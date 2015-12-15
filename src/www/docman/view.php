@@ -6,7 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2010-2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012,2014, Franck Villaume - TrivialDev
+ * Copyright 2012,2015, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -267,7 +267,11 @@ if (is_numeric($docid)) {
 					$zip->close();
 					unlink($file);
 					$warning_msg = _('No action to perform');
-					session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
+					$redirect_url = '/docman/?group_id='.$group_id.'&view=listfile';
+					if (is_numeric($dirid)) {
+						$redirect_url .= '&dirir='.$dirid;
+					}
+					session_redirect($redirect_url);
 				}
 			}
 			if ( !$zip->close()) {
@@ -286,7 +290,7 @@ if (is_numeric($docid)) {
 			if(!readfile_chunked($file)) {
 				unlink($file);
 				$error_msg = _('Unable to download ZIP archive');
-				session_redirect('/docman/?group_id='.$group_id.'&view=admin');
+				session_redirect('/docman/?group_id='.$group_id);
 			}
 			unlink($file);
 		} else {
