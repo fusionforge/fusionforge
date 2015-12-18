@@ -423,6 +423,7 @@ DocManListFileController.prototype =
 		for (var h = 0; h < jQuery('input:checked').length; h++) {
 			if (typeof(jQuery('input:checked')[h].className) != 'undefined' && jQuery('input:checked')[h].className.match('checkeddocid'+id)) {
 				jQuery('#massaction'+id).show();
+				break;
 			}
 		}
 	}

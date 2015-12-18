@@ -4,7 +4,7 @@
  *
  * Copyright 2006 (c) Fabien Regnier - Sogeti
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2015, Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of National Education
  * http://fusionforge.org
  *
@@ -126,15 +126,15 @@ _('Organise projects hierarchically, relation type 1-n');
 				break;
 			}
 			case 'docmansearch_has_hierarchy': {
-				if ($params['includesubprojects']) {
-					$group_id = $params['group_id'];
-					$group = group_get_object($group_id);
-					if ($group->usesPlugin($this->name)) {
-						$arrayChilds= $this->getFamily($group_id, 'child', true, 'validated');
-						foreach ( $arrayChilds as $childId ) {
-							$params['qpa'] = db_construct_qpa($params['qpa'], ' OR group_id = $1', array($childId));
+				if (isset($params['options']['includesubprojects']) && $params['options']['includesubprojects']) {
+					$added_groupid = array();
+					foreach ($params['groupIdArr'] as $param_groupid) {
+						$group = group_get_object($param_groupid);
+						if ($group->usesPlugin($this->name)) {
+							$added_groupid = array_merge($this->getFamily($param_groupid, 'child', true, 'validated'), $added_groupid);
 						}
 					}
+					$params['groupIdArr'] = array_merge($params['groupIdArr'], $added_groupid);
 				}
 				$returned = true;
 				break;

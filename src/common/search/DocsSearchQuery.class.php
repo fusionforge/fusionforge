@@ -68,11 +68,16 @@ class DocsSearchQuery extends SearchQuery {
 	 */
 	function addCommonQPA($qpa) {
 		$options = $this->options;
-		if (count($this->groupIdArr)) {
-			$qpa = db_construct_qpa($qpa, ' AND doc_data.group_id = ANY ($1) ', array(db_int_array_to_any_clause($this->groupIdArr)));
+		$groupIdArr = $this->groupIdArr;
+		$sections = $this->sections;
+		$params['groupIdArr'] = $this->groupIdArr;
+		$params['options'] = $options;
+		plugin_hook_by_reference('docmansearch_has_hierarchy', $params);
+		if (count($params['groupIdArr'])) {
+			$qpa = db_construct_qpa($qpa, ' AND doc_data.group_id = ANY ($1) ', array(db_int_array_to_any_clause($params['groupIdArr'])));
 		}
-		if ($this->sections != SEARCH__ALL_SECTIONS) {
-			$qpa = db_construct_qpa($qpa, ' AND doc_groups.doc_group = ANY ($1)', array(db_int_array_to_any_clause($this->sections)));
+		if ($sections != SEARCH__ALL_SECTIONS) {
+			$qpa = db_construct_qpa($qpa, ' AND doc_groups.doc_group = ANY ($1)', array(db_int_array_to_any_clause($sections)));
 		}
 		if ($this->showNonPublic) {
 			$qpa = db_construct_qpa($qpa, ' AND doc_data.stateid IN (1, 4, 5)') ;
@@ -102,11 +107,11 @@ class DocsSearchQuery extends SearchQuery {
 			$options = $this->options;
 			if (!isset($options['insideDocuments']) || !$options['insideDocuments']) {
 				$qpa = db_construct_qpa(false,
-						 'SELECT x.* FROM (SELECT doc_data.docid, doc_data.title, doc_data.filename, doc_data.description, doc_groups.groupname, title||$1||description AS full_string_agg, groups.group_name as project_name FROM doc_data, doc_groups, groups WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.group_id = groups.group_id ',
+						 'SELECT x.* FROM (SELECT doc_data.docid, doc_data.group_id AS group_id, doc_data.title, doc_data.filename, doc_data.description, doc_groups.groupname, title||$1||description AS full_string_agg, groups.group_name as project_name FROM doc_data, doc_groups, groups WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.group_id = groups.group_id ',
 						 array ($this->field_separator));
 			} else {
 				$qpa = db_construct_qpa(false,
-						 'SELECT x.* FROM (SELECT doc_data.docid, doc_data.title, doc_data.filename, doc_data.description, doc_groups.groupname, title||$1||description||$1||data_words AS full_string_agg, groups.group_name as project_name FROM doc_data, doc_groups, groups WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.group_id = groups.group_id ',
+						 'SELECT x.* FROM (SELECT doc_data.docid, doc_data.group_id AS group_id, doc_data.title, doc_data.filename, doc_data.description, doc_groups.groupname, title||$1||description||$1||data_words AS full_string_agg, groups.group_name as project_name FROM doc_data, doc_groups, groups WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.group_id = groups.group_id ',
 						 array ($this->field_separator));
 			}
 			$qpa = $this->addCommonQPA($qpa);
@@ -122,11 +127,11 @@ class DocsSearchQuery extends SearchQuery {
 		$options = $this->options;
 		if (!isset($options['insideDocuments']) || !$options['insideDocuments']) {
 			$qpa = db_construct_qpa(false,
-					'SELECT x.* FROM (SELECT doc_data.docid, doc_data.filename, ts_headline(doc_data.title, q) AS title, ts_headline(doc_data.description, q) AS description, doc_groups.groupname, doc_data.title||$1||description AS full_string_agg, doc_data_idx.vectors, groups.group_name as project_name FROM groups, doc_data, doc_groups, doc_data_idx, to_tsquery($2) AS q WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.group_id = groups.group_id AND doc_data.docid = doc_data_idx.docid AND (vectors @@ to_tsquery($2))',
+					'SELECT x.* FROM (SELECT doc_data.docid, doc_data.group_id AS group_id, doc_data.filename, ts_headline(doc_data.title, q) AS title, ts_headline(doc_data.description, q) AS description, doc_groups.groupname, doc_data.title||$1||description AS full_string_agg, doc_data_idx.vectors, groups.group_name as project_name FROM groups, doc_data, doc_groups, doc_data_idx, to_tsquery($2) AS q WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.group_id = groups.group_id AND doc_data.docid = doc_data_idx.docid AND (vectors @@ to_tsquery($2))',
 					array ($this->field_separator, $words));
 		} else {
 			$qpa = db_construct_qpa(false,
-					'SELECT x.* FROM (SELECT doc_data.docid, ts_headline(doc_data.filename, q) AS filename, ts_headline(doc_data.title, q) AS title, ts_headline(doc_data.description, q) AS description, doc_groups.groupname, doc_data.title||$1||description||$1||filename AS full_string_agg, doc_data_words_idx.vectors, groups.group_name as project_name FROM groups, doc_data, doc_groups, doc_data_words_idx, to_tsquery($2) AS q WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.group_id = groups.group_id AND doc_data.docid = doc_data_words_idx.docid AND (vectors @@ to_tsquery($2))',
+					'SELECT x.* FROM (SELECT doc_data.docid, doc_data.group_id AS group_id, ts_headline(doc_data.filename, q) AS filename, ts_headline(doc_data.title, q) AS title, ts_headline(doc_data.description, q) AS description, doc_groups.groupname, doc_data.title||$1||description||$1||filename AS full_string_agg, doc_data_words_idx.vectors, groups.group_name as project_name FROM groups, doc_data, doc_groups, doc_data_words_idx, to_tsquery($2) AS q WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.group_id = groups.group_id AND doc_data.docid = doc_data_words_idx.docid AND (vectors @@ to_tsquery($2))',
 					array ($this->field_separator, $words));
 		}
 		$qpa = $this->addCommonQPA($qpa);
@@ -136,7 +141,7 @@ class DocsSearchQuery extends SearchQuery {
 			$qpa = $this->addMatchCondition($qpa, 'full_string_agg');
 		}
 		$qpa = db_construct_qpa($qpa,
-					 ' ORDER BY ts_rank(vectors, to_tsquery($1)) DESC, groupname ASC, title ASC',
+					 ' ORDER BY ts_rank(vectors, to_tsquery($1)) DESC, group_id ASC, groupname ASC, title ASC',
 					 array($words));
 
 		return $qpa;
