@@ -171,20 +171,16 @@ class cvstrackerPlugin extends Plugin {
 	*
 	*/
 	function addCvsTrackerToFile($group, $path) {
-		global  $cvs_binary_version;
+		$cvs_binary_version = get_cvs_binary_version();
 
 		$FOut = fopen($path, "a");
 		if($FOut) {
 			fwrite($FOut, "# BEGIN added by gforge-plugin-cvstracker\n");
 			if ( $cvs_binary_version == "1.12" ) {
-				$Line = "ALL ( php -q -d include_path=".ini_get('include_path').
-					" ".forge_get_config('plugins_path')."/cvstracker/bin/post.php
- %r %p %{sVv} )\n";
+				$Line = "ALL ( php -q -d include_path=".ini_get('include_path')." ".forge_get_config('plugins_path')."/cvstracker/bin/post.php %r %p %{sVv} )\n";
 			}
 			if ( $cvs_binary_version == "1.11") {
-				$Line = "ALL ( php -q -d include_path=".ini_get('include_path').
-					" ".forge_get_config('plugins_path')."/cvstracker/bin/post.php
- ".$group->getUnixName()." %{sVv} )\n";
+				$Line = "ALL ( php -q -d include_path=".ini_get('include_path')." ".forge_get_config('plugins_path')."/cvstracker/bin/post.php ".$group->getUnixName()." %{sVv} )\n";
 			}
 			fwrite($FOut,$Line);
 			fwrite($FOut, "# END added by gforge-plugin-cvstracker\n");
@@ -199,17 +195,13 @@ class cvstrackerPlugin extends Plugin {
 	*	return array with the loginfo lines.
 	*/
 	function getCvsTrackerLogInfoLines() {
-		global  $cvs_binary_version;
+		$cvs_binary_version = get_cvs_binary_version();
 		$array=array();
 		$array[]="# BEGIN added by gforge-plugin-cvstracker\n";
 		if ( $cvs_binary_version == "1.11" ) {
-				$array[] = "ALL ( php -q -d include_path=".ini_get('include_path').
-					" ".forge_get_config('plugins_path')."/cvstracker/bin/post.php
- ".$group->getUnixName()." %{sVv} )\n";
+				$array[] = "ALL ( php -q -d include_path=".ini_get('include_path')." ".forge_get_config('plugins_path')."/cvstracker/bin/post.php ".$group->getUnixName()." %{sVv} )\n";
 		}else { //it's version 1.12
-			$array[] = "ALL ( php -q -d include_path=".ini_get('include_path').
-			" ".forge_get_config('plugins_path')."/cvstracker/bin/post.php
- %r %p %{sVv} )\n";
+			$array[] = "ALL ( php -q -d include_path=".ini_get('include_path')." ".forge_get_config('plugins_path')."/cvstracker/bin/post.php %r %p %{sVv} )\n";
 		}
 		$array[]= "# END added by gforge-plugin-cvstracker\n";
 
@@ -224,7 +216,10 @@ class cvstrackerPlugin extends Plugin {
 	*
 	* return String the FileName in the working repository
 	*/
-	function getCvsFile($repos,$file) {
+	static function getCvsFile($params) {
+		$repos = $params['repos'];
+		$file = $params['file'];
+		$admin = $params['admin'];
 		$actual_dir = getcwd();
 		$tempdirname = tempnam("/tmp","cvstracker");
 		if (!$tempdirname)
@@ -241,7 +236,9 @@ class cvstrackerPlugin extends Plugin {
 		system("cvs -d ".$repos." co ".$file);
 
 		chdir($actual_dir);
-		return $tempdirname.$file;
+		$username = $admin->getUnixname();
+		system("chown -R $username:$username $tempdirname");
+		return $tempdirname.'/'.$file;
 	}
 
 	/**
@@ -251,9 +248,11 @@ class cvstrackerPlugin extends Plugin {
 	* @param String $file to commit
 	* @param String $message to commit
 	*/
-	function putCvsFile($repos,$file,$message="Automatic updated by cvstracker") {
+	static function putCvsFile($params) {
+		$repos = $params['repos'];
+		$file = $params['file'];
+		$message="Automatic updated by cvstracker";
 		system("cvs -d ".$repos." ci -m \"".$message."\" ".$file);
-		unlink ($file);
 	}
 
 	/**
@@ -277,9 +276,11 @@ class cvstrackerPlugin extends Plugin {
 		} elseif ($hookname == "update_cvs_repository") {
 			$Group = group_get_object($params["group_id"]);
 			if ($Group->usesPlugin("cvstracker")) {
-				$LineFound=FALSE;
-				$FIn = fopen(getCvsFile( $params["file_name"],
-					"CVSROOT/loginfo"),"r");
+				$params["file_name"] = forge_get_config('repos_path', 'scmcvs') . '/' . $Group->getUnixName(). '/';
+				$LineFound = false;
+				$admins = $Group->getAdmins();
+				$newfile = $this->getCvsFile(array('repos' => $params["file_name"],'file' => "CVSROOT/loginfo", 'admin' => $admins[0]));
+				$FIn = fopen($newfile, 'r');
 				if ($FIn) {
 					while (!feof($FIn))  {
 						$Line = fgets ($FIn);
@@ -290,13 +291,12 @@ class cvstrackerPlugin extends Plugin {
 				 	}
 				 	fclose($FIn);
 				}
-				if($LineFound==FALSE) {
-					$newfile=getCvsFile($params["file_name"],
-						 "CVSROOT/loginfo");
-					$this->addCvsTrackerToFile($group, $newfile);
-					$this->putCvsFile($params["file_name"],
-						$newfile);
+				if($LineFound == FALSE) {
+					$this->addCvsTrackerToFile($Group, $newfile);
+					util_sudo_effective_user($admins[0]->getUnixName(), array('cvstrackerPlugin', 'putCvsFile'), array('repos' => $params["file_name"], 'file' => $newfile));
 				}
+				$tempdir = dirname(dirname($newfile));
+				system("rm -rf $tempdir");
 			}
 		} elseif ($hookname == "get_cvs_loginfo_lines") {
 			$group = group_get_object($group_id);

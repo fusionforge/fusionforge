@@ -17,7 +17,6 @@
  */
 require_once dirname(__FILE__)."/../../env.inc.php";
 require_once $gfcommon.'include/pre.php';
-require_once $gfconfig.'plugins/cvstracker/config.php';
 
 /**
  * Getting POST variables

@@ -118,7 +118,7 @@ function getLog($Input)
 $files = array();
 
 if( $cvs_binary_version == "1.11" ) {
-	if ($argc <= 3 ) {
+	if ($argc < 3 ) {
 		usage ( $argv );
 	}
 
@@ -135,8 +135,8 @@ if( $cvs_binary_version == "1.11" ) {
 			'actual' => $filesInformation[2]
 		);
 	}
-
 }
+
 if ( $cvs_binary_version == "1.12" ) {
 	if ($argc < 6 ) {
 		usage ( $argv );

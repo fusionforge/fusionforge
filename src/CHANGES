@@ -20,12 +20,14 @@ FusionForge 6.0.4:
 * FRS: frs latest zip migration script hardening (TrivialDev)
 * MTA-Exim4: restart exim4 on install
 * News: pending site news e-mail reminder: properly filter out private projects (Inria)
+* Plugin cvstracker: fix permission issues 
 * Plugin SCM: fix another race condition when creating project with SCM selected (Inria)
 * Plugin SCM Git: improve user matching when computing stats, support git .mailmap (Inria)
 * Plugin SCM SVN: fix HTTP commit access for old SVN 1.7 clients (Inria)
 * Plugin scmhook: fix non-editable mailing list name in some configurations (Inria)
 * Plugin scmhook: fix migration scripts svntracker To ScmhookCommitTracker & svncommitemail To ScmHookCommitEmail (TrivialDev)
 * Plugin MediaWiki: fix permission error when upgrading suspended projects database (Inria & TrivialDev)
+* Plugin MediaWiki: restore access to public dumps at /plugins/mediawiki/dumps/ (Inria)
 * Plugin Projects Hierarchy: don't display a project as possible child if there's no read access to it (Inria)
 * Plugin Projects Hierarchy: mask delegation checkbox until implementation is complete [#797] (Inria)
 * Plugin Projects Hierarchy: prevent auto-validation of parent-child requests [#796] (Inria)
