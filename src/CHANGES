@@ -9,6 +9,7 @@ FusionForge 6.0.4:
 * FRS: frs latest zip migration script hardening (TrivialDev)
 * MTA-Exim4: restart exim4 on install
 * News: pending site news e-mail reminder: properly filter out private projects (Inria)
+* Plugin cvstracker: fix permission issues 
 * Plugin SCM: fix another race condition when creating project with SCM selected (Inria)
 * Plugin SCM Git: improve user matching when computing stats, support git .mailmap (Inria)
 * Plugin SCM SVN: fix HTTP commit access for old SVN 1.7 clients (Inria)
