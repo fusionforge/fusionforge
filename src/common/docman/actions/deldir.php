@@ -48,7 +48,7 @@ if (!forge_check_perm('docman', $g->getID(), 'approve')) {
 	session_redirect($urlredirect.'&dirid='.$dirid);
 }
 
-$dg = documentgroup_get_object($dirid);
+$dg = documentgroup_get_object($dirid, $g->getID());
 
 if ($dg->isError() || !$dg->delete($dirid, $g->getID())) {
 	$error_msg = $dg->getErrorMessage();

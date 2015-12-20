@@ -161,7 +161,7 @@ class Document extends Error {
 			}
 		}
 
-		$dg = documentgroup_get_object($doc_group);
+		$dg = documentgroup_get_object($doc_group, $this->Group->getID());
 		if ($dg->hasDocument($filename)) {
 			$this->setError(_('Document already published in this folder').' '.$dg->getPath());
 			return false;
@@ -244,7 +244,7 @@ class Document extends Error {
 		}
 
 		if ($perm->isDocEditor()) {
-			$localDg = documentgroup_get_object($doc_group);
+			$localDg = documentgroup_get_object($doc_group, $this->Group->getID());
 			if (!$localDg->update($localDg->getName(), $localDg->getParentID(), 1)) {
 				$this->setError(_('Error updating document group')._(': ').$localDg->getErrorMessage());
 				if ($filesize) {
@@ -870,7 +870,7 @@ class Document extends Error {
 		if ($this->isMonitoredBy('ALL')) {
 			$BCC .= $this->getMonitoredUserEmailAddress();
 		}
-		$dg = documentgroup_get_object($this->getDocGroupID());
+		$dg = documentgroup_get_object($this->getDocGroupID(), $this->Group->getID());
 		if ($dg->isMonitoredBy('ALL')) {
 			$BCC .= $dg->getMonitoredUserEmailAddress();
 		}
@@ -1064,7 +1064,7 @@ class Document extends Error {
 			$this->setOnUpdateError(db_error());
 			return false;
 		}
-		$localDg = documentgroup_get_object($this->getDocGroupID());
+		$localDg = documentgroup_get_object($this->getDocGroupID(), $this->Group->getID());
 		if (!$localDg->update($localDg->getName(), $localDg->getParentID(), 1)) {
 			$this->setError(_('Error updating document group')._(': ').$localDg->getErrorMessage());
 			return false;

@@ -168,7 +168,7 @@ class DocumentManager extends Error {
 	 * @param	int	$docGroupId	the doc_group to start: default 0
 	 */
 	function getTree($selecteddir, $linkmenu, $docGroupId = 0) {
-		global $g; // the master group of all the groups .... anyway.
+		global $g; // the master group of all the groups .... anyway. Needed to support projects-hierarchy plugin
 		$dg = new DocumentGroup($this->Group);
 		switch ($linkmenu) {
 			case 'listtrashfile': {
@@ -183,11 +183,12 @@ class DocumentManager extends Error {
 		$subGroupIdArr = $dg->getSubgroup($docGroupId, $stateId);
 		if (sizeof($subGroupIdArr)) {
 			foreach ($subGroupIdArr as $subGroupIdValue) {
-				$localDg = documentgroup_get_object($subGroupIdValue);
+				$localDg = documentgroup_get_object($subGroupIdValue, $this->Group->getID());
 				$liclass = 'docman_li_treecontent';
 				if ($selecteddir == $localDg->getID()) {
 					$liclass = 'docman_li_treecontent_selected';
 				}
+				// support projects-hierarchy plugin
 				if ($this->Group->getID() != $g->getID()) {
 					$link = '/docman/?group_id='.$g->getID().'&view='.$linkmenu.'&dirid='.$localDg->getID().'&childgroup_id='.$this->Group->getID();
 				} else {

@@ -93,7 +93,7 @@ class Widget_ProjectLatestDocuments extends Widget {
 				$filetype = $documentObject->getFileType();
 				$docid = $documentObject->getID();
 				$docgroup = $documentObject->getDocGroupID();
-				$ndg = documentgroup_get_object($docgroup);
+				$ndg = documentgroup_get_object($docgroup, $group_id);
 				$path = $ndg->getPath(true, true);
 				switch ($filetype) {
 					case "URL": {

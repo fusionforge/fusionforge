@@ -37,23 +37,23 @@ $DOCUMENTGROUP_OBJ = array();
  * You should always use this instead of instantiating the object directly
  *
  * @param	int		$docgroup_id	The ID of the document group - required
+ * @param	int		$group_id	Group ID of the project - required
  * @param	int|bool	$res	The result set handle ("SELECT * FROM doc_groups WHERE doc_group = $1")
  * @return	DocumentGroup	a document group object or false on failure
  */
-function &documentgroup_get_object($docgroup_id, $res = false) {
+function &documentgroup_get_object($docgroup_id, $group_id, $res = false) {
 	global $DOCUMENTGROUP_OBJ;
 	if (!isset($DOCUMENTGROUP_OBJ["_".$docgroup_id."_"])) {
 		if ($res) {
 			//the db result handle was passed in
 		} else {
-			$res = db_query_params('SELECT * FROM doc_groups WHERE doc_group = $1',
-						array($docgroup_id));
+			$res = db_query_params('SELECT * FROM doc_groups WHERE doc_group = $1 and group_id = $2',
+						array($docgroup_id, $group_id));
 		}
 		if (!$res || db_numrows($res) < 1) {
 			$DOCUMENTGROUP_OBJ["_".$docgroup_id."_"] = false;
 		} else {
-			$Group = &group_get_object(db_result($res,0,'group_id'));
-			$DOCUMENTGROUP_OBJ["_".$docgroup_id."_"] = new DocumentGroup($Group, db_fetch_array($res));
+			$DOCUMENTGROUP_OBJ["_".$docgroup_id."_"] = new DocumentGroup(group_get_object($group_id), db_fetch_array($res));
 		}
 	}
 	return $DOCUMENTGROUP_OBJ["_".$docgroup_id."_"];
@@ -227,7 +227,7 @@ class DocumentGroup extends Error {
 		}
 
 		/* update the parent */
-		$parentDg = documentgroup_get_object($this->getParentID());
+		$parentDg = documentgroup_get_object($this->getParentID(), $this->Group->getID());
 		$parentDg->update($parentDg->getName(), $parentDg->getParentID(), 1);
 		/* is there any subdir ? */
 		$subdir = db_query_params('select doc_group from doc_groups where parent_doc_group = $1 and group_id = $2',
@@ -644,7 +644,7 @@ class DocumentGroup extends Error {
 
 		$returnPath = '';
 		if ($this->getParentID()) {
-			$parentDg = documentgroup_get_object($this->getParentID());
+			$parentDg = documentgroup_get_object($this->getParentID(), $this->Group->getID());
 			$returnPath = $parentDg->getPath($url);
 		}
 		if ($includename) {
@@ -950,7 +950,7 @@ class DocumentGroup extends Error {
 		$this->data_array['lockdate'] = $thistime;
 		$subGroupArray = $this->getSubgroup($this->getID(), $this->getState());
 		foreach ($subGroupArray as $docgroupId) {
-			$ndg = documentgroup_get_object($docgroupId);
+			$ndg = documentgroup_get_object($docgroupId, $this->Group->getID());
 			$ndg->setLock($stateLock, $userid, $thistime);
 		}
 		return true;

@@ -100,7 +100,7 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		}
 		for($i = 0; $i < $rowsCount; $i++) {
 			$document = document_get_object(db_result($result, $i, 'docid'), db_result($result, $i, 'group_id'));
-			$currentDocGroup = documentgroup_get_object($document->getDocGroupID());
+			$currentDocGroup = documentgroup_get_object($document->getDocGroupID(), $document->Group->getID());
 			//section changed
 			if ($lastDocGroupID != $currentDocGroup->getID()) {
 				//project changed

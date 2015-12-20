@@ -96,7 +96,7 @@ $nested_docs = array();
 $DocGroupName = 0;
 
 if ($dirid) {
-	$ndg = documentgroup_get_object($dirid);
+	$ndg = documentgroup_get_object($dirid, $g->getID());
 	$DocGroupName = $ndg->getName();
 	$dgpath = $ndg->getPath(true, false);
 	if (!$DocGroupName) {

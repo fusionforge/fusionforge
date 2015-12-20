@@ -34,7 +34,7 @@ if (!forge_check_perm('docman', $group_id, 'read')) {
 
 $directoryid = getStringFromRequest('directoryid');
 $option = getStringFromRequest('option');
-$dg = documentgroup_get_object($directoryid);
+$dg = documentgroup_get_object($directoryid, $group_id);
 if (!$dg || $dg->isError()) {
 	$error_msg = _('Docman Error: unable to get folder object');
 	session_redirect('/docman/?group_id='.$group_id);
