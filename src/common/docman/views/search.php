@@ -58,8 +58,10 @@ $date_format = _('Y-m-d');
 
 if (getStringFromPost('search_type') == 'one') {
 	$attrsInputSearchOne['checked'] = 'checked';
+	$isExact = false;
 } else {
 	$attrsInputSearchAll['checked'] = 'checked';
+	$isExact = true;
 }
 
 echo html_ao('div', array('id' => 'docman_search', 'class' => 'docmanDivIncluded'));
@@ -175,7 +177,7 @@ if(!isset($paging) || !$paging)
 	$paging = 25;
 
 if ($searchString) {
-	$docsHtmlSearchRenderer = new DocsHtmlSearchRenderer($searchString, $start, getStringFromPost('search_type'), $group_id, SEARCH__ALL_SECTIONS, $paging, $search_options);
+	$docsHtmlSearchRenderer = new DocsHtmlSearchRenderer($searchString, $start, $isExact, $group_id, SEARCH__ALL_SECTIONS, $paging, $search_options);
 	$docsHtmlSearchRenderer->searchQuery->executeQuery();
 	$nbDocs = $docsHtmlSearchRenderer->searchQuery->getRowsCount();
 	$max = $docsHtmlSearchRenderer->searchQuery->getRowsTotalCount();
