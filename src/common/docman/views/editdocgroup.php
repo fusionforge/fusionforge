@@ -28,7 +28,7 @@
 
 /* please do not add require here : use www/docman/index.php to add require */
 /* global variables used */
-global $g; //group object
+global $g; // Group object
 global $group_id; // id of the group
 global $dirid; // id of doc_group
 global $dgf; // document directory factory of this group
@@ -37,17 +37,17 @@ global $HTML;
 global $warning_msg;
 global $childgroup_id;
 
-if (!forge_check_perm('docman', $group_id, 'approve')) {
-	$warning_msg = _('Document Manager Access Denied');
-	session_redirect('/docman/?group_id='.$group_id);
-}
-
 $actionurl = '/docman/?group_id='.$group_id.'&action=editdocgroup';
 
 // plugin projects-hierarchy support
 if ($childgroup_id) {
 	$g = group_get_object($childgroup_id);
 	$actionurl .= '&childgroup_id='.$childgroup_id;
+}
+
+if (!forge_check_perm('docman', $g->getID(), 'approve')) {
+	$warning_msg = _('Document Manager Access Denied');
+	session_redirect('/docman/?group_id='.$group_id);
 }
 
 $dg = new DocumentGroup($g, $dirid);

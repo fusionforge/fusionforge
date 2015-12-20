@@ -34,6 +34,7 @@ global $dirid; //id of the doc_group
 global $dm; // the Document Manager object
 global $HTML; // Layout object
 global $warning_msg;
+global $error_msg;
 global $childgroup_id;
 
 $actionurl = '/docman/?group_id='.$group_id.'&action=addfile&dirid='.$dirid;

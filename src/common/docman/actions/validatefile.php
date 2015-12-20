@@ -3,7 +3,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2013-2014, Franck Villaume - TrivialDev
+ * Copyright 2013-2015, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -24,13 +24,17 @@
 
 /* please do not add require here : use www/docman/index.php to add require */
 /* global variables used */
-global $g; //group object
-global $dirid; //id of doc_group
+global $g; // Group object
+global $dirid; // id of doc_group
 global $group_id; // id of group
+global $childgroup_id; // id of child group if any
+global $feedback;
+global $error_msg;
+global $warning_msg;
 
 $urlredirect = '/docman/?group_id='.$group_id.'&dirid='.$dirid;
+
 // plugin projects-hierarchy handler
-$childgroup_id = getIntFromRequest('childgroup_id');
 if ($childgroup_id) {
 	$g = group_get_object($childgroup_id);
 	$urlredirect .= '&childgroup_id='.$childgroup_id;
@@ -44,7 +48,7 @@ if (!forge_check_perm('docman', $g->getID(), 'approve')) {
 $arr_fileid = explode(',', getStringFromRequest('fileid'));
 foreach ($arr_fileid as $fileid) {
 	if (!empty($fileid)) {
-		$d = document_get_object($fileid);
+		$d = document_get_object($fileid, $g->getID());
 		if ($d->isError() || !$d->setState('1')) {
 			$error_msg = $d->getErrorMessage();
 			session_redirect($urlredirect);

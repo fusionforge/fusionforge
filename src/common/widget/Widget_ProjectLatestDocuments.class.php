@@ -45,17 +45,19 @@ class Widget_ProjectLatestDocuments extends Widget {
 
 	function getContent() {
 		$result = '';
-		
+
 		global $HTML;
 		$request =& HTTPRequest::instance();
 		$group_id = $request->get('group_id');
 
 		$qpa = db_construct_qpa();
-		$qpa = db_construct_qpa($qpa, 'SELECT docid FROM doc_data WHERE group_id=$1 AND stateid=$2',
-					array($group_id, '1'));
+		$qpa = db_construct_qpa($qpa, 'SELECT docid FROM doc_data WHERE group_id = $1',
+					array($group_id));
 
 		if (session_loggedin() && forge_check_perm('docman', $group_id, 'approve')) {
 			$qpa = db_construct_qpa($qpa, ' AND stateid IN ($1, $2, $3, $4)', array('1', '3', '4', '5'));
+		} else {
+			$qpa = db_construct_qpa($qpa, ' AND stateid = $1', array('1'));
 		}
 
 		$qpa = db_construct_qpa($qpa, ' ORDER BY updatedate,createdate DESC LIMIT 5',array());
@@ -79,7 +81,7 @@ class Widget_ProjectLatestDocuments extends Widget {
 			}
 			$result .= $HTML->listTableTop($tabletop, false, 'sortable_widget_docman_listfile full', 'sortable', $classth);
 			for ($f=0; $f < $rows_files; $f++) {
-				$documentObject = document_get_object(db_result($res_files, $f, 'docid'));
+				$documentObject = document_get_object(db_result($res_files, $f, 'docid'), $group_id);
 				$updatedate = $documentObject->getUpdated();
 				$createdate = $documentObject->getCreated();
 				$realdate = ($updatedate >= $createdate) ? $updatedate : $createdate;

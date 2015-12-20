@@ -40,23 +40,24 @@ $DOCUMENT_OBJ = array();
  * document_get_object is useful so you can pool document objects/save database queries
  * You should always use this instead of instantiating the object directly
  *
- * @param	int		$doc_id	The ID of the document - required
- * @param	int|bool	$res	The result set handle ("SELECT * FROM docdata_vw WHERE docid=$1")
+ * @param	int		$doc_id		The ID of the document - required
+ * @param	int		$group_id	Group ID of the project - required
+ * @param	int|bool	$res		The result set handle ("SELECT * FROM docdata_vw WHERE docid=$1")
  * @return	Document	a document object or false on failure
  */
-function &document_get_object($doc_id, $res = false) {
+function &document_get_object($doc_id, $group_id, $res = false) {
 	global $DOCUMENT_OBJ;
 	if (!isset($DOCUMENT_OBJ["_".$doc_id."_"])) {
 		if ($res) {
 			//the db result handle was passed in
 		} else {
-			$res = db_query_params('SELECT * FROM docdata_vw WHERE docid = $1',
-						array($doc_id));
+			$res = db_query_params('SELECT * FROM docdata_vw WHERE docid = $1 and group_id = $2',
+						array($doc_id, $group_id));
 		}
 		if (!$res || db_numrows($res) < 1) {
 			$DOCUMENT_OBJ["_".$doc_id."_"] = false;
 		} else {
-			$DOCUMENT_OBJ["_".$doc_id."_"] = new Document(group_get_object(db_result($res,0,'group_id')), $doc_id, db_fetch_array($res));
+			$DOCUMENT_OBJ["_".$doc_id."_"] = new Document(group_get_object($group_id), $doc_id, db_fetch_array($res));
 		}
 	}
 	return $DOCUMENT_OBJ["_".$doc_id."_"];

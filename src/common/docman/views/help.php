@@ -29,21 +29,20 @@ global $g; // the project object
 global $warning_msg;
 global $childgroup_id;
 
-if (!forge_check_perm('docman', $group_id, 'read')) {
-	$warning_msg = _('Document Manager Access Denied');
-	session_redirect('/docman/?group_id='.$group_id);
-}
-
 // plugin hierarchy support
 if ($childgroup_id) {
-	$group_id = $childgroup_id;
 	$g = group_get_object($childgroup_id);
+}
+
+if (!forge_check_perm('docman', $g->getID(), 'read')) {
+	$warning_msg = _('Document Manager Access Denied');
+	session_redirect('/docman/?group_id='.$group_id);
 }
 
 echo html_ao('div', array('class' => 'docmanDivIncluded'));
 plugin_hook('blocks', 'doc help');
 if (forge_get_config('use_webdav') && $g->useWebdav()) {
 	echo html_e('p', array(), _('Documents parsing is also available through webdav. Only for registered users.'), false);
-	echo html_e('p', array(), util_make_link('/docman/view.php/'.$group_id.'/webdav',_('Direct Webdav URL')), false);
+	echo html_e('p', array(), util_make_link('/docman/view.php/'.$g->getID().'/webdav',_('Direct Webdav URL')), false);
 }
 echo html_ac(html_ap() - 1);

@@ -3,7 +3,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2013-2014, Franck Villaume - TrivialDev
+ * Copyright 2013-2015, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -24,6 +24,7 @@
 
 /* please do not add require here : use www/docman/index.php to add require */
 /* global variables used */
+global $g; // Group object
 global $dirid; //id of doc_group
 global $group_id; // id of group
 global $feedback;
@@ -38,7 +39,7 @@ if (!forge_check_perm('docman', $group_id, 'approve')) {
 $arr_fileid = explode(',', getStringFromRequest('fileid'));
 $feedback = _('Document(s)').' ';
 foreach ($arr_fileid as $fileid) {
-	$d = document_get_object($fileid);
+	$d = document_get_object($fileid, $group_id);
 	$feedback .= $d->getFilename().' ';
 	if ($d->isError() || !$d->setReservedBy('1', user_getid())) {
 		$feedback = '';

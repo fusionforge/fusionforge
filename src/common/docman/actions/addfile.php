@@ -8,7 +8,7 @@
  * Copyright 2011, Roland Mas
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * Copyright 2012, Thorsten Glaser - tarent solutions GmbH
- * Copyright 2012,2014, Franck Villaume - TrivialDev
+ * Copyright 2012,2014-2015, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -29,9 +29,13 @@
 
 /* please do not add require here : use www/docman/index.php to add require */
 /* global variables used */
-global $g; //group object
+global $g; // Group object
 global $group_id; // id of group
 global $dirid;
+global $childgroup_id; // id of child group if any
+global $feedback;
+global $error_msg;
+global $warning_msg;
 
 $doc_group = getIntFromRequest('doc_group');
 $title = trim(getStringFromRequest('title'));
@@ -48,16 +52,11 @@ if (!$doc_group) {
 }
 
 $baseurl = '/docman/?group_id='.$group_id;
-$redirecturl = $baseurl.'&view=listfile&dirid='.$doc_group;
+$redirecturl = $baseurl.'&dirid='.$doc_group;
 
 // plugin projects-hierarchy handler
-$childgroup_id = getIntFromRequest('childgroup_id');
 if ($childgroup_id) {
 	$redirecturl .= '&childgroup_id='.$childgroup_id;
-	if (!forge_check_perm('docman', $childgroup_id, 'submit')) {
-		$warning_msg = _('Document Manager Action Denied.');
-		session_redirect($redirecturl);
-	}
 	$g = group_get_object($childgroup_id);
 }
 

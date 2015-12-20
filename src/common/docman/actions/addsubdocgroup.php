@@ -33,10 +33,10 @@ global $group_id; // id of group
 global $feedback;
 global $error_msg;
 global $warning_msg;
-global $childgroup_id;
+global $childgroup_id; // id of child group if any
 
 if ($dirid) {
-	$urlredirect = '/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid;
+	$urlredirect = '/docman/?group_id='.$group_id.'&dirid='.$dirid;
 } else {
 	$urlredirect = '/docman/?group_id='.$group_id;
 }
@@ -67,4 +67,4 @@ if ($dirid) {
 }
 
 $feedback = _('Document folder successfully created.');
-session_redirect($urlredirect.'&view=listfile&dirid='.$dg->getID());
+session_redirect($urlredirect.'&dirid='.$dg->getID());

@@ -48,8 +48,8 @@ class Parsedata {
 	 * @return	string	the analysed content
 	 */
 	function get_parse_data($data, $filetype) {
-		$parser = "";
-		$rep = "";
+		$parser = '';
+		$rep = '';
 		if (array_key_exists($filetype, $this->parsers)) {
 			// parse data if good parser exists
 			$parser = $this->p_path.$this->parsers[$filetype];
@@ -72,8 +72,8 @@ class Parsedata {
 		$arrayLines = file($file, FILE_SKIP_EMPTY_LINES);
 		if (is_array($arrayLines) && count($arrayLines)) {
 			foreach ($arrayLines as $a) {
-				if (trim($a) != "" && substr($a, 0,1) != "#") {
-					$a2 = explode ("|", $a);
+				if (trim($a) != '' && substr($a, 0,1) != '#') {
+					$a2 = explode ('|', $a);
 					$rep[$a2[0]] = trim($a2[1]);
 				}
 			}

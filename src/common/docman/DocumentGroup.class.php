@@ -260,11 +260,11 @@ class DocumentGroup extends Error {
 		}
 
 		switch ($uploaded_data_type) {
-			case "application/zip": {
+			case 'application/zip': {
 				$returned = $this->injectZip($uploaded_data);
 				break;
 			}
-			case "application/x-rar-compressed": {
+			case 'application/x-rar-compressed': {
 				$returned = $this->injectRar($uploaded_data);
 				break;
 			}

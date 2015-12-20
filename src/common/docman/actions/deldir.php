@@ -6,7 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2015, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -27,14 +27,17 @@
 
 /* please do not add require here : use www/docman/index.php to add require */
 /* global variables used */
-global $g; //group object
-global $dirid; //id of doc_group
+global $g; // Group object
+global $dirid; // id of doc_group
 global $group_id; // id of group
+global $childgroup_id; // id of child group if any
+global $feedback;
+global $error_msg;
+global $warning_msg;
 
 $urlredirect = '/docman/?group_id='.$group_id;
 
 // plugin projects-hierarchy handler
-$childgroup_id = getIntFromRequest('childgroup_id');
 if ($childgroup_id) {
 	$g = group_get_object($childgroup_id);
 	$urlredirect .= '&childgroup_id='.$childgroup_id;
@@ -42,23 +45,23 @@ if ($childgroup_id) {
 
 if (!forge_check_perm('docman', $g->getID(), 'approve')) {
 	$warning_msg = _('Document Manager Action Denied.');
-	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
+	session_redirect($urlredirect.'&dirid='.$dirid);
 }
 
 $dg = documentgroup_get_object($dirid);
 
 if ($dg->isError() || !$dg->delete($dirid, $g->getID())) {
 	$error_msg = $dg->getErrorMessage();
-	session_redirect($urlredirect.'&view=listfile&dirid='.$dirid);
+	session_redirect($urlredirect.'&dirid='.$dirid);
 }
 
 if ($dg->getState() != 2) {
 	$parentId = $dg->getParentID();
-	$view='listfile';
+	$view = '';
 } else {
 	$parentId = 0;
-	$view='listtrashfile';
+	$view = '&view=listtrashfile';
 }
 
 $feedback = sprintf(_('Document folder %s deleted successfully.'), $dg->getName());
-session_redirect($urlredirect.'&view='.$view.'&dirid='.$parentId);
+session_redirect($urlredirect.$view.'&dirid='.$parentId);

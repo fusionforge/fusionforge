@@ -151,7 +151,7 @@ if (is_numeric($docid)) {
 		require_once $gfcommon.'docman/include/webdav.php';
 		$_SERVER['SCRIPT_NAME'] = '';
 		/* we need the group id for check authentification. */
-		$_SERVER["AUTH_TYPE"] = $group_id;
+		$_SERVER['AUTH_TYPE'] = $group_id;
 		if (!isset($_SERVER['PHP_AUTH_USER'])) {
 			header('WWW-Authenticate: Basic realm="Webdav Access (No anonymous access)"');
 			header('HTTP/1.0 401 Unauthorized');
@@ -236,7 +236,15 @@ if (is_numeric($docid)) {
 			}
 		} elseif ( $arr[5] === 'selected' ) {
 			$dirid = $arr[6];
-			$arr_fileid = explode(',',$arr[7]);
+			$arr_groupIdfileId = explode(',',$arr[7]);
+			foreach ($arr_groupIdfileId as $groupIdfileId) {
+				$splited_val = explode('-', $groupIdfileId);
+				$arr_groupid[] = $splited_val[0];
+				$arr_fileid[] = $splited_val[1];
+			}
+			if (count($arr_groupid) != count($arr_fileid)) {
+				exit_error(_('Cannot build ZIP archive for download as ZIP'), 'docman');
+			}
 			$filename = 'docman-'.$g->getUnixName().'-selected-'.time().'.zip';
 			$file = forge_get_config('data_path').'/docman/'.$filename;
 			@unlink($file);
@@ -245,9 +253,9 @@ if (is_numeric($docid)) {
 				@unlink($file);
 				exit_error(_('Unable to open ZIP archive for download as ZIP'), 'docman');
 			}
-
-			foreach($arr_fileid as $docid) {
+			foreach ($arr_fileid as $key => $docid) {
 				if (!empty($docid)) {
+					$g = group_get_object($arr_groupid[$key]);
 					$d = new Document($g, $docid);
 					if (!$d || !is_object($d)) {
 						@unlink($file);
@@ -259,7 +267,7 @@ if (is_numeric($docid)) {
 					if ($d->isURL()) {
 						continue;
 					}
-					if (!$zip->addFromString(iconv("UTF-8", "ASCII//TRANSLIT", $d->getFileName()), $d->getFileData())) {
+					if (!$zip->addFromString(iconv('UTF-8', 'ASCII//TRANSLIT', $d->getFileName()), $d->getFileData())) {
 						@unlink($file);
 						exit_error(_('Unable to fill ZIP file.'), 'docman');
 					}
@@ -274,6 +282,7 @@ if (is_numeric($docid)) {
 					session_redirect($redirect_url);
 				}
 			}
+
 			if ( !$zip->close()) {
 				@unlink($file);
 				exit_error(_('Unable to close ZIP archive for download as ZIP'), 'docman');

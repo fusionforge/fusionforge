@@ -54,9 +54,9 @@ function docman_fill_zip($zip, $nested_groups, $document_factory, $docgroup = 0,
 	if (is_array(@$nested_groups[$docgroup])) {
 		foreach ($nested_groups[$docgroup] as $dg) {
 			if ($parent_docname != '') {
-				$path = iconv("UTF-8", "ASCII//TRANSLIT", $parent_docname).'/'.iconv("UTF-8", "ASCII//TRANSLIT", $dg->getName());
+				$path = iconv('UTF-8', 'ASCII//TRANSLIT', $parent_docname).'/'.iconv('UTF-8', 'ASCII//TRANSLIT', $dg->getName());
 			} else {
-				$path = iconv("UTF-8", "ASCII//TRANSLIT", $dg->getName());
+				$path = iconv('UTF-8', 'ASCII//TRANSLIT', $dg->getName());
 			}
 
 			if (!$zip->addEmptyDir($path)) {
@@ -68,7 +68,7 @@ function docman_fill_zip($zip, $nested_groups, $document_factory, $docgroup = 0,
 			if (is_array($docs) && count($docs)) {
 				foreach ($docs as $doc) {
 					if (!$doc->isURL()) {
-						if (!$zip->addFromString($path.'/'.iconv("UTF-8", "ASCII//TRANSLIT", $doc->getFileName()), $doc->getFileData())) {
+						if (!$zip->addFromString($path.'/'.iconv('UTF-8', 'ASCII//TRANSLIT', $doc->getFileName()), $doc->getFileData())) {
 							return false;
 						}
 					}

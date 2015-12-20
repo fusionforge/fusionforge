@@ -29,30 +29,31 @@
 /* global variables used */
 global $group_id; // id of the group
 global $dirid; // id of doc_group
+global $HTML; // Layout object
+global $LUSER; // User object
 global $g; // the Group object
+global $dm; // the docman manager
+global $warning_msg;
+global $start; // use to set the offset
 
 $linkmenu = 'listtrashfile';
 $childgroup_id = getIntFromRequest('childgroup_id');
 $baseredirecturl = '/docman/?group_id='.$group_id;
 $redirecturl = $baseredirecturl.'&view='.$linkmenu.'&dirid='.$dirid;
-if (!forge_check_perm('docman', $group_id, 'approve')) {
-	$warning_msg = _('Document Manager Access Denied');
-	session_redirect($baseredirecturl);
-}
 
 echo html_ao('div', array('id' => 'leftdiv'));
 include ($gfcommon.'docman/views/tree.php');
 echo html_ac(html_ap() - 1);
 
 // plugin projects-hierarchy
-$childgroup_id = getIntFromRequest('childgroup_id');
 if ($childgroup_id) {
-	if (!forge_check_perm('docman', $childgroup_id, 'read')) {
-		$warning_msg = _('Document Manager Access Denied');
-		session_redirect($baseredirecturl);
-	}
 	$redirecturl .= '&childgroup_id='.$childgroup_id;
 	$g = group_get_object($childgroup_id);
+}
+
+if (!forge_check_perm('docman', $g->getID(), 'approve')) {
+	$warning_msg = _('Document Manager Access Denied');
+	session_redirect($baseredirecturl);
 }
 
 $df = new DocumentFactory($g);
@@ -149,7 +150,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		$cells = array();
 		$cells[][] = html_e('input', array('type' => 'checkbox', 'class' => 'checkeddocidactive', 'value' => $d->getID(), 'title' => _('Select / Deselect this document for massaction'), 'onClick' => 'controllerListTrash.checkgeneral("active")'));
 		switch ($d->getFileType()) {
-			case "URL": {
+			case 'URL': {
 				$cells[][] = util_make_link($d->getFileName(), html_image($d->getFileTypeImage(), '22', '22', array('alt' => $d->getFileType())), array('title' => _('Visit this link')));
 				break;
 			}
@@ -172,8 +173,8 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		}
 		$cells[][] = $d->getStateName();
 		switch ($d->getFileType()) {
-			case "URL": {
-				$cells[][] = "--";
+			case 'URL': {
+				$cells[][] = '--';
 				break;
 			}
 			default: {

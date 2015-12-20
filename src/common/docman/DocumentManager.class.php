@@ -2,7 +2,7 @@
 /**
  * FusionForge document manager
  *
- * Copyright 2011-2014, Franck Villaume - TrivialDev
+ * Copyright 2011-2015, Franck Villaume - TrivialDev
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2013, French Ministry of National Education
  * http://fusionforge.org
@@ -133,9 +133,27 @@ class DocumentManager extends Error {
 	 * @return	boolean	success or not
 	 */
 	function isTrashEmpty() {
-		$res = db_query_params('select ( select count(*) from doc_groups where group_id = $1 and stateid = 2 and groupname !=$2 )
-					+ ( select count(*) from docdata_vw where group_id = $3 and stateid = 2 ) as c',
-					array($this->Group->getID(), '.trash', $this->Group->getID()));
+		if ($this->Group->usesPlugin('projects-hierarchy')) {
+			$projectsHierarchy = plugin_get_object('projects-hierarchy');
+			$projectIDsArray = $projectsHierarchy->getFamily($this->Group->getID(), 'child', true, 'validated');
+		}
+
+
+		if (isset($projectIDsArray) && is_array($projectIDsArray)) {
+			foreach ($projectIDsArray as $projectID) {
+				$groupObject = group_get_object($projectID);
+				if ($groupObject->usesDocman() && $projectsHierarchy->getDocmanStatus($groupObject->getID())
+					&& forge_check_perm('docman', $groupObject->getID(), 'approve')) {
+					$groupIdArr[] = $projectID;
+				}
+			}
+		}
+		$groupIdArr[] = $this->Group->getID();
+
+		$res = db_query_params('select ( select count(*) from doc_groups where group_id = ANY ($1) and stateid = 2 and groupname !=$2 )
+					+ ( select count(*) from docdata_vw where group_id = ANY ($3) and stateid = 2 ) as c',
+					array(db_int_array_to_any_clause($groupIdArr), '.trash', db_int_array_to_any_clause($groupIdArr)));
+
 		if (!$res) {
 			return false;
 		}

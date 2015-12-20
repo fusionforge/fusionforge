@@ -3,7 +3,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2015, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -24,40 +24,39 @@
 
 /* please do not add require here : use www/docman/index.php to add require */
 /* global variables used */
-global $dirid; //id of doc_group
+global $g; // Group object
+global $dirid; // id of doc_group
 global $group_id; // id of group
+global $childgroup_id; // id of child group if any
+global $feedback;
+global $error_msg;
+global $warning_msg;
 
-$baseurl = '/docman/?group_id='.$group_id;
-$redirecturl = $baseurl.'&view=listfile&dirid='.$dirid;
+$redirecturl = '/docman/?group_id='.$group_id.'&dirid='.$dirid;
 
 // plugin projects-hierarchy handler
-$childgroup_id = getIntFromRequest('childgroup_id');
 if ($childgroup_id) {
 	$redirecturl .= '&childgroup_id='.$childgroup_id;
-	if (!forge_check_perm('docman', $childgroup_id, 'submit')) {
-		$warning_msg = _('Document Manager Action Denied.');
-		session_redirect($redirecturl);
-	}
 	$g = group_get_object($childgroup_id);
 }
 
 if (!forge_check_perm('docman', $g->getID(), 'approve')) {
 	$warning_msg = _('Document Manager Action Denied.');
-	session_redirect('/docman/?group_id='.$group_id.'&dirid='.$dirid);
+	session_redirect($redirecturl);
 }
 
 $arr_fileid = explode(',', getStringFromRequest('fileid'));
 $moveto_dirid = getIntFromRequest('moveto_dirid');
 foreach ($arr_fileid as $fileid) {
 	if (!empty($fileid)) {
-		$d = document_get_object($fileid);
+		$d = document_get_object($fileid, $g->getID());
 		if ($d->isError() || !$d->update($d->getFilename(), $d->getFileType(), NULL, $moveto_dirid, $d->getName(), $d->getDescription(), $d->getStateID())) {
 			$error_msg = $d->getErrorMessage();
-			session_redirect('/docman/?group_id='.$group_id.'&dirid='.$dirid);
+			session_redirect($redirecturl);
 		}
 	}
 }
 
 $count = count($arr_fileid);
 $feedback = sprintf(ngettext('%s document moved.', '%s documents moved.', $count), $count);
-session_redirect('/docman/?group_id='.$group_id.'&dirid='.$dirid);
+session_redirect($redirecturl);

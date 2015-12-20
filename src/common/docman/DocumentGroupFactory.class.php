@@ -26,10 +26,6 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-/*
- Document Groups
-*/
-
 require_once $gfcommon.'include/Error.class.php';
 
 class DocumentGroupFactory extends Error {

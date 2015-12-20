@@ -87,7 +87,7 @@ class Widget_MyMonitoredDocuments extends Widget {
 					$html = '';
 					if (!$hide_now) {
 						foreach ($monitorElementIds as $key => $monitorElementId) {
-							$documentObject = document_get_object($monitorElementId);
+							$documentObject = document_get_object($monitorElementId, $distinctMonitorGroupId);
 							$cells = array();
 							$cells[] = array('&nbsp;&nbsp;&nbsp;-&nbsp;'.util_make_link('/docman/?group_id='.$distinctMonitorGroupId.'&view=listfile&dirid='.$documentObject->getDocGroupID(), stripslashes($documentObject->getFileName())), 'style' => 'width:99%');
 							$cells[] = array(util_make_link('/docman/?group_id='.$distinctMonitorGroupId.'&action=monitorfile&option=stop&view=listfile&dirid='.$documentObject->getDocGroupID().'&fileid='.$documentObject->getID(),

@@ -41,7 +41,7 @@ if (!forge_check_perm('docman', $group_id, 'read')) {
 }
 
 $is_editor = forge_check_perm('docman', $g->getID(), 'approve');
-$searchString = trim(getStringFromPost('textsearch', null));
+$searchString = trim(getStringFromRequest('textsearch', null));
 $insideDocuments = getStringFromPost('insideDocuments');
 $subprojectsIncluded = getStringFromPost('includesubprojects');
 $limitByStartDate = getIntFromPost('limitByStartDate', 0);
@@ -179,8 +179,8 @@ if ($searchString) {
 	$docsHtmlSearchRenderer->searchQuery->executeQuery();
 	$nbDocs = $docsHtmlSearchRenderer->searchQuery->getRowsCount();
 	$max = $docsHtmlSearchRenderer->searchQuery->getRowsTotalCount();
-	echo $HTML->paging_top($start, $paging, $nbDocs, $max, $redirect_url.'&view=search');
+	echo $HTML->paging_top($start, $paging, $nbDocs, $max, $redirect_url.'&view=search&textsearch='.$searchString);
 	$docsHtmlSearchRenderer->writeBody();
-	echo $HTML->paging_bottom($start, $paging, $nbDocs, $redirect_url.'&view=search');
+	echo $HTML->paging_bottom($start, $paging, $nbDocs, $redirect_url.'&view=search&textsearch='.$searchString);
 }
 echo html_ac(html_ap() -2);

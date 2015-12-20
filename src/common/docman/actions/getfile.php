@@ -23,13 +23,18 @@
 
 /* please do not add require here : use www/docman/index.php to add require */
 /* global variables used */
+global $g; // Group object
 global $dirid; //id of doc_group
 global $group_id; // id of group
+global $childgroup_id; // id of child group if any
+global $feedback;
+global $error_msg;
+global $warning_msg;
 
 $sysdebug_enable = false;
 
 $urlparam = '/docman/?group_id='.$group_id;
-if (isset($childgroup_id) && $childgroup_id) {
+if ($childgroup_id) {
 	$g = group_get_object($childgroup_id);
 	$urlparam .= '&childgroup_id='.$childgroup_id;
 }
@@ -48,18 +53,15 @@ switch ($fromview) {
 	}
 }
 
-if (!forge_check_perm('docman', $group_id, 'approve')) {
+if (!forge_check_perm('docman', $g->getID(), 'approve')) {
 	$warning_msg = _('Document Manager Action Denied.');
 	session_redirect($urlparam);
 }
 
 $itemid = getIntFromRequest('itemid');
-$childgroup_id = getIntFromRequest('childgroup_id');
 $details = getIntFromRequest('details');
-if ($childgroup_id) {
-	$g = group_get_object($childgroup_id);
-}
-$d = document_get_object($itemid);
+
+$d = document_get_object($itemid, $g->getID());
 if ($d->isError()) {
 	$error_msg = $d->getErrorMessage();
 	session_redirect($urlparam);

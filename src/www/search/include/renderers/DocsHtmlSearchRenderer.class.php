@@ -99,7 +99,7 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			echo html_ac(html_ap() - 1);
 		}
 		for($i = 0; $i < $rowsCount; $i++) {
-			$document = document_get_object(db_result($result, $i, 'docid'));
+			$document = document_get_object(db_result($result, $i, 'docid'), db_result($result, $i, 'group_id'));
 			$currentDocGroup = documentgroup_get_object($document->getDocGroupID());
 			//section changed
 			if ($lastDocGroupID != $currentDocGroup->getID()) {
@@ -116,12 +116,12 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			}
 			$cells = array();
 			if (!$document->getLocked() && !$document->getReserved()) {
-				$cells[][] = html_e('input', array('type' => 'checkbox', 'value' => $document->getID(), 'class' => 'checkeddocidactive', 'title' => _('Select / Deselect this document for massaction'), 'onClick' => 'controllerListFile.checkgeneral("active")'));
+				$cells[][] = html_e('input', array('type' => 'checkbox', 'value' => $document->Group->getID().'-'.$document->getID(), 'class' => 'checkeddocidactive', 'title' => _('Select / Deselect this document for massaction'), 'onClick' => 'controllerListFile.checkgeneral("active")'));
 			} else {
 				if (session_loggedin() && ($document->getReservedBy() != $LUSER->getID())) {
 					$cells[][] = html_e('input', array('type' => 'checkbox', 'name' => 'disabled', 'disabled' => 'disabled'));
 				} else {
-					$cells[][] = html_e('input', array('type' => 'checkbox', 'value' => $document->getID(), 'class' => 'checkeddocidactive', 'title' => _('Select / Deselect this document for massaction'), 'onClick' => 'controllerListFile.checkgeneral("active")'));
+					$cells[][] = html_e('input', array('type' => 'checkbox', 'value' => $document->Group->getID().'-'.$document->getID(), 'class' => 'checkeddocidactive', 'title' => _('Select / Deselect this document for massaction'), 'onClick' => 'controllerListFile.checkgeneral("active")'));
 				}
 			}
 			$cells[][] = util_make_link('/docman/view.php/'.$document->Group->getID().'/'.$document->getID().'/'.urlencode($document->getFileName()), html_image($document->getFileTypeImage(), 22, 22), array('title' => _('View this document')));

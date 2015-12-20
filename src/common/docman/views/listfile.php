@@ -41,10 +41,6 @@ global $start; // use to set the offset
 $linkmenu = 'listfile';
 $baseredirecturl = '/docman/?group_id='.$group_id;
 $redirecturl = $baseredirecturl.'&view='.$linkmenu.'&dirid='.$dirid;
-if (!forge_check_perm('docman', $group_id, 'read')) {
-	$warning_msg = _('Document Manager Access Denied');
-	session_redirect($baseredirecturl);
-}
 
 echo html_ao('div', array('id' => 'leftdiv'));
 include ($gfcommon.'docman/views/tree.php');
@@ -53,12 +49,13 @@ echo html_ac(html_ap() - 1);
 // plugin projects-hierarchy support
 $childgroup_id = getIntFromRequest('childgroup_id');
 if ($childgroup_id) {
-	if (!forge_check_perm('docman', $childgroup_id, 'read')) {
-		$warning_msg = _('Document Manager Access Denied');
-		session_redirect($baseredirecturl);
-	}
 	$redirecturl .= '&childgroup_id='.$childgroup_id;
 	$g = group_get_object($childgroup_id);
+}
+
+if (!forge_check_perm('docman', $g->getID(), 'read')) {
+	$warning_msg = _('Document Manager Access Denied');
+	session_redirect($baseredirecturl);
 }
 
 if (session_loggedin()) {
@@ -262,12 +259,12 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 			}
 		}
 		if (!$d->getLocked() && !$d->getReserved()) {
-			$cells[][] = html_e('input', array('type' => 'checkbox', 'value' => $d->getID(), 'class' => 'checkeddocidactive', 'title' => _('Select / Deselect this document for massaction'), 'onClick' => 'controllerListFile.checkgeneral("active")'));
+			$cells[][] = html_e('input', array('type' => 'checkbox', 'value' => $d->Group->getID().'-'.$d->getID(), 'class' => 'checkeddocidactive', 'title' => _('Select / Deselect this document for massaction'), 'onClick' => 'controllerListFile.checkgeneral("active")'));
 		} else {
 			if (session_loggedin() && ($d->getReservedBy() != $LUSER->getID())) {
 				$cells[][] = html_e('input', array('type' => 'checkbox', 'name' => 'disabled', 'disabled' => 'disabled'));
 			} else {
-				$cells[][] = html_e('input', array('type' => 'checkbox', 'value' => $d->getID(), 'class' => 'checkeddocidactive', 'title' => _('Select / Deselect this document for massaction'), 'onClick' => 'controllerListFile.checkgeneral("active")'));
+				$cells[][] = html_e('input', array('type' => 'checkbox', 'value' => $d->Group->getID().'-'.$d->getID(), 'class' => 'checkeddocidactive', 'title' => _('Select / Deselect this document for massaction'), 'onClick' => 'controllerListFile.checkgeneral("active")'));
 			}
 		}
 		switch ($d->getFileType()) {
@@ -398,7 +395,7 @@ if ($DocGroupName) {
 		include ($gfcommon.'docman/views/editfile.php');
 		$directViewFileRequestedID = getIntFromRequest('filedetailid', null);
 		if ($directViewFileRequestedID) {
-			$localDocumentObject = document_get_object($directViewFileRequestedID);
+			$localDocumentObject = document_get_object($directViewFileRequestedID, $group_id);
 			echo html_ao('script', array('type' => 'text/javascript'));
 			echo '//<![CDATA['."\n";
 			echo 'jQuery(document).ready(function() {javascript:controllerListFile.toggleEditFileView({action:\''.util_make_uri($editfileaction).'\',

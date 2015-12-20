@@ -3,7 +3,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2015, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -27,11 +27,11 @@
 global $dirid; //id of doc_group
 global $group_id; // id of group
 global $LUSER; //user object
+global $childgroup_id; // id of child group if any
 
 $redirecturl = '/docman/?group_id='.$group_id.'&dirid='.$dirid;
 
 // plugin projects-hierarchy handler
-$childgroup_id = getIntFromRequest('childgroup_id');
 if ($childgroup_id) {
 	$redirecturl .= '&childgroup_id='.$childgroup_id;
 	if (!forge_check_perm('docman', $childgroup_id, 'submit')) {
@@ -52,7 +52,7 @@ switch ($option) {
 	case 'start': {
 		foreach ($arr_fileid as $fileid) {
 			if (!empty($fileid)) {
-				$d = document_get_object($fileid);
+				$d = document_get_object($fileid, $g->getID());
 				if ($d->isError() || !$d->addMonitoredBy(user_getid())) {
 					$error_msg = $d->getErrorMessage();
 					session_redirect($redirecturl);
@@ -69,7 +69,7 @@ switch ($option) {
 	case 'stop': {
 		foreach ($arr_fileid as $fileid) {
 			if (!empty($fileid)) {
-				$d = document_get_object($fileid);
+				$d = document_get_object($fileid, $g->getID());
 				if ($d->isError() || !$d->removeMonitoredBy($LUSER->getID())) {
 					$error_msg = $d->getErrorMessage();
 					session_redirect($redirecturl);

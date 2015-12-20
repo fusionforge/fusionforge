@@ -289,6 +289,12 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		}
 	}
 
+	/**
+	 * PUT
+	 * called by HTTP_WebDAV_Server
+	 *
+	 * @param	array	$options	options passed by previous functions in HTTP_WebDAV_Server
+	 */
 	function PUT(&$options) {
 		$arr_path = explode('/', rtrim($options['path'], '/'));
 		$group_id = $arr_path[3];
@@ -313,7 +319,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 
 		$docid = $dg->hasDocument($newfilename);
 		if ($docid) {
-			$d = document_get_object($docid);
+			$d = document_get_object($docid, $g->getID());
 			if (!$d->getReserved() && !$d->getLocked()) {
 				if ($d->update($d->getFileName(), $d->getFileType(), $tmpfile, $dgId, $d->getName(), $d->getDescription(), $d->getStateID())) {
 					@unlink($tmpfile);
@@ -344,6 +350,12 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		return '409';
 	}
 
+	/**
+	 * DELETE
+	 * called by HTTP_WebDAV_Server
+	 *
+	 * @param	array	$options	options passed by previous functions in HTTP_WebDAV_Server
+	 */
 	function DELETE(&$options) {
 		$arr_path = explode('/', rtrim($options['path'], '/'));
 		$group_id = $arr_path[3];
@@ -391,6 +403,12 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		return '404';
 	}
 
+	/**
+	 * MKCOL
+	 * called by HTTP_WebDAV_Server
+	 *
+	 * @param	array	$options	options passed by previous functions in HTTP_WebDAV_Server
+	 */
 	function MKCOL(&$options) {
 		$arr_path = explode('/', rtrim($options['path'], '/'));
 		$group_id = $arr_path[3];
@@ -414,6 +432,12 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		return '405';
 	}
 
+	/**
+	 * MOVE
+	 * called by HTTP_WebDAV_Server
+	 *
+	 * @param	array	$options	options passed by previous functions in HTTP_WebDAV_Server
+	 */
 	function MOVE(&$options) {
 		$arr_path = explode('/', rtrim($options['path'], '/'));
 		$group_id = $arr_path[3];
