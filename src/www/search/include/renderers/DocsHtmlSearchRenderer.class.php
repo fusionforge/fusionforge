@@ -98,7 +98,7 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			<?php
 			echo html_ac(html_ap() - 1);
 		}
-		for($i = 0; $i < $rowsCount; $i++) {
+		for ($i = 0; $i < $rowsCount; $i++) {
 			$document = document_get_object(db_result($result, $i, 'docid'), db_result($result, $i, 'group_id'));
 			$currentDocGroup = documentgroup_get_object($document->getDocGroupID(), $document->Group->getID());
 			//section changed
@@ -124,7 +124,11 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 					$cells[][] = html_e('input', array('type' => 'checkbox', 'value' => $document->Group->getID().'-'.$document->getID(), 'class' => 'checkeddocidactive', 'title' => _('Select / Deselect this document for massaction'), 'onClick' => 'controllerListFile.checkgeneral("active")'));
 				}
 			}
-			$cells[][] = util_make_link('/docman/view.php/'.$document->Group->getID().'/'.$document->getID().'/'.urlencode($document->getFileName()), html_image($document->getFileTypeImage(), 22, 22), array('title' => _('View this document')));
+			if ($document->isURL()) {
+				$cells[][] = util_make_link($document->getFileName(), html_image($document->getFileTypeImage(), 22, 22), array('title' => _('Follow this link')), true);
+			} else {
+				$cells[][] = util_make_link('/docman/view.php/'.$document->Group->getID().'/'.$document->getID().'/'.urlencode($document->getFileName()), html_image($document->getFileTypeImage(), 22, 22), array('title' => _('View this document')));
+			}
 			$cells[][] = db_result($result, $i, 'title');
 			$cells[][] = db_result($result, $i, 'description');
 			if (forge_check_perm('docman', $document->Group->getID(), 'approve')) {
