@@ -5,7 +5,7 @@
  * Copyright 2004 (c) Dominik Haas, GForge Team
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright 2013, French Ministry of National Education
- * Copyright 2013,2015 Franck Villaume - TrivialDev
+ * Copyright 2013,2015, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -58,6 +58,7 @@ class DocsAllHtmlSearchRenderer extends HtmlSearchRenderer {
 		$this->tableHeaders = array(
 			_('Project'),
 			_('Directory'),
+			'',
 			_('Title'),
 			_('Description')
 		);
@@ -77,34 +78,42 @@ class DocsAllHtmlSearchRenderer extends HtmlSearchRenderer {
 	 * @return string html output
 	 */
 	function getRows() {
+		global $HTML;
 		$rowsCount = $this->searchQuery->getRowsCount();
 		$result =& $this->searchQuery->getResult();
 
 		$return = '';
 
-		$lastDocGroup = null;
+		$lastGroupID = null;
+		$lastDocGroupID = null;
 
 		$rowColor = 0;
 		for($i = 0; $i < $rowsCount; $i++) {
+			$cells = array();
+			$document = document_get_object(db_result($result, $i, 'docid'), db_result($result, $i, 'group_id'));
 			$currentDocGroup = db_result($result, $i, 'project_name');
-			$currentDocGroupObject = group_get_object_by_publicname($currentDocGroup);
-			if ($lastDocGroup != $currentDocGroup) {
-				$return .= '<tr><td>'.html_image('ic/home16b.png', '10', '12', array('border' => '0')).'<b>'.util_make_link('/docman/?group_id='.$currentDocGroupObject->getID(),$currentDocGroup).'</b></td><td colspan="3">&nbsp;</td></tr>';
-				$lastDocGroup = $currentDocGroup;
+			if ($lastGroupID != $document->Group->getID()) {
+				$cells[] = array(html_image('ic/home16b.png', 10, 12, array('border' => 0)).'<b>'.util_make_link('/docman/?group_id='.$document->Group->getID(),$currentDocGroup).'</b>', 'colspan' => 4);
+				$lastGroupID = $document->Group->getID();
 				$rowColor = 0;
+				$return .= $HTML->multiTableRow(array(), $cells);
 			}
-			$document = new Document($currentDocGroupObject, db_result($result, $i, 'docid'));
-			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($rowColor) .'>'
-						. '<td>&nbsp;</td>'
-						. '<td>'.html_image('ic/cfolder15.png', '10', '12', array('border' => '0')).util_make_link('/docman/?group_id='.$currentDocGroupObject->getID().'&view=listfile&dirid='.$document->getDocGroupID(),db_result($result, $i, 'groupname')).'</td>';
-						if (db_result($result, $i, 'filetype') == 'URL') {
-							$return .= '<td><a href="'.db_result($result, $i, 'filename').'">';
-						} else {
-							$return .= '<td><a href="'.util_make_url('/docman/view.php/'.db_result($result, $i, 'group_id') . '/'.db_result($result, $i, 'docid').'/'.db_result($result, $i, 'filename')).'">';
-						}
-			$return .= html_image('ic/msg.png', '10', '12', array('border' => '0'))
-						. ' '.db_result($result, $i, 'title').'</a></td>'
-						. '<td>'.db_result($result, $i, 'description').'</td></tr>';
+			$cells = array();
+			$cells[][] = '&nbsp;';
+			if ($lastDocGroupID != $document->getDocGroupID()) {
+				$cells[][] = html_image('ic/folder.png', 22, 22, array('border' => 0)).util_make_link('/docman/?group_id='.$document->Group->getID().'&view=listfile&dirid='.$document->getDocGroupID(),db_result($result, $i, 'groupname'));
+				$lastDocGroupID = $document->getDocGroupID();
+			} else {
+				$cells[][] = '&nbsp';
+			}
+			if ($document->isURL()) {
+				$cells[][] = util_make_link($document->getFileName(), html_image($document->getFileTypeImage(), 22, 22), array('title' => _('Visit this link')), true);
+			} else {
+				$cells[][] = util_make_link('/docman/view.php/'.db_result($result, $i, 'group_id') . '/'.db_result($result, $i, 'docid').'/'.db_result($result, $i, 'filename'), html_image($document->getFileTypeImage(), 22, 22), array('title' => _('View this document')));
+			}
+			$cells[][] = db_result($result, $i, 'title');
+			$cells[][] = db_result($result, $i, 'description');
+			$return .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($rowColor, true)), $cells);
 			$rowColor++;
 		}
 		return $return;

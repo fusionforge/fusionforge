@@ -125,7 +125,7 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 				}
 			}
 			if ($document->isURL()) {
-				$cells[][] = util_make_link($document->getFileName(), html_image($document->getFileTypeImage(), 22, 22), array('title' => _('Follow this link')), true);
+				$cells[][] = util_make_link($document->getFileName(), html_image($document->getFileTypeImage(), 22, 22), array('title' => _('Visit this link')), true);
 			} else {
 				$cells[][] = util_make_link('/docman/view.php/'.$document->Group->getID().'/'.$document->getID().'/'.urlencode($document->getFileName()), html_image($document->getFileTypeImage(), 22, 22), array('title' => _('View this document')));
 			}
