@@ -68,7 +68,7 @@ class DocsAllHtmlSearchRenderer extends HtmlSearchRenderer {
 	 * writeHeader - write the header of the output
 	 */
 	function writeHeader() {
-		$GLOBALS['HTML']->header(array('title'=>_('Search for documents'), 'pagename'=>'search'));
+		$GLOBALS['HTML']->header(array('title'=>_('Search for documents')));
 		parent::writeHeader();
 	}
 
