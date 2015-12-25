@@ -208,7 +208,7 @@ if ($DocGroupName) {
 	if (forge_check_perm('docman', $group_id, 'approve'))
 		$numPendingFiles = $ndg->getNumberOfDocuments(3);
 	if ($numFiles || (isset($numPendingFiles) && $numPendingFiles))
-		echo util_make_link('/docman/view.php/'.$ndg->Group->getID().'/zip/full/'.$dirid, html_image('docman/download-directory-zip.png',22,22,array('alt'=>'downloadaszip')), array('title' => _('Download this folder as a ZIP')));
+		echo util_make_link('/docman/view.php/'.$ndg->Group->getID().'/zip/full/'.$dirid, html_image('docman/download-directory-zip.png', 22, 22, array('alt' => 'downloadaszip')), array('title' => _('Download this folder as a ZIP')));
 
 	if (session_loggedin()) {
 		if ($ndg->isMonitoredBy($LUSER->getID())) {
@@ -269,11 +269,11 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		}
 		switch ($d->getFileType()) {
 			case 'URL': {
-				$cells[][] =  util_make_link($d->getFileName(), html_image($d->getFileTypeImage(), '22', '22', array('alt' => $d->getFileType())), array('title' => _('Visit this link')), true);
+				$cells[][] =  util_make_link($d->getFileName(), html_image($d->getFileTypeImage(), 22, 22, array('alt' => $d->getFileType())), array('title' => _('Visit this link')), true);
 				break;
 			}
 			default: {
-				$cells[][] =  util_make_link('/docman/view.php/'.$d->Group->getID().'/'.$d->getID().'/'.urlencode($d->getFileName()), html_image($d->getFileTypeImage(), '20', '20', array('alt' => $d->getFileType())), array('title' => _('View this document')));
+				$cells[][] =  util_make_link('/docman/view.php/'.$d->Group->getID().'/'.$d->getID().'/'.urlencode($d->getFileName()), html_image($d->getFileTypeImage(), 22, 22, array('alt' => $d->getFileType())), array('title' => _('View this document')));
 			}
 		}
 		$nextcell = '';
@@ -291,7 +291,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		}
 		$nextcell = '';
 		if ($d->getReserved()) {
-			$nextcell = html_image('docman/document-reserved.png', '22', '22', array('alt' => _('Reserved Document'), 'title' => _('Reserved Document')));
+			$nextcell = html_image('docman/document-reserved.png', 22, 22, array('alt' => _('Reserved Document'), 'title' => _('Reserved Document')));
 			$reserved_by = $d->getReservedBy();
 			if ($reserved_by) {
 				$user = user_get_object($reserved_by);
