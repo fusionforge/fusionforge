@@ -1559,7 +1559,7 @@ if (isset($params['group']) && $params['group']) {
 			$sep = '&';
 		}
 		if ($start > 0) {
-			$html_content .= util_make_link($actionUrl.$sep.'start='.($start-$paging),'<strong>← '._('previous').'</strong>');
+			$html_content .= util_make_link($actionUrl.$sep.'start='.($start-$paging),'<strong>&larr; '._('previous').'</strong>');
 			$html_content .= '&nbsp;&nbsp;';
 		}
 		$pages = $totalElements / $paging;
@@ -1586,7 +1586,7 @@ if (isset($params['group']) && $params['group']) {
 			}
 		}
 		if ( $totalElements > $start + $paging) {
-			$html_content .= util_make_link($actionUrl.$sep.'start='.($start+$paging),'<strong>'._('next').' →</strong>');
+			$html_content .= util_make_link($actionUrl.$sep.'start='.($start+$paging),'<strong>'._('next').' &rarr;</strong>');
 		}
 		return $html_content;
 	}
