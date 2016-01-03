@@ -2,7 +2,7 @@
 /**
  * Copyright (C) 2008-2009 Alcatel-Lucent
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012,2014 Franck Villaume - TrivialDev
+ * Copyright 2012,2014,2015, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -51,88 +51,87 @@ if (!forge_get_config('use_project_full_list')) {
 }
 
 global $HTML;
+$role_id = 1;
+
+if (session_loggedin()) {
+	if (getStringFromRequest('setpaging')) {
+		/* store paging preferences */
+		$paging = getIntFromRequest('nres');
+		if (!$paging) {
+			$paging = 25;
+		}
+		$LUSER->setPreference('paging', $paging);
+	}
+	/* logged in users get configurable paging */
+	$paging = $LUSER->getPreference('paging');
+	$userRoles = $LUSER->getRoles();
+	if (count($userRoles)) {
+		foreach ($userRoles as $r) {
+			$role_id .= ', '.$r->getID();
+		}
+	}
+}
+
+if(!isset($paging) || !$paging)
+	$paging = 25;
+
+$start = getIntFromRequest('start');
+
+if ($start < 0) {
+	$start = 0;
+}
 
 $HTML->header(array('title'=>_('Project List'),'pagename'=>'softwaremap'));
 $HTML->printSoftwareMapLinks();
 
-$projects = group_get_public_active_projects_asc($TROVE_HARDQUERYLIMIT);
+$nbProjects = FusionForge::getInstance()->getNumberOfProjects(array('status' => 'A', 'type_id' => 1, 'is_template' => 0), 'register_time > 0 AND group_id in (select ref_id FROM pfo_role_setting WHERE section_name = \'project_read\' and perm_val = 1 and role_id IN ('.$role_id.'))');
 
-$querytotalcount = count($projects);
+$projects = group_get_public_active_projects_asc($paging, $start);
 
-// #################################################################
-// limit/offset display
+$max = ($nbProjects > ($start + $paging)) ? ($start + $paging) : $nbProjects;
+echo $HTML->paging_top($start, $paging, $nbProjects, $max, '/softwaremap/full_list.php');
 
-$page = getIntFromRequest('page',1);
-
-// store this as a var so it can be printed later as well
-$html_limit = '';
-if ($querytotalcount == $TROVE_HARDQUERYLIMIT) {
-	$html_limit .= sprintf(_('More than <strong>%d</strong> projects in result set.'), $querytotalcount);
-}
-$html_limit .= sprintf(_('<strong>%d</strong> projects in result set.'), $querytotalcount);
-
-$html_limit .= ' ';
-
-// only display pages stuff if there is more to display
-if ($querytotalcount > $TROVE_BROWSELIMIT) {
-	$html_limit .= html_trove_limit_navigation_box($_SERVER['PHP_SELF'], $querytotalcount, $TROVE_BROWSELIMIT, $page);
-}
-
-echo $html_limit.html_e('hr');
+echo html_e('hr');
 
 // #################################################################
 // print actual project listings
-for ($i_proj=0;$i_proj<$querytotalcount;$i_proj++) {
+for ($i_proj = 0; $i_proj < count($projects); $i_proj++) {
 	$row_grp = $projects[$i_proj];
 
-	// check to see if row is in page range
-	if (($i_proj >= (($page-1)*$TROVE_BROWSELIMIT)) && ($i_proj < ($page*$TROVE_BROWSELIMIT))) {
-		$viewthisrow = 1;
-	} else {
-		$viewthisrow = 0;
+	// Embed RDFa description for /projects/PROJ_NAME
+	$proj_uri = util_make_url_g(strtolower($row_grp['unix_group_name']),$row_grp['group_id']);
+	echo html_ao('div', array('typeof' => 'doap:Project sioc:Space', 'about' => $proj_uri));
+	echo html_e('span', array('rel' => 'planetforge:hosted_by', 'resource' => util_make_url('/')), '', false);
+
+	echo $HTML->listTableTop();
+	$cells = array();
+	$content = util_make_link_g(strtolower($row_grp['unix_group_name']),$row_grp['group_id'],'<strong>'
+		.'<span property="doap:name">'
+		.$row_grp['group_name']
+		.'</span>'
+		.'</strong>').' ';
+	if ($row_grp['short_description']) {
+		$content .= '- '
+		. '<span property="doap:short_desc">'
+		. $row_grp['short_description']
+		. '</span>';
 	}
-
-	if ($viewthisrow) {
-
-		// Embed RDFa description for /projects/PROJ_NAME
-		$proj_uri = util_make_url_g(strtolower($row_grp['unix_group_name']),$row_grp['group_id']);
-		echo html_ao('div', array('typeof' => 'doap:Project sioc:Space', 'about' => $proj_uri));
-		echo html_e('span', array('rel' => 'planetforge:hosted_by', 'resource' => util_make_url('/')), '', false);
-
-		echo $HTML->listTableTop();
-		$cells = array();
-		$content = util_make_link_g(strtolower($row_grp['unix_group_name']),$row_grp['group_id'],'<strong>'
-			.'<span property="doap:name">'
-			.$row_grp['group_name']
-			.'</span>'
-			.'</strong>').' ';
-		if ($row_grp['short_description']) {
-			$content .= '- '
-			. '<span property="doap:short_desc">'
-			. $row_grp['short_description']
-			. '</span>';
-		}
-		$cells[] = array($content, 'colspan' => 2);
-		echo $HTML->multiTableRow(array('class' => 'top'), $cells);
-		$cells = array();
-		$content = '';
-		// list all trove categories
-		if (forge_get_config('use_trove')) {
-			$content .= trove_getcatlisting($row_grp['group_id'], 0, 1, 1);
-		}
-		$cells[] = array($content, 'class' => 'top');
-		$cells[] = array(html_e('br')._('Register Date')._(': ').html_e('strong', array(), date(_('Y-m-d H:i'),$row_grp['register_time'])),
-				'class' => 'bottom align-right');
-		echo $HTML->multiTableRow(array('class' => 'top'), $cells);
-		echo $HTML->listTableBottom();
-		echo html_ac(html_ap() -1);
-		echo html_e('hr');
-	} // end if for row and range chacking
+	$cells[] = array($content, 'colspan' => 2);
+	echo $HTML->multiTableRow(array('class' => 'top'), $cells);
+	$cells = array();
+	$content = '';
+	// list all trove categories
+	if (forge_get_config('use_trove')) {
+		$content .= trove_getcatlisting($row_grp['group_id'], 0, 1, 1);
+	}
+	$cells[] = array($content, 'class' => 'top');
+	$cells[] = array(html_e('br')._('Register Date')._(': ').html_e('strong', array(), date(_('Y-m-d H:i'),$row_grp['register_time'])),
+			'class' => 'bottom align-right');
+	echo $HTML->multiTableRow(array('class' => 'top'), $cells);
+	echo $HTML->listTableBottom();
+	echo html_ac(html_ap() -1);
+	echo html_e('hr');
 }
 
-// print bottom navigation if there are more projects to display
-if ($querytotalcount > $TROVE_BROWSELIMIT) {
-	echo $html_limit;
-}
-
+echo $HTML->paging_bottom($start, $paging, $nbProjects, '/softwaremap/full_list.php');
 $HTML->footer();

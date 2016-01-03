@@ -161,24 +161,33 @@ function group_get_object_by_publicname($groupname) {
 /**
  * get_public_active_projects_asc() - Get a list of rows for public active projects (initially in trove/full_list)
  *
- * @param	int	$max_query_limit Optional Maximum number of rows to limit query length
+ * @param	int	$max_query_limit	Optional Maximum number of rows to limit query length
+ * @param	int	$offset			start to retrieve rows from offset value
  * @return	array	List of public active projects
  */
-function group_get_public_active_projects_asc($max_query_limit = -1) {
+function group_get_public_active_projects_asc($max_query_limit = -1, $offset = 0) {
+	$role_id = 1;
+	if (session_loggedin()) {
+		global $LUSER;
+		$userRoles = $LUSER->getRoles();
+		if (count($userRoles)) {
+			foreach ($userRoles as $r) {
+				$role_id .= ', '.$r->getID();
+			}
+		}
+	}
 
 	$res_grp = db_query_params ('
 			SELECT group_id, group_name, unix_group_name, short_description, register_time
 			FROM groups
 			WHERE status = $1 AND type_id=1 AND is_template=0 AND register_time > 0
+			AND group_id in (select ref_id FROM pfo_role_setting WHERE section_name = $2 and perm_val = 1 and role_id IN ('.$role_id.'))
 			ORDER BY group_name ASC
 			',
-			array('A'),
-			$max_query_limit);
+			array('A', 'project_read'),
+			$max_query_limit, $offset);
 	$projects = array();
 	while ($row_grp = db_fetch_array($res_grp)) {
-		if (!forge_check_perm ('project_read', $row_grp['group_id'])) {
-			continue;
-		}
 		$projects[] = $row_grp;
 	}
 	return $projects;

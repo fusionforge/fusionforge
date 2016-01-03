@@ -61,11 +61,31 @@ class FusionForge extends Error {
 
 	/**
 	 * List full number of hosted projects, public and private
+	 *
+	 * @param	array	$params		array of columns and values to filter query: $params['status'] = 'A' ...
+	 * @param	string	$extended_qpa	string of SQL to be part of the QPA query
 	 */
-	function getNumberOfProjects($status) {
+	function getNumberOfProjects($params = array(), $extended_qpa = null) {
 		$qpa = db_construct_qpa(false, 'SELECT count(*) as count FROM groups');
-		if ($status) {
-			$qpa = db_construct_qpa($qpa, ' WHERE status = $1', array($status));
+		if (count($params) > 1) {
+			$qpa = db_construct_qpa($qpa, ' WHERE ');
+			$i = 0;
+			foreach ($params as $key => $value) {
+				$i++;
+				$qpa = db_construct_qpa($qpa, $key.' = $1 ', array($value));
+				if ($i < count($params)) {
+					$qpa = db_construct_qpa($qpa, ' AND ');
+				}
+			}
+		}
+		if (strlen($extended_qpa) > 1) {
+			if (!strpos($qpa[0], 'WHERE')) {
+				$qpa = db_construct_qpa($qpa, ' WHERE ');
+			}
+			if (strpos($qpa[0], 'AND')) {
+				$qpa = db_construct_qpa($qpa, ' AND ');
+			}
+			$qpa = db_construct_qpa($qpa, $extended_qpa);
 		}
 		$res = db_query_qpa($qpa);
 		if (!$res || db_numrows($res) < 1) {
@@ -75,15 +95,15 @@ class FusionForge extends Error {
 		return $this->parseCount($res);
 	}
 	function getNumberOfActiveProjects() {
-		return $this->getNumberOfProjects('A');
+		return $this->getNumberOfProjects(array('status' => 'A'));
 	}
 
 	function getNumberOfDeletedProjects() {
-		return $this->getNumberOfProjects('D');
+		return $this->getNumberOfProjects(array('status' => 'D'));
 	}
 
 	function getNumberOfSuspendedProjects() {
-		return $this->getNumberOfProjects('S');
+		return $this->getNumberOfProjects(array('status' => 'S'));
 	}
 
 	function getNumberOfActiveUsers() {
