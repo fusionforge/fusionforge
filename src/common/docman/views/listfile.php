@@ -159,6 +159,9 @@ jQuery(document).ready(function() {
 		childGroupId:		<?php echo util_ifsetor($childgroup_id, 0) ?>,
 		divEditFile:		jQuery('#editFile'),
 		divEditTitle:		'<?php echo _('Edit document dialog box') ?>',
+		divNotifyUsers:		jQuery('#notifyUsers'),
+		divNotifyTitle:		'<?php echo _('Notify selected users dialog box') ?>',
+		divNotifySaveButtonTxt:	'<?php echo _('Send') ?>',
 		enableResize:		true,
 		page:			'listfile',
 		docgroupId:		<?php echo $dirid ?>,
@@ -317,10 +320,13 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		if (forge_check_perm('docman', $group_id, 'approve')) {
 			$nextcell = '';
 			$editfileaction = '/docman/?action=editfile&fromview=listfile&dirid='.$d->getDocGroupID();
+			$notifyaction = '/docman/?action=notifyusers&fromview=listfile&dirid='.$d->getDocGroupID();
 			if (isset($GLOBALS['childgroup_id']) && $GLOBALS['childgroup_id']) {
 				$editfileaction .= '&childgroup_id='.$GLOBALS['childgroup_id'];
+				$notifyaction .= '&childgroup_id='.$GLOBALS['childgroup_id'];
 			}
 			$editfileaction .= '&group_id='.$GLOBALS['group_id'];
+			$notifyaction .= '&group_id='.$GLOBALS['group_id'];
 			if (!$d->getLocked() && !$d->getReserved()) {
 				$nextcell .= util_make_link($redirecturl.'&action=trashfile&fileid='.$d->getID(), $HTML->getDeletePic(_('Move this document to trash'), 'delfile'));
 				$nextcell .= util_make_link('#', html_image('docman/edit-file.png', 22, 22, array('alt' => _('Edit this document'))), array('onclick' => 'javascript:controllerListFile.toggleEditFileView({action:\''.util_make_uri($editfileaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json').', docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').', title:\''.addslashes($d->getName()).'\', filename:\''.addslashes($d->getFilename()).'\', description:\''.addslashes($d->getDescription()).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', isHtml:\''.$d->isHtml().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri('/docman').'\'})', 'title' => _('Edit this document')), true);
@@ -350,6 +356,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 				}
 				$nextcell .= util_make_link($redirecturl.'&action=monitorfile&option='.$option.'&fileid='.$d->getID(), $image, array('title' => $titleMonitor));
 			}
+			$nextcell .= util_make_link('#', html_image('ic/mail-send.png', 22, 22, array('alt' => _('Notify'))), array('onclick' => 'javascript:controllerListFile.toggleNotifyUserView({action:\''.util_make_uri($notifyaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', title:\''.addslashes($d->getName()).'\', filename:\''.addslashes($d->getFilename()).'\', description:\''.addslashes($d->getDescription()).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', isHtml:\''.$d->isHtml().'\', docManURL:\''.util_make_uri('/docman').'\'})', 'title' => _('Notify users')), true);
 			$cells[][] = $nextcell;
 		}
 		echo $HTML->multiTableRow(array(), $cells);
@@ -374,7 +381,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		echo html_ao('div', array('class' => 'docman_div_include hide', 'id' => 'movefile'));
 		include ($gfcommon.'docman/views/movefile.php');
 		echo html_ac(html_ap() - 1);
-	}
+		}
 } else {
 	if ($dirid) {
 		echo $HTML->information(_('No documents.'));
@@ -393,6 +400,7 @@ if ($DocGroupName) {
 	}
 	if (forge_check_perm('docman', $g->getID(), 'approve') && $foundFiles) {
 		include ($gfcommon.'docman/views/editfile.php');
+		include ($gfcommon.'docman/views/notifyusers.php');
 		$directViewFileRequestedID = getIntFromRequest('filedetailid', null);
 		if ($directViewFileRequestedID) {
 			$localDocumentObject = document_get_object($directViewFileRequestedID, $group_id);
