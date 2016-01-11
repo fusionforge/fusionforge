@@ -76,13 +76,13 @@ $body .= $details;
 $sendEmails = 0;
 foreach ($emailsArr as $key => $toEmail) {
 	if (!in_array(trim($toEmail), $emailsErrArr)) {
-		util_send_message($toEmail, $subject, $body);
+		util_send_message(trim($toEmail), $subject, $body);
 		$sendEmails++;
 	}
 }
 
 $feedback = sprintf(ngettext('%s user notified.', '%s users notified.', $sendEmails), $sendEmails);
 if (count($emailsErrArr)) {
-	$warning_msg = sprintf(ngettext('%s email rejected due to wrong syntax', '%s emails rejected due to wrong syntax', count($emailsErrArr)), count($emailsErrArr));
+	$warning_msg = sprintf(ngettext('%s email rejected due to wrong syntax.', '%s emails rejected due to wrong syntax.', count($emailsErrArr)), count($emailsErrArr));
 }
 session_redirect($urlparam);
