@@ -75,6 +75,8 @@ if (getStringFromRequest('add')) {
 				$error_msg .= _('Error adding VHOST: ') .db_error();
 			} else {
 				$feedback .= _('Virtual Host').' '.$vhost_name._(' scheduled for creation on group ').$group->getUnixName();
+				$systasksq = new SysTasksQ();
+				$systasksq->add(SYSTASK_CORE, 'WEB_VHOSTS', $group_id);
 			}
 		} else {
 			$error_msg .= _('Vhost not valid');
@@ -103,6 +105,8 @@ if (getStringFromRequest('tweakcommit')) {
 		$error_msg .= _('Error updating VHOST entry: ') .db_error();
 	} else {
 		$feedback .= _('Virtual Host entry updated.');
+		$systasksq = new SysTasksQ();
+		$systasksq->add(SYSTASK_CORE, 'WEB_VHOSTS', $group_id);
 	}
 }
 
