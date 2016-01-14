@@ -159,6 +159,5 @@ if (db_error()) {
 	$err .= "Error: ".db_error();
 }
 
-cron_entry(5,$err)
+cron_entry(5,$err);
 
-?>
