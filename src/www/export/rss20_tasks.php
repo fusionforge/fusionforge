@@ -72,6 +72,8 @@ if(isset($projects[0]))
 {
 	foreach($projects AS $project)
 	{
+		session_require_perm('pm', $project, 'read');
+
 		$project_sq.=" OR (group_project_id = '".$project."')";
 		/*$sql="SELECT project_name,group_id FROM project_group_list WHERE group_project_id='".$project."'";
 		$res=pg_query($sql);
