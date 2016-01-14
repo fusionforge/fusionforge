@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (C) 2008-2009 Alcatel-Lucent
+ * Copyright 2015, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -44,141 +45,102 @@ require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'include/trove.php';
 require_once $gfcommon.'include/tag_cloud.php';
+require_once $gfwww.'people/people_utils.php';
 
 if (!forge_get_config('use_project_tags')) {
 	exit_disabled();
 }
 
+global $HTML;
+
 $HTML->header(array('title'=>_('Tag Cloud'),'pagename'=>'softwaremap'));
 $HTML->printSoftwareMapLinks();
 
 $selected_tag = getStringFromRequest('tag');
-$page = getIntFromRequest('page', 1);
 
-echo '<br />' . tag_cloud(array('selected' => $selected_tag, 'nb_max' => 100)) . '<br />';
+echo tag_cloud(array('selected' => $selected_tag, 'nb_max' => 100)) . '<br /><br />';
 
 if ($selected_tag) {
-	$res_grp = db_query_params('
-		SELECT groups.group_id, group_name, unix_group_name, short_description, register_time
-		FROM project_tags, groups
-		WHERE LOWER(name) = $1
-		AND project_tags.group_id = groups.group_id
-		AND status = $2 AND type_id=1 AND register_time > 0
-		ORDER BY group_name ASC',
-		array(strtolower($selected_tag), 'A'), $TROVE_HARDQUERYLIMIT);
-	$projects = array();
-	$project_ids = array();
-	while ($row_grp = db_fetch_array($res_grp)) {
-		if (!forge_check_perm('project_read', $row_grp['group_id'])) {
-			continue;
-		}
-		$projects[] = $row_grp;
-		$project_ids[] = $row_grp['group_id'];
-	}
-	$querytotalcount = count($projects);
+	$role_id = 1;
 
-	// #################################################################
-	// limit/offset display
-
-	// store this as a var so it can be printed later as well
-	$html_limit = '';
-	if ($querytotalcount == $TROVE_HARDQUERYLIMIT){
-		$html_limit .= sprintf(_('More than <strong>%1$s</strong> projects have <strong>%2$s</strong> as tag.'), $TROVE_HARDQUERYLIMIT, htmlspecialchars($selected_tag));
-	}
-	else {
-		$html_limit .= sprintf(ngettext('<strong>%d</strong> project in result set.',
-						'<strong>%d</strong> projects in result set.',
-						$querytotalcount),
-						$querytotalcount);
-	}
-
-	// only display pages stuff if there is more to display
-	if ($querytotalcount > $TROVE_BROWSELIMIT) {
-		$html_limit .= ' ';
-		$html_limit .= sprintf(ngettext('Displaying %d project per page. Projects sorted by alphabetical order.',
-						  'Displaying %d projects per page. Projects sorted by alphabetical order.',
-						  $TROVE_BROWSELIMIT),
-						$TROVE_BROWSELIMIT);
-		$html_limit .= '.<br />';
-
-		// display all the numbers
-		for ($i=1 ;$i <= ceil($querytotalcount/$TROVE_BROWSELIMIT); $i++) {
-			$html_limit .= ' ';
-			if ($page != $i) {
-				$html_limit .= util_make_link ('/softwaremap/tag_cloud.php?tag='.$selected_tag.'&page='.$i,
-							       '&lt;'.$i.'&gt;');
-			} else {
-				$html_limit .= '<strong>&lt;'.$i.'&gt;</strong>';
+	if (session_loggedin()) {
+		if (getStringFromRequest('setpaging')) {
+			/* store paging preferences */
+			$paging = getIntFromRequest('nres');
+			if (!$paging) {
+				$paging = 25;
 			}
-			$html_limit .= ' ';
+			$LUSER->setPreference('paging', $paging);
+		}
+		/* logged in users get configurable paging */
+		$paging = $LUSER->getPreference('paging');
+		$userRoles = $LUSER->getRoles();
+		if (count($userRoles)) {
+			foreach ($userRoles as $r) {
+				$role_id .= ', '.$r->getID();
+			}
 		}
 	}
 
-	print $html_limit."<hr />\n";
+	if(!isset($paging) || !$paging)
+		$paging = 25;
+
+	$start = getIntFromRequest('start');
+
+	if ($start < 0) {
+		$start = 0;
+	}
+	$nbProjects = FusionForge::getInstance()->getNumberOfProjectsUsingTags(array('groups.status' => 'A', 'groups.type_id' => 1, 'groups.is_template' => 0, 'LOWER(name)' => strtolower($selected_tag)), 'register_time > 0 AND groups.group_id in (select ref_id FROM pfo_role_setting WHERE section_name = \'project_read\' and perm_val = 1 and role_id IN ('.$role_id.'))');
+	$projects = group_get_readable_projects_using_tag_asc($selected_tag, $paging, $start);
+
+	$max = ($nbProjects > ($start + $paging)) ? ($start + $paging) : $nbProjects;
+	echo $HTML->paging_top($start, $paging, $nbProjects, $max, '/softwaremap/tag_cloud.php?tag='.$selected_tag);
+
+	echo html_e('hr');
 
 	// #################################################################
 	// print actual project listings
-	for ($i_proj = 0; $i_proj < $querytotalcount; $i_proj++) {
+	for ($i_proj = 0; $i_proj < count($projects); $i_proj++) {
 		$row_grp = $projects[$i_proj];
 
-		// check to see if row is in page range
-		if (($i_proj >= (($page-1)*$TROVE_BROWSELIMIT)) && ($i_proj < ($page*$TROVE_BROWSELIMIT))) {
-			$viewthisrow = 1;
-		} else {
-			$viewthisrow = 0;
+		echo $HTML->listTableTop();
+		$cells = array();
+		$content = util_make_link ('/projects/'. strtolower($row_grp['unix_group_name']).'/',
+				      '<strong>'.$row_grp['group_name'].'</strong> ');
+		if ($row_grp['short_description']) {
+			$content .= "- " . $row_grp['short_description'];
 		}
-
-		if ($row_grp && $viewthisrow) {
-			print '<table class="fullwidth">';
-			print '<tr class="top"><td colspan="2">';
-			print util_make_link ('/projects/'. strtolower($row_grp['unix_group_name']).'/',
-					      '<strong>'.$row_grp['group_name'].'</strong> ');
-
-			if ($row_grp['short_description']) {
-				print "- " . $row_grp['short_description'];
-			}
-
-			// extra description
-			print '</td></tr>';
-			print '<tr class="top"><td colspan="2">';
-			print _('Tags') . _(': ') . list_project_tag($row_grp['group_id']);
-			print '</td></tr>';
-			print '<tr class="top"><td>';
-			// list all trove categories
-			print trove_getcatlisting($row_grp['group_id'],0,1,0);
-			print '</td>'."\n".'<td class="align-right">'; // now the right side of the display
-			$res = db_query_params('SELECT percentile, ranking
-					FROM project_weekly_metric
-					WHERE group_id=$1', array($row_grp['group_id']));
-			$nb_line = db_numrows($res);
-			if (! $nb_line) {
-				$percentile = 'N/A';
-				$ranking = 'N/A';
-			}
-			else {
-				$percentile = number_format(db_result($res, 0, 'percentile'));
-				$ranking = number_format(db_result($res, 0, 'ranking'));
-			}
-			printf ('<br />'._('Activity Percentile: <strong>%3.0f</strong>'), $percentile);
-			printf ('<br />'._('Activity Ranking: <strong>%d</strong>'), $ranking);
-			printf ('<br />'._('Registered') . _(': '));
-			printf ('<strong>%s</strong>', date(_('Y-m-d H:i'),$row_grp['register_time']));
-			print '</td></tr>';
-			/*
-			 if ($row_grp['jobs_count']) {
-			 print '<tr><td colspan="2" class="align-center">'
-			 .util_make_link ('/people/?group_id='.$row_grp['group_id'],_("[This project needs help]")).'</td></td>';
-			 }
-			*/
-			print '</table>';
-			print '<hr />';
-		} // end if for row and range chacking
+		$cells[] = array($content, 'colspan' => 2);
+		echo $HTML->multiTableRow(array('class' => 'top'), $cells);
+		// extra description
+		$cells = array();
+		$cells[] = array(_('Tags') . _(': ') . list_project_tag($row_grp['group_id']), 'colspan' => 2);
+		echo $HTML->multiTableRow(array('class' => 'top'), $cells);
+		$cells = array();
+		$cells[][] = trove_getcatlisting($row_grp['group_id'],0,1,0);
+		$res = db_query_params('SELECT percentile, ranking FROM project_weekly_metric WHERE group_id = $1', array($row_grp['group_id']));
+		$nb_line = db_numrows($res);
+		if ($nb_line) {
+			$percentile = html_e('strong', array(), sprintf('%3.0f', number_format(db_result($res, 0, 'percentile'))));
+			$ranking = html_e('strong', array(), sprintf('%d', number_format(db_result($res, 0, 'ranking'))));
+		} else {
+			$percentile = _('N/A');
+			$ranking = _('N/A');
+		}
+		$content = html_e('br')._('Activity Percentile')._(': ').$percentile;
+		$content .= html_e('br')._('Activity Ranking')._(': ').$ranking;
+		$content .= html_e('br').sprintf(_('Registered') . _(': '));
+		$content .= html_e('strong', array(), date(_('Y-m-d H:i'),$row_grp['register_time']));
+		$cells[] = array($content, 'class' => 'align-right');
+		echo $HTML->multiTableRow(array('class' => 'top'), $cells);
+		if (forge_get_config('use_people') && people_group_has_job($row_grp['group_id'])) {
+				$cells = array();
+				$cells[] = array(util_make_link('/people/?group_id='.$row_grp['group_id'],_('[This project needs help]')), 'colspan' => 2, 'class' => 'align-center');
+				echo $HTML->multiTableRow(array('class' => 'top'), $cells);
+		}
+		echo $HTML->listTableBottom();
+		print '<hr />';
 	}
-
-	// print bottom navigation if there are more projects to display
-	if ($querytotalcount > $TROVE_BROWSELIMIT) {
-		print $html_limit;
-	}
+	echo $HTML->paging_bottom($start, $paging, $nbProjects, '/softwaremap/tag_cloud.php?tag='.$selected_tag);
 }
-
 $HTML->footer();

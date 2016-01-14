@@ -6,7 +6,7 @@
  * Copyright 2009-2013, Roland Mas
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2010-2012, Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2015, Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of National Education
  * http://fusionforge.org
  *
@@ -193,6 +193,41 @@ function group_get_public_active_projects_asc($max_query_limit = -1, $offset = 0
 	return $projects;
 }
 
+/**
+ * group_get_readable_projects_using_tag_asc() - Get a list of group_id for active projects (initially in trove/tag_cloud)
+ *
+ * @param	string	$selected_tag		Tag to search
+ * @param	int	$max_query_limit	Optional Maximum number of rows to limit query length
+ * @param	int	$offset			start to retrieve rows from offset value
+ * @return	array	List of public active projects
+ */
+function group_get_readable_projects_using_tag_asc($selected_tag, $max_query_limit = -1, $offset = 0) {
+	$role_id = 1;
+	if (session_loggedin()) {
+		global $LUSER;
+		$userRoles = $LUSER->getRoles();
+		if (count($userRoles)) {
+			foreach ($userRoles as $r) {
+				$role_id .= ', '.$r->getID();
+			}
+		}
+	}
+
+	$res_grp = db_query_params ('SELECT groups.group_id, group_name, unix_group_name, short_description, register_time
+		FROM project_tags, groups
+		WHERE LOWER(name) = $1
+		AND project_tags.group_id = groups.group_id
+		AND groups.status = $2 AND groups.type_id=1 AND groups.is_template=0 AND groups.register_time > 0
+		AND groups.group_id in (select ref_id FROM pfo_role_setting WHERE section_name = $3 and perm_val = 1 and role_id IN ('.$role_id.'))
+		ORDER BY groups.group_name ASC',
+		array(strtolower($selected_tag), 'A', 'project_read'),
+		$max_query_limit, $offset);
+	$projects = array();
+	while ($row_grp = db_fetch_array($res_grp)) {
+		$projects[] = $row_grp;
+	}
+	return $projects;
+}
 
 class Group extends Error {
 	/**

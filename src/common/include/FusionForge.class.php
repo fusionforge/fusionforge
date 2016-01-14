@@ -94,6 +94,7 @@ class FusionForge extends Error {
 		}
 		return $this->parseCount($res);
 	}
+
 	function getNumberOfActiveProjects() {
 		return $this->getNumberOfProjects(array('status' => 'A'));
 	}
@@ -167,9 +168,37 @@ class FusionForge extends Error {
 		return $result;
 	}
 
+	function getNumberOfProjectsUsingTags($params = array(), $extended_qpa = null) {
+		$qpa = db_construct_qpa(false, 'SELECT count(*) as count FROM groups, project_tags WHERE groups.group_id = project_tags.group_id ');
+		if (count($params) > 1) {
+			$qpa = db_construct_qpa($qpa, ' AND ');
+			$i = 0;
+			foreach ($params as $key => $value) {
+				$i++;
+				$qpa = db_construct_qpa($qpa, $key.' = $1 ', array($value));
+				if ($i < count($params)) {
+					$qpa = db_construct_qpa($qpa, ' AND ');
+				}
+			}
+		}
+		if (strlen($extended_qpa) > 1) {
+			if (strpos($qpa[0], 'AND')) {
+				$qpa = db_construct_qpa($qpa, ' AND ');
+			}
+			$qpa = db_construct_qpa($qpa, $extended_qpa);
+		}
+		$res = db_query_qpa($qpa);
+		if (!$res || db_numrows($res) < 1) {
+			$this->setError('Unable to get hosted project count: '.db_error());
+			return false;
+		}
+		return $this->parseCount($res);
+	}
+
+
 	function parseCount($res) {
 		$row_count = db_fetch_array($res);
-		return $row_count['count'];
+		return (int)$row_count['count'];
 	}
 }
 
