@@ -46,12 +46,12 @@ class DocsSearchQuery extends SearchQuery {
 	/**
 	 * Constructor
 	 *
-	 * @param	string	$words words we are searching for
-	 * @param	int	$offset offset
-	 * @param	bool	$isExact if we want to search for all the words or if only one matching the query is sufficient
-	 * @param	array	$groupIdArr array containing group ids
-	 * @param	string	$sections sections to search in
-	 * @param	bool	$showNonPublic flag if private sections are searched too
+	 * @param	string	$words		words we are searching for
+	 * @param	int	$offset		offset
+	 * @param	bool	$isExact	if we want to search for all the words or if only one matching the query is sufficient
+	 * @param	array	$groupIdArr	array containing group ids
+	 * @param	string	$sections	sections to search in
+	 * @param	bool	$showNonPublic	flag if private sections are searched too
 	 */
 	function __construct($words, $offset, $isExact, $groupIdArr, $sections = SEARCH__ALL_SECTIONS, $showNonPublic = false, $rowsPerPage = SEARCH__DEFAULT_ROWS_PER_PAGE, $options = array()) {
 
@@ -101,37 +101,13 @@ class DocsSearchQuery extends SearchQuery {
 	 * @return	array	query+params array
 	 */
 	function getQuery() {
-		if (forge_get_config('use_fti')) {
-			return $this->getFTIQuery();
-		} else {
-			$options = $this->options;
-			if (!isset($options['insideDocuments']) || !$options['insideDocuments']) {
-				$qpa = db_construct_qpa(false,
-						 'SELECT x.* FROM (SELECT doc_data.docid, doc_data.group_id AS group_id, doc_data.title, doc_data.filename, doc_data.description, doc_groups.groupname, title||$1||description AS full_string_agg, groups.group_name as project_name FROM doc_data, doc_groups, groups WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.group_id = groups.group_id ',
-						 array ($this->field_separator));
-			} else {
-				$qpa = db_construct_qpa(false,
-						 'SELECT x.* FROM (SELECT doc_data.docid, doc_data.group_id AS group_id, doc_data.title, doc_data.filename, doc_data.description, doc_groups.groupname, title||$1||description||$1||data_words AS full_string_agg, groups.group_name as project_name FROM doc_data, doc_groups, groups WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.group_id = groups.group_id ',
-						 array ($this->field_separator));
-			}
-			$qpa = $this->addCommonQPA($qpa);
-			$qpa = db_construct_qpa($qpa, ') AS x WHERE ');
-			$qpa = $this->addIlikeCondition($qpa, 'full_string_agg');
-			$qpa = db_construct_qpa($qpa, ' ORDER BY x.groupname, x.title');
-		}
-		return $qpa;
-	}
-
-	function getFTIQuery() {
 		$words = $this->getFTIwords();
 		$options = $this->options;
 		if (!isset($options['insideDocuments']) || !$options['insideDocuments']) {
-			$qpa = db_construct_qpa(false,
-					'SELECT x.* FROM (SELECT doc_data.docid, doc_data.group_id AS group_id, doc_data.filename, ts_headline(doc_data.title, q) AS title, ts_headline(doc_data.description, q) AS description, doc_groups.groupname, doc_data.title||$1||description AS full_string_agg, doc_data_idx.vectors, groups.group_name as project_name FROM groups, doc_data, doc_groups, doc_data_idx, to_tsquery($2) AS q WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.group_id = groups.group_id AND doc_data.docid = doc_data_idx.docid AND (vectors @@ to_tsquery($2))',
+			$qpa = db_construct_qpa(false, 'SELECT x.* FROM (SELECT doc_data.docid, doc_data.group_id AS group_id, doc_data.filename, ts_headline(doc_data.title, q) AS title, ts_headline(doc_data.description, q) AS description, doc_groups.groupname, doc_data.title||$1||description AS full_string_agg, doc_data_idx.vectors, groups.group_name as project_name FROM groups, doc_data, doc_groups, doc_data_idx, to_tsquery($2) AS q WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.group_id = groups.group_id AND doc_data.docid = doc_data_idx.docid AND (vectors @@ to_tsquery($2))',
 					array ($this->field_separator, $words));
 		} else {
-			$qpa = db_construct_qpa(false,
-					'SELECT x.* FROM (SELECT doc_data.docid, doc_data.group_id AS group_id, ts_headline(doc_data.filename, q) AS filename, ts_headline(doc_data.title, q) AS title, ts_headline(doc_data.description, q) AS description, doc_groups.groupname, doc_data.title||$1||description||$1||filename AS full_string_agg, doc_data_words_idx.vectors, groups.group_name as project_name FROM groups, doc_data, doc_groups, doc_data_words_idx, to_tsquery($2) AS q WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.group_id = groups.group_id AND doc_data.docid = doc_data_words_idx.docid AND (vectors @@ to_tsquery($2))',
+			$qpa = db_construct_qpa(false, 'SELECT x.* FROM (SELECT doc_data.docid, doc_data.group_id AS group_id, ts_headline(doc_data.filename, q) AS filename, ts_headline(doc_data.title, q) AS title, ts_headline(doc_data.description, q) AS description, doc_groups.groupname, doc_data.title||$1||description||$1||filename AS full_string_agg, doc_data_words_idx.vectors, groups.group_name as project_name FROM groups, doc_data, doc_groups, doc_data_words_idx, to_tsquery($2) AS q WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.group_id = groups.group_id AND doc_data.docid = doc_data_words_idx.docid AND (vectors @@ to_tsquery($2))',
 					array ($this->field_separator, $words));
 		}
 		$qpa = $this->addCommonQPA($qpa);
@@ -140,8 +116,7 @@ class DocsSearchQuery extends SearchQuery {
 			$qpa = db_construct_qpa($qpa, 'WHERE ') ;
 			$qpa = $this->addMatchCondition($qpa, 'full_string_agg');
 		}
-		$qpa = db_construct_qpa($qpa,
-					 ' ORDER BY ts_rank(vectors, to_tsquery($1)) DESC, group_id ASC, groupname ASC, title ASC',
+		$qpa = db_construct_qpa($qpa, ' ORDER BY ts_rank(vectors, to_tsquery($1)) DESC, group_id ASC, groupname ASC, title ASC',
 					 array($words));
 
 		return $qpa;
@@ -152,7 +127,7 @@ class DocsSearchQuery extends SearchQuery {
 	 *
 	 * @param	$groupId	int group id
 	 * @param	$showNonPublic	boolean if we should consider non public sections
-	 * @return array
+	 * @return	array
 	 */
 	static function getSections($groupId, $showNonPublic = false) {
 		if (!forge_check_perm('docman',$groupId,'read')) {

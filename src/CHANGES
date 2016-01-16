@@ -3,6 +3,7 @@ FusionForge 6.X:
 * Spellcheck (Anders Jonsson)
 * Site Admin: add paging system in userlist page [#799] (TrivialDev)
 * Projects Page: add paging system in full_list and tag_cloud subpages (TrivialDev)
+* SearchEngine: support only FTI queries (TrivialDev)
 * Docman: limit number of returned documents on search query. Use paging system [#794] (TrivialDev)
 * Docman: limit search using from & to dates [#798] (TrivialDev)
 * Docman: use standard search engine: unify results between 'search in project' & search in the docs tab (TrivialDev)

@@ -90,7 +90,6 @@ add_config core url_root >> $tmp
 add_config core use_docman >> $tmp
 add_config core use_forum >> $tmp
 add_config core use_frs >> $tmp
-add_config core use_fti >> $tmp
 add_config core use_ftp >> $tmp
 add_config core use_ftp_uploads >> $tmp
 add_config core use_gateways >> $tmp

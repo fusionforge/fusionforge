@@ -44,12 +44,12 @@ class TasksSearchQuery extends SearchQuery {
 	/**
 	 * Constructor
 	 *
-	 * @param string	$words words we are searching for
-	 * @param int		$offset offset
-	 * @param bool		$isExact if we want to search for all the words or if only one matching the query is sufficient
-	 * @param int		$groupId group id
-	 * @param string 	$sections sections to search in
-	 * @param bool		$showNonPublic flag if private sections are searched too
+	 * @param	string	$words		words we are searching for
+	 * @param	int	$offset		offset
+	 * @param	bool	$isExact	if we want to search for all the words or if only one matching the query is sufficient
+	 * @param	int	$groupId	group id
+	 * @param	string 	$sections	sections to search in
+	 * @param	bool	$showNonPublic	flag if private sections are searched too
 	 */
 	function __construct($words, $offset, $isExact, $groupId, $sections=SEARCH__ALL_SECTIONS, $showNonPublic=false) {
 		$this->groupId = $groupId;
@@ -63,65 +63,36 @@ class TasksSearchQuery extends SearchQuery {
 	/**
 	 * getQuery - get the query built to get the search results
 	 *
-	 * @return array query+params array
+	 * @return	array	query+params array
 	 */
 	function getQuery() {
-		$qpa = db_construct_qpa() ;
+		$words = $this->getFTIwords();
 
-		if (forge_get_config('use_fti')) {
-			$words = $this->getFTIwords();
-
-			if (count($this->phrases)) {
-				$qpa = db_construct_qpa($qpa,
-							 'SELECT x.* FROM (SELECT project_task.project_task_id, project_task.group_project_id, project_task.summary, project_task.percent_complete, project_task.start_date, project_task.end_date, users.realname, project_group_list.project_name, project_task.summary||$1||project_task.details||$1||coalesce(ff_string_agg(project_messages.body), $1) as full_string_agg, project_task_idx.vectors FROM project_task LEFT OUTER JOIN project_messages USING (project_task_id), users, project_group_list, project_task_idx WHERE users.user_id = project_task.created_by AND project_task.group_project_id = project_group_list.group_project_id AND project_group_list.group_id = $2 ',
-							 array ($this->field_separator, $this->groupId)) ;
-
-				if ($this->sections != SEARCH__ALL_SECTIONS) {
-					$qpa = db_construct_qpa($qpa,
-								 'AND project_group_list.group_project_id = ANY ($1) ',
-								 array (db_int_array_to_any_clause ($this->sections))) ;
-				}
-
-				$qpa = db_construct_qpa($qpa,
-							 ' AND project_task.project_task_id = project_task_idx.project_task_id AND vectors @@ to_tsquery($1) GROUP BY project_task.project_task_id, project_task.group_project_id, project_task.summary, project_task.percent_complete, project_task.start_date, project_task.end_date, users.realname, project_group_list.project_name, project_task.details, vectors) AS x WHERE ',
-							 array ($words)) ;
-				$qpa = $this->addMatchCondition ($qpa, 'full_string_agg') ;
-				$qpa = db_construct_qpa($qpa,
-						 ' ORDER BY ts_rank(vectors, to_tsquery($1)) DESC',
-						 array($words)) ;
-			} else {
-				$qpa = db_construct_qpa($qpa,
-							 'SELECT project_task.project_task_id, project_task.group_project_id, project_task.summary, project_task.percent_complete, project_task.start_date, project_task.end_date, users.realname, project_group_list.project_name, project_task_idx.vectors FROM project_task, users, project_group_list, project_task_idx WHERE users.user_id = project_task.created_by AND project_task.group_project_id = project_group_list.group_project_id AND project_group_list.group_id = $1 ',
-							 array ($this->groupId)) ;
-
-				if ($this->sections != SEARCH__ALL_SECTIONS) {
-					$qpa = db_construct_qpa($qpa,
-								 'AND project_group_list.group_project_id = ANY ($1) ',
-								 array (db_int_array_to_any_clause ($this->sections))) ;
-				}
-
-				$qpa = db_construct_qpa($qpa,
-							 'AND project_task.project_task_id = project_task_idx.project_task_id AND vectors @@ to_tsquery($1) ORDER BY ts_rank(vectors, to_tsquery($1)) DESC',
-							 array ($words)) ;
-			}
-
-		} else {
-			$qpa = db_construct_qpa($qpa,
-						 'SELECT x.* FROM (SELECT project_task.project_task_id, project_task.group_project_id, project_task.summary, project_task.percent_complete, project_task.start_date, project_task.end_date, users.realname, project_group_list.project_name, project_task.summary||$1||project_task.details||$1||coalesce(ff_string_agg(project_messages.body), $1) as full_string_agg FROM project_task LEFT OUTER JOIN project_messages USING (project_task_id), users, project_group_list WHERE users.user_id = project_task.created_by AND project_task.group_project_id = project_group_list.group_project_id AND project_group_list.group_id = $2 ',
-						 array ($this->field_separator, $this->groupId)) ;
+		if (count($this->phrases)) {
+			$qpa = db_construct_qpa(false, 'SELECT x.* FROM (SELECT project_task.project_task_id, project_task.group_project_id, project_task.summary, project_task.percent_complete, project_task.start_date, project_task.end_date, users.realname, project_group_list.project_name, project_task.summary||$1||project_task.details||$1||coalesce(ff_string_agg(project_messages.body), $1) as full_string_agg, project_task_idx.vectors FROM project_task LEFT OUTER JOIN project_messages USING (project_task_id), users, project_group_list, project_task_idx WHERE users.user_id = project_task.created_by AND project_task.group_project_id = project_group_list.group_project_id AND project_group_list.group_id = $2 ',
+							array($this->field_separator, $this->groupId));
 
 			if ($this->sections != SEARCH__ALL_SECTIONS) {
-				$qpa = db_construct_qpa($qpa,
-							 'AND project_group_list.group_project_id = ANY ($1) ',
-							 array (db_int_array_to_any_clause ($this->sections))) ;
+				$qpa = db_construct_qpa($qpa, 'AND project_group_list.group_project_id = ANY ($1) ',
+								array(db_int_array_to_any_clause ($this->sections)));
 			}
 
-			$qpa = db_construct_qpa($qpa,
-						 'GROUP BY project_task.project_task_id, project_task.group_project_id, project_task.summary, project_task.percent_complete, project_task.start_date, project_task.end_date, users.realname, project_group_list.project_name, project_task.details) AS x WHERE ',
-						 array ()) ;
-			$qpa = $this->addIlikeCondition ($qpa, 'full_string_agg') ;
-			$qpa = db_construct_qpa($qpa,
-						 ' ORDER BY project_task_id') ;
+			$qpa = db_construct_qpa($qpa, ' AND project_task.project_task_id = project_task_idx.project_task_id AND vectors @@ to_tsquery($1) GROUP BY project_task.project_task_id, project_task.group_project_id, project_task.summary, project_task.percent_complete, project_task.start_date, project_task.end_date, users.realname, project_group_list.project_name, project_task.details, vectors) AS x WHERE ',
+							array($words));
+			$qpa = $this->addMatchCondition($qpa, 'full_string_agg');
+			$qpa = db_construct_qpa($qpa, ' ORDER BY ts_rank(vectors, to_tsquery($1)) DESC',
+						array($words));
+		} else {
+			$qpa = db_construct_qpa(false, 'SELECT project_task.project_task_id, project_task.group_project_id, project_task.summary, project_task.percent_complete, project_task.start_date, project_task.end_date, users.realname, project_group_list.project_name, project_task_idx.vectors FROM project_task, users, project_group_list, project_task_idx WHERE users.user_id = project_task.created_by AND project_task.group_project_id = project_group_list.group_project_id AND project_group_list.group_id = $1 ',
+							array($this->groupId));
+
+			if ($this->sections != SEARCH__ALL_SECTIONS) {
+				$qpa = db_construct_qpa($qpa, 'AND project_group_list.group_project_id = ANY ($1) ',
+								array(db_int_array_to_any_clause ($this->sections)));
+			}
+
+			$qpa = db_construct_qpa($qpa, 'AND project_task.project_task_id = project_task_idx.project_task_id AND vectors @@ to_tsquery($1) ORDER BY ts_rank(vectors, to_tsquery($1)) DESC',
+							array($words));
 		}
 
 		return $qpa ;
@@ -130,17 +101,16 @@ class TasksSearchQuery extends SearchQuery {
 	/**
 	 * getSections - returns the list of available subprojects
 	 *
-	 * @param $groupId int group id
-	 * @param $showNonPublic boolean if we should consider non public sections
-	 * @return array
+	 * @param	int	$groupId	group id
+	 * @param	boolean	$showNonPublic	if we should consider non public sections
+	 * @return	array
 	 */
-	static function getSections($groupId, $showNonPublic=false) {
+	static function getSections($groupId, $showNonPublic = false) {
 		$sql = 'SELECT group_project_id, project_name FROM project_group_list WHERE group_id=$1' ;
 		$sql .= ' ORDER BY project_name';
 
 		$sections = array();
-		$res = db_query_params ($sql,
-					array ($groupId));
+		$res = db_query_params($sql, array($groupId));
 		while($data = db_fetch_array($res)) {
 			if (forge_check_perm('pm',$data['group_project_id'],'read')) {
 				$sections[$data['group_project_id']] = $data['project_name'];
