@@ -69,8 +69,8 @@ $childgroup_id = getIntFromRequest('childgroup_id');
 
 /* everything sounds ok, now let do the job */
 $action = getStringFromRequest('action');
-if (file_exists($gfcommon.'docman/actions/'.$action.'.php')) {
-	include ($gfcommon.'docman/actions/'.$action.'.php');
+if (file_exists(forge_get_config('source_path').'/common/docman/actions/'.$action.'.php')) {
+	include(forge_get_config('source_path').'/common/docman/actions/'.$action.'.php');
 }
 
 $start = getIntFromRequest('start', 0);
