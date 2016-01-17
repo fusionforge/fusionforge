@@ -85,7 +85,7 @@ if ($dgf->getNested() == NULL) {
 		session_redirect('/docman/?group_id='.$group_id);
 	}
 
-	if ($dg->create('Uncategorized Submissions')) {
+	if ($dg->create(_('Uncategorized Submissions'))) {
 		session_redirect('/docman/?group_id='.$group_id.'&view=additem');
 	}
 
