@@ -3,6 +3,7 @@
  * FusionForge system users integration
  *
  * Copyright 2004, Christian Bayle
+ * Copyright 2015, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -53,19 +54,17 @@ class UNIX extends System {
 		} else {
 			$res = db_query_params ('UPDATE users SET
 			unix_uid=user_id+$1,
-			unix_gid=user_id+$2,
-			unix_status=$3
-			WHERE user_id=$4',
+			unix_status=$2
+			WHERE user_id=$3',
 						array ($this->UID_ADD,
-							   $this->UID_ADD,
 							   'A',
 							   $user_id)) ;
 					if (!$res) {
 							$this->setError('Error: Cannot Update User UID/GID: '.db_error());
 							return false;
 			}
-			return true;
 		}
+		return parent::sysCreateUser($user_id);
 	}
 
 	/**
