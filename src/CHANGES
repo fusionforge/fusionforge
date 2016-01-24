@@ -13,6 +13,7 @@ FusionForge 6.0.4:
 * Plugin cvstracker: fix permission issues 
 * Plugin SCM: fix another race condition when creating project with SCM selected (Inria)
 * Plugin SCM Git: improve user matching when computing stats, support git .mailmap (Inria)
+* Plugin SCM Git: fix history browsing. Merge Patch from Sieu Truc [#802] (TrivialDev)
 * Plugin SCM SVN: fix HTTP commit access for old SVN 1.7 clients (Inria)
 * Plugin scmhook: fix non-editable mailing list name in some configurations (Inria)
 * Plugin scmhook: fix migration scripts svntracker To ScmhookCommitTracker & svncommitemail To ScmHookCommitEmail (TrivialDev)
