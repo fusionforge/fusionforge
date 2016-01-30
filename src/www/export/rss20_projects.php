@@ -31,10 +31,12 @@ print '<?xml version="1.0" encoding="UTF-8"?>
 
 $limit = getIntFromRequest('limit', 10);
 
-$res = db_query_params('SELECT group_id,group_name,unix_group_name,homepage,short_description,register_time FROM groups WHERE status=$1 ORDER BY group_id',
+$res = db_query_params('SELECT group_id,group_name,unix_group_name,homepage,short_description,register_time FROM groups
+			WHERE status = $1 AND type_id=1 AND is_template=0 AND register_time > 0
+			ORDER BY register_time DESC',
 			array ('A'),
 			$limit);
 
-rss_dump_project_result_set($res,forge_get_config ('forge_name')._(': ')._('Full Project Listing'));
+rss_dump_project_result_set($res,forge_get_config ('forge_name')._(': ')._('New Projects Listing'));
 ?>
 </rss>
