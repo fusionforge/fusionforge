@@ -1,5 +1,8 @@
 <?php
 /**
+ * FusionForge Rss export for tasks
+ * Previous Copyright: FusionForge Team
+ * Copyright 2015, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -36,45 +39,49 @@ $us='';
 
 //group and project and user, or group or project or user?
 //take care: status means AND to all (user or group, but AND status)
-if (isset($_GET['OR']))
-{
+if (isset($_GET['OR'])) {
 	$additive=' OR ';
 }
 
-$user_arr=handle_getvar('user_ids');
-if(isset($user_arr[0]))
-{
-	foreach($user_arr AS $single_user_id)
-	{
-		$user.=" OR (a.assigned_to_id = '".$single_user_id."')";
-	}
+$user = '';
+$user_ids = getStringFromRequest('user_ids');
+$user_arr = array();
+if ($user_ids) {
+	$user_arr = explode(',', $user_ids);
+}
+foreach($user_arr AS $single_user_id) {
+	$user.=" OR (a.assigned_to_id = '".$single_user_id."')";
+}
+if (strlen($user)) {
 	$user='('.substr($user,4).')';
 }
+
 //group_ids
-$projects=array();
-$groups = handle_getvar('group_ids');
-if(isset($groups[0])) //die projekte der gruppen werden in $projects gespeichert
-{
-	foreach($groups AS $group)
-	{
-		$sql="SELECT group_project_id FROM project_group_list WHERE group_id='".$group."'";
-		$res=pg_query($sql);
-		while($row=db_fetch_array($res))
-		{
-			$projects[]=$row['group_project_id'];
-		}
+$projects = array();
+$group_ids = getStringFromRequest('group_ids');
+$groups = array();
+if ($group_ids) {
+	$groups = explode(',', $group_ids);
+}
+foreach($groups AS $group) {
+	$res = db_query_params('SELECT group_project_id FROM project_group_list WHERE group_id = $1', array($group));
+	while($row = db_fetch_array($res)) {
+		$projects[] = $row['group_project_id'];
 	}
 }
-$p=handle_getvar('group_project_ids');
-$projects = array_unique(array_merge($projects,$p)); //die projekte der getvars kommen dazu
-$project_sq = '' ;
-if(isset($projects[0]))
-{
-	foreach($projects AS $project)
-	{
-		session_require_perm('pm', $project, 'read');
 
-		$project_sq.=" OR (group_project_id = '".$project."')";
+$p = array();
+$group_project_ids = getStringFromRequest('group_project_ids');
+if ($group_project_ids) {
+	$p = explode(',', $group_project_ids);
+}
+$projects = array_unique(array_merge($projects, $p)); //die projekte der getvars kommen dazu
+$project_sq = '' ;
+if(count($projects) > 0) {
+	foreach($projects AS $project) {
+		if (forge_check_perm('pm', $project, 'read')) {
+
+			$project_sq .= " OR (group_project_id = '".$project."')";
 		/*$sql="SELECT project_name,group_id FROM project_group_list WHERE group_project_id='".$project."'";
 		$res=pg_query($sql);
 		if(pg_num_rows($res)==0)
@@ -98,9 +105,11 @@ if(isset($projects[0]))
 				$group_c[$project_c[$project]['group_id']]=$a['group_name'];
 			}
 		}*/
-
+		}
 	}
-$project_sq='('.substr($project_sq,4).')';
+	if (strlen($project_sq)) {
+		$project_sq = '('.substr($project_sq,4).')';
+	}
 }
 
 foreach(handle_getvar('status_ids') AS $status_id)
@@ -155,47 +164,45 @@ $sql="
 		last_modified_date
 	LIMIT
 		".$number.";";
-$res=pg_query($sql);
-$i=0;
 
-beginTaskFeed('evolvis: Current Tasks',forge_get_config('web_host'),'See all the tasks you want to see!');
-if(0<pg_num_rows($res))
-{
-	while($i<pg_num_rows($res))
-	{
-		$sql1="SELECT group_id,project_name FROM project_group_list WHERE group_project_id='".pg_fetch_result($res,$i,'group_project_id')."'";
-		$res1=pg_query($sql1);
-		if(pg_num_rows($res1)==1)
-		{
-			$row1=db_fetch_array($res1);
-			$project_c[pg_fetch_result($res,$i,'group_project_id')]['group_id']=$row1['group_id'];
-			if(isset($row1['project_name']))
-			{
-				$project_c[pg_fetch_result($res,$i,'group_project_id')]['project_name']=$row1['project_name'];
-			} else
-			{
-				$project_c[pg_fetch_result($res,$i,'group_project_id')]['project_name']='Wrong or deleted project';
-			}
-			$sql2="SELECT group_name FROM groups WHERE group_id='".$row1['group_id']."'";
-			$res2=pg_query($sql2);
-			$row2=db_fetch_array($res2);
-			if(isset($row2['group_name']))
-			{
-				$group_c[$row1['group_id']]=$row2['group_name'];
-			} else
-			{
-				$group_c[$row1['group_id']]='Wrong or deleted group';
-			}
+$res= pg_query($sql);
+$i = 0;
 
-			$item_cat = $group_c[$project_c[pg_fetch_result($res,$i,'group_project_id')]['group_id']]." - ".$project_c[pg_fetch_result($res,$i,'group_project_id')]['project_name']." -- ".pg_fetch_result($res,$i,'summary');
-			$ar['project_task_id']=pg_fetch_result($res,$i,'project_task_id');
-			$ar['group_project_id']=pg_fetch_result($res,$i,'group_project_id');
-			$ar['group_id']=$project_c[pg_fetch_result($res,$i,'group_project_id')]['group_id'];
-			$ar['most_recent_date']=pg_fetch_result($res,$i,'last_modified_date');
-			$ar['subject']=pg_fetch_result($res,$i,'summary');
-			$ar['user_realname']=pg_fetch_result($res,$i,'user_realname');
-			$ar['details']=pg_fetch_result($res,$i,'details');
-			writeTaskFeed($ar,$item_cat);
+beginTaskFeed(forge_get_config('forge_name')._(': ')._('Current Tasks'), forge_get_config('web_host'), _('See all the tasks you want to see!'));
+if(0 < db_numrows($res)) {
+	while ($i < db_numrows($res)) {
+		$res1 = db_query_params('SELECT group_id, project_name FROM project_group_list WHERE group_project_id = $1', array(pg_fetch_result($res,$i,'group_project_id')));
+		if(db_numrows($res1)==1) {
+			$row1 = db_fetch_array($res1);
+			if (forge_check_perm('pm', pg_fetch_result($res,$i,'group_project_id'), 'read')) {
+				$project_c[pg_fetch_result($res,$i,'group_project_id')]['group_id']=$row1['group_id'];
+				if(isset($row1['project_name']))
+				{
+					$project_c[pg_fetch_result($res,$i,'group_project_id')]['project_name']=$row1['project_name'];
+				} else
+				{
+					$project_c[pg_fetch_result($res,$i,'group_project_id')]['project_name']='Wrong or deleted project';
+				}
+				$res2 = db_query_params('SELECT group_name FROM groups WHERE group_id = $1', array($row1['group_id']));
+				$row2 = db_fetch_array($res2);
+				if(isset($row2['group_name']))
+				{
+					$group_c[$row1['group_id']]=$row2['group_name'];
+				} else
+				{
+					$group_c[$row1['group_id']]='Wrong or deleted group';
+				}
+
+				$item_cat = $group_c[$project_c[pg_fetch_result($res,$i,'group_project_id')]['group_id']]." - ".$project_c[pg_fetch_result($res,$i,'group_project_id')]['project_name']." -- ".pg_fetch_result($res,$i,'summary');
+				$ar['project_task_id']=pg_fetch_result($res,$i,'project_task_id');
+				$ar['group_project_id']=pg_fetch_result($res,$i,'group_project_id');
+				$ar['group_id']=$project_c[pg_fetch_result($res,$i,'group_project_id')]['group_id'];
+				$ar['most_recent_date']=pg_fetch_result($res,$i,'last_modified_date');
+				$ar['subject']=pg_fetch_result($res,$i,'summary');
+				$ar['user_realname']=pg_fetch_result($res,$i,'user_realname');
+				$ar['details']=pg_fetch_result($res,$i,'details');
+				writeTaskFeed($ar,$item_cat);
+			}
 		}
 		$i++;
 	}
@@ -249,13 +256,6 @@ function beginTaskFeed($feed_title, $feed_link, $feed_desc) {
 	print "  <webMaster>".forge_get_config('admin_email')."</webMaster>\n";
 	print "  <lastBuildDate>".gmdate('D, d M Y G:i:s',time())." GMT</lastBuildDate>\n";
 	print "  <docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
-	print "  <image>\n";
-	print "    <url>http://".forge_get_config('web_host')."/images/bflogo-88.png</url>\n";
-	print "    <title>".forge_get_config('forge_name')." Developer</title>\n";
-	print "    <link>http://".forge_get_config('web_host')."/</link>\n";
-	print "    <width>124</width>\n";
-	print "    <heigth>32</heigth>\n";
-	print "  </image>\n";
 }
 
 function writeTaskFeed($msg, $item_cat){
