@@ -188,7 +188,7 @@ class DocumentGroup extends Error {
 
 		if ($parent_doc_group) {
 			/* update the parent */
-			$parentDg = documentgroup_get_object($parent_doc_group);
+			$parentDg = documentgroup_get_object($parent_doc_group, $this->Group->getID());
 			$parentDg->update($parentDg->getName(), $parentDg->getParentID(), 1);
 		}
 		$this->sendNotice(true);
