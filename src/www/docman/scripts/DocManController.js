@@ -78,19 +78,15 @@ DocManListFileController.prototype =
 		} else {
 			var fixwidth = -40;
 			if (jQuery('#editFile').length >= 1) {
-				console.log(jQuery('#editFile').outerHeight());
 				fixwidth += jQuery('#editFile').outerHeight() - jQuery('[aria-describedby="editFile"]').outerHeight();
-				console.log(fixwidth);
 			}
 			if (jQuery('#notifyUsers').length >= 1) {
-				console.log(jQuery('#editFile').outerHeight());
 				fixwidth += jQuery('#notifyUsers').outerHeight() - jQuery('[aria-describedby="notifyUsers"]').outerHeight();
-				console.log(fixwidth);
 			}
 			var totalRightHeight = 0;
 			this.params.divRight.children().each(function() {
 					if (jQuery(this).is(':visible')) {
-						totalRightHeight = totalRightHeight + jQuery(this).outerHeight();
+						totalRightHeight += jQuery(this).outerHeight();
 					}
 				});
 			totalRightHeight -= fixwidth;
