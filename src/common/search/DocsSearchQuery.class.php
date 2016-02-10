@@ -6,7 +6,7 @@
  * Copyright 2009, Roland Mas
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2013, French Ministry of National Education
- * Copyright 2013,2015 Franck Villaume - TrivialDev
+ * Copyright 2013,2015-2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -80,9 +80,9 @@ class DocsSearchQuery extends SearchQuery {
 			$qpa = db_construct_qpa($qpa, ' AND doc_groups.doc_group = ANY ($1)', array(db_int_array_to_any_clause($sections)));
 		}
 		if ($this->showNonPublic) {
-			$qpa = db_construct_qpa($qpa, ' AND doc_data.stateid IN (1, 4, 5)') ;
+			$qpa = db_construct_qpa($qpa, ' AND doc_data.stateid IN (1, 3, 4, 5)');
 		} else {
-			$qpa = db_construct_qpa($qpa, ' AND doc_data.stateid = 1') ;
+			$qpa = db_construct_qpa($qpa, ' AND doc_data.stateid = 1 AND doc_groups.stateid = 1');
 		}
 
 		if (isset($options['date_begin']) && !isset($options['date_end'])) {
@@ -137,7 +137,7 @@ class DocsSearchQuery extends SearchQuery {
 		$sql = 'SELECT doc_groups.doc_group, doc_groups.groupname FROM doc_groups, doc_data'
 			.' WHERE doc_groups.doc_group = doc_data.doc_group AND doc_groups.group_id = $1';
 		if ($showNonPublic) {
-			$sql .= ' AND doc_data.stateid IN (1, 4, 5) AND doc_groups.stateid = 1';
+			$sql .= ' AND doc_data.stateid IN (1, 3, 4, 5)';
 		} else {
 			$sql .= ' AND doc_data.stateid = 1  AND doc_groups.stateid = 1';
 		}
