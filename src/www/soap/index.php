@@ -1,8 +1,30 @@
 <?php
+/**
+ * SOAP interface
+ *
+ * Previous Copyright FusionForge Team
+ * Copyright 2016, Franck Villaume - TrivialDev
+ * http://gforge.org
+ *
+ * This file is part of FusionForge. FusionForge is free software;
+ * you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the Licence, or (at your option)
+ * any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with FusionForge; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
 
 $no_debug     = true;
 
-// 0. Include GForge files for access to GForge system
+// 0. Include FusionForge files for access to FusionForge system
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/gettext.php';
@@ -14,7 +36,7 @@ sysdebug_off();
 // Disable error_reporting as it breaks XML generated output.
 error_reporting(0);
 
-$uri = 'http://'.forge_get_config('web_host');
+$uri = util_make_base_url();
 // 1. include client and server
 require_once 'nusoap/nusoap.php';
 //$debug = true;
