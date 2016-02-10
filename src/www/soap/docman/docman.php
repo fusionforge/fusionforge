@@ -3,6 +3,7 @@
  * SOAP Documentation Include - this file contains wrapper functions for the SOAP interface
  *
  * Copyright 2004 (c) GForge, LLC
+ * Copyright 2016, Franck Villaume - TrivialDev
  * http://gforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -39,7 +40,8 @@ $server->wsdl->addComplexType(
 	array(
 	'doc_group_id' => array('name'=>'doc_group_id', 'type' => 'xsd:int'),
 	'parent_doc_group' => array('name'=>'parent_doc_group', 'type' => 'xsd:int'),
-	'groupname' => array('name'=>'groupname', 'type' => 'xsd:string')
+	'groupname' => array('name'=>'groupname', 'type' => 'xsd:string'),
+	'stateid' => array('name' => 'stateid', 'type' => 'xsd:int')
 	)
 );
 
