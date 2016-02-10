@@ -1532,7 +1532,7 @@ if (isset($params['group']) && $params['group']) {
 		if (strpos($actionUrl, '?')) {
 			$sep = '&';
 		}
-		if (session_loggedin()) {
+		if ($totalElements && session_loggedin()) {
 			$html_content .= $this->openForm(array('action' => $actionUrl.$sep.'start='.$start, 'method' => 'post'));
 		}
 		if ($totalElements) {
