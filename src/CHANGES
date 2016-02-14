@@ -40,6 +40,7 @@ FusionForge 6.0.4:
 * Plugin Taskboard: fix blank admin page when project tracker is disabled (Inria)
 * Updated simplified Chinese translation (Mingye Wang)
 * Site Admin: fix grouplist.php listing projects using specific plugin [#800] (TrivialDev)
+* Site Admin: massmail, fix typo [#805] (TrivialDev)
 
 FusionForge 6.0.3:
 * Layout: fix rss url when url is absolute (TrivialDev)
