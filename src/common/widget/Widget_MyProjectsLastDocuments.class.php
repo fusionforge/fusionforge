@@ -70,11 +70,14 @@ class Widget_MyProjectsLastDocuments extends Widget {
 					}
 
 					$stateIdDg = 1;
+					$stateIdDocuments = array(1);
 					if (forge_check_perm('docman', $g->getID(), 'approve')) {
 						$stateIdDg = 5;
+						$stateIdDocuments = array(1, 2, 3, 4, 5);
 					}
 					$df = new DocumentFactory($g);
 					$df->setDocGroupState($stateIdDg);
+					$df->setStateID($stateIdDocuments);
 					$df->setLimit(5);
 					$df->setOrder(array('updatedate', 'createdate'));
 					$df->setSort('DESC');

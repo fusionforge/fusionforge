@@ -49,7 +49,7 @@ class DocumentFactory extends Error {
 	 * The stateid Array limit
 	 * @var	array	Contains the different stateid to limit return documents in getDocuments.
 	 */
-	var $stateidArr;
+	var $stateidArr = array();
 
 	/**
 	 * The doc_group_id limit
