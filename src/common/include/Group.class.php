@@ -6,7 +6,7 @@
  * Copyright 2009-2013, Roland Mas
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2010-2012, Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2015, Franck Villaume - TrivialDev
+ * Copyright 2012-2016, Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of National Education
  * http://fusionforge.org
  *
@@ -2571,7 +2571,7 @@ class Group extends Error {
 					$olddgf = new DocumentGroupFactory($template);
 					// First pass: create all docgroups
 					$id_mappings['docman_docgroup'][0] = 0;
-					foreach ($olddgf->getDocumentGroups() as $o) {
+					foreach ($olddgf->getDocumentGroups(array(1, 5)) as $o) {
 						$ndgf = new DocumentGroup($this);
 						// .trash is a reserved directory
 						if ($o->getName() != '.trash' && $o->getParentID() == 0) {
@@ -2579,12 +2579,12 @@ class Group extends Error {
 							$id_mappings['docman_docgroup'][$o->getID()] = $ndgf->getID();
 						}
 					}
-					// Second pass: restore hierarchy links
-					foreach ($olddgf->getDocumentGroups() as $o) {
+					// Second pass: restore hierarchy links & stateid
+					foreach ($olddgf->getDocumentGroups(array(1, 5)) as $o) {
 						$ndgf = new DocumentGroup($this);
 						if ($o->getName() != '.trash' && $o->getParentID() == 0) {
 							$ndgf->fetchData($id_mappings['docman_docgroup'][$o->getID()]);
-							$ndgf->update($ndgf->getName(), $id_mappings['docman_docgroup'][$o->getParentID()]);
+							$ndgf->update($ndgf->getName(), $id_mappings['docman_docgroup'][$o->getParentID()], $id_mappings['docman_docgroup'][$o->getState()]);
 						}
 					}
 				}

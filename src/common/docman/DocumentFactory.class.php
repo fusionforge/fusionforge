@@ -7,7 +7,7 @@
  * Copyright 2009, Roland Mas
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2015, Franck Villaume - TrivialDev
+ * Copyright 2012-2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -79,11 +79,20 @@ class DocumentFactory extends Error {
 	var $limit = 0;
 
 	/**
+	 * The docgroupstate
+	 * @var	int	Contains the valid state of documentgroups to retrieve documents using getDocuments.
+	 *		Default value is 1 which means public any
+	 */
+	var $docgroupstate = 1;
+
+	/**
 	 * The offset
 	 * @var	integer	Contains the offset of the query used to retrive documents using getDocuments.
 	 *		Default value is 0 which means NO OFFSET
 	 */
 	var $offset = 0;
+
+	var $validdocumentgroups = array();
 
 	/**
 	 * Constructor.
@@ -267,6 +276,17 @@ class DocumentFactory extends Error {
 	}
 
 	/**
+	 * setDocGroupState - call this before getDocuments() to setup correct permission settings for retrieve authorized documents.
+	 * default value is 1 which means : no limit.
+	 *
+	 * @param	array	$state	The array of valid state of documentgroups
+	 * @access	public
+	 */
+	function setDocGroupState($state) {
+		$this->docgroupstate = $state;
+	}
+
+	/**
 	 * setOffset - call this before getDocuments() if you want to move to the offset in the query used to retrieve documents.
 	 * default value is 0 which means : no offset.
 	 *
@@ -292,7 +312,7 @@ class DocumentFactory extends Error {
 
 		$return = array();
 
-		// limit scope to the doc_group_id if any. Useful when you retrieve all documents
+		// limit scope to the doc_group_id if any. Useful when you retrieve all documents in cache then filter
 		if ($this->docgroupid) {
 			$keys = array($this->docgroupid);
 		} else {
@@ -303,28 +323,9 @@ class DocumentFactory extends Error {
 			if (!array_key_exists($key, $this->Documents))	continue;		// Should not happen
 
 			$count = count($this->Documents[$key]);
-
 			for ($i=0; $i < $count; $i++) {
-				$valid = true;							// do we need to return this document?
 				$doc =& $this->Documents[$key][$i];
-
-				if (!count($this->stateidArr)) {
-					$perm =& $this->Group->getPermission();
-					if (!$perm || !is_object($perm)) {
-						if ($doc->getStateID() != 1) {
-							$valid = false;
-						}
-						if ($perm->isDocEditor()) {
-							$valid = true;
-						}
-					}
-				} else {
-					if (!in_array($doc->getStateID(), $this->stateidArr)) {
-						$valid = false;
-					}
-				}
-
-				if ($valid) {
+				if (in_array($doc->getStateID(), $this->stateidArr)) {
 					$return[] =& $doc;
 				}
 			}
@@ -339,6 +340,27 @@ class DocumentFactory extends Error {
 		return $return;
 	}
 
+	private function ValidDocumentGroups() {
+		$this->validdocumentgroups = array();
+		// recursive query to find if documentgroups are visible thru the tree of documentgroups
+		$qpa = db_construct_qpa(false, 'WITH RECURSIVE doc_groups_parent(parent_doc_group, doc_group, stateid, group_id) AS
+						( (SELECT parent_doc_group as anc, doc_group as desc, stateid as desc_stateid, group_id FROM doc_groups)
+						UNION
+						(select doc_groups_parent.parent_doc_group as anc, doc_groups.doc_group as desc, doc_groups_parent.stateid as desc_stateid, doc_groups.group_id
+						FROM doc_groups_parent, doc_groups
+						WHERE doc_groups_parent.doc_group = doc_groups.parent_doc_group ))
+						select max(stateid), doc_group from doc_groups_parent where group_id = $1 group by doc_group having max(stateid) <= $2',
+						array($this->Group->getID(), $this->docgroupstate));
+		$result = db_query_qpa($qpa);
+		if (!$result) {
+			$this->setError('getFromStorage:'.db_error());
+			return false;
+		}
+		while ($arr = db_fetch_array($result)) {
+			$this->validdocumentgroups[] = $arr['doc_group'];
+		}
+	}
+
 	/**
 	 * getFromStorage - Retrieve documents from storage (database for all informations).
 	 * you can limit query to speed up: warning, once $this->documents is retrieve, it's cached.
@@ -348,12 +370,19 @@ class DocumentFactory extends Error {
 	 */
 	private function getFromStorage() {
 		$this->Documents = array();
-		$qpa = db_construct_qpa(false, 'SELECT * FROM docdata_vw WHERE group_id = $1 ',
-						array($this->Group->getID()));
+
+		$qpa = db_construct_qpa(false, 'SELECT docdata_vw.* from docdata_vw, doc_groups
+						WHERE docdata_vw.doc_group = doc_groups.doc_group
+						and docdata_vw.group_id = $1 ', array($this->Group->getID()));
 
 		if ($this->docgroupid) {
-			$qpa = db_construct_qpa($qpa, 'AND doc_group = $1 ', array($this->docgroupid));
+			$qpa = db_construct_qpa($qpa, 'AND docdata_vw.doc_group = $1 ', array($this->docgroupid));
+		} else {
+			$this->ValidDocumentGroups();
+			$qpa = db_construct_qpa($qpa, 'AND docdata_vw.doc_group = ANY ($1) ',array(db_int_array_to_any_clause($this->validdocumentgroups)));
 		}
+
+		$qpa = db_construct_qpa($qpa, 'AND docdata_vw.stateid = ANY ($1) ', array(db_int_array_to_any_clause($this->stateidArr)));
 
 		$qpa = db_construct_qpa($qpa, 'ORDER BY ');
 		for ($i=0; $i<count($this->order); $i++) {

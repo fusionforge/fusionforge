@@ -2,7 +2,7 @@
 /**
  * FusionForge document manager
  *
- * Copyright 2011-2015, Franck Villaume - TrivialDev
+ * Copyright 2011-2016, Franck Villaume - TrivialDev
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2013, French Ministry of National Education
  * http://fusionforge.org
@@ -173,14 +173,19 @@ class DocumentManager extends Error {
 		switch ($linkmenu) {
 			case 'listtrashfile': {
 				$stateId = 2;
+				$doc_group_stateid = array(2);
 				break;
 			}
 			default: {
 				$stateId = 1;
+				$doc_group_stateid = array(1);
+				if (forge_check_perm('docman', $this->Group->getID(), 'approve')) {
+					$doc_group_stateid = array(1, 3, 4, 5);
+				}
 				break;
 			}
 		}
-		$subGroupIdArr = $dg->getSubgroup($docGroupId, $stateId);
+		$subGroupIdArr = $dg->getSubgroup($docGroupId, $doc_group_stateid);
 		if (sizeof($subGroupIdArr)) {
 			foreach ($subGroupIdArr as $subGroupIdValue) {
 				$localDg = documentgroup_get_object($subGroupIdValue, $this->Group->getID());
@@ -227,11 +232,15 @@ class DocumentManager extends Error {
 						}
 						$lititle .= _('Last Modified')._(': ').relative_date($localDg->getLastModifyDate());
 					}
-					echo html_ao('li', array('id' => 'leaf-'.$subGroupIdValue, 'class' => $liclass)).util_make_link($link, $localDg->getName(), array('title'=>$lititle)).$nbDocsLabel;
+					$linkname = $localDg->getName();
+					if ($localDg->getState() == 5) {
+						$linkname .= ' '._('(private)');
+					}
+					echo html_ao('li', array('id' => 'leaf-'.$subGroupIdValue, 'class' => $liclass)).util_make_link($link, $linkname, array('title'=>$lititle)).$nbDocsLabel;
 				} else {
 					echo html_ao('li', array('id' => 'leaf-'.$subGroupIdValue, 'class' => $liclass)).util_make_link($link, $localDg->getName()).$nbDocsLabel;
 				}
-				if ($dg->getSubgroup($subGroupIdValue, $stateId)) {
+				if ($dg->getSubgroup($subGroupIdValue, $doc_group_stateid)) {
 					echo html_ao('ul', array('class' => 'simpleTreeMenu'));
 					$this->getTree($selecteddir, $linkmenu, $subGroupIdValue);
 					echo html_ac(html_ap() - 1);
@@ -354,6 +363,12 @@ class DocumentManager extends Error {
 			} else {
 				$df = new DocumentFactory($doc_group->getGroup());
 				$df->setDocGroupID($doc_group->getID());
+				$stateidArr = array(1);
+				if (forge_check_perm('docman', $this->getGroup()->getID(), 'approve')) {
+					$stateIdDg = 5;
+				}
+				$df->setStateID(array(1, 4, 5));
+				$df->setDocGroupState($stateIdDg);
 				$docs = $df->getDocuments();
 				if (is_array($docs)) {
 					foreach ($docs as $doc) {

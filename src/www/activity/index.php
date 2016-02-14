@@ -5,7 +5,7 @@
  * Copyright 1999 dtype
  * Copyright 2006 (c) GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2012-2015, Franck Villaume - TrivialDev
+ * Copyright 2012-2016, Franck Villaume - TrivialDev
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2014, Benoit Debaenst - TrivialDev
  * http://fusionforge.org/
@@ -28,6 +28,8 @@
 
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
+require_once $gfcommon.'docman/Document.class.php';
+require_once $gfcommon.'docman/DocumentGroup.class.php';
 
 global $HTML;
 
@@ -290,6 +292,7 @@ echo $HTML->closeForm();
 		$j = 0;
 		$last_day = 0;
 		foreach ($results as $arr) {
+			$docmanerror = 0;
 			if (!check_perm_for_activity($arr)) {
 				continue;
 			}
@@ -301,12 +304,6 @@ echo $HTML->closeForm();
 
 				echo $HTML->listTableTop($theader);
 				$displayTableTop = 1;
-			}
-			if ($last_day != strftime($date_format, $arr['activity_date'])) {
-				//	echo $HTML->listTableBottom($theader);
-				echo '<tr class="tableheading"><td colspan="3">'.strftime($date_format, $arr['activity_date']).'</td></tr>';
-				//	echo $HTML->listTableTop($theader);
-				$last_day=strftime($date_format, $arr['activity_date']);
 			}
 			switch (@$arr['section']) {
 				case 'scm': {
@@ -357,11 +354,24 @@ echo $HTML->closeForm();
 				}
 				case 'docmannew':
 				case 'docmanupdate': {
+					$document = document_get_object($arr['subref_id'], $arr['group_id']);
+					$stateid = $document->getStateID();
+					if ($stateid != 1 && !forge_check_perm('docman', $arr['group_id'], 'approve')) {
+						$docmanerror = 1;
+					}
+					$dg = documentgroup_get_object($arr['ref_id'], $arr['group_id']);
+					if (!$dg->getPath(true, false)) {
+						$docmanerror = 1;
+					}
 					$icon = html_image('ic/docman16b.png', '', '', array('alt'=>_('Documents')));
 					$url = util_make_link('docman/?group_id='.$arr['group_id'].'&view=listfile&dirid='.$arr['ref_id'],_('Document').' '.$arr['description']);
 					break;
 				}
 				case 'docgroupnew': {
+					$dg = documentgroup_get_object($arr['ref_id'], $arr['group_id']);
+					if ($dg->isError() || !$dg->getPath(true, false)) {
+						$docmanerror = 1;
+					}
 					$icon = html_image('ic/cfolder15.png', '', '', array("alt"=>_('Directory')));
 					$url = util_make_link('docman/?group_id='.$arr['group_id'].'&view=listfile&dirid='.$arr['subref_id'],_('Directory').' '.$arr['description']);
 					break;
@@ -370,6 +380,13 @@ echo $HTML->closeForm();
 					$icon = isset($arr['icon']) ? $arr['icon'] : '';
 					$url = '<a href="'.$arr['link'].'">'.$arr['title'].'</a>';
 				}
+			}
+			if ($docmanerror) {
+				continue;
+			}
+			if ($last_day != strftime($date_format, $arr['activity_date'])) {
+				echo '<tr class="tableheading"><td colspan="3">'.strftime($date_format, $arr['activity_date']).'</td></tr>';
+				$last_day=strftime($date_format, $arr['activity_date']);
 			}
 			$cells = array();
 			$cells[][] = date('H:i:s',$arr['activity_date']);

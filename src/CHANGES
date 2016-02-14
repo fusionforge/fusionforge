@@ -10,6 +10,7 @@ FusionForge 6.X:
 * Docman: searchengine: DocsAll & Docs unified. (TrivialDev)
 * Docman: searchengine: add edit file action on result. (TrivialDev)
 * Docman: notify users on document. (TrivialDev)
+* Docman: support private directory. (TrivialDev)
 * Plugin AuthBuiltin: add captcha after 3 attempts with the same login [#795] (TrivialDev)
 
 FusionForge 6.0.4:

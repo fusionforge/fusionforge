@@ -5,7 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2013-2014, Franck Villaume - TrivialDev
+ * Copyright 2013-2014,2016 Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -46,6 +46,8 @@ if (!forge_check_perm('docman', $g->getID(), 'approve')) {
 
 $groupname = getStringFromRequest('groupname');
 $parent_dirid = getIntFromRequest('parent_dirid');
+$stateid = getIntFromRequest('stateid');
+
 $dg = documentgroup_get_object($dirid, $g->getID());
 if ($dg->isError()) {
 	$error_msg = $dg->getErrorMessage();
@@ -53,7 +55,7 @@ if ($dg->isError()) {
 }
 
 $currentParentID = $dg->getParentID();
-if (!$dg->update($groupname, $parent_dirid)) {
+if (!$dg->update($groupname, $parent_dirid, 1, $stateid)) {
 	$error_msg = $dg->getErrorMessage();
 	session_redirect($urlredirect);
 }

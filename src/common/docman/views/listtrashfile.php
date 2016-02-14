@@ -5,7 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2011-2015, Franck Villaume - TrivialDev
+ * Copyright 2011-2016, Franck Villaume - TrivialDev
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
@@ -66,6 +66,7 @@ if ($dgf->isError())
 
 // deleted state id
 $df->setStateID(array(2));
+$df->setDocGroupState(2);
 
 $d_arr =& $df->getDocuments();
 
@@ -190,7 +191,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		$editfileaction .= '&group_id='.$GLOBALS['group_id'];
 		$nextcell = '';
 		$nextcell .= util_make_link($redirecturl.'&action=delfile&fileid='.$d->getID(), $HTML->getRemovePic(_('Delete permanently this document.'), 'delfile'));
-		$nextcell .= util_make_link('#', html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this document'))), array('onclick' => 'javascript:controllerListTrash.toggleEditFileView({action:\''.util_make_uri($editfileaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json','2').', docgroupDict:'.$dm->getDocGroupList($newdgf->getNested(), 'json').', title:\''.addslashes($d->getName()).'\', filename:\''.addslashes($d->getFilename()).'\', description:\''.addslashes($d->getDescription()).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri("docman").'\'})', 'title' => _('Edit this document')), true);
+		$nextcell .= util_make_link('#', html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this document'))), array('onclick' => 'javascript:controllerListTrash.toggleEditFileView({action:\''.util_make_uri($editfileaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json','2').', docgroupDict:'.$dm->getDocGroupList($newdgf->getNested(array(1, 5)), 'json').', title:\''.addslashes($d->getName()).'\', filename:\''.addslashes($d->getFilename()).'\', description:\''.addslashes($d->getDescription()).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri("docman").'\'})', 'title' => _('Edit this document')), true);
 		$cells[][] = $nextcell;
 		echo $HTML->multiTableRow(array(), $cells);
 	}

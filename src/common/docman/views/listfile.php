@@ -1,4 +1,3 @@
-
 <?php
 /**
  * FusionForge Documentation Manager
@@ -8,7 +7,7 @@
  * Copyright (C) 2010 Alcatel-Lucent
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2015, Franck Villaume - TrivialDev
+ * Copyright 2012-2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -82,28 +81,38 @@ $dgf = new DocumentGroupFactory($g);
 if ($dgf->isError())
 	exit_error($dgf->getErrorMessage(), 'docman');
 
+$stateidArr = array(1);
+$stateIdDg = 1;
+if (forge_check_perm('docman', $g->getID(), 'approve')) {
+	$stateidArr[] = 5;
+	$stateIdDg = 5;
+}
+
 $df->setLimit($paging);
 $df->setOffset($start);
 $df->setDocGroupID($dirid);
-
 //active, hidden & private state ids
 $df->setStateID(array(1, 4, 5));
+$df->setDocGroupState($stateIdDg);
 $d_arr =& $df->getDocuments();
-
-$nested_groups = $dgf->getNested();
+$nested_groups = $dgf->getNested($stateidArr);
 
 $nested_docs = array();
 $DocGroupName = 0;
 
 if ($dirid) {
 	$ndg = documentgroup_get_object($dirid, $g->getID());
+	if ($ndg->isError()) {
+		$error_msg = $ndg->getErrorMessage();
+		session_redirect($baseredirecturl);
+	}
 	$DocGroupName = $ndg->getName();
 	$dgpath = $ndg->getPath(true, false);
 	if (!$DocGroupName) {
 		$error_msg = $g->getErrorMessage();
 		session_redirect($baseredirecturl);
 	}
-	if ($ndg->getState() != 1) {
+	if (($ndg->getState() != 1 && $ndg->getState() != 5) || !$dgpath) {
 		$error_msg = _('Invalid folder');
 		session_redirect($baseredirecturl.'&view=listfile');
 	}
@@ -207,10 +216,7 @@ if ($DocGroupName) {
 		}
 	}
 
-	$numFiles = $ndg->getNumberOfDocuments(1);
-	if (forge_check_perm('docman', $group_id, 'approve'))
-		$numPendingFiles = $ndg->getNumberOfDocuments(3);
-	if ($numFiles || (isset($numPendingFiles) && $numPendingFiles))
+	if ($ndg->hasDocuments($nested_groups, $df))
 		echo util_make_link('/docman/view.php/'.$ndg->Group->getID().'/zip/full/'.$dirid, html_image('docman/download-directory-zip.png', 22, 22, array('alt' => 'downloadaszip')), array('title' => _('Download this folder as a ZIP')));
 
 	if (session_loggedin()) {

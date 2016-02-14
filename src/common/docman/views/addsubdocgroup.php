@@ -6,7 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013-2015, Franck Villaume - TrivialDev
+ * Copyright 2013-2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -67,6 +67,7 @@ if ($dirid) {
 }
 echo html_e('span', array(), $folderMessage.utils_requiredField(), false);
 echo html_e('input', array('required' => 'required', 'type' => 'text',  'name' => 'groupname', 'size' => 40, 'maxlength' => 255, 'placeholder' => $folderMessage));
+echo html_e('span', array(), _('Status').utils_requiredField().doc_get_state_box('xzxz', array(2)), false);
 echo html_e('input', array('id' => 'submitaddsubgroup', 'type' => 'button', 'value' => _('Create'), 'onclick' => 'javascript:doItAddSubGroup()'));
 echo $HTML->closeForm();
 echo html_ac(html_ap() -1);

@@ -6,7 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2011-2015, Franck Villaume - TrivialDev
+ * Copyright 2011-2016, Franck Villaume - TrivialDev
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
@@ -1068,6 +1068,26 @@ class Document extends Error {
 		if (!$localDg->update($localDg->getName(), $localDg->getParentID(), 1)) {
 			$this->setError(_('Error updating document group')._(': ').$localDg->getErrorMessage());
 			return false;
+		}
+		for ($i = 0; $i < count($colArr); $i++) {
+			switch ($colArr[$i]) {
+				case 'filesize':
+				case 'data_words':
+				case 'reserved':
+				case 'reserved_by':
+				case 'title':
+				case 'description':
+				case 'filetype':
+				case 'filename':
+				case 'updatedate':
+				case 'stateid':
+				case 'doc_group':
+				case 'locked':
+				case 'locked_by':
+				case 'lockdate': {
+					$this->data_array[$colArr[$i]] = $valArr[$i];
+				}
+			}
 		}
 		$this->sendNotice(false);
 		return true;

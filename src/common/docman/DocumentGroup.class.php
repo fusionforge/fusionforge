@@ -7,7 +7,7 @@
  * Copyright 2009, Roland Mas
  * Copyright 2010, Franck Villaume - Capgemini
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2015, Franck Villaume - TrivialDev
+ * Copyright 2012-2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -108,10 +108,14 @@ class DocumentGroup extends Error {
 					$this->data_array = null;
 					return;
 				}
-				return;
 			} else {
 				$this->fetchData($data);
 			}
+		}
+		if ($this->getState() == 5 && !forge_check_perm('docman', $this->Group->getID(), 'approve')) {
+			$this->data_array = null;
+			$this->setError(_('Permission refused'));
+			return;
 		}
 	}
 
@@ -124,7 +128,7 @@ class DocumentGroup extends Error {
 	 * @return	boolean	true on success / false on failure.
 	 * @access	public
 	 */
-	function create($name, $parent_doc_group = 0) {
+	function create($name, $parent_doc_group = 0, $state = 1) {
 		//
 		//	data validation
 		//
@@ -168,7 +172,7 @@ class DocumentGroup extends Error {
 						array ($this->Group->getID(),
 							htmlspecialchars($name),
 							$parent_doc_group,
-							'1',
+							$state,
 							time(),
 							$user_id)
 						);
@@ -189,7 +193,7 @@ class DocumentGroup extends Error {
 		if ($parent_doc_group) {
 			/* update the parent */
 			$parentDg = documentgroup_get_object($parent_doc_group, $this->Group->getID());
-			$parentDg->update($parentDg->getName(), $parentDg->getParentID(), 1);
+			$parentDg->update($parentDg->getName(), $parentDg->getParentID(), 1, $parentDg->getState());
 		}
 		$this->sendNotice(true);
 		return true;
@@ -226,9 +230,11 @@ class DocumentGroup extends Error {
 			return false;
 		}
 
-		/* update the parent */
-		$parentDg = documentgroup_get_object($this->getParentID(), $this->Group->getID());
-		$parentDg->update($parentDg->getName(), $parentDg->getParentID(), 1);
+		/* update the parent if any */
+		if ($this->getParentID()) {
+			$parentDg = documentgroup_get_object($this->getParentID(), $this->Group->getID());
+			$parentDg->update($parentDg->getName(), $parentDg->getParentID(), 1);
+		}
 		/* is there any subdir ? */
 		$subdir = db_query_params('select doc_group from doc_groups where parent_doc_group = $1 and group_id = $2',
 					array($doc_groupid, $project_group_id));
@@ -470,7 +476,7 @@ class DocumentGroup extends Error {
 	 * @return	boolean	success or not
 	 * @access	public
 	 */
-	function update($name, $parent_doc_group = 0, $metadata = 0) {
+	function update($name, $parent_doc_group = 0, $metadata = 0, $state = 1) {
 		$perm =& $this->Group->getPermission();
 		if (!$perm || !$perm->isDocEditor()) {
 			$this->setPermissionDeniedError();
@@ -506,12 +512,12 @@ class DocumentGroup extends Error {
 		}
 
 		$user_id = ((session_loggedin()) ? user_getid() : 100);
-		$colArr = array('groupname', 'parent_doc_group', 'updatedate', 'created_by', 'locked', 'locked_by');
-		$valArr = array(htmlspecialchars($name), $parent_doc_group, time(), $user_id, 0, NULL);
+		$colArr = array('groupname', 'parent_doc_group', 'updatedate', 'created_by', 'locked', 'locked_by', 'stateid');
+		$valArr = array(htmlspecialchars($name), $parent_doc_group, time(), $user_id, 0, NULL, $state);
 		if ($this->setValueinDB($colArr, $valArr)) {
 			$parentDg = new DocumentGroup($this->Group, $parent_doc_group);
 			if ($parentDg->getParentID())
-				$parentDg->update($parentDg->getName(), $parentDg->getParentID(), 1);
+				$parentDg->update($parentDg->getName(), $parentDg->getParentID(), 1, $parentDg->getState());
 
 			$this->fetchData($this->getID());
 			$this->sendNotice(false);
@@ -546,10 +552,20 @@ class DocumentGroup extends Error {
 		if (array_key_exists($doc_group_id, $result[$stateid]))
 			return $result[$stateid][$doc_group_id];
 
+
+		$stateIdDg = 1;
+		if (forge_check_perm('docman', $document_factory->Group->getID(), 'approve')) {
+			$stateIdDg = 5;
+		}
+		$document_factory->setDocGroupID($doc_group_id);
+		$document_factory->setDocGroupState($stateIdDg);
 		// check if it has documents
 		if ($stateid) {
-			$document_factory->setStateID($stateid);
+			$document_factory->setStateID(array($stateid));
+		} else {
+			$document_factory->setStateID(array(1, 4, 5));
 		}
+
 		$document_factory->setDocGroupID($doc_group_id);
 		$docs = $document_factory->getDocuments();
 		if (is_array($docs) && count($docs) > 0) {		// this group has documents
@@ -614,13 +630,13 @@ class DocumentGroup extends Error {
 	 * getSubgroup - Return the ids of any sub folders (first level only) in specific folder
 	 *
 	 * @param	int	$docGroupId	ID of the specific folder
-	 * @param	int	$stateId	the state id of this specific folder (default is 1)
+	 * @param	array	$stateId	the state ids of this specific folder (default is 1)
 	 * @return	array	the ids of any sub folders
 	 */
-	function getSubgroup($docGroupId, $stateId = 1) {
+	function getSubgroup($docGroupId, $stateId = array(1)) {
 		$returnArr = array();
-		$res = db_query_params('SELECT doc_group from doc_groups where parent_doc_group = $1 and stateid = $2 and group_id = $3 order by groupname',
-							array($docGroupId, $stateId, $this->Group->getID()));
+		$res = db_query_params('SELECT doc_group from doc_groups where parent_doc_group = $1 and stateid = ANY ($2) and group_id = $3 order by groupname',
+							array($docGroupId, db_int_array_to_any_clause($stateId), $this->Group->getID()));
 		if (!$res) {
 			return $returnArr;
 		}
@@ -637,15 +653,30 @@ class DocumentGroup extends Error {
 	 *
 	 * @param	boolean	$url		does path is url clickable (default is false)
 	 * @param	boolean	$includename	does path include this document group name ? (default is true)
-	 * @return	string	the complete_path
+	 * @return	string|boolean		the complete_path or false if user has not proper access to this path.
 	 * @access	public
 	 */
 	function getPath($url = false, $includename = true) {
-
+		if ($this->getState() != 1 && !forge_check_perm('docman', $this->Group->getID(), 'approve')) {
+			return false;
+		}
 		$returnPath = '';
 		if ($this->getParentID()) {
 			$parentDg = documentgroup_get_object($this->getParentID(), $this->Group->getID());
+			if ($parentDg->isError()) {
+				$this->setError = $parentDg->getErrorMessage();
+				return false;
+			}
+			//need to check if user has access to this path. If not, return false.
+			if ($parentDg->getState() != 1) {
+				if (!forge_check_perm('docman', $this->Group->getID(), 'approve')) {
+					return false;
+				}
+			}
 			$returnPath = $parentDg->getPath($url);
+			if (!$returnPath) {
+				return false;
+			}
 		}
 		if ($includename) {
 			if ($url) {
@@ -659,6 +690,7 @@ class DocumentGroup extends Error {
 				$returnPath .= '/'.$this->getName();
 			}
 		}
+
 		if (!strlen($returnPath))
 			$returnPath = '/';
 
@@ -683,7 +715,12 @@ class DocumentGroup extends Error {
 			if ($dgf->isError())
 				exit_error($dgf->getErrorMessage(), 'docman');
 
-			$nested_groups =& $dgf->getNested($this->getState());
+			if ($stateid == 2) {
+				$stateidArr = array(2);
+			} else {
+				$stateidArr = array(1, 5);
+			}
+			$nested_groups =& $dgf->getNested($stateidArr);
 
 			$df->setDocGroupID($this->getID());
 			$d_arr =& $df->getDocuments();
@@ -948,7 +985,7 @@ class DocumentGroup extends Error {
 		$this->data_array['locked'] = $stateLock;
 		$this->data_array['locked_by'] = $userid;
 		$this->data_array['lockdate'] = $thistime;
-		$subGroupArray = $this->getSubgroup($this->getID(), $this->getState());
+		$subGroupArray = $this->getSubgroup($this->getID(), array($this->getState()));
 		foreach ($subGroupArray as $docgroupId) {
 			$ndg = documentgroup_get_object($docgroupId, $this->Group->getID());
 			$ndg->setLock($stateLock, $userid, $thistime);
@@ -1002,6 +1039,20 @@ class DocumentGroup extends Error {
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setOnUpdateError(db_error());
 			return false;
+		}
+		for ($i = 0; $i < count($colArr); $i++) {
+			switch ($colArr[$i]) {
+				case 'groupname':
+				case 'parent_doc_group':
+				case 'updatedate':
+				case 'created_by':
+				case 'locked':
+				case 'locked_by':
+				case 'stateid':
+				case 'lockdate': {
+					$this->data_array[$colArr[$i]] = $valArr[$i];
+				}
+			}
 		}
 		return true;
 	}

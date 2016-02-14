@@ -6,7 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2010-2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012,2015, Franck Villaume - TrivialDev
+ * Copyright 2012,2015-2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -31,6 +31,9 @@ require_once $gfcommon.'docman/Document.class.php';
 require_once $gfcommon.'docman/DocumentFactory.class.php';
 require_once $gfcommon.'docman/DocumentGroupFactory.class.php';
 require_once $gfcommon.'docman/include/utils.php';
+
+global $warning_msg;
+global $error_msg;
 
 $sysdebug_enable = false;
 
@@ -102,7 +105,7 @@ if (is_numeric($docid)) {
 		if ($dgf->isError())
 			exit_error($dgf->getErrorMessage(), 'docman');
 
-		$nested_groups = $dgf->getNested();
+		$nested_groups = $dgf->getNested(array(1, 5));
 
 		if ( $nested_groups != NULL ) {
 			$filename = 'docman-'.$g->getUnixName().'-'.$docid.'.zip';
@@ -168,6 +171,7 @@ if (is_numeric($docid)) {
 	session_require_perm('docman', $group_id, 'read');
 	if (extension_loaded('zip')) {
 		if ( $arr[5] === 'full' ) {
+
 			$dirid = $arr[6];
 
 			$dg = new DocumentGroup($g, $dirid);
@@ -182,7 +186,12 @@ if (is_numeric($docid)) {
 			if ($dgf->isError())
 				exit_error($dgf->getErrorMessage(), 'docman');
 
-			$nested_groups = $dgf->getNested();
+			$stateidArr = array(1);
+			if (forge_check_perm('docman', $g->getID(), 'approve')) {
+				$stateidArr = array(1, 4, 5);
+			}
+
+			$nested_groups = $dgf->getNested($stateidArr);
 
 			if ($dg->hasDocuments($nested_groups, $df)) {
 				$filename = 'docman-'.$g->getUnixName().'-'.$dg->getID().'.zip';
@@ -195,7 +204,15 @@ if (is_numeric($docid)) {
 				}
 
 				// ugly workaround to get the files at doc_group_id level
+				$stateidArr = array(1);
+				$stateIdDg = 1;
+				if (forge_check_perm('docman', $df->Group->getID(), 'approve')) {
+					$stateidArr = array(1, 4, 5);
+					$stateIdDg = 5;
+				}
 				$df->setDocGroupID($dg->getID());
+				$df->setStateID($stateidArr);
+				$df->setDocGroupState($stateIdDg);
 				$docs = $df->getDocuments(1);	// no caching
 				if (is_array($docs) && count($docs) > 0) {	// this group has documents
 					foreach ($docs as $doc) {
@@ -232,7 +249,7 @@ if (is_numeric($docid)) {
 				unlink($file);
 			} else {
 				$warning_msg = _('This documents folder is empty.');
-				session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
+				//session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
 			}
 		} elseif ( $arr[5] === 'selected' ) {
 			$dirid = $arr[6];
@@ -279,7 +296,7 @@ if (is_numeric($docid)) {
 					if (is_numeric($dirid)) {
 						$redirect_url .= '&dirir='.$dirid;
 					}
-					session_redirect($redirect_url);
+					//session_redirect($redirect_url);
 				}
 			}
 
@@ -299,7 +316,7 @@ if (is_numeric($docid)) {
 			if(!readfile_chunked($file)) {
 				unlink($file);
 				$error_msg = _('Unable to download ZIP archive');
-				session_redirect('/docman/?group_id='.$group_id);
+				//session_redirect('/docman/?group_id='.$group_id);
 			}
 			unlink($file);
 		} else {
