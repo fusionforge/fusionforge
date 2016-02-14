@@ -396,13 +396,7 @@ class DocumentFactory extends Error {
 
 		$qpa = db_construct_qpa($qpa, $this->sort);
 
-		if ($this->limit !== 0) {
-			$qpa = db_construct_qpa($qpa, ' LIMIT $1', array($this->limit));
-		}
-
-		$qpa = db_construct_qpa($qpa, ' OFFSET $1', array($this->offset));
-
-		$result = db_query_qpa($qpa);
+		$result = db_query_qpa($qpa, $this->limit, $this->offset);
 		if (!$result) {
 			$this->setError('getFromStorage:'.db_error());
 			return false;
