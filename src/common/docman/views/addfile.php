@@ -36,6 +36,7 @@ global $HTML; // Layout object
 global $warning_msg;
 global $error_msg;
 global $childgroup_id;
+global $stateidArr;
 
 $actionurl = '/docman/?group_id='.$group_id.'&action=addfile&dirid='.$dirid;
 $redirecturl = '/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid;
@@ -77,10 +78,6 @@ jQuery(document).ready(function() {
 <?php
 echo html_ac(html_ap() - 1);
 echo html_ao('div', array('class' => 'docmanDivIncluded'));
-$stateidArr = array(1);
-if (forge_check_perm('docman', $group_id, 'approve')) {
-	$stateidArr[] = 5;
-}
 if ($dgf->getNested($stateidArr) == NULL) {
 	$dg = new DocumentGroup($g);
 

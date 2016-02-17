@@ -3,7 +3,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2012-2015, Franck Villaume - TrivialDev
+ * Copyright 2012-2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -33,6 +33,11 @@ global $gfcommon;
 if (!forge_check_perm('docman', $group_id, 'submit')) {
 	$warning_msg = _('Document Manager Access Denied');
 	session_redirect('/docman/?group_id='.$group_id);
+}
+
+$stateidArr = array(1);
+if (forge_check_perm('docman', $group_id, 'approve')) {
+	$stateidArr[] = 5;
 }
 
 echo html_ao('script', array('type' => 'text/javascript'));
@@ -73,14 +78,18 @@ if (forge_check_perm('docman', $group_id, 'approve')) {
 	echo html_ac(html_ap() -2);
 	echo html_ao('div', array('id' => 'tabs-inject-tree'));
 	echo html_ao('div', array('class' => 'docman_div_include', 'id' => 'zipinject'));
-	echo $HTML->openForm(array('id' => 'injectzip', 'name' => 'injectzip', 'method' => 'post', 'action' => util_make_uri('/docman/?group_id='.$group_id.'&action=injectzip&dirid='.$dirid), 'enctype' => 'multipart/form-data'));
-	echo html_ao('p');
-	echo html_e('label', array(), _('Upload archive:'), false);
-	echo html_e('input', array('type' => 'file', 'name' => 'uploaded_zip', 'required' => 'required'));
-	echo html_e('span', array(), sprintf(_('(max upload size: %s)'),human_readable_bytes(util_get_maxuploadfilesize())), false);
-	echo html_e('input', array('id' => 'submitinjectzip', 'type' => 'button', 'value' => _('Inject Tree')));
-	echo html_ac(html_ap() -1);
-	echo $HTML->closeForm();
+	if ($dgf->getNested($stateidArr) == NULL) {
+		echo $HTML->warning_msg(_('You MUST first create at least one folder to upload your archive.'));
+	} else {
+		echo $HTML->openForm(array('id' => 'injectzip', 'name' => 'injectzip', 'method' => 'post', 'action' => util_make_uri('/docman/?group_id='.$group_id.'&action=injectzip&dirid='.$dirid), 'enctype' => 'multipart/form-data'));
+		echo html_ao('p');
+		echo html_e('label', array(), _('Upload archive:'), false);
+		echo html_e('input', array('type' => 'file', 'name' => 'uploaded_zip', 'required' => 'required'));
+		echo html_e('span', array(), sprintf(_('(max upload size: %s)'),human_readable_bytes(util_get_maxuploadfilesize())), false);
+		echo html_e('input', array('id' => 'submitinjectzip', 'type' => 'button', 'value' => _('Inject Tree')));
+		echo html_ac(html_ap() -1);
+		echo $HTML->closeForm();
+	}
 	echo html_ac(html_ap() -2);
 }
 
