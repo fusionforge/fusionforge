@@ -30,9 +30,9 @@ require_once $gfcommon.'pm/ProjectGroupFactory.class.php';
 $number_items = 10;
 $max_number_items = 100;
 $show_threads = true;
-$number=10;
-$max_number=100;
-$additive=' AND ';
+$number = 10;
+$max_number = 100;
+$additive = ' AND ';
 $btwg='';
 $btwp='';
 $project='';
@@ -41,7 +41,7 @@ $us='';
 //group and project and user, or group or project or user?
 //take care: status means AND to all (user or group, but AND status)
 if (isset($_GET['OR'])) {
-	$additive=' OR ';
+	$additive = ' OR ';
 }
 
 $user = '';
@@ -84,43 +84,38 @@ if ($group_project_ids) {
 }
 $projects = array_unique(array_merge($projects, $p)); //die projekte der getvars kommen dazu
 $project_sq = '' ;
-if(count($projects) > 0) {
-	foreach($projects AS $project) {
+if (count($projects) > 0) {
+	foreach ($projects AS $project) {
 		$project_sq .= ' OR (group_project_id = '.$project.')';
 	}
 	$project_sq = '('.substr($project_sq,4).')';
 }
 
-foreach(handle_getvar('status_ids') AS $status_id)
-{
-	$status.=" OR (status_id = '".$status_id."')";
+foreach (handle_getvar('status_ids') AS $status_id) {
+	$status .= ' OR (status_id = '.$status_id.')';
 }
-if(isset($status))
-{
-	$status='('.substr($status,4).')';
+if (isset($status)) {
+	$status = '('.substr($status,4).')';
 }
 
 //important for correct sql-syntax
-if(!empty($status))
-{
+if (!empty($status)) {
 	$status = ' AND '.$status;
 }
-if(!empty($project_sq) OR !empty($user) OR !empty($status))
-{
+if (!empty($project_sq) OR !empty($user) OR !empty($status)) {
 	$us = ' AND ';
 }
-if(!empty($project_sq) AND !empty($user))
-{
-	$btwp=$additive;
+if (!empty($project_sq) AND !empty($user)) {
+	$btwp = $additive;
 }
 
+$requestedNumber = getIntFromRequest('number', $number);
+
 //calculates number of shown
-if (isset($_GET['number']) AND ctype_digit($_GET['number'])) {
-	if ($_GET['number'] <= $max_number AND $_GET['number']>0) {
-		$number = $_GET['number'];
-	} elseif ($_GET['number'] > $max_number) {
-		$number = $max_number;
-	}
+if ($requestedNumber <= $max_number AND $requestedNumber > 0) {
+	$number = $requestedNumber;
+} elseif ($requestedNumber > $max_number) {
+	$number = $max_number;
 }
 
 //creating, sending, and using the query
@@ -131,14 +126,14 @@ $qpa = db_construct_qpa(false, 'SELECT DISTINCT
 				project_task pt,users u,project_assigned_to a
 				WHERE', array());
 
-$qpa = db_construct_qpa($qpa, is_needed('(').$project_sq." ".$btwp." ".$user." ".$status.is_needed(')')." ".$us."u.user_id = pt.created_by AND pt.project_task_id=a.project_task_id", array());
+$qpa = db_construct_qpa($qpa, is_needed('(').$project_sq.' '.$btwp.' '.$user.' '.$status.is_needed(')').' '.$us.'u.user_id = pt.created_by AND pt.project_task_id=a.project_task_id', array());
 $qpa = db_construct_qpa($qpa, ' ORDER BY last_modified_date', array());
 
 $res = db_query_qpa($qpa, $number);
 $i = 0;
 
 beginTaskFeed(forge_get_config('forge_name')._(': ')._('Current Tasks'), forge_get_config('web_host'), _('See all the tasks you want to see!'));
-if(0 < db_numrows($res)) {
+if (0 < db_numrows($res)) {
 	while ($i < db_numrows($res)) {
 		$res1 = db_query_params('SELECT group_id, project_name FROM project_group_list WHERE group_project_id = $1', array(db_result($res, $i, 'group_project_id')));
 		if(db_numrows($res1)==1) {
@@ -170,35 +165,27 @@ if(0 < db_numrows($res)) {
 		}
 		$i++;
 	}
-} else
-{
+} else {
 	displayError('No tasks found! Please check for invalid params.');
 }
 endFeed();
 
 //*********************** HELPER FUNCTIONS ***************************************
 
-function is_needed($str)
-{
+function is_needed($str) {
 	global $project_sq,$user,$status;
-	if(!empty($project_sq) OR !empty($user) OR !empty($status))
-	{
+	if(!empty($project_sq) OR !empty($user) OR !empty($status)) {
 		return $str;
-	} else
-	{
+	} else {
 		return '';
 	}
 }
-function handle_getvar($name)
-{
+function handle_getvar($name) {
 	$return = array();
-	if(isset($_GET[$name]))
-	{
+	if(isset($_GET[$name])) {
 		$vars = array_unique(explode(" ",$_GET[$name]));
-		foreach ($vars as $var)
-		{
-			if(ctype_digit($var))
-			{
+		foreach ($vars as $var) {
+			if(ctype_digit($var)) {
 				$return[]=$var;
 			}
 		}
