@@ -369,7 +369,7 @@ echo $HTML->closeForm();
 				}
 				case 'docgroupnew': {
 					$dg = documentgroup_get_object($arr['ref_id'], $arr['group_id']);
-					if ($dg->isError() || !$dg->getPath(true, false)) {
+					if (!$dg || $dg->isError() || !$dg->getPath(true, false)) {
 						$docmanerror = 1;
 					}
 					$icon = html_image('ic/cfolder15.png', '', '', array("alt"=>_('Directory')));
