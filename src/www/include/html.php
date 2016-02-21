@@ -6,7 +6,7 @@
  * Copyright 2010 (c) FusionForge Team
  * Copyright (C) 2010-2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2011-2015, Franck Villaume - TrivialDev
+ * Copyright 2011-2016, Franck Villaume - TrivialDev
  * Copyright © 2011, 2012
  *	Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
  *
@@ -381,7 +381,6 @@ function html_get_tooltip_description($element_name) {
 			return _('This drop-down box represents the person to which a tracker item is assigned.');
 		case 'status_id_tracker':
 			return _('This drop-down box represents the current status of a tracker item.')
-				.'<br /><br />'
 				._('You can set the status to “Pending” if you are waiting for a response from the tracker item author.  When the author responds the status is automatically reset to that of “Open”. Otherwise, if the author does not respond with an admin-defined amount of time (default is 14 days) then the item is given a status of “Deleted”.');
 		case 'category':
 			return _('Tracker category');
@@ -389,15 +388,12 @@ function html_get_tooltip_description($element_name) {
 			return _('Tracker group');
 		case 'sort_by':
 			return _('The Sort By option allows you to determine how the browse results are sorted.')
-				.'<br /><br />'
 				._('You can sort by ID, Priority, Summary, Open Date, Close Date, Submitter, or Assignee.  You can also have the results sorted in Ascending or Descending order.');
 		case 'new_artifact_type_id':
 			return _('The Data Type option determines the type of tracker item this is.  Since the tracker rolls into one the bug, patch, support, etc... managers you need to be able to determine which one of these an item should belong.')
-				.'<br /><br />'
 				._('This has the added benefit of enabling an admin to turn a support request into a bug.');
 		case 'priority':
 			return _('The priority option allows a user to define a tracker item priority (ranging from 1-Lowest to 5-Highest).')
-				.'<br /><br />'
 				._('This is especially helpful for bugs and support requests where a user might find a critical problem with a project.');
 		case 'resolution':
 			return _('Resolution');
@@ -405,22 +401,17 @@ function html_get_tooltip_description($element_name) {
 			return _('The summary text-box represents a short tracker item summary. Useful when browsing through several tracker items.');
 		case 'canned_response':
 			return _('The canned response drop-down represents a list of project admin-defined canned responses to common support or bug submission.')
-				.'<br /><br />'
 				._('If you are a project admin you can click the “Manage Canned Responses” link to define your own canned responses');
 		case 'comment':
 			return _('Anyone can add here comments to give additional information, answers and solutions. Please, be as precise as possible to avoid misunderstanding. If relevant, screenshots or documents can be added as attached files.');
 		case 'description':
 			return _('Enter the complete description.')
-				.'<br/><br/>'
-				."<div align='left' >"
-				._("<strong>Editing tips:</strong><br/><strong>http,https or ftp</strong>: Hyperlinks.<br/><strong>[#NNN]</strong>: Tracker id NNN.<br/><strong>[TNNN]</strong>: Task id NNN.<br/><strong>[wiki:&lt;pagename&gt;]</strong>: Wiki page.<br/><strong>[forum:&lt;msg_id&gt;]</strong>: Forum post.")
-				.'</div>';
+				._("Editing tips:http,https or ftp: Hyperlinks. [#NNN]: Tracker id NNN. [TNNN]: Task id NNN. [wiki:&lt;pagename&gt;]: Wiki page. [forum:&lt;msg_id&gt;]: Forum post.");
 		case 'attach_file':
 			return _('When you wish to attach a file to a tracker item you must check this checkbox before submitting changes.');
 		case 'monitor':
 			return _('You can monitor or un-monitor this item by clicking the “Monitor” button.')
-				.' <br /><br />'
-				._('<strong>Note!</strong> this will send you additional email. If you add comments to this item, or submitted, or are assigned this item, you will also get emails for those reasons as well!');
+				._('Note! this will send you additional email. If you add comments to this item, or submitted, or are assigned this item, you will also get emails for those reasons as well!');
 		case 'vote':
 			return _('You can cast your vote for a Tracker Item to aid Project Management to decide which features to prioritise, and retract votes at any time. Please use this functionality sparingly, as it loses its meaning if you vote on *every* item.');
 		case 'votes':
