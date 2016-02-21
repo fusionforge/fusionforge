@@ -3,7 +3,7 @@
  * FusionForge CVS plugin
  *
  * Copyright 2004-2009, Roland Mas
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013,2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -257,7 +257,13 @@ over it to the project's administrator.");
 			system ("chmod 3777 $locks_dir") ;
 
 			if (forge_get_config('use_shell')) {
-				util_create_file_with_contents ("$repo/CVSROOT/config", "SystemAuth=no\nLockDir=$locks_dir\nUseNewInfoFmtStrings=yes\n");
+				$cvs_binary_version = get_cvs_binary_version();
+				if ($cvs_binary_version == '1.12') {
+					util_create_file_with_contents("$repo/CVSROOT/config", "SystemAuth=no\nLockDir=$locks_dir\nUseNewInfoFmtStrings=yes\n");
+				}
+				if ($cvs_binary_version == '1.11') {
+					util_create_file_with_contents("$repo/CVSROOT/config", "SystemAuth=no\nLockDir=$locks_dir\n");
+				}
 				if ($project->enableAnonSCM()) {
 					util_create_file_with_contents ("$repo/CVSROOT/readers", "anonymous\n");
 					util_create_file_with_contents ("$repo/CVSROOT/passwd", "anonymous:\n");
