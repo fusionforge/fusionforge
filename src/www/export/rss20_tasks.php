@@ -29,7 +29,6 @@ require_once $gfcommon.'pm/ProjectGroupFactory.class.php';
 //Default Vars
 $number_items = 10;
 $max_number_items = 100;
-$show_threads = true;
 $number = 10;
 $max_number = 100;
 $additive = ' AND ';
@@ -119,13 +118,11 @@ if ($requestedNumber <= $max_number AND $requestedNumber > 0) {
 }
 
 //creating, sending, and using the query
-
 $qpa = db_construct_qpa(false, 'SELECT DISTINCT
 				pt.*,u.realname AS user_realname
 				FROM
 				project_task pt,users u,project_assigned_to a
-				WHERE', array());
-
+				WHERE ', array());
 $qpa = db_construct_qpa($qpa, is_needed('(').$project_sq.' '.$btwp.' '.$user.' '.$status.is_needed(')').' '.$us.'u.user_id = pt.created_by AND pt.project_task_id=a.project_task_id', array());
 $qpa = db_construct_qpa($qpa, ' ORDER BY last_modified_date', array());
 
@@ -210,7 +207,6 @@ function beginTaskFeed($feed_title, $feed_link, $feed_desc) {
 }
 
 function writeTaskFeed($msg, $item_cat){
-    global  $show_threads;
 
     //------------ build one feed item ------------
     print "  <item>\n";
