@@ -68,7 +68,7 @@ switch ($option) {
 		break;
 	}
 	default: {
-		$error_msg = _('Docman: monitoring action unknown.');
+		$error_msg = _('Docman')._(': ')._('monitoring action unknown.');
 		session_redirect('/docman/?group_id='.$group_id.'&dirid='.$dirid);
 	}
 }
