@@ -31,7 +31,7 @@ require_once $gfwww.'project/admin/project_admin_utils.php';
 
 global $HTML;
 
-site_admin_header(array('title'=>_('Site Admin').(': ')._('Edit Rejection Responses')));
+site_admin_header(array('title'=>_('Site Admin')._(': ')._('Edit Rejection Responses')));
 
 function check_select_value($value) {
 	if( $value == "100" ) {
