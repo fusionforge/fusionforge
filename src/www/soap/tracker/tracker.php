@@ -323,12 +323,12 @@ function artifactFileDelete($session_ser,$group_id,$group_artifact_id,$artifact_
 	continue_session($session_ser);
 	$a =& artifactfile_get_object($file_id);
 	if (!$a || !is_object($a)) {
-		return new soap_fault ('','artifactFileDelete','Could Not Get ArtifactFile','Could Not Get ArtifactFile');
+		return new soap_fault('','artifactFileDelete','Could Not Get ArtifactFile','Could Not Get ArtifactFile');
 	} elseif ($a->isError()) {
-		return new soap_fault ('','artifactFileDelete','$a->getErrorMessage()',$a->getErrorMessage());
+		return new soap_fault('','artifactFileDelete','$a->getErrorMessage()',$a->getErrorMessage());
 	}
 	if (!$a->delete(true)) {
-		return new soap_fault ('','artifactFileDelete','$a->getErrorMessage()',$a->getErrorMessage());
+		return new soap_fault('','artifactFileDelete','$a->getErrorMessage()',$a->getErrorMessage());
 	} else {
 		return true;
 	}
@@ -411,9 +411,9 @@ function artifactSetMonitor($session_ser,$group_id,$group_artifact_id,$artifact_
 	continue_session($session_ser);
 	$a =& artifact_get_object($artifact_id);
 	if (!$a || !is_object($a)) {
-		return new soap_fault ('','artifactSetMonitor','Could Not Get Artifact','Could Not Get Artifact');
+		return new soap_fault('','artifactSetMonitor','Could Not Get Artifact','Could Not Get Artifact');
 	} elseif ($a->isError()) {
-		return new soap_fault ('','artifactSetMonitor','$a->getErrorMessage()',$a->getErrorMessage());
+		return new soap_fault('','artifactSetMonitor','$a->getErrorMessage()',$a->getErrorMessage());
 	}
 	$a->setMonitor();
 	return true;
@@ -423,9 +423,9 @@ function artifactIsMonitoring($session_ser,$group_id,$group_artifact_id,$artifac
 	continue_session($session_ser);
 	$a =& artifact_get_object($artifact_id);
 	if (!$a || !is_object($a)) {
-		return new soap_fault ('','artifactIsMonitoring','Could Not Get Artifact','Could Not Get Artifact');
+		return new soap_fault('','artifactIsMonitoring','Could Not Get Artifact','Could Not Get Artifact');
 	} elseif ($a->isError()) {
-		return new soap_fault ('','artifactIsMonitoring','$a->getErrorMessage()',$a->getErrorMessage());
+		return new soap_fault('','artifactIsMonitoring','$a->getErrorMessage()',$a->getErrorMessage());
 	}
 	return $a->isMonitoring();
 }
@@ -444,12 +444,12 @@ function artifactDelete($session_ser,$group_id,$group_artifact_id,$artifact_id) 
 	continue_session($session_ser);
 	$a =& artifact_get_object($artifact_id);
 	if (!$a || !is_object($a)) {
-		return new soap_fault ('','artifactDelete','Could Not Get Artifact','Could Not Get Artifact');
+		return new soap_fault('','artifactDelete','Could Not Get Artifact','Could Not Get Artifact');
 	} elseif ($a->isError()) {
-		return new soap_fault ('','artifactDelete','$a->getErrorMessage()',$a->getErrorMessage());
+		return new soap_fault('','artifactDelete','$a->getErrorMessage()',$a->getErrorMessage());
 	}
 	if (!$a->delete(1)) {
-		return new soap_fault ('','artifactDelete','$a->getErrorMessage()',$a->getErrorMessage());
+		return new soap_fault('','artifactDelete','$a->getErrorMessage()',$a->getErrorMessage());
 	} else {
 		return true;
 	}
@@ -466,9 +466,9 @@ function artifactTypeSetMonitor($session_ser,$group_id,$group_artifact_id) {
 	continue_session($session_ser);
 	$a =& artifacttype_get_object($group_artifact_id);
 	if (!$a || !is_object($a)) {
-		return new soap_fault ('','artifactTypeSetMonitor','Could Not Get ArtifactType','Could Not Get ArtifactType');
+		return new soap_fault('','artifactTypeSetMonitor','Could Not Get ArtifactType','Could Not Get ArtifactType');
 	} elseif ($a->isError()) {
-		return new soap_fault ('','artifactTypeSetMonitor','$a->getErrorMessage()',$a->getErrorMessage());
+		return new soap_fault('','artifactTypeSetMonitor','$a->getErrorMessage()',$a->getErrorMessage());
 	}
 	$a->setMonitor();
 	return true;
@@ -478,9 +478,9 @@ function artifactTypeIsMonitoring($session_ser,$group_id,$group_artifact_id) {
 	continue_session($session_ser);
 	$a =& artifacttype_get_object($group_artifact_id);
 	if (!$a || !is_object($a)) {
-		return new soap_fault ('','artifactTypeIsMonitoring','Could Not Get ArtifactType','Could Not Get ArtifactType');
+		return new soap_fault('','artifactTypeIsMonitoring','Could Not Get ArtifactType','Could Not Get ArtifactType');
 	} elseif ($a->isError()) {
-		return new soap_fault ('','artifactTypeIsMonitoring','$a->getErrorMessage()',$a->getErrorMessage());
+		return new soap_fault('','artifactTypeIsMonitoring','$a->getErrorMessage()',$a->getErrorMessage());
 	}
 	return $a->isMonitoring();
 }
@@ -492,16 +492,16 @@ function &getArtifactTypes($session_ser,$group_id) {
 	continue_session($session_ser);
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
-		return new soap_fault ('','getArtifactTypes','Could Not Get Project','Could Not Get Project');
+		return new soap_fault('','getArtifactTypes','Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {
-		return new soap_fault ('','getArtifactTypes','$grp->getErrorMessage()',$grp->getErrorMessage());
+		return new soap_fault('','getArtifactTypes','$grp->getErrorMessage()',$grp->getErrorMessage());
 	}
 
 	$atf = new ArtifactTypeFactory($grp);
 	if (!$atf || !is_object($atf)) {
-		return new soap_fault ('','getArtifactTypes','Could Not Get ArtifactTypeFactory','Could Not Get ArtifactTypeFactory');
+		return new soap_fault('','getArtifactTypes','Could Not Get ArtifactTypeFactory','Could Not Get ArtifactTypeFactory');
 	} elseif ($atf->isError()) {
-		return new soap_fault ('','getArtifactTypes',$atf->getErrorMessage(),$atf->getErrorMessage());
+		return new soap_fault('','getArtifactTypes',$atf->getErrorMessage(),$atf->getErrorMessage());
 	}
 
 	return artifacttype_to_soap($atf->getArtifactTypes());
@@ -601,29 +601,29 @@ function &addArtifact($session_ser,$group_id,$group_artifact_id,$status_id,
 	continue_session($session_ser);
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
-		return new soap_fault ('','addArtifact','Could Not Get Project','Could Not Get Project');
+		return new soap_fault('','addArtifact','Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {
-		return new soap_fault ('','addArtifact',$grp->getErrorMessage(),$grp->getErrorMessage());
+		return new soap_fault('','addArtifact',$grp->getErrorMessage(),$grp->getErrorMessage());
 	}
 
 	$at = new ArtifactType($grp,$group_artifact_id);
 	if (!$at || !is_object($at)) {
-		return new soap_fault ('','addArtifact','Could Not Get ArtifactType','Could Not Get ArtifactType');
+		return new soap_fault('','addArtifact','Could Not Get ArtifactType','Could Not Get ArtifactType');
 	} elseif ($at->isError()) {
-		return new soap_fault ('','addArtifact',$at->getErrorMessage(),$at->getErrorMessage());
+		return new soap_fault('','addArtifact',$at->getErrorMessage(),$at->getErrorMessage());
 	}
 
 	$a = new Artifact($at);
 	if (!$a || !is_object($a)) {
-		return new soap_fault ('','addArtifact','Could Not Get Artifact','Could Not Get Artifact');
+		return new soap_fault('','addArtifact','Could Not Get Artifact','Could Not Get Artifact');
 	} elseif ($a->isError()) {
-		return new soap_fault ('','addArtifact',$a->getErrorMessage(),$a->getErrorMessage());
+		return new soap_fault('','addArtifact',$a->getErrorMessage(),$a->getErrorMessage());
 	}
 
 	$aef = $a->ArtifactType->getExtraFields();
 	$extra_flds=arrangeExtraFields($extra_fields,$aef);
 	if (!$a->create($summary,$details,$assigned_to,$priority,$extra_flds)) {
-		return new soap_fault ('','addArtifact',$a->getErrorMessage(),$a->getErrorMessage());
+		return new soap_fault('','addArtifact',$a->getErrorMessage(),$a->getErrorMessage());
 	} else {
 		return $a->getID();
 	}
@@ -637,23 +637,23 @@ function &updateArtifact($session_ser,$group_id,$group_artifact_id,$artifact_id,
 	continue_session($session_ser);
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
-		return new soap_fault ('','updateArtifact','Could Not Get Project','Could Not Get Project');
+		return new soap_fault('','updateArtifact','Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {
-		return new soap_fault ('','updateArtifact',$grp->getErrorMessage(),$grp->getErrorMessage());
+		return new soap_fault('','updateArtifact',$grp->getErrorMessage(),$grp->getErrorMessage());
 	}
 
 	$at = new ArtifactType($grp,$group_artifact_id);
 	if (!$at || !is_object($at)) {
-		return new soap_fault ('','updateArtifact','Could Not Get ArtifactType','Could Not Get ArtifactType');
+		return new soap_fault('','updateArtifact','Could Not Get ArtifactType','Could Not Get ArtifactType');
 	} elseif ($at->isError()) {
-		return new soap_fault ('','updateArtifact',$at->getErrorMessage(),$at->getErrorMessage());
+		return new soap_fault('','updateArtifact',$at->getErrorMessage(),$at->getErrorMessage());
 	}
 
 	$a = new Artifact($at,$artifact_id);
 	if (!$a || !is_object($a)) {
-		return new soap_fault ('','updateArtifact','Could Not Get Artifact','Could Not Get Artifact');
+		return new soap_fault('','updateArtifact','Could Not Get Artifact','Could Not Get Artifact');
 	} elseif ($a->isError()) {
-		return new soap_fault ('','updateArtifact',$a->getErrorMessage(),$a->getErrorMessage());
+		return new soap_fault('','updateArtifact',$a->getErrorMessage(),$a->getErrorMessage());
 	}
 //NOT DONE - $new_artifact_type_id missing, extra_fields missing, canned response missing
 	$canned_response = 100;
@@ -661,7 +661,7 @@ function &updateArtifact($session_ser,$group_id,$group_artifact_id,$artifact_id,
 	$extra_flds=arrangeExtraFields($extra_fields_data, $aef);
 	if (!$a->update($priority,$status_id,$assigned_to,
 		$summary,$canned_response,$details,$new_artifact_type_id,$extra_flds)) {
-		return new soap_fault ('','updateArtifact',$a->getErrorMessage(),$a->getErrorMessage());
+		return new soap_fault('','updateArtifact',$a->getErrorMessage(),$a->getErrorMessage());
 	} else {
 		return $a->getID();
 	}
@@ -674,16 +674,16 @@ function &getArtifactTechnicians($session_ser,$group_id,$group_artifact_id) {
 	continue_session($session_ser);
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
-		return new soap_fault ('','getArtifactTechnicians','Could Not Get Project','Could Not Get Project');
+		return new soap_fault('','getArtifactTechnicians','Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {
-		return new soap_fault ('','getArtifactTechnicians',$grp->getErrorMessage(),$grp->getErrorMessage());
+		return new soap_fault('','getArtifactTechnicians',$grp->getErrorMessage(),$grp->getErrorMessage());
 	}
 
 	$at = new ArtifactType($grp,$group_artifact_id);
 	if (!$at || !is_object($at)) {
-		return new soap_fault ('','getArtifactTechnicians','Could Not Get ArtifactType','Could Not Get ArtifactType');
+		return new soap_fault('','getArtifactTechnicians','Could Not Get ArtifactType','Could Not Get ArtifactType');
 	} elseif ($at->isError()) {
-		return new soap_fault ('','getArtifactTechnicians',$at->getErrorMessage(),$at->getErrorMessage());
+		return new soap_fault('','getArtifactTechnicians',$at->getErrorMessage(),$at->getErrorMessage());
 	}
 
 	$engine = RBACEngine::getInstance () ;
@@ -699,23 +699,23 @@ function &getArtifacts($session_ser,$group_id,$group_artifact_id,$assigned_to,$s
 	continue_session($session_ser);
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
-		return new soap_fault ('','getArtifacts','Could Not Get Project','Could Not Get Project');
+		return new soap_fault('','getArtifacts','Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {
-		return new soap_fault ('','getArtifacts',$grp->getErrorMessage(),$grp->getErrorMessage());
+		return new soap_fault('','getArtifacts',$grp->getErrorMessage(),$grp->getErrorMessage());
 	}
 
 	$at = new ArtifactType($grp,$group_artifact_id);
 	if (!$at || !is_object($at)) {
-		return new soap_fault ('','getArtifacts','Could Not Get ArtifactType','Could Not Get ArtifactType');
+		return new soap_fault('','getArtifacts','Could Not Get ArtifactType','Could Not Get ArtifactType');
 	} elseif ($at->isError()) {
-		return new soap_fault ('','getArtifacts',$at->getErrorMessage(),$at->getErrorMessage());
+		return new soap_fault('','getArtifacts',$at->getErrorMessage(),$at->getErrorMessage());
 	}
 
 	$af = new ArtifactFactory($at);
 	if (!$af || !is_object($af)) {
-		return new soap_fault ('','getArtifacts','Could Not Get ArtifactFactory','Could Not Get ArtifactFactory');
+		return new soap_fault('','getArtifacts','Could Not Get ArtifactFactory','Could Not Get ArtifactFactory');
 	} elseif ($af->isError()) {
-		return new soap_fault ('','getArtifacts',$af->getErrorMessage(),$af->getErrorMessage());
+		return new soap_fault('','getArtifacts',$af->getErrorMessage(),$af->getErrorMessage());
 	}
 
 	// this is a bit hacky...
@@ -728,7 +728,7 @@ function &getArtifacts($session_ser,$group_id,$group_artifact_id,$assigned_to,$s
 	$af->setup(0,'','',0,$set,$assigned_to,$status);
 	$artifacts = $af->getArtifacts();
 	if ($artifacts === false) {
-		return new soap_fault ('','getArtifacts',$af->getErrorMessage(),$af->getErrorMessage());
+		return new soap_fault('','getArtifacts',$af->getErrorMessage(),$af->getErrorMessage());
 	}
 	return util_strip_unprintable(artifacts_to_soap($artifacts));
 
@@ -806,23 +806,23 @@ function &getArtifactFiles($session_ser,$group_id,$group_artifact_id,$artifact_i
 	continue_session($session_ser);
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
-		return new soap_fault ('','getArtifactFiles','Could Not Get Project','Could Not Get Project');
+		return new soap_fault('','getArtifactFiles','Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {
-		return new soap_fault ('','getArtifactFiles',$grp->getErrorMessage(),$grp->getErrorMessage());
+		return new soap_fault('','getArtifactFiles',$grp->getErrorMessage(),$grp->getErrorMessage());
 	}
 
 	$at = new ArtifactType($grp,$group_artifact_id);
 	if (!$at || !is_object($at)) {
-		return new soap_fault ('','getArtifactFiles','Could Not Get ArtifactType','Could Not Get ArtifactType');
+		return new soap_fault('','getArtifactFiles','Could Not Get ArtifactType','Could Not Get ArtifactType');
 	} elseif ($at->isError()) {
-		return new soap_fault ('','getArtifactFiles',$at->getErrorMessage(),$at->getErrorMessage());
+		return new soap_fault('','getArtifactFiles',$at->getErrorMessage(),$at->getErrorMessage());
 	}
 
 	$a = new Artifact($at,$artifact_id);
 	if (!$a || !is_object($a)) {
-		return new soap_fault ('','getArtifactFiles','Could Not Get Artifact','Could Not Get Artifact');
+		return new soap_fault('','getArtifactFiles','Could Not Get Artifact','Could Not Get Artifact');
 	} elseif ($a->isError()) {
-		return new soap_fault ('','getArtifactFiles',$a->getErrorMessage(),$a->getErrorMessage());
+		return new soap_fault('','getArtifactFiles',$a->getErrorMessage(),$a->getErrorMessage());
 	}
 
 	$files_arr = $a->getFiles();
@@ -860,30 +860,30 @@ function getArtifactFileData($session_ser,$group_id,$group_artifact_id,$artifact
 	continue_session($session_ser);
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
-		return new soap_fault ('','getArtifactFileData','Could Not Get Project','Could Not Get Project');
+		return new soap_fault('','getArtifactFileData','Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {
-		return new soap_fault ('','getArtifactFileData',$grp->getErrorMessage(),$grp->getErrorMessage());
+		return new soap_fault('','getArtifactFileData',$grp->getErrorMessage(),$grp->getErrorMessage());
 	}
 
 	$at = new ArtifactType($grp,$group_artifact_id);
 	if (!$at || !is_object($at)) {
-		return new soap_fault ('','getArtifactFileData','Could Not Get ArtifactType','Could Not Get ArtifactType');
+		return new soap_fault('','getArtifactFileData','Could Not Get ArtifactType','Could Not Get ArtifactType');
 	} elseif ($at->isError()) {
-		return new soap_fault ('','getArtifactFileData',$at->getErrorMessage(),$at->getErrorMessage());
+		return new soap_fault('','getArtifactFileData',$at->getErrorMessage(),$at->getErrorMessage());
 	}
 
 	$a = new Artifact($at,$artifact_id);
 	if (!$a || !is_object($a)) {
-		return new soap_fault ('','getArtifactFileData','Could Not Get Artifact','Could Not Get Artifact');
+		return new soap_fault('','getArtifactFileData','Could Not Get Artifact','Could Not Get Artifact');
 	} elseif ($a->isError()) {
-		return new soap_fault ('','getArtifactFileData',$a->getErrorMessage(),$a->getErrorMessage());
+		return new soap_fault('','getArtifactFileData',$a->getErrorMessage(),$a->getErrorMessage());
 	}
 
 	$af=new ArtifactFile($a,$file_id);
 	if (!$af || !is_object($af)) {
-		return new soap_fault ('','getArtifactFileData','ArtifactFile Could Not Be Created','ArtifactFile Could Not Be Created');
+		return new soap_fault('','getArtifactFileData','ArtifactFile Could Not Be Created','ArtifactFile Could Not Be Created');
 	} elseif ($af->isError()) {
-		return new soap_fault ('','getArtifactFileData',$af->getErrorMessage(),$af->getErrorMessage());
+		return new soap_fault('','getArtifactFileData',$af->getErrorMessage(),$af->getErrorMessage());
 	}
 
 	//send file encoded in base64
@@ -910,30 +910,30 @@ function addArtifactFile($session_ser,$group_id,$group_artifact_id,$artifact_id,
 
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
-		return new soap_fault ('','addArtifactFile','Could Not Get Project','Could Not Get Project');
+		return new soap_fault('','addArtifactFile','Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {
-		return new soap_fault ('','addArtifactFile',$grp->getErrorMessage(),$grp->getErrorMessage());
+		return new soap_fault('','addArtifactFile',$grp->getErrorMessage(),$grp->getErrorMessage());
 	}
 
 	$at = new ArtifactType($grp,$group_artifact_id);
 	if (!$at || !is_object($at)) {
-		return new soap_fault ('','addArtifactFile','Could Not Get ArtifactType','Could Not Get ArtifactType');
+		return new soap_fault('','addArtifactFile','Could Not Get ArtifactType','Could Not Get ArtifactType');
 	} elseif ($at->isError()) {
-		return new soap_fault ('','addArtifactFile',$at->getErrorMessage(),$at->getErrorMessage());
+		return new soap_fault('','addArtifactFile',$at->getErrorMessage(),$at->getErrorMessage());
 	}
 
 	$a = new Artifact($at,$artifact_id);
 	if (!$a || !is_object($a)) {
-		return new soap_fault ('','addArtifactFile','Could Not Get Artifact','Could Not Get Artifact');
+		return new soap_fault('','addArtifactFile','Could Not Get Artifact','Could Not Get Artifact');
 	} elseif ($a->isError()) {
-		return new soap_fault ('','addArtifactFile',$a->getErrorMessage(),$a->getErrorMessage());
+		return new soap_fault('','addArtifactFile',$a->getErrorMessage(),$a->getErrorMessage());
 	}
 
 	$af = new ArtifactFile($a);
 	if (!$af || !is_object($af)) {
-		return new soap_fault ('','addArtifactFile','Could Not Create ArtifactFile object','Could Not Create ArtifactFile object');
+		return new soap_fault('','addArtifactFile','Could Not Create ArtifactFile object','Could Not Create ArtifactFile object');
 	} elseif ($af->isError()) {
-		return new soap_fault ('','addArtifactFile',$af->getErrorMessage(),$af->getErrorMessage());
+		return new soap_fault('','addArtifactFile',$af->getErrorMessage(),$af->getErrorMessage());
 	}
 
 	$bin_data = base64_decode($base64_contents);
@@ -942,7 +942,7 @@ function addArtifactFile($session_ser,$group_id,$group_artifact_id,$artifact_id,
 	$res = $af->create($filename,$filetype,$filesize,$bin_data,$description);
 
 	if (!$res) {
-		return new soap_fault ('','addArtifactFile',$af->getErrorMessage(),$af->getErrorMessage());
+		return new soap_fault('','addArtifactFile',$af->getErrorMessage(),$af->getErrorMessage());
 	}
 
 	return $res;
@@ -956,23 +956,23 @@ function &getArtifactMessages($session_ser,$group_id,$group_artifact_id,$artifac
 	continue_session($session_ser);
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
-		return new soap_fault ('','getArtifactMessages','Could Not Get Project','Could Not Get Project');
+		return new soap_fault('','getArtifactMessages','Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {
-		return new soap_fault ('','getArtifactMessages',$grp->getErrorMessage(),$grp->getErrorMessage());
+		return new soap_fault('','getArtifactMessages',$grp->getErrorMessage(),$grp->getErrorMessage());
 	}
 
 	$at = new ArtifactType($grp,$group_artifact_id);
 	if (!$at || !is_object($at)) {
-		return new soap_fault ('','getArtifactMessages','Could Not Get ArtifactType','Could Not Get ArtifactType');
+		return new soap_fault('','getArtifactMessages','Could Not Get ArtifactType','Could Not Get ArtifactType');
 	} elseif ($at->isError()) {
-		return new soap_fault ('','getArtifactMessages',$at->getErrorMessage(),$at->getErrorMessage());
+		return new soap_fault('','getArtifactMessages',$at->getErrorMessage(),$at->getErrorMessage());
 	}
 
 	$a = new Artifact($at,$artifact_id);
 	if (!$a || !is_object($a)) {
-		return new soap_fault ('','getArtifactMessages','Could Not Get Artifact','Could Not Get Artifact');
+		return new soap_fault('','getArtifactMessages','Could Not Get Artifact','Could Not Get Artifact');
 	} elseif ($a->isError()) {
-		return new soap_fault ('','getArtifactMessages',$a->getErrorMessage(),$a->getErrorMessage());
+		return new soap_fault('','getArtifactMessages',$a->getErrorMessage(),$a->getErrorMessage());
 	}
 
 	return artifactmessages_to_soap($a->getMessageObjects());
@@ -1006,34 +1006,34 @@ function &addArtifactMessage($session_ser,$group_id,$group_artifact_id,$artifact
 	continue_session($session_ser);
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
-		return new soap_fault ('','addArtifactMessage','Could Not Get Project','Could Not Get Project');
+		return new soap_fault('','addArtifactMessage','Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {
-		return new soap_fault ('','addArtifactMessage',$grp->getErrorMessage(),$grp->getErrorMessage());
+		return new soap_fault('','addArtifactMessage',$grp->getErrorMessage(),$grp->getErrorMessage());
 	}
 
 	$at = new ArtifactType($grp,$group_artifact_id);
 	if (!$at || !is_object($at)) {
-		return new soap_fault ('','addArtifactMessage','Could Not Get ArtifactType','Could Not Get ArtifactType');
+		return new soap_fault('','addArtifactMessage','Could Not Get ArtifactType','Could Not Get ArtifactType');
 	} elseif ($at->isError()) {
-		return new soap_fault ('','addArtifactMessage',$at->getErrorMessage(),$at->getErrorMessage());
+		return new soap_fault('','addArtifactMessage',$at->getErrorMessage(),$at->getErrorMessage());
 	}
 
 	$a = new Artifact($at,$artifact_id);
 	if (!$a || !is_object($a)) {
-		return new soap_fault ('','addArtifactMessage','Could Not Get Artifact','Could Not Get Artifact');
+		return new soap_fault('','addArtifactMessage','Could Not Get Artifact','Could Not Get Artifact');
 	} elseif ($a->isError()) {
-		return new soap_fault ('','addArtifactMessage',$a->getErrorMessage(),$a->getErrorMessage());
+		return new soap_fault('','addArtifactMessage',$a->getErrorMessage(),$a->getErrorMessage());
 	}
 
 	$am = new ArtifactMessage($a);
 	if (!$am || !is_object($am)) {
-		return new soap_fault ('','addArtifactMessage','Could Not Get ArtifactMessage','Could Not Get ArtifactMessage');
+		return new soap_fault('','addArtifactMessage','Could Not Get ArtifactMessage','Could Not Get ArtifactMessage');
 	} elseif ($am->isError()) {
-		return new soap_fault ('','addArtifactMessage',$am->getErrorMessage(),$am->getErrorMessage());
+		return new soap_fault('','addArtifactMessage',$am->getErrorMessage(),$am->getErrorMessage());
 	}
 
 	if (!$am->create($body)) {
-		return new soap_fault ('','addArtifactMessage',$am->getErrorMessage(),$am->getErrorMessage());
+		return new soap_fault('','addArtifactMessage',$am->getErrorMessage(),$am->getErrorMessage());
 	} else {
 		return $am->getID();
 	}
@@ -1086,23 +1086,23 @@ function artifactGetChangeLog($session_ser, $group_id, $group_artifact_id, $arti
 	continue_session($session_ser);
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
-		return new soap_fault ('','artifactGetChangeLog','Could Not Get Project','Could Not Get Project');
+		return new soap_fault('','artifactGetChangeLog','Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {
-		return new soap_fault ('','artifactGetChangeLog',$grp->getErrorMessage(),$grp->getErrorMessage());
+		return new soap_fault('','artifactGetChangeLog',$grp->getErrorMessage(),$grp->getErrorMessage());
 	}
 
 	$at = new ArtifactType($grp,$group_artifact_id);
 	if (!$at || !is_object($at)) {
-		return new soap_fault ('','artifactGetChangeLog','Could Not Get ArtifactType','Could Not Get ArtifactType');
+		return new soap_fault('','artifactGetChangeLog','Could Not Get ArtifactType','Could Not Get ArtifactType');
 	} elseif ($at->isError()) {
-		return new soap_fault ('','artifactGetChangeLog',$at->getErrorMessage(),$at->getErrorMessage());
+		return new soap_fault('','artifactGetChangeLog',$at->getErrorMessage(),$at->getErrorMessage());
 	}
 
 	$artifact = new Artifact($at,$artifact_id);
 	if (!$artifact || !is_object($artifact)) {
-		return new soap_fault ('','artifactGetChangeLog','Could Not Get Artifact','Could Not Get Artifact');
+		return new soap_fault('','artifactGetChangeLog','Could Not Get Artifact','Could Not Get Artifact');
 	} elseif ($artifact->isError()) {
-		return new soap_fault ('','artifactGetChangeLog',$artifact->getErrorMessage(),$artifact->getErrorMessage());
+		return new soap_fault('','artifactGetChangeLog',$artifact->getErrorMessage(),$artifact->getErrorMessage());
 	}
 
 	// note that Artifact::getHistory returns a DB result handler
