@@ -145,7 +145,7 @@ class CoreApiService {
 		$grps = group_get_objects($group_ids);
 		if (!$grps) {
 			$this->logger->debug("Could Not Get Groups by Id");
-			return new soap_fault ('2001','group','Could Not Get Groups by Id'.$inputArgs,$feedback);
+			return new soap_fault('2001','group','Could Not Get Groups by Id'.$inputArgs,$feedback);
 		}
 
 		$response = new getGroupsResponse_soap();
