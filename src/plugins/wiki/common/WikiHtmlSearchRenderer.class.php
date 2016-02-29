@@ -34,7 +34,7 @@ class WikiHtmlSearchRenderer extends HtmlGroupSearchRenderer {
      *
      * @param string $words words we are searching for
      * @param int $offset offset
-     * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
+     * @param bool $isExact if we want to search for all the words or if only one matching the query is sufficient
      * @param int $groupId group id
      * @internal param array $sections array of all sections to search in (array of strings)
      */
@@ -43,7 +43,7 @@ class WikiHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 
 		$searchQuery = new WikiSearchQuery($words, $offset, $isExact, $groupId);
 
-		//init the searchrendererr
+		// init the search renderer
 		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_WIKI, $words, $isExact,
 			$searchQuery, $groupId, 'wiki');
 
@@ -70,8 +70,8 @@ class WikiHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 				. '<td><a href="/wiki/g/'. $group_name.'/'. $page_name .'">'
 				. html_image('ic/msg.png', '10', '12')
 				. ' '.db_result($result, $i, 'pagename').'</a></td>
-				<td width="15%">'.$data['author'].'</td>
-				<td width="15%">'.relative_date(db_result($result, $i, 'mtime')).'</td></tr>';
+				<td style="width: 15%">'.$data['author'].'</td>
+				<td style="width: 15%">'.relative_date(db_result($result, $i, 'mtime')).'</td></tr>';
 		}
 		return $return;
 	}

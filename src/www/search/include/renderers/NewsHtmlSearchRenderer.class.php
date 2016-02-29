@@ -66,8 +66,8 @@ class NewsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 				. '<td><a href="'.util_make_url ('/forum/forum.php?forum_id='. db_result($result, $i, 'forum_id')).'">'
 				. html_image('ic/msg.png', '10', '12')
 				. ' '.db_result($result, $i, 'summary').'</a></td>
-				<td width="15%">'.db_result($result, $i, 'realname').'</td>
-				<td width="15%">'.relative_date(db_result($result, $i, 'post_date')).'</td></tr>';
+				<td style="width: 15%">'.db_result($result, $i, 'realname').'</td>
+				<td style="width: 15%">'.relative_date(db_result($result, $i, 'post_date')).'</td></tr>';
 		}
 		return $return;
 	}

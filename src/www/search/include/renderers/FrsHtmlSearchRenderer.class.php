@@ -76,8 +76,8 @@ class FrsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($rowColor) .'>'
 				. '<td width="5%">&nbsp;</td>'
 				. '<td>'.util_make_link ('/frs/?view=shownotes&group_id='.$group_id.'&release_id='.db_result($result, $i, 'release_id'),db_result($result, $i, 'release_name')).'</td>'
-				. '<td width="15%">'.db_result($result, $i, 'realname').'</td>'
-				. '<td width="15%">'.relative_date(db_result($result,$i, 'release_date')).'</td></tr>';
+				. '<td style="width: 15%">'.db_result($result, $i, 'realname').'</td>'
+				. '<td style="width: 15%">'.relative_date(db_result($result,$i, 'release_date')).'</td></tr>';
 			$rowColor ++;
 		}
 		return $return;
