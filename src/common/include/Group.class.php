@@ -1628,6 +1628,7 @@ class Group extends Error {
 		}
 		return $this->data_array['homepage'];
 	}
+
 	/**
 	 * setHomepage - the hostname of the website url where this project is located.
 	 *
@@ -1791,6 +1792,7 @@ class Group extends Error {
             return false;
          }
       }
+
 		//
 		//	Delete Forums
 		//
@@ -1859,16 +1861,16 @@ class Group extends Error {
 			}
 		}
 
-     // Delete news forums in group itself
-      for ($i = 0; $i < db_numrows($res); $i++) {
-         $Forum = new Forum($this, db_result($res, $i, 'forum_id'));
-         if (!$Forum->delete(1, 1)) {
-            $this->setError(_("Could Not Delete News Forum: %d"), $Forum->getID());
-            return false;
-         }
-      }
+		// Delete news forums in group itself
+		for ($i = 0; $i < db_numrows($res); $i++) {
+			$Forum = new Forum($this, db_result($res, $i, 'forum_id'));
+			if (!$Forum->delete(1, 1)) {
+				$this->setError(_("Could Not Delete News Forum: %d"), $Forum->getID());
+				return false;
+			}
+		}
 
-      $res = db_query_params('DELETE FROM news_bytes WHERE group_id=$1',
+		$res = db_query_params('DELETE FROM news_bytes WHERE group_id=$1',
 					array($this->getID()));
 		if (!$res) {
 			$this->setError(_('Error Deleting News: ').db_error());
@@ -2293,7 +2295,7 @@ class Group extends Error {
 		plugin_hook ("group_removeuser", $hook_params);
 
 		//audit trail
-		$this->addHistory(_('Removed User'),$user_id);
+		$this->addHistory(_('Removed User'), $user_id);
 
 		db_commit();
 
@@ -2626,9 +2628,7 @@ class Group extends Error {
 				}
 			} else {
 				/* use SCM choice from registration page */
-
-				foreach ($template->getPlugins() as
-					$plugin_id => $plugin_name) {
+				foreach ($template->getPlugins() as $plugin_id => $plugin_name) {
 					if (substr($plugin_name, 3) == 'scm' &&
 						$plugin_name != 'scmhook') {
 						/* skip copying scm plugins */
@@ -2727,7 +2727,7 @@ class Group extends Error {
 		foreach ($admins as $admin) {
 			setup_gettext_for_user ($admin);
 
-			$message=sprintf(_('Your project registration for %4$s has been approved.
+			$message = sprintf(_('Your project registration for %4$s has been approved.
 
 Project Full Name:  %1$s
 Project Unix Name:  %2$s

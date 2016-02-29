@@ -25,52 +25,52 @@ require_once $gfcommon.'include/System.class.php';
 
 class pgsql extends System {
 	/*
- 	* Constants
- 	*/
+	 * Constants
+	 */
 
 	/**
-	* Value to add to unix_uid to get unix uid
-	*
-	* @var	constant	$UID_ADD
-	*/
+	 * Value to add to unix_uid to get unix uid
+	 *
+	 * @var	constant	$UID_ADD
+	 */
 	var $UID_ADD = 20000;
 
 	/**
-	* Value to add to group_id to get unix gid
-	*
-	* @var	constant	$GID_ADD
-	*/
+	 * Value to add to group_id to get unix gid
+	 *
+	 * @var	constant	$GID_ADD
+	 */
 	var $GID_ADD = 10000;
 
 	/**
-	* Value to add to unix gid to get unix gid of 'xxx_scmro' group
-	*
-	* @var	constant	$GID_ADD_SCMRO
-	*/
+	 * Value to add to unix gid to get unix gid of 'xxx_scmro' group
+	 *
+	 * @var	constant	$GID_ADD_SCMRO
+	 */
 	var $GID_ADD_SCMRO = 100000;
 
 	/**
-	* Value to add to unix gid to get unix gid of 'xxx_scmrw' group
-	*
-	* @var	constant	$GID_ADD_SCMRW
-	*/
+	 * Value to add to unix gid to get unix gid of 'xxx_scmrw' group
+	 *
+	 * @var	constant	$GID_ADD_SCMRW
+	 */
 	var $GID_ADD_SCMRW = 50000;
 
 	/**
-	* pgsql() - CONSTRUCTOR
-	*
-	*/
+	 * pgsql() - CONSTRUCTOR
+	 *
+	 */
 	function pgsql() {
 		$this->System();
 		return true;
 	}
 
 	/**
-	* sysUseUnixName() - Check if user/group used the unix_name
-	*
-	* @param	string	$unix_name	The unix_name to check
-	* @return	boolean	true if used/false is free
-	*/
+	 * sysUseUnixName() - Check if user/group used the unix_name
+	 *
+	 * @param	string	$unix_name	The unix_name to check
+	 * @return	boolean	true if used/false is free
+	 */
 	function sysUseUnixName($unix_name) {
 		$res1 = db_query_params('SELECT user_id FROM users
 								 WHERE user_name=$1',array($unix_name));
@@ -83,16 +83,16 @@ class pgsql extends System {
 	}
 
 	/*
- 	* User management functions
- 	*/
+	 * User management functions
+	 */
 
 	/**
- 	* sysCheckUser() - Check for the existence of a user
- 	*
- 	* @param	int	$user_id	The user ID of the user to check
- 	* @return	bool			true on success/false on error
- 	*
- 	*/
+	 * sysCheckUser() - Check for the existence of a user
+	 *
+	 * @param	int	$user_id	The user ID of the user to check
+	 * @return	bool			true on success/false on error
+	 *
+	 */
 	function sysCheckUser($user_id) {
 		$user = user_get_object($user_id);
 		if (!$user) {
@@ -102,12 +102,12 @@ class pgsql extends System {
 	}
 
 	/**
- 	* sysCreateUser() - Create a user
- 	*
- 	* @param	int	$user_id	The user ID of the user to create
- 	* @return	bool			success or not
- 	*
- 	*/
+	 * sysCreateUser() - Create a user
+	 *
+	 * @param	int	$user_id	The user ID of the user to create
+	 * @return	bool			success or not
+	 *
+	 */
 	function sysCreateUser($user_id) {
 		$user = user_get_object($user_id);
 		if (!$user) {
@@ -150,34 +150,34 @@ class pgsql extends System {
 	}
 
 	/**
- 	* sysCheckCreateUser() - Check that a user has been created
- 	*
- 	* @param	int		$user_id	The ID of the user to check
- 	* @return	bool	true on success/false on error
- 	*
- 	*/
+	 * sysCheckCreateUser() - Check that a user has been created
+	 *
+	 * @param	int		$user_id	The ID of the user to check
+	 * @return	bool	true on success/false on error
+	 *
+	 */
 	function sysCheckCreateUser($user_id) {
 		return $this->sysCreateUser($user_id);
 	}
 
 	/**
- 	* sysCheckCreateGroup() - Check that a group has been created
- 	*
- 	* @param	int	$group_id	The ID of the group to check
- 	* @return	bool			true on success/false on error
- 	*
- 	*/
+	 * sysCheckCreateGroup() - Check that a group has been created
+	 *
+	 * @param	int	$group_id	The ID of the group to check
+	 * @return	bool			true on success/false on error
+	 *
+	 */
 	function sysCheckCreateGroup($group_id) {
 		return $this->sysCreateGroup($group_id);
 	}
 
 	/**
- 	* sysRemoveUser() - Remove a user
- 	*
- 	* @param	int	$user_id	The user ID of the user to remove
- 	* @return	bool			true on success/false on failure
- 	*
- 	*/
+	 * sysRemoveUser() - Remove a user
+	 *
+	 * @param	int	$user_id	The user ID of the user to remove
+	 * @return	bool			true on success/false on failure
+	 *
+	 */
 	function sysRemoveUser($user_id) {
 		$res = db_query_params('UPDATE users SET unix_status=$1 WHERE user_id=$2',
 					array ('D',
@@ -197,14 +197,14 @@ class pgsql extends System {
 	}
 
 	/**
- 	* sysUserSetAttribute() - Set an attribute for a user
- 	*
- 	* @param	int		$user_id	The user ID
- 	* @param	string	$attr		The attribute to set
- 	* @param	string	$value		The new value of the attribute
- 	* @return	bool				true on success/false on error
- 	*
- 	*/
+	* sysUserSetAttribute() - Set an attribute for a user
+	*
+	* @param	int		$user_id	The user ID
+	* @param	string	$attr		The attribute to set
+	* @param	string	$value		The new value of the attribute
+	* @return	bool				true on success/false on error
+	*
+	*/
 	function sysUserSetAttribute($user_id,$attr,$value) {
 		// trigger nscd cache invalidation and scm-passwd regen through systasksd
 		$res = db_query_params('UPDATE nss_usergroups'
@@ -219,16 +219,16 @@ class pgsql extends System {
 	}
 
 	/*
- 	* Group management functions
- 	*/
+	 * Group management functions
+	 */
 
 	/**
- 	* sysCheckGroup() - Check for the existence of a group
- 	*
- 	* @param	int		$group_id	The ID of the group to check
- 	* @return	bool				true on success/false on error
- 	*
- 	*/
+	 * sysCheckGroup() - Check for the existence of a group
+	 *
+	 * @param	int		$group_id	The ID of the group to check
+	 * @return	bool				true on success/false on error
+	 *
+	 */
 	function sysCheckGroup($group_id) {
 		$group = group_get_object($group_id);
 		if (!$group){
@@ -245,12 +245,12 @@ class pgsql extends System {
 	}
 
 	/**
- 	* sysCreateGroup() - Create a group
- 	*
- 	* @param		int		$group_id	The ID of the group to create
-	* @return bool			true on success/false on error
- 	*
- 	*/
+	 * sysCreateGroup() - Create a group
+	 *
+	 * @param		int		$group_id	The ID of the group to create
+	 * @return bool			true on success/false on error
+	 *
+	 */
 	function sysCreateGroup($group_id) {
 		$group = group_get_object($group_id);
 		if (!$group) {
@@ -263,6 +263,7 @@ class pgsql extends System {
 			$this->setError('Error: Cannot Delete Group Member(s): '.db_error());
 			return false;
 		}
+
 		$res3 = db_query_params ('DELETE FROM nss_groups WHERE group_id=$1',
 					 array ($group_id)) ;
 		if (!$res3) {
@@ -316,12 +317,12 @@ class pgsql extends System {
 	}
 
 	/**
- 	* sysRemoveGroup() - Remove a group
- 	*
- 	* @param		int		$group_id	The ID of the group to remove
-	* @return bool			true on success/false on error
- 	*
- 	*/
+	 * sysRemoveGroup() - Remove a group
+	 *
+	 * @param		int		$group_id	The ID of the group to remove
+	 * @return bool			true on success/false on error
+	 *
+	 */
 	function sysRemoveGroup($group_id) {
 		$res1 = db_query_params ('DELETE FROM nss_usergroups WHERE group_id=$1',
 					 array ($group_id)) ;
@@ -338,7 +339,7 @@ class pgsql extends System {
 		return true;
 	}
 
- 	/**
+	/**
 	 * sysGroupAddUser() - Add a user to a group
 	 *
 	 * @param	int		$group_id	The ID of the group two which the user will be added
@@ -351,12 +352,12 @@ class pgsql extends System {
 	}
 
 	/**
- 	* sysGroupCheckUser() - Sync user's Unix permissions with their FF permissions within a group
- 	*
- 	* @param	int	$group_id	The ID of the group
- 	* @param	int	$user_id	The ID of the user
- 	* @return	bool			true on success/false on error
- 	*/
+	 * sysGroupCheckUser() - Sync user's Unix permissions with their FF permissions within a group
+	 *
+	 * @param	int	$group_id	The ID of the group
+	 * @param	int	$user_id	The ID of the user
+	 * @return	bool			true on success/false on error
+	 */
 	function sysGroupCheckUser($group_id,$user_id) {
 		db_begin () ;
 		if (! $this->sysGroupRemoveUser($group_id,$user_id)) {
@@ -449,13 +450,13 @@ WHERE users.user_id=$2
 	}
 
 	/**
- 	* sysGroupRemoveUser() - Remove a user from a group
- 	*
- 	* @param	int		$group_id	The ID of the group from which to remove the user
- 	* @param	int		$user_id	The ID of the user to remove
-	* @param	bool	$unused		Compatibility issue but not used : pgsql extends System...
- 	* @return	bool	true on success/false on error
- 	*/
+	 * sysGroupRemoveUser() - Remove a user from a group
+	 *
+	 * @param	int		$group_id	The ID of the group from which to remove the user
+	 * @param	int		$user_id	The ID of the user to remove
+	 * @param	bool	$unused		Compatibility issue but not used : pgsql extends System...
+	 * @return	bool	true on success/false on error
+	 */
 	function sysGroupRemoveUser($group_id, $user_id, $unused = false) {
 		$res = db_query_params ('DELETE FROM nss_usergroups WHERE user_id=$1 AND group_id=$2',
 					 array ($user_id,

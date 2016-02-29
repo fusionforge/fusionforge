@@ -136,7 +136,7 @@ class PluginManager extends Error {
 		$res = db_query_params('DELETE FROM plugins WHERE plugin_name = $1', array($pluginname));
 
 		$p_id = NULL;
-		
+
 		if (!isset($this->plugins_data)) {
 			$this->plugins_data = array();
 		}

@@ -26,8 +26,8 @@ require_once $gfcommon.'include/Error.class.php';
 
 class FusionForge extends Error {
 
-	var $software_name = "FusionForge" ;
-	var $software_version ;
+	var $software_name = "FusionForge";
+	var $software_version;
 
 	public static $instance;
 

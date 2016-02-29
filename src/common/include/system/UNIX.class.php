@@ -86,16 +86,16 @@ class UNIX extends System {
 	}
 
 	/*
-	* Group management functions
-	*/
+	 * Group management functions
+	 */
 
 	/**
-	 * sysCheckGroup() - Check for the existence of a group
-	 *
-	 * @param	int	$group_id	The ID of the group to check
-	 * @return	bool	true on success/false on error
-	 *
-	 */
+	  * sysCheckGroup() - Check for the existence of a group
+	  *
+	  * @param	int	$group_id	The ID of the group to check
+	  * @return	bool	true on success/false on error
+	  *
+	  */
 	function sysCheckGroup($group_id) {
 		$group = group_get_object($group_id);
 		if (!$group){
@@ -105,10 +105,10 @@ class UNIX extends System {
 	}
 
 	/**
-	 * sysCreateGroup() - Create a group
-	 *
-	 * @param	int	$group_id	The ID of the group to create
-	 * @return	bool	true on success/false on error
+	  * sysCreateGroup() - Create a group
+	  *
+	  * @param	int	$group_id	The ID of the group to create
+	  * @return	bool	true on success/false on error
 	 *
 	 */
 	function sysCreateGroup($group_id) {
