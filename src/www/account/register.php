@@ -256,14 +256,18 @@ if($toDisplay != "") {
 </p>
 <?php if (forge_get_config('user_registration_accept_conditions')) { ?>
 	<p>
-	<input type="checkbox" name="accept_conditions" value="1" />
-	<?php printf (_('Do you accept the <a href="%s">terms of use</a> for this site?'),
-		      util_make_url('/terms.php')); ?>
+	<input id="accept_conditions" type="checkbox" name="accept_conditions" value="1" />
+	<label for="accept_conditions">
+		<?php printf (_('Do you accept the <a href="%s">terms of use</a> for this site?'), util_make_url('/terms.php')); ?>
+	</label>
 	</p>
 <?php } ?>
 <?php if (forge_check_global_perm('forge_admin')) { ?>
-	<p><input type="checkbox" name="activate_immediately" value="1" />
-<?php print _('Activate this user immediately') ; ?>
+	<p>
+		<input id="activate_immediately" type="checkbox" name="activate_immediately" value="1" />
+		<label for="activate_immediately">
+			<?php print _('Activate this user immediately') ; ?>
+		</label>
 	</p>
 <?php } else {
 	$html = '';
