@@ -47,13 +47,13 @@ $input_file = getUploadedFile('userfile');
 if (isset($input_file) && isset($input_file['tmp_name']) &&
 	is_uploaded_file($input_file['tmp_name'])) {
 
+	// Check file format
 	if (function_exists('finfo_open')) {
 		$finfo = finfo_open(FILEINFO_MIME_TYPE);
 		$uploaded_data_type = finfo_file($finfo, $input_file['tmp_name']);
 	} else {
 		$uploaded_data_type = $input_file['type'];
 	}
-
 
 	if ($uploaded_data_type === "text/plain") {
 
@@ -131,5 +131,7 @@ if (isset($input_file) && isset($input_file['tmp_name']) &&
 if (isset($res['success']) && $res['success']) {
 	$feedback .= _('Import was successful');
 } else {
-	$error_msg .= $res['errormessage'];
+	if (isset($res['errormessage'])) {
+		$error_msg .= $res['errormessage'];
+	}
 }
