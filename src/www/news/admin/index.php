@@ -91,7 +91,7 @@ if ($group_id && $group_id != forge_get_config('news_group')) {
 						array($status, htmlspecialchars($summary), $details, $id, $group_id));
 
 			if (!$result || db_affected_rows($result) < 1) {
-				$error_msg .= sprintf(_('Error On Update: %s'), db_error());
+				$error_msg .= _('Error On Update')._(': ').db_error();
 			} else {
 				$feedback .= _('Newsbyte Updated.');
 			}

@@ -75,7 +75,7 @@ if ($post_changes) {
 						      $details,
 						      $id));
 			if (!$result || db_affected_rows($result) < 1) {
-				$error_msg .= sprintf(_('Error On Update: %s'), db_error());
+				$error_msg .= _('Error On Update')._(': ').db_error();
 			} else {
 				$feedback .= _('Newsbyte Updated.');
 			}
@@ -85,7 +85,7 @@ if ($post_changes) {
 			*/
 			$result=db_query_params("UPDATE news_bytes SET is_approved='2' WHERE id=$1", array($id));
 			if (!$result || db_affected_rows($result) < 1) {
-				$error_msg .= sprintf(_('Error On Update: %s'), db_error());
+				$error_msg .= _('Error On Update')._(': ').db_error();
 			} else {
 				$feedback .= _('Newsbyte Deleted.');
 			}
@@ -105,7 +105,7 @@ if ($post_changes) {
 SET is_approved='2'
 WHERE id = ANY($1)",array(db_int_array_to_any_clause($news_id)));
 		if (!$result || db_affected_rows($result) < 1) {
-			$error_msg .= sprintf(_('Error On Update: %s'), db_error());
+			$error_msg .= _('Error On Update')._(': ').db_error();
 		} else {
 			$feedback .= _('Newsbytes Rejected.');
 		}

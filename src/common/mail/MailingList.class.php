@@ -270,7 +270,7 @@ Thank you for registering your project with %1$s.'), forge_get_config ('forge_na
 					       $this->Group->getID())) ;
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError(sprintf(_('Error On Update: %s'), db_error()));
+			$this->setError(_('Error On Update')._(': ').db_error());
 			return false;
 		}
 
