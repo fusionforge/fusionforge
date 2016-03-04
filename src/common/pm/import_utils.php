@@ -23,7 +23,7 @@
 
 require_once $gfcommon.'pm/ProjectTaskFactory.class.php';
 
-function &pm_import_tasks($group_project_id,&$tasks,$replace=true) {
+function &pm_import_tasks($group_project_id, &$tasks, $replace=true) {
 	$was_error = false;
 
 	$pg = projectgroup_get_object($group_project_id);
