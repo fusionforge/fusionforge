@@ -68,7 +68,7 @@ function exit_permission_denied($reason_descr = '', $toptab = '') {
 function exit_not_logged_in() {
 	//instead of a simple error page, now take them to the login page
 	session_redirect("/account/login.php?triggered=1&return_to=" .
-	    urlencode(getStringFromServer('REQUEST_URI')), false);
+		urlencode(getStringFromServer('REQUEST_URI')), false);
 }
 
 /**
