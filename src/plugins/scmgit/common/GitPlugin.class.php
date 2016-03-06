@@ -503,10 +503,10 @@ control over it to the project's administrator.");
 			$repo_name = db_result($result,$i,'repo_name');
 			$description = db_result($result,$i,'description');
 			$clone_url = db_result($result,$i,'clone_url');
-            // Clone URLs need to be validated to prevent a potential arbitrary command execution
-            if (!preg_match('|^[-a-zA-Z0-9:./_]+$|', $clone_url)) {
-                    $clone_url = '';
-            }
+			// Clone URLs need to be validated to prevent a potential arbitrary command execution
+			if (!preg_match('|^[-a-zA-Z0-9:./_]+$|', $clone_url)) {
+				$clone_url = '';
+			}
 			$repodir = $root . '/' .  $repo_name . '.git';
 			if (!is_file("$repodir/HEAD") && !is_dir("$repodir/objects") && !is_dir("$repodir/refs")) {
 				if ($clone_url != '') {
