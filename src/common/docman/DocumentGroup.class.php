@@ -715,13 +715,10 @@ class DocumentGroup extends Error {
 			if ($dgf->isError())
 				exit_error($dgf->getErrorMessage(), 'docman');
 
-			if ($stateid == 2) {
-				$stateidArr = array(2);
-			} else {
-				$stateidArr = array(1, 5);
-			}
+			$stateidArr = array(1, 3, 4, 5);
 			$nested_groups =& $dgf->getNested($stateidArr);
 
+			$df->setStateID($stateidArr);
 			$df->setDocGroupID($this->getID());
 			$d_arr =& $df->getDocuments();
 
