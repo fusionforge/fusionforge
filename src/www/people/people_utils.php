@@ -221,7 +221,7 @@ function people_add_to_job_inventory($job_id,$skill_id,$skill_level_id,$skill_ye
 				return true;
 			}
 		} else {
-			$error_msg .= _('Error: Skill already in your inventory.');
+			$error_msg .= _('Error: skill already in your inventory');
 			return false;
 		}
 
