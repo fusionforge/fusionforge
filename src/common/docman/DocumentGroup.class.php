@@ -233,7 +233,7 @@ class DocumentGroup extends Error {
 		/* update the parent if any */
 		if ($this->getParentID()) {
 			$parentDg = documentgroup_get_object($this->getParentID(), $this->Group->getID());
-			$parentDg->update($parentDg->getName(), $parentDg->getParentID(), 1);
+			$parentDg->update($parentDg->getName(), $parentDg->getParentID(), 1, $parentDg->getState());
 		}
 		/* is there any subdir ? */
 		$subdir = db_query_params('select doc_group from doc_groups where parent_doc_group = $1 and group_id = $2',
