@@ -78,8 +78,8 @@ echo html_e('h2', array(), _('Edit release')._(':'));
 echo $HTML->listTableTop();
 ?>
 	<tr><td><strong><?php echo _('Release') ?></strong>&nbsp;<?php echo utils_requiredField(); ?></td><td><?php echo $release_box; ?></td></tr>
-	<tr><td><strong><?php echo _('Start date') ?></strong>&nbsp;<?php echo utils_requiredField(); ?></td><td><input type="text" name="start_date" value="<?php echo $start_date ?>"></td></tr>
-	<tr><td><strong><?php echo _('End date') ?></strong>&nbsp;<?php echo utils_requiredField(); ?></td><td><input type="text" name="end_date" value="<?php echo $end_date ?>"></td></tr>
+	<tr><td><strong><?php echo _('Start Date') ?></strong>&nbsp;<?php echo utils_requiredField(); ?></td><td><input type="text" name="start_date" value="<?php echo $start_date ?>"></td></tr>
+	<tr><td><strong><?php echo _('End Date') ?></strong>&nbsp;<?php echo utils_requiredField(); ?></td><td><input type="text" name="end_date" value="<?php echo $end_date ?>"></td></tr>
 	<tr><td><strong><?php echo _('Goals') ?></strong></td><td><textarea name="goals" cols="79" rows="5" ><?php echo htmlspecialchars($goals) ?></textarea></td></tr>
 	<tr><td><strong><?php echo _('Page URL') ?></strong></td><td><input type="text" name="page_url" value="<?php echo htmlspecialchars($page_url) ?>"></td></tr>
 <?php

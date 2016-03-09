@@ -49,7 +49,7 @@ if ($taskboardReleases === false) {
 
 echo html_e('p', array(), util_make_link('/plugins/'.$pluginTaskboard->name.'/releases/?group_id='.$group_id.'&view=add_release', html_e('strong', array(), _('Add release'))));
 
-$tablearr = array(_('Title'),_('Start date'),_('End date'), _('Goals'), _('Page'), _('Charts'));
+$tablearr = array(_('Title'),_('Start Date'),_('End Date'), _('Goals'), _('Page'), _('Charts'));
 
 echo $HTML->listTableTop($tablearr, false, 'sortable_table_tracker', 'sortable_table_tracker');
 
