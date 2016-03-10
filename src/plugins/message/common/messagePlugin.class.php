@@ -2,8 +2,7 @@
 /**
  * FusionForge Plugin Message Class
  *
- * Copyright 2009 (c) Alain Peyrat <alain.peyrat@alcatel-lucent.com>
- * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2009, 2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2012, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;

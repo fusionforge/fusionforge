@@ -74,12 +74,12 @@ control over it to the project's administrator.");
 			$result = db_query_params('SELECT sum(updates) AS updates, sum(adds) AS adds FROM stats_cvs_group WHERE group_id=$1',
 						array($project->getID()));
 			$commit_num = db_result($result,0,'updates');
-			$add_num    = db_result($result,0,'adds');
+			$add_num = db_result($result,0,'adds');
 			if (!$commit_num) {
-				$commit_num=0;
+				$commit_num = 0;
 			}
 			if (!$add_num) {
-				$add_num=0;
+				$add_num = 0;
 			}
 			echo ' (Git: '.sprintf(_('<strong>%1$s</strong> updates, <strong>%2$s</strong> adds'), number_format($commit_num, 0), number_format($add_num, 0)).')';
 		}

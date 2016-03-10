@@ -223,8 +223,8 @@ over it to the project's administrator.");
 	}
 
 	function updateRepositoryList ($params) {
-			$groups = $this->getGroups () ;
-			
+		$groups = $this->getGroups () ;
+
 		$dir = forge_get_config('data_path').'/plugins/scmbzr/public-repositories' ;
 
 		if (!is_dir($dir)) {
