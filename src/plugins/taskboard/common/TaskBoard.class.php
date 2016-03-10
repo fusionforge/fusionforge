@@ -90,11 +90,11 @@ class TaskBoard extends Error {
 	function TaskBoard($Group, $arr = false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
-			$this->setError('No Valid Group Object');
+			$this->setError(_('No Valid Group Object'));
 			return false;
 		}
 		if ($Group->isError()) {
-			$this->setError('TaskBoard'._(': ').$Group->getErrorMessage());
+			$this->setError(_('Taskboard')._(': ').$Group->getErrorMessage());
 			return false;
 		}
 
@@ -299,7 +299,7 @@ class TaskBoard extends Error {
 		}
 		$res = db_query_params('SELECT * FROM plugin_taskboard WHERE taskboard_id=$1', array($taskboard_id));
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError(_('TaskBoard')._(': ')._('Invalid TaskBoardID'));
+			$this->setError(_('Taskboard')._(': ')._('Invalid TaskBoardID'));
 			return false;
 		}
 		$this->data_array = db_fetch_array($res);
@@ -315,7 +315,7 @@ class TaskBoard extends Error {
 	function fetchDataByGroup() {
 		$res = db_query_params('SELECT * FROM plugin_taskboard WHERE group_id=$1', array ($this->Group->getID()));
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError(_('TaskBoard')._(': ')._('Not configured for this project yet. Please, initialize plugin on the plugin admin page.'));
+			$this->setError(_('Taskboard')._(': ')._('Not configured for this project yet. Please, initialize plugin on the plugin admin page.'));
 			return false;
 		}
 		$this->data_array = db_fetch_array($res);
@@ -413,7 +413,7 @@ class TaskBoard extends Error {
 	function getUsedTrackersIds() {
 		$res = db_query_params('SELECT * FROM plugin_taskboard_trackers WHERE taskboard_id = $1', array ($this->getID()));
 		if (!$res) {
-			$this->setError(_('TaskBoard')._(': ')._('Cannot get list of used trackers.'));
+			$this->setError(_('Taskboard')._(': ')._('Cannot get list of used trackers.'));
 			return false;
 		}
 
@@ -433,7 +433,7 @@ class TaskBoard extends Error {
 	function getUsedTrackersData() {
 		$res = db_query_params('SELECT * FROM plugin_taskboard_trackers WHERE taskboard_id = $1', array ($this->getID()));
 		if (!$res) {
-			$this->setError(_('TaskBoard')._(': ')._('Cannot get list of used trackers.'));
+			$this->setError(_('Taskboard')._(': ')._('Cannot get list of used trackers.'));
 			return false;
 		}
 
@@ -453,7 +453,7 @@ class TaskBoard extends Error {
 	function cleanUsedTrackers() {
 		$res = db_query_params('DELETE FROM plugin_taskboard_trackers WHERE taskboard_id = $1', array ($this->getID()));
 		if (!$res) {
-			$this->setError(_('TaskBoard')._(': ')._('Cannot empty list of used trackers.'));
+			$this->setError(_('Taskboard')._(': ')._('Cannot empty list of used trackers.'));
 				 return false;
 		}
 
@@ -471,7 +471,7 @@ class TaskBoard extends Error {
 	function addUsedTracker($tracker_id, $bgcolor='') {
 		$res = db_query_params('INSERT INTO plugin_taskboard_trackers(taskboard_id, group_artifact_id, card_background_color) VALUES($1, $2, $3)', array($this->getID(), $tracker_id, $bgcolor));
 		 if (!$res) {
-			$this->setError(_('TaskBoard')._(': ')._('Cannot add used tracker'));
+			$this->setError(_('Taskboard')._(': ')._('Cannot add used tracker'));
 			return false;
 		}
 
@@ -489,7 +489,7 @@ class TaskBoard extends Error {
 	function updateUsedTracker($tracker_id, $bgcolor = '') {
 		 $res = db_query_params('UPDATE plugin_taskboard_trackers SET card_background_color = $1 WHERE group_artifact_id = $2', array($bgcolor, $tracker_id));
 		if (!$res) {
-			$this->setError(_('TaskBoard')._(': ')._('Cannot update used tracker'));
+			$this->setError(_('Taskboard')._(': ')._('Cannot update used tracker'));
 			return false;
 		}
 
@@ -506,7 +506,7 @@ class TaskBoard extends Error {
 	function deleteUsedTracker($tracker_id) {
 		$res = db_query_params('DELETE FROM plugin_taskboard_trackers WHERE group_artifact_id = $1', array($tracker_id));
 		if (!$res) {
-			$this->setError(_('TaskBoard')._(': ')._('Cannot delete used tracker'));
+			$this->setError(_('Taskboard')._(': ')._('Cannot delete used tracker'));
 			return false;
 		}
 
@@ -743,7 +743,7 @@ class TaskBoard extends Error {
 	function getColumns() {
 		$res = db_query_params('SELECT * FROM plugin_taskboard_columns WHERE taskboard_id=$1 ORDER BY order_num', array ($this->getID()));
 		if (!$res) {
-			$this->setError(_('TaskBoard')._(': ')._('Cannot get list of columns.'));
+			$this->setError(_('Taskboard')._(': ')._('Cannot get list of columns.'));
 			return false;
 		}
 
@@ -894,7 +894,7 @@ class TaskBoard extends Error {
 	function getReleases() {
 		$res = db_query_params('SELECT * FROM plugin_taskboard_releases WHERE taskboard_id = $1 ORDER BY start_date, end_date', array($this->getID()));
 		if (!$res) {
-			$this->setError(_('TaskBoard')._(': ')._('Cannot get list of releases.'));
+			$this->setError(_('Taskboard')._(': ')._('Cannot get list of releases.'));
 			return false;
 		}
 
@@ -922,7 +922,7 @@ class TaskBoard extends Error {
 				)
 			);
 		if (!$res) {
-			$this->setError(_('TaskBoard')._(': ')._('Cannot get current release.'));
+			$this->setError(_('Taskboard')._(': ')._('Cannot get current release.'));
 			return false;
 		} else {
 			$row =  db_fetch_array($res);
@@ -975,7 +975,7 @@ class TaskBoard extends Error {
 				array($this->getID())
 			);
 		if (!$res) {
-			$this->setError(_('TaskBoard')._(': ')._('Cannot get used resolutions'));
+			$this->setError(_('Taskboard')._(': ')._('Cannot get used resolutions'));
 			return false;
 		}
 
