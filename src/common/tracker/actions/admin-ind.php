@@ -6,7 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010, FusionForge Team
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2012-2015, Franck Villaume - TrivialDev
+ * Copyright 2012-2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -101,24 +101,18 @@ if (!isset($at_arr) || !$at_arr || count($at_arr) < 1) {
 	echo $HTML->listTableTop($tablearr);
 
 	for ($j = 0; $j < count($at_arr); $j++) {
-		echo '
-		<tr '. $HTML->boxGetAltRowStyle($j) . '>
-			<td><a href="'.util_make_url ('/tracker/admin/?atid='. $at_arr[$j]->getID() . '&amp;group_id='.$group_id).'">' .
-				html_image("ic/tracker20w.png","20","20") . ' &nbsp;'.
-				$at_arr[$j]->getName() .'</a>
-			</td>
-			<td>'.$at_arr[$j]->getDescription() .'
-			</td>
-		</tr>';
+		$cells = array();
+		$cells[][] = util_make_link('/tracker/admin/?atid='.$at_arr[$j]->getID().'&group_id='.$group_id, html_image('ic/tracker20w.png', 20, 20).'&nbsp;'.
+						$at_arr[$j]->getName());
+		$cells[][] = $at_arr[$j]->getDescription();
+		echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($j, true)), $cells);
 	}
 	echo $HTML->listTableBottom();
 
 	$roadmap_factory = new RoadmapFactory($group);
 	$roadmaps = $roadmap_factory->getRoadmaps(true);
 	if (!empty($roadmaps)) {
-		echo '	<p id="roadmapadminlink">
-			'.util_make_link('/tracker/admin/?group_id='.$group_id.'&admin_roadmap=1', _('Manage your roadmaps.')).'
-			</p>';
+		echo html_e('p', array('id' => 'roadmapadminlink'), util_make_link('/tracker/admin/?group_id='.$group_id.'&admin_roadmap=1', _('Manage your roadmaps.')));
 	}
 }
 
