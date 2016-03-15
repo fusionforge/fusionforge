@@ -6,6 +6,7 @@ FusionForge 6.0.4:
 * Accounts: passwords hashes: increase md5crypt salt length to 8; fix invalid Blowfish salt (Inria)
 * Accounts: passwords hashes: add support for SHA256/SHA512 (Inria)
 * Accounts: fix supported ssh keys types - again (Inria)
+* Docman: fix folder tree to support Chrome correctly. open/closing folders [#810] (TrivialDev)
 * FRS: fix shownotes.php link. Use new url form. view=shownotes (TrivialDev)
 * FRS: frs latest zip migration script hardening (TrivialDev)
 * MTA-Exim4: restart exim4 on install
