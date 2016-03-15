@@ -155,7 +155,7 @@ if (forge_get_config('require_unique_email')) {
     </label>
 </p>
 <p>
-<?php echo _('Password (min. 6 chars)').utils_requiredField()._(':'); ?><br />
+<?php echo _('Password (min. 8 chars)').utils_requiredField()._(':'); ?><br />
     <label for="password1">
         <input id="password1" type="password" required="required" name="password1"/>
     </label>
@@ -208,7 +208,7 @@ if($toDisplay != "") {
 <?php echo html_get_ccode_popup('ccode', $ccode); ?>
 </p>
 <p>
-<?php echo _('Email Address') . _(': ') . utils_requiredField(); ?>
+<?php echo _('Email Address').utils_requiredField()._(':'); ?>
 <br />
 <em>
 <?php printf(_('This email address will be verified before account activation. You will receive a mail forward account at &lt;loginname@%s&gt; that will forward to this address.'), forge_get_config('users_host')); ?>
