@@ -2,7 +2,7 @@
 /**
  * FusionForge document manager
  *
- * Copyright 2011-2016, Franck Villaume - TrivialDev
+ * Copyright 2011-2014,2016, Franck Villaume - TrivialDev
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2013, French Ministry of National Education
  * http://fusionforge.org
@@ -236,9 +236,10 @@ class DocumentManager extends Error {
 					if ($localDg->getState() == 5) {
 						$linkname .= ' '._('(private)');
 					}
-					echo html_ao('li', array('id' => 'leaf-'.$subGroupIdValue, 'class' => $liclass)).util_make_link($link, $linkname, array('title'=>$lititle)).$nbDocsLabel;
+					//use &nbsp + inline to support Chrome browser correctly
+					echo html_ao('li', array('id' => 'leaf-'.$subGroupIdValue, 'class' => $liclass)).'&nbsp;'.util_make_link($link, $localDg->getName(), array('title'=>$lititle, 'style' => 'display: inline')).$nbDocsLabel;
 				} else {
-					echo html_ao('li', array('id' => 'leaf-'.$subGroupIdValue, 'class' => $liclass)).util_make_link($link, $localDg->getName()).$nbDocsLabel;
+					echo html_ao('li', array('id' => 'leaf-'.$subGroupIdValue, 'class' => $liclass)).'&nbsp;'.util_make_link($link, $localDg->getName(), array('style' => 'display: inline')).$nbDocsLabel;
 				}
 				if ($dg->getSubgroup($subGroupIdValue, $doc_group_stateid)) {
 					echo html_ao('ul', array('class' => 'simpleTreeMenu'));
