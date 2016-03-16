@@ -4,7 +4,7 @@
  *
  * Copyright 2009, Roland Mas
  * Copyright 2009, Mehdi Dogguy <mehdi@debian.org>
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2014,2016, Franck Villaume - TrivialDev
  * Copyright © 2013
  *	Thorsten Glaser <t.glaser@tarent.de>
  * http://fusionforge.org
@@ -81,7 +81,7 @@ control over it to the project's administrator.");
 			if (!$add_num) {
 				$add_num = 0;
 			}
-			echo ' (Git: '.sprintf(_('<strong>%1$s</strong> updates, <strong>%2$s</strong> adds'), number_format($commit_num, 0), number_format($add_num, 0)).')';
+			$params['result'] .= ' (Git: '.sprintf(_('<strong>%1$s</strong> updates, <strong>%2$s</strong> adds'), number_format($commit_num, 0), number_format($add_num, 0)).')';
 		}
 	}
 

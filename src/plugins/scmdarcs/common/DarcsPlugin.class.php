@@ -3,7 +3,7 @@
  * FusionForge Darcs plugin
  *
  * Copyright 2009, Roland Mas
- * Copyright 2013-2014, Franck Villaume - TrivialDev
+ * Copyright 2013-2014,2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -87,7 +87,7 @@ over it to the project's administrator.");
 			if (!$add_num) {
 				$add_num=0;
 			}
-			echo ' (Darcs: '.sprintf(_('<strong>%1$s</strong> updates, <strong>%2$s</strong> adds'), number_format($commit_num, 0), number_format($add_num, 0)).")";
+			$params['result'] .= ' (Darcs: '.sprintf(_('<strong>%1$s</strong> updates, <strong>%2$s</strong> adds'), number_format($commit_num, 0), number_format($add_num, 0)).")";
 		}
 	}
 
