@@ -156,7 +156,7 @@ page edits displayed on activity tab, and multi-project wiki preferences.");
 
 					$pat = '_g'.$group_id.'_';
 					$len = strlen($pat)+1;
-                    $encoding = pg_client_encoding();
+					$encoding = pg_client_encoding();
 					// @ToDo: to remove after wiki tables convert
 					pg_set_client_encoding("iso-8859-1");
 					$wres = db_query_params ("SELECT plugin_wiki_page.id AS id,
