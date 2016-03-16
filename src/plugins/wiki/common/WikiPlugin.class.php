@@ -4,6 +4,7 @@
  * Wiki Search Engine for Fusionforge
  *
  * Copyright 2006 (c) Alain Peyrat
+ * Copyright 2016, Franck Villaume - TrivialDev
  *
  * This file is part of Fusionforge.
  *
@@ -131,12 +132,11 @@ page edits displayed on activity tab, and multi-project wiki preferences.");
 				return;
 			}
 			if ($project->usesPlugin($this->name)) {
-				echo '<div class="public-area-box">';
-				print '<a href="'. util_make_url ('/wiki/g/'.$project->getUnixName().'/HomePage').'">';
-				print html_image("ic/wiki20g.png","20","20",array("alt"=>"Wiki"));
-				print ' Wiki';
-				print '</a>';
-				echo '</div>';
+				$params['result'] .= '<div class="public-area-box">';
+				$params['result'] .= util_make_link('/wiki/g/'.$project->getUnixName().'/HomePage',
+									html_image('ic/wiki20g.png', 20, 20, array('alt' => 'Wiki')),
+									'&nbsp;'.'Wiki');
+				$params['result'] .= '</div>';
 			}
 		} elseif ($hookname == 'activity') {
 			$group = group_get_object($params['group']);
