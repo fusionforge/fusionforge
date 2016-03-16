@@ -134,7 +134,7 @@ page edits displayed on activity tab, and multi-project wiki preferences.");
 			if ($project->usesPlugin($this->name)) {
 				$params['result'] .= '<div class="public-area-box">';
 				$params['result'] .= util_make_link('/wiki/g/'.$project->getUnixName().'/HomePage',
-									html_image('ic/wiki20g.png', 20, 20, array('alt' => 'Wiki')),
+									html_image('ic/wiki20g.png', 20, 20, array('alt' => 'Wiki')).
 									'&nbsp;'.'Wiki');
 				$params['result'] .= '</div>';
 			}

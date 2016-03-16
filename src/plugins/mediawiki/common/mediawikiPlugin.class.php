@@ -115,7 +115,7 @@ _("This plugin allows each project to embed Mediawiki under a tab.");
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['result'] .= '<div class="public-area-box">';
 				$params['result'] .= util_make_link('/plugins/mediawiki/wiki/'.$project->getUnixName().'/index.php',
-							html_abs_image(util_make_url('/plugins/mediawiki/wiki/'.$project->getUnixName().'/skins/monobook/wiki.png'),'20','20',array('alt'=>'Mediawiki')),
+							html_abs_image(util_make_url('/plugins/mediawiki/wiki/'.$project->getUnixName().'/skins/monobook/wiki.png'),'20','20',array('alt'=>'Mediawiki')).
 							'&nbsp;'.'Mediawiki');
 				$params['result'] .= '</div>';
 			}
