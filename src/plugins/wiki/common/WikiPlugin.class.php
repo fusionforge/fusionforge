@@ -75,7 +75,7 @@ page edits displayed on activity tab, and multi-project wiki preferences.");
 			$group_id = $params['group_id'];
 			$group = group_get_object($group_id);
 			if ($group->usesPlugin($this->name)) {
-				echo '<p><a href="/wiki/wikiadmin.php?group_id=' . $group->getID() . '&amp;type=admin&amp;pluginname=' . $this->name . '">' . _('Wiki Admin') . '</a></p>';
+				echo html_e('p', array(), util_make_link('/wiki/wikiadmin.php?group_id='.$group->getID().'&type=admin&pluginname='.$this->name, _('Wiki Admin')));
 			}
 		} elseif ($hookname == 'search_engines') {
 			// FIXME: when the hook is called, the group_id is not set.
