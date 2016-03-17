@@ -1,9 +1,6 @@
 <?php
 /**
- * Copyright (c) STMicroelectronics, 2008. All Rights Reserved.
- *
- * Originally written by Manuel VACELET, 2008.
- *
+ * Copyright 2016, Franck Villaume - TrivialDev
  * This file is a part of Fusionforge.
  *
  * Fusionforge is free software; you can redistribute it and/or modify
@@ -17,16 +14,21 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
+ * along with Fusionforge. If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once 'common/valid/Rule.class.php';
+require_once 'Widget.class.php';
+require_once $gfcommon.'include/tag_cloud.php';
 
-/**
- * Check that value match widget owner format
- */
-class Rule_Widget_Owner extends Rule {
-	function isValid($val) {
-		return (preg_match('/^([a-z][0-9]+)$/', $val) === 1);
+class Widget_HomeVersion extends Widget {
+	function __construct() {
+		$this->Widget('homeversion');
+	}
+	function getTitle() {
+		return _('System Information');
+	}
+	function getContent() {
+		$ff = FusionForge::getInstance();
+		return sprintf(_('%s is running %s version %s'), forge_get_config('forge_name'), $ff->software_name, $ff->software_version);
 	}
 }

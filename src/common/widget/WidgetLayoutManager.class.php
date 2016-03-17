@@ -53,9 +53,12 @@ class WidgetLayoutManager {
 			if($owner_type == self::OWNER_TYPE_USER) {
 				$this->createDefaultLayoutForUser($owner_id);
 				$this->displayLayout($owner_id,$owner_type);
-			} else {
-				$this->createDefaultLayoutForProject($owner_id,1);
+			} elseif ($owner_type == self::OWNER_TYPE_GROUP) {
+				$this->createDefaultLayoutForProject($owner_id, 1);
 				$this->displayLayout($owner_id,$owner_type);
+			} elseif ($owner_type == self::OWNER_TYPE_HOME) {
+				$this->createDefaultLayoutForForge($owner_id);
+				$this->displayLayout($owner_id, $owner_type);
 			}
 		} else {
 			$sql = "SELECT l.*
@@ -119,7 +122,9 @@ class WidgetLayoutManager {
 				}
 				break;
 			case self::OWNER_TYPE_HOME:
-				//Only site admin
+				if (forge_check_global_perm('forge_admin')) { //Only site admin
+					$readonly = false;
+				}
 				break;
 			default:
 				break;
@@ -169,6 +174,36 @@ class WidgetLayoutManager {
 			    foreach($widgets as $widget) {
 			    $sql .= ",($13, $14, 1, $15, $16, $17)";
 			    }*/
+		} else
+			$success = false;
+		if (!$success) {
+			$success = db_error();
+			db_rollback();
+			exit_error(sprintf(_('DB Error: %s'), $success), 'widgets');
+		}
+		db_commit();
+	}
+
+	function createDefaultLayoutForForge($owner_id) {
+		db_begin();
+		$success = true;
+		$sql = "INSERT INTO owner_layouts (owner_id, owner_type, layout_id, is_default) values ($1, $2, $3, $4)";
+		if (db_query_params($sql, array($owner_id, self::OWNER_TYPE_HOME, 1, 1))) {
+
+			$sql = "INSERT INTO layouts_contents(owner_id, owner_type, layout_id, column_id, name, rank) VALUES ";
+
+			$args[] = "($1, $2, 1, 2, 'hometagcloud', 0)";
+			$args[] = "($1, $2, 1, 2, 'homestats', 1)";
+			$args[] = "($1, $2, 1, 2, 'homeversion', 2)";
+			$args[] = "($1, $2, 1, 1, 'homewelcome', 0)";
+			$args[] = "($1, $2, 1, 1, 'homelatestnews', 1)";
+
+			foreach($args as $a) {
+				if (!db_query_params($sql.$a,array(0, self::OWNER_TYPE_HOME))) {
+					$success = false;
+					break;
+				}
+			}
 		} else
 			$success = false;
 		if (!$success) {
@@ -665,6 +700,8 @@ class WidgetLayoutManager {
 			}
 		} elseif ($owner_type == self::OWNER_TYPE_USER) {
 			$link = util_make_uri('/my/');
+		} elseif ($owner_type == self::OWNER_TYPE_HOME) {
+			$link = util_make_uri('/');
 		}
 		$feedback .= _('Your dashboard has been updated.');
 	}

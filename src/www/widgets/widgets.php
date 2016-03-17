@@ -1,7 +1,7 @@
 <?php
 /**
  *
- * Copyright 2011-2014, Franck Villaume - TrivialDev
+ * Copyright 2011-2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -31,7 +31,8 @@ html_use_jquery();
 use_javascript('/widgets/scripts/LayoutController.js');
 
 $hp = Codendi_HTMLPurifier::instance();
-if (isLogged()) {
+
+if (session_loggedin()) {
 
 	$request =& HTTPRequest::instance();
 	$lm = new WidgetLayoutManager();
@@ -39,7 +40,6 @@ if (isLogged()) {
 	$vLayoutId->required();
 	if ($request->valid($vLayoutId)) {
 		$layout_id = $request->get('layout_id');
-
 		$vOwner = new Valid_Widget_Owner('owner');
 		$vOwner->required();
 		if ($request->valid($vOwner)) {
@@ -74,6 +74,20 @@ if (isLogged()) {
 						} else {
 							$GLOBALS['Response']->redirect('/projects/'.$project->getUnixName().'/');
 						}
+					}
+					break;
+				case WidgetLayoutManager::OWNER_TYPE_HOME:
+					if (forge_check_global_perm('forge_admin')) {
+						if (HTTPRequest::instance()->get('update') == 'layout') {
+							$title = _('Customize Layout');
+						} else {
+							$title = _('Add widgets');
+						}
+						site_header(array('title'=>$title, 'toptab'=>'home'));
+						$lm->displayAvailableWidgets(0, WidgetLayoutManager::OWNER_TYPE_HOME, $layout_id);
+						site_footer();
+					} else {
+						$GLOBALS['Response']->redirect('/');
 					}
 					break;
 				default:

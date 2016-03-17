@@ -2,6 +2,7 @@ FusionForge 6.X:
 * Accounts: minimum password length is now 8
 * Spellcheck (Anders Jonsson)
 * Site Admin: add paging system in userlist page [#799] (TrivialDev)
+* Site Admin: support widgets for forge home page (TrivialDev)
 * Projects Page: add paging system in full_list and tag_cloud subpages (TrivialDev)
 * SearchEngine: support only FTI queries (TrivialDev)
 * Docman: limit number of returned documents on search query. Use paging system [#794] (TrivialDev)

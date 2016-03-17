@@ -55,6 +55,9 @@ require_once $gfcommon.'widget/Widget_ProjectLatestCommits.class.php';
 //require_once 'common/widget/Widget_ProjectSvnStats.class.php';
 require_once $gfcommon.'widget/Widget_MyMonitoredDocuments.class.php';
 
+require_once $gfcommon.'widget/Widget_HomeTagCloud.class.php';
+require_once $gfcommon.'widget/Widget_HomeVersion.class.php';
+
 /**
 * "Codendi" Layout Widget
 *
@@ -172,6 +175,12 @@ require_once $gfcommon.'widget/Widget_MyMonitoredDocuments.class.php';
 	static  function & getInstance($widget_name) {
 		$o = null;
 		switch($widget_name) {
+			case 'hometagcloud':
+				$o = new Widget_HomeTagCloud();
+				break;
+			case 'homeversion':
+				$o = new Widget_HomeVersion();
+				break;
 			case 'mysurveys':
 				$o = new Widget_MySurveys();
 				break;
@@ -306,7 +315,7 @@ require_once $gfcommon.'widget/Widget_MyMonitoredDocuments.class.php';
 						);
 				break;
 			case WidgetLayoutManager::OWNER_TYPE_HOME:
-				$widgets = array();
+				$widgets = array('hometagcloud', 'homeversion');
 				break;
 			default:
 				$widgets = array();
