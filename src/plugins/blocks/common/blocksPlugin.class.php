@@ -4,7 +4,7 @@
  * Copyright (C) 2006 Alain Peyrat, Alcatel-Lucent
  * Copyright (C) 2010 Alain Peyrat <aljeux@free.fr>
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -147,59 +147,33 @@ control over it to the project's administrator.");
 	function widget_instance($params) {
 		require_once 'common/widget/WidgetLayoutManager.class.php';
 
-		$user = UserManager::instance()->getCurrentUser();
-
-		// MY
-//		if ($params['widget'] == 'plugin_hudson_my_jobs') {
-//			require_once('hudson_Widget_MyMonitoredJobs.class.php');
-//			$params['instance'] = new hudson_Widget_MyMonitoredJobs($this);
-//		}
-//		if ($params['widget'] == 'plugin_hudson_my_joblastbuilds') {
-//			require_once('hudson_Widget_JobLastBuilds.class.php');
-//			$params['instance'] = new hudson_Widget_JobLastBuilds(WidgetLayoutManager::OWNER_TYPE_USER, $user->getId());
-//		}
-//		if ($params['widget'] == 'plugin_hudson_my_jobtestresults') {
-//			require_once('hudson_Widget_JobTestResults.class.php');
-//			$params['instance'] = new hudson_Widget_JobTestResults(WidgetLayoutManager::OWNER_TYPE_USER, $user->getId());
-//		}
-//		if ($params['widget'] == 'plugin_hudson_my_jobtesttrend') {
-//			require_once('hudson_Widget_JobTestTrend.class.php');
-//			$params['instance'] = new hudson_Widget_JobTestTrend(WidgetLayoutManager::OWNER_TYPE_USER, $user->getId());
-//		}
-//		if ($params['widget'] == 'plugin_hudson_my_jobbuildhistory') {
-//			require_once('hudson_Widget_JobBuildHistory.class.php');
-//			$params['instance'] = new hudson_Widget_JobBuildHistory(WidgetLayoutManager::OWNER_TYPE_USER, $user->getId());
-//		}
-//		if ($params['widget'] == 'plugin_hudson_my_joblastartifacts') {
-//			require_once('hudson_Widget_JobLastArtifacts.class.php');
-//			$params['instance'] = new hudson_Widget_JobLastArtifacts(WidgetLayoutManager::OWNER_TYPE_USER, $user->getId());
-//		}
-
 		// PROJECT
 		if ($params['widget'] == 'plugin_blocks_project_summary') {
 			require_once 'blocks_Widget_ProjectSummary.class.php';
 			$params['instance'] = new blocks_Widget_ProjectSummary(WidgetLayoutManager::OWNER_TYPE_GROUP, $GLOBALS['group_id']);
 		}
-	}
-	function widgets($params) {
-		$group = group_get_object($GLOBALS['group_id']);
-		if ( !$group || !$group->usesPlugin ( $this->name ) ) {
-			return false;
+		// FORGE HOMEPAGE
+		if ($params['widget'] == 'plugin_blocks_home_summary') {
+			require_once 'blocks_Widget_HomeSummary.class.php';
+			$params['instance'] = new blocks_Widget_HomeSummary(WidgetLayoutManager::OWNER_TYPE_HOME, 0);
 		}
 
-		require_once 'common/widget/WidgetLayoutManager.class.php';
-//		if ($params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_USER) {
-//			$params['codendi_widgets'][] = 'plugin_hudson_my_jobs';
-//			$params['codendi_widgets'][] = 'plugin_hudson_my_joblastbuilds';
-//			$params['codendi_widgets'][] = 'plugin_hudson_my_jobtestresults';
-//			$params['codendi_widgets'][] = 'plugin_hudson_my_jobtesttrend';
-//			$params['codendi_widgets'][] = 'plugin_hudson_my_jobbuildhistory';
-//			$params['codendi_widgets'][] = 'plugin_hudson_my_joblastartifacts';
-//		}
+
+	}
+	function widgets($params) {
 		if ($params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_GROUP) {
-			$params['codendi_widgets'][] = 'plugin_blocks_project_summary';
+			$group = group_get_object($GLOBALS['group_id']);
+			if ( !$group || !$group->usesPlugin ( $this->name ) ) {
+				return false;
+			}
+			require_once 'common/widget/WidgetLayoutManager.class.php';
+			$params['fusionforge_widgets'][] = 'plugin_blocks_project_summary';
+			return true;
+		} else if ($params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_HOME) {
+			$params['fusionforge_widgets'][] = 'plugin_blocks_home_summary';
+			return true;
 		}
-		return true;
+		return false;
 	}
 }
 
