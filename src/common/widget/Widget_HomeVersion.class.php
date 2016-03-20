@@ -18,15 +18,16 @@
  */
 
 require_once 'Widget.class.php';
-require_once $gfcommon.'include/tag_cloud.php';
 
 class Widget_HomeVersion extends Widget {
 	function __construct() {
 		$this->Widget('homeversion');
 	}
+
 	function getTitle() {
 		return _('System Information');
 	}
+
 	function getContent() {
 		$ff = FusionForge::getInstance();
 		return sprintf(_('%s is running %s version %s'), forge_get_config('forge_name'), $ff->software_name, $ff->software_version);
