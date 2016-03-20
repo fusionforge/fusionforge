@@ -68,6 +68,7 @@ function show_features_boxes() {
 }
 
 function show_top_downloads() {
+	global $HTML;
 	// TODO yesterday is now defined as two days ago.  Quick fix
 	//      to allow download list to be cached before nightly
 	//      aggregation is done. jbyers 2001.03.19
@@ -104,7 +105,7 @@ function show_top_downloads() {
 		}
 	}
 	if ( $return == "" ) {
-		return _('No stats available');
+		return $HTML->information(_('No stats available'));
 	} else {
 		$return = '<table>' . $return . "</table>\n";
 	}
@@ -196,6 +197,7 @@ function show_newest_projects() {
 }
 
 function show_highest_ranked_users() {
+	global $HTML;
 	//select out the users information to show the top users on the site
 	$res = db_query_params('SELECT users.user_name,users.user_id,users.realname,user_metric.metric	FROM user_metric,users WHERE users.user_id=user_metric.user_id AND user_metric.ranking < 11 AND users.status != $1 ORDER BY ranking ASC',
 				array ('D'));
@@ -204,7 +206,7 @@ function show_highest_ranked_users() {
 	} else {
 		$rows = db_numrows($res);
 		if ($rows < 1) {
-			return  _('No stats available');
+			return  $HTML->information(_('No stats available'));
 		} else {
 			$return = '';
 			for ($i=0; $i < $rows; $i++) {
@@ -219,6 +221,7 @@ function show_highest_ranked_users() {
 }
 
 function show_highest_ranked_projects() {
+	global $HTML;
 	$stats = new Stats();
 	$result = $stats->getMostActiveStats ('week', 0) ;
 	$return = '' ;
@@ -239,7 +242,7 @@ function show_highest_ranked_projects() {
 		$count++ ;
 	}
 	if ( $return == "" ) {
-		return _('No stats available');
+		return  $HTML->information(_('No stats available'));
 	} else {
 		$return = '<table>' . $return . "</table>\n";
 	}
