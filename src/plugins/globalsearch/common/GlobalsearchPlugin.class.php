@@ -5,6 +5,7 @@
  * Copyright 2003-2004, GForge, LLC
  * Copyright 2007-2009, Roland Mas
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright 2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -38,14 +39,18 @@ hosted on these forges from your own.");
 
 	function CallHook($hookname, &$params) {
 		global $HTML;
-
 		if ($hookname == "site_admin_option_hook") {
-			print '<li><a href="/plugins/globalsearch/edit_assoc_sites.php">'._("Admin Associated Forges"). ' [' . _('Global Search plugin') . ']</a></li>';
+			echo html_e('li', array(), $this->getAdminOptionLink());
 		} elseif ($hookname == "features_boxes_top") {
 			(isset($params['returned_text'])) ? $params['returned_text'] .= $HTML->boxTop(_('Associated Forges'), 'Associated_Forges') : $params['returned_text'] = $HTML->boxTop(_('Associated Forges'), 'Associated_Forges');
 			$params['returned_text'] .= $this->show_top_n_assocsites(5);
 			$params['returned_text'] .= $this->search_box();
+			$params['returned_text'] .= $HTML->boxBottom();
 		}
+	}
+
+	function getAdminOptionLink() {
+		return util_make_link('/plugins/globalsearch/edit_assoc_sites.php', _("Admin Associated Forges"). ' [' . _('Global Search plugin') . ']');
 	}
 
 	/**
@@ -59,7 +64,7 @@ hosted on these forges from your own.");
 		$return .= globalsearch_box();
 		$return .= $HTML->boxMiddle(_("Top associated forges"));
 		$return .= show_top_n_assocsites(5);
-		$return .= "<div align=\"center\">".sprintf(_("Total projects in associated forges: <b>%1$d</b>"),stats_get_total_projects_assoc_sites()). "</div>";
+		$return .= '<div align="center">'.sprintf(_("Total projects in associated forges: <b>%1$d</b>"),stats_get_total_projects_assoc_sites()). "</div>";
 		$return .= $HTML->boxBottom();
 		return $return;
 	}
@@ -70,12 +75,11 @@ hosted on these forges from your own.");
 	function search_box() {
 		global $HTML, $gwords, $gexact, $otherfreeknowledge;
 
-		$return = '<form method="post" action="/plugins/globalsearch/">';
+		$return = $HTML->openForm(array('action' => '/plugins/globalsearch/', 'method' => 'post'));
 		$return .= $HTML->html_text_input_img_submit('gwords', 'magnifier.png', 'search_associated_forges', '', $gwords, _('Search associated forges'));
 		$return .= $HTML->html_checkbox('otherfreeknowledge', '1', 'search_associated_forges_otherfreeknowledge', _('Extend search to include non-software projects'), $otherfreeknowledge);
 		$return .= $HTML->html_checkbox('gexact', '1', 'search_associated_forges_exact', _('Require all words'), $gexact);
-		$return .= '
-		</form>';
+		$return .= $HTML->closeForm();
 		return $return;
 	}
 
@@ -86,6 +90,7 @@ hosted on these forges from your own.");
 	 * @return	string	html code to display
 	 */
 	function show_top_n_assocsites($num_assocsites) {
+		global $HTML;
 		$res_top_n_assoc = db_query_params('
 							SELECT a.title, a.link, count(*) AS numprojects
 							FROM plugin_globalsearch_assoc_site_project p, plugin_globalsearch_assoc_site a
@@ -96,7 +101,7 @@ hosted on these forges from your own.");
 							array('t', $num_assocsites));
 
 		if (db_numrows($res_top_n_assoc) == 0) {
-			return _('No stats available')." ".db_error();
+			return $HTML->information(_('No stats available')." ".db_error());
 		}
 
 		$return = '<table class="underline-link">';
