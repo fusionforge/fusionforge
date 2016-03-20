@@ -43,6 +43,7 @@ class Widget_HomeStats extends Widget {
 		$return .= show_highest_ranked_projects();
 		$return .= $HTML->boxMiddle(_('Recently Registered Projects'), 'Recently_Registered_Projects');
 		$return .= show_newest_projects();
+		$params['return'] = &$return;
 		plugin_hook_by_reference("widget_homestats", $params);
 		return $return;
 	}
