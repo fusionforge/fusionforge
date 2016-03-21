@@ -31,14 +31,15 @@
 
 require dirname(__FILE__).'/../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
-require_once ($gfcommon.'common/include/utils.php');
-require_once ('libphp-snoopy/Snoopy.class.php');
+require_once $gfcommon.'common/include/utils.php';
+require_once 'libphp-snoopy/Snoopy.class.php';
 
 $cvs_binary_version = get_cvs_binary_version () ;
 
 if ($cvs_binary_version != "1.12" &&
 	$cvs_binary_version != "1.11" )
 	$cvs_binary_version = "1.12";
+
 /**
  * It returns the usage and exit program
  *
