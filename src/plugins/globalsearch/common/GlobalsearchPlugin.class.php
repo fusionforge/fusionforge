@@ -35,6 +35,8 @@ declare a list of other FusionForge sites, and search for projects
 hosted on these forges from your own.");
 		$this->_addHook('site_admin_option_hook');
 		$this->_addHook('features_boxes_top');
+		$this->_addHook('widget_instance');
+		$this->_addHook('widgets');
 	}
 
 	function CallHook($hookname, &$params) {
@@ -76,7 +78,7 @@ hosted on these forges from your own.");
 		global $HTML, $gwords, $gexact, $otherfreeknowledge;
 
 		$return = $HTML->openForm(array('action' => '/plugins/globalsearch/', 'method' => 'post'));
-		$return .= $HTML->html_text_input_img_submit('gwords', 'magnifier.png', 'search_associated_forges', '', $gwords, _('Search associated forges'));
+		$return .= $HTML->html_text_input_img_submit('gwords', 'magnifier20.png', 'search_associated_forges', '', $gwords, _('Search associated forges'));
 		$return .= $HTML->html_checkbox('otherfreeknowledge', '1', 'search_associated_forges_otherfreeknowledge', _('Extend search to include non-software projects'), $otherfreeknowledge);
 		$return .= $HTML->html_checkbox('gexact', '1', 'search_associated_forges_exact', _('Require all words'), $gexact);
 		$return .= $HTML->closeForm();
@@ -137,6 +139,26 @@ hosted on these forges from your own.");
 		} else {
 			return _('No stats available')." ".db_error();
 		}
+	}
+
+
+	function widget_instance($params) {
+		require_once 'common/widget/WidgetLayoutManager.class.php';
+
+		// FORGE HOMEPAGE
+		if ($params['widget'] == 'plugin_globalsearch_home') {
+			require_once 'globalsearch_Widget_Home.class.php';
+			$params['instance'] = new globalsearch_Widget_Home(WidgetLayoutManager::OWNER_TYPE_HOME, 0);
+		}
+
+
+	}
+	function widgets($params) {
+		if ($params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_HOME) {
+			$params['fusionforge_widgets'][] = 'plugin_globalsearch_home';
+			return true;
+		}
+		return false;
 	}
 }
 
