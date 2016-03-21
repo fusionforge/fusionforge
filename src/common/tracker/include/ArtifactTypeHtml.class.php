@@ -118,7 +118,7 @@ class ArtifactTypeHtml extends ArtifactType {
 		$title_arr[]=_('Customize List');
 
 		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&add_canned=1';
-		$title_arr[]=_('Add/Update Canned Responses');
+		$title_arr[]=_('Manage Canned Responses');
 
 		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&clone_tracker=1';
 		$title_arr[]=_('Clone Tracker');
