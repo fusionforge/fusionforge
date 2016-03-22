@@ -256,6 +256,7 @@ class Layout extends Error {
 		$this->headerHTMLDeclaration();
 		echo html_ao('head');
 		echo html_e('meta', array('http-equiv' => 'Content-Type', 'content' => 'text/html; charset=utf-8'));
+		echo html_e('meta', array('http-equiv' => 'X-UA-Compatible', 'content' => 'IE=9; IE=8; IE=EDGE'));
 		if (isset($params['meta-description'])) {
 			echo html_e('meta', array('name' => 'description', 'content' => $params['meta-description']));
 		}
