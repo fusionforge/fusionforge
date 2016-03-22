@@ -32,7 +32,6 @@ class globalsearch_Widget_Home extends Widget {
 		}
 		$this->Widget($this->widget_id);
 		$this->setOwner($owner_id, $owner_type);
-
 	}
 
 	function getTitle() {
@@ -48,4 +47,3 @@ class globalsearch_Widget_Home extends Widget {
 		return $pluginObject->search_box();
 	}
 }
-
