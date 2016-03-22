@@ -598,10 +598,9 @@ some control over it to the project's administrator.");
 
 			// final checks
 			if (!xml_parse($xml_parser, '', true))
-				exit_error('Unable to parse XML with error '
+				$this->setError('Unable to parse XML with error '
 						   . xml_error_string(xml_get_error_code($xml_parser))
-						   . ' on line ' . xml_get_current_line_number($xml_parser),
-					'activity');
+						   . ' on line ' . xml_get_current_line_number($xml_parser));
 			xml_parser_free($xml_parser);
 
 			if ($adds > 0 || $updates > 0 || $commits > 0 || $deletes > 0) {
@@ -686,10 +685,9 @@ some control over it to the project's administrator.");
 
 			// final checks
 			if (!xml_parse($xml_parser, '', true))
-				exit_error('Unable to parse XML with error '
+				$this->setError('Unable to parse XML with error '
 						   . xml_error_string(xml_get_error_code($xml_parser))
-						   . ' on line ' . xml_get_current_line_number($xml_parser),
-					'activity');
+						   . ' on line ' . xml_get_current_line_number($xml_parser));
 			xml_parser_free($xml_parser);
 
 			if ($adds > 0 || $updates > 0 || $commits > 0 || $deletes > 0) {
