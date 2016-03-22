@@ -1231,6 +1231,7 @@ control over it to the project's administrator.");
 			$f = fopen($filename, 'r');
 			unlink($filename);
 
+			$i = 0;
 			while (!feof($f) && $data = fgets($f)) {
 				$line = trim($data);
 				$splitedLine = explode('||', $line);
