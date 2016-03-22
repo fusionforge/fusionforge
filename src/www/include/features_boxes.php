@@ -3,7 +3,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -31,8 +31,10 @@ require_once $gfcommon.'include/Stats.class.php';
 function show_features_boxes() {
 	global $HTML;
 
-	plugin_hook ("features_boxes_top", array());
-	$return = '<h2 class="skip">' . _('Features Boxes') . '</h2>';
+	$return = '';
+	$params['returned_text'] = &$return;
+	plugin_hook_by_reference('features_boxes_top', $params);
+	$return .= '<h2 class="skip">' . _('Features Boxes') . '</h2>';
 
 	if (forge_get_config('use_project_tags')) {
 		$contentTag = tag_cloud();
@@ -63,7 +65,7 @@ function show_features_boxes() {
 			   $ff->software_name,
 			   $ff->software_version);
 	$return .= $HTML->boxBottom();
-	plugin_hook ("features_boxes_bottom", array());
+	plugin_hook_by_reference('features_boxes_bottom', $params);
 	return $return;
 }
 
