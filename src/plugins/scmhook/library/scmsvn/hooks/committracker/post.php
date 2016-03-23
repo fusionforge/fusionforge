@@ -6,7 +6,7 @@
  * Portions Copyright 2004 (c) Roland Mas <99.roland.mas @nospam@ aist.enst.fr>
  * The rest Copyright 2004 (c) Francisco Gimeno <kikov @nospam@ kikov.org>
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2013,2015 Franck Villaume - TrivialDev
+ * Copyright 2013,2015-2016 Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -169,6 +169,8 @@ $vars['data'] = urlencode(serialize($SubmitVars));
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $SubmitUrl);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_POSTFIELDS, $vars);
 $result = curl_exec($ch);
