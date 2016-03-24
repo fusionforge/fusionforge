@@ -110,7 +110,16 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 			if (!$res)
 				return '404';
 
-			$arr = db_fetch_array($res);
+			if (db_numrows($res)) {
+				$arr = db_fetch_array($res);
+			} else {
+				//we setup for the specific root / folder which does not exist in database
+				$g = group_get_object($group_id);
+				$arr = array();
+				$arr['groupname'] = '/';
+				$arr['createdate'] = $g->getStartDate();
+				$arr['updatedate'] = 0;
+			}
 			if ($arr['updatedate']) {
 				$lastmodifieddate = $arr['updatedate'];
 			} else {
@@ -538,6 +547,14 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 			}
 		}
 		return '403';
+	}
+
+	function LOCK(&$options) {
+		return true;
+	}
+
+	function UNLOCK(&$options) {
+		return true;
 	}
 
 	/**
