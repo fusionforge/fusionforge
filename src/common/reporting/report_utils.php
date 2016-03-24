@@ -5,7 +5,7 @@
  * Copyright 2003-2004, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013,2015 Franck Villaume - TrivialDev
+ * Copyright 2013,2015-2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -388,7 +388,7 @@ function trackerpie_graph($group_id, $area, $SPAN, $start, $end, $atid) {
 		echo 'var plot'.$chartid.';';
 		echo 'var data = new Array();';
 		while ($row = db_fetch_array($dbres)) {
-			echo 'data.push([\''.htmlentities($row[0]).'\',\''.$row[1].'\']);';
+			echo 'data.push([\''.htmlentities($row[0]).'\','.$row[1].']);';
 		}
 		echo 'jQuery(document).ready(function(){
 			plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', [data],
@@ -400,7 +400,6 @@ function trackerpie_graph($group_id, $area, $SPAN, $start, $end, $atid) {
 							// Put data labels on the pie slices.
 							// By default, labels show the percentage of the slice.
 							showDataLabels: true,
-							dataLabels: \'percent\',
 						}
 					},
 					legend: {
