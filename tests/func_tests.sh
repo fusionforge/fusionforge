@@ -78,7 +78,7 @@ install_selenium() {
     
     # Add alias to /etc/hosts
     if ! grep -q ^$(hostname -i) /etc/hosts ; then
-	echo $(hostname -i) $(hostname) >> /etc/hosts
+	echo $(hostname -i) $(hostname -f) $(hostname)>> /etc/hosts
     fi
     grep -q "^$(hostname -i).*$(forge_get_config scm_host)" /etc/hosts || sed -i -e "s/^$(hostname -i).*/& $(forge_get_config scm_host)/" /etc/hosts
     
