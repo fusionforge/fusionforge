@@ -98,6 +98,37 @@ class Search extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("public description for projectb"));
 
 		/*
+		 * Test paging system
+		 */
+		for ($i = 1; $i <= 30; $i++) {
+			$pname = sprintf("project-x%02d",$i);
+			$this->createProject($pname);
+		}
+
+		$this->open(ROOT) ;
+		$this->waitForPageToLoad("30000");
+		$this->type("//input[@name='words']", "'public description'");
+		$this->click("//input[@name='Search']");
+		$this->waitForPageToLoad("30000");
+		$this->assertFalse($this->isTextPresent("No matches found for"));
+		$this->assertTrue($this->isTextPresent("public description for ProjectA"));
+		$this->assertTrue($this->isTextPresent("public description for projectb"));
+		$this->assertTrue($this->isTextPresent("public description for project-x15"));
+		$this->assertFalse($this->isTextPresent("public description for project-x30"));
+		$this->clickAndWait("link=Next Results");
+		$this->assertFalse($this->isTextPresent("public description for project-x15"));
+		$this->assertTrue($this->isTextPresent("public description for project-x30"));
+
+		$this->open(ROOT) ;
+		$this->waitForPageToLoad("30000");
+		$this->type("//input[@name='words']", "x15");
+		$this->click("//input[@name='Search']");
+		$this->waitForPageToLoad("30000");
+		$this->assertFalse($this->isTextPresent("No matches found for"));
+		$this->assertTrue($this->isTextPresent("public description for project-x15"));
+		$this->assertFalse($this->isTextPresent("public description for projectb"));
+
+		/*
 		 * Search for people
 		 */
 
