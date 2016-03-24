@@ -1151,6 +1151,7 @@ function report_sitetimebargraph($start, $end) {
 }
 
 function report_pm_hbar($id, $values, $ticks, $labels, $stackSeries = false) {
+	global $HTML;
 	$yMax = 0;
 	echo '<script type="text/javascript">//<![CDATA['."\n";
 	echo 'var plot'.$id.';';
