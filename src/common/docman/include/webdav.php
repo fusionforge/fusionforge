@@ -540,7 +540,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 					// we are moving the directory to a new directory
 					$dirname = $src_dg->getName();
 				}
-				if ($src_dg->update($dirname, $analysed_dest_element['doc_group'], 1)) {
+				if ($src_dg->update($dirname, $analysed_dest_element['doc_group'], 1, $src_dg->getState())) {
 					return '201';
 				}
 				return '403';
