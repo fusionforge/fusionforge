@@ -394,7 +394,9 @@ class DocumentManager extends Error {
 	 * @return	array	number per section of activities found between begin and end values
 	 */
 	function getActivity($sections, $begin, $end) {
+		$results = array();
 		for ($i = 0; $i < count($sections); $i++) {
+			$results[$sections[$i]] = 0;
 			$union = 0;
 			if (count($sections) >= 1 && $i != count($sections) -1) {
 				$union = 1;
@@ -410,7 +412,6 @@ class DocumentManager extends Error {
 			}
 		}
 		$res = db_query_qpa($qpa);
-		$results = array();
 		$j = 0;
 		while ($arr = db_fetch_array($res)) {
 			$results[$sections[$j]] = $arr['0'];
