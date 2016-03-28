@@ -308,7 +308,6 @@ control over it to the project's administrator.");
 	}
 
 	function getBrowserLinkBlock($project) {
-		global $HTML;
 		$b = html_e('h2', array(), _('Git Repository Browser'));
 		$b .= html_e('p', array(), _("Browsing the Git tree gives you a view into the current status"
 									 . " of this project's code. You may also view the complete"
@@ -355,7 +354,6 @@ control over it to the project's administrator.");
 			array($project->getID()));
 
 		if (db_numrows($result) > 0) {
-
 			$tableHeaders = array(
 			_('Name'),
 			_('Adds'),
