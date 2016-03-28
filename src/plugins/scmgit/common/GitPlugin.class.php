@@ -229,7 +229,7 @@ control over it to the project's administrator.");
 			}
 		}
 		if ($b == '') {
-			$b .= $HTML->error_msg(_('Error')._(': ')._('No access protocol has been allowed for the Git plugin in scmgit.ini: use_ssh, use_smarthttp and use_dav are disabled'));
+			$b .= $HTML->error_msg(_('Error')._(': ')._('No access protocol has been allowed for the Git plugin in scmgit.ini: use_ssh and use_smarthttp are disabled'));
 		}
 
 		if (session_loggedin()) {
