@@ -292,12 +292,12 @@ some control over it to the project's administrator.");
 		if (!$project->isActive()) return false;
 		if (!$project->usesPlugin($this->name)) return false;
 
-		$repo_prefix = forge_get_config('repos_path', 'scmsvn');
+		$repo_prefix = forge_get_config('repos_path', 'scmsvn').$project->getUnixName().'.svn/';
 		if (!is_dir($repo_prefix) && !mkdir($repo_prefix, 0755, true)) {
 			return false;
 		}
 
-		$repo = $repo_prefix.'/'.$project->getUnixName().'.svn/'.$project->getUnixName();
+		$repo = $repo_prefix.'/'.$project->getUnixName();
 
 		if (!is_dir ($repo) || !is_file ("$repo/format")) {
 			if (!mkdir($repo, 0700, true)) {
@@ -331,6 +331,7 @@ some control over it to the project's administrator.");
 		} else {
 			system("chmod g+rX-w,o-rwx $repo") ;
 		}
+		$this->regenApacheAuth($params);
 	}
 
 	function updateRepositoryList(&$params) {
