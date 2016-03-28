@@ -217,6 +217,7 @@ abstract class SCMPlugin extends Plugin {
 			// Instructions for developer access
 			$cellContent .= $this->getInstructionsForRW($project);
 
+			// Browsing
 			if ($this->browserDisplayable($project)) {
 				$cellContent .= $this->getBrowserLinkBlock($project);
 			}
@@ -227,8 +228,8 @@ abstract class SCMPlugin extends Plugin {
 			}
 			$cells[] = array($cellContent, 'style' => 'width:65%');
 
-			// Browsing
 			$cellContent =  $HTML->boxTop(_('Repository History'));
+			// Stats
 			$cellContent .=  _('Data about current and past states of the repository.');
 			if ($this->browserDisplayable($project)) {
 				$cellContent .= $this->getStatsBlock($project);
