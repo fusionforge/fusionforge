@@ -31,7 +31,7 @@ if (is_dir($svn_root)) {
 			$keep = true;
 			//check if this is a real repo with a project. reponame = unix_group_name
 			$group = group_get_object_by_name($svn_repodir);
-			if (!$group || !is_object($group) || !$group->isError()) {
+			if (!$group || !is_object($group) || $group->isError()) {
 				$keep = false;
 			}
 			if ($keep) {
