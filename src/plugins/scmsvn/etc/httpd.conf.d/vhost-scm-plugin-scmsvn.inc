@@ -2,16 +2,6 @@
   Include ${FF__core__config_path}/httpd.conf.d/disable-scripts.inc
 </Directory>
 
-# Read-only access for public repos
-<Location /anonscm/svn/>
-  DAV svn
-  SVNParentPath ${FF__scmsvn__repos_path}
-  # allow read-only browsing
-  <LimitExcept GET PROPFIND OPTIONS REPORT>
-  </LimitExcept>
-</Location>
-
-
 # SVN tools
 <Directory ${FF__core__plugins_path}/scmsvn/libexec>
   Require all granted

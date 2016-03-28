@@ -48,8 +48,7 @@ class SVNPlugin extends SCMPlugin {
 _("This plugin contains the Subversion subsystem of FusionForge. It allows
 each FusionForge project to have its own Subversion repository, and gives
 some control over it to the project's administrator.");
-		$this->svn_root_fs = forge_get_config('repos_path',
-											  $this->name);
+		$this->svn_root_fs = forge_get_config('repos_path', $this->name);
 		$this->svn_root_dav = '/svn';
 		$this->_addHook('scm_browser_page');
 		$this->_addHook('scm_update_repolist');
@@ -96,9 +95,9 @@ some control over it to the project's administrator.");
 				. '</p>';
 	}
 
-	function topModule($project) {
+	function topModule($project, $repo_name) {
 		// Check toplevel module presence
-		$repo = 'file://' . forge_get_config('repos_path', $this->name).'/'.$project->getUnixName().'/';
+		$repo = 'file://' . forge_get_config('repos_path', $this->name).'/'.$project->getUnixName().'.svn/'.$repo_name.'/';
 		$res = array ();
 		$module = 'trunk';
 		if (!(exec("svn ls '$repo'", $res) && in_array($module.'/', $res))) {
@@ -109,25 +108,49 @@ some control over it to the project's administrator.");
 	}
 
 	function getInstructionsForAnon($project) {
-		$b = '<h2>' . _('Anonymous Subversion Access') . '</h2>';
-		$b .= '<p>';
-		$b .= _("This project's SVN repository can be checked out through anonymous access with the following command(s).");
-		$b .= '</p>';
+		$repo_list = array($project->getUnixName());
+		$result = db_query_params('SELECT repo_name FROM scm_secondary_repos WHERE group_id=$1 AND next_action = $2 AND plugin_id=$3 ORDER BY repo_name',
+				array($project->getID(), SCM_EXTRA_REPO_ACTION_UPDATE, $this->getID()));
+		$rows = db_numrows($result);
 
-		$b .= '<p>' ;
-		$module = $this->topModule($project);
+		for ($i = 0; $i < $rows; $i++) {
+			$repo_list[] = db_result($result, $i, 'repo_name');
+		}
+
+		$b = html_e('h2', array(), _('Anonymous Access'));
+		$b .= html_e('p', array(),
+			ngettext("This project's SVN repository can be checked out through anonymous access with the following command(s).",
+				"This project's SVN repositories can be checked out through anonymous access with the following command(s).",
+				count($repo_list)));
+
 		if (forge_get_config('use_ssh', 'scmsvn')) {
-			$b .= '<tt>svn checkout svn://'.forge_get_config('scm_host').$this->svn_root_fs.'/'.$project->getUnixName().$module.'</tt><br />';
+			$b .= html_e('h3', array(), _('via SVN'));
+			foreach ($repo_list as $repo_name) {
+				$module = $this->topModule($project, $repo_name);
+				$b .= html_e('tt', array(), 'svn checkout svn://'.forge_get_config('scm_host').$this->svn_root_fs.'/'.$project->getUnixName().'.svn/'.$repo_name.$module).html_e('br');
+			}
 		}
 		if (forge_get_config('use_dav', 'scmsvn')) {
-				$b .= '<p><tt>svn checkout http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. forge_get_config('scm_host'). '/anonscm/svn/'.$project->getUnixName().$module.'</tt></p>' ;
+			$b .= html_e('h3', array(), _('via DAV'));
+			foreach ($repo_list as $repo_name) {
+				$module = $this->topModule($project, $repo_name);
+				$b .= html_e('tt', array(), 'svn checkout http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. forge_get_config('scm_host'). '/anonscm/svn/'.$project->getUnixName().'/'.$repo_name.$module).html_e('br');
+			}
 		}
-		$b .= '</p>';
 		return $b;
 	}
 
 	function getInstructionsForRW($project) {
+		$repo_list = array($project->getUnixName());
+		$result = db_query_params('SELECT repo_name FROM scm_secondary_repos WHERE group_id=$1 AND next_action = $2 AND plugin_id=$3 ORDER BY repo_name',
+				array($project->getID(), SCM_EXTRA_REPO_ACTION_UPDATE, $this->getID()));
+		$rows = db_numrows($result);
+		for ($i=0; $i<$rows; $i++) {
+			$repo_list[] = db_result($result, $i, 'repo_name');
+		}
+
 		$b = '';
+		$b .= html_e('h2', array(), _('Developer Access'));
 
 		$module = $this->topModule($project);
 
@@ -135,57 +158,55 @@ some control over it to the project's administrator.");
 			$u = user_get_object(user_getid());
 			$d = $u->getUnixName() ;
 			if (forge_get_config('use_ssh', 'scmsvn')) {
-				$b .= '<h2>';
-				$b .= sprintf(_('Developer %s Access via SSH'), 'Subversion');
-				$b .= '</h2>';
-				$b .= '<p>';
-				$b .= sprintf(_('Only project developers can access the %s tree via this method.'), 'Subversion');
-				$b .= ' ';
-				$b .= _('SSH must be installed on your client machine.');
-				$b .= ' ';
-				$b .= _('Enter your site password when prompted.');
-				$b .= '</p>';
-				$b .= '<p><tt>svn checkout svn+ssh://'.$d.'@' . forge_get_config('scm_host') . $this->svn_root_fs .'/'. $project->getUnixName().$module.'</tt></p>' ;
+				$b .= html_e('h3', array(), _('via SSH'));
+				$b .= html_e('p', array(),
+					ngettext('Only project developers can access the Subversion repository via this method.',
+						'Only project developers can access the Subversion repositories via this method.',
+						count($repo_list)).
+					' '. _('SSH must be installed on your client machine.'));
+				foreach ($repo_list as $repo_name) {
+					$module = $this->topModule($project, $repo_name);
+					$b .= html_e('tt', array(), 'svn checkout svn+ssh://'.$d.'@'.forge_get_config('scm_host').$this->svn_root_fs.'/'.$project->getUnixName().'.svn/'.$repo_name.$module).html_e('br');
+				}
 			}
 			if (forge_get_config('use_dav', 'scmsvn')) {
-				$b .= '<h2>';
-				$b .= _('Developer Subversion Access via DAV');
-				$b .= '</h2>';
+				$b .= html_e('h3', array(), _('via DAV'));
 				$b .= '<p>';
-				$b .= sprintf(_('Only project developers can access the %s tree via this method.'), 'Subversion');
-				$b .= ' ';
-				$b .= _('Enter your site password when prompted.');
-				$b .= '</p>';
-				$b .= '<p><tt>svn checkout --username '.$d.' http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. forge_get_config('scm_host'). '/authscm/'.$d.'/svn/'.$project->getUnixName().$module.'</tt></p>' ;
+				$b .= html_e('p', array(),
+					ngettext('Only project developers can access the Subversion repository via this method.',
+						'Only project developers can access the Subversion repositories via this method.',
+						count($repo_list)).
+					' '. _('Enter your site password when prompted.'));
+				foreach ($repo_list as $repo_name) {
+					$module = $this->topModule($project, $repo_name);
+					$b .= html_e('tt', array(), 'svn checkout --username '.$d.' http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'.forge_get_config('scm_host').'/authscm/'.$d.'/svn/'.$project->getUnixName().'/'.$repo_name.$module).html_e('br');
+				}
 			}
 		} else {
 			if (forge_get_config('use_ssh', 'scmsvn')) {
-				$b .= '<h2>';
-				$b .= sprintf(_('Developer %s Access via SSH'), 'Subversion');
-				$b .= '</h2>';
-				$b .= '<p>';
-				$b .= sprintf(_('Only project developers can access the %s tree via this method.'), 'Subversion');
-				$b .= ' ';
-				$b .= _('SSH must be installed on your client machine.');
-				$b .= ' ';
-				$b .= _('Substitute <em>developername</em> with the proper value.');
-				$b .= ' ';
-				$b .= _('Enter your site password when prompted.');
-				$b .= '</p>';
-				$b .= '<p><tt>svn checkout svn+ssh://<i>'._('developername').'</i>@' . forge_get_config('scm_host') . $this->svn_root_fs .'/'. $project->getUnixName().$module.'</tt></p>' ;
+				$b .= html_e('h3', array(), _('via SSH'));
+				$b .= html_e('p', array(),
+					ngettext('Only project developers can access the Subversion repository via this method.',
+						'Only project developers can access the Subversion repositories via this method.',
+						count($repo_list)).
+					' '. _('SSH must be installed on your client machine.'));
+				foreach ($repo_list as $repo_name) {
+					$module = $this->topModule($project, $repo_name);
+					$b .= html_e('tt', array(), 'svn checkout svn+ssh://<i>'._('developername').'</i>@'.forge_get_config('scm_host').$this->svn_root_fs.'/'.$project->getUnixName().'.svn/'.$repo_name.$module).html_e('br');
+				}
 			}
 			if (forge_get_config('use_dav', 'scmsvn')) {
-				$b .= '<h2>';
-				$b .= _('Developer Subversion Access via DAV');
-				$b .= '</h2>';
+				$b .= html_e('h3', array(), _('via DAV'));
 				$b .= '<p>';
-				$b .= sprintf(_('Only project developers can access the %s tree via this method.'), 'Subversion');
-				$b .= ' ';
-				$b .= _('Substitute <em>developername</em> with the proper value.');
-				$b .= ' ';
-				$b .= _('Enter your site password when prompted.');
-				$b .= '</p>';
-				$b .= '<p><tt>svn checkout --username <i>'._('developername').'</i> http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. forge_get_config('scm_host'). '/authscm/<i>'._('developername').'</i>/svn/'.$project->getUnixName().$module.'</tt></p>' ;
+				$b .= html_e('p', array(),
+					ngettext('Only project developers can access the Subversion repository via this method.',
+						'Only project developers can access the Subversion repositories via this method.',
+						count($repo_list)).
+					' '. _('Enter your site password when prompted.'));
+				foreach ($repo_list as $repo_name) {
+					$module = $this->topModule($project, $repo_name);
+					$b .= html_e('tt', array(), 'svn checkout --username <i>'._('developername').'</i> http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'.forge_get_config('scm_host').'/authscm/<i>'._('developername').'</i>/svn/'.$project->getUnixName().'/'.$repo_name.$module).html_e('br');
+				}
 			}
 		}
 		return $b;
@@ -196,8 +217,7 @@ some control over it to the project's administrator.");
 	}
 
 	function getBrowserLinkBlock($project) {
-		global $HTML ;
-		$b = $HTML->boxMiddle(sprintf(_('%s Repository Browser'), 'Subversion'));
+		$b = html_e('h2', array(), _('Subversion Repository Browser'));
 		$b .= '<p>';
 		$b .= sprintf(_("Browsing the %s tree gives you a view into the current status of this project's code."), 'Subversion');
 		$b .= ' ';
@@ -207,13 +227,13 @@ some control over it to the project's administrator.");
 		$b .= util_make_link ("/scm/browser.php?group_id=".$project->getID(),
 								sprintf(_('Browse %s Repository'), 'Subversion')
 			) ;
-		$b .= ']</p>' ;
-		return $b ;
+		$b .= ']</p>';
+		return $b;
 	}
 
 	function getStatsBlock($project) {
-		global $HTML ;
-		$b = '' ;
+		global $HTML;
+		$b = '';
 
 		$result = db_query_params('SELECT u.realname, u.user_name, u.user_id, sum(updates) as updates, sum(adds) as adds, sum(adds+updates) as combined FROM stats_cvs_user s, users u WHERE group_id=$1 AND s.user_id=u.user_id AND (updates>0 OR adds >0) GROUP BY u.user_id, realname, user_name, u.user_id ORDER BY combined DESC, realname',
 					  array ($project->getID()));
@@ -251,7 +271,6 @@ some control over it to the project's administrator.");
 	}
 
 	function printBrowserPage($params) {
-		global $HTML;
 		$useautoheight = 0;
 		$project = $this->checkParams($params);
 		if (!$project) {
@@ -278,7 +297,7 @@ some control over it to the project's administrator.");
 			return false;
 		}
 
-		$repo = $repo_prefix . '/' . $project->getUnixName();
+		$repo = $repo_prefix.'/'.$project->getUnixName().'.svn/'.$project->getUnixName();
 
 		if (!is_dir ($repo) || !is_file ("$repo/format")) {
 			if (!mkdir($repo, 0700, true)) {
@@ -319,17 +338,50 @@ some control over it to the project's administrator.");
 
 	function regenApacheAuth(&$params) {
 		# Enable /authscm/$user/svn URLs
-		$config_fname = forge_get_config('data_path').'/scmsvn-auth.inc';
-		$config_f = fopen($config_fname.'.new', 'w');
+		# format of Macro is 3 params
+		# Use ScmsvnUser user project reponame
 
-		$res = db_query_params("SELECT login, passwd FROM nss_passwd WHERE status=$1", array('A'));
+		# Enable /anonscm/svn URLs
+		# format of Macro is 2 params
+		# Use ScmsvnRepoAnon project reponame
+		$config_fname_auth = forge_get_config('data_path').'/scmsvn-auth.inc';
+		$config_f_auth = fopen($config_fname_auth.'.new', 'w');
+		$config_fname_anon = forge_get_config('data_path').'/scmsvn-auth-anon.inc';
+		$config_f_anon = fopen($config_fname_anon.'.new', 'w');
+
+		$res = db_query_params('SELECT unix_group_name, group_id FROM groups WHERE status = $1 and type_id = $2 and is_template =$3 and register_time > 0',
+					array('A', 1, 0));
 		while ($arr = db_fetch_array($res)) {
-			fwrite($config_f, 'Use ScmsvnUser '.$arr['login']."\n");
+			$groupObject = group_get_object($arr['group_id']);
+			if ($groupObject->usesPlugin($this->name)) {
+				$users = $groupObject->getUsers();
+				$repo_list = array();
+				$repo_list[] = $arr['unix_group_name'];
+				$result = db_query_params('SELECT repo_name FROM scm_secondary_repos WHERE group_id=$1 AND next_action = $2 AND plugin_id=$3 ORDER BY repo_name',
+					array($arr['group_id'], SCM_EXTRA_REPO_ACTION_UPDATE, $this->getID()));
+				$rows = db_numrows($result);
+				for ($i = 0; $i < $rows; $i++) {
+					$repo_list[] = db_result($result, $i, 'repo_name');
+				}
+				foreach ($repo_list as $repo_name) {
+					foreach ($users as $user) {
+						if (forge_check_perm_for_user($user, 'scm', $arr['group_id'], 'write')) {
+							fwrite($config_f_auth, 'Use ScmsvnUser '.$user->getUnixName().' '.$arr['unix_group_name'].' '.$repo_name."\n");
+						}
+					}
+					if ($groupObject->enableAnonSCM()) {
+						fwrite($config_f_anon, 'Use ScmsvnRepoAnon '.$arr['unix_group_name'].' '.$repo_name."\n");
+					}
+				}
+			}
 		}
 
-		fclose($config_f);
-		chmod($config_fname.'.new', 0644);
-		rename($config_fname.'.new', $config_fname);
+		fclose($config_f_auth);
+		chmod($config_fname_auth.'.new', 0644);
+		rename($config_fname_auth.'.new', $config_fname_auth);
+		fclose($config_f_anon);
+		chmod($config_fname_anon.'.new', 0644);
+		rename($config_fname_anon.'.new', $config_fname_anon);
 	}
 
 	function gatherStats($params) {
@@ -368,7 +420,7 @@ some control over it to the project's administrator.");
 			$usr_deletes = array();
 			$usr_commits = array();
 
-			$repo = forge_get_config('repos_path', 'scmsvn') . '/' . $project->getUnixName();
+			$repo = forge_get_config('repos_path', 'scmsvn').'/'.$project->getUnixName().'.svn/'.$project->getUnixName();
 			if (!is_dir ($repo) || !is_file ("$repo/format")) {
 				db_rollback();
 				return false;
@@ -505,7 +557,7 @@ some control over it to the project's administrator.");
 		}
 
 		$toprepo = forge_get_config('repos_path', 'scmsvn');
-		$repo = $toprepo . '/' . $project->getUnixName();
+		$repo = $toprepo.'/'.$group_name.'.svn/'.$group_name;
 
 		if (!is_dir ($repo) || !is_file ("$repo/format")) {
 			if (is_file($snapshot)) {
@@ -522,7 +574,7 @@ some control over it to the project's administrator.");
 			return false ;
 		}
 		$today = date ('Y-m-d') ;
-		$dir = $project->getUnixName ()."-$today" ;
+		$dir = $group_name."-$today" ;
 		system ("mkdir -p $tmp") ;
 		$code = 0 ;
 		system ("svn ls file://$repo/trunk > /dev/null 2> /dev/null", $code) ;
@@ -542,7 +594,7 @@ some control over it to the project's administrator.");
 		}
 
 		if ($ut) {
-			system ("tar cCf $toprepo - ".$project->getUnixName() ."|".forge_get_config('compression_method')."> $tmp/tarball") ;
+			system ("tar cCf $toprepo - ".$group_name."|".forge_get_config('compression_method')."> $tmp/tarball") ;
 			chmod ("$tmp/tarball", 0644) ;
 			copy ("$tmp/tarball", $tarball) ;
 			unlink ("$tmp/tarball") ;

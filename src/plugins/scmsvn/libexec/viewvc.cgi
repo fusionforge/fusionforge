@@ -1,9 +1,29 @@
 #!/usr/bin/env python
 # Locate ViewVC and run it
+#
+# Previous Copyright, FusionForge Team
+# Copyright 2016, Franck Villaume - TrivialDev
+#
+# This file is part of FusionForge.
+#
+# FusionForge is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published
+# by the Free Software Foundation; either version 2 of the License,
+# or (at your option) any later version.
+#
+# FusionForge is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along
+# with this program; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 import sys
 import os
 import glob
+import re
 
 LIBRARY_GLOBS = (
   r'/usr/lib/viewvc/lib',  # Debian
@@ -48,7 +68,18 @@ import subprocess
 encoding = os.environ.get('HTTP_ACCEPT_ENCODING', None)
 if 'HTTP_ACCEPT_ENCODING' in os.environ: del os.environ['HTTP_ACCEPT_ENCODING']
 repos_path = subprocess.check_output(['forge_get_config', 'repos_path', 'scmsvn']).rstrip()
-cfg.general.root_parents = [repos_path+': svn']
+uri = os.environ['REQUEST_URI']
+if uri.find('root=') != -1:
+  # uri is: /some/thing/?root=svnrepo&something&else
+  subrepos_path1 = re.sub('^.*?root=', '', uri)
+  subrepos_path = re.sub('&.*$', '', subrepos_path1)
+else:
+  # uri is: /some/thing/svnrepo/?
+  #  or is: /some/thing/svnrepo?
+  subrepos_path1 = uri.split('/')[3]
+  subrepos_path = re.sub('\?.*$', '', subrepos_path1)
+
+cfg.general.root_parents = [repos_path+'/'+subrepos_path+'.svn: svn']
 
 # Authentify request
 try:

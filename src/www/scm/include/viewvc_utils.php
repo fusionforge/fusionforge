@@ -69,7 +69,7 @@ function viewcvs_execute($repos_name, $repos_type) {
 	if ($repos_type == "cvs") {
 		$repos_root = forge_get_config('repos_path', 'scmcvs').'/'.$repos_name;
 	} elseif ($repos_type == "svn") {
-		$repos_root = forge_get_config('repos_path', 'scmsvn').'/'.$repos_name;
+		$repos_root = forge_get_config('repos_path', 'scmsvn').'/'.$repos_name.'.svn/'.$repos_name;
 	} else {
 		die("Invalid repository type");
 	}
