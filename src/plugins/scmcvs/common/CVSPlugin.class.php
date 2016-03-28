@@ -149,9 +149,8 @@ over it to the project's administrator.");
 		return $b ;
 	}
 
-	function getBrowserLinkBlock ($project) {
-		global $HTML ;
-		$b = $HTML->boxMiddle(sprintf(_('%s Repository Browser'), 'CVS'));
+	function getBrowserLinkBlock($project) {
+		$b = html_e('h2', array(), _('CVS Repository Browser'));
 		$b .= '<p>';
 		$b .= sprintf(_("Browsing the %s tree gives you a view into the current status of this project's code."), 'CVS');
 		$b .= ' ';
@@ -165,16 +164,14 @@ over it to the project's administrator.");
 		return $b ;
 	}
 
-	function getStatsBlock ($project) {
-		global $HTML ;
-		$b = '' ;
+	function getStatsBlock($project) {
+		global $HTML;
+		$b = '';
 
 		$result = db_query_params('SELECT u.realname, u.user_name, u.user_id, sum(commits) as commits, sum(adds) as adds, sum(adds+commits) as combined FROM stats_cvs_user s, users u WHERE group_id=$1 AND s.user_id=u.user_id AND (commits>0 OR adds >0) GROUP BY u.user_id, realname, user_name, u.user_id ORDER BY combined DESC, realname',
 					  array ($project->getID()));
 
 		if (db_numrows($result) > 0) {
-			$b .= $HTML->boxMiddle(_('Repository Statistics'));
-
 			$tableHeaders = array(
 				_('Name'),
 				_('Adds'),
