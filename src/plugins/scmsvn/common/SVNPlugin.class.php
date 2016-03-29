@@ -290,7 +290,7 @@ some control over it to the project's administrator.");
 		if (!$project->isActive()) return false;
 		if (!$project->usesPlugin($this->name)) return false;
 
-		$repo_prefix = forge_get_config('repos_path', 'scmsvn').$project->getUnixName().'.svn/';
+		$repo_prefix = forge_get_config('repos_path', 'scmsvn').'/'.$project->getUnixName().'.svn/';
 		if (!is_dir($repo_prefix) && !mkdir($repo_prefix, 0755, true)) {
 			return false;
 		}
