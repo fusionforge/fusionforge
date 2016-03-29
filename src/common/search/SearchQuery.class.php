@@ -192,6 +192,28 @@ class SearchQuery extends Error {
 		return;
 	}
 
+	function getData() {
+		if ($this->cached_results == NULL) {
+			$this->cached_results = array();
+
+			$res = db_query_qpa (
+				$this->getQuery(),
+				'SYS_DB_SEARCH'
+				);
+			while ($row = db_fetch_array($res)) {
+				if ($this->isRowVisible($row)) {
+					$this->cached_results[] = $row;
+				}
+			}
+		}
+
+		return $this->cached_results;
+	}
+
+	function isRowVisible($row) {
+		return true;
+	}
+
 	function addMatchCondition($qpa, $fieldName) {
 
 		if(!count($this->phrases)) {
