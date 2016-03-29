@@ -55,6 +55,9 @@ some control over it to the project's administrator.");
 		$this->_addHook('scm_regen_apache_auth');
 		$this->_addHook('scm_generate_snapshots');
 		$this->_addHook('scm_gather_stats');
+		$this->_addHook('scm_admin_form');
+		$this->_addHook('scm_add_repo');
+		$this->_addHook('scm_delete_repo');
 		$this->_addHook('activity');
 
 		$this->provides['svn'] = true;
@@ -230,6 +233,19 @@ some control over it to the project's administrator.");
 								sprintf(_('Browse %s Repository'), 'Subversion')
 			) ;
 		$b .= ']</p>';
+		# Extra repos
+		$result = db_query_params('SELECT repo_name FROM scm_secondary_repos WHERE group_id=$1 AND next_action = $2 AND plugin_id=$3 ORDER BY repo_name',
+								  array($project->getID(),
+										SCM_EXTRA_REPO_ACTION_UPDATE,
+										$this->getID()));
+		$rows = db_numrows($result);
+		$repo_list = array();
+		for ($i=0; $i<$rows; $i++) {
+			$repo_list[] = db_result($result,$i,'repo_name');
+		}
+		foreach ($repo_list as $repo_name) {
+			$b .= '['.util_make_link('/scm/browser.php?group_id='.$project->getID().'&extra='.$repo_name, _('Browse extra Subversion repository')._(': ').$repo_name).']'.html_e('br');
+		}
 		return $b;
 	}
 
@@ -332,6 +348,62 @@ some control over it to the project's administrator.");
 			system("chmod g+rX-w,o+rX-w $repo") ;
 		} else {
 			system("chmod g+rX-w,o-rwx $repo") ;
+		}
+
+		// Create project-wide secondary repositories
+		$result = db_query_params('SELECT repo_name FROM scm_secondary_repos WHERE group_id=$1 AND next_action = $2 AND plugin_id=$3',
+					   array($project->getID(),
+						  SCM_EXTRA_REPO_ACTION_UPDATE,
+						  $this->getID()));
+		$rows = db_numrows($result);
+		for ($i = 0; $i < $rows; $i++) {
+			$repo_name = db_result($result, $i, 'repo_name');
+			$repodir = $repo_prefix.'/'.$repo_name;
+			if (!is_dir ($repo) || !is_file ("$repo/format")) {
+				if (!mkdir($repo, 0700, true)) {
+					return false;
+				}
+				$ret = 0;
+				system ("svnadmin create $repo", $ret);
+				if ($ret != 0) {
+					return false;
+				}
+				system ("sed -i '/enable-rep-sharing = false/s/^. //' $repo/db/fsfs.conf") ;
+				// dav/ directory is required by old svn clients (eg. svn 1.6.17 on ubuntu 12.04)
+				if (!is_dir ("$repo/dav")) {
+					mkdir("$repo/dav");
+				}
+				system ("svn mkdir -m'Init' file:///$repo/trunk file:///$repo/tags file:///$repo/branches >/dev/null") ;
+				system ("find $repo -type d -print0 | xargs -r -0 chmod g+s") ;
+				// Allow read/write users to modify the SVN repository
+				$rw_unix_group = $project->getUnixName() . '_scmrw';
+				system("chgrp -R $rw_unix_group $repo");
+				// Allow read-only users to enter the (top-level) directory
+				$ro_unix_group = $project->getUnixName() . '_scmro';
+				system("chgrp $ro_unix_group $repo");
+				// open permissions to allow switching private/public easily
+				// see after to restrict the top-level directory
+				system ("chmod -R g+rwX,o+rX-w $repo") ;
+			}
+		}
+
+		// Delete project-wide secondary repositories
+		$result = db_query_params('SELECT repo_name FROM scm_secondary_repos WHERE group_id=$1 AND next_action = $2 AND plugin_id=$3',
+					   array($project->getID(),
+						  SCM_EXTRA_REPO_ACTION_DELETE,
+						  $this->getID()));
+		$rows = db_numrows ($result);
+		for ($i=0; $i<$rows; $i++) {
+			$repo_name = db_result($result, $i, 'repo_name');
+			$repodir = $repo_prefix.'/'.$repo_name;
+			if (util_is_valid_repository_name($repo_name)) {
+				system("rm -rf $repodir");
+			}
+			db_query_params ('DELETE FROM scm_secondary_repos WHERE group_id=$1 AND repo_name=$2 AND next_action = $3 AND plugin_id=$4',
+					 array($project->getID(),
+						$repo_name,
+						SCM_EXTRA_REPO_ACTION_DELETE,
+						$this->getID()));
 		}
 		$this->regenApacheAuth($params);
 	}
@@ -764,6 +836,129 @@ some control over it to the project's administrator.");
 			}
 		}
 		return $revisionsArr;
+	}
+
+	function scm_add_repo(&$params) {
+		$project = $this->checkParams($params);
+		if (!$project) {
+			return false;
+		}
+		if (!$project->usesPlugin($this->name)) {
+			return false;
+		}
+
+		if (!isset($params['repo_name'])) {
+			return false;
+		}
+
+		if ($params['repo_name'] == $project->getUnixName()) {
+			$params['error_msg'] = _('Cannot create a secondary repository with the same name as the primary');
+			return false;
+		}
+
+		if (!util_is_valid_repository_name($params['repo_name'])) {
+			$params['error_msg'] = _('This repository name is not valid');
+			return false;
+		}
+
+		$result = db_query_params('SELECT count(*) AS count FROM scm_secondary_repos WHERE group_id=$1 AND repo_name = $2 AND plugin_id=$3',
+					  array($params['group_id'],
+						 $params['repo_name'],
+						 $this->getID()));
+		if (!$result) {
+			$params['error_msg'] = db_error();
+			return false;
+		}
+		if (db_result($result, 0, 'count')) {
+			$params['error_msg'] = sprintf(_('A repository %s already exists'), $params['repo_name']);
+			return false;
+		}
+		$description = '';
+		$clone = '';
+		if (isset($params['description'])) {
+			$description = $params['description'];
+		}
+		if (!$description) {
+			$description = "Subversion repository $params[repo_name] for project ".$project->getUnixName();
+		}
+		$result = db_query_params('INSERT INTO scm_secondary_repos (group_id, repo_name, description, clone_url, plugin_id) VALUES ($1, $2, $3, $4, $5)',
+					   array($params['group_id'],
+						  $params['repo_name'],
+						  $description,
+						  $clone,
+						  $this->getID()));
+		if (!$result) {
+			$params['error_msg'] = db_error();
+			return false;
+		}
+
+		plugin_hook ("scm_admin_update", $params);
+		return true;
+	}
+	function scm_admin_form(&$params) {
+		global $HTML;
+		$project = $this->checkParams($params);
+		if (!$project) {
+			return false;
+		}
+		if (!$project->usesPlugin($this->name)) {
+			return false;
+		}
+
+		session_require_perm('project_admin', $params['group_id']);
+
+		$project_name = $project->getUnixName();
+
+		$result = db_query_params('SELECT repo_name, description FROM scm_secondary_repos WHERE group_id=$1 AND next_action = $2 AND plugin_id=$3 ORDER BY repo_name',
+					  array($params['group_id'],
+						 SCM_EXTRA_REPO_ACTION_UPDATE,
+						 $this->getID()));
+		if (!$result) {
+			$params['error_msg'] = db_error();
+			return false;
+		}
+		$existing_repos = array();
+		while($data = db_fetch_array($result)) {
+			$existing_repos[] = array('repo_name' => $data['repo_name'],
+						  'description' => $data['description']);
+		}
+		if (count($existing_repos) == 0) {
+			echo $HTML->information(_('No extra Subversion repository for project').' '.$project_name);
+		} else {
+			echo html_e('h2', array(), sprintf(ngettext('Extra Subversion repository for project %1$s',
+									'Extra Subversion repositories for project %1$s',
+									count($existing_repos)), $project_name));
+			$titleArr = array(_('Repository name'), ('Initial repository description'), _('Delete'));
+			echo $HTML->listTableTop($titleArr);
+			foreach ($existing_repos as $key => $repo) {
+				$cells = array();
+				$cells[][] = html_e('tt', array(), $repo['repo_name']);
+				$cells[][] = $repo['description'];
+				$deleteForm = $HTML->openForm(array('name' => 'form_delete_repo_'.$repo['repo_name'], 'action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
+				$deleteForm .= html_e('input', array('type' => 'hidden', 'name' => 'group_id', 'value' => $params['group_id']));
+				$deleteForm .= html_e('input', array('type' => 'hidden', 'name' => 'delete_repository', 'value' => 1));
+				$deleteForm .= html_e('input', array('type' => 'hidden', 'name' => 'repo_name', 'value' => $repo['repo_name']));
+				$deleteForm .= html_e('input', array('type' => 'hidden', 'name' => 'scm_enable_anonymous', 'value' => ($project->enableAnonSCM()? 1 : 0)));
+				$deleteForm .= html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Delete')));
+				$deleteForm .= $HTML->closeForm();
+				$cells[][] = $deleteForm;
+				echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($key, true)), $cells);
+			}
+			echo $HTML->listTableBottom();
+		}
+
+		echo html_e('h2', array(), _('Create new Subversion repository for project').' '.$project_name);
+		echo $HTML->openForm(array('name' => 'form_create_repo', 'action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
+		echo html_e('input', array('type' => 'hidden', 'name' => 'group_id', 'value' => $params['group_id']));
+		echo html_e('input', array('type' => 'hidden', 'name' => 'create_repository', 'value' => 1));
+		echo html_e('p', array(), html_e('strong', array(), _('Repository name')._(':')).utils_requiredField().html_e('br').
+				html_e('input', array('type' => 'text', 'required' => 'required', 'size' => 20, 'name' => 'repo_name', 'value' => '')));
+		echo html_e('p', array(), html_e('strong', array(), _('Description')._(':')).html_e('br').
+				html_e('input', array('type' => 'text', 'size' => 60, 'name' => 'description', 'value' => '')));
+		echo html_e('input', array('type' => 'hidden', 'name' => 'scm_enable_anonymous', 'value' => ($project->enableAnonSCM()? 1 : 0)));
+		echo html_e('input', array('type' => 'submit', 'name' => 'cancel', 'value' => _('Cancel')));
+		echo html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Submit')));
+		echo $HTML->closeForm();
 	}
 }
 
