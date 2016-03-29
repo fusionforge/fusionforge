@@ -196,8 +196,7 @@ some control over it to the project's administrator.");
 	}
 
 	function getBrowserLinkBlock($project) {
-		global $HTML ;
-		$b = $HTML->boxMiddle(sprintf(_('%s Repository Browser'), 'Subversion'));
+		$b = html_e('h2', array(), _('Subversion Repository Browser'));
 		$b .= '<p>';
 		$b .= sprintf(_("Browsing the %s tree gives you a view into the current status of this project's code."), 'Subversion');
 		$b .= ' ';
