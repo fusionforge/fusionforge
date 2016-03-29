@@ -152,8 +152,6 @@ some control over it to the project's administrator.");
 		$b = '';
 		$b .= html_e('h2', array(), _('Developer Access'));
 
-		$module = $this->topModule($project);
-
 		if (session_loggedin()) {
 			$u = user_get_object(user_getid());
 			$d = $u->getUnixName() ;
