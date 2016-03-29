@@ -100,10 +100,14 @@ some control over it to the project's administrator.");
 		$repo = 'file://' . forge_get_config('repos_path', $this->name).'/'.$project->getUnixName().'.svn/'.$repo_name.'/';
 		$res = array ();
 		$module = 'trunk';
-		if (!(exec("svn ls '$repo'", $res) && in_array($module.'/', $res))) {
+		if (!is_file($repo.'/format')) {
 			$module = '';
+		} else {
+			exec("svn ls '$repo'", $res);
+			if (!in_array($module.'/', $res)) {
+				$module = '';
+			}
 		}
-
 		return '/'.$module;
 	}
 
