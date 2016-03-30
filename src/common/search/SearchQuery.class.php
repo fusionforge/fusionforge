@@ -207,7 +207,7 @@ class SearchQuery extends Error {
 		return;
 	}
 
-	function getData($limit = NULL, $offset = 0) {
+	function fetchDataUntil($limit = NULL) {
 		if ($this->cached_results == NULL) {
 			$this->cached_results = array();
 		}
@@ -220,7 +220,7 @@ class SearchQuery extends Error {
 		}
 
 		if ($limit) {
-			while ((count($this->cached_results) < $limit + $offset)
+			while ((count($this->cached_results) < $limit)
 				   && ($row = db_fetch_array($this->data_res))) {
 				if ($this->isRowVisible($row)) {
 					$this->cached_results[] = $row;
@@ -233,7 +233,18 @@ class SearchQuery extends Error {
 				}
 			}
 		}
+	}
 
+	function fetchAllData() {
+		$this->fetchDataUntil();
+	}	   
+
+	function getData($limit = NULL, $offset = 0) {
+		if ($limit) {
+			$this->fetchDataUntil($limit+$offset);
+		} else {
+			$this->fetchAllData();
+		}
 		return array_slice($this->cached_results, $offset, $limit);
 	}
 
