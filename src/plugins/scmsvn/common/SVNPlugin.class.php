@@ -351,15 +351,15 @@ some control over it to the project's administrator.");
 		}
 
 		// Create project-wide secondary repositories
-		$result = db_query_params('SELECT repo_name FROM scm_secondary_repos WHERE group_id=$1 AND next_action = $2 AND plugin_id=$3',
+		$result = db_query_params('SELECT repo_name FROM scm_secondary_repos WHERE group_id = $1 AND next_action = $2 AND plugin_id = $3',
 					   array($project->getID(),
 						  SCM_EXTRA_REPO_ACTION_UPDATE,
 						  $this->getID()));
 		$rows = db_numrows($result);
 		for ($i = 0; $i < $rows; $i++) {
 			$repo_name = db_result($result, $i, 'repo_name');
-			$repodir = $repo_prefix.'/'.$repo_name;
-			if (!is_dir ($repo) || !is_file ("$repo/format")) {
+			$repo = $repo_prefix.'/'.$repo_name;
+			if (!is_dir($repo) || !is_file("$repo/format")) {
 				if (!mkdir($repo, 0700, true)) {
 					return false;
 				}
@@ -384,6 +384,11 @@ some control over it to the project's administrator.");
 				// open permissions to allow switching private/public easily
 				// see after to restrict the top-level directory
 				system ("chmod -R g+rwX,o+rX-w $repo") ;
+			}
+			if ($project->enableAnonSCM()) {
+				system("chmod g+rX-w,o+rX-w $repo") ;
+			} else {
+				system("chmod g+rX-w,o-rwx $repo") ;
 			}
 		}
 
