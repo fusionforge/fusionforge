@@ -294,9 +294,13 @@ some control over it to the project's administrator.");
 		if (!$project) {
 			return;
 		}
-
 		if ($project->usesPlugin($this->name)) {
-			$iframe_src = '/scm/viewvc.php?root='.$project->getUnixName();
+			if ($params['extra']) {
+				$repo_name = $params['extra'];
+			} else {
+				$repo_name = $project->getUnixName();
+			}
+			$iframe_src = '/scm/viewvc.php?root='.$repo_name;
 			if ($params['commit']) {
 				$iframe_src .= '&view=rev&revision='.$params['commit'];
 			}
