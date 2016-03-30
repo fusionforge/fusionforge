@@ -233,19 +233,6 @@ some control over it to the project's administrator.");
 								sprintf(_('Browse %s Repository'), 'Subversion')
 			) ;
 		$b .= ']</p>';
-		# Extra repos
-		$result = db_query_params('SELECT repo_name FROM scm_secondary_repos WHERE group_id=$1 AND next_action = $2 AND plugin_id=$3 ORDER BY repo_name',
-								  array($project->getID(),
-										SCM_EXTRA_REPO_ACTION_UPDATE,
-										$this->getID()));
-		$rows = db_numrows($result);
-		$repo_list = array();
-		for ($i=0; $i<$rows; $i++) {
-			$repo_list[] = db_result($result,$i,'repo_name');
-		}
-		foreach ($repo_list as $repo_name) {
-			$b .= '['.util_make_link('/scm/browser.php?group_id='.$project->getID().'&extra='.$repo_name, _('Browse extra Subversion repository')._(': ').$repo_name).']'.html_e('br');
-		}
 		return $b;
 	}
 
@@ -295,12 +282,7 @@ some control over it to the project's administrator.");
 			return;
 		}
 		if ($project->usesPlugin($this->name)) {
-			if ($params['extra']) {
-				$repo_name = $params['extra'];
-			} else {
-				$repo_name = $project->getUnixName();
-			}
-			$iframe_src = '/scm/viewvc.php?root='.$repo_name;
+			$iframe_src = '/scm/viewvc.php?root='.$project->getUnixName();
 			if ($params['commit']) {
 				$iframe_src .= '&view=rev&revision='.$params['commit'];
 			}
