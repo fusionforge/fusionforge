@@ -45,12 +45,6 @@ class SearchQuery extends Error {
 	 */
 	var $rowsCount = 0;
 	/**
-	 * Number of rows returned by the query
-	 *
-	 * @var int $rowsTotalCount
-	 */
-	var $rowsTotalCount = 0;
-	/**
 	 * Offset
 	 *
 	 * @var int $offset
@@ -193,8 +187,7 @@ class SearchQuery extends Error {
 			$this->offset,
 			'SYS_DB_SEARCH'
 		);
-		$this->rowsTotalCount = db_numrows($this->result);
-		$this->rowsCount = min($this->rowsPerPage, $this->rowsTotalCount);
+		$this->rowsCount = min($this->rowsPerPage, db_numrows($this->result));
 	}
 
 	/**
@@ -329,7 +322,8 @@ class SearchQuery extends Error {
 	 * @return int rows count
 	 */
 	function getRowsTotalCount() {
-		return $this->rowsTotalCount;
+		$this->fetchAllData();
+		return count($this->cached_results);
 	}
 
 	/**
