@@ -56,7 +56,7 @@ class SearchQuery extends Error {
 	 * @var int $offset
 	 */
 	var $offset = 0;
-	/**
+ 	/**
 	 * Result handle
 	 *
 	 * @var resource $result
@@ -89,6 +89,18 @@ class SearchQuery extends Error {
 	var $field_separator = ' ioM0Thu6_fieldseparator_kaeph9Ee ';
 
 	/**
+	 * Result handle
+	 *
+	 * @var resource $result
+	 */
+	var $data_res;
+	/**
+	 * Cached results (array of rows)
+	 *
+	 * @var array $cached_results
+	 */
+	var $cached_results;
+	/**
 	 * Constructor
 	 *
 	 * @param	string	$words words we are searching for
@@ -115,6 +127,9 @@ class SearchQuery extends Error {
 		$this->isExact = $isExact;
 		$this->operator = $this->getOperator();
 		$this->options = $options;
+
+		$this->data_res = NULL;
+		$this->cached_results = NULL;
 	}
 
 	/**
@@ -192,22 +207,34 @@ class SearchQuery extends Error {
 		return;
 	}
 
-	function getData() {
+	function getData($limit = NULL, $offset = 0) {
 		if ($this->cached_results == NULL) {
 			$this->cached_results = array();
+		}
 
-			$res = db_query_qpa (
+		if ($this->data_res == NULL) {
+			$this->data_res = db_query_qpa (
 				$this->getQuery(),
 				'SYS_DB_SEARCH'
 				);
-			while ($row = db_fetch_array($res)) {
+		}
+
+		if ($limit) {
+			while ((count($this->cached_results) < $limit + $offset)
+				   && ($row = db_fetch_array($this->data_res))) {
+				if ($this->isRowVisible($row)) {
+					$this->cached_results[] = $row;
+				}
+			}
+		} else {
+			while ($row = db_fetch_array($this->data_res)) {
 				if ($this->isRowVisible($row)) {
 					$this->cached_results[] = $row;
 				}
 			}
 		}
 
-		return $this->cached_results;
+		return array_slice($this->cached_results, $offset, $limit);
 	}
 
 	function isRowVisible($row) {
