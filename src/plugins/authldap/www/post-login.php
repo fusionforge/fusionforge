@@ -92,8 +92,10 @@ if ($login) {
 		} else {
 			$warning_msg = _('Missing Password Or User Name');
 		}
-	} else {
-		$warning_msg = _('LDAP server unreachable');
+	} elseif ($u != NULL && $u->getStatus != 'A') {
+            $warning_msg = _('User is inactive');
+    } else {
+            $warning_msg = _('LDAP server unreachable');
 	}
 }
 

@@ -52,12 +52,12 @@ $server->register(
 function getSCMData($session_ser, $group_id) {
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
-		return new soap_fault ('','getSCMData','Could Not Get Project','Could Not Get Project');
+		return new soap_fault('','getSCMData','Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {
-		return new soap_fault ('','getSCMData',$grp->getErrorMessage(),$grp->getErrorMessage());
+		return new soap_fault('','getSCMData',$grp->getErrorMessage(),$grp->getErrorMessage());
 	}
 	if (!$grp->usesSCM()) {
-		return new soap_fault ('','getSCMData','SCM is not enabled in this project');
+		return new soap_fault('','getSCMData','SCM is not enabled in this project');
 	}
 
 	$res = array();

@@ -8,7 +8,7 @@
  * Copyright 2010-2012, Alain Peyrat - Alcatel-Lucent
  * Copyright © 2011 Thorsten Glaser – tarent GmbH
  * Copyright 2011 - Marc-Etienne Vargenau, Alcatel-Lucent
- * Copyright 2012-2015, Franck Villaume - TrivialDev
+ * Copyright 2012-2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -256,6 +256,7 @@ class Layout extends Error {
 		$this->headerHTMLDeclaration();
 		echo html_ao('head');
 		echo html_e('meta', array('http-equiv' => 'Content-Type', 'content' => 'text/html; charset=utf-8'));
+		echo html_e('meta', array('http-equiv' => 'X-UA-Compatible', 'content' => 'IE=9; IE=8; IE=EDGE'));
 		if (isset($params['meta-description'])) {
 			echo html_e('meta', array('name' => 'description', 'content' => $params['meta-description']));
 		}
@@ -1556,14 +1557,16 @@ if (isset($params['group']) && $params['group']) {
 		if (strpos($actionUrl, '?')) {
 			$sep = '&';
 		}
-		if (session_loggedin()) {
+		if ($totalElements && session_loggedin()) {
 			$html_content .= $this->openForm(array('action' => $actionUrl.$sep.'start='.$start, 'method' => 'post'));
 		}
-		$html_content .= sprintf(_('Displaying results %1$s out of %2$d total.'), ($start + 1).'-'.$maxElements, $totalElements);
-		if (session_loggedin()) {
-			$html_content .= sprintf(' ' . _('Displaying %1$s results.'), html_build_select_box_from_array(array('10', '25', '50', '100', '1000'), 'nres', $paging, 1));
-			$html_content .= html_e('input', array('type' => 'submit', 'name' => 'setpaging', 'value' => _('Change')));
-			$html_content .= $this->closeForm();
+		if ($totalElements) {
+			$html_content .= sprintf(_('Displaying results %1$s out of %2$d total.'), ($start + 1).'-'.$maxElements, $totalElements);
+			if (session_loggedin()) {
+				$html_content .= sprintf(' ' . _('Displaying %1$s results.'), html_build_select_box_from_array(array('10', '25', '50', '100', '1000'), 'nres', $paging, 1));
+				$html_content .= html_e('input', array('type' => 'submit', 'name' => 'setpaging', 'value' => _('Change')));
+				$html_content .= $this->closeForm();
+			}
 		}
 		return $html_content;
 	}
@@ -1583,7 +1586,7 @@ if (isset($params['group']) && $params['group']) {
 			$sep = '&';
 		}
 		if ($start > 0) {
-			$html_content .= util_make_link($actionUrl.$sep.'start='.($start-$paging),'<strong>← '._('previous').'</strong>');
+			$html_content .= util_make_link($actionUrl.$sep.'start='.($start-$paging),'<strong>&larr; '._('previous').'</strong>');
 			$html_content .= '&nbsp;&nbsp;';
 		}
 		$pages = $totalElements / $paging;
@@ -1610,7 +1613,7 @@ if (isset($params['group']) && $params['group']) {
 			}
 		}
 		if ( $totalElements > $start + $paging) {
-			$html_content .= util_make_link($actionUrl.$sep.'start='.($start+$paging),'<strong>'._('next').' →</strong>');
+			$html_content .= util_make_link($actionUrl.$sep.'start='.($start+$paging),'<strong>'._('next').' &rarr;</strong>');
 		}
 		return $html_content;
 	}

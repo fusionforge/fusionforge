@@ -2,7 +2,7 @@
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
  * Copyright 2010, Franck Villaume - Capgemini
- * Copyright 2011-2014, Franck Villaume - TrivialDev
+ * Copyright 2011-2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is a part of FusionForge.
@@ -22,7 +22,7 @@
  */
 
 require_once 'Widget.class.php';
-include $gfcommon.'docman/DocumentFactory.class.php';
+require_once $gfcommon.'docman/DocumentFactory.class.php';
 
 /**
  * Widget_MyProjectsLastDocuments
@@ -69,9 +69,17 @@ class Widget_MyProjectsLastDocuments extends Widget {
 						$hide_docmanproject = null;
 					}
 
+					$stateIdDg = 1;
+					$stateIdDocuments = array(1);
+					if (forge_check_perm('docman', $g->getID(), 'approve')) {
+						$stateIdDg = 5;
+						$stateIdDocuments = array(1, 2, 3, 4, 5);
+					}
 					$df = new DocumentFactory($g);
+					$df->setDocGroupState($stateIdDg);
+					$df->setStateID($stateIdDocuments);
 					$df->setLimit(5);
-					$df->setOrder(array('updatedate','createdate'));
+					$df->setOrder(array('updatedate', 'createdate'));
 					$df->setSort('DESC');
 					$df->getDocuments();
 

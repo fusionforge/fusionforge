@@ -2,7 +2,7 @@
 /**
  * FusionForge Documentation Manager
  *
- * Copyright 2014-2015, Franck Villaume - TrivialDev
+ * Copyright 2014-2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -23,7 +23,7 @@
 
 /* please do not add require here : use www/docman/index.php to add require */
 /* global variables used */
-global $g; //group object
+global $g; // Group object
 global $group_id; // id of the group
 global $dirid; // id of doc_group
 global $dgf; // document directory factory of this group
@@ -32,11 +32,6 @@ global $HTML; // Layout object
 global $warning_msg;
 global $childgroup_id;
 
-if (!forge_check_perm('docman', $group_id, 'approve')) {
-	$warning_msg = _('Document Manager Access Denied');
-	session_redirect('/docman/?group_id='.$group_id);
-}
-
 $actionurl = '/docman/?group_id='.$group_id.'&dirid='.$dirid.'&action=movefile';
 // plugin projects-hierarchy support
 if ($childgroup_id) {
@@ -44,11 +39,16 @@ if ($childgroup_id) {
 	$actionurl .= '&childgroup_id='.$childgroup_id;
 }
 
+if (!forge_check_perm('docman', $g->getID(), 'approve')) {
+	$warning_msg = _('Document Manager Access Denied');
+	session_redirect('/docman/?group_id='.$group_id);
+}
+
 echo html_ao('div', array('class' => 'docmanDivIncluded'));
 echo $HTML->openForm(array('name' => 'movefile', 'action' => util_make_uri($actionurl), 'method' => 'post'));
 echo html_e('input', array('type' => 'hidden', 'name' => 'fileid', 'id' => 'movefileinput'));
 echo html_e('p', array(), _('Move files to').
-			$dm->showSelectNestedGroups($dgf->getNested(), 'moveto_dirid', false).
+			$dm->showSelectNestedGroups($dgf->getNested(array(1, 5)), 'moveto_dirid', false).
 			html_e('input', array('type' => 'submit', 'value' => _('Go'),  'name' => 'submit')));
 echo $HTML->closeForm();
 echo html_ac(html_ap() - 1);

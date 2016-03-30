@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
+ * Copyright 2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -57,6 +58,13 @@ if ($owner) {
 				$good = true;
 			}
 			break;
+		case WidgetLayoutManager::OWNER_TYPE_HOME:
+			$redirect = '/';
+			if (!forge_check_global_perm('forge_admin')) {
+				$GLOBALS['Response']->redirect($redirect);
+			}
+			$good = true;
+			break;
 		default:
 			break;
 	}
@@ -81,6 +89,10 @@ if ($owner) {
 										$instance_id = (int)$param[$name][$action];
 										if ($owner_type == WidgetLayoutManager::OWNER_TYPE_GROUP) {
 											if (forge_check_perm ('project_admin', $owner_id, NULL)) {
+												$lm->removeWidget($owner_id, $owner_type, $layout_id, $name, $instance_id, $widget);
+											}
+										} elseif ($owner_type == WidgetLayoutManager::OWNER_TYPE_HOME) {
+											if (forge_check_global_perm('forge_admin')) {
 												$lm->removeWidget($owner_id, $owner_type, $layout_id, $name, $instance_id, $widget);
 											}
 										} else {

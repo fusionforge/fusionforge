@@ -34,18 +34,12 @@ case "$1" in
 	update-inetd --comment-chars "#SF_WAS_HERE#" --disable cvspserver
 	update-inetd --add  "cvspserver	stream	tcp	nowait.400	root	/usr/sbin/tcpd	$source_path/plugins/scmcvs/sbin/cvs-pserver"
 
-	# Making user group and cvs update from database 
-	$source_path/plugins/scmcvs/bin/update-user-group-ssh.sh > /dev/null 2>&1
 	rm -f $data_path/dumps/*cvs*dump
 
 	if [ ! -e $data_path/chroot/cvs ] ; then
 	    cd $data_path/chroot
 	    ln -s cvsroot cvs
 	fi
-
-	# logs
-	chown root:gforge $log_path/cvs
-	chmod 775 $log_path/cvs
 
 	# Restart some services
 	[ -d /etc/ssh ] && invoke-rc.d ssh restart || true

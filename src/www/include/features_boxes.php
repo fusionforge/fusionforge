@@ -3,7 +3,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -31,8 +31,10 @@ require_once $gfcommon.'include/Stats.class.php';
 function show_features_boxes() {
 	global $HTML;
 
-	plugin_hook ("features_boxes_top", array());
-	$return = '<h2 class="skip">' . _('Features Boxes') . '</h2>';
+	$return = '';
+	$params['returned_text'] = &$return;
+	plugin_hook_by_reference('features_boxes_top', $params);
+	$return .= '<h2 class="skip">' . _('Features Boxes') . '</h2>';
 
 	if (forge_get_config('use_project_tags')) {
 		$contentTag = tag_cloud();
@@ -63,11 +65,12 @@ function show_features_boxes() {
 			   $ff->software_name,
 			   $ff->software_version);
 	$return .= $HTML->boxBottom();
-	plugin_hook ("features_boxes_bottom", array());
+	plugin_hook_by_reference('features_boxes_bottom', $params);
 	return $return;
 }
 
 function show_top_downloads() {
+	global $HTML;
 	// TODO yesterday is now defined as two days ago.  Quick fix
 	//      to allow download list to be cached before nightly
 	//      aggregation is done. jbyers 2001.03.19
@@ -104,7 +107,7 @@ function show_top_downloads() {
 		}
 	}
 	if ( $return == "" ) {
-		return _('No stats available');
+		return $HTML->information(_('No stats available'));
 	} else {
 		$return = '<table>' . $return . "</table>\n";
 	}
@@ -196,6 +199,7 @@ function show_newest_projects() {
 }
 
 function show_highest_ranked_users() {
+	global $HTML;
 	//select out the users information to show the top users on the site
 	$res = db_query_params('SELECT users.user_name,users.user_id,users.realname,user_metric.metric	FROM user_metric,users WHERE users.user_id=user_metric.user_id AND user_metric.ranking < 11 AND users.status != $1 ORDER BY ranking ASC',
 				array ('D'));
@@ -204,7 +208,7 @@ function show_highest_ranked_users() {
 	} else {
 		$rows = db_numrows($res);
 		if ($rows < 1) {
-			return  _('No stats available');
+			return  $HTML->information(_('No stats available'));
 		} else {
 			$return = '';
 			for ($i=0; $i < $rows; $i++) {
@@ -219,6 +223,7 @@ function show_highest_ranked_users() {
 }
 
 function show_highest_ranked_projects() {
+	global $HTML;
 	$stats = new Stats();
 	$result = $stats->getMostActiveStats ('week', 0) ;
 	$return = '' ;
@@ -239,7 +244,7 @@ function show_highest_ranked_projects() {
 		$count++ ;
 	}
 	if ( $return == "" ) {
-		return _('No stats available');
+		return  $HTML->information(_('No stats available'));
 	} else {
 		$return = '<table>' . $return . "</table>\n";
 	}

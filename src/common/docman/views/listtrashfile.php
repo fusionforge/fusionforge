@@ -5,7 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2011-2015, Franck Villaume - TrivialDev
+ * Copyright 2011-2016, Franck Villaume - TrivialDev
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
@@ -29,30 +29,31 @@
 /* global variables used */
 global $group_id; // id of the group
 global $dirid; // id of doc_group
+global $HTML; // Layout object
+global $LUSER; // User object
 global $g; // the Group object
+global $dm; // the docman manager
+global $warning_msg;
+global $start; // use to set the offset
 
 $linkmenu = 'listtrashfile';
 $childgroup_id = getIntFromRequest('childgroup_id');
 $baseredirecturl = '/docman/?group_id='.$group_id;
 $redirecturl = $baseredirecturl.'&view='.$linkmenu.'&dirid='.$dirid;
-if (!forge_check_perm('docman', $group_id, 'approve')) {
-	$warning_msg = _('Document Manager Access Denied');
-	session_redirect($baseredirecturl);
-}
 
 echo html_ao('div', array('id' => 'leftdiv'));
 include ($gfcommon.'docman/views/tree.php');
 echo html_ac(html_ap() - 1);
 
 // plugin projects-hierarchy
-$childgroup_id = getIntFromRequest('childgroup_id');
 if ($childgroup_id) {
-	if (!forge_check_perm('docman', $childgroup_id, 'read')) {
-		$warning_msg = _('Document Manager Access Denied');
-		session_redirect($baseredirecturl);
-	}
 	$redirecturl .= '&childgroup_id='.$childgroup_id;
 	$g = group_get_object($childgroup_id);
+}
+
+if (!forge_check_perm('docman', $g->getID(), 'approve')) {
+	$warning_msg = _('Document Manager Access Denied');
+	session_redirect($baseredirecturl);
 }
 
 $df = new DocumentFactory($g);
@@ -65,6 +66,7 @@ if ($dgf->isError())
 
 // deleted state id
 $df->setStateID(array(2));
+$df->setDocGroupState(2);
 
 $d_arr =& $df->getDocuments();
 
@@ -72,7 +74,7 @@ $nested_docs = array();
 $DocGroupName = 0;
 
 if ($dirid) {
-	$ndg = documentgroup_get_object($dirid);
+	$ndg = documentgroup_get_object($dirid, $g->getID());
 	$DocGroupName = $ndg->getName();
 	if (!$DocGroupName) {
 		$error_msg = $g->getErrorMessage();
@@ -149,7 +151,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		$cells = array();
 		$cells[][] = html_e('input', array('type' => 'checkbox', 'class' => 'checkeddocidactive', 'value' => $d->getID(), 'title' => _('Select / Deselect this document for massaction'), 'onClick' => 'controllerListTrash.checkgeneral("active")'));
 		switch ($d->getFileType()) {
-			case "URL": {
+			case 'URL': {
 				$cells[][] = util_make_link($d->getFileName(), html_image($d->getFileTypeImage(), '22', '22', array('alt' => $d->getFileType())), array('title' => _('Visit this link')));
 				break;
 			}
@@ -172,8 +174,8 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		}
 		$cells[][] = $d->getStateName();
 		switch ($d->getFileType()) {
-			case "URL": {
-				$cells[][] = "--";
+			case 'URL': {
+				$cells[][] = '--';
 				break;
 			}
 			default: {
@@ -189,7 +191,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		$editfileaction .= '&group_id='.$GLOBALS['group_id'];
 		$nextcell = '';
 		$nextcell .= util_make_link($redirecturl.'&action=delfile&fileid='.$d->getID(), $HTML->getRemovePic(_('Delete permanently this document.'), 'delfile'));
-		$nextcell .= util_make_link('#', html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this document'))), array('onclick' => 'javascript:controllerListTrash.toggleEditFileView({action:\''.util_make_uri($editfileaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json','2').', docgroupDict:'.$dm->getDocGroupList($newdgf->getNested(), 'json').', title:\''.addslashes($d->getName()).'\', filename:\''.addslashes($d->getFilename()).'\', description:\''.addslashes($d->getDescription()).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri("docman").'\'})', 'title' => _('Edit this document')), true);
+		$nextcell .= util_make_link('#', html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this document'))), array('onclick' => 'javascript:controllerListTrash.toggleEditFileView({action:\''.util_make_uri($editfileaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json','2').', docgroupDict:'.$dm->getDocGroupList($newdgf->getNested(array(1, 5)), 'json').', title:\''.addslashes($d->getName()).'\', filename:\''.addslashes($d->getFilename()).'\', description:\''.addslashes($d->getDescription()).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri("docman").'\'})', 'title' => _('Edit this document')), true);
 		$cells[][] = $nextcell;
 		echo $HTML->multiTableRow(array(), $cells);
 	}

@@ -6,7 +6,7 @@
  * Copyright 2009-2013, Roland Mas
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2010-2012, Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2016, Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of National Education
  * http://fusionforge.org
  *
@@ -161,29 +161,73 @@ function group_get_object_by_publicname($groupname) {
 /**
  * get_public_active_projects_asc() - Get a list of rows for public active projects (initially in trove/full_list)
  *
- * @param	int	$max_query_limit Optional Maximum number of rows to limit query length
+ * @param	int	$max_query_limit	Optional Maximum number of rows to limit query length
+ * @param	int	$offset			start to retrieve rows from offset value
  * @return	array	List of public active projects
  */
-function group_get_public_active_projects_asc($max_query_limit = -1) {
+function group_get_public_active_projects_asc($max_query_limit = -1, $offset = 0) {
+	$role_id = 1;
+	if (session_loggedin()) {
+		global $LUSER;
+		$userRoles = $LUSER->getRoles();
+		if (count($userRoles)) {
+			foreach ($userRoles as $r) {
+				$role_id .= ', '.$r->getID();
+			}
+		}
+	}
 
 	$res_grp = db_query_params ('
 			SELECT group_id, group_name, unix_group_name, short_description, register_time
 			FROM groups
 			WHERE status = $1 AND type_id=1 AND is_template=0 AND register_time > 0
+			AND group_id in (select ref_id FROM pfo_role_setting WHERE section_name = $2 and perm_val = 1 and role_id IN ('.$role_id.'))
 			ORDER BY group_name ASC
 			',
-			array('A'),
-			$max_query_limit);
+			array('A', 'project_read'),
+			$max_query_limit, $offset);
 	$projects = array();
 	while ($row_grp = db_fetch_array($res_grp)) {
-		if (!forge_check_perm ('project_read', $row_grp['group_id'])) {
-			continue;
-		}
 		$projects[] = $row_grp;
 	}
 	return $projects;
 }
 
+/**
+ * group_get_readable_projects_using_tag_asc() - Get a list of group_id for active projects (initially in trove/tag_cloud)
+ *
+ * @param	string	$selected_tag		Tag to search
+ * @param	int	$max_query_limit	Optional Maximum number of rows to limit query length
+ * @param	int	$offset			start to retrieve rows from offset value
+ * @return	array	List of public active projects
+ */
+function group_get_readable_projects_using_tag_asc($selected_tag, $max_query_limit = -1, $offset = 0) {
+	$role_id = 1;
+	if (session_loggedin()) {
+		global $LUSER;
+		$userRoles = $LUSER->getRoles();
+		if (count($userRoles)) {
+			foreach ($userRoles as $r) {
+				$role_id .= ', '.$r->getID();
+			}
+		}
+	}
+
+	$res_grp = db_query_params ('SELECT groups.group_id, group_name, unix_group_name, short_description, register_time
+		FROM project_tags, groups
+		WHERE LOWER(name) = $1
+		AND project_tags.group_id = groups.group_id
+		AND groups.status = $2 AND groups.type_id=1 AND groups.is_template=0 AND groups.register_time > 0
+		AND groups.group_id in (select ref_id FROM pfo_role_setting WHERE section_name = $3 and perm_val = 1 and role_id IN ('.$role_id.'))
+		ORDER BY groups.group_name ASC',
+		array(strtolower($selected_tag), 'A', 'project_read'),
+		$max_query_limit, $offset);
+	$projects = array();
+	while ($row_grp = db_fetch_array($res_grp)) {
+		$projects[] = $row_grp;
+	}
+	return $projects;
+}
 
 class Group extends Error {
 	/**
@@ -1584,8 +1628,9 @@ class Group extends Error {
 		}
 		return $this->data_array['homepage'];
 	}
+
 	/**
-	 * setHomepage - the hostname of the scm box where this project is located.
+	 * setHomepage - the hostname of the website url where this project is located.
 	 *
 	 * @param	string	$homepage	The name of the new HOMEPAGE
 	 * @return	bool
@@ -1747,6 +1792,7 @@ class Group extends Error {
             return false;
          }
       }
+
 		//
 		//	Delete Forums
 		//
@@ -1815,16 +1861,16 @@ class Group extends Error {
 			}
 		}
 
-     // Delete news forums in group itself
-      for ($i = 0; $i < db_numrows($res); $i++) {
-         $Forum = new Forum($this, db_result($res, $i, 'forum_id'));
-         if (!$Forum->delete(1, 1)) {
-            $this->setError(_("Could Not Delete News Forum: %d"), $Forum->getID());
-            return false;
-         }
-      }
+		// Delete news forums in group itself
+		for ($i = 0; $i < db_numrows($res); $i++) {
+			$Forum = new Forum($this, db_result($res, $i, 'forum_id'));
+			if (!$Forum->delete(1, 1)) {
+				$this->setError(_("Could Not Delete News Forum: %d"), $Forum->getID());
+				return false;
+			}
+		}
 
-      $res = db_query_params('DELETE FROM news_bytes WHERE group_id=$1',
+		$res = db_query_params('DELETE FROM news_bytes WHERE group_id=$1',
 					array($this->getID()));
 		if (!$res) {
 			$this->setError(_('Error Deleting News: ').db_error());
@@ -2249,7 +2295,7 @@ class Group extends Error {
 		plugin_hook ("group_removeuser", $hook_params);
 
 		//audit trail
-		$this->addHistory(_('Removed User'),$user_id);
+		$this->addHistory(_('Removed User'), $user_id);
 
 		db_commit();
 
@@ -2527,7 +2573,7 @@ class Group extends Error {
 					$olddgf = new DocumentGroupFactory($template);
 					// First pass: create all docgroups
 					$id_mappings['docman_docgroup'][0] = 0;
-					foreach ($olddgf->getDocumentGroups() as $o) {
+					foreach ($olddgf->getDocumentGroups(array(1, 5)) as $o) {
 						$ndgf = new DocumentGroup($this);
 						// .trash is a reserved directory
 						if ($o->getName() != '.trash' && $o->getParentID() == 0) {
@@ -2535,12 +2581,12 @@ class Group extends Error {
 							$id_mappings['docman_docgroup'][$o->getID()] = $ndgf->getID();
 						}
 					}
-					// Second pass: restore hierarchy links
-					foreach ($olddgf->getDocumentGroups() as $o) {
+					// Second pass: restore hierarchy links & stateid
+					foreach ($olddgf->getDocumentGroups(array(1, 5)) as $o) {
 						$ndgf = new DocumentGroup($this);
 						if ($o->getName() != '.trash' && $o->getParentID() == 0) {
 							$ndgf->fetchData($id_mappings['docman_docgroup'][$o->getID()]);
-							$ndgf->update($ndgf->getName(), $id_mappings['docman_docgroup'][$o->getParentID()]);
+							$ndgf->update($ndgf->getName(), $id_mappings['docman_docgroup'][$o->getParentID()], $id_mappings['docman_docgroup'][$o->getState()]);
 						}
 					}
 				}
@@ -2582,9 +2628,7 @@ class Group extends Error {
 				}
 			} else {
 				/* use SCM choice from registration page */
-
-				foreach ($template->getPlugins() as
-					$plugin_id => $plugin_name) {
+				foreach ($template->getPlugins() as $plugin_id => $plugin_name) {
 					if (substr($plugin_name, 3) == 'scm' &&
 						$plugin_name != 'scmhook') {
 						/* skip copying scm plugins */
@@ -2683,7 +2727,7 @@ class Group extends Error {
 		foreach ($admins as $admin) {
 			setup_gettext_for_user ($admin);
 
-			$message=sprintf(_('Your project registration for %4$s has been approved.
+			$message = sprintf(_('Your project registration for %4$s has been approved.
 
 Project Full Name:  %1$s
 Project Unix Name:  %2$s

@@ -91,8 +91,8 @@ if ($external_scm) {
 		$server_script = '/authscm/'.$u->getUnixName().'/viewvc';
 	// pass the parameters passed to this script to the remote script in the same fashion
 	$protocol = forge_get_config('use_ssl', 'scmsvn')? 'https://' : 'http://';
-    $pathinfo = (isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : '/');
-    $pathinfo = preg_replace('/ /', '%20', $pathinfo);
+	$pathinfo = (isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : '/');
+	$pathinfo = preg_replace('/ /', '%20', $pathinfo);
 	$script_url = $protocol . forge_get_config('scm_host') . $server_script
 		. $pathinfo . '?' . $_SERVER["QUERY_STRING"];
 	if ($redirect) {

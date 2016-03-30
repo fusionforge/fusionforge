@@ -2,7 +2,7 @@
 /**
  * FusionForge document manager
  *
- * Copyright 2011-2014, Franck Villaume - TrivialDev
+ * Copyright 2011-2014,2016, Franck Villaume - TrivialDev
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2013, French Ministry of National Education
  * http://fusionforge.org
@@ -133,9 +133,27 @@ class DocumentManager extends Error {
 	 * @return	boolean	success or not
 	 */
 	function isTrashEmpty() {
-		$res = db_query_params('select ( select count(*) from doc_groups where group_id = $1 and stateid = 2 and groupname !=$2 )
-					+ ( select count(*) from docdata_vw where group_id = $3 and stateid = 2 ) as c',
-					array($this->Group->getID(), '.trash', $this->Group->getID()));
+		if ($this->Group->usesPlugin('projects-hierarchy')) {
+			$projectsHierarchy = plugin_get_object('projects-hierarchy');
+			$projectIDsArray = $projectsHierarchy->getFamily($this->Group->getID(), 'child', true, 'validated');
+		}
+
+
+		if (isset($projectIDsArray) && is_array($projectIDsArray)) {
+			foreach ($projectIDsArray as $projectID) {
+				$groupObject = group_get_object($projectID);
+				if ($groupObject->usesDocman() && $projectsHierarchy->getDocmanStatus($groupObject->getID())
+					&& forge_check_perm('docman', $groupObject->getID(), 'approve')) {
+					$groupIdArr[] = $projectID;
+				}
+			}
+		}
+		$groupIdArr[] = $this->Group->getID();
+
+		$res = db_query_params('select ( select count(*) from doc_groups where group_id = ANY ($1) and stateid = 2 and groupname !=$2 )
+					+ ( select count(*) from docdata_vw where group_id = ANY ($3) and stateid = 2 ) as c',
+					array(db_int_array_to_any_clause($groupIdArr), '.trash', db_int_array_to_any_clause($groupIdArr)));
+
 		if (!$res) {
 			return false;
 		}
@@ -150,26 +168,32 @@ class DocumentManager extends Error {
 	 * @param	int	$docGroupId	the doc_group to start: default 0
 	 */
 	function getTree($selecteddir, $linkmenu, $docGroupId = 0) {
-		global $g; // the master group of all the groups .... anyway.
+		global $g; // the master group of all the groups .... anyway. Needed to support projects-hierarchy plugin
 		$dg = new DocumentGroup($this->Group);
 		switch ($linkmenu) {
 			case 'listtrashfile': {
 				$stateId = 2;
+				$doc_group_stateid = array(2);
 				break;
 			}
 			default: {
 				$stateId = 1;
+				$doc_group_stateid = array(1);
+				if (forge_check_perm('docman', $this->Group->getID(), 'approve')) {
+					$doc_group_stateid = array(1, 3, 4, 5);
+				}
 				break;
 			}
 		}
-		$subGroupIdArr = $dg->getSubgroup($docGroupId, $stateId);
+		$subGroupIdArr = $dg->getSubgroup($docGroupId, $doc_group_stateid);
 		if (sizeof($subGroupIdArr)) {
 			foreach ($subGroupIdArr as $subGroupIdValue) {
-				$localDg = documentgroup_get_object($subGroupIdValue);
+				$localDg = documentgroup_get_object($subGroupIdValue, $this->Group->getID());
 				$liclass = 'docman_li_treecontent';
 				if ($selecteddir == $localDg->getID()) {
 					$liclass = 'docman_li_treecontent_selected';
 				}
+				// support projects-hierarchy plugin
 				if ($this->Group->getID() != $g->getID()) {
 					$link = '/docman/?group_id='.$g->getID().'&view='.$linkmenu.'&dirid='.$localDg->getID().'&childgroup_id='.$this->Group->getID();
 				} else {
@@ -208,11 +232,16 @@ class DocumentManager extends Error {
 						}
 						$lititle .= _('Last Modified')._(': ').relative_date($localDg->getLastModifyDate());
 					}
-					echo html_ao('li', array('id' => 'leaf-'.$subGroupIdValue, 'class' => $liclass)).util_make_link($link, $localDg->getName(), array('title'=>$lititle)).$nbDocsLabel;
+					$linkname = $localDg->getName();
+					if ($localDg->getState() == 5) {
+						$linkname .= ' '._('(private)');
+					}
+					//use &nbsp + inline to support Chrome browser correctly
+					echo html_ao('li', array('id' => 'leaf-'.$subGroupIdValue, 'class' => $liclass)).'&nbsp;'.util_make_link($link, $localDg->getName(), array('title'=>$lititle, 'style' => 'display: inline')).$nbDocsLabel;
 				} else {
-					echo html_ao('li', array('id' => 'leaf-'.$subGroupIdValue, 'class' => $liclass)).util_make_link($link, $localDg->getName()).$nbDocsLabel;
+					echo html_ao('li', array('id' => 'leaf-'.$subGroupIdValue, 'class' => $liclass)).'&nbsp;'.util_make_link($link, $localDg->getName(), array('style' => 'display: inline')).$nbDocsLabel;
 				}
-				if ($dg->getSubgroup($subGroupIdValue, $stateId)) {
+				if ($dg->getSubgroup($subGroupIdValue, $doc_group_stateid)) {
 					echo html_ao('ul', array('class' => 'simpleTreeMenu'));
 					$this->getTree($selecteddir, $linkmenu, $subGroupIdValue);
 					echo html_ac(html_ap() - 1);
@@ -335,6 +364,12 @@ class DocumentManager extends Error {
 			} else {
 				$df = new DocumentFactory($doc_group->getGroup());
 				$df->setDocGroupID($doc_group->getID());
+				$stateidArr = array(1);
+				if (forge_check_perm('docman', $this->getGroup()->getID(), 'approve')) {
+					$stateIdDg = 5;
+				}
+				$df->setStateID(array(1, 4, 5));
+				$df->setDocGroupState($stateIdDg);
 				$docs = $df->getDocuments();
 				if (is_array($docs)) {
 					foreach ($docs as $doc) {
@@ -359,7 +394,9 @@ class DocumentManager extends Error {
 	 * @return	array	number per section of activities found between begin and end values
 	 */
 	function getActivity($sections, $begin, $end) {
+		$results = array();
 		for ($i = 0; $i < count($sections); $i++) {
+			$results[$sections[$i]] = 0;
 			$union = 0;
 			if (count($sections) >= 1 && $i != count($sections) -1) {
 				$union = 1;
@@ -375,7 +412,6 @@ class DocumentManager extends Error {
 			}
 		}
 		$res = db_query_qpa($qpa);
-		$results = array();
 		$j = 0;
 		while ($arr = db_fetch_array($res)) {
 			$results[$sections[$j]] = $arr['0'];

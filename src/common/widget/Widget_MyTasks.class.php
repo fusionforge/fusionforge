@@ -68,13 +68,13 @@ class Widget_MyTasks extends Widget {
 				$sql2 = 'SELECT project_task.project_task_id, project_task.priority, project_task.summary,project_task.percent_complete '.
 					'FROM groups,project_group_list,project_task,project_assigned_to '.
 					'WHERE project_task.project_task_id=project_assigned_to.project_task_id '.
-					"AND project_assigned_to.assigned_to_id=$1 AND project_task.status_id='1'  ".
+					'AND project_assigned_to.assigned_to_id = $1 AND project_task.status_id = 1 '.
 					'AND project_group_list.group_id=groups.group_id '.
 					"AND groups.group_id=$2 ".
 					'AND project_group_list.group_project_id=project_task.group_project_id '.
-					"AND project_group_list.group_project_id= $3 LIMIT 100";
+					'AND project_group_list.group_project_id= $3 ';
 
-				$result2 = db_query_params($sql2,array(user_getid(),$group_id,$group_project_id));
+				$result2 = db_query_params($sql2,array(user_getid(),$group_id,$group_project_id), 100);
 				$rows2 = db_numrows($result2);
 
 				$vItemId = new Valid_UInt('hide_item_id');

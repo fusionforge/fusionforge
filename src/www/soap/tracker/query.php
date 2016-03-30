@@ -115,16 +115,16 @@ function artifactGetViews($session_ser, $group_id, $group_artifact_id) {
 	continue_session($session_ser);
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
-		return new soap_fault ('','artifactGetViews','Could Not Get Project','Could Not Get Project');
+		return new soap_fault('','artifactGetViews','Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {
-		return new soap_fault ('','artifactGetViews',$grp->getErrorMessage(),$grp->getErrorMessage());
+		return new soap_fault('','artifactGetViews',$grp->getErrorMessage(),$grp->getErrorMessage());
 	}
 
 	$at = new ArtifactType($grp,$group_artifact_id);
 	if (!$at || !is_object($at)) {
-		return new soap_fault ('','artifactGetViews','Could Not Get ArtifactType','Could Not Get ArtifactType');
+		return new soap_fault('','artifactGetViews','Could Not Get ArtifactType','Could Not Get ArtifactType');
 	} elseif ($at->isError()) {
-		return new soap_fault ('','artifactGetViews',$at->getErrorMessage(),$at->getErrorMessage());
+		return new soap_fault('','artifactGetViews',$at->getErrorMessage(),$at->getErrorMessage());
 	}
 
 	$aqf = new ArtifactQueryFactory($at);
@@ -204,23 +204,23 @@ function artifactDeleteView($session_ser, $group_id, $group_artifact_id, $artifa
 	continue_session($session_ser);
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
-		return new soap_fault ('','artifactDeleteView','Could Not Get Group','Could Not Get Group');
+		return new soap_fault('','artifactDeleteView','Could Not Get Group','Could Not Get Group');
 	} elseif ($grp->isError()) {
-		return new soap_fault ('','artifactDeleteView',$grp->getErrorMessage(),$grp->getErrorMessage());
+		return new soap_fault('','artifactDeleteView',$grp->getErrorMessage(),$grp->getErrorMessage());
 	}
 
 	$at = new ArtifactType($grp,$group_artifact_id);
 	if (!$at || !is_object($at)) {
-		return new soap_fault ('','artifactDeleteView','Could Not Get ArtifactType','Could Not Get ArtifactType');
+		return new soap_fault('','artifactDeleteView','Could Not Get ArtifactType','Could Not Get ArtifactType');
 	} elseif ($at->isError()) {
-		return new soap_fault ('','artifactDeleteView',$at->getErrorMessage(),$at->getErrorMessage());
+		return new soap_fault('','artifactDeleteView',$at->getErrorMessage(),$at->getErrorMessage());
 	}
 
 	$query = new ArtifactQuery($at, $artifact_query_id);
 	if (!$query || !is_object($query)) {
-		return new soap_fault ('','artifactDeleteView','Could Not Get Query','Could Not Get Query');
+		return new soap_fault('','artifactDeleteView','Could Not Get Query','Could Not Get Query');
 	} elseif ($query->isError()) {
-		return new soap_fault ('','artifactDeleteView',$query->getErrorMessage(),$query->getErrorMessage());
+		return new soap_fault('','artifactDeleteView',$query->getErrorMessage(),$query->getErrorMessage());
 	}
 
 	$query->delete();
@@ -247,23 +247,23 @@ function artifactSetView($session_ser, $group_id, $group_artifact_id, $artifact_
 	continue_session($session_ser);
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
-		return new soap_fault ('','artifactSetView','Could Not Get Group','Could Not Get Group');
+		return new soap_fault('','artifactSetView','Could Not Get Group','Could Not Get Group');
 	} elseif ($grp->isError()) {
-		return new soap_fault ('','artifactSetView',$grp->getErrorMessage(),$grp->getErrorMessage());
+		return new soap_fault('','artifactSetView',$grp->getErrorMessage(),$grp->getErrorMessage());
 	}
 
 	$at = new ArtifactType($grp,$group_artifact_id);
 	if (!$at || !is_object($at)) {
-		return new soap_fault ('','artifactSetView','Could Not Get ArtifactType','Could Not Get ArtifactType');
+		return new soap_fault('','artifactSetView','Could Not Get ArtifactType','Could Not Get ArtifactType');
 	} elseif ($at->isError()) {
-		return new soap_fault ('','artifactSetView',$at->getErrorMessage(),$at->getErrorMessage());
+		return new soap_fault('','artifactSetView',$at->getErrorMessage(),$at->getErrorMessage());
 	}
 
 	$query = new ArtifactQuery($at, $artifact_query_id);
 	if (!$query || !is_object($query)) {
-		return new soap_fault ('','artifactDeleteView','Could Not Get Query','Could Not Get Query');
+		return new soap_fault('','artifactDeleteView','Could Not Get Query','Could Not Get Query');
 	} elseif ($query->isError()) {
-		return new soap_fault ('','artifactDeleteView',$query->getErrorMessage(),$query->getErrorMessage());
+		return new soap_fault('','artifactDeleteView',$query->getErrorMessage(),$query->getErrorMessage());
 	}
 
 	$query->makeDefault();
@@ -312,16 +312,16 @@ function artifactCreateView($session_ser, $group_id, $group_artifact_id, $name, 
 	continue_session($session_ser);
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
-		return new soap_fault ('','artifactCreateView','Could Not Get Group','Could Not Get Group');
+		return new soap_fault('','artifactCreateView','Could Not Get Group','Could Not Get Group');
 	} elseif ($grp->isError()) {
-		return new soap_fault ('','artifactCreateView',$grp->getErrorMessage(),$grp->getErrorMessage());
+		return new soap_fault('','artifactCreateView',$grp->getErrorMessage(),$grp->getErrorMessage());
 	}
 
 	$at = new ArtifactType($grp,$group_artifact_id);
 	if (!$at || !is_object($at)) {
-		return new soap_fault ('','artifactCreateView','Could Not Get ArtifactType','Could Not Get ArtifactType');
+		return new soap_fault('','artifactCreateView','Could Not Get ArtifactType','Could Not Get ArtifactType');
 	} elseif ($at->isError()) {
-		return new soap_fault ('','artifactCreateView',$at->getErrorMessage(),$at->getErrorMessage());
+		return new soap_fault('','artifactCreateView',$at->getErrorMessage(),$at->getErrorMessage());
 	}
 
 	//rearrange the extra fields
@@ -331,7 +331,7 @@ function artifactCreateView($session_ser, $group_id, $group_artifact_id, $name, 
 	$query = new ArtifactQuery($at);
 	if (!$query->create($name, $status, $assignee, $moddaterange, $sort_col,
 		$sort_ord, $extra_fields, $opendaterange, $closedaterange)) {
-		return new soap_fault ('','artifactCreateView',$query->getErrorMessage(),$query->getErrorMessage());
+		return new soap_fault('','artifactCreateView',$query->getErrorMessage(),$query->getErrorMessage());
 	}
 
 	return $query->getID();
@@ -369,16 +369,16 @@ function artifactUpdateView($session_ser, $group_id, $group_artifact_id, $query_
 	continue_session($session_ser);
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
-		return new soap_fault ('','artifactUpdateView','Could Not Get Group','Could Not Get Group');
+		return new soap_fault('','artifactUpdateView','Could Not Get Group','Could Not Get Group');
 	} elseif ($grp->isError()) {
-		return new soap_fault ('','artifactCreateView',$grp->getErrorMessage(),$grp->getErrorMessage());
+		return new soap_fault('','artifactCreateView',$grp->getErrorMessage(),$grp->getErrorMessage());
 	}
 
 	$at = new ArtifactType($grp,$group_artifact_id);
 	if (!$at || !is_object($at)) {
-		return new soap_fault ('','artifactUpdateView','Could Not Get ArtifactType','Could Not Get ArtifactType');
+		return new soap_fault('','artifactUpdateView','Could Not Get ArtifactType','Could Not Get ArtifactType');
 	} elseif ($at->isError()) {
-		return new soap_fault ('','artifactUpdateView',$at->getErrorMessage(),$at->getErrorMessage());
+		return new soap_fault('','artifactUpdateView',$at->getErrorMessage(),$at->getErrorMessage());
 	}
 
 	//rearrange the extra fields
@@ -387,14 +387,14 @@ function artifactUpdateView($session_ser, $group_id, $group_artifact_id, $query_
 
 	$query = new ArtifactQuery($at, $query_id);
 	if (!$query || !is_object($query)) {
-		return new soap_fault ('','artifactUpdateView','Could Not Get ArtifactType','Could Not Get ArtifactType');
+		return new soap_fault('','artifactUpdateView','Could Not Get ArtifactType','Could Not Get ArtifactType');
 	} elseif ($query->isError()) {
-		return new soap_fault ('','artifactUpdateView',$query->getErrorMessage(),$query->getErrorMessage());
+		return new soap_fault('','artifactUpdateView',$query->getErrorMessage(),$query->getErrorMessage());
 	}
 
 	if (!$query->update($name, $status, $assignee, $moddaterange, $sort_col, $sort_ord,
 		$extra_fields, $opendaterange, $closedaterange)) {
-		return new soap_fault ('','artifactUpdateView',$query->getErrorMessage(),$query->getErrorMessage());
+		return new soap_fault('','artifactUpdateView',$query->getErrorMessage(),$query->getErrorMessage());
 	}
 
 	return $query->getID();

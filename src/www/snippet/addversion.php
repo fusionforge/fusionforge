@@ -83,7 +83,6 @@ if (session_loggedin()) {
 
 		?>
 		<p><?php echo _('If you have modified a version of a snippet and you feel it is significant enough to share with others, please do so.'); ?></p>
-		<p>
 		<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 		<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>">
 		<input type="hidden" name="post_changes" value="y" />
@@ -97,11 +96,11 @@ if (session_loggedin()) {
 		</td></tr>
 
 		<tr><td colspan="2"><strong><?php echo _('Changes')._(':'). utils_requiredField(); ?></strong><br />
-			<textarea name="changes" rows="5" cols="45" required="required" s></textarea>
+			<textarea name="changes" rows="5" cols="45" required="required"></textarea>
 		</td></tr>
 
 		<tr><td colspan="2"><strong><?php echo _('Paste the Code Here')._(':'). utils_requiredField(); ?></strong><br />
-			<textarea name="code" rows="30" cols="85" required="required" ></textarea>
+			<textarea name="code" rows="30" cols="85" required="required"></textarea>
 		</td></tr>
 
 		<tr><td colspan="2" class="align-center">
@@ -109,7 +108,7 @@ if (session_loggedin()) {
 			<br />
 			<input type="submit" name="submit" value="<?php echo _('Submit'); ?>" />
 		</td></tr>
-		</table></form></p>
+		</table></form>
 		<?php
 
 		snippet_footer();

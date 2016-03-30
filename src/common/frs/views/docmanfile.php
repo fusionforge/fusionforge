@@ -2,7 +2,7 @@
 /**
  * FusionForge FRS : docman include view
  *
- * Copyright 2014 Franck Villaume - TrivialDev
+ * Copyright 2014, 2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -29,4 +29,8 @@ global $content;
 $content .= html_e('p', array(), _('Alternatively, you can pick a file available in the Documents Management tool.'), false);
 $dm = new DocumentManager($g);
 $dgf = new DocumentGroupFactory($g);
-$content .= $dm->showSelectNestedGroups($dgf->getNested(), 'docman_fileid', true, 0, array(), true);
+$stateidArr = array(1);
+if (forge_check_perm('docman', $g->getID(), 'approve')) {
+	$stateidArr[] = 5;
+}
+$content .= $dm->showSelectNestedGroups($dgf->getNested($stateidArr), 'docman_fileid', true, 0, array(), true);

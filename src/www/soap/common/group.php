@@ -338,7 +338,7 @@ function &getGroups($session_ser,$group_ids) {
 
 	$grps = group_get_objects($group_ids);
 	if (!$grps) {
-		return new soap_fault ('2001','group','Could Not Get Projects by Id'.$inputArgs,$feedback);
+		return new soap_fault('2001','group','Could Not Get Projects by Id'.$inputArgs,$feedback);
 	}
 
 	return groups_to_soap($grps);
@@ -348,7 +348,7 @@ function &getGroupsByName($session_ser,$group_names) {
 	session_continue($session_ser);
 	$grps = group_get_objects_by_name($group_names);
 	if (!$grps) {
-		return new soap_fault ('2002','group','Could Not Get Projects by Name','Could Not Get Projects by Name');
+		return new soap_fault('2002','group','Could Not Get Projects by Name','Could Not Get Projects by Name');
 	}
 
 	return groups_to_soap($grps);
@@ -361,7 +361,7 @@ function &getPublicProjectNames($session_ser) {
 	$result = $forge->getPublicProjectNames();
 	if ($forge->isError()) {
 		$errMsg = 'Could Not Get Public Projects Names: '.$forge->getErrorMessage();
-		return new soap_fault ('2003','group',$errMsg,$errMsg);
+		return new soap_fault('2003','group',$errMsg,$errMsg);
 	}
 	return $result;
 }
@@ -374,7 +374,7 @@ function getGroupByStatus($session_ser, $status) {
 	$grps = group_get_objects(util_result_column_to_array($res,0));
 
 	if ($grps < 0) {
-		return new soap_fault ('2004','group','Could Not Get Projects by Status','Could Not Get Projects by Status');
+		return new soap_fault('2004','group','Could Not Get Projects by Status','Could Not Get Projects by Status');
 	}
 
 	return groups_to_soap($grps);
@@ -388,7 +388,7 @@ function approveGroup($session_ser, $group_id) {
 
 	if (!$result) {
 		$errMsg = 'Could Not Approve The Project: '.$group->getErrorMessage();
-		return new soap_fault ('2005','group',$errMsg,$errMsg);
+		return new soap_fault('2005','group',$errMsg,$errMsg);
 	}
 
 	return $result;
@@ -403,7 +403,7 @@ function addGroup($session_ser, $group_name, $unix_name, $description, $purpose,
 
 	if (!$result){
 		$errMsg = 'Could Not Add A New Project: '.$group->getErrorMessage();
-		return new soap_fault ('2006','group',$errMsg,$errMsg);
+		return new soap_fault('2006','group',$errMsg,$errMsg);
 	}
 	return $result;
 }
@@ -431,7 +431,7 @@ function updateGroup($session_ser, $group_id, $is_public, $is_template, $status,
 
 	if ($error_msg){
 		$errMsg = 'Could Not Update A Project: '.$error_msg;
-		return new soap_fault ('2007','group',$errMsg,$errMsg);
+		return new soap_fault('2007','group',$errMsg,$errMsg);
 	}
 	return true;
 }
@@ -468,7 +468,7 @@ function updateGroup2($session_ser, $group_id, $form_group_name, $form_homepage,
 
 	if (!$res) {
 		$errMsg = 'Could Not Update A Project: '.$group->getErrorMessage();
-		return new soap_fault ('2007','group',$errMsg,$errMsg);
+		return new soap_fault('2007','group',$errMsg,$errMsg);
 	}
 
 	return true;
@@ -482,7 +482,7 @@ function deleteGroup($session_ser, $group_id) {
 	$result = $group->delete(true, true, true);
 	if (!$result){
 		$errMsg = 'Could Not Delete A Project: '.$group->getErrorMessage();
-		return new soap_fault ('2008','group',$errMsg,$errMsg);
+		return new soap_fault('2008','group',$errMsg,$errMsg);
 	}
 	return $result;
 }
@@ -493,7 +493,7 @@ function addUserToGroup ($session_ser,$user_unix_name, $group_id, $role_id){
 
 	$user_object = user_get_object_by_name($user_unix_name);
 	if ($user_object == false) {
-		return new soap_fault ('addUserToGroup','Could Not Get User','Could Not Get User');
+		return new soap_fault('addUserToGroup','Could Not Get User','Could Not Get User');
 	}
 	$user_id = $user_object->getID();
 
@@ -501,14 +501,14 @@ function addUserToGroup ($session_ser,$user_unix_name, $group_id, $role_id){
 
 	if (!$group || !is_object($group)) {
     		$errMsg = 'Could not get group: '.$group->getErrorMessage();
-		return new soap_fault ('2004','group',$errMsg,$errMsg);
+		return new soap_fault('2004','group',$errMsg,$errMsg);
 	} elseif ($group->isError()) {
 		$errMsg = 'Could not get group: '.$group->getErrorMessage();
-		return new soap_fault ('2004','group',$errMsg,$errMsg);
+		return new soap_fault('2004','group',$errMsg,$errMsg);
 	}
 
 	if (!$group->addUser($user_unix_name,$role_id)) {
-		return new soap_fault ('addUserToGroup',$group->getErrorMessage(),$group->getErrorMessage());
+		return new soap_fault('addUserToGroup',$group->getErrorMessage(),$group->getErrorMessage());
 	} else {
 		//if the user have requested to join this group
 		//we should remove him from the request list
@@ -528,7 +528,7 @@ function removeUserFromGroup ($session_ser,$user_id, $role_id){
 	$role = RBACEngine::getInstance()->getRoleById($role_id) ;
 
 	if (!$role->removeUser (user_get_object ($user_id))) {
-		return new soap_fault ('removeUserFromGroup',$role->getErrorMessage(),$role->getErrorMessage());
+		return new soap_fault('removeUserFromGroup',$role->getErrorMessage(),$role->getErrorMessage());
 	} else {
 		return true;
 	}
@@ -542,15 +542,15 @@ function &getGroupRoles($session_ser,$group_id) {
 
 	if (!$group || !is_object($group)) {
     		$errMsg = 'Could not get group: '.$group->getErrorMessage();
-		return new soap_fault ('2005','group',$errMsg,$errMsg);
+		return new soap_fault('2005','group',$errMsg,$errMsg);
 	} elseif ($group->isError()) {
 		$errMsg = 'Could not get group: '.$group->getErrorMessage();
-		return new soap_fault ('2005','group',$errMsg,$errMsg);
+		return new soap_fault('2005','group',$errMsg,$errMsg);
 	}
 	$roles = $group->getRoles();
 	if (!$roles) {
 		$errMsg = 'Could not get any roles';
-		return new soap_fault ('2005','group',$errMsg,$errMsg);
+		return new soap_fault('2005','group',$errMsg,$errMsg);
 	}
 
 	return roles_to_soap($roles,$group_id);
@@ -564,16 +564,16 @@ function getUserRolesForGroup($session_ser, $group_id, $user_id) {
 	$user = user_get_object($user_id);
 	if ($user == false) {
 		$errMsg = 'Could not get user: '.$user->getErrorMessage();
-		return new soap_fault ('2006','user',$errMsg,$errMsg);
+		return new soap_fault('2006','user',$errMsg,$errMsg);
 	}
 
 	$group = group_get_object($group_id);
 	if (!$group || !is_object($group)) {
     		$errMsg = 'Could not get group: '.$group->getErrorMessage();
-		return new soap_fault ('2006','group',$errMsg,$errMsg);
+		return new soap_fault('2006','group',$errMsg,$errMsg);
 	} elseif ($group->isError()) {
 		$errMsg = 'Could not get group: '.$group->getErrorMessage();
-		return new soap_fault ('2006','group',$errMsg,$errMsg);
+		return new soap_fault('2006','group',$errMsg,$errMsg);
 	}
 
 	foreach (RBACEngine::getInstance()->getAvailableRolesForUser ($user) as $role) {
@@ -596,9 +596,9 @@ function addGroupRole ($session_ser, $group_id, $role_name, $project_read, $proj
 	$role = new Role ($group) ;
 
 	if (!$role || !is_object($role)) {
-		return new soap_fault ('addGroupRole','Could Not Get GroupRole','Could Not Get GroupRole');
+		return new soap_fault('addGroupRole','Could Not Get GroupRole','Could Not Get GroupRole');
 	} elseif ($role->isError()) {
-		return new soap_fault ('addGroupRole',$role->getErrorMessage(),$role->getErrorMessage());
+		return new soap_fault('addGroupRole',$role->getErrorMessage(),$role->getErrorMessage());
 	}
 
 	$data = array ();
@@ -617,7 +617,7 @@ function addGroupRole ($session_ser, $group_id, $role_name, $project_read, $proj
 	$role_id = $role->create($role_name, $data);
 
 	if (!$role_id) {
-		return new soap_fault ('addGroupRole',$role->getErrorMessage(),$role->getErrorMessage());
+		return new soap_fault('addGroupRole',$role->getErrorMessage(),$role->getErrorMessage());
 	}
 
 	return $role_id;
@@ -632,9 +632,9 @@ function updateGroupRole ($session_ser, $group_id, $role_id, $role_name, $projec
 	$role = RBACEngine::getInstance()->getRoleById($role_id) ;
 
 	if (!$role || !is_object($role)) {
-		return new soap_fault ('updateGroupRole','Could Not Get Role','Could Not Get Role');
+		return new soap_fault('updateGroupRole','Could Not Get Role','Could Not Get Role');
 	} elseif ($role->isError()) {
-		return new soap_fault ('updateGroupRole',$role->getErrorMessage(),$role->getErrorMessage());
+		return new soap_fault('updateGroupRole',$role->getErrorMessage(),$role->getErrorMessage());
 	}
 
 	$data = array ();
@@ -653,7 +653,7 @@ function updateGroupRole ($session_ser, $group_id, $role_id, $role_name, $projec
 	$role_id = $role->update($role_name, $data, false);
 
 	if (!$role_id) {
-		return new soap_fault ('updateRole',$role->getErrorMessage(),$role->getErrorMessage());
+		return new soap_fault('updateRole',$role->getErrorMessage(),$role->getErrorMessage());
 	}
 
 	return $role_id;
@@ -668,21 +668,21 @@ function deleteGroupRole ($session_ser, $group_id, $role_id){
 	$role = RBACEngine::getInstance()->getRoleById($role_id) ;
 
 	if (!$role || !is_object($role)) {
-		return new soap_fault ('deleteGroupRole','Could Not Get Role','Could Not Get Role');
+		return new soap_fault('deleteGroupRole','Could Not Get Role','Could Not Get Role');
 	} elseif ($role->isError()) {
-		return new soap_fault ('deleteGroupRole',$role->getErrorMessage(),$role->getErrorMessage());
+		return new soap_fault('deleteGroupRole',$role->getErrorMessage(),$role->getErrorMessage());
 	}
 
 	if ($role->getHomeProject() == NULL) {
-		return new soap_fault ('deleteGroupRole', "You can't delete a global role from here.", "You can't delete a global role from here.");
+		return new soap_fault('deleteGroupRole', "You can't delete a global role from here.", "You can't delete a global role from here.");
 	}
 
 	if ($role->getHomeProject()->getID() != $group_id) {
-		return new soap_fault ('deleteGroupRole', "You can't delete a role belonging to another project.", "You can't delete a role belonging to another project.");
+		return new soap_fault('deleteGroupRole', "You can't delete a role belonging to another project.", "You can't delete a role belonging to another project.");
 	}
 
 	if (!$role->delete()) {
-		return new soap_fault ('deleteGroupRole',$role->getErrorMessage(),$role->getErrorMessage());
+		return new soap_fault('deleteGroupRole',$role->getErrorMessage(),$role->getErrorMessage());
 	}else{
 		return true;
 	}

@@ -2,7 +2,7 @@
 /**
  * Copyright (C) 2010-2013 Alain Peyrat - Alcatel-Lucent
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013,2015 Franck Villaume - TrivialDev
  * Copyright (C) 2015  Inria (Sylvain Beucler)
  *
  * This file is part of FusionForge.
@@ -60,11 +60,11 @@ class CreateDocURL extends FForge_SeleniumTestCase
 		$this->clickAndWait("addItemDocmanMenu");
 		// ugly hack until we fix behavior in docman when no folders exist. We need to click twice on the link
 		$this->clickAndWait("addItemDocmanMenu");
-		$this->click("id=tab-new-folder");
+		$this->click("id=tabs-new-folder");
 		$this->type("groupname", "docdirectory");
 		$this->clickAndWait("submitaddsubgroup");
 		$this->clickAndWait("addItemDocmanMenu");
-		$this->click("id=tab-new-document");
+		$this->click("id=tabs-new-document");
 		$this->type("title", "My document");
 		$this->type("//input[@name='description']", "L'année dernière à Noël, 3 < 4, 中国 \" <em>, père & fils");
 		$this->click("//input[@name='type' and @value='pasteurl']");

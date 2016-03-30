@@ -11,6 +11,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2003 (c) GForge, LLC
  * Copyright 2010, Roland Mas
+ * Copyright 2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -110,7 +111,7 @@ foreach ($all_users as $user) {
 			}
 		}
 		break;
-	case 'SFDLVPR':
+	case 'SFDVLPR':
 		$process = forge_check_global_perm_for_user ($user,'forge_admin') ;
 		break;
 	}
@@ -179,5 +180,3 @@ function m_exit($mess = '') {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

@@ -63,7 +63,7 @@ function highlight_target_words($word_array,$text) {
         return preg_replace("/($re)/i",'<span style="background-color:pink">\1</span>',$text);
 }
 
-$HTML->header(array('title'=>'Search','pagename'=>'search'));
+$HTML->header(array('title'=>_('Global Project Search'),'pagename'=>'search'));
 
 echo "<p>";
 
@@ -145,13 +145,13 @@ $qpa = db_construct_qpa($qpa, ')) ORDER BY '.$order) ;
 
 $limit=25;
 
-$result = db_query_qpa ($qpa, $limit+1, $offset, 'DB_SEARCH');
+$result = db_query_qpa ($qpa, $limit+1, $offset);
 $rows = $rows_returned = db_numrows($result);
 
 if (!$result || $rows < 1) {
         $no_rows = 1;
         echo "<h2>".sprintf (_('No matches found for “%s”'), $gwords)."</h2>";
-        echo db_error('DB_SEARCH');
+        echo db_error();
 
 } else {
 
@@ -182,7 +182,7 @@ if (!$result || $rows < 1) {
                         . db_result($result, $i, 'project_link')."\" target=\"blank\">"
                         . html_image("ic/msg.png","10","12",array("border"=>"0"))."&nbsp;"
                         . highlight_target_words($array,db_result($result, $i, 'project_title'))."</a></td>
-<td>".highlight_target_words($array,db_result($result,$i,'project_description'))."</td>
+<td>".highlight_target_words($array,html_entity_decode(db_result($result,$i,'project_description')))."</td>
 <td><center><a href=\"".db_result($result,$i,'link')."\" target=\"_blank\">"
                         . db_result($result,$i,'title')."</a></center></td></tr>\n";
         }

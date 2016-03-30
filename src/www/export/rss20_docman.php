@@ -1,6 +1,7 @@
 <?php
 /**
- * Copyright 2012, Franck Villaume - TrivialDev
+ * FusionForge Documents RSS Feed
+ * Copyright 2012,2015 Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -19,16 +20,6 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-// export a group's tracker bugs per artifact in RSS 2.0
-// Author: Jutta Horstmann, data in transit <jh@dataintransit.com>
-// Created: 01.10.07
-// Based on: export/rss20_tracker.php (by JH), docman/index.php
-// Changes:
-// Date         Author      Comment
-// 07.11.07     JH          show only public group feeds
-//
-//TO DO: Translations for error messages
-//Notes:
 // Keep in mind to write "&" in URLs as &amp; in RSS feeds
 
 
@@ -88,7 +79,7 @@ function beginFeed($groupname = "", $link = "") {
 			';
 	print " <channel>\n";
 	print "  <title>".forge_get_config('forge_name')." Project \"".$groupname."\" Documents</title>\n";
-	print "  <link>http://".forge_get_config('web_host').$link."</link>\n";
+	print "  <link>".util_make_url($link)."</link>\n";
 	print "  <description>".forge_get_config('forge_name')." Documents of \"".$groupname."\"</description>\n";
 	print "  <language>en-us</language>\n";
 	print "  <copyright>Copyright ".date("Y")." ".forge_get_config('forge_name')."</copyright>\n";
@@ -99,10 +90,6 @@ function beginFeed($groupname = "", $link = "") {
 }
 
 function writeFeed($d_arr, $limit){
-
-	// ## default limit
-	//if (isset($limit) ||empty($limit)) $limit = 10;
-	//if ($limit > 100) $limit = 100;
 
 	/*
 	if (!is_array($nested_groups["$parent_group"])) {
@@ -117,7 +104,7 @@ function writeFeed($d_arr, $limit){
 		//$outputtotal = 0;
 		//loop through the documents
 		for ($j = 0; $j < count($d_arr); $j++) {
-			$link = (( $d_arr[$j]->isURL() ) ? $d_arr[$j]->getFileName() : "http://".forge_get_config('web_host')."/docman/view.php/".$d_arr[$j]->Group->getID()."/".$d_arr[$j]->getID()."/".$d_arr[$j]->getFileName() );
+			$link = (( $d_arr[$j]->isURL() ) ? $d_arr[$j]->getFileName() : util_make_url('/docman/view.php/'.$d_arr[$j]->Group->getID().'/'.$d_arr[$j]->getID().'/'.urlencode($d_arr[$j]->getFileName())));
 
 			print "  <item>\n";
 			if (!is_object($d_arr[$j])) {

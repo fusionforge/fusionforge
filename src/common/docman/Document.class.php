@@ -6,7 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2011-2015, Franck Villaume - TrivialDev
+ * Copyright 2011-2016, Franck Villaume - TrivialDev
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
@@ -40,23 +40,24 @@ $DOCUMENT_OBJ = array();
  * document_get_object is useful so you can pool document objects/save database queries
  * You should always use this instead of instantiating the object directly
  *
- * @param	int		$doc_id	The ID of the document - required
- * @param	int|bool	$res	The result set handle ("SELECT * FROM docdata_vw WHERE docid=$1")
+ * @param	int		$doc_id		The ID of the document - required
+ * @param	int		$group_id	Group ID of the project - required
+ * @param	int|bool	$res		The result set handle ("SELECT * FROM docdata_vw WHERE docid=$1")
  * @return	Document	a document object or false on failure
  */
-function &document_get_object($doc_id, $res = false) {
+function &document_get_object($doc_id, $group_id, $res = false) {
 	global $DOCUMENT_OBJ;
 	if (!isset($DOCUMENT_OBJ["_".$doc_id."_"])) {
 		if ($res) {
 			//the db result handle was passed in
 		} else {
-			$res = db_query_params('SELECT * FROM docdata_vw WHERE docid = $1',
-						array($doc_id));
+			$res = db_query_params('SELECT * FROM docdata_vw WHERE docid = $1 and group_id = $2',
+						array($doc_id, $group_id));
 		}
 		if (!$res || db_numrows($res) < 1) {
 			$DOCUMENT_OBJ["_".$doc_id."_"] = false;
 		} else {
-			$DOCUMENT_OBJ["_".$doc_id."_"] = new Document(group_get_object(db_result($res,0,'group_id')), $doc_id, db_fetch_array($res));
+			$DOCUMENT_OBJ["_".$doc_id."_"] = new Document(group_get_object($group_id), $doc_id, db_fetch_array($res));
 		}
 	}
 	return $DOCUMENT_OBJ["_".$doc_id."_"];
@@ -160,7 +161,7 @@ class Document extends Error {
 			}
 		}
 
-		$dg = documentgroup_get_object($doc_group);
+		$dg = documentgroup_get_object($doc_group, $this->Group->getID());
 		if ($dg->hasDocument($filename)) {
 			$this->setError(_('Document already published in this folder').' '.$dg->getPath());
 			return false;
@@ -186,7 +187,7 @@ class Document extends Error {
 		// key words for in-document search
 		if ($this->Group->useDocmanSearch() && $filesize) {
 			$kw = new Parsedata();
-			$kwords = $kw->get_parse_data($data, htmlspecialchars($title), htmlspecialchars($description), $filetype, $filename);
+			$kwords = $kw->get_parse_data($data, $filetype);
 		} else {
 			$kwords ='';
 		}
@@ -243,7 +244,7 @@ class Document extends Error {
 		}
 
 		if ($perm->isDocEditor()) {
-			$localDg = documentgroup_get_object($doc_group);
+			$localDg = documentgroup_get_object($doc_group, $this->Group->getID());
 			if (!$localDg->update($localDg->getName(), $localDg->getParentID(), 1)) {
 				$this->setError(_('Error updating document group')._(': ').$localDg->getErrorMessage());
 				if ($filesize) {
@@ -826,6 +827,7 @@ class Document extends Error {
 			return false;
 		}
 
+		$localDg = new DocumentGroup($this->Group, $doc_group);
 		if (!$localDg->update($localDg->getName(), $localDg->getParentID(), 1)) {
 			$this->setOnUpdateError(_('Error updating document group')._(': ').$localDg->getErrorMessage());
 			db_rollback();
@@ -836,7 +838,7 @@ class Document extends Error {
 			// key words for in-document search
 			if ($this->Group->useDocmanSearch()) {
 				$kw = new Parsedata();
-				$kwords = $kw->get_parse_data($data, htmlspecialchars($title), htmlspecialchars($description), $filetype, $filename);
+				$kwords = $kw->get_parse_data($data, $filetype);
 			} else {
 				$kwords = '';
 			}
@@ -868,7 +870,7 @@ class Document extends Error {
 		if ($this->isMonitoredBy('ALL')) {
 			$BCC .= $this->getMonitoredUserEmailAddress();
 		}
-		$dg = documentgroup_get_object($this->getDocGroupID());
+		$dg = documentgroup_get_object($this->getDocGroupID(), $this->Group->getID());
 		if ($dg->isMonitoredBy('ALL')) {
 			$BCC .= $dg->getMonitoredUserEmailAddress();
 		}
@@ -999,8 +1001,8 @@ class Document extends Error {
 	 */
 	function downloadUp() {
 		if (session_loggedin()) {
-			$s =& session_get_user();
-			$us = $s->getID();
+			global $LUSER;
+			$us = $LUSER->getID();
 		} else {
 			$us=100;
 		}
@@ -1062,10 +1064,30 @@ class Document extends Error {
 			$this->setOnUpdateError(db_error());
 			return false;
 		}
-		$localDg = documentgroup_get_object($this->getDocGroupID());
+		$localDg = documentgroup_get_object($this->getDocGroupID(), $this->Group->getID());
 		if (!$localDg->update($localDg->getName(), $localDg->getParentID(), 1)) {
 			$this->setError(_('Error updating document group')._(': ').$localDg->getErrorMessage());
 			return false;
+		}
+		for ($i = 0; $i < count($colArr); $i++) {
+			switch ($colArr[$i]) {
+				case 'filesize':
+				case 'data_words':
+				case 'reserved':
+				case 'reserved_by':
+				case 'title':
+				case 'description':
+				case 'filetype':
+				case 'filename':
+				case 'updatedate':
+				case 'stateid':
+				case 'doc_group':
+				case 'locked':
+				case 'locked_by':
+				case 'lockdate': {
+					$this->data_array[$colArr[$i]] = $valArr[$i];
+				}
+			}
 		}
 		$this->sendNotice(false);
 		return true;

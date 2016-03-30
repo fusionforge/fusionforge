@@ -72,7 +72,7 @@ if (getStringFromRequest('action')) {
 
 			if (!$res || db_affected_rows($res)<1) {
 				form_release_key(getStringFromRequest('form_key'));
-				$error_msg = _('Scheduling Mailing, Could not schedule mailing, database error: ').db_error();
+				$error_msg = _('Scheduling Mailing, Could not schedule mailing, database error')._(': ').db_error();
 			} else {
 				$systasksq = new SysTasksQ();
 				$systasksq->add(SYSTASK_CORE, 'MASSMAIL', null, user_getid());
@@ -90,7 +90,7 @@ if (getStringFromRequest('action')) {
 						array($id));
 			if (!$res || db_affected_rows($res)<1) {
 				form_release_key(getStringFromRequest('form_key'));
-				$error_msg = _('Scheduling Mailing, Could not delete mailing, database error: ').db_error();
+				$error_msg = _('Scheduling Mailing, Could not delete mailing, database error')._(': ').db_error();
 			} else {
 				$feedback = _('Mailing successfully deleted');
 			}
@@ -99,53 +99,44 @@ if (getStringFromRequest('action')) {
 	}
 }
 
-$title = sprintf(_('Mail Engine for %s Subscribers'), forge_get_config ('forge_name'));
-site_admin_header(array('title'=>$title));
+$title = sprintf(_('Mail Engine for %s Subscribers'), forge_get_config('forge_name'));
+site_admin_header(array('title' => $title));
 
-print '
-<p>
-<a href="#active">' ._('Active Deliveries').'</a>
-</p>
+echo html_e('p', array(), util_make_link('/admin/massmail.php#active', _('Active Deliveries')));
+echo html_e('p', array(), _('Be <span class="important">VERY</span> careful with this form, because submitting it WILL lead to sending email to lots of users.'));
 
-<p>' ._('Be <span class="important">VERY</span> careful with this form, because submitting it WILL lead to sending email to lots of users.').
-'</p>
-';
+echo $HTML->openForm(array('action' => '/admin/massmail.php?action=add', 'method' => 'post'))
+	.html_e('input', array('type' => 'hidden', 'name' => 'form_key', 'value' => form_generate_key()))
+	.html_e('strong', array(), _('Target Audience').utils_requiredField()._(':'))
+	.html_e('br')
+	.html_build_select_box_from_arrays(
+			array(0,'SITE','COMMNTY','DVLPR','ADMIN','ALL','SFDVLPR'),
+			array(
+				_('(select)'),
+				_('Subscribers to “Site Updates”'),
+				_('Subscribers to “Additional Community Mailings”'),
+				_('All Project Developers'),
+				_('All Project Admins'),
+				_('All Users'),
+				forge_get_config('forge_name'). _('Developers (test)')
+			),
+			'mail_type',false,false
+		)
+	.html_e('br');
 
-print '
-<form action="'.util_make_uri('/admin/massmail.php?action=add').'" method="post">'
-.'<input type="hidden" name="form_key" value="'.form_generate_key().'" />'
-.'<strong>'._('Target Audience').utils_requiredField()._(':').'</strong><br />'.html_build_select_box_from_arrays(
-	array(0,'SITE','COMMNTY','DVLPR','ADMIN','ALL','SFDVLPR'),
-	array(
-		_('(select)'),
-		_('Subscribers to “Site Updates”'),
-		_('Subscribers to “Additional Community Mailings”'),
-		_('All Project Developers'),
-		_('All Project Admins'),
-		_('All Users'),
-		forge_get_config ('forge_name'). _('Developers (test)')
-	),
-	'mail_type',false,false
-)
-.'<br />';
+echo html_e('p', array(),
+		html_e('strong', array(), _('Subject').utils_requiredField()._(':'))
+		.html_e('br')
+		.html_e('input', array('type' => 'text', 'required' => 'required', 'name' => 'mail_subject', 'size' => 50, 'value' => '['.forge_get_config('forge_name').']')));
+echo html_e('p', array(),
+		html_e('strong', array(), _('Text of Message').utils_requiredField()._(': '))._('(will be appended with unsubscription information, if applicable)'));
 
-print '
+echo html_e('textarea', array('required' => 'required', 'name' => 'mail_message', 'cols' => 70, 'rows' => 20), '' , false);
 
-<p>
-<strong>' ._('Subject').utils_requiredField()._(':').'</strong>
-<br /><input type="text" required="required" name="mail_subject" size="50" value="['.forge_get_config ('forge_name').'] " /></p>
+echo html_e('p', array(), html_e('input', array('type' => 'submit', 'value' => _('Schedule for Mailing'))));
+echo $HTML->closeForm();
 
-<p><strong>'._('Text of Message').utils_requiredField()._(':').'</strong>'._('(will be appended with unsubscription information, if applicable)').'</p>
-<pre><textarea required="required" name="mail_message" cols="70" rows="20">
-</textarea>
-</pre>
-
-<p><input type="submit" name="submit" value="' ._('Schedule for Mailing').'" /></p>
-
-</form>
-';
-
-$res = db_query_params ('
+$res = db_query_params('
 	SELECT *
 	FROM massmail_queue
 	WHERE finished_date=0
@@ -160,7 +151,7 @@ $title[]=_('Subject');
 $title[]=_('Date');
 $title[]=_('Last user_id mailed');
 
-print '<a name="active">'._('Active Deliveries')._(':').'</a>';
+echo html_e('h2', array('id' => 'active'), _('Active Deliveries')._(':'));
 
 $seen = false;
 
@@ -183,7 +174,7 @@ while ($row = db_fetch_array($res)) {
 if ($seen) {
 	echo $HTML->listTableBottom();
 } else {
-	echo '<p>' . _('No deliveries active.') . "</p>\n";
+	echo $HTML->information(_('No deliveries active.'));
 }
 
 site_admin_footer();

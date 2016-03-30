@@ -5,7 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014-2015, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -26,34 +26,31 @@
 
 /* please do not add require here : use www/docman/index.php to add require */
 /* global variables used */
-global $g; //group object
-global $dirid; //id of doc_group
+global $g; // Group object
+global $dirid; // id of doc_group
 global $group_id; // id of group
 global $warning_msg;
 global $feedback;
 global $error_msg;
 
 $redirecturl = '/docman/?group_id='.$group_id.'&dirid='.$dirid;
-if (!forge_check_perm('docman', $group_id, 'approve')) {
-	$warning_msg = _('Document Manager Action Denied.');
-	session_redirect($redirecturl);
-}
 
 // plugin projects-hierarchy handler
 $childgroup_id = getIntFromRequest('childgroup_id');
 if ($childgroup_id) {
-	if (!forge_check_perm('docman', $childgroup_id, 'approve')) {
-		$warning_msg = _('Document Manager Action Denied.');
-		session_redirect($redirecturl);
-	}
 	$redirecturl .= '&childgroup_id='.$childgroup_id;
 	$g = group_get_object($childgroup_id);
+}
+
+if (!forge_check_perm('docman', $g->getID(), 'approve')) {
+	$warning_msg = _('Document Manager Action Denied.');
+	session_redirect($redirecturl);
 }
 
 $arr_fileid = explode(',', getStringFromRequest('fileid'));
 foreach ($arr_fileid as $fileid) {
 	if (!empty($fileid)) {
-		$d = document_get_object($fileid);
+		$d = document_get_object($fileid, $g->getID());
 		if (!$d || $d->isError() || !$d->trash()) {
 			$error_msg = $d->getErrorMessage();
 			session_redirect($redirecturl);

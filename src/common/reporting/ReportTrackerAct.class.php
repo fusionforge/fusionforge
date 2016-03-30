@@ -4,7 +4,7 @@
  *
  * Copyright 2003-2004, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013,2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -71,15 +71,31 @@ function ReportTrackerAct($span,$group_id,$atid,$start=0,$end=0) {
 		}
 	}
 
+	// required since we unset val in $arr
+	$arr_backed = $arr;
 	for ($i=0; $i<count($arr); $i++) {
 		if ($arr[$i]<$start || $arr[$i]>$end) {
 			//skip this month as it's not in the range
 			unset($arr[$i]);
 		} else {
-			$this->labels[]=date('M d',($arr[$i-1]-1)).' <-> '.date('M d',$arr[$i]);
-			$this->avgtime[]=$this->getAverageTime($atid,($arr[$i-1]-1),$arr[$i]);
-			$this->opencount[]=$this->getOpenCount($atid,($arr[$i-1]-1),$arr[$i]);
-			$this->stillopencount[]=$this->getStillOpenCount($atid,$arr[$i]);
+			if (!isset($arr_backed[$i-1])) {
+				switch ($span) {
+					case REPORT_TYPE_WEEKLY: {
+						$previous = $arr_backed[$i] - REPORT_WEEK_SPAN;
+						break;
+					}
+					default: {
+						$previous = mktime(0,0,0,date('m')-$this->max_month,1,date('Y'));
+						break;
+					}
+				}
+			} else {
+				$previous = $arr_backed[$i-1];
+			}
+			$this->labels[]=date('M d', ($previous-1)).' <-> '.date('M d', $arr[$i]);
+			$this->avgtime[]=$this->getAverageTime($atid,($previous-1), $arr[$i]);
+			$this->opencount[]=$this->getOpenCount($atid,($previous-1), $arr[$i]);
+			$this->stillopencount[]=$this->getStillOpenCount($atid, $arr[$i]);
 		}
 	}
 

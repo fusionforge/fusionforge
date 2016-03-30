@@ -23,7 +23,7 @@
 
 /* please do not add require here : use www/docman/index.php to add require */
 /* global variables used */
-global $g; //group object
+global $g; // Group object
 global $group_id; // id of the group
 global $HTML;
 global $warning_msg;

@@ -2,6 +2,7 @@
 /**
  * Copyright 2010 (c) Mélanie Le Bail
  * Copyright 2014,2015 Franck Villaume - TrivialDev
+ * Copyright 2015, Sieu Truc
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -89,12 +90,20 @@ function htmlIframeResizer($url, $poub = array()) {
 		html_use_iframeresizer();
 		echo $HTML->getJavascripts();
 		echo '<script type="text/javascript">//<![CDATA[
-			jQuery(\'iframe\').iFrameResize();
-			jQuery(\'iframe\').load(function (){
-					if (this.contentWindow.location.href == "'.util_make_url('/projects/'.$project->getUnixName()).'/") {
-						window.location.href = this.contentWindow.location.href;
-					}
-				});
+			jQuery(\'#'.$id.'\').iFrameResize();
+			function messageHandler (evt) {
+				var matches = jQuery(\'#'.$id.'\')[0].src.match(/^(https?\:\/\/[^\/?#]+)(?:[\/?#]|$)/i);
+				var domain = matches && matches[1];
+				if (evt.origin === domain && evt.data.indexOf("http") === 0) {
+					window.location.href = evt.data;
+				}
+			}
+			if (window.addEventListener) {
+				// For standards-compliant web browsers
+				window.addEventListener("message", messageHandler, false);
+			} else {
+				window.attachEvent("onmessage", messageHandler);
+			}
 			//]]></script>';
 	}
 }

@@ -270,9 +270,9 @@ function getPackages($session_ser,$group_id) {
 	continue_session($session_ser);
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
-		return new soap_fault ('','getPackages','Could Not Get Project','Could Not Get Project');
+		return new soap_fault('','getPackages','Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {
-		return new soap_fault ('','getPackages',$grp->getErrorMessage(),$grp->getErrorMessage());
+		return new soap_fault('','getPackages',$grp->getErrorMessage(),$grp->getErrorMessage());
 	}
 
 	$pkg_arr = get_frs_packages($grp);
@@ -315,9 +315,9 @@ function addPackage($session_ser,$group_id,$package_name,$is_public) {
 	continue_session($session_ser);
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
-		return new soap_fault ('','addPackage','Could Not Get Project','Could Not Get Project');
+		return new soap_fault('','addPackage','Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {
-		return new soap_fault ('','addPackage',$grp->getErrorMessage(),$grp->getErrorMessage());
+		return new soap_fault('','addPackage',$grp->getErrorMessage(),$grp->getErrorMessage());
 	}
 
 	$frsp = new FRSPackage($grp);
@@ -332,16 +332,16 @@ function getReleases($session_ser,$group_id,$package_id) {
 	continue_session($session_ser);
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
-		return new soap_fault ('','getReleases','Could Not Get Project','Could Not Get Project');
+		return new soap_fault('','getReleases','Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {
-		return new soap_fault ('','getReleases',$grp->getErrorMessage(),$grp->getErrorMessage());
+		return new soap_fault('','getReleases',$grp->getErrorMessage(),$grp->getErrorMessage());
 	}
 
 	$frsp = frspackage_get_object($package_id);
 	if (!$frsp || !is_object($frsp)) {
-		return new soap_fault ('','getReleases','Could Not Get Package','Could Not Get Package');
+		return new soap_fault('','getReleases','Could Not Get Package','Could Not Get Package');
 	} elseif ($frsp->isError()) {
-		return new soap_fault ('','getReleases',$frsp->getErrorMessage(),$frsp->getErrorMessage());
+		return new soap_fault('','getReleases',$frsp->getErrorMessage(),$frsp->getErrorMessage());
 	}
 
 	$release_arr = $frsp->getReleases();
@@ -377,16 +377,16 @@ function addRelease($session_ser,$group_id,$package_id,$name,$notes,$changes,$re
 
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
-		return new soap_fault ('','getPackages','Could Not Get Project','Could Not Get Project');
+		return new soap_fault('','getPackages','Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {
-		return new soap_fault ('','getPackages',$grp->getErrorMessage(),$grp->getErrorMessage());
+		return new soap_fault('','getPackages',$grp->getErrorMessage(),$grp->getErrorMessage());
 	}
 
 	$frsp = frspackage_get_object($package_id);
 	if (!$frsp || !is_object($frsp)) {
-		return new soap_fault ('','getReleases','Could Not Get Package','Could Not Get Package');
+		return new soap_fault('','getReleases','Could Not Get Package','Could Not Get Package');
 	} elseif ($frsp->isError()) {
-		return new soap_fault ('','getReleases',$frsp->getErrorMessage(),$frsp->getErrorMessage());
+		return new soap_fault('','getReleases',$frsp->getErrorMessage(),$frsp->getErrorMessage());
 	}
 
 	$frsr = new FRSRelease($frsp);
@@ -402,24 +402,24 @@ function getFiles($session_ser,$group_id,$package_id,$release_id) {
 
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
-		return new soap_fault ('','getFiles','Could Not Get Project','Could Not Get Project');
+		return new soap_fault('','getFiles','Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {
-		return new soap_fault ('','getFiles',$grp->getErrorMessage(),$grp->getErrorMessage());
+		return new soap_fault('','getFiles',$grp->getErrorMessage(),$grp->getErrorMessage());
 	}
 
 	$frsp =& frspackage_get_object($package_id);
 	if (!$frsp || !is_object($frsp)) {
-		return new soap_fault ('','getFiles','Could Not Get Package','Could Not Get Package');
+		return new soap_fault('','getFiles','Could Not Get Package','Could Not Get Package');
 	} elseif ($frsp->isError()) {
-		return new soap_fault ('','getFiles',$frsp->getErrorMessage(),$frsp->getErrorMessage());
+		return new soap_fault('','getFiles',$frsp->getErrorMessage(),$frsp->getErrorMessage());
 	}
 
 	//TODO: Check that the release belongs to the package
 	$frsr =& frsrelease_get_object($release_id);
 	if (!$frsr || !is_object($frsr)) {
-		return new soap_fault ('','getFiles','Could Not Get Release','Could Not Get Release');
+		return new soap_fault('','getFiles','Could Not Get Release','Could Not Get Release');
 	} elseif ($frsr->isError()) {
-		return new soap_fault ('','getFiles',$frsr->getErrorMessage(),$frsr->getErrorMessage());
+		return new soap_fault('','getFiles',$frsr->getErrorMessage(),$frsr->getErrorMessage());
 	}
 
 	$files_arr =& $frsr->getFiles();
@@ -492,30 +492,30 @@ function getFile($session_ser,$group_id,$package_id,$release_id,$file_id) {
 
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
-		return new soap_fault ('','getFile','Could Not Get Project','Could Not Get Project');
+		return new soap_fault('','getFile','Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {
-		return new soap_fault ('','getFile',$grp->getErrorMessage(),$grp->getErrorMessage());
+		return new soap_fault('','getFile',$grp->getErrorMessage(),$grp->getErrorMessage());
 	}
 
 	$frsp =& frspackage_get_object($package_id);
 	if (!$frsp || !is_object($frsp)) {
-		return new soap_fault ('','getFile','Could Not Get Package','Could Not Get Package');
+		return new soap_fault('','getFile','Could Not Get Package','Could Not Get Package');
 	} elseif ($frsp->isError()) {
-		return new soap_fault ('','getFile',$frsp->getErrorMessage(),$frsp->getErrorMessage());
+		return new soap_fault('','getFile',$frsp->getErrorMessage(),$frsp->getErrorMessage());
 	}
 
 	$frsr =& frsrelease_get_object($release_id);
 	if (!$frsr || !is_object($frsr)) {
-		return new soap_fault ('','getFile','Could Not Get Release','Could Not Get Release');
+		return new soap_fault('','getFile','Could Not Get Release','Could Not Get Release');
 	} elseif ($frsr->isError()) {
-		return new soap_fault ('','getFile',$frsr->getErrorMessage(),$frsr->getErrorMessage());
+		return new soap_fault('','getFile',$frsr->getErrorMessage(),$frsr->getErrorMessage());
 	}
 
 	$frsf = new FRSFile($frsr, $file_id);
 	if (!$frsf || !is_object($frsf)) {
-		return new soap_fault ('','getFile','Could Not Get File','Could Not Get File');
+		return new soap_fault('','getFile','Could Not Get File','Could Not Get File');
 	} elseif ($frsf->isError()) {
-		return new soap_fault ('','getFile',$frsf->getErrorMessage(),$frsf->getErrorMessage());
+		return new soap_fault('','getFile',$frsf->getErrorMessage(),$frsf->getErrorMessage());
 	}
 
 	$file_location = forge_get_config('upload_dir').'/'.
@@ -538,41 +538,41 @@ function addFile($session_ser,$group_id,$package_id,$release_id,$name,$base64_co
 
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
-		return new soap_fault ('','addFile','Could Not Get Project','Could Not Get Project');
+		return new soap_fault('','addFile','Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {
-		return new soap_fault ('','addFile',$grp->getErrorMessage(),$grp->getErrorMessage());
+		return new soap_fault('','addFile',$grp->getErrorMessage(),$grp->getErrorMessage());
 	}
 
 	$frsp =& frspackage_get_object($package_id);
 	if (!$frsp || !is_object($frsp)) {
-		return new soap_fault ('','addFile','Could Not Get Package','Could Not Get Package');
+		return new soap_fault('','addFile','Could Not Get Package','Could Not Get Package');
 	} elseif ($frsp->isError()) {
-		return new soap_fault ('','addFile',$frsp->getErrorMessage(),$frsp->getErrorMessage());
+		return new soap_fault('','addFile',$frsp->getErrorMessage(),$frsp->getErrorMessage());
 	}
 
 	$frsr =& frsrelease_get_object($release_id);
 	if (!$frsr || !is_object($frsr)) {
-		return new soap_fault ('','addFile','Could Not Get Release','Could Not Get Release');
+		return new soap_fault('','addFile','Could Not Get Release','Could Not Get Release');
 	} elseif ($frsr->isError()) {
-		return new soap_fault ('','addFile',$frsr->getErrorMessage(),$frsr->getErrorMessage());
+		return new soap_fault('','addFile',$frsr->getErrorMessage(),$frsr->getErrorMessage());
 	}
 
 	$frsf = new FRSFile($frsr);
 	if (!$frsf || !is_object($frsf)) {
-		return new soap_fault ('','addFile','Could Not Get File','Could Not Get File');
+		return new soap_fault('','addFile','Could Not Get File','Could Not Get File');
 	}
 
 	$tmpname = tempnam("/tmp", "gforge_cli_frs");
 	$fh = fopen($tmpname, "wb");
 	if (!$fh) {
-		return new soap_fault ('','addFile','Could not create temporary file in directory /tmp');
+		return new soap_fault('','addFile','Could not create temporary file in directory /tmp');
 	}
 	fwrite($fh, base64_decode($base64_contents));
 	fclose($fh);
 
 	if (!$frsf->create($name,$tmpname,$type_id,$processor_id,$release_time)) {
 		@unlink($tmpname);
-		return new soap_fault ('','addFile',$frsf->getErrorMessage(),$frsf->getErrorMessage());
+		return new soap_fault('','addFile',$frsf->getErrorMessage(),$frsf->getErrorMessage());
 	} else {
 		@unlink($tmpname);
 		return $frsf->getID();

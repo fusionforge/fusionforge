@@ -4,7 +4,7 @@
  *
  * Copyright 2005, Fabio Bertagnin
  * Copyright 2009-2010, Franck Villaume - Capgemini
- * Copyright 2011-2013, Franck Villaume - TrivialDev
+ * Copyright 2011-2013,2015 Franck Villaume - TrivialDev
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
@@ -43,37 +43,21 @@ class Parsedata {
 	/**
 	 * get_parse_data - analyse content and metadata
 	 *
-	 * @param	string	$data		the path of the file to be analysed
-	 * @param	string	$title		the file title
-	 * @param	string	$description	the file description
-	 * @param	string	$filetype	the file type
-	 * @param	string	$filename	the filename
+	 * @param	string	$data		the path of the file to analyse
+	 * @param	string	$filetype	type of the file to analyse
 	 * @return	string	the analysed content
 	 */
-	function get_parse_data($data, $title, $description, $filetype, $filename) {
-		$parser = "";
-		$rep = "";
+	function get_parse_data($data, $filetype) {
+		$parser = '';
+		$rep = '';
 		if (array_key_exists($filetype, $this->parsers)) {
 			// parse data if good parser exists
 			$parser = $this->p_path.$this->parsers[$filetype];
 			$cmd = "php -f $parser $data";
 			$rep = shell_exec($cmd);
 		}
-		// always parse title, description, filename and filetype
-		$data1 = utf8_decode("$title $description $filename $filetype");
-		// temporary file for treatment
-		$filename = tempnam(sys_get_temp_dir(), 'docman');
-		$handle = fopen($filename, 'w');
-		fwrite($handle, $data1);
-		fclose($handle);
-		$cmd = $this->p_path.$this->parsers['text/plain'];
-		$cmd = "php -f $cmd $filename";
-		$rep1 = shell_exec($cmd);
-		if ( file_exists ($filename ) ) {
-			unlink($filename);
-		}
 		// dont need to unlink the filename because parser_text already remove it
-		return preg_replace("/\n/", " ", "$rep $rep1");
+		return preg_replace("/\n/", " ", "$rep");
 	}
 
 	/**
@@ -88,8 +72,8 @@ class Parsedata {
 		$arrayLines = file($file, FILE_SKIP_EMPTY_LINES);
 		if (is_array($arrayLines) && count($arrayLines)) {
 			foreach ($arrayLines as $a) {
-				if (trim($a) != "" && substr($a, 0,1) != "#") {
-					$a2 = explode ("|", $a);
+				if (trim($a) != '' && substr($a, 0,1) != '#') {
+					$a2 = explode ('|', $a);
 					$rep[$a2[0]] = trim($a2[1]);
 				}
 			}

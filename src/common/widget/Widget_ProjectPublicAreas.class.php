@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2012,2014 Franck Villaume - TrivialDev
+ * Copyright 2012,2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is a part of Fusionforge.
@@ -197,6 +197,7 @@ class Widget_ProjectPublicAreas extends Widget {
 
 			$hook_params = array () ;
 			$hook_params['group_id'] = $group_id ;
+			$hook_params['result'] = &$result;
 			plugin_hook ("scm_stats", $hook_params) ;
 			$result .= "\n</div>\n";
 		}
@@ -205,6 +206,7 @@ class Widget_ProjectPublicAreas extends Widget {
 
 		$hook_params = array ();
 		$hook_params['group_id'] = $group_id;
+		$hook_params['result'] = &$result;
 		plugin_hook ("project_public_area", $hook_params);
 
 		// ######################## AnonFTP

@@ -1,5 +1,7 @@
 <?php
 /**
+ * Previous copyright: FusionForge Team
+ * Copyright 2016, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -43,7 +45,7 @@ if ($group_id) {
 				array ($group_id)) ;
 	$row = db_fetch_array($res);
 	$title = ": ".$row['group_name']." - ";
-	$link = "/project/showfiles.php?group_id=$group_id";
+	$link = "/frs/?group_id=$group_id";
 	$description = " of ".$row['group_name'];
 	$admins = RBACEngine::getInstance()->getUsersByAllowedAction ('project_admin', $group_id) ;
 	if (count ($admins)) {
@@ -62,7 +64,7 @@ if ($group_id) {
 // ## one time output
 print " <channel>\n";
 print "  <title>".forge_get_config ('forge_name')." Project$title Releases</title>\n";
-print "  <link>http://".forge_get_config('web_host')."$link</link>\n";
+print "  <link>".util_make_url($link)."</link>\n";
 print "  <description>".forge_get_config ('forge_name')." Project Releases$description</description>\n";
 print "  <language>en-us</language>\n";
 print "  <copyright>Copyright ".date("Y")." ".forge_get_config ('forge_name')."</copyright>\n";
@@ -106,12 +108,12 @@ while ($row = db_fetch_array($res)) {
 	if (!isset ($seen[$row['filerelease_id']])) {
 		print "  <item>\n";
 		print "   <title>".htmlspecialchars($row['package_name'])." ".htmlspecialchars($row['module_name'])."</title>\n";
-		print "   <link>http://".forge_get_config('web_host')."/project/showfiles.php?group_id=".$row['group_id']."&amp;release_id=".$row['filerelease_id']."</link>\n";
+		print "   <link>".util_make_url("/frs/?group_id=".$row['group_id']."&amp;release_id=".$row['filerelease_id'])."</link>\n";
 		print "   <description>".rss_description($row['module_notes'])."</description>\n";
 		print "   <author>".$row['user_name']."@".forge_get_config('users_host')." (".$row['realname'].")</author>\n";
-		print "   <comments>http://".forge_get_config('web_host')."/frs/?view=shownotes&amp;group_id=".$row['group_id']."&amp;release_id=".$row['filerelease_id']."</comments>\n";
+		print "   <comments>".util_make_url("/frs/?view=shownotes&amp;group_id=".$row['group_id']."&amp;release_id=".$row['filerelease_id'])."</comments>\n";
 		print "   <pubDate>".rss_date($row['release_date'])."</pubDate>\n";
-		print "   <guid>http://".forge_get_config('web_host')."/project/showfiles.php?group_id=".$row['group_id']."&amp;release_id=".$row['filerelease_id']."</guid>\n";
+		print "   <guid>".util_make_url("/frs/?group_id=".$row['group_id']."&amp;release_id=".$row['filerelease_id'])."</guid>\n";
 		print "  </item>\n";
 		$outputtotal++;
 	}

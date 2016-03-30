@@ -111,7 +111,7 @@ function db_connect() {
 
 	$res = db_query_params ('SELECT set_config($1, $2, false)',
 				array('default_text_search_config',
-				      'simple'));
+                      forge_get_config('fti_config')));
 
 	// Register top-level "finally" handler to abort current
 	// transaction in case of error

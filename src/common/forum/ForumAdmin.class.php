@@ -242,7 +242,7 @@ class ForumAdmin extends Error {
 				exit_error($f->getErrorMessage(),'forums');
 			}
 
-			session_require_perm ('forum_admin', $f->Group->getID()) ;
+			session_require_perm('forum_admin', $f->Group->getID()) ;
 
 			if (!$f->delete(getStringFromRequest('sure'),getStringFromRequest('really_sure'))) {
 				exit_error($f->getErrorMessage(),'forums');
@@ -258,7 +258,7 @@ class ForumAdmin extends Error {
 			if ($this->isGroupAdmin()) {
 				$this->PrintAdminOptions();
 			}
-			$res = db_query_params ('SELECT fgl.forum_name, fgl.group_forum_id FROM forum_group_list fgl, forum_pending_messages fpm WHERE fgl.group_id=$1 AND fpm.group_forum_id = fgl.group_forum_id GROUP BY fgl.forum_name, fgl.group_forum_id',
+			$res = db_query_params('SELECT fgl.forum_name, fgl.group_forum_id FROM forum_group_list fgl, forum_pending_messages fpm WHERE fgl.group_id=$1 AND fpm.group_forum_id = fgl.group_forum_id GROUP BY fgl.forum_name, fgl.group_forum_id',
 						array ($group_id));
 			if (!$res) {
 				echo db_error();

@@ -87,7 +87,7 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		global $HTML;
 		if (!$this->words) {
 			echo $HTML->error_msg(_('Error')._(': ')._('Please enter a term to search for'));
-		} elseif (!forge_get_config('use_fti') && (strlen($this->words) < 3)) {
+		} elseif (strlen($this->words) < 3) {
 			echo $HTML->error_msg(_('Error')._(': ')._('Search must be at least three characters'));
 		} else {
 			echo $this->getResult();

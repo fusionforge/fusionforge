@@ -35,6 +35,7 @@ DocManListFileController = function(params)
 		this.resizableDiv();
 	}
 	this.initModalEditWindow();
+	this.initModelNotifyWindow();
 };
 
 DocManAddItemController = function(params)
@@ -67,34 +68,31 @@ DocManListFileController.prototype =
 
 	resizableDiv: function() {
 		var splitterPosition = '30%';
-		var mainwidth = jQuery('#maindiv').width();
+		var mainwidth = jQuery('#maindiv').innerWidth();
 		if (jQuery.Storage.get('splitterStyle') !== undefined) {
 			var storedSplitterPosition = jQuery.Storage.get('splitterStyle').replace(/px;?/g, '').replace(/left: /g, '');
 			splitterPosition = Math.round(storedSplitterPosition * 100 / mainwidth )+'%';
 		}
 		if (this.params.page == 'trashfile') {
-			(this.params.divLeft.height() > this.params.divRight.height()) ? mainheight = this.params.divLeft.height() : mainheight = this.params.divRight.height();
+			(this.params.divLeft.outerHeight() > this.params.divRight.outerHeight()) ? mainheight = this.params.divLeft.outerHeight() : mainheight = this.params.divRight.outerHeight();
 		} else {
-			var fixwidth = 0;
-			if (jQuery('#editFile').length) {
-				fixwidth = jQuery('#editFile').height() - jQuery('#resourcePopupContainer').height();
-				if ( fixwidth < 0) {
-					fixwidth = 0;
-				}
+			var fixwidth = -40;
+			if (jQuery('#editFile').length >= 1) {
+				fixwidth += jQuery('#editFile').outerHeight() - jQuery('[aria-describedby="editFile"]').outerHeight();
 			}
-			if (fixwidth == 0) {
-				fixwidth = -40;
+			if (jQuery('#notifyUsers').length >= 1) {
+				fixwidth += jQuery('#notifyUsers').outerHeight() - jQuery('[aria-describedby="notifyUsers"]').outerHeight();
 			}
 			var totalRightHeight = 0;
 			this.params.divRight.children().each(function() {
 					if (jQuery(this).is(':visible')) {
-						totalRightHeight = totalRightHeight + jQuery(this).outerHeight();
+						totalRightHeight += jQuery(this).outerHeight();
 					}
 				});
-			totalRightHeight = totalRightHeight - fixwidth;
-			(this.params.divRight.height() - fixwidth < 0) ? useRightHeight = this.params.divRight.height() : useRightHeight = this.params.divRight.height() - fixwidth;
+			totalRightHeight -= fixwidth;
+			(this.params.divRight.outerHeight() - fixwidth < 0) ? useRightHeight = this.params.divRight.outerHeight() : useRightHeight = this.params.divRight.outerHeight() - fixwidth;
 			(useRightHeight < totalRightHeight) ? useRightHeight = totalRightHeight : useRightHeight ;
-			(this.params.divLeft.height() > this.params.divRight.height()) ? mainheight = this.params.divLeft.height() : mainheight = useRightHeight;
+			(this.params.divLeft.outerHeight() > this.params.divRight.outerHeight()) ? mainheight = this.params.divLeft.outerHeight() : mainheight = useRightHeight;
 		}
 		jQuery('#views').height(mainheight)
 				.split({orientation:'vertical', limit:100, position: splitterPosition});
@@ -181,6 +179,85 @@ DocManListFileController.prototype =
 		}, this));
 	},
 
+	initModelNotifyWindow: function() {
+		var modalId = this.params.divNotifyUsers;
+		jQuery(modalId).dialog({
+			autoOpen: false,
+			width: 475,
+			modal: true,
+			title: this.params.divNotifyTitle,
+			buttons: {
+				Save: { text: this.params.divNotifySaveButtonTxt,
+					click: jQuery.proxy(function() {
+					jQuery('#notifyusersdoc').submit();
+					var id = jQuery('#notifydocid').attr('value');
+					jQuery.get(this.params.docManURL+'/', {
+						group_id:	this.params.groupId,
+						action:		'lock',
+						lock:		0,
+						itemid:		id,
+						type:		'file',
+						childgroup_id:	this.params.childGroupId
+					});
+					jQuery.get(this.params.docManURL+'/', {
+						group_id:	this.params.groupId,
+						action:		'lock',
+						lock:		0,
+						itemid:		this.params.docgroupId,
+						type:		'dir',
+						childgroup_id:	this.params.childGroupId
+					});
+					clearInterval(this.lockInterval[id]);
+					clearInterval(this.lockInterval[this.params.docgroupId]);
+					jQuery(modalId).dialog( "close" );
+				}, this)},
+				Cancel: jQuery.proxy(function() {
+					var id = jQuery('#notifydocid').attr('value');
+					jQuery.get(this.params.docManURL+'/', {
+						group_id:	this.params.groupId,
+						action:		'lock',
+						lock:		0,
+						itemid:		id,
+						type:		'file',
+						childgroup_id:	this.params.childGroupId
+					});
+					jQuery.get(this.params.docManURL+'/', {
+						group_id:	this.params.groupId,
+						action:		'lock',
+						lock:		0,
+						itemid:		this.params.docgroupId,
+						type:		'dir',
+						childgroup_id:	this.params.childGroupId
+					});
+					clearInterval(this.lockInterval[id]);
+					clearInterval(this.lockInterval[this.params.docgroupId]);
+					jQuery(modalId).dialog('close');
+				}, this)
+			}
+		});
+		jQuery(modalId).bind('dialogclose', jQuery.proxy(function() {
+			var id = jQuery('#notifydocid').attr('value');
+			jQuery.get(this.params.docManURL+'/', {
+				group_id:	this.params.groupId,
+				action:		'lock',
+				lock:		0,
+				itemid:		id,
+				type:		'file',
+				childgroup_id:	this.params.childGroupId
+			});
+			jQuery.get(this.params.docManURL+'/', {
+				group_id:	this.params.groupId,
+				action:		'lock',
+				lock:		0,
+				itemid:		this.params.docgroupId,
+				type:		'dir',
+				childgroup_id:	this.params.childGroupId
+			});
+			clearInterval(this.lockInterval[id]);
+			clearInterval(this.lockInterval[this.params.docgroupId]);
+		}, this));
+	},
+
 	/*! toggle edit group view div visibility
 	 */
 	toggleEditDirectoryView: function() {
@@ -196,9 +273,9 @@ DocManListFileController.prototype =
 					if (typeof(this.params.divAddItem) != 'undefined') {
 						this.params.divAddItem.hide();
 					}
-					computeHeight = this.params.divRight.height() + this.params.divEditDirectory.height();
-					currentLeftHeight = this.params.divLeft.height();
-					this.params.divLeft.height(currentLeftHeight + this.params.divEditDirectory.height());
+					computeHeight = this.params.divRight.outerHeight() + this.params.divEditDirectory.outerHeight();
+					currentLeftHeight = this.params.divLeft.outerHeight();
+					this.params.divLeft.height(currentLeftHeight + this.params.divEditDirectory.outerHeight());
 					jQuery.get(this.params.docManURL+'/', {
 						group_id:	this.params.groupId,
 						action:		'lock',
@@ -209,8 +286,8 @@ DocManListFileController.prototype =
 					});
 					this.lockInterval[this.params.docgroupId] = setInterval("jQuery.get('" + this.params.docManURL + "/', {group_id:"+this.params.groupId+",action:'lock',lock:1,type:'dir',itemid:"+this.params.docgroupId+",childgroup_id:"+this.params.childGroupId+"})", this.params.lockIntervalDelay);
 					if (typeof(this.params.divLeft) != 'undefined' && typeof(this.params.divRight) != 'undefined') {
-						if (this.params.divLeft.height() > computeHeight) {
-							jQuery('#views').height(this.params.divLeft.height());
+						if (this.params.divLeft.outerHeight() > computeHeight) {
+							jQuery('#views').height(this.params.divLeft.outerHeight());
 						} else {
 							jQuery('#views').height(computeHeight);
 						}
@@ -219,9 +296,9 @@ DocManListFileController.prototype =
 			}, this));
 		} else {
 			this.params.divEditDirectory.hide();
-			computeHeight = this.params.divRight.height() - this.params.divEditDirectory.height();
-			currentLeftHeight = this.params.divLeft.height();
-			this.params.divLeft.height(currentLeftHeight - this.params.divEditDirectory.height());
+			computeHeight = this.params.divRight.outerHeight() - this.params.divEditDirectory.outerHeight();
+			currentLeftHeight = this.params.divLeft.outerHeight();
+			this.params.divLeft.height(currentLeftHeight - this.params.divEditDirectory.outerHeight());
 			jQuery.get(this.params.docManURL+'/', {
 				group_id:	this.params.groupId,
 				action:		'lock',
@@ -232,8 +309,8 @@ DocManListFileController.prototype =
 			});
 			clearInterval(this.lockInterval[this.params.docgroupId]);
 			if (typeof(this.params.divLeft) != 'undefined' && typeof(this.params.divRight) != 'undefined') {
-				if (this.params.divLeft.height() > computeHeight) {
-					jQuery('#views').height(this.params.divLeft.height());
+				if (this.params.divLeft.outerHeight() > computeHeight) {
+					jQuery('#views').height(this.params.divLeft.outerHeight());
 				} else {
 					jQuery('#views').height(computeHeight);
 				}
@@ -264,12 +341,12 @@ DocManListFileController.prototype =
 					this.lockInterval[this.params.docgroupId] = setInterval("jQuery.get('" + this.params.docManURL + "/', {group_id:"+this.params.groupId+",action:'lock',lock:1,type:'dir',itemid:"+this.params.docgroupId+",childgroup_id:"+this.params.childGroupId+"})",this.params.lockIntervalDelay);
 					this.params.divAddItem.show();
 					this.params.divEditDirectory.hide();
-					computeHeight = this.params.divRight.height() + jQuery(this.params.divAddItem).height();
-					currentLeftHeight = this.params.divLeft.height();
-					this.params.divLeft.height(currentLeftHeight + jQuery(this.params.divAddItem).height());
+					computeHeight = this.params.divRight.outerHeight() + jQuery(this.params.divAddItem).outerHeight();
+					currentLeftHeight = this.params.divLeft.outerHeight();
+					this.params.divLeft.height(currentLeftHeight + jQuery(this.params.divAddItem).outerHeight());
 					if (typeof(this.params.divLeft) != 'undefined' && typeof(this.params.divRight) != 'undefined') {
-						if (this.params.divLeft.height() > computeHeight) {
-							jQuery('#views').height(this.params.divLeft.height());
+						if (this.params.divLeft.outerHeight() > computeHeight) {
+							jQuery('#views').height(this.params.divLeft.outerHeight());
 						} else {
 							jQuery('#views').height(computeHeight);
 						}
@@ -287,12 +364,12 @@ DocManListFileController.prototype =
 			});
 			clearInterval(this.lockInterval[this.params.docgroupId]);
 			this.params.divAddItem.hide();
-			computeHeight = this.params.divRight.height() - jQuery(this.params.divAddItem).height();
-			currentLeftHeight = this.params.divLeft.height();
-			this.params.divLeft.height(currentLeftHeight - jQuery(this.params.divAddItem).height());
+			computeHeight = this.params.divRight.outerHeight() - jQuery(this.params.divAddItem).outerHeight();
+			currentLeftHeight = this.params.divLeft.outerHeight();
+			this.params.divLeft.height(currentLeftHeight - jQuery(this.params.divAddItem).outerHeight());
 			if (typeof(this.params.divLeft) != 'undefined' && typeof(this.params.divRight) != 'undefined') {
-				if (this.params.divLeft.height() > computeHeight) {
-					jQuery('#views').height(this.params.divLeft.height());
+				if (this.params.divLeft.outerHeight() > computeHeight) {
+					jQuery('#views').height(this.params.divLeft.outerHeight());
 				} else {
 					jQuery('#views').height(computeHeight);
 				}
@@ -388,6 +465,37 @@ DocManListFileController.prototype =
 		}
 	},
 
+	toggleNotifyUserView: function(docparams) {
+		this.docparams = docparams;
+		jQuery('#notifytitle').text(this.docparams.title);
+		jQuery('#notifydescription').text(this.docparams.description);
+		jQuery('#notifydocid').val(this.docparams.id);
+		jQuery('#notifyfilelink').text(this.docparams.filename);
+		if (this.docparams.statusId != 2) {
+			if (this.docparams.isURL) {
+				jQuery('#notifyfilelink').attr('href', this.docparams.filename);
+			} else {
+				jQuery('#notifyfilelink').attr('href', this.docparams.docManURL + '/view.php/' + this.docparams.groupId + '/' + this.docparams.id + '/' + this.docparams.filename);
+			}
+		}
+
+		jQuery('#notifyusersdoc').attr('action', this.docparams.action);
+		jQuery.get(this.docparams.docManURL+'/', {
+				group_id:	this.docparams.groupId,
+				action:		'lock',
+				lock:		1,
+				type:		'dir',
+				itemid:		this.docparams.docgroupId,
+				childgroup_id:	this.docparams.childGroupId
+			});
+		this.lockInterval[this.docparams.id] = setInterval("jQuery.get('" + this.docparams.docManURL + "/', {group_id:"+this.docparams.groupId+",action:'lock',lock:1,type:'file',itemid:"+this.docparams.id+",childgroup_id:"+this.docparams.childGroupId+"})",this.docparams.lockIntervalDelay);
+		this.lockInterval[this.docparams.docgroupId] = setInterval("jQuery.get('" + this.docparams.docManURL + "/', {group_id:"+this.docparams.groupId+",action:'lock',lock:1,type:'dir',itemid:"+this.docparams.docgroupId+",childgroup_id:"+this.docparams.childGroupId+"})",this.docparams.lockIntervalDelay);
+		jQuery(this.params.divNotifyUsers).dialog('open');
+
+		return false;
+
+	},
+
 	/*! build list of id, comma separated
 	 */
 	buildUrlByCheckbox: function(id) {
@@ -423,6 +531,7 @@ DocManListFileController.prototype =
 		for (var h = 0; h < jQuery('input:checked').length; h++) {
 			if (typeof(jQuery('input:checked')[h].className) != 'undefined' && jQuery('input:checked')[h].className.match('checkeddocid'+id)) {
 				jQuery('#massaction'+id).show();
+				break;
 			}
 		}
 	}

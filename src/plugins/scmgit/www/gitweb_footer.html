@@ -1,0 +1,60 @@
+<!--
+ * FusionForge SCM Git Plugin
+ *
+ * Copyright 2015, Sieu Truc
+ * Copyright 2015, Franck Villaume - TrivialDev
+ * http://fusionforge.org
+ *
+ * This file is part of FusionForge. FusionForge is free software;
+ * you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the Licence, or (at your option)
+ * any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with FusionForge; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+-->
+
+<script type="text/javascript">
+<![CDATA[
+function inIframe() {
+    try {
+        return window.self !== window.top;
+    } catch (e) {
+        return true;
+    }
+}
+
+if(typeof(String.prototype.trim) === "undefined")
+{
+    String.prototype.trim = function()
+    {
+        return String(this).replace(/^\s+|\s+$/g, '');
+    };
+}
+(function() {
+	if(inIframe()) {
+		var anchors = document.getElementsByTagName('a');
+		for (var i = 0; i < anchors.length; i++) {
+			var anchor = anchors[i];
+			if(anchor.href.indexOf('func=grouppage') != -1) {
+				anchor.addEventListener('click', function(event) {
+					var iframeWin = window.parent;
+					var fullDomain = this.protocol+"//"+this.host;
+					if(this.port)
+						fullDomain += ":"+this.port;
+					iframeWin.postMessage(this.href, fullDomain);
+					event.preventDefault();
+				}, false);
+			}
+		}
+	}
+})()
+]]>
+</script>

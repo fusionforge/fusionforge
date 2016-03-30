@@ -73,7 +73,7 @@ over it to the project's administrator.");
 			if (!$add_num) {
 				$add_num=0;
 			}
-			echo ' (Bazaar: '.sprintf(_('<strong>%1$s</strong> updates, <strong>%2$s</strong> adds'), number_format($commit_num, 0), number_format($add_num, 0)).")";
+			$params['result'] .= ' (Bazaar: '.sprintf(_('<strong>%1$s</strong> updates, <strong>%2$s</strong> adds'), number_format($commit_num, 0), number_format($add_num, 0)).")";
 		}
 	}
 
@@ -137,8 +137,7 @@ over it to the project's administrator.");
 	}
 
 	function getBrowserLinkBlock ($project) {
-		global $HTML ;
-		$b = $HTML->boxMiddle(sprintf(_('%s Repository Browser'), 'Bazaar'));
+		$b = html_e('h2', array(), _('Bazaar Repository Browser'));
 		$b .= '<p>';
 		$b .= sprintf(_("Browsing the %s tree gives you a view into the current status of this project's code."), 'Bazaar');
 		$b .= ' ';
@@ -223,8 +222,8 @@ over it to the project's administrator.");
 	}
 
 	function updateRepositoryList ($params) {
-			$groups = $this->getGroups () ;
-			
+		$groups = $this->getGroups () ;
+
 		$dir = forge_get_config('data_path').'/plugins/scmbzr/public-repositories' ;
 
 		if (!is_dir($dir)) {

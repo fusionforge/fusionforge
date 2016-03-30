@@ -137,7 +137,9 @@ class Rule_lessOrEqual extends Rule_Comparator {
  */
 class Rule_WhiteList extends Rule_Comparator {
 	function isValid($val) {
-		if(is_array($this->ref) && count($this->ref) > 0 && in_array($val, $this->ref)) {
+		if(is_array($this->ref)
+		   && count($this->ref) > 0
+		   && in_array($val, $this->ref)) {
 			return true;
 		}
 		return false;
@@ -156,8 +158,9 @@ class Rule_Int extends Rule {
 	function checkFormat($val) {
 		if(preg_match('/^([+-]?[1-9][0-9]*|[+-]?0)$/', $val)) {
 			return true;
+		} else {
+			return false;
 		}
-		return false;
 	}
 
 	function isValid($val) {
@@ -170,8 +173,9 @@ class Rule_Int extends Rule {
 			} else {
 				return false;
 			}
+		} else {
+			return false;
 		}
-		return false;
 	}
 }
 
@@ -189,7 +193,8 @@ class Rule_String extends Rule {
  */
 class Rule_NoCr extends Rule {
 	function isValid($val) {
-		if(is_string($val) && strpos($val, 0x0A) === false && strpos($val, 0x0D) === false && strpos($val, 0x00) === false) {
+		if(is_string($val) && strpos($val, 0x0A) === false && strpos($val, 0x0D) === false
+		   && strpos($val, 0x00) === false) {
 			return true;
 		}
 		return false;
@@ -221,7 +226,7 @@ class Rule_Email extends Rule {
 				$valid = $valid & $this->validEmail(trim(rtrim($email)));
 			}
 		} else {
-		// $val must contains only one email address
+			// $val must contains only one email address
 			$valid = $this->validEmail($val);
 		}
 		return $valid;
@@ -238,7 +243,8 @@ class Rule_Email extends Rule {
 	 */
 	function validEmail($email) {
 		$valid_chars='-!#$%&\'*+0-9=?A-Z^_`a-z{|}~\.';
-		if (array_key_exists('sys_disable_subdomains', $GLOBALS) && $GLOBALS['sys_disable_subdomains']) {
+		if (array_key_exists('sys_disable_subdomains', $GLOBALS)
+			&& $GLOBALS['sys_disable_subdomains']) {
 			$valid_domain='['.$valid_chars.']+';
 		} else {
 			$valid_domain='['.$valid_chars.']+\.['.$valid_chars.']+';

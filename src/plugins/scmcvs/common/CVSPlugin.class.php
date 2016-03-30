@@ -3,7 +3,7 @@
  * FusionForge CVS plugin
  *
  * Copyright 2004-2009, Roland Mas
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013,2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -67,7 +67,7 @@ over it to the project's administrator.");
 			if (!$add_num) {
 				$add_num=0;
 			}
-			echo ' (CVS: '.sprintf(_('<strong>%1$s</strong> commits, <strong>%2$s</strong> adds'), number_format($commit_num, 0), number_format($add_num, 0)).")";
+			$params['result'] .= ' (CVS: '.sprintf(_('<strong>%1$s</strong> commits, <strong>%2$s</strong> adds'), number_format($commit_num, 0), number_format($add_num, 0)).")";
 		}
 	}
 
@@ -149,9 +149,8 @@ over it to the project's administrator.");
 		return $b ;
 	}
 
-	function getBrowserLinkBlock ($project) {
-		global $HTML ;
-		$b = $HTML->boxMiddle(sprintf(_('%s Repository Browser'), 'CVS'));
+	function getBrowserLinkBlock($project) {
+		$b = html_e('h2', array(), _('CVS Repository Browser'));
 		$b .= '<p>';
 		$b .= sprintf(_("Browsing the %s tree gives you a view into the current status of this project's code."), 'CVS');
 		$b .= ' ';
@@ -165,16 +164,14 @@ over it to the project's administrator.");
 		return $b ;
 	}
 
-	function getStatsBlock ($project) {
-		global $HTML ;
-		$b = '' ;
+	function getStatsBlock($project) {
+		global $HTML;
+		$b = '';
 
 		$result = db_query_params('SELECT u.realname, u.user_name, u.user_id, sum(commits) as commits, sum(adds) as adds, sum(adds+commits) as combined FROM stats_cvs_user s, users u WHERE group_id=$1 AND s.user_id=u.user_id AND (commits>0 OR adds >0) GROUP BY u.user_id, realname, user_name, u.user_id ORDER BY combined DESC, realname',
 					  array ($project->getID()));
 
 		if (db_numrows($result) > 0) {
-			$b .= $HTML->boxMiddle(_('Repository Statistics'));
-
 			$tableHeaders = array(
 				_('Name'),
 				_('Adds'),
@@ -257,7 +254,13 @@ over it to the project's administrator.");
 			system ("chmod 3777 $locks_dir") ;
 
 			if (forge_get_config('use_shell')) {
-				util_create_file_with_contents ("$repo/CVSROOT/config", "SystemAuth=no\nLockDir=$locks_dir\nUseNewInfoFmtStrings=yes\n");
+				$cvs_binary_version = get_cvs_binary_version();
+				if ($cvs_binary_version == '1.12') {
+					util_create_file_with_contents("$repo/CVSROOT/config", "SystemAuth=no\nLockDir=$locks_dir\nUseNewInfoFmtStrings=yes\n");
+				}
+				if ($cvs_binary_version == '1.11') {
+					util_create_file_with_contents("$repo/CVSROOT/config", "SystemAuth=no\nLockDir=$locks_dir\n");
+				}
 				if ($project->enableAnonSCM()) {
 					util_create_file_with_contents ("$repo/CVSROOT/readers", "anonymous\n");
 					util_create_file_with_contents ("$repo/CVSROOT/passwd", "anonymous:\n");

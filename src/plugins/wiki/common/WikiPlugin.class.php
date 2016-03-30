@@ -4,6 +4,7 @@
  * Wiki Search Engine for Fusionforge
  *
  * Copyright 2006 (c) Alain Peyrat
+ * Copyright 2016, Franck Villaume - TrivialDev
  *
  * This file is part of Fusionforge.
  *
@@ -74,7 +75,7 @@ page edits displayed on activity tab, and multi-project wiki preferences.");
 			$group_id = $params['group_id'];
 			$group = group_get_object($group_id);
 			if ($group->usesPlugin($this->name)) {
-				echo '<p><a href="/wiki/wikiadmin.php?group_id=' . $group->getID() . '&amp;type=admin&amp;pluginname=' . $this->name . '">' . _('Wiki Admin') . '</a></p>';
+				echo html_e('p', array(), util_make_link('/wiki/wikiadmin.php?group_id='.$group->getID().'&type=admin&pluginname='.$this->name, _('Wiki Admin')));
 			}
 		} elseif ($hookname == 'search_engines') {
 			// FIXME: when the hook is called, the group_id is not set.
@@ -114,8 +115,7 @@ page edits displayed on activity tab, and multi-project wiki preferences.");
 			if (defined('PHPWIKI_BASE_URL')) {
 				use_stylesheet('/wiki/themes/fusionforge/fusionforge.css');
 				use_stylesheet('/wiki/themes/fusionforge/fusionforge-print.css', 'print');
-                use_stylesheet('/wiki/highlight.js/styles/github.css');
-
+				use_stylesheet('/wiki/highlight.js/styles/github.css');
 				echo '    <link rel="alternate" type="application/x-wiki" title="Edit this page!" href="'.$_SERVER['PHP_SELF'].'?action=edit" />';
 				echo "\n".'    <link rel="alternate stylesheet" type="text/css" href="/wiki/themes/fusionforge/fusionforge-fullscreen.css" media="screen" title="Fullscreen" />';
 				echo "\n".'    <link rel="alternate stylesheet" type="text/css" href="/wiki/themes/fusionforge/fusionforge-autonumbering.css" title="Autonumbering" />';
@@ -132,12 +132,11 @@ page edits displayed on activity tab, and multi-project wiki preferences.");
 				return;
 			}
 			if ($project->usesPlugin($this->name)) {
-				echo '<div class="public-area-box">';
-				print '<a href="'. util_make_url ('/wiki/g/'.$project->getUnixName().'/HomePage').'">';
-				print html_image("ic/wiki20g.png","20","20",array("alt"=>"Wiki"));
-				print ' Wiki';
-				print '</a>';
-				echo '</div>';
+				$params['result'] .= '<div class="public-area-box">';
+				$params['result'] .= util_make_link('/wiki/g/'.$project->getUnixName().'/HomePage',
+									html_image('ic/wiki20g.png', 20, 20, array('alt' => 'Wiki')).
+									'&nbsp;'.'Wiki');
+				$params['result'] .= '</div>';
 			}
 		} elseif ($hookname == 'activity') {
 			$group = group_get_object($params['group']);
@@ -157,7 +156,7 @@ page edits displayed on activity tab, and multi-project wiki preferences.");
 
 					$pat = '_g'.$group_id.'_';
 					$len = strlen($pat)+1;
-                    $encoding = pg_client_encoding();
+					$encoding = pg_client_encoding();
 					// @ToDo: to remove after wiki tables convert
 					pg_set_client_encoding("iso-8859-1");
 					$wres = db_query_params ("SELECT plugin_wiki_page.id AS id,

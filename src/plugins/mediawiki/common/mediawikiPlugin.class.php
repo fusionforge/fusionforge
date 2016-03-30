@@ -3,7 +3,7 @@
  * MediaWikiPlugin Class
  *
  * Copyright 2000-2011, Fusionforge Team
- * Copyright 2012,2014 Franck Villaume - TrivialDev
+ * Copyright 2012,2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -61,7 +61,7 @@ _("This plugin allows each project to embed Mediawiki under a tab.");
 		$this->_addHook("clone_project_from_template") ;
 		$this->_addHook('group_delete');
 	}
-	
+
 	function process() {
 		echo '<h1>Mediawiki</h1>';
 		echo $this->getPluginInfo()->getpropVal('answer');
@@ -113,12 +113,11 @@ _("This plugin allows each project to embed Mediawiki under a tab.");
 				return;
 			}
 			if ( $project->usesPlugin ( $this->name ) ) {
-				echo '<div class="public-area-box">';
-				print '<a href="'. util_make_url ('/plugins/mediawiki/wiki/'.$project->getUnixName().'/index.php').'">';
-				print html_abs_image(util_make_url ('/plugins/mediawiki/wiki/'.$project->getUnixName().'/skins/monobook/wiki.png'),'20','20',array('alt'=>'Mediawiki'));
-				print ' Mediawiki';
-				print '</a>';
-				echo '</div>';
+				$params['result'] .= '<div class="public-area-box">';
+				$params['result'] .= util_make_link('/plugins/mediawiki/wiki/'.$project->getUnixName().'/index.php',
+							html_abs_image(util_make_url('/plugins/mediawiki/wiki/'.$project->getUnixName().'/skins/monobook/wiki.png'),'20','20',array('alt'=>'Mediawiki')).
+							'&nbsp;'.'Mediawiki');
+				$params['result'] .= '</div>';
 			}
 		} elseif ($hookname == "role_get") {
 			$role =& $params['role'] ;

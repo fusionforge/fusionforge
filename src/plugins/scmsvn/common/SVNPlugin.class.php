@@ -5,7 +5,7 @@
  * Copyright 2003-2010, Roland Mas, Franck Villaume
  * Copyright 2004, GForge, LLC
  * Copyright 2010, Alain Peyrat <aljeux@free.fr>
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2014,2016, Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of National Education
  *
  * This file is part of FusionForge.
@@ -28,7 +28,7 @@
 require_once $gfcommon.'include/plugins_utils.php';
 
 forge_define_config_item('default_server', 'scmsvn', forge_get_config ('scm_host'));
-forge_define_config_item('repos_path', 'scmsvn', forge_get_config('data_path').'/scmrepos/svn');
+forge_define_config_item('repos_path', 'scmsvn', forge_get_config('chroot').'/scmrepos/svn');
 forge_define_config_item('serve_path', 'scmsvn', forge_get_config('repos_path'));
 forge_define_config_item('use_ssh', 'scmsvn', false);
 forge_set_config_item_bool('use_ssh', 'scmsvn');
@@ -48,11 +48,8 @@ class SVNPlugin extends SCMPlugin {
 _("This plugin contains the Subversion subsystem of FusionForge. It allows
 each FusionForge project to have its own Subversion repository, and gives
 some control over it to the project's administrator.");
-		$this->svn_root_fs = '/scmrepos/svn';
-		if (!file_exists($this->svn_root_fs.'/.')) {
-			$this->svn_root_fs = forge_get_config('repos_path',
-			    $this->name);
-		}
+		$this->svn_root_fs = forge_get_config('repos_path',
+											  $this->name);
 		$this->svn_root_dav = '/svn';
 		$this->_addHook('scm_browser_page');
 		$this->_addHook('scm_update_repolist');
@@ -87,7 +84,7 @@ some control over it to the project's administrator.");
 			if (!$add_num) {
 				$add_num=0;
 			}
-			echo ' (Subversion: '.sprintf(_('<strong>%1$s</strong> updates, <strong>%2$s</strong> adds'), number_format($commit_num, 0), number_format($add_num, 0)).")";
+			$params['result'] .= ' (Subversion: '.sprintf(_('<strong>%1$s</strong> updates, <strong>%2$s</strong> adds'), number_format($commit_num, 0), number_format($add_num, 0)).")";
 		}
 	}
 
@@ -199,8 +196,7 @@ some control over it to the project's administrator.");
 	}
 
 	function getBrowserLinkBlock($project) {
-		global $HTML ;
-		$b = $HTML->boxMiddle(sprintf(_('%s Repository Browser'), 'Subversion'));
+		$b = html_e('h2', array(), _('Subversion Repository Browser'));
 		$b .= '<p>';
 		$b .= sprintf(_("Browsing the %s tree gives you a view into the current status of this project's code."), 'Subversion');
 		$b .= ' ';
@@ -566,7 +562,7 @@ some control over it to the project's administrator.");
 		if (in_array('scmsvn', $params['show']) || (count($params['show']) < 1)) {
 			$start_time = $params['begin'];
 			$end_time = $params['end'];
-			
+
 			$xml_parser = xml_parser_create();
 			xml_set_element_handler($xml_parser, "SVNPluginStartElement", "SVNPluginEndElement");
 			xml_set_character_data_handler($xml_parser, "SVNPluginCharData");
@@ -601,10 +597,9 @@ some control over it to the project's administrator.");
 
 			// final checks
 			if (!xml_parse($xml_parser, '', true))
-				exit_error('Unable to parse XML with error '
+				$this->setError('Unable to parse XML with error '
 						   . xml_error_string(xml_get_error_code($xml_parser))
-						   . ' on line ' . xml_get_current_line_number($xml_parser),
-					'activity');
+						   . ' on line ' . xml_get_current_line_number($xml_parser));
 			xml_parser_free($xml_parser);
 
 			if ($adds > 0 || $updates > 0 || $commits > 0 || $deletes > 0) {
@@ -689,10 +684,9 @@ some control over it to the project's administrator.");
 
 			// final checks
 			if (!xml_parse($xml_parser, '', true))
-				exit_error('Unable to parse XML with error '
+				$this->setError('Unable to parse XML with error '
 						   . xml_error_string(xml_get_error_code($xml_parser))
-						   . ' on line ' . xml_get_current_line_number($xml_parser),
-					'activity');
+						   . ' on line ' . xml_get_current_line_number($xml_parser));
 			xml_parser_free($xml_parser);
 
 			if ($adds > 0 || $updates > 0 || $commits > 0 || $deletes > 0) {

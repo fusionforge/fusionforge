@@ -1,6 +1,7 @@
 <?php
 /**
  * http://fusionforge.org
+ * Copyright 2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -39,22 +40,27 @@ if ($request->valid($vOwner)) {
 	$owner_type = substr($owner, 0, 1);
 	switch($owner_type) {
 		case WidgetLayoutManager::OWNER_TYPE_USER:
-		$owner_id = user_getid();
-		$redirect = '/my/';
-		$good = true;
-		break;
-		case WidgetLayoutManager::OWNER_TYPE_GROUP:
-		$pm = ProjectManager::instance();
-		if ($project = $pm->getProject($owner_id)) {
-			$group_id = $owner_id;
-			$_REQUEST['group_id'] = $_GET['group_id'] = $group_id;
-			$request->params['group_id'] = $group_id; //bad!
-			$redirect = '/projects/'. $project->getUnixName();
+			$owner_id = user_getid();
+			$redirect = '/my/';
 			$good = true;
-		}
-		break;
+			break;
+		case WidgetLayoutManager::OWNER_TYPE_GROUP:
+			$pm = ProjectManager::instance();
+			if ($project = $pm->getProject($owner_id)) {
+				$group_id = $owner_id;
+				$_REQUEST['group_id'] = $_GET['group_id'] = $group_id;
+				$request->params['group_id'] = $group_id; //bad!
+				$redirect = '/projects/'. $project->getUnixName();
+				$good = true;
+			}
+			break;
+		case WidgetLayoutManager::OWNER_TYPE_HOME:
+			if (forge_check_global_perm('forge_admin')) {
+				$good = true;
+			}
+			break;
 		default:
-		break;
+			break;
 	}
 	if ($good) {
 		if ($request->exist('name')) {

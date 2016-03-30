@@ -7,7 +7,7 @@
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2011, Roland Mas
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2015, Franck Villaume - TrivialDev
+ * Copyright 2012-2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -34,7 +34,9 @@ global $dirid; //id of the doc_group
 global $dm; // the Document Manager object
 global $HTML; // Layout object
 global $warning_msg;
+global $error_msg;
 global $childgroup_id;
+global $stateidArr;
 
 $actionurl = '/docman/?group_id='.$group_id.'&action=addfile&dirid='.$dirid;
 $redirecturl = '/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid;
@@ -76,7 +78,7 @@ jQuery(document).ready(function() {
 <?php
 echo html_ac(html_ap() - 1);
 echo html_ao('div', array('class' => 'docmanDivIncluded'));
-if ($dgf->getNested() == NULL) {
+if ($dgf->getNested($stateidArr) == NULL) {
 	$dg = new DocumentGroup($g);
 
 	if ($dg->isError()) {
@@ -84,7 +86,7 @@ if ($dgf->getNested() == NULL) {
 		session_redirect('/docman/?group_id='.$group_id);
 	}
 
-	if ($dg->create('Uncategorized Submissions')) {
+	if ($dg->create(_('Uncategorized Submissions'))) {
 		session_redirect('/docman/?group_id='.$group_id.'&view=additem');
 	}
 
@@ -175,13 +177,13 @@ if ($dgf->getNested() == NULL) {
 	} else {
 		$cells = array();
 		$cells[][] = _('Documents folder that document belongs in');
-		$cells[][] = $dm->showSelectNestedGroups($dgf->getNested(), 'doc_group', false, $dirid);
+		$cells[][] = $dm->showSelectNestedGroups($dgf->getNested($stateidArr), 'doc_group', false, $dirid);
 		echo $HTML->multiTableRow(array(), $cells);
 	}
 	if (forge_check_perm('docman', $group_id, 'approve')) {
 		$cells = array();
 		$cells[][] = _('Status of that document');
-		$cells[][] = doc_get_state_box('xzxz', 2); /** no direct deleted status */
+		$cells[][] = doc_get_state_box('xzxz', array(2)); /** no direct deleted status */
 		echo $HTML->multiTableRow(array(), $cells);
 	}
 	echo $HTML->listTableBottom();

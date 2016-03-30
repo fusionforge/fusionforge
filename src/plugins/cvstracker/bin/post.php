@@ -31,14 +31,15 @@
 
 require dirname(__FILE__).'/../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
-require_once ($gfcommon.'common/include/utils.php');
-require_once ('libphp-snoopy/Snoopy.class.php');
+require_once $gfcommon.'common/include/utils.php';
+require_once 'libphp-snoopy/Snoopy.class.php';
 
 $cvs_binary_version = get_cvs_binary_version () ;
 
 if ($cvs_binary_version != "1.12" &&
 	$cvs_binary_version != "1.11" )
 	$cvs_binary_version = "1.12";
+
 /**
  * It returns the usage and exit program
  *
@@ -118,7 +119,7 @@ function getLog($Input)
 $files = array();
 
 if( $cvs_binary_version == "1.11" ) {
-	if ($argc <= 3 ) {
+	if ($argc < 3 ) {
 		usage ( $argv );
 	}
 
@@ -135,8 +136,8 @@ if( $cvs_binary_version == "1.11" ) {
 			'actual' => $filesInformation[2]
 		);
 	}
-
 }
+
 if ( $cvs_binary_version == "1.12" ) {
 	if ($argc < 6 ) {
 		usage ( $argv );

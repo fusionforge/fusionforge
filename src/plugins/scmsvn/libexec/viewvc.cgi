@@ -64,7 +64,7 @@ try:
     c.setopt(c.COOKIE, os.environ.get('HTTP_COOKIE', ''))
     c.setopt(c.USERAGENT, os.environ.get('HTTP_USER_AGENT', ''))
     c.setopt(c.HTTPHEADER, ['X-Forwarded-For: '+os.environ.get('HTTP_X_FORWARDED_FOR', '')])
-    c.setopt(c.WRITEDATA, buffer)
+    c.setopt(c.WRITEFUNCTION, buffer.write)
     c.perform()
     c.close()
     body = buffer.getvalue()

@@ -5,7 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2012,2014, Franck Villaume - TrivialDev
+ * Copyright 2012,2015, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -26,12 +26,13 @@
 
 /* please do not add require here : use www/docman/index.php to add require */
 /* global variables used */
-global $g; //group object
-global $dirid; //id of doc_group
+global $g; // Group object
 global $group_id; // id of group
+global $childgroup_id; // id of child group if any
 
 $urlparam = '/docman/?group_id='.$group_id;
-if (isset($childgroup_id) && $childgroup_id) {
+
+if ($childgroup_id) {
 	$g = group_get_object($childgroup_id);
 	$urlparam .= '&childgroup_id='.$childgroup_id;
 }
@@ -45,7 +46,7 @@ switch ($fromview) {
 		break;
 	}
 	default: {
-		$urlparam .= '&view=listfile&dirid='.$doc_group;
+		$urlparam .= '&dirid='.$doc_group;
 		break;
 	}
 }
@@ -70,7 +71,7 @@ if (!$docid) {
 	session_redirect($urlparam);
 }
 
-$d= document_get_object($docid);
+$d = document_get_object($docid, $g->getID());
 if ($d->isError()) {
 	$error_msg = $d->getErrorMessage();
 	session_redirect($urlparam);

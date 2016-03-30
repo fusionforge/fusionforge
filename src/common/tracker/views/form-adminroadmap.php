@@ -4,7 +4,7 @@
  *
  * Copyright 2011, Alcatel-Lucent
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2014-2015, Franck Villaume - TrivialDev
+ * Copyright 2014-2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -468,11 +468,11 @@ if (! isset($ihm) || $ihm !== true) {
 					*/
 					'<td class="align-center">'.
 					util_make_link('/tracker/admin/?group_id='.$group_id.'&roadmap_id='.$roadmap->getID().'&admin_roadmap=1&update_roadmap=1',
-							html_image('ic/forum_edit.gif','','',array('alt' => _('Modify roadmap'), 'title' => _('Modify roadmap')))).
+							$HTML->getConfigurePic(_('Modify roadmap'), 'modifyroadmap')).
 					util_make_link('/tracker/admin/?group_id='.$group_id.'&roadmap_id='.$roadmap->getID().'&admin_roadmap=1&manage_release=1',
-							html_image('ic/survey-question-add.png','','',array('alt' => _('Manage releases'), 'title' => _('Manage releases')))).
+							html_image('ic/tag.png','','',array('alt' => _('Manage releases'), 'title' => _('Manage releases')))).
 					util_make_link('/tracker/admin/?group_id='.$group_id.'&roadmap_id='.$roadmap->getID().'&admin_roadmap=1&delete_roadmap=1',
-							html_image('ic/trash.png','','',array('alt' => _('Delete roadmap'), 'title' => _('Delete roadmap')))).
+							$HTML->getDeletePic(_('Delete roadmap'), 'delroadmap')).
 					'</td>'."\n".
 					'</tr>'."\n";
 			$pos++;

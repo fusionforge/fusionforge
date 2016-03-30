@@ -103,15 +103,12 @@ class Navigation extends Error {
 			$res['urls'] = array();
 
 			$res['titles'][] = forge_get_config ('forge_name').' - Project News Highlights RSS';
-			$res['urls'][] = util_make_uri('/export/rss_sfnews.php');
-
-			$res['titles'][] = forge_get_config ('forge_name').' - Project News Highlights RSS 2.0';
 			$res['urls'][] = util_make_uri('/export/rss20_news.php');
 
 			$res['titles'][] = forge_get_config ('forge_name').' - New Projects RSS';
-			$res['urls'][] = util_make_uri('/export/rss_sfprojects.php');
+			$res['urls'][] = util_make_uri('/export/rss20_projects.php');
 
-			if (isset($GLOBALS['group_id'])) {
+			if (isset($GLOBALS['group_id']) && $GLOBALS['group_id'] > 0) {
 				$res['titles'][] = forge_get_config ('forge_name') . ' - New Activity RSS';
 				$res['urls'][] = util_make_uri('/export/rss20_activity.php?group_id='.$GLOBALS['group_id']);
 			}
@@ -315,7 +312,7 @@ class Navigation extends Error {
 			$menu['titles'][] = _('Site Admin');
 			$menu['urls'][] = util_make_uri('/admin/');
 			$menu['tooltips'][] = _('Administration Submenu to handle global configuration, users & projects.');
-			if (strstr($request_uri, util_make_uri('/admin/')) || strstr($request_uri, 'globaladmin')) {
+			if (strstr($request_uri, util_make_uri('/admin/')) || strstr($request_uri, 'type=globaladmin')) {
 				$selected = count($menu['urls'])-1;
 			}
 		}
@@ -329,7 +326,11 @@ class Navigation extends Error {
 		}
 
 		// Project
-		if (isset($GLOBALS['group_id'])) {
+		if (isset($GLOBALS['group_id']) &&
+			!strstr($request_uri, '/search/?type_of_search=alldocs') &&
+			!strstr($request_uri, '/search/?type_of_search=skill') &&
+			!strstr($request_uri, '/search/?type_of_search=people') &&
+			!strstr($request_uri, '/search/?type_of_search=soft')) {
 			// get group info using the common result set
 			$project = group_get_object($GLOBALS['group_id']);
 			if (is_int($project) && $project == 0) {
@@ -345,11 +346,11 @@ class Navigation extends Error {
 					$menu['titles'][] = $project->getPublicName();
 					$menu['tooltips'][] = _('Project home page, widgets selected to follow specific items.');
 					if (isset ($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
-						$menu['urls'][]=util_make_uri('/project/?group_id') .$project->getId();
+						$menu['urls'][] = util_make_uri('/project/?group_id') .$project->getId();
 					} else {
-						$menu['urls'][]=util_make_uri('/projects/') .$project->getUnixName().'/';
+						$menu['urls'][] = util_make_uri('/projects/') .$project->getUnixName().'/';
 					}
-					$selected=count($menu['urls'])-1;
+					$selected = count($menu['urls'])-1;
 				}
 			}
 		}

@@ -50,10 +50,10 @@ class TaskBoardHtml extends TaskBoard {
 				$view = getStringFromRequest('view','');
 				if($release_id) {
 					if( $view == 'edit_release' ) {
-						$labels[] = _('Delete Release');
+						$labels[] = _('Delete release');
 						$links[]  = '/plugins/taskboard/releases/?group_id='.$group_id.'&view=delete_release&release_id='.$release_id;
 					} else {
-						$labels[] = _('Edit Release');
+						$labels[] = _('Edit release');
 						$links[]  = '/plugins/taskboard/releases/?group_id='.$group_id.'&view=edit_release&release_id='.$release_id;
 					}
 				}

@@ -423,12 +423,12 @@ function generateClassUpdate($tableName,$className,$fields) {
 
 	$output .= "\t\t\$res=db_query(\$sql);\n".
                    "\t\tif (!\$res || db_affected_rows(\$res) < 1) {\n".
-                   "\t\t\t\$this->setError('Error On Update: '.db_error());\n".
+                   "\t\t\t\$this->setError(_('Error On Update')._(': ').db_error());\n".
                    "\t\t\tdb_rollback();\n".
                    "\t\t\treturn false;\n".
                    "\t\t} else {\n".
                    "\t\t\tif (!$this->fetchData(\$this->getID())) {\n".
-                   "\t\t\t\t\$this->setError('Error On Update: '.db_error());\n".
+                   "\t\t\t\t\$this->setError(_('Error On Update')._(': ').db_error());\n".
                    "\t\t\t\tdb_rollback();\n".
                    "\t\t\t\treturn false;\n".
                    "\t\t\t} else {\n".

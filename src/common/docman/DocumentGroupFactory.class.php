@@ -6,7 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
  * Copyright 2010, Franck Villaume - Capgemini
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2014,2016, Franck Villaume - TrivialDev
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
@@ -25,10 +25,6 @@
  * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
-/*
- Document Groups
-*/
 
 require_once $gfcommon.'include/Error.class.php';
 
@@ -71,16 +67,16 @@ class DocumentGroupFactory extends Error {
 	/**
 	 * getNested - Return an array of DocumentGroup objects arranged for nested views.
 	 *
-	 * @param	int	$stateid	The stateid of DocumentGroup : default is public (1).
+	 * @param	array	$stateid	The array of stateid of DocumentGroup : default is public (1).
 	 * @return	array	The array of DocumentGroup.
 	 */
-	function &getNested($stateid = 1) {
+	function &getNested($stateid = array(1)) {
 		if ($this->nested_groups) {
 			return $this->nested_groups;
 		}
 
-		$result = db_query_params('SELECT * FROM doc_groups WHERE group_id=$1 AND stateid=$2 ORDER BY groupname ASC',
-						array($this->Group->getID(), $stateid));
+		$result = db_query_params('SELECT * FROM doc_groups WHERE group_id=$1 AND stateid = ANY ($2) ORDER BY groupname ASC',
+						array($this->Group->getID(), db_int_array_to_any_clause($stateid)));
 
 		if (!$result) {
 			$this->setError(_('No Documents Folder Found').' '.db_error());
@@ -102,18 +98,18 @@ class DocumentGroupFactory extends Error {
 	/**
 	 * getDocumentGroups - Return an array of DocumentGroup objects.
 	 *
-	 * @param	int	$stateid	The stateid of DocumentGroups : default is public (1).
+	 * @param	int	$stateid	The array of stateid of DocumentGroups : default is public (1).
 	 * @return	array	The array of DocumentGroup.
 	 */
-	function &getDocumentGroups($stateid = 1) {
+	function &getDocumentGroups($stateid = array(1)) {
 		if ($this->flat_groups) {
 			return $this->flat_groups;
 		}
 
 		$this->flat_groups = array();
 
-		$result = db_query_params('SELECT * FROM doc_groups WHERE group_id=$1 AND stateid=$2 ORDER BY groupname ASC',
-						array($this->Group->getID(), $stateid));
+		$result = db_query_params('SELECT * FROM doc_groups WHERE group_id = $1 AND stateid = ANY ($2) ORDER BY groupname ASC',
+						array($this->Group->getID(), db_int_array_to_any_clause($stateid)));
 		$rows = db_numrows($result);
 
 		if (!$result || $rows < 1) {

@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (C) 2015 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
+ * Copyright 2015, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -57,27 +58,28 @@ foreach ( $release_values as $release_name => $release_id ) {
 	}
 }
 
-$release_box = html_build_select_box_from_arrays($release_id_arr, $release_name_arr, '_release', $element_id, false);
+$release_box = html_build_select_box_from_arrays($release_id_arr, $release_name_arr, '_release', false, false);
 echo $HTML->openForm(array('action' => '/plugins/'.$pluginTaskboard->name.'/releases/?group_id='.$group_id.'&action=add_release', 'method' => 'post'));
 echo html_e('input', array('type' => 'hidden', 'name' => 'post_changes', 'value' => 'y'));
 echo html_e('h2', array(), _('Add release')._(':'));
 echo $HTML->listTableTop();
 ?>
 	<tr><td><strong><?php echo _('Release') ?></strong>&nbsp;<?php echo utils_requiredField(); ?></td><td><?php echo $release_box; ?></td></tr>
-	<tr><td><strong><?php echo _('Start date') ?></strong>&nbsp;<?php echo utils_requiredField(); ?></td><td><input type="text" name="start_date" value="<?php echo $start_date ?>"></td></tr>
-	<tr><td><strong><?php echo _('End date') ?></strong>&nbsp;<?php echo utils_requiredField(); ?></td><td><input type="text" name="end_date" value="<?php echo $end_date ?>"></td></tr>
-	<tr><td><strong><?php echo _('Goals') ?></strong></td><td><textarea name="goals" cols="79" rows="5" ><?php echo htmlspecialchars($goals) ?></textarea></td></tr>
-	<tr><td><strong><?php echo _('Page URL') ?></strong></td><td><input type="text" name="page_url" value="<?php echo htmlspecialchars($page_url) ?>"></td></tr>
+	<tr><td><strong><?php echo _('Start Date') ?></strong>&nbsp;<?php echo utils_requiredField(); ?></td><td><input type="text" name="start_date" ></td></tr>
+	<tr><td><strong><?php echo _('End Date') ?></strong>&nbsp;<?php echo utils_requiredField(); ?></td><td><input type="text" name="end_date" ></td></tr>
+	<tr><td><strong><?php echo _('Goals') ?></strong></td><td><textarea name="goals" cols="79" rows="5" ></textarea></td></tr>
+	<tr><td><strong><?php echo _('Page URL') ?></strong></td><td><input type="text" name="page_url" ></td></tr>
 <?php
 echo $HTML->listTableBottom();
 echo html_e('p', array(), html_e('input', array('type' => 'submit', 'name' => 'post_changes', 'value' => _('Submit'))));
 echo $HTML->closeForm();
 echo $HTML->addRequiredFieldsInfoBox();
+$date_format_js = _('yy-mm-dd');
 echo html_ao('script', array('type' => 'text/javascript'));
 ?>
 //<![CDATA[
 jQuery( document ).ready(function( $ ) {
-	$( "input[name='start_date'], input[name='end_date']" ).datepicker( {  "dateFormat" : "yy-mm-dd" });
+	$( "input[name='start_date'], input[name='end_date']" ).datepicker( {  "dateFormat" : "<?php echo $date_format_js ?>" });
 });
 //]]>
 <?php

@@ -4,7 +4,7 @@
  *
  * Copyright 2009, Roland Mas
  * Copyright 2009, Mehdi Dogguy <mehdi@debian.org>
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2014,2016, Franck Villaume - TrivialDev
  * Copyright © 2013
  *	Thorsten Glaser <t.glaser@tarent.de>
  * http://fusionforge.org
@@ -74,14 +74,14 @@ control over it to the project's administrator.");
 			$result = db_query_params('SELECT sum(updates) AS updates, sum(adds) AS adds FROM stats_cvs_group WHERE group_id=$1',
 						array($project->getID()));
 			$commit_num = db_result($result,0,'updates');
-			$add_num    = db_result($result,0,'adds');
+			$add_num = db_result($result,0,'adds');
 			if (!$commit_num) {
-				$commit_num=0;
+				$commit_num = 0;
 			}
 			if (!$add_num) {
-				$add_num=0;
+				$add_num = 0;
 			}
-			echo ' (Git: '.sprintf(_('<strong>%1$s</strong> updates, <strong>%2$s</strong> adds'), number_format($commit_num, 0), number_format($add_num, 0)).')';
+			$params['result'] .= ' (Git: '.sprintf(_('<strong>%1$s</strong> updates, <strong>%2$s</strong> adds'), number_format($commit_num, 0), number_format($add_num, 0)).')';
 		}
 	}
 
@@ -105,7 +105,6 @@ control over it to the project's administrator.");
 		$clone_commands = array();
 		foreach ($repo_list as $repo_name) {
 			if (forge_get_config('use_smarthttp', 'scmgit')) {
-				$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
 				$clone_commands[] = 'git clone '.$protocol.'://'.forge_get_config('scm_host').'/anonscm/git/'.$project->getUnixName().'/'.$repo_name.'.git';
 			}
 		}
@@ -230,7 +229,7 @@ control over it to the project's administrator.");
 			}
 		}
 		if ($b == '') {
-			$b .= $HTML->error_msg(_('Error')._(': ')._('No access protocol has been allowed for the Git plugin in scmgit.ini: use_ssh, use_smarthttp and use_dav are disabled'));
+			$b .= $HTML->error_msg(_('Error')._(': ')._('No access protocol has been allowed for the Git plugin in scmgit.ini: use_ssh and use_smarthttp are disabled'));
 		}
 
 		if (session_loggedin()) {
@@ -309,7 +308,6 @@ control over it to the project's administrator.");
 	}
 
 	function getBrowserLinkBlock($project) {
-		global $HTML;
 		$b = html_e('h2', array(), _('Git Repository Browser'));
 		$b .= html_e('p', array(), _("Browsing the Git tree gives you a view into the current status"
 									 . " of this project's code. You may also view the complete"
@@ -356,7 +354,6 @@ control over it to the project's administrator.");
 			array($project->getID()));
 
 		if (db_numrows($result) > 0) {
-
 			$tableHeaders = array(
 			_('Name'),
 			_('Adds'),
@@ -503,10 +500,10 @@ control over it to the project's administrator.");
 			$repo_name = db_result($result,$i,'repo_name');
 			$description = db_result($result,$i,'description');
 			$clone_url = db_result($result,$i,'clone_url');
-            // Clone URLs need to be validated to prevent a potential arbitrary command execution
-            if (!preg_match('|^[-a-zA-Z0-9:./_]+$|', $clone_url)) {
-                    $clone_url = '';
-            }
+			// Clone URLs need to be validated to prevent a potential arbitrary command execution
+			if (!preg_match('|^[-a-zA-Z0-9:./_]+$|', $clone_url)) {
+				$clone_url = '';
+			}
 			$repodir = $root . '/' .  $repo_name . '.git';
 			if (!is_file("$repodir/HEAD") && !is_dir("$repodir/objects") && !is_dir("$repodir/refs")) {
 				if ($clone_url != '') {
@@ -605,6 +602,7 @@ control over it to the project's administrator.");
 		fwrite($f, "\$javascript = '". util_make_url('/plugins/scmgit/gitweb.js')."';\n");
 		fwrite($f, "\$site_html_head_string = '<script type=\"text/javascript\" src=\"". util_make_url('/scripts/iframe-resizer/iframeResizer.contentWindow.min.js'). "\" />';\n");
 		fwrite($f, "\$prevent_xss = 'true';\n");
+		fwrite($f, "\$site_footer = '".forge_get_config('source_path')."/plugins/scmgit/www/gitweb_footer.html';\n");
 		fwrite($f, "\$feature{'actions'}{'default'} = [('project home', '" .
 		       util_make_url('/plugins/scmgit/?func=grouppage/%n') .
 		       "', 'summary')];\n");
@@ -1230,6 +1228,7 @@ control over it to the project's administrator.");
 			$f = fopen($filename, 'r');
 			unlink($filename);
 
+			$i = 0;
 			while (!feof($f) && $data = fgets($f)) {
 				$line = trim($data);
 				$splitedLine = explode('||', $line);

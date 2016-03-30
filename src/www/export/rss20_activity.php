@@ -3,7 +3,7 @@
  *
  * Copyright 2006 Daniel A. Perez <daniel@gforgegroup.com>
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014-2015, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -32,9 +32,6 @@ $group_id = getIntFromRequest('group_id');
 $limit = getIntFromRequest('limit', 10);
 
 if ($limit > 100) $limit = 100;
-
-$url = util_make_url ('/');
-$url = rtrim($url, '/');
 
 if ($group_id) {
 	session_require_perm('project_read', $group_id);
@@ -100,16 +97,15 @@ if ($group_id) {
 
 	// ## item outputs
 	foreach ($results as $arr) {
-
 		switch ($arr['section']) {
-			case 'commit': {
-				if (!forge_check_perm('tracker',$arr['ref_id'],'read')) {
+			case 'scm': {
+				if (!forge_check_perm('scm',$arr['group_id'],'read')) {
 					continue (2);
 				}
 				print "  <item>\n";
-				print "   <title>".htmlspecialchars('Commit for Tracker Item [#'.$arr['subref_id'].'] '.$arr['description'])."</title>\n";
-				print "   <link>$url/tracker/?func=detail&amp;atid=".$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</link>\n";
-				print "   <comments>$url/tracker/?func=detail&amp;atid=".$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</comments>\n";
+				print "   <title>".htmlspecialchars('Commit :'.$arr['description'])."</title>\n";
+				print "   <link>".util_make_url('/scm/'.$arr['ref_id'].$arr['subref_id'])."</link>\n";
+				print "   <comments>".util_make_url('/scm/'.$arr['ref_id'].$arr['subref_id'])."</comments>\n";
 				$arr['category'] = _('Source Code');
 				break;
 			}
@@ -119,8 +115,8 @@ if ($group_id) {
 				}
 				print "  <item>\n";
 				print "   <title>".htmlspecialchars('Tracker Item [#'.$arr['subref_id'].' '.$arr['description'].'] Opened')."</title>\n";
-				print "   <link>$url/tracker/?func=detail&amp;atid=".$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</link>\n";
-				print "   <comments>$url/tracker/?func=detail&amp;atid=".$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</comments>\n";
+				print "   <link>".util_make_url("/tracker/?func=detail&amp;atid=".$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'])."</link>\n";
+				print "   <comments>".util_make_url("/tracker/?func=detail&amp;atid=".$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'])."</comments>\n";
 				$arr['category'] = _('Trackers');
 				break;
 			}
@@ -130,8 +126,8 @@ if ($group_id) {
 				}
 				print "  <item>\n";
 				print "   <title>".htmlspecialchars('Tracker Item [#'.$arr['subref_id'].' '.$arr['description'].'] Closed')."</title>\n";
-				print "   <link>$url/tracker/?func=detail&amp;atid=".$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</link>\n";
-				print "   <comments>$url/tracker/?func=detail&amp;atid=".$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</comments>\n";
+				print "   <link>".util_make_url("/tracker/?func=detail&amp;atid=".$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'])."</link>\n";
+				print "   <comments>".util_make_url("/tracker/?func=detail&amp;atid=".$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'])."</comments>\n";
 				$arr['category'] = _('Trackers');
 				break;
 			}
@@ -141,8 +137,8 @@ if ($group_id) {
 				}
 				print "  <item>\n";
 				print "   <title>".htmlspecialchars('FRS Release [#'.$arr['description'].']')."</title>\n";
-				print "   <link>$url/frs/?release_id=".$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</link>\n";
-				print "   <comments>$url/frs/?release_id=".$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</comments>\n";
+				print "   <link>".util_make_url("/frs/?release_id=".$arr['subref_id'].'&amp;group_id='.$arr['group_id'])."</link>\n";
+				print "   <comments>".util_make_url("/frs/?release_id=".$arr['subref_id'].'&amp;group_id='.$arr['group_id'])."</comments>\n";
 				$arr['category'] = _('File Release System');
 				break;
 			}
@@ -152,8 +148,8 @@ if ($group_id) {
 				}
 				print "  <item>\n";
 				print "   <title>".htmlspecialchars('Forum Post [#'.$arr['subref_id'].'] '.$arr['description'])."</title>\n";
-				print "   <link>$url/forum/message.php?forum_id=".$arr['ref_id'].'&amp;msg_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</link>\n";
-				print "   <comments>$url/forum/message.php?forum_id=".$arr['ref_id'].'&amp;msg_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</comments>\n";
+				print "   <link>".util_make_url("/forum/message.php?forum_id=".$arr['ref_id'].'&amp;msg_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'])."</link>\n";
+				print "   <comments>".util_make_url("/forum/message.php?forum_id=".$arr['ref_id'].'&amp;msg_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'])."</comments>\n";
 				$arr['category'] = _('Forums');
 				break;
 			}
@@ -163,8 +159,8 @@ if ($group_id) {
 				}
 				print "  <item>\n";
 				print "   <title>".htmlspecialchars('News Post [#'.$arr['subref_id'].'] '.$arr['description'])."</title>\n";
-				print "   <link>$url/forum/forum.php?forum_id=".$arr['subref_id']."</link>\n";
-				print "   <comments>$url/forum/forum.php?forum_id=".$arr['subref_id']."</comments>\n";
+				print "   <link>".util_make_url("/forum/forum.php?forum_id=".$arr['subref_id'])."</link>\n";
+				print "   <comments>".util_make_url("/forum/forum.php?forum_id=".$arr['subref_id'])."</comments>\n";
 				$arr['category'] = _('News');
 				break;
 			}
@@ -174,16 +170,38 @@ if ($group_id) {
 				}
 				print "  <item>\n";
 				print "   <title>".htmlspecialchars('New Document '.$arr['description'])."</title>\n";
-				print "   <link>$url/docman/?group_id=".$arr['group_id']."&amp;view=listfile&amp;dirid=".$arr['ref_id']."</link>\n";
-				print "   <comment>$url/docman/?group_id=".$arr['group_id']."&amp;view=listfile&amp;dirid=".$arr['ref_id']."</comment>\n";
+				print "   <link>".util_make_url("/docman/?group_id=".$arr['group_id']."&amp;view=listfile&amp;dirid=".$arr['ref_id'])."</link>\n";
+				print "   <comment>".util_make_url("/docman/?group_id=".$arr['group_id']."&amp;view=listfile&amp;dirid=".$arr['ref_id'])."</comment>\n";
+				$arr['category'] = _('Documents');
+				break;
+			}
+			case 'docmanupdate': {
+				if (!forge_check_perm('docman', $arr['group_id'], 'read')) {
+					continue (2);
+				}
+				print "  <item>\n";
+				print "   <title>".htmlspecialchars('Updated Document '.$arr['description'])."</title>\n";
+				print "   <link>".util_make_url("/docman/?group_id=".$arr['group_id']."&amp;view=listfile&amp;dirid=".$arr['ref_id'])."</link>\n";
+				print "   <comment>".util_make_url("/docman/?group_id=".$arr['group_id']."&amp;view=listfile&amp;dirid=".$arr['ref_id'])."</comment>\n";
+				$arr['category'] = _('Documents');
+				break;
+			}
+			case 'docgroupnew': {
+				if (!forge_check_perm('docman', $arr['group_id'], 'read')) {
+					continue (2);
+				}
+				print "  <item>\n";
+				print "   <title>".htmlspecialchars('New Document Directory '.$arr['description'])."</title>\n";
+				print "   <link>".util_make_url("/docman/?group_id=".$arr['group_id']."&amp;view=listfile&amp;dirid=".$arr['subref_id'])."</link>\n";
+				print "   <comment>".util_make_url("/docman/?group_id=".$arr['group_id']."&amp;view=listfile&amp;dirid=".$arr['subref_id'])."</comment>\n";
 				$arr['category'] = _('Documents');
 				break;
 			}
 			default: {
 				print "  <item>\n";
 				print "   <title>".htmlspecialchars($arr['title'])."</title>\n";
-				print "   <link>".$url.$arr['link']."</link>\n";
-				print "   <comment>".$url.$arr['link']."</comment>\n";
+				print "   <link>".util_make_url($arr['link'])."</link>\n";
+				print "   <comment>".util_make_url($arr['link'])."</comment>\n";
 			}
 		}
 

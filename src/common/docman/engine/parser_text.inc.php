@@ -5,7 +5,7 @@
  * Copyright 2005, Fabio Bertagnin
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2015 Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -43,14 +43,13 @@ function parser_text($fichin) {
 		$buff = strtolower($buff);
 	}
 
-	// élimination d'éventuels caractères unicode encore présents
+	// transform into UTF-8
 	if (function_exists('mb_convert_encoding')) {
-		$buff = mb_convert_encoding($buff, 'ascii');
+		$buff = mb_convert_encoding($buff, 'UTF-8');
 	}
 
-	// élimination caractères avec accents
-	// et caractères spéciaux
-	$buff = suppression_diacritics($buff);
+	// remove specific characters
+	$buff = delete_specific_chars($buff);
 	// tous les mots dans un tableau
 	$words = explode(' ', $buff);
 	// élimination des doublons
@@ -68,9 +67,8 @@ function print_list($list) {
 	return $rep;
 }
 
-function suppression_diacritics($text) {
-	$text = iconv('UTF-8', 'US-ASCII//TRANSLIT', $text) ;
-	$text = strtr($text, "\t\r\n?.*'\":;,#![]()", "                 ");
+function delete_specific_chars($text) {
+	$text = strtr($text, "\t\r\n?.*'\":;,#![]()/", "                  ");
 	return $text;
 }
 

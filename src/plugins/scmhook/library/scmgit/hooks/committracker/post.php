@@ -201,6 +201,8 @@ $vars['data'] = urlencode(serialize($SubmitVars));
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $SubmitUrl);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_POSTFIELDS, $vars);
 $result = curl_exec($ch);

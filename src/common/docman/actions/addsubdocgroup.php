@@ -5,7 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2011,2015, Franck Villaume - TrivialDev
+ * Copyright 2011,2016, Franck Villaume - TrivialDev
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
@@ -33,13 +33,9 @@ global $group_id; // id of group
 global $feedback;
 global $error_msg;
 global $warning_msg;
-global $childgroup_id;
+global $childgroup_id; // id of child group if any
 
-if ($dirid) {
-	$urlredirect = '/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid;
-} else {
-	$urlredirect = '/docman/?group_id='.$group_id;
-}
+$urlredirect = '/docman/?group_id='.$group_id.'&dirid='.$dirid;
 
 // plugin projects-hierarchy support
 if ($childgroup_id) {
@@ -53,10 +49,11 @@ if (!forge_check_perm('docman', $g->getID(), 'approve')) {
 }
 
 $groupname = trim(getStringFromRequest('groupname'));
+$stateid = getIntFromRequest('stateid');
 
 $dg = new DocumentGroup($g);
 
-if ($dg->isError() || !$dg->create($groupname, $dirid)) {
+if ($dg->isError() || !$dg->create($groupname, $dirid, $stateid)) {
 	$error_msg = $dg->getErrorMessage();
 	session_redirect($urlredirect);
 }
@@ -67,4 +64,4 @@ if ($dirid) {
 }
 
 $feedback = _('Document folder successfully created.');
-session_redirect($urlredirect.'&view=listfile&dirid='.$dg->getID());
+session_redirect($urlredirect.'&dirid='.$dg->getID());

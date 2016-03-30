@@ -44,15 +44,16 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 
 		$userIsGroupMember = $this->isGroupMember($groupId);
 
-		$searchQuery = new DocsSearchQuery($words, $offset, $isExact, $groupId, $sections, $userIsGroupMember, $rowsPerPage, $options);
+		$searchQuery = new DocsSearchQuery($words, $offset, $isExact, array($groupId), $sections, $userIsGroupMember, $rowsPerPage, $options);
 
 		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_DOCS, $words, $isExact, $searchQuery, $groupId, 'docman');
 
 		$this->tableHeaders = array(
 			_('Directory'),
-			_('#'),
+			_('&nbsp;'),
 			_('Title'),
-			_('Description')
+			_('Description'),
+			_('Actions')
 		);
 	}
 
@@ -66,33 +67,89 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			return '';
 		}
 
+		global $HTML;
+		global $LUSER;
 		$rowsCount = $this->searchQuery->getRowsCount();
 		$result =& $this->searchQuery->getResult();
 
 		$return = '';
 
-		$lastDocGroup = null;
+		$lastDocGroupID = null;
 
 		$rowColor = 0;
-		for($i = 0; $i < $rowsCount; $i++) {
+		if ($rowsCount) {
+			use_javascript('/docman/scripts/DocManController.js');
+			$return .= $HTML->getJavascripts();
+			$return .= $HTML->getStylesheets();
+			echo html_ao('script', array('type' => 'text/javascript'));
+			?>
+			//<![CDATA[
+			var controllerListFile;
+
+			jQuery(document).ready(function() {
+				controllerListFile = new DocManListFileController({
+					groupId:		<?php echo $this->groupId ?>,
+					docManURL:		'<?php echo util_make_uri('/docman') ?>',
+					childGroupId:		<?php echo util_ifsetor($childgroup_id, 0) ?>,
+				});
+			});
+
+			//]]>
+			<?php
+			echo html_ac(html_ap() - 1);
+		}
+		for ($i = 0; $i < $rowsCount; $i++) {
+			$document = document_get_object(db_result($result, $i, 'docid'), db_result($result, $i, 'group_id'));
+			$currentDocGroup = documentgroup_get_object($document->getDocGroupID(), $document->Group->getID());
 			//section changed
-			$currentDocGroup = db_result($result, $i, 'groupname');
-			$groupObject = group_get_object($this->groupId);
-			$document = new Document($groupObject, db_result($result, $i, 'docid'));
-			if ($lastDocGroup != $currentDocGroup) {
-				$return .= '<tr><td>'.html_image('ic/cfolder15.png', '10', '12', array('border' => '0')).util_make_link('/docman/?group_id='.$this->groupId.'&view=listfile&dirid='.$document->getDocGroupID(),$currentDocGroup).'</td><td colspan="3">&nbsp;</td></tr>';
-				$lastDocGroup = $currentDocGroup;
+			if ($lastDocGroupID != $currentDocGroup->getID()) {
+				//project changed
+				$content = '';
+				if ($this->groupId != $currentDocGroup->Group->getID()) {
+					$content = _('Project')._(': ').util_make_link('/docman/?group_id='.$currentDocGroup->Group->getID(),$currentDocGroup->Group->getPublicName()).' ';
+				}
+				$cells = array();
+				$cells[] = array($content.html_image('ic/folder.png', 22, 22, array('border' => '0')).$currentDocGroup->getPath(true), 'colspan' => 4);
+				$lastDocGroupID = $currentDocGroup->getID();
+				$return .= $HTML->multiTableRow(array(), $cells);
 				$rowColor = 0;
 			}
-			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($rowColor) .'>'
-				. '<td>&nbsp;</td>'
-				. '<td>'.db_result($result, $i, 'docid').'</td>'
-				. '<td><a href="'.util_make_url ('/docman/view.php/'.$this->groupId . '/'.db_result($result, $i, 'docid').'/'.db_result($result, $i, 'filename')).'">'
-				. html_image('ic/msg.png', '10', '12')
-				. ' '.db_result($result, $i, 'title').'</a></td>'
-				. '<td>'.db_result($result, $i, 'description').'</td></tr>';
+			$cells = array();
+			if (!$document->getLocked() && !$document->getReserved()) {
+				$cells[][] = html_e('input', array('type' => 'checkbox', 'value' => $document->Group->getID().'-'.$document->getID(), 'class' => 'checkeddocidactive', 'title' => _('Select / Deselect this document for massaction'), 'onClick' => 'controllerListFile.checkgeneral("active")'));
+			} else {
+				if (session_loggedin() && ($document->getReservedBy() != $LUSER->getID())) {
+					$cells[][] = html_e('input', array('type' => 'checkbox', 'name' => 'disabled', 'disabled' => 'disabled'));
+				} else {
+					$cells[][] = html_e('input', array('type' => 'checkbox', 'value' => $document->Group->getID().'-'.$document->getID(), 'class' => 'checkeddocidactive', 'title' => _('Select / Deselect this document for massaction'), 'onClick' => 'controllerListFile.checkgeneral("active")'));
+				}
+			}
+			if ($document->isURL()) {
+				$cells[][] = util_make_link($document->getFileName(), html_image($document->getFileTypeImage(), 22, 22), array('title' => _('Visit this link')), true);
+			} else {
+				$cells[][] = util_make_link('/docman/view.php/'.$document->Group->getID().'/'.$document->getID().'/'.urlencode($document->getFileName()), html_image($document->getFileTypeImage(), 22, 22), array('title' => _('View this document')));
+			}
+			$cells[][] = db_result($result, $i, 'title');
+			$cells[][] = db_result($result, $i, 'description');
+			if (forge_check_perm('docman', $document->Group->getID(), 'approve')) {
+				if (!$document->getLocked() && !$document->getReserved()) {
+					$cells[][] = util_make_link('/docman/?group_id='.$document->Group->getID().'&view=listfile&dirid='.$document->getDocGroupID().'&filedetailid='.$document->getID(), html_image('docman/edit-file.png', 22, 22, array('alt' => _('Edit this document'))), array('title' => _('Edit this document')));
+				} else {
+					$cells[][] = '&nbsp;';
+				}
+			} else {
+				$cells[][] = '&nbsp;';
+			}
+			$return .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($rowColor, true)), $cells);
 			$rowColor++;
 		}
+		$content = html_ao('span', array('id' => 'massactionactive', 'class' => 'hide'));
+		$content .=  html_e('span', array('id' => 'docman-massactionmessage', 'title' => _('Actions availables for selected documents, you need to check at least one document to get actions')), _('Mass actions for selected documents')._(':'), false);
+		$content .= util_make_link('#', html_image('docman/download-directory-zip.png', 22, 22, array('alt' => _('Download as a ZIP'))) , array('onclick' => 'window.location.href=\''.util_make_uri('/docman/view.php/'.$this->groupId.'/zip/selected/files/\'+controllerListFile.buildUrlByCheckbox("active")'), 'title' => _('Download as a ZIP')), true);
+		$content .= html_ac(html_ap() - 1);
+		$cells = array();
+		$cells[] = array($content, 'colspan' => 4);
+		$return .= $HTML->multiTableRow(array(), $cells);
 		return $return;
 	}
 

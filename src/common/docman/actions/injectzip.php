@@ -3,7 +3,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2015-2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -24,13 +24,14 @@
 
 /* please do not add require here : use www/docman/index.php to add require */
 /* global variables used */
-global $g; // group object
+global $g; // Group object
 global $group_id; // id of group
+global $feedback;
+global $error_msg;
+global $warning_msg;
+global $dirid;
 
-$doc_group = getIntFromRequest('dirid');
-$return_url = '/docman/?group_id='.$group_id;
-if ($doc_group)
-	$return_url .= '&dirid='.$doc_group;
+$return_url = '/docman/?group_id='.$group_id.'&dirid='.$dirid;
 
 if (!forge_check_perm('docman', $group_id, 'approve')) {
 	$warning_msg = _('Document Manager Action Denied.');
@@ -38,9 +39,21 @@ if (!forge_check_perm('docman', $group_id, 'approve')) {
 }
 
 $uploaded_zip = getUploadedFile('uploaded_zip');
-$dg = documentgroup_get_object($doc_group);
+if (empty($uploaded_zip['name'])) {
+	$error_msg = _('Missing file or limit size exceeded');
+	session_redirect($return_url);
+}
 
-if (!$dg || $dg->isError() || !$dg->injectArchive($uploaded_zip)) {
+if ($dirid) {
+	$dg = documentgroup_get_object($dirid, $group_id);
+} else {
+	$dg = new DocumentGroup(group_get_object($group_id));
+}
+
+if (!$dg) {
+	$error_msg = _('No valid Group nor directory');
+	session_redirect($return_url);
+} elseif ($dg->isError() || !$dg->injectArchive($uploaded_zip)) {
 	$error_msg = $dg->getErrorMessage();
 	session_redirect($return_url);
 }

@@ -105,8 +105,8 @@ class TrackersHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 							. '<a href="'.util_make_url ('/tracker/?func=detail&amp;group_id='.$this->groupId.'&amp;aid='.$row['artifact_id'] . '&amp;atid='.$row['group_artifact_id']).'">'
 							. html_image('ic/tracker20g.png').' '.$row['summary']
 							. '</a></td>'
-						. '<td width="15%">'.$row['realname'].'</td>'
-						. '<td width="15%">'.relative_date($row['open_date']).'</td></tr>';
+						. '<td style="width: 15%">'.$row['realname'].'</td>'
+						. '<td style="width: 15%">'.relative_date($row['open_date']).'</td></tr>';
 			$rowColor ++;
 		}
 		return $return;

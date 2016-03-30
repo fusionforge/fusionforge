@@ -3,6 +3,7 @@
  * FusionForge system users integration
  *
  * Copyright 2004, Christian Bayle
+ * Copyright 2015, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -53,19 +54,17 @@ class UNIX extends System {
 		} else {
 			$res = db_query_params ('UPDATE users SET
 			unix_uid=user_id+$1,
-			unix_gid=user_id+$2,
-			unix_status=$3
-			WHERE user_id=$4',
+			unix_status=$2
+			WHERE user_id=$3',
 						array ($this->UID_ADD,
-							   $this->UID_ADD,
 							   'A',
 							   $user_id)) ;
 					if (!$res) {
 							$this->setError('Error: Cannot Update User UID/GID: '.db_error());
 							return false;
 			}
-			return true;
 		}
+		return parent::sysCreateUser($user_id);
 	}
 
 	/**
@@ -87,16 +86,16 @@ class UNIX extends System {
 	}
 
 	/*
-	* Group management functions
-	*/
+	 * Group management functions
+	 */
 
 	/**
-	 * sysCheckGroup() - Check for the existence of a group
-	 *
-	 * @param	int	$group_id	The ID of the group to check
-	 * @return	bool	true on success/false on error
-	 *
-	 */
+	  * sysCheckGroup() - Check for the existence of a group
+	  *
+	  * @param	int	$group_id	The ID of the group to check
+	  * @return	bool	true on success/false on error
+	  *
+	  */
 	function sysCheckGroup($group_id) {
 		$group = group_get_object($group_id);
 		if (!$group){
@@ -106,10 +105,10 @@ class UNIX extends System {
 	}
 
 	/**
-	 * sysCreateGroup() - Create a group
-	 *
-	 * @param	int	$group_id	The ID of the group to create
-	 * @return	bool	true on success/false on error
+	  * sysCreateGroup() - Create a group
+	  *
+	  * @param	int	$group_id	The ID of the group to create
+	  * @return	bool	true on success/false on error
 	 *
 	 */
 	function sysCreateGroup($group_id) {

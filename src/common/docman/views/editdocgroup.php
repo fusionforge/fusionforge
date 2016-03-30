@@ -1,5 +1,4 @@
 <?php
-
 /**
  * FusionForge Documentation Manager
  *
@@ -7,7 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013-2015, Franck Villaume - TrivialDev
+ * Copyright 2013-2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -28,7 +27,7 @@
 
 /* please do not add require here : use www/docman/index.php to add require */
 /* global variables used */
-global $g; //group object
+global $g; // Group object
 global $group_id; // id of the group
 global $dirid; // id of doc_group
 global $dgf; // document directory factory of this group
@@ -37,17 +36,17 @@ global $HTML;
 global $warning_msg;
 global $childgroup_id;
 
-if (!forge_check_perm('docman', $group_id, 'approve')) {
-	$warning_msg = _('Document Manager Access Denied');
-	session_redirect('/docman/?group_id='.$group_id);
-}
-
 $actionurl = '/docman/?group_id='.$group_id.'&action=editdocgroup';
 
 // plugin projects-hierarchy support
 if ($childgroup_id) {
 	$g = group_get_object($childgroup_id);
 	$actionurl .= '&childgroup_id='.$childgroup_id;
+}
+
+if (!forge_check_perm('docman', $g->getID(), 'approve')) {
+	$warning_msg = _('Document Manager Access Denied');
+	session_redirect('/docman/?group_id='.$group_id);
 }
 
 $dg = new DocumentGroup($g, $dirid);
@@ -63,13 +62,16 @@ echo $HTML->listTableTop();
 $cells[][] = _('Folder Name');
 $cells[][] = '<input required="required" type="text" name="groupname" value="'.$dg->getName().'" />';
 $cells[][] = '&nbsp;';
+$cells[][] = _('Status');
+$cells[][] = doc_get_state_box($dg->getState(), array(2, 3, 4)); /** no direct deleted, pending, hidden status */
+$cells[][] = '&nbsp;';
 $cells[][] = _('belongs to');
 if ($dg->getState() == 2) {
 	$newdgf = new DocumentGroupFactory($g);
-	$cells[][] = $dm->showSelectNestedGroups($newdgf->getNested(), 'parent_dirid', true, false);
+	$cells[][] = $dm->showSelectNestedGroups($newdgf->getNested(array(1, 5)), 'parent_dirid', true, false);
 	$labelSubmit = _('Restore');
 } else {
-	$cells[][] = $dm->showSelectNestedGroups($dgf->getNested(), 'parent_dirid', true, $dg->getParentId(), array($dg->getID()));
+	$cells[][] = $dm->showSelectNestedGroups($dgf->getNested(array(1, 5)), 'parent_dirid', true, $dg->getParentId(), array($dg->getID()));
 	$labelSubmit = _('Edit');
 }
 $cells[][] = '<input type="submit" value="'.$labelSubmit.'" name="submit" />';

@@ -114,7 +114,6 @@ if (getStringFromRequest('create_repository') && getStringFromRequest('submit'))
 		}
 	}
 
-
 	$SCMFactory = new SCMFactory();
 	$scm_plugins = $SCMFactory->getSCMs();
 

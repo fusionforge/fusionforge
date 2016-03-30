@@ -124,7 +124,7 @@ Offer DAV or SSH access.");
 
 	function getBrowserLinkBlock($project) {
 		global $HTML;
-		$b = $HTML->boxMiddle(_('Hg Repository Browser'));
+		$b = html_e('h2', array(), _('Mercurial Repository Browser'));
 		$b .= html_e('p', array(), _('Browsing the Mercurial tree gives you a view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.'));
 		$b .= html_e('p', array(), '['.util_make_link('/scm/browser.php?group_id='.$project->getID(), _('Browse Hg Repository')).']');
 		return $b;
@@ -138,7 +138,6 @@ Offer DAV or SSH access.");
 			array($project->getID()));
 
 		if (db_numrows($result) > 0) {
-
 			$tableHeaders = array(
 			_('Name'),
 			_('Adds'),
@@ -186,7 +185,7 @@ Offer DAV or SSH access.");
 			if (!$add_num) {
 				$add_num=0;
 			}
-			echo ' (Mercurial: '.sprintf(_('<strong>%1$s</strong> updates, <strong>%2$s</strong> adds'), number_format($update_num, 0), number_format($add_num, 0)).")";
+			$params['result'] .= ' (Mercurial: '.sprintf(_('<strong>%1$s</strong> updates, <strong>%2$s</strong> adds'), number_format($update_num, 0), number_format($add_num, 0)).")";
 		}
 	}
 

@@ -3,7 +3,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2012,2014, Franck Villaume - TrivialDev
+ * Copyright 2012,2014,2016 Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -105,12 +105,21 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		if ($analysed_path['isdir']) {
 			$i = 0;
 			$path = rtrim($options['path'], '/');
-			$res = db_query_params('select * from doc_groups where group_id = $1 and doc_group = $2 and stateid = 1',
-						array($group_id, $analysed_path['doc_group']));
+			$res = db_query_params('select * from doc_groups where group_id = $1 and doc_group = $2 and stateid = ANY ($3)',
+						array($group_id, $analysed_path['doc_group'], db_int_array_to_any_clause(array(1, 5))));
 			if (!$res)
 				return '404';
 
-			$arr = db_fetch_array($res);
+			if (db_numrows($res)) {
+				$arr = db_fetch_array($res);
+			} else {
+				//we setup for the specific root / folder which does not exist in database
+				$g = group_get_object($group_id);
+				$arr = array();
+				$arr['groupname'] = '/';
+				$arr['createdate'] = $g->getStartDate();
+				$arr['updatedate'] = 0;
+			}
 			if ($arr['updatedate']) {
 				$lastmodifieddate = $arr['updatedate'];
 			} else {
@@ -126,8 +135,8 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 			$files['files'][$i]['props'][] = $this->mkprop('ishidden', false);
 			$files['files'][$i]['props'][] = $this->mkprop('resourcetype', 'collection');
 			$files['files'][$i]['props'][] = $this->mkprop('getcontenttype', 'httpd/unix-directory');
-			$res = db_query_params('select * from doc_groups where group_id = $1 and parent_doc_group = $2 and stateid = 1',
-						array($group_id, $analysed_path['doc_group']));
+			$res = db_query_params('select * from doc_groups where group_id = $1 and parent_doc_group = $2 and stateid = ANY ($3)',
+						array($group_id, $analysed_path['doc_group'], db_int_array_to_any_clause(array(1, 5))));
 			if (!$res)
 				return '404';
 
@@ -243,8 +252,8 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 				$back_url = substr($options['path'], 0, strrpos($options['path'], strrchr($lastpath,'/')));
 				echo util_make_link($back_url, '..');
 			}
-			$res = db_query_params('select groupname from doc_groups where group_id = $1 and parent_doc_group = $2 and stateid = 1',
-						array($group_id, $analysed_path['doc_group']));
+			$res = db_query_params('select groupname from doc_groups where group_id = $1 and parent_doc_group = $2 and stateid = ANY ($3)',
+						array($group_id, $analysed_path['doc_group'], db_int_array_to_any_clause(array(1, 5))));
 			if (!$res) {
 				exit_error(_('webdav db error')._(': ').db_error(),'docman');
 			}
@@ -254,8 +263,8 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 			while ($arr = db_fetch_array($res)) {
 				echo '<li>'.util_make_link('/docman/view.php/'.$group_id.'/webdav'.$subpath.$arr['groupname'], $arr['groupname']).'</li>';
 			}
-			$res = db_query_params('select filename, filetype from doc_data where group_id = $1 and doc_group = $2 and stateid = 1',
-						array($group_id, $analysed_path['doc_group']));
+			$res = db_query_params('select filename, filetype from doc_data where group_id = $1 and doc_group = $2 and stateid = ANY ($3)',
+						array($group_id, $analysed_path['doc_group'], db_int_array_to_any_clause(array(1, 5))));
 			if (!$res) {
 				exit_error(_('webdav db error')._(': ').db_error(),'docman');
 			}
@@ -289,6 +298,12 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		}
 	}
 
+	/**
+	 * PUT
+	 * called by HTTP_WebDAV_Server
+	 *
+	 * @param	array	$options	options passed by previous functions in HTTP_WebDAV_Server
+	 */
 	function PUT(&$options) {
 		$arr_path = explode('/', rtrim($options['path'], '/'));
 		$group_id = $arr_path[3];
@@ -313,7 +328,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 
 		$docid = $dg->hasDocument($newfilename);
 		if ($docid) {
-			$d = document_get_object($docid);
+			$d = document_get_object($docid, $g->getID());
 			if (!$d->getReserved() && !$d->getLocked()) {
 				if ($d->update($d->getFileName(), $d->getFileType(), $tmpfile, $dgId, $d->getName(), $d->getDescription(), $d->getStateID())) {
 					@unlink($tmpfile);
@@ -344,6 +359,12 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		return '409';
 	}
 
+	/**
+	 * DELETE
+	 * called by HTTP_WebDAV_Server
+	 *
+	 * @param	array	$options	options passed by previous functions in HTTP_WebDAV_Server
+	 */
 	function DELETE(&$options) {
 		$arr_path = explode('/', rtrim($options['path'], '/'));
 		$group_id = $arr_path[3];
@@ -391,6 +412,12 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		return '404';
 	}
 
+	/**
+	 * MKCOL
+	 * called by HTTP_WebDAV_Server
+	 *
+	 * @param	array	$options	options passed by previous functions in HTTP_WebDAV_Server
+	 */
 	function MKCOL(&$options) {
 		$arr_path = explode('/', rtrim($options['path'], '/'));
 		$group_id = $arr_path[3];
@@ -414,6 +441,12 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		return '405';
 	}
 
+	/**
+	 * MOVE
+	 * called by HTTP_WebDAV_Server
+	 *
+	 * @param	array	$options	options passed by previous functions in HTTP_WebDAV_Server
+	 */
 	function MOVE(&$options) {
 		$arr_path = explode('/', rtrim($options['path'], '/'));
 		$group_id = $arr_path[3];
@@ -507,13 +540,21 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 					// we are moving the directory to a new directory
 					$dirname = $src_dg->getName();
 				}
-				if ($src_dg->update($dirname, $analysed_dest_element['doc_group'], 1)) {
+				if ($src_dg->update($dirname, $analysed_dest_element['doc_group'], 1, $src_dg->getState())) {
 					return '201';
 				}
 				return '403';
 			}
 		}
 		return '403';
+	}
+
+	function LOCK(&$options) {
+		return true;
+	}
+
+	function UNLOCK(&$options) {
+		return true;
 	}
 
 	/**
@@ -538,8 +579,8 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 	}
 
 	function findPdgIdFromPath($name, $parent_doc_group, $group_id) {
-		$res = db_query_params('select doc_group from doc_groups where group_id = $1 and groupname = $2 and stateid = 1 and parent_doc_group = $3',
-						array($group_id, $name, $parent_doc_group));
+		$res = db_query_params('select doc_group from doc_groups where group_id = $1 and groupname = $2 and stateid = ANY ($3) and parent_doc_group = $4',
+						array($group_id, $name, db_int_array_to_any_clause(array(1, 5)), $parent_doc_group));
 		if (!$res) {
 			exit_error(_('webdav db error')._(': ').db_error(),'docman');
 		}
@@ -583,8 +624,8 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 	 */
 	function whatIsIt($string, $group_id, $path_array) {
 		$return_path_array['isdir'] = false;
-		$res = db_query_params('select doc_group from doc_groups where group_id = $1 and groupname = $2 and parent_doc_group = $3 and stateid = 1',
-							array($group_id, $string, $path_array['doc_group']));
+		$res = db_query_params('select doc_group from doc_groups where group_id = $1 and groupname = $2 and parent_doc_group = $3 and stateid = ANY ($4)',
+							array($group_id, $string, $path_array['doc_group'], db_int_array_to_any_clause(array(1, 5))));
 		if (!$res) {
 			exit_error(_('webdav db error')._(': ').db_error(),'docman');
 		}

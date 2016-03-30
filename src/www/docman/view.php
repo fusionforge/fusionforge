@@ -6,7 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2010-2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012,2014, Franck Villaume - TrivialDev
+ * Copyright 2012,2015-2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -31,6 +31,9 @@ require_once $gfcommon.'docman/Document.class.php';
 require_once $gfcommon.'docman/DocumentFactory.class.php';
 require_once $gfcommon.'docman/DocumentGroupFactory.class.php';
 require_once $gfcommon.'docman/include/utils.php';
+
+global $warning_msg;
+global $error_msg;
 
 $sysdebug_enable = false;
 
@@ -102,7 +105,7 @@ if (is_numeric($docid)) {
 		if ($dgf->isError())
 			exit_error($dgf->getErrorMessage(), 'docman');
 
-		$nested_groups = $dgf->getNested();
+		$nested_groups = $dgf->getNested(array(1, 5));
 
 		if ( $nested_groups != NULL ) {
 			$filename = 'docman-'.$g->getUnixName().'-'.$docid.'.zip';
@@ -151,7 +154,7 @@ if (is_numeric($docid)) {
 		require_once $gfcommon.'docman/include/webdav.php';
 		$_SERVER['SCRIPT_NAME'] = '';
 		/* we need the group id for check authentification. */
-		$_SERVER["AUTH_TYPE"] = $group_id;
+		$_SERVER['AUTH_TYPE'] = $group_id;
 		if (!isset($_SERVER['PHP_AUTH_USER'])) {
 			header('WWW-Authenticate: Basic realm="Webdav Access (No anonymous access)"');
 			header('HTTP/1.0 401 Unauthorized');
@@ -168,6 +171,7 @@ if (is_numeric($docid)) {
 	session_require_perm('docman', $group_id, 'read');
 	if (extension_loaded('zip')) {
 		if ( $arr[5] === 'full' ) {
+
 			$dirid = $arr[6];
 
 			$dg = new DocumentGroup($g, $dirid);
@@ -182,7 +186,12 @@ if (is_numeric($docid)) {
 			if ($dgf->isError())
 				exit_error($dgf->getErrorMessage(), 'docman');
 
-			$nested_groups = $dgf->getNested();
+			$stateidArr = array(1);
+			if (forge_check_perm('docman', $g->getID(), 'approve')) {
+				$stateidArr = array(1, 4, 5);
+			}
+
+			$nested_groups = $dgf->getNested($stateidArr);
 
 			if ($dg->hasDocuments($nested_groups, $df)) {
 				$filename = 'docman-'.$g->getUnixName().'-'.$dg->getID().'.zip';
@@ -195,7 +204,15 @@ if (is_numeric($docid)) {
 				}
 
 				// ugly workaround to get the files at doc_group_id level
+				$stateidArr = array(1);
+				$stateIdDg = 1;
+				if (forge_check_perm('docman', $df->Group->getID(), 'approve')) {
+					$stateidArr = array(1, 4, 5);
+					$stateIdDg = 5;
+				}
 				$df->setDocGroupID($dg->getID());
+				$df->setStateID($stateidArr);
+				$df->setDocGroupState($stateIdDg);
 				$docs = $df->getDocuments(1);	// no caching
 				if (is_array($docs) && count($docs) > 0) {	// this group has documents
 					foreach ($docs as $doc) {
@@ -232,11 +249,19 @@ if (is_numeric($docid)) {
 				unlink($file);
 			} else {
 				$warning_msg = _('This documents folder is empty.');
-				session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
+				//session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
 			}
 		} elseif ( $arr[5] === 'selected' ) {
 			$dirid = $arr[6];
-			$arr_fileid = explode(',',$arr[7]);
+			$arr_groupIdfileId = explode(',',$arr[7]);
+			foreach ($arr_groupIdfileId as $groupIdfileId) {
+				$splited_val = explode('-', $groupIdfileId);
+				$arr_groupid[] = $splited_val[0];
+				$arr_fileid[] = $splited_val[1];
+			}
+			if (count($arr_groupid) != count($arr_fileid)) {
+				exit_error(_('Cannot build ZIP archive for download as ZIP'), 'docman');
+			}
 			$filename = 'docman-'.$g->getUnixName().'-selected-'.time().'.zip';
 			$file = forge_get_config('data_path').'/docman/'.$filename;
 			@unlink($file);
@@ -245,9 +270,9 @@ if (is_numeric($docid)) {
 				@unlink($file);
 				exit_error(_('Unable to open ZIP archive for download as ZIP'), 'docman');
 			}
-
-			foreach($arr_fileid as $docid) {
+			foreach ($arr_fileid as $key => $docid) {
 				if (!empty($docid)) {
+					$g = group_get_object($arr_groupid[$key]);
 					$d = new Document($g, $docid);
 					if (!$d || !is_object($d)) {
 						@unlink($file);
@@ -259,7 +284,7 @@ if (is_numeric($docid)) {
 					if ($d->isURL()) {
 						continue;
 					}
-					if (!$zip->addFromString(iconv("UTF-8", "ASCII//TRANSLIT", $d->getFileName()), $d->getFileData())) {
+					if (!$zip->addFromString(iconv('UTF-8', 'ASCII//TRANSLIT', $d->getFileName()), $d->getFileData())) {
 						@unlink($file);
 						exit_error(_('Unable to fill ZIP file.'), 'docman');
 					}
@@ -267,9 +292,14 @@ if (is_numeric($docid)) {
 					$zip->close();
 					unlink($file);
 					$warning_msg = _('No action to perform');
-					session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
+					$redirect_url = '/docman/?group_id='.$group_id.'&view=listfile';
+					if (is_numeric($dirid)) {
+						$redirect_url .= '&dirir='.$dirid;
+					}
+					//session_redirect($redirect_url);
 				}
 			}
+
 			if ( !$zip->close()) {
 				@unlink($file);
 				exit_error(_('Unable to close ZIP archive for download as ZIP'), 'docman');
@@ -286,7 +316,7 @@ if (is_numeric($docid)) {
 			if(!readfile_chunked($file)) {
 				unlink($file);
 				$error_msg = _('Unable to download ZIP archive');
-				session_redirect('/docman/?group_id='.$group_id.'&view=admin');
+				//session_redirect('/docman/?group_id='.$group_id);
 			}
 			unlink($file);
 		} else {

@@ -6,7 +6,7 @@
  * Copyright 2002-2004 (c) GForge Team
  * Copyright 2010 (c) Franck Villaume
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013-2014, Franck Villaume - TrivialDev
+ * Copyright 2013-2015, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -221,7 +221,7 @@ function people_add_to_job_inventory($job_id,$skill_id,$skill_level_id,$skill_ye
 				return true;
 			}
 		} else {
-			$error_msg .= _('Error: Skill already in your inventory.');
+			$error_msg .= _('Error: skill already in your inventory');
 			return false;
 		}
 
@@ -467,6 +467,12 @@ function people_show_job_list($result) {
 		$return .= $HTML->listTableBottom();
 	}
 	return $return;
+}
+
+function people_group_has_job($group_id) {
+	$res = db_query_params('SELECT count(*) as count FROM people_job WHERE group_id = $1', array($group_id));
+	$row_count = db_fetch_array($res);
+	return (int)$row_count['count'];
 }
 
 // Local Variables:
