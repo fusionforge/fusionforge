@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2014-2015, Franck Villaume - TrivialDev
+ * Copyright 2014-2016, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -144,5 +144,9 @@ class Widget_MyTasks extends Widget {
 
 	function getDescription() {
 		return _('List the tasks assigned to you.');
+	}
+
+	function getCategory() {
+		return _('Project Management');
 	}
 }
