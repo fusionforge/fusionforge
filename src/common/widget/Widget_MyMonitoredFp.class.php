@@ -122,11 +122,13 @@ class Widget_MyMonitoredFp extends Widget {
 	function getCategory() {
 		return _('File Release System');
 	}
+
 	function getDescription() {
 		return _('List packages that you are currently monitoring, by project.')
 		. '<br />'
 		. _('To cancel any of the monitored items just click on the trash icon next to the item label.');
 	}
+
 	function isAjax() {
 		return true;
 	}
