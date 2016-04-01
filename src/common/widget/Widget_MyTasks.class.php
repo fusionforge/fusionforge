@@ -123,12 +123,15 @@ class Widget_MyTasks extends Widget {
 			$this->content .= $HTML->warning_msg(_('No task yet'));
 		}
 	}
+
 	function getTitle() {
 		return _('My Tasks');
 	}
+
 	function getContent() {
 		return $this->content;
 	}
+
 	function isAvailable() {
 		if (!forge_get_config('use_pm')) {
 			return false ;
