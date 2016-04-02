@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2013-2014, Franck Villaume - TrivialDev
+ * Copyright 2013-2014,2016, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -123,7 +123,7 @@ class HudsonTestResult {
 		echo '<script type="text/javascript">//<![CDATA['."\n";
 		echo 'var data'.$chartid.' = new Array();';
 		for ($i = 0; $i < count($pie_vals); $i++) {
-			echo 'data'.$chartid.'.push([\''.htmlentities($pie_labels[$i]).'\',\''.$pie_vals[$i].'\']);';
+			echo 'data'.$chartid.'.push([\''.htmlentities($pie_labels[$i]).'\','.$pie_vals[$i].']);';
 		}
 		echo 'var plot'.$chartid.';';
 		echo 'jQuery(document).ready(function(){

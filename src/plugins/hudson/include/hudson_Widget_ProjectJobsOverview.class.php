@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2016, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -42,7 +42,7 @@ class hudson_Widget_ProjectJobsOverview extends HudsonOverviewWidget {
 		$request =& HTTPRequest::instance();
 		$this->group_id = $request->get('group_id');
 
-		if ($this->_use_global_status == "true") {
+		if ($this->_use_global_status === true) {
 			$this->_all_status = array(
 				'grey' => 0,
 				'blue' => 0,
@@ -53,7 +53,7 @@ class hudson_Widget_ProjectJobsOverview extends HudsonOverviewWidget {
 		}
 		if (forge_check_perm('hudson', $this->group_id, 'read')) {
 			$this->content['title'] = '';
-			if ($this->_use_global_status == "true") {
+			if ($this->_use_global_status === true) {
 				$this->content['title'] = '<img src="'.$this->_global_status_icon.'" title="'.$this->_global_status.'" alt="'.$this->_global_status.'" /> ';
 			}
 			$this->content['title'] .= _("Hudson Jobs");

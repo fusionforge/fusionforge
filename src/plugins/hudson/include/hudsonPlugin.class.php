@@ -5,7 +5,7 @@
  * Copyright (c) Xerox Corporation, Codendi 2007-2008.
  * @author Marc Nazarian <marc.nazarian@xrce.xerox.com>
  * Copyright (C) 2010-2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013-2014, Franck Villaume - TrivialDev
+ * Copyright 2013-2014,2016, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -32,8 +32,8 @@ class hudsonPlugin extends Plugin {
 		$this->name = "hudson";
 		$this->text = _('Hudson/Jenkins'); // To show in the tabs, use...
 		$this->pkg_desc =
-_("This plugin contains the Hudson subsystem of FusionForge. It allows each
-FusionForge project to have its own Hudson, and gives some
+_("This plugin contains the Hudson/Jenkins subsystem of FusionForge. It allows each
+FusionForge project to have its own Hudson/Jenkins, and gives some
 control over it to the project administrator.");
 		$this->_addHook("user_personal_links"); //to make a link to the user's personal part of the plugin
 		//$this->_addHook("usermenu") ;
@@ -89,9 +89,7 @@ control over it to the project administrator.");
 			if (isset($params['toptab'])) {
 				(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
 			}
-		} elseif ($hookname =='cssfile') {
-			use_stylesheet('/plugins/hudson/themes/default/css/style.css');
-		} elseif ($hookname == "cssfile") {
+		} elseif ($hookname == 'cssfile') {
 			$this->cssFile($params);
 		} elseif ($hookname == 'group_delete') {
 			$this->projectIsDeleted($params);
