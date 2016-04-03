@@ -380,6 +380,8 @@ control over it to the project's administrator.");
 			$cells[] = array($total['updates'], 'class' => 'onequarterwidth align-right');
 			$b .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
 			$b .= $HTML->listTableBottom();
+		} else {
+			$b .= $HTML->information(_('No history yet');
 		}
 
 		return $b;
