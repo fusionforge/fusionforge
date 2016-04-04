@@ -1778,20 +1778,20 @@ class Group extends Error {
 				return false;
 			}
 		}
-      //
-      //	Delete Roadmaps
-      //
+		//
+		//	Delete Roadmaps
+		//
 		$rmf = new RoadmapFactory($this);
-      $rm_arr = $rmf->getRoadmaps();
-      foreach ($rm_arr as $i) {
-         if (!is_object($i)) {
-            continue;
-         }
-         if (!$i->delete()) {
-            $this->setError(_('Could not properly delete the roadmap:') . ' ' . $i->getErrorMessage());
-            return false;
-         }
-      }
+		$rm_arr = $rmf->getRoadmaps();
+		foreach ($rm_arr as $i) {
+			if (!is_object($i)) {
+				continue;
+			}
+			if (!$i->delete()) {
+				$this->setError(_('Could not properly delete the roadmap:') . ' ' . $i->getErrorMessage());
+				return false;
+			}
+		}
 
 		//
 		//	Delete Forums
