@@ -1213,6 +1213,21 @@ class Group extends Error {
 		}
 	}
 
+	function setUseNews($booleanparam) {
+		db_begin();
+		$booleanparam = $booleanparam ? 1 : 0;
+		$res = db_query_params('UPDATE groups SET use_news=$1 WHERE group_id=$2',
+					array($booleanparam, $this->getID()));
+		if ($res) {
+			$this->data_array['use_news']=$booleanparam;
+			db_commit();
+			return true;
+		} else {
+			db_rollback();
+			return false;
+		}
+	}
+
 	/**
 	 * usesActivity - whether or not this group has opted to display Project Activities.
 	 *
@@ -1222,6 +1237,21 @@ class Group extends Error {
 		if (forge_get_config('use_activity')) {
 			return $this->data_array['use_activity'];
 		} else {
+			return false;
+		}
+	}
+
+	function setUseActivity($booleanparam) {
+		db_begin();
+		$booleanparam = $booleanparam ? 1 : 0;
+		$res = db_query_params('UPDATE groups SET use_activity=$1 WHERE group_id=$2',
+					array($booleanparam, $this->getID()));
+		if ($res) {
+			$this->data_array['use_activity']=$booleanparam;
+			db_commit();
+			return true;
+		} else {
+			db_rollback();
 			return false;
 		}
 	}
