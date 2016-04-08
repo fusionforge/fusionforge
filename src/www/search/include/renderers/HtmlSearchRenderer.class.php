@@ -203,13 +203,4 @@ class HtmlSearchRenderer extends SearchRenderer {
 		return method_exists($this, 'redirectToResult');
 	}
 
-	/**
-	 * getResultId - get the field value for the first row of a result handle
-	 *
-	 * @param string $fieldName field name
-	 * @return string value of the field
-	 */
-	function getResultId($fieldName) {
-		return db_result($this->searchQuery->getResult(), 0, $fieldName);
-	}
 }

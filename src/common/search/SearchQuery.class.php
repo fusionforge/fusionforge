@@ -177,20 +177,6 @@ class SearchQuery extends Error {
 	}
 
 	/**
-	 * executeQuery - execute the SQL query to get the results
-	 */
-	function executeQuery() {
-
-		$this->result = db_query_qpa (
-			$this->getQuery(),
-			$this->rowsPerPage + 1,
-			$this->offset,
-			'SYS_DB_SEARCH'
-		);
-		$this->rowsCount = min($this->rowsPerPage, db_numrows($this->result));
-	}
-
-	/**
 	 * getQuery - returns the query built to get the search results
 	 * This is an abstract method. It _MUST_ be implemented in children classes.
 	 *
@@ -296,24 +282,6 @@ class SearchQuery extends Error {
 		} else {
 			return ' OR ';
 		}
-	}
-
-	/**
-	 * getResult - returns the result set
-	 *
-	 * @return resource result set
-	 */
-	function & getResult() {
-		return $this->result;
-	}
-
-	/**
-	 * getRowsCount - returns number of rows for the current page
-	 *
-	 * @return int rows count for the current page
-	 */
-	function getRowsCount() {
-		return $this->rowsCount;
 	}
 
 	/**
