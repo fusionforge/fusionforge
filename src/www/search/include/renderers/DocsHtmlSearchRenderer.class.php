@@ -76,8 +76,6 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$rowColor = 0;
 		if ($rowsCount) {
 			use_javascript('/docman/scripts/DocManController.js');
-			$return .= $HTML->getJavascripts();
-			$return .= $HTML->getStylesheets();
 			echo html_ao('script', array('type' => 'text/javascript'));
 			?>
 			//<![CDATA[
