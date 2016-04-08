@@ -61,15 +61,12 @@ class ProjectHtmlSearchRenderer extends HtmlSearchRenderer {
 	 * @return string html output
 	 */
 	function getRows() {
-		$result =& $this->searchQuery->getResult();
+		$result = $this->searchQuery->getData($this->searchQuery->getRowsPerPage(),$this->searchQuery->getOffset());
 
 		$return = '';
 		$i = 0;
 
-		while ($row = db_fetch_array($result)) {
-			if (!forge_check_perm ('project_read', $row['group_id'])) {
-				continue ;
-			}
+		foreach ($result as $row) {
 			$i++;
 			if ($row['type_id'] == 2) {
 				$what = 'foundry';
@@ -90,20 +87,21 @@ class ProjectHtmlSearchRenderer extends HtmlSearchRenderer {
 	 * redirectToResult - redirect the user  directly to the result when there is only one matching result
 	 */
 	function redirectToResult() {
-
-		$project_name = $this->getResultId('unix_group_name');
-		$project_id = $this->getResultId('group_id');
+		$result = $this->searchQuery->getData(1)[0];
+		$project_name = $result['unix_group_name'];
+		$project_id = $result['group_id'];
 
 		$project_name = str_replace('<b>', '', $project_name);
 		$project_name = str_replace('</b>', '', $project_name);
 
-		if ($this->getResultId('type') == 2) {
+		if ($result['type'] == 2) {
 			session_redirect('/foundry/'.$project_name.'/');
 		} else {
 			if (forge_check_perm ('project_read', $project_id)) {
 				header('Location: '.util_make_url_g($project_name,$project_id));
 			} else {
 				$this->writeHeader();
+
 				$html = '<h2>'.sprintf(_('Search results for “%s”'), $project_name).'</h2>';
 				$html .= '<p><strong>'.sprintf(_('No matches found for “%s”'), $project_name).'</strong></p>';
 				echo $html;

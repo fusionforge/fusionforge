@@ -149,6 +149,10 @@ class DocsSearchQuery extends SearchQuery {
 		}
 		return $sections;
 	}
+
+	function isRowVisible($row) {
+		return forge_check_perm ('docman', $row['group_id'], 'read');
+	}
 }
 
 // Local Variables:

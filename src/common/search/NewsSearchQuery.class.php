@@ -91,6 +91,12 @@ class NewsSearchQuery extends SearchQuery {
 		}
 		return $sections;
 	}
+
+	function isRowVisible($row) {
+		return forge_check_perm('forum',
+								$row['forum_id'],
+								'read');
+	}
 }
 
 // Local Variables:

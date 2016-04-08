@@ -45,18 +45,12 @@ class SearchQuery extends Error {
 	 */
 	var $rowsCount = 0;
 	/**
-	 * Number of rows returned by the query
-	 *
-	 * @var int $rowsTotalCount
-	 */
-	var $rowsTotalCount = 0;
-	/**
 	 * Offset
 	 *
 	 * @var int $offset
 	 */
 	var $offset = 0;
-	/**
+ 	/**
 	 * Result handle
 	 *
 	 * @var resource $result
@@ -89,6 +83,18 @@ class SearchQuery extends Error {
 	var $field_separator = ' ioM0Thu6_fieldseparator_kaeph9Ee ';
 
 	/**
+	 * Result handle
+	 *
+	 * @var resource $result
+	 */
+	var $data_res;
+	/**
+	 * Cached results (array of rows)
+	 *
+	 * @var array $cached_results
+	 */
+	var $cached_results;
+	/**
 	 * Constructor
 	 *
 	 * @param	string	$words words we are searching for
@@ -115,6 +121,9 @@ class SearchQuery extends Error {
 		$this->isExact = $isExact;
 		$this->operator = $this->getOperator();
 		$this->options = $options;
+
+		$this->data_res = NULL;
+		$this->cached_results = NULL;
 	}
 
 	/**
@@ -168,21 +177,6 @@ class SearchQuery extends Error {
 	}
 
 	/**
-	 * executeQuery - execute the SQL query to get the results
-	 */
-	function executeQuery() {
-
-		$this->result = db_query_qpa (
-			$this->getQuery(),
-			$this->rowsPerPage + 1,
-			$this->offset,
-			'SYS_DB_SEARCH'
-		);
-		$this->rowsTotalCount = db_numrows($this->result);
-		$this->rowsCount = min($this->rowsPerPage, $this->rowsTotalCount);
-	}
-
-	/**
 	 * getQuery - returns the query built to get the search results
 	 * This is an abstract method. It _MUST_ be implemented in children classes.
 	 *
@@ -190,6 +184,51 @@ class SearchQuery extends Error {
 	 */
 	function getQuery() {
 		return;
+	}
+
+	function fetchDataUntil($limit = NULL) {
+		if ($this->cached_results == NULL) {
+			$this->cached_results = array();
+		}
+
+		if ($this->data_res == NULL) {
+			$this->data_res = db_query_qpa (
+				$this->getQuery(),
+				'SYS_DB_SEARCH'
+				);
+		}
+
+		if ($limit) {
+			while ((count($this->cached_results) < $limit)
+				   && ($row = db_fetch_array($this->data_res))) {
+				if ($this->isRowVisible($row)) {
+					$this->cached_results[] = $row;
+				}
+			}
+		} else {
+			while ($row = db_fetch_array($this->data_res)) {
+				if ($this->isRowVisible($row)) {
+					$this->cached_results[] = $row;
+				}
+			}
+		}
+	}
+
+	function fetchAllData() {
+		$this->fetchDataUntil();
+	}	   
+
+	function getData($limit = NULL, $offset = 0) {
+		if ($limit) {
+			$this->fetchDataUntil($limit+$offset);
+		} else {
+			$this->fetchAllData();
+		}
+		return array_slice($this->cached_results, $offset, $limit);
+	}
+
+	function isRowVisible($row) {
+		return true;
 	}
 
 	function addMatchCondition($qpa, $fieldName) {
@@ -246,30 +285,13 @@ class SearchQuery extends Error {
 	}
 
 	/**
-	 * getResult - returns the result set
-	 *
-	 * @return resource result set
-	 */
-	function & getResult() {
-		return $this->result;
-	}
-
-	/**
-	 * getRowsCount - returns number of rows for the current page
-	 *
-	 * @return int rows count for the current page
-	 */
-	function getRowsCount() {
-		return $this->rowsCount;
-	}
-
-	/**
 	 * getRowsTotalCount - returns total number of rows
 	 *
 	 * @return int rows count
 	 */
 	function getRowsTotalCount() {
-		return $this->rowsTotalCount;
+		$this->fetchAllData();
+		return count($this->cached_results);
 	}
 
 	/**

@@ -118,6 +118,12 @@ class TasksSearchQuery extends SearchQuery {
 		}
 		return $sections;
 	}
+
+	function isRowVisible($row) {
+		return forge_check_perm('pm',
+								$row['group_project_id'],
+								'read');
+	}
 }
 
 // Local Variables:

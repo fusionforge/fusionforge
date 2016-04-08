@@ -57,17 +57,16 @@ class FrsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 * @return string html output
 	 */
 	function getRows() {
-		$rowsCount = $this->searchQuery->getRowsCount();
-		$result =& $this->searchQuery->getResult();
+		$result = $this->searchQuery->getData($this->searchQuery->getRowsPerPage(),$this->searchQuery->getOffset());
 		$group_id = $this->searchQuery->groupId;
 
 		$return = '';
 		$rowColor = 0;
 		$lastPackage = null;
 
-		for($i = 0; $i < $rowsCount; $i++) {
+		foreach ($result as $row) {
 			//section changed
-			$currentPackage = db_result($result, $i, 'package_name');
+			$currentPackage = $row['package_name'];
 			if ($lastPackage != $currentPackage) {
 				$return .= '<tr><td colspan="4">'.$currentPackage.'</td></tr>';
 				$lastPackage = $currentPackage;
@@ -75,9 +74,9 @@ class FrsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			}
 			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($rowColor) .'>'
 				. '<td width="5%">&nbsp;</td>'
-				. '<td>'.util_make_link ('/frs/?view=shownotes&group_id='.$group_id.'&release_id='.db_result($result, $i, 'release_id'),db_result($result, $i, 'release_name')).'</td>'
-				. '<td style="width: 15%">'.db_result($result, $i, 'realname').'</td>'
-				. '<td style="width: 15%">'.relative_date(db_result($result,$i, 'release_date')).'</td></tr>';
+				. '<td>'.util_make_link ('/frs/?view=shownotes&group_id='.$group_id.'&release_id='.$row['release_id'],$row['release_name']).'</td>'
+				. '<td style="width: 15%">'.$row['realname'].'</td>'
+				. '<td style="width: 15%">'.relative_date($row['release_date']).'</td></tr>';
 			$rowColor ++;
 		}
 		return $return;
