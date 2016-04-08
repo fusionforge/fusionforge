@@ -212,14 +212,13 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	function getPartResult($renderer, $section, $title='') {
 		global $HTML;
 		$result = '';
-		$renderer->searchQuery->executeQuery();
 
 		if ($title === '')
 			$title = $section;
 
 		$result .= '<h2><a name="'.$section.'"></a>'.$title.'</h2>';
 
-		if ($renderer->searchQuery->getRowsCount() > 0) {
+		if ($renderer->searchQuery->getRowsTotalCount() > 0) {
 			$result .= $HTML->listTabletop($renderer->tableHeaders);
 			$result .= $renderer->getRows();
 			$result .= $HTML->listTableBottom();

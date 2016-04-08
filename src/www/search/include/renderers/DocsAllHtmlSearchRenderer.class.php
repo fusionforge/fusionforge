@@ -79,8 +79,8 @@ class DocsAllHtmlSearchRenderer extends HtmlSearchRenderer {
 	 */
 	function getRows() {
 		global $HTML;
-		$rowsCount = $this->searchQuery->getRowsCount();
-		$result =& $this->searchQuery->getResult();
+		$result = $this->searchQuery->getData($this->searchQuery->getRowsPerPage(),$this->searchQuery->getOffset());
+		$rowsCount = count($result);
 
 		$return = '';
 
@@ -88,10 +88,11 @@ class DocsAllHtmlSearchRenderer extends HtmlSearchRenderer {
 		$lastDocGroupID = null;
 
 		$rowColor = 0;
-		for($i = 0; $i < $rowsCount; $i++) {
+		$i = 0;
+		foreach ($result as $row) {
 			$cells = array();
-			$document = document_get_object(db_result($result, $i, 'docid'), db_result($result, $i, 'group_id'));
-			$currentDocGroup = db_result($result, $i, 'project_name');
+			$document = document_get_object($row['docid'], $row['group_id']);
+			$currentDocGroup = $row['project_name'];
 			if ($lastGroupID != $document->Group->getID()) {
 				$cells[] = array(html_image('ic/home16b.png', 10, 12, array('border' => 0)).'<b>'.util_make_link('/docman/?group_id='.$document->Group->getID(),$currentDocGroup).'</b>', 'colspan' => 4);
 				$lastGroupID = $document->Group->getID();
@@ -101,7 +102,7 @@ class DocsAllHtmlSearchRenderer extends HtmlSearchRenderer {
 			$cells = array();
 			$cells[][] = '&nbsp;';
 			if ($lastDocGroupID != $document->getDocGroupID()) {
-				$cells[][] = html_image('ic/folder.png', 22, 22, array('border' => 0)).util_make_link('/docman/?group_id='.$document->Group->getID().'&view=listfile&dirid='.$document->getDocGroupID(),db_result($result, $i, 'groupname'));
+				$cells[][] = html_image('ic/folder.png', 22, 22, array('border' => 0)).util_make_link('/docman/?group_id='.$document->Group->getID().'&view=listfile&dirid='.$document->getDocGroupID(),$row['groupname']);
 				$lastDocGroupID = $document->getDocGroupID();
 			} else {
 				$cells[][] = '&nbsp';
@@ -109,10 +110,10 @@ class DocsAllHtmlSearchRenderer extends HtmlSearchRenderer {
 			if ($document->isURL()) {
 				$cells[][] = util_make_link($document->getFileName(), html_image($document->getFileTypeImage(), 22, 22), array('title' => _('Visit this link')), true);
 			} else {
-				$cells[][] = util_make_link('/docman/view.php/'.db_result($result, $i, 'group_id') . '/'.db_result($result, $i, 'docid').'/'.db_result($result, $i, 'filename'), html_image($document->getFileTypeImage(), 22, 22), array('title' => _('View this document')));
+				$cells[][] = util_make_link('/docman/view.php/'.$row['group_id'] . '/'.$row['docid'].'/'.$row['filename'], html_image($document->getFileTypeImage(), 22, 22), array('title' => _('View this document')));
 			}
-			$cells[][] = db_result($result, $i, 'title');
-			$cells[][] = db_result($result, $i, 'description');
+			$cells[][] = $row['title'];
+			$cells[][] = $row['description'];
 			$return .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($rowColor, true)), $cells);
 			$rowColor++;
 		}

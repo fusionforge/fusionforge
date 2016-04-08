@@ -52,45 +52,21 @@ class TrackersHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		);
 	}
 
-	function getFilteredRows() {
-		$rowsCount = $this->searchQuery->getRowsCount();
-		$result =& $this->searchQuery->getResult();
-
-		$fields = array ('group_artifact_id',
-				 'artifact_id',
-				 'name',
-				 'summary',
-				 'realname',
-				 'open_date');
-
-		$fd = array();
-		for($i = 0; $i < $rowsCount; $i++) {
-			if (forge_check_perm('tracker',
-					     db_result($result, $i, 'group_artifact_id'),
-					     'read')) {
-				$r = array();
-				foreach ($fields as $f) {
-					$r[$f] = db_result($result, $i, $f);
-				}
-				$fd[] = $r;
-			}
-		}
-		return $fd;
-	}
-
 	/**
 	 * getRows - get the html output for result rows
 	 *
 	 * @return string html output
 	 */
 	function getRows() {
-		$fd = $this->getFilteredRows();
+		$result = $this->searchQuery->getData($this->searchQuery->getRowsPerPage(),$this->searchQuery->getOffset());
 
 		$return = '';
 		$rowColor = 0;
 		$lastTracker = null;
 
-		foreach ($fd as $row) {
+		error_log($result);
+
+		foreach ($result as $row) {
 			//section changed
 			$currentTracker = $row['name'];
 			if ($lastTracker != $currentTracker) {
@@ -128,7 +104,9 @@ class TrackersHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 * redirectToResult - redirect the user  directly to the result when there is only one matching result
 	 */
 	function redirectToResult() {
-		session_redirect('/tracker/?group_id='.$this->groupId.'&atid='.$this->getResultId('group_artifact_id').'&func=detail&aid='.$this->getResultId('artifact_id'));
+		$result = $this->searchQuery->getData(1)[0];
+
+		session_redirect('/tracker/?group_id='.$this->groupId.'&atid='.$result['group_artifact_id'].'&func=detail&aid='.$result['artifact_id']);
 	}
 }
 

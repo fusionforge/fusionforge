@@ -60,14 +60,15 @@ class PeopleHtmlSearchRenderer extends HtmlSearchRenderer {
 	 * @return string html output
 	 */
 	function getRows() {
-		$rowsCount = $this->searchQuery->getRowsCount();
-		$result =& $this->searchQuery->getResult();
+		$result = $this->searchQuery->getData($this->searchQuery->getRowsPerPage(),$this->searchQuery->getOffset());
 
 		$return = '';
-		for($i = 0; $i < $rowsCount; $i++) {
+		$i = 0;
+		foreach ($result as $row) {
+			$i++;
 			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
-				'<td width="40%"><a href="'.util_make_url_u (db_result($result, $i, 'user_name'),db_result($result, $i, 'user_id')).'">'.html_image('ic/msg.png', '10', '12').' '.db_result($result, $i, 'user_name').'</a></td>'.
-				'<td width="60%">'.db_result($result, $i, 'realname').'</td>'.
+				'<td width="40%"><a href="'.util_make_url_u ($row['user_name'],$row['user_id']).'">'.html_image('ic/msg.png', '10', '12').' '.$row['user_name'].'</a></td>'.
+				'<td width="60%">'.$row['realname'].'</td>'.
 				'</tr>';
 		}
 		return $return;
@@ -77,7 +78,10 @@ class PeopleHtmlSearchRenderer extends HtmlSearchRenderer {
 	 * redirectToResult - redirect the user  directly to the result when there is only one matching result
 	 */
 	function redirectToResult() {
-		session_redirect('/users/'.$this->getResultId('user_name').'/');
+		$result = $this->searchQuery->getData(1)[0];
+		$user_name = $result['user_name'];
+
+		session_redirect('/users/'.$user_name.'/');
 	}
 }
 

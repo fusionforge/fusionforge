@@ -187,15 +187,15 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	function getPartResult($renderer, $section, $title='') {
 		global $HTML;
 		$result = '';
-		$renderer->searchQuery->executeQuery();
-		$query = NULL;
 
 		if ($title === '')
 			$title = $section;
 
 		$result .= '<h2><a name="'.$section.'"></a>'.$title.'</h2>';
 
-		if ($renderer->searchQuery->getRowsCount() > 0) {
+		$result = $renderer->searchQuery->getData($renderer->searchQuery->getRowsPerPage(),$renderer->searchQuery->getOffset());
+
+		if (count($result) > 0) {
 			if ($renderer->searchQuery->getRowsTotalCount() >= $renderer->searchQuery->getRowsPerPage())
 				$result .= '<i>' . sprintf(_('Note: only the first %d results for this category are displayed.'), $renderer->searchQuery->getRowsPerPage()) . '</i>';
 			$result .= $HTML->listTabletop($renderer->tableHeaders);

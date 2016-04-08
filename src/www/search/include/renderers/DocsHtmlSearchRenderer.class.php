@@ -63,14 +63,11 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 * @return string html output
 	 */
 	function getRows() {
-		if (!forge_check_perm('docman', $this->groupId, 'read')) {
-			return '';
-		}
-
 		global $HTML;
 		global $LUSER;
-		$rowsCount = $this->searchQuery->getRowsCount();
-		$result =& $this->searchQuery->getResult();
+		$result = $this->searchQuery->getData($this->searchQuery->getRowsPerPage(),$this->searchQuery->getOffset());
+
+		$rowsCount = count($result);
 
 		$return = '';
 
@@ -98,8 +95,9 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			<?php
 			echo html_ac(html_ap() - 1);
 		}
-		for ($i = 0; $i < $rowsCount; $i++) {
-			$document = document_get_object(db_result($result, $i, 'docid'), db_result($result, $i, 'group_id'));
+		$i = 0;
+		foreach ($result as $row) {
+			$document = document_get_object($row['docid'], $row['group_id']);
 			$currentDocGroup = documentgroup_get_object($document->getDocGroupID(), $document->Group->getID());
 			//section changed
 			if ($lastDocGroupID != $currentDocGroup->getID()) {
@@ -129,8 +127,8 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			} else {
 				$cells[][] = util_make_link('/docman/view.php/'.$document->Group->getID().'/'.$document->getID().'/'.urlencode($document->getFileName()), html_image($document->getFileTypeImage(), 22, 22), array('title' => _('View this document')));
 			}
-			$cells[][] = db_result($result, $i, 'title');
-			$cells[][] = db_result($result, $i, 'description');
+			$cells[][] = $row['title'];
+			$cells[][] = $row['description'];
 			if (forge_check_perm('docman', $document->Group->getID(), 'approve')) {
 				if (!$document->getLocked() && !$document->getReserved()) {
 					$cells[][] = util_make_link('/docman/?group_id='.$document->Group->getID().'&view=listfile&dirid='.$document->getDocGroupID().'&filedetailid='.$document->getID(), html_image('docman/edit-file.png', 22, 22, array('alt' => _('Edit this document'))), array('title' => _('Edit this document')));

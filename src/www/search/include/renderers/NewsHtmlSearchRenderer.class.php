@@ -57,17 +57,18 @@ class NewsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 * @return string html output
 	 */
 	function getRows() {
-		$rowsCount = $this->searchQuery->getRowsCount();
-		$result =& $this->searchQuery->getResult();
+		$result = $this->searchQuery->getData($this->searchQuery->getRowsPerPage(),$this->searchQuery->getOffset());
+		$rowsCount = count($result);
 
 		$return = '';
-		for($i = 0; $i < $rowsCount; $i++) {
+		$i = 0;
+		foreach ($result as $row) {
 			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'
-				. '<td><a href="'.util_make_url ('/forum/forum.php?forum_id='. db_result($result, $i, 'forum_id')).'">'
+				. '<td><a href="'.util_make_url ('/forum/forum.php?forum_id='. $row['forum_id']).'">'
 				. html_image('ic/msg.png', '10', '12')
-				. ' '.db_result($result, $i, 'summary').'</a></td>
-				<td style="width: 15%">'.db_result($result, $i, 'realname').'</td>
-				<td style="width: 15%">'.relative_date(db_result($result, $i, 'post_date')).'</td></tr>';
+				. ' '.$row['summary'].'</a></td>
+				<td style="width: 15%">'.$row['realname'].'</td>
+				<td style="width: 15%">'.relative_date($row['post_date']).'</td></tr>';
 		}
 		return $return;
 	}
