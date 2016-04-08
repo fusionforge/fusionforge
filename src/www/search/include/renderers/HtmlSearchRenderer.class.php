@@ -58,8 +58,7 @@ class HtmlSearchRenderer extends SearchRenderer {
 			echo $HTML->error_msg($searchQuery->getErrorMessage());
 			$this->writeFooter();
 		} else {
-			$searchQuery->executeQuery();
-			if($searchQuery->getResult() && ($searchQuery->getRowsTotalCount() == 1 && $searchQuery->getOffset() == 0) && $this->implementsRedirectToResult()) {
+			if(count($searchQuery->getData(2)) == 1 && $this->implementsRedirectToResult()) {
 				$this->redirectToResult();
 			} else {
 				$this->writeHeader();
@@ -100,7 +99,9 @@ class HtmlSearchRenderer extends SearchRenderer {
 		$searchQuery =& $this->searchQuery;
 		$query =& $this->query;
 
-		if(!$searchQuery->getResult() || $searchQuery->getRowsCount() < 1) {
+		$result = $this->searchQuery->getData($this->searchQuery->getRowsPerPage(),$this->searchQuery->getOffset());
+
+		if(count($result) < 1) {
 			$html = $HTML->information(sprintf(_('No matches found for “%s”'), $query['words']));
 			$html .= db_error();
 		} else {
@@ -109,7 +110,8 @@ class HtmlSearchRenderer extends SearchRenderer {
 			$html .= $HTML->listTableBottom();
 		}
 
-		if($searchQuery->getRowsCount() > 0 && ($searchQuery->getRowsTotalCount() > $searchQuery->getRowsCount() || $searchQuery->getOffset() != 0 )) {
+		$result = $this->searchQuery->getData($this->searchQuery->getRowsPerPage(),$this->searchQuery->getOffset());
+		if(count($result) > 0 && ($searchQuery->getRowsTotalCount() > count($result) || $searchQuery->getOffset() != 0 )) {
 			$html .= $this->getNavigationPanel();
 		}
 
@@ -134,7 +136,9 @@ class HtmlSearchRenderer extends SearchRenderer {
 			$html .= '&nbsp;';
 		}
 		$html .= '</td><td class="align-right">';
-		if ($searchQuery->getRowsTotalCount() > $searchQuery->getRowsCount()) {
+		$result = $this->searchQuery->getData($this->searchQuery->getRowsPerPage(),$this->searchQuery->getOffset());
+		error_log(count($result));
+		if ($searchQuery->getRowsTotalCount() > $this->searchQuery->getRowsPerPage()+$this->searchQuery->getOffset()) {
 			$html .= util_make_link($this->getNextResultsUrl(), _('Next Results').' '.html_image('t.png', '15', '15'), array('class' => 'next'));
 		} else {
 			$html .= '&nbsp;';
@@ -199,13 +203,4 @@ class HtmlSearchRenderer extends SearchRenderer {
 		return method_exists($this, 'redirectToResult');
 	}
 
-	/**
-	 * getResultId - get the field value for the first row of a result handle
-	 *
-	 * @param string $fieldName field name
-	 * @return string value of the field
-	 */
-	function getResultId($fieldName) {
-		return db_result($this->searchQuery->getResult(), 0, $fieldName);
-	}
 }

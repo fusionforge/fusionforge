@@ -50,7 +50,7 @@ require_once $gfcommon.'widget/Widget_ProjectRss.class.php';
 require_once $gfcommon.'widget/Widget_ProjectLatestCommits.class.php';
 //require_once 'common/widget/Widget_ProjectTwitterFollow.class.php';
 //require_once('common/widget/Widget_ProjectWikiPage.class.php');
-//require_once 'common/widget/Widget_ProjectSvnStats.class.php';
+require_once 'common/widget/Widget_ProjectScmStats.class.php';
 
 require_once $gfcommon.'widget/Widget_HomeLatestNews.class.php';
 require_once $gfcommon.'widget/Widget_HomeStats.class.php';
@@ -267,12 +267,12 @@ require_once $gfcommon.'widget/Widget_HomeVersion.class.php';
 			case 'projecttwitterfollow':
 				$o = new Widget_ProjectTwitterFollow();
 				break;
-			case 'projectsvnstats':
-				$o = new Widget_ProjectSvnStats();
-				break;
 			case 'projectwikipage':                    //not yet
 				$o = new Widget_ProjectWikiPage();
 				break;*/
+			case 'projectscmstats':
+				$o = new Widget_ProjectScmStats();
+				break;
 			case 'projectlatestcommits':
 				$o = new Widget_ProjectLatestCommits();
 				break;
@@ -303,9 +303,9 @@ require_once $gfcommon.'widget/Widget_HomeVersion.class.php';
 				break;
 			case WidgetLayoutManager::OWNER_TYPE_GROUP:
 				// project home widgets
-				$widgets = array('projectdescription', 'projectmembers', 'projectinfo',
+				$widgets = array('projectdescription', 'projectmembers', 'projectinfo', 'projectscmstats',
 						'projectlatestfilereleases', 'projectlatestdocuments', 'projectlatestnews', 'projectpublicareas', //'projectwikipage' //not yet
-						'projectlatestcommits', 'projecttwitterfollow', 'projectsvnstats', 'projectrss', 'projectdocumentsactivity',
+						'projectlatestcommits', 'projecttwitterfollow', 'projectrss', 'projectdocumentsactivity',
 						);
 				break;
 			case WidgetLayoutManager::OWNER_TYPE_HOME:

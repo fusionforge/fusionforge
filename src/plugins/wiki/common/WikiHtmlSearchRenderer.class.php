@@ -56,22 +56,22 @@ class WikiHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 * @return string html output
 	 */
 	function getRows() {
-		$rowsCount = $this->searchQuery->getRowsCount();
-		$result =& $this->searchQuery->getResult();
+		$result = $this->searchQuery->getData($this->searchQuery->getRowsPerPage(),$this->searchQuery->getOffset());
 
 		$group = group_get_object($this->groupId);
 		$group_name = $group->getUnixName();
 
 		$return = '';
-		for($i = 0; $i < $rowsCount; $i++) {
-			$data = unserialize(db_result($result, $i, 'versiondata'));
-			$page_name = preg_replace('/%2f/i', '/', rawurlencode(db_result($result, $i, 'pagename')));
+		$i = 0;
+		foreach ($result as $row) {
+			$data = unserialize($row['versiondata']);
+			$page_name = preg_replace('/%2f/i', '/', rawurlencode($row['pagename']));
 			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'
 				. '<td><a href="/wiki/g/'. $group_name.'/'. $page_name .'">'
 				. html_image('ic/msg.png', '10', '12')
-				. ' '.db_result($result, $i, 'pagename').'</a></td>
+				. ' '.$row['pagename'].'</a></td>
 				<td style="width: 15%">'.$data['author'].'</td>
-				<td style="width: 15%">'.relative_date(db_result($result, $i, 'mtime')).'</td></tr>';
+				<td style="width: 15%">'.relative_date($row['mtime']).'</td></tr>';
 		}
 		return $return;
 	}

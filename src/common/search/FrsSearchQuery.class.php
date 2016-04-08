@@ -115,6 +115,10 @@ class FrsSearchQuery extends SearchQuery {
 		}
 		return $sections;
 	}
+
+	function isRowVisible($row) {
+		return forge_check_perm ('project_read', $row['group_id']);
+	}
 }
 
 // Local Variables:

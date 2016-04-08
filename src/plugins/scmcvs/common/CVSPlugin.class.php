@@ -198,6 +198,8 @@ over it to the project's administrator.");
 				'<td class="onequarterwidth align-right"><strong>'.$total['commits'].'</strong></td>';
 			$b .= '</tr>';
 			$b .= $HTML->listTableBottom();
+		} else {
+			$b .= $HTML->information(_('No history yet'));
 		}
 
 		return $b ;

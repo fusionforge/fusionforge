@@ -47,14 +47,14 @@ class ForumMLHtmlSearchRenderer extends HtmlGroupSearchRenderer {
         function getRows() {
                 $plugin_manager =& PluginManager::instance();
                 $p =& $plugin_manager->getPluginByName('forumml');
-                $rowsCount = $this->searchQuery->getRowsCount();
-                $result =& $this->searchQuery->getResult();
+				$result = $this->searchQuery->getData($this->searchQuery->getRowsPerPage(),$this->searchQuery->getOffset());
                 $dateFormat = _('Y-m-d H:i');
 
                 $group = group_get_object($this->groupId);
                 $group_name = $group->getUnixName();
 
-                $data = unserialize(db_result($result, 0, 'versiondata'));
+				$row = $result[0];
+                $data = unserialize($row['versiondata']);
 
                 $return = "<table width='100%'>
                         <tr>
@@ -69,7 +69,7 @@ class ForumMLHtmlSearchRenderer extends HtmlGroupSearchRenderer {
                         </th>
                         </tr>";
                 $idx=0;
-                while ($rows = db_fetch_array($result)) {
+				foreach ($result as $row) {
                         $idx++;
                         if ($idx % 2 == 0) {
                                 $class="boxitemalt bgcolor-white";

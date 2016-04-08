@@ -75,6 +75,12 @@ class ForumSearchQuery extends SearchQuery {
 		$qpa = db_construct_qpa($qpa, 'ORDER BY ts_rank(vectors, $1) DESC', array($words));
 		return $qpa;
 	}
+
+	function isRowVisible($row) {
+		return forge_check_perm('forum',
+								$row['group_forum_id'],
+								'read');
+	}
 }
 
 // Local Variables:

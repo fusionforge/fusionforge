@@ -64,8 +64,8 @@ class SkillHtmlSearchRenderer extends HtmlSearchRenderer {
 	 * @return string html output
 	 */
 	function getRows() {
-		$rowsCount = $this->searchQuery->getRowsCount();
-		$result =& $this->searchQuery->getResult();
+		$result = $this->searchQuery->getData($this->searchQuery->getRowsPerPage(),$this->searchQuery->getOffset());
+		$rowsCount = count($result);
 
 		$monthArray = array();
 		for($i = 1; $i <= 12; $i++) {
@@ -74,21 +74,22 @@ class SkillHtmlSearchRenderer extends HtmlSearchRenderer {
 
 		$return = '';
 
-		for($i = 0; $i < $rowsCount; $i++) {
-			$start = db_result($result, $i, 'start');
+		$i = 0;
+		foreach ($result as $row) {
+			$start = $row['start'];
 			$startYear = substr($start, 0, 4);
 			$startMonth = substr($start, 4, 2);
 
-			$finish = db_result($result, $i, 'finish');
+			$finish = $row['finish'];
 			$finishYear = substr($finish, 0, 4);
 			$finishMonth = substr($finish, 4, 2);
 
 			$return .= '
 			<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i).'>
-				<td>'.util_make_link_u (db_result($result, $i, 'user_name'),db_result($result, $i, 'user_id'),db_result($result, $i, 'realname')).'</td>
-				<td>'.db_result($result, $i, 'type_name').'</td>
-				<td>'.db_result($result, $i, 'title').'</td>
-				<td>'.db_result($result, $i, 'keywords').'</td>
+				<td>'.util_make_link_u ($row['user_name'],$row['user_id'],$row['realname']).'</td>
+				<td>'.$row['type_name'].'</td>
+				<td>'.$row['title'].'</td>
+				<td>'.$row['keywords'].'</td>
 				<td>'.$monthArray[$startMonth - 1].' '.$startYear.'</td>
 				<td>'.$monthArray[$finishMonth - 1].' '.$finishYear.'</td>
 			<tr>';
@@ -101,6 +102,9 @@ class SkillHtmlSearchRenderer extends HtmlSearchRenderer {
 	 * redirectToResult - redirect the user  directly to the result when there is only one matching result
 	 */
 	function redirectToResult() {
-		session_redirect('/users/'.$this->getResultId('user_name').'/');
+		$result = $this->searchQuery->getData(1)[0];
+		$user_name = $result['user_name'];
+
+		session_redirect('/users/'.$user_name.'/');
 	}
 }

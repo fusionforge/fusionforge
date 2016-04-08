@@ -117,6 +117,12 @@ class ForumsSearchQuery extends SearchQuery {
 		}
 		return $sections;
 	}
+
+	function isRowVisible($row) {
+		return forge_check_perm('forum',
+								$row['group_forum_id'],
+								'read');
+	}
 }
 
 // Local Variables:

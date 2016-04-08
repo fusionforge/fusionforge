@@ -14,6 +14,7 @@ FusionForge 6.X:
 * Docman: support private directory. (TrivialDev)
 * Plugin AuthBuiltin: add captcha after 3 attempts with the same login [#795] (TrivialDev)
 * Widget MySystasks: new widget for user to display systasks perform on user projects (TrivialDev)
+* Widget ProjectScmStats: new widget for project to display SCM stats (TrivialDev)
 
 FusionForge 6.0.4:
 * Account Management System: fix sysCreateUser for UNIX: unix_gid dropped (TrivialDev)

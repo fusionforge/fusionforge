@@ -62,6 +62,10 @@ class ExportProjectSearchQuery extends SearchQuery {
 		$qpa = db_construct_qpa($qpa, ') ORDER BY ts_rank(vectors, q) DESC, group_name ASC');
 		return $qpa;
 	}
+
+	function isRowVisible($row) {
+		return forge_check_perm ('project_read', $row['group_id']);
+	}
 }
 
 // Local Variables:

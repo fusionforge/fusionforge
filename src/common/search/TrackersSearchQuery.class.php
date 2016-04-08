@@ -117,6 +117,12 @@ class TrackersSearchQuery extends SearchQuery {
 		}
 		return $sections;
 	}
+
+	function isRowVisible($row) {
+		return forge_check_perm('tracker',
+								$row['group_artifact_id'],
+								'read');
+	}
 }
 
 // Local Variables:

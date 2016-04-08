@@ -56,11 +56,10 @@ class RssSearchRenderer extends SearchRenderer {
 		if($searchQuery->isError() || $this->isError()) {
 			echo '<channel></channel>';
 		} else {
-			$searchQuery->executeQuery();
 			include_once $GLOBALS['gfwww'].'export/rss_utils.inc';
 
-			rss_dump_project_result_set(
-				$searchQuery->getResult(),
+			rss_dump_project_result_array(
+				$searchQuery->getData(),
 				'GForge Search Results',
 				'GForge Search Results for "'.$this->query['words'].'"',
 				$this->callbackFunction
