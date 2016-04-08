@@ -54,47 +54,19 @@ class TasksHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		);
 	}
 
-	function getFilteredRows() {
-		$rowsCount = $this->searchQuery->getRowsCount();
-		$result =& $this->searchQuery->getResult();
-
-		$fields = array ('group_project_id',
-				 'project_task_id',
-				 'project_name',
-				 'summary',
-				 'realname',
-				 'start_date',
-				 'end_date',
-				 'percent_complete');
-
-		$fd = array();
-		for($i = 0; $i < $rowsCount; $i++) {
-			if (forge_check_perm('pm',
-					     db_result($result, $i, 'group_project_id'),
-					     'read')) {
-				$r = array();
-				foreach ($fields as $f) {
-					$r[$f] = db_result($result, $i, $f);
-				}
-				$fd[] = $r;
-			}
-		}
-		return $fd;
-	}
-
 	/**
 	 * getRows - get the html output for result rows
 	 *
 	 * @return string html output
 	 */
 	function getRows() {
-		$fd = $this->getFilteredRows();
+		$result = $this->searchQuery->getData($this->searchQuery->getRowsPerPage(),$this->searchQuery->getOffset());
 
 		$return = '';
 		$rowColor = 0;
 		$lastProjectName = null;
 
-		foreach ($fd as $row) {
+		foreach ($result as $row) {
 			//section changed
 			$currentProjectName = $row['project_name'];
 			if ($lastProjectName != $currentProjectName) {
