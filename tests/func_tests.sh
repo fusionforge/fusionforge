@@ -206,7 +206,7 @@ if [ -n "$1" ] ; then
     testname="$1"
 fi
 
-phpunit --verbose --debug --stop-on-failure --log-junit $SELENIUM_RC_DIR/phpunit-selenium.xml $testname || retcode=$?
+timeout 2h phpunit --verbose --debug --stop-on-failure --log-junit $SELENIUM_RC_DIR/phpunit-selenium.xml $testname || retcode=$?
 
 set +x
 echo "phpunit returned with code $retcode"

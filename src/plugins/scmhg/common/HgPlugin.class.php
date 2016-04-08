@@ -164,6 +164,8 @@ Offer DAV or SSH access.");
 			$cells[] = array($total['updates'], 'class' => 'onequarterwidth align-right');
 			$b .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
 			$b .= $HTML->listTableBottom();
+		} else {
+			$b .= $HTML->information(_('No history yet'));
 		}
 
 		return $b;

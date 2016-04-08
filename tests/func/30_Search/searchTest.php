@@ -34,7 +34,7 @@ class Search extends FForge_SeleniumTestCase
 		/*
 		 * Search for projects
 		 */
-		$this->createProject('projectb');
+		$this->createProject('ProjectB');
 
 		$this->open(ROOT) ;
 		$this->waitForPageToLoad("30000");
@@ -50,7 +50,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->assertFalse($this->isTextPresent("No matches found for"));
 		$this->assertTrue($this->isTextPresent("public description for ProjectA"));
-		$this->assertFalse($this->isTextPresent("public description for projectb"));
+		$this->assertFalse($this->isTextPresent("public description for ProjectB"));
 
 		$this->open(ROOT) ;
 		$this->waitForPageToLoad("30000");
@@ -59,7 +59,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->assertFalse($this->isTextPresent("No matches found for"));
 		$this->assertTrue($this->isTextPresent("public description for ProjectA"));
-		$this->assertFalse($this->isTextPresent("public description for projectb"));
+		$this->assertFalse($this->isTextPresent("public description for ProjectB"));
 
 		$this->open(ROOT) ;
 		$this->waitForPageToLoad("30000");
@@ -68,7 +68,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("No matches found for"));
 		$this->assertFalse($this->isTextPresent("public description for ProjectA"));
-		$this->assertFalse($this->isTextPresent("public description for projectb"));
+		$this->assertFalse($this->isTextPresent("public description for ProjectB"));
 
 		$this->open(ROOT) ;
 		$this->waitForPageToLoad("30000");
@@ -77,7 +77,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->assertFalse($this->isTextPresent("No matches found for"));
 		$this->assertTrue($this->isTextPresent("public description for ProjectA"));
-		$this->assertTrue($this->isTextPresent("public description for projectb"));
+		$this->assertTrue($this->isTextPresent("public description for ProjectB"));
 
 		$this->open(ROOT) ;
 		$this->waitForPageToLoad("30000");
@@ -86,7 +86,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("No matches found for"));
 		$this->assertFalse($this->isTextPresent("public description for ProjectA"));
-		$this->assertFalse($this->isTextPresent("public description for projectb"));
+		$this->assertFalse($this->isTextPresent("public description for ProjectB"));
 
 		$this->open(ROOT) ;
 		$this->waitForPageToLoad("30000");
@@ -95,7 +95,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->assertFalse($this->isTextPresent("No matches found for"));
 		$this->assertTrue($this->isTextPresent("public description for ProjectA"));
-		$this->assertTrue($this->isTextPresent("public description for projectb"));
+		$this->assertTrue($this->isTextPresent("public description for ProjectB"));
 
 		/*
 		 * Test paging system
@@ -112,7 +112,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->assertFalse($this->isTextPresent("No matches found for"));
 		$this->assertTrue($this->isTextPresent("public description for ProjectA"));
-		$this->assertTrue($this->isTextPresent("public description for projectb"));
+		$this->assertTrue($this->isTextPresent("public description for ProjectB"));
 		$this->assertTrue($this->isTextPresent("public description for project-x15"));
 		$this->assertFalse($this->isTextPresent("public description for project-x30"));
 		$this->clickAndWait("link=Next Results");
@@ -126,7 +126,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->assertFalse($this->isTextPresent("No matches found for"));
 		$this->assertTrue($this->isTextPresent("public description for project-x15"));
-		$this->assertFalse($this->isTextPresent("public description for projectb"));
+		$this->assertFalse($this->isTextPresent("public description for ProjectB"));
 
 		/*
 		 * Search for people

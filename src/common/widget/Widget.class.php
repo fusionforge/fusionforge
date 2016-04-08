@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2012,2014, Franck Villaume - TrivialDev
+ * Copyright 2012,2014,2016 Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -24,23 +24,21 @@ require_once $gfcommon.'widget/WidgetLayoutManager.class.php';
 require_once $gfcommon.'widget/Widget_MySurveys.class.php';
 require_once $gfcommon.'widget/Widget_MyProjects.class.php';
 require_once $gfcommon.'widget/Widget_MyBookmarks.class.php';
+require_once $gfcommon.'widget/Widget_MyMonitoredDocuments.class.php';
 require_once $gfcommon.'widget/Widget_MyMonitoredForums.class.php';
 require_once $gfcommon.'widget/Widget_MyMonitoredFp.class.php';
 require_once $gfcommon.'widget/Widget_MyLatestCommits.class.php';
 require_once $gfcommon.'widget/Widget_MyProjectsLastDocuments.class.php';
 require_once $gfcommon.'widget/Widget_MyArtifacts.class.php';
-//require_once('common/widget/Widget_MyBugs.class.php');
 //require_once('common/widget/Widget_MySrs.class.php');
 require_once $gfcommon.'widget/Widget_MyTasks.class.php';
 require_once $gfcommon.'widget/Widget_MyRss.class.php';
-
 require_once $gfcommon.'widget/Widget_MyAdmin.class.php';
+require_once $gfcommon.'widget/Widget_MySystasks.class.php';
 //require_once 'common/widget/Widget_MyTwitterFollow.class.php';
-//require_once 'common/widget/Widget_MySystemEvent.class.php';
 //require_once('common/widget/Widget_MyWikiPage.class.php');
-require_once $gfcommon.'widget/Widget_ProjectDescription.class.php' ;
-//require_once('common/widget/Widget_ProjectClassification.class.php');
 
+require_once $gfcommon.'widget/Widget_ProjectDescription.class.php' ;
 require_once $gfcommon.'widget/Widget_ProjectMembers.class.php';
 require_once $gfcommon.'widget/Widget_ProjectInfo.class.php';
 require_once $gfcommon.'widget/Widget_ProjectLatestFileReleases.class.php';
@@ -52,8 +50,7 @@ require_once $gfcommon.'widget/Widget_ProjectRss.class.php';
 require_once $gfcommon.'widget/Widget_ProjectLatestCommits.class.php';
 //require_once 'common/widget/Widget_ProjectTwitterFollow.class.php';
 //require_once('common/widget/Widget_ProjectWikiPage.class.php');
-//require_once 'common/widget/Widget_ProjectSvnStats.class.php';
-require_once $gfcommon.'widget/Widget_MyMonitoredDocuments.class.php';
+require_once 'common/widget/Widget_ProjectScmStats.class.php';
 
 require_once $gfcommon.'widget/Widget_HomeLatestNews.class.php';
 require_once $gfcommon.'widget/Widget_HomeStats.class.php';
@@ -61,9 +58,8 @@ require_once $gfcommon.'widget/Widget_HomeTagCloud.class.php';
 require_once $gfcommon.'widget/Widget_HomeVersion.class.php';
 
 /**
-* "Codendi" Layout Widget
-*
-*/
+ * FusionForge Layout Widget
+ */
 
 /* abstract */ class Widget {
 
@@ -231,24 +227,15 @@ require_once $gfcommon.'widget/Widget_HomeVersion.class.php';
 				break;
 			case 'mylatestcommits':
 				$o = new Widget_MyLatestCommits();
-				break;/*
-			case 'mybugs':
-				$o = new Widget_MyBugs();
 				break;
+			case 'mysystasks':
+				$o = new Widget_MySystasks();
+				break;/*
 			case 'mytwitterfollow':
 				$o = new Widget_MyTwitterFollow();
 				break;
 			case 'mywikipage':                   //not yet
 				$o = new Widget_MyWikiPage();
-				break;
-			case 'mysystemevent':
-				// This widget is only for super admin
-				if (forge_check_global_perm('forge_admin')) {
-					$o = new Widget_MySystemEvent();
-				}
-				break;
-			case 'projectclassification':
-				$o = new Widget_ProjectClassification();
 				break;*/
 			case 'projectdescription':
 				$o = new Widget_ProjectDescription();
@@ -280,12 +267,12 @@ require_once $gfcommon.'widget/Widget_HomeVersion.class.php';
 			case 'projecttwitterfollow':
 				$o = new Widget_ProjectTwitterFollow();
 				break;
-			case 'projectsvnstats':
-				$o = new Widget_ProjectSvnStats();
-				break;
 			case 'projectwikipage':                    //not yet
 				$o = new Widget_ProjectWikiPage();
 				break;*/
+			case 'projectscmstats':
+				$o = new Widget_ProjectScmStats();
+				break;
 			case 'projectlatestcommits':
 				$o = new Widget_ProjectLatestCommits();
 				break;
@@ -310,16 +297,15 @@ require_once $gfcommon.'widget/Widget_HomeVersion.class.php';
 		switch ($owner_type) {
 			case WidgetLayoutManager::OWNER_TYPE_USER:
 				$widgets = array('myadmin', 'mysurveys', 'myprojects', 'mybookmarks',
-						'mymonitoredforums', 'mymonitoredfp', 'myartifacts', 'mybugs', //'mywikipage' //not yet
-						'mytasks', 'mysrs', 'mylatestcommits', 'mytwitterfollow',
-						'mysystemevent', 'myrss', 'mymonitoreddocuments', 'myprojectslastdocuments',
+						'mymonitoredforums', 'mymonitoredfp', 'myartifacts', 'mysystasks', //'mywikipage' //not yet
+						'mytasks', 'mylatestcommits', 'myrss', 'mymonitoreddocuments', 'myprojectslastdocuments',
 						);
 				break;
 			case WidgetLayoutManager::OWNER_TYPE_GROUP:
 				// project home widgets
-				$widgets = array('projectdescription', 'projectmembers', 'projectinfo',
+				$widgets = array('projectdescription', 'projectmembers', 'projectinfo', 'projectscmstats',
 						'projectlatestfilereleases', 'projectlatestdocuments', 'projectlatestnews', 'projectpublicareas', //'projectwikipage' //not yet
-						'projectlatestcommits', 'projecttwitterfollow', 'projectsvnstats', 'projectrss', 'projectdocumentsactivity',
+						'projectlatestcommits', 'projecttwitterfollow', 'projectrss', 'projectdocumentsactivity',
 						);
 				break;
 			case WidgetLayoutManager::OWNER_TYPE_HOME:
