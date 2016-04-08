@@ -50,45 +50,19 @@ class ForumsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		);
 	}
 
-	function getFilteredRows() {
-		$rowsCount = $this->searchQuery->getRowsCount();
-		$result =& $this->searchQuery->getResult();
-
-		$fields = array ('group_forum_id',
-				 'msg_id',
-				 'forum_name',
-				 'subject',
-				 'realname',
-				 'post_date');
-
-		$fd = array();
-		for($i = 0; $i < $rowsCount; $i++) {
-			if (forge_check_perm('forum',
-					     db_result($result, $i, 'group_forum_id'),
-					     'read')) {
-				$r = array();
-				foreach ($fields as $f) {
-					$r[$f] = db_result($result, $i, $f);
-				}
-				$fd[] = $r;
-			}
-		}
-		return $fd;
-	}
-
 	/**
 	 * getRows - get the html output for result rows
 	 *
 	 * @return string html output
 	 */
 	function getRows() {
-		$fd = $this->getFilteredRows();
+		$result = $this->searchQuery->getData($this->searchQuery->getRowsPerPage(),$this->searchQuery->getOffset());
 
 		$return = '';
 		$rowColor = 0;
 		$lastForumName = null;
 
-		foreach ($fd as $row) {
+		foreach ($result as $row) {
 			//section changed
 			$currentForumName = $row['forum_name'];
 			if ($lastForumName != $currentForumName) {

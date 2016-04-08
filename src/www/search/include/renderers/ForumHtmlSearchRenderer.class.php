@@ -57,44 +57,19 @@ class ForumHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		);
 	}
 
-	function getFilteredRows() {
-		$rowsCount = $this->searchQuery->getRowsCount();
-		$result =& $this->searchQuery->getResult();
-
-		$fields = array ('group_forum_id',
-				 'msg_id',
-				 'subject',
-				 'realname',
-				 'post_date');
-
-		$fd = array();
-		for($i = 0; $i < $rowsCount; $i++) {
-			if (forge_check_perm('forum',
-					     db_result($result, $i, 'group_forum_id'),
-					     'read')) {
-				$r = array();
-				foreach ($fields as $f) {
-					$r[$f] = db_result($result, $i, $f);
-				}
-				$fd[] = $r;
-			}
-		}
-		return $fd;
-	}
-
 	/**
 	 * getRows - get the html output for result rows
 	 *
 	 * @return string html output
 	 */
 	function getRows() {
-		$fd = $this->getFilteredRows();
+		$result = $this->searchQuery->getData($this->searchQuery->getRowsPerPage(),$this->searchQuery->getOffset());
 
 		$dateFormat = _('Y-m-d H:i');
 
 		$return = '';
 		$i = 0;
-		foreach ($fd as $row) {
+		foreach ($result as $row) {
 			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td class="halfwidth"><a href="'.util_make_url ('/forum/message.php?msg_id=' . $row['msg_id']).'">'
 				. html_image('ic/msg.png', '10', '12')
 				. ' '.$row['subject'].'</a></td>'
@@ -127,6 +102,8 @@ class ForumHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 * redirectToResult - redirect the user  directly to the result when there is only one matching result
 	 */
 	function redirectToResult() {
-		session_redirect('/forum/message.php?msg_id='.$this->getResultId('msg_id'));
+		$result = $this->searchQuery->getData(1)[0];
+
+		session_redirect('/forum/message.php?msg_id='.$result['msg_id']);
 	}
 }
