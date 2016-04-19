@@ -20,7 +20,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-class DatabaseInstaller extends Error {
+class DatabaseInstaller extends FFError {
 
 	/**
 	 * __construct - DatabaseInstaller constructor

@@ -23,10 +23,10 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 require_once $gfcommon.'forum/ForumMessage.class.php';
 
-class ForumMessageFactory extends Error {
+class ForumMessageFactory extends FFError {
 
 	/**
 	 * The Forum object.
@@ -53,7 +53,7 @@ class ForumMessageFactory extends Error {
 	 * @return	boolean	success.
 	 */
 	function ForumMessageFactory(&$Forum) {
-		$this->Error();
+		parent::__construct();
 		if (!$Forum || !is_object($Forum)) {
 			$this->setError(_("Invalid group_form_id"));
 			return false;

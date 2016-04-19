@@ -22,10 +22,10 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 require_once $gfcommon.'tracker/Artifact.class.php';
 
-class Artifacts extends Error {
+class Artifacts extends FFError {
 
 	/**
 	 * Status db resource ID.
@@ -56,7 +56,7 @@ class Artifacts extends Error {
 	 * @param	ArtifactType	$ArtifactType	Artifact Type object.
 	 */
 	function __construct(&$ArtifactType) {
-		$this->Error();
+		parent::__construct();
 
 		$this->ArtifactType =& $ArtifactType;
 

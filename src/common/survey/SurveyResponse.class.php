@@ -22,9 +22,9 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 
-class SurveyResponse extends Error {
+class SurveyResponse extends FFError {
 	/**
 	 * Associative array of data from db.
 	 *
@@ -50,7 +50,7 @@ class SurveyResponse extends Error {
 	 * @return	\SurveyResponse
 	 */
 	function __construct(&$Group, $arr=false) {
-		$this->Error();
+		parent::__construct();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(_('No Valid Group Object'));
 			return;

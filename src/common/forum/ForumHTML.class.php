@@ -164,7 +164,7 @@ function forum_footer($params = array()) {
  * Wrap many forum functions in this class
  *
  */
-class ForumHTML extends Error {
+class ForumHTML extends FFError {
 	/**
 	 * The Forum object.
 	 *
@@ -173,7 +173,7 @@ class ForumHTML extends Error {
 	var $Forum;
 
 	function __construct(&$Forum) {
-		$this->Error();
+		parent::__construct();
 		if (!$Forum || !is_object($Forum)) {
 			$this->setError(_('Invalid Forum Object'));
 			return false;

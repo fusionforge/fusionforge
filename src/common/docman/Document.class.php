@@ -26,7 +26,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 require_once $gfcommon.'docman/Parsedata.class.php';
 require_once $gfcommon.'docman/DocumentManager.class.php';
 require_once $gfcommon.'docman/DocumentGroup.class.php';
@@ -63,7 +63,7 @@ function &document_get_object($doc_id, $group_id, $res = false) {
 	return $DOCUMENT_OBJ["_".$doc_id."_"];
 }
 
-class Document extends Error {
+class Document extends FFError {
 
 	/**
 	 * Associative array of data from db.
@@ -91,7 +91,7 @@ class Document extends Error {
 	 * @return	\Document
 	 */
 	function __construct(&$Group, $docid = false, $arr = false) {
-		$this->Error();
+		parent::__construct();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(_('No Valid Group Object'));
 			return;

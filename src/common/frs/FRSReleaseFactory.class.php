@@ -20,12 +20,12 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 require_once $gfcommon.'frs/FRSRelease.class.php';
 require_once $gfcommon.'frs/FRSPackage.class.php';
 require_once $gfcommon.'frs/FRSPackageFactory.class.php';
 
-class FRSReleaseFactory extends Error {
+class FRSReleaseFactory extends FFError {
 
 	/**
 	 * The Group object.
@@ -54,7 +54,7 @@ class FRSReleaseFactory extends Error {
 	 * @param	Group	$Group The Group object to which these FRSRs are associated.
 	 */
 	function __construct(& $Group) {
-		$this->Error();
+		parent::__construct();
 
 		if (!$Group || !is_object($Group)) {
 			$this->setError(_('No Valid Group Object'));

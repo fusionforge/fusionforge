@@ -22,7 +22,7 @@
 define('RELEASE_OF_TASK', 1);
 define('RELEASE_OF_USER_STORY', 2);
 
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 require_once $gfplugins.'taskboard/common/TaskBoardColumn.class.php';
 require_once $gfplugins.'taskboard/common/TaskBoardRelease.class.php';
 
@@ -65,7 +65,7 @@ function &taskboard_init($group_id) {
 }
 
 
-class TaskBoard extends Error {
+class TaskBoard extends FFError {
 	/**
 	 * The Group object.
 	 *
@@ -88,7 +88,7 @@ class TaskBoard extends Error {
 	var $data_array;
 
 	function TaskBoard($Group, $arr = false) {
-		$this->Error();
+		parent::__construct();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(_('No Valid Group Object'));
 			return false;

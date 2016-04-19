@@ -1,7 +1,7 @@
 <?php
 
 require_once 'PHPUnit/Framework/TestCase.php';
-require_once dirname(__FILE__) . '/../../../src/common/include/Error.class.php';
+require_once dirname(__FILE__) . '/../../../src/common/include/FFError.class.php';
 require_once dirname(__FILE__) . '/../../../src/common/include/TextSanitizer.class.php';
 
 /**

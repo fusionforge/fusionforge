@@ -24,7 +24,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 require_once $gfcommon.'forum/ForumMessage.class.php';
 require_once $gfcommon.'include/MonitorElement.class.php';
 
@@ -64,7 +64,7 @@ function forum_get_groupid ($forum_id) {
 	return $arr['group_id'];
 }
 
-class Forum extends Error {
+class Forum extends FFError {
 
 	/**
 	 * Associative array of data from db.
@@ -105,7 +105,7 @@ class Forum extends Error {
 	 * @return	\Forum	success.
 	 */
 	function __construct(&$Group, $group_forum_id = false, $arr = false, $is_news = false) {
-		$this->Error();
+		parent::__construct();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(_('No Valid Group Object'));
 			return;

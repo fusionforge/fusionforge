@@ -21,7 +21,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 
 function get_frs_filetypes() {
 	$res=db_query_params('SELECT * FROM frs_filetype', array());
@@ -35,7 +35,7 @@ function get_frs_filetypes() {
 	return $ps;
 }
 
-class FRSFileType extends Error {
+class FRSFileType extends FFError {
 
 	/**
 	 * Associative array of data from db.
@@ -45,7 +45,7 @@ class FRSFileType extends Error {
 	var $data_array;
 
 	function FRSFileType ($type_id=false, $name=false) {
-		$this->Error();
+		parent::__construct();
 		if($type_id && $name) {
 			$this->data_array = array( 'type_id' => $type_id, 'name' => $name);
 		}

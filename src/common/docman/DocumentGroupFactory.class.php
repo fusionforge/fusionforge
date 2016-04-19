@@ -26,9 +26,13 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'include/Error.class.php';
+/*
+ Document Groups
+*/
 
-class DocumentGroupFactory extends Error {
+require_once $gfcommon.'include/FFError.class.php';
+
+class DocumentGroupFactory extends FFError {
 	/**
 	 * This variable holds the document groups.
 	 */
@@ -51,7 +55,7 @@ class DocumentGroupFactory extends Error {
 	 * @return	\DocumentGroupFactory
 	 */
 	function __construct(&$Group) {
-		$this->Error();
+		parent::__construct();
 
 		if (!$Group || !is_object($Group)) {
 			$this->setError(_('No Valid Group Object'));

@@ -33,7 +33,7 @@ define('ERROR__MISSING_PARAMS_ERROR', 6);
  *
  */
 
-class Error {
+class FFError {
 	/**
 	 * The current error state.
 	 *
@@ -61,7 +61,7 @@ class Error {
 	 * Sets the error state to false.
 	 *
 	 */
-	function Error() {
+	function FFError() {
 		//nothing
 		$this->error_state=false;
 		$this->error_code=ERROR__NO_ERROR;

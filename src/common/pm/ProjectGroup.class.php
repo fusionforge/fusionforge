@@ -23,7 +23,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 
 /**
  * Fetches a ProjectGroup object from the database
@@ -67,7 +67,7 @@ function projectgroup_get_groupid($group_project_id) {
 	return $arr['group_id'];
 }
 
-class ProjectGroup extends Error {
+class ProjectGroup extends FFError {
 
 	/**
 	 * Associative array of data from db.
@@ -98,7 +98,7 @@ class ProjectGroup extends Error {
 	 * @return	\ProjectGroup
 	 */
 	function ProjectGroup(&$Group, $group_project_id = false, $arr = false) {
-		$this->Error();
+		parent::__construct();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(_('No Valid Group Object'));
 			return;

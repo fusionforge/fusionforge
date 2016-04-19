@@ -42,10 +42,10 @@
  * ALONE BASIS."
  */
 
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 require_once $gfcommon.'tracker/Roadmap.class.php';
 
-class RoadmapFactory extends Error {
+class RoadmapFactory extends FFError {
 
 	var $group;
 	var $group_id;
@@ -55,7 +55,7 @@ class RoadmapFactory extends Error {
 	var $roadmaps;
 
 	function __construct($group) {
-		$this->Error();
+		parent::__construct();
 
 		if (!$group || !is_object($group)) {
 			$this->setError(_('No Valid Group Object'));

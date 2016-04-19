@@ -19,7 +19,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 require_once $gfplugins.'taskboard/common/TaskBoard.class.php';
 require_once $gfplugins.'taskboard/common/TaskBoardColumnSource.class.php';
 
@@ -83,7 +83,7 @@ function &taskboard_column_get_object_by_resolution($taskboard, $resolution_labe
 	return $columns[$taskboard->getID()][$resolution_label];
 }
 
-class TaskBoardColumn extends Error {
+class TaskBoardColumn extends FFError {
 	/**
 	 * The Taskboard object.
 	 *
@@ -104,7 +104,7 @@ class TaskBoardColumn extends Error {
 	var $drop_rules;
 
 	function TaskBoardColumn($Taskboard, $arr = false) {
-		$this->Error();
+		parent::__construct();
 		if (!$Taskboard || !is_object($Taskboard)) {
 			$this->setError('No Valid Taskboard Object');
 			return false;

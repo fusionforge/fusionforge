@@ -229,7 +229,7 @@ function group_get_readable_projects_using_tag_asc($selected_tag, $max_query_lim
 	return $projects;
 }
 
-class Group extends Error {
+class Group extends FFError {
 	/**
 	 * Associative array of data from db.
 	 *
@@ -280,7 +280,7 @@ class Group extends Error {
 	 * @param	int|bool	$res	Database result from select query OR associative array of all columns.
 	 */
 	function __construct($id = false, $res = false) {
-		$this->Error();
+		parent::__construct();
 		if (!$id) {
 			//setting up an empty object
 			//probably going to call create()

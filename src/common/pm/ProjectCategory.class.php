@@ -22,9 +22,9 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 
-class ProjectCategory extends Error {
+class ProjectCategory extends FFError {
 
 	/**
 	 * The ProjectGroup object.
@@ -48,7 +48,7 @@ class ProjectCategory extends Error {
 	 * @return	boolean		success.
 	 */
 	function ProjectCategory(&$ProjectGroup, $data=false) {
-		$this->Error();
+		parent::__construct();
 
 		//was ProjectGroup legit?
 		if (!$ProjectGroup || !is_object($ProjectGroup)) {

@@ -24,7 +24,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 require_once $gfcommon.'frs/FRSRelease.class.php';
 require_once $gfcommon.'include/MonitorElement.class.php';
 
@@ -90,7 +90,7 @@ function frspackage_get_groupid($package_id) {
 	return $arr['group_id'];
 }
 
-class FRSPackage extends Error {
+class FRSPackage extends FFError {
 
 	/**
 	 * Associative array of data from db.
@@ -119,7 +119,7 @@ class FRSPackage extends Error {
 	 * @return	\FRSPackage
 	 */
 	function __construct(&$Group, $package_id = false, $arr = false) {
-		$this->Error();
+		parent::__construct();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(_('No Valid Group Object'));
 			return;

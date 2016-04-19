@@ -22,7 +22,7 @@
  */
 
 require_once $gfcommon.'tracker/ArtifactStorage.class.php';
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 
 /**
 * Factory method which creates an ArtifactFile from an artifactFile ID
@@ -52,7 +52,7 @@ function &artifactfile_get_object($artifact_file_id,$data=false) {
 }
 
 
-class ArtifactFile extends Error {
+class ArtifactFile extends FFError {
 
 	/**
 	 * The artifact object.
@@ -75,7 +75,7 @@ class ArtifactFile extends Error {
 	 * @param	array|bool	$data		(all fields from artifact_file_user_vw) OR id from database.
 	 */
 	function __construct(&$Artifact, $data=false) {
-		$this->Error();
+		parent::__construct();
 
 		// Was Artifact legit?
 		if (!$Artifact || !is_object($Artifact)) {
