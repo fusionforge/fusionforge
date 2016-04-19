@@ -20,7 +20,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-class MonitorElement extends Error {
+class MonitorElement extends FFError {
 
 	var $_clearMonitorQuery = null;
 	var $_clearMonitorForUserIdQuery = null;

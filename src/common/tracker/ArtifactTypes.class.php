@@ -22,11 +22,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 require_once $gfcommon.'tracker/ArtifactType.class.php';
 require_once $gfcommon.'tracker/ArtifactExtraField.class.php';
 
-class ArtifactTypes extends Error {
+class ArtifactTypes extends FFError {
 
 	/**
 	 * The Group object.
@@ -49,7 +49,7 @@ class ArtifactTypes extends Error {
 	 * @return	ArtifactTypes	success.
 	 */
 	function __construct(&$Group) {
-		$this->Error();
+		parent::__construct();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(_('No Valid Group Object'));
 			return;

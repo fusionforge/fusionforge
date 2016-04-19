@@ -22,10 +22,10 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 require_once $gfcommon.'forum/Forum.class.php';
 
-class ForumFactory extends Error {
+class ForumFactory extends FFError {
 
 	/**
 	 * The Group object.
@@ -47,7 +47,7 @@ class ForumFactory extends Error {
 	 * @param	object	$Group	The Group object to which this forum is associated.
 	 */
 	function __construct(&$Group, $skip_check=false) {
-		$this->Error();
+		parent::__construct();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(_('No Valid Group Object'));
 			return;

@@ -19,10 +19,10 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 require_once $gfplugins.'taskboard/common/TaskBoard.class.php';
 
-class TaskBoardRelease extends Error {
+class TaskBoardRelease extends FFError {
 	/**
 	 * The Taskboard object.
 	 *
@@ -50,7 +50,7 @@ class TaskBoardRelease extends Error {
 	 * Constructor
 	 */
 	function TaskBoardRelease($Taskboard, $arr = false) {
-		$this->Error();
+		parent::__construct();
 		if (!$Taskboard || !is_object($Taskboard)) {
 			$this->setError('No Valid Taskboard Object');
 			return false;

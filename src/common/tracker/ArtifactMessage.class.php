@@ -21,9 +21,9 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 
-class ArtifactMessage extends Error {
+class ArtifactMessage extends FFError {
 
 	/**
 	 * The artifact object.
@@ -46,7 +46,7 @@ class ArtifactMessage extends Error {
 	 * @param	array|bool	$data		(all fields from artifact_history_user_vw) OR id from database.
 	 */
 	function __construct(&$Artifact, $data=false) {
-		$this->Error();
+		parent::__construct();
 
 		//was Artifact legit?
 		if (!$Artifact || !is_object($Artifact)) {

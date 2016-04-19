@@ -46,7 +46,7 @@
  * TOGETHER WITH THE SOFTWARE TO WHICH THE CONTRIBUTION RELATES OR ON A STAND
  * ALONE BASIS."
  */
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 require_once $gfcommon.'tracker/ArtifactMessage.class.php';
 require_once $gfcommon.'tracker/ArtifactExtraField.class.php';
 require_once $gfcommon.'tracker/ArtifactWorkflow.class.php';
@@ -84,7 +84,7 @@ function &artifact_get_object($artifact_id,$data=false) {
 	return $ARTIFACT_OBJ["_".$artifact_id."_"];
 }
 
-class Artifact extends Error {
+class Artifact extends FFError {
 
 	/**
 	 * Resource ID.
@@ -142,7 +142,7 @@ class Artifact extends Error {
 	 *						ONLY OPTIONAL WHEN YOU PLAN TO IMMEDIATELY CALL ->create()
 	 */
 	function __construct(&$ArtifactType, $data=false) {
-		$this->Error();
+		parent::__construct();
 
 		$this->ArtifactType =& $ArtifactType;
 

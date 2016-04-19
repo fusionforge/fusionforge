@@ -23,10 +23,10 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 require_once $gfcommon.'survey/SurveyResponse.class.php';
 
-class SurveyResponseFactory extends Error {
+class SurveyResponseFactory extends FFError {
 
 	/**
 	* The Survey object.
@@ -70,7 +70,7 @@ class SurveyResponseFactory extends Error {
 	 * @param	object	$question	The Question object to which this survey Response is associated.
 	 */
 	function __construct(&$survey, &$question ) {
-		$this->Error();
+		parent::__construct();
 
 		if (!$survey || !is_object($survey)) {
 			$this->setError(_('No valid Survey Object'));

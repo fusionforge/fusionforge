@@ -190,7 +190,7 @@ if ($sysdebug_enable && getenv('SERVER_SOFTWARE')) {
 require $gfcommon.'include/constants.php';
 
 // Base error library for new objects
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 
 // Database abstraction
 // From here database is required

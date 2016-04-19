@@ -20,10 +20,10 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 require_once $gfcommon.'include/PluginManager.class.php';
 
-class SCMFactory extends Error {
+class SCMFactory extends FFError {
 
 	/**
 	 * The scms array.
@@ -40,7 +40,7 @@ class SCMFactory extends Error {
 	 */
 	function SCMFactory() {
 
-		$this->Error();
+		parent::__construct();
 		if (!forge_get_config('use_scm')) {
 			$this->setError('SCMFactory::sys_use_scm');
 			return false;

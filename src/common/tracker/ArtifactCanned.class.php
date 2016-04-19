@@ -22,9 +22,9 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 
-class ArtifactCanned extends Error {
+class ArtifactCanned extends FFError {
 
 	/**
 	 * The artifact type object.
@@ -48,7 +48,7 @@ class ArtifactCanned extends Error {
 	 * @return	ArtifactCanned	success.
 	 */
 	function __construct(&$ArtifactType, $data=false) {
-		$this->Error();
+		parent::__construct();
 
 		// Was ArtifactType legit?
 		if (!$ArtifactType || !is_object($ArtifactType)) {

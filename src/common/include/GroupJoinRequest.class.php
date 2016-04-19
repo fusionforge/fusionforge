@@ -22,7 +22,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 require_once $gfcommon.'include/Validator.class.php';
 
 function &get_group_join_requests($Group) {
@@ -39,7 +39,7 @@ function &get_group_join_requests($Group) {
 	return $reqs;
 }
 
-class GroupJoinRequest extends Error {
+class GroupJoinRequest extends FFError {
 
 	/**
 	 * Associative array of data from db.
@@ -59,7 +59,7 @@ class GroupJoinRequest extends Error {
 	 * @return	\GroupJoinRequest
 	 */
 	function __construct($Group = false, $user_id = false, $arr = false) {
-		$this->error();
+		parent::__construct();
 
 		if (!$Group || !is_object($Group)) {
 			$this->setError(_('No Valid Group Object'));

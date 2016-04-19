@@ -26,7 +26,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 require_once $gfcommon.'include/MonitorElement.class.php';
 
 $DOCUMENTGROUP_OBJ = array();
@@ -59,7 +59,7 @@ function &documentgroup_get_object($docgroup_id, $group_id, $res = false) {
 	return $DOCUMENTGROUP_OBJ["_".$docgroup_id."_"];
 }
 
-class DocumentGroup extends Error {
+class DocumentGroup extends FFError {
 
 	/**
 	 * The Group object.
@@ -88,7 +88,7 @@ class DocumentGroup extends Error {
 	 * @access	public
 	 */
 	function __construct(&$Group, $data = false) {
-		$this->Error();
+		parent::__construct();
 
 		if (!$Group || !is_object($Group)) {
 			$this->setError(_('No Valid Group Object'));

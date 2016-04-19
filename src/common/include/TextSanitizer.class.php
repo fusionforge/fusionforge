@@ -45,7 +45,7 @@
 
 require_once 'HTMLPurifier.auto.php';
 
-class TextSanitizer extends Error {
+class TextSanitizer extends FFError {
 
 	/**
 	 *  convertExtendedCharsForEmail - Grabs some text with html special characters and converts them to the corresponding character.

@@ -45,7 +45,7 @@
  * ALONE BASIS."
  */
 
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 
 define('ARTIFACT_QUERY_ASSIGNEE',1);
 define('ARTIFACT_QUERY_STATE',2);
@@ -62,7 +62,7 @@ define('ARTIFACT_QUERY_SUBMITTER',12);
 
 require_once $gfcommon.'tracker/ArtifactType.class.php';
 
-class ArtifactQuery extends Error {
+class ArtifactQuery extends FFError {
 	/**
 	 * The artifact type object.
 	 *
@@ -91,7 +91,7 @@ class ArtifactQuery extends Error {
 	 * @param	array|bool	$data
 	 */
 	function __construct(&$ArtifactType, $data = false) {
-		$this->Error();
+		parent::__construct();
 
 		// Was ArtifactType legit?
 		if (!$ArtifactType || !is_object($ArtifactType)) {

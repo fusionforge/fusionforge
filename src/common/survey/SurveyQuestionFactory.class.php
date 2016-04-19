@@ -23,10 +23,10 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 require_once $gfcommon.'survey/SurveyQuestion.class.php';
 
-class SurveyQuestionFactory extends Error {
+class SurveyQuestionFactory extends FFError {
 
 	/**
 	 * The Group object.
@@ -48,7 +48,7 @@ class SurveyQuestionFactory extends Error {
 	 * @param	object	$Group	The Group object to which this survey question is associated.
 	 */
 	function __construct(&$Group) {
-		$this->Error();
+		parent::__construct();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(_('No Valid Group Object'));
 			return;

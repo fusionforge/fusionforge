@@ -60,7 +60,7 @@ function generateHeader($tableName,$author="Gforge Class Generator by Francisco 
 		" * Rewrite in OO and coding guidelines 12/2002 by Tim Perdue\n".
 		" */\n".
 		"\n".
-		"require_once('common/include/Error.class');\n";
+		"require_once('common/include/FFError.class');\n";
 		"require_once('common/include/Validator.class');\n\n";
 
 	$variables = array("%{CLASS_NAME}","%{YEAR}","%{AUTHOR}",
@@ -108,7 +108,7 @@ function getIdFieldFromFieldsArr($fields) {
 }
 
 function generateClassHead($className) {
-	$output="class ".$className." extends Error {\n\n";
+	$output="class ".$className." extends FFError {\n\n";
 
 	return $output;
 }
@@ -139,7 +139,7 @@ function generateClassConstructor($className, $fields) {
          "\t *  @return boolean success.\n".
          "\t */\n";
 	$output.="\tfunction ".$className."(/*&\$ProjectGroup,*/ \$".getIdFieldFromFieldsArr($fields)."=false, \$arr=false) {\n";
-	$output.="\t\t\$this->error(); \n\n".
+	$output.="\t\tparent::__construct(); \n\n".
 		"\t\t/*if (!\$ProjectGroup || !is_object(\$ProjectGroup)) {\n".
                 "\t\t\t\$this->setError('$className:: No Valid ProjectGroup Object');\n".
                 "\t\t\t\treturn false;\n".

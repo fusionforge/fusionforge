@@ -39,7 +39,7 @@ require_once 'common/dao/CodendiDataAccess.class.php';
 require_once 'common/system_event/SystemEventManager.class.php';
 require_once 'common/system_event/SystemEvent.class.php';
 
-class MailmanList extends Error {
+class MailmanList extends FFError {
 	/**
 	 * DAO
 	 *
@@ -80,7 +80,7 @@ class MailmanList extends Error {
 		$pm = ProjectManager::instance();
 		$Group = $pm->getProject($group_id);
 		$this->_mailingDAO = new MailmanListDao(CodendiDataAccess::instance());
-		$this->Error();
+		parent::__construct();
 		if (!$Group || !is_object($Group)) {
 			exit_no_group();
 		}

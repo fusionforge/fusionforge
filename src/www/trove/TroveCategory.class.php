@@ -25,7 +25,7 @@
 require_once 'TroveCategoryLabel.class.php';
 
 // should extend observable
-class TroveCategory extends Error {
+class TroveCategory extends FFError {
 
 	/**
 	 * Associative array of data from db.

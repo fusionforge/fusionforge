@@ -36,7 +36,7 @@ require_once $gfcommon.'include/SysTasksQ.class.php';
  * TODO: RBAC::BaseRole Enter description here ...
  *
  */
-abstract class BaseRole extends Error {
+abstract class BaseRole extends FFError {
 	/**
 	 * TODO: Enter description here ...
 	 * @var unknown_type

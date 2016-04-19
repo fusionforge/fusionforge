@@ -24,13 +24,13 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-class Stats extends Error {
+class Stats extends FFError {
 
 	/**
 	 *	Stats - Stats object constructor
 	 */
 	function Stats() {
-		$this->Error();
+		parent::__construct();
 		return true;
 	}
 

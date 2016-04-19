@@ -22,7 +22,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 
 define('ARTIFACT_EXTRAFIELD_FILTER_INT','1,2,3,5,7');
 define('ARTIFACT_EXTRAFIELDTYPE_SELECT',1);
@@ -40,7 +40,7 @@ define('ARTIFACT_EXTRAFIELDTYPE_FORMULA',11);
 /* reserved for Evolvis extension, for merge into FusionForge */
 define('ARTIFACT_EXTRAFIELDTYPE_DATETIME',12);
 
-class ArtifactExtraField extends Error {
+class ArtifactExtraField extends FFError {
 
 	/**
 	 * The artifact type object.
@@ -62,7 +62,7 @@ class ArtifactExtraField extends Error {
 	 * @param	bool		$data
 	 */
 	function __construct(&$ArtifactType, $data=false) {
-		$this->Error();
+		parent::__construct();
 
 		//was ArtifactType legit?
 		if (!$ArtifactType || !is_object($ArtifactType)) {

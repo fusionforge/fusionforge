@@ -24,7 +24,7 @@
 # Default category (plugin_id field)
 define('SYSTASK_CORE', null);
 
-class SysTasksQ extends Error {
+class SysTasksQ extends FFError {
 	function add($plugin_id, $systask_type, $group_id, $user_id=null) {
 		// Trim duplicate requests, e.g. SCM_REPO ones
 		$qpa = db_construct_qpa();

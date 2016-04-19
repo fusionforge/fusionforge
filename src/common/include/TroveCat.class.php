@@ -25,7 +25,7 @@
  * TODO: FusionForge Trove Categories
  *
  */
-class TroveCat extends Error {
+class TroveCat extends FFError {
 
 	var $data_array;
 

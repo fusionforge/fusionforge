@@ -4,6 +4,12 @@ fusionforge (6.0.50-0) UNRELEASED; urgency=medium
 
  -- Roland Mas <lolando@debian.org>  Wed, 24 Jun 2015 11:32:26 +0200
 
+fusionforge (6.0.3+20160419-0) UNRELEASED; urgency=medium
+
+  * Update packaging to work with php7.0 (not only php5).
+
+ -- Roland Mas <lolando@debian.org>  Tue, 19 Apr 2016 10:01:27 +0200
+
 fusionforge (6.0.3+20151023-1) unstable; urgency=medium
 
   * New upstream snapshot following the 6.0 stable branch

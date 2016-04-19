@@ -15,7 +15,7 @@
 
 // May create an interface with 2 implementations : JSON or php serialize...
 
-class PluginPersistentStore extends Error {
+class PluginPersistentStore extends FFError {
 
 	var $plugin_id;
 

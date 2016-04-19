@@ -21,7 +21,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 
 function get_frs_fileprocessortypes() {
 	$res=db_query_params('SELECT * FROM frs_processor', array());
@@ -35,7 +35,7 @@ function get_frs_fileprocessortypes() {
 	return $ps;
 }
 
-class FRSFileProcessorType extends Error {
+class FRSFileProcessorType extends FFError {
 
 	/**
 	 * Associative array of data from db.
@@ -45,7 +45,7 @@ class FRSFileProcessorType extends Error {
 	var $data_array;
 
 	function FRSFileProcessorType($processor_id, $name) {
-		$this->Error();
+		parent::__construct();
 		$this->data_array = array( 'processor_id' => $processor_id, 'name' => $name);
 	}
 

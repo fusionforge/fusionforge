@@ -43,9 +43,9 @@
  * ALONE BASIS."
  */
 
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 
-class Roadmap extends Error {
+class Roadmap extends FFError {
 
 	var $group;
 	var $group_id;
@@ -61,7 +61,7 @@ class Roadmap extends Error {
 	var $data_array;
 
 	function __construct($group, $roadmap_id=0, $data=false) {
-		$this->Error();
+		parent::__construct();
 
 		if (is_object($group)) {
 			if ($group->isError()) {

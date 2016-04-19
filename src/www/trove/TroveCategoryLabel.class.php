@@ -31,14 +31,14 @@ label varchar(255),
 PRIMARY KEY(label_id));
 **/
 
-class TroveCategoryLabel extends Error {
+class TroveCategoryLabel extends FFError {
 
 	var $labelId;
 	var $category;
 	var $dataArray = false;
 
 	function TroveCategoryLabel(& $category, $labelId = false, $dataArray = false) {
-		$this->Error();
+		parent::__construct();
 		if (!$category || !is_object($category)) {
 			return false;
 		}

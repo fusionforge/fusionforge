@@ -28,7 +28,7 @@ require_once $gfcommon.'include/RBAC.php';
  * TODO: Enter description here ...
  *
  */
-class RBACEngine extends Error implements PFO_RBACEngine {
+class RBACEngine extends FFError implements PFO_RBACEngine {
 	private static $_instance;
 	private $_cached_roles = array ();
 	private $_cached_available_roles = NULL;

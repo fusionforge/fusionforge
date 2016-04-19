@@ -22,12 +22,12 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 require_once $gfcommon.'tracker/Artifact.class.php';
 require_once $gfcommon.'tracker/ArtifactType.class.php';
 require_once $gfcommon.'tracker/ArtifactQuery.class.php';
 
-class ArtifactFactory extends Error {
+class ArtifactFactory extends FFError {
 
 	/**
 	 * The ArtifactType object.
@@ -70,7 +70,7 @@ class ArtifactFactory extends Error {
 	 * @param	object	$ArtifactType	The ArtifactType object to which this ArtifactFactory is associated.
 	 */
 	function __construct(&$ArtifactType) {
-		$this->Error();
+		parent::__construct();
 		if (!$ArtifactType || !is_object($ArtifactType)) {
 			$this->setError('ArtifactFactory: No Valid ArtifactType Object');
 			return;

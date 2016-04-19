@@ -32,7 +32,7 @@ require_once $gfwww.'search/include/SearchManager.class.php';
  * always tries to be as generic as possible so that it can easily be
  * styled via CSS.
  */
-class Navigation extends Error {
+class Navigation extends FFError {
 	/**
 	 * Associative array of data for the project menus.
 	 *
@@ -44,7 +44,7 @@ class Navigation extends Error {
 	 * Constructor
 	 */
 	function Navigation() {
-		$this->Error();
+		parent::__construct();
 		return true;
 	}
 

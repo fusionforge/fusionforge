@@ -24,11 +24,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 include_once $gfcommon.'include/TextSanitizer.class.php'; // for parsing the mail body
 include_once $gfcommon.'include/User.class.php';
 
-class ForumMessage extends Error {
+class ForumMessage extends FFError {
 
 	var $awaits_moderation;//boolean -> true if the message was inserted for approval (pending), false if not
 	/**
@@ -55,7 +55,7 @@ class ForumMessage extends Error {
 	 * @return	bool		success.
 	 */
 	function ForumMessage(&$Forum, $msg_id=false, $arr=array(), $pending=false) {
-		$this->Error();
+		parent::__construct();
 		if (!$Forum || !is_object($Forum)) {
 			$this->setError(_('Invalid Forum Object'));
 			return false;

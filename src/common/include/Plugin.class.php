@@ -30,7 +30,7 @@
  * Plugin base class
  */
 
-class Plugin extends Error {
+class Plugin extends FFError {
 	var $name;
 	var $hooks;
 	var $id = NULL;
@@ -42,7 +42,7 @@ class Plugin extends Error {
 	 * @param	int	$id
 	 */
 	function Plugin($id=0) {
-		$this->Error();
+		parent::__construct();
 		$this->name = false;
 		$this->hooks = array();
 	}
