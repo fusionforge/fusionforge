@@ -45,7 +45,7 @@
  * ALONE BASIS."
  */
 
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 
 define('ARTIFACT_QUERY_ASSIGNEE',1);
 define('ARTIFACT_QUERY_STATE',2);

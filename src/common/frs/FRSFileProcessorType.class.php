@@ -21,7 +21,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 
 function get_frs_fileprocessortypes() {
 	$res=db_query_params('SELECT * FROM frs_processor', array());

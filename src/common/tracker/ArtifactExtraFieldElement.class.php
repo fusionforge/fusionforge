@@ -44,7 +44,7 @@
  * ALONE BASIS."
  */
 
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 require_once $gfcommon.'tracker/ArtifactWorkflow.class.php';
 
 class ArtifactExtraFieldElement extends FFError {

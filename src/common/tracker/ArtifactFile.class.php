@@ -22,7 +22,7 @@
  */
 
 require_once $gfcommon.'tracker/ArtifactStorage.class.php';
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 
 /**
 * Factory method which creates an ArtifactFile from an artifactFile ID

@@ -22,7 +22,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 
 define('ARTIFACT_EXTRAFIELD_FILTER_INT','1,2,3,5,7');
 define('ARTIFACT_EXTRAFIELDTYPE_SELECT',1);

@@ -24,7 +24,7 @@
 /**
  * Base error class
  */
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 
 /**
  * Time Entry model object

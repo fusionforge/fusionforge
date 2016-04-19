@@ -25,7 +25,7 @@
 require_once $gfcommon.'pm/ProjectGroup.class.php';
 require_once $gfcommon.'pm/ProjectTask.class.php';
 require_once $gfcommon.'include/Group.class.php';
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 
 /**
 * A class that manages the project tasks for a specific user

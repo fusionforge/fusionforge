@@ -30,7 +30,7 @@
  Document Groups
 */
 
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 
 class DocumentGroupFactory extends FFError {
 	/**

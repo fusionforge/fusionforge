@@ -22,7 +22,7 @@
 define('RELEASE_OF_TASK', 1);
 define('RELEASE_OF_USER_STORY', 2);
 
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 require_once $gfplugins.'taskboard/common/TaskBoardColumn.class.php';
 require_once $gfplugins.'taskboard/common/TaskBoardRelease.class.php';
 
