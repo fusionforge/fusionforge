@@ -24,7 +24,7 @@
 
 require_once $gfcommon.'include/Error.class.php';
 
-class ProjectCategory extends Error {
+class ProjectCategory extends FFError {
 
 	/**
 	 * The ProjectGroup object.

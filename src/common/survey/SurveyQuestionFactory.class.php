@@ -26,7 +26,7 @@
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'survey/SurveyQuestion.class.php';
 
-class SurveyQuestionFactory extends Error {
+class SurveyQuestionFactory extends FFError {
 
 	/**
 	 * The Group object.

@@ -25,7 +25,7 @@ require_once $gfcommon.'frs/FRSRelease.class.php';
 require_once $gfcommon.'frs/FRSPackage.class.php';
 require_once $gfcommon.'frs/FRSPackageFactory.class.php';
 
-class FRSReleaseFactory extends Error {
+class FRSReleaseFactory extends FFError {
 
 	/**
 	 * The Group object.

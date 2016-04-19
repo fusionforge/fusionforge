@@ -108,7 +108,7 @@ function getIdFieldFromFieldsArr($fields) {
 }
 
 function generateClassHead($className) {
-	$output="class ".$className." extends Error {\n\n";
+	$output="class ".$className." extends FFError {\n\n";
 
 	return $output;
 }

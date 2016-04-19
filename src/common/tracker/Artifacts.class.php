@@ -25,7 +25,7 @@
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'tracker/Artifact.class.php';
 
-class Artifacts extends Error {
+class Artifacts extends FFError {
 
 	/**
 	 * Status db resource ID.

@@ -43,7 +43,7 @@
  * ALONE BASIS."
  */
 
-class Storage extends Error {
+class Storage extends FFError {
     protected static $_instance;
 	var $pending_store = array();
 	var $pending_delete = array();

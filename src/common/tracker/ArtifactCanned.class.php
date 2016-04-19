@@ -24,7 +24,7 @@
 
 require_once $gfcommon.'include/Error.class.php';
 
-class ArtifactCanned extends Error {
+class ArtifactCanned extends FFError {
 
 	/**
 	 * The artifact type object.

@@ -61,7 +61,7 @@ define('PM_LINK_START_FINISH','SF');
 define('PM_LINK_FINISH_START','FS');
 define('PM_LINK_FINISH_FINISH','FF');
 
-class ProjectTask extends Error {
+class ProjectTask extends FFError {
 
 	/**
 	 * Associative array of data from db.

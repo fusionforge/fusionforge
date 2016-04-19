@@ -45,7 +45,7 @@
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'tracker/Roadmap.class.php';
 
-class RoadmapFactory extends Error {
+class RoadmapFactory extends FFError {
 
 	var $group;
 	var $group_id;

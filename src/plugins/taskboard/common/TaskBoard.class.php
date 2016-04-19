@@ -65,7 +65,7 @@ function &taskboard_init($group_id) {
 }
 
 
-class TaskBoard extends Error {
+class TaskBoard extends FFError {
 	/**
 	 * The Group object.
 	 *

@@ -62,7 +62,7 @@ define('ARTIFACT_QUERY_SUBMITTER',12);
 
 require_once $gfcommon.'tracker/ArtifactType.class.php';
 
-class ArtifactQuery extends Error {
+class ArtifactQuery extends FFError {
 	/**
 	 * The artifact type object.
 	 *

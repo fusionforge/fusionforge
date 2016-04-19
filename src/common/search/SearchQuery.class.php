@@ -24,7 +24,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-class SearchQuery extends Error {
+class SearchQuery extends FFError {
 	/**
 	 * the operator between each part of the query. Can be AND or OR.
 	 *

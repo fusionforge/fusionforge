@@ -26,7 +26,7 @@
 
 require_once 'MailmanList.class.php';
 
-class MailsForUser extends Error {
+class MailsForUser extends FFError {
 
 	/**
 	 * The User object.

@@ -40,7 +40,7 @@ require_once $gfcommon.'include/Error.class.php';
  * @todo I'm sure this isn't code per the gForge coding standards.  This should be fixed.
  *
  */
-class TimeEntry extends Error {
+class TimeEntry extends FFError {
     /**
      * Constructor
      *

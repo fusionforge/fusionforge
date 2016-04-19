@@ -83,7 +83,7 @@ function &taskboard_column_get_object_by_resolution($taskboard, $resolution_labe
 	return $columns[$taskboard->getID()][$resolution_label];
 }
 
-class TaskBoardColumn extends Error {
+class TaskBoardColumn extends FFError {
 	/**
 	 * The Taskboard object.
 	 *

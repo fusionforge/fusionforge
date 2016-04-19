@@ -39,7 +39,7 @@ function &get_group_join_requests($Group) {
 	return $reqs;
 }
 
-class GroupJoinRequest extends Error {
+class GroupJoinRequest extends FFError {
 
 	/**
 	 * Associative array of data from db.

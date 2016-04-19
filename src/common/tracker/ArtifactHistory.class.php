@@ -23,7 +23,7 @@
 
 require_once $gfcommon.'include/Error.class.php';
 
-class ArtifactHistory extends Error {
+class ArtifactHistory extends FFError {
 
 	/**
 	 * The artifact object.

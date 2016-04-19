@@ -39,7 +39,7 @@ require_once 'common/dao/CodendiDataAccess.class.php';
 require_once 'common/system_event/SystemEventManager.class.php';
 require_once 'common/system_event/SystemEvent.class.php';
 
-class MailmanList extends Error {
+class MailmanList extends FFError {
 	/**
 	 * DAO
 	 *

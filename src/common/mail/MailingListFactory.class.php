@@ -26,7 +26,7 @@
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'mail/MailingList.class.php';
 
-class MailingListFactory extends Error {
+class MailingListFactory extends FFError {
 
 	/**
 	 * The Group object.

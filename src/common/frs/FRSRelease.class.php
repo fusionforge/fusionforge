@@ -53,7 +53,7 @@ function &frsrelease_get_object($release_id, $data = array()) {
 	return $FRSRELEASE_OBJ['_'.$release_id.'_'];
 }
 
-class FRSRelease extends Error {
+class FRSRelease extends FFError {
 
 	/**
 	 * Associative array of data from db.

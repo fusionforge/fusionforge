@@ -45,7 +45,7 @@
 
 require_once $gfcommon.'include/Error.class.php';
 
-class Roadmap extends Error {
+class Roadmap extends FFError {
 
 	var $group;
 	var $group_id;

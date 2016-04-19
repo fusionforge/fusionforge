@@ -42,7 +42,7 @@ require_once $gfcommon.'include/constants.php';
 require_once $gfcommon.'include/FusionForge.class.php';
 require_once $gfcommon.'include/Navigation.class.php';
 
-class Layout extends Error {
+class Layout extends FFError {
 
 	/**
 	 * Which doctype to use. Can be configured in the

@@ -62,7 +62,7 @@ function &document_get_object($doc_id, $res = false) {
 	return $DOCUMENT_OBJ["_".$doc_id."_"];
 }
 
-class Document extends Error {
+class Document extends FFError {
 
 	/**
 	 * Associative array of data from db.

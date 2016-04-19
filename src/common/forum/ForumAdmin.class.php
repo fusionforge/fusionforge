@@ -26,7 +26,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-class ForumAdmin extends Error {
+class ForumAdmin extends FFError {
 	var $group_id;
 	var $p,$g;
 

@@ -20,7 +20,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-class SearchRenderer extends Error {
+class SearchRenderer extends FFError {
 
 	/**
 	 * This is not the SQL query but elements from the HTTP query

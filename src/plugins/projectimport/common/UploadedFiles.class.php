@@ -34,7 +34,7 @@
  * @author Olivier Berger
  *
  */
-class AbstractFilesDirectory extends Error {
+class AbstractFilesDirectory extends FFError {
 
 	protected $dir_path;
 

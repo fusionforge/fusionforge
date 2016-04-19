@@ -31,7 +31,7 @@ require_once $gfwww.'include/note.php';
 /**
  * Survey HTML related functions
  */
-class SurveyHTML extends Error {
+class SurveyHTML extends FFError {
 
 	/**
 	 * Dummy constructor

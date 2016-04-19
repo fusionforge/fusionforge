@@ -23,7 +23,7 @@
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'include/PluginManager.class.php';
 
-class SCMFactory extends Error {
+class SCMFactory extends FFError {
 
 	/**
 	 * The scms array.

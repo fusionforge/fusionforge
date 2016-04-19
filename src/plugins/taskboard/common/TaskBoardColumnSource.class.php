@@ -84,7 +84,7 @@ function &taskboard_default_column_source_get_object($taskboard_target_column_id
 	return $ColumnSource;
 }
 
-class TaskBoardColumnSource extends Error {
+class TaskBoardColumnSource extends FFError {
 	/**
 	 * The Taskboard object.
 	 *

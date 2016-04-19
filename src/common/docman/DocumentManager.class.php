@@ -28,7 +28,7 @@ require_once $gfcommon.'include/User.class.php';
 require_once $gfcommon.'docman/DocumentGroup.class.php';
 require_once $gfcommon.'docman/DocumentFactory.class.php';
 
-class DocumentManager extends Error {
+class DocumentManager extends FFError {
 
 	/**
 	 * Associative array of data from db.

@@ -90,7 +90,7 @@ function frspackage_get_groupid($package_id) {
 	return $arr['group_id'];
 }
 
-class FRSPackage extends Error {
+class FRSPackage extends FFError {
 
 	/**
 	 * Associative array of data from db.

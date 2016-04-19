@@ -23,7 +23,7 @@
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'frs/FRSPackage.class.php';
 
-class FRSPackageFactory extends Error {
+class FRSPackageFactory extends FFError {
 
 	/**
 	 * The Group object.

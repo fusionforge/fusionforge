@@ -192,7 +192,7 @@ function &user_get_all_users() {
 	return user_get_objects (util_result_column_to_array($res,0)) ;
 }
 
-class GFUser extends Error {
+class GFUser extends FFError {
 	/**
 	 * Associative array of data from db.
 	 *

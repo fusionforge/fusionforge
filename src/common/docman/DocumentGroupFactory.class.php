@@ -32,7 +32,7 @@
 
 require_once $gfcommon.'include/Error.class.php';
 
-class DocumentGroupFactory extends Error {
+class DocumentGroupFactory extends FFError {
 	/**
 	 * This variable holds the document groups.
 	 */

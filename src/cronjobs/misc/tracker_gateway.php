@@ -35,7 +35,7 @@ require_once $gfcommon.'include/MailParser.class.php';
 require_once $gfcommon.'tracker/Artifact.class.php';
 require_once $gfcommon.'tracker/ArtifactFactory.class.php';
 
-class TrackerGateway extends Error {
+class TrackerGateway extends FFError {
 	/*
 	 * variables
 	 */

@@ -22,7 +22,7 @@
 
 require_once $gfcommon.'include/Error.class.php';
 
-class MailParser extends Error {
+class MailParser extends FFError {
 
 	var $max_file_size=2000000;
 	var $headers;

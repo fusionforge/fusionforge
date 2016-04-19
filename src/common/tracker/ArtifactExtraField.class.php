@@ -40,7 +40,7 @@ define('ARTIFACT_EXTRAFIELDTYPE_FORMULA',11);
 /* reserved for Evolvis extension, for merge into FusionForge */
 define('ARTIFACT_EXTRAFIELDTYPE_DATETIME',12);
 
-class ArtifactExtraField extends Error {
+class ArtifactExtraField extends FFError {
 
 	/**
 	 * The artifact type object.

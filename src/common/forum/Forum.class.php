@@ -64,7 +64,7 @@ function forum_get_groupid ($forum_id) {
 	return $arr['group_id'];
 }
 
-class Forum extends Error {
+class Forum extends FFError {
 
 	/**
 	 * Associative array of data from db.

@@ -58,7 +58,7 @@ function &documentgroup_get_object($docgroup_id, $res = false) {
 	return $DOCUMENTGROUP_OBJ["_".$docgroup_id."_"];
 }
 
-class DocumentGroup extends Error {
+class DocumentGroup extends FFError {
 
 	/**
 	 * The Group object.

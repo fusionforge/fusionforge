@@ -31,7 +31,7 @@ label varchar(255),
 PRIMARY KEY(label_id));
 **/
 
-class TroveCategoryLabel extends Error {
+class TroveCategoryLabel extends FFError {
 
 	var $labelId;
 	var $category;

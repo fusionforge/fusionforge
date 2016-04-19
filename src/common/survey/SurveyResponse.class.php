@@ -24,7 +24,7 @@
 
 require_once $gfcommon.'include/Error.class.php';
 
-class SurveyResponse extends Error {
+class SurveyResponse extends FFError {
 	/**
 	 * Associative array of data from db.
 	 *

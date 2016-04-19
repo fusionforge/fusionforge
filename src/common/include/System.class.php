@@ -22,7 +22,7 @@
 
 require_once $gfcommon.'include/Error.class.php';
 
-class System extends Error {
+class System extends FFError {
 	/**
 	 * System()
 	 *

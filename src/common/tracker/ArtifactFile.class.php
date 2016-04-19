@@ -52,7 +52,7 @@ function &artifactfile_get_object($artifact_file_id,$data=false) {
 }
 
 
-class ArtifactFile extends Error {
+class ArtifactFile extends FFError {
 
 	/**
 	 * The artifact object.

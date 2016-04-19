@@ -22,7 +22,7 @@
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfplugins.'taskboard/common/TaskBoard.class.php';
 
-class TaskBoardRelease extends Error {
+class TaskBoardRelease extends FFError {
 	/**
 	 * The Taskboard object.
 	 *

@@ -56,7 +56,7 @@ function &permission_get_object(&$_Group) {
 	return $PERMISSION_OBJ[$group_id];
 }
 
-class Permission extends Error {
+class Permission extends FFError {
 	/**
 	 * Associative array of data from db.
 	 *

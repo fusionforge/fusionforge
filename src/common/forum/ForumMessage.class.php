@@ -28,7 +28,7 @@ require_once $gfcommon.'include/Error.class.php';
 include_once $gfcommon.'include/TextSanitizer.class.php'; // for parsing the mail body
 include_once $gfcommon.'include/User.class.php';
 
-class ForumMessage extends Error {
+class ForumMessage extends FFError {
 
 	var $awaits_moderation;//boolean -> true if the message was inserted for approval (pending), false if not
 	/**

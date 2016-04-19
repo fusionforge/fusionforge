@@ -25,7 +25,7 @@
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'tracker/ArtifactType.class.php';
 
-class ArtifactTypeFactory extends Error {
+class ArtifactTypeFactory extends FFError {
 
 	/**
 	 * The Group object.

@@ -28,7 +28,7 @@
 require_once $gfcommon.'forum/ForumStorage.class.php';
 require_once $gfcommon.'forum/ForumPendingStorage.class.php';
 
-class AttachManager extends Error {
+class AttachManager extends FFError {
 
 	var $attachs = array(); //the attached files
 	var $msg_id; //the msg_id that links to the attachs

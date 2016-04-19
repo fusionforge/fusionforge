@@ -23,7 +23,7 @@
  */
 require_once $gfcommon.'include/Error.class.php';
 
-class ArtifactWorkflow extends Error {
+class ArtifactWorkflow extends FFError {
 
 	var $ath;
 	var $artifact_id;

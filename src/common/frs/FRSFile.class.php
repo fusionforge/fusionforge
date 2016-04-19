@@ -51,7 +51,7 @@ function &frsfile_get_object($file_id, $data=false) {
 	return $FRSFILE_OBJ['_'.$file_id.'_'];
 }
 
-class FRSFile extends Error {
+class FRSFile extends FFError {
 
 	/**
 	 * Associative array of data from db.

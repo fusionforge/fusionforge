@@ -47,7 +47,7 @@
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'tracker/ArtifactWorkflow.class.php';
 
-class ArtifactExtraFieldElement extends Error {
+class ArtifactExtraFieldElement extends FFError {
 
 	/**
 	 * The artifact type object.

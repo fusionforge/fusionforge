@@ -35,7 +35,7 @@ require_once 'MailmanList.class.php';
 require_once 'MailmanListDao.class.php';
 require_once 'common/dao/CodendiDataAccess.class.php';
 
-class MailmanListFactory extends Error {
+class MailmanListFactory extends FFError {
 
 	/**
 	 * The Group object.

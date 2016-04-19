@@ -30,7 +30,7 @@
  * Plugin base class
  */
 
-class Plugin extends Error {
+class Plugin extends FFError {
 	var $name;
 	var $hooks;
 	var $id = NULL;

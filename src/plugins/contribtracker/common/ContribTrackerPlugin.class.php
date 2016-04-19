@@ -272,7 +272,7 @@ contributions, along with their authors.");
 	}
 }
 
-class ContribTrackerRole extends Error {
+class ContribTrackerRole extends FFError {
 	var $data_array ;
 
 	function ContribTrackerRole ($id=false) {
@@ -380,7 +380,7 @@ class ContribTrackerRole extends Error {
 
 }
 
-class ContribTrackerLegalStructure extends Error {
+class ContribTrackerLegalStructure extends FFError {
 	var $data_array ;
 
 	function ContribTrackerLegalStructure ($id=false) {
@@ -484,7 +484,7 @@ class ContribTrackerLegalStructure extends Error {
 	function getName () { return $this->data_array['name'] ; }
 }
 
-class ContribTrackerActor extends Error {
+class ContribTrackerActor extends FFError {
 	var $data_array ;
 
 	function ContribTrackerActor ($id=false) {
@@ -621,7 +621,7 @@ class ContribTrackerActor extends Error {
 
 }
 
-class ContribTrackerContribution extends Error {
+class ContribTrackerContribution extends FFError {
 	var $data_array ;
 
 	function ContribTrackerContribution ($id=false) {
@@ -758,7 +758,7 @@ class ContribTrackerContribution extends Error {
 	}
 }
 
-class ContribTrackerParticipation extends Error {
+class ContribTrackerParticipation extends FFError {
 	var $data_array ;
 
 	function ContribTrackerParticipation ($id=false) {

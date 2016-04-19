@@ -84,7 +84,7 @@ function &artifact_get_object($artifact_id,$data=false) {
 	return $ARTIFACT_OBJ["_".$artifact_id."_"];
 }
 
-class Artifact extends Error {
+class Artifact extends FFError {
 
 	/**
 	 * Resource ID.

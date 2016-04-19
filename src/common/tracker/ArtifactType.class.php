@@ -72,7 +72,7 @@ function artifacttype_get_groupid($artifact_type_id) {
 	return $arr['group_id'];
 }
 
-class ArtifactType extends Error {
+class ArtifactType extends FFError {
 
 	/**
 	 * The Group object.

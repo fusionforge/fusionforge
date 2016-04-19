@@ -185,7 +185,7 @@ function group_get_public_active_projects_asc($max_query_limit = -1) {
 }
 
 
-class Group extends Error {
+class Group extends FFError {
 	/**
 	 * Associative array of data from db.
 	 *

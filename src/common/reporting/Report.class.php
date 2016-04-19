@@ -31,7 +31,7 @@ DEFINE('REPORT_TYPE_WEEKLY',2);
 DEFINE('REPORT_TYPE_MONTHLY',3);
 DEFINE('REPORT_TYPE_OA',4);
 
-class Report extends Error {
+class Report extends FFError {
 
 //var $adjust_days=array('Sun'=>0, 'Sat'=>6, 'Fri'=>5, 'Thu'=>4, 'Wed'=>3, 'Tue'=>2, 'Mon'=>1);
 var $adjust_days = array('Sun'=>'0.0', 'Sat'=>1, 'Fri'=>2, 'Thu'=>3, 'Wed'=>4, 'Tue'=>5, 'Mon'=>6);

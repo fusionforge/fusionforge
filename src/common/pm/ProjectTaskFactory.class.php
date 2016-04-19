@@ -27,7 +27,7 @@
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'pm/ProjectTask.class.php';
 
-class ProjectTaskFactory extends Error {
+class ProjectTaskFactory extends FFError {
 
 	/**
 	 * The ProjectGroup object.

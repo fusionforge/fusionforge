@@ -25,7 +25,7 @@
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'forum/Forum.class.php';
 
-class ForumFactory extends Error {
+class ForumFactory extends FFError {
 
 	/**
 	 * The Group object.

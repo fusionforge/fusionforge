@@ -29,7 +29,7 @@
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'docman/Document.class.php';
 
-class DocumentFactory extends Error {
+class DocumentFactory extends FFError {
 
 	/**
 	 * The Group object.

@@ -67,7 +67,7 @@ function projectgroup_get_groupid($group_project_id) {
 	return $arr['group_id'];
 }
 
-class ProjectGroup extends Error {
+class ProjectGroup extends FFError {
 
 	/**
 	 * Associative array of data from db.

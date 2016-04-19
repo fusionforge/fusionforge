@@ -35,7 +35,7 @@ function get_frs_fileprocessortypes() {
 	return $ps;
 }
 
-class FRSFileProcessorType extends Error {
+class FRSFileProcessorType extends FFError {
 
 	/**
 	 * Associative array of data from db.

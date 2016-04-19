@@ -35,7 +35,7 @@ function get_frs_filetypes() {
 	return $ps;
 }
 
-class FRSFileType extends Error {
+class FRSFileType extends FFError {
 
 	/**
 	 * Associative array of data from db.

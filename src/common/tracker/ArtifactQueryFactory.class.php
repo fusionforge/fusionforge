@@ -24,7 +24,7 @@
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'tracker/ArtifactQuery.class.php';
 
-class ArtifactQueryFactory extends Error {
+class ArtifactQueryFactory extends FFError {
 	/**
 	 * The ArtifactType object.
 	 *

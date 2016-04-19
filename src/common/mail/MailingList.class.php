@@ -26,7 +26,7 @@
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'include/SysTasksQ.class.php';
 
-class MailingList extends Error {
+class MailingList extends FFError {
 
 	/**
 	 * Associative array of data from db.

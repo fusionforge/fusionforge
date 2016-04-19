@@ -31,7 +31,7 @@ require_once $gfcommon.'include/MailParser.class.php';
 require_once $gfcommon.'forum/Forum.class.php';
 require_once $gfcommon.'forum/ForumMessage.class.php';
 
-class ForumGateway extends Error {
+class ForumGateway extends FFError {
 	/*
 	 * variables
 	 */

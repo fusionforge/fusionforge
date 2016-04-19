@@ -26,7 +26,7 @@
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'survey/SurveyQuestionFactory.class.php';
 
-class Survey extends Error {
+class Survey extends FFError {
 
 	/**
 	 * Associative array of data from db.

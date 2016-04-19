@@ -30,7 +30,7 @@ require_once $gfcommon.'include/Error.class.php';
 /**
 * A class that manages the project tasks for a specific user
 */
-class ProjectTasksForUser extends Error {
+class ProjectTasksForUser extends FFError {
 
 	/**
 	* The User to whom the tasks belong

@@ -27,7 +27,7 @@ require_once $gfcommon.'include/User.class.php';
 require_once $gfcommon.'tracker/Artifact.class.php';
 require_once $gfcommon.'tracker/ArtifactFromID.class.php';
 
-class ArtifactsForUser extends Error {
+class ArtifactsForUser extends FFError {
 
 	var $User;
 	var $Group;
