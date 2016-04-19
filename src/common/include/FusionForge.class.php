@@ -32,7 +32,7 @@ class FusionForge extends FFError {
 	 *	FusionForge - FusionForge object constructor
 	 */
 	function FusionForge() {
-		$this->Error();
+		parent::__construct();
 
 		$pkg = dirname(dirname(__FILE__)).'/pkginfo.inc.php';
 		if (file_exists($pkg)) {

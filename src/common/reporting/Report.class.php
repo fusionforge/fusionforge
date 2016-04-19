@@ -52,7 +52,7 @@ var $max_month = 24;
 var $rawdates = array();
 
 function Report() {
-	$this->Error();
+	parent::__construct();
 	//
 	//	All reporting action will be done in GMT timezone
 	//

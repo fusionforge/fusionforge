@@ -52,7 +52,7 @@ class ForumGateway extends FFError {
 	var $Message="";
 
 	function ForumGateway() {
-		$this->Error();
+		parent::__construct();
 
 		/* Copy mail message to tmp file */
 		$tmpfile = $this->copyMailTmp();

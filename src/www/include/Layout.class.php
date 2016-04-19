@@ -118,7 +118,7 @@ class Layout extends FFError {
 	 */
 	function Layout() {
 		// parent constructor
-		$this->Error();
+		parent::__construct();
 
 		$this->navigation = new Navigation();
 

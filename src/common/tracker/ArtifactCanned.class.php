@@ -48,7 +48,7 @@ class ArtifactCanned extends FFError {
 	 * @return	ArtifactCanned	success.
 	 */
 	function __construct(&$ArtifactType, $data=false) {
-		$this->Error();
+		parent::__construct();
 
 		// Was ArtifactType legit?
 		if (!$ArtifactType || !is_object($ArtifactType)) {

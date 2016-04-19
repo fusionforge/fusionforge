@@ -62,7 +62,7 @@ class ArtifactExtraField extends FFError {
 	 * @param	bool		$data
 	 */
 	function __construct(&$ArtifactType, $data=false) {
-		$this->Error();
+		parent::__construct();
 
 		//was ArtifactType legit?
 		if (!$ArtifactType || !is_object($ArtifactType)) {

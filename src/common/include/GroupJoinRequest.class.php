@@ -59,7 +59,7 @@ class GroupJoinRequest extends FFError {
 	 * @return	\GroupJoinRequest
 	 */
 	function __construct($Group = false, $user_id = false, $arr = false) {
-		$this->error();
+		parent::__construct();
 
 		if (!$Group || !is_object($Group)) {
 			$this->setError(_('No Valid Group Object'));

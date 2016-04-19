@@ -55,7 +55,7 @@ class RoadmapFactory extends FFError {
 	var $roadmaps;
 
 	function __construct($group) {
-		$this->Error();
+		parent::__construct();
 
 		if (!$group || !is_object($group)) {
 			$this->setError(_('No Valid Group Object'));

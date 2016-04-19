@@ -50,7 +50,7 @@ class TaskBoardRelease extends FFError {
 	 * Constructor
 	 */
 	function TaskBoardRelease($Taskboard, $arr = false) {
-		$this->Error();
+		parent::__construct();
 		if (!$Taskboard || !is_object($Taskboard)) {
 			$this->setError('No Valid Taskboard Object');
 			return false;

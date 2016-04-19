@@ -276,7 +276,7 @@ class ContribTrackerRole extends FFError {
 	var $data_array ;
 
 	function ContribTrackerRole ($id=false) {
-		$this->Error () ;
+		parent::__construct();
 		if (!$id) {
 			return true ;
 		}

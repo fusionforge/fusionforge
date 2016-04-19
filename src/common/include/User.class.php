@@ -232,7 +232,7 @@ class GFUser extends FFError {
 	 * @param bool|int $res The database result set OR array of data
 	 */
 	function __construct($id = false, $res = false) {
-		$this->Error();
+		parent::__construct();
 		if (!$id) {
 			//setting up an empty object
 			//probably going to call create()

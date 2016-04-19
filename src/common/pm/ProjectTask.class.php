@@ -89,7 +89,7 @@ class ProjectTask extends FFError {
 	 * @return	boolean		success.
 	 */
 	function ProjectTask(&$ProjectGroup, $project_task_id=false, $arr=false) {
-		$this->Error();
+		parent::__construct();
 		if (!$ProjectGroup || !is_object($ProjectGroup)) {
 			$this->setError('No Valid ProjectGroup Object');
 			return false;

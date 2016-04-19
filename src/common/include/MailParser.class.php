@@ -29,7 +29,7 @@ class MailParser extends FFError {
 	var $body;
 
 	function MailParser($input_file) {
-		$this->Error();
+		parent::__construct();
 		$size = filesize($input_file);
 		if ($size > $this->max_file_size) {
 			return $this->setError(_("Error: file too large"));

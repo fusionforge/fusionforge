@@ -174,7 +174,7 @@ class ForumHTML extends FFError {
 	var $Forum;
 
 	function ForumHTML(&$Forum) {
-		$this->Error();
+		parent::__construct();
 		if (!$Forum || !is_object($Forum)) {
 			$this->setError(_('Invalid Forum Object'));
 			return false;

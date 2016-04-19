@@ -45,7 +45,7 @@ class FRSFileProcessorType extends FFError {
 	var $data_array;
 
 	function FRSFileProcessorType($processor_id, $name) {
-		$this->Error();
+		parent::__construct();
 		$this->data_array = array( 'processor_id' => $processor_id, 'name' => $name);
 	}
 

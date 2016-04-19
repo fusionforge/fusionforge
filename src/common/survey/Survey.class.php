@@ -61,7 +61,7 @@ class Survey extends FFError {
 	 * @return	\Survey
 	 */
 	function __construct(&$Group, $survey_id = false, $arr = false) {
-		$this->Error();
+		parent::__construct();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(_('No Valid Group Object'));
 			return;

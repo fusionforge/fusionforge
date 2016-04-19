@@ -40,7 +40,7 @@ class SCMFactory extends FFError {
 	 */
 	function SCMFactory() {
 
-		$this->Error();
+		parent::__construct();
 		if (!forge_get_config('use_scm')) {
 			$this->setError('SCMFactory::sys_use_scm');
 			return false;

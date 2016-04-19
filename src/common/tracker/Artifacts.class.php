@@ -56,7 +56,7 @@ class Artifacts extends FFError {
 	 * @param	ArtifactType	$ArtifactType	Artifact Type object.
 	 */
 	function __construct(&$ArtifactType) {
-		$this->Error();
+		parent::__construct();
 
 		$this->ArtifactType =& $ArtifactType;
 

@@ -87,7 +87,7 @@ class DocumentGroup extends FFError {
 	 * @access	public
 	 */
 	function __construct(&$Group, $data = false) {
-		$this->Error();
+		parent::__construct();
 
 		if (!$Group || !is_object($Group)) {
 			$this->setError(_('No Valid Group Object'));

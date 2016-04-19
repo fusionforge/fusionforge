@@ -53,7 +53,7 @@ class TrackerGateway extends FFError {
 	var $Artifact=null;
 
 	function TrackerGateway() {
-		$this->Error();
+		parent::__construct();
 
 		/* Copy mail message to tmp file */
 		$tmpfile = $this->copyMailTmp();

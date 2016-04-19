@@ -54,7 +54,7 @@ class FRSReleaseFactory extends FFError {
 	 * @param	Group	$Group The Group object to which these FRSRs are associated.
 	 */
 	function __construct(& $Group) {
-		$this->Error();
+		parent::__construct();
 
 		if (!$Group || !is_object($Group)) {
 			$this->setError(_('No Valid Group Object'));

@@ -142,7 +142,7 @@ class Artifact extends FFError {
 	 *						ONLY OPTIONAL WHEN YOU PLAN TO IMMEDIATELY CALL ->create()
 	 */
 	function __construct(&$ArtifactType, $data=false) {
-		$this->Error();
+		parent::__construct();
 
 		$this->ArtifactType =& $ArtifactType;
 

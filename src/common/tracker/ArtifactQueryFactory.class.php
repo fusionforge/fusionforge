@@ -45,7 +45,7 @@ class ArtifactQueryFactory extends FFError {
 	 * @param	object	$ArtifactType	The Group object to which this ArtifactQueryFactory is associated
 	 */
 	function __construct(&$ArtifactType) {
-		$this->Error();
+		parent::__construct();
 		if (!$ArtifactType || !is_object($ArtifactType)) {
 			$this->setError('ArtifactQueryFactory: No ArtifactType Object');
 			return;

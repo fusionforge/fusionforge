@@ -49,7 +49,7 @@ class SurveyFactory extends FFError {
 	 * @param	object	$Group	The Group object to which this survey is associated.
 	 */
 	function __construct(&$Group, $skip_check=false) {
-		$this->Error();
+		parent::__construct();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(_('No Valid Group Object'));
 			return;

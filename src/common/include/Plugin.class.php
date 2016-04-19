@@ -42,7 +42,7 @@ class Plugin extends FFError {
 	 * @param	int	$id
 	 */
 	function Plugin($id=0) {
-		$this->Error();
+		parent::__construct();
 		$this->name = false;
 		$this->hooks = array();
 	}

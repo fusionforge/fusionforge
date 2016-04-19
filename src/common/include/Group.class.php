@@ -236,7 +236,7 @@ class Group extends FFError {
 	 * @param	int|bool	$res	Database result from select query OR associative array of all columns.
 	 */
 	function __construct($id = false, $res = false) {
-		$this->Error();
+		parent::__construct();
 		if (!$id) {
 			//setting up an empty object
 			//probably going to call create()

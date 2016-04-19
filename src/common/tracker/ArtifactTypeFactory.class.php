@@ -54,7 +54,7 @@ class ArtifactTypeFactory extends FFError {
 	 * @param	Group	$Group The Group object to which this ArtifactTypeFactory is associated
 	 */
 	function __construct(&$Group, $skip_check=false) {
-		$this->Error();
+		parent::__construct();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(_('No Valid Group Object'));
 			return;

@@ -91,7 +91,7 @@ class ArtifactQuery extends FFError {
 	 * @param	array|bool	$data
 	 */
 	function __construct(&$ArtifactType, $data = false) {
-		$this->Error();
+		parent::__construct();
 
 		// Was ArtifactType legit?
 		if (!$ArtifactType || !is_object($ArtifactType)) {

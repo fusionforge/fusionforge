@@ -158,7 +158,7 @@ class ArtifactType extends FFError {
 	 * @param	array|bool	$arr			The associative array of data.
 	 */
 	function __construct($Group, $artifact_type_id = false, $arr = false) {
-		$this->Error();
+		parent::__construct();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(_('No Valid Group Object'));
 			return;

@@ -98,7 +98,7 @@ class ProjectGroup extends FFError {
 	 * @return	\ProjectGroup
 	 */
 	function ProjectGroup(&$Group, $group_project_id = false, $arr = false) {
-		$this->Error();
+		parent::__construct();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(_('No Valid Group Object'));
 			return;

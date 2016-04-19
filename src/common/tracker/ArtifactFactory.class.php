@@ -70,7 +70,7 @@ class ArtifactFactory extends FFError {
 	 * @param	object	$ArtifactType	The ArtifactType object to which this ArtifactFactory is associated.
 	 */
 	function __construct(&$ArtifactType) {
-		$this->Error();
+		parent::__construct();
 		if (!$ArtifactType || !is_object($ArtifactType)) {
 			$this->setError('ArtifactFactory: No Valid ArtifactType Object');
 			return;

@@ -70,7 +70,7 @@ class ArtifactExtraFieldElement extends FFError {
 	 * @param	array|bool	$data			(all fields from artifact_file_user_vw) OR id from database.
 	 */
 	function __construct(&$ArtifactExtraField,$data=false) {
-		$this->Error();
+		parent::__construct();
 
 		// Was ArtifactExtraField legit?
 		if (!$ArtifactExtraField || !is_object($ArtifactExtraField)) {

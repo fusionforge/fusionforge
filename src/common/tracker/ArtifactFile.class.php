@@ -75,7 +75,7 @@ class ArtifactFile extends FFError {
 	 * @param	array|bool	$data		(all fields from artifact_file_user_vw) OR id from database.
 	 */
 	function __construct(&$Artifact, $data=false) {
-		$this->Error();
+		parent::__construct();
 
 		// Was Artifact legit?
 		if (!$Artifact || !is_object($Artifact)) {

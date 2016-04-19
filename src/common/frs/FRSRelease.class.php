@@ -80,7 +80,7 @@ class FRSRelease extends FFError {
 	 * @return	bool	success.
 	 */
 	function FRSRelease(&$FRSPackage, $release_id = false, $arr = false) {
-		$this->Error();
+		parent::__construct();
 		if (!$FRSPackage || !is_object($FRSPackage)) {
 			$this->setError(_('Invalid FRS Package Object'));
 			return false;

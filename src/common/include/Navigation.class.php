@@ -44,7 +44,7 @@ class Navigation extends FFError {
 	 * Constructor
 	 */
 	function Navigation() {
-		$this->Error();
+		parent::__construct();
 		return true;
 	}
 

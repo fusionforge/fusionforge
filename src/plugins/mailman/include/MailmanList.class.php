@@ -80,7 +80,7 @@ class MailmanList extends FFError {
 		$pm = ProjectManager::instance();
 		$Group = $pm->getProject($group_id);
 		$this->_mailingDAO = new MailmanListDao(CodendiDataAccess::instance());
-		$this->Error();
+		parent::__construct();
 		if (!$Group || !is_object($Group)) {
 			exit_no_group();
 		}

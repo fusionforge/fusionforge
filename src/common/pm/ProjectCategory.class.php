@@ -48,7 +48,7 @@ class ProjectCategory extends FFError {
 	 * @return	boolean		success.
 	 */
 	function ProjectCategory(&$ProjectGroup, $data=false) {
-		$this->Error();
+		parent::__construct();
 
 		//was ProjectGroup legit?
 		if (!$ProjectGroup || !is_object($ProjectGroup)) {

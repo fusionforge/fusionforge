@@ -88,7 +88,7 @@ class TaskBoard extends FFError {
 	var $data_array;
 
 	function TaskBoard($Group, $arr = false) {
-		$this->Error();
+		parent::__construct();
 		if (!$Group || !is_object($Group)) {
 			$this->setError('No Valid Group Object');
 			return false;

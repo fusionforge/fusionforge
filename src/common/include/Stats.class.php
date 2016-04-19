@@ -30,7 +30,7 @@ class Stats extends FFError {
 	 *	Stats - Stats object constructor
 	 */
 	function Stats() {
-		$this->Error();
+		parent::__construct();
 		return true;
 	}
 

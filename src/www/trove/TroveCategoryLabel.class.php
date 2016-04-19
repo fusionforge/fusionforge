@@ -38,7 +38,7 @@ class TroveCategoryLabel extends FFError {
 	var $dataArray = false;
 
 	function TroveCategoryLabel(& $category, $labelId = false, $dataArray = false) {
-		$this->Error();
+		parent::__construct();
 		if (!$category || !is_object($category)) {
 			return false;
 		}

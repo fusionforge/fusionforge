@@ -53,7 +53,7 @@ class ForumMessageFactory extends FFError {
 	 * @return	boolean	success.
 	 */
 	function ForumMessageFactory(&$Forum) {
-		$this->Error();
+		parent::__construct();
 		if (!$Forum || !is_object($Forum)) {
 			$this->setError(_("Invalid group_form_id"));
 			return false;

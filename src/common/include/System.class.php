@@ -28,7 +28,7 @@ class System extends FFError {
 	 *
 	 */
 	function System() {
-		$this->Error();
+		parent::__construct();
 		return true;
 	}
 

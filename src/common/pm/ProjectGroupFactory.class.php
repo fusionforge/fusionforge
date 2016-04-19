@@ -49,7 +49,7 @@ class ProjectGroupFactory extends FFError {
 	 * @return	\ProjectGroupFactory
 	*/
 	function __construct(&$Group, $skip_check=false) {
-		$this->Error();
+		parent::__construct();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(_('No Valid Group Object'));
 			return;

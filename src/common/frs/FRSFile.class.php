@@ -76,7 +76,7 @@ class FRSFile extends FFError {
 	* @return	\FRSFile
 	*/
 	function __construct(&$FRSRelease, $file_id=false, $arr=false) {
-		$this->Error();
+		parent::__construct();
 		if (!$FRSRelease || !is_object($FRSRelease)) {
 			$this->setError(_('Invalid FRS Release Object'));
 			return;

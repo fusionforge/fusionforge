@@ -46,7 +46,7 @@ class ArtifactMessage extends FFError {
 	 * @param	array|bool	$data		(all fields from artifact_history_user_vw) OR id from database.
 	 */
 	function __construct(&$Artifact, $data=false) {
-		$this->Error();
+		parent::__construct();
 
 		//was Artifact legit?
 		if (!$Artifact || !is_object($Artifact)) {

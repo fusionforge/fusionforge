@@ -55,7 +55,7 @@ class ForumMessage extends FFError {
 	 * @return	bool		success.
 	 */
 	function ForumMessage(&$Forum, $msg_id=false, $arr=array(), $pending=false) {
-		$this->Error();
+		parent::__construct();
 		if (!$Forum || !is_object($Forum)) {
 			$this->setError(_('Invalid Forum Object'));
 			return false;

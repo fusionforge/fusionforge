@@ -70,7 +70,7 @@ class SurveyResponseFactory extends FFError {
 	 * @param	object	$question	The Question object to which this survey Response is associated.
 	 */
 	function __construct(&$survey, &$question ) {
-		$this->Error();
+		parent::__construct();
 
 		if (!$survey || !is_object($survey)) {
 			$this->setError(_('No valid Survey Object'));
