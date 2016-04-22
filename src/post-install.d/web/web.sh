@@ -18,7 +18,7 @@
 # with FusionForge; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-source $(forge_get_config source_path)/post-install.d/common/service.inc
+. $(forge_get_config source_path)/post-install.d/common/service.inc
 
 source_path=$(forge_get_config source_path)
 config_path=$(forge_get_config config_path)
@@ -108,7 +108,7 @@ case "$1" in
 	if [ -x /usr/sbin/a2enmod ]; then
 	    a2enmod version 2>/dev/null || true  # opensuse..
 	    a2enmod macro
-	    a2enmod php5
+	    a2enmod php7.0 || a2enmod php5
 	    a2enmod ssl
 	    a2enmod env
 	    a2enmod headers

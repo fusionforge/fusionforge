@@ -15,7 +15,7 @@ Depends:
 Recommends: fusionforge-scm
 
 Package: fusionforge-plugin-scmcvs
-Depends: php5-cli, cvs, viewvc, libphp-snoopy, openbsd-inetd | inet-superserver, update-inetd, libipc-run-perl, liburi-perl, ${perl:Depends}
+Depends: php-cli | php5-cli, cvs, viewvc, libphp-snoopy, openbsd-inetd | inet-superserver, update-inetd, libipc-run-perl, liburi-perl, ${perl:Depends}
 Recommends: fusionforge-scm
 
 Package: fusionforge-plugin-scmdarcs
@@ -27,10 +27,10 @@ Depends: mercurial
 Recommends: fusionforge-scm
 
 Package: fusionforge-plugin-mediawiki
-Depends: php5-cli, mediawiki (>= 1:1.19.1-2~exp2)
+Depends: php-cli | php5-cli, mediawiki (>= 1:1.19.1-2~exp2)
 
 Package: fusionforge-plugin-moinmoin
-Depends: php5-cli, python-moinmoin, python-psycopg2, libapache2-mod-wsgi
+Depends: php-cli | php5-cli, python-moinmoin, python-psycopg2, libapache2-mod-wsgi
 
 Package: fusionforge-plugin-admssw
 Depends: php-http, fusionforge-plugin-doaprdf, libgraphite-php
@@ -42,7 +42,7 @@ Package: fusionforge-plugin-authhttpd
 Depends:
 
 Package: fusionforge-plugin-authldap
-Depends: php5-ldap
+Depends: php-ldap | php5-ldap
 
 Package: fusionforge-plugin-blocks
 Depends:
@@ -72,7 +72,7 @@ Package: fusionforge-plugin-headermenu
 Depends:
 
 Package: fusionforge-plugin-hudson
-Depends: php5-cli
+Depends: php-cli | php5-cli
 
 Package: fusionforge-plugin-message
 Depends:
@@ -86,10 +86,10 @@ Depends:
 # Note: scmhook might need to be manually packaged to allow installing
 # the commit hooks on a separate SCM server
 Package: fusionforge-plugin-scmhook
-Depends: php5-cli, php5-curl, mksh, ${perl:Depends}
+Depends: php-cli | php5-cli, php-curl | php5-curl, mksh, ${perl:Depends}
 
 Package: fusionforge-plugin-sysauthldap
-Depends: php5-ldap
+Depends: php-ldap | php5-ldap
 Recommends: slapd, ldap-utils, ${perl:Depends}
 
 Package: fusionforge-plugin-taskboard

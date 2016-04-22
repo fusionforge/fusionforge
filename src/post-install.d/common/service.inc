@@ -20,7 +20,7 @@
 # Debian-specific behavior for Policy Nazis
 # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=789778
 if [ -e /etc/debian_version ]; then
-    function service {
+    service () {
         invoke-rc.d $@
         ret=$?
         if [ $ret -ne 0 ]; then

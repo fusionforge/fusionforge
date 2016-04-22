@@ -18,7 +18,7 @@
 # with FusionForge; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-source $(forge_get_config source_path)/post-install.d/common/service.inc
+. $(forge_get_config source_path)/post-install.d/common/service.inc
 
 database_host=$(forge_get_config database_host)
 database_port=$(forge_get_config database_port)

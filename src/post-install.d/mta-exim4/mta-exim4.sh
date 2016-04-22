@@ -22,7 +22,7 @@
 
 set -e
 
-source $(forge_get_config source_path)/post-install.d/common/service.inc
+. $(forge_get_config source_path)/post-install.d/common/service.inc
 
 ####
 # Handle the three configuration types (unsplit, split, manual)
