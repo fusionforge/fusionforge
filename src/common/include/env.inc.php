@@ -100,6 +100,7 @@ $include_path = join(PATH_SEPARATOR,
 		'/usr/share/php',
 		'/usr/share/php/htmlpurifier',
 		'/usr/share/pear',
+		'/usr/share/php/PEAR',
 		'/usr/share/php5/PEAR',
 	)
 );

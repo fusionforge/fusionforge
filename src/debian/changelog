@@ -1,9 +1,39 @@
-fusionforge (6.0.4-0) UNRELEASED; urgency=medium
+fusionforge (6.0.4-2) unstable; urgency=medium
+
+  * More packaging fixes for php7.0:
+  * Bug fix: "PHP 7.0 Transition", thanks to Ondřej Surý (Closes:
+    #821486).
+  * Bug fix: "PHP 7.0 Transition", thanks to Ondřej Surý (Closes:
+    #821487).
+  * Bug fix: "PHP 7.0 Transition", thanks to Ondřej Surý (Closes:
+    #821488).
+  * Bug fix: "PHP 7.0 Transition", thanks to Ondřej Surý (Closes:
+    #821489).
+  * Bug fix: "PHP 7.0 Transition", thanks to Ondřej Surý (Closes:
+    #821490).
+  * Bug fix: "PHP 7.0 Transition", thanks to Ondřej Surý (Closes:
+    #821491).
+  * Bug fix: "PHP 7.0 Transition", thanks to Ondřej Surý (Closes:
+    #821492).
+  * Bug fix: "PHP 7.0 Transition", thanks to Ondřej Surý (Closes:
+    #821493).
+  * Bug fix: "PHP 7.0 Transition", thanks to Ondřej Surý (Closes:
+    #821494).
+  * Bug fix: "PHP 7.0 Transition", thanks to Ondřej Surý (Closes:
+    #821495).
+  * Bug fix: "PHP 7.0 Transition", thanks to Ondřej Surý (Closes:
+    #821496).
+  * Bug fix: "PHP 7.0 Transition", thanks to Ondřej Surý (Closes:
+    #821497).
+
+ -- Roland Mas <lolando@debian.org>  Fri, 22 Apr 2016 14:51:08 +0200
+
+fusionforge (6.0.4-1) unstable; urgency=medium
 
   * New upstream release.
   * Update packaging to work with php7.0 (not only php5).
 
- -- Roland Mas <lolando@debian.org>  Fri, 22 Apr 2016 13:17:59 +0200
+ -- Roland Mas <lolando@debian.org>  Fri, 22 Apr 2016 13:49:15 +0200
 
 fusionforge (6.0.3+20151023-1) unstable; urgency=medium
 

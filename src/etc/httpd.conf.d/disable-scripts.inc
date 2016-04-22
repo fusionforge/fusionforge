@@ -20,3 +20,8 @@ RequestHeader unset Cookie
 <IfModule mod_php5.c>
   php_admin_flag engine off
 </IfModule>
+
+# Disable PHP7 explicitly for security (CVE-2014-0468)
+<IfModule mod_php7.c>
+  php_admin_flag engine off
+</IfModule>
