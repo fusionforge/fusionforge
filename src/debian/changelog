@@ -1,4 +1,4 @@
-fusionforge (6.0.4-2) unstable; urgency=medium
+fusionforge (6.0.4-1+) UNRELEASED; urgency=medium
 
   * More packaging fixes for php7.0:
   * Bug fix: "PHP 7.0 Transition", thanks to Ondřej Surý (Closes:
@@ -26,7 +26,7 @@ fusionforge (6.0.4-2) unstable; urgency=medium
   * Bug fix: "PHP 7.0 Transition", thanks to Ondřej Surý (Closes:
     #821497).
 
- -- Roland Mas <lolando@debian.org>  Fri, 22 Apr 2016 14:51:08 +0200
+ -- Roland Mas <lolando@debian.org>  Fri, 22 Apr 2016 15:01:03 +0200
 
 fusionforge (6.0.4-1) unstable; urgency=medium
 
