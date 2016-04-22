@@ -20,7 +20,7 @@
 
 set -e
 
-source $(forge_get_config source_path)/post-install.d/common/service.inc
+. $(forge_get_config source_path)/post-install.d/common/service.inc
 
 db_name=$(forge_get_config database_name)
 db_user=$(forge_get_config database_user)
