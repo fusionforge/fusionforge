@@ -44,5 +44,3 @@ if (!$res) {
 }
 
 cron_entry(12,$err);
-
-?>

@@ -321,5 +321,3 @@ if ($listforum->isError()) {
 } else {
 //	DBG("Success!!");
 }
-
-?>

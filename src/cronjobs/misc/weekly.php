@@ -59,5 +59,3 @@ cron_entry(29, $params['output']);
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

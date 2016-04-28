@@ -104,5 +104,3 @@ if (db_error()) {
 }
 
 cron_entry(7,$err);
-
-?>

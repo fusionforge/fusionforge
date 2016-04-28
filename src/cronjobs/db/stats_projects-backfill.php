@@ -47,5 +47,3 @@ while($i < 515) {
 
 	project_stats_day($year,$month,$day);
 }
-
-?>

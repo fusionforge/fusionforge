@@ -271,5 +271,3 @@ db_drop_table_if_exists("project_metric_weekly_tmp1");
 db_drop_sequence_if_exists("project_metric_week_ranking_seq");
 
 cron_entry(8,$err);
-
-?>

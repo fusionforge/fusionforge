@@ -47,5 +47,3 @@ db_commit();
 
 $err .= "Done: ".date('Ymd H:i').' - '.db_error();
 cron_entry(20,$err);
-
-?>

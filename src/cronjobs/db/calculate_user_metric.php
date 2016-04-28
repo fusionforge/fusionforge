@@ -286,5 +286,3 @@ $err .= db_error();
 cron_entry(1,$err);
 
 db_commit();
-
-?>

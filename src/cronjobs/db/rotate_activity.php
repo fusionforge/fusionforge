@@ -38,5 +38,3 @@ db_commit();
 if (!$err) $err = 'Done';
 
 cron_entry(10,$err);
-
-?>
