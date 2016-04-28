@@ -57,8 +57,8 @@ if (!$received_begin || $received_begin==0) {
 	}
 }
 if ($begin < 0) {
-    $begin = 0;
-    $rendered_begin = strftime($date_format, $begin);
+	$begin = 0;
+	$rendered_begin = strftime($date_format, $begin);
 }
 
 if (!$received_end || $received_end == 0) {
