@@ -47,21 +47,21 @@ $result = db_query_params ('SELECT user_id, email FROM users WHERE status=$1 and
 				  $then));
 if (db_numrows($result)) {
 
-  // Plugins subsystem
-  require_once 'common/include/Plugin.class.php';
-  require_once 'common/include/PluginManager.class.php';
+	// Plugins subsystem
+	require_once 'common/include/Plugin.class.php';
+	require_once 'common/include/PluginManager.class.php';
 
-  // SCM-specific plugins subsystem
-  require_once 'common/include/SCMPlugin.class.php';
+	// SCM-specific plugins subsystem
+	require_once 'common/include/SCMPlugin.class.php';
 
-  setup_plugin_manager () ;
+	setup_plugin_manager () ;
 
-  while ($row = db_fetch_array($result)) {
-    $hook_params = array();
-    $hook_params['user'] = user_get_object($row['user_id']);
-    $hook_params['user_id'] = $row['user_id'];
-    plugin_hook ("user_delete", $hook_params);
-  }
+	while ($row = db_fetch_array($result)) {
+		$hook_params = array();
+		$hook_params['user'] = user_get_object($row['user_id']);
+		$hook_params['user_id'] = $row['user_id'];
+		plugin_hook ("user_delete", $hook_params);
+	}
 }
 
 db_query_params ('DELETE FROM users WHERE status=$1 and add_date < $2',
