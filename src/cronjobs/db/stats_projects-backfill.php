@@ -21,7 +21,7 @@
 
 require dirname(__FILE__).'/../../common/include/env.inc.php';
 require_once $gfcommon.'include/pre.php';
-require_once 'cronjobs/stats_projects.inc';
+require_once 'cronjobs/db/stats_projects.inc';
 
 $i=0;
 
