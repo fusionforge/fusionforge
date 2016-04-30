@@ -360,7 +360,7 @@ echo $HTML->closeForm();
 						$docmanerror = 1;
 					}
 					$dg = documentgroup_get_object($arr['ref_id'], $arr['group_id']);
-					if (!$dg->getPath(true, false)) {
+					if (!$dg || $dg->isError() || !$dg->getPath(true, false)) {
 						$docmanerror = 1;
 					}
 					$icon = html_image('ic/docman16b.png', '', '', array('alt'=>_('Documents')));
@@ -368,7 +368,7 @@ echo $HTML->closeForm();
 					break;
 				}
 				case 'docgroupnew': {
-					$dg = documentgroup_get_object($arr['ref_id'], $arr['group_id']);
+					$dg = documentgroup_get_object($arr['subref_id'], $arr['group_id']);
 					if (!$dg || $dg->isError() || !$dg->getPath(true, false)) {
 						$docmanerror = 1;
 					}
