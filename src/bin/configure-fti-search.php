@@ -92,9 +92,8 @@ foreach ($config['queries'] as $q) {
 	query_and_exit_if_error ($q);
 }
 query_and_exit_if_error('SELECT to_tsvector($1,$2)',array('fusionforge','Hôtels camping forge Iıİi'));
+query_and_exit_if_error("SELECT rebuild_fti_indices()");
 db_commit();
-
-system($fusionforge_basedir.'/bin/rebuild-fti-indices.php');
 
 // Local Variables:
 // mode: php
