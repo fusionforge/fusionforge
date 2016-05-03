@@ -70,7 +70,7 @@ cat <<EOF > $PGPASSFILE
 $database_host:$database_port:$database_name:$database_user:$database_password
 EOF
 
-su - postgres -c psql <<EOF >/dev/null
+su - postgres -c "psql $database_name" <<EOF
 CREATE EXTENSION IF NOT EXISTS unaccent;
 EOF
 
