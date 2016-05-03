@@ -15,6 +15,8 @@ FusionForge 6.X:
 * Plugin AuthBuiltin: add captcha after 3 attempts with the same login [#795] (TrivialDev)
 * Widget MySystasks: new widget for user to display systasks perform on user projects (TrivialDev)
 * Widget ProjectScmStats: new widget for project to display SCM stats (TrivialDev)
+* Search: index project tags and use them for search (Roland Mas)
+* Search: provide language-specific settings for better indexation/search (Roland Mas)
 
 FusionForge 6.0.4:
 * Account Management System: fix sysCreateUser for UNIX: unix_gid dropped (TrivialDev)
