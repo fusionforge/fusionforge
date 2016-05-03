@@ -658,7 +658,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->clickAndWait("//input[@name='submit']");
 
 		// In "simple" configuration, no normalization occurs beyond capitalization
-		$this->runCommand(dirname(__FILE__).'/../../src/bin/configure-fti-search.php simple');
+		$this->runCommand(dirname(__FILE__).'/../../../src/bin/configure-fti-search.php simple');
 		$this->open(ROOT) ;
 		$this->type("//input[@name='words']", "coded");
 		$this->clickAndWait("//input[@name='Search']");
@@ -675,7 +675,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->assertFalse($this->isTextPresent("projectc"));
 		
 		// In English, accents are removed and coding==coded
-		$this->runCommand(dirname(__FILE__).'/../../src/bin/configure-fti-search.php english');
+		$this->runCommand(dirname(__FILE__).'/../../../src/bin/configure-fti-search.php english');
 		$this->open(ROOT) ;
 		$this->type("//input[@name='words']", "coded");
 		$this->clickAndWait("//input[@name='Search']");
@@ -692,7 +692,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("projectc"));
 		
 		// In French, accents are removed but coding==coded
-		$this->runCommand(dirname(__FILE__).'/../../src/bin/configure-fti-search.php french');
+		$this->runCommand(dirname(__FILE__).'/../../../src/bin/configure-fti-search.php french');
 		$this->open(ROOT) ;
 		$this->type("//input[@name='words']", "coded");
 		$this->clickAndWait("//input[@name='Search']");
