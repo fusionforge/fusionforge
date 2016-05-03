@@ -653,8 +653,8 @@ class Search extends FForge_SeleniumTestCase
 		// Also test project search based on tags
 		$this->createAndGoto('projectc');
 		$this->click("link=Admin");
-		$this->type("//input[@name='form_shortdesc'","Coding hôtels Iiİı");
-		$this->type("//input[@name='form_tags'","Goldorak");
+		$this->type("//input[@name='form_shortdesc']","Coding hôtels Iiİı");
+		$this->type("//input[@name='form_tags']","Goldorak");
 		$this->clickAndWait("//input[@name='submit']");
 
 		// In "simple" configuration, no normalization occurs beyond capitalization
