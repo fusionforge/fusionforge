@@ -31,8 +31,10 @@ fusionforge (6.0.4-1+) UNRELEASED; urgency=medium
     #821496).
   * Bug fix: "PHP 7.0 Transition", thanks to Ondřej Surý (Closes:
     #821497).
+  * Fixed Lintian warning (fusionforge-web dependency on virtual package
+    only).
 
- -- Roland Mas <lolando@debian.org>  Fri, 22 Apr 2016 15:01:03 +0200
+ -- Roland Mas <lolando@debian.org>  Mon, 02 May 2016 10:57:13 +0200
 
 fusionforge (6.0.4-1) unstable; urgency=medium
 
