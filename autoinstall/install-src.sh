@@ -31,7 +31,7 @@ if [ -e /etc/debian_version ]; then
     apt-get update
     apt-get install -y make gettext php5-cli php5-pgsql php-htmlpurifier php-http \
 	libapache2-mpm-itk libapache2-mod-svn \
-	apache2 postgresql libnss-pgsql2 unscd \
+	apache2 postgresql postgresql-contrib libnss-pgsql2 unscd \
 	subversion viewvc python-pycurl git xinetd \
 	mediawiki \
 	python-moinmoin libapache2-mod-wsgi python-psycopg2 \
