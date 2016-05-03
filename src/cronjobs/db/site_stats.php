@@ -134,5 +134,3 @@ include 'cronjobs/db/stats_projects.inc';
 project_stats_day($year,$month,$day);
 
 cron_entry(11,$err);
-
-?>

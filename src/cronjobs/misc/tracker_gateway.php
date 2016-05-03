@@ -287,5 +287,3 @@ if ($myTrackerGateway->isError()) {
 } else {
 //	DBG("Success!!");
 }
-
-?>

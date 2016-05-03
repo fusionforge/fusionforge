@@ -205,5 +205,3 @@ if ($err != "")
 	$err = "Error" . $err;
 }
 cron_entry (16, $err);
-
-?>

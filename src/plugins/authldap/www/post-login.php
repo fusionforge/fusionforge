@@ -72,11 +72,11 @@ if ($login) {
 		exit_form_double_submit();
 	}
 	$test = $plugin->checkLDAPCredentials(strtolower($form_loginname),$form_pw);
-    $u = user_get_object_by_name($form_loginname);
-    $user_is_okay = false;
-    if ($u == NULL or $u->getStatus() == 'A') {
-            $user_is_okay=true;
-    }
+	$u = user_get_object_by_name($form_loginname);
+	$user_is_okay = false;
+	if ($u == NULL or $u->getStatus() == 'A') {
+		$user_is_okay=true;
+	}
 	if ($test == FORGE_AUTH_AUTHORITATIVE_ACCEPT && $user_is_okay) {
 		if ($plugin->isSufficient()) {
 			$plugin->startSession($form_loginname);
@@ -93,9 +93,9 @@ if ($login) {
 			$warning_msg = _('Missing Password Or User Name');
 		}
 	} elseif ($u != NULL && ! $u->isError() && $u->getStatus() != 'A') {
-            $warning_msg = _('User is inactive');
-    } else {
-            $warning_msg = _('LDAP server unreachable');
+		$warning_msg = _('User is inactive');
+	} else {
+		$warning_msg = _('LDAP server unreachable');
 	}
 }
 
