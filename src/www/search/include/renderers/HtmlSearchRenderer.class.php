@@ -181,17 +181,7 @@ class HtmlSearchRenderer extends SearchRenderer {
 	 * @return string text with keywords highlighted
 	 */
 	function highlightTargetWords($text) {
-		if (empty($text)) {
-			return '&nbsp;';
-		}
-		$words = $this->searchQuery->getWords();
-		foreach ($this->searchQuery->getPhrases() as $p) {
-			foreach (explode(' ',$p) as $w) {
-				$words[] = $w;
-			}
-		}
-		$regexp = implode('|',$words);
-		return preg_replace('/('.str_replace('/', '\/', $regexp).')/i','<span class="selected">\1</span>', $text);
+		return preg_replace('/<b>/','<b class="selected">', $text);
 	}
 
 	/**
