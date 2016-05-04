@@ -571,11 +571,16 @@ some control over it to the project's administrator.");
 
 			// Grab&parse commit log
 			$protocol = forge_get_config('use_ssl', 'scmsvn') ? 'https://' : 'http://';
-			$u = session_get_user();
-			if ($project->enableAnonSCM())
+			if ($project->enableAnonSCM()) {
 				$server_script = '/anonscm/svnlog';
-			else
-				$server_script = '/authscm/'.$u->getUnixName().'/svnlog';
+			} else {
+				$u = session_get_user();
+				if ($u && !$u->isError()) {
+					$server_script = '/authscm/'.$u->getUnixName().'/svnlog';
+				} else {
+					return false;
+				}
+			}
 			$script_url = $protocol . forge_get_config('scm_host')
 				. $server_script
 				.'?unix_group_name='.$project->getUnixName()

@@ -18,6 +18,9 @@ FusionForge 6.X:
 * Search: index project tags and use them for search (Roland Mas)
 * Search: provide language-specific settings for better indexation/search (Roland Mas)
 
+FusionForge 6.0.5:
+* Plugin SCM SVN: fix activity when SVN repository is private [#813] (TrivialDev)
+s
 FusionForge 6.0.4:
 * Account Management System: fix sysCreateUser for UNIX: unix_gid dropped (TrivialDev)
 * Accounts: do not accept digits-only user and group names, to avoid confusion with UID/GID in system commands (Inria)
@@ -31,7 +34,7 @@ FusionForge 6.0.4:
 * FRS: frs latest zip migration script hardening (TrivialDev)
 * MTA-Exim4: restart exim4 on install
 * News: pending site news e-mail reminder: properly filter out private projects (Inria)
-* Plugin cvstracker: fix permission issues 
+* Plugin cvstracker: fix permission issues
 * Plugin SCM: fix another race condition when creating project with SCM selected (Inria)
 * Plugin SCM Git: improve user matching when computing stats, support git .mailmap (Inria)
 * Plugin SCM Git: fix history browsing. Merge Patch from Sieu Truc [#802] (TrivialDev)
