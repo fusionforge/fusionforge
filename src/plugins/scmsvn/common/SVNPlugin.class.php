@@ -5,7 +5,7 @@
  * Copyright 2003-2010, Roland Mas, Franck Villaume
  * Copyright 2004, GForge, LLC
  * Copyright 2010, Alain Peyrat <aljeux@free.fr>
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2014,2016, Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of National Education
  *
  * This file is part of FusionForge.
@@ -563,18 +563,23 @@ some control over it to the project's administrator.");
 		if (in_array('scmsvn', $params['show']) || (count($params['show']) < 1)) {
 			$start_time = $params['begin'];
 			$end_time = $params['end'];
-			
+
 			$xml_parser = xml_parser_create();
 			xml_set_element_handler($xml_parser, "SVNPluginStartElement", "SVNPluginEndElement");
 			xml_set_character_data_handler($xml_parser, "SVNPluginCharData");
 
 			// Grab&parse commit log
 			$protocol = forge_get_config('use_ssl', 'scmsvn') ? 'https://' : 'http://';
-			$u = session_get_user();
-			if ($project->enableAnonSCM())
+			if ($project->enableAnonSCM()) {
 				$server_script = '/anonscm/svnlog';
-			else
-				$server_script = '/authscm/'.$u->getUnixName().'/svnlog';
+			} else {
+				$u = session_get_user();
+				if ($u && !$u->isError()) {
+					$server_script = '/authscm/'.$u->getUnixName().'/svnlog';
+				} else {
+					return false;
+				}
+			}
 			$script_url = $protocol . forge_get_config('scm_host')
 				. $server_script
 				.'?unix_group_name='.$project->getUnixName()

@@ -1,3 +1,6 @@
+FusionForge 6.0.5:
+* Plugin SCM SVN: fix activity when SVN repository is private [#813] (TrivialDev)
+
 FusionForge 6.0.4:
 * Account Management System: fix sysCreateUser for UNIX: unix_gid dropped (TrivialDev)
 * Accounts: do not accept digits-only user and group names, to avoid confusion with UID/GID in system commands (Inria)
