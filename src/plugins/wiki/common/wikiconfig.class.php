@@ -21,7 +21,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-class WikiConfig extends Error {
+class WikiConfig extends FFError {
     var $group_id;
 
     var $default_config = array(

@@ -46,5 +46,3 @@ if (db_error()) {
 }
 
 cron_entry(9,$err);
-
-?>

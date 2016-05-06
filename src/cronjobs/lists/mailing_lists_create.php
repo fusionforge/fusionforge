@@ -345,5 +345,3 @@ for($k = 0; $k < $rows; $k++) {
 }
 
 cron_entry(18, $err);
-
-?>

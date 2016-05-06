@@ -35,7 +35,7 @@ require_once $gfcommon.'include/MailParser.class.php';
 require_once $gfcommon.'tracker/Artifact.class.php';
 require_once $gfcommon.'tracker/ArtifactFactory.class.php';
 
-class TrackerGateway extends Error {
+class TrackerGateway extends FFError {
 	/*
 	 * variables
 	 */
@@ -53,7 +53,7 @@ class TrackerGateway extends Error {
 	var $Artifact=null;
 
 	function TrackerGateway() {
-		$this->Error();
+		parent::__construct();
 
 		/* Copy mail message to tmp file */
 		$tmpfile = $this->copyMailTmp();
@@ -287,5 +287,3 @@ if ($myTrackerGateway->isError()) {
 } else {
 //	DBG("Success!!");
 }
-
-?>

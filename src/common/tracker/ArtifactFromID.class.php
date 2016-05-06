@@ -21,9 +21,9 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 
-class ArtifactFromID extends Error {
+class ArtifactFromID extends FFError {
 
 	var $Group;
 	var $ArtifactType;

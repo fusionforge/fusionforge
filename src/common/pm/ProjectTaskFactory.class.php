@@ -24,10 +24,10 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 require_once $gfcommon.'pm/ProjectTask.class.php';
 
-class ProjectTaskFactory extends Error {
+class ProjectTaskFactory extends FFError {
 
 	/**
 	 * The ProjectGroup object.
@@ -59,7 +59,7 @@ class ProjectTaskFactory extends Error {
 	 * @return	boolean		success.
 	 */
 	function ProjectTaskFactory(&$ProjectGroup) {
-		$this->Error();
+		parent::__construct();
 		if (!$ProjectGroup || !is_object($ProjectGroup)) {
 			$this->setError('ProjectTask: No Valid ProjectGroup Object');
 			return false;

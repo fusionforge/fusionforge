@@ -56,5 +56,3 @@ while ($data = db_fetch_array ($res)) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

@@ -77,4 +77,3 @@ function execute($cmd)
         // print_debug ("res= ".$res);
         return $res;
 }
-?>

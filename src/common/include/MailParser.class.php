@@ -20,16 +20,16 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 
-class MailParser extends Error {
+class MailParser extends FFError {
 
 	var $max_file_size=2000000;
 	var $headers;
 	var $body;
 
 	function MailParser($input_file) {
-		$this->Error();
+		parent::__construct();
 		$size = filesize($input_file);
 		if ($size > $this->max_file_size) {
 			return $this->setError(_("Error: file too large"));

@@ -123,4 +123,3 @@ for ($i=0; $i<db_numrows($res);$i++) {
 }
 
 cron_entry(22,$err);
-?>

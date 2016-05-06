@@ -23,7 +23,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 
 /**
  * Factory method which creates a FRSFile from an file id
@@ -51,7 +51,7 @@ function &frsfile_get_object($file_id, $data=false) {
 	return $FRSFILE_OBJ['_'.$file_id.'_'];
 }
 
-class FRSFile extends Error {
+class FRSFile extends FFError {
 
 	/**
 	 * Associative array of data from db.
@@ -76,7 +76,7 @@ class FRSFile extends Error {
 	* @return	\FRSFile
 	*/
 	function __construct(&$FRSRelease, $file_id=false, $arr=false) {
-		$this->Error();
+		parent::__construct();
 		if (!$FRSRelease || !is_object($FRSRelease)) {
 			$this->setError(_('Invalid FRS Release Object'));
 			return;

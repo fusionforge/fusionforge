@@ -27,7 +27,7 @@
 
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 require_once $gfcommon.'pm/ProjectTask.class.php';
 require_once $gfcommon.'pm/ProjectGroup.class.php';
 require_once $gfcommon.'include/Group.class.php';

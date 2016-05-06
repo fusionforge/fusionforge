@@ -31,7 +31,7 @@ require_once $gfcommon.'include/MailParser.class.php';
 require_once $gfcommon.'forum/Forum.class.php';
 require_once $gfcommon.'forum/ForumMessage.class.php';
 
-class ForumGateway extends Error {
+class ForumGateway extends FFError {
 	/*
 	 * variables
 	 */
@@ -52,7 +52,7 @@ class ForumGateway extends Error {
 	var $Message="";
 
 	function ForumGateway() {
-		$this->Error();
+		parent::__construct();
 
 		/* Copy mail message to tmp file */
 		$tmpfile = $this->copyMailTmp();
@@ -321,5 +321,3 @@ if ($listforum->isError()) {
 } else {
 //	DBG("Success!!");
 }
-
-?>

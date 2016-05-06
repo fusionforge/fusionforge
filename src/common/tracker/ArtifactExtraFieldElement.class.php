@@ -44,10 +44,10 @@
  * ALONE BASIS."
  */
 
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 require_once $gfcommon.'tracker/ArtifactWorkflow.class.php';
 
-class ArtifactExtraFieldElement extends Error {
+class ArtifactExtraFieldElement extends FFError {
 
 	/**
 	 * The artifact type object.
@@ -70,7 +70,7 @@ class ArtifactExtraFieldElement extends Error {
 	 * @param	array|bool	$data			(all fields from artifact_file_user_vw) OR id from database.
 	 */
 	function __construct(&$ArtifactExtraField,$data=false) {
-		$this->Error();
+		parent::__construct();
 
 		// Was ArtifactExtraField legit?
 		if (!$ArtifactExtraField || !is_object($ArtifactExtraField)) {

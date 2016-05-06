@@ -21,22 +21,5 @@
 
 require (dirname(__FILE__).'/../common/include/env.inc.php');
 require_once $gfcommon."include/pre.php";
-$f = array(
-	'groups' => 'short_description',
-	'artifact' => 'summary',
-	'artifact_message' => 'body',
-	'doc_data' => 'title',
-	'forum' => 'subject',
-	'frs_file' => 'filename',
-	'frs_release' => 'name',
-	'news_bytes' => 'summary',
-	'project_task' => 'summary',
-	'project_messages' => 'body',
-	'skills_data' => 'keywords',
-	'users' => 'realname',
-);
-
-foreach ($f as $table => $column) {
-	echo "Regenerating FTI indices for table $table.\n";
-	$res = db_query_params ("UPDATE $table SET $column=$column");
-}
+echo "Regenerating all FTI indices.\n";
+$res = db_query_params ("SELECT rebuild_fti_indices()");

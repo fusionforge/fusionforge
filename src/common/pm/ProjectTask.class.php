@@ -25,7 +25,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/FFError.class.php';
 require_once $gfcommon.'include/Validator.class.php';
 
 function projecttask_get_object($project_task_id,$data=false) {
@@ -61,7 +61,7 @@ define('PM_LINK_START_FINISH','SF');
 define('PM_LINK_FINISH_START','FS');
 define('PM_LINK_FINISH_FINISH','FF');
 
-class ProjectTask extends Error {
+class ProjectTask extends FFError {
 
 	/**
 	 * Associative array of data from db.
@@ -89,7 +89,7 @@ class ProjectTask extends Error {
 	 * @return	boolean		success.
 	 */
 	function ProjectTask(&$ProjectGroup, $project_task_id=false, $arr=false) {
-		$this->Error();
+		parent::__construct();
 		if (!$ProjectGroup || !is_object($ProjectGroup)) {
 			$this->setError('No Valid ProjectGroup Object');
 			return false;

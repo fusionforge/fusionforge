@@ -22,7 +22,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-class PluginManager extends Error {
+class PluginManager extends FFError {
 	var $plugins_objects;
 	var $plugins_to_hooks;
 	var $hooks_to_plugins;
@@ -33,7 +33,7 @@ class PluginManager extends Error {
 	 *
 	 */
 	function PluginManager() {
-		$this->Error();
+		parent::__construct();
 		$this->plugins_objects = array();
 		$this->plugins_to_hooks = array();
 		$this->hooks_to_plugins = array();
