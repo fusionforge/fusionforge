@@ -44,7 +44,7 @@ else
     backports_rpm
     yum --enablerepo=epel install -y httpd-itk
     yum install -y gettext php-cli php-pgsql php-process php-mbstring php-pear-HTTP \
-	httpd mod_dav_svn mod_ssl postgresql-server nscd \
+	httpd mod_dav_svn mod_ssl postgresql-server postgresql-contrib nscd \
 	subversion viewvc python-pycurl git gitweb xinetd \
 	moin mod_wsgi python-psycopg2 \
 	unoconv poppler-utils
