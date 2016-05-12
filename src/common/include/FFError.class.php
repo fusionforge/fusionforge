@@ -56,12 +56,10 @@ class FFError {
 	var $error_code;
 
 	/**
-	 * Error() - Constructor.
 	 * Constructor for the Error class.
 	 * Sets the error state to false.
-	 *
 	 */
-	function FFError() {
+	function __construct() {
 		//nothing
 		$this->error_state=false;
 		$this->error_code=ERROR__NO_ERROR;
