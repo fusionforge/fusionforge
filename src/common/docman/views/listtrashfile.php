@@ -72,10 +72,11 @@ $d_arr =& $df->getDocuments();
 
 $nested_docs = array();
 $DocGroupName = 0;
-
+$dgpath = '';
 if ($dirid) {
 	$ndg = documentgroup_get_object($dirid, $g->getID());
 	$DocGroupName = $ndg->getName();
+	$dgpath = $ndg->getPath(true, false);
 	if (!$DocGroupName) {
 		$error_msg = $g->getErrorMessage();
 		session_redirect($baseredirecturl);
@@ -129,14 +130,21 @@ jQuery(document).ready(function() {
 echo html_ac(html_ap() - 1);
 
 if ($DocGroupName) {
-	$content = _('Document Folder')._(': ').html_e('i', array(), $DocGroupName, false).'&nbsp;';
-	if ($DocGroupName != '.trash') {
-		$content .= util_make_link('#', $HTML->getConfigurePic(_('Edit this folder'), 'edit'), array('id' => 'docman-editdirectory', 'onclick' => 'javascript:controllerListTrash.toggleEditDirectoryView()'), true);
-		$content .= util_make_link($redirecturl.'&action=deldir', $HTML->getRemovePic(_('Delete permanently this folder and his content.'), 'deldir'), array('id' => 'docman-deletedirectory'));
+	$headerPath = '';
+	if ($childgroup_id) {
+		$headerPath .= _('Subproject')._(': ').util_make_link('/docman/?group_id='.$g->getID(), $g->getPublicName()).'::';
 	}
-	echo html_e('h3', array('class' => 'docman_h3'), $content, false);
+	$generalpath = $dgpath.'/'.$DocGroupName;
+	$generalpath = preg_replace('/\/\//','/', $generalpath);
+	$headerPath .= html_e('i', array(), $generalpath, false).'&nbsp;';
+	echo html_e('h2', array('class' => 'docman_h2'), $headerPath, false);
+	if ($DocGroupName != '.trash') {
+		echo util_make_link('#', $HTML->getConfigurePic(_('Edit this folder'), 'edit'), array('id' => 'docman-editdirectory', 'onclick' => 'javascript:controllerListTrash.toggleEditDirectoryView()'), true);
+		echo util_make_link($redirecturl.'&action=deldir', $HTML->getRemovePic(_('Delete permanently this folder and his content.'), 'deldir'), array('id' => 'docman-deletedirectory'));
+	}
+
 	echo html_ao('div', array('class' => 'docman_div_include hide', 'id' => 'editdocgroup'));
-	echo html_e('h4', array('class' => 'docman_h4'), _('Edit this folder'), false);
+	echo html_e('h3', array('class' => 'docman_h3'), _('Edit this folder'), false);
 	include ($gfcommon.'docman/views/editdocgroup.php');
 	echo html_ac(html_ap() - 1);
 }
