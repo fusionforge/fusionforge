@@ -1545,7 +1545,7 @@ if (isset($params['group']) && $params['group']) {
 				$html_content .= $this->closeForm();
 			}
 		}
-		return html_e('span', $htmlAttr, $html_content);
+		return html_e('span', $htmlAttr, $html_content, false);
 	}
 
 	/**
