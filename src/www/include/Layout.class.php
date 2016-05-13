@@ -1526,8 +1526,9 @@ if (isset($params['group']) && $params['group']) {
 	 * @param	integer	$totalElements	total number of this type of Elements in the forge
 	 * @param	integer	$maxElements	max number of Elements to display
 	 * @param	string	$actionUrl	next / prev Url to click
+	 * @param	array	$htmlAttr	html attributes to set.
 	 */
-	function paging_top($start = 0, $paging = 25, $totalElements = 0, $maxElements = 0, $actionUrl = '/') {
+	function paging_top($start = 0, $paging = 25, $totalElements = 0, $maxElements = 0, $actionUrl = '/', $htmlAttr = array()) {
 		$html_content = '';
 		$sep = '?';
 		if (strpos($actionUrl, '?')) {
@@ -1544,7 +1545,7 @@ if (isset($params['group']) && $params['group']) {
 				$html_content .= $this->closeForm();
 			}
 		}
-		return $html_content;
+		return html_e('span', $htmlAttr, $html_content);
 	}
 
 	/**
