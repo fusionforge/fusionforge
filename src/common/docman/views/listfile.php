@@ -99,7 +99,7 @@ $nested_groups = $dgf->getNested($stateidArr);
 
 $nested_docs = array();
 $DocGroupName = 0;
-
+$dgpath = '';
 if ($dirid) {
 	$ndg = documentgroup_get_object($dirid, $g->getID());
 	if ($ndg->isError()) {
@@ -184,14 +184,14 @@ echo html_ac(html_ap() - 1);
 if ($DocGroupName) {
 	$headerPath = '';
 	if ($childgroup_id) {
-		$headerPath .= _('Subproject')._(': ').util_make_link('/docman/?group_id='.$g->getID(), $g->getPublicName()).' ';
+		$headerPath .= _('Subproject')._(': ').util_make_link('/docman/?group_id='.$g->getID(), $g->getPublicName()).'::';
 	}
-	$headerPath .= _('Path')._(': ').html_e('i', array(), $dgpath, false);
-	echo html_e('h2', array(), $headerPath, false);
+	$generalpath = $dgpath.'/'.$DocGroupName;
+	$generalpath = preg_replace('/\/\//','/', $generalpath);
+	$headerPath .= html_e('i', array(), $generalpath, false);
+	echo html_e('h2', array('class' => 'docman_h2'), $headerPath, false);
 	$max = ($nbDocs > ($start + $paging)) ? ($start + $paging) : $nbDocs;
-	echo $HTML->paging_top($start, $paging, $nbDocs, $max, $redirecturl);
-	echo html_ao('h3', array('class' => 'docman_h3'));
-	echo html_e('span', array(), _('Document Folder')._(': ').html_e('i', array(), $DocGroupName, false).'&nbsp;', false);
+	echo $HTML->paging_top($start, $paging, $nbDocs, $max, $redirecturl, array('style' => 'display:inline-block'));
 	/* should we steal the lock on folder ? */
 	if ($ndg->getLocked()) {
 		if (session_loggedin() && ($ndg->getLockedBy() == $LUSER->getID())) {
@@ -231,11 +231,10 @@ if ($DocGroupName) {
 		}
 		echo util_make_link($redirecturl.'&action=monitordirectory&option='.$option.'&directoryid='.$ndg->getID(), $image, array('title' => $titleMonitor));
 	}
-	echo html_ac(html_ap() - 1);
 
 	if (forge_check_perm('docman', $ndg->Group->getID(), 'approve')) {
 		echo html_ao('div', array('class' => 'docman_div_include hide', 'id' => 'editdocgroup'));
-		echo html_e('h4', array('class' => 'docman_h4'), _('Edit this folder'), false);
+		echo html_e('h3', array('class' => 'docman_h3'), _('Edit this folder'), false);
 		include ($gfcommon.'docman/views/editdocgroup.php');
 		echo html_ac(html_ap() - 1);
 	}
