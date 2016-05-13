@@ -70,15 +70,19 @@ echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&a
 	$init = _('Initial values').' ';
 
 	$title_arr=array();
-	$title_arr[]=_('From Value');
+	$class_arr=array();
+	$title_arr[]=('From Value');
+	$class_arr[]=('');
 	foreach ($elearray as $status) {
-		$title_arr[]=$status['element_name'];
+		$title_arr[]='<div><span>'.$status['element_name'].'</span></div>';
+		$to_title_arr[]='<div><span>'.$to.$status['element_name'].'</span></div>';
+		$class_arr[]='rotate';
 	}
-	echo $HTML->listTableTop($title_arr, false, ' ');
+	echo $HTML->listTableTop($title_arr, false, 'table-header-rotated','',$class_arr);
 	echo "\n";
 
 	// Special treatement for the initial value (in the Submit form).
-	echo '<tr id="initval"><th style="text-align:left">'.$init.'</th>'."\n";
+	echo '<tr id="initval"><th class="row-header" style="text-align:left">'.$init.'</th>'."\n";
 	$next = $atw->getNextNodes('100');
 	foreach ($states as $s) {
 		$name = 'wk[100]['. $s['element_id'].']';
@@ -92,14 +96,18 @@ echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&a
 
 	$count=count($title_arr);
 	$totitle_arr = array();
+	$class_arr= array();
+	$totitle_arr[]=('');
+	$class_arr[]=('');
 	for ($i=0; $i<$count; $i++) {
-		$totitle_arr[] = $title_arr[$i]? $to.$title_arr[$i] : '';
+		$totitle_arr[] = $title_arr[$i]? $to_title_arr[$i] : '';
+		$class_arr[]='rotate';
 	}
-	echo $HTML->listTableTop($totitle_arr, false, ' ');
+	echo $HTML->listTableTop($totitle_arr, false, 'table-header-rotated','',$class_arr);
 
 	$i=1;
 	foreach ($elearray as $status) {
-		echo '<tr id="configuring-'.$i++.'"><th style="text-align:left">'.$from.$status['element_name'].'</th>'."\n";
+		echo '<tr id="configuring-'.$i++.'"><th class ="row-header" style="text-align:left">'.$from.$status['element_name'].'</th>'."\n";
 		$next = $atw->getNextNodes($status['element_id']);
 		foreach ($states as $s) {
 			if ($status['element_id'] !== $s['element_id']) {
