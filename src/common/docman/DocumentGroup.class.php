@@ -660,7 +660,7 @@ class DocumentGroup extends FFError {
 		if ($this->getState() != 1 && !forge_check_perm('docman', $this->Group->getID(), 'approve')) {
 			return false;
 		}
-		$returnPath = '';
+		$returnPath = '/';
 		if ($this->getParentID()) {
 			$parentDg = documentgroup_get_object($this->getParentID(), $this->Group->getID());
 			if ($parentDg->isError()) {
@@ -690,10 +690,6 @@ class DocumentGroup extends FFError {
 				$returnPath .= '/'.$this->getName();
 			}
 		}
-
-		if (!strlen($returnPath))
-			$returnPath = '/';
-
 		return $returnPath;
 	}
 
