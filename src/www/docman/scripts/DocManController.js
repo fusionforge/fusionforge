@@ -92,7 +92,7 @@ DocManListFileController.prototype =
 			totalRightHeight -= fixwidth;
 			(this.params.divRight.outerHeight() - fixwidth < 0) ? useRightHeight = this.params.divRight.outerHeight() : useRightHeight = this.params.divRight.outerHeight() - fixwidth;
 			(useRightHeight < totalRightHeight) ? useRightHeight = totalRightHeight : useRightHeight ;
-			(this.params.divLeft.outerHeight() > this.params.divRight.outerHeight()) ? mainheight = this.params.divLeft.outerHeight() : mainheight = useRightHeight;
+			(this.params.divLeft.outerHeight() + 30 > this.params.divRight.outerHeight()) ? mainheight = this.params.divLeft.outerHeight() + 30 : mainheight = useRightHeight;
 		}
 		jQuery('#views').height(mainheight)
 				.split({orientation:'vertical', limit:100, position: splitterPosition});
