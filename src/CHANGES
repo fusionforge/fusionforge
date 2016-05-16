@@ -1,10 +1,5 @@
 FusionForge 6.X:
 * Accounts: minimum password length is now 8
-* Spellcheck (Anders Jonsson)
-* Site Admin: add paging system in userlist page [#799] (TrivialDev)
-* Site Admin: support widgets for forge home page (TrivialDev)
-* Projects Page: add paging system in full_list and tag_cloud subpages (TrivialDev)
-* SearchEngine: support only FTI queries (TrivialDev)
 * Docman: limit number of returned documents on search query. Use paging system [#794] (TrivialDev)
 * Docman: limit search using from & to dates [#798] (TrivialDev)
 * Docman: use standard search engine: unify results between 'search in project' & search in the docs tab (TrivialDev)
@@ -13,10 +8,17 @@ FusionForge 6.X:
 * Docman: notify users on document. (TrivialDev)
 * Docman: support private directory. (TrivialDev)
 * Plugin AuthBuiltin: add captcha after 3 attempts with the same login [#795] (TrivialDev)
-* Widget MySystasks: new widget for user to display systasks perform on user projects (TrivialDev)
-* Widget ProjectScmStats: new widget for project to display SCM stats (TrivialDev)
+* Projects Page: add paging system in full_list and tag_cloud subpages (TrivialDev)
+* SearchEngine: support only FTI queries (TrivialDev)
 * Search: index project tags and use them for search (Roland Mas)
 * Search: provide language-specific settings for better indexation/search (Roland Mas)
+* Site Admin: add paging system in userlist page [#799] (TrivialDev)
+* Site Admin: support widgets for forge home page (TrivialDev)
+* Spellcheck (Anders Jonsson)
+* Web UI: upgrade splitter jquery plugin to 0.20.0 (TrivialDev)
+* Web UI: upgrade jquery ui to 1.11.4 (TrivialDev)
+* Widget MySystasks: new widget for user to display systasks perform on user projects (TrivialDev)
+* Widget ProjectScmStats: new widget for project to display SCM stats (TrivialDev)
 
 FusionForge 6.0.5:
 * Plugin SCM SVN: fix activity when SVN repository is private [#813] (TrivialDev)

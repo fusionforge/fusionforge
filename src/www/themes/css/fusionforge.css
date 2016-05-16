@@ -1010,3 +1010,8 @@ table.boxed th, table.bordered th {
     font-weight: bold;
     background-color: #d8d8d8;
 }
+
+/* overwrite some css for splitter to avoid overlap with jquery modal panel */
+.vsplitter {
+	z-index: 100 !important;
+}

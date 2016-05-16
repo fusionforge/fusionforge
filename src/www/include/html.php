@@ -449,7 +449,7 @@ function html_use_coolfieldset() {
 
 function html_use_jqueryui() {
 	html_use_jquery();
-	use_javascript('/scripts/jquery-ui/js/jquery-ui-1.11.2.js');
+	use_javascript('/scripts/jquery-ui/js/jquery-ui-1.11.4.js');
 }
 
 function html_use_jqueryjqplot() {
@@ -510,7 +510,7 @@ function html_use_jqueryteamworkgantt() {
 
 function html_use_jquerysplitter() {
 	html_use_jquery();
-	use_javascript('/scripts/jquery-splitter/js/jquery.splitter-0.8.0.js');
+	use_javascript('/scripts/jquery-splitter/js/jquery.splitter-0.20.0.js');
 	use_stylesheet('/scripts/jquery-splitter/css/jquery.splitter.css');
 }
 
