@@ -560,8 +560,8 @@ if (getStringFromRequest('add_extrafield')) {
 	$elearray = $ath->getExtraFieldElements($field_id);
 	foreach ($elearray as $e) {
 		$from = $e['element_id'];
-		$next = isset($wk[$from]) ? array_keys($wk[$from]) : array();
-		$atw->saveNextNodes($from, $next);
+		$to = isset($wk[$from]) ? array_keys($wk[$from]) : array();
+		$atw->saveNextNodes($from, $to);
 	}
 	$feedback .= _('Workflow saved');
 
@@ -569,11 +569,23 @@ if (getStringFromRequest('add_extrafield')) {
 	require_once $gfcommon.'tracker/ArtifactWorkflow.class.php';
 	$field_id = getIntFromRequest('field_id');
 	$from = getIntFromRequest('from');
-	$next = getIntFromRequest('next');
+	$to = getIntFromRequest('next');
 	$role = array_keys(getArrayFromRequest('role'));
 	$atw = new ArtifactWorkflow($ath, $field_id);
-	$atw->saveAllowedRoles($from, $next, $role);
-	$feedback .= _('Workflow saved');
+	$atw->saveAllowedRoles($from, $to, $role);
+	$feedback .= _('Workflow (allowed roles) saved');
+	$next = 'workflow';
+
+} elseif (getStringFromRequest('workflow_required_fields')) {
+	require_once $gfcommon.'tracker/ArtifactWorkflow.class.php';
+	$field_id = getIntFromRequest('field_id');
+	$from = getIntFromRequest('from');
+	$to = getIntFromRequest('next');
+	$extra_field = array_keys(getArrayFromRequest('extrafield'));
+	$atw = new ArtifactWorkflow($ath, $field_id);
+	$atw->saveRequiredFields($from, $to, $extra_field);
+	$feedback .= _('Workflow (required fields) saved');
+	$next = 'workflow';
 
 } elseif (getStringFromRequest('delete_opt')) {
 	$sure = getStringFromRequest('sure');

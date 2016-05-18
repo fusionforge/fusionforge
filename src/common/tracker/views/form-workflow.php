@@ -117,11 +117,15 @@ echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&a
 				if ($value) {
 					$url = '/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&workflow_roles=1&from='.$status['element_id'].'&next='.$s['element_id'];
 					$str .= util_make_link($url, html_image('ic/acl_roles20.png', 20, 20, array('alt'=>_('Edit Roles'))), array('title' => _('Edit roles')));
+					$url = '/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&workflow_required_fields=1&from='.$status['element_id'].'&next='.$s['element_id'];
+					$str .= util_make_link($url, html_image('ic/required.png', 20, 20, array('alt'=>_('Edit Required Fields'))), array('title' => _('Edit required fields')));
 				} else {
+					$str .= ' '.html_image('spacer.gif', 20, 20);
 					$str .= ' '.html_image('spacer.gif', 20, 20);
 				}
 			} else {
 				$str = '<input type="checkbox" checked="checked" disabled="disabled" />';
+				$str .= ' '.html_image('spacer.gif', 20, 20);
 				$str .= ' '.html_image('spacer.gif', 20, 20);
 			}
 			echo '<td class="align-center">'.$str.'</td>'."\n";
@@ -132,6 +136,8 @@ echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&a
 
 ?>
 <div class="tips">Tip: Click on <?php echo html_image('ic/acl_roles20.png', 20, 20, array('alt'=> _('Edit Roles'))) ?> to configure allowed roles for a transition (all by default).</div>
+<div class="tips">Tip2: Click on <?php echo html_image('ic/required.png', 20, 20, array('alt'=> _('Edit Required Fields'))) ?> to configure required fields for a transition (none by default).</div>
+
 <p>
 <input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
 <?php

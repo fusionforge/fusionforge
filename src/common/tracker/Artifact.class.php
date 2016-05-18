@@ -1264,6 +1264,8 @@ class Artifact extends FFError {
 			return true;
 		}
 
+		$status_changed = false;
+
 		// If there is a status field, then check against the workflow.
 		// Unless if we change type.
 		if (! isset($changes['Type']) || !$changes['Type']) {
@@ -1276,16 +1278,26 @@ class Artifact extends FFError {
 							WHERE artifact_id=$1 AND extra_field_id=$2',
 						array($this->getID(),
 							$efid));
-					$old = (db_numrows($res)>0) ? db_result($res,0,'field_data') : 100;
-					if ($old != $extra_fields[$efid]) {
+					$from_status = (db_numrows($res)>0) ? db_result($res,0,'field_data') : 100;
+					$to_status = $extra_fields[$efid];
+						if ($from_status != $to_status) {
+						$status_changed = true;
 						$atw = new ArtifactWorkflow($this->ArtifactType, $efid);
-						if (!$atw->checkEvent($old, $extra_fields[$efid])) {
-							$this->setError('Workflow error: You are not authorized to change the Status ('.$old.' => '.$extra_fields[$efid].')');
+						if (!$atw->checkEvent($from_status, $to_status)) {
+							$this->setError('Workflow error: You are not authorized to change the Status ('.$from_status.' => '.$to_status.')');
 							return false;
 						}
 					}
 				}
 			}
+		}
+
+		if ($status_changed) {
+			$CSFid = $this->ArtifactType->getCustomStatusField();
+			$wf = new ArtifactWorkflow($this->ArtifactType, $CSFid);
+			$rf = $wf->getRequiredFields($from_status, $to_status);
+		} else {
+			$rf = array();
 		}
 
 		//now we'll update this artifact for each extra field
@@ -1294,7 +1306,7 @@ class Artifact extends FFError {
 			$type=$ef[$efid]['field_type'];
 
 			// check required fields
-			if ($ef[$efid]['is_required']) {
+			if ($ef[$efid]['is_required'] || in_array($efid, $rf)) {
 				if (!array_key_exists($efid, $extra_fields)) {
 					if ($type == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 						$this->setError(_('Status Custom Field Must Be Set'));

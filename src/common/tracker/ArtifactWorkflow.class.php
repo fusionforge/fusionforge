@@ -190,8 +190,45 @@ class ArtifactWorkflow extends FFError {
 		return true;
 	}
 
-	function _getEventId($from, $to) {
+	function getRequiredFields($from, $to) {
+		$res = db_query_params ('SELECT extra_field_id
+				FROM artifact_workflow_required_fields NATURAL INNER JOIN artifact_workflow_event
+				WHERE group_artifact_id=$1
+				AND field_id=$2
+				AND from_value_id=$3
+				AND to_value_id=$4',
+				array($this->artifact_id,
+						$this->field_id,
+						$from,
+						$to));
+		$values = array();
+		while($arr = db_fetch_array($res)) {
+			$values[] = $arr['extra_field_id'];
+		}
+		return $values;
+	}
 
+	function saveRequiredFields($from, $to, $extra_fields) {
+		$event_id = $this->_getEventId($from, $to);
+		// Get required fields.
+		$current = $this->getRequiredFields($from, $to);
+		// Remove required fields no longer present.
+		foreach ($current as $extra_field) {
+			if (!in_array($extra_field, $extra_fields)) {
+				$this->_removeRequiredField($event_id, $extra_field);
+			}
+		}
+
+		// Add missing required fields.
+		foreach ($extra_fields as $extra_field) {
+			if (!in_array($extra_field, $current)) {
+				$this->_addRequiredField($event_id, $extra_field);
+			}
+		}
+		return true;
+	}
+
+	function _getEventId($from, $to) {
 		$res = db_query_params ('SELECT event_id FROM artifact_workflow_event
 				WHERE group_artifact_id=$1
 				AND field_id=$2
@@ -250,7 +287,6 @@ class ArtifactWorkflow extends FFError {
 			$this->setError('Unable to remove Event($from, $to): '.db_error());
 			return false;
 		}
-
 		return true;
 	}
 
@@ -296,11 +332,35 @@ class ArtifactWorkflow extends FFError {
 			array($event_id,
 				$role_id));
 		if (!$res) {
-			$this->setError('Unable to remove Event($from, $to): '.db_error());
+			$this->setError('Unable to remove Role ($role_id): '.db_error());
 			return false;
 		}
 		return true;
+	}
 
+	function _addRequiredField($event_id, $extra_field_id) {
+		$res = db_query_params ('INSERT INTO artifact_workflow_required_fields
+				(event_id, extra_field_id)
+				VALUES ($1, $2)',
+				array($event_id,
+						$extra_field_id));
+		if (!$res) {
+			$this->setError('Unable to add Extra Field ($extra_field_id): '.db_error());
+			return false;
+		}
+		return true;
+	}
+
+	function _removeRequiredField($event_id, $extra_field_id) {
+		$res = db_query_params ('DELETE FROM artifact_workflow_required_fields
+				WHERE event_id=$1 AND extra_field_id=$2',
+				array($event_id,
+						$extra_field_id));
+		if (!$res) {
+			$this->setError('Unable to remove Extra Field ($extra_field_id): '.db_error());
+			return false;
+		}
+		return true;
 	}
 
 }

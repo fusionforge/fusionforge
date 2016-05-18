@@ -118,7 +118,7 @@ if ($group_id && $atid) {
 	if ($next) {
 		$action = $next;
 	} else {
-		$actions = array('add_extrafield', 'customize_list', 'workflow', 'workflow_roles', 'add_opt',
+		$actions = array('add_extrafield', 'customize_list', 'workflow', 'workflow_roles', 'workflow_required_fields', 'add_opt',
 			'updownorder_opt', 'post_changes_order', 'post_changes_alphaorder', 'copy_opt', 'add_canned',
 			'clone_tracker', 'edittemplate',
 			'update_canned', 'delete_canned', 'update_box', 'update_opt', 'delete', 'delete_opt', 'deleteextrafield','update_type');
@@ -146,6 +146,10 @@ if ($group_id && $atid) {
 	} elseif ($action == 'workflow_roles') {
 
 		include $gfcommon.'tracker/views/form-workflow_roles.php';
+
+	} elseif ($action == 'workflow_required_fields') {
+
+		include $gfcommon.'tracker/views/form-workflow_required_fields.php';
 
 	} elseif ($action == 'add_opt' ||
 			  $action == 'updownorder_opt' ||
