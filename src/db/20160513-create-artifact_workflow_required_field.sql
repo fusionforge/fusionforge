@@ -7,4 +7,4 @@ CREATE TABLE artifact_workflow_required_fields
   CONSTRAINT artifact_workflow_required_fields_event_id_fkey FOREIGN KEY (event_id)
       REFERENCES artifact_workflow_event (event_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE CASCADE
-)
+);
