@@ -5,6 +5,7 @@
  * Copyright 2004, Anthony J. Pugliese
  * Copyright 2009, Roland Mas
  * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -102,7 +103,7 @@ class ArtifactExtraField extends FFError {
 	 * @param	string	$show100label	The label used for the 100 value if displayed
 	 * @return	bool	true on success / false on failure.
 	 */
-	function create($name, $field_type, $attribute1, $attribute2, $is_required = 0, $alias = '', $show100 = true, $show100label = 'none') {
+	function create($name, $field_type, $attribute1, $attribute2, $is_required = 0, $alias = '', $show100 = true, $show100label = 'none', $description = '') {
 		//
 		//	data validation
 		//
@@ -155,17 +156,18 @@ class ArtifactExtraField extends FFError {
 		}
 
 		db_begin();
-		$result = db_query_params ('INSERT INTO artifact_extra_field_list (group_artifact_id, field_name, field_type, attribute1, attribute2, is_required, alias, show100, show100label)
-			VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)',
+		$result = db_query_params ('INSERT INTO artifact_extra_field_list (group_artifact_id, field_name, field_type, attribute1, attribute2, is_required, alias, show100, show100label, description)
+			VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)',
 					   array ($this->ArtifactType->getID(),
-						  htmlspecialchars($name),
-						  $field_type,
-						  $attribute1,
-						  $attribute2,
-						  $is_required,
-						  $alias,
-						  $show100,
-						  $show100label));
+							  htmlspecialchars($name),
+							  $field_type,
+							  $attribute1,
+							  $attribute2,
+							  $is_required,
+							  $alias,
+							  $show100,
+							  $show100label,
+							  $description));
 
 		if ($result && db_affected_rows($result) > 0) {
 			$this->clearError();
@@ -272,6 +274,15 @@ class ArtifactExtraField extends FFError {
 	 */
 	function getName() {
 		return $this->data_array['field_name'];
+	}
+
+	/**
+	 * getDescription - get the description.
+	 *
+	 * @return	string	The description.
+	 */
+	function getDescription() {
+		return $this->data_array['description'];
 	}
 
 	/**
@@ -395,7 +406,7 @@ class ArtifactExtraField extends FFError {
 	 * @param	string	$show100label	The label used for the 100 value if displayed
 	 * @return	bool	success.
 	 */
-	function update($name, $attribute1, $attribute2, $is_required = 0, $alias = "", $show100 = true, $show100label = 'none') {
+	function update($name, $attribute1, $attribute2, $is_required = 0, $alias = "", $show100 = true, $show100label = 'none', $description = '') {
 		if (!forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
@@ -428,23 +439,25 @@ class ArtifactExtraField extends FFError {
 
 		$result = db_query_params ('UPDATE artifact_extra_field_list
 			SET field_name = $1,
-			attribute1 = $2,
-			attribute2 = $3,
-			is_required = $4,
-			alias = $5,
-			show100 = $6,
-			show100label = $7
-			WHERE extra_field_id = $8
-			AND group_artifact_id = $9',
+			description = $2,
+			attribute1 = $3,
+			attribute2 = $4,
+			is_required = $5,
+			alias = $6,
+			show100 = $7,
+			show100label = $8
+			WHERE extra_field_id = $9
+			AND group_artifact_id = $10',
 					   array (htmlspecialchars($name),
-						  $attribute1,
-						  $attribute2,
-						  $is_required,
-						  $alias,
-						  $show100,
-						  $show100label,
-						  $this->getID(),
-						  $this->ArtifactType->getID())) ;
+							  $description,
+							  $attribute1,
+							  $attribute2,
+							  $is_required,
+							  $alias,
+							  $show100,
+							  $show100label,
+							  $this->getID(),
+							  $this->ArtifactType->getID())) ;
 		if ($result && db_affected_rows($result) > 0) {
 			return true;
 		} else {

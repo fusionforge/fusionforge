@@ -6,6 +6,7 @@
  * Copyright 2010, FusionForge Team
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2013-2014, Franck Villaume - TrivialDev
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -23,6 +24,8 @@
  * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
+
+
 
 require_once '../../env.inc.php';
 require_once $gfcommon.'include/pre.php';

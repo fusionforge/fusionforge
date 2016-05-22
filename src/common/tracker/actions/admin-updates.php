@@ -5,6 +5,7 @@
  * Copyright 2010 (c) FusionForge Team
  * Copyright 2010 (c) Franck Villaume - Capgemini
  * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -34,6 +35,7 @@ global $atid;
 //
 if (getStringFromRequest('add_extrafield')) {
 	$name = getStringFromRequest('name');
+	$description = getStringFromRequest('description');
 	$field_type = getStringFromRequest('field_type');
 	$attribute1 = getStringFromRequest('attribute1');
 	$attribute2 = getStringFromRequest('attribute2');
@@ -54,7 +56,7 @@ if (getStringFromRequest('add_extrafield')) {
 		} else {
 			$show100 = 1;
 		}
-		if (!$ab->create($name, $field_type, $attribute1, $attribute2, $is_required, $alias, $show100, $show100label)) {
+		if (!$ab->create($name, $field_type, $attribute1, $attribute2, $is_required, $alias, $show100, $show100label, $description)) {
 			$error_msg .= _('Error inserting a custom field')._(': ').$ab->getErrorMessage();
 			$ab->clearError();
 		} else {
@@ -227,6 +229,7 @@ if (getStringFromRequest('add_extrafield')) {
 } elseif (getStringFromRequest('update_box')) {
 	$id = getStringFromRequest('id');
 	$name = getStringFromRequest('name');
+	$description = getStringFromRequest('description');
 	$attribute1 = getStringFromRequest('attribute1');
 	$attribute2 = getStringFromRequest('attribute2');
 	$is_required = getStringFromRequest('is_required');
@@ -245,7 +248,7 @@ if (getStringFromRequest('add_extrafield')) {
 		} else {
 			$show100 = 1;
 		}
-		if (!$ac->update($name, $attribute1, $attribute2, $is_required, $alias, $show100, $show100label)) {
+		if (!$ac->update($name, $attribute1, $attribute2, $is_required, $alias, $show100, $show100label, $description)) {
 			$error_msg .= _('Update failed')._(': ').$ac->getErrorMessage();
 			$ac->clearError();
 		} else {

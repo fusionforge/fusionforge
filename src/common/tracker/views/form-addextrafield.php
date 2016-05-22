@@ -4,6 +4,7 @@
  *
  * Copyright 2010 (c) FusionForge Team
  * Copyright 2014-2015, Franck Villaume - TrivialDev
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -96,55 +97,71 @@ if ($rows > 0) {
 
 echo "<h2>"._('Add New Custom Field')."</h2>";
 echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID(), 'method' => 'post'));
-?>
-<p>
-<input type="hidden" name="add_extrafield" value="y" />
-<strong><?php echo _('Custom Field Name').utils_requiredField()._(':'); ?></strong><br />
-<input type="text" name="name" value="" size="15" maxlength="30" required="required" />
-</p>
-<p>
-<strong><?php echo _('Field alias')._(':'); ?></strong><br />
-<input type="text" name="alias" value="" size="15" maxlength="30" />
-</p>
+echo html_ao('p');
+echo html_e('input', array('type'=>'hidden', 'name'=>'add_extrafield', 'value'=>'y')); 
 
-<p>
-<strong><?php  echo _('Type of custom field')._(':'); ?></strong><br />
-<input type="radio" name="field_type" value="1" required="required" /> <?php echo _('Select Box'); ?><br />
-<input type="radio" name="field_type" value="2" /> <?php echo _('Check Box'); ?><br />
-<input type="radio" name="field_type" value="3" /> <?php echo _('Radio Buttons'); ?><br />
-<input type="radio" name="field_type" value="4" /> <?php echo _('Text Field'); ?><br />
-<input type="radio" name="field_type" value="5" /> <?php echo _('Multi-Select Box'); ?><br />
-<input type="radio" name="field_type" value="6" /> <?php echo _('Text Area'); ?><br />
-<?php if (!$ath->usesCustomStatuses()) { ?>
-<input type="radio" name="field_type" value="7" /> <?php echo _('Status'); ?><br />
-<?php } ?>
-<!--<input type="radio" name="field_type" value="8" /> <?php echo _('Box type technician'); ?><br />-->
-<input type="radio" name="field_type" value="9" /> <?php echo _('Relation between artifacts'); ?><br />
-<p>
-<?php echo _('Text Fields and Text Areas need to have Size/Maxlength and Rows/Cols defined, respectively.'); ?><br />
-<?php echo _('Text Field Size/Text Area Rows'); ?>
-	<input type="text" name="attribute1" value="20" size="2" maxlength="2" /><br />
-<?php echo _('Text Field Maxlength/Text Area Columns'); ?>
-	<input type="text" name="attribute2" value="80" size="2" maxlength="2" /><br />
-<?php echo _('Hide the default none value'); ?>
-	<input type="checkbox" name="hide100" /><br />
-<?php echo _('Label for the none value'); ?>
-	<input type="text" name="show100label" size="30" value="<?php echo _('none') ?>" /><br />
-</p>
-<?php
+echo html_e('strong', array(), _('Custom Field Name').utils_requiredField()._(':')).html_e('br');
+echo html_e('input', array('type'=>'text', 'name'=>'name', 'value'=>'', size=>'15', 'maxlength'=>'30', 'required'=>'required'));
+echo html_ac(html_ap() - 1);
+
+echo html_ao('p');
+echo html_e('strong', array(), _('Field alias')._(':')).html_e('br');
+echo html_e('input', array('type'=>'text', 'name'=>'alias', 'value'=>'', size=>'15', 'maxlength'=>'30'));
+echo html_ac(html_ap() - 1);
+
+echo html_ao('p');
+echo html_e('strong', array(), _('Description')._(':')).html_e('br');
+echo html_e('input', array('type'=>'text', 'name'=>'description', 'value'=>'', size=>'50', 'maxlength'=>'255'));
+echo html_ac(html_ap() - 1);
+
+echo html_ao('p');
+echo html_e('strong', array(), _('Type of custom field').utils_requiredField()._(':')).html_e('br');
+
+$vals = array(ARTIFACT_EXTRAFIELDTYPE_SELECT , ARTIFACT_EXTRAFIELDTYPE_CHECKBOX, ARTIFACT_EXTRAFIELDTYPE_RADIO, ARTIFACT_EXTRAFIELDTYPE_TEXT, ARTIFACT_EXTRAFIELDTYPE_MULTISELECT, ARTIFACT_EXTRAFIELDTYPE_TEXTAREA, ARTIFACT_EXTRAFIELDTYPE_STATUS, 8, ARTIFACT_EXTRAFIELDTYPE_RELATION);
+// 8 = ARTIFACT_EXTRAFIELDTYPE_ASSIGNEE
+// ARTIFACT_EXTRAFIELDTYPE_INTEGER, ARTIFACT_EXTRAFIELDTYPE_FORMULA, ARTIFACT_EXTRAFIELDTYPE_DATETIME, ARTIFACT_EXTRAFIELDTYPE_USER
+$texts = array( _('Select Box'), _('Check Box'), _('Radio Buttons'), _('Text Field'), _('Multi-Select Box'), _('Text Area'), _('Status'), _('Box type technician'), _('Relation between artifacts'));
+
+// ARTIFACT_EXTRAFIELDTYPE_ASSIGNEE not used
+unset($vals[7]);
+unset($texts[7]);
+
+if ($ath->usesCustomStatuses()) {
+	unset($vals[ARTIFACT_EXTRAFIELDTYPE_STATUS-1]);
+	unset($texts[ARTIFACT_EXTRAFIELDTYPE_STATUS-1]);
+}
+// re-index
+$vals = array_values($vals);
+$texts = array_values($texts);
+
+echo html_build_radio_buttons_from_arrays( $vals, $texts, 'field_type', '', false, '', false ,'', array('required'=>'required') );
+echo html_ac(html_ap() - 1);
+
+echo html_ao('p');
+echo _('Text Fields and Text Areas need to have Size/Maxlength and Rows/Cols defined, respectively.').html_e('br');
+echo _('Text Field Size/Text Area Rows');
+echo html_e('input', array('type'=>'text', 'name'=>'attribute1', 'value'=>'20', size=>'2', 'maxlength'=>'2')).html_e('br');
+echo _('Text Field Maxlength/Text Area Columns');
+echo html_e('input', array('type'=>'text', 'name'=>'attribute2', 'value'=>'80', size=>'2', 'maxlength'=>'2')).html_e('br');
+echo _('Hide the default none value');
+echo html_build_checkbox('hide100','',false).html_e('br');
+echo _('Label for the none value');
+echo html_e('input', array('type'=>'text', 'name'=>'show100label', 'value'=>_('none'), size=>'30')).html_e('br');
+echo html_ac(html_ap() - 1);
+
 echo $HTML->warning_msg(_('Warning: this add new custom field'));
-?>
-<p>
-<input type="submit" name="post_changes" value="<?php echo _('Add Custom Field') ?>" />
-</p>
-<?php
-echo $HTML->closeForm();
-echo "<h2>"._('Custom Field Rendering Template')."</h2>";
 
-echo "<p>";
-echo util_make_link('/tracker/admin/?edittemplate=1&group_id='.$group_id.'&atid='.$ath->getID(), _('Edit template')).'<br />';
+echo html_ao('p');
+echo html_e('input', array('type'=>'submit', 'name'=>'post_changes', 'value'=>_('Add Custom Field')));
+echo html_ac(html_ap() - 1);
+
+echo $HTML->closeForm();
+
+echo html_e('h2', array(), _('Custom Field Rendering Template'));
+echo html_ao('p');
+echo util_make_link('/tracker/admin/?edittemplate=1&group_id='.$group_id.'&atid='.$ath->getID(), _('Edit template')).html_e('br');
 echo util_make_link('/tracker/admin/?deletetemplate=1&group_id='.$group_id.'&atid='.$ath->getID(), _('Delete template'));
-echo "</p>";
+echo html_ac(html_ap() - 1);
 
 $ath->footer();
 

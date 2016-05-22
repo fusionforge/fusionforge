@@ -659,7 +659,7 @@ class ArtifactType extends FFError {
 					$current_ef_todelete->delete(true,true);
 				}
 			}
-			if (!$nef->create(util_unconvert_htmlspecialchars($ef['field_name']), $ef['field_type'], $ef['attribute1'], $ef['attribute2'], $ef['is_required'], $ef['alias'])) {
+			if (!$nef->create(util_unconvert_htmlspecialchars($ef['field_name']), $ef['field_type'], $ef['attribute1'], $ef['attribute2'], $ef['is_required'], $ef['alias'], $ef['description'])) {
 				$this->setError('Error Creating New Extra Field: '.$nef->getErrorMessage());
 				db_rollback();
 				return false;

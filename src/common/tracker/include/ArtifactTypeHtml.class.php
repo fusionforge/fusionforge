@@ -236,6 +236,14 @@ class ArtifactTypeHtml extends ArtifactType {
 			$i = $keys[$k];
 			$post_name = '';
 
+			$attrs = array();
+			if (!empty($efarr[$i]['description'])) {
+				$attrs['title'] = $efarr[$i]['description'];
+			}
+			if ($efarr[$i]['is_required'] == 1) {
+				$attrs['required'] = 'required';
+			}
+
 			if (!isset($selected[$efarr[$i]['extra_field_id']]))
 				$selected[$efarr[$i]['extra_field_id']] = '';
 
@@ -244,41 +252,41 @@ class ArtifactTypeHtml extends ArtifactType {
 			}
 
 			if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_SELECT) {
-				$str = $this->renderSelect($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['show100'],$efarr[$i]['show100label'],$show_any,$text_any);
+				$str = $this->renderSelect($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['show100'],$efarr[$i]['show100label'],$show_any,$text_any,false, $attrs);
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) {
 
-				$str = $this->renderCheckbox($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['show100'],$efarr[$i]['show100label']);
+				$str = $this->renderCheckbox($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['show100'],$efarr[$i]['show100label'], $attrs);
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RADIO) {
 
-				$str = $this->renderRadio($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['show100'],$efarr[$i]['show100label'],$show_any,$text_any);
+				$str = $this->renderRadio($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['show100'],$efarr[$i]['show100label'],$show_any,$text_any, $attrs);
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_TEXT ||
 					$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_INTEGER) {
 
-				$str = $this->renderTextField($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['attribute1'],$efarr[$i]['attribute2']);
+				$str = $this->renderTextField($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['attribute1'],$efarr[$i]['attribute2'], $attrs);
 				if ($mode == 'QUERY') {
 					$post_name =  ' <i>'._('(%% for wildcards)').'</i>&nbsp;&nbsp;&nbsp;';
 				}
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_TEXTAREA) {
 
-				$str = $this->renderTextArea($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['attribute1'],$efarr[$i]['attribute2']);
+				$str = $this->renderTextArea($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['attribute1'],$efarr[$i]['attribute2'], $attrs);
 				if ($mode == 'QUERY') {
 					$post_name =  ' <i>'._('(%% for wildcards)').'</i>';
 				}
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT) {
 
-				$str = $this->renderMultiSelectBox ($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['show100'],$efarr[$i]['show100label']);
+				$str = $this->renderMultiSelectBox ($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['show100'],$efarr[$i]['show100label'], $attrs);
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 
 				// Get the allowed values from the workflow.
 				$atw = new ArtifactWorkflow($this, $efarr[$i]['extra_field_id']);
 
-				// Special treatement for the initial step (Submit).
+				// Special treatment for the initial step (Submit).
 				// In this case, the initial value is the first value.
 				if ($selected === true) {
 					$selected_node = 100;
@@ -290,11 +298,11 @@ class ArtifactTypeHtml extends ArtifactType {
 
 				$allowed = $atw->getNextNodes($selected_node);
 				$allowed[] = $selected_node;
-				$str = $this->renderSelect($efarr[$i]['extra_field_id'],$selected_node,$status_show_100,$text_100,$show_any,$text_any, $allowed);
+				$str = $this->renderSelect($efarr[$i]['extra_field_id'],$selected_node,$status_show_100,$text_100,$show_any,$text_any, $allowed, $attrs);
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RELATION) {
 
-				$str = $this->renderRelationField($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['attribute1'],$efarr[$i]['attribute2']);
+				$str = $this->renderRelationField($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['attribute1'],$efarr[$i]['attribute2'], $attrs);
 				if ($mode == 'UPDATE') {
 					$post_name = html_image('ic/forum_edit.gif','37','15',array('title'=>"Click to edit", 'alt'=>"Click to edit", 'onclick'=>"switch2edit(this, 'show$i', 'edit$i')"));
 				}
@@ -545,9 +553,10 @@ class ArtifactTypeHtml extends ArtifactType {
 	 * @param	bool		$show_any
 	 * @param	string		$text_any
 	 * @param	bool		$allowed
+	 * @param	array		$attrs
 	 * @return string HTML code for the box and choices
 	 */
-	function renderSelect ($extra_field_id,$checked='xzxz',$show_100=false,$text_100='none',$show_any=false,$text_any='Any', $allowed=false) {
+	function renderSelect ($extra_field_id,$checked='xzxz',$show_100=false,$text_100='none',$show_any=false,$text_any='Any', $allowed=false, $attrs = array ()) {
 		if ($text_100 == 'none'){
 			$text_100=_('None');
 		}
@@ -558,7 +567,7 @@ class ArtifactTypeHtml extends ArtifactType {
 			$keys[$i]=$arr[$i]['element_id'];
 			$vals[$i]=$arr[$i]['element_name'];
 		}
-		return html_build_select_box_from_arrays ($keys,$vals,'extra_fields['.$extra_field_id.']',$checked,$show_100,$text_100,$show_any,$text_any, $allowed);
+		return html_build_select_box_from_arrays ($keys,$vals,'extra_fields['.$extra_field_id.']',$checked,$show_100,$text_100,$show_any,$text_any, $allowed, $attrs);
 	}
 
 	/**
@@ -570,9 +579,10 @@ class ArtifactTypeHtml extends ArtifactType {
 	 * @param	string	$text_100	What $string to call the '100 row'
 	 * @param	bool	$show_any
 	 * @param	string	$text_any
+	 * @param	array	$attrs		Array of other attributes
 	 * @return	string	HTML code using radio buttons
 	 */
-	function renderRadio ($extra_field_id,$checked='xzxz',$show_100=false,$text_100='none',$show_any=false,$text_any='Any') {
+	function renderRadio ($extra_field_id,$checked='xzxz',$show_100=false,$text_100='none',$show_any=false,$text_any='Any', $attrs = array()) {
 		$arr = $this->getExtraFieldElements($extra_field_id);
 		$keys = array();
 		$vals = array();
@@ -580,7 +590,7 @@ class ArtifactTypeHtml extends ArtifactType {
 			$keys[$i]=$arr[$i]['element_id'];
 			$vals[$i]=$arr[$i]['element_name'];
 		}
-		return html_build_radio_buttons_from_arrays ($keys,$vals,'extra_fields['.$extra_field_id.']',$checked,$show_100,$text_100,$show_any,$text_any);
+		return html_build_radio_buttons_from_arrays ($keys,$vals,'extra_fields['.$extra_field_id.']',$checked,$show_100,$text_100,$show_any,$text_any,$attrs);
 	}
 
 	/**
@@ -590,26 +600,38 @@ class ArtifactTypeHtml extends ArtifactType {
 	 * @param	array		$checked	The items that should be checked
 	 * @param	bool|string	$show_100	Whether to show the '100 row'
 	 * @param	string		$text_100	What to call the '100 row'
+	 * @param	array		$attrs		Array of other attributes
 	 * @return string radio buttons
 	 */
-	function renderCheckbox ($extra_field_id,$checked=array(),$show_100=false,$text_100='none') {
+	function renderCheckbox ($extra_field_id,$checked=array(),$show_100=false,$text_100='none', $attrs = array()) {
 		if ($text_100 == 'none'){
 			$text_100=_('None');
 		}
 		if (!$checked || !is_array($checked)) {
 			$checked=array();
 		}
+		if (!empty($attrs['title'])) {
+			$attrs['title'] = util_html_secure($attrs['title']);
+		}
 		$arr = $this->getExtraFieldElements($extra_field_id);
 		$return = '';
 		if ($show_100) {
-			$return .= '
-				<input type="checkbox" name="extra_fields['.$extra_field_id.'][]" value="100" '.
-			((in_array(100,$checked)) ? 'checked="checked"' : '').'/> '.$text_100.'<br />';
+			$chk_attrs = array('type'=>'checkbox', 'name'=>'extra_fields['.$extra_field_id.'][]', 'id'=>'extra_fields100', 'value'=>'100');
+			if (in_array('100', $checked)) {
+				$chk_attrs['checked']='checked';
+			}
+			$return .= html_e('input', array_merge($attrs,$chk_attrs));
+			$return .= html_e('label', array_merge(array('for'=>'extra_fields100'), (empty($attrs['title']) ? array() : array('title'=>$attrs['title']))), $text_100);
+			$return .= html_e('br');
 		}
 		for ($i=0; $i<count($arr); $i++) {
-			$return .= '
-				<input type="checkbox" name="extra_fields['.$extra_field_id.'][]" value="'.$arr[$i]['element_id'].'" '.
-			((in_array($arr[$i]['element_id'],$checked)) ? 'checked="checked"' : '').'/> '.$arr[$i]['element_name'].'<br />';
+			$chk_attrs = array('type'=>'checkbox', 'name'=>'extra_fields['.$extra_field_id.'][]', 'id'=>'extra_fields'.$arr[$i]['element_id'], 'value'=>$arr[$i]['element_id']);
+			if (in_array($arr[$i]['element_id'],$checked)) {
+				$chk_attrs['checked']='checked';
+			}
+			$return .= html_e('input', array_merge($attrs,$chk_attrs));
+			$return .= html_e('label', array_merge(array('for'=>'extra_fields'.$arr[$i]['element_id']), (empty($attrs['title']) ? array() : array('title'=>$attrs['title']))), $arr[$i]['element_name']);
+			$return .= html_e('br');
 		}
 		return $return;
 	}
@@ -621,9 +643,10 @@ class ArtifactTypeHtml extends ArtifactType {
 	 * @param	array		$checked	The items that should be checked
 	 * @param	bool|string	$show_100	Whether to show the '100 row'
 	 * @param	string		$text_100	What to call the '100 row'
+	 * @param	array		$attrs		Array of other attributes
 	 * @return	string		radio multiselectbox
 	 */
-	function renderMultiSelectBox ($extra_field_id,$checked=array(),$show_100=false,$text_100='none') {
+	function renderMultiSelectBox ($extra_field_id,$checked=array(),$show_100=false,$text_100='none', $attrs = array()) {
 		if (!$checked) {
 			$checked=array();
 		}
@@ -638,7 +661,7 @@ class ArtifactTypeHtml extends ArtifactType {
 			$vals[]=$arr[$i]['element_name'];
 		}
 		$size = min( count($arr)+1, 15);
-			return html_build_multiple_select_box_from_arrays($keys,$vals,"extra_fields[$extra_field_id][]",$checked,$size,$show_100,$text_100);
+			return html_build_multiple_select_box_from_arrays($keys,$vals,"extra_fields[$extra_field_id][]",$checked,$size,$show_100,$text_100, $attrs);
 	}
 
 	/**
@@ -648,23 +671,24 @@ class ArtifactTypeHtml extends ArtifactType {
 	 * @param	string	$contents	The data for this field.
 	 * @param	string	$size
 	 * @param	string	$maxlength
+	 * @param	array	$attrs		Array of other attributes
 	 * @return	string	HTML code of corresponding input tag.
 	 */
-	function renderTextField ($extra_field_id, $contents, $size, $maxlength) {
-		return '
-			<input type="text" name="extra_fields['.$extra_field_id.']" value="'.$contents.'" size="'.$size.'" maxlength="'.$maxlength.'"/>';
+	function renderTextField ($extra_field_id, $contents, $size, $maxlength, $attrs = array()) {
+		return html_e('input', array_merge(array( 'type'=>'text', 'name'=>'extra_fields['.$extra_field_id.']', 'value'=>$contents, 'size'=>$size, 'maxlength'=>$maxlength)));
 	}
 
-	/**
+	/**()
 	 * renderRelationField - this function builds a relation field.
 	 *
 	 * @param	int	$extra_field_id	The ID of this field.
 	 * @param	string	$contents	The data for this field.
 	 * @param	string	$size
 	 * @param	string	$maxlength
+	 * @param	array	$attrs		Array of other attributes
 	 * @return	string	text area and data.
 	 */
-	function renderRelationField ($extra_field_id,$contents,$size,$maxlength) {
+	function renderRelationField ($extra_field_id,$contents,$size,$maxlength, $attrs = array()) {
 		$arr = $this->getExtraFieldElements($extra_field_id);
 		for ($i=0; $i<count($arr); $i++) {
 			$keys[$i]=$arr[$i]['element_id'];
@@ -673,9 +697,9 @@ class ArtifactTypeHtml extends ArtifactType {
 		// Convert artifact id to links.
 		$html_contents = preg_replace_callback('/\b(\d+)\b/', create_function('$matches', 'return _artifactid2url($matches[1], \'title\');'), $contents);
 		$edit_contents = $this->renderTextField ($extra_field_id,$contents,$size,$maxlength);
-		return '
-			<div id="edit'.$extra_field_id.'" style="display: none;" title="'._('Tip: Enter a space-separated list of artifact ids ([#NNN] also accepted)').'" >'.$edit_contents.'</div>
-			<div id="show'.$extra_field_id.'" style="display: block;">'.$html_contents.'</div>';
+		$return = html_e('div',array_merge(array( 'id'=>'edit'.$extra_field_id, 'style'=>'display: none', 'title'=>_('Tip: Enter a space-separated list of artifact ids ([#NNN] also accepted)')), $attrs), $edit_contents);
+		$return .=html_e('div',array_merge(array( 'id'=>'show'.$extra_field_id, 'style'=>'display: block'), $attrs), $html_contents);
+		return $return;
 	}
 
 	/**
@@ -685,11 +709,11 @@ class ArtifactTypeHtml extends ArtifactType {
 	 * @param	string	$contents	The data for this field.
 	 * @param	string	$rows
 	 * @param	string	$cols
+	 * @param	array	$attrs		Array of other attributes
 	 * @return	string	text area and data.
 	 */
-	function renderTextArea ($extra_field_id,$contents,$rows,$cols) {
-		return '
-			<textarea name="extra_fields['.$extra_field_id.']" rows="'.$rows.'" cols="'.$cols.'">'.$contents.'</textarea>';
+	function renderTextArea ($extra_field_id,$contents,$rows,$cols, $attrs = array()) {
+		return html_e('textarea', array_merge(array('name'=>'extra_fields['.$extra_field_id.']', 'rows'=>$rows, 'cols'=>$cols), $attrs), $contents);
 	}
 
 	function technicianBox ($name='assigned_to[]',$checked='xzxz',$show_100=true,$text_100='none',$extra_id='-1',$extra_name='',$multiple=false) {
