@@ -50,12 +50,12 @@ if (!$ac || !is_object($ac)) {
 
 	echo html_ao('p');
 	echo html_e('label', array('for'=>'name'), html_e('strong', array(), _('Custom Field Name')._(':')).html_e('br'));
-	echo html_e('input', array('type'=>'text', 'id'=>'name', 'name'=>'name', 'value'=>$ac->getName(), size=>'15', 'maxlength'=>'30', 'required'=>'required'));
+	echo html_e('input', array('type'=>'text', 'id'=>'name', 'name'=>'name', 'value'=>$ac->getName(), 'size'=>'15', 'maxlength'=>'30', 'required'=>'required'));
 	echo html_ac(html_ap() - 1);
 
 	echo html_ao('p');
 	echo html_e('label', array('for'=>'description'), html_e('strong', array(), _('Description')._(':')).html_e('br'));
-	echo html_e('input', array('type'=>'text', 'name'=>'description', 'value'=>$ac->getDescription(), size=>'50', 'maxlength'=>'255'));
+	echo html_e('input', array('type'=>'text', 'name'=>'description', 'value'=>$ac->getDescription(), 'size'=>'50', 'maxlength'=>'255'));
 	echo html_ac(html_ap() - 1);
 
 	echo html_ao('p');
