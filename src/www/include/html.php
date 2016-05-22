@@ -9,6 +9,7 @@
  * Copyright 2011-2016, Franck Villaume - TrivialDev
  * Copyright © 2011, 2012
  *	Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivalDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -240,19 +241,19 @@ function html_get_timezone_popup($title = 'timezone', $selected = 'xzxz') {
 /**
  * html_build_select_box_from_assoc() - Takes one assoc array and returns a pop-up box.
  *
- * @param	array		$arr		An array of items to use.
+ * @param	array		$arr			An array of items to use.
  * @param	string		$select_name	The name you want assigned to this form element.
  * @param	string		$checked_val	The value of the item that should be checked.
- * @param	bool		$swap		Whether we should swap the keys / names.
- * @param	bool		$show_100	Whether or not to show the '100 row'.
- * @param	string		$text_100	What to call the '100 row' defaults to none.
- * @param	bool		$show_any	Whether or not to show the 'Any row'.
- * @param	string		$text_any	What to call the 'Any row' defaults to any.
- * @param	bool|array	$allowed	Array of all allowed values from the full list.
- * @param	array		$html_params	Array of other html param for an element.
+ * @param	bool		$swap			Whether we should swap the keys / names.
+ * @param	bool		$show_100		Whether or not to show the '100 row'.
+ * @param	string		$text_100		What to call the '100 row' defaults to none.
+ * @param	bool		$show_any		Whether or not to show the 'Any row'.
+ * @param	string		$text_any		What to call the 'Any row' defaults to any.
+ * @param	bool|array	$allowed		Array of all allowed values from the full list.
+ * @param	array		$attrs			Array of other attributes for this select element.
  * @return	string
  */
-function html_build_select_box_from_assoc($arr, $select_name, $checked_val = 'xzxz', $swap = false, $show_100 = false, $text_100 = 'None', $show_any = false, $text_any = 'any', $allowed = false, $html_params = array()) {
+function html_build_select_box_from_assoc($arr, $select_name, $checked_val = 'xzxz', $swap = false, $show_100 = false, $text_100 = 'None', $show_any = false, $text_any = 'any', $allowed = false, $attrs = array()) {
 	if ($swap) {
 		$keys = array_values($arr);
 		$vals = array_keys($arr);
@@ -260,43 +261,31 @@ function html_build_select_box_from_assoc($arr, $select_name, $checked_val = 'xz
 		$vals = array_values($arr);
 		$keys = array_keys($arr);
 	}
-	return html_build_select_box_from_arrays($keys, $vals, $select_name, $checked_val, $show_100, $text_100, $show_any, $text_any, $allowed, $html_params);
+	return html_build_select_box_from_arrays($keys, $vals, $select_name, $checked_val, $show_100, $text_100, $show_any, $text_any, $allowed, $attrs);
 }
 
 /**
  * html_build_select_box_from_array() - Takes one array, with the first array being the "id"
  * or value and the array being the text you want displayed.
  *
- * @param	array	$vals		An array of items to use.
+ * @param	array	$vals			An array of items to use.
  * @param	string	$select_name	The name you want assigned to this form element.
  * @param	string	$checked_val	The value of the item that should be checked.
- * @param	int	$samevals
+ * @param	int		$samevals
+ * @param	array	$attrs			Array of other attributes for this select element.
  * @return	string
  */
-function html_build_select_box_from_array($vals, $select_name, $checked_val = 'xzxz', $samevals = 0) {
-	$return = '
-		<select name="'.$select_name.'">';
+function html_build_select_box_from_array($vals, $select_name, $checked_val = 'xzxz', $samevals = 0, $attrs = array()) {
 
-	$rows = count($vals);
-
-	for ($i = 0; $i < $rows; $i++) {
-		if ($samevals) {
-			$return .= "\n\t\t<option value=\"".$vals[$i]."\"";
-			if ($vals[$i] == $checked_val) {
-				$return .= ' selected="selected"';
-			}
-		} else {
-			$return .= "\n\t\t<option value=\"".$i.'"';
-			if ($i == $checked_val) {
-				$return .= ' selected="selected"';
-			}
-		}
-		$return .= '>'.htmlspecialchars($vals[$i]).'</option>';
+	if ($samevals) {
+		$values = array_values($vals);
+		$texts =  array_values($vals);
+	} else {
+		$values = array_keys($vals);
+		$texts =  array_values($vals);
 	}
-	$return .= '
-		</select>';
 
-	return $return;
+	return html_build_select_box_from_arrays($values, $texts, $select_name, $checked_val, false, '', false, '', false, $attrs);
 }
 
 /**
@@ -316,10 +305,16 @@ function html_build_select_box_from_array($vals, $select_name, $checked_val = 'x
  * @param	string	$text_100	What to call the '100 row' defaults to none
  * @param	bool	$show_any	Whether or not to show the 'Any row'
  * @param	string	$text_any	What to call the 'Any row' defaults to any
+ * @param	array	$attrs		Array of other attributes
  * @return	string
  */
 function html_build_radio_buttons_from_arrays($vals, $texts, $select_name, $checked_val = 'xzxz',
-											  $show_100 = true, $text_100 = 'none', $show_any = false, $text_any = 'any') {
+											  $show_100 = true, $text_100 = 'none', $show_any = false,
+											  $text_any = 'any', $attrs = array()) {
+
+	$attrs['type'] = 'radio';
+	$attrs['name'] = $select_name;
+
 	if ($text_100 == 'none') {
 		$text_100 = _('None');
 	}
@@ -332,13 +327,23 @@ function html_build_radio_buttons_from_arrays($vals, $texts, $select_name, $chec
 
 	//we don't always want the default Any row shown
 	if ($show_any) {
-		$return .= '
-		<input type="radio" name="'.$select_name.'" value=""'.(($checked_val == '')? ' checked="checked"' : '').' />&nbsp;'.$text_any.'<br />';
+		$radio_attrs = $attrs;
+		$radio_attrs['value'] = '';
+		$radio_attrs['id'] = $select_name.'_any';
+		if ($checked_val == '') {
+			$radio_attrs ['checked'] = 'checked';
+		}
+		$return .= html_e('input', $radio_attrs).html_e('label',array('for'=>$select_name.'_any'), $text_any).html_e('br');
 	}
 	//we don't always want the default 100 row shown
 	if ($show_100) {
-		$return .= '
-		<input type="radio" name="'.$select_name.'" value="100"'.(($checked_val == 100)? ' checked="checked"' : '').' />&nbsp;'.$text_100.'<br />';
+		$radio_attrs = $attrs;
+		$radio_attrs['value'] = '100';
+		$radio_attrs['id'] = $select_name.'_100';
+		if ($checked_val == '100') {
+			$radio_attrs ['checked'] = 'checked';
+		}
+		$return .= html_e('input', $radio_attrs).html_e('label',array('for'=>$select_name.'_100'), $text_100).html_e('br');
 	}
 
 	$checked_found = false;
@@ -347,13 +352,15 @@ function html_build_radio_buttons_from_arrays($vals, $texts, $select_name, $chec
 		//  uggh - sorry - don't show the 100 row
 		//  if it was shown above, otherwise do show it
 		if (($vals[$i] != '100') || ($vals[$i] == '100' && !$show_100)) {
-			$return .= '
-				<input type="radio" id="'.$select_name.'_'.$vals[$i].'" name="'.$select_name.'" value="'.$vals[$i].'"';
+			$radio_attrs = $attrs;
+			$radio_attrs['value'] = $vals[$i];
+			$radio_attrs['id'] = $select_name.'_'.$vals[$i];
 			if ((string)$vals[$i] == (string)$checked_val) {
 				$checked_found = true;
-				$return .= ' checked="checked"';
+				//$return .= ' checked="checked"';
+				$radio_attrs ['checked'] = 'checked';
 			}
-			$return .= ' />&nbsp;'.htmlspecialchars($texts[$i]).'<br />';
+				$return .= html_e('input', $radio_attrs).html_e('label',array('for'=>$select_name.'_'.$vals[$i]), htmlspecialchars($texts[$i])).html_e('br');
 		}
 	}
 	//
@@ -361,8 +368,11 @@ function html_build_radio_buttons_from_arrays($vals, $texts, $select_name, $chec
 	//	we want to preserve that value UNLESS that value was 'xzxz', the default value
 	//
 	if (!$checked_found && $checked_val != 'xzxz' && $checked_val && $checked_val != 100) {
-		$return .= '
-		<input type="radio" value="'.$checked_val.'" checked="checked" />&nbsp;'._('No Change').'<br />';
+		$radio_attrs = $attrs;
+		$radio_attrs['value'] = $checked_val;
+		$radio_attrs['id'] = $select_name.'_no_change';
+		$radio_attrs ['checked'] = 'checked';
+		$return .= html_e('input', $radio_attrs).html_e('label',array('for'=>$select_name.'_no_change'), _('No Change')).html_e('br');
 	}
 
 	return $return;
@@ -537,21 +547,25 @@ function html_use_jquerybrowser() {
  * row is 100, so almost every pop-up box has 100 as the default
  * Most tables in the database should therefore have a row with an id of 100 in it so that joins are successful
  *
- * @param	array		$vals		The ID or value
- * @param	array		$texts		Text to be displayed
+ * @param	array		$vals			The ID or value
+ * @param	array		$texts			Text to be displayed
  * @param	string		$select_name	Name to assign to this form element
  * @param	string		$checked_val	The item that should be checked
- * @param	bool		$show_100	Whether or not to show the '100 row'
- * @param	string		$text_100	What to call the '100 row' defaults to none
- * @param	bool		$show_any	Whether or not to show the 'Any row'
- * @param	string		$text_any	What to call the 'Any row' defaults to any
- * @param	bool|array	$allowed	Array of all allowed values from the full list.
- * @param	array		$html_params	Array of other html param for an element
+ * @param	bool		$show_100		Whether or not to show the '100 row'
+ * @param	string		$text_100		What to call the '100 row' defaults to none
+ * @param	bool		$show_any		Whether or not to show the 'Any row'
+ * @param	string		$text_any		What to call the 'Any row' defaults to any
+ * @param	bool|array	$allowed		Array of all allowed values from the full list.
+ * @param	array		$attrs			Array of other attributes for this select element
  * @return	string
  */
 function html_build_select_box_from_arrays($vals, $texts, $select_name, $checked_val = 'xzxz',
-					   $show_100 = true, $text_100 = 'none',
-					   $show_any = false, $text_any = 'any', $allowed = false, $html_params = array()) {
+										   $show_100 = true, $text_100 = 'none',
+										   $show_any = false, $text_any = 'any',
+										   $allowed = false, $attrs = array()) {
+	if ($text_100 == 'none') {
+		$text_100 = _('None');
+	}
 	$have_a_subelement = false;
 	$return = '';
 
@@ -560,28 +574,32 @@ function html_build_select_box_from_arrays($vals, $texts, $select_name, $checked
 		$return .= _('Error: uneven row counts');
 	}
 
-	//TODO: remove this ugly ack to get something more generic...
-	$title = html_get_tooltip_description($select_name);
-	if (isset($html_params['id'])) {
-		$id = $html_params['id'];
-	} else {
-		$id = '';
-	}
-	if ($title) {
-		$id = 'tracker-'.$select_name.'"';
-		if (preg_match('/\[\]/', $id)) {
-			$id = '';
-		}
+	if (!is_array($attrs)) {
+		$attrs = array();
 	}
 
-	$return .= html_ao('select', array('id' => $id, 'name' => $select_name, 'title' => util_html_secure($title)));
+	if (empty($attrs['title'])) {
+		//TODO: remove this ugly ack to get something more generic...
+		$attrs['title'] = util_html_secure(html_get_tooltip_description($select_name));
+	} else {
+		$attrs['title'] = util_html_secure($attrs['title']);
+	}
+
+	if (!empty($attrs['title'])) {
+		$attrs['id'] = 'tracker-'.$select_name.'"';
+		if (preg_match('/\[\]/', $attrs['id'])) {
+			unset($attrs['id']);
+		}
+	}
+	$attrs['name'] = $select_name;
+	$return .= html_ao('select', $attrs);
 
 	//we don't always want the default Any row shown
 	if ($show_any) {
-		$attrs = array('value' => '');
+		$opt_attrs = array('value' => '');
 		if ($checked_val)
-			$attrs['selected'] = 'selected';
-		$return .= html_e('option', $attrs, util_html_secure($text_any), false);
+			$opt_attrs['selected'] = 'selected';
+		$return .= html_e('option', $opt_attrs, util_html_secure($text_any), false);
 		$have_a_subelement = true;
 	}
 	//we don't always want the default 100 row shown
@@ -589,10 +607,10 @@ function html_build_select_box_from_arrays($vals, $texts, $select_name, $checked
 		if ($text_100 == 'none') {
 			$text_100 = _('None');
 		}
-		$attrs = array('value' => 100);
+		$opt_attrs = array('value' => 100);
 		if ($checked_val)
-			$attrs['selected'] = 'selected';
-		$return .= html_e('option', $attrs, util_html_secure($text_100), false);
+			$opt_attrs['selected'] = 'selected';
+		$return .= html_e('option', $opt_attrs, util_html_secure($text_100), false);
 		$have_a_subelement = true;
 	}
 
@@ -602,17 +620,17 @@ function html_build_select_box_from_arrays($vals, $texts, $select_name, $checked
 		//  uggh - sorry - don't show the 100 row
 		//  if it was shown above, otherwise do show it
 		if (($vals[$i] != '100') || ($vals[$i] == '100' && !$show_100)) {
-			$attrs = array();
-			$attrs['value'] = util_html_secure($vals[$i]);
+			$opt_attrs = array();
+			$opt_attrs['value'] = util_html_secure($vals[$i]);
 			if ((string)$vals[$i] == (string)$checked_val) {
 				$checked_found = true;
-				$attrs['selected'] = 'selected';
+				$opt_attrs['selected'] = 'selected';
 			}
 			if (is_array($allowed) && !in_array($vals[$i], $allowed)) {
-				$attrs['disabled'] = 'disabled';
-				$attrs['class'] = 'option_disabled';
+				$opt_attrs['disabled'] = 'disabled';
+				$opt_attrs['class'] = 'option_disabled';
 			}
-			$return .= html_e('option', $attrs, util_html_secure($texts[$i]));
+			$return .= html_e('option', $opt_attrs, util_html_secure($texts[$i]));
 			$have_a_subelement = true;
 		}
 	}
@@ -650,7 +668,7 @@ function html_build_select_box_from_arrays($vals, $texts, $select_name, $checked
  * @return	string
  */
 function html_build_select_box($result, $name, $checked_val = "xzxz", $show_100 = true, $text_100 = 'none',
-							   $show_any = false, $text_any = 'Select One', $allowed = false) {
+							   $show_any = false, $text_any = 'Select One', $allowed = false, $attrs = array()) {
 	if ($text_100 == 'none') {
 		$text_100 = _('None');
 	}
@@ -659,7 +677,8 @@ function html_build_select_box($result, $name, $checked_val = "xzxz", $show_100 
 	}
 	return html_build_select_box_from_arrays(util_result_column_to_array($result, 0),
 											 util_result_column_to_array($result, 1),
-											 $name, $checked_val, $show_100, $text_100, $show_any, $text_any);
+											 $name, $checked_val, $show_100, $text_100,
+											 $show_any, $text_any, $allowed, $attrs);
 }
 
 /**
@@ -673,14 +692,20 @@ function html_build_select_box($result, $name, $checked_val = "xzxz", $show_100 
  * @param	string	$text_100	What to call the '100 row'.  Defaults to none.
  * @return	string
  */
-function html_build_select_box_sorted($result, $name, $checked_val = "xzxz", $show_100 = true, $text_100 = 'none') {
+function html_build_select_box_sorted($result, $name, $checked_val = "xzxz", $show_100 = true, $text_100 = 'none',
+							   $show_any = false, $text_any = 'Select One', $allowed = false, $attrs = array()) {
 	if ($text_100 == 'none') {
 		$text_100 = _('None');
 	}
+	if ($text_any == 'Select One') {
+		$text_any = _('Select One');
+	}
+
 	$vals = util_result_column_to_array($result, 0);
 	$texts = util_result_column_to_array($result, 1);
 	array_multisort($texts, SORT_ASC, SORT_STRING, $vals);
-	return html_build_select_box_from_arrays ($vals, $texts, $name, $checked_val, $show_100, $text_100);
+	return html_build_select_box_from_arrays ($vals, $texts, $name, $checked_val, $show_100, $text_100,
+											  $show_any, $text_any, $allowed, $attrs);
 }
 
 /**
@@ -690,49 +715,21 @@ function html_build_select_box_sorted($result, $name, $checked_val = "xzxz", $sh
  * @param	resource	$result		The result set
  * @param	string		$name		Text to be displayed
  * @param	string		$checked_array	The item that should be checked
- * @param	int		$size		The size of this box
+ * @param	int			$size		The size of this box
  * @param	bool		$show_100	Whether or not to show the '100 row'
  * @param	string		$text_100	The displayed text of the '100 row'
+ * @param	array		$attrs		Array of other attributes for this select element
  * @return	string
  */
-function html_build_multiple_select_box($result, $name, $checked_array, $size = 8, $show_100 = true, $text_100 = 'none') {
-	$checked_count = count($checked_array);
-	$return = html_ao('select', array('name' => $name, 'multiple' => 'multiple', 'size' => $size));
-	if ($show_100) {
-		if ($text_100 == 'none') {
-			$text_100 = _('None');
-		}
-		/*
-			Put in the default NONE box
-		*/
-		$attrs = array('value' => 100);
-		for ($j = 0; $j < $checked_count; $j++) {
-			if ($checked_array[$j] == '100') {
-				$attrs['selected'] = 'selected';
-			}
-		}
-		$return .= html_e('option', $attrs, $text_100, false);
-	}
-
+function html_build_multiple_select_box($result, $name, $checked_array, $size = 8, $show_100 = true, $text_100 = 'none', $attrs = array()) {
+	$vals = array();
+	$texts = array();
 	$rows = db_numrows($result);
 	for ($i = 0; $i < $rows; $i++) {
-		if ((db_result($result, $i, 0) != '100') || (db_result($result, $i, 0) == '100' && !$show_100)) {
-			$attrs = array();
-			$attrs = array('value' => db_result($result, $i, 0));
-			/*
-				Determine if it's checked
-			*/
-			$val = db_result($result, $i, 0);
-			for ($j = 0; $j < $checked_count; $j++) {
-				if ($val == $checked_array[$j]) {
-					$attrs['selected'] = 'selected';
-				}
-			}
-			$return .= html_e('option', $attrs, substr(db_result($result, $i, 1), 0, 35), false);
-		}
+		$vals = db_result($result, $i, 0);
+		$texts = substr(db_result($result, $i, 1), 0, 35);
 	}
-	$return .= html_ac(html_ap() -1);
-	return $return;
+	return html_build_multiple_select_box_from_arrays($vals, $texts, $name, $checked_array, $size, $show_100, $text_100, $attrs);
 }
 
 /**
@@ -745,9 +742,10 @@ function html_build_multiple_select_box($result, $name, $checked_array, $size = 
  * @param	int	$size		The size of this box
  * @param	bool	$show_100	Whether or not to show the '100 row'
  * @param	string	$text_100	What to call the '100 row' defaults to none.
+ * @param	array	$attrs		Array of other attributes for this select element
  * @return	string
  */
-function html_build_multiple_select_box_from_arrays($ids, $texts, $name, $checked_array, $size = 8, $show_100 = true, $text_100 = 'none') {
+function html_build_multiple_select_box_from_arrays($vals, $texts, $name, $checked_array, $size = 8, $show_100 = true, $text_100 = 'none', $attrs = array()) {
 	$checked_count = count($checked_array);
 	$return = html_ao('select', array('name' => $name, 'multiple' => 'multiple', 'size' => $size));
 	if ($show_100) {
@@ -757,30 +755,30 @@ function html_build_multiple_select_box_from_arrays($ids, $texts, $name, $checke
 		/*
 			Put in the default NONE box
 		*/
-		$attrs = array('value' => 100);
+		$opt_attrs = array('value' => 100);
 		for ($j = 0; $j < $checked_count; $j++) {
 			if ($checked_array[$j] == '100') {
-				$attrs['selected'] = 'selected';
+				$opt_attrs['selected'] = 'selected';
 			}
 		}
-		$return .= html_e('option', $attrs, $text_100, false);
+		$return .= html_e('option', $opt_attrs, $text_100, false);
 	}
 
-	$rows = count($ids);
+	$rows = count($vals);
 	for ($i = 0; $i < $rows; $i++) {
-		if (($ids[$i] != '100') || ($ids[$i] == '100' && !$show_100)) {
-			$attrs = array();
-			$attrs = array('value' => $ids[$i]);
+		if (($vals[$i] != '100') || ($vals[$i] == '100' && !$show_100)) {
+			$opt_attrs = array();
+			$opt_attrs = array('value' => $vals[$i]);
 			/*
 				Determine if it's checked
 			*/
-			$val = $ids[$i];
+			$val = $vals[$i];
 			for ($j = 0; $j < $checked_count; $j++) {
 				if ($val == $checked_array[$j]) {
-					$attrs['selected'] = 'selected';
+					$opt_attrs['selected'] = 'selected';
 				}
 			}
-			$return .= html_e('option', $attrs, $texts[$i], false);
+			$return .= html_e('option', $opt_attrs, $texts[$i], false);
 		}
 	}
 	$return .= html_ac(html_ap() -1);
@@ -793,10 +791,11 @@ function html_build_multiple_select_box_from_arrays($ids, $texts, $name, $checke
  * @param	string	$name		name of control
  * @param	string	$value		value of control
  * @param	bool	$checked	true if control should be checked
+ * @param	array	$attrs		Array of other attributes for this element
  * @return	html code for checkbox control
  */
-function html_build_checkbox($name, $value, $checked) {
-	$attrs = array('id' => $name, 'name' => $name, 'value' => $value, 'type' => 'checkbox');
+function html_build_checkbox($name, $value, $checked, $attrs=array()) {
+	$attrs = array_merge(array('id' => $name, 'name' => $name, 'value' => $value, 'type' => 'checkbox'), $attrs);
 	if ($checked) {
 		$attrs['checked'] = 'checked';
 	}
@@ -808,8 +807,8 @@ function html_build_checkbox($name, $value, $checked) {
  *
  * @see html_build_priority_select_box()
  */
-function build_priority_select_box($name = 'priority', $checked_val = '3', $nochange = false) {
-	echo html_build_priority_select_box($name, $checked_val, $nochange);
+function build_priority_select_box($name = 'priority', $checked_val = '3', $nochange = false, $attrs = array()) {
+	echo html_build_priority_select_box($name, $checked_val, $nochange, $attrs);
 }
 
 /**
@@ -819,23 +818,26 @@ function build_priority_select_box($name = 'priority', $checked_val = '3', $noch
  * @param	string	$name		Name of the select box
  * @param	string	$checked_val	The value to be checked
  * @param	bool	$nochange	Whether to make 'No Change' selected.
+ * @param	bool|array	$attrs			Array of other attributes for this select element
  * @return string
  */
-function html_build_priority_select_box($name = 'priority', $checked_val = '3', $nochange = false) {
-	$html = '<select id="tracker-'.$name.'" name="'.$name.'" title="'.util_html_secure(html_get_tooltip_description($name)).'">';
+function html_build_priority_select_box($name = 'priority', $checked_val = '3', $nochange = false, $attrs = array()) {
+	if (empty($attrs['title'])) {
+		$attrs['title'] = util_html_secure(html_get_tooltip_description($name));
+	} else {
+		$attrs['title'] = util_html_secure($attrs['title']);
+	}
+	$vals = array('1', '2', '3', '4', '5');
+	$texts = array('1 - '._('Lowest'), '2', '3', '4', '5 - '._('Highest'));
 	if ($nochange) {
-		$html .= '<option value="100" selected="selected" >'._('No Change').'</option>';
+		$show_100 = true;
+		$text_100 = _('No Change');
+		$checked_val = 100;
+	} else {
+		$show_100 = false;
+		$text_100 = '';
 	}
-	$labelOption = array('1 - '._('Lowest'), '2', '3', '4', '5 - '._('Highest'));
-	for ($i = 1; $i <= 5; $i++) {
-		$html .= '<option value="'.$i.'" ';
-		if ($checked_val == $i) {
-			$html .= 'selected="selected" ';
-		}
-		$html .= '>'.$labelOption[$i -1].'</option>';
-	}
-	$html .= '</select>';
-	return $html;
+	return html_build_select_box_from_arrays($vals, $texts, $name, $checked_val, $show_100, $text_100, false, '', false, $attrs);
 }
 
 /**
