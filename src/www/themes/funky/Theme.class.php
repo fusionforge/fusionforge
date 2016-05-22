@@ -382,6 +382,8 @@ class Theme_Funky extends Layout {
 				setInterval(function() {
 						setTimeout("jQuery(\'.feedback\').hide(\'slow\')", 5000);
 					}, 5000);
+				jQuery("button").button();
+				jQuery(":submit").button();
 			});
 			//]]>'."\n";
 		echo html_ac(html_ap() -1);
