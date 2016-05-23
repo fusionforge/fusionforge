@@ -713,7 +713,7 @@ class ArtifactTypeHtml extends ArtifactType {
 	 * @return	string	text area and data.
 	 */
 	function renderTextArea ($extra_field_id,$contents,$rows,$cols, $attrs = array()) {
-		return html_e('textarea', array_merge(array('name'=>'extra_fields['.$extra_field_id.']', 'rows'=>$rows, 'cols'=>$cols), $attrs), $contents);
+		return html_e('textarea', array_merge(array('name'=>'extra_fields['.$extra_field_id.']', 'rows'=>$rows, 'cols'=>$cols), $attrs), $contents, false);
 	}
 
 	function technicianBox ($name='assigned_to[]',$checked='xzxz',$show_100=true,$text_100='none',$extra_id='-1',$extra_name='',$multiple=false) {
