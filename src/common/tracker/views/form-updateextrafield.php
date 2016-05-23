@@ -73,6 +73,12 @@ if (!$ac || !is_object($ac)) {
 		echo html_ao('p');
 		echo html_e('label', array('for'=>'attribute2'), html_e('b', array(), _('Text Field Maxlength')).html_e('br'));
 		echo html_e('input', array('type'=>'text', 'id'=>'attribute2', 'name'=>'attribute2', 'value'=>$ac->getAttribute2(), size=>'2', 'maxlength'=>'2'));
+		if ($ac->getType() == ARTIFACT_EXTRAFIELDTYPE_TEXT) {
+			echo html_ac(html_ap() - 1);
+			echo html_ao('p');
+			echo html_e('label', array('for'=>'pattern'), html_e('b', array(), _('Text Field Pattern')).html_e('br'));
+			echo html_e('input', array('type'=>'text', 'id'=>'pattern', 'name'=>'pattern', 'value'=>$ac->getPattern(), size=>'80', 'maxlength'=>'255'));
+		}
 	} else {
 		echo html_e('input', array('type'=>'hidden', 'name'=>'attribute1', 'value'=>'0'));
 		echo html_e('input', array('type'=>'hidden', 'name'=>'attribute2', 'value'=>'0'));

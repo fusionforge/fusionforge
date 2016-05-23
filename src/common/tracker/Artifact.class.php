@@ -1340,6 +1340,12 @@ class Artifact extends FFError {
 					}
 				}
 			}
+
+			// check pattern for text fields
+			if ($type == ARTIFACT_EXTRAFIELDTYPE_TEXT && !empty($ef[$efid]['pattern']) && !empty($extra_fields[$efid]) && !preg_match('/'.$ef[$efid]['pattern'].'/', $extra_fields[$efid])) {
+				$this->setError(sprintf(_("Field %s doesn't match the pattern."), $ef[$efid]['field_name']));
+				return false;
+			}
 //
 //	Force each field to have some value if it is a numeric field
 //	text fields will just be purged and skipped

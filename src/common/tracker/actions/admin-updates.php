@@ -39,6 +39,7 @@ if (getStringFromRequest('add_extrafield')) {
 	$field_type = getStringFromRequest('field_type');
 	$attribute1 = getStringFromRequest('attribute1');
 	$attribute2 = getStringFromRequest('attribute2');
+	$pattern = getStringFromRequest('pattern');
 	$is_required = getStringFromRequest('is_required');
 	$alias = getStringFromRequest('alias');
 	$hide100 = getStringFromRequest('hide100');
@@ -56,7 +57,7 @@ if (getStringFromRequest('add_extrafield')) {
 		} else {
 			$show100 = 1;
 		}
-		if (!$ab->create($name, $field_type, $attribute1, $attribute2, $is_required, $alias, $show100, $show100label, $description)) {
+		if (!$ab->create($name, $field_type, $attribute1, $attribute2, $is_required, $alias, $show100, $show100label, $description, $pattern)) {
 			$error_msg .= _('Error inserting a custom field')._(': ').$ab->getErrorMessage();
 			$ab->clearError();
 		} else {
@@ -232,6 +233,7 @@ if (getStringFromRequest('add_extrafield')) {
 	$description = getStringFromRequest('description');
 	$attribute1 = getStringFromRequest('attribute1');
 	$attribute2 = getStringFromRequest('attribute2');
+	$pattern = getStringFromRequest('pattern');
 	$is_required = getStringFromRequest('is_required');
 	$alias = getStringFromRequest('alias');
 	$hide100 = getStringFromRequest('hide100');
@@ -248,7 +250,7 @@ if (getStringFromRequest('add_extrafield')) {
 		} else {
 			$show100 = 1;
 		}
-		if (!$ac->update($name, $attribute1, $attribute2, $is_required, $alias, $show100, $show100label, $description)) {
+		if (!$ac->update($name, $attribute1, $attribute2, $is_required, $alias, $show100, $show100label, $description, $pattern)) {
 			$error_msg .= _('Update failed')._(': ').$ac->getErrorMessage();
 			$ac->clearError();
 		} else {

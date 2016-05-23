@@ -143,10 +143,17 @@ echo _('Text Field Size/Text Area Rows');
 echo html_e('input', array('type'=>'text', 'name'=>'attribute1', 'value'=>'20', size=>'2', 'maxlength'=>'2')).html_e('br');
 echo _('Text Field Maxlength/Text Area Columns');
 echo html_e('input', array('type'=>'text', 'name'=>'attribute2', 'value'=>'80', size=>'2', 'maxlength'=>'2')).html_e('br');
+echo _('Text Field Pattern');
+echo html_e('input', array('type'=>'text', 'name'=>'pattern', 'value'=>'', size=>'80', 'maxlength'=>'255')).html_e('br');
 echo _('Hide the default none value');
 echo html_build_checkbox('hide100','',false).html_e('br');
 echo _('Label for the none value');
 echo html_e('input', array('type'=>'text', 'name'=>'show100label', 'value'=>_('none'), size=>'30')).html_e('br');
+echo html_ac(html_ap() - 1);
+
+echo html_ao('p');
+echo html_build_checkbox('is_required','',false);
+echo html_e('label', array('for'=>'is_required'), _('Field is mandatory'));
 echo html_ac(html_ap() - 1);
 
 echo $HTML->warning_msg(_('Warning: this add new custom field'));

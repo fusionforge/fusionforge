@@ -265,6 +265,9 @@ class ArtifactTypeHtml extends ArtifactType {
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_TEXT ||
 					$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_INTEGER) {
 
+				if (!empty($efarr[$i]['pattern'])) {
+					$attrs['pattern'] = $efarr[$i]['pattern'];
+				}
 				$str = $this->renderTextField($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['attribute1'],$efarr[$i]['attribute2'], $attrs);
 				if ($mode == 'QUERY') {
 					$post_name =  ' <i>'._('(%% for wildcards)').'</i>&nbsp;&nbsp;&nbsp;';
@@ -675,7 +678,7 @@ class ArtifactTypeHtml extends ArtifactType {
 	 * @return	string	HTML code of corresponding input tag.
 	 */
 	function renderTextField ($extra_field_id, $contents, $size, $maxlength, $attrs = array()) {
-		return html_e('input', array_merge(array( 'type'=>'text', 'name'=>'extra_fields['.$extra_field_id.']', 'value'=>$contents, 'size'=>$size, 'maxlength'=>$maxlength)));
+		return html_e('input', array_merge(array('type'=>'text', 'name'=>'extra_fields['.$extra_field_id.']', 'value'=>$contents, 'size'=>$size, 'maxlength'=>$maxlength), $attrs));
 	}
 
 	/**()

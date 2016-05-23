@@ -93,17 +93,19 @@ class ArtifactExtraField extends FFError {
 	 * a tracker.  This function is only used to create rows for boxes
 	 * configured by the admin.
 	 *
-	 * @param	string	$name		Name of the extra field.
-	 * @param	int	$field_type	The type of field - radio, select, text, textarea
-	 * @param	int	$attribute1	For text (size) and textarea (rows)
-	 * @param	int	$attribute2	For text (maxlength) and textarea (cols)
-	 * @param	int	$is_required	True or false whether this is a required field or not.
-	 * @param	string	$alias		Alias for this extra field (optional)
-	 * @param	int	$show100	True or false whether the 100 value is displayed or not
+	 * @param	string	$name			Name of the extra field.
+	 * @param	int		$field_type		The type of field - radio, select, text, textarea
+	 * @param	int		$attribute1		For text (size) and textarea (rows)
+	 * @param	int		$attribute2		For text (maxlength) and textarea (cols)
+	 * @param	int		$is_required	True or false whether this is a required field or not.
+	 * @param	string	$alias			Alias for this extra field (optional)
+	 * @param	int		$show100		True or false whether the 100 value is displayed or not
 	 * @param	string	$show100label	The label used for the 100 value if displayed
+	 * @param	string	$description	Description used for help text.
+	 * @param	string	$pattern		A regular expression to check the field.
 	 * @return	bool	true on success / false on failure.
 	 */
-	function create($name, $field_type, $attribute1, $attribute2, $is_required = 0, $alias = '', $show100 = true, $show100label = 'none', $description = '') {
+	function create($name, $field_type, $attribute1, $attribute2, $is_required = 0, $alias = '', $show100 = true, $show100label = 'none', $description = '', $pattern='') {
 		//
 		//	data validation
 		//
@@ -156,8 +158,8 @@ class ArtifactExtraField extends FFError {
 		}
 
 		db_begin();
-		$result = db_query_params ('INSERT INTO artifact_extra_field_list (group_artifact_id, field_name, field_type, attribute1, attribute2, is_required, alias, show100, show100label, description)
-			VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)',
+		$result = db_query_params ('INSERT INTO artifact_extra_field_list (group_artifact_id, field_name, field_type, attribute1, attribute2, is_required, alias, show100, show100label, description, pattern)
+			VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)',
 					   array ($this->ArtifactType->getID(),
 							  htmlspecialchars($name),
 							  $field_type,
@@ -167,7 +169,8 @@ class ArtifactExtraField extends FFError {
 							  $alias,
 							  $show100,
 							  $show100label,
-							  $description));
+							  $description,
+							  $pattern));
 
 		if ($result && db_affected_rows($result) > 0) {
 			$this->clearError();
@@ -304,6 +307,15 @@ class ArtifactExtraField extends FFError {
 	}
 
 	/**
+	 * getPattern - get the pattern for text field.
+	 *
+	 * @return	string	The pattern.
+	 */
+	function getPattern() {
+		return $this->data_array['pattern'];
+	}
+
+	/**
 	 * getShow100 - get the show100 field.
 	 *
 	 * @return	int	The show100 attribute.
@@ -406,7 +418,7 @@ class ArtifactExtraField extends FFError {
 	 * @param	string	$show100label	The label used for the 100 value if displayed
 	 * @return	bool	success.
 	 */
-	function update($name, $attribute1, $attribute2, $is_required = 0, $alias = "", $show100 = true, $show100label = 'none', $description = '') {
+	function update($name, $attribute1, $attribute2, $is_required = 0, $alias = "", $show100 = true, $show100label = 'none', $description = '', $pattern='') {
 		if (!forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
@@ -445,9 +457,10 @@ class ArtifactExtraField extends FFError {
 			is_required = $5,
 			alias = $6,
 			show100 = $7,
-			show100label = $8
-			WHERE extra_field_id = $9
-			AND group_artifact_id = $10',
+			show100label = $8,
+			pattern = $9,
+			WHERE extra_field_id = $10
+			AND group_artifact_id = $11',
 					   array (htmlspecialchars($name),
 							  $description,
 							  $attribute1,
@@ -456,6 +469,7 @@ class ArtifactExtraField extends FFError {
 							  $alias,
 							  $show100,
 							  $show100label,
+							  $pattern,
 							  $this->getID(),
 							  $this->ArtifactType->getID())) ;
 		if ($result && db_affected_rows($result) > 0) {
