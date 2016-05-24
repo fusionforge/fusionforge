@@ -845,3 +845,7 @@ p.information {
 	padding: 0 10px;
 	border-bottom: 1px solid #ccc;
 }
+
+input, select {
+	vertical-align: middle;
+}

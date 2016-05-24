@@ -125,3 +125,8 @@ p.information {
 	margin-top: 23px;
 	margin-left: 5px;
 }
+
+input, select {
+	vertical-align: middle;
+}
+
