@@ -1,6 +1,6 @@
 # parser_list.txt
 #
-# FusionForge document search engine
+# FusionForge Documentation Manager Search Engine
 #
 # Copyright 2005, Fabio Bertagnin
 # Copyright 2009-2010, Franck Villaume - Capgemini

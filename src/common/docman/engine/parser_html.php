@@ -1,7 +1,7 @@
 #! /usr/bin/php
 <?php
 /**
- * FusionForge document search engine
+ * FusionForge Documentation Manager Search Engine
  *
  * Copyright 2005, Fabio Bertagnin
  * Copyright 2009-2011, Franck Villaume - Capgemini
