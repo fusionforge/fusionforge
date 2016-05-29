@@ -1298,6 +1298,10 @@ if (isset($params['group']) && $params['group']) {
 		return $this->getPicto('ic/directory-add.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
+	function getEditFilePic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/edit-file.png', $title, $alt, 20, 20, $otherAttr);
+	}
+
 	function getNewPic($title = '', $alt = '', $otherAttr = array()) {
 		return $this->getPicto('ic/add.png', $title, $alt, 20, 20, $otherAttr);
 	}
