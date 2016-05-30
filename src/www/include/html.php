@@ -547,16 +547,16 @@ function html_use_jquerybrowser() {
  * row is 100, so almost every pop-up box has 100 as the default
  * Most tables in the database should therefore have a row with an id of 100 in it so that joins are successful
  *
- * @param	array		$vals			The ID or value
- * @param	array		$texts			Text to be displayed
+ * @param	array		$vals		The ID or value
+ * @param	array		$texts		Text to be displayed
  * @param	string		$select_name	Name to assign to this form element
  * @param	string		$checked_val	The item that should be checked
- * @param	bool		$show_100		Whether or not to show the '100 row'
- * @param	string		$text_100		What to call the '100 row' defaults to none
- * @param	bool		$show_any		Whether or not to show the 'Any row'
- * @param	string		$text_any		What to call the 'Any row' defaults to any
- * @param	bool|array	$allowed		Array of all allowed values from the full list.
- * @param	array		$attrs			Array of other attributes for this select element
+ * @param	bool		$show_100	Whether or not to show the '100 row'
+ * @param	string		$text_100	What to call the '100 row' defaults to none
+ * @param	bool		$show_any	Whether or not to show the 'Any row'
+ * @param	string		$text_any	What to call the 'Any row' defaults to any
+ * @param	bool|array	$allowed	Array of all allowed values from the full list.
+ * @param	array		$attrs		Array of other attributes for this select element
  * @return	string
  */
 function html_build_select_box_from_arrays($vals, $texts, $select_name, $checked_val = 'xzxz',
@@ -586,7 +586,7 @@ function html_build_select_box_from_arrays($vals, $texts, $select_name, $checked
 	}
 
 	if (!empty($attrs['title'])) {
-		$attrs['id'] = 'tracker-'.$select_name.'"';
+		$attrs['id'] = 'tracker-'.$select_name;
 		if (preg_match('/\[\]/', $attrs['id'])) {
 			unset($attrs['id']);
 		}
@@ -715,7 +715,7 @@ function html_build_select_box_sorted($result, $name, $checked_val = "xzxz", $sh
  * @param	resource	$result		The result set
  * @param	string		$name		Text to be displayed
  * @param	string		$checked_array	The item that should be checked
- * @param	int			$size		The size of this box
+ * @param	int		$size		The size of this box
  * @param	bool		$show_100	Whether or not to show the '100 row'
  * @param	string		$text_100	The displayed text of the '100 row'
  * @param	array		$attrs		Array of other attributes for this select element
@@ -815,10 +815,10 @@ function build_priority_select_box($name = 'priority', $checked_val = '3', $noch
  * html_build_priority_select_box() - Return a select box of standard priorities.
  * The name of this select box is optional and so is the default checked value.
  *
- * @param	string	$name		Name of the select box
- * @param	string	$checked_val	The value to be checked
- * @param	bool	$nochange	Whether to make 'No Change' selected.
- * @param	bool|array	$attrs			Array of other attributes for this select element
+ * @param	string		$name		Name of the select box
+ * @param	string		$checked_val	The value to be checked
+ * @param	bool		$nochange	Whether to make 'No Change' selected.
+ * @param	bool|array	$attrs		Array of other attributes for this select element
  * @return string
  */
 function html_build_priority_select_box($name = 'priority', $checked_val = '3', $nochange = false, $attrs = array()) {

@@ -6,6 +6,7 @@
  * Copyright 2010 (c) Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -30,7 +31,7 @@ global $ath;
 $ath->header(array ('title'=>_('Submit New')));
 
 require_once $gfcommon.'tracker/include/build_submission_form.php';
-artifact_submission_form($ath, $group);
+artifact_submission_form($ath, $group, $summary, $details, $assigned_to, $priority, $extra_fields);
 
 $ath->footer();
 
