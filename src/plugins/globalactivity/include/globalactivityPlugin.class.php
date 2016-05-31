@@ -25,100 +25,194 @@ class globalactivityPlugin extends Plugin {
 	public function __construct($id=0) {
 		$this->Plugin($id) ;
 		$this->name = "globalactivity";
-		$this->text = "HelloWorld!"; // To show in the tabs, use...
-		$this->_addHook("user_personal_links");//to make a link to the user's personal part of the plugin
-		$this->_addHook("usermenu");
-		$this->_addHook("groupmenu");	// To put into the project tabs
-		$this->_addHook("groupisactivecheckbox"); // The "use ..." checkbox in editgroupinfo
-		$this->_addHook("groupisactivecheckboxpost"); //
-		$this->_addHook("userisactivecheckbox"); // The "use ..." checkbox in user account
-		$this->_addHook("userisactivecheckboxpost"); //
-		$this->_addHook("project_admin_plugins"); // to show up in the admin page fro group
+		$this->text = "Global Activity"; // To show in the tabs, use...
 	}
 
 	function CallHook ($hookname, &$params) {
-		global $use_helloworldplugin,$G_SESSION,$HTML;
-		if ($hookname == "usermenu") {
-			$text = $this->text; // this is what shows in the tab
-			if ($G_SESSION->usesPlugin("helloworld")) {
-				$param = '?type=user&id=' . $G_SESSION->getId() . '&pluginname=' . $this->name; // we indicate the part we're calling is the user one
-				echo $HTML->PrintSubMenu (array ($text),
-						  array ('/plugins/helloworld/index.php' . $param ));
+	}
 
+	public function getData($begin,$end,$show,&$ids,&$texts) {
+		if ($begin > $end) {
+			$tmp = $end;
+			$end = $begin;
+			$begin = $tmp;
+			$tmp = $rendered_end;
+			$rendered_end = $rendered_begin;
+			$rendered_begin = $tmp;
+		}
+		
+		if (forge_get_config('use_forum')) {
+			$ids[]		= 'forumpost';
+			$texts[]	= _('Forum Post');
+		}
+
+		if (forge_get_config('use_tracker')) {
+			$ids[]		= 'trackeropen';
+			$texts[]	= _('Tracker Opened');
+			$ids[]		= 'trackerclose';
+			$texts[]	= _('Tracker Closed');
+		}
+
+		if (forge_get_config('use_news')) {
+			$ids[]		= 'news';
+			$texts[]	= _('News');
+		}
+
+		if (forge_get_config('use_pm')) {
+			$ids[]		= 'taskopen';
+			$texts[]	= _('Tasks Opened');
+			$ids[]		= 'taskclose';
+			$texts[]	= _('Tasks Closed');
+			$ids[]		= 'taskdelete';
+			$texts[]	= _('Tasks Deleted');
+		}
+
+		if (forge_get_config('use_frs')) {
+			$ids[]		= 'frsrelease';
+			$texts[]	= _('FRS Release');
+		}
+
+		if (forge_get_config('use_docman')) {
+			$ids[]		= 'docmannew';
+			$texts[]	= _('New Documents');
+			$ids[]		= 'docmanupdate';
+			$texts[]	= _('Updated Documents');
+			$ids[]		= 'docgroupnew';
+			$texts[]	= _('New Directories');
+		}
+
+		if (count($show) < 1) {
+			$section = $ids;
+		} else {
+			$section = $show;
+		}
+
+		function date_compare($a, $b) {
+			if ($a['activity_date'] == $b['activity_date']) {
+				return 0;
 			}
-		} elseif ($hookname == "groupmenu") {
-			$group_id=$params['group'];
-			$project = group_get_object($group_id);
-			if (!$project || !is_object($project)) {
-				return;
+			return ($a['activity_date'] > $b['activity_date']) ? -1 : 1;
+		}
+
+		global $cached_perms;
+		$cached_perms = array();
+		function check_perm_for_activity($arr) {
+			global $cached_perms;
+			$s = $arr['section'];
+			$ref = $arr['ref_id'];
+			$group_id = $arr['group_id'];
+
+			if (!isset($cached_perms[$s][$ref])) {
+				switch ($s) {
+					case 'scm': {
+						$cached_perms[$s][$ref] = forge_check_perm('scm', $group_id, 'read');
+						break;
+					}
+					case 'trackeropen':
+					case 'trackerclose': {
+						$cached_perms[$s][$ref] = forge_check_perm('tracker', $ref, 'read');
+						break;
+					}
+					case 'frsrelease': {
+						$cached_perms[$s][$ref] = forge_check_perm('frs', $ref, 'read');
+						break;
+					}
+					case 'forumpost':
+					case 'news': {
+						$cached_perms[$s][$ref] = forge_check_perm('forum', $ref, 'read');
+						break;
+					}
+					case 'taskopen':
+					case 'taskclose':
+					case 'taskdelete': {
+						$cached_perms[$s][$ref] = forge_check_perm('pm', $ref, 'read');
+						break;
+					}
+					case 'docmannew':
+					case 'docmanupdate':
+					case 'docgroupnew': {
+						$cached_perms[$s][$ref] = forge_check_perm('docman', $group_id, 'read');
+						break;
+					}
+					default: {
+						// Must be a bug somewhere, we're supposed to handle all types
+						$cached_perms[$s][$ref] = false;
+					}
+				}
 			}
-			if ($project->isError()) {
-				return;
+			return $cached_perms[$s][$ref];
+		}
+
+		$res = db_query_params('SELECT * FROM activity_vw WHERE activity_date BETWEEN $1 AND $2
+			AND section = ANY ($3) ORDER BY activity_date DESC',
+							   array($begin,
+									 $end,
+									 db_string_array_to_any_clause($section)));
+
+		if (db_error()) {
+			exit_error(db_error(), 'home');
+		}
+
+		$results = array();
+		while ($arr = db_fetch_array($res)) {
+			$group_id = $arr['group_id'];
+			if (!forge_check_perm('project_read', $group_id)) {
+				continue;
 			}
-			if (!$project->isProject()) {
-				return;
+			if (!check_perm_for_activity($arr)) {
+				continue;
 			}
-			if ( $project->usesPlugin ( $this->name ) ) {
-				$params['TITLES'][]=$this->text;
-				$params['DIRS'][]=util_make_url ('/plugins/helloworld/index.php?type=group&id=' . $group_id . "&pluginname=" . $this->name) ; // we indicate the part we're calling is the project one
-			} else {
-				$params['TITLES'][]=$this->text." is [Off]";
-				$params['DIRS'][]='';
+			$results[] = $arr;
+		}
+
+		$res = db_query_params('SELECT group_id FROM groups WHERE status=$1',
+							   array('A'));
+
+		if (db_error()) {
+			exit_error(db_error(), 'home');
+		}
+
+		// If plugins wants to add activities.
+		while ($arr = db_fetch_array($res)) {
+			if (!forge_check_perm('project_read', $group_id)) {
+				continue;
 			}
-			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
-		} elseif ($hookname == "groupisactivecheckbox") {
-			//Check if the group is active
-			// this code creates the checkbox in the project edit public info page to activate/deactivate the plugin
-			$group_id=$params['group'];
-			$group = group_get_object($group_id);
-			echo "<tr>";
-			echo "<td>";
-			echo ' <input type="checkbox" name="use_helloworldplugin" value="1" ';
-			// checked or unchecked?
-			if ( $group->usesPlugin ( $this->name ) ) {
-				echo "checked";
-			}
-			echo " /><br/>";
-			echo "</td>";
-			echo "<td>";
-			echo "<strong>Use ".$this->text." Plugin</strong>";
-			echo "</td>";
-			echo "</tr>";
-		} elseif ($hookname == "groupisactivecheckboxpost") {
-			// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
-			$group_id=$params['group'];
-			$group = group_get_object($group_id);
-			$use_helloworldplugin = getStringFromRequest('use_helloworldplugin');
-			if ( $use_helloworldplugin == 1 ) {
-				$group->setPluginUse ( $this->name );
-			} else {
-				$group->setPluginUse ( $this->name, false );
-			}
-		} elseif ($hookname == "user_personal_links") {
-			// this displays the link in the user's profile page to it's personal HelloWorld (if you want other sto access it, youll have to change the permissions in the index.php
-			$userid = $params['user_id'];
-			$user = user_get_object($userid);
-			$text = $params['text'];
-			//check if the user has the plugin activated
-			if ($user->usesPlugin($this->name)) {
-				echo '	<p>' ;
-				echo util_make_link ("/plugins/helloworld/index.php?id=$userid&type=user&pluginname=".$this->name,
-						     _('View Personal HelloWorld')
-					);
-				echo '</p>';
-			}
-		} elseif ($hookname == "project_admin_plugins") {
-			// this displays the link in the project admin options page to it's  HelloWorld administration
-			$group_id = $params['group_id'];
-			$group = group_get_object($group_id);
-			if ( $group->usesPlugin ( $this->name ) ) {
-				echo '<p>'.util_make_link ("/plugins/helloworld/admin/index.php?id=".$group->getID().'&type=admin&pluginname='.$this->name,
-						     _('HelloWorld Admin')).'</p>' ;
+			$group_id = $arr['group_id'];
+			$hookParams['group'] = $group_id;
+			$hookParams['results'] = &$results;
+			$hookParams['show'] = &$show;
+			$hookParams['begin'] = $begin;
+			$hookParams['end'] = $end;
+			$hookParams['ids'] = &$ids;
+			$hookParams['texts'] = &$texts;
+			plugin_hook("activity", $hookParams);
+		}
+
+		if (count($show) < 1) {
+			$show = $ids;
+		}
+
+		foreach ($show as $showthis) {
+			if (array_search($showthis, $ids) === false) {
+				exit_error(_('Invalid Data Passed to query'), 'home');
 			}
 		}
-		elseif ($hookname == "blahblahblah") {
-			// ...
+
+		$res2 = array();
+		foreach ($results as $arr) {
+			$group_id = $arr['group_id'];
+			if (!forge_check_perm('project_read', $group_id)) {
+				continue;
+			}
+			if (!check_perm_for_activity($arr)) {
+				continue;
+			}
+			$res2[] = $arr;
 		}
+
+		usort($res2, 'date_compare');
+
+		return $res2;
 	}
 }
 
