@@ -43,7 +43,7 @@ if [ -e /etc/debian_version ]; then
 	    fusionforge-plugin-scmgit fusionforge-plugin-scmsvn fusionforge-plugin-scmbzr \
 	    fusionforge-plugin-moinmoin \
 	    fusionforge-plugin-blocks fusionforge-plugin-taskboard \
-	    fusionforge-plugin-message
+	    fusionforge-plugin-message fusionforge-plugin-globalactivity
 	if ! dpkg-vendor --is Ubuntu; then
 	    apt-get install locales-all  # https://bugs.launchpad.net/ubuntu/+source/glibc/+bug/1394929
 	fi
@@ -58,6 +58,6 @@ else
 	yum --enablerepo=epel install -y fusionforge fusionforge-shell fusionforge-scm \
 	    fusionforge-plugin-scmgit fusionforge-plugin-scmsvn \
 	    fusionforge-plugin-blocks fusionforge-plugin-online_help fusionforge-plugin-taskboard \
-	    fusionforge-plugin-message
+	    fusionforge-plugin-message fusionforge-plugin-globalactivity
     fi
 fi
