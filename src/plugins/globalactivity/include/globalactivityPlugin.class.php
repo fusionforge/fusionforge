@@ -235,7 +235,7 @@ class globalactivityPlugin extends Plugin {
 
 		foreach ($show as $showthis) {
 			if (array_search($showthis, $ids) === false) {
-				exit_error(_('Invalid Data Passed to query'), 'home');
+				throw new Exception(_('Invalid Data Passed to query'));
 			}
 		}
 
@@ -268,8 +268,13 @@ function &globalactivity_getActivity($session_ser,$begin,$end,$show=array()) {
 
 	$ids = array();
 	$texts = array();
-	
-	$results = $plugin->getData($begin,$end,$show,$ids,$texts);
+
+	try {
+		$results = $plugin->getData($begin,$end,$show,$ids,$texts);
+	} catch (Exception $e) {
+		$msg = "Error in global activity: ".$e->getMessage();
+		return new soap_fault ('','globalactivity_getActivity',$msg,$msg);
+	}
 
 	$keys = array(
 		'group_id',

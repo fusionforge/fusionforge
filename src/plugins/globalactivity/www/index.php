@@ -85,7 +85,11 @@ site_header(array('title'=>_('Global activity')));
 $ids = array();
 $texts = array();
 
-$results = $plugin->getData($begin,$end,$show,$ids,$texts);
+try {
+	$results = $plugin->getData($begin,$end,$show,$ids,$texts);
+} catch (Exception $e) {
+	exit_error($e->getMessage(), 'home');
+}
 
 if (count($ids) < 1) {
 	echo $HTML->information(_('No Activity Found'));
