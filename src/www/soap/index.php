@@ -150,6 +150,11 @@ require_once $gfwww.'soap/frs/frs.php';
 //
 require_once $gfwww.'soap/scm/scm.php';
 
+// Include methods defined by plugins
+$params = array();
+$params['server'] = &$server;
+plugin_hook('register_soap',$params);
+
 $wsdl_data = $server->wsdl->serialize();
 
 if (isset($wsdl)) {
