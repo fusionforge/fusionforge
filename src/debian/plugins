@@ -62,6 +62,9 @@ Depends: libarc-php, fusionforge-plugin-compactpreview
 Package: fusionforge-plugin-foafprofiles
 Depends:
 
+Package: fusionforge-plugin-globalactivity
+Depends:
+
 Package: fusionforge-plugin-globalsearch
 Depends: libxml-rss-perl, libgetopt-mixed-perl, libdbi-perl, libwww-perl, libcrypt-ssleay-perl, libunicode-string-perl, ${perl:Depends}
 
