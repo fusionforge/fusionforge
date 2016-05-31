@@ -79,7 +79,7 @@ class Widget_ProjectPublicAreas extends Widget {
 					// with OSLC-CM server API
 					$group_artifact_id = $row['group_artifact_id'];
 					$tracker_stdzd_uri = util_make_url('/tracker/cm/project/'. $project->getUnixName() .'/atid/'. $group_artifact_id);
-					$contentLi .= '<span rel="http://www.w3.org/2002/07/owl#sameAs">'."\n";
+					$contentLi = '<span rel="http://www.w3.org/2002/07/owl#sameAs">'."\n";
 					$contentLi .= util_make_link('/tracker/?atid='. $group_artifact_id . '&group_id='.$group_id.'&func=browse', $row['name']) . ' ' ;
 					$contentLi .= "</span>\n"; // /owl:sameAs
 					$contentLi .= sprintf(ngettext('(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', '(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', $row['open_count']), $row['open_count'], $row['count']);
