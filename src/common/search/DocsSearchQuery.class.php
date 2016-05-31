@@ -119,7 +119,6 @@ class DocsSearchQuery extends SearchQuery {
 		$qpa = db_construct_qpa($qpa, ' ORDER BY ts_rank(vectors, to_tsquery($1)) DESC, group_id ASC, groupname ASC, title ASC',
 					 array($words));
 
-		var_dump($qpa);
 		return $qpa;
 	}
 
