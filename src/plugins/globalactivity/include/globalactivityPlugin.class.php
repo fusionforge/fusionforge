@@ -26,9 +26,49 @@ class globalactivityPlugin extends Plugin {
 		$this->Plugin($id) ;
 		$this->name = "globalactivity";
 		$this->text = "Global Activity"; // To show in the tabs, use...
+
+		$this->_addHook('register_soap');
 	}
 
-	function CallHook ($hookname, &$params) {
+	public function register_soap(&$params) {
+		$server = &$params['server'];
+		$uri = 'http://'.forge_get_config('web_host');
+
+		$server->wsdl->addComplexType(
+			'GlobalActivityEntry',
+			'complexType',
+			'struct',
+			'sequence',
+			'',
+			array(
+				'group_id' => array('name'=>'group_id', 'type' => 'xsd:int'),
+				'section' => array('name'=>'section', 'type' => 'xsd:string'),
+				'ref_id' => array('name'=>'ref_id', 'type' => 'xsd:string'),
+				'subref_id' => array('name'=>'subref_id', 'type' => 'xsd:string'),
+				'description' => array('name'=>'description', 'type' => 'xsd:string'),
+				'activity_date' => array('name'=>'activity_date', 'type' => 'xsd:int')
+				)
+			);
+
+		$server->wsdl->addComplexType(
+			'ArrayOfGlobalActivityEntry',
+			'complexType',
+			'array',
+			'',
+			'SOAP-ENC:Array',
+			array(),
+			array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:GlobalActivityEntry[]')),
+			'tns:GlobalActivityEntry');
+		
+		$server->register(
+			'globalactivity_getActivity',
+			array('session_ser'=>'xsd:string',
+				  'begin'=>'xsd:int',
+				  'end'=>'xsd:int',
+				  'show'=>'tns:ArrayOfstring',),
+			array('return'=>'tns:ArrayOfGlobalActivityEntry'),
+			$uri,
+			$uri.'#globalactivity_getActivity','rpc','encoded');
 	}
 
 	public function getData($begin,$end,$show,&$ids,&$texts) {
@@ -87,7 +127,7 @@ class globalactivityPlugin extends Plugin {
 			$section = $show;
 		}
 
-		function date_compare($a, $b) {
+		function activity_date_compare($a, $b) {
 			if ($a['activity_date'] == $b['activity_date']) {
 				return 0;
 			}
@@ -174,6 +214,7 @@ class globalactivityPlugin extends Plugin {
 
 		// If plugins wants to add activities.
 		while ($arr = db_fetch_array($res)) {
+			$group_id = $arr['group_id'];
 			if (!forge_check_perm('project_read', $group_id)) {
 				continue;
 			}
@@ -210,10 +251,47 @@ class globalactivityPlugin extends Plugin {
 			$res2[] = $arr;
 		}
 
-		usort($res2, 'date_compare');
+		usort($res2, 'activity_date_compare');
 
 		return $res2;
 	}
+}
+
+function &globalactivity_getActivity($session_ser,$begin,$end,$show=array()) {
+	continue_session($session_ser);
+
+	$plugin = plugin_get_object('globalactivity');
+	if (!forge_get_config('use_activity')
+		|| !$plugin) {
+		return new soap_fault ('','globalactivity_getActivity','Global activity not available','Global activity not available');
+	}
+
+	$ids = array();
+	$texts = array();
+	
+	$results = $plugin->getData($begin,$end,$show,$ids,$texts);
+
+	$keys = array(
+		'group_id',
+		'section',
+		'ref_id',
+		'subref_id',
+		'description',
+		'activity_date',
+		);
+
+
+	$res2 = array();
+	foreach ($results as $res) {
+		$r = array();
+		
+		foreach ($keys as $k) {
+			$r[$k] = $res[$k];
+		}
+		$res2[] = $r;
+	}
+
+	return $res2;
 }
 
 // Local Variables:
