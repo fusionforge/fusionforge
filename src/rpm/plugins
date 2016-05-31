@@ -37,6 +37,9 @@ Requires: php-pear-HTTP
 %package plugin-externalsearch
 Requires:
 
+%package plugin-globalactivity
+Requires:
+
 %package plugin-gravatar
 Requires:
 
