@@ -81,6 +81,14 @@ class ScmGitSSHTest extends FForge_SeleniumTestCase
 		$this->assertTextPresent("Adding file");
 		$this->selectFrame("relative=top");
 
+		// Check that the changes appear in the global activity page
+
+		$this->activatePlugin('globalactivity');
+
+		$this->open(ROOT.'/plugins/globalactivity/');
+		$this->assertTextPresent("scm commit: Modifying file");
+		$this->assertTextPresent("scm commit: Adding file");
+
 		system("rm -fr $t");
 	}
 }
