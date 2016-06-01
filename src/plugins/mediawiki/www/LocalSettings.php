@@ -103,6 +103,9 @@ $wgPasswordSender = forge_get_config('admin_email');
 
 function ff_mw_db_name($s) {
 	$s = str_replace('-', '_', $s);
+	$s = preg_replace_callback('/[^A-Za-z0-9_]/', function ($match) {
+		return sprintf('$%02X', ord($match[0]));
+	    }, $s);
 	return $s;
 }
 
