@@ -45,7 +45,7 @@ function pm_header($params) {
 		exit_no_group();
 	}
 
-	if (!$project->usesPm()) {
+	if (!$project->usesPM()) {
 		exit_disabled('home');
 	}
 

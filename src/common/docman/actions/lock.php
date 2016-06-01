@@ -39,7 +39,7 @@ $itemid = getIntFromRequest('itemid');
 // hack to use this action as a getLocked action.
 // if the param lock is missing, then we return the status of the lock.
 $lock = getIntFromRequest('lock', 2);
-$type = getStringfromRequest('type');
+$type = getStringFromRequest('type');
 $childgroup_id = getIntFromRequest('childgroup_id');
 if ($childgroup_id) {
 	$g = group_get_object($childgroup_id);

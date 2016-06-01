@@ -179,7 +179,7 @@ class FRSPackage extends FFError {
 
 		db_begin();
 		$result = db_query_params('INSERT INTO frs_package(group_id, name, status_id) VALUES ($1, $2, $3)',
-					array($this->Group->getId(),
+					array($this->Group->getID(),
 						htmlspecialchars($name),
 						1));
 		if (!$result) {
@@ -590,7 +590,7 @@ class FRSPackage extends FFError {
 			$zipPath = $this->getReleaseZipPath($release_id);
 			$release = frsrelease_get_object($release_id);
 			$filesPath = forge_get_config('upload_dir').'/'.$this->Group->getUnixName().'/'.$this->getFileName().'/'.$release->getFileName();
-			if ($zip->open($zipPath, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE) != true) {
+			if ($zip->open($zipPath, ZipArchive::CREATE | ZipArchive::OVERWRITE) != true) {
 				$this->setError(_('Cannot open the file archive')._(': ').$zipPath.'.');
 				return false;
 			}

@@ -119,7 +119,7 @@ class Widget_MySurveys extends Widget {
 				foreach ($surveys as $survey) {
 					$i++ ;
 					if (!$hide_now) {
-						$group_survey_id = $survey->getId();
+						$group_survey_id = $survey->getID();
 						$survey_title = $survey->getTitle();
 						$html .= '
 							<tr '. $HTML->boxGetAltRowStyle($i) .'><td style="width:99%">'.

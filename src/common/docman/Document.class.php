@@ -196,7 +196,7 @@ class Document extends FFError {
 		db_begin();
 		$result = db_query_params('INSERT INTO doc_data (group_id, createdate, doc_group, stateid)
 						VALUES ($1, $2, $3, $4)',
-						array($this->Group->getId(), time(), $doc_group, $doc_initstatus));
+						array($this->Group->getID(), time(), $doc_group, $doc_initstatus));
 
 		$docid = db_insertid($result, 'doc_data', 'docid');
 		if (!$result || !$docid) {

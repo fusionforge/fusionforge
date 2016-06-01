@@ -148,7 +148,7 @@ class FRSRelease extends FFError {
 
 		db_begin();
 		$result = db_query_params('INSERT INTO frs_release(package_id,notes,changes,preformatted,name,release_date,released_by,status_id) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
-					array($this->FRSPackage->getId(),
+					array($this->FRSPackage->getID(),
 						htmlspecialchars($notes),
 						htmlspecialchars($changes),
 						$preformatted,

@@ -148,7 +148,7 @@ if (!$pm->PluginIsInstalled('scmcvs')) {
 }
 
 // [#411] Prevent admin from desactivating the last auth plugin.
-$plugins = $pm->GetPlugins();
+$plugins = $pm->getPlugins();
 $auth_plugins = array();
 foreach($plugins as $p) {
 	if (preg_match('/^auth/', $p)) {

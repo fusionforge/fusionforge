@@ -74,7 +74,7 @@ class TroveCat extends FFError {
 		}
 	}
 
-	function getId() {
+	function getID() {
 		return $this->data_array['trove_cat_id'];
 	}
 
@@ -86,7 +86,7 @@ class TroveCat extends FFError {
 		return $this->data_array['fullname'];
 	}
 
-	function getParentId() {
+	function getParentID() {
 		return $this->data_array['parent'];
 	}
 
@@ -94,7 +94,7 @@ class TroveCat extends FFError {
 		return $this->data_array['root_parent'];
 	}
 
-	function getIdsFullPath() {
+	function getIDsFullPath() {
 		return $this->data_array['fullpath_ids'];
 
 	}

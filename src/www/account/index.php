@@ -115,7 +115,7 @@ echo $HTML->boxTop(_('Account options'));
 echo html_e('p', array(), _('Welcome').html_e('strong', array(), $u->getRealName()));
 echo html_e('p', array(), _('Account options')._(':'));
 echo html_ao('ul');
-echo html_e('li', array(), util_make_link_u($u->getUnixName(),$u->getId(),html_e('strong', array(), _('View My Profile'))));
+echo html_e('li', array(), util_make_link_u($u->getUnixName(),$u->getID(),html_e('strong', array(), _('View My Profile'))));
 if(forge_get_config('use_people')) {
 	echo html_e('li', array(), util_make_link('/people/editprofile.php', html_e('strong', array(), _('Edit My Skills Profile'))));
 }
@@ -260,7 +260,7 @@ echo $HTML->boxTop(_('Preferences'));
 	<input id="use_ratings" type="checkbox" name="use_ratings" value="1"<?php
 	if ($u->usesRatings()) print ' checked="checked"'; ?> />
 	<label for="use_ratings">
-		<?php printf(_('Participate in peer ratings. <em>(Allows you to rate other users using several criteria as well as to be rated by others. More information is available on your <a href="%s">user page</a> if you have chosen to participate in ratings.)</em>'), util_make_url_u($u->getUnixName(),$u->getId())); ?>
+		<?php printf(_('Participate in peer ratings. <em>(Allows you to rate other users using several criteria as well as to be rated by others. More information is available on your <a href="%s">user page</a> if you have chosen to participate in ratings.)</em>'), util_make_url_u($u->getUnixName(),$u->getID())); ?>
 	</label>
 <?php } ?>
 </p>

@@ -114,7 +114,7 @@ class Widget_MyProjectsLastDocuments extends Widget {
 									}
 								}
 								$html .= '<td>'.$docurl.'</td>';
-								$html .= '<td>'.$doc->getFilename().'</td>';
+								$html .= '<td>'.$doc->getFileName().'</td>';
 								$html .= '<td>'.make_user_link($doc->getCreatorUserName(), $doc->getCreatorRealName()).'</td>';
 								if ( $doc->getUpdated() ) {
 									$html .= '<td>'.date(_('Y-m-d H:i'), $doc->getUpdated()).'</td>';

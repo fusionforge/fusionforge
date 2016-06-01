@@ -92,7 +92,7 @@ if ($s->isError()) {
 $title = $survey_id ? _('Edit a Survey') : _('Add a Survey');
 $sh->header(array('title'=>$title, 'modal'=>1));
 
-echo ($sh->ShowAddSurveyForm($s));
+echo ($sh->showAddSurveyForm($s));
 
 /* Show list of Survey */
 $sf = new SurveyFactory($g);

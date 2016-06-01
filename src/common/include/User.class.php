@@ -937,7 +937,7 @@ Use one below, but make sure it is entered as the single line.)
 			$hook_params['user_email'] = $email;
 			plugin_hook("user_setemail", $hook_params);
 
-			if (!$this->fetchData($this->getId())) {
+			if (!$this->fetchData($this->getID())) {
 				db_rollback();
 				return false;
 			}

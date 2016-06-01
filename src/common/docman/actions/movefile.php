@@ -55,7 +55,7 @@ foreach ($arr_fileid as $fileid) {
 			session_redirect($redirecturl);
 		}
 		var_dump($d);
-		if ($d->isError() || !$d->update($d->getFilename(), $d->getFileType(), NULL, $moveto_dirid, $d->getName(), $d->getDescription(), $d->getStateID(), $d->getVersion())) {
+		if ($d->isError() || !$d->update($d->getFileName(), $d->getFileType(), NULL, $moveto_dirid, $d->getName(), $d->getDescription(), $d->getStateID(), $d->getVersion())) {
 			$error_msg = $d->getErrorMessage();
 			session_redirect($redirecturl);
 		}

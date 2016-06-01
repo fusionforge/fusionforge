@@ -1251,7 +1251,7 @@ class RoleAnonymous extends BaseRole implements PFO_RoleAnonymous {
 	}
 }
 
-class RoleLoggedIn extends BaseRole implements PFO_RoleLoggedIn {
+class RoleLoggedIn extends BaseRole implements PFO_RoleLoggedin {
 	// This role is implemented as a singleton
 	private static $_instance ;
 	private $_role_id ;

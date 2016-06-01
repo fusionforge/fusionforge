@@ -145,7 +145,7 @@ class FRSFile extends FFError {
 		//
 		$resfile = db_query_params('SELECT filename FROM frs_file WHERE filename=$1 AND release_id=$2',
 					    array($name,
-						  $this->FRSRelease->getId()));
+						  $this->FRSRelease->getID()));
 		if (!$resfile || db_numrows($resfile) > 0) {
 			$this->setError(_('That filename already exists in this release').' '.db_error());
 			return false;

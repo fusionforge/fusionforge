@@ -167,7 +167,7 @@ function frs_add_file_from_form($release, $type_id, $processor_id, $release_date
 		$filechecks = true;
 	} elseif ($release->getFRSPackage()->getGroup()->usesDocman() && $docman_fileid) {
 		$doc = new Document($release->getFRSPackage()->getGroup(), $docman_fileid);
-		$fname = $doc->getFilename();
+		$fname = $doc->getFileName();
 		$infile = DocumentStorage::instance()->get($docman_fileid);
 		$move = false;
 		$filechecks = true;

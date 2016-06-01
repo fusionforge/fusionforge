@@ -326,7 +326,7 @@ class Navigation extends FFError {
 					$menu['titles'][] = $project->getPublicName();
 					$menu['tooltips'][] = _('Project home page, widgets selected to follow specific items.');
 					if (isset ($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
-						$menu['urls'][] = util_make_uri('/project/?group_id') .$project->getId();
+						$menu['urls'][] = util_make_uri('/project/?group_id') .$project->getID();
 					} else {
 						$menu['urls'][] = util_make_uri('/projects/') .$project->getUnixName().'/';
 					}
@@ -473,7 +473,7 @@ class Navigation extends FFError {
 			}
 
 			// Project/Task Manager
-			if ($group->usesPm()) {
+			if ($group->usesPM()) {
 				$menu['titles'][] = _('Tasks');
 				$menu['tooltips'][] = _('Project Management.');
 				$menu['urls'][] = util_make_uri('/pm/?group_id=' . $group_id);

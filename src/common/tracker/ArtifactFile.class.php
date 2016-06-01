@@ -180,7 +180,7 @@ class ArtifactFile extends FFError {
 			if (!array_key_exists('time', $importData)){
 				$this->Artifact->addHistory('File Added',$id.': '.$filename);
 			}
-			$this->Artifact->UpdateLastModifiedDate();
+			$this->Artifact->updateLastModifiedDate();
 			$this->clearError();
 			return $id;
 		}

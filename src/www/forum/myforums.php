@@ -66,7 +66,8 @@ if (count($monitoredForumsIdsArray) < 1) {
 	exit;
 }
 
-$tablearr = array(_('Project'),_('Forum'), _('Threads'), _('Posts'), _('Last Post'), _('New Content?'));
+$tablearr = array(_('Project'),_('Forum'), _('Threads'),
+				_('Posts'), _('Last Post'), _('New Content?'));
 echo $HTML->listTableTop($tablearr);
 
 $i = 0;
@@ -96,7 +97,7 @@ for($i = 0; $i < sizeof($monitoredForumsIdsArray); $i++) {
 				exit_error($fmf->getErrorMessage(), 'forums');
 			}
 
-			$fmf->setUp($offset,$style,$max_rows,$set);
+			$fmf->setup($offset,$style,$max_rows,$set);
 			$style=$fmf->getStyle();
 			$max_rows=$fmf->max_rows;
 			$offset=$fmf->offset;

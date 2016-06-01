@@ -235,7 +235,7 @@ class GroupJoinRequest extends FFError {
 							 $user->getRealName(), $user->getUnixName());
 			$body .= "\n";
 			$body .= sprintf(_('You can approve this request here: %s'),
-							 util_make_url('/project/admin/users.php?group_id='.$this->Group->getId()));
+							 util_make_url('/project/admin/users.php?group_id='.$this->Group->getID()));
 			$body .= "\n\n";
 			$body .= _('Comments by the user:');
 			$body .= "\n";

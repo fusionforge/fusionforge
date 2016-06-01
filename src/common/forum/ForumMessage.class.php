@@ -696,13 +696,13 @@ Or reply to this e-mail entering your response between the following markers:
 				$extra_headers .= "Reply-To: ".$this->Forum->getReturnEmailAddress()."\n";
 			}
 			$extra_headers .= "Precedence: Bulk\n"
-				."List-Id: ".$this->Forum->getName()." <forum".$this->Forum->getId()."@".forge_get_config('web_host').">\n"
-				."List-Help: ".util_make_url ('/forum/forum.php?id='.$this->Forum->getId())."\n"
-				."Message-Id: <forumpost".$this->getId()."@".forge_get_config('web_host').">";
-			$parentid = $this->getParentId();
+				."List-Id: ".$this->Forum->getName()." <forum".$this->Forum->getID()."@".forge_get_config('web_host').">\n"
+				."List-Help: ".util_make_url ('/forum/forum.php?id='.$this->Forum->getID())."\n"
+				."Message-Id: <forumpost".$this->getID()."@".forge_get_config('web_host').">";
+			$parentid = $this->getParentID();
 			if (!empty($parentid)) {
 				$extra_headers .= "\nIn-Reply-To: ".$this->Forum->getReturnEmailAddress()."\n"
-					."References: <forumpost".$this->getParentId()."@".forge_get_config('web_host').">";
+					."References: <forumpost".$this->getParentID()."@".forge_get_config('web_host').">";
 			}
 
 			$subject="[" . $this->Forum->getUnixName() ."][".$this->getID()."] ".util_unconvert_htmlspecialchars($this->getSubject());
@@ -758,13 +758,13 @@ Or reply to this e-mail entering your response between the following markers:
 		$extra_headers .= "Sender: <noreply@".forge_get_config('web_host').">\n";
 		$extra_headers .= "Reply-To: ".$this->Forum->getReturnEmailAddress()."\n";
 		$extra_headers .= "Precedence: Bulk\n"
-			."List-Id: ".$this->Forum->getName()." <forum".$this->Forum->getId()."@".forge_get_config('web_host').">\n"
-			."List-Help: ".util_make_url('/forum/forum.php?id='.$this->Forum->getId())."\n"
-			."Message-Id: <forumpost".$this->getId()."@".forge_get_config('web_host').">";
-		$parentid = $this->getParentId();
+			."List-Id: ".$this->Forum->getName()." <forum".$this->Forum->getID()."@".forge_get_config('web_host').">\n"
+			."List-Help: ".util_make_url('/forum/forum.php?id='.$this->Forum->getID())."\n"
+			."Message-Id: <forumpost".$this->getID()."@".forge_get_config('web_host').">";
+		$parentid = $this->getParentID();
 		if (!empty($parentid)) {
  			$extra_headers .= "\nIn-Reply-To: ".$this->Forum->getReturnEmailAddress()."\n"
-				."References: <forumpost".$this->getParentId()."@".forge_get_config('web_host').">";
+				."References: <forumpost".$this->getParentID()."@".forge_get_config('web_host').">";
 		}
 
 		$subject="[" . $this->Forum->getUnixName() ."][".$this->getID()."] ".util_unconvert_htmlspecialchars($this->getSubject());
@@ -865,13 +865,13 @@ Or reply to this e-mail entering your response between the following markers:
 			$extra_headers .= "Sender: <noreply@".forge_get_config('web_host').">\n";
 			$extra_headers .= "Reply-To: ".$this->Forum->getReturnEmailAddress()."\n";
 			$extra_headers .= "Precedence: Bulk\n"
-				."List-Id: ".$this->Forum->getName()." <forum".$this->Forum->getId()."@".forge_get_config('web_host').">\n"
-				."List-Help: ".util_make_url('/forum/forum.php?id='.$this->Forum->getId())."\n"
-				."Message-Id: <forumpost".$this->getId()."@".forge_get_config('web_host').">";
-			$parentid = $this->getParentId();
+				."List-Id: ".$this->Forum->getName()." <forum".$this->Forum->getID()."@".forge_get_config('web_host').">\n"
+				."List-Help: ".util_make_url('/forum/forum.php?id='.$this->Forum->getID())."\n"
+				."Message-Id: <forumpost".$this->getID()."@".forge_get_config('web_host').">";
+			$parentid = $this->getParentID();
 			if (!empty($parentid)) {
 				$extra_headers .= "\nIn-Reply-To: ".$this->Forum->getReturnEmailAddress()."\n"
-					."References: <forumpost".$this->getParentId()."@".forge_get_config('web_host').">";
+					."References: <forumpost".$this->getParentID()."@".forge_get_config('web_host').">";
 			}
 
 			$subject="[" . $this->Forum->getUnixName() ."][".$this->getID()."] ".util_unconvert_htmlspecialchars($this->getSubject());

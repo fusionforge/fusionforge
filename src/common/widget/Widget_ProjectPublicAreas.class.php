@@ -150,7 +150,7 @@ class Widget_ProjectPublicAreas extends Widget {
 
 		// ##################### Task Manager
 
-		if ($project->usesPm()) {
+		if ($project->usesPM()) {
 			$result .= '<div class="public-area-box">';
 			$link_content = $HTML->getPmPic('') . ' ' . _('Tasks');
 			$result .= util_make_link('/pm/?group_id='.$group_id, $link_content);

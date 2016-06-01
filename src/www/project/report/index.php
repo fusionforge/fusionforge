@@ -148,7 +148,7 @@ foreach ($group->getUsers() as $member) {
 	} else {
 		$cells[][] = $link;
 	}
-	$cells[][] = util_make_link('/sendmessage.php?touser='.$member->getId(), sprintf(_('Contact %s'), $member->getRealName()));
+	$cells[][] = util_make_link('/sendmessage.php?touser='.$member->getID(), sprintf(_('Contact %s'), $member->getRealName()));
 	$roles = RBACEngine::getInstance()->getAvailableRolesForUser ($member) ;
 	sortRoleList ($roles) ;
 	$role_names = array () ;

@@ -1391,7 +1391,7 @@ class ReportSetup extends Report {
 	 *	@param	string	$status_name The category name.
 	 *	@return	boolean	Success.
 	 */
-	function updateStatusId($status_id, $status_name) {
+	function updateStatusID($status_id, $status_name) {
 		return db_query_params ('UPDATE project_status SET status_name=$1 WHERE status_id=$2',
 				array($status_name,
 				$status_id));

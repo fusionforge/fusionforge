@@ -37,7 +37,7 @@ $arr_fileid = explode(',', getStringFromRequest('fileid'));
 $feedback = _('Document(s)').' ';
 foreach ($arr_fileid as $fileid) {
 	$d = new Document($g, $fileid);
-	$feedback .= $d->getFilename().' ';
+	$feedback .= $d->getFileName().' ';
 	if ($d->isError() || !$d->setReservedBy('0')) {
 		$error_msg = $d->getErrorMessage();
 		session_redirect('/docman/?group_id='.$group_id.'&dirid='.$dirid);

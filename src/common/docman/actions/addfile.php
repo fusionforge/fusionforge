@@ -187,10 +187,10 @@ if (!$d->create($uploaded_data_name, $uploaded_data_type, $data, $doc_group, $ti
 		setcookie("gforgecurrentdocdata", "", time() - 3600);
 	}
 	if (forge_check_perm('docman', $group_id, 'approve')) {
-		$feedback = sprintf(_('Document %s submitted successfully.'), $d->getFilename());
+		$feedback = sprintf(_('Document %s submitted successfully.'), $d->getFileName());
 		session_redirect($redirecturl);
 	} else {
-		$feedback = sprintf(_('Document %s has been successfully uploaded and is waiting to be approved.'), $d->getFilename());
+		$feedback = sprintf(_('Document %s has been successfully uploaded and is waiting to be approved.'), $d->getFileName());
 		session_redirect($baseurl);
 	}
 }

@@ -169,17 +169,17 @@ $server->wsdl->addComplexType(
 	'sequence',
 	'',
 	array(
-	'artifact_id' => array('name'=>'artifact_id', 'type' => 'xsd:int'),
-	'group_artifact_id' => array('name'=>'group_artifact_id', 'type' => 'xsd:int'),
-	'status_id' => array('name'=>'status_id', 'type' => 'xsd:int'),
-	'priority' => array('name'=>'priority', 'type' => 'xsd:int'),
-	'submitted_by' => array('name'=>'submitted_by', 'type' => 'xsd:int'),
-	'assigned_to' => array('name'=>'assigned_to', 'type' => 'xsd:int'),
-	'open_date' => array('name'=>'open_date', 'type' => 'xsd:int'),
-	'close_date' => array('name'=>'close_date', 'type' => 'xsd:int'),
-	'summary' => array('name'=>'summary', 'type' => 'xsd:string'),
-	'details' => array('name'=>'details', 'type' => 'xsd:string'),
-	'extra_fields'=>array('name'=>'extra_fields', 'type' => 'tns:ArrayOfArtifactExtraFieldsData')
+		'artifact_id' => array('name'=>'artifact_id', 'type' => 'xsd:int'),
+		'group_artifact_id' => array('name'=>'group_artifact_id', 'type' => 'xsd:int'),
+		'status_id' => array('name'=>'status_id', 'type' => 'xsd:int'),
+		'priority' => array('name'=>'priority', 'type' => 'xsd:int'),
+		'submitted_by' => array('name'=>'submitted_by', 'type' => 'xsd:int'),
+		'assigned_to' => array('name'=>'assigned_to', 'type' => 'xsd:int'),
+		'open_date' => array('name'=>'open_date', 'type' => 'xsd:int'),
+		'close_date' => array('name'=>'close_date', 'type' => 'xsd:int'),
+		'summary' => array('name'=>'summary', 'type' => 'xsd:string'),
+		'details' => array('name'=>'details', 'type' => 'xsd:string'),
+		'extra_fields'=>array('name'=>'extra_fields', 'type' => 'tns:ArrayOfArtifactExtraFieldsData')
 	)
 );
 //ArrayOfArtifactExtraFieldsData
@@ -464,7 +464,7 @@ $server->register(
 
 function artifactTypeSetMonitor($session_ser,$group_id,$group_artifact_id) {
 	continue_session($session_ser);
-	$a =& artifacttype_get_object($group_artifact_id);
+	$a =& artifactType_get_object($group_artifact_id);
 	if (!$a || !is_object($a)) {
 		return new soap_fault('','artifactTypeSetMonitor','Could Not Get ArtifactType','Could Not Get ArtifactType');
 	} elseif ($a->isError()) {
@@ -476,7 +476,7 @@ function artifactTypeSetMonitor($session_ser,$group_id,$group_artifact_id) {
 
 function artifactTypeIsMonitoring($session_ser,$group_id,$group_artifact_id) {
 	continue_session($session_ser);
-	$a =& artifacttype_get_object($group_artifact_id);
+	$a =& artifactType_get_object($group_artifact_id);
 	if (!$a || !is_object($a)) {
 		return new soap_fault('','artifactTypeIsMonitoring','Could Not Get ArtifactType','Could Not Get ArtifactType');
 	} elseif ($a->isError()) {

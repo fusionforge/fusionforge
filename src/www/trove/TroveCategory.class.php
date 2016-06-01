@@ -117,7 +117,7 @@ class TroveCategory extends FFError {
 		}
 	}
 
-	function getId() {
+	function getID() {
 		return $this->categoryId;
 	}
 

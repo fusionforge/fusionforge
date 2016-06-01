@@ -93,7 +93,7 @@ if ($msg_id) {
 		exit_error($fmf->getErrorMessage(),'forums');
 	}
 
-	$fmf->setUp(0,'threaded',200,'');
+	$fmf->setup(0,'threaded',200,'');
 	$style=$fmf->getStyle();
 	$max_rows=$fmf->max_rows;
 	$offset=$fmf->offset;

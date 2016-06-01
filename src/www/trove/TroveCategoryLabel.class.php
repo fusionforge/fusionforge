@@ -55,7 +55,7 @@ class TroveCategoryLabel extends FFError {
 				}
 			} else {
 				$this->dataArray =& $dataArray;
-				if ($this->dataArray['category_id'] != $this->category->getId()) {
+				if ($this->dataArray['category_id'] != $this->category->getID()) {
 					$this->dataArray = null;
 					return false;
 				}
@@ -74,7 +74,7 @@ class TroveCategoryLabel extends FFError {
 		db_begin();
 		$result = db_query_params("INSERT INTO trove_category_labels
 			(category_id, label, language_id) VALUES ($1, $2, $3)",
-			array($this->category->getId(), $label, $languageId));
+			array($this->category->getID(), $label, $languageId));
 		echo db_error();
 		if (!$result) {
 			db_rollback();
@@ -94,7 +94,7 @@ class TroveCategoryLabel extends FFError {
 			. "WHERE trove_category_labels.label_id=$1 "
 			. "AND trove_category_labels.category_id=$2 "
 			. "AND supported_languages.language_id=trove_category_labels.language_id",
-			array($labelId, $this->category->getId()));
+			array($labelId, $this->category->getID()));
 
 		if (!$res || db_numrows($res) < 1) {
 			return false;
@@ -117,7 +117,7 @@ class TroveCategoryLabel extends FFError {
 		}
 	}
 
-	function getId() {
+	function getID() {
 		return $this->labelId;
 	}
 

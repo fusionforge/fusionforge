@@ -164,7 +164,7 @@ class ProjectGroup extends FFError {
 
 		db_begin();
 		$result = db_query_params('INSERT INTO project_group_list (group_id,project_name,description,send_all_posts_to) VALUES ($1,$2,$3,$4)',
-					  array($this->Group->getId(),
+					  array($this->Group->getID(),
 						htmlspecialchars($project_name),
 						htmlspecialchars($description),
 						$send_all_posts_to));

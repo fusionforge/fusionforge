@@ -203,7 +203,7 @@ function project_summary($group_id, $mode, $no_table) {
 
 	// ##################### Tasks
 
-	if ($project->usesPm()) {
+	if ($project->usesPM()) {
 		$return .= '
 
 			<hr />';
@@ -214,7 +214,7 @@ function project_summary($group_id, $mode, $no_table) {
 		if ($mode != 'compact') {
 			//get a list of publicly available subprojects
 			$result = db_query_params('SELECT * FROM project_group_list WHERE group_id=$1',
-			                          array($group_id));
+						   array($group_id));
 			$rows = db_numrows($result);
 			if (!$result || $rows < 1) {
 				$return .= '<br /><em>There are no public subprojects available</em>';

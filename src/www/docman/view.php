@@ -143,7 +143,7 @@ if (is_numeric($docid)) {
 			$file = forge_get_config('data_path').'/docman/'.$filename;
 
 			$zip = new ZipArchive;
-			if ( !$zip->open($file, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE)) {
+			if ( !$zip->open($file, ZipArchive::CREATE | ZipArchive::OVERWRITE)) {
 				@unlink($file);
 				exit_error(_('Unable to open ZIP archive for backup'), 'docman');
 			}
@@ -181,7 +181,7 @@ if (is_numeric($docid)) {
 		session_redirect('/docman/?group_id='.$group_id.'&view=admin');
 	}
 } elseif ($docid === 'webdav') {
-	if (forge_get_config('use_webdav') && $g->useWebDav()) {
+	if (forge_get_config('use_webdav') && $g->useWebdav()) {
 		require_once $gfcommon.'docman/include/webdav.php';
 		$_SERVER['SCRIPT_NAME'] = '';
 		/* we need the group id for check authentification. */
@@ -229,7 +229,7 @@ if (is_numeric($docid)) {
 				$file = forge_get_config('data_path').'/docman/'.$filename;
 				@unlink($file);
 				$zip = new ZipArchive;
-				if ( !$zip->open($file, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE)) {
+				if ( !$zip->open($file, ZipArchive::CREATE | ZipArchive::OVERWRITE)) {
 					@unlink($file);
 					exit_error(_('Unable to open ZIP archive for download as ZIP'), 'docman');
 				}
@@ -289,7 +289,7 @@ if (is_numeric($docid)) {
 			$file = forge_get_config('data_path').'/docman/'.$filename;
 			@unlink($file);
 			$zip = new ZipArchive;
-			if (!$zip->open($file, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE)) {
+			if (!$zip->open($file, ZipArchive::CREATE | ZipArchive::OVERWRITE)) {
 				@unlink($file);
 				exit_error(_('Unable to open ZIP archive for download as ZIP'), 'docman');
 			}
