@@ -93,16 +93,16 @@ class ArtifactExtraField extends FFError {
 	 * a tracker.  This function is only used to create rows for boxes
 	 * configured by the admin.
 	 *
-	 * @param	string	$name			Name of the extra field.
-	 * @param	int		$field_type		The type of field - radio, select, text, textarea
-	 * @param	int		$attribute1		For text (size) and textarea (rows)
-	 * @param	int		$attribute2		For text (maxlength) and textarea (cols)
-	 * @param	int		$is_required	True or false whether this is a required field or not.
-	 * @param	string	$alias			Alias for this extra field (optional)
-	 * @param	int		$show100		True or false whether the 100 value is displayed or not
+	 * @param	string	$name		Name of the extra field.
+	 * @param	int	$field_type	The type of field - radio, select, text, textarea
+	 * @param	int	$attribute1	For text (size) and textarea (rows)
+	 * @param	int	$attribute2	For text (maxlength) and textarea (cols)
+	 * @param	int	$is_required	True or false whether this is a required field or not.
+	 * @param	string	$alias		Alias for this extra field (optional)
+	 * @param	int	$show100	True or false whether the 100 value is displayed or not
 	 * @param	string	$show100label	The label used for the 100 value if displayed
 	 * @param	string	$description	Description used for help text.
-	 * @param	string	$pattern		A regular expression to check the field.
+	 * @param	string	$pattern	A regular expression to check the field.
 	 * @return	bool	true on success / false on failure.
 	 */
 	function create($name, $field_type, $attribute1, $attribute2, $is_required = 0, $alias = '', $show100 = true, $show100label = 'none', $description = '', $pattern='') {

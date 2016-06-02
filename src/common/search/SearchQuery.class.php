@@ -50,7 +50,7 @@ class SearchQuery extends FFError {
 	 * @var int $offset
 	 */
 	var $offset = 0;
- 	/**
+	/**
 	 * Result handle
 	 *
 	 * @var resource $result
