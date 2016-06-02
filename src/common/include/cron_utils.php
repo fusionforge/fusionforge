@@ -111,7 +111,7 @@ function cron_release_lock($script) {
 //
 // Reload NSCD, in particular when replicating new groups, users or
 // project memberships
-// 
+//
 function cron_reload_nscd() {
         system("(nscd -i passwd && nscd -i group) >/dev/null 2>&1");
 }
@@ -124,21 +124,21 @@ function cron_regen_apache_auth() {
 	# Reproduce nss_passwd on file, so we can work without mod-auth-*
 	$passwd_fname = forge_get_config('data_path').'/scm-passwd';
 	$passwd_f = fopen($passwd_fname.'.new', 'w');
-	
+
 	# Enable /authscm/$user ITK URLs for FusionForge users only (not system users)
 	$config_fname = forge_get_config('data_path').'/scm-auth.inc';
 	$config_f = fopen($config_fname.'.new', 'w');
-	
+
 	$res = db_query_params("SELECT login, passwd FROM nss_passwd WHERE status=$1", array('A'));
 	while ($arr = db_fetch_array($res)) {
 		fwrite($passwd_f, $arr['login'].':'.$arr['passwd']."\n");
 		fwrite($config_f, 'Use ScmUser '.$arr['login']."\n");
 	}
-	
+
 	fclose($passwd_f);
 	chmod($passwd_fname.'.new', 0644);
 	rename($passwd_fname.'.new', $passwd_fname);
-	
+
 	fclose($config_f);
 	chmod($config_fname.'.new', 0644);
 	rename($config_fname.'.new', $config_fname);

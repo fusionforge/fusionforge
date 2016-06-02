@@ -34,7 +34,7 @@ class Widget_ProjectInfo extends Widget {
 
 	public function getContent() {
 		$result = '';
-		
+
 		$request =& HTTPRequest::instance();
 		$group_id = $request->get('group_id');
 		$pm = ProjectManager::instance();

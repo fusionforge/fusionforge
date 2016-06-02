@@ -98,7 +98,7 @@ if ($rows > 0) {
 echo "<h2>"._('Add New Custom Field')."</h2>";
 echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID(), 'method' => 'post'));
 echo html_ao('p');
-echo html_e('input', array('type'=>'hidden', 'name'=>'add_extrafield', 'value'=>'y')); 
+echo html_e('input', array('type'=>'hidden', 'name'=>'add_extrafield', 'value'=>'y'));
 
 echo html_e('strong', array(), _('Custom Field Name').utils_requiredField()._(':')).html_e('br');
 echo html_e('input', array('type'=>'text', 'name'=>'name', 'value'=>'', size=>'15', 'maxlength'=>'30', 'required'=>'required'));

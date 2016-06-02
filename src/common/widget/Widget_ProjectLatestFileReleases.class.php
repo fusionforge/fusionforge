@@ -44,7 +44,7 @@ class Widget_ProjectLatestFileReleases extends Widget {
 
 	function getContent() {
 		$result = '';
-		
+
 		$request =& HTTPRequest::instance();
 		$pm = ProjectManager::instance();
 		$group_id = $request->get('group_id');

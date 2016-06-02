@@ -216,7 +216,7 @@ class SearchQuery extends FFError {
 
 	function fetchAllData() {
 		$this->fetchDataUntil();
-	}	   
+	}
 
 	function getData($limit = NULL, $offset = 0) {
 		if ($limit) {

@@ -44,7 +44,7 @@ class SysTasksQ extends FFError {
 		}
 		if (db_numrows($res) >= 1)
 			return true;
-		
+
 		$res = db_query_params(
 			'INSERT INTO systasks (
 				plugin_id,

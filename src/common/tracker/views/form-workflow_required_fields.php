@@ -77,7 +77,7 @@ echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&a
 			$extra_fields_names[$key] = $row['field_name'];
 		}
 		array_multisort($extra_fields_names, SORT_ASC, SORT_LOCALE_STRING | SORT_FLAG_CASE, $extra_fields);
-		
+
 		foreach ($extra_fields as $field) {
 			if ($field['field_type'] != ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 				$value = in_array($field['extra_field_id'], $requiredFields)? ' checked="checked"' : '';
