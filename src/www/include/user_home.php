@@ -81,7 +81,7 @@ if (forge_get_config('use_diary')) {
 
 echo $HTML->boxMiddle(_('Project Information'), _('Project Information'));
 
-$projects = $user->getGroups () ;
+$projects = $user->getGroups();
 sortProjectList ($projects) ;
 $roles = RBACEngine::getInstance()->getAvailableRolesForUser ($user) ;
 sortRoleList ($roles) ;

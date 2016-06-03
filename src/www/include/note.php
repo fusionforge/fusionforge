@@ -47,7 +47,7 @@ function notepad_button($form) {
 }
 
 function notepad_anchor($str, $form) {
-        return notepad_button_raw($str, $form, "SOFT", "45", "80");
+	return notepad_button_raw($str, $form, "SOFT", "45", "80");
 }
 
 function notepad_func() {

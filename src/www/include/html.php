@@ -241,16 +241,16 @@ function html_get_timezone_popup($title = 'timezone', $selected = 'xzxz') {
 /**
  * html_build_select_box_from_assoc() - Takes one assoc array and returns a pop-up box.
  *
- * @param	array		$arr			An array of items to use.
+ * @param	array		$arr		An array of items to use.
  * @param	string		$select_name	The name you want assigned to this form element.
  * @param	string		$checked_val	The value of the item that should be checked.
- * @param	bool		$swap			Whether we should swap the keys / names.
- * @param	bool		$show_100		Whether or not to show the '100 row'.
- * @param	string		$text_100		What to call the '100 row' defaults to none.
- * @param	bool		$show_any		Whether or not to show the 'Any row'.
- * @param	string		$text_any		What to call the 'Any row' defaults to any.
- * @param	bool|array	$allowed		Array of all allowed values from the full list.
- * @param	array		$attrs			Array of other attributes for this select element.
+ * @param	bool		$swap		Whether we should swap the keys / names.
+ * @param	bool		$show_100	Whether or not to show the '100 row'.
+ * @param	string		$text_100	What to call the '100 row' defaults to none.
+ * @param	bool		$show_any	Whether or not to show the 'Any row'.
+ * @param	string		$text_any	What to call the 'Any row' defaults to any.
+ * @param	bool|array	$allowed	Array of all allowed values from the full list.
+ * @param	array		$attrs		Array of other attributes for this select element.
  * @return	string
  */
 function html_build_select_box_from_assoc($arr, $select_name, $checked_val = 'xzxz', $swap = false, $show_100 = false, $text_100 = 'None', $show_any = false, $text_any = 'any', $allowed = false, $attrs = array()) {
@@ -268,11 +268,11 @@ function html_build_select_box_from_assoc($arr, $select_name, $checked_val = 'xz
  * html_build_select_box_from_array() - Takes one array, with the first array being the "id"
  * or value and the array being the text you want displayed.
  *
- * @param	array	$vals			An array of items to use.
+ * @param	array	$vals		An array of items to use.
  * @param	string	$select_name	The name you want assigned to this form element.
  * @param	string	$checked_val	The value of the item that should be checked.
- * @param	int		$samevals
- * @param	array	$attrs			Array of other attributes for this select element.
+ * @param	int	$samevals
+ * @param	array	$attrs		Array of other attributes for this select element.
  * @return	string
  */
 function html_build_select_box_from_array($vals, $select_name, $checked_val = 'xzxz', $samevals = 0, $attrs = array()) {

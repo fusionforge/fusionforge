@@ -42,7 +42,6 @@ $group_id = (int) $arr[3];
 $docid = isset($arr[4])? $arr[4]: '';
 
 $g = group_get_object($group_id);
-
 if (!$g || !is_object($g)) {
 	exit_no_group();
 } elseif ($g->isError()) {

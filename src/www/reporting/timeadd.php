@@ -109,7 +109,7 @@ if ($week) {
 			$project_ids[] = $p->getID() ;
 		}
 
-		$respm = db_query_params ('SELECT pgl.group_project_id,g.group_name || $1 || pgl.project_name
+		$respm = db_query_params('SELECT pgl.group_project_id,g.group_name || $1 || pgl.project_name
 		FROM groups g, project_group_list pgl
 		WHERE g.group_id=ANY($2)
 		AND g.group_id=pgl.group_id

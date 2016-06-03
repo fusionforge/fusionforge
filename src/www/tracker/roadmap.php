@@ -602,7 +602,6 @@ if (!$at_arr || count($at_arr) < 1) {
 				jQuery('#nb_release').change(function() {
 					updatePage();
 				});
-
 			<?php
 			}
 
