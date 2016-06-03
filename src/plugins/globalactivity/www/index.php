@@ -34,7 +34,18 @@ global $HTML;
 
 $received_begin = getStringFromRequest("start_date");
 $received_end = getStringFromRequest("end_date");
-$show = getArrayFromRequest("show");
+$show = getArrayFromRequest("show",array('forumpost',
+										 'trackeropen',
+										 'trackerclose',
+										 'news',
+										 'taskopen',
+										 'taskclose',
+										 'taskdelete',
+										 'frsrelease',
+										 'docmannew',
+										 'docmanupdate',
+										 'docgroupnew'
+));
 
 $date_format = _('%Y-%m-%d');
 
