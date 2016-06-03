@@ -43,7 +43,7 @@ function show_news_approve_form($qpa_pending, $qpa_rejected, $qpa_approved, $for
 			.$row['id'].'" />';
 		}
 		echo date(_('Y-m-d'), $row['post_date']).'</td>
-		<td width="45%">';
+		<td style="width: 45%">';
 		echo util_make_link($form_url.'?approve=1&id='.$row['id'], $row['summary']);
 		echo '</td>
 

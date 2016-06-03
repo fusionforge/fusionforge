@@ -127,7 +127,7 @@ class HtmlSearchRenderer extends SearchRenderer {
 		$searchQuery =& $this->searchQuery;
 
 		$html = '<br />';
-		$html .= '<table class="tablecontent" width="100%" cellpadding="5">';
+		$html .= '<table class="tablecontent fullwidth" cellpadding="5">';
 		$html .= '<tr>';
 		$html .= '<td>';
 		if ($searchQuery->getOffset() != 0) {

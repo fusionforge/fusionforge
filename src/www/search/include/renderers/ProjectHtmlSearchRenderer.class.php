@@ -74,10 +74,10 @@ class ProjectHtmlSearchRenderer extends HtmlSearchRenderer {
 				$what = 'projects';
 			}
 			$return .= '<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i).'>'
-				.'<td width="30%"><a href="'.util_make_url('/'.$what.'/'.$row['unix_group_name'].'/').'">'
+				.'<td style="width: 30%"><a href="'.util_make_url('/'.$what.'/'.$row['unix_group_name'].'/').'">'
 				.html_image('ic/msg.png', '10', '12')
 				.' '.$this->highlightTargetWords($row['group_name']).'</a></td>'
-				.'<td width="70%">'.$this->highlightTargetWords($row['short_description']).'</td></tr>';
+				.'<td style="width: 70%">'.$this->highlightTargetWords($row['short_description']).'</td></tr>';
 		}
 
 		return $return;
