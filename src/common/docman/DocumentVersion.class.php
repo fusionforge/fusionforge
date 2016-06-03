@@ -161,13 +161,14 @@ class DocumentVersion extends FFError {
 	 * @param	string	$kwords			The parsed words of the file (content)
 	 * @param	int	$version		The version id to create. Default is 1 (the first version)
 	 * @param	int	$current_version	Is it the current version? Defaut is 1 (yes)
+	 * @param	int	$createtimetamp		timestamp of creation of this version
 	 * return	bool	true on success
 	 */
-	function create($docid, $title, $description, $created_by, $filetype, $filename, $filesize, $kwords, $version = 1, $current_version = 1) {
+	function create($docid, $title, $description, $created_by, $filetype, $filename, $filesize, $kwords, $version = 1, $current_version = 1, $createtimetamp) {
 		db_begin();
 		$res = db_query_params('INSERT INTO doc_data_version (docid, title, description, created_by, filetype, filename, filesize, data_words, version, current_version, createdate)
 					VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)',
-					array($docid, htmlspecialchars($title), htmlspecialchars($description), $created_by, $filetype, $filename, $filesize, $kwords, $version, $current_version, time()));
+					array($docid, htmlspecialchars($title), htmlspecialchars($description), $created_by, $filetype, $filename, $filesize, $kwords, $version, $current_version, $createtimetamp));
 		$serial_id = db_insertid($res, 'doc_data_version', 'serial_id');
 		if (!$res || !$serial_id) {
 			$this->setError(_('Document Version')._(': ')._('Cannot create version.').' '.db_error());
@@ -283,12 +284,13 @@ class DocumentVersion extends FFError {
 	 * @param	string	$filename		The new filename
 	 * @param	int	$filesize		The new filesize
 	 * @param	int	$current_version	Is the current version to set? Default is yes.
+	 * @param	int	$updatetimestamp	timestamp of this update
 	 * @return	bool	true on success
 	 */
-	function update($version, $title, $description, $filetype, $filename, $filesize, $current_version = 1) {
+	function update($version, $title, $description, $filetype, $filename, $filesize, $current_version = 1, $updatetimestamp) {
 		db_begin();
 		$colArr = array('title', 'description', 'filetype', 'filename', 'filesize', 'current_version', 'updatedate');
-		$valArr = array(htmlspecialchars($title), htmlspecialchars($description), $filetype, $filename, $filesize, $current_version, time());
+		$valArr = array(htmlspecialchars($title), htmlspecialchars($description), $filetype, $filename, $filesize, $current_version, $updatetimestamp);
 		if (!$this->setValueinDB($version, $colArr, $valArr)) {
 			db_rollback();
 			return false;

@@ -124,11 +124,17 @@ class DocumentGroup extends FFError {
 	 *
 	 * @param	string	$name			The name of the directory to create
 	 * @param	int	$parent_doc_group	The ID of the parent directory
+	 * @param	int	$state			The status of this directory: default is 1 = public.
+	 *						Valid values are :
+	 *							1 = public
+	 *							2 = deleted
+	 *							5 = private
+	 * @param	int	$createtimestamp	Timestamp of the directory creation
 	 * @internal	param	\Item $string name.
 	 * @return	boolean	true on success / false on failure.
 	 * @access	public
 	 */
-	function create($name, $parent_doc_group = 0, $state = 1) {
+	function create($name, $parent_doc_group = 0, $state = 1, $createtimestamp = null) {
 		//
 		//	data validation
 		//
@@ -167,13 +173,14 @@ class DocumentGroup extends FFError {
 			return false;
 		}
 
+		$createtimestamp = (($createtimestamp) ? $createtimestamp : time());
 		$user_id = ((session_loggedin()) ? user_getid() : 100);
 		$result = db_query_params('INSERT INTO doc_groups (group_id, groupname, parent_doc_group, stateid, createdate, created_by) VALUES ($1, $2, $3, $4, $5, $6)',
 						array ($this->Group->getID(),
 							htmlspecialchars($name),
 							$parent_doc_group,
 							$state,
-							time(),
+							$createtimestamp,
 							$user_id)
 						);
 		if ($result && db_affected_rows($result) > 0) {
@@ -473,10 +480,12 @@ class DocumentGroup extends FFError {
 	 * @param	string	$name			Name of the category.
 	 * @param	int	$parent_doc_group	the doc_group id of the parent. default = 0
 	 * @param	int	$metadata		update only the metadata : created_by, updatedate
+	 * @param	int	$state			state of the directory. Default is 1 = public. See create function for valid values
+	 * @param	int	$updatetimestamp	Timestamp of the update
 	 * @return	boolean	success or not
 	 * @access	public
 	 */
-	function update($name, $parent_doc_group = 0, $metadata = 0, $state = 1) {
+	function update($name, $parent_doc_group = 0, $metadata = 0, $state = 1, $updatetimestamp = null) {
 		$perm =& $this->Group->getPermission();
 		if (!$perm || !$perm->isDocEditor()) {
 			$this->setPermissionDeniedError();
@@ -512,12 +521,13 @@ class DocumentGroup extends FFError {
 		}
 
 		$user_id = ((session_loggedin()) ? user_getid() : 100);
+		$updatetimestamp = (($updatetimestamp) ? $updatetimestamp : time());
 		$colArr = array('groupname', 'parent_doc_group', 'updatedate', 'created_by', 'locked', 'locked_by', 'stateid');
-		$valArr = array(htmlspecialchars($name), $parent_doc_group, time(), $user_id, 0, NULL, $state);
+		$valArr = array(htmlspecialchars($name), $parent_doc_group, $updatetimestamp, $user_id, 0, NULL, $state);
 		if ($this->setValueinDB($colArr, $valArr)) {
 			$parentDg = new DocumentGroup($this->Group, $parent_doc_group);
 			if ($parentDg->getParentID())
-				$parentDg->update($parentDg->getName(), $parentDg->getParentID(), 1, $parentDg->getState());
+				$parentDg->update($parentDg->getName(), $parentDg->getParentID(), 1, $parentDg->getState(), $updatetimestamp);
 
 			$this->fetchData($this->getID());
 			$this->sendNotice(false);
