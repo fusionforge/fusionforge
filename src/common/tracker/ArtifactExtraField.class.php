@@ -41,7 +41,8 @@ define('ARTIFACT_EXTRAFIELDTYPE_FORMULA',11);
 /* reserved for Evolvis extension, for merge into FusionForge */
 define('ARTIFACT_EXTRAFIELDTYPE_DATETIME',12);
 /* reserved */
-define('ARTIFACT_EXTRAFIELDTYPE_USER',13);
+define('ARTIFACT_EXTRAFIELDTYPE_DATE',13);
+define('ARTIFACT_EXTRAFIELDTYPE_USER',14);
 
 class ArtifactExtraField extends FFError {
 
@@ -145,8 +146,9 @@ class ArtifactExtraField extends FFError {
 				$this->setError(_('This Tracker already uses custom statuses'));
 				return false;
 			}
+		}  elseif ($field_type == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
+			$show100label='nobody';
 		}
-
 		if ($is_required) {
 			$is_required=1;
 		} else {
@@ -376,7 +378,8 @@ class ArtifactExtraField extends FFError {
 			ARTIFACT_EXTRAFIELDTYPE_TEXTAREA => _('Text Area'),
 			ARTIFACT_EXTRAFIELDTYPE_STATUS => _('Status'),
 			ARTIFACT_EXTRAFIELDTYPE_RELATION => _('Relation between artifacts'),
-			ARTIFACT_EXTRAFIELDTYPE_INTEGER => _('Integer')
+			ARTIFACT_EXTRAFIELDTYPE_INTEGER => _('Integer'),
+			ARTIFACT_EXTRAFIELDTYPE_USER => _('User Select Box')
 			);
 	}
 

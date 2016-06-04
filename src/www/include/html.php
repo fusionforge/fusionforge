@@ -803,6 +803,42 @@ function html_build_checkbox($name, $value, $checked, $attrs=array()) {
 }
 
 /**
+ * html_build_checkboxes_from_array() - Render checkbox control
+ *
+ * @param	string	$name		name of control
+ * @param	string	$value		value of control
+ * @param	bool	$checked	true if control should be checked
+ * @param	array	$attrs		Array of other attributes for this element
+ * @return	html code for checkbox control
+ */
+function html_build_checkboxes_from_array($vals, $check_name, $checked_array=array(), $checkall=false, $attrs=array()) {
+
+	$title = (empty($attrs['title']) ? array() : array('title' => $attrs['title']));
+	if ($checkall) {
+		$javascript = '//<![CDATA[
+							$(window).load(function(){
+								$("#checkall_'.$check_name.'").change(function () {
+									$("input[id^=\''.$check_name.'\']:checkbox").prop(\'checked\', $(this).prop("checked"));
+								});
+							});
+						//]]';
+		echo html_e('script', array( 'type'=>'text/javascript'), $javascript);
+		echo html_ao('p');
+		echo html_e('input', array_merge( array( 'type' => 'checkbox', 'name' => 'checkall_'.$check_name, 'id' => 'checkall_'.$check_name ), $attrs));
+		echo html_e('label', array_merge( array( 'for' => 'checkall_'.$check_name), $title), _('Check all'), false);
+		echo html_ac(html_ap() - 1);
+	}
+	echo html_ao('p');
+	foreach ($vals as $key => $value) {
+		$checked = ((in_array($key, $checked_array)) ? array('checked'=>'checked') : array());
+		echo html_e('input', array_merge( array( 'type' => 'checkbox', 'name' => $check_name.'[]', 'id' => $check_name.$key, 'value' => $key), $attrs, $checked));
+		echo html_e('label', array_merge( array( 'for' => $check_name.$key), $title), $value, false);
+		echo html_e('br');
+	}
+	echo html_ac(html_ap() - 1);
+}
+
+/**
  * build_priority_select_box() - Wrapper for html_build_priority_select_box()
  *
  * @see html_build_priority_select_box()

@@ -7,6 +7,7 @@
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -309,6 +310,8 @@ class ArtifactTypeHtml extends ArtifactType {
 				if ($mode == 'UPDATE') {
 					$post_name = html_image('ic/forum_edit.gif','37','15',array('title'=>"Click to edit", 'alt'=>"Click to edit", 'onclick'=>"switch2edit(this, 'show$i', 'edit$i')"));
 				}
+			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_USER) {
+				$str = $this->renderUserField($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['show100'],$efarr[$i]['show100label'],$show_any,$text_any,false, $attrs);
 			}
 			$template = str_replace('{$PostName:'.$efarr[$i]['field_name'].'}',$post_name,$template);
 			$template = str_replace('{$'.$efarr[$i]['field_name'].'}',$str,$template);
@@ -526,7 +529,12 @@ class ArtifactTypeHtml extends ArtifactType {
 				$return .= '
 					<td style="width:'.(50*$colspan).'%" colspan="'.$colspan.'" class="top">'.$name.'{$PostName:'.$efarr[$i]['field_name'].'}<br />{$'.$efarr[$i]['field_name'].'}</td>';
 
+			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_USER) {
+
+				$return .= '
+					<td class="halfwidth top">'.$name.'<br />{$'.$efarr[$i]['field_name'].'}</td>';
 			}
+
 			$col_count++;
 			//we've done two columns - if there are more to do, start a new row
 			if (($col_count == 2) && ($k != $count-1)) {
@@ -570,6 +578,47 @@ class ArtifactTypeHtml extends ArtifactType {
 			$keys[$i]=$arr[$i]['element_id'];
 			$vals[$i]=$arr[$i]['element_name'];
 		}
+		return html_build_select_box_from_arrays ($keys,$vals,'extra_fields['.$extra_field_id.']',$checked,$show_100,$text_100,$show_any,$text_any, $allowed, $attrs);
+	}
+
+	/**
+	 * renderUserField - this function builds pop up box with choices.
+	 *
+	 * @param	int		$extra_field_id	The ID of this field.
+	 * @param	string		$checked	The item that should be checked
+	 * @param	bool|string	$show_100	Whether to show the '100 row'
+	 * @param	string		$text_100	What to call the '100 row'
+	 * @param	bool		$show_any
+	 * @param	string		$text_any
+	 * @param	bool		$allowed
+	 * @param	array		$attrs
+	 * @return string HTML code for the box and choices
+	 */
+	function renderUserField ($extra_field_id,$checked='xzxz',$show_100=false,$text_100='none',$show_any=false,$text_any='Any', $allowed=false, $attrs = array ()) {
+		if ($text_100 == 'none' || $text_100 == 'nobody'){
+			$text_100=_('NoBody');
+		}
+		$arr = $this->getExtraFieldElements($extra_field_id);
+		$selectedRolesId = array();
+		for ($i=0; $i<count($arr); $i++) {
+			$selectedRolesId[$i]=$arr[$i]['element_name'];
+		}
+		$roles = $this->getGroup()->getRoles();
+		$userArray = array();
+		foreach ($roles as $role) {
+			if (in_array($role->getID(), $selectedRolesId)) {
+				foreach ($role->getUsers() as $user) {
+					$userArray[$user->getID()] = $user->getRealName().(($user->getStatus()=='S') ? ' '._('[SUSPENDED]') : '');
+				}
+			}
+		}
+		if (!isset($userArray[$checked])) {
+			$checkedUser = user_get_object($checked);
+			$userArray[$checkedUser->getID()] = $checkedUser->getRealName().' '._('[DELETED]');
+		}
+		asort($userArray,SORT_FLAG_CASE | SORT_STRING);
+		$keys = array_keys($userArray);
+		$vals = array_values($userArray);
 		return html_build_select_box_from_arrays ($keys,$vals,'extra_fields['.$extra_field_id.']',$checked,$show_100,$text_100,$show_any,$text_any, $allowed, $attrs);
 	}
 

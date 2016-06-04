@@ -292,6 +292,62 @@ if (getStringFromRequest('add_extrafield')) {
 	}
 
 //
+//	Update checked elements (add checked, delete uncheked)
+//
+} elseif (getStringFromRequest('update_checked_opt')) {
+	$checkedElts = getStringFromRequest('element');
+	$boxid = getStringFromRequest('boxid');
+	$aef = new ArtifactExtraField($ath,$boxid);
+	if (!$aef || !is_object($aef)) {
+		$error_msg .= _('Unable to create ArtifactExtraField Object');
+	} elseif ($aef->isError()) {
+		$error_msg .= $aef->getErrorMessage();
+	} else {
+		$efValues = $aef->getAvailableValues();
+		$efEltNames = array();
+		foreach ($efValues as $efValue) {
+			$efEltNames [$efValue['element_id']]= $efValue['element_name'];
+		}
+		if (is_array($checkedElts)) {
+			foreach ($checkedElts as $checkedElt) {
+				if (!in_array($checkedElt,$efEltNames)) {
+					$aefe = new ArtifactExtraFieldElement($aef);
+					if (!$aefe || !is_object($aefe)) {
+						$error_msg .= 'Unable to create ArtifactExtraFieldElement Object';
+						//		} elseif ($ao->isError())
+						//			$error_msg .= $ao->getErrorMessage();
+					} else {
+						if (!$aefe->create($checkedElt)) {
+							$error_msg .= _('Insert Error')._(': ').$aefe->getErrorMessage();
+							$aefe->clearError();
+						} else {
+							$feedback .= _('Element inserted').' ';
+						}
+					}
+				}
+			}
+		}
+		if (is_array($efEltNames)) {
+			foreach ($efEltNames as $efEltId=>$efEltName) {
+				if (!in_array($efEltName,$checkedElts)) {
+					$aefe = new ArtifactExtraFieldElement($aef,$efEltId);
+					if (!$aefe || !is_object($aefe)) {
+						$error_msg .= _('Unable to create ArtifactExtraFieldElement Object');
+					} else {
+						if (!$aefe->delete()) {
+							$error_msg .= _('Error deleting an element')._(': ').$aefe->getErrorMessage();
+							$aefe->clearError();
+						} else {
+							$feedback .= _('Element deleted').' ';
+							$next = 'add_extrafield';
+						}
+					}
+				}
+			}
+		}
+	}
+	$next = 'add_extrafield';
+//
 //	Clone a tracker's elements to this tracker
 //
 } elseif (getStringFromRequest('clone_tracker')) {
