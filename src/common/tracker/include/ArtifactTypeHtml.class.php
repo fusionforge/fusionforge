@@ -596,7 +596,7 @@ class ArtifactTypeHtml extends ArtifactType {
 	 */
 	function renderUserField ($extra_field_id,$checked='xzxz',$show_100=false,$text_100='none',$show_any=false,$text_any='Any', $allowed=false, $attrs = array ()) {
 		if ($text_100 == 'none' || $text_100 == 'nobody'){
-			$text_100=_('NoBody');
+			$text_100=_('Nobody');
 		}
 		$arr = $this->getExtraFieldElements($extra_field_id);
 		$selectedRolesId = array();
@@ -612,7 +612,7 @@ class ArtifactTypeHtml extends ArtifactType {
 				}
 			}
 		}
-		if (!isset($userArray[$checked])) {
+		if (is_integer($checked) && !isset($userArray[$checked])) {
 			$checkedUser = user_get_object($checked);
 			$userArray[$checkedUser->getID()] = $checkedUser->getRealName().' '._('[DELETED]');
 		}
