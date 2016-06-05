@@ -309,7 +309,9 @@ class Document extends FFError {
 	 * @return	string	The description.
 	 */
 	function getDescription() {
-		return $this->data_array['description'];
+		$result = util_gen_cross_ref($this->data_array['description'], $this->Group->getID());
+		$result = nl2br($result);
+		return $result;
 	}
 
 	/**

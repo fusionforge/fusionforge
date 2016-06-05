@@ -8,6 +8,7 @@ FusionForge 6.X:
 * Docman: notify users on document. (TrivialDev)
 * Docman: support private directory. (TrivialDev)
 * Docman: support document versioning. (TrivialDev)
+* Docman: support cross ref. forum, documents, task or artifact. (TrivialDev)
 * Plugin AuthBuiltin: add captcha after 3 attempts with the same login [#795] (TrivialDev)
 * Projects Page: add paging system in full_list and tag_cloud subpages (TrivialDev)
 * SearchEngine: support only FTI queries (TrivialDev)
