@@ -98,4 +98,15 @@ class DocumentVersionFactory extends FFError {
 		db_free_result($res);
 		return $versions;
 	}
+
+	function getSerialIDs() {
+		$serialids = array();
+		$res = db_query_params('SELECT serial_id FROM doc_data_version WHERE docid = $1', array($this->Document->getID()));
+		if ($res) {
+			while ($arr = db_fetch_array($res)) {
+				$serialids[] = $arr[0];
+			}
+		}
+		return $serialids;
+	}
 }

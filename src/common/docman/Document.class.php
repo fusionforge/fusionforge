@@ -1023,6 +1023,9 @@ class Document extends FFError {
 			return false;
 		}
 
+		db_begin();
+		$dvf = new DocumentVersionFactory($this);
+		$serialids = $dvf->getSerialIDs();
 		$result = db_query_params('DELETE FROM doc_data WHERE docid=$1',
 						array($this->getID()));
 		if (!$result) {
@@ -1030,8 +1033,11 @@ class Document extends FFError {
 			db_rollback();
 			return false;
 		}
-
-		DocumentStorage::instance()->delete($this->getID())->commit();
+		db_commit();
+		
+		foreach ($serialids as $serialid) {
+			DocumentStorage::instance()->delete($serialid)->commit();
+		}
 
 		/** we should be able to send a notice that this doc has been deleted .... but we need to rewrite sendNotice
 		 * $this->sendNotice(false);
