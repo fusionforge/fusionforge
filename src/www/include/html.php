@@ -6,9 +6,9 @@
  * Copyright 2010 (c) FusionForge Team
  * Copyright (C) 2010-2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2011-2016, Franck Villaume - TrivialDev
  * Copyright © 2011, 2012
  *	Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
+ * Copyright 2011-2016, Franck Villaume - TrivialDev
  * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivalDev
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -420,7 +420,7 @@ function html_get_tooltip_description($element_name) {
 			return _('Anyone can add here comments to give additional information, answers and solutions. Please, be as precise as possible to avoid misunderstanding. If relevant, screenshots or documents can be added as attached files.');
 		case 'description':
 			return _('Enter the complete description.')
-				._("Editing tips:http,https or ftp: Hyperlinks. [#NNN]: Tracker id NNN. [TNNN]: Task id NNN. [wiki:&lt;pagename&gt;]: Wiki page. [forum:&lt;msg_id&gt;]: Forum post.");
+				._("Editing tips:http,https or ftp: Hyperlinks. [#NNN]: Tracker id NNN. [TNNN]: Task id NNN. [wiki:&lt;pagename&gt;]: Wiki page. [forum:&lt;msg_id&gt;]: Forum post. [DNNN]: Document id NNN.");
 		case 'attach_file':
 			return _('When you wish to attach a file to a tracker item you must check this checkbox before submitting changes.');
 		case 'monitor':

@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) Alcatel-Lucent
  * Copyright 2009, Roland Mas
- * Copyright 2014,2015 Franck Villaume - TrivialDev
+ * Copyright 2014-2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -22,6 +22,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+require_once $gfcommon.'docman/Document.class.php';
+
 function util_gen_cross_ref ($text, $group_id) {
 
 	// Some important information.
@@ -30,18 +32,20 @@ function util_gen_cross_ref ($text, $group_id) {
 	// Handle URL in links, replace them with hyperlinks.
 	$text = util_make_links($text);
 
-	// Handle gforge [#nnn] Syntax => links to tracker.
+	// Handle FusionForge [#nnn] Syntax => links to tracker.
 	$text = preg_replace_callback('/\[\#(\d+)\]/', create_function('$matches', 'return _artifactid2url($matches[1]);'), $text);
 
-	// Handle gforge [Tnnn] Syntax => links to task.
+	// Handle FusionForge [Tnnn] Syntax => links to task.
 	$text = preg_replace_callback('/\[\T(\d+)\]/', create_function('$matches', 'return _taskid2url($matches[1],'.$group_id.');'), $text);
 
 	// Handle [wiki:<pagename>] syntax
 	$text = preg_replace_callback('/\[wiki:(.*?)\]/', create_function('$matches', 'return _page2url('.$prj.',$matches[1]);'), $text);
 
-	// Handle [forum:<thread_id>] Syntax => links to forum.
+	// Handle FusionForge [forum:<thread_id>] Syntax => links to forum.
 	$text = preg_replace_callback('/\[forum:(\d+)\]/', create_function('$matches', 'return _forumid2url($matches[1]);'), $text);
 
+	// Handle FusionForge [Dnnn] Syntax => links to document.
+	$text = preg_replace_callback('/\[D(\d+)\]/', create_function('$matches', 'return _documentid2url($matches[1],'.$group_id.');'), $text);
 	return $text;
 }
 
@@ -110,6 +114,18 @@ function _forumid2url($id) {
 		$row = db_fetch_array($res);
 		$url = '/forum/message.php?msg_id='.$id.'&group_id='.$row['group_id'];
 		$arg['title'] = $row['subject'];
+		return util_make_link($url, $text, $arg);
+	}
+	return $text;
+}
+
+function _documentid2url($id, $group_id) {
+	$text = '[D'.$id.']';
+	$d = document_get_object($id, $group_id);
+	if ($d && is_object($d) && !$d->isError()) {
+		$view = (($d->getStateID() != 2) ? 'listfile' : 'listtrashfile');
+		$url = '/docman/?group_id='.$group_id.'&view='.$view.'&dirid='.$d->getDocGroupID().'&filedetailid='.$d->getID();
+		$arg['title'] = $d->getName().' ['.$d->getFileName().']';
 		return util_make_link($url, $text, $arg);
 	}
 	return $text;
