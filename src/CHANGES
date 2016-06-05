@@ -18,6 +18,7 @@ FusionForge 6.X:
 * Spellcheck (Anders Jonsson)
 * Tracker: keep values in artifact new submit form on error. (TrivialDev)
 * Tracker: add new extrafield: text regex (TrivialDev)
+* Tracker: add new extrafield: User (TrivialDev)
 * Tracker: add support for mandatory fields on workflow of artifact (TrivialDev)
 * Tracker: add support for description on extrafield to be used in tooltip (TrivialDev)
 * Utils: cross ref document. Use [DNNN] where NNN is the ID of the document. (TrivialDev)
