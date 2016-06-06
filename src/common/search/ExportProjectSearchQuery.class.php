@@ -27,8 +27,6 @@ require_once $gfcommon.'search/SearchQuery.class.php';
 class ExportProjectSearchQuery extends SearchQuery {
 
 	/**
-	 * Constructor
-	 *
 	 * @param	string	$words		words we are searching for
 	 * @param	int	$offset		offset
 	 * @param	boolean	$isExact	if we want to search for all the words or if only one matching the query is sufficient

@@ -64,8 +64,6 @@ class ArtifactExtraFieldElement extends FFError {
 	var $data_array;
 
 	/**
-	 * __construct - Constructor
-	 *
 	 * @param	object		$ArtifactExtraField	ArtifactExtraField object.
 	 * @param	array|bool	$data			(all fields from artifact_file_user_vw) OR id from database.
 	 */

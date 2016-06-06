@@ -40,8 +40,6 @@ class ArtifactQueryFactory extends FFError {
 	var $ArtifactQueries = null;
 
 	/**
-	 * Constructor.
-	 *
 	 * @param	object	$ArtifactType	The Group object to which this ArtifactQueryFactory is associated
 	 */
 	function __construct(&$ArtifactType) {

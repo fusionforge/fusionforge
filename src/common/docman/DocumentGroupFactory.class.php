@@ -49,10 +49,7 @@ class DocumentGroupFactory extends FFError {
 	var $Group;
 
 	/**
-	 * Constructor.
-	 *
 	 * @param	$Group
-	 * @return	\DocumentGroupFactory
 	 */
 	function __construct(&$Group) {
 		parent::__construct();

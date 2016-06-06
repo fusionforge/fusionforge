@@ -65,8 +65,6 @@ class ArtifactFactory extends FFError {
 	var $query_id;			// id of the query (when query_type=query)
 
 	/**
-	 * __construct - Constructor.
-	 *
 	 * @param	object	$ArtifactType	The ArtifactType object to which this ArtifactFactory is associated.
 	 */
 	function __construct(&$ArtifactType) {

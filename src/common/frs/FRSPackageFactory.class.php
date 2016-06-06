@@ -40,8 +40,6 @@ class FRSPackageFactory extends FFError {
 	var $FRSs;
 
 	/**
-	 * Constructor.
-	 *
 	 * @param	Group	$Group The Group object to which these FRSs are associated.
 	 */
 	function __construct(& $Group) {

@@ -31,9 +31,6 @@ class FusionForge extends FFError {
 
 	public static $instance;
 
-	/**
-	 *	FusionForge - FusionForge object constructor
-	 */
 	function __construct() {
 		parent::__construct();
 

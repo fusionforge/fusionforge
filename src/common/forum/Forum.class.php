@@ -94,15 +94,12 @@ class Forum extends FFError {
 	var $is_news;
 
 	/**
-	 * Constructor.
-	 *
 	 * @param	$Group
 	 * @param	bool	$group_forum_id
 	 * @param	bool	$arr
 	 * @internal	param	\The $object Group object to which this forum is associated.
 	 * @internal	param	\The $int group_forum_id.
 	 * @internal	param	\The $array associative array of data.
-	 * @return	\Forum	success.
 	 */
 	function __construct(&$Group, $group_forum_id = false, $arr = false, $is_news = false) {
 		parent::__construct();

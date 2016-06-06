@@ -35,8 +35,6 @@ class NewsSearchQuery extends SearchQuery {
 	var $groupId;
 
 	/**
-	 * Constructor
-	 *
 	 * @param	string	$words		words we are searching for
 	 * @param	int	$offset		offset
 	 * @param	boolean	$isExact	if we want to search for all the words or if only one matching the query is sufficient
@@ -44,7 +42,6 @@ class NewsSearchQuery extends SearchQuery {
 	 */
 	function __construct($words, $offset, $isExact, $groupId) {
 		$this->groupId = $groupId;
-
 		parent::__construct($words, $offset, $isExact);
 	}
 

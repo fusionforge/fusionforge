@@ -33,11 +33,8 @@ class DocumentVersionFactory extends FFError {
 	var $Document;
 
 	/**
-	 * Constructor.
-	 *
 	 * @param	$Document
 	 * @internal	param			\The $object Document object to which this version factory is associated.
-	 * @return	\DocumentVersionFactory
 	 */
 	function __construct(&$Document) {
 		parent::__construct();

@@ -51,9 +51,6 @@ class Codendi_HTMLPurifier {
      */
     private static $Codendi_HTMLPurifier_instance;
 
-    /**
-     * Constructor
-     */
     private function __construct() {
     }
 

@@ -85,8 +85,6 @@ class ArtifactQuery extends FFError {
 	var $element_array;
 
 	/**
-	 * __construct - Constructor
-	 *
 	 * @param	$ArtifactType	$ArtifactType	c object.
 	 * @param	array|bool	$data
 	 */

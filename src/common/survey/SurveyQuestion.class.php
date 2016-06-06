@@ -41,16 +41,13 @@ class SurveyQuestion extends FFError {
 	var $Group;
 
 	/**
-	* Constructor.
-	*
-	* @param	$Group
-	* @param	bool	$question_id
-	* @param	bool	$arr
-	* @internal	param	\The $object Group object to which this Survey Question is associated.
-	* @internal	param	\The $int question_id.
-	* @internal	param	\The $array associative array of data.
-	* @return	\SurveyQuestion
-	*/
+	 * @param	$Group
+	 * @param	bool	$question_id
+	 * @param	bool	$arr
+	 * @internal	param	\The $object Group object to which this Survey Question is associated.
+	 * @internal	param	\The $int question_id.
+	 * @internal	param	\The $array associative array of data.
+	 */
 	function __construct(&$Group, $question_id = false, $arr = false) {
 		parent::__construct();
 		if (!$Group || !is_object($Group)) {

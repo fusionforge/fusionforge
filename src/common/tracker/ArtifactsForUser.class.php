@@ -35,8 +35,6 @@ class ArtifactsForUser extends FFError {
 	var $Artifact;
 
 	/**
-	 * __construct - Creates a new ArtifactsForUser object
-	 *
 	 * @param	object	$user	the User object for which to collect artifacts
 	 */
 	function __construct(&$user) {

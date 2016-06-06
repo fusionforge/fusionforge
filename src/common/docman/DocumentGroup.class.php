@@ -76,16 +76,12 @@ class DocumentGroup extends FFError {
 	var $data_array;
 
 	/**
-	 * DocumentGroup - constructor.
-	 *
 	 * Use this constructor if you are modifying an existing doc_group.
 	 *
 	 * @param	$Group
 	 * @param	bool	$data
 	 * @internal	param	\Group $object object.
 	 * @internal	param	array $OR doc_group id from database.
-	 * @return	\DocumentGroup
-	 * @access	public
 	 */
 	function __construct(&$Group, $data = false) {
 		parent::__construct();

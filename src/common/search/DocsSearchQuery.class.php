@@ -44,8 +44,6 @@ class DocsSearchQuery extends SearchQuery {
 	var $showNonPublic;
 
 	/**
-	 * Constructor
-	 *
 	 * @param	string	$words		words we are searching for
 	 * @param	int	$offset		offset
 	 * @param	bool	$isExact	if we want to search for all the words or if only one matching the query is sufficient

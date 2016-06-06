@@ -59,15 +59,12 @@ class DocumentVersion extends FFError {
 	var $Document;
 
 	/**
-	 * Constructor.
-	 *
 	 * @param	$Document
 	 * @param	bool			$verid
 	 * @param	bool			$arr
 	 * @internal	param			\The $object Document object to which this version is associated.
 	 * @internal	param			\The $int verid.
 	 * @internal	param			\The $array associative array of data.
-	 * @return	\DocumentVersion
 	 */
 	function __construct(&$Document, $verid = false, $arr = false) {
 		parent::__construct();

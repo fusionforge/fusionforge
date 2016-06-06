@@ -43,8 +43,6 @@ class SurveyQuestionFactory extends FFError {
 	var $questions;
 
 	/**
-	 * Constructor.
-	 *
 	 * @param	object	$Group	The Group object to which this survey question is associated.
 	 */
 	function __construct(&$Group) {

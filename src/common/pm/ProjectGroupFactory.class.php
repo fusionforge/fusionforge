@@ -43,10 +43,7 @@ class ProjectGroupFactory extends FFError {
 	var $projectGroups;
 
 	/**
-	 * Constructor.
-	 *
 	 * @param	Group	$Group	The Group object to which this ProjectGroupFactory is associated.
-	 * @return	\ProjectGroupFactory
 	*/
 	function __construct(&$Group, $skip_check=false) {
 		parent::__construct();

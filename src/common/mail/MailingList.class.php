@@ -50,15 +50,12 @@ class MailingList extends FFError {
 	var $groupMailingListId;
 
 	/**
-	 *  Constructor.
-	 *
 	 * @param	$Group
 	 * @param	bool	$groupListId
 	 * @param	bool	$dataArray
 	 * @internal	param	\The $object Group object to which this mailing list is associated.
 	 * @internal	param	\The $int group_list_id.
 	 * @internal	param	\The $array associative array of data.
-	 * @return	\MailingList
 	 */
 	function __construct(&$Group, $groupListId = false, $dataArray = false) {
 		parent::__construct();

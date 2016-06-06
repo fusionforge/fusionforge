@@ -81,15 +81,12 @@ class Document extends FFError {
 	var $Group;
 
 	/**
-	 * Constructor.
-	 *
 	 * @param	$Group
 	 * @param	bool	$docid
 	 * @param	bool	$arr
 	 * @internal	param	\The $object Group object to which this document is associated.
 	 * @internal	param	\The $int docid.
 	 * @internal	param	\The $array associative array of data.
-	 * @return	\Document
 	 */
 	function __construct(&$Group, $docid = false, $arr = false) {
 		parent::__construct();

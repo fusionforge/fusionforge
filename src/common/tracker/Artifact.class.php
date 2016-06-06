@@ -135,8 +135,6 @@ class Artifact extends FFError {
 	var $votes = false;
 
 	/**
-	 * Artifact - constructor.
-	 *
 	 * @param	ArtifactType	$ArtifactType	The ArtifactType object.
 	 * @param	int|bool	$data		(primary key from database OR complete assoc array)
 	 *						ONLY OPTIONAL WHEN YOU PLAN TO IMMEDIATELY CALL ->create()

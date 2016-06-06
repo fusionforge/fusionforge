@@ -93,10 +93,7 @@ class Permission extends FFError {
 	var $is_site_admin;
 
 	/**
-	 *	Constructor for this object.
-	 *
 	 *	@param	object	Group Object required.
-	 *
 	 */
 	function __construct (&$_Group) {
 		if (!$_Group || !is_object($_Group)) {

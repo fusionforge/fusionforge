@@ -41,11 +41,8 @@ class ArtifactCanned extends FFError {
 	var $data_array;
 
 	/**
-	 * __construct - constructor.
-	 *
 	 * @param	ArtifactType	$ArtifactType	The Artifact Type object.
 	 * @param	array|bool	$data		(all fields from artifact_file_user_vw) OR id from database.
-	 * @return	ArtifactCanned	success.
 	 */
 	function __construct(&$ArtifactType, $data=false) {
 		parent::__construct();

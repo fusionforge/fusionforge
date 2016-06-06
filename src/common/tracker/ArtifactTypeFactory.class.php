@@ -49,8 +49,6 @@ class ArtifactTypeFactory extends FFError {
 	var $dataType;
 
 	/**
-	 * __construct - ArtifactTypeFactory constructor.
-	 *
 	 * @param	Group	$Group The Group object to which this ArtifactTypeFactory is associated
 	 */
 	function __construct(&$Group, $skip_check=false) {

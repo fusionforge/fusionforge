@@ -45,11 +45,8 @@ class DocumentManager extends FFError {
 	var $Group;
 
 	/**
-	 * Constructor.
-	 *
 	 * @param	$Group
 	 * @internal	param	\The $object Group object to which this document is associated.
-	 * @return	\DocumentManager
 	 */
 	function __construct(&$Group) {
 		parent::__construct();

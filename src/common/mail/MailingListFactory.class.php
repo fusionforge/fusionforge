@@ -43,8 +43,6 @@ class MailingListFactory extends FFError {
 	var $mailingLists;
 
 	/**
-	 * Constructor.
-	 *
 	 * @param	Group	$Group The Group object to which these mailing lists are associated.
 	 */
 	function __construct(&$Group, $skip_check=false) {

@@ -23,8 +23,6 @@
 class DatabaseInstaller extends FFError {
 
 	/**
-	 * __construct - DatabaseInstaller constructor
-	 *
 	 * @param string $name If set, name of plugin.
 	 * @param string $path If set, path of upgrade scripts.
 	 */

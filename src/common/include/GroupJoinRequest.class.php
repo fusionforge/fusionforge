@@ -51,12 +51,9 @@ class GroupJoinRequest extends FFError {
 	var $Group;
 
 	/**
-	 *  Constructor.
-	 *
 	 * @param	bool|Group	$Group		The Group object.
 	 * @param	bool|int	$user_id	The user_id.
 	 * @param	array|bool	$arr		The associative array of data.
-	 * @return	\GroupJoinRequest
 	 */
 	function __construct($Group = false, $user_id = false, $arr = false) {
 		parent::__construct();

@@ -56,7 +56,6 @@ class FFError {
 	var $error_code;
 
 	/**
-	 * Constructor for the Error class.
 	 * Sets the error state to false.
 	 */
 	function __construct() {

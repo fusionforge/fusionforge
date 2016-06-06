@@ -30,11 +30,6 @@ class Parsedata {
 
 	var $p_path;
 
-	/**
-	 * Constructor.
-	 *
-	 * @return	\Parsedata
-	 */
 	function __construct() {
 		$this->p_path = dirname(__FILE__).'/engine/';
 		$this->parsers = $this->get_parser_list($this->p_path);

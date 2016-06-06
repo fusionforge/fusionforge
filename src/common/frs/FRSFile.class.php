@@ -68,13 +68,10 @@ class FRSFile extends FFError {
 	var $FRSRelease;
 
 	/**
-	* Constructor.
-	*
-	* @param	object		$FRSRelease	The FRSRelease object to which this file is associated.
-	* @param	int|bool	$file_id	The file_id.
-	* @param	array|bool	$arr		The associative array of data.
-	* @return	\FRSFile
-	*/
+	 * @param	object		$FRSRelease	The FRSRelease object to which this file is associated.
+	 * @param	int|bool	$file_id	The file_id.
+	 * @param	array|bool	$arr		The associative array of data.
+	 */
 	function __construct(&$FRSRelease, $file_id=false, $arr=false) {
 		parent::__construct();
 		if (!$FRSRelease || !is_object($FRSRelease)) {

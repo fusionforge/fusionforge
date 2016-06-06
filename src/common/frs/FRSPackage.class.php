@@ -108,15 +108,12 @@ class FRSPackage extends FFError {
 	var $Group;
 
 	/**
-	 * Constructor.
-	 *
 	 * @param	$Group
 	 * @param	bool	$package_id
 	 * @param	bool	$arr
 	 * @internal	param	\The $object Group object to which this FRSPackage is associated.
 	 * @internal	param	\The $int package_id.
 	 * @internal	param	\The $array associative array of data.
-	 * @return	\FRSPackage
 	 */
 	function __construct(&$Group, $package_id = false, $arr = false) {
 		parent::__construct();

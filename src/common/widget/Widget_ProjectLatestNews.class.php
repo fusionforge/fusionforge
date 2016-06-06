@@ -21,8 +21,8 @@
 require_once 'Widget.class.php';
 
 /**
-* Widget_ProjectLatestNews
-*/
+ * Widget_ProjectLatestNews
+ */
 class Widget_ProjectLatestNews extends Widget {
 	var $content;
 

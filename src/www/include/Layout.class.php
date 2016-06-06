@@ -113,11 +113,7 @@ class Layout extends FFError {
 	var $css_min = array();
 	var $stylesheets = array();
 
-	/**
-	 * Layout() - Constructor
-	 */
 	function __construct() {
-		// parent constructor
 		parent::__construct();
 
 		$this->navigation = new Navigation();

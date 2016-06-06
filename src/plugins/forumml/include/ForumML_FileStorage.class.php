@@ -33,8 +33,6 @@ class ForumML_FileStorage {
 	var $root;
 
     /**
-     * ForumML_FileStorage Constructor
-     *
      * @param root: The ForumML attachments directory
      */
     function __construct($root) {

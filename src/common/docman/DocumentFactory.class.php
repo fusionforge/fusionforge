@@ -95,12 +95,8 @@ class DocumentFactory extends FFError {
 	var $validdocumentgroups = array();
 
 	/**
-	 * Constructor.
-	 *
 	 * @param	$Group
 	 * @internal	param	\The $object Group object to which this DocumentFactory is associated.
-	 * @return	\DocumentFactory
-	 * @access	public
 	 */
 	function __construct(&$Group) {
 		parent::__construct();

@@ -151,8 +151,6 @@ class ArtifactType extends FFError {
 	var $voters = false;
 
 	/**
-	 * ArtifactType - constructor.
-	 *
 	 * @param	Group		$Group			The Group object.
 	 * @param	int|bool	$artifact_type_id	The id # assigned to this artifact type in the db.
 	 * @param	array|bool	$arr			The associative array of data.
