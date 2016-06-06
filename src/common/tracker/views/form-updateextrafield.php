@@ -61,23 +61,23 @@ if (!$ac || !is_object($ac)) {
 	echo html_ao('p');
 	if ($ac->getType() == ARTIFACT_EXTRAFIELDTYPE_TEXTAREA) {
 		echo html_e('label', array('for'=>'attribute1'), html_e('b', array(), _('Text Area Columns')).html_e('br'));
-		echo html_e('input', array('type'=>'text', 'id'=>'attribute1', 'name'=>'attribute1', 'value'=>$ac->getAttribute1(), size=>'2', 'maxlength'=>'2'));
+		echo html_e('input', array('type'=>'text', 'id'=>'attribute1', 'name'=>'attribute1', 'value'=>$ac->getAttribute1(), 'size'=>'2', 'maxlength'=>'2'));
 		echo html_ac(html_ap() - 1);
 		echo html_ao('p');
 		echo html_e('label', array('for'=>'attribute2'), html_e('b', array(), _('Text Area Columns')).html_e('br'));
-		echo html_e('input', array('type'=>'text', 'id'=>'attribute2', 'name'=>'attribute2', 'value'=>$ac->getAttribute2(), size=>'2', 'maxlength'=>'2'));
+		echo html_e('input', array('type'=>'text', 'id'=>'attribute2', 'name'=>'attribute2', 'value'=>$ac->getAttribute2(), 'size'=>'2', 'maxlength'=>'2'));
 	} elseif ($ac->getType() == ARTIFACT_EXTRAFIELDTYPE_TEXT || $ac->getType() == ARTIFACT_EXTRAFIELDTYPE_RELATION) {
 		echo html_e('label', array('for'=>'attribute1'), html_e('b', array(), _('Text Field Size')).html_e('br'));
-		echo html_e('input', array('type'=>'text', 'id'=>'attribute1', 'name'=>'attribute1', 'value'=>$ac->getAttribute1(), size=>'2', 'maxlength'=>'2'));
+		echo html_e('input', array('type'=>'text', 'id'=>'attribute1', 'name'=>'attribute1', 'value'=>$ac->getAttribute1(), 'size'=>'2', 'maxlength'=>'2'));
 		echo html_ac(html_ap() - 1);
 		echo html_ao('p');
 		echo html_e('label', array('for'=>'attribute2'), html_e('b', array(), _('Text Field Maxlength')).html_e('br'));
-		echo html_e('input', array('type'=>'text', 'id'=>'attribute2', 'name'=>'attribute2', 'value'=>$ac->getAttribute2(), size=>'2', 'maxlength'=>'2'));
+		echo html_e('input', array('type'=>'text', 'id'=>'attribute2', 'name'=>'attribute2', 'value'=>$ac->getAttribute2(), 'size'=>'2', 'maxlength'=>'2'));
 		if ($ac->getType() == ARTIFACT_EXTRAFIELDTYPE_TEXT) {
 			echo html_ac(html_ap() - 1);
 			echo html_ao('p');
 			echo html_e('label', array('for'=>'pattern'), html_e('b', array(), _('Text Field Pattern')).html_e('br'));
-			echo html_e('input', array('type'=>'text', 'id'=>'pattern', 'name'=>'pattern', 'value'=>$ac->getPattern(), size=>'80', 'maxlength'=>'255'));
+			echo html_e('input', array('type'=>'text', 'id'=>'pattern', 'name'=>'pattern', 'value'=>$ac->getPattern(), 'size'=>'80', 'maxlength'=>'255'));
 		}
 	} else {
 		echo html_e('input', array('type'=>'hidden', 'name'=>'attribute1', 'value'=>'0'));
@@ -87,13 +87,13 @@ if (!$ac || !is_object($ac)) {
 		echo html_ac(html_ap() - 1);
 		echo html_ao('p');
 		echo html_e('label', array('for'=>'show100label'), html_e('b', array(), _('Label for the none value')).html_e('br'));
-		echo html_e('input', array('type'=>'text', 'name'=>'show100label', 'value'=>$ac->getShow100label(), size=>'30'));
+		echo html_e('input', array('type'=>'text', 'name'=>'show100label', 'value'=>$ac->getShow100label(), 'size'=>'30'));
 	}
 	echo html_ac(html_ap() - 1);
 
 	echo html_ao('p');
 	echo html_e('label', array('for'=>'alias'), html_e('strong', array(), _('Field alias')._(':')).html_e('br'));
-	echo html_e('input', array('type'=>'text', 'id'=>'alias', 'name'=>'alias', 'value'=>$ac->getAlias(),  size=>'15', 'maxlength'=>'30'));
+	echo html_e('input', array('type'=>'text', 'id'=>'alias', 'name'=>'alias', 'value'=>$ac->getAlias(), 'size'=>'15', 'maxlength'=>'30'));
 	echo html_ac(html_ap() - 1);
 
 	echo html_ao('p');
