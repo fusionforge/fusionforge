@@ -1,5 +1,5 @@
 <?php // -*- mode: php -*-
-/** 
+/**
  * FusionForge Exports: RSS support module
  *
  * Copyright 1999-2001 (c) VA Linux Systems
