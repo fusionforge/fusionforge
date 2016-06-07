@@ -140,97 +140,119 @@ echo $HTML->listTableTop(array(), array(), 'infotable');
 	</td>
 </tr>
 
-<tr>
-	<td><?php echo _('First Name').utils_requiredField()._(':'); ?></td>
+<tr class="top">
+	<td>
+	<?php echo _('First Name').utils_requiredField()._(':'); ?>
+	</td>
 	<td>
 		<label for="firstname">
-		<input id="firstname" required="required" type="text" name="firstname" value="<?php print $u->getFirstName(); ?>"/>
+			<input id="firstname" required="required" type="text" name="firstname" value="<?php print $u->getFirstName(); ?>"/>
 		</label>
 	</td>
 </tr>
 
-<tr>
-	<td><?php echo _('Last Name').utils_requiredField()._(':'); ?></td>
+<tr class="top">
 	<td>
-	<label for="lastname">
-	<input id="lastname" required="required" type="text" name="lastname" value="<?php print $u->getLastName(); ?>"/>
-	</label>
+	<?php echo _('Last Name').utils_requiredField()._(':'); ?>
+	</td>
+	<td>
+		<label for="lastname">
+		<input id="lastname" required="required" type="text" name="lastname" value="<?php print $u->getLastName(); ?>"/>
+		</label>
 	</td>
 </tr>
 
-<tr>
-	<td><?php echo _('Language')._(':'); ?></td>
-	<td><?php echo html_get_language_popup ('language',$u->getLanguage()); ?>
+<tr class="top">
+	<td>
+	<?php echo _('Language')._(':'); ?>
+	</td>
+	<td>
+	<?php echo html_get_language_popup ('language',$u->getLanguage()); ?>
 	</td>
 </tr>
 
-<tr>
+<tr class="top">
 	<td><?php echo _('Timezone:'); ?></td>
 	<td><?php echo html_get_timezone_popup('timezone', $u->getTimeZone()); ?>
 	</td>
 </tr>
 
-<tr>
+<tr class="top">
 	<td><?php echo _('Theme')._(':'); ?></td>
 	<td><?php echo html_get_theme_popup('theme_id', $u->getThemeID()); ?>
 	</td>
 </tr>
 
-<tr>
-	<td><?php echo _('Country:'); ?></td>
-	<td><?php echo html_get_ccode_popup('ccode', $u->getCountryCode()); ?>
+<tr class="top">
+	<td>
+	<?php echo _('Country')._(':'); ?>
+	</td>
+	<td>
+	<?php echo html_get_ccode_popup('ccode', $u->getCountryCode()); ?>
 	</td>
 </tr>
 
-<tr>
-	<td><?php echo _('Email Address')._(': '); ?></td>
+<tr class="top">
+	<td>
+	<?php echo _('Email Address')._(': '); ?>
+	</td>
 	<td><?php print $u->getEmail(); ?>
 	<br /><a href="change_email.php">[<?php echo _('Change Email Address'); ?>]</a>
 	</td>
 </tr>
 
-<tr>
-	<td><?php echo _('Address')._(':'); ?></td>
+<tr class="top">
 	<td>
-	<label for="address">
-	<input id="address" type="text" name="address" value="<?php echo $u->getAddress(); ?>" size="80"/>
-	</label>
+	<?php echo _('Address')._(':'); ?>
+	</td>
+	<td>
+		<label for="address">
+			<input id="address" type="text" name="address" value="<?php echo $u->getAddress(); ?>" size="80"/>
+		</label>
 	</td>
 </tr>
 
-<tr>
-	<td><?php echo _('Address (continued)')._(':'); ?></td>
+<tr class="top">
 	<td>
-	   <label for="address2">
-	       <input id="address2" type="text" name="address2" value="<?php echo $u->getAddress2(); ?>" size="80"/>
-	   </label>
+	<?php echo _('Address (continued)')._(':'); ?>
+	</td>
+	<td>
+		<label for="address2">
+			<input id="address2" type="text" name="address2" value="<?php echo $u->getAddress2(); ?>" size="80"/>
+		</label>
 	</td>
 </tr>
 
-<tr>
-	<td><?php echo _('Phone')._(':'); ?></td>
+<tr class="top">
 	<td>
-	   <label for="phone">
-	       <input id="phone" type="text" name="phone" value="<?php echo $u->getPhone(); ?>" size="20"/>
-	   </label>
+	<?php echo _('Phone')._(':'); ?>
+	</td>
+	<td>
+		<label for="phone">
+			<input id="phone" type="text" name="phone" value="<?php echo $u->getPhone(); ?>" size="20"/>
+		</label>
 	</td>
 </tr>
 
-<tr>
-	<td><?php echo _('Fax')._(':'); ?></td>
+<tr class="top">
 	<td>
-	   <label for="fax">
-	       <input id="fax" type="text" name="fax" value="<?php echo $u->getFax(); ?>" size="20"/>
-	   </label>
+	<?php echo _('Fax')._(':'); ?>
+	</td>
+	<td>
+		<label for="fax">
+			<input id="fax" type="text" name="fax" value="<?php echo $u->getFax(); ?>" size="20"/>
+		</label>
 	</td>
 </tr>
 
-<tr>
-	<td><?php echo _('Title')._(':'); ?></td>
+<tr class="top">
 	<td>
-	   <label for="title">
-	       <input id="title" type="text" name="title" value="<?php echo $u->getTitle(); ?>" size="10"/>
-	   </label>
+	<?php echo _('Title')._(':'); ?>
+	</td>
+	<td>
+		<label for="title">
+			<input id="title" type="text" name="title" value="<?php echo $u->getTitle(); ?>" size="10"/>
+		</label>
 	</td>
 </tr>
 <?php
