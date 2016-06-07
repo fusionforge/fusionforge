@@ -358,15 +358,12 @@ function util_unconvert_htmlspecialchars($string) {
  *
  */
 function util_result_columns_to_assoc($result, $col_key = 0, $col_val = 1) {
+	$arr = array();
 	$rows = db_numrows($result);
 
 	if ($rows > 0) {
-		$arr = array();
 		for ($i = 0; $i < $rows; $i++) {
 			$arr[db_result($result, $i, $col_key)] = db_result($result, $i, $col_val);
-		}
-	} else {
-		$arr = array();
 	}
 	return $arr;
 }
@@ -380,19 +377,12 @@ function util_result_columns_to_assoc($result, $col_key = 0, $col_val = 1) {
  *
  */
 function &util_result_column_to_array($result, $col = 0) {
-	/*
-		Takes a result set and turns the optional column into
-		an array
-	*/
+	$arr = array();
 	$rows = db_numrows($result);
 
 	if ($rows > 0) {
-		$arr = array();
 		for ($i = 0; $i < $rows; $i++) {
 			$arr[$i] = db_result($result, $i, $col);
-		}
-	} else {
-		$arr = array();
 	}
 	return $arr;
 }
