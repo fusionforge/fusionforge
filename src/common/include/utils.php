@@ -944,8 +944,7 @@ function normalized_urlprefix() {
 function util_url_prefix($prefix = '') {
 	if ($prefix == 'http' || $prefix == 'https' ) {
 		return $prefix . '://';
-	}
-	else {
+	} else {
 		if (forge_get_config('use_ssl')) {
 			return "https://";
 		} else {
