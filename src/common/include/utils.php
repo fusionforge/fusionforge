@@ -364,6 +364,7 @@ function util_result_columns_to_assoc($result, $col_key = 0, $col_val = 1) {
 	if ($rows > 0) {
 		for ($i = 0; $i < $rows; $i++) {
 			$arr[db_result($result, $i, $col_key)] = db_result($result, $i, $col_val);
+		}
 	}
 	return $arr;
 }
@@ -383,6 +384,7 @@ function &util_result_column_to_array($result, $col = 0) {
 	if ($rows > 0) {
 		for ($i = 0; $i < $rows; $i++) {
 			$arr[$i] = db_result($result, $i, $col);
+		}
 	}
 	return $arr;
 }
