@@ -135,6 +135,7 @@ function hide_edit_button(id) {
 	}
 
 	function showHistory() {
+		global $HTML;
 		$result=$this->getHistory();
 		$rows= db_numrows($result);
 
@@ -146,14 +147,14 @@ function hide_edit_button(id) {
 			$title_arr[]=_('Date');
 			$title_arr[]=_('By');
 
-			echo $GLOBALS['HTML']->listTableTop ($title_arr);
+			echo $HTML->listTableTop ($title_arr);
 
 			$artifactType =& $this->getArtifactType();
 
 			for ($i=0; $i < $rows; $i++) {
 				$field=db_result($result, $i, 'field_name');
 				echo '
-				<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td>'.$field.'</td><td>';
+				<tr '. $HTML->boxGetAltRowStyle($i) .'><td>'.$field.'</td><td>';
 
 				if ($field == 'status_id') {
 
@@ -178,7 +179,7 @@ function hide_edit_button(id) {
 					'<td>'. db_result($result, $i, 'user_name'). '</td></tr>';
 			}
 
-			echo $GLOBALS['HTML']->listTableBottom();
+			echo $HTML->listTableBottom();
 
 		} else {
 			echo '
