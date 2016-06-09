@@ -45,7 +45,7 @@ if (getStringFromPost('submit')) {
 		exit_error($group->getErrorMessage(), 'admin');
 	} else {
 		$feedback = _('Project successfully deleted');
-		session_redirect('/admin/?feedback='.urlencode($feedback));
+		session_redirect('/admin/');
 	}
 }
 
