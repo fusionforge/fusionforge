@@ -26,10 +26,8 @@ $keyid = getStringFromRequest('keyid');
 if (is_numeric($keyid)) {
 	if (!$u->deleteAuthorizedKey($keyid)) {
 		$error_msg = $u->getErrorMessage();
-		session_redirect('/account/');
+	} else {
+		$feedback = _('SSH Key deleted successfully.');
 	}
-	$feedback = _('SSH Key deleted successfully.');
-	session_redirect('/account/');
 }
-
 session_redirect('/account/');
