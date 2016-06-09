@@ -301,7 +301,7 @@ echo '<input type="hidden" name="form_key" value="'.form_generate_key().'" />
 </table>';
 
 echo'
-<table width="100%" class="tablecontent">';
+<table class="tablecontent fullwidth">';
 if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
 	$default_query = db_result(db_query_params('SELECT query_name FROM artifact_query WHERE query_type=2 AND group_artifact_id=$1',
 						   array ($ath->getID())),
