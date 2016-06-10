@@ -1652,7 +1652,7 @@ function util_sudo_effective_user($username, $function, $params=array()) {
 	if ( $pid == -1 ) {
 		// Fork failed
 		exit(1);
-	} else if ($pid) {
+	} elseif ($pid) {
 		pcntl_waitpid($pid, $status);
 	} else {
 		if (posix_setgid($userinfo['gid']) &&
