@@ -47,7 +47,7 @@ class hudsonViews extends Views {
 
 	function _getTitle() {
 //		return _("Continuous Integration");
-		return _("Hudson");
+		return _("Hudson/Jenkins");
 	}
 
 	function _getHelp($section = '', $questionmark = false) {
