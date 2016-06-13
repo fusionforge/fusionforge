@@ -139,9 +139,9 @@ control over it to the project's administrator.");
 						$rows));
 			$htmlRepo = '';
 			for ($i=0; $i<$rows; $i++) {
-				$user_id = db_result($result,$i,'user_id');
-				$user_name = db_result($result,$i,'user_name');
-				$real_name = db_result($result,$i,'realname');
+				$user_id = db_result($result, $i, 'user_id');
+				$user_name = db_result($result, $i, 'user_name');
+				$real_name = db_result($result, $i, 'realname');
 				$htmlRepo .= html_e('tt', array(), 'git clone '.$protocol.'://'.forge_get_config('scm_host').'/anonscm/git/'.$project->getUnixName().'/users/'.$user_name.'.git')
 					. ' ('.util_make_link_u($user_name, $user_id, $real_name).')'
 					. html_e('br');
@@ -162,7 +162,7 @@ control over it to the project's administrator.");
 						  $this->getID()));
 		$rows = db_numrows($result);
 		for ($i=0; $i<$rows; $i++) {
-			$repo_list[] = db_result($result,$i,'repo_name');
+			$repo_list[] = db_result($result, $i, 'repo_name');
 		}
 
 		$b = '';
