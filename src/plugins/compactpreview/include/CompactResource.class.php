@@ -31,7 +31,6 @@ class CompactResource {
 	public $params;
 
 	/**
-	 * Constructor
 	 * @param unknown_type $params
 	 */
 	public function __construct($params) {
