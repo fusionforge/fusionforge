@@ -38,7 +38,7 @@ forge_define_config_item('use_ssl', 'scmgit', true);
 forge_set_config_item_bool('use_ssl', 'scmgit');
 
 class GitPlugin extends SCMPlugin {
-	function GitPlugin() {
+	function __construct() {
 		$this->SCMPlugin();
 		$this->name = 'scmgit';
 		$this->text = _('Git');
