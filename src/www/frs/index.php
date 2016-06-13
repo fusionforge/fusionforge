@@ -86,20 +86,8 @@ if($content_type != $default_content_type) {
 
 /* everything sounds ok, now let do the job */
 $action = getStringFromRequest('action');
-switch ($action) {
-	case 'addfile':
-	case 'addpackage':
-	case 'addrelease':
-	case 'deletefile':
-	case 'deletepackage':
-	case 'deleterelease':
-	case 'editfile':
-	case 'editrelease':
-	case 'monitor':
-	case 'updatepackage': {
-		include ($gfcommon.'frs/actions/'.$action.'.php');
-		break;
-	}
+if (file_exists(forge_get_config('source_path').'/common/frs/actions/'.$action.'.php')) {
+	include(forge_get_config('source_path').'/common/frs/actions/'.$action.'.php');
 }
 
 html_use_jqueryui();

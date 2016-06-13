@@ -88,7 +88,7 @@ class DocsSearchQuery extends SearchQuery {
 		} elseif (!isset($options['date_begin']) && isset($options['date_end'])) {
 			$qpa = db_construct_qpa($qpa, ' AND docdata_vw.createdate <= $1', array($options['date_end']));
 		} elseif (isset($options['date_begin']) && isset($options['date_end'])) {
-			$qpa = db_construct_qpa($qpa, ' AND docdata_vw.createdate between $1 and $2', array($options['date_begin'], $$options['date_end']));
+			$qpa = db_construct_qpa($qpa, ' AND docdata_vw.createdate between $1 and $2', array($options['date_begin'], $options['date_end']));
 		}
 		return $qpa;
 	}
