@@ -130,6 +130,7 @@ echo $HTML->openForm(array('enctype' => 'multipart/form-data', 'method' => 'post
 echo html_ao('fieldset');
 echo html_e('legend', array(), '<strong>'._('File Name').'</strong>');
 echo _('Upload a new file')._(': ').'<input type="file" name="userfile" />'.'('._('max upload size')._(': ').human_readable_bytes(util_get_maxuploadfilesize()).')';
+// the following var will be set by different include.
 $content = '';
 if (forge_get_config('use_ftp_uploads')) {
 	include ($gfcommon.'frs/views/useftpuploads.php');
@@ -198,4 +199,11 @@ if(count($files)) {
 }
 
 echo $HTML->jQueryUIconfirmBox('confirmbox1', _('Delete file'), _('You are about to delete permanently this file. Are you sure? This action is definitive.'));
+
+if ($g->usesTracker()) {
+	include $gfcommon.'frs/views/linktrackerroadmap.php';
+}
+
+echo html_e('hr');
+echo html_e('h2', array(), _('Monitoring Information'));
 echo html_e('p', array(), sprintf(ngettext('There is %s user monitoring this package.', 'There are %s users monitoring this package.', $frsp->getMonitorCount()), $frsp->getMonitorCount()));

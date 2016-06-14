@@ -1,11 +1,11 @@
 <?php
 /**
- * FusionForge file release system
+ * FusionForge FRS: Release Class
  *
  * Copyright 2002, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -486,6 +486,55 @@ class FRSRelease extends FFError {
 		return true;
 	}
 
+	function isLinkedRoadmapRelease($roadmap_id, $roadmap_release) {
+		$roadmaps = array();
+		$res = db_query_params('SELECT roadmap_id FROM frs_release_tracker_roadmap_link WHERE release_id = $1 and roadmap_release = $2',
+					array($this->getID(), $roadmap_release));
+		if (!$res) {
+			return false;
+		}
+		$roadmaps = util_result_column_to_array($res);
+		return $roadmaps;
+	}
+
+	function deleteLinkedRoadmap($roadmap_id, $roadmap_release) {
+		db_begin();
+		$res = db_query_params('DELETE FROM frs_release_tracker_roadmap_link where roadmap_id = $1 and release_id = $2 and roadmap_release = $3',
+					array($roadmap_id, $this->getID(), $roadmap_release));
+		if (!$res) {
+			$this->setError(_('Error Delete Linked Roadmap')._(': ').db_error());
+			db_rollback();
+			return false;
+		}
+		db_commit();
+		return true;
+	}
+
+	function addLinkedRoadmap($roadmap_id, $roadmap_release) {
+		db_begin();
+		$res = db_query_params('INSERT INTO frs_release_tracker_roadmap_link (roadmap_id, release_id, roadmap_release) VALUES ($1, $2, $3)',
+					array($roadmap_id, $this->getID(), $roadmap_release));
+		if (!$res) {
+			$this->setError(_('Error Adding Linked Roadmap')._(': ').db_error());
+			db_rollback();
+			return false;
+		}
+		db_commit();
+		return true;
+	}
+
+	function getLinkedRoadmaps() {
+		$roadmaps = array();
+		$res = db_query_params('SELECT roadmap_id, roadmap_release FROM frs_release_tracker_roadmap_link WHERE release_id = $1',
+					array($this->getID()));
+		if (!$res) {
+			return false;
+		}
+		while ($arr = db_fetch_array($res)) {
+			$roadmaps[$arr[0]][] = $arr[1];
+		}
+		return $roadmaps;
+	}
 }
 
 // Local Variables:
