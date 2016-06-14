@@ -33,7 +33,6 @@ if [ -e /etc/debian_version ]; then
 	libapache2-mpm-itk libapache2-mod-svn \
 	apache2 postgresql libnss-pgsql2 unscd \
 	subversion viewvc python-pycurl git xinetd \
-	mediawiki \
 	python-moinmoin libapache2-mod-wsgi python-psycopg2 \
 	unoconv poppler-utils
     if ! dpkg-vendor --is Ubuntu; then
@@ -57,8 +56,5 @@ fi
         install-plugin-scmsvn install-plugin-scmgit \
         install-plugin-blocks install-plugin-moinmoin \
         install-plugin-online_help install-plugin-taskboard install-plugin-message
-    if [ -e /etc/debian_version ]; then
-	make install-plugin-mediawiki
-    fi
     make post-install
 )

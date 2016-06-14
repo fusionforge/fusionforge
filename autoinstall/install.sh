@@ -41,7 +41,7 @@ if [ -e /etc/debian_version ]; then
 	# Additional components for testsuite
 	$APT install fusionforge-shell fusionforge-scm \
 	    fusionforge-plugin-scmgit fusionforge-plugin-scmsvn fusionforge-plugin-scmbzr \
-	    fusionforge-plugin-mediawiki fusionforge-plugin-moinmoin \
+	    fusionforge-plugin-moinmoin \
 	    fusionforge-plugin-blocks fusionforge-plugin-taskboard \
 	    fusionforge-plugin-message
 	if ! dpkg-vendor --is Ubuntu; then
