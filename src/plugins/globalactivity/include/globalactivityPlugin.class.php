@@ -69,9 +69,20 @@ class globalactivityPlugin extends Plugin {
 			array('return'=>'tns:ArrayOfGlobalActivityEntry'),
 			$uri,
 			$uri.'#globalactivity_getActivity','rpc','encoded');
+
+		$server->register(
+			'globalactivity_getActivityForProject',
+			array('session_ser'=>'xsd:string',
+				  'begin'=>'xsd:int',
+				  'end'=>'xsd:int',
+				  'group_id'=>'xsd:int',
+				  'show'=>'tns:ArrayOfstring',),
+			array('return'=>'tns:ArrayOfGlobalActivityEntry'),
+			$uri,
+			$uri.'#globalactivity_getActivityForProject','rpc','encoded');
 	}
 
-	public function getData($begin,$end,$show,&$ids,&$texts) {
+	public function getData($begin,$end,$show,&$ids,&$texts,$gid = NULL) {
 		if ($begin > $end) {
 			$tmp = $end;
 			$end = $begin;
@@ -183,11 +194,18 @@ class globalactivityPlugin extends Plugin {
 			return $cached_perms[$s][$ref];
 		}
 
-		$res = db_query_params('SELECT * FROM activity_vw WHERE activity_date BETWEEN $1 AND $2
-			AND section = ANY ($3) ORDER BY activity_date DESC',
+		if ($gid) {
+			$res = db_query_params('SELECT * FROM activity_vw WHERE activity_date BETWEEN $1 AND $2 AND section = ANY ($3) AND group_id = $4 ORDER BY activity_date DESC',
+							   array($begin,
+									 $end,
+									 db_string_array_to_any_clause($section),
+									 $gid));
+		} else {
+			$res = db_query_params('SELECT * FROM activity_vw WHERE activity_date BETWEEN $1 AND $2 AND section = ANY ($3) ORDER BY activity_date DESC',
 							   array($begin,
 									 $end,
 									 db_string_array_to_any_clause($section)));
+		}
 
 		if (db_error()) {
 			exit_error(db_error(), 'home');
@@ -205,9 +223,14 @@ class globalactivityPlugin extends Plugin {
 			$results[] = $arr;
 		}
 
-		$res = db_query_params('SELECT group_id FROM groups WHERE status=$1',
-							   array('A'));
-
+		if ($gid) {
+			$res = db_query_params('SELECT group_id FROM groups WHERE status=$1 AND group_id=$2',
+								   array('A', $gid));
+		} else {
+			$res = db_query_params('SELECT group_id FROM groups WHERE status=$1',
+								   array('A'));
+		}
+		
 		if (db_error()) {
 			exit_error(db_error(), 'home');
 		}
@@ -271,6 +294,48 @@ function &globalactivity_getActivity($session_ser,$begin,$end,$show=array()) {
 
 	try {
 		$results = $plugin->getData($begin,$end,$show,$ids,$texts);
+	} catch (Exception $e) {
+		$msg = "Error in global activity: ".$e->getMessage();
+		return new soap_fault ('','globalactivity_getActivity',$msg,$msg);
+	}
+
+	$keys = array(
+		'group_id',
+		'section',
+		'ref_id',
+		'subref_id',
+		'description',
+		'activity_date',
+		);
+
+
+	$res2 = array();
+	foreach ($results as $res) {
+		$r = array();
+		
+		foreach ($keys as $k) {
+			$r[$k] = $res[$k];
+		}
+		$res2[] = $r;
+	}
+
+	return $res2;
+}
+
+function &globalactivity_getActivityForProject($session_ser,$begin,$end,$group_id,$show=array()) {
+	continue_session($session_ser);
+
+	$plugin = plugin_get_object('globalactivity');
+	if (!forge_get_config('use_activity')
+		|| !$plugin) {
+		return new soap_fault ('','globalactivity_getActivity','Global activity not available','Global activity not available');
+	}
+
+	$ids = array();
+	$texts = array();
+
+	try {
+		$results = $plugin->getData($begin,$end,$show,$ids,$texts,$group_id);
 	} catch (Exception $e) {
 		$msg = "Error in global activity: ".$e->getMessage();
 		return new soap_fault ('','globalactivity_getActivity',$msg,$msg);

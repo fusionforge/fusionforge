@@ -32,3 +32,8 @@ ref_id (meaning differs across sections), subref_id (ditto),
 description (title, commit number, or otherwise descriptive text),
 activity_date (as a Unix timestamp).
 
+Despite its name, the plugin also provides a non-global SOAP method
+called globalactivity_getActivityForProject, which takes a group_id as
+an extra parameter between the end date and the list of sections.  It
+returns an array of GlobalActivityEntry that only concerns the
+requested project.
