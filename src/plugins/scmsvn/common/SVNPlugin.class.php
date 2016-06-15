@@ -554,6 +554,15 @@ some control over it to the project's administrator.");
 		global $last_user, $last_time, $last_tag, $time_ok, $start_time, $end_time,
 			$adds, $deletes, $updates, $commits, $date_key,
 			$messages, $last_message, $times, $revisions, $users, $xml_parser;
+		$commits = 0;
+		$adds = 0;
+		$updates = 0;
+		$deletes = 0;
+		$users = array();
+		$messages = array();
+		$times = array();
+		$revisions = array();
+
 		$group_id = $params['group'];
 		$project = group_get_object($group_id);
 		if (! $project->usesPlugin($this->name)) {
