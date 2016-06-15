@@ -72,7 +72,7 @@ class Activity extends FForge_SeleniumTestCase
 		$this->type("body", "ninetynine of them on Charlie's wall - also, ZONGO");
 		$this->clickAndWait("submit");
 
-		$this->createAndGote('ProjectB');
+		$this->createAndGoto('ProjectB');
 		$this->clickAndWait("link=Forums");
 		$this->clickAndWait("link=open-discussion");
 		$this->click("link=Start New Thread");
