@@ -155,7 +155,7 @@ class Activity extends FForge_SeleniumTestCase
 		$this->assertTrue($found);
 		$found = False;
 		foreach ($response as $data) {
-			if ($data->description == 'Message1') {
+			if ($data->description == 'Message1 in a bottle') {
 				$found = True;
 				break;
 			}
@@ -171,7 +171,7 @@ class Activity extends FForge_SeleniumTestCase
 		$this->assertTrue($found);
 
 		// Now restrict to ProjectA only
-		$response = $soapclient->globalactivity_getActivityForProject($session,time()-3600,time(),6,array('forumpost'));
+		$response = $soapclient->globalactivity_getActivityForProject($session,time()-3600,time(),7,array('forumpost'));
 		$found = False;
 		foreach ($response as $data) {
 			if ($data->description == 'Welcome to developers-discussion') {
@@ -182,7 +182,7 @@ class Activity extends FForge_SeleniumTestCase
 		$this->assertTrue($found);
 		$found = False;
 		foreach ($response as $data) {
-			if ($data->description == 'Message1') {
+			if ($data->description == 'Message1 in a bottle') {
 				$found = True;
 				break;
 			}
