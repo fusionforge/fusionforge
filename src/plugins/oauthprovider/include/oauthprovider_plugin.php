@@ -29,7 +29,7 @@ class oauthproviderPlugin extends ForgeAuthPlugin {
 
 	public $oauth_token = null;
 	public $oauth_user = null;
-	public function __construct() {
+	function __construct() {
 
 		$this->ForgeAuthPlugin() ;
 

@@ -33,7 +33,7 @@ class CompactResource {
 	/**
 	 * @param unknown_type $params
 	 */
-	public function __construct($params) {
+	function __construct($params) {
 		$this->params = $params;
 	}
 

@@ -2,7 +2,7 @@
 
 class oauthconsumerPlugin extends ForgeAuthPlugin {
 
-	public function __construct() {
+	function __construct() {
 
 		$this->ForgeAuthPlugin() ;
 
