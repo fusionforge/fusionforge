@@ -37,13 +37,13 @@ class TroveCategoryLabel extends FFError {
 	var $category;
 	var $dataArray = false;
 
-	function TroveCategoryLabel(& $category, $labelId = false, $dataArray = false) {
+	function __construct(& $category, $labelId = false, $dataArray = false) {
 		parent::__construct();
 		if (!$category || !is_object($category)) {
-			return false;
+			return;
 		}
 		if ($category->isError()) {
-			return false;
+			return;
 		}
 		$this->category =& $category;
 
@@ -51,18 +51,14 @@ class TroveCategoryLabel extends FFError {
 			$this->labelId = $labelId;
 			if (!$dataArray || !is_array($dataArray)) {
 				if (!$this->fetchData($labelId)) {
-					return false;
 				}
 			} else {
 				$this->dataArray =& $dataArray;
 				if ($this->dataArray['category_id'] != $this->category->getID()) {
 					$this->dataArray = null;
-					return false;
 				}
 			}
 		}
-
-		return true;
 	}
 
 	function create($label, $languageId) {

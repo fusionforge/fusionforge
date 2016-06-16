@@ -2,7 +2,7 @@
 
 class TroveCategoryAdmin extends TroveCategory {
 
-function TroveCategoryAdmin() {
+function __construct() {
 
 // access management
 
