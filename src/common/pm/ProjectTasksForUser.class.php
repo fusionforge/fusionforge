@@ -40,7 +40,7 @@ class ProjectTasksForUser extends FFError {
 	/**
 	 * ProjectTasksForUser - Creates a new ProjectTasksForUser object
 	 *
-	 * @param	GFUser	$user	the User object
+	 * @param	FFUser	$user	the User object
 	 * @return	bool
 	 */
 	function ProjectTasksForUser(&$user) {

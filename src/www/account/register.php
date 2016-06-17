@@ -94,7 +94,7 @@ if (getStringFromRequest('submit')) {
 			$activate_immediately = false;
 		}
 
-		$new_user = new GFUser();
+		$new_user = new FFUser();
 		$register = $new_user->create($unix_name,$firstname,$lastname,$password1,$password2,
 					      $email,$mail_site,$mail_va,$language_id,$timezone,'',0,$theme_id,'',
 					      $address,$address2,$phone,$fax,$title,$ccode,$send_mail);

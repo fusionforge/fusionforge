@@ -618,7 +618,7 @@ some control over it to the project's administrator.");
 					$result['ref_id'] = 'browser.php?group_id='.$group_id;
 					$result['description'] = htmlspecialchars($message).' (r'.$revisions[$i].')';
 					$userObject = user_get_object_by_name($users[$i]);
-					if (is_a($userObject, 'GFUser')) {
+					if (is_a($userObject, 'FFUser')) {
 						$result['realname'] = util_display_user($userObject->getUnixName(), $userObject->getID(), $userObject->getRealName());
 					} else {
 						$result['realname'] = '';

@@ -1016,7 +1016,7 @@ control over it to the project's administrator.");
 					$result['ref_id'] = 'browser.php?group_id='.$group_id.'&commit='.$splitedLine[3];
 					$result['description'] = htmlspecialchars($splitedLine[2]).' (commit '.$splitedLine[3].')';
 					$userObject = user_get_object_by_email($splitedLine[1]);
-					if (is_a($userObject, 'GFUser')) {
+					if (is_a($userObject, 'FFUser')) {
 						$result['realname'] = util_display_user($userObject->getUnixName(), $userObject->getID(), $userObject->getRealName());
 					} else {
 						$result['realname'] = '';

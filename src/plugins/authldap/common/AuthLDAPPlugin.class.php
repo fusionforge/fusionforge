@@ -78,7 +78,7 @@ into the FusionForge database.");
 		if (!$u) {
 			// No user by that name yet, let's create it
 
-			$u = new GFUser();
+			$u = new FFUser();
 
 			$user_data = array();
 
@@ -189,7 +189,7 @@ into the FusionForge database.");
 			   $u->usesTooltips(),
 			   trim($mapped_data['email']));
 
-		if ((substr($mapped_data['unix_password'], 0, 7) == '{crypt}') 
+		if ((substr($mapped_data['unix_password'], 0, 7) == '{crypt}')
 			|| substr($mapped_data['unix_password'], 0, 7) == '{CRYPT}') {
 			$mapped_data['unix_password'] = substr($mapped_data['unix_password'],7);
 		}

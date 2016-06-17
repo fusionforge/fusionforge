@@ -47,7 +47,7 @@ while (! feof ($f)) {
 	$lname = $array[3] ;
 	$password = $array[4] ;
 
-	$u = new GFUser () ;
+	$u = new FFUser () ;
 
 	$r = $u->create ($login, $fname, $lname, $password, $password, $email,
 			 1, 0, 1, 'UTC', '', '', getThemeIdFromName(forge_get_config('default_theme')),

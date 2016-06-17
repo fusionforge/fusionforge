@@ -223,8 +223,8 @@ had been written.
   Description: Called before checking if the user is logged in by
   						 reading session cookie.
                You can use this hook to handle session setup specific
-               to your plugin. 
-  
+               to your plugin.
+
   Hook Name  : session_set_return
   Locations  : common/include/session.php
   Description: Called after checking if the user is logged in by reading
@@ -237,7 +237,7 @@ had been written.
   Locations  : www/tracker/detail.php
                www/tracker/mod-limited.php
                www/tracker/mod.php
-  Description: Use this hook to provide additional information about a 
+  Description: Use this hook to provide additional information about a
                tracker item based upon its ID.
 
   Hook Name  : before_logout_redirect
@@ -265,7 +265,7 @@ had been written.
   Hook Name  : groupisactivecheckboxpost
   Parameters : group_id - The numeric ID of the group
   Locations  : www/project/admin/index.php
-  Description: Called when a plugin is activated for a specific group from 
+  Description: Called when a plugin is activated for a specific group from
                the group's Edit Public Info page. Use this to perform
                actions to initialise the plugin for a specific group.
 
@@ -274,7 +274,7 @@ had been written.
   Locations  : www/project/admin/index.php
   Description: Used to display a portion of a form on a group's Edit
                Public Info page. It should return a HTML <tr> line containing
-               two cells. 
+               two cells.
 
   Hook Name  : groupmenu
   Parameters : DIRS - A reference to the array of tab URLs
@@ -344,7 +344,7 @@ had been written.
   Hook Name  : project_after_description
   Parameters : group_id - The numeric ID of the group
   Locations  : www/include/project_home.php
-  Description: Provides some space for plugin specific text on a group's 
+  Description: Provides some space for plugin specific text on a group's
                summary page.
 
   Hook Name  : project_public_area
@@ -385,7 +385,7 @@ had been written.
   Description: This is used by GForge to identify SCM plugins. Any plugin that
                provides SCM features should add itself to the scm_plugins array
                when this hook is called.
- 
+
   Hook Name  : scm_stats
   Parameters : group_id - The numeric ID of the group
   Locations  : www/include/project_home.php
@@ -400,7 +400,7 @@ had been written.
   Locations  : common/include/session.php
   Description: Authentication plugins can use this hook to authenticate
                a user before GForge passes the authentication details on
-               to its own database. The hook should return true if the 
+               to its own database. The hook should return true if the
                authentication succeeds.
 
   Hook Name  : site_admin_option_hook
@@ -414,14 +414,14 @@ had been written.
   Locations  : www/admin/index.php
   Description: Use this to provide a link to the project maintenance pages
                for your plugin. The hook should obey the plugin_hook_by_reference()
-               protocol and concatenate a <li> HTML block to params['result'] so 
+               protocol and concatenate a <li> HTML block to params['result'] so
                that it can appear in the "Plugins Project Maintenance" subsection
 
   Hook Name  : site_admin_user_maintenance_hook
   Locations  : www/admin/index.php
   Description: Use this to provide a link to the user maintenance pages
                for your plugin. The hook should obey the plugin_hook_by_reference()
-               protocol and concatenate a <li> HTML block to params['result'] so 
+               protocol and concatenate a <li> HTML block to params['result'] so
                that it can appear in the "Plugins User Maintenance" subsection
 
   Hook Name  : task_extra_detail
@@ -431,7 +431,7 @@ had been written.
   Description: Provides a place to include extra information about a
                task. The hook should return a <tr> row containing 2 cells
                (or colspan'ed to 2).
-  
+
   Hook Name  : usermenu
   Locations  : www/include/html.php
   Description: Prints out a tab to show when displaying user pages.
@@ -488,12 +488,12 @@ TODO : document Auth plugins :
   Hook Name  : fetch_authenticated_user
   Parameters : ??
   Locations  : common/include/session.php
-  Description: what GFUser is logged in?
+  Description: what FFUser is logged in?
                it returns a user object in passed $params['results']
 
   Hook Name  : widgets
   Parameters : $params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_GROUP or WidgetLayoutManager::OWNER_TYPE_USER
-  Description: appends to $params['fusionforge_widgets'] (or 'codendi_widgets') names 
+  Description: appends to $params['fusionforge_widgets'] (or 'codendi_widgets') names
   			   of widgets it provides depending on the project home or user home context
 
   Hook Name  : widget_instance
@@ -502,26 +502,26 @@ TODO : document Auth plugins :
 
   Hook Name  : script_accepted_types
   Parameters : $params['script'] == 'project_home' or 'user_home' depending on whether providing alternate accept types for such pages
-  Description: appends to $params['accepted_types'] alternate HTTP Accept Content-types supported by a plugin for the 
+  Description: appends to $params['accepted_types'] alternate HTTP Accept Content-types supported by a plugin for the
                /projects or /users/ pages rendered through content-negociation
 
   Hook Name  : content_negociated_project_home
   Parameters : $params['accept'] provides the content-type to be rendered, $params['groupname'] the project name, $params['group_id'] the project ID
-  Description: returns in $params['content'] an alternate content for /projects/ page and 
+  Description: returns in $params['content'] an alternate content for /projects/ page and
                in $params['content_type'] the actual content-type to return
 
   Hook Name  : content_negociated_user_home
   Parameters : $params['accept'] provides the content-type to be rendered, $params['username'] the user name
-  Description: returns in $params['content'] an alternate content for /users/ page and 
+  Description: returns in $params['content'] an alternate content for /users/ page and
                in $params['content_type'] the actual content-type to return
 
   Hook Name  : project_rdf_metadata
-  Parameters : $params['prefixes'] : already used RDF prefixes in the form URL => shortname, 
+  Parameters : $params['prefixes'] : already used RDF prefixes in the form URL => shortname,
                $hook_params['group'] : group_id of the project,
 			   $hook_params['in_Resource'] : (read-only) ARC2 resource already available,
 			   $hook_params['details'] : 'full' or 'minimal' whether requesting a detailed or minimal description
-			   $hook_params['out_Resources'] : (write) to be returned the new ARC2 resource 
-  Description: returns in $params['prefixes'] and $params['out_Resources'] added prefixes and ARC2 RDF resource to be included in the project's DOAP description 
+			   $hook_params['out_Resources'] : (write) to be returned the new ARC2 resource
+  Description: returns in $params['prefixes'] and $params['out_Resources'] added prefixes and ARC2 RDF resource to be included in the project's DOAP description
 
   Hook Name  : role_adduser
   Parameters : $params['user'] : user added to the role, $params['role'] : role added to the user
@@ -535,11 +535,11 @@ TODO : document Auth plugins :
 
   Hook Name  : alt_representations
   Parameters : $params['script_name'] contains the SCRIPT_NAME (filtered to work only on /projects or /users for the moment)
-  Description: returns alternate representations for a particular page in $params['results'] which is populated by the hook users 
+  Description: returns alternate representations for a particular page in $params['results'] which is populated by the hook users
 
   Hook Name  : content_negociated_projects_list
   Parameters : $params['accept'] provides the content-type to be rendered
-  Description: returns in $params['content'] an alternate content for /projects page and 
+  Description: returns in $params['content'] an alternate content for /projects page and
                in $params['content_type'] the actual content-type to return
 
   Hook Name  : softwaremap_links
@@ -551,7 +551,7 @@ TODO : document Auth plugins :
 
   Hook Name  : content_negociated_trove_list
   Parameters : $params['accept'] provides the content-type to be rendered
-  Description: returns in $params['content'] an alternate content for /softwaremap/trove_list.php page and 
+  Description: returns in $params['content'] an alternate content for /softwaremap/trove_list.php page and
                in $params['content_type'] the actual content-type to return
 
   Hook Name  : content_negociated_frs_index
@@ -566,7 +566,7 @@ TODO : document Auth plugins :
 
 
 TODO (nerville) : document display_hierarchy
-TODO (lolando ?) : document role_normalize, role_translate_strings, role_has_permission, role_get_setting, list_roles_by_permission 
+TODO (lolando ?) : document role_normalize, role_translate_strings, role_has_permission, role_get_setting, list_roles_by_permission
 TODO : document project_link_with_tooltip
 
   -- Roland Mas <lolando@debian.org>

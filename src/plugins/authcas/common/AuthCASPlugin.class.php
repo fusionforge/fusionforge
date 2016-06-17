@@ -145,7 +145,7 @@ server.");
 	}
 
 	/**
-	 * What GFUser is logged in?
+	 * What FFUser is logged in?
 	 * @param unknown_type $params
 	 */
 	function fetchAuthUser(&$params) {
