@@ -237,9 +237,9 @@ class CmController extends Zend_Rest_Controller {
 	}
 
         public function headAction(){
- 
+
           //$this->_forward('index');
- 
+
 	}
 
 	public function getAction(){
