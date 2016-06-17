@@ -370,9 +370,9 @@ require_once $gfcommon.'widget/Widget_HomeVersion.class.php';
 		return 'widget-preview-'.($this->id).'-'.$locale;
 	}
 	function getAjaxUrl($owner_id, $owner_type) {
-		return '/widgets/widget.php?owner='. $owner_type.$owner_id .'&action=ajax&name['. $this->id .']='. $this->getInstanceId();
+		return '/widgets/widget.php?owner='. $owner_type.$owner_id .'&action=ajax&name%5B'. $this->id .'%5D='. $this->getInstanceId();
 	}
 	function getIframeUrl($owner_id, $owner_type) {
-		return '/widgets/widget.php?owner='. $owner_type.$owner_id .'&amp;action=iframe&amp;name['. $this->id .']='. $this->getInstanceId();
+		return '/widgets/widget.php?owner='. $owner_type.$owner_id .'&amp;action=iframe&amp;name%5B'. $this->id .'%5D='. $this->getInstanceId();
 	}
 }
