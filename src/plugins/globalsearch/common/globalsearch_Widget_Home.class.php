@@ -24,13 +24,13 @@ class globalsearch_Widget_Home extends Widget {
 	var $title = '';
 	var $content = '';
 
-	function globalsearch_Widget_Home($owner_type, $owner_id) {
+	function __construct($owner_type, $owner_id) {
 		$request =& HTTPRequest::instance();
 		if ($owner_type == WidgetLayoutManager::OWNER_TYPE_HOME) {
 			$this->widget_id = 'plugin_globalsearch_home';
 			$this->group_id = $owner_id;
 		}
-		$this->Widget($this->widget_id);
+		parent::__construct($this->widget_id);
 		$this->setOwner($owner_id, $owner_type);
 	}
 

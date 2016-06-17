@@ -43,8 +43,8 @@ class admsswPlugin extends Plugin {
 	/**
 	 * @param number $id plugin identifier
 	 */
-	public function __construct($id=0) {
-		$this->Plugin($id) ;
+	function __construct($id=0) {
+		parent::__construct($id);
 		$this->name = "admssw";
 		$this->text = _("ADMS.SW"); // To show in the tabs, use...
 		$this->pkg_desc =

@@ -28,21 +28,18 @@ require_once $gfcommon.'search/NewsSearchQuery.class.php';
 class NewsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 
 	/**
-	 * Constructor
-	 *
 	 * @param string $words words we are searching for
 	 * @param int $offset offset
 	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
 	 * @param int $groupId group id
-	 *
 	 */
-	function NewsHtmlSearchRenderer($words, $offset, $isExact, $groupId) {
+	function __construct($words, $offset, $isExact, $groupId) {
 		$this->groupId = $groupId;
 
 		$searchQuery = new NewsSearchQuery($words, $offset, $isExact, $groupId);
 
 		//init the searchrendererr
-		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_NEWS, $words, $isExact, $searchQuery, $groupId, 'news');
+		parent::__construct(SEARCH__TYPE_IS_NEWS, $words, $isExact, $searchQuery, $groupId, 'news');
 
 		$this->tableHeaders = array(
 			_('Summary'),

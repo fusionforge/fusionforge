@@ -40,12 +40,8 @@ class Navigation extends FFError {
 	 */
 	var $project_menu_data;
 
-	/**
-	 * Constructor
-	 */
-	function Navigation() {
+	function __construct() {
 		parent::__construct();
-		return true;
 	}
 
 	/**

@@ -28,11 +28,7 @@ class PluginManager extends FFError {
 	var $hooks_to_plugins;
 	var $returned_values = array();
 
-	/**
-	 * PluginManager() - constructor
-	 *
-	 */
-	function PluginManager() {
+	function __construct() {
 		parent::__construct();
 		$this->plugins_objects = array();
 		$this->plugins_to_hooks = array();

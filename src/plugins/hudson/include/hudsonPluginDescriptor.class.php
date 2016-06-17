@@ -22,7 +22,7 @@ require_once 'common/plugin/PluginDescriptor.class.php';
 
 class hudsonPluginDescriptor extends PluginDescriptor {
 
-	function hudsonPluginDescriptor() {
-		$this->PluginDescriptor(_("Continuous Integration"), '1.0', _("Continuous Integration with Hudson"));
+	function __construct() {
+		parent::__construct(_("Continuous Integration"), '1.0', _("Continuous Integration with Hudson"));
 	}
 }

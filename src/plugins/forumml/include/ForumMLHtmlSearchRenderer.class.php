@@ -17,14 +17,11 @@ class ForumMLHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 
         var $groupId;
         /**
-         * Constructor
-         *
          * @param string $words words we are searching for
          * @param int $offset offset
          * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
          * @param int $groupId group id
          * @param array $sections array of all sections to search in (array of strings)
-         *
          */
         function ForumMLHtmlSearchRenderer($words, $offset, $isExact, $groupId) {
                 $this->groupId = $groupId;
@@ -32,8 +29,7 @@ class ForumMLHtmlSearchRenderer extends HtmlGroupSearchRenderer {
                 $searchQuery = new ForumMLSearchQuery($words, $offset, $isExact, $groupId);
 
                 //init the searchrendererr
-                $this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_LIST, $words, $isExact,
-                                $searchQuery, $groupId, 'list');
+                parent::__construct(SEARCH__TYPE_IS_LIST, $words, $isExact, $searchQuery, $groupId, 'list');
 
                // $this->tableHeaders = array(_('Thread'),_('Submitted on'), _('Author'));
 

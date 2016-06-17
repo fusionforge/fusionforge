@@ -26,7 +26,7 @@ class CodendiDataAccess extends DataAccess {
 
     protected function __construct() {
 
-      $this->DataAccess();
+      parent::__construct();
     }
 
     protected static $_instance;

@@ -28,7 +28,7 @@ class phpcaptchaPlugin extends Plugin {
 	var $phpcaptcha_path;
 
 	function __construct() {
-		$this->Plugin();
+		parent::__construct();
 		$this->name = 'phpcaptcha';
 		$this->text = _('Enable use of phpcaptcha (more information www.phpcaptcha.org)');
 		$this->_addHook('captcha_check');

@@ -26,9 +26,9 @@ forge_define_config_item('use_frame', 'moinmoin', false);
 forge_set_config_item_bool('use_frame', 'moinmoin');
 
 class MoinMoinPlugin extends Plugin {
-	function MoinMoinPlugin () {
-		$this->Plugin() ;
-		$this->name = "moinmoin" ;
+	function __construct() {
+		parent::__construct();
+		$this->name = "moinmoin";
 		$this->text = _("MoinMoinWiki") ; // To show in the tabs, use...
 		$this->pkg_desc =
 _("This plugin allows each project to embed MoinMoinWiki under a tab.");

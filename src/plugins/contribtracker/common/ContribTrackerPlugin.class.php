@@ -23,8 +23,8 @@
  */
 
 class ContribTrackerPlugin extends Plugin {
-	function ContribTrackerPlugin() {
-		$this->Plugin() ;
+	function __construct() {
+		parent::__construct();
 		$this->name = "contribtracker";
 		$this->text = _("Contribution Tracker"); // To show in the tabs, use...
 		$this->pkg_desc =

@@ -25,8 +25,8 @@ require_once $gfwww.'search/include/engines/GroupSearchEngine.class.php';
 
 class DocsGroupSearchEngine extends GroupSearchEngine {
 
-	function DocsGroupSearchEngine() {
-		$this->GroupSearchEngine(SEARCH__TYPE_IS_DOCS, 'DocsHtmlSearchRenderer', _('This project\'s documents'));
+	function __construct() {
+		parent::__construct(SEARCH__TYPE_IS_DOCS, 'DocsHtmlSearchRenderer', _('This project\'s documents'));
 	}
 
 	function isAvailable($parameters) {

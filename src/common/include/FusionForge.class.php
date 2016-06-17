@@ -46,7 +46,6 @@ class FusionForge extends FFError {
 		}
 
 		self::$instance = $this;
-		return true;
 	}
 
 	public static function getInstance() {

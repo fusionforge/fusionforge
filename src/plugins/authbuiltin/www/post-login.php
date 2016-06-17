@@ -80,7 +80,6 @@ if ($login) {
 	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 		exit_form_double_submit();
 	}
-
 	$valide = 1;
 	if ($attempts >= 3) {
 		$params['valide'] =& $valide;

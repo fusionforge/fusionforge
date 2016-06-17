@@ -38,8 +38,8 @@ class Valid_UInt extends Valid {
  * Check that group_id variable is valid
  */
 class Valid_GroupId extends Valid {
-	function Valid_GroupId() {
-		parent::Valid('group_id');
+	function __construct() {
+		parent::__construct('group_id');
 		//$this->setErrorMessage(_("Error: No group_id was chosen."));
 	}
 

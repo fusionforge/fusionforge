@@ -29,8 +29,8 @@
  */
 
 class cvstrackerPlugin extends Plugin {
-	function cvstrackerPlugin () {
-		$this->Plugin() ;
+	function __construct() {
+		parent::__construct();
 		$this->name = "cvstracker" ;
 		$this->text = "CVS<->Tracker";
 		$this->hooks[] = "groupisactivecheckbox";

@@ -32,7 +32,7 @@ require_once 'common/rss/RSS.class.php';
 
 class Widget_MyProjects extends Widget {
 	function __construct() {
-		$this->Widget('myprojects');
+		parent::__construct('myprojects');
 	}
 	function getTitle() {
 		return _('My Projects');

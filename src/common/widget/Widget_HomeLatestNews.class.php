@@ -21,7 +21,7 @@ require_once 'Widget.class.php';
 
 class Widget_HomeLatestNews extends Widget {
 	function __construct() {
-		$this->Widget('homelatestnews');
+		parent::__construct('homelatestnews');
 	}
 	function getTitle() {
 		return _('Latest News');

@@ -72,40 +72,36 @@ class FRSRelease extends FFError {
 	var $files_count = null;
 
 	/**
-	 * Constructor.
-	 *
 	 * @param	object  	$FRSPackage	The FRSPackage object to which this release is associated.
 	 * @param	int|bool	$release_id	The release_id.
 	 * @param	array|bool	$arr		The associative array of data.
-	 * @return	bool	success.
 	 */
-	function FRSRelease(&$FRSPackage, $release_id = false, $arr = false) {
+	function __construct(&$FRSPackage, $release_id = false, $arr = false) {
 		parent::__construct();
 		if (!$FRSPackage || !is_object($FRSPackage)) {
 			$this->setError(_('Invalid FRS Package Object'));
-			return false;
+			return;
 		}
 		if ($FRSPackage->isError()) {
 			$this->setError('FRSRelease: '.$FRSPackage->getErrorMessage());
-			return false;
+			return;
 		}
 		$this->FRSPackage =& $FRSPackage;
 
 		if ($release_id) {
 			if (!$arr || !is_array($arr)) {
 				if (!$this->fetchData($release_id)) {
-					return false;
+					return;
 				}
 			} else {
 				$this->data_array =& $arr;
 				if ($this->data_array['package_id'] != $this->FRSPackage->getID()) {
 					$this->setError('FRSPackage_id in db result does not match FRSPackage Object');
 					$this->data_array = null;
-					return false;
+					return;
 				}
 			}
 		}
-		return true;
 	}
 
 	/**

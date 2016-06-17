@@ -33,12 +33,8 @@ define('FORGE_AUTH_NOT_AUTHORITATIVE', 3);
  *
  */
 abstract class ForgeAuthPlugin extends Plugin {
-	/**
-	 * ForgeAuthPlugin() - constructor
-	 *
-	 */
-	function ForgeAuthPlugin() {
-		$this->Plugin();
+	function __construct() {
+		parent::__construct();
 		// Common hooks that can be enabled per plugin:
 		// check_auth_session - is there a valid session?
 		// fetch_authenticated_user - what FFUser is logged in?

@@ -40,7 +40,7 @@ require_once $gfcommon.'tracker/ArtifactCanned.class.php';
 class Widget_MyArtifacts extends Widget {
 	var $_artifact_show;
 	function __construct() {
-		$this->Widget('myartifacts');
+		parent::__construct('myartifacts');
 		$this->_artifact_show = UserManager::instance()->getCurrentUser()->getPreference('my_artifacts_show');
 		if($this->_artifact_show === false) {
 			$this->_artifact_show = 'ASM';

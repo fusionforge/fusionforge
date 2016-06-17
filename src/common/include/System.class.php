@@ -23,13 +23,8 @@
 require_once $gfcommon.'include/FFError.class.php';
 
 class System extends FFError {
-	/**
-	 * System()
-	 *
-	 */
-	function System() {
+	function __construct() {
 		parent::__construct();
-		return true;
 	}
 
 	/**

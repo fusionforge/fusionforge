@@ -30,7 +30,7 @@ require_once $gfcommon.'include/plugins_utils.php';
 
 class Widget_MyBookmarks extends Widget {
 	function __construct() {
-		$this->Widget('mybookmarks');
+		parent::__construct('mybookmarks');
 	}
 
 	function getTitle() {

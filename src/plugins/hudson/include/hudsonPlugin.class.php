@@ -27,8 +27,8 @@ require_once 'PluginHudsonJobDao.class.php';
 
 class hudsonPlugin extends Plugin {
 
-	function hudsonPlugin($id=0) {
-		$this->Plugin($id);
+	function __construct($id=0) {
+		parent::__construct($id);
 		$this->name = "hudson";
 		$this->text = _('Hudson/Jenkins'); // To show in the tabs, use...
 		$this->pkg_desc =

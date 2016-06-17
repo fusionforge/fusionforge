@@ -29,7 +29,7 @@ require_once $gfcommon.'frs/FRSReleaseFactory.class.php';
 class Widget_ProjectLatestFileReleases extends Widget {
 	var $content;
 	function __construct() {
-		$this->Widget('projectlatestfilereleases');
+		parent::__construct('projectlatestfilereleases');
 		$request =& HTTPRequest::instance();
 		$pm = ProjectManager::instance();
 		$project = $pm->getProject($request->get('group_id'));

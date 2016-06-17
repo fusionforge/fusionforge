@@ -24,7 +24,7 @@ class Widget_HomeDetailActivityMostActiveProjectWeek extends Widget {
 	var $cached_perms = array();
 
 	function __construct() {
-		$this->Widget('homedetailactivitymostactiveprojectweek');
+		parent::__construct('homedetailactivitymostactiveprojectweek');
 		if (forge_get_config('use_activity')) {
 			$this->content['title'] = _('Detailed Activity for the 10 Most Active Projects this Week');
 		}

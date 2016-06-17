@@ -34,7 +34,7 @@ class Widget_MyLatestCommits extends Widget {
 	private $_nb_commits;
 
 	public function __construct() {
-		$this->Widget('mylatestcommits');
+		parent::__construct('mylatestcommits');
 		$this->_nb_commits = UserManager::instance()->getCurrentUser()->getPreference('my_latests_commits_nb_display');
 		if($this->_nb_commits === false) {
 			$this->_nb_commits = self::NB_COMMITS_TO_DISPLAY;

@@ -25,8 +25,8 @@ require_once $gfwww.'search/include/engines/SearchEngine.class.php';
 class GroupSearchEngine extends GFSearchEngine {
 	var $Group;
 
-	function GroupSearchEngine($type, $rendererClassName, $label) {
-		$this->GFSearchEngine($type, $rendererClassName, $label);
+	function __construct($type, $rendererClassName, $label) {
+		parent::__construct($type, $rendererClassName, $label);
 	}
 
 	function isAvailable($parameters) {

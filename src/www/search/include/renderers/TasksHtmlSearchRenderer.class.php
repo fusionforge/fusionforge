@@ -27,21 +27,18 @@ require_once $gfcommon.'search/TasksSearchQuery.class.php';
 class TasksHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 
 	/**
-	 * Constructor
-	 *
 	 * @param string $words words we are searching for
 	 * @param int $offset offset
 	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
 	 * @param int $groupId group id
 	 * @param array|string $sections array of all sections to search in (array of strings)
-	 *
 	 */
-	function TasksHtmlSearchRenderer($words, $offset, $isExact, $groupId, $sections=SEARCH__ALL_SECTIONS) {
+	function __construct($words, $offset, $isExact, $groupId, $sections=SEARCH__ALL_SECTIONS) {
 		$userIsGroupMember = $this->isGroupMember($groupId);
 
 		$searchQuery = new TasksSearchQuery($words, $offset, $isExact, $groupId, $sections, $userIsGroupMember);
 
-		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_TASKS, $words, $isExact, $searchQuery, $groupId, 'pm');
+		parent::__construct(SEARCH__TYPE_IS_TASKS, $words, $isExact, $searchQuery, $groupId, 'pm');
 
 		$this->tableHeaders = array(
 			'&nbsp;',

@@ -27,14 +27,12 @@ class ExternalHtmlSearchRenderer extends SearchRenderer {
 	var $url;
 
 	/**
-	 * Constructor
-	 *
 	 * @param string $words words we are searching for
 	 */
-	function ExternalHtmlSearchRenderer($type, $name, $url, $words) {
+	function __construct($type, $name, $url, $words) {
 		$this->name = $name;
 		$this->url = $url;
-		$this->SearchRenderer($type, $words, true, false);
+		parent::__construct($type, $words, true, false);
 	}
 
 	function flush() {

@@ -25,8 +25,8 @@ require_once $gfwww.'search/include/engines/GroupSearchEngine.class.php';
 
 class NewsGroupSearchEngine extends GroupSearchEngine {
 
-	function NewsGroupSearchEngine() {
-		$this->GroupSearchEngine(SEARCH__TYPE_IS_NEWS, 'NewsHtmlSearchRenderer', _('This project\'s news'));
+	function __construct() {
+		parent::__construct(SEARCH__TYPE_IS_NEWS, 'NewsHtmlSearchRenderer', _('This project\'s news'));
 	}
 
 	function isAvailable($parameters) {

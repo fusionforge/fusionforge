@@ -25,29 +25,24 @@ require_once $gfcommon.'include/account.php';
 require_once $gfcommon.'include/system/UNIX.class.php';
 
 class LDAP extends UNIX {
-	/**
-	*	LDAP()
-	*
-	*/
-	function LDAP() {
-		$this->UNIX();
-		return true;
+	function __construct() {
+		parent::__construct();
 	}
 
 	/*
- 	* Auxilary functions
- 	*/
+ 	 * Auxilary functions
+ 	 */
 
 	/**
- 	*	asciize() - Replace non-ascii characters with question marks
- 	*
- 	*	LDAP expects utf-8 encoded character string. Since we cannot
- 	*	know which encoding 8-bit characters in database use, we
- 	*	just replace them with question marks.
- 	*
- 	*	@param		string	$str	UTF-8 encoded character string.
- 	*	@return		string	which contains only ascii characters
- 	*/
+ 	 *	asciize() - Replace non-ascii characters with question marks
+ 	 *
+ 	 *	LDAP expects utf-8 encoded character string. Since we cannot
+ 	 *	know which encoding 8-bit characters in database use, we
+ 	 *	just replace them with question marks.
+ 	 *
+ 	 *	@param		string	$str	UTF-8 encoded character string.
+ 	 *	@return		string	which contains only ascii characters
+ 	 */
 	function asciize($str) {
 		if (!$str) {
 			// LDAP don't allow empty strings for some attributes

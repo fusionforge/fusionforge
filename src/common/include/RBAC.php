@@ -56,7 +56,7 @@ abstract class BaseRole extends FFError {
 	// var $perms_array;
 	// var $setting_array;
 
-	public function BaseRole() {
+	public function __construct() {
 		// TODO: document these tables
 		// $gfcommon.'include/rbac_texts.php' may provide some hints...
 		$this->role_values = array(

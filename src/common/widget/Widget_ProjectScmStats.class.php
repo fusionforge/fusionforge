@@ -30,7 +30,7 @@ class Widget_ProjectScmStats extends Widget {
 	var $content = array();
 
 	function __construct() {
-		$this->Widget('projectscmstats');
+		parent::__construct('projectscmstats');
 		$request =& HTTPRequest::instance();
 		$pm = ProjectManager::instance();
 		$project = $pm->getProject($request->get('group_id'));

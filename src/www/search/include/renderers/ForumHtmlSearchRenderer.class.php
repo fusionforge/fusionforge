@@ -35,20 +35,18 @@ class ForumHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	var $forumId;
 
 	/**
-	 * Constructor
-	 *
 	 * @param string $words words we are searching for
 	 * @param int $offset offset
 	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
 	 * @param int $groupId group id
 	 * @param int $forumId forum id
 	 */
-	function ForumHtmlSearchRenderer($words, $offset, $isExact, $groupId, $forumId) {
+	function __construct($words, $offset, $isExact, $groupId, $forumId) {
 		$this->forumId = $forumId;
 
 		$searchQuery = new ForumSearchQuery($words, $offset, $isExact, $groupId, $forumId);
 
-		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_FORUM, $words, $isExact, $searchQuery, $groupId, 'forums');
+		parent::__construct(SEARCH__TYPE_IS_FORUM, $words, $isExact, $searchQuery, $groupId, 'forums');
 
 		$this->tableHeaders = array(
 			_('Thread'),

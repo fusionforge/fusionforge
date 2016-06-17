@@ -28,9 +28,9 @@ forge_define_config_item ('default_server', 'scmbzr', forge_get_config ('scm_hos
 forge_define_config_item ('repos_path', 'scmbzr', forge_get_config('chroot').'/scmrepos/bzr') ;
 
 class BzrPlugin extends SCMPlugin {
-	function BzrPlugin () {
+	function __construct() {
 		global $gfconfig;
-		$this->SCMPlugin () ;
+		parent::__construct();
 		$this->name = 'scmbzr';
 		$this->text = _('Bazaar');
 		$this->pkg_desc =
@@ -38,9 +38,9 @@ _("This plugin contains the Bazaar subsystem of FusionForge. It allows each
 FusionForge project to have its own Bazaar repository, and gives some control
 over it to the project's administrator.");
 		$this->hooks[] = 'scm_generate_snapshots' ;
-                $this->hooks[] = 'scm_browser_page';
-                $this->hooks[] = 'scm_update_repolist' ;
-                $this->hooks[] = 'scm_gather_stats' ;
+		$this->hooks[] = 'scm_browser_page';
+		$this->hooks[] = 'scm_update_repolist' ;
+		$this->hooks[] = 'scm_gather_stats' ;
 
 		$this->main_branch_names = array () ;
 		$this->main_branch_names[] = 'trunk' ;

@@ -25,9 +25,9 @@
 class webanalyticsPlugin extends Plugin {
 
 	function __construct() {
-		$this->Plugin() ;
-		$this->name = "webanalytics" ;
-		$this->text = _("webanalytics") ;
+		parent::__construct();
+		$this->name = "webanalytics";
+		$this->text = _("webanalytics");
 		$this->pkg_desc =
 _("webanalytics plugin for FusionForge. Get the ability
 to configure specific URL for web analytics tool

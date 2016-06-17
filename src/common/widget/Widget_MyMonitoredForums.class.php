@@ -32,7 +32,7 @@ require_once $gfcommon.'include/MonitorElement.class.php';
 
 class Widget_MyMonitoredForums extends Widget {
 	function __construct() {
-		$this->Widget('mymonitoredforums');
+		parent::__construct('mymonitoredforums');
 	}
 
 	function getTitle() {

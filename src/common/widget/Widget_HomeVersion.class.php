@@ -21,7 +21,7 @@ require_once 'Widget.class.php';
 
 class Widget_HomeVersion extends Widget {
 	function __construct() {
-		$this->Widget('homeversion');
+		parent::__construct('homeversion');
 	}
 
 	function getTitle() {

@@ -29,8 +29,8 @@ require_once 'common/include/ProjectManager.class.php';
 require_once 'common/include/rdfutils.php';
 
 class doaprdfPlugin extends Plugin {
-	public function __construct($id=0) {
-		$this->Plugin($id) ;
+	function __construct($id=0) {
+		parent::__construct($id) ;
 		$this->name = "doaprdf";
 		$this->text = _("DoaPRDF!"); // To show in the tabs, use...
 		$this->pkg_desc =

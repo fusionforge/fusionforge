@@ -25,9 +25,8 @@ require_once $gfcommon.'reporting/Report.class.php';
 
 class ReportSetup extends Report {
 
-	function ReportSetup() {
-		$this->Report();
-
+	function __construct() {
+		parent::__construct();
 	}
 
 	function initialSetup() {

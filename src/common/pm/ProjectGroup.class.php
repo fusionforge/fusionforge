@@ -87,17 +87,14 @@ class ProjectGroup extends FFError {
 	var $technicians;
 
 	/**
-	 * Constructor.
-	 *
 	 * @param	$Group
 	 * @param	bool	$group_project_id
 	 * @param	bool	$arr
 	 * @internal	param	\The $object Group object to which this forum is associated.
 	 * @internal	param	\The $int group_project_id.
 	 * @internal	param	\The $array associative array of data.
-	 * @return	\ProjectGroup
 	 */
-	function ProjectGroup(&$Group, $group_project_id = false, $arr = false) {
+	function __construct(&$Group, $group_project_id = false, $arr = false) {
 		parent::__construct();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(_('No Valid Group Object'));

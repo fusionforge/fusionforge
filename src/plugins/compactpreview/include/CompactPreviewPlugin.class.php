@@ -23,8 +23,8 @@
 
 class CompactPreviewPlugin extends Plugin {
 
-	public function __construct($id=0) {
-		$this->Plugin($id) ;
+	function __construct($id=0) {
+		parent::__construct($id);
 		$this->name = "compactpreview";
 		$this->text = _("CompactPreview!"); // To show in the tabs, use...
 		$this->pkg_desc =

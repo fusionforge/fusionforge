@@ -28,7 +28,7 @@ class Widget_ProjectLatestNews extends Widget {
 
 	function __construct() {
 		global $gfwww;
-		$this->Widget('projectlatestnews');
+		parent::__construct('projectlatestnews');
 		$request =& HTTPRequest::instance();
 		$pm = ProjectManager::instance();
 		$project = $pm->getProject($request->get('group_id'));

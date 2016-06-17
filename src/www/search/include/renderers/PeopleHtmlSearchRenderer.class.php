@@ -28,17 +28,15 @@ require_once $gfcommon.'search/PeopleSearchQuery.class.php';
 class PeopleHtmlSearchRenderer extends HtmlSearchRenderer {
 
 	/**
-	 * Constructor
-	 *
 	 * @param string $words words we are searching for
 	 * @param int $offset offset
 	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
 	 */
-	function PeopleHtmlSearchRenderer($words, $offset, $isExact) {
+	function __construct($words, $offset, $isExact) {
 
 		$searchQuery = new PeopleSearchQuery($words, $offset, $isExact);
 
-		$this->HtmlSearchRenderer(SEARCH__TYPE_IS_PEOPLE, $words, $isExact, $searchQuery);
+		parent::__construct(SEARCH__TYPE_IS_PEOPLE, $words, $isExact, $searchQuery);
 
 		$this->tableHeaders = array(
 			_('User Name'),

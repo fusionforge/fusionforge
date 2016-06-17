@@ -27,21 +27,18 @@ require_once $gfcommon.'search/FrsSearchQuery.class.php';
 class FrsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 
 	/**
-	 * Constructor
-	 *
 	 * @param string $words words we are searching for
 	 * @param int $offset offset
 	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
 	 * @param int $groupId group id
 	 * @param array|string $sections array of all sections to search in (array of strings)
-	 *
 	 */
-	function FrsHtmlSearchRenderer($words, $offset, $isExact, $groupId, $sections=SEARCH__ALL_SECTIONS) {
+	function __construct($words, $offset, $isExact, $groupId, $sections=SEARCH__ALL_SECTIONS) {
 		$userIsGroupMember = $this->isGroupMember($groupId);
 
 		$searchQuery = new FrsSearchQuery($words, $offset, $isExact, $groupId, $sections, $userIsGroupMember);
 
-		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_FRS, $words, $isExact, $searchQuery, $groupId, 'frs');
+		parent::__construct(SEARCH__TYPE_IS_FRS, $words, $isExact, $searchQuery, $groupId, 'frs');
 
 		$this->tableHeaders = array(
 			'&nbsp;',

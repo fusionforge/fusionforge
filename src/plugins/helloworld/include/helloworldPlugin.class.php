@@ -22,8 +22,8 @@
  */
 
 class helloworldPlugin extends Plugin {
-	public function __construct($id=0) {
-		$this->Plugin($id) ;
+	function __construct($id=0) {
+		parent::__construct($id) ;
 		$this->name = "helloworld";
 		$this->text = "HelloWorld!"; // To show in the tabs, use...
 		$this->_addHook("user_personal_links");//to make a link to the user's personal part of the plugin

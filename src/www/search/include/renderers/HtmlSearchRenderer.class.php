@@ -36,15 +36,13 @@ class HtmlSearchRenderer extends SearchRenderer {
 	var $tableHeaders = array();
 
 	/**
-	 * Constructor
-	 *
 	 * @param string  $typeOfSearch type of the search (Software, Forum, People and so on)
 	 * @param string  $words        words we are searching for
 	 * @param boolean $isExact      if we want to search for all the words or if only one matching the query is sufficient
 	 * @param object  $searchQuery  SearchQuery instance
 	 */
-	function HtmlSearchRenderer($typeOfSearch, $words, $isExact, $searchQuery) {
-		$this->SearchRenderer($typeOfSearch, $words, $isExact, $searchQuery);
+	function __construct($typeOfSearch, $words, $isExact, $searchQuery) {
+		parent::__construct($typeOfSearch, $words, $isExact, $searchQuery);
 	}
 
 	/**

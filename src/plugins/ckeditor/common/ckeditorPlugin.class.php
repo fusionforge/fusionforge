@@ -34,8 +34,8 @@ class ckeditorPlugin extends Plugin {
 	var $toolBar = array();
 
 	function __construct() {
-		$this->Plugin() ;
-		$this->name = "ckeditor" ;
+		parent::__construct();
+		$this->name = "ckeditor";
 		$this->text = _("HTML editor (ckeditor)");
 		$this->pkg_desc =
 _("CKEditor is a WYSIWYG text editor that displays within a web browser.");

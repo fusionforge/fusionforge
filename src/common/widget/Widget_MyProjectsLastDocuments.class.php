@@ -30,7 +30,7 @@ require_once $gfcommon.'docman/DocumentFactory.class.php';
 
 class Widget_MyProjectsLastDocuments extends Widget {
 	function __construct() {
-		$this->Widget('myprojectslastdocuments');
+		parent::__construct('myprojectslastdocuments');
 	}
 
 	function getTitle() {

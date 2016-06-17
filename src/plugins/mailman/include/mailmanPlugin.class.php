@@ -35,8 +35,8 @@ require_once 'mailman/include/events/SystemEvent_MAILMAN_LIST_CREATE.class.php';
 require_once 'mailman/include/events/SystemEvent_MAILMAN_LIST_DELETE.class.php';
 
 class mailmanPlugin extends Plugin {
-	public function __construct($id=0) {
-		$this->Plugin($id);
+	function __construct($id=0) {
+		parent::__construct($id);
 		//$this->setScope(Plugin::SCOPE_PROJECT);
 		$this->name = "mailman" ;
 		$this->text = "Mailman" ; // To show in the tabs, use...

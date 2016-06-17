@@ -31,7 +31,7 @@ require_once $gfcommon.'docman/DocumentFactory.class.php';
 class Widget_ProjectLatestDocuments extends Widget {
 	var $content;
 	function __construct() {
-		$this->Widget('projectlatestdocuments');
+		parent::__construct('projectlatestdocuments');
 		$request =& HTTPRequest::instance();
 		$pm = ProjectManager::instance();
 		$project = $pm->getProject($request->get('group_id'));

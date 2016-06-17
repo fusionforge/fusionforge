@@ -30,18 +30,16 @@ class TroveCat extends FFError {
 	var $data_array;
 
 	/**
-	 * TroveCat() - CONSTRUCTOR.
-	 *
 	 * @param	bool|int	$cat_id	The cat_id.
 	 */
-	function TroveCat($cat_id = false) {
+	function __construct($cat_id = false) {
 
 		if (!$cat_id) {
 			//setting up an empty object
 			//probably going to call create()
-			return true;
+			return;
 		}
-		return $this->fetchData($cat_id);
+		$this->fetchData($cat_id);
 	}
 
     /**

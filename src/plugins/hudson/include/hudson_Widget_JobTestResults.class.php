@@ -30,7 +30,7 @@ class hudson_Widget_JobTestResults extends HudsonJobWidget {
 	var $test_result;
 	var $content;
 
-	function hudson_Widget_JobTestResults($owner_type, $owner_id) {
+	function __construct($owner_type, $owner_id) {
 		$request =& HTTPRequest::instance();
 		if ($owner_type == WidgetLayoutManager::OWNER_TYPE_USER) {
 			$this->widget_id = 'plugin_hudson_my_jobtestresults';
@@ -39,7 +39,7 @@ class hudson_Widget_JobTestResults extends HudsonJobWidget {
 			$this->widget_id = 'plugin_hudson_project_jobtestresults';
 			$this->group_id = $request->get('group_id');
 		}
-		$this->Widget($this->widget_id);
+		parent::__construct($this->widget_id);
 		$this->setOwner($owner_id, $owner_type);
 		if ($this->widget_id == 'plugin_hudson_project_jobtestresults' && forge_check_perm('hudson', $this->group_id, 'read')) {
 			$this->content['title'] = '';

@@ -46,23 +46,20 @@ class ForumMessage extends FFError {
 	var $Forum;
 
 	/**
-	 * Constructor.
-	 *
 	 * @param	object		$Forum		The Forum object to which this ForumMessage is associated.
 	 * @param	bool|int	$msg_id		The message_id.
 	 * @param	array		$arr		The associative array of data.
 	 * @param	bool		$pending	Whether the message is a pending one.
-	 * @return	bool		success.
 	 */
-	function ForumMessage(&$Forum, $msg_id=false, $arr=array(), $pending=false) {
+	function __construct(&$Forum, $msg_id=false, $arr=array(), $pending=false) {
 		parent::__construct();
 		if (!$Forum || !is_object($Forum)) {
 			$this->setError(_('Invalid Forum Object'));
-			return false;
+			return;
 		}
 		if ($Forum->isError()) {
 			$this->setError('ForumMessage: '.$Forum->getErrorMessage());
-			return false;
+			return;
 		}
 		$this->Forum =& $Forum;
 
@@ -70,14 +67,14 @@ class ForumMessage extends FFError {
 			if ($pending) {
 				//we are going to create the pending message to show it to the admin for moderation
 				if (!$this->fetchModeratedData($msg_id)) {
-					return false;
+					return;
 				}
 				$this->awaits_moderation = true;
 			} else {
 				$this->awaits_moderation = false;
 				if (!$arr || !is_array($arr)) {
 					if (!$this->fetchData($msg_id)) {
-						return false;
+						return;
 					}
 				} else {
 					$this->data_array =& $arr;
@@ -87,12 +84,11 @@ class ForumMessage extends FFError {
 					if ($this->data_array['group_forum_id'] != $this->Forum->getID()) {
 						$this->setError(_('Group_forum_id in db result does not match Forum Object'));
 						$this->data_array=null;
-						return false;
+						return;
 					}
 				}
 			}
 		}
-		return true;
 	}
 
 	/**

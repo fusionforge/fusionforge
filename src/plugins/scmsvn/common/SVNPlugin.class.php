@@ -40,8 +40,8 @@ forge_define_config_item('anonsvn_login','scmsvn', 'anonsvn');
 forge_define_config_item('anonsvn_password','scmsvn', 'anonsvn');
 
 class SVNPlugin extends SCMPlugin {
-	function SVNPlugin() {
-		$this->SCMPlugin();
+	function __construct() {
+		parent::__construct();
 		$this->name = 'scmsvn';
 		$this->text = _('Subversion');
 		$this->pkg_desc =

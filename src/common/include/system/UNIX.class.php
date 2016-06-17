@@ -31,13 +31,8 @@ class UNIX extends System {
 	 */
 	var $UID_ADD = 20000;
 
-	/**
-	 * UNIX() - CONSTRUCTOR
-	 *
-	 */
-	function UNIX() {
-		$this->System();
-		return true;
+	function __construct() {
+		parent::__construct();
 	}
 
 	/**

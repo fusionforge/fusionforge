@@ -32,9 +32,9 @@ class Widget_MyTasks extends Widget {
 	var $content;
 	var $can_be_displayed;
 
-	function Widget_MyTasks() {
+	function __construct() {
 		global $HTML;
-		$this->Widget('mytasks');
+		parent::__construct('mytasks');
 		$this->content = '';
 		$this->setOwner(user_getid(), WidgetLayoutManager::OWNER_TYPE_USER);
 

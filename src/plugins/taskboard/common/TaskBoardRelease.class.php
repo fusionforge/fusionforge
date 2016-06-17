@@ -46,31 +46,28 @@ class TaskBoardRelease extends FFError {
 	private $_title = NULL;
 
 
-	/**
-	 * Constructor
-	 */
-	function TaskBoardRelease($Taskboard, $arr = false) {
+	function __construct($Taskboard, $arr = false) {
 		parent::__construct();
 		if (!$Taskboard || !is_object($Taskboard)) {
 			$this->setError('No Valid Taskboard Object');
-			return false;
+			return;
 		}
 		if ($Taskboard->isError()) {
 			$this->setError('TaskBoardRelease: '.$Taskboard->getErrorMessage());
-			return false;
+			return;
 		}
 
 		$this->Taskboard = $Taskboard;
 		if (!$arr || !is_array($arr)) {
 			if (!$this->fetchData($arr)) {
-				return false;
+				return;
 			}
 		} else {
 			$this->data_array =& $arr;
 			if ($this->data_array['taskboard_id'] != $this->Taskboard->getID()) {
 				$this->setError('taskboard_id in db result does not match TaskBoard Object');
 				$this->data_array = null;
-				return false;
+				return;
 			}
 		}
 	}

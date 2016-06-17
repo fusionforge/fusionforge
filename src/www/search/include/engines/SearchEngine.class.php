@@ -26,7 +26,7 @@ class GFSearchEngine {
 	var $rendererClassName;
 	var $label;
 
-	function GFSearchEngine($type, $rendererClassName, $label) {
+	function __construct($type, $rendererClassName, $label) {
 		$this->type = $type;
 		$this->rendererClassName = $rendererClassName;
 		$this->label = $label;

@@ -37,11 +37,9 @@ class Plugin extends FFError {
 	var $pkg_desc = 'No description available.';
 
 	/**
-	 * Plugin() - constructor
-	 *
 	 * @param	int	$id
 	 */
-	function Plugin($id=0) {
+	function __construct($id=0) {
 		parent::__construct();
 		$this->name = false;
 		$this->hooks = array();

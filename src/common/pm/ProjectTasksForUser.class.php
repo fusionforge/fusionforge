@@ -38,14 +38,10 @@ class ProjectTasksForUser extends FFError {
 	var $User;
 
 	/**
-	 * ProjectTasksForUser - Creates a new ProjectTasksForUser object
-	 *
 	 * @param	FFUser	$user	the User object
-	 * @return	bool
 	 */
-	function ProjectTasksForUser(&$user) {
+	function __construct(&$user) {
 		$this->User =& $user;
-		return true;
 	}
 
 	/**

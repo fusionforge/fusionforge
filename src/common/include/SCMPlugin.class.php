@@ -26,12 +26,8 @@ require_once $gfcommon.'include/scm.php';
 require_once $gfcommon.'include/SysTasksQ.class.php';
 
 abstract class SCMPlugin extends Plugin {
-	/**
-	 * SCMPlugin() - constructor
-	 *
-	 */
-	function SCMPlugin() {
-		$this->Plugin() ;
+	function __construct() {
+		parent::__construct();
 		$this->_addHook('group_plugin_use');
 		$this->_addHook('scm_plugin');
 		$this->_addHook('scm_page');

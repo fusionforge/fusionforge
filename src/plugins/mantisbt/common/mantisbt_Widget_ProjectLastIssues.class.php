@@ -24,7 +24,7 @@ require_once 'common/widget/WidgetLayoutManager.class.php';
 
 class mantisBT_Widget_ProjectLastIssues extends Widget {
 	function __construct() {
-		$this->Widget('plugin_mantisbt_project_latestissues');
+		parent::__construct('plugin_mantisbt_project_latestissues');
 	}
 
 	function getTitle() {

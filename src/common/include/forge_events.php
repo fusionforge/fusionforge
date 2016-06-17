@@ -3,9 +3,9 @@
 abstract class ForgeEvent extends Plugin {
 
 	function __construct() {
-		$this->Plugin() ;
-		$this->name = "event" ;
-		$this->text = "event" ;
+		parent::__construct();
+		$this->name = "event";
+		$this->text = "event";
 		$this->_addHook('group_approve');
 		$this->_addHook('scm_admin_update');
 		$this->_addHook('site_admin_option_hook');

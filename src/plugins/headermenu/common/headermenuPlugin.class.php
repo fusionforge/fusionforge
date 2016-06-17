@@ -27,7 +27,7 @@ class headermenuPlugin extends Plugin {
 	var $pageid;
 
 	function __construct() {
-		$this->Plugin();
+		parent::__construct();
 		$this->name = 'headermenu';
 		$this->text = _('Menu Tabs Manager');
 		$this->pkg_desc =

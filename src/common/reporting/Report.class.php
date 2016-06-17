@@ -51,7 +51,7 @@ var $max_weeks = 104;
 var $max_month = 24;
 var $rawdates = array();
 
-function Report() {
+function __construct() {
 	parent::__construct();
 	//
 	//	All reporting action will be done in GMT timezone

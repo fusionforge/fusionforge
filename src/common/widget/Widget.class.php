@@ -70,10 +70,8 @@ require_once $gfcommon.'widget/Widget_HomeVersion.class.php';
 	var $buttons;
 	var $owner_id;
 	var $owner_type;
-	/**
-	 * Constructor
-	 */
-	function Widget($id) {
+
+	function __construct($id) {
 		$this->id = $id;
 		$this->content_id = 0;
 	}

@@ -44,7 +44,7 @@ class FRSFileType extends FFError {
 	 */
 	var $data_array;
 
-	function FRSFileType ($type_id=false, $name=false) {
+	function __construct($type_id=false, $name=false) {
 		parent::__construct();
 		if($type_id && $name) {
 			$this->data_array = array( 'type_id' => $type_id, 'name' => $name);

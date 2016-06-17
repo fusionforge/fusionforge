@@ -34,8 +34,8 @@ class hudson_Widget_MyMonitoredJobs extends HudsonOverviewWidget {
 	var $_global_status;
 	var $_global_status_icon;
 
-	function hudson_Widget_MyMonitoredJobs($plugin) {
-		$this->Widget('plugin_hudson_my_jobs');
+	function __construct($plugin) {
+		parent::__construct('plugin_hudson_my_jobs');
 		$this->plugin = $plugin;
 		$user=UserManager::instance()->getCurrentUser();
 		$this->_not_monitored_jobs = $user->getPreference('plugin_hudson_my_not_monitored_jobs');

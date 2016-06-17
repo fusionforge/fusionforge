@@ -23,8 +23,8 @@
 forge_define_config_item('test', 'taskboard', 'test value');
 
 class TaskBoardPlugin extends Plugin {
-	function TaskBoardPlugin() {
-		$this->Plugin() ;
+	function __construct() {
+		parent::__construct();
 		$this->name = 'taskboard';
 		$this->text = 'Task Board'; // To show in the tabs, use...
 		$this->pkg_desc =

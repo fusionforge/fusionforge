@@ -28,7 +28,7 @@ require_once 'Widget.class.php';
 
 class Widget_ProjectPublicAreas extends Widget {
 	function __construct() {
-		$this->Widget('projectpublicareas');
+		parent::__construct('projectpublicareas');
 	}
 
 	function getTitle() {

@@ -46,18 +46,15 @@ class HtmlGroupSearchRenderer extends HtmlSearchRenderer {
 	var $topTab;
 
 	/**
-	 * Constructor
-	 *
 	 * @param string  $typeOfSearch type of the search (Software, Forum, People and so on)
 	 * @param string  $words        words we are searching for
 	 * @param boolean $isExact      if we want to search for all the words or if only one matching the query is sufficient
 	 * @param object  $searchQuery  SearchQuery instance
 	 * @param int     $groupId      group id
 	 * @param string  $topTab
-	 * @return void
 	 */
-	function HtmlGroupSearchRenderer($typeOfSearch, $words, $isExact, $searchQuery, $groupId, $topTab = '') {
-		$this->HtmlSearchRenderer($typeOfSearch, $words, $isExact, $searchQuery);
+	function __construct($typeOfSearch, $words, $isExact, $searchQuery, $groupId, $topTab = '') {
+		parent::__construct($typeOfSearch, $words, $isExact, $searchQuery);
 		$this->groupId = $groupId;
 		$this->topTab = $topTab;
 	}

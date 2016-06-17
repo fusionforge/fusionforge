@@ -24,9 +24,9 @@ forge_define_config_item ('default_server', 'scmarch', forge_get_config ('scm_ho
 forge_define_config_item ('repos_path', 'scmarch', forge_get_config('chroot').'/scmrepos/arch') ;
 
 class ArchPlugin extends SCMPlugin {
-	function ArchPlugin () {
+	function __construct() {
 		global $gfconfig;
-		$this->SCMPlugin () ;
+		parent::__construct();
 		$this->name = 'scmarch';
 		$this->text = _('Arch');
 		$this->pkg_desc =

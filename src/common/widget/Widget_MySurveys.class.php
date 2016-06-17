@@ -38,7 +38,7 @@ class Widget_MySurveys extends Widget {
 
 	function __construct() {
 		global $HTML;
-		$this->Widget('mysurveys');
+		parent::__construct('mysurveys');
 		$this->_survey_show = UserManager::instance()->getCurrentUser()->getPreference('my_surveys_show');
 		if($this->_survey_show === false) {
 			$this->_survey_show = 'AN';

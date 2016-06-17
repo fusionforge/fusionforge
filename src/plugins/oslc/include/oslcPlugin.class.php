@@ -24,8 +24,8 @@
 require_once 'common/include/rdfutils.php';
 
 class oslcPlugin extends Plugin {
-	public function __construct($id=0) {
-		$this->Plugin($id) ;
+	function __construct($id=0) {
+		parent::__construct($id) ;
 		$this->name = "oslc";
 		$this->text = "oslc"; // To show in the tabs, use...
 		$this->_addHook("user_personal_links");//to make a link to the user's personal part of the plugin

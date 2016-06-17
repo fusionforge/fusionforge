@@ -23,8 +23,8 @@ forge_define_config_item('storage_base','projectimport','$core/data_path/plugins
 forge_define_config_item('libmagic_db','projectimport','/usr/share/misc/magic.mgc');
 
 class ProjectImportPlugin extends Plugin {
-	function ProjectImportPlugin () {
-		$this->Plugin() ;
+	function __construct() {
+		parent::__construct();
 		$this->name = "projectimport" ;
 		$this->text = "Project import" ; // To show in the tabs, use...
 		$this->hooks[] = "groupmenu" ;	// To put into the project tabs

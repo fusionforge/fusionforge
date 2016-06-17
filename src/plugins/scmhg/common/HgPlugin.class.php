@@ -29,8 +29,8 @@ forge_define_config_item('default_server', 'scmhg', forge_get_config('scm_host')
 forge_define_config_item('repos_path', 'scmhg', forge_get_config('chroot').'/scmrepos/hg');
 
 class HgPlugin extends SCMPlugin {
-	function HgPlugin() {
-		$this->SCMPlugin();
+	function __construct() {
+		parent::__construct();
 		$this->name = 'scmhg';
 		$this->text = _('Mercurial');
 		$this->pkg_desc =

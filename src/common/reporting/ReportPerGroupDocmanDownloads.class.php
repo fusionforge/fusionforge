@@ -51,7 +51,7 @@ require_once $gfcommon.'reporting/Report.class.php';
 class ReportPerGroupDocmanDownloads extends Report {
 
 	function __construct($group_id, $start = 0, $end = 0) {
-		$this->Report();
+		parent::__construct();
 
 		if (!$start) {
 			$start = mktime(0, 0, 0, date('m'), 1, date('Y'));

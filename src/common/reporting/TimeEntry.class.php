@@ -41,14 +41,7 @@ require_once $gfcommon.'include/FFError.class.php';
  *
  */
 class TimeEntry extends FFError {
-    /**
-     * Constructor
-     *
-     * @author Tony Bibbs <tony@geeklog.net>
-     * @access public
-     *
-     */
-    function TimeEntry()
+    function __construct()
     {
     }
 

@@ -31,7 +31,7 @@ class scmhookPlugin extends Plugin {
 	);
 
 	function __construct() {
-		$this->Plugin();
+		parent::__construct();
 		$this->name = 'scmhook';
 		$this->text = _('Scmhook'); // To show in the tabs, use...
 		$this->pkg_desc =
