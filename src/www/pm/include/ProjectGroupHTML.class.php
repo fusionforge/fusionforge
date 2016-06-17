@@ -122,7 +122,7 @@ function pm_footer($params = array()) {
 class ProjectGroupHTML extends ProjectGroup {
 
 	function __construct(&$Group, $group_project_id=false, $arr=false) {
-		parent::__construct($Group,$group_project_id,$arr)) {
+		parent::__construct($Group,$group_project_id,$arr) {
 	}
 
 	function statusBox($name='status_id',$checked='xyxy',$show_100=true,$text_100='None') {
