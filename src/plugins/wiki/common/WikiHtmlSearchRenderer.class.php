@@ -34,7 +34,6 @@ class WikiHtmlSearchRenderer extends HtmlGroupSearchRenderer {
      * @param int $offset offset
      * @param bool $isExact if we want to search for all the words or if only one matching the query is sufficient
      * @param int $groupId group id
-     * @internal param array $sections array of all sections to search in (array of strings)
      */
 	function __construct($words, $offset, $isExact, $groupId) {
 		$this->groupId = $groupId;
@@ -42,7 +41,7 @@ class WikiHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$searchQuery = new WikiSearchQuery($words, $offset, $isExact, $groupId);
 
 		// init the search renderer
-		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_WIKI, $words, $isExact,
+		parent::__construct(SEARCH__TYPE_IS_WIKI, $words, $isExact,
 			$searchQuery, $groupId, 'wiki');
 
 		$this->tableHeaders = array(_('Page'),_('Author'), _('Date'));

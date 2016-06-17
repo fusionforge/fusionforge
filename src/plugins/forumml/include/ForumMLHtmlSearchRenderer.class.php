@@ -23,7 +23,7 @@ class ForumMLHtmlSearchRenderer extends HtmlGroupSearchRenderer {
          * @param int $groupId group id
          * @param array $sections array of all sections to search in (array of strings)
          */
-        function ForumMLHtmlSearchRenderer($words, $offset, $isExact, $groupId) {
+        function __construct($words, $offset, $isExact, $groupId) {
                 $this->groupId = $groupId;
 
                 $searchQuery = new ForumMLSearchQuery($words, $offset, $isExact, $groupId);
