@@ -100,7 +100,7 @@ if (getStringFromRequest('adduser')) {
 	if ($role instanceof RoleExplicit) {
 		$user_name = getStringFromRequest ('form_unix_name') ;
 		$u = user_get_object_by_name ($user_name) ;
-		if ($u && $u instanceof GFUser && !$u->isError()) {
+		if ($u && $u instanceof FFUser && !$u->isError()) {
 			if ($role->addUser ($u)) {
 				$feedback .= _('User Added Successfully') ;
 			} else {
@@ -122,7 +122,7 @@ if (getStringFromRequest('dormusers')) {
 		$rmlist = getArrayFromRequest('rmusers');
 		foreach ($rmlist as $user_id) {
 			$u = user_get_object ($user_id) ;
-			if ($u && $u instanceof GFUser && !$u->isError()) {
+			if ($u && $u instanceof FFUser && !$u->isError()) {
 				if ($role->removeUser ($u)) {
 					$feedback .= sprintf(
 					    _('User %s removed successfully') . "\n",

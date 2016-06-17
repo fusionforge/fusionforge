@@ -41,7 +41,7 @@ abstract class ForgeAuthPlugin extends Plugin {
 		$this->Plugin();
 		// Common hooks that can be enabled per plugin:
 		// check_auth_session - is there a valid session?
-		// fetch_authenticated_user - what GFUser is logged in?
+		// fetch_authenticated_user - what FFUser is logged in?
 		// display_auth_form - display a form to input credentials
 		// display_create_user_form - display a form to create a user from external auth
 		// sync_account_info - sync identity from external source (realname, email, etc.)
@@ -95,7 +95,7 @@ abstract class ForgeAuthPlugin extends Plugin {
 	/**
 	 * Current forge user
 	 *
-	 * @var object GFUser
+	 * @var object FFUser
 	 */
 	protected $saved_user;
 
@@ -131,7 +131,7 @@ abstract class ForgeAuthPlugin extends Plugin {
 	}
 
 	/**
-	 * What GFUser is logged in?
+	 * What FFUser is logged in?
 	 *
 	 * This will generate a valid forge user (by default, it was generated and cached already in saved_user)
 	 *

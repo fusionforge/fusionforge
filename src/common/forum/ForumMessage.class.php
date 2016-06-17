@@ -649,7 +649,7 @@ class ForumMessage extends FFError {
 		}
 
 		foreach ($recipients as $recipient) {
-			if ($recipient instanceof GFUser) {
+			if ($recipient instanceof FFUser) {
 				setup_gettext_for_user ($recipient) ;
 				$dest_email = $recipient->getEmail ();
 			} else {

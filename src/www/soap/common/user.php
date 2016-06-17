@@ -242,7 +242,7 @@ function getUsersByName($session_ser,$user_names) {
 //add user object
 function addUser($unix_name,$firstname,$lastname,$password1,$password2,$email,
 		$mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only,$theme_id,$unix_box,$address,$address2,$phone,$fax,$title,$ccode){
-	$new_user = new GFUser();
+	$new_user = new FFUser();
 
 	$register = $new_user->create($unix_name,$firstname,$lastname,$password1,$password2,$email,$mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only,$theme_id,$unix_box,$address,$address2,$phone,$fax,$title,$ccode);
 
