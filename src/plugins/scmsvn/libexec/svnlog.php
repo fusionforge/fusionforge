@@ -71,7 +71,7 @@ if ($mode == 'date_range') {
 	if (!ctype_digit($limit))
 		die('Invalid limit');
 	$options = "--limit $limit";
-	
+
 	if ($mode == 'latest_user') {
 		$user_name = $_GET['user_name'];
 		if (!preg_match('/^[a-z0-9][-a-z0-9_\.]+\z/', $user_name))
