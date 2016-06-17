@@ -44,7 +44,7 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 
 	function AuthWebIDPlugin () {
 		global $gfconfig;
-		$this->ForgeAuthPlugin() ;
+		parent::__construct();
 		$this->name = "authwebid";
 		$this->text = "WebID authentication";
 

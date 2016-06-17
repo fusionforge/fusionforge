@@ -35,7 +35,7 @@ class AuthLDAPPlugin extends ForgeAuthPlugin {
 
 	function AuthLDAPPlugin() {
 		global $gfconfig;
-		$this->ForgeAuthPlugin();
+		parent::__construct();
 		$this->name = "authldap";
 		$this->text = _("LDAP authentication");
 		$this->pkg_desc =

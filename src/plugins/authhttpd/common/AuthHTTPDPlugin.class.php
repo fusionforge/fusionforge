@@ -28,7 +28,7 @@ require_once $gfcommon.'include/AuthPlugin.class.php';
 class AuthHTTPDPlugin extends ForgeAuthPlugin {
 	function AuthHTTPDPlugin () {
 		global $gfconfig;
-		$this->ForgeAuthPlugin() ;
+		parent::__construct();
 		$this->name = "authhttpd";
 		$this->text = _("HTTPD authentication");
 		$this->pkg_desc =

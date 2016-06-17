@@ -29,7 +29,7 @@ require_once $gfcommon.'include/AuthPlugin.class.php';
 class AuthCASPlugin extends ForgeAuthPlugin {
 	function AuthCASPlugin () {
 		global $gfconfig;
-		$this->ForgeAuthPlugin() ;
+		parent::__construct();
 		$this->name = "authcas";
 		$this->text = _("CAS authentication");
 		$this->pkg_desc =

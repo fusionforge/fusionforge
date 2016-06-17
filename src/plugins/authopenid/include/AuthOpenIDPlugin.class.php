@@ -39,7 +39,7 @@ class AuthOpenIDPlugin extends ForgeAuthPlugin {
 
 	function AuthOpenIDPlugin () {
 		global $gfconfig;
-		$this->ForgeAuthPlugin() ;
+		parent::__construct();
 		$this->name = "authopenid";
 		$this->text = "OpenID authentication";
 
