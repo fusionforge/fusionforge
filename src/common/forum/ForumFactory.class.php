@@ -152,7 +152,7 @@ class ForumFactory extends FFError {
 
 		$rows = db_numrows($result);
 
-		if (!$result) {
+		if (!$result || ($rows < 1)) {
 			$this->setError(_('Forum not found')._(': ').db_error());
 			$this->forums = false;
 		} else {

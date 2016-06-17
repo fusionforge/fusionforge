@@ -1,6 +1,6 @@
 <?php
 /**
- * FusionForge FRS: Add release Action
+ * FusionForge FRS: Delete File Action
  *
  * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org/
@@ -39,9 +39,7 @@ if (!forge_check_perm('frs', $package_id, 'file')) {
 		$frsf = frsfile_get_object($file_id);
 		if (!$frsf || !is_object($frsf)) {
 			$result[$key]['html'] = $HTML->error_msg(_('Error Getting FRSPackage'));
-		} elseif ($frsf->isError()) {
-			$result[$key]['html'] = $HTML->error_msg($frsf->getErrorMessage());
-		} elseif (!$frsf->delete()) {
+		} elseif ($frsf->isError() || !$frsf->delete()) {
 			$result[$key]['html'] = $HTML->error_msg($frsf->getErrorMessage());
 		} else {
 			$result[$key]['html'] = $HTML->feedback(_('File successfully deleted.'));

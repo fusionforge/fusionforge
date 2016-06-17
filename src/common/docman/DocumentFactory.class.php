@@ -329,8 +329,7 @@ class DocumentFactory extends FFError {
 
 		if (count($return) === 0) {
 			$this->setError(_('No Documents Found'));
-			$return = NULL;
-			return $return;
+			return NULL;
 		}
 
 		return $return;

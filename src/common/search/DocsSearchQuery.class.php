@@ -66,7 +66,6 @@ class DocsSearchQuery extends SearchQuery {
 	 */
 	function addCommonQPA($qpa) {
 		$options = $this->options;
-		$groupIdArr = $this->groupIdArr;
 		$sections = $this->sections;
 		$params['groupIdArr'] = $this->groupIdArr;
 		$params['options'] = $options;

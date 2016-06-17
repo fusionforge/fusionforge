@@ -74,7 +74,7 @@ class ForumAdmin extends FFError {
 	 *
 	 */
 	function PrintAdminOptions() {
-		global $group_id, $forum_id;
+		global $group_id;
 		echo html_e('p', array(), util_make_link('/forum/admin/?group_id='.$group_id.'&add_forum=1', _('Add Forum')).
 			' | '.util_make_link('/forum/admin/pending.php?action=view_pending&group_id='.$group_id, _('Manage Pending Messages')).'<br />');
 	}
@@ -359,7 +359,6 @@ class ForumAdmin extends FFError {
 				$this->PrintAdminOptions();
 			}*/
 
-			$results = array(); //messages
 			for($i=0;$i<count($msgids);$i++) {
 				switch ($doaction[$i]) {
 					case 1 : {
@@ -421,7 +420,6 @@ class ForumAdmin extends FFError {
 						$is_followup_to = db_result($res1,0,"is_followup_to");
 						$posted_by = db_result($res1,0,"posted_by");
 						$has_followups = db_result($res1,0,"has_followups");
-						$most_recent_date = db_result($res1,0,"most_recent_date");
 						if ($fm->insertreleasedmsg($group_forum_id,$subject, $body,$post_date, $thread_id, $is_followup_to,$posted_by,$has_followups,time())) {
 							$feedback .= "($subject) " . _('Pending message released') . "<br />";
 							if (db_numrows($res2)>0) {
@@ -495,7 +493,6 @@ class ForumAdmin extends FFError {
 				}
 			}
 			html_feedback_top($feedback);
-			$page = 0;
 			$this->ExecuteAction("view_pending");
 		}
 	}

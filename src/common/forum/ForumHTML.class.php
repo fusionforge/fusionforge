@@ -249,8 +249,7 @@ class ForumHTML extends FFError {
 		$msgforum =& $msg->getForum();
 		$fa = new ForumAdmin($msgforum->Group->getID());
 		$url = util_make_uri('/forum/message.php?msg_id='. $msg->getID() .'&amp;group_id='.$group_id);
-		$ret_val =
-		'<table class="fullwidth">
+		$ret_val = $HTML->listTableTop().'
 			<tr>
 				<td class="tablecontent top" style="white-space: nowrap;">';
 
@@ -282,8 +281,7 @@ class ForumHTML extends FFError {
 					}
 					$ret_val .= '
 				</td>
-			</tr>
-		</table>';
+			</tr>'.$HTML->listTableBottom();
 		return $ret_val;
 	}
 
@@ -404,7 +402,7 @@ class ForumHTML extends FFError {
 			If there are, it calls itself, incrementing $level
 			$level is used for indentation of the threads.
 		*/
-		global $total_rows,$forum_id,$current_message,$group_id;
+		global $total_rows,$current_message,$group_id, $HTML;
 
 		if (!isset($msg_arr["$msg_id"]))
 			return "";
@@ -420,7 +418,7 @@ class ForumHTML extends FFError {
 				$total_rows++;
 
 				$ret_val .= '
-					<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($total_rows) .'><td style="white-space: nowrap;">';
+					<tr '. $HTML->boxGetAltRowStyle($total_rows) .'><td style="white-space: nowrap;">';
 				/*
 					How far should it indent?
 				*/

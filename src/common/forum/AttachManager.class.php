@@ -238,8 +238,6 @@ class AttachManager extends FFError {
 	 *
 	 */
 	function attach($attach, $group_id, $update = 0, $msg_id = 0) {
-		global $_FILES;
-
 		$attachment = trim($attach['tmp_name']);
 		$attachment_name = trim($attach['name']);
 		$attachment_size = trim($attach['size']);

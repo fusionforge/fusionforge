@@ -278,8 +278,6 @@ class FRSRelease extends FFError {
 	function sendNotice() {
 		$arr =& $this->FRSPackage->getMonitorIDs();
 
-		$date = date('Y-m-d H:i',time());
-
 		$subject = sprintf(_('[%1$s Release] %2$s'),
 					$this->FRSPackage->Group->getUnixName(),
 					$this->FRSPackage->getName());

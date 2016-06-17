@@ -361,7 +361,6 @@ class DocumentManager extends FFError {
 			} else {
 				$df = new DocumentFactory($doc_group->getGroup());
 				$df->setDocGroupID($doc_group->getID());
-				$stateidArr = array(1);
 				if (forge_check_perm('docman', $this->getGroup()->getID(), 'approve')) {
 					$stateIdDg = 5;
 				}

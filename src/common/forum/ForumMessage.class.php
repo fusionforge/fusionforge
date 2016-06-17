@@ -599,7 +599,7 @@ class ForumMessage extends FFError {
 		}
 		ForumStorage::instance()->commit();
 
-		$toss = db_query_params('DELETE FROM forum WHERE msg_id=$1 AND group_forum_id=$2',
+		db_query_params('DELETE FROM forum WHERE msg_id=$1 AND group_forum_id=$2',
 								array ($msg_id, $this->Forum->getID()));
 
 		return $count;
@@ -771,8 +771,6 @@ Or reply to this e-mail entering your response between the following markers:
 		}
 
 		$BCC = implode(util_result_column_to_array($bccres),',').','.$this->Forum->getSendAllPostsTo();
-		$User = user_get_object($this->getPosterID());
-		//util_send_message('',$subject,$body,$User->getEmail(),$BCC,$this->getPosterRealName(),$extra_headers);
 		util_send_message('',$subject,$body,"noreply@".forge_get_config('web_host'),$BCC,'Forum',$extra_headers);
 //		util_handle_message(array_unique($ids),$subject,$body,$this->Forum->getSendAllPostsTo(),'','forumgateway@'.forge_get_config('web_host'));
 		return true;
@@ -877,7 +875,6 @@ Or reply to this e-mail entering your response between the following markers:
 								  db_int_array_to_any_clause ($ids))) ;
 			}
 			$BCC = implode(util_result_column_to_array($bccres),',').','.$this->Forum->getSendAllPostsTo();
-			$User = user_get_object($this->getPosterID());
 			util_send_message('',$subject,$body,"noreply@".forge_get_config('web_host'),$BCC,'Forum',$extra_headers);
 			return true;
 		}
