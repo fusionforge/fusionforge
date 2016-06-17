@@ -48,11 +48,8 @@ class FRSFileType extends FFError {
 		parent::__construct();
 		if($type_id && $name) {
 			$this->data_array = array( 'type_id' => $type_id, 'name' => $name);
-		}
-		else {
-			if ($type_id) {
-				$this->fetchData($type_id);
-			}
+		} elseif ($type_id) {
+			$this->fetchData($type_id);
 		}
 	}
 
