@@ -265,7 +265,6 @@ class Group extends FFError {
 	 */
 	var $plugins_data;
 
-
 	/**
 	 * Associative array of data for the group menu.
 	 *
