@@ -124,26 +124,22 @@ if ($dirid) {
 	}
 }
 
-if ($d_arr != NULL) {
-	if (!$d_arr || count($d_arr) > 0) {
-		// Get the document groups info
-		//put the doc objects into an array keyed off the docgroup
-		foreach ($d_arr as $doc) {
-			$nested_docs[$doc->getDocGroupID()][] = $doc;
-		}
+if (is_array($d_arr) && count($d_arr) > 0) {
+	// Get the document groups info
+	//put the doc objects into an array keyed off the docgroup
+	foreach ($d_arr as $doc) {
+		$nested_docs[$doc->getDocGroupID()][] = $doc;
 	}
 }
 
 $df->setStateID(array(3));
 $d_pending_arr =& $df->getDocuments();
 
-if ($d_pending_arr != NULL) {
-	if (!$d_pending_arr || count($d_pending_arr) > 0) {
-		// Get the document groups info
-		//put the doc objects into an array keyed off the docgroup
-		foreach ($d_pending_arr as $doc) {
-			$nested_pending_docs[$doc->getDocGroupID()][] = $doc;
-		}
+if (is_array($d_pending_arr) && count($d_pending_arr) > 0) {
+	// Get the document groups info
+	//put the doc objects into an array keyed off the docgroup
+	foreach ($d_pending_arr as $doc) {
+		$nested_pending_docs[$doc->getDocGroupID()][] = $doc;
 	}
 }
 

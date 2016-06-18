@@ -5,8 +5,8 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2011-2016, Franck Villaume - TrivialDev
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2011-2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -87,13 +87,11 @@ if ($dirid) {
 	}
 }
 
-if ($d_arr != NULL ) {
-	if (!$d_arr || count($d_arr) > 0) {
-		// Get the document groups info
-		//put the doc objects into an array keyed off the docgroup
-		foreach ($d_arr as $doc) {
-			$nested_docs[$doc->getDocGroupID()][] = $doc;
-		}
+if (is_array($d_arr) && count($d_arr) > 0) {
+	// Get the document groups info
+	//put the doc objects into an array keyed off the docgroup
+	foreach ($d_arr as $doc) {
+		$nested_docs[$doc->getDocGroupID()][] = $doc;
 	}
 }
 
