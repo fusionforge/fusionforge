@@ -23,7 +23,7 @@
 
 class SysAuthPGSQLPlugin extends SysAuthPlugin {
 	function SysAuthPGSQLPlugin () {
-		$this->SysAuthPlugin() ;
+		parent::__construct();
 		$this->name = "sysauthpgsql" ;
 		$this->text = "System authentication via PostgreSQL";
 	}

@@ -38,7 +38,7 @@ require_once $gfcommon.'include/SysAuthPlugin.class.php';
 
 class SysAuthLDAPPlugin extends SysAuthPlugin {
 	function SysAuthLDAPPlugin () {
-		$this->SysAuthPlugin() ;
+		parent::__construct();
 		$this->name = "sysauthldap" ;
 		$this->text = _("System authentication via LDAP");
 		$this->pkg_desc =
