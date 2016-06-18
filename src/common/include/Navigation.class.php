@@ -316,9 +316,7 @@ class Navigation extends FFError {
 				}
 			}
 			if ($project && is_object($project)) {
-				if ($project->isError()) {
-				} elseif (!$project->isProject()) {
-				} else {
+				if (!$project->isError() && $project->isProject()) {
 					$menu['titles'][] = $project->getPublicName();
 					$menu['tooltips'][] = _('Project home page, widgets selected to follow specific items.');
 					if (isset ($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {

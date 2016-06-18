@@ -214,9 +214,7 @@ function populateProject($project) {
 	return true;
 }
 
-if (count($argv) < 2) {
-	usage();
-} elseif (in_array($argv[1], array('-h', '-?', '--help'))) {
+if (in_array($argv[1], array('-h', '-?', '--help'))) {
 	usage(0);
 } elseif (count($argv) == 2) {
 	if (!($gid = util_nat0($argv[1]))) {

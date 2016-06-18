@@ -195,10 +195,8 @@ if ($DocGroupName) {
 	echo $HTML->paging_top($start, $paging, $nbDocs, $max, $redirecturl, array('style' => 'display:inline-block'));
 	/* should we steal the lock on folder ? */
 	if ($ndg->getLocked()) {
-		if (session_loggedin() && ($ndg->getLockedBy() == $LUSER->getID())) {
-			$ndg->setLock(0);
 		/* if you change the 60000 lockIntervalDelay value, please update here too */
-		} elseif ((time() - $ndg->getLockdate()) > 600) {
+		if ((session_loggedin() && ($ndg->getLockedBy() == $LUSER->getID())) || ((time() - $ndg->getLockdate()) > 600)) {
 			$ndg->setLock(0);
 		}
 	}
@@ -260,10 +258,8 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		$cells = array();
 		/* should we steal the lock on file ? */
 		if ($d->getLocked()) {
-			if ($d->getLockedBy() == $LUSER->getID()) {
-				$d->setLock(0);
 			/* if you change the 60000 value below, please update here too */
-			} elseif ((time() - $d->getLockdate()) > 600) {
+			if (($d->getLockedBy() == $LUSER->getID()) || ((time() - $d->getLockdate()) > 600)) {
 				$d->setLock(0);
 			}
 		}
