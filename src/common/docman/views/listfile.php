@@ -194,11 +194,9 @@ if ($DocGroupName) {
 	$max = ($nbDocs > ($start + $paging)) ? ($start + $paging) : $nbDocs;
 	echo $HTML->paging_top($start, $paging, $nbDocs, $max, $redirecturl, array('style' => 'display:inline-block'));
 	/* should we steal the lock on folder ? */
-	if ($ndg->getLocked()) {
+	if ($ndg->getLocked() && ((session_loggedin() && ($ndg->getLockedBy() == $LUSER->getID())) || ((time() - $ndg->getLockdate()) > 600))) {
 		/* if you change the 60000 lockIntervalDelay value, please update here too */
-		if ((session_loggedin() && ($ndg->getLockedBy() == $LUSER->getID())) || ((time() - $ndg->getLockdate()) > 600)) {
-			$ndg->setLock(0);
-		}
+		$ndg->setLock(0);
 	}
 	if (!$ndg->getLocked()) {
 		if (forge_check_perm('docman', $ndg->Group->getID(), 'approve')) {
@@ -257,11 +255,9 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 	foreach ($nested_docs[$dirid] as $d) {
 		$cells = array();
 		/* should we steal the lock on file ? */
-		if ($d->getLocked()) {
+		if ($d->getLocked() && (($d->getLockedBy() == $LUSER->getID()) || ((time() - $d->getLockdate()) > 600))) {
 			/* if you change the 60000 value below, please update here too */
-			if (($d->getLockedBy() == $LUSER->getID()) || ((time() - $d->getLockdate()) > 600)) {
-				$d->setLock(0);
-			}
+			$d->setLock(0);
 		}
 		if (!$d->getLocked() && !$d->getReserved()) {
 			$cells[][] = html_e('input', array('type' => 'checkbox', 'value' => $d->getID(), 'class' => 'checkeddocidactive', 'title' => _('Select / Deselect this document for massaction'), 'onClick' => 'controllerListFile.checkgeneral("active")'));
