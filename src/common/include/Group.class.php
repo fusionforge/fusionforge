@@ -343,10 +343,11 @@ class Group extends FFError {
 	 * @param	bool	$is_public
 	 * @param	bool	$send_mail		Whether to send an email or not
 	 * @param	int	$built_from_template	The id of the project this new project is based on
+	 * @param	int	$createtimestamp	The Time Stamp of creation to ease import.
 	 * @return	bool	success or not
 	 */
 	function create(&$user, $group_name, $unix_name, $description, $purpose, $unix_box = 'shell1',
-			$scm_box = 'cvs1', $is_public = true, $send_mail = true, $built_from_template = 0) {
+			$scm_box = 'cvs1', $is_public = true, $send_mail = true, $built_from_template = 0, $createtimestamp = null) {
 		// $user is ignored - anyone can create pending group
 
 		global $SYS;
@@ -385,7 +386,7 @@ class Group extends FFError {
 			}
 
 			db_begin();
-
+			$createtimestamp = (($createtimestamp) ? $createtimestamp : time());
 			$res = db_query_params('
 				INSERT INTO groups(
 					group_name,
@@ -411,7 +412,7 @@ class Group extends FFError {
 							$unix_box,
 							$scm_box,
 							htmlspecialchars($purpose),
-							time(),
+							$createtimestamp,
 							md5(util_randbytes()),
 							$built_from_template));
 			if (!$res || db_affected_rows($res) < 1) {
@@ -442,6 +443,7 @@ class Group extends FFError {
 			$hook_params['group_id'] = $this->getID();
 			$hook_params['group_name'] = $group_name;
 			$hook_params['unix_group_name'] = $unix_name;
+			$hook_params['createtimestamp'] = $createtimestamp;
 			plugin_hook("group_create", $hook_params);
 
 			db_commit();
