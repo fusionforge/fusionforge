@@ -112,6 +112,7 @@ class Layout extends FFError {
 	var $css = array();
 	var $css_min = array();
 	var $stylesheets = array();
+	var $buttons = array();
 
 	function __construct() {
 		parent::__construct();
@@ -226,6 +227,32 @@ class Layout extends FFError {
 			}
 		}
 		$this->stylesheets = array();
+		return $code;
+	}
+
+	function addButtons($link, $text, $options = array()) {
+		$this->buttons[] = array_merge( array('link' => $link, 'text' => $text), $options);
+	}
+
+	function getButtons() {
+		$code = '';
+		if ($this->buttons) {
+			$code .= "\n";
+			$code .= '<p class="buttonsbar">';
+			$code .= "\n";
+			foreach ($this->buttons as $b) {
+				$text = $b['text'];
+				$link = $b['link'];
+				if (isset($b['icon'])) {
+					$text = $b['icon'].' '.$text;
+					unset($b['icon']);
+				}
+				unset($b['text'], $b['link'], $b['icon']);
+				$code .= '<span class="buttons">'.util_make_link($link, $text, $b).'</span>'."\n";
+			}
+			$code .= '</p>';
+			$this->buttons = array();
+		}
 		return $code;
 	}
 
