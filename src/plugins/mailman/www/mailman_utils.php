@@ -16,24 +16,24 @@ global $class;
 $current_user=UserManager::instance()->getCurrentUser();
 
 function sendCreationMail($userEmail,&$list) {
-	$message = sprintf(_('A mailing list will be created on %1$s in few minutes
-and you are the list administrator.
+	$message = sprintf(_('A mailing list will be created on %s in few minutes and you are the list administrator.'), forge_get_config ('forge_name'))
 
-This list is: %3$s@%2$s .
+			. sprintf(_('This list is: %1$s@%2$s'),  $list->getName(), forge_get_config('lists_host')) . "\n\n"
 
-Your mailing list info is at:
-%4$s .
+			. _('Your mailing list info is at:') . "\n"
+			. $this->getExternalInfoUrl() . "\n\n"
 
-List administration can be found at:
-%5$s .
+			. _('List administration can be found at:') . "\n"
+			. util_make_url('/mailman/admin/'.$list->getName()) . "\n\n"
 
-Your list password is: %6$s .
-You are encouraged to change this password as soon as possible.
+			. _('Your list password is: ') . $list->getPassword(). "\n"
+			. _('You are encouraged to change this password as soon as possible.') . "\n\n"
 
-Thank you for registering your project with %1$s.'), forge_get_config ('forge_name'), forge_get_config('lists_host'), $list->getName(), $list->getExternalInfoUrl(), util_make_url('/mailman/admin/'.$list->getName()), $list->getPassword());
-	$message .= "\n\n";
-	$message .= sprintf(_('-- the %s staff'), forge_get_config ('forge_name'));
-	$message .= "\n";
+			. sprintf(_('Thank you for registering your project with %s.'), forge_get_config ('forge_name'))
+			. "\n\n"
+
+			. sprintf(_('-- the %s staff'), forge_get_config ('forge_name'))
+			. "\n";
 
 	$mailSubject = sprintf(_('%s New Mailing List'), forge_get_config ('forge_name'));
 
