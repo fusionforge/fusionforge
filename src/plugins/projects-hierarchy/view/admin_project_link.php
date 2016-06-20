@@ -35,7 +35,7 @@ if (sizeof($parent)) {
 	$parentGroup = group_get_object($parent[0]);
 	echo $HTML->openForm(array('method' => 'post', 'action' => '/plugins/'.$projectsHierarchy->name.'/?type=group&action=removeParent&id='.$group_id.'&parent_id='.$parentGroup->getID()));
 	echo util_make_link('/projects/'.$parentGroup->getUnixName(),$parentGroup->getPublicName(),array('title'=>_('Browse this project')));
-	echo ' <input type="submit" value="'._('Remove parent project').'">';
+	echo '<input type="submit" value="'._('Remove parent project').'">';
 	echo $HTML->closeForm();
 }
 
@@ -46,7 +46,7 @@ if (sizeof($childs)) {
 		$childGroup = group_get_object($child);
 		echo $HTML->openForm(array('method' => 'post', 'action' => '/plugins/'.$projectsHierarchy->name.'/?type=group&action=removeChild&id='.$group_id.'&child_id='.$childGroup->getID()));
 		echo util_make_link('/projects/'.$childGroup->getUnixName(),$childGroup->getPublicName(),array('title'=>_('Browse this project')));
-		echo ' <input type="submit" value="'._('Remove child project').'">';
+		echo '<input type="submit" value="'._('Remove child project').'">';
 		echo $HTML->closeForm();
 	}
 }
@@ -58,7 +58,7 @@ if (sizeof($childs)) {
 		$childGroup = group_get_object($child);
 		echo $HTML->openForm(array('method' => 'post', 'action' => '/plugins/'.$projectsHierarchy->name.'/?type=group&action=removeChild&id='.$group_id.'&child_id='.$childGroup->getID()));
 		echo util_make_link('/projects/'.$childGroup->getUnixName(),$childGroup->getPublicName(),array('title'=>_('Browse this project')));
-		echo ' <input type="submit" value="'._('Remove child project').'">';
+		echo '<input type="submit" value="'._('Remove child project').'">';
 		echo $HTML->closeForm();
 	}
 }
@@ -74,7 +74,7 @@ if (sizeof($pendingParent)) {
 	echo '<input type="hidden" name="validation_id" value="'.$pendingParent[0].'" />';
 	echo _('Validate parent').' '.util_make_link('/projects/'.$pendingParentGroup->getUnixName(), $pendingParentGroup->getPublicName(), array('title'=>_('Browse this project')));
 	echo html_build_select_box_from_arrays(array(1,0), array(_('Yes'), _('No')), 'validation_status', 'xzxz', false);
-	echo ' <input type="submit" value="'. _('Send') .'" />';
+	echo '<input type="submit" value="'. _('Send') .'" />';
 	echo $HTML->closeForm();
 }
 
