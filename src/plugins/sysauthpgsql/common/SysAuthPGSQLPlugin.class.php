@@ -22,38 +22,38 @@
  */
 
 class SysAuthPGSQLPlugin extends SysAuthPlugin {
-	function SysAuthPGSQLPlugin () {
+	function __construct() {
 		parent::__construct();
-		$this->name = "sysauthpgsql" ;
+		$this->name = "sysauthpgsql";
 		$this->text = "System authentication via PostgreSQL";
 	}
 
 	function user_create($params) {
-		error_log ("user_create" . print_r($params, true));
+		error_log("user_create" . print_r($params, true));
 	}
 
 	function user_update($params) {
-		error_log ("user_update" . print_r($params, true));
+		error_log("user_update" . print_r($params, true));
 	}
 
 	function user_delete($params) {
-		error_log ("user_delete" . print_r($params, true));
+		error_log("user_delete" . print_r($params, true));
 	}
 
 	function group_create($params) {
-		error_log ("group_create" . print_r($params, true));
+		error_log("group_create" . print_r($params, true));
 	}
 
 	function group_update($params) {
-		error_log ("group_update" . print_r($params, true));
+		error_log("group_update" . print_r($params, true));
 	}
 
 	function group_delete($params) {
-		error_log ("group_delete" . print_r($params, true));
+		error_log("group_delete" . print_r($params, true));
 	}
 
 	function group_update_members($params) {
-		error_log ("group_update_members" . print_r($params, true));
+		error_log("group_update_members" . print_r($params, true));
 	}
 
 }

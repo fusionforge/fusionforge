@@ -33,7 +33,7 @@ class AuthLDAPPlugin extends ForgeAuthPlugin {
 	protected $saved_password;
 	protected $saved_data;
 
-	function AuthLDAPPlugin() {
+	function __construct() {
 		global $gfconfig;
 		parent::__construct();
 		$this->name = "authldap";

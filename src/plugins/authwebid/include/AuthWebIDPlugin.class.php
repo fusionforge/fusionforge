@@ -42,7 +42,7 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 
 	var $webid_identity;
 
-	function AuthWebIDPlugin () {
+	function __construct() {
 		global $gfconfig;
 		parent::__construct();
 		$this->name = "authwebid";
@@ -52,9 +52,9 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 		$this->_addHook("check_auth_session");
 		$this->_addHook("fetch_authenticated_user");
 		$this->_addHook("close_auth_session");
-		$this->_addHook("usermenu") ;
-		$this->_addHook("userisactivecheckbox") ; // The "use ..." checkbox in user account
-		$this->_addHook("userisactivecheckboxpost") ; //
+		$this->_addHook("usermenu");
+		$this->_addHook("userisactivecheckbox"); // The "use ..." checkbox in user account
+		$this->_addHook("userisactivecheckboxpost"); //
 
 		$this->saved_login = '';
 		$this->saved_user = NULL;
@@ -66,7 +66,7 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 		$this->declareConfigVars();
 
 		// The IdP to use is configured in the .ini file
-		$this->delegate_webid_auth_to = forge_get_config ('delegate_webid_auth_to', $this->name);
+		$this->delegate_webid_auth_to = forge_get_config('delegate_webid_auth_to', $this->name);
 		$this->idp_delegation_link = forge_get_config('idp_delegation_link', $this->name);
 
 	}
@@ -268,7 +268,7 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 		$error_msg = NULL;
 		// remove the 'pending:' prefix
 		$res = db_query_params('UPDATE plugin_authwebid_user_identities SET webid_identity=$1 WHERE user_id =$2 AND webid_identity =$3',
-								array ($webid_identity, $user_id, 'pending:'.$webid_identity)) ;
+								array ($webid_identity, $user_id, 'pending:'.$webid_identity));
 		if (!$res) {
 			$error_msg = sprintf(_('Cannot bind new identity: %s'), db_error());
 		}
@@ -295,7 +295,7 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 				$error_msg = _('WebID already pending binding');
 			}
 			$res = db_query_params('INSERT INTO plugin_authwebid_user_identities (user_id, webid_identity) VALUES ($1,$2)',
-					array ($user_id, $webid_identity)) ;
+					array ($user_id, $webid_identity));
 			if (!$res || db_affected_rows($res) < 1) {
 				$error_msg = sprintf(_('Cannot insert new identity: %s'), db_error());
 			}
@@ -368,11 +368,11 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 
 		// Change vs default
 		forge_define_config_item ('required', $this->name, 'no');
-		forge_set_config_item_bool ('required', $this->name) ;
+		forge_set_config_item_bool ('required', $this->name);
 
 		// Change vs default
 		forge_define_config_item ('sufficient', $this->name, 'no');
-		forge_set_config_item_bool ('sufficient', $this->name) ;
+		forge_set_config_item_bool ('sufficient', $this->name);
 
 		// Default delegated WebID IdP to use
 		forge_define_config_item ('delegate_webid_auth_to', $this->name, 'auth.my-profile.eu');

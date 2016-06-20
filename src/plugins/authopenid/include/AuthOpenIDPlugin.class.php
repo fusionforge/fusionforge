@@ -37,7 +37,7 @@ class AuthOpenIDPlugin extends ForgeAuthPlugin {
 
 	var $openid_identity;
 
-	function AuthOpenIDPlugin () {
+	function __construct() {
 		global $gfconfig;
 		parent::__construct();
 		$this->name = "authopenid";
@@ -47,9 +47,9 @@ class AuthOpenIDPlugin extends ForgeAuthPlugin {
 		$this->_addHook("check_auth_session");
 		$this->_addHook("fetch_authenticated_user");
 		$this->_addHook("close_auth_session");
-		$this->_addHook("usermenu") ;
-		$this->_addHook("userisactivecheckbox") ; // The "use ..." checkbox in user account
-		$this->_addHook("userisactivecheckboxpost") ; //
+		$this->_addHook("usermenu");
+		$this->_addHook("userisactivecheckbox"); // The "use ..." checkbox in user account
+		$this->_addHook("userisactivecheckboxpost"); //
 
 		$this->saved_login = '';
 		$this->saved_user = NULL;
@@ -159,11 +159,11 @@ Your OpenID identifier: <input type="text" name="openid_identifier" />
 
 		// Change vs default
 		forge_define_config_item ('required', $this->name, 'no');
-		forge_set_config_item_bool ('required', $this->name) ;
+		forge_set_config_item_bool ('required', $this->name);
 
 		// Change vs default
 		forge_define_config_item ('sufficient', $this->name, 'no');
-		forge_set_config_item_bool ('sufficient', $this->name) ;
+		forge_set_config_item_bool ('sufficient', $this->name);
 	}
 
 	/**
