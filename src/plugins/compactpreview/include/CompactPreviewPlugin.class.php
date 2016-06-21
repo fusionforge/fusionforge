@@ -159,12 +159,12 @@ _("This plugin adds support for user and project compact-preview
 				<tr>
 					'/* <td rowspan="8"><img src="/plugins/compactpreview/images/userTooltip/oslc.png" />
 					</td>*/.'
-					<td><b>'._('Project name')._(': ').'</b>
+					<td><b>'._('Project Name')._(': ').'</b>
 
 					 '. $public_name .'</td>
 				</tr>
 				<tr>
-					<td><b>'._('Project short name')._(': ').'</b>
+					<td><b>'._('Project Short Name')._(': ').'</b>
 
 					 '. $unix_name .'</td>
 				</tr>
