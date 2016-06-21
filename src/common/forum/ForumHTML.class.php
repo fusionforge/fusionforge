@@ -264,7 +264,7 @@ class ForumHTML extends FFError {
 		$ret_val .= ' on '.date('Y-m-d H:i',$msg->getPostDate());
 		$ret_val .= '</td><td class="tablecontent align-right">';
 		$ret_val .= '<a href="'.$url.'">[forum:'.$msg->getID().']</a><br/>';
-		if (forge_check_perm ('forum_admin', $msgforum->Group->getID())) {
+		if (forge_check_perm('forum_admin', $msgforum->Group->getID())) {
 			$ret_val .= $fa->PrintAdminMessageOptions($msg->getID(),$group_id,$msg->getThreadID(),$msgforum->getID());
 		}
 		$ret_val .= $am->PrintAttachLink($msg,$group_id,$msgforum->getID());
@@ -589,7 +589,7 @@ class ForumHTML extends FFError {
 				//$text_support->displayTextField('body'); ?>
 		<br />
 		<!--		<span class="selected"><?php echo _('HTML tags will display in your post as text'); ?></span> -->
-		<p>
+		<br />
 				<?php $this->LinkAttachForm();?>
 
 		<p><?php

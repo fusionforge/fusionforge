@@ -742,7 +742,7 @@ Or reply to this e-mail entering your response between the following markers:
 		$text = $this->getBody();
 		$sanitizer = new TextSanitizer();
 		$text = $sanitizer->convertNeededTagsForEmail($text);
-		$text= strip_tags($this->removebbcode(util_line_wrap($text)));
+		$text = strip_tags($this->removebbcode(util_line_wrap($text)));
 		$text = $sanitizer->convertExtendedCharsForEmail($text);
 		$body .= $text .
 		"\n\n______________________________________________________________________".
