@@ -42,6 +42,7 @@ page edits displayed on activity tab, and multi-project wiki preferences.");
 		$this->hooks[] = 'search_engines';
 		$this->hooks[] = 'full_search_engines';
 		$this->hooks[] = 'cssfile';
+		$this->hooks[] = 'soap';
 		$this->hooks[] = 'project_public_area';
 		$this->hooks[] = 'activity';
 		$this->hooks[] = 'site_admin_option_hook';
@@ -123,6 +124,8 @@ page edits displayed on activity tab, and multi-project wiki preferences.");
 				echo "\n".'    <base href="'.PHPWIKI_BASE_URL.'" />';
 				echo "\n";
 			}
+		} elseif ($hookname == "soap") {
+			$params['requires'][] = dirname(__FILE__).'/soap.php';
 		} elseif ($hookname == "project_public_area") {
 			$project = group_get_object($params['group_id']);
 			if (!$project || !is_object($project)) {
