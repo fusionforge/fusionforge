@@ -145,7 +145,7 @@ foreach ($atf->getArtifactTypes() as $at) {
 	}
 }
 
-$res = db_query_params ('SELECT group_artifact_id, name
+$res = db_query_params('SELECT group_artifact_id, name
 			FROM artifact_group_list
 			WHERE group_artifact_id = ANY ($1)',
 			array (db_int_array_to_any_clause ($tids))) ;
