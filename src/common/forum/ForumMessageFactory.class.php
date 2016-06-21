@@ -262,7 +262,7 @@ class ForumMessageFactory extends FFError {
 		$this->fetched_rows=$rows;
 		if (!$result || $rows < 1) {
 			$this->setError('No Messages Found '.db_error());
-			return false;
+			$this->forum_messages = false;
 		} else {
 			while ($arr = db_fetch_array($result)) {
 				$this->forum_messages[] = new ForumMessage($this->Forum, $arr['msg_id'], $arr);
