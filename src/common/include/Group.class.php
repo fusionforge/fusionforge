@@ -2199,7 +2199,7 @@ class Group extends FFError {
 		//
 		//	audit trail
 		//
-		$this->addHistory(_('Added User'),$user_identifier);
+		$this->addHistory(_('Added User'), $user_identifier);
 		db_commit();
 
 		//
@@ -2914,19 +2914,19 @@ if there is anything we can do to help you.
 	/**
 	 * validateGroupName - Validate the group name
 	 *
-	 * @param	string	Group name.
+	 * @param	string	$group_name Project name.
 	 *
-	 * @return	boolean	an error false and set an error is the group name is invalid otherwise return true
+	 * @return	bool	an error false and set an error is the group name is invalid otherwise return true
 	 */
 	function validateGroupName($group_name) {
 		if (strlen($group_name)<3) {
-			$this->setError(_('Group name is too short'));
+			$this->setError(_('Project name is too short'));
 			return false;
 		} elseif (strlen(htmlspecialchars($group_name))>40) {
-			$this->setError(_('Group name is too long'));
+			$this->setError(_('Project name is too long'));
 			return false;
 		} elseif (group_get_object_by_publicname($group_name)) {
-			$this->setError(_('Group name already taken'));
+			$this->setError(_('Project name already taken'));
 			return false;
 		}
 		return true;
