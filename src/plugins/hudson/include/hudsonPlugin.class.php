@@ -147,7 +147,7 @@ control over it to the project administrator.");
 		require_once $gfcommon.'dao/CodendiDataAccess.class.php';
 		$group_id = $params['group_id'];
 		$job_dao = new PluginHudsonJobDao(CodendiDataAccess::instance());
-		$dar = $job_dao->deleteHudsonJobsByGroupID($group_id);
+		$job_dao->deleteHudsonJobsByGroupID($group_id);
 	}
 
 	function myPageBox($params) {
