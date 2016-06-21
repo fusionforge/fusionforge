@@ -181,25 +181,25 @@ echo html_ac(html_ap() - 1);
 <?php if(forge_get_config('use_news')) {?>
 <div class="info-box">
 <h2><?php echo _('News'); ?></h2>
-<ul>
-	<li><?php echo util_make_link('/admin/pending-news.php', _('Pending news (moderation for front-page)')); ?></li>
-</ul>
+	<ul>
+		<li><?php echo util_make_link('/admin/pending-news.php', _('Pending news (moderation for front-page)')); ?></li>
+	</ul>
 </div>
 <?php } ?>
 
 <div class="info-box">
 <h2><?php echo _('Stats'); ?></h2>
-<ul>
-	<li><?php echo util_make_link('/stats/', _('Site-Wide Stats')); ?></li>
-	<?php plugin_hook('webanalytics_admin', array()); ?>
-</ul>
+	<ul>
+		<li><?php echo util_make_link('/stats/', _('Site-Wide Stats')); ?></li>
+		<?php plugin_hook('webanalytics_admin', array()); ?>
+	</ul>
 </div>
 
 <div class="info-box">
 <h2><?php echo _('Trove Project Tree'); ?></h2>
-<ul>
-	<li><?php echo util_make_link('/admin/trove/trove_cat_list.php', _('Display Trove Map')); ?></li>
-	<li><?php echo util_make_link('/admin/trove/trove_cat_add.php', _('Add to the Trove Map')); ?></li>
+	<ul>
+		<li><?php echo util_make_link('/admin/trove/trove_cat_list.php', _('Display Trove Map')); ?></li>
+		<li><?php echo util_make_link('/admin/trove/trove_cat_add.php', _('Add to the Trove Map')); ?></li>
 </ul>
 </div>
 

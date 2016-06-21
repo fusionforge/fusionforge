@@ -245,7 +245,7 @@ function show_highest_ranked_projects() {
 		$count++ ;
 	}
 	if ( $return == "" ) {
-		return  $HTML->information(_('No stats available'));
+		return $HTML->information(_('No stats available'));
 	} else {
 		$return = $HTML->listTableTop().$return.$HTML->listTableBottom();
 	}
