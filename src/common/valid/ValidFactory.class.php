@@ -89,7 +89,7 @@ class Valid_String extends Valid_Text {
  */
 class Valid_WhiteList extends Valid {
 	function Valid_WhiteList($key, $whitelist) {
-		parent::Valid($key);
+		parent::__construct($key);
 		$this->addRule(new Rule_WhiteList($whitelist));
 	}
 }
