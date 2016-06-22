@@ -94,7 +94,7 @@ $df->setDocGroupID($dirid);
 //active, hidden & private state ids
 $df->setStateID(array(1, 4, 5));
 $df->setDocGroupState($stateIdDg);
-$d_arr =& $df->getDocuments();
+$d_arr = $df->getDocuments();
 $nested_groups = $dgf->getNested($stateidArr);
 
 $nested_docs = array();
@@ -133,7 +133,7 @@ if (is_array($d_arr) && count($d_arr) > 0) {
 }
 
 $df->setStateID(array(3));
-$d_pending_arr =& $df->getDocuments();
+$d_pending_arr = $df->getDocuments();
 
 if (is_array($d_pending_arr) && count($d_pending_arr) > 0) {
 	// Get the document groups info

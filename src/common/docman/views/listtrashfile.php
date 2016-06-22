@@ -68,7 +68,7 @@ if ($dgf->isError())
 $df->setStateID(array(2));
 $df->setDocGroupState(2);
 
-$d_arr =& $df->getDocuments();
+$d_arr = $df->getDocuments();
 
 $nested_docs = array();
 $DocGroupName = 0;
