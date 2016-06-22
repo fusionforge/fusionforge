@@ -72,12 +72,23 @@ _("This plugin allows each project to embed MoinMoinWiki under a tab.");
 			if (!$project->isProject()) {
 				return;
 			}
-			if ( $project->usesPlugin ( $this->name ) ) {
-				$params['TITLES'][]=$this->text;
-				$params['DIRS'][]=$this->getWikiUrl($project);
+			if ($project->usesPlugin($this->name)) {
+                                $params['TITLES'][] = $this->text;
+				$params['DIRS'][] = $this->getWikiUrl($project);
 				$params['TOOLTIPS'][] = _('MoinMoin Space');
-			}
-			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
+                                if (session_loggedin()) {
+                                        $user = session_get_user();
+                                        $userperm = $project->getPermission();
+                                        if ($userperm->isAdmin()) {
+                                                $params['ADMIN'][] = '';
+                                        }
+                                }
+                                if(isset($params['toptab'])){
+                                        if($params['toptab'] == $this->name) {
+                                                $params['selected'] = array_search($this->text, $params['TITLES']);
+                                        }
+                                }
+                        }
 		} elseif ($hookname == "groupisactivecheckbox") {
 			//Check if the group is active
 			// this code creates the checkbox in the project edit public info page to activate/deactivate the plugin
