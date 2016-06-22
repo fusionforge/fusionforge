@@ -301,7 +301,7 @@ class DocumentFactory extends FFError {
 	 * @return	array	Document objects.
 	 * @access	public
 	 */
-	function &getDocuments($nocache = 0) {
+	function getDocuments($nocache = 0) {
 		if (!$this->Documents || $nocache) {
 			$this->getFromStorage();
 		}
