@@ -138,7 +138,7 @@ class FRSRelease extends FFError {
 					array ($this->FRSPackage->getID(),
 						   htmlspecialchars($name)));
 		if (db_numrows($res)) {
-			$this->setError(_('Error Adding Release: Name Already Exists'));
+			$this->setError(_('Error Adding Release: ')._('Name Already Exists'));
 			return false;
 		}
 

@@ -53,7 +53,7 @@ if (getStringFromRequest('submit')) {
 
 	if (strlen($passwd)<6) {
 		form_release_key(getStringFromRequest('form_key'));
-		exit_error(_('You must supply valid password (at least 6 chars).'),'my');
+		exit_error(_('You must supply valid password (at least 6 characters).'),'my');
 	}
 
 	if ($passwd != $passwd2) {
@@ -78,7 +78,7 @@ if (getStringFromRequest('submit')) {
 	echo html_e('p', array(), _('Old Password')._(':').utils_requiredField().
 				html_e('br').
 				html_e('label', array('for' => 'old_passwd'), html_e('input',array('id' => 'old_passwd', 'type' => 'password', 'name' => 'old_passwd', 'required'=> 'required'))));
-	echo html_e('p', array(), _('New Password (at least 6 chars)')._(':').utils_requiredField().
+	echo html_e('p', array(), _('New Password (at least 6 characters)')._(':').utils_requiredField().
 				html_e('br').
 				html_e('label', array('for' => 'passwd'), html_e('input', array('id' => 'passwd', 'type' => 'password', 'name' => 'passwd', 'required' => 'required', 'pattern' => '.{6,}'))));
 	echo html_e('p', array(), _('New Password (repeat)')._(':').utils_requiredField().

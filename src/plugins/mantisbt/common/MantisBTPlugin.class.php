@@ -225,7 +225,7 @@ _('Use Mantis Bugtracker as another ticket management tool.');
 		$localMantisbtConf = $this->getMantisBTConf($idProjet);
 
 		if (!$localMantisbtConf) {
-			$this->setError('removeProjetMantis::Error' . ' '. _('No project found'));
+			$this->setError('removeProjetMantis::Error' . ' '. _('No project found.'));
 			return false;
 		} else {
 			try {

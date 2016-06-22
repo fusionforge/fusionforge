@@ -54,7 +54,7 @@ if (getStringFromRequest('submit')) {
 		form_release_key(getStringFromRequest('form_key'));
 		exit_error(
 			_('Error'),
-			_('You must supply valid password (at least 6 chars).')
+			_('You must supply valid password (at least 6 characters).')
 		);
 	}
 
@@ -89,10 +89,10 @@ if (getStringFromRequest('submit')) {
 	<form action="<?php echo util_make_uri('/admin/passedit.php?user_id='.$user_id); ?>" method="post">
 	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
 	<p><?php printf(_('Changing password for user #%1$s "%2$s" (%3$s).'), $user_id, $u->getUnixName(), $u->getRealName()); ?></p>
-	<p><?php echo _('New Password (at least 6 chars)') ?>:
-	<br /><input type="password" name="passwd" required="required" title="<?php echo _('At least 6 chars'); ?>" pattern=".{6,}"/></p>
+	<p><?php echo _('New Password (at least 6 characters)') ?>:
+	<br /><input type="password" name="passwd" required="required" title="<?php echo _('At least 6 characters'); ?>" pattern=".{6,}"/></p>
 	<p><?php echo _('New Password (repeat)') ?>:
-	<br /><input type="password" name="passwd2" required="required" title="<?php echo _('At least 6 chars'); ?>" pattern=".{6,}" /></p>
+	<br /><input type="password" name="passwd2" required="required" title="<?php echo _('At least 6 characters'); ?>" pattern=".{6,}" /></p>
 	<p><input type="submit" name="submit" value="<?php echo _('Update password') ?>" /></p>
 	</form>
 	<?php

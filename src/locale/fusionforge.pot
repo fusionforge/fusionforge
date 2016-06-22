@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-21 21:31+0200\n"
+"POT-Creation-Date: 2016-06-22 08:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -356,7 +356,8 @@ msgstr ""
 #: db/20141105-frs-ziplatest.php:70 db/20141105-frs-ziplatest.php:75
 #: db/20141105-frs-ziplatest.php:83 db/20141106-frs-zip-per-release.php:50
 #: db/20141106-frs-zip-per-release.php:57
-#: db/20141106-frs-zip-per-release.php:63
+#: db/20141106-frs-zip-per-release.php:63 plugins/blocks/www/index.php:163
+#: plugins/blocks/www/index.php:165
 #: plugins/compactpreview/include/CompactPreviewPlugin.class.php:104
 #: plugins/compactpreview/include/CompactPreviewPlugin.class.php:151
 #: plugins/compactpreview/include/CompactPreviewPlugin.class.php:162
@@ -367,6 +368,8 @@ msgstr ""
 #: plugins/compactpreview/include/CompactPreviewPlugin.class.php:187
 #: plugins/compactpreview/include/CompactPreviewPlugin.class.php:192
 #: plugins/compactpreview/include/CompactPreviewPlugin.class.php:197
+#: plugins/extsubproj/www/index.php:38 plugins/extsubproj/www/index.php:48
+#: plugins/extsubproj/www/index.php:110
 #: plugins/forumml/www/forumml_utils.php:679 plugins/forumml/www/index.php:121
 #: plugins/globaldashboard/www/admin/add_account.php:75
 #: plugins/globaldashboard/www/admin/add_account.php:79
@@ -428,6 +431,9 @@ msgstr ""
 #: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:34
 #: plugins/projects-hierarchy/view/home_project_link.php:54
 #: plugins/projects-hierarchy/view/home_project_link.php:64
+#: plugins/projects-hierarchy/www/index.php:37
+#: plugins/projects-hierarchy/www/index.php:47
+#: plugins/projects-hierarchy/www/index.php:101
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:600
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:602
 #: plugins/scmgit/common/GitPlugin.class.php:232
@@ -469,7 +475,7 @@ msgstr ""
 #: plugins/taskboard/www/admin/ajax.php:38
 #: plugins/taskboard/www/admin/index.php:33
 #: plugins/taskboard/www/admin/index.php:66 plugins/taskboard/www/ajax.php:32
-#: plugins/taskboard/www/index.php:150
+#: plugins/taskboard/www/index.php:33 plugins/taskboard/www/index.php:150
 #: plugins/taskboard/www/releases/index.php:32
 #: plugins/taskboard/www/releases/index.php:64
 #: plugins/webanalytics/view/admin/updateLinkValue.php:53
@@ -3436,7 +3442,7 @@ msgid "Error Adding Package"
 msgstr ""
 
 #: common/frs/FRSPackage.class.php:173 common/frs/FRSPackage.class.php:424
-#: common/frs/FRSRelease.class.php:429
+#: common/frs/FRSRelease.class.php:141 common/frs/FRSRelease.class.php:429
 msgid "Name Already Exists"
 msgstr ""
 
@@ -3533,11 +3539,7 @@ msgstr ""
 msgid "FRSRelease Name Must Be At Least 3 Characters"
 msgstr ""
 
-#: common/frs/FRSRelease.class.php:141
-msgid "Error Adding Release: Name Already Exists"
-msgstr ""
-
-#: common/frs/FRSRelease.class.php:156
+#: common/frs/FRSRelease.class.php:141 common/frs/FRSRelease.class.php:156
 msgid "Error Adding Release: "
 msgstr ""
 
@@ -3605,6 +3607,7 @@ msgstr ""
 
 #: common/frs/actions/addfile.php:36 common/frs/actions/addpackage.php:35
 #: common/frs/actions/addrelease.php:40 common/frs/actions/deletefile.php:34
+#: common/frs/actions/deletepackage.php:57
 #: common/frs/actions/deleterelease.php:54 common/frs/actions/editfile.php:34
 #: common/frs/actions/editrelease.php:37 common/frs/actions/linkroadmap.php:34
 #: common/frs/actions/monitor.php:37 common/frs/actions/updatepackage.php:39
@@ -3680,10 +3683,6 @@ msgstr ""
 
 #: common/frs/actions/deletepackage.php:52
 msgid "Package successfully deleted."
-msgstr ""
-
-#: common/frs/actions/deletepackage.php:57
-msgid "FRS Action Denied"
 msgstr ""
 
 #: common/frs/actions/deleterelease.php:40
@@ -5695,8 +5694,9 @@ msgstr ""
 msgid "Task managers administration"
 msgstr ""
 
-#: common/include/rbac_texts.php:67 www/forum/admin/attachments.php:42
-#: www/forum/admin/index.php:427
+#: common/include/rbac_texts.php:67 common/include/rbac_texts.php:198
+#: www/forum/admin/attachments.php:42 www/forum/admin/index.php:427
+#: www/project/admin/tools.php:342
 msgid "Forums Administration"
 msgstr ""
 
@@ -5897,10 +5897,6 @@ msgstr ""
 
 #: common/include/rbac_texts.php:196
 msgid "Trackers administration"
-msgstr ""
-
-#: common/include/rbac_texts.php:198
-msgid "Forums administration"
 msgstr ""
 
 #: common/include/rbac_texts.php:199
@@ -7395,12 +7391,16 @@ msgstr ""
 msgid "Export as a CSV file"
 msgstr ""
 
-#: common/tracker/actions/csv.php:84
-msgid "Selected CSV Format:"
+#: common/tracker/actions/csv.php:84 www/pm/csv.php:81
+msgid "Selected CSV Format"
 msgstr ""
 
-#: common/tracker/actions/csv.php:86
-msgid "Download CSV file"
+#: common/tracker/actions/csv.php:84
+msgid ""
+"); ?></strong> CSV<?php echo $format ?> <a href=\"<?php echo "
+"$url_set_format ?>\">(Change)</a>\n"
+"\n"
+"<p><a href=\"<?php echo $url_export ?>\"><?php echo _("
 msgstr ""
 
 #: common/tracker/actions/deleteartifact.php:33
@@ -8483,6 +8483,7 @@ msgid ""
 msgstr ""
 
 #: common/tracker/views/form-deleteextrafield.php:53
+#: common/tracker/views/form-deleteextrafieldelement.php:80
 #: common/tracker/views/form-deletetracker.php:47 www/forum/admin/index.php:185
 #: www/pm/admin/index.php:386
 msgid "I am Really Sure"
@@ -8496,10 +8497,6 @@ msgstr ""
 #: common/tracker/views/form-deleteextrafieldelement.php:66
 #: common/tracker/views/form-updateextrafieldelement.php:61
 msgid "Element"
-msgstr ""
-
-#: common/tracker/views/form-deleteextrafieldelement.php:80
-msgid "I am really sure"
 msgstr ""
 
 #: common/tracker/views/form-deletetracker.php:27
@@ -10339,12 +10336,39 @@ msgstr ""
 msgid "Display block at the top of the main page"
 msgstr ""
 
-#: plugins/blocks/www/index.php:163
-msgid "Cannot Process your request: No TYPE specified"
+#: plugins/blocks/www/index.php:163 plugins/blocks/www/index.php:165
+#: plugins/extsubproj/www/index.php:38 plugins/extsubproj/www/index.php:48
+#: plugins/extsubproj/www/index.php:110
+#: plugins/globaldashboard/www/index.php:26
+#: plugins/globaldashboard/www/index.php:28
+#: plugins/projects-hierarchy/www/index.php:37
+#: plugins/projects-hierarchy/www/index.php:47
+#: plugins/projects-hierarchy/www/index.php:101
+#: plugins/taskboard/www/admin/ajax.php:38
+#: plugins/taskboard/www/admin/index.php:33 plugins/taskboard/www/ajax.php:32
+#: plugins/taskboard/www/index.php:33
+#: plugins/taskboard/www/releases/index.php:32
+msgid "Cannot Process your request"
 msgstr ""
 
-#: plugins/blocks/www/index.php:165 plugins/taskboard/www/index.php:33
-msgid "Cannot Process your request: No ID specified"
+#: plugins/blocks/www/index.php:163 plugins/extsubproj/www/index.php:38
+#: plugins/globaldashboard/www/index.php:26
+#: plugins/projects-hierarchy/www/index.php:37
+#: plugins/quota_management/www/index.php:46
+msgid "No TYPE specified"
+msgstr ""
+
+#: plugins/blocks/www/index.php:165 plugins/extsubproj/www/index.php:48
+#: plugins/extsubproj/www/index.php:110
+#: plugins/globaldashboard/www/index.php:28
+#: plugins/projects-hierarchy/www/index.php:47
+#: plugins/projects-hierarchy/www/index.php:101
+#: plugins/quota_management/www/index.php:48
+#: plugins/taskboard/www/admin/ajax.php:38
+#: plugins/taskboard/www/admin/index.php:33 plugins/taskboard/www/ajax.php:32
+#: plugins/taskboard/www/index.php:33
+#: plugins/taskboard/www/releases/index.php:32
+msgid "No ID specified"
 msgstr ""
 
 #: plugins/blocks/www/index.php:173 plugins/extsubproj/www/index.php:55
@@ -11453,27 +11477,6 @@ msgstr ""
 
 #: plugins/globaldashboard/www/index.php:18
 msgid "Cannot Process your globaldashboard for this user."
-msgstr ""
-
-#: plugins/globaldashboard/www/index.php:26
-#: plugins/globaldashboard/www/index.php:28
-#: plugins/taskboard/www/admin/ajax.php:38
-#: plugins/taskboard/www/admin/index.php:33 plugins/taskboard/www/ajax.php:32
-#: plugins/taskboard/www/releases/index.php:32
-msgid "Cannot Process your request"
-msgstr ""
-
-#: plugins/globaldashboard/www/index.php:26
-#: plugins/quota_management/www/index.php:46
-msgid "No TYPE specified"
-msgstr ""
-
-#: plugins/globaldashboard/www/index.php:28
-#: plugins/quota_management/www/index.php:48
-#: plugins/taskboard/www/admin/ajax.php:38
-#: plugins/taskboard/www/admin/index.php:33 plugins/taskboard/www/ajax.php:32
-#: plugins/taskboard/www/releases/index.php:32
-msgid "No ID specified"
 msgstr ""
 
 #: plugins/globaldashboard/www/index.php:36
@@ -12769,7 +12772,8 @@ msgid "Category added successfully"
 msgstr ""
 
 #: plugins/mantisbt/action/addCategory.php:45
-msgid "Missing category name"
+#: plugins/mantisbt/action/renameCategory.php:50 www/people/admin/index.php:60
+msgid "Missing category name."
 msgstr ""
 
 #: plugins/mantisbt/action/addIssue.php:126
@@ -12839,10 +12843,6 @@ msgstr ""
 msgid "Category renamed successfully."
 msgstr ""
 
-#: plugins/mantisbt/action/renameCategory.php:50 www/people/admin/index.php:60
-msgid "Missing category name."
-msgstr ""
-
 #: plugins/mantisbt/action/updateConf.php:41
 msgid "MantisBT configuration successfully updated."
 msgstr ""
@@ -12892,8 +12892,9 @@ msgid "Unable to create project in MantisBT"
 msgstr ""
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:228
-#: plugins/projectimport/www/index.php:628 www/admin/search.php:178
-msgid "No project found"
+#: plugins/projectimport/www/index.php:628 www/admin/grouplist.php:201
+#: www/admin/search.php:178
+msgid "No project found."
 msgstr ""
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:239
@@ -16561,7 +16562,7 @@ msgstr ""
 
 #: www/account/change_pw.php:56 www/account/lostlogin.php:62
 #: www/admin/passedit.php:57
-msgid "You must supply valid password (at least 6 chars)."
+msgid "You must supply valid password (at least 6 characters)."
 msgstr ""
 
 #: www/account/change_pw.php:61 www/account/lostlogin.php:66
@@ -16602,7 +16603,7 @@ msgstr ""
 
 #: www/account/change_pw.php:81 www/account/lostlogin.php:95
 #: www/admin/passedit.php:92
-msgid "New Password (at least 6 chars)"
+msgid "New Password (at least 6 characters)"
 msgstr ""
 
 #: www/account/change_pw.php:84 www/account/lostlogin.php:101
@@ -17512,10 +17513,6 @@ msgstr ""
 msgid "Click to edit this project."
 msgstr ""
 
-#: www/admin/grouplist.php:201
-msgid "No project found."
-msgstr ""
-
 #: www/admin/index.php:44
 msgid "User Maintenance"
 msgstr ""
@@ -17799,7 +17796,7 @@ msgid "Changing password for user #%1$s \"%2$s\" (%3$s)."
 msgstr ""
 
 #: www/admin/passedit.php:93 www/admin/passedit.php:95
-msgid "At least 6 chars"
+msgid "At least 6 characters"
 msgstr ""
 
 #: www/admin/pending-news.php:63 www/admin/pending-news.php:126
@@ -17819,7 +17816,8 @@ msgstr ""
 msgid "Newsbytes Rejected."
 msgstr ""
 
-#: www/admin/pending-news.php:115 www/project/admin/tools.php:360
+#: www/admin/pending-news.php:115 www/news/admin/index.php:106
+#: www/project/admin/tools.php:360
 msgid "News Admin"
 msgstr ""
 
@@ -17977,7 +17975,7 @@ msgid_plural "User search with criteria <em>%1$s</em>: %2$s matches"
 msgstr[0] ""
 msgstr[1] ""
 
-#: www/admin/search.php:98
+#: www/admin/search.php:98 www/admin/unsubscribe.php:124
 msgid "No user found."
 msgstr ""
 
@@ -18127,10 +18125,6 @@ msgstr ""
 
 #: www/admin/unsubscribe.php:107
 msgid "Comm. Mail."
-msgstr ""
-
-#: www/admin/unsubscribe.php:124
-msgid "No user found"
 msgstr ""
 
 #: www/admin/useredit.php:37
@@ -19995,10 +19989,6 @@ msgstr ""
 msgid "Older Releases"
 msgstr ""
 
-#: www/news/admin/index.php:106
-msgid "News admin"
-msgstr ""
-
 #: www/news/admin/index.php:133
 msgid "Displayed"
 msgstr ""
@@ -20993,10 +20983,6 @@ msgid "Export tasks as a CSV file"
 msgstr ""
 
 #: www/pm/csv.php:81
-msgid "Selected CSV Format"
-msgstr ""
-
-#: www/pm/csv.php:81
 msgid "(Change)"
 msgstr ""
 
@@ -21885,10 +21871,6 @@ msgstr ""
 
 #: www/project/admin/tools.php:339
 msgid "Tool Admin"
-msgstr ""
-
-#: www/project/admin/tools.php:342
-msgid "Forums Admin"
 msgstr ""
 
 #: www/project/admin/tools.php:354

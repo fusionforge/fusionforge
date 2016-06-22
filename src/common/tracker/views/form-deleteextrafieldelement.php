@@ -77,7 +77,7 @@ global $HTML;
 			<p>
 			<input id="really_sure" type="checkbox" name="really_sure" value="1" />
 			<label for="really_sure">
-			<?php echo _("I am really sure") ?>
+			<?php echo _("I am Really Sure") ?>
 			</label>
 			</p>
 

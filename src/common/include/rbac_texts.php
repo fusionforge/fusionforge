@@ -195,7 +195,7 @@ function setup_rbac_strings () {
 
 								    'tracker_admin' => _('Trackers administration'),
 								    'pm_admin' => _('Task managers administration'),
-								    'forum_admin' => _('Forums administration'),
+								    'forum_admin' => _('Forums Administration'),
 								    'frs_admin' => _('FRS access level'),
 
 								    'tracker' => _('Tracker'),

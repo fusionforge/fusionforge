@@ -81,7 +81,7 @@ $format .= " using '".htmlentities($sep)."' as separator.";
 <p><?php echo _('This page allows you to export the items using a CSV (<a href="http://en.wikipedia.org/wiki/Comma-separated_values">Comma Separated Values</a>) File. This format can be used to view your entries using your favorite spreadsheet software.'); ?></p>
 <h2><?php echo _('Export as a CSV file'); ?></h2>
 
-<strong><?php echo _('Selected CSV Format:'); ?></strong> CSV<?php echo $format ?> <a href="<?php echo $url_set_format ?>">(Change)</a>
+<strong><?php echo _('Selected CSV Format')._(:'); ?></strong> CSV<?php echo $format ?> <a href="<?php echo $url_set_format ?>">(Change)</a>
 
 <p><a href="<?php echo $url_export ?>"><?php echo _('Download CSV file'); ?></a></p>
 
