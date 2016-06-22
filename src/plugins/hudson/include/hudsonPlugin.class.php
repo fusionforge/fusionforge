@@ -303,7 +303,7 @@ control over it to the project administrator.");
 						$html .= '   </ul>';
 						$html .= '  </td>';
 						$html .= '  <td class="widget_lastbuilds_weather">';
-						$html .= _("Weather Report:").'<img src="'.$job->getWeatherReportIcon().'" align="middle" />';
+						$html .= _('Weather Report')._(':').'<img src="'.$job->getWeatherReportIcon().'" align="middle" />';
 						$html .= '  </td>';
 						$html .= ' </tr>';
 						$html .= '</table>';

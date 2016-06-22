@@ -469,7 +469,7 @@ class Navigation extends FFError {
 			// Project/Task Manager
 			if ($group->usesPM()) {
 				$menu['titles'][] = _('Tasks');
-				$menu['tooltips'][] = _('Project Management.');
+				$menu['tooltips'][] = _('Project Management');
 				$menu['urls'][] = util_make_uri('/pm/?group_id=' . $group_id);
 				if (forge_check_perm ('pm_admin', $group_id)) {
 					$menu['adminurls'][] = util_make_uri('/pm/admin/?group_id='.$group_id);

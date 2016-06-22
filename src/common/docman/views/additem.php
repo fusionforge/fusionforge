@@ -85,7 +85,7 @@ if (forge_check_perm('docman', $group_id, 'approve')) {
 		echo html_ao('p');
 		echo html_e('label', array(), _('Upload archive:'), false);
 		echo html_e('input', array('type' => 'file', 'name' => 'uploaded_zip', 'required' => 'required'));
-		echo html_e('span', array(), sprintf(_('(max upload size: %s)'),human_readable_bytes(util_get_maxuploadfilesize())), false);
+		echo html_e('span', array(), '('._('max upload size')._(': ').human_readable_bytes(util_get_maxuploadfilesize()).')', false);
 		echo html_e('input', array('id' => 'submitinjectzip', 'type' => 'button', 'value' => _('Inject Tree')));
 		echo html_ac(html_ap() -1);
 		echo $HTML->closeForm();

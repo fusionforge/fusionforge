@@ -132,7 +132,7 @@ $cells[][] = html_e('input', array('id' => 'editFileurl', 'type' => 'url', 'name
 echo $HTML->multiTableRow(array('id' => 'fileurlroweditfile', 'class' => 'hide'), $cells);
 $cells = array();
 $cells[] = array(_('File')._(':'), 'class' => 'docman_editfile_file');
-$cells[][] = html_e('input', array('type' => 'file', 'name' => 'uploaded_data')).html_e('br').sprintf(_('(max upload size: %s)'),human_readable_bytes(util_get_maxuploadfilesize()));
+$cells[][] = html_e('input', array('type' => 'file', 'name' => 'uploaded_data')).html_e('br').'('._('max upload size')._(': ').human_readable_bytes(util_get_maxuploadfilesize()).')';
 echo $HTML->multiTableRow(array('id' => 'uploadnewroweditfile', 'class' => 'hide'), $cells);
 echo $HTML->listTableBottom();
 echo html_e('input', array('type' => 'hidden', 'id' => 'docid', 'name' => 'docid'));

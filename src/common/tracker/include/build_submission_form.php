@@ -99,7 +99,7 @@ function artifact_submission_form($ath, $group, $summary='', $details='', $assig
 	$content = html_ao('div', array('class'=>'file_attachments'));
 	$content .= html_ao('p');
 	$content .= html_e('strong', array(), _('Attach Files')._(':'));
-	$content .= '('._('max upload size: '.human_readable_bytes(util_get_maxuploadfilesize())).')'.html_e('br');
+	$content .= '('._('max upload size')._(': ').human_readable_bytes(util_get_maxuploadfilesize()).')'.html_e('br');
 	$content .= html_e('input', array('type'=>'file', 'name'=>'input_file0')).html_e('br');
 	$content .= html_e('input', array('type'=>'file', 'name'=>'input_file1')).html_e('br');
 	$content .= html_e('input', array('type'=>'file', 'name'=>'input_file2')).html_e('br');

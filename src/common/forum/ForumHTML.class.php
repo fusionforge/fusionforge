@@ -136,7 +136,7 @@ function forum_header($params) {
 		if ($f) {
 			if ($f->isMonitoring()) {
 				echo util_make_link('/forum/monitor.php?forum_id='.$forum_id.'&group_id='.$group_id.'&stop=1',
-								 html_image('ic/xmail16w.png').' '._('Stop Monitoring')).' | ';
+								 html_image('ic/xmail16w.png').' '._('Stop monitoring')).' | ';
 			} else {
 				echo util_make_link('/forum/monitor.php?forum_id='.$forum_id.'&group_id='.$group_id.'&start=1',
 							 html_image('ic/mail16w.png').' '._('Monitor Forum')).' | ';

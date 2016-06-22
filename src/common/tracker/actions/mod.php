@@ -67,7 +67,7 @@ if (session_loggedin()) {
 			<td><?php
 				if ($ah->isMonitoring()) {
 					$img="xmail16w.png";
-					$text=_('Stop Monitoring');
+					$text=_('Stop monitoring');
 				} else {
 					$img="mail16w.png";
 					$text=_('Monitor');
@@ -286,7 +286,7 @@ $nb = $count? ' ('.$count.')' : '';
 <h2><?php echo _('Existing Files')._(':'); ?></h2>
 <table width="80%">
 	<tr><td colspan="2">
-        <strong><?php echo _('Attach Files')._(':'); ?></strong> <?php echo('('._('max upload size: '.human_readable_bytes(util_get_maxuploadfilesize())).')') ?><br />
+        <strong><?php echo _('Attach Files')._(':'); ?></strong> <?php echo('('._('max upload size')._(': ').human_readable_bytes(util_get_maxuploadfilesize()).')') ?><br />
         <input type="file" name="input_file0" size="30" /><br />
         <input type="file" name="input_file1" size="30" /><br />
         <input type="file" name="input_file2" size="30" /><br />

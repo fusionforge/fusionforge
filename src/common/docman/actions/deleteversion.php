@@ -46,7 +46,7 @@ if ($docid && $version) {
 		$dv = new DocumentVersion($documentObject);
 		if ($dv && !$dv->isError()) {
 			if ($dv->delete($version)) {
-				$result['html'] = $HTML->feedback(_('Version deleted successfully'));
+				$result['html'] = $HTML->feedback(_('Version deleted successfully.'));
 				$result['status'] = 1;
 			} else {
 				$result['html'] = $HTML->error_msg(_('Cannot delete version')._(': ').$version.' '.$dv->getErrorMessage());
