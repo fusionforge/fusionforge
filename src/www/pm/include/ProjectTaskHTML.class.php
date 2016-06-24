@@ -30,7 +30,7 @@ require_once $gfcommon.'pm/ProjectTask.class.php';
 class ProjectTaskHTML extends ProjectTask {
 
 	function __construct(&$ProjectGroup, $project_task_id=false, $arr=false) {
-		parent::__construct($ProjectGroup,$project_task_id,$arr);
+		parent::__construct($ProjectGroup, $project_task_id, $arr);
 	}
 
 	function multipleDependBox ($name='dependent_on[]') {

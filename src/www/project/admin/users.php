@@ -101,7 +101,7 @@ if (getStringFromRequest('submit')) {
 			session_require_perm ('project_admin', $role->getHomeProject()->getID()) ;
 		}
 		if (!$role->removeUser (user_get_object ($user_id))) {
-			$error_msg = $role->getErrorMessage() ;
+			$error_msg = $role->getErrorMessage();
 		} else {
 			$feedback = _("Member Removed Successfully");
 		}
