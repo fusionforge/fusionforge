@@ -27,6 +27,9 @@ class ExternalHtmlSearchRenderer extends SearchRenderer {
 	var $url;
 
 	/**
+	 * @param        $type
+	 * @param string $name
+	 * @param string $url
 	 * @param string $words words we are searching for
 	 */
 	function __construct($type, $name, $url, $words) {
