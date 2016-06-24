@@ -72,7 +72,7 @@ class Widget_ProjectLatestFileReleases extends Widget {
 				$titleArr[] = _('Monitor');
 			}
 			$titleArr[] = _('Download');
-			use_javascript('/js/sortable.js');
+			html_use_tablesorter();
 			$result .= $HTML->getJavascripts();
 			$result .= $HTML->listTableTop($titleArr, false, 'sortable_widget_frs_listpackage full', 'sortable');
 			foreach ($frsrnrs as $key => $frsrnr) {

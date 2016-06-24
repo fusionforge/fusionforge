@@ -439,6 +439,13 @@ function html_use_jquery() {
 	use_javascript('/scripts/jquery/jquery-1.10.2.js');
 }
 
+function html_use_tablesorter() {
+	// html_use_jquery();
+	// use_javascript('/scripts/jquery-tablesorter/jquery.tablesorter.js');
+	use_javascript('/js/sortable.js');
+}
+
+
 function html_use_storage() {
 	html_use_jquery();
 	use_javascript('/scripts/jquery-storage/jquery.Storage.js');

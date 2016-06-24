@@ -106,7 +106,7 @@ if (getStringFromRequest('submit')) {//if this is set, then the user has issued 
 	plugin_hook("userisactivecheckboxpost", $hookParams);
 }
 
-use_javascript('/js/sortable.js');
+html_use_tablesorter();
 $title = _('My Account');
 site_user_header(array('title'=>$title));
 

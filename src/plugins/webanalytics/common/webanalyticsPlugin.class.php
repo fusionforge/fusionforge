@@ -161,7 +161,7 @@ such as Piwik or Google Analytics.");
 				session_require_global_perm('forge_admin');
 				global $gfwww;
 				require_once($gfwww.'admin/admin_utils.php');
-				use_javascript('/js/sortable.js');
+				html_use_tablesorter();
 				site_admin_header(array('title'=>_('Site Global Webanalytics Admin'), 'toptab' => ''));
 				$returned = true;
 				break;

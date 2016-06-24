@@ -192,7 +192,7 @@ project independently.");
 
 	function displayScmHook($group_id, $scm) {
 		global $HTML;
-		use_javascript('/js/sortable.js');
+		html_use_tablesorter();
 		echo $HTML->getJavascripts();
 		$hooksAvailable = $this->getAvailableHooks($group_id);
 		$hooksEnabled = $this->getEnabledHooks($group_id);

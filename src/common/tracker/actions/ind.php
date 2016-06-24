@@ -36,7 +36,7 @@ if ($at_arr === false) {
 	exit_permission_denied('tracker');
 }
 
-use_javascript('/js/sortable.js');
+html_use_tablesorter();
 
 $atf->header();
 

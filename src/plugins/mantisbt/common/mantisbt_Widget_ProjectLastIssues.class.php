@@ -65,7 +65,7 @@ class mantisBT_Widget_ProjectLastIssues extends Widget {
 		$arrayBugs = array_slice($arrayBugs, 0, 5);
 		$content = '';
 		if (count($arrayBugs)) {
-			use_javascript('/js/sortable.js');
+			html_use_tablesorter()
 			echo $HTML->getJavascripts();
 			$arrTitle = array(_('ID'), _('Title'), _('Status'), _('Category'));
 			$content .= $HTML->listTableTop($arrTitle, false, 'sortable_widget_mantisbt_listissues full', 'sortable');

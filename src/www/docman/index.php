@@ -84,7 +84,7 @@ html_use_simplemenu();
 html_use_jqueryui();
 html_use_jquerysplitter();
 use_javascript('/docman/scripts/DocManController.js');
-use_javascript('/js/sortable.js');
+html_use_tablesorter();
 
 site_project_header(array('title'=> _('Documents for ').$g->getPublicName(), 'group'=>$group_id, 'toptab'=>'docman'));
 
