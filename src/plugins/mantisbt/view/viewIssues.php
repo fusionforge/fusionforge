@@ -127,7 +127,7 @@ if (!isset($clientSOAP) && !isset($errorPage)) {
 	if (!count($listBug)) {
 		echo $HTML->warning_msg(_('No tickets to display.'));
 	} else {
-		html_use_tablesorter()
+		html_use_tablesorter();
 		echo $HTML->getJavascripts();
 
 		include ($gfplugins.$mantisbt->name.'/view/jumpToIssue.php');
