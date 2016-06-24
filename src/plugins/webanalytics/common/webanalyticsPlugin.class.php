@@ -181,4 +181,13 @@ such as Piwik or Google Analytics.");
 		include $gfplugins.$this->name.'/view/admin/viewGlobalConfiguration.php';
 		return true;
 	}
+
+	/**
+	 * getPluginDescription - display the description of this plugin in pluginman admin page
+	 *
+	 * @return	string	the description
+	 */
+	function getPluginDescription() {
+		return _('Get the ability to configure specific URL for web analytics tool such as Piwik or Google Analytics.');
+	}
 }
