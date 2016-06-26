@@ -40,6 +40,7 @@ if (getStringFromRequest('add_extrafield')) {
 	$attribute1 = getStringFromRequest('attribute1');
 	$attribute2 = getStringFromRequest('attribute2');
 	$pattern = getStringFromRequest('pattern');
+	$parent = getStringFromRequest('parent');
 	$is_required = getStringFromRequest('is_required');
 	$alias = getStringFromRequest('alias');
 	$hide100 = getStringFromRequest('hide100');
@@ -57,7 +58,7 @@ if (getStringFromRequest('add_extrafield')) {
 		} else {
 			$show100 = 1;
 		}
-		if (!$ab->create($name, $field_type, $attribute1, $attribute2, $is_required, $alias, $show100, $show100label, $description, $pattern)) {
+		if (!$ab->create($name, $field_type, $attribute1, $attribute2, $is_required, $alias, $show100, $show100label, $description, $pattern, $parent)) {
 			$error_msg .= _('Error inserting a custom field')._(': ').$ab->getErrorMessage();
 			$ab->clearError();
 		} else {
@@ -234,6 +235,7 @@ if (getStringFromRequest('add_extrafield')) {
 	$attribute1 = getStringFromRequest('attribute1');
 	$attribute2 = getStringFromRequest('attribute2');
 	$pattern = getStringFromRequest('pattern');
+	$parent = getStringFromRequest('parent');
 	$is_required = getStringFromRequest('is_required');
 	$alias = getStringFromRequest('alias');
 	$hide100 = getStringFromRequest('hide100');
@@ -250,7 +252,7 @@ if (getStringFromRequest('add_extrafield')) {
 		} else {
 			$show100 = 1;
 		}
-		if (!$ac->update($name, $attribute1, $attribute2, $is_required, $alias, $show100, $show100label, $description, $pattern)) {
+		if (!$ac->update($name, $attribute1, $attribute2, $is_required, $alias, $show100, $show100label, $description, $pattern, $parent)) {
 			$error_msg .= _('Update failed')._(': ').$ac->getErrorMessage();
 			$ac->clearError();
 		} else {
@@ -264,8 +266,8 @@ if (getStringFromRequest('add_extrafield')) {
 //
 } elseif (getStringFromRequest('update_opt')) {
 	$id = getStringFromRequest('id');
-	$name = getStringFromRequest('name');
 	$boxid = getStringFromRequest('boxid');
+	$parentElements = getStringFromRequest('parent_elements');
 
 	$ac = new ArtifactExtraField($ath,$boxid);
 	if (!$ac || !is_object($ac)) {
@@ -286,7 +288,14 @@ if (getStringFromRequest('add_extrafield')) {
 				$ao->clearError();
 			} else {
 				$feedback .= _('Element updated');
+				$parentElements = getStringFromRequest('parent_elements');
+				if (!$ao->saveParentElements($parentElements)) {
+					$error_msg .= _('Update failed')._(': ').$ao->getErrorMessage();
+					$ao->clearError();
+				} else {
+				$feedback .= html_e('br')._('Parent Elements updated');
 				$next = 'add_extrafield';
+				}
 			}
 		}
 	}

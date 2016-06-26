@@ -31,7 +31,11 @@ global $ath;
 $ath->header(array ('title'=>_('Submit New')));
 
 require_once $gfcommon.'tracker/include/build_submission_form.php';
-artifact_submission_form($ath, $group, $summary, $details, $assigned_to, $priority, $extra_fields);
+if (isset($summary)) {
+	artifact_submission_form($ath, $group, $summary, $details, $assigned_to, $priority, $extra_fields);
+} else {
+	artifact_submission_form($ath, $group);
+}
 
 $ath->footer();
 

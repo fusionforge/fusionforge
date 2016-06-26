@@ -105,29 +105,37 @@ class ArtifactTypeHtml extends ArtifactType {
 
 		$links_arr[]='/tracker/admin/?group_id='.$group_id;
 		$title_arr[]=_('New Tracker');
+		$attr_arr[] = array('title'=>_('Create a new tracker.'));
 
 		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&update_type=1';
 		$title_arr[]=_('Update Settings');
+		$attr_arr[] = array('title'=>_('Set up preferences like expiration times, email addresses.'));
 
 		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&add_extrafield=1';
 		$title_arr[]=_('Manage Custom Fields');
+		$attr_arr[] = array('title'=>_('Add new boxes like Phases, Quality Metrics, Components, etc.  Once added they can be used with other selection boxes (for example, Categories or Groups) to describe and browse bugs or other artifact types.'));
 
 		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&workflow=1';
 		$title_arr[]=_('Manage Workflow');
+		$attr_arr[] = array('title'=>_('Edit tracker workflow.'));
 
 		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&customize_list=1';
 		$title_arr[]=_('Customize List');
+		$attr_arr[] = array('title'=>_('Customize display for the tracker.'));
 
 		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&add_canned=1';
 		$title_arr[]=_('Manage Canned Responses');
+		$attr_arr[] = array('title'=>_('Create/change generic response messages for the tracker.'));
 
 		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&clone_tracker=1';
-		$title_arr[]=_('Clone Tracker');
+		$title_arr[]=_('Apply Template Tracker');
+		$attr_arr[] = array('title'=>_('Duplicate parameters and fields from a template trackers in this one.'));
 
 		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&delete=1';
 		$title_arr[]=_('Delete');
+		$attr_arr[] = array('title'=>_('Permanently delete this tracker.'));
 
-		echo $HTML->printSubMenu($title_arr, $links_arr, array());
+		echo $HTML->printSubMenu($title_arr, $links_arr, $attr_arr);
 	}
 
 	function adminFooter($params) {
@@ -164,7 +172,6 @@ class ArtifactTypeHtml extends ArtifactType {
                                $mode = '') {
 		$efarr = $this->getExtraFields($types);
 		//each two columns, we'll reset this and start a new row
-
 		$template = $this->getRenderHTML($types, $mode);
 
 		if ($mode=='QUERY') {
@@ -193,7 +200,7 @@ class ArtifactTypeHtml extends ArtifactType {
 				if (!isset($selected[$efarr[$i]['extra_field_id']]))
 					$selected[$efarr[$i]['extra_field_id']] = '';
 
-				$value = @$selected[$efarr[$i]['extra_field_id']];
+				$value = $selected[$efarr[$i]['extra_field_id']];
 
 				if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_SELECT ||
 					$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX ||
@@ -251,16 +258,30 @@ class ArtifactTypeHtml extends ArtifactType {
 				$efarr[$i]['show100'] = $status_show_100;
 			}
 
+			if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_SELECT ||
+					$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX ||
+					$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RADIO ||
+					$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT) {
+				$allowed=false;
+				if (!is_null($efarr[$i]['parent']) && !empty($efarr[$i]['parent']) && $efarr[$i]['parent']!='100') {
+					$aefParentId = $efarr[$i]['parent'];
+					$selectedElmnts = (isset($selected[$aefParentId]) ? $selected[$aefParentId] : '');
+					$aef = new ArtifactExtraField($this,$efarr[$i]['extra_field_id']);
+					$allowed = $aef->getAllowedValues($selectedElmnts);
+				}
+			}
+
 			if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_SELECT) {
-				$str = $this->renderSelect($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['show100'],$efarr[$i]['show100label'],$show_any,$text_any,false, $attrs);
+
+				$str = $this->renderSelect($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['show100'],$efarr[$i]['show100label'],$show_any,$text_any,$allowed, $attrs);
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) {
 
-				$str = $this->renderCheckbox($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['show100'],$efarr[$i]['show100label'], $attrs);
+				$str = $this->renderCheckbox($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['show100'],$efarr[$i]['show100label'], $allowed, $attrs);
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RADIO) {
 
-				$str = $this->renderRadio($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['show100'],$efarr[$i]['show100label'],$show_any,$text_any, $attrs);
+				$str = $this->renderRadio($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['show100'],$efarr[$i]['show100label'],$show_any, $text_any, $allowed, $attrs);
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_TEXT ||
 					$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_INTEGER) {
@@ -282,7 +303,7 @@ class ArtifactTypeHtml extends ArtifactType {
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT) {
 
-				$str = $this->renderMultiSelectBox ($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['show100'],$efarr[$i]['show100label'], $attrs);
+				$str = $this->renderMultiSelectBox($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['show100'],$efarr[$i]['show100label'], $allowed, $attrs);
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 
@@ -314,6 +335,103 @@ class ArtifactTypeHtml extends ArtifactType {
 			$template = str_replace('{$'.$efarr[$i]['field_name'].'}',$str,$template);
 		}
 		if($template != NULL){
+			if ($mode == 'UPDATE') {
+				$jsvariable ="
+	var invalidSelectMsg = '"._("One or more of the selected options is not allowed")."';
+	var invalidInputMsg = '". _("This choice is not allowed")."';";
+				$javascript = <<<'EOS'
+	$.expr[':'].invalid = function(elem, index, match) {
+		for (let invalid of document.querySelectorAll(':invalid') )  {
+			if (elem === invalid) { return true; }
+		}
+		return false;
+	};
+	$(".with-depcy[name^='extra_fields']").on('change', function(){
+		if ($(this).prop('tagName') == 'SELECT') {
+			var elmnts = $(this).children('option:selected');
+		} else {
+			var elmnts = $(this).siblings('input:checked');
+		}
+		elmnts.each(function(i){
+			var dep = $(this).data("dependency");
+			if (this.value!='100') {
+				$(dep).each(function(j, val) {
+					$("select[name^='extra_fields["+val.field+"]']:invalid, input[name^='extra_fields["+val.field+"]']:invalid").each(function() {
+						this.setCustomValidity("");
+						$(this).off("change.invalid");
+					});
+					$("select[name^='extra_fields["+val.field+"]'] option").each(function(k,opt){
+						if (this.value!='100') {
+							if ($.inArray(parseInt(this.value),val.elmnt)>-1) {
+								$(this).prop('disabled', false).removeClass('option_disabled');
+							} else if (i==0) {
+								$(this).prop('disabled', true);
+								$(this).addClass('option_disabled');
+							}
+						}
+					});
+					$("input[name^='extra_fields["+val.field+"]']").each(function(k,opt){
+						if (this.value!='100') {
+							if ($.inArray(parseInt(this.value),val.elmnt)>-1) {
+								$(this).prop('disabled', false).removeClass($(this).attr('type')+'_disabled');
+							} else if (i==0) {
+								$(this).prop('disabled', true);
+								$(this).addClass($(this).attr('type')+'_disabled');
+							}
+						}
+					});
+				});
+			} else {
+				$(dep.fields).each(function(j, val) {
+					$("select[name^='extra_fields["+val+"]']:invalid, input[name^='extra_fields["+val+"]']:invalid").each(function() {
+						this.setCustomValidity("");
+					});
+					$("select[name^='extra_fields["+val+"]'] option.option_disabled").each(function() {
+						$(this).prop('disabled', false).removeClass('option_disabled');
+					});
+					$("input.radio_disable[name^='extra_fields["+val+"]']").each(function() {
+						$(this).prop('disabled', false).removeClass('radio_disabled');
+					});
+					$("input.checkbox_disabled[name^='extra_fields["+val+"]']").each(function() {
+						$(this).prop('disabled', false).removeClass('checkbox_disabled');
+					});
+				});
+			}
+		});
+		$("select[name^='extra_fields'] option:selected:disabled").parent().each(function() {
+			$(this).children('option:selected:disabled').prop('disabled', false);
+			this.setCustomValidity(invalidSelectMsg);
+			$(this).on("change.invalid", function() {
+				$(this).children('option.option_disabled:not(:disabled):not(:selected)').prop('disabled', true);
+				if (!$(this).children('option.option_disabled:selected').length) {
+					this.setCustomValidity("");
+					$(this).off("change.invalid");
+				}
+			});
+		});
+		$("input[name^='extra_fields']:checked:disabled").each(function() {
+			$(this).prop('disabled', false);
+			this.setCustomValidity(invalidInputMsg);
+			if ($(this).attr('type') == 'radio') {
+				$(this).siblings('input[type="radio"]').on("change.invalid", function() {
+					$(this).siblings('input[type="radio"]:invalid').prop('disabled', true).addClass('input_disabled').each(function() {
+						this.setCustomValidity("");
+					});
+					$(this).siblings('input[type="radio"]').off("change.invalid");
+					$(this).off("change.invalid");
+				});
+			} else {
+				$(this).on("change.invalid", function() {
+					$(this).prop('disabled', true);
+					this.setCustomValidity("");
+					$(this).off("change.invalid");
+				});
+			}
+		});
+	});
+EOS;
+				echo html_e('script', array( 'type'=>'text/javascript'), '//<![CDATA['."\n".'$(function(){'.$jsvariable."\n".$javascript.'});'."\n".'//]]>');
+			}
 			echo $template;
 		}
 	}
@@ -536,13 +654,41 @@ class ArtifactTypeHtml extends ArtifactType {
 			$text_100=_('None');
 		}
 		$arr = $this->getExtraFieldElements($extra_field_id);
-		$keys = array();
-		$vals = array();
-		for ($i=0; $i<count($arr); $i++) {
-			$keys[$i]=$arr[$i]['element_id'];
-			$vals[$i]=$arr[$i]['element_name'];
+		$aef = new ArtifactExtraField($this, $extra_field_id);
+		$aefChildren = $aef->getChildren();
+		if (!empty($aefChildren)) {
+			$attrs['class'] = (empty($attrs['class']) ? '':$attrs['class'].' ').'with-depcy';
 		}
-		return html_build_select_box_from_arrays ($keys,$vals,'extra_fields['.$extra_field_id.']',$checked,$show_100,$text_100,$show_any,$text_any, $allowed, $attrs);
+		$vals = array();
+		$texts = array();
+		$opt_attrs = array();
+		$attrs_100 = array();
+
+		for ($i=0; $i<count($arr); $i++) {
+			$vals[$i]=$arr[$i]['element_id'];
+			$texts[$i]=$arr[$i]['element_name'];
+			$opt_attrs[$i]=array();
+			$aefe = new ArtifactExtraFieldElement($aef, $arr[$i]['element_id']);
+			if (!empty($aefChildren)) {
+				$cElmntArr = $aefe->getChildrenElements();
+				if (!empty($cElmntArr))
+				{
+					$dependency = '';
+					foreach ($cElmntArr as $key=>$cElmnt) {
+						$childField = new ArtifactExtraField($this, $key);
+						$dependency .= (empty($dependency) ? '':', ').'{"field":'.$key.', "elmnt": ['.implode(', ', $cElmnt).']}';
+					}
+					$dependency = '['.$dependency.']';
+					$opt_attrs[$i]= array( 'data-dependency'=>$dependency);
+				}
+			}
+		}
+
+		if ($show_100 && !empty($aefChildren)) {
+			$attrs_100 = array( 'data-dependency'=>'{"fields": ['.implode(', ',$aefChildren).']}');
+		}
+
+		return html_build_select_box_from_arrays ($vals,$texts,'extra_fields['.$extra_field_id.']',$checked,$show_100,$text_100,$show_any,$text_any, $allowed, $attrs, $opt_attrs, $attrs_100);
 	}
 
 	/**
@@ -598,15 +744,42 @@ class ArtifactTypeHtml extends ArtifactType {
 	 * @param	array	$attrs		Array of other attributes
 	 * @return	string	HTML code using radio buttons
 	 */
-	function renderRadio ($extra_field_id,$checked='xzxz',$show_100=false,$text_100='none',$show_any=false,$text_any='Any', $attrs = array()) {
+	function renderRadio ($extra_field_id,$checked='xzxz',$show_100=false,$text_100='none',$show_any=false,$text_any='Any', $allowed = false, $attrs = array()) {
+
 		$arr = $this->getExtraFieldElements($extra_field_id);
-		$keys = array();
-		$vals = array();
-		for ($i=0; $i<count($arr); $i++) {
-			$keys[$i]=$arr[$i]['element_id'];
-			$vals[$i]=$arr[$i]['element_name'];
+		$aef = new ArtifactExtraField($this, $extra_field_id);
+		$aefChildren = $aef->getChildren();
+		if (!empty($aefChildren)) {
+			$attrs['class'] = (empty($attrs['class']) ? '':$attrs['class'].' ').'with-depcy';
 		}
-		return html_build_radio_buttons_from_arrays ($keys,$vals,'extra_fields['.$extra_field_id.']',$checked,$show_100,$text_100,$show_any,$text_any,$attrs);
+
+		$vals = array();
+		$texts = array();
+		$radios_attrs = array();
+		$attrs_100 = array();
+
+		for ($i=0; $i<count($arr); $i++) {
+			$vals[$i]=$arr[$i]['element_id'];
+			$texts[$i]=$arr[$i]['element_name'];
+			$aefe = new ArtifactExtraFieldElement($aef, $arr[$i]['element_id']);
+			$dependency = '';
+			if (!empty($aefChildren)) {
+				$cElmntArr = $aefe->getChildrenElements();
+				if (!empty($cElmntArr))
+				{
+					foreach ($cElmntArr as $key=>$cElmnt) {
+						$childField = new ArtifactExtraField($this, $key);
+						$dependency .= (empty($dependency) ? '':', ').'{"field":'.$key.', "elmnt": ['.implode(', ', $cElmnt).']}';
+					}
+					$dependency = '['.$dependency.']';
+					$radios_attrs[$i]['data-dependency']=$dependency;
+				}
+			}
+		}
+		if ($show_100 && !empty($aefChildren)) {
+			$attrs_100 = array( 'data-dependency'=>'{"fields": ['.implode(', ',$aefChildren).']}');
+		}
+		return html_build_radio_buttons_from_arrays ($vals,$texts,'extra_fields['.$extra_field_id.']',$checked,$show_100,$text_100,$show_any,$text_any,$allowed,$attrs,$radios_attrs,$attrs_100);
 	}
 
 	/**
@@ -619,37 +792,53 @@ class ArtifactTypeHtml extends ArtifactType {
 	 * @param	array		$attrs		Array of other attributes
 	 * @return	string		radio buttons
 	 */
-	function renderCheckbox ($extra_field_id,$checked=array(),$show_100=false,$text_100='none', $attrs = array()) {
+	function renderCheckbox ($extra_field_id,$checked=array(),$show_100=false,$text_100='none', $allowed=false, $attrs = array()) {
 		if ($text_100 == 'none'){
 			$text_100=_('None');
 		}
+
 		if (!$checked || !is_array($checked)) {
 			$checked=array();
 		}
 		if (!empty($attrs['title'])) {
 			$attrs['title'] = util_html_secure($attrs['title']);
 		}
+
 		$arr = $this->getExtraFieldElements($extra_field_id);
-		$return = '';
-		if ($show_100) {
-			$chk_attrs = array('type'=>'checkbox', 'name'=>'extra_fields['.$extra_field_id.'][]', 'id'=>'extra_fields100', 'value'=>'100');
-			if (in_array('100', $checked)) {
-				$chk_attrs['checked']='checked';
-			}
-			$return .= html_e('input', array_merge($attrs,$chk_attrs));
-			$return .= html_e('label', array_merge(array('for'=>'extra_fields100'), (empty($attrs['title']) ? array() : array('title'=>$attrs['title']))), $text_100);
-			$return .= html_e('br');
+		$aef = new ArtifactExtraField($this, $extra_field_id);
+		$aefChildren = $aef->getChildren();
+		if (!empty($aefChildren)) {
+			$attrs['class'] = (empty($attrs['class']) ? '':$attrs['class'].' ').'with-depcy';
 		}
+
+		$texts = array();
+		$vals = array();
+		$chk_attrs = array();
+		$attrs_100 = array();
+
 		for ($i=0; $i<count($arr); $i++) {
-			$chk_attrs = array('type'=>'checkbox', 'name'=>'extra_fields['.$extra_field_id.'][]', 'id'=>'extra_fields'.$arr[$i]['element_id'], 'value'=>$arr[$i]['element_id']);
-			if (in_array($arr[$i]['element_id'],$checked)) {
-				$chk_attrs['checked']='checked';
+			$aefe = new ArtifactExtraFieldElement($aef, $arr[$i]['element_id']);
+			$vals[$i] = $arr[$i]['element_id'];
+			$texts[$i] = $arr[$i]['element_name'];
+			$chk_attrs[$i] = array();
+			$dependency = '';
+			if (!empty($aefChildren)) {
+				$cElmntArr = $aefe->getChildrenElements();
+				if (!empty($cElmntArr))
+				{
+					foreach ($cElmntArr as $key=>$cElmnt) {
+						$childField = new ArtifactExtraField($this, $key);
+						$dependency .= (empty($dependency) ? '':', ').'{"field":'.$key.', "elmnt": ['.implode(', ', $cElmnt).']}';
+					}
+					$dependency = '['.$dependency.']';
+					$chk_attrs[$i]['data-dependency']=$dependency;
+				}
 			}
-			$return .= html_e('input', array_merge($attrs,$chk_attrs));
-			$return .= html_e('label', array_merge(array('for'=>'extra_fields'.$arr[$i]['element_id']), (empty($attrs['title']) ? array() : array('title'=>$attrs['title']))), $arr[$i]['element_name']);
-			$return .= html_e('br');
 		}
-		return $return;
+		if ($show_100 && !empty($aefChildren)) {
+			$attrs_100['data-dependency'] ='{"fields": ['.implode(', ',$aefChildren).']}';
+		}
+		return html_build_checkboxes_from_arrays($vals,$texts,'extra_fields['.$extra_field_id.']',$checked,false,$show_100,$text_100,$allowed,$attrs,$chk_attrs,$attrs_100);
 	}
 
 	/**
@@ -662,22 +851,47 @@ class ArtifactTypeHtml extends ArtifactType {
 	 * @param	array		$attrs		Array of other attributes
 	 * @return	string		radio multiselectbox
 	 */
-	function renderMultiSelectBox ($extra_field_id,$checked=array(),$show_100=false,$text_100='none', $attrs = array()) {
+	function renderMultiSelectBox($extra_field_id,$checked=array(),$show_100=false,$text_100='none', $allowed=false, $attrs=array()) {
 		if (!$checked) {
 			$checked=array();
 		}
 		if (!is_array($checked)) {
 			$checked = explode(',',$checked);
 		}
-		$keys=array();
-		$vals=array();
 		$arr = $this->getExtraFieldElements($extra_field_id);
+		$aef = new ArtifactExtraField($this, $extra_field_id);
+		$aefChildren = $aef->getChildren();
+		if (!empty($aefChildren)) {
+			$attrs['class'] = (empty($attrs['class']) ? '':$attrs['class'].' ').'with-depcy';
+		}
+		$vals = array();
+		$texts = array();
+		$opt_attrs = array();
+		$attrs_100 = array();
+
 		for ($i=0; $i<count($arr); $i++) {
-			$keys[]=$arr[$i]['element_id'];
-			$vals[]=$arr[$i]['element_name'];
+			$vals[$i]=$arr[$i]['element_id'];
+			$texts[$i]=$arr[$i]['element_name'];
+			$aefe = new ArtifactExtraFieldElement($aef, $arr[$i]['element_id']);
+			if (!empty($aefChildren)) {
+				$cElmntArr = $aefe->getChildrenElements();
+				if (!empty($cElmntArr))
+				{
+					$dependency = '';
+					foreach ($cElmntArr as $key=>$cElmnt) {
+						$childField = new ArtifactExtraField($this, $key);
+						$dependency .= (empty($dependency) ? '':', ').'{"field":'.$key.', "elmnt": ['.implode(', ', $cElmnt).']}';
+					}
+					$dependency = '['.$dependency.']';
+					$opt_attrs[$i]= array( 'data-dependency'=>$dependency);
+				}
+			}
 		}
 		$size = min( count($arr)+1, 15);
-		return html_build_multiple_select_box_from_arrays($keys,$vals,"extra_fields[$extra_field_id][]",$checked,$size,$show_100,$text_100, $attrs);
+		if ($show_100 && !empty($aefChildren)) {
+			$attrs_100 = array( 'data-dependency'=>'{"fields": ['.implode(', ',$aefChildren).']}');
+		}
+		return html_build_multiple_select_box_from_arrays($vals,$texts,"extra_fields[$extra_field_id][]",$checked,$size,$show_100,$text_100, $allowed, $attrs, $opt_attrs, $attrs_100);
 	}
 
 	/**

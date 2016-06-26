@@ -4,6 +4,7 @@
  *
  * Copyright 2010 (c) FusionForge Team
  * Copyright 2014-2015, Franck Villaume - TrivialDev
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -59,21 +60,22 @@ if (!$ac || !is_object($ac)) {
 	echo html_ac(html_ap() - 1);
 
 	echo html_ao('p');
-	if ($ac->getType() == ARTIFACT_EXTRAFIELDTYPE_TEXTAREA) {
+	$efType=$ac->getType();
+	if ($efType == ARTIFACT_EXTRAFIELDTYPE_TEXTAREA) {
 		echo html_e('label', array('for'=>'attribute1'), html_e('b', array(), _('Text Area Columns')).html_e('br'));
 		echo html_e('input', array('type'=>'text', 'id'=>'attribute1', 'name'=>'attribute1', 'value'=>$ac->getAttribute1(), 'size'=>'2', 'maxlength'=>'2'));
 		echo html_ac(html_ap() - 1);
 		echo html_ao('p');
 		echo html_e('label', array('for'=>'attribute2'), html_e('b', array(), _('Text Area Columns')).html_e('br'));
 		echo html_e('input', array('type'=>'text', 'id'=>'attribute2', 'name'=>'attribute2', 'value'=>$ac->getAttribute2(), 'size'=>'2', 'maxlength'=>'2'));
-	} elseif ($ac->getType() == ARTIFACT_EXTRAFIELDTYPE_TEXT || $ac->getType() == ARTIFACT_EXTRAFIELDTYPE_RELATION) {
+	} elseif ($efType == ARTIFACT_EXTRAFIELDTYPE_TEXT || $efType == ARTIFACT_EXTRAFIELDTYPE_RELATION) {
 		echo html_e('label', array('for'=>'attribute1'), html_e('b', array(), _('Text Field Size')).html_e('br'));
 		echo html_e('input', array('type'=>'text', 'id'=>'attribute1', 'name'=>'attribute1', 'value'=>$ac->getAttribute1(), 'size'=>'2', 'maxlength'=>'2'));
 		echo html_ac(html_ap() - 1);
 		echo html_ao('p');
 		echo html_e('label', array('for'=>'attribute2'), html_e('b', array(), _('Text Field Maxlength')).html_e('br'));
 		echo html_e('input', array('type'=>'text', 'id'=>'attribute2', 'name'=>'attribute2', 'value'=>$ac->getAttribute2(), 'size'=>'2', 'maxlength'=>'2'));
-		if ($ac->getType() == ARTIFACT_EXTRAFIELDTYPE_TEXT) {
+		if ($efType == ARTIFACT_EXTRAFIELDTYPE_TEXT) {
 			echo html_ac(html_ap() - 1);
 			echo html_ao('p');
 			echo html_e('label', array('for'=>'pattern'), html_e('b', array(), _('Text Field Pattern')).html_e('br'));
@@ -82,6 +84,22 @@ if (!$ac || !is_object($ac)) {
 	} else {
 		echo html_e('input', array('type'=>'hidden', 'name'=>'attribute1', 'value'=>'0'));
 		echo html_e('input', array('type'=>'hidden', 'name'=>'attribute2', 'value'=>'0'));
+		if (in_array($efType, array(ARTIFACT_EXTRAFIELDTYPE_RADIO, ARTIFACT_EXTRAFIELDTYPE_CHECKBOX,ARTIFACT_EXTRAFIELDTYPE_SELECT,ARTIFACT_EXTRAFIELDTYPE_MULTISELECT))) {
+			$pfarr = $ath->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_RADIO, ARTIFACT_EXTRAFIELDTYPE_CHECKBOX,ARTIFACT_EXTRAFIELDTYPE_SELECT,ARTIFACT_EXTRAFIELDTYPE_MULTISELECT));
+			$parentField = array();
+			$progenyField = $ac->getProgeny();
+			if (is_array($pfarr)) {
+				foreach ($pfarr as $pf) {
+					if ($pf['extra_field_id'] != $id && !in_array($pf['extra_field_id'], $progenyField))
+					$parentField[$pf['extra_field_id']] = $pf['field_name'];
+				}
+			}
+			asort($parentField,SORT_FLAG_CASE | SORT_STRING);
+			echo html_ao('p');
+			echo html_e('label', array('for'=>'parent'), html_e('strong', array(), _('Parent Field')._(':')).html_e('br'));
+			echo html_build_select_box_from_arrays(array_keys($parentField), array_values($parentField), 'parent', $ac->getParent(), true, 'none').html_e('br');
+			echo html_ac(html_ap() - 1);
+		}
 		echo html_e('label', array('for'=>'hide100'), html_e('b', array(), _('Hide the default none value')).html_e('br'));
 		echo html_build_checkbox('hide100','',!$ac->getShow100());
 		echo html_ac(html_ap() - 1);

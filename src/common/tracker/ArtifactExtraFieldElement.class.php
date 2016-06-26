@@ -5,6 +5,7 @@
  * Copyright 2004, Anthony J. Pugliese
  * Copyright 2009, Roland Mas
  * Copyright 2009, Alcatel-Lucent
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -219,6 +220,114 @@ class ArtifactExtraFieldElement extends FFError {
 	 */
 	function getStatusID() {
 		return $this->data_array['status_id'];
+	}
+
+	/**
+	 * getParentElements - return the list of the elements of the parent field on which depends the current element
+	 *
+	 * @return	array of parent elements
+	 */
+	function getParentElements() {
+		$res = db_query_params ('SELECT parent_element_id
+				FROM artifact_extra_field_elements_dependencies
+				WHERE child_element_id=$1',
+				array($this->getID()));
+		$values = array();
+		while($arr = db_fetch_array($res)) {
+			$values[] = $arr['parent_element_id'];
+		}
+		return $values;
+	}
+
+	/**
+	 * getChildrenElements - return the array of the elements of children fields who depend on current element
+	 *
+	 * @return	array of parent elements
+	 */
+	function getChildrenElements($childExtraFieldId = null) {
+		if (is_null($childExtraFieldId)) {
+			$aefChildren = $this->ArtifactExtraField->getChildren();
+			$res = db_query_params ('SELECT extra_field_id, child_element_id
+				FROM artifact_extra_field_elements_dependencies
+				INNER JOIN artifact_extra_field_elements ON child_element_id = element_id
+				WHERE parent_element_id=$1
+				ORDER BY extra_field_id',
+					array($this->getID()));
+		} else {
+			$aefChildren = array($childExtraFieldId);
+			$res = db_query_params ('SELECT extra_field_id, child_element_id
+				FROM artifact_extra_field_elements_dependencies
+				INNER JOIN artifact_extra_field_elements ON child_element_id = element_id
+				WHERE parent_element_id=$1
+				AND extra_field_id=$2
+				ORDER BY extra_field_id',
+					array($this->getID(),
+					$childExtraFieldId));
+		}
+		$values = array();
+		$current = 0;
+		if (is_array($aefChildren)) {
+			foreach ($aefChildren as $aefChild) {
+				$values[$aefChild] = array();
+			}
+			while($arr = db_fetch_array($res)) {
+				$values[$arr['extra_field_id']][] = $arr['child_element_id'];
+			}
+		}
+		return $values;
+	}
+	/**
+	 * saveParentElements - save the list of the elements of the parent field on which depends the current element
+	 *
+	 * @param	elements	array of new parent elements
+	 * @return	bool	always true
+	 */
+	function saveParentElements($elements) {
+		$return = true;
+		// Get current parent elements.
+		$currentElements = $this->getParentElements();
+		// Remove parent elements no longer present.
+		foreach ($currentElements as $element) {
+			if (!in_array($element, $elements)) {
+				if (!$this->_removeParentElement($element)) {
+					$return = false;
+				}
+			}
+		}
+		// Add missing required fields.
+		foreach ($elements as $element) {
+			if (!in_array($element, $currentElements)) {
+				if (!$this->_addParentElement($element)) {
+					$return = false;
+				}
+			}
+		}
+		return $return;
+	}
+
+	function _addParentElement($ParentElementId) {
+		$res = db_query_params ('INSERT INTO artifact_extra_field_elements_dependencies
+				(parent_element_id, child_element_id)
+				VALUES ($1, $2)',
+				array($ParentElementId,
+						$this->getID()));
+		if (!$res) {
+			$this->setError(sprintf(_('Unable to add Parent Element %s for Child Element %s'), $ParentElementId, $this->getID())._(':').' '.db_error());
+			return false;
+		}
+		return true;
+	}
+
+	function _removeParentElement($ParentElementId) {
+		$res = db_query_params ('DELETE FROM artifact_extra_field_elements_dependencies
+				WHERE parent_element_id=$1 AND child_element_id=$2',
+				array($ParentElementId,
+						$this->getID()));
+		if (!$res) {
+			$this->setError(sprintf(_('Unable to remove Parent Element %s for Child Element %s'), $ParentElementId, $this->getID())._(':').' '.db_error());
+			return false;
+		}
+		return true;
 	}
 
 	/**

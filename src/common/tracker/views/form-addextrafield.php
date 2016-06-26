@@ -139,7 +139,7 @@ if ($ath->usesCustomStatuses()) {
 $vals = array_keys($eftypes);
 $texts = array_values($eftypes);
 
-echo html_build_radio_buttons_from_arrays($vals, $texts, 'field_type', '', false, '', false ,'', array('required'=>'required') );
+echo html_build_radio_buttons_from_arrays($vals, $texts, 'field_type', '', false, '', false ,'', false, array('required'=>'required') );
 echo html_ac(html_ap() - 1);
 
 echo html_ao('p');
@@ -151,6 +151,16 @@ echo html_e('input', array('type'=>'text', 'name'=>'attribute2', 'value'=>'80', 
 echo _('Text Field Pattern');
 echo html_e('input', array('type'=>'text', 'name'=>'pattern', 'value'=>'', 'size'=>'80', 'maxlength'=>'255')).html_e('br');
 
+$pfarr = $ath->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_RADIO, ARTIFACT_EXTRAFIELDTYPE_CHECKBOX,ARTIFACT_EXTRAFIELDTYPE_SELECT,ARTIFACT_EXTRAFIELDTYPE_MULTISELECT));
+$parentField = array();
+if (is_array($pfarr)) {
+	foreach ($pfarr as $pf) {
+		$parentField[$pf['extra_field_id']] = $pf['field_name'];
+	}
+}
+asort($parentField,SORT_FLAG_CASE | SORT_STRING);
+echo _('Parent Field');
+echo html_build_select_box_from_arrays(array_keys($parentField), array_values($parentField), 'parent', null, true, 'none').html_e('br');
 echo _('Hide the default none value');
 echo html_build_checkbox('hide100','',false).html_e('br');
 echo _('Label for the none value');

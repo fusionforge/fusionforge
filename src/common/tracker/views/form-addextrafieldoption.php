@@ -61,11 +61,11 @@ global $HTML;
 					if ($efType == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 						$cells[] = array($ath->getStatusName($efearr[$i]['status_id']));
 					}
-					$content = util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&boxid='.$boxid.'&id='.$efearr[$i]['element_id'].'&updownorder_opt=1&new_pos='.(($i == 0)? $i + 1 : $i), html_image('ic/btn_up.png','19','18',array('alt'=>'Up')));
-					$content .= util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&boxid='.$boxid.'&id='.$efearr[$i]['element_id'].'&updownorder_opt=1&new_pos='.(($i == $rows - 1)? $i + 1 : $i + 2), html_image('ic/btn_down.png','19','18',array('alt'=>'Down')));
+					$content = util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&boxid='.$boxid.'&id='.$efearr[$i]['element_id'].'&updownorder_opt=1&new_pos='.(($i == 0)? $i + 1 : $i), html_image('ic/btn_up.png','19','18',array('alt'=>'Up', 'title'=>_('Move Up this custom field element'))));
+					$content .= util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&boxid='.$boxid.'&id='.$efearr[$i]['element_id'].'&updownorder_opt=1&new_pos='.(($i == $rows - 1)? $i + 1 : $i + 2), html_image('ic/btn_down.png','19','18',array('alt'=>'Down', 'title'=>_('Move Down this custom field element'))));
 					$cells[] = array($content, 'class'=>'align-center');
 					$cells[] = array($efearr[$i]['element_name']);
-					$content = util_make_link('/tracker/admin/?update_opt=1&id='.$efearr[$i]['element_id'].'&boxid='.$boxid.'&group_id='.$group_id.'&atid='. $ath->getID(), html_image('ic/forum_edit.gif','37','15',array('alt'=>_('Edit'))));
+					$content = util_make_link('/tracker/admin/?update_opt=1&id='.$efearr[$i]['element_id'].'&boxid='.$boxid.'&group_id='.$group_id.'&atid='. $ath->getID(), html_image('ic/configure.png','22','22',array('alt'=>_('Edit'), 'title'=>_('Edit custom field element'))));
 					$cells[] = array($content, 'class'=>'align-center');
 					echo $HTML->multiTableRow($row_attrs, $cells);
 				}

@@ -103,9 +103,10 @@ class ArtifactExtraField extends FFError {
 	 * @param	string	$show100label	The label used for the 100 value if displayed
 	 * @param	string	$description	Description used for help text.
 	 * @param	string	$pattern	A regular expression to check the field.
+	 * @param	int	$parent		Parent extra field id.
 	 * @return	bool	true on success / false on failure.
 	 */
-	function create($name, $field_type, $attribute1, $attribute2, $is_required = 0, $alias = '', $show100 = true, $show100label = 'none', $description = '', $pattern='') {
+	function create($name, $field_type, $attribute1, $attribute2, $is_required = 0, $alias = '', $show100 = true, $show100label = 'none', $description = '', $pattern='', $parent=100) {
 		//
 		//	data validation
 		//
@@ -159,8 +160,8 @@ class ArtifactExtraField extends FFError {
 		}
 
 		db_begin();
-		$result = db_query_params ('INSERT INTO artifact_extra_field_list (group_artifact_id, field_name, field_type, attribute1, attribute2, is_required, alias, show100, show100label, description, pattern)
-			VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)',
+		$result = db_query_params ('INSERT INTO artifact_extra_field_list (group_artifact_id, field_name, field_type, attribute1, attribute2, is_required, alias, show100, show100label, description, pattern, parent)
+			VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)',
 					   array ($this->ArtifactType->getID(),
 							  htmlspecialchars($name),
 							  $field_type,
@@ -171,7 +172,8 @@ class ArtifactExtraField extends FFError {
 							  $show100,
 							  $show100label,
 							  $description,
-							  $pattern));
+							  $pattern,
+							  $parent));
 
 		if ($result && db_affected_rows($result) > 0) {
 			$this->clearError();
@@ -317,6 +319,58 @@ class ArtifactExtraField extends FFError {
 	}
 
 	/**
+	 * getParent - get the parent field id for select/multiselect/radio/check field.
+	 *
+	 * @return	string	The parent.
+	 */
+	function getParent() {
+		return $this->data_array['parent'];
+	}
+
+	/**
+	 * getChildren - get children fields id for a select/multiselect/radio/check field.
+	 *
+	 * @return	array	Children.
+	 */
+	function getChildren() {
+
+		$id = $this->getID();
+		$return = array();
+		$res = db_query_params ('SELECT extra_field_id FROM artifact_extra_field_list WHERE parent=$1',
+				array ($id)) ;
+		if (!$res) {
+			$this->setError(_('Invalid ArtifactExtraField ID'));
+			return $return;
+		}
+		while ($row = db_fetch_array($res)) {
+			$return[] = $row['extra_field_id'];
+		}
+		return $return;
+	}
+
+	/**
+	 * getProgeny - get progeny fields id for a select/multiselect/radio/check field.
+	 *
+	 * @return	array	Progeny.
+	 */
+	function getProgeny() {
+		$return = array();
+		$childrenArr = $this->getChildren();
+		if (is_array($childrenArr)) {
+			$return = $childrenArr;
+			$at = $this->ArtifactType;
+			foreach ($childrenArr as $child) {
+				$childObj = new ArtifactExtraField($at,$child);
+				$childProgenyArr = $childObj->getProgeny();
+				if (is_array($childProgenyArr)) {
+					$return = array_merge($return, $childProgenyArr);
+				}
+			}
+		}
+		return $return;
+	}
+
+	/**
 	 * getShow100 - get the show100 field.
 	 *
 	 * @return	int	The show100 attribute.
@@ -407,6 +461,49 @@ class ArtifactExtraField extends FFError {
 	}
 
 	/**
+	 * getAllowedValues - Get the list of allowed values for this extra field
+	 *
+	 * @param	string|array	$parentValues	Id or id list of selected parent values.
+	 * @return	array|bool
+	 */
+	function getAllowedValues($parentValues) {
+
+		$parentId = $this->getParent();
+		if ($parentId=='100') {
+			return false;
+		}
+		if ($this->getType() != ARTIFACT_EXTRAFIELDTYPE_SELECT &&
+				$this->getType() != ARTIFACT_EXTRAFIELDTYPE_MULTISELECT &&
+				$this->getType() != ARTIFACT_EXTRAFIELDTYPE_RADIO &&
+				$this->getType() != ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) {
+			return false;
+		}
+		if (empty($parentValues) || $parentValues=='100') {
+			return false;
+		}
+
+		if (is_array($parentValues)) {
+			if (count($parentValues)==1 && implode('',$parentValues)=='100' ) {
+				return false;
+			}
+			$res = db_query_params ('SELECT child_element_id FROM artifact_extra_field_elements
+										INNER JOIN artifact_extra_field_elements_dependencies ON child_element_id = element_id
+										WHERE extra_field_id=$1 AND parent_element_id IN ($2)',
+					array ($this->getID(), implode(', ', $parentValues)));
+		} else {
+			$res = db_query_params ('SELECT child_element_id FROM artifact_extra_field_elements
+										INNER JOIN artifact_extra_field_elements_dependencies ON child_element_id = element_id
+										WHERE extra_field_id=$1 AND parent_element_id=$2',
+					array ($this->getID(), $parentValues));
+		}
+		$return = array();
+		while ($row = db_fetch_array($res)) {
+			$return[] = $row['child_element_id'];
+		}
+		return $return;
+	}
+
+	/**
 	 * update - update a row in the table used to store box names
 	 * for a tracker.  This function is only to update rowsf
 	 * for boxes configured by the admin.
@@ -418,9 +515,12 @@ class ArtifactExtraField extends FFError {
 	 * @param	string	$alias		Alias for this field
 	 * @param	int	$show100	True or false whether the 100 value is displayed or not
 	 * @param	string	$show100label	The label used for the 100 value if displayed
+	 * @param	string	$description	Description used for help text.
+	 * @param	string	$pattern	A regular expression to check the field.
+	 * @param	int	$parent		Parent extra field id.
 	 * @return	bool	success.
 	 */
-	function update($name, $attribute1, $attribute2, $is_required = 0, $alias = "", $show100 = true, $show100label = 'none', $description = '', $pattern='') {
+	function update($name, $attribute1, $attribute2, $is_required = 0, $alias = "", $show100 = true, $show100label = 'none', $description = '', $pattern='', $parent=100) {
 		if (!forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
@@ -432,6 +532,7 @@ class ArtifactExtraField extends FFError {
 			$this->setError(_('A field name is required'));
 			return false;
 		}
+
 		$res = db_query_params ('SELECT field_name FROM artifact_extra_field_list
 				WHERE field_name=$1 AND group_artifact_id=$2 AND extra_field_id !=$3',
 			array($name,
@@ -450,7 +551,6 @@ class ArtifactExtraField extends FFError {
 		if (!($alias = $this->generateAlias($alias,$name))) {
 			return false;
 		}
-
 		$result = db_query_params ('UPDATE artifact_extra_field_list
 			SET field_name = $1,
 			description = $2,
@@ -461,8 +561,9 @@ class ArtifactExtraField extends FFError {
 			show100 = $7,
 			show100label = $8,
 			pattern = $9,
-			WHERE extra_field_id = $10
-			AND group_artifact_id = $11',
+			parent = $10
+			WHERE extra_field_id = $11
+			AND group_artifact_id = $12',
 					   array (htmlspecialchars($name),
 							  $description,
 							  $attribute1,
@@ -472,6 +573,7 @@ class ArtifactExtraField extends FFError {
 							  $show100,
 							  $show100label,
 							  $pattern,
+							  $parent,
 							  $this->getID(),
 							  $this->ArtifactType->getID())) ;
 		if ($result && db_affected_rows($result) > 0) {

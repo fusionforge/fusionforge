@@ -8,6 +8,7 @@
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
  * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -624,18 +625,18 @@ class ArtifactType extends FFError {
 
 		$g = group_get_object(forge_get_config('template_group'));
 		if (!$g || !is_object($g)) {
-			$this->setError('Could Not Get Template Group');
+			$this->setError(_('Could Not Get Template Group'));
 			return false;
 		} elseif ($g->isError()) {
-			$this->setError('Template Group Error '.$g->getErrorMessage());
+			$this->setError(_('Template Group Error').' '.$g->getErrorMessage());
 			return false;
 		}
 		$at = new ArtifactType($g,$clone_tracker_id);
 		if (!$at || !is_object($at)) {
-			$this->setError('Could Not Get Tracker To Clone');
+			$this->setError(_('Could Not Get Tracker To Clone'));
 			return false;
 		} elseif ($at->isError()) {
-			$this->setError('Clone Tracker Error '.$at->getErrorMessage());
+			$this->setError(_('Clone Tracker Error').' '.$at->getErrorMessage());
 			return false;
 		}
 		$efs = $at->getExtraFields();
@@ -647,6 +648,8 @@ class ArtifactType extends FFError {
 		//	Iterate list of extra fields
 		//
 		db_begin();
+		$newEFIds = array();
+		$newEFElIds = array();
 		foreach ($efs as $ef) {
 			//new field in this tracker
 			$nef = new ArtifactExtraField($this);
@@ -657,11 +660,13 @@ class ArtifactType extends FFError {
 					$current_ef_todelete->delete(true,true);
 				}
 			}
-			if (!$nef->create(util_unconvert_htmlspecialchars($ef['field_name']), $ef['field_type'], $ef['attribute1'], $ef['attribute2'], $ef['is_required'], $ef['alias'], $ef['description'], $ef['pattern'])) {
-				$this->setError('Error Creating New Extra Field: '.$nef->getErrorMessage());
+			if (!$nef->create(util_unconvert_htmlspecialchars($ef['field_name']), $ef['field_type'], $ef['attribute1'], $ef['attribute2'], $ef['is_required'], $ef['alias'], $ef['show100'], $ef['show100label'], $ef['description'], $ef['pattern'], 100)) {
+				$this->setError(_('Error Creating New Extra Field')._(':').' '.$nef->getErrorMessage());
 				db_rollback();
 				return false;
 			}
+			$newEFIds[$ef['extra_field_id']] = $nef->getID();
+			$newEFElIds[$ef['extra_field_id']] = array();
 			//
 			//	Iterate the elements
 			//
@@ -672,11 +677,60 @@ class ArtifactType extends FFError {
 				$nel = new ArtifactExtraFieldElement($nef);
 				if (!$nel->create(util_unconvert_htmlspecialchars($el['element_name']), $el['status_id'])) {
 					db_rollback();
-					$this->setError('Error Creating New Extra Field Element: '.$nel->getErrorMessage());
+					$this->setError(_('Error Creating New Extra Field Element')._(':').' '.$nel->getErrorMessage());
 					return false;
+				}
+				$newEFElIds[$ef['extra_field_id']][$el['element_id']] = $nel->getID();
+			}
+		}
+		foreach ($newEFIds as $oldEFId=>$newEFId) {
+			$oef = new ArtifactExtraField($this,$oldEFId);
+			$nef = new ArtifactExtraField($this,$newEFId);
+			if ($oef->getParent() != 100) {
+				$nef->update($nef->getName(),
+							$nef->getAttribute1(),
+							$nef->getAttribute2(),
+							$nef->isRequired(),
+							$nef->getAlias(),
+							$nef->getShow100(),
+							$nef->getShow100label(),
+							$nef->getDescription(),
+							$nef->getPattern(),
+							$newEFIds[$oef->getParent()]);
+				if ($nef->isError()) {
+					db_rollback();
+					$this->setError(_('Error Updating New Extra Field Parent')._(':').' '.$nef->getErrorMessage());
+					return false;
+				}
+
+				foreach ($newEFElIds[$oldEFId] as $oldEFElId=>$newEFElId) {
+					$oel = new ArtifactExtraFieldElement($oef,$oldEFElId);
+					if ($oel->isError()) {
+						db_rollback();
+						$this->setError($oel->getErrorMessage());
+						return false;
+					}
+					$nel = new ArtifactExtraFieldElement($nef,$newEFElId);
+					if ($nel->isError()) {
+						db_rollback();
+						$this->setError($nel->getErrorMessage());
+						return false;
+					}
+					$oPEls = $oel->getParentElements();
+					$nPEls = array();
+					foreach ($oPEls as $oPEl) {
+						$nPEls[]=$newEFElIds[$oef->getParent()][$oPEl];
+					}
+					$nel->saveParentElements($nPEls);
+					if ($nel->isError()) {
+						db_rollback();
+						$this->setError(_('Error Saving New Extra Field Parent Elements').' '.$nel->getErrorMessage());
+						return false;
+					}
 				}
 			}
 		}
+
 		db_commit();
 		return true;
 

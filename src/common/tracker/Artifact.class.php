@@ -8,6 +8,7 @@
  * Copyright (C) 2009-2013 Alain Peyrat, Alcatel-Lucent
  * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
  * Copyright 2014-2015, Franck Villaume - TrivialDev
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -1338,6 +1339,43 @@ class Artifact extends FFError {
 					}
 				}
 			}
+
+			// check parent field
+			if ($type == ARTIFACT_EXTRAFIELDTYPE_SELECT ||
+					$type == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT ||
+					$type == ARTIFACT_EXTRAFIELDTYPE_RADIO ||
+					$type == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) {
+				$allowed = false;
+				if (!is_null($ef[$efid]['parent']) && !empty($ef[$efid]['parent']) && $ef[$efid]['parent']!='100') {
+					$aefParentId = $ef[$efid]['parent'];
+					$selectedElmnts = (isset($extra_fields[$aefParentId]) ? $extra_fields[$aefParentId] : '');
+					$aef = new ArtifactExtraField($this->ArtifactType,$efid);
+					$allowed = $aef->getAllowedValues($selectedElmnts);
+				}
+
+				if (is_array($allowed)) {
+					if (($type == ARTIFACT_EXTRAFIELDTYPE_RADIO) || ($type==ARTIFACT_EXTRAFIELDTYPE_SELECT)) {
+						if ($extra_fields[$efid]!='100' && !in_array($extra_fields[$efid],$allowed)) {
+							//$aef = new ArtifactExtraField($this->ArtifactType,$efid);
+							$aefe = new ArtifactExtraFieldElement($aef,$extra_fields[$efid]);
+							$this->setError(sprintf(_('"%1$s" value of the field "%2$s", is not allowed by "%3$s" field values'), $aefe->getName(), $ef[$efid]['field_name'], $ef[$aefParentId]['field_name']));
+							return false;
+						}
+					} else {
+						if (is_array($extra_fields[$efid])) {
+							//$aef = new ArtifactExtraField($this->ArtifactType,$efid);
+							foreach ($extra_fields[$efid] as $val) {
+								if ($val!='100' && !in_array($val,$allowed)) {
+									$aefe = new ArtifactExtraFieldElement($aef,$val);
+									$this->setError(sprintf(_('"%1$s" value of the field "%2$s", is not allowed by "%3$s" field values'), $aefe->getName(), $ef[$efid]['field_name'], $ef[$aefParentId]['field_name']));
+									return false;
+								}
+							}
+						}
+					}
+				}
+			}
+
 
 			// check pattern for text fields
 			if ($type == ARTIFACT_EXTRAFIELDTYPE_TEXT && !empty($ef[$efid]['pattern']) && !empty($extra_fields[$efid]) && !preg_match('/'.$ef[$efid]['pattern'].'/', $extra_fields[$efid])) {
