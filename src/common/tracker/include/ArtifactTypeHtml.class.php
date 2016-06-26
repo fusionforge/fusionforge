@@ -6,7 +6,7 @@
  * Copyright 2010 (c) Fusionforge Team
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2016, Franck Villaume - TrivialDev
  * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
@@ -208,11 +208,10 @@ class ArtifactTypeHtml extends ArtifactType {
 						// Convert the values (ids) to names in the ids order.
 						$new = array();
 						for ($j=0; $j<count($arr); $j++) {
-							if (is_array($value)) {
-								if (in_array($arr[$j]['element_id'],$value))
-									$new[]= $arr[$j]['element_name'];
+							if (is_array($value) && in_array($arr[$j]['element_id'],$value)) {
+								$new[]= $arr[$j]['element_name'];
 							} elseif ($arr[$j]['element_id'] === $value) {
-									$new[] = $arr[$j]['element_name'];
+								$new[] = $arr[$j]['element_name'];
 							}
 						}
 						$value = join('<br />', $new);
@@ -292,9 +291,7 @@ class ArtifactTypeHtml extends ArtifactType {
 
 				// Special treatment for the initial step (Submit).
 				// In this case, the initial value is the first value.
-				if ($selected === true) {
-					$selected_node = 100;
-				} elseif (isset($selected[$efarr[$i]['extra_field_id']]) && $selected[$efarr[$i]['extra_field_id']]) {
+				if (isset($selected[$efarr[$i]['extra_field_id']]) && $selected[$efarr[$i]['extra_field_id']]) {
 					$selected_node = $selected[$efarr[$i]['extra_field_id']];
 				} else {
 					$selected_node = 100;
@@ -458,23 +455,19 @@ class ArtifactTypeHtml extends ArtifactType {
 			$name = $efarr[$i]['field_name'].($is_required ? utils_requiredField() : '')._(': ');
 			$name = '<strong>'.$name.'</strong>';
 
-			if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_SELECT) {
-
-				$return .= '
-					<td class="halfwidth top">'.$name.'<br />{$'.$efarr[$i]['field_name'].'}</td>';
-
-			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) {
-
-				$return .= '
-					<td class="halfwidth top">'.$name.'<br />{$'.$efarr[$i]['field_name'].'}</td>';
-
-			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RADIO) {
+			if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_SELECT ||
+				$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX ||
+				$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RADIO ||
+				$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT ||
+				$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_STATUS ||
+				$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_USER) {
 
 				$return .= '
 					<td class="halfwidth top">'.$name.'<br />{$'.$efarr[$i]['field_name'].'}</td>';
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_TEXT ||
-				$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_INTEGER) {
+				$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_INTEGER ||
+				$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RELATION) {
 
 				//text fields might be really wide, so need a row to themselves.
 				if (($col_count == 1) && ($efarr[$i]['attribute1'] > 30)) {
@@ -504,35 +497,6 @@ class ArtifactTypeHtml extends ArtifactType {
 				$return .= '
 					<td style="width:'.(50*$colspan).'%" colspan="'.$colspan.'" class="top">'.$name.'{$PostName:'.$efarr[$i]['field_name'].'}<br />{$'.$efarr[$i]['field_name'].'}</td>';
 
-			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT) {
-
-				$return .= '
-					<td class="halfwidth top">'.$name.'<br />{$'.$efarr[$i]['field_name'].'}</td>';
-
-			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
-
-				$return .= '
-					<td class="halfwidth top">'.$name.'<br />{$'.$efarr[$i]['field_name'].'}</td>';
-
-			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RELATION) {
-
-				//text fields might be really wide, so need a row to themselves.
-				if (($col_count == 1) && ($efarr[$i]['attribute1'] > 30)) {
-					$colspan=2;
-					$return .= '
-					<td></td>
-			</tr>
-			<tr>';
-				} else {
-					$colspan=1;
-				}
-				$return .= '
-					<td style="width:'.(50*$colspan).'%" colspan="'.$colspan.'" class="top">'.$name.'{$PostName:'.$efarr[$i]['field_name'].'}<br />{$'.$efarr[$i]['field_name'].'}</td>';
-
-			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_USER) {
-
-				$return .= '
-					<td class="halfwidth top">'.$name.'<br />{$'.$efarr[$i]['field_name'].'}</td>';
 			}
 
 			$col_count++;
@@ -565,7 +529,7 @@ class ArtifactTypeHtml extends ArtifactType {
 	 * @param	string		$text_any
 	 * @param	bool		$allowed
 	 * @param	array		$attrs
-	 * @return string HTML code for the box and choices
+	 * @return	string		HTML code for the box and choices
 	 */
 	function renderSelect ($extra_field_id,$checked='xzxz',$show_100=false,$text_100='none',$show_any=false,$text_any='Any', $allowed=false, $attrs = array ()) {
 		if ($text_100 == 'none'){
@@ -592,7 +556,7 @@ class ArtifactTypeHtml extends ArtifactType {
 	 * @param	string		$text_any
 	 * @param	bool		$allowed
 	 * @param	array		$attrs
-	 * @return string HTML code for the box and choices
+	 * @return	string		HTML code for the box and choices
 	 */
 	function renderUserField ($extra_field_id,$checked='xzxz',$show_100=false,$text_100='none',$show_any=false,$text_any='Any', $allowed=false, $attrs = array ()) {
 		if ($text_100 == 'none' || $text_100 == 'nobody'){
@@ -653,7 +617,7 @@ class ArtifactTypeHtml extends ArtifactType {
 	 * @param	bool|string	$show_100	Whether to show the '100 row'
 	 * @param	string		$text_100	What to call the '100 row'
 	 * @param	array		$attrs		Array of other attributes
-	 * @return string radio buttons
+	 * @return	string		radio buttons
 	 */
 	function renderCheckbox ($extra_field_id,$checked=array(),$show_100=false,$text_100='none', $attrs = array()) {
 		if ($text_100 == 'none'){
@@ -713,7 +677,7 @@ class ArtifactTypeHtml extends ArtifactType {
 			$vals[]=$arr[$i]['element_name'];
 		}
 		$size = min( count($arr)+1, 15);
-			return html_build_multiple_select_box_from_arrays($keys,$vals,"extra_fields[$extra_field_id][]",$checked,$size,$show_100,$text_100, $attrs);
+		return html_build_multiple_select_box_from_arrays($keys,$vals,"extra_fields[$extra_field_id][]",$checked,$size,$show_100,$text_100, $attrs);
 	}
 
 	/**
@@ -749,9 +713,8 @@ class ArtifactTypeHtml extends ArtifactType {
 		// Convert artifact id to links.
 		$html_contents = preg_replace_callback('/\b(\d+)\b/', create_function('$matches', 'return _artifactid2url($matches[1], \'title\');'), $contents);
 		$edit_contents = $this->renderTextField ($extra_field_id,$contents,$size,$maxlength);
-		$return = html_e('div',array_merge(array( 'id'=>'edit'.$extra_field_id, 'style'=>'display: none', 'title'=>_('Tip: Enter a space-separated list of artifact ids ([#NNN] also accepted)')), $attrs), $edit_contents);
-		$return .=html_e('div',array_merge(array( 'id'=>'show'.$extra_field_id, 'style'=>'display: block'), $attrs), $html_contents);
-		return $return;
+		return html_e('div',array_merge(array( 'id'=>'edit'.$extra_field_id, 'style'=>'display: none', 'title'=>_('Tip: Enter a space-separated list of artifact ids ([#NNN] also accepted)')), $attrs), $edit_contents)
+			.html_e('div',array_merge(array( 'id'=>'show'.$extra_field_id, 'style'=>'display: block'), $attrs), $html_contents);
 	}
 
 	/**
