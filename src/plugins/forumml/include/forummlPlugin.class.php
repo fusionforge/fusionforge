@@ -25,7 +25,7 @@ class ForumMLPlugin extends Plugin {
 		parent::__construct($id);
 		$this->name = "forumml" ;
 		$this->text = "ForumML" ; // To show in the tabs, use...
-		$this->_addHook("user_personal_links");//to make a link to the user�s personal part of the plugin
+		$this->_addHook("user_personal_links");//to make a link to the user's personal part of the plugin
 		$this->_addHook("usermenu") ;
 		$this->_addHook("groupisactivecheckbox") ; // The "use ..." checkbox in editgroupinfo
 		$this->_addHook("groupisactivecheckboxpost") ; //

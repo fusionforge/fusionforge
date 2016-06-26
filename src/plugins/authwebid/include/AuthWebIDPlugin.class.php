@@ -391,7 +391,7 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 		global $G_SESSION, $HTML;
 		$text = $this->text; // this is what shows in the tab
 		if ($G_SESSION->usesPlugin($this->name)) {
-			//$param = '?type=user&id=' . $G_SESSION->getId() . "&pluginname=" . $this->name; // we indicate the part we�re calling is the user one
+			//$param = '?type=user&id=' . $G_SESSION->getId() . "&pluginname=" . $this->name; // we indicate the part we're calling is the user one
 			echo $HTML->PrintSubMenu (array ($text), array ('/plugins/authwebid/index.php'), array(_('coin pan')));
 		}
 	}

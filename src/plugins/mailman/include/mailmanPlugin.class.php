@@ -40,7 +40,7 @@ class mailmanPlugin extends Plugin {
 		//$this->setScope(Plugin::SCOPE_PROJECT);
 		$this->name = "mailman" ;
 		$this->text = "Mailman" ; // To show in the tabs, use...
-		$this->_addHook("user_personal_links");//to make a link to the user�s personal part of the plugin
+		$this->_addHook("user_personal_links");//to make a link to the user's personal part of the plugin
 		$this->_addHook("usermenu") ;
 		$this->_addHook("groupmenu");	// To put into the project tabs
 		$this->_addHook("groupisactivecheckbox") ; // The "use ..." checkbox in editgroupinfo
