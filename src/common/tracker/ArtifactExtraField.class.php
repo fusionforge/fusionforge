@@ -146,7 +146,7 @@ class ArtifactExtraField extends FFError {
 				$this->setError(_('This Tracker already uses custom statuses'));
 				return false;
 			}
-		}  elseif ($field_type == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
+		}  elseif ($field_type == ARTIFACT_EXTRAFIELDTYPE_USER) {
 			$show100label='nobody';
 		}
 		if ($is_required) {
