@@ -178,7 +178,7 @@ class Widget_HomeDetailActivityMostActiveProjectWeek extends Widget {
 				echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($j++, true)), $cells);
 			}
 			if ($displayTableTop) {
-				echo $HTML->listTableBottom($theader);
+				echo $HTML->listTableBottom();
 			}
 		} else {
 			echo $HTML->information(_('No activity during the last week'));
