@@ -567,9 +567,10 @@ if (isset($params['group']) && $params['group']) {
 	 * boxTop() - Top HTML box.
 	 *
 	 * @param	string	$title	Box title
+	 * @param   string  $id
 	 * @return	string	the html code
 	 */
-	function boxTop($title) {
+	function boxTop($title, $id = '') {
 		return '
 			<!-- Box Top Start -->
 
@@ -592,9 +593,10 @@ if (isset($params['group']) && $params['group']) {
 	 * boxMiddle() - Middle HTML box.
 	 *
 	 * @param	string	$title	Box title
+	 * @param   string  $id
 	 * @return	string	The html code
 	 */
-	function boxMiddle($title) {
+	function boxMiddle($title, $id = '') {
 		return '
 			<!-- Box Middle Start -->
 			</td>
