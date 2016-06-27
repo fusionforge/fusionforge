@@ -7,6 +7,7 @@
  * Copyright 2010, FusionForge Team
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright 2012-2016, Franck Villaume - TrivialDev
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -44,11 +45,11 @@ if (getStringFromRequest('post_changes')) {
 	if (getStringFromRequest('add_at')) {
 		$res=new ArtifactTypeHtml($group);
 		if (!$res->create($name,$description,$email_all,$email_address,
-			$due_period,$use_resolution,$submit_instructions,$browse_instructions)) {
+				$due_period,$use_resolution,$submit_instructions,$browse_instructions)) {
 			exit_error($res->getErrorMessage(),'tracker');
 		} else {
 			$feedback .= _('Tracker created successfully');
-			$feedback .= '<br/>';
+			$feedback .= html_e('br');
 			$feedback .= _("Please configure also the roles (by default, it's “No Access”)");
 		}
 		$group->normalizeAllRoles () ;
@@ -91,8 +92,7 @@ if (!isset($at_arr) || !$at_arr || count($at_arr) < 1) {
 	echo $HTML->warning_msg(_('No trackers found'));
 } else {
 
-	echo '
-	<p>'._('Choose a data type and you can set up prefs, categories, groups, users, and permissions').'.</p>';
+	echo html_e('p', array(), _('Choose a data type and you can set up prefs, categories, groups, users, and permissions').'.');
 
 	/*
 		Put the result set (list of forums for this group) into a column with folders
@@ -120,41 +120,59 @@ if (!isset($at_arr) || !$at_arr || count($at_arr) < 1) {
 //	Set up blank ArtifactType
 //
 
-if (forge_check_perm ('tracker_admin', $group->getID())) { ?>
-	<h3><?php echo _('Create a new tracker.') ?></h3>
-	<p><?php echo _('You can use this system to track virtually any kind of data, with each tracker having separate user, group, category, and permission lists. You can also easily move items between trackers when needed.') ?></p>
-	<p><?php echo _('Trackers are referred to as “Artifact Types” and individual pieces of data are “Artifacts”. “Bugs” might be an Artifact Type, whiles a bug report would be an Artifact. You can create as many Artifact Types as you want, but remember you need to set up categories, groups, and permission for each type, which can get time-consuming.') ?></p>
+if (forge_check_perm ('tracker_admin', $group->getID())) {
+	echo html_e('h3', array(), _('Create a new tracker.'));
+	echo html_e('p', array(), _('You can use this system to track virtually any kind of data, with each tracker having separate user, group, category, and permission lists. You can also easily move items between trackers when needed.'));
+	echo html_e('p', array(), _('Trackers are referred to as “Artifact Types” and individual pieces of data are “Artifacts”. “Bugs” might be an Artifact Type, whiles a bug report would be an Artifact. You can create as many Artifact Types as you want, but remember you need to set up categories, groups, and permission for each type, which can get time-consuming.'));
 
-	<?php
 	echo $HTML->openForm(array('method' => 'post', 'action' => '/tracker/admin/?group_id='.$group_id));
-	?>
-	<input type="hidden" name="add_at" value="y" />
-	<p>
-	<?php echo _('<strong> Name:</strong> (examples: meeting minutes, test results, RFP Docs)').utils_requiredField() ?><br />
-	<input type="text" name="name" value="" required="required" /></p>
-	<p>
-	<strong><?php echo _('Description')._(':').utils_requiredField(); ?></strong><br />
-	<input type="text" name="description" value="" size="50" required="required" /></p>
-	<p>
-	<strong><?php echo _('Send email on new submission to address')._(':'); ?></strong><br />
-	<input type="text" name="email_address" value="" /></p>
-	<p>
-	<input type="checkbox" name="email_all" value="1" /> <strong><?php echo _('Send email on all changes') ?></strong></p>
-	<p>
-	<strong><?php echo _('Days till considered overdue')._(':'); ?></strong><br />
-	<input type="text" name="due_period" value="30" /></p>
-	<p>
-	<strong><?php echo _('Days till pending tracker items time out')._(':'); ?></strong><br />
-	<input type="text" name="status_timeout" value="14" /></p>
-	<p>
-	<strong><?php echo _('Free form text for the “Submit New” page')._(':'); ?></strong><br />
-	<textarea name="submit_instructions" rows="10" cols="55"></textarea></p>
-	<p>
-	<strong><?php echo _('Free form text for the Browse page')._(':'); ?></strong><br />
-	<textarea name="browse_instructions" rows="10" cols="55"></textarea></p>
-	<p>
-	<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
-	<?php
+
+	echo html_e('input', array('type'=>'hidden', 'name'=>'add_at', 'value'=>'y'));
+
+	echo html_ao('p');
+	echo html_e('label', array('for'=>'name'), html_e('strong',array(), _('Name')._(':')).' '._('(examples: meeting minutes, test results, RFP Docs)').utils_requiredField()).html_e('br');
+	echo html_e('input', array('type'=>'text', 'name'=>'name', 'value'=>'', 'required'=>'required'));
+	echo html_ac(html_ap()-1);
+
+	echo html_ao('p');
+	echo html_e('label', array('for'=>'description'), html_e('strong',array(), _('Description')._(':').utils_requiredField())).html_e('br');
+	echo html_e('input', array('type'=>'text', 'name'=>'description', 'value'=>'', 'size'=>'50', 'required'=>'required'));
+	echo html_ac(html_ap()-1);
+
+	echo html_ao('p');
+	echo html_e('label', array('for'=>'email_address'), html_e('strong',array(), _('Send email on new submission to address')._(':'))).html_e('br');
+	echo html_e('input', array('type'=>'text', 'name'=>'email_address', 'value'=>''));
+	echo html_ac(html_ap()-1);
+
+	echo html_ao('p');
+	echo html_e('input', array('type'=>'checkbox', 'name'=>'email_all', 'value'=>'1'));
+	echo html_e('label', array('for'=>'email_all'), html_e('strong',array(), _('Send email on all changes')));
+	echo html_ac(html_ap()-1);
+
+	echo html_ao('p');
+	echo html_e('label', array('for'=>'due_period'), html_e('strong',array(),  _('Days till considered overdue')._(':'))).html_e('br');
+	echo html_e('input', array('type'=>'text', 'name'=>'due_period', 'value'=>'30'));
+	echo html_ac(html_ap()-1);
+
+	echo html_ao('p');
+	echo html_e('label', array('for'=>'status_timeout'), html_e('strong',array(), _('Days till pending tracker items time out')._(':'))).html_e('br');
+	echo html_e('input', array('type'=>'text', 'name'=>'status_timeout', 'value'=>'14'));
+	echo html_ac(html_ap()-1);
+
+	echo html_ao('p');
+	echo html_e('label', array('for'=>'submit_instructions'), html_e('strong',array(), _('Free form text for the “Submit New” page')._(':'))).html_e('br');
+	echo html_e('textarea', array('name'=>'submit_instructions', 'rows'=>'10', 'cols'=>'55'), '', false);
+	echo html_ac(html_ap()-1);
+
+	echo html_ao('p');
+	echo html_e('label', array('for'=>'browse_instructions'), html_e('strong',array(), _('Free form text for the Browse page')._(':'))).html_e('br');
+	echo html_e('textarea', array('name'=>'browse_instructions', 'rows'=>'10', 'cols'=>'55'), '', false);
+	echo html_ac(html_ap()-1);
+
+	echo html_ao('p');
+	echo html_e('input', array('type'=>'submit', 'name'=>'post_changes', 'value'=>_('Submit')));
+	echo html_ac(html_ap()-1);
+
 	echo $HTML->closeForm();
 }
 
