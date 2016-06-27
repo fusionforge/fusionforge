@@ -874,6 +874,9 @@ class WidgetLayoutManager {
 
 	/**
 	 * compute the differences between two arrays
+	 * @param array $tab1
+	 * @param array $tab2
+	 * @return array
 	 */
 	function _array_diff_names($tab1, $tab2) {
 		$diff = array();
