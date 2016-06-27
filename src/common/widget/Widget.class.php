@@ -121,7 +121,7 @@ require_once $gfcommon.'widget/Widget_HomeVersion.class.php';
 	}
 	function getRssUrl($owner_id, $owner_type) {
 		if ($this->hasRss()) {
-			return '/widgets/widget.php?owner='.$owner_type.$owner_id.'&amp;action=rss&amp;name['. $this->id .']='. $this->getInstanceId();
+			return '/widgets/widget.php?owner='.$owner_type.$owner_id.'&amp;action=rss&amp;name%5B'. $this->id .'%5D='. $this->getInstanceId();
 		} else {
 			return false;
 		}
