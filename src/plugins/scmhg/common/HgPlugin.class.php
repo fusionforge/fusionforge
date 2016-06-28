@@ -644,9 +644,9 @@ Offer DAV or SSH access.");
 	function scm_add_repo(&$params) {
 		$project = $this->checkParams($params);
 		if (!$project) {
-			return false ;
+			return false;
 		}
-		if (! $project->usesPlugin ($this->name)) {
+		if (!$project->usesPlugin($this->name)) {
 			return false;
 		}
 
@@ -668,7 +668,7 @@ Offer DAV or SSH access.");
 					  array($params['group_id'],
 						 $params['repo_name'],
 						 $this->getID()));
-		if (! $result) {
+		if (!$result) {
 			$params['error_msg'] = db_error();
 			return false;
 		}
@@ -732,9 +732,9 @@ Offer DAV or SSH access.");
 		global $HTML;
 		$project = $this->checkParams($params);
 		if (!$project) {
-			return false ;
+			return false;
 		}
-		if (! $project->usesPlugin ($this->name)) {
+		if (!$project->usesPlugin($this->name)) {
 			return false;
 		}
 
