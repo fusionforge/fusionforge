@@ -218,7 +218,7 @@ project independently.");
 					break;
 				}
 			}
-			echo '</div><p />';
+			echo '</div>'."\n";
 		} else {
 			echo $HTML->information(_('No hooks available'));
 		}
@@ -228,7 +228,6 @@ project independently.");
 		$res = db_query_params('SELECT need_update FROM plugin_scmhook WHERE id_group = $1', array($group_id));
 		if (!$res)
 			return 1;
-
 		$row = db_fetch_array($res);
 		return $row['need_update'];
 	}
