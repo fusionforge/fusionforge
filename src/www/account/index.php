@@ -167,13 +167,28 @@ echo $HTML->listTableTop(array(), array(), 'infotable');
 	<?php echo _('Language')._(':'); ?>
 	</td>
 	<td>
-	<?php echo html_get_language_popup ('language',$u->getLanguage()); ?>
+	<?php
+	if ($u->isEditable('language')) {
+		echo html_get_language_popup ('language',$u->getLanguage());
+	} else {
+		print $u->getLanguage();
+	}
+	?>
 	</td>
 </tr>
 
 <tr class="top">
-	<td><?php echo _('Timezone:'); ?></td>
-	<td><?php echo html_get_timezone_popup('timezone', $u->getTimeZone()); ?>
+	<td>
+	<?php echo _('Timezone')._(':'); ?>
+	</td>
+	<td>
+	<?php
+	if ($u->isEditable('timezone')) {
+		echo html_get_timezone_popup('timezone', $u->getTimeZone());
+	} else {
+		print $u->getTimeZone();
+	}
+	?>
 	</td>
 </tr>
 
@@ -188,7 +203,13 @@ echo $HTML->listTableTop(array(), array(), 'infotable');
 	<?php echo _('Country')._(':'); ?>
 	</td>
 	<td>
-	<?php echo html_get_ccode_popup('ccode', $u->getCountryCode()); ?>
+	<?php
+	if ($u->isEditable('ccode')) {
+		echo html_get_ccode_popup('ccode', $u->getCountryCode());
+	} else {
+		print $u->getCountryCode();
+	}
+	?>
 	</td>
 </tr>
 
