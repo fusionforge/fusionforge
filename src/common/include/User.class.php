@@ -522,7 +522,6 @@ Use one below, but make sure it is entered as the single line.)
 				}
 			}
 
-
 			db_begin();
 			$monitorElementsArray = array('artifact', 'artifact_type', 'docdata', 'docgroup', 'forum');
 			foreach ($monitorElementsArray as $monitorElement) {
@@ -1715,6 +1714,99 @@ Email: %3$s
 			util_send_message($admin_email, sprintf(_('New %1$s User'), forge_get_config ('forge_name')), $message);
 			setup_gettext_from_context();
 		}
+		return true;
+	}
+
+	/**
+	 *    isEditable - verify if field name is editable
+	 *
+	 * @param string $fieldName Field name
+	 * @return    boolean
+	 */
+	function isEditable($fieldName) {
+		if (!isset($this->data_array['uneditable'])) {
+			$flag = true;
+		} else {
+			$uneditable = unserialize($this->data_array['uneditable']);
+			if (is_array($uneditable) && in_array($fieldName, $uneditable)) {
+				$flag = false;
+			} else {
+				$flag = true;
+			}
+		}
+
+		if ($this->refresh) {
+			$flag = !$flag;
+		}
+
+		return $flag;
+	}
+
+	/**
+	 * isHidden - verify if field name is hidden
+	 *
+	 * @param string $fieldName Field name
+	 * @return    boolean
+	 */
+	function isHidden($fieldName) {
+		if (!isset($this->data_array['hidden']))
+			return false;
+
+		$hidden = unserialize($this->data_array['hidden']);
+		if (is_array($hidden) && in_array($fieldName, $hidden)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * setUneditable - set the list of uneditable fields of this user.
+	 *
+	 * @param    array $data	array of uneditable field names
+	 * @return    boolean.
+	 */
+	function setUneditable($data) {
+		if (!is_array($data)) {
+			$this->setError('Error: Cannot Update list of uneditable fields: not an array');
+			return false;
+		}
+
+		$serializedData = serialize($data);
+		$sql = "UPDATE users
+				SET uneditable='".$serializedData."'
+				WHERE user_id='".$this->getID()."'";
+		$res = db_query($sql);
+		if (!$res || db_affected_rows($res) < 1) {
+			$this->setError('Error: Cannot Update list of uneditable fields: '.db_error());
+			return false;
+		}
+		$this->data_array['uneditable'] = $serializedData;
+		return true;
+	}
+
+	/**
+	 * setHidden - set the list of hidden fields of this user.
+	 *
+	 * @param array $data Array of hidden field names
+	 * @return    boolean.
+	 */
+	function setHidden($data) {
+		if (!is_array($data)) {
+			$this->setError('Error: Cannot Update list of hidden fields: not an array');
+			return false;
+		}
+
+		$serializedData = serialize($data);
+		$sql = "UPDATE users
+				SET hidden='".$serializedData."'
+				WHERE user_id='".$this->getID()."'";
+		$res = db_query($sql);
+		if (!$res || db_affected_rows($res) < 1) {
+			$this->setError('Error: Cannot Update list of hidden fields: '.db_error());
+			return false;
+		}
+		$this->data_array['hidden'] = $serializedData;
 		return true;
 	}
 }
