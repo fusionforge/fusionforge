@@ -158,7 +158,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 				$files['files'][$i]['props'][] = $this->mkprop('resourcetype', 'collection');
 				$files['files'][$i]['props'][] = $this->mkprop('getcontenttype', 'httpd/unix-directory');
 			}
-			$res = db_query_params('select filename,filetype,filesize,createdate,updatedate from doc_data where group_id = $1 and doc_group = $2',
+			$res = db_query_params('select filename,filetype,filesize,createdate,updatedate from docdata_vw where group_id = $1 and doc_group = $2',
 				array($group_id, $analysed_path['doc_group']));
 			if (!$res)
 				return '404';
@@ -182,7 +182,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 				$files['files'][$i]['props'][] = $this->mkprop('getcontenttype', $arr['filetype']);
 			}
 		} elseif (isset($analysed_path['docid'])) {
-			$res = db_query_params('select filename,filetype,filesize,createdate,updatedate from doc_data where group_id = $1 and docid = $2',
+			$res = db_query_params('select filename,filetype,filesize,createdate,updatedate from docdata_vw where group_id = $1 and docid = $2',
 				array($group_id, $analysed_path['docid']));
 			if (!$res)
 				return '404';
@@ -263,7 +263,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 			while ($arr = db_fetch_array($res)) {
 				echo '<li>'.util_make_link('/docman/view.php/'.$group_id.'/webdav'.$subpath.$arr['groupname'], $arr['groupname']).'</li>';
 			}
-			$res = db_query_params('select filename, filetype from doc_data where group_id = $1 and doc_group = $2 and stateid = ANY ($3)',
+			$res = db_query_params('select filename, filetype from docdata_vw where group_id = $1 and doc_group = $2 and stateid = ANY ($3)',
 						array($group_id, $analysed_path['doc_group'], db_int_array_to_any_clause(array(1, 5))));
 			if (!$res) {
 				exit_error(_('webdav db error')._(': ').db_error(),'docman');
@@ -639,7 +639,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 			return $return_path_array;
 		}
 
-		$res = db_query_params('select docid from doc_data where group_id = $1 and doc_group = $2 and filename = $3',
+		$res = db_query_params('select docid from docdata_vw where group_id = $1 and doc_group = $2 and filename = $3',
 					array($group_id, $path_array['doc_group'], $string));
 		while ($arr = db_fetch_array($res)) {
 			$return_path_array['docid'] = $arr['docid'];
