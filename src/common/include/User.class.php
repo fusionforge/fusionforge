@@ -1773,10 +1773,8 @@ Email: %3$s
 		}
 
 		$serializedData = serialize($data);
-		$sql = "UPDATE users
-				SET uneditable='".$serializedData."'
-				WHERE user_id='".$this->getID()."'";
-		$res = db_query($sql);
+		$sql = 'UPDATE users SET uneditable = $1 WHERE user_id = $2';
+		$res = db_query_params($sql, array($serializedData, $this->getID()));
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setError('Error: Cannot Update list of uneditable fields: '.db_error());
 			return false;
@@ -1798,10 +1796,8 @@ Email: %3$s
 		}
 
 		$serializedData = serialize($data);
-		$sql = "UPDATE users
-				SET hidden='".$serializedData."'
-				WHERE user_id='".$this->getID()."'";
-		$res = db_query($sql);
+		$sql = 'UPDATE users SET hidden = $1 WHERE user_id = $2';
+		$res = db_query_params($sql, array($serializedData, $this->getID()));
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setError('Error: Cannot Update list of hidden fields: '.db_error());
 			return false;
