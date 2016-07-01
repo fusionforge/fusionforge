@@ -155,12 +155,20 @@ echo $HTML->listTableTop(array(), array(), 'infotable');
 
 <tr class="top">
 	<td>
-	<?php echo _('Last Name').utils_requiredField()._(':'); ?>
+	<?php if ($u->isEditable('lastname')) { ?>
+		<label for="lastname">
+			<?php echo _('Last Name').utils_requiredField()._(':'); ?>
+		</label>
+	<?php } else { ?>
+			<?php echo _('Last Name')._(':'); ?>
+	<?php } ?>
 	</td>
 	<td>
-		<label for="lastname">
+	<?php if ($u->isEditable('lastname')) { ?>
 		<input id="lastname" required="required" type="text" name="lastname" value="<?php print $u->getLastName(); ?>"/>
-		</label>
+	<?php } else {
+		print $u->getLastName();
+	} ?>
 	</td>
 </tr>
 
@@ -195,8 +203,11 @@ echo $HTML->listTableTop(array(), array(), 'infotable');
 </tr>
 
 <tr class="top">
-	<td><?php echo _('Theme')._(':'); ?></td>
-	<td><?php echo html_get_theme_popup('theme_id', $u->getThemeID()); ?>
+	<td>
+	<?php echo _('Theme')._(':'); ?>
+	</td>
+	<td>
+	<?php echo html_get_theme_popup('theme_id', $u->getThemeID()); ?>
 	</td>
 </tr>
 
@@ -220,7 +231,11 @@ echo $HTML->listTableTop(array(), array(), 'infotable');
 	<?php echo _('Email Address')._(': '); ?>
 	</td>
 	<td><?php print $u->getEmail(); ?>
+	<?php
+	if ($u->isEditable('email')) {
+	?>
 	<br /><a href="change_email.php">[<?php echo _('Change Email Address'); ?>]</a>
+	<?php } ?>
 	</td>
 </tr>
 
@@ -229,9 +244,15 @@ echo $HTML->listTableTop(array(), array(), 'infotable');
 	<?php echo _('Address')._(':'); ?>
 	</td>
 	<td>
+	<?php
+	if ($u->isEditable('address')) {
+	?>
 		<label for="address">
 			<input id="address" type="text" name="address" value="<?php echo $u->getAddress(); ?>" size="80"/>
 		</label>
+	<?php } else {
+		print $u->getAddress();
+	} ?>
 	</td>
 </tr>
 
@@ -240,9 +261,15 @@ echo $HTML->listTableTop(array(), array(), 'infotable');
 	<?php echo _('Address (continued)')._(':'); ?>
 	</td>
 	<td>
+	<?php
+	if ($u->isEditable('address2')) {
+	?>
 		<label for="address2">
 			<input id="address2" type="text" name="address2" value="<?php echo $u->getAddress2(); ?>" size="80"/>
 		</label>
+	<?php } else {
+		print $u->getAddress2();
+	} ?>
 	</td>
 </tr>
 
@@ -251,9 +278,15 @@ echo $HTML->listTableTop(array(), array(), 'infotable');
 	<?php echo _('Phone')._(':'); ?>
 	</td>
 	<td>
+	<?php
+	if ($u->isEditable('phone')) {
+	?>
 		<label for="phone">
 			<input id="phone" type="text" name="phone" value="<?php echo $u->getPhone(); ?>" size="20"/>
 		</label>
+	<?php } else {
+		print $u->getPhone();
+	} ?>
 	</td>
 </tr>
 
@@ -262,9 +295,15 @@ echo $HTML->listTableTop(array(), array(), 'infotable');
 	<?php echo _('Fax')._(':'); ?>
 	</td>
 	<td>
+	<?php
+	if ($u->isEditable('fax')) {
+	?>
 		<label for="fax">
 			<input id="fax" type="text" name="fax" value="<?php echo $u->getFax(); ?>" size="20"/>
 		</label>
+	<?php } else {
+		print $u->getFax();
+	} ?>
 	</td>
 </tr>
 
@@ -273,9 +312,15 @@ echo $HTML->listTableTop(array(), array(), 'infotable');
 	<?php echo _('Title')._(':'); ?>
 	</td>
 	<td>
+	<?php
+	if ($u->isEditable('title')) {
+	?>
 		<label for="title">
 			<input id="title" type="text" name="title" value="<?php echo $u->getTitle(); ?>" size="10"/>
 		</label>
+	<?php } else {
+		print $u->getTitle();
+	} ?>
 	</td>
 </tr>
 <?php
