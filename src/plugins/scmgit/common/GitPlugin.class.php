@@ -964,16 +964,16 @@ control over it to the project's administrator.");
 			return false;
 		}
 		if (in_array('scmgit', $params['show']) || (count($params['show']) < 1)) {
-			$start_time = $params['begin'];
-			$end_time = $params['end'];
-
+			if ($project->enableAnonSCM()) {
+				$server_script = '/anonscm/gitlog';
+			} elseif (session_loggedin()) {
+				$u = session_get_user();
+				$server_script = '/authscm/'.$u->getUnixName().'/gitlog';
+			} else {
+				return false;
+			}
 			// Grab commit log
 			$protocol = forge_get_config('use_ssl', 'scmgit') ? 'https://' : 'http://';
-			$u = session_get_user();
-			if ($project->enableAnonSCM())
-				$server_script = '/anonscm/gitlog';
-			else
-				$server_script = '/authscm/'.$u->getUnixName().'/gitlog';
 			$script_url = $protocol . forge_get_config('scm_host')
 				. $server_script
 				.'?unix_group_name='.$project->getUnixName()
