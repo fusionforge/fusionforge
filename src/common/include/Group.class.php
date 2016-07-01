@@ -2960,15 +2960,16 @@ if there is anything we can do to help you.
 	/**
 	 * getRoles - Get the roles of the group.
 	 *
+	 * @param	bool	all roles or local roles only. Default is all roles
 	 * @return	array	Roles of this group.
 	 */
-	function getRoles() {
+	function getRoles($global = true) {
 		$result = array();
 
-		$roles = $this->getRolesId();
+		$roles = $this->getRolesId($global);
 		$engine = RBACEngine::getInstance();
 		foreach ($roles as $role_id) {
-			$result[] = $engine->getRoleById ($role_id);
+			$result[] = $engine->getRoleById($role_id);
 		}
 
 		return $result;
