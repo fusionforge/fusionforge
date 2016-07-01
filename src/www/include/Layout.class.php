@@ -721,13 +721,14 @@ if (isset($params['group']) && $params['group']) {
 			if (count($groups) < 1) {
 				return;
 			} else {
-				sortProjectList($groups);
-
-				$result = html_ao('form', array('id' => 'quicknavform', 'name' => 'quicknavform', 'action' => ''));
+				$result = $this->openForm(array('id' => 'quicknavform', 'name' => 'quicknavform', 'action' => ''));
 				$result .= html_ao('div');
 				$result .= html_ao('select', array('name' => 'quicknav', 'id' => 'quicknav', 'onchange' => 'location.href=document.quicknavform.quicknav.value'));
 				$result .= html_e('option', array('value' => ''), _('Quick Jump To...'), false);
-
+				if (!forge_get_config('use_quicknav_default') && session_get_user()->getPreference('quicknav_mode')) {
+					$groups = session_get_user()->getActivityLogGroups();
+				}
+				sortProjectList($groups);
 				foreach ($groups as $g) {
 					$group_id = $g->getID();
 					$menu = $this->navigation->getProjectMenu($group_id);
@@ -739,7 +740,8 @@ if (isset($params['group']) && $params['group']) {
 						}
 					}
 				}
-				$result .= html_ac(html_ap() - 3);
+				$result .= html_ac(html_ap() - 2);
+				$result .= $this->closeForm();
 			}
 			return $result;
 		}

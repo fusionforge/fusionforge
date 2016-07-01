@@ -72,6 +72,7 @@ if (getStringFromRequest('submit')) {
 	$remember_user = getStringFromRequest('remember_user');
 	$use_ratings = getStringFromRequest('use_ratings');
 	$use_tooltips = getIntFromRequest('use_tooltips');
+	$quicknav_mode = getIntFromRequest('quicknav_mode');
 
 	$check = true;
 	if (!strlen(trim($firstname))) {
@@ -87,7 +88,8 @@ if (getStringFromRequest('submit')) {
 		$refresh = ($language != $u->getLanguage() || $theme_id != $u->getThemeID());
 
 		if (!$u->update($firstname, $lastname, $language, $timezone, $mail_site, $mail_va, $use_ratings,
-				'',0,$theme_id,$address,$address2,$phone,$fax,$title,$ccode,$use_tooltips)) {
+				'',0,$theme_id,$address,$address2,$phone,$fax,$title,$ccode,$use_tooltips)
+				|| !$u->setPreference('quicknav_mode', $quicknav_mode)) {
 			form_release_key(getStringFromRequest('form_key'));
 			$error_msg = $u->getErrorMessage();
 		} else {
@@ -299,15 +301,15 @@ echo $HTML->boxTop(_('Preferences'));
 	</label>
 </p>
 
-<p>
 <?php if (forge_get_config('use_ratings')) { ?>
+<p>
 	<input id="use_ratings" type="checkbox" name="use_ratings" value="1"<?php
 	if ($u->usesRatings()) print ' checked="checked"'; ?> />
 	<label for="use_ratings">
 		<?php printf(_('Participate in peer ratings. <em>(Allows you to rate other users using several criteria as well as to be rated by others. More information is available on your <a href="%s">user page</a> if you have chosen to participate in ratings.)</em>'), util_make_url_u($u->getUnixName(),$u->getID())); ?>
 	</label>
-<?php } ?>
 </p>
+<?php } ?>
 
 <p>
 	<input id="use_tooltips" type="checkbox" name="use_tooltips" value="1"<?php
@@ -316,7 +318,19 @@ echo $HTML->boxTop(_('Preferences'));
 	<?php echo _('Enable tooltips. Small help texts displayed on mouse over links, images.'); ?>
 	</label>
 </p>
-
+<?php
+if (!forge_get_config('use_quicknav_default')) {
+?>
+<p>
+	<input id="quicknav_mode" type="checkbox" name="quicknav_mode" value="1"<?php
+	if ($u->getPreference('quicknav_mode')) print ' checked="checked"'; ?> />
+	<label for="quicknav_mode">
+	<?php echo _('Use advanced quicknav menu based on your navigation history on this site. Quicknav will use your 5 more visited projects.'); ?>
+	</label>
+<?php
+}
+?>
+</p>
 <?php
 // displays a "Use xxxx Plugin" checkbox
 plugin_hook("userisactivecheckbox", $hookParams);

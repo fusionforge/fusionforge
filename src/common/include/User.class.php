@@ -1805,6 +1805,16 @@ Email: %3$s
 		$this->data_array['hidden'] = $serializedData;
 		return true;
 	}
+
+	function getActivityLogGroups() {
+		$res = db_query_params('select group_id from activity_log where group_id != 0 and user_id = $1 group by group_id order by count(group_id) desc',
+					array($this->getID()), 5);
+		if (!$res) {
+			return array();
+		} else {
+			return group_get_objects(util_result_column_to_array($res,0));
+		}
+	}
 }
 
 
