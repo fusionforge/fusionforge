@@ -240,9 +240,7 @@ if ($rows < 1) {
 		echo '
 			<tr class="priority'.$pt_arr[$i]->getPriority().'"><td style="width:16px; background-color:#FFFFFF">' .
 			util_make_link('/export/rssAboTask.php?tid=' .
-			    $pt_arr[$i]->getID(), html_image('ic/rss.png',
-			    16, 16, array('border' => '0'))
-			) . "</td>\n" .
+			    $pt_arr[$i]->getID(), html_image('ic/rss.png', 16, 16)) . "</td>\n" .
 			'<td>'.
 			($IS_ADMIN?'<input type="checkbox" name="project_task_id_list[]" value="'.
 			$pt_arr[$i]->getID() .'" /> ':'').

@@ -71,7 +71,7 @@ class ForumsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($rowColor) .'>'
 						. '<td width="5%"></td>'
 						. '<td><a href="'.util_make_url ('/forum/message.php?msg_id='. $row['msg_id']).'">'
-							. html_image('ic/msg.png', '10', '12').' '.$row['subject']
+							. html_image('ic/msg.png').' '.$row['subject']
 							.'</a></td>'
 						. '<td style="width: 15%">'.$row['realname'].'</td>'
 						. '<td style="width: 15%">'.relative_date($row['post_date']).'</td></tr>';

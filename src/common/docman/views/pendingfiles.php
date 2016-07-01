@@ -71,11 +71,11 @@ jQuery(document).ready(function() {
 			$cells[][] = html_e('input', array('type' => 'checkbox', 'value' => $d->getID(), 'class' => 'checkeddocidpending', 'title' => _('Select / Deselect this document for massaction'), 'onClick' => 'controllerListPending.checkgeneral("pending")'));
 			switch ($d->getFileType()) {
 				case 'URL': {
-					$cells[][] = util_make_link($d->getFileName(), html_image($d->getFileTypeImage(), '22', '22', array('alt'=>$d->getFileType())), array('title' => _('Visit this link')), true);
+					$cells[][] = util_make_link($d->getFileName(), html_image($d->getFileTypeImage(), 22, 22, array('alt'=>$d->getFileType())), array('title' => _('Visit this link')), true);
 					break;
 				}
 				default: {
-					$cells[][] = util_make_link('/docman/view.php/'.$g->getID().'/'.$d->getID().'/'.urlencode($d->getFileName()), html_image($d->getFileTypeImage(), '20', '20', array('alt'=>$d->getFileType())), array('title' => _('View this document')));
+					$cells[][] = util_make_link('/docman/view.php/'.$g->getID().'/'.$d->getID().'/'.urlencode($d->getFileName()), html_image($d->getFileTypeImage(), 20, 20, array('alt'=>$d->getFileType())), array('title' => _('View this document')));
 				}
 			}
 			$nextcell = '';

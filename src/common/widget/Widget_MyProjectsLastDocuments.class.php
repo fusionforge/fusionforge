@@ -106,11 +106,11 @@ class Widget_MyProjectsLastDocuments extends Widget {
 								$html .= '<tr '. $HTML->boxGetAltRowStyle($j) .'>';
 								switch ($doc->getFileType()) {
 									case "URL": {
-										$docurl = util_make_link($doc->getFileName(), html_image($doc->getFileTypeImage(), '22', '22', array('alt'=>$doc->getFileType())), array(), true);
+										$docurl = util_make_link($doc->getFileName(), html_image($doc->getFileTypeImage(), 22, 22, array('alt'=>$doc->getFileType())), array(), true);
 										break;
 									}
 									default: {
-										$docurl = util_make_link('/docman/view.php/'.$g->getID().'/'.$doc->getID().'/'.urlencode($doc->getFileName()), html_image($doc->getFileTypeImage(), '22', '22', array('alt'=>$doc->getFileType())));
+										$docurl = util_make_link('/docman/view.php/'.$g->getID().'/'.$doc->getID().'/'.urlencode($doc->getFileName()), html_image($doc->getFileTypeImage(), 22, 22, array('alt'=>$doc->getFileType())));
 									}
 								}
 								$html .= '<td>'.$docurl.'</td>';

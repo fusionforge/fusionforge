@@ -72,7 +72,7 @@ if (session_loggedin()) {
 					$img="mail16w.png";
 					$text=_('Monitor');
 				}
-				echo util_make_link('/tracker/?group_id='.$group_id.'&artifact_id='.$ah->getID().'&atid='.$ath->getID().'&func=monitor', html_e('strong', array(), html_image('ic/'.$img.'','20','20').' '.$text), array('id' => 'tracker-monitor', 'title' => util_html_secure(html_get_tooltip_description('monitor'))));
+				echo util_make_link('/tracker/?group_id='.$group_id.'&artifact_id='.$ah->getID().'&atid='.$ath->getID().'&func=monitor', html_e('strong', array(), html_image('ic/'.$img, 20, 20).' '.$text), array('id' => 'tracker-monitor', 'title' => util_html_secure(html_get_tooltip_description('monitor'))));
 				?>
 			</td>
 			<td><?php
@@ -86,19 +86,19 @@ if (session_loggedin()) {
 							$key = 'pointer_up';
 							$txt = _('Cast Vote');
 						}
-						echo util_make_link('/tracker/?group_id='.$group_id.'&aid='.$ah->getID().'&atid='.$ath->getID().'&func='.$key, html_image('ic/'.$key.'.png', 16, 16, array('border' => 0)), array('id' => 'tracker-vote', 'alt' => $txt, 'title' => util_html_secure(html_get_tooltip_description('vote'))));
+						echo util_make_link('/tracker/?group_id='.$group_id.'&aid='.$ah->getID().'&atid='.$ath->getID().'&func='.$key, html_image('ic/'.$key.'.png', 16, 16), array('id' => 'tracker-vote', 'alt' => $txt, 'title' => util_html_secure(html_get_tooltip_description('vote'))));
 					}
 				?>
 			</td>
 			<td><?php
 				if ($group->usesPM()) {
-					echo util_make_link('/tracker/?func=taskmgr&group_id='.$group_id.'&atid='.$atid.'&aid='.$aid, html_image('ic/taskman20w.png','20','20').'<strong>'._('Build Task Relation').'</strong>');
+					echo util_make_link('/tracker/?func=taskmgr&group_id='.$group_id.'&atid='.$atid.'&aid='.$aid, html_image('ic/taskman20w.png', 20, 20).'<strong>'._('Build Task Relation').'</strong>');
 				}
 				?>
 			</td>
 			<td>
 				<?php
-				echo util_make_link('/tracker/?func=deleteartifact&aid='.$aid.'&group_id='.$group_id.'&atid='.$atid, html_image('ic/trash.png','16','16').html_e('strong', array(), _('Delete')));
+				echo util_make_link('/tracker/?func=deleteartifact&aid='.$aid.'&group_id='.$group_id.'&atid='.$atid, html_image('ic/trash.png', 16, 16).html_e('strong', array(), _('Delete')));
 				?>
 			</td>
 			<td>

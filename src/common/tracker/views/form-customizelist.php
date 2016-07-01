@@ -74,8 +74,8 @@ foreach ($fields as $f => $name) {
 					($pos + 1).' --&gt; <input type="text" name="order['.$f.']" value="" size="3" maxlength="3" />'.
 					'</td>'."\n".
 					'<td class="align-center">'.
-					util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&id='.$f.'&customize_list=1&post_changes=1&updownorder_field=1&new_pos='.(($pos == 0)? $pos + 1 : $pos), html_image('ic/btn_up.png','19','18',array('alt' => _('Up')))).
-					util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&id='.$f.'&customize_list=1&post_changes=1&updownorder_field=1&new_pos='.(($pos == count($browse_fields) - 1)? $pos + 1 : $pos + 2), html_image('ic/btn_down.png','19','18',array('alt' => _('Down')))).
+					util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&id='.$f.'&customize_list=1&post_changes=1&updownorder_field=1&new_pos='.(($pos == 0)? $pos + 1 : $pos), html_image('ic/btn_up.png', 19, 18, array('alt' => _('Up')))).
+					util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&id='.$f.'&customize_list=1&post_changes=1&updownorder_field=1&new_pos='.(($pos == count($browse_fields) - 1)? $pos + 1 : $pos + 2), html_image('ic/btn_down.png', 19, 18, array('alt' => _('Down')))).
 					'</td>'."\n".
 					'<td class="align-center">'.
 					util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&id='.$f.'&customize_list=1&post_changes=1&delete_field=1', html_image('ic/trash.png','','',array('alt' => _('Delete')))).

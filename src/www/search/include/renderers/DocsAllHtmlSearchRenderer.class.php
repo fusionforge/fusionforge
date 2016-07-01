@@ -91,7 +91,7 @@ class DocsAllHtmlSearchRenderer extends HtmlSearchRenderer {
 			$document = document_get_object($row['docid'], $row['group_id']);
 			$currentDocGroup = $row['project_name'];
 			if ($lastGroupID != $document->Group->getID()) {
-				$cells[] = array(html_image('ic/home16b.png', 10, 12, array('border' => 0)).'<b>'.util_make_link('/docman/?group_id='.$document->Group->getID(),$currentDocGroup).'</b>', 'colspan' => 4);
+				$cells[] = array(html_image('ic/home16b.png', 10, 12).'<b>'.util_make_link('/docman/?group_id='.$document->Group->getID(),$currentDocGroup).'</b>', 'colspan' => 4);
 				$lastGroupID = $document->Group->getID();
 				$rowColor = 0;
 				$return .= $HTML->multiTableRow(array(), $cells);
@@ -99,7 +99,7 @@ class DocsAllHtmlSearchRenderer extends HtmlSearchRenderer {
 			$cells = array();
 			$cells[][] = '&nbsp;';
 			if ($lastDocGroupID != $document->getDocGroupID()) {
-				$cells[][] = html_image('ic/folder.png', 22, 22, array('border' => 0)).util_make_link('/docman/?group_id='.$document->Group->getID().'&view=listfile&dirid='.$document->getDocGroupID(),$row['groupname']);
+				$cells[][] = html_image('ic/folder.png', 22, 22).util_make_link('/docman/?group_id='.$document->Group->getID().'&view=listfile&dirid='.$document->getDocGroupID(),$row['groupname']);
 				$lastDocGroupID = $document->getDocGroupID();
 			} else {
 				$cells[][] = '&nbsp';

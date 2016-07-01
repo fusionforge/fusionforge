@@ -118,7 +118,7 @@ http://.../projects/siteadmin/
 | 			print 'class=tabs ';
 | 		}
 | 		print 'href="'. $url .'">';
-| 		print html_image($this->imgroot . $icon,'24','24',array('alt'=>"$title",'border'=>($selected?'1':'0')));
+| 		print html_image($this->imgroot . $icon,24,24,array('alt'=>"$title",'border'=>($selected?'1':'0')));
 | 		print '</A>';
 | 	}
 `----

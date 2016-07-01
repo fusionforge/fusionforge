@@ -180,7 +180,7 @@ if (!$result || $rows < 1) {
 
                 print        "<tr ". $HTML->boxGetAltRowStyle($i)."><td><a href=\""
                         . db_result($result, $i, 'project_link')."\" target=\"blank\">"
-                        . html_image("ic/msg.png","10","12",array("border"=>"0"))."&nbsp;"
+                        . html_image("ic/msg.png", 10, 12)."&nbsp;"
                         . highlight_target_words($array,db_result($result, $i, 'project_title'))."</a></td>
 <td>".highlight_target_words($array,html_entity_decode(db_result($result,$i,'project_description')))."</td>
 <td><center><a href=\"".db_result($result,$i,'link')."\" target=\"_blank\">"
@@ -210,7 +210,7 @@ if ( !$no_rows && ( ($rows_returned > $rows) || ($offset != 0) ) ) {
         if ( $rows_returned > $rows) {
                 echo "<span style=\"font-family:arial, helvetica;text-decoration: none\">";
                 echo "<a href=\"/plugins/globalsearch/?gwords=".urlencode($gwords)."&amp;order=".urlencode($order)."&amp;gexact=$gexact&amp;offset=".($offset+25);
-                echo "\"><strong>"._("Next Results") . html_image("t.png","15","15",array("border"=>"0","align"=>"middle")) . "</strong></a></span>";
+                echo "\"><strong>"._("Next Results") . html_image("t.png", 15, 15, array("align"=>"middle")) . "</strong></a></span>";
         } else {
                 echo "&nbsp;";
         }

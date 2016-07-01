@@ -92,7 +92,7 @@ if ($totalCount) {
 			<td><?php
 			if ($offset != 0) {
 				echo util_make_link('/admin/cronman.php?which='.$which.'&offset='.($offset - ADMIN_CRONMAN_ROWS),
-							html_image('t2.png', '15', '15').' '._('Previous'),
+							html_image('t2.png', 15, 15).' '._('Previous'),
 							array('class' => 'prev'));
 			} else {
 				echo '&nbsp;';
@@ -100,7 +100,7 @@ if ($totalCount) {
 			echo '</td><td class="align-right">';
 			if ($totalCount > $offset + ADMIN_CRONMAN_ROWS) {
 				echo util_make_link('/admin/cronman.php?which='.$which.'&offset='.($offset + ADMIN_CRONMAN_ROWS),
-							_('Next').' '.html_image('t.png', '15', '15'),
+							_('Next').' '.html_image('t.png', 15, 15),
 							array('class' => 'next'));
 			} else {
 				echo '&nbsp;';

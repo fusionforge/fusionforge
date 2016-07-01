@@ -56,15 +56,15 @@ class ForumAdmin extends FFError {
 	 */
 	function PrintAdminMessageOptions($msg_id,$group_id,$thread_id=0,$forum_id=0,$return_to_message=0) {
 
-		$return = util_make_link('/forum/admin/?movethread='.$thread_id.'&msg_id='.$msg_id.'&group_id='.$group_id.'&forum_id='.$forum_id.'&return_to_message='.$return_to_message, html_image('ic/forum_move.gif', '37', '15', array('alt' => _('Move Thread'))));
+		$return = util_make_link('/forum/admin/?movethread='.$thread_id.'&msg_id='.$msg_id.'&group_id='.$group_id.'&forum_id='.$forum_id.'&return_to_message='.$return_to_message, html_image('ic/forum_move.gif', 37, 15, array('alt' => _('Move Thread'))));
 
 		// Following code (if ...) is to keep old implementation but need to be cleaned
 		if ($return_to_message) {
 			$thread_id = 0;
 		}
 
-		$return .= util_make_link('/forum/admin/?editmsg='.$msg_id.'&group_id='.$group_id.'&thread_id='.$thread_id.'&forum_id='.$forum_id, html_image('ic/forum_edit.gif', '37', '15', array('alt' => _("Edit"))));
-		$return .= util_make_link('/forum/admin/?deletemsg='.$msg_id.'&group_id='.$group_id.'&thread_id='.$thread_id.'&forum_id='.$forum_id, html_image('ic/forum_delete.gif', '16', '18', array('alt'=>_("Delete"))));
+		$return .= util_make_link('/forum/admin/?editmsg='.$msg_id.'&group_id='.$group_id.'&thread_id='.$thread_id.'&forum_id='.$forum_id, html_image('ic/forum_edit.gif', 37, 15, array('alt' => _("Edit"))));
+		$return .= util_make_link('/forum/admin/?deletemsg='.$msg_id.'&group_id='.$group_id.'&thread_id='.$thread_id.'&forum_id='.$forum_id, html_image('ic/forum_delete.gif', 16, 18, array('alt'=>_("Delete"))));
 		//		$return .= "<br />";
 		return $return;
 	}

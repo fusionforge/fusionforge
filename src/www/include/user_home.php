@@ -69,7 +69,7 @@ if (forge_get_config('use_diary')) {
 		echo '</p>
 		<p>';
 		echo util_make_link('/developer/monitor.php?diary_user='.$user_id,
-						html_image("ic/check.png",'15','13',array(),0) ._('Monitor this Diary')
+						html_image("ic/check.png", 15, 13) ._('Monitor this Diary')
 			) ;
 		echo '</p>';
 		$hookparams['user_id'] = $user_id;

@@ -106,7 +106,7 @@ echo $HTML->openForm(array('action' => '/pm/task.php?group_id='.$group_id.'&grou
 		</td>
 		<td>
 		<?php echo util_make_link('/export/rssAboTask.php?tid='.$project_task_id,
-						html_image('ic/rss.png', 16, 16, array('border' => '0')).' '._('Subscribe to task'));
+						html_image('ic/rss.png', 16, 16).' '._('Subscribe to task'));
 		?>
 		</td>
 	</tr>

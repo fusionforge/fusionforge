@@ -200,7 +200,7 @@ page edits displayed on activity tab, and multi-project wiki preferences.");
 						$arr['user_name'] = $cache[$data['author']]['user_name'];
 						$arr['user_id'] = $cache[$data['author']]['user_id'];
 						$arr['realname'] = $data['author'];
-						$arr['icon']=html_image("ic/wiki20g.png","20","20",array("alt"=>"Wiki"));
+						$arr['icon']=html_image("ic/wiki20g.png", 20, 20, array('alt'=>'Wiki'));
 						$arr['title'] = 'Wiki Page '.$arr['pagename'];
 						$arr['link'] = '/wiki/g/'.$group_name.'/'.$page_name;
 						$arr['description']= $arr['title'];

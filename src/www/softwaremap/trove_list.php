@@ -158,7 +158,7 @@ if ( $cat === 'c' ) {
 	$folders_len = count($folders);
 
 	print "<p>";
-	print html_image("category.png",'32','33',array('alt'=>""));
+	print html_image("category.png", 32, 33, array('alt'=>""));
 	print "&nbsp;";
 
 	for ($i = 0; $i < $folders_len; $i++) {

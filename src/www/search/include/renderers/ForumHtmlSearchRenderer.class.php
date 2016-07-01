@@ -69,7 +69,7 @@ class ForumHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$i = 0;
 		foreach ($result as $row) {
 			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td class="halfwidth"><a href="'.util_make_url ('/forum/message.php?msg_id=' . $row['msg_id']).'">'
-				. html_image('ic/msg.png', '10', '12')
+				. html_image('ic/msg.png', 10, 12)
 				. ' '.$row['subject'].'</a></td>'
 				. '<td style="width: 30%">'.$row['realname'].'</td>'
 				. '<td style="width: 20%">'.date($dateFormat, $row['post_date']).'</td></tr>';

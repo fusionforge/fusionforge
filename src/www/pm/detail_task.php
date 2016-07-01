@@ -52,7 +52,7 @@ echo $HTML->multiTableRow(array(), $cells);
 $cells = array();
 $cells[][] = '<strong>'._('Percent Complete')._(':').'</strong><br />'.$pt->getPercentComplete().'%';
 $cells[][] = '<strong>'._('Priority')._(':').'</strong><br />'.$pt->getPriority();
-$cells[][] = util_make_link('/export/rssAboTask.php?tid='.$project_task_id, html_image('ic/rss.png',16, 16, array('border' => '0')).' '._('Subscribe to task'));
+$cells[][] = util_make_link('/export/rssAboTask.php?tid='.$project_task_id, html_image('ic/rss.png', 16, 16).' '._('Subscribe to task'));
 echo $HTML->multiTableRow(array(), $cells);
 $cells = array();
 $cells[][] = '<strong>'._('Start Date')._(':').'</strong><br />'.date(_('Y-m-d'), $pt->getStartDate());

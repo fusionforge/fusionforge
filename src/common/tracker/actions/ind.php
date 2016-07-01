@@ -62,7 +62,7 @@ if (!$at_arr || count($at_arr) < 1) {
 		} else {
 			$cells = array();
 			$cells[][] = util_make_link('/tracker/?atid='.$at_arr[$j]->getID().'&group_id='.$group_id.'&func=browse',
-							html_image("ic/tracker20w.png","20","20").' '.$at_arr[$j]->getName());
+							html_image("ic/tracker20w.png", 20, 20).' '.$at_arr[$j]->getName());
 			$cells[][] = $at_arr[$j]->getDescription();
 			$cells[] = array((int) $at_arr[$j]->getOpenCount(), 'class' => 'align-center');
 			$cells[] = array((int) $at_arr[$j]->getTotalCount(), 'class' => 'align-center');

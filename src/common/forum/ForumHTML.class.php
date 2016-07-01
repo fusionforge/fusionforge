@@ -150,7 +150,7 @@ function forum_header($params) {
 
 	if ($f && $forum_id) {
 		echo util_make_link ('/forum/new.php?forum_id='.$forum_id.'&group_id='.$group_id,
-					 html_image('ic/write16w.png','20','20',array('alt'=>_('Start New Thread'))) .' '.
+					 html_image('ic/write16w.png', 20, 20, array('alt'=>_('Start New Thread'))) .' '.
 					 _('Start New Thread'));
 	}
 }

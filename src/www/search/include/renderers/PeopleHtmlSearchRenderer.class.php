@@ -65,7 +65,7 @@ class PeopleHtmlSearchRenderer extends HtmlSearchRenderer {
 		foreach ($result as $row) {
 			$i++;
 			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
-				'<td style="width: 40%"><a href="'.util_make_url_u ($row['user_name'],$row['user_id']).'">'.html_image('ic/msg.png', '10', '12').' '.$row['user_name'].'</a></td>'.
+				'<td style="width: 40%"><a href="'.util_make_url_u ($row['user_name'],$row['user_id']).'">'.html_image('ic/msg.png', 10, 12).' '.$row['user_name'].'</a></td>'.
 				'<td style="width: 60%">'.$row['realname'].'</td>'.
 				'</tr>';
 		}

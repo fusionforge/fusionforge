@@ -129,7 +129,7 @@ class HtmlSearchRenderer extends SearchRenderer {
 		$html .= '<tr>';
 		$html .= '<td>';
 		if ($searchQuery->getOffset() != 0) {
-			$html .= util_make_link($this->getPreviousResultsUrl(), html_image('t2.png', '15', '15').' '._('Previous Results'), array('class' => 'prev'));
+			$html .= util_make_link($this->getPreviousResultsUrl(), html_image('t2.png', 15, 15).' '._('Previous Results'), array('class' => 'prev'));
 		} else {
 			$html .= '&nbsp;';
 		}
@@ -137,7 +137,7 @@ class HtmlSearchRenderer extends SearchRenderer {
 		$result = $this->searchQuery->getData($this->searchQuery->getRowsPerPage(),$this->searchQuery->getOffset());
 		error_log(count($result));
 		if ($searchQuery->getRowsTotalCount() > $this->searchQuery->getRowsPerPage()+$this->searchQuery->getOffset()) {
-			$html .= util_make_link($this->getNextResultsUrl(), _('Next Results').' '.html_image('t.png', '15', '15'), array('class' => 'next'));
+			$html .= util_make_link($this->getNextResultsUrl(), _('Next Results').' '.html_image('t.png', 15, 15), array('class' => 'next'));
 		} else {
 			$html .= '&nbsp;';
 		}

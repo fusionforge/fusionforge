@@ -380,10 +380,10 @@ if (getIntFromRequest('manage_release') ||
 						'</td>'."\n".
 						'<td class="align-center">'.'&#160;&#160;&#160;'.
 						util_make_link('/tracker/admin/?group_id='.$group_id.'&roadmap_id='.$roadmap_id.'&admin_roadmap=1&updownorder_release=1&old_pos='.$pos.'&new_pos='.(($pos == count($release_order) - 1) ? $pos : $pos + 1),
-								html_image('ic/btn_up.png','19','18',array('alt'=>"Up"))).
+								html_image('ic/btn_up.png', 19, 18, array('alt'=>'Up'))).
 						'&#160;&#160;'.
 						util_make_link('/tracker/admin/?group_id='.$group_id.'&roadmap_id='.$roadmap_id.'&admin_roadmap=1&updownorder_release=1&old_pos='.$pos.'&new_pos='.(($pos == 0) ? $pos : $pos - 1),
-								html_image('ic/btn_down.png','19','18',array('alt'=>"Down"))).
+								html_image('ic/btn_down.png', 19, 18, array('alt'=>'Down'))).
 						'</td>'."\n".
 						'</tr>'."\n";
 		}
@@ -460,10 +460,10 @@ if (! isset($ihm) || $ihm !== true) {
 					'</td>'."\n".
 					'<td class="align-center">'.'&#160;&#160;&#160;'.
 					'<a href="index.php?group_id='.$group_id.'&amp;roadmap_id='.$roadmap->getID().
-					'&amp;customize_list=1&amp;post_changes=1&amp;updownorder_release=1&amp;new_pos='.(($pos == 0)? $pos + 1 : $pos).'">'.html_image('ic/btn_up.png','19','18',array('alt'=>"Up")).'</a>'.
+					'&amp;customize_list=1&amp;post_changes=1&amp;updownorder_release=1&amp;new_pos='.(($pos == 0)? $pos + 1 : $pos).'">'.html_image('ic/btn_up.png', 19, 18, array('alt'=>'Up')).'</a>'.
 					'&#160;&#160;'.
 					'<a href="index.php?group_id='.$group_id.'&amp;roadmap_id='.$roadmap->getID().
-					'&amp;customize_list=1&amp;post_changes=1&amp;updownorder_release=1&amp;new_pos='.(($pos == count($browse_fields) - 1)? $pos + 1 : $pos + 2).'">'.html_image('ic/btn_down.png','19','18',array('alt'=>"Down")).'</a>'.
+					'&amp;customize_list=1&amp;post_changes=1&amp;updownorder_release=1&amp;new_pos='.(($pos == count($browse_fields) - 1)? $pos + 1 : $pos + 2).'">'.html_image('ic/btn_down.png', 19, 18, array('alt'=>'Down')).'</a>'.
 					'</td>'."\n".
 					*/
 					'<td class="align-center">'.

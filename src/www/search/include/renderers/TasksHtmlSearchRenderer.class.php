@@ -76,7 +76,7 @@ class TasksHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 						. ' <td>'.$row['project_task_id'].'</td>'
 						. ' <td>'
 							. '<a href="'.util_make_url ('/pm/task.php?func=detailtask&amp;project_task_id=' . $row['project_task_id'].'&amp;group_id='.$this->groupId . '&amp;group_project_id='.$row['group_project_id']).'">'
-							. html_image('ic/msg.png', '10', '12').' '
+							. html_image('ic/msg.png', 10, 12).' '
 							. $row['summary'].'</a></td>'
 						. ' <td style="width: 15%">'.relative_date($row['start_date']).'</td>'
 						. ' <td style="width: 15%">'.relative_date($row['end_date']).'</td>'

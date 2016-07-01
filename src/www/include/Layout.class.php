@@ -430,7 +430,7 @@ class Layout extends FFError {
 			<div class="header">
 			<table class="fullwidth" id="headertable">
 			<tr>
-			<td><?php util_make_link('/', html_image('logo.png',198,52,array('border'=>'0'))); ?></td>
+			<td><?php util_make_link('/', html_image('logo.png', 198, 52)); ?></td>
 			<td><?php $this->searchBox(); ?></td>
 			<td align="right"><?php
 			$items = $this->navigation->getUserLinks();
@@ -1032,7 +1032,7 @@ if (isset($params['group']) && $params['group']) {
 
 	function confirmBox($msg, $params, $buttons, $image='*none*') {
 		if ($image == '*none*') {
-			$image = html_image('stop.png','48','48',array());
+			$image = html_image('stop.png', 48, 48);
 		}
 
 		foreach ($params as $b => $v) {
