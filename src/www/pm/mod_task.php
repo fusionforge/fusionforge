@@ -85,7 +85,7 @@ echo $HTML->openForm(array('action' => '/pm/task.php?group_id='.$group_id.'&grou
 
 		<td>
 		<strong><?php echo _('Priority') . _(': '); ?></strong><br />
-		<?php build_priority_select_box('priority',$pt->getPriority()); ?>
+		<?php echo build_priority_select_box('priority',$pt->getPriority()); ?>
 		</td>
 
 		<td>
