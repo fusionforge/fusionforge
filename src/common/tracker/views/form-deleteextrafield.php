@@ -30,41 +30,41 @@ $ath->adminHeader(array('title'=>sprintf(_('Delete a custom field for %s'),
 $id = getStringFromRequest('id');
 ?>
 
-		<table class="centered">
-		<tr>
-		<td>
-		<fieldset>
-		<legend><?php echo _('Confirm Delete') ?></legend>
+<table class="centered">
+<tr>
+<td>
+<fieldset>
+<legend><?php echo _('Confirm Delete') ?></legend>
 <?php
 echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID(), 'method' => 'post'));
 ?>
-		<p>
-		<input type="hidden" name="deleteextrafield" value="y" />
-		<input type="hidden" name="id" value="<?php echo $id; ?>" />
-		<?php echo _('You are about to permanently and irretrievably delete this custom field and all its contents!'); ?>
-		</p>
-		<p>
-		<input id="sure" type="checkbox" name="sure" value="1" />
-		<label for="sure">
-		<?php echo _("I am Sure") ?><br />
-		</label>
-		<input id="really_sure" type="checkbox" name="really_sure" value="1" />
-		<label for="really_sure">
-		<?php echo _("I am Really Sure") ?>
-		</label>
-		</p>
-		<p>
-		<input type="submit" name="post_changes" value="<?php echo _('Delete') ?>" /></p>
+<p>
+<input type="hidden" name="deleteextrafield" value="y" />
+<input type="hidden" name="id" value="<?php echo $id; ?>" />
+<?php echo _('You are about to permanently and irretrievably delete this custom field and all its contents!'); ?>
+</p>
+<p>
+<input id="sure" type="checkbox" name="sure" value="1" />
+<label for="sure">
+<?php echo _("I am Sure") ?><br />
+</label>
+<input id="really_sure" type="checkbox" name="really_sure" value="1" />
+<label for="really_sure">
+<?php echo _("I am Really Sure") ?>
+</label>
+</p>
+<p>
+<input type="submit" name="post_changes" value="<?php echo _('Delete') ?>" /></p>
 <?php
 echo $HTML->closeForm();
 ?>
-		</fieldset>
-		</td>
-		</tr>
-		</table>
-		<?php
+</fieldset>
+</td>
+</tr>
+</table>
+<?php
 
-		$ath->footer();
+$ath->footer();
 
 // Local Variables:
 // mode: php

@@ -27,58 +27,58 @@ require_once 'common/tracker/ArtifactWorkflow.class.php';
 
 global $HTML;
 
-		$from = getIntFromRequest('from');
-		$next = getIntFromRequest('next');
+$from = getIntFromRequest('from');
+$next = getIntFromRequest('next');
 
 //	FORM TO UPDATE ARTIFACT TYPES
 
-		/*
-			List of possible user built Selection Boxes for an ArtifactType
-		*/
-		$efarr = $ath->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_STATUS));
-		if (count($efarr) === 0) {
-			// TODO: Normal status is not implemented right now.
-			return false;
-		} elseif (count($efarr) !== 1) {
-			// Internal error.
-			return false;
-		}
+/*
+	List of possible user built Selection Boxes for an ArtifactType
+*/
+$efarr = $ath->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_STATUS));
+if (count($efarr) === 0) {
+	// TODO: Normal status is not implemented right now.
+	return false;
+} elseif (count($efarr) !== 1) {
+	// Internal error.
+	return false;
+}
 
-		$keys=array_keys($efarr);
-		$field_id = $keys[0];
+$keys=array_keys($efarr);
+$field_id = $keys[0];
 
-		$atw = new ArtifactWorkflow($ath, $field_id);
-		$roles = $atw->getAllowedRoles($from, $next);
+$atw = new ArtifactWorkflow($ath, $field_id);
+$roles = $atw->getAllowedRoles($from, $next);
 
-		$elearray = $ath->getExtraFieldElements($field_id);
-		foreach ($elearray as $e) {
-			$name[ $e['element_id'] ] = $e['element_name'];
-		}
+$elearray = $ath->getExtraFieldElements($field_id);
+foreach ($elearray as $e) {
+	$name[ $e['element_id'] ] = $e['element_name'];
+}
 
-		$title = sprintf(_('Configuring allowed roles for the transitions from %1$s to %2$s'), $name[$from], $name[$next]);
-		$ath->adminHeader(array('title'=>$title,
-			'pagename'=>'tracker_admin_customize_liste',
-			'titlevals'=>array($ath->getName())));
+$title = sprintf(_('Configuring allowed roles for the transitions from %1$s to %2$s'), $name[$from], $name[$next]);
+$ath->adminHeader(array('title'=>$title,
+	'pagename'=>'tracker_admin_customize_liste',
+	'titlevals'=>array($ath->getName())));
 
 echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID(), 'method' => 'post'));
 ?>
-		<input type="hidden" name="field_id" value="<?php echo $field_id ?>" />
-		<input type="hidden" name="workflow_roles" value="1" />
-		<input type="hidden" name="from" value="<?php echo $from ?>" />
-		<input type="hidden" name="next" value="<?php echo $next ?>" />
+<input type="hidden" name="field_id" value="<?php echo $field_id ?>" />
+<input type="hidden" name="workflow_roles" value="1" />
+<input type="hidden" name="from" value="<?php echo $from ?>" />
+<input type="hidden" name="next" value="<?php echo $next ?>" />
 
 <?php
-		$group_roles = $group->getRoles() ;
-		sortRoleList ($group_roles) ;
-		foreach ($group_roles as $role) {
-			$value = in_array($role->getID(), $roles)? ' checked="checked"' : '';
-			$str = '<input type="checkbox" name="role['.$role->getID().']"'.$value.' />';
-			$str .= ' '.$role->getDisplayableName($group);
-			echo $str."<br />\n";
-		}
+$group_roles = $group->getRoles() ;
+sortRoleList ($group_roles) ;
+foreach ($group_roles as $role) {
+	$value = in_array($role->getID(), $roles)? ' checked="checked"' : '';
+	$str = '<input type="checkbox" name="role['.$role->getID().']"'.$value.' />';
+	$str .= ' '.$role->getDisplayableName($group);
+	echo $str."<br />\n";
+}
 ?>
-		<p>
-		<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
-		<?php
+<p>
+<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
+<?php
 echo $HTML->closeForm();
-		$ath->footer();
+$ath->footer();
