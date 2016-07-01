@@ -169,7 +169,7 @@ echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 		?>
 		</td><td>
 		<strong><?php echo _('Priority'). _(': ') ?></strong><br />
-		<?php build_priority_select_box('priority',$ah->getPriority()); ?>
+		<?php echo build_priority_select_box('priority',$ah->getPriority()); ?>
 		</td>
 	</tr>
 
