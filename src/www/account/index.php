@@ -5,7 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2011, Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2014,2016, Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of National Education
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -43,14 +43,11 @@ if (!$u || !is_object($u)) {
 }
 
 $action = getStringFromRequest('action');
-switch ($action) {
-	case "deletesshkey":
-	case "addsshkey": {
-		include ($gfcommon."account/actions/$action.php");
-		break;
-	}
+if (file_exists(forge_get_config('source_path').'/common/account/actions/'.$action.'.php')) {
+	include(forge_get_config('source_path').'/common/account/actions/'.$action.'.php');
 }
 
+$hookParams['user'] = $u;
 if (getStringFromRequest('submit')) {
 	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 		exit_form_double_submit('my');
@@ -93,6 +90,7 @@ if (getStringFromRequest('submit')) {
 			form_release_key(getStringFromRequest('form_key'));
 			$error_msg = $u->getErrorMessage();
 		} else {
+			plugin_hook('userisactivecheckboxpost', $hookParams);
 			$feedback = _('Updated');
 		}
 
@@ -100,12 +98,6 @@ if (getStringFromRequest('submit')) {
 			session_redirect('/account/');
 		}
 	}
-}
-
-$hookParams['user'] = user_get_object(user_getid());
-
-if (getStringFromRequest('submit')) {//if this is set, then the user has issued an Update
-	plugin_hook("userisactivecheckboxpost", $hookParams);
 }
 
 html_use_tablesorter();
@@ -117,266 +109,171 @@ echo html_e('input', array('type' => 'hidden', 'name' => 'form_key', 'value' => 
 echo $HTML->boxTop(_('Account options'));
 echo html_e('p', array(), _('Welcome').html_e('strong', array(), $u->getRealName()));
 echo html_e('p', array(), _('Account options')._(':'));
-echo html_ao('ul');
-echo html_e('li', array(), util_make_link_u($u->getUnixName(),$u->getID(),html_e('strong', array(), _('View My Profile'))));
+$elementLi[] = array('content' => util_make_link_u($u->getUnixName(), $u->getID(), html_e('strong', array(), _('View My Profile'))));
 if(forge_get_config('use_people')) {
-	echo html_e('li', array(), util_make_link('/people/editprofile.php', html_e('strong', array(), _('Edit My Skills Profile'))));
+	$elementLi[] = array('content' => util_make_link('/people/editprofile.php', html_e('strong', array(), _('Edit My Skills Profile'))));
 }
-echo html_ac(html_ap() - 1);
+echo $HTML->html_list($elementLi);
 echo $HTML->listTableTop(array(), array(), 'infotable');
-?>
 
-<tr class="top">
-	<td><?php echo _('Member since')._(':'); ?></td>
-	<td><?php print date(_('Y-m-d H:i'),$u->getAddDate()); ?></td>
-</tr>
-<tr class="top">
-	<td><?php echo _('User Id')._(':'); ?></td>
-	<td><?php print $u->getID(); ?></td>
-</tr>
+$cells = array();
+$cells[][] = _('Member since')._(':');
+$cells[][] = date(_('Y-m-d H:i'), $u->getAddDate());
+echo $HTML->multiTableRow(array('class' => 'top'), $cells);
 
-<tr class="top">
-	<td><?php echo _('Login Name')._(':'); ?></td>
-	<td><?php print $u->getUnixName(); ?>
-	<br /><a href="change_pw.php"><?php echo _('Change Password'); ?></a>
-	</td>
-</tr>
+$cells = array();
+$cells[][] = _('User Id')._(':');
+$cells[][] = $u->getID();
+echo $HTML->multiTableRow(array('class' => 'top'), $cells);
 
-<tr class="top">
-	<td>
-	<?php echo _('First Name').utils_requiredField()._(':'); ?>
-	</td>
-	<td>
-		<label for="firstname">
-			<input id="firstname" required="required" type="text" name="firstname" value="<?php print $u->getFirstName(); ?>"/>
-		</label>
-	</td>
-</tr>
+$cells = array();
+$cells[][] = _('Login Name')._(':');
+$cells[][] = $u->getUnixName().html_e('br').util_make_link('/account/change_pw.php', _('Change Password'));
+echo $HTML->multiTableRow(array('class' => 'top'), $cells);
 
-<tr class="top">
-	<td>
-	<?php if ($u->isEditable('lastname')) { ?>
-		<label for="lastname">
-			<?php echo _('Last Name').utils_requiredField()._(':'); ?>
-		</label>
-	<?php } else { ?>
-			<?php echo _('Last Name')._(':'); ?>
-	<?php } ?>
-	</td>
-	<td>
-	<?php if ($u->isEditable('lastname')) { ?>
-		<input id="lastname" required="required" type="text" name="lastname" value="<?php print $u->getLastName(); ?>"/>
-	<?php } else {
-		print $u->getLastName();
-	} ?>
-	</td>
-</tr>
+$cells = array();
+$cells[][] = _('First Name').utils_requiredField()._(':');
+$cells[][] = html_e('label', array('for' => 'firstname'), html_e('input', array('type' => 'text', 'id' => 'firstname', 'required' => 'required', 'name' => 'firstname', 'value' => $u->getFirstName())));
+echo $HTML->multiTableRow(array('class' => 'top'), $cells);
 
-<tr class="top">
-	<td>
-	<?php echo _('Language')._(':'); ?>
-	</td>
-	<td>
-	<?php
-	if ($u->isEditable('language')) {
-		echo html_get_language_popup ('language',$u->getLanguage());
-	} else {
-		print $u->getLanguage();
-	}
-	?>
-	</td>
-</tr>
+$cells = array();
+if ($u->isEditable('lastname')) {
+	$cells[][] = _('Last Name').utils_requiredField()._(':');
+	$cells[][] = html_e('label', array('for' => 'lastname'), html_e('input', array('type' => 'text', 'id' => 'lastname', 'required' => 'required', 'name' => 'lastname', 'value' => $u->getLastName())));
+} else {
+	$cells[][] = _('Last Name')._(':');
+	$cells[][] = $u->getLastName();
+}
+echo $HTML->multiTableRow(array('class' => 'top'), $cells);
 
-<tr class="top">
-	<td>
-	<?php echo _('Timezone')._(':'); ?>
-	</td>
-	<td>
-	<?php
-	if ($u->isEditable('timezone')) {
-		echo html_get_timezone_popup('timezone', $u->getTimeZone());
-	} else {
-		print $u->getTimeZone();
-	}
-	?>
-	</td>
-</tr>
+$cells = array();
+$cells[][] = _('Language')._(':');
+if ($u->isEditable('language')) {
+	$cells[][] = html_get_language_popup('language',$u->getLanguage());
+} else {
+	$cells[][] = $u->getLanguage();
+}
+echo $HTML->multiTableRow(array('class' => 'top'), $cells);
 
-<tr class="top">
-	<td>
-	<?php echo _('Theme')._(':'); ?>
-	</td>
-	<td>
-	<?php echo html_get_theme_popup('theme_id', $u->getThemeID()); ?>
-	</td>
-</tr>
+$cells = array();
+$cells[][] = _('Timezone')._(':');
+if ($u->isEditable('timezone')) {
+	$cells[][] = html_get_timezone_popup('timezone', $u->getTimeZone());
+} else {
+	$cells[][] = $u->getTimeZone();
+}
+echo $HTML->multiTableRow(array('class' => 'top'), $cells);
 
-<tr class="top">
-	<td>
-	<?php echo _('Country')._(':'); ?>
-	</td>
-	<td>
-	<?php
-	if ($u->isEditable('ccode')) {
-		echo html_get_ccode_popup('ccode', $u->getCountryCode());
-	} else {
-		print $u->getCountryCode();
-	}
-	?>
-	</td>
-</tr>
+$cells = array();
+$cells[][] = _('Theme')._(':');
+$cells[][] = html_get_theme_popup('theme_id', $u->getThemeID());
+echo $HTML->multiTableRow(array('class' => 'top'), $cells);
 
-<tr class="top">
-	<td>
-	<?php echo _('Email Address')._(': '); ?>
-	</td>
-	<td><?php print $u->getEmail(); ?>
-	<?php
-	if ($u->isEditable('email')) {
-	?>
-	<br /><a href="change_email.php">[<?php echo _('Change Email Address'); ?>]</a>
-	<?php } ?>
-	</td>
-</tr>
+$cells = array();
+$cells[][] = _('Country')._(':');
+if ($u->isEditable('ccode')) {
+	$cells[][] = html_get_ccode_popup('ccode', $u->getCountryCode());
+} else {
+	$cells[][] = $u->getCountryCode();
+}
+echo $HTML->multiTableRow(array('class' => 'top'), $cells);
 
-<tr class="top">
-	<td>
-	<?php echo _('Address')._(':'); ?>
-	</td>
-	<td>
-	<?php
-	if ($u->isEditable('address')) {
-	?>
-		<label for="address">
-			<input id="address" type="text" name="address" value="<?php echo $u->getAddress(); ?>" size="80"/>
-		</label>
-	<?php } else {
-		print $u->getAddress();
-	} ?>
-	</td>
-</tr>
+$cells = array();
+$cells[][] = _('Email Address')._(':');
+if ($u->isEditable('email')) {
+	$cells[][] = $u->getEmail().html_e('br').util_make_link('/account/change_email.php', _('Change Email Address'));
+} else {
+	$cells[][] = $u->getEmail();
+}
+echo $HTML->multiTableRow(array('class' => 'top'), $cells);
 
-<tr class="top">
-	<td>
-	<?php echo _('Address (continued)')._(':'); ?>
-	</td>
-	<td>
-	<?php
-	if ($u->isEditable('address2')) {
-	?>
-		<label for="address2">
-			<input id="address2" type="text" name="address2" value="<?php echo $u->getAddress2(); ?>" size="80"/>
-		</label>
-	<?php } else {
-		print $u->getAddress2();
-	} ?>
-	</td>
-</tr>
+$cells = array();
+$cells[][] = _('Address')._(':');
+if ($u->isEditable('address')) {
+	$cells[][] = html_e('label', array('for' => 'address'), html_e('input', array('type' => 'text', 'id' => 'address', 'name' => 'address', 'value' => $u->getAddress(), 'size' => 80)));
+} else {
+	$cells[][] = $u->getAddress();
+}
+echo $HTML->multiTableRow(array('class' => 'top'), $cells);
 
-<tr class="top">
-	<td>
-	<?php echo _('Phone')._(':'); ?>
-	</td>
-	<td>
-	<?php
-	if ($u->isEditable('phone')) {
-	?>
-		<label for="phone">
-			<input id="phone" type="text" name="phone" value="<?php echo $u->getPhone(); ?>" size="20"/>
-		</label>
-	<?php } else {
-		print $u->getPhone();
-	} ?>
-	</td>
-</tr>
+$cells = array();
+$cells[][] = _('Address (continued)')._(':');
+if ($u->isEditable('address2')) {
+	$cells[][] = html_e('label', array('for' => 'address2'), html_e('input', array('type' => 'text', 'id' => 'address2', 'name' => 'address2', 'value' => $u->getAddress2(), 'size' => 80)));
+} else {
+	$cells[][] = $u->getAddress2();
+}
+echo $HTML->multiTableRow(array('class' => 'top'), $cells);
 
-<tr class="top">
-	<td>
-	<?php echo _('Fax')._(':'); ?>
-	</td>
-	<td>
-	<?php
-	if ($u->isEditable('fax')) {
-	?>
-		<label for="fax">
-			<input id="fax" type="text" name="fax" value="<?php echo $u->getFax(); ?>" size="20"/>
-		</label>
-	<?php } else {
-		print $u->getFax();
-	} ?>
-	</td>
-</tr>
+$cells = array();
+$cells[][] = _('Phone')._(':');
+if ($u->isEditable('phone')) {
+	$cells[][] = html_e('label', array('for' => 'phone'), html_e('input', array('type' => 'text', 'id' => 'phone', 'name' => 'phone', 'value' => $u->getPhone(), 'size' => 20)));
+} else {
+	$cells[][] = $u->getPhone();
+}
+echo $HTML->multiTableRow(array('class' => 'top'), $cells);
 
-<tr class="top">
-	<td>
-	<?php echo _('Title')._(':'); ?>
-	</td>
-	<td>
-	<?php
-	if ($u->isEditable('title')) {
-	?>
-		<label for="title">
-			<input id="title" type="text" name="title" value="<?php echo $u->getTitle(); ?>" size="10"/>
-		</label>
-	<?php } else {
-		print $u->getTitle();
-	} ?>
-	</td>
-</tr>
-<?php
+$cells = array();
+$cells[][] = _('Fax')._(':');
+if ($u->isEditable('fax')) {
+	$cells[][] = html_e('label', array('for' => 'fax'), html_e('input', array('type' => 'text', 'id' => 'fax', 'name' => 'fax', 'value' => $u->getFax(), 'size' => 20)));
+} else {
+	$cells[][] = $u->getFax();
+}
+echo $HTML->multiTableRow(array('class' => 'top'), $cells);
+
+$cells = array();
+$cells[][] = _('Title')._(':');
+if ($u->isEditable('title')) {
+	$cells[][] = html_e('label', array('for' => 'title'), html_e('input', array('type' => 'text', 'id' => 'title', 'name' => 'title', 'value' => $u->getTitle(), 'size' => 10)));
+} else {
+	$cells[][] = $u->getTitle();
+}
+echo $HTML->multiTableRow(array('class' => 'top'), $cells);
+
 echo $HTML->listTableBottom();
 echo $HTML->boxBottom();
+echo html_e('br');
 // ############################# Preferences
 echo $HTML->boxTop(_('Preferences'));
-?>
 
-<p>
-	<input id="mail_site" type="checkbox" name="mail_site" value="1"<?php
-	if ($u->getMailingsPrefs('site')) print ' checked="checked"'; ?> />
-	<label for="mail_site">
-		<?php echo _('Receive Email about Site Updates <em>(Very low traffic and includes security notices. Highly Recommended.)</em>'); ?>
-	</label>
-</p>
-
-<p>
-	<input id="mail_va" type="checkbox" name="mail_va" value="1"<?php
-	if ($u->getMailingsPrefs('va')) print ' checked="checked"'; ?> />
-	<label for="mail_va">
-		<?php echo _('Receive additional community mailings. <em>(Low traffic.)</em>'); ?>
-	</label>
-</p>
-
-<?php if (forge_get_config('use_ratings')) { ?>
-<p>
-	<input id="use_ratings" type="checkbox" name="use_ratings" value="1"<?php
-	if ($u->usesRatings()) print ' checked="checked"'; ?> />
-	<label for="use_ratings">
-		<?php printf(_('Participate in peer ratings. <em>(Allows you to rate other users using several criteria as well as to be rated by others. More information is available on your <a href="%s">user page</a> if you have chosen to participate in ratings.)</em>'), util_make_url_u($u->getUnixName(),$u->getID())); ?>
-	</label>
-</p>
-<?php } ?>
-
-<p>
-	<input id="use_tooltips" type="checkbox" name="use_tooltips" value="1"<?php
-	if ($u->usesTooltips()) print ' checked="checked"'; ?> />
-		<label for="use_tooltips">
-	<?php echo _('Enable tooltips. Small help texts displayed on mouse over links, images.'); ?>
-	</label>
-</p>
-<?php
-if (!forge_get_config('use_quicknav_default')) {
-?>
-<p>
-	<input id="quicknav_mode" type="checkbox" name="quicknav_mode" value="1"<?php
-	if ($u->getPreference('quicknav_mode')) print ' checked="checked"'; ?> />
-	<label for="quicknav_mode">
-	<?php echo _('Use advanced quicknav menu based on your navigation history on this site. Quicknav will use your 5 more visited projects.'); ?>
-	</label>
-<?php
+$htmlAttrs = array('id' => 'mail_site', 'type' => 'checkbox', 'name' => 'mail_site', 'value' => 1);
+if ($u->getMailingsPrefs('site')) {
+	$htmlAttrs['checked'] = 'checked';
 }
-?>
-</p>
-<?php
+echo html_e('p', array(), html_e('input', $htmlAttrs).html_e('label', array('for' => 'mail_site'), _('Receive Email about Site Updates <em>(Very low traffic and includes security notices. Highly Recommended.)</em>')));
+
+$htmlAttrs = array('id' => 'mail_va', 'type' => 'checkbox', 'name' => 'mail_va', 'value' => 1);
+if ($u->getMailingsPrefs('va')) {
+	$htmlAttrs['checked'] = 'checked';
+}
+echo html_e('p', array(), html_e('input', $htmlAttrs).html_e('label', array('for' => 'mail_va'), _('Receive additional community mailings. <em>(Low traffic.)</em>')));
+
+if (forge_get_config('use_ratings')) {
+	$htmlAttrs = array('id' => 'use_ratings', 'type' => 'checkbox', 'name' => 'use_ratings', 'value' => 1);
+	if ($u->usesRatings()) {
+		$htmlAttrs['checked'] = 'checked';
+	}
+	echo html_e('p', array(), html_e('input', $htmlAttrs).
+				html_e('label', array('for' => 'use_ratings'), sprintf(_('Participate in peer ratings. <em>(Allows you to rate other users using several criteria as well as to be rated by others. More information is available on your <a href="%s">user page</a> if you have chosen to participate in ratings.)</em>'), util_make_url_u($u->getUnixName(), $u->getID()))));
+}
+
+$htmlAttrs = array('id' => 'use_tooltips', 'type' => 'checkbox', 'name' => 'use_tooltips', 'value' => 1);
+if ($u->usesTooltips()) {
+	$htmlAttrs['checked'] = 'checked';
+}
+echo html_e('p', array(), html_e('input', $htmlAttrs).html_e('label', array('for' => 'use_tooltips'), _('Enable tooltips. Small help texts displayed on mouse over links, images.')));
+
+if (!forge_get_config('use_quicknav_default')) {
+	$htmlAttrs = array('id' => 'quicknav_mode', 'type' => 'checkbox', 'name' => 'quicknav_mode', 'value' => 1);
+	if ($u->getPreference('quicknav_mode')) {
+		$htmlAttrs['checked'] = 'checked';
+	}
+	echo html_e('p', array(), html_e('input', $htmlAttrs).
+				html_e('label', array('for' => 'quicknav_mode'), _('Use advanced quicknav menu based on your navigation history on this site. Quicknav will use your 5 more visited projects.')));
+}
+
 // displays a "Use xxxx Plugin" checkbox
 plugin_hook("userisactivecheckbox", $hookParams);
 
@@ -385,11 +282,11 @@ echo $HTML->boxBottom();
 // ############################### Shell Account
 
 if (forge_get_config('use_shell')) {
+	echo html_e('br');
 	echo $HTML->boxTop(_('Shell Account Information')."");
 	if ($u->getUnixStatus() == 'A') {
-		print '&nbsp;
-	<br />'._('Shell box')._(': ').'<strong>'.forge_get_config('shell_host').'</strong>
-	<br />'._('SSH Shared Authorized Keys')._(': ').'<strong>';
+		echo html_e('br')._('Shell box')._(': ').html_e('strong', array(), forge_get_config('shell_host')).
+			html_e('br')._('SSH Shared Authorized Keys')._(': ').'<strong>';
 		$sshKeysArray = $u->getAuthorizedKeys();
 		if (is_array($sshKeysArray) && count($sshKeysArray)) {
 			$tabletop = array(_('Name'), _('Algorithm'), _('Fingerprint'), _('Uploaded'));
@@ -408,7 +305,7 @@ if (forge_get_config('use_shell')) {
 			print '0';
 		}
 		print '</strong>';
-		print '<br />' . util_make_link('/account/editsshkeys.php', _('Edit Keys'));
+		echo html_e('br').util_make_link('/account/editsshkeys.php', _('Edit Keys'));
 	} else {
 		echo $HTML->warning_msg(_('Shell Account deactivated'));
 	}
