@@ -384,6 +384,7 @@ class Theme_Funky extends Layout {
 					}, 5000);
 				jQuery("button").button();
 				jQuery(":submit").button();
+				jQuery(":reset").button();
 			});
 			//]]>'."\n";
 		echo html_ac(html_ap() -1);
