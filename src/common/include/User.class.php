@@ -1735,7 +1735,7 @@ Email: %3$s
 			}
 		}
 
-		if ($this->refresh) {
+		if (isset($this->refresh) && $this->refresh) {
 			$flag = !$flag;
 		}
 
