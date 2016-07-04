@@ -735,7 +735,7 @@ if ($art_arr && $art_cnt > 0) {
 		$ath->renderExtraFields($sel,true,_('No Change'),false,'', array(ARTIFACT_EXTRAFIELD_FILTER_INT),true);
 		echo '<tr>';
 		echo '<td><strong>'._('Priority')._(':').'</strong><br />';
-		build_priority_select_box ('priority', '100', true);
+		echo build_priority_select_box ('priority', '100', true);
 		echo '</td>';
 		echo '<td>';
 		echo '</td>';
