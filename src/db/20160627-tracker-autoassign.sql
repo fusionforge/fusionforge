@@ -1,3 +1,5 @@
+INSERT INTO artifact_extra_field_list(extra_field_id, group_artifact_id, field_name, alias, description) VALUES (100, 100, 'Default', 'default', 'Default Data - Dont Edit');
+
 ALTER TABLE artifact_group_list
    ADD auto_assign_field integer NOT NULL DEFAULT 100;
 
@@ -15,8 +17,6 @@ CREATE VIEW artifact_group_list_vw AS
     agl.custom_renderer, agl.auto_assign_field, aca.count, aca.open_count
    FROM artifact_group_list agl
    LEFT JOIN artifact_counts_agg aca USING (group_artifact_id);
-
-INSERT INTO artifact_extra_field_list(extra_field_id, group_artifact_id, field_name, alias, description) VALUES (100, 100, 'Default', 'default', 'Default Data - Dont Edit');
 
 ALTER TABLE artifact_extra_field_elements
    ADD auto_assign_to integer NOT NULL DEFAULT 100;
