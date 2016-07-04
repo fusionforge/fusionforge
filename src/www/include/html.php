@@ -576,11 +576,13 @@ function html_use_jquerybrowser() {
  * @param	array		$attrs		Array of other attributes for this select element
  * @return	string
  */
-function html_build_select_box_from_arrays($vals, $texts, $select_name, $checked_val = 'xzxz',
-										   $show_100 = true, $text_100 = 'none',
-										   $show_any = false, $text_any = 'any',
-										   $allowed = false, $attrs = array(),
-										   $opts_attrs = array(), $attrs_100 = array()) {
+function html_build_select_box_from_arrays($vals, $texts, $select_name,
+					   $checked_val = 'xzxz',
+					   $show_100 = true, $text_100 = 'none',
+					   $show_any = false, $text_any = 'any',
+					   $allowed = false, $attrs = array(),
+					   $opts_attrs = array(),
+					   $attrs_100 = array()) {
 	if ($text_100 == 'none') {
 		$text_100 = _('None');
 	}
@@ -694,18 +696,21 @@ function html_build_select_box_from_arrays($vals, $texts, $select_name, $checked
  * @param	bool		$allowed	Unused
  * @return	string
  */
-function html_build_select_box($result, $name, $checked_val = "xzxz", $show_100 = true, $text_100 = 'none',
-							   $show_any = false, $text_any = 'Select One', $allowed = false, $attrs = array()) {
+function html_build_select_box($result, $name, $checked_val = "xzxz",
+			       $show_100 = true, $text_100 = 'none',
+			       $show_any = false, $text_any = 'Select One',
+			       $allowed = false, $attrs = array()) {
 	if ($text_100 == 'none') {
 		$text_100 = _('None');
 	}
 	if ($text_any == 'Select One') {
 		$text_any = _('Select One');
 	}
-	return html_build_select_box_from_arrays(util_result_column_to_array($result, 0),
-											 util_result_column_to_array($result, 1),
-											 $name, $checked_val, $show_100, $text_100,
-											 $show_any, $text_any, $allowed, $attrs);
+	return html_build_select_box_from_arrays(
+			util_result_column_to_array($result, 0),
+			util_result_column_to_array($result, 1),
+			$name, $checked_val, $show_100, $text_100,
+			$show_any, $text_any, $allowed, $attrs);
 }
 
 /**
@@ -719,8 +724,11 @@ function html_build_select_box($result, $name, $checked_val = "xzxz", $show_100 
  * @param	string	$text_100	What to call the '100 row'.  Defaults to none.
  * @return	string
  */
-function html_build_select_box_sorted($result, $name, $checked_val = "xzxz", $show_100 = true, $text_100 = 'none',
-							   $show_any = false, $text_any = 'Select One', $allowed = false, $attrs = array()) {
+function html_build_select_box_sorted($result, $name,
+				      $checked_val = "xzxz",
+				      $show_100 = true, $text_100 = 'none',
+				      $show_any = false, $text_any = 'Select One',
+				      $allowed = false, $attrs = array()) {
 	if ($text_100 == 'none') {
 		$text_100 = _('None');
 	}
@@ -731,8 +739,11 @@ function html_build_select_box_sorted($result, $name, $checked_val = "xzxz", $sh
 	$vals = util_result_column_to_array($result, 0);
 	$texts = util_result_column_to_array($result, 1);
 	array_multisort($texts, SORT_ASC, SORT_STRING, $vals);
-	return html_build_select_box_from_arrays ($vals, $texts, $name, $checked_val, $show_100, $text_100,
-											  $show_any, $text_any, $allowed, $attrs);
+	return html_build_select_box_from_arrays($vals, $texts, $name,
+						 $checked_val,
+						 $show_100, $text_100,
+						 $show_any, $text_any,
+						 $allowed, $attrs);
 }
 
 /**
@@ -748,7 +759,9 @@ function html_build_select_box_sorted($result, $name, $checked_val = "xzxz", $sh
  * @param	array		$attrs		Array of other attributes for this select element
  * @return	string
  */
-function html_build_multiple_select_box($result, $name, $checked_array, $size = 8, $show_100 = true, $text_100 = 'none', $attrs = array()) {
+function html_build_multiple_select_box($result, $name, $checked_array, $size = 8,
+					$show_100 = true, $text_100 = 'none',
+					$attrs = array()) {
 	$vals = array();
 	$texts = array();
 	$rows = db_numrows($result);
