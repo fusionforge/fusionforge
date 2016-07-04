@@ -801,7 +801,11 @@ function html_build_multiple_select_box($result, $name, $checked_array, $size = 
  * @return	string
  * @throws	Exception
  */
-function html_build_multiple_select_box_from_arrays($vals, $texts, $name, $checked_array, $size = 8, $show_100 = true, $text_100 = 'none', $allowed = false, $attrs = array(), $opts_attrs = array(), $attrs_100 = array()) {
+function html_build_multiple_select_box_from_arrays(
+		$vals, $texts, $name, $checked_array, $size = 8,
+		$show_100 = true, $text_100 = 'none',
+		$allowed = false, $attrs = array(),
+		$opts_attrs = array(), $attrs_100 = array()) {
 	$return = html_ao('select', array_merge(array('name' => $name, 'multiple' => 'multiple', 'size' => $size), $attrs));
 	if ($show_100) {
 		if ($text_100 == 'none') {
