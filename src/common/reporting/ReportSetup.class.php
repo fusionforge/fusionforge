@@ -970,7 +970,7 @@ class ReportSetup extends Report {
 
 			FULL OUTER JOIN
 				(SELECT created_by AS user_id, $1::int AS day, count(*) AS docs
-				FROM doc_data
+				FROM docdata_vw
 				WHERE createdate BETWEEN $1 AND $2
 				GROUP BY user_id,day ) docs USING (user_id,day)) foo3
 
