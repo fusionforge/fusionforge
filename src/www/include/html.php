@@ -293,7 +293,7 @@ function html_build_select_box_from_array($vals, $select_name, $checked_val = 'x
  * array being the text you want displayed.
  *
  * The infamous '100 row' has to do with the SQL Table joins done throughout all this code.
- * There must be a related row in users, categories, et	, and by default that
+ * There must be a related row in users, categories, etc., and by default that
  * row is 100, so almost every pop-up box has 100 as the default
  * Most tables in the database should therefore have a row with an id of 100 in it so that joins are successful
  *
@@ -305,7 +305,10 @@ function html_build_select_box_from_array($vals, $select_name, $checked_val = 'x
  * @param	string	$text_100	What to call the '100 row' defaults to none
  * @param	bool	$show_any	Whether or not to show the 'Any row'
  * @param	string	$text_any	What to call the 'Any row' defaults to any
+ * @param	bool	$allowed
  * @param	array	$attrs		Array of other attributes
+ * @param	array	$radios_attrs
+ * @param	array	$attrs_100
  * @return	string
  */
 function html_build_radio_buttons_from_arrays($vals, $texts, $select_name, $checked_val = 'xzxz',
@@ -560,7 +563,7 @@ function html_use_jquerybrowser() {
  * array being the text you want displayed.
  *
  * The infamous '100 row' has to do with the SQL Table joins done throughout all this code.
- * There must be a related row in users, categories, et	, and by default that
+ * There must be a related row in users, categories, etc., and by default that
  * row is 100, so almost every pop-up box has 100 as the default
  * Most tables in the database should therefore have a row with an id of 100 in it so that joins are successful
  *
@@ -574,7 +577,10 @@ function html_use_jquerybrowser() {
  * @param	string		$text_any	What to call the 'Any row' defaults to any
  * @param	bool|array	$allowed	Array of all allowed values from the full list.
  * @param	array		$attrs		Array of other attributes for this select element
+ * @param	array		$opts_attrs
+ * @param	array		$attrs_100
  * @return	string
+ * @throws Exception
  */
 function html_build_select_box_from_arrays($vals, $texts, $select_name,
 					   $checked_val = 'xzxz',
@@ -694,6 +700,7 @@ function html_build_select_box_from_arrays($vals, $texts, $select_name,
  * @param	bool		$show_any	Whether or not to show the 'Any row'
  * @param	string		$text_any	What to call the 'Any row' defaults to any
  * @param	bool		$allowed	Unused
+ * @param	array	$attrs
  * @return	string
  */
 function html_build_select_box($result, $name, $checked_val = "xzxz",
@@ -722,6 +729,10 @@ function html_build_select_box($result, $name, $checked_val = "xzxz",
  * @param	string	$checked_val	The item that should be checked
  * @param	bool	$show_100	Whether or not to show the '100 row'
  * @param	string	$text_100	What to call the '100 row'.  Defaults to none.
+ * @param	bool	$show_any
+ * @param	string	$text_any
+ * @param	bool	$allowed
+ * @param	array	$attrs
  * @return	string
  */
 function html_build_select_box_sorted($result, $name,
@@ -775,15 +786,19 @@ function html_build_multiple_select_box($result, $name, $checked_array, $size = 
 /**
  * html_build_multiple_select_box_from_arrays() - Takes two arrays and builds a multi-select box
  *
- * @param	array	$ids		id of the field
+ * @param	array	$vals
  * @param	array	$texts		Text to be displayed
  * @param	string	$name		id of the items selected
  * @param	string	$checked_array	The item that should be checked
  * @param	int	$size		The size of this box
  * @param	bool	$show_100	Whether or not to show the '100 row'
  * @param	string	$text_100	What to call the '100 row' defaults to none.
- * @param	array	$attrs		Array of other attributes for this select element
+ * @param	bool	$allowed
+ * @param	array	$attrs Array of other attributes for this select element
+ * @param	array	$opts_attrs
+ * @param	array	$attrs_100
  * @return	string
+ * @throws	Exception
  */
 function html_build_multiple_select_box_from_arrays($vals, $texts, $name, $checked_array, $size = 8, $show_100 = true, $text_100 = 'none', $allowed = false, $attrs = array(), $opts_attrs = array(), $attrs_100 = array()) {
 	$return = html_ao('select', array_merge(array('name' => $name, 'multiple' => 'multiple', 'size' => $size), $attrs));
@@ -853,11 +868,12 @@ function html_build_checkbox($name, $value, $checked, $attrs=array()) {
 /**
  * html_build_checkboxes_from_array() - Render checkbox control
  *
- * @param	string	$name		name of control
- * @param	string	$value		value of control
- * @param	bool	$checked	true if control should be checked
- * @param	array	$attrs		Array of other attributes for this element
- * @return	html code for checkbox control
+ * @param	array	$vals
+ * @param	string	$check_name	name of control
+ * @param	array	$checked
+ * @param	bool	$checkall
+ * @param	bool	$show_100
+ * @return	string	html code for checkbox control
  */
 function html_build_checkboxes_from_array($vals, $check_name, $checked=array(), $checkall=false, $show_100) {
 	$values = array_keys($vals);
@@ -921,6 +937,12 @@ function html_build_checkboxes_from_arrays($vals, $texts, $check_name, $checked=
  * build_priority_select_box() - Wrapper for html_build_priority_select_box()
  *
  * @see html_build_priority_select_box()
+ *
+ * @param	string	$name
+ * @param	string	$checked_val
+ * @param	bool	$nochange
+ * @param	array	$attrs
+ * @return string
  */
 function build_priority_select_box($name = 'priority', $checked_val = '3', $nochange = false, $attrs = array()) {
 	return  html_build_priority_select_box($name, $checked_val, $nochange, $attrs);
@@ -1449,6 +1471,7 @@ function html_a_apply($scopy) {
  * @param	int	$querytotalcount	total number of results
  * @param	int	$trove_browselimit	the maximum number displayed on a single page
  * @param	int	$page			current page number (starting at 1)
+ * @param	string	$textintro
  * @return	string
  */
 function html_trove_limit_navigation_box($php_self, $querytotalcount, $trove_browselimit, $page, $textintro = '') {
