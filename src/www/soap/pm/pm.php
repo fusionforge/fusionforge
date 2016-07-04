@@ -365,7 +365,7 @@ $server->register(
 //
 //	getProjectGroups
 //
-function &getProjectGroups($session_ser,$group_id) {
+function getProjectGroups($session_ser,$group_id) {
 	continue_session($session_ser);
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
@@ -408,7 +408,7 @@ function projectgroups_to_soap($pg_arr) {
 //
 //	addProjectTask
 //
-function &addProjectTask($session_ser,$group_id,$group_project_id,$summary,$details,$priority,
+function addProjectTask($session_ser,$group_id,$group_project_id,$summary,$details,$priority,
 	$hours,$start_date,$end_date,$category_id,$percent_complete,$assigned_arr,$depend_arr,$duration,$parent_id) {
 	continue_session($session_ser);
 	$grp = group_get_object($group_id);
@@ -449,7 +449,7 @@ function &addProjectTask($session_ser,$group_id,$group_project_id,$summary,$deta
 //
 //  Update ProjectTask
 //
-function &updateProjectTask($session_ser,$group_id,$group_project_id,$project_task_id,
+function updateProjectTask($session_ser,$group_id,$group_project_id,$project_task_id,
 	$summary,$details,$priority,$hours,$start_date,$end_date,$status_id,$category_id,
     $percent_complete,$assigned_arr,$depend_arr,$new_group_project_id,$duration,$parent_id) {
     continue_session($session_ser);
@@ -491,7 +491,7 @@ function &updateProjectTask($session_ser,$group_id,$group_project_id,$project_ta
 //
 //	getProjectTaskCategories
 //
-function &getProjectTaskCategories($session_ser,$group_id,$group_project_id) {
+function getProjectTaskCategories($session_ser,$group_id,$group_project_id) {
 	continue_session($session_ser);
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
@@ -533,7 +533,7 @@ function projectcategories_to_soap($cat_arr) {
 //
 //	getProjectTechnicians
 //
-function &getProjectTechnicians($session_ser,$group_id,$group_project_id) {
+function getProjectTechnicians($session_ser,$group_id,$group_project_id) {
 	continue_session($session_ser);
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
@@ -555,7 +555,7 @@ function &getProjectTechnicians($session_ser,$group_id,$group_project_id) {
 	return users_to_soap($techs);
 }
 
-function &getProjectTasks($session_ser,$group_id,$group_project_id,$assigned_to,$status,$category,$group) {
+function getProjectTasks($session_ser,$group_id,$group_project_id,$assigned_to,$status,$category,$group) {
 	continue_session($session_ser);
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
@@ -639,7 +639,7 @@ function projecttasks_to_soap($pt_arr) {
 //
 //	getProjectMessages
 //
-function &getProjectMessages($session_ser,$group_id,$group_project_id,$project_task_id) {
+function getProjectMessages($session_ser,$group_id,$group_project_id,$project_task_id) {
 	continue_session($session_ser);
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
@@ -687,7 +687,7 @@ function projectmessages_to_soap($at_arr) {
 //
 //	addProjectMessage
 //
-function &addProjectMessage($session_ser,$group_id,$group_project_id,$project_task_id,$body) {
+function addProjectMessage($session_ser,$group_id,$group_project_id,$project_task_id,$body) {
 	continue_session($session_ser);
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
