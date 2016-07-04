@@ -311,10 +311,11 @@ function html_build_select_box_from_array($vals, $select_name, $checked_val = 'x
  * @param	array	$attrs_100
  * @return	string
  */
-function html_build_radio_buttons_from_arrays($vals, $texts, $select_name, $checked_val = 'xzxz',
-											  $show_100 = true, $text_100 = 'none', $show_any = false,
-											  $text_any = 'any', $allowed = false, $attrs = array(),
-											  $radios_attrs = array(), $attrs_100 = array()) {
+function html_build_radio_buttons_from_arrays(
+		$vals, $texts, $select_name, $checked_val = 'xzxz',
+		$show_100 = true, $text_100 = 'none', $show_any = false,
+		$text_any = 'any', $allowed = false, $attrs = array(),
+		$radios_attrs = array(), $attrs_100 = array()) {
 
 	$attrs['type'] = 'radio';
 	$attrs['name'] = $select_name;
