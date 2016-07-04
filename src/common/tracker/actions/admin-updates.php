@@ -45,7 +45,7 @@ if (getStringFromRequest('add_extrafield')) {
 	$alias = getStringFromRequest('alias');
 	$hide100 = getStringFromRequest('hide100');
 	$show100label = getStringFromRequest('show100label');
-
+	$autoassign = getStringFromRequest('autoassign');
 	$ab = new ArtifactExtraField($ath);
 
 	if (!$ab || !is_object($ab)) {
@@ -58,7 +58,7 @@ if (getStringFromRequest('add_extrafield')) {
 		} else {
 			$show100 = 1;
 		}
-		if (!$ab->create($name, $field_type, $attribute1, $attribute2, $is_required, $alias, $show100, $show100label, $description, $pattern, $parent)) {
+		if (!$ab->create($name, $field_type, $attribute1, $attribute2, $is_required, $alias, $show100, $show100label, $description, $pattern, $parent, $autoassign)) {
 			$error_msg .= _('Error inserting a custom field')._(': ').$ab->getErrorMessage();
 			$ab->clearError();
 		} else {
@@ -240,7 +240,7 @@ if (getStringFromRequest('add_extrafield')) {
 	$alias = getStringFromRequest('alias');
 	$hide100 = getStringFromRequest('hide100');
 	$show100label = getStringFromRequest('show100label');
-
+	$autoassign = getStringFromRequest('autoassign');
 	$ac = new ArtifactExtraField($ath, $id);
 	if (!$ac || !is_object($ac)) {
 		$error_msg .= _('Unable to create ArtifactExtraField Object');
@@ -252,7 +252,7 @@ if (getStringFromRequest('add_extrafield')) {
 		} else {
 			$show100 = 1;
 		}
-		if (!$ac->update($name, $attribute1, $attribute2, $is_required, $alias, $show100, $show100label, $description, $pattern, $parent)) {
+		if (!$ac->update($name, $attribute1, $attribute2, $is_required, $alias, $show100, $show100label, $description, $pattern, $parent, $autoassign)) {
 			$error_msg .= _('Update failed')._(': ').$ac->getErrorMessage();
 			$ac->clearError();
 		} else {
@@ -265,16 +265,14 @@ if (getStringFromRequest('add_extrafield')) {
 //	Update an Element
 //
 } elseif (getStringFromRequest('update_opt')) {
-	$id = getStringFromRequest('id');
 	$boxid = getStringFromRequest('boxid');
-	$parentElements = getStringFromRequest('parent_elements');
-
 	$ac = new ArtifactExtraField($ath,$boxid);
 	if (!$ac || !is_object($ac)) {
 		$error_msg .= _('Unable to create ArtifactExtraField Object');
 	} elseif ($ac->isError()) {
 		$error_msg .= $ac->getErrorMessage();
 	} else {
+		$id = getStringFromRequest('id');
 		$ao = new ArtifactExtraFieldElement($ac,$id);
 		if (!$ao || !is_object($ao)) {
 			$error_msg .= _('Unable to create ArtifactExtraFieldElement Object');
@@ -283,7 +281,8 @@ if (getStringFromRequest('add_extrafield')) {
 		} else {
 			$name = getStringFromRequest('name');
 			$status_id = getIntFromRequest('status_id');
-			if (!$ao->update($name,$status_id)) {
+			$autoAssignTo = getStringFromRequest('auto_assign_to');
+			if (!$ao->update($name,$status_id,$autoAssignTo)) {
 				$error_msg .= _('Update failed')._(': ').$ao->getErrorMessage();
 				$ao->clearError();
 			} else {

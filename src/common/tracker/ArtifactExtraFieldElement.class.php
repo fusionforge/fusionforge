@@ -101,7 +101,7 @@ class ArtifactExtraFieldElement extends FFError {
 	 * @param	int	$status_id	Id the box that contains the choice (optional).
 	 * @return	bool	true on success / false on failure.
 	 */
-	function create($name,$status_id=0) {
+	function create($name,$status_id=0,$auto_assign_to=100) {
 		//
 		//	data validation
 		//
@@ -129,10 +129,11 @@ class ArtifactExtraFieldElement extends FFError {
 			return false;
 		}
 		db_begin();
-		$result = db_query_params ('INSERT INTO artifact_extra_field_elements (extra_field_id,element_name,status_id) VALUES ($1,$2,$3)',
+		$result = db_query_params ('INSERT INTO artifact_extra_field_elements (extra_field_id,element_name,status_id,auto_assign_to) VALUES ($1,$2,$3,$4)',
 					   array ($this->ArtifactExtraField->getID(),
 						  htmlspecialchars($name),
-						  $status_id)) ;
+						  $status_id,
+						  $auto_assign_to));
 		if ($result && db_affected_rows($result) > 0) {
 			$this->clearError();
 			$id=db_insertid($result,'artifact_extra_field_elements','element_id');
@@ -220,6 +221,15 @@ class ArtifactExtraFieldElement extends FFError {
 	 */
 	function getStatusID() {
 		return $this->data_array['status_id'];
+	}
+
+	/**
+	 * getAutoAssignedUser - return id of the user witch issue is auto assign to.
+	 *
+	 * @return	integer user id.
+	 */
+	function getAutoAssignto() {
+		return $this->data_array['auto_assign_to'];
 	}
 
 	/**
@@ -339,7 +349,7 @@ class ArtifactExtraFieldElement extends FFError {
 	 * @param	int	$status_id	optional for status box - maps to either open/closed.
 	 * @return	bool	success.
 	 */
-	function update($name,$status_id=0) {
+	function update($name,$status_id=0,$auto_assign_to=100) {
 		if (!forge_check_perm ('tracker_admin', $this->ArtifactExtraField->ArtifactType->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
@@ -365,10 +375,11 @@ class ArtifactExtraFieldElement extends FFError {
 			$status_id=0;
 		}
 		$result = db_query_params ('UPDATE artifact_extra_field_elements
-			SET element_name=$1, status_id=$2
-			WHERE element_id=$3',
+			SET element_name=$1, status_id=$2, auto_assign_to=$3
+			WHERE element_id=$4',
 					   array (htmlspecialchars($name),
 						  $status_id,
+						  $auto_assign_to,
 						  $this->getID())) ;
 		if ($result && db_affected_rows($result) > 0) {
 			return true;

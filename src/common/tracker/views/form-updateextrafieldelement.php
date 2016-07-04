@@ -71,11 +71,24 @@ if (!$ac || !is_object($ac)) {
 			$checkedElmntsArr = $ao->getParentElements();
 			echo html_build_checkboxes_from_array($parentFieldElmntVals, 'parent_elements', $checkedElmntsArr, true);
 		}
+		if ($ac->isAutoAssign()) {
+			echo html_e('strong',array(),_('Auto assign to')._(':')).html_e('br');
+			$engine = RBACEngine::getInstance () ;
+			$techs = $engine->getUsersByAllowedAction ('tracker', $ath->getID(), 'tech') ;
+			sortUserList($techs);
+			foreach ($techs as $tech) {
+				$ids[] = $tech->getID() ;
+				$names[] = $tech->getRealName().(($tech->getStatus()=='S') ? ' '._('[SUSPENDED]') : '');
+			}
+			$AutoAssignTo = $ao->getAutoAssignTo();
+			echo html_build_select_box_from_arrays($ids, $names, 'auto_assign_to', $AutoAssignTo, true,'nobody');
+		} else {
+			echo html_e('input', array('type'=>'hidden', 'name'=>'auto_assign_to', 'value'=>100));
+		}
 		echo $HTML->warning_msg(_('It is not recommended that you change the custom field name because other things are dependent upon it. When you change the custom field name, all related items will be changed to the new name.'));
-			?>
-			<p>
-			<input type="submit" name="post_changes" value="<?php echo _('Update') ?>" /></p>
-		<?php
+		echo html_ao('p');
+		echo html_e('input', array('type'=>'submit', 'name'=>'post_changes', 'value'=> _('Update')));
+		echo html_ac(html_ap()-1);
 		echo $HTML->closeForm();
 		$ath->footer();
 	}

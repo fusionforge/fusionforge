@@ -55,35 +55,63 @@ if (!$ac || !is_object($ac)) {
 	echo html_ac(html_ap() - 1);
 
 	echo html_ao('p');
+	echo html_e('label', array('for'=>'alias'), html_e('strong', array(), _('Field alias')._(':')).html_e('br'));
+	echo html_e('input', array('type'=>'text', 'id'=>'alias', 'name'=>'alias', 'value'=>$ac->getAlias(), 'size'=>'15', 'maxlength'=>'30'));
+	echo html_ac(html_ap() - 1);
+
+	echo html_ao('p');
 	echo html_e('label', array('for'=>'description'), html_e('strong', array(), _('Description')._(':')).html_e('br'));
 	echo html_e('input', array('type'=>'text', 'name'=>'description', 'value'=>$ac->getDescription(), 'size'=>'50', 'maxlength'=>'255'));
 	echo html_ac(html_ap() - 1);
 
 	echo html_ao('p');
+	echo html_build_checkbox('is_required', false, $ac->isRequired());
+	echo html_e('label', array('for'=>'is_required'), _('Field is mandatory'));
+	echo html_ac(html_ap() - 1);
+
 	$efType=$ac->getType();
 	if ($efType == ARTIFACT_EXTRAFIELDTYPE_TEXTAREA) {
-		echo html_e('label', array('for'=>'attribute1'), html_e('b', array(), _('Text Area Columns')).html_e('br'));
+		echo html_ao('p');
+		echo html_e('label', array('for'=>'attribute1'), _('Text Area Columns'));
 		echo html_e('input', array('type'=>'text', 'id'=>'attribute1', 'name'=>'attribute1', 'value'=>$ac->getAttribute1(), 'size'=>'2', 'maxlength'=>'2'));
 		echo html_ac(html_ap() - 1);
+
 		echo html_ao('p');
-		echo html_e('label', array('for'=>'attribute2'), html_e('b', array(), _('Text Area Columns')).html_e('br'));
+		echo html_e('label', array('for'=>'attribute2'), _('Text Area Columns'));
 		echo html_e('input', array('type'=>'text', 'id'=>'attribute2', 'name'=>'attribute2', 'value'=>$ac->getAttribute2(), 'size'=>'2', 'maxlength'=>'2'));
+		echo html_ac(html_ap() - 1);
+
 	} elseif ($efType == ARTIFACT_EXTRAFIELDTYPE_TEXT || $efType == ARTIFACT_EXTRAFIELDTYPE_RELATION) {
-		echo html_e('label', array('for'=>'attribute1'), html_e('b', array(), _('Text Field Size')).html_e('br'));
+		echo html_ao('p');
+		echo html_e('label', array('for'=>'attribute1'), _('Text Field Size'));
 		echo html_e('input', array('type'=>'text', 'id'=>'attribute1', 'name'=>'attribute1', 'value'=>$ac->getAttribute1(), 'size'=>'2', 'maxlength'=>'2'));
 		echo html_ac(html_ap() - 1);
+
 		echo html_ao('p');
-		echo html_e('label', array('for'=>'attribute2'), html_e('b', array(), _('Text Field Maxlength')).html_e('br'));
+		echo html_e('label', array('for'=>'attribute2'), _('Text Field Maxlength'));
 		echo html_e('input', array('type'=>'text', 'id'=>'attribute2', 'name'=>'attribute2', 'value'=>$ac->getAttribute2(), 'size'=>'2', 'maxlength'=>'2'));
+		echo html_ac(html_ap() - 1);
+
 		if ($efType == ARTIFACT_EXTRAFIELDTYPE_TEXT) {
-			echo html_ac(html_ap() - 1);
 			echo html_ao('p');
-			echo html_e('label', array('for'=>'pattern'), html_e('b', array(), _('Text Field Pattern')).html_e('br'));
-			echo html_e('input', array('type'=>'text', 'id'=>'pattern', 'name'=>'pattern', 'value'=>$ac->getPattern(), 'size'=>'80', 'maxlength'=>'255'));
+			echo html_e('label', array('for'=>'pattern'), _('Text Field Pattern'));
+			echo html_e('input', array('type'=>'text', 'id'=>'pattern', 'name'=>'pattern', 'value'=>$ac->getPattern(), 'size'=>'50', 'maxlength'=>'255'));
+			echo html_ac(html_ap() - 1);
 		}
 	} else {
 		echo html_e('input', array('type'=>'hidden', 'name'=>'attribute1', 'value'=>'0'));
 		echo html_e('input', array('type'=>'hidden', 'name'=>'attribute2', 'value'=>'0'));
+
+		echo html_ao('p');
+		echo html_build_checkbox('hide100', false, !$ac->getShow100());
+		echo html_e('label', array('for'=>'hide100'), _('Hide the default none value'));
+		echo html_ac(html_ap() - 1);
+
+		echo html_ao('p');
+		echo html_e('label', array('for'=>'show100label'), html_e('b', array(), _('Label for the none value')).html_e('br'));
+		echo html_e('input', array('type'=>'text', 'name'=>'show100label', 'value'=>$ac->getShow100label(), 'size'=>'30'));
+		echo html_ac(html_ap() - 1);
+
 		if (in_array($efType, array(ARTIFACT_EXTRAFIELDTYPE_RADIO, ARTIFACT_EXTRAFIELDTYPE_CHECKBOX,ARTIFACT_EXTRAFIELDTYPE_SELECT,ARTIFACT_EXTRAFIELDTYPE_MULTISELECT))) {
 			$pfarr = $ath->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_RADIO, ARTIFACT_EXTRAFIELDTYPE_CHECKBOX,ARTIFACT_EXTRAFIELDTYPE_SELECT,ARTIFACT_EXTRAFIELDTYPE_MULTISELECT));
 			$parentField = array();
@@ -100,24 +128,13 @@ if (!$ac || !is_object($ac)) {
 			echo html_build_select_box_from_arrays(array_keys($parentField), array_values($parentField), 'parent', $ac->getParent(), true, 'none').html_e('br');
 			echo html_ac(html_ap() - 1);
 		}
-		echo html_e('label', array('for'=>'hide100'), html_e('b', array(), _('Hide the default none value')).html_e('br'));
-		echo html_build_checkbox('hide100','',!$ac->getShow100());
-		echo html_ac(html_ap() - 1);
-		echo html_ao('p');
-		echo html_e('label', array('for'=>'show100label'), html_e('b', array(), _('Label for the none value')).html_e('br'));
-		echo html_e('input', array('type'=>'text', 'name'=>'show100label', 'value'=>$ac->getShow100label(), 'size'=>'30'));
+		if (in_array($efType, array(ARTIFACT_EXTRAFIELDTYPE_RADIO, ARTIFACT_EXTRAFIELDTYPE_SELECT))) {
+			echo html_ao('p');
+			echo html_build_checkbox('autoassign', false, $ac->isAutoAssign());
+			echo html_e('label', array('for'=>'autoassign'), _('Field that triggers auto-assignment rules'));
+			echo html_ac(html_ap() - 1);
+		}
 	}
-	echo html_ac(html_ap() - 1);
-
-	echo html_ao('p');
-	echo html_e('label', array('for'=>'alias'), html_e('strong', array(), _('Field alias')._(':')).html_e('br'));
-	echo html_e('input', array('type'=>'text', 'id'=>'alias', 'name'=>'alias', 'value'=>$ac->getAlias(), 'size'=>'15', 'maxlength'=>'30'));
-	echo html_ac(html_ap() - 1);
-
-	echo html_ao('p');
-	echo html_build_checkbox('is_required','',$ac->isRequired());
-	echo html_e('label', array('for'=>'is_required'), _('Field is mandatory'));
-	echo html_ac(html_ap() - 1);
 
 	echo $HTML->warning_msg(_('It is not recommended that you change the custom field name because other things are dependent upon it. When you change the custom field name, all related items will be changed to the new name.'));
 

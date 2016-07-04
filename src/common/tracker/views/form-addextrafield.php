@@ -44,8 +44,11 @@ if ($rows > 0) {
 	$title_arr=array();
 	$title_arr[]=_('Custom Fields Defined');
 	$title_arr[]=_('Type');
+	$title_arr[]=_('Auto Assign');
+	$title_arr[]=_('Depend on');
 	$title_arr[]=_('Elements Defined');
 	$title_arr[]=_('Add Options');
+	$autoAssignFieldId = $ath->getAutoAssignField();
 	echo $HTML->listTableTop($title_arr);
 	$rownb = 0;
 	for ($k=0; $k < $rows; $k++) {
@@ -59,6 +62,17 @@ if ($rows > 0) {
 				util_make_link('/tracker/admin/?copy_opt=1&id='.$efarr[$i]['extra_field_id'].'&group_id='.$group_id.'&atid='. $ath->getID(), ' ['._('Copy').']').
 				"</td>\n";
 		echo '<td>'.$eftypes[$efarr[$i]['field_type']]."</td>\n";
+		if ($autoAssignFieldId==$i) {
+			echo '<td class="align-center">'.html_image("ic/check.png",'15','13').'</td>'."\n";
+		} else {
+			echo '<td></td>'."\n";
+		}
+		$parentFieldId = $efarr[$i]['parent'];
+		if ($parentFieldId!=100) {
+			echo '<td>'.$efarr[$parentFieldId]['field_name'].'</td>'."\n";
+		} else {
+			echo '<td></td>'."\n";
+		}
 		/*
 			List of possible options for a user built Selection Box
 		*/
@@ -111,8 +125,10 @@ if ($rows > 0) {
 	echo $HTML->warning_msg(_('You have not defined any custom fields'));
 }
 
-echo "<h2>"._('Add New Custom Field')."</h2>";
+echo html_e('h2', array(), _('Add New Custom Field'));
+
 echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID(), 'method' => 'post'));
+
 echo html_ao('p');
 echo html_e('input', array('type'=>'hidden', 'name'=>'add_extrafield', 'value'=>'y'));
 
@@ -131,14 +147,17 @@ echo html_e('input', array('type'=>'text', 'name'=>'description', 'value'=>'', '
 echo html_ac(html_ap() - 1);
 
 echo html_ao('p');
-echo html_e('strong', array(), _('Type of custom field').utils_requiredField()._(':')).html_e('br');
+echo html_build_checkbox('is_required', false, false);
+echo html_e('label', array('for'=>'is_required'), _('Field is mandatory'));
+echo html_ac(html_ap() - 1);
 
+echo html_ao('p');
+echo html_e('strong', array(), _('Type of custom field').utils_requiredField()._(':')).html_e('br');
 if ($ath->usesCustomStatuses()) {
 	unset($eftypes[ARTIFACT_EXTRAFIELDTYPE_STATUS]);
 }
 $vals = array_keys($eftypes);
 $texts = array_values($eftypes);
-
 echo html_build_radio_buttons_from_arrays($vals, $texts, 'field_type', '', false, '', false ,'', false, array('required'=>'required') );
 echo html_ac(html_ap() - 1);
 
@@ -148,9 +167,24 @@ echo _('Text Field Size/Text Area Rows');
 echo html_e('input', array('type'=>'text', 'name'=>'attribute1', 'value'=>'20', 'size'=>'2', 'maxlength'=>'2')).html_e('br');
 echo _('Text Field Maxlength/Text Area Columns');
 echo html_e('input', array('type'=>'text', 'name'=>'attribute2', 'value'=>'80', 'size'=>'2', 'maxlength'=>'2')).html_e('br');
-echo _('Text Field Pattern');
-echo html_e('input', array('type'=>'text', 'name'=>'pattern', 'value'=>'', 'size'=>'80', 'maxlength'=>'255')).html_e('br');
+echo html_ac(html_ap() - 1);
 
+echo html_ao('p');
+echo _('Text Field Pattern');
+echo html_e('input', array('type'=>'text', 'name'=>'pattern', 'value'=>'', 'size'=>'50', 'maxlength'=>'255')).html_e('br');
+echo html_ac(html_ap() - 1);
+
+echo html_ao('p');
+echo html_build_checkbox('hide100', false, false);
+echo html_e('label', array('for'=>'hide100'), _('Hide the default none value'));
+echo html_ac(html_ap() - 1);
+
+echo html_ao('p');
+echo _('Label for the none value');
+echo html_e('input', array('type'=>'text', 'name'=>'show100label', 'value'=>_('none'), 'size'=>'30')).html_e('br');
+echo html_ac(html_ap() - 1);
+
+echo html_ao('p');
 $pfarr = $ath->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_RADIO, ARTIFACT_EXTRAFIELDTYPE_CHECKBOX,ARTIFACT_EXTRAFIELDTYPE_SELECT,ARTIFACT_EXTRAFIELDTYPE_MULTISELECT));
 $parentField = array();
 if (is_array($pfarr)) {
@@ -161,15 +195,11 @@ if (is_array($pfarr)) {
 asort($parentField,SORT_FLAG_CASE | SORT_STRING);
 echo _('Parent Field');
 echo html_build_select_box_from_arrays(array_keys($parentField), array_values($parentField), 'parent', null, true, 'none').html_e('br');
-echo _('Hide the default none value');
-echo html_build_checkbox('hide100','',false).html_e('br');
-echo _('Label for the none value');
-echo html_e('input', array('type'=>'text', 'name'=>'show100label', 'value'=>_('none'), 'size'=>'30')).html_e('br');
 echo html_ac(html_ap() - 1);
 
 echo html_ao('p');
-echo html_build_checkbox('is_required','',false);
-echo html_e('label', array('for'=>'is_required'), _('Field is mandatory'));
+echo html_build_checkbox('autoassign', false, false);
+echo html_e('label', array('for'=>'autoassign'), _('Field that triggers auto-assignment rules'));
 echo html_ac(html_ap() - 1);
 
 echo $HTML->warning_msg(_('Warning: this add new custom field'));

@@ -31,6 +31,7 @@ require_once $gfcommon.'tracker/ArtifactExtraField.class.php';
 require_once $gfcommon.'tracker/ArtifactExtraFieldElement.class.php';
 require_once $gfcommon.'tracker/ArtifactWorkflow.class.php';
 require_once $gfcommon.'include/utils_crossref.php';
+require_once $gfcommon.'include/UserManager.class.php';
 
 class ArtifactTypeHtml extends ArtifactType {
 
@@ -346,6 +347,18 @@ class ArtifactTypeHtml extends ArtifactType {
 		}
 		return false;
 	};
+	$(".autoassign[name^='extra_fields']").on('change', function(){
+		if ($(this).prop('tagName') == 'SELECT') {
+			var elmnts = $(this).children('option:selected');
+		} else {
+			var elmnts = $(this).siblings('input:checked');
+		}
+		elmnts.each(function(i){
+			var aat = $(this).data("autoassignto");
+			$("select#tracker-assigned_to option[value="+aat.id+"]").prop('selected', true);
+			$("span#tracker-assigned_to").text(aat.name);
+		});
+	});
 	$(".with-depcy[name^='extra_fields']").on('change', function(){
 		if ($(this).prop('tagName') == 'SELECT') {
 			var elmnts = $(this).children('option:selected');
@@ -659,6 +672,9 @@ EOS;
 		if (!empty($aefChildren)) {
 			$attrs['class'] = (empty($attrs['class']) ? '':$attrs['class'].' ').'with-depcy';
 		}
+		if ($aef->isAutoAssign())  {
+			$attrs['class'] = (empty($attrs['class']) ? '':$attrs['class'].' ').'autoassign';
+		}
 		$vals = array();
 		$texts = array();
 		$opt_attrs = array();
@@ -681,6 +697,10 @@ EOS;
 					$dependency = '['.$dependency.']';
 					$opt_attrs[$i]= array( 'data-dependency'=>$dependency);
 				}
+			}
+			if ($aef->isAutoAssign()) {
+				$autoAssignTo = UserManager::instance()->getUserById($aefe->getAutoAssignto());
+				$opt_attrs[$i]=array_merge(isset($opt_attrs[$i]) ? $opt_attrs[$i] : array(), array( 'data-autoassignto'=>'{"id":'.$aefe->getAutoAssignto().', "name":"'.$autoAssignTo->getRealName().' ('.$autoAssignTo->getUnixName().')"}'));
 			}
 		}
 
@@ -774,6 +794,10 @@ EOS;
 					$dependency = '['.$dependency.']';
 					$radios_attrs[$i]['data-dependency']=$dependency;
 				}
+			}
+			if ($aef->isAutoAssign()) {
+				$autoAssignTo = UserManager::instance()->getUserById($aefe->getAutoAssignto());
+				$radios_attrs[$i]=array_merge(isset($radios_attrs[$i]) ? $radios_attrs[$i] : array(), array( 'data-autoassignto'=>'{"id":'.$aefe->getAutoAssignto().', "name":"'.$autoAssignTo->getRealName().' ('.$autoAssignTo->getUnixName().')"}'));
 			}
 		}
 		if ($show_100 && !empty($aefChildren)) {

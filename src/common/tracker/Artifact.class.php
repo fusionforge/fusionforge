@@ -904,8 +904,26 @@ class Artifact extends FFError {
 			$description=htmlspecialchars_decode($this->getDetails());
 			$canned_response=100;
 			$new_artifact_type_id=$this->ArtifactType->getID();
-			$assigned_to=$this->getAssignedTo();
-
+			$autoAssignField = $this->getArtifactType()->getAutoAssignField();
+			if ($autoAssignField!=100) {
+				$ef = new ArtifactExtraField($this->getArtifactType(),$autoAssignField);
+				if (!$ef || !is_object($ef)) {
+					exit_error(_('Unable to create ArtifactExtraField Object'),'tracker');
+				} elseif ($ef->isError()) {
+					exit_error($ef->getErrorMessage(),'tracker');
+				} else {
+					$efe = new ArtifactExtraFieldElement($ef,$extra_fields[$autoAssignField]);
+					if (!$efe || !is_object($efe)) {
+						exit_error(_('Unable to create ArtifactExtraFieldElement Object'),'tracker');
+					} elseif ($efe->isError()) {
+						exit_error($efe->getErrorMessage(),'tracker');
+					} else {
+						$assigned_to = $efe->getAutoAssignto();
+					}
+				}
+			} else {
+				$assigned_to=$this->getAssignedTo();
+			}
 			if (!forge_check_perm ('tracker', $this->ArtifactType->getID(), 'tech')) {
 				$this->setPermissionDeniedError();
 				return false;

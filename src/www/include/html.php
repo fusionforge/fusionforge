@@ -584,6 +584,9 @@ function html_build_select_box_from_arrays($vals, $texts, $select_name, $checked
 	if ($text_100 == 'none') {
 		$text_100 = _('None');
 	}
+	if ($text_100 == 'nobody') {
+		$text_100 = _('Nobody');
+	}
 	$have_a_subelement = false;
 	$return = '';
 
@@ -816,14 +819,18 @@ function html_build_multiple_select_box_from_arrays($vals, $texts, $name, $check
 /**
  * html_build_checkbox() - Render checkbox control
  *
- * @param	string	$name		name of control
- * @param	string	$value		value of control
- * @param	bool	$checked	true if control should be checked
- * @param	array	$attrs		Array of other attributes for this element
+ * @param	string		$name		name of control
+ * @param	bool|string	$value		value of control (if false then no attribute value)
+ * @param	bool		$checked	true if control should be checked
+ * @param	array		$attrs		Array of other attributes for this element
  * @return	html code for checkbox control
  */
 function html_build_checkbox($name, $value, $checked, $attrs=array()) {
-	$attrs = array_merge(array('id' => $name, 'name' => $name, 'value' => $value, 'type' => 'checkbox'), $attrs);
+	if ($value === false) {
+		$attrs = array_merge(array('id' => $name, 'name' => $name, 'type' => 'checkbox'), $attrs);
+	} else {
+		$attrs = array_merge(array('id' => $name, 'name' => $name, 'value' => $value, 'type' => 'checkbox'), $attrs);
+	}
 	if ($checked) {
 		$attrs['checked'] = 'checked';
 	}

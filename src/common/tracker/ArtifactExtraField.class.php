@@ -104,9 +104,10 @@ class ArtifactExtraField extends FFError {
 	 * @param	string	$description	Description used for help text.
 	 * @param	string	$pattern	A regular expression to check the field.
 	 * @param	int	$parent		Parent extra field id.
+	 * @param	int	$autoassign	True or false whether it triggers auto-assignment rules
 	 * @return	bool	true on success / false on failure.
 	 */
-	function create($name, $field_type, $attribute1, $attribute2, $is_required = 0, $alias = '', $show100 = true, $show100label = 'none', $description = '', $pattern='', $parent=100) {
+	function create($name, $field_type, $attribute1, $attribute2, $is_required = 0, $alias = '', $show100 = true, $show100label = 'none', $description = '', $pattern='', $parent=100, $autoassign=0) {
 		//
 		//	data validation
 		//
@@ -149,13 +150,11 @@ class ArtifactExtraField extends FFError {
 		}  elseif ($field_type == ARTIFACT_EXTRAFIELDTYPE_USER) {
 			$show100label='nobody';
 		}
-		if ($is_required) {
-			$is_required=1;
-		} else {
-			$is_required=0;
-		}
+		$is_required = ($is_required ? 1 : 0);
+		$autoassign = ($autoassign ? 1 : 0);
 
 		if (!($alias = $this->generateAlias($alias,$name))) {
+			$this->setError(_('Unable to generate alias'));
 			return false;
 		}
 
@@ -185,8 +184,13 @@ class ArtifactExtraField extends FFError {
 				db_rollback();
 				return false;
 			}
+			if ($autoassign && $this->setAutoAssign()) {
+				$this->setError(_('Unable to set Auto Assign Field')._(':').db_error());
+				return false;
+			}
 			if ($field_type == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 				if (!$this->ArtifactType->setCustomStatusField($id)) {
+					$this->setError(_('Unable to set Custom Status Field')._(':').db_error());
 					db_rollback();
 					return false;
 				} else {
@@ -195,18 +199,18 @@ class ArtifactExtraField extends FFError {
 					//
 					$ao = new ArtifactExtraFieldElement($this);
 					if (!$ao || !is_object($ao)) {
-						$feedback .= 'Unable to create ArtifactExtraFieldElement Object';
+						$this->setError(_('Unable to create ArtifactExtraFieldElement Object'));
 						db_rollback();
 						return false;
 					} else {
 						if (!$ao->create('Open', '1')) {
-							$feedback .= _('Insert Error')._(': ').$ao->getErrorMessage();
+							$this->setError(_('Insert Error')._(': ').$ao->getErrorMessage());
 							$ao->clearError();
 							db_rollback();
 							return false;
 						}
 						if (!$ao->create('Closed', '2')) {
-							$feedback .= _('Insert Error')._(': ').$ao->getErrorMessage();
+							$this->setError(_('Insert Error')._(': ').$ao->getErrorMessage());
 							$ao->clearError();
 							db_rollback();
 							return false;
@@ -417,6 +421,38 @@ class ArtifactExtraField extends FFError {
 	}
 
 	/**
+	 * isAutoAssign
+	 *
+	 * @return	boolean	assign.
+	 */
+	function isAutoAssign() {
+		if ($this->getArtifactType()->getAutoAssignField() == $this->getID()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	/**
+	 * setAutoAssign - set this field that triggers auto-assignment rules.
+	 *
+	 * @return	boolean
+	 */
+	function setAutoAssign() {
+		return $this->getArtifactType()->setAutoAssignField($this->getID());
+	}
+
+	/**
+	 * unsetAutoAssign - unset this field that triggers auto-assignment rules.
+	 *
+	 * @return	boolean
+	 */
+	function unsetAutoAssign() {
+		return $this->getArtifactType()->setAutoAssignField(100);
+	}
+
+	/**
 	 * getAvailableTypes - the types of text fields and their names available.
 	 *
 	 * @return	array	types.
@@ -520,7 +556,7 @@ class ArtifactExtraField extends FFError {
 	 * @param	int	$parent		Parent extra field id.
 	 * @return	bool	success.
 	 */
-	function update($name, $attribute1, $attribute2, $is_required = 0, $alias = "", $show100 = true, $show100label = 'none', $description = '', $pattern='', $parent=100) {
+	function update($name, $attribute1, $attribute2, $is_required = 0, $alias = "", $show100 = true, $show100label = 'none', $description = '', $pattern='', $parent=100, $autoassign=0) {
 		if (!forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
@@ -542,11 +578,9 @@ class ArtifactExtraField extends FFError {
 			$this->setError(_('Field name already exists'));
 			return false;
 		}
-		if ($is_required) {
-			$is_required=1;
-		} else {
-			$is_required=0;
-		}
+
+		$is_required = ($is_required ? 1 : 0);
+		$autoassign = ($autoassign ? 1 : 0);
 
 		if (!($alias = $this->generateAlias($alias,$name))) {
 			return false;
@@ -577,6 +611,18 @@ class ArtifactExtraField extends FFError {
 							  $this->getID(),
 							  $this->ArtifactType->getID())) ;
 		if ($result && db_affected_rows($result) > 0) {
+			if ($autoassign && !$this->isAutoAssign()) {
+				if (!$this->setAutoAssign()) {
+					$this->setError(_('Unable to set Auto Assign Field')._(':').db_error());
+					return false;
+				}
+			}
+			if (!$autoassign && $this->isAutoAssign()) {
+				if (!$this->unsetAutoAssign()) {
+					$this->setError(_('Unable to unset Auto Assign Field')._(':').db_error());
+					return false;
+				}
+			}
 			return true;
 		} else {
 			$this->setError(db_error());
@@ -609,6 +655,12 @@ class ArtifactExtraField extends FFError {
 				if ($result) {
 					if ($this->getType() == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 						if (!$this->ArtifactType->setCustomStatusField(0)) {
+							db_rollback();
+							return false;
+						}
+					}
+					if ($this->isAutoAssign()) {
+						if (!$this->unsetAutoAssign()) {
 							db_rollback();
 							return false;
 						}

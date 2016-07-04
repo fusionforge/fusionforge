@@ -466,6 +466,29 @@ class ArtifactType extends FFError {
 	}
 
 	/**
+	 * getAutoAssignField - get the extra_field_id of the field that triggers auto-assignment rules.
+	 *
+	 * @return	int	extra_field_id.
+	 */
+	function getAutoAssignField() {
+		return $this->data_array['auto_assign_field'];
+	}
+
+	/**
+	 * setAutoAssignField - set the extra_field_id of the field that triggers auto-assignment rules.
+	 *
+	 * @param	int	$extra_field_id	The extra field id.
+	 * @return	boolean	success.
+	 */
+	function setAutoAssignField($extra_field_id) {
+		$res = db_query_params('UPDATE artifact_group_list SET auto_assign_field=$1
+			WHERE group_artifact_id=$2',
+				array ($extra_field_id,
+				       $this->getID()));
+		return $res;
+	}
+
+	/**
 	 * usesCustomStatuses - boolean
 	 *
 	 * @return	boolean	use_custom_statues.
