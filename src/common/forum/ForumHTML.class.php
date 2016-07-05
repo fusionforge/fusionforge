@@ -32,7 +32,7 @@ require_once $gfwww.'news/news_utils.php';
 require_once $gfcommon.'forum/ForumAdmin.class.php';
 require_once $gfcommon.'forum/AttachManager.class.php';
 
-function forum_header($params) {
+function forum_header($params = array()) {
 	global $HTML, $group_id, $forum_id, $f, $group_forum_id;
 
 	if ($group_forum_id) {
