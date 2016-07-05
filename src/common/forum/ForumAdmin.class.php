@@ -308,7 +308,7 @@ class ForumAdmin extends FFError {
 			$title = array();
 			$title[] = _('Forum Name');
 			$title[] = _('Message');
-			$title[] = "Action";
+			$title[] = _('Action');
 
 			$res = db_query_params('SELECT msg_id,subject,pm.group_forum_id,gl.forum_name FROM forum_pending_messages pm, forum_group_list gl WHERE pm.group_forum_id=$1 AND pm.group_forum_id=gl.group_forum_id AND gl.group_forum_id=$2',
 			array ($forum_id,
