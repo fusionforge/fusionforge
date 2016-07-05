@@ -1702,7 +1702,7 @@ function utils_headers_download($filename, $mimetype, $size) {
 	/* https://www.owasp.org/images/a/ac/PDF_XSS_vulnerability.pdf */
 	/* https://groups.google.com/forum/#!topic/mozilla.dev.pdf-js/Fyl5RnaUWVc */
 	/* (PDF theoretically supports JS, not sure how pdf.js deals with that) */
-	$authorized_inline = ',^(text/plain|image/png|image/jpg|image/gif)$,';
+	$authorized_inline = ',^(text/plain|image/png|image/jpe?g|image/gif)$,';
 	/* Disarm XSS-able text/html, and inline common text files (*.c, *.pl...) */
 	$force_text_plain  = ',^(text/html|text/.*|application/x-perl|application/x-ruby)$,';
 
