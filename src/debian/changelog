@@ -27,8 +27,9 @@ fusionforge (6.0.4-1+) UNRELEASED; urgency=medium
     #821497).
   * Fixed Lintian warning (fusionforge-web dependency on virtual package
     only).
+  * Removed Olivier Berger from uploaders.  Thanks, Olivier!
 
- -- Roland Mas <lolando@debian.org>  Mon, 02 May 2016 10:57:13 +0200
+ -- Roland Mas <lolando@debian.org>  Tue, 05 Jul 2016 09:02:03 +0200
 
 fusionforge (6.0.4-1) unstable; urgency=medium
 
