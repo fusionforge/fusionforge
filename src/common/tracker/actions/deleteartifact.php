@@ -30,7 +30,7 @@ global $aid;
 global $atid;
 global $HTML;
 
-$ath->header(array ('title'=>_('Delete artifact').': [#'. $ah->getID(). '] ' . $ah->getSummary(),
+$ath->header(array ('title'=>_('Delete artifact').': '. $ah->getStringID() . ' ' . $ah->getSummary(),
 		    'atid'=>$ath->getID(),
 		    'modal'=>1));
 
