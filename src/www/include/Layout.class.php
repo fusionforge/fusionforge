@@ -208,7 +208,7 @@ class Layout extends FFError {
 	function getJavascripts() {
 		$code = '';
 		foreach ($this->javascripts as $js) {
-			$code .= "\t".html_e('script', array('type' => 'text/javascript', 'src' => util_make_uri($js)), '', false)."\n";
+			$code .= html_e('script', array('type' => 'text/javascript', 'src' => util_make_uri($js)), '', false);
 		}
 		$this->javascripts = array();
 		return $code;
@@ -221,9 +221,9 @@ class Layout extends FFError {
 		$code = '';
 		foreach ($this->stylesheets as $c) {
 			if ($c['media']) {
-				$code .= "\t".html_e('link', array('rel' => 'stylesheet', 'type' => 'text/css', 'href' => util_make_uri($c['css']), 'media' => $c['media']))."\n";
+				$code .= html_e('link', array('rel' => 'stylesheet', 'type' => 'text/css', 'href' => util_make_uri($c['css']), 'media' => $c['media']));
 			} else {
-				$code .= "\t".html_e('link', array('rel' => 'stylesheet', 'type' => 'text/css', 'href' => util_make_uri($c['css'])))."\n";
+				$code .= html_e('link', array('rel' => 'stylesheet', 'type' => 'text/css', 'href' => util_make_uri($c['css'])));
 			}
 		}
 		$this->stylesheets = array();
