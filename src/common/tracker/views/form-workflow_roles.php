@@ -58,7 +58,8 @@ foreach ($elearray as $e) {
 $title = sprintf(_('Configuring allowed roles for the transitions from %1$s to %2$s'), $name[$from], $name[$next]);
 $ath->adminHeader(array('title'=>$title,
 	'pagename'=>'tracker_admin_customize_liste',
-	'titlevals'=>array($ath->getName())));
+	'titlevals'=>array($ath->getName()),
+	'modal'=>1));
 
 echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID(), 'method' => 'post'));
 ?>

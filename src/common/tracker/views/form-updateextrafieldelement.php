@@ -46,7 +46,7 @@ if (!$ac || !is_object($ac)) {
 		exit_error($ao->getErrorMessage(),'tracker');
 	} else {
 		$title = sprintf(_('Update a custom field element in %s'), $ath->getName()) ;
-		$ath->adminHeader(array('title'=>$title));
+		$ath->adminHeader(array('title'=>$title, 'modal'=>1));
 		echo html_e('h2', array(),  _('Custom Field Name')._(': ').$ac->getName());
 		echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID(), 'method' => 'post'));
 		echo html_e('input', array('type'=>'hidden', 'name'=>'update_opt', 'value'=>'y'));

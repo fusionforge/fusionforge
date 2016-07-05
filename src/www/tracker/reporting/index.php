@@ -117,7 +117,7 @@ html_use_jqueryjqplotpluginhighlighter();
 html_use_jqueryjqplotplugindateAxisRenderer();
 html_use_jqueryjqplotpluginBar();
 
-$h->header(array('title' => _('Tracker Activity Reporting')));
+$h->header(array('title' => _('Tracker Activity Reporting'), 'modal' => 1));
 echo $HTML->openForm(array('action' => '/tracker/reporting/?group_id='.$group_id, 'method' => 'get'));
 ?>
 <table class="centered">

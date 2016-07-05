@@ -47,7 +47,8 @@ if (!$ac || !is_object($ac)) {
 	} else {
 
 		$ath->adminHeader(array('title'=>sprintf(_("Delete a custom field element in: %s"),
-			$ath->getName())));
+			$ath->getName()),
+			'modal'=>1));
 
 		?>
 		<table class="centered">

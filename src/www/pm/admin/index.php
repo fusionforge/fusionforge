@@ -177,7 +177,7 @@ if ($add_cat && $group_project_id) {
 	session_require_perm ('pm', $pg->getID(), 'manager') ;
 
 	$title = sprintf(_('Add Categories to: %s'), $pg->getName());
-	pm_header(array('title'=>$title));
+	pm_header(array('title'=>$title, 'modal'=>1));
 
 	/*
 		List of possible categories for this ArtifactType
@@ -237,7 +237,7 @@ if ($add_cat && $group_project_id) {
 	session_require_perm ('pm', $pg->getID(), 'manager') ;
 
 	$title = sprintf(_('Modify a Category in: %s'), $pg->getName());
-	pm_header(array('title'=>$title));
+	pm_header(array('title'=>$title, 'modal'=>1));
 
 	$ac = new ProjectCategory($pg,$id);
 	if (!$ac || !is_object($ac)) {
@@ -270,7 +270,7 @@ if ($add_cat && $group_project_id) {
 	*/
 	session_require_perm ('pm_admin', $group_id) ;
 
-	pm_header(array('title'=>_('Add a new subproject')));
+	pm_header(array('title'=>_('Add a new subproject'), 'modal'=>1));
 
 	?>
 	<p><?php echo _('Add a new subproject to the Tasks. <strong>This is different than adding a task to a subproject.</strong>') ?></p>
@@ -365,7 +365,8 @@ if ($add_cat && $group_project_id) {
 
 	session_require_perm ('pm', $pg->getID(), 'manager') ;
 
-	pm_header(array('title'=>_('Permanently delete this subproject and all its data')));
+	pm_header(array('title'=>_('Permanently delete this subproject and all its data'),
+					'modal'=>1));
 
 	?>
 	<form action="<?php echo util_make_uri('/pm/admin/?group_id='.$group_id.'&group_project_id='.$group_project_id); ?>" method="post">

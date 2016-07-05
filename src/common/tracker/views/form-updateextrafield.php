@@ -32,7 +32,7 @@ global $HTML;
 	Allow modification of a artifact Selection Box
 */
 $title = sprintf(_('Modify a custom field in %s'),$ath->getName());
-$ath->adminHeader(array('title'=>$title));
+$ath->adminHeader(array('title'=>$title, 'modal'=>1));
 
 $id = getStringFromRequest('id');
 $ac = new ArtifactExtraField($ath,$id);

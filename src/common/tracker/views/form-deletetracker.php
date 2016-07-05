@@ -25,7 +25,8 @@
 global $HTML;
 
 $ath->adminHeader(array ('title'=>sprintf(_('Permanently Delete Tracker %s'),
-	$ath->getName())));
+	$ath->getName()),
+	'modal'=>1));
 ?>
 <table class="centered">
 <tr>

@@ -31,7 +31,8 @@ global $atid;
 global $HTML;
 
 $ath->header(array ('title'=>_('Delete artifact').': [#'. $ah->getID(). '] ' . $ah->getSummary(),
-					'atid'=>$ath->getID()));
+		    'atid'=>$ath->getID(),
+		    'modal'=>1));
 
 // $atid, $aid and $group_id are set in tracker.php
 

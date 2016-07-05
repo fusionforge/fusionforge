@@ -101,7 +101,8 @@ if (getStringFromRequest('add_to_task')) {
 
 	$ath->header(array('titlevals'=>array($ath->getName()),
 		'atid'=>$ath->getID(),
-		'title'=>_('Build Relationship Between Tracker Items and Tasks')));
+		'title'=>_('Build Relationship Between Tracker Items and Tasks'),
+		'modal'=>1));
 
 	echo $HTML->openForm(array('name' => 'foo', 'action' => '/tracker/?func=taskmgr&group_id='.$group_id.'&atid='.$atid.'&aid='.$aid, 'method' => 'post'));
 	echo '
@@ -156,7 +157,8 @@ if (getStringFromRequest('add_to_task')) {
 
 	$ath->header(array('titlevals'=>array($ath->getName()),
 		'atid'=>$ath->getID(),
-		'title'=>_('Build Relationship Between Tracker Items and Tasks')));
+		'title'=>_('Build Relationship Between Tracker Items and Tasks'),
+		'modal'=>1));
 
 	echo $HTML->openForm(array('name' => 'foo', 'action' => '/tracker/?func=taskmgr&group_id='.$group_id.'&atid='.$atid.'&aid='.$aid, 'method' => 'post'));
 	echo '

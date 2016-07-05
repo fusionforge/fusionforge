@@ -247,7 +247,9 @@ $res = db_query_params('SELECT artifact_query_id,query_name FROM artifact_query 
 
 //	Show the new pop-up boxes to select assigned to, status, etc
 //
-$ath->header(array('atid'=>$ath->getID(), 'title' =>_('Build Query')));
+$ath->header(array('atid'=>$ath->getID(),
+				   'title' =>_('Build Query'),
+				   'modal' => 1));
 
 echo '<table style="margin-left:auto;margin-right:auto"><tr><td>' .
 		'<fieldset><legend>'.

@@ -25,7 +25,8 @@
 global $HTML;
 
 $ath->adminHeader(array('title'=>sprintf(_('Delete a custom field for %s'),
-	$ath->getName())));
+	$ath->getName()),
+	'modal'=>1));
 
 $id = getStringFromRequest('id');
 ?>

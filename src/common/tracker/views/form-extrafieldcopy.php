@@ -55,7 +55,7 @@ $res = db_query_params ('SELECT g.unix_group_name, agl.name AS tracker_name, aef
 		}
 
 		$title = sprintf(_('Copy choices from custom field %s'), $fb->getName());
-		$ath->adminHeader(array('title'=>$title));
+		$ath->adminHeader(array('title'=>$title, 'modal'=>1));
 
 		$efearr = $ath->getExtraFieldElements($id);
 		for ($i=0; $i<count($efearr); $i++) {

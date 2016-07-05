@@ -37,7 +37,7 @@ if (!$ac || !is_object($ac)) {
 } else {
 	$efearr=$ath->getExtraFieldElements($boxid);
 	$title = sprintf(_('Add/Update Custom Field Elements in %s'), $ath->getName());
-	$ath->adminHeader(array('title'=>$title));
+	$ath->adminHeader(array('title'=>$title, 'modal'=>1));
 	echo html_e('h2', array(), _('Custom Field Name')._(': ').$ac->getName());
 	$efType = $ac->getType();
 	if ($efType != ARTIFACT_EXTRAFIELDTYPE_USER) {

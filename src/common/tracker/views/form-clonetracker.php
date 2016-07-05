@@ -48,7 +48,7 @@ if (!$g || !is_object($g)) {
 			}
 		}
 
-		$ath->adminHeader(array ('title'=>_('Clone Tracker')));
+		$ath->adminHeader(array ('title'=>_('Clone Tracker'), 'modal'=>1));
 
 		if (empty($ata)) {
 			echo $HTML->warning_msg(_('The site administrator must first set up template trackers in the template project with default values and set permissions properly so you can access them.'));

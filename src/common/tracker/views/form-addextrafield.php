@@ -30,7 +30,7 @@ global $HTML;
 //
 
 $title = sprintf(_('Manage Custom Fields for %s'), $ath->getName());
-$ath->adminHeader(array('title'=>$title));
+$ath->adminHeader(array('title'=>$title, 'modal'=>1));
 
 /*
 	List of possible user built Selection Boxes for an ArtifactType

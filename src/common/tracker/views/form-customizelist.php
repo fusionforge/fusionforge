@@ -27,7 +27,8 @@ global $HTML;
 
 $ath->adminHeader(array('title'=>_('Customize Browse List'),
 	'pagename'=>'tracker_admin_customize_liste',
-	'titlevals'=>array($ath->getName())));
+	'titlevals'=>array($ath->getName()),
+	'modal'=>1));
 
 /*
 	List of possible user built Selection Boxes for an ArtifactType

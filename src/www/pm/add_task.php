@@ -30,7 +30,7 @@ global $HTML;
 $related_artifact_id = getIntFromRequest('related_artifact_id');
 $related_artifact_summary = getStringFromRequest('related_artifact_summary');
 
-pm_header(array('title'=>_('Add a new Task'),'group_project_id'=>$group_project_id));
+pm_header(array('title'=>_('Add a new Task'),'group_project_id'=>$group_project_id, 'modal' => 1));
 echo notepad_func();
 
 $params['name'] = 'details';

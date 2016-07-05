@@ -28,7 +28,7 @@
 global $group;
 global $ath;
 
-$ath->header(array ('title'=>_('Submit New')));
+$ath->header(array ('title'=>_('Submit New'), 'modal' => 1));
 
 require_once $gfcommon.'tracker/include/build_submission_form.php';
 if (isset($summary)) {

@@ -46,7 +46,7 @@
 //	so a user can choose a file to upload a .csv file and store it in task mgr
 //
 
-pm_header(array('title'=>_('Update CSV Format'),'group_project_id'=>$group_project_id));
+pm_header(array('title'=>_('Update CSV Format'), 'modal'=>1, 'group_project_id'=>$group_project_id));
 
 $headers = getIntFromRequest('headers', 1);
 $full = getIntFromRequest('full', 1);
