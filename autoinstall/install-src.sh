@@ -47,7 +47,7 @@ else
 	httpd mod_dav_svn mod_ssl postgresql-server postgresql-contrib nscd \
 	subversion viewvc python-pycurl git gitweb xinetd \
 	moin mod_wsgi python-psycopg2 \
-	unoconv poppler-utils
+	unoconv poppler-utils libreoffice-headless
 fi
 
 (
