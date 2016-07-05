@@ -145,7 +145,7 @@ class CreateTracker extends FForge_SeleniumTestCase
 		$this->click("field_type");
 		$this->click("post_changes");
 		$this->waitForPageToLoad("30000");
-		$this->click("//tr[@id='field-number']/td[5]/a[1]");
+		$this->click("//tr[@id='field-number']/td[6]/a[1]");
 		$this->waitForPageToLoad("30000");
 		$this->type("name", "1");
 		$this->clickAndWait("post_changes");
