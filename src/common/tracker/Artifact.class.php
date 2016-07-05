@@ -922,7 +922,7 @@ class Artifact extends FFError {
 					}
 				}
 			} else {
-				$assigned_to=$this->getAssignedTo();
+				$assigned_to = $this->getAssignedTo();
 			}
 			if (!forge_check_perm ('tracker', $this->ArtifactType->getID(), 'tech')) {
 				$this->setPermissionDeniedError();
