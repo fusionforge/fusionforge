@@ -346,10 +346,10 @@ class ArtifactExtraFieldElement extends FFError {
 	 * boxes and fields configured by the admin
 	 *
 	 * @param	string	$name		Name of the choice in a box.
-	 * @param	int	$status_id	optional for status box - maps to either open/closed.
+	 * @param	int	$status_id	Optional for status box - maps to either open/closed.
 	 * @return	bool	success.
 	 */
-	function update($name,$status_id=0,$auto_assign_to=100) {
+	function update($name, $status_id=0, $auto_assign_to=100) {
 		if (!forge_check_perm ('tracker_admin', $this->ArtifactExtraField->ArtifactType->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
