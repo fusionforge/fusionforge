@@ -955,13 +955,14 @@ if (isset($params['group']) && $params['group']) {
 			$row_attrs['class'] .= '';
 		}
 		$return = html_ao('tr', $row_attrs);
+		$type = $istitle ? 'th' : 'td';
 		for ( $c = 0; $c < count($cell_data); $c++ ) {
 			$locAp = html_ap();
 			$cellAttrs = array();
 			foreach (array_slice($cell_data[$c],1) as $k => $v) {
 				$cellAttrs[$k] = $v;
 			}
-			$return .= html_ao('td', $cellAttrs);
+			$return .= html_ao($type, $cellAttrs);
 			if ( $istitle ) {
 				$return .= html_ao('span', array('class' => 'multiTableRowTitle'));
 			}
