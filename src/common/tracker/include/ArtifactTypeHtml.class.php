@@ -163,7 +163,7 @@ class ArtifactTypeHtml extends ArtifactType {
 	 * @param	string	$text_any
 	 * @param	array	$types
 	 * @param	bool	$status_show_100	Force display of the '100' value if needed. Default is false.
-	 * @param	string	$mode
+	 * @param	string	$mode			QUERY, DISPLAY, UPDATE, NEW
 	 */
 	function renderExtraFields($selected = array(),
                                $show_100 = false, $text_100 = 'none',
@@ -171,7 +171,11 @@ class ArtifactTypeHtml extends ArtifactType {
                                $types = array(),
                                $status_show_100 = false,
                                $mode = '') {
-		$efarr = $this->getExtraFields($types);
+		if ($mode == 'NEW') {
+			$efarr = $this->getExtraFields($types, false, false);
+		} else {
+			$efarr = $this->getExtraFields($types);
+		}
 		//each two columns, we'll reset this and start a new row
 		$template = $this->getRenderHTML($types, $mode);
 
@@ -326,8 +330,8 @@ class ArtifactTypeHtml extends ArtifactType {
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RELATION) {
 
 				$str = $this->renderRelationField($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['attribute1'],$efarr[$i]['attribute2'], $attrs);
-				if ($mode == 'UPDATE') {
-					$post_name = html_image('ic/forum_edit.gif', 37, 15, array('title'=>"Click to edit", 'alt'=>"Click to edit", 'onclick'=>"switch2edit(this, 'show$i', 'edit$i')"));
+				if ($mode == 'UPDATE' || $mode == 'NEW') {
+					$post_name = html_image('ic/forum_edit.gif', 37, 15 ,array('title'=>"Click to edit", 'alt'=>"Click to edit", 'onclick'=>"switch2edit(this, 'show$i', 'edit$i')"));
 				}
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_USER) {
 				$str = $this->renderUserField($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['show100'],$efarr[$i]['show100label'],$show_any,$text_any,false, $attrs);
@@ -336,7 +340,7 @@ class ArtifactTypeHtml extends ArtifactType {
 			$template = str_replace('{$'.$efarr[$i]['field_name'].'}',$str,$template);
 		}
 		if($template != NULL){
-			if ($mode == 'UPDATE') {
+			if ($mode == 'UPDATE' || $mode == 'NEW') {
 				$jsvariable ="
 	var invalidSelectMsg = '"._("One or more of the selected options is not allowed")."';
 	var invalidInputMsg = '". _("This choice is not allowed")."';";
@@ -550,7 +554,7 @@ EOS;
 	 */
 	function getRenderHTML($types=array(), $mode='') {
 		// Use template only for the browse (not for query or mass update)
-		if (($mode === 'DISPLAY' || $mode === 'DETAIL' || $mode === 'UPDATE')
+		if (($mode === 'DISPLAY' || $mode === 'DETAIL' || $mode === 'UPDATE' || $mode == 'NEW')
 			&& $this->data_array['custom_renderer']) {
 			return preg_replace('/<!--(\S+.*?)-->/','{$\\1}',$this->data_array['custom_renderer']);
 		} else {

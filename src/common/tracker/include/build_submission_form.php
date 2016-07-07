@@ -50,7 +50,7 @@ function artifact_submission_form($ath, $group, $summary='', $details='', $assig
 	$cells[] = array(html_e('input', array('type'=>'submit', 'name'=>'submit', 'value'=>_('Submit'))), 'class'=>'top');
 	echo $HTML->multiTableRow(array(), $cells);
 
-	$ath->renderExtraFields($extra_fields,true,'none',false,'Any',array(),false,'UPDATE');
+	$ath->renderExtraFields($extra_fields,true,'none',false,'Any',array(),false,'NEW');
 
 	if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
 		$content = html_e('strong', array(), _('Assigned to')._(':')).html_e('br');

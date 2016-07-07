@@ -606,7 +606,14 @@ class ArtifactType extends FFError {
 	 * @param	array	$types
 	 * @return	array	arrays of data;
 	 */
-	function getExtraFields($types = array()) {
+	function getExtraFields($types = array(), $get_is_disabled = false, $get_is_hidden_on_submit = true) {
+		$where ='';
+		if (!$get_is_disabled) {
+			$where = ' AND is_disabled = 0';
+		}
+		if (!$get_is_hidden_on_submit) {
+			$where = ' AND is_hidden_on_submit = 0';
+		}
 		if (count($types)) {
 			$filter = implode(',', $types);
 			$types = explode(',', $filter);
@@ -619,15 +626,17 @@ class ArtifactType extends FFError {
 				$res = db_query_params('SELECT *
 				FROM artifact_extra_field_list
 				WHERE group_artifact_id=$1
-				AND field_type = ANY ($2)
-				ORDER BY field_type ASC',
+				AND field_type = ANY ($2)'.
+				$where.' '.
+				'ORDER BY field_type ASC',
 							array($this->getID(),
 									db_int_array_to_any_clause($types)));
 			} else {
 				$res = db_query_params('SELECT *
 				FROM artifact_extra_field_list
-				WHERE group_artifact_id=$1
-				ORDER BY field_type ASC',
+				WHERE group_artifact_id=$1'.
+				$where.' '.
+				'ORDER BY field_type ASC',
 					array($this->getID()));
 			}
 			while ($arr = db_fetch_array($res)) {

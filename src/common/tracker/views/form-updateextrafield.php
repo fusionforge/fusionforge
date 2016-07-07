@@ -65,43 +65,55 @@ if (!$ac || !is_object($ac)) {
 	echo html_ac(html_ap() - 1);
 
 	echo html_ao('p');
+	echo html_build_checkbox('is_disabled', false, $ac->is_disabled());
+	echo html_e('label', array('for'=>'is_disabled'), _('Field is disabled'));
+	echo html_ac(html_ap() - 1);
+
+	echo html_ao('p');
 	echo html_build_checkbox('is_required', false, $ac->isRequired());
 	echo html_e('label', array('for'=>'is_required'), _('Field is mandatory'));
+	echo html_ac(html_ap() - 1);
+
+	echo html_ao('p');
+	echo html_build_checkbox('is_hidden_on_submit', false, $ac->is_hidden_on_submit());
+	echo html_e('label', array('for'=>'is_hidden_on_submit'), _('Hide this Field on a new submission'));
 	echo html_ac(html_ap() - 1);
 
 	$efType=$ac->getType();
 	if ($efType == ARTIFACT_EXTRAFIELDTYPE_TEXTAREA) {
 		echo html_ao('p');
-		echo html_e('label', array('for'=>'attribute1'), _('Text Area Columns'));
+		echo html_e('label', array('for'=>'attribute1'), _('Rows'));
 		echo html_e('input', array('type'=>'text', 'id'=>'attribute1', 'name'=>'attribute1', 'value'=>$ac->getAttribute1(), 'size'=>'2', 'maxlength'=>'2'));
 		echo html_ac(html_ap() - 1);
 
 		echo html_ao('p');
-		echo html_e('label', array('for'=>'attribute2'), _('Text Area Columns'));
+		echo html_e('label', array('for'=>'attribute2'), _('Columns'));
 		echo html_e('input', array('type'=>'text', 'id'=>'attribute2', 'name'=>'attribute2', 'value'=>$ac->getAttribute2(), 'size'=>'2', 'maxlength'=>'2'));
 		echo html_ac(html_ap() - 1);
 
-	} elseif ($efType == ARTIFACT_EXTRAFIELDTYPE_TEXT || $efType == ARTIFACT_EXTRAFIELDTYPE_RELATION) {
+	} elseif ($efType == ARTIFACT_EXTRAFIELDTYPE_TEXT || $efType == ARTIFACT_EXTRAFIELDTYPE_INTEGER || $efType == ARTIFACT_EXTRAFIELDTYPE_RELATION) {
 		echo html_ao('p');
-		echo html_e('label', array('for'=>'attribute1'), _('Text Field Size'));
+		echo html_e('label', array('for'=>'attribute1'), _('Size'));
 		echo html_e('input', array('type'=>'text', 'id'=>'attribute1', 'name'=>'attribute1', 'value'=>$ac->getAttribute1(), 'size'=>'2', 'maxlength'=>'2'));
 		echo html_ac(html_ap() - 1);
 
 		echo html_ao('p');
-		echo html_e('label', array('for'=>'attribute2'), _('Text Field Maxlength'));
+		echo html_e('label', array('for'=>'attribute2'), _('Maxlength'));
 		echo html_e('input', array('type'=>'text', 'id'=>'attribute2', 'name'=>'attribute2', 'value'=>$ac->getAttribute2(), 'size'=>'2', 'maxlength'=>'2'));
 		echo html_ac(html_ap() - 1);
-
-		if ($efType == ARTIFACT_EXTRAFIELDTYPE_TEXT) {
-			echo html_ao('p');
-			echo html_e('label', array('for'=>'pattern'), _('Text Field Pattern'));
-			echo html_e('input', array('type'=>'text', 'id'=>'pattern', 'name'=>'pattern', 'value'=>$ac->getPattern(), 'size'=>'50', 'maxlength'=>'255'));
-			echo html_ac(html_ap() - 1);
-		}
 	} else {
 		echo html_e('input', array('type'=>'hidden', 'name'=>'attribute1', 'value'=>'0'));
 		echo html_e('input', array('type'=>'hidden', 'name'=>'attribute2', 'value'=>'0'));
-
+		}
+	if ($efType == ARTIFACT_EXTRAFIELDTYPE_TEXT) {
+		echo html_ao('p');
+		echo html_e('label', array('for'=>'pattern'), _('Pattern'));
+		echo html_e('input', array('type'=>'text', 'id'=>'pattern', 'name'=>'pattern', 'value'=>$ac->getPattern(), 'size'=>'50', 'maxlength'=>'255'));
+		echo html_ac(html_ap() - 1);
+	} else {
+		echo html_e('input', array('type'=>'hidden', 'name'=>'pattern', 'value'=>''));
+	}
+	if (in_array($efType, array(ARTIFACT_EXTRAFIELDTYPE_RADIO, ARTIFACT_EXTRAFIELDTYPE_CHECKBOX,ARTIFACT_EXTRAFIELDTYPE_SELECT,ARTIFACT_EXTRAFIELDTYPE_MULTISELECT))) {
 		echo html_ao('p');
 		echo html_build_checkbox('hide100', false, !$ac->getShow100());
 		echo html_e('label', array('for'=>'hide100'), _('Hide the default none value'));
@@ -112,29 +124,34 @@ if (!$ac || !is_object($ac)) {
 		echo html_e('input', array('type'=>'text', 'name'=>'show100label', 'value'=>$ac->getShow100label(), 'size'=>'30'));
 		echo html_ac(html_ap() - 1);
 
-		if (in_array($efType, array(ARTIFACT_EXTRAFIELDTYPE_RADIO, ARTIFACT_EXTRAFIELDTYPE_CHECKBOX,ARTIFACT_EXTRAFIELDTYPE_SELECT,ARTIFACT_EXTRAFIELDTYPE_MULTISELECT))) {
-			$pfarr = $ath->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_RADIO, ARTIFACT_EXTRAFIELDTYPE_CHECKBOX,ARTIFACT_EXTRAFIELDTYPE_SELECT,ARTIFACT_EXTRAFIELDTYPE_MULTISELECT));
-			$parentField = array();
-			$progenyField = $ac->getProgeny();
-			if (is_array($pfarr)) {
-				foreach ($pfarr as $pf) {
-					if ($pf['extra_field_id'] != $id && !in_array($pf['extra_field_id'], $progenyField))
-					$parentField[$pf['extra_field_id']] = $pf['field_name'];
-				}
+		$pfarr = $ath->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_RADIO, ARTIFACT_EXTRAFIELDTYPE_CHECKBOX,ARTIFACT_EXTRAFIELDTYPE_SELECT,ARTIFACT_EXTRAFIELDTYPE_MULTISELECT));
+		$parentField = array();
+		$progenyField = $ac->getProgeny();
+		if (is_array($pfarr)) {
+			foreach ($pfarr as $pf) {
+				if ($pf['extra_field_id'] != $id && !in_array($pf['extra_field_id'], $progenyField))
+				$parentField[$pf['extra_field_id']] = $pf['field_name'];
 			}
-			asort($parentField,SORT_FLAG_CASE | SORT_STRING);
-			echo html_ao('p');
-			echo html_e('label', array('for'=>'parent'), html_e('strong', array(), _('Parent Field')._(':')).html_e('br'));
-			echo html_build_select_box_from_arrays(array_keys($parentField), array_values($parentField), 'parent', $ac->getParent(), true, 'none').html_e('br');
-			echo html_ac(html_ap() - 1);
 		}
-		if (in_array($efType, array(ARTIFACT_EXTRAFIELDTYPE_RADIO, ARTIFACT_EXTRAFIELDTYPE_SELECT))) {
-			echo html_ao('p');
-			echo html_build_checkbox('autoassign', false, $ac->isAutoAssign());
-			echo html_e('label', array('for'=>'autoassign'), _('Field that triggers auto-assignment rules'));
-			echo html_ac(html_ap() - 1);
-		}
+		asort($parentField,SORT_FLAG_CASE | SORT_STRING);
+		echo html_ao('p');
+		echo html_e('label', array('for'=>'parent'), html_e('strong', array(), _('Parent Field')._(':')).html_e('br'));
+		echo html_build_select_box_from_arrays(array_keys($parentField), array_values($parentField), 'parent', $ac->getParent(), true, 'none').html_e('br');
+		echo html_ac(html_ap() - 1);
+	} else {
+		echo html_e('input', array('type'=>'hidden', 'name'=>'hide100', 'value'=>0));
+		echo html_e('input', array('type'=>'hidden', 'name'=>'show100label', 'value'=>''));
+		echo html_e('input', array('type'=>'hidden', 'name'=>'parent', 'value'=>100));
 	}
+	if (in_array($efType, array(ARTIFACT_EXTRAFIELDTYPE_RADIO, ARTIFACT_EXTRAFIELDTYPE_SELECT))) {
+		echo html_ao('p');
+		echo html_build_checkbox('autoassign', false, $ac->isAutoAssign());
+		echo html_e('label', array('for'=>'autoassign'), _('Field that triggers auto-assignment rules'));
+		echo html_ac(html_ap() - 1);
+	} else {
+		echo html_e('input', array('type'=>'hidden', 'name'=>'autoassign', 'value'=>0));
+	}
+
 
 	echo $HTML->warning_msg(_('It is not recommended that you change the custom field name because other things are dependent upon it. When you change the custom field name, all related items will be changed to the new name.'));
 

@@ -46,6 +46,8 @@ if (getStringFromRequest('add_extrafield')) {
 	$hide100 = getStringFromRequest('hide100');
 	$show100label = getStringFromRequest('show100label');
 	$autoassign = getStringFromRequest('autoassign');
+	$is_hidden_on_submit = getStringFromRequest('is_hidden_on_submit');
+	$is_disabled = getStringFromRequest('is_disabled');
 	$ab = new ArtifactExtraField($ath);
 
 	if (!$ab || !is_object($ab)) {
@@ -58,7 +60,7 @@ if (getStringFromRequest('add_extrafield')) {
 		} else {
 			$show100 = 1;
 		}
-		if (!$ab->create($name, $field_type, $attribute1, $attribute2, $is_required, $alias, $show100, $show100label, $description, $pattern, $parent, $autoassign)) {
+		if (!$ab->create($name, $field_type, $attribute1, $attribute2, $is_required, $alias, $show100, $show100label, $description, $pattern, $parent, $autoassign, $is_hidden_on_submit, $is_disabled)) {
 			$error_msg .= _('Error inserting a custom field')._(': ').$ab->getErrorMessage();
 			$ab->clearError();
 		} else {
@@ -241,6 +243,8 @@ if (getStringFromRequest('add_extrafield')) {
 	$hide100 = getStringFromRequest('hide100');
 	$show100label = getStringFromRequest('show100label');
 	$autoassign = getStringFromRequest('autoassign');
+	$is_hidden_on_submit = getStringFromRequest('is_hidden_on_submit');
+	$is_disabled = getStringFromRequest('is_disabled');
 	$ac = new ArtifactExtraField($ath, $id);
 	if (!$ac || !is_object($ac)) {
 		$error_msg .= _('Unable to create ArtifactExtraField Object');
@@ -252,7 +256,7 @@ if (getStringFromRequest('add_extrafield')) {
 		} else {
 			$show100 = 1;
 		}
-		if (!$ac->update($name, $attribute1, $attribute2, $is_required, $alias, $show100, $show100label, $description, $pattern, $parent, $autoassign)) {
+		if (!$ac->update($name, $attribute1, $attribute2, $is_required, $alias, $show100, $show100label, $description, $pattern, $parent, $autoassign, $is_hidden_on_submit, $is_disabled)) {
 			$error_msg .= _('Update failed')._(': ').$ac->getErrorMessage();
 			$ac->clearError();
 		} else {

@@ -107,7 +107,7 @@ class ArtifactExtraField extends FFError {
 	 * @param	int	$autoassign	True or false whether it triggers auto-assignment rules
 	 * @return	bool	true on success / false on failure.
 	 */
-	function create($name, $field_type, $attribute1, $attribute2, $is_required = 0, $alias = '', $show100 = true, $show100label = 'none', $description = '', $pattern='', $parent=100, $autoassign=0) {
+	function create($name, $field_type, $attribute1, $attribute2, $is_required = 0, $alias = '', $show100 = true, $show100label = 'none', $description = '', $pattern='', $parent=100, $autoassign=0, $is_hidden_on_submit=0, $is_disabled=0) {
 		//
 		//	data validation
 		//
@@ -152,6 +152,8 @@ class ArtifactExtraField extends FFError {
 		}
 		$is_required = ($is_required ? 1 : 0);
 		$autoassign = ($autoassign ? 1 : 0);
+		$is_hidden_on_submit = ($is_hidden_on_submit ? 1 : 0);
+		$is_disabled = ($is_disabled ? 1 : 0);
 
 		if (!($alias = $this->generateAlias($alias,$name))) {
 			$this->setError(_('Unable to generate alias'));
@@ -159,8 +161,8 @@ class ArtifactExtraField extends FFError {
 		}
 
 		db_begin();
-		$result = db_query_params ('INSERT INTO artifact_extra_field_list (group_artifact_id, field_name, field_type, attribute1, attribute2, is_required, alias, show100, show100label, description, pattern, parent)
-			VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)',
+		$result = db_query_params ('INSERT INTO artifact_extra_field_list (group_artifact_id, field_name, field_type, attribute1, attribute2, is_required, alias, show100, show100label, description, pattern, parent, is_hidden_on_submit, is_disabled)
+			VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)',
 					   array ($this->ArtifactType->getID(),
 							  htmlspecialchars($name),
 							  $field_type,
@@ -172,7 +174,9 @@ class ArtifactExtraField extends FFError {
 							  $show100label,
 							  $description,
 							  $pattern,
-							  $parent));
+							  $parent,
+							  $is_hidden_on_submit,
+							  $is_disabled));
 
 		if ($result && db_affected_rows($result) > 0) {
 			$this->clearError();
@@ -421,6 +425,24 @@ class ArtifactExtraField extends FFError {
 	}
 
 	/**
+	 * is_hidden_on_submit - whether this field is hidden on a new submission or not.
+	 *
+	 * @return	boolean	required.
+	 */
+	function is_hidden_on_submit() {
+		return $this->data_array['is_hidden_on_submit'];
+	}
+
+	/**
+	 * is_disabled - whether this field is disabled or not.
+	 *
+	 * @return	boolean	required.
+	 */
+	function is_disabled() {
+		return $this->data_array['is_disabled'];
+	}
+
+	/**
 	 * isAutoAssign
 	 *
 	 * @return	boolean	assign.
@@ -556,7 +578,7 @@ class ArtifactExtraField extends FFError {
 	 * @param	int	$parent		Parent extra field id.
 	 * @return	bool	success.
 	 */
-	function update($name, $attribute1, $attribute2, $is_required = 0, $alias = "", $show100 = true, $show100label = 'none', $description = '', $pattern='', $parent=100, $autoassign=0) {
+	function update($name, $attribute1, $attribute2, $is_required = 0, $alias = "", $show100 = true, $show100label = 'none', $description = '', $pattern='', $parent=100, $autoassign=0, $is_hidden_on_submit=0, $is_disabled=0) {
 		if (!forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
@@ -581,10 +603,14 @@ class ArtifactExtraField extends FFError {
 
 		$is_required = ($is_required ? 1 : 0);
 		$autoassign = ($autoassign ? 1 : 0);
+		$is_hidden_on_submit = ($is_hidden_on_submit ? 1 : 0);
+		$is_disabled = ($is_disabled ? 1 : 0);
+		$parent = (is_integer($parent) ? $parent : 100);
 
 		if (!($alias = $this->generateAlias($alias,$name))) {
 			return false;
 		}
+
 		$result = db_query_params ('UPDATE artifact_extra_field_list
 			SET field_name = $1,
 			description = $2,
@@ -595,9 +621,11 @@ class ArtifactExtraField extends FFError {
 			show100 = $7,
 			show100label = $8,
 			pattern = $9,
-			parent = $10
-			WHERE extra_field_id = $11
-			AND group_artifact_id = $12',
+			parent = $10,
+			is_hidden_on_submit = $11,
+			is_disabled = $12
+			WHERE extra_field_id = $13
+			AND group_artifact_id = $14',
 					   array (htmlspecialchars($name),
 							  $description,
 							  $attribute1,
@@ -608,6 +636,8 @@ class ArtifactExtraField extends FFError {
 							  $show100label,
 							  $pattern,
 							  $parent,
+							  $is_hidden_on_submit,
+							  $is_disabled,
 							  $this->getID(),
 							  $this->ArtifactType->getID())) ;
 		if ($result && db_affected_rows($result) > 0) {
