@@ -205,7 +205,7 @@ class Document extends FFError {
 		}
 
 		$dv = new DocumentVersion($this);
-		$idversion = $dv->create($docid, $title, $description, $user_id, $filetype, $filename, $filesize, $kwords, 1, 1, $createtimestamp);
+		$idversion = $dv->create($docid, $title, $description, $user_id, $filetype, $filename, $filesize, $kwords, $createtimestamp, 1, 1);
 		if (!$idversion) {
 			$this->setError($dv->getErrorMessage());
 			db_rollback();
@@ -878,14 +878,14 @@ class Document extends FFError {
 			if (isset($kwords)) {
 				$version_kwords = $kwords;
 			}
-			$serial_id = $dv->create($this->getID(), $title, $description, user_getid(), $filetype, $filename, $filesize, $version_kwords, $version, $current_version, $updatetimestamp);
+			$serial_id = $dv->create($this->getID(), $title, $description, user_getid(), $filetype, $filename, $filesize, $version_kwords, $updatetimestamp, $version, $current_version);
 			if (!$serial_id) {
 				$this->setOnUpdateError(_('Error updating document version')._(': ').$dv->getErrorMessage());
 				db_rollback();
 				return false;
 			}
 		} else {
-			if ($dv->isError() || !$dv->update($version, $title, $description, $filetype, $filename, $filesize, $current_version, $updatetimestamp)) {
+			if ($dv->isError() || !$dv->update($version, $title, $description, $filetype, $filename, $filesize, $updatetimestamp, $current_version)) {
 				$this->setOnUpdateError(_('Error updating document version')._(': ').$dv->getErrorMessage());
 				db_rollback();
 				return false;

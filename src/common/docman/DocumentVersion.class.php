@@ -156,12 +156,12 @@ class DocumentVersion extends FFError {
 	 * @param	string	$filename		The name of the file (content)
 	 * @param	int	$filesize		The size of the file (content)
 	 * @param	string	$kwords			The parsed words of the file (content)
+	 * @param	int	$createtimetamp		timestamp of creation of this version
 	 * @param	int	$version		The version id to create. Default is 1 (the first version)
 	 * @param	int	$current_version	Is it the current version? Defaut is 1 (yes)
-	 * @param	int	$createtimetamp		timestamp of creation of this version
 	 * return	bool	true on success
 	 */
-	function create($docid, $title, $description, $created_by, $filetype, $filename, $filesize, $kwords, $version = 1, $current_version = 1, $createtimetamp) {
+	function create($docid, $title, $description, $created_by, $filetype, $filename, $filesize, $kwords, $createtimetamp, $version = 1, $current_version = 1) {
 		db_begin();
 		$res = db_query_params('INSERT INTO doc_data_version (docid, title, description, created_by, filetype, filename, filesize, data_words, version, current_version, createdate)
 					VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)',
@@ -202,7 +202,7 @@ class DocumentVersion extends FFError {
 		}
 		if ($this->getNumberOfVersions() == 1) {
 			$this->getMaxVersionData();
-			$this->update($this->data_array['version'], $this->data_array['title'], $this->data_array['description'], $this->data_array['filetype'], $this->data_array['filename'], $this->data_array['filesize'], 1, $this->data_array['updatedate']);
+			$this->update($this->data_array['version'], $this->data_array['title'], $this->data_array['description'], $this->data_array['filetype'], $this->data_array['filename'], $this->data_array['filesize'], $this->data_array['updatedate'], 1);
 		}
 		db_commit();
 		db_free_result($res);
@@ -280,11 +280,11 @@ class DocumentVersion extends FFError {
 	 * @param	string	$filetype		The new filetype
 	 * @param	string	$filename		The new filename
 	 * @param	int	$filesize		The new filesize
-	 * @param	int	$current_version	Is the current version to set? Default is yes.
 	 * @param	int	$updatetimestamp	timestamp of this update
+	 * @param	int	$current_version	Is the current version to set? Default is yes.
 	 * @return	bool	true on success
 	 */
-	function update($version, $title, $description, $filetype, $filename, $filesize, $current_version = 1, $updatetimestamp) {
+	function update($version, $title, $description, $filetype, $filename, $filesize, $updatetimestamp, $current_version = 1) {
 		db_begin();
 		$colArr = array('title', 'description', 'filetype', 'filename', 'filesize', 'current_version', 'updatedate');
 		$valArr = array(htmlspecialchars($title), htmlspecialchars($description), $filetype, $filename, $filesize, $current_version, $updatetimestamp);
