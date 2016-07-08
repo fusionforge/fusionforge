@@ -41,9 +41,7 @@ FRSController.prototype =
 							jQuery('#maindiv > .warning_msg').remove();
 							if (data.format == 'multi') {
 								var arrayLength = Object.keys(data).length;
-								console.log(arrayLength);
 								for (var i = 0; i < arrayLength; i++) {
-									console.log(data[i]);
 									if (typeof data[i].html != 'undefined') {
 										jQuery('#maindiv').prepend(data[i].html);
 									}
