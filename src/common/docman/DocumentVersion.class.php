@@ -202,7 +202,7 @@ class DocumentVersion extends FFError {
 		}
 		if ($this->getNumberOfVersions() == 1) {
 			$this->getMaxVersionData();
-			$this->update($this->data_array['version'], $this->data_array['title'], $this->data_array['description'], $this->data_array['filetype'], $this->data_array['filename'], $this->data_array['filesize'], 1);
+			$this->update($this->data_array['version'], $this->data_array['title'], $this->data_array['description'], $this->data_array['filetype'], $this->data_array['filename'], $this->data_array['filesize'], 1, $this->data_array['updatedate']);
 		}
 		db_commit();
 		db_free_result($res);
