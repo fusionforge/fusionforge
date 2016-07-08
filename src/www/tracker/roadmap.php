@@ -414,7 +414,7 @@ if (!$at_arr || count($at_arr) < 1) {
 				$roadmap_select[$roadmap->getID()] = $roadmap->getName();
 			}
 			$roadmap_html_params['id'] = 'roadmap';
-			echo html_build_select_box_from_assoc($roadmap_select, 'roadmap', $roadmap_id, false, '', false, '', false, $roadmap_html_params);
+			echo html_build_select_box_from_assoc($roadmap_select, 'roadmap', $roadmap_id, false, false, '', false, '', false, $roadmap_html_params);
 			echo '</td>'."\n";
 		}
 
