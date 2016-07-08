@@ -265,7 +265,7 @@ echo html_e('input', array('type'=>'text', 'name'=>'show100label', 'value'=>_('n
 echo html_ac(html_ap() - 1);
 
 echo html_ao('p', array('class'=>'for-select for-multiselect for-radio for-check'));
-$pfarr = $ath->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_RADIO, ARTIFACT_EXTRAFIELDTYPE_CHECKBOX,ARTIFACT_EXTRAFIELDTYPE_SELECT,ARTIFACT_EXTRAFIELDTYPE_MULTISELECT),fasle,true);
+$pfarr = $ath->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_RADIO, ARTIFACT_EXTRAFIELDTYPE_CHECKBOX,ARTIFACT_EXTRAFIELDTYPE_SELECT,ARTIFACT_EXTRAFIELDTYPE_MULTISELECT), false, true);
 $parentField = array();
 if (is_array($pfarr)) {
 	foreach ($pfarr as $pf) {
