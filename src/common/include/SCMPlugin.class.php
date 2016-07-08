@@ -45,7 +45,7 @@ abstract class SCMPlugin extends Plugin {
 		$this->provides['scm'] = true;
 	}
 
-	function CallHook($hookname, $params) {
+	function CallHook($hookname, &$params) {
 		switch ($hookname) {
 			case 'group_plugin_use': {
 				if ($params['val'] == true) {
