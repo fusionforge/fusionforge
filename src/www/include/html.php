@@ -675,7 +675,11 @@ function html_build_select_box_from_arrays($vals, $texts, $select_name,
 	//	we want to preserve that value UNLESS that value was 'xzxz', the default value
 	//
 	if (!$checked_found && $checked_val != 'xzxz' && $checked_val && $checked_val != 100) {
-		$return .= html_e('option', array_merge(array('value' => util_html_secure($checked_val), 'selected' => 'selected'), $opts_attrs[$checked_val]), _('No Change'), false);
+		$optionAttrs = array('value' => util_html_secure($checked_val), 'selected' => 'selected');
+		if (isset($opt_attrs[$checked_val]) && is_array($opt_attrs[$checked_val])) {
+			$optionAttrs = array_merge($optionAttrs, $opt_attrs[$checked_val]);
+		}
+		$return .= html_e('option', $optionAttrs, _('No Change'), false);
 		$have_a_subelement = true;
 	}
 
