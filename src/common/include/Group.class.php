@@ -363,10 +363,6 @@ class Group extends FFError {
 		} elseif (!$SYS->sysUseUnixName($unix_name)) {
 			$this->setError(_('Unix name already taken.'));
 			return false;
-		} elseif (db_numrows(db_query_params('SELECT group_id FROM groups WHERE unix_group_name=$1',
-							array($unix_name))) > 0) {
-			$this->setError(_('Unix name already taken.'));
-			return false;
 		} elseif (strlen($purpose)<10) {
 			$this->setError(_('Please describe your Registration Project Purpose and Summarization in a more comprehensive manner.'));
 			return false;
@@ -1767,10 +1763,7 @@ class Group extends FFError {
 		if (!$perm || !is_object($perm)) {
 			$this->setPermissionDeniedError();
 			return false;
-		} elseif ($perm->isError()) {
-			$this->setPermissionDeniedError();
-			return false;
-		} elseif (!$perm->isSuperUser()) {
+		} elseif ($perm->isError() || !$perm->isSuperUser()) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
