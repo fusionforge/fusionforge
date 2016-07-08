@@ -1031,7 +1031,7 @@ class Document extends FFError {
 			return false;
 		}
 		db_commit();
-		
+
 		foreach ($serialids as $serialid) {
 			DocumentStorage::instance()->delete($serialid)->commit();
 		}
