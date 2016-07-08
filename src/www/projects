@@ -159,8 +159,7 @@ if (!isset($group_id) && !isset($project)) {
 				include $gfwww.'include/project_home.php';
 			}
 		}
-	}
-	else {
+	} else {
 		header('HTTP/1.1 404 Not Found',true,404);
 		exit_error('HTTP/1.1 404 Not Found');
 	}
@@ -170,5 +169,3 @@ if (!isset($group_id) && !isset($project)) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>
