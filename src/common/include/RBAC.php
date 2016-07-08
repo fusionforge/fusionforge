@@ -482,6 +482,7 @@ abstract class BaseRole extends FFError {
 		case 'forge_read':
 		case 'approve_projects':
 		case 'approve_news':
+		case 'project_admin':
 			if ($this->hasGlobalPermission('forge_admin')) {
 				return 1 ;
 			}
@@ -491,13 +492,6 @@ abstract class BaseRole extends FFError {
 		case 'forge_stats':
 			if ($this->hasGlobalPermission('forge_admin')) {
 				return 2 ;
-			}
-			return $value ;
-			break ;
-
-		case 'project_admin':
-			if ($this->hasGlobalPermission('forge_admin')) {
-				return 1 ;
 			}
 			return $value ;
 			break ;
@@ -683,6 +677,7 @@ abstract class BaseRole extends FFError {
 			break ;
 
 		case 'forge_stats':
+		case 'frs_admin':
 			switch ($action) {
 			case 'read':
 				return ($value >= 1) ;
@@ -721,16 +716,6 @@ abstract class BaseRole extends FFError {
 			}
 			break ;
 
-		case 'frs_admin':
-			switch ($action) {
-			case 'read':
-				return ($value >= 1);
-				break;
-			case 'admin':
-				return ($value >= 2);
-				break;
-			}
-			break;
 		case 'frs':
 		case 'new_frs':
 			switch ($action) {
@@ -802,6 +787,7 @@ abstract class BaseRole extends FFError {
 				break ;
 			}
 			break ;
+
 		default:
 			$hook_params = array ();
 			$hook_params['section'] = $section ;
