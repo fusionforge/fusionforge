@@ -85,7 +85,7 @@ class FRSPackageFactory extends FFError {
 
 		foreach ($ids as $id) {
 			if (forge_check_perm('frs', $id, 'read')) {
-				$this->FRSs[] =& frspackage_get_object($id);
+				$this->FRSs[] = frspackage_get_object($id);
 			}
 		}
 		return $this->FRSs;
