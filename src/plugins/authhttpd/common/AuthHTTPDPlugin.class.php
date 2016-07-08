@@ -26,9 +26,9 @@ require_once $gfcommon.'include/AuthPlugin.class.php';
  *
  */
 class AuthHTTPDPlugin extends ForgeAuthPlugin {
-	function AuthHTTPDPlugin () {
+	function __construct() {
 		global $gfconfig;
-		$this->ForgeAuthPlugin() ;
+		parent::__construct();
 		$this->name = "authhttpd";
 		$this->text = _("HTTPD authentication");
 		$this->pkg_desc =
@@ -70,7 +70,7 @@ FusionForge, for instance where Kerberos is used.");
 <input type="hidden" name="return_to" value="' . htmlspecialchars(stripslashes($return_to)) . '" />
 <p><input type="submit" name="login" value="' . _('Login via HTTP authentication') . '" />
 </p>
-</form>' ;
+</form>';
 
 		$params['html_snippets'][$this->name] = $result;
 
@@ -114,7 +114,7 @@ FusionForge, for instance where Kerberos is used.");
 	}
 
 	/**
-	 * What GFUser is logged in?
+	 * What FFUser is logged in?
 	 * @param unknown_type $params
 	 */
 	function fetchAuthUser(&$params) {

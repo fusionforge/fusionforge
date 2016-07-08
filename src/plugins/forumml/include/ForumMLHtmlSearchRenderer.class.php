@@ -1,11 +1,26 @@
 <?php
 /**
- * MailingList Search Engine for GForge
+ * MailingList Search Engine for FusionForge
  *
  * Copyright 2006 (c) Alain Peyrat
  *
- * @version $Id: NewsHtmlSearchRenderer.class,v 1.1 2004/10/16 16:36:31 gsmet Exp $
+ * This file is part of FusionForge.
+ *
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
+
 global $gfwww,$gfcommon;
 require_once 'preplugins.php';
 require_once $gfwww.'search/include/renderers/HtmlGroupSearchRenderer.class.php';
@@ -17,23 +32,19 @@ class ForumMLHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 
         var $groupId;
         /**
-         * Constructor
-         *
          * @param string $words words we are searching for
          * @param int $offset offset
          * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
          * @param int $groupId group id
          * @param array $sections array of all sections to search in (array of strings)
-         *
          */
-        function ForumMLHtmlSearchRenderer($words, $offset, $isExact, $groupId) {
+        function __construct($words, $offset, $isExact, $groupId) {
                 $this->groupId = $groupId;
 
                 $searchQuery = new ForumMLSearchQuery($words, $offset, $isExact, $groupId);
 
                 //init the searchrendererr
-                $this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_LIST, $words, $isExact,
-                                $searchQuery, $groupId, 'list');
+                parent::__construct(SEARCH__TYPE_IS_LIST, $words, $isExact, $searchQuery, $groupId, 'list');
 
                // $this->tableHeaders = array(_('Thread'),_('Submitted on'), _('Author'));
 

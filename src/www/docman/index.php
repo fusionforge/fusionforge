@@ -6,7 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2010-2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2015, Franck Villaume - TrivialDev
+ * Copyright 2012-2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -30,6 +30,8 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'docman/DocumentManager.class.php';
 require_once $gfcommon.'docman/Document.class.php';
 require_once $gfcommon.'docman/DocumentFactory.class.php';
+require_once $gfcommon.'docman/DocumentVersion.class.php';
+require_once $gfcommon.'docman/DocumentVersionFactory.class.php';
 require_once $gfcommon.'docman/DocumentGroup.class.php';
 require_once $gfcommon.'docman/DocumentGroupFactory.class.php';
 require_once $gfcommon.'docman/include/utils.php';
@@ -67,7 +69,7 @@ $dirid = getIntFromRequest('dirid', 0);
 
 $childgroup_id = getIntFromRequest('childgroup_id');
 
-/* everything sounds ok, now let do the job */
+/* everything sounds ok, now let's do the job */
 $action = getStringFromRequest('action');
 if (file_exists(forge_get_config('source_path').'/common/docman/actions/'.$action.'.php')) {
 	include(forge_get_config('source_path').'/common/docman/actions/'.$action.'.php');
@@ -82,7 +84,7 @@ html_use_simplemenu();
 html_use_jqueryui();
 html_use_jquerysplitter();
 use_javascript('/docman/scripts/DocManController.js');
-use_javascript('/js/sortable.js');
+html_use_tablesorter();
 
 site_project_header(array('title'=> _('Documents for ').$g->getPublicName(), 'group'=>$group_id, 'toptab'=>'docman'));
 

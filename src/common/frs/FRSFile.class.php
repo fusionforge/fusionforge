@@ -68,13 +68,10 @@ class FRSFile extends FFError {
 	var $FRSRelease;
 
 	/**
-	* Constructor.
-	*
-	* @param	object		$FRSRelease	The FRSRelease object to which this file is associated.
-	* @param	int|bool	$file_id	The file_id.
-	* @param	array|bool	$arr		The associative array of data.
-	* @return	\FRSFile
-	*/
+	 * @param	object		$FRSRelease	The FRSRelease object to which this file is associated.
+	 * @param	int|bool	$file_id	The file_id.
+	 * @param	array|bool	$arr		The associative array of data.
+	 */
 	function __construct(&$FRSRelease, $file_id=false, $arr=false) {
 		parent::__construct();
 		if (!$FRSRelease || !is_object($FRSRelease)) {
@@ -145,7 +142,7 @@ class FRSFile extends FFError {
 		//
 		$resfile = db_query_params('SELECT filename FROM frs_file WHERE filename=$1 AND release_id=$2',
 					    array($name,
-						  $this->FRSRelease->getId()));
+						  $this->FRSRelease->getID()));
 		if (!$resfile || db_numrows($resfile) > 0) {
 			$this->setError(_('That filename already exists in this release').' '.db_error());
 			return false;

@@ -36,14 +36,12 @@ if ($type == 'pageviews_proj') {
 	$res_top = $stats->getTopPageViews();
 	$title = sprintf(_('Top Weekly Project Pageviews at *.%1$s (from impressions of %2$s logo)'), forge_get_config('web_host'), forge_get_config ('forge_name'));
 	$column1 = _('Page Views');
-}
-else if ($type == 'forumposts_week') {
+} elseif ($type == 'forumposts_week') {
 	$res_top = $stats->getTopMessagesPosted();
 	$title = _('Top Forum Post Counts');
 	$column1 = _('Posts');
-}
 // default to downloads
-else {
+} else {
 	$res_top = $stats->getTopDownloads();
 	$title = _('Top Downloads');
 	$column1 = _('Downloads');

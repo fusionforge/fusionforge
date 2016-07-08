@@ -73,7 +73,7 @@ function people_skill_year_box($name='skill_year_id',$checked='xzxz') {
 		//will be used many times potentially on a single page
 		$PEOPLE_SKILL_YEAR=db_query_params("SELECT * FROM people_skill_year", array());
 	}
-	return html_build_select_box ($PEOPLE_SKILL_YEAR,$name,$checked, false);
+	return html_build_select_box($PEOPLE_SKILL_YEAR,$name,$checked, false);
 }
 
 function people_job_status_box($name='status_id',$checked='xzxz') {
@@ -325,10 +325,10 @@ function people_edit_job_inventory($job_id,$group_id) {
 			<input type="hidden" name="job_inventory_id" value="'. db_result($result,$i,'job_inventory_id') .'" />
 			<input type="hidden" name="job_id" value="'. db_result($result,$i,'job_id') .'" />
 			<input type="hidden" name="group_id" value="'.$group_id.'" />
-				<td width="25%">'. people_get_skill_name(db_result($result,$i,'skill_id')) . '</td>
-				<td width="25%">'. people_skill_level_box('skill_level_id',db_result($result,$i,'skill_level_id')). '</td>
-				<td width="25%">'. people_skill_year_box('skill_year_id',db_result($result,$i,'skill_year_id')). '</td>
-				<td width="25%" nowrap="nowrap"><input type="submit" name="update_job_inventory" value="'._('Update').'" /> &nbsp;
+				<td style="width: 25%">'. people_get_skill_name(db_result($result,$i,'skill_id')) . '</td>
+				<td style="width: 25%">'. people_skill_level_box('skill_level_id',db_result($result,$i,'skill_level_id')). '</td>
+				<td style="width: 25%">'. people_skill_year_box('skill_year_id',db_result($result,$i,'skill_year_id')). '</td>
+				<td style="width: 25%" nowrap="nowrap"><input type="submit" name="update_job_inventory" value="'._('Update').'" /> &nbsp;
 					<input type="submit" name="delete_from_job_inventory" value="'._('Delete').'" /></td>
 				</form></tr>';
 		}
@@ -343,10 +343,10 @@ function people_edit_job_inventory($job_id,$group_id) {
 	<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 	<input type="hidden" name="job_id" value="'. $job_id .'" />
 	<input type="hidden" name="group_id" value="'.$group_id.'" />
-		<td width="25%">'. people_skill_box('skill_id'). '</td>
-		<td width="25%">'. people_skill_level_box('skill_level_id'). '</td>
-		<td width="25%">'. people_skill_year_box('skill_year_id'). '</td>
-		<td width="25%" nowrap="nowrap"><input type="submit" name="add_to_job_inventory" value="'._('Add Skill').'" /></td>
+		<td style="width: 25%">'. people_skill_box('skill_id'). '</td>
+		<td style="width: 25%">'. people_skill_level_box('skill_level_id'). '</td>
+		<td style="width: 25%">'. people_skill_year_box('skill_year_id'). '</td>
+		<td style="width: 25%" nowrap="nowrap"><input type="submit" name="add_to_job_inventory" value="'._('Add Skill').'" /></td>
 	</form></tr>';
 
 	echo $HTML->listTableBottom();

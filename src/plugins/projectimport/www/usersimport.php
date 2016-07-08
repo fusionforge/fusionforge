@@ -207,7 +207,7 @@ class UsersImportPage extends FileManagerPage {
 					$password2 = $password1;
 					$language_id = language_name_to_lang_id (choose_language_from_context ());
 
-					$new_user = new GFUser();
+					$new_user = new FFUser();
 					$res = $new_user->create($unix_name,$firstname,$lastname,$password1,$password2,
 						$email,$mail_site,$mail_va,$language_id,$timezone,'',0,$theme_id,'',
 						$address,$address2,$phone,$fax,$title,$ccode,$send_mail);

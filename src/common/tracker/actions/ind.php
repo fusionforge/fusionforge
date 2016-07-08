@@ -36,7 +36,7 @@ if ($at_arr === false) {
 	exit_permission_denied('tracker');
 }
 
-use_javascript('/js/sortable.js');
+html_use_tablesorter();
 
 $atf->header();
 
@@ -52,7 +52,7 @@ if (!$at_arr || count($at_arr) < 1) {
 		Put the result set (list of trackers for this group) into a column with folders
 	*/
 	$tablearr = array(_('Tracker'),_('Description'),_('Open'),_('Total'));
-	echo $HTML->listTableTop($tablearr, false, 'full sortable_table_tracker', 'sortable_table_tracker');
+	echo $HTML->listTableTop($tablearr, false, 'full sortable sortable_table_tracker', 'sortable_table_tracker');
 
 	for ($j = 0; $j < count($at_arr); $j++) {
 		if (!is_object($at_arr[$j])) {
@@ -62,7 +62,7 @@ if (!$at_arr || count($at_arr) < 1) {
 		} else {
 			$cells = array();
 			$cells[][] = util_make_link('/tracker/?atid='.$at_arr[$j]->getID().'&group_id='.$group_id.'&func=browse',
-							html_image("ic/tracker20w.png","20","20").' '.$at_arr[$j]->getName());
+							html_image("ic/tracker20w.png", 20, 20).' '.$at_arr[$j]->getName());
 			$cells[][] = $at_arr[$j]->getDescription();
 			$cells[] = array((int) $at_arr[$j]->getOpenCount(), 'class' => 'align-center');
 			$cells[] = array((int) $at_arr[$j]->getTotalCount(), 'class' => 'align-center');

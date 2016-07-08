@@ -46,23 +46,20 @@ class ForumMessage extends FFError {
 	var $Forum;
 
 	/**
-	 * Constructor.
-	 *
 	 * @param	object		$Forum		The Forum object to which this ForumMessage is associated.
 	 * @param	bool|int	$msg_id		The message_id.
 	 * @param	array		$arr		The associative array of data.
 	 * @param	bool		$pending	Whether the message is a pending one.
-	 * @return	bool		success.
 	 */
-	function ForumMessage(&$Forum, $msg_id=false, $arr=array(), $pending=false) {
+	function __construct(&$Forum, $msg_id=false, $arr=array(), $pending=false) {
 		parent::__construct();
 		if (!$Forum || !is_object($Forum)) {
 			$this->setError(_('Invalid Forum Object'));
-			return false;
+			return;
 		}
 		if ($Forum->isError()) {
 			$this->setError('ForumMessage: '.$Forum->getErrorMessage());
-			return false;
+			return;
 		}
 		$this->Forum =& $Forum;
 
@@ -70,14 +67,14 @@ class ForumMessage extends FFError {
 			if ($pending) {
 				//we are going to create the pending message to show it to the admin for moderation
 				if (!$this->fetchModeratedData($msg_id)) {
-					return false;
+					return;
 				}
 				$this->awaits_moderation = true;
 			} else {
 				$this->awaits_moderation = false;
 				if (!$arr || !is_array($arr)) {
 					if (!$this->fetchData($msg_id)) {
-						return false;
+						return;
 					}
 				} else {
 					$this->data_array =& $arr;
@@ -87,12 +84,11 @@ class ForumMessage extends FFError {
 					if ($this->data_array['group_forum_id'] != $this->Forum->getID()) {
 						$this->setError(_('Group_forum_id in db result does not match Forum Object'));
 						$this->data_array=null;
-						return false;
+						return;
 					}
 				}
 			}
 		}
-		return true;
 	}
 
 	/**
@@ -603,7 +599,7 @@ class ForumMessage extends FFError {
 		}
 		ForumStorage::instance()->commit();
 
-		$toss = db_query_params('DELETE FROM forum WHERE msg_id=$1 AND group_forum_id=$2',
+		db_query_params('DELETE FROM forum WHERE msg_id=$1 AND group_forum_id=$2',
 								array ($msg_id, $this->Forum->getID()));
 
 		return $count;
@@ -649,7 +645,7 @@ class ForumMessage extends FFError {
 		}
 
 		foreach ($recipients as $recipient) {
-			if ($recipient instanceof GFUser) {
+			if ($recipient instanceof FFUser) {
 				setup_gettext_for_user ($recipient) ;
 				$dest_email = $recipient->getEmail ();
 			} else {
@@ -696,13 +692,13 @@ Or reply to this e-mail entering your response between the following markers:
 				$extra_headers .= "Reply-To: ".$this->Forum->getReturnEmailAddress()."\n";
 			}
 			$extra_headers .= "Precedence: Bulk\n"
-				."List-Id: ".$this->Forum->getName()." <forum".$this->Forum->getId()."@".forge_get_config('web_host').">\n"
-				."List-Help: ".util_make_url ('/forum/forum.php?id='.$this->Forum->getId())."\n"
-				."Message-Id: <forumpost".$this->getId()."@".forge_get_config('web_host').">";
-			$parentid = $this->getParentId();
+				."List-Id: ".$this->Forum->getName()." <forum".$this->Forum->getID()."@".forge_get_config('web_host').">\n"
+				."List-Help: ".util_make_url ('/forum/forum.php?id='.$this->Forum->getID())."\n"
+				."Message-Id: <forumpost".$this->getID()."@".forge_get_config('web_host').">";
+			$parentid = $this->getParentID();
 			if (!empty($parentid)) {
 				$extra_headers .= "\nIn-Reply-To: ".$this->Forum->getReturnEmailAddress()."\n"
-					."References: <forumpost".$this->getParentId()."@".forge_get_config('web_host').">";
+					."References: <forumpost".$this->getParentID()."@".forge_get_config('web_host').">";
 			}
 
 			$subject="[" . $this->Forum->getUnixName() ."][".$this->getID()."] ".util_unconvert_htmlspecialchars($this->getSubject());
@@ -746,7 +742,7 @@ Or reply to this e-mail entering your response between the following markers:
 		$text = $this->getBody();
 		$sanitizer = new TextSanitizer();
 		$text = $sanitizer->convertNeededTagsForEmail($text);
-		$text= strip_tags($this->removebbcode(util_line_wrap($text)));
+		$text = strip_tags($this->removebbcode(util_line_wrap($text)));
 		$text = $sanitizer->convertExtendedCharsForEmail($text);
 		$body .= $text .
 		"\n\n______________________________________________________________________".
@@ -758,13 +754,13 @@ Or reply to this e-mail entering your response between the following markers:
 		$extra_headers .= "Sender: <noreply@".forge_get_config('web_host').">\n";
 		$extra_headers .= "Reply-To: ".$this->Forum->getReturnEmailAddress()."\n";
 		$extra_headers .= "Precedence: Bulk\n"
-			."List-Id: ".$this->Forum->getName()." <forum".$this->Forum->getId()."@".forge_get_config('web_host').">\n"
-			."List-Help: ".util_make_url('/forum/forum.php?id='.$this->Forum->getId())."\n"
-			."Message-Id: <forumpost".$this->getId()."@".forge_get_config('web_host').">";
-		$parentid = $this->getParentId();
+			."List-Id: ".$this->Forum->getName()." <forum".$this->Forum->getID()."@".forge_get_config('web_host').">\n"
+			."List-Help: ".util_make_url('/forum/forum.php?id='.$this->Forum->getID())."\n"
+			."Message-Id: <forumpost".$this->getID()."@".forge_get_config('web_host').">";
+		$parentid = $this->getParentID();
 		if (!empty($parentid)) {
  			$extra_headers .= "\nIn-Reply-To: ".$this->Forum->getReturnEmailAddress()."\n"
-				."References: <forumpost".$this->getParentId()."@".forge_get_config('web_host').">";
+				."References: <forumpost".$this->getParentID()."@".forge_get_config('web_host').">";
 		}
 
 		$subject="[" . $this->Forum->getUnixName() ."][".$this->getID()."] ".util_unconvert_htmlspecialchars($this->getSubject());
@@ -775,8 +771,6 @@ Or reply to this e-mail entering your response between the following markers:
 		}
 
 		$BCC = implode(util_result_column_to_array($bccres),',').','.$this->Forum->getSendAllPostsTo();
-		$User = user_get_object($this->getPosterID());
-		//util_send_message('',$subject,$body,$User->getEmail(),$BCC,$this->getPosterRealName(),$extra_headers);
 		util_send_message('',$subject,$body,"noreply@".forge_get_config('web_host'),$BCC,'Forum',$extra_headers);
 //		util_handle_message(array_unique($ids),$subject,$body,$this->Forum->getSendAllPostsTo(),'','forumgateway@'.forge_get_config('web_host'));
 		return true;
@@ -865,13 +859,13 @@ Or reply to this e-mail entering your response between the following markers:
 			$extra_headers .= "Sender: <noreply@".forge_get_config('web_host').">\n";
 			$extra_headers .= "Reply-To: ".$this->Forum->getReturnEmailAddress()."\n";
 			$extra_headers .= "Precedence: Bulk\n"
-				."List-Id: ".$this->Forum->getName()." <forum".$this->Forum->getId()."@".forge_get_config('web_host').">\n"
-				."List-Help: ".util_make_url('/forum/forum.php?id='.$this->Forum->getId())."\n"
-				."Message-Id: <forumpost".$this->getId()."@".forge_get_config('web_host').">";
-			$parentid = $this->getParentId();
+				."List-Id: ".$this->Forum->getName()." <forum".$this->Forum->getID()."@".forge_get_config('web_host').">\n"
+				."List-Help: ".util_make_url('/forum/forum.php?id='.$this->Forum->getID())."\n"
+				."Message-Id: <forumpost".$this->getID()."@".forge_get_config('web_host').">";
+			$parentid = $this->getParentID();
 			if (!empty($parentid)) {
 				$extra_headers .= "\nIn-Reply-To: ".$this->Forum->getReturnEmailAddress()."\n"
-					."References: <forumpost".$this->getParentId()."@".forge_get_config('web_host').">";
+					."References: <forumpost".$this->getParentID()."@".forge_get_config('web_host').">";
 			}
 
 			$subject="[" . $this->Forum->getUnixName() ."][".$this->getID()."] ".util_unconvert_htmlspecialchars($this->getSubject());
@@ -881,7 +875,6 @@ Or reply to this e-mail entering your response between the following markers:
 								  db_int_array_to_any_clause ($ids))) ;
 			}
 			$BCC = implode(util_result_column_to_array($bccres),',').','.$this->Forum->getSendAllPostsTo();
-			$User = user_get_object($this->getPosterID());
 			util_send_message('',$subject,$body,"noreply@".forge_get_config('web_host'),$BCC,'Forum',$extra_headers);
 			return true;
 		}

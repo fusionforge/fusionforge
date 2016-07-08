@@ -110,9 +110,9 @@ if (getStringFromRequest('submit')) {
 }
 
 if (!$role_id) {
-	$title= _('New Role');
+	$title = _('New Role');
 } else {
-	$title= _('Edit Role');
+	$title = _('Edit Role');
 }
 $msg = _('Use this page to edit the permissions attached to each role.  Note that each role has at least as much access as the Anonymous and LoggedIn roles.  For example, if the Anonymous role has read access to a forum, all other roles will have it too.');
 

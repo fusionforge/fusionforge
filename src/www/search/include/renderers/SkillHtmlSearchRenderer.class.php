@@ -28,17 +28,15 @@ require_once $gfcommon.'search/SkillSearchQuery.class.php';
 class SkillHtmlSearchRenderer extends HtmlSearchRenderer {
 
 	/**
-	 * Constructor
-	 *
 	 * @param string $words words we are searching for
 	 * @param int $offset offset
 	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
 	 */
-	function SkillHtmlSearchRenderer($words, $offset, $isExact) {
+	function __construct($words, $offset, $isExact) {
 
 		$searchQuery = new SkillSearchQuery($words, $offset, $isExact);
 
-		$this->HtmlSearchRenderer(SEARCH__TYPE_IS_SKILL, $words, $isExact, $searchQuery);
+		parent::__construct(SEARCH__TYPE_IS_SKILL, $words, $isExact, $searchQuery);
 
 		$this->tableHeaders = array(
 			_('Name'),

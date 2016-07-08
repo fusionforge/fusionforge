@@ -109,7 +109,7 @@ fi
 
 %package db-local
 Summary: Collaborative development tool - database (using PostgreSQL)
-Requires: %{name}-common = %{version}-%{release}, postgresql-server
+Requires: %{name}-common = %{version}-%{release}, postgresql-server, postgresql-contrib
 Provides: %{name}-db = %{version}-%{release}
 %description db-local
 FusionForge provides many tools to aid collaboration in a

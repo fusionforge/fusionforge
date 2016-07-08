@@ -27,9 +27,9 @@ forge_define_config_item ('default_server', 'scmccase', forge_get_config ('scm_h
 forge_define_config_item ('tag_pattern', 'scmccase', '') ;
 
 class CCasePlugin extends SCMPlugin {
-	function CCasePlugin () {
+	function __construct() {
 		global $gfconfig;
-		$this->SCM () ;
+		parent::__construct();
 		$this->name = "scmccase";
 		$this->text = 'CCASE';
 		$this->hooks[] = "scm_page";

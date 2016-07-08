@@ -89,7 +89,6 @@ function parseConfig(&$Config)
 		$Config['FileName'] = substr($Config['FileName'],strlen($Repository)); //get only the filename relative to the repo
 	} else {
 		$GroupName = $Repository;
-		$Config['FileName'] = $Config['FileName'];
 	}
 
 	$Result['group']    = group_get_object_by_name($GroupName);

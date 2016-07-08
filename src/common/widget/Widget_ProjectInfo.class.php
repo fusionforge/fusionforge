@@ -24,8 +24,8 @@ require_once 'Widget.class.php';
  * Widget_ProjectInfo
  */
 class Widget_ProjectInfo extends Widget {
-	public function __construct() {
-		$this->Widget('projectinfo');
+	function __construct() {
+		parent::__construct('projectinfo');
 	}
 
 	public function getTitle() {
@@ -34,7 +34,7 @@ class Widget_ProjectInfo extends Widget {
 
 	public function getContent() {
 		$result = '';
-		
+
 		$request =& HTTPRequest::instance();
 		$group_id = $request->get('group_id');
 		$pm = ProjectManager::instance();
@@ -84,7 +84,7 @@ class Widget_ProjectInfo extends Widget {
 			}
 			$result .= '<br />'.sprintf (_('Activity Ranking: <strong>%d</strong>'), $actv_res)."\n";
 			$result .= '<br />'._('View project').' '.util_make_link('/project/stats/?group_id='.$group_id, _('Statistics'));
-			if ( ($project->usesTracker() && forge_get_config('use_tracker')) || ($project->usesPm() && forge_get_config('use_pm')) ) {
+			if ( ($project->usesTracker() && forge_get_config('use_tracker')) || ($project->usesPM() && forge_get_config('use_pm')) ) {
 				$result .= sprintf(_(' or <a href="%s">Activity</a>'),util_make_uri('/project/report/?group_id='.$group_id))."\n";
 			}
 			$result .= '<br />'.sprintf(_('View list of <a href="%s">RSS feeds</a> available for this project.'), util_make_uri('/export/rss_project.php?group_id='.$group_id)). ' ' . html_image('ic/rss.png',16,16,array());

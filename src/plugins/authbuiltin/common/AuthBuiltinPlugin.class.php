@@ -32,7 +32,7 @@ class AuthBuiltinPlugin extends ForgeAuthPlugin {
 	 *
 	 */
 	function AuthBuiltinPlugin() {
-		$this->ForgeAuthPlugin();
+		parent::__construct();
 
 		$this->name = 'authbuiltin';
 		$this->text = _('Built-in authentication');

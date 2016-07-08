@@ -40,8 +40,6 @@ class ArtifactHistory extends FFError {
 	var $data_array;
 
 	/**
-	 * ArtifactHistory - constructor.
-	 *
 	 * @param	Artifact	$Artifact	Artifact object.
 	 * @param	array|bool	$data		(all fields from artifact_history_user_vw) OR id from database.
 	 */

@@ -32,7 +32,7 @@ require_once $gfwww.'news/news_utils.php';
 require_once $gfcommon.'forum/ForumAdmin.class.php';
 require_once $gfcommon.'forum/AttachManager.class.php';
 
-function forum_header($params) {
+function forum_header($params = array()) {
 	global $HTML, $group_id, $forum_id, $f, $group_forum_id;
 
 	if ($group_forum_id) {
@@ -136,7 +136,7 @@ function forum_header($params) {
 		if ($f) {
 			if ($f->isMonitoring()) {
 				echo util_make_link('/forum/monitor.php?forum_id='.$forum_id.'&group_id='.$group_id.'&stop=1',
-								 html_image('ic/xmail16w.png').' '._('Stop Monitoring')).' | ';
+								 html_image('ic/xmail16w.png').' '._('Stop monitoring')).' | ';
 			} else {
 				echo util_make_link('/forum/monitor.php?forum_id='.$forum_id.'&group_id='.$group_id.'&start=1',
 							 html_image('ic/mail16w.png').' '._('Monitor Forum')).' | ';
@@ -150,7 +150,7 @@ function forum_header($params) {
 
 	if ($f && $forum_id) {
 		echo util_make_link ('/forum/new.php?forum_id='.$forum_id.'&group_id='.$group_id,
-					 html_image('ic/write16w.png','20','20',array('alt'=>_('Start New Thread'))) .' '.
+					 html_image('ic/write16w.png', 20, 20, array('alt'=>_('Start New Thread'))) .' '.
 					 _('Start New Thread'));
 	}
 }
@@ -249,8 +249,7 @@ class ForumHTML extends FFError {
 		$msgforum =& $msg->getForum();
 		$fa = new ForumAdmin($msgforum->Group->getID());
 		$url = util_make_uri('/forum/message.php?msg_id='. $msg->getID() .'&amp;group_id='.$group_id);
-		$ret_val =
-		'<table class="fullwidth">
+		$ret_val = $HTML->listTableTop().'
 			<tr>
 				<td class="tablecontent top" style="white-space: nowrap;">';
 
@@ -265,7 +264,7 @@ class ForumHTML extends FFError {
 		$ret_val .= ' on '.date('Y-m-d H:i',$msg->getPostDate());
 		$ret_val .= '</td><td class="tablecontent align-right">';
 		$ret_val .= '<a href="'.$url.'">[forum:'.$msg->getID().']</a><br/>';
-		if (forge_check_perm ('forum_admin', $msgforum->Group->getID())) {
+		if (forge_check_perm('forum_admin', $msgforum->Group->getID())) {
 			$ret_val .= $fa->PrintAdminMessageOptions($msg->getID(),$group_id,$msg->getThreadID(),$msgforum->getID());
 		}
 		$ret_val .= $am->PrintAttachLink($msg,$group_id,$msgforum->getID());
@@ -282,8 +281,7 @@ class ForumHTML extends FFError {
 					}
 					$ret_val .= '
 				</td>
-			</tr>
-		</table>';
+			</tr>'.$HTML->listTableBottom();
 		return $ret_val;
 	}
 
@@ -404,7 +402,7 @@ class ForumHTML extends FFError {
 			If there are, it calls itself, incrementing $level
 			$level is used for indentation of the threads.
 		*/
-		global $total_rows,$forum_id,$current_message,$group_id;
+		global $total_rows,$current_message,$group_id, $HTML;
 
 		if (!isset($msg_arr["$msg_id"]))
 			return "";
@@ -420,7 +418,7 @@ class ForumHTML extends FFError {
 				$total_rows++;
 
 				$ret_val .= '
-					<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($total_rows) .'><td style="white-space: nowrap;">';
+					<tr '. $HTML->boxGetAltRowStyle($total_rows) .'><td style="white-space: nowrap;">';
 				/*
 					How far should it indent?
 				*/
@@ -591,7 +589,7 @@ class ForumHTML extends FFError {
 				//$text_support->displayTextField('body'); ?>
 		<br />
 		<!--		<span class="selected"><?php echo _('HTML tags will display in your post as text'); ?></span> -->
-		<p>
+		<br />
 				<?php $this->LinkAttachForm();?>
 
 		<p><?php

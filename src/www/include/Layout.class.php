@@ -112,12 +112,9 @@ class Layout extends FFError {
 	var $css = array();
 	var $css_min = array();
 	var $stylesheets = array();
+	var $buttons = array();
 
-	/**
-	 * Layout() - Constructor
-	 */
 	function __construct() {
-		// parent constructor
 		parent::__construct();
 
 		$this->navigation = new Navigation();
@@ -230,6 +227,32 @@ class Layout extends FFError {
 			}
 		}
 		$this->stylesheets = array();
+		return $code;
+	}
+
+	function addButtons($link, $text, $options = array()) {
+		$this->buttons[] = array_merge( array('link' => $link, 'text' => $text), $options);
+	}
+
+	function getButtons() {
+		$code = '';
+		if ($this->buttons) {
+			$code .= "\n";
+			$code .= '<p class="buttonsbar">';
+			$code .= "\n";
+			foreach ($this->buttons as $b) {
+				$text = $b['text'];
+				$link = $b['link'];
+				if (isset($b['icon'])) {
+					$text = $b['icon'].' '.$text;
+					unset($b['icon']);
+				}
+				unset($b['text'], $b['link'], $b['icon']);
+				$code .= '<span class="buttons">'.util_make_link($link, $text, $b).'</span>'."\n";
+			}
+			$code .= '</p>';
+			$this->buttons = array();
+		}
 		return $code;
 	}
 
@@ -407,7 +430,7 @@ class Layout extends FFError {
 			<div class="header">
 			<table class="fullwidth" id="headertable">
 			<tr>
-			<td><?php util_make_link('/', html_image('logo.png',198,52,array('border'=>'0'))); ?></td>
+			<td><?php util_make_link('/', html_image('logo.png', 198, 52)); ?></td>
 			<td><?php $this->searchBox(); ?></td>
 			<td align="right"><?php
 			$items = $this->navigation->getUserLinks();
@@ -544,9 +567,10 @@ if (isset($params['group']) && $params['group']) {
 	 * boxTop() - Top HTML box.
 	 *
 	 * @param	string	$title	Box title
+	 * @param   string  $id
 	 * @return	string	the html code
 	 */
-	function boxTop($title) {
+	function boxTop($title, $id = '') {
 		return '
 			<!-- Box Top Start -->
 
@@ -569,9 +593,10 @@ if (isset($params['group']) && $params['group']) {
 	 * boxMiddle() - Middle HTML box.
 	 *
 	 * @param	string	$title	Box title
+	 * @param   string  $id
 	 * @return	string	The html code
 	 */
-	function boxMiddle($title) {
+	function boxMiddle($title, $id = '') {
 		return '
 			<!-- Box Middle Start -->
 			</td>
@@ -696,13 +721,14 @@ if (isset($params['group']) && $params['group']) {
 			if (count($groups) < 1) {
 				return;
 			} else {
-				sortProjectList($groups);
-
-				$result = html_ao('form', array('id' => 'quicknavform', 'name' => 'quicknavform', 'action' => ''));
+				$result = $this->openForm(array('id' => 'quicknavform', 'name' => 'quicknavform', 'action' => ''));
 				$result .= html_ao('div');
 				$result .= html_ao('select', array('name' => 'quicknav', 'id' => 'quicknav', 'onchange' => 'location.href=document.quicknavform.quicknav.value'));
 				$result .= html_e('option', array('value' => ''), _('Quick Jump To...'), false);
-
+				if (!forge_get_config('use_quicknav_default') && session_get_user()->getPreference('quicknav_mode')) {
+					$groups = session_get_user()->getActivityLogGroups();
+				}
+				sortProjectList($groups);
 				foreach ($groups as $g) {
 					$group_id = $g->getID();
 					$menu = $this->navigation->getProjectMenu($group_id);
@@ -714,7 +740,8 @@ if (isset($params['group']) && $params['group']) {
 						}
 					}
 				}
-				$result .= html_ac(html_ap() - 3);
+				$result .= html_ac(html_ap() - 2);
+				$result .= $this->closeForm();
 			}
 			return $result;
 		}
@@ -928,13 +955,14 @@ if (isset($params['group']) && $params['group']) {
 			$row_attrs['class'] .= '';
 		}
 		$return = html_ao('tr', $row_attrs);
+		$type = $istitle ? 'th' : 'td';
 		for ( $c = 0; $c < count($cell_data); $c++ ) {
 			$locAp = html_ap();
 			$cellAttrs = array();
 			foreach (array_slice($cell_data[$c],1) as $k => $v) {
 				$cellAttrs[$k] = $v;
 			}
-			$return .= html_ao('td', $cellAttrs);
+			$return .= html_ao($type, $cellAttrs);
 			if ( $istitle ) {
 				$return .= html_ao('span', array('class' => 'multiTableRowTitle'));
 			}
@@ -1005,7 +1033,7 @@ if (isset($params['group']) && $params['group']) {
 
 	function confirmBox($msg, $params, $buttons, $image='*none*') {
 		if ($image == '*none*') {
-			$image = html_image('stop.png','48','48',array());
+			$image = html_image('stop.png', 48, 48);
 		}
 
 		foreach ($params as $b => $v) {
@@ -1298,6 +1326,10 @@ if (isset($params['group']) && $params['group']) {
 		return $this->getPicto('ic/directory-add.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
+	function getEditFilePic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/edit-file.png', $title, $alt, 20, 20, $otherAttr);
+	}
+
 	function getNewPic($title = '', $alt = '', $otherAttr = array()) {
 		return $this->getPicto('ic/add.png', $title, $alt, 20, 20, $otherAttr);
 	}
@@ -1526,8 +1558,9 @@ if (isset($params['group']) && $params['group']) {
 	 * @param	integer	$totalElements	total number of this type of Elements in the forge
 	 * @param	integer	$maxElements	max number of Elements to display
 	 * @param	string	$actionUrl	next / prev Url to click
+	 * @param	array	$htmlAttr	html attributes to set.
 	 */
-	function paging_top($start = 0, $paging = 25, $totalElements = 0, $maxElements = 0, $actionUrl = '/') {
+	function paging_top($start = 0, $paging = 25, $totalElements = 0, $maxElements = 0, $actionUrl = '/', $htmlAttr = array()) {
 		$html_content = '';
 		$sep = '?';
 		if (strpos($actionUrl, '?')) {
@@ -1544,7 +1577,7 @@ if (isset($params['group']) && $params['group']) {
 				$html_content .= $this->closeForm();
 			}
 		}
-		return $html_content;
+		return html_e('span', $htmlAttr, $html_content, false);
 	}
 
 	/**

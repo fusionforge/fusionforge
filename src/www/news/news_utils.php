@@ -30,8 +30,8 @@ function news_header($params) {
 		exit_disabled();
 	}
 
-	$params['toptab']='news';
-	$params['group']=$group_id;
+	$params['toptab'] = 'news';
+	$params['group'] = $group_id;
 
 	if ($group_id && ($group_id != forge_get_config('news_group'))) {
 		$menu_texts=array();

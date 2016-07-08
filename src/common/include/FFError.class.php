@@ -56,12 +56,9 @@ class FFError {
 	var $error_code;
 
 	/**
-	 * Error() - Constructor.
-	 * Constructor for the Error class.
 	 * Sets the error state to false.
-	 *
 	 */
-	function FFError() {
+	function __construct() {
 		//nothing
 		$this->error_state=false;
 		$this->error_code=ERROR__NO_ERROR;
@@ -140,10 +137,11 @@ class FFError {
 	 */
 	function setInvalidEmailError($adr=false){
 		$e = _('Invalid Email Address');
-		if ($adr)
+		if ($adr) {
 			$e .= " '" . htmlspecialchars($adr) . "'";
-		else if ($adr !== false)
+		} elseif ($adr !== false) {
 			$e .= ' ' . _('(none given)');
+		}
 		$this->setError($e, ERROR__INVALID_EMAIL_ERROR);
 	}
 

@@ -28,8 +28,8 @@
 require_once 'common/include/rdfutils.php';
 
 class foafprofilesPlugin extends Plugin {
-	public function __construct($id=0) {
-		$this->Plugin($id) ;
+	function __construct($id=0) {
+		parent::__construct($id) ;
 		$this->name = "foafprofiles";
 		$this->text = _("User FOAF Profiles"); // To show in the tabs, use...
 		$this->pkg_desc =

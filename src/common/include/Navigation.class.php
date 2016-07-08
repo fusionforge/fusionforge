@@ -40,12 +40,8 @@ class Navigation extends FFError {
 	 */
 	var $project_menu_data;
 
-	/**
-	 * Constructor
-	 */
-	function Navigation() {
+	function __construct() {
 		parent::__construct();
-		return true;
 	}
 
 	/**
@@ -320,13 +316,11 @@ class Navigation extends FFError {
 				}
 			}
 			if ($project && is_object($project)) {
-				if ($project->isError()) {
-				} elseif (!$project->isProject()) {
-				} else {
+				if (!$project->isError() && $project->isProject()) {
 					$menu['titles'][] = $project->getPublicName();
 					$menu['tooltips'][] = _('Project home page, widgets selected to follow specific items.');
 					if (isset ($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
-						$menu['urls'][] = util_make_uri('/project/?group_id') .$project->getId();
+						$menu['urls'][] = util_make_uri('/project/?group_id') .$project->getID();
 					} else {
 						$menu['urls'][] = util_make_uri('/projects/') .$project->getUnixName().'/';
 					}
@@ -473,9 +467,9 @@ class Navigation extends FFError {
 			}
 
 			// Project/Task Manager
-			if ($group->usesPm()) {
+			if ($group->usesPM()) {
 				$menu['titles'][] = _('Tasks');
-				$menu['tooltips'][] = _('Project Management.');
+				$menu['tooltips'][] = _('Project Management');
 				$menu['urls'][] = util_make_uri('/pm/?group_id=' . $group_id);
 				if (forge_check_perm ('pm_admin', $group_id)) {
 					$menu['adminurls'][] = util_make_uri('/pm/admin/?group_id='.$group_id);

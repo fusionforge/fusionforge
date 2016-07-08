@@ -54,10 +54,10 @@ $group_name=$group->getUnixName();
 $filename=$group_name.'-scmroot.tar.gz';
 
 if (file_exists(forge_get_config('scm_tarballs_path').'/'.$filename)) {
-	Header('Content-disposition: filename="'.str_replace('"', '', $filename).'"');
-	Header("Content-type: application/x-gzip");
+	header('Content-disposition: filename="'.str_replace('"', '', $filename).'"');
+	header("Content-type: application/x-gzip");
 	$length = filesize(forge_get_config('scm_tarballs_path').'/'.$filename);
-	Header("Content-length: ".$length);
+	header("Content-length: ".$length);
 
 	readfile_chunked(forge_get_config('scm_tarballs_path').'/'.$filename);
 } else {

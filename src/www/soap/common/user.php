@@ -185,7 +185,7 @@ $server->register(
 );
 
 //get user objects for array of user_ids
-function &getUsers($session_ser,$user_ids) {
+function getUsers($session_ser,$user_ids) {
 	continue_session($session_ser);
 	$users = user_get_objects($user_ids);
 	if (!$users) {
@@ -242,7 +242,7 @@ function getUsersByName($session_ser,$user_names) {
 //add user object
 function addUser($unix_name,$firstname,$lastname,$password1,$password2,$email,
 		$mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only,$theme_id,$unix_box,$address,$address2,$phone,$fax,$title,$ccode){
-	$new_user = new GFUser();
+	$new_user = new FFUser();
 
 	$register = $new_user->create($unix_name,$firstname,$lastname,$password1,$password2,$email,$mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only,$theme_id,$unix_box,$address,$address2,$phone,$fax,$title,$ccode);
 
@@ -320,7 +320,7 @@ function changePassword ($session_ser,$user_id,$password){
 }
 
 //get groups for user_id
-function &userGetGroups($session_ser,$user_id) {
+function userGetGroups($session_ser,$user_id) {
 	continue_session($session_ser);
 	$user = user_get_object($user_id);
 	if (!$user) {
@@ -332,7 +332,7 @@ function &userGetGroups($session_ser,$user_id) {
 /*
 	Converts an array of User objects to soap data
 */
-function &users_to_soap($users) {
+function users_to_soap($users) {
 	$return = array();
 	for ($i=0; $i<count($users); $i++) {
 		if ($users[$i]->isError()) {

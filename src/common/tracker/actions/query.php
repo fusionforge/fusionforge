@@ -247,7 +247,9 @@ $res = db_query_params('SELECT artifact_query_id,query_name FROM artifact_query 
 
 //	Show the new pop-up boxes to select assigned to, status, etc
 //
-$ath->header(array('atid'=>$ath->getID(), 'title' =>_('Build Query')));
+$ath->header(array('atid'=>$ath->getID(),
+				   'title' =>_('Build Query'),
+				   'modal' => 1));
 
 echo '<table style="margin-left:auto;margin-right:auto"><tr><td>' .
 		'<fieldset><legend>'.
@@ -300,8 +302,7 @@ echo '<input type="hidden" name="form_key" value="'.form_generate_key().'" />
 	</tr>
 </table>';
 
-echo'
-<table width="100%" class="tablecontent">';
+echo $HTML->listTableTop(array(), array(), 'tablecontent fullwidth');
 if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
 	$default_query = db_result(db_query_params('SELECT query_name FROM artifact_query WHERE query_type=2 AND group_artifact_id=$1',
 						   array ($ath->getID())),
@@ -399,8 +400,7 @@ echo '<tr>
 .'/>'._('Display a short summary box on top of the list (roadmap status).').'</p>
 		</td>
 	</tr>';
-echo '
-	</table>';
+echo $HTML->listTableBottom();
 echo $HTML->closeForm();
 echo '</fieldset></td></tr></table>';
 $ath->footer();

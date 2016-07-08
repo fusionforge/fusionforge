@@ -26,11 +26,11 @@ forge_define_config_item ('default_server', 'scmcvs', forge_get_config ('scm_hos
 forge_define_config_item ('repos_path', 'scmcvs', forge_get_config('chroot').'/scmrepos/cvs') ;
 
 class CVSPlugin extends SCMPlugin {
-	function CVSPlugin () {
+	function __construct () {
 		global $cvs_root;
 		global $gfconfig;
-		global $cvsdir_prefix ;
-		$this->SCMPlugin () ;
+		global $cvsdir_prefix;
+		parent::__construct();
 		$this->name = 'scmcvs';
 		$this->text = _('CVS');
 		$this->pkg_desc =

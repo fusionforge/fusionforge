@@ -5,7 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2012,2015, Franck Villaume - TrivialDev
+ * Copyright 2012,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -29,6 +29,9 @@
 global $g; // Group object
 global $group_id; // id of group
 global $childgroup_id; // id of child group if any
+global $feedback;
+global $error_msg;
+global $warning_msg;
 
 $urlparam = '/docman/?group_id='.$group_id;
 
@@ -65,6 +68,10 @@ $uploaded_data = getUploadedFile('uploaded_data');
 $stateid = getIntFromRequest('stateid');
 $filetype = getStringFromRequest('filetype');
 $editor = getStringFromRequest('editor');
+$current_version_radio = getIntFromRequest('doc_version_cv_radio');
+$current_version = getIntFromRequest('current_version', 0);
+$version = getIntFromRequest('edit_version', 0);
+$new_version = getIntFromRequest('new_version', 0);
 
 if (!$docid) {
 	$warning_msg = _('No document found to update');
@@ -79,42 +86,86 @@ if ($d->isError()) {
 
 $sanitizer = new TextSanitizer();
 $details = $sanitizer->SanitizeHtml($details);
-if (($editor) && ($d->getFileData() != $details) && (!$uploaded_data['name'])) {
-	$filename = $d->getFileName();
-	$datafile = tempnam("/tmp", "docman");
-	$fh = fopen($datafile, 'w');
-	fwrite($fh, $details);
-	fclose($fh);
-	$data = $datafile;
-	if (!$filetype)
-		$filetype = $d->getFileType();
+$data = '';
 
-} elseif (!empty($uploaded_data) && $uploaded_data['name']) {
-	if (!is_uploaded_file($uploaded_data['tmp_name'])) {
-		$error_msg = sprintf(_('Invalid file attack attempt %s.'), $uploaded_data['name']);
-		session_redirect($urlparam);
-	}
-	$data = $uploaded_data['tmp_name'];
-	$filename = $uploaded_data['name'];
-	if (function_exists('finfo_open')) {
-		$finfo = finfo_open(FILEINFO_MIME_TYPE);
-		$filetype = finfo_file($finfo, $uploaded_data['tmp_name']);
+if ($version) {
+	$dv = documentversion_get_object($version, $docid, $group_id);
+	if (($editor) && ($dv->getFileData() != $details) && (!$uploaded_data['name'])) {
+		$filename = $dv->getFileName();
+		$datafile = tempnam('/tmp', 'docman');
+		$fh = fopen($datafile, 'w');
+		fwrite($fh, $details);
+		fclose($fh);
+		$data = $datafile;
+		if (!$filetype)
+			$filetype = $dv->getFileType();
+
+	} elseif (!empty($uploaded_data) && $uploaded_data['name']) {
+		if (!is_uploaded_file($uploaded_data['tmp_name'])) {
+			$error_msg = sprintf(_('Invalid file attack attempt %s.'), $uploaded_data['name']);
+			session_redirect($urlparam);
+		}
+		$data = $uploaded_data['tmp_name'];
+		$filename = $uploaded_data['name'];
+		if (function_exists('finfo_open')) {
+			$finfo = finfo_open(FILEINFO_MIME_TYPE);
+			$filetype = finfo_file($finfo, $uploaded_data['tmp_name']);
+		} else {
+			$filetype = $uploaded_data['type'];
+		}
+	} elseif ($file_url) {
+		$filename = $file_url;
+		$filetype = 'URL';
 	} else {
-		$filetype = $uploaded_data['type'];
+		$filename = $dv->getFileName();
+		$filetype = $dv->getFileType();
 	}
-} elseif ($file_url) {
-	$data = '';
-	$filename = $file_url;
-	$filetype = 'URL';
+} elseif ($new_version) {
+	if ($editor && $details && $name) {
+		$filename = $name;
+		$datafile = tempnam('/tmp', 'docman');
+		$fh = fopen($datafile, 'w');
+		fwrite($fh, $details);
+		fclose($fh);
+		$data = $datafile;
+		if (!$filetype)
+			$filetype = 'text/html';
+
+	} elseif (!empty($uploaded_data) && $uploaded_data['name']) {
+		if (!is_uploaded_file($uploaded_data['tmp_name'])) {
+			$error_msg = sprintf(_('Invalid file attack attempt %s.'), $uploaded_data['name']);
+			session_redirect($urlparam);
+		}
+		$data = $uploaded_data['tmp_name'];
+		$filename = $uploaded_data['name'];
+		if (function_exists('finfo_open')) {
+			$finfo = finfo_open(FILEINFO_MIME_TYPE);
+			$filetype = finfo_file($finfo, $uploaded_data['tmp_name']);
+		} else {
+			$filetype = $uploaded_data['type'];
+		}
+	} elseif ($file_url) {
+		$filename = $file_url;
+		$filetype = 'URL';
+	}
+} elseif (($d->getDocGroupID() != $doc_group) || ($d->getState() != $stateid)) {
+	// we do the update based on the current version.
+	$dv = documentversion_get_object($current_version_radio, $docid, $group_id);
+	$filename = $dv->getFileName();
+	$filetype = $dv->getFileType();
+	$title = $dv->getTitle();
+	$description = $dv->getDescription();
+	$version = $current_version_radio;
+	$current_version = 1;
 } else {
-	$filename = $d->getFileName();
-	$filetype = $d->getFileType();
+	$warning_msg = _('No action to perform');
+	session_redirect($urlparam);
 }
 
-if (!$d->update($filename, $filetype, $data, $doc_group, $title, $description, $stateid)) {
+if (!$d->update($filename, $filetype, $data, $doc_group, $title, $description, $stateid, $version, $current_version, $new_version)) {
 	$error_msg = $d->getErrorMessage();
 	session_redirect($urlparam);
 }
 
-$feedback = sprintf(_('Document %s updated successfully.'), $filename);
+$feedback = sprintf(_('Document [D%s] updated successfully.'), $d->getID());
 session_redirect($urlparam);

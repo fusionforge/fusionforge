@@ -48,15 +48,15 @@
 class blocksPlugin extends Plugin {
 
 	function __construct() {
-		$this->Plugin() ;
-		$this->name = "blocks" ;
+		parent::__construct();
+		$this->name = "blocks";
 		$this->text = _("Blocks"); // To show in the tabs, use...
 		$this->pkg_desc =
 _("This plugin contains the Blocks subsystem of FusionForge. It allows each
 FusionForge project to have its own Blocks, and gives some
 control over it to the project's administrator.");
-		$this->hooks[] = "groupisactivecheckbox" ; // The "use ..." checkbox in editgroupinfo
-		$this->hooks[] = "groupisactivecheckboxpost" ; //
+		$this->hooks[] = "groupisactivecheckbox"; // The "use ..." checkbox in editgroupinfo
+		$this->hooks[] = "groupisactivecheckboxpost"; //
 		$this->hooks[] = "project_admin_plugins"; // to show up in the admin page fro group
 		$this->hooks[] = "blocks"; // to show up in the admin page fro group
 		$this->hooks[] = 'widget_instance';

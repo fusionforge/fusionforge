@@ -358,15 +358,13 @@ function util_unconvert_htmlspecialchars($string) {
  *
  */
 function util_result_columns_to_assoc($result, $col_key = 0, $col_val = 1) {
+	$arr = array();
 	$rows = db_numrows($result);
 
 	if ($rows > 0) {
-		$arr = array();
 		for ($i = 0; $i < $rows; $i++) {
 			$arr[db_result($result, $i, $col_key)] = db_result($result, $i, $col_val);
 		}
-	} else {
-		$arr = array();
 	}
 	return $arr;
 }
@@ -380,19 +378,13 @@ function util_result_columns_to_assoc($result, $col_key = 0, $col_val = 1) {
  *
  */
 function &util_result_column_to_array($result, $col = 0) {
-	/*
-		Takes a result set and turns the optional column into
-		an array
-	*/
+	$arr = array();
 	$rows = db_numrows($result);
 
 	if ($rows > 0) {
-		$arr = array();
 		for ($i = 0; $i < $rows; $i++) {
 			$arr[$i] = db_result($result, $i, $col);
 		}
-	} else {
-		$arr = array();
 	}
 	return $arr;
 }
@@ -944,8 +936,7 @@ function normalized_urlprefix() {
 function util_url_prefix($prefix = '') {
 	if ($prefix == 'http' || $prefix == 'https' ) {
 		return $prefix . '://';
-	}
-	else {
+	} else {
 		if (forge_get_config('use_ssl')) {
 			return "https://";
 		} else {
@@ -1064,7 +1055,7 @@ function util_make_link_u($username, $user_id, $text) {
  * @param	string	$size
  * @return	string
  */
-function util_display_user($username, $user_id, $text, $size = 'xs') {
+function util_display_user($username, $user_id = 0, $text = '', $size = 'xs') {
 	// Invoke user_link_with_tooltip plugin
 	$hook_params = array('resource_type' => 'user', 'username' => $username, 'user_id' => $user_id, 'size' => $size, 'user_link' => '');
 	plugin_hook_by_reference('user_link_with_tooltip', $hook_params);
@@ -1661,7 +1652,7 @@ function util_sudo_effective_user($username, $function, $params=array()) {
 	if ( $pid == -1 ) {
 		// Fork failed
 		exit(1);
-	} else if ($pid) {
+	} elseif ($pid) {
 		pcntl_waitpid($pid, $status);
 	} else {
 		if (posix_setgid($userinfo['gid']) &&
@@ -1711,7 +1702,7 @@ function utils_headers_download($filename, $mimetype, $size) {
 	/* https://www.owasp.org/images/a/ac/PDF_XSS_vulnerability.pdf */
 	/* https://groups.google.com/forum/#!topic/mozilla.dev.pdf-js/Fyl5RnaUWVc */
 	/* (PDF theoretically supports JS, not sure how pdf.js deals with that) */
-	$authorized_inline = ',^(text/plain|image/png|image/jpg|image/gif)$,';
+	$authorized_inline = ',^(text/plain|image/png|image/jpe?g|image/gif)$,';
 	/* Disarm XSS-able text/html, and inline common text files (*.c, *.pl...) */
 	$force_text_plain  = ',^(text/html|text/.*|application/x-perl|application/x-ruby)$,';
 

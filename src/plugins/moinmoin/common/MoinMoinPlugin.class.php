@@ -3,13 +3,14 @@
 /**
  * MoinMoinPlugin Class
  *
+ * Copyright 2016, Franck Villaume - TrivialDev
+ * http://fusionforge.org
  *
- * This file is part of FusionForge.
- *
- * FusionForge is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
+ * This file is part of FusionForge. FusionForge is free software;
+ * you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the Licence, or (at your option)
+ * any later version.
  *
  * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -17,7 +18,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
@@ -26,9 +27,9 @@ forge_define_config_item('use_frame', 'moinmoin', false);
 forge_set_config_item_bool('use_frame', 'moinmoin');
 
 class MoinMoinPlugin extends Plugin {
-	function MoinMoinPlugin () {
-		$this->Plugin() ;
-		$this->name = "moinmoin" ;
+	function __construct() {
+		parent::__construct();
+		$this->name = "moinmoin";
 		$this->text = _("MoinMoinWiki") ; // To show in the tabs, use...
 		$this->pkg_desc =
 _("This plugin allows each project to embed MoinMoinWiki under a tab.");
@@ -72,12 +73,20 @@ _("This plugin allows each project to embed MoinMoinWiki under a tab.");
 			if (!$project->isProject()) {
 				return;
 			}
-			if ( $project->usesPlugin ( $this->name ) ) {
-				$params['TITLES'][]=$this->text;
-				$params['DIRS'][]=$this->getWikiUrl($project);
+			if ($project->usesPlugin($this->name)) {
+				$params['TITLES'][] = $this->text;
+				$params['DIRS'][] = $this->getWikiUrl($project);
 				$params['TOOLTIPS'][] = _('MoinMoin Space');
+				if (session_loggedin()) {
+					$userperm = $project->getPermission();
+					if ($userperm->isAdmin()) {
+						$params['ADMIN'][] = '';
+					}
+				}
+				if(isset($params['toptab']) && $params['toptab'] == $this->name){
+					$params['selected'] = array_search($this->text, $params['TITLES']);
+				}
 			}
-			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
 		} elseif ($hookname == "groupisactivecheckbox") {
 			//Check if the group is active
 			// this code creates the checkbox in the project edit public info page to activate/deactivate the plugin

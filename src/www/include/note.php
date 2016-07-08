@@ -42,12 +42,12 @@ function notepad_button_raw($str, $form, $wrap, $rows, $cols) {
 }
 
 function notepad_button($form) {
-        $icon = html_image('ic/msg.png','12','14',array('alt'=>'Notepad'));
+        $icon = html_image('ic/msg.png', 12, 14, array('alt'=>'Notepad'));
         return notepad_button_raw($icon, $form, "SOFT", "45", "80");
 }
 
 function notepad_anchor($str, $form) {
-        return notepad_button_raw($str, $form, "SOFT", "45", "80");
+	return notepad_button_raw($str, $form, "SOFT", "45", "80");
 }
 
 function notepad_func() {

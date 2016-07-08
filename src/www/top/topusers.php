@@ -84,14 +84,11 @@ while ($row_top = db_fetch_array($res_top)) {
 	$diff = $row_top["old_ranking"] - $row_top["ranking"];
 	if (!$row_top["old_ranking"] || !$row_top["ranking"]) {
 		print _('N/A');
-	}
-	else if ($diff == 0) {
+	} elseif ($diff == 0) {
 		print _('Same');
-	}
-	else if ($diff > 0) {
+	} elseif ($diff > 0) {
 		print "<span class=\"up\"".sprintf(_('Up %s'), $diff)."</span>";
-	}
-	else if ($diff < 0) {
+	} elseif ($diff < 0) {
 		print "<span class=\"down\">".sprintf(_('Down %s'), (0-$diff))."</span>";
 	}
 

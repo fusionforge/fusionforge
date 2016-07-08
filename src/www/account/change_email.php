@@ -44,8 +44,8 @@ if (getStringFromRequest('submit')) {
 
 	$u = user_get_object(user_getid());
 	if (!$u || !is_object($u)) {
-   		form_release_key(getStringFromRequest('form_key'));
-   		exit_error(_('Could Not Get User'),'my');
+		form_release_key(getStringFromRequest('form_key'));
+		exit_error(_('Could Not Get User'),'my');
 	} elseif ($u->isError()) {
 		form_release_key(getStringFromRequest('form_key'));
 		exit_error($u->getErrorMessage(),'my');
@@ -58,11 +58,11 @@ if (getStringFromRequest('submit')) {
 
 	$message = sprintf(_('You have requested a change of email address on %s.'), forge_get_config('forge_name'))
 			. "\n\n"
-		 	. _('Please visit the following URL to complete the email change:')
+			. _('Please visit the following URL to complete the email change:')
 			. "\n\n"
 			.  util_make_url('/account/change_email-complete.php?ch='.$confirm_hash)
 			. "\n\n"
- 			. sprintf(_('-- the %s staff'), forge_get_config('forge_name'));
+			. sprintf(_('-- the %s staff'), forge_get_config('forge_name'));
 
 	util_send_message($newemail,sprintf(_('%s Verification'), forge_get_config ('forge_name')),$message);
 

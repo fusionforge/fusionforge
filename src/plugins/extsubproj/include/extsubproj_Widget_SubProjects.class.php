@@ -22,9 +22,9 @@ require_once 'common/widget/Widget.class.php';
 require_once 'common/widget/WidgetLayoutManager.class.php';
 
 class extsubproj_Widget_SubProjects extends Widget {
-	function extsubproj_Widget_SubProjects($owner_type, $plugin) {
+	function __construct($owner_type, $plugin) {
 		$this->plugin = $plugin;
-		$this->Widget('plugin_extsubproj_project_subprojects');
+		parent::__construct('plugin_extsubproj_project_subprojects');
 	}
 
 	function getTitle() {

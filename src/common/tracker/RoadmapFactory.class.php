@@ -60,7 +60,7 @@ class RoadmapFactory extends FFError {
 		if (!$group || !is_object($group)) {
 			$this->setError(_('No Valid Group Object'));
 			return;
- 		}
+		}
 		if ($group->isError()) {
 			$this->setError('RoadmapFactory: '.$group->getErrorMessage());
 			return;

@@ -27,9 +27,9 @@ require_once $gfcommon.'include/AuthPlugin.class.php';
  *
  */
 class AuthCASPlugin extends ForgeAuthPlugin {
-	function AuthCASPlugin () {
+	function __construct() {
 		global $gfconfig;
-		$this->ForgeAuthPlugin() ;
+		parent::__construct();
 		$this->name = "authcas";
 		$this->text = _("CAS authentication");
 		$this->pkg_desc =
@@ -97,7 +97,7 @@ server.");
 <input type="hidden" name="return_to" value="' . htmlspecialchars(stripslashes($return_to)) . '" />
 <p><input type="submit" name="login" value="' . _('Login via CAS') . '" />
 </p>
-</form>' ;
+</form>';
 
 		$params['html_snippets'][$this->name] = $result;
 
@@ -145,7 +145,7 @@ server.");
 	}
 
 	/**
-	 * What GFUser is logged in?
+	 * What FFUser is logged in?
 	 * @param unknown_type $params
 	 */
 	function fetchAuthUser(&$params) {

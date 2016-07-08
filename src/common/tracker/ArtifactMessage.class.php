@@ -40,8 +40,6 @@ class ArtifactMessage extends FFError {
 	var $data_array;
 
 	/**
-	 * __construct - ArtifactMessage constructor.
-	 *
 	 * @param	object		$Artifact	Artifact object.
 	 * @param	array|bool	$data		(all fields from artifact_history_user_vw) OR id from database.
 	 */

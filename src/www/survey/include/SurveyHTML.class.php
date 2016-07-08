@@ -33,11 +33,7 @@ require_once $gfwww.'include/note.php';
  */
 class SurveyHTML extends FFError {
 
-	/**
-	 * Dummy constructor
-	 */
-	function SurveyHTML() {
-		return true;
+	function __construct() {
 	}
 
 	/**
@@ -133,9 +129,9 @@ class SurveyHTML extends FFError {
 		$ret.='<input type="hidden" name="group_id" value="'.$group_id.'" />';
 		$ret.='<input type="hidden" name="question_id" value="'.$question_id.'" />';
 		$ret.='<input type="hidden" name="form_key" value="' . form_generate_key() . '" />';
-		$ret.=_('Question')._(':').'<br />';
-		$ret.='<input required="required" type="text" name="question" value="'.$question.'" size="60" maxlength="150" /></p>';
-		$ret.='<p>'. _('Question Type')._(':').'<br />';
+		$ret.='<label for="question">'._('Question')._(':').'</label>'.'<br />';
+		$ret.='<input id="question" required="required" type="text" name="question" value="'.$question.'" size="60" maxlength="150" /></p>';
+		$ret.='<p><label for="question_type">'. _('Question Type')._(':').'</label><br />';
 
 		$result = db_query_params ('SELECT * FROM survey_question_types', array());
 		$ret.= html_build_select_box($result,'question_type',$question_type,false);
@@ -194,12 +190,14 @@ class SurveyHTML extends FFError {
 		$ret.='<input type="hidden" name="survey_id" value="'.$survey_id.'" />';
 		$ret.='<input type="hidden" name="survey_questions" value="'.$survey_questions.'" />';
 		$ret.='<input type="hidden" name="form_key" value="' . form_generate_key() . '" />';
+		$ret.='<label for="survey_title">';
 		$ret.='<strong>'._('Survey Title').utils_requiredField()._(':').'</strong>';
-		$ret.= '<input required="required" type="text" name="survey_title" value="'.$survey_title.'" size="60" maxlength="150" /></p>';
+		$ret.='</label>';
+		$ret.= '<input required="required" type="text" name="survey_title" id="survey_title" value="'.$survey_title.'" size="60" maxlength="150" /></p>';
 
 		$ret.='<p><strong>'. _('Is Active?').'</strong>';
-		$ret.='<br /><input type="radio" name="is_active" value="1"' .$active. '/>'._('Yes');
-		$ret.='<br /><input type="radio" name="is_active" value="0"' .$inactive. '/>'._('No');
+		$ret.='<br /><input type="radio" name="is_active" id="is_active_yes" value="1"' .$active. '/> <label for="is_active_yes">'._('Yes').'</label>';
+		$ret.='<br /><input type="radio" name="is_active" id="is_active_no" value="0"' .$inactive. '/> <label for="is_active_no">'._('No').'</label>';
 		$ret.='</p>';
 
 		$arr_to_add = & $s->getAddableQuestionInstances();
@@ -719,10 +717,10 @@ class SurveyHTML extends FFError {
 	 * @return	string
 	 */
 	function _makeBar($name, $percent, $color) {
-		$ret = '<tr><td width="30%">'.$name.'</td><td>';
-		$ret.= '<table width="'.$percent.'%"><tr>';
+		$ret = '<tr><td style=width: 30%">'.$name.'</td><td>';
+		$ret.= '<table style=width: '.$percent.'%"><tr>';
 		if ($percent) {
-			$ret.='<td width="90%" bgcolor="'.$color.'">&nbsp;</td>';
+			$ret.='<td style=width: 90%" bgcolor="'.$color.'">&nbsp;</td>';
 		}
 
 		$ret.= '<td>'.sprintf("%.2f", $percent).'%</td></tr></table></td></tr>'."\n";

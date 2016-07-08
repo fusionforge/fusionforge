@@ -160,9 +160,9 @@ $blocks_text = array(
 );
 
 if (!$type) {
-	exit_error(_('Cannot Process your request: No TYPE specified'),'home'); // you can create items in Base.tab and customize this messages
+	exit_error(_('Cannot Process your request')._(': ')._('No TYPE specified'), 'home'); // you can create items in Base.tab and customize this messages
 } elseif (!$id) {
-	exit_error(_('Cannot Process your request: No ID specified'),'home');
+	exit_error(_('Cannot Process your request')._(': ')._('No ID specified'), 'home');
 }
 
 $group = group_get_object($id);

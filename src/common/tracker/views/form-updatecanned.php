@@ -27,7 +27,7 @@ global $HTML;
 //	FORM TO UPDATE CANNED MESSAGES
 //
 $title = sprintf(_('Modify Canned Responses In %s'),$ath->getName());
-$ath->adminHeader(array('title'=>$title));
+$ath->adminHeader(array('title'=>$title, 'modal'=>1));
 
 $id = getStringFromRequest('id');
 $acr = new ArtifactCanned($ath,$id);

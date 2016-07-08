@@ -23,13 +23,12 @@
 class Widget_ProjectLatestCommits extends Widget {
 
 	/**
-	* Default number of commits to display
-	*/
+	 * Default number of commits to display
+	 */
 	const NB_COMMITS_TO_DISPLAY = 5;
 
-
 	public function __construct() {
-		$this->Widget('projectlatestcommits');
+		parent::__construct('projectlatestcommits');
 		$request =& HTTPRequest::instance();
 		$pm = ProjectManager::instance();
 		$project = $pm->getProject($request->get('group_id'));

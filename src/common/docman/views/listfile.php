@@ -94,12 +94,12 @@ $df->setDocGroupID($dirid);
 //active, hidden & private state ids
 $df->setStateID(array(1, 4, 5));
 $df->setDocGroupState($stateIdDg);
-$d_arr =& $df->getDocuments();
+$d_arr = $df->getDocuments();
 $nested_groups = $dgf->getNested($stateidArr);
 
 $nested_docs = array();
 $DocGroupName = 0;
-
+$dgpath = '';
 if ($dirid) {
 	$ndg = documentgroup_get_object($dirid, $g->getID());
 	if ($ndg->isError()) {
@@ -124,26 +124,22 @@ if ($dirid) {
 	}
 }
 
-if ($d_arr != NULL) {
-	if (!$d_arr || count($d_arr) > 0) {
-		// Get the document groups info
-		//put the doc objects into an array keyed off the docgroup
-		foreach ($d_arr as $doc) {
-			$nested_docs[$doc->getDocGroupID()][] = $doc;
-		}
+if (is_array($d_arr) && count($d_arr) > 0) {
+	// Get the document groups info
+	//put the doc objects into an array keyed off the docgroup
+	foreach ($d_arr as $doc) {
+		$nested_docs[$doc->getDocGroupID()][] = $doc;
 	}
 }
 
 $df->setStateID(array(3));
-$d_pending_arr =& $df->getDocuments();
+$d_pending_arr = $df->getDocuments();
 
-if ($d_pending_arr != NULL) {
-	if (!$d_pending_arr || count($d_pending_arr) > 0) {
-		// Get the document groups info
-		//put the doc objects into an array keyed off the docgroup
-		foreach ($d_pending_arr as $doc) {
-			$nested_pending_docs[$doc->getDocGroupID()][] = $doc;
-		}
+if (is_array($d_pending_arr) && count($d_pending_arr) > 0) {
+	// Get the document groups info
+	//put the doc objects into an array keyed off the docgroup
+	foreach ($d_pending_arr as $doc) {
+		$nested_pending_docs[$doc->getDocGroupID()][] = $doc;
 	}
 }
 
@@ -174,7 +170,8 @@ jQuery(document).ready(function() {
 		enableResize:		true,
 		page:			'listfile',
 		docgroupId:		<?php echo $dirid ?>,
-		lockIntervalDelay:	60000
+		lockIntervalDelay:	60000,
+		tableAddVersion:	jQuery('#doc_version_edit')
 	});
 });
 
@@ -184,22 +181,18 @@ echo html_ac(html_ap() - 1);
 if ($DocGroupName) {
 	$headerPath = '';
 	if ($childgroup_id) {
-		$headerPath .= _('Subproject')._(': ').util_make_link('/docman/?group_id='.$g->getID(), $g->getPublicName()).' ';
+		$headerPath .= _('Subproject')._(': ').util_make_link('/docman/?group_id='.$g->getID(), $g->getPublicName()).'::';
 	}
-	$headerPath .= _('Path')._(': ').html_e('i', array(), $dgpath, false);
-	echo html_e('h2', array(), $headerPath, false);
+	$generalpath = $dgpath.'/'.$DocGroupName;
+	$generalpath = preg_replace('/\/\//','/', $generalpath);
+	$headerPath .= html_e('i', array(), $generalpath, false);
+	echo html_e('h2', array('class' => 'docman_h2'), $headerPath, false);
 	$max = ($nbDocs > ($start + $paging)) ? ($start + $paging) : $nbDocs;
-	echo $HTML->paging_top($start, $paging, $nbDocs, $max, $redirecturl);
-	echo html_ao('h3', array('class' => 'docman_h3'));
-	echo html_e('span', array(), _('Document Folder')._(': ').html_e('i', array(), $DocGroupName, false).'&nbsp;', false);
+	echo $HTML->paging_top($start, $paging, $nbDocs, $max, $redirecturl, array('style' => 'display:inline-block'));
 	/* should we steal the lock on folder ? */
-	if ($ndg->getLocked()) {
-		if (session_loggedin() && ($ndg->getLockedBy() == $LUSER->getID())) {
-			$ndg->setLock(0);
+	if ($ndg->getLocked() && ((session_loggedin() && ($ndg->getLockedBy() == $LUSER->getID())) || ((time() - $ndg->getLockdate()) > 600))) {
 		/* if you change the 60000 lockIntervalDelay value, please update here too */
-		} elseif ((time() - $ndg->getLockdate()) > 600) {
-			$ndg->setLock(0);
-		}
+		$ndg->setLock(0);
 	}
 	if (!$ndg->getLocked()) {
 		if (forge_check_perm('docman', $ndg->Group->getID(), 'approve')) {
@@ -231,11 +224,10 @@ if ($DocGroupName) {
 		}
 		echo util_make_link($redirecturl.'&action=monitordirectory&option='.$option.'&directoryid='.$ndg->getID(), $image, array('title' => $titleMonitor));
 	}
-	echo html_ac(html_ap() - 1);
 
 	if (forge_check_perm('docman', $ndg->Group->getID(), 'approve')) {
 		echo html_ao('div', array('class' => 'docman_div_include hide', 'id' => 'editdocgroup'));
-		echo html_e('h4', array('class' => 'docman_h4'), _('Edit this folder'), false);
+		echo html_e('h3', array('class' => 'docman_h3'), _('Edit this folder'), false);
 		include ($gfcommon.'docman/views/editdocgroup.php');
 		echo html_ac(html_ap() - 1);
 	}
@@ -254,26 +246,22 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		$classth[] = 'unsortable';
 	}
 	echo html_ao('div', array('class' => 'docmanDiv'));
-	echo $HTML->listTableTop($tabletop, array(), 'sortable_docman_listfile', 'sortable', $classth);
+	echo $HTML->listTableTop($tabletop, array(), 'sortable', 'sortable_docman_listfile', $classth);
 	$time_new = 604800;
 	foreach ($nested_docs[$dirid] as $d) {
 		$cells = array();
 		/* should we steal the lock on file ? */
-		if ($d->getLocked()) {
-			if ($d->getLockedBy() == $LUSER->getID()) {
-				$d->setLock(0);
+		if ($d->getLocked() && (($d->getLockedBy() == $LUSER->getID()) || ((time() - $d->getLockdate()) > 600))) {
 			/* if you change the 60000 value below, please update here too */
-			} elseif ((time() - $d->getLockdate()) > 600) {
-				$d->setLock(0);
-			}
+			$d->setLock(0);
 		}
 		if (!$d->getLocked() && !$d->getReserved()) {
-			$cells[][] = html_e('input', array('type' => 'checkbox', 'value' => $d->Group->getID().'-'.$d->getID(), 'class' => 'checkeddocidactive', 'title' => _('Select / Deselect this document for massaction'), 'onClick' => 'controllerListFile.checkgeneral("active")'));
+			$cells[][] = html_e('input', array('type' => 'checkbox', 'value' => $d->getID(), 'class' => 'checkeddocidactive', 'title' => _('Select / Deselect this document for massaction'), 'onClick' => 'controllerListFile.checkgeneral("active")'));
 		} else {
 			if (session_loggedin() && ($d->getReservedBy() != $LUSER->getID())) {
 				$cells[][] = html_e('input', array('type' => 'checkbox', 'name' => 'disabled', 'disabled' => 'disabled'));
 			} else {
-				$cells[][] = html_e('input', array('type' => 'checkbox', 'value' => $d->Group->getID().'-'.$d->getID(), 'class' => 'checkeddocidactive', 'title' => _('Select / Deselect this document for massaction'), 'onClick' => 'controllerListFile.checkgeneral("active")'));
+				$cells[][] = html_e('input', array('type' => 'checkbox', 'value' => $d->getID(), 'class' => 'checkeddocidactive', 'title' => _('Select / Deselect this document for massaction'), 'onClick' => 'controllerListFile.checkgeneral("active")'));
 			}
 		}
 		switch ($d->getFileType()) {
@@ -282,7 +270,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 				break;
 			}
 			default: {
-				$cells[][] =  util_make_link('/docman/view.php/'.$d->Group->getID().'/'.$d->getID().'/'.urlencode($d->getFileName()), html_image($d->getFileTypeImage(), 22, 22, array('alt' => $d->getFileType())), array('title' => _('View this document')));
+				$cells[][] =  util_make_link('/docman/view.php/'.$d->Group->getID().'/'.$d->getID(), html_image($d->getFileTypeImage(), 22, 22, array('alt' => $d->getFileType())), array('title' => _('View this document')));
 			}
 		}
 		$nextcell = '';
@@ -323,7 +311,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		}
 		$cells[][] = $d->getDownload();
 
-		if (forge_check_perm('docman', $group_id, 'approve')) {
+		if (forge_check_perm('docman', $g->getID(), 'approve')) {
 			$nextcell = '';
 			$editfileaction = '/docman/?action=editfile&fromview=listfile&dirid='.$d->getDocGroupID();
 			$notifyaction = '/docman/?action=notifyusers&fromview=listfile&dirid='.$d->getDocGroupID();
@@ -335,7 +323,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 			$notifyaction .= '&group_id='.$GLOBALS['group_id'];
 			if (!$d->getLocked() && !$d->getReserved()) {
 				$nextcell .= util_make_link($redirecturl.'&action=trashfile&fileid='.$d->getID(), $HTML->getDeletePic(_('Move this document to trash'), 'delfile'));
-				$nextcell .= util_make_link('#', html_image('docman/edit-file.png', 22, 22, array('alt' => _('Edit this document'))), array('onclick' => 'javascript:controllerListFile.toggleEditFileView({action:\''.util_make_uri($editfileaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json').', docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').', title:\''.addslashes($d->getName()).'\', filename:\''.addslashes($d->getFilename()).'\', description:\''.addslashes($d->getDescription()).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', isHtml:\''.$d->isHtml().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri('/docman').'\'})', 'title' => _('Edit this document')), true);
+				$nextcell .= util_make_link('#', $HTML->getEditFilePic(_('Edit this document'), 'editdocument'), array('onclick' => 'javascript:controllerListFile.toggleEditFileView({action:\''.util_make_uri($editfileaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' , id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json').', docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').', isText:\''.$d->isText().'\', isHtml:\''.$d->isHtml().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri('/docman').'\'})', 'title' => _('Edit this document')), true);
 				if (session_loggedin()) {
 					$nextcell .= util_make_link($redirecturl.'&action=reservefile&fileid='.$d->getID(), html_image('docman/reserve-document.png', 22, 22, array('alt' => _('Reserve this document'))), array('title' => _('Reserve this document for later edition')));
 				}
@@ -346,7 +334,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 					}
 				} else {
 					$nextcell .= util_make_link($redirecturl.'&action=trashfile&fileid='.$d->getID(), $HTML->getDeletePic(_('Move this document to trash'), 'delfile'));
-					$nextcell .= util_make_link('#', html_image('docman/edit-file.png', 22 ,22, array('alt' => _('Edit this document'))), array('onclick' => 'javascript:controllerListFile.toggleEditFileView({action:\''.util_make_uri($editfileaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json').', docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').', title:\''.addslashes($d->getName()).'\', filename:\''.addslashes($d->getFilename()).'\', description:\''.addslashes($d->getDescription()).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', isHtml:\''.$d->isHtml().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri('/docman').'\'})', 'title' => _('Edit this document')), true);
+					$nextcell .= util_make_link('#', $HTML->getEditFilePic(_('Edit this document'), 'editdocument'), array('onclick' => 'javascript:controllerListFile.toggleEditFileView({action:\''.util_make_uri($editfileaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' , id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json').', docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').', isText:\''.$d->isText().'\', isHtml:\''.$d->isHtml().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri('/docman').'\'})', 'title' => _('Edit this document')), true);
 					$nextcell .= util_make_link($redirecturl.'&action=releasefile&fileid='.$d->getID(), html_image('docman/release-document.png', 22, 22, array('alt' => _('Release reservation'))), array('title' => _('Release reservation')));
 				}
 			}
@@ -362,7 +350,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 				}
 				$nextcell .= util_make_link($redirecturl.'&action=monitorfile&option='.$option.'&fileid='.$d->getID(), $image, array('title' => $titleMonitor));
 			}
-			$nextcell .= util_make_link('#', html_image('ic/mail-send.png', 22, 22, array('alt' => _('Notify'))), array('onclick' => 'javascript:controllerListFile.toggleNotifyUserView({action:\''.util_make_uri($notifyaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', title:\''.addslashes($d->getName()).'\', filename:\''.addslashes($d->getFilename()).'\', description:\''.addslashes($d->getDescription()).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', isHtml:\''.$d->isHtml().'\', docManURL:\''.util_make_uri('/docman').'\'})', 'title' => _('Notify users')), true);
+			$nextcell .= util_make_link('#', html_image('ic/mail-send.png', 22, 22, array('alt' => _('Notify'))), array('onclick' => 'javascript:controllerListFile.toggleNotifyUserView({action:\''.util_make_uri($notifyaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' , id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', title:\''.addslashes($d->getName()).'\', filename:\''.addslashes($d->getFileName()).'\', description:\''.addslashes($d->getDescription()).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', isHtml:\''.$d->isHtml().'\', docManURL:\''.util_make_uri('/docman').'\'})', 'title' => _('Notify users')), true);
 			$cells[][] = $nextcell;
 		}
 		echo $HTML->multiTableRow(array(), $cells);
@@ -381,7 +369,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 			echo util_make_link('#', html_image('docman/move-document.png', 22, 22, array('alt' => _('Move files to another folder'))), array('onclick' => 'javascript:controllerListFile.toggleMoveFileView({})', 'title' => _('Move files to another folder')), true);
 		}
 	}
-	echo util_make_link('#', html_image('docman/download-directory-zip.png', 22, 22, array('alt' => _('Download as a ZIP'))) , array('onclick' => 'window.location.href=\''.util_make_uri('/docman/view.php/'.$group_id.'/zip/selected/'.$dirid.'/\'+controllerListFile.buildUrlByCheckbox("active")'), 'title' => _('Download as a ZIP')), true);
+	echo util_make_link('#', html_image('docman/download-directory-zip.png', 22, 22, array('alt' => _('Download as a ZIP'))) , array('onclick' => 'window.location.href=\''.util_make_uri('/docman/view.php/'.$g->getID().'/zip/selected/'.$dirid.'/\'+controllerListFile.buildUrlByCheckbox("active")'), 'title' => _('Download as a ZIP')), true);
 	echo html_ac(html_ap() - 3);
 	if (forge_check_perm('docman', $ndg->Group->getID(), 'approve') && session_loggedin()) {
 		echo html_ao('div', array('class' => 'docman_div_include hide', 'id' => 'movefile'));
@@ -395,7 +383,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 }
 
 if ($DocGroupName) {
-	if (forge_check_perm('docman', $group_id, 'approve') && $DocGroupName) {
+	if (forge_check_perm('docman', $g->getID(), 'approve') && $DocGroupName) {
 		include ($gfcommon.'docman/views/pendingfiles.php');
 	}
 	$foundFiles = 0;
@@ -409,7 +397,7 @@ if ($DocGroupName) {
 		include ($gfcommon.'docman/views/notifyusers.php');
 		$directViewFileRequestedID = getIntFromRequest('filedetailid', null);
 		if ($directViewFileRequestedID) {
-			$localDocumentObject = document_get_object($directViewFileRequestedID, $group_id);
+			$localDocumentObject = document_get_object($directViewFileRequestedID, $g->getID());
 			echo html_ao('script', array('type' => 'text/javascript'));
 			echo '//<![CDATA['."\n";
 			echo 'jQuery(document).ready(function() {javascript:controllerListFile.toggleEditFileView({action:\''.util_make_uri($editfileaction).'\',
@@ -422,7 +410,7 @@ if ($DocGroupName) {
 														statusDict:'.$dm->getStatusNameList('json').',
 														docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').',
 														title:\''.addslashes($localDocumentObject->getName()).'\',
-														filename:\''.addslashes($localDocumentObject->getFilename()).'\',
+														filename:\''.addslashes($localDocumentObject->getFileName()).'\',
 														description:\''.addslashes($localDocumentObject->getDescription()).'\',
 														isURL:\''.$localDocumentObject->isURL().'\',
 														isText:\''.$localDocumentObject->isText().'\',

@@ -136,39 +136,30 @@ class HudsonJob {
 			case "blue":
 				// The last build was successful.
 				return _("Success");
-				break;
 			case "blue_anime":
 				// The last build was successful. A new build is in progress.
 				return _("In progress");
-				break;
 			case "yellow":
 				// The last build was successful but unstable. This is primarily used to represent test failures.
 				return _("Unstable");
-				break;
 			case "yellow_anime":
 				// The last build was successful but unstable. This is primarily used to represent test failures. A new build is in progress.
 				return _("In progress");
-				break;
 			case "red":
 				// The last build fatally failed.
 				return _("Failure");
-				break;
 			case "red_anime":
 				// The last build fatally failed. A new build is in progress.
 				return _("In progress");
-				break;
 			case "grey":
 				// The project has never been built before, or the project is disabled.
 				return _("Pending");
-				break;
 			case "grey_anime":
 				// The project has never been built before, or the project is disabled. The first build of this project is in progress.
 				return _("In progress");
-				break;
 			default:
 				// Can we have anime icons here?
 				return _("Unknown status");
-				break;
 		}
 	}
 
@@ -181,39 +172,30 @@ class HudsonJob {
 			case "blue":
 				// The last build was successful.
 				return $this->getIconsPath()."status_blue.png";
-				break;
 			case "blue_anime":
 				// The last build was successful. A new build is in progress.
 				return $this->getIconsPath()."status_blue.png";
-				break;
 			case "yellow":
 				// The last build was successful but unstable. This is primarily used to represent test failures.
 				return $this->getIconsPath()."status_yellow.png";
-				break;
 			case "yellow_anime":
 				// The last build was successful but unstable. A new build is in progress.
 				return $this->getIconsPath()."status_yellow.png";
-				break;
 			case "red":
 				// The last build fatally failed.
 				return $this->getIconsPath()."status_red.png";
-				break;
 			case "red_anime":
 				// The last build fatally failed. A new build is in progress.
 				return $this->getIconsPath()."status_red.png";
-				break;
 			case "grey":
 				// The project has never been built before, or the project is disabled.
 				return $this->getIconsPath()."status_grey.png";
-				break;
 			case "grey_anime":
 				// The first build of the project is in progress.
 				return $this->getIconsPath()."status_grey.png";
-				break;
 			default:
 				// Can we have anime icons here?
 				return $this->getIconsPath()."status_unknown.png";
-				break;
 		}
 	}
 
@@ -264,7 +246,7 @@ class HudsonJob {
 	function getHealthDescriptions() {
 		$descs = array();
 		foreach ($this->dom_job->healthReport as $health_report) {
-			$scores[] = $health_report->description;
+			$descs[] = $health_report->description;
 		}
 		return $descs;
 	}

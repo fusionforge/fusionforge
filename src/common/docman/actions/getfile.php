@@ -2,7 +2,7 @@
 /**
  * FusionForge Documentation Manager
  *
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -60,6 +60,7 @@ if (!forge_check_perm('docman', $g->getID(), 'approve')) {
 
 $itemid = getIntFromRequest('itemid');
 $details = getIntFromRequest('details');
+$version = getIntFromRequest('version');
 
 $d = document_get_object($itemid, $g->getID());
 if ($d->isError()) {
@@ -69,11 +70,24 @@ if ($d->isError()) {
 
 $filearray = array();
 if ($details) {
-	$filearray['name'] = $d->getFileName();
-	$filearray['type'] = $d->getFileType();
-	$filearray['title'] = $d->getName();
-	$filearray['description'] = $d->getDescription();
-	$filearray['stateid'] = $d->getStateID();
+	if ($version) {
+		$dv = documentversion_get_object($version, $itemid, $g->getID());
+		if ($dv->isError()) {
+			$error_msg = $dv->getErrorMessage();
+			session_redirect($urlparam);
+		}
+		$filearray['name'] = $dv->getFileName();
+		$filearray['type'] = $dv->getFileType();
+		$filearray['title'] = $dv->getTitle();
+		$filearray['description'] = $dv->getDescription();
+		$filearray['isurl'] = $dv->isURL();
+	} else {
+		$filearray['name'] = $d->getFileName();
+		$filearray['type'] = $d->getFileType();
+		$filearray['title'] = $d->Name();
+		$filearray['description'] = $d->getDescription();
+		$filearray['isurl'] = $d->isURL();
+	}
 	$filearray['docgroupid'] = $d->getDocGroupID();
 	$filearray['isurl'] = $d->isURL();
 }

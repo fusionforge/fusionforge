@@ -25,7 +25,7 @@ require_once 'common/plugin/PluginDescriptor.class.php';
 
 class MediaWikiPluginDescriptor extends PluginDescriptor {
 
-    function MediaWikiPluginDescriptor() {
+    function __construct() {
         $this->PluginDescriptor(_('Mediawiki'), 'v1.0', _('Mediawiki integration in the forge'));
     }
 }

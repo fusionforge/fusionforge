@@ -40,8 +40,6 @@ class FRSPackageFactory extends FFError {
 	var $FRSs;
 
 	/**
-	 * Constructor.
-	 *
 	 * @param	Group	$Group The Group object to which these FRSs are associated.
 	 */
 	function __construct(& $Group) {
@@ -87,7 +85,7 @@ class FRSPackageFactory extends FFError {
 
 		foreach ($ids as $id) {
 			if (forge_check_perm('frs', $id, 'read')) {
-				$this->FRSs[] =& frspackage_get_object($id);
+				$this->FRSs[] = frspackage_get_object($id);
 			}
 		}
 		return $this->FRSs;

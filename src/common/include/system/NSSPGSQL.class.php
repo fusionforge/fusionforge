@@ -24,53 +24,49 @@ require_once $gfcommon.'include/System.class.php';
 
 class NSSPGSQL extends System {
 	/**
-	* Value to add to unix_uid to get unix uid
-	*
-	* @var  constant	$UID_ADD
-	*/
+	 * Value to add to unix_uid to get unix uid
+	 *
+	 * @var  constant	$UID_ADD
+	 */
 	var $UID_ADD = 20000;
 
-	/**
-	*	NSSPGSQL() - CONSTRUCTOR
-	*
-	*/
-	function NSSPGSQL() {
-		$this->System();
-		return true;
+	function __construct() {
+		parent::__construc();
 	}
+
 	/**
- 	* sysCreateUser() - Create a user
- 	*
- 	* @param		int		$user_id	The user ID of the user to create
-	* @return		bool	The return status
- 	*
- 	*/
+ 	 * sysCreateUser() - Create a user
+ 	 *
+ 	 * @param		int		$user_id	The user ID of the user to create
+	 * @return		bool	The return status
+ 	 *
+ 	 */
 	function sysCreateUser($user_id) {
 		return true;
 	}
 
 	/**
- 	* sysRemoveUser() - Remove a user
- 	*
- 	* @param		int		$user_id	The user ID of the user to remove
-	* @return		bool	true on success/false on failure
- 	*
- 	*/
+ 	 * sysRemoveUser() - Remove a user
+ 	 *
+ 	 * @param		int		$user_id	The user ID of the user to remove
+	 * @return		bool	true on success/false on failure
+ 	 *
+ 	 */
 	function sysRemoveUser($user_id) {
 		return true;
 	}
 
 	/*
- 	* Group management functions
- 	*/
+ 	 * Group management functions
+ 	 */
 
 	/**
- 	* sysCheckGroup() - Check for the existence of a group
- 	*
- 	* @param		int		$group_id	The ID of the group to check
-	* @return		bool	true on success/false on failure
- 	*
- 	*/
+ 	 * sysCheckGroup() - Check for the existence of a group
+ 	 *
+ 	 * @param		int		$group_id	The ID of the group to check
+	 * @return		bool	true on success/false on failure
+ 	 *
+ 	 */
 	function sysCheckGroup($group_id) {
 		$group = group_get_object($group_id);
 		if (!$group){
@@ -80,12 +76,12 @@ class NSSPGSQL extends System {
 	}
 
 	/**
- 	* sysCreateGroup() - Create a group
- 	*
- 	* @param		int		$group_id	The ID of the group to create
-	* @return		bool	true on success/false on failure
- 	*
- 	*/
+ 	 * sysCreateGroup() - Create a group
+ 	 *
+ 	 * @param		int		$group_id	The ID of the group to create
+	 * @return		bool	true on success/false on failure
+ 	 *
+ 	 */
 	function sysCreateGroup($group_id) {
 		$group = group_get_object($group_id);
 		if (!$group) {

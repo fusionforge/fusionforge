@@ -42,8 +42,6 @@ class ForumFactory extends FFError {
 	var $forums;
 
 	/**
-	 * Constructor.
-	 *
 	 * @param	object	$Group	The Group object to which this forum is associated.
 	 */
 	function __construct(&$Group, $skip_check=false) {
@@ -154,7 +152,7 @@ class ForumFactory extends FFError {
 
 		$rows = db_numrows($result);
 
-		if (!$result) {
+		if (!$result || ($rows < 1)) {
 			$this->setError(_('Forum not found')._(': ').db_error());
 			$this->forums = false;
 		} else {

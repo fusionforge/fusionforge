@@ -49,8 +49,6 @@ class Artifacts extends FFError {
 	var $artifacts_array;
 
 	/**
-	 * __construct - Artifacts constructor.
-	 *
 	 * Use this constructor if you are modifying an existing artifact.
 	 *
 	 * @param	ArtifactType	$ArtifactType	Artifact Type object.

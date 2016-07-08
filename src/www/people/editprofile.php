@@ -272,7 +272,7 @@ if (session_loggedin()) {
 		echo _('You can enter new skills you have acquired here. Please enter the start and finish dates as accurately as possible.').'<br />'.
 			 '<span class="required-field">'._('All fields are required!').'</span>';
 		echo '<form action="'.getStringFromServer('PHP_SELF').'" method="post">';
-	   	echo' <input type="hidden" name="form_key" value="'.form_generate_key().'">';
+		echo' <input type="hidden" name="form_key" value="'.form_generate_key().'">';
 		$cell_data = array();
 		$cell_data[] = array(_('Type'));
 		$cell_data[] = array(_('Start Date'));

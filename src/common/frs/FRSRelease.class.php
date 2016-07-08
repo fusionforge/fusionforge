@@ -1,11 +1,11 @@
 <?php
 /**
- * FusionForge file release system
+ * FusionForge FRS: Release Class
  *
  * Copyright 2002, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -33,7 +33,7 @@ require_once $gfcommon.'frs/FRSFile.class.php';
  * @param	array	$data		The result array, if it's passed in
  * @return	object	FRSRelease object
  */
-function &frsrelease_get_object($release_id, $data = array()) {
+function frsrelease_get_object($release_id, $data = array()) {
 	global $FRSRELEASE_OBJ;
 	if (!isset($FRSRELEASE_OBJ['_'.$release_id.'_'])) {
 		if ($data) {
@@ -72,40 +72,36 @@ class FRSRelease extends FFError {
 	var $files_count = null;
 
 	/**
-	 * Constructor.
-	 *
 	 * @param	object  	$FRSPackage	The FRSPackage object to which this release is associated.
 	 * @param	int|bool	$release_id	The release_id.
 	 * @param	array|bool	$arr		The associative array of data.
-	 * @return	bool	success.
 	 */
-	function FRSRelease(&$FRSPackage, $release_id = false, $arr = false) {
+	function __construct(&$FRSPackage, $release_id = false, $arr = false) {
 		parent::__construct();
 		if (!$FRSPackage || !is_object($FRSPackage)) {
 			$this->setError(_('Invalid FRS Package Object'));
-			return false;
+			return;
 		}
 		if ($FRSPackage->isError()) {
 			$this->setError('FRSRelease: '.$FRSPackage->getErrorMessage());
-			return false;
+			return;
 		}
 		$this->FRSPackage =& $FRSPackage;
 
 		if ($release_id) {
 			if (!$arr || !is_array($arr)) {
 				if (!$this->fetchData($release_id)) {
-					return false;
+					return;
 				}
 			} else {
 				$this->data_array =& $arr;
 				if ($this->data_array['package_id'] != $this->FRSPackage->getID()) {
 					$this->setError('FRSPackage_id in db result does not match FRSPackage Object');
 					$this->data_array = null;
-					return false;
+					return;
 				}
 			}
 		}
-		return true;
 	}
 
 	/**
@@ -142,13 +138,13 @@ class FRSRelease extends FFError {
 					array ($this->FRSPackage->getID(),
 						   htmlspecialchars($name)));
 		if (db_numrows($res)) {
-			$this->setError(_('Error Adding Release: Name Already Exists'));
+			$this->setError(_('Error Adding Release: ')._('Name Already Exists'));
 			return false;
 		}
 
 		db_begin();
 		$result = db_query_params('INSERT INTO frs_release(package_id,notes,changes,preformatted,name,release_date,released_by,status_id) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
-					array($this->FRSPackage->getId(),
+					array($this->FRSPackage->getID(),
 						htmlspecialchars($notes),
 						htmlspecialchars($changes),
 						$preformatted,
@@ -281,8 +277,6 @@ class FRSRelease extends FFError {
 	 */
 	function sendNotice() {
 		$arr =& $this->FRSPackage->getMonitorIDs();
-
-		$date = date('Y-m-d H:i',time());
 
 		$subject = sprintf(_('[%1$s Release] %2$s'),
 					$this->FRSPackage->Group->getUnixName(),
@@ -486,6 +480,55 @@ class FRSRelease extends FFError {
 		return true;
 	}
 
+	function isLinkedRoadmapRelease($roadmap_id, $roadmap_release) {
+		$roadmaps = array();
+		$res = db_query_params('SELECT roadmap_id FROM frs_release_tracker_roadmap_link WHERE release_id = $1 and roadmap_release = $2',
+					array($this->getID(), $roadmap_release));
+		if (!$res) {
+			return false;
+		}
+		$roadmaps = util_result_column_to_array($res);
+		return $roadmaps;
+	}
+
+	function deleteLinkedRoadmap($roadmap_id, $roadmap_release) {
+		db_begin();
+		$res = db_query_params('DELETE FROM frs_release_tracker_roadmap_link where roadmap_id = $1 and release_id = $2 and roadmap_release = $3',
+					array($roadmap_id, $this->getID(), $roadmap_release));
+		if (!$res) {
+			$this->setError(_('Error Delete Linked Roadmap')._(': ').db_error());
+			db_rollback();
+			return false;
+		}
+		db_commit();
+		return true;
+	}
+
+	function addLinkedRoadmap($roadmap_id, $roadmap_release) {
+		db_begin();
+		$res = db_query_params('INSERT INTO frs_release_tracker_roadmap_link (roadmap_id, release_id, roadmap_release) VALUES ($1, $2, $3)',
+					array($roadmap_id, $this->getID(), $roadmap_release));
+		if (!$res) {
+			$this->setError(_('Error Adding Linked Roadmap')._(': ').db_error());
+			db_rollback();
+			return false;
+		}
+		db_commit();
+		return true;
+	}
+
+	function getLinkedRoadmaps() {
+		$roadmaps = array();
+		$res = db_query_params('SELECT roadmap_id, roadmap_release FROM frs_release_tracker_roadmap_link WHERE release_id = $1',
+					array($this->getID()));
+		if (!$res) {
+			return false;
+		}
+		while ($arr = db_fetch_array($res)) {
+			$roadmaps[$arr[0]][] = $arr[1];
+		}
+		return $roadmaps;
+	}
 }
 
 // Local Variables:

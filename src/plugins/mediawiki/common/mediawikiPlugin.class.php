@@ -41,7 +41,7 @@ class MediaWikiPlugin extends Plugin {
 	);
 
 	function __construct ($id=0) {
-		$this->Plugin($id) ;
+		parent::__construct($id) ;
 		$this->name = "mediawiki" ;
 		$this->text = _("Mediawiki") ; // To show in the tabs, use...
 		$this->pkg_desc =

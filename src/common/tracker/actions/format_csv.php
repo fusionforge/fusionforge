@@ -51,7 +51,7 @@ global $ath;
 global $group_id;
 global $HTML;
 
-$ath->header(array('atid'=>$ath->getID(), 'title'=>_('Update CSV Format')));
+$ath->header(array('atid'=>$ath->getID(), 'modal'=>1, 'title'=>_('Update CSV Format')));
 
 $headers = getIntFromRequest('headers', 1);
 $sep = getStringFromRequest('sep', ',');

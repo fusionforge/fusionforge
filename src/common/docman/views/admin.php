@@ -93,7 +93,7 @@ if (forge_get_config('use_webdav')) {
 	echo html_ao('ul');
 	$webdavStatus = '1';
 	$labelWebdavInterface = _('Enable Webdav Interface');
-	if ($g->useWebDav()) {
+	if ($g->useWebdav()) {
 		$webdavStatus = '0';
 		$labelWebdavInterface = _('Disable Webdav Interface');
 	}

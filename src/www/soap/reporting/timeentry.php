@@ -43,7 +43,7 @@ $server->register(
 //      addArtifact
 //
 
-function &addTimeEntry($session_ser, $projectTaskId, $week, $daysAdjust, $timeCode, $hours)
+function addTimeEntry($session_ser, $projectTaskId, $week, $daysAdjust, $timeCode, $hours)
 {
         continue_session($session_ser);
 

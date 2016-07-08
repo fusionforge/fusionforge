@@ -1,10 +1,5 @@
 FusionForge 6.X:
-* Accounts: minimum password length is now 8
-* Spellcheck (Anders Jonsson)
-* Site Admin: add paging system in userlist page [#799] (TrivialDev)
-* Site Admin: support widgets for forge home page (TrivialDev)
-* Projects Page: add paging system in full_list and tag_cloud subpages (TrivialDev)
-* SearchEngine: support only FTI queries (TrivialDev)
+* Accounts: minimum password length is now 8 (Sylvain Beucler)
 * Docman: limit number of returned documents on search query. Use paging system [#794] (TrivialDev)
 * Docman: limit search using from & to dates [#798] (TrivialDev)
 * Docman: use standard search engine: unify results between 'search in project' & search in the docs tab (TrivialDev)
@@ -12,15 +7,33 @@ FusionForge 6.X:
 * Docman: searchengine: add edit file action on result. (TrivialDev)
 * Docman: notify users on document. (TrivialDev)
 * Docman: support private directory. (TrivialDev)
+* Docman: support document versioning. (TrivialDev)
+* Docman: support cross ref. forum, documents, task or artifact. (TrivialDev)
+* FRS: link package release to tracker roadmap. (TrivialDev)
+* Layout: new dynamic quickNav menu: based on user activity to select 5 more visited projects (TrivialDev)
 * Plugin AuthBuiltin: add captcha after 3 attempts with the same login [#795] (TrivialDev)
-* Widget MySystasks: new widget for user to display systasks perform on user projects (TrivialDev)
-* Widget ProjectScmStats: new widget for project to display SCM stats (TrivialDev)
+* Projects Page: add paging system in full_list and tag_cloud subpages (TrivialDev)
+* SearchEngine: support only FTI queries (TrivialDev)
 * Search: index project tags and use them for search (Roland Mas)
 * Search: provide language-specific settings for better indexation/search (Roland Mas)
+* Site Admin: add paging system in userlist page [#799] (TrivialDev)
+* Site Admin: support widgets for forge home page (TrivialDev)
+* Spellcheck (Anders Jonsson)
+* Tracker: keep values in artifact new submit form on error. (TrivialDev)
+* Tracker: add new extrafield: text regex (TrivialDev)
+* Tracker: add new extrafield: User (TrivialDev)
+* Tracker: add support for mandatory fields on workflow of artifact (TrivialDev)
+* Tracker: add support for description on extrafield to be used in tooltip (TrivialDev)
+* Utils: cross ref document. Use [DNNN] where NNN is the ID of the document. (TrivialDev)
+* Web UI: upgrade splitter jquery plugin to 0.20.0 (TrivialDev)
+* Web UI: upgrade jquery ui to 1.11.4 (TrivialDev)
+* Widget MySystasks: new widget for user to display systasks perform on user projects (TrivialDev)
+* Widget ProjectScmStats: new widget for project to display SCM stats (TrivialDev)
 
 FusionForge 6.0.5:
 * Plugin SCM SVN: fix activity when SVN repository is private [#813] (TrivialDev)
-s
+* Tracker: fix artifact deletion with votes [#819] (TrivialDev)
+
 FusionForge 6.0.4:
 * Account Management System: fix sysCreateUser for UNIX: unix_gid dropped (TrivialDev)
 * Accounts: do not accept digits-only user and group names, to avoid confusion with UID/GID in system commands (Inria)

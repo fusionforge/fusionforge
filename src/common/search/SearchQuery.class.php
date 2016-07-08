@@ -50,7 +50,7 @@ class SearchQuery extends FFError {
 	 * @var int $offset
 	 */
 	var $offset = 0;
- 	/**
+	/**
 	 * Result handle
 	 *
 	 * @var resource $result
@@ -95,8 +95,6 @@ class SearchQuery extends FFError {
 	 */
 	var $cached_results;
 	/**
-	 * Constructor
-	 *
 	 * @param	string	$words words we are searching for
 	 * @param	int	$offset offset
 	 * @param	boolean	$isExact if we want to search for all the words or if only one is sufficient
@@ -216,7 +214,7 @@ class SearchQuery extends FFError {
 
 	function fetchAllData() {
 		$this->fetchDataUntil();
-	}	   
+	}
 
 	function getData($limit = NULL, $offset = 0) {
 		if ($limit) {

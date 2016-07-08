@@ -128,7 +128,7 @@ if (session_loggedin()) {
 		Show the submit form
 	*/
 	$group = group_get_object($group_id);
-	news_header(array('title'=>_('Submit News for Project')._(': ').$group->getPublicName()));
+	news_header(array('title'=>_('Submit News for Project')._(': ').$group->getPublicName(), 'modal' => 1));
 
 	echo '<p>';
 	echo _('You can post news about your project if you are an admin on your project. You may also post “help wanted” notes if your project needs help.');

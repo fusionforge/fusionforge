@@ -327,7 +327,7 @@ $server->register(
 	$uri.'#deleteGroupRole','rpc','encoded'
 );
 
-function &getGroups($session_ser,$group_ids) {
+function getGroups($session_ser,$group_ids) {
 	global $feedback;
 	continue_session($session_ser);
 
@@ -344,7 +344,7 @@ function &getGroups($session_ser,$group_ids) {
 	return groups_to_soap($grps);
 }
 
-function &getGroupsByName($session_ser,$group_names) {
+function getGroupsByName($session_ser,$group_names) {
 	session_continue($session_ser);
 	$grps = group_get_objects_by_name($group_names);
 	if (!$grps) {
@@ -355,7 +355,7 @@ function &getGroupsByName($session_ser,$group_names) {
 }
 
 // use as a way to get group names for use in getGroupsByName
-function &getPublicProjectNames($session_ser) {
+function getPublicProjectNames($session_ser) {
 	continue_session($session_ser);
 	$forge = new FusionForge();
 	$result = $forge->getPublicProjectNames();
@@ -535,7 +535,7 @@ function removeUserFromGroup ($session_ser,$user_id, $role_id){
 }
 
 //[Yosu] getGroupRoles (session_ser, group_id)
-function &getGroupRoles($session_ser,$group_id) {
+function getGroupRoles($session_ser,$group_id) {
 	continue_session($session_ser);
 
 	$group = group_get_object($group_id);
@@ -691,7 +691,7 @@ function deleteGroupRole ($session_ser, $group_id, $role_id){
 /*
 	Converts an array of Group objects to soap data
 */
-function &groups_to_soap($grps) {
+function groups_to_soap($grps) {
 	$return = array();
 	$ra = RoleAnonymous::getInstance() ;
 
@@ -740,7 +740,7 @@ function &groups_to_soap($grps) {
 /*
 	[Yosu]	Converts an array of Role objects to soap data
 */
-function &roles_to_soap($roles, $group_id) {
+function roles_to_soap($roles, $group_id) {
 	$return = array();
 
 	for ($i=0; $i<count($roles); $i++) {

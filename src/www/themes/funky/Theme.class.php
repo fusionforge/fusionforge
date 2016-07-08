@@ -5,7 +5,7 @@
  * Copyright 2010, Antoine Mercadal - Capgemini
  * Copyright 2010, Marc-Etienne Vargenau, Alcatel-Lucent
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2011-2015, Franck Villaume - TrivialDev
+ * Copyright 2011-2016, Franck Villaume - TrivialDev
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -34,9 +34,9 @@ class Theme_Funky extends Layout {
 		$this->imgroot = $this->imgbaseurl;
 		$this->addStylesheet('/themes/funky/css/theme.css');
 		$this->addStylesheet('/themes/funky/css/theme-pages.css');
-		$this->addStylesheet('/scripts/jquery-ui/css/overcast/jquery-ui-1.11.2.css');
-		$this->addStylesheet('/scripts/jquery-ui/css/overcast/jquery-ui.structure-1.11.2.css');
-		$this->addStylesheet('/scripts/jquery-ui/css/overcast/jquery-ui.theme-1.11.2.css');
+		$this->addStylesheet('/scripts/jquery-ui/css/overcast/jquery-ui-1.11.4.css');
+		$this->addStylesheet('/scripts/jquery-ui/css/overcast/jquery-ui.structure-1.11.4.css');
+		$this->addStylesheet('/scripts/jquery-ui/css/overcast/jquery-ui.theme-1.11.4.css');
 	}
 
 	function bodyHeader($params) {
@@ -382,6 +382,9 @@ class Theme_Funky extends Layout {
 				setInterval(function() {
 						setTimeout("jQuery(\'.feedback\').hide(\'slow\')", 5000);
 					}, 5000);
+				jQuery("button").button();
+				jQuery(":submit").button();
+				jQuery(":reset").button();
 			});
 			//]]>'."\n";
 		echo html_ac(html_ap() -1);

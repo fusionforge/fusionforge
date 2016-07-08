@@ -29,17 +29,15 @@ require_once $gfcommon.'search/ProjectSearchQuery.class.php';
 class ProjectHtmlSearchRenderer extends HtmlSearchRenderer {
 
 	/**
-	 * Constructor
-	 *
 	 * @param string $words words we are searching for
 	 * @param int $offset offset
 	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
 	 */
-	function ProjectHtmlSearchRenderer($words, $offset, $isExact) {
+	function __construct($words, $offset, $isExact) {
 
 		$searchQuery = new ProjectSearchQuery($words, $offset, $isExact);
 
-		$this->HtmlSearchRenderer(SEARCH__TYPE_IS_SOFTWARE, $words, $isExact, $searchQuery);
+		parent::__construct(SEARCH__TYPE_IS_SOFTWARE, $words, $isExact, $searchQuery);
 
 		$this->tableHeaders = array(
 			_('Project Name'),
@@ -74,10 +72,10 @@ class ProjectHtmlSearchRenderer extends HtmlSearchRenderer {
 				$what = 'projects';
 			}
 			$return .= '<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i).'>'
-				.'<td width="30%"><a href="'.util_make_url('/'.$what.'/'.$row['unix_group_name'].'/').'">'
-				.html_image('ic/msg.png', '10', '12')
+				.'<td style="width: 30%"><a href="'.util_make_url('/'.$what.'/'.$row['unix_group_name'].'/').'">'
+				.html_image('ic/msg.png', 10, 12)
 				.' '.$this->highlightTargetWords($row['group_name']).'</a></td>'
-				.'<td width="70%">'.$this->highlightTargetWords($row['short_description']).'</td></tr>';
+				.'<td style="width: 70%">'.$this->highlightTargetWords($row['short_description']).'</td></tr>';
 		}
 
 		return $return;

@@ -21,14 +21,14 @@
 require_once 'Widget.class.php';
 
 /**
-* Widget_ProjectLatestNews
-*/
+ * Widget_ProjectLatestNews
+ */
 class Widget_ProjectLatestNews extends Widget {
 	var $content;
 
 	function __construct() {
 		global $gfwww;
-		$this->Widget('projectlatestnews');
+		parent::__construct('projectlatestnews');
 		$request =& HTTPRequest::instance();
 		$pm = ProjectManager::instance();
 		$project = $pm->getProject($request->get('group_id'));

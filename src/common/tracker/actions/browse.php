@@ -663,12 +663,12 @@ if ($art_arr && $art_cnt > 0) {
 
 				}
 				echo '<td>' . $value .'</td>';
-			} else if ($f == '_votes') {
+			} elseif ($f == '_votes') {
 				$v = $art_arr[$i]->getVotes();
 				echo html_e('td', array(), $v[0], false);
-			} else if ($f == '_voters') {
+			} elseif ($f == '_voters') {
 				echo html_e('td', array(), $voters, false);
-			} else if ($f == '_votage') {
+			} elseif ($f == '_votage') {
 				$v = $art_arr[$i]->getVotes();
 				echo html_e('td', array(), $v[2], false);
 			} else {
@@ -732,19 +732,20 @@ if ($art_arr && $art_cnt > 0) {
 				$sel[$keys[$i]]='100';
 			}
 		}
-		$ath->renderExtraFields($sel,true,_('No Change'),false,'', array(ARTIFACT_EXTRAFIELD_FILTER_INT),true);
-		echo   '<tr>
-			<td><strong>'._('Priority')._(':').'</strong><br />';
-		build_priority_select_box ('priority', '100', true);
-		echo '</td><td>';
+		$ath->renderExtraFields($sel,true,_('No Change'),false,'', array(ARTIFACT_EXTRAFIELD_FILTER_INT),true,'UPDATE');
+		echo '<tr>';
+		echo '<td><strong>'._('Priority')._(':').'</strong><br />';
+		echo build_priority_select_box ('priority', '100', true);
+		echo '</td>';
+		echo '<td>';
+		echo '</td>';
+		echo '</tr>';
 
-		echo '</td>
-			</tr>
-
-			<tr>
-			<td><strong>'._('Assigned to')._(':').'</strong><br />'.
-				$ath->technicianBox ('assigned_to','100.1',true,_('Nobody'),'100.1',_('No Change')) .'</td>
-			<td>';
+		echo '<tr>';
+		echo '<td><strong>'._('Assigned to')._(':').'</strong><br />';
+		echo $ath->technicianBox ('assigned_to','100.1',true,_('Nobody'),'100.1',_('No Change'));
+		echo'</td>';
+		echo '<td>';
 		if (!$ath->usesCustomStatuses()) {
 		echo '<strong>'._('State')._(': ').'</strong>
 				<br />'. $ath->statusBox ('status_id','xzxz',true,_('No Change'));
@@ -752,8 +753,9 @@ if ($art_arr && $art_cnt > 0) {
 		echo '</td>';
 		echo '</tr>';
 
-		echo '<tr><td colspan="2"><strong>'._('Canned Response')._(':').'</strong><br />'.
-				$ath->cannedResponseBox ('canned_response') .'</td></tr>
+		echo '<tr>';
+		echo '<td colspan="2"><strong>'._('Canned Response')._(':').'</strong><br />';
+		echo $ath->cannedResponseBox ('canned_response') .'</td></tr>
 
 			<tr><td colspan="3" class="align-center"><input type="submit" name="submit" value="'._('Mass Update').'" /></td></tr>
 			</table>';

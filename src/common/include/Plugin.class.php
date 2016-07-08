@@ -37,11 +37,9 @@ class Plugin extends FFError {
 	var $pkg_desc = 'No description available.';
 
 	/**
-	 * Plugin() - constructor
-	 *
 	 * @param	int	$id
 	 */
-	function Plugin($id=0) {
+	function __construct($id=0) {
 		parent::__construct();
 		$this->name = false;
 		$this->hooks = array();
@@ -278,7 +276,7 @@ class Plugin extends FFError {
 			printf(_("Use %s"), $this->text);
 			echo "</strong>";
 			echo " ";
-			echo html_image($imgStatus, '16', '16',array('alt'=>$title, 'title'=>$title));
+			echo html_image($imgStatus, 16, 16, array('alt'=>$title, 'title'=>$title));
 			echo "</td>\n";
 			echo "</tr>\n";
 		}
@@ -326,7 +324,7 @@ class Plugin extends FFError {
 			}
 			echo " />\n";
 			printf(_("Use %s"), $this->text);
-			echo html_image($imgStatus, '16', '16',array('alt'=>$title, 'title'=>$title));
+			echo html_image($imgStatus, 16, 16, array('alt'=>$title, 'title'=>$title));
 			echo '</div>';
 		}
 	}

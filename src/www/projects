@@ -46,15 +46,15 @@ function display_content_negociated_hook($hook_name, $hook_params, $accepted_typ
 	plugin_hook_by_reference($hook_name, $hook_params);
 
 	$content_type = $hook_params['content_type'];
-	
+
 	// If the hooks return a content-type
 	if($content_type != ''){
-			
+
 		// The returned content-type may be overriden
 		if($forced_content_type) {
 			$content_type = $forced_content_type;
 		}
-		
+
 		header('Content-type: '. $content_type);
 		echo $hook_params['content'];
 	}
@@ -120,47 +120,46 @@ if (!isset($group_id) && !isset($project)) {
 		global $RESTPATH_PROJECTS_SUBPAGE2;
 		$subpage2 = getStringFromRequest('subpage2');
 		$subpage2 = isset($subpage2)?$subpage2:$RESTPATH_PROJECTS_SUBPAGE2;
-		
+
 		if ($subpage == "admin") {
-			
+
 			session_redirect("/project/admin/?group_id=$group_id");
-			
-		} else if ($subpage == "files" || $subpage == "download" || $subpage == "dl") {
-			
+
+		} elseif ($subpage == "files" || $subpage == "download" || $subpage == "dl") {
+
 			if ($subpage2 == "release") {
 				session_redirect("/frs/?group_id=$group_id&view=qrs");
 			} else {
 				session_redirect("/frs/?group_id=$group_id");
 			}
-			
-		} else if ($subpage == "cvs") {
+
+		} elseif ($subpage == "cvs") {
 			header("Location: ".account_group_cvsweb_url($project->getUnixName()));
 			exit();
-			
+
 		} else {
-	
+
 			$script='project_home';
-				
+
 			$accepted_type = util_negociate_alternate_content_types($script, $default_content_type, $forced_accept);
-	
+
 			// if a custom content-type is selected, then use plugin's/hooks rendering
 			if($accepted_type != $default_content_type) {
-					
+
 				$hook_params = array();
 				$hook_params['groupname'] = $project->getUnixName();
 				$hook_params['group_id'] = $project->getID();
 				$hook_params['return'] = '';
 				$hook_params['content_type'] = '';
-					
+
 				display_content_negociated_hook('content_negociated_project_home', $hook_params, $accepted_type, $forced_content_type);
-					
+
 			} else {
 				// show the project summary page for HTML display
 				include $gfwww.'include/project_home.php';
 			}
 		}
-	}
-	else {
+	} else {
 		header('HTTP/1.1 404 Not Found',true,404);
 		exit_error('HTTP/1.1 404 Not Found');
 	}
@@ -170,5 +169,3 @@ if (!isset($group_id) && !isset($project)) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

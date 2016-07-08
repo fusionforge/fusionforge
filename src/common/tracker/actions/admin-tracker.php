@@ -28,7 +28,8 @@ global $ath;
 //
 //  SHOW LINKS TO FUNCTIONS
 //
-$ath->header(array ('title'=>_('Administration of tracker')._(': ').$ath->getName()));
+$ath->header(array ('title'=>_('Administration of tracker')._(': ').$ath->getName(),
+	'modal' => 1));
 
 echo '<p>';
 echo util_make_link('/tracker/admin/?group_id='.$group_id, '<strong>'._('New Tracker').'</strong>');

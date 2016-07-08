@@ -21,8 +21,8 @@
  */
 
 abstract class SysAuthPlugin extends Plugin {
-        function SysAuthPlugin() {
-                $this->Plugin();
+	function __construct() {
+		parent::__construct();
 		$this->_addHook("user_create");
 		$this->_addHook("user_update");
 		$this->_addHook("user_delete");
@@ -37,11 +37,11 @@ abstract class SysAuthPlugin extends Plugin {
 		$this->_addHook("group_setstatus");
 		$this->_addHook("group_approved");
 		$this->_addHook("group_update_members");
-        }
+	}
 
-        function CallHook ($hookname, &$params) {
+	function CallHook ($hookname, &$params) {
 		$this->$hookname($params);
-        }
+	}
 
 	abstract function user_update($params);
 	abstract function user_delete($params);
@@ -79,5 +79,4 @@ abstract class SysAuthPlugin extends Plugin {
 	function group_update_members($params) {
 		return $this->group_update($params);
 	}
-
 }

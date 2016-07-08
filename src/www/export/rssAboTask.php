@@ -158,7 +158,7 @@ function writeRssFeedItem($objProjectTask, $updates) {
 	foreach($updates as $update){
 	$update[6]==='message' ? $title = _('Comment') : $title = $update[5];
 	$update[6]==='message' ? $description = $update[5] : $description = $update[6];
-	$objGfUser = user_get_object($update[7]);
+	$objFfUser = user_get_object($update[7]);
 		print'<item>';
 		print'<title>';
 		print $title;
@@ -167,13 +167,13 @@ function writeRssFeedItem($objProjectTask, $updates) {
 		print _('Updated value')._(': ');
 		print $description.' | ';
 		print _('Posted by')._(': ');
-		print $objGfUser->getUnixName().' | ';
+		print $objFfUser->getUnixName().' | ';
 		print _('Update time')._(': ');
 		print gmdate('D, d M Y G:i:s',$update[8]);
 		print'</description>';
 		print '<link>' . util_make_url("/pm/t_follow.php/" . $objProjectTask->getID()) . '</link>';
 		print'<author>';
-		print $objGfUser->getEmail();
+		print $objFfUser->getEmail();
 		print'</author>';
 		print '<guid isPermaLink="true">' . util_make_url("/export/rssAboTask.php?tid=" . $objProjectTask->getID()) . '</guid>';
 		print'<pubDate>';

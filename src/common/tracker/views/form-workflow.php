@@ -39,7 +39,8 @@ if (count($efarr) === 0) {
 
 $ath->adminHeader(array('title'=> _('Configure Workflow'),
 	'pagename'=>'tracker_admin_customize_liste',
-	'titlevals'=>array($ath->getName())));
+	'titlevals'=>array($ath->getName()),
+	'modal'=>1));
 
 /*
 	List of possible user built Selection Boxes for an ArtifactType
@@ -70,15 +71,21 @@ echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&a
 	$init = _('Initial values').' ';
 
 	$title_arr=array();
+	$to_title_arr=array();
+	$class_arr=array();
 	$title_arr[]=_('From Value');
+	$class_arr[]=('');
+	$to_title_arr[]=('');
 	foreach ($elearray as $status) {
-		$title_arr[]=$status['element_name'];
+		$title_arr[]='<div><span>'.$status['element_name'].'</span></div>';
+		$to_title_arr[]='<div><span>'.$to.$status['element_name'].'</span></div>';
+		$class_arr[]='rotate';
 	}
-	echo $HTML->listTableTop($title_arr, false, ' ');
+	echo $HTML->listTableTop($title_arr, false, 'table-header-rotated','',$class_arr);
 	echo "\n";
 
-	// Special treatement for the initial value (in the Submit form).
-	echo '<tr id="initval"><th style="text-align:left">'.$init.'</th>'."\n";
+	// Special treatment for the initial value (in the Submit form).
+	echo '<tr id="initval"><th class="row-header" style="text-align:left">'.$init.'</th>'."\n";
 	$next = $atw->getNextNodes('100');
 	foreach ($states as $s) {
 		$name = 'wk[100]['. $s['element_id'].']';
@@ -92,14 +99,16 @@ echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&a
 
 	$count=count($title_arr);
 	$totitle_arr = array();
+	$class_arr= array();
 	for ($i=0; $i<$count; $i++) {
-		$totitle_arr[] = $title_arr[$i]? $to.$title_arr[$i] : '';
+		$totitle_arr[] = $title_arr[$i]? $to_title_arr[$i] : '';
+		$class_arr[]='rotate';
 	}
-	echo $HTML->listTableTop($totitle_arr, false, ' ');
+	echo $HTML->listTableTop($totitle_arr, false, 'table-header-rotated','',$class_arr);
 
 	$i=1;
 	foreach ($elearray as $status) {
-		echo '<tr id="configuring-'.$i++.'"><th style="text-align:left">'.$from.$status['element_name'].'</th>'."\n";
+		echo '<tr id="configuring-'.$i++.'"><th class ="row-header" style="text-align:left">'.$from.$status['element_name'].'</th>'."\n";
 		$next = $atw->getNextNodes($status['element_id']);
 		foreach ($states as $s) {
 			if ($status['element_id'] !== $s['element_id']) {
@@ -109,11 +118,15 @@ echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&a
 				if ($value) {
 					$url = '/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&workflow_roles=1&from='.$status['element_id'].'&next='.$s['element_id'];
 					$str .= util_make_link($url, html_image('ic/acl_roles20.png', 20, 20, array('alt'=>_('Edit Roles'))), array('title' => _('Edit roles')));
+					$url = '/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&workflow_required_fields=1&from='.$status['element_id'].'&next='.$s['element_id'];
+					$str .= util_make_link($url, html_image('ic/required.png', 20, 20, array('alt'=>_('Edit Required Fields'))), array('title' => _('Edit required fields')));
 				} else {
+					$str .= ' '.html_image('spacer.gif', 20, 20);
 					$str .= ' '.html_image('spacer.gif', 20, 20);
 				}
 			} else {
 				$str = '<input type="checkbox" checked="checked" disabled="disabled" />';
+				$str .= ' '.html_image('spacer.gif', 20, 20);
 				$str .= ' '.html_image('spacer.gif', 20, 20);
 			}
 			echo '<td class="align-center">'.$str.'</td>'."\n";
@@ -124,6 +137,8 @@ echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&a
 
 ?>
 <div class="tips">Tip: Click on <?php echo html_image('ic/acl_roles20.png', 20, 20, array('alt'=> _('Edit Roles'))) ?> to configure allowed roles for a transition (all by default).</div>
+<div class="tips">Tip2: Click on <?php echo html_image('ic/required.png', 20, 20, array('alt'=> _('Edit Required Fields'))) ?> to configure required fields for a transition (none by default).</div>
+
 <p>
 <input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
 <?php

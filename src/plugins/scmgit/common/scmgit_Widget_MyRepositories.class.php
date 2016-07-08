@@ -23,8 +23,8 @@ require_once 'common/widget/Widget.class.php';
 require_once 'common/widget/WidgetLayoutManager.class.php';
 
 class scmgit_Widget_MyRepositories extends Widget {
-	function scmgit_Widget_MyRepositories($owner_type, $owner_id) {
-		$this->Widget('plugin_scmgit_user_myrepositories');
+	function __construct($owner_type, $owner_id) {
+		parent::__construct('plugin_scmgit_user_myrepositories');
 		$this->setOwner($owner_id, $owner_type);
 	}
 

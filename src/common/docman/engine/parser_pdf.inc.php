@@ -1,6 +1,6 @@
 <?php
 /**
- * FusionForge document search engine
+ * FusionForge Documentation Manager Search Engine
  *
  * Copyright 2005, Fabio Bertagnin
  * Copyright 2009-2011, Franck Villaume - Capgemini
@@ -36,7 +36,7 @@ function parser_pdf($fichin) {
 
 	$fichout = tempnam(forge_get_config('data_path'),'tmp');
 	$cmd = '/usr/bin/pdftotext '.$fichin.' '.$fichout;
-	$res = shell_exec($cmd);
+	shell_exec($cmd);
 
 	return parser_text($fichout);
 	unlink ($fichout);

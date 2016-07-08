@@ -51,7 +51,7 @@ class MantisCmController extends CmController{
 		return self::$supportedAcceptMimeTypes;
 	}
 
-	/*public function __construct(){
+	/*function __construct(){
 		// just merge Mantis specifc action mime types with the default set
 		// of supported actions mime types in OSLC-CM
 		$this->getSupportedAcceptMimeTypes = array_merge(CmController::getSupportedAcceptMimeTypes(), $this->mantisSupportedAcceptMimeTypes);

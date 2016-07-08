@@ -32,14 +32,14 @@ forge_define_config_item('bind_dn', 'sysauthldap', 'cn=admin,$sysauthldap/base_d
 forge_define_config_item('password', 'sysauthldap', '');
 
 setconfigfromenv ('sysauthldap', 'ldap_password',
-			 'GForgePluginSysAuthLdapPasswd', NULL) ;
+			 'GForgePluginSysAuthLdapPasswd', NULL);
 
 require_once $gfcommon.'include/SysAuthPlugin.class.php';
 
 class SysAuthLDAPPlugin extends SysAuthPlugin {
-	function SysAuthLDAPPlugin () {
-		$this->SysAuthPlugin() ;
-		$this->name = "sysauthldap" ;
+	function __construct() {
+		parent::__construct();
+		$this->name = "sysauthldap";
 		$this->text = _("System authentication via LDAP");
 		$this->pkg_desc =
 _("This plugin maintains data about users, groups and memberships in an
@@ -84,14 +84,14 @@ for other uses).");
 
 	function _parse_fromhost($s) {
 		$result = $s;
-		if (preg_match ('/\b(fromhost:[^,]+)/', $s, $matches)) {
-			$m = preg_replace ('/^fromhost:/','',$matches[0]);
+		if (preg_match('/\b(fromhost:[^,]+)/', $s, $matches)) {
+			$m = preg_replace('/^fromhost:/','',$matches[0]);
 
 			$r = array();
 			foreach (explode ('.', $m) as $i) {
 				$r[] = 'dc='.$i;
 			}
-			$result = preg_replace ('/\b(fromhost:[^,]+)/',
+			$result = preg_replace('/\b(fromhost:[^,]+)/',
 						      implode(',',$r),
 						      $s);
 		}

@@ -55,7 +55,7 @@ class OSLCConnector {
 	/**
 	 * @param array $params unused in base class
 	 */
-	public function __construct($params=null) {
+	function __construct($params=null) {
 		$this->changerequests = null;
 	}
 

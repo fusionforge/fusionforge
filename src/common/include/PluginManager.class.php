@@ -28,11 +28,7 @@ class PluginManager extends FFError {
 	var $hooks_to_plugins;
 	var $returned_values = array();
 
-	/**
-	 * PluginManager() - constructor
-	 *
-	 */
-	function PluginManager() {
+	function __construct() {
 		parent::__construct();
 		$this->plugins_objects = array();
 		$this->plugins_to_hooks = array();
@@ -48,11 +44,11 @@ class PluginManager extends FFError {
 
 	}
 	/**
-	 * GetPlugins() - get a list of installed plugins
+	 * getPlugins() - get a list of installed plugins
 	 *
 	 * @return	array hash of plugin id => plugin names
 	 */
-	function GetPlugins() {
+	function getPlugins() {
 		$this->plugins_data = array();
 		$res = db_query_params('SELECT plugin_id, plugin_name FROM plugins',
 				array());
@@ -178,7 +174,7 @@ class PluginManager extends FFError {
 	 *
 	 */
 	function LoadPlugins() {
-		$plugins_data = $this->GetPlugins();
+		$plugins_data = $this->getPlugins();
 		foreach ($plugins_data as $p_id => $p_name) {
 			if (!$this->LoadPlugin($p_name)) {
 				// we can't find the plugin so we remove it from the array

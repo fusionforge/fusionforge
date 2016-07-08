@@ -72,8 +72,8 @@ if($filter) {
 			$filterCategory =& $filterCategories[$i];
 			echo '<br /> &nbsp; &nbsp; &nbsp; '
 				.$filterCategory->getFullPath()
-				.' <a href="?form_cat='.$category->getId()
-				.getFilterUrl($filterArray, $filterCategory->getId()).'">['._('Remove Filter').']'
+				.' <a href="?form_cat='.$category->getID()
+				.getFilterUrl($filterArray, $filterCategory->getID()).'">['._('Remove Filter').']'
 				.'</a>';
 		}
 
@@ -100,14 +100,14 @@ if($filter) {
 				// also make anchor if not current
 
 				echo '<br />';
-				if (($rootCategory->getId() == $category->getRootParentId())
-					|| ($rootCategory->getId() == $category->getId())) {
+				if (($rootCategory->getID() == $category->getRootParentId())
+					|| ($rootCategory->getID() == $category->getID())) {
 
-					echo html_image('ic/ofolder15.png','15','13',array());
+					echo html_image('ic/ofolder15.png', 15, 13);
 					echo '&nbsp; <strong>'.$rootCategory->getLocalizedLabel().'</strong>';
 				} else {
-					echo '<a href="?form_cat='.$rootCategory->getId().@$discrim_url.'">';
-					echo html_image('ic/cfolder15.png', '15', '13', array());
+					echo '<a href="?form_cat='.$rootCategory->getID().@$discrim_url.'">';
+					echo html_image('ic/cfolder15.png', 15, 13);
 					echo '&nbsp; '.$rootCategory->getLocalizedLabel();
 					echo '</a>';
 				}
@@ -121,15 +121,15 @@ if($filter) {
 			for ($i=0, $count = sizeof($parentCategories); $i < $count; $i++) {
 				echo str_repeat(' &nbsp; ', $i * 2);
 
-				echo html_image('ic/ofolder15.png', '15', '13', array());
+				echo html_image('ic/ofolder15.png', 15, 13);
 				echo '&nbsp; ';
-				if($parentCategories[$i]['id'] != $category->getId()) {
+				if($parentCategories[$i]['id'] != $category->getID()) {
 					echo '<a href="?form_cat='.$parentCategories[$i]['id'].$discrim_url.'">';
 				} else {
 					echo '<strong>';
 				}
 				echo $parentCategories[$i]['name'];
-				if($parentCategories[$i]['id'] != $category->getId()) {
+				if($parentCategories[$i]['id'] != $category->getID()) {
 					echo '</a>';
 				} else {
 					echo '</strong>';
@@ -145,8 +145,8 @@ if($filter) {
 				$childCategory =& $childrenCategories[$i];
 
 				echo $currentIndent;
-				echo '<a href="?form_cat='.$childCategory->getId().@$discrim_url.'">';
-				echo html_image('ic/cfolder15.png', '15', '13', array());
+				echo '<a href="?form_cat='.$childCategory->getID().@$discrim_url.'">';
+				echo html_image('ic/cfolder15.png', 15, 13);
 				echo '&nbsp; '.$childCategory->getLocalizedLabel().'</a>';
 				echo ' <em>('
 					.sprintf(_('%s projects'), $childCategory->getSubProjectsCount())

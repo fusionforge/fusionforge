@@ -38,7 +38,7 @@ require_once $gfcommon.'forum/ForumPendingStorage.class.php';
  */
 
 function goodbye($msg) {
-	forum_header(array('title'=>_('Attachments')));
+	forum_header(array('title'=>_('Attachments'), 'modal' => 1));
 	html_feedback_top($msg);
 	echo '<form method="post"><input type="button" value="'._('Close Window').'" onclick="window.close()" /></form>';
 	site_footer();
@@ -83,7 +83,7 @@ if ($delete == "yes") {
 	if ( (!$res) ) {
 		exit_error("Attachment Download error: ".db_error(),'forums');
 	}
-	if (! ((db_result($res,0,'userid') == user_getid()) || (forge_check_perm ('forum_admin', $f->Group->getID()))) ) {
+	if (! ((db_result($res,0,'userid') == user_getid()) || (forge_check_perm('forum_admin', $f->Group->getID()))) ) {
 		goodbye(_('You cannot delete this attachment'));
 	} else {
 		if (!$pending) {
@@ -146,7 +146,7 @@ if ($edit == "yes") {
 			exit();
 		} else {
 			//show the form to edit the attach
-			forum_header(array('title' => _('Attachments')));
+			forum_header(array('title' => _('Attachments'), 'modal' => 1));
 			$fh = new ForumHTML($f);
 			if (!$fh || !is_object($fh)) {
 				exit_error(_('Error getting new ForumHTML'), 'forums');

@@ -43,8 +43,6 @@ class ArtifactTypes extends FFError {
 	var $data_array;
 
 	/**
-	 * ArtifactTypes - constructor.
-	 *
 	 * @param	Group		$Group The Group object.
 	 * @return	ArtifactTypes	success.
 	 */

@@ -41,9 +41,9 @@ if (!$u || !is_object($u)) {
 	exit_error($u->getErrorMessage(),'my');
 }
 
-use_javascript('/js/sortable.js');
+html_use_tablesorter();
 // not valid registration, or first time to page
-site_user_header(array('title'=> _('Manage Authorized Keys')));
+site_user_header(array('title' => _('Manage Authorized Keys')));
 $sshKeysArray = $u->getAuthorizedKeys();
 if (count($sshKeysArray)) {
 	echo $HTML->boxTop(_('Available keys'));

@@ -59,7 +59,7 @@ if (!$u || !is_object($u)) {
 if (getStringFromRequest("submit")) {
 
 	if (strlen($passwd)<6) {
-		exit_error(_('You must supply valid password (at least 6 chars).'),'my');
+		exit_error(_('You must supply valid password (at least 6 characters).'),'my');
 	}
 
 	if ($passwd != $passwd2) {
@@ -92,7 +92,7 @@ echo '</p>';
 ?>
 
 <form action="<?php echo util_make_url('/account/lostlogin.php'); ?>" method="post">
-<p><?php echo _('New Password (at least 6 chars)'); ?>:
+<p><?php echo _('New Password (at least 6 characters)'); ?>:
 <br />
 <label for="passwd">
 	<input id="passwd" type="password" name="passwd"/>

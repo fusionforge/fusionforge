@@ -24,15 +24,15 @@ forge_define_config_item ('default_server', 'scmcpold', forge_get_config ('scm_h
 forge_define_config_item ('repos_path', 'scmcpold', forge_get_config('chroot').'/scmrepos/cpold') ;
 
 class CpoldPlugin extends SCMPlugin {
-	function CpoldPlugin () {
+	function __construct() {
 		global $gfconfig;
-		$this->SCMPlugin () ;
+		parent::__construct();
 		$this->name = 'scmcpold';
 		$this->text = 'CPOLD';
 		$this->hooks[] = 'scm_generate_snapshots' ;
 		$this->hooks[] = 'scm_cpold_do_nothing' ;
 
-		$this->register () ;
+		$this->register();
 	}
 
 	function CallHook ($hookname, &$params) {

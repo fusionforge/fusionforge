@@ -53,6 +53,10 @@ switch ($option) {
 		foreach ($arr_fileid as $fileid) {
 			if (!empty($fileid)) {
 				$d = document_get_object($fileid, $g->getID());
+				if (!$d) {
+					$error_msg = _('Cannot retrieve document');
+					session_redirect($redirecturl);
+				}
 				if ($d->isError() || !$d->addMonitoredBy(user_getid())) {
 					$error_msg = $d->getErrorMessage();
 					session_redirect($redirecturl);
@@ -70,6 +74,10 @@ switch ($option) {
 		foreach ($arr_fileid as $fileid) {
 			if (!empty($fileid)) {
 				$d = document_get_object($fileid, $g->getID());
+				if (!$d) {
+					$error_msg = _('Cannot retrieve document');
+					session_redirect($redirecturl);
+				}
 				if ($d->isError() || !$d->removeMonitoredBy($LUSER->getID())) {
 					$error_msg = $d->getErrorMessage();
 					session_redirect($redirecturl);

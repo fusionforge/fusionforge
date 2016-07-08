@@ -32,7 +32,7 @@ require_once $gfcommon.'include/MonitorElement.class.php';
 
 class Widget_MyMonitoredForums extends Widget {
 	function __construct() {
-		$this->Widget('mymonitoredforums');
+		parent::__construct('mymonitoredforums');
 	}
 
 	function getTitle() {
@@ -103,7 +103,7 @@ class Widget_MyMonitoredForums extends Widget {
 								$cells = array();
 								$cells[] = array('&nbsp;&nbsp;&nbsp;-&nbsp;'.util_make_link('/forum/forum.php?forum_id='.$validMonitoredForumId, $forumObject->getName()), 'style' => 'width:99%');
 								$cells[] = array(util_make_link('/forum/monitor.php?forum_id='.$validMonitoredForumId.'&group_id='.$groupObject->getID().'&stop=1',
-										$HTML->getDeletePic(_('Stop Monitoring'), _('Stop Monitoring'), array('onClick' => 'return confirm("'._('Stop monitoring this forum?').'")'))),
+										$HTML->getDeletePic(_('Stop monitoring'), _('Stop monitoring'), array('onClick' => 'return confirm("'._('Stop monitoring this forum?').'")'))),
 										'class' => 'align-center');
 								$html .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($key, true)), $cells);
 							}

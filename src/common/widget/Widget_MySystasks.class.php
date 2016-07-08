@@ -27,7 +27,7 @@ require_once 'Widget.class.php';
 
 class Widget_MySystasks extends Widget {
 	function __construct() {
-		$this->Widget('mysystasks');
+		parent::__construct('mysystasks');
 	}
 
 	function getTitle() {

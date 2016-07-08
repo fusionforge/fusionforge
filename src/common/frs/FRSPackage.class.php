@@ -36,7 +36,7 @@ $FRSPACKAGE_OBJ = array();
  * @param	Group	$Group
  * @return	array
  */
-function &get_frs_packages($Group) {
+function get_frs_packages($Group) {
 	$ps = array();
 	$res = db_query_params('SELECT * FROM frs_package WHERE group_id=$1',
 				array($Group->getID()));
@@ -55,7 +55,7 @@ function &get_frs_packages($Group) {
  * @param	bool	$data
  * @return	object	the FRSPackage object
  */
-function &frspackage_get_object($package_id, $data = false) {
+function frspackage_get_object($package_id, $data = false) {
 	global $FRSPACKAGE_OBJ;
 	if (!isset($FRSPACKAGE_OBJ['_'.$package_id.'_'])) {
 		if ($data) {
@@ -68,7 +68,7 @@ function &frspackage_get_object($package_id, $data = false) {
 			}
 			$data = db_fetch_array($res);
 		}
-		$Group =& group_get_object($data['group_id']);
+		$Group = group_get_object($data['group_id']);
 		$FRSPACKAGE_OBJ['_'.$package_id.'_'] = new FRSPackage($Group, $data['package_id'], $data);
 	}
 	return $FRSPACKAGE_OBJ['_'.$package_id.'_'];
@@ -108,15 +108,12 @@ class FRSPackage extends FFError {
 	var $Group;
 
 	/**
-	 * Constructor.
-	 *
 	 * @param	$Group
 	 * @param	bool	$package_id
 	 * @param	bool	$arr
 	 * @internal	param	\The $object Group object to which this FRSPackage is associated.
 	 * @internal	param	\The $int package_id.
 	 * @internal	param	\The $array associative array of data.
-	 * @return	\FRSPackage
 	 */
 	function __construct(&$Group, $package_id = false, $arr = false) {
 		parent::__construct();
@@ -179,7 +176,7 @@ class FRSPackage extends FFError {
 
 		db_begin();
 		$result = db_query_params('INSERT INTO frs_package(group_id, name, status_id) VALUES ($1, $2, $3)',
-					array($this->Group->getId(),
+					array($this->Group->getID(),
 						htmlspecialchars($name),
 						1));
 		if (!$result) {
@@ -590,7 +587,7 @@ class FRSPackage extends FFError {
 			$zipPath = $this->getReleaseZipPath($release_id);
 			$release = frsrelease_get_object($release_id);
 			$filesPath = forge_get_config('upload_dir').'/'.$this->Group->getUnixName().'/'.$this->getFileName().'/'.$release->getFileName();
-			if ($zip->open($zipPath, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE) != true) {
+			if ($zip->open($zipPath, ZipArchive::CREATE | ZipArchive::OVERWRITE) != true) {
 				$this->setError(_('Cannot open the file archive')._(': ').$zipPath.'.');
 				return false;
 			}

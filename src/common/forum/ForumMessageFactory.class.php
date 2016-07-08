@@ -47,23 +47,19 @@ class ForumMessageFactory extends FFError {
 	var $fetched_rows;
 
 	/**
-	 * Constructor.
-	 *
 	 * @param	object	$Forum	The Forum object to which this ForumMessageFactory is associated.
-	 * @return	boolean	success.
 	 */
-	function ForumMessageFactory(&$Forum) {
+	function __construct(&$Forum) {
 		parent::__construct();
 		if (!$Forum || !is_object($Forum)) {
 			$this->setError(_("Invalid group_form_id"));
-			return false;
+			return;
 		}
 		if ($Forum->isError()) {
 			$this->setError('ForumMessage: '.$Forum->getErrorMessage());
-			return false;
+			return;
 		}
 		$this->Forum =& $Forum;
-		return true;
 	}
 
 	/**
@@ -266,7 +262,7 @@ class ForumMessageFactory extends FFError {
 		$this->fetched_rows=$rows;
 		if (!$result || $rows < 1) {
 			$this->setError('No Messages Found '.db_error());
-			return false;
+			$this->forum_messages = false;
 		} else {
 			while ($arr = db_fetch_array($result)) {
 				$this->forum_messages[] = new ForumMessage($this->Forum, $arr['msg_id'], $arr);

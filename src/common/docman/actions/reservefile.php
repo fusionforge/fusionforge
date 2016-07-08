@@ -40,7 +40,7 @@ $arr_fileid = explode(',', getStringFromRequest('fileid'));
 $feedback = _('Document(s)').' ';
 foreach ($arr_fileid as $fileid) {
 	$d = document_get_object($fileid, $group_id);
-	$feedback .= $d->getFilename().' ';
+	$feedback .= $d->getFileName().' ';
 	if ($d->isError() || !$d->setReservedBy('1', user_getid())) {
 		$feedback = '';
 		$error_msg = $d->getErrorMessage();

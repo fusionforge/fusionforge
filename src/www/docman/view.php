@@ -53,8 +53,6 @@ if (!$g || !is_object($g)) {
 
 if (is_numeric($docid)) {
 	session_require_perm('docman', $group_id, 'read');
-	$docname = urldecode($arr[5]);
-
 	$d = new Document($g, $docid);
 
 	if (!$d || !is_object($d)) {
@@ -67,30 +65,62 @@ if (is_numeric($docid)) {
 	 * except for active (1), we need more right access than just read
 	 */
 	switch ($d->getStateID()) {
-		case "2":
-		case "3":
-		case "4":
-		case "5": {
+		case '2':
+		case '3':
+		case '4':
+		case '5': {
 			session_require_perm('docman', $group_id, 'approve');
 			break;
 		}
 	}
 
-	/**
-	 * If the served document has wrong relative links, then
-	 * theses links may redirect to the same document with another
-	 * name, this way a search engine may loop and stress the
-	 * server.
-	 */
-	if ($d->getFileName() != $docname) {
-		session_redirect('/docman/view.php/'.$group_id.'/'.$docid.'/'.urlencode($d->getFileName()));
-	}
 	ob_end_clean();
-
 	$file_path = $d->getFilePath();
 	$length = filesize($file_path);
 	$d->downloadUp();
 	utils_headers_download($d->getFileName(), $d->getFileType(), $length);
+	readfile_chunked($file_path);
+} elseif ($docid === 'versions') {
+	// let get the specific version
+	$doc_id = (int) $arr[5];
+	$version_id = (int) $arr[6];
+	session_require_perm('docman', $group_id, 'read');
+	$d = new Document($g, $doc_id);
+
+	if (!$d || !is_object($d)) {
+		exit_error(_('Document is not available.'), 'docman');
+	} elseif ($d->isError()) {
+		exit_error($d->getErrorMessage(), 'docman');
+	}
+
+	/**
+	 * except for active (1), we need more right access than just read
+	 */
+	switch ($d->getStateID()) {
+		case '2':
+		case '3':
+		case '4':
+		case '5': {
+			session_require_perm('docman', $group_id, 'approve');
+			break;
+		}
+	}
+
+	$dv = documentversion_get_object($version_id, $doc_id, $group_id);
+	if (!$dv || !is_object($dv)) {
+		exit_error(_('Document Version is not available.'), 'docman');
+	} elseif ($dv->isError()) {
+		exit_error($dv->getErrorMessage(), 'docman');
+	}
+
+	if (!$dv->isCurrent()) {
+		session_require_perm('docman', $group_id, 'approve');
+	}
+
+	ob_end_clean();
+	$file_path = $dv->getFilePath();
+	$length = filesize($file_path);
+	utils_headers_download($dv->getFileName(), $dv->getFileType(), $length);
 	readfile_chunked($file_path);
 
 } elseif ($docid === 'backup') {
@@ -112,7 +142,7 @@ if (is_numeric($docid)) {
 			$file = forge_get_config('data_path').'/docman/'.$filename;
 
 			$zip = new ZipArchive;
-			if ( !$zip->open($file, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE)) {
+			if ( !$zip->open($file, ZipArchive::CREATE | ZipArchive::OVERWRITE)) {
 				@unlink($file);
 				exit_error(_('Unable to open ZIP archive for backup'), 'docman');
 			}
@@ -150,7 +180,7 @@ if (is_numeric($docid)) {
 		session_redirect('/docman/?group_id='.$group_id.'&view=admin');
 	}
 } elseif ($docid === 'webdav') {
-	if (forge_get_config('use_webdav') && $g->useWebDav()) {
+	if (forge_get_config('use_webdav') && $g->useWebdav()) {
 		require_once $gfcommon.'docman/include/webdav.php';
 		$_SERVER['SCRIPT_NAME'] = '';
 		/* we need the group id for check authentification. */
@@ -198,7 +228,7 @@ if (is_numeric($docid)) {
 				$file = forge_get_config('data_path').'/docman/'.$filename;
 				@unlink($file);
 				$zip = new ZipArchive;
-				if ( !$zip->open($file, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE)) {
+				if ( !$zip->open($file, ZipArchive::CREATE | ZipArchive::OVERWRITE)) {
 					@unlink($file);
 					exit_error(_('Unable to open ZIP archive for download as ZIP'), 'docman');
 				}
@@ -249,30 +279,21 @@ if (is_numeric($docid)) {
 				unlink($file);
 			} else {
 				$warning_msg = _('This documents folder is empty.');
-				//session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
+				session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid);
 			}
 		} elseif ( $arr[5] === 'selected' ) {
 			$dirid = $arr[6];
-			$arr_groupIdfileId = explode(',',$arr[7]);
-			foreach ($arr_groupIdfileId as $groupIdfileId) {
-				$splited_val = explode('-', $groupIdfileId);
-				$arr_groupid[] = $splited_val[0];
-				$arr_fileid[] = $splited_val[1];
-			}
-			if (count($arr_groupid) != count($arr_fileid)) {
-				exit_error(_('Cannot build ZIP archive for download as ZIP'), 'docman');
-			}
+			$arr_fileid = explode(',', $arr[7]);
 			$filename = 'docman-'.$g->getUnixName().'-selected-'.time().'.zip';
 			$file = forge_get_config('data_path').'/docman/'.$filename;
 			@unlink($file);
 			$zip = new ZipArchive;
-			if (!$zip->open($file, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE)) {
+			if (!$zip->open($file, ZipArchive::CREATE | ZipArchive::OVERWRITE)) {
 				@unlink($file);
 				exit_error(_('Unable to open ZIP archive for download as ZIP'), 'docman');
 			}
-			foreach ($arr_fileid as $key => $docid) {
+			foreach ($arr_fileid as $docid) {
 				if (!empty($docid)) {
-					$g = group_get_object($arr_groupid[$key]);
 					$d = new Document($g, $docid);
 					if (!$d || !is_object($d)) {
 						@unlink($file);
@@ -296,11 +317,11 @@ if (is_numeric($docid)) {
 					if (is_numeric($dirid)) {
 						$redirect_url .= '&dirir='.$dirid;
 					}
-					//session_redirect($redirect_url);
+					session_redirect($redirect_url);
 				}
 			}
 
-			if ( !$zip->close()) {
+			if (!$zip->close()) {
 				@unlink($file);
 				exit_error(_('Unable to close ZIP archive for download as ZIP'), 'docman');
 			}
@@ -310,7 +331,7 @@ if (is_numeric($docid)) {
 			if (!preg_match('/trident/i', $_SERVER['HTTP_USER_AGENT'])) {
 				header('Content-type: application/zip');
 			}
-			header("Content-Transfer-Encoding: binary");
+			header('Content-Transfer-Encoding: binary');
 			ob_end_clean();
 
 			if(!readfile_chunked($file)) {

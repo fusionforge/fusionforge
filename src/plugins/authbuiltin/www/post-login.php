@@ -27,9 +27,9 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-Header("Expires: Wed, 11 Nov 1998 11:11:11 GMT");
-Header("Cache-Control: no-cache");
-Header("Cache-Control: must-revalidate");
+header("Expires: Wed, 11 Nov 1998 11:11:11 GMT");
+header("Cache-Control: no-cache");
+header("Cache-Control: must-revalidate");
 
 require_once '../../../www/env.inc.php';
 require_once $gfcommon.'include/pre.php';
@@ -80,7 +80,6 @@ if ($login) {
 	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 		exit_form_double_submit();
 	}
-
 	$valide = 1;
 	if ($attempts >= 3) {
 		$params['valide'] =& $valide;

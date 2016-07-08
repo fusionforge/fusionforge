@@ -36,15 +36,13 @@ class HtmlSearchRenderer extends SearchRenderer {
 	var $tableHeaders = array();
 
 	/**
-	 * Constructor
-	 *
 	 * @param string  $typeOfSearch type of the search (Software, Forum, People and so on)
 	 * @param string  $words        words we are searching for
 	 * @param boolean $isExact      if we want to search for all the words or if only one matching the query is sufficient
 	 * @param object  $searchQuery  SearchQuery instance
 	 */
-	function HtmlSearchRenderer($typeOfSearch, $words, $isExact, $searchQuery) {
-		$this->SearchRenderer($typeOfSearch, $words, $isExact, $searchQuery);
+	function __construct($typeOfSearch, $words, $isExact, $searchQuery) {
+		parent::__construct($typeOfSearch, $words, $isExact, $searchQuery);
 	}
 
 	/**
@@ -127,11 +125,11 @@ class HtmlSearchRenderer extends SearchRenderer {
 		$searchQuery =& $this->searchQuery;
 
 		$html = '<br />';
-		$html .= '<table class="tablecontent" width="100%" cellpadding="5">';
+		$html .= '<table class="tablecontent fullwidth" cellpadding="5">';
 		$html .= '<tr>';
 		$html .= '<td>';
 		if ($searchQuery->getOffset() != 0) {
-			$html .= util_make_link($this->getPreviousResultsUrl(), html_image('t2.png', '15', '15').' '._('Previous Results'), array('class' => 'prev'));
+			$html .= util_make_link($this->getPreviousResultsUrl(), html_image('t2.png', 15, 15).' '._('Previous Results'), array('class' => 'prev'));
 		} else {
 			$html .= '&nbsp;';
 		}
@@ -139,7 +137,7 @@ class HtmlSearchRenderer extends SearchRenderer {
 		$result = $this->searchQuery->getData($this->searchQuery->getRowsPerPage(),$this->searchQuery->getOffset());
 		error_log(count($result));
 		if ($searchQuery->getRowsTotalCount() > $this->searchQuery->getRowsPerPage()+$this->searchQuery->getOffset()) {
-			$html .= util_make_link($this->getNextResultsUrl(), _('Next Results').' '.html_image('t.png', '15', '15'), array('class' => 'next'));
+			$html .= util_make_link($this->getNextResultsUrl(), _('Next Results').' '.html_image('t.png', 15, 15), array('class' => 'next'));
 		} else {
 			$html .= '&nbsp;';
 		}

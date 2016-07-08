@@ -1,9 +1,9 @@
 <?php
 
 class ProjectLabelsPlugin extends Plugin {
-	function ProjectLabelsPlugin () {
-		$this->Plugin() ;
-		$this->name = "projectlabels" ;
+	function __construct() {
+		parent::__construct();
+		$this->name = "projectlabels";
 		$this->text = _("Project labels");
 		$this->pkg_desc =
 _("This can be used to highlight some projects on a forge, for instance

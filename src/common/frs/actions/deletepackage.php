@@ -54,7 +54,7 @@ if (!$package_id_strings) {
 				}
 			}
 		} else {
-			$result[$key]['html'] = $HTML->error_msg(_('FRS Action Denied'));
+			$result[$key]['html'] = $HTML->error_msg(_('FRS Action Denied.'));
 		}
 	}
 }

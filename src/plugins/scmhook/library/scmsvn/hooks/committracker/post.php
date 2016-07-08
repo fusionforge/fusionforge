@@ -95,9 +95,9 @@ $svn_tracker_debug = 0;
 $svn_tracker_debug_file = sys_get_temp_dir().'scmhook_svn_committracker.debug';
 
 $UserName = trim(`svnlook author -r $revision $repository`); //username of author
-$date     = trim(`svnlook date -r $revision $repository`); //date
-$log      = trim(`svnlook log -r $revision $repository`); // the log
-$changed  = trim(`svnlook changed -r $revision $repository | sed 's/[A-Z]*   //'`); // the filenames
+$date    = trim(`svnlook date -r $revision $repository`); //date
+$log     = trim(`svnlook log -r $revision $repository`); // the log
+$changed = trim(`svnlook changed -r $revision $repository | sed 's/[A-Z]*   //'`); // the filenames
 
 if (isset($svn_tracker_debug) && $svn_tracker_debug == 1) {
 	$file = fopen($svn_tracker_debug_file, 'a+');

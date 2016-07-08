@@ -121,7 +121,7 @@ if ($pattern) {
 		}
 		echo $HTML->listTableBottom();
 	} else {
-		echo $HTML->warning_msg(_('No user found'));
+		echo $HTML->warning_msg(_('No user found.'));
 	}
 }
 

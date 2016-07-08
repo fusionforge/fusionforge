@@ -1,5 +1,7 @@
 <?php
 /**
+ * FusionForge Documentation Manager
+ *
  * Copyright (C) 2009-2012 Alain Peyrat, Alcatel-Lucent
  * Copyright 2012-2015, Franck Villaume - TrivialDev
  * http://fusionforge.org

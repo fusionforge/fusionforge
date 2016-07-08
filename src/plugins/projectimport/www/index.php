@@ -625,7 +625,7 @@ class ProjectImportPage extends FileManagerPage {
 					}
 				}
 				else { // count($projects)
-					$this->feedback(_('No project found'));
+					$this->feedback(_('No project found.'));
 				}
 			}
 			else { // not $this->importer->has_project_dump()

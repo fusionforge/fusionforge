@@ -85,7 +85,7 @@ echo $HTML->openForm(array('action' => '/pm/task.php?group_id='.$group_id.'&grou
 
 		<td>
 		<strong><?php echo _('Priority') . _(': '); ?></strong><br />
-		<?php build_priority_select_box('priority',$pt->getPriority()); ?>
+		<?php echo build_priority_select_box('priority',$pt->getPriority()); ?>
 		</td>
 
 		<td>
@@ -106,7 +106,7 @@ echo $HTML->openForm(array('action' => '/pm/task.php?group_id='.$group_id.'&grou
 		</td>
 		<td>
 		<?php echo util_make_link('/export/rssAboTask.php?tid='.$project_task_id,
-						html_image('ic/rss.png', 16, 16, array('border' => '0')).' '._('Subscribe to task'));
+						html_image('ic/rss.png', 16, 16).' '._('Subscribe to task'));
 		?>
 		</td>
 	</tr>

@@ -30,7 +30,7 @@ $group_id = getStringFromRequest('group_id');
 $pluginTaskboard = plugin_get_object('taskboard');
 
 if (!$group_id) {
-	exit_error(_('Cannot Process your request: No ID specified'), 'home');
+	exit_error(_('Cannot Process your request')._(': ')._('No ID specified'), 'home');
 } else {
 	$group = group_get_object($group_id);
 	if ( !$group) {

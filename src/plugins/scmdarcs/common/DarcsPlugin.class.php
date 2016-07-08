@@ -28,9 +28,9 @@ forge_define_config_item('default_server', 'scmdarcs', forge_get_config('scm_hos
 forge_define_config_item('repos_path', 'scmdarcs', forge_get_config('chroot').'/scmrepos/darcs');
 
 class DarcsPlugin extends SCMPlugin {
-	function DarcsPlugin() {
+	function __construct() {
 		global $gfconfig;
-		$this->SCMPlugin();
+		parent::__construct();
 		$this->name = 'scmdarcs';
 		$this->text = _('Darcs');
 		$this->pkg_desc =

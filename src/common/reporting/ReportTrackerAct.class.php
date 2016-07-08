@@ -31,8 +31,8 @@ var $avgtime;
 var $opencount;
 var $stillopencount;
 
-function ReportTrackerAct($span,$group_id,$atid,$start=0,$end=0) {
-	$this->Report();
+function __construct($span,$group_id,$atid,$start=0,$end=0) {
+	parent::__construct();
 
 	$group = group_get_object($group_id);
 	$at = new ArtifactType($group, $atid);

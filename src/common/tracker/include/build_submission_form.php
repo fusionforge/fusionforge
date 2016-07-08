@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems; 2005 GForge, LLC
  * Copyright 2012,2015, Franck Villaume - TrivialDev
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -22,7 +23,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 require_once 'note.php';
-function artifact_submission_form($ath, $group) {
+function artifact_submission_form($ath, $group, $summary='', $details='', $assigned_to=100, $priority=null, $extra_fields=array()) {
 	global $HTML;
 	/*
 		Show the free-form text submitted by the project admin
@@ -30,95 +31,92 @@ function artifact_submission_form($ath, $group) {
 	echo notepad_func();
 	echo $ath->renderSubmitInstructions();
 	echo $HTML->openForm(array('id' => 'trackeraddform', 'action' => '/tracker/?group_id='.$group->getID().'&atid='.$ath->getID(), 'method' => 'post', 'enctype' => 'multipart/form-data'));
-	?>
-	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>" />
-	<input type="hidden" name="func" value="postadd" />
-	<input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
-	<table>
-
-	<tr>
-		<td class="top">
-<?php
+	echo html_e('input', array( 'type'=>'hidden', 'name'=>'form_key', 'value'=>form_generate_key()));
+	echo html_e('input', array( 'type'=>'hidden', 'name'=>'func', 'value'=>'postadd'));
+	echo html_e('input', array( 'type'=>'hidden', 'name'=>'MAX_FILE_SIZE', 'value'=>'10000000'));
+	echo $HTML->listTableTop();
 	if (!session_loggedin()) {
-		echo '<div class="login_warning_msg">';
-		echo $HTML->warning_msg(_('Please').' '.util_make_link('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI')), _('login')));
-		echo _('If you <strong>cannot</strong> login, then enter your email address here')._(':').'<p>
-		<input type="text" name="user_email" size="50" maxlength="255" /></p>
-		</div>';
+		$content = html_ao('div', array('class'=>'login_warning_msg'));
+		$content .= $HTML->warning_msg(_('Please').' '.util_make_link('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI')), _('login')));
+		$content .= _('If you <strong>cannot</strong> login, then enter your email address here')._(':');
+		$content .= html_e('p',array(), html_e('input', array('type'=>'text', 'name'=>'user_email', 'size'=>'50', 'maxlength'=>'255')));
+		$content .= html_ac(html_ap() - 1);
+		$cells = array();
+		$cells[][] = $content;
+		echo $HTML->multiTableRow(array(), $cells);
 	}
-?>
-		</td>
-	</tr>
-	<tr>
-		<td class="top"><strong><?php echo _('For project')._(':'); ?></strong><br /><?php echo $group->getPublicName(); ?></td>
-		<td class="top"><input type="submit" name="submit" value="<?php echo _('Submit'); ?>" /></td>
-	</tr>
+	$cells = array();
+	$cells[] = array(html_e('strong',array(),_('For project')._(':')).html_e('br').$group->getPublicName(), 'class'=>'top');
+	$cells[] = array(html_e('input', array('type'=>'submit', 'name'=>'submit', 'value'=>_('Submit'))), 'class'=>'top');
+	echo $HTML->multiTableRow(array(), $cells);
 
-<?php
-	$ath->renderExtraFields(array(),true,'none',false,'Any',array(),false,'UPDATE');
+	$ath->renderExtraFields($extra_fields,true,'none',false,'Any',array(),false,'NEW');
 
 	if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
-		echo '<tr>
-		<td><strong>'._('Assigned to')._(':').'</strong><br />';
-		echo $ath->technicianBox('assigned_to');
-		echo '&nbsp;'.util_make_link('/tracker/admin/?group_id='.$group->getID().'&atid='.$ath->getID().'&update_users=1', '('._('Admin').')' );
+		$content = html_e('strong', array(), _('Assigned to')._(':')).html_e('br');
+		$content .= $ath->technicianBox('assigned_to', $assigned_to);
+		$content .= '&nbsp;'.util_make_link('/tracker/admin/?group_id='.$group->getID().'&atid='.$ath->getID().'&update_users=1', '('._('Admin').')' );
+		$cells = array();
+		$cells[][] = $content;
 
-		echo '</td><td><strong>'._('Priority')._(':').'</strong><br />';
-		build_priority_select_box('priority');
-		echo '</td></tr>';
+		$content = html_e('strong', array(), _('Priority')._(':')).html_e('br');
+		if (empty($priority)) {
+			$content .= html_build_priority_select_box('priority');
+		} else {
+			$content .= html_build_priority_select_box('priority',$priority);
+		}
+		$cells[][] = $content;
+
+		echo $HTML->multiTableRow(array(), $cells);
 	}
-?>
-	<tr>
-		<td colspan="2"><strong><?php echo _('Summary').utils_requiredField()._(':'); ?></strong><br />
-			<input id="tracker-summary" required="required" type="text" name="summary" size="80" maxlength="255" title="<?php echo util_html_secure(html_get_tooltip_description('summary')); ?>" />
-		</td>
-	</tr>
+	$content = html_e('strong', array(), _('Summary').utils_requiredField()._(':')).html_e('br');
+	$content .= html_e('input', array('id'=>'tracker-summary', 'value'=>$summary, 'required'=>'required', 'type'=>'text', 'name'=>'summary', 'size'=>'80', 'maxlength'=>'255', 'title'=>util_html_secure(html_get_tooltip_description('summary'))));
+	$cells = array();
+	$cells[] = array($content, 'colspan'=>'2');
+	echo $HTML->multiTableRow(array(), $cells);
 
-	<tr>
-		<td colspan="2">
-			<strong><?php echo _('Detailed description').utils_requiredField()._(':'); ?></strong><?php notepad_button('document.forms.trackeraddform.details'); ?><br />
-			<textarea id="tracker-description" required="required" name="details" rows="20" cols="79" title="<?php echo util_html_secure(html_get_tooltip_description('description')); ?> "></textarea>
-		</td>
-	</tr>
+	$content = html_e('strong', array(), _('Detailed description').utils_requiredField()._(':'));
+	$content .= notepad_button('document.forms.trackeraddform.details').html_e('br');
+	$content .= html_e('textarea', array('id'=>'tracker-description', 'required'=>'required', 'name'=>'details', 'rows'=>'20', 'cols'=>'79', 'title'=>util_html_secure(html_get_tooltip_description('description'))), $details, false);
+	$cells = array();
+	$cells[] = array($content, 'colspan'=>'2');
+	echo $HTML->multiTableRow(array(), $cells);
 
-	<tr>
-		<td colspan="2">
-<?php
+	$content = '';
 	if (!session_loggedin()) {
-		echo '<div class="login_warning_msg">';
-		echo $HTML->error_msg(_('Please').' '.util_make_link('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI')), _('login')));
-		echo _('If you <strong>cannot</strong> login, then enter your email address here').':<p>
-		<input type="text" name="user_email" size="30" maxlength="255" /></p>
-		</div>';
+		$content .= html_ao('div', array('class'=>'login_warning_msg'));
+		$content .= $HTML->warning_msg(_('Please').' '.util_make_link('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI')), _('login')));
+		$content .= _('If you <strong>cannot</strong> login, then enter your email address here')._(':');
+		$content .= html_e('p',array(), html_e('input', array('type'=>'text', 'name'=>'user_email', 'size'=>'50', 'maxlength'=>'255')));
+		$content .= html_ac(html_ap() - 1);
 	}
-?>
-		<p>&nbsp;</p>
-		<span class="important"><?php echo _('DO NOT enter passwords or confidential information in your message!'); ?></span>
-		</td>
-	</tr>
+	$content .= html_e('p', array(), '&nbsp;');
+	$content .= html_e('span', array('class'=>'important'), _('DO NOT enter passwords or confidential information in your message!'));
+	$cells = array();
+	$cells[] = array($content, 'colspan'=>'2');
+	echo $HTML->multiTableRow(array(), $cells);
 
-	<tr>
-		<td colspan="2">
-		<div class="file_attachments">
-		<p>
-		<strong><?php echo _('Attach Files')._(':'); ?> </strong> <?php echo('('._('max upload size: '.human_readable_bytes(util_get_maxuploadfilesize())).')') ?><br />
-		<input type="file" name="input_file0" /><br />
-		<input type="file" name="input_file1" /><br />
-		<input type="file" name="input_file2" /><br />
-		<input type="file" name="input_file3" /><br />
-		<input type="file" name="input_file4" />
-		</p>
-		</div>
-		</td>
-	</tr>
+	$content = html_ao('div', array('class'=>'file_attachments'));
+	$content .= html_ao('p');
+	$content .= html_e('strong', array(), _('Attach Files')._(':'));
+	$content .= '('._('max upload size')._(': ').human_readable_bytes(util_get_maxuploadfilesize()).')'.html_e('br');
+	$content .= html_e('input', array('type'=>'file', 'name'=>'input_file0')).html_e('br');
+	$content .= html_e('input', array('type'=>'file', 'name'=>'input_file1')).html_e('br');
+	$content .= html_e('input', array('type'=>'file', 'name'=>'input_file2')).html_e('br');
+	$content .= html_e('input', array('type'=>'file', 'name'=>'input_file3')).html_e('br');
+	$content .= html_e('input', array('type'=>'file', 'name'=>'input_file4'));
+	$content .= html_ac(html_ap() - 2);
+	$cells = array();
+	$cells[] = array($content, 'colspan'=>'2');
+	echo $HTML->multiTableRow(array(), $cells);
 
-	<tr><td colspan="2">
-		<input type="submit" name="submit" value="<?php echo _('Submit'); ?>" />
-		</td>
-	</tr>
+	$content = html_e('input', array('type'=>'submit', 'name'=>'submit', 'value'=>_('Submit')));
+	$cells = array();
+	$cells[] = array($content, 'colspan'=>'2');
+	echo $HTML->multiTableRow(array(), $cells);
 
-	</table>
-<?php
+	echo $HTML->listTableBottom();
+
 	echo $HTML->closeForm();
 	echo $HTML->addRequiredFieldsInfoBox();
 }

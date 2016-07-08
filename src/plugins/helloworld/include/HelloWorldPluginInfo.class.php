@@ -25,8 +25,8 @@ require_once 'HelloWorldPluginDescriptor.class.php';
 
 class HelloWorldPluginInfo extends PluginInfo {
 
-    function HelloWorldPluginInfo(&$plugin) {
-        $this->PluginInfo($plugin);
+    function __construct(&$plugin) {
+        parent::__construct($plugin);
         $this->setPluginDescriptor(new HelloWorldPluginDescriptor());
     }
 

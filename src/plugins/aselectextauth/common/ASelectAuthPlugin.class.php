@@ -22,8 +22,8 @@ global $gfplugins;
 require_once $gfplugins.'aselectextauth/common/Aselect.class.php';
 
 class ASelectextauthPlugin extends Plugin {
-	function ASelectextauthPlugin () {
-		$this->Plugin() ;
+	function __construct() {
+		parent::__construct();
 		$this->name = "aselectextauth";
 		$this->text = _("A-select external authentication");
 		$this->pkg_desc =

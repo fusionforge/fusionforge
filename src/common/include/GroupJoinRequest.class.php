@@ -51,12 +51,9 @@ class GroupJoinRequest extends FFError {
 	var $Group;
 
 	/**
-	 *  Constructor.
-	 *
 	 * @param	bool|Group	$Group		The Group object.
 	 * @param	bool|int	$user_id	The user_id.
 	 * @param	array|bool	$arr		The associative array of data.
-	 * @return	\GroupJoinRequest
 	 */
 	function __construct($Group = false, $user_id = false, $arr = false) {
 		parent::__construct();
@@ -235,7 +232,7 @@ class GroupJoinRequest extends FFError {
 							 $user->getRealName(), $user->getUnixName());
 			$body .= "\n";
 			$body .= sprintf(_('You can approve this request here: %s'),
-							 util_make_url('/project/admin/users.php?group_id='.$this->Group->getId()));
+							 util_make_url('/project/admin/users.php?group_id='.$this->Group->getID()));
 			$body .= "\n\n";
 			$body .= _('Comments by the user:');
 			$body .= "\n";

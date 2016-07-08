@@ -213,6 +213,7 @@
 	text-align: left;
 	vertical-align: middle;
 	width: 100%;
+	margin: 2px;
 }
 
 .docmanDiv td, .docmanDiv th {

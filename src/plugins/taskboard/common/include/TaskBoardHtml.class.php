@@ -28,7 +28,7 @@ class TaskBoardHtml extends TaskBoard {
 	function header($params) {
 		global $HTML, $group_id;
 
-		use_javascript('/js/sortable.js');
+		html_use_tablesorter();
 		use_stylesheet('/plugins/taskboard/css/agile-board.css');
 		use_javascript('/plugins/taskboard/js/agile-board.js');
 		html_use_jqueryui();

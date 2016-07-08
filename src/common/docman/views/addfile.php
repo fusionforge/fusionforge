@@ -129,7 +129,7 @@ if ($dgf->getNested($stateidArr) == NULL) {
 	$cells = array();
 	$cells[][] = _('Upload File').utils_requiredField();
 	$cells[][] = html_e('input', array('type' => 'file', 'required' => 'required', 'name' => 'uploaded_data')).
-			html_e('span', array(), sprintf(_('(max upload size: %s)'), human_readable_bytes(util_get_maxuploadfilesize())), false);
+			html_e('span', array(), '('._('max upload size')._(': ').human_readable_bytes(util_get_maxuploadfilesize()).')', false);
 	echo $HTML->multiTableRow(array('id' => 'filerow'), $cells);
 	$cells = array();
 	$cells[][] = _('URL').utils_requiredField();

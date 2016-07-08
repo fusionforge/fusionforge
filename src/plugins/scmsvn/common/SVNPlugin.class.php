@@ -40,8 +40,8 @@ forge_define_config_item('anonsvn_login','scmsvn', 'anonsvn');
 forge_define_config_item('anonsvn_password','scmsvn', 'anonsvn');
 
 class SVNPlugin extends SCMPlugin {
-	function SVNPlugin() {
-		$this->SCMPlugin();
+	function __construct() {
+		parent::__construct();
 		$this->name = 'scmsvn';
 		$this->text = _('Subversion');
 		$this->pkg_desc =
@@ -674,6 +674,15 @@ some control over it to the project's administrator.");
 		global $last_user, $last_time, $last_tag, $time_ok, $start_time, $end_time,
 			$adds, $deletes, $updates, $commits, $date_key,
 			$messages, $last_message, $times, $revisions, $users, $xml_parser;
+		$commits = 0;
+		$adds = 0;
+		$updates = 0;
+		$deletes = 0;
+		$users = array();
+		$messages = array();
+		$times = array();
+		$revisions = array();
+
 		$group_id = $params['group'];
 		$project = group_get_object($group_id);
 		if (! $project->usesPlugin($this->name)) {
@@ -737,7 +746,7 @@ some control over it to the project's administrator.");
 					$result['ref_id'] = 'browser.php?group_id='.$group_id;
 					$result['description'] = htmlspecialchars($message).' (r'.$revisions[$i].')';
 					$userObject = user_get_object_by_name($users[$i]);
-					if (is_a($userObject, 'GFUser')) {
+					if (is_a($userObject, 'FFUser')) {
 						$result['realname'] = util_display_user($userObject->getUnixName(), $userObject->getID(), $userObject->getRealName());
 					} else {
 						$result['realname'] = '';

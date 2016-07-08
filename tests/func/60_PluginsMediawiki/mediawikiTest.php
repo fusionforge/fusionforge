@@ -29,6 +29,8 @@ class PluginMediawiki extends FForge_SeleniumTestCase
 
 	function testMediawiki()
 	{
+		$this->skip_on_src_installs();
+		$this->skip_on_deb_installs();
 		$this->skip_on_rpm_installs();
 		$this->skip_on_centos();
 

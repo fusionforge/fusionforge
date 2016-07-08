@@ -36,21 +36,19 @@ class ArtifactHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	var $artifactId;
 
 	/**
-	 * Constructor
-	 *
 	 * @param string $words words we are searching for
 	 * @param int $offset offset
 	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
 	 * @param int $groupId group id
 	 * @param int $artifactId artifact id
 	 */
-	function ArtifactHtmlSearchRenderer($words, $offset, $isExact, $groupId, $artifactId) {
+	function __construct($words, $offset, $isExact, $groupId, $artifactId) {
 		$this->groupId = $groupId;
 		$this->artifactId = $artifactId;
 
 		$searchQuery = new ArtifactSearchQuery($words, $offset, $isExact, $groupId, $artifactId);
 
-		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_ARTIFACT, $words, $isExact, $searchQuery, $groupId, 'tracker');
+		parent::__construct(SEARCH__TYPE_IS_ARTIFACT, $words, $isExact, $searchQuery, $groupId, 'tracker');
 
 		$this->tableHeaders = array(
 			_('Id'),

@@ -41,12 +41,10 @@ class admsswPlugin extends Plugin {
 	var $trovecat_id_to_path; // cat_id to path
 
 	/**
-	 * Constructor
-	 *
 	 * @param number $id plugin identifier
 	 */
-	public function __construct($id=0) {
-		$this->Plugin($id) ;
+	function __construct($id=0) {
+		parent::__construct($id);
 		$this->name = "admssw";
 		$this->text = _("ADMS.SW"); // To show in the tabs, use...
 		$this->pkg_desc =

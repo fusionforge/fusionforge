@@ -169,17 +169,17 @@ $server->wsdl->addComplexType(
 	'sequence',
 	'',
 	array(
-	'artifact_id' => array('name'=>'artifact_id', 'type' => 'xsd:int'),
-	'group_artifact_id' => array('name'=>'group_artifact_id', 'type' => 'xsd:int'),
-	'status_id' => array('name'=>'status_id', 'type' => 'xsd:int'),
-	'priority' => array('name'=>'priority', 'type' => 'xsd:int'),
-	'submitted_by' => array('name'=>'submitted_by', 'type' => 'xsd:int'),
-	'assigned_to' => array('name'=>'assigned_to', 'type' => 'xsd:int'),
-	'open_date' => array('name'=>'open_date', 'type' => 'xsd:int'),
-	'close_date' => array('name'=>'close_date', 'type' => 'xsd:int'),
-	'summary' => array('name'=>'summary', 'type' => 'xsd:string'),
-	'details' => array('name'=>'details', 'type' => 'xsd:string'),
-	'extra_fields'=>array('name'=>'extra_fields', 'type' => 'tns:ArrayOfArtifactExtraFieldsData')
+		'artifact_id' => array('name'=>'artifact_id', 'type' => 'xsd:int'),
+		'group_artifact_id' => array('name'=>'group_artifact_id', 'type' => 'xsd:int'),
+		'status_id' => array('name'=>'status_id', 'type' => 'xsd:int'),
+		'priority' => array('name'=>'priority', 'type' => 'xsd:int'),
+		'submitted_by' => array('name'=>'submitted_by', 'type' => 'xsd:int'),
+		'assigned_to' => array('name'=>'assigned_to', 'type' => 'xsd:int'),
+		'open_date' => array('name'=>'open_date', 'type' => 'xsd:int'),
+		'close_date' => array('name'=>'close_date', 'type' => 'xsd:int'),
+		'summary' => array('name'=>'summary', 'type' => 'xsd:string'),
+		'details' => array('name'=>'details', 'type' => 'xsd:string'),
+		'extra_fields'=>array('name'=>'extra_fields', 'type' => 'tns:ArrayOfArtifactExtraFieldsData')
 	)
 );
 //ArrayOfArtifactExtraFieldsData
@@ -464,7 +464,7 @@ $server->register(
 
 function artifactTypeSetMonitor($session_ser,$group_id,$group_artifact_id) {
 	continue_session($session_ser);
-	$a =& artifacttype_get_object($group_artifact_id);
+	$a =& artifactType_get_object($group_artifact_id);
 	if (!$a || !is_object($a)) {
 		return new soap_fault('','artifactTypeSetMonitor','Could Not Get ArtifactType','Could Not Get ArtifactType');
 	} elseif ($a->isError()) {
@@ -476,7 +476,7 @@ function artifactTypeSetMonitor($session_ser,$group_id,$group_artifact_id) {
 
 function artifactTypeIsMonitoring($session_ser,$group_id,$group_artifact_id) {
 	continue_session($session_ser);
-	$a =& artifacttype_get_object($group_artifact_id);
+	$a =& artifactType_get_object($group_artifact_id);
 	if (!$a || !is_object($a)) {
 		return new soap_fault('','artifactTypeIsMonitoring','Could Not Get ArtifactType','Could Not Get ArtifactType');
 	} elseif ($a->isError()) {
@@ -488,7 +488,7 @@ function artifactTypeIsMonitoring($session_ser,$group_id,$group_artifact_id) {
 //
 //	getArtifactTypes
 //
-function &getArtifactTypes($session_ser,$group_id) {
+function getArtifactTypes($session_ser,$group_id) {
 	continue_session($session_ser);
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
@@ -595,7 +595,7 @@ function arrangeExtraFields($extra_fields, $extra_field_info) {
 //	addArtifact
 //
 
-function &addArtifact($session_ser,$group_id,$group_artifact_id,$status_id,
+function addArtifact($session_ser,$group_id,$group_artifact_id,$status_id,
 	$priority,$assigned_to,$summary,$details,$extra_fields) {
 
 	continue_session($session_ser);
@@ -632,7 +632,7 @@ function &addArtifact($session_ser,$group_id,$group_artifact_id,$status_id,
 //
 //	Update Artifact
 //
-function &updateArtifact($session_ser,$group_id,$group_artifact_id,$artifact_id,$status_id,
+function updateArtifact($session_ser,$group_id,$group_artifact_id,$artifact_id,$status_id,
 	$priority,$assigned_to,$summary,$details,$new_artifact_type_id,$extra_fields_data) {
 	continue_session($session_ser);
 	$grp = group_get_object($group_id);
@@ -670,7 +670,7 @@ function &updateArtifact($session_ser,$group_id,$group_artifact_id,$artifact_id,
 //
 //	getArtifactTechnicians
 //
-function &getArtifactTechnicians($session_ser,$group_id,$group_artifact_id) {
+function getArtifactTechnicians($session_ser,$group_id,$group_artifact_id) {
 	continue_session($session_ser);
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
@@ -695,7 +695,7 @@ function &getArtifactTechnicians($session_ser,$group_id,$group_artifact_id) {
 //
 //	getArtifacts
 //
-function &getArtifacts($session_ser,$group_id,$group_artifact_id,$assigned_to,$status) {
+function getArtifacts($session_ser,$group_id,$group_artifact_id,$assigned_to,$status) {
 	continue_session($session_ser);
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
@@ -802,7 +802,7 @@ function artifacts_to_soap($at_arr) {
 //
 //	getArtifactFiles
 //
-function &getArtifactFiles($session_ser,$group_id,$group_artifact_id,$artifact_id) {
+function getArtifactFiles($session_ser,$group_id,$group_artifact_id,$artifact_id) {
 	continue_session($session_ser);
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
@@ -952,7 +952,7 @@ function addArtifactFile($session_ser,$group_id,$group_artifact_id,$artifact_id,
 //
 //	getArtifactMessages
 //
-function &getArtifactMessages($session_ser,$group_id,$group_artifact_id,$artifact_id) {
+function getArtifactMessages($session_ser,$group_id,$group_artifact_id,$artifact_id) {
 	continue_session($session_ser);
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
@@ -1002,7 +1002,7 @@ function artifactmessages_to_soap($at_arr) {
 //
 //	addArtifactMessage
 //
-function &addArtifactMessage($session_ser,$group_id,$group_artifact_id,$artifact_id,$body) {
+function addArtifactMessage($session_ser,$group_id,$group_artifact_id,$artifact_id,$body) {
 	continue_session($session_ser);
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {

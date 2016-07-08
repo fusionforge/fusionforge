@@ -30,18 +30,16 @@ class TroveCat extends FFError {
 	var $data_array;
 
 	/**
-	 * TroveCat() - CONSTRUCTOR.
-	 *
 	 * @param	bool|int	$cat_id	The cat_id.
 	 */
-	function TroveCat($cat_id = false) {
+	function __construct($cat_id = false) {
 
 		if (!$cat_id) {
 			//setting up an empty object
 			//probably going to call create()
-			return true;
+			return;
 		}
-		return $this->fetchData($cat_id);
+		$this->fetchData($cat_id);
 	}
 
     /**
@@ -74,7 +72,7 @@ class TroveCat extends FFError {
 		}
 	}
 
-	function getId() {
+	function getID() {
 		return $this->data_array['trove_cat_id'];
 	}
 
@@ -86,7 +84,7 @@ class TroveCat extends FFError {
 		return $this->data_array['fullname'];
 	}
 
-	function getParentId() {
+	function getParentID() {
 		return $this->data_array['parent'];
 	}
 
@@ -94,7 +92,7 @@ class TroveCat extends FFError {
 		return $this->data_array['root_parent'];
 	}
 
-	function getIdsFullPath() {
+	function getIDsFullPath() {
 		return $this->data_array['fullpath_ids'];
 
 	}

@@ -27,8 +27,8 @@ require_once 'PluginHudsonJobDao.class.php';
 
 class hudsonPlugin extends Plugin {
 
-	function hudsonPlugin($id=0) {
-		$this->Plugin($id);
+	function __construct($id=0) {
+		parent::__construct($id);
 		$this->name = "hudson";
 		$this->text = _('Hudson/Jenkins'); // To show in the tabs, use...
 		$this->pkg_desc =
@@ -147,7 +147,7 @@ control over it to the project administrator.");
 		require_once $gfcommon.'dao/CodendiDataAccess.class.php';
 		$group_id = $params['group_id'];
 		$job_dao = new PluginHudsonJobDao(CodendiDataAccess::instance());
-		$dar = $job_dao->deleteHudsonJobsByGroupID($group_id);
+		$job_dao->deleteHudsonJobsByGroupID($group_id);
 	}
 
 	function myPageBox($params) {
@@ -294,7 +294,7 @@ control over it to the project administrator.");
 						$html .= '  <td>';
 						$html .= '   <ul>';
 						if ($job->hasBuilds()) {
-							$html .= ' <li>'._("Last Build:").util_make_link('/plugins/hudson/?action=view_build&group_id='.$group_id.'&job_id='.$job_id.'&build_id='.$job->getLastBuildNumber(), '# '.$job->getLastBuildNumber()).'</li>';
+							$html .= ' <li>'._("Last Build")._(":").util_make_link('/plugins/hudson/?action=view_build&group_id='.$group_id.'&job_id='.$job_id.'&build_id='.$job->getLastBuildNumber(), '# '.$job->getLastBuildNumber()).'</li>';
 							$html .= ' <li>'._("Last Success")._(": ").util_make_link('/plugins/hudson/?action=view_build&group_id='.$group_id.'&job_id='.$job_id.'&build_id='.$job->getLastSuccessfulBuildNumber(), '# '.$job->getLastSuccessfulBuildNumber()).'</li>';
 							$html .= ' <li>'._("Last Failure")._(": ").util_make_link('/plugins/hudson/?action=view_build&group_id='.$group_id.'&job_id='.$job_id.'&build_id='.$job->getLastFailedBuildNumber(), '# '.$job->getLastFailedBuildNumber()).'</li>';
 						} else {
@@ -303,7 +303,7 @@ control over it to the project administrator.");
 						$html .= '   </ul>';
 						$html .= '  </td>';
 						$html .= '  <td class="widget_lastbuilds_weather">';
-						$html .= _("Weather Report:").'<img src="'.$job->getWeatherReportIcon().'" align="middle" />';
+						$html .= _('Weather Report')._(':').'<img src="'.$job->getWeatherReportIcon().'" align="middle" />';
 						$html .= '  </td>';
 						$html .= ' </tr>';
 						$html .= '</table>';

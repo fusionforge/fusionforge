@@ -103,7 +103,7 @@ if ($group_id && $group_id != forge_get_config('news_group')) {
 		}
 	}
 
-	news_header(array('title'=>_('News admin')));
+	news_header(array('title'=>_('News Admin')));
 
 	if ($approve) {
 		/*

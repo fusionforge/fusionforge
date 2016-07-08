@@ -94,15 +94,12 @@ class Forum extends FFError {
 	var $is_news;
 
 	/**
-	 * Constructor.
-	 *
 	 * @param	$Group
 	 * @param	bool	$group_forum_id
 	 * @param	bool	$arr
 	 * @internal	param	\The $object Group object to which this forum is associated.
 	 * @internal	param	\The $int group_forum_id.
 	 * @internal	param	\The $array associative array of data.
-	 * @return	\Forum	success.
 	 */
 	function __construct(&$Group, $group_forum_id = false, $arr = false, $is_news = false) {
 		parent::__construct();
@@ -125,7 +122,7 @@ class Forum extends FFError {
 			$is_news = $res && db_numrows($res) >= 1;
 		}
 
-      $this->Group =& $Group;
+		$this->Group =& $Group;
 
 		if ($group_forum_id) {
 			if (!$arr || !is_array($arr)) {
@@ -606,7 +603,7 @@ class Forum extends FFError {
 			$this->setMissingParamsError(_('Please tick all checkboxes.'));
 			return false;
 		}
-		if (!forge_check_perm ('forum_admin', $this->Group->getID())) {
+		if (!forge_check_perm('forum_admin', $this->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
 		}

@@ -27,7 +27,7 @@ require_once 'common/dao/include/DataAccessObject.class.php';
  */
 class MailmanListDao extends DataAccessObject {
 
-	public function __construct($da) {
+	function __construct($da) {
 		parent::__construct($da);
 	}
 

@@ -25,7 +25,7 @@ class globalDashboard_Widget_MyArtifacts extends Widget {
 
 	function __construct($owner_type, $plugin) {
 		$this->plugin = $plugin;
-		$this->Widget('plugin_globalDashboard_MyArtifacts');
+		parent::__construct('plugin_globalDashboard_MyArtifacts');
 	}
 
 	function getTitle() {

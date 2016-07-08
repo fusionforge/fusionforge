@@ -1,13 +1,13 @@
 <?php
 /**
- * FusionForge document manager
+ * FusionForge Documentation Manager
  *
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2011-2016, Franck Villaume - TrivialDev
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2011-2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -31,6 +31,7 @@ require_once $gfcommon.'docman/Parsedata.class.php';
 require_once $gfcommon.'docman/DocumentManager.class.php';
 require_once $gfcommon.'docman/DocumentGroup.class.php';
 require_once $gfcommon.'docman/DocumentStorage.class.php';
+require_once $gfcommon.'docman/DocumentVersion.class.php';
 require_once $gfcommon.'include/MonitorElement.class.php';
 
 $DOCUMENT_OBJ = array();
@@ -80,15 +81,12 @@ class Document extends FFError {
 	var $Group;
 
 	/**
-	 * Constructor.
-	 *
 	 * @param	$Group
 	 * @param	bool	$docid
 	 * @param	bool	$arr
 	 * @internal	param	\The $object Group object to which this document is associated.
 	 * @internal	param	\The $int docid.
 	 * @internal	param	\The $array associative array of data.
-	 * @return	\Document
 	 */
 	function __construct(&$Group, $docid = false, $arr = false) {
 		parent::__construct();
@@ -130,16 +128,17 @@ class Document extends FFError {
 	/**
 	 * create - use this function to create a new entry in the database.
 	 *
-	 * @param	string	$filename	The filename of this document. Can be a URL.
-	 * @param	string	$filetype	The filetype of this document. If filename is URL, this should be 'URL';
-	 * @param	string	$data		The absolute path file itself.
-	 * @param	int	$doc_group	The doc_group id of the doc_groups table.
-	 * @param	string	$title		The title of this document.
-	 * @param	string	$description	The description of this document.
-	 * @param	int	$stateid	The state id of the document. At creation, cannot be deleted status.
+	 * @param	string	$filename		The filename of this document. Can be a URL.
+	 * @param	string	$filetype		The filetype of this document. If filename is URL, this should be 'URL';
+	 * @param	string	$data			The absolute path file itself.
+	 * @param	int	$doc_group		The doc_group id of the doc_groups table.
+	 * @param	string	$title			The title of this document.
+	 * @param	string	$description		The description of this document.
+	 * @param	int	$stateid		The state id of the document. At creation, cannot be deleted status.
+	 * @param	int	$createtimestamp	Timestamp of the creation of this document
 	 * @return	bool	success.
 	 */
-	function create($filename, $filetype, $data, $doc_group, $title, $description, $stateid = 0) {
+	function create($filename, $filetype, $data, $doc_group, $title, $description, $stateid = 0, $createtimestamp = null) {
 		if (strlen($title) < 5) {
 			$this->setError(_('Title Must Be At Least 5 Characters'));
 			return false;
@@ -193,26 +192,29 @@ class Document extends FFError {
 		}
 
 		db_begin();
-		$result = db_query_params('INSERT INTO doc_data (group_id, title, description, createdate, doc_group,
-						stateid, filename, filetype, filesize, data_words, created_by)
-						VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)',
-						array($this->Group->getId(),
-							htmlspecialchars($title),
-							htmlspecialchars($description),
-							time(),
-							$doc_group,
-							$doc_initstatus,
-							$filename,
-							$filetype,
-							$filesize,
-							$kwords,
-							$user_id)
-					);
+		$createtimestamp = (($createtimestamp) ? $createtimestamp : time());
+		$result = db_query_params('INSERT INTO doc_data (group_id, createdate, doc_group, stateid)
+						VALUES ($1, $2, $3, $4)',
+						array($this->Group->getID(), $createtimestamp, $doc_group, $doc_initstatus));
 
 		$docid = db_insertid($result, 'doc_data', 'docid');
+		if (!$result || !$docid) {
+			$this->setError(_('Error Adding Document')._(': ').db_error().$result);
+			db_rollback();
+			return false;
+		}
+
+		$dv = new DocumentVersion($this);
+		$idversion = $dv->create($docid, $title, $description, $user_id, $filetype, $filename, $filesize, $kwords, 1, 1, $createtimestamp);
+		if (!$idversion) {
+			$this->setError($dv->getErrorMessage());
+			db_rollback();
+			return false;
+		}
+
 		if ($filesize) {
 			if (is_file($data)) {
-				if (!DocumentStorage::instance()->store($docid, $data)) {
+				if (!DocumentStorage::instance()->store($idversion, $data)) {
 					DocumentStorage::instance()->rollback();
 					db_rollback();
 					$this->setError(DocumentStorage::instance()->getErrorMessage());
@@ -225,17 +227,7 @@ class Document extends FFError {
 			}
 		}
 
-		if (!$result || !$docid) {
-			$this->setError(_('Error Adding Document')._(': ').db_error().$result);
-			if ($filesize) {
-				DocumentStorage::instance()->rollback();
-			}
-			db_rollback();
-			return false;
-		}
-
 		if (!$this->fetchData($docid)) {
-			$this->setError(_('Error fetching Document'));
 			if ($filesize) {
 				DocumentStorage::instance()->rollback();
 			}
@@ -245,7 +237,7 @@ class Document extends FFError {
 
 		if ($perm->isDocEditor()) {
 			$localDg = documentgroup_get_object($doc_group, $this->Group->getID());
-			if (!$localDg->update($localDg->getName(), $localDg->getParentID(), 1)) {
+			if (!$localDg->update($localDg->getName(), $localDg->getParentID(), 1, $localDg->getState(), $createtimestamp)) {
 				$this->setError(_('Error updating document group')._(': ').$localDg->getErrorMessage());
 				if ($filesize) {
 					DocumentStorage::instance()->rollback();
@@ -314,7 +306,9 @@ class Document extends FFError {
 	 * @return	string	The description.
 	 */
 	function getDescription() {
-		return $this->data_array['description'];
+		$result = util_gen_cross_ref($this->data_array['description'], $this->Group->getID());
+		$result = nl2br($result);
+		return $result;
 	}
 
 	/**
@@ -470,7 +464,15 @@ class Document extends FFError {
 	 * @return	string	The file where the file is stored.
 	 */
 	function getFilePath() {
-		return DocumentStorage::instance()->get($this->getID());
+		return DocumentStorage::instance()->get($this->getSerialIDVersion());
+	}
+
+	function getSerialIDVersion() {
+		return $this->data_array['serial_id'];
+	}
+
+	function getVersion() {
+		return $this->data_array['version'];
 	}
 
 	/**
@@ -786,16 +788,20 @@ class Document extends FFError {
 	/**
 	 * update - use this function to update an existing entry in the database.
 	 *
-	 * @param	string	$filename	The filename of this document. Can be a URL.
-	 * @param	string	$filetype	The filetype of this document. If filename is URL, this should be 'URL';
-	 * @param	string	$data		The contents of this document.
-	 * @param	int	$doc_group	The doc_group id of the doc_groups table.
-	 * @param	string	$title		The title of this document.
-	 * @param	string	$description	The description of this document.
-	 * @param	int	$stateid	The state id of the doc_states table.
+	 * @param	string	$filename		The filename of this document. Can be a URL.
+	 * @param	string	$filetype		The filetype of this document. If filename is URL, this should be 'URL';
+	 * @param	string	$data			The contents of this document.
+	 * @param	int	$doc_group		The doc_group id of the doc_groups table.
+	 * @param	string	$title			The title of this document.
+	 * @param	string	$description		The description of this document.
+	 * @param	int	$stateid		The state id of the doc_states table.
+	 * @param	int	$version		The version to update. Default is 1.
+	 * @param	int	$current_version	Is the current version? default is 1.
+	 * @param	int	$new_version		To create a new version? default is 0. == No.
+	 * @param	int	$updatetimestamp	Timestamp of this update.
 	 * @return	boolean	success.
 	 */
-	function update($filename, $filetype, $data, $doc_group, $title, $description, $stateid) {
+	function update($filename, $filetype, $data, $doc_group, $title, $description, $stateid, $version = 1, $current_version = 1, $new_version = 0, $updatetimestamp = null) {
 
 		$perm =& $this->Group->getPermission();
 		if (!$perm || !is_object($perm) || !$perm->isDocEditor()) {
@@ -820,39 +826,94 @@ class Document extends FFError {
 		}
 
 		db_begin();
-		$colArr = array('title', 'description', 'stateid', 'doc_group', 'filetype', 'filename', 'updatedate', 'locked', 'locked_by');
-		$valArr = array(htmlspecialchars($title), htmlspecialchars($description), $stateid, $doc_group, $filetype, $filename, time(), 0, NULL);
+		$updatetimestamp = (($updatetimestamp) ? $updatetimestamp : time());
+		$colArr = array('stateid', 'doc_group', 'updatedate', 'locked', 'locked_by');
+		$valArr = array($stateid, $doc_group, $updatetimestamp, 0, NULL);
 		if (!$this->setValueinDB($colArr, $valArr)) {
 			db_rollback();
 			return false;
 		}
 
 		$localDg = new DocumentGroup($this->Group, $doc_group);
-		if (!$localDg->update($localDg->getName(), $localDg->getParentID(), 1)) {
+		if (!$localDg->update($localDg->getName(), $localDg->getParentID(), 1, $localDg->getState(), $updatetimestamp)) {
 			$this->setOnUpdateError(_('Error updating document group')._(': ').$localDg->getErrorMessage());
+			db_rollback();
+			return false;
+		}
+		if ($new_version) {
+			$dv = new DocumentVersion($this);
+		} else {
+			$dv = documentversion_get_object($version, $this->getID(), $this->Group->getID());
+		}
+		if (!$dv) {
+			$this->setOnUpdateError(_('Error getting document version'));
 			db_rollback();
 			return false;
 		}
 
 		if (filesize($data)) {
+			$filesize = filesize($data);
 			// key words for in-document search
 			if ($this->Group->useDocmanSearch()) {
 				$kw = new Parsedata();
 				$kwords = $kw->get_parse_data($data, $filetype);
-			} else {
-				$kwords = '';
 			}
+		} else {
+			$filesize = $dv->getFileSize();
+			if ($filesize == null) {
+				$filesize = 0;
+			}
+		}
 
-			$colArr = array('filesize', 'data_words');
-			$valArr = array(filesize($data), $kwords);
-			if (!$this->setValueinDB($colArr, $valArr)) {
+		if ($new_version) {
+			if ($dv->isError()) {
+				$this->setOnUpdateError(_('Error updating document version')._(': ').$dv->getErrorMessage());
 				db_rollback();
 				return false;
 			}
-
-			DocumentStorage::instance()->delete($this->getID())->commit();
-			DocumentStorage::instance()->store($this->getID(), $data);
+			//new version to create. We overwrite the param.
+			$version = $dv->getMaxVersionID();
+			$version++;
+			$version_kwords = '';
+			if (isset($kwords)) {
+				$version_kwords = $kwords;
+			}
+			$serial_id = $dv->create($this->getID(), $title, $description, user_getid(), $filetype, $filename, $filesize, $version_kwords, $version, $current_version, $updatetimestamp);
+			if (!$serial_id) {
+				$this->setOnUpdateError(_('Error updating document version')._(': ').$dv->getErrorMessage());
+				db_rollback();
+				return false;
+			}
+		} else {
+			if ($dv->isError() || !$dv->update($version, $title, $description, $filetype, $filename, $filesize, $current_version, $updatetimestamp)) {
+				$this->setOnUpdateError(_('Error updating document version')._(': ').$dv->getErrorMessage());
+				db_rollback();
+				return false;
+			}
 		}
+		if (isset($kwords)) {
+			if(!$dv->updateDataWords($version, $kwords)) {
+				$this->setOnUpdateError(_('Error updating document version')._(': ').$dv->getErrorMessage());
+				db_rollback();
+				return false;
+			}
+		}
+
+		if (filesize($data)) {
+			if ($new_version) {
+				if (!DocumentStorage::instance()->store($serial_id, $data)) {
+					DocumentStorage::instance()->rollback();
+					db_rollback();
+					$this->setError(DocumentStorage::instance()->getErrorMessage());
+					return false;
+				}
+				DocumentStorage::instance()->commit();
+			} else {
+				DocumentStorage::instance()->delete($dv->getID())->commit();
+				DocumentStorage::instance()->store($dv->getID(), $data);
+			}
+		}
+
 		db_commit();
 		$this->fetchData($this->getID());
 		$this->sendNotice(false);
@@ -959,6 +1020,9 @@ class Document extends FFError {
 			return false;
 		}
 
+		db_begin();
+		$dvf = new DocumentVersionFactory($this);
+		$serialids = $dvf->getSerialIDs();
 		$result = db_query_params('DELETE FROM doc_data WHERE docid=$1',
 						array($this->getID()));
 		if (!$result) {
@@ -966,8 +1030,11 @@ class Document extends FFError {
 			db_rollback();
 			return false;
 		}
+		db_commit();
 
-		DocumentStorage::instance()->delete($this->getID())->commit();
+		foreach ($serialids as $serialid) {
+			DocumentStorage::instance()->delete($serialid)->commit();
+		}
 
 		/** we should be able to send a notice that this doc has been deleted .... but we need to rewrite sendNotice
 		 * $this->sendNotice(false);
@@ -1015,7 +1082,7 @@ class Document extends FFError {
 	 * setValueinDB - private function to update columns in db
 	 *
 	 * @param	array	$colArr	the columns to update in array form array('col1', col2')
-	 * @param	int	$valArr	the values to store in array form array('val1', 'val2')
+	 * @param	array	$valArr	the values to store in array form array('val1', 'val2')
 	 * @return	boolean	success or not
 	 * @access	private
 	 */
@@ -1028,14 +1095,8 @@ class Document extends FFError {
 		$qpa = db_construct_qpa(false, 'UPDATE doc_data SET ');
 		for ($i = 0; $i < count($colArr); $i++) {
 			switch ($colArr[$i]) {
-				case 'filesize':
-				case 'data_words':
 				case 'reserved':
 				case 'reserved_by':
-				case 'title':
-				case 'description':
-				case 'filetype':
-				case 'filename':
 				case 'updatedate':
 				case 'stateid':
 				case 'doc_group':
@@ -1065,20 +1126,14 @@ class Document extends FFError {
 			return false;
 		}
 		$localDg = documentgroup_get_object($this->getDocGroupID(), $this->Group->getID());
-		if (!$localDg->update($localDg->getName(), $localDg->getParentID(), 1)) {
+		if (!$localDg->update($localDg->getName(), $localDg->getParentID(), 1, $localDg->getState())) {
 			$this->setError(_('Error updating document group')._(': ').$localDg->getErrorMessage());
 			return false;
 		}
 		for ($i = 0; $i < count($colArr); $i++) {
 			switch ($colArr[$i]) {
-				case 'filesize':
-				case 'data_words':
 				case 'reserved':
 				case 'reserved_by':
-				case 'title':
-				case 'description':
-				case 'filetype':
-				case 'filename':
 				case 'updatedate':
 				case 'stateid':
 				case 'doc_group':
@@ -1091,14 +1146,6 @@ class Document extends FFError {
 		}
 		$this->sendNotice(false);
 		return true;
-	}
-
-	function createVersion() {
-
-	}
-
-	function deleteVersion() {
-
 	}
 }
 

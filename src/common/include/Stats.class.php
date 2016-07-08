@@ -26,20 +26,16 @@
 
 class Stats extends FFError {
 
-	/**
-	 *	Stats - Stats object constructor
-	 */
-	function Stats() {
+	function __construct() {
 		parent::__construct();
-		return true;
 	}
 
 	/**
-	* Returns a resultset consisting of the month, day, total_users, pageviews, and sessions
-	* from the stats_site tables
-	*
-	* @return resource A resultset of month, day, total_users, pageviews, sessions
-	*/
+	 * Returns a resultset consisting of the month, day, total_users, pageviews, and sessions
+	 * from the stats_site tables
+	 *
+	 * @return resource A resultset of month, day, total_users, pageviews, sessions
+	 */
 	function getSiteStats() {
 		$res = db_query_params ("select byday.month,byday.day,byday.site_page_views as pageviews, ss.total_users, ss.sessions from stats_site_pages_by_day byday, stats_site ss where byday.month=ss.month and byday.day = ss.day order by byday.month asc, byday.day asc",
 					array ());

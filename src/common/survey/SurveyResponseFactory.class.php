@@ -64,8 +64,6 @@ class SurveyResponseFactory extends FFError {
 	var $Results;
 
 	/**
-	 *  Constructor.
-	 *
 	 * @param	object	$survey		The Survey object
 	 * @param	object	$question	The Question object to which this survey Response is associated.
 	 */

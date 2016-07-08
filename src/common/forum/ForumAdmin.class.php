@@ -56,15 +56,15 @@ class ForumAdmin extends FFError {
 	 */
 	function PrintAdminMessageOptions($msg_id,$group_id,$thread_id=0,$forum_id=0,$return_to_message=0) {
 
-		$return = util_make_link('/forum/admin/?movethread='.$thread_id.'&msg_id='.$msg_id.'&group_id='.$group_id.'&forum_id='.$forum_id.'&return_to_message='.$return_to_message, html_image('ic/forum_move.gif', '37', '15', array('alt' => _('Move Thread'))));
+		$return = util_make_link('/forum/admin/?movethread='.$thread_id.'&msg_id='.$msg_id.'&group_id='.$group_id.'&forum_id='.$forum_id.'&return_to_message='.$return_to_message, html_image('ic/forum_move.gif', 37, 15, array('alt' => _('Move Thread'))));
 
 		// Following code (if ...) is to keep old implementation but need to be cleaned
 		if ($return_to_message) {
 			$thread_id = 0;
 		}
 
-		$return .= util_make_link('/forum/admin/?editmsg='.$msg_id.'&group_id='.$group_id.'&thread_id='.$thread_id.'&forum_id='.$forum_id, html_image('ic/forum_edit.gif', '37', '15', array('alt' => _("Edit"))));
-		$return .= util_make_link('/forum/admin/?deletemsg='.$msg_id.'&group_id='.$group_id.'&thread_id='.$thread_id.'&forum_id='.$forum_id, html_image('ic/forum_delete.gif', '16', '18', array('alt'=>_("Delete"))));
+		$return .= util_make_link('/forum/admin/?editmsg='.$msg_id.'&group_id='.$group_id.'&thread_id='.$thread_id.'&forum_id='.$forum_id, html_image('ic/forum_edit.gif', 37, 15, array('alt' => _("Edit"))));
+		$return .= util_make_link('/forum/admin/?deletemsg='.$msg_id.'&group_id='.$group_id.'&thread_id='.$thread_id.'&forum_id='.$forum_id, html_image('ic/forum_delete.gif', 16, 18, array('alt'=>_("Delete"))));
 		//		$return .= "<br />";
 		return $return;
 	}
@@ -74,7 +74,7 @@ class ForumAdmin extends FFError {
 	 *
 	 */
 	function PrintAdminOptions() {
-		global $group_id, $forum_id;
+		global $group_id;
 		echo html_e('p', array(), util_make_link('/forum/admin/?group_id='.$group_id.'&add_forum=1', _('Add Forum')).
 			' | '.util_make_link('/forum/admin/pending.php?action=view_pending&group_id='.$group_id, _('Manage Pending Messages')).'<br />');
 	}
@@ -308,7 +308,7 @@ class ForumAdmin extends FFError {
 			$title = array();
 			$title[] = _('Forum Name');
 			$title[] = _('Message');
-			$title[] = "Action";
+			$title[] = _('Action');
 
 			$res = db_query_params('SELECT msg_id,subject,pm.group_forum_id,gl.forum_name FROM forum_pending_messages pm, forum_group_list gl WHERE pm.group_forum_id=$1 AND pm.group_forum_id=gl.group_forum_id AND gl.group_forum_id=$2',
 			array ($forum_id,
@@ -359,7 +359,6 @@ class ForumAdmin extends FFError {
 				$this->PrintAdminOptions();
 			}*/
 
-			$results = array(); //messages
 			for($i=0;$i<count($msgids);$i++) {
 				switch ($doaction[$i]) {
 					case 1 : {
@@ -421,7 +420,6 @@ class ForumAdmin extends FFError {
 						$is_followup_to = db_result($res1,0,"is_followup_to");
 						$posted_by = db_result($res1,0,"posted_by");
 						$has_followups = db_result($res1,0,"has_followups");
-						$most_recent_date = db_result($res1,0,"most_recent_date");
 						if ($fm->insertreleasedmsg($group_forum_id,$subject, $body,$post_date, $thread_id, $is_followup_to,$posted_by,$has_followups,time())) {
 							$feedback .= "($subject) " . _('Pending message released') . "<br />";
 							if (db_numrows($res2)>0) {
@@ -495,7 +493,6 @@ class ForumAdmin extends FFError {
 				}
 			}
 			html_feedback_top($feedback);
-			$page = 0;
 			$this->ExecuteAction("view_pending");
 		}
 	}

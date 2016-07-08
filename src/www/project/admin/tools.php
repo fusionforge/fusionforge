@@ -339,7 +339,7 @@ echo '<td>';
 echo $HTML->boxTop(_('Tool Admin'));
 
 if($group->usesForum()) {
-	echo html_e('p', array(), util_make_link('/forum/admin/?group_id='.$group->getID(), _('Forums Admin')), false);
+	echo html_e('p', array(), util_make_link('/forum/admin/?group_id='.$group->getID(), _('Forums Administration')), false);
 }
 if($group->usesTracker()) {
 	echo html_e('p', array(), util_make_link('/tracker/admin/?group_id='.$group->getID(), _('Trackers Administration')), false);

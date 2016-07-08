@@ -25,13 +25,13 @@ class blocks_Widget_HomeSummary extends Widget {
 	var $title = '';
 	var $content = '';
 
-	function blocks_Widget_HomeSummary($owner_type, $owner_id) {
+	function __construct($owner_type, $owner_id) {
 		$request =& HTTPRequest::instance();
 		if ($owner_type == WidgetLayoutManager::OWNER_TYPE_HOME) {
 			$this->widget_id = 'plugin_blocks_home_summary';
 			$this->group_id = $owner_id;
 		}
-		$this->Widget($this->widget_id);
+		parent::__construct($this->widget_id);
 		$this->setOwner($owner_id, $owner_type);
 
 	}

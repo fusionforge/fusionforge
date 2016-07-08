@@ -8,6 +8,7 @@
  * Copyright (C) 2009-2013 Alain Peyrat, Alcatel-Lucent
  * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
  * Copyright 2014-2015, Franck Villaume - TrivialDev
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -135,8 +136,6 @@ class Artifact extends FFError {
 	var $votes = false;
 
 	/**
-	 * Artifact - constructor.
-	 *
 	 * @param	ArtifactType	$ArtifactType	The ArtifactType object.
 	 * @param	int|bool	$data		(primary key from database OR complete assoc array)
 	 *						ONLY OPTIONAL WHEN YOU PLAN TO IMMEDIATELY CALL ->create()
@@ -905,8 +904,26 @@ class Artifact extends FFError {
 			$description=htmlspecialchars_decode($this->getDetails());
 			$canned_response=100;
 			$new_artifact_type_id=$this->ArtifactType->getID();
-			$assigned_to=$this->getAssignedTo();
-
+			$autoAssignField = $this->getArtifactType()->getAutoAssignField();
+			if ($autoAssignField!=100) {
+				$ef = new ArtifactExtraField($this->getArtifactType(),$autoAssignField);
+				if (!$ef || !is_object($ef)) {
+					exit_error(_('Unable to create ArtifactExtraField Object'),'tracker');
+				} elseif ($ef->isError()) {
+					exit_error($ef->getErrorMessage(),'tracker');
+				} else {
+					$efe = new ArtifactExtraFieldElement($ef,$extra_fields[$autoAssignField]);
+					if (!$efe || !is_object($efe)) {
+						exit_error(_('Unable to create ArtifactExtraFieldElement Object'),'tracker');
+					} elseif ($efe->isError()) {
+						exit_error($efe->getErrorMessage(),'tracker');
+					} else {
+						$assigned_to = $efe->getAutoAssignto();
+					}
+				}
+			} else {
+				$assigned_to = $this->getAssignedTo();
+			}
 			if (!forge_check_perm ('tracker', $this->ArtifactType->getID(), 'tech')) {
 				$this->setPermissionDeniedError();
 				return false;
@@ -1264,6 +1281,8 @@ class Artifact extends FFError {
 			return true;
 		}
 
+		$status_changed = false;
+
 		// If there is a status field, then check against the workflow.
 		// Unless if we change type.
 		if (! isset($changes['Type']) || !$changes['Type']) {
@@ -1276,16 +1295,26 @@ class Artifact extends FFError {
 							WHERE artifact_id=$1 AND extra_field_id=$2',
 						array($this->getID(),
 							$efid));
-					$old = (db_numrows($res)>0) ? db_result($res,0,'field_data') : 100;
-					if ($old != $extra_fields[$efid]) {
+					$from_status = (db_numrows($res)>0) ? db_result($res,0,'field_data') : 100;
+					$to_status = $extra_fields[$efid];
+						if ($from_status != $to_status) {
+						$status_changed = true;
 						$atw = new ArtifactWorkflow($this->ArtifactType, $efid);
-						if (!$atw->checkEvent($old, $extra_fields[$efid])) {
-							$this->setError('Workflow error: You are not authorized to change the Status ('.$old.' => '.$extra_fields[$efid].')');
+						if (!$atw->checkEvent($from_status, $to_status)) {
+							$this->setError('Workflow error: You are not authorized to change the Status ('.$from_status.' => '.$to_status.')');
 							return false;
 						}
 					}
 				}
 			}
+		}
+
+		if ($status_changed) {
+			$CSFid = $this->ArtifactType->getCustomStatusField();
+			$wf = new ArtifactWorkflow($this->ArtifactType, $CSFid);
+			$rf = $wf->getRequiredFields($from_status, $to_status);
+		} else {
+			$rf = array();
 		}
 
 		//now we'll update this artifact for each extra field
@@ -1294,7 +1323,7 @@ class Artifact extends FFError {
 			$type=$ef[$efid]['field_type'];
 
 			// check required fields
-			if ($ef[$efid]['is_required']) {
+			if ($ef[$efid]['is_required'] || in_array($efid, $rf)) {
 				if (!array_key_exists($efid, $extra_fields)) {
 					if ($type == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 						$this->setError(_('Status Custom Field Must Be Set'));
@@ -1327,6 +1356,49 @@ class Artifact extends FFError {
 						}
 					}
 				}
+			}
+
+			// check parent field
+			if ($type == ARTIFACT_EXTRAFIELDTYPE_SELECT ||
+					$type == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT ||
+					$type == ARTIFACT_EXTRAFIELDTYPE_RADIO ||
+					$type == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) {
+				$allowed = false;
+				if (!is_null($ef[$efid]['parent']) && !empty($ef[$efid]['parent']) && $ef[$efid]['parent']!='100') {
+					$aefParentId = $ef[$efid]['parent'];
+					$selectedElmnts = (isset($extra_fields[$aefParentId]) ? $extra_fields[$aefParentId] : '');
+					$aef = new ArtifactExtraField($this->ArtifactType,$efid);
+					$allowed = $aef->getAllowedValues($selectedElmnts);
+				}
+
+				if (is_array($allowed)) {
+					if (($type == ARTIFACT_EXTRAFIELDTYPE_RADIO) || ($type==ARTIFACT_EXTRAFIELDTYPE_SELECT)) {
+						if ($extra_fields[$efid]!='100' && !in_array($extra_fields[$efid],$allowed)) {
+							//$aef = new ArtifactExtraField($this->ArtifactType,$efid);
+							$aefe = new ArtifactExtraFieldElement($aef,$extra_fields[$efid]);
+							$this->setError(sprintf(_('"%1$s" value of the field "%2$s", is not allowed by "%3$s" field values'), $aefe->getName(), $ef[$efid]['field_name'], $ef[$aefParentId]['field_name']));
+							return false;
+						}
+					} else {
+						if (is_array($extra_fields[$efid])) {
+							//$aef = new ArtifactExtraField($this->ArtifactType,$efid);
+							foreach ($extra_fields[$efid] as $val) {
+								if ($val!='100' && !in_array($val,$allowed)) {
+									$aefe = new ArtifactExtraFieldElement($aef,$val);
+									$this->setError(sprintf(_('"%1$s" value of the field "%2$s", is not allowed by "%3$s" field values'), $aefe->getName(), $ef[$efid]['field_name'], $ef[$aefParentId]['field_name']));
+									return false;
+								}
+							}
+						}
+					}
+				}
+			}
+
+
+			// check pattern for text fields
+			if ($type == ARTIFACT_EXTRAFIELDTYPE_TEXT && !empty($ef[$efid]['pattern']) && !empty($extra_fields[$efid]) && !preg_match('/'.$ef[$efid]['pattern'].'/', $extra_fields[$efid])) {
+				$this->setError(sprintf(_("Field %s doesn't match the pattern."), $ef[$efid]['field_name']));
+				return false;
 			}
 //
 //	Force each field to have some value if it is a numeric field

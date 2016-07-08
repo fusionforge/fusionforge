@@ -3,7 +3,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2012,2014 Franck Villaume - TrivialDev
+ * Copyright 2012,2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -39,7 +39,7 @@ $itemid = getIntFromRequest('itemid');
 // hack to use this action as a getLocked action.
 // if the param lock is missing, then we return the status of the lock.
 $lock = getIntFromRequest('lock', 2);
-$type = getStringfromRequest('type');
+$type = getStringFromRequest('type');
 $childgroup_id = getIntFromRequest('childgroup_id');
 if ($childgroup_id) {
 	$g = group_get_object($childgroup_id);

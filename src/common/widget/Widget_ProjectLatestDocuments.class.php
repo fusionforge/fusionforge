@@ -31,7 +31,7 @@ require_once $gfcommon.'docman/DocumentFactory.class.php';
 class Widget_ProjectLatestDocuments extends Widget {
 	var $content;
 	function __construct() {
-		$this->Widget('projectlatestdocuments');
+		parent::__construct('projectlatestdocuments');
 		$request =& HTTPRequest::instance();
 		$pm = ProjectManager::instance();
 		$project = $pm->getProject($request->get('group_id'));
@@ -74,7 +74,7 @@ class Widget_ProjectLatestDocuments extends Widget {
 		if (!count($keys)) {
 			$result .= $HTML->information(_('This project has not published any documents.'));
 		} else {
-			use_javascript('/js/sortable.js');
+			html_use_tablesorter();
 			$result .= $HTML->getJavascripts();
 			$tabletop = array(_('Date'), _('File Name'), _('Title'), _('Author'), _('Path'));
 			$classth = array('', '', '', '', '');

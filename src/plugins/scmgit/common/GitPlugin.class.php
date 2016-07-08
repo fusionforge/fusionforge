@@ -38,8 +38,8 @@ forge_define_config_item('use_ssl', 'scmgit', true);
 forge_set_config_item_bool('use_ssl', 'scmgit');
 
 class GitPlugin extends SCMPlugin {
-	function GitPlugin() {
-		$this->SCMPlugin();
+	function __construct() {
+		parent::__construct();
 		$this->name = 'scmgit';
 		$this->text = _('Git');
 		$this->pkg_desc =
@@ -74,7 +74,7 @@ control over it to the project's administrator.");
 			$result = db_query_params('SELECT sum(updates) AS updates, sum(adds) AS adds FROM stats_cvs_group WHERE group_id=$1',
 						array($project->getID()));
 			$commit_num = db_result($result,0,'updates');
-			$add_num = db_result($result,0,'adds');
+			$add_num = db_result($result, 0, 'adds');
 			if (!$commit_num) {
 				$commit_num = 0;
 			}
@@ -139,9 +139,9 @@ control over it to the project's administrator.");
 						$rows));
 			$htmlRepo = '';
 			for ($i=0; $i<$rows; $i++) {
-				$user_id = db_result($result,$i,'user_id');
-				$user_name = db_result($result,$i,'user_name');
-				$real_name = db_result($result,$i,'realname');
+				$user_id = db_result($result, $i, 'user_id');
+				$user_name = db_result($result, $i, 'user_name');
+				$real_name = db_result($result, $i, 'realname');
 				$htmlRepo .= html_e('tt', array(), 'git clone '.$protocol.'://'.forge_get_config('scm_host').'/anonscm/git/'.$project->getUnixName().'/users/'.$user_name.'.git')
 					. ' ('.util_make_link_u($user_name, $user_id, $real_name).')'
 					. html_e('br');
@@ -162,7 +162,7 @@ control over it to the project's administrator.");
 						  $this->getID()));
 		$rows = db_numrows($result);
 		for ($i=0; $i<$rows; $i++) {
-			$repo_list[] = db_result($result,$i,'repo_name');
+			$repo_list[] = db_result($result, $i, 'repo_name');
 		}
 
 		$b = '';
@@ -355,16 +355,16 @@ control over it to the project's administrator.");
 
 		if (db_numrows($result) > 0) {
 			$tableHeaders = array(
-			_('Name'),
-			_('Adds'),
-			_('Updates')
+					_('Name'),
+					_('Adds'),
+					_('Updates')
 			);
 			$b .= $HTML->listTableTop($tableHeaders, false, '', 'repo-history');
 
 			$i = 0;
 			$total = array('adds' => 0, 'updates' => 0);
 
-			while($data = db_fetch_array($result)) {
+			while ($data = db_fetch_array($result)) {
 				$cells = array();
 				$cells[] = array(util_make_link_u($data['user_name'], $data['user_id'], $data['realname']), 'class' => 'halfwidth');
 				$cells[] = array($data['adds'], 'class' => 'onequarterwidth align-right');
@@ -499,14 +499,14 @@ control over it to the project's administrator.");
 						  $this->getID()));
 		$rows = db_numrows($result);
 		for ($i=0; $i<$rows; $i++) {
-			$repo_name = db_result($result,$i,'repo_name');
-			$description = db_result($result,$i,'description');
-			$clone_url = db_result($result,$i,'clone_url');
+			$repo_name = db_result($result, $i, 'repo_name');
+			$description = db_result($result, $i, 'description');
+			$clone_url = db_result($result, $i, 'clone_url');
 			// Clone URLs need to be validated to prevent a potential arbitrary command execution
 			if (!preg_match('|^[-a-zA-Z0-9:./_]+$|', $clone_url)) {
 				$clone_url = '';
 			}
-			$repodir = $root . '/' .  $repo_name . '.git';
+			$repodir = $root . '/' . $repo_name . '.git';
 			if (!is_file("$repodir/HEAD") && !is_dir("$repodir/objects") && !is_dir("$repodir/refs")) {
 				if ($clone_url != '') {
 					system("cd $root; LC_ALL=C git clone --quiet --bare $clone_url $repodir 2>&1 >/dev/null | grep -v 'warning: You appear to have cloned an empty repository.' >&2");
@@ -542,8 +542,8 @@ control over it to the project's administrator.");
 						  $this->getID()));
 		$rows = db_numrows ($result);
 		for ($i=0; $i<$rows; $i++) {
-			$repo_name = db_result($result,$i,'repo_name');
-			$repodir = $root . '/' .  $repo_name . '.git';
+			$repo_name = db_result($result, $i, 'repo_name');
+			$repodir = $root . '/' . $repo_name . '.git';
 			if (util_is_valid_repository_name($repo_name)) {
 				system("rm -rf $repodir");
 			}
@@ -566,8 +566,8 @@ control over it to the project's administrator.");
 			system("chmod 00755 $root/users");
 		}
 		for ($i=0; $i<$rows; $i++) {
-			$user_name = db_result($result,$i,'user_name');
-			$repodir = $root . '/users/' .  $user_name . '.git';
+			$user_name = db_result($result, $i, 'user_name');
+			$repodir = $root . '/users/' . $user_name . '.git';
 
 			if (!is_dir($repodir) && mkdir ($repodir, 0700)) {
 				chown ($repodir, $user_name);
@@ -580,7 +580,7 @@ control over it to the project's administrator.");
 				$params['main_repo'] = $main_repo;
 
 				util_sudo_effective_user($user_name,
-							 array("GitPlugin","createUserRepo"),
+							 array("GitPlugin", "createUserRepo"),
 							 $params);
 			}
 		}
@@ -681,12 +681,12 @@ control over it to the project's administrator.");
 			$start_time = gmmktime(0, 0, 0, $month, $day, $year);
 			$end_time = $start_time + 86400;
 
-			$usr_adds    = array();
+			$usr_adds = array();
 			$usr_updates = array();
 			$usr_deletes = array();
 			$usr_commits = array();
 
-			$adds    = 0;
+			$adds = 0;
 			$updates = 0;
 			$deletes = 0;
 			$commits = 0;
@@ -708,7 +708,7 @@ control over it to the project's administrator.");
 						array($month_string,
 						       $day,
 						       $project->getID()));
-			if(!$res) {
+			if (!$res) {
 				echo "Error while cleaning stats_cvs_group\n";
 				db_rollback();
 				return false;
@@ -724,7 +724,7 @@ control over it to the project's administrator.");
 				return false ;
 			}
 
-			$last_user    = "";
+			$last_user = "";
 			while (!feof($pipe) && $data = fgets($pipe)) {
 				$line = trim($data);
 				// Replace bad UTF-8 with '?' - it's quite hard to make git output non-UTF-8
@@ -748,11 +748,16 @@ control over it to the project's administrator.");
 					} else {
 						// Short-commit stats line
 						$result = preg_match("/^(?P<mode>[AMD])\s+(?P<file>.+)$/", $line, $matches);
-						if (!$result) continue;
-						if ($last_user == "") continue;
-						if (!isset($usr_adds[$last_user])) $usr_adds[$last_user] = 0;
-						if (!isset($usr_updates[$last_user])) $usr_updates[$last_user] = 0;
-						if (!isset($usr_deletes[$last_user])) $usr_deletes[$last_user] = 0;
+						if (!$result)
+							continue;
+						if ($last_user == "")
+							continue;
+						if (!isset($usr_adds[$last_user]))
+							$usr_adds[$last_user] = 0;
+						if (!isset($usr_updates[$last_user]))
+							$usr_updates[$last_user] = 0;
+						if (!isset($usr_deletes[$last_user]))
+							$usr_deletes[$last_user] = 0;
 						if ($matches['mode'] == 'A') {
 							$usr_adds[$last_user]++;
 							$adds++;
@@ -785,7 +790,7 @@ control over it to the project's administrator.");
 			}
 
 			// building the user list
-			$user_list = array_unique( array_merge( array_keys( $usr_adds ), array_keys( $usr_updates ), array_keys( $usr_deletes ), array_keys( $usr_commits ) ) );
+			$user_list = array_unique(array_merge(array_keys($usr_adds), array_keys($usr_updates), array_keys($usr_deletes), array_keys($usr_commits)));
 
 			foreach ($user_list as $user) {
 				// Trying to get user id from user name or email
@@ -793,10 +798,10 @@ control over it to the project's administrator.");
 				if ($u) {
 					$user_id = $u->getID();
 				} else {
-					$res=db_query_params('SELECT user_id FROM users WHERE lower(realname)=$1 OR lower(email)=$2',
+					$res = db_query_params('SELECT user_id FROM users WHERE lower(realname)=$1 OR lower(email)=$2',
 						array(strtolower($user), strtolower($user2email[$user])));
 					if ($res && db_numrows($res) > 0) {
-						$user_id = db_result($res,0,'user_id');
+						$user_id = db_result($res, 0, 'user_id');
 					} else {
 						continue;
 					}
@@ -859,7 +864,7 @@ control over it to the project's administrator.");
 
 		// TODO: ideally we generate one snapshot per git repository
 		$toprepo = forge_get_config('repos_path', 'scmgit');
-		$repo = $toprepo . '/' . $project->getUnixName() . '/' .  $project->getUnixName() . '.git';
+		$repo = $toprepo . '/' . $project->getUnixName() . '/' . $project->getUnixName() . '.git';
 
 		if (!is_dir($repo)) {
 			if (is_file($snapshot)) {
@@ -899,6 +904,7 @@ control over it to the project's administrator.");
 
 	/**
 	 * widgets - 'widgets' hook handler
+	 *
 	 * @param array $params
 	 * @return boolean
 	 */
@@ -915,6 +921,7 @@ control over it to the project's administrator.");
 
 	/**
 	 * Process the 'widget_instance' hook to create instances of the widgets
+	 *
 	 * @param array $params
 	 */
 	function myPageBox($params) {
@@ -948,7 +955,7 @@ control over it to the project's administrator.");
 			}
 
 			$project_name = $project->getUnixName();
-			$repo = forge_get_config('repos_path', 'scmgit') . '/' . $project_name . '/' . $project_name .'.git';
+			$repo = forge_get_config('repos_path', 'scmgit') . '/' . $project_name . '/' . $project_name . '.git';
 			if (is_dir($repo)) {
 				chdir($repo);
 				$params['output'] .= $project_name.': '.`git gc --quiet 2>&1`;
@@ -963,16 +970,16 @@ control over it to the project's administrator.");
 			return false;
 		}
 		if (in_array('scmgit', $params['show']) || (count($params['show']) < 1)) {
-			$start_time = $params['begin'];
-			$end_time = $params['end'];
-
+			if ($project->enableAnonSCM()) {
+				$server_script = '/anonscm/gitlog';
+			} elseif (session_loggedin()) {
+				$u = session_get_user();
+				$server_script = '/authscm/'.$u->getUnixName().'/gitlog';
+			} else {
+				return false;
+			}
 			// Grab commit log
 			$protocol = forge_get_config('use_ssl', 'scmgit') ? 'https://' : 'http://';
-			$u = session_get_user();
-			if ($project->enableAnonSCM())
-				$server_script = '/anonscm/gitlog';
-			else
-				$server_script = '/authscm/'.$u->getUnixName().'/gitlog';
 			$script_url = $protocol . forge_get_config('scm_host')
 				. $server_script
 				.'?unix_group_name='.$project->getUnixName()
@@ -1009,7 +1016,7 @@ control over it to the project's administrator.");
 					$result['ref_id'] = 'browser.php?group_id='.$group_id.'&commit='.$splitedLine[3];
 					$result['description'] = htmlspecialchars($splitedLine[2]).' (commit '.$splitedLine[3].')';
 					$userObject = user_get_object_by_email($splitedLine[1]);
-					if (is_a($userObject, 'GFUser')) {
+					if (is_a($userObject, 'FFUser')) {
 						$result['realname'] = util_display_user($userObject->getUnixName(), $userObject->getID(), $userObject->getRealName());
 					} else {
 						$result['realname'] = '';

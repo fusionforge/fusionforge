@@ -49,8 +49,6 @@ class FRSReleaseFactory extends FFError {
 	var $FRSNRs;
 
 	/**
-	 * Constructor.
-	 *
 	 * @param	Group	$Group The Group object to which these FRSRs are associated.
 	 */
 	function __construct(& $Group) {

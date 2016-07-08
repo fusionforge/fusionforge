@@ -265,7 +265,6 @@ class Group extends FFError {
 	 */
 	var $plugins_data;
 
-
 	/**
 	 * Associative array of data for the group menu.
 	 *
@@ -344,10 +343,11 @@ class Group extends FFError {
 	 * @param	bool	$is_public
 	 * @param	bool	$send_mail		Whether to send an email or not
 	 * @param	int	$built_from_template	The id of the project this new project is based on
+	 * @param	int	$createtimestamp	The Time Stamp of creation to ease import.
 	 * @return	bool	success or not
 	 */
 	function create(&$user, $group_name, $unix_name, $description, $purpose, $unix_box = 'shell1',
-			$scm_box = 'cvs1', $is_public = true, $send_mail = true, $built_from_template = 0) {
+			$scm_box = 'cvs1', $is_public = true, $send_mail = true, $built_from_template = 0, $createtimestamp = null) {
 		// $user is ignored - anyone can create pending group
 
 		global $SYS;
@@ -386,7 +386,7 @@ class Group extends FFError {
 			}
 
 			db_begin();
-
+			$createtimestamp = (($createtimestamp) ? $createtimestamp : time());
 			$res = db_query_params('
 				INSERT INTO groups(
 					group_name,
@@ -412,7 +412,7 @@ class Group extends FFError {
 							$unix_box,
 							$scm_box,
 							htmlspecialchars($purpose),
-							time(),
+							$createtimestamp,
 							md5(util_randbytes()),
 							$built_from_template));
 			if (!$res || db_affected_rows($res) < 1) {
@@ -443,6 +443,7 @@ class Group extends FFError {
 			$hook_params['group_id'] = $this->getID();
 			$hook_params['group_name'] = $group_name;
 			$hook_params['unix_group_name'] = $unix_name;
+			$hook_params['createtimestamp'] = $createtimestamp;
 			plugin_hook("group_create", $hook_params);
 
 			db_commit();
@@ -2198,7 +2199,7 @@ class Group extends FFError {
 		//
 		//	audit trail
 		//
-		$this->addHistory(_('Added User'),$user_identifier);
+		$this->addHistory(_('Added User'), $user_identifier);
 		db_commit();
 
 		//
@@ -2913,19 +2914,19 @@ if there is anything we can do to help you.
 	/**
 	 * validateGroupName - Validate the group name
 	 *
-	 * @param	string	Group name.
+	 * @param	string	$group_name Project name.
 	 *
-	 * @return	boolean	an error false and set an error is the group name is invalid otherwise return true
+	 * @return	bool	an error false and set an error is the group name is invalid otherwise return true
 	 */
 	function validateGroupName($group_name) {
 		if (strlen($group_name)<3) {
-			$this->setError(_('Group name is too short'));
+			$this->setError(_('Project name is too short'));
 			return false;
 		} elseif (strlen(htmlspecialchars($group_name))>40) {
-			$this->setError(_('Group name is too long'));
+			$this->setError(_('Project name is too long'));
 			return false;
 		} elseif (group_get_object_by_publicname($group_name)) {
-			$this->setError(_('Group name already taken'));
+			$this->setError(_('Project name already taken'));
 			return false;
 		}
 		return true;
@@ -2959,15 +2960,16 @@ if there is anything we can do to help you.
 	/**
 	 * getRoles - Get the roles of the group.
 	 *
+	 * @param	bool	all roles or local roles only. Default is all roles
 	 * @return	array	Roles of this group.
 	 */
-	function getRoles() {
+	function getRoles($global = true) {
 		$result = array();
 
-		$roles = $this->getRolesId();
+		$roles = $this->getRolesId($global);
 		$engine = RBACEngine::getInstance();
 		foreach ($roles as $role_id) {
-			$result[] = $engine->getRoleById ($role_id);
+			$result[] = $engine->getRoleById($role_id);
 		}
 
 		return $result;

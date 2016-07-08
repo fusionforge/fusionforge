@@ -25,9 +25,9 @@
 class webanalyticsPlugin extends Plugin {
 
 	function __construct() {
-		$this->Plugin() ;
-		$this->name = "webanalytics" ;
-		$this->text = _("webanalytics") ;
+		parent::__construct();
+		$this->name = "webanalytics";
+		$this->text = _("webanalytics");
 		$this->pkg_desc =
 _("webanalytics plugin for FusionForge. Get the ability
 to configure specific URL for web analytics tool
@@ -161,7 +161,7 @@ such as Piwik or Google Analytics.");
 				session_require_global_perm('forge_admin');
 				global $gfwww;
 				require_once($gfwww.'admin/admin_utils.php');
-				use_javascript('/js/sortable.js');
+				html_use_tablesorter();
 				site_admin_header(array('title'=>_('Site Global Webanalytics Admin'), 'toptab' => ''));
 				$returned = true;
 				break;
@@ -180,5 +180,14 @@ such as Piwik or Google Analytics.");
 		$user = session_get_user();
 		include $gfplugins.$this->name.'/view/admin/viewGlobalConfiguration.php';
 		return true;
+	}
+
+	/**
+	 * getPluginDescription - display the description of this plugin in pluginman admin page
+	 *
+	 * @return	string	the description
+	 */
+	function getPluginDescription() {
+		return _('Get the ability to configure specific URL for web analytics tool such as Piwik or Google Analytics.');
 	}
 }

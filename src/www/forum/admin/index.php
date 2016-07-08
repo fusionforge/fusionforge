@@ -172,7 +172,7 @@ if (getStringFromRequest('add_forum')) {
 
 	$f = new Forum ($g,$group_forum_id);
 
-	forum_header(array('title'=>_('Permanently Delete Forum')));
+	forum_header(array('title'=>_('Permanently Delete Forum'), 'modal' => 1));
 	echo '<p>
 			<strong>'._('You are about to permanently and irretrievably delete this entire forum and all its contents!').'</strong><br />
 			</p>

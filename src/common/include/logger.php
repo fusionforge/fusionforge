@@ -131,12 +131,17 @@ if (isset($group_id) && is_numeric($group_id) && $group_id) {
 
 }
 
+$log_user_id = user_getid();
+if (!$log_user_id) {
+	$log_user_id = 0;
+}
+
 $res_logger = db_query_params ('INSERT INTO activity_log
-	(day,hour,group_id,browser,ver,platform,time,page,type)
-	VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)',
+	(day,hour,group_id,browser,ver,platform,time,page,type, user_id)
+	VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)',
 	array(date('Ymd'), date('H'),
 		$log_group, browser_get_agent(), browser_get_version(), browser_get_platform(),
-		time(), getStringFromServer('PHP_SELF'), '0'));
+		time(), getStringFromServer('PHP_SELF'), '0', $log_user_id));
 
 if (!$res_logger) {
 	echo "An error occured in the logger.\n";

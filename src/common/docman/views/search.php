@@ -178,7 +178,7 @@ if(!isset($paging) || !$paging)
 
 if ($searchString) {
 	$docsHtmlSearchRenderer = new DocsHtmlSearchRenderer($searchString, $start, $isExact, $group_id, SEARCH__ALL_SECTIONS, $paging, $search_options);
-	$result = $this->searchQuery->getData($this->searchQuery->getRowsPerPage(),$this->searchQuery->getOffset());
+	$result = $docsHtmlSearchRenderer->searchQuery->getData($docsHtmlSearchRenderer->searchQuery->getRowsPerPage(),$docsHtmlSearchRenderer->searchQuery->getOffset());
 	$nbDocs = count($result);
 	$max = $docsHtmlSearchRenderer->searchQuery->getRowsTotalCount();
 	echo $HTML->paging_top($start, $paging, $nbDocs, $max, $redirect_url.'&view=search&textsearch='.$searchString);

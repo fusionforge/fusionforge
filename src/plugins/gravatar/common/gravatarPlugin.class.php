@@ -25,8 +25,8 @@
 class gravatarPlugin extends Plugin {
 
 	function __construct() {
-		$this->Plugin() ;
-		$this->name = "gravatar" ;
+		parent::__construct();
+		$this->name = "gravatar";
 		$this->text = _('Gravatar Plugin');
 		$this->pkg_desc =
 _("This plugin contains the gravatar plugin of FusionForge. It allows each

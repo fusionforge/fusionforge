@@ -142,7 +142,7 @@ if ($forum_id) {
 	}
 
 //echo "<br /> style: $style|max_rows: $max_rows|offset: $offset+";
-	$fmf->setUp($offset, $style, $max_rows, $set);
+	$fmf->setup($offset, $style, $max_rows, $set);
 
 	$style=$fmf->getStyle();
 	$max_rows=$fmf->max_rows;

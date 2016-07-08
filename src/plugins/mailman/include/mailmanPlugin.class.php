@@ -35,12 +35,12 @@ require_once 'mailman/include/events/SystemEvent_MAILMAN_LIST_CREATE.class.php';
 require_once 'mailman/include/events/SystemEvent_MAILMAN_LIST_DELETE.class.php';
 
 class mailmanPlugin extends Plugin {
-	public function __construct($id=0) {
-		$this->Plugin($id);
+	function __construct($id=0) {
+		parent::__construct($id);
 		//$this->setScope(Plugin::SCOPE_PROJECT);
 		$this->name = "mailman" ;
 		$this->text = "Mailman" ; // To show in the tabs, use...
-		$this->_addHook("user_personal_links");//to make a link to the user�s personal part of the plugin
+		$this->_addHook("user_personal_links");//to make a link to the user's personal part of the plugin
 		$this->_addHook("usermenu") ;
 		$this->_addHook("groupmenu");	// To put into the project tabs
 		$this->_addHook("groupisactivecheckbox") ; // The "use ..." checkbox in editgroupinfo
@@ -92,7 +92,7 @@ class mailmanPlugin extends Plugin {
 			}
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][]=$this->text;
-				$params['DIRS'][]='/plugins/mailman/index.php?group_id=' . $group_id . '&pluginname=' . $this->name; // we indicate the part we�re calling is the project one
+				$params['DIRS'][]='/plugins/mailman/index.php?group_id=' . $group_id . '&pluginname=' . $this->name; // we indicate the part we're calling is the project one
                 $params['ADMIN'][]='';
 			}
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );

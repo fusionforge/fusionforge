@@ -28,20 +28,21 @@ require_once $gfplugins.'wiki/common/WikiSearchEngine.class.php';
 
 class FusionForgeWikiPlugin extends Plugin {
 	function __construct() {
-		$this->Plugin() ;
-		$this->name = "wiki" ;
+		parent::__construct();
+		$this->name = "wiki";
 		$this->text = _("Wiki"); // To show in the tabs, use...
 		$this->pkg_desc =
 _("PhpWiki plugin for FusionForge. Allows for one wiki per project, integrated search,
 page edits displayed on activity tab, and multi-project wiki preferences.");
 		$this->installdir = 'wiki';
 		$this->hooks[] = "groupmenu";
-		$this->hooks[] = "groupisactivecheckbox" ; // The "use ..." checkbox in editgroupinfo
+		$this->hooks[] = "groupisactivecheckbox"; // The "use ..." checkbox in editgroupinfo
 		$this->hooks[] = "groupisactivecheckboxpost";
 		$this->hooks[] = "project_admin_plugins"; // to show up in the project admin page
 		$this->hooks[] = 'search_engines';
 		$this->hooks[] = 'full_search_engines';
 		$this->hooks[] = 'cssfile';
+		$this->hooks[] = 'soap';
 		$this->hooks[] = 'project_public_area';
 		$this->hooks[] = 'activity';
 		$this->hooks[] = 'site_admin_option_hook';
@@ -123,6 +124,8 @@ page edits displayed on activity tab, and multi-project wiki preferences.");
 				echo "\n".'    <base href="'.PHPWIKI_BASE_URL.'" />';
 				echo "\n";
 			}
+		} elseif ($hookname == "soap") {
+			$params['requires'][] = dirname(__FILE__).'/soap.php';
 		} elseif ($hookname == "project_public_area") {
 			$project = group_get_object($params['group_id']);
 			if (!$project || !is_object($project)) {
@@ -197,7 +200,7 @@ page edits displayed on activity tab, and multi-project wiki preferences.");
 						$arr['user_name'] = $cache[$data['author']]['user_name'];
 						$arr['user_id'] = $cache[$data['author']]['user_id'];
 						$arr['realname'] = $data['author'];
-						$arr['icon']=html_image("ic/wiki20g.png","20","20",array("alt"=>"Wiki"));
+						$arr['icon']=html_image("ic/wiki20g.png", 20, 20, array('alt'=>'Wiki'));
 						$arr['title'] = 'Wiki Page '.$arr['pagename'];
 						$arr['link'] = '/wiki/g/'.$group_name.'/'.$page_name;
 						$arr['description']= $arr['title'];

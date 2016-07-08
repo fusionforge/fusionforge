@@ -29,8 +29,8 @@ require_once $gfcommon.'include/MonitorElement.class.php';
 * FRS packages that are actively monitored
 */
 class Widget_MyMonitoredFp extends Widget {
-	function Widget_MyMonitoredFp() {
-		$this->Widget('mymonitoredfp');
+	function __construct() {
+		parent::__construct('mymonitoredfp');
 	}
 	function getTitle() {
 		return _('Monitored File Packages');

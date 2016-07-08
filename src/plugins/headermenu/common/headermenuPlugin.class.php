@@ -27,7 +27,7 @@ class headermenuPlugin extends Plugin {
 	var $pageid;
 
 	function __construct() {
-		$this->Plugin();
+		parent::__construct();
 		$this->name = 'headermenu';
 		$this->text = _('Menu Tabs Manager');
 		$this->pkg_desc =
@@ -406,7 +406,7 @@ in the main menu (outermenu) or in the project menu (groupmenu).");
 				html_use_jquery();
 				html_use_jqueryui();
 				use_javascript('/plugins/'.$this->name.'/scripts/HeaderMenuController.js');
-				use_javascript('/js/sortable.js');
+				html_use_tablesorter();
 				site_admin_header(array('title'=>_('Site Global Menu Admin'), 'toptab' => ''));
 				$returned = true;
 				break;
@@ -430,7 +430,7 @@ in the main menu (outermenu) or in the project menu (groupmenu).");
 				html_use_jquery();
 				html_use_jqueryui();
 				use_javascript('/plugins/'.$this->name.'/scripts/HeaderMenuController.js');
-				use_javascript('/js/sortable.js');
+				html_use_tablesorter();
 				$group_id = getIntFromRequest('group_id');
 				$params['toptab'] = 'admin';
 				$params['group'] = $group_id;

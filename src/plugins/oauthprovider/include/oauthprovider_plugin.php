@@ -29,9 +29,9 @@ class oauthproviderPlugin extends ForgeAuthPlugin {
 
 	public $oauth_token = null;
 	public $oauth_user = null;
-	public function __construct() {
+	function __construct() {
 
-		$this->ForgeAuthPlugin() ;
+		parent::__construct();
 
 		$this->name = 'oauthprovider';
 		$this->text = 'OAuthProvider'; // To show in the tabs, use...

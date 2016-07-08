@@ -70,7 +70,7 @@ if ($survey_id) {
 	/* Get questions of this survey */
 	$questions = & $s->getQuestionInstances();
 	foreach ($questions as $cur_question){
-		$qid = $cur_question->getId();
+		$qid = $cur_question->getID();
 		$lib = $cur_question->getQuestion();
 		$type = $cur_question->getQuestionType();
 		$header[$qid]=$lib;

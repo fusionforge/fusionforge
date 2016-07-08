@@ -57,21 +57,18 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	var $selectedParentSections = array();
 
 	/**
-	 * Constructor
-	 *
 	 * @param string $words words we are searching for
 	 * @param int $offset offset
 	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
 	 * @param int $groupId group id
-	 *
 	 */
-	function AdvancedSearchHtmlSearchRenderer($words, $offset, $isExact, $groupId) {
+	function __construct($words, $offset, $isExact, $groupId) {
 		$this->groupId = $groupId;
 		$this->words = $words;
 		$this->isExact = $isExact;
 		$searchQuery =& $this->searchQuery;
 
-		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_ADVANCED, $words, $isExact, $searchQuery, $groupId);
+		parent::__construct(SEARCH__TYPE_IS_ADVANCED, $words, $isExact, $searchQuery, $groupId);
 	}
 
 	/**

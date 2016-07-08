@@ -36,14 +36,10 @@ class MailsForUser extends FFError {
 	var $User;
 
 	/**
-	 *  Constructor.
-	 *
 	 *	@param	object	The Group object to which this  list associated.
 	 */
-	function MailsForUser(&$user) {
+	function __construct(&$user) {
 		$this->User =& $user;
-
-		return true;
 	}
 
 	/**

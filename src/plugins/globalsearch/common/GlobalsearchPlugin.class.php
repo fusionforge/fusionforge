@@ -25,8 +25,8 @@
  */
 
 class globalSearchPlugin extends Plugin {
-	function globalSearchPlugin() {
-		$this->Plugin();
+	function __construct() {
+		parent::__construct();
 		$this->name = "globalsearch";
 		$this->text = _("Globalsearch");
 		$this->pkg_desc =

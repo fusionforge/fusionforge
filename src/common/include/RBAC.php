@@ -56,7 +56,7 @@ abstract class BaseRole extends FFError {
 	// var $perms_array;
 	// var $setting_array;
 
-	public function BaseRole() {
+	public function __construct() {
 		// TODO: document these tables
 		// $gfcommon.'include/rbac_texts.php' may provide some hints...
 		$this->role_values = array(
@@ -867,7 +867,7 @@ abstract class BaseRole extends FFError {
 					// new permission
 					db_execute('insert_into_pfo_role_setting',
 						   array($role_id, $sect, $refid, $value));
-				} else if ($this->perms_array[$sect][$refid] != $value) {
+				} elseif ($this->perms_array[$sect][$refid] != $value) {
 					// changed permission
 					db_execute('update_pfo_role_setting',
 						   array($role_id, $sect, $refid, $value));
@@ -1251,7 +1251,7 @@ class RoleAnonymous extends BaseRole implements PFO_RoleAnonymous {
 	}
 }
 
-class RoleLoggedIn extends BaseRole implements PFO_RoleLoggedIn {
+class RoleLoggedIn extends BaseRole implements PFO_RoleLoggedin {
 	// This role is implemented as a singleton
 	private static $_instance ;
 	private $_role_id ;

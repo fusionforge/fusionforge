@@ -93,6 +93,7 @@ ALTER TABLE people_job_inventory ADD FOREIGN KEY (skill_year_id) REFERENCES peop
 ALTER TABLE people_job ADD FOREIGN KEY (status_id) REFERENCES people_job_status ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE people_job ADD FOREIGN KEY (category_id) REFERENCES people_job_category ON DELETE CASCADE ON UPDATE CASCADE;
 
+DELETE FROM frs_dlstats_filetotal_agg WHERE file_id NOT IN (SELECT file_id FROM frs_file);
 ALTER TABLE frs_dlstats_filetotal_agg ADD FOREIGN KEY (file_id) REFERENCES frs_file ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE forum_agg_msg_count ADD FOREIGN KEY (group_forum_id) REFERENCES forum_group_list ON DELETE CASCADE ON UPDATE CASCADE;
 

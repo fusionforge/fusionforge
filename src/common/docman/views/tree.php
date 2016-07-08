@@ -41,14 +41,14 @@ if (!forge_check_perm('docman', $group_id, 'read')) {
 }
 
 echo html_ao('div', array('id' => 'documenttree'));
-echo html_ao('ul', array('id' => $g->getUnixname().'-tree'));
+echo html_ao('ul', array('id' => $g->getUnixName().'-tree'));
 $dm->getTree($dirid, $linkmenu);
 echo html_ac(html_ap() - 1);
 echo html_ao('script', array('type' => 'text/javascript'));
 echo '//<![CDATA[
 	jQuery(document).ready(function() {
-		if (typeof(jQuery(\'#'.$g->getUnixname().'-tree\').simpleTreeMenu) != "undefined") {
-			jQuery(\'#'.$g->getUnixname().'-tree\').simpleTreeMenu();
+		if (typeof(jQuery(\'#'.$g->getUnixName().'-tree\').simpleTreeMenu) != "undefined") {
+			jQuery(\'#'.$g->getUnixName().'-tree\').simpleTreeMenu();
 		}
 	});
 //]]>'."\n";
@@ -65,14 +65,14 @@ if (isset($projectIDsArray) && is_array($projectIDsArray)) {
 			echo html_e('hr');
 			echo html_e('h5', array(), _('Child project')._(': ').util_make_link('/docman/?group_id='.$groupObject->getID(),$groupObject->getPublicName(), array('title'=>_('Browse document manager for this project.'))), false);
 			$dmc = new DocumentManager($groupObject);
-			echo html_ao('ul', array('id' => $groupObject->getUnixname().'-tree'));
+			echo html_ao('ul', array('id' => $groupObject->getUnixName().'-tree'));
 			$dmc->getTree($dirid, $linkmenu);
 			echo html_ac(html_ap() - 1);
 			echo html_ao('script', array('type' => 'text/javascript'));
 			echo '//<![CDATA[
 				jQuery(document).ready(function() {
-					if (typeof(jQuery(\'#'.$groupObject->getUnixname().'-tree\').simpleTreeMenu) != "undefined") {
-						jQuery(\'#'.$groupObject->getUnixname().'-tree\').simpleTreeMenu();
+					if (typeof(jQuery(\'#'.$groupObject->getUnixName().'-tree\').simpleTreeMenu) != "undefined") {
+						jQuery(\'#'.$groupObject->getUnixName().'-tree\').simpleTreeMenu();
 					}
 				});
 			//]]>'."\n";
@@ -85,8 +85,8 @@ if ($childgroup_id) {
 	echo html_ao('script', array('type' => 'text/javascript'));
 	echo '//<![CDATA[
 			jQuery(document).ready(function() {
-				if (typeof(jQuery(\'#'.$groupObject->getUnixname().'-tree\').simpleTreeMenu) != "undefined") {
-					jQuery(\'#'.$groupObject->getUnixname().'-tree\').simpleTreeMenu(\'expandToNode\', jQuery(\'#leaf-'.$dirid.'\'));
+				if (typeof(jQuery(\'#'.$groupObject->getUnixName().'-tree\').simpleTreeMenu) != "undefined") {
+					jQuery(\'#'.$groupObject->getUnixName().'-tree\').simpleTreeMenu(\'expandToNode\', jQuery(\'#leaf-'.$dirid.'\'));
 				}
 			});
 		//]]>'."\n";
@@ -95,8 +95,8 @@ if ($childgroup_id) {
 	echo html_ao('script', array('type' => 'text/javascript'));
 	echo '//<![CDATA[
 			jQuery(document).ready(function() {
-				if (typeof(jQuery(\'#'.$g->getUnixname().'-tree\').simpleTreeMenu) != "undefined") {
-					jQuery(\'#'.$g->getUnixname().'-tree\').simpleTreeMenu(\'expandToNode\', jQuery(\'#leaf-'.$dirid.'\'));
+				if (typeof(jQuery(\'#'.$g->getUnixName().'-tree\').simpleTreeMenu) != "undefined") {
+					jQuery(\'#'.$g->getUnixName().'-tree\').simpleTreeMenu(\'expandToNode\', jQuery(\'#leaf-'.$dirid.'\'));
 				}
 			});
 		//]]>'."\n";

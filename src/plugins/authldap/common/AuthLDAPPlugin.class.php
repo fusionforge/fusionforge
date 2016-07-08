@@ -33,9 +33,9 @@ class AuthLDAPPlugin extends ForgeAuthPlugin {
 	protected $saved_password;
 	protected $saved_data;
 
-	function AuthLDAPPlugin() {
+	function __construct() {
 		global $gfconfig;
-		$this->ForgeAuthPlugin();
+		parent::__construct();
 		$this->name = "authldap";
 		$this->text = _("LDAP authentication");
 		$this->pkg_desc =
@@ -78,7 +78,7 @@ into the FusionForge database.");
 		if (!$u) {
 			// No user by that name yet, let's create it
 
-			$u = new GFUser();
+			$u = new FFUser();
 
 			$user_data = array();
 
@@ -155,7 +155,6 @@ into the FusionForge database.");
 
 		$mapped_data = array(
 			'username' => $u->getUnixName(),
-			'md5_password' => '',
 			'unix_password' => '',
 			'firstname' => $u->getFirstName(),
 			'lastname' => $u->getLastName(),
@@ -190,8 +189,7 @@ into the FusionForge database.");
 			   $u->usesTooltips(),
 			   trim($mapped_data['email']));
 
-		$u->setMD5Passwd ($mapped_data['md5_password']);
-		if ((substr($mapped_data['unix_password'], 0, 7) == '{crypt}') 
+		if ((substr($mapped_data['unix_password'], 0, 7) == '{crypt}')
 			|| substr($mapped_data['unix_password'], 0, 7) == '{CRYPT}') {
 			$mapped_data['unix_password'] = substr($mapped_data['unix_password'],7);
 		}
