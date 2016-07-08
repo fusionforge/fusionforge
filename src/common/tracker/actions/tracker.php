@@ -565,7 +565,7 @@ switch (getStringFromRequest('func')) {
 			$ah = new ArtifactHtml($ath, $aid);
 			if (!$ah || !is_object($ah)) {
 				exit_error(_('Artifact Could Not Be Created'), 'tracker');
-			} else if ($ah->isError()) {
+			} elseif ($ah->isError()) {
 				exit_error($ah->getErrorMessage(), 'tracker');
 			}
 			if ($ah->castVote(false)) {
@@ -583,7 +583,7 @@ switch (getStringFromRequest('func')) {
 			$ah = new ArtifactHtml($ath, $aid);
 			if (!$ah || !is_object($ah)) {
 				exit_error(_('Artifact Could Not Be Created'), 'tracker');
-			} else if ($ah->isError()) {
+			} elseif ($ah->isError()) {
 				exit_error($ah->getErrorMessage(), 'tracker');
 			}
 			if ($ah->castVote()) {

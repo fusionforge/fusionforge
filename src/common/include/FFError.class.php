@@ -137,10 +137,11 @@ class FFError {
 	 */
 	function setInvalidEmailError($adr=false){
 		$e = _('Invalid Email Address');
-		if ($adr)
+		if ($adr) {
 			$e .= " '" . htmlspecialchars($adr) . "'";
-		else if ($adr !== false)
+		} elseif ($adr !== false) {
 			$e .= ' ' . _('(none given)');
+		}
 		$this->setError($e, ERROR__INVALID_EMAIL_ERROR);
 	}
 

@@ -142,7 +142,7 @@ class Valid_File extends Valid {
 	function isEmptyValue($file) {
 		if(!is_array($file)) {
 			return false;
-		} elseif(parent::isEmptyValue($file['name'])) {
+		} elseif (parent::isEmptyValue($file['name'])) {
 			return false;
 		}
 		return true;
@@ -177,7 +177,7 @@ class ValidFactory {
 	function getInstance($validator, $key = null) {
 		if (is_a($validator, 'Valid')) {
 			return $validator;
-		} else if(is_string($validator) && class_exists('Valid_'.$validator)) {
+		} elseif(is_string($validator) && class_exists('Valid_'.$validator)) {
 			$validator_classname = 'Valid_'.$validator;
 			$v = new $validator_classname($key);
 			return $v;

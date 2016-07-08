@@ -663,12 +663,12 @@ if ($art_arr && $art_cnt > 0) {
 
 				}
 				echo '<td>' . $value .'</td>';
-			} else if ($f == '_votes') {
+			} elseif ($f == '_votes') {
 				$v = $art_arr[$i]->getVotes();
 				echo html_e('td', array(), $v[0], false);
-			} else if ($f == '_voters') {
+			} elseif ($f == '_voters') {
 				echo html_e('td', array(), $voters, false);
-			} else if ($f == '_votage') {
+			} elseif ($f == '_votage') {
 				$v = $art_arr[$i]->getVotes();
 				echo html_e('td', array(), $v[2], false);
 			} else {
