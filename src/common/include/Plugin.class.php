@@ -269,7 +269,7 @@ class Plugin extends FFError {
 			if ($group->usesPlugin($this->name)) {
 				echo 'checked="checked"';
 			}
-			echo ' /><br/>';
+			echo ' />';
 			echo "</td>\n";
 			echo '<td title="'.$this->pkg_desc.'">';
 			echo "<strong>";
