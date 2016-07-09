@@ -333,16 +333,8 @@ require_once $gfcommon.'widget/Widget_HomeVersion.class.php';
 	/* static */ function getExternalWidgets($owner_type) {
 		switch ($owner_type) {
 			case WidgetLayoutManager::OWNER_TYPE_USER:
-				$widgets = array(
-						);
-				break;
 			case WidgetLayoutManager::OWNER_TYPE_GROUP:
-				$widgets = array(
-						);
-				break;
 			case WidgetLayoutManager::OWNER_TYPE_HOME:
-				$widgets = array();
-				break;
 			default:
 				$widgets = array();
 				break;
