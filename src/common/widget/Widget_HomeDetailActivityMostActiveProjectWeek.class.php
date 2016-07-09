@@ -117,12 +117,7 @@ class Widget_HomeDetailActivityMostActiveProjectWeek extends Widget {
 						break;
 					}
 					case 'taskopen':
-					case 'taskclose': {
-						$icon = html_image('ic/taskman20w.png','','',array('alt'=>_('Tasks')));
-						$url = util_make_link('/pm/task.php?func=detailtask&project_task_id='.$activity['subref_id'].'&group_id='.$activity['group_id'].'&group_project_id='.$activity['ref_id'],_('Tasks').' '.$activity['description']);
-						break;
-					}
-
+					case 'taskclose':
 					case 'taskdelete': {
 						$icon = html_image('ic/taskman20w.png','','',array('alt'=>_('Tasks')));
 						$url = util_make_link('/pm/task.php?func=detailtask&project_task_id='.$activity['subref_id'].'&group_id='.$activity['group_id'].'&group_project_id='.$activity['ref_id'],_('Tasks').' '.$activity['description']);
@@ -161,7 +156,9 @@ class Widget_HomeDetailActivityMostActiveProjectWeek extends Widget {
 					continue;
 				}
 				if ($last_day != strftime($date_format, $activity['activity_date'])) {
-					echo '<tr class="tableheading"><td colspan="4">'.strftime($date_format, $activity['activity_date']).'</td></tr>';
+					$cells = array();
+					$cells[] = array(strftime($date_format, $activity['activity_date']), 'colspan' => 4);
+					echo $HTML->multiTableRow(array('class' => 'tableheading'), $cells, true);
 					$last_day=strftime($date_format, $activity['activity_date']);
 				}
 				$cells = array();
