@@ -62,7 +62,6 @@ jQuery(function(){
 			clearTimeout(hideTimer);
 		}
 		var pos = jQuery(this).offset();
-		var width = jQuery(this).width();
 		container.css({
 			left: (pos.left) + 'px',
 			top: pos.top + 10 + 'px'
