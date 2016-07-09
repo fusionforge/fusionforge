@@ -1295,7 +1295,9 @@ function util_ini_get_bytes($id) {
 	$last = strtolower($val[strlen($val)-1]);
 	switch ($last) {
 		case 'g':
+			$val *= 1024;
 		case 'm':
+			$val *= 1024;
 		case 'k':
 			$val *= 1024;
 	}
