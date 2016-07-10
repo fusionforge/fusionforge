@@ -1067,7 +1067,7 @@ if (isset($params['group']) && $params['group']) {
 			';
 	}
 
-	function jQueryUIconfirmBox($id = 'dialog-confirm', $title = 'Confirm your action', $message = 'Do you confirm your action?') {
+	function jQueryUIconfirmBox($id = 'dialog-confirm', $title = _('Confirm your action'), $message = _('Do you confirm your action?')) {
 		$htmlcode = html_ao('div', array('id' => $id, 'title' => $title, 'class' => 'hide'));
 		$htmlcode .= html_e('p', array(), html_e('span', array('class' => 'ui-icon ui-icon-alert', 'style' => 'float:left; margin:0 7px 20px 0;'), '', false).$message);
 		$htmlcode .= html_ac(html_ap() -1);
