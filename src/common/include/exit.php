@@ -23,7 +23,7 @@
  */
 
 /**
- * exit_errorlevel – Return code for exit_error() and friends
+ * exit_errorlevel - Return code for exit_error() and friends
  *
  * A script can set this to explicitly return a different
  * status code than the historic default of 0 to the caller.
