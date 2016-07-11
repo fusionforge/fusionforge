@@ -331,15 +331,7 @@ require_once $gfcommon.'widget/Widget_HomeVersion.class.php';
 		return $widgets;
 	}
 	/* static */ function getExternalWidgets($owner_type) {
-		switch ($owner_type) {
-			case WidgetLayoutManager::OWNER_TYPE_USER:
-			case WidgetLayoutManager::OWNER_TYPE_GROUP:
-			case WidgetLayoutManager::OWNER_TYPE_HOME:
-			default:
-				$widgets = array();
-				break;
-		}
-
+		$widgets = array();
 		$plugins_widgets = array();
 		$em =& EventManager::instance();
 		$em->processEvent('widgets', array('external_widgets' => &$plugins_widgets, 'owner_type' => $owner_type));
