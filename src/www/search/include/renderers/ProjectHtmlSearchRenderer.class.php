@@ -92,7 +92,7 @@ class ProjectHtmlSearchRenderer extends HtmlSearchRenderer {
 		$project_name = str_replace('<b>', '', $project_name);
 		$project_name = str_replace('</b>', '', $project_name);
 
-		if ($result['type'] == 2) {
+		if ($result['type_id'] == 2) {
 			session_redirect('/foundry/'.$project_name.'/');
 		} else {
 			if (forge_check_perm ('project_read', $project_id)) {
