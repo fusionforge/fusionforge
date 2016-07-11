@@ -61,8 +61,6 @@ class TrackersHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$rowColor = 0;
 		$lastTracker = null;
 
-		error_log($result);
-
 		foreach ($result as $row) {
 			//section changed
 			$currentTracker = $row['name'];

@@ -135,7 +135,6 @@ class HtmlSearchRenderer extends SearchRenderer {
 		}
 		$html .= '</td><td class="align-right">';
 		$result = $this->searchQuery->getData($this->searchQuery->getRowsPerPage(),$this->searchQuery->getOffset());
-		error_log(count($result));
 		if ($searchQuery->getRowsTotalCount() > $this->searchQuery->getRowsPerPage()+$this->searchQuery->getOffset()) {
 			$html .= util_make_link($this->getNextResultsUrl(), _('Next Results').' '.html_image('t.png', 15, 15), array('class' => 'next'));
 		} else {
