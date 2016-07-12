@@ -704,8 +704,8 @@ function html_build_select_box_from_arrays($vals, $texts, $select_name,
  * @param	string		$text_100	What to call the '100 row'.  Defaults to none.
  * @param	bool		$show_any	Whether or not to show the 'Any row'
  * @param	string		$text_any	What to call the 'Any row' defaults to any
- * @param	bool		$allowed	Unused
- * @param	array	$attrs
+ * @param	bool		$allowed
+ * @param	array		$attrs
  * @return	string
  */
 function html_build_select_box($result, $name, $checked_val = "xzxz",
