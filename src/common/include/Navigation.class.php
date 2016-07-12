@@ -155,8 +155,9 @@ class Navigation extends FFError {
 		for($i = 0, $max = count($searchEngines); $i < $max; $i++) {
 			$searchEngine =& $searchEngines[$i];
 			$attrs = array('value' => $searchEngine->getType());
-			if ( $type_of_search == $searchEngine->getType())
+			if ( $type_of_search == $searchEngine->getType()) {
 				$attrs['selected'] = 'selected';
+			}
 			$res .= html_e('option', $attrs, $searchEngine->getLabel($parameters), false);
 		}
 		$res .= html_ac(html_ap() - 1);
@@ -342,7 +343,7 @@ class Navigation extends FFError {
 	 *	$result['tooltips']: list of tooltips (html title) of the menu entries;
 	 *	$result['urls']: list of urls of the menu entries;
 	 *	$result['adminurls']: list of urls to the admin pages of the menu entries.
-	 *	If the user has no admin permissions, the correpsonding adminurl is false.
+	 *	If the user has no admin permissions, the corresponding adminurl is false.
 	 *	$result['selected']: number of the menu entry that is currently selected.
 	 */
 	function getProjectMenu($group_id, $toptab = "") {
@@ -360,7 +361,7 @@ class Navigation extends FFError {
 				return null;
 			}
 			if (!$group->isProject()) {
-				return;
+				return null;
 			}
 
 			$selected = 0;

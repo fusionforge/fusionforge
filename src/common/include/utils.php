@@ -49,15 +49,21 @@ function htpasswd_apr1_md5($plainpasswd) {
 	$bin = pack("H32", md5($text));
 	for ($i = 0; $i < 1000; $i++) {
 		$new = ($i & 1)? $plainpasswd : $bin;
-		if ($i % 3) $new .= $salt;
-		if ($i % 7) $new .= $plainpasswd;
+		if ($i % 3) {
+			$new .= $salt;
+		}
+		if ($i % 7) {
+			$new .= $plainpasswd;
+		}
 		$new .= ($i & 1)? $bin : $plainpasswd;
 		$bin = pack("H32", md5($new));
 	}
 	for ($i = 0; $i < 5; $i++) {
 		$k = $i + 6;
 		$j = $i + 12;
-		if ($j == 16) $j = 5;
+		if ($j == 16) {
+			$j = 5;
+		}
 		$tmp = $bin[$i].$bin[$k].$bin[$j].$tmp;
 	}
 	$tmp = chr(0).chr(0).$bin[11].$tmp;
@@ -652,15 +658,18 @@ function validate_email($address) {
  * @return	array	Array of invalid e-mail addresses (if empty, all addresses are OK)
  */
 function validate_emails($addresses, $separator = ',') {
-	if (strlen($addresses) == 0) return array();
-
+	if (strlen($addresses) == 0) {
+		return array();
+	}
 	$emails = explode($separator, $addresses);
 	$ret = array();
 
 	if (is_array($emails)) {
 		foreach ($emails as $email) {
 			$email = trim($email); // This is done so we can validate lists like "a@b.com, c@d.com"
-			if (!validate_email($email)) $ret[] = $email;
+			if (!validate_email($email)) {
+				$ret[] = $email;
+			}
 		}
 	}
 	return $ret;
@@ -876,10 +885,10 @@ function util_is_dot_or_dotdot($dir) {
  */
 function util_containts_dot_or_dotdot($dir) {
 	foreach (explode('/', $dir) as $sub_dir) {
-		if (util_is_dot_or_dotdot($sub_dir))
+		if (util_is_dot_or_dotdot($sub_dir)) {
 			return true;
+		}
 	}
-
 	return false;
 }
 
@@ -891,10 +900,12 @@ function util_containts_dot_or_dotdot($dir) {
  */
 function util_secure_filename($file) {
 	$f = preg_replace("/[^-A-Z0-9_\.]/i", '', $file);
-	if (util_containts_dot_or_dotdot($f))
+	if (util_containts_dot_or_dotdot($f)) {
 		$f = preg_replace("/\./", '_', $f);
-	if (!$f)
+	}
+	if (!$f) {
 		$f = md5($file);
+	}
 	return $f;
 }
 
@@ -922,8 +933,9 @@ function normalized_urlprefix() {
 	$prefix = preg_replace("/^\//", "", $prefix);
 	$prefix = preg_replace("/\/$/", "", $prefix);
 	$prefix = "/$prefix/";
-	if ($prefix == '//')
+	if ($prefix == '//') {
 		$prefix = '/';
+	}
 	return $prefix;
 }
 
@@ -968,8 +980,7 @@ function util_make_base_url($prefix = '') {
  * @return	string	URL
  */
 function util_make_url($path = '', $prefix = '') {
-	$url = util_make_base_url($prefix).util_make_uri($path);
-	return $url;
+	return util_make_base_url($prefix).util_make_uri($path);
 }
 
 /**
@@ -1240,9 +1251,9 @@ if (!function_exists('json_encode')) {
 
 /* returns an integer from http://forge/foo/bar.php/123 or false */
 function util_path_info_last_numeric_component() {
-	if (!isset($_SERVER['PATH_INFO']))
+	if (!isset($_SERVER['PATH_INFO'])) {
 		return false;
-
+	}
 	$ok = false;
 	foreach (str_split($_SERVER['PATH_INFO']) as $x) {
 		if ($x == '/') {
@@ -1256,8 +1267,9 @@ function util_path_info_last_numeric_component() {
 			$ok = false;
 		}
 	}
-	if ($ok)
+	if ($ok) {
 		return $rv;
+	}
 	return false;
 }
 
@@ -1383,9 +1395,15 @@ function util_randnum($min = 0, $max = 32767) {
 // sys_get_temp_dir() is only available for PHP >= 5.2.1
 if (!function_exists('sys_get_temp_dir')) {
 	function sys_get_temp_dir() {
-		if ($temp = getenv('TMP')) return $temp;
-		if ($temp = getenv('TEMP')) return $temp;
-		if ($temp = getenv('TMPDIR')) return $temp;
+		if ($temp = getenv('TMP')) {
+			return $temp;
+		}
+		if ($temp = getenv('TEMP')) {
+			return $temp;
+		}
+		if ($temp = getenv('TMPDIR')) {
+			return $temp;
+		}
 		return '/tmp';
 	}
 }
@@ -1409,15 +1427,17 @@ function util_uri_grabber($unencoded_string, $tryaidtid = false) {
 	$s = preg_replace(
 		'|([a-zA-Z][a-zA-Z0-9+.-]*:[#0-9a-zA-Z;/?:@&=+$,_.!~*\'()%-]+)|',
 		"\x01\$1\x01", $s);
-	if (!$s)
+	if (!$s) {
 		return htmlentities($unencoded_string, ENT_QUOTES, "UTF-8");
+	}
 	/* encode the string */
 	$s = htmlentities($s, ENT_QUOTES, "UTF-8");
 	/* convert 「^Afoo^A」 to 「<a href="foo">foo</a>」 */
 	$s = preg_replace('|\x01([^\x01]+)\x01|',
 		'<a href="$1">$1</a>', $s);
-	if (!$s)
+	if (!$s) {
 		return htmlentities($unencoded_string, ENT_QUOTES, "UTF-8");
+	}
 //	/* convert [#123] to links if found */
 //	if ($tryaidtid)
 //		$s = util_tasktracker_links($s);
@@ -1570,13 +1590,19 @@ function util_init_messages() {
 		$feedback = $warning_msg = $error_msg = '';
 	} else {
 		$feedback = getStringFromCookie('feedback', '');
-		if ($feedback) setcookie('feedback', '', time()-3600, '/');
+		if ($feedback) {
+			setcookie('feedback', '', time()-3600, '/');
+		}
 
 		$warning_msg = getStringFromCookie('warning_msg', '');
-		if ($warning_msg) setcookie('warning_msg', '', time()-3600, '/');
+		if ($warning_msg) {
+			setcookie('warning_msg', '', time()-3600, '/');
+		}
 
 		$error_msg = getStringFromCookie('error_msg', '');
-		if ($error_msg) setcookie('error_msg', '', time()-3600, '/');
+		if ($error_msg) {
+			setcookie('error_msg', '', time()-3600, '/');
+		}
 	}
 }
 
@@ -1706,9 +1732,9 @@ function utils_headers_download($filename, $mimetype, $size) {
 	/* Disarm XSS-able text/html, and inline common text files (*.c, *.pl...) */
 	$force_text_plain  = ',^(text/html|text/.*|application/x-perl|application/x-ruby)$,';
 
-	if (preg_match($force_text_plain, $mimetype))
+	if (preg_match($force_text_plain, $mimetype)) {
 		$mimetype = 'text/plain';
-
+	}
 	if (preg_match($authorized_inline, $mimetype)) {
 		header('Content-Disposition: inline; filename="' . str_replace('"', '', $filename) . '"');
 		header('Content-Type: '. $mimetype);
