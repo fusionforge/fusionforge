@@ -128,7 +128,7 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			$cells[][] = $row['description'];
 			if (forge_check_perm('docman', $document->Group->getID(), 'approve')) {
 				if (!$document->getLocked() && !$document->getReserved()) {
-					$cells[][] = util_make_link('/docman/?group_id='.$document->Group->getID().'&view=listfile&dirid='.$document->getDocGroupID().'&filedetailid='.$document->getID(), html_image('docman/edit-file.png', 22, 22, array('alt' => _('Edit this document'))), array('title' => _('Edit this document')));
+					$cells[][] = util_make_link('/docman/?group_id='.$document->Group->getID().'&view=listfile&dirid='.$document->getDocGroupID().'&filedetailid='.$document->getID(), $HTML->getEditFilePic(_('Edit this document')), array('title' => _('Edit this document')));
 				} else {
 					$cells[][] = '&nbsp;';
 				}
