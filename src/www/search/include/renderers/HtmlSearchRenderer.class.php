@@ -75,8 +75,8 @@ class HtmlSearchRenderer extends SearchRenderer {
 	/**
 	 * writeBody - write the body
 	 */
-	function writeBody() {
-		echo $this->writeResults();
+	function writeBody($withpanel = true) {
+		echo $this->writeResults($withpanel);
 	}
 
 	/**
@@ -92,7 +92,7 @@ class HtmlSearchRenderer extends SearchRenderer {
 	 *
 	 * @return string html output
 	 */
-	function writeResults() {
+	function writeResults($withpanel = true) {
 		global $HTML;
 		$searchQuery =& $this->searchQuery;
 		$query =& $this->query;
@@ -109,8 +109,10 @@ class HtmlSearchRenderer extends SearchRenderer {
 		}
 
 		$result = $this->searchQuery->getData($this->searchQuery->getRowsPerPage(),$this->searchQuery->getOffset());
-		if(count($result) > 0 && ($searchQuery->getRowsTotalCount() > count($result) || $searchQuery->getOffset() != 0 )) {
-			$html .= $this->getNavigationPanel();
+		if ($withpanel) {
+			if (count($result) > 0 && ($searchQuery->getRowsTotalCount() > count($result) || $searchQuery->getOffset() != 0 )) {
+				$html .= $this->getNavigationPanel();
+			}
 		}
 
 		return $html;

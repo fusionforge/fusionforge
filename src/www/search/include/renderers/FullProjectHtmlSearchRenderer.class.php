@@ -73,14 +73,14 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 */
 	function flush() {
 		$this->writeHeader();
-		$this->writeBody();
+		$this->writeBody(true);
 		$this->writeFooter();
 	}
 
 	/**
 	 * writeBody - write the Body of the output
 	 */
-	function writeBody() {
+	function writeBody($withpanel = true) {
 		global $HTML;
 		if (!$this->words) {
 			echo $HTML->error_msg(_('Error')._(': ')._('Please enter a term to search for'));
@@ -195,7 +195,7 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$html .= $this->getPartResult($renderer, 'short_news', _('News Search Results'));
 */
 
-		return $html.'<br />';
+		return $html;
 	}
 
 	/**
