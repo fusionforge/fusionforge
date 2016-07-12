@@ -3229,18 +3229,15 @@ class ProjectComparator {
 			}
 			/* If several projects share a same public name */
 			return strcoll ($a->getUnixName(), $b->getUnixName());
-			break;
 		case 'unixname':
 			return strcmp ($a->getUnixName(), $b->getUnixName());
-			break;
 		case 'id':
 			$aid = $a->getID();
 			$bid = $b->getID();
-			if ($a == $b) {
+			if ($aid == $bid) {
 				return 0;
 			}
-			return ($a < $b) ? -1 : 1;
-			break;
+			return ($aid < $bid) ? -1 : 1;
 		}
 	}
 }
