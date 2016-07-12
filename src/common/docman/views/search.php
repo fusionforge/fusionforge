@@ -7,7 +7,7 @@
  * Copyright 2005, Fabio Bertagnin
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2015, Franck Villaume - TrivialDev
+ * Copyright 2012-2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -170,7 +170,7 @@ if (session_loggedin()) {
 		$LUSER->setPreference('paging', $paging);
 	}
 	/* logged in users get configurable paging */
-	$paging = $LUSER->getPreference('paging');
+	$paging = (int)$LUSER->getPreference('paging');
 }
 
 if(!isset($paging) || !$paging)
@@ -181,8 +181,8 @@ if ($searchString) {
 	$result = $docsHtmlSearchRenderer->searchQuery->getData($docsHtmlSearchRenderer->searchQuery->getRowsPerPage(),$docsHtmlSearchRenderer->searchQuery->getOffset());
 	$nbDocs = count($result);
 	$max = $docsHtmlSearchRenderer->searchQuery->getRowsTotalCount();
-	echo $HTML->paging_top($start, $paging, $nbDocs, $max, $redirect_url.'&view=search&textsearch='.$searchString);
-	$docsHtmlSearchRenderer->writeBody();
-	echo $HTML->paging_bottom($start, $paging, $nbDocs, $redirect_url.'&view=search&textsearch='.$searchString);
+	echo $HTML->paging_top($start, $paging, $max, $nbDocs, $redirect_url.'&view=search&textsearch='.$searchString);
+	$docsHtmlSearchRenderer->writeBody(false);
+	echo $HTML->paging_bottom($start, $paging, $max, $redirect_url.'&view=search&textsearch='.$searchString);
 }
 echo html_ac(html_ap() -2);
