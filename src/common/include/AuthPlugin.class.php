@@ -49,7 +49,7 @@ abstract class ForgeAuthPlugin extends Plugin {
 	}
 
 	// Hook dispatcher
-	function CallHook ($hookname, &$params) {
+	function CallHook($hookname, &$params) {
 		switch ($hookname) {
 		case 'check_auth_session':
 			$this->checkAuthSession($params);

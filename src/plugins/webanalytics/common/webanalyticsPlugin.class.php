@@ -37,7 +37,7 @@ such as Piwik or Google Analytics.");
 		$this->_addHook('site_admin_option_hook');
 	}
 
-	function CallHook ($hookname, &$params) {
+	function CallHook($hookname, &$params) {
 		switch ($hookname) {
 			case "webanalytics_url": {
 				echo $this->getWebAnalyticsCodes();

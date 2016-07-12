@@ -35,7 +35,7 @@ class CpoldPlugin extends SCMPlugin {
 		$this->register();
 	}
 
-	function CallHook ($hookname, &$params) {
+	function CallHook($hookname, &$params) {
 		global $HTML;
 
 		switch ($hookname) {

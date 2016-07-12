@@ -39,7 +39,7 @@ class oslcPlugin extends Plugin {
 		$this->_addHook("project_rdf_metadata"); // will provide some RDF metadata for the project's DOAP profile to 'doaprdf' plugin
 	}
 
-	function CallHook ($hookname, &$params) {
+	function CallHook($hookname, &$params) {
 		global $use_oslcplugin,$G_SESSION,$HTML;
 		if ($hookname == "usermenu") {
 			$text = $this->text; // this is what shows in the tab

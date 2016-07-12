@@ -54,7 +54,7 @@ _("This plugin allows each project to embed MoinMoinWiki under a tab.");
 		}
 	}
 
-	function CallHook ($hookname, &$params) {
+	function CallHook($hookname, &$params) {
 		if (isset($params['group_id'])) {
 			$group_id=$params['group_id'];
 		} elseif (isset($params['group'])) {

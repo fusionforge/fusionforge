@@ -48,7 +48,7 @@ page edits displayed on activity tab, and multi-project wiki preferences.");
 		$this->hooks[] = 'site_admin_option_hook';
 	}
 
-	function CallHook ($hookname, & $params) {
+	function CallHook($hookname, &$params) {
 		if (is_array($params) && isset($params['group']))
 			$group_id=$params['group'];
 		if ($hookname == "groupmenu") {

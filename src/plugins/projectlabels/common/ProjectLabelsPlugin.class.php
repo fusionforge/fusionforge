@@ -12,7 +12,7 @@ for a \"project of the month\".");
 		$this->hooks[] = "site_admin_option_hook" ;
 	}
 
-	function CallHook ($hookname, &$params) {
+	function CallHook($hookname, &$params) {
 		global $HTML;
 
 		if ($hookname == "site_admin_option_hook") {

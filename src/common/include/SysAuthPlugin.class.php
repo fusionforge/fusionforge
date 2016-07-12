@@ -39,7 +39,7 @@ abstract class SysAuthPlugin extends Plugin {
 		$this->_addHook("group_update_members");
 	}
 
-	function CallHook ($hookname, &$params) {
+	function CallHook($hookname, &$params) {
 		$this->$hookname($params);
 	}
 
