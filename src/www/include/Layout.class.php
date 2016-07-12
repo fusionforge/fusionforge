@@ -1338,7 +1338,7 @@ if (isset($params['group']) && $params['group']) {
 		return $this->getPicto('ic/folder.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
-	function getPicto($url, $title, $alt, $width = '20', $height = '20', $otherAttr = array()) {
+	function getPicto($url, $title, $alt, $width = 20, $height = 20, $otherAttr = array()) {
 		$otherAttr['title'] = $title;
 		if (!$alt) {
 			$otherAttr['alt'] = $title;
