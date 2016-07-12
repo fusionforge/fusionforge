@@ -67,7 +67,7 @@ class TrackersSearchQuery extends SearchQuery {
 		$words = $this->getFTIwords();
 
 		if (count($this->phrases)) {
-			$qpa = db_construct_qpa(false, 'SELECT x.* FROM (SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact.summary||$1||artifact.details||$1||coalesce(ff_string_agg(artifact_message.body), $1) as full_string_agg, artifact_idx.vectors FROM artifact LEFT OUTER JOIN artifact_message USING (artifact_id), users, artifact_group_list, artifact_idx WHERE users.user_id = artifact.submitted_by AND artifact.group_artifact_id = artifact_group_list.group_artifact_id AND artifact_group_list.group_id = $2 ',
+			$qpa = db_construct_qpa(false, 'SELECT x.* FROM (SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact.summary||$1||artifact.details||$1||coalesce(ff_string_agg(artifact_message.body), $1) as full_string_agg, artifact_idx.vectors, artifact_group_list.name FROM artifact LEFT OUTER JOIN artifact_message USING (artifact_id), users, artifact_group_list, artifact_idx WHERE users.user_id = artifact.submitted_by AND artifact.group_artifact_id = artifact_group_list.group_artifact_id AND artifact_group_list.group_id = $2 ',
 							array($this->field_separator, $this->groupId));
 
 			if ($this->sections != SEARCH__ALL_SECTIONS) {
@@ -81,7 +81,7 @@ class TrackersSearchQuery extends SearchQuery {
 			$qpa = db_construct_qpa($qpa, ' ORDER BY ts_rank(vectors, to_tsquery($1)) DESC',
 						array($words));
 		} else {
-			$qpa = db_construct_qpa(false, 'SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact_idx.vectors FROM artifact, users, artifact_group_list, artifact_idx WHERE users.user_id = artifact.submitted_by AND artifact.group_artifact_id = artifact_group_list.group_artifact_id AND artifact_group_list.group_id = $1 ',
+			$qpa = db_construct_qpa(false, 'SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact_idx.vectors, artifact_group_list.name FROM artifact, users, artifact_group_list, artifact_idx WHERE users.user_id = artifact.submitted_by AND artifact.group_artifact_id = artifact_group_list.group_artifact_id AND artifact_group_list.group_id = $1 ',
 							array($this->groupId));
 
 			if ($this->sections != SEARCH__ALL_SECTIONS) {
@@ -117,9 +117,7 @@ class TrackersSearchQuery extends SearchQuery {
 	}
 
 	function isRowVisible($row) {
-		return forge_check_perm('tracker',
-								$row['group_artifact_id'],
-								'read');
+		return forge_check_perm('tracker', $row['group_artifact_id'], 'read');
 	}
 }
 
