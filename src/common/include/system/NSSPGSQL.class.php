@@ -31,7 +31,7 @@ class NSSPGSQL extends System {
 	var $UID_ADD = 20000;
 
 	function __construct() {
-		parent::__construc();
+		parent::__construct();
 	}
 
 	/**
