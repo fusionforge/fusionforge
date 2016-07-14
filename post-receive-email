@@ -4,6 +4,8 @@
 #	Thorsten “mirabilos” Glaser <thorsten.glaser@teckids.org>
 # Copyright © 2011, 2012, 2013, 2014, 2015
 #	Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
+# Copyright © 2016
+#	martin f krafft (madduck), Thorsten Glaser (mirabilos)
 #
 # Copyright (c) 2007 Andy Parkins
 #
@@ -527,7 +529,7 @@ generate_update_branch_email()
 	# non-fast-forward updates.
 	echo ""
 	echo "Summary of changes:"
-	git diff-tree $diffopts $oldrev..$newrev
+	git -c core.quotePath=false diff-tree $diffopts $oldrev..$newrev
 }
 
 #
