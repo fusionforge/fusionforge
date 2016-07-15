@@ -78,7 +78,8 @@ $cells[][] = html_e('input', array('pattern' => '.{5,}', 'title' => sprintf(_('(
 echo $HTML->multiTableRow(array(), $cells);
 $cells = array();
 $cells[] = array(_('Description').utils_requiredField()._(':'), 'class' => 'docman_editfile_description');
-$cells[][] = html_e('textarea', array('pattern' => '.{10,}', 'title' => sprintf(_('(at least %s characters)'), 10), 'id' => 'description', 'name' => 'description', 'maxlength' => '255', 'rows' => '5', 'cols' => '50'), '', false);
+$cells[][] = html_e('textarea', array('pattern' => '.{10,}', 'title' => _('Editing tips:http,https or ftp: Hyperlinks. [#NNN]: Tracker id NNN. [TNNN]: Task id NNN. [wiki:&lt;pagename&gt;]: Wiki page. [forum:&lt;msg_id&gt;]: Forum post. [DNNN]: Document id NNN.').
+										sprintf(_('at least %s characters)'), 10), 'id' => 'description', 'name' => 'description', 'maxlength' => '255', 'rows' => '5', 'cols' => '50'), '', false);
 echo $HTML->multiTableRow(array(), $cells);
 $cells = array();
 $cells[] = array(_('Comment')._(':'), 'class' => 'docman_editfile_comment');
