@@ -344,13 +344,11 @@ class Theme_Funky extends Layout {
 				jQuery("button").button();
 				jQuery(":submit").button();
 				jQuery(":reset").button();
+				jQuery(":button").button();
 			});
 			//]]>'."\n";
-		echo html_ac(html_ap() -1);
 		if ($use_tooltips) {
-			echo html_ao('script', array('type' => 'text/javascript'));
-			echo '	//<![CDATA[
-				jQuery(document).ready(
+			echo '	jQuery(document).ready(
 					function() {
 						jQuery(document).tooltip({
 								show: {
@@ -364,10 +362,9 @@ class Theme_Funky extends Layout {
 									}
 								});
 					}
-				);
-			//]]>'."\n";
-			echo html_ac(html_ap() -1);
+				);'."\n";
 		}
+		echo html_ac(html_ap() -1);
 	}
 }
 
