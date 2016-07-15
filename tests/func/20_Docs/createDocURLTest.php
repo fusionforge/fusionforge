@@ -66,7 +66,7 @@ class CreateDocURL extends FForge_SeleniumTestCase
 		$this->clickAndWait("addItemDocmanMenu");
 		$this->click("id=tabs-new-document");
 		$this->type("title", "My document");
-		$this->type("description", "L'année dernière à Noël, 3 < 4, 中国 \" <em>, père & fils");
+		$this->type("//textarea[@name='description']", "L'année dernière à Noël, 3 < 4, 中国 \" <em>, père & fils");
 		$this->click("//input[@name='type' and @value='pasteurl']");
 		$this->type("//input[@name='file_url']", URL."/terms.php");
 		$this->clickAndWait("submit");
@@ -96,7 +96,7 @@ class CreateDocURL extends FForge_SeleniumTestCase
 		$this->clickAndWait("addItemDocmanMenu");
 		$this->click("id=tab-new-document");
 		$this->type("title", "My document");
-		$this->type("description", "My Description");
+		$this->type("//textarea[@name='description']", "My Description");
 		$this->click("//input[@name='type' and @value='pasteurl']");
 		$this->type("file_url", URL."/terms.php");
 		$this->clickAndWait("//input[@name='submit' and @value='Submit Information']");
@@ -106,7 +106,7 @@ class CreateDocURL extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=Docs");
 		$this->clickAndWait("addItemDocmanMenu");
 		$this->type("title", " My document ");
-		$this->type("description", "My Description");
+		$this->type("//textarea[@name='description']", "My Description");
 		$this->click("//input[@name='type' and @value='pasteurl']");
 		$this->type("file_url", URL."/terms.php");
 		$this->clickAndWait("//input[@name='submit' and @value='Submit Information']");
