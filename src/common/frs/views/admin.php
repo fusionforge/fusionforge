@@ -87,15 +87,15 @@ if (count($FRSPackages) == 0) {
 		$title_arr[] = html_e('input', array('id' => 'checkallactive', 'type' => 'checkbox', 'title' => _('Select / Deselect all packages for massaction'), 'onClick' => 'controllerFRS.checkAll("checkedrelidactive", "active")'));
 		$thTitleArray[] = NULL;
 	}
-	$title_arr[] = _('Releases');
-	$thTitleArray[] = NULL;
 	$title_arr[] = _('Package name');
 	$thTitleArray[] = NULL;
 	$title_arr[] = _('Status');
 	$thTitleArray[] = NULL;
 	$title_arr[] = _('Publicly Viewable');
 	$thTitleArray[] = _('To change public visibility of a specific package, you have to use the role permission.');
-	$title_arr[] = _('Actions');
+	$title_arr[] = _('Actions on package');
+	$thTitleArray[] = NULL;
+	$title_arr[] = _('Actions on release');
 	$thTitleArray[] = NULL;
 
 
@@ -107,14 +107,6 @@ if (count($FRSPackages) == 0) {
 		} else {
 			$cells[][] = '';
 		}
-		$content = '';
-		if (forge_check_perm('frs', $FRSPackage->getID(), 'release')) {
-			$content = util_make_link('/frs/?view=qrs&package_id='.$FRSPackage->getID().'&group_id='.$group_id, '<strong>['._('Add Release').']</strong>');
-		}
-		if (forge_check_perm('frs', $FRSPackage->getID(), 'file') && count($FRSPackage->getReleases()))  {
-			$content .= util_make_link('/frs/?view=showreleases&package_id='.$FRSPackage->getID().'&group_id='.$group_id, $HTML->getConfigurePic(_('Edit Releases'), _('Edit Releases')));
-		}
-		$cells[] = array($content, 'style' => 'white-space: nowrap;', 'align' => 'center');
 		$package_nameInputAttr = array('type' => 'text', 'name' => 'package_name', 'value' => html_entity_decode($FRSPackage->getName()), 'size' => 20, 'maxlength' => 60, 'required' => 'required', 'pattern' => '.{3,}', 'title' => _('At least 3 characters'));
 		if (!forge_check_perm('frs', $FRSPackage->getID(), 'admin')) {
 			$package_nameInputAttr['disabled'] = 'disabled';
@@ -131,6 +123,14 @@ if (count($FRSPackages) == 0) {
 			$cells[][] = $FRSPackage->getPublicLabel();
 			$cells[][] = '';
 		}
+		$content = '';
+		if (forge_check_perm('frs', $FRSPackage->getID(), 'release')) {
+			$content .= util_make_link('/frs/?view=qrs&package_id='.$FRSPackage->getID().'&group_id='.$group_id, '<strong>['._('Add Release').']</strong>');
+		}
+		if (forge_check_perm('frs', $FRSPackage->getID(), 'file') && count($FRSPackage->getReleases()))  {
+			$content .= util_make_link('/frs/?view=showreleases&package_id='.$FRSPackage->getID().'&group_id='.$group_id, $HTML->getConfigurePic(_('Edit Releases'), _('Edit Releases')));
+		}
+		$cells[] = array($content, 'style' => 'white-space: nowrap;', 'align' => 'center');
 		echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($key, true), 'id' => 'pkgid'.$FRSPackage->getID()), $cells);
 	}
 	echo $HTML->listTableBottom();
