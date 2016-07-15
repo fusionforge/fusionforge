@@ -105,7 +105,7 @@ DocManListFileController.prototype =
 		var modalId = this.listfileparams.divEditFile;
 		jQuery(modalId).dialog({
 			autoOpen: false,
-			width: 800,
+			width: 900,
 			modal: true,
 			title: this.listfileparams.divEditTitle,
 			buttons: {
@@ -431,7 +431,7 @@ DocManListFileController.prototype =
 						for (var i = 0; i < versionActionsArrayLength; i++) {
 							versionactiontdcontent += val.versionactions[i];
 						}
-						var htmlString = '<tr id="docversion'+val.version+'" ><td>'+val.version+currenttdcontent+'</td><td>'+filenametdcontent[0].outerHTML+'</td><td>'+val.title+'</td><td>'+val.description+'</td><td>'+val.vcomment+'</td><td>'+val.created_by_username+'</td><td>'+val.lastdate+'</td><td>'+val.filesize_readable+'</td><td>'+versionactiontdcontent+'</td></tr>'
+						var htmlString = '<tr id="docversion'+val.version.substr(1)+'" ><td>'+val.version.substr(1)+currenttdcontent+'</td><td>'+filenametdcontent[0].outerHTML+'</td><td>'+val.title+'</td><td>'+val.description+'</td><td>'+val.vcomment+'</td><td>'+val.created_by_username+'</td><td>'+val.lastdate+'</td><td>'+val.filesize_readable+'</td><td>'+versionactiontdcontent+'</td></tr>'
 						jQuery('#sortable_doc_version_table > tbody:last-child').append(htmlString);
 						});
 				}

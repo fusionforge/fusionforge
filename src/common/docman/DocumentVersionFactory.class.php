@@ -61,7 +61,7 @@ class DocumentVersionFactory extends FFError {
 		global $HTML;
 		$versions = array();
 		// everything but data_words! Too much memory consumption.
-		$res = db_query_params('SELECT serial_id, version, docid, current_version, title, updatedate, createdate, created_by, description, filename, filetype, filesize, vcomment FROM doc_data_version WHERE docid = $1 ORDER by version ASC',
+		$res = db_query_params('SELECT serial_id, \'_\'||version as version, docid, current_version, title, updatedate, createdate, created_by, description, filename, filetype, filesize, vcomment FROM doc_data_version WHERE docid = $1 ORDER by version DESC',
 					array($this->Document->getID()), $limit, $start);
 		if ($res) {
 			$numrows = db_numrows($res);
