@@ -62,6 +62,7 @@ if (!forge_check_perm('docman', $g->getID(), 'approve')) {
 $docid = getIntFromRequest('docid');
 $title = getStringFromRequest('title');
 $description = getStringFromRequest('description');
+$vcomment = getStringFromRequest('vcomment');
 $details = getStringFromRequest('details');
 $file_url = getStringFromRequest('file_url');
 $uploaded_data = getUploadedFile('uploaded_data');
@@ -155,6 +156,7 @@ if ($version) {
 	$filetype = $dv->getFileType();
 	$title = $dv->getTitle();
 	$description = $dv->getDescription();
+	$vcomment = $dv->getComment();
 	$version = $current_version_radio;
 	$current_version = 1;
 } else {
@@ -162,7 +164,7 @@ if ($version) {
 	session_redirect($urlparam);
 }
 
-if (!$d->update($filename, $filetype, $data, $doc_group, $title, $description, $stateid, $version, $current_version, $new_version)) {
+if (!$d->update($filename, $filetype, $data, $doc_group, $title, $description, $stateid, $version, $current_version, $new_version, null, $vcomment)) {
 	$error_msg = $d->getErrorMessage();
 	session_redirect($urlparam);
 }

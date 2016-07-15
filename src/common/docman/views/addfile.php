@@ -106,13 +106,15 @@ if ($dgf->getNested($stateidArr) == NULL) {
 	echo $HTML->listTableTop(array(), array(), 'infotable');
 	$cells = array();
 	$cells[][] = _('Document Title').utils_requiredField();
-	$cells[][] = html_e('input', array('pattern' => '.{5,}', 'placeholder' => _('Document Title'), 'title' => sprintf(_('(at least %s characters)'), 5), 'type' => 'text', 'name' => 'title', 'size' => '40', 'maxlength' => '255', 'required' => 'required')).
-			html_e('span', array(), sprintf(_('(at least %s characters)'), 5), false);
+	$cells[][] = html_e('input', array('pattern' => '.{5,}', 'placeholder' => _('Document Title').' '.sprintf(_('(at least %s characters)'), 5), 'type' => 'text', 'name' => 'title', 'size' => 40, 'maxlength' => 255, 'required' => 'required'));
 	echo $HTML->multiTableRow(array(), $cells);
 	$cells = array();
 	$cells[][] = _('Description') .utils_requiredField();
-	$cells[][] = html_e('input', array('pattern' => '.{10,}', 'placeholder' => _('Description'), 'title' => sprintf(_('(at least %s characters)'), 10), 'type' => 'text', 'name' => 'description', 'size' => '50', 'maxlength' => '255', 'required' => 'required')).
-			html_e('span', array(), sprintf(_('(at least %s characters)'), 10), false);
+	$cells[][] = html_e('textarea', array('pattern' => '.{10,}', 'placeholder' => _('Description').' '.sprintf(_('(at least %s characters)'), 10), 'name' => 'description', 'rows' => 5, 'cols' => 50, 'maxlength' => 255, 'required' => 'required'), '', false);
+	echo $HTML->multiTableRow(array(), $cells);
+	$cells = array();
+	$cells[][] = _('Comment');
+	$cells[][] = html_e('textarea', array('placeholder' => _('Add free comment'), 'name' => 'vcomment', 'rows' => 5, 'cols' => 50, 'maxlength' => 255), '', false);
 	echo $HTML->multiTableRow(array(), $cells);
 	$cells = array();
 	$cells[][] = _('Type of Document') .utils_requiredField();

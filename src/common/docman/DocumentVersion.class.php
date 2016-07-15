@@ -113,6 +113,10 @@ class DocumentVersion extends FFError {
 		return $this->data_array['description'];
 	}
 
+	function getComment() {
+		return $this->data_array['vcomment'];
+	}
+
 	/**
 	 * getFileData - the filedata of this document.
 	 *
@@ -134,7 +138,7 @@ class DocumentVersion extends FFError {
 
 	function fetchData($verid) {
 		// everything but data_words. Too much memory consumption.
-		$res = db_query_params('SELECT serial_id, version, docid, current_version, title, updatedate, createdate, created_by, description, filename, filetype, filesize FROM doc_data_version WHERE version = $1 AND docid = $2',
+		$res = db_query_params('SELECT serial_id, version, docid, current_version, title, updatedate, createdate, created_by, description, filename, filetype, filesize, vcomment FROM doc_data_version WHERE version = $1 AND docid = $2',
 					array($verid, $this->Document->getID()));
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError(_('DocumentVersion')._(': ')._('Invalid version id'));
@@ -161,11 +165,11 @@ class DocumentVersion extends FFError {
 	 * @param	int	$current_version	Is it the current version? Defaut is 1 (yes)
 	 * return	bool	true on success
 	 */
-	function create($docid, $title, $description, $created_by, $filetype, $filename, $filesize, $kwords, $createtimetamp, $version = 1, $current_version = 1) {
+	function create($docid, $title, $description, $created_by, $filetype, $filename, $filesize, $kwords, $createtimetamp, $version = 1, $current_version = 1, $vcomment = '') {
 		db_begin();
-		$res = db_query_params('INSERT INTO doc_data_version (docid, title, description, created_by, filetype, filename, filesize, data_words, version, current_version, createdate)
-					VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)',
-					array($docid, htmlspecialchars($title), htmlspecialchars($description), $created_by, $filetype, $filename, $filesize, $kwords, $version, $current_version, $createtimetamp));
+		$res = db_query_params('INSERT INTO doc_data_version (docid, title, description, created_by, filetype, filename, filesize, data_words, version, current_version, createdate, vcomment)
+					VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)',
+					array($docid, htmlspecialchars($title), htmlspecialchars($description), $created_by, $filetype, $filename, $filesize, $kwords, $version, $current_version, $createtimetamp, htmlspecialchars($vcomment)));
 		$serial_id = db_insertid($res, 'doc_data_version', 'serial_id');
 		if (!$res || !$serial_id) {
 			$this->setError(_('Document Version')._(': ')._('Cannot create version.').' '.db_error());
@@ -202,7 +206,8 @@ class DocumentVersion extends FFError {
 		}
 		if ($this->getNumberOfVersions() == 1) {
 			$this->getMaxVersionData();
-			$this->update($this->data_array['version'], $this->data_array['title'], $this->data_array['description'], $this->data_array['filetype'], $this->data_array['filename'], $this->data_array['filesize'], $this->data_array['updatedate'], 1);
+			$this->update($this->data_array['version'], $this->data_array['title'], $this->data_array['description'], $this->data_array['filetype'],
+					$this->data_array['filename'], $this->data_array['filesize'], $this->data_array['updatedate'], 1, $this->data_array['vcomment']);
 		}
 		db_commit();
 		db_free_result($res);
@@ -284,10 +289,10 @@ class DocumentVersion extends FFError {
 	 * @param	int	$current_version	Is the current version to set? Default is yes.
 	 * @return	bool	true on success
 	 */
-	function update($version, $title, $description, $filetype, $filename, $filesize, $updatetimestamp, $current_version = 1) {
+	function update($version, $title, $description, $filetype, $filename, $filesize, $updatetimestamp, $current_version = 1, $vcomment = '') {
 		db_begin();
-		$colArr = array('title', 'description', 'filetype', 'filename', 'filesize', 'current_version', 'updatedate');
-		$valArr = array(htmlspecialchars($title), htmlspecialchars($description), $filetype, $filename, $filesize, $current_version, $updatetimestamp);
+		$colArr = array('title', 'description', 'filetype', 'filename', 'filesize', 'current_version', 'updatedate', 'vcomment');
+		$valArr = array(htmlspecialchars($title), htmlspecialchars($description), $filetype, $filename, $filesize, $current_version, $updatetimestamp, htmlspecialchars($vcomment));
 		if (!$this->setValueinDB($version, $colArr, $valArr)) {
 			db_rollback();
 			return false;
@@ -341,6 +346,7 @@ class DocumentVersion extends FFError {
 
 		$qpa = db_construct_qpa(false, 'UPDATE doc_data_version SET ');
 		for ($i = 0; $i < count($colArr); $i++) {
+			$qpa_string = '';
 			switch ($colArr[$i]) {
 				case 'filesize':
 				case 'title':
@@ -349,12 +355,12 @@ class DocumentVersion extends FFError {
 				case 'filename':
 				case 'updatedate':
 				case 'data_words':
-				case 'current_version': {
+				case 'current_version':
+				case 'vcomment': {
 					if ($i) {
-						$qpa = db_construct_qpa($qpa, ',');
+						$qpa_string .= ',';
 					}
-					$qpa = db_construct_qpa($qpa, $colArr[$i]);
-					$qpa = db_construct_qpa($qpa, ' = $1 ', array($valArr[$i]));
+					$qpa = db_construct_qpa($qpa, $qpa_string.$colArr[$i].' = $1 ', array($valArr[$i]));
 					break;
 				}
 				default: {
@@ -372,13 +378,15 @@ class DocumentVersion extends FFError {
 		}
 		for ($i = 0; $i < count($colArr); $i++) {
 			switch ($colArr[$i]) {
+				// we do not store data_words in memory!
 				case 'filesize':
 				case 'title':
 				case 'description':
 				case 'filetype':
 				case 'filename':
 				case 'updatedate':
-				case 'current_version': {
+				case 'current_version':
+				case 'vcomment': {
 					$this->data_array[$colArr[$i]] = $valArr[$i];
 				}
 			}

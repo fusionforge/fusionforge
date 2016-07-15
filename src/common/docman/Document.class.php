@@ -135,10 +135,11 @@ class Document extends FFError {
 	 * @param	string	$title			The title of this document.
 	 * @param	string	$description		The description of this document.
 	 * @param	int	$stateid		The state id of the document. At creation, cannot be deleted status.
+	 * @param	string	$vcomment		The comment of the new created version
 	 * @param	int	$createtimestamp	Timestamp of the creation of this document
 	 * @return	bool	success.
 	 */
-	function create($filename, $filetype, $data, $doc_group, $title, $description, $stateid = 0, $createtimestamp = null) {
+	function create($filename, $filetype, $data, $doc_group, $title, $description, $stateid = 0, $vcomment = '', $createtimestamp = null) {
 		if (strlen($title) < 5) {
 			$this->setError(_('Title Must Be At Least 5 Characters'));
 			return false;
@@ -205,7 +206,7 @@ class Document extends FFError {
 		}
 
 		$dv = new DocumentVersion($this);
-		$idversion = $dv->create($docid, $title, $description, $user_id, $filetype, $filename, $filesize, $kwords, $createtimestamp, 1, 1);
+		$idversion = $dv->create($docid, $title, $description, $user_id, $filetype, $filename, $filesize, $kwords, $createtimestamp, 1, 1, $vcomment);
 		if (!$idversion) {
 			$this->setError($dv->getErrorMessage());
 			db_rollback();
@@ -799,9 +800,10 @@ class Document extends FFError {
 	 * @param	int	$current_version	Is the current version? default is 1.
 	 * @param	int	$new_version		To create a new version? default is 0. == No.
 	 * @param	int	$updatetimestamp	Timestamp of this update.
+	 * @param	string	$vcomment		The comment of this version
 	 * @return	boolean	success.
 	 */
-	function update($filename, $filetype, $data, $doc_group, $title, $description, $stateid, $version = 1, $current_version = 1, $new_version = 0, $updatetimestamp = null) {
+	function update($filename, $filetype, $data, $doc_group, $title, $description, $stateid, $version = 1, $current_version = 1, $new_version = 0, $updatetimestamp = null, $vcomment = '') {
 
 		$perm =& $this->Group->getPermission();
 		if (!$perm || !is_object($perm) || !$perm->isDocEditor()) {
@@ -878,14 +880,14 @@ class Document extends FFError {
 			if (isset($kwords)) {
 				$version_kwords = $kwords;
 			}
-			$serial_id = $dv->create($this->getID(), $title, $description, user_getid(), $filetype, $filename, $filesize, $version_kwords, $updatetimestamp, $version, $current_version);
+			$serial_id = $dv->create($this->getID(), $title, $description, user_getid(), $filetype, $filename, $filesize, $version_kwords, $updatetimestamp, $version, $current_version, $vcomment);
 			if (!$serial_id) {
 				$this->setOnUpdateError(_('Error updating document version')._(': ').$dv->getErrorMessage());
 				db_rollback();
 				return false;
 			}
 		} else {
-			if ($dv->isError() || !$dv->update($version, $title, $description, $filetype, $filename, $filesize, $updatetimestamp, $current_version)) {
+			if ($dv->isError() || !$dv->update($version, $title, $description, $filetype, $filename, $filesize, $updatetimestamp, $current_version, $vcomment)) {
 				$this->setOnUpdateError(_('Error updating document version')._(': ').$dv->getErrorMessage());
 				db_rollback();
 				return false;

@@ -410,10 +410,10 @@ DocManListFileController.prototype =
 					jQuery('#sortable_doc_version_table > tbody').children().remove();
 					eachdocparams = this.docparams;
 					jQuery.each(data, function (i, val) {
-						//_('Current'), _('Filename'), _('Title'), _('Description'), _('Author'), _('Last Time'), _('Size'), _('Actions'));
-						currenttdcontent = jQuery('<input id="doc_version_cv_radio" name="doc_version_cv_radio" type="checkbox" value="'+val.version+'" onclick="return false" >');
+						//_('VersionID/Current'), _('Filename'), _('Title'), _('Description'), _('Comment'), _('Author'), _('Last Time'), _('Size'), _('Actions'));
+						currenttdcontent = '';
 						if (val.current_version == 1) {
-							currenttdcontent.attr('checked', 'checked');
+							currenttdcontent += ' (x)';
 						}
 						if (eachdocparams.statusId != 2) {
 							filenametdcontent = jQuery('<a>'+val.filename+'</a>');
@@ -431,7 +431,7 @@ DocManListFileController.prototype =
 						for (var i = 0; i < versionActionsArrayLength; i++) {
 							versionactiontdcontent += val.versionactions[i];
 						}
-						var htmlString = '<tr id="docversion'+val.version+'" ><td>'+currenttdcontent[0].outerHTML+'</td><td>'+filenametdcontent[0].outerHTML+'</td><td>'+val.title+'</td><td>'+val.description+'</td><td>'+val.created_by_username+'</td><td>'+val.lastdate+'</td><td>'+val.filesize_readable+'</td><td>'+versionactiontdcontent+'</td></tr>'
+						var htmlString = '<tr id="docversion'+val.version+'" ><td>'+val.version+currenttdcontent+'</td><td>'+filenametdcontent[0].outerHTML+'</td><td>'+val.title+'</td><td>'+val.description+'</td><td>'+val.vcomment+'</td><td>'+val.created_by_username+'</td><td>'+val.lastdate+'</td><td>'+val.filesize_readable+'</td><td>'+versionactiontdcontent+'</td></tr>'
 						jQuery('#sortable_doc_version_table > tbody:last-child').append(htmlString);
 						});
 				}
@@ -510,6 +510,7 @@ DocManListFileController.prototype =
 			}
 			jQuery('#title').val(this.version.title);
 			jQuery('#description').val(this.version.description);
+			jQuery('#vcomment').val(this.version.vcomment);
 			jQuery('#edit_version').val(this.version.version);
 			if (this.version.current_version == 1) {
 				jQuery('#current_version').attr('checked', 'checked').prop('checked', true);
@@ -520,6 +521,7 @@ DocManListFileController.prototype =
 			this.listfileparams.tableAddVersion.hide();
 			jQuery('#title').val('');
 			jQuery('#description').val('');
+			jQuery('#vcomment').val('');
 			jQuery(':file').val('');
 			jQuery('#edit_version').val('');
 			jQuery('#current_version').removeAttr('checked');

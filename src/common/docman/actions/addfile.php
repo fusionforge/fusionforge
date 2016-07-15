@@ -40,6 +40,7 @@ global $warning_msg;
 $doc_group = getIntFromRequest('doc_group');
 $title = trim(getStringFromRequest('title'));
 $description = getStringFromRequest('description');
+$vcomment = getStringFromRequest('vcomment');
 $file_url = getStringFromRequest('file_url');
 $uploaded_data = getUploadedFile('uploaded_data');
 $manual_path = getStringFromRequest('manual_path');
@@ -174,7 +175,7 @@ switch ($type) {
 	}
 }
 
-if (!$d->create($uploaded_data_name, $uploaded_data_type, $data, $doc_group, $title, $description, $stateid)) {
+if (!$d->create($uploaded_data_name, $uploaded_data_type, $data, $doc_group, $title, $description, $stateid, $vcomment)) {
 	$error_msg = $d->getErrorMessage();
 	if (forge_check_perm('docman', $group_id, 'approve')) {
 		session_redirect($redirecturl);
