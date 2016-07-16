@@ -105,7 +105,7 @@ DocManListFileController.prototype =
 		var modalId = this.listfileparams.divEditFile;
 		jQuery(modalId).dialog({
 			autoOpen: false,
-			width: 900,
+			width: 1000,
 			modal: true,
 			title: this.listfileparams.divEditTitle,
 			buttons: {
@@ -408,9 +408,11 @@ DocManListFileController.prototype =
 					jQuery('#editFile').prepend(data.html);
 				} else {
 					jQuery('#sortable_doc_version_table > tbody').children().remove();
+					jQuery('#sortable_doc_version_table > tbody').css('max-height', '400px').css('overflow-y', 'auto').css('display', 'block');
+					jQuery('#sortable_doc_version_table > thead > tr').css('display', 'block');
 					eachdocparams = this.docparams;
 					jQuery.each(data, function (i, val) {
-						//_('VersionID/Current'), _('Filename'), _('Title'), _('Description'), _('Comment'), _('Author'), _('Last Time'), _('Size'), _('Actions'));
+						//_('ID (x)'), _('Filename'), _('Title'), _('Description'), _('Comment'), _('Author'), _('Last Time'), _('Size'), _('Actions'));
 						currenttdcontent = '';
 						if (val.current_version == 1) {
 							currenttdcontent += ' (x)';
@@ -431,7 +433,8 @@ DocManListFileController.prototype =
 						for (var i = 0; i < versionActionsArrayLength; i++) {
 							versionactiontdcontent += val.versionactions[i];
 						}
-						var htmlString = '<tr id="docversion'+val.version.substr(1)+'" ><td>'+val.version.substr(1)+currenttdcontent+'</td><td>'+filenametdcontent[0].outerHTML+'</td><td>'+val.title+'</td><td>'+val.description+'</td><td>'+val.vcomment+'</td><td>'+val.created_by_username+'</td><td>'+val.lastdate+'</td><td>'+val.filesize_readable+'</td><td>'+versionactiontdcontent+'</td></tr>'
+						// please sync with the editfile.php widths if you change it here.
+						var htmlString = '<tr id="docversion'+val.version.substr(1)+'" ><td style="width: 60px">'+val.version.substr(1)+currenttdcontent+'</td><td style="width: 150px">'+filenametdcontent[0].outerHTML+'</td><td style="width: 150px">'+val.title+'</td><td style="width: 150px">'+val.description+'</td><td style="width: 110px">'+val.vcomment+'</td><td style="width: 100px">'+val.created_by_username+'</td><td style="width: 100px">'+val.lastdate+'</td><td style="width: 50px">'+val.filesize_readable+'</td><td style="width: 50px">'+versionactiontdcontent+'</td></tr>'
 						jQuery('#sortable_doc_version_table > tbody:last-child').append(htmlString);
 						});
 				}

@@ -66,9 +66,12 @@ $cells[] = array(_('State')._(':'), 'class' => 'docman_editfile_title');
 $cells[][] = html_e('select', array('name' => 'stateid', 'id' => 'stateid'), '', false);
 echo $HTML->multiTableRow(array(), $cells);
 echo $HTML->listTableBottom();
-$thArr = array(_('VersionID/Current'), _('Filename'), _('Title'), _('Description'), _('Comment'), _('Author'), _('Last Time'), _('Size'), _('Actions'));
+$thArr = array(_('ID (x)'), _('Filename'), _('Title'), _('Description'), _('Comment'), _('Author'), _('Last Time'), _('Size'), _('Actions'));
+$thTitle = array(_('x does mark the current version'), '', '', '', '', '', '', '', '', '', '');
+$thSizeCssArr = array(array('style' => 'width: 60px'), array('style' => 'width: 150px'), array('style' => 'width: 150px'), array('style' => 'width: 150px'), array('style' => 'width: 110px'),
+			array('style' => 'width: 100px'), array('style' => 'width: 100px'), array('style' => 'width: 50px'),array('style' => 'width: 50px'));
 $thClass = array('', '', '', '', '', '', '', '', 'unsortable');
-echo $HTML->listTableTop($thArr, array(), 'sortable full', 'sortable_doc_version_table', $thClass);
+echo $HTML->listTableTop($thArr, array(), 'sortable full', 'sortable_doc_version_table', $thClass, $thTitle, $thSizeCssArr);
 echo $HTML->listTableBottom();
 echo html_e('button', array('id' => 'doc_version_addbutton', 'type' => 'button', 'onclick' => 'javascript:controllerListFile.toggleAddVersionView()'), _('Add new version'));
 echo $HTML->listTableTop(array(), array(), 'listing full hide', 'doc_version_edit');
