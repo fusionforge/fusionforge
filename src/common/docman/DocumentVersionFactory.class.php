@@ -86,7 +86,7 @@ class DocumentVersionFactory extends FFError {
 				if (preg_match('/html/i', $arr['filetype'])) { // text plain, text html, text x-patch, etc
 					$isHtml = 1;
 				}
-				$arr['versionactions'][] = util_make_link('#', $HTML->getEditFilePic(_('Edit this version'), 'editversion'), array('id' => 'version_action_edit', 'onclick' => 'javascript:controllerListFile.toggleEditVersionView({title: \''.addslashes($arr['title']).'\', description: \''.addslashes($arr['description']).'\', version: '.$arr['version'].', current_version: '.$arr['current_version'].', isURL: '.$isURL.', isText: '.$isText.', isHtml: '.$isHtml.', filename: \''.addslashes($arr['filename']).'\', vcomment: \''.addslashes($arr['vcomment']).'\'})'), true);
+				$arr['versionactions'][] = util_make_link('#', $HTML->getEditFilePic(_('Edit this version'), 'editversion'), array('id' => 'version_action_edit', 'onclick' => 'javascript:controllerListFile.toggleEditVersionView({title: \''.addslashes($arr['title']).'\', description: \''.addslashes($arr['description']).'\', version: '.ltrim($arr['version'], '_').', current_version: '.$arr['current_version'].', isURL: '.$isURL.', isText: '.$isText.', isHtml: '.$isHtml.', filename: \''.addslashes($arr['filename']).'\', vcomment: \''.addslashes($arr['vcomment']).'\'})'), true);
 				if ($numrows > 1) {
 					$arr['versionactions'][] = util_make_link('#', $HTML->getRemovePic(_('Permanently delete this version'), 'delversion'), array('id' => 'version_action_delete', 'onclick' => 'javascript:controllerListFile.deleteVersion({version: '.$arr['version'].'})'), true);
 				}
