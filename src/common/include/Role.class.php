@@ -22,8 +22,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'include/rbac_texts.php' ;
-require_once $gfcommon.'include/RBAC.php' ;
+require_once $gfcommon.'include/rbac_texts.php';
+require_once $gfcommon.'include/RBAC.php';
 
 /**
  * TODO: FusionForge roles - Enter description here ...
