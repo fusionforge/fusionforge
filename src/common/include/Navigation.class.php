@@ -224,21 +224,25 @@ class Navigation extends FFError {
 		$selected = 0;
 
 		// Home
-		$menu['titles'][] = _('Home');
-		$menu['urls'][] = util_make_uri('/');
-		$menu['tooltips'][] = _('Main Page');
+		if (forge_get_config('use_home')) {
+			$menu['titles'][] = _('Home');
+			$menu['urls'][] = util_make_uri('/');
+			$menu['tooltips'][] = _('Main Page');
+		}
 
 		// My Page
-		$menu['titles'][] = _('My Page');
-		$menu['urls'][] = util_make_uri('/my/');
-		$menu['tooltips'][] = _('Your Page, widgets selected by you to follow your items.');
-		if (strstr($request_uri, util_make_uri('/my/'))
-			|| strstr($request_uri, util_make_uri('/account/'))
-			|| strstr($request_uri, util_make_uri('/register/'))
-			|| strstr($request_uri, util_make_uri('/themes/'))
-			)
-		{
-			$selected = count($menu['urls'])-1;
+		if (forge_get_config('use_my')) {
+			$menu['titles'][] = _('My Page');
+			$menu['urls'][] = util_make_uri('/my/');
+			$menu['tooltips'][] = _('Your Page, widgets selected by you to follow your items.');
+			if (strstr($request_uri, util_make_uri('/my/'))
+				|| strstr($request_uri, util_make_uri('/account/'))
+				|| strstr($request_uri, util_make_uri('/register/'))
+				|| strstr($request_uri, util_make_uri('/themes/'))
+				)
+			{
+				$selected = count($menu['urls'])-1;
+			}
 		}
 
 		if (forge_get_config('use_trove') || forge_get_config('use_project_tags') || forge_get_config('use_project_full_list')) {
