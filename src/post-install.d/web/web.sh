@@ -148,6 +148,7 @@ case "$1" in
         ;;
 
     servicerestart)
+	apache_service=$(forge_get_config apache_service)
 	# Start web server on boot
 	if [ -x /sbin/chkconfig ]; then
 	    chkconfig $apache_service on
