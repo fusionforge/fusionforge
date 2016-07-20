@@ -177,7 +177,7 @@ case "$1" in
 	;;
 
     *)
-	echo "Usage: $0 {configure|remove|purge|update-defines|servicerestart}"
+	echo "Usage: $0 {configure|remove|purge|update-defines|servicerestart|rawconfigure}"
 	exit 1
 	;;
 esac
