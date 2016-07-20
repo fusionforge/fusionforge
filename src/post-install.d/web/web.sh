@@ -141,6 +141,10 @@ case "$1" in
 	    sed -i 's/^NameVirtualHost \*:80/#&/' /etc/apache2/ports.conf
 	fi
 
+        $0 servicerestart
+        ;;
+
+    servicerestart)
 	# Start web server on boot
 	if [ -x /sbin/chkconfig ]; then
 	    chkconfig $apache_service on
@@ -170,7 +174,7 @@ case "$1" in
 	;;
 
     *)
-	echo "Usage: $0 {configure|remove|purge|update-defines}"
+	echo "Usage: $0 {configure|remove|purge|update-defines|servicerestart}"
 	exit 1
 	;;
 esac
