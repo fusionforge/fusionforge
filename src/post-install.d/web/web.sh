@@ -44,7 +44,7 @@ case "$1" in
 	mv $t 00-defines.conf
 	;;
 
-    configure)
+    rawconfigure)
 	$0 update-defines
 
 	# '${FF__core__config_path}' not yet available in the top-level config file, so generate it:
@@ -140,7 +140,10 @@ case "$1" in
 	if [ -e /etc/apache2/ports.conf ]; then
 	    sed -i 's/^NameVirtualHost \*:80/#&/' /etc/apache2/ports.conf
 	fi
+        ;;
 
+    configure)
+        $0 rawconfigure
         $0 servicerestart
         ;;
 
