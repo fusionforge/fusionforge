@@ -182,7 +182,6 @@ case "$1" in
 	$(dirname $0)/upgrade-conf.sh $2
 	configure_libnss_pgsql
 	configure_nsswitch
-	configure_nscd
 	configure_pam
 	configure_sshd
         ;;
