@@ -178,6 +178,14 @@ remove_sshd()
 
 # Main
 case "$1" in
+    rawconfigure)
+	$(dirname $0)/upgrade-conf.sh $2
+	configure_libnss_pgsql
+	configure_nsswitch
+	configure_nscd
+	configure_pam
+	configure_sshd
+        ;;
     configure)
 	$(dirname $0)/upgrade-conf.sh $2
 	configure_libnss_pgsql
@@ -198,7 +206,7 @@ case "$1" in
 	purge_libnss_pgsql
 	;;
     *)
-	echo "Usage: $0 {configure|remove|purge}"
+	echo "Usage: $0 {configure|rawconfigure|remove|purge}"
 	exit 1
 	;;
 esac
