@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (C) 2015 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
+ * Copyright 2016, Stéphane-Eymeric Bredtthauer - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -31,7 +32,7 @@ html_use_jqueryjqplotpluginhighlighter();
 
 $taskboard->header(
 		array(
-			'title' => _('Taskboard for ').$group->getPublicName()._(': '). _('Releases')._(': ')._('Burndown chart')._(': ').$release->getTitle() ,
+			'title' => $taskboard->getName()._(': '). _('Releases')._(': ')._('Burndown chart')._(': ').$release->getTitle() ,
 			'pagename' => _('Releases')._(': ')._('Burndown chart')._(': ').$release->getTitle(),
 			'sectionvals' => array($group->getPublicName()),
 			'group' => $group_id
@@ -98,7 +99,7 @@ foreach( $release_snapshots as $snapshot ) {
 
 	jQuery( document ).ready(function( $ ) {
 		jQuery('#taskboard-view-btn').click( function ( e ) {
-			window.location = '<?php echo util_make_url ('/plugins/'.$pluginTaskboard->name.'/?group_id='. $group_id . '&_release=' . $release_id ); ?>';
+			window.location = '<?php echo util_make_url ('/plugins/'.$pluginTaskboard->name.'/?group_id='.$group_id.'&taskboard_id='.$taskboard->getID().'&_release='.$release_id ); ?>';
 			e.preventDefault();
 		});
 

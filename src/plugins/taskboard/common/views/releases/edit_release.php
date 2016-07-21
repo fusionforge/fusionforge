@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (C) 2015 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
+ * Copyright 2016, Stéphane-Eymeric Bredtthauer - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -38,7 +39,7 @@ $page_url = $release->getPageUrl();
 
 $taskboard->header(
 		array(
-			'title' => _('Taskboard for ').$group->getPublicName()._(': '). _('Releases')._(': ')._('Edit release') ,
+			'title' => $taskboard->getName()._(': '). _('Releases')._(': ')._('Edit release') ,
 			'pagename' => _('Releases')._(': ')._('Edit release'),
 			'sectionvals' => array($group->getPublicName()),
 			'group' => $group_id
@@ -59,7 +60,7 @@ foreach($taskboard_releases as $release ) {
 }
 
 $release_values = $taskboard->getReleaseValues();
-
+$taskboard_id = $taskboard->getID();
 $release_id_arr = array();
 $release_name_arr = array();
 foreach( $release_values as $release_name => $release_id ) {
@@ -71,7 +72,7 @@ foreach( $release_values as $release_name => $release_id ) {
 }
 
 $release_box = html_build_select_box_from_arrays($release_id_arr, $release_name_arr, '_release', $element_id, false);
-echo $HTML->openForm(array('action' => '/plugins/taskboard/releases/?group_id='.$group_id.'&action=edit_release', 'method' => 'post'));
+echo $HTML->openForm(array('action' => '/plugins/taskboard/releases/?group_id='.$group_id.'&taskboard_id='.$taskboard_id.'&action=edit_release', 'method' => 'post'));
 echo html_e('input', array('type' => 'hidden', 'name' => 'post_changes', 'value' => 'y'));
 echo html_e('input', array('type' => 'hidden', 'name' => 'release_id', 'value' => $release->getID()));
 echo html_e('h2', array(), _('Edit release')._(':'));

@@ -2,6 +2,7 @@
 /**
  * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
  * Copyright 2015, Franck Villaume - TrivialDev
+ * Copyright 2016, Stéphane-Eymeric Bredtthauer - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -25,6 +26,8 @@ global $group_id, $pluginTaskboard, $taskboard;
 session_require_perm('tracker_admin', $group_id);
 
 if (getStringFromRequest('post_changes')) {
+	$taskboard_name = getStringFromRequest('taskboard_name','');
+	$taskboard_description = getStringFromRequest('taskboard_description','');
 	$trackers_selected = getArrayFromRequest('use', array());
 	$trackers_bgcolor  = getArrayFromRequest('bg', array());
 	$release_field = getStringFromRequest('release_field','');
@@ -38,9 +41,9 @@ if (getStringFromRequest('post_changes')) {
 
 	// try to save data
 	if($taskboard->getID()) {
-		$ret = $taskboard->update($trackers_selected, $trackers_bgcolor, $release_field, $release_field_tracker, $estimated_cost_field, $remaining_cost_field, $user_stories_tracker, $user_stories_reference_field, $user_stories_sort_field, $first_column_by_default);
+		$ret = $taskboard->update($taskboard_name, $taskboard_description, $trackers_selected, $trackers_bgcolor, $release_field, $release_field_tracker, $estimated_cost_field, $remaining_cost_field, $user_stories_tracker, $user_stories_reference_field, $user_stories_sort_field, $first_column_by_default);
 	} else {
-		$ret = $taskboard->create($trackers_selected, $trackers_bgcolor, $release_field, $release_field_tracker, $estimated_cost_field, $remaining_cost_field, $user_stories_tracker, $user_stories_reference_field, $user_stories_sort_field, $first_column_by_default);
+		$ret = $taskboard->create($taskboard_name, $taskboard_description, $trackers_selected, $trackers_bgcolor, $release_field, $release_field_tracker, $estimated_cost_field, $remaining_cost_field, $user_stories_tracker, $user_stories_reference_field, $user_stories_sort_field, $first_column_by_default);
 	}
 
 	if(!$ret) {
@@ -50,4 +53,4 @@ if (getStringFromRequest('post_changes')) {
 	}
 }
 
-session_redirect('/plugins/'.$pluginTaskboard->name.'/admin/?view=trackers&group_id='.$group_id);
+session_redirect('/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&taskboard_id='.$taskboard->getID().'&view=trackers', false);

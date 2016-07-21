@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
+ * Copyright 2016, Stéphane-Eymeric Bredtthauer - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -24,6 +25,7 @@ global $group_id, $pluginTaskboard;
 session_require_perm('tracker_admin', $group_id);
 
 $column_id = getStringFromRequest('column_id', '');
+$taskboard_id = getStringFromRequest('taskboard_id', '');
 
 $column = &taskboard_column_get_object($column_id);
 
@@ -34,4 +36,4 @@ if ($column->setOrder($column->getOrder() + 1)) {
 	db_rollback();
 }
 
-session_redirect('/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&view=columns');
+session_redirect('/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&$taskboard_id='.$$taskboard_id.'&view=columns');

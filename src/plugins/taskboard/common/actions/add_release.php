@@ -2,6 +2,7 @@
 /**
  * Copyright (C) 2015 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
  * Copyright 2015, Franck Villaume - TrivialDev
+ * Copyright 2016, Stéphane-Eymeric Bredtthauer - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -68,4 +69,4 @@ if ($element_id && $start_date_unixtime && $end_date_unixtime) {
 } else {
 	$warning_msg = _('Something missing here');
 }
-session_redirect('/plugins/'.$pluginTaskboard->name.'/releases/?group_id='.$group_id);
+session_redirect('/plugins/'.$pluginTaskboard->name.'/releases/?group_id='.$group_id.'&taskboard_id='.$taskboard->getID(),false);
