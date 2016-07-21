@@ -1,8 +1,6 @@
 <?php
 /**
- * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
- * Copyright 2015, Franck Villaume - TrivialDev
- * Copyright 2016, Stéphane-Eymeric Bredtthauer - TrivialDev
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -21,16 +19,12 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-
 global $group_id, $taskboard, $pluginTaskboard, $HTML;
-
-$column_id = getStringFromRequest('column_id', '');
-$column = &taskboard_column_get_object($column_id);
 
 $taskboard->header(
 	array(
-		'title' => $taskboard->getName()._(': ')._('Administration')._(': ')._('Column configuration'),
-		'pagename' => _('Column configuration'),
+		'title' => $taskboard->getName()._(': ')._('Administration')._(': ')._('Delete taskboard'),
+		'pagename' => _('Delete taskboard'),
 		'sectionvals' => array(group_getname($group_id)),
 		'group' => $group_id
 	)
@@ -42,10 +36,9 @@ if($taskboard->isError()) {
 	echo html_e('div', array('id' => 'messages', 'style' => 'display: none;'), '', false);
 }
 $taskboard_id = $taskboard->getID();
-echo $HTML->openForm(array('action' => '/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&taskboard_id='.$taskboard_id.'&action=delete_column', 'method' => 'post'));
-echo html_e('input', array('type' => 'hidden', 'name' => 'column_id', 'value' => $column_id));
-echo html_e('h1', array(), _('Column')." '".$column->getTitle() ."'");
-echo html_e('div', array(), _('You are about to permanently and irretrievably delete this column!'));
+echo $HTML->openForm(array('action' => '/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&taskboard_id='.$taskboard_id.'&action=delete_taskboard', 'method' => 'post'));
+echo html_e('h1', array(), _('Taskboard')." '".$taskboard->getName() ."'");
+echo html_e('div', array(), _('You are about to permanently and irretrievably delete this taskbord!'));
 echo html_e('div', array(), html_e('input', array('type' => 'checkbox', 'value' => 'y', 'name' => 'confirmed')), _('I am Sure'));
 echo html_e('p', array(), html_e('input', array('type' => 'submit', 'name' => 'post_delete', 'value' => _('Delete'))));
 echo $HTML->closeForm();

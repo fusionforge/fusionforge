@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
+ * Copyright 2016, Stéphane-Eymeric Bredtthauer - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -53,14 +54,29 @@ function &taskboard_get_object($taskboard_id, $data = false) {
  * Initialize a task board
  */
 function &taskboard_init($group_id) {
+	db_begin();
 	$res = db_query_params('INSERT INTO plugin_taskboard(group_id) VALUES($1)', array($group_id));
 	if (!$res) {
+		$this->setError(db_error());
+		db_rollback();
 		return false;
 	}
-
-	$Group = group_get_object($data['group_id']);
-
-	$Taskboard = new TaskBoard($Group, $data);
+	$taskboard_id=db_insertid($res,'plugin_taskboard','taskboard_id');
+	if ($taskboard_id==0) {
+		db_rollback();
+		return false;
+	}
+	$Group = group_get_object($group_id);
+	if (!$Group) {
+		db_rollback();
+		return false;
+	}
+	$Taskboard = new TaskBoard($Group, $taskboard_id);
+	if (!$Taskboard) {
+		db_rollback();
+		return false;
+	}
+	db_commit();
 	return $Taskboard;
 }
 
@@ -81,13 +97,13 @@ class TaskBoard extends FFError {
 	var $TrackersAdapter;
 
 	/**
-	  * Array of artifact data.
+	  * Array of taskboard data.
 	 *
 	 * @var	array	$data_array.
 	 */
 	var $data_array;
 
-	function TaskBoard($Group, $arr = false) {
+	function TaskBoard($Group, $data = false) {
 		parent::__construct();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(_('No Valid Group Object'));
@@ -99,16 +115,17 @@ class TaskBoard extends FFError {
 		}
 
 		$this->Group = $Group;
-		if (!$arr || !is_array($arr)) {
-			if (!$this->fetchDataByGroup()) {
-				return false;
-			}
-		} else {
-			$this->data_array =& $arr;
-			if ($this->data_array['group_id'] != $this->Group->getID()) {
-				$this->setError('Group_id in db result does not match Group Object');
-				$this->data_array = null;
-				return false;
+
+		if ($data) {
+			if (is_array($data)) {
+				$this->data_array =& $data;
+				if ($this->data_array['group_id'] != $this->Group->getID()) {
+					$this->setError('Group_id in db result does not match Group Object');
+					$this->data_array = null;
+					return false;
+				}
+			} else {
+				$this->fetchData($data);
 			}
 		}
 
@@ -130,16 +147,22 @@ class TaskBoard extends FFError {
 	 * @param	array	list of trackers IDs, linked to the taskboard
 	 * @param	array	has of card background colors (key - tracker id, value - bg color)
 	 * @param	string	Alias for of 'select' extra field used for release/sprint
-	 * @param	string	Tracke type of extra field used for release/sprint (1 - task trackers, 2 - user story tracker)
+	 * @param	string	Tracker type of extra field used for release/sprint (1 - task trackers, 2 - user story tracker)
 	 * @param	string	Used for cost calculations together with remaining_cost_field_alias if specified
 	 * @param	string	Used for cost calculations together with estimated_cost_field_alias if specified
 	 *
 	 * @return     true on success / false on failure.
 	 */
-	function create($trackers, $bgcolors, $release_field_alias = NULL, $release_field_tracker = 1,
-			$estimated_cost_field_alias = NULL, $remaining_cost_field_alias = NULL,
+	function create($name, $description = '', $trackers = array(), $bgcolors = array(), $release_field_alias = NULL, $release_field_tracker = 1,
+			$estimated_cost_field_alias = NULL, $remaining_cost_field_alias = '',
 			$user_stories_tracker = NULL, $user_stories_reference_field = NULL,
 			$user_stories_sort_field = NULL, $first_column_by_default = 1) {
+
+		//$estimated_cost_field = '';  // TODO define alias by default in configuration file
+		//$remaining_cost_field = '';  // TODO define alias by default in configuration file
+		//$user_stories_reference_field = '';  // TODO define alias by default in configuration file
+		//$user_stories_sort_field = '';  // TODO define alias by default in configuration file
+
 		//
 		//      data validation
 		//
@@ -148,18 +171,13 @@ class TaskBoard extends FFError {
 			return false;
 		}
 
-		if (count($trackers) == 0) {
-			$this->setError(_('Taskboard must be linked at least to one tracker'));
-			return false;
-		}
-
 		$ret = true;
 		db_begin();
 		$res = db_query_params(
-				'INSERT INTO plugin_taskboard(group_id, release_field_alias,  release_field_tracker, estimated_cost_field_alias,
+				'INSERT INTO plugin_taskboard(taskboard_name, description, group_id, release_field_alias, release_field_tracker, estimated_cost_field_alias,
 					remaining_cost_field_alias, user_stories_group_artifact_id, user_stories_reference_field_alias,user_stories_sort_field_alias,
-				first_column_by_default) VALUES($1, $2, $3, $4, $5, $6, $7, $8)',
-				array( $release_field_alias, $release_field_tracker, $estimated_cost_field_alias,
+				first_column_by_default) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)',
+				array($name, $description, $this->Group->getID(), $release_field_alias, $release_field_tracker, $estimated_cost_field_alias,
 					$remaining_cost_field_alias, ( $user_stories_tracker ? $user_stories_tracker: NULL ),
 					$user_stories_reference_field, $user_stories_sort_field, $first_column_by_default)
 			);
@@ -170,7 +188,7 @@ class TaskBoard extends FFError {
 			$this->data_array['taskboard_id'] = db_insertid($res,'plugin_taskboard','taskboard_id');
 		}
 
-		if( $ret ) {
+		if( $ret && is_array($trackers)) {
 			foreach( $trackers as $tracker_id ) {
 				$ret = $this->addUsedTracker( $tracker_id, ( array_key_exists($tracker_id, $bgcolors) ? $bgcolors[$tracker_id]  : NULL) );
 			}
@@ -200,7 +218,7 @@ class TaskBoard extends FFError {
 	 *
 	 * @return	true on success / false on failure.
 	 */
-	function update($trackers, $bgcolors, $release_field_alias = NULL,  $release_field_tracker = 1,
+	function update($name, $description, $trackers=array(), $bgcolors=array(), $release_field_alias = NULL,  $release_field_tracker = 1,
 			$estimated_cost_field_alias = NULL, $remaining_cost_field_alias = NULL,
 			$user_stories_tracker = NULL, $user_stories_reference_field = NULL, $user_stories_sort_field = NULL, $first_column_by_default = 1 ) {
 		//
@@ -211,22 +229,36 @@ class TaskBoard extends FFError {
 			return false;
 		}
 
-		if( count($trackers) == 0 ) {
+		if ($name!=$this->getName() || $description!=$this->getDescription()) {
+			$updateOnlyName = true;
+		} else {
+			$updateOnlyName = false;
+		}
+
+		if( count($trackers) == 0 && !$updateOnlyName) {
 			$this->setError(_('Taskboard must be linked at least to one tracker'));
 			return false;
 		}
 
 		$ret = true;
 		db_begin();
-		$res = db_query_params(
-				'UPDATE plugin_taskboard SET release_field_alias=$1, release_field_tracker=$2, estimated_cost_field_alias=$3, remaining_cost_field_alias=$4,
-				user_stories_group_artifact_id=$5, user_stories_reference_field_alias=$6, user_stories_sort_field_alias=$7,
-				first_column_by_default=$8 WHERE taskboard_id=$9',
-				array(
-					$release_field_alias, $release_field_tracker , $estimated_cost_field_alias, $remaining_cost_field_alias,
-					( $user_stories_tracker ? $user_stories_tracker: NULL), $user_stories_reference_field, $user_stories_sort_field,
-					$first_column_by_default, $this->getID())
-			);
+		if($updateOnlyName) {
+			$res = db_query_params(
+					'UPDATE plugin_taskboard SET taskboard_name=$1, description=$2 WHERE taskboard_id=$3',
+					array($name, $description, $this->getID()));
+		} else {
+			$res = db_query_params(
+					'UPDATE plugin_taskboard SET taskboard_name=$1, description=$2, release_field_alias=$3, release_field_tracker=$4,
+					estimated_cost_field_alias=$5, remaining_cost_field_alias=$6, user_stories_group_artifact_id=$7,
+					user_stories_reference_field_alias=$8, user_stories_sort_field_alias=$9,
+					first_column_by_default=$10 WHERE taskboard_id=$11',
+					array(
+							$name, $description, $release_field_alias, $release_field_tracker ,
+							$estimated_cost_field_alias, $remaining_cost_field_alias, ( $user_stories_tracker ? $user_stories_tracker: NULL),
+							$user_stories_reference_field, $user_stories_sort_field,
+							$first_column_by_default, $this->getID())
+					);
+		}
 		if (!$res) {
 			$this->setError(_('Cannot update taskboard'));
 			$ret = false;
@@ -235,7 +267,7 @@ class TaskBoard extends FFError {
 		}
 
 		// update trackers
-		if($ret) {
+		if($ret && !$updateOnlyName) {
 			$old_trackers = $this->getUsedTrackersIds();
 			foreach($trackers as $tracker_id) {
 				if(in_array($tracker_id, $old_trackers)) {
@@ -270,6 +302,20 @@ class TaskBoard extends FFError {
 		return $ret;
 	}
 
+
+	/**
+	 * delete - delete taskboard
+	 *
+	 * @return	bool
+	 */
+	function delete() {
+		$res = db_query_params('DELETE FROM plugin_taskboard WHERE taskboard_id = $1', array($this->getID()));
+		if (!$res) {
+			$this->setError(_('Taskboard')._(': ')._('Cannot delete taskboard'));
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 * _checkExtraFields() - check where extra field exists in the tracker
@@ -308,28 +354,30 @@ class TaskBoard extends FFError {
 	}
 
 	/**
-	 * fetchDataByGroup - re-fetch the data for this TaskBoard from the database by group ID.
-	 *
-	 * @return	boolean	success.
-	 */
-	function fetchDataByGroup() {
-		$res = db_query_params('SELECT * FROM plugin_taskboard WHERE group_id=$1', array ($this->Group->getID()));
-		if (!$res || db_numrows($res) < 1) {
-			$this->setError(_('Taskboard')._(': ')._('Not configured for this project yet. Please, initialize plugin on the plugin admin page.'));
-			return false;
-		}
-		$this->data_array = db_fetch_array($res);
-		db_free_result($res);
-		return true;
-	}
-
-	/**
 	 * getID - get this TaskBoardID.
 	 *
 	 * @return	int	The taskboard_id
 	 */
 	function getID() {
 		return $this->data_array['taskboard_id'];
+	}
+
+	/**
+	 * getName - get this TaskBoard Name.
+	 *
+	 * @return	string	The taskboard_name
+	 */
+	function getName() {
+		return $this->data_array['taskboard_name'];
+	}
+
+	/**
+	 * getDescription - get this TaskBoard Description.
+	 *
+	 * @return	string	The taskboard description
+	 */
+	function getDescription() {
+		return $this->data_array['description'];
 	}
 
 	/**

@@ -1,12 +1,10 @@
 <?php
 /**
- * Tracker Link & List for administration
+ * Taskboard Front Page
  *
- * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
- * Copyright 2015 Franck Villaume - TrivialDev
- * Copyright 2016, Stéphane-Eymeric Bredtthauer - TrivialDev
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  * 
- * http://fusionforge.org
+ * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -23,10 +21,6 @@
  * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
-//
-//  SHOW LINKS TO FUNCTIONS
-//
 
 global $group_id, $group, $HTML, $pluginTaskboard;
 
@@ -45,12 +39,11 @@ if ($tb_arr === false) {
 html_use_tablesorter();
 
 $taskboardFactory->header();
-echo html_e('p', array(), util_make_link('/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&view=init',
-		html_e('strong', array(), _('Initialize a new taskboard')))
-		.html_e('br'). _('Create initial taskboard configuration'));
-
 if (!$tb_arr || count($tb_arr) < 1) {
 	echo $HTML->information(_('No taskboards have been set up, or you cannot view them.'));
+	echo '<p>';
+	echo sprintf(_('The Admin for this project will have to set up data types using the %1$s admin page %2$s'), '<a href="'.util_make_url ('/plugins/'.$pluginTaskboard->name.'/?group_id='.$group_id).'">', '</a>');
+	echo "</p>";
 } else {
 	echo '<p>'._('Choose a taskboard.').'</p>';
 	$tablearr = array(_('Taskboard'),_('Description'));
@@ -62,8 +55,8 @@ if (!$tb_arr || count($tb_arr) < 1) {
 				echo $tb_arr[$j]->getErrorMessage();
 			} else {
 				$cells = array();
-				$cells[][] = util_make_link('/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&taskboard_id='.$tb_arr[$j]->getID(),
-						html_image("ic/tracker20w.png", 20, 20).' '.$tb_arr[$j]->getName());
+				$cells[][] = util_make_link('/plugins/'.$pluginTaskboard->name.'/?group_id='.$group_id.'&taskboard_id='.$tb_arr[$j]->getID(),
+								html_image("ic/tracker20w.png", 20, 20).' '.$tb_arr[$j]->getName());
 				$cells[][] = $tb_arr[$j]->getDescription();
 				echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($j, true)), $cells);
 			}
@@ -71,3 +64,5 @@ if (!$tb_arr || count($tb_arr) < 1) {
 	}
 	echo $HTML->listTableBottom();
 }
+$taskboardFactory->footer();
+

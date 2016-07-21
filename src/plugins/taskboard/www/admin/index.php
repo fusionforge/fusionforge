@@ -2,6 +2,7 @@
 /**
  * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
  * Copyright 2015, Franck Villaume - TrivialDev
+ * Copyright 2016, Stéphane-Eymeric Bredtthauer - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -23,10 +24,12 @@
 require_once '../../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfplugins.'taskboard/common/include/TaskBoardHtml.class.php';
+require_once $gfplugins.'taskboard/common/include/TaskBoardFactoryHtml.class.php';
 
 global $HTML;
 
 $group_id = getIntFromRequest('group_id');
+$taskboard_id = getIntFromRequest('taskboard_id');
 $pluginTaskboard = plugin_get_object('taskboard');
 
 if (!$group_id) {
@@ -44,31 +47,32 @@ if (!$group_id) {
 
 		session_require_perm('tracker_admin', $group_id);
 
-		$allowedActions = array('trackers', 'columns', 'edit_column', 'down_column', 'delete_column');
 		$action = getStringFromRequest('action');
-		$taskboard = new TaskBoardHtml($group);
-
-		if (in_array($action, $allowedActions)) {
-			include($gfplugins.$pluginTaskboard->name.'/common/actions/'.$action.'.php');
-		}
-
-		$allowedViews = array('trackers', 'columns', 'edit_column', 'delete_column', 'init');
 		$view = getStringFromRequest('view');
 
-		if (in_array($view, $allowedViews)) {
-			include($gfplugins.$pluginTaskboard->name.'/common/views/admin/'.$view.'.php');
+		if ($taskboard_id) {
+			$taskboard = new TaskBoardHtml($group, $taskboard_id);
+			$allowedActions = array('trackers', 'columns', 'edit_column', 'down_column', 'delete_column', 'init', 'delete_taskboard');
+			$allowedViews = array('trackers', 'columns', 'edit_column', 'delete_column', 'init', 'delete_taskboard');
+			if (in_array($action, $allowedActions)) {
+				include($gfplugins.$pluginTaskboard->name.'/common/actions/'.$action.'.php');
+			} elseif (in_array($view, $allowedViews)) {
+				include($gfplugins.$pluginTaskboard->name.'/common/views/admin/'.$view.'.php');
+			} else {
+				include($gfplugins.$pluginTaskboard->name.'/common/views/admin/taskboard.php');
+			}
 		} else {
-			include($gfplugins.$pluginTaskboard->name.'/common/views/admin/ind.php');
+			if ($action=='init') {
+				include($gfplugins.$pluginTaskboard->name.'/common/actions/init.php');
+			} elseif ($view=='init') {
+				include($gfplugins.$pluginTaskboard->name.'/common/views/admin/init.php');
+			} else {
+				include($gfplugins.$pluginTaskboard->name.'/common/views/admin/ind.php');
+			}
 		}
 	} else {
-		$HTML->header(
-			array(
-				'title' => _('Taskboard for ').$group->getPublicName()._(': ')._('Administration'),
-				'pagename' => _('Administration'),
-				'sectionvals' => array(group_getname($group_id)),
-				'group' => $group_id
-			)
-		);
+		$taskboardFactory = new TaskBoardFactoryHtml($group);
+		$taskboardFactory->header();
 		echo $HTML->information(_('Your project does not use tracker feature. Please contact your Administrator to turn on this feature.'));
 	}
 }

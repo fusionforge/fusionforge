@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
+ * Copyright 2016, Stéphane-Eymeric Bredtthauer - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -32,6 +33,7 @@ require_once $gfplugins.'taskboard/common/include/TaskBoardHtml.class.php';
 $sysdebug_enable = false;
 
 $group_id = getIntFromPost('group_id');
+$taskboard_id = getIntFromPost('taskboard_id');
 $action = getStringFromPost('action');
 
 if (!$group_id) {
@@ -44,7 +46,7 @@ if (!$group_id) {
 		exit();
 	}
 
-	$taskboard = new TaskBoardHtml( $group ) ;
+	$taskboard = new TaskBoardHtml( $group, $taskboard_id ) ;
 	$allowedActions = array('get_trackers_fields');
 
 	if(in_array($action, $allowedActions)) {

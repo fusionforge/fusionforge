@@ -14,6 +14,7 @@ function loadTaskboard( group_id ) {
 	var data = {
 			action   : 'load_taskboard',
 			group_id : group_id,
+			taskboard_id : gTaskboardId,
 			assigned_to : assigned_to,
 			release : release_val
 		};
@@ -277,6 +278,7 @@ function setPhase( nUserStoryId, nTaskId, nTargetPhaseId ) {
 								data : {
 									action   : 'drop_card',
 									group_id : gGroupId,
+									taskboard_id : gTaskboardId,
 									task_id : nTaskId,
 									target_phase_id : nTargetPhaseId
 								},
@@ -470,6 +472,7 @@ function initEditable() {
 						data : {
 							action   : 'update',
 							group_id : gGroupId,
+							taskboard_id : gTaskboardId,
 							task_id : l_nTaskId,
 							title : jQuery(this).val()
 						},
