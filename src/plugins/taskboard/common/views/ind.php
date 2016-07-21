@@ -3,7 +3,7 @@
  * Taskboard Front Page
  *
  * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
- * 
+ *
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -65,4 +65,3 @@ if (!$tb_arr || count($tb_arr) < 1) {
 	echo $HTML->listTableBottom();
 }
 $taskboardFactory->footer();
-
