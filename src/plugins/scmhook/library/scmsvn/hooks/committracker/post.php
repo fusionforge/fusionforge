@@ -92,7 +92,6 @@ USAGE;
 $repository = $argv[1];
 $revision   = $argv[2];
 $svn_tracker_debug = 0;
-$svn_tracker_debug_file = sys_get_temp_dir().'scmhook_svn_committracker.debug';
 
 $UserName = trim(`svnlook author -r $revision $repository`); //username of author
 $date    = trim(`svnlook date -r $revision $repository`); //date
@@ -100,6 +99,7 @@ $log     = trim(`svnlook log -r $revision $repository`); // the log
 $changed = trim(`svnlook changed -r $revision $repository | sed 's/[A-Z]*   //'`); // the filenames
 
 if (isset($svn_tracker_debug) && $svn_tracker_debug == 1) {
+	$svn_tracker_debug_file = sys_get_temp_dir().'/scmhook_svn_committracker.debug';
 	$file = fopen($svn_tracker_debug_file, 'a+');
 	fwrite($file,"Vars filled:\n");
 	fwrite($file,"username: " . $UserName . "\n");
@@ -173,6 +173,8 @@ curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_POSTFIELDS, $vars);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 $result = curl_exec($ch);
 //$info = curl_getinfo($ch);
 curl_close($ch);

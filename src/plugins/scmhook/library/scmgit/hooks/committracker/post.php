@@ -126,8 +126,8 @@ $log      = trim(`git log -n 1 --format=%s $newrev`);
 $changed  = trim(`git log -n 1 --format=%b --name-only -p $newrev`);
 
 if (isset($git_tracker_debug) && $git_tracker_debug == 1) {
-	$tempfile = tempnam('/tmp', 'debug.post');
-	$file=fopen($tempfile, 'a+');
+	$git_tracker_debug_file = sys_get_temp_dir().'/scmhook_git_committracker.debug';
+	$file=fopen($git_tracker_debug_file, 'a+');
 	fwrite($file,"Vars filled:\n");
 	fwrite($file,"arg :  " . print_r($argv,true) . " \n");
 	fwrite($file,"rev :  " . $newrev . " \n");
@@ -205,6 +205,8 @@ curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_POSTFIELDS, $vars);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 $result = curl_exec($ch);
 //$info = curl_getinfo($ch);
 curl_close($ch);
