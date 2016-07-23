@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2000, Tim Perdue/Sourceforge
  * Copyright 2002, Tim Perdue/GForge, LLC
+ * Copyright 2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -29,10 +30,10 @@ function &pm_import_tasks($group_project_id,&$tasks,$replace=true) {
 	$pg = projectgroup_get_object($group_project_id);
 	if (!$pg || !is_object($pg)) {
 		$array['success']=false;
-		$array['errormessage']='Could Not Get ProjectGroup';
+		$array['errormessage']=_('Could Not Get ProjectGroup');
 	} elseif ($pg->isError()) {
 		$array['success']=false;
-		$array['errormessage']='Could Not Get ProjectGroup: '.$pg->getErrorMessage();
+		$array['errormessage']=_('Could Not Get ProjectGroup')._(': ').$pg->getErrorMessage();
 	} else {
 		$count=count($tasks);
 		//
@@ -68,7 +69,7 @@ function &pm_import_tasks($group_project_id,&$tasks,$replace=true) {
 		//
 		if (count($invalid_names)) {
 			$array['success']=false;
-			$array['errormessage']='Invalid Resource Name:';
+			$array['errormessage']=_('Invalid Resource Name')._(':');
 			foreach ($invalid_names as $i) {
 				$array['errormessage'] .= ' ' . $i;
 			}
@@ -88,18 +89,18 @@ function &pm_import_tasks($group_project_id,&$tasks,$replace=true) {
 				//no task_id so it must be new - create it
 				if (!$tasks[$i]['id']) {
 					if (!$tasks[$i]['notes']) {
-						$tasks[$i]['notes']='None Provided';
+						$tasks[$i]['notes']=_('None Provided');
 					}
 					//create the task
 					$pt = new ProjectTask($pg);
 					if (!$pt || !is_object($pt)) {
 						$array['success']=false;
 						$was_error=true;
-						$array['errormessage']='Could Not Get ProjectTask';
+						$array['errormessage']=_('Could Not Get ProjectTask');
 					} elseif ($pt->isError()) {
 						$array['success']=false;
 						$was_error=true;
-						$array['errormessage']='Could Not Get ProjectTask: '.$pt->getErrorMessage();
+						$array['errormessage']=_('Could Not Get ProjectTask')._(': ').$pt->getErrorMessage();
 					} else {
 						//remap priority names=>numbers
 						$priority=$tasks[$i]['priority'];
@@ -136,7 +137,7 @@ function &pm_import_tasks($group_project_id,&$tasks,$replace=true) {
 								$category_id = db_result($res, 0, 'category_id');
 								if (!$category_id) {
 									$was_error=true;
-									$array['errormessage']='Error No category named : '.$tasks[$i]['category'];
+									$array['errormessage']=_('Error No category named')._(': ').$tasks[$i]['category'];
 									break;
 								}
 							}
@@ -159,7 +160,7 @@ function &pm_import_tasks($group_project_id,&$tasks,$replace=true) {
 							$tasks[$i]['parent_id'])) {
 							$array['success']=false;
 							$was_error=true;
-							$array['errormessage']='Error Creating ProjectTask: '.$pt->getErrorMessage();
+							$array['errormessage']=_('Error Creating ProjectTask')._(': ').$pt->getErrorMessage();
 							break 1;
 //							continue;
 						} else {
@@ -179,7 +180,7 @@ function &pm_import_tasks($group_project_id,&$tasks,$replace=true) {
 					} elseif ($pt->isError()) {
 						$array['success']=false;
 						$was_error=true;
-						$array['errormessage']='Could Not Get ProjectTask: '.$pt->getErrorMessage();
+						$array['errormessage']=_('Could Not Get ProjectTask')._(': ').$pt->getErrorMessage();
 					} else {
 						//remap priority names=>numbers
 						$priority=$tasks[$i]['priority'];
@@ -218,7 +219,7 @@ function &pm_import_tasks($group_project_id,&$tasks,$replace=true) {
 								$category_id = db_result($res, 0, 'category_id');
 								if (!$category_id) {
 									$was_error=true;
-									$array['errormessage']='Error No category named : '.$tasks[$i]['category'];
+									$array['errormessage']=_('Error No category named')._(': ').$tasks[$i]['category'];
 									break;
 								}
 							}
@@ -243,7 +244,7 @@ function &pm_import_tasks($group_project_id,&$tasks,$replace=true) {
 							$tasks[$i]['parent_id'])) {
 							$array['success']=false;
 							$was_error=true;
-							$array['errormessage']='Error Updating ProjectTask: '.$pt->getErrorMessage();
+							$array['errormessage']=_('Error Updating ProjectTask')._(': ').$pt->getErrorMessage();
 							break 1;
 //							continue;
 

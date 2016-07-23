@@ -1,5 +1,8 @@
 FusionForge 6.0.5:
 * Plugin SCM SVN: fix activity when SVN repository is private [#813] (TrivialDev)
+* Project Task: fix CSV import [#823] (Peter Katzmann)
+* Project Task: fix CSV import [#823]: add missing translation, add missing category in no header import,
+                fix start/end date format description (TrivialDev)
 * Tracker: fix artifact deletion with votes [#819] (TrivialDev)
 
 FusionForge 6.0.4:
