@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (C) 2009 Alain Peyrat, Alcatel-Lucent
- * Copyright 2015, Franck Villaume - TrivialDev
+ * Copyright 2015-2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -90,7 +90,7 @@ if (isset($input_file) && isset($input_file['tmp_name']) &&
 			while (($cols = fgetcsv($handle, 4096, $sep)) !== false) {
 
 				$resources = array();
-				for ($i=12;$i<17;$i++) {
+				for ($i=13;$i<18;$i++) {
 					if (trim($cols[$i]) != '') {
 						$resources[] = array('user_name'=>$cols[$i]);
 					}
@@ -98,7 +98,7 @@ if (isset($input_file) && isset($input_file['tmp_name']) &&
 
 				$dependentOn = array();
 
-				for ($i=17;$i<30;$i=$i+3) {
+				for ($i=18;$i<31;$i=$i+3) {
 					if (trim($cols[$i]) != '') {
 						$dependentOn[] = array('task_id'=>$cols[$i], 'msproj_id'=>$cols[$i+1], 'task_name'=>'', 'link_type'=>$cols[$i+2]);
 					}
@@ -109,18 +109,19 @@ if (isset($input_file) && isset($input_file['tmp_name']) &&
 						'parent_id'=>$cols[2],
 						'parent_msproj_id'=>$cols[3],
 						'name'=>$cols[4],
-						'duration'=>$cols[5],
-						'work'=>$cols[6],
-						'start_date'=>$cols[7],
-						'end_date'=>$cols[8],
-						'percent_complete'=>$cols[9],
-						'priority'=>$cols[10],
+						'category'=>$cols[5],
+						'duration'=>$cols[6],
+						'work'=>$cols[7],
+						'start_date'=>$cols[8],
+						'end_date'=>$cols[9],
+						'percent_complete'=>$cols[10],
+						'priority'=>$cols[11],
 						'resources'=>$resources,
 						'dependenton'=>$dependentOn,
-						'notes'=>$cols[11]);
+						'notes'=>$cols[12]);
 			}
-    			$res = &pm_import_tasks($group_project_id, $tasks, getIntFromRequest('replace') == 1);
 		}
+		$res = &pm_import_tasks($group_project_id, $tasks, getIntFromRequest('replace') == 1);
 	} else {
 		$res['errormessage'] = _('Wrong file type. Only plain CSV file supported');
 	}
