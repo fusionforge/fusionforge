@@ -32,8 +32,9 @@ header('Content-type: text/plain');
 # Authentify request
 if (!preg_match(',^/anonscm/,', $_SERVER['REQUEST_URI'])) {
 	$web_host = forge_get_config('web_host');
+	$protocol = forge_get_config('use_ssl', 'scmsvn') ? 'https://' : 'http://';
 	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_URL, 'https://' . $web_host . '/account/check_forwarded_session.php');
+	curl_setopt($ch, CURLOPT_URL, $protocol . $web_host . '/account/check_forwarded_session.php');
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
