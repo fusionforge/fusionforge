@@ -26,9 +26,9 @@
 
 require (dirname(__FILE__).'/../common/include/env.inc.php');
 try {
-        require_once $gfcommon.'include/pre.php';
+	require_once $gfcommon.'include/pre.php';
 } catch (DBException $e) {
-        print "Cannot connect to DB: $e\nWaiting for DB...\n";
+	print "Cannot connect to DB: $e\nWaiting for DB...\n";
 }
 require_once $gfcommon.'include/cron_utils.php';
 
