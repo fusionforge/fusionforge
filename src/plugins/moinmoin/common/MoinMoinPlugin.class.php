@@ -46,7 +46,7 @@ _("This plugin allows each project to embed MoinMoinWiki under a tab.");
 		$this->hooks[] = "clone_project_from_template" ;
 	}
 
-	function getWikiUrl ($project) {
+	function getWikiUrl($project) {
 		if (forge_get_config('use_frame', 'moinmoin')){
 			return util_make_uri('/plugins/moinmoin/frame.php?group_id=' . $project->getID());
 		} else {
@@ -191,7 +191,7 @@ _("This plugin allows each project to embed MoinMoinWiki under a tab.");
 			}
 		}
 	}
-  }
+}
 
 // Local Variables:
 // mode: php
