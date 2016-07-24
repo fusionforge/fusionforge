@@ -37,7 +37,7 @@ if (!$group) {
 }
 
 if (!$group->usesPlugin ($pluginname)) {
-	exit_error(_('Error'), sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'), $pluginname);
+	exit_error(_('Error'), sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'), $pluginname));
 }
 
 $params = array () ;
