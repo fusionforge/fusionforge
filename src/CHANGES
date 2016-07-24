@@ -32,6 +32,7 @@ FusionForge 6.X:
 
 FusionForge 6.0.5:
 * Plugin SCM SVN: fix activity when SVN repository is private [#813] (TrivialDev)
+* Plugin MoinMoin: fix httpd permissions & 404 on CentOS [#809] (TrivialDev)
 * Project Task: fix CSV import [#823] (Peter Katzmann)
 * Project Task: fix CSV import [#823]: add missing translation, add missing category in no header import,
                 fix start/end date format description (TrivialDev)
