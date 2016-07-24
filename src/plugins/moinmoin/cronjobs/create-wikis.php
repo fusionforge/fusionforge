@@ -1,6 +1,6 @@
 #! /usr/bin/php
 <?php
-/*
+/**
  * Copyright 2010, Olaf Lenz
  * Copyright 2011, Roland Mas
  *
@@ -21,11 +21,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-  /** This script will automatically create MoinMoin instances for
-   projects that do not yet have them.
-
-   It is intended to be started in a cronjob.
-   */
+/**
+ * This script will automatically create MoinMoin instances for
+ * projects that do not yet have them.
+ * It is intended to be started in a cronjob.
+ **/
 
 require_once (dirname(__FILE__) . '/../../../www/env.inc.php');
 require_once $gfcommon.'include/pre.php';
@@ -39,7 +39,7 @@ $project_res = db_query_params ("SELECT g.unix_group_name from groups g, group_p
 if (!$project_res) {
 	$err =  "Error: Database Query Failed: ".db_error();
 	cron_debug($err);
-	cron_entry(23,$err);
+	cron_entry(23, $err);
 	exit;
 }
 
@@ -75,5 +75,3 @@ if ($need_reload) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>
