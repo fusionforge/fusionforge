@@ -98,7 +98,7 @@ if (session_loggedin()) {
 			</td>
 			<td>
 				<?php
-				echo util_make_link('/tracker/?func=deleteartifact&aid='.$aid.'&group_id='.$group_id.'&atid='.$atid, html_image('ic/trash.png', 16, 16).html_e('strong', array(), _('Delete')));
+				echo util_make_link('/tracker/?func=deleteartifact&aid='.$aid.'&group_id='.$group_id.'&atid='.$atid, $HTML->getDeletePic().html_e('strong', array(), _('Delete')));
 				?>
 			</td>
 			<td>
