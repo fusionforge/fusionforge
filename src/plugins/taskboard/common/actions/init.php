@@ -38,7 +38,11 @@ if (getStringFromRequest('post_changes')) {
 		session_redirect('/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id, false);
 	} else {
 		if ($taskboard_id) {
-			$ret = $taskboard->update($taskboard_name,$taskboard_description);
+			if ($taskboard_name!=$taskboard->getName() || $taskboard_description!=$taskboard->getDescription()) {
+				$ret = $taskboard->update($taskboard_name,$taskboard_description);
+			} else {
+				$ret = true;
+			}
 		} else {
 			$ret = $taskboard->create($taskboard_name,$taskboard_description);
 		}
@@ -52,7 +56,11 @@ if (getStringFromRequest('post_changes')) {
 			}
 		} else {
 			db_commit();
-			$feedback = _('Taskboard successfully created');
+			if ($taskboard_id) {
+				$feedback = _('Taskboard successfully updated');
+			} else {
+				$feedback = _('Taskboard successfully created');
+			}
 			session_redirect('/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&taskboard_id='.$taskboard->getID(), false);
 		}
 	}

@@ -577,6 +577,19 @@ class TaskBoard extends FFError {
 			)
 		);
 
+		if($this->getReleaseFieldTracker() == RELEASE_OF_USER_STORY) {
+			$tasks_trackers = $this->getUsedTrackersData();
+			foreach($tasks_trackers as $tasks_tracker_data) {
+				$tasks = $this->TrackersAdapter->getTasks($tasks_tracker_data['group_artifact_id'], $assigned_to, NULL, NULL);
+				foreach($tasks as $task) {
+					$task_maped = $this->getMappedTask($task);
+					if ($task_maped['user_story']==0) {
+						$stories[0]['tasks'][] = $task_maped;
+					}
+				}
+			}
+		}
+
 		$user_stories_sort_field = $this->getUserStoriesSortField();
 		$user_stories_sort_extra_field_id = NULL;
 		if ($user_stories_sort_field) {
@@ -641,16 +654,7 @@ class TaskBoard extends FFError {
 			}
 		}
 
-		$but = array_values($stories);
-
-		//leave only stories, having not empty tasks list
-		$ret_stories = array();
-		foreach($but as $us) {
-			if (count($us['tasks']) > 0 ) {
-				$ret_stories[] = $us;
-			}
-		}
-
+		$ret_stories = array_values($stories);
 		usort($ret_stories, array($this, 'sortUserStories'));
 
 		return $ret_stories;

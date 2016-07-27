@@ -45,7 +45,7 @@ if ($taskboard_id) {
 
 	$taskboardFactory->header(
 		array(
-			'title' => _('Administration - Create New Taskboard'),
+			'title' => _('Taskboards for ').$taskboardFactory->Group->getPublicName()._(': ')._('Administration - Create New Taskboard'),
 			'pagename' => _('Administration'),
 			'sectionvals' => array($group->getPublicName()),
 			'group' => $group_id
