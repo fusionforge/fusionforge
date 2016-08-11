@@ -155,7 +155,15 @@ if (forge_get_config('require_unique_email')) {
     </label>
 </p>
 <p>
-<?php echo _('Password (min. 8 chars)').utils_requiredField()._(':'); ?><br />
+<?php echo _('Password').utils_requiredField()._(':'); ?><br />
+<em>
+<?php printf(_('Minimum 8 characters.')); ?><br/>
+<?php
+if (forge_get_config('check_password_strength')) {
+	printf(_('Must contain at least one uppercase letter, one lowercase, one digit, one non-alphanumeric character.').'<br/>');
+}
+?>
+</em>
     <label for="password1">
         <input id="password1" type="password" required="required" name="password1"/>
     </label>

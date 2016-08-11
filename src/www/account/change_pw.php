@@ -73,8 +73,11 @@ if (getStringFromRequest('submit')) {
 	echo html_e('p', array(), _('Old Password')._(':').utils_requiredField().
 				html_e('br').
 				html_e('label', array('for' => 'old_passwd'), html_e('input',array('id' => 'old_passwd', 'type' => 'password', 'name' => 'old_passwd', 'required'=> 'required'))));
-	echo html_e('p', array(), _('New Password (at least 8 characters)')._(':').utils_requiredField().
+	echo html_e('p', array(), _('New Password')._(':').utils_requiredField().
 				html_e('br').
+				html_e('em', array(),
+					_('Minimum 8 characters.').html_e('br').
+					(forge_get_config('check_password_strength') ? _('Must contain at least one uppercase letter, one lowercase, one digit, one non-alphanumeric character.').html_e('br') : '')).
 				html_e('label', array('for' => 'passwd'), html_e('input', array('id' => 'passwd', 'type' => 'password', 'name' => 'passwd', 'required' => 'required', 'pattern' => '.{8,}'))));
 	echo html_e('p', array(), _('New Password (repeat)')._(':').utils_requiredField().
 				html_e('br').
