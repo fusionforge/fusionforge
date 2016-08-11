@@ -23,6 +23,33 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+forge_define_config_item('check_password_strength', 'core', 'true');
+forge_set_config_item_bool('check_password_strength', 'core');
+
+/**
+ * pw_weak() - checks if password is weak
+ *
+ * @param	string	$pw	the password
+ * @return	false if password ok, string with description of problem if password ko.
+ *
+ */
+function pw_weak($pw) {
+	// password ok if contains at least 1 uppercase letter, 1 lowercase, 1 digit and 1 non-alphanumeric
+	if (!preg_match('/[[:lower:]]/', $pw)) {
+		return _("Password must contain at least one lowercase letter.");
+	}
+	if (!preg_match('/[[:upper:]]/', $pw)) {
+		return _("Password must contain at least one uppercase letter.");
+	}
+	if (!preg_match('/[[:digit:]]/', $pw)) {
+		return _("Password must contain at least one digit.");
+	}
+	if (!preg_match('/[^[:alnum:]]/', $pw)) {
+		return _("Password must contain at least one non-alphanumeric character.");
+	}
+	return false;
+}
+
 /**
  * account_pwvalid() - Validates a password
  *
@@ -34,6 +61,12 @@ function account_pwvalid($pw) {
 	if (strlen($pw) < 8) {
 		$GLOBALS['register_error'] = _('Password must be at least 8 characters.');
 		return 0;
+	}
+	if (forge_get_config('check_password_strength')) {
+		if ($msg = pw_weak($pw)) {
+			$GLOBALS['register_error'] = $msg;
+			return 0;
+		}
 	}
 	return 1;
 }
