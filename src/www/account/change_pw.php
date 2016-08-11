@@ -73,12 +73,12 @@ if (getStringFromRequest('submit')) {
 	echo html_e('p', array(), _('Old Password')._(':').utils_requiredField().
 				html_e('br').
 				html_e('label', array('for' => 'old_passwd'), html_e('input',array('id' => 'old_passwd', 'type' => 'password', 'name' => 'old_passwd', 'required'=> 'required'))));
-	echo html_e('p', array(), _('New Password (at least 6 characters)')._(':').utils_requiredField().
+	echo html_e('p', array(), _('New Password (at least 8 characters)')._(':').utils_requiredField().
 				html_e('br').
-				html_e('label', array('for' => 'passwd'), html_e('input', array('id' => 'passwd', 'type' => 'password', 'name' => 'passwd', 'required' => 'required', 'pattern' => '.{6,}'))));
+				html_e('label', array('for' => 'passwd'), html_e('input', array('id' => 'passwd', 'type' => 'password', 'name' => 'passwd', 'required' => 'required', 'pattern' => '.{8,}'))));
 	echo html_e('p', array(), _('New Password (repeat)')._(':').utils_requiredField().
 				html_e('br').
-				html_e('label', array('for' => 'passwd2'), html_e('input', array('id' => 'passwd2', 'type' => 'password', 'name' => 'passwd2', 'required' => 'required', 'pattern' => '.{6,}'))));
+				html_e('label', array('for' => 'passwd2'), html_e('input', array('id' => 'passwd2', 'type' => 'password', 'name' => 'passwd2', 'required' => 'required', 'pattern' => '.{8,}'))));
 	echo html_e('p', array(), html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Update password'))));
 	echo $HTML->closeForm();
 	echo $HTML->addRequiredFieldsInfoBox();
