@@ -51,11 +51,6 @@ if (getStringFromRequest('submit')) {
 		exit_error(_('Old password is incorrect'),'my');
 	}
 
-	if (strlen($passwd)<6) {
-		form_release_key(getStringFromRequest('form_key'));
-		exit_error(_('You must supply valid password (at least 6 characters).'),'my');
-	}
-
 	if ($passwd != $passwd2) {
 		form_release_key(getStringFromRequest('form_key'));
 		exit_error(_('New passwords do not match.'),'my');
