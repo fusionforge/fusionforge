@@ -1,5 +1,6 @@
 FusionForge 6.X:
 * Accounts: minimum password length is now 8 (Sylvain Beucler)
+* Accounts: add minimal constraints to password (upper-case, lower-case, non-alphanumeric check) [#826] (Inria)
 * Docman: limit number of returned documents on search query. Use paging system [#794] (TrivialDev)
 * Docman: limit search using from & to dates [#798] (TrivialDev)
 * Docman: use standard search engine: unify results between 'search in project' & search in the docs tab (TrivialDev)
