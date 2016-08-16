@@ -6,6 +6,7 @@ FusionForge 6.0.5:
 * Project Task: fix CSV import [#823]: add missing translation, add missing category in no header import,
                 fix start/end date format description (TrivialDev)
 * Tracker: fix artifact deletion with votes [#819] (TrivialDev)
+* Tracker: fix downloadcsv missing vote values [#828] (TrivialDev)
 
 FusionForge 6.0.4:
 * Account Management System: fix sysCreateUser for UNIX: unix_gid dropped (TrivialDev)
