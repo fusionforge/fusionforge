@@ -88,7 +88,7 @@ for ($i=0; $i<count($at_arr); $i++) {
 	$update_date = $at_arr[$i]->getLastModifiedDate() ? date(_('Y-m-d H:i'),$at_arr[$i]->getLastModifiedDate()) : '';
 	$close_date  = $at_arr[$i]->getCloseDate()? date(_('Y-m-d H:i'),$at_arr[$i]->getCloseDate()): '';
 
-	$at_arr[$i]->getVotes();
+	$votes = $at_arr[$i]->getVotes();
 	echo $at_arr[$i]->getID().$sep.
 		$at_arr[$i]->getStatusID().$sep.
 		'"'.$at_arr[$i]->getStatusName().'"'.$sep.
