@@ -105,8 +105,6 @@ $server->wsdl->addComplexType(
 	'group_id' => array('name'=>'group_id', 'type' => 'xsd:int'),
 	'name' => array('name'=>'name', 'type' => 'xsd:string'),
 	'description' => array('name'=>'description', 'type' => 'xsd:string'),
-	'is_public' => array('name'=>'is_public', 'type' => 'xsd:int'),
-	'allow_anon' => array('name'=>'allow_anon', 'type' => 'xsd:int'),
 	'due_period' => array('name'=>'due_period', 'type' => 'xsd:int'),
 	'datatype' => array('name'=>'datatype', 'type' => 'xsd:int'),
 	'status_timeout' => array('name'=>'status_timeout', 'type' => 'xsd:int'),
