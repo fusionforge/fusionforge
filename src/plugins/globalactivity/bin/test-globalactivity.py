@@ -18,6 +18,12 @@ t1 = int(time.time())
 t0 = t1 - 864000
 results = []
 print ("Global activity")
+results = client.service.globalactivity_getActivity(session,t0,t1,[])
+project_id = 0
+for r in results:
+    print r
+
+print ("Global activity,restricted to some sections")
 results = client.service.globalactivity_getActivity(session,t0,t1,['trackeropen','trackerclose','scmgit'])
 project_id = 0
 for r in results:
