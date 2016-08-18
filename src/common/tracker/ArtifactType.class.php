@@ -594,7 +594,7 @@ class ArtifactType extends FFError {
 	 *
 	 * @return	array	array of id of users monitoring this Artifact.
 	 */
-	function &getMonitorIds() {
+	function getMonitorIds() {
 		$MonitorElementObject = new MonitorElement('artifact_type');
 		return $MonitorElementObject->getMonitorUsersIdsInArray($this->getID());
 	}
