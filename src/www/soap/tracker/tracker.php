@@ -551,8 +551,6 @@ function artifacttype_to_soap($at_arr) {
 					'group_id'=>$at_arr[$i]->data_array['group_id'],
 					'name'=>$at_arr[$i]->data_array['name'],
 					'description'=>$at_arr[$i]->data_array['description'],
-					'is_public'=>$at_arr[$i]->data_array['is_public'],
-					'allow_anon'=>$at_arr[$i]->data_array['allow_anon'],
 					'due_period'=>$at_arr[$i]->data_array['due_period'],
 					'datatype'=>$at_arr[$i]->data_array['datatype'],
 					'status_timeout'=>$at_arr[$i]->data_array['status_timeout'],
