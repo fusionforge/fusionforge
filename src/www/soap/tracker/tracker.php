@@ -4,6 +4,7 @@
  *
  * Copyright 2004 (c) GForge, LLC
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2016, Franck Villaume - TrivialDev
  * http://gforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -101,15 +102,15 @@ $server->wsdl->addComplexType(
 	'sequence',
 	'',
 	array(
-	'group_artifact_id' => array('name'=>'group_artifact_id', 'type' => 'xsd:int'),
-	'group_id' => array('name'=>'group_id', 'type' => 'xsd:int'),
-	'name' => array('name'=>'name', 'type' => 'xsd:string'),
-	'description' => array('name'=>'description', 'type' => 'xsd:string'),
-	'due_period' => array('name'=>'due_period', 'type' => 'xsd:int'),
-	'datatype' => array('name'=>'datatype', 'type' => 'xsd:int'),
-	'status_timeout' => array('name'=>'status_timeout', 'type' => 'xsd:int'),
-	'extra_fields' => array('name' => 'extra_fields', 'type' => 'tns:ArrayOfArtifactExtraField'),
-	'custom_status_field' => array('name' => 'custom_status_field', 'type' => 'xsd:int'),
+		'group_artifact_id' => array('name'=>'group_artifact_id', 'type' => 'xsd:int'),
+		'group_id' => array('name'=>'group_id', 'type' => 'xsd:int'),
+		'name' => array('name'=>'name', 'type' => 'xsd:string'),
+		'description' => array('name'=>'description', 'type' => 'xsd:string'),
+		'due_period' => array('name'=>'due_period', 'type' => 'xsd:int'),
+		'datatype' => array('name'=>'datatype', 'type' => 'xsd:int'),
+		'status_timeout' => array('name'=>'status_timeout', 'type' => 'xsd:int'),
+		'extra_fields' => array('name' => 'extra_fields', 'type' => 'tns:ArrayOfArtifactExtraField'),
+		'custom_status_field' => array('name' => 'custom_status_field', 'type' => 'xsd:int'),
 	)
 );
 
@@ -121,7 +122,8 @@ $server->wsdl->addComplexType(
 	'SOAP-ENC:Array',
 	array(),
 	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:ArtifactType[]')),
-	'tns:ArtifactType');
+	'tns:ArtifactType'
+);
 
 $server->register(
 	'getArtifactTypes',
@@ -141,8 +143,8 @@ $server->wsdl->addComplexType(
 	'sequence',
 	'',
 	array(
-	'extra_field_id' => array('name'=>'extra_field_id', 'type' => 'xsd:int'),
-	'field_data' => array('name'=>'field_data', 'type' => 'xsd:string')
+		'extra_field_id' => array('name'=>'extra_field_id', 'type' => 'xsd:int'),
+		'field_data' => array('name'=>'field_data', 'type' => 'xsd:string')
 	)
 );
 
@@ -253,14 +255,14 @@ $server->wsdl->addComplexType(
 	'sequence',
 	'',
 	array(
-	'id' => array('name'=>'id', 'type' => 'xsd:int'),
-	'artifact_id' => array('name'=>'artifact_id', 'type' => 'xsd:int'),
-	'name' => array('name'=>'name', 'type' => 'xsd:string'),
-	'description' => array('name'=>'description', 'type' => 'xsd:string'),
-	'filesize' => array('name'=>'filesize', 'type' => 'xsd:int'),
-	'filetype' => array('name'=>'filetype', 'type' => 'xsd:string'),
-	'adddate' => array('name'=>'adddate', 'type' => 'xsd:int'),
-	'submitted_by' => array('name'=>'submitted_by', 'type' => 'xsd:int')
+		'id' => array('name'=>'id', 'type' => 'xsd:int'),
+		'artifact_id' => array('name'=>'artifact_id', 'type' => 'xsd:int'),
+		'name' => array('name'=>'name', 'type' => 'xsd:string'),
+		'description' => array('name'=>'description', 'type' => 'xsd:string'),
+		'filesize' => array('name'=>'filesize', 'type' => 'xsd:int'),
+		'filetype' => array('name'=>'filetype', 'type' => 'xsd:string'),
+		'adddate' => array('name'=>'adddate', 'type' => 'xsd:int'),
+		'submitted_by' => array('name'=>'submitted_by', 'type' => 'xsd:int')
 	)
 );
 
@@ -292,15 +294,16 @@ $server->register(
 
 $server->register(
 	'addArtifactFile',
-	array(	'session_ser'=>'xsd:string',
-			'group_id'=>'xsd:int',
-			'group_artifact_id'=>'xsd:int',
-			'artifact_id'=>'xsd:int',
-			'base64_contents'=>'xsd:string',
-			'description'=>'xsd:string',
-			'filename'=>'xsd:string',
-			'filetype'=>'xsd:string'
-		),
+	array(
+		'session_ser'=>'xsd:string',
+		'group_id'=>'xsd:int',
+		'group_artifact_id'=>'xsd:int',
+		'artifact_id'=>'xsd:int',
+		'base64_contents'=>'xsd:string',
+		'description'=>'xsd:string',
+		'filename'=>'xsd:string',
+		'filetype'=>'xsd:string'
+	),
 	array('addArtifactFileResponse'=>'xsd:int'),
 	$uri,$uri.'#addArtifactFile','rpc','encoded'
 );
@@ -748,10 +751,10 @@ function artifacts_to_soap($at_arr) {
 			if ($at_arr[$i]->isError()) {
 				//skip if error
 			} else {
-	//NEEDS THOROUGH COMMENTS AND EXPLANATION
-		//***********
-		// Retrieving the artifact details
-		//**checks whether there is any artifact details exists for this object, if not continue with next loop
+				//NEEDS THOROUGH COMMENTS AND EXPLANATION
+				//***********
+				// Retrieving the artifact details
+				//**checks whether there is any artifact details exists for this object, if not continue with next loop
 
 				if(count($at_arr[$i]) < 1) { continue; }
 				$flddata=array();
@@ -1128,11 +1131,10 @@ function artifact_history_to_soap($db_result, &$artifactType) {
 
 		$result[] = array(
 					"field_name"	=> $field_name,
-					"old_value"		=> $old_value,
-					"date"			=> $date,
-					"user_name"		=> $user_name
-					);
+					"old_value"	=> $old_value,
+					"date"		=> $date,
+					"user_name"	=> $user_name
+				);
 	}
-
 	return $result;
 }

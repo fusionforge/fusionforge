@@ -604,6 +604,8 @@ class ArtifactType extends FFError {
 	 * set up for this artifact type.
 	 *
 	 * @param	array	$types
+	 * @param	bool	$get_is_disabled
+	 * @param	bool	$get_is_hidden_on_submit
 	 * @return	array	arrays of data;
 	 */
 	function getExtraFields($types = array(), $get_is_disabled = false, $get_is_hidden_on_submit = true) {
