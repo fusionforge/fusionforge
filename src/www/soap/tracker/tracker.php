@@ -134,8 +134,6 @@ $server->register(
 );
 //
 // Artifact Extra Fields
-// By remo on 08-Mar-2005
-
 $server->wsdl->addComplexType(
 	'ArtifactExtraFieldsData',
 	'complexType',
@@ -148,6 +146,7 @@ $server->wsdl->addComplexType(
 	)
 );
 
+//ArrayOfArtifactExtraFieldsData
 $server->wsdl->addComplexType(
 	'ArrayOfArtifactExtraFieldsData',
 	'complexType',
@@ -183,7 +182,7 @@ $server->wsdl->addComplexType(
 		'extra_fields'=>array('name'=>'extra_fields', 'type' => 'tns:ArrayOfArtifactExtraFieldsData')
 	)
 );
-//ArrayOfArtifactExtraFieldsData
+//ArrayOfArtifact
 $server->wsdl->addComplexType(
 	'ArrayOfArtifact',
 	'complexType',
@@ -203,9 +202,11 @@ $server->register(
 		'group_id'=>'xsd:int',
 		'group_artifact_id'=>'xsd:int',
 		'assigned_to'=>'xsd:int',
-		'status'=>'xsd:int'),
+		'status'=>'xsd:int'
+	),
 	array('getArtifactsResponse'=>'tns:ArrayOfArtifact'),
-	$uri,$uri.'#getArtifacts','rpc','encoded');
+	$uri,$uri.'#getArtifacts','rpc','encoded'
+);
 
 //addArtifact
 $server->register(
