@@ -79,10 +79,10 @@ if (getStringFromRequest('submit')) {
 	if (($role->getHomeProject() != NULL)
 		&& ($role->getHomeProject()->getID() == $group_id)) {
 		$role_name = trim(getStringFromRequest('role_name'));
-		$public = getIntFromRequest('public') ? true : false ;
+		$public = getIntFromRequest('public') ? true : false;
 	} else {
-		$role_name = $role->getName() ;
-		$public = $role->isPublic() ;
+		$role_name = $role->getName();
+		$public = $role->isPublic();
 	}
 	if (!$role_name) {
 		$error_msg .= _('Missing Role Name');
