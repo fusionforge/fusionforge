@@ -259,6 +259,8 @@ class Layout extends FFError {
 	/**
 	 * header() - generates the complete header of page by calling
 	 * headerStart() and bodyHeader().
+	 *
+	 * @param	array	$params		Header parameters array
 	 */
 	function header($params) {
 		$this->headerStart($params);
@@ -634,14 +636,16 @@ if (isset($params['group']) && $params['group']) {
 	 * @return	string	the class code
 	 */
 	function boxGetAltRowStyle($i, $classonly = false) {
-		if ($i % 2 == 0)
+		if ($i % 2 == 0) {
 			$ret = 'altRowStyleEven';
-		else
+		} else {
 			$ret = 'altRowStyleOdd';
-		if ($classonly)
+		}
+		if ($classonly) {
 			return $ret;
-		else
+		} else {
 			return 'class="'.$ret.'"';
+		}
 	}
 
 	/**
@@ -877,9 +881,7 @@ if (isset($params['group']) && $params['group']) {
 	 * @return	string	Html to start a submenu.
 	 */
 	function beginSubMenu() {
-		$return = '
-			<p><strong>';
-		return $return;
+		return '<p><strong>';
 	}
 
 	/**
@@ -888,8 +890,7 @@ if (isset($params['group']) && $params['group']) {
 	 * @return	string	Html to end a submenu.
 	 */
 	function endSubMenu() {
-		$return = '</strong></p>';
-		return $return;
+		return '</strong></p>';
 	}
 
 	/**
@@ -1559,6 +1560,7 @@ if (isset($params['group']) && $params['group']) {
 	 * @param	integer	$maxElements	max number of Elements to display
 	 * @param	string	$actionUrl	next / prev Url to click
 	 * @param	array	$htmlAttr	html attributes to set.
+	 * @return	string
 	 */
 	function paging_top($start = 0, $paging = 25, $totalElements = 0, $maxElements = 0, $actionUrl = '/', $htmlAttr = array()) {
 		$html_content = '';
@@ -1587,6 +1589,7 @@ if (isset($params['group']) && $params['group']) {
 	 * @param	integer	$paging		number of element per page
 	 * @param	integer	$totalElements	total number of Elements to display
 	 * @param	string	$actionUrl	next / prev Url to click
+	 * @return	string
 	 */
 	function paging_bottom($start = 0, $paging = 25, $totalElements = 0, $actionUrl = '/') {
 		$html_content = '';
