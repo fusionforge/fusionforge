@@ -131,7 +131,6 @@ class ProjectTask extends FFError {
 	 * @param	int	$duration		The duration of the task in days.
 	 * @param	int	$parent_id		The id of the parent task, if any.
 	 * @param	array	$importData		An array ('user' => user_id)
-	 * @param	array	$importData		An array ('user' => user_id)
 	 * @return	boolean	success.
 	 */
 	function create($summary,$details,$priority,$hours,$start_date,$end_date,
