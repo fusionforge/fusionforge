@@ -130,7 +130,7 @@ class DocumentGroup extends FFError {
 	 * @return	boolean	true on success / false on failure.
 	 * @access	public
 	 */
-	function create($name, $parent_doc_group = 0, $state = 1, $createtimestamp = null) {
+	function create($name, $parent_doc_group = 0, $state = 1, $createtimestamp = null, $forcecreate = false) {
 		//
 		//	data validation
 		//
@@ -159,14 +159,16 @@ class DocumentGroup extends FFError {
 			}
 		}
 
-		$res = db_query_params('SELECT * FROM doc_groups WHERE groupname=$1 AND parent_doc_group=$2 AND group_id=$3',
-					array($name,
-						$parent_doc_group,
-						$this->Group->getID())
-					);
-		if ($res && db_numrows($res) > 0) {
-			$this->setError(_('Folder name already exists'));
-			return false;
+		if (!$forcecreate) {
+			$res = db_query_params('SELECT * FROM doc_groups WHERE groupname=$1 AND parent_doc_group=$2 AND group_id=$3',
+						array($name,
+							$parent_doc_group,
+							$this->Group->getID())
+						);
+			if ($res && db_numrows($res) > 0) {
+				$this->setError(_('Folder name already exists'));
+				return false;
+			}
 		}
 
 		$createtimestamp = (($createtimestamp) ? $createtimestamp : time());

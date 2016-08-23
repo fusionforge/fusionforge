@@ -2598,19 +2598,19 @@ class Group extends FFError {
 					// First pass: create all docgroups
 					$id_mappings['docman_docgroup'][0] = 0;
 					foreach ($olddgf->getDocumentGroups(array(1, 5)) as $o) {
-						$ndgf = new DocumentGroup($this);
+						$ndg = new DocumentGroup($this);
 						// .trash is a reserved directory
-						if ($o->getName() != '.trash' && $o->getParentID() == 0) {
-							$ndgf->create($this->replaceTemplateStrings($o->getName()));
-							$id_mappings['docman_docgroup'][$o->getID()] = $ndgf->getID();
+						if ($o->getName() != '.trash') {
+							$status = $ndg->create($this->replaceTemplateStrings($o->getName()), 0, 1, null, true);
+							$id_mappings['docman_docgroup'][$o->getID()] = $ndg->getID();
 						}
 					}
 					// Second pass: restore hierarchy links & stateid
 					foreach ($olddgf->getDocumentGroups(array(1, 5)) as $o) {
 						$ndgf = new DocumentGroup($this);
-						if ($o->getName() != '.trash' && $o->getParentID() == 0) {
+						if ($o->getName() != '.trash') {
 							$ndgf->fetchData($id_mappings['docman_docgroup'][$o->getID()]);
-							$ndgf->update($ndgf->getName(), $id_mappings['docman_docgroup'][$o->getParentID()], $id_mappings['docman_docgroup'][$o->getState()]);
+							$ndgf->update($ndgf->getName(), $id_mappings['docman_docgroup'][$o->getParentID()], 0, $o->getState());
 						}
 					}
 				}
