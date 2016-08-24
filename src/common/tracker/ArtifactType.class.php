@@ -7,7 +7,7 @@
  * Copyright 2009, Roland Mas
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2016, Franck Villaume - TrivialDev
  * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -653,11 +653,15 @@ class ArtifactType extends FFError {
 	 * cloneFieldsFrom - clone all the fields and elements from another tracker
 	 *
 	 * @param	int	$clone_tracker_id
+	 * @param	int	$group_id		id of the project template to use.
 	 * @return	boolean	true/false on success
 	 */
-	function cloneFieldsFrom($clone_tracker_id) {
-
-		$g = group_get_object(forge_get_config('template_group'));
+	function cloneFieldsFrom($clone_tracker_id, $group_id = null) {
+		if ($group_id) {
+			$g = group_get_object($group_id);
+		} else {
+			$g = group_get_object(forge_get_config('template_group'));
+		}
 		if (!$g || !is_object($g)) {
 			$this->setError(_('Could Not Get Template Group'));
 			return false;
@@ -709,10 +713,14 @@ class ArtifactType extends FFError {
 			while ($el = db_fetch_array($resel)) {
 				//new element
 				$nel = new ArtifactExtraFieldElement($nef);
-				if (!$nel->create(util_unconvert_htmlspecialchars($el['element_name']), $el['status_id'])) {
-					db_rollback();
-					$this->setError(_('Error Creating New Extra Field Element')._(':').' '.$nel->getErrorMessage());
-					return false;
+				if ($nef->getType() == ARTIFACT_EXTRAFIELDTYPE_STATUS && ($el['element_name'] == 'Open' || $el['element_name'] == 'Closed')) {
+					//by default extrafield status is created with default values: 'Open' & 'Closed'
+				} else {
+					if (!$nel->create(util_unconvert_htmlspecialchars($el['element_name']), $el['status_id'])) {
+						db_rollback();
+						$this->setError(_('Error Creating New Extra Field Element')._(':').' '.$nel->getErrorMessage());
+						return false;
+					}
 				}
 				$newEFElIds[$ef['extra_field_id']][$el['element_id']] = $nel->getID();
 			}

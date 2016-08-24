@@ -2562,7 +2562,7 @@ class Group extends FFError {
 						$t = new ArtifactType ($this);
 						$t->create ($this->replaceTemplateStrings($o->getName()),$this->replaceTemplateStrings($o->getDescription()),$o->emailAll(),$o->getEmailAddress(),$o->getDuePeriod()/86400,0,$o->getSubmitInstructions(),$o->getBrowseInstructions());
 						$id_mappings['tracker'][$o->getID()] = $t->getID();
-						$t->cloneFieldsFrom ($o->getID());
+						$t->cloneFieldsFrom($o->getID(), $o->Group->getID());
 					}
 				}
 			}

@@ -25,6 +25,7 @@ FusionForge 6.X:
 * Tracker: add new extrafield: User (TrivialDev)
 * Tracker: add support for mandatory fields on workflow of artifact (TrivialDev)
 * Tracker: add support for description on extrafield to be used in tooltip (TrivialDev)
+* Tracker: fix extrafield cloning when not using default template fusionforge project [#829] (TrivialDev)
 * Utils: cross ref document. Use [DNNN] where NNN is the ID of the document. (TrivialDev)
 * Web UI: upgrade splitter jquery plugin to 0.20.0 (TrivialDev)
 * Web UI: upgrade jquery ui to 1.11.4 (TrivialDev)
