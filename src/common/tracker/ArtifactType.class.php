@@ -677,7 +677,8 @@ class ArtifactType extends FFError {
 			$this->setError(_('Clone Tracker Error').' '.$at->getErrorMessage());
 			return false;
 		}
-		$efs = $at->getExtraFields();
+		// do not filter and get disabled fields as well
+		$efs = $at->getExtraFields(array(), true);
 
 		// get current getExtraFields if any
 		$current_efs = $this->getExtraFields();
@@ -698,7 +699,7 @@ class ArtifactType extends FFError {
 					$current_ef_todelete->delete(true,true);
 				}
 			}
-			if (!$nef->create(util_unconvert_htmlspecialchars($ef['field_name']), $ef['field_type'], $ef['attribute1'], $ef['attribute2'], $ef['is_required'], $ef['alias'], $ef['show100'], $ef['show100label'], $ef['description'], $ef['pattern'], 100)) {
+			if (!$nef->create(util_unconvert_htmlspecialchars($ef['field_name']), $ef['field_type'], $ef['attribute1'], $ef['attribute2'], $ef['is_required'], $ef['alias'], $ef['show100'], $ef['show100label'], $ef['description'], $ef['pattern'], 100, 0, $ef['is_hidden_on_submit'], $ef['is_disabled'])) {
 				$this->setError(_('Error Creating New Extra Field')._(':').' '.$nef->getErrorMessage());
 				db_rollback();
 				return false;
@@ -710,36 +711,33 @@ class ArtifactType extends FFError {
 			//
 			$resel = db_query_params('SELECT * FROM artifact_extra_field_elements WHERE extra_field_id=$1',
 						array($ef['extra_field_id']));
+
+			//by default extrafield status is created with default values: 'Open' & 'Closed'
+			if ($nef->getType() == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
+				$existingElements = $nef->getAvailableValues();
+				foreach($existingElements as $existingElement) {
+					$existingElement = new ArtifactExtraFieldElement($nef, $existingElement);
+					$existingElement->delete();
+				}	
+			}
 			while ($el = db_fetch_array($resel)) {
 				//new element
 				$nel = new ArtifactExtraFieldElement($nef);
-				if ($nef->getType() == ARTIFACT_EXTRAFIELDTYPE_STATUS && ($el['element_name'] == 'Open' || $el['element_name'] == 'Closed')) {
-					//by default extrafield status is created with default values: 'Open' & 'Closed'
-				} else {
-					if (!$nel->create(util_unconvert_htmlspecialchars($el['element_name']), $el['status_id'])) {
-						db_rollback();
-						$this->setError(_('Error Creating New Extra Field Element')._(':').' '.$nel->getErrorMessage());
-						return false;
-					}
+				if (!$nel->create(util_unconvert_htmlspecialchars($el['element_name']), $el['status_id'])) {
+					db_rollback();
+					$this->setError(_('Error Creating New Extra Field Element')._(':').' '.$nel->getErrorMessage());
+					return false;
 				}
 				$newEFElIds[$ef['extra_field_id']][$el['element_id']] = $nel->getID();
 			}
 		}
+
 		foreach ($newEFIds as $oldEFId=>$newEFId) {
-			$oef = new ArtifactExtraField($this,$oldEFId);
+			$oef = new ArtifactExtraField($at, $oldEFId);
 			$nef = new ArtifactExtraField($this,$newEFId);
+			// update Dependency between extrafield
 			if ($oef->getParent() != 100) {
-				$nef->update($nef->getName(),
-							$nef->getAttribute1(),
-							$nef->getAttribute2(),
-							$nef->isRequired(),
-							$nef->getAlias(),
-							$nef->getShow100(),
-							$nef->getShow100label(),
-							$nef->getDescription(),
-							$nef->getPattern(),
-							$newEFIds[$oef->getParent()]);
-				if ($nef->isError()) {
+				if (!$nef->update($nef->getName(), $nef->getAttribute1(), $nef->getAttribute2(), $nef->isRequired(), $nef->getAlias(), $nef->getShow100(), $nef->getShow100label(), $nef->getDescription(), $nef->getPattern(), $newEFIds[$oef->getParent()], $nef->isAutoAssign(), $nef->is_hidden_on_submit(), $nef->is_disabled())) {
 					db_rollback();
 					$this->setError(_('Error Updating New Extra Field Parent')._(':').' '.$nef->getErrorMessage());
 					return false;
@@ -770,6 +768,20 @@ class ArtifactType extends FFError {
 						return false;
 					}
 				}
+			}
+			// update workflow if any
+			if ($nef->getType() == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
+				// update the allowed init values
+				$oatw = new ArtifactWorkflow($at, $oldEFId);
+				$natw = new ArtifactWorkflow($this, $newEFId);
+				// template allowed init values
+				$oaivs = $oatw->getNextNodes('100');
+				$naivs = array();
+				foreach ($oaivs as $oaiv) {
+					$naivs[] = $newEFElIds[$oldEFId][$oaiv];
+				}
+				$natw->saveNextNodes('100', $naivs);
+				//TODO implement the rest of the workflow...
 			}
 		}
 
