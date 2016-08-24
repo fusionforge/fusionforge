@@ -2601,7 +2601,7 @@ class Group extends FFError {
 						$ndg = new DocumentGroup($this);
 						// .trash is a reserved directory
 						if ($o->getName() != '.trash') {
-							$status = $ndg->create($this->replaceTemplateStrings($o->getName()), 0, 1, null, true);
+							$ndg->create($this->replaceTemplateStrings($o->getName()), 0, 1, null, true);
 							$id_mappings['docman_docgroup'][$o->getID()] = $ndg->getID();
 						}
 					}
