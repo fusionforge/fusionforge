@@ -441,7 +441,7 @@ function applyTaskFilter() {
 					$(container).addClass('filtred');
 				}
 			} else {
-				$TaskDescription = $(container).find('a.agile-toolbar-get-description').attr('title');
+				$TaskDescription = $(container).find('a.agile-toolbar-get-description').text();
 				if (sTaskName.match(sFilter) || $TaskDescription.match(sFilter)) {
 					$(container).removeClass('filtred');
 				} else {
