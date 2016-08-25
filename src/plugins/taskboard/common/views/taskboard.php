@@ -182,32 +182,34 @@ if ($release_box) {
 				</td>
 		<?php } ?>
 			</tr>
-			<tr valign="middle">
-				<td>
-					<?php
-						echo html_build_checkbox('filter-tasks-chk', false, false);
-						echo html_e('label', array('for'=>'filter-tasks-chk'), _('Filter tasks')._(': '));
-					?>
-				</td>
-				<td colspan=2>
-					<?php
-						echo html_e('label', array('for'=>'task-filter'), _('Filter')._(': '));
-						echo html_e('input', array('type'=>'text', 'id'=>'task-filter', 'value'=>'', 'title'=>_('Use regular expression')));
-						echo html_build_checkbox('filter-only-on-name-chk', false, true);
-						echo html_e('label', array('for'=>'filter-only-on-name-chk'), _('Filter only on task name'));
-					?>
-				</td>
-			</tr>
-			<tr valign="middle">
-				<td>
-					<?php
-						echo html_build_checkbox('hide-unlinked-task-chk', false, false);
-						echo html_e('label', array('for'=>'hide-unlinked-task-chk'), _('Hide unlinked tasks'));
-					?>
-				</td>
-			</tr>
 		</table>
 	</form>
+	<table cellspacing="0" width="100%">
+		<tr valign="middle">
+			<td width="10%">
+				<?php
+					echo html_build_checkbox('filter-tasks-chk', false, false);
+					echo html_e('label', array('for'=>'filter-tasks-chk'), _('Filter tasks')._(': '));
+				?>
+			</td>
+			<td>
+				<?php
+					echo html_e('label', array('for'=>'task-filter'), _('Filter')._(': '));
+					echo html_e('input', array('type'=>'text', 'id'=>'task-filter', 'value'=>'', 'title'=>_('Use regular expression')));
+					echo html_build_checkbox('filter-only-on-name-chk', false, true);
+					echo html_e('label', array('for'=>'filter-only-on-name-chk'), _('Filter only on task name'));
+				?>
+			</td>
+		</tr>
+		<tr valign="middle">
+			<td>
+				<?php
+					echo html_build_checkbox('hide-unlinked-task-chk', false, false);
+					echo html_e('label', array('for'=>'hide-unlinked-task-chk'), _('Hide unlinked tasks'));
+				?>
+			</td>
+		</tr>
+	</table>
 </div>
 
 <div id="agile-board-progress">

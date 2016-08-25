@@ -96,6 +96,13 @@ function loadTaskboard( group_id ) {
 					'<tr><td colspan="'  + aPhases.length + '" style="text-align: center;">' + gMessages['notasks'] + '</td></tr>'
 				);
 		}
+
+		if ($('#filter-tasks-chk').is(':checked')) {
+			applyTaskFilter();
+		}
+		if ($('#hide-unlinked-task-chk').is(':checked')) {
+			hideUnlinkedTasks();
+		}
 	});
 }
 
