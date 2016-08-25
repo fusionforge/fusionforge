@@ -617,7 +617,7 @@ class TaskBoard extends FFError {
 			$stories[$story->getID()] = array(
 				'id' => $story->getID(),
 				'title' => $story->getSummary(),
-				'description' => str_replace("\n", '<br>', $story->getDetails()),
+				'description' => str_replace("\n", '<br>', util_gen_cross_ref($story->getDetails(),$this->Group->getID())),
 				'priority' => $story->getPriority(),
 				'tasks' => array(),
 				'url' => $this->TrackersAdapter->getTaskUrl($story)
@@ -636,8 +636,7 @@ class TaskBoard extends FFError {
 				foreach($tasks_trackers as $tasks_tracker_data) {
 					$tasks = $this->TrackersAdapter->getTasks($tasks_tracker_data['group_artifact_id'], $assigned_to, NULL, $story->getID());
 					foreach($tasks as $task) {
-						$task_maped = $this->getMappedTask($task);
-						$stories[$story->getID()]['tasks'][] = $task_maped;
+						$stories[$story->getID()]['tasks'][] = $this->getMappedTask($task);;
 					}
 				}
 			}
@@ -757,7 +756,7 @@ class TaskBoard extends FFError {
 
 		$ret['id'] = $task->getID();
 		$ret['title'] = $task->getSummary();
-		$ret['description'] = str_replace("\n", '<br>', $task->getDetails() );
+		$ret['description'] = str_replace("\n", '<br>', util_gen_cross_ref($task->getDetails(),$this->Group->getID()) );
 		$ret['assigned_to'] = $task->getAssignedRealName();
 		$ret['priority'] = $task->getPriority();
 		foreach( $ef_mapping as $k => $f){

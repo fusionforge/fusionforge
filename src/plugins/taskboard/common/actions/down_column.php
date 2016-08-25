@@ -36,4 +36,4 @@ if ($column->setOrder($column->getOrder() + 1)) {
 	db_rollback();
 }
 
-session_redirect('/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&$taskboard_id='.$$taskboard_id.'&view=columns');
+session_redirect('/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&$taskboard_id='.$$taskboard_id.'&view=columns', false);

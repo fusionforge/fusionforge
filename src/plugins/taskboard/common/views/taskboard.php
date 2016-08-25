@@ -160,7 +160,7 @@ if ($release_box) {
 			<tr>
 		<?php if ($release_box) { ?>
 				<td>
-					<?php echo _('Release'); ?>
+					<?php echo _('Release')._(': '); ?>
 				</td>
 				<td>
 					<?php echo $release_box; ?>
@@ -181,7 +181,30 @@ if ($release_box) {
 					</div>
 				</td>
 		<?php } ?>
-
+			</tr>
+			<tr valign="middle">
+				<td>
+					<?php
+						echo html_build_checkbox('filter-tasks-chk', false, false);
+						echo html_e('label', array('for'=>'filter-tasks-chk'), _('Filter tasks')._(': '));
+					?>
+				</td>
+				<td colspan=2>
+					<?php
+						echo html_e('label', array('for'=>'task-filter'), _('Filter')._(': '));
+						echo html_e('input', array('type'=>'text', 'id'=>'task-filter', 'value'=>'', 'title'=>_('Use regular expression')));
+						echo html_build_checkbox('filter-only-on-name-chk', false, true);
+						echo html_e('label', array('for'=>'filter-only-on-name-chk'), _('Filter only on task name'));
+					?>
+				</td>
+			</tr>
+			<tr valign="middle">
+				<td>
+					<?php
+						echo html_build_checkbox('hide-unlinked-task-chk', false, false);
+						echo html_e('label', array('for'=>'hide-unlinked-task-chk'), _('Hide unlinked tasks'));
+					?>
+				</td>
 			</tr>
 		</table>
 	</form>
@@ -208,7 +231,7 @@ if ($release_box) {
 		?>
 			<td class="agile-phase-title" style="<?php echo $style ?>">
 				<?php echo $column->getTitle() ?>&nbsp;&nbsp;
-				<input type="checkbox" class="agile-minimize-column" id="phase-title-<?php echo $column->getID() ?>" phase_id="<?php echo $column->getID() ?>">
+				<div class="agile-minimize-column" id="phase-title-<?php echo $column->getID() ?>" phase_id="<?php echo $column->getID() ?>"></div>
 			</td>
 		<?php } ?>
 		</tr>
@@ -262,8 +285,10 @@ var gMessages = {
 	'progressByTasks' : "<?php echo _('Progress by tasks') ?>",
 	'progressByCost' : "<?php echo _('Progress by cost') ?>",
 	'remainingCost' : "<?php echo _('Remaining m/d') ?>",
-	'completedCost' : "<?php echo _('Completed m/d') ?>"
-};
+	'completedCost' : "<?php echo _('Completed m/d') ?>",
+	'invalidRegEx' : " <?php echo _('Invalid regular expression') ?>"
+}
+var gThemeRoot = "<?php echo $HTML->imgroot ?>";
 
 <?php
 	$releases = array();
@@ -283,6 +308,9 @@ aUserStories = [];
 aPhases = []
 
 jQuery( document ).ready(function( $ ) {
+
+	$("<style type='text/css'>.agile-toolbar-minimize, .agile-minimize-column {background-image: url('" + gThemeRoot + "ic/up-down-16.png');} .agile-toolbar-add-task {background-image: url('" + gThemeRoot + "ic/add-16.png');}</style>").appendTo('head');
+
 	loadTaskboard( <?php echo $group_id ?> );
 
 	jQuery('select[name="_assigned_to"], select[name="_release"]').change(function () {
@@ -292,6 +320,34 @@ jQuery( document ).ready(function( $ ) {
 	jQuery('#taskboard-burndown-btn').click( function ( e ) {
 		window.location = '<?php echo util_make_url ('/plugins/'.$pluginTaskboard->name.'/releases/?view=burndown&group_id='.$group_id.'&taskboard_id='.$taskboard_id.'&release_id=' ); ?>' + jQuery('#taskboard-release-id').val();
 		e.preventDefault();
+	});
+
+	jQuery('#task-filter').keyup( function ( e ) {
+		checkTaskFilter();
+		if ($('#filter-tasks-chk').is(':checked')) {
+			applyTaskFilter();
+		}
+	});
+
+	jQuery('#filter-tasks-chk').change( function ( e ) {
+		if ($('#filter-tasks-chk').is(':checked')) {
+			applyTaskFilter();
+		} else {
+			removeTaskFilter();
+		}
+	});
+
+
+	jQuery('#filter-only-on-name-chk').change( function ( e ) {
+		applyTaskFilter();
+	});
+
+	jQuery('#hide-unlinked-task-chk').change( function ( e ) {
+		if ($('#hide-unlinked-task-chk').is(':checked')) {
+			hideUnlinkedTasks();
+		} else {
+			showUnlinkedTasks();
+		}
 	});
 
 	<?php if( user_getid()) { ?>
