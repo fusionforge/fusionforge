@@ -966,8 +966,14 @@ function util_url_prefix($prefix = '') {
 function util_make_base_url($prefix = '') {
 	$url = util_url_prefix($prefix);
 	$url .= forge_get_config('web_host');
-	if (forge_get_config('https_port') && (forge_get_config('https_port') != 443)) {
-		$url .= ":".forge_get_config('https_port');
+	if (forge_get_config('use_ssl')) {
+		if (forge_get_config('https_port') && (forge_get_config('https_port') != 443)) {
+			$url .= ":".forge_get_config('https_port');
+		}
+	} else {
+		if (forge_get_config('http_port') && (forge_get_config('http_port') != 80)) {
+			$url .= ":".forge_get_config('http_port');
+		}
 	}
 	return $url;
 }
