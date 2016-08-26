@@ -194,7 +194,14 @@ class Navigation extends FFError {
 			$url = '/account/login.php';
 			if(getStringFromServer('REQUEST_METHOD') != 'POST') {
 				$url .= '?return_to=';
-				$url .= urlencode(getStringFromServer('REQUEST_URI'));
+				// remove the url_prefix
+				$url_prefix = forge_get_config('url_prefix');
+				$request_uri = getStringFromServer('REQUEST_URI');
+				if (substr($request_uri, 0, strlen($url_prefix)) == $url_prefix) {
+					$request_uri = '/'.substr($request_uri, strlen($url_prefix));
+				}
+
+				$url .= urlencode($request_uri);
 			}
 			$res['titles'][] = _('Log In');
 			$res['urls'][] = util_make_url($url);
