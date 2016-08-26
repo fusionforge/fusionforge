@@ -48,15 +48,16 @@ $triggered = getIntFromRequest('triggered');
 $attempts = getIntFromRequest('attempts');
 $previous_login = getStringFromRequest('previous_login');
 
-if (session_loggedin())
+if (session_loggedin()) {
 	session_redirect('/my');
+}
 
 //
 //	Validate return_to
 //
 if ($return_to) {
 	$tmpreturn = explode('?',$return_to);
-	$rtpath = $tmpreturn[0] ;
+	$rtpath = $tmpreturn[0];
 
 	if (@is_file(forge_get_config('url_root').$rtpath)
 	    || @is_dir(forge_get_config('url_root').$rtpath)
