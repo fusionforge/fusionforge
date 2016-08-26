@@ -1,4 +1,5 @@
 ServerName ${FF__core__scm_host}
+ServerPath ${FF__core__url_prefix}
 
 SetEnvIf Request_URI . ITKUID=${FF__core__apache_user}
 SetEnvIf Request_URI . ITKGID=${FF__core__apache_group}
