@@ -237,7 +237,7 @@ class Layout extends FFError {
 	function getButtons() {
 		$code = '';
 		if ($this->buttons) {
-			$code .= html_ao('p', array('class' => 'buttonsbar');
+			$code .= html_ao('p', array('class' => 'buttonsbar'));
 			foreach ($this->buttons as $b) {
 				$text = $b['text'];
 				$link = $b['link'];
