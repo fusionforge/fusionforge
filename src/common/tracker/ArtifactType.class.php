@@ -718,7 +718,7 @@ class ArtifactType extends FFError {
 				foreach($existingElements as $existingElement) {
 					$existingElement = new ArtifactExtraFieldElement($nef, $existingElement);
 					$existingElement->delete();
-				}	
+				}
 			}
 			while ($el = db_fetch_array($resel)) {
 				//new element
@@ -769,7 +769,7 @@ class ArtifactType extends FFError {
 					}
 				}
 			}
-			// update workflow if any
+			// update workflow
 			if ($nef->getType() == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 				// update the allowed init values
 				$oatw = new ArtifactWorkflow($at, $oldEFId);
