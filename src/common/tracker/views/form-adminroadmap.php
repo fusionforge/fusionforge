@@ -396,7 +396,7 @@ if (getIntFromRequest('manage_release') ||
 			<strong><?php echo sprintf(_('Set order of releases for %s roadmap:'), $selected_roadmap->getName()) ?></strong>
 			</p>
 			<?php
-			echo $HTML->openForm(array('action' => '/tracker/admin?group_id='.$group_id.'&admin_roadmap=1', 'method' => 'post'));
+			echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&admin_roadmap=1', 'method' => 'post'));
 			?>
 			<input type="hidden" name="roadmap_id" value="<?php echo $roadmap_id ?>" />
 			<?php
