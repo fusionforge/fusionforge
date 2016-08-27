@@ -69,27 +69,27 @@ SetEnv FF__core__config_path "${FF__core__config_path}"
 
 </Directory>
 
-<Location ${FF__core__url_prefix}/projects>
+<Location ${FF__core__url_prefix}projects>
   ForceType application/x-httpd-php
 </Location>
-<Location ${FF__core__url_prefix}/users>
+<Location ${FF__core__url_prefix}users>
   ForceType application/x-httpd-php
 </Location>
 
 IncludeOptional ${FF__core__config_path}/httpd.conf.d/plugin-*.inc
 
-Alias ${FF__core__url_prefix}/images/ ${FF__core__source_path}/www/images/
-Alias ${FF__core__url_prefix}/scripts/coolfieldset/ ${FF__core__source_path}/vendor/coolfieldset/
-Alias ${FF__core__url_prefix}/scripts/iframe-resizer/ ${FF__core__source_path}/vendor/iframe-resizer/
-Alias ${FF__core__url_prefix}/scripts/jquery/ ${FF__core__source_path}/vendor/jquery/
-Alias ${FF__core__url_prefix}/scripts/jquery-ui/ ${FF__core__source_path}/vendor/jquery-ui/
-Alias ${FF__core__url_prefix}/scripts/jquery-storage/ ${FF__core__source_path}/vendor/jquery-storage/
-Alias ${FF__core__url_prefix}/scripts/jquery-simpletreemenu/ ${FF__core__source_path}/vendor/jquery-simpletreemenu/
-Alias ${FF__core__url_prefix}/scripts/jquery-jqplot/ ${FF__core__source_path}/vendor/jquery-jqplot/
-Alias ${FF__core__url_prefix}/scripts/jquery-livequery/ ${FF__core__source_path}/vendor/jquery-livequery/
-Alias ${FF__core__url_prefix}/scripts/jquery-teamwork-gantt/ ${FF__core__source_path}/vendor/jquery-teamwork-gantt/
-Alias ${FF__core__url_prefix}/scripts/jquery-splitter/ ${FF__core__source_path}/vendor/jquery-splitter/
-Alias ${FF__core__url_prefix}/scripts/jquery-auto-height/ ${FF__core__source_path}/vendor/jquery-auto-height/
+Alias ${FF__core__url_prefix}images/ ${FF__core__source_path}/www/images/
+Alias ${FF__core__url_prefix}scripts/coolfieldset/ ${FF__core__source_path}/vendor/coolfieldset/
+Alias ${FF__core__url_prefix}scripts/iframe-resizer/ ${FF__core__source_path}/vendor/iframe-resizer/
+Alias ${FF__core__url_prefix}scripts/jquery/ ${FF__core__source_path}/vendor/jquery/
+Alias ${FF__core__url_prefix}scripts/jquery-ui/ ${FF__core__source_path}/vendor/jquery-ui/
+Alias ${FF__core__url_prefix}scripts/jquery-storage/ ${FF__core__source_path}/vendor/jquery-storage/
+Alias ${FF__core__url_prefix}scripts/jquery-simpletreemenu/ ${FF__core__source_path}/vendor/jquery-simpletreemenu/
+Alias ${FF__core__url_prefix}scripts/jquery-jqplot/ ${FF__core__source_path}/vendor/jquery-jqplot/
+Alias ${FF__core__url_prefix}scripts/jquery-livequery/ ${FF__core__source_path}/vendor/jquery-livequery/
+Alias ${FF__core__url_prefix}scripts/jquery-teamwork-gantt/ ${FF__core__source_path}/vendor/jquery-teamwork-gantt/
+Alias ${FF__core__url_prefix}scripts/jquery-splitter/ ${FF__core__source_path}/vendor/jquery-splitter/
+Alias ${FF__core__url_prefix}scripts/jquery-auto-height/ ${FF__core__source_path}/vendor/jquery-auto-height/
 
 # For FusionForge without DNS delegation, uncomment this
 # and remove 30-vhosts-projects.conf
