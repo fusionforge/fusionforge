@@ -219,19 +219,19 @@ if ($set_roadmap_failed ||
 				if (array_key_exists($artifact_type->getID(), $roadmap_list)) {
 					$field_id = $roadmap_list[$artifact_type->getID()];
 				}
-
-				echo '<tr>';
-				echo '<td>' . $artifact_type->getName() . '</td>'."\n";
-				echo '<td><select name="roadmap_list['.$artifact_type->getID().']">'."\n";
-				echo '<option value="0"'.(! $field_id ? ' selected="selected"' : '').' >'._('Not used').'</option>'."\n";
+				$cells = array();
+				$cells[][] = $artifact_type->getName();
+				$content = '<select name="roadmap_list['.$artifact_type->getID().']">'."\n";
+				$content .= '<option value="0"'.(! $field_id ? ' selected="selected"' : '').' >'._('Not used').'</option>'."\n";
 				$extra_fields = $ath->getExtraFields(array(ARTIFACT_EXTRAFIELD_FILTER_INT));
 				foreach ($extra_fields as $extra_field) {
 					if ($extra_field['field_type'] != ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) {
-						echo '<option value="'.$extra_field['extra_field_id'].'"'.($extra_field['extra_field_id'] == $field_id ? ' selected="selected"' : '').' >'.$extra_field['field_name'].'</option>'."\n";
+						$content .= '<option value="'.$extra_field['extra_field_id'].'"'.($extra_field['extra_field_id'] == $field_id ? ' selected="selected"' : '').' >'.$extra_field['field_name'].'</option>'."\n";
 					}
 				}
-				echo '</select></td>'."\n";
-				echo '</tr>'."\n";
+				$content .= '</select>';
+				$cells[][] = $content;
+				echo $HTML->multiTableRow(array(), $cells);
 			}
 		}
 		echo $HTML->listTableBottom();

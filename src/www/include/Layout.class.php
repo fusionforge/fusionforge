@@ -237,9 +237,7 @@ class Layout extends FFError {
 	function getButtons() {
 		$code = '';
 		if ($this->buttons) {
-			$code .= "\n";
-			$code .= '<p class="buttonsbar">';
-			$code .= "\n";
+			$code .= html_ao('p', array('class' => 'buttonsbar');
 			foreach ($this->buttons as $b) {
 				$text = $b['text'];
 				$link = $b['link'];
@@ -248,9 +246,9 @@ class Layout extends FFError {
 					unset($b['icon']);
 				}
 				unset($b['text'], $b['link'], $b['icon']);
-				$code .= '<span class="buttons">'.util_make_link($link, $text, $b).'</span>'."\n";
+				$code .= html_e('span', array('class' => 'buttons'), util_make_link($link, $text, $b));
 			}
-			$code .= '</p>';
+			$code .= html_ac(html_ap() -1);
 			$this->buttons = array();
 		}
 		return $code;
