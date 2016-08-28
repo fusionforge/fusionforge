@@ -43,7 +43,7 @@ if (getStringFromRequest('submit') && $bookmark_url && $bookmark_title) {
 	echo util_make_link('/my/',_('Back to your homepage'));
 	echo html_ac(html_ap()-1);
 } else {
-	echo $HTML->openForm(array('action' => '/my/bookmark_add.php', 'method' => 'post');
+	echo $HTML->openForm(array('action' => '/my/bookmark_add.php', 'method' => 'post'));
 	echo html_ao('p');
 	echo html_e('label', array('for' => 'bookmark_url'), _('Bookmark URL')._(':').html_e('br'));
 	echo html_e('input', array('id' => 'bookmark_url', 'required' => 'required', 'type' => 'url', 'name' => 'bookmark_url', 'value' => 'http://'));

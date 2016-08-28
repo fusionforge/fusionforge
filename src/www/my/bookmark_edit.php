@@ -55,7 +55,7 @@ if ($result) {
 	$bookmark_title = db_result($result,0,'bookmark_title');
 }
 
-echo $HTML->openForm(array('action' => '/my/bookmark_edit.php', 'method' => 'post');
+echo $HTML->openForm(array('action' => '/my/bookmark_edit.php', 'method' => 'post'));
 echo html_e('input', array('type' => 'hidden', 'name' => 'bookmark_id', 'value' => $bookmark_id));
 echo html_ao('p');
 echo html_e('label', array('for' => 'bookmark_url'), _('Bookmark URL')._(':').html_e('br'));
