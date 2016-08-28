@@ -62,7 +62,7 @@ if (count($sshKeysArray)) {
 	echo $HTML->listTableBottom();
 	echo $HTML->boxBottom();
 }
-echo $HTML->openForm(array('action' => util_make_uri('/account/?action=addsshkey'), 'method' => 'post', 'enctype' => 'multipart/form-data'));
+echo $HTML->openForm(array('action' => '/account/?action=addsshkey', 'method' => 'post', 'enctype' => 'multipart/form-data'));
 echo html_e('h2', array(), _('Add a new ssh key'));
 echo html_e('p', array(), _('To avoid having to type your password every time for your SSH developer account, you may upload your public key(s) here and they will be placed on the server in your ~/.ssh/authorized_keys file. Uploaded SSH keys are effective <em>immediately</em>.'));
 echo html_e('p', array(), _('To generate a public key, run the program \'ssh-keygen\'. The public key will be placed at \'~/.ssh/id_dsa.pub\', \'~/.ssh/id_rsa.pub\', \'~/.ssh/id_ecdsa.pub\' or \'~/.ssh/id_ed25519.pub\' (protocol version 2). Read the ssh documentation for further information on sharing keys.'));

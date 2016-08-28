@@ -150,7 +150,7 @@ if (count($FRSPackages) == 0) {
 if (forge_check_perm('frs_admin', $group_id, 'admin')) {
 	echo html_ao('fieldset');
 	echo html_e('legend', array(), _('Create New Package'));
-	echo $HTML->openForm(array('action' => util_make_uri('/frs/?group_id='.$group_id.'&action=addpackage'), 'method' => 'post'));
+	echo $HTML->openForm(array('action' => '/frs/?group_id='.$group_id.'&action=addpackage', 'method' => 'post'));
 	echo html_e('p', array(), html_e('strong', array(), _('New Package Name')._(':')).html_e('input', array('type' => 'text', 'name' => 'package_name', 'size' => 20, 'maxlength' => 30, 'required' => 'required', 'pattern' => '.{3,}', 'title' => _('At least 3 characters'))).html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Create'))));
 	echo $HTML->closeForm();
 	echo html_ac(html_ap() - 1);

@@ -68,7 +68,7 @@ if (getStringFromRequest('submit')) {
 } else {
 	// Show change form
 	site_user_header(array('title'=>_('Change Password')));
-	echo $HTML->openForm(array('action' => util_make_uri('/account/change_pw.php'), 'method' => 'post'));
+	echo $HTML->openForm(array('action' => '/account/change_pw.php', 'method' => 'post'));
 	echo html_e('input', array('type' => 'hidden', 'name' => 'form_key', 'value' => form_generate_key()));
 	echo html_e('p', array(), _('Old Password')._(':').utils_requiredField().
 				html_e('br').

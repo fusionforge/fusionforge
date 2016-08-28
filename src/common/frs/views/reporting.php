@@ -82,7 +82,7 @@ if ($report->isError()) {
 	echo $HTML->error_msg($report->getErrorMessage());
 } else {
 
-	echo $HTML->openForm(array('action' => util_make_url('/frs/?view=reporting&group_id='.$group_id), 'method' => 'post', 'class' => 'align-center'));
+	echo $HTML->openForm(array('action' => '/frs/?view=reporting&group_id='.$group_id, 'method' => 'post', 'class' => 'align-center'));
 	echo html_e('strong', array(), _('Package')._(':')).report_package_box($group_id,'package_id',$package_id);
 	echo html_e('strong', array(), _('Start Date')._(':')).report_months_box($report, 'start', $start);
 	echo html_e('strong', array(), _('End Date')._(':')).report_months_box($report, 'end', $end);

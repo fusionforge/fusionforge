@@ -76,7 +76,7 @@ if (getStringFromRequest('submit')) {
 	echo html_e('p', array(), _('Changing your email address will require confirmation from your new email address, so that we can ensure we have a good email address on file.'));
 	echo html_e('p', array(), _('We need to maintain an accurate email address for each user due to the level of access we grant via this account. If we need to reach a user for issues arriving from a shell or project account, it is important that we be able to do so.'));
 	echo html_e('p', array(), _('Submitting the form below will mail a confirmation URL to the new email address. Visiting this link will complete the email change.'));
-	echo $HTML->openForm(array('action' => util_make_uri('/account/change_email.php'), 'method' => 'post'));
+	echo $HTML->openForm(array('action' => '/account/change_email.php', 'method' => 'post'));
 	echo html_e('p', array(), html_e('input', array('type' => 'hidden', 'name' => 'form_key', 'value' => form_generate_key())).
 				_('New Email Address')._(':').utils_requiredField().
 				html_e('label', array('for' => 'newemail'), html_e('input', array('id' => 'newemail', 'required' => 'required', 'type' => 'email', 'name' => 'newemail', 'maxlength' => 255))).

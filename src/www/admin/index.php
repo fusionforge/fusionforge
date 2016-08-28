@@ -83,7 +83,7 @@ echo html_ac(html_ap() - 1);
 	<ul>
 	<li><?php
 
-		echo $HTML->openForm(array('action' => util_make_uri('/admin/globalroleedit.php'), 'method' => 'post')).'<p>';
+		echo $HTML->openForm(array('action' => '/admin/globalroleedit.php', 'method' => 'post')).'<p>';
 		echo global_role_box('role_id');
 		echo '<input type="submit" name="edit" value="'._("Edit Role").'" /></p>'.$HTML->closeForm();
 ?>
@@ -91,7 +91,7 @@ echo html_ac(html_ap() - 1);
 <li>
 <?php
 
-		echo $HTML->openForm(array('action' => util_make_uri('/admin/globalroleedit.php'), 'method' => 'post')).'<p>';
+		echo $HTML->openForm(array('action' => '/admin/globalroleedit.php', 'method' => 'post')).'<p>';
 		echo '<input type="text" name="role_name" size="10" value="" required="required" />';
 		echo '<input type="submit" name="add" value="'._("Create Role").'" /></p>'.$HTML->closeForm();
 	?></li>

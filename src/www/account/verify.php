@@ -69,7 +69,7 @@ if (getStringFromRequest('submit')) {
 $HTML->header(array('title'=>_('Verify')));
 
 echo html_e('p', array(), _('In order to complete your registration, login now. Your account will then be activated for normal logins.'));
-echo $HTML->openForm(array('action' => util_make_uri('/account/verify.php?confirm_hash='.$confirm_hash), 'method' => 'post'));
+echo $HTML->openForm(array('action' => '/account/verify.php?confirm_hash='.$confirm_hash, 'method' => 'post'));
 if (forge_get_config('require_unique_email')) {
 	$content = _('Login name or email address')._(':');
 } else {

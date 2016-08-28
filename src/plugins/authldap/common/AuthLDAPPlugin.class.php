@@ -207,7 +207,7 @@ into the FusionForge database.");
 		$result = '';
 
 		$result .= html_e('p', array(), _('Cookies must be enabled past this point.'));
-		$result .= $HTML->openForm(array('action' => util_make_uri('/plugins/'.$this->name.'/post-login.php'), 'method' => 'post'));
+		$result .= $HTML->openForm(array('action' => '/plugins/'.$this->name.'/post-login.php', 'method' => 'post'));
 		$result .= html_e('input', array('type' => 'hidden', 'name' => 'form_key', 'value' => form_generate_key()));
 		$result .= html_e('input', array('type' => 'hidden', 'name' => 'return_to', 'value' => htmlspecialchars(stripslashes($return_to))));
 		$result .= html_e('p', array(), _('Login Name')._(':').

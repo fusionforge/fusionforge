@@ -104,7 +104,7 @@ html_use_tablesorter();
 $title = _('My Account');
 site_user_header(array('title'=>$title));
 
-echo $HTML->openForm(array('action' => util_make_uri('/account/'), 'method' => 'post'));
+echo $HTML->openForm(array('action' => '/account/', 'method' => 'post'));
 echo html_e('input', array('type' => 'hidden', 'name' => 'form_key', 'value' => form_generate_key()));
 echo $HTML->boxTop(_('Account options'));
 echo html_e('p', array(), _('Welcome').html_e('strong', array(), $u->getRealName()));

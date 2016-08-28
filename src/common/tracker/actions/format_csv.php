@@ -61,7 +61,7 @@ $sep = getStringFromRequest('sep', ',');
 	<tr>
 		<td>
 		<fieldset><legend><strong><?php echo _('CSV Format'); ?></strong></legend><?php
-		echo $HTML->openForm(array('action' => util_make_uri('/tracker/'), 'method' => 'get'));?>
+		echo $HTML->openForm(array('action' => '/tracker/', 'method' => 'get'));?>
 			<input type="hidden" name="group_id" value="<?php echo $group_id ?>" />
 			<input type="hidden" name="atid" value="<?php echo $ath->getID() ?>" />
 			<input type="hidden" name="func" value="csv" />

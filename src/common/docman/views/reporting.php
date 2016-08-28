@@ -85,7 +85,7 @@ if ($report->isError()) {
 	echo $HTML->error_msg($report->getErrorMessage());
 } else {
 	echo html_ao('div', array('id' => 'div_form_reporting'));
-	echo $HTML->openForm(array('action' => util_make_uri('/docman/?group_id='.$group_id.'&view=reporting'), 'method' => 'post', 'class' => 'align-center'));
+	echo $HTML->openForm(array('action' => '/docman/?group_id='.$group_id.'&view=reporting', 'method' => 'post', 'class' => 'align-center'));
 	echo html_e('strong', array(), _('Start Date')._(':'), false);
 	echo report_months_box($report, 'start', $start);
 	echo html_e('strong', array(), _('End Date')._(':'), false);

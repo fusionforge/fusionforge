@@ -140,7 +140,7 @@ if (!isset($ccode) || empty($ccode) || !preg_match('/^[a-zA-Z]{2}$/', $ccode)) {
 }
 
 site_header(array('title'=>_('User Account Registration')));
-echo $HTML->openForm(array('action' => util_make_uri('/account/register.php'), 'method' => 'post'));
+echo $HTML->openForm(array('action' => '/account/register.php', 'method' => 'post'));
 echo html_e('input', array('type' => 'hidden', 'name' => 'form_key', 'value' => form_generate_key()));
 ?>
 <p>
