@@ -5,6 +5,7 @@
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2003-2004, GForge, LLC
  * Copyright 2007-2009, Roland Mas
+ * Copyright 2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -26,23 +27,19 @@
 /**
  *      globalsearch_admin_table_add() - present a form for adding a record to the specified table
  */
-function globalsearch_admin_table_add () {
-        global $PHP_SELF;
-
+function globalsearch_admin_table_add() {
+        global $HTML;
 	echo _('Create a new associated forge below');
-	echo '<form name="add" action="'.$PHP_SELF.'?function=postadd" method="post">
-                        <table>';
-
-	echo '<tr><td><strong>'._('Title').'</strong></td><td><input type="text" name="title" /></td></tr>';
-	echo '<tr><td><strong>'._('Link').'</strong></td><td><input type="text" name="link" /></td></tr>';
+	echo $HTML->openForm(array('name' => 'add', 'action' => '/plugins/globalsearch/edit_assoc_sites.php?function=postadd', 'method' => 'post'));
+	echo '<table>';
+	echo '<tr><td><strong>'._('Title').'</strong></td><td><input type="text" name="title" required="required" /></td></tr>';
+	echo '<tr><td><strong>'._('Link').'</strong></td><td><input type="text" name="link" required="required" /></td></tr>';
 	echo '<tr><td><strong>'._('Software only').'</strong></td><td><input type="checkbox" checked name="onlysw" value="t"/></td></tr>';
 	echo '<tr><td><strong>'._('Enabled').'</strong></td><td><input type="checkbox" checked name="enabled" value="t"/></td></tr>';
 	echo '<tr><td><strong>'._('Rank').'</strong></td><td><input type="text" name="rank" /></td></tr>';
-
-	echo '</table><input type="submit" value="'._('Submit new associated forge').'" /></form>
-                        <form name="cancel" action="'.$PHP_SELF.'" method="post">
-                        <input type="submit" value="Cancel" />
-                        </form>';
+	echo '</table><input type="submit" value="'._('Submit new associated forge').'" />
+                        <input type="reset" value="'._('Cancel').'" />';
+	echo $HTML->closeForm();
 }
 
 /**
@@ -80,7 +77,7 @@ VALUES ($1, $2, $3, $4, $5)',
  *      @param $id - the id of the record to act on
  */
 function globalsearch_admin_table_confirmdelete ($id) {
-        global $PHP_SELF;
+        global $HTML;
 
         $result = db_query_params ('SELECT * FROM plugin_globalsearch_assoc_site WHERE assoc_site_id=$1',
 				   array($id));
@@ -99,12 +96,10 @@ function globalsearch_admin_table_confirmdelete ($id) {
 		echo '<tr><td><strong>'._('Enabled').'</strong></td><td>'.(($enabled == 't')?_('Yes'):_('No')) .'</td></tr>';
 		echo '<tr><td><strong>'._('Rank').'</strong></td><td>'.$rank.'</td></tr>';
 		echo '</table>' ;
-		echo '<form name="delete" action="'.$PHP_SELF.'?function=delete&amp;id='.$id.'" method="post">
-                        <input type="submit" value="'._('Delete').'" />
-                        </form>
-                        <form name="cancel" action="'.$PHP_SELF.'" method="post">
-                        <input type="submit" value="'._('Cancel').'" />
-                        </form>';
+		echo $HTML->openForm(array('name' => 'delete', 'action' => '/plugins/globalsearch/edit_assoc_sites.php?function=delete&id='.$id, 'method' => 'post'));
+		echo '<input type="submit" value="'._('Delete').'" />';
+		echo util_make_link('/plugins/globalsearch/edit_assoc_sites.php', '<input type="button" value="'._('Cancel').'" />');
+		echo $HTML->closeForm();
         } else {
                 echo db_error();
         }
@@ -130,7 +125,7 @@ function globalsearch_admin_table_delete ($id) {
  *      @param $id - the id of the record to act on
  */
 function globalsearch_admin_table_edit ($id) {
-        global $PHP_SELF;
+        global $HTML;
 
         $result = db_query_params ('SELECT * FROM plugin_globalsearch_assoc_site WHERE assoc_site_id=$1',
 				   array($id));
@@ -141,9 +136,9 @@ function globalsearch_admin_table_edit ($id) {
 		$old_enabled   =  db_result ($result, 0, 'enabled');
 		$old_rank      =  db_result ($result, 0, 'rank', 1);
 
-                echo _('Modify the associated forge below');
-		echo '<form name="edit" action="'.$PHP_SELF.'?function=postedit&amp;id='.$id.'" method="post">
-                        <table>';
+		echo _('Modify the associated forge below');
+		echo $HTML->openForm(array('name' => 'edit', 'action' => '/plugins/globalsearch/edit_assoc_sites.php?function=postedit&id='.$id, 'method' => 'post'));
+		echo '<table>';
 
 		echo '<tr><td><strong>'._('Title').'</strong></td><td><input type="text" name="title" value="'.$old_title.'"/></td></tr>';
 		echo '<tr><td><strong>'._('Link').'</strong></td><td><input type="text" name="link" value="'.$old_link.'"/></td></tr>';
@@ -151,10 +146,9 @@ function globalsearch_admin_table_edit ($id) {
 		echo '<tr><td><strong>'._('Enabled').'</strong></td><td><input type="checkbox" '.(($old_enabled == 't')?'checked':'') .' name="enabled" value="t"/></td></tr>';
 		echo '<tr><td><strong>'._('Rank').'</strong></td><td><input type="text" name="rank" value="'.$old_rank.'"/></td></tr>';
 
-		echo '</table><input type="submit" value="'._('Submit Changes').'" /></form>
-                        <form name="cancel" action="'.$PHP_SELF.'" method="post">
-                        <input type="submit" value="'._('Cancel').'" />
-                        </form>';
+		echo '</table><input type="submit" value="'._('Submit Changes').'" />';
+		echo $HTML->closeForm();
+		echo util_make_link('/plugins/globalsearch/edit_assoc_sites.php', '<input type="button" value="'._('Cancel').'" />');
         } else {
                 echo db_error();
         }

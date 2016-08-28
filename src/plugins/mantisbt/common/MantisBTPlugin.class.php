@@ -65,13 +65,13 @@ _('Use Mantis Bugtracker as another ticket management tool.');
 				}
 				if ($project->usesPlugin($this->name)) {
 					$params['TITLES'][] = $this->text;
-					$params['DIRS'][] = '/plugins/'.$this->name.'/?type=group&group_id=' . $group_id;
+					$params['DIRS'][] = util_make_uri('/plugins/'.$this->name.'/?type=group&group_id=' . $group_id);
 					$params['TOOLTIPS'][] = _('Tickets Management');
 					if (session_loggedin()) {
 						$user = session_get_user();
 						$userperm = $project->getPermission();
 						if ($userperm->isAdmin()) {
-							$params['ADMIN'][] = '/plugins/'.$this->name.'/?type=admin&group_id=' . $group_id;
+							$params['ADMIN'][] = util_make_uri('/plugins/'.$this->name.'/?type=admin&group_id=' . $group_id);
 						}
 					}
 					if (isset($params['toptab'])) {

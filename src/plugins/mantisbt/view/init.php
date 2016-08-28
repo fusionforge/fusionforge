@@ -3,7 +3,7 @@
  * MantisBT plugin
  *
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2011-2012,2014 Franck Villaume - TrivialDev
+ * Copyright 2011-2012,2014,2016 Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -48,7 +48,7 @@ jQuery(document).ready(function() {
 
 <?php
 
-echo $HTML->openForm(array('method' => 'post', 'action' => util_make_uri('/plugins/'.$mantisbt->name.'/?type='.$type.'&group_id='.$group_id.'&action=init')));
+echo $HTML->openForm(array('method' => 'post', 'action' => '/plugins/'.$mantisbt->name.'/?type='.$type.'&group_id='.$group_id.'&action=init'));
 echo $HTML->listTableTop();
 $cells = array();
 $cells[] = array(_('Use global configuration')._(':'), 'class' => 'align-right');

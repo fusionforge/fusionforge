@@ -89,7 +89,7 @@ jQuery(document).ready(function() {
 //]]>
 <?php
 echo html_ac(html_ap() - 1);
-echo $HTML->openForm(array('method' => 'post', 'action' => util_make_uri('/docman/?group_id='.$group_id.'&view=search')));
+echo $HTML->openForm(array('method' => 'post', 'action' => '/docman/?group_id='.$group_id.'&view=search'));
 echo html_e('div', array('id' => 'docman_search_query_words'),
 		html_e('span', array('id' => 'docman_search_query_label'), _('Query').utils_requiredField()._(': ')).
 		html_e('input', array('type' => 'text', 'name' => 'textsearch', 'id' => 'textsearch', 'size' => 48, 'value' => $searchString, 'required' => 'required', 'placeholder' => _('Searched words'))).

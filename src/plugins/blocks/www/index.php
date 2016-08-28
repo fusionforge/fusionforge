@@ -4,6 +4,7 @@
  * Copyright (C) 2006 Alain Peyrat, Alcatel-Lucent
  * Copyright (C) 2010 Alain Peyrat <aljeux@free.fr>
  * Copyright (C) 2012-2014 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -51,6 +52,8 @@ require_once $gfcommon.'tracker/ArtifactFactory.class.php';
 require_once $gfcommon.'mail/MailingListFactory.class.php';
 require_once $gfcommon.'pm/ProjectGroupFactory.class.php';
 require_once $gfcommon.'survey/SurveyFactory.class.php';
+
+global $HTML;
 
 function getAvailableBlocks($group) {
 	$blocks = array(
@@ -176,7 +179,7 @@ if ( ! ($group->usesPlugin ( $pluginname )) ) {//check if the group has the bloc
 session_require_perm ('project_admin', $id) ;
 
 if ($type == 'admin') {
-	blocks_Project_Header(array('title'=>'Blocks Administration','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));
+	blocks_Project_Header(array('title' => _('Blocks Administration'), 'pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));
 
 	$res = db_query_params('SELECT name, status FROM plugin_blocks WHERE group_id=$1',
 			array($id));
@@ -185,32 +188,15 @@ if ($type == 'admin') {
 	}
 
 	print _("Blocks are customizable HTML boxes in the left or right side of the pages the web site. They are created manually.");
-
-	print "<form action=\"/plugins/blocks/\" method=\"post\">";
+	echo $HTML->openForm(array('action' => '/plugins/blocks/', 'method' => 'post'));
 	print "<input type=\"hidden\" name=\"id\" value=\"$id\" />\n";
 	print "<input type=\"hidden\" name=\"pluginname\" value=\"$pluginname\" />\n";
 	print "<input type=\"hidden\" name=\"type\" value=\"admin_post\" />\n";
 
-	print "<table class=\"centered listing\">";
-	print "<thead><tr><th>".
-			_("Name").
-			"</th>" .
-			"<th>".
-			_("Active").
-			"</th>" .
-			"<th>" .
-			_("Description").
-			"</th>" .
-			"<th>" .
-			_("Operation") .
-			"</th>" .
-			"</tr></thead>";
+	$thArray = array(_('Name'), _('Active'), _('Description'), _('Operation'));
+	echo $HTML->listTableTop($thArray, array(), 'centered listing');
 	$blocks = getAvailableBlocks($group);
-	$class = 'even';
 	foreach ($blocks as $b => $help) {
-
-		$class = ($class == 'even') ? "odd" : "even";
-
 		$match = '';
 		if (preg_match('/(.*) index$/', $b, $match)) {
 			print '<tr><td colspan="4"><b>'.$blocks_text[$match[1]].'</b></td></tr>';
@@ -218,17 +204,17 @@ if ($type == 'admin') {
 
 		$checked = (isset($status[$b]) && $status[$b] == 1) ? ' checked="checked"' : '';
 
-		print "<tr class=\"$class\"><td>$b</td>\n" .
+		print "<tr ".$HTML->boxGetAltRowStyle($b)."><td>$b</td>\n" .
 		"<td class=\"align-center\">" .
 		"<input type=\"checkbox\" name=\"activate[$b]\" value=\"1\"$checked /></td>\n" .
 		"<td>$help</td>\n" .
-		"<td><a href=\"/plugins/blocks/index.php?id=$id&amp;type=configure&amp;pluginname=blocks&amp;name=".urlencode($b)."\">"._('Configure')."</a></td>\n</tr>\n";
+		"<td>".util_make_link('/plugins/blocks/?id='.$id.'&type=configure&pluginname=blocks&name='.urlencode($b), _('Configure'))."</td>\n</tr>\n";
 	}
-	print "</table>\n";
+	echo $HTML->listTableBottom();
 	print '<p class="align-center"><input type="submit" value="' .
 			_("Save Blocks") .
 			'" /></p>';
-	print "</form>\n";
+	echo $HTML->closeForm();
 } elseif ($type == 'admin_post') {
 	$res = db_query_params('SELECT name, status FROM plugin_blocks WHERE group_id=$1',
 			array($id));
@@ -267,9 +253,9 @@ if ($type == 'admin') {
 		}
 	}
 	$feedback = _('Block Saved');
-	session_redirect('/plugins/blocks/index.php?id='.$id.'&type=admin&pluginname=blocks');
+	session_redirect('/plugins/blocks/?id='.$id.'&type=admin&pluginname=blocks');
 } elseif ($type == 'configure') {
-	blocks_Project_Header(array('title'=>'Edit Block','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));
+	blocks_Project_Header(array('title'=>_('Edit Block'), 'pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));
 	// DO THE STUFF FOR THE PROJECT ADMINISTRATION PART HERE
 
 	$blocks = getAvailableBlocks($group);
@@ -281,7 +267,7 @@ if ($type == 'admin') {
 
 	print '<div class="align-center">';
 	print "<p><b>$blocks[$name]</b> ($name)</p>";
-	print "<form action=\"/plugins/blocks/\" method=\"post\">";
+	echo $HTML->openForm(array('action' => '/plugins/blocks', 'method' => 'post'));
 	print "<input type=\"hidden\" name=\"id\" value=\"$id\" />\n";
 	print "<input type=\"hidden\" name=\"pluginname\" value=\"$pluginname\" />\n";
 	print "<input type=\"hidden\" name=\"type\" value=\"configure_post\" />\n";
@@ -315,7 +301,7 @@ if ($type == 'admin') {
 	print "<br /><input type=\"submit\" value=\"" .
 			_("Save") .
 			"\" />";
-	print "</form>";
+	echo $HTML->closeForm();
 	print "</div>";
 
 	print "<fieldset><legend>".
@@ -354,7 +340,7 @@ if ($type == 'admin') {
 				array($body, $id, htmlspecialchars($name)));
 	}
 	$feedback = $name .' : '. _('Block configuration saved');
-	session_redirect('/plugins/blocks/index.php?id='.$id.'&type=admin&pluginname=blocks');
+	session_redirect('/plugins/blocks/?id='.$id.'&type=admin&pluginname=blocks');
 }
 
 site_project_footer();

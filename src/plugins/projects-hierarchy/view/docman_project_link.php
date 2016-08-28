@@ -28,7 +28,7 @@ $projectsHierarchy = plugin_get_object('projects-hierarchy');
 $globalConfArray = $projectsHierarchy->getGlobalConf();
 
 if ($globalConfArray['docman']) {
-	echo html_ao('form', array('id' => 'projectsHierarchyDocman', 'name' => 'projectsHierarchyDocman', 'method' => 'post', 'action' => util_make_uri('/plugins/'.$projectsHierarchy->name.'/?action=projectsHierarchyDocman&id='.$group_id.'&type=group')));
+	echo html_ao('form', array('id' => 'projectsHierarchyDocman', 'name' => 'projectsHierarchyDocman', 'method' => 'post', 'action' => '/plugins/'.$projectsHierarchy->name.'/?action=projectsHierarchyDocman&id='.$group_id.'&type=group'));
 	echo html_ao('ul');
 	$label = _('Enable hierarchical browsing');
 	$status = 1;

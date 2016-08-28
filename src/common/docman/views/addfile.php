@@ -93,7 +93,7 @@ if ($dgf->getNested($stateidArr) == NULL) {
 	echo $HTML->warning_msg(_('You MUST first create at least one folder to store your document.'));
 } else {
 	/* display the add new documentation form */
-	echo $HTML->openForm(array('name' => 'adddata', 'action' => util_make_uri($actionurl), 'method' => 'post', 'enctype' => 'multipart/form-data'));
+	echo $HTML->openForm(array('name' => 'adddata', 'action' => $actionurl, 'method' => 'post', 'enctype' => 'multipart/form-data'));
 	echo $HTML->listTableTop(array(), array(), 'infotable');
 	$cells = array();
 	$cells[][] = _('Document Title').utils_requiredField();

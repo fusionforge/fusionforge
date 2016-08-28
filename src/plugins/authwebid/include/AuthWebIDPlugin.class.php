@@ -81,9 +81,7 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 		if (!$message) {
 			$message = sprintf( _('Click here to delegate authentication of your WebID to %s'), $this->delegate_webid_auth_to);
 		}
-		$html = '<a href="' . $this->idp_delegation_link . '?authreqissuer='. $callback .'">';
-		$html .=  $message .'</a>';
-		return $html;
+		return util_make_link($this->idp_delegation_link.'?authreqissuer='.$callback, $message, array(), true);
 	}
 
 	/**
@@ -106,7 +104,7 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 		// TODO Use a trusted IdP that was configured previously by the forge admin, and which is trusted by the libAuthentication checks
 		//$result .= '<a href="https://foafssl.org/srv/idp?authreqissuer='. util_make_url('/plugins/authwebid/post-login.php') .'">Click here to Login via foafssl.org</a>';
 		//echo "<br />";
-		$result .= '<b>'. $this->displayAuthentifyViaIdPLink( util_make_url('/plugins/authwebid/post-login.php') ) . '</b>';
+		$result .= '<b>'. $this->displayAuthentifyViaIdPLink(util_make_uri('/plugins/authwebid/post-login.php')) . '</b>';
 		$result .= ' ('. _('You need to have bound such a WebID to your existing fusionforge account in advance') .')';
 
 		$params['html_snippets'][$this->name] = $result;

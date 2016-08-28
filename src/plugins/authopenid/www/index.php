@@ -1,8 +1,9 @@
 <?php
-
-/** External authentication via OpenID for FusionForge
+/**
+ * External authentication via OpenID for FusionForge
  * Copyright 2011, Roland Mas
  * Copyright 2011, Olivier Berger & Institut Telecom
+ * Copyright 2016, Franck Villaume - TrivialDev
  *
  * This program was developped in the frame of the COCLICO project
  * (http://www.coclico-project.org/) with financial support of the Paris
@@ -128,14 +129,13 @@ echo $HTML->boxTop(_('My OpenID identities'));
 <h2><?php echo _('Add new identity'); ?></h2>
 
 <p><?php echo _('You can add your own OpenID identities in the form below.') ?></p>
-
-<form name="new_identity" action="<?php echo util_make_uri ('/plugins/authopenid/'); ?>" method="post">
+<?php echo $HTML->openForm(array('name' => 'new_identity', 'action' => '/plugins/authopenid/', 'method' => 'post')); ?>
 <fieldset>
 <legend><?php echo _('Add new identity'); ?></legend>
 <p>
 <input type="hidden" name="user_id" value="<?php echo $u->getID() ?>" />
 <input type="hidden" name="addidentity" value="1" />
-<strong><?php echo _('OpenID identity URL:') ?></strong><?php echo utils_requiredField(); ?>
+<strong><?php echo _('OpenID identity URL')._(': ') ?></strong><?php echo utils_requiredField(); ?>
 <br />
 <input type="text" size="150" name="openid_identity" value="<?php echo $openid_identity ?>" /><br />
 </p>
@@ -143,9 +143,8 @@ echo $HTML->boxTop(_('My OpenID identities'));
 <input type="submit" value="<?php echo _('Add identity') ?>" />
 </p>
 </fieldset>
-</form>
 <?php
-
+echo $HTML->closeForm();
 echo $HTML->listTableTop(array(_('Identity'), ''));
 
 $res = db_query_params('SELECT openid_identity FROM plugin_authopenid_user_identities WHERE user_id =$1',
@@ -158,16 +157,14 @@ if($res) {
 
 		echo '<tr '.$HTML->boxGetAltRowStyle($i).'>';
 		echo '<td>'. $openid_identity .'</td>';
-		echo '<td><a href="'.util_make_uri ('/plugins/authopenid/').'?openid_identity='. urlencode($openid_identity) .'&delete=1">delete</a></td>';
+		echo '<td>'.util_make_link('/plugins/authopenid/?openid_identity='.urlencode($openid_identity).'&delete=1', _('delete')).'</td>';
 		echo '</tr>';
 		$i++;
 	}
 }
 
 echo $HTML->listTableBottom();
-
 echo $HTML->boxBottom();
-
 site_user_footer();
 
 // Local Variables:

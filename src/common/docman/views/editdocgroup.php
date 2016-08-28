@@ -56,7 +56,7 @@ if ($dg->isError()) {
 }
 
 echo html_ao('div', array('class' => 'docmanDivIncluded'));
-echo $HTML->openForm(array('name' => 'editgroup', 'action' => util_make_uri($actionurl), 'method' => 'post'));
+echo $HTML->openForm(array('name' => 'editgroup', 'action' => $actionurl, 'method' => 'post'));
 echo html_e('input', array('type' => 'hidden', 'name' => 'dirid', 'value' => $dirid));
 echo $HTML->listTableTop();
 $cells[][] = _('Folder Name');

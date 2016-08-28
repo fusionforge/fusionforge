@@ -294,7 +294,7 @@ class ForumAdmin extends FFError {
 				}
 			}
 			/* ]]> */</script>';
-			echo $HTML->openForm(array('name' => 'pending', 'action' => util_make_uri('forum/admin/pending.php'), 'method' => 'post'));
+			echo $HTML->openForm(array('name' => 'pending', 'action' => '/forum/admin/pending.php', 'method' => 'post'));
 			echo '
 			<input type="hidden" name="action" value="update_pending" />
 			<input type="hidden" name="form_key" value="' . form_generate_key() . '" />

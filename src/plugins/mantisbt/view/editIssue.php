@@ -4,7 +4,7 @@
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2010, Antoine Mercadal - Capgemini
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -68,7 +68,7 @@ if (!isset($errorPage)){
 	global $additional_value;
 
 	$boxTitle = _('Edit ticket')._(': ').sprintf($format,$defect->id);
-	echo $HTML->openForm(array('name' => 'issue', 'method' => 'post', 'action' => util_make_uri('plugins/'.$mantisbt->name.'/?type='.$type.'&group_id='.$group_id.'&idBug='.$defect->id.'&action=updateIssue&view=viewIssue')));
+	echo $HTML->openForm(array('name' => 'issue', 'method' => 'post', 'action' => 'plugins/'.$mantisbt->name.'/?type='.$type.'&group_id='.$group_id.'&idBug='.$defect->id.'&action=updateIssue&view=viewIssue'));
 	echo $HTML->listTableTop();
 	echo		'<tr>';
 	echo 			'<td width="20%">'._('Category').'</td>';

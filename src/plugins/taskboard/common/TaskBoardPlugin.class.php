@@ -41,7 +41,7 @@ _('Agile TaskBoard: Supports Scrum and Kanban methodologies.');
 			$group_id = $params['group_id'];
 			$group = group_get_object($group_id);
 			if ( $group->usesPlugin($this->name)) {
-				echo html_e('p', array(), util_make_uri('/plugins/'.$this->name.'/admin/index.php?group_id='.$group_id, _('Task Board Admin')));
+				echo html_e('p', array(), util_make_link('/plugins/'.$this->name.'/admin/index.php?group_id='.$group_id, _('Task Board Admin')));
 			}
 		} elseif ($hookname == 'groupmenu') {
 			$group_id = $params['group'];

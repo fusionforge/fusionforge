@@ -3,7 +3,7 @@
  * MantisBT plugin
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -54,12 +54,12 @@ if (!isset($errorPage)){
 			$cells = array();
 			if ( $category != 'General' ) {
 				$cells[][] = $category;
-				$cells[][] = $HTML->openForm(array('method' => 'post', 'action' => util_make_uri('/plugins/'.$mantisbt->name.'/?type=admin&group_id='.$group_id.'&action=renameCategory'))).
+				$cells[][] = $HTML->openForm(array('method' => 'post', 'action' => '/plugins/'.$mantisbt->name.'/?type=admin&group_id='.$group_id.'&action=renameCategory')).
 						'<input type="hidden" name="renameCategory" value="'.htmlspecialchars($category).'" />'.
 						'<input name="newCategoryName" type="text" />'.
 						'<input type="submit" value="'._('Rename').'" />'.
 						$HTML->closeForm();
-				$cells[][] = $HTML->openForm(array('method' => 'post', 'action' => util_make_uri('/plugins/'.$mantisbt->name.'/?type=admin&group_id='.$group_id.'&action=deleteCategory'))).
+				$cells[][] = $HTML->openForm(array('method' => 'post', 'action' => '/plugins/'.$mantisbt->name.'/?type=admin&group_id='.$group_id.'&action=deleteCategory')).
 						'<input type="hidden" name="deleteCategory" value="'.htmlspecialchars($category).'" />'.
 						'<input type="submit" value="'._('Delete').'" />'.
 						$HTML->closeForm();

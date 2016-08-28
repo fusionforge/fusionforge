@@ -4,7 +4,7 @@
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2010, Antoine Mercadal - Capgemini
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -51,7 +51,7 @@ try {
 }
 
 if (!isset($errorPage)){
-	echo $HTML->openForm(array('name' => 'issue', 'method' => 'post', 'action' => util_make_uri('/plugins/'.$mantisbt->name.'/?type='.$type.'&group_id='.$group_id.'&action=addIssue')));
+	echo $HTML->openForm(array('name' => 'issue', 'method' => 'post', 'action' => '/plugins/'.$mantisbt->name.'/?type='.$type.'&group_id='.$group_id.'&action=addIssue'));
 	echo	'<table>';
 	echo		'<tr>';
 	echo			'<td width="16%">'._('Category').'</td>';

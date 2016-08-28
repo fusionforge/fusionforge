@@ -2,7 +2,7 @@
 /**
  * webanalyticsPlugin Global Configuration View
  *
- * Copyright 2012, 2014, Franck Villaume - TrivialDev
+ * Copyright 2012,2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -53,7 +53,7 @@ if (sizeof($linksArray)) {
 	echo html_e('br');
 }
 
-echo $HTML->openForm(array('method' => 'POST', 'name' => 'addLink', 'action' => util_make_uri('/plugins/'.$webanalytics->name.'/?type=globaladmin&action=addLink')));
+echo $HTML->openForm(array('method' => 'post', 'name' => 'addLink', 'action' => '/plugins/'.$webanalytics->name.'/?type=globaladmin&action=addLink'));
 echo $HTML->boxTop(_('Add a new webanalytics reference'));
 echo $HTML->listTableTop();
 $cells = array();

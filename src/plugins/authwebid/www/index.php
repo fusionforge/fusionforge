@@ -109,16 +109,16 @@ echo $HTML->boxTop(_('My WebID identities'));
 			foreach($pendingwebids as $webid_identity) {
 				echo '<tr '.$HTML->boxGetAltRowStyle($i).'>';
 				echo '<td><i>'. $webid_identity .'</i></td>';
-				echo '<td><b>'. $plugin->displayAuthentifyViaIdPLink( util_make_url('/plugins/authwebid/index.php'), _('Confirm binding')) . '</b></td>';
-				echo '<td><a href="'.util_make_uri ('/plugins/authwebid/').'?webid_identity='. urlencode('pending:'.$webid_identity) .'&delete=1">'. _('remove') . '</a></td>';
+				echo '<td><b>'. $plugin->displayAuthentifyViaIdPLink(util_make_uri('/plugins/authwebid/index.php'), _('Confirm binding')) . '</b></td>';
+				echo '<td>'.util_make_link('/plugins/authwebid/?webid_identity='.urlencode('pending:'.$webid_identity).'&delete=1', _('remove')).'</td>';
 				echo '</tr>';
 				$i++;
 			}
 			echo $HTML->listTableBottom();
 		}
+		//This form isn't one any more actually, but decorations is nice like this
+		echo $HTML->openForm(array('name' => 'new_identity', 'action' => '/plugins/authwebid/', 'method' => 'post'))
 		?>
-		<!-- This form isn't one any more actually, but decorations is nice like this -->
-		<form name="new_identity" action="<?php echo util_make_uri ('/plugins/authwebid/'); ?>" method="post">
 			<fieldset>
 				<legend><?php echo _('Bind a new WebID'); ?></legend>
 				<p>
@@ -126,16 +126,16 @@ echo $HTML->boxTop(_('My WebID identities'));
 						echo '</p><p>';
 						// redirect link to the IdP
 						// This might as well confirm binding just as if using the Confirm link, if user has only one WebID recognized by the IdP
-						echo '<b>'. $plugin->displayAuthentifyViaIdPLink( util_make_url('/plugins/authwebid/index.php'),
+						echo '<b>'. $plugin->displayAuthentifyViaIdPLink(util_make_uri('/plugins/authwebid/index.php'),
 																		sprintf( _('Click here to initiate the addition of a new WebID validated via %s'),
 																				 $plugin->delegate_webid_auth_to)) . '</b>';
 				?>
 				</p>
 			</fieldset>
-		</form>
-
+		<?php
+		echo $HTML->closeForm();
+		?>
 		<h2><?php echo _('My WebIDs'); ?></h2>
-
 		<?php
 
 		// now display existing bound identities
@@ -150,7 +150,7 @@ echo $HTML->boxTop(_('My WebID identities'));
 			foreach($boundwebids as $webid_identity) {
 				echo '<tr '.$HTML->boxGetAltRowStyle($i).'>';
 				echo '<td>'. $webid_identity .'</td>';
-				echo '<td><a href="'.util_make_uri ('/plugins/authwebid/').'?webid_identity='. urlencode($webid_identity) .'&delete=1">'. _('remove') . '</a></td>';
+				echo '<td>'.util_make_link('/plugins/authwebid/?webid_identity='.urlencode($webid_identity).'&delete=1', _('remove')).'</td>';
 				echo '</tr>';
 				$i++;
 			}

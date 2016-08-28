@@ -3,7 +3,7 @@
  * FusionForge trackers
  *
  * Copyright 2011, Alcatel-Lucent
- * Copyright 2012,2015, Franck Villaume - TrivialDev
+ * Copyright 2012,2015-2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -646,7 +646,7 @@ if (!$at_arr || count($at_arr) < 1) {
 					url: 'roadmap.php',
 					data: '<?php echo 'group_id='.$group_id.'&roadmap_id='.$roadmap_id ?>&ajax=1&template=1&release='+release,
 					success: function(rep) {
-						jQuery('#div_options').empty().append('<a href="<?php echo '/tracker/roadmap.php?group_id='.$group_id ?>&roadmap_id='+selected_roadmap+'&nb_release='+selected_nb_release+'&display_graph='+selected_display_graph+'" ><?php echo _('Return to last release(s)') ?></a>');
+						jQuery('#div_options').empty().append('<a href="<?php echo util_make_uri('/tracker/roadmap.php?group_id='.$group_id) ?>&roadmap_id='+selected_roadmap+'&nb_release='+selected_nb_release+'&display_graph='+selected_display_graph+'" ><?php echo _('Return to last release(s)') ?></a>');
 						jQuery('#div_roadmap').empty().append(rep);
 					}
 				});

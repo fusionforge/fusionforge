@@ -4,7 +4,7 @@
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2010, Antoine Mercadal - Capgemini
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -61,7 +61,7 @@ if (!isset($errorPage)){
 	}
 
 	echo 		'<div id="add_edit_note">';
-	echo $HTML->openForm(array('method' => 'post', 'action' => util_make_uri('/plugins/'.$mantisbt->name.'/?type='.$type.'&group_id='.$group_id.'&idBug='.$defect->id.'&idNote='.$idNote.'&action='.$actionform.'&view=viewIssue')));
+	echo $HTML->openForm(array('method' => 'post', 'action' => '/plugins/'.$mantisbt->name.'/?type='.$type.'&group_id='.$group_id.'&idBug='.$defect->id.'&idNote='.$idNote.'&action='.$actionform.'&view=viewIssue'));
 	echo				'<table>';
 	echo 					'<tr>';
 	(isset($noteEdit->text))? $note_value = $noteEdit->text : $note_value = '';

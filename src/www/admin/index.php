@@ -51,7 +51,7 @@ for ($i = 0; $i < count($abc_array); $i++) {
 	$localcontent .= util_make_link('/admin/userlist.php?user_name_search='.$abc_array[$i], $abc_array[$i]).'|';
 }
 $localcontent .= html_e('br');
-$localcontent .= $HTML->openForm(array('name' => 'usersrch', 'action' => util_make_uri('/admin/search.php'), 'method' => 'post'));
+$localcontent .= $HTML->openForm(array('name' => 'usersrch', 'action' => '/admin/search.php', 'method' => 'post'));
 $localcontent .= _('Search <em>(userid, username, realname, email)</em>');
 $localcontent .= html_e('input', array('type' => 'text', 'name' => 'search'));
 $localcontent .= html_e('input', array('type' => 'hidden', 'name' => 'substr', 'value' => 1));
@@ -137,7 +137,7 @@ echo html_ac(html_ap() - 1);
 		echo util_make_link('/admin/grouplist.php?group_name_search='.$abc_array[$i], $abc_array[$i]).'|';
 	}
 	echo html_e('br');
-	echo $HTML->openForm(array('name'=> 'gpsrch', 'action' => util_make_uri('/admin/search.php'), 'method' => 'post'));
+	echo $HTML->openForm(array('name'=> 'gpsrch', 'action' => '/admin/search.php', 'method' => 'post'));
 		echo _('Search <em>(groupid, project Unix name, project full name)</em>'); ?>:
 		<input type="text" name="search" />
 		<input type="hidden" name="substr" value="1" />

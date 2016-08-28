@@ -37,7 +37,7 @@ if (!count($packages)) {
 }
 
 echo html_e('h2', array(), _('Quick Release System'));
-echo $HTML->openForm(array('enctype' => 'multipart/form-data', 'method' => 'post', 'action' => util_make_uri('/frs/?group_id='.$group_id.'&action=addrelease')));
+echo $HTML->openForm(array('enctype' => 'multipart/form-data', 'method' => 'post', 'action' => '/frs/?group_id='.$group_id.'&action=addrelease'));
 echo $HTML->listTableTop();
 $cells = array();
 $cells[][] = html_e('strong', array(), _('Package ID')._(':'));

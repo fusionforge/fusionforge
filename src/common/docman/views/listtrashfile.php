@@ -97,7 +97,7 @@ if (is_array($d_arr) && count($d_arr) > 0) {
 
 echo html_ao('div', array('id' => 'rightdiv'));
 echo html_ao('div', array('style' => 'padding:5px'));
-echo $HTML->openForm(array('id' => 'emptytrash', 'name' => 'emptytrash', 'method' => 'post', 'action' => util_make_uri('/docman/?group_id='.$group_id.'&action=emptytrash')));
+echo $HTML->openForm(array('id' => 'emptytrash', 'name' => 'emptytrash', 'method' => 'post', 'action' => '/docman/?group_id='.$group_id.'&action=emptytrash'));
 echo html_e('input', array('id' => 'submitemptytrash', 'type' => 'submit', 'value' => _('Delete permanently all documents and folders with deleted status.')));
 echo $HTML->closeForm();
 echo html_ac(html_ap() - 1);
