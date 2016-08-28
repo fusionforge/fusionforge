@@ -42,7 +42,7 @@ $taskboardFactory->header();
 if (!$tb_arr || count($tb_arr) < 1) {
 	echo $HTML->information(_('No taskboards have been set up, or you cannot view them.'));
 	echo '<p>';
-	echo sprintf(_('The Admin for this project will have to set up data types using the %1$s admin page %2$s'), '<a href="'.util_make_url ('/plugins/'.$pluginTaskboard->name.'/?group_id='.$group_id).'">', '</a>');
+	echo sprintf(_('The Admin for this project will have to set up data types using the %1$s admin page %2$s'), '<a href="'.util_make_uri('/plugins/'.$pluginTaskboard->name.'/?group_id='.$group_id).'">', '</a>');
 	echo "</p>";
 } else {
 	echo '<p>'._('Choose a taskboard.').'</p>';
@@ -55,7 +55,7 @@ if (!$tb_arr || count($tb_arr) < 1) {
 				echo $tb_arr[$j]->getErrorMessage();
 			} else {
 				$cells = array();
-				$cells[][] = util_make_link('/plugins/'.$pluginTaskboard->name.'/?group_id='.$group_id.'&taskboard_id='.$tb_arr[$j]->getID(),
+				$cells[][] = util_make_uri('/plugins/'.$pluginTaskboard->name.'/?group_id='.$group_id.'&taskboard_id='.$tb_arr[$j]->getID(),
 								html_image("ic/tracker20w.png", 20, 20).' '.$tb_arr[$j]->getName());
 				$cells[][] = $tb_arr[$j]->getDescription();
 				echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($j, true)), $cells);

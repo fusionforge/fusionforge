@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
- * Copyright 2015, Franck Villaume - TrivialDev
+ * Copyright 2015-2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -41,7 +41,7 @@ _('Agile TaskBoard: Supports Scrum and Kanban methodologies.');
 			$group_id = $params['group_id'];
 			$group = group_get_object($group_id);
 			if ( $group->usesPlugin($this->name)) {
-				echo html_e('p', array(), util_make_link('/plugins/'.$this->name.'/admin/index.php?group_id='.$group_id, _('Task Board Admin')));
+				echo html_e('p', array(), util_make_uri('/plugins/'.$this->name.'/admin/index.php?group_id='.$group_id, _('Task Board Admin')));
 			}
 		} elseif ($hookname == 'groupmenu') {
 			$group_id = $params['group'];
@@ -55,13 +55,13 @@ _('Agile TaskBoard: Supports Scrum and Kanban methodologies.');
 
 			if($group->usesPlugin($this->name)) {
 				$params['TITLES'][] = $this->text;
-				$params['DIRS'][] = '/plugins/'.$this->name.'/index.php?group_id='.$group_id;
+				$params['DIRS'][] = util_make_uri('/plugins/'.$this->name.'/index.php?group_id='.$group_id);
 				$params['TOOLTIPS'][] = _('Agile Scrum and Kanban display of existing artifacts.');
 				if (session_loggedin()) {
 					$user = session_get_user();
 					$userperm = $group->getPermission();
 					if ($userperm->isAdmin()) {
-						$params['ADMIN'][] = '/plugins/'.$this->name.'/admin/?&group_id='.$group_id;
+						$params['ADMIN'][] = util_make_uri('/plugins/'.$this->name.'/admin/?&group_id='.$group_id);
 					}
 				}
 				if(isset($params['toptab'])){
