@@ -199,16 +199,20 @@ if ($type == 'admin') {
 	foreach ($blocks as $b => $help) {
 		$match = '';
 		if (preg_match('/(.*) index$/', $b, $match)) {
-			print '<tr><td colspan="4"><b>'.$blocks_text[$match[1]].'</b></td></tr>';
+			$cells = array();
+			$cells[] = array(html_e('b', array(), $blocks_text[$match[1]]), 'colspan' => 4);
+			echo $HTML->multiTableRow(array(), $cells);
 		}
-
-		$checked = (isset($status[$b]) && $status[$b] == 1) ? ' checked="checked"' : '';
-
-		print "<tr ".$HTML->boxGetAltRowStyle($b)."><td>$b</td>\n" .
-		"<td class=\"align-center\">" .
-		"<input type=\"checkbox\" name=\"activate[$b]\" value=\"1\"$checked /></td>\n" .
-		"<td>$help</td>\n" .
-		"<td>".util_make_link('/plugins/blocks/?id='.$id.'&type=configure&pluginname=blocks&name='.urlencode($b), _('Configure'))."</td>\n</tr>\n";
+		$cells = array();
+		$cells[][] = $b;
+		$inputAttr = array('type' => 'checkbox', 'name' => 'activate['.$b.']', 'value' => 1);
+		if (isset($status[$b]) && $status[$b] == 1) {
+			$inputAttr['checked'] = 'checked';
+		}
+		$cells[] = array(html_e('input', $inputAttr), 'class' => 'align-center');
+		$cells[][] = $help;
+		$cells[][] = util_make_link('/plugins/blocks/?id='.$id.'&type=configure&pluginname=blocks&name='.urlencode($b), _('Configure'));
+		echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($b, true)), $cells);
 	}
 	echo $HTML->listTableBottom();
 	print '<p class="align-center"><input type="submit" value="' .
@@ -339,7 +343,7 @@ if ($type == 'admin') {
 				WHERE group_id=$2 AND name=$3',
 				array($body, $id, htmlspecialchars($name)));
 	}
-	$feedback = $name .' : '. _('Block configuration saved');
+	$feedback = $name ._(' : '). _('Block configuration saved');
 	session_redirect('/plugins/blocks/?id='.$id.'&type=admin&pluginname=blocks');
 }
 
