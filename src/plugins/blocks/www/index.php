@@ -267,7 +267,7 @@ if ($type == 'admin') {
 
 	print '<div class="align-center">';
 	print "<p><b>$blocks[$name]</b> ($name)</p>";
-	echo $HTML->openForm(array('action' => '/plugins/blocks', 'method' => 'post'));
+	echo $HTML->openForm(array('action' => '/plugins/blocks/', 'method' => 'post'));
 	print "<input type=\"hidden\" name=\"id\" value=\"$id\" />\n";
 	print "<input type=\"hidden\" name=\"pluginname\" value=\"$pluginname\" />\n";
 	print "<input type=\"hidden\" name=\"type\" value=\"configure_post\" />\n";
