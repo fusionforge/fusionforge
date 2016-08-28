@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (C) 2008-2009 Alcatel-Lucent
+ * Copyright 2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -43,7 +44,7 @@
 $NB_MAX = 20;
 $NB_SIZE = 5;
 $CLASS_PREFIX = 'tag';
-$SELECTED_STYLE = 'style="text-decoration:overline underline;"';
+$SELECTED_STYLE = 'text-decoration:overline underline';
 
 /**
  * tag_cloud() - This function displays a tag cloug with the tags defined by projects.
@@ -153,11 +154,12 @@ function tag_cloud($params = array()) {
 		foreach ($tag_count as $name => $count) {
 			if ($count < $count_min) continue;
 			$size = intval(1 + ($count - $count_min) * $a);
-			$return .= '<a href="/softwaremap/tag_cloud.php?tag='
-			. urlencode($name)
-			. '" class="' . $params['class_prefix'] . $size . '" '
-			. (($name == $params['selected']) ? $params['selected_style'] : '' )
-			. '>' . htmlspecialchars($name) . '</a> ';
+			$linkAttr = array();
+			$linkAttr['class'] = $params['class_prefix'] . $size;
+			if ($name == $params['selected']) {
+				$linkAttr['style'] = $params['selected_style'];
+			}
+			$return .= util_make_link('/softwaremap/tag_cloud.php?tag='.urlencode($name), htmlspecialchars($name), $linkAttr);
 		}
 	}
 
