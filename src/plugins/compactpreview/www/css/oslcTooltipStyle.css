@@ -33,34 +33,34 @@
 }
 
 .resourcePopupPopup .topLeft {
-	background: url(/plugins/compactpreview/images/Tooltip/balloon_topLeft.png) no-repeat right;
+	background: url(../images/Tooltip/balloon_topLeft.png) no-repeat right;
 }
 
 .resourcePopupPopup .bottomLeft {
-	background: url(/plugins/compactpreview/images/Tooltip/balloon_bottomLeft.png) no-repeat right top;
+	background: url(../images/Tooltip/balloon_bottomLeft.png) no-repeat right top;
 }
 
 .resourcePopupPopup .left {
-	background: url(/plugins/compactpreview/images/Tooltip/balloon_left.png) repeat-y right;
+	background: url(../images/Tooltip/balloon_left.png) repeat-y right;
 }
 
 .resourcePopupPopup .right {
-	background: url(/plugins/compactpreview/images/Tooltip/balloon_right.png) repeat-y;
+	background: url(../images/Tooltip/balloon_right.png) repeat-y;
 }
 
 .resourcePopupPopup .topRight {
-	background: url(/plugins/compactpreview/images/Tooltip/balloon_topRight.png) no-repeat left;
+	background: url(../images/Tooltip/balloon_topRight.png) no-repeat left;
 }
 
 .resourcePopupPopup .bottomRight {
-	background: url(/plugins/compactpreview/images/Tooltip/balloon_bottomRight.png) no-repeat;
-}  
+	background: url(../images/Tooltip/balloon_bottomRight.png) no-repeat;
+}
 
 .resourcePopupPopup .top {
-	background: url(/plugins/compactpreview/images/Tooltip/balloon_top.png) repeat-x bottom;
+	background: url(../images/Tooltip/balloon_top.png) repeat-x bottom;
 }
 
 .resourcePopupPopup .bottom {
-	background: url(/plugins/compactpreview/images/Tooltip/balloon_bottom.png) repeat-x;
-	text-align: center;  
+	background: url(../images/Tooltip/balloon_bottom.png) repeat-x;
+	text-align: center;
 }
