@@ -343,7 +343,7 @@ if ($type == 'admin') {
 				WHERE group_id=$2 AND name=$3',
 				array($body, $id, htmlspecialchars($name)));
 	}
-	$feedback = $name ._(' : '). _('Block configuration saved');
+	$feedback = $name ._(': '). _('Block configuration saved');
 	session_redirect('/plugins/blocks/?id='.$id.'&type=admin&pluginname=blocks');
 }
 
