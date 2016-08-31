@@ -30,14 +30,6 @@ util_init_messages();
 
 require_once $gfcommon.'include/config.php';
 
-if (isset($_SERVER) && array_key_exists('PHP_SELF', $_SERVER) && $_SERVER['PHP_SELF']) {
-	$_SERVER['PHP_SELF'] = htmlspecialchars($_SERVER['PHP_SELF']);
-}
-
-if (isset($GLOBALS) && array_key_exists('PHP_SELF', $GLOBALS) && $GLOBALS['PHP_SELF']) {
-	$GLOBALS['PHP_SELF'] = htmlspecialchars($GLOBALS['PHP_SELF']);
-}
-
 // Block link prefetching (Moz prefetching, Google Web Accelerator, others)
 // http://www.google.com/webmasters/faq.html#prefetchblock
 if (getStringFromServer('HTTP_X_moz') === 'prefetch'){
@@ -91,6 +83,21 @@ if (($ecd = forge_get_config ('extra_config_dirs')) != NULL) {
 	foreach ($ecda as $cd) {
 		$cd = trim ($cd) ;
 		forge_read_config_dir ($cd) ;
+	}
+}
+
+$url_prefix = forge_get_config('url_prefix');
+if (isset($_SERVER) && array_key_exists('PHP_SELF', $_SERVER) && $_SERVER['PHP_SELF']) {
+	$_SERVER['PHP_SELF'] = htmlspecialchars($_SERVER['PHP_SELF']);
+	if (substr($_SERVER['PHP_SELF'], 0, strlen($url_prefix)) == $url_prefix) {
+		$_SERVER['PHP_SELF'] = '/'.substr($_SERVER['PHP_SELF'], strlen($url_prefix));
+	}
+}
+
+if (isset($GLOBALS) && array_key_exists('PHP_SELF', $GLOBALS) && $GLOBALS['PHP_SELF']) {
+	$GLOBALS['PHP_SELF'] = htmlspecialchars($GLOBALS['PHP_SELF']);
+	if (substr($GLOBALS['PHP_SELF'], 0, strlen($url_prefix)) == $url_prefix) {
+		$GLOBALS['PHP_SELF'] = '/'.substr($GLOBALS['PHP_SELF'], strlen($url_prefix));
 	}
 }
 
