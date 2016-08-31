@@ -1807,8 +1807,9 @@ Email: %3$s
 	}
 
 	function getActivityLogGroups() {
-		$res = db_query_params('select group_id from activity_log where group_id != 0 and user_id = $1 group by group_id order by count(group_id) desc',
-					array($this->getID()), 5);
+		$res = db_query_params('select activity_log.group_id from activity_log, groups where activity_log.group_id != 0 and user_id = $1 and groups.status = $2 group by activity_log.group_id order by count(activity_log.group_id) desc',
+					array($this->getID()), 'A', 5);
+
 		if (!$res) {
 			return array();
 		} else {
