@@ -86,7 +86,7 @@ into the FusionForge database.");
 			$user_data['firstname'] = '';
 			$user_data['lastname'] = '';
 			if ($this->saved_password == '') {
-				$user_data['password1'] = 'INVALID';
+				$user_data['password1'] = '_INVALID_';
 			} else {
 				$user_data['password1'] = $this->saved_password;
 			}
