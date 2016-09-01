@@ -488,7 +488,7 @@ if (! isset($ihm) || $ihm !== true) {
 		$title_arr[] = _('Enable');
 		$title_arr[] = _('Roadmap name');
 		$title_arr[] = _('Default');
-		//$title_arr[] = _('Current / New positions');
+		//$title_arr[] = _('Current/New positions');
 		//$title_arr[] = _('Up/Down positions');
 		$title_arr[] = _('Actions');
 

@@ -45,7 +45,7 @@ if (!$ac || !is_object($ac)) {
 		if ($rows > 0) {
 			echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&boxid='.$boxid, 'method' => 'post'));
 			$title_arr=array();
-			$title_arr[]=_('Current / New positions');
+			$title_arr[]=_('Current/New positions');
 			if ($efType == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 				$title_arr[] = _('Mapping');
 			}
