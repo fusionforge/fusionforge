@@ -137,6 +137,7 @@ into the FusionForge database.");
 					 $user_data['title'],
 					 $user_data['ccode'],
 					 $send_mail)) {
+				error_log("LDAP: user::create() failed: ".$u->getErrorMessage());
 				return false;
 			}
 
@@ -232,6 +233,7 @@ into the FusionForge database.");
 		forge_define_config_item('ldap_version', $this->name, 3);
 		forge_define_config_item('manager_dn', $this->name, '');
 		forge_define_config_item('manager_password', $this->name, '');
+		forge_define_config_item('use_x_forward_user', $this->name, false);
 	}
 
 	/// HELPERS
@@ -339,6 +341,57 @@ into the FusionForge database.");
 
 		$this->ldap_conn = $conn;
 		return true;
+	}
+
+	/**
+	 * Is there a valid session?
+	 *
+	 * @param	array	$params
+	 * @return	FORGE_AUTH_AUTHORITATIVE_ACCEPT, FORGE_AUTH_AUTHORITATIVE_REJECT or FORGE_AUTH_NOT_AUTHORITATIVE
+	 * TODO : document 'auth_token' param
+	 */
+	function checkAuthSession(&$params) {
+		// check the session cookie/token to get a user_id
+		if (isset($params['auth_token']) && $params['auth_token'] != '') {
+			$user_id = $this->checkSessionToken($params['auth_token']);
+			//WARNING: I HOPE YOU KNOW WHAT YOU ARE DOING WHEN USING THIS OPTION!
+		} elseif (forge_get_config('use_x_forward_user', $this->name)) {
+			$username = $_SERVER['HTTP_X_FORWARDED_USER'];
+			$userObject = user_get_object_by_name($username);
+			if ($userObject && is_object($userObject)) {
+				$user_id = $userObject->getID();
+			} else {
+				$user_id = false;
+			}
+			if (!$user_id) {
+				$params['username'] = $username;
+				$params['event'] = forge_get_config('sync_data_on', $this->name);
+				$this->syncAccountInfo($params);
+				$userObject = user_get_object_by_name($username);
+				if ($userObject && is_object($userObject)) {
+					$user_id = $userObject->getID();
+				} else {
+					$user_id = false;
+				}
+			}
+		} else {
+			$user_id = $this->checkSessionCookie();
+		}
+		if ($user_id) {
+			$this->saved_user = user_get_object($user_id);
+			if ($this->isSufficient()) {
+				$params['results'][$this->name] = FORGE_AUTH_AUTHORITATIVE_ACCEPT;
+			} else {
+				$params['results'][$this->name] = FORGE_AUTH_NOT_AUTHORITATIVE;
+			}
+		} else {
+			$this->saved_user = NULL;
+			if ($this->isRequired()) {
+				$params['results'][$this->name] = FORGE_AUTH_AUTHORITATIVE_REJECT;
+			} else {
+				$params['results'][$this->name] = FORGE_AUTH_NOT_AUTHORITATIVE;
+			}
+		}
 	}
 }
 

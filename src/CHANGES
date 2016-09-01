@@ -13,6 +13,7 @@ FusionForge 6.X:
 * FRS: link package release to tracker roadmap. (TrivialDev)
 * Layout: new dynamic quickNav menu: based on user activity to select 5 more visited projects (TrivialDev)
 * Plugin AuthBuiltin: add captcha after 3 attempts with the same login [#795] (TrivialDev)
+* Plugin AuthLDAP: support X_FORWARD_USER to delegate authentication and then retry user from LDAP (TrivialDev)
 * Projects Page: add paging system in full_list and tag_cloud subpages (TrivialDev)
 * SearchEngine: support only FTI queries (TrivialDev)
 * Search: index project tags and use them for search (Roland Mas)
