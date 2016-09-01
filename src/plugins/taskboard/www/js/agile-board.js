@@ -1,3 +1,27 @@
+/**
+ * FusionForge Documentation Manager
+ *
+ * Previous Copyright to FusionForge Team
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
+ * Copyright 2016, Franck Villaume - TrivialDev
+ * http://fusionforge.org
+ *
+ * This file is part of FusionForge. FusionForge is free software;
+ * you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the Licence, or (at your option)
+ * any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with FusionForge; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
+
 var aTaskboardUserStories = [];
 
 function cleanMessages() {
@@ -189,7 +213,11 @@ function drawUserStories() {
 	for( var i=0; i<aUserStories.length; i++ ) {
 		var start=0;
 		var us=aUserStories[i];
-		l_sHtml += "<tr class='agile-user-story-"+ us.id +"' valign='top'>\n";
+		evenOdd = 'even';
+		if (i % 2) {
+			evenOdd = 'odd';
+		}
+		l_sHtml += "<tr class='agile-user-story-"+ us.id +" "+evenOdd+"' valign='top'>\n";
 		if( bShowUserStories ) {
 			start=1;
 			l_sHtml += '<td class="agile-phase agile-user-stories">';
