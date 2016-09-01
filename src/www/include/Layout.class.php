@@ -715,13 +715,13 @@ if (isset($params['group']) && $params['group']) {
 	 */
 	function quickNav() {
 		if (!session_loggedin()) {
-			return;
+			return '';
 		} else {
 			// get all projects that the user belongs to
 			$groups = session_get_user()->getGroups();
 
 			if (count($groups) < 1) {
-				return;
+				return '';
 			} else {
 				$result = $this->openForm(array('id' => 'quicknavform', 'name' => 'quicknavform', 'action' => ''));
 				$result .= html_ao('div');
