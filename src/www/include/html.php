@@ -450,7 +450,7 @@ function html_get_tooltip_description($element_name) {
 }
 
 function html_use_jquery() {
-	use_javascript('/scripts/jquery/jquery-1.10.2.js');
+	use_javascript('/scripts/jquery/jquery-1.12.4.js');
 }
 
 function html_use_tablesorter() {
