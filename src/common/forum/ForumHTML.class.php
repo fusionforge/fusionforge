@@ -6,8 +6,8 @@
  * Copyright 2002, Tim Perdue - GForge, LLC
  * Copyright 2010 (c) Franck Villaume - Capgemini
  * Copyright (C) 2010-2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013-2015, Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of National Education
+ * Copyright 2013-2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -472,6 +472,7 @@ class ForumHTML extends FFError {
 	 * @return	The HTML output echoed
 	 */
 	function showEditForm(&$msg) {
+		global $HTML;
 		$thread_id = $msg->getThreadID();
 		$msg_id = $msg->getID();
 		$posted_by = $msg->getPosterID();
@@ -488,8 +489,8 @@ class ForumHTML extends FFError {
 			echo notepad_func();
 			?>
 			<div style="margin-left: auto; margin-right: auto;">
-			<form id="ForumEditForm" enctype="multipart/form-data" action="<?php echo util_make_url ('/forum/admin/index.php') ?>" method="post">
-			<?php $objid = $this->Forum->getID();?>
+			<?php echo $HTML->openForm(array('id' => 'ForumEditForm', 'enctype' => 'multipart/form-data', 'action' => '/forum/admin/index.php', 'method' => 'post'));
+			$objid = $this->Forum->getID(); ?>
 			<input type="hidden" name="thread_id" value="<?php echo $thread_id; ?>" />
 			<input type="hidden" name="forum_id" value="<?php echo $objid; ?>" />
 			<input type="hidden" name="editmsg" value="<?php echo $msg_id; ?>" />
@@ -532,7 +533,7 @@ class ForumHTML extends FFError {
 				<input type="submit" name="cancel" formnovalidate="formnovalidate" value="<?php echo _('Cancel'); ?>" />
 				</p>
 			</td></tr></table></fieldset>
-			</form>
+			<?php echo $HTML->closeForm(); ?>
 			</div>
 			<?php
 		}
@@ -544,7 +545,7 @@ class ForumHTML extends FFError {
 	 * @param string $subject
 	 */
 	function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
-		global $group_id;
+		global $group_id, $HTML;
 
 		$body = '';
 
@@ -557,7 +558,7 @@ class ForumHTML extends FFError {
 			echo notepad_func();
 			?>
 			<div class="align-center">
-			<form id="ForumPostForm" enctype="multipart/form-data" action="<?php echo util_make_url ('/forum/forum.php?forum_id='.$this->Forum->getID().'&amp;group_id='.$group_id); ?>" method="post">
+			<?php echo $HTML->openForm(array('id' => 'ForumPostForm', 'enctype' => 'multipart/form-data', 'action' => '/forum/forum.php?forum_id='.$this->Forum->getID().'&group_id='.$group_id, 'method' => 'post')); ?>
 			<input type="hidden" name="post_message" value="y" />
 			<input type="hidden" name="thread_id" value="<?php echo $thread_id; ?>" />
 			<input type="hidden" name="msg_id" value="<?php echo $is_followup_to; ?>" />
@@ -607,7 +608,7 @@ class ForumHTML extends FFError {
 	</tr>
 </table>
 </fieldset>
-</form>
+<?php echo $HTML->closeForm(); ?>
 </div>
 			<?php
 

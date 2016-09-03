@@ -4,7 +4,7 @@
  *
  * Copyright 2010-2011, Roland Mas
  * Copyright (c) 2011 Thorsten Glaser <t.glaser@tarent.de>
- * Copyright 2013-2014, Franck Villaume - TrivialDev
+ * Copyright 2013-2014,2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -26,6 +26,8 @@ require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'admin/admin_utils.php';
 require_once $gfwww.'include/role_utils.php';
+
+global $HTML;
 
 site_admin_header(array('title'=>_('Site Admin')));
 
@@ -144,9 +146,8 @@ if ($role instanceof RoleExplicit) {
 	if (count ($users) > 0) {
 		echo '<p><strong>'._('Current users with this role').'</strong></p>' ;
 
-		echo '
-		<form action="'.util_make_uri('/admin/globalroleedit.php').'" method="post">
-		<input type="hidden" name="role_id" value="'.$role_id.'" />';
+		echo $HTML->openForm(array('action' => '/admin/globalroleedit.php', 'method' => 'post'));
+		echo '<input type="hidden" name="role_id" value="'.$role_id.'" />';
 		$titleArr = array(_('User Name'), _('Remove'));
 		echo $HTML->listTableTop($titleArr);
 		foreach ($users as $user) {
@@ -166,28 +167,23 @@ if ($role instanceof RoleExplicit) {
 		$cells[] = array('<input type="submit" name="dormusers" value="'._('Remove').'" />', 'colspan' => 2);
 		echo $HTML->multiTableRow(array(), $cells);
 		echo $HTML->listTableBottom();
-		echo '</form>';
+		echo $HTML->closeForm();
 	} else {
 		echo '<p><strong>'._('No users currently have this role').'</strong></p>' ;
 	}
 
-			?>
-		<form
-			action="<?php echo util_make_uri('/admin/globalroleedit.php'); ?>"
-			method="post">
-		<p><input type="text"
+	echo $HTML->openForm(array('action' => '/admin/globalroleedit.php', 'method' => 'post')); ?>
+	<p><input type="text"
 			name="form_unix_name" size="10" value="" />
 		<input type="submit" name="adduser"
 			value="<?php echo _("Add User") ?>" />
 		<input type="hidden" name="role_id" value="<?php echo $role_id; ?>" />
 		</p>
-		</form>
 <?php
+	echo $HTML->closeForm();
 }
 
-echo '
-<p>
-<form action="'.util_make_uri('/admin/globalroleedit.php').'" method="post">';
+echo $HTML->openForm(array('action' => '/admin/globalroleedit.php', 'method' => 'post'));
 echo '<input type="hidden" name="role_id" value="'.$role_id.'" />' ;
 
 if ($role instanceof RoleExplicit) {
@@ -232,17 +228,16 @@ for ($i=0; $i<count($keys); $i++) {
 }
 echo $HTML->listTableBottom();
 
-echo '<p><input type="submit" name="submit" value="'._('Submit').'" /></p>
-</form>';
+echo '<p><input type="submit" name="submit" value="'._('Submit').'" /></p>';
+echo $HTML->closeForm();
 
-echo '
-<form action="'.util_make_url('/admin/globalroledelete.php').'" method="post">';
+echo $HTML->openForm(array('action' => '/admin/globalroledelete.php', 'method' => 'post'));
 echo '<input type="hidden" name="role_id" value="'.$role_id.'" />';
 
 echo '<p><strong>'._('Delete role').'</strong></p>';
 echo '<p><input type="checkbox" name="sure" value="1"/> '._("Really delete this role?");
-echo '<input type="submit" name="submit" value="'._('Delete role').'" /></p>
-</form>';
+echo '<input type="submit" name="submit" value="'._('Delete role').'" /></p>';
+echo $HTML->closeForm();
 
 site_admin_footer();
 

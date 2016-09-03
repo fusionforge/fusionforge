@@ -1,15 +1,33 @@
 <?php
-
-/*
+/**
  * ContribTracker plugin
  *
  * Copyright 2009, Roland Mas
+ * Copyright 2016, Franck Villaume - TrivialDev
+ * http://fusionforge.org/
  *
+ * This file is part of FusionForge. FusionForge is free software;
+ * you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the Licence, or (at your option)
+ * any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with FusionForge; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
 require_once '../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
-$plugin = plugin_get_object('contribtracker') ;
+
+global $HTML;
+
+$plugin = plugin_get_object('contribtracker');
 
 $group_id = getIntFromRequest('group_id') ;
 session_require_perm('project_admin', $group_id) ;
@@ -181,9 +199,9 @@ if(isset($error_msg) && !empty($error_msg)) {
 }
 switch ($action) {
 case 'add_contrib':
-	print '<h1>'._('Register a new contribution').'</h1>' ;
+	print '<h1>'._('Register a new contribution').'</h1>';
+	echo $HTML->openForm(array('action' => '/plugins/'.$plugin->name.'/project_admin.php', 'method' => 'post'));
 ?>
-<form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/project_admin.php') ?>" method="post">
 <input type="hidden" name="action" value="post_add_contrib" />
 <input type="hidden" name="group_id" value="<?php echo $group_id ?>" />
 <?php echo _('Contribution name')._(':') ?> <input type="text" name="contrib_name" size="20" /><br />
@@ -191,9 +209,9 @@ case 'add_contrib':
 <?php echo _('Contribution description')._(':') ?><br />
 <textarea name="contrib_desc" rows="20" cols="80"></textarea><br />
 <input type="submit" name="submit" value="<?php echo _('Submit') ?>" />
-</form>
 
 <?php
+	echo $HTML->closeForm();
 	 break ;
 case 'edit_contrib':
 	print '<h1>'._('Edit a contribution').'</h1>' ;
@@ -201,9 +219,8 @@ case 'edit_contrib':
 	$contrib = new ContribTrackerContribution ($contrib_id) ;
 
 	print '<h3>'._('Contribution details').'</h3>' ;
-
+	echo $HTML->openForm(array('action' => '/plugins/'.$plugin->name.'/project_admin.php', 'method' => 'post'));
 ?>
-<form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/project_admin.php') ?>" method="post">
 <input type="hidden" name="action" value="post_edit_contrib" />
 <input type="hidden" name="group_id" value="<?php echo $group_id ?>" />
 <input type="hidden" name="contrib_id" value="<?php echo $contrib->getId() ?>" />
@@ -212,10 +229,9 @@ case 'edit_contrib':
 <?php echo _('Contribution description')._(':') ?><br />
 <textarea name="contrib_desc" rows="20" cols="80"><?php echo htmlspecialchars ($contrib->getDescription()) ?></textarea><br />
 <input type="submit" name="submit" value="<?php echo _('Save') ?>" />
-</form>
 <?php
-
-	 print '<h3>'._('Current participants').'</h3>' ;
+	echo $HTML->closeForm();
+	print '<h3>'._('Current participants').'</h3>' ;
 
 	$parts = $contrib->getParticipations () ;
 	print '<strong>'.ngettext('Participant:',
@@ -230,31 +246,32 @@ case 'edit_contrib':
 			util_make_link ('/plugins/'.$plugin->name.'/?actor_id='.$p->getActor()->getId (),
 					htmlspecialchars ($p->getActor()->getName())),
 			htmlspecialchars ($p->getActor()->getLegalStructure()->getName())) ;
+		echo $HTML->openForm(array('action' => '/plugins/'.$plugin->name.'/project_admin.php', 'method' => 'post'));
 ?>
-<form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/project_admin.php') ?>" method="post">
 <input type="hidden" name="action" value="del_part" />
 <input type="hidden" name="group_id" value="<?php echo $group_id ?>" />
 <input type="hidden" name="contrib_id" value="<?php echo $contrib->getId() ?>" />
 <input type="hidden" name="part_id" value="<?php echo $p->getId() ?>" />
 <input type="submit" name="submit" value="<?php echo _('Delete') ?>" />
-</form>
-<form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/project_admin.php') ?>" method="post">
+<?php
+		echo $HTML->closeForm();
+		echo $HTML->openForm(array('action' => '/plugins/'.$plugin->name.'/project_admin.php', 'method' => 'post'));
+?>
 <input type="hidden" name="action" value="move_part" />
 <input type="hidden" name="group_id" value="<?php echo $group_id ?>" />
 <input type="hidden" name="contrib_id" value="<?php echo $contrib->getId() ?>" />
 <input type="hidden" name="part_id" value="<?php echo $p->getId() ?>" />
 <input type="submit" name="down" value="<?php echo _('Move participant down') ?>" />
 <input type="submit" name="up" value="<?php echo _('Move participant up') ?>" />
-</form>
 <?php
+		echo $HTML->closeForm();
 		print '</li>' ;
 	}
 	print '</ul>' ;
 
-	  print '<h3>'._('Add a participant').'</h3>' ;
-
+	print '<h3>'._('Add a participant').'</h3>' ;
+	echo $HTML->openForm(array('action' => '/plugins/'.$plugin->name.'/project_admin.php', 'method' => 'post'));
 ?>
-<form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/project_admin.php') ?>" method="post">
 <input type="hidden" name="action" value="add_part" />
 <input type="hidden" name="group_id" value="<?php echo $group_id ?>" />
 <input type="hidden" name="contrib_id" value="<?php echo $contrib->getId() ?>" />
@@ -275,10 +292,9 @@ case 'edit_contrib':
 ?>
 </select>
 <input type="submit" name="submit" value="<?php echo _('Add participant') ?>" />
-</form>
 <?php
-
-	 break ;
+	echo $HTML->closeForm();
+	break ;
 case 'display':
 	$contribs = $plugin->getContributionsByGroup ($group) ;
 	if (count ($contribs) != 0) {
@@ -310,33 +326,37 @@ case 'display':
 				print '</li>' ;
 			}
 			print '</ul>' ;
+			echo $HTML->openForm(array('action' => '/plugins/'.$plugin->name.'/project_admin.php', 'method' => 'post'));
+
 ?>
-<form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/project_admin.php') ?>" method="post">
 <input type="hidden" name="action" value="edit_contrib" />
 <input type="hidden" name="group_id" value="<?php echo $group_id ?>" />
 <input type="hidden" name="contrib_id" value="<?php echo $c->getId() ?>" />
 <input type="submit" name="submit" value="<?php echo _('Edit') ?>" />
-</form>
-<form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/project_admin.php') ?>" method="post">
+<?php
+			echo $HTML->closeForm();
+			echo $HTML->openForm(array('action' => '/plugins/'.$plugin->name.'/project_admin.php', 'method' => 'post'));
+?>
 <input type="hidden" name="action" value="del_contrib" />
 <input type="hidden" name="group_id" value="<?php echo $group_id ?>" />
 <input type="hidden" name="contrib_id" value="<?php echo $c->getId() ?>" />
 <input type="submit" name="submit" value="<?php echo _('Delete'); ?>" />
-</form>
+<?php			echo $HTML->closeForm(); ?>
 <hr />
 <?php
 		}
 	} else {
 		print '<h1>'._('No contributions for this project yet.').'</h1>' ;
 	}
+	echo $HTML->openForm(array('action' => '/plugins/'.$plugin->name.'/project_admin.php', 'method' => 'post'));
+
 ?>
-<form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/project_admin.php') ?>" method="post">
 <input type="hidden" name="action" value="add_contrib" />
 <input type="hidden" name="group_id" value="<?php echo $group_id ?>" />
 <input type="submit" name="submit" value="<?php echo _('Add new contribution') ?>" />
-</form>
 <?php
-	break ;
+	echo $HTML->closeForm();
+	break;
 }
 
 site_project_footer();

@@ -1,13 +1,31 @@
 <?php
-/*
+/**
  * Project labels plugin
  *
  * Roland Mas <lolando@debian.org>
+ * Copyright 2016, Franck Villaume - TrivialDev
+ *
+ * This file is part of FusionForge. FusionForge is free software;
+ * you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the Licence, or (at your option)
+ * any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with FusionForge; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
 require_once '../../../www/env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'admin/admin_utils.php';
+
+global $HTML;
 
 site_admin_header(array('title'=>_('Project labels')));
 
@@ -112,20 +130,20 @@ if ($func == 'edit') {
 		         WHERE label_id=$1',
 			array($label_id));
 	$row = db_fetch_array($res) ;
-?>
-<form name="edit_label" action="<?php echo util_make_url ('/plugins/projectlabels/') ; ?>" method="post">
+
+	echo $HTML->openForm(array('name' => 'edit_label', 'action' => '/plugins/projectlabels/', 'method' => 'post'));
+	?>
 <input type="hidden" name="func" value="editlabel" />
 <input type="hidden" name="label_id" value="<?php echo $label_id ?>" />
 <?php echo utils_requiredField(); ?>
-	 <?php echo _('Label name:') ; ?><br/>
+<?php echo _('Label name')._(': '); ?><br/>
 <input type="text" required="required" size="15" maxlength="32" name="label_name" value="<?php echo stripslashes ($row['label_name']) ; ?>"/> <br/>
-						  <?php echo _('Displayed text (or HTML) for the label:') ; ?><br/>
-<textarea tabindex='1' accesskey="," name="label_text" rows='5'
-														       cols='80'><?php echo $row['label_text'] ; ?></textarea><br/>
-																							   <?php echo _('This label currently looks like this:') ." " . $row['label_text'] ; ?>
+<?php echo _('Displayed text (or HTML) for the label')._(': ') ; ?><br/>
+<textarea tabindex='1' accesskey="," name="label_text" rows='5' cols='80'><?php echo $row['label_text'] ; ?></textarea><br/>
+<?php echo _('This label currently looks like this')._(': ').$row['label_text'] ; ?>
 <input type="submit" value="<?php echo _('Save this label') ?>" />
-</form>
 <?php
+	echo $HTML->closeForm();
 }
 ?>
 
@@ -142,7 +160,7 @@ if (db_numrows($res) >= 1) {
 
 	while ($row = db_fetch_array($res)) {
 		echo "<h3>".stripslashes ($row['label_name'])."</h3>" ;
-		echo "<br />" . _('This label currently looks like this:') ." ";
+		echo "<br />" . _('This label currently looks like this')._(': ');
 		echo $row['label_text'] . "<br />" ;
 
 		$res2 = db_query_params ('SELECT groups.unix_group_name, groups.group_name, groups.group_id FROM groups, plugin_projectlabels_group_labels
@@ -167,44 +185,42 @@ if (db_numrows($res) >= 1) {
 		} else {
 			echo _('This label is not used on any group.')."<br />" ;
 		}
-		?>
-<form name="addlabeltoproject" method="post" action="<?php echo util_make_url ('/plugins/projectlabels/') ; ?>">
-	 <?php echo _('Project Unix Name')._(': '); ?>
+		echo $HTML->openForm(array('name' => 'addlabeltoproject', 'method' => 'post', 'action' => '/plugins/projectlabels/'));
+		echo _('Project Unix Name')._(': '); ?>
 <input type=text name=group_uname>
 <input type="hidden" name="func" value="addlabeltoproject">
 <input type="submit" value="<?php echo _('Add label to project') ?>">
 <input type="hidden" value="<?php echo $row['label_id'] ;?>" name=label_id>
-</form>
 <?php
-	 echo util_make_link ('/plugins/projectlabels/?func=edit&label_id='.$row['label_id'],
+		echo $HTML->closeForm();
+		echo util_make_link ('/plugins/projectlabels/?func=edit&label_id='.$row['label_id'],
 			      _('[Edit this label]')) ;
-	 echo util_make_link ('/plugins/projectlabels/?func=delete&label_id='.$row['label_id'],
+		echo util_make_link ('/plugins/projectlabels/?func=delete&label_id='.$row['label_id'],
 			      _('[Delete this label]')) ;
 	}
 }
 ?>
 </p>
 
-		  <p><?php
+		<p><?php
 
-		  echo "<h2>"._('Add new labels')."</h2>" ;
-		  echo _('You can create new labels with the form below.') ?></p>
-
-<form name="new_label" action="<?php echo util_make_url ('/plugins/projectlabels/') ; ?>" method="post">
+echo "<h2>"._('Add new labels')."</h2>" ;
+echo _('You can create new labels with the form below.') ?></p>
+		<?php echo $HTML->openForm(array('name' => 'new_label', 'action' => '/plugins/projectlabels/', 'method' => 'post')); ?>
 <p>
 <input type="hidden" name="func" value="addlabel" />
 <?php echo utils_requiredField(); ?>
-		  <?php echo _('Name of the label:') ; ?><br/>
+		  <?php echo _('Name of the label')._(': ') ; ?><br/>
 <input type="text" required="required" size="15" maxlength="32" name="label_name" value="<?php echo _('potm') ; ?>"/> <br/>
-		  <?php echo _('Displayed text (or HTML) for the label:') ; ?><br/>
+		  <?php echo _('Displayed text (or HTML) for the label')._(': ') ; ?><br/>
 <textarea tabindex='1' accesskey="," name="label_text" rows='5'
 		  cols='80'><p><b><?php echo _('Project of the month!') ; ?></b></p>
 </textarea><br/>
 <input type="submit" value="<?php echo _('Add label') ?>" />
 </p>
-</form>
 
 <?php
+echo $HTML->closeForm();
 site_admin_footer();
 
 // Local Variables:

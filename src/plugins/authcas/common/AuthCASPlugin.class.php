@@ -86,22 +86,17 @@ server.");
 
 		$this->initCAS();
 
-		$result = '';
+		$result = html_e('p', array(), _('Cookies must be enabled past this point.'));
 
-		$result .= '<p>';
-		$result .= _('Cookies must be enabled past this point.');
-		$result .= '</p>';
-
-		$result .= '<form action="' . util_make_url('/plugins/authcas/post-login.php') . '" method="get">
-<input type="hidden" name="form_key" value="' . form_generate_key() . '"/>
+		$result .= $HTML->openForm(array('action' => '/plugins/'.$this->name.'/post-login.php', 'method' => 'get'));
+		$result .= '<input type="hidden" name="form_key" value="' . form_generate_key() . '"/>
 <input type="hidden" name="return_to" value="' . htmlspecialchars(stripslashes($return_to)) . '" />
 <p><input type="submit" name="login" value="' . _('Login via CAS') . '" />
-</p>
-</form>';
-
+</p>';
+		$result .= $HTML->closeForm();
 		$params['html_snippets'][$this->name] = $result;
 
-		$params['transparent_redirect_urls'][$this->name] = util_make_url('/plugins/authcas/post-login.php?return_to='.htmlspecialchars(stripslashes($return_to)).'&login=1');
+		$params['transparent_redirect_urls'][$this->name] = util_make_url('/plugins/'.$this->name.'/post-login.php?return_to='.htmlspecialchars(stripslashes($return_to)).'&login=1');
 	}
 
     /**

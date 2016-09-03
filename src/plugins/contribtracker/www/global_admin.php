@@ -1,10 +1,9 @@
 <?php
-
 /**
  * ContribTracker plugin
  *
  * Copyright 2009, Roland Mas
- * Copyright 2010 (c) Franck Villaume
+ * Copyright 2010, 2016, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -262,19 +261,19 @@ case 'display':
 			print '<td>'.htmlspecialchars($a->getLegalStructure()->getName()).'</td>' ;
 			?>
 				<td>
-					 <form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/global_admin.php') ?>" method="post">
-					 <input type="hidden" name="action" value="edit_actor" />
-					 <input type="hidden" name="actor_id" value="<?php echo $a->getId () ?>" />
-					 <input type="submit" name="submit" value="<?php echo _('Edit') ?>" />
-					 </form>
-					 <form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/global_admin.php') ?>" method="post">
-					 <input type="hidden" name="action" value="del_actor" />
-					 <input type="hidden" name="actor_id" value="<?php echo $a->getId () ?>" />
-					 <input type="submit" name="submit" value="<?php echo _('Delete') ?>" />
-					 </form>
-					 </td>
-					 <?php
-					 print '</tr>';
+					<?php echo $HTML->openForm(array('action' => '/plugins/'.$plugin->name.'/global_admin.php', 'method' => 'post')); ?>
+					<input type="hidden" name="action" value="edit_actor" />
+					<input type="hidden" name="actor_id" value="<?php echo $a->getId () ?>" />
+					<input type="submit" name="submit" value="<?php echo _('Edit') ?>" />
+					<?php echo $HTML->closeForm();
+					echo $HTML->openForm(array('action' => '/plugins/'.$plugin->name.'/global_admin.php', 'method' => 'post')); ?>
+					<input type="hidden" name="action" value="del_actor" />
+					<input type="hidden" name="actor_id" value="<?php echo $a->getId () ?>" />
+					<input type="submit" name="submit" value="<?php echo _('Delete') ?>" />
+					<?php echo $HTML->closeForm(); ?>
+				 </td>
+			<?php
+			print '</tr>';
 		}
 		print '</tbody></table>' ;
 	} else {
@@ -282,14 +281,14 @@ case 'display':
 	}
 	$structs = $plugin->getLegalStructures () ;
 	if (count ($structs)) {
+		echo $HTML->openForm(array('action' => '/plugins/'.$plugin->name.'/global_admin.php', 'method' => 'post'));
 		?>
-		<form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/global_admin.php') ?>" method="post">
 			<input type="hidden" name="action" value="add_actor" />
 			<input type="submit" name="submit" value="<?php echo _('Register new actor') ?>" />
-			</form>
 
-			<?php
-			} else {
+		<?php
+		echo $HTML->closeForm();
+	} else {
 		print _("No legal structures yet, cannot define actors without them.") ;
 	}
 
@@ -305,33 +304,32 @@ case 'display':
 			print '<td>'.htmlspecialchars($s->getName()).'</td>' ;
 			?>
 				<td>
-					 <form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/global_admin.php') ?>" method="post">
-					 <input type="hidden" name="action" value="edit_structure" />
-					 <input type="hidden" name="structure_id" value="<?php echo $s->getId () ?>" />
-					 <input type="submit" name="submit" value="<?php echo _('Edit') ?>" />
-					 </form>
-					 <form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/global_admin.php') ?>" method="post">
-					 <input type="hidden" name="action" value="del_structure" />
-					 <input type="hidden" name="structure_id" value="<?php echo $s->getId () ?>" />
-					 <input type="submit" name="submit" value="<?php echo _('Delete') ?>" />
-					 </form>
-					 </td>
-					 <?php
-					 print '</tr>';
+					<?php echo $HTML->openForm(array('action' => '/plugins/'.$plugin->name.'/global_admin.php', 'method' => 'post')); ?>
+					<input type="hidden" name="action" value="edit_structure" />
+					<input type="hidden" name="structure_id" value="<?php echo $s->getId () ?>" />
+					<input type="submit" name="submit" value="<?php echo _('Edit') ?>" />
+					<?php echo $HTML->closeForm();
+					echo $HTML->openForm(array('action' => '/plugins/'.$plugin->name.'/global_admin.php', 'method' => 'post')); ?>
+					<input type="hidden" name="action" value="del_structure" />
+					<input type="hidden" name="structure_id" value="<?php echo $s->getId () ?>" />
+					<input type="submit" name="submit" value="<?php echo _('Delete') ?>" />
+					<?php echo $HTML->closeForm(); ?>
+				</td>
+			<?php
+			print '</tr>';
 		}
 		print '</tbody></table>' ;
 	} else {
 		print _('No legal structures currently defined.') ;
 	}
+	echo $HTML->openForm(array('action' => '/plugins/'.$plugin->name.'/global_admin.php', 'method' => 'post'));
 	?>
-		<form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/global_admin.php') ?>" method="post">
-			 <input type="hidden" name="action" value="add_structure" />
-			 <input type="submit" name="submit" value="<?php echo _('Register new legal structure') ?>" />
-			 </form>
-			 <?php
-
-			 print '<h1>'._('Existing roles').'</h1>' ;
-	$roles = $plugin->getRoles () ;
+		<input type="hidden" name="action" value="add_structure" />
+		<input type="submit" name="submit" value="<?php echo _('Register new legal structure') ?>" />
+	<?php
+	echo $HTML->closeForm();
+	print '<h1>'._('Existing roles').'</h1>' ;
+	$roles = $plugin->getRoles();
 	if (count ($roles)) {
 		print '<table><thead><tr>' ;
 		print '<td><strong>'._('Short name').'</strong></td>' ;
@@ -344,139 +342,131 @@ case 'display':
 			print '<td>'.htmlspecialchars($r->getDescription()).'</td>' ;
 			?>
 				<td>
-					 <form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/global_admin.php') ?>" method="post">
-					 <input type="hidden" name="action" value="edit_role" />
-					 <input type="hidden" name="role_id" value="<?php echo $r->getId () ?>" />
-					 <input type="submit" name="submit" value="<?php echo _('Edit') ?>" />
-					 </form>
-					 <form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/global_admin.php') ?>" method="post">
-					 <input type="hidden" name="action" value="del_role" />
-					 <input type="hidden" name="role_id" value="<?php echo $r->getId () ?>" />
-					 <input type="submit" name="submit" value="<?php echo _('Delete') ?>" />
-					 </form>
-					 </td>
-					 <?php
-					 print '</tr>';
+					<?php echo $HTML->openForm(array('action' => '/plugins/'.$plugin->name.'/global_admin.php', 'method' => 'post')); ?>
+					<input type="hidden" name="action" value="edit_role" />
+					<input type="hidden" name="role_id" value="<?php echo $r->getId () ?>" />
+					<input type="submit" name="submit" value="<?php echo _('Edit') ?>" />
+					<?php echo $HTML->closeForm();
+					echo $HTML->openForm(array('action' => '/plugins/'.$plugin->name.'/global_admin.php', 'method' => 'post')); ?>
+					<input type="hidden" name="action" value="del_role" />
+					<input type="hidden" name="role_id" value="<?php echo $r->getId () ?>" />
+					<input type="submit" name="submit" value="<?php echo _('Delete') ?>" />
+					<?php echo $HTML->closeForm(); ?>
+				</td>
+			<?php
+			print '</tr>';
 		}
 		print '</tbody></table>' ;
 	} else {
 		print _('No roles currently defined.') ;
 	}
+	echo $HTML->openForm(array('action' => '/plugins/'.$plugin->name.'/global_admin.php', 'method' => 'post'));
 	?>
-		<form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/global_admin.php') ?>" method="post">
-			 <input type="hidden" name="action" value="add_role" />
-			 <input type="submit" name="submit" value="<?php echo _('Register new role') ?>" />
-			 </form>
-			 <?php
-
-			 break ;
+		<input type="hidden" name="action" value="add_role" />
+		<input type="submit" name="submit" value="<?php echo _('Register new role') ?>" />
+	<?php
+	echo $HTML->closeForm();
+	break;
 
 case 'add_role':
 	print '<h1>'._('Register a new role').'</h1>' ;
+	echo $HTML->openForm(array('action' => '/plugins/'.$plugin->name.'/global_admin.php', 'method' => 'post'));
 	?>
-		<form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/global_admin.php') ?>" method="post">
-			 <input type="hidden" name="action" value="post_add_role" />
-			 <?php echo _('Role Name')._(':') ?> <input type="text" name="role_name" size="20" /><br />
-			 <?php echo _('Role description')._(':') ?><br />
-			 <textarea name="role_desc" rows="20" cols="80"></textarea><br />
-			 <input type="submit" name="submit" value="<?php echo _('Submit') ?>" />
-			 </form>
-
-			 <?php
-			 break ;
+		<input type="hidden" name="action" value="post_add_role" />
+		<?php echo _('Role Name')._(':') ?> <input type="text" name="role_name" size="20" /><br />
+		<?php echo _('Role description')._(':') ?><br />
+		<textarea name="role_desc" rows="20" cols="80"></textarea><br />
+		<input type="submit" name="submit" value="<?php echo _('Submit') ?>" />
+	<?php
+	echo $HTML->closeForm();
+	break;
 
 case 'edit_role':
 	print '<h1>'._('Edit a role').'</h1>' ;
 	$role = new ContribTrackerRole ($role_id) ;
-
+	echo $HTML->openForm(array('action' => '/plugins/'.$plugin->name.'/global_admin.php', 'method' => 'post'));
 	?>
-		<form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/global_admin.php') ?>" method="post">
-			 <input type="hidden" name="action" value="post_edit_role" />
-			 <input type="hidden" name="role_id" value="<?php echo $role->getId() ?>" />
-			 <?php echo _('Role Name')._(':') ?> <input type="text" name="role_name" size="20" value="<?php echo htmlspecialchars ($role->getName()) ?>" /><br />
-			 <?php echo _('Role description')._(':') ?><br />
-			 <textarea name="role_desc" rows="20" cols="80"><?php echo htmlspecialchars ($role->getDescription()) ?></textarea><br />
-			 <input type="submit" name="submit" value="<?php echo _('Save') ?>" />
-			 </form>
-			 <?php
-			 break ;
+		<input type="hidden" name="action" value="post_edit_role" />
+		<input type="hidden" name="role_id" value="<?php echo $role->getId() ?>" />
+		<?php echo _('Role Name')._(':') ?> <input type="text" name="role_name" size="20" value="<?php echo htmlspecialchars ($role->getName()) ?>" /><br />
+		<?php echo _('Role description')._(':') ?><br />
+		<textarea name="role_desc" rows="20" cols="80"><?php echo htmlspecialchars ($role->getDescription()) ?></textarea><br />
+		<input type="submit" name="submit" value="<?php echo _('Save') ?>" />
+	<?php
+	echo $HTML->closeForm();
+	break;
 
 case 'add_structure':
 	print '<h1>'._('Register a new legal structure').'</h1>' ;
+	echo $HTML->openForm(array('action' => '/plugins/'.$plugin->name.'/global_admin.php', 'method' => 'post'));
 	?>
-		<form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/global_admin.php') ?>" method="post">
-			 <input type="hidden" name="action" value="post_add_structure" />
-			 <?php echo _('Structure name')._(':') ?> <input type="text" name="structure_name" size="20" /><br />
-			 <input type="submit" name="submit" value="<?php echo _('Submit') ?>" />
-			 </form>
-
-			 <?php
-			 break ;
+		<input type="hidden" name="action" value="post_add_structure" />
+		<?php echo _('Structure name')._(':') ?> <input type="text" name="structure_name" size="20" /><br />
+		<input type="submit" name="submit" value="<?php echo _('Submit') ?>" />
+	<?php
+	echo $HTML->closeForm();
+	break;
 
 case 'edit_structure':
 	print '<h1>'._('Edit a legal structure').'</h1>' ;
 	$structure = new ContribTrackerLegalStructure ($structure_id) ;
-
+	echo $HTML->openForm(array('action' => '/plugins/'.$plugin->name.'/global_admin.php', 'method' => 'post'));
 	?>
-		<form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/global_admin.php') ?>" method="post">
-			 <input type="hidden" name="action" value="post_edit_structure" />
-			 <input type="hidden" name="structure_id" value="<?php echo $structure->getId() ?>" />
-			 <?php echo _('Structure name')._(':') ?> <input type="text" name="structure_name" size="20" value="<?php echo htmlspecialchars ($structure->getName()) ?>" /><br />
-			 <input type="submit" name="submit" value="<?php echo _('Save') ?>" />
-			 </form>
-			 <?php
-			 break ;
+		<input type="hidden" name="action" value="post_edit_structure" />
+		<input type="hidden" name="structure_id" value="<?php echo $structure->getId() ?>" />
+		<?php echo _('Structure name')._(':') ?> <input type="text" name="structure_name" size="20" value="<?php echo htmlspecialchars ($structure->getName()) ?>" /><br />
+		<input type="submit" name="submit" value="<?php echo _('Save') ?>" />
+	<?php
+	echo $HTML->closeForm();
+	break;
 
 case 'add_actor':
 	print '<h1>'._('Register a new actor').'</h1>' ;
+	echo $HTML->openForm(array('action' => '/plugins/'.$plugin->name.'/global_admin.php', 'method' => 'post', 'enctype' => 'multipart/form-data'));
 	?>
-		<form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/global_admin.php') ?>" method="post" enctype="multipart/form-data">
-			 <input type="hidden" name="action" value="post_add_actor" />
-			 <?php echo _('Actor name')._(':') ?> <input type="text" name="actor_name" size="20" /><br />
-			 <?php echo _('Actor URL')._(':') ?> <input type="text" name="actor_url" size="20" /><br />
-			 <?php echo _('Actor email')._(':') ?> <input type="text" name="actor_email" size="20" /><br />
-			 <?php echo _('Actor description')._(':') ?><br />
-			 <textarea name="actor_desc" rows="20" cols="80"></textarea><br />
-			 <?php printf (_('Actor logo (PNG, %d kB max)')._(':'), $max_logo_size) ?> <input type="file" name="actor_logo" /><br />
-			 <?php
-			 echo _('Legal structure')._(':') ?>
-			 <select name="structure_id">
-			 <?php
-			 $structs = $plugin->getLegalStructures () ;
+		<input type="hidden" name="action" value="post_add_actor" />
+		<?php echo _('Actor name')._(':') ?> <input type="text" name="actor_name" size="20" /><br />
+		<?php echo _('Actor URL')._(':') ?> <input type="text" name="actor_url" size="20" /><br />
+		<?php echo _('Actor email')._(':') ?> <input type="text" name="actor_email" size="20" /><br />
+		<?php echo _('Actor description')._(':') ?><br />
+		<textarea name="actor_desc" rows="20" cols="80"></textarea><br />
+		<?php printf (_('Actor logo (PNG, %d kB max)')._(':'), $max_logo_size) ?> <input type="file" name="actor_logo" /><br />
+		<?php echo _('Legal structure')._(':') ?>
+		<select name="structure_id">
+	<?php
+	$structs = $plugin->getLegalStructures () ;
 	foreach ($structs as $s) {
 		print '<option value="'.$s->getId().'">'.htmlspecialchars($s->getName()).'</option>' ;
 	}
 	?>
 		</select><br />
-			  <input type="submit" name="submit" value="<?php echo _('Submit') ?>" />
-			  </form>
-
-			  <?php
-			  break ;
+		<input type="submit" name="submit" value="<?php echo _('Submit') ?>" />
+	<?php
+	echo $HTML->closeForm();
+	break;
 
 case 'edit_actor':
 	print '<h1>'._('Edit an actor').'</h1>' ;
 	$actor = new ContribTrackerActor ($actor_id) ;
-
+	echo $HTML->openForm(array('action' => '/plugins/'.$plugin->name.'/global_admin.php', 'method' => 'post', 'enctype' => 'multipart/form-data'));
 	?>
-		<form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/global_admin.php') ?>" method="post" enctype="multipart/form-data">
-			 <input type="hidden" name="action" value="post_edit_actor" />
-			 <input type="hidden" name="actor_id" value="<?php echo $actor->getId() ?>" />
-			 <?php echo _('Actor name')._(':') ?> <input type="text" name="actor_name" size="20" value="<?php echo htmlspecialchars ($actor->getName()) ?>" /><br />
-			 <?php echo _('Actor URL')._(':') ?> <input type="text" name="actor_url" size="20" value="<?php echo htmlspecialchars ($actor->getUrl()) ?>" /><br />
-			 <?php echo _('Actor email')._(':') ?> <input type="text" name="actor_email" size="20" value="<?php echo htmlspecialchars ($actor->getEmail()) ?>" /><br />
-			 <?php echo _('Actor description')._(':') ?><br />
-			 <textarea name="actor_desc" rows="20" cols="80"><?php echo htmlspecialchars ($actor->getDescription()) ?></textarea><br />
-			 <?php printf (_('Actor logo (PNG, %d kB max)')._(':'), $max_logo_size) ?> <input type="file" name="actor_logo" /><br />
-			 <?php
-			 if ($actor->getLogo() != '') {
-				 print '<img type="image/png" src="'.util_make_url ('/plugins/'.$plugin->name.'/actor_logo.php?actor_id='.$actor->getId ()).'" />' ;
-			 }
+		<input type="hidden" name="action" value="post_edit_actor" />
+		<input type="hidden" name="actor_id" value="<?php echo $actor->getId() ?>" />
+		<?php echo _('Actor name')._(':') ?> <input type="text" name="actor_name" size="20" value="<?php echo htmlspecialchars ($actor->getName()) ?>" /><br />
+		<?php echo _('Actor URL')._(':') ?> <input type="text" name="actor_url" size="20" value="<?php echo htmlspecialchars ($actor->getUrl()) ?>" /><br />
+		<?php echo _('Actor email')._(':') ?> <input type="text" name="actor_email" size="20" value="<?php echo htmlspecialchars ($actor->getEmail()) ?>" /><br />
+		<?php echo _('Actor description')._(':') ?><br />
+		<textarea name="actor_desc" rows="20" cols="80"><?php echo htmlspecialchars ($actor->getDescription()) ?></textarea><br />
+		<?php printf (_('Actor logo (PNG, %d kB max)')._(':'), $max_logo_size) ?> <input type="file" name="actor_logo" /><br />
+		<?php
+	if ($actor->getLogo() != '') {
+		print '<img type="image/png" src="'.util_make_url ('/plugins/'.$plugin->name.'/actor_logo.php?actor_id='.$actor->getId ()).'" />' ;
+	}
 	print '<br />' ;
-			 echo _('Legal structure')._(':') ?>
-			 <select name="structure_id">
-			 <?php
-			 $structs = $plugin->getLegalStructures () ;
+	echo _('Legal structure')._(':') ?>
+	<select name="structure_id">
+	<?php
+	$structs = $plugin->getLegalStructures () ;
 	foreach ($structs as $s) {
 		print '<option value="'.$s->getId().'".' ;
 		if ($s->getId() == $actor->getLegalStructure()->getId()) {
@@ -486,10 +476,10 @@ case 'edit_actor':
 	}
 	?>
 		</select><br />
-			  <input type="submit" name="submit" value="<?php echo _('Save') ?>" />
-			  </form>
-			  <?php
-			  break ;
+		<input type="submit" name="submit" value="<?php echo _('Save') ?>" />
+	<?php
+	echo $HTML->closeForm();
+	break;
 
 }
 
