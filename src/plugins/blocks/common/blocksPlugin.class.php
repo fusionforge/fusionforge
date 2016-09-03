@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright (C) 2006 Alain Peyrat, Alcatel-Lucent
  * Copyright (C) 2010 Alain Peyrat <aljeux@free.fr>
@@ -119,7 +118,7 @@ control over it to the project's administrator.");
 		if ($content === false) {
 			return false;
 		} elseif ($content) {
-			return $this->parseContent($content).'<br />';
+			return $this->parseContent($content);
 		} else {
 			return '<table width="100%" border="1" cellpadding="0" cellspacing="0">'.
 					'<tr><td align="center">block: '.$name.'</td></tr></table><br />';
@@ -129,10 +128,10 @@ control over it to the project's administrator.");
 	function parseContent($text) {
 		global $HTML;
 
-		$text = preg_replace('/<p>{boxTop (.*?)}<\/p>/ie', '$HTML->boxTop(\'$1\')', $text);
-		$text = preg_replace('/{boxTop (.*?)}/ie', '$HTML->boxTop(\'$1\')', $text);
-		$text = preg_replace('/<p>{boxMiddle (.*?)}<\/p>/ie', '$HTML->boxMiddle(\'$1\')', $text);
-		$text = preg_replace('/{boxMiddle (.*?)}/ie', '$HTML->boxMiddle(\'$1\')', $text);
+		$text = preg_replace_callback('/<p>{boxTop (.*?)}<\/p>/i', function($m) { return $HTML->boxTop($m[1]); }, $text);
+		$text = preg_replace_callback('/{boxTop (.*?)}/i', function($m) { $HTML->boxTop($m[1]); }, $text);
+		$text = preg_replace_callback('/<p>{boxMiddle (.*?)}<\/p>/i', function($m) { $HTML->boxMiddle($m[1]); }, $text);
+		$text = preg_replace_callback('/{boxMiddle (.*?)}/i', function($m) { $HTML->boxMiddle($m[1]); }, $text);
 		$text = preg_replace('/<p>{boxBottom}<\/p>/i', $HTML->boxBottom(), $text);
 		$text = preg_replace('/{boxBottom}/i', $HTML->boxBottom(), $text);
 
