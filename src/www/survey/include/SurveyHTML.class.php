@@ -6,7 +6,7 @@
  * The rest Copyright 2002-2004 (c) GForge Team - Sung Kim
  * Copyright 2008-2010 (c) FusionForge Team
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013-2014, Franck Villaume - TrivialDev
+ * Copyright 2013-2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -471,7 +471,7 @@ class SurveyHTML extends FFError {
 		if ($s->isUserVote(user_getid())) {
 			$ret.= $HTML->warning_msg(_('Warning - you are about to vote a second time on this survey.'));
 		}
-		$ret.= '<form action="/survey/survey_resp.php" method="post">'.
+		$ret.= $HTML->openForm(array('action' => '/survey/survey_resp.php', 'method' =>'post')).
 			'<input type="hidden" name="group_id" value="'.$group_id.'" />'.
 			'<input type="hidden" name="survey_id" value="'.$survey_id. '" />';
 
@@ -551,8 +551,8 @@ class SurveyHTML extends FFError {
 		$ret.='<tr><td class="align-center" colspan="2">'.
 			'<input type="submit" name="submit" value="'._('Submit').'" />'.
 			'<br />'.util_make_link('/survey/privacy.php?group_id='.$group_id, _('Survey Privacy')).
-			'</td></tr></form></table>';
-
+			'</td></tr></table>';
+		echo $HTML->closeForm();
 		return $ret;
 	}
 

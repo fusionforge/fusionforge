@@ -3,6 +3,7 @@
  * Project Management Facility : Display Calendar
  *
  * Copyright 2002 GForge, LLC
+ * Copyright 2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -157,7 +158,7 @@ function make_task_link($task, $type) {
  *
  */
 function display_month($m, $y) {
-	global $today, $month, $day, $year, $pt_arr;
+	global $today, $month, $day, $year, $pt_arr, $HTML;
 	$dow = array(_('Sunday'), _('Monday'), _('Tuesday'), _('Wednesday'), _('Thursday'), _('Friday'), _('Saturday'));
 
 	$tstamp = mktime(0, 0, 0, $m + 1, 0, $y) ;
@@ -242,9 +243,8 @@ function display_month($m, $y) {
 
 <?php
 }
-
+	echo $HTML->openForm(array('action' => '/pm/calendar.php', 'method' => 'get'));
 ?>
-	<form action="/pm/calendar.php" method="get">
 	<table class="fullwidth">
 		<tr>
 			<td><?php echo _('Period'); ?><br />
@@ -296,9 +296,9 @@ function display_month($m, $y) {
 	<input type="hidden" name="group_id" value="'. $group_id .'" />
 	<input type="hidden" name="group_project_id" value="'. $group_project_id .'" />';
 	}
-?>
+	echo $HTML->closeForm();
+	?>
 
-	</form>
 	<table class="fullwidth">
 		<tr>
 			<td style="width:20px" class="selected"></td>

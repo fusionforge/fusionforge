@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
- * Copyright 2010-2014, Franck Villaume - TrivialDev
+ * Copyright 2010-2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -26,6 +26,8 @@
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'people/people_utils.php';
+
+global $HTML;
 
 if (!forge_get_config('use_people')) {
 	exit_disabled('home');
@@ -58,7 +60,7 @@ if ($group_id && (forge_check_perm('project_admin', $group_id))) {
 					VALUES ($1, $2, $3, $4, $5, $6, $7)",
 					array($group_id, user_getid(), htmlspecialchars($title), htmlspecialchars($description), time(), '1',$category_id));
 		if (!$result || db_affected_rows($result) < 1) {
-			$error_msg .= sprintf(_('Job insert failed: %s'),db_error());
+			$error_msg .= _('Job skill insert failed')._(': ').db_error();
 			form_release_key(getStringFromRequest("form_key"));
 		} else {
 			$job_id=db_insertid($result,'people_job','job_id');
@@ -77,7 +79,7 @@ if ($group_id && (forge_check_perm('project_admin', $group_id))) {
 		$result=db_query_params("UPDATE people_job SET title=$1,description=$2,status_id=$3,category_id=$4 WHERE job_id=$5 AND group_id=$6",
 			array(htmlspecialchars($title), htmlspecialchars($description), $status_id, $category_id, $job_id, $group_id));
 		if (!$result || db_affected_rows($result) < 1) {
-			$error_msg = sprintf(_('Job update failed: %s'),db_error());
+			$error_msg = _('Job skill update failed')._(': ').db_error();
 		} else {
 			$feedback = _('Job updated successfully');
 		}
@@ -112,7 +114,7 @@ if ($group_id && (forge_check_perm('project_admin', $group_id))) {
 			$result=db_query_params("UPDATE people_job_inventory SET skill_level_id=$1,skill_year_id=$2 WHERE job_id=$3 AND job_inventory_id=$4",
 				array($skill_level_id, $skill_year_id, $job_id, $job_inventory_id));
 			if (!$result || db_affected_rows($result) < 1) {
-				$error_msg .= sprintf(_('Job skill update failed: %s'), db_error());
+				$error_msg .= _('Job skill update failed')._(': ').db_error();
 			} else {
 				$feedback .= _('Job skill updated successfully');
 			}
@@ -132,7 +134,7 @@ if ($group_id && (forge_check_perm('project_admin', $group_id))) {
 		if (people_verify_job_group($job_id,$group_id)) {
 			$result = db_query_params("DELETE FROM people_job_inventory WHERE job_id=$1 AND job_inventory_id=$2", array($job_id, $job_inventory_id));
 			if (!$result || db_affected_rows($result) < 1) {
-				$error_msg .= sprintf(_('Job skill delete failed: %s'),db_error());
+				$error_msg .= _('Job skill delete failed')._(': ').db_error();
 			} else {
 				$feedback .= _('Job skill deleted successfully');
 			}
@@ -150,7 +152,7 @@ if ($group_id && (forge_check_perm('project_admin', $group_id))) {
 	//for security, include group_id
 	$result=db_query_params("SELECT * FROM people_job WHERE job_id=$1 AND group_id=$2", array($job_id, $group_id));
 	if (!$result || db_numrows($result) < 1) {
-		$error_msg .= sprintf(_('Posting fetch failed: %s'),db_error());
+		$error_msg .= _('Posting fetch failed')._(': ').db_error();
 		echo '<h2>'._('No such posting for this project').'</h2>';
 	} else {
 
@@ -178,8 +180,9 @@ if ($group_id && (forge_check_perm('project_admin', $group_id))) {
 
 		//now show the list of desired skills
 		echo '<p>'.people_edit_job_inventory($job_id,$group_id).'</p>';
-		echo '<form action="/people/" method="post"><input type="submit" name="submit" value="'._('Finished').'" /></form>';
-
+		echo $HTML->openForm(array('action' => '/people/', 'method' => 'post'));
+		echo '<input type="submit" name="submit" value="'._('Finished').'" />';
+		echo $HTML->closeForm();
 	}
 
 	people_footer();

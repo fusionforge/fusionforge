@@ -147,7 +147,7 @@ echo html_ac(html_ap() - 1);
 	</li>
 	<li><?php echo util_make_link('/register/',_('Register New Project')); ?></li>
 	<li><?php echo util_make_link('/admin/approve-pending.php', _('Pending projects (new project approval)')); ?></li>
-	<li><form name="projectsearch" action="/admin/search.php">
+	<li><?php echo $HTML->openForm(array('name' => 'projectsearch', 'action' => '/admin/search.php', 'method' => 'post')); ?>
 	<label for="status">
 	<?php echo _('Projects with status'); ?>
 	</label>
@@ -159,7 +159,7 @@ echo html_ac(html_ap() - 1);
 	<input type="hidden" name="groupsearch" value="1"/>
 	<input type="hidden" name="search" value="%"/>
 	<input type="submit" value="<?php echo _('Submit');?> "/>
-	</form></li>
+	<?php echo $HTML->closeForm(); ?></li>
 	<li><?php echo util_make_link('/admin/search.php?groupsearch=1&is_public=0', _('Private Projects')); ?></li>
 </ul>
 <?php
@@ -228,9 +228,8 @@ echo html_ac(html_ap() - 1);
 	<?php } ?>
 </ul>
 </div>
-<?php }
-?>
 <?php
+}
 site_admin_footer();
 
 // Local Variables:
