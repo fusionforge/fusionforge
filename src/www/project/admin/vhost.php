@@ -4,7 +4,7 @@
  *
  * Portions Copyright 1999-2001 (c) VA Linux Systems
  * The rest Copyright 2002-2004 (c) GForge Team
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -118,10 +118,8 @@ print '</p>';
 print '<p>';
 printf(_('Clicking on “Create” will schedule the creation of the Virtual Host.  This will be synced to the project webservers - such that <em>yourhost.org</em> will display the material at <em>%1$s.%2$s</em>.'), $group->getUnixName(), forge_get_config ('web_host'));
 print '</p>';
-
+echo $HTML->openForm(array('name' => 'new_vhost', 'action' => '/project/admin/vhost.php?group_id='.$group->getID().'&createvhost=1', 'method' => 'post'));
 ?>
-
-<form name="new_vhost" action="<?php echo util_make_uri('/project/admin/vhost.php?group_id='.$group->getID().'&createvhost=1'); ?>" method="post">
 <table>
 <tr>
 	<td> <?php echo _('New Virtual Host <em>(e.g. vhost.org)</em>') ?> </td>
@@ -129,10 +127,8 @@ print '</p>';
 	<td> <input type="submit" value="<?php echo _('Create') ?>" /> </td>
 </tr>
 </table>
-</form>
-
 <?php
-
+echo $HTML->closeForm();
 $res_db = db_query_params('
 	SELECT *
 	FROM prweb_vhost

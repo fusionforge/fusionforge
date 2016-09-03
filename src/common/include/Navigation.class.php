@@ -3,7 +3,7 @@
  * FusionForge navigation
  *
  * Copyright 2009 - 2010, Olaf Lenz
- * Copyright 2011-2012, Franck Villaume - TrivialDev
+ * Copyright 2011-2012,2016, Franck Villaume - TrivialDev
  * Copyright 2014, Stéphane-Eymeric Bredthauer
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -122,7 +122,7 @@ class Navigation extends FFError {
 	 * Get the searchBox HTML code.
 	 */
 	function getSearchBox() {
-		global $words, $forum_id, $group_id, $group_project_id, $atid, $exact, $type_of_search;
+		global $words, $forum_id, $group_id, $group_project_id, $atid, $exact, $type_of_search, $HTML;
 
 		$res = "";
 		if (get_magic_quotes_gpc()) {
@@ -138,7 +138,7 @@ class Navigation extends FFError {
 			$exact = 1;
 		}
 
-		$res .= html_ao('form', array('id' => 'searchBox', 'action' => util_make_uri('/search/'), 'method' => 'get'));
+		$res .= $HTML->openForm(array('id' => 'searchBox', 'action' => '/search/', 'method' => 'get'));
 		$res .= html_ao('div', array());
 		$parameters = array(
 			SEARCH__PARAMETER_GROUP_ID => $group_id,
@@ -172,7 +172,8 @@ class Navigation extends FFError {
 		if (isset($group_id) && $group_id) {
 			$res .= util_make_link('/search/advanced_search.php?group_id='.$group_id, _('Advanced search'));
 		}
-		$res .= html_ac(html_ap() - 2);
+		$res .= html_ac(html_ap() - 1);
+		$res .= $HTML->closeForm();
 
 		return $res;
 	}

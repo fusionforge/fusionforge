@@ -5,6 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 (c) Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -53,9 +54,9 @@ function activate_group($group_id) {
 	}
 
 	if ($group->approve(session_get_user())) {
-		$feedback .= sprintf(_('Approving Project: %s'), $group->getUnixName()).'<br />';
+		$feedback .= _('Approving Project')._(': ').$group->getUnixName().'<br />';
 	} else {
-		$error_msg .= sprintf(_('Error when approving Project: %s'), $group->getUnixName()).'<br />';
+		$error_msg .= _('Error when approving Project')._(': ').$group->getUnixName().'<br />';
 		$error_msg .= $group->getErrorMessage();
 		return false;
 	}
@@ -86,7 +87,7 @@ if ($action == 'activate') {
 	}
 
 	if (!$group->setStatus(session_get_user(), 'D')) {
-		exit_error(_('Error during group rejection: ').$this->getErrorMessage(), 'admin');
+		exit_error(_('Error during group rejection')._(': ').$this->getErrorMessage(), 'admin');
 	}
 
 	$group->addHistory('rejected', 'x');
@@ -121,16 +122,16 @@ if ($rows < 1) {
 }
 
 if ($rows > $LIMIT) {
-	print '<p>'. _('Pending projects:'). " $LIMIT+ ($LIMIT shown)</p>";
+	print '<p>'. _('Pending projects')._(':'). " $LIMIT+ ($LIMIT shown)</p>";
 } else {
-	print '<p>'. _('Pending projects:'). " $rows</p>";
+	print '<p>'. _('Pending projects')._(':'). " $rows</p>";
 }
 
 while ($row_grp = db_fetch_array($res_grp)) {
 
 	?>
 	<hr />
-	<h2><?php echo _('Pending') . ': <i>'. $row_grp['group_name'] . '</i>'; ?></h2>
+	<h2><?php echo _('Pending')._(': ').'<i>'. $row_grp['group_name'] . '</i>'; ?></h2>
 
 	<h3><?php  echo _('Pre-approval modifications :'); ?></h3>
 
@@ -140,19 +141,21 @@ while ($row_grp = db_fetch_array($res_grp)) {
 	echo _(' or ');
 	echo util_make_link('/admin/userlist.php?group_id='.$row_grp['group_id'],_('View/Edit Project Members')); ?></p>
 
-	<h3><?php echo _('Decision :'); ?></h3>
+	<h3><?php echo _('Decision')._(':'); ?></h3>
 	<table><tr class="bottom"><td>
-
-	<form name="approve.<?php echo $row_grp['unix_group_name'] ?>" action="<?php echo util_make_uri('/admin/approve-pending.php'); ?>" method="post">
+	<?php
+	echo $HTML->openForm(array('name' => 'approve'.$row_grp['unix_group_name'], 'action' => '/admin/approve-pending.php', 'method' => 'post'));
+	?>
 	<input type="hidden" name="action" value="activate" />
 	<input type="hidden" name="list_of_groups" value="<?php print $row_grp['group_id']; ?>" />
 	<input type="submit" name="submit" value="<?php echo _('Approve'); ?>" />
-	</form>
+	<?php echo $HTML->closeForm(); ?>
 
 	</td><td><?php echo _(' or '); ?>
 	</td><td>
-
-	<form action="<?php echo util_make_uri('/admin/approve-pending.php'); ?>" method="post">
+	<?php
+	echo $HTML->openForm(array('action' => '/admin/approve-pending.php', 'method' => 'post'));
+	?>
 	<input type="hidden" name="action" value="delete" />
 	<input type="hidden" name="group_id" value="<?php print $row_grp['group_id']; ?>" />
 	<?php echo _('Rejection canned responses'); ?><br />
@@ -165,11 +168,11 @@ while ($row_grp = db_fetch_array($res_grp)) {
 	<input type="checkbox" name="add_to_can" value="<?php echo _('Yes'); ?>" /><?php echo _('Add this custom response to canned responses') ;?>
 	<br />
 	<input type="submit" name="submit" value="<?php echo _('Reject'); ?>" />
-	</form>
+	<?php echo $HTML->closeForm(); ?>
 	</td></tr>
 	</table>
 
-	<h3><?php  echo _('Project details :'); ?></h3>
+	<h3><?php  echo _('Project details')._(':'); ?></h3>
 
 	<table>
 	<tr class="top"><td>
@@ -177,11 +180,11 @@ while ($row_grp = db_fetch_array($res_grp)) {
 
 		if (forge_get_config('use_shell')) {
 	?>
-	<strong><?php echo _('Home Box:')."</strong></td><td>"; print $row_grp['unix_box']; ?></tr>
+	<strong><?php echo _('Home Box')._(': ')."</strong></td><td>"; print $row_grp['unix_box']; ?></tr>
 	<?php
 		} //end of sys_use_shell
 	?>
-	<tr><td><strong><?php echo _('HTTP Domain:')."</strong></td><td>"; print $row_grp['http_domain']; ?></td>
+	<tr><td><strong><?php echo _('HTTP Domain')._(': ')."</strong></td><td>"; print $row_grp['http_domain']; ?></td>
 
 	</tr>
 
@@ -197,11 +200,11 @@ while ($row_grp = db_fetch_array($res_grp)) {
 	print "<tr><td>" ._('Purpose of submission:'). "</td><td><blockquote>".$row_grp['register_purpose']."</blockquote></td></tr>";
 
 	if ($row_grp['license']=="other") {
-		print "<tr><td>" ._('License Other:'). "</td><td><blockquote>".$row_grp['license_other']."</blockquote></td></tr>";
+		print "<tr><td>" ._('License Other')._(': '). "</td><td><blockquote>".$row_grp['license_other']."</blockquote></td></tr>";
 	}
 
 	if (isset($row_grp['status_comment'])) {
-		print "<tr><td>" ._('Pending reason:'). "</td><td><span class=\"important\">".$row_grp['status_comment']."</span></td></tr>";
+		print "<tr><td>" ._('Pending reason')._(': '). "</td><td><span class=\"important\">".$row_grp['status_comment']."</span></td></tr>";
 	}
 
 	$submitter = NULL ;
@@ -225,16 +228,14 @@ while ($row_grp = db_fetch_array($res_grp)) {
 $arr = util_result_column_to_array($res_grp, 0);
 $group_list = implode($arr, ',');
 
+echo $HTML->openForm(array('action' => '/admin/approve-pending.php', 'method' => 'post'));
 echo '
-	<form action="'.util_make_uri('/admin/approve-pending.php').'" method="post">
 	<p class="align-center">
 	<input type="hidden" name="action" value="activate" />
 	<input type="hidden" name="list_of_groups" value="'.$group_list.'" />
 	<input type="submit" name="submit" value="'._('Approve All On This Page').'" />
-	</p>
-	</form>
-	';
-
+	</p>';
+echo $HTML->closeForm();
 site_admin_footer();
 
 // Local Variables:
