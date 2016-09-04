@@ -28,14 +28,12 @@
  */
 
 /**
- *
  * Extends the basic Error class to add HTML functions
  * for displaying all site dependent HTML, while allowing
  * extendibility/overriding by themes via the Theme class.
  *
  * Make sure browser.php is included _before_ you create an instance
  * of this object.
- *
  */
 
 require_once $gfcommon.'include/constants.php';
