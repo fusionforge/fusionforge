@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
- * Copyright 2011, Franck Villaume - TrivialDev
+ * Copyright 2011,2016, Franck Villaume - TrivialDev
  * Copyright 2014, Stéphane-Eymeric Bredthauer
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -177,11 +177,11 @@ if (!session_loggedin()) {
 
 	echo html_e('h2', array(), $info_str);
 
-	echo html_ao('form', array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
+	echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
 	echo html_e('input', array('type' => 'hidden', 'name' => 'form_key', 'value' => form_generate_key()));
 	echo html_e('input', array('type' => 'hidden', 'name' => $proc_str, 'value' => '1'));
 	echo html_e('input', array('type' => 'hidden', 'name' => 'diary_id', 'value' => $_diary_id));
-	echo html_ao('table', array('class' => 'fullwidth'));
+	echo $HTML->listTableTop();
 	echo html_ao('tr').html_ao('td');
 	echo html_e('strong', array(),_('Summary')._(':')).'<br />';
 	echo html_e('input', array( 'required' => 'required', 'type' => 'text', 'name' => 'summary', 'size' => '60', 'maxlength' => '60', 'value' => $_summary));
@@ -203,7 +203,9 @@ if (!session_loggedin()) {
 	echo html_ac(html_ap()-1);
 
 	echo html_e('p', array(), _('If marked as public, your entry will be mailed to any monitoring users when it is first submitted.'));
-	echo html_ac(html_ap()-4);
+	echo html_ac(html_ap()-2);
+	echo $HTML->listTableBottom();
+	echo $HTML->closeForm();
 
 	echo html_e('h2', array(), _('Existing Diary and Notes Entries'));
 	$result=db_query_params('SELECT * FROM user_diary WHERE user_id=$1 ORDER BY id DESC',

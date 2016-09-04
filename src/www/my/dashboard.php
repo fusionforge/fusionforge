@@ -8,7 +8,7 @@
  * Copyright 2009-2010, Roland Mas
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * Copyright (C) 2012-2013 Marc-Etienne Vargenau - Alcatel-Lucent
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013,2016, Franck Villaume - TrivialDev
  * Copyright 2014, Stéphane-Eymeric Bredthauer
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -41,7 +41,7 @@ if (!session_loggedin()) {
 } else {
 	$u = session_get_user();
 	site_user_header(array('title'=>sprintf(_('Personal Page for %s'), $u->getRealName())));
-	echo html_ao('table', array('class' => 'fullwidth'));
+	echo $HTML->listTableTop();
 	echo html_ao('tr');
 	echo html_ao('td', array('class' => 'top'));
 	echo $HTML->boxTop(_('All trackers for my projects'), false, false);
@@ -215,6 +215,6 @@ if (!session_loggedin()) {
 	show_priority_colors_key();
 	echo html_ac(html_ap()-2);
 */
-	echo html_ac(html_ap()-1);
+	echo $HTML->listTableBottom();
 	site_user_footer();
 }
