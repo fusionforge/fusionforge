@@ -4,7 +4,8 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2011,2015 Franck Villaume - Capgemini
+ * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright 2015, 2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -212,24 +213,26 @@ function hide_edit_button(id) {
 <table class="fullwidth">
 	<tr>
 		<td colspan="2">
-		<h2><?php echo _('Relations')._(':'); ?></h2>
 		<?php
 		$current = '';
 		$end = '';
 		while ($arr = db_fetch_array($res)) {
-			$title = $arr['group_name']._(': ').$arr['name'];
-			if ($title != $current) {
-				echo $end.'<strong>'.$title.'</strong>';
-				$current = $title;
-				$end = '<br /><br />';
+			if (forge_check_perm('tracker', $arr['group_artifact_id'], 'read')) {
+				$title = $arr['group_name']._(': ').$arr['name'];
+				if ($title != $current) {
+					echo $end.'<strong>'.$title.'</strong>';
+					$current = $title;
+					$end = '<br /><br />';
+				}
+				$text = '[#'.$arr['artifact_id'].']'.' '.$arr['summary'];
+				$url = '/tracker/?func=detail&aid='.$arr['artifact_id'].'&group_id='.$arr['group_id'].'&atid='.$arr['group_artifact_id'];
+				$arg['title'] = util_html_secure($arr['summary']);
+				if ($arr['status_id'] == 2) {
+					$arg['class'] = 'artifact_closed';
+				}
+				print '<br/>&nbsp;&nbsp;&nbsp;';
+				echo util_make_link($url, $text, $arg).' <i>('._('Relation')._(': ').$arr['field_name'].')</i>';
 			}
-			$text = '[#'.$arr['artifact_id'].']';
-			$url = '/tracker/?func=detail&amp;aid='.$arr['artifact_id'].'&amp;group_id='.$arr['group_id'].'&amp;atid='.$arr['group_artifact_id'];
-			$arg = 'title="'.util_html_secure($arr['summary']).'"' ;
-			if ($arr['status_id'] == 2) {
-				$arg .= 'class="artifact_closed"';
-			}
-			print '<br/>&nbsp;&nbsp;&nbsp;<a href="'.$url.'" '.$arg.'>'.$text.'</a>'.' <a href="'.$url.'">'.$arr['summary'].'</a> <i>(Relation: '.$arr['field_name'].')</i>';
 		}
 		?></td>
 	</tr>
