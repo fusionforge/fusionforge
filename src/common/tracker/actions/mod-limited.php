@@ -56,10 +56,10 @@ echo $HTML->openForm(array('id' => 'trackermodlimitedform', 'action' => '/tracke
 <input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
 <input type="hidden" name="artifact_id" value="<?php echo $ah->getID(); ?>" />
 
-<table width="80%">
 <?php
 if (session_loggedin()) {
 ?>
+<table width="80%">
 		<tr>
 			<td><?php
 				if ($ah->isMonitoring()) {

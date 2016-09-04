@@ -59,10 +59,10 @@ echo $HTML->openForm(array('id' => 'trackermodform', 'action' => '/tracker/?grou
 <input type="hidden" name="func" value="postmod" />
 <input type="hidden" name="artifact_id" value="<?php echo $ah->getID(); ?>" />
 
-<table width="80%">
 <?php
 if (session_loggedin()) {
 ?>
+<table width="80%">
 		<tr>
 			<td><?php
 				if ($ah->isMonitoring()) {
