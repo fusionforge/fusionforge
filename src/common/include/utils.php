@@ -558,7 +558,7 @@ function ShowResultSet($result, $title = '', $linkify = false, $displayHeaders =
 		$rows = db_numrows($result);
 		$cols = db_numfields($result);
 
-		echo '<table class="fullwidth">'."\n";
+		echo $HTML->listTableTop();
 
 		/*  Create  the  headers  */
 		$headersCellData = array();
@@ -621,7 +621,7 @@ function ShowResultSet($result, $title = '', $linkify = false, $displayHeaders =
 			}
 			echo '</tr>';
 		}
-		echo '</table>';
+		echo $HTML->listTableBottom();
 	} else {
 		echo db_error();
 	}
