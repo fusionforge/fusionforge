@@ -454,7 +454,7 @@ EOS;
 	}
 
 	function renderRelatedTasks($group, $ah) {
-
+		global $HTML;
 		if (!$group->usesPM()) {
 			return;
 		}
@@ -480,7 +480,7 @@ EOS;
 			$title_arr[] = _('End Date');
 			$title_arr[] = _('Status');
 			(($is_admin) ? $title_arr[]=_('Remove Relation') : '');
-			echo $GLOBALS['HTML']->listTableTop($title_arr);
+			echo $HTML->listTableTop($title_arr);
 
 			for ($i = 0; $i < $taskcount; $i++) {
 				$taskinfo  = db_fetch_array($ah->relatedtasks, $i);
@@ -488,21 +488,23 @@ EOS;
 				$taskid    = $taskinfo['project_task_id'];
 				$projectid = $taskinfo['group_project_id'];
 				$groupid   = $taskinfo['group_id'];
-				$summary   = util_unconvert_htmlspecialchars($taskinfo['summary']);
-				$startdate = date(_('Y-m-d H:i'), $taskinfo['start_date']);
-				$enddate   = date(_('Y-m-d H:i'), $taskinfo['end_date']);
-				$status   = $taskinfo['status_name'];
-				echo '<tr>
-						<td>'.util_make_link('/pm/task.php?func=detailtask&project_task_id='.$taskid.'&group_id='.$groupid.'&group_project_id='.$projectid, '[T'.$taskid.'] '.$summary).'</td>
-						<td><div class="percentbar" style="width: 100px;">
-							<div style="width:'.round($taskinfo['percent_complete']).'px;"></div></div></td>
-						<td>'.$startdate.'</td>
-						<td>'.$enddate.'</td>
-						<td>'.$status.' ('.$taskinfo['percent_complete'].'%)</td>'.
-					(($is_admin) ? '<td><input type="checkbox" name="remlink[]" value="'.$taskid.'" /></td>' : '').
-					'</tr>';
+				if (forge_check_perm('pm', $projectid, 'read')) {
+					$summary   = util_unconvert_htmlspecialchars($taskinfo['summary']);
+					$startdate = date(_('Y-m-d H:i'), $taskinfo['start_date']);
+					$enddate   = date(_('Y-m-d H:i'), $taskinfo['end_date']);
+					$status   = $taskinfo['status_name'];
+					echo '<tr>
+							<td>'.util_make_link('/pm/task.php?func=detailtask&project_task_id='.$taskid.'&group_id='.$groupid.'&group_project_id='.$projectid, '[T'.$taskid.'] '.$summary).'</td>
+							<td><div class="percentbar" style="width: 100px;">
+								<div style="width:'.round($taskinfo['percent_complete']).'px;"></div></div></td>
+							<td>'.$startdate.'</td>
+							<td>'.$enddate.'</td>
+							<td>'.$status.' ('.$taskinfo['percent_complete'].'%)</td>'.
+						(($is_admin) ? '<td><input type="checkbox" name="remlink[]" value="'.$taskid.'" /></td>' : '').
+						'</tr>';
+				}
 			}
-			echo $GLOBALS['HTML']->listTableBottom();
+			echo $HTML->listTableBottom();
 
 			echo "\n<hr /><p style=\"text-align:right;\">";
 			printf(_('Average completion rate: %d%%'), (int)($totalPercentage/$taskcount));
@@ -512,7 +514,7 @@ EOS;
 	}
 
 	function renderFiles($group_id, $ah) {
-
+		global $HTML;
 		$file_list =& $ah->getFiles();
 		$count=count($file_list);
 
@@ -525,7 +527,7 @@ EOS;
 			$title_arr[] = _('Date');
 			$title_arr[] = _('By');
 			$title_arr[] = _('Download');
-			echo $GLOBALS['HTML']->listTableTop($title_arr);
+			echo $HTML->listTableTop($title_arr);
 
 			foreach ($file_list as $file) {
 				echo '<tr>';
@@ -540,7 +542,7 @@ EOS;
 				echo '</tr>';
 			}
 
-			echo $GLOBALS['HTML']->listTableBottom();
+			echo $HTML->listTableBottom();
 			echo '</td></tr>';
 		}
 	}
