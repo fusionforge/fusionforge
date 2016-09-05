@@ -210,7 +210,7 @@ echo _('You can create new labels with the form below.') ?></p>
 <p>
 <input type="hidden" name="func" value="addlabel" />
 <?php echo utils_requiredField(); ?>
-		  <?php echo _('Name of the label')._(': ') ; ?><br/>
+		  <?php echo _('Label name')._(': ') ; ?><br/>
 <input type="text" required="required" size="15" maxlength="32" name="label_name" value="<?php echo _('potm') ; ?>"/> <br/>
 		  <?php echo _('Displayed text (or HTML) for the label')._(': ') ; ?><br/>
 <textarea tabindex='1' accesskey="," name="label_text" rows='5'
