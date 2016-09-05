@@ -98,7 +98,7 @@ if ($group_id && (forge_check_perm('project_admin', $group_id))) {
 				$feedback .= _('Job updated successfully');
 			}
 		} else {
-			$error_msg .= _('Job update failed - wrong project_id');
+			$error_msg .= _('Job update failed')._(': ')._('wrong project_id');
 		}
 
 	} elseif (getStringFromRequest('update_job_inventory')) {
@@ -119,7 +119,7 @@ if ($group_id && (forge_check_perm('project_admin', $group_id))) {
 				$feedback .= _('Job skill updated successfully');
 			}
 		} else {
-			$error_msg .= _('Job skill update failed - wrong project_id');
+			$error_msg .= _('Job skill update failed')._(': ')._('wrong project_id');
 		}
 
 	} elseif (getStringFromRequest('delete_from_job_inventory')) {
@@ -139,7 +139,7 @@ if ($group_id && (forge_check_perm('project_admin', $group_id))) {
 				$feedback .= _('Job skill deleted successfully');
 			}
 		} else {
-			$error_msg .= _('Job skill delete failed - wrong project_id');
+			$error_msg .= _('Job skill delete failed')._(': ')._('wrong project_id');
 		}
 
 	}
