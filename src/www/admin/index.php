@@ -108,7 +108,7 @@ echo html_ac(html_ap() - 1);
 			    AND is_template = 0',
 		    array());
 		$row = db_fetch_array($res);
-		printf(_('Registered projects: <strong>%d</strong>'), $row['count']);
+		echo _('Registered projects')._(': ').'<strong>'.$row['count'].'</strong>';
 	?></li>
 	<li><?php
 		$res = db_query_params('SELECT count(*) AS count FROM groups
@@ -118,7 +118,7 @@ echo html_ac(html_ap() - 1);
 			    AND is_template = 0',
 		    array('A'));
 		$row = db_fetch_array($res);
-		printf(_('Active projects: <strong>%d</strong>'), $row['count']);
+		echo _('Active projects')._(': ').'<strong>'.$row['count'].'</strong>';
 	?></li>
 	<li><?php
 		$res = db_query_params('SELECT count(*) AS count FROM groups
@@ -128,7 +128,7 @@ echo html_ac(html_ap() - 1);
 			    AND is_template = 0',
 		    array('P'));
 		$row = db_fetch_array($res);
-		printf(_('Pending projects: <strong>%d</strong>'), $row['count']);
+		echo _('Pending projects')._(': ').'<strong>'.$row['count'].'</strong>';
 	?></li>
 	<li><?php echo util_make_link('/admin/grouplist.php', _('Display Full Project List/Edit Projects')); ?></li>
 
