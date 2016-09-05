@@ -149,7 +149,7 @@ if (getStringFromRequest('submit')) {
 		} elseif ($group->isError()) {
 			echo $HTML->error_msg($group->getErrorMessage());
 		} else {
-			printf(_('Approving Project: %s'), $group->getUnixName());
+			echo _('Approving Project')._(': ').$group->getUnixName();
 			echo '<br />';
 
 			if (forge_get_config('project_auto_approval')) {
