@@ -41,10 +41,7 @@ define('ARTIFACT_EXTRAFIELDTYPE_FORMULA',11);
 /* reserved for Evolvis extension, for merge into FusionForge */
 define('ARTIFACT_EXTRAFIELDTYPE_DATETIME',12);
 /* reserved */
-define('ARTIFACT_EXTRAFIELDTYPE_DATE',13);
 define('ARTIFACT_EXTRAFIELDTYPE_USER',14);
-define('ARTIFACT_EXTRAFIELDTYPE_RELEASE',15);
-
 
 class ArtifactExtraField extends FFError {
 

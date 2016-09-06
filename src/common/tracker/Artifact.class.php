@@ -1043,8 +1043,7 @@ class Artifact extends FFError {
 					if ($type == ARTIFACT_EXTRAFIELDTYPE_TEXT ||
 						$type == ARTIFACT_EXTRAFIELDTYPE_INTEGER ||
 						$type == ARTIFACT_EXTRAFIELDTYPE_TEXTAREA ||
-						$type == ARTIFACT_EXTRAFIELDTYPE_RELATION ||
-						$type == ARTIFACT_EXTRAFIELDTYPE_DATE) {
+						$type == ARTIFACT_EXTRAFIELDTYPE_RELATION) {
 						$new_extra_fields[$new_id] = $value;
 					} else {
 						$values = $newArtifactType->getExtraFieldElements($new_id);
@@ -1840,7 +1839,6 @@ class Artifact extends FFError {
 				case ARTIFACT_EXTRAFIELDTYPE_TEXTAREA:
 				case ARTIFACT_EXTRAFIELDTYPE_RELATION:
 				case ARTIFACT_EXTRAFIELDTYPE_INTEGER:
-				case ARTIFACT_EXTRAFIELDTYPE_DATE:
 					if (isset($efd[$efid])) {
 						$value = $efd[$efid];
 					} else {
