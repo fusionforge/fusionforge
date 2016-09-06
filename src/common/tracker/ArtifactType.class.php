@@ -283,6 +283,7 @@ class ArtifactType extends FFError {
 	function fetchData($artifact_type_id) {
 		$this->voters = false;
 		$this->extra_field = false;
+		$this->extra_fields = false;
 		$res = db_query_params('SELECT * FROM artifact_group_list_vw
 			WHERE group_artifact_id=$1
 			AND group_id=$2',

@@ -764,7 +764,7 @@ class Artifact extends FFError {
 	 * @param	bool	$send_followup	Whether $bool to email out a followup.
 	 * @return	bool	success.
 	 */
-	function addMessage($body,$by=false,$send_followup=false) {
+	function addMessage($body,$by=false,$send_followup=false,$importData = array()) {
 		if (!$body) {
 			$this->setMissingParamsError();
 			return false;
@@ -773,36 +773,49 @@ class Artifact extends FFError {
 			$this->setError(_('You are not currently allowed to submit items to this tracker.'));
 			return false;
 		}
-		if (session_loggedin()) {
-			$user_id=user_getid();
-			$user = user_get_object($user_id);
-			if (!$user || !is_object($user)) {
-				$this->setError('Error: Logged In User But Could Not Get User Object');
-				return false;
-			}
-			//	we'll store this email even though it will likely never be used -
-			//	since we have their correct user_id, we can join the USERS table to get email
-			$by=$user->getEmail();
+		
+		if(array_key_exists('user', $importData)){
+				$user = user_get_object($importData['user']);
+				if (!$user || !is_object($user)) {
+					$this->setError('Error: Logged In User But Could Not Get User Object');
+					return false;
+				}
+				$by=$user->getEmail();
 		} else {
-			$user_id=100;
-			if (!$by || !validate_email($by)) {
-				$this->setMissingParamsError();
-				return false;
+			if (session_loggedin()) {
+				$user_id=user_getid();
+				$user = user_get_object($user_id);
+				if (!$user || !is_object($user)) {
+					$this->setError('Error: Logged In User But Could Not Get User Object');
+					return false;
+				}
+				//	we'll store this email even though it will likely never be used -
+				//	since we have their correct user_id, we can join the USERS table to get email
+				$by=$user->getEmail();
+			} else {
+				$user_id=100;
+				if (!$by || !validate_email($by)) {
+					$this->setMissingParamsError();
+					return false;
+				}
 			}
 		}
-
-		$now = time();
+		if(array_key_exists('time', $importData)){
+			$time = $importData['time'];;
+		} else {
+			$time = time();
+		}
 		$res = db_query_params ('INSERT INTO artifact_message (artifact_id,submitted_by,from_email,adddate,body) VALUES ($1,$2,$3,$4,$5)',
 					array ($this->getID(),
 					       $user_id,
 					       $by,
-					       $now,
+					       $time,
 					       htmlspecialchars($body))) ;
 
 		$this->updateLastModifiedDate();
 
 		if ($send_followup) {
-			$this->mailFollowupEx($now, 2, false);
+			$this->mailFollowupEx($time, 2, false);
 		}
 		return $res;
 	}
@@ -1030,7 +1043,8 @@ class Artifact extends FFError {
 					if ($type == ARTIFACT_EXTRAFIELDTYPE_TEXT ||
 						$type == ARTIFACT_EXTRAFIELDTYPE_INTEGER ||
 						$type == ARTIFACT_EXTRAFIELDTYPE_TEXTAREA ||
-						$type == ARTIFACT_EXTRAFIELDTYPE_RELATION) {
+						$type == ARTIFACT_EXTRAFIELDTYPE_RELATION ||
+						$type == ARTIFACT_EXTRAFIELDTYPE_DATE) {
 						$new_extra_fields[$new_id] = $value;
 					} else {
 						$values = $newArtifactType->getExtraFieldElements($new_id);
@@ -1826,6 +1840,7 @@ class Artifact extends FFError {
 				case ARTIFACT_EXTRAFIELDTYPE_TEXTAREA:
 				case ARTIFACT_EXTRAFIELDTYPE_RELATION:
 				case ARTIFACT_EXTRAFIELDTYPE_INTEGER:
+				case ARTIFACT_EXTRAFIELDTYPE_DATE:
 					if (isset($efd[$efid])) {
 						$value = $efd[$efid];
 					} else {
