@@ -65,7 +65,7 @@ echo $HTML->openForm(array('action' => '/account/pending-resend.php', 'method' =
 if (forge_get_config('require_unique_email')) {
 	$content = _('Login name or email address')._(':');
 } else {
-	$content = _('Login name')._(':');
+	$content = _('Login Name')._(':');
 }
 echo html_e('p', array(), $content.html_e('br').html_e('label', array('for' => 'loginname'),
 							html_e('input', array('id' => 'loginname', 'required' => 'required', 'type' => 'text', 'name' => 'loginname'))));
