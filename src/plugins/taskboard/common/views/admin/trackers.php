@@ -84,7 +84,7 @@ if (!$atf || !is_object($atf) || $atf->isError()) {
 				echo html_e('div', array('id' => 'messages', 'class' => 'warning', 'style' => 'display: none;'), '', false);
 			}
 		} else {
-			echo $HTML->error_msg(_('There are no any tracker having "resolution" field.'));
+			echo $HTML->error_msg(_('There are no any tracker having “resolution” field.'));
 		}
 		echo $HTML->openForm(array('action' => '/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&taskboard_id='.$taskboard_id.'&action=trackers', 'method' => 'post'));
 		echo html_e('input', array('type' => 'hidden', 'name' => 'post_changes', 'value' => 'y'));

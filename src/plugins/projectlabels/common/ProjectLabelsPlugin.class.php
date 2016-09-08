@@ -7,7 +7,7 @@ class ProjectLabelsPlugin extends Plugin {
 		$this->text = _("Project labels");
 		$this->pkg_desc =
 _("This can be used to highlight some projects on a forge, for instance
-for a \"project of the month\".");
+for a “project of the month”.");
 		$this->hooks[] = "project_before_widgets" ;
 		$this->hooks[] = "site_admin_option_hook" ;
 	}
