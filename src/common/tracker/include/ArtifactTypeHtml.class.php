@@ -507,7 +507,7 @@ EOS;
 			echo $HTML->listTableBottom();
 
 			echo "\n<hr /><p style=\"text-align:right;\">";
-			echo _('Average completion rate')._(': ').(int)($totalPercentage/$taskcount);
+			echo _('Average completion rate')._(': ').(int)($totalPercentage/$taskcount).'%';
 			echo "</p>\n";
 			echo '</td></tr>';
 		}
