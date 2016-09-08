@@ -86,7 +86,7 @@ if (getStringFromRequest('delete') != '') {
 
 // In all cases, we display the management screen
 
-$title = sprintf(_('Manage WebID identities for user %1$s'), $u->getUnixName());
+$title = sprintf(_('Manage WebID identities for user %s'), $u->getUnixName());
 site_user_header(array('title'=>$title));
 
 echo $HTML->boxTop(_('My WebID identities'));
