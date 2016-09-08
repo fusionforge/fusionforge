@@ -427,7 +427,7 @@ class MailmanList extends FFError {
 	function deleteList($sure,$really_sure) {
 		$current_user=UserManager::instance()->getCurrentUser();
 		if (!$sure || !$really_sure) {
-			$this->setError(_('Missing params'));
+			$this->setError(_('Missing parameters'));
 			return false;
 		}
 
