@@ -94,7 +94,7 @@ if (session_loggedin()) {
 	<?php echo _('<span class="important">Note:</span> You can submit a new version of an existing snippet by browsing the library. You should only use this page if you are submitting an entirely new script or function.'); ?>
 	</p>
 	<?php
-	echo $HTML->openForm(arrray('action' => getStringFromServer('PHP_SELF'), 'method' => 'post', 'id' => 'snippet_submit'));
+	echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post', 'id' => 'snippet_submit'));
 	echo $HTML->html_input('form_key', '', '', 'hidden', form_generate_key());
 	echo $HTML->html_input('post_changes', '', '', 'hidden', 'y');
 	echo $HTML->html_input('changes', '', '', 'hidden', 'First Posted Version');
