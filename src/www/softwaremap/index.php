@@ -25,11 +25,11 @@
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 if (forge_get_config('use_project_tags')) {
-	session_redirect('softwaremap/tag_cloud.php');
+	session_redirect('/softwaremap/tag_cloud.php');
 } elseif (forge_get_config('use_trove')){
-	session_redirect('softwaremap/trove_list.php');
+	session_redirect('/softwaremap/trove_list.php');
 } elseif (forge_get_config('use_project_full_list')) {
-	session_redirect('softwaremap/full_list.php');
+	session_redirect('/softwaremap/full_list.php');
 } else {
 	session_redirect('/');
 }
