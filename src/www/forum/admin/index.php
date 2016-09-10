@@ -7,7 +7,7 @@
  * Copyright 2010 (c) Franck Villaume - Capgemini
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2013, French Ministry of National Education
- * Copyright 2013-2014, Franck Villaume - TrivialDev
+ * Copyright 2013-2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -58,7 +58,7 @@ if (!$g->usesForum() and !$g->usesNews()) {
 	exit_error(sprintf(_('%s does not use the Forum tool.'), $g->getPublicName()), 'forums');
 }
 
-session_require_perm ('forum_admin', $group_id) ;
+session_require_perm('forum_admin', $group_id);
 
 if (getStringFromRequest('post_changes')) {
 	/*
@@ -102,9 +102,8 @@ if (getStringFromRequest('add_forum')) {
 	*/
 	forum_header(array('title'=>_('Add Forum')));
 
-	echo '
-			<form method="post" action="'.getStringFromServer('PHP_SELF').'">
-			<p>
+	echo $HTML->openForm(array('method' => 'post', 'action' => getStringFromServer('PHP_SELF')));
+	echo '		<p>
 			<input type="hidden" name="post_changes" value="y" />
 			<input type="hidden" name="add_forum" value="y" />
 			<input type="hidden" name="group_id" value="'.$group_id.'" />
@@ -122,8 +121,8 @@ if (getStringFromRequest('add_forum')) {
 			</p>
 			<p>
 			<input type="submit" name="submit" value="'._('Add This Forum').'" />
-			</p>
-			</form>';
+			</p>';
+	echo $HTML->closeForm();
 	echo '<span>'.sprintf(_('%s Mandatory fields'), utils_requiredField()).'</span>';
 	forum_footer();
 
@@ -140,9 +139,8 @@ if (getStringFromRequest('add_forum')) {
 	$fa = new ForumAdmin($f->Group->getID());
 	$fa->PrintAdminPendingOption($group_forum_id);
 
-	echo '
-			<form action="'.getStringFromServer('PHP_SELF').'" method="post">
-				<p>
+	echo $HTML->openForm(array('method' => 'post', 'action' => getStringFromServer('PHP_SELF')));
+	echo '		<p>
 				<input type="hidden" name="post_changes" value="y" />
 				<input type="hidden" name="change_status" value="y" />
 				<input type="hidden" name="group_forum_id" value="'. $f->getID() .'" />
@@ -160,11 +158,9 @@ if (getStringFromRequest('add_forum')) {
 				</p>
 				<p>
 				<input type="submit" name="submit" value="'._('Update').'" />
-				</p>
-			</form>
-			<p>';
-	//echo '<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_forum_id='.$group_forum_id.'&amp;delete=1">'._('Delete Message').'</a><br />';
-	echo '<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_forum_id='.$group_forum_id.'&amp;deleteforum=1">'._('Delete entire forum and all content').'</a></p>';
+				</p>';
+	echo $HTML->closeForm();
+	echo '<p>'.util_make_link(getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&group_forum_id='.$group_forum_id.'&deleteforum=1', _('Delete entire forum and all content')).'</p>';
 	echo '<span>'.sprintf(_('%s Mandatory fields'), utils_requiredField()).'</span>';
 	forum_footer();
 
@@ -175,16 +171,16 @@ if (getStringFromRequest('add_forum')) {
 	forum_header(array('title'=>_('Permanently Delete Forum'), 'modal' => 1));
 	echo '<p>
 			<strong>'._('You are about to permanently and irretrievably delete this entire forum and all its contents!').'</strong><br />
-			</p>
-			<form method="post" action="'.getStringFromServer('PHP_SELF').'">
-			<input type="hidden" name="post_changes" value="y" />
+			</p>';
+	echo $HTML->openForm(array('method' => 'post', 'action' => getStringFromServer('PHP_SELF')));
+	echo '		<input type="hidden" name="post_changes" value="y" />
 			<input type="hidden" name="deleteforum" value="y" />
 			<input type="hidden" name="group_id" value="'.$group_id.'" />
 			<input type="hidden" name="group_forum_id" value="'.$group_forum_id.'" />
 			<input type="checkbox" name="sure" value="1" />'._('I am Sure').'<br />
 			<input type="checkbox" name="really_sure" value="1" />'._('I am Really Sure').'<br />
-			<input type="submit" name="submit" value="'._('Delete').'" />
-			</form>';
+			<input type="submit" name="submit" value="'._('Delete').'" />';
+	echo $HTML->closeForm();
 	forum_footer();
 
 } elseif ( getStringFromRequest("deletemsg") ) {
@@ -216,9 +212,9 @@ if (getStringFromRequest('add_forum')) {
 	} else {
 		//print the delete message confirmation
 		forum_header(array('title'=>_('Delete a Message')));
-		echo '<center>
-							<form action="'.getStringFromServer('PHP_SELF').'" method="post">
-							<h3>' . _('WARNING! You are about to permanently delete a message and all of its comments!!') . '</h3>
+		echo '<center>';
+		echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
+		echo '					<h3>' . _('WARNING! You are about to permanently delete a message and all of its comments!!') . '</h3>
 							<p>
 							<input type="submit" name="ok" value="' . _('Yes') . '" />
 							<input type="submit" name="cancel" value="' . _('No') . '" />
@@ -226,9 +222,9 @@ if (getStringFromRequest('add_forum')) {
 							<input type="hidden" name="group_id" value="'.$group_id.'" />
 							<input type="hidden" name="forum_id" value="'.$forum_id.'" />
 							<input type="hidden" name="thread_id" value="'.$thread_id.'" />
-							</p>
-							</form>
-							</center>';
+							</p>';
+		echo $HTML->closeForm();
+		echo '</center>';
 		forum_footer();
 	}
 } elseif (getStringFromRequest("editmsg")) {
@@ -399,9 +395,9 @@ if (getStringFromRequest('add_forum')) {
 			exit_error($f_from->getErrorMessage(),'forums');
 		}
 
-		echo '<center>
-							<form action="'.getStringFromServer('PHP_SELF').'" method="post">
-							<p><strong>' . sprintf(_('Move thread from %s forum to the following forum:'), $f_from->getName()) . '</strong></p>
+		echo '<center>';
+		echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
+		echo '					<p><strong>' . sprintf(_('Move thread from %s forum to the following forum:'), $f_from->getName()) . '</strong></p>
 							<p>
 							<input type="hidden" name="movethread" value="'.$thread_id.'" />
 							<input type="hidden" name="group_id" value="'.$group_id.'" />
@@ -412,10 +408,9 @@ if (getStringFromRequest('add_forum')) {
 			'<br />
 							<input type="submit" name="ok" value="' . _("Submit") . '" />
 							<input type="submit" name="cancel" value="' . _("Cancel") . '" />
-							</p>
-							</form>
-							</center>';
-
+							</p>';
+		echo $HTML->closeForm();
+		echo '</center>';
 		forum_footer();
 	}
 

@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -54,7 +54,7 @@ if (session_loggedin()) {
 
 	if (!$snippet_package_version_id) {
 		//make sure the package id was passed in
-		echo $HTML->error_msg(_('Error: snippet_package_version_id missing'));
+		echo $HTML->error_msg(_('Error')._(': ')._('snippet_package_version_id missing'));
 		handle_add_exit();
 	}
 
@@ -112,7 +112,7 @@ if (session_loggedin()) {
 				$feedback .= _('Snippet Version Added Successfully.');
 			}
 		} else {
-			echo $HTML->error_msg(_('Error: Go back and fill in all the information'));
+			echo $HTML->error_msg(_('Error')._(': ')._('Go back and fill in all the information'));
 			echo util_make_link('/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id,_('Back To Add Page'));
 			handle_add_exit();
 		}
@@ -131,14 +131,14 @@ if (session_loggedin()) {
 	<p><?php echo _('You can use this form repeatedly to keep adding snippets to your package.'); ?></p>
 	<p><?php echo _('The “Snippet Version ID” is the unique ID number that is shown next to a specific version of a snippet on the browse pages.'); ?></p>
 	<p>
-	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
+	<?php echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post')); ?>
 	<input type="hidden" name="post_changes" value="y" />
 	<input type="hidden" name="snippet_package_version_id" value="<?php echo $snippet_package_version_id; ?>" />
 	<input type="hidden" name="suppress_nav" value="<?php echo $suppress_nav; ?>" />
 
 	<table>
 	<tr><td colspan="2" class="align-center">
-		<strong><?php echo _('Add This Snippet Version ID:'); ?></strong><br />
+		<strong><?php echo _('Add This Snippet Version ID')._(':'); ?></strong><br />
 		<select name="snippet_version_id">
 <?php
 
@@ -166,7 +166,9 @@ for ($i=0; $i<$combolistrows; $i++)
 		<br />
 		<input type="submit" name="submit" value="<?php echo _('Submit'); ?>" />
 	</td></tr>
-	</table></form></p>
+	</table>
+	<?php echo $HTML->closeForm(); ?>
+	</p>
 	<?php
 	/*
 		Show the snippets in this package

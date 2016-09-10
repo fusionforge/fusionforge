@@ -6,7 +6,7 @@
  * Copyright 2003-2004 (c) Guillaume Smet - Open Wide
  * Copyright 2010 (c) Franck Villaume - Capgemini
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -176,8 +176,7 @@ if ($group_id) {
 //
 //	Form to add list
 //
-		?>
-		<form method="post" action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id ?>">
+		echo $HTML->openForm(array('method' => 'post', 'action' => getStringFromServer('PHP_SELF').'?group_id='.$group_id)); ?>
 			<input type="hidden" name="post_changes" value="y" />
 			<input type="hidden" name="add_list" value="y" />
 			<input type="hidden" name="form_key" value="<?php echo form_generate_key();?>" />
@@ -200,8 +199,8 @@ if ($group_id) {
 			<input type="text" name="description" value="" size="40" maxlength="80" /></p>
 			<p>
 			<input type="submit" name="submit" value="<?php echo _('Add This List'); ?>" /></p>
-		</form>
 		<?php
+		echo $HTML->closeForm();
 		mail_footer();
 
 //
@@ -220,7 +219,7 @@ if ($group_id) {
 			'title' => sprintf(_('Update Mailing List %s'), $mailingList->getName())));
 		?>
 		<h3><?php echo $mailingList->getName(); ?></h3>
-		<form method="post" action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&amp;group_list_id=<?php echo $mailingList->getID(); ?>">
+		<?php echo $HTML->openForm(array('method' => 'post', 'action' => getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&group_list_id='.$mailingList->getID())); ?>
 			<input type="hidden" name="post_changes" value="y" />
 			<input type="hidden" name="change_status" value="y" />
 			<p>
@@ -233,9 +232,9 @@ if ($group_id) {
 			<input type="text" name="description" value="<?php echo inputSpecialChars($mailingList->getDescription()); ?>" size="40" maxlength="80" /></p>
 			<p>
 			<input type="submit" name="submit" value="<?php echo _('Update'); ?>" /></p>
-		</form>
-		<a href="deletelist.php?group_id=<?php echo $group_id; ?>&amp;group_list_id=<?php echo $mailingList->getID(); ?>">[<?php echo _('Permanently Delete List'); ?>]</a>
-	<?php
+		<?php
+		echo $HTML->closeForm();
+		echo util_make_link('/mail/admin/deletelist.php?group_id='.$group_id.'&group_list_id='.$mailingList->getID(), '['._('Permanently Delete List').']');
 		mail_footer();
 	} else {
 //
@@ -259,11 +258,9 @@ if ($group_id) {
 			exit;
 		}
 		echo '<p>'.sprintf(_('You can administrate lists from here. Please note that private lists can still be viewed by members of your project, but are not listed on %s.'), forge_get_config ('forge_name')).'</p>';
-		echo '<ul>
-			<li>
-				<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;add_list=1">'._('Add Mailing List').'</a>
-			</li>
-		</ul>';
+		echo '<ul><li>'
+		echo util_make_link(getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&add_list=1', _('Add Mailing List'));
+		echo '</li></ul>';
 		$mlCount = count($mlArray);
 		if($mlCount > 0) {
 			$tableHeaders = array(
@@ -285,7 +282,7 @@ if ($group_id) {
 					htmlspecialchars($currentList->getDescription()).'</td>';
 					echo '<td class="align-center">';
 					if ($currentList->getStatus() != MAIL__MAILING_LIST_PW_RESET_REQUESTED) {
-						echo '<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_list_id='.$currentList->getID().'&amp;change_status=1">'._('Update').'</a>';
+						echo util_make_link(getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&group_list_id='.$currentList->getID().'&change_status=1', _('Update'));
 					}
 					echo '</td>';
 					echo '<td class="align-center">';
@@ -297,10 +294,11 @@ if ($group_id) {
 					echo '</td>';
 					echo '<td class="align-center">';
 					if($currentList->getStatus() == MAIL__MAILING_LIST_IS_CONFIGURED) {
-						echo '<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_list_id='.$currentList->getID().'&amp;reset_pw=1">'._('Reset admin password').'</a></td>' ;
-
+						echo util_make_link(getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&group_list_id='.$currentList->getID().'&reset_pw=1', _('Reset admin password'));
+					} else {
+						echo '';
 					}
-					echo '</tr>';
+					echo '</td></tr>';
 				}
 			}
 			echo $HTML->listTableBottom();

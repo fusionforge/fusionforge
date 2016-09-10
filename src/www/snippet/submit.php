@@ -3,7 +3,7 @@
  * Code Snippets Repository
  *
  * Copyright 1999-2001 (c) VA Linux Systems
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -26,8 +26,9 @@ require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'snippet/snippet_utils.php';
 
-if (session_loggedin()) {
+global $HTML, $feedback, $error_msg;
 
+if (session_loggedin()) {
 	if (getStringFromRequest('post_changes')) {
 		if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 			exit_form_double_submit();
@@ -92,8 +93,8 @@ if (session_loggedin()) {
 	<p>
 	<?php echo _('<span class="important">Note:</span> You can submit a new version of an existing snippet by browsing the library. You should only use this page if you are submitting an entirely new script or function.'); ?>
 	</p>
-	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post" id="snippet_submit">
 	<?php
+	echo $HTML->openForm(arrray('action' => getStringFromServer('PHP_SELF'), 'method' => 'post', 'id' => 'snippet_submit'));
 	echo $HTML->html_input('form_key', '', '', 'hidden', form_generate_key());
 	echo $HTML->html_input('post_changes', '', '', 'hidden', 'y');
 	echo $HTML->html_input('changes', '', '', 'hidden', 'First Posted Version');
@@ -128,7 +129,7 @@ if (session_loggedin()) {
 
 	<td>
 		<?php echo $HTML->html_select($SCRIPT_CATEGORY, 'category', _('Category').utils_requiredField()._(': ')); ?>
-                <br />
+		<br />
                 <!-- FIXME: Where should this link go to? <?php echo util_make_link ('/support/?func=addsupport&group_id=1',_('Suggest a Category')); ?> -->
 	</td>
 	</tr>
@@ -144,15 +145,12 @@ if (session_loggedin()) {
 	<tr><td colspan="2" class="align-center">
         <?php echo $HTML->html_input('submit', '', _('Make sure all info is complete and accurate'), 'submit', _('Submit')); ?>
 	</td></tr>
-	</table></form>
-
+	</table>
 	<?php
+	echo $HTML->closeForm();
 	snippet_footer();
-
 } else {
-
 	exit_not_logged_in();
-
 }
 
 // Local Variables:

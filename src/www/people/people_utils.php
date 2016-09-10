@@ -6,7 +6,7 @@
  * Copyright 2002-2004 (c) GForge Team
  * Copyright 2010 (c) Franck Villaume
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013-2015, Franck Villaume - TrivialDev
+ * Copyright 2013-2016, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -171,8 +171,8 @@ function people_edit_skill_inventory($user_id) {
 		echo db_error();
 	} else {
 		for ($i=0; $i < $rows; $i++) {
+			echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
 			echo '
-			<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 			<input type="hidden" name="skill_inventory_id" value="'.db_result($result,$i,'skill_inventory_id').'" />
 			<tr '. $HTML->boxGetAltRowStyle($i) .'>
 				<td>'. people_get_skill_name(db_result($result,$i,'skill_id')) .'</td>
@@ -180,23 +180,23 @@ function people_edit_skill_inventory($user_id) {
 				<td>'. people_skill_year_box('skill_year_id',db_result($result,$i,'skill_year_id')). '</td>
 				<td style="white-space:nowrap"><input type="submit" name="update_skill_inventory" value="'._('Update').'" /> &nbsp;
 					<input type="submit" name="delete_from_skill_inventory" value="'._('Delete').'" /></td>
-				</tr></form>';
+				</tr>';
+			echo $HTML->closeForm();
 		}
 
 	}
 	//add a new skill
 	$i++; //for row coloring
 
-	echo '
-	<tr class="tableheading"><td colspan="4">'._('Add a new skill').'/td></tr>
-	<form action="'.getStringFromServer('PHP_SELF').'" method="post">
-	<tr '. $HTML->boxGetAltRowStyle($i) .'>
+	echo '<tr class="tableheading"><td colspan="4">'._('Add a new skill').'/td></tr>';
+	echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
+	echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>
 		<td>'. people_skill_box('skill_id'). '</td>
 		<td>'. people_skill_level_box('skill_level_id'). '</td>
 		<td>'. people_skill_year_box('skill_year_id'). '</td>
 		<td nowrap="nowrap"><input type="submit" name="add_to_skill_inventory" value="'._('Add Skill').'" /></td>
-	</tr></form>';
-
+	</tr>';
+	echo $HTML->closeForm();
 	echo $HTML->listTableBottom();
 
 }
@@ -213,7 +213,7 @@ function people_add_to_job_inventory($job_id,$skill_id,$skill_level_id,$skill_ye
 							VALUES ($1, $2, $3, $4)',
 							array($job_id, $skill_id, $skill_level_id, $skill_year_id));
 			if (!$result || db_affected_rows($result) < 1) {
-				$error_msg .= _('Error inserting into job inventory: ');
+				$error_msg .= _('Error inserting into job inventory')._(': ');
 				$error_msg .= db_error();
 				return false;
 			} else {
@@ -221,7 +221,7 @@ function people_add_to_job_inventory($job_id,$skill_id,$skill_level_id,$skill_ye
 				return true;
 			}
 		} else {
-			$error_msg .= _('Error: skill already in your inventory');
+			$error_msg .= _('Error')._(': ')._('skill already in your inventory');
 			return false;
 		}
 
@@ -319,36 +319,33 @@ function people_edit_job_inventory($job_id,$group_id) {
 		}
 	} else {
 		for ($i=0; $i < $rows; $i++) {
-			echo '
-			<tr '. $HTML->boxGetAltRowStyle($i) . '>
-			<form action="'.getStringFromServer('PHP_SELF').'" method="post">
-			<input type="hidden" name="job_inventory_id" value="'. db_result($result,$i,'job_inventory_id') .'" />
+			echo '<tr '. $HTML->boxGetAltRowStyle($i) . '>';
+			echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
+			echo '<input type="hidden" name="job_inventory_id" value="'. db_result($result,$i,'job_inventory_id') .'" />
 			<input type="hidden" name="job_id" value="'. db_result($result,$i,'job_id') .'" />
 			<input type="hidden" name="group_id" value="'.$group_id.'" />
 				<td style="width: 25%">'. people_get_skill_name(db_result($result,$i,'skill_id')) . '</td>
 				<td style="width: 25%">'. people_skill_level_box('skill_level_id',db_result($result,$i,'skill_level_id')). '</td>
 				<td style="width: 25%">'. people_skill_year_box('skill_year_id',db_result($result,$i,'skill_year_id')). '</td>
 				<td style="width: 25%" nowrap="nowrap"><input type="submit" name="update_job_inventory" value="'._('Update').'" /> &nbsp;
-					<input type="submit" name="delete_from_job_inventory" value="'._('Delete').'" /></td>
-				</form></tr>';
+					<input type="submit" name="delete_from_job_inventory" value="'._('Delete').'" /></td>'.
+			$HTML->closeForm().'</tr>';
 		}
 
 	}
 	//add a new skill
 	(isset($i)) ? $i++ : $i = 0; //for row coloring
 
-	echo '
-	<tr><td colspan="4"><h3>'._('Add a new skill').'</h3></td></tr>
-	<tr '. $HTML->boxGetAltRowStyle($i) . '>
-	<form action="'.getStringFromServer('PHP_SELF').'" method="post">
-	<input type="hidden" name="job_id" value="'. $job_id .'" />
+	echo '<tr><td colspan="4"><h3>'._('Add a new skill').'</h3></td></tr>
+	<tr '. $HTML->boxGetAltRowStyle($i) . '>';
+	echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
+	echo '<input type="hidden" name="job_id" value="'. $job_id .'" />
 	<input type="hidden" name="group_id" value="'.$group_id.'" />
 		<td style="width: 25%">'. people_skill_box('skill_id'). '</td>
 		<td style="width: 25%">'. people_skill_level_box('skill_level_id'). '</td>
 		<td style="width: 25%">'. people_skill_year_box('skill_year_id'). '</td>
-		<td style="width: 25%" nowrap="nowrap"><input type="submit" name="add_to_job_inventory" value="'._('Add Skill').'" /></td>
-	</form></tr>';
-
+		<td style="width: 25%" nowrap="nowrap"><input type="submit" name="add_to_job_inventory" value="'._('Add Skill').'" /></td>'.
+	$HTML->closeForm().'</tr>';
 	echo $HTML->listTableBottom();
 }
 

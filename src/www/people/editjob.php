@@ -157,11 +157,11 @@ if ($group_id && (forge_check_perm('project_admin', $group_id))) {
 	} else {
 
 		echo '<p>'
-        . _('Now you can edit/change the list of skills attached to this posting. Developers will be able to match their skills with your requirements.')
-        .'</p><p>'
-        . _('All postings are automatically closed after two weeks.').'
-		<form action="'.getStringFromServer('PHP_SELF').'" method="post">
-		<input type="hidden" name="group_id" value="'.$group_id.'" />
+			. _('Now you can edit/change the list of skills attached to this posting. Developers will be able to match their skills with your requirements.')
+			.'</p><p>'
+			. _('All postings are automatically closed after two weeks.');
+		echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
+		echo '<input type="hidden" name="group_id" value="'.$group_id.'" />
 		<input type="hidden" name="job_id" value="'.$job_id.'" />
 		<strong>'._('Category').'</strong>'.utils_requiredField().'<br />
 		'. people_job_category_box('category_id',db_result($result,0,'category_id')) .'
@@ -175,9 +175,8 @@ if ($group_id && (forge_check_perm('project_admin', $group_id))) {
 		<strong>'._('Long Description').utils_requiredField()._(':').'</strong><br />
 		<textarea name="description" rows="10" cols="60" required="required" >'. db_result($result,0,'description') .'</textarea></p>
 		<p>
-		<input type="submit" name="update_job" value="'._('Update Descriptions').'" /></p>
-		</form>';
-
+		<input type="submit" name="update_job" value="'._('Update Descriptions').'" /></p>';
+		echo $HTML->closeForm();
 		//now show the list of desired skills
 		echo '<p>'.people_edit_job_inventory($job_id,$group_id).'</p>';
 		echo $HTML->openForm(array('action' => '/people/', 'method' => 'post'));

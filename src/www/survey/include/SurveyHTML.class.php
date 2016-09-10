@@ -33,9 +33,6 @@ require_once $gfwww.'include/note.php';
  */
 class SurveyHTML extends FFError {
 
-	function __construct() {
-	}
-
 	/**
 	 * Show survey header
 	 */
@@ -124,7 +121,7 @@ class SurveyHTML extends FFError {
 		}
 
 		$ret = $warning_msg;
-		$ret.='<form action="'.getStringFromServer('PHP_SELF').'" method="post">' . "\n";
+		$ret.= $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
 		$ret.='<p><input type="hidden" name="post" value="Y" />';
 		$ret.='<input type="hidden" name="group_id" value="'.$group_id.'" />';
 		$ret.='<input type="hidden" name="question_id" value="'.$question_id.'" />';
@@ -137,7 +134,7 @@ class SurveyHTML extends FFError {
 		$ret.= html_build_select_box($result,'question_type',$question_type,false);
 
 		$ret.='</p><p><input type="submit" name="submit" value="'.$question_button.'" /></p>' . "\n";
-		$ret.='</form>' . "\n";
+		$ret.= $HTML->closeForm();
 
 		return $ret;
 	}
@@ -184,7 +181,7 @@ class SurveyHTML extends FFError {
 		}
 
 		$ret = $warning_msg;
-		$ret.='<form action="'.getStringFromServer('PHP_SELF').'" method="post">';
+		$ret.= $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
 		$ret.='<p><input type="hidden" name="post" value="Y" />';
 		$ret.='<input type="hidden" name="group_id" value="'.$group_id.'" />';
 		$ret.='<input type="hidden" name="survey_id" value="'.$survey_id.'" />';
@@ -278,8 +275,7 @@ class SurveyHTML extends FFError {
 		*/
 
 		$ret.='<p><input type="submit" name="submit" value="'.$survey_button.'" /></p>';
-		$ret.='</form>';
-
+		$ret.= $HTML->closeForm();
 		return $ret;
 	}
 
@@ -439,7 +435,7 @@ class SurveyHTML extends FFError {
 			}
 			if ($show_result_csv) {
 				/* Csv Link */
-				$ret.= '<td>['.util_make_link('/survey/admin/show_csv.php?group_id=$group_id&survey_id='.$surveys[$i]->getID(), _('CSV')).']</td>';
+				$ret.= '<td>['.util_make_link('/survey/admin/show_csv.php?group_id='.$group_id.'&survey_id='.$surveys[$i]->getID(), _('CSV')).']</td>';
 			}
 			$ret.= "</tr>\n";
 		}
