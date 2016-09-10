@@ -331,11 +331,11 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	}
 
 	function getAdvancedSearchBox($sectionsArray, $group_id, $words, $isExact) {
+		global $HTML;
 		$res = '';
 		// display the searchmask
-		$res .= '
-			<form class="ff" name="advancedsearch" action="'.getStringFromServer('PHP_SELF').'" method="post">
-			<input class="ff" type="hidden" name="search" value="1"/>
+		$res .= $HTML->openForm(array('class' => 'ff', 'name' => 'advancedsearch', 'action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
+		$res .= '<input class="ff" type="hidden" name="search" value="1"/>
 			<input class="ff" type="hidden" name="group_id" value="'.$group_id.'"/>
 			<div align="center"><br />
 			<table id="advsearchinput">
@@ -355,9 +355,8 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 				</tr>
 			</table><br />'
 			. $this->createSubSections($sectionsArray) .'
-			</div>
-		</form>
-		';
+			</div>';
+		$res .= $HTML->closeForm();
 
 		// Add jquery javascript method for select none/all
 		$res .= <<< EOS

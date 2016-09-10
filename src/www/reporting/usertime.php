@@ -3,6 +3,7 @@
  * Reporting System
  *
  * Copyright 2003-2004 (c) GForge LLC
+ * Copyright 2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -27,6 +28,8 @@ require_once $gfcommon.'reporting/report_utils.php';
 require_once $gfcommon.'reporting/ReportUserTime.class.php';
 
 session_require_global_perm ('forge_stats', 'read') ;
+
+global $HTML, $error_msg;
 
 $report=new Report();
 if ($report->isError()) {
@@ -70,7 +73,7 @@ for ($i=0; $i<count($abc_array); $i++) {
 	if ($sw == $abc_array[$i]) {
 		echo '<strong>'.$abc_array[$i].'</strong>&nbsp;';
 	} else {
-		echo '<a href="usertime.php?sw='.$abc_array[$i].'&amp;typ='.$typ.'">'.$abc_array[$i].'</a>&nbsp;';
+		echo util_make_link('/reporting/usertime.php?sw='.$abc_array[$i].'&typ='.$typ, $abc_array[$i]).'&nbsp;';
 	}
 }
 
@@ -84,9 +87,8 @@ if ($sw) {
 	$a2[]='category';
 	$a2[]='subproject';
 
+	echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'get'));
 	?>
-
-	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 	<input type="hidden" name="sw" value="<?php echo $sw; ?>" />
 	<input type="hidden" name="typ" value="<?php echo $typ; ?>" />
 	<table><tr>
@@ -96,8 +98,9 @@ if ($sw) {
 	<td><strong><?php echo _('End Date')._(':'); ?></strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
 	<td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" /></td>
 	</tr></table>
-	</form>
 	<?php
+	echo $HTML->closeForm();
+
 	if ($dev_id && $typ=='r') {
 		$report=new ReportUserTime($dev_id,$type,$start,$end);
 		$labels = $report->labels;

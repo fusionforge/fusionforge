@@ -9,6 +9,7 @@
  * Copyright 2004 GForge, LLC - Tim Perdue
  * Copyright 2010, Franck Villaume - Capgemini
  * Copyright 2010-2011, Alain Peyrat - Alcatel-Lucent
+ * Copyright 2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -125,9 +126,9 @@ if (forge_get_config('use_shell')) {
 <p><?php echo _('Project WWW directory on shell server:') ?><br /><strong><?php echo account_group_homedir($group->getUnixName()).'/htdocs'; ?></strong></p>
 <?php
 	} //end of use_shell condition
-?>
 
-<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
+	echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
+?>
 
 <input type="hidden" name="group_id" value="<?php echo $group->getID(); ?>" />
 
@@ -310,9 +311,8 @@ if(forge_get_config('use_tracker')) {
 <input type="submit" name="submit" value="<?php echo _('Update') ?>" />
 </p>
 
-</form>
-
 <?php
+echo $HTML->closeForm();
 plugin_hook('hierarchy_views', array($group_id, 'admin'));
 
 echo $HTML->boxBottom();

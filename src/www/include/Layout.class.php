@@ -1029,6 +1029,7 @@ if (isset($params['group']) && $params['group']) {
 	}
 
 	function confirmBox($msg, $params, $buttons, $image='*none*') {
+		global $HTML;
 		if ($image == '*none*') {
 			$image = html_image('stop.png', 48, 48);
 		}
@@ -1052,11 +1053,10 @@ if (isset($params['group']) && $params['group']) {
 			</tr>
 			<tr>
 			<td colspan="2" align="center">
-			<br />
-			<form action="' . getStringFromServer('PHP_SELF') . '" method="get" >
-			'.$prm.'
-			'.$btn.'
-			</form>
+			<br />'.$HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'get'))
+			.$prm.'
+			'.$btn.
+			$HTML->closeForm().'
 			</td>
 			</tr>
 			</table>

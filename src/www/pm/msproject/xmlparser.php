@@ -3,6 +3,7 @@
  * MS Project Integration Facility
  *
  * Copyright 2004 GForge, LLC
+ * Copyright 2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * Provides some fuctions for Ms Project Plugin.
@@ -27,21 +28,23 @@ require_once $gfwww.'pm/msproject/msp.php';
 
 $send_task_email=false;
 
+global $HTML;
+
 if (getStringFromRequest('showform')) {
 ?>
 	<html>
-	<title>XML Parser</title>
+	<title><?php echo _('XML Parser'); ?></title>
 	<body>
-	<h2>XML Parser</h2>
+	<h2><?php echo _('XML Parser'); ?></h2>
 	<p>
-	<form name="xmlparser" method="post" action="<?php echo getStringFromServer('PHP_SELF'); ?>">
+	<?php echo $HTML->openForm(array('name' => 'xmlparser', 'method' => 'post', 'action' => getStringFromServer('PHP_SELF'))); ?>
 	Text: <br />
 	<textarea name="document" cols="50" rows="10"></textarea>
 	<br />
 	<input type="hidden" name="parser" value="yes">
 	<input type="submit" value="Parser">
-	</form>
 	<?php
+	echo $HTML->closeForm();
 } elseif (getStringFromRequest("parser") == "yes") {
 
 	$data = getStringFromRequest("document");

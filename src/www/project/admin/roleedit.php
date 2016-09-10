@@ -8,7 +8,7 @@
  * Copyright © 2011
  *	Thorsten Glaser <t.glaser@tarent.de>
  * Copyright 2014, Stéphane-Eymeric Bredthauer
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -119,8 +119,7 @@ $msg = _('Use this page to edit the permissions attached to each role.  Note tha
 project_admin_header(array('title'=> $title, 'group'=>$group_id));
 
 echo '<p>'.$msg.'</p>';
-echo '
-<form action="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;role_id='. $role_id .'" method="post">';
+echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&role_id='.$role_id, 'method' => 'post'));
 
 if ($role->getHomeProject() == NULL
     || $role->getHomeProject()->getID() != $group_id) {
@@ -282,27 +281,23 @@ for ($i=0; $i<count($keys); $i++) {
 									false);
 			echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($j++, true)), $cells);
 		}
-
 //
 //	Handle all other settings for all roles
 //
 	} else {
-
 		echo '<tr '. $HTML->boxGetAltRowStyle($j++) . '>
 		<td colspan="2"><strong>'.$rbac_edit_section_names[$keys[$i]].'</strong></td>
 		<td>';
 		echo html_build_select_box_from_assoc($role->getRoleVals($keys[$i]), "data[".$keys[$i]."][$group_id]", $role->getVal($keys[$i],$group_id), false, false ) ;
 		echo '</td>
 		</tr>';
-
 	}
-
 }
 
 echo $HTML->listTableBottom();
 
-echo '<p><input type="submit" name="submit" value="'._('Submit').'" /></p>
-</form>';
+echo '<p><input type="submit" name="submit" value="'._('Submit').'" /></p>';
+echo $HTML->closeForm();
 
 project_admin_footer();
 
