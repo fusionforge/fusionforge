@@ -107,7 +107,7 @@ if (!isset($group_id) && !isset($project)) {
 
 	} else {
 	  // '/projects' in HTML redirects to the softwaremap
-	  session_redirect(util_make_uri('/softwaremap/'));
+	  session_redirect('/softwaremap/');
 	}
 
 } else {
