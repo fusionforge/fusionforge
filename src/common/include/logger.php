@@ -40,20 +40,10 @@ if (isset($group_id) && is_numeric($group_id) && $group_id) {
 	}
 } else {
 	//
-	//
 	//	This is a hack to allow the logger to have a group_id present
 	//	for foundry and project summary pages
 	//
-	//
-	$pos = strpos (getStringFromServer('REQUEST_URI'),
-		       normalized_urlprefix ());
-	if (($pos !== false) && ($pos == 0)) {
-		$pathwithoutprefix = substr (getStringFromServer('REQUEST_URI'),
-					     strlen (normalized_urlprefix ()) - 1);
-	}
-	$pathwithoutprefix_exploded = explode('?', $pathwithoutprefix);
-	$pathwithoutprefix = $pathwithoutprefix_exploded[0];
-	$expl_pathinfo = explode('/',$pathwithoutprefix);
+	$expl_pathinfo = explode('/', getStringFromServer('REQUEST_URI'));
 	if (($expl_pathinfo[1]=='foundry') || ($expl_pathinfo[1]=='projects')) {
 		$group_name = $expl_pathinfo[2];
 		if ($group_name) {
