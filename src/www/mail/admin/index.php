@@ -258,7 +258,7 @@ if ($group_id) {
 			exit;
 		}
 		echo '<p>'.sprintf(_('You can administrate lists from here. Please note that private lists can still be viewed by members of your project, but are not listed on %s.'), forge_get_config ('forge_name')).'</p>';
-		echo '<ul><li>'
+		echo '<ul><li>';
 		echo util_make_link(getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&add_list=1', _('Add Mailing List'));
 		echo '</li></ul>';
 		$mlCount = count($mlArray);
