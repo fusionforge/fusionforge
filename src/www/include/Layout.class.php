@@ -1486,8 +1486,9 @@ if (isset($params['group']) && $params['group']) {
 	 * @return	string	html code
 	 */
 	function openForm($args) {
-		$action = $args['action'];
-		$args['action'] = util_make_uri($action);
+		if (isset($args['action'])) {
+			$args['action'] = util_make_uri($args['action']);
+		}
 		return html_ao('form', $args);
 	}
 
