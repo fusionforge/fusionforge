@@ -2562,7 +2562,6 @@ class Group extends FFError {
 						$t = new ArtifactType ($this);
 						$t->create ($this->replaceTemplateStrings($o->getName()),$this->replaceTemplateStrings($o->getDescription()),$o->emailAll(),$o->getEmailAddress(),$o->getDuePeriod()/86400,0,$o->getSubmitInstructions(),$o->getBrowseInstructions());
 						$id_mappings['tracker'][$o->getID()] = $t->getID();
-						$t->cloneFieldsFrom($o->getID(), $o->Group->getID());
 					}
 				}
 			}
@@ -2664,7 +2663,7 @@ class Group extends FFError {
 			}
 
 			foreach ($template->getRoles() as $oldrole) {
-				$newrole = RBACEngine::getInstance()->getRoleById ($id_mappings['role'][$oldrole->getID()]);
+				$newrole = RBACEngine::getInstance()->getRoleById($id_mappings['role'][$oldrole->getID()]);
 				if ($oldrole->getHomeProject() != NULL
 					&& $oldrole->getHomeProject()->getID() == $template->getID()) {
 					$newrole->setPublic ($oldrole->isPublic());
@@ -2687,6 +2686,18 @@ class Group extends FFError {
 											$v);
 							}
 						}
+					}
+				}
+			}
+
+			// second computation to clone fields and workflow
+			if (forge_get_config('use_tracker')) {
+				if ($template->usesTracker()) {
+					$oldatf = new ArtifactTypeFactory($template);
+					foreach ($oldatf->getArtifactTypes() as $o) {
+						$t = artifactType_get_object($id_mappings['tracker'][$o->getID()]);
+						$id_mappings['tracker'][$o->getID()] = $t->getID();
+						$t->cloneFieldsFrom($o->getID(), $o->Group->getID());
 					}
 				}
 			}
