@@ -653,7 +653,7 @@ class ArtifactType extends FFError {
 	/**
 	 * cloneFieldsFrom - clone all the fields and elements from another tracker
 	 *
-	 * @param	int	$clone_tracker_id
+	 * @param	int	$clone_tracker_id	id of the cloned tracker
 	 * @param	int	$group_id		id of the project template to use.
 	 * @return	boolean	true/false on success
 	 */
