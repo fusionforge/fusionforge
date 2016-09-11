@@ -189,7 +189,7 @@ function globalsearch_admin_table_postedit ($id) {
  *      globalsearch_admin_table_show() - display the specified table, sorted by the primary key, with links to add, edit, and delete
  */
 function globalsearch_admin_table_show () {
-	global $HTML, $PHP_SELF;
+	global $HTML;
 
 	$result = db_query_params ('SELECT * FROM plugin_globalsearch_assoc_site ORDER BY assoc_site_id',
 				   array());
@@ -197,7 +197,7 @@ function globalsearch_admin_table_show () {
 		$rows = db_numrows($result);
 
 		$cell_data=array();
-		$cell_data[]=array(ngettext('Associated forge','Associated forges',$rows).' <a href="'.$PHP_SELF.'?function=add">['._('add new').']</a>',
+		$cell_data[]=array(ngettext('Associated forge','Associated forges',$rows).' '.util_make_link(getStringFromServer('PHP_SELF').'?function=add', '['._('add new').']'),
 			'colspan' => 8);
 
 		echo '<table border="0" width="100%">';
@@ -218,8 +218,8 @@ function globalsearch_admin_table_show () {
                         echo '<tr '. $HTML->boxGetAltRowStyle($j) . '>';
 
                         $id = db_result($result,$j,0);
-                        echo '<td><a href="'.$PHP_SELF.'?function=edit&amp;id='.$id.'">['._('edit').']</a> ';
-                        echo '<a href="'.$PHP_SELF.'?function=confirmdelete&amp;id='.$id.'">['._('delete').']</a> </td>';
+                        echo '<td>'.util_make_link(getStringFromServer('PHP_SELF').'?function=edit&id='.$id, '['._('edit').']');
+                        echo util_make_link(getStringFromServer('PHP_SELF').'?function=confirmdelete&id='.$id, '['._('delete').']').'</td>';
 
 			echo '<td><strong>'.db_result ($result, $j, 'assoc_site_id').'</strong></td>';
 			echo '<td><strong>'.db_result ($result, $j, 'title').'</strong></td>';

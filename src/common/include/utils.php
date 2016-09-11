@@ -8,7 +8,7 @@
  * Copyright (c) 2010, 2011, 2012
  *	Thorsten Glaser <t.glaser@tarent.de>
  * Copyright 2010-2012, Alain Peyrat - Alcatel-Lucent
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013,2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -598,25 +598,23 @@ function ShowResultSet($result, $title = '', $linkify = false, $displayHeaders =
 			for ($i = 0; $i < $cols; $i++) {
 				if (in_array($i, $colsToKeep)) {
 					if ($linkify && $i == 0) {
-						$link = '<a href="'.getStringFromServer('PHP_SELF').'?';
-						$linkend = '</a>';
 						if ($linkify == "bug_cat") {
-							$link .= 'group_id='.$group_id.'&amp;bug_cat_mod=y&amp;bug_cat_id='.db_result($result, $j, 'bug_category_id').'">';
+							$linkUrl = util_make_link(getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&bug_cat_mod=y&bug_cat_id='.db_result($result, $j, 'bug_category_id'), db_result($result, $j, $i));
 						} elseif ($linkify == "bug_group") {
-							$link .= 'group_id='.$group_id.'&amp;bug_group_mod=y&amp;bug_group_id='.db_result($result, $j, 'bug_group_id').'">';
+							$linkUrl = util_make_link(getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&bug_group_mod=y&bug_group_id='.db_result($result, $j, 'bug_group_id'), db_result($result, $j, $i));
 						} elseif ($linkify == "patch_cat") {
-							$link .= 'group_id='.$group_id.'&amp;patch_cat_mod=y&amp;patch_cat_id='.db_result($result, $j, 'patch_category_id').'">';
+							$linkUrl = util_make_link(getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&patch_cat_mod=y&patch_cat_id='.db_result($result, $j, 'patch_category_id'), db_result($result, $j, $i));
 						} elseif ($linkify == "support_cat") {
-							$link .= 'group_id='.$group_id.'&amp;support_cat_mod=y&amp;support_cat_id='.db_result($result, $j, 'support_category_id').'">';
+							$linkUrl = util_make_link(getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&support_cat_mod=y&support_cat_id='.db_result($result, $j, 'support_category_id'), db_result($result, $j, $i));
 						} elseif ($linkify == "pm_project") {
-							$link .= 'group_id='.$group_id.'&amp;project_cat_mod=y&amp;project_cat_id='.db_result($result, $j, 'group_project_id').'">';
+							$linkUrl = util_make_link(getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&project_cat_mod=y&project_cat_id='.db_result($result, $j, 'group_project_id'), db_result($result, $j, $i));
 						} else {
-							$link = $linkend = '';
+							$linkUrl = db_result($result, $j, $i);
 						}
 					} else {
-						$link = $linkend = '';
+						$linkUrl = db_result($result, $j, $i);
 					}
-					echo '<td>'.$link.db_result($result, $j, $i).$linkend.'</td>';
+					echo '<td>'.$linkUrl.'</td>';
 				}
 			}
 			echo '</tr>';
