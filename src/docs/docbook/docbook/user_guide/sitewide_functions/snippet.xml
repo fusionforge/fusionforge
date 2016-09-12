@@ -77,7 +77,7 @@
 	<section id="ug_sitewide_snippet_modify">
 		<title>Modifying a snippet</title>
 		<para>
-			You cannot modify an existing snippet, but you can add a new version of the snippet by clicking on the Submit a new version link on the bottom part of the detail page of the snippet.
+			You cannot modify an existing snippet, but you can add a new version of the snippet by clicking on the Add a new version link on the bottom part of the detail page of the snippet.
 		</para>
 		<para>
 			Adding a new version does not delete the old version, all previous versions will be available.

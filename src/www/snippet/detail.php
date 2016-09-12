@@ -115,7 +115,7 @@ if ($type=='snippet') {
 		Show a link so you can add a new version of this snippet
 	*/
 	echo '
-	<h3>'.util_make_link('/snippet/addversion.php?type=snippet&id='.htmlspecialchars($id), _('Submit a new version')).'</h3>
+	<h3>'.util_make_link('/snippet/addversion.php?type=snippet&id='.htmlspecialchars($id), _('Add a new version')).'</h3>
 	<p>' ._('You can submit a new version of this snippet if you have modified it and you feel it is appropriate to share with others.').'.</p>';
 
 	}
@@ -196,7 +196,7 @@ if ($type=='snippet') {
 			Show a form so you can add a new version of this package
 		*/
 		echo '
-		<h3>'.util_make_link('/snippet/addversion.php?type=package&id='.$id, _('Submit a new version')).'</h3>
+		<h3>'.util_make_link('/snippet/addversion.php?type=package&id='.$id, _('Add a new version')).'</h3>
 		<p>' ._('You can submit a new version of this package if you have modified it and you feel it is appropriate to share with others.').'.</p>';
 
 	}
