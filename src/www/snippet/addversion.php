@@ -77,7 +77,7 @@ if (session_loggedin()) {
 					$feedback .= _('Snippet Version Added Successfully.');
 				}
 			} else {
-				exit_error(_('Error: Go back and fill in all the information'));
+				exit_error(_('Error')._(': ')._('Go back and fill in all the information'));
 			}
 
 		}
@@ -197,7 +197,7 @@ function show_add_snippet_box() {
 
 			} else {
 				form_release_key(getStringFromRequest("form_key"));
-				exit_error( _('Error: Go back and fill in all the information'));
+				exit_error(_('Error')._(': ')._('Go back and fill in all the information'));
 			}
 
 		}
