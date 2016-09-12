@@ -33,6 +33,7 @@ require_once $gfcommon.'docman/DocumentGroup.class.php';
 require_once $gfcommon.'docman/DocumentStorage.class.php';
 require_once $gfcommon.'docman/DocumentVersion.class.php';
 require_once $gfcommon.'include/MonitorElement.class.php';
+require_once $gfcommon.'include/utils_crossref.php';
 
 $DOCUMENT_OBJ = array();
 
