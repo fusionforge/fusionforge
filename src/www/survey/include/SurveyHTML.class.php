@@ -219,9 +219,10 @@ class SurveyHTML extends FFError {
 				$ret.= "<tr ". $HTML->boxGetAltRowStyle($i) .">\n";
 			}
 
-			$ret.= '<td><input type="checkbox" name="to_add[]" value="'.$arr_to_add[$i]->getID().'" />'.
+			$ret.= '<td><input type="checkbox" id="to_add_'.$i.'" name="to_add[]" value="'.$arr_to_add[$i]->getID().'" />'.
+				'<label for="to_add_'.$i.'">'.
 				$arr_to_add[$i]->getQuestion().' ('.
-				$arr_to_add[$i]->getQuestionStringType().')</td>';
+				$arr_to_add[$i]->getQuestionStringType().")</label></td>\n";
 
 			if ($i%3==2) {
 				$ret.= "</tr>";
