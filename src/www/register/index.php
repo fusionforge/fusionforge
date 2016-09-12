@@ -282,11 +282,10 @@ if (forge_get_config('use_scm') && count($scm_plugins) > 0) {
 	echo '</tr></tbody></table>'."\n";
 }
 
-echo '<h2>'.$index++.'. '._('Project template'). '</h2>';
-
 if (count ($template_projects) > 1) {
 	$tpv_arr = array () ;
 	$tpn_arr = array () ;
+	echo '<h2>'.$index++.'. '._('Project template'). '</h2>';
 	echo '<p>';
 	if (forge_get_config('allow_project_without_template')) {
 		printf(_('You can either start from an empty project, or pick a project that will act as a template for yours.  Your project will initially have the same configuration as the template (same roles and permissions, same trackers, same set of enabled plugins, and so on).')) ;
@@ -303,8 +302,9 @@ if (count ($template_projects) > 1) {
 	echo html_build_select_box_from_arrays ($tpv_arr, $tpn_arr, 'built_from_template', $built_from_template,
 						false, '', false, '') ;
 } elseif (count ($template_projects) == 1) {
-	echo '<p>';
 	if (forge_get_config('allow_project_without_template')) {
+		echo '<h2>'.$index++.'. '._('Project template'). '</h2>';
+		echo '<p>';
 		printf(_('You can either start from an empty project, or use the %s project as a template for yours.  Your project will initially have the same configuration as the template (same roles and permissions, same trackers, same set of enabled plugins, and so on).'),
 		       $template_projects[0]->getPublicName()) ;
 		echo '</p>' ;
