@@ -156,9 +156,9 @@ class HtmlSearchRenderer extends SearchRenderer {
 		$offset = $this->searchQuery->getOffset() - $this->searchQuery->getRowsPerPage();
 		$query =& $this->query;
 
-		$url = '/search/?type='.$query['typeOfSearch'].'&exact='.$query['isExact'].'&q='.urlencode($query['words']);
+		$url = '/search/?type='.$query['typeOfSearch'].'&amp;exact='.$query['isExact'].'&amp;q='.urlencode($query['words']);
 		if($offset > 0) {
-			$url .= '&offset='.$offset;
+			$url .= '&amp;offset='.$offset;
 		}
 		return $url;
 	}
@@ -170,7 +170,7 @@ class HtmlSearchRenderer extends SearchRenderer {
 	 */
 	function getNextResultsUrl() {
 		$query =& $this->query;
-		return '/search/?type='.$query['typeOfSearch'].'&exact='.$query['isExact'].'&q='.urlencode($query['words']).'&offset='.($this->searchQuery->getOffset() + $this->searchQuery->getRowsPerPage());
+		return '/search/?type='.$query['typeOfSearch'].'&amp;exact='.$query['isExact'].'&amp;q='.urlencode($query['words']).'&amp;offset='.($this->searchQuery->getOffset() + $this->searchQuery->getRowsPerPage());
 	}
 
 	/**

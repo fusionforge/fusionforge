@@ -73,7 +73,7 @@ for ($i=0; $i<count($abc_array); $i++) {
 	if ($sw == $abc_array[$i]) {
 		echo '<strong>'.$abc_array[$i].'</strong>&nbsp;';
 	} else {
-		echo util_make_link('/reporting/usertime.php?sw='.$abc_array[$i].'&typ='.$typ, $abc_array[$i]).'&nbsp;';
+		echo util_make_link('/reporting/usertime.php?sw='.$abc_array[$i].'&amp;typ='.$typ, $abc_array[$i]).'&nbsp;';
 	}
 }
 

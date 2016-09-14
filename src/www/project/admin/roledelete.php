@@ -85,7 +85,7 @@ printf(_('You are about to permanently delete role %s'), $role->getName()); ?>
 <td>
 <fieldset>
 <legend><?php echo _('Confirm Delete') ?></legend>
-<?php echo $HTML-> openForm(array('action' => getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&role_id='.$role_id, 'method' => 'post')); ?>
+<?php echo $HTML-> openForm(array('action' => getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;role_id='.$role_id, 'method' => 'post')); ?>
 <p>
 <input id="sure" type="checkbox" value="1" name="sure" />
 <label for="sure">

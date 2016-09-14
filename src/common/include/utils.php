@@ -599,15 +599,15 @@ function ShowResultSet($result, $title = '', $linkify = false, $displayHeaders =
 				if (in_array($i, $colsToKeep)) {
 					if ($linkify && $i == 0) {
 						if ($linkify == "bug_cat") {
-							$linkUrl = util_make_link(getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&bug_cat_mod=y&bug_cat_id='.db_result($result, $j, 'bug_category_id'), db_result($result, $j, $i));
+							$linkUrl = util_make_link(getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;bug_cat_mod=y&amp;bug_cat_id='.db_result($result, $j, 'bug_category_id'), db_result($result, $j, $i));
 						} elseif ($linkify == "bug_group") {
-							$linkUrl = util_make_link(getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&bug_group_mod=y&bug_group_id='.db_result($result, $j, 'bug_group_id'), db_result($result, $j, $i));
+							$linkUrl = util_make_link(getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;bug_group_mod=y&amp;bug_group_id='.db_result($result, $j, 'bug_group_id'), db_result($result, $j, $i));
 						} elseif ($linkify == "patch_cat") {
-							$linkUrl = util_make_link(getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&patch_cat_mod=y&patch_cat_id='.db_result($result, $j, 'patch_category_id'), db_result($result, $j, $i));
+							$linkUrl = util_make_link(getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;patch_cat_mod=y&amp;patch_cat_id='.db_result($result, $j, 'patch_category_id'), db_result($result, $j, $i));
 						} elseif ($linkify == "support_cat") {
-							$linkUrl = util_make_link(getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&support_cat_mod=y&support_cat_id='.db_result($result, $j, 'support_category_id'), db_result($result, $j, $i));
+							$linkUrl = util_make_link(getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;support_cat_mod=y&amp;support_cat_id='.db_result($result, $j, 'support_category_id'), db_result($result, $j, $i));
 						} elseif ($linkify == "pm_project") {
-							$linkUrl = util_make_link(getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&project_cat_mod=y&project_cat_id='.db_result($result, $j, 'group_project_id'), db_result($result, $j, $i));
+							$linkUrl = util_make_link(getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;project_cat_mod=y&amp;project_cat_id='.db_result($result, $j, 'group_project_id'), db_result($result, $j, $i));
 						} else {
 							$linkUrl = db_result($result, $j, $i);
 						}

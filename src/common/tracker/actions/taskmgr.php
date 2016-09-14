@@ -104,7 +104,7 @@ if (getStringFromRequest('add_to_task')) {
 		'title'=>_('Build Relationship Between Tracker Items and Tasks'),
 		'modal'=>1));
 
-	echo $HTML->openForm(array('name' => 'foo', 'action' => '/tracker/?func=taskmgr&group_id='.$group_id.'&atid='.$atid.'&aid='.$aid, 'method' => 'post'));
+	echo $HTML->openForm(array('name' => 'foo', 'action' => '/tracker/?func=taskmgr&amp;group_id='.$group_id.'&amp;atid='.$atid.'&amp;aid='.$aid, 'method' => 'post'));
 	echo '
 		<p><strong>'._('Tracker Item')._(':').'</strong> [#'.$a->getID().'] '.$a->getSummary().'</p>
 		<p><strong>'._('Tasks Project')._(':').'</strong><br />';
@@ -160,7 +160,7 @@ if (getStringFromRequest('add_to_task')) {
 		'title'=>_('Build Relationship Between Tracker Items and Tasks'),
 		'modal'=>1));
 
-	echo $HTML->openForm(array('name' => 'foo', 'action' => '/tracker/?func=taskmgr&group_id='.$group_id.'&atid='.$atid.'&aid='.$aid, 'method' => 'post'));
+	echo $HTML->openForm(array('name' => 'foo', 'action' => '/tracker/?func=taskmgr&amp;group_id='.$group_id.'&amp;atid='.$atid.'&amp;aid='.$aid, 'method' => 'post'));
 	echo '
 		<p><strong>'._('Tracker Item')._(':').'</strong> [#'.$a->getID().'] '.$a->getSummary().'</p>
 		<p><strong>'._('Tasks Project')._(':').'</strong></p>
