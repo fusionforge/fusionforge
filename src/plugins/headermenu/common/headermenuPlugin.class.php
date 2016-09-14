@@ -466,4 +466,13 @@ in the main menu (outermenu) or in the project menu (groupmenu).");
 		include $gfplugins.$this->name.'/view/admin/viewProjectConfiguration.php';
 		return true;
 	}
+
+	/**
+	 * getPluginDescription - display the description of this plugin in pluginman admin page
+	 *
+	 * @return	string	the description
+	 */
+	function getPluginDescription() {
+		return _('Get the ability to set new links next to the login menu (headermenu), in the main menu (outermenu) or in the project menu (groupmenu).');
+	}
 }
