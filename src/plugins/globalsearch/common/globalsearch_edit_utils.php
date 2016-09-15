@@ -218,8 +218,8 @@ function globalsearch_admin_table_show () {
                         echo '<tr '. $HTML->boxGetAltRowStyle($j) . '>';
 
                         $id = db_result($result,$j,0);
-                        echo '<td>'.util_make_link(getStringFromServer('PHP_SELF').'?function=edit&id='.$id, '['._('edit').']');
-                        echo util_make_link(getStringFromServer('PHP_SELF').'?function=confirmdelete&id='.$id, '['._('delete').']').'</td>';
+                        echo '<td>'.util_make_link(getStringFromServer('PHP_SELF').'?function=edit&amp;id='.$id, '['._('edit').']');
+                        echo util_make_link(getStringFromServer('PHP_SELF').'?function=confirmdelete&amp;id='.$id, '['._('delete').']').'</td>';
 
 			echo '<td><strong>'.db_result ($result, $j, 'assoc_site_id').'</strong></td>';
 			echo '<td><strong>'.db_result ($result, $j, 'title').'</strong></td>';
