@@ -5,7 +5,7 @@
  * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
  * Copyright 2015 Franck Villaume - TrivialDev
  * Copyright 2016, Stéphane-Eymeric Bredtthauer - TrivialDev
- * 
+ *
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;

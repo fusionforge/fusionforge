@@ -37,21 +37,21 @@ $taskboard_id = getIntFromPost('taskboard_id');
 $action = getStringFromPost('action');
 
 if (!$group_id) {
-	echo  json_encode( array( 'message' => _('Cannot Process your request')._(': ')._('No ID specified')));
+	echo json_encode(array('message' => _('Cannot Process your request')._(': ')._('No ID specified')));
 	exit();
 } else {
 	$group = group_get_object($group_id);
 	if (!$group) {
-		echo  json_encode( array('message' => _('Group is not found')));
+		echo json_encode(array('message' => _('Group is not found')));
 		exit();
 	}
 
-	$taskboard = new TaskBoardHtml( $group, $taskboard_id ) ;
+	$taskboard = new TaskBoardHtml($group, $taskboard_id);
 	$allowedActions = array('get_trackers_fields');
 
 	if(in_array($action, $allowedActions)) {
-		include($gfplugins.'taskboard/common/actions/ajax_'.$action.'.php' );
+		include($gfplugins.'taskboard/common/actions/ajax_'.$action.'.php');
 	} else {
-		echo  json_encode(array('message' => _('OK')));
+		echo json_encode(array('message' => _('OK')));
 	}
 }
