@@ -192,7 +192,7 @@ if ($add_cat && $group_project_id) {
 		for ($i=0; $i < $rows; $i++) {
 			$cells = array();
 			$cells[][] = db_result($result, $i, 'category_id');
-			$cells[][] = util_make_link('/pm/admin/?update_cat=1&id='.db_result($result, $i, 'category_id').'&group_id='.$group_id.'&group_project_id='. $pg->getID(),
+			$cells[][] = util_make_link('/pm/admin/?update_cat=1&amp;id='.db_result($result, $i, 'category_id').'&amp;group_id='.$group_id.'&amp;group_project_id='. $pg->getID(),
 							db_result($result, $i, 'category_name'));
 			echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
 		}
