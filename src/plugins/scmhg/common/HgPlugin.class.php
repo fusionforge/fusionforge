@@ -49,6 +49,15 @@ Offer DAV or SSH access.");
 		$this->register();
 	}
 
+	/**
+	 * getPluginDescription - display the description of this plugin in pluginman admin page
+	 *
+	 * @return	string	the description
+	 */
+	function getPluginDescription() {
+		return _('Use Mercurial as Source Code Management tool. Offer DAV or SSH access.');
+	}
+
 	function getDefaultServer() {
 		return forge_get_config('default_server', 'scmhg');
 	}
