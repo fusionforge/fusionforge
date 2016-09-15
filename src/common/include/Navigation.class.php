@@ -195,8 +195,7 @@ class Navigation extends FFError {
 			$url = '/account/login.php';
 			if(getStringFromServer('REQUEST_METHOD') != 'POST') {
 				$url .= '?return_to=';
-				$request_uri = getStringFromServer('REQUEST_URI');
-				$url .= urlencode($request_uri);
+				$url .= urlencode(getStringFromServer('REQUEST_URI'));
 			}
 			$res['titles'][] = _('Log In');
 			$res['urls'][] = util_make_url($url);
