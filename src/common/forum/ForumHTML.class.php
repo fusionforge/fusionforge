@@ -495,12 +495,12 @@ class ForumHTML extends FFError {
 			<input type="hidden" name="forum_id" value="<?php echo $objid; ?>" />
 			<input type="hidden" name="editmsg" value="<?php echo $msg_id; ?>" />
 			<input type="hidden" name="is_followup_to" value="<?php echo $is_followup_to; ?>" />
-			<input type="hidden" name="form_key" value="<?php echo form_generate_key();?>">
-			<input type="hidden" name="posted_by" value="<?php echo $posted_by;?>">
-			<input type="hidden" name="post_date" value="<?php echo $post_date;?>">
-			<input type="hidden" name="has_followups" value="<?php echo $has_followups;?>">
-			<input type="hidden" name="most_recent_date" value="<?php echo $most_recent_date;?>">
-			<input type="hidden" name="group_id" value="<?php echo $group_id;?>">
+			<input type="hidden" name="form_key" value="<?php echo form_generate_key();?>" />
+			<input type="hidden" name="posted_by" value="<?php echo $posted_by;?>" />
+			<input type="hidden" name="post_date" value="<?php echo $post_date;?>" />
+			<input type="hidden" name="has_followups" value="<?php echo $has_followups;?>" />
+			<input type="hidden" name="most_recent_date" value="<?php echo $most_recent_date;?>" />
+			<input type="hidden" name="group_id" value="<?php echo $group_id;?>" />
 			<fieldset class="fieldset">
 			<legend><?php echo _('Edit Message'); ?></legend>
 			<table><tr><td class="top">
