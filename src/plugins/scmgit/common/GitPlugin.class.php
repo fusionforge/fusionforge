@@ -167,29 +167,40 @@ control over it to the project's administrator.");
 
 		$b = '';
 		$b .= html_e('h2', array(), _('Developer Access'));
+		$b .= html_e('p', array(),
+				ngettext('Only project developers can access the Git repository via this method.',
+				'Only project developers can access the Git repositories via this method.',
+				count($repo_list)));
+		$b .= '<div id="tabber">';
+		$b .= '<ul>';
+		if (forge_get_config('use_ssh', 'scmgit')) {
+			$b .= '<li><a href="#tabber-ssh">'._('via SSH').'</a></li>';
+			$configuration = 1;
+		}
+		if (forge_get_config('use_smarthttp', 'scmgit')) {
+			$b .= '<li><a href="#tabber-smarthttp">'._('via "smart HTTP"').'</a></li>';
+			$configuration = 1;
+		}
+		$b .= '</ul>';
+		if (!isset($configuration)) {
+			return $HTML->error_msg(_('Error')._(': ')._('No access protocol has been allowed for the Git plugin in scmgit.ini: use_ssh and use_smarthttp are disabled'));
+		}
 		if (session_loggedin()) {
 			$u = user_get_object(user_getid());
 			$d = $u->getUnixName();
 			if (forge_get_config('use_ssh', 'scmgit')) {
-				$b .= html_e('h3', array(), _('via SSH'));
-				$b .= html_e('p', array(),
-					ngettext('Only project developers can access the Git repository via this method.',
-						'Only project developers can access the Git repositories via this method.',
-						count($repo_list)).
-					' '. _('SSH must be installed on your client machine.'));
+				$b .= '<div id="tabber-ssh" class="tabbertab" >';
+				$b .= html_e('p', array(), _('SSH must be installed on your client machine.'));
 				$htmlRepo = '';
 				foreach ($repo_list as $repo_name) {
 						$htmlRepo .= html_e('tt', array(), 'git clone git+ssh://'.$d.'@' . forge_get_config('scm_host') . forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git').html_e('br');
 				}
 				$b .= html_e('p', array(), $htmlRepo);
+				$b .= '</div>';
 			}
 			if (forge_get_config('use_smarthttp', 'scmgit')) {
-				$b .= html_e('h3', array(), _('via "smart HTTP"'));
-				$b .= html_e('p', array(),
-					ngettext('Only project developers can access the Git repository via this method.',
-						'Only project developers can access the Git repositories via this method.',
-						count($repo_list)).
-					' '. _('Enter your site password when prompted.'));
+				$b .= '<div id="tabber-smarthttp" class="tabbertab" >';
+				$b .= html_e('p', array(), _('Enter your site password when prompted.'));
 				$htmlRepo = '';
 
 				$protocol = forge_get_config('use_ssl', 'scmgit') ? 'https' : 'http';
@@ -197,10 +208,11 @@ control over it to the project's administrator.");
 					$htmlRepo .= '<tt>git clone '.$protocol.'://'.$d.'@' . forge_get_config('scm_host').'/authscm/'.$d.'/git/'.$project->getUnixName() .'/'. $repo_name .'.git</tt><br />';
 				}
 				$b .= html_e('p', array(), $htmlRepo);
+				$b .= '</div>';
 			}
 		} else {
 			if (forge_get_config('use_ssh', 'scmgit')) {
-				$b .= html_e('h3', array(), _('via SSH'));
+				$b .= '<div id="tabber-ssh" class="tabbertab" >';
 				$b .= html_e('p', array(),
 					ngettext('Only project developers can access the Git repository via this method.',
 						'Only project developers can access the Git repositories via this method.',
@@ -212,10 +224,11 @@ control over it to the project's administrator.");
 					$htmlRepo .= html_e('tt', array(), 'git clone git+ssh://'.html_e('i', array(), _('developername'), true, false).'@' . forge_get_config('scm_host') . forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git').html_e('br');
 				}
 				$b .= html_e('p', array(), $htmlRepo);
+				$b .= '</div>';
 			}
 			if (forge_get_config('use_smarthttp', 'scmgit')) {
 				$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
-				$b .= html_e('h3', array(), _('via "smart HTTP"'));
+				$b .= '<div id="tabber-smarthttp" class="tabbertab" >';
 				$b .= html_e('p', array(),
 					ngettext('Only project developers can access the Git repository via this method.',
 						'Only project developers can access the Git repositories via this method.',
@@ -226,12 +239,15 @@ control over it to the project's administrator.");
 					$b .= '<tt>git clone '.$protocol.'://<i>'._('developername').'</i>@' . forge_get_config('scm_host').'/authscm/<i>'._('developername').'</i>/git/'.$project->getUnixName() .'/'. $repo_name .'.git</tt><br />';
 				}
 				$b .= html_e('p', array(), $htmlRepo);
+				$b .= '</div>';
 			}
 		}
-		if ($b == '') {
-			$b .= $HTML->error_msg(_('Error')._(': ')._('No access protocol has been allowed for the Git plugin in scmgit.ini: use_ssh and use_smarthttp are disabled'));
-		}
-
+		$b .= '</div>';
+		$b .= '<script type="text/javascript">//<![CDATA[
+			jQuery(document).ready(function() {
+				jQuery("#tabber").tabs();
+			});
+			//]]></script>';
 		if (session_loggedin()) {
 			$u = user_get_object(user_getid());
 			if ($u->getUnixStatus() == 'A') {

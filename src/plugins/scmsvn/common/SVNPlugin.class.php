@@ -130,42 +130,43 @@ some control over it to the project's administrator.");
 		$b = '';
 
 		$module = $this->topModule($project);
-
+		$b .= sprintf(_('Only project developers can access the %s tree via this method.'), 'Subversion');
+		$b .= '<div id="tabber">';
+		$b .= '<ul>';
+		if (forge_get_config('use_ssh', 'scmsvn')) {
+			$b .= '<li><a href="#tabber-ssh">'._('via SSH').'</a></li>';
+			$configuration = 1;
+		}
+		if (forge_get_config('use_dav', 'scmsvn')) {
+			$b .= '<li><a href="#tabber-dav">'._('via DAV').'</a></li>';
+			$configuration = 1;
+		}
+		$b .= '</ul>';
 		if (session_loggedin()) {
 			$u = user_get_object(user_getid());
 			$d = $u->getUnixName() ;
 			if (forge_get_config('use_ssh', 'scmsvn')) {
-				$b .= '<h2>';
-				$b .= sprintf(_('Developer %s Access via SSH'), 'Subversion');
-				$b .= '</h2>';
+				$b .= '<div id="tabber-ssh" class="tabbertab" >';
 				$b .= '<p>';
-				$b .= sprintf(_('Only project developers can access the %s tree via this method.'), 'Subversion');
-				$b .= ' ';
 				$b .= _('SSH must be installed on your client machine.');
 				$b .= ' ';
 				$b .= _('Enter your site password when prompted.');
 				$b .= '</p>';
 				$b .= '<p><tt>svn checkout svn+ssh://'.$d.'@' . forge_get_config('scm_host') . $this->svn_root_fs .'/'. $project->getUnixName().$module.'</tt></p>' ;
+				$b .= '</div>';
 			}
 			if (forge_get_config('use_dav', 'scmsvn')) {
-				$b .= '<h2>';
-				$b .= _('Developer Subversion Access via DAV');
-				$b .= '</h2>';
+				$b .= '<div id="tabber-dav" class="tabbertab" >';
 				$b .= '<p>';
-				$b .= sprintf(_('Only project developers can access the %s tree via this method.'), 'Subversion');
-				$b .= ' ';
 				$b .= _('Enter your site password when prompted.');
 				$b .= '</p>';
 				$b .= '<p><tt>svn checkout --username '.$d.' http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. forge_get_config('scm_host'). '/authscm/'.$d.'/svn/'.$project->getUnixName().$module.'</tt></p>' ;
+				$b .= '</div>';
 			}
 		} else {
 			if (forge_get_config('use_ssh', 'scmsvn')) {
-				$b .= '<h2>';
-				$b .= sprintf(_('Developer %s Access via SSH'), 'Subversion');
-				$b .= '</h2>';
+				$b .= '<div id="tabber-ssh" class="tabbertab" >';
 				$b .= '<p>';
-				$b .= sprintf(_('Only project developers can access the %s tree via this method.'), 'Subversion');
-				$b .= ' ';
 				$b .= _('SSH must be installed on your client machine.');
 				$b .= ' ';
 				$b .= _('Substitute <em>developername</em> with the proper value.');
@@ -173,21 +174,25 @@ some control over it to the project's administrator.");
 				$b .= _('Enter your site password when prompted.');
 				$b .= '</p>';
 				$b .= '<p><tt>svn checkout svn+ssh://<i>'._('developername').'</i>@' . forge_get_config('scm_host') . $this->svn_root_fs .'/'. $project->getUnixName().$module.'</tt></p>' ;
+				$b .= '</div>';
 			}
 			if (forge_get_config('use_dav', 'scmsvn')) {
-				$b .= '<h2>';
-				$b .= _('Developer Subversion Access via DAV');
-				$b .= '</h2>';
+				$b .= '<div id="tabber-dav" class="tabbertab" >';
 				$b .= '<p>';
-				$b .= sprintf(_('Only project developers can access the %s tree via this method.'), 'Subversion');
-				$b .= ' ';
 				$b .= _('Substitute <em>developername</em> with the proper value.');
 				$b .= ' ';
 				$b .= _('Enter your site password when prompted.');
 				$b .= '</p>';
 				$b .= '<p><tt>svn checkout --username <i>'._('developername').'</i> http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. forge_get_config('scm_host'). '/authscm/<i>'._('developername').'</i>/svn/'.$project->getUnixName().$module.'</tt></p>' ;
+				$b .= '</div>';
 			}
 		}
+		$b .= '</div>';
+		$b .= '<script type="text/javascript">//<![CDATA[
+			jQuery(document).ready(function() {
+				jQuery("#tabber").tabs();
+			});
+			//]]></script>';
 		return $b;
 	}
 
