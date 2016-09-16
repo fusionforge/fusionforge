@@ -714,16 +714,6 @@ class Group extends FFError {
 	}
 
 	/**
-	 * getType() - project, etc. // OBSOLETE. Always return 1.
-	 *
-	 * @return	int	The type flag from the database.
-	 */
-	function getType() {
-		return 1;
-	}
-
-
-	/**
 	 * getStatus - the status code.
 	 *
 	 * Statuses	char	include I,H,A,D,P.
