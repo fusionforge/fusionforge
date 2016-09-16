@@ -67,7 +67,7 @@ echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method'
 <td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" /></td>
 </tr></table>
 <?php
-echo $HMTL->closeForm();
+echo $HTML->closeForm();
 if ($start != $end) {
 	report_graph('usercumul', $SPAN, $start, $end);
 }
