@@ -1,4 +1,11 @@
 # -*- coding: iso-8859-1 mode:python -*-
+"""
+    MoinMoin - FusionForge FarmConfig generation
+
+    @Copyright: previous copyright FusionForge Team
+    @copyright: 2016, Franck Villaume - TrivialDev
+    @license: GNU GPL, see COPYING for details.
+"""
 
 from MoinMoin.config import multiconfig
 import fusionforge
@@ -18,6 +25,7 @@ class FarmConfig(multiconfig.DefaultConfig):
     ffsa = fusionforge.FusionForgeSessionAuth(session_cookies)
     forge_get_config = fusionforge.FusionForgeLink(session_cookies).get_config
     ff_host = fusionforge.FusionForgeLink(session_cookies).get_config('web_host')
+    ff_url_prefix = forge_get_config('url_prefix')
 
     auth = [ffsa]
 
@@ -57,6 +65,6 @@ class FarmConfig(multiconfig.DefaultConfig):
                                 WikiGroups (request))
 
 wikis = map (lambda p: \
-               (p, "^https?://%s/plugins/moinmoin/%s/.*$"
-                   % (FarmConfig.ff_host, p)),
+               (p, "^https?://%s%splugins/moinmoin/%s/.*$"
+                   % (FarmConfig.ff_host, FarmConfig.ff_url_prefix, p)),
              FarmConfig.ffsa.projects)
