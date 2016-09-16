@@ -457,7 +457,7 @@ class Group extends FFError {
 	 * This function require site admin privilege.
 	 *
 	 * @param	object	$user		User requesting operation (for access control).
-	 * @param	int	$type_id	Group type (1-project, 2-foundry).
+	 * @param	int	$type_id	Group type. Obsolete parameter NOT USED.
 	 * @param	string	$unix_box	Machine on which group's home directory located.
 	 * @param	string	$http_domain	Domain which serves group's WWW.
 	 * @return	bool	status.
@@ -480,10 +480,9 @@ class Group extends FFError {
 
 		$res = db_query_params('
 			UPDATE groups
-			SET type_id=$1, unix_box=$2, http_domain=$3
-			WHERE group_id=$4',
-					array($type_id,
-						$unix_box,
+			SET unix_box=$1, http_domain=$2
+			WHERE group_id=$3',
+					array($unix_box,
 						$http_domain,
 						$this->getID()));
 
@@ -494,9 +493,6 @@ class Group extends FFError {
 		}
 
 		// Log the audit trail
-		if ($type_id != $this->data_array['type_id']) {
-			$this->addHistory('type_id', $this->data_array['type_id']);
-		}
 		if ($unix_box != $this->data_array['unix_box']) {
 			$this->addHistory('unix_box', $this->data_array['unix_box']);
 		}
@@ -718,12 +714,12 @@ class Group extends FFError {
 	}
 
 	/**
-	 * getType() - Foundry, project, etc.
+	 * getType() - project, etc. // OBSOLETE. Always return 1.
 	 *
 	 * @return	int	The type flag from the database.
 	 */
 	function getType() {
-		return $this->data_array['type_id'];
+		return 1;
 	}
 
 
@@ -835,16 +831,12 @@ class Group extends FFError {
 	}
 
 	/**
-	 * isProject - Simple boolean test to see if it's a project or not.
+	 * isProject - Simple boolean test to see if it's a project or not. //OBSOLETE: always return true
 	 *
 	 * @return	bool	is_project.
 	 */
 	function isProject() {
-		if ($this->getType()==1) {
-			return true;
-		} else {
-			return false;
-		}
+		return true;
 	}
 
 	/**

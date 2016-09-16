@@ -66,13 +66,8 @@ class ProjectHtmlSearchRenderer extends HtmlSearchRenderer {
 
 		foreach ($result as $row) {
 			$i++;
-			if ($row['type_id'] == 2) {
-				$what = 'foundry';
-			} else {
-				$what = 'projects';
-			}
 			$return .= '<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i).'>'
-				.'<td style="width: 30%"><a href="'.util_make_url('/'.$what.'/'.$row['unix_group_name'].'/').'">'
+				.'<td style="width: 30%"><a href="'.util_make_url('/projects/'.$row['unix_group_name'].'/').'">'
 				.html_image('ic/msg.png', 10, 12)
 				.' '.$this->highlightTargetWords($row['group_name']).'</a></td>'
 				.'<td style="width: 70%">'.$this->highlightTargetWords($row['short_description']).'</td></tr>';
@@ -92,21 +87,15 @@ class ProjectHtmlSearchRenderer extends HtmlSearchRenderer {
 		$project_name = str_replace('<b>', '', $project_name);
 		$project_name = str_replace('</b>', '', $project_name);
 
-		if ($result['type_id'] == 2) {
-			session_redirect('/foundry/'.$project_name.'/');
+		if (forge_check_perm('project_read', $project_id)) {
+			header('Location: '.util_make_url_g($project_name,$project_id));
 		} else {
-			if (forge_check_perm ('project_read', $project_id)) {
-				header('Location: '.util_make_url_g($project_name,$project_id));
-			} else {
-				$this->writeHeader();
-
-				$html = '<h2>'.sprintf(_('Search results for “%s”'), $project_name).'</h2>';
-				$html .= '<p><strong>'.sprintf(_('No matches found for “%s”'), $project_name).'</strong></p>';
-				echo $html;
-				$this->writeFooter();
-			}
+			$this->writeHeader();
+			$html = '<h2>'.sprintf(_('Search results for “%s”'), $project_name).'</h2>';
+			$html .= '<p><strong>'.sprintf(_('No matches found for “%s”'), $project_name).'</strong></p>';
+			echo $html;
+			$this->writeFooter();
 		}
 		exit();
 	}
-
 }

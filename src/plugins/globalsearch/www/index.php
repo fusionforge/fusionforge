@@ -166,12 +166,6 @@ if (!$result || $rows < 1) {
         echo $GLOBALS['HTML']->listTableTop($title_arr);
 
         for ( $i = 0; $i < $rows; $i++ ) {
-                if (db_result($result, $i, 'type') == 2) {
-                        $what = 'foundry';
-                } else {
-                        $what = 'projects';
-                }
-
                 print        "<tr ". $HTML->boxGetAltRowStyle($i)."><td><a href=\""
                         . db_result($result, $i, 'project_link')."\" target=\"blank\">"
                         . html_image("ic/msg.png", 10, 12)."&nbsp;"

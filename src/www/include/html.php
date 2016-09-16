@@ -1041,13 +1041,10 @@ function site_footer($params = array()) {
  * @param	params	array() must contain $toptab and $group
  */
 function site_project_header($params) {
-
 	/*
 		Check to see if active
-		Check to see if project rather than foundry
 		Check to see if private (if private check if user_ismember)
 	*/
-
 	$group_id = $params['group'];
 
 	//get the project object
@@ -1058,15 +1055,16 @@ function site_project_header($params) {
 	} elseif ($project->isError()) {
 		if ($project->isPermissionDeniedError()) {
 			if (!session_get_user()) {
-				$next = '/account/login.php?error_msg='.urlencode($project->getErrorMessage());
+				$error_msg = $project->getErrorMessage();
+				$next = '/account/login.php');
 				if (getStringFromServer('REQUEST_METHOD') != 'POST') {
 					$next .= '&return_to='.urlencode(getStringFromServer('REQUEST_URI'));
 				}
 				session_redirect($next);
 			} else
-				exit_error(sprintf(_('Project access problem: %s'), $project->getErrorMessage()), 'home');
+				exit_error(_('Project access problem')._(': ').$project->getErrorMessage(), 'home');
 		}
-		exit_error(sprintf(_('Project Problem: %s'), $project->getErrorMessage()), 'home');
+		exit_error(_('Project Problem')._(': ').$project->getErrorMessage(), 'home');
 	}
 
 	// Check permissions in case of restricted access

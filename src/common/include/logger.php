@@ -40,11 +40,10 @@ if (isset($group_id) && is_numeric($group_id) && $group_id) {
 	}
 } else {
 	//
-	//	This is a hack to allow the logger to have a group_id present
-	//	for foundry and project summary pages
+	//	This is a hack to allow the logger to have a group_id present for project summary pages
 	//
 	$expl_pathinfo = explode('/', getStringFromServer('REQUEST_URI'));
-	if (($expl_pathinfo[1]=='foundry') || ($expl_pathinfo[1]=='projects')) {
+	if ($expl_pathinfo[1] == 'projects') {
 		$group_name = $expl_pathinfo[2];
 		if ($group_name) {
 			$res_grp = db_query_params ('
@@ -53,8 +52,7 @@ if (isset($group_id) && is_numeric($group_id) && $group_id) {
 				WHERE unix_group_name=$1
 				AND status IN ($2,$3)',
 						    array ($group_name,
-							   'A',
-							   'H'));
+							   'A', 'H', 'P'));
 
 			// store subpage id for analyzing later
 			// This will later be used in the www/projects for instance
@@ -67,7 +65,6 @@ if (isset($group_id) && is_numeric($group_id) && $group_id) {
 			//set up the group_id
 		   	$group_id=db_result($res_grp,0,'group_id');
 
-			//set up a foundry object for reference all over the place
 			if ($group_id) {
 				$grp = group_get_object($group_id,$res_grp);
 				if ($grp) {
@@ -107,7 +104,6 @@ if (isset($group_id) && is_numeric($group_id) && $group_id) {
 
 		//set up the group_id
 		$group_id=db_result($res_grp,0,'group_id');
-		//set up a foundry object for reference all over the place
 		if ($group_id) {
 			$grp = group_get_object($group_id,$res_grp);
 			if ($grp) {
