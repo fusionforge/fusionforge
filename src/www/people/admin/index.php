@@ -133,7 +133,7 @@ if (forge_check_global_perm('forge_admin')) {
 			echo "\n<h2>"._('No Skills Found').'</h2>';
 		}
 
-		echo $HMTL->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
+		echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
 		?>
 		<p>
 		<input type="hidden" name="people_skills" value="y" />
