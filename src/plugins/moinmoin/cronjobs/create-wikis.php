@@ -3,6 +3,7 @@
 /**
  * Copyright 2010, Olaf Lenz
  * Copyright 2011, Roland Mas
+ * Copyright 2016, Franck Villaume
  *
  * This file is part of FusionForge.
  *
@@ -68,7 +69,7 @@ while ( $row = db_fetch_array($project_res) ) {
 
 if ($need_reload) {
 	// Using restart rather than reload, to avoid late WSGI socket changes during test suite
-	system("invoke-rc.d apache2 restart");
+	cron_reload_apache();
 }
 
 // Local Variables:
