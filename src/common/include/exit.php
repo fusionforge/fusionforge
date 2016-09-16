@@ -99,7 +99,7 @@ function exit_missing_param($url = '', $missing_params = array(), $toptab = '') 
 	if (!empty($redirect_url)) {
 		session_redirect($redirect_url);
 	} else {
-		exit_error($error, $toptab);
+		exit_error($error_msg, $toptab);
 	}
 }
 
