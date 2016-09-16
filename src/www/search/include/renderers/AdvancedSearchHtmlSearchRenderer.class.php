@@ -94,7 +94,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	/**
 	 * writeBody - write the Body of the output
 	 */
-	function writeBody() {
+	function writeBody($withpanel = true) {
 		global $HTML;
 		if (strlen($this->words) < 3) {
 			echo $HTML->error_msg(_('Error') . _(': ') . _('Search must be at least three characters'));
