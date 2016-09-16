@@ -50,7 +50,7 @@ if (isset($group_id) && is_numeric($group_id) && $group_id) {
 				SELECT *
 				FROM groups
 				WHERE unix_group_name=$1
-				AND status IN ($2,$3)',
+				AND status IN ($2, $3, $4)',
 						    array ($group_name,
 							   'A', 'H', 'P'));
 
@@ -83,8 +83,7 @@ if (isset($group_id) && is_numeric($group_id) && $group_id) {
 
 				global $RESTPATH_PROJECTS_SUBPAGE2;
 				$RESTPATH_PROJECTS_SUBPAGE2 = $subpage2;
-			}
-			else {
+			} else {
 				$RESTPATH_PROJECTS_GROUP_ID = -1;
 			}
 		}

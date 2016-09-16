@@ -1056,7 +1056,7 @@ function site_project_header($params) {
 		if ($project->isPermissionDeniedError()) {
 			if (!session_get_user()) {
 				$error_msg = $project->getErrorMessage();
-				$next = '/account/login.php');
+				$next = '/account/login.php';
 				if (getStringFromServer('REQUEST_METHOD') != 'POST') {
 					$next .= '&return_to='.urlencode(getStringFromServer('REQUEST_URI'));
 				}
