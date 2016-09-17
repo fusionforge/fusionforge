@@ -46,7 +46,7 @@ class PluginMoinMoin extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("Project information updated"));
 
 		$this->cron_for_plugin("create-wikis.php", "moinmoin");
-
+		$this->pause("5000"); //wait for cronjob to be executed
 		$this->gotoProject('ProjectA');
 		$this->clickAndWait("link=MoinMoinWiki");
 		$this->assertFalse($this->isTextPresent("ConfigurationError"));
