@@ -45,7 +45,7 @@ class FarmConfig(multiconfig.DefaultConfig):
         self.data_dir = (self.__class__.forge_get_config('data_path') + '/plugins/moinmoin/wikidata/%s/data') % project_name
         self.data_underlay_dir = (self.__class__.forge_get_config('data_path') + '/plugins/moinmoin/wikidata/%s/underlay') % project_name
 
-        page_header1_file = (self.__class__.forge_get_config('chroot') + '/home/groups/%s/plugins/moinmoin/page_header1.html') % project_name
+        page_header1_file = (self.__class__.forge_get_config('groupdir_prefix') + '/%s/plugins/moinmoin/page_header1.html') % project_name
         if os.path.exists(page_header1_file):
             with open(page_header1_file) as f:
                 self.page_header1 = f.read()
