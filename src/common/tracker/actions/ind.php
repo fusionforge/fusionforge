@@ -66,7 +66,7 @@ if (!$at_arr || count($at_arr) < 1) {
 			$cells[][] = $at_arr[$j]->getDescription();
 			$cells[] = array((int) $at_arr[$j]->getOpenCount(), 'class' => 'align-center');
 			$cells[] = array((int) $at_arr[$j]->getTotalCount(), 'class' => 'align-center');
-			echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($j, true)), $cells);
+			echo $HTML->multiTableRow(array(), $cells);
 		}
 	}
 	echo $HTML->listTableBottom();
