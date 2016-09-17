@@ -57,11 +57,10 @@ page edits displayed on activity tab, and multi-project wiki preferences.");
 				return;
 			if ($project->isError())
 				return;
-			if (!$project->isProject())
-				return;
 			if ($project->usesPlugin($this->name)) {
 				$params['TITLES'][]=$this->text;
 				$params['DIRS'][]='/wiki/g/'.$project->getUnixName().'/HomePage';
+				$params['TOOLTIPS'][] = null;
 			} else {
 				$this->hooks["groupmenu"] = "";
 				//$params['TITLES'][]=$this->text." [Off]";

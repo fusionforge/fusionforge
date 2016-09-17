@@ -77,9 +77,6 @@ control over it to the project administrator.");
 			if ($project->isError()) {
 				return;
 			}
-			if (!$project->isProject()) {
-				return;
-			}
 			if ( $project->usesPlugin( $this->name )) {
 				$params['TITLES'][] = $this->text;
 				$params['DIRS'][] = '/plugins/hudson/?group_id=' . $group_id; // we indicate the part we're calling is the project one

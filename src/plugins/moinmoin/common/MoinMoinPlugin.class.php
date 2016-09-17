@@ -1,5 +1,4 @@
 <?php
-
 /**
  * MoinMoinPlugin Class
  *
@@ -70,9 +69,6 @@ _("This plugin allows each project to embed MoinMoinWiki under a tab.");
 			if ($project->isError()) {
 				return;
 			}
-			if (!$project->isProject()) {
-				return;
-			}
 			if ($project->usesPlugin($this->name)) {
 				$params['TITLES'][] = $this->text;
 				$params['DIRS'][] = $this->getWikiUrl($project);
@@ -87,41 +83,12 @@ _("This plugin allows each project to embed MoinMoinWiki under a tab.");
 					$params['selected'] = array_search($this->text, $params['TITLES']);
 				}
 			}
-		} elseif ($hookname == "groupisactivecheckbox") {
-			//Check if the group is active
-			// this code creates the checkbox in the project edit public info page to activate/deactivate the plugin
-			$group = group_get_object($group_id);
-			echo "<tr>";
-			echo "<td>";
-			echo ' <input type="checkbox" name="use_moinmoinplugin" value="1" ';
-			// checked or unchecked?
-			if ( $group->usesPlugin ( $this->name ) ) {
-				echo "checked";
-			}
-			echo " /><br/>";
-			echo "</td>";
-			echo "<td>";
-			echo "<strong>Use ".$this->text." Plugin</strong>";
-			echo "</td>";
-			echo "</tr>";
-		} elseif ($hookname == "groupisactivecheckboxpost") {
-			// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
-			$group = group_get_object($group_id);
-			$use_moinmoinplugin = getStringFromRequest('use_moinmoinplugin');
-			if ( $use_moinmoinplugin == 1 ) {
-				$group->setPluginUse ( $this->name );
-			} else {
-				$group->setPluginUse ( $this->name, false );
-			}
 		} elseif ($hookname == "project_public_area") {
 			$project = group_get_object($group_id);
 			if (!$project || !is_object($project)) {
 				return;
 			}
 			if ($project->isError()) {
-				return;
-			}
-			if (!$project->isProject()) {
 				return;
 			}
 			if ( $project->usesPlugin ( $this->name ) ) {

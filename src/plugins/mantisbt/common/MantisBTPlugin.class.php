@@ -60,7 +60,7 @@ _('Use Mantis Bugtracker as another ticket management tool.');
 			case 'groupmenu': {
 				$group_id = $params['group'];
 				$project = group_get_object($group_id);
-				if (!$project || !is_object($project) || $project->isError() || !$project->isProject()) {
+				if (!$project || !is_object($project) || $project->isError()) {
 					return;
 				}
 				if ($project->usesPlugin($this->name)) {

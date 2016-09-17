@@ -1,9 +1,8 @@
 <?php
-
 /**
  * oslcPlugin Class
  *
- *
+ * Copyright 2016, Franck Villaume - TrivialDev
  * This file is part of FusionForge.
  *
  * FusionForge is free software; you can redistribute it and/or modify
@@ -57,18 +56,25 @@ class oslcPlugin extends Plugin {
 			if ($project->isError()) {
 				return;
 			}
-			if (!$project->isProject()) {
-				return;
-			}
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][]=$this->text;
 				$params['DIRS'][]=util_make_uri('/plugins/oslc/');
-				$params['ADMIN'][]='';
+				if (session_loggedin()) {
+					$userperm = $project->getPermission();
+					if ($userperm->isAdmin()) {
+						$params['ADMIN'][]='';
+					}
+				}
 				$params['TOOLTIPS'][] = NULL;
 			} else {
 				$params['TITLES'][]=$this->text." is [Off]";
 				$params['DIRS'][]='';
-				$params['ADMIN'][]='';
+				if (session_loggedin()) {
+					$userperm = $project->getPermission();
+					if ($userperm->isAdmin()) {
+						$params['ADMIN'][]='';
+					}
+				}
 				$params['TOOLTIPS'][] = NULL;
 			}
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );

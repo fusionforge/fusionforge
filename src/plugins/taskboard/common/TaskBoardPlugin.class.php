@@ -50,8 +50,6 @@ _('Agile TaskBoard: Supports Scrum and Kanban methodologies.');
 				return;
 			if ($group->isError())
 				return;
-			if (!$group->isProject())
-				return;
 
 			if($group->usesPlugin($this->name)) {
 				$params['TITLES'][] = $this->text;

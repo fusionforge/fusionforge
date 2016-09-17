@@ -1,8 +1,10 @@
 <?php
-
 /**
  * mailmanPlugin class
  *
+ * Portions Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
+ * Portions Copyright 2010 (c) Mélanie Le Bail
+ * Copyright 2016, Franck Villaume - TrivialDev
  * This file is part of FusionForge.
  *
  * FusionForge is free software; you can redistribute it and/or modify
@@ -19,8 +21,6 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * Portions Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Portions Copyright 2010 (c) Mélanie Le Bail
  */
 
 require_once 'plugins_utils.php';
@@ -87,13 +87,16 @@ class mailmanPlugin extends Plugin {
 			if ($project->isError()) {
 				return;
 			}
-			if (!$project->isProject()) {
-				return;
-			}
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][]=$this->text;
-				$params['DIRS'][]='/plugins/mailman/index.php?group_id=' . $group_id . '&pluginname=' . $this->name; // we indicate the part we're calling is the project one
-                $params['ADMIN'][]='';
+				$params['DIRS'][]='/plugins/mailman/?group_id=' . $group_id . '&pluginname=' . $this->name; // we indicate the part we're calling is the project one
+				if (session_loggedin()) {
+					$userperm = $project->getPermission();
+					if ($userperm->isAdmin()) {
+						$params['ADMIN'][]='';
+					}
+				}
+				$params['TOOLTIPS'][] = NULL;
 			}
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
 		} elseif ($hookname == "groupisactivecheckbox") {
