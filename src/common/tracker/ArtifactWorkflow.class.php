@@ -1,6 +1,26 @@
 <?php
 /**
  * The ArtifactWorkflow class manages workflow for trackers.
+ * Previous Copyright, FusionForge Team
+ * Copyright 2016, Franck Villaume - TrivialDev
+ *
+ * This file is part of FusionForge. FusionForge is free software;
+ * you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the Licence, or (at your option)
+ * any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with FusionForge; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
+
+/**
  *
  * The workflow is attached to custom status field only.
  *
@@ -17,8 +37,6 @@
  *
  * NOTES:
  * @todo: the getAllowedRoles should be replaced by getRealAllowedRoles code. (to be tested).
- * @todo: Some code could use a db direct to array func instead of the while.
- *
  */
 require_once $gfcommon.'include/FFError.class.php';
 
@@ -107,14 +125,12 @@ class ArtifactWorkflow extends FFError {
 				$this->_removeEvent($element_id, $e['element_id']);
 			}
 		}
-
 		// Allow the new element for the Submit form (Initial values).
 		$this->_removeEvent('100', $element_id);
 	}
 
 	// Returns all the possible following nodes (no roles involved).
 	function getNextNodes($from) {
-
 		$res = db_query_params ('SELECT to_value_id FROM artifact_workflow_event
 				WHERE group_artifact_id=$1
 				AND field_id=$2
@@ -122,16 +138,10 @@ class ArtifactWorkflow extends FFError {
 			array($this->artifact_id,
 				$this->field_id,
 				(int)$from));
-		$values = array();
-		while($arr = db_fetch_array($res)) {
-			$values[] = $arr['to_value_id'];
-		}
-		return $values;
-
+		return util_result_column_to_array($res);
 	}
 
 	function saveNextNodes($from, $nodes) {
-
 		// Get All possible nodes.
 		$current = $this->getNextNodes($from);
 
@@ -201,11 +211,7 @@ class ArtifactWorkflow extends FFError {
 						$this->field_id,
 						$from,
 						$to));
-		$values = array();
-		while($arr = db_fetch_array($res)) {
-			$values[] = $arr['extra_field_id'];
-		}
-		return $values;
+		return util_result_column_to_array($res);
 	}
 
 	function saveRequiredFields($from, $to, $extra_fields) {
@@ -247,7 +253,6 @@ class ArtifactWorkflow extends FFError {
 	}
 
 	function _addEvent($from, $to) {
-
 		$res = db_query_params ('INSERT INTO artifact_workflow_event
 				(group_artifact_id, field_id, from_value_id, to_value_id)
 				VALUES ($1, $2, $3, $4)',
@@ -303,11 +308,7 @@ class ArtifactWorkflow extends FFError {
 				$this->field_id,
 				$from,
 				$to));
-		$values = array();
-		while($arr = db_fetch_array($res)) {
-			$values[] = $arr['role_id'];
-		}
-		return $values;
+		return util_result_column_to_array($res);
 	}
 
 	function _addRole($event_id, $role_id) {
