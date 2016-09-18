@@ -291,7 +291,7 @@ if (getStringFromRequest('add_extrafield')) {
 				$ao->clearError();
 			} else {
 				$feedback .= _('Element updated');
-				$parentElements = getStringFromRequest('parent_elements', array());
+				$parentElements = getArrayFromRequest('parent_elements', array());
 				if (!$ao->saveParentElements($parentElements)) {
 					$error_msg .= _('Update failed')._(': ').$ao->getErrorMessage();
 					$ao->clearError();
