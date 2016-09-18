@@ -821,15 +821,6 @@ class Group extends FFError {
 	}
 
 	/**
-	 * isProject - Simple boolean test to see if it's a project or not. //OBSOLETE: always return true
-	 *
-	 * @return	bool	is_project.
-	 */
-	function isProject() {
-		return true;
-	}
-
-	/**
 	 * isPublic - Wrapper around RBAC to check if a project is anonymously readable
 	 *
 	 * @return	boo	is_public.
