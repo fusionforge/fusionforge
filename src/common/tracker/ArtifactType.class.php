@@ -655,9 +655,10 @@ class ArtifactType extends FFError {
 	 *
 	 * @param	int	$clone_tracker_id	id of the cloned tracker
 	 * @param	int	$group_id		id of the project template to use.
+	 * @param	array	$id_mappings		array mapping between template objects and new project objects
 	 * @return	boolean	true/false on success
 	 */
-	function cloneFieldsFrom($clone_tracker_id, $group_id = null) {
+	function cloneFieldsFrom($clone_tracker_id, $group_id = null, $id_mappings = array()) {
 		if ($group_id) {
 			$g = group_get_object($group_id);
 		} else {
@@ -733,9 +734,9 @@ class ArtifactType extends FFError {
 			}
 		}
 
-		foreach ($newEFIds as $oldEFId=>$newEFId) {
+		foreach ($newEFIds as $oldEFId => $newEFId) {
 			$oef = new ArtifactExtraField($at, $oldEFId);
-			$nef = new ArtifactExtraField($this,$newEFId);
+			$nef = new ArtifactExtraField($this, $newEFId);
 			// update Dependency between extrafield
 			if ($oef->getParent() != 100) {
 				if (!$nef->update($nef->getName(), $nef->getAttribute1(), $nef->getAttribute2(), $nef->isRequired(), $nef->getAlias(), $nef->getShow100(), $nef->getShow100label(), $nef->getDescription(), $nef->getPattern(), $newEFIds[$oef->getParent()], $nef->isAutoAssign(), $nef->is_hidden_on_submit(), $nef->is_disabled())) {
@@ -744,7 +745,7 @@ class ArtifactType extends FFError {
 					return false;
 				}
 
-				foreach ($newEFElIds[$oldEFId] as $oldEFElId=>$newEFElId) {
+				foreach ($newEFElIds[$oldEFId] as $oldEFElId => $newEFElId) {
 					$oel = new ArtifactExtraFieldElement($oef,$oldEFElId);
 					if ($oel->isError()) {
 						db_rollback();
@@ -782,13 +783,35 @@ class ArtifactType extends FFError {
 					$naivs[] = $newEFElIds[$oldEFId][$oaiv];
 				}
 				$natw->saveNextNodes('100', $naivs);
-				//TODO implement the rest of the workflow...
+
+				//implement role based of the workflow
+				if (sizeof($id_mappings) && isset($id_mappings['role'])) {
+					$oefelements = $at->getExtraFieldElements($oldEFId);
+					foreach ($oefelements as $oefelement) {
+						// retrieve the allowed values for the old element
+						$onexts = $oatw->getNextNodes($oefelement['element_id']);
+						$naivs = array();
+						foreach ($onexts as $onext) {
+							$naivs[] = $newEFElIds[$oldEFId][$onext];
+							//retrieve the allowed old roles from old element to old next value
+							$oars = $oatw->getAllowedRoles($oefelement['element_id'], $onext);
+							//map old roles into new roles id
+							$nar = array();
+							foreach ($oars as $oar) {
+								if (array_key_exists($oar, $id_mappings['role'])) {
+									$nar[] = $id_mappings['role'][$oar];
+								}
+							}
+							$natw->saveAllowedRoles($newEFElIds[$oldEFId][$oefelement['element_id']], $newEFElIds[$oldEFId][$onext], $nar);
+						}
+						$natw->saveNextNodes($newEFElIds[$oldEFId][$oefelement['element_id']], $naivs);
+					}
+				}
 			}
 		}
 
 		db_commit();
 		return true;
-
 	}
 
 	/**

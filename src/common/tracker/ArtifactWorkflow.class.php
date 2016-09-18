@@ -102,6 +102,8 @@ class ArtifactWorkflow extends FFError {
 	 * When a new element is created, add all the new events in the workflow.
 	 */
 	function addNode($element_id) {
+		// reset the cache!
+		$this->ath->fetchData($this->ath->getID());
 		$elearray = $this->ath->getExtraFieldElements($this->field_id);
 		foreach ($elearray as $e) {
 			if ($element_id !== $e['element_id']) {

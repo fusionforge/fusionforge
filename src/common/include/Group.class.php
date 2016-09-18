@@ -2676,7 +2676,7 @@ class Group extends FFError {
 					foreach ($oldatf->getArtifactTypes() as $o) {
 						$t = artifactType_get_object($id_mappings['tracker'][$o->getID()]);
 						$id_mappings['tracker'][$o->getID()] = $t->getID();
-						$t->cloneFieldsFrom($o->getID(), $o->Group->getID());
+						$t->cloneFieldsFrom($o->getID(), $o->Group->getID(), $id_mappings);
 					}
 				}
 			}
