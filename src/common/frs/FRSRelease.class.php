@@ -27,6 +27,24 @@ require_once $gfcommon.'include/FFError.class.php';
 require_once $gfcommon.'frs/FRSFile.class.php';
 
 /**
+ * get_frs_releases - get all FRS releases for a specific package
+ *
+ * @param	FRSPackage	$package
+ * @return	array
+ */
+function get_frs_releases($package) {
+	$rs = array();
+	$res = db_query_params('SELECT * FROM frs_release WHERE package_id=$1',
+				array($package->getID()));
+	if (db_numrows($res) > 0) {
+		while($arr = db_fetch_array($res)) {
+			$rs[] = new FRSRelease($package, $arr['release_id'], $arr);
+		}
+	}
+	return $rs;
+}
+
+/**
  * Factory method which creates a FRSRelease from an release id
  *
  * @param	int	$release_id	The release id

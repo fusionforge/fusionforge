@@ -35,6 +35,7 @@ require_once $gfcommon.'pm/ProjectGroup.class.php';
 require_once $gfcommon.'pm/ProjectGroupFactory.class.php';
 require_once $gfcommon.'include/Role.class.php';
 require_once $gfcommon.'frs/FRSPackage.class.php';
+require_once $gfcommon.'frs/FRSRelease.class.php';
 require_once $gfcommon.'docman/DocumentGroup.class.php';
 require_once $gfcommon.'docman/DocumentGroupFactory.class.php';
 require_once $gfcommon.'mail/MailingList.class.php';
@@ -2594,8 +2595,13 @@ class Group extends FFError {
 					foreach (get_frs_packages($template) as $o) {
 						$newp = new FRSPackage($this);
 						$nname = $this->replaceTemplateStrings($o->getName());
-						$newp->create ($nname, $o->isPublic());
+						$newp->create($nname, $o->isPublic());
 						$id_mappings['frs'][$o->getID()] = $newp->getID();
+						foreach(get_frs_releases($o) as $or) {
+							$newr = new FRSRelease($newp);
+							$newr->create($this->replaceTemplateStrings($or->getName()), $this->replaceTemplateStrings($or->getNotes()), $this->replaceTemplateStrings($or->getChanges()), $or->getPreformatted());
+							$id_mappings['frs_release'][$or->getID()] = $newr->getID();
+						}
 					}
 				}
 			}
