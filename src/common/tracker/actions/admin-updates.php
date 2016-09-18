@@ -4,7 +4,7 @@
  *
  * Copyright 2010 (c) FusionForge Team
  * Copyright 2010 (c) Franck Villaume - Capgemini
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2014,2016, Franck Villaume - TrivialDev
  * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
@@ -291,7 +291,7 @@ if (getStringFromRequest('add_extrafield')) {
 				$ao->clearError();
 			} else {
 				$feedback .= _('Element updated');
-				$parentElements = getStringFromRequest('parent_elements');
+				$parentElements = getStringFromRequest('parent_elements', array());
 				if (!$ao->saveParentElements($parentElements)) {
 					$error_msg .= _('Update failed')._(': ').$ao->getErrorMessage();
 					$ao->clearError();
