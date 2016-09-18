@@ -3,7 +3,8 @@
  * Update Artifact Type Form
  *
  * Copyright 2010, FusionForge Team
- * Copyright 2015, Franck Villaume - TrivialDev
+ * Copyright 2015,2016, Franck Villaume - TrivialDev
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -136,8 +137,8 @@ echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&a
 	echo $HTML->listTableBottom();
 
 ?>
-<div class="tips">Tip: Click on <?php echo html_image('ic/acl_roles20.png', 20, 20, array('alt'=> _('Edit Roles'))) ?> to configure allowed roles for a transition (all by default).</div>
-<div class="tips">Tip2: Click on <?php echo html_image('ic/required.png', 20, 20, array('alt'=> _('Edit Required Fields'))) ?> to configure required fields for a transition (none by default).</div>
+<div class="tips"><?php echo _('Tip')._(': ').sprintf(_('Click on %s to configure allowed roles for a transition (all by default).'), html_image('ic/acl_roles20.png', 20, 20, array('alt'=> _('Edit Roles')))) ?></div>
+<div class="tips"><?php echo _('Tip2')._(': ').sprintf(_('Click on %s to configure required fields for a transition (none by default).'), html_image('ic/required.png', 20, 20, array('alt'=> _('Edit Required Fields')))) ?></div>
 
 <p>
 <input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
