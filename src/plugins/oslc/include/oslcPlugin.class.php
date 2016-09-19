@@ -147,21 +147,20 @@ class oslcPlugin extends Plugin {
 			//check if the user has the plugin activated
 			if ($user->usesPlugin($this->name)) {
 				echo '	<p>' ;
-				echo util_make_link ("/plugins/oslc/index.php?id=$userid&type=user&pluginname=".$this->name,
+				echo util_make_link("/plugins/oslc/index.php?id=$userid&type=user&pluginname=".$this->name,
 						     _('View Personal oslc')
 					);
 				echo '</p>';
 			}
 		} elseif ($hookname == "project_admin_plugins") {
-			// this displays the link in the project admin options page to it's  oslc administration
+			// this displays the link in the project admin options page to its oslc administration
 			$group_id = $params['group_id'];
 			$group = group_get_object($group_id);
 			if ( $group->usesPlugin ( $this->name ) ) {
 				echo '<p>'.util_make_link ("/plugins/oslc/admin/index.php?id=".$group->getID().'&type=admin&pluginname='.$this->name,
 						     _('oslc Admin')).'</p>' ;
 			}
-		}
-		elseif($hookname == "project_rdf_metadata") {
+		} elseif($hookname == "project_rdf_metadata") {
 
 			# TODO : create another resource
 			$group_id=$params['group'];
@@ -178,9 +177,6 @@ class oslcPlugin extends Plugin {
 
 			$params['out_Resources'][] = $res;
 
-		}
-		elseif ($hookname == "blahblahblah") {
-			// ...
 		}
 	}
 }
