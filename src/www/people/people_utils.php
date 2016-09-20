@@ -108,7 +108,7 @@ function people_add_to_skill_inventory($skill_id,$skill_level_id,$skill_year_id)
 				$feedback .= _('Added to skill inventory');
 			}
 		} else {
-			$error_msg .= _('Error: skill already in your inventory');
+			$error_msg .= _('Error')._(': ')._('skill already in your inventory');
 		}
 		}
 	} else {
