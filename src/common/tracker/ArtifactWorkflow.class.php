@@ -255,26 +255,28 @@ class ArtifactWorkflow extends FFError {
 	}
 
 	function _addEvent($from, $to) {
-		$res = db_query_params ('INSERT INTO artifact_workflow_event
-				(group_artifact_id, field_id, from_value_id, to_value_id)
-				VALUES ($1, $2, $3, $4)',
-			array($this->artifact_id,
-				$this->field_id,
-				$from,
-				$to));
-		if (!$res) {
-			$this->setError('Unable to add Event($from, $to): '.db_error());
-			return false;
+		$event_id = $this->_getEventId($from, $to);
+		if (!$event_id) {
+			$res = db_query_params ('INSERT INTO artifact_workflow_event
+					(group_artifact_id, field_id, from_value_id, to_value_id)
+					VALUES ($1, $2, $3, $4)',
+				array($this->artifact_id,
+					$this->field_id,
+					$from,
+					$to));
+			if (!$res) {
+				$this->setError('Unable to add Event($from, $to): '.db_error());
+				return false;
+			}
+			$event_id = $this->_getEventId($from, $to);
 		}
 
-		$event_id = $this->_getEventId($from, $to);
 		if ($event_id) {
 			// By default, all roles are allowed on a new event.
 			foreach ($this->ath->Group->getRoles() as $r) {
 				$this->_addRole($event_id, $r->getID());
 			}
 		}
-
 		return true;
 	}
 
