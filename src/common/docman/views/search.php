@@ -40,23 +40,21 @@ if (!forge_check_perm('docman', $group_id, 'read')) {
 	session_redirect($redirect_url);
 }
 
-$is_editor = forge_check_perm('docman', $g->getID(), 'approve');
 $searchString = trim(getStringFromRequest('textsearch', null));
-$insideDocuments = getStringFromPost('insideDocuments');
-$subprojectsIncluded = getStringFromPost('includesubprojects');
-$limitByStartDate = getIntFromPost('limitByStartDate', 0);
-$limitByEndDate = getIntFromPost('limitByEndDate', 0);
+$insideDocuments = getIntFromRequest('insideDocuments', 0);
+$subprojectsIncluded = getIntFromRequest('includesubprojects', 0);
+$limitByStartDate = getIntFromRequest('limitByStartDate', 0);
+$limitByEndDate = getIntFromRequest('limitByEndDate', 0);
 $received_begin = getStringFromRequest('start_date', 0);
 $received_end = getStringFromRequest('end_date', 0);
-$allchecked = '';
-$onechecked = '';
+$search_type = getStringFromRequest('search_type', 'all');
 $insideDocumentsCheckbox = '';
 $attrsInputSearchAll = array('type' => 'radio', 'name' => 'search_type', 'required' => 'required', 'value' => 'all', 'title' => _('All searched words are mandatory.'));
 $attrsInputSearchOne = array('type' => 'radio', 'name' => 'search_type', 'required' => 'required', 'value' => 'one', 'title' => _('At least one word must be found.'));
 $date_format_js = _('yy-mm-dd');
 $date_format = _('Y-m-d');
 
-if (getStringFromPost('search_type') == 'one') {
+if ($search_type == 'one') {
 	$attrsInputSearchOne['checked'] = 'checked';
 	$isExact = false;
 } else {
@@ -181,8 +179,8 @@ if ($searchString) {
 	$result = $docsHtmlSearchRenderer->searchQuery->getData($docsHtmlSearchRenderer->searchQuery->getRowsPerPage(),$docsHtmlSearchRenderer->searchQuery->getOffset());
 	$nbDocs = count($result);
 	$max = $docsHtmlSearchRenderer->searchQuery->getRowsTotalCount();
-	echo $HTML->paging_top($start, $paging, $max, $nbDocs, $redirect_url.'&view=search&textsearch='.$searchString);
+	echo $HTML->paging_top($start, $paging, $max, $nbDocs, $redirect_url.'&view=search&textsearch='.$searchString.'&insideDocuments='.$insideDocuments.'&search_type='.$search_type.'&includesubprojects='.$includesubprojects.'&limitByStartDate='.$limitByStartDate.'&limitByEndDate='.$limitByEndDate.'&start_date='.$received_begin.'&end_date='.$received_end);
 	$docsHtmlSearchRenderer->writeBody(false);
-	echo $HTML->paging_bottom($start, $paging, $max, $redirect_url.'&view=search&textsearch='.$searchString);
+	echo $HTML->paging_bottom($start, $paging, $max, $redirect_url.'&view=search&textsearch='.$searchString.'&insideDocuments='.$insideDocuments.'&search_type='.$search_type.'&includesubprojects='.$includesubprojects.'&limitByStartDate='.$limitByStartDate.'&limitByEndDate='.$limitByEndDate.'&start_date='.$received_begin.'&end_date='.$received_end);
 }
 echo html_ac(html_ap() -2);
