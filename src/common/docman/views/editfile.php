@@ -109,21 +109,21 @@ if ($g->useCreateOnline()) {
 }
 $cells[][] = $nextcell;
 echo $HTML->multiTableRow(array(), $cells);
-	if (forge_get_config('use_manual_uploads')) {
-		$cells = array();
-		$cells[][] = _('File').utils_requiredField();
-		$incoming = forge_get_config('groupdir_prefix')."/".$g->getUnixName()."/incoming";
-		$manual_files_arr = ls($incoming, true);
-		if (count($manual_files_arr)) {
-			$cells[][] = html_build_select_box_from_arrays($manual_files_arr, $manual_files_arr, 'manual_path', '').
-					html_e('br').
-					html_e('span', array(), sprintf(_('Pick a file already uploaded (by SFTP or SCP) to the <a href="%1$s">project\'s incoming directory</a> (%2$s).'),
-									'sftp://'.forge_get_config('shell_host').$incoming.'/', $incoming), false);
-		} else {
-			$cells[][] = html_e('p', array('class' => 'warning'), sprintf(_('You need first to upload file in %s'),$incoming), false);
-		}
-		echo $HTML->multiTableRow(array('id' => 'pathroweditfile', 'class' => 'hide'), $cells);
+if (forge_get_config('use_manual_uploads')) {
+	$cells = array();
+	$cells[][] = _('File').utils_requiredField();
+	$incoming = forge_get_config('groupdir_prefix')."/".$g->getUnixName()."/incoming";
+	$manual_files_arr = ls($incoming, true);
+	if (count($manual_files_arr)) {
+		$cells[][] = html_build_select_box_from_arrays($manual_files_arr, $manual_files_arr, 'manual_path', '').
+				html_e('br').
+				html_e('span', array(), sprintf(_('Pick a file already uploaded (by SFTP or SCP) to the <a href="%1$s">project\'s incoming directory</a> (%2$s).'),
+								'sftp://'.forge_get_config('shell_host').$incoming.'/', $incoming), false);
+	} else {
+		$cells[][] = html_e('p', array('class' => 'warning'), sprintf(_('You need first to upload file in %s'),$incoming), false);
 	}
+	echo $HTML->multiTableRow(array('id' => 'pathroweditfile', 'class' => 'hide'), $cells);
+}
 if ($g->useCreateOnline()) {
 	$cells = array();
 	$cells[] = array(_('Edit the contents to your desire or leave them as they are to remain unmodified.').html_e('br').
