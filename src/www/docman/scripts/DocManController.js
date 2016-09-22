@@ -423,7 +423,7 @@ DocManListFileController.prototype =
 
 								filenametdcontent.attr('href', val.filename);
 							} else {
-								filenametdcontent.attr('href', eachdocparams.docManURL+'/view.php/'+eachdocparams.groupId+'/versions/'+eachdocparams.id+'/'+val.version);
+								filenametdcontent.attr('href', eachdocparams.docManURL+'/view.php/'+eachdocparams.groupId+'/versions/'+eachdocparams.id+'/'+val.version.substring(1));
 							}
 						} else {
 							filenametdcontent = val.filename;
