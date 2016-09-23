@@ -64,7 +64,7 @@ class WidgetLayout {
 							placeholder: 'ui-state-highlight',
 							handle: '.widget_titlebar_handle',
 							update: function (event, ui) {
-								var urlparams = '$urlprefix/widgets/updatelayout.php?owner=$owner_type'+$owner_id+'&layout_id='+$this->id;
+								var urlparams = '$url_prefix/widgets/updatelayout.php?owner=$owner_type'+$owner_id+'&layout_id='+$this->id;
 								jQuery('#'+value).children('div').each(function(){
 									urlparams += '&'+value+'[]='+jQuery(this).attr('id').replace('widget_','');
 									});
