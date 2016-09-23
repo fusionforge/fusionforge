@@ -1,11 +1,11 @@
-AliasMatch "^/moin_static[0-9]*/applets/FCKeditor/(.*)" "/usr/share/fckeditor/$1"
+AliasMatch "${FF__core__url_prefix}moin_static[0-9]*/applets/FCKeditor/(.*)" "/usr/share/fckeditor/$1"
 <Directory "/usr/share/fckeditor/">
   Options None
   AllowOverride None
 </Directory>
 
 # The path to static contents changes (named after moinmoin version).
-AliasMatch "^/moin_static[0-9]*/(.*)" "/usr/share/moin/htdocs/$1"
+AliasMatch "${FF__core__url_prefix}moin_static[0-9]*/(.*)" "/usr/share/moin/htdocs/$1"
 <Directory "/usr/share/moin/htdocs/">
   Options -Indexes -FollowSymlinks
   AllowOverride None
@@ -26,7 +26,7 @@ AliasMatch "^/moin_static[0-9]*/(.*)" "/usr/share/moin/htdocs/$1"
   </IfVersion>
 </Location>
 
-<LocationMatch "^/moin_static[0-9]*/(.*)">
+<LocationMatch "${FF__core__url_prefix}moin_static[0-9]*/(.*)">
   <IfVersion >= 2.3>
     Require all granted
   </IfVersion>

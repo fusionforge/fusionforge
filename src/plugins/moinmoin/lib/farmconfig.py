@@ -26,7 +26,11 @@ class FarmConfig(multiconfig.DefaultConfig):
     forge_get_config = fusionforge.FusionForgeLink(session_cookies).get_config
     ff_host = fusionforge.FusionForgeLink(session_cookies).get_config('web_host')
     ff_url_prefix = forge_get_config('url_prefix')
-
+    ff_http = forge_get_config('http_port')
+    if forge_get_config('use_ssl'):
+        ff_port = forge_get_config('https_port')
+    if ff_port:
+        ff_port = ':' + ff_port
     auth = [ffsa]
 
     # Defaults (overridden per project)
@@ -42,6 +46,7 @@ class FarmConfig(multiconfig.DefaultConfig):
         self.project_name = project_name
         self.sitename = u'%s' % project_name
         self.interwikiname = u'%s' % project_name
+        self.url_prefix_static = '%smoin_static' % self.ff_url_prefix
         self.data_dir = (self.__class__.forge_get_config('data_path') + '/plugins/moinmoin/wikidata/%s/data') % project_name
         self.data_underlay_dir = (self.__class__.forge_get_config('data_path') + '/plugins/moinmoin/wikidata/%s/underlay') % project_name
 
@@ -65,6 +70,6 @@ class FarmConfig(multiconfig.DefaultConfig):
                                 WikiGroups (request))
 
 wikis = map (lambda p: \
-               (p, "^https?://%s%splugins/moinmoin/%s/.*$"
-                   % (FarmConfig.ff_host, FarmConfig.ff_url_prefix, p)),
+               (p, "^https?://%s%s%splugins/moinmoin/%s/.*$"
+                   % (FarmConfig.ff_host, FarmConfig.ff_port, FarmConfig.ff_url_prefix, p)),
              FarmConfig.ffsa.projects)
