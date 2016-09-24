@@ -50,7 +50,7 @@ class WidgetLayout {
 			$this->rows[$key]->display($readonly, $owner_id, $owner_type);
 		}
 		if (!$readonly) {
-			$url_prefix = forge_get_config('url_prefix');
+			$url = util_make_uri('/widgets/updatelayout.php');
 			$cells = "['". implode("', '", $this->getColumnIds()) ."']";
 			echo <<<EOS
 				<script type='text/javascript'>/* <![CDATA[ */
@@ -64,7 +64,7 @@ class WidgetLayout {
 							placeholder: 'ui-state-highlight',
 							handle: '.widget_titlebar_handle',
 							update: function (event, ui) {
-								var urlparams = '$url_prefix/widgets/updatelayout.php?owner=$owner_type'+$owner_id+'&layout_id='+$this->id;
+								var urlparams = '$url?owner=$owner_type'+$owner_id+'&layout_id='+$this->id;
 								jQuery('#'+value).children('div').each(function(){
 									urlparams += '&'+value+'[]='+jQuery(this).attr('id').replace('widget_','');
 									});
