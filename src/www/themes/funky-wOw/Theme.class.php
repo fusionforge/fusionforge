@@ -33,9 +33,9 @@ class Theme_Funky_Wow extends Theme_Funky {
 		$this->imgbaseurl = $this->themeurl . 'images/';
 		$this->imgroot = $this->imgbaseurl;
 		$this->addStylesheet('/themes/funky-wOw/css/theme.css');
-		$this->addStylesheet('/scripts/jquery-ui/css/sunny/jquery-ui-1.11.4.css');
-		$this->addStylesheet('/scripts/jquery-ui/css/sunny/jquery-ui.structure-1.11.4.css');
-		$this->addStylesheet('/scripts/jquery-ui/css/sunny/jquery-ui.theme-1.11.4.css');
+		$this->addStylesheet('/scripts/jquery-ui/css/sunny/jquery-ui-1.12.4.css');
+		$this->addStylesheet('/scripts/jquery-ui/css/sunny/jquery-ui.structure-1.12.4.css');
+		$this->addStylesheet('/scripts/jquery-ui/css/sunny/jquery-ui.theme-1.12.4.css');
 	}
 }
 

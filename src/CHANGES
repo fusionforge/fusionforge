@@ -32,7 +32,8 @@ FusionForge 6.X:
 * Tracker: add support for autoassign [#151] & [#149] (TrivialDev)
 * Utils: cross ref document. Use [DNNN] where NNN is the ID of the document. (TrivialDev)
 * Web UI: upgrade splitter jquery plugin to 0.20.0 (TrivialDev)
-* Web UI: upgrade jquery ui to 1.11.4 (TrivialDev)
+* Web UI: upgrade jquery ui to 1.12.1 (TrivialDev)
+* Web UI: upgrade jquery to 1.12.4 (Nokia)
 * Widget MySystasks: new widget for user to display systasks perform on user projects (TrivialDev)
 * Widget ProjectScmStats: new widget for project to display SCM stats (TrivialDev)
 
