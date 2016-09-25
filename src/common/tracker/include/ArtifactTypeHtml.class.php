@@ -294,7 +294,11 @@ class ArtifactTypeHtml extends ArtifactType {
 				if (!empty($efarr[$i]['pattern'])) {
 					$attrs['pattern'] = $efarr[$i]['pattern'];
 				}
-				$str = $this->renderTextField($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['attribute1'],$efarr[$i]['attribute2'], $attrs);
+				if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_TEXT) {
+					$str = $this->renderTextField($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['attribute1'],$efarr[$i]['attribute2'], $attrs);
+				} else {
+					$str = $this->renderIntegerField($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['attribute1'],$efarr[$i]['attribute2'], $attrs);
+				}
 				if ($mode == 'QUERY') {
 					$post_name =  ' <i>'._('(%% for wildcards)').'</i>&nbsp;&nbsp;&nbsp;';
 				}
@@ -936,6 +940,20 @@ EOS;
 	 */
 	function renderTextField ($extra_field_id, $contents, $size, $maxlength, $attrs = array()) {
 		return html_e('input', array_merge(array('type'=>'text', 'name'=>'extra_fields['.$extra_field_id.']', 'value'=>$contents, 'size'=>$size, 'maxlength'=>$maxlength), $attrs));
+	}
+
+	/**
+	 * renderIntegerField - this function builds a text field.
+	 *
+	 * @param	int	$extra_field_id	The ID of this field.
+	 * @param	string	$contents	The data for this field.
+	 * @param	string	$size
+	 * @param	string	$maxlength
+	 * @param	array	$attrs		Array of other attributes
+	 * @return	string	HTML code of corresponding input tag.
+	 */
+	function renderIntegerField ($extra_field_id, $contents, $size, $maxlength, $attrs = array()) {
+		return html_e('input', array_merge(array('type'=>'number', 'name'=>'extra_fields['.$extra_field_id.']', 'value'=>$contents, 'size'=>$size, 'maxlength'=>$maxlength, 'min'=>0), $attrs));
 	}
 
 	/**
