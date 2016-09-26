@@ -74,14 +74,14 @@ if (getStringFromRequest('submit')) {
 		);
 	}
 
-	site_admin_header(array('title'=>_('Site Admin: Change User Password')));
+	site_admin_header(array('title'=>_('Site Admin')._(': ')._('Change User Password')));
 
 	echo html_e('h2', array(), sprintf(_('%s Password Change Confirmation'), forge_get_config('forge_name')));
 	echo $HTML->feedback(sprintf(_('You have changed successfully the password of %1$s (%2$s).'), $u->getUnixName(), $u->getRealName()));
 	printf('<p>'._('Go back to %s.').'</p>', util_make_link('/admin/userlist.php', _('the Full User List')));
 } else {
 	// Show change form
-	site_admin_header(array('title'=>_('Site Admin: Change User Password')));
+	site_admin_header(array('title'=>_('Site Admin')._(': ')._('Change User Password')));
 	echo $HTML->openForm(array('action' => '/admin/passedit.php?user_id='.$user_id, 'method' => 'post'));
 	?>
 	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
