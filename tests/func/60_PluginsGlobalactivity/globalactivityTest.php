@@ -23,7 +23,7 @@
 
 require_once dirname(dirname(__FILE__)).'/SeleniumForge.php';
 
-class Activity extends FForge_SeleniumTestCase
+class GlobalActivity extends FForge_SeleniumTestCase
 {
 	public $fixture = 'projecta';
 
@@ -90,7 +90,7 @@ class Activity extends FForge_SeleniumTestCase
 		$this->clickAndWait("addItemDocmanMenu");
 		$this->click("id=tab-new-document");
 		$this->type("title", "Doc1 Vladimir");
-		$this->type("//input[@name='description']", "Main website (the needle) - also, ZONGO");
+		$this->type("//textarea[@name='description']", "Main website (the needle) - also, ZONGO");
 		$this->click("//input[@name='type' and @value='pasteurl']");
 		$this->type("file_url", "http://fusionforge.org/");
 		$this->clickAndWait("submit");
