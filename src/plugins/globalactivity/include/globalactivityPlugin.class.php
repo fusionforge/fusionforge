@@ -23,9 +23,9 @@
 
 class globalactivityPlugin extends Plugin {
 	public function __construct($id=0) {
-		$this->Plugin($id) ;
+		parent::__construct($id);
 		$this->name = "globalactivity";
-		$this->text = "Global Activity"; // To show in the tabs, use...
+		$this->text = "Global Activity";
 
 		$this->_addHook('register_soap');
 	}
