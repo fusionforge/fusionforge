@@ -67,7 +67,7 @@ class ReportPerGroupDocmanDownloads extends Report {
 		$end_m = date('Ym', $end);
 
 		if (!$group_id) {
-			$this->setError(_('No Valid Group Object'));
+			$this->setError(_('Invalid Project'));
 			return;
 		}
 

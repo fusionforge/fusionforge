@@ -58,7 +58,7 @@ class RoadmapFactory extends FFError {
 		parent::__construct();
 
 		if (!$group || !is_object($group)) {
-			$this->setError(_('No Valid Group Object'));
+			$this->setError(_('Invalid Project'));
 			return;
 		}
 		if ($group->isError()) {

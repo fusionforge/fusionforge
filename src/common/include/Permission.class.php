@@ -97,7 +97,7 @@ class Permission extends FFError {
 	 */
 	function __construct (&$_Group) {
 		if (!$_Group || !is_object($_Group)) {
-			$this->setError(_('No Valid Group Object'));
+			$this->setError(_('Invalid Project'));
 			return;
 		}
 		if ($_Group->isError()) {
