@@ -70,9 +70,8 @@ class Roadmap extends FFError {
 			}
 			$this->group = $group;
 			$this->group_id = $group->getID();
-		}
-		else {
-			$this->setError(_('Invalid Group'));
+		} else {
+			$this->setError(_('Invalid Project'));
 			return;
 		}
 
