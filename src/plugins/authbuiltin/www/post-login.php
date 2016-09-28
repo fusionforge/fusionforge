@@ -27,9 +27,9 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-Header("Expires: Wed, 11 Nov 1998 11:11:11 GMT");
-Header("Cache-Control: no-cache");
-Header("Cache-Control: must-revalidate");
+header("Expires: Wed, 11 Nov 1998 11:11:11 GMT");
+header("Cache-Control: no-cache");
+header("Cache-Control: must-revalidate");
 
 require_once '../../../www/env.inc.php';
 require_once $gfcommon.'include/pre.php';
@@ -48,15 +48,16 @@ $triggered = getIntFromRequest('triggered');
 $attempts = getIntFromRequest('attempts');
 $previous_login = getStringFromRequest('previous_login');
 
-if (session_loggedin())
+if (session_loggedin()) {
 	session_redirect('/my');
+}
 
 //
 //	Validate return_to
 //
 if ($return_to) {
 	$tmpreturn = explode('?',$return_to);
-	$rtpath = $tmpreturn[0] ;
+	$rtpath = $tmpreturn[0];
 
 	if (@is_file(forge_get_config('url_root').$rtpath)
 	    || @is_dir(forge_get_config('url_root').$rtpath)
@@ -80,7 +81,6 @@ if ($login) {
 	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 		exit_form_double_submit();
 	}
-
 	$valide = 1;
 	if ($attempts >= 3) {
 		$params['valide'] =& $valide;

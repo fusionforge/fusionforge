@@ -27,7 +27,7 @@ class globalDashboard_Widget_MyProjects extends Widget {
 
 	function __construct($owner_type, $plugin) {
 		$this->plugin = $plugin;
-		$this->Widget('plugin_globalDashboard_MyProjects');
+		parent::__construct('plugin_globalDashboard_MyProjects');
 	}
 
 	function getTitle() {

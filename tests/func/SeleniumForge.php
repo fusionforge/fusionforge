@@ -295,7 +295,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		if (in_array ('forums', $what)) {
 			$this->clickAndWait("link=Admin");
 			$this->clickAndWait("link=Tools");
-			$this->clickAndWait("link=Forums Admin");
+			$this->clickAndWait("link=Forums Administration");
 
 			$this->clickAndWait("link=Add Forum");
 			$this->type("forum_name", "Open-Discussion");

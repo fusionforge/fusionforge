@@ -64,7 +64,7 @@ if (!$fhtml || !is_object($fhtml)) {
 } elseif ($fhtml->isError()) {
 	exit_error($fhtml->getErrorMessage(),'forums');
 }
-forum_header(array());
+forum_header();
 echo $fhtml->showPendingMessage($fm);
 $HTML->footer();
 

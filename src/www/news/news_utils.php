@@ -30,8 +30,8 @@ function news_header($params) {
 		exit_disabled();
 	}
 
-	$params['toptab']='news';
-	$params['group']=$group_id;
+	$params['toptab'] = 'news';
+	$params['group'] = $group_id;
 
 	if ($group_id && ($group_id != forge_get_config('news_group'))) {
 		$menu_texts=array();
@@ -222,53 +222,6 @@ ORDER BY post_date DESC',
 		//you can only submit news from a project now
 		//you used to be able to submit general news
 		$return .= '<div>' . util_make_link ('/news/submit.php?group_id='.$group_id, _('Submit News')).'</div>';
-	}
-	return $return;
-}
-
-function news_foundry_latest($group_id=0,$limit=5,$show_summaries=true) {
-	/*
-		Show a the latest news for a portal
-	*/
-
-	$result=db_query_params("SELECT groups.group_name,groups.unix_group_name,groups.group_id,
-		users.user_name,users.realname,news_bytes.forum_id,
-		news_bytes.summary,news_bytes.post_date,news_bytes.details
-		FROM users,news_bytes,groups,foundry_news
-		WHERE foundry_news.foundry_id=$1
-		AND users.user_id=news_bytes.submitted_by
-		AND foundry_news.news_id=news_bytes.id
-		AND news_bytes.group_id=groups.group_id
-		AND foundry_news.is_approved=1
-		ORDER BY news_bytes.post_date DESC", array($group_id),$limit);
-
-	$rows=db_numrows($result);
-
-	if (!$result || $rows < 1) {
-		$return .= '<h3>' . _('No News Found') . '</h3>';
-		$return .= db_error();
-	} else {
-		for ($i=0; $i<$rows; $i++) {
-			if ($show_summaries) {
-				//get the first paragraph of the story
-				$arr=explode("\n",db_result($result,$i,'details'));
-				if ((isset($arr[1]))&&(isset($arr[2]))&&(strlen($arr[0]) < 200) && (strlen($arr[1].$arr[2]) < 300) && (strlen($arr[2]) > 5)) {
-					$summ_txt=util_make_links( $arr[0].'<br />'.$arr[1].'<br />'.$arr[2] );
-				} else {
-					$summ_txt=util_make_links( $arr[0] );
-				}
-
-				//show the project name
-				$proj_name=' &nbsp; - &nbsp; '.util_make_link_g (strtolower(db_result($result,$i,'unix_group_name')),db_result($result,$i,'group_id'),db_result($result,$i,'group_name'));
-			} else {
-				$proj_name='';
-				$summ_txt='';
-			}
-			$return .= util_make_link ('/forum/forum.php?forum_id='. db_result($result,$i,'forum_id'),'<strong>'. db_result($result,$i,'summary') . '</strong>')
-				.'<br /><em>'. db_result($result,$i,'realname') .' - '.
-					date(_('Y-m-d H:i'),db_result($result,$i,'post_date')) . $proj_name . '</em>
-				'. $summ_txt .'';
-		}
 	}
 	return $return;
 }

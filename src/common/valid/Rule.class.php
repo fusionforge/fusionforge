@@ -74,7 +74,7 @@ class Rule_Comparator extends Rule {
 	 * @access private
 	 */
 	var $ref;
-	function Rule_Comparator($ref) {
+	function __construct($ref) {
 		$this->ref = $ref;
 	}
 }

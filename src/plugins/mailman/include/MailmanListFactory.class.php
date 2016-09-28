@@ -59,11 +59,9 @@ class MailmanListFactory extends FFError {
 
 
 	/**
-	 *  Constructor.
-	 *
 	 *	@param	object	The Group object to which these mailing lists are associated.
 	 */
-	function MailmanListFactory(& $Group) {
+	function __construct(& $Group) {
 		$this->_mailingDAO = new MailmanListDao(CodendiDataAccess::instance());
 		parent::__construct();
 
@@ -72,11 +70,9 @@ class MailmanListFactory extends FFError {
 		}
 		if ($Group->isError()) {
 			$this->setError('MailmanListFactory: '.$Group->getErrorMessage());
-			return false;
+			return;
 		}
 		$this->Group =& $Group;
-
-		return true;
 	}
 
 	/**

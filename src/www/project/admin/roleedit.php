@@ -8,7 +8,7 @@
  * Copyright © 2011
  *	Thorsten Glaser <t.glaser@tarent.de>
  * Copyright 2014, Stéphane-Eymeric Bredthauer
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -79,10 +79,10 @@ if (getStringFromRequest('submit')) {
 	if (($role->getHomeProject() != NULL)
 		&& ($role->getHomeProject()->getID() == $group_id)) {
 		$role_name = trim(getStringFromRequest('role_name'));
-		$public = getIntFromRequest('public') ? true : false ;
+		$public = getIntFromRequest('public') ? true : false;
 	} else {
-		$role_name = $role->getName() ;
-		$public = $role->isPublic() ;
+		$role_name = $role->getName();
+		$public = $role->isPublic();
 	}
 	if (!$role_name) {
 		$error_msg .= _('Missing Role Name');
@@ -110,17 +110,16 @@ if (getStringFromRequest('submit')) {
 }
 
 if (!$role_id) {
-	$title= _('New Role');
+	$title = _('New Role');
 } else {
-	$title= _('Edit Role');
+	$title = _('Edit Role');
 }
 $msg = _('Use this page to edit the permissions attached to each role.  Note that each role has at least as much access as the Anonymous and LoggedIn roles.  For example, if the Anonymous role has read access to a forum, all other roles will have it too.');
 
 project_admin_header(array('title'=> $title, 'group'=>$group_id));
 
 echo '<p>'.$msg.'</p>';
-echo '
-<form action="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;role_id='. $role_id .'" method="post">';
+echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&role_id='.$role_id, 'method' => 'post'));
 
 if ($role->getHomeProject() == NULL
     || $role->getHomeProject()->getID() != $group_id) {
@@ -282,27 +281,23 @@ for ($i=0; $i<count($keys); $i++) {
 									false);
 			echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($j++, true)), $cells);
 		}
-
 //
 //	Handle all other settings for all roles
 //
 	} else {
-
 		echo '<tr '. $HTML->boxGetAltRowStyle($j++) . '>
 		<td colspan="2"><strong>'.$rbac_edit_section_names[$keys[$i]].'</strong></td>
 		<td>';
 		echo html_build_select_box_from_assoc($role->getRoleVals($keys[$i]), "data[".$keys[$i]."][$group_id]", $role->getVal($keys[$i],$group_id), false, false ) ;
 		echo '</td>
 		</tr>';
-
 	}
-
 }
 
 echo $HTML->listTableBottom();
 
-echo '<p><input type="submit" name="submit" value="'._('Submit').'" /></p>
-</form>';
+echo '<p><input type="submit" name="submit" value="'._('Submit').'" /></p>';
+echo $HTML->closeForm();
 
 project_admin_footer();
 

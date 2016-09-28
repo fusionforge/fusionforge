@@ -6,8 +6,8 @@
  * Copyright 2002, Tim Perdue - GForge, LLC
  * Copyright 2010 (c) Franck Villaume - Capgemini
  * Copyright (C) 2010-2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013-2015, Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of National Education
+ * Copyright 2013-2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -32,7 +32,7 @@ require_once $gfwww.'news/news_utils.php';
 require_once $gfcommon.'forum/ForumAdmin.class.php';
 require_once $gfcommon.'forum/AttachManager.class.php';
 
-function forum_header($params) {
+function forum_header($params = array()) {
 	global $HTML, $group_id, $forum_id, $f, $group_forum_id;
 
 	if ($group_forum_id) {
@@ -136,7 +136,7 @@ function forum_header($params) {
 		if ($f) {
 			if ($f->isMonitoring()) {
 				echo util_make_link('/forum/monitor.php?forum_id='.$forum_id.'&group_id='.$group_id.'&stop=1',
-								 html_image('ic/xmail16w.png').' '._('Stop Monitoring')).' | ';
+								 html_image('ic/xmail16w.png').' '._('Stop monitoring')).' | ';
 			} else {
 				echo util_make_link('/forum/monitor.php?forum_id='.$forum_id.'&group_id='.$group_id.'&start=1',
 							 html_image('ic/mail16w.png').' '._('Monitor Forum')).' | ';
@@ -150,7 +150,7 @@ function forum_header($params) {
 
 	if ($f && $forum_id) {
 		echo util_make_link ('/forum/new.php?forum_id='.$forum_id.'&group_id='.$group_id,
-					 html_image('ic/write16w.png','20','20',array('alt'=>_('Start New Thread'))) .' '.
+					 html_image('ic/write16w.png', 20, 20, array('alt'=>_('Start New Thread'))) .' '.
 					 _('Start New Thread'));
 	}
 }
@@ -249,8 +249,7 @@ class ForumHTML extends FFError {
 		$msgforum =& $msg->getForum();
 		$fa = new ForumAdmin($msgforum->Group->getID());
 		$url = util_make_uri('/forum/message.php?msg_id='. $msg->getID() .'&amp;group_id='.$group_id);
-		$ret_val =
-		'<table class="fullwidth">
+		$ret_val = $HTML->listTableTop().'
 			<tr>
 				<td class="tablecontent top" style="white-space: nowrap;">';
 
@@ -265,7 +264,7 @@ class ForumHTML extends FFError {
 		$ret_val .= ' on '.date('Y-m-d H:i',$msg->getPostDate());
 		$ret_val .= '</td><td class="tablecontent align-right">';
 		$ret_val .= '<a href="'.$url.'">[forum:'.$msg->getID().']</a><br/>';
-		if (forge_check_perm ('forum_admin', $msgforum->Group->getID())) {
+		if (forge_check_perm('forum_admin', $msgforum->Group->getID())) {
 			$ret_val .= $fa->PrintAdminMessageOptions($msg->getID(),$group_id,$msg->getThreadID(),$msgforum->getID());
 		}
 		$ret_val .= $am->PrintAttachLink($msg,$group_id,$msgforum->getID());
@@ -282,8 +281,7 @@ class ForumHTML extends FFError {
 					}
 					$ret_val .= '
 				</td>
-			</tr>
-		</table>';
+			</tr>'.$HTML->listTableBottom();
 		return $ret_val;
 	}
 
@@ -404,7 +402,7 @@ class ForumHTML extends FFError {
 			If there are, it calls itself, incrementing $level
 			$level is used for indentation of the threads.
 		*/
-		global $total_rows,$forum_id,$current_message,$group_id;
+		global $total_rows,$current_message,$group_id, $HTML;
 
 		if (!isset($msg_arr["$msg_id"]))
 			return "";
@@ -420,7 +418,7 @@ class ForumHTML extends FFError {
 				$total_rows++;
 
 				$ret_val .= '
-					<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($total_rows) .'><td style="white-space: nowrap;">';
+					<tr '. $HTML->boxGetAltRowStyle($total_rows) .'><td style="white-space: nowrap;">';
 				/*
 					How far should it indent?
 				*/
@@ -474,6 +472,7 @@ class ForumHTML extends FFError {
 	 * @return	The HTML output echoed
 	 */
 	function showEditForm(&$msg) {
+		global $HTML;
 		$thread_id = $msg->getThreadID();
 		$msg_id = $msg->getID();
 		$posted_by = $msg->getPosterID();
@@ -490,18 +489,18 @@ class ForumHTML extends FFError {
 			echo notepad_func();
 			?>
 			<div style="margin-left: auto; margin-right: auto;">
-			<form id="ForumEditForm" enctype="multipart/form-data" action="<?php echo util_make_url ('/forum/admin/index.php') ?>" method="post">
-			<?php $objid = $this->Forum->getID();?>
+			<?php echo $HTML->openForm(array('id' => 'ForumEditForm', 'enctype' => 'multipart/form-data', 'action' => '/forum/admin/index.php', 'method' => 'post'));
+			$objid = $this->Forum->getID(); ?>
 			<input type="hidden" name="thread_id" value="<?php echo $thread_id; ?>" />
 			<input type="hidden" name="forum_id" value="<?php echo $objid; ?>" />
 			<input type="hidden" name="editmsg" value="<?php echo $msg_id; ?>" />
 			<input type="hidden" name="is_followup_to" value="<?php echo $is_followup_to; ?>" />
-			<input type="hidden" name="form_key" value="<?php echo form_generate_key();?>">
-			<input type="hidden" name="posted_by" value="<?php echo $posted_by;?>">
-			<input type="hidden" name="post_date" value="<?php echo $post_date;?>">
-			<input type="hidden" name="has_followups" value="<?php echo $has_followups;?>">
-			<input type="hidden" name="most_recent_date" value="<?php echo $most_recent_date;?>">
-			<input type="hidden" name="group_id" value="<?php echo $group_id;?>">
+			<input type="hidden" name="form_key" value="<?php echo form_generate_key();?>" />
+			<input type="hidden" name="posted_by" value="<?php echo $posted_by;?>" />
+			<input type="hidden" name="post_date" value="<?php echo $post_date;?>" />
+			<input type="hidden" name="has_followups" value="<?php echo $has_followups;?>" />
+			<input type="hidden" name="most_recent_date" value="<?php echo $most_recent_date;?>" />
+			<input type="hidden" name="group_id" value="<?php echo $group_id;?>" />
 			<fieldset class="fieldset">
 			<legend><?php echo _('Edit Message'); ?></legend>
 			<table><tr><td class="top">
@@ -534,7 +533,7 @@ class ForumHTML extends FFError {
 				<input type="submit" name="cancel" formnovalidate="formnovalidate" value="<?php echo _('Cancel'); ?>" />
 				</p>
 			</td></tr></table></fieldset>
-			</form>
+			<?php echo $HTML->closeForm(); ?>
 			</div>
 			<?php
 		}
@@ -546,7 +545,7 @@ class ForumHTML extends FFError {
 	 * @param string $subject
 	 */
 	function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
-		global $group_id;
+		global $group_id, $HTML;
 
 		$body = '';
 
@@ -559,7 +558,7 @@ class ForumHTML extends FFError {
 			echo notepad_func();
 			?>
 			<div class="align-center">
-			<form id="ForumPostForm" enctype="multipart/form-data" action="<?php echo util_make_url ('/forum/forum.php?forum_id='.$this->Forum->getID().'&amp;group_id='.$group_id); ?>" method="post">
+			<?php echo $HTML->openForm(array('id' => 'ForumPostForm', 'enctype' => 'multipart/form-data', 'action' => '/forum/forum.php?forum_id='.$this->Forum->getID().'&group_id='.$group_id, 'method' => 'post')); ?>
 			<input type="hidden" name="post_message" value="y" />
 			<input type="hidden" name="thread_id" value="<?php echo $thread_id; ?>" />
 			<input type="hidden" name="msg_id" value="<?php echo $is_followup_to; ?>" />
@@ -591,7 +590,7 @@ class ForumHTML extends FFError {
 				//$text_support->displayTextField('body'); ?>
 		<br />
 		<!--		<span class="selected"><?php echo _('HTML tags will display in your post as text'); ?></span> -->
-		<p>
+		<br />
 				<?php $this->LinkAttachForm();?>
 
 		<p><?php
@@ -609,7 +608,7 @@ class ForumHTML extends FFError {
 	</tr>
 </table>
 </fieldset>
-</form>
+<?php echo $HTML->closeForm(); ?>
 </div>
 			<?php
 

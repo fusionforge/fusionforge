@@ -131,7 +131,7 @@ if (!$res_new || db_numrows($res_new) < 1) {
 		echo '<tr class="content"><td>';
         if ($offset != 0) {
         	print '<a href="'.util_make_url ('/new/?offset='.($offset-20)).'">'.
-				html_image("t2.png","15","15").
+				html_image("t2.png", 15, 15).
 			' <strong>'._('Newer Releases').'</strong></a>';
         } else {
         	print '&nbsp;';
@@ -140,7 +140,7 @@ if (!$res_new || db_numrows($res_new) < 1) {
 	echo '</td><td colspan="2" style="text-align:right">"';
 	if (db_numrows($res_new)>$rows) {
 		print '<a href="'.util_make_url ('/new/?offset='.($offset+20).'"><strong>'._('Older Releases').'</strong> ') .
-			html_image("t.png","15","15") .
+			html_image("t.png", 15, 15) .
 		'</a>';
 	} else {
 		print "&nbsp;";

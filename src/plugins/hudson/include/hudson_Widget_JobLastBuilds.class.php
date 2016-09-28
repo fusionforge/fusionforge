@@ -28,7 +28,7 @@ class hudson_Widget_JobLastBuilds extends HudsonJobWidget {
 
 	var $content;
 
-	function hudson_Widget_JobLastBuilds($owner_type, $owner_id) {
+	function __construct($owner_type, $owner_id) {
 		$request =& HTTPRequest::instance();
 		if ($owner_type == WidgetLayoutManager::OWNER_TYPE_USER) {
 			$this->widget_id = 'plugin_hudson_my_joblastbuilds';
@@ -37,7 +37,7 @@ class hudson_Widget_JobLastBuilds extends HudsonJobWidget {
 			$this->widget_id = 'plugin_hudson_project_joblastbuilds';
 			$this->group_id = $request->get('group_id');
 		}
-		$this->Widget($this->widget_id);
+		parent::__construct($this->widget_id);
 		$this->setOwner($owner_id, $owner_type);
 		if ($this->widget_id == 'plugin_hudson_project_joblastbuilds' && forge_check_perm('hudson', $this->group_id, 'read')) {
 			$this->content['title'] = '';

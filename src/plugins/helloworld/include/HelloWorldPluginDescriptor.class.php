@@ -25,7 +25,7 @@ require_once 'common/plugin/PluginDescriptor.class.php';
 
 class HelloWorldPluginDescriptor extends PluginDescriptor {
 
-    function HelloWorldPluginDescriptor() {
-        $this->PluginDescriptor(_('HelloWorld'), 'v1.0', _('HelloWorld integration in the forge'));
+    function __construct() {
+        parent::__construct(_('HelloWorld'), 'v1.0', _('HelloWorld integration in the forge'));
     }
 }

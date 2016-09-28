@@ -4,6 +4,7 @@
  *
  * Copyright 2010 (c) FusionForge Team
  * Copyright 2015, Franck Villaume - TrivialDev
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -37,74 +38,70 @@ $browse_instructions = getStringFromRequest('browse_instructions', $ath->getBrow
 //	FORM TO UPDATE ARTIFACT TYPES
 //
 $ath->adminHeader(array('title'=>sprintf(_('Update settings for %s'),
-	$ath->getName())));
+	$ath->getName()),
+	'modal'=>1));
 echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID(), 'method' => 'post'));
-?>
-	<p>
-		<input type="hidden" name="update_type" value="y" />
-		<?php echo _('<strong>Name:</strong> (examples: meeting minutes, test results, RFP Docs)') ?><br />
-		<?php if ($ath->getDataType()) {
-			echo $ath->getName();
-		} else {
-			?>
-			<input type="text" name="name" value="<?php echo $ath->getName(); ?>" />
-			<?php
-		}
-		?>
-	</p>
-	<p>
-		<label for="description">
-			<strong><?php echo _('Description').utils_requiredField()._(':'); ?></strong><br />
-		</label>
-		<?php if ($ath->getDataType()) {
-			echo $ath->getDescription();
-		} else {
-			?>
-			<input type="text" id="description" name="description" required="required" value="<?php echo $ath->getDescription(); ?>" size="50" />
-			<?php
-		}
-		?>
-	</p>
-	<p>
-		<label for="email_address">
-			<strong><?php echo _('Send email on new submission to address')._(':'); ?></strong><br />
-		</label>
-		<input type="text" id="email_address" name="email_address" value="<?php echo $email_address; ?>" />
-	</p>
-	<p>
-		<input type="checkbox" id="email_all" name="email_all" value="1" <?php echo (($email_all)?'checked="checked"':''); ?> />
-		<label for="email_all">
-			<strong><?php echo _('Send email on all changes') ?></strong>
-		</label>
-	</p>
-	<p>
-		<label for="due_period">
-			<strong><?php echo _('Days till considered overdue')._(':'); ?></strong><br />
-		</label>
-		<input type="number" id="due_period" name="due_period" value="<?php echo $due_period; ?>" />
-	</p>
-	<p>
-		<label for="status_timeout">
-			<strong><?php echo _('Days till pending tracker items time out')._(':'); ?></strong><br />
-		</label>
-		<input type="number" id="status_timeout" name="status_timeout"  value="<?php echo $status_timeout; ?>" />
-	</p>
-	<p>
-		<label for="submit_instructions">
-			<strong><?php echo _('Free form text for the “Submit New” page')._(':'); ?></strong><br />
-		</label>
-		<textarea id="submit_instructions" name="submit_instructions" rows="10" cols="55"><?php echo $submit_instructions; ?></textarea>
-	</p>
-	<p>
-		<label for="browse_instructions">
-			<strong><?php echo _('Free form text for the Browse page')._(':'); ?></strong><br />
-		</label>
-		<textarea id="browse_instructions" name="browse_instructions" rows="10" cols="55"><?php echo $browse_instructions; ?></textarea>
-	</p>
-	<p>
-		<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" />
-	</p>
-	<?php
+
+echo html_e('input', array('type'=>'hidden', 'name'=>'update_type', 'value'=>'y'));
+
+echo html_ao('p');
+if ($ath->getDataType()) {
+	echo html_e('strong',array(), _('Name')._(':')).' '._('(examples: meeting minutes, test results, RFP Docs)').html_e('br');
+	echo $ath->getName();
+} else  {
+	echo html_e('label', array('for'=>'name'), html_e('strong',array(), _('Name')._(':')).' '._('(examples: meeting minutes, test results, RFP Docs)').utils_requiredField()).html_e('br');
+	echo html_e('input', array('type'=>'text', 'name'=>'name', 'value'=>$ath->getName(), 'required'=>'required'));
+}
+echo html_ac(html_ap()-1);
+
+echo html_ao('p');
+if ($ath->getDataType()) {
+	echo html_e('strong',array(), _('Description')._(':')).html_e('br');
+	echo $ath->getDescription();
+} else  {
+	echo html_e('label', array('for'=>'description'), html_e('strong',array(),_('Description')._(':')).utils_requiredField()).html_e('br');
+	echo html_e('input', array('type'=>'text', 'name'=>'description', 'value'=>$ath->getDescription(), 'size'=>'50', 'required'=>'required'));
+}
+echo html_ac(html_ap()-1);
+
+echo html_ao('p');
+echo html_e('label', array('for'=>'email_address'), html_e('strong',array(), _('Send email on new submission to address')._(':'))).html_e('br');
+echo html_e('input', array('type'=>'text', 'name'=>'email_address', 'value'=> $email_address));
+echo html_ac(html_ap()-1);
+
+echo html_ao('p');
+if ($email_all) {
+	echo html_e('input', array('type'=>'checkbox', 'name'=>'email_all', 'value'=>'1', 'checked'=>'checked'));
+} else {
+	echo html_e('input', array('type'=>'checkbox', 'name'=>'email_all', 'value'=>'1'));
+}
+echo html_e('label', array('for'=>'email_all'), html_e('strong',array(), _('Send email on all changes')));
+echo html_ac(html_ap()-1);
+
+echo html_ao('p');
+echo html_e('label', array('for'=>'due_period'), html_e('strong',array(),  _('Days till considered overdue')._(':'))).html_e('br');
+echo html_e('input', array('type'=>'text', 'name'=>'due_period', 'value'=>$due_period));
+echo html_ac(html_ap()-1);
+
+echo html_ao('p');
+echo html_e('label', array('for'=>'status_timeout'), html_e('strong',array(), _('Days till pending tracker items time out')._(':'))).html_e('br');
+echo html_e('input', array('type'=>'text', 'name'=>'status_timeout', 'value'=>$status_timeout));
+echo html_ac(html_ap()-1);
+
+echo html_ao('p');
+echo html_e('label', array('for'=>'submit_instructions'), html_e('strong',array(), _('Free form text for the “Submit New” page')._(':'))).html_e('br');
+echo html_e('textarea', array('name'=>'submit_instructions', 'rows'=>'10', 'cols'=>'55'), $submit_instructions, false);
+echo html_ac(html_ap()-1);
+
+echo html_ao('p');
+echo html_e('label', array('for'=>'browse_instructions'), html_e('strong',array(), _('Free form text for the Browse page')._(':'))).html_e('br');
+echo html_e('textarea', array('name'=>'browse_instructions', 'rows'=>'10', 'cols'=>'55'), $browse_instructions, false);
+echo html_ac(html_ap()-1);
+
+echo html_ao('p');
+echo html_e('input', array('type'=>'submit', 'name'=>'post_changes', 'value'=>_('Submit')));
+echo html_ac(html_ap()-1);
+
 echo $HTML->closeForm();
 	$ath->footer();
 

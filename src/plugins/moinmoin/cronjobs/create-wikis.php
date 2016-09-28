@@ -1,8 +1,9 @@
 #! /usr/bin/php
 <?php
-/*
+/**
  * Copyright 2010, Olaf Lenz
  * Copyright 2011, Roland Mas
+ * Copyright 2016, Franck Villaume
  *
  * This file is part of FusionForge.
  *
@@ -21,11 +22,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-  /** This script will automatically create MoinMoin instances for
-   projects that do not yet have them.
-
-   It is intended to be started in a cronjob.
-   */
+/**
+ * This script will automatically create MoinMoin instances for
+ * projects that do not yet have them.
+ * It is intended to be started in a cronjob.
+ **/
 
 require_once (dirname(__FILE__) . '/../../../www/env.inc.php');
 require_once $gfcommon.'include/pre.php';
@@ -39,7 +40,7 @@ $project_res = db_query_params ("SELECT g.unix_group_name from groups g, group_p
 if (!$project_res) {
 	$err =  "Error: Database Query Failed: ".db_error();
 	cron_debug($err);
-	cron_entry(23,$err);
+	cron_entry(23, $err);
 	exit;
 }
 
@@ -68,12 +69,10 @@ while ( $row = db_fetch_array($project_res) ) {
 
 if ($need_reload) {
 	// Using restart rather than reload, to avoid late WSGI socket changes during test suite
-	system("invoke-rc.d apache2 restart");
+	cron_reload_apache();
 }
 
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

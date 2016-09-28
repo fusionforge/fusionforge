@@ -24,8 +24,8 @@ require_once 'MediaWikiPluginDescriptor.class.php';
 
 class MediaWikiPluginInfo extends PluginInfo {
 
-    function MediaWikiPluginInfo(&$plugin) {
-        $this->PluginInfo($plugin);
+    function __construct(&$plugin) {
+        parent::__construct($plugin);
         $this->setPluginDescriptor(new MediaWikiPluginDescriptor());
     }
 

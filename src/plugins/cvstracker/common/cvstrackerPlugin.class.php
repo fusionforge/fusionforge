@@ -29,8 +29,8 @@
  */
 
 class cvstrackerPlugin extends Plugin {
-	function cvstrackerPlugin () {
-		$this->Plugin() ;
+	function __construct() {
+		parent::__construct();
 		$this->name = "cvstracker" ;
 		$this->text = "CVS<->Tracker";
 		$this->hooks[] = "groupisactivecheckbox";
@@ -262,7 +262,7 @@ class cvstrackerPlugin extends Plugin {
 	* @param    String  $params    The params of the Hook
 	*
 	*/
-	function CallHook ($hookname, &$params) {
+	function CallHook($hookname, &$params) {
 		global $group_id, $G_SESSION, $HTML, $aid ;
 
 		if ($hookname == "artifact_extra_detail") {

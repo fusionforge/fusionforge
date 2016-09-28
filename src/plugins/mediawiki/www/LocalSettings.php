@@ -101,6 +101,14 @@ $wgScriptPath       = "/plugins/mediawiki/wiki/$fusionforgeproject" ;
 $wgEmergencyContact = forge_get_config('admin_email');
 $wgPasswordSender = forge_get_config('admin_email');
 
+function ff_mw_db_name($s) {
+	$s = str_replace('-', '_', $s);
+	$s = preg_replace_callback('/[^A-Za-z0-9_]/', function ($match) {
+		return sprintf('$%02X', ord($match[0]));
+	    }, $s);
+	return $s;
+}
+
 $wgDBtype           = "forge";
 $wgDBserver         = forge_get_config('database_host') ;
 if (forge_get_config('mw_dbtype', 'mediawiki')=='mysql'){
@@ -115,8 +123,8 @@ $wgDBpassword       = forge_get_config('database_password') ;
 $wgDBadminuser           = forge_get_config('database_user') ;
 $wgDBadminpassword       = forge_get_config('database_password') ;
 $wgDBport           = forge_get_config('database_port') ;
-$wgDBmwschema       = str_replace ('-', '_', "plugin_mediawiki_$fusionforgeproject") ;
-$wgDBts2schema      = str_replace ('-', '_', "plugin_mediawiki_$fusionforgeproject") ;
+$wgDBmwschema       = 'plugin_mediawiki_' . ff_mw_db_name($fusionforgeproject);
+$wgDBts2schema      = 'plugin_mediawiki_' . ff_mw_db_name($fusionforgeproject);
 $wgMainCacheType = CACHE_NONE;
 $wgMemCachedServers = array();
 

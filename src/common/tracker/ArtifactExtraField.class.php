@@ -5,6 +5,7 @@
  * Copyright 2004, Anthony J. Pugliese
  * Copyright 2009, Roland Mas
  * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -39,6 +40,8 @@ define('ARTIFACT_EXTRAFIELDTYPE_INTEGER',10);
 define('ARTIFACT_EXTRAFIELDTYPE_FORMULA',11);
 /* reserved for Evolvis extension, for merge into FusionForge */
 define('ARTIFACT_EXTRAFIELDTYPE_DATETIME',12);
+/* reserved */
+define('ARTIFACT_EXTRAFIELDTYPE_USER',14);
 
 class ArtifactExtraField extends FFError {
 
@@ -57,7 +60,6 @@ class ArtifactExtraField extends FFError {
 	var $data_array;
 
 	/**
-	 * __construct - Constructor
 	 * @param	$ArtifactType
 	 * @param	bool		$data
 	 */
@@ -90,17 +92,23 @@ class ArtifactExtraField extends FFError {
 	 * a tracker.  This function is only used to create rows for boxes
 	 * configured by the admin.
 	 *
-	 * @param	string	$name		Name of the extra field.
-	 * @param	int	$field_type	The type of field - radio, select, text, textarea
-	 * @param	int	$attribute1	For text (size) and textarea (rows)
-	 * @param	int	$attribute2	For text (maxlength) and textarea (cols)
-	 * @param	int	$is_required	True or false whether this is a required field or not.
-	 * @param	string	$alias		Alias for this extra field (optional)
-	 * @param	int	$show100	True or false whether the 100 value is displayed or not
-	 * @param	string	$show100label	The label used for the 100 value if displayed
+	 * @param	string	$name			Name of the extra field.
+	 * @param	int	$field_type		The type of field - radio, select, text, textarea
+	 * @param	int	$attribute1		For text (size) and textarea (rows)
+	 * @param	int	$attribute2		For text (maxlength) and textarea (cols)
+	 * @param	int	$is_required		True or false whether this is a required field or not.
+	 * @param	string	$alias			Alias for this extra field (optional)
+	 * @param	int	$show100		True or false whether the 100 value is displayed or not
+	 * @param	string	$show100label		The label used for the 100 value if displayed
+	 * @param	string	$description		Description used for help text.
+	 * @param	string	$pattern		A regular expression to check the field.
+	 * @param	int	$parent			Parent extra field id.
+	 * @param	int	$autoassign		True or false whether it triggers auto-assignment rules
+	 * @param	int	$is_hidden_on_submit	True or false to display the extrafield in the new artifact submit page
+	 * @param	int	$disabled		True or false to enable/disable the extrafield
 	 * @return	bool	true on success / false on failure.
 	 */
-	function create($name, $field_type, $attribute1, $attribute2, $is_required = 0, $alias = '', $show100 = true, $show100label = 'none') {
+	function create($name, $field_type, $attribute1, $attribute2, $is_required = 0, $alias = '', $show100 = true, $show100label = 'none', $description = '', $pattern = '', $parent = 100, $autoassign = 0, $is_hidden_on_submit = 0, $is_disabled = 0) {
 		//
 		//	data validation
 		//
@@ -140,30 +148,36 @@ class ArtifactExtraField extends FFError {
 				$this->setError(_('This Tracker already uses custom statuses'));
 				return false;
 			}
+		}  elseif ($field_type == ARTIFACT_EXTRAFIELDTYPE_USER) {
+			$show100label='nobody';
 		}
-
-		if ($is_required) {
-			$is_required=1;
-		} else {
-			$is_required=0;
-		}
+		$is_required = ($is_required ? 1 : 0);
+		$autoassign = ($autoassign ? 1 : 0);
+		$is_hidden_on_submit = ($is_hidden_on_submit ? 1 : 0);
+		$is_disabled = ($is_disabled ? 1 : 0);
 
 		if (!($alias = $this->generateAlias($alias,$name))) {
+			$this->setError(_('Unable to generate alias'));
 			return false;
 		}
 
 		db_begin();
-		$result = db_query_params ('INSERT INTO artifact_extra_field_list (group_artifact_id, field_name, field_type, attribute1, attribute2, is_required, alias, show100, show100label)
-			VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)',
+		$result = db_query_params ('INSERT INTO artifact_extra_field_list (group_artifact_id, field_name, field_type, attribute1, attribute2, is_required, alias, show100, show100label, description, pattern, parent, is_hidden_on_submit, is_disabled)
+			VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)',
 					   array ($this->ArtifactType->getID(),
-						  htmlspecialchars($name),
-						  $field_type,
-						  $attribute1,
-						  $attribute2,
-						  $is_required,
-						  $alias,
-						  $show100,
-						  $show100label));
+							  htmlspecialchars($name),
+							  $field_type,
+							  $attribute1,
+							  $attribute2,
+							  $is_required,
+							  $alias,
+							  $show100,
+							  $show100label,
+							  $description,
+							  $pattern,
+							  $parent,
+							  $is_hidden_on_submit,
+							  $is_disabled));
 
 		if ($result && db_affected_rows($result) > 0) {
 			$this->clearError();
@@ -175,8 +189,13 @@ class ArtifactExtraField extends FFError {
 				db_rollback();
 				return false;
 			}
+			if ($autoassign && $this->setAutoAssign()) {
+				$this->setError(_('Unable to set Auto Assign Field')._(':').db_error());
+				return false;
+			}
 			if ($field_type == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 				if (!$this->ArtifactType->setCustomStatusField($id)) {
+					$this->setError(_('Unable to set Custom Status Field')._(':').db_error());
 					db_rollback();
 					return false;
 				} else {
@@ -185,18 +204,18 @@ class ArtifactExtraField extends FFError {
 					//
 					$ao = new ArtifactExtraFieldElement($this);
 					if (!$ao || !is_object($ao)) {
-						$feedback .= 'Unable to create ArtifactExtraFieldElement Object';
+						$this->setError(_('Unable to create ArtifactExtraFieldElement Object'));
 						db_rollback();
 						return false;
 					} else {
 						if (!$ao->create('Open', '1')) {
-							$feedback .= _('Insert Error')._(': ').$ao->getErrorMessage();
+							$this->setError(_('Insert Error')._(': ').$ao->getErrorMessage());
 							$ao->clearError();
 							db_rollback();
 							return false;
 						}
 						if (!$ao->create('Closed', '2')) {
-							$feedback .= _('Insert Error')._(': ').$ao->getErrorMessage();
+							$this->setError(_('Insert Error')._(': ').$ao->getErrorMessage());
 							$ao->clearError();
 							db_rollback();
 							return false;
@@ -273,6 +292,15 @@ class ArtifactExtraField extends FFError {
 	}
 
 	/**
+	 * getDescription - get the description.
+	 *
+	 * @return	string	The description.
+	 */
+	function getDescription() {
+		return $this->data_array['description'];
+	}
+
+	/**
 	 * getAttribute1 - get the attribute1 field.
 	 *
 	 * @return	int	The first attribute.
@@ -288,6 +316,67 @@ class ArtifactExtraField extends FFError {
 	 */
 	function getAttribute2() {
 		return $this->data_array['attribute2'];
+	}
+
+	/**
+	 * getPattern - get the pattern for text field.
+	 *
+	 * @return	string	The pattern.
+	 */
+	function getPattern() {
+		return $this->data_array['pattern'];
+	}
+
+	/**
+	 * getParent - get the parent field id for select/multiselect/radio/check field.
+	 *
+	 * @return	string	The parent.
+	 */
+	function getParent() {
+		return $this->data_array['parent'];
+	}
+
+	/**
+	 * getChildren - get children fields id for a select/multiselect/radio/check field.
+	 *
+	 * @return	array	Children.
+	 */
+	function getChildren() {
+
+		$id = $this->getID();
+		$return = array();
+		$res = db_query_params ('SELECT extra_field_id FROM artifact_extra_field_list WHERE parent=$1',
+				array ($id)) ;
+		if (!$res) {
+			$this->setError(_('Invalid ArtifactExtraField ID'));
+			return $return;
+		}
+		while ($row = db_fetch_array($res)) {
+			$return[] = $row['extra_field_id'];
+		}
+		return $return;
+	}
+
+	/**
+	 * getProgeny - get progeny fields id for a select/multiselect/radio/check field.
+	 *
+	 * @return	array	Progeny.
+	 */
+	function getProgeny() {
+		$return = array();
+		$childrenArr = $this->getChildren();
+		if (is_array($childrenArr)) {
+			$return = $childrenArr;
+			$at = $this->ArtifactType;
+			foreach ($childrenArr as $child) {
+				$childObj = new ArtifactExtraField($at,$child);
+				$childProgenyArr = $childObj->getProgeny();
+				if (is_array($childProgenyArr)) {
+					$return = array_merge($return, $childProgenyArr);
+				}
+			}
+		}
+		return $return;
 	}
 
 	/**
@@ -337,6 +426,56 @@ class ArtifactExtraField extends FFError {
 	}
 
 	/**
+	 * is_hidden_on_submit - whether this field is hidden on a new submission or not.
+	 *
+	 * @return	boolean	required.
+	 */
+	function is_hidden_on_submit() {
+		return $this->data_array['is_hidden_on_submit'];
+	}
+
+	/**
+	 * is_disabled - whether this field is disabled or not.
+	 *
+	 * @return	boolean	required.
+	 */
+	function is_disabled() {
+		return $this->data_array['is_disabled'];
+	}
+
+	/**
+	 * isAutoAssign
+	 *
+	 * @return	boolean	assign.
+	 */
+	function isAutoAssign() {
+		if ($this->getArtifactType()->getAutoAssignField() == $this->getID()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	/**
+	 * setAutoAssign - set this field that triggers auto-assignment rules.
+	 *
+	 * @return	boolean
+	 */
+	function setAutoAssign() {
+		return $this->getArtifactType()->setAutoAssignField($this->getID());
+	}
+
+	/**
+	 * unsetAutoAssign - unset this field that triggers auto-assignment rules.
+	 *
+	 * @return	boolean
+	 */
+	function unsetAutoAssign() {
+		return $this->getArtifactType()->setAutoAssignField(100);
+	}
+
+	/**
 	 * getAvailableTypes - the types of text fields and their names available.
 	 *
 	 * @return	array	types.
@@ -351,7 +490,8 @@ class ArtifactExtraField extends FFError {
 			ARTIFACT_EXTRAFIELDTYPE_TEXTAREA => _('Text Area'),
 			ARTIFACT_EXTRAFIELDTYPE_STATUS => _('Status'),
 			ARTIFACT_EXTRAFIELDTYPE_RELATION => _('Relation between artifacts'),
-			ARTIFACT_EXTRAFIELDTYPE_INTEGER => _('Integer')
+			ARTIFACT_EXTRAFIELDTYPE_INTEGER => _('Integer'),
+			ARTIFACT_EXTRAFIELDTYPE_USER => _('User Select Box')
 			);
 	}
 
@@ -380,6 +520,49 @@ class ArtifactExtraField extends FFError {
 	}
 
 	/**
+	 * getAllowedValues - Get the list of allowed values for this extra field
+	 *
+	 * @param	string|array	$parentValues	Id or id list of selected parent values.
+	 * @return	array|bool
+	 */
+	function getAllowedValues($parentValues) {
+
+		$parentId = $this->getParent();
+		if ($parentId=='100') {
+			return false;
+		}
+		if ($this->getType() != ARTIFACT_EXTRAFIELDTYPE_SELECT &&
+				$this->getType() != ARTIFACT_EXTRAFIELDTYPE_MULTISELECT &&
+				$this->getType() != ARTIFACT_EXTRAFIELDTYPE_RADIO &&
+				$this->getType() != ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) {
+			return false;
+		}
+		if (empty($parentValues) || $parentValues=='100') {
+			return false;
+		}
+
+		if (is_array($parentValues)) {
+			if (count($parentValues)==1 && implode('',$parentValues)=='100' ) {
+				return false;
+			}
+			$res = db_query_params ('SELECT child_element_id FROM artifact_extra_field_elements
+										INNER JOIN artifact_extra_field_elements_dependencies ON child_element_id = element_id
+										WHERE extra_field_id=$1 AND parent_element_id IN ($2)',
+					array ($this->getID(), implode(', ', $parentValues)));
+		} else {
+			$res = db_query_params ('SELECT child_element_id FROM artifact_extra_field_elements
+										INNER JOIN artifact_extra_field_elements_dependencies ON child_element_id = element_id
+										WHERE extra_field_id=$1 AND parent_element_id=$2',
+					array ($this->getID(), $parentValues));
+		}
+		$return = array();
+		while ($row = db_fetch_array($res)) {
+			$return[] = $row['child_element_id'];
+		}
+		return $return;
+	}
+
+	/**
 	 * update - update a row in the table used to store box names
 	 * for a tracker.  This function is only to update rowsf
 	 * for boxes configured by the admin.
@@ -391,9 +574,12 @@ class ArtifactExtraField extends FFError {
 	 * @param	string	$alias		Alias for this field
 	 * @param	int	$show100	True or false whether the 100 value is displayed or not
 	 * @param	string	$show100label	The label used for the 100 value if displayed
+	 * @param	string	$description	Description used for help text.
+	 * @param	string	$pattern	A regular expression to check the field.
+	 * @param	int	$parent		Parent extra field id.
 	 * @return	bool	success.
 	 */
-	function update($name, $attribute1, $attribute2, $is_required = 0, $alias = "", $show100 = true, $show100label = 'none') {
+	function update($name, $attribute1, $attribute2, $is_required = 0, $alias = "", $show100 = true, $show100label = 'none', $description = '', $pattern='', $parent=100, $autoassign=0, $is_hidden_on_submit=0, $is_disabled=0) {
 		if (!forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
@@ -405,6 +591,7 @@ class ArtifactExtraField extends FFError {
 			$this->setError(_('A field name is required'));
 			return false;
 		}
+
 		$res = db_query_params ('SELECT field_name FROM artifact_extra_field_list
 				WHERE field_name=$1 AND group_artifact_id=$2 AND extra_field_id !=$3',
 			array($name,
@@ -414,11 +601,12 @@ class ArtifactExtraField extends FFError {
 			$this->setError(_('Field name already exists'));
 			return false;
 		}
-		if ($is_required) {
-			$is_required=1;
-		} else {
-			$is_required=0;
-		}
+
+		$is_required = ($is_required ? 1 : 0);
+		$autoassign = ($autoassign ? 1 : 0);
+		$is_hidden_on_submit = ($is_hidden_on_submit ? 1 : 0);
+		$is_disabled = ($is_disabled ? 1 : 0);
+		$parent = (is_integer($parent) ? $parent : 100);
 
 		if (!($alias = $this->generateAlias($alias,$name))) {
 			return false;
@@ -426,24 +614,46 @@ class ArtifactExtraField extends FFError {
 
 		$result = db_query_params ('UPDATE artifact_extra_field_list
 			SET field_name = $1,
-			attribute1 = $2,
-			attribute2 = $3,
-			is_required = $4,
-			alias = $5,
-			show100 = $6,
-			show100label = $7
-			WHERE extra_field_id = $8
-			AND group_artifact_id = $9',
+			description = $2,
+			attribute1 = $3,
+			attribute2 = $4,
+			is_required = $5,
+			alias = $6,
+			show100 = $7,
+			show100label = $8,
+			pattern = $9,
+			parent = $10,
+			is_hidden_on_submit = $11,
+			is_disabled = $12
+			WHERE extra_field_id = $13
+			AND group_artifact_id = $14',
 					   array (htmlspecialchars($name),
-						  $attribute1,
-						  $attribute2,
-						  $is_required,
-						  $alias,
-						  $show100,
-						  $show100label,
-						  $this->getID(),
-						  $this->ArtifactType->getID())) ;
+							  $description,
+							  $attribute1,
+							  $attribute2,
+							  $is_required,
+							  $alias,
+							  $show100,
+							  $show100label,
+							  $pattern,
+							  $parent,
+							  $is_hidden_on_submit,
+							  $is_disabled,
+							  $this->getID(),
+							  $this->ArtifactType->getID())) ;
 		if ($result && db_affected_rows($result) > 0) {
+			if ($autoassign && !$this->isAutoAssign()) {
+				if (!$this->setAutoAssign()) {
+					$this->setError(_('Unable to set Auto Assign Field')._(':').db_error());
+					return false;
+				}
+			}
+			if (!$autoassign && $this->isAutoAssign()) {
+				if (!$this->unsetAutoAssign()) {
+					$this->setError(_('Unable to unset Auto Assign Field')._(':').db_error());
+					return false;
+				}
+			}
 			return true;
 		} else {
 			$this->setError(db_error());
@@ -476,6 +686,12 @@ class ArtifactExtraField extends FFError {
 				if ($result) {
 					if ($this->getType() == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 						if (!$this->ArtifactType->setCustomStatusField(0)) {
+							db_rollback();
+							return false;
+						}
+					}
+					if ($this->isAutoAssign()) {
+						if (!$this->unsetAutoAssign()) {
 							db_rollback();
 							return false;
 						}

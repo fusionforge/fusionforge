@@ -22,9 +22,9 @@
  */
 
 class twitterPlugin extends ForgeAuthPlugin {
-	public function __construct() {
+	function __construct() {
 
-		$this->ForgeAuthPlugin() ;
+		parent::__construct();
 
 		$this->name = 'twitter';
 		$this->text = 'Twitter'; // To show in the tabs, use...

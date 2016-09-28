@@ -296,7 +296,7 @@ class WidgetLayoutManager {
 			$action = 'widget';
 		}
 		echo $HTML->html_list($elementsLi, array('class' => 'widget_toolbar'));
-		echo $HTML->openForm(array('action' => util_make_uri('/widgets/updatelayout.php?owner='.$owner_type.$owner_id.'&action='.$action.'&layout_id='.$layout_id), 'method' => 'post'));
+		echo $HTML->openForm(array('action' => '/widgets/updatelayout.php?owner='.$owner_type.$owner_id.'&action='.$action.'&layout_id='.$layout_id, 'method' => 'post'));
 		if ($update_layout) {
 			?>
 			<script type='text/javascript'>//<![CDATA[
@@ -874,6 +874,9 @@ class WidgetLayoutManager {
 
 	/**
 	 * compute the differences between two arrays
+	 * @param array $tab1
+	 * @param array $tab2
+	 * @return array
 	 */
 	function _array_diff_names($tab1, $tab2) {
 		$diff = array();

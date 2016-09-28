@@ -2,7 +2,7 @@
 /**
  * headermenu : viewProjectConfiguration page
  *
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -88,7 +88,7 @@ if (sizeof($linksArray)) {
 
 echo html_e('h2', array(), _('Add new tab'));
 echo $HTML->information(_('You can add your own tabs in the menu bar with the form below.'));
-echo $HTML->openForm(array('method' => 'POST', 'name' => 'addLink', 'action' => util_make_uri('/plugins/'.$headermenu->name.'/?type=projectadmin&group_id='.$group_id.'&action=addLink')));
+echo $HTML->openForm(array('method' => 'POST', 'name' => 'addLink', 'action' => '/plugins/'.$headermenu->name.'/?type=projectadmin&group_id='.$group_id.'&action=addLink'));
 echo $HTML->listTableTop();
 $cells = array();
 $cells[] = array(_('Displayed Name').utils_requiredField()._(':'), 'style' => 'text-align:right');

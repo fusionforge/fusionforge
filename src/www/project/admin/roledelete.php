@@ -4,7 +4,7 @@
  *
  * Copyright 2010 (c) Alcatel-Lucent
  * Copyright 2011, Roland Mas
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2016, Franck Villaume - TrivialDev
  *
  * @author Alain Peyrat
  * @date 2010-05-18
@@ -34,6 +34,8 @@ $group_id = getIntFromRequest('group_id');
 $role_id = getIntFromRequest('role_id');
 
 session_require_perm ('project_admin', $group_id) ;
+
+global $HTML, $error_msg, $feedback;
 
 if (!$role_id) {
 	session_redirect('/project/admin/users.php?group_id='.$group_id);
@@ -83,7 +85,7 @@ printf(_('You are about to permanently delete role %s'), $role->getName()); ?>
 <td>
 <fieldset>
 <legend><?php echo _('Confirm Delete') ?></legend>
-<form action="<?php echo getStringFromServer('PHP_SELF') ?>?group_id=<?php echo $group_id ?>&amp;role_id=<?php echo $role_id ?>" method="post">
+<?php echo $HTML-> openForm(array('action' => getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&role_id='.$role_id, 'method' => 'post')); ?>
 <p>
 <input id="sure" type="checkbox" value="1" name="sure" />
 <label for="sure">
@@ -94,7 +96,7 @@ printf(_('You are about to permanently delete role %s'), $role->getName()); ?>
 <p>
 <input type="submit" name="submit" value="<?php echo _('Submit') ?>" />
 </p>
-</form>
+<?php echo $HTML->closeForm(); ?>
 </fieldset>
 </td>
 </tr>

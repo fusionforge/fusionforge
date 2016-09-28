@@ -29,12 +29,12 @@ require_once 'common/include/ProjectManager.class.php';
 require_once 'common/include/rdfutils.php';
 
 class doaprdfPlugin extends Plugin {
-	public function __construct($id=0) {
-		$this->Plugin($id) ;
+	function __construct($id=0) {
+		parent::__construct($id) ;
 		$this->name = "doaprdf";
 		$this->text = _("DoaPRDF!"); // To show in the tabs, use...
 		$this->pkg_desc =
-_("This plugin provides DOAP RDF documents for projects on /projects URLs 
+_("This plugin provides DOAP RDF documents for projects on /projects URLs
 with content-negotiation (application/rdf+xml).");
 		$this->_addHook("script_accepted_types");
 		$this->_addHook("content_negociated_project_home");

@@ -5,7 +5,7 @@
  * Copyright 2010, Antoine Mercadal - Capgemini
  * Copyright 2010, Marc-Etienne Vargenau, Alcatel-Lucent
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2011-2015, Franck Villaume - TrivialDev
+ * Copyright 2011-2016, Franck Villaume - TrivialDev
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -34,9 +34,9 @@ class Theme_Funky extends Layout {
 		$this->imgroot = $this->imgbaseurl;
 		$this->addStylesheet('/themes/funky/css/theme.css');
 		$this->addStylesheet('/themes/funky/css/theme-pages.css');
-		$this->addStylesheet('/scripts/jquery-ui/css/overcast/jquery-ui-1.11.2.css');
-		$this->addStylesheet('/scripts/jquery-ui/css/overcast/jquery-ui.structure-1.11.2.css');
-		$this->addStylesheet('/scripts/jquery-ui/css/overcast/jquery-ui.theme-1.11.2.css');
+		$this->addStylesheet('/scripts/jquery-ui/css/overcast/jquery-ui-1.12.1.css');
+		$this->addStylesheet('/scripts/jquery-ui/css/overcast/jquery-ui.structure-1.12.1.css');
+		$this->addStylesheet('/scripts/jquery-ui/css/overcast/jquery-ui.theme-1.12.1.css');
 	}
 
 	function bodyHeader($params) {
@@ -319,47 +319,6 @@ class Theme_Funky extends Layout {
 	}
 
 	/**
-	 * multiTableRow() - create a multilevel row in a table
-	 *
-	 * @param	array	$row_attrs	the row attributes
-	 * @param	array	$cell_data	the array of cell data, each element is an array,
-	 *					the first item being the text,
-	 *					the subsequent items are attributes (dont include
-	 *					the bgcolor for the title here, that will be
-	 *					handled by $istitle
-	 * @param	bool	$istitle	is this row part of the title ?
-	 *
-	 * @return string
-	 */
-	function multiTableRow($row_attrs, $cell_data, $istitle = false) {
-		$ap = html_ap();
-		(isset($row_attrs['class'])) ? $row_attrs['class'] .= ' ff' : $row_attrs['class'] = 'ff';
-		if ( $istitle ) {
-			$row_attrs['class'] .= ' align-center';
-		}
-		$return = html_ao('tr', $row_attrs);
-		for ( $c = 0; $c < count($cell_data); $c++ ) {
-			$locAp = html_ap();
-			$cellAttrs = array();
-			foreach (array_slice($cell_data[$c],1) as $k => $v) {
-				$cellAttrs[$k] = $v;
-			}
-			(isset($cellAttrs['class'])) ? $cellAttrs['class'] .= ' ff' : $cellAttrs['class'] = 'ff';
-			$return .= html_ao('td', $cellAttrs);
-			if ( $istitle ) {
-				$return .= html_ao('strong');
-			}
-			$return .= $cell_data[$c][0];
-			if ( $istitle ) {
-				$return .= html_ac(html_ap() -1);
-			}
-			$return .= html_ac($locAp);
-		}
-		$return .= html_ac($ap);
-		return $return;
-	}
-
-	/**
 	 * headerJS() - creates the JS headers and calls the plugin javascript hook
 	 * @todo generalize this
 	 */
@@ -399,13 +358,14 @@ class Theme_Funky extends Layout {
 				setInterval(function() {
 						setTimeout("jQuery(\'.feedback\').hide(\'slow\')", 5000);
 					}, 5000);
+				jQuery("button").button();
+				jQuery(":submit").button();
+				jQuery(":reset").button();
+				jQuery(":button").button();
 			});
 			//]]>'."\n";
-		echo html_ac(html_ap() -1);
 		if ($use_tooltips) {
-			echo html_ao('script', array('type' => 'text/javascript'));
-			echo '	//<![CDATA[
-				jQuery(document).ready(
+			echo '	jQuery(document).ready(
 					function() {
 						jQuery(document).tooltip({
 								show: {
@@ -419,10 +379,9 @@ class Theme_Funky extends Layout {
 									}
 								});
 					}
-				);
-			//]]>'."\n";
-			echo html_ac(html_ap() -1);
+				);'."\n";
 		}
+		echo html_ac(html_ap() -1);
 	}
 }
 

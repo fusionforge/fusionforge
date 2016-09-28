@@ -57,21 +57,18 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	var $selectedParentSections = array();
 
 	/**
-	 * Constructor
-	 *
 	 * @param string $words words we are searching for
 	 * @param int $offset offset
 	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
 	 * @param int $groupId group id
-	 *
 	 */
-	function AdvancedSearchHtmlSearchRenderer($words, $offset, $isExact, $groupId) {
+	function __construct($words, $offset, $isExact, $groupId) {
 		$this->groupId = $groupId;
 		$this->words = $words;
 		$this->isExact = $isExact;
 		$searchQuery =& $this->searchQuery;
 
-		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_ADVANCED, $words, $isExact, $searchQuery, $groupId);
+		parent::__construct(SEARCH__TYPE_IS_ADVANCED, $words, $isExact, $searchQuery, $groupId);
 	}
 
 	/**
@@ -97,7 +94,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	/**
 	 * writeBody - write the Body of the output
 	 */
-	function writeBody() {
+	function writeBody($withpanel = true) {
 		global $HTML;
 		if (strlen($this->words) < 3) {
 			echo $HTML->error_msg(_('Error') . _(': ') . _('Search must be at least three characters'));
@@ -334,11 +331,11 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	}
 
 	function getAdvancedSearchBox($sectionsArray, $group_id, $words, $isExact) {
+		global $HTML;
 		$res = '';
 		// display the searchmask
-		$res .= '
-			<form class="ff" name="advancedsearch" action="'.getStringFromServer('PHP_SELF').'" method="post">
-			<input class="ff" type="hidden" name="search" value="1"/>
+		$res .= $HTML->openForm(array('class' => 'ff', 'name' => 'advancedsearch', 'action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
+		$res .= '<input class="ff" type="hidden" name="search" value="1"/>
 			<input class="ff" type="hidden" name="group_id" value="'.$group_id.'"/>
 			<div align="center"><br />
 			<table id="advsearchinput">
@@ -358,9 +355,8 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 				</tr>
 			</table><br />'
 			. $this->createSubSections($sectionsArray) .'
-			</div>
-		</form>
-		';
+			</div>';
+		$res .= $HTML->closeForm();
 
 		// Add jquery javascript method for select none/all
 		$res .= <<< EOS

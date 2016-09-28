@@ -24,7 +24,7 @@ require_once 'common/widget/WidgetLayoutManager.class.php';
 
 class mantisBT_Widget_ProjectLastIssues extends Widget {
 	function __construct() {
-		$this->Widget('plugin_mantisbt_project_latestissues');
+		parent::__construct('plugin_mantisbt_project_latestissues');
 	}
 
 	function getTitle() {
@@ -65,7 +65,7 @@ class mantisBT_Widget_ProjectLastIssues extends Widget {
 		$arrayBugs = array_slice($arrayBugs, 0, 5);
 		$content = '';
 		if (count($arrayBugs)) {
-			use_javascript('/js/sortable.js');
+			html_use_tablesorter();
 			echo $HTML->getJavascripts();
 			$arrTitle = array(_('ID'), _('Title'), _('Status'), _('Category'));
 			$content .= $HTML->listTableTop($arrTitle, false, 'sortable_widget_mantisbt_listissues full', 'sortable');

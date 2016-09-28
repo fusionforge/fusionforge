@@ -31,9 +31,9 @@ if [ -e /etc/debian_version ]; then
     apt-get update
     apt-get install -y make gettext php5-cli php5-pgsql php-htmlpurifier php-http \
 	libapache2-mpm-itk libapache2-mod-svn \
-	apache2 postgresql libnss-pgsql2 unscd \
+	libapache2-mod-php5 \
+	apache2 postgresql postgresql-contrib libnss-pgsql2 unscd \
 	subversion viewvc python-pycurl git xinetd \
-	mediawiki \
 	php-twig \
 	python-moinmoin libapache2-mod-wsgi python-psycopg2 \
 	unoconv poppler-utils
@@ -45,10 +45,10 @@ else
     backports_rpm
     yum --enablerepo=epel install -y httpd-itk php-twig
     yum install -y gettext php-cli php-pgsql php-process php-mbstring php-pear-HTTP \
-	httpd mod_dav_svn mod_ssl postgresql-server nscd \
+	httpd mod_dav_svn mod_ssl postgresql-server postgresql-contrib nscd \
 	subversion viewvc python-pycurl git gitweb xinetd \
 	moin mod_wsgi python-psycopg2 \
-	unoconv poppler-utils
+	unoconv poppler-utils libreoffice-headless
 fi
 
 (
@@ -58,8 +58,5 @@ fi
         install-plugin-scmsvn install-plugin-scmgit \
         install-plugin-blocks install-plugin-moinmoin \
         install-plugin-online_help install-plugin-taskboard install-plugin-message
-    if [ -e /etc/debian_version ]; then
-	make install-plugin-mediawiki
-    fi
     make post-install
 )

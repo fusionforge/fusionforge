@@ -94,7 +94,7 @@ if (getStringFromRequest('submit')) {
 			$activate_immediately = false;
 		}
 
-		$new_user = new GFUser();
+		$new_user = new FFUser();
 		$register = $new_user->create($unix_name,$firstname,$lastname,$password1,$password2,
 					      $email,$mail_site,$mail_va,$language_id,$timezone,'',0,$theme_id,'',
 					      $address,$address2,$phone,$fax,$title,$ccode,$send_mail);
@@ -140,7 +140,7 @@ if (!isset($ccode) || empty($ccode) || !preg_match('/^[a-zA-Z]{2}$/', $ccode)) {
 }
 
 site_header(array('title'=>_('User Account Registration')));
-echo $HTML->openForm(array('action' => util_make_uri('/account/register.php'), 'method' => 'post'));
+echo $HTML->openForm(array('action' => '/account/register.php', 'method' => 'post'));
 echo html_e('input', array('type' => 'hidden', 'name' => 'form_key', 'value' => form_generate_key()));
 ?>
 <p>
@@ -155,7 +155,15 @@ if (forge_get_config('require_unique_email')) {
     </label>
 </p>
 <p>
-<?php echo _('Password (min. 8 chars)').utils_requiredField()._(':'); ?><br />
+<?php echo _('Password').utils_requiredField()._(':'); ?><br />
+<em>
+<?php printf(_('Minimum 8 characters.')); ?><br/>
+<?php
+if (forge_get_config('check_password_strength')) {
+	printf(_('Must contain at least one uppercase letter, one lowercase, one digit, one non-alphanumeric character.').'<br/>');
+}
+?>
+</em>
     <label for="password1">
         <input id="password1" type="password" required="required" name="password1"/>
     </label>

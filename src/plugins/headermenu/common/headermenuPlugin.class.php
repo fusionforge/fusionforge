@@ -27,7 +27,7 @@ class headermenuPlugin extends Plugin {
 	var $pageid;
 
 	function __construct() {
-		$this->Plugin();
+		parent::__construct();
 		$this->name = 'headermenu';
 		$this->text = _('Menu Tabs Manager');
 		$this->pkg_desc =
@@ -150,7 +150,7 @@ in the main menu (outermenu) or in the project menu (groupmenu).");
 						break;
 					}
 					case 'htmlcode': {
-						$params['DIRS'][] = '/plugins/'.$this->name.'/?type=pageview&pageid='.$link['id_headermenu'];
+						$params['DIRS'][] = '/plugins/'.$this->name.'/?type=pageview&amp;pageid='.$link['id_headermenu'];
 						$params['TITLES'][] = $link['name'];
 						$params['TOOLTIPS'][] = $link['description'];
 						break;
@@ -179,19 +179,19 @@ in the main menu (outermenu) or in the project menu (groupmenu).");
 						break;
 					}
 					case 'htmlcode': {
-						$params['DIRS'][] = '/plugins/'.$this->name.'/?type=pageview&group_id='.$params['group'].'&pageid='.$link['id_headermenu'];
+						$params['DIRS'][] = '/plugins/'.$this->name.'/?type=pageview&amp;group_id='.$params['group'].'&amp;pageid='.$link['id_headermenu'];
 						$params['TITLES'][] = $link['name'];
 						$params['TOOLTIPS'][] = $link['description'];
-						if (isset($params['toptab']) && ($params['toptab'] == '/plugins/'.$this->name.'/?type=pageview&group_id='.$params['group'].'&amp;pageid='.$link['id_headermenu'])) {
+						if (isset($params['toptab']) && ($params['toptab'] == '/plugins/'.$this->name.'/?type=pageview&amp;group_id='.$params['group'].'&amp;pageid='.$link['id_headermenu'])) {
 							$params['selected'] = (count($params['DIRS'])-1);
 						}
 						break;
 					}
 					case 'iframe': {
-						$params['DIRS'][] = '/plugins/'.$this->name.'/?type=iframeview&group_id='.$params['group'].'&pageid='.$link['id_headermenu'];
+						$params['DIRS'][] = '/plugins/'.$this->name.'/?type=iframeview&amp;group_id='.$params['group'].'&amp;pageid='.$link['id_headermenu'];
 						$params['TITLES'][] = $link['name'];
 						$params['TOOLTIPS'][] = $link['description'];
-						if (isset($params['toptab']) && ($params['toptab'] == '/plugins/'.$this->name.'/?type=iframeview&group_id='.$params['group'].'&pageid='.$link['id_headermenu'])) {
+						if (isset($params['toptab']) && ($params['toptab'] == '/plugins/'.$this->name.'/?type=iframeview&amp;group_id='.$params['group'].'&amp;pageid='.$link['id_headermenu'])) {
 							$params['selected'] = (count($params['DIRS'])-1);
 						}
 						break;
@@ -406,7 +406,7 @@ in the main menu (outermenu) or in the project menu (groupmenu).");
 				html_use_jquery();
 				html_use_jqueryui();
 				use_javascript('/plugins/'.$this->name.'/scripts/HeaderMenuController.js');
-				use_javascript('/js/sortable.js');
+				html_use_tablesorter();
 				site_admin_header(array('title'=>_('Site Global Menu Admin'), 'toptab' => ''));
 				$returned = true;
 				break;
@@ -416,12 +416,12 @@ in the main menu (outermenu) or in the project menu (groupmenu).");
 				$link = $this->getLink($this->pageid);
 				$group_id = getIntFromRequest('group_id');
 				if ($group_id) {
-					$params['toptab'] = '/plugins/'.$this->name.'/?type='.$type.'&group_id='.$group_id.'&pageid='.$this->pageid;
+					$params['toptab'] = '/plugins/'.$this->name.'/?type='.$type.'&amp;group_id='.$group_id.'&amp;pageid='.$this->pageid;
 					$params['group'] = $group_id;
 					$params['title'] = $link['name'];
 					site_project_header($params);
 				} else {
-					site_header(array('title'=> $link['name'], 'toptab' => '/plugins/'.$this->name.'/?type='.$type.'&pageid='.$this->pageid));
+					site_header(array('title'=> $link['name'], 'toptab' => '/plugins/'.$this->name.'/?type='.$type.'&amp;pageid='.$this->pageid));
 				}
 				$returned = true;
 				break;
@@ -430,7 +430,7 @@ in the main menu (outermenu) or in the project menu (groupmenu).");
 				html_use_jquery();
 				html_use_jqueryui();
 				use_javascript('/plugins/'.$this->name.'/scripts/HeaderMenuController.js');
-				use_javascript('/js/sortable.js');
+				html_use_tablesorter();
 				$group_id = getIntFromRequest('group_id');
 				$params['toptab'] = 'admin';
 				$params['group'] = $group_id;
@@ -465,5 +465,14 @@ in the main menu (outermenu) or in the project menu (groupmenu).");
 		$user = session_get_user();
 		include $gfplugins.$this->name.'/view/admin/viewProjectConfiguration.php';
 		return true;
+	}
+
+	/**
+	 * getPluginDescription - display the description of this plugin in pluginman admin page
+	 *
+	 * @return	string	the description
+	 */
+	function getPluginDescription() {
+		return _('Get the ability to set new links next to the login menu (headermenu), in the main menu (outermenu) or in the project menu (groupmenu).');
 	}
 }

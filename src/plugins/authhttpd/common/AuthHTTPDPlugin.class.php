@@ -1,6 +1,8 @@
 <?php
-/** External authentication via HTTPD for FusionForge
+/**
+ * External authentication via HTTPD for FusionForge
  * Copyright 2011, Roland Mas
+ * Copyright 2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -26,9 +28,9 @@ require_once $gfcommon.'include/AuthPlugin.class.php';
  *
  */
 class AuthHTTPDPlugin extends ForgeAuthPlugin {
-	function AuthHTTPDPlugin () {
+	function __construct() {
 		global $gfconfig;
-		$this->ForgeAuthPlugin() ;
+		parent::__construct();
 		$this->name = "authhttpd";
 		$this->text = _("HTTPD authentication");
 		$this->pkg_desc =
@@ -54,27 +56,23 @@ FusionForge, for instance where Kerberos is used.");
 	 * @return boolean
 	 */
 	function displayAuthForm(&$params) {
+		global $HTML;
 		if (!$this->isRequired() && !$this->isSufficient()) {
 			return true;
 		}
 		$return_to = $params['return_to'];
 
-		$result = '';
+		$result = html_e('p', array(), _('Cookies must be enabled past this point.'));
 
-		$result .= '<p>';
-		$result .= _('Cookies must be enabled past this point.');
-		$result .= '</p>';
-
-		$result .= '<form action="' . util_make_url('/plugins/authhttpd/post-login.php') . '" method="get">
-<input type="hidden" name="form_key" value="' . form_generate_key() . '"/>
+		$result .= $HTML->openForm(array('action' => '/plugins/'.$this->name.'/post-login.php', 'method' => 'get'));
+		$result .= '<input type="hidden" name="form_key" value="' . form_generate_key() . '"/>
 <input type="hidden" name="return_to" value="' . htmlspecialchars(stripslashes($return_to)) . '" />
 <p><input type="submit" name="login" value="' . _('Login via HTTP authentication') . '" />
-</p>
-</form>' ;
-
+</p>';
+		$result .= $HTML->closeForm();
 		$params['html_snippets'][$this->name] = $result;
 
-		$params['transparent_redirect_urls'][$this->name] = util_make_url('/plugins/authhttpd/post-login.php?return_to='.htmlspecialchars(stripslashes($return_to)));
+		$params['transparent_redirect_urls'][$this->name] = util_make_url('/plugins/'.$this->name.'/post-login.php?return_to='.htmlspecialchars(stripslashes($return_to)));
 	}
 
 	/**
@@ -114,7 +112,7 @@ FusionForge, for instance where Kerberos is used.");
 	}
 
 	/**
-	 * What GFUser is logged in?
+	 * What FFUser is logged in?
 	 * @param unknown_type $params
 	 */
 	function fetchAuthUser(&$params) {

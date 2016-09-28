@@ -26,7 +26,7 @@
 class MantisBTPlugin extends Plugin {
 
 	function __construct() {
-		$this->Plugin();
+		parent::__construct();
 		$this->name = 'mantisbt';
 		$this->text = 'MantisBT'; // To show in the tabs, use...
 		$this->pkg_desc =
@@ -60,18 +60,18 @@ _('Use Mantis Bugtracker as another ticket management tool.');
 			case 'groupmenu': {
 				$group_id = $params['group'];
 				$project = group_get_object($group_id);
-				if (!$project || !is_object($project) || $project->isError() || !$project->isProject()) {
+				if (!$project || !is_object($project) || $project->isError()) {
 					return;
 				}
 				if ($project->usesPlugin($this->name)) {
 					$params['TITLES'][] = $this->text;
-					$params['DIRS'][] = '/plugins/'.$this->name.'/?type=group&group_id=' . $group_id;
+					$params['DIRS'][] = util_make_uri('/plugins/'.$this->name.'/?type=group&group_id=' . $group_id);
 					$params['TOOLTIPS'][] = _('Tickets Management');
 					if (session_loggedin()) {
 						$user = session_get_user();
 						$userperm = $project->getPermission();
 						if ($userperm->isAdmin()) {
-							$params['ADMIN'][] = '/plugins/'.$this->name.'/?type=admin&group_id=' . $group_id;
+							$params['ADMIN'][] = util_make_uri('/plugins/'.$this->name.'/?type=admin&group_id=' . $group_id);
 						}
 					}
 					if (isset($params['toptab'])) {
@@ -225,7 +225,7 @@ _('Use Mantis Bugtracker as another ticket management tool.');
 		$localMantisbtConf = $this->getMantisBTConf($idProjet);
 
 		if (!$localMantisbtConf) {
-			$this->setError('removeProjetMantis::Error' . ' '. _('No project found'));
+			$this->setError('removeProjetMantis::Error' . ' '. _('No project found.'));
 			return false;
 		} else {
 			try {

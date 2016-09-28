@@ -23,15 +23,15 @@
 
 class CVSSyncMailPlugin extends Plugin {
 
-	function CVSSyncMailPlugin () {
-		$this->Plugin() ;
-		$this->name = "cvssyncmail" ;
-		$this->text = "CVS->Syncmail" ;
-		$this->hooks[] = "groupisactivecheckbox" ; // The "use ..." checkbox in editgroupinfo
-		$this->hooks[] = "groupisactivecheckboxpost" ; //
+	function __construct() {
+		parent::__construct();
+		$this->name = "cvssyncmail";
+		$this->text = "CVS->Syncmail";
+		$this->hooks[] = "groupisactivecheckbox"; // The "use ..." checkbox in editgroupinfo
+		$this->hooks[] = "groupisactivecheckboxpost"; //
 	}
 
-	function CallHook ($hookname, &$params) {
+	function CallHook($hookname, &$params) {
 		global $use_cvssyncmailplugin,$G_SESSION,$HTML;
 		$group_id=$params['group'];
 		if ($hookname == "groupisactivecheckbox") {

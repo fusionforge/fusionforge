@@ -4,7 +4,8 @@
  *
  * Copyright 2010 (c) FusionForge Team
  * Copyright 2010 (c) Franck Villaume - Capgemini
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2014,2016, Franck Villaume - TrivialDev
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -34,14 +35,19 @@ global $atid;
 //
 if (getStringFromRequest('add_extrafield')) {
 	$name = getStringFromRequest('name');
+	$description = getStringFromRequest('description');
 	$field_type = getStringFromRequest('field_type');
 	$attribute1 = getStringFromRequest('attribute1');
 	$attribute2 = getStringFromRequest('attribute2');
+	$pattern = getStringFromRequest('pattern');
+	$parent = getStringFromRequest('parent');
 	$is_required = getStringFromRequest('is_required');
 	$alias = getStringFromRequest('alias');
 	$hide100 = getStringFromRequest('hide100');
 	$show100label = getStringFromRequest('show100label');
-
+	$autoassign = getStringFromRequest('autoassign');
+	$is_hidden_on_submit = getStringFromRequest('is_hidden_on_submit');
+	$is_disabled = getStringFromRequest('is_disabled');
 	$ab = new ArtifactExtraField($ath);
 
 	if (!$ab || !is_object($ab)) {
@@ -54,7 +60,7 @@ if (getStringFromRequest('add_extrafield')) {
 		} else {
 			$show100 = 1;
 		}
-		if (!$ab->create($name, $field_type, $attribute1, $attribute2, $is_required, $alias, $show100, $show100label)) {
+		if (!$ab->create($name, $field_type, $attribute1, $attribute2, $is_required, $alias, $show100, $show100label, $description, $pattern, $parent, $autoassign, $is_hidden_on_submit, $is_disabled)) {
 			$error_msg .= _('Error inserting a custom field')._(': ').$ab->getErrorMessage();
 			$ab->clearError();
 		} else {
@@ -227,13 +233,18 @@ if (getStringFromRequest('add_extrafield')) {
 } elseif (getStringFromRequest('update_box')) {
 	$id = getStringFromRequest('id');
 	$name = getStringFromRequest('name');
+	$description = getStringFromRequest('description');
 	$attribute1 = getStringFromRequest('attribute1');
 	$attribute2 = getStringFromRequest('attribute2');
+	$pattern = getStringFromRequest('pattern');
+	$parent = getStringFromRequest('parent');
 	$is_required = getStringFromRequest('is_required');
 	$alias = getStringFromRequest('alias');
 	$hide100 = getStringFromRequest('hide100');
 	$show100label = getStringFromRequest('show100label');
-
+	$autoassign = getStringFromRequest('autoassign');
+	$is_hidden_on_submit = getStringFromRequest('is_hidden_on_submit');
+	$is_disabled = getStringFromRequest('is_disabled');
 	$ac = new ArtifactExtraField($ath, $id);
 	if (!$ac || !is_object($ac)) {
 		$error_msg .= _('Unable to create ArtifactExtraField Object');
@@ -245,7 +256,7 @@ if (getStringFromRequest('add_extrafield')) {
 		} else {
 			$show100 = 1;
 		}
-		if (!$ac->update($name, $attribute1, $attribute2, $is_required, $alias, $show100, $show100label)) {
+		if (!$ac->update($name, $attribute1, $attribute2, $is_required, $alias, $show100, $show100label, $description, $pattern, $parent, $autoassign, $is_hidden_on_submit, $is_disabled)) {
 			$error_msg .= _('Update failed')._(': ').$ac->getErrorMessage();
 			$ac->clearError();
 		} else {
@@ -258,16 +269,14 @@ if (getStringFromRequest('add_extrafield')) {
 //	Update an Element
 //
 } elseif (getStringFromRequest('update_opt')) {
-	$id = getStringFromRequest('id');
-	$name = getStringFromRequest('name');
 	$boxid = getStringFromRequest('boxid');
-
 	$ac = new ArtifactExtraField($ath,$boxid);
 	if (!$ac || !is_object($ac)) {
 		$error_msg .= _('Unable to create ArtifactExtraField Object');
 	} elseif ($ac->isError()) {
 		$error_msg .= $ac->getErrorMessage();
 	} else {
+		$id = getStringFromRequest('id');
 		$ao = new ArtifactExtraFieldElement($ac,$id);
 		if (!$ao || !is_object($ao)) {
 			$error_msg .= _('Unable to create ArtifactExtraFieldElement Object');
@@ -276,16 +285,80 @@ if (getStringFromRequest('add_extrafield')) {
 		} else {
 			$name = getStringFromRequest('name');
 			$status_id = getIntFromRequest('status_id');
-			if (!$ao->update($name,$status_id)) {
+			$autoAssignTo = getStringFromRequest('auto_assign_to');
+			if (!$ao->update($name,$status_id,$autoAssignTo)) {
 				$error_msg .= _('Update failed')._(': ').$ao->getErrorMessage();
 				$ao->clearError();
 			} else {
 				$feedback .= _('Element updated');
+				$parentElements = getArrayFromRequest('parent_elements', array());
+				if (!$ao->saveParentElements($parentElements)) {
+					$error_msg .= _('Update failed')._(': ').$ao->getErrorMessage();
+					$ao->clearError();
+				} else {
+				$feedback .= html_e('br')._('Parent Elements updated');
 				$next = 'add_extrafield';
+				}
 			}
 		}
 	}
 
+//
+//	Update checked elements (add checked, delete uncheked)
+//
+} elseif (getStringFromRequest('update_checked_opt')) {
+	$checkedElts = getStringFromRequest('element');
+	$boxid = getStringFromRequest('boxid');
+	$aef = new ArtifactExtraField($ath,$boxid);
+	if (!$aef || !is_object($aef)) {
+		$error_msg .= _('Unable to create ArtifactExtraField Object');
+	} elseif ($aef->isError()) {
+		$error_msg .= $aef->getErrorMessage();
+	} else {
+		$efValues = $aef->getAvailableValues();
+		$efEltNames = array();
+		foreach ($efValues as $efValue) {
+			$efEltNames [$efValue['element_id']]= $efValue['element_name'];
+		}
+		if (is_array($checkedElts)) {
+			foreach ($checkedElts as $checkedElt) {
+				if (!in_array($checkedElt,$efEltNames)) {
+					$aefe = new ArtifactExtraFieldElement($aef);
+					if (!$aefe || !is_object($aefe)) {
+						$error_msg .= 'Unable to create ArtifactExtraFieldElement Object';
+						//		} elseif ($ao->isError())
+						//			$error_msg .= $ao->getErrorMessage();
+					} else {
+						if (!$aefe->create($checkedElt)) {
+							$error_msg .= _('Insert Error')._(': ').$aefe->getErrorMessage();
+							$aefe->clearError();
+						} else {
+							$feedback .= _('Element inserted').' ';
+						}
+					}
+				}
+			}
+		}
+		if (is_array($efEltNames)) {
+			foreach ($efEltNames as $efEltId=>$efEltName) {
+				if (!in_array($efEltName,$checkedElts)) {
+					$aefe = new ArtifactExtraFieldElement($aef,$efEltId);
+					if (!$aefe || !is_object($aefe)) {
+						$error_msg .= _('Unable to create ArtifactExtraFieldElement Object');
+					} else {
+						if (!$aefe->delete()) {
+							$error_msg .= _('Error deleting an element')._(': ').$aefe->getErrorMessage();
+							$aefe->clearError();
+						} else {
+							$feedback .= _('Element deleted').' ';
+							$next = 'add_extrafield';
+						}
+					}
+				}
+			}
+		}
+	}
+	$next = 'add_extrafield';
 //
 //	Clone a tracker's elements to this tracker
 //
@@ -560,8 +633,8 @@ if (getStringFromRequest('add_extrafield')) {
 	$elearray = $ath->getExtraFieldElements($field_id);
 	foreach ($elearray as $e) {
 		$from = $e['element_id'];
-		$next = isset($wk[$from]) ? array_keys($wk[$from]) : array();
-		$atw->saveNextNodes($from, $next);
+		$to = isset($wk[$from]) ? array_keys($wk[$from]) : array();
+		$atw->saveNextNodes($from, $to);
 	}
 	$feedback .= _('Workflow saved');
 
@@ -569,11 +642,23 @@ if (getStringFromRequest('add_extrafield')) {
 	require_once $gfcommon.'tracker/ArtifactWorkflow.class.php';
 	$field_id = getIntFromRequest('field_id');
 	$from = getIntFromRequest('from');
-	$next = getIntFromRequest('next');
+	$to = getIntFromRequest('next');
 	$role = array_keys(getArrayFromRequest('role'));
 	$atw = new ArtifactWorkflow($ath, $field_id);
-	$atw->saveAllowedRoles($from, $next, $role);
-	$feedback .= _('Workflow saved');
+	$atw->saveAllowedRoles($from, $to, $role);
+	$feedback .= _('Workflow (allowed roles) saved');
+	$next = 'workflow';
+
+} elseif (getStringFromRequest('workflow_required_fields')) {
+	require_once $gfcommon.'tracker/ArtifactWorkflow.class.php';
+	$field_id = getIntFromRequest('field_id');
+	$from = getIntFromRequest('from');
+	$to = getIntFromRequest('next');
+	$extra_field = array_keys(getArrayFromRequest('extrafield'));
+	$atw = new ArtifactWorkflow($ath, $field_id);
+	$atw->saveRequiredFields($from, $to, $extra_field);
+	$feedback .= _('Workflow (required fields) saved');
+	$next = 'workflow';
 
 } elseif (getStringFromRequest('delete_opt')) {
 	$sure = getStringFromRequest('sure');

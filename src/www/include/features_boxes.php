@@ -109,7 +109,7 @@ function show_top_downloads() {
 	if ( $return == "" ) {
 		return $HTML->information(_('No stats available'));
 	} else {
-		$return = '<table>' . $return . "</table>\n";
+		$return = $HTML->listTableTop(). $return . $HTML->listTableBottom();
 	}
 	$return .= '<div class="align-center">' . util_make_link ('/top/', _('All the ranking'), array('class' => 'dot-link')) . '</div>';
 
@@ -166,6 +166,7 @@ function show_sitestats() {
 }
 
 function show_newest_projects() {
+	global $HTML;
 	$res_newproj = db_query_params ('SELECT group_id,unix_group_name,group_name,register_time FROM groups WHERE status=$1 AND type_id=1 AND register_time > 0 ORDER BY register_time DESC', array ('A'));
 
 	$return = '';
@@ -187,9 +188,9 @@ function show_newest_projects() {
 	}
 
 	if ( $return == "" ) {
-		return _('No stats available');
+		return $HTML->information(_('No stats available'));
 	} else {
-		$return = '<table>' . $return . "</table>\n";
+		$return = $HTML->listTableTop().$return.$HTML->listTableBottom();
 	}
 
 	if (forge_get_config('use_project_full_list')) {
@@ -204,7 +205,7 @@ function show_highest_ranked_users() {
 	$res = db_query_params('SELECT users.user_name,users.user_id,users.realname,user_metric.metric	FROM user_metric,users WHERE users.user_id=user_metric.user_id AND user_metric.ranking < 11 AND users.status != $1 ORDER BY ranking ASC',
 				array ('D'));
 	if (!$res) {
-		return db_error();
+		return $HTML->error_msg(db_error());
 	} else {
 		$rows = db_numrows($res);
 		if ($rows < 1) {
@@ -244,9 +245,9 @@ function show_highest_ranked_projects() {
 		$count++ ;
 	}
 	if ( $return == "" ) {
-		return  $HTML->information(_('No stats available'));
+		return $HTML->information(_('No stats available'));
 	} else {
-		$return = '<table>' . $return . "</table>\n";
+		$return = $HTML->listTableTop().$return.$HTML->listTableBottom();
 	}
 
 	$return .= '<div class="align-center">' . util_make_link ('/top/mostactive.php?type=week', _('All project activities'), array('class' => 'dot-link')) . '</div>';

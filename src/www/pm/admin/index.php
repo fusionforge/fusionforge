@@ -6,7 +6,7 @@
  * Copyright 2002 GForge, LLC, Tim Perdue
  * Copyright 2010, FusionForge Team
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013-2014, Franck Villaume - TrivialDev
+ * Copyright 2013-2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -177,7 +177,7 @@ if ($add_cat && $group_project_id) {
 	session_require_perm ('pm', $pg->getID(), 'manager') ;
 
 	$title = sprintf(_('Add Categories to: %s'), $pg->getName());
-	pm_header(array('title'=>$title));
+	pm_header(array('title'=>$title, 'modal'=>1));
 
 	/*
 		List of possible categories for this ArtifactType
@@ -192,7 +192,7 @@ if ($add_cat && $group_project_id) {
 		for ($i=0; $i < $rows; $i++) {
 			$cells = array();
 			$cells[][] = db_result($result, $i, 'category_id');
-			$cells[][] = util_make_link('/pm/admin/?update_cat=1&id='.db_result($result, $i, 'category_id').'&group_id='.$group_id.'&group_project_id='. $pg->getID(),
+			$cells[][] = util_make_link('/pm/admin/?update_cat=1&amp;id='.db_result($result, $i, 'category_id').'&amp;group_id='.$group_id.'&amp;group_project_id='. $pg->getID(),
 							db_result($result, $i, 'category_name'));
 			echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
 		}
@@ -200,9 +200,8 @@ if ($add_cat && $group_project_id) {
 	} else {
 		echo $HTML->information(_('No categories defined'));
 	}
-
+	echo $HTML->openForm(array('action' => '/pm/admin/?group_id='.$group_id, 'method' => 'post'));
 	?>
-	<form action="<?php echo util_make_uri('/pm/admin/?group_id='.$group_id); ?>" method="post">
 	<p>
 	<input type="hidden" name="add_cat" value="y" />
 	<input type="hidden" name="group_project_id" value="<?php echo $pg->getID(); ?>" />
@@ -213,9 +212,8 @@ if ($add_cat && $group_project_id) {
 	</p>
 	<p class="important"><?php echo _('Once you add a category, it cannot be deleted') ?></p>
 	<p><input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
-	</form>
 	<?php
-
+	echo $HTML->closeForm();
 	pm_footer();
 
 } elseif ($update_cat && $group_project_id && $id) {
@@ -237,7 +235,7 @@ if ($add_cat && $group_project_id) {
 	session_require_perm ('pm', $pg->getID(), 'manager') ;
 
 	$title = sprintf(_('Modify a Category in: %s'), $pg->getName());
-	pm_header(array('title'=>$title));
+	pm_header(array('title'=>$title, 'modal'=>1));
 
 	$ac = new ProjectCategory($pg,$id);
 	if (!$ac || !is_object($ac)) {
@@ -246,8 +244,8 @@ if ($add_cat && $group_project_id) {
 		exit_error($ac->getErrorMessage(),'pm');
 	} else {
 		echo $HTML->information(_('It is not recommended that you change the category name because other things are dependent upon it. When you change the category name, all related items will be changed to the new name.'));
+		echo $HTML->openForm(array('action' => '/pm/admin/?group_id='.$group_id, 'method' => 'post'));
 		?>
-		<form action="<?php echo util_make_uri('/pm/admin/?group_id='.$group_id); ?>" method="post">
 		<p>
 		<input type="hidden" name="update_cat" value="y" />
 		<input type="hidden" name="id" value="<?php echo $ac->getID(); ?>" />
@@ -258,8 +256,8 @@ if ($add_cat && $group_project_id) {
 		<input id="name" required="required" type="text" name="name" value="<?php echo $ac->getName(); ?>" />
 		</p>
 		<p><input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
-		</form>
 		<?php
+		echo $HTML->closeForm();
 	}
 
 	pm_footer();
@@ -270,12 +268,13 @@ if ($add_cat && $group_project_id) {
 	*/
 	session_require_perm ('pm_admin', $group_id) ;
 
-	pm_header(array('title'=>_('Add a new subproject')));
+	pm_header(array('title'=>_('Add a new subproject'), 'modal'=>1));
 
 	?>
 	<p><?php echo _('Add a new subproject to the Tasks. <strong>This is different than adding a task to a subproject.</strong>') ?></p>
-
-	<form action="<?php echo util_make_uri('/pm/admin/?group_id='.$group_id); ?>" method="post">
+	<?php
+	echo $HTML->openForm(array('action' => '/pm/admin/?group_id='.$group_id, 'method' => 'post'));
+	?>
 	<p>
 	<input type="hidden" name="addproject" value="y" />
 	<input type="hidden" name="post_changes" value="y" />
@@ -289,8 +288,8 @@ if ($add_cat && $group_project_id) {
 	<strong><?php echo _('Send All Updates To')._(':'); ?></strong><br />
 	<input type="email" name="send_all_posts_to" value="" size="40" maxlength="80" /><p />
 	<input type="submit" name="submit" value="<?php echo _('Submit') ?>" />
-	</form>
 	<?php
+	echo $HTML->closeForm();
 	pm_footer();
 
 } elseif (getStringFromRequest('update_pg') && $group_project_id) {
@@ -307,8 +306,9 @@ if ($add_cat && $group_project_id) {
 
 	?>
 	<p><?php echo _('You can modify an existing subproject using this form. Please note that private subprojects can still be viewed by members of your project, but not the general public.') ?></p>
-
-	<form action="<?php echo util_make_uri('/pm/admin/?group_id='.$group_id);; ?>" method="post">
+	<?php
+	echo $HTML->openForm(array('action' => '/pm/admin/?group_id='.$group_id, 'method' => 'post'));
+	?>
 	<input type="hidden" name="post_changes" value="y" />
 	<input type="hidden" name="update_pg" value="y" />
 	<input type="hidden" name="group_project_id" value="<?php echo $pg->getID(); ?>" />
@@ -349,8 +349,8 @@ if ($add_cat && $group_project_id) {
 		</td>
 	</tr>
 	</table>
-	</form>
 	<?php
+	echo $HTML->closeForm();
 	echo '<p>'.util_make_link('/pm/admin/?group_id='.$group_id.'&add_cat=1&group_project_id='.$group_project_id,_('Category Administration')).'</p>';
 	pm_footer();
 
@@ -365,10 +365,10 @@ if ($add_cat && $group_project_id) {
 
 	session_require_perm ('pm', $pg->getID(), 'manager') ;
 
-	pm_header(array('title'=>_('Permanently delete this subproject and all its data')));
-
+	pm_header(array('title'=>_('Permanently delete this subproject and all its data'),
+					'modal'=>1));
+	echo $HTML->openForm(array('action' => '/pm/admin/?group_id='.$group_id.'&group_project_id='.$group_project_id, 'method' => 'post'));
 	?>
-	<form action="<?php echo util_make_uri('/pm/admin/?group_id='.$group_id.'&group_project_id='.$group_project_id); ?>" method="post">
 	<p>
 	<input type="hidden" name="post_changes" value="y" />
 	<input type="hidden" name="delete" value="y" />
@@ -389,9 +389,8 @@ if ($add_cat && $group_project_id) {
 	<p>
 		<input type="submit" name="post_changes" value="<?php echo _('Permanently delete this subproject and all its data') ?>" />
 	</p>
-	</form>
 	<?php
-
+	echo $HTML->closeForm();
 	pm_footer();
 
 } else {

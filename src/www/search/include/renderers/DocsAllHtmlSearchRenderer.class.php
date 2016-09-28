@@ -31,15 +31,12 @@ require_once $gfcommon.'docman/Document.class.php';
 class DocsAllHtmlSearchRenderer extends HtmlSearchRenderer {
 
 	/**
-	 * Constructor
-	 *
 	 * @param	string	$words words we are searching for
 	 * @param	int	$offset offset
 	 * @param	boolean	$isExact if we want to search for all the words or if only one matching the query is sufficient
 	 * @param	array|string	$sections array of all sections to search in (array of strings)
-	 *
 	 */
-	function DocsAllHtmlSearchRenderer($words, $offset, $isExact, $sections = SEARCH__ALL_SECTIONS) {
+	function __construct($words, $offset, $isExact, $sections = SEARCH__ALL_SECTIONS) {
 		$groupIdValidArr = array();
 
 		if (session_loggedin()) {
@@ -54,7 +51,7 @@ class DocsAllHtmlSearchRenderer extends HtmlSearchRenderer {
 			}
 		}
 		$searchQuery = new DocsSearchQuery($words, $offset, $isExact, $groupIdValidArr, $sections);
-		$this->HtmlSearchRenderer(SEARCH__TYPE_IS_ALLDOCS, $words, $isExact, $searchQuery);
+		parent::__construct(SEARCH__TYPE_IS_ALLDOCS, $words, $isExact, $searchQuery);
 		$this->tableHeaders = array(
 			_('Project'),
 			_('Directory'),
@@ -94,7 +91,7 @@ class DocsAllHtmlSearchRenderer extends HtmlSearchRenderer {
 			$document = document_get_object($row['docid'], $row['group_id']);
 			$currentDocGroup = $row['project_name'];
 			if ($lastGroupID != $document->Group->getID()) {
-				$cells[] = array(html_image('ic/home16b.png', 10, 12, array('border' => 0)).'<b>'.util_make_link('/docman/?group_id='.$document->Group->getID(),$currentDocGroup).'</b>', 'colspan' => 4);
+				$cells[] = array(html_image('ic/home16b.png', 10, 12).'<b>'.util_make_link('/docman/?group_id='.$document->Group->getID(),$currentDocGroup).'</b>', 'colspan' => 4);
 				$lastGroupID = $document->Group->getID();
 				$rowColor = 0;
 				$return .= $HTML->multiTableRow(array(), $cells);
@@ -102,7 +99,7 @@ class DocsAllHtmlSearchRenderer extends HtmlSearchRenderer {
 			$cells = array();
 			$cells[][] = '&nbsp;';
 			if ($lastDocGroupID != $document->getDocGroupID()) {
-				$cells[][] = html_image('ic/folder.png', 22, 22, array('border' => 0)).util_make_link('/docman/?group_id='.$document->Group->getID().'&view=listfile&dirid='.$document->getDocGroupID(),$row['groupname']);
+				$cells[][] = html_image('ic/folder.png', 22, 22).util_make_link('/docman/?group_id='.$document->Group->getID().'&view=listfile&dirid='.$document->getDocGroupID(),$row['groupname']);
 				$lastDocGroupID = $document->getDocGroupID();
 			} else {
 				$cells[][] = '&nbsp';

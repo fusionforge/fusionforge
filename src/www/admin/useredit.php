@@ -116,7 +116,7 @@ if (getStringFromRequest('delete_user') != '') {
 
 }
 
-$title = _('Site Admin: User Info');
+$title = _('Site Admin')._(': ')._('User Info');
 site_admin_header(array('title'=>$title));
 
 ?>

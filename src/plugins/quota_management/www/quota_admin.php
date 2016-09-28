@@ -3,7 +3,7 @@
  * Project Admin page to manage quotas disk and database
  *
  * Copyright 2005, Fabio Bertagnin
- * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright 2011,2016, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -39,7 +39,7 @@ site_admin_header(array('title'=>_('Site Admin')));
 
 ?>
 <h4>
-	<a href="quota.php"><?php echo _('Ressources usage and quota'); ?></a>
+	<?php echo util_make_link('/plugins/'.$quota_management->name.'/quota.php', _('Ressources usage and quota')); ?>
 	&nbsp;&nbsp;
 	<?php echo _('Quota Manager Admin'); ?>
 </h4>
@@ -102,15 +102,15 @@ if (db_numrows($res_db) > 0) {
 	{
 		$total_database += $q["database_size"];
 		$total_disk += $q["disk_size"];
+		echo $HTML->openForm(array('action' => '/plugins/'.$quota_management->name.'/quota_admin.php', 'method' => 'post'));
 		?>
-		<form action="quota_admin.php" method="POST">
 		<input type="hidden" name="cmd" value="maj" />
 		<input type="hidden" name="group_id" value="<?php echo $q["group_id"]; ?>" />
 		<tr>
 			<td style="border-top:thin solid #808080"><?php echo $q["group_id"]; ?></td>
-			<td style="border-top:thin solid #808080"><a href="<?php echo util_make_url('/plugins/quota_management/index.php?id='.$q['group_id'].'&type=admin&pluginname='.$quota_management->name); ?>">
-				<?php echo $q["unix_name"]; ?>
-			</a></td>
+			<td style="border-top:thin solid #808080">
+			<?php echo util_make_link('/plugins/quota_management/index.php?id='.$q['group_id'].'&type=admin&pluginname='.$quota_management->name, $q['unix_name']) ?>
+			</td>
 			<td style="border-top:thin solid #808080"><?php echo $q["name"]; ?></td>
 			<td style="border-top:thin solid #808080" align="right">
 				<input type="text" name="qs"
@@ -130,8 +130,8 @@ if (db_numrows($res_db) > 0) {
 				<input type="submit" value="<?php echo _('Modify'); ?>" />
 			</td>
 		</tr>
-		</form>
 		<?php
+		echo $HTML->closeForm();
 	}
 ?>
 	<tr style="font-weight:bold">

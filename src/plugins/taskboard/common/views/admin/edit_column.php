@@ -2,6 +2,7 @@
 /**
  * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
  * Copyright 2015, Franck Villaume - TrivialDev
+ * Copyright 2016, Stéphane-Eymeric Bredtthauer - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -29,7 +30,7 @@ if ($column_id) {
 
 		$taskboard->header(
 			array(
-				'title' => _('Taskboard for ').$group->getPublicName()._(': ')._('Administration')._(': ')._('Column configuration'),
+				'title' => $taskboard->getName()._(': ')._('Administration')._(': ')._('Column configuration'),
 				'pagename' => _('Column configuration'),
 				'sectionvals' => array($group->getPublicName()),
 				'group' => $group_id
@@ -43,8 +44,9 @@ if ($column_id) {
 		}
 
 		$drop_rules_by_default = $column->getDropRulesByDefault(true);
+		$taskboard_id = $taskboard->getID();
 
-		echo $HTML->openForm(array('action' => '/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&action=edit_column', 'method' => 'post'));
+		echo $HTML->openForm(array('action' => '/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&taskboard_id='.$taskboard_id.'&action=edit_column', 'method' => 'post'));
 		echo html_e('input', array('type' => 'hidden', 'name' => 'post_changes', 'value' => 'y'));
 		echo html_e('input', array('type' => 'hidden', 'name' => 'column_id', 'value' => $column_id));
 		echo html_e('h2', array(), _('Edit column')._(':'));
@@ -133,9 +135,9 @@ jQuery(function($){
 		echo html_ac(html_ap() - 1);
 	} else {
 		$error_msg = _('Cannot edit column due to unknown column ID');
-		session_redirect('/plugins/'.$pluginTaskboard->name.'/admin/?view=columns&group_id='.$group_id);
+		session_redirect('/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&taskboard_id='.$taskboard_id.'view=columns', false);
 	}
 } else {
 	$warning_msg = _('Cannot edit column due to missing column ID');
-	session_redirect('/plugins/'.$pluginTaskboard->name.'/admin/?view=columns&group_id='.$group_id);
+	session_redirect('/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&taskboard_id='.$taskboard_id.'view=columns', false);
 }

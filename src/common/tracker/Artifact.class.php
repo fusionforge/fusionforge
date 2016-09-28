@@ -8,6 +8,7 @@
  * Copyright (C) 2009-2013 Alain Peyrat, Alcatel-Lucent
  * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
  * Copyright 2014-2015, Franck Villaume - TrivialDev
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -72,7 +73,7 @@ function &artifact_get_object($artifact_id,$data=false) {
 		} else {
 			$res = db_query_params ('SELECT * FROM artifact_vw WHERE artifact_id=$1',
 						array ($artifact_id)) ;
-			if (db_numrows($res) <1 ) {
+			if (db_numrows($res) <1) {
 				$ARTIFACT_OBJ["_".$artifact_id."_"]=false;
 				return false;
 			}
@@ -135,8 +136,6 @@ class Artifact extends FFError {
 	var $votes = false;
 
 	/**
-	 * Artifact - constructor.
-	 *
 	 * @param	ArtifactType	$ArtifactType	The ArtifactType object.
 	 * @param	int|bool	$data		(primary key from database OR complete assoc array)
 	 *						ONLY OPTIONAL WHEN YOU PLAN TO IMMEDIATELY CALL ->create()
@@ -185,7 +184,7 @@ class Artifact extends FFError {
 	 *						array('user' => 127, 'time' => 1234556789)
 	 * @return	bool	id on success / false on failure.
 	 */
-	function create( $summary, $details, $assigned_to=100, $priority=3, $extra_fields=array(), $importData = array()) {
+	function create($summary, $details, $assigned_to=100, $priority=3, $extra_fields=array(), $importData = array()) {
 		//
 		//	make sure this person has permission to add artifacts
 		//
@@ -279,7 +278,7 @@ class Artifact extends FFError {
 				// the changes to the extra fields will be logged in this array.
 				// (we won't use it however)
 				$extra_field_changes = array();
-				if (!$this->updateExtraFields($extra_fields,$extra_field_changes)) {
+				if (!$this->updateExtraFields($extra_fields, $extra_field_changes, $importData)) {
 					db_rollback();
 					return false;
 				}
@@ -763,9 +762,12 @@ class Artifact extends FFError {
 	 * @param	string	$body		The $string message being attached.
 	 * @param	bool	$by		Email $string address of message creator.
 	 * @param	bool	$send_followup	Whether $bool to email out a followup.
+	 * @param	array	$importData	Array of data to change submitter and time of submit like:
+	 *						array('user' => 127, 'time' => 1234556789)
+	 *
 	 * @return	bool	success.
 	 */
-	function addMessage($body,$by=false,$send_followup=false) {
+	function addMessage($body,$by=false,$send_followup=false,$importData = array()) {
 		if (!$body) {
 			$this->setMissingParamsError();
 			return false;
@@ -774,36 +776,50 @@ class Artifact extends FFError {
 			$this->setError(_('You are not currently allowed to submit items to this tracker.'));
 			return false;
 		}
-		if (session_loggedin()) {
-			$user_id=user_getid();
-			$user = user_get_object($user_id);
-			if (!$user || !is_object($user)) {
-				$this->setError('Error: Logged In User But Could Not Get User Object');
-				return false;
-			}
-			//	we'll store this email even though it will likely never be used -
-			//	since we have their correct user_id, we can join the USERS table to get email
-			$by=$user->getEmail();
+
+		if(array_key_exists('user', $importData)){
+				$user_id = $importData['user'];
+				$user = user_get_object($user_id);
+				if (!$user || !is_object($user)) {
+					$this->setError('Error: Logged In User But Could Not Get User Object');
+					return false;
+				}
+				$by=$user->getEmail();
 		} else {
-			$user_id=100;
-			if (!$by || !validate_email($by)) {
-				$this->setMissingParamsError();
-				return false;
+			if (session_loggedin()) {
+				$user_id=user_getid();
+				$user = user_get_object($user_id);
+				if (!$user || !is_object($user)) {
+					$this->setError('Error: Logged In User But Could Not Get User Object');
+					return false;
+				}
+				//	we'll store this email even though it will likely never be used -
+				//	since we have their correct user_id, we can join the USERS table to get email
+				$by=$user->getEmail();
+			} else {
+				$user_id=100;
+				if (!$by || !validate_email($by)) {
+					$this->setMissingParamsError();
+					return false;
+				}
 			}
 		}
-
-		$now = time();
+		if(array_key_exists('time', $importData)){
+			$time = $importData['time'];;
+		} else {
+			$time = time();
+		}
 		$res = db_query_params ('INSERT INTO artifact_message (artifact_id,submitted_by,from_email,adddate,body) VALUES ($1,$2,$3,$4,$5)',
 					array ($this->getID(),
 					       $user_id,
 					       $by,
-					       $now,
+					       $time,
 					       htmlspecialchars($body))) ;
 
-		$this->updateLastModifiedDate();
+		$this->updateLastModifiedDate($importData);
 
 		if ($send_followup) {
-			$this->mailFollowupEx($now, 2, false);
+			$this->mailFollowupEx($time, 2, false);
 		}
 		return $res;
 	}
@@ -889,27 +905,57 @@ class Artifact extends FFError {
 	 * @param	int	$new_artifact_type_id	Allows you to move an artifact to another type.
 	 * @param	array	$extra_fields		Array of extra fields like: array(15=>'foobar',22=>'1');
 	 * @param	string  $description		The description.
+	 * @param	array	$importData	Array of data to change submitter and time of submit like:
+	 *						array('user' => 127, 'time' => 1234556789)
 	 * @return	boolean	success.
 	 */
 	function update($priority,$status_id,
 		$assigned_to,$summary,$canned_response,$details,$new_artifact_type_id,
-		$extra_fields=array(), $description='') {
+		$extra_fields=array(), $description='', $importData=array()) {
 
+		if (array_key_exists('user', $importData)){
+			$user = $importData['user'];
+		}
+		if (empty($importData)) {
+			$isAnImport = false;
+		} else {
+			$isAnImport = true;
+		}
 		/*
 			Field-level permission checking
 		*/
-		if (!forge_check_perm ('tracker', $this->ArtifactType->getID(), 'manager')) {
-			// Non-managers cannot modify these fields
-			$priority=$this->getPriority();
-			$summary=htmlspecialchars_decode($this->getSummary());
-			$description=htmlspecialchars_decode($this->getDetails());
-			$canned_response=100;
-			$new_artifact_type_id=$this->ArtifactType->getID();
-			$assigned_to=$this->getAssignedTo();
-
-			if (!forge_check_perm ('tracker', $this->ArtifactType->getID(), 'tech')) {
-				$this->setPermissionDeniedError();
-				return false;
+		if (!$isAnImport) {
+			if (!forge_check_perm ('tracker', $this->ArtifactType->getID(), 'manager')) {
+				// Non-managers cannot modify these fields
+				$priority=$this->getPriority();
+				$summary=htmlspecialchars_decode($this->getSummary());
+				$description=htmlspecialchars_decode($this->getDetails());
+				$canned_response=100;
+				$new_artifact_type_id=$this->ArtifactType->getID();
+				$autoAssignField = $this->getArtifactType()->getAutoAssignField();
+				if ($autoAssignField!=100) {
+					$ef = new ArtifactExtraField($this->getArtifactType(),$autoAssignField);
+					if (!$ef || !is_object($ef)) {
+						exit_error(_('Unable to create ArtifactExtraField Object'),'tracker');
+					} elseif ($ef->isError()) {
+						exit_error($ef->getErrorMessage(),'tracker');
+					} else {
+						$efe = new ArtifactExtraFieldElement($ef,$extra_fields[$autoAssignField]);
+						if (!$efe || !is_object($efe)) {
+							exit_error(_('Unable to create ArtifactExtraFieldElement Object'),'tracker');
+						} elseif ($efe->isError()) {
+							exit_error($efe->getErrorMessage(),'tracker');
+						} else {
+							$assigned_to = $efe->getAutoAssignto();
+						}
+					}
+				} else {
+					$assigned_to = $this->getAssignedTo();
+				}
+				if (!forge_check_perm ('tracker', $this->ArtifactType->getID(), 'tech')) {
+					$this->setPermissionDeniedError();
+					return false;
+				}
 			}
 		}
 		//
@@ -942,7 +988,7 @@ class Artifact extends FFError {
 		}
 
 		// Check that assigned_to is a tech for the tracker
-		if ($assigned_to != 100) {
+		if ($assigned_to != 100 && !$isAnImport) {
 			if (!forge_check_perm_for_user ($assigned_to, 'tracker', $this->ArtifactType->getID(), 'tech')) {
 				$this->setError(_("Invalid assigned person: must be a technician"));
 				return false;
@@ -972,7 +1018,7 @@ class Artifact extends FFError {
 				return false;
 			}
 			//	do they have perms for new ArtifactType?
-			if (!forge_check_perm ('tracker', $newArtifactType->getID(), 'manager')) {
+			if (!forge_check_perm ('tracker', $newArtifactType->getID(), 'manager') && !$isAnImport) {
 				$this->setPermissionDeniedError();
 				db_rollback();
 				return false;
@@ -982,8 +1028,8 @@ class Artifact extends FFError {
 			$message = sprintf(_('Moved from %1$s to %2$s'),
                                $this->ArtifactType->getName(),
                                $newArtifactType->getName());
-			$this->addHistory('type', $this->ArtifactType->getName());
-			$this->addMessage($message,'',0);
+			$this->addHistory('type', $this->ArtifactType->getName(), $importData);
+			$this->addMessage($message,'',0, $importData);
 
 			// Fake change to send a mail when moved.
 			$changes['Type'] = 1;
@@ -1059,7 +1105,7 @@ class Artifact extends FFError {
 			}
 
 			// Check that assigned_to is a tech in the new tracker
-			if ($assigned_to != 100) {
+			if ($assigned_to != 100 && !$isAnImport) {
 				if (!forge_check_perm ('tracker', $newArtifactType->getID(), 'tech')) {
 					$assigned_to = 100;
 				}
@@ -1077,47 +1123,52 @@ class Artifact extends FFError {
 		//
 		//	handle audit trail
 		//
-		$now = time();
+		if (array_key_exists('time',$importData)){
+			$time = $importData['time'];
+		} else {
+			$time = time();
+		}
+
 		if ($this->getStatusID() != $status_id) {
-			$this->addHistory('status_id',$this->getStatusID());
+			$this->addHistory('status_id',$this->getStatusID(), $importData);
 			$qpa = db_construct_qpa($qpa, ' status_id=$1,', array($status_id));
 			$changes['status'] = 1;
 			$update = true;
 
 			if ($status_id != 1) {
-				$qpa = db_construct_qpa($qpa, ' close_date=$1,', array($now));
+				$qpa = db_construct_qpa($qpa, ' close_date=$1,', array($time));
 			} else {
 			  $qpa = db_construct_qpa($qpa, ' close_date=$1,', array(0));
 			}
-			$this->addHistory('close_date', $this->getCloseDate());
+			$this->addHistory('close_date', $this->getCloseDate(), $importData);
 		}
 		if ($this->getPriority() != $priority) {
-			$this->addHistory('priority',$this->getPriority());
+			$this->addHistory('priority',$this->getPriority(), $importData);
 			$qpa = db_construct_qpa($qpa, ' priority=$1,', array($priority));
 			$changes['priority'] = 1;
 			$update = true;
 		}
 
 		if ($this->getAssignedTo() != $assigned_to) {
-			$this->addHistory('assigned_to',$this->getAssignedTo());
+			$this->addHistory('assigned_to',$this->getAssignedTo(), $importData);
 			$qpa = db_construct_qpa($qpa, ' assigned_to=$1,', array($assigned_to));
 			$changes['assigned_to'] = 1;
 			$update = true;
 		}
 		if ($summary && ($this->getSummary() != htmlspecialchars($summary))) {
-			$this->addHistory('summary', $this->getSummary());
+			$this->addHistory('summary', $this->getSummary(), $importData);
 			$qpa = db_construct_qpa($qpa, ' summary=$1,', array(htmlspecialchars($summary)));
 			$changes['summary'] = 1;
 			$update = true;
 		}
- 		if ($description && ($this->getDetails() != htmlspecialchars($description))) {
- 			$this->addHistory('details', $this->getDetails());
- 			$qpa = db_construct_qpa($qpa, ' details=$1,', array(htmlspecialchars($description)));
- 			$changes['details'] = 1;
- 			$update = true;
-  		}
+		if ($description && ($this->getDetails() != htmlspecialchars($description))) {
+			$this->addHistory('details', $this->getDetails(), $importData);
+			$qpa = db_construct_qpa($qpa, ' details=$1,', array(htmlspecialchars($description)));
+			$changes['details'] = 1;
+			$update = true;
+		}
 		if ($details) {
-			$this->addMessage($details,'',0);
+			$this->addMessage($details, '' ,0 , $importData);
 			$changes['details'] = 1;
 			$send_message=true;
 		}
@@ -1146,7 +1197,7 @@ class Artifact extends FFError {
 
 		//extra field handling
 		$update=true;
-		if (!$this->updateExtraFields($extra_fields,$changes)) {
+		if (!$this->updateExtraFields($extra_fields, $changes, $importData)) {
 //TODO - see if anything actually did change
 			db_rollback();
 			return false;
@@ -1167,7 +1218,7 @@ class Artifact extends FFError {
 			} else {
 				$body = $acr->getBody();
 				if ($body) {
-					if (!$this->addMessage(util_unconvert_htmlspecialchars($body),'',0)) {
+					if (!$this->addMessage(util_unconvert_htmlspecialchars($body),'',0,$importData)) {
 						db_rollback();
 						return false;
 					} else {
@@ -1183,7 +1234,7 @@ class Artifact extends FFError {
 		if ($update || $send_message){
 			if (!empty($changes)) {
 				// Send the email with changes
-				$this->mailFollowupEx($now, 2, false, $changes);
+				$this->mailFollowupEx($time, 2, false, $changes);
 			}
 			db_commit();
 			return true;
@@ -1198,12 +1249,19 @@ class Artifact extends FFError {
 
 	/**
 	 * updateLastModifiedDate - update the last_modified_date attribute of this artifact.
+	 * @param	array	$importData	Array of data to change submitter and time of submit like:
+	 *						array('user' => 127, 'time' => 1234556789)
 	 *
 	 * @return	bool	true on success / false on failure
 	 */
-	function updateLastModifiedDate() {
-		$res = db_query_params ('UPDATE artifact SET last_modified_date=EXTRACT(EPOCH FROM now())::integer WHERE artifact_id=$1',
-			array ($this->getID()));
+	function updateLastModifiedDate($importData = array()) {
+		if (array_key_exists('time',$importData)){
+			$time = $importData['time'];
+		} else {
+			$time = time();
+		}
+		$res = db_query_params ('UPDATE artifact SET last_modified_date=$1 WHERE artifact_id=$2',
+			array ($time, $this->getID()));
 		return (!$res);
 	}
 
@@ -1236,9 +1294,12 @@ class Artifact extends FFError {
 	 *
 	 * @param	array	Array of extra fields like: array(15=>'foobar',22=>'1');
 	 * @param	array	Array where changes to the extra fields should be logged
+	 * @param	array	Array of data to change submitter and time of submit like:
+	 *						array('user' => 127, 'time' => 1234556789)
+	 *
 	 * @return	bool	true on success / false on failure
 	 */
-	function updateExtraFields($extra_fields,&$changes){
+	function updateExtraFields($extra_fields, &$changes, $importData = array()){
 /*
 	This is extremely complex code - we have take the passed array
 	and see if we need to insert it into the db, and may have to
@@ -1254,6 +1315,11 @@ class Artifact extends FFError {
 				skip it and continue to next item
 
 */
+		if (empty($importData)) {
+			$isAnImport = false;
+		} else {
+			$isAnImport = true;
+		}
 		$update = false;
 
 		//get a list of extra fields for this artifact_type
@@ -1264,9 +1330,11 @@ class Artifact extends FFError {
 			return true;
 		}
 
+		$status_changed = false;
+
 		// If there is a status field, then check against the workflow.
 		// Unless if we change type.
-		if (! isset($changes['Type']) || !$changes['Type']) {
+		if ((!isset($changes['Type']) || !$changes['Type']) && !$isAnImport) {
 			for ($i=0; $i<count($efk); $i++) {
 				$efid=$efk[$i];
 				$type=$ef[$efid]['field_type'];
@@ -1276,16 +1344,26 @@ class Artifact extends FFError {
 							WHERE artifact_id=$1 AND extra_field_id=$2',
 						array($this->getID(),
 							$efid));
-					$old = (db_numrows($res)>0) ? db_result($res,0,'field_data') : 100;
-					if ($old != $extra_fields[$efid]) {
+					$from_status = (db_numrows($res)>0) ? db_result($res,0,'field_data') : 100;
+					$to_status = $extra_fields[$efid];
+						if ($from_status != $to_status) {
+						$status_changed = true;
 						$atw = new ArtifactWorkflow($this->ArtifactType, $efid);
-						if (!$atw->checkEvent($old, $extra_fields[$efid])) {
-							$this->setError('Workflow error: You are not authorized to change the Status ('.$old.' => '.$extra_fields[$efid].')');
+						if (!$atw->checkEvent($from_status, $to_status)) {
+							$this->setError('Workflow error: You are not authorized to change the Status ('.$from_status.' => '.$to_status.')');
 							return false;
 						}
 					}
 				}
 			}
+		}
+
+		if ($status_changed) {
+			$CSFid = $this->ArtifactType->getCustomStatusField();
+			$wf = new ArtifactWorkflow($this->ArtifactType, $CSFid);
+			$rf = $wf->getRequiredFields($from_status, $to_status);
+		} else {
+			$rf = array();
 		}
 
 		//now we'll update this artifact for each extra field
@@ -1294,7 +1372,7 @@ class Artifact extends FFError {
 			$type=$ef[$efid]['field_type'];
 
 			// check required fields
-			if ($ef[$efid]['is_required']) {
+			if (($ef[$efid]['is_required'] || in_array($efid, $rf)) && !$isAnImport) {
 				if (!array_key_exists($efid, $extra_fields)) {
 					if ($type == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 						$this->setError(_('Status Custom Field Must Be Set'));
@@ -1327,6 +1405,54 @@ class Artifact extends FFError {
 						}
 					}
 				}
+			}
+
+			// check parent field
+			if (($type == ARTIFACT_EXTRAFIELDTYPE_SELECT ||
+					$type == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT ||
+					$type == ARTIFACT_EXTRAFIELDTYPE_RADIO ||
+					$type == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX)
+					&& !$isAnImport) {
+				$allowed = false;
+				if (!is_null($ef[$efid]['parent']) && !empty($ef[$efid]['parent']) && $ef[$efid]['parent']!='100') {
+					$aefParentId = $ef[$efid]['parent'];
+					$selectedElmnts = (isset($extra_fields[$aefParentId]) ? $extra_fields[$aefParentId] : '');
+					$aef = new ArtifactExtraField($this->ArtifactType,$efid);
+					$allowed = $aef->getAllowedValues($selectedElmnts);
+				}
+
+				if (is_array($allowed)) {
+					if (($type == ARTIFACT_EXTRAFIELDTYPE_RADIO) || ($type==ARTIFACT_EXTRAFIELDTYPE_SELECT)) {
+						if ($extra_fields[$efid]!='100' && !in_array($extra_fields[$efid],$allowed)) {
+							//$aef = new ArtifactExtraField($this->ArtifactType,$efid);
+							$aefe = new ArtifactExtraFieldElement($aef,$extra_fields[$efid]);
+							$this->setError(sprintf(_('"%1$s" value of the field "%2$s", is not allowed by "%3$s" field values'), $aefe->getName(), $ef[$efid]['field_name'], $ef[$aefParentId]['field_name']));
+							return false;
+						}
+					} else {
+						if (is_array($extra_fields[$efid])) {
+							//$aef = new ArtifactExtraField($this->ArtifactType,$efid);
+							foreach ($extra_fields[$efid] as $val) {
+								if ($val!='100' && !in_array($val,$allowed)) {
+									$aefe = new ArtifactExtraFieldElement($aef,$val);
+									$this->setError(sprintf(_('"%1$s" value of the field "%2$s", is not allowed by "%3$s" field values'), $aefe->getName(), $ef[$efid]['field_name'], $ef[$aefParentId]['field_name']));
+									return false;
+								}
+							}
+						}
+					}
+				}
+			}
+
+
+			// check pattern for text fields
+			if ($type == ARTIFACT_EXTRAFIELDTYPE_TEXT &&
+					!empty($ef[$efid]['pattern']) &&
+					!empty($extra_fields[$efid]) &&
+					!preg_match('/'.$ef[$efid]['pattern'].'/', $extra_fields[$efid]) &&
+					!$isAnImport) {
+				$this->setError(sprintf(_("Field %s doesn't match the pattern."), $ef[$efid]['field_name']));
+				return false;
 			}
 //
 //	Force each field to have some value if it is a numeric field
@@ -1496,7 +1622,7 @@ class Artifact extends FFError {
 		unset($this->extra_field_data);
 
 		if ($update)
-			$this->updateLastModifiedDate();
+			$this->updateLastModifiedDate($importData);
 
 		return true;
 	}
@@ -1601,7 +1727,7 @@ class Artifact extends FFError {
 			 "Assigned to: ". $this->getAssignedRealName() .
 			 " (". $this->getAssignedUnixName(). ")"."\n".
 			$this->marker('summary',$changes).
-			 "Summary: ". util_unconvert_htmlspecialchars( $this->getSummary() )." \n";
+			 "Summary: ". util_unconvert_htmlspecialchars($this->getSummary())." \n";
 
 		// Now display the extra fields
 		$efd = $this->getExtraFieldDataText();
@@ -1610,7 +1736,7 @@ class Artifact extends FFError {
 			$body .= $ef["name"].": ".htmlspecialchars_decode($ef["value"])."\n";
 		}
 
-		$subject='['. $this->ArtifactType->Group->getUnixName() . '-' . $name . ']' . $this->getStringID() .' '. util_unconvert_htmlspecialchars( $this->getSummary() );
+		$subject='['. $this->ArtifactType->Group->getUnixName() . '-' . $name . ']' . $this->getStringID() .' '. util_unconvert_htmlspecialchars($this->getSummary());
 
 		if ($type > 1) {
 			// get all the email addresses that are monitoring this request or the ArtifactType
@@ -1646,7 +1772,7 @@ class Artifact extends FFError {
 		}
 
 		$body .= "\n\nInitial Comment:".
-			"\n".util_unconvert_htmlspecialchars( $this->getDetails() ) .
+			"\n".util_unconvert_htmlspecialchars($this->getDetails()) .
 			"\n\n----------------------------------------------------------------------";
 
 		if ($type > 1) {
@@ -1676,9 +1802,9 @@ class Artifact extends FFError {
 						$body .= $this->marker('details',$changes);
 					}
 					$body .= "Comment By: ". db_result($result2,$i,'realname') . " (".db_result($result2,$i,'user_name').")".
-					"\nDate: ". date( _('Y-m-d H:i'),db_result($result2,$i,'adddate') ).
+					"\nDate: ". date(_('Y-m-d H:i'),db_result($result2,$i,'adddate')).
 					"\n\nMessage:".
-					"\n".util_unconvert_htmlspecialchars( db_result($result2,$i,'body') ).
+					"\n".util_unconvert_htmlspecialchars(db_result($result2,$i,'body')).
 					"\n\n----------------------------------------------------------------------";
 				}
 			}

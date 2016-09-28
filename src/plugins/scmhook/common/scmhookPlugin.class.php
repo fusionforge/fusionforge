@@ -31,7 +31,7 @@ class scmhookPlugin extends Plugin {
 	);
 
 	function __construct() {
-		$this->Plugin();
+		parent::__construct();
 		$this->name = 'scmhook';
 		$this->text = _('Scmhook'); // To show in the tabs, use...
 		$this->pkg_desc =
@@ -192,7 +192,7 @@ project independently.");
 
 	function displayScmHook($group_id, $scm) {
 		global $HTML;
-		use_javascript('/js/sortable.js');
+		html_use_tablesorter();
 		echo $HTML->getJavascripts();
 		$hooksAvailable = $this->getAvailableHooks($group_id);
 		$hooksEnabled = $this->getEnabledHooks($group_id);
@@ -218,7 +218,7 @@ project independently.");
 					break;
 				}
 			}
-			echo '</div><p />';
+			echo '</div>'."\n";
 		} else {
 			echo $HTML->information(_('No hooks available'));
 		}
@@ -228,7 +228,6 @@ project independently.");
 		$res = db_query_params('SELECT need_update FROM plugin_scmhook WHERE id_group = $1', array($group_id));
 		if (!$res)
 			return 1;
-
 		$row = db_fetch_array($res);
 		return $row['need_update'];
 	}

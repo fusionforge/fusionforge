@@ -60,15 +60,12 @@ class OAuthTransaction {
 	protected $request; //an OAuthRequest object
 
 	/**
-	* Constructor
-	*
-	* @param OAuthProvider $provider
-	* @param OAuthAccessToken $access_token
-	* @param OAuthResource $resource
-	* @param array $post_data (should be in the form of an array)
-	* @param boolean $json
-	*
-	*/
+	 * @param OAuthProvider $provider
+	 * @param OAuthAccessToken $access_token
+	 * @param OAuthResource $resource
+	 * @param array $post_data (should be in the form of an array)
+	 * @param boolean $json
+	 */
 	function __construct($provider, $access_token, $resource, $post_data=NULL)	{
 		$this->consumer = new OAuthConsumer($provider->get_consumer_key(), $provider->get_consumer_secret());
 		$this->token = new OAuthToken($access_token->get_token_key(), $access_token->get_token_secret());

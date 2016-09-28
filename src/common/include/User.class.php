@@ -36,7 +36,7 @@ $USER_OBJ = array();
  *
  * @param string       $user_name The unix username - required
  * @param bool|int     $res       The result set handle ("SELECT * FROM USERS WHERE user_id=xx")
- * @return GFUser User object or false on failure
+ * @return FFUser User object or false on failure
  */
 function &user_get_object_by_name($user_name, $res = false) {
 	$user_name = strtolower($user_name);
@@ -53,7 +53,7 @@ function &user_get_object_by_name($user_name, $res = false) {
  *
  * @param string    $email The unix username - required
  * @param bool|int  $res   The result set handle ("SELECT * FROM USERS WHERE user_id=xx")
- * @return GFUser User object or false on failure
+ * @return FFUser User object or false on failure
  */
 function user_get_object_by_email($email, $res = false) {
 	if (!validate_email($email)
@@ -97,7 +97,7 @@ function &user_get_object_by_name_or_email($user_name, $res = false) {
  *
  * @param int      $user_id The ID of the user - required
  * @param int|bool $res     The result set handle ("SELECT * FROM USERS WHERE user_id=xx")
- * @return GFUser a user object or false on failure
+ * @return FFUser a user object or false on failure
  */
 function &user_get_object($user_id, $res = false) {
 	//create a common set of group objects
@@ -117,7 +117,7 @@ function &user_get_object($user_id, $res = false) {
 		if (!$res || db_numrows($res) < 1) {
 			$USER_OBJ["_".$user_id."_"] = false;
 		} else {
-			$USER_OBJ["_".$user_id."_"] = new GFUser($user_id, $res);
+			$USER_OBJ["_".$user_id."_"] = new FFUser($user_id, $res);
 		}
 	}
 	return $USER_OBJ["_".$user_id."_"];
@@ -125,7 +125,7 @@ function &user_get_object($user_id, $res = false) {
 
 /**
  * @param $id_arr
- * @return GFUser[]
+ * @return FFUser[]
  */
 function &user_get_objects($id_arr) {
 	global $USER_OBJ;
@@ -144,7 +144,7 @@ function &user_get_objects($id_arr) {
 		$res = db_query_params('SELECT * FROM users WHERE user_id = ANY ($1)',
 			array(db_int_array_to_any_clause($fetch)));
 		while ($arr = db_fetch_array($res)) {
-			$USER_OBJ["_".$arr['user_id']."_"] = new GFUser($arr['user_id'], $arr);
+			$USER_OBJ["_".$arr['user_id']."_"] = new FFUser($arr['user_id'], $arr);
 		}
 	}
 	foreach ($id_arr as $id) {
@@ -155,7 +155,7 @@ function &user_get_objects($id_arr) {
 
 /**
  * @param string $username_arr
- * @return GFUser[]
+ * @return FFUser[]
  */
 function &user_get_objects_by_name($username_arr) {
 	$res = db_query_params('SELECT user_id FROM users WHERE lower(user_name) = ANY ($1)',
@@ -166,7 +166,7 @@ function &user_get_objects_by_name($username_arr) {
 
 /**
  * @param string $email_arr
- * @return GFUser[]
+ * @return FFUser[]
  */
 function &user_get_objects_by_email($email_arr) {
 	$res = db_query_params('SELECT user_id FROM users WHERE lower(email) = ANY ($1)',
@@ -178,7 +178,7 @@ function &user_get_objects_by_email($email_arr) {
 /**
  * user_get_active_users - Return the list of active users.
  *
- * @return GFUser[]
+ * @return FFUser[]
  */
 function &user_get_active_users() {
 	$res = db_query_params('SELECT user_id FROM users WHERE status=$1',
@@ -192,7 +192,7 @@ function &user_get_all_users() {
 	return user_get_objects (util_result_column_to_array($res,0)) ;
 }
 
-class GFUser extends FFError {
+class FFUser extends FFError {
 	/**
 	 * Associative array of data from db.
 	 *
@@ -301,7 +301,7 @@ class GFUser extends FFError {
 					$mail_site, $mail_va, $language_id, $timezone,
 					$dummy1, $dummy2, $theme_id, $unix_box = 'shell',
 					$address = '', $address2 = '', $phone = '', $fax = '', $title = '',
-					$ccode = 'US', $send_mail = true, $tooltips = true) {
+					$ccode = 'US', $send_mail = true, $tooltips = true, $createtimestamp = null) {
 		global $SYS;
 		if (!$theme_id) {
 			$this->setError(_('You must supply a theme'));
@@ -407,6 +407,7 @@ class GFUser extends FFError {
 		// if we got this far, it must be good
 		$confirm_hash = substr(md5($password1.util_randbytes().microtime()), 0, 16);
 		db_begin();
+		$createtimestamp = (($createtimestamp) ? $createtimestamp : time());
 		$result = db_query_params('INSERT INTO users (user_name,unix_pw,realname,firstname,lastname,email,add_date,status,confirm_hash,mail_siteupdates,mail_va,language,timezone,unix_box,address,address2,phone,fax,title,ccode,theme_id,tooltips,shell)
 							VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23)',
 			array($unix_name,
@@ -415,7 +416,7 @@ class GFUser extends FFError {
 				htmlspecialchars($firstname),
 				htmlspecialchars($lastname),
 				$email,
-				time(),
+				$createtimestamp,
 				'P',
 				$confirm_hash,
 				(($mail_site)? "1" : "0"),
@@ -455,6 +456,7 @@ class GFUser extends FFError {
 			$hook_params['user_id'] = $this->getID();
 			$hook_params['user_name'] = $unix_name;
 			$hook_params['user_password'] = $password1;
+			$hook_params['user_timecreate'] = $createtimestamp;
 			plugin_hook("user_create", $hook_params);
 
 			if ($send_mail) {
@@ -520,7 +522,6 @@ Use one below, but make sure it is entered as the single line.)
 				}
 			}
 
-
 			db_begin();
 			$monitorElementsArray = array('artifact', 'artifact_type', 'docdata', 'docgroup', 'forum');
 			foreach ($monitorElementsArray as $monitorElement) {
@@ -545,7 +546,7 @@ Use one below, but make sure it is entered as the single line.)
 	}
 
 	/**
-	 * update() - update *common* properties of GFUser object.
+	 * update() - update *common* properties of FFUser object.
 	 *
 	 * Use specific setter to change other properties.
 	 *
@@ -662,7 +663,7 @@ Use one below, but make sure it is entered as the single line.)
 		$res = db_query_params('SELECT * FROM users WHERE user_id=$1',
 					array($user_id));
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError('GFUser: '.db_error());
+			$this->setError('FFUser: '.db_error());
 			return false;
 		}
 		$this->data_array = db_fetch_array($res);
@@ -937,7 +938,7 @@ Use one below, but make sure it is entered as the single line.)
 			$hook_params['user_email'] = $email;
 			plugin_hook("user_setemail", $hook_params);
 
-			if (!$this->fetchData($this->getId())) {
+			if (!$this->fetchData($this->getID())) {
 				db_rollback();
 				return false;
 			}
@@ -1176,13 +1177,14 @@ Use one below, but make sure it is entered as the single line.)
 		return $this->data_array['title'];
 	}
 
+
 	/**
-	 * getGroups - get an array of groups this user is a member of.
+	 * getGroupIds  - get an array of group ids this user is a member of.
 	 *
 	 * @param	bool	$onlylocal
 	 * @return	array	Array of groups.
 	 */
-	function &getGroups($onlylocal = true) {
+	function getGroupIds($onlylocal = true) {
 		$ids = array();
 		foreach ($this->getRoles() as $r) {
 			if ($onlylocal) {
@@ -1196,7 +1198,16 @@ Use one below, but make sure it is entered as the single line.)
 				}
 			}
 		}
-		return group_get_objects(array_values(array_unique($ids))) ;
+		return array_values(array_unique($ids));
+	}
+	/**
+	 * getGroups - get an array of groups this user is a member of.
+	 *
+	 * @param	bool	$onlylocal
+	 * @return	array	Array of groups.
+	 */
+	function &getGroups($onlylocal = true) {
+		return group_get_objects($this->getGroupIds($onlylocal));
 	}
 
 	/**
@@ -1714,6 +1725,106 @@ Email: %3$s
 			setup_gettext_from_context();
 		}
 		return true;
+	}
+
+	/**
+	 *    isEditable - verify if field name is editable
+	 *
+	 * @param string $fieldName Field name
+	 * @return    boolean
+	 */
+	function isEditable($fieldName) {
+		if (!isset($this->data_array['uneditable'])) {
+			$flag = true;
+		} else {
+			$uneditable = unserialize($this->data_array['uneditable']);
+			if (is_array($uneditable) && in_array($fieldName, $uneditable)) {
+				$flag = false;
+			} else {
+				$flag = true;
+			}
+		}
+
+		if (isset($this->refresh) && $this->refresh) {
+			$flag = !$flag;
+		}
+
+		return $flag;
+	}
+
+	/**
+	 * isHidden - verify if field name is hidden
+	 *
+	 * @param string $fieldName Field name
+	 * @return    boolean
+	 */
+	function isHidden($fieldName) {
+		if (!isset($this->data_array['hidden']))
+			return false;
+
+		$hidden = unserialize($this->data_array['hidden']);
+		if (is_array($hidden) && in_array($fieldName, $hidden)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * setUneditable - set the list of uneditable fields of this user.
+	 *
+	 * @param    array $data	array of uneditable field names
+	 * @return    boolean.
+	 */
+	function setUneditable($data) {
+		if (!is_array($data)) {
+			$this->setError('Error: Cannot Update list of uneditable fields: not an array');
+			return false;
+		}
+
+		$serializedData = serialize($data);
+		$sql = 'UPDATE users SET uneditable = $1 WHERE user_id = $2';
+		$res = db_query_params($sql, array($serializedData, $this->getID()));
+		if (!$res || db_affected_rows($res) < 1) {
+			$this->setError('Error: Cannot Update list of uneditable fields: '.db_error());
+			return false;
+		}
+		$this->data_array['uneditable'] = $serializedData;
+		return true;
+	}
+
+	/**
+	 * setHidden - set the list of hidden fields of this user.
+	 *
+	 * @param array $data Array of hidden field names
+	 * @return    boolean.
+	 */
+	function setHidden($data) {
+		if (!is_array($data)) {
+			$this->setError('Error: Cannot Update list of hidden fields: not an array');
+			return false;
+		}
+
+		$serializedData = serialize($data);
+		$sql = 'UPDATE users SET hidden = $1 WHERE user_id = $2';
+		$res = db_query_params($sql, array($serializedData, $this->getID()));
+		if (!$res || db_affected_rows($res) < 1) {
+			$this->setError('Error: Cannot Update list of hidden fields: '.db_error());
+			return false;
+		}
+		$this->data_array['hidden'] = $serializedData;
+		return true;
+	}
+
+	function getActivityLogGroups() {
+		$res = db_query_params('select group_id from activity_log where user_id = $1 and group_id = ANY ($2) group by group_id order by count(group_id) desc',
+					array($this->getID(), db_int_array_to_any_clause($this->getGroupIds())), 5);
+
+		if (!$res) {
+			return array();
+		} else {
+			return group_get_objects(util_result_column_to_array($res,0));
+		}
 	}
 }
 

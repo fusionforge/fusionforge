@@ -709,7 +709,7 @@ class FusionForge_Http_Auth_Resolver implements Zend_Auth_Adapter_Http_Resolver_
 	protected $username = null;
 	protected $password = null;
 
-	public function __construct($username, $password)
+	function __construct($username, $password)
 	{
 		$this->username = $username;
 		$this->password = $password;

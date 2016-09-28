@@ -83,7 +83,7 @@ if ($type=='snippet') {
 				util_make_link('/snippet/download.php?type=snippet&id='.db_result($result,$i,'snippet_version_id'), '<strong>'. db_result($result,$i,'version').'</strong>').'</td><td>'.
 				date(_('Y-m-d H:i'),db_result($result,$i,'post_date')).'</td><td>'.
 				util_make_link_u(db_result($result, $i, 'user_name'), db_result($result, $i, 'user_id'), db_result($result, $i, 'realname')).'</td>'.
-				'<td class="align-center">'.util_make_link('/snippet/delete.php?type=snippet&snippet_version_id='.db_result($result,$i,'snippet_version_id'), html_image("ic/trash.png","16","16",array("border"=>"0"))).'</td></tr>';
+				'<td class="align-center">'.util_make_link('/snippet/delete.php?type=snippet&snippet_version_id='.db_result($result,$i,'snippet_version_id'), html_image("ic/trash.png", 16, 16)).'</td></tr>';
 
 				if ($i != ($rows - 1)) {
 					echo '
@@ -115,7 +115,7 @@ if ($type=='snippet') {
 		Show a link so you can add a new version of this snippet
 	*/
 	echo '
-	<h3>'.util_make_link('/snippet/addversion.php?type=snippet&id='.htmlspecialchars($id), _('Submit a new version')).'</h3>
+	<h3>'.util_make_link('/snippet/addversion.php?type=snippet&id='.htmlspecialchars($id), _('Add a new version')).'</h3>
 	<p>' ._('You can submit a new version of this snippet if you have modified it and you feel it is appropriate to share with others.').'.</p>';
 
 	}
@@ -168,9 +168,9 @@ if ($type=='snippet') {
 				date(_('Y-m-d H:i'),db_result($result,$i,'post_date')).'</td><td>'.
 				util_make_link_u (db_result($result, $i, 'user_name'), db_result($result, $i, 'user_id'),db_result($result, $i, 'realname')).'</td>'.
 				'<td class="align-center">'.
-				util_make_link('/snippet/add_snippet_to_package.php?snippet_package_version_id='.db_result($result,$i,'snippet_package_version_id'), html_image("ic/pencil.png","20","25")).
+				util_make_link('/snippet/add_snippet_to_package.php?snippet_package_version_id='.db_result($result,$i,'snippet_package_version_id'), html_image("ic/pencil.png", 20, 25)).
 				'&nbsp; &nbsp; &nbsp; '.
-				util_make_link('/snippet/delete.php?type=package&snippet_package_version_id='.db_result($result,$i,'snippet_package_version_id'), html_image("ic/trash.png","16","16")).'</td></tr>';
+				util_make_link('/snippet/delete.php?type=package&snippet_package_version_id='.db_result($result,$i,'snippet_package_version_id'), html_image("ic/trash.png", 16, 16)).'</td></tr>';
 		}
 
 		echo $HTML->listTableBottom();
@@ -196,7 +196,7 @@ if ($type=='snippet') {
 			Show a form so you can add a new version of this package
 		*/
 		echo '
-		<h3>'.util_make_link('/snippet/addversion.php?type=package&id='.$id, _('Submit a new version')).'</h3>
+		<h3>'.util_make_link('/snippet/addversion.php?type=package&id='.$id, _('Add a new version')).'</h3>
 		<p>' ._('You can submit a new version of this package if you have modified it and you feel it is appropriate to share with others.').'.</p>';
 
 	}

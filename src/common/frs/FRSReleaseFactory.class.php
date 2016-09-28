@@ -49,15 +49,13 @@ class FRSReleaseFactory extends FFError {
 	var $FRSNRs;
 
 	/**
-	 * Constructor.
-	 *
 	 * @param	Group	$Group The Group object to which these FRSRs are associated.
 	 */
 	function __construct(& $Group) {
 		parent::__construct();
 
 		if (!$Group || !is_object($Group)) {
-			$this->setError(_('No Valid Group Object'));
+			$this->setError(_('Invalid Project'));
 			return;
 		}
 		if ($Group->isError()) {

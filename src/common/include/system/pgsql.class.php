@@ -56,13 +56,8 @@ class pgsql extends System {
 	 */
 	var $GID_ADD_SCMRW = 50000;
 
-	/**
-	 * pgsql() - CONSTRUCTOR
-	 *
-	 */
-	function pgsql() {
-		$this->System();
-		return true;
+	function __construct() {
+		parent::__construct();
 	}
 
 	/**

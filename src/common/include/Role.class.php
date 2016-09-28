@@ -22,8 +22,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'include/rbac_texts.php' ;
-require_once $gfcommon.'include/RBAC.php' ;
+require_once $gfcommon.'include/rbac_texts.php';
+require_once $gfcommon.'include/RBAC.php';
 
 /**
  * TODO: FusionForge roles - Enter description here ...
@@ -37,14 +37,11 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	var $Group;
 
 	/**
-	 * Role - Constructor.
-	 *
 	 * @param	object		$group		The Group object.
 	 * @param	int|bool	$role_id	The role_id.
-	 * @return	bool
 	 */
-	function Role($Group, $role_id = false) {
-		$this->BaseRole();
+	function __construct($Group, $role_id = false) {
+		parent::__construct();
 		if (!$Group || !is_object($Group) || $Group->isError()) {
 			$Group = NULL;
 		}
@@ -67,9 +64,9 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 		if (!$role_id) {
 			//setting up an empty object
 			//probably going to call create()
-			return true;
+			return;
 		}
-		return $this->fetchData($role_id);
+		$this->fetchData($role_id);
 	}
 
 	/**

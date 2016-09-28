@@ -42,7 +42,7 @@ class UserManager {
 	 */
 	function getCurrentUser($session_hash = '') {
 		if (!session_get_user()) {
-			return new GFUser();
+			return new FFUser();
 		}
 		return session_get_user();
 	}

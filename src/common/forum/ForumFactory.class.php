@@ -42,14 +42,12 @@ class ForumFactory extends FFError {
 	var $forums;
 
 	/**
-	 * Constructor.
-	 *
 	 * @param	object	$Group	The Group object to which this forum is associated.
 	 */
 	function __construct(&$Group, $skip_check=false) {
 		parent::__construct();
 		if (!$Group || !is_object($Group)) {
-			$this->setError(_('No Valid Group Object'));
+			$this->setError(_('Invalid Project'));
 			return;
 		}
 		if ($Group->isError()) {
@@ -154,7 +152,7 @@ class ForumFactory extends FFError {
 
 		$rows = db_numrows($result);
 
-		if (!$result) {
+		if (!$result || ($rows < 1)) {
 			$this->setError(_('Forum not found')._(': ').db_error());
 			$this->forums = false;
 		} else {

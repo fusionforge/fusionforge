@@ -33,7 +33,7 @@ require_once $gfcommon.'include/MonitorElement.class.php';
 
 class Widget_MyMonitoredDocuments extends Widget {
 	function __construct() {
-		$this->Widget('mymonitoreddocuments');
+		parent::__construct('mymonitoreddocuments');
 	}
 
 	function getTitle() {
@@ -91,7 +91,7 @@ class Widget_MyMonitoredDocuments extends Widget {
 							$cells = array();
 							$cells[] = array('&nbsp;&nbsp;&nbsp;-&nbsp;'.util_make_link('/docman/?group_id='.$distinctMonitorGroupId.'&view=listfile&dirid='.$documentObject->getDocGroupID(), stripslashes($documentObject->getFileName())), 'style' => 'width:99%');
 							$cells[] = array(util_make_link('/docman/?group_id='.$distinctMonitorGroupId.'&action=monitorfile&option=stop&view=listfile&dirid='.$documentObject->getDocGroupID().'&fileid='.$documentObject->getID(),
-									$HTML->getDeletePic(_('Stop Monitoring'), _('Stop Monitoring'), array('onClick' => 'return confirm("'._('Stop monitoring this document?').'")'))),
+									$HTML->getDeletePic(_('Stop monitoring'), _('Stop monitoring'), array('onClick' => 'return confirm("'._('Stop monitoring this document?').'")'))),
 									'class' => 'align-center');
 							$html .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($key, true)), $cells);
 

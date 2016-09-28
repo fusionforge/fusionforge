@@ -43,7 +43,7 @@ $group = group_get_object($group_id);
 if ($submit) {
 	$gjr=new GroupJoinRequest($group);
 	$usr=&session_get_user();
-	if (!$gjr->create($usr->getId(),$comments)) {
+	if (!$gjr->create($usr->getID(),$comments)) {
 		$error_msg = $gjr->getErrorMessage();
 		session_redirect('/projects/'.$group->getUnixName());
 	} else {

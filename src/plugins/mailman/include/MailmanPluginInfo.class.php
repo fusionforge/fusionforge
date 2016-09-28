@@ -24,8 +24,8 @@ require_once 'MailmanPluginDescriptor.class.php';
 
 class MailmanPluginInfo extends PluginInfo {
 
-    function MailmanPluginInfo(&$plugin) {
-        $this->PluginInfo($plugin);
+    function __construct(&$plugin) {
+        parent::__construct($plugin);
         $this->setPluginDescriptor(new MailmanPluginDescriptor());
     }
 

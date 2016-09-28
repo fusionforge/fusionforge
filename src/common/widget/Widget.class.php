@@ -30,27 +30,27 @@ require_once $gfcommon.'widget/Widget_MyMonitoredFp.class.php';
 require_once $gfcommon.'widget/Widget_MyLatestCommits.class.php';
 require_once $gfcommon.'widget/Widget_MyProjectsLastDocuments.class.php';
 require_once $gfcommon.'widget/Widget_MyArtifacts.class.php';
-//require_once('common/widget/Widget_MySrs.class.php');
+//require_once $gfcommon.'widget/Widget_MySrs.class.php';
 require_once $gfcommon.'widget/Widget_MyTasks.class.php';
 require_once $gfcommon.'widget/Widget_MyRss.class.php';
 require_once $gfcommon.'widget/Widget_MyAdmin.class.php';
 require_once $gfcommon.'widget/Widget_MySystasks.class.php';
-//require_once 'common/widget/Widget_MyTwitterFollow.class.php';
-//require_once('common/widget/Widget_MyWikiPage.class.php');
+//require_once $gfcommon.'widget/Widget_MyTwitterFollow.class.php';
+//require_once $gfcommon.'widget/Widget_MyWikiPage.class.php';
 
 require_once $gfcommon.'widget/Widget_ProjectDescription.class.php' ;
 require_once $gfcommon.'widget/Widget_ProjectMembers.class.php';
 require_once $gfcommon.'widget/Widget_ProjectInfo.class.php';
 require_once $gfcommon.'widget/Widget_ProjectLatestFileReleases.class.php';
 require_once $gfcommon.'widget/Widget_ProjectLatestDocuments.class.php';
-require_once $gfcommon.'widget/Widget_ProjectDocumentsActivity.class.php' ;
+require_once $gfcommon.'widget/Widget_ProjectDocumentsActivity.class.php';
 require_once $gfcommon.'widget/Widget_ProjectLatestNews.class.php';
 require_once $gfcommon.'widget/Widget_ProjectPublicAreas.class.php';
 require_once $gfcommon.'widget/Widget_ProjectRss.class.php';
 require_once $gfcommon.'widget/Widget_ProjectLatestCommits.class.php';
-//require_once 'common/widget/Widget_ProjectTwitterFollow.class.php';
-//require_once('common/widget/Widget_ProjectWikiPage.class.php');
-require_once 'common/widget/Widget_ProjectScmStats.class.php';
+//require_once $gfcommon.'widget/Widget_ProjectTwitterFollow.class.php';
+//require_once $gfcommon.'widget/Widget_ProjectWikiPage.class.php';
+require_once $gfcommon.'widget/Widget_ProjectScmStats.class.php';
 
 require_once $gfcommon.'widget/Widget_HomeDetailActivityMostActiveProjectWeek.class.php';
 require_once $gfcommon.'widget/Widget_HomeLatestNews.class.php';
@@ -70,10 +70,8 @@ require_once $gfcommon.'widget/Widget_HomeVersion.class.php';
 	var $buttons;
 	var $owner_id;
 	var $owner_type;
-	/**
-	 * Constructor
-	 */
-	function Widget($id) {
+
+	function __construct($id) {
 		$this->id = $id;
 		$this->content_id = 0;
 	}
@@ -93,7 +91,7 @@ require_once $gfcommon.'widget/Widget_HomeVersion.class.php';
 	}
 	function getPreferencesForm($layout_id, $owner_id, $owner_type) {
 		global $HTML;
-		$prefs  = $HTML->openForm(array('method' => 'post', 'action' => util_make_uri('/widgets/widget.php?owner='. $owner_type.$owner_id .'&action=update&name['. $this->id .']='. $this->getInstanceId() .'&content_id='. $this->getInstanceId() .'&layout_id='. $layout_id)));
+		$prefs  = $HTML->openForm(array('method' => 'post', 'action' => '/widgets/widget.php?owner='.$owner_type.$owner_id.'&action=update&name['.$this->id.']='.$this->getInstanceId().'&content_id='.$this->getInstanceId().'&layout_id='.$layout_id));
 		$prefs .= html_ao('fieldset').html_e('legend', array(), _('Preferences'));
 		$prefs .= $this->getPreferences();
 		$prefs .= html_e('br');
@@ -123,7 +121,7 @@ require_once $gfcommon.'widget/Widget_HomeVersion.class.php';
 	}
 	function getRssUrl($owner_id, $owner_type) {
 		if ($this->hasRss()) {
-			return '/widgets/widget.php?owner='.$owner_type.$owner_id.'&amp;action=rss&amp;name['. $this->id .']='. $this->getInstanceId();
+			return '/widgets/widget.php?owner='.$owner_type.$owner_id.'&amp;action=rss&amp;name%5B'. $this->id .'%5D='. $this->getInstanceId();
 		} else {
 			return false;
 		}
@@ -333,23 +331,7 @@ require_once $gfcommon.'widget/Widget_HomeVersion.class.php';
 		return $widgets;
 	}
 	/* static */ function getExternalWidgets($owner_type) {
-		switch ($owner_type) {
-			case WidgetLayoutManager::OWNER_TYPE_USER:
-				$widgets = array(
-						);
-				break;
-			case WidgetLayoutManager::OWNER_TYPE_GROUP:
-				$widgets = array(
-						);
-				break;
-			case WidgetLayoutManager::OWNER_TYPE_HOME:
-				$widgets = array();
-				break;
-			default:
-				$widgets = array();
-				break;
-		}
-
+		$widgets = array();
 		$plugins_widgets = array();
 		$em =& EventManager::instance();
 		$em->processEvent('widgets', array('external_widgets' => &$plugins_widgets, 'owner_type' => $owner_type));
@@ -372,9 +354,9 @@ require_once $gfcommon.'widget/Widget_HomeVersion.class.php';
 		return 'widget-preview-'.($this->id).'-'.$locale;
 	}
 	function getAjaxUrl($owner_id, $owner_type) {
-		return '/widgets/widget.php?owner='. $owner_type.$owner_id .'&action=ajax&name['. $this->id .']='. $this->getInstanceId();
+		return '/widgets/widget.php?owner='. $owner_type.$owner_id .'&action=ajax&name%5B'. $this->id .'%5D='. $this->getInstanceId();
 	}
 	function getIframeUrl($owner_id, $owner_type) {
-		return '/widgets/widget.php?owner='. $owner_type.$owner_id .'&amp;action=iframe&amp;name['. $this->id .']='. $this->getInstanceId();
+		return '/widgets/widget.php?owner='. $owner_type.$owner_id .'&amp;action=iframe&amp;name%5B'. $this->id .'%5D='. $this->getInstanceId();
 	}
 }

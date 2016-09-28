@@ -3,7 +3,7 @@
  * MantisBT plugin
  *
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2011,2014 Franck Villaume - TrivialDev
+ * Copyright 2011,2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -46,7 +46,7 @@ echo html_e('p', array(), _('You need to setup your mantisbt account per URL.'))
 
 foreach ($uniqueMantisBTUrls as $uniqueMantisBTUrl) {
 	echo $HTML->boxTop(_('User configuration for URL')._(': ').$uniqueMantisBTUrl);
-	echo $HTML->openForm(array('method' => 'post', 'action' => util_make_uri('/plugins/'.$mantisbt->name.'/?type='.$type.'&action=inituser')));
+	echo $HTML->openForm(array('method' => 'post', 'action' => '/plugins/'.$mantisbt->name.'/?type='.$type.'&action=inituser'));
 	echo $HTML->listTableTop();
 	$cells[] = array(_('MantisBT User').utils_requiredField()._(':'), 'class' => 'align-right');
 	$cells[][] = html_e('input', array('title' => _('Specify your MantisBT user to be used. This user MUST already exists.'), 'id' => 'mantisbt_user', 'type' => 'text', 'size' => 50, 'maxlength' => 255, 'name' => 'mantisbt_user', 'required' => 'required'));

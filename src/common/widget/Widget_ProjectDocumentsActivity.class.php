@@ -29,7 +29,7 @@ class Widget_ProjectDocumentsActivity extends Widget {
 	var $content;
 	var $_statistic_show = 'FUD';
 	function __construct() {
-		$this->Widget('projectdocumentsactivity');
+		parent::__construct('projectdocumentsactivity');
 		if (session_loggedin()) {
 			$userPrefValue = UserManager::instance()->getCurrentUser()->getPreference('my_docman_project_activitity_show');
 			if ($userPrefValue) {

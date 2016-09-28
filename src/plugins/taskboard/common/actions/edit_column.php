@@ -2,6 +2,7 @@
 /**
  * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
  * Copyright 2015, Franck Villaume - TrivialDev
+ * Copyright 2016, Stéphane-Eymeric Bredtthauer - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -24,6 +25,7 @@ global $group_id, $pluginTaskboard;
 
 session_require_perm('tracker_admin', $group_id);
 $column_id = getStringFromRequest('column_id', '');
+$taskboard_id = getStringFromRequest('taskboard_id', '');
 $column = &taskboard_column_get_object($column_id);
 
 if (getStringFromRequest('post_changes')) {
@@ -55,7 +57,7 @@ if (getStringFromRequest('post_changes')) {
 		}
 	} else {
 		$warning_msg .= _('Please, fill all required fields.');
-		session_redirect('/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&view=edit_column&column_id='.$column_id);
+		session_redirect('/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&taskboard_id='.$taskboard_id.'&column_id='.$column_id.'&view=edit_column', false);
 	}
 }
-session_redirect('/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&view=columns');
+session_redirect('/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&taskboard_id='.$taskboard_id.'&view=columns', false);

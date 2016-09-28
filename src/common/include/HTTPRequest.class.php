@@ -25,11 +25,8 @@ require_once 'common/include/Codendi_Request.class.php';
  */
 class HTTPRequest extends Codendi_Request {
 
-    /**
-     * Constructor
-     */
-    function HTTPRequest() {
-        parent::Codendi_Request($_REQUEST);
+    function __construct() {
+        parent::__construct($_REQUEST);
     }
 
     /**

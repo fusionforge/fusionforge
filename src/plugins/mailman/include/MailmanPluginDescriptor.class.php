@@ -24,7 +24,7 @@ require_once 'common/plugin/PluginDescriptor.class.php';
 
 class MailmanPluginDescriptor extends PluginDescriptor {
 
-    function MailmanPluginDescriptor() {
-        $this->PluginDescriptor(_('Mailman'), 'v1.0', _('Offers a better integration of Mailman in the forge'));
+    function __construct() {
+        parent::__construct(_('Mailman'), 'v1.0', _('Offers a better integration of Mailman in the forge'));
     }
 }

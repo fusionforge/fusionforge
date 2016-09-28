@@ -394,7 +394,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->clickAndWait("addItemDocmanMenu");
 		$this->click("id=tab-new-document");
 		$this->type("title", "Doc1 Vladimir");
-		$this->type("//input[@name='description']", "Jenkins buildbot - also, ZONGO");
+		$this->type("//textarea[@name='description']", "Jenkins buildbot - also, ZONGO");
 		$this->click("//input[@name='type' and @value='pasteurl']");
 		$this->type("file_url", "http://buildbot.fusionforge.org/");
 		$this->clickAndWait("submit");
@@ -402,7 +402,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->clickAndWait("addItemDocmanMenu");
 		$this->click("id=tab-new-document");
 		$this->type("title", "Doc2 Astromir");
-		$this->type("//input[@name='description']", "Main website (the needle) - also, ZONGO");
+		$this->type("//textarea[@name='description']", "Main website (the needle) - also, ZONGO");
 		$this->click("//input[@name='type' and @value='pasteurl']");
 		$this->type("file_url", "http://fusionforge.org/");
 		$this->clickAndWait("submit");
@@ -648,5 +648,64 @@ class Search extends FForge_SeleniumTestCase
 		$this->assertFalse($this->isTextPresent("Doc2"));
 		$this->assertTrue($this->isTextPresent("News1"));
 		$this->assertTrue($this->isTextPresent("News2"));
+
+		// Test language-specific search configurations
+		// Also test project search based on tags
+		$this->createAndGoto('projectc');
+		$this->clickAndWait("link=Admin");
+		$this->type("//textarea[@name='form_shortdesc']","This is the public description for projectc. It's about Coding hôtels Iiİı.");
+		$this->type("//input[@name='form_tags']","Goldorak");
+		$this->clickAndWait("//input[@name='submit']");
+
+		// In "simple" configuration, no normalization occurs beyond capitalization
+		$this->runCommand(dirname(__FILE__).'/../../../src/bin/configure-fti-search.php simple');
+		$this->open(ROOT) ;
+		$this->type("//input[@name='words']", "coded");
+		$this->clickAndWait("//input[@name='Search']");
+		$this->assertFalse($this->isTextPresent("public description for projectc"));
+
+		$this->open(ROOT) ;
+		$this->type("//input[@name='words']", "goldorak");
+		$this->clickAndWait("//input[@name='Search']");
+		$this->assertTrue($this->isTextPresent("public description for projectc"));
+
+		$this->open(ROOT) ;
+		$this->type("//input[@name='words']", "hotel");
+		$this->clickAndWait("//input[@name='Search']");
+		$this->assertFalse($this->isTextPresent("public description for projectc"));
+
+		// In English, accents are removed and coding==coded
+		$this->runCommand(dirname(__FILE__).'/../../../src/bin/configure-fti-search.php english');
+		$this->open(ROOT) ;
+		$this->type("//input[@name='words']", "coded");
+		$this->clickAndWait("//input[@name='Search']");
+		$this->assertTrue($this->isTextPresent("public description for projectc"));
+
+		$this->open(ROOT) ;
+		$this->type("//input[@name='words']", "goldorak");
+		$this->clickAndWait("//input[@name='Search']");
+		$this->assertTrue($this->isTextPresent("public description for projectc"));
+
+		$this->open(ROOT) ;
+		$this->type("//input[@name='words']", "hotel");
+		$this->clickAndWait("//input[@name='Search']");
+		$this->assertTrue($this->isTextPresent("public description for projectc"));
+
+		// In French, accents are removed but coding==coded
+		$this->runCommand(dirname(__FILE__).'/../../../src/bin/configure-fti-search.php french');
+		$this->open(ROOT) ;
+		$this->type("//input[@name='words']", "coded");
+		$this->clickAndWait("//input[@name='Search']");
+		$this->assertFalse($this->isTextPresent("public description for projectc"));
+
+		$this->open(ROOT) ;
+		$this->type("//input[@name='words']", "goldorak");
+		$this->clickAndWait("//input[@name='Search']");
+		$this->assertTrue($this->isTextPresent("public description for projectc"));
+
+		$this->open(ROOT) ;
+		$this->type("//input[@name='words']", "hotel");
+		$this->clickAndWait("//input[@name='Search']");
+		$this->assertTrue($this->isTextPresent("public description for projectc"));
 	}
 }

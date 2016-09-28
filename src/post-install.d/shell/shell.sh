@@ -162,7 +162,10 @@ configure_sshd()
 	dir=$(dirname $dir)
 	if [ -n "$(find $dir -maxdepth 0 -perm -g+w)" ]; then chmod g-w $dir; fi
     done
+}
 
+restart_ssh_service()
+{
     service $(forge_get_config ssh_service) restart
 }
 
@@ -175,6 +178,13 @@ remove_sshd()
 
 # Main
 case "$1" in
+    rawconfigure)
+	$(dirname $0)/upgrade-conf.sh $2
+	configure_libnss_pgsql
+	configure_nsswitch
+	configure_pam
+	configure_sshd
+        ;;
     configure)
 	$(dirname $0)/upgrade-conf.sh $2
 	configure_libnss_pgsql
@@ -182,18 +192,20 @@ case "$1" in
 	configure_nscd
 	configure_pam
 	configure_sshd
+        restart_ssh_service
 	;;
     remove)
 	remove_nsswitch
 	remove_pam
 	remove_sshd
+        restart_ssh_service
 	;;
     purge)
 	# note: can't be called from Debian's postrm - rely on ucfq(1)
 	purge_libnss_pgsql
 	;;
     *)
-	echo "Usage: $0 {configure|remove|purge}"
+	echo "Usage: $0 {configure|rawconfigure|remove|purge}"
 	exit 1
 	;;
 esac

@@ -1,7 +1,9 @@
 <?php
-/** External authentication via OpenID for FusionForge
+/**
+ * External authentication via OpenID for FusionForge
  * Copyright 2011, Roland Mas
  * Copyright 2011, Olivier Berger & Institut Telecom
+ * Copyright 2016, Franck Villaume - TrivialDev
  *
  * This program was developped in the frame of the COCLICO project
  * (http://www.coclico-project.org/) with financial support of the Paris
@@ -37,9 +39,9 @@ class AuthOpenIDPlugin extends ForgeAuthPlugin {
 
 	var $openid_identity;
 
-	function AuthOpenIDPlugin () {
+	function __construct() {
 		global $gfconfig;
-		$this->ForgeAuthPlugin() ;
+		parent::__construct();
 		$this->name = "authopenid";
 		$this->text = "OpenID authentication";
 
@@ -47,9 +49,9 @@ class AuthOpenIDPlugin extends ForgeAuthPlugin {
 		$this->_addHook("check_auth_session");
 		$this->_addHook("fetch_authenticated_user");
 		$this->_addHook("close_auth_session");
-		$this->_addHook("usermenu") ;
-		$this->_addHook("userisactivecheckbox") ; // The "use ..." checkbox in user account
-		$this->_addHook("userisactivecheckboxpost") ; //
+		$this->_addHook("usermenu");
+		$this->_addHook("userisactivecheckbox"); // The "use ..." checkbox in user account
+		$this->_addHook("userisactivecheckboxpost"); //
 
 		$this->saved_login = '';
 		$this->saved_user = NULL;
@@ -72,18 +74,15 @@ class AuthOpenIDPlugin extends ForgeAuthPlugin {
 		}
 		$return_to = $params['return_to'];
 
-		$result = '';
 
-		$result .= '<p>';
-		$result .= _('Cookies must be enabled past this point.');
-		$result .= '</p>';
+		$result = html_e('p', array(), _('Cookies must be enabled past this point.'));
 
-		$result .= '<form action="' . util_make_url('/plugins/authopenid/post-login.php') . '" method="post">
-<input type="hidden" name="form_key" value="' . form_generate_key() . '"/>
+		$result .= $HTML->openForm(array('action' => '/plugins/'.$this->name.'/post-login.php', 'method' => 'get'));
+		$result .= '<input type="hidden" name="form_key" value="' . form_generate_key() . '"/>
 <input type="hidden" name="return_to" value="' . htmlspecialchars(stripslashes($return_to)) . '" />
 Your OpenID identifier: <input type="text" name="openid_identifier" />
-<input type="submit" name="login" value="' . _('Login via OpenID') . '" />
-</form>';
+<input type="submit" name="login" value="' . _('Login via OpenID') . '" />';
+		$result .= $HTML->closeForm();
 
 		$params['html_snippets'][$this->name] = $result;
 
@@ -159,11 +158,11 @@ Your OpenID identifier: <input type="text" name="openid_identifier" />
 
 		// Change vs default
 		forge_define_config_item ('required', $this->name, 'no');
-		forge_set_config_item_bool ('required', $this->name) ;
+		forge_set_config_item_bool ('required', $this->name);
 
 		// Change vs default
 		forge_define_config_item ('sufficient', $this->name, 'no');
-		forge_set_config_item_bool ('sufficient', $this->name) ;
+		forge_set_config_item_bool ('sufficient', $this->name);
 	}
 
 	/**
@@ -174,8 +173,8 @@ Your OpenID identifier: <input type="text" name="openid_identifier" />
 		global $G_SESSION, $HTML;
 		$text = $this->text; // this is what shows in the tab
 		if ($G_SESSION->usesPlugin($this->name)) {
-			//$param = '?type=user&id=' . $G_SESSION->getId() . "&pluginname=" . $this->name; // we indicate the part we�re calling is the user one
-			echo $HTML->PrintSubMenu (array ($text), array ('/plugins/authopenid/index.php'), array(_('coin pan')));
+			//$param = '?type=user&id=' . $G_SESSION->getId() . "&pluginname=" . $this->name; // we indicate the part we're calling is the user one
+			echo $HTML->PrintSubMenu (array ($text), array ('/plugins/'.$this->name.'/index.php'), array(_('coin pan')));
 		}
 	}
 }

@@ -28,11 +28,12 @@ class MailParser extends FFError {
 	var $headers;
 	var $body;
 
-	function MailParser($input_file) {
+	function __construct($input_file) {
 		parent::__construct();
 		$size = filesize($input_file);
 		if ($size > $this->max_file_size) {
-			return $this->setError(_("Error: file too large"));
+			$this->setError(_("Error: file too large"));
+			return;
 		}
 		$fo = fopen($input_file, 'r');
 		$input_data = fread($fo, $size);
@@ -82,7 +83,7 @@ class MailParser extends FFError {
 
 			} else {
 				$this->setError(_('Error - only text/plain supported at this time'));
-				return false;
+				return;
 			}
 		}
 //echo "\n\n**".$header['Content-Type']."**\n\n";
@@ -90,7 +91,6 @@ class MailParser extends FFError {
 		unset ($lines);
 //system("echo \"mp: headers".implode("***\n",$header)."\n\" >> /tmp/forum.log");
 //system("echo \"mp: body".$body."\n\" >> /tmp/forum.log");
-		return true;
 	}
 
 	function &getBody() {

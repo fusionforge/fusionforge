@@ -7,7 +7,8 @@
  * Copyright 2009, Roland Mas
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2016, Franck Villaume - TrivialDev
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -151,8 +152,6 @@ class ArtifactType extends FFError {
 	var $voters = false;
 
 	/**
-	 * ArtifactType - constructor.
-	 *
 	 * @param	Group		$Group			The Group object.
 	 * @param	int|bool	$artifact_type_id	The id # assigned to this artifact type in the db.
 	 * @param	array|bool	$arr			The associative array of data.
@@ -160,7 +159,7 @@ class ArtifactType extends FFError {
 	function __construct($Group, $artifact_type_id = false, $arr = false) {
 		parent::__construct();
 		if (!$Group || !is_object($Group)) {
-			$this->setError(_('No Valid Group Object'));
+			$this->setError(_('Invalid Project'));
 			return;
 		}
 		if ($Group->isError()) {
@@ -222,7 +221,7 @@ class ArtifactType extends FFError {
 		if ($email_address) {
 			$invalid_emails = validate_emails($email_address);
 			if (count($invalid_emails) > 0) {
-				$this->SetError(_('E-mail address(es) appeared invalid')._(': ').implode(',', $invalid_emails));
+				$this->setError(_('E-mail address(es) appeared invalid')._(': ').implode(',', $invalid_emails));
 				return false;
 			}
 		}
@@ -283,6 +282,8 @@ class ArtifactType extends FFError {
 	 */
 	function fetchData($artifact_type_id) {
 		$this->voters = false;
+		$this->extra_field = false;
+		$this->extra_fields = false;
 		$res = db_query_params('SELECT * FROM artifact_group_list_vw
 			WHERE group_artifact_id=$1
 			AND group_id=$2',
@@ -466,6 +467,29 @@ class ArtifactType extends FFError {
 	}
 
 	/**
+	 * getAutoAssignField - get the extra_field_id of the field that triggers auto-assignment rules.
+	 *
+	 * @return	int	extra_field_id.
+	 */
+	function getAutoAssignField() {
+		return $this->data_array['auto_assign_field'];
+	}
+
+	/**
+	 * setAutoAssignField - set the extra_field_id of the field that triggers auto-assignment rules.
+	 *
+	 * @param	int	$extra_field_id	The extra field id.
+	 * @return	boolean	success.
+	 */
+	function setAutoAssignField($extra_field_id) {
+		$res = db_query_params('UPDATE artifact_group_list SET auto_assign_field=$1
+			WHERE group_artifact_id=$2',
+				array ($extra_field_id,
+				       $this->getID()));
+		return $res;
+	}
+
+	/**
 	 * usesCustomStatuses - boolean
 	 *
 	 * @return	boolean	use_custom_statues.
@@ -571,7 +595,7 @@ class ArtifactType extends FFError {
 	 *
 	 * @return	array	array of id of users monitoring this Artifact.
 	 */
-	function &getMonitorIds() {
+	function getMonitorIds() {
 		$MonitorElementObject = new MonitorElement('artifact_type');
 		return $MonitorElementObject->getMonitorUsersIdsInArray($this->getID());
 	}
@@ -581,9 +605,18 @@ class ArtifactType extends FFError {
 	 * set up for this artifact type.
 	 *
 	 * @param	array	$types
+	 * @param	bool	$get_is_disabled
+	 * @param	bool	$get_is_hidden_on_submit
 	 * @return	array	arrays of data;
 	 */
-	function getExtraFields($types = array()) {
+	function getExtraFields($types = array(), $get_is_disabled = false, $get_is_hidden_on_submit = true) {
+		$where ='';
+		if (!$get_is_disabled) {
+			$where = ' AND is_disabled = 0';
+		}
+		if (!$get_is_hidden_on_submit) {
+			$where = ' AND is_hidden_on_submit = 0';
+		}
 		if (count($types)) {
 			$filter = implode(',', $types);
 			$types = explode(',', $filter);
@@ -596,15 +629,17 @@ class ArtifactType extends FFError {
 				$res = db_query_params('SELECT *
 				FROM artifact_extra_field_list
 				WHERE group_artifact_id=$1
-				AND field_type = ANY ($2)
-				ORDER BY field_type ASC',
+				AND field_type = ANY ($2)'.
+				$where.' '.
+				'ORDER BY field_type ASC',
 							array($this->getID(),
 									db_int_array_to_any_clause($types)));
 			} else {
 				$res = db_query_params('SELECT *
 				FROM artifact_extra_field_list
-				WHERE group_artifact_id=$1
-				ORDER BY field_type ASC',
+				WHERE group_artifact_id=$1'.
+				$where.' '.
+				'ORDER BY field_type ASC',
 					array($this->getID()));
 			}
 			while ($arr = db_fetch_array($res)) {
@@ -618,28 +653,34 @@ class ArtifactType extends FFError {
 	/**
 	 * cloneFieldsFrom - clone all the fields and elements from another tracker
 	 *
-	 * @param	int	$clone_tracker_id
+	 * @param	int	$clone_tracker_id	id of the cloned tracker
+	 * @param	int	$group_id		id of the project template to use.
+	 * @param	array	$id_mappings		array mapping between template objects and new project objects
 	 * @return	boolean	true/false on success
 	 */
-	function cloneFieldsFrom($clone_tracker_id) {
-
-		$g = group_get_object(forge_get_config('template_group'));
+	function cloneFieldsFrom($clone_tracker_id, $group_id = null, $id_mappings = array()) {
+		if ($group_id) {
+			$g = group_get_object($group_id);
+		} else {
+			$g = group_get_object(forge_get_config('template_group'));
+		}
 		if (!$g || !is_object($g)) {
-			$this->setError('Could Not Get Template Group');
+			$this->setError(_('Could Not Get Template Group'));
 			return false;
 		} elseif ($g->isError()) {
-			$this->setError('Template Group Error '.$g->getErrorMessage());
+			$this->setError(_('Template Group Error').' '.$g->getErrorMessage());
 			return false;
 		}
 		$at = new ArtifactType($g,$clone_tracker_id);
 		if (!$at || !is_object($at)) {
-			$this->setError('Could Not Get Tracker To Clone');
+			$this->setError(_('Could Not Get Tracker To Clone'));
 			return false;
 		} elseif ($at->isError()) {
-			$this->setError('Clone Tracker Error '.$at->getErrorMessage());
+			$this->setError(_('Clone Tracker Error').' '.$at->getErrorMessage());
 			return false;
 		}
-		$efs = $at->getExtraFields();
+		// do not filter and get disabled fields as well
+		$efs = $at->getExtraFields(array(), true);
 
 		// get current getExtraFields if any
 		$current_efs = $this->getExtraFields();
@@ -648,6 +689,8 @@ class ArtifactType extends FFError {
 		//	Iterate list of extra fields
 		//
 		db_begin();
+		$newEFIds = array();
+		$newEFElIds = array();
 		foreach ($efs as $ef) {
 			//new field in this tracker
 			$nef = new ArtifactExtraField($this);
@@ -658,29 +701,117 @@ class ArtifactType extends FFError {
 					$current_ef_todelete->delete(true,true);
 				}
 			}
-			if (!$nef->create(util_unconvert_htmlspecialchars($ef['field_name']), $ef['field_type'], $ef['attribute1'], $ef['attribute2'], $ef['is_required'], $ef['alias'])) {
-				$this->setError('Error Creating New Extra Field: '.$nef->getErrorMessage());
+			if (!$nef->create(util_unconvert_htmlspecialchars($ef['field_name']), $ef['field_type'], $ef['attribute1'], $ef['attribute2'], $ef['is_required'], $ef['alias'], $ef['show100'], $ef['show100label'], $ef['description'], $ef['pattern'], 100, 0, $ef['is_hidden_on_submit'], $ef['is_disabled'])) {
+				$this->setError(_('Error Creating New Extra Field')._(':').' '.$nef->getErrorMessage());
 				db_rollback();
 				return false;
 			}
+			$newEFIds[$ef['extra_field_id']] = $nef->getID();
+			$newEFElIds[$ef['extra_field_id']] = array();
 			//
 			//	Iterate the elements
 			//
 			$resel = db_query_params('SELECT * FROM artifact_extra_field_elements WHERE extra_field_id=$1',
 						array($ef['extra_field_id']));
+
+			//by default extrafield status is created with default values: 'Open' & 'Closed'
+			if ($nef->getType() == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
+				$existingElements = $nef->getAvailableValues();
+				foreach($existingElements as $existingElement) {
+					$existingElement = new ArtifactExtraFieldElement($nef, $existingElement);
+					$existingElement->delete();
+				}
+			}
 			while ($el = db_fetch_array($resel)) {
 				//new element
 				$nel = new ArtifactExtraFieldElement($nef);
 				if (!$nel->create(util_unconvert_htmlspecialchars($el['element_name']), $el['status_id'])) {
 					db_rollback();
-					$this->setError('Error Creating New Extra Field Element: '.$nel->getErrorMessage());
+					$this->setError(_('Error Creating New Extra Field Element')._(':').' '.$nel->getErrorMessage());
 					return false;
+				}
+				$newEFElIds[$ef['extra_field_id']][$el['element_id']] = $nel->getID();
+			}
+		}
+
+		foreach ($newEFIds as $oldEFId => $newEFId) {
+			$oef = new ArtifactExtraField($at, $oldEFId);
+			$nef = new ArtifactExtraField($this, $newEFId);
+			// update Dependency between extrafield
+			if ($oef->getParent() != 100) {
+				if (!$nef->update($nef->getName(), $nef->getAttribute1(), $nef->getAttribute2(), $nef->isRequired(), $nef->getAlias(), $nef->getShow100(), $nef->getShow100label(), $nef->getDescription(), $nef->getPattern(), $newEFIds[$oef->getParent()], $nef->isAutoAssign(), $nef->is_hidden_on_submit(), $nef->is_disabled())) {
+					db_rollback();
+					$this->setError(_('Error Updating New Extra Field Parent')._(':').' '.$nef->getErrorMessage());
+					return false;
+				}
+
+				foreach ($newEFElIds[$oldEFId] as $oldEFElId => $newEFElId) {
+					$oel = new ArtifactExtraFieldElement($oef,$oldEFElId);
+					if ($oel->isError()) {
+						db_rollback();
+						$this->setError($oel->getErrorMessage());
+						return false;
+					}
+					$nel = new ArtifactExtraFieldElement($nef,$newEFElId);
+					if ($nel->isError()) {
+						db_rollback();
+						$this->setError($nel->getErrorMessage());
+						return false;
+					}
+					$oPEls = $oel->getParentElements();
+					$nPEls = array();
+					foreach ($oPEls as $oPEl) {
+						$nPEls[]=$newEFElIds[$oef->getParent()][$oPEl];
+					}
+					$nel->saveParentElements($nPEls);
+					if ($nel->isError()) {
+						db_rollback();
+						$this->setError(_('Error Saving New Extra Field Parent Elements').' '.$nel->getErrorMessage());
+						return false;
+					}
+				}
+			}
+			// update workflow
+			if ($nef->getType() == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
+				// update the allowed init values
+				$oatw = new ArtifactWorkflow($at, $oldEFId);
+				$natw = new ArtifactWorkflow($this, $newEFId);
+				// template allowed init values
+				$oaivs = $oatw->getNextNodes('100');
+				$naivs = array();
+				foreach ($oaivs as $oaiv) {
+					$naivs[] = $newEFElIds[$oldEFId][$oaiv];
+				}
+				$natw->saveNextNodes('100', $naivs);
+
+				//implement role based of the workflow
+				if (sizeof($id_mappings) && isset($id_mappings['role'])) {
+					$oefelements = $at->getExtraFieldElements($oldEFId);
+					foreach ($oefelements as $oefelement) {
+						// retrieve the allowed values for the old element
+						$onexts = $oatw->getNextNodes($oefelement['element_id']);
+						$naivs = array();
+						foreach ($onexts as $onext) {
+							$naivs[] = $newEFElIds[$oldEFId][$onext];
+							//retrieve the allowed old roles from old element to old next value
+							$oars = $oatw->getAllowedRoles($oefelement['element_id'], $onext);
+							//map old roles into new roles id
+							$nar = array();
+							foreach ($oars as $oar) {
+								if (array_key_exists($oar, $id_mappings['role'])) {
+									$nar[] = $id_mappings['role'][$oar];
+								}
+							}
+							$natw->saveAllowedRoles($newEFElIds[$oldEFId][$oefelement['element_id']], $newEFElIds[$oldEFId][$onext], $nar);
+						}
+						$natw->saveNextNodes($newEFElIds[$oldEFId][$oefelement['element_id']], $naivs);
+					}
 				}
 			}
 		}
+
 		db_commit();
 		return true;
-
 	}
 
 	/**
@@ -992,7 +1123,7 @@ class ArtifactType extends FFError {
 		if ($email_address) {
 			$invalid_emails = validate_emails($email_address);
 			if (count($invalid_emails) > 0) {
-				$this->SetError(_('E-mail address(es) appeared invalid')._(': ').implode(',', $invalid_emails));
+				$this->setError(_('E-mail address(es) appeared invalid')._(': ').implode(',', $invalid_emails));
 				return false;
 			}
 		}

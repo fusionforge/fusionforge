@@ -3,7 +3,7 @@
  * Project Admin page to manage quotas disk and database
  *
  * Copyright 2005, Fabio Bertagnin
- * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright 2011,2016, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -38,7 +38,7 @@ site_admin_header(array('title'=>_('Site Admin')));
 <h4>
 	<?php echo _('Ressources usage and quota'); ?>
 	&nbsp;&nbsp;&nbsp;&nbsp;
-	<a href="quota_admin.php">Admin</a>
+	<?php echo util_make_link('/plugins/'.$quota_management->name.'/quota_admin.php', _('Admin')) ?>
 </h4>
 <?php
 // stock projects infos in array
@@ -123,8 +123,7 @@ foreach ($quotas as $p) {
 }
 
 // users disk space size
-$chroot_dir = forge_get_config('chroot');
-$ftp_dir = $chroot_dir."/home/users/";
+$ftp_dir = forge_get_config('homedir_prefix');
 $users = array();
 $res_db = db_query_params('SELECT user_id, user_name, realname, unix_status FROM users ORDER BY user_id ',
 			array());
@@ -236,9 +235,7 @@ foreach ($users as $u)
 		<tr>
 			<td style="border-top:thin solid #808080;background:<?php echo $color2; ?>"><?php echo $q["group_id"]; ?></td>
 			<td style="border-top:thin solid #808080;background:<?php echo $color2; ?>">
-				<a href="quota_project.php?group_id=<?php echo $q["group_id"]; ?>">
-					<?php echo $q["unix_name"]; ?>
-				</a>
+				<?php echo util_make_link('/plugins/'.$quota_management->name.'/quota_project.php?group_id='.$q['group_id'], $q['unix_name']); ?>
 			</td>
 			<td style="border-top:thin solid #808080;background:<?php echo $color2; ?>">
 				<?php echo $q["name"]; ?>

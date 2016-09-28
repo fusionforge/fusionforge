@@ -69,8 +69,6 @@ class ArtifactFile extends FFError {
 	var $data_array;
 
 	/**
-	 *  __construct - ArtifactFile constructor.
-	 *
 	 * @param	Artifact	$Artifact	The Artifact object.
 	 * @param	array|bool	$data		(all fields from artifact_file_user_vw) OR id from database.
 	 */
@@ -180,7 +178,7 @@ class ArtifactFile extends FFError {
 			if (!array_key_exists('time', $importData)){
 				$this->Artifact->addHistory('File Added',$id.': '.$filename);
 			}
-			$this->Artifact->UpdateLastModifiedDate();
+			$this->Artifact->updateLastModifiedDate();
 			$this->clearError();
 			return $id;
 		}

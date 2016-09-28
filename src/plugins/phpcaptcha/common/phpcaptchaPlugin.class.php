@@ -1,10 +1,9 @@
 <?php
-
 /**
  * phpcaptchaPlugin Class
  *
  * Copyright 2010, Luis Daniel Ibáñez
- * Copyright 2013-2015, Franck Villaume - TrivialDev
+ * Copyright 2013-2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -28,7 +27,7 @@ class phpcaptchaPlugin extends Plugin {
 	var $phpcaptcha_path;
 
 	function __construct() {
-		$this->Plugin();
+		parent::__construct();
 		$this->name = 'phpcaptcha';
 		$this->text = _('Enable use of phpcaptcha (more information www.phpcaptcha.org)');
 		$this->_addHook('captcha_check');
@@ -49,12 +48,13 @@ class phpcaptchaPlugin extends Plugin {
 	function captcha_form(&$html) {
 		global $HTML;
 		if ($this->checkConfig()) {
+			$src = util_make_uri('/plugins/'.$this->name.'/securimage_show.php');
 			$html .= '<p>
-				<img id="captcha" src="/plugins/'.$this->name.'/securimage_show.php" alt="CAPTCHA Image" />
-				<a href="#" onclick="document.getElementById(\'captcha\').src = \'/plugins/'.$this->name.'/securimage_show.php?\' + Math.random(); return false">';
+				<img id="captcha" src="'.$src.'" alt="'._('CAPTCHA Image').'" />
+				<a href="#" onclick="document.getElementById(\'captcha\').src = \''.$src.'\' + Math.random(); return false">';
 			$html .= _('Reload image.').'</a>';
 			$html .= '</p><p>';
-			$html .= _('Write captcha here:').'<br />';
+			$html .= _('Write captcha here')._(': ').'<br />';
 			$html .= '<input type="text" name="captcha_code" size="10" maxlength="6" required="required" />';
 			$html .= '</p>';
 		} else {

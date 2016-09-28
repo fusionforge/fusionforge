@@ -2,7 +2,7 @@
 /**
  * headermenu : viewGlobalConfiguration page
  *
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -125,7 +125,7 @@ if (sizeof($linksOuterMenuArray)) {
 
 echo html_e('h2', array(), _('Add new tab'), false);
 echo $HTML->information(_('You can add specific tabs in outermenu (main tab) or headermenu (next to the login) with the form below.'));
-echo $HTML->openForm(array('method' => 'POST', 'name' => 'addLink', 'action' => util_make_uri($actionurl.'&action=addLink')));
+echo $HTML->openForm(array('method' => 'POST', 'name' => 'addLink', 'action' => $actionurl.'&action=addLink'));
 echo $HTML->listTableTop();
 $cells = array();
 $cells[] = array(_('Displayed Name').utils_requiredField()._(':'), 'style' => 'text-align:right');

@@ -1,6 +1,5 @@
 <?php
 /**
- *
  * Project Registration: Project Information.
  *
  * This page is used to request data required for project registration:
@@ -19,7 +18,7 @@
  * Portions Copyright 2002-2009 (c) Roland Mas
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * Copyright 2012, Jean-Christophe Masson - French National Education Department
- * Copyright 2013-2014, Franck Villaume - TrivialDev
+ * Copyright 2013-2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -149,7 +148,7 @@ if (getStringFromRequest('submit')) {
 		} elseif ($group->isError()) {
 			echo $HTML->error_msg($group->getErrorMessage());
 		} else {
-			printf(_('Approving Project: %s'), $group->getUnixName());
+			echo _('Approving Project')._(': ').$group->getUnixName();
 			echo '<br />';
 
 			if (forge_get_config('project_auto_approval')) {
@@ -181,8 +180,8 @@ site_user_header(array('title'=>_('Register Project')));
 <p>
 <?php echo _('To apply for project registration, you should fill in basic information about it. Please read descriptions below carefully and provide complete and comprehensive data. All fields below are mandatory.') ?>
 </p>
-
-<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
+<?php
+echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post')); ?>
 <input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
 <h2><?php echo $index++.'. '._('Project Full Name') ?></h2>
 <p>
@@ -283,11 +282,10 @@ if (forge_get_config('use_scm') && count($scm_plugins) > 0) {
 	echo '</tr></tbody></table>'."\n";
 }
 
-echo '<h2>'.$index++.'. '._('Project template'). '</h2>';
-
 if (count ($template_projects) > 1) {
 	$tpv_arr = array () ;
 	$tpn_arr = array () ;
+	echo '<h2>'.$index++.'. '._('Project template'). '</h2>';
 	echo '<p>';
 	if (forge_get_config('allow_project_without_template')) {
 		printf(_('You can either start from an empty project, or pick a project that will act as a template for yours.  Your project will initially have the same configuration as the template (same roles and permissions, same trackers, same set of enabled plugins, and so on).')) ;
@@ -304,8 +302,9 @@ if (count ($template_projects) > 1) {
 	echo html_build_select_box_from_arrays ($tpv_arr, $tpn_arr, 'built_from_template', $built_from_template,
 						false, '', false, '') ;
 } elseif (count ($template_projects) == 1) {
-	echo '<p>';
 	if (forge_get_config('allow_project_without_template')) {
+		echo '<h2>'.$index++.'. '._('Project template'). '</h2>';
+		echo '<p>';
 		printf(_('You can either start from an empty project, or use the %s project as a template for yours.  Your project will initially have the same configuration as the template (same roles and permissions, same trackers, same set of enabled plugins, and so on).'),
 		       $template_projects[0]->getPublicName()) ;
 		echo '</p>' ;
@@ -336,10 +335,8 @@ if (count ($template_projects) > 1) {
 <input type="submit" name="i_disagree" formnovalidate="formnovalidate" value="<?php echo _('Cancel') ?>" />
 </p>
 
-</form>
-
 <?php
-
+echo $HTML->closeForm();
 site_footer();
 
 // Local Variables:

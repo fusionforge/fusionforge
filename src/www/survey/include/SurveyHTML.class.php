@@ -6,7 +6,7 @@
  * The rest Copyright 2002-2004 (c) GForge Team - Sung Kim
  * Copyright 2008-2010 (c) FusionForge Team
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013-2014, Franck Villaume - TrivialDev
+ * Copyright 2013-2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -32,13 +32,6 @@ require_once $gfwww.'include/note.php';
  * Survey HTML related functions
  */
 class SurveyHTML extends FFError {
-
-	/**
-	 * Dummy constructor
-	 */
-	function SurveyHTML() {
-		return true;
-	}
 
 	/**
 	 * Show survey header
@@ -128,20 +121,20 @@ class SurveyHTML extends FFError {
 		}
 
 		$ret = $warning_msg;
-		$ret.='<form action="'.getStringFromServer('PHP_SELF').'" method="post">' . "\n";
+		$ret.= $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
 		$ret.='<p><input type="hidden" name="post" value="Y" />';
 		$ret.='<input type="hidden" name="group_id" value="'.$group_id.'" />';
 		$ret.='<input type="hidden" name="question_id" value="'.$question_id.'" />';
 		$ret.='<input type="hidden" name="form_key" value="' . form_generate_key() . '" />';
-		$ret.=_('Question')._(':').'<br />';
-		$ret.='<input required="required" type="text" name="question" value="'.$question.'" size="60" maxlength="150" /></p>';
-		$ret.='<p>'. _('Question Type')._(':').'<br />';
+		$ret.='<label for="question">'._('Question')._(':').'</label>'.'<br />';
+		$ret.='<input id="question" required="required" type="text" name="question" value="'.$question.'" size="60" maxlength="150" /></p>';
+		$ret.='<p><label for="question_type">'. _('Question Type')._(':').'</label><br />';
 
 		$result = db_query_params ('SELECT * FROM survey_question_types', array());
 		$ret.= html_build_select_box($result,'question_type',$question_type,false);
 
 		$ret.='</p><p><input type="submit" name="submit" value="'.$question_button.'" /></p>' . "\n";
-		$ret.='</form>' . "\n";
+		$ret.= $HTML->closeForm();
 
 		return $ret;
 	}
@@ -188,18 +181,20 @@ class SurveyHTML extends FFError {
 		}
 
 		$ret = $warning_msg;
-		$ret.='<form action="'.getStringFromServer('PHP_SELF').'" method="post">';
+		$ret.= $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
 		$ret.='<p><input type="hidden" name="post" value="Y" />';
 		$ret.='<input type="hidden" name="group_id" value="'.$group_id.'" />';
 		$ret.='<input type="hidden" name="survey_id" value="'.$survey_id.'" />';
 		$ret.='<input type="hidden" name="survey_questions" value="'.$survey_questions.'" />';
 		$ret.='<input type="hidden" name="form_key" value="' . form_generate_key() . '" />';
+		$ret.='<label for="survey_title">';
 		$ret.='<strong>'._('Survey Title').utils_requiredField()._(':').'</strong>';
-		$ret.= '<input required="required" type="text" name="survey_title" value="'.$survey_title.'" size="60" maxlength="150" /></p>';
+		$ret.='</label>';
+		$ret.= '<input required="required" type="text" name="survey_title" id="survey_title" value="'.$survey_title.'" size="60" maxlength="150" /></p>';
 
 		$ret.='<p><strong>'. _('Is Active?').'</strong>';
-		$ret.='<br /><input type="radio" name="is_active" value="1"' .$active. '/>'._('Yes');
-		$ret.='<br /><input type="radio" name="is_active" value="0"' .$inactive. '/>'._('No');
+		$ret.='<br /><input type="radio" name="is_active" id="is_active_yes" value="1"' .$active. '/> <label for="is_active_yes">'._('Yes').'</label>';
+		$ret.='<br /><input type="radio" name="is_active" id="is_active_no" value="0"' .$inactive. '/> <label for="is_active_no">'._('No').'</label>';
 		$ret.='</p>';
 
 		$arr_to_add = & $s->getAddableQuestionInstances();
@@ -224,9 +219,10 @@ class SurveyHTML extends FFError {
 				$ret.= "<tr ". $HTML->boxGetAltRowStyle($i) .">\n";
 			}
 
-			$ret.= '<td><input type="checkbox" name="to_add[]" value="'.$arr_to_add[$i]->getID().'" />'.
+			$ret.= '<td><input type="checkbox" id="to_add_'.$i.'" name="to_add[]" value="'.$arr_to_add[$i]->getID().'" />'.
+				'<label for="to_add_'.$i.'">'.
 				$arr_to_add[$i]->getQuestion().' ('.
-				$arr_to_add[$i]->getQuestionStringType().')</td>';
+				$arr_to_add[$i]->getQuestionStringType().")</label></td>\n";
 
 			if ($i%3==2) {
 				$ret.= "</tr>";
@@ -280,8 +276,7 @@ class SurveyHTML extends FFError {
 		*/
 
 		$ret.='<p><input type="submit" name="submit" value="'.$survey_button.'" /></p>';
-		$ret.='</form>';
-
+		$ret.= $HTML->closeForm();
 		return $ret;
 	}
 
@@ -441,7 +436,7 @@ class SurveyHTML extends FFError {
 			}
 			if ($show_result_csv) {
 				/* Csv Link */
-				$ret.= '<td>['.util_make_link('/survey/admin/show_csv.php?group_id=$group_id&survey_id='.$surveys[$i]->getID(), _('CSV')).']</td>';
+				$ret.= '<td>['.util_make_link('/survey/admin/show_csv.php?group_id='.$group_id.'&survey_id='.$surveys[$i]->getID(), _('CSV')).']</td>';
 			}
 			$ret.= "</tr>\n";
 		}
@@ -473,7 +468,7 @@ class SurveyHTML extends FFError {
 		if ($s->isUserVote(user_getid())) {
 			$ret.= $HTML->warning_msg(_('Warning - you are about to vote a second time on this survey.'));
 		}
-		$ret.= '<form action="/survey/survey_resp.php" method="post">'.
+		$ret.= $HTML->openForm(array('action' => '/survey/survey_resp.php', 'method' =>'post')).
 			'<input type="hidden" name="group_id" value="'.$group_id.'" />'.
 			'<input type="hidden" name="survey_id" value="'.$survey_id. '" />';
 
@@ -553,8 +548,8 @@ class SurveyHTML extends FFError {
 		$ret.='<tr><td class="align-center" colspan="2">'.
 			'<input type="submit" name="submit" value="'._('Submit').'" />'.
 			'<br />'.util_make_link('/survey/privacy.php?group_id='.$group_id, _('Survey Privacy')).
-			'</td></tr></form></table>';
-
+			'</td></tr></table>';
+		echo $HTML->closeForm();
 		return $ret;
 	}
 
@@ -719,10 +714,10 @@ class SurveyHTML extends FFError {
 	 * @return	string
 	 */
 	function _makeBar($name, $percent, $color) {
-		$ret = '<tr><td width="30%">'.$name.'</td><td>';
-		$ret.= '<table width="'.$percent.'%"><tr>';
+		$ret = '<tr><td style=width: 30%">'.$name.'</td><td>';
+		$ret.= '<table style=width: '.$percent.'%"><tr>';
 		if ($percent) {
-			$ret.='<td width="90%" bgcolor="'.$color.'">&nbsp;</td>';
+			$ret.='<td style=width: 90%" bgcolor="'.$color.'">&nbsp;</td>';
 		}
 
 		$ret.= '<td>'.sprintf("%.2f", $percent).'%</td></tr></table></td></tr>'."\n";

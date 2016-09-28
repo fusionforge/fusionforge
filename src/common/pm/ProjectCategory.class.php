@@ -41,24 +41,22 @@ class ProjectCategory extends FFError {
 	var $data_array;
 
 	/**
-	 * ProjectCategory - constructor.
-	 *
 	 * @param	object	   	$ProjectGroup	ProjectGroup object.
 	 * @param	array|bool	$data		(all fields from project_category) OR category_id from database.
 	 * @return	boolean		success.
 	 */
-	function ProjectCategory(&$ProjectGroup, $data=false) {
+	function __construct(&$ProjectGroup, $data=false) {
 		parent::__construct();
 
 		//was ProjectGroup legit?
 		if (!$ProjectGroup || !is_object($ProjectGroup)) {
 			$this->setError('ProjectCategory: No Valid ProjectGroup');
-			return false;
+			return;
 		}
 		//did ProjectGroup have an error?
 		if ($ProjectGroup->isError()) {
 			$this->setError('ProjectCategory: '.$ProjectGroup->getErrorMessage());
-			return false;
+			return;
 		}
 		$this->ProjectGroup =& $ProjectGroup;
 
@@ -68,16 +66,10 @@ class ProjectCategory extends FFError {
 //
 //	should verify group_project_id
 //
-				return true;
 			} else {
-				if (!$this->fetchData($data)) {
-					return false;
-				} else {
-					return true;
-				}
+				$this->fetchData($data);
 			}
 		}
-		return true;
 	}
 
 	/**

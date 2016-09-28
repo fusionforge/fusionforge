@@ -50,20 +50,17 @@ class Survey extends FFError {
 	var $Group;
 
 	/**
-	 * Constructor.
-	 *
 	 * @param	$Group
 	 * @param	bool	$survey_id
 	 * @param	bool	$arr
 	 * @internal	param	\The $object Group object to which this survey is associated.
 	 * @internal	param	\The $int survey_id.
 	 * @internal	param	\The $array associative array of data.
-	 * @return	\Survey
 	 */
 	function __construct(&$Group, $survey_id = false, $arr = false) {
 		parent::__construct();
 		if (!$Group || !is_object($Group)) {
-			$this->setError(_('No Valid Group Object'));
+			$this->setError(_('Invalid Project'));
 			return;
 		}
 		if ($Group->isError()) {

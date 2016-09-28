@@ -25,9 +25,8 @@ require_once $gfcommon.'reporting/Report.class.php';
 
 class ReportSetup extends Report {
 
-	function ReportSetup() {
-		$this->Report();
-
+	function __construct() {
+		parent::__construct();
 	}
 
 	function initialSetup() {
@@ -56,8 +55,8 @@ class ReportSetup extends Report {
 			time_code int not null CONSTRAINT reptimetrk_timecode REFERENCES rep_time_category(time_code),
 				hours float not null);";
 		$sql[]=$sql1;
-	//	$sql[]="CREATE UNIQUE INDEX reptimetrk_weekusrtskcde ON
-	//		rep_time_tracking (week,user_id,project_task_id,time_code);";
+		//	$sql[]="CREATE UNIQUE INDEX reptimetrk_weekusrtskcde ON
+		//		rep_time_tracking (week,user_id,project_task_id,time_code);";
 		$sql[]="CREATE INDEX reptimetracking_userdate ON
 			rep_time_tracking (user_id,week);";
 
@@ -183,7 +182,7 @@ class ReportSetup extends Report {
 		FROM rep_user_act_monthly
 		GROUP BY user_id;";
 
-	//per-project activity
+		//per-project activity
 		$sql[]="DROP TABLE rep_group_act_daily";
 		$sql[]="CREATE TABLE rep_group_act_daily (
 		group_id int not null,
@@ -249,7 +248,7 @@ class ReportSetup extends Report {
 		FROM rep_group_act_monthly
 		GROUP BY group_id;";
 
-	//overall activity
+		//overall activity
 		$sql[]="DROP VIEW rep_site_act_daily_vw";
 		$sql[]="CREATE VIEW rep_site_act_daily_vw AS
 		SELECT day,
@@ -971,7 +970,7 @@ class ReportSetup extends Report {
 
 			FULL OUTER JOIN
 				(SELECT created_by AS user_id, $1::int AS day, count(*) AS docs
-				FROM doc_data
+				FROM docdata_vw
 				WHERE createdate BETWEEN $1 AND $2
 				GROUP BY user_id,day ) docs USING (user_id,day)) foo3
 
@@ -1371,8 +1370,6 @@ class ReportSetup extends Report {
 				$time_code));
 	}
 
-
-
 	/**
 	 * Add a row to the project_status table.
 	 *
@@ -1391,7 +1388,7 @@ class ReportSetup extends Report {
 	 *	@param	string	$status_name The category name.
 	 *	@return	boolean	Success.
 	 */
-	function updateStatusId($status_id, $status_name) {
+	function updateStatusID($status_id, $status_name) {
 		return db_query_params ('UPDATE project_status SET status_name=$1 WHERE status_id=$2',
 				array($status_name,
 				$status_id));

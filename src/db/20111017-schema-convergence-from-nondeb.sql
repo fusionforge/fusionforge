@@ -1,12 +1,16 @@
 ALTER FUNCTION frs_dlstats_filetotal_insert_ag() RENAME TO frs_dlstats_filetotal_insert_agg;
 
+ALTER TABLE ONLY artifact_type_monitor DROP CONSTRAINT IF EXISTS artifact_type_monitor_group_artifact_id_fkey;
 ALTER TABLE ONLY artifact_type_monitor ADD CONSTRAINT artifact_type_monitor_group_artifact_id_fkey FOREIGN KEY (group_artifact_id) REFERENCES artifact_group_list(group_artifact_id) ON DELETE CASCADE;
+ALTER TABLE ONLY artifact_type_monitor DROP CONSTRAINT IF EXISTS artifact_type_monitor_user_id_fkey;
 ALTER TABLE ONLY artifact_type_monitor ADD CONSTRAINT artifact_type_monitor_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(user_id);
 
 ALTER TABLE artifact_type_monitor DROP CONSTRAINT "$1";
 ALTER TABLE artifact_type_monitor DROP CONSTRAINT "$2";
 
+ALTER TABLE ONLY forum_attachment DROP CONSTRAINT IF EXISTS forum_attachment_msg_id_fkey;
 ALTER TABLE ONLY forum_attachment ADD CONSTRAINT forum_attachment_msg_id_fkey FOREIGN KEY (msg_id) REFERENCES forum(msg_id) ON DELETE CASCADE;
+ALTER TABLE ONLY forum_attachment DROP CONSTRAINT IF EXISTS forum_attachment_userid_fkey;
 ALTER TABLE ONLY forum_attachment ADD CONSTRAINT forum_attachment_userid_fkey FOREIGN KEY (userid) REFERENCES users(user_id) ON DELETE SET DEFAULT;
 
 ALTER TABLE forum_attachment DROP CONSTRAINT "$1";
@@ -16,6 +20,7 @@ ALTER SEQUENCE supported_langu_language_id_seq RENAME TO supported_languages_pk_
 ALTER TABLE supported_languages ALTER COLUMN language_id SET DEFAULT nextval(('supported_languages_pk_seq'::text)::regclass);
 ALTER SEQUENCE group_cvs_history_id_seq RENAME TO group_cvs_history_pk_seq;
 ALTER TABLE group_cvs_history ALTER COLUMN id SET DEFAULT nextval(('group_cvs_history_pk_seq'::text)::regclass);
+ALTER TABLE group_cvs_history DROP CONSTRAINT IF EXISTS group_cvs_history_pkey;
 ALTER TABLE group_cvs_history ADD CONSTRAINT group_cvs_history_pkey PRIMARY KEY (id);
 
 ALTER SEQUENCE project_messa_project_messa_seq RENAME TO project_messages_project_message_id_seq;
@@ -29,24 +34,33 @@ ALTER TABLE db_images ALTER COLUMN version SET DEFAULT 0;
 
 ALTER TABLE group_join_request DROP CONSTRAINT "$1";
 ALTER TABLE group_join_request DROP CONSTRAINT "$2";
+ALTER TABLE group_join_request DROP CONSTRAINT IF EXISTS group_join_request_group_id_fkey;
 ALTER TABLE group_join_request ADD CONSTRAINT group_join_request_group_id_fkey FOREIGN KEY (group_id) REFERENCES groups(group_id) ON DELETE CASCADE;
+ALTER TABLE group_join_request DROP CONSTRAINT IF EXISTS group_join_request_user_id_fkey;
 ALTER TABLE group_join_request ADD CONSTRAINT group_join_request_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(user_id);
+ALTER TABLE groups DROP CONSTRAINT IF EXISTS groups_license;
 ALTER TABLE groups ADD CONSTRAINT groups_license FOREIGN KEY (license) REFERENCES licenses(license_id) MATCH FULL;
 ALTER TABLE groups ALTER COLUMN unix_box SET DEFAULT 'shell'::character varying;
 ALTER TABLE users ALTER COLUMN unix_box SET DEFAULT 'shell'::character varying;
 
 DROP INDEX plugins_plugin_name_key;
+ALTER TABLE plugins DROP CONSTRAINT IF EXISTS plugins_plugin_name_key;
 ALTER TABLE plugins ADD CONSTRAINT plugins_plugin_name_key UNIQUE (plugin_name);
+ALTER TABLE project_tags DROP CONSTRAINT IF EXISTS project_tags_group_id_fkey;
 ALTER TABLE project_tags ADD CONSTRAINT project_tags_group_id_fkey FOREIGN KEY (group_id) REFERENCES groups(group_id) MATCH FULL;
+ALTER TABLE project_task DROP CONSTRAINT IF EXISTS project_task_group_project_id_f;
 ALTER TABLE project_task ADD CONSTRAINT project_task_group_project_id_f FOREIGN KEY (group_project_id) REFERENCES project_group_list(group_project_id) MATCH FULL;
 
 ALTER TABLE project_task_external_order DROP CONSTRAINT "$1";
+ALTER TABLE project_task_external_order DROP CONSTRAINT IF EXISTS project_task_external_order_project_task_id_fkey;
 ALTER TABLE project_task_external_order ADD CONSTRAINT project_task_external_order_project_task_id_fkey FOREIGN KEY (project_task_id) REFERENCES project_task(project_task_id) MATCH FULL ON DELETE CASCADE;
 
+ALTER TABLE project_weekly_metric DROP CONSTRAINT IF EXISTS project_weekly_metric_pkey;
 ALTER TABLE project_weekly_metric ADD CONSTRAINT project_weekly_metric_pkey PRIMARY KEY (ranking);
 DROP SEQUENCE project_metric_wee_ranking1_seq;
 
 ALTER TABLE role DROP CONSTRAINT "$1";
+ALTER TABLE role DROP CONSTRAINT IF EXISTS role_group_id_fkey;
 ALTER TABLE role ADD CONSTRAINT role_group_id_fkey FOREIGN KEY (group_id) REFERENCES groups(group_id) ON DELETE CASCADE;
 
 ALTER TABLE project_messages ALTER COLUMN project_message_id SET DEFAULT nextval('project_messages_project_message_id_seq'::regclass);
@@ -113,14 +127,17 @@ ALTER TABLE user_preferences RENAME COLUMN set_date_new TO set_date;
 
 ALTER TABLE project_task DROP CONSTRAINT project_task_category_id_fkey;
 DROP INDEX project_categor_category_id_key;
+ALTER TABLE project_category DROP CONSTRAINT IF EXISTS project_category_pkey;
 ALTER TABLE project_category ADD CONSTRAINT project_category_pkey PRIMARY KEY (category_id);
+ALTER TABLE project_task DROP CONSTRAINT IF EXISTS project_task_category_id_fkey;
 ALTER TABLE project_task ADD CONSTRAINT project_task_category_id_fkey FOREIGN KEY (category_id) REFERENCES project_category(category_id);
 
 ALTER TABLE users DROP CONSTRAINT users_themeid;
 DROP INDEX themes_theme_id_key;
+ALTER TABLE themes DROP CONSTRAINT IF EXISTS themes_pkey;
 ALTER TABLE themes ADD CONSTRAINT themes_pkey PRIMARY KEY (theme_id);
+ALTER TABLE users DROP CONSTRAINT IF EXISTS users_themeid;
 ALTER TABLE users ADD CONSTRAINT users_themeid FOREIGN KEY (theme_id) REFERENCES themes(theme_id) MATCH FULL;
-
 
 CREATE OR REPLACE VIEW stats_project_all_vw AS SELECT stats_project_months.group_id, (avg(stats_project_months.developers))::integer AS developers, (avg(stats_project_months.group_ranking))::integer AS group_ranking, avg(stats_project_months.group_metric) AS group_metric, sum(stats_project_months.logo_showings) AS logo_showings, sum(stats_project_months.downloads) AS downloads, sum(stats_project_months.site_views) AS site_views, sum(stats_project_months.subdomain_views) AS subdomain_views, sum(stats_project_months.page_views) AS page_views, sum(stats_project_months.file_releases) AS file_releases, sum(stats_project_months.msg_posted) AS msg_posted, (avg(stats_project_months.msg_uniq_auth))::integer AS msg_uniq_auth, sum(stats_project_months.bugs_opened) AS bugs_opened, sum(stats_project_months.bugs_closed) AS bugs_closed, sum(stats_project_months.support_opened) AS support_opened, sum(stats_project_months.support_closed) AS support_closed, sum(stats_project_months.patches_opened) AS patches_opened, sum(stats_project_months.patches_closed) AS patches_closed, sum(stats_project_months.artifacts_opened) AS artifacts_opened, sum(stats_project_months.artifacts_closed) AS artifacts_closed, sum(stats_project_months.tasks_opened) AS tasks_opened, sum(stats_project_months.tasks_closed) AS tasks_closed, sum(stats_project_months.help_requests) AS help_requests, sum(stats_project_months.cvs_checkouts) AS cvs_checkouts, sum(stats_project_months.cvs_commits) AS cvs_commits, sum(stats_project_months.cvs_adds) AS cvs_adds FROM stats_project_months GROUP BY stats_project_months.group_id;
 CREATE OR REPLACE VIEW stats_project_vw AS SELECT spd.group_id, spd.month, spd.day, spd.developers, spm.ranking AS group_ranking, spm.percentile AS group_metric, salbg.count AS logo_showings, fdga.downloads, sasbg.count AS site_views, ssp.pages AS subdomain_views, (COALESCE(sasbg.count, 0) + COALESCE(ssp.pages, 0)) AS page_views, sp.file_releases, sp.msg_posted, sp.msg_uniq_auth, sp.bugs_opened, sp.bugs_closed, sp.support_opened, sp.support_closed, sp.patches_opened, sp.patches_closed, sp.artifacts_opened, sp.artifacts_closed, sp.tasks_opened, sp.tasks_closed, sp.help_requests, scg.checkouts AS cvs_checkouts, scg.commits AS cvs_commits, scg.adds AS cvs_adds FROM (((((((stats_project_developers spd LEFT JOIN stats_project sp USING (month, day, group_id)) LEFT JOIN stats_project_metric spm USING (month, day, group_id)) LEFT JOIN stats_cvs_group scg USING (month, day, group_id)) LEFT JOIN stats_agg_site_by_group sasbg USING (month, day, group_id)) LEFT JOIN stats_agg_logo_by_group salbg USING (month, day, group_id)) LEFT JOIN stats_subd_pages ssp USING (month, day, group_id)) LEFT JOIN frs_dlstats_group_vw fdga USING (month, day, group_id));

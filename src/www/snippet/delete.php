@@ -51,7 +51,7 @@ if (session_loggedin()) {
 			echo $HTML->error_msg(_('Error: package version not found.'));
 			snippet_footer();
 			exit;
-		} else if (!forge_check_global_perm('forge_admin')
+		} elseif (!forge_check_global_perm('forge_admin')
 		           and db_result($result,0,'submitted_by') != user_getid()) {
 			echo $HTML->error_msg(_('Error: Only the creator of a package version can delete snippets from it.'));
 			snippet_footer();
@@ -87,7 +87,7 @@ if (session_loggedin()) {
 			echo $HTML->error_msg(_('Error: That snippet does not exist.'));
 			snippet_footer();
 			exit;
-		} else if (!forge_check_global_perm('forge_admin')
+		} elseif (!forge_check_global_perm('forge_admin')
 			and db_result($result,0,'submitted_by') != user_getid()) {
 			echo $HTML->error_msg(_('Error: Only the creator of a snippet can delete it.'));
 			snippet_footer();
@@ -127,7 +127,7 @@ if (session_loggedin()) {
 			echo $HTML->error_msg(_('Error: package version not found.'));
 			snippet_footer();
 			exit;
-		} else if (!forge_check_global_perm('forge_admin')
+		} elseif (!forge_check_global_perm('forge_admin')
 		           and db_result($result,0,'submitted_by') != user_getid()) {
 			echo $HTML->error_msg(_('Error: Only the creator of a package version can delete it.'));
 			snippet_footer();

@@ -31,9 +31,6 @@ class FusionForge extends FFError {
 
 	public static $instance;
 
-	/**
-	 *	FusionForge - FusionForge object constructor
-	 */
 	function __construct() {
 		parent::__construct();
 
@@ -49,7 +46,6 @@ class FusionForge extends FFError {
 		}
 
 		self::$instance = $this;
-		return true;
 	}
 
 	public static function getInstance() {
@@ -66,7 +62,7 @@ class FusionForge extends FFError {
 	 * @param	string	$extended_qpa	string of SQL to be part of the QPA query
 	 */
 	function getNumberOfProjects($params = array(), $extended_qpa = null) {
-		$qpa = db_construct_qpa(false, 'SELECT count(*) as count FROM groups');
+		$qpa = db_construct_qpa(false, 'SELECT count(*) AS count FROM groups');
 		if (count($params) > 1) {
 			$qpa = db_construct_qpa($qpa, ' WHERE ');
 			$i = 0;
@@ -120,7 +116,7 @@ class FusionForge extends FFError {
 	}
 
 	function getNumberOfProjectsFilteredByGroupName($filter) {
-		$res = db_query_params('SELECT count(*) as count FROM groups WHERE lower(group_name) LIKE $1', array(strtolower("$filter%")));
+		$res = db_query_params('SELECT count(*) AS count FROM groups WHERE lower(group_name) LIKE $1', array(strtolower("$filter%")));
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError('Unable to get project count: '.db_error());
 			return false;
@@ -129,7 +125,7 @@ class FusionForge extends FFError {
 	}
 
 	function getNumberOfUsersUsingAPlugin($plugin_name) {
-		$res = db_query_params ('SELECT count(u.user_id) AS count FROM plugins p, user_plugin up, users u WHERE p.plugin_name = $1 and up.user_id = u.user_id and p.plugin_id = up.plugin_id and users.user_id != 100',
+		$res = db_query_params ('SELECT count(u.user_id) AS count FROM plugins p, user_plugin up, users u WHERE p.plugin_name = $1 and up.user_id = u.user_id AND p.plugin_id = up.plugin_id and users.user_id != 100',
 					array($plugin_name));
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError('Unable to get user count: '.db_error());
@@ -169,7 +165,7 @@ class FusionForge extends FFError {
 	}
 
 	function getNumberOfProjectsUsingTags($params = array(), $extended_qpa = null) {
-		$qpa = db_construct_qpa(false, 'SELECT count(*) as count FROM groups, project_tags WHERE groups.group_id = project_tags.group_id ');
+		$qpa = db_construct_qpa(false, 'SELECT count(*) AS count FROM groups, project_tags WHERE groups.group_id = project_tags.group_id ');
 		if (count($params) > 1) {
 			$qpa = db_construct_qpa($qpa, ' AND ');
 			$i = 0;

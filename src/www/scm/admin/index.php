@@ -158,7 +158,7 @@ echo html_ao('script', array('type' => 'text/javascript'));
 //]]>
 <?php
 echo html_ac(html_ap() - 1);
-echo $HTML->openForm(array('method' => 'post', 'action' => util_make_uri('/scm/admin/?group_id='.$group_id)));
+echo $HTML->openForm(array('method' => 'post', 'action' => '/scm/admin/?group_id='.$group_id));
 $hook_params = array () ;
 $hook_params['group_id'] = $group_id ;
 

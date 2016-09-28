@@ -5,7 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -38,7 +38,6 @@ $group_id = getIntFromRequest('group_id');
 $job_id = getIntFromRequest('job_id');
 
 if (forge_check_global_perm('forge_admin')) {
-
 	if (getStringFromRequest('post_changes')) {
 		/*
 			Update the database
@@ -95,8 +94,9 @@ if (forge_check_global_perm('forge_admin')) {
 		} else {
 			echo $HTML->error_msg(_('No job categories').db_error());
 		}
+
+		echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
 		?>
-		<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 		<p>
 		<input type="hidden" name="people_cat" value="y" />
 		<input type="hidden" name="post_changes" value="y" />
@@ -111,9 +111,8 @@ if (forge_check_global_perm('forge_admin')) {
 		?>
 		<p>
 		<input type="submit" name="submit" value="<?php echo _('Submit'); ?>"></p>
-		</form>
 		<?php
-
+		echo $HTML->closeForm();
 		people_footer();
 
 	} elseif (getStringFromRequest('people_skills')) {
@@ -133,8 +132,9 @@ if (forge_check_global_perm('forge_admin')) {
 			echo db_error();
 			echo "\n<h2>"._('No Skills Found').'</h2>';
 		}
+
+		echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
 		?>
-		<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 		<p>
 		<input type="hidden" name="people_skills" value="y" />
 		<input type="hidden" name="post_changes" value="y" />
@@ -149,29 +149,22 @@ if (forge_check_global_perm('forge_admin')) {
 		?>
 		<p>
 		<input type="submit" name="submit" value="<?php echo _('Submit'); ?>"></p>
-		</form>
 		<?php
-
+		echo $HTML->closeForm();
 		people_footer();
-
 	} else {
 		/*
 			Show main page
 		*/
-
 		people_header(array('title' => _('People Administration')));
-
 		echo '<p>
 			'.util_make_link('/people/admin/?people_cat=1', _('Add Job Categories')).'<br />';
 	//	echo "\nAdd categories of bugs like, 'mail module','gant chart module','interface', etc<p>";
-
 		echo "\n".util_make_link('/people/admin/?people_skills=1', _('Add Job Skills')).'<br />';
 	//	echo "\nAdd Groups of bugs like 'future requests','unreproducible', etc<p>";
 		echo '</p>';
-
 		people_footer();
 	}
-
 } else {
 	exit_permission_denied('home');
 }

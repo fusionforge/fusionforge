@@ -24,8 +24,8 @@
  */
 
 class quota_managementPlugin extends Plugin {
-	function quota_managementPlugin () {
-		$this->Plugin() ;
+	function __construct() {
+		parent::__construct();
 		$this->name = "quota_management";
 		$this->text = _("Quota Management"); // To show in the tabs, use...
 		$this->pkg_desc =

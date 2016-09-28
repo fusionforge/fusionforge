@@ -63,11 +63,10 @@ class AbstractFilesDirectory extends FFError {
 		return self::$finfo;
 	}
 	/**
-	 * Constructor
 	 * @param HTML generator $HTML
 	 * @param string $storage_base path to the storage directory (if omitted, uses a temprary dir in /tmp)
 	 */
-	public function AbstractFilesDirectory($HTML, $storage_base=False) {
+	function __construct($HTML, $storage_base=False) {
 
 		$this->html_generator = $HTML;
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * FusionForge Document Storage Class
+ * FusionForge Document Manager Storage Class
  *
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * Copyright 2012, Franck Villaume - TrivialDev

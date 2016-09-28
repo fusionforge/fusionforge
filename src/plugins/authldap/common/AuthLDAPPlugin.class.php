@@ -33,9 +33,9 @@ class AuthLDAPPlugin extends ForgeAuthPlugin {
 	protected $saved_password;
 	protected $saved_data;
 
-	function AuthLDAPPlugin() {
+	function __construct() {
 		global $gfconfig;
-		$this->ForgeAuthPlugin();
+		parent::__construct();
 		$this->name = "authldap";
 		$this->text = _("LDAP authentication");
 		$this->pkg_desc =
@@ -78,7 +78,7 @@ into the FusionForge database.");
 		if (!$u) {
 			// No user by that name yet, let's create it
 
-			$u = new GFUser();
+			$u = new FFUser();
 
 			$user_data = array();
 
@@ -86,7 +86,7 @@ into the FusionForge database.");
 			$user_data['firstname'] = '';
 			$user_data['lastname'] = '';
 			if ($this->saved_password == '') {
-				$user_data['password1'] = 'INVALID';
+				$user_data['password1'] = '_INVALID_';
 			} else {
 				$user_data['password1'] = $this->saved_password;
 			}
@@ -137,6 +137,7 @@ into the FusionForge database.");
 					 $user_data['title'],
 					 $user_data['ccode'],
 					 $send_mail)) {
+				error_log("LDAP: user::create() failed: ".$u->getErrorMessage());
 				return false;
 			}
 
@@ -155,7 +156,6 @@ into the FusionForge database.");
 
 		$mapped_data = array(
 			'username' => $u->getUnixName(),
-			'md5_password' => '',
 			'unix_password' => '',
 			'firstname' => $u->getFirstName(),
 			'lastname' => $u->getLastName(),
@@ -190,8 +190,7 @@ into the FusionForge database.");
 			   $u->usesTooltips(),
 			   trim($mapped_data['email']));
 
-		$u->setMD5Passwd ($mapped_data['md5_password']);
-		if ((substr($mapped_data['unix_password'], 0, 7) == '{crypt}') 
+		if ((substr($mapped_data['unix_password'], 0, 7) == '{crypt}')
 			|| substr($mapped_data['unix_password'], 0, 7) == '{CRYPT}') {
 			$mapped_data['unix_password'] = substr($mapped_data['unix_password'],7);
 		}
@@ -209,7 +208,7 @@ into the FusionForge database.");
 		$result = '';
 
 		$result .= html_e('p', array(), _('Cookies must be enabled past this point.'));
-		$result .= $HTML->openForm(array('action' => util_make_uri('/plugins/'.$this->name.'/post-login.php'), 'method' => 'post'));
+		$result .= $HTML->openForm(array('action' => '/plugins/'.$this->name.'/post-login.php', 'method' => 'post'));
 		$result .= html_e('input', array('type' => 'hidden', 'name' => 'form_key', 'value' => form_generate_key()));
 		$result .= html_e('input', array('type' => 'hidden', 'name' => 'return_to', 'value' => htmlspecialchars(stripslashes($return_to))));
 		$result .= html_e('p', array(), _('Login Name')._(':').
@@ -234,6 +233,7 @@ into the FusionForge database.");
 		forge_define_config_item('ldap_version', $this->name, 3);
 		forge_define_config_item('manager_dn', $this->name, '');
 		forge_define_config_item('manager_password', $this->name, '');
+		forge_define_config_item('use_x_forward_user', $this->name, false);
 	}
 
 	/// HELPERS
@@ -341,6 +341,57 @@ into the FusionForge database.");
 
 		$this->ldap_conn = $conn;
 		return true;
+	}
+
+	/**
+	 * Is there a valid session?
+	 *
+	 * @param	array	$params
+	 * @return	FORGE_AUTH_AUTHORITATIVE_ACCEPT, FORGE_AUTH_AUTHORITATIVE_REJECT or FORGE_AUTH_NOT_AUTHORITATIVE
+	 * TODO : document 'auth_token' param
+	 */
+	function checkAuthSession(&$params) {
+		// check the session cookie/token to get a user_id
+		if (isset($params['auth_token']) && $params['auth_token'] != '') {
+			$user_id = $this->checkSessionToken($params['auth_token']);
+			//WARNING: I HOPE YOU KNOW WHAT YOU ARE DOING WHEN USING THIS OPTION!
+		} elseif (forge_get_config('use_x_forward_user', $this->name)) {
+			$username = $_SERVER['HTTP_X_FORWARDED_USER'];
+			$userObject = user_get_object_by_name($username);
+			if ($userObject && is_object($userObject)) {
+				$user_id = $userObject->getID();
+			} else {
+				$user_id = false;
+			}
+			if (!$user_id) {
+				$params['username'] = $username;
+				$params['event'] = forge_get_config('sync_data_on', $this->name);
+				$this->syncAccountInfo($params);
+				$userObject = user_get_object_by_name($username);
+				if ($userObject && is_object($userObject)) {
+					$user_id = $userObject->getID();
+				} else {
+					$user_id = false;
+				}
+			}
+		} else {
+			$user_id = $this->checkSessionCookie();
+		}
+		if ($user_id) {
+			$this->saved_user = user_get_object($user_id);
+			if ($this->isSufficient()) {
+				$params['results'][$this->name] = FORGE_AUTH_AUTHORITATIVE_ACCEPT;
+			} else {
+				$params['results'][$this->name] = FORGE_AUTH_NOT_AUTHORITATIVE;
+			}
+		} else {
+			$this->saved_user = NULL;
+			if ($this->isRequired()) {
+				$params['results'][$this->name] = FORGE_AUTH_AUTHORITATIVE_REJECT;
+			} else {
+				$params['results'][$this->name] = FORGE_AUTH_NOT_AUTHORITATIVE;
+			}
+		}
 	}
 }
 

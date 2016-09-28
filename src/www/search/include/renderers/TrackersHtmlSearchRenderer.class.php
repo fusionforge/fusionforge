@@ -3,6 +3,7 @@
  * Search Engine
  *
  * Copyright 2004 (c) Dominik Haas, GForge Team
+ * Copyright 2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -27,24 +28,21 @@ require_once $gfcommon.'search/TrackersSearchQuery.class.php';
 class TrackersHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 
 	/**
-	 * Constructor
-	 *
 	 * @param string $words words we are searching for
 	 * @param int $offset offset
 	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
 	 * @param int $groupId group id
 	 * @param array|string $sections array of all sections to search in (array of strings)
-	 *
 	 */
-	function TrackersHtmlSearchRenderer($words, $offset, $isExact, $groupId, $sections=SEARCH__ALL_SECTIONS) {
+	function __construct($words, $offset, $isExact, $groupId, $sections=SEARCH__ALL_SECTIONS) {
 		$userIsGroupMember = $this->isGroupMember($groupId);
 
 		$searchQuery = new TrackersSearchQuery($words, $offset, $isExact, $groupId, $sections, $userIsGroupMember);
 
-		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_TRACKERS, $words, $isExact, $searchQuery, $groupId, 'tracker');
+		parent::__construct(SEARCH__TYPE_IS_TRACKERS, $words, $isExact, $searchQuery, $groupId, 'tracker');
 
 		$this->tableHeaders = array(
-			'&nbsp;',
+			_('Tracker'),
 			_('#'),
 			_('Summary'),
 			_('Submitted by'),
@@ -64,26 +62,23 @@ class TrackersHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$rowColor = 0;
 		$lastTracker = null;
 
-		error_log($result);
-
 		foreach ($result as $row) {
 			//section changed
 			$currentTracker = $row['name'];
 			if ($lastTracker != $currentTracker) {
-				$return .= '<tr><td colspan="5">'.$currentTracker.'</td></tr>';
+				$return .= '<tr><td colspan="5">'.util_make_link('/tracker/?atid='.$row['group_artifact_id'].'&group_id='.$this->groupId.'&func=browse',$currentTracker).'</td></tr>';
 				$lastTracker = $currentTracker;
 				$rowColor = 0;
 			}
 			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($rowColor) .'>'
-						. '<td width="5%">&nbsp;</td>'
+						. '<td style="width: 5%">&nbsp;</td>'
 						. '<td>'.$row['artifact_id'].'</td>'
-						. '<td>'
-							. '<a href="'.util_make_url ('/tracker/?func=detail&amp;group_id='.$this->groupId.'&amp;aid='.$row['artifact_id'] . '&amp;atid='.$row['group_artifact_id']).'">'
-							. html_image('ic/tracker20g.png').' '.$row['summary']
-							. '</a></td>'
+						. '<td>'.util_make_link('/tracker/?func=detail&group_id='.$this->groupId.'&aid='.$row['artifact_id'].'&atid='.$row['group_artifact_id'],
+									html_image('ic/tracker20g.png').' '.$row['summary'])
+							.'</td>'
 						. '<td style="width: 15%">'.$row['realname'].'</td>'
 						. '<td style="width: 15%">'.relative_date($row['open_date']).'</td></tr>';
-			$rowColor ++;
+			$rowColor++;
 		}
 		return $return;
 	}
@@ -101,7 +96,7 @@ class TrackersHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	}
 
 	/**
-	 * redirectToResult - redirect the user  directly to the result when there is only one matching result
+	 * redirectToResult - redirect the user directly to the result when there is only one matching result
 	 */
 	function redirectToResult() {
 		$result = $this->searchQuery->getData(1)[0];

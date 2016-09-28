@@ -49,7 +49,7 @@ Class CoreApiServer extends SoapServer {
 	 * @param string $wsdl WSDL location for this service
 	 * @param array $options Options for the SoapClient
 	 */
-	public function __construct($wsdl="FusionforgeCoreApi.wsdl", $options=array()) {
+	function __construct($wsdl="FusionforgeCoreApi.wsdl", $options=array()) {
 
 		$this->logger = Logger::getLogger('api.soap.core.CoreApi');
 		$this->logger->debug("FusionForgeCoreApi Soap Server created ...");

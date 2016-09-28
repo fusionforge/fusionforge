@@ -24,7 +24,7 @@ class Widget_HomeDetailActivityMostActiveProjectWeek extends Widget {
 	var $cached_perms = array();
 
 	function __construct() {
-		$this->Widget('homedetailactivitymostactiveprojectweek');
+		parent::__construct('homedetailactivitymostactiveprojectweek');
 		if (forge_get_config('use_activity')) {
 			$this->content['title'] = _('Detailed Activity for the 10 Most Active Projects this Week');
 		}
@@ -116,17 +116,8 @@ class Widget_HomeDetailActivityMostActiveProjectWeek extends Widget {
 						$url = util_make_link('/forum/forum.php?forum_id='.$activity['subref_id'],_('News').' '.$activity['description']);
 						break;
 					}
-					case 'taskopen': {
-						$icon = html_image('ic/taskman20w.png','','',array('alt'=>_('Tasks')));
-						$url = util_make_link('/pm/task.php?func=detailtask&project_task_id='.$activity['subref_id'].'&group_id='.$activity['group_id'].'&group_project_id='.$activity['ref_id'],_('Tasks').' '.$activity['description']);
-						break;
-					}
-					case 'taskclose': {
-						$icon = html_image('ic/taskman20w.png','','',array('alt'=>_('Tasks')));
-						$url = util_make_link('/pm/task.php?func=detailtask&project_task_id='.$activity['subref_id'].'&group_id='.$activity['group_id'].'&group_project_id='.$activity['ref_id'],_('Tasks').' '.$activity['description']);
-						break;
-					}
-
+					case 'taskopen':
+					case 'taskclose':
 					case 'taskdelete': {
 						$icon = html_image('ic/taskman20w.png','','',array('alt'=>_('Tasks')));
 						$url = util_make_link('/pm/task.php?func=detailtask&project_task_id='.$activity['subref_id'].'&group_id='.$activity['group_id'].'&group_project_id='.$activity['ref_id'],_('Tasks').' '.$activity['description']);
@@ -165,7 +156,9 @@ class Widget_HomeDetailActivityMostActiveProjectWeek extends Widget {
 					continue;
 				}
 				if ($last_day != strftime($date_format, $activity['activity_date'])) {
-					echo '<tr class="tableheading"><td colspan="4">'.strftime($date_format, $activity['activity_date']).'</td></tr>';
+					$cells = array();
+					$cells[] = array(strftime($date_format, $activity['activity_date']), 'colspan' => 4);
+					echo $HTML->multiTableRow(array('class' => 'tableheading'), $cells, true);
 					$last_day=strftime($date_format, $activity['activity_date']);
 				}
 				$cells = array();
@@ -182,7 +175,7 @@ class Widget_HomeDetailActivityMostActiveProjectWeek extends Widget {
 				echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($j++, true)), $cells);
 			}
 			if ($displayTableTop) {
-				echo $HTML->listTableBottom($theader);
+				echo $HTML->listTableBottom();
 			}
 		} else {
 			echo $HTML->information(_('No activity during the last week'));

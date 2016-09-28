@@ -3,7 +3,7 @@
  * FusionForge trackers
  *
  * Copyright 2011, Alcatel-Lucent
- * Copyright 2012,2015, Franck Villaume - TrivialDev
+ * Copyright 2012,2015-2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -204,22 +204,18 @@ if ($roadmap_name) {
 	if (! is_object($selected_roadmap)) {
 		$error_msg .= _('Error')._(': ').sprintf(_('roadmap %s is not available'), $roadmap_name);
 		local_exit();
-	}
-	else {
+	} else {
 		$roadmap_id = $selected_roadmap->getID();
 	}
-}
-elseif($roadmap_id) {
+} elseif ($roadmap_id) {
 	$selected_roadmap = $roadmap_factory->getRoadmapByID($roadmap_id, true);
 	if (! is_object($selected_roadmap)) {
 		$error_msg .= _('Error')._(': ').sprintf(_('roadmap %s is not available'), 'ID='.$roadmap_id);
 		local_exit();
-	}
-	else {
+	} else {
 		$roadmap_name = $selected_roadmap->getName();
 	}
-}
-else {
+} else {
 	$roadmap_id = $roadmap_factory->getDefault();
 	if ($roadmap_id) {
 		$selected_roadmap = new Roadmap($group, $roadmap_id);
@@ -227,8 +223,7 @@ else {
 			$error_msg .= _('Error')._(': ').sprintf(_('roadmap %s is not available'), 'ID='.$roadmap_id);
 			local_exit();
 		}
-	}
-	else {
+	} else {
 		$selected_roadmap = $roadmaps[0];
 		if (! is_object($selected_roadmap)) {
 			local_exit(_('No roadmap available'));
@@ -260,7 +255,6 @@ $artifact_type_list = $selected_roadmap->getList();
 if (!$at_arr || count($at_arr) < 1) {
 	local_exit($HTML->information(_('No trackers have been set up.')));
 } else {
-
 	foreach ($at_arr as $artifact_type) {
 		if (!is_object($artifact_type)) {
 			//just skip it
@@ -341,11 +335,9 @@ if (!$at_arr || count($at_arr) < 1) {
 
 			if ($selected_release) {
 				$release_filter = array($selected_release);
-			}
-			elseif ($nb_release) {
+			} elseif ($nb_release) {
 				$release_filter = array_slice($release_order, 0, $nb_release);
-			}
-			else {
+			} else {
 				$release_filter = false;
 			}
 			$art_arr = $af->getArtifactsByReleases($field_id, $release_filter);
@@ -422,7 +414,7 @@ if (!$at_arr || count($at_arr) < 1) {
 				$roadmap_select[$roadmap->getID()] = $roadmap->getName();
 			}
 			$roadmap_html_params['id'] = 'roadmap';
-			echo html_build_select_box_from_assoc($roadmap_select, 'roadmap', $roadmap_id, false, '', false, '', false, $roadmap_html_params);
+			echo html_build_select_box_from_assoc($roadmap_select, 'roadmap', $roadmap_id, false, false, '', false, '', false, $roadmap_html_params);
 			echo '</td>'."\n";
 		}
 
@@ -434,8 +426,7 @@ if (!$at_arr || count($at_arr) < 1) {
 			}
 			echo '<option value="0"'.(! $nb_release ? ' selected="selected"' : '').' >'._('All').'</option>';
 			echo '</select></td>';
-		}
-		else {
+		} else {
 			echo html_e('td', array(),
 				util_make_link('/tracker/roadmap.php?group_id='.$group_id.($roadmap_id ? '&roadmap_id='.$roadmap_id : ''), _('Return to last release(s)')));
 		}
@@ -524,8 +515,7 @@ if (!$at_arr || count($at_arr) < 1) {
 
 		if (! array_key_exists($release_value, $rmap)) {
 			echo html_e('p', array(), _('No data for this release'));
-		}
-		else {
+		} else {
 			foreach ($rmap[$release_value] as $artifact_type_name => $ticket_list) {
 				echo '<h3>'.$artifact_type_name.'</h3>'."\n";
 
@@ -602,7 +592,6 @@ if (!$at_arr || count($at_arr) < 1) {
 				jQuery('#nb_release').change(function() {
 					updatePage();
 				});
-
 			<?php
 			}
 
@@ -657,7 +646,7 @@ if (!$at_arr || count($at_arr) < 1) {
 					url: 'roadmap.php',
 					data: '<?php echo 'group_id='.$group_id.'&roadmap_id='.$roadmap_id ?>&ajax=1&template=1&release='+release,
 					success: function(rep) {
-						jQuery('#div_options').empty().append('<a href="<?php echo '/tracker/roadmap.php?group_id='.$group_id ?>&roadmap_id='+selected_roadmap+'&nb_release='+selected_nb_release+'&display_graph='+selected_display_graph+'" ><?php echo _('Return to last release(s)') ?></a>');
+						jQuery('#div_options').empty().append('<a href="<?php echo util_make_uri('/tracker/roadmap.php?group_id='.$group_id) ?>&roadmap_id='+selected_roadmap+'&nb_release='+selected_nb_release+'&display_graph='+selected_display_graph+'" ><?php echo _('Return to last release(s)') ?></a>');
 						jQuery('#div_roadmap').empty().append(rep);
 					}
 				});

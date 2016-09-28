@@ -69,14 +69,11 @@ class MailmanList extends FFError {
 	var $groupMailmanListId;
 
 	/**
-	 *  Constructor.
-	 *
 	 * @param	object	The Group object to which this mailing list is associated.
 	 * @param	int		The group_list_id.
 	 * @param	array		The associative array of data.
-	 * @return	boolean	success.
 	 */
-	function MailmanList($group_id, $groupListId = false, $dataArray = false) {
+	function __construct($group_id, $groupListId = false, $dataArray = false) {
 		$pm = ProjectManager::instance();
 		$Group = $pm->getProject($group_id);
 		$this->_mailingDAO = new MailmanListDao(CodendiDataAccess::instance());
@@ -86,7 +83,7 @@ class MailmanList extends FFError {
 		}
 		if ($Group->isError()) {
 			$this->setError('MailmanList: '.$Group->getErrorMessage());
-			return false;
+			return;
 		}
 		$this->Group =& $Group;
 
@@ -94,25 +91,23 @@ class MailmanList extends FFError {
 			$this->groupMailmanListId = $groupListId;
 			if (!$dataArray || !is_array($dataArray)) {
 				if (!$this->fetchData($groupListId)) {
-					return false;
+					return;
 				}
 			} else {
 				$this->dataArray =& $dataArray;
 				if ($this->dataArray['group_id'] != $this->Group->getID()) {
 					$this->setError(_('group_id in db result does not match Group Object'));
 					$this->dataArray = null;
-					return false;
+					return;
 				}
 			}
 			if (!$this->isPublic()) {
 				if (!isLogged()) {
 					$this->dataArray = null;
-					return false;
+					return;
 				}
 			}
 		}
-
-		return true;
 	}
 
 	/**
@@ -432,7 +427,7 @@ class MailmanList extends FFError {
 	function deleteList($sure,$really_sure) {
 		$current_user=UserManager::instance()->getCurrentUser();
 		if (!$sure || !$really_sure) {
-			$this->setError(_('Missing params'));
+			$this->setError(_('Missing parameters'));
 			return false;
 		}
 

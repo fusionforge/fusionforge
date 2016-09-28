@@ -112,7 +112,7 @@ if ($pattern) {
 			$cells = array();
 			$cells[][] = '&nbsp;';
 			$cells[][] = $row['user_id'];
-			$cells[][] = util_make_link('/admin/unsubscribe.php?submit=1&user_name='.$row['user_name'], $row['user_name']);
+			$cells[][] = util_make_link('/admin/unsubscribe.php?submit=1&amp;user_name='.$row['user_name'], $row['user_name']);
 			$cells[][] = $row['realname'];
 			$cells[][] = $row['email'];
 			$cells[][] = $row['mail_siteupdates'];
@@ -121,7 +121,7 @@ if ($pattern) {
 		}
 		echo $HTML->listTableBottom();
 	} else {
-		echo $HTML->warning_msg(_('No user found'));
+		echo $HTML->warning_msg(_('No user found.'));
 	}
 }
 

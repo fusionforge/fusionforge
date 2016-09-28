@@ -34,11 +34,11 @@ class WikiSearchEngine extends GFSearchEngine {
 	var $rendererClassName;
 	var $groupId;
 
-	function WikiSearchEngine($type, $rendererClassName, $label, $groupId) {
+	function __construct($type, $rendererClassName, $label, $groupId) {
 		$this->groupId = $groupId;
 		$this->rendererClassName = $rendererClassName;
 
-		$this->GFSearchEngine($type, $rendererClassName, $label);
+		parent::__construct($type, $rendererClassName, $label);
 	}
 
 	function isAvailable($parameters) {

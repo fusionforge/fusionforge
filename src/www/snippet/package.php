@@ -3,6 +3,7 @@
  * Code Snippets Repository
  *
  * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -25,8 +26,9 @@ require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'snippet/snippet_utils.php';
 
-if (session_loggedin()) {
+global $HTML, $feedback, $error_msg;
 
+if (session_loggedin()) {
 	if (getStringFromRequest('post_changes')) {
 		if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 			exit_form_double_submit();
@@ -120,7 +122,7 @@ function show_add_snippet_box() {
 			}
 		} else {
 			form_release_key(getStringFromRequest("form_key"));
-			exit_error(_('Error: Go back and fill in all the information'));
+			exit_error(_('Error')._(': ')._('Go back and fill in all the information'));
 		}
 
 	}
@@ -128,16 +130,16 @@ function show_add_snippet_box() {
 
 	?>
 	</p>
-    <p>
-    <?php echo _('You can group together existing snippets into a package using this interface. Before creating your package, make sure all your snippets are in place and you have made a note of the snippet ID\'s.'); ?>
-    </p>
+	<p>
+	<?php echo _('You can group together existing snippets into a package using this interface. Before creating your package, make sure all your snippets are in place and you have made a note of the snippet ID\'s.'); ?>
+	</p>
 	<ol>
-      <li><?php echo _('Create the package using this form.'); ?></li>
-	  <li><?php echo _('<strong>Then</strong> use the “Add Snippets to Package” link to add files to your package.'); ?></li>
+		<li><?php echo _('Create the package using this form.'); ?></li>
+		<li><?php echo _('<strong>Then</strong> use the “Add Snippets to Package” link to add files to your package.'); ?></li>
 	</ol>
 	<p><?php echo _('<span class="important">Note:</span> You can submit a new version of an existing package by browsing the library and using the link on the existing package. You should only use this page if you are submitting an entirely new package.'); ?>
-    </p>
-	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
+	</p>
+	<?php echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post')); ?>
 	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
 	<input type="hidden" name="post_changes" value="y" />
 	<input type="hidden" name="changes" value="<?php echo _('First Posted Version') ?>" />
@@ -176,14 +178,12 @@ function show_add_snippet_box() {
 		<input type="submit" name="submit" value="<?php echo _('Submit'); ?>" />
 	</td></tr>
 
-	</table></form>
+	</table>
 	<?php
+	echo $HTML->closeForm();
 	snippet_footer();
-
 } else {
-
 	exit_not_logged_in();
-
 }
 
 // Local Variables:

@@ -81,29 +81,26 @@ class ProjectTask extends FFError {
 	var $relatedartifacts;
 
 	/**
-	 *  ProjectTask - Constructor.
-	 *
 	 * @param	object	   	$ProjectGroup		The ProjectGroup object to which this ProjectTask is associated.
 	 * @param	int|bool	$project_task_id	The project_task_id.
 	 * @param	array|bool	$arr			The associative array of data.
-	 * @return	boolean		success.
 	 */
-	function ProjectTask(&$ProjectGroup, $project_task_id=false, $arr=false) {
+	function __construct(&$ProjectGroup, $project_task_id=false, $arr=false) {
 		parent::__construct();
 		if (!$ProjectGroup || !is_object($ProjectGroup)) {
 			$this->setError('No Valid ProjectGroup Object');
-			return false;
+			return;
 		}
 		if ($ProjectGroup->isError()) {
 			$this->setError($ProjectGroup->getErrorMessage());
-			return false;
+			return;
 		}
 		$this->ProjectGroup =& $ProjectGroup;
 
 		if ($project_task_id) {
 			if (!$arr || !is_array($arr)) {
 				if (!$this->fetchData($project_task_id)) {
-					return false;
+					return;
 				}
 			} else {
 				$this->data_array =& $arr;
@@ -112,11 +109,10 @@ class ProjectTask extends FFError {
 				//
 				if ($this->data_array['group_project_id'] != $this->ProjectGroup->getID()) {
 					$this->setError('Group_project_id in db result does not match ProjectGroup Object');
-					return false;
+					return;
 				}
 			}
 		}
-		return true;
 	}
 
 	/**
@@ -134,7 +130,6 @@ class ProjectTask extends FFError {
 	 * @param	array	$depend_arr		An array of project_task_id's that this task depends on.
 	 * @param	int	$duration		The duration of the task in days.
 	 * @param	int	$parent_id		The id of the parent task, if any.
-	 * @param	array	$importData		An array ('user' => user_id)
 	 * @param	array	$importData		An array ('user' => user_id)
 	 * @return	boolean	success.
 	 */

@@ -126,7 +126,7 @@ if (getStringFromRequest('update')) {
 }
 
 site_admin_header(array('title'=>_('Plugin Manager')));
-echo $HTML->openForm(array('action' => '/admin/pluginmap.php', 'method' => 'get'));
+echo $HTML->openForm(array('action' => '/admin/pluginman.php', 'method' => 'get'));
 echo html_e('p', array(), _('Here you can activate / deactivate site-wide plugins which are in the plugins/ folder. Then, you should activate them also per project, per user or whatever the plugin specifically applies to.'));
 echo html_e('p', array('class' => 'important'), _('Be careful because some projects/users can be using the plugin. Deactivating it will remove the plugin from all users/projects.'));
 
@@ -148,7 +148,7 @@ if (!$pm->PluginIsInstalled('scmcvs')) {
 }
 
 // [#411] Prevent admin from desactivating the last auth plugin.
-$plugins = $pm->GetPlugins();
+$plugins = $pm->getPlugins();
 $auth_plugins = array();
 foreach($plugins as $p) {
 	if (preg_match('/^auth/', $p)) {

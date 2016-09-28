@@ -29,7 +29,7 @@ require_once 'Widget.class.php';
 
 class Widget_MyAdmin extends Widget {
 	function __construct() {
-		$this->Widget('myadmin');
+		parent::__construct('myadmin');
 	}
 	function getTitle() {
 		return _('Pending administrative tasks');

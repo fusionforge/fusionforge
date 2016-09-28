@@ -49,14 +49,12 @@ class ArtifactTypeFactory extends FFError {
 	var $dataType;
 
 	/**
-	 * __construct - ArtifactTypeFactory constructor.
-	 *
 	 * @param	Group	$Group The Group object to which this ArtifactTypeFactory is associated
 	 */
 	function __construct(&$Group, $skip_check=false) {
 		parent::__construct();
 		if (!$Group || !is_object($Group)) {
-			$this->setError(_('No Valid Group Object'));
+			$this->setError(_('Invalid Project'));
 			return;
 		}
 		if ($Group->isError()) {

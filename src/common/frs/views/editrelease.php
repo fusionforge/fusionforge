@@ -75,7 +75,7 @@ echo html_e('h2', array(), _('Edit Release for the package').' '.$frsp->getName(
  * Show the forms for each part
  */
 if (forge_check_perm('frs', $package_id, 'admin')) {
-	echo $HTML->openForm(array('enctype' => 'multipart/form-data', 'method' => 'post', 'action' => util_make_uri('/frs/?group_id='.$group_id.'&release_id='.$release_id.'&package_id='.$package_id.'&action=editrelease')));
+	echo $HTML->openForm(array('enctype' => 'multipart/form-data', 'method' => 'post', 'action' => '/frs/?group_id='.$group_id.'&release_id='.$release_id.'&package_id='.$package_id.'&action=editrelease'));
 	echo $HTML->listTableTop();
 	$cells = array();
 	$cells[][] = '<strong>'._('Release Date')._(':').'</strong>';
@@ -126,10 +126,11 @@ echo html_e('hr');
 echo html_e('h2', array(), _('Add Files To This Release'));
 echo html_e('p', array(), _('Now, choose a file to upload into the system.'));
 
-echo $HTML->openForm(array('enctype' => 'multipart/form-data', 'method' => 'post', 'action' => util_make_uri('/frs/?group_id='.$group_id.'&release_id='.$release_id.'&package_id='.$package_id.'&action=addfile')));
+echo $HTML->openForm(array('enctype' => 'multipart/form-data', 'method' => 'post', 'action' => '/frs/?group_id='.$group_id.'&release_id='.$release_id.'&package_id='.$package_id.'&action=addfile'));
 echo html_ao('fieldset');
 echo html_e('legend', array(), '<strong>'._('File Name').'</strong>');
 echo _('Upload a new file')._(': ').'<input type="file" name="userfile" />'.'('._('max upload size')._(': ').human_readable_bytes(util_get_maxuploadfilesize()).')';
+// the following var will be set by different include.
 $content = '';
 if (forge_get_config('use_ftp_uploads')) {
 	include ($gfcommon.'frs/views/useftpuploads.php');
@@ -172,7 +173,7 @@ if(count($files)) {
 	echo $HTML->listTableTop($title_arr, array(), '', '', array(), array(), array(array('style' => 'width: 2%'), array('style' => 'width: 30%')));
 	echo '<tr><td colspan="7" style="padding:0;">';
 	foreach ($files as $key => $file) {
-		echo $HTML->openForm(array('action' => util_make_uri('/frs/?group_id='.$group_id.'&release_id='.$release_id.'&package_id='.$package_id.'&file_id='.$file->getID().'&action=editfile'), 'method' => 'post', 'id' => 'fileid'.$file->getID()));
+		echo $HTML->openForm(array('action' => '/frs/?group_id='.$group_id.'&release_id='.$release_id.'&package_id='.$package_id.'&file_id='.$file->getID().'&action=editfile', 'method' => 'post', 'id' => 'fileid'.$file->getID()));
 		echo $HTML->listTableTop();
 		$cells = array();
 		$cells[] = array(html_e('input', array('type' => 'checkbox', 'value' => $file->getID(), 'class' => 'checkedrelidactive', 'title' => _('Select / Deselect this file for massaction'), 'onClick' => 'controllerFRS.checkgeneral("active")')), 'style' => 'width: 2%; padding: 0px;');
@@ -198,4 +199,11 @@ if(count($files)) {
 }
 
 echo $HTML->jQueryUIconfirmBox('confirmbox1', _('Delete file'), _('You are about to delete permanently this file. Are you sure? This action is definitive.'));
+
+if ($g->usesTracker()) {
+	include $gfcommon.'frs/views/linktrackerroadmap.php';
+}
+
+echo html_e('hr');
+echo html_e('h2', array(), _('Monitoring Information'));
 echo html_e('p', array(), sprintf(ngettext('There is %s user monitoring this package.', 'There are %s users monitoring this package.', $frsp->getMonitorCount()), $frsp->getMonitorCount()));

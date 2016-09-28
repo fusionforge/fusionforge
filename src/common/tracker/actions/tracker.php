@@ -545,7 +545,7 @@ switch (getStringFromRequest('func')) {
 		} elseif ($ah->isError()) {
 			exit_error($ah->getErrorMessage(),'tracker');
 		} else {
-			use_javascript('/js/sortable.js');
+			html_use_tablesorter();
 			if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
 				include $gfcommon.'tracker/actions/mod.php';
 			} elseif (forge_check_perm ('tracker', $ath->getID(), 'tech')) {
@@ -565,7 +565,7 @@ switch (getStringFromRequest('func')) {
 			$ah = new ArtifactHtml($ath, $aid);
 			if (!$ah || !is_object($ah)) {
 				exit_error(_('Artifact Could Not Be Created'), 'tracker');
-			} else if ($ah->isError()) {
+			} elseif ($ah->isError()) {
 				exit_error($ah->getErrorMessage(), 'tracker');
 			}
 			if ($ah->castVote(false)) {
@@ -583,7 +583,7 @@ switch (getStringFromRequest('func')) {
 			$ah = new ArtifactHtml($ath, $aid);
 			if (!$ah || !is_object($ah)) {
 				exit_error(_('Artifact Could Not Be Created'), 'tracker');
-			} else if ($ah->isError()) {
+			} elseif ($ah->isError()) {
 				exit_error($ah->getErrorMessage(), 'tracker');
 			}
 			if ($ah->castVote()) {

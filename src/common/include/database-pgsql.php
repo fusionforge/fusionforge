@@ -318,10 +318,10 @@ function db_prepare($qstring, $qname, $dbserver = NULL) {
 			    "successful call of db_prepare():",
 			    debug_string_backtrace());
 		}
-	} else if ($sysdebug_dbquery) {
+	} elseif ($sysdebug_dbquery) {
 		ffDebug("database", "failed call of db_prepare():",
 		    db_error($dbserver) . "\n\n" . debug_string_backtrace());
-	} else if ($sysdebug_dberrors) {
+	} elseif ($sysdebug_dberrors) {
 		ffDebug("database", "db_prepare() failed (" .
 		    db_error($dbserver) . "), SQL: " . $qstring,
 		    print_r(array("params" => $params), 1));
@@ -356,10 +356,10 @@ function db_execute($qname, $params, $dbserver = NULL) {
 			    "successful call of db_execute():",
 			    debug_string_backtrace());
 		}
-	} else if ($sysdebug_dbquery) {
+	} elseif ($sysdebug_dbquery) {
 		ffDebug("database", "failed call of db_execute():",
 		    db_error($dbserver) . "\n\n" . debug_string_backtrace());
-	} else if ($sysdebug_dberrors) {
+	} elseif ($sysdebug_dberrors) {
 		ffDebug("database", "db_execute() failed (" .
 		    db_error($dbserver) . "), SQL: " . $qname,
 		    print_r(array("params" => $params), 1));
@@ -390,10 +390,10 @@ function db_unprepare($name, $dbserver = NULL) {
 			    "successful call of db_unprepare():",
 			    debug_string_backtrace());
 		}
-	} else if ($sysdebug_dbquery) {
+	} elseif ($sysdebug_dbquery) {
 		ffDebug("database", "failed call of db_unprepare():",
 		    db_error($dbserver) . "\n\n" . debug_string_backtrace());
-	} else if ($sysdebug_dberrors) {
+	} elseif ($sysdebug_dberrors) {
 		ffDebug("database", "db_unprepare() failed (" .
 		    db_error($dbserver) . "), SQL: " . $qname,
 		    print_r(array("params" => $params), 1));

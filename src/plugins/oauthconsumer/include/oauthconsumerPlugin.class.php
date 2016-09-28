@@ -2,9 +2,9 @@
 
 class oauthconsumerPlugin extends ForgeAuthPlugin {
 
-	public function __construct() {
+	function __construct() {
 
-		$this->ForgeAuthPlugin() ;
+		parent::__construct();
 
 		$this->name = 'oauthconsumer';
 		$this->text = 'OAuth Consumer'; // To show in the tabs, use...

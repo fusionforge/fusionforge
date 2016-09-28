@@ -3,7 +3,7 @@
  * MantisBT plugin
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2012,2014, Franck Villaume - TrivialDev
+ * Copyright 2012,2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -52,7 +52,7 @@ foreach ($arrVersions as $key => $currentVersion) {
 
 if (!isset($errorPage)){
 	echo $HTML->boxTop(_('Version Detail'));
-	echo $HTML->openForm(array('method' => 'post', 'action' => util_make_uri('/plugins/'.$mantisbt->name.'/?type=admin&group_id='.$group_id.'&action=updateVersion')));
+	echo $HTML->openForm(array('method' => 'post', 'action' => '/plugins/'.$mantisbt->name.'/?type=admin&group_id='.$group_id.'&action=updateVersion'));
 	$titleArr = array(_('Version'), _('Description'), _('Target Date'), _('Type'));
 	echo $HTML->listTableTop($titleArr);
 	echo	'<tr>';
@@ -84,7 +84,7 @@ if (!isset($errorPage)){
 	echo $HTML->closeForm();
 	echo $HTML->boxBottom();
 
-	echo $HTML->openForm(array('method' => 'post', 'action' => util_make_uri('/plugins/'.$mantisbt->name.'/?type=admin&group_id='.$group_id.'&action=deleteVersion')));
+	echo $HTML->openForm(array('method' => 'post', 'action' => '/plugins/'.$mantisbt->name.'/?type=admin&group_id='.$group_id.'&action=deleteVersion'));
 	echo '<input type="hidden" name="deleteVersion" value="'.$idVersion.'" />';
 	echo '<input type="submit" value="'. _('Delete') .'" />';
 	echo $HTML->closeForm();

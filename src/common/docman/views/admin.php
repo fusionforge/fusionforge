@@ -49,14 +49,14 @@ function doIt(formid) {
 <?php
 echo html_ac(html_ap() - 1);
 if (extension_loaded('zip')) {
-	echo $HTML->openForm(array('id' => 'backup', 'name' => 'backup', 'method' => 'post', 'action' => util_make_uri('/docman/view.php/'.$group_id.'/backup')));
+	echo $HTML->openForm(array('id' => 'backup', 'name' => 'backup', 'method' => 'post', 'action' => '/docman/view.php/'.$group_id.'/backup'));
 	echo html_ao('ul');
 	echo html_e('li', array(), html_e('input', array('id' => 'submitbackup', 'type' => 'button', 'value' => _('Extract documents and directories as an archive'), 'onclick' => 'javascript:doIt("backup")')), false);
 	echo html_ac(html_ap() -1);
 	echo $HTML->closeForm();
 }
 
-echo $HTML->openForm(array('id' => 'createonline', 'name' => 'createonline', 'method' => 'post', 'action' => util_make_uri('/docman/?group_id='.$group_id.'&action=updatecreateonline')));
+echo $HTML->openForm(array('id' => 'createonline', 'name' => 'createonline', 'method' => 'post', 'action' => '/docman/?group_id='.$group_id.'&action=updatecreateonline'));
 echo html_ao('ul');
 $createOnlineStatus = '1';
 $labelCreateOnline = _('Enable Create Online Documents');
@@ -68,7 +68,7 @@ echo html_e('li', array(), html_e('input', array('name' => 'status', 'type' => '
 echo html_ac(html_ap() -1);
 echo $HTML->closeForm();
 
-echo $HTML->openForm(array('id' => 'searchengine', 'name' => 'searchengine', 'method' => 'post', 'action' => util_make_uri('/docman/?group_id='.$group_id.'&action=updateenginesearch')));
+echo $HTML->openForm(array('id' => 'searchengine', 'name' => 'searchengine', 'method' => 'post', 'action' => '/docman/?group_id='.$group_id.'&action=updateenginesearch'));
 echo html_ao('ul');
 $searchEngineStatus = '1';
 $labelSearchEngine = _('Enable Search Engine');
@@ -81,7 +81,7 @@ echo html_ac(html_ap() -1);
 echo $HTML->closeForm();
 
 if ($g->useDocmanSearch()) {
-	echo $HTML->openForm(array('id' => 'reindexword', 'name' => 'reindexword', 'method' => 'post', 'action' => util_make_uri('/docman/?group_id='.$group_id.'&action=forcereindexenginesearch')));
+	echo $HTML->openForm(array('id' => 'reindexword', 'name' => 'reindexword', 'method' => 'post', 'action' => '/docman/?group_id='.$group_id.'&action=forcereindexenginesearch'));
 	echo html_ao('ul');
 	echo html_e('li', array(), html_e('input', array('name' => 'status', 'type' => 'hidden', 'value' => '1')).html_e('input', array('id' => 'submitreindexword', 'type' => 'button', 'value' => _('Force reindexation search engine'), 'onclick' => 'javascript:doIt("reindexword")')), false);
 	echo html_ac(html_ap() -1);
@@ -89,11 +89,11 @@ if ($g->useDocmanSearch()) {
 }
 
 if (forge_get_config('use_webdav')) {
-	echo $HTML->openForm(array('id' => 'webdavinterface', 'name' => 'webdavinterface', 'method' => 'post', 'action' => util_make_uri('/docman/?group_id='.$group_id.'&action=updatewebdavinterface')));
+	echo $HTML->openForm(array('id' => 'webdavinterface', 'name' => 'webdavinterface', 'method' => 'post', 'action' => '/docman/?group_id='.$group_id.'&action=updatewebdavinterface'));
 	echo html_ao('ul');
 	$webdavStatus = '1';
 	$labelWebdavInterface = _('Enable Webdav Interface');
-	if ($g->useWebDav()) {
+	if ($g->useWebdav()) {
 		$webdavStatus = '0';
 		$labelWebdavInterface = _('Disable Webdav Interface');
 	}

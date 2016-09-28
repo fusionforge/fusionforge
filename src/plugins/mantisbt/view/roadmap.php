@@ -4,6 +4,7 @@
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2010, Antoine Mercadal - Capgemini
+ * Copyright 2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -67,7 +68,7 @@ if (!isset($errorPage)) {
 
 <div id='expandable_filter' class="notice_content" style='clear: both'>
 <?php
-	include 'mantisbt/controler/filter_roadmap.php';
+	include ($gfplugins.$mantisbt->name.'/controler/filter_roadmap.php');
 ?>
 </div>
 
@@ -110,7 +111,7 @@ if (!isset($errorPage)) {
 				if ( $defect->status->id >= 80 ) {
 					echo '<strike>';
 				}
-				echo	'<a href="?type=group&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$defect->id.'&view=viewIssue">'.$defect->id.'</a>: '.$defect->summary.' ('.$defect->resolution->name.') - ('.$defect_handler_name.')';
+				echo	util_make_link('/plugins/'.$mantisbt->name.'/?type=group&group_id='.$group_id.'&idBug='.$defect->id.'&view=viewIssue', $defect->id)._(': ').$defect->summary.' ('.$defect->resolution->name.') - ('.$defect_handler_name.')';
 				if ( $defect->status->id >= 80 ) {
 					echo '</strike>';
 				}
@@ -127,7 +128,7 @@ if (!isset($errorPage)) {
 											where groups.group_id = plugin_mantisbt.id_group and plugin_mantisbt.id_mantisbt = $1',
 											array($child));
 					$rowGroupNameFusionForge = db_fetch_array($resultGroupNameFusionForge);
-					echo $HTML->boxTop('<a style="color:white;" href="?type=group&group_id='.$rowGroupNameFusionForge['group_id'].'&pluginname='.$mantisbt->name.'">'.$rowGroupNameFusionForge['group_name'].'</a>');
+					echo $HTML->boxTop(util_make_link('/plugins/'.$mantisbt->name.'/?type=group&group_id='.$rowGroupNameFusionForge['group_id'], $rowGroupNameFusionForge['group_name']));
 					echo '<fieldset>';
 					$listChildVersions = $clientSOAP->__soapCall('mc_project_get_versions', array("username" => $username, "password" => $password, "project_id" => $child));
 					if (!empty($listChildVersions)){
@@ -159,7 +160,7 @@ if (!isset($errorPage)) {
 									if ( $defect->status->id >= 80 ) {
 										echo '<strike>';
 									}
-									echo    '<a href="?type=group&group_id='.$rowGroupNameFusionForge['group_id'].'&pluginname='.$mantisbt->name.'&idBug='.$defect->id.'&view=viewIssue">'.$defect->id.'</a>: '.$defect->summary.' ('.$defect->resolution->name.') - ('.$defect_handler_name.')';
+									echo util_make_link('/plugins/'.$mantisbt->name.'/?type=group&group_id='.$rowGroupNameFusionForge['group_id'].'&idBug='.$defect->id.'&view=viewIssue', $defect->id)._(': ').$defect->summary.' ('.$defect->resolution->name.') - ('.$defect_handler_name.')';
 									if ( $defect->status->id >= 80 ) {
 										echo '</strike>';
 									}

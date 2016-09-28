@@ -28,8 +28,8 @@ class ReportProjectAct extends Report {
 
 var $res;
 
-function ReportProjectAct($span,$group_id,$start=0,$end=0) {
-	$this->Report();
+function __construct($span,$group_id,$start=0,$end=0) {
+	parent::__construct();
 
 	if (!$start) {
 		$start=mktime(0,0,0,date('m'),1,date('Y'));;

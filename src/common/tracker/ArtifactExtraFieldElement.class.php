@@ -5,6 +5,7 @@
  * Copyright 2004, Anthony J. Pugliese
  * Copyright 2009, Roland Mas
  * Copyright 2009, Alcatel-Lucent
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -64,8 +65,6 @@ class ArtifactExtraFieldElement extends FFError {
 	var $data_array;
 
 	/**
-	 * __construct - Constructor
-	 *
 	 * @param	object		$ArtifactExtraField	ArtifactExtraField object.
 	 * @param	array|bool	$data			(all fields from artifact_file_user_vw) OR id from database.
 	 */
@@ -102,7 +101,7 @@ class ArtifactExtraFieldElement extends FFError {
 	 * @param	int	$status_id	Id the box that contains the choice (optional).
 	 * @return	bool	true on success / false on failure.
 	 */
-	function create($name,$status_id=0) {
+	function create($name,$status_id=0,$auto_assign_to=100) {
 		//
 		//	data validation
 		//
@@ -130,10 +129,11 @@ class ArtifactExtraFieldElement extends FFError {
 			return false;
 		}
 		db_begin();
-		$result = db_query_params ('INSERT INTO artifact_extra_field_elements (extra_field_id,element_name,status_id) VALUES ($1,$2,$3)',
+		$result = db_query_params ('INSERT INTO artifact_extra_field_elements (extra_field_id,element_name,status_id,auto_assign_to) VALUES ($1,$2,$3,$4)',
 					   array ($this->ArtifactExtraField->getID(),
 						  htmlspecialchars($name),
-						  $status_id)) ;
+						  $status_id,
+						  $auto_assign_to));
 		if ($result && db_affected_rows($result) > 0) {
 			$this->clearError();
 			$id=db_insertid($result,'artifact_extra_field_elements','element_id');
@@ -224,15 +224,132 @@ class ArtifactExtraFieldElement extends FFError {
 	}
 
 	/**
+	 * getAutoAssignedUser - return id of the user witch issue is auto assign to.
+	 *
+	 * @return	integer user id.
+	 */
+	function getAutoAssignto() {
+		return $this->data_array['auto_assign_to'];
+	}
+
+	/**
+	 * getParentElements - return the list of the elements of the parent field on which depends the current element
+	 *
+	 * @return	array of parent elements
+	 */
+	function getParentElements() {
+		$res = db_query_params ('SELECT parent_element_id
+				FROM artifact_extra_field_elements_dependencies
+				WHERE child_element_id=$1',
+				array($this->getID()));
+		$values = array();
+		while($arr = db_fetch_array($res)) {
+			$values[] = $arr['parent_element_id'];
+		}
+		return $values;
+	}
+
+	/**
+	 * getChildrenElements - return the array of the elements of children fields who depend on current element
+	 *
+	 * @return	array of parent elements
+	 */
+	function getChildrenElements($childExtraFieldId = null) {
+		if (is_null($childExtraFieldId)) {
+			$aefChildren = $this->ArtifactExtraField->getChildren();
+			$res = db_query_params ('SELECT extra_field_id, child_element_id
+				FROM artifact_extra_field_elements_dependencies
+				INNER JOIN artifact_extra_field_elements ON child_element_id = element_id
+				WHERE parent_element_id=$1
+				ORDER BY extra_field_id',
+					array($this->getID()));
+		} else {
+			$aefChildren = array($childExtraFieldId);
+			$res = db_query_params ('SELECT extra_field_id, child_element_id
+				FROM artifact_extra_field_elements_dependencies
+				INNER JOIN artifact_extra_field_elements ON child_element_id = element_id
+				WHERE parent_element_id=$1
+				AND extra_field_id=$2
+				ORDER BY extra_field_id',
+					array($this->getID(),
+					$childExtraFieldId));
+		}
+		$values = array();
+		$current = 0;
+		if (is_array($aefChildren)) {
+			foreach ($aefChildren as $aefChild) {
+				$values[$aefChild] = array();
+			}
+			while($arr = db_fetch_array($res)) {
+				$values[$arr['extra_field_id']][] = $arr['child_element_id'];
+			}
+		}
+		return $values;
+	}
+	/**
+	 * saveParentElements - save the list of the elements of the parent field on which depends the current element
+	 *
+	 * @param	elements	array of new parent elements
+	 * @return	bool	always true
+	 */
+	function saveParentElements($elements) {
+		$return = true;
+		// Get current parent elements.
+		$currentElements = $this->getParentElements();
+		// Remove parent elements no longer present.
+		foreach ($currentElements as $element) {
+			if (!in_array($element, $elements)) {
+				if (!$this->_removeParentElement($element)) {
+					$return = false;
+				}
+			}
+		}
+		// Add missing required fields.
+		foreach ($elements as $element) {
+			if (!in_array($element, $currentElements)) {
+				if (!$this->_addParentElement($element)) {
+					$return = false;
+				}
+			}
+		}
+		return $return;
+	}
+
+	function _addParentElement($ParentElementId) {
+		$res = db_query_params ('INSERT INTO artifact_extra_field_elements_dependencies
+				(parent_element_id, child_element_id)
+				VALUES ($1, $2)',
+				array($ParentElementId,
+						$this->getID()));
+		if (!$res) {
+			$this->setError(sprintf(_('Unable to add Parent Element %s for Child Element %s'), $ParentElementId, $this->getID())._(':').' '.db_error());
+			return false;
+		}
+		return true;
+	}
+
+	function _removeParentElement($ParentElementId) {
+		$res = db_query_params ('DELETE FROM artifact_extra_field_elements_dependencies
+				WHERE parent_element_id=$1 AND child_element_id=$2',
+				array($ParentElementId,
+						$this->getID()));
+		if (!$res) {
+			$this->setError(sprintf(_('Unable to remove Parent Element %s for Child Element %s'), $ParentElementId, $this->getID())._(':').' '.db_error());
+			return false;
+		}
+		return true;
+	}
+
+	/**
 	 * update - update rows in the table used to store the choices
 	 * for a selection box. This function is used only for extra
 	 * boxes and fields configured by the admin
 	 *
 	 * @param	string	$name		Name of the choice in a box.
-	 * @param	int	$status_id	optional for status box - maps to either open/closed.
+	 * @param	int	$status_id	Optional for status box - maps to either open/closed.
 	 * @return	bool	success.
 	 */
-	function update($name,$status_id=0) {
+	function update($name, $status_id=0, $auto_assign_to=100) {
 		if (!forge_check_perm ('tracker_admin', $this->ArtifactExtraField->ArtifactType->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
@@ -258,10 +375,11 @@ class ArtifactExtraFieldElement extends FFError {
 			$status_id=0;
 		}
 		$result = db_query_params ('UPDATE artifact_extra_field_elements
-			SET element_name=$1, status_id=$2
-			WHERE element_id=$3',
+			SET element_name=$1, status_id=$2, auto_assign_to=$3
+			WHERE element_id=$4',
 					   array (htmlspecialchars($name),
 						  $status_id,
+						  $auto_assign_to,
 						  $this->getID())) ;
 		if ($result && db_affected_rows($result) > 0) {
 			return true;

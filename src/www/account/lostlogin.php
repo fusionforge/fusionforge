@@ -6,6 +6,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 (c) Franck Villaume
+ * Copyright 2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -58,8 +59,8 @@ if (!$u || !is_object($u)) {
 
 if (getStringFromRequest("submit")) {
 
-	if (strlen($passwd)<6) {
-		exit_error(_('You must supply valid password (at least 6 chars).'),'my');
+	if (strlen($passwd)<8) {
+		exit_error(_('You must supply valid password (at least 8 characters).'),'my');
 	}
 
 	if ($passwd != $passwd2) {
@@ -86,13 +87,10 @@ if (getStringFromRequest("submit")) {
 
 $title = _("Lost Password Login") ;
 $HTML->header(array('title'=>$title));
-echo '<p>' ;
-printf (_('Welcome, %s. You may now change your password.'),$u->getUnixName());
-echo '</p>';
+echo html_e('p', array(), sprintf(_('Welcome, %s. You may now change your password.'),$u->getUnixName()));
+echo $HTML->openForm(array('action' => '/account/lostlogin.php', 'method' => 'post'));
 ?>
-
-<form action="<?php echo util_make_url('/account/lostlogin.php'); ?>" method="post">
-<p><?php echo _('New Password (at least 6 chars)'); ?>:
+<p><?php echo _('New Password (at least 8 characters)')._(':'); ?>
 <br />
 <label for="passwd">
 	<input id="passwd" type="password" name="passwd"/>
@@ -105,10 +103,9 @@ echo '</p>';
 </label>
 <input type="hidden" name="confirm_hash" value="<?php print $confirm_hash; ?>" /></p>
 <p><input type="submit" name="submit" value="<?php echo _('Update'); ?>" /></p>
-</form>
 
 <?php
-
+echo $HTML->closeForm();
 $HTML->footer();
 
 // Local Variables:

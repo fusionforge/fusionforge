@@ -22,8 +22,8 @@
  */
 
 class extsubprojPlugin extends Plugin {
-	public function __construct($id=0) {
-		$this->Plugin($id) ;
+	function __construct($id=0) {
+		parent::__construct($id);
 		$this->name = "extsubproj";
 		$this->text = _("External SubProjects"); // To show in the tabs, use...
 		$this->pkg_desc =

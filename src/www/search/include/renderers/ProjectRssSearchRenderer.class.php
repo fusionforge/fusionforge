@@ -49,18 +49,16 @@ AND group_id=$2',
 class ProjectRssSearchRenderer extends RssSearchRenderer {
 
 	/**
-	 * Constructor
-	 *
 	 * @param string $words words we are searching for
 	 * @param int $offset offset
 	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
 	 */
-	function ProjectRssSearchRenderer($words, $offset, $isExact) {
+	function __construct($words, $offset, $isExact) {
 
 		$this->callbackFunction = 'rssProjectCallback';
 
 		$searchQuery = new ExportProjectSearchQuery($words, $offset, $isExact);
 
-		$this->RssSearchRenderer(SEARCH__TYPE_IS_SOFTWARE, $words, $isExact, $searchQuery);
+		parent::__construct(SEARCH__TYPE_IS_SOFTWARE, $words, $isExact, $searchQuery);
 	}
 }

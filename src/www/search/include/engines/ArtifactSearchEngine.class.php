@@ -27,7 +27,7 @@ require_once $gfcommon.'tracker/include/ArtifactTypeHtml.class.php';
 class ArtifactSearchEngine extends GroupSearchEngine {
 	var $ath;
 
-	function ArtifactSearchEngine() {
+	function __construct() {
 		$this->type = SEARCH__TYPE_IS_ARTIFACT;
 		$this->rendererClassName = 'ArtifactHtmlSearchRenderer';
 	}

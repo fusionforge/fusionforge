@@ -25,8 +25,8 @@ require_once $gfwww.'search/include/engines/GroupSearchEngine.class.php';
 
 class FrsGroupSearchEngine extends GroupSearchEngine {
 
-	function FrsGroupSearchEngine() {
-		$this->GroupSearchEngine(SEARCH__TYPE_IS_FRS, 'FrsHtmlSearchRenderer', _('This project\'s releases'));
+	function __construct() {
+		parent::__construct(SEARCH__TYPE_IS_FRS, 'FrsHtmlSearchRenderer', _('This project\'s releases'));
 	}
 
 	function isAvailable($parameters) {

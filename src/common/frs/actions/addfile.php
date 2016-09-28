@@ -31,7 +31,6 @@ global $warning_msg; // warning message
 global $feedback; // feedback message
 global $error_msg; // error message
 
-
 $package_id = getIntFromRequest('package_id');
 if (!forge_check_perm('frs', $package_id, 'file')) {
 	$error_msg = _('FRS Action Denied.');

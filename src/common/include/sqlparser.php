@@ -114,16 +114,7 @@ function parse_sql_file($filename) {
 
 		case $states['IN_COMMENT']:
 			// error_log('IN_COMMENT');
-			if (($l == '') || preg_match('/^\s*$/', $l)) {
-				$l = get_next_line($f);
-				if ($l === false) {
-					error_log("End of file reached during a comment");
-					$state = $states['ERROR'];
-					continue;
-				}
-				$state = $states['IN_COMMENT'];
-				continue;
-			} elseif (preg_match(',\*/,', $l) || preg_match(',/\*,', $l)) {
+			if (preg_match(',\*/,', $l) || preg_match(',/\*,', $l)) {
 				$l = preg_replace(',.*?((/\*)|(\*/)),', '$1', $l, 1);
 				$chunk = substr($l,0,2);
 				$rest = substr($l,2);
@@ -153,16 +144,7 @@ function parse_sql_file($filename) {
 
 		case $states['IN_SQL_COMMENT']:
 			// error_log('IN_SQL_COMMENT');
-			if (($rest == '') || preg_match('/^\s*$/')) {
-				$rest = get_next_line($f);
-				if ($rest === false) {
-					error_log("End of file reached during a comment");
-					$state = $states['ERROR'];
-					continue;
-				}
-				$state = $states['IN_SQL_COMMENT'];
-				continue;
-			} elseif (preg_match(',\*/,', $rest) || preg_match(',/\*,', $rest)) {
+			if (preg_match(',\*/,', $rest) || preg_match(',/\*,', $rest)) {
 				$rest = preg_replace(',.*?((/\*)|(\*/)),', '$1', $l, 1);
 				$chunk = substr($rest,0,2);
 				$rest = substr($rest,2);

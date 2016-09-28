@@ -1,6 +1,26 @@
 <?php
 /**
  * The ArtifactWorkflow class manages workflow for trackers.
+ * Previous Copyright, FusionForge Team
+ * Copyright 2016, Franck Villaume - TrivialDev
+ *
+ * This file is part of FusionForge. FusionForge is free software;
+ * you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the Licence, or (at your option)
+ * any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with FusionForge; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
+
+/**
  *
  * The workflow is attached to custom status field only.
  *
@@ -17,8 +37,6 @@
  *
  * NOTES:
  * @todo: the getAllowedRoles should be replaced by getRealAllowedRoles code. (to be tested).
- * @todo: Some code could use a db direct to array func instead of the while.
- *
  */
 require_once $gfcommon.'include/FFError.class.php';
 
@@ -84,6 +102,8 @@ class ArtifactWorkflow extends FFError {
 	 * When a new element is created, add all the new events in the workflow.
 	 */
 	function addNode($element_id) {
+		// reset the cache!
+		$this->ath->fetchData($this->ath->getID());
 		$elearray = $this->ath->getExtraFieldElements($this->field_id);
 		foreach ($elearray as $e) {
 			if ($element_id !== $e['element_id']) {
@@ -107,14 +127,12 @@ class ArtifactWorkflow extends FFError {
 				$this->_removeEvent($element_id, $e['element_id']);
 			}
 		}
-
 		// Allow the new element for the Submit form (Initial values).
 		$this->_removeEvent('100', $element_id);
 	}
 
 	// Returns all the possible following nodes (no roles involved).
 	function getNextNodes($from) {
-
 		$res = db_query_params ('SELECT to_value_id FROM artifact_workflow_event
 				WHERE group_artifact_id=$1
 				AND field_id=$2
@@ -122,16 +140,10 @@ class ArtifactWorkflow extends FFError {
 			array($this->artifact_id,
 				$this->field_id,
 				(int)$from));
-		$values = array();
-		while($arr = db_fetch_array($res)) {
-			$values[] = $arr['to_value_id'];
-		}
-		return $values;
-
+		return util_result_column_to_array($res);
 	}
 
 	function saveNextNodes($from, $nodes) {
-
 		// Get All possible nodes.
 		$current = $this->getNextNodes($from);
 
@@ -190,8 +202,41 @@ class ArtifactWorkflow extends FFError {
 		return true;
 	}
 
-	function _getEventId($from, $to) {
+	function getRequiredFields($from, $to) {
+		$res = db_query_params ('SELECT extra_field_id
+				FROM artifact_workflow_required_fields NATURAL INNER JOIN artifact_workflow_event
+				WHERE group_artifact_id=$1
+				AND field_id=$2
+				AND from_value_id=$3
+				AND to_value_id=$4',
+				array($this->artifact_id,
+						$this->field_id,
+						$from,
+						$to));
+		return util_result_column_to_array($res);
+	}
 
+	function saveRequiredFields($from, $to, $extra_fields) {
+		$event_id = $this->_getEventId($from, $to);
+		// Get required fields.
+		$current = $this->getRequiredFields($from, $to);
+		// Remove required fields no longer present.
+		foreach ($current as $extra_field) {
+			if (!in_array($extra_field, $extra_fields)) {
+				$this->_removeRequiredField($event_id, $extra_field);
+			}
+		}
+
+		// Add missing required fields.
+		foreach ($extra_fields as $extra_field) {
+			if (!in_array($extra_field, $current)) {
+				$this->_addRequiredField($event_id, $extra_field);
+			}
+		}
+		return true;
+	}
+
+	function _getEventId($from, $to) {
 		$res = db_query_params ('SELECT event_id FROM artifact_workflow_event
 				WHERE group_artifact_id=$1
 				AND field_id=$2
@@ -210,27 +255,28 @@ class ArtifactWorkflow extends FFError {
 	}
 
 	function _addEvent($from, $to) {
-
-		$res = db_query_params ('INSERT INTO artifact_workflow_event
-				(group_artifact_id, field_id, from_value_id, to_value_id)
-				VALUES ($1, $2, $3, $4)',
-			array($this->artifact_id,
-				$this->field_id,
-				$from,
-				$to));
-		if (!$res) {
-			$this->setError('Unable to add Event($from, $to): '.db_error());
-			return false;
+		$event_id = $this->_getEventId($from, $to);
+		if (!$event_id) {
+			$res = db_query_params ('INSERT INTO artifact_workflow_event
+					(group_artifact_id, field_id, from_value_id, to_value_id)
+					VALUES ($1, $2, $3, $4)',
+				array($this->artifact_id,
+					$this->field_id,
+					$from,
+					$to));
+			if (!$res) {
+				$this->setError('Unable to add Event($from, $to): '.db_error());
+				return false;
+			}
+			$event_id = $this->_getEventId($from, $to);
 		}
 
-		$event_id = $this->_getEventId($from, $to);
 		if ($event_id) {
 			// By default, all roles are allowed on a new event.
 			foreach ($this->ath->Group->getRoles() as $r) {
 				$this->_addRole($event_id, $r->getID());
 			}
 		}
-
 		return true;
 	}
 
@@ -250,7 +296,6 @@ class ArtifactWorkflow extends FFError {
 			$this->setError('Unable to remove Event($from, $to): '.db_error());
 			return false;
 		}
-
 		return true;
 	}
 
@@ -267,11 +312,7 @@ class ArtifactWorkflow extends FFError {
 				$this->field_id,
 				$from,
 				$to));
-		$values = array();
-		while($arr = db_fetch_array($res)) {
-			$values[] = $arr['role_id'];
-		}
-		return $values;
+		return util_result_column_to_array($res);
 	}
 
 	function _addRole($event_id, $role_id) {
@@ -296,11 +337,35 @@ class ArtifactWorkflow extends FFError {
 			array($event_id,
 				$role_id));
 		if (!$res) {
-			$this->setError('Unable to remove Event($from, $to): '.db_error());
+			$this->setError('Unable to remove Role ($role_id): '.db_error());
 			return false;
 		}
 		return true;
+	}
 
+	function _addRequiredField($event_id, $extra_field_id) {
+		$res = db_query_params ('INSERT INTO artifact_workflow_required_fields
+				(event_id, extra_field_id)
+				VALUES ($1, $2)',
+				array($event_id,
+						$extra_field_id));
+		if (!$res) {
+			$this->setError('Unable to add Extra Field ($extra_field_id): '.db_error());
+			return false;
+		}
+		return true;
+	}
+
+	function _removeRequiredField($event_id, $extra_field_id) {
+		$res = db_query_params ('DELETE FROM artifact_workflow_required_fields
+				WHERE event_id=$1 AND extra_field_id=$2',
+				array($event_id,
+						$extra_field_id));
+		if (!$res) {
+			$this->setError('Unable to remove Extra Field ($extra_field_id): '.db_error());
+			return false;
+		}
+		return true;
 	}
 
 }

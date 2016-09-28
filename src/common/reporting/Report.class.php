@@ -22,14 +22,14 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-DEFINE('REPORT_DAY_SPAN',24*60*60);
-DEFINE('REPORT_WEEK_SPAN',7*24*60*60);
-DEFINE('REPORT_MONTH_SPAN',30*24*60*60);
+define('REPORT_DAY_SPAN',24*60*60);
+define('REPORT_WEEK_SPAN',7*24*60*60);
+define('REPORT_MONTH_SPAN',30*24*60*60);
 
-DEFINE('REPORT_TYPE_DAILY',1);
-DEFINE('REPORT_TYPE_WEEKLY',2);
-DEFINE('REPORT_TYPE_MONTHLY',3);
-DEFINE('REPORT_TYPE_OA',4);
+define('REPORT_TYPE_DAILY',1);
+define('REPORT_TYPE_WEEKLY',2);
+define('REPORT_TYPE_MONTHLY',3);
+define('REPORT_TYPE_OA',4);
 
 class Report extends FFError {
 
@@ -51,7 +51,7 @@ var $max_weeks = 104;
 var $max_month = 24;
 var $rawdates = array();
 
-function Report() {
+function __construct() {
 	parent::__construct();
 	//
 	//	All reporting action will be done in GMT timezone

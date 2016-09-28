@@ -25,7 +25,7 @@ class ForumMLPlugin extends Plugin {
 		parent::__construct($id);
 		$this->name = "forumml" ;
 		$this->text = "ForumML" ; // To show in the tabs, use...
-		$this->_addHook("user_personal_links");//to make a link to the user�s personal part of the plugin
+		$this->_addHook("user_personal_links");//to make a link to the user's personal part of the plugin
 		$this->_addHook("usermenu") ;
 		$this->_addHook("groupisactivecheckbox") ; // The "use ..." checkbox in editgroupinfo
 		$this->_addHook("groupisactivecheckboxpost") ; //
@@ -47,12 +47,12 @@ class ForumMLPlugin extends Plugin {
 		$this->allowedForProject = array();
 	}
 
-	function CallHook ($hookname, &$params) {
+	function CallHook($hookname, &$params) {
 		global $use_mailmanplugin,$G_SESSION,$HTML,$gfcommon,$gfwww,$gfplugins;
 		if ($hookname == "usermenu") {
 			$text = $this->text; // this is what shows in the tab
 			if ($G_SESSION->usesPlugin("mailman")) {
-				$param = '?type=user&id=' . $G_SESSION->getId() . '&pluginname=' . $this->name; // we indicate the part we�re calling is the user one
+				$param = '?type=user&id=' . $G_SESSION->getId() . '&pluginname=' . $this->name; // we indicate the part we're calling is the user one
 				echo ' | ' . $HTML->PrintSubMenu (array ($text),
 						array ('/plugins/mailman/index.php' . $param ));
 			}

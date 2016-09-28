@@ -1,6 +1,6 @@
 <?php
 /**
- * FusionForge document manager
+ * FusionForge Documentation Manager
  *
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
@@ -49,16 +49,13 @@ class DocumentGroupFactory extends FFError {
 	var $Group;
 
 	/**
-	 * Constructor.
-	 *
 	 * @param	$Group
-	 * @return	\DocumentGroupFactory
 	 */
 	function __construct(&$Group) {
 		parent::__construct();
 
 		if (!$Group || !is_object($Group)) {
-			$this->setError(_('No Valid Group Object'));
+			$this->setError(_('Invalid Project'));
 			return;
 		}
 		if ($Group->isError()) {

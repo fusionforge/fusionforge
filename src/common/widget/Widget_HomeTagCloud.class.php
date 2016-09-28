@@ -22,7 +22,7 @@ require_once $gfcommon.'include/tag_cloud.php';
 
 class Widget_HomeTagCloud extends Widget {
 	function __construct() {
-		$this->Widget('hometagcloud');
+		parent::__construct('hometagcloud');
 		if (forge_get_config('use_project_tags')) {
 			$this->content['title'] = _('Tag Cloud');
 		}

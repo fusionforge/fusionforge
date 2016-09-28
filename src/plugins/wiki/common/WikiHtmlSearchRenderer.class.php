@@ -30,13 +30,10 @@ class WikiHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	var $groupId;
 
     /**
-     * Constructor
-     *
      * @param string $words words we are searching for
      * @param int $offset offset
      * @param bool $isExact if we want to search for all the words or if only one matching the query is sufficient
      * @param int $groupId group id
-     * @internal param array $sections array of all sections to search in (array of strings)
      */
 	function __construct($words, $offset, $isExact, $groupId) {
 		$this->groupId = $groupId;
@@ -44,7 +41,7 @@ class WikiHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$searchQuery = new WikiSearchQuery($words, $offset, $isExact, $groupId);
 
 		// init the search renderer
-		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_WIKI, $words, $isExact,
+		parent::__construct(SEARCH__TYPE_IS_WIKI, $words, $isExact,
 			$searchQuery, $groupId, 'wiki');
 
 		$this->tableHeaders = array(_('Page'),_('Author'), _('Date'));
@@ -68,7 +65,7 @@ class WikiHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			$page_name = preg_replace('/%2f/i', '/', rawurlencode($row['pagename']));
 			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'
 				. '<td><a href="/wiki/g/'. $group_name.'/'. $page_name .'">'
-				. html_image('ic/msg.png', '10', '12')
+				. html_image('ic/msg.png', 10, 12)
 				. ' '.$row['pagename'].'</a></td>
 				<td style="width: 15%">'.$data['author'].'</td>
 				<td style="width: 15%">'.relative_date($row['mtime']).'</td></tr>';

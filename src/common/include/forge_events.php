@@ -3,9 +3,9 @@
 abstract class ForgeEvent extends Plugin {
 
 	function __construct() {
-		$this->Plugin() ;
-		$this->name = "event" ;
-		$this->text = "event" ;
+		parent::__construct();
+		$this->name = "event";
+		$this->text = "event";
 		$this->_addHook('group_approve');
 		$this->_addHook('scm_admin_update');
 		$this->_addHook('site_admin_option_hook');
@@ -23,7 +23,7 @@ abstract class ForgeEvent extends Plugin {
 
 	function site_admin_option_hook($params) {
 		$action = getStringFromRequest('action');
-		echo '<li><a name="jobs"></a>'.util_make_link('/admin/?action=listjobs#jobs', _('Jobs'))."\n";
+		echo '<li><a id="jobs"></a>'.util_make_link('/admin/?action=listjobs#jobs', _('Jobs'))."\n";
 		if ($action == 'listjobs') {
 			echo '<ul>';
 			echo '<li>'.util_make_link('/admin/?action=runjobs&job=create_scm_repos#jobs', _('Create SCM Repositories')).'</li>'."\n";

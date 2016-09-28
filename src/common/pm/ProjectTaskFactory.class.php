@@ -53,12 +53,9 @@ class ProjectTaskFactory extends FFError {
 	var $view_type;
 
 	/**
-	 *  Constructor.
-	 *
 	 * @param	ProjectGroup	$ProjectGroup	The ProjectGroup object to which this ProjectTask is associated.
-	 * @return	boolean		success.
 	 */
-	function ProjectTaskFactory(&$ProjectGroup) {
+	function __construct(&$ProjectGroup) {
 		parent::__construct();
 		if (!$ProjectGroup || !is_object($ProjectGroup)) {
 			$this->setError('ProjectTask: No Valid ProjectGroup Object');

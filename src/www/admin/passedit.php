@@ -50,11 +50,11 @@ if (getStringFromRequest('submit')) {
 	$passwd = getStringFromRequest('passwd');
 	$passwd2 = getStringFromRequest('passwd2');
 
-	if (strlen($passwd)<6) {
+	if (strlen($passwd)<8) {
 		form_release_key(getStringFromRequest('form_key'));
 		exit_error(
 			_('Error'),
-			_('You must supply valid password (at least 6 chars).')
+			_('You must supply valid password (at least 8 characters).')
 		);
 	}
 
@@ -74,28 +74,25 @@ if (getStringFromRequest('submit')) {
 		);
 	}
 
-	site_admin_header(array('title'=>_('Site Admin: Change User Password')));
+	site_admin_header(array('title'=>_('Site Admin')._(': ')._('Change User Password')));
 
-	echo '<h2>';
-	printf(_('%s Password Change Confirmation'), forge_get_config('forge_name'));
-	echo '</h2>';
+	echo html_e('h2', array(), sprintf(_('%s Password Change Confirmation'), forge_get_config('forge_name')));
 	echo $HTML->feedback(sprintf(_('You have changed successfully the password of %1$s (%2$s).'), $u->getUnixName(), $u->getRealName()));
 	printf('<p>'._('Go back to %s.').'</p>', util_make_link('/admin/userlist.php', _('the Full User List')));
 } else {
 	// Show change form
-	site_admin_header(array('title'=>_('Site Admin: Change User Password')));
+	site_admin_header(array('title'=>_('Site Admin')._(': ')._('Change User Password')));
+	echo $HTML->openForm(array('action' => '/admin/passedit.php?user_id='.$user_id, 'method' => 'post'));
 	?>
-
-	<form action="<?php echo util_make_uri('/admin/passedit.php?user_id='.$user_id); ?>" method="post">
 	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
 	<p><?php printf(_('Changing password for user #%1$s "%2$s" (%3$s).'), $user_id, $u->getUnixName(), $u->getRealName()); ?></p>
-	<p><?php echo _('New Password (at least 6 chars)') ?>:
-	<br /><input type="password" name="passwd" required="required" title="<?php echo _('At least 6 chars'); ?>" pattern=".{6,}"/></p>
+	<p><?php echo _('New Password (at least 8 characters)') ?>:
+	<br /><input type="password" name="passwd" required="required" title="<?php echo _('At least 8 characters'); ?>" pattern=".{8,}"/></p>
 	<p><?php echo _('New Password (repeat)') ?>:
-	<br /><input type="password" name="passwd2" required="required" title="<?php echo _('At least 6 chars'); ?>" pattern=".{6,}" /></p>
+	<br /><input type="password" name="passwd2" required="required" title="<?php echo _('At least 8 characters'); ?>" pattern=".{8,}" /></p>
 	<p><input type="submit" name="submit" value="<?php echo _('Update password') ?>" /></p>
-	</form>
 	<?php
+	echo $HTML->closeForm();
 }
 
 site_admin_footer();

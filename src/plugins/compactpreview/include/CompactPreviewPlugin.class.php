@@ -23,8 +23,8 @@
 
 class CompactPreviewPlugin extends Plugin {
 
-	public function __construct($id=0) {
-		$this->Plugin($id) ;
+	function __construct($id=0) {
+		parent::__construct($id);
 		$this->name = "compactpreview";
 		$this->text = _("CompactPreview!"); // To show in the tabs, use...
 		$this->pkg_desc =
@@ -101,7 +101,7 @@ _("This plugin adds support for user and project compact-preview
 
 		$html = '<html>
 						<head>
-						<title>User: '. $user_real_name .' (Identifier: '. $user_id .')</title>
+						<title>'._('User')._(': ').$user_real_name.' ('._('Identifier')._(': ').$user_id.')</title>
 						</head>
 						<body>';
 
@@ -120,35 +120,35 @@ _("This plugin adds support for user and project compact-preview
 		$public_name = $project_obj->getPublicName();
 		$unix_name = $project_obj->getUnixName();
 		$id = $project_obj->getID();
-		$home_page = util_make_url ("/projects/$unix_name/");
+		$home_page = util_make_url('/projects/'.$unix_name.'/');
 		$description = $project_obj->getDescription();
 		$start_date = $project_obj->getStartDate();
 		$status = $project_obj->getStatus();
 		switch ($status){
 			case 'A':
-				$project_status = 'Active';
+				$project_status = _('Active');
 				break;
 			case 'H':
-				$project_status = 'Hold';
+				$project_status = _('Hold');
 				break;
 			case 'P':
-				$project_status = 'Pending';
+				$project_status = _('Pending');
 				break;
 			case 'I':
-				$project_status = 'Incomplete';
+				$project_status = _('Incomplete');
 				break;
 			default:
 				break;
 		}
 		if ($project_obj->isPublic()) {
-			$public = 'Yes';
+			$public = _('Yes');
 		} else {
-			$public = 'No';
+			$public = _('No');
 		}
 
 		$html='<html>
 		<head>
-		<title>Project: '. $public_name .' ('. $unix_name .')</title>
+		<title>'._('Project')._(': '). $public_name .' ('. $unix_name .')</title>
 		</head>
 		<body>
 			<table>
@@ -159,42 +159,42 @@ _("This plugin adds support for user and project compact-preview
 				<tr>
 					'/* <td rowspan="8"><img src="/plugins/compactpreview/images/userTooltip/oslc.png" />
 					</td>*/.'
-					<td><b>Project name:</b>
+					<td><b>'._('Project Name')._(': ').'</b>
 
 					 '. $public_name .'</td>
 				</tr>
 				<tr>
-					<td><b>Project short name:</b>
+					<td><b>'._('Project Short Name')._(': ').'</b>
 
 					 '. $unix_name .'</td>
 				</tr>
 				<tr>
-					<td><b>Identifier:</b>
+					<td><b>'._('Identifier')._(': ').'</b>
 
 					  '. $id .'</td>
 				</tr>
 				<tr>
-					<td><b>Started since:</b>
+					<td><b>'._('Started since')._(': ').'</b>
 
 					 '. date(_('Y-m-d H:i'), $start_date) .'</td>
 				</tr>
 				<tr>
-					<td><b>Status:</b>
+					<td><b>'._('Status')._(': ').'</b>
 
 					  '. $project_status .'</td>
 				</tr>
 				<tr>
-					<td><b>Is Public:</b>
+					<td><b>'._('Is Public')._(': ').'</b>
 
 					  '. $public .'</td>
 				</tr>
 				<tr>
-					<td><b>Description:</b>
+					<td><b>'._('Description')._(': ').'</b>
 
 					  '. $description .'</td>
 				</tr>
 				<tr>
-					<td><small><b>Home Page:</b> <a href="'. $home_page .'">'. $home_page .'
+					<td><small><b>'._('Home Page')._(': ').'</b> <a href="'. $home_page .'">'. $home_page .'
 						</a> </small></td>
 				</tr>
 

@@ -1,9 +1,9 @@
 <?php
-
 /**
  * Project data importing script for project admin
  *
  * Copyright (c) 2011 Olivier Berger & Institut Telecom
+ * Copyright 2016, Franck Villaume - TrivialDev
  *
  * This program was developped in the frame of the COCLICO project
  * (http://www.coclico-project.org/) with financial support of the Paris
@@ -496,16 +496,13 @@ class ProjectImportPage extends FileManagerPage {
 					$html .= $message;
 				}
 				else {
-					$this->feedback("Couldn't proceed!");
+					$this->feedback(_("Couldn't proceed!"));
 				}
-				$html .= "All (mapped) imported users added to the group.";
+				$html .= _("All (mapped) imported users added to the group.");
 				// }
 			}
-
 		}
-
 		return $html;
-
 	}
 
 	/**
@@ -513,16 +510,16 @@ class ProjectImportPage extends FileManagerPage {
 	 * @return html string
 	 */
 	function do_work() {
-		global $group_id, $feedback;
+		global $group_id, $feedback, $HTML;
 
-		$html = '';
+		$htmlcontent = '';
 
 		// If the posted JSON file indeed contains a project dump, an importer was created,
 		// and if it has data we can work
 		if($this->importer) {
 			// If it indeed has valid data
 			if ($this->importer->has_project_dump()) {
-				$this->message .= "Here are the results from your upload:";
+				$this->message .= _("Here are the results from your upload")._(':');
 
 				$imported_users = $this->importer->get_users();
 
@@ -533,13 +530,13 @@ class ProjectImportPage extends FileManagerPage {
 				// start HTML output
 				if (! $this->form_header_already_displayed) {
 					$this->form_header_already_displayed = true;
-					$html .= '<form enctype="multipart/form-data" action="'.getStringFromServer('PHP_SELF').'" method="post">';
+					$htmlcontent .= $HTML->openForm(array('enctype' => 'multipart/form-data', 'action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
 				}
 
 				// Handle missing users, taking into account the user mapping form elements
 				// that may have been provided
 				$apply = TRUE;
-				$html .= $this->match_users($imported_users, $apply);
+				$htmlcontent .= $this->match_users($imported_users, $apply);
 
 				// Then handle project(s)
 
@@ -558,14 +555,14 @@ class ProjectImportPage extends FileManagerPage {
 					foreach($projects as $project) {
 
 						// Display project's general description
-						$html .= '<table id="project-summary-and-devs" class="my-layout-table">
-	                               <tr>
-		                             <td>
-			                            <h2>'._('Details of imported project: ').
-			                             '<pre>'.$project->getUnixName().'</pre>
-			                            </h2>
-			                            <h3>'._('Project Summary').'</h3>';
-						$html .= '<p><pre>'.$project->getDescription().'</pre></p>';
+						$htmlcontent .= '<table id="project-summary-and-devs" class="my-layout-table">
+									<tr>
+									<td>
+									<h2>'._('Details of imported project: ').
+									'<pre>'.$project->getUnixName().'</pre>
+									</h2>
+									<h3>'._('Project Summary').'</h3>';
+						$htmlcontent .= '<p><pre>'.$project->getDescription().'</pre></p>';
 
 						$spaces = $project->getSpaces();
 
@@ -575,41 +572,38 @@ class ProjectImportPage extends FileManagerPage {
 
 							// spaces header first
 							if(count($spaces)) {
-								$html .= $this->html_generator->boxTop(_("Project's spaces found"));
+								$htmlcontent .= $this->html_generator->boxTop(_("Project's spaces found"));
 								if (! $this->form_header_already_displayed) {
-									$html .= '<form enctype="multipart/form-data" action="'.getStringFromServer('PHP_SELF').'" method="post">';
+									$htmlcontent .= $HTML->openForm(array('enctype' => 'multipart/form-data', 'action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
 									$this->form_header_already_displayed = true;
 								}
-								$html .= '<table width="100%"><thead><tr>';
-								$html .= '<th>'._('uri').'</th>';
-								$html .= '<th>'._('type').'</th>';
-								$html .= '<th>'._('Import space ?').'</th>';
-								$html .= '</tr></thead><tbody>';
+								$htmlcontent .= '<table width="100%"><thead><tr>';
+								$htmlcontent .= '<th>'._('uri').'</th>';
+								$htmlcontent .= '<th>'._('type').'</th>';
+								$htmlcontent .= '<th>'._('Import space ?').'</th>';
+								$htmlcontent .= '</tr></thead><tbody>';
 							}
 							foreach($spaces as $space => $spaceres) {
 								$uri = $space;
 								$sha_uri = sha1($uri);
 								$type = $spaceres->getPropValue('rdf:type');
 
-								$html .= '<tr>';
-								$html .= '<td style="white-space: nowrap;">'. $uri .'</td>';
-								$html .= '<td style="white-space: nowrap;">'. $type .'</td>';
+								$htmlcontent .= '<tr>';
+								$htmlcontent .= '<td style="white-space: nowrap;">'. $uri .'</td>';
+								$htmlcontent .= '<td style="white-space: nowrap;">'. $type .'</td>';
 								if(array_key_exists($sha_uri, $this->posted_spaces_imported)) {
-									$html .= '<td><input type="checkbox" name="import_'.$sha_uri.'" value="'.$sha_uri.'" selected="selected" /></td>';
+									$htmlcontent .= '<td><input type="checkbox" name="import_'.$sha_uri.'" value="'.$sha_uri.'" selected="selected" /></td>';
+								} else {
+									$htmlcontent .= '<td><input type="checkbox" name="import_'.$sha_uri.'" value="'.$sha_uri.'" /></td>';
 								}
-								else {
-									$html .= '<td><input type="checkbox" name="import_'.$sha_uri.'" value="'.$sha_uri.'" /></td>';
-								}
-								$html .= '</tr>';
+								$htmlcontent .= '</tr>';
 							}
 							if(count($spaces)) {
-								$html .= '<input type="hidden" name="submit_spaces" value="y" />';
-								$html .= '</tbody></table>';
-								$html .= $this->html_generator->boxBottom();
+								$htmlcontent .= '<input type="hidden" name="submit_spaces" value="y" />';
+								$htmlcontent .= '</tbody></table>';
+								$htmlcontent .= $this->html_generator->boxBottom();
 							}
-						}
-						// else, user tells us we have to import the spaces
-						else {
+						} else { // else, user tells us we have to import the spaces
 							//					$html .= 'to be imported:';
 							//					print_r($this->posted_spaces_imported);
 							//					$html .= '<br />';
@@ -617,45 +611,43 @@ class ProjectImportPage extends FileManagerPage {
 								$sha_uri = sha1($uri);
 								//						$html .= 'sha1 :'.$sha_uri.'<br />';
 								if (in_array($sha_uri, $this->posted_spaces_imported)) {
-									$html .= 'Importing:'.$uri.'<br />';
+									$htmlcontent .= _('Importing')._(': ').$uri.'<br />';
 									$this->importer->decode_space($uri, $spaceres);
 								}
 							}
 						}
 					}
+				} else { // count($projects)
+					$this->feedback(_('No project found.'));
 				}
-				else { // count($projects)
-					$this->feedback(_('No project found'));
-				}
-			}
-			else { // not $this->importer->has_project_dump()
+			} else { // not $this->importer->has_project_dump()
 				$this->feedback(_('parsing problem'));
 			}
 		}
-		return $html;
+		return $htmlcontent;
 	}
 
 	/**
 	 * Display the page
 	 */
 	function display_main() {
-		global $feedback, $group_id;
+		global $feedback, $group_id, $HTML;
 
 		// Do the work, first !
-		$html = $this->do_work();
+		$htmlcontent = $this->do_work();
 
 		if($this->message) {
 			echo $this->message . '<br />';
 		}
 		html_feedback_top($feedback);
 
-		echo $html;
+		echo $htmlcontent;
 
 		// If invoked initially (not on callback) or if more details needed
 		// display the last part of the form for JSON file upload
 		if (! $this->form_header_already_displayed) {
-			echo '<form enctype="multipart/form-data" action="'.getStringFromServer('PHP_SELF').'" method="post">';
-			$this->form_header_already_displayed = True;
+			echo $HTML->openForm(array('enctype' => 'multipart/form-data', 'action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
+			$this->form_header_already_displayed = true;
 		}
 
 		// If user mapping has been provided, then display it
@@ -683,8 +675,7 @@ class ProjectImportPage extends FileManagerPage {
 		if($selectiondialog) { // there are some selectable files already
 			if ($preselected) {
 				$legend = _('Confirm selected file or upload a new one');
-			}
-			else {
+			} else {
 				$legend = _('Select a file or upload a new one');
 			}
 		} else { // there are yet no files
@@ -693,25 +684,24 @@ class ProjectImportPage extends FileManagerPage {
 
 		// finally, display the file upload form
 		echo '<fieldset><legend>'. $legend .'</legend>
-		       <p><center>
-                          <input type="file" id="uploaded_file" name="uploaded_file" tabindex="2" />
-                  </center></p>
-               </fieldset>';
+			<p><center>
+				<input type="file" id="uploaded_file" name="uploaded_file" tabindex="2" />
+			</center></p>
+		</fieldset>';
 
 		echo '<input type="hidden" name="group_id" value="' . $group_id . '" />';
 		echo '<div style="text-align:center;">
-                      <input type="submit" name="submit" value="Submit" />
-                    </div>';
-		echo '</form>';
-
+			<input type="submit" name="submit" value="Submit" />
+			</div>';
+		if ($this->form_header_already_displayed) {
+			echo $HTML->closeForm();
+		}
 		site_project_footer();
-
 	}
 }
 
 // OK, we need a session
 if (session_loggedin()) {
-
 	// The user should be project admin
 	if ( ! forge_check_perm('project_admin', $group_id) ) {
 		exit_permission_denied(_('You cannot import project unless you are an admin on that project'));
@@ -727,22 +717,16 @@ if (session_loggedin()) {
 
 	// when called back by post form we can initialize some elements provided by the user
 	if (getStringFromRequest('submit')) {
-
 		$this_page->initialize_from_submitted_data();
-
-	}
-	else {
-		$message .= "You can import a project from a JSON RDF document compatible with ForgePlucker's dump format.<br />";
+	} else {
+		$message .= _("You can import a project from a JSON RDF document compatible with ForgePlucker's dump format.").'<br />';
 	}
 
 	$this_page->display_headers($message);
-
 	$this_page->display_main();
 
 } else {
-
 	exit_not_logged_in();
-
 }
 
 

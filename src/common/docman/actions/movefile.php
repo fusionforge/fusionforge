@@ -3,7 +3,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2012-2015, Franck Villaume - TrivialDev
+ * Copyright 2012-2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -50,7 +50,11 @@ $moveto_dirid = getIntFromRequest('moveto_dirid');
 foreach ($arr_fileid as $fileid) {
 	if (!empty($fileid)) {
 		$d = document_get_object($fileid, $g->getID());
-		if ($d->isError() || !$d->update($d->getFilename(), $d->getFileType(), NULL, $moveto_dirid, $d->getName(), $d->getDescription(), $d->getStateID())) {
+		if (!$d) {
+			$error_msg = _('Cannot retrieve document');
+			session_redirect($redirecturl);
+		}
+		if ($d->isError() || !$d->update($d->getFileName(), $d->getFileType(), NULL, $moveto_dirid, $d->getName(), $d->getDescription(), $d->getStateID(), $d->getVersion())) {
 			$error_msg = $d->getErrorMessage();
 			session_redirect($redirecturl);
 		}

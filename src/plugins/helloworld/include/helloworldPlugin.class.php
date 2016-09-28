@@ -1,8 +1,6 @@
 <?php
-
 /**
  * helloworldPlugin Class
- *
  *
  * This file is part of FusionForge.
  *
@@ -22,8 +20,8 @@
  */
 
 class helloworldPlugin extends Plugin {
-	public function __construct($id=0) {
-		$this->Plugin($id) ;
+	function __construct($id=0) {
+		parent::__construct($id) ;
 		$this->name = "helloworld";
 		$this->text = "HelloWorld!"; // To show in the tabs, use...
 		$this->_addHook("user_personal_links");//to make a link to the user's personal part of the plugin
@@ -36,7 +34,7 @@ class helloworldPlugin extends Plugin {
 		$this->_addHook("project_admin_plugins"); // to show up in the admin page fro group
 	}
 
-	function CallHook ($hookname, &$params) {
+	function CallHook($hookname, &$params) {
 		global $use_helloworldplugin,$G_SESSION,$HTML;
 		if ($hookname == "usermenu") {
 			$text = $this->text; // this is what shows in the tab
@@ -55,45 +53,16 @@ class helloworldPlugin extends Plugin {
 			if ($project->isError()) {
 				return;
 			}
-			if (!$project->isProject()) {
-				return;
-			}
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][]=$this->text;
 				$params['DIRS'][]=util_make_url ('/plugins/helloworld/index.php?type=group&id=' . $group_id . "&pluginname=" . $this->name) ; // we indicate the part we're calling is the project one
+				$params['TOOLTIPS'][]='';
 			} else {
 				$params['TITLES'][]=$this->text." is [Off]";
 				$params['DIRS'][]='';
+				$params['TOOLTIPS'][]='';
 			}
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
-		} elseif ($hookname == "groupisactivecheckbox") {
-			//Check if the group is active
-			// this code creates the checkbox in the project edit public info page to activate/deactivate the plugin
-			$group_id=$params['group'];
-			$group = group_get_object($group_id);
-			echo "<tr>";
-			echo "<td>";
-			echo ' <input type="checkbox" name="use_helloworldplugin" value="1" ';
-			// checked or unchecked?
-			if ( $group->usesPlugin ( $this->name ) ) {
-				echo "checked";
-			}
-			echo " /><br/>";
-			echo "</td>";
-			echo "<td>";
-			echo "<strong>Use ".$this->text." Plugin</strong>";
-			echo "</td>";
-			echo "</tr>";
-		} elseif ($hookname == "groupisactivecheckboxpost") {
-			// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
-			$group_id=$params['group'];
-			$group = group_get_object($group_id);
-			$use_helloworldplugin = getStringFromRequest('use_helloworldplugin');
-			if ( $use_helloworldplugin == 1 ) {
-				$group->setPluginUse ( $this->name );
-			} else {
-				$group->setPluginUse ( $this->name, false );
-			}
 		} elseif ($hookname == "user_personal_links") {
 			// this displays the link in the user's profile page to it's personal HelloWorld (if you want other sto access it, youll have to change the permissions in the index.php
 			$userid = $params['user_id'];

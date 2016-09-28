@@ -23,8 +23,8 @@
  */
 
 class globaldashboardPlugin extends Plugin {
-	public function __construct($id=0) {
-		$this->Plugin($id);
+	function __construct($id=0) {
+		parent::__construct($id);
 		$this->name = "globaldashboard";
 		$this->text = "Global Dashboard"; // Text to show in the tabs
 

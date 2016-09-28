@@ -50,20 +50,17 @@ class MailingList extends FFError {
 	var $groupMailingListId;
 
 	/**
-	 *  Constructor.
-	 *
 	 * @param	$Group
 	 * @param	bool	$groupListId
 	 * @param	bool	$dataArray
 	 * @internal	param	\The $object Group object to which this mailing list is associated.
 	 * @internal	param	\The $int group_list_id.
 	 * @internal	param	\The $array associative array of data.
-	 * @return	\MailingList
 	 */
 	function __construct(&$Group, $groupListId = false, $dataArray = false) {
 		parent::__construct();
 		if (!$Group || !is_object($Group)) {
-			$this->setError(_('No Valid Group Object'));
+			$this->setError(_('Invalid Project'));
 			return;
 		}
 		if ($Group->isError()) {
@@ -194,24 +191,24 @@ class MailingList extends FFError {
 			db_rollback();
 			return false;
 		} else {
-			$mailBody = sprintf(_('A mailing list will be created on %1$s in one hour
-and you are the list administrator.
+			$mailBody = sprintf(_('A mailing list will be created on %s in one hour and you are the list administrator.'), forge_get_config ('forge_name'))
 
-This list is: %3$s@%2$s .
+					. sprintf(_('This list is: %1$s@%2$s'), $realListName, forge_get_config('lists_host')) . "\n\n"
 
-Your mailing list info is at:
-%4$s .
+					. _('Your mailing list info is at:') . "\n"
+					. $this->getExternalInfoUrl() . "\n\n"
 
-List administration can be found at:
-%5$s .
+					. _('List administration can be found at:') . "\n"
+					. $this->getExternalAdminUrl() . "\n\n"
 
-Your list password is: %6$s .
-You are encouraged to change this password as soon as possible.
+					. _('Your list password is: ') . $listPassword . "\n"
+					. _('You are encouraged to change this password as soon as possible.') . "\n\n"
 
-Thank you for registering your project with %1$s.'), forge_get_config ('forge_name'), forge_get_config('lists_host'), $realListName, $this->getExternalInfoUrl(), $this->getExternalAdminUrl(), $listPassword);
-			$mailBody .= "\n\n";
-			$mailBody .= sprintf(_('-- the %s staff'), forge_get_config ('forge_name'));
-			$mailBody .= "\n";
+					. sprintf(_('Thank you for registering your project with %s.'), forge_get_config ('forge_name'))
+					. "\n\n"
+
+					. sprintf(_('-- the %s staff'), forge_get_config ('forge_name'))
+					. "\n";
 
 			$mailSubject = sprintf(_('%s New Mailing List'), forge_get_config ('forge_name'));
 

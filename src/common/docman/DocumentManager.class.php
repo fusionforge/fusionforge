@@ -1,6 +1,6 @@
 <?php
 /**
- * FusionForge document manager
+ * FusionForge Documentation Manager
  *
  * Copyright 2011-2014,2016, Franck Villaume - TrivialDev
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
@@ -45,16 +45,13 @@ class DocumentManager extends FFError {
 	var $Group;
 
 	/**
-	 * Constructor.
-	 *
 	 * @param	$Group
 	 * @internal	param	\The $object Group object to which this document is associated.
-	 * @return	\DocumentManager
 	 */
 	function __construct(&$Group) {
 		parent::__construct();
 		if (!$Group || !is_object($Group)) {
-			$this->setError(_('No Valid Group Object'));
+			$this->setError(_('Invalid Project'));
 			return;
 		}
 		if ($Group->isError()) {
@@ -364,7 +361,6 @@ class DocumentManager extends FFError {
 			} else {
 				$df = new DocumentFactory($doc_group->getGroup());
 				$df->setDocGroupID($doc_group->getID());
-				$stateidArr = array(1);
 				if (forge_check_perm('docman', $this->getGroup()->getID(), 'approve')) {
 					$stateIdDg = 5;
 				}

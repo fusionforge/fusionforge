@@ -25,8 +25,8 @@ require_once $gfwww.'search/include/engines/GroupSearchEngine.class.php';
 
 class ForumSearchEngine extends GroupSearchEngine {
 
-	function ForumSearchEngine() {
-		$this->GroupSearchEngine(SEARCH__TYPE_IS_FORUM, 'ForumHtmlSearchRenderer', _('This forum'));
+	function __construct() {
+		parent::__construct(SEARCH__TYPE_IS_FORUM, 'ForumHtmlSearchRenderer', _('This forum'));
 	}
 
 	function isAvailable($parameters) {

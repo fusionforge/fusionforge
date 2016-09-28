@@ -34,7 +34,7 @@ $type = getStringFromRequest('type');
 $projectsHierarchy = plugin_get_object('projects-hierarchy');
 
 if (!$type) {
-	exit_error("Cannot Process your request: No TYPE specified", 'home'); // you can create items in Base.tab and customize this messages
+	exit_error(_('Cannot Process your request')._(': ')._('No TYPE specified'), 'home'); // you can create items in Base.tab and customize this messages
 }
 
 switch ($type) {
@@ -44,7 +44,7 @@ switch ($type) {
 		}
 		$id = getStringFromRequest('id');
 		if (!$id) {
-			exit_error("Cannot Process your request: No ID specified", 'home');
+			exit_error(_('Cannot Process your request')._(': ')._('No ID specified'), 'home');
 		}
 		$group = group_get_object($id);
 		if ( !$group) {
@@ -98,7 +98,7 @@ switch ($type) {
 		$id = getStringFromRequest('group_id');
 		session_require_perm('project_admin', $id);
 		if (!$id) {
-			exit_error("Cannot Process your request: No ID specified", 'home');
+			exit_error(_('Cannot Process your request')._(': ')._('No ID specified'), 'home');
 		}
 		$group = group_get_object($id);
 		if ( !$group) {

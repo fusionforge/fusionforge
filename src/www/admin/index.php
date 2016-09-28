@@ -51,7 +51,7 @@ for ($i = 0; $i < count($abc_array); $i++) {
 	$localcontent .= util_make_link('/admin/userlist.php?user_name_search='.$abc_array[$i], $abc_array[$i]).'|';
 }
 $localcontent .= html_e('br');
-$localcontent .= $HTML->openForm(array('name' => 'usersrch', 'action' => util_make_uri('/admin/search.php'), 'method' => 'post'));
+$localcontent .= $HTML->openForm(array('name' => 'usersrch', 'action' => '/admin/search.php', 'method' => 'post'));
 $localcontent .= _('Search <em>(userid, username, realname, email)</em>');
 $localcontent .= html_e('input', array('type' => 'text', 'name' => 'search'));
 $localcontent .= html_e('input', array('type' => 'hidden', 'name' => 'substr', 'value' => 1));
@@ -83,7 +83,7 @@ echo html_ac(html_ap() - 1);
 	<ul>
 	<li><?php
 
-		echo $HTML->openForm(array('action' => util_make_uri('/admin/globalroleedit.php'), 'method' => 'post')).'<p>';
+		echo $HTML->openForm(array('action' => '/admin/globalroleedit.php', 'method' => 'post')).'<p>';
 		echo global_role_box('role_id');
 		echo '<input type="submit" name="edit" value="'._("Edit Role").'" /></p>'.$HTML->closeForm();
 ?>
@@ -91,7 +91,7 @@ echo html_ac(html_ap() - 1);
 <li>
 <?php
 
-		echo $HTML->openForm(array('action' => util_make_uri('/admin/globalroleedit.php'), 'method' => 'post')).'<p>';
+		echo $HTML->openForm(array('action' => '/admin/globalroleedit.php', 'method' => 'post')).'<p>';
 		echo '<input type="text" name="role_name" size="10" value="" required="required" />';
 		echo '<input type="submit" name="add" value="'._("Create Role").'" /></p>'.$HTML->closeForm();
 	?></li>
@@ -108,7 +108,7 @@ echo html_ac(html_ap() - 1);
 			    AND is_template = 0',
 		    array());
 		$row = db_fetch_array($res);
-		printf(_('Registered projects: <strong>%d</strong>'), $row['count']);
+		echo _('Registered projects')._(': ').'<strong>'.$row['count'].'</strong>';
 	?></li>
 	<li><?php
 		$res = db_query_params('SELECT count(*) AS count FROM groups
@@ -118,7 +118,7 @@ echo html_ac(html_ap() - 1);
 			    AND is_template = 0',
 		    array('A'));
 		$row = db_fetch_array($res);
-		printf(_('Active projects: <strong>%d</strong>'), $row['count']);
+		echo _('Active projects')._(': ').'<strong>'.$row['count'].'</strong>';
 	?></li>
 	<li><?php
 		$res = db_query_params('SELECT count(*) AS count FROM groups
@@ -128,7 +128,7 @@ echo html_ac(html_ap() - 1);
 			    AND is_template = 0',
 		    array('P'));
 		$row = db_fetch_array($res);
-		printf(_('Pending projects: <strong>%d</strong>'), $row['count']);
+		echo _('Pending projects')._(': ').'<strong>'.$row['count'].'</strong>';
 	?></li>
 	<li><?php echo util_make_link('/admin/grouplist.php', _('Display Full Project List/Edit Projects')); ?></li>
 
@@ -137,7 +137,7 @@ echo html_ac(html_ap() - 1);
 		echo util_make_link('/admin/grouplist.php?group_name_search='.$abc_array[$i], $abc_array[$i]).'|';
 	}
 	echo html_e('br');
-	echo $HTML->openForm(array('name'=> 'gpsrch', 'action' => util_make_uri('/admin/search.php'), 'method' => 'post'));
+	echo $HTML->openForm(array('name'=> 'gpsrch', 'action' => '/admin/search.php', 'method' => 'post'));
 		echo _('Search <em>(groupid, project Unix name, project full name)</em>'); ?>:
 		<input type="text" name="search" />
 		<input type="hidden" name="substr" value="1" />
@@ -147,7 +147,7 @@ echo html_ac(html_ap() - 1);
 	</li>
 	<li><?php echo util_make_link('/register/',_('Register New Project')); ?></li>
 	<li><?php echo util_make_link('/admin/approve-pending.php', _('Pending projects (new project approval)')); ?></li>
-	<li><form name="projectsearch" action="/admin/search.php">
+	<li><?php echo $HTML->openForm(array('name' => 'projectsearch', 'action' => '/admin/search.php', 'method' => 'post')); ?>
 	<label for="status">
 	<?php echo _('Projects with status'); ?>
 	</label>
@@ -159,7 +159,7 @@ echo html_ac(html_ap() - 1);
 	<input type="hidden" name="groupsearch" value="1"/>
 	<input type="hidden" name="search" value="%"/>
 	<input type="submit" value="<?php echo _('Submit');?> "/>
-	</form></li>
+	<?php echo $HTML->closeForm(); ?></li>
 	<li><?php echo util_make_link('/admin/search.php?groupsearch=1&is_public=0', _('Private Projects')); ?></li>
 </ul>
 <?php
@@ -181,25 +181,25 @@ echo html_ac(html_ap() - 1);
 <?php if(forge_get_config('use_news')) {?>
 <div class="info-box">
 <h2><?php echo _('News'); ?></h2>
-<ul>
-	<li><?php echo util_make_link('/admin/pending-news.php', _('Pending news (moderation for front-page)')); ?></li>
-</ul>
+	<ul>
+		<li><?php echo util_make_link('/admin/pending-news.php', _('Pending news (moderation for front-page)')); ?></li>
+	</ul>
 </div>
 <?php } ?>
 
 <div class="info-box">
 <h2><?php echo _('Stats'); ?></h2>
-<ul>
-	<li><?php echo util_make_link('/stats/', _('Site-Wide Stats')); ?></li>
-	<?php plugin_hook('webanalytics_admin', array()); ?>
-</ul>
+	<ul>
+		<li><?php echo util_make_link('/stats/', _('Site-Wide Stats')); ?></li>
+		<?php plugin_hook('webanalytics_admin', array()); ?>
+	</ul>
 </div>
 
 <div class="info-box">
 <h2><?php echo _('Trove Project Tree'); ?></h2>
-<ul>
-	<li><?php echo util_make_link('/admin/trove/trove_cat_list.php', _('Display Trove Map')); ?></li>
-	<li><?php echo util_make_link('/admin/trove/trove_cat_add.php', _('Add to the Trove Map')); ?></li>
+	<ul>
+		<li><?php echo util_make_link('/admin/trove/trove_cat_list.php', _('Display Trove Map')); ?></li>
+		<li><?php echo util_make_link('/admin/trove/trove_cat_add.php', _('Add to the Trove Map')); ?></li>
 </ul>
 </div>
 
@@ -228,9 +228,8 @@ echo html_ac(html_ap() - 1);
 	<?php } ?>
 </ul>
 </div>
-<?php }
-?>
 <?php
+}
 site_admin_footer();
 
 // Local Variables:

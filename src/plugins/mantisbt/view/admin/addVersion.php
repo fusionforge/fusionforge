@@ -3,7 +3,7 @@
  * MantisBT plugin
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2012,2014 Franck Villaume - TrivialDev
+ * Copyright 2012,2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -29,7 +29,7 @@ global $group;
 global $group_id;
 global $mantisbt;
 echo $HTML->boxTop(_('Add a new version'));
-echo $HTML->openForm(array('method' => 'post', 'name' => 'addVersion', 'action' => util_make_uri('/plugins/'.$mantisbt->name.'/?type=admin&group_id='.$group_id.'&action=addVersion')));
+echo $HTML->openForm(array('method' => 'post', 'name' => 'addVersion', 'action' => '/plugins/'.$mantisbt->name.'/?type=admin&group_id='.$group_id.'&action=addVersion'));
 echo $HTML->listTableTop();
 $cells = array();
 $cells[] = array(_('Name').utils_requiredField()._(':'), 'class' => 'align-right');

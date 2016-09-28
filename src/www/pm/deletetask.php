@@ -27,8 +27,8 @@
 global $HTML;
 
 pm_header(array('title'=>sprintf(_("Delete Task [T%s]"), $project_task_id),
-                'group_project_id'=>$group_project_id));
-
+                'group_project_id'=>$group_project_id,
+                'modal' => 1));
 echo $HTML->openForm(array('action' => '/pm/task.php?group_id='.$group_id.'&group_project_id='.$group_project_id, 'method' => 'post'));
 ?>
 <input type="hidden" name="func" value="postdeletetask" />

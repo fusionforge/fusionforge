@@ -150,7 +150,7 @@ if (count($exploded_content) > 1) {
 			$content_type = $matches[2];
 			if (isset($matches[4])) $charset = $matches[4];
 			// we'll validate content-type or transcode body below
-		} else if (preg_match('/^Transfer-Encoding: chunked/', $header)) {
+		} elseif (preg_match('/^Transfer-Encoding: chunked/', $header)) {
 			// curl already de-chuncked the body
 		} else {
 			header($header);

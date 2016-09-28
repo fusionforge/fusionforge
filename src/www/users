@@ -27,9 +27,7 @@ require_once 'env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/User.class.php';
 
-$normalized_urlprefix = normalized_urlprefix();
-$pathinfo = substr_replace(getStringFromServer('REQUEST_URI'), '', 0, strlen($normalized_urlprefix)-1);
-$expl_pathinfo = explode('/', $pathinfo);
+$expl_pathinfo = explode('/', getStringFromServer('REQUEST_URI'));
 
 if (!$expl_pathinfo[2]) {
 	exit_error(_('No User Name Provided'));
@@ -40,6 +38,8 @@ $script='user_home';
 $content_type = util_negociate_alternate_content_types($script, $default_content_type);
 
 $username = urldecode($expl_pathinfo[2]);
+//get the user object based on the user_name in the URL
+$user = user_get_object_by_name($username);
 
 // If restricted mode, display only people who are sharing a project with the current user.
 if (forge_get_config('restrict_users_visibility')) {
@@ -47,19 +47,15 @@ if (forge_get_config('restrict_users_visibility')) {
 		exit_permission_denied();
 	}
 
-	$s  = session_get_user();
-	$u1 = $s->getID();
-
-	$user = user_get_object_by_name($username);
 	if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
 		exit_permission_denied();
 	}
 	$u2 = $user->getID();
 
-	$u2gl = $user->getGroups();
+	$u2gl = $user->getGroupIds();
 	$seen = false;
 	foreach ($u2gl as $u2g) {
-		if (forge_check_perm('project_read', $u2g->getID())) {
+		if (forge_check_perm('project_read', $u2g)) {
 			$seen = true;
 			break;
 		}
@@ -69,13 +65,8 @@ if (forge_get_config('restrict_users_visibility')) {
 	}
 }
 
-//get the user object based on the user_name in the URL
-$user = user_get_object_by_name($username);
-
 if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
-
 	exit_error(_('That user does not exist.'));
-
 } else {
 	// if a custom content-type is selected, then redirect to plugin's rendering
 	if($content_type != $default_content_type) {

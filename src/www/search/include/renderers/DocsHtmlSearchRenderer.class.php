@@ -31,22 +31,19 @@ require_once $gfcommon.'docman/Document.class.php';
 class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 
 	/**
-	 * Constructor
-	 *
 	 * @param string $words words we are searching for
 	 * @param int $offset offset
 	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
 	 * @param int $groupId group id
 	 * @param array|string $sections array of all sections to search in (array of strings)
-	 *
 	 */
-	function DocsHtmlSearchRenderer($words, $offset, $isExact, $groupId, $sections = SEARCH__ALL_SECTIONS, $rowsPerPage = SEARCH__DEFAULT_ROWS_PER_PAGE, $options = array()) {
+	function __construct($words, $offset, $isExact, $groupId, $sections = SEARCH__ALL_SECTIONS, $rowsPerPage = SEARCH__DEFAULT_ROWS_PER_PAGE, $options = array()) {
 
 		$userIsGroupMember = $this->isGroupMember($groupId);
 
 		$searchQuery = new DocsSearchQuery($words, $offset, $isExact, array($groupId), $sections, $userIsGroupMember, $rowsPerPage, $options);
 
-		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_DOCS, $words, $isExact, $searchQuery, $groupId, 'docman');
+		parent::__construct(SEARCH__TYPE_IS_DOCS, $words, $isExact, $searchQuery, $groupId, 'docman');
 
 		$this->tableHeaders = array(
 			_('Directory'),
@@ -129,7 +126,7 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			$cells[][] = $row['description'];
 			if (forge_check_perm('docman', $document->Group->getID(), 'approve')) {
 				if (!$document->getLocked() && !$document->getReserved()) {
-					$cells[][] = util_make_link('/docman/?group_id='.$document->Group->getID().'&view=listfile&dirid='.$document->getDocGroupID().'&filedetailid='.$document->getID(), html_image('docman/edit-file.png', 22, 22, array('alt' => _('Edit this document'))), array('title' => _('Edit this document')));
+					$cells[][] = util_make_link('/docman/?group_id='.$document->Group->getID().'&view=listfile&dirid='.$document->getDocGroupID().'&filedetailid='.$document->getID(), $HTML->getEditFilePic(_('Edit this document')), array('title' => _('Edit this document')));
 				} else {
 					$cells[][] = '&nbsp;';
 				}

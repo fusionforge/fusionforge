@@ -30,9 +30,6 @@ class ForumML_HTMLPurifier extends Codendi_HTMLPurifier {
      */
     private static $ForumML_HTMLPurifier_instance;
 
-    /**
-     * Constructor
-     */
     protected function __construct() {
     }
 

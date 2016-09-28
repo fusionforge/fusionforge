@@ -32,7 +32,6 @@ class ForumML_FileStorageTest extends UnitTestCase {
 	private $_fixture;
     private $_namePattern;
 
-	// Class constructor
 	function __construct($name="ForumML Mail Attachments Storage Test") {
         parent::__construct($name);
         $this->_fixture     = dirname(__FILE__).'/_fixtures';

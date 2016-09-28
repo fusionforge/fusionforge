@@ -1,9 +1,9 @@
 <?php
-
 /**
  * User importing script for site admin
  *
  * Copyright (c) 2011 Olivier Berger & Institut Telecom
+ * Copyright 2016, Franck Villaume - TrivialDev
  *
  * This program was developped in the frame of the COCLICO project
  * (http://www.coclico-project.org/) with financial support of the Paris
@@ -81,23 +81,22 @@ class UsersImportPage extends FileManagerPage {
 	 * Display the page
 	 */
 	function display_main() {
-
-		global $feedback;
+		global $feedback, $HTML;
 
 		// Do the work, first !
-		$html = $this->do_work();
+		$htmlcontent = $this->do_work();
 
 		if($this->message) {
 			echo $this->message . '<br />';
 		}
 		html_feedback_top($feedback);
 
-		echo $html;
+		echo $htmlcontent;
 
 		// If invoked initially (not on callback) or if more details needed
 		// display the last part of the form for JSON file upload
 		if (! $this->form_header_already_displayed) {
-			echo '<form enctype="multipart/form-data" action="'.getStringFromServer('PHP_SELF').'" method="post">';
+			echo $HTML->openForm(array('enctype' => 'multipart/form-data', 'action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
 			$this->form_header_already_displayed = True;
 		}
 
@@ -124,9 +123,10 @@ class UsersImportPage extends FileManagerPage {
                     </fieldset>
                     <div style="text-align:center;">
                       <input type="submit" name="submit" value="Submit" />
-                    </div>
-              </form>';
-
+                    </div>';
+		if ($this->form_header_already_displayed) {
+			echo $HTML->closeForm();
+		}
 		site_footer();
 	}
 
@@ -142,8 +142,7 @@ class UsersImportPage extends FileManagerPage {
 			$json = fread(fopen($this->posted_selecteddumpfile, 'r'),filesize($this->posted_selecteddumpfile));
 				if(! $json) {
 				$feedback = "Error : missing data";
-			}
-			else {
+			} else {
 
 				//			print_r($imported_file);
 				$this->importer->parse_OSLCCoreRDFJSON($json);
@@ -172,9 +171,9 @@ class UsersImportPage extends FileManagerPage {
 	 * @return html string
 	 */
 	function do_work() {
-		global $feedback;
+		global $feedback, $HTML;
 
-		$html = '';
+		$htmlcode = '';
 
 		// If the posted JSON file indeed contains a project dump, an importer was created,
 		// and if it has data we can work
@@ -186,13 +185,13 @@ class UsersImportPage extends FileManagerPage {
 			// start HTML output
 			if (! $this->form_header_already_displayed) {
 				$this->form_header_already_displayed = true;
-				$html .= '<form enctype="multipart/form-data" action="'.getStringFromServer('PHP_SELF').'" method="post">';
+				$htmlcode .= $HTML->openForm(array('enctype' => 'multipart/form-data', 'action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
 			}
 
 			$imported_users = $this->importer->get_user_objs();
 
 			if (count($imported_users)) {
-				$html .= $this->html_generator->boxTop(_("Users found in imported file"));
+				$htmlcode .= $this->html_generator->boxTop(_("Users found in imported file"));
 
 				foreach($imported_users as $user => $user_obj) {
 
@@ -207,7 +206,7 @@ class UsersImportPage extends FileManagerPage {
 					$password2 = $password1;
 					$language_id = language_name_to_lang_id (choose_language_from_context ());
 
-					$new_user = new GFUser();
+					$new_user = new FFUser();
 					$res = $new_user->create($unix_name,$firstname,$lastname,$password1,$password2,
 						$email,$mail_site,$mail_va,$language_id,$timezone,'',0,$theme_id,'',
 						$address,$address2,$phone,$fax,$title,$ccode,$send_mail);
@@ -217,29 +216,26 @@ class UsersImportPage extends FileManagerPage {
 						if ($feedback) $feedback .= '<br />';
 						$feedback .= 'Import of "'. $unix_name . '": '. $error_msg;
 
-						$html .= _('Failed to create user'). ': <pre>'. $unix_name .'</pre>';
-					}
-					else {
-						$html .= _('Created user'). ': <pre>'. $unix_name .'</pre>';
+						$htmlcode .= _('Failed to create user'). ': <pre>'. $unix_name .'</pre>';
+					} else {
+						$htmlcode .= _('Created user'). ': <pre>'. $unix_name .'</pre>';
 					}
 
-					$html .= 'User :<br />';
-					$html .= ' account name : '. $unix_name .'<br />';
-					$html .= ' email : '. $email .'<br />';
-					$html .= ' firstname : '. $firstname .'<br />';
-					$html .= ' lastname : '. $lastname .'<br />';
-					$html .= '<br/>';
+					$htmlcode .= 'User :<br />';
+					$htmlcode .= ' account name : '. $unix_name .'<br />';
+					$htmlcode .= ' email : '. $email .'<br />';
+					$htmlcode .= ' firstname : '. $firstname .'<br />';
+					$htmlcode .= ' lastname : '. $lastname .'<br />';
+					$htmlcode .= '<br/>';
 				}
 
-				$html .= $this->html_generator->boxBottom();
+				$htmlcode .= $this->html_generator->boxBottom();
 
-			}
-
-			else {
+			} else {
 				$feedback .= 'Found no users<br />';
 			}
 		}
-		return $html;
+		return $htmlcode;
 	}
 
 }
@@ -257,11 +253,8 @@ $message = '';
 
 // when called back by post form we can initialize some elements provided by the user
 if (getStringFromRequest('submit')) {
-
 	$this_page->initialize_from_submitted_data();
-
-}
-else {
+} else {
 	$message .= "You can import a list of users from a JSON RDF document compatible with ForgePlucker's dump format.<br />";
 }
 

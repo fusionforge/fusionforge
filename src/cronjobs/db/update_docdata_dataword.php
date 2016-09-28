@@ -28,16 +28,22 @@ require dirname(__FILE__).'/../../common/include/env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'docman/Parsedata.class.php';
 require_once $gfcommon.'docman/Document.class.php';
+require_once $gfcommon.'docman/DocumentVersion.class.php';
 require_once $gfcommon.'docman/DocumentFactory.class.php';
 require_once $gfcommon.'docman/DocumentGroupFactory.class.php';
+
+session_set_admin();
 
 $p = new Parsedata();
 
 $timestarttrait = microtime_float();
 // documents list
 $resarr = array();
-$result = db_query_params('SELECT doc_data.docid, doc_data.group_id, doc_data.filename, doc_data.filetype from doc_data, groups where doc_data.group_id = groups.group_id and groups.force_docman_reindex = $1',
-			   array('1'));
+$result = db_query_params('select doc_data_version.docid as docid, doc_data_version.version as version, doc_data.group_id as group_id
+			from doc_data_version, doc_data, groups
+			where doc_data_version.docid = doc_data.docid and doc_data.group_id = groups.group_id and groups.force_docman_reindex = $1',
+			array('1'));
+
 if (!$result) {
 	die(db_error());
 }
@@ -57,23 +63,24 @@ foreach ($resarr as $item) {
 	$timestart = microtime_float();
 	$group = group_get_object($item['group_id']);
 	$d = new Document($group, $item['docid']);
+	$dv = new DocumentVersion($d, $item['version']);
 	$datafile = tempnam(forge_get_config('data_path'), 'tmp');
 	$fh = fopen($datafile, 'w');
-	fwrite($fh, $d->getFileData(false));
+	fwrite($fh, $dv->getFileData(false));
 	fclose($fh);
-	$lenin = $d->getFileSize();
-	$res = $p->get_parse_data($datafile, $item['filetype']);
+	$lenin = $dv->getFileSize();
+	$res = $p->get_parse_data($datafile, $dv->getFileType());
 	$len = strlen($res);
 	if (file_exists($datafile)) {
 		unlink($datafile);
 	}
-	$resUp = db_query_params('UPDATE doc_data SET data_words=$1 WHERE docid=$2', array ($res, $item['docid']));
+	$resUp = $dv->updateDataWords($item['version'], $res);
 	if (!$resUp) {
-		die('unable to update data: '.db_error());
+		die('unable to update words for docid/version'.$item['docid'].'/'.$item['version']);
 	}
 	$timeend = microtime_float();
 	$timetrait = $timeend - $timestart;
-	echo "Analyzed $item[filename] : type=$item[filetype]  octets in=$lenin  octets out=$len  time=$timetrait sec\n";
+	echo 'Analyzed '.$dv->getFileName().' : type='.$dv->getFileType().' octets in='.$lenin.' octets out='.$len.' time='.$timetrait.' sec'."\n";
 }
 $timeendtrait = microtime_float();
 $timetot = $timeendtrait - $timestarttrait;
@@ -81,8 +88,8 @@ db_query_params('UPDATE groups set force_docman_reindex = $1', array('0'));
 //echo "End analyze : $compt files, $timetot secs.";
 
 function microtime_float() {
-  list($usec, $sec) = explode(" ", microtime());
-  return ((float)$usec + (float)$sec);
+	list($usec, $sec) = explode(" ", microtime());
+	return ((float)$usec + (float)$sec);
 }
 
 // Local Variables:

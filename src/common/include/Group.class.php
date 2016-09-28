@@ -35,6 +35,7 @@ require_once $gfcommon.'pm/ProjectGroup.class.php';
 require_once $gfcommon.'pm/ProjectGroupFactory.class.php';
 require_once $gfcommon.'include/Role.class.php';
 require_once $gfcommon.'frs/FRSPackage.class.php';
+require_once $gfcommon.'frs/FRSRelease.class.php';
 require_once $gfcommon.'docman/DocumentGroup.class.php';
 require_once $gfcommon.'docman/DocumentGroupFactory.class.php';
 require_once $gfcommon.'mail/MailingList.class.php';
@@ -265,7 +266,6 @@ class Group extends FFError {
 	 */
 	var $plugins_data;
 
-
 	/**
 	 * Associative array of data for the group menu.
 	 *
@@ -344,10 +344,11 @@ class Group extends FFError {
 	 * @param	bool	$is_public
 	 * @param	bool	$send_mail		Whether to send an email or not
 	 * @param	int	$built_from_template	The id of the project this new project is based on
+	 * @param	int	$createtimestamp	The Time Stamp of creation to ease import.
 	 * @return	bool	success or not
 	 */
 	function create(&$user, $group_name, $unix_name, $description, $purpose, $unix_box = 'shell1',
-			$scm_box = 'cvs1', $is_public = true, $send_mail = true, $built_from_template = 0) {
+			$scm_box = 'cvs1', $is_public = true, $send_mail = true, $built_from_template = 0, $createtimestamp = null) {
 		// $user is ignored - anyone can create pending group
 
 		global $SYS;
@@ -361,10 +362,6 @@ class Group extends FFError {
 			$this->setError(_('Invalid Unix Name.'));
 			return false;
 		} elseif (!$SYS->sysUseUnixName($unix_name)) {
-			$this->setError(_('Unix name already taken.'));
-			return false;
-		} elseif (db_numrows(db_query_params('SELECT group_id FROM groups WHERE unix_group_name=$1',
-							array($unix_name))) > 0) {
 			$this->setError(_('Unix name already taken.'));
 			return false;
 		} elseif (strlen($purpose)<10) {
@@ -386,7 +383,7 @@ class Group extends FFError {
 			}
 
 			db_begin();
-
+			$createtimestamp = (($createtimestamp) ? $createtimestamp : time());
 			$res = db_query_params('
 				INSERT INTO groups(
 					group_name,
@@ -412,7 +409,7 @@ class Group extends FFError {
 							$unix_box,
 							$scm_box,
 							htmlspecialchars($purpose),
-							time(),
+							$createtimestamp,
 							md5(util_randbytes()),
 							$built_from_template));
 			if (!$res || db_affected_rows($res) < 1) {
@@ -443,6 +440,7 @@ class Group extends FFError {
 			$hook_params['group_id'] = $this->getID();
 			$hook_params['group_name'] = $group_name;
 			$hook_params['unix_group_name'] = $unix_name;
+			$hook_params['createtimestamp'] = $createtimestamp;
 			plugin_hook("group_create", $hook_params);
 
 			db_commit();
@@ -460,7 +458,7 @@ class Group extends FFError {
 	 * This function require site admin privilege.
 	 *
 	 * @param	object	$user		User requesting operation (for access control).
-	 * @param	int	$type_id	Group type (1-project, 2-foundry).
+	 * @param	int	$type_id	Group type. Obsolete parameter NOT USED.
 	 * @param	string	$unix_box	Machine on which group's home directory located.
 	 * @param	string	$http_domain	Domain which serves group's WWW.
 	 * @return	bool	status.
@@ -483,10 +481,9 @@ class Group extends FFError {
 
 		$res = db_query_params('
 			UPDATE groups
-			SET type_id=$1, unix_box=$2, http_domain=$3
-			WHERE group_id=$4',
-					array($type_id,
-						$unix_box,
+			SET unix_box=$1, http_domain=$2
+			WHERE group_id=$3',
+					array($unix_box,
 						$http_domain,
 						$this->getID()));
 
@@ -497,9 +494,6 @@ class Group extends FFError {
 		}
 
 		// Log the audit trail
-		if ($type_id != $this->data_array['type_id']) {
-			$this->addHistory('type_id', $this->data_array['type_id']);
-		}
 		if ($unix_box != $this->data_array['unix_box']) {
 			$this->addHistory('unix_box', $this->data_array['unix_box']);
 		}
@@ -721,16 +715,6 @@ class Group extends FFError {
 	}
 
 	/**
-	 * getType() - Foundry, project, etc.
-	 *
-	 * @return	int	The type flag from the database.
-	 */
-	function getType() {
-		return $this->data_array['type_id'];
-	}
-
-
-	/**
 	 * getStatus - the status code.
 	 *
 	 * Statuses	char	include I,H,A,D,P.
@@ -835,19 +819,6 @@ class Group extends FFError {
 
 		$this->data_array['status'] = $status;
 		return true;
-	}
-
-	/**
-	 * isProject - Simple boolean test to see if it's a project or not.
-	 *
-	 * @return	bool	is_project.
-	 */
-	function isProject() {
-		if ($this->getType()==1) {
-			return true;
-		} else {
-			return false;
-		}
 	}
 
 	/**
@@ -1766,10 +1737,7 @@ class Group extends FFError {
 		if (!$perm || !is_object($perm)) {
 			$this->setPermissionDeniedError();
 			return false;
-		} elseif ($perm->isError()) {
-			$this->setPermissionDeniedError();
-			return false;
-		} elseif (!$perm->isSuperUser()) {
+		} elseif ($perm->isError() || !$perm->isSuperUser()) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -2198,7 +2166,7 @@ class Group extends FFError {
 		//
 		//	audit trail
 		//
-		$this->addHistory(_('Added User'),$user_identifier);
+		$this->addHistory(_('Added User'), $user_identifier);
 		db_commit();
 
 		//
@@ -2568,7 +2536,6 @@ class Group extends FFError {
 						$t = new ArtifactType ($this);
 						$t->create ($this->replaceTemplateStrings($o->getName()),$this->replaceTemplateStrings($o->getDescription()),$o->emailAll(),$o->getEmailAddress(),$o->getDuePeriod()/86400,0,$o->getSubmitInstructions(),$o->getBrowseInstructions());
 						$id_mappings['tracker'][$o->getID()] = $t->getID();
-						$t->cloneFieldsFrom ($o->getID());
 					}
 				}
 			}
@@ -2604,19 +2571,19 @@ class Group extends FFError {
 					// First pass: create all docgroups
 					$id_mappings['docman_docgroup'][0] = 0;
 					foreach ($olddgf->getDocumentGroups(array(1, 5)) as $o) {
-						$ndgf = new DocumentGroup($this);
+						$ndg = new DocumentGroup($this);
 						// .trash is a reserved directory
-						if ($o->getName() != '.trash' && $o->getParentID() == 0) {
-							$ndgf->create($this->replaceTemplateStrings($o->getName()));
-							$id_mappings['docman_docgroup'][$o->getID()] = $ndgf->getID();
+						if ($o->getName() != '.trash') {
+							$ndg->create($this->replaceTemplateStrings($o->getName()), 0, 1, null, true);
+							$id_mappings['docman_docgroup'][$o->getID()] = $ndg->getID();
 						}
 					}
 					// Second pass: restore hierarchy links & stateid
 					foreach ($olddgf->getDocumentGroups(array(1, 5)) as $o) {
 						$ndgf = new DocumentGroup($this);
-						if ($o->getName() != '.trash' && $o->getParentID() == 0) {
+						if ($o->getName() != '.trash') {
 							$ndgf->fetchData($id_mappings['docman_docgroup'][$o->getID()]);
-							$ndgf->update($ndgf->getName(), $id_mappings['docman_docgroup'][$o->getParentID()], $id_mappings['docman_docgroup'][$o->getState()]);
+							$ndgf->update($ndgf->getName(), $id_mappings['docman_docgroup'][$o->getParentID()], 0, $o->getState());
 						}
 					}
 				}
@@ -2628,8 +2595,13 @@ class Group extends FFError {
 					foreach (get_frs_packages($template) as $o) {
 						$newp = new FRSPackage($this);
 						$nname = $this->replaceTemplateStrings($o->getName());
-						$newp->create ($nname, $o->isPublic());
+						$newp->create($nname, $o->isPublic());
 						$id_mappings['frs'][$o->getID()] = $newp->getID();
+						foreach(get_frs_releases($o) as $or) {
+							$newr = new FRSRelease($newp);
+							$newr->create($this->replaceTemplateStrings($or->getName()), $this->replaceTemplateStrings($or->getNotes()), $this->replaceTemplateStrings($or->getChanges()), $or->getPreformatted());
+							$id_mappings['frs_release'][$or->getID()] = $newr->getID();
+						}
 					}
 				}
 			}
@@ -2670,7 +2642,7 @@ class Group extends FFError {
 			}
 
 			foreach ($template->getRoles() as $oldrole) {
-				$newrole = RBACEngine::getInstance()->getRoleById ($id_mappings['role'][$oldrole->getID()]);
+				$newrole = RBACEngine::getInstance()->getRoleById($id_mappings['role'][$oldrole->getID()]);
 				if ($oldrole->getHomeProject() != NULL
 					&& $oldrole->getHomeProject()->getID() == $template->getID()) {
 					$newrole->setPublic ($oldrole->isPublic());
@@ -2693,6 +2665,18 @@ class Group extends FFError {
 											$v);
 							}
 						}
+					}
+				}
+			}
+
+			// second computation to clone fields and workflow
+			if (forge_get_config('use_tracker')) {
+				if ($template->usesTracker()) {
+					$oldatf = new ArtifactTypeFactory($template);
+					foreach ($oldatf->getArtifactTypes() as $o) {
+						$t = artifactType_get_object($id_mappings['tracker'][$o->getID()]);
+						$id_mappings['tracker'][$o->getID()] = $t->getID();
+						$t->cloneFieldsFrom($o->getID(), $o->Group->getID(), $id_mappings);
 					}
 				}
 			}
@@ -2913,19 +2897,19 @@ if there is anything we can do to help you.
 	/**
 	 * validateGroupName - Validate the group name
 	 *
-	 * @param	string	Group name.
+	 * @param	string	$group_name Project name.
 	 *
-	 * @return	boolean	an error false and set an error is the group name is invalid otherwise return true
+	 * @return	bool	an error false and set an error is the group name is invalid otherwise return true
 	 */
 	function validateGroupName($group_name) {
 		if (strlen($group_name)<3) {
-			$this->setError(_('Group name is too short'));
+			$this->setError(_('Project name is too short'));
 			return false;
 		} elseif (strlen(htmlspecialchars($group_name))>40) {
-			$this->setError(_('Group name is too long'));
+			$this->setError(_('Project name is too long'));
 			return false;
 		} elseif (group_get_object_by_publicname($group_name)) {
-			$this->setError(_('Group name already taken'));
+			$this->setError(_('Project name already taken'));
 			return false;
 		}
 		return true;
@@ -2959,15 +2943,16 @@ if there is anything we can do to help you.
 	/**
 	 * getRoles - Get the roles of the group.
 	 *
+	 * @param	bool	all roles or local roles only. Default is all roles
 	 * @return	array	Roles of this group.
 	 */
-	function getRoles() {
+	function getRoles($global = true) {
 		$result = array();
 
-		$roles = $this->getRolesId();
+		$roles = $this->getRolesId($global);
 		$engine = RBACEngine::getInstance();
 		foreach ($roles as $role_id) {
-			$result[] = $engine->getRoleById ($role_id);
+			$result[] = $engine->getRoleById($role_id);
 		}
 
 		return $result;
@@ -3234,18 +3219,15 @@ class ProjectComparator {
 			}
 			/* If several projects share a same public name */
 			return strcoll ($a->getUnixName(), $b->getUnixName());
-			break;
 		case 'unixname':
 			return strcmp ($a->getUnixName(), $b->getUnixName());
-			break;
 		case 'id':
 			$aid = $a->getID();
 			$bid = $b->getID();
-			if ($a == $b) {
+			if ($aid == $bid) {
 				return 0;
 			}
-			return ($a < $b) ? -1 : 1;
-			break;
+			return ($aid < $bid) ? -1 : 1;
 		}
 	}
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * FusionForge document manager
+ * FusionForge Documentation Manager
  *
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002, Tim Perdue/GForge, LLC
@@ -76,22 +76,18 @@ class DocumentGroup extends FFError {
 	var $data_array;
 
 	/**
-	 * DocumentGroup - constructor.
-	 *
 	 * Use this constructor if you are modifying an existing doc_group.
 	 *
 	 * @param	$Group
 	 * @param	bool	$data
 	 * @internal	param	\Group $object object.
 	 * @internal	param	array $OR doc_group id from database.
-	 * @return	\DocumentGroup
-	 * @access	public
 	 */
 	function __construct(&$Group, $data = false) {
 		parent::__construct();
 
 		if (!$Group || !is_object($Group)) {
-			$this->setError(_('No Valid Group Object'));
+			$this->setError(_('Invalid Project'));
 			return;
 		}
 		if ($Group->isError()) {
@@ -124,11 +120,17 @@ class DocumentGroup extends FFError {
 	 *
 	 * @param	string	$name			The name of the directory to create
 	 * @param	int	$parent_doc_group	The ID of the parent directory
+	 * @param	int	$state			The status of this directory: default is 1 = public.
+	 *						Valid values are :
+	 *							1 = public
+	 *							2 = deleted
+	 *							5 = private
+	 * @param	int	$createtimestamp	Timestamp of the directory creation
 	 * @internal	param	\Item $string name.
 	 * @return	boolean	true on success / false on failure.
 	 * @access	public
 	 */
-	function create($name, $parent_doc_group = 0, $state = 1) {
+	function create($name, $parent_doc_group = 0, $state = 1, $createtimestamp = null, $forcecreate = false) {
 		//
 		//	data validation
 		//
@@ -157,23 +159,26 @@ class DocumentGroup extends FFError {
 			}
 		}
 
-		$res = db_query_params('SELECT * FROM doc_groups WHERE groupname=$1 AND parent_doc_group=$2 AND group_id=$3',
-					array($name,
-						$parent_doc_group,
-						$this->Group->getID())
-					);
-		if ($res && db_numrows($res) > 0) {
-			$this->setError(_('Folder name already exists'));
-			return false;
+		if (!$forcecreate) {
+			$res = db_query_params('SELECT * FROM doc_groups WHERE groupname=$1 AND parent_doc_group=$2 AND group_id=$3',
+						array($name,
+							$parent_doc_group,
+							$this->Group->getID())
+						);
+			if ($res && db_numrows($res) > 0) {
+				$this->setError(_('Folder name already exists'));
+				return false;
+			}
 		}
 
+		$createtimestamp = (($createtimestamp) ? $createtimestamp : time());
 		$user_id = ((session_loggedin()) ? user_getid() : 100);
 		$result = db_query_params('INSERT INTO doc_groups (group_id, groupname, parent_doc_group, stateid, createdate, created_by) VALUES ($1, $2, $3, $4, $5, $6)',
 						array ($this->Group->getID(),
 							htmlspecialchars($name),
 							$parent_doc_group,
 							$state,
-							time(),
+							$createtimestamp,
 							$user_id)
 						);
 		if ($result && db_affected_rows($result) > 0) {
@@ -473,10 +478,12 @@ class DocumentGroup extends FFError {
 	 * @param	string	$name			Name of the category.
 	 * @param	int	$parent_doc_group	the doc_group id of the parent. default = 0
 	 * @param	int	$metadata		update only the metadata : created_by, updatedate
+	 * @param	int	$state			state of the directory. Default is 1 = public. See create function for valid values
+	 * @param	int	$updatetimestamp	Timestamp of the update
 	 * @return	boolean	success or not
 	 * @access	public
 	 */
-	function update($name, $parent_doc_group = 0, $metadata = 0, $state = 1) {
+	function update($name, $parent_doc_group = 0, $metadata = 0, $state = 1, $updatetimestamp = null) {
 		$perm =& $this->Group->getPermission();
 		if (!$perm || !$perm->isDocEditor()) {
 			$this->setPermissionDeniedError();
@@ -512,12 +519,13 @@ class DocumentGroup extends FFError {
 		}
 
 		$user_id = ((session_loggedin()) ? user_getid() : 100);
+		$updatetimestamp = (($updatetimestamp) ? $updatetimestamp : time());
 		$colArr = array('groupname', 'parent_doc_group', 'updatedate', 'created_by', 'locked', 'locked_by', 'stateid');
-		$valArr = array(htmlspecialchars($name), $parent_doc_group, time(), $user_id, 0, NULL, $state);
+		$valArr = array(htmlspecialchars($name), $parent_doc_group, $updatetimestamp, $user_id, 0, NULL, $state);
 		if ($this->setValueinDB($colArr, $valArr)) {
 			$parentDg = new DocumentGroup($this->Group, $parent_doc_group);
 			if ($parentDg->getParentID())
-				$parentDg->update($parentDg->getName(), $parentDg->getParentID(), 1, $parentDg->getState());
+				$parentDg->update($parentDg->getName(), $parentDg->getParentID(), 1, $parentDg->getState(), $updatetimestamp);
 
 			$this->fetchData($this->getID());
 			$this->sendNotice(false);
@@ -593,10 +601,7 @@ class DocumentGroup extends FFError {
 	}
 
 	function hasDocument($filename, $stateid = 1) {
-		$result = db_query_params('SELECT filename, doc_group, docid from docdata_vw
-						where filename = $1
-						and doc_group = $2
-						and stateid = $3',
+		$result = db_query_params('SELECT docid from docdata_vw where filename = $1 and doc_group = $2 and stateid = $3',
 				array($filename, $this->getID(), $stateid));
 
 		if (!$result || db_numrows($result) > 0) {
@@ -660,7 +665,7 @@ class DocumentGroup extends FFError {
 		if ($this->getState() != 1 && !forge_check_perm('docman', $this->Group->getID(), 'approve')) {
 			return false;
 		}
-		$returnPath = '';
+		$returnPath = '/';
 		if ($this->getParentID()) {
 			$parentDg = documentgroup_get_object($this->getParentID(), $this->Group->getID());
 			if ($parentDg->isError()) {
@@ -690,10 +695,6 @@ class DocumentGroup extends FFError {
 				$returnPath .= '/'.$this->getName();
 			}
 		}
-
-		if (!strlen($returnPath))
-			$returnPath = '/';
-
 		return $returnPath;
 	}
 

@@ -36,15 +36,13 @@ class HtmlSearchRenderer extends SearchRenderer {
 	var $tableHeaders = array();
 
 	/**
-	 * Constructor
-	 *
 	 * @param string  $typeOfSearch type of the search (Software, Forum, People and so on)
 	 * @param string  $words        words we are searching for
 	 * @param boolean $isExact      if we want to search for all the words or if only one matching the query is sufficient
 	 * @param object  $searchQuery  SearchQuery instance
 	 */
-	function HtmlSearchRenderer($typeOfSearch, $words, $isExact, $searchQuery) {
-		$this->SearchRenderer($typeOfSearch, $words, $isExact, $searchQuery);
+	function __construct($typeOfSearch, $words, $isExact, $searchQuery) {
+		parent::__construct($typeOfSearch, $words, $isExact, $searchQuery);
 	}
 
 	/**
@@ -77,8 +75,8 @@ class HtmlSearchRenderer extends SearchRenderer {
 	/**
 	 * writeBody - write the body
 	 */
-	function writeBody() {
-		echo $this->writeResults();
+	function writeBody($withpanel = true) {
+		echo $this->writeResults($withpanel);
 	}
 
 	/**
@@ -94,7 +92,7 @@ class HtmlSearchRenderer extends SearchRenderer {
 	 *
 	 * @return string html output
 	 */
-	function writeResults() {
+	function writeResults($withpanel = true) {
 		global $HTML;
 		$searchQuery =& $this->searchQuery;
 		$query =& $this->query;
@@ -111,8 +109,10 @@ class HtmlSearchRenderer extends SearchRenderer {
 		}
 
 		$result = $this->searchQuery->getData($this->searchQuery->getRowsPerPage(),$this->searchQuery->getOffset());
-		if(count($result) > 0 && ($searchQuery->getRowsTotalCount() > count($result) || $searchQuery->getOffset() != 0 )) {
-			$html .= $this->getNavigationPanel();
+		if ($withpanel) {
+			if (count($result) > 0 && ($searchQuery->getRowsTotalCount() > count($result) || $searchQuery->getOffset() != 0 )) {
+				$html .= $this->getNavigationPanel();
+			}
 		}
 
 		return $html;
@@ -127,19 +127,18 @@ class HtmlSearchRenderer extends SearchRenderer {
 		$searchQuery =& $this->searchQuery;
 
 		$html = '<br />';
-		$html .= '<table class="tablecontent" width="100%" cellpadding="5">';
+		$html .= '<table class="tablecontent fullwidth" cellpadding="5">';
 		$html .= '<tr>';
 		$html .= '<td>';
 		if ($searchQuery->getOffset() != 0) {
-			$html .= util_make_link($this->getPreviousResultsUrl(), html_image('t2.png', '15', '15').' '._('Previous Results'), array('class' => 'prev'));
+			$html .= util_make_link($this->getPreviousResultsUrl(), html_image('t2.png', 15, 15).' '._('Previous Results'), array('class' => 'prev'));
 		} else {
 			$html .= '&nbsp;';
 		}
 		$html .= '</td><td class="align-right">';
 		$result = $this->searchQuery->getData($this->searchQuery->getRowsPerPage(),$this->searchQuery->getOffset());
-		error_log(count($result));
 		if ($searchQuery->getRowsTotalCount() > $this->searchQuery->getRowsPerPage()+$this->searchQuery->getOffset()) {
-			$html .= util_make_link($this->getNextResultsUrl(), _('Next Results').' '.html_image('t.png', '15', '15'), array('class' => 'next'));
+			$html .= util_make_link($this->getNextResultsUrl(), _('Next Results').' '.html_image('t.png', 15, 15), array('class' => 'next'));
 		} else {
 			$html .= '&nbsp;';
 		}
@@ -157,9 +156,9 @@ class HtmlSearchRenderer extends SearchRenderer {
 		$offset = $this->searchQuery->getOffset() - $this->searchQuery->getRowsPerPage();
 		$query =& $this->query;
 
-		$url = '/search/?type='.$query['typeOfSearch'].'&exact='.$query['isExact'].'&q='.urlencode($query['words']);
+		$url = '/search/?type='.$query['typeOfSearch'].'&amp;exact='.$query['isExact'].'&amp;q='.urlencode($query['words']);
 		if($offset > 0) {
-			$url .= '&offset='.$offset;
+			$url .= '&amp;offset='.$offset;
 		}
 		return $url;
 	}
@@ -171,7 +170,7 @@ class HtmlSearchRenderer extends SearchRenderer {
 	 */
 	function getNextResultsUrl() {
 		$query =& $this->query;
-		return '/search/?type='.$query['typeOfSearch'].'&exact='.$query['isExact'].'&q='.urlencode($query['words']).'&offset='.($this->searchQuery->getOffset() + $this->searchQuery->getRowsPerPage());
+		return '/search/?type='.$query['typeOfSearch'].'&amp;exact='.$query['isExact'].'&amp;q='.urlencode($query['words']).'&amp;offset='.($this->searchQuery->getOffset() + $this->searchQuery->getRowsPerPage());
 	}
 
 	/**
@@ -181,17 +180,7 @@ class HtmlSearchRenderer extends SearchRenderer {
 	 * @return string text with keywords highlighted
 	 */
 	function highlightTargetWords($text) {
-		if (empty($text)) {
-			return '&nbsp;';
-		}
-		$words = $this->searchQuery->getWords();
-		foreach ($this->searchQuery->getPhrases() as $p) {
-			foreach (explode(' ',$p) as $w) {
-				$words[] = $w;
-			}
-		}
-		$regexp = implode('|',$words);
-		return preg_replace('/('.str_replace('/', '\/', $regexp).')/i','<span class="selected">\1</span>', $text);
+		return preg_replace('/<b>/','<b class="selected">', $text);
 	}
 
 	/**

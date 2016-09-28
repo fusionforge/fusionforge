@@ -59,20 +59,20 @@ echo $HTML->openForm(array('id' => 'trackermodform', 'action' => '/tracker/?grou
 <input type="hidden" name="func" value="postmod" />
 <input type="hidden" name="artifact_id" value="<?php echo $ah->getID(); ?>" />
 
-<table width="80%">
 <?php
 if (session_loggedin()) {
 ?>
+<table width="80%">
 		<tr>
 			<td><?php
 				if ($ah->isMonitoring()) {
 					$img="xmail16w.png";
-					$text=_('Stop Monitoring');
+					$text=_('Stop monitoring');
 				} else {
 					$img="mail16w.png";
 					$text=_('Monitor');
 				}
-				echo util_make_link('/tracker/?group_id='.$group_id.'&artifact_id='.$ah->getID().'&atid='.$ath->getID().'&func=monitor', html_e('strong', array(), html_image('ic/'.$img.'','20','20').' '.$text), array('id' => 'tracker-monitor', 'title' => util_html_secure(html_get_tooltip_description('monitor'))));
+				echo util_make_link('/tracker/?group_id='.$group_id.'&artifact_id='.$ah->getID().'&atid='.$ath->getID().'&func=monitor', html_e('strong', array(), html_image('ic/'.$img, 20, 20).' '.$text), array('id' => 'tracker-monitor', 'title' => util_html_secure(html_get_tooltip_description('monitor'))));
 				?>
 			</td>
 			<td><?php
@@ -86,19 +86,19 @@ if (session_loggedin()) {
 							$key = 'pointer_up';
 							$txt = _('Cast Vote');
 						}
-						echo util_make_link('/tracker/?group_id='.$group_id.'&artifact_id='.$ah->getID().'&atid='.$ath->getID().'&func='.$key, html_image('ic/'.$key.'.png', 16, 16, array('border' => 0)), array('id' => 'tracker-vote', 'alt' => $txt, 'title' => util_html_secure(html_get_tooltip_description('vote'))));
+						echo util_make_link('/tracker/?group_id='.$group_id.'&aid='.$ah->getID().'&atid='.$ath->getID().'&func='.$key, html_image('ic/'.$key.'.png', 16, 16), array('id' => 'tracker-vote', 'alt' => $txt, 'title' => util_html_secure(html_get_tooltip_description('vote'))));
 					}
 				?>
 			</td>
 			<td><?php
 				if ($group->usesPM()) {
-					echo util_make_link('/tracker/?func=taskmgr&group_id='.$group_id.'&atid='.$atid.'&aid='.$aid, html_image('ic/taskman20w.png','20','20').'<strong>'._('Build Task Relation').'</strong>');
+					echo util_make_link('/tracker/?func=taskmgr&group_id='.$group_id.'&atid='.$atid.'&aid='.$aid, html_image('ic/taskman20w.png', 20, 20).'<strong>'._('Build Task Relation').'</strong>');
 				}
 				?>
 			</td>
 			<td>
 				<?php
-				echo util_make_link('/tracker/?func=deleteartifact&aid='.$aid.'&group_id='.$group_id.'&atid='.$atid, html_image('ic/trash.png','16','16').html_e('strong', array(), _('Delete')));
+				echo util_make_link('/tracker/?func=deleteartifact&aid='.$aid.'&group_id='.$group_id.'&atid='.$atid, $HTML->getDeletePic().html_e('strong', array(), _('Delete')));
 				?>
 			</td>
 			<td>
@@ -145,7 +145,7 @@ foreach ($atf->getArtifactTypes() as $at) {
 	}
 }
 
-$res = db_query_params ('SELECT group_artifact_id, name
+$res = db_query_params('SELECT group_artifact_id, name
 			FROM artifact_group_list
 			WHERE group_artifact_id = ANY ($1)',
 			array (db_int_array_to_any_clause ($tids))) ;
@@ -169,7 +169,7 @@ echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 		?>
 		</td><td>
 		<strong><?php echo _('Priority'). _(': ') ?></strong><br />
-		<?php build_priority_select_box('priority',$ah->getPriority()); ?>
+		<?php echo build_priority_select_box('priority',$ah->getPriority()); ?>
 		</td>
 	</tr>
 
@@ -286,7 +286,7 @@ $nb = $count? ' ('.$count.')' : '';
 <h2><?php echo _('Existing Files')._(':'); ?></h2>
 <table width="80%">
 	<tr><td colspan="2">
-        <strong><?php echo _('Attach Files')._(':'); ?></strong> <?php echo('('._('max upload size: '.human_readable_bytes(util_get_maxuploadfilesize())).')') ?><br />
+        <strong><?php echo _('Attach Files')._(':'); ?></strong> <?php echo('('._('max upload size')._(': ').human_readable_bytes(util_get_maxuploadfilesize()).')') ?><br />
         <input type="file" name="input_file0" size="30" /><br />
         <input type="file" name="input_file1" size="30" /><br />
         <input type="file" name="input_file2" size="30" /><br />

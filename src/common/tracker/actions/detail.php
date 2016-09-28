@@ -54,7 +54,7 @@ if (session_loggedin()) { ?>
 				<?php
 					if ($ah->isMonitoring()) {
 						$img="xmail16w.png";
-						$text=_('Stop Monitoring');
+						$text=_('Stop monitoring');
 					} else {
 						$img="mail16w.png";
 						$text=_('Monitor');
@@ -73,7 +73,7 @@ if (session_loggedin()) { ?>
 							$key = 'pointer_up';
 							$txt = _('Cast Vote');
 						}
-						echo util_make_link('/tracker/?group_id='.$group_id.'&artifact_id='.$ah->getID().'&atid='.$ath->getID().'&func='.$key, html_image('ic/'.$key.'.png', 16, 16, array('border' => 0)), array('id' => 'tracker-vote', 'alt' => $txt, 'title' => util_html_secure(html_get_tooltip_description('vote'))));
+						echo util_make_link('/tracker/?group_id='.$group_id.'&aid='.$ah->getID().'&atid='.$ath->getID().'&func='.$key, html_image('ic/'.$key.'.png', 16, 16), array('id' => 'tracker-vote', 'alt' => $txt, 'title' => util_html_secure(html_get_tooltip_description('vote'))));
 					}
 					?>
 			</td>
@@ -191,7 +191,7 @@ $nb = $count? ' ('.$count.')' : '';
 	<table width="80%">
 		<tr><td colspan="2">
 		<?php if (session_loggedin() && ($ah->getSubmittedBy() == user_getid())) { ?>
-			<strong><?php echo _('Attach Files')._(':'); ?></strong>  <?php echo('('._('max upload size: '.human_readable_bytes(util_get_maxuploadfilesize())).')') ?><br />
+			<strong><?php echo _('Attach Files')._(':'); ?></strong>  <?php echo('('._('max upload size')._(': ').human_readable_bytes(util_get_maxuploadfilesize()).')') ?><br />
 			<input type="file" name="input_file0" /><br />
 			<input type="file" name="input_file1" /><br />
 			<input type="file" name="input_file2" /><br />

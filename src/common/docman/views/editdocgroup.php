@@ -56,7 +56,7 @@ if ($dg->isError()) {
 }
 
 echo html_ao('div', array('class' => 'docmanDivIncluded'));
-echo $HTML->openForm(array('name' => 'editgroup', 'action' => util_make_uri($actionurl), 'method' => 'post'));
+echo $HTML->openForm(array('name' => 'editgroup', 'action' => $actionurl, 'method' => 'post'));
 echo html_e('input', array('type' => 'hidden', 'name' => 'dirid', 'value' => $dirid));
 echo $HTML->listTableTop();
 $cells[][] = _('Folder Name');
@@ -71,7 +71,7 @@ if ($dg->getState() == 2) {
 	$cells[][] = $dm->showSelectNestedGroups($newdgf->getNested(array(1, 5)), 'parent_dirid', true, false);
 	$labelSubmit = _('Restore');
 } else {
-	$cells[][] = $dm->showSelectNestedGroups($dgf->getNested(array(1, 5)), 'parent_dirid', true, $dg->getParentId(), array($dg->getID()));
+	$cells[][] = $dm->showSelectNestedGroups($dgf->getNested(array(1, 5)), 'parent_dirid', true, $dg->getParentID(), array($dg->getID()));
 	$labelSubmit = _('Edit');
 }
 $cells[][] = '<input type="submit" value="'.$labelSubmit.'" name="submit" />';

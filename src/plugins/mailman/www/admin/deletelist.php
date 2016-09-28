@@ -1,15 +1,29 @@
 <?php
-
 /**
  * FusionForge Mailing Lists Facility
  *
  * Portions Copyright 1999-2001 (c) VA Linux Systems
  * The rest Copyright 2003-2004 (c) Guillaume Smet - Open Wide
- *
- * @version $Id$
- *
  * Portions Copyright 2010 (c) Mélanie Le Bail
+ * Copyright 2016, Franck Villaume - TrivialDev
+ *
+ * This file is part of FusionForge.
+ *
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
+
 require_once 'env.inc.php';
 require_once 'pre.php';
 require_once 'preplugins.php';
@@ -19,7 +33,7 @@ require_once '../mailman_utils.php';
 $request =& HTTPRequest::instance();
 $group_id = $request->get('group_id');
 
-global $feedback;
+global $HTML, $feedback;
 
 if (!$group_id) {
 	exit_no_group();
@@ -54,7 +68,7 @@ mailman_header(array(
 
 ?>
 <h3><?php echo $ml->getName(); ?></h3>
-<form method="post" action="<?php echo $request->get('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&amp;id=<?php echo $ml->getID(); ?>">
+<?php echo $HTML->openForm(array('method' => 'post', 'action' => getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&id='.$ml->getID())); ?>
 <p>
 <input id="sure" type="checkbox" name="sure" value="1">
 <label for="sure">
@@ -66,7 +80,6 @@ mailman_header(array(
 </label>
 <input type="submit" name="submit" value="<?php echo _('Permanently Delete'); ?>">
 </p>
-</form>
 <?php
-
+echo $HTML->closeForm();
 mail_footer();

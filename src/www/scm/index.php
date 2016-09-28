@@ -35,7 +35,7 @@ session_require_perm('scm', $group_id, 'read');
 
 // Check if there is an associated scm plugin and issue a warning if none.
 $scm_plugin = '';
-foreach (PluginManager::instance()->GetPlugins() as $p) {
+foreach (PluginManager::instance()->getPlugins() as $p) {
 	$plugin = PluginManager::instance()->GetPluginObject($p);
 	if (isset($plugin->provides['scm']) && $plugin->provides['scm'] && $group->usesPlugin($p)) {
 		$scm_plugin = $p;

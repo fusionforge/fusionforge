@@ -80,7 +80,7 @@ if( $action == "Edit" ) {
 		$response_text=$row[2];
 	echo _('Edit Response')._(':').html_e('br');
 	echo $HTML->openForm(array('method' => 'post', 'action' => '/admin/responses_admin.php'));
-	echo _('Response Title').(':'); ?><input type="text" name="response_title" size="30" maxlength="25" value="<?php echo $response_title; ?>" /><br />
+	echo _('Response Title')._(':'); ?><input type="text" name="response_title" size="30" maxlength="25" value="<?php echo $response_title; ?>" /><br />
 <?php echo _('Response Text')._(':'); ?><br />
 <textarea name="response_text" cols="50" rows="10"><?php echo $response_text; ?></textarea>
 <input type="hidden" name="response_id" value="<?php echo $response_id; ?>" />

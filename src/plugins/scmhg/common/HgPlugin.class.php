@@ -29,8 +29,8 @@ forge_define_config_item('default_server', 'scmhg', forge_get_config('scm_host')
 forge_define_config_item('repos_path', 'scmhg', forge_get_config('chroot').'/scmrepos/hg');
 
 class HgPlugin extends SCMPlugin {
-	function HgPlugin() {
-		$this->SCMPlugin();
+	function __construct() {
+		parent::__construct();
 		$this->name = 'scmhg';
 		$this->text = _('Mercurial');
 		$this->pkg_desc =
@@ -47,6 +47,15 @@ Offer DAV or SSH access.");
 		$this->_addHook('scm_delete_repo');
 		$this->_addHook('scm_add_repo');
 		$this->register();
+	}
+
+	/**
+	 * getPluginDescription - display the description of this plugin in pluginman admin page
+	 *
+	 * @return	string	the description
+	 */
+	function getPluginDescription() {
+		return _('Use Mercurial as Source Code Management tool. Offer DAV or SSH access.');
 	}
 
 	function getDefaultServer() {
@@ -623,7 +632,7 @@ Offer DAV or SSH access.");
 						$result['ref_id'] = 'browser.php?group_id='.$group_id.'&commit='.$splitedLine[3];
 						$result['description'] = htmlspecialchars($splitedLine[2]).' (changeset '.$splitedLine[3].')';
 						$userObject = user_get_object_by_email($splitedLine[1]);
-						if (is_a($userObject, 'GFUser')) {
+						if (is_a($userObject, 'FFUser')) {
 							$result['realname'] = util_display_user($userObject->getUnixName(), $userObject->getID(), $userObject->getRealName());
 						} else {
 							$result['realname'] = '';
@@ -644,9 +653,9 @@ Offer DAV or SSH access.");
 	function scm_add_repo(&$params) {
 		$project = $this->checkParams($params);
 		if (!$project) {
-			return false ;
+			return false;
 		}
-		if (! $project->usesPlugin ($this->name)) {
+		if (!$project->usesPlugin($this->name)) {
 			return false;
 		}
 
@@ -668,7 +677,7 @@ Offer DAV or SSH access.");
 					  array($params['group_id'],
 						 $params['repo_name'],
 						 $this->getID()));
-		if (! $result) {
+		if (!$result) {
 			$params['error_msg'] = db_error();
 			return false;
 		}
@@ -732,9 +741,9 @@ Offer DAV or SSH access.");
 		global $HTML;
 		$project = $this->checkParams($params);
 		if (!$project) {
-			return false ;
+			return false;
 		}
-		if (! $project->usesPlugin ($this->name)) {
+		if (!$project->usesPlugin($this->name)) {
 			return false;
 		}
 

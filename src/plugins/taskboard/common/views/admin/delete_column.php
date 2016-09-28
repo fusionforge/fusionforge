@@ -2,6 +2,7 @@
 /**
  * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
  * Copyright 2015, Franck Villaume - TrivialDev
+ * Copyright 2016, Stéphane-Eymeric Bredtthauer - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -28,7 +29,7 @@ $column = &taskboard_column_get_object($column_id);
 
 $taskboard->header(
 	array(
-		'title' => _('Taskboard for ').$group->getPublicName()._(': ')._('Administration')._(': ')._('Column configuration'),
+		'title' => $taskboard->getName()._(': ')._('Administration')._(': ')._('Column configuration'),
 		'pagename' => _('Column configuration'),
 		'sectionvals' => array(group_getname($group_id)),
 		'group' => $group_id
@@ -40,8 +41,8 @@ if($taskboard->isError()) {
 } else {
 	echo html_e('div', array('id' => 'messages', 'style' => 'display: none;'), '', false);
 }
-
-echo $HTML->openForm(array('action' => '/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&action=delete_column', 'method' => 'post'));
+$taskboard_id = $taskboard->getID();
+echo $HTML->openForm(array('action' => '/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&taskboard_id='.$taskboard_id.'&action=delete_column', 'method' => 'post'));
 echo html_e('input', array('type' => 'hidden', 'name' => 'column_id', 'value' => $column_id));
 echo html_e('h1', array(), _('Column')." '".$column->getTitle() ."'");
 echo html_e('div', array(), _('You are about to permanently and irretrievably delete this column!'));

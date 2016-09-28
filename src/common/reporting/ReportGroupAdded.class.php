@@ -25,8 +25,8 @@ require_once $gfcommon.'reporting/Report.class.php';
 
 class ReportGroupAdded extends Report {
 
-function ReportGroupAdded($span,$start=0,$end=0) {
-	$this->Report();
+function __construct($span,$start=0,$end=0) {
+	parent::__construct();
 
 	if (!$start) {
 		$start=mktime(0,0,0,date('m'),1,date('Y'));;

@@ -101,7 +101,7 @@ if (getStringFromRequest('submit')) {
 			session_require_perm ('project_admin', $role->getHomeProject()->getID()) ;
 		}
 		if (!$role->removeUser (user_get_object ($user_id))) {
-			$error_msg = $role->getErrorMessage() ;
+			$error_msg = $role->getErrorMessage();
 		} else {
 			$feedback = _("Member Removed Successfully");
 		}
@@ -201,11 +201,11 @@ if (count($reqs) > 0) {
 		}
 		$content .=  $HTML->openForm(array('action' => getStringFromServer('PHP_SELF').'?group_id='.$group_id, 'method' => 'post'));
 		$content .=  html_e('input', array('type' => 'hidden', 'name' => 'submit', 'value' => 'y'));
-		$content .=  html_e('input', array('type' => 'hidden', 'name' => 'form_userid', 'value' => $user->getId()));
+		$content .=  html_e('input', array('type' => 'hidden', 'name' => 'form_userid', 'value' => $user->getID()));
 		$content .=  html_e('input', array('type' => 'hidden', 'name' => 'form_unix_name', 'value' => $user->getUnixName()));
 		$content .=  $HTML->listTableTop();
 		$localcells = array();
-		$localcells[] = array(util_display_user($user->getUnixName(), $user->getId(), $user->getRealName()), 'style' => 'white-space: nowrap;');
+		$localcells[] = array(util_display_user($user->getUnixName(), $user->getID(), $user->getRealName()), 'style' => 'white-space: nowrap;');
 		$localcells[] = array(role_box($group_id,'role_id').
 					html_e('input', array('type' => 'submit', 'name' => 'acceptpending', 'value' => _('Accept'))).
 					html_e('input', array('type' => 'submit', 'name' => 'rejectpending', 'value' => _('Reject'))),
@@ -311,7 +311,7 @@ foreach ($roles as $r) {
 				html_e('input', array('type' => 'submit', 'name' => 'edit', 'value' => _('Edit Permissions')))).
 			$HTML->closeForm();
 
-	if ($r->getHomeProject() != NULL && $r->getHomeProject()->getId() == $group_id) {
+	if ($r->getHomeProject() != NULL && $r->getHomeProject()->getID() == $group_id) {
 		$localcontent .= $HTML->openForm(array('action' => '/project/admin/roledelete.php?group_id='.$group_id , 'method' => 'post')).
 				html_e('div', array('class' => 'float_right'), html_e('input', array('type' => 'hidden', 'name' => 'role_id', 'value' => $r->getID())).
 					html_e('input', array('type' => 'submit', 'name' => 'delete', 'value' => _('Delete role')))).

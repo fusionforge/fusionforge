@@ -286,9 +286,9 @@ class TaskBoardBasicAdapter {
 			}
 
 			// link create task to user story (if specified)
-			if ($user_story_id && $user_story_alias) {
+			if (!is_null($user_story_id) && $user_story_alias) {
 				if(array_key_exists($user_story_alias, $fields_ids)) {
-					$extra_fields[ $fields_ids[ $user_story_alias ] ] = $user_story_id;
+					$extra_fields[ $fields_ids[ $user_story_alias ] ] = ($user_story_id!=0 ? $user_story_id : '');
 				}
 			}
 

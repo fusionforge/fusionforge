@@ -25,8 +25,8 @@ require_once 'Widget.class.php';
  * Widget_ProjectMembers
  */
 class Widget_ProjectMembers extends Widget {
-	public function __construct() {
-		$this->Widget('projectmembers');
+	function __construct() {
+		parent::__construct('projectmembers');
 	}
 
 	public function getTitle() {

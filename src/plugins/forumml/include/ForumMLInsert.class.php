@@ -31,7 +31,6 @@ class ForumMLInsert {
     var $id_list;
     var $dao;
 
-    // Class Constructor
 	function __construct($list_id) {
 		// set id_list
 		$this->id_list = $list_id;

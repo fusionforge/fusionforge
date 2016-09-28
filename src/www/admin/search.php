@@ -175,7 +175,7 @@ if (getStringFromRequest('groupsearch')) {
 
 		echo $HTML->listTableBottom();
 	} else {
-		echo $HTML->information(_('No project found'));
+		echo $HTML->information(_('No project found.'));
 	}
 } //end if($groupsearch)
 

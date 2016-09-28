@@ -44,7 +44,7 @@ case "$1" in
 	mv $t 00-defines.conf
 	;;
 
-    configure)
+    rawconfigure)
 	$0 update-defines
 
 	# '${FF__core__config_path}' not yet available in the top-level config file, so generate it:
@@ -140,7 +140,15 @@ case "$1" in
 	if [ -e /etc/apache2/ports.conf ]; then
 	    sed -i 's/^NameVirtualHost \*:80/#&/' /etc/apache2/ports.conf
 	fi
+        ;;
 
+    configure)
+        $0 rawconfigure
+        $0 servicerestart
+        ;;
+
+    servicerestart)
+	apache_service=$(forge_get_config apache_service)
 	# Start web server on boot
 	if [ -x /sbin/chkconfig ]; then
 	    chkconfig $apache_service on
@@ -170,7 +178,7 @@ case "$1" in
 	;;
 
     *)
-	echo "Usage: $0 {configure|remove|purge|update-defines}"
+	echo "Usage: $0 {configure|remove|purge|update-defines|servicerestart|rawconfigure}"
 	exit 1
 	;;
 esac

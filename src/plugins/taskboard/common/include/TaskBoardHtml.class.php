@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
+ * Copyright 2016, Stéphane-Eymeric Bredtthauer - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -26,59 +27,77 @@ class TaskBoardHtml extends TaskBoard {
 
 	// the header that displays for the user portion of the plugin
 	function header($params) {
-		global $HTML, $group_id;
+		global $HTML;
 
-		use_javascript('/js/sortable.js');
+		html_use_tablesorter();
 		use_stylesheet('/plugins/taskboard/css/agile-board.css');
 		use_javascript('/plugins/taskboard/js/agile-board.js');
 		html_use_jqueryui();
 
+		$group_id = $this->Group->getID();
+		$taskboard_id = $this->getID();
 		$params['toptab'] = 'taskboard';
 		$params['group'] = $group_id;
 
-		$labels[] = _('View Taskboard');
+		$labels[] = _('View Taskboards');
 		$links[]  = '/plugins/taskboard/?group_id='.$group_id;
+		$attr   = array(array('title' => _('Get the list of available taskboards')));
+		if (session_loggedin()) {
+			if (forge_check_perm('tracker_admin', $group_id)) {
+				$labels[] = _('Taskboards Administration');
+				$links[]  = 'plugins/taskboard/admin/?group_id='.$group_id;
+				$attr[]   = array('title' => _('Global administration for taskboards.'));
+			}
+		}
+		if ($taskboard_id) {
+			$labels[] = $this->getName();
+			$links[]  = '/plugins/taskboard/?group_id='.$group_id.'&taskboard_id='.$taskboard_id;
+			$attr[]   = array('title' => _('View this taskboard.'));
 
-		if( $this->getReleaseField()) {
-			$labels[] = _('Releases');
-			$links[]  = '/plugins/taskboard/releases/?group_id='.$group_id;
+			if( $this->getReleaseField()) {
+				$labels[] = _('Releases');
+				$links[]  = '/plugins/taskboard/releases/?group_id='.$group_id.'&taskboard_id='.$taskboard_id;
+				$attr[]   = array('title' => _('Manage releases.'));
+			}
 		}
 
 		if (session_loggedin()) {
-			if (forge_check_perm('tracker_admin', $this->Group->getID())) {
+			if (forge_check_perm('tracker_admin', $group_id)) {
 				$release_id = getIntFromRequest('release_id','');
 				$view = getStringFromRequest('view','');
 				if($release_id) {
 					if( $view == 'edit_release' ) {
 						$labels[] = _('Delete release');
-						$links[]  = '/plugins/taskboard/releases/?group_id='.$group_id.'&view=delete_release&release_id='.$release_id;
+						$links[]  = '/plugins/taskboard/releases/?group_id='.$group_id.'&taskboard_id='.$taskboard_id.'&release_id='.$release_id.'&view=delete_release';
 					} else {
 						$labels[] = _('Edit release');
-						$links[]  = '/plugins/taskboard/releases/?group_id='.$group_id.'&view=edit_release&release_id='.$release_id;
+						$links[]  = '/plugins/taskboard/releases/?group_id='.$group_id.'&taskboard_id='.$taskboard_id.'&release_id='.$release_id.'&view=edit_release';
 					}
 				}
 			}
 		}
 
 		if (session_loggedin()) {
-			if (forge_check_perm('tracker_admin', $this->Group->getID())) {
-				$labels[] = _('Administration');
-				$links[]  = '/plugins/taskboard/admin/?group_id='.$group_id;
-
+			if (forge_check_perm('tracker_admin', $group_id)) {
+				if ($taskboard_id) {
+					$labels[] = _('Administration');
+					$links[]  = '/plugins/taskboard/admin/?group_id='.$group_id.'&taskboard_id='.$taskboard_id;
+					$attr[]   = array('title' => _('Administration for this taskboard.'));
+				}
 				$view = getStringFromRequest('view');
 				if ($view == 'edit_column') {
 					$labels[] = _('Configure Columns');
-					$links[]  = '/plugins/taskboard/admin/?group_id='.$group_id.'&view=columns';
+					$links[]  = '/plugins/taskboard/admin/?group_id='.$group_id.'&taskboard_id='.$taskboard_id.'&view=columns';
 
 					$column_id = getIntFromRequest('column_id', '');
 					if ($column_id) {
 						$labels[] = _('Delete Column');
-						$links[]  = '/plugins/taskboard/admin/?group_id='.$group_id.'&view=delete_column&column_id='.$column_id;
+						$links[]  = '/plugins/taskboard/admin/?group_id='.$group_id.'&taskboard_id='.$taskboard_id.'&column_id='.$column_id.'&view=delete_column';
 					}
 				}
 			}
 		}
-		$params['submenu'] = $HTML->subMenu($labels, $links);
+		$params['submenu'] = $HTML->subMenu($labels, $links, $attr);
 		site_project_header($params);
 	}
 
@@ -112,6 +131,5 @@ class TaskBoardHtml extends TaskBoard {
 
 		return $ret;
 	}
-
 
 }

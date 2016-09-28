@@ -4,7 +4,8 @@
  *
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2003-2004 (c) Guillaume Smet - Open Wide
- * Copyright 2010 (c) Franck Villaume
+ * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright 2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -28,9 +29,9 @@ require_once $gfwww.'mail/admin/../mail_utils.php';
 
 require_once $gfcommon.'mail/MailingList.class.php';
 
-$group_id = getIntFromRequest('group_id');
+global $HTML, $feedback;
 
-$feedback = '';
+$group_id = getIntFromRequest('group_id');
 
 if (!$group_id) {
 	exit_no_group();
@@ -65,7 +66,7 @@ mail_header(array('title' => _('Permanently Delete Mailing List ') . $ml->getNam
 ?>
 <fieldset>
 <legend><?php echo _('Confirm Delete'); ?></legend>
-<form method="post" action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&amp;group_list_id=<?php echo $ml->getID(); ?>">
+<?php echo $HTML->openForm(array('method' => 'post', 'action' => getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&group_list_id='.$ml->getID())); ?>
 <p><?php printf(_("Do you really want to delete mailing list %s?"), $ml->getName()); ?></p>
 <p>
 	<input id="sure" type="checkbox" name="sure" value="1" />
@@ -76,8 +77,7 @@ mail_header(array('title' => _('Permanently Delete Mailing List ') . $ml->getNam
 <p>
 	<input type="submit" name="submit" value="<?php echo _('Permanently Delete'); ?>" />
 </p>
-</form>
+<?php echo $HTML->closeForm(); ?>
 </fieldset>
 <?php
-
 mail_footer();

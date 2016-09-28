@@ -49,7 +49,7 @@ if (!$f || !is_object($f)) {
 
 session_require_perm('forum_admin', $f->Group->getID());
 
-forum_header(array('title'=>sprintf(_('Forum %s Monitoring Users'), $f->getName())));
+forum_header(array('title'=>sprintf(_('Forum %s Monitoring Users'), $f->getName()), 'modal' => 1));
 
 $MonitorElementObject = new MonitorElement('forum');
 $monitorUsersIdArray = $MonitorElementObject->getMonitorUsersIdsInArray($group_forum_id);

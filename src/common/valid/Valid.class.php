@@ -62,10 +62,7 @@ class Valid {
 	 */
 	var $isValid;
 
-	/**
-	 * Constructor
-	 */
-	function Valid($key = null) {
+	function __construct($key = null) {
 		$this->key = $key;
 		$this->errors = array();
 		$this->rules = array();

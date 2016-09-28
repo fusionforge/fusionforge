@@ -3,7 +3,7 @@
  * Code Snippets Repository
  *
  * Copyright 1999-2001 (c) VA Linux Systems
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -25,6 +25,8 @@
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'snippet/snippet_utils.php';
+
+global $HTML;
 
 if (session_loggedin()) {
 	$type = getStringFromRequest('type');
@@ -75,7 +77,7 @@ if (session_loggedin()) {
 					$feedback .= _('Snippet Version Added Successfully.');
 				}
 			} else {
-				exit_error(_('Error: Go back and fill in all the information'));
+				exit_error(_('Error')._(': ')._('Go back and fill in all the information'));
 			}
 
 		}
@@ -83,7 +85,7 @@ if (session_loggedin()) {
 
 		?>
 		<p><?php echo _('If you have modified a version of a snippet and you feel it is significant enough to share with others, please do so.'); ?></p>
-		<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
+		<?php echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post')); ?>
 		<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>">
 		<input type="hidden" name="post_changes" value="y" />
 		<input type="hidden" name="type" value="snippet" />
@@ -108,9 +110,9 @@ if (session_loggedin()) {
 			<br />
 			<input type="submit" name="submit" value="<?php echo _('Submit'); ?>" />
 		</td></tr>
-		</table></form>
+		</table>
 		<?php
-
+		echo $HTML->closeForm();
 		snippet_footer();
 
 	} elseif ($type=='package') {
@@ -195,7 +197,7 @@ function show_add_snippet_box() {
 
 			} else {
 				form_release_key(getStringFromRequest("form_key"));
-				exit_error( _('Error: Go back and fill in all the information'));
+				exit_error(_('Error')._(': ')._('Go back and fill in all the information'));
 			}
 
 		}
@@ -206,7 +208,7 @@ function show_add_snippet_box() {
 		<p>
 		<?php echo _('If you have modified a version of a package and you feel it is significant enough to share with others, please do so.'); ?></p>
 		<p>
-		<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
+		<?php echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post')); ?>
 		<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>">
 		<input type="hidden" name="post_changes" value="y" />
 		<input type="hidden" name="type" value="package" />
@@ -227,9 +229,9 @@ function show_add_snippet_box() {
 			<br />
 			<input type="submit" name="submit" value="<?php echo _('Submit'); ?>" />
 		</td></tr>
-		</table></form></p>
+		</table></p>
 		<?php
-
+		echo $HTML->closeForm();
 		snippet_footer();
 
 	} else {

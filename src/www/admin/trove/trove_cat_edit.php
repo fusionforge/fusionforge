@@ -7,6 +7,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -108,9 +109,8 @@ if (db_numrows($res_cat)<1) {
 $row_cat = db_fetch_array($res_cat);
 
 site_admin_header(array('title'=>_('Edit Trove Category')));
+echo $HTML->openForm(array('action' => '/admin/trove/trove_cat_edit.php', 'method' => 'post'));
 ?>
-
-<form action="<?php echo util_make_uri('/admin/trove/trove_cat_edit.php'); ?>" method="post">
 
 <p><?php echo _('Parent Category')._(':'); ?>
 <br /><select name="form_parent">
@@ -148,10 +148,8 @@ while ($row_parent = db_fetch_array($res_parent)) {
 <br /><input type="text" name="form_description" size="80" value="<?php print $row_cat["description"]; ?>" /></p>
 
 <br /><input type="submit" name="submit" value="<?php echo _('Update'); ?>" /><input type="submit" name="delete" value="<?php echo _('Delete'); ?>" />
-</form>
-
 <?php
-
+echo $HTML->closeForm();
 site_admin_footer();
 
 // Local Variables:

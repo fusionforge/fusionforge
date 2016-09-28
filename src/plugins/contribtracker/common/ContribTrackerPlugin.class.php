@@ -1,5 +1,4 @@
 <?php
-
 /**
  * ContribTrackerPlugin Class
  *
@@ -23,8 +22,8 @@
  */
 
 class ContribTrackerPlugin extends Plugin {
-	function ContribTrackerPlugin() {
-		$this->Plugin() ;
+	function __construct() {
+		parent::__construct();
 		$this->name = "contribtracker";
 		$this->text = _("Contribution Tracker"); // To show in the tabs, use...
 		$this->pkg_desc =
@@ -48,9 +47,6 @@ contributions, along with their authors.");
 			if ($project->isError()) {
 				return;
 			}
-			if (!$project->isProject()) {
-				return;
-			}
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][] = '<nobr>'._('Contribution tracker').'</nobr>' ;
 				$params['TOOLTIPS'][] = _('Follow the contributions by contributors to this project');
@@ -58,36 +54,6 @@ contributions, along with their authors.");
 				$params['ADMIN'][]='';
 			}
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
-		} elseif ($hookname == "groupisactivecheckbox") {
-			//Check if the group is active
-			// this code creates the checkbox in the project edit public info page to activate/deactivate the plugin
-			$group_id=$params['group'];
-			$group = group_get_object($group_id);
-			echo "<tr>";
-			echo "<td>";
-			echo ' <input type="CHECKBOX" name="use_contribtrackerplugin" value="1" ';
-			// CHECKED OR UNCHECKED?
-			if ( $group->usesPlugin ( $this->name ) ) {
-				echo "CHECKED";
-			}
-			echo "><br/>";
-			echo "</td>";
-			echo "<td>";
-			echo "<strong>";
-			echo _('Use the Contribution Tracker plugin') ;
-			echo "</strong>";
-			echo "</td>";
-			echo "</tr>";
-		} elseif ($hookname == "groupisactivecheckboxpost") {
-			// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
-			$group_id=$params['group'];
-			$group = group_get_object($group_id);
-			$use_contribtrackerplugin = getStringFromRequest('use_contribtrackerplugin');
-			if ( $use_contribtrackerplugin == 1 ) {
-				$group->setPluginUse ( $this->name );
-			} else {
-				$group->setPluginUse ( $this->name, false );
-			}
 		} elseif ($hookname == "project_admin_plugins") {
 			// this displays the link in the project admin options page to its ContribTracker administration
 			$group_id = $params['group_id'];
@@ -173,10 +139,8 @@ contributions, along with their authors.");
 				echo '</div>';
 			}
 		} elseif ($hookname == "site_admin_option_hook") {
-			?>
-			<li><?php echo util_make_link ('/plugins/'.$this->name.'/global_admin.php',
-						_('Edit actors and roles'). ' [' . _('Contribution tracker plugin') . ']'); ?></li>
-			<?php
+			echo html_e('li', array(),
+					util_make_link('/plugins/'.$this->name.'/global_admin.php', _('Edit actors and roles'). ' [' . _('Contribution tracker plugin') . ']'));
 		}
 	}
 

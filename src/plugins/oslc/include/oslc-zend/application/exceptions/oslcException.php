@@ -5,7 +5,7 @@ class oslcException extends Exception
 	protected $code = 0;
 	protected $exception_details = "OSLC Custom Exception";
 
-	public function __construct($message, Exception $previous = null)
+	function __construct($message, Exception $previous = null)
 	{
 		parent::__construct($message, $this->code, $previous);
 

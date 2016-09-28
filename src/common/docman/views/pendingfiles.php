@@ -71,11 +71,11 @@ jQuery(document).ready(function() {
 			$cells[][] = html_e('input', array('type' => 'checkbox', 'value' => $d->getID(), 'class' => 'checkeddocidpending', 'title' => _('Select / Deselect this document for massaction'), 'onClick' => 'controllerListPending.checkgeneral("pending")'));
 			switch ($d->getFileType()) {
 				case 'URL': {
-					$cells[][] = util_make_link($d->getFileName(), html_image($d->getFileTypeImage(), '22', '22', array('alt'=>$d->getFileType())), array('title' => _('Visit this link')), true);
+					$cells[][] = util_make_link($d->getFileName(), html_image($d->getFileTypeImage(), 22, 22, array('alt'=>$d->getFileType())), array('title' => _('Visit this link')), true);
 					break;
 				}
 				default: {
-					$cells[][] = util_make_link('/docman/view.php/'.$g->getID().'/'.$d->getID().'/'.urlencode($d->getFileName()), html_image($d->getFileTypeImage(), '20', '20', array('alt'=>$d->getFileType())), array('title' => _('View this document')));
+					$cells[][] = util_make_link('/docman/view.php/'.$g->getID().'/'.$d->getID().'/'.urlencode($d->getFileName()), html_image($d->getFileTypeImage(), 20, 20, array('alt'=>$d->getFileType())), array('title' => _('View this document')));
 				}
 			}
 			$nextcell = '';
@@ -107,7 +107,7 @@ jQuery(document).ready(function() {
 				$editfileaction .= '&childgroup_id='.$childgroup_id;
 			}
 			$editfileaction .= '&group_id='.$group_id;
-			$cells[][] = util_make_link('#', html_image('docman/edit-file.png', 22, 22, array('alt' => _('Edit this document'))), array('onclick' => 'javascript:controllerListPending.toggleEditFileView({action:\''.util_make_uri($editfileaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json').', docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').', title:\''.addslashes($d->getName()).'\', filename:\''.addslashes($d->getFilename()).'\', description:\''.addslashes($d->getDescription()).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri("docman").'\'})', 'title' => _('Edit this document')), true).
+			$cells[][] = util_make_link('#', html_image('docman/edit-file.png', 22, 22, array('alt' => _('Edit this document'))), array('onclick' => 'javascript:controllerListPending.toggleEditFileView({action:\''.util_make_uri($editfileaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json').', docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').', title:\''.addslashes($d->getName()).'\', filename:\''.addslashes($d->getFileName()).'\', description:\''.addslashes($d->getDescription()).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri("docman").'\'})', 'title' => _('Edit this document')), true).
 					util_make_link('#', html_image('docman/validate.png', 22, 22, array('alt' => _('Activate in this folder'))), array('onclick' => 'window.location.href=\''.util_make_uri($redirecturl.'&action=validatefile&fileid='.$d->getID()).'\'', 'title' => _('Activate in this folder')), true);
 			echo $HTML->multiTableRow(array(), $cells);
 		}

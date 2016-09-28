@@ -22,6 +22,7 @@
  * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
+
 require_once $gfcommon.'include/escapingUtils.php';
 require_once $gfcommon.'include/utils.php';
 
@@ -29,14 +30,6 @@ require_once $gfcommon.'include/utils.php';
 util_init_messages();
 
 require_once $gfcommon.'include/config.php';
-
-if (isset($_SERVER) && array_key_exists('PHP_SELF', $_SERVER) && $_SERVER['PHP_SELF']) {
-	$_SERVER['PHP_SELF'] = htmlspecialchars($_SERVER['PHP_SELF']);
-}
-
-if (isset($GLOBALS) && array_key_exists('PHP_SELF', $GLOBALS) && $GLOBALS['PHP_SELF']) {
-	$GLOBALS['PHP_SELF'] = htmlspecialchars($GLOBALS['PHP_SELF']);
-}
 
 // Block link prefetching (Moz prefetching, Google Web Accelerator, others)
 // http://www.google.com/webmasters/faq.html#prefetchblock
@@ -91,6 +84,35 @@ if (($ecd = forge_get_config ('extra_config_dirs')) != NULL) {
 	foreach ($ecda as $cd) {
 		$cd = trim ($cd) ;
 		forge_read_config_dir ($cd) ;
+	}
+}
+
+$url_prefix = forge_get_config('url_prefix');
+if (isset($_SERVER) && array_key_exists('PHP_SELF', $_SERVER) && $_SERVER['PHP_SELF']) {
+	$_SERVER['PHP_SELF'] = htmlspecialchars($_SERVER['PHP_SELF']);
+	if (substr($_SERVER['PHP_SELF'], 0, strlen($url_prefix)) == $url_prefix) {
+		$_SERVER['PHP_SELF'] = '/'.substr($_SERVER['PHP_SELF'], strlen($url_prefix));
+	}
+}
+
+if (isset($GLOBALS) && array_key_exists('PHP_SELF', $GLOBALS) && $GLOBALS['PHP_SELF']) {
+	$GLOBALS['PHP_SELF'] = htmlspecialchars($GLOBALS['PHP_SELF']);
+	if (substr($GLOBALS['PHP_SELF'], 0, strlen($url_prefix)) == $url_prefix) {
+		$GLOBALS['PHP_SELF'] = '/'.substr($GLOBALS['PHP_SELF'], strlen($url_prefix));
+	}
+}
+
+if (isset($_SERVER) && array_key_exists('REQUEST_URI', $_SERVER) && $_SERVER['REQUEST_URI']) {
+	$_SERVER['REQUEST_URI'] = htmlspecialchars($_SERVER['REQUEST_URI']);
+	if (substr($_SERVER['REQUEST_URI'], 0, strlen($url_prefix)) == $url_prefix) {
+		$_SERVER['REQUEST_URI'] = '/'.substr($_SERVER['REQUEST_URI'], strlen($url_prefix));
+	}
+}
+
+if (isset($GLOBALS) && array_key_exists('REQUEST_URI', $GLOBALS) && $GLOBALS['REQUEST_URI']) {
+	$GLOBALS['REQUEST_URI'] = htmlspecialchars($GLOBALS['REQUEST_URI']);
+	if (substr($GLOBALS['REQUEST_URI'], 0, strlen($url_prefix)) == $url_prefix) {
+		$GLOBALS['REQUEST_URI'] = '/'.substr($GLOBALS['REQUEST_URI'], strlen($url_prefix));
 	}
 }
 
@@ -267,7 +289,7 @@ if (getenv('FUSIONFORGE_NO_DB') != 'true' and forge_get_config('database_name') 
 
 		// Mandatory login
 		if (!session_loggedin() && forge_get_config ('force_login') == 1 ) {
-			$expl_pathinfo = explode('/',getStringFromServer('REQUEST_URI'));
+			$expl_pathinfo = explode('/', getStringFromServer('REQUEST_URI'));
 			if (getStringFromServer('REQUEST_URI')!='/' && $expl_pathinfo[1]!='account' && $expl_pathinfo[1]!='export' && $expl_pathinfo[1]!='plugins') exit_not_logged_in();
 			// Show proj* export even if not logged in when force login
 			// If not default web project page would be broken

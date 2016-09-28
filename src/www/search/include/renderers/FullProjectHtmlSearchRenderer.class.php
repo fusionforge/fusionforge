@@ -55,20 +55,17 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	var $isExact;
 
 	/**
-	 * Constructor
-	 *
 	 * @param string $words words we are searching for
 	 * @param int $offset offset
 	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
 	 * @param int $groupId group id
-	 *
 	 */
-	function FullProjectHtmlSearchRenderer($words, $offset, $isExact, $groupId) {
+	function __construct($words, $offset, $isExact, $groupId) {
 		$this->groupId = $groupId;
 		$this->words = $words;
 		$this->isExact = $isExact;
 
-		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_ADVANCED, $words, $isExact, '', $groupId);
+		parent::__construct(SEARCH__TYPE_IS_ADVANCED, $words, $isExact, '', $groupId);
 	}
 
 	/**
@@ -76,14 +73,14 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 */
 	function flush() {
 		$this->writeHeader();
-		$this->writeBody();
+		$this->writeBody(true);
 		$this->writeFooter();
 	}
 
 	/**
 	 * writeBody - write the Body of the output
 	 */
-	function writeBody() {
+	function writeBody($withpanel = true) {
 		global $HTML;
 		if (!$this->words) {
 			echo $HTML->error_msg(_('Error')._(': ')._('Please enter a term to search for'));
@@ -198,7 +195,7 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$html .= $this->getPartResult($renderer, 'short_news', _('News Search Results'));
 */
 
-		return $html.'<br />';
+		return $html;
 	}
 
 	/**

@@ -85,8 +85,6 @@ class ArtifactQuery extends FFError {
 	var $element_array;
 
 	/**
-	 * __construct - Constructor
-	 *
 	 * @param	$ArtifactType	$ArtifactType	c object.
 	 * @param	array|bool	$data
 	 */
@@ -136,7 +134,7 @@ class ArtifactQuery extends FFError {
 	 * @return	bool		true on success / false on failure.
 	 */
 	function create($name,$status,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange=0,$closedaterange=0,
-		$summary,$description,$followups,$query_type=0,$query_options=array(),$submitter='') {
+		$summary='',$description='',$followups='',$query_type=0,$query_options=array(),$submitter='') {
 		//
 		//	data validation
 		//

@@ -56,7 +56,7 @@ abstract class BaseRole extends FFError {
 	// var $perms_array;
 	// var $setting_array;
 
-	public function BaseRole() {
+	public function __construct() {
 		// TODO: document these tables
 		// $gfcommon.'include/rbac_texts.php' may provide some hints...
 		$this->role_values = array(
@@ -482,6 +482,7 @@ abstract class BaseRole extends FFError {
 		case 'forge_read':
 		case 'approve_projects':
 		case 'approve_news':
+		case 'project_admin':
 			if ($this->hasGlobalPermission('forge_admin')) {
 				return 1 ;
 			}
@@ -491,13 +492,6 @@ abstract class BaseRole extends FFError {
 		case 'forge_stats':
 			if ($this->hasGlobalPermission('forge_admin')) {
 				return 2 ;
-			}
-			return $value ;
-			break ;
-
-		case 'project_admin':
-			if ($this->hasGlobalPermission('forge_admin')) {
-				return 1 ;
 			}
 			return $value ;
 			break ;
@@ -683,6 +677,7 @@ abstract class BaseRole extends FFError {
 			break ;
 
 		case 'forge_stats':
+		case 'frs_admin':
 			switch ($action) {
 			case 'read':
 				return ($value >= 1) ;
@@ -721,16 +716,6 @@ abstract class BaseRole extends FFError {
 			}
 			break ;
 
-		case 'frs_admin':
-			switch ($action) {
-			case 'read':
-				return ($value >= 1);
-				break;
-			case 'admin':
-				return ($value >= 2);
-				break;
-			}
-			break;
 		case 'frs':
 		case 'new_frs':
 			switch ($action) {
@@ -802,6 +787,7 @@ abstract class BaseRole extends FFError {
 				break ;
 			}
 			break ;
+
 		default:
 			$hook_params = array ();
 			$hook_params['section'] = $section ;
@@ -867,7 +853,7 @@ abstract class BaseRole extends FFError {
 					// new permission
 					db_execute('insert_into_pfo_role_setting',
 						   array($role_id, $sect, $refid, $value));
-				} else if ($this->perms_array[$sect][$refid] != $value) {
+				} elseif ($this->perms_array[$sect][$refid] != $value) {
 					// changed permission
 					db_execute('update_pfo_role_setting',
 						   array($role_id, $sect, $refid, $value));
@@ -1136,7 +1122,6 @@ abstract class RoleExplicit extends BaseRole implements PFO_RoleExplicit {
 			$ids[] = $user->getID() ;
 		}
 
-		$already_there = array () ;
 		$res = db_query_params ('DELETE FROM pfo_user_role WHERE user_id=ANY($1) AND role_id=$2',
 					array (db_int_array_to_any_clause($ids), $this->getID())) ;
 
@@ -1251,7 +1236,7 @@ class RoleAnonymous extends BaseRole implements PFO_RoleAnonymous {
 	}
 }
 
-class RoleLoggedIn extends BaseRole implements PFO_RoleLoggedIn {
+class RoleLoggedIn extends BaseRole implements PFO_RoleLoggedin {
 	// This role is implemented as a singleton
 	private static $_instance ;
 	private $_role_id ;

@@ -23,7 +23,7 @@
  */
 
 /**
- * exit_errorlevel – Return code for exit_error() and friends
+ * exit_errorlevel - Return code for exit_error() and friends
  *
  * A script can set this to explicitly return a different
  * status code than the historic default of 0 to the caller.
@@ -56,7 +56,9 @@ function exit_permission_denied($reason_descr = '', $toptab = '') {
 		exit_not_logged_in();
 	} else {
 		if (!$reason_descr) {
-			$reason_descr=_('Permission denied. This project\'s administrator will have to grant you permission to view this page.');
+			$reason_descr = _('Permission denied.')
+							.' '
+							._("This project's administrator will have to grant you permission to view this page.");
 		}
 		exit_error($reason_descr, $toptab);
 	}
@@ -75,7 +77,9 @@ function exit_not_logged_in() {
  * exit_no_group() - Exit with no group chosen error
  */
 function exit_no_group() {
-	exit_error(_('Permission denied. No project was chosen, project does not exist or you cannot access it.'), '');
+	exit_error(_('Permission denied.')
+				.' '
+				._('No project was chosen, project does not exist or you cannot access it.'), '');
 }
 
 /**
@@ -99,7 +103,7 @@ function exit_missing_param($url = '', $missing_params = array(), $toptab = '') 
 	if (!empty($redirect_url)) {
 		session_redirect($redirect_url);
 	} else {
-		exit_error($error, $toptab);
+		exit_error($error_msg, $toptab);
 	}
 }
 

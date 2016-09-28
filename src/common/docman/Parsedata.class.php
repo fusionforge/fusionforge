@@ -1,6 +1,6 @@
 <?php
 /**
- * FusionForge document manager
+ * FusionForge Documentation Manager
  *
  * Copyright 2005, Fabio Bertagnin
  * Copyright 2009-2010, Franck Villaume - Capgemini
@@ -30,11 +30,6 @@ class Parsedata {
 
 	var $p_path;
 
-	/**
-	 * Constructor.
-	 *
-	 * @return	\Parsedata
-	 */
 	function __construct() {
 		$this->p_path = dirname(__FILE__).'/engine/';
 		$this->parsers = $this->get_parser_list($this->p_path);

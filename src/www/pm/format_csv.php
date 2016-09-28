@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (C) 2009 Alain Peyrat, Alcatel-Lucent
+ * Copyright 2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -46,7 +47,9 @@
 //	so a user can choose a file to upload a .csv file and store it in task mgr
 //
 
-pm_header(array('title'=>_('Update CSV Format'),'group_project_id'=>$group_project_id));
+global $HTML;
+
+pm_header(array('title'=>_('Update CSV Format'), 'modal'=>1, 'group_project_id'=>$group_project_id));
 
 $headers = getIntFromRequest('headers', 1);
 $full = getIntFromRequest('full', 1);
@@ -57,7 +60,7 @@ $sep = getStringFromRequest('sep', ',');
 	<tr>
 		<td>
 		<fieldset><legend><strong><?php echo _('CSV Format'); ?></strong></legend>
-		<form action="/pm/task.php" method="get">
+		<?php echo $HTML->openForm(array('action' => '/pm/task.php', 'method' => 'get')); ?>
 			<input type="hidden" name="group_id" value="<?php echo $group_id ?>" />
 			<input type="hidden" name="group_project_id" value="<?php echo $group_project_id ?>" />
 			<input type="hidden" name="func" value="csv" />
@@ -108,7 +111,7 @@ $sep = getStringFromRequest('sep', ',');
 				</td>
 			</tr>
 		</table>
-		<input type="submit" name="Submit" /></form>
+		<input type="submit" name="Submit" /><?php echo $HTML->closeForm(); ?>
 		</fieldset>
 		</td>
 	</tr>

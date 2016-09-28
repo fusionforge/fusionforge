@@ -28,7 +28,7 @@ require_once 'Widget.class.php';
 
 class Widget_ProjectPublicAreas extends Widget {
 	function __construct() {
-		$this->Widget('projectpublicareas');
+		parent::__construct('projectpublicareas');
 	}
 
 	function getTitle() {
@@ -45,11 +45,8 @@ class Widget_ProjectPublicAreas extends Widget {
 		$HTML = $GLOBALS['HTML'];
 		// ################# Homepage Link
 
-		$result .= '<div class="public-area-box" rel="doap:homepage">';
-		$result .= util_make_link($project->getHomePage(),
-		    $HTML->getHomePic(_('Home Page')) . ' ' .
-		    _('Project Home Page'), false, true);
-		$result .= "</div>\n";
+		$result .= html_e('div', array('class' => 'public-area-box', 'rel' => 'doap:homepage'),
+				util_make_link($project->getHomePage(), $HTML->getHomePic(_('Home Page')). ' ' ._('Project Home Page'), false, true));
 
 		// ################## ArtifactTypes
 
@@ -76,22 +73,21 @@ class Widget_ProjectPublicAreas extends Widget {
 			if (count($rows) < 1) {
 				$result .= "<br />\n<em>"._('There are no trackers available').'</em>';
 			} else {
-				$result .= "\n".'<ul class="tracker" rel="doap:bug-database">'."\n";
+				$elementsLi = array();
 				foreach ($rows as $row) {
 					// tracker REST paths are something like : /tracker/cm/project/A_PROJECT/atid/NUMBER to plan compatibility
 					// with OSLC-CM server API
 					$group_artifact_id = $row['group_artifact_id'];
 					$tracker_stdzd_uri = util_make_url('/tracker/cm/project/'. $project->getUnixName() .'/atid/'. $group_artifact_id);
-					$result .= "\t".'<li about="'. $tracker_stdzd_uri . '" typeof="sioc:Container">'."\n";
-					$result .= '<span rel="http://www.w3.org/2002/07/owl#sameAs">'."\n";
-					$result .= util_make_link('/tracker/?atid='. $group_artifact_id . '&group_id='.$group_id.'&func=browse', $row['name']) . ' ' ;
-					$result .= "</span>\n"; // /owl:sameAs
-					$result .= sprintf(ngettext('(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', '(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', $row['open_count']), $row['open_count'], $row['count']);
-					$result .= '<br />';
-					$result .= '<span rel="sioc:has_space" resource="" ></span>'."\n";
-					$result .= "</li>\n";
+					$contentLi = '<span rel="http://www.w3.org/2002/07/owl#sameAs">'."\n";
+					$contentLi .= util_make_link('/tracker/?atid='. $group_artifact_id . '&group_id='.$group_id.'&func=browse', $row['name']) . ' ' ;
+					$contentLi .= "</span>\n"; // /owl:sameAs
+					$contentLi .= sprintf(ngettext('(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', '(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', $row['open_count']), $row['open_count'], $row['count']);
+					$contentLi .= '<br />';
+					$contentLi .= '<span rel="sioc:has_space" resource="" ></span>'."\n";
+					$elementLi[] = array('content' => $contentLi, 'attrs' => array('about' => $tracker_stdzd_uri, 'typeof' => 'sioc:Container'));
 				}
-				$result .= "</ul>\n";
+				$result .= $HTML->html_list($elementsLi, array('class' => 'tracker', 'rel' => 'doap:bug-database'));
 			}
 
 			$result .= "</div>\n";
@@ -154,7 +150,7 @@ class Widget_ProjectPublicAreas extends Widget {
 
 		// ##################### Task Manager
 
-		if ($project->usesPm()) {
+		if ($project->usesPM()) {
 			$result .= '<div class="public-area-box">';
 			$link_content = $HTML->getPmPic('') . ' ' . _('Tasks');
 			$result .= util_make_link('/pm/?group_id='.$group_id, $link_content);

@@ -28,14 +28,12 @@
  */
 
 /**
- *
  * Extends the basic Error class to add HTML functions
  * for displaying all site dependent HTML, while allowing
  * extendibility/overriding by themes via the Theme class.
  *
  * Make sure browser.php is included _before_ you create an instance
  * of this object.
- *
  */
 
 require_once $gfcommon.'include/constants.php';
@@ -112,12 +110,9 @@ class Layout extends FFError {
 	var $css = array();
 	var $css_min = array();
 	var $stylesheets = array();
+	var $buttons = array();
 
-	/**
-	 * Layout() - Constructor
-	 */
 	function __construct() {
-		// parent constructor
 		parent::__construct();
 
 		$this->navigation = new Navigation();
@@ -233,9 +228,35 @@ class Layout extends FFError {
 		return $code;
 	}
 
+	function addButtons($link, $text, $options = array()) {
+		$this->buttons[] = array_merge( array('link' => $link, 'text' => $text), $options);
+	}
+
+	function getButtons() {
+		$code = '';
+		if ($this->buttons) {
+			$code .= html_ao('p', array('class' => 'buttonsbar'));
+			foreach ($this->buttons as $b) {
+				$text = $b['text'];
+				$link = $b['link'];
+				if (isset($b['icon'])) {
+					$text = $b['icon'].' '.$text;
+					unset($b['icon']);
+				}
+				unset($b['text'], $b['link'], $b['icon']);
+				$code .= html_e('span', array('class' => 'buttons'), util_make_link($link, $text, $b));
+			}
+			$code .= html_ac(html_ap() -1);
+			$this->buttons = array();
+		}
+		return $code;
+	}
+
 	/**
 	 * header() - generates the complete header of page by calling
 	 * headerStart() and bodyHeader().
+	 *
+	 * @param	array	$params		Header parameters array
 	 */
 	function header($params) {
 		$this->headerStart($params);
@@ -410,7 +431,7 @@ class Layout extends FFError {
 			<div class="header">
 			<table class="fullwidth" id="headertable">
 			<tr>
-			<td><?php util_make_link('/', html_image('logo.png',198,52,array('border'=>'0'))); ?></td>
+			<td><?php util_make_link('/', html_image('logo.png', 198, 52)); ?></td>
 			<td><?php $this->searchBox(); ?></td>
 			<td align="right"><?php
 			$items = $this->navigation->getUserLinks();
@@ -547,9 +568,10 @@ if (isset($params['group']) && $params['group']) {
 	 * boxTop() - Top HTML box.
 	 *
 	 * @param	string	$title	Box title
+	 * @param   string  $id
 	 * @return	string	the html code
 	 */
-	function boxTop($title, $id='') {
+	function boxTop($title, $id = '') {
 		return '
 			<!-- Box Top Start -->
 
@@ -572,9 +594,10 @@ if (isset($params['group']) && $params['group']) {
 	 * boxMiddle() - Middle HTML box.
 	 *
 	 * @param	string	$title	Box title
+	 * @param   string  $id
 	 * @return	string	The html code
 	 */
-	function boxMiddle($title, $id='') {
+	function boxMiddle($title, $id = '') {
 		return '
 			<!-- Box Middle Start -->
 			</td>
@@ -612,14 +635,16 @@ if (isset($params['group']) && $params['group']) {
 	 * @return	string	the class code
 	 */
 	function boxGetAltRowStyle($i, $classonly = false) {
-		if ($i % 2 == 0)
+		if ($i % 2 == 0) {
 			$ret = 'altRowStyleEven';
-		else
+		} else {
 			$ret = 'altRowStyleOdd';
-		if ($classonly)
+		}
+		if ($classonly) {
 			return $ret;
-		else
+		} else {
 			return 'class="'.$ret.'"';
+		}
 	}
 
 	/**
@@ -691,21 +716,22 @@ if (isset($params['group']) && $params['group']) {
 	 */
 	function quickNav() {
 		if (!session_loggedin()) {
-			return;
+			return '';
 		} else {
 			// get all projects that the user belongs to
 			$groups = session_get_user()->getGroups();
 
 			if (count($groups) < 1) {
-				return;
+				return '';
 			} else {
-				sortProjectList($groups);
-
-				$result = html_ao('form', array('id' => 'quicknavform', 'name' => 'quicknavform', 'action' => ''));
+				$result = $this->openForm(array('id' => 'quicknavform', 'name' => 'quicknavform', 'action' => ''));
 				$result .= html_ao('div');
 				$result .= html_ao('select', array('name' => 'quicknav', 'id' => 'quicknav', 'onchange' => 'location.href=document.quicknavform.quicknav.value'));
 				$result .= html_e('option', array('value' => ''), _('Quick Jump To...'), false);
-
+				if (!forge_get_config('use_quicknav_default') && session_get_user()->getPreference('quicknav_mode')) {
+					$groups = session_get_user()->getActivityLogGroups();
+				}
+				sortProjectList($groups);
 				foreach ($groups as $g) {
 					$group_id = $g->getID();
 					$menu = $this->navigation->getProjectMenu($group_id);
@@ -717,7 +743,8 @@ if (isset($params['group']) && $params['group']) {
 						}
 					}
 				}
-				$result .= html_ac(html_ap() - 3);
+				$result .= html_ac(html_ap() - 2);
+				$result .= $this->closeForm();
 			}
 			return $result;
 		}
@@ -853,9 +880,7 @@ if (isset($params['group']) && $params['group']) {
 	 * @return	string	Html to start a submenu.
 	 */
 	function beginSubMenu() {
-		$return = '
-			<p><strong>';
-		return $return;
+		return '<p><strong>';
 	}
 
 	/**
@@ -864,8 +889,7 @@ if (isset($params['group']) && $params['group']) {
 	 * @return	string	Html to end a submenu.
 	 */
 	function endSubMenu() {
-		$return = '</strong></p>';
-		return $return;
+		return '</strong></p>';
 	}
 
 	/**
@@ -931,13 +955,14 @@ if (isset($params['group']) && $params['group']) {
 			$row_attrs['class'] .= '';
 		}
 		$return = html_ao('tr', $row_attrs);
+		$type = $istitle ? 'th' : 'td';
 		for ( $c = 0; $c < count($cell_data); $c++ ) {
 			$locAp = html_ap();
 			$cellAttrs = array();
 			foreach (array_slice($cell_data[$c],1) as $k => $v) {
 				$cellAttrs[$k] = $v;
 			}
-			$return .= html_ao('td', $cellAttrs);
+			$return .= html_ao($type, $cellAttrs);
 			if ( $istitle ) {
 				$return .= html_ao('span', array('class' => 'multiTableRowTitle'));
 			}
@@ -1007,8 +1032,9 @@ if (isset($params['group']) && $params['group']) {
 	}
 
 	function confirmBox($msg, $params, $buttons, $image='*none*') {
+		global $HTML;
 		if ($image == '*none*') {
-			$image = html_image('stop.png','48','48',array());
+			$image = html_image('stop.png', 48, 48);
 		}
 
 		foreach ($params as $b => $v) {
@@ -1030,11 +1056,10 @@ if (isset($params['group']) && $params['group']) {
 			</tr>
 			<tr>
 			<td colspan="2" align="center">
-			<br />
-			<form action="' . getStringFromServer('PHP_SELF') . '" method="get" >
-			'.$prm.'
-			'.$btn.'
-			</form>
+			<br />'.$HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'get'))
+			.$prm.'
+			'.$btn.
+			$HTML->closeForm().'
 			</td>
 			</tr>
 			</table>
@@ -1301,6 +1326,10 @@ if (isset($params['group']) && $params['group']) {
 		return $this->getPicto('ic/directory-add.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
+	function getEditFilePic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/edit-file.png', $title, $alt, 20, 20, $otherAttr);
+	}
+
 	function getNewPic($title = '', $alt = '', $otherAttr = array()) {
 		return $this->getPicto('ic/add.png', $title, $alt, 20, 20, $otherAttr);
 	}
@@ -1309,7 +1338,7 @@ if (isset($params['group']) && $params['group']) {
 		return $this->getPicto('ic/folder.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
-	function getPicto($url, $title, $alt, $width = '20', $height = '20', $otherAttr = array()) {
+	function getPicto($url, $title, $alt, $width = 20, $height = 20, $otherAttr = array()) {
 		$otherAttr['title'] = $title;
 		if (!$alt) {
 			$otherAttr['alt'] = $title;
@@ -1460,6 +1489,9 @@ if (isset($params['group']) && $params['group']) {
 	 * @return	string	html code
 	 */
 	function openForm($args) {
+		if (isset($args['action'])) {
+			$args['action'] = util_make_uri($args['action']);
+		}
 		return html_ao('form', $args);
 	}
 
@@ -1550,8 +1582,10 @@ if (isset($params['group']) && $params['group']) {
 	 * @param	integer	$totalElements	total number of this type of Elements in the forge
 	 * @param	integer	$maxElements	max number of Elements to display
 	 * @param	string	$actionUrl	next / prev Url to click
+	 * @param	array	$htmlAttr	html attributes to set.
+	 * @return	string
 	 */
-	function paging_top($start = 0, $paging = 25, $totalElements = 0, $maxElements = 0, $actionUrl = '/') {
+	function paging_top($start = 0, $paging = 25, $totalElements = 0, $maxElements = 0, $actionUrl = '/', $htmlAttr = array()) {
 		$html_content = '';
 		$sep = '?';
 		if (strpos($actionUrl, '?')) {
@@ -1563,12 +1597,12 @@ if (isset($params['group']) && $params['group']) {
 		if ($totalElements) {
 			$html_content .= sprintf(_('Displaying results %1$s out of %2$d total.'), ($start + 1).'-'.$maxElements, $totalElements);
 			if (session_loggedin()) {
-				$html_content .= sprintf(' ' . _('Displaying %1$s results.'), html_build_select_box_from_array(array('10', '25', '50', '100', '1000'), 'nres', $paging, 1));
+				$html_content .= sprintf(' ' . _('Displaying %s results.'), html_build_select_box_from_array(array('10', '25', '50', '100', '1000'), 'nres', $paging, 1));
 				$html_content .= html_e('input', array('type' => 'submit', 'name' => 'setpaging', 'value' => _('Change')));
 				$html_content .= $this->closeForm();
 			}
 		}
-		return $html_content;
+		return html_e('span', $htmlAttr, $html_content, false);
 	}
 
 	/**
@@ -1578,6 +1612,7 @@ if (isset($params['group']) && $params['group']) {
 	 * @param	integer	$paging		number of element per page
 	 * @param	integer	$totalElements	total number of Elements to display
 	 * @param	string	$actionUrl	next / prev Url to click
+	 * @return	string
 	 */
 	function paging_bottom($start = 0, $paging = 25, $totalElements = 0, $actionUrl = '/') {
 		$html_content = '';

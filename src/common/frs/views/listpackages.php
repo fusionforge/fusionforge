@@ -136,6 +136,25 @@ if (count($FRSPackages) < 1) {
 					echo html_e('div', array('class' => 'frs_release_name_version'), $release_title.html_e('span', array('class' => 'frs-zip-release'), $ziplink, false));
 				}
 
+				// display linked roadmaps if any
+				if ($g->usesTracker()) {
+					$linkedRoadmaps = $FRSPackageRelease->getLinkedRoadmaps();
+					if (count($linkedRoadmaps)) {
+						$urls = '';
+						foreach ($linkedRoadmaps as $linkedRoadmapID => $linkedRoadmap) {
+							$roadmapObject = new Roadmap($g, $linkedRoadmapID);
+							$rnum = 0;
+							foreach ($linkedRoadmap as $linkedRoadmapRelease) {
+								if ($rnum)
+									$urls .= ' || ';
+								$urls .= util_make_link('/tracker/roadmap.php?group_id='.$group_id.'&release='.urlencode($linkedRoadmapRelease), $roadmapObject->getName().' - '.$linkedRoadmapRelease);
+								$rnum++;
+							}
+						}
+						echo html_e('span', array(), html_e('b', array(), _('Linked Roadmaps')._(': ')).$urls, false);
+					}
+				}
+
 				// get the files in this release....
 				$res_files = $FRSPackageRelease->getFiles();
 				$num_files = count($FRSPackageRelease);

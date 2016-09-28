@@ -3,7 +3,7 @@
  * MantisBT plugin
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -27,7 +27,7 @@ global $mantisbt;
 global $type;
 global $idBug;
 
-echo $HTML->openForm(array('method' => 'post', 'action' => util_make_uri('/plugins/'.$mantisbt->name.'/?type='.$type.'&group_id='.$group_id.'&idBug='.$idBug.'&action=addAttachment&view=viewIssue'), 'enctype' => 'multipart/form-data'));
+echo $HTML->openForm(array('method' => 'post', 'action' => '/plugins/'.$mantisbt->name.'/?type='.$type.'&group_id='.$group_id.'&idBug='.$idBug.'&action=addAttachment&view=viewIssue', 'enctype' => 'multipart/form-data'));
 echo	'<table>';
 echo		'<tr><td>';
 echo		_('File')._(': ').'<input type="file" name="attachment" />';

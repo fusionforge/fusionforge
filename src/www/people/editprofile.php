@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002 (c) Silicon and Software Systems (S3)
- * Copyright 2010-2014, Franck Villaume - TrivialDev
+ * Copyright 2010-2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -31,6 +31,8 @@ require_once $gfwww.'people/skills_utils.php';
 if (!forge_get_config('use_people')) {
 	exit_disabled('home');
 }
+
+global $HTML;
 
 $group_id = getIntFromRequest('group_id');
 $job_id = getIntFromRequest('job_id');
@@ -149,13 +151,13 @@ if (session_loggedin()) {
 			} else	/* not confirmed multiedit */ {
 				people_header(array('title'=>_('Edit Skills')));
 				echo _('Change the required fields, and press “Done” at the bottom of the page');
-				echo '<form action="'.getStringFromServer('PHP_SELF').'" method="post">';
+				echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
 				echo '<input type="hidden" name="form_key" value="'.form_generate_key().'">';
 				handle_multi_edit($skill_edit);
 				echo '<input type="hidden" name="confirmMultiEdit" value="1" />';
 				echo '<input type="submit" name="MultiEdit" value="'._('Done').'" />';
 				echo '<input type="submit" name="cancelMultiEdit" value="'._('Cancel').'" />';
-				echo '</form>';
+				echo $HTML->closeForm();
 				people_footer();
 				return;
 			}
@@ -205,7 +207,7 @@ if (session_loggedin()) {
 					echo "<br />"._('This action cannot be undone.')."<br />";
 					echo _('Are you <strong>sure</strong> you wish to continue?');
 
-					echo '<form action="'.getStringFromServer('PHP_SELF').'" method="post">';
+					echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
 					echo '<input type="hidden" name="form_key" value="'.form_generate_key().'">';
 					for($i = 0; $i < $rows; $i ++) {
 						echo '<input type="hidden" name="skill_delete[]" value="'.$skill_delete[$i].'">';
@@ -213,7 +215,7 @@ if (session_loggedin()) {
 					echo '<input type="hidden" name="confirmMultiDelete" value="1" />';
 					echo '<input type="submit" name="MultiDelete" value="'._('Confirm').'" />';
 					echo '<input type="submit" name="MultiDeleteCancel" value="'._('Cancel').'" />';
-					echo '</form>';
+					echo $HTML->closeForm();
 					people_footer();
 				}
 				return;
@@ -233,18 +235,17 @@ if (session_loggedin()) {
 		$error_msg .= _('No Such User')._(': ').db_error();
 	} else {
 
-		echo '
-		<h2>'._('Edit Public Permissions').'</h2>
-		<form action="'.getStringFromServer('PHP_SELF').'" method="post">
-		'._('The following option determines if others can see your skills. If they cannot, you can still enter your skills.').'
+		echo '<h2>'._('Edit Public Permissions').'</h2>';
+		echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
+		echo _('The following option determines if others can see your skills. If they cannot, you can still enter your skills.').'
 		<p>
 		<strong>'._('Publicly Viewable')._(':').'</strong><br />
 		<input type="hidden" name="form_key" value="'.form_generate_key().'">
 		<input type="radio" name="people_view_skills" value="0" '. ((db_result($result,0,'people_view_skills')==0)?'checked="checked"':'') .' /> <strong>'._('No').'</strong><br />
 		<input type="radio" name="people_view_skills" value="1" '. ((db_result($result,0,'people_view_skills')==1)?'checked="checked"':'') .' /> <strong>'._('Yes').'</strong></p>
 		<p>
-		<input type="submit" name="update_profile" value="'._('Update Permissions').'"></p>
-		</form>';
+		<input type="submit" name="update_profile" value="'._('Update Permissions').'"></p>';
+		echo $HTML->closeForm();
 
 		//now show the list of desired skills
 		//echo '<p>'.people_edit_skill_inventory( user_getid() );
@@ -271,8 +272,8 @@ if (session_loggedin()) {
 		echo '<h2>'._('Add a new skill').'</h2>';
 		echo _('You can enter new skills you have acquired here. Please enter the start and finish dates as accurately as possible.').'<br />'.
 			 '<span class="required-field">'._('All fields are required!').'</span>';
-		echo '<form action="'.getStringFromServer('PHP_SELF').'" method="post">';
-	   	echo' <input type="hidden" name="form_key" value="'.form_generate_key().'">';
+		echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
+		echo '<input type="hidden" name="form_key" value="'.form_generate_key().'">';
 		$cell_data = array();
 		$cell_data[] = array(_('Type'));
 		$cell_data[] = array(_('Start Date'));
@@ -309,19 +310,16 @@ if (session_loggedin()) {
 			</tr>
 			</table>';
 
-		echo '</form>';
+		echo $HTML->closeForm();
 
-		echo '<h2>'._('Edit/Delete Your Skills').'</h2>
-		<table class="fullwidth">';
-		echo '<form action="'.getStringFromServer('PHP_SELF').'" method="post">';
+		echo '<h2>'._('Edit/Delete Your Skills').'</h2>';
+		echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
+		echo '<table class="fullwidth">';
 		displayUserSkills(user_getid(), 1);
-		echo '</form>';
 		echo '</table>';
-
+		echo $HTML->closeForm();
 	}
-
 	people_footer();
-
 } else {
 	/*
 		Not logged in

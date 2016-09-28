@@ -42,5 +42,5 @@ if (!empty($nameCategory)) {
 	$feedback = _('Category added successfully');
 	session_redirect('/plugins/'.$mantisbt->name.'/?type=admin&group_id='.$group_id);
 }
-$warning_msg = _('Missing category name');
+$warning_msg = _('Missing category name.');
 session_redirect('/plugins/'.$mantisbt->name.'/?type=admin&group_id='.$group_id);

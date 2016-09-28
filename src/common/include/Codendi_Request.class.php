@@ -36,10 +36,7 @@
 	 */
 	var $params;
 
-	/**
-	 * Constructor
-	 */
-	function Codendi_Request($params) {
+	function __construct($params) {
 		$this->params = $params;
 		$this->_validated_input = array();
 		$this->_last_access_to_input = array();

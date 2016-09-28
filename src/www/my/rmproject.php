@@ -6,6 +6,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2014, Stéphane-Eymeric Bredthauer
+ * Copyright 2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -25,6 +26,8 @@
 
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
+
+global $HTML;
 
 if (!session_loggedin()) {
 	exit_not_logged_in();
@@ -82,17 +85,18 @@ echo html_ao('table');
 echo html_ao('tr');
 echo html_ao('td');
 
-echo html_ao('form', array('action' => util_make_uri('/my/rmproject.php'), 'method' => 'post'));
+echo $HTML->openForm(array('action' => '/my/rmproject.php', 'method' => 'post'));
 echo html_e('input',array('type' => 'hidden', 'name' => 'confirm', 'value' => '1'));
 echo html_e('input',array('type' => 'hidden', 'name' => 'group_id', 'value' => $group_id));
 echo html_e('input',array('type' => 'submit', 'value' => _('Remove')));
-echo html_ac(html_ap()-2);
+echo $HTML->closeForm();
+echo html_ac(html_ap()-1);
 
 echo html_ao('td');
-
-echo html_ao('form', array('action' => util_make_uri('/my/'), 'method' => 'get'));
+echo $HTML->openForm(array('action' => '/my/', 'method' => 'get'));
 echo html_e('input',array('type' => 'submit', 'value' => _('Cancel')));
-echo html_ac(html_ap()-4);
+echo $HTML->closeForm();
+echo html_ac(html_ap()-3);
 
 site_user_footer();
 

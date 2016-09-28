@@ -1,10 +1,6 @@
 FusionForge 6.X:
-* Accounts: minimum password length is now 8
-* Spellcheck (Anders Jonsson)
-* Site Admin: add paging system in userlist page [#799] (TrivialDev)
-* Site Admin: support widgets for forge home page (TrivialDev)
-* Projects Page: add paging system in full_list and tag_cloud subpages (TrivialDev)
-* SearchEngine: support only FTI queries (TrivialDev)
+* Accounts: minimum password length is now 8 (Sylvain Beucler)
+* Accounts: add minimal constraints to password (upper-case, lower-case, non-alphanumeric check) [#826] (Inria)
 * Docman: limit number of returned documents on search query. Use paging system [#794] (TrivialDev)
 * Docman: limit search using from & to dates [#798] (TrivialDev)
 * Docman: use standard search engine: unify results between 'search in project' & search in the docs tab (TrivialDev)
@@ -12,9 +8,44 @@ FusionForge 6.X:
 * Docman: searchengine: add edit file action on result. (TrivialDev)
 * Docman: notify users on document. (TrivialDev)
 * Docman: support private directory. (TrivialDev)
+* Docman: support document versioning. (TrivialDev)
+* Docman: support cross ref. forum, documents, task or artifact. (TrivialDev)
+* FRS: link package release to tracker roadmap. (TrivialDev)
+* Layout: new dynamic quickNav menu: based on user activity to select 5 more visited projects (TrivialDev)
 * Plugin AuthBuiltin: add captcha after 3 attempts with the same login [#795] (TrivialDev)
+* Plugin AuthLDAP: support X_FORWARD_USER to delegate authentication and then retry user from LDAP (TrivialDev)
+* Projects Page: add paging system in full_list and tag_cloud subpages (TrivialDev)
+* SearchEngine: support only FTI queries (TrivialDev)
+* Search: index project tags and use them for search (Roland Mas)
+* Search: provide language-specific settings for better indexation/search (Roland Mas)
+* Site Admin: add paging system in userlist page [#799] (TrivialDev)
+* Site Admin: support widgets for forge home page (TrivialDev)
+* Spellcheck (Anders Jonsson)
+* Taskboard: support multiple taskboards per project [#785] (TrivialDev)
+* Taskboard: support filtering tasks [#786] (TrivialDev)
+* Tracker: keep values in artifact new submit form on error. (TrivialDev)
+* Tracker: add new extrafield: text regex (TrivialDev)
+* Tracker: add new extrafield: User (TrivialDev)
+* Tracker: add support for mandatory fields on workflow of artifact (TrivialDev)
+* Tracker: add support for description on extrafield to be used in tooltip (TrivialDev)
+* Tracker: fix extrafield cloning when not using default template fusionforge project [#829] (TrivialDev)
+* Tracker: add support for autoassign [#151] & [#149] (TrivialDev)
+* Utils: cross ref document. Use [DNNN] where NNN is the ID of the document. (TrivialDev)
+* Web UI: upgrade splitter jquery plugin to 0.20.0 (TrivialDev)
+* Web UI: upgrade jquery ui to 1.12.1 (TrivialDev)
+* Web UI: upgrade jquery to 1.12.4 (Nokia)
 * Widget MySystasks: new widget for user to display systasks perform on user projects (TrivialDev)
 * Widget ProjectScmStats: new widget for project to display SCM stats (TrivialDev)
+
+FusionForge 6.0.5:
+* Plugin SCM SVN: fix activity when SVN repository is private [#813] (TrivialDev)
+* Plugin SCM Git: fix activity when Git repository is private [#825] (TrivialDev)
+* Plugin MoinMoin: fix httpd permissions & 404 on CentOS [#809] (TrivialDev)
+* Project Task: fix CSV import [#823] (Peter Katzmann)
+* Project Task: fix CSV import [#823]: add missing translation, add missing category in no header import,
+                fix start/end date format description (TrivialDev)
+* Tracker: fix artifact deletion with votes [#819] (TrivialDev)
+* Tracker: fix downloadcsv missing vote values [#828] (TrivialDev)
 
 FusionForge 6.0.4:
 * Account Management System: fix sysCreateUser for UNIX: unix_gid dropped (TrivialDev)
@@ -29,7 +60,7 @@ FusionForge 6.0.4:
 * FRS: frs latest zip migration script hardening (TrivialDev)
 * MTA-Exim4: restart exim4 on install
 * News: pending site news e-mail reminder: properly filter out private projects (Inria)
-* Plugin cvstracker: fix permission issues 
+* Plugin cvstracker: fix permission issues
 * Plugin SCM: fix another race condition when creating project with SCM selected (Inria)
 * Plugin SCM Git: improve user matching when computing stats, support git .mailmap (Inria)
 * Plugin SCM Git: fix history browsing. Merge Patch from Sieu Truc [#802] (TrivialDev)

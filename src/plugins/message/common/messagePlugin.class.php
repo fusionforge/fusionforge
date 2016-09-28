@@ -29,8 +29,8 @@
 class messagePlugin extends Plugin {
 
 	function __construct() {
-		$this->Plugin() ;
-		$this->name = "message" ;
+		parent::__construct();
+		$this->name = "message";
 		$this->text = _('Message');
 		$this->pkg_desc =
 _("This plugin allows the site administrator to display a message banner

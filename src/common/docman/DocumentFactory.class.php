@@ -1,6 +1,6 @@
 <?php
 /**
- * FusionForge document manager
+ * FusionForge Documentation Manager
  *
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
@@ -95,17 +95,13 @@ class DocumentFactory extends FFError {
 	var $validdocumentgroups = array();
 
 	/**
-	 * Constructor.
-	 *
 	 * @param	$Group
 	 * @internal	param	\The $object Group object to which this DocumentFactory is associated.
-	 * @return	\DocumentFactory
-	 * @access	public
 	 */
 	function __construct(&$Group) {
 		parent::__construct();
 		if (!$Group || !is_object($Group)) {
-			$this->setError(_('No Valid Group Object'));
+			$this->setError(_('Invalid Project'));
 			return;
 		}
 
@@ -305,7 +301,7 @@ class DocumentFactory extends FFError {
 	 * @return	array	Document objects.
 	 * @access	public
 	 */
-	function &getDocuments($nocache = 0) {
+	function getDocuments($nocache = 0) {
 		if (!$this->Documents || $nocache) {
 			$this->getFromStorage();
 		}
@@ -333,8 +329,7 @@ class DocumentFactory extends FFError {
 
 		if (count($return) === 0) {
 			$this->setError(_('No Documents Found'));
-			$return = NULL;
-			return $return;
+			return NULL;
 		}
 
 		return $return;

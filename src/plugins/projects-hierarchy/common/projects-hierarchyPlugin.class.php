@@ -26,7 +26,7 @@
 
 class projects_hierarchyPlugin extends Plugin {
 	function __construct() {
-		$this->Plugin();
+		parent::__construct();
 		$this->name = 'projects-hierarchy';
 		$this->text = _('Project Hierarchy'); // To show in the tabs, use...
 		$this->pkg_desc =

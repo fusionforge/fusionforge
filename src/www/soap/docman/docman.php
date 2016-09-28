@@ -164,7 +164,7 @@ $server->register(
 //
 //getDocumentStates
 //
-function &getDocumentStates($session_ser) {
+function getDocumentStates($session_ser) {
 	continue_session($session_ser);
 	$return = array();
 
@@ -212,7 +212,7 @@ $server->register(
 	$uri,$uri.'#addDocument','rpc','encoded'
 );
 
-function &addDocument($session_ser,$group_id,$doc_group,$title,$description,$base64_contents,$filename,$file_url) {
+function addDocument($session_ser,$group_id,$doc_group,$title,$description,$base64_contents,$filename,$file_url) {
 	continue_session($session_ser);
 
 	$g = group_get_object($group_id);
@@ -270,7 +270,7 @@ $server->register(
 //
 //updateDocument
 //
-function &updateDocument($session_ser,$group_id,$doc_group,$doc_id,$title,$description, $base64_contents,$filename,$file_url,$state_id) {
+function updateDocument($session_ser,$group_id,$doc_group,$doc_id,$title,$description, $base64_contents,$filename,$file_url,$state_id) {
 	continue_session($session_ser);
 
 	$g = group_get_object($group_id);
@@ -352,7 +352,7 @@ $server->register(
 //
 // addDocumentGroup
 //
-function &addDocumentGroup($session_ser,$group_id,$groupname,$parent_doc_group) {
+function addDocumentGroup($session_ser,$group_id,$groupname,$parent_doc_group) {
 	continue_session($session_ser);
 
 	$g = group_get_object($group_id);
@@ -394,7 +394,7 @@ $server->register(
 //
 // updateDocumentGroup
 //
-function &updateDocumentGroup($session_ser, $group_id, $doc_group, $new_groupname, $new_parent_doc_group) {
+function updateDocumentGroup($session_ser, $group_id, $doc_group, $new_groupname, $new_parent_doc_group) {
 	continue_session($session_ser);
 
 	$g = group_get_object($group_id);
@@ -435,7 +435,7 @@ $server->register(
 //	getDocuments
 //
 
-function &getDocuments($session_ser,$group_id,$doc_group_id) {
+function getDocuments($session_ser,$group_id,$doc_group_id) {
 	continue_session($session_ser);
 	$g = group_get_object($group_id);
 	if (!$g || !is_object($g)) {
@@ -500,7 +500,7 @@ $server->register(
 //
 //getDocumentGroups
 //
-function &getDocumentGroups($session_ser,$group_id) {
+function getDocumentGroups($session_ser,$group_id) {
 	continue_session($session_ser);
 	$g = group_get_object($group_id);
 	if (!$g || !is_object($g)) {
@@ -556,7 +556,7 @@ $server->register(
 //
 //getDocumentGroup
 //
-function &getDocumentGroup($session_ser,$group_id,$doc_group) {
+function getDocumentGroup($session_ser,$group_id,$doc_group) {
 	continue_session($session_ser);
 	$g = group_get_object($group_id);
 	if (!$g || !is_object($g)) {
@@ -596,7 +596,7 @@ $server->register(
 ///
 /// getDocumentFiles
 ///
-function &getDocumentFiles($session_ser,$group_id,$doc_id) {
+function getDocumentFiles($session_ser,$group_id,$doc_id) {
 	continue_session($session_ser);
 	$g = group_get_object($group_id);
 	if (!$g || !is_object($g)) {

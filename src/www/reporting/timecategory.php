@@ -4,6 +4,7 @@
  *
  * Copyright 2003-2004 (c) GForge LLC
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -82,7 +83,7 @@ echo $HTML->listTableBottom();
 <p>
 <?php echo _('You can create categories for how time might be spent when completing a particular task. Examples of categories include “Meeting”, “Coding”, “Testing”.'); ?>
 </p>
-<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
+<?php echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post')); ?>
 <p>
 <input type="hidden" name="submit" value="1" />
 <input type="hidden" name="time_code" value="<?php echo $time_code; ?>" />
@@ -103,9 +104,8 @@ if ($time_code) {
 
 ?>
 </p>
-</form>
-
 <?php
+echo $HTML->closeForm();
 
 report_footer();
 

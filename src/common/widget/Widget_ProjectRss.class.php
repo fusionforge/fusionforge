@@ -29,9 +29,9 @@ require_once 'Widget.class.php';
 *
 */
 class Widget_ProjectRss extends Widget_Rss {
-	function Widget_ProjectRss() {
+	function __construct() {
 		$request =& HTTPRequest::instance();
-		$this->Widget_Rss('projectrss', $request->get('group_id'), WidgetLayoutManager::OWNER_TYPE_GROUP);
+		parent::__construct('projectrss', $request->get('group_id'), WidgetLayoutManager::OWNER_TYPE_GROUP);
 	}
 	function canBeUsedByProject(&$project) {
 		return true;

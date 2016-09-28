@@ -2,6 +2,7 @@
 /**
  * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
  * Copyright 2015, Franck Villaume - TrivialDev
+ * Copyright 2016, Stéphane-Eymeric Bredtthauer - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -22,7 +23,8 @@
 
 global $group_id, $group, $pluginTaskboard;
 session_require_perm('tracker_admin', $group_id);
-$taskboard = new TaskBoardHtml($group);
+$taskboard_id = getStringFromRequest('taskboard_id', '');
+$taskboard = new TaskBoardHtml($group,$taskboard_id);
 
 if (getStringFromRequest('post_changes')) {
 	$column_title = getStringFromRequest('column_title', '');
@@ -48,4 +50,4 @@ if (getStringFromRequest('post_changes')) {
 	}
 }
 
-session_redirect('/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&view=columns');
+session_redirect('/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&taskboard_id='.$taskboard_id.'&view=columns', false);

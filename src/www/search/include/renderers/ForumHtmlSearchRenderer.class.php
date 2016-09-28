@@ -35,20 +35,18 @@ class ForumHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	var $forumId;
 
 	/**
-	 * Constructor
-	 *
 	 * @param string $words words we are searching for
 	 * @param int $offset offset
 	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
 	 * @param int $groupId group id
 	 * @param int $forumId forum id
 	 */
-	function ForumHtmlSearchRenderer($words, $offset, $isExact, $groupId, $forumId) {
+	function __construct($words, $offset, $isExact, $groupId, $forumId) {
 		$this->forumId = $forumId;
 
 		$searchQuery = new ForumSearchQuery($words, $offset, $isExact, $groupId, $forumId);
 
-		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_FORUM, $words, $isExact, $searchQuery, $groupId, 'forums');
+		parent::__construct(SEARCH__TYPE_IS_FORUM, $words, $isExact, $searchQuery, $groupId, 'forums');
 
 		$this->tableHeaders = array(
 			_('Thread'),
@@ -71,10 +69,10 @@ class ForumHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$i = 0;
 		foreach ($result as $row) {
 			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td class="halfwidth"><a href="'.util_make_url ('/forum/message.php?msg_id=' . $row['msg_id']).'">'
-				. html_image('ic/msg.png', '10', '12')
+				. html_image('ic/msg.png', 10, 12)
 				. ' '.$row['subject'].'</a></td>'
-				. '<td width="30%">'.$row['realname'].'</td>'
-				. '<td width="20%">'.date($dateFormat, $row['post_date']).'</td></tr>';
+				. '<td style="width: 30%">'.$row['realname'].'</td>'
+				. '<td style="width: 20%">'.date($dateFormat, $row['post_date']).'</td></tr>';
 			$i++;
 		}
 		return $return;

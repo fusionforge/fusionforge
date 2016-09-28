@@ -87,20 +87,17 @@ class ProjectGroup extends FFError {
 	var $technicians;
 
 	/**
-	 * Constructor.
-	 *
 	 * @param	$Group
 	 * @param	bool	$group_project_id
 	 * @param	bool	$arr
 	 * @internal	param	\The $object Group object to which this forum is associated.
 	 * @internal	param	\The $int group_project_id.
 	 * @internal	param	\The $array associative array of data.
-	 * @return	\ProjectGroup
 	 */
-	function ProjectGroup(&$Group, $group_project_id = false, $arr = false) {
+	function __construct(&$Group, $group_project_id = false, $arr = false) {
 		parent::__construct();
 		if (!$Group || !is_object($Group)) {
-			$this->setError(_('No Valid Group Object'));
+			$this->setError(_('Invalid Project'));
 			return;
 		}
 		if ($Group->isError()) {
@@ -164,7 +161,7 @@ class ProjectGroup extends FFError {
 
 		db_begin();
 		$result = db_query_params('INSERT INTO project_group_list (group_id,project_name,description,send_all_posts_to) VALUES ($1,$2,$3,$4)',
-					  array($this->Group->getId(),
+					  array($this->Group->getID(),
 						htmlspecialchars($project_name),
 						htmlspecialchars($description),
 						$send_all_posts_to));

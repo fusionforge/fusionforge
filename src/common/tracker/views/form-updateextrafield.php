@@ -4,6 +4,7 @@
  *
  * Copyright 2010 (c) FusionForge Team
  * Copyright 2014-2015, Franck Villaume - TrivialDev
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -31,7 +32,7 @@ global $HTML;
 	Allow modification of a artifact Selection Box
 */
 $title = sprintf(_('Modify a custom field in %s'),$ath->getName());
-$ath->adminHeader(array('title'=>$title));
+$ath->adminHeader(array('title'=>$title, 'modal'=>1));
 
 $id = getStringFromRequest('id');
 $ac = new ArtifactExtraField($ath,$id);
@@ -40,76 +41,123 @@ if (!$ac || !is_object($ac)) {
 } elseif ($ac->isError()) {
 	$error_msg .= $ac->getErrorMessage();
 } else {
-	?>
-	<p>
-	<strong><?php echo _('Type of custom field')._(': ').$ac->getTypeName(); ?></strong></p>
-	<?php
+	echo html_ao('p');
+	echo html_e('strong', array(), _('Type of custom field')._(': ').$ac->getTypeName());
+	echo html_ac(html_ap() - 1);
 	echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&id='.$id.'&atid='.$ath->getID(), 'method' => 'post'));
-	?>
-	<input type="hidden" name="update_box" value="y" />
-	<input type="hidden" name="id" value="<?php echo $ac->getID(); ?>" />
-	<p>
-		<label for="name">
-		<strong><?php echo _('Custom Field Name')._(':'); ?></strong><br />
-		</label>
-		<input id="name" type="text" name="name" value="<?php echo $ac->getName(); ?>" required="required" />
-	</p>
-	<p>
-		<?php if ($ac->getType() == ARTIFACT_EXTRAFIELDTYPE_TEXTAREA) { ?>
-		<label for="attribute1">
-		<b><?php echo _('Text Area Rows'); ?></b><br />
-		</label>
-		<input id="attribute1" type="text" name="attribute1" value="<?php echo $ac->getAttribute1(); ?>" size="2" maxlength="2" />
-	</p>
-	<p>
-		<label for="attribute2">
-		<b><?php echo _('Text Area Columns'); ?></b><br />
-		</label>
-		<input id="attribute2" type="text" name="attribute2" value="<?php echo $ac->getAttribute2(); ?>" size="2" maxlength="2" />
-		<?php } elseif ($ac->getType() == ARTIFACT_EXTRAFIELDTYPE_TEXT ||
-					$ac->getType() == ARTIFACT_EXTRAFIELDTYPE_RELATION) {?>
-		<label for="attribute1">
-		<b><?php echo _('Text Field Size'); ?></b><br />
-		</label>
-		<input id="attribute1" type="text" name="attribute1" value="<?php echo $ac->getAttribute1(); ?>" size="2" maxlength="2" />
-		</p>
-		<p>
-		<label for="attribute2">
-		<b><?php echo _('Text Field Maxlength'); ?></b><br />
-		<input id="attribute2" type="text" name="attribute2" value="<?php echo $ac->getAttribute2(); ?>" size="2" maxlength="2" />
-		<?php } else { ?>
-		<input type="hidden" name="attribute1" value="0" />
-		<input type="hidden" name="attribute2" value="0" />
-		<label for="hide100">
-		<b><?php echo _('Hide the default none value'); ?></b><br />
-		</label>
-		<input type="checkbox" name="hide100" <?php if (!$ac->getShow100()) { echo 'checked="checked" '; } ?>/>
-		</p>
-		<p>
-		<label for="show100label">
-		<b><?php echo _('Label for the none value'); ?></b><br />
-		<input type="text" name="show100label" size="30" value="<?php $ac->getShow100label() ?>" />
-		</p>
-		<?php } ?>
-	</p>
-	<p>
-		<label for="alias">
-		<strong><?php echo _('Field alias')._(':'); ?></strong><br />
-		</label>
-		<input id="alias" type="text" name="alias" value="<?php echo $ac->getAlias(); ?>" />
-	</p>
-	<p><input id="is_required" type="checkbox" name="is_required" <?php if ($ac->isRequired()) echo 'checked="checked"'; ?> />
-	<?php echo _('Field is mandatory')?></p>
-	<label for="is_required">
-	<?php
+
+	echo html_e('input', array('type'=>'hidden', 'name'=>'update_box', 'value'=>'y'));
+	echo html_e('input', array('type'=>'hidden', 'name'=>'id', 'value'=> $ac->getID()));
+
+	echo html_ao('p');
+	echo html_e('label', array('for'=>'name'), html_e('strong', array(), _('Custom Field Name')._(':')).html_e('br'));
+	echo html_e('input', array('type'=>'text', 'id'=>'name', 'name'=>'name', 'value'=>$ac->getName(), 'size'=>'15', 'maxlength'=>'30', 'required'=>'required'));
+	echo html_ac(html_ap() - 1);
+
+	echo html_ao('p');
+	echo html_e('label', array('for'=>'alias'), html_e('strong', array(), _('Field alias')._(':')).html_e('br'));
+	echo html_e('input', array('type'=>'text', 'id'=>'alias', 'name'=>'alias', 'value'=>$ac->getAlias(), 'size'=>'15', 'maxlength'=>'30'));
+	echo html_ac(html_ap() - 1);
+
+	echo html_ao('p');
+	echo html_e('label', array('for'=>'description'), html_e('strong', array(), _('Description')._(':')).html_e('br'));
+	echo html_e('input', array('type'=>'text', 'name'=>'description', 'value'=>$ac->getDescription(), 'size'=>'50', 'maxlength'=>'255'));
+	echo html_ac(html_ap() - 1);
+
+	echo html_ao('p');
+	echo html_build_checkbox('is_disabled', false, $ac->is_disabled());
+	echo html_e('label', array('for'=>'is_disabled'), _('Field is disabled'));
+	echo html_ac(html_ap() - 1);
+
+	echo html_ao('p');
+	echo html_build_checkbox('is_required', false, $ac->isRequired());
+	echo html_e('label', array('for'=>'is_required'), _('Field is mandatory'));
+	echo html_ac(html_ap() - 1);
+
+	echo html_ao('p');
+	echo html_build_checkbox('is_hidden_on_submit', false, $ac->is_hidden_on_submit());
+	echo html_e('label', array('for'=>'is_hidden_on_submit'), _('Hide this Field on a new submission'));
+	echo html_ac(html_ap() - 1);
+
+	$efType=$ac->getType();
+	if ($efType == ARTIFACT_EXTRAFIELDTYPE_TEXTAREA) {
+		echo html_ao('p');
+		echo html_e('label', array('for'=>'attribute1'), _('Rows'));
+		echo html_e('input', array('type'=>'text', 'id'=>'attribute1', 'name'=>'attribute1', 'value'=>$ac->getAttribute1(), 'size'=>'2', 'maxlength'=>'2'));
+		echo html_ac(html_ap() - 1);
+
+		echo html_ao('p');
+		echo html_e('label', array('for'=>'attribute2'), _('Columns'));
+		echo html_e('input', array('type'=>'text', 'id'=>'attribute2', 'name'=>'attribute2', 'value'=>$ac->getAttribute2(), 'size'=>'2', 'maxlength'=>'2'));
+		echo html_ac(html_ap() - 1);
+
+	} elseif ($efType == ARTIFACT_EXTRAFIELDTYPE_TEXT || $efType == ARTIFACT_EXTRAFIELDTYPE_INTEGER || $efType == ARTIFACT_EXTRAFIELDTYPE_RELATION) {
+		echo html_ao('p');
+		echo html_e('label', array('for'=>'attribute1'), _('Size'));
+		echo html_e('input', array('type'=>'text', 'id'=>'attribute1', 'name'=>'attribute1', 'value'=>$ac->getAttribute1(), 'size'=>'2', 'maxlength'=>'2'));
+		echo html_ac(html_ap() - 1);
+
+		echo html_ao('p');
+		echo html_e('label', array('for'=>'attribute2'), _('Maxlength'));
+		echo html_e('input', array('type'=>'text', 'id'=>'attribute2', 'name'=>'attribute2', 'value'=>$ac->getAttribute2(), 'size'=>'2', 'maxlength'=>'2'));
+		echo html_ac(html_ap() - 1);
+	} else {
+		echo html_e('input', array('type'=>'hidden', 'name'=>'attribute1', 'value'=>'0'));
+		echo html_e('input', array('type'=>'hidden', 'name'=>'attribute2', 'value'=>'0'));
+		}
+	if ($efType == ARTIFACT_EXTRAFIELDTYPE_TEXT) {
+		echo html_ao('p');
+		echo html_e('label', array('for'=>'pattern'), _('Pattern'));
+		echo html_e('input', array('type'=>'text', 'id'=>'pattern', 'name'=>'pattern', 'value'=>$ac->getPattern(), 'size'=>'50', 'maxlength'=>'255'));
+		echo html_ac(html_ap() - 1);
+	} else {
+		echo html_e('input', array('type'=>'hidden', 'name'=>'pattern', 'value'=>''));
+	}
+	if (in_array($efType, array(ARTIFACT_EXTRAFIELDTYPE_RADIO, ARTIFACT_EXTRAFIELDTYPE_CHECKBOX,ARTIFACT_EXTRAFIELDTYPE_SELECT,ARTIFACT_EXTRAFIELDTYPE_MULTISELECT))) {
+		echo html_ao('p');
+		echo html_build_checkbox('hide100', false, !$ac->getShow100());
+		echo html_e('label', array('for'=>'hide100'), _('Hide the default none value'));
+		echo html_ac(html_ap() - 1);
+
+		echo html_ao('p');
+		echo html_e('label', array('for'=>'show100label'), html_e('b', array(), _('Label for the none value')).html_e('br'));
+		echo html_e('input', array('type'=>'text', 'name'=>'show100label', 'value'=>$ac->getShow100label(), 'size'=>'30'));
+		echo html_ac(html_ap() - 1);
+
+		$pfarr = $ath->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_RADIO, ARTIFACT_EXTRAFIELDTYPE_CHECKBOX,ARTIFACT_EXTRAFIELDTYPE_SELECT,ARTIFACT_EXTRAFIELDTYPE_MULTISELECT));
+		$parentField = array();
+		$progenyField = $ac->getProgeny();
+		if (is_array($pfarr)) {
+			foreach ($pfarr as $pf) {
+				if ($pf['extra_field_id'] != $id && !in_array($pf['extra_field_id'], $progenyField))
+				$parentField[$pf['extra_field_id']] = $pf['field_name'];
+			}
+		}
+		asort($parentField,SORT_FLAG_CASE | SORT_STRING);
+		echo html_ao('p');
+		echo html_e('label', array('for'=>'parent'), html_e('strong', array(), _('Parent Field')._(':')).html_e('br'));
+		echo html_build_select_box_from_arrays(array_keys($parentField), array_values($parentField), 'parent', $ac->getParent(), true, 'none').html_e('br');
+		echo html_ac(html_ap() - 1);
+	} else {
+		echo html_e('input', array('type'=>'hidden', 'name'=>'hide100', 'value'=>0));
+		echo html_e('input', array('type'=>'hidden', 'name'=>'show100label', 'value'=>''));
+		echo html_e('input', array('type'=>'hidden', 'name'=>'parent', 'value'=>100));
+	}
+	if (in_array($efType, array(ARTIFACT_EXTRAFIELDTYPE_RADIO, ARTIFACT_EXTRAFIELDTYPE_SELECT))) {
+		echo html_ao('p');
+		echo html_build_checkbox('autoassign', false, $ac->isAutoAssign());
+		echo html_e('label', array('for'=>'autoassign'), _('Field that triggers auto-assignment rules'));
+		echo html_ac(html_ap() - 1);
+	} else {
+		echo html_e('input', array('type'=>'hidden', 'name'=>'autoassign', 'value'=>0));
+	}
+
+
 	echo $HTML->warning_msg(_('It is not recommended that you change the custom field name because other things are dependent upon it. When you change the custom field name, all related items will be changed to the new name.'));
-	?>
-	</label>
-	</p>
-	<p>
-	<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" />
-	</p>
-	<?php
+
+	echo html_ao('p');
+	echo html_e('input', array('type'=>'submit', 'name'=>'post_changes', 'value'=>_('Submit')));
+	echo html_ac(html_ap() - 1);
 	echo $HTML->closeForm();
 }
 

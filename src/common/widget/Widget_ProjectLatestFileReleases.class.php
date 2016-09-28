@@ -29,7 +29,7 @@ require_once $gfcommon.'frs/FRSReleaseFactory.class.php';
 class Widget_ProjectLatestFileReleases extends Widget {
 	var $content;
 	function __construct() {
-		$this->Widget('projectlatestfilereleases');
+		parent::__construct('projectlatestfilereleases');
 		$request =& HTTPRequest::instance();
 		$pm = ProjectManager::instance();
 		$project = $pm->getProject($request->get('group_id'));
@@ -44,7 +44,7 @@ class Widget_ProjectLatestFileReleases extends Widget {
 
 	function getContent() {
 		$result = '';
-		
+
 		$request =& HTTPRequest::instance();
 		$pm = ProjectManager::instance();
 		$group_id = $request->get('group_id');
@@ -72,7 +72,7 @@ class Widget_ProjectLatestFileReleases extends Widget {
 				$titleArr[] = _('Monitor');
 			}
 			$titleArr[] = _('Download');
-			use_javascript('/js/sortable.js');
+			html_use_tablesorter();
 			$result .= $HTML->getJavascripts();
 			$result .= $HTML->listTableTop($titleArr, false, 'sortable_widget_frs_listpackage full', 'sortable');
 			foreach ($frsrnrs as $key => $frsrnr) {

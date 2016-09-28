@@ -4,6 +4,7 @@
  *
  * Copyright 2004 (c) GForge LLC - Tim Perdue
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -26,6 +27,8 @@ require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'reporting/report_utils.php';
 require_once $gfcommon.'reporting/Report.class.php';
+
+global $HTML;
 
 if (!session_loggedin()) {
 	exit_not_logged_in();
@@ -109,7 +112,7 @@ if ($week) {
 			$project_ids[] = $p->getID() ;
 		}
 
-		$respm = db_query_params ('SELECT pgl.group_project_id,g.group_name || $1 || pgl.project_name
+		$respm = db_query_params('SELECT pgl.group_project_id,g.group_name || $1 || pgl.project_name
 		FROM groups g, project_group_list pgl
 		WHERE g.group_id=ANY($2)
 		AND g.group_id=pgl.group_id
@@ -154,14 +157,14 @@ if ($week) {
 				<td class="align-center">'. date( 'D, M d, Y',$r['report_date']) .'</td>
 				<td class="align-center"><!-- <input type="text" name="hours" value="'. $r['hours'] .'" size="3" maxlength="3" /> -->'.$r['hours'].'</td>
 				<td class="align-center"><!-- '.report_time_category_box('time_code',$r['time_code']).' -->'.$r['category_name'].'</td>
-				<td class="align-center"><!-- <input type="submit" name="update" value="Update" /> -->
-				<form action="'.getStringFromServer('PHP_SELF').'?week='.$week.'&amp;project_task_id='.$r['project_task_id'].'" method="post">
-				<input type="hidden" name="submit" value="1" />
+				<td class="align-center"><!-- <input type="submit" name="update" value="Update" /> -->';
+			echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF').'?week='.$week.'&project_task_id='.$r['project_task_id'], 'method' => 'post')).
+				'<input type="hidden" name="submit" value="1" />
 				<input type="hidden" name="report_date" value="'.$r['report_date'] .'" />
 				<input type="hidden" name="old_time_code" value="'.$r['time_code'] .'" />
 				<input type="hidden" name="hours" value="'.$r['hours'].'" />
-				<input type="submit" name="delete" value="'. _('Delete').'" />
-				</form>
+				<input type="submit" name="delete" value="'. _('Delete').'" />';
+			echo $HTML->closeForm().'
 				</td>
 			</tr>';
 			$total_hours += $r['hours'];
@@ -171,8 +174,8 @@ if ($week) {
 			$respt=db_query_params ('SELECT project_task_id,summary FROM project_task WHERE group_project_id=$1',
 			array($group_project_id));
 
-			echo '<form action="'.getStringFromServer('PHP_SELF').'?week='.$week.'" method="post">
-			<input type="hidden" name="submit" value="1" />
+			echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF').'?week='.$week, 'method' => 'post'));
+			echo '<input type="hidden" name="submit" value="1" />
 			<input type="hidden" name="week" value="'.$week.'" />
 			<tr '.$HTML->boxGetAltRowStyle($xi++).'>
 				<td class="align-center">'. html_build_select_box ($respt,'project_task_id',false,false) .'</td>
@@ -180,8 +183,9 @@ if ($week) {
 				<td class="align-center"><input type="text" name="hours" value="" size="3" maxlength="3" /></td>
 				<td class="align-center">'.report_time_category_box('time_code',false).'</td>
 				<td class="align-center"><input type="submit" name="add" value="'.
-		_('Add').'" /><input type="submit" name="cancel" value="'._('Cancel').'" /></td>
-			</tr></form>';
+					_('Add').'" /><input type="submit" name="cancel" value="'._('Cancel').'" /></td>
+			</tr>';
+			echo $HTML->closeForm();
 		}
 		if (!isset($total_hours)) $total_hours = '';
 		echo '<tr '.$HTML->boxGetAltRowStyle($xi++).'><td colspan="2"><strong>'._('Total Hours')._(':').'</strong></td>';
@@ -192,7 +196,7 @@ if ($week) {
 		?>
 <h2><?php echo _('Add Entry'); ?></h2>
 <p><?php echo _('Choose a Project/Subproject in the Tasks. You will then have to choose a Task and category to record your time in.'); ?></p>
-<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
+<?php echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'get')); ?>
 <input type="hidden" name="week" value="<?php echo $week; ?>" />
 <table>
 	<tr>
@@ -202,15 +206,15 @@ if ($week) {
 			value="<?php echo _('Next'); ?>" /></td>
 	</tr>
 </table>
-</form>
+<?php echo $HTML->closeForm(); ?>
 
 <h2><?php echo _('Change Week') ?></h2>
 
-<form action="<?php echo getStringFromServer('PHP_SELF'); ?>"
+<?php echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'))); ?>
 	method="get"><?php echo report_weeks_box($report,'week'); ?><input
 	type="submit" name="submit" value="<?php echo _('Change Week'); ?>" />
-</form>
 		<?php
+		echo $HTML->closeForm();
 	}
 	//
 	//	First Choose A Week to add/update/delete time sheet info
@@ -223,14 +227,12 @@ if ($week) {
 <h2><?php echo _('Choose A Week to Record Or Edit Your Time.'); ?></h2>
 
 <p><?php echo _("After you choose a week, you will be prompted to choose a Project/Subproject in the Tasks."); ?></p>
-<form action="<?php echo getStringFromServer('PHP_SELF'); ?>"
-	method="get">
+<?php echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'get')); ?>
 <p><strong><?php echo _('Week Starting')._(':'); ?></strong></p>
 	<?php echo report_weeks_box($report,'week'); ?>
 <p><input type="submit" name="submit" value="<?php echo _('Next'); ?>" /></p>
-</form>
 	<?php
-
+	echo $HTML->closeForm();
 }
 
 report_footer();

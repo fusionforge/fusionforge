@@ -40,6 +40,10 @@ figcaption {
 	text-align: center;
 }
 
+label {
+	font-weight: normal;
+}
+
 /* From old gforge-compat */
 .altrowstyleeven,
 .even {
@@ -213,6 +217,9 @@ td.toptab {
 .twothirdswidth {width: 66.66667%;}
 .onequarterwidth {width: 25%;}
 
+.packet_name {font-weight: bold;}
+.version_name {font-style: italic;}
+
 /* A table with two columns, first one right-aligned and bold */
 table.infotable tr { vertical-align: top; }
 table.infotable td:first-child {
@@ -220,6 +227,10 @@ table.infotable td:first-child {
 	padding-right: 4px;
 	text-align: right;
 	white-space: nowrap;
+}
+
+table.infotable td:first-child label {
+	font-weight: bold;
 }
 
 table.full {
@@ -1009,4 +1020,9 @@ table.boxed caption, table.bordered caption {
 table.boxed th, table.bordered th {
     font-weight: bold;
     background-color: #d8d8d8;
+}
+
+/* overwrite some css for splitter to avoid overlap with jquery modal panel */
+.vsplitter {
+	z-index: 100 !important;
 }

@@ -399,7 +399,7 @@ echo $HTML->closeForm();
 			echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($j++, true)), $cells);
 		}
 		if ($displayTableTop) {
-			echo $HTML->listTableBottom($theader);
+			echo $HTML->listTableBottom();
 		}
 		if (!$displayTableTop) {
 			echo $HTML->information(_('No Activity Found'));
