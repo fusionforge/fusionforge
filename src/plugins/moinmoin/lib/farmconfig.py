@@ -27,10 +27,10 @@ class FarmConfig(multiconfig.DefaultConfig):
     ff_host = fusionforge.FusionForgeLink(session_cookies).get_config('web_host')
     ff_url_prefix = forge_get_config('url_prefix')
     ff_port = ''
-    if forge_get_config('http_port'):
+    if forge_get_config('http_port') != '80':
         ff_port = forge_get_config('http_port')
     if forge_get_config('use_ssl'):
-        if forge_get_config('https_port'):
+        if forge_get_config('https_port') != '443':
             ff_port = forge_get_config('https_port')
     if ff_port != '':
         ff_port = ':' + ff_port
