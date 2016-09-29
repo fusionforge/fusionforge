@@ -183,7 +183,7 @@ printf(_('With PFO-RBAC, the “is_public” property is gone. Instead, to make 
 ?>
 <tr>
 <td>
-<?php echo _('Home Box:'); ?>
+<?php echo _('Home Box')._(':'); ?>
 </td>
 <td>
 <input type="text" name="form_box" value="<?php echo $group->getUnixBox(); ?>" />
@@ -193,7 +193,7 @@ printf(_('With PFO-RBAC, the “is_public” property is gone. Instead, to make 
 
 <tr>
 <td>
-<?php echo _('HTTP Domain:') ?>
+<?php echo _('HTTP Domain')._(':') ?>
 </td>
 <td>
 <input size="40" type="text" name="form_domain" value="<?php echo $group->getDomain(); ?>" />
@@ -202,7 +202,7 @@ printf(_('With PFO-RBAC, the “is_public” property is gone. Instead, to make 
 
 <tr>
 <td>
-<?php echo _('Registration Application:'); ?>
+<?php echo _('Registration Application')._(':'); ?>
 </td>
 <td>
 <?php echo $group->getRegistrationPurpose(); ?>
@@ -212,7 +212,7 @@ printf(_('With PFO-RBAC, the “is_public” property is gone. Instead, to make 
 if ($group->usesSCM()) {
 ?>
 <tr>
-	<td><?php echo _('SCM Box:'); ?></td>
+	<td><?php echo _('SCM Box')._(':'); ?></td>
 	<td><input size="40" type="text" name="form_scm_box" value="<?php echo $group->getSCMBox(); ?>"/></td>
 </tr>
 <?php
