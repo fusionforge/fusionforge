@@ -290,9 +290,12 @@ some control over it to the project's administrator.");
 				return false;
 			}
 			system ("sed -i '/enable-rep-sharing = false/s/^. //' $repo/db/fsfs.conf") ;
-			// dav/ directory is required by old svn clients (eg. svn 1.6.17 on ubuntu 12.04)
+			// dav/ and dav/activities.d directories are required by old svn clients (eg. svn 1.6.17 on ubuntu 12.04)
 			if (!is_dir ("$repo/dav")) {
 				mkdir("$repo/dav");
+			}
+			if (!is_dir ("$repo/dav/activities.d")) {
+				mkdir("$repo/dav/activities.d");
 			}
 			system ("svn mkdir -m'Init' file:///$repo/trunk file:///$repo/tags file:///$repo/branches >/dev/null") ;
 			system ("find $repo -type d -print0 | xargs -r -0 chmod g+s") ;
