@@ -26,9 +26,6 @@ require_once $gfcommon.'docman/Document.class.php';
 
 function util_gen_cross_ref ($text, $group_id) {
 
-	// Some important information.
-	$prj = group_getunixname ($group_id);
-
 	// Handle URL in links, replace them with hyperlinks.
 	$text = util_make_links($text);
 
@@ -39,7 +36,7 @@ function util_gen_cross_ref ($text, $group_id) {
 	$text = preg_replace_callback('/\[\T(\d+)\]/', create_function('$matches', 'return _taskid2url($matches[1],'.$group_id.');'), $text);
 
 	// Handle [wiki:<pagename>] syntax
-	$text = preg_replace_callback('/\[wiki:(.*?)\]/', create_function('$matches', 'return _page2url('.$prj.',$matches[1]);'), $text);
+	$text = preg_replace_callback('/\[wiki:(.*?)\]/', create_function('$matches', 'return _page2url('.$group_id.',$matches[1]);'), $text);
 
 	// Handle FusionForge [forum:<thread_id>] Syntax => links to forum.
 	$text = preg_replace_callback('/\[forum:(\d+)\]/', create_function('$matches', 'return _forumid2url($matches[1]);'), $text);
@@ -49,7 +46,8 @@ function util_gen_cross_ref ($text, $group_id) {
 	return $text;
 }
 
-function _page2url($prj,$page) {
+function _page2url($group_id,$page) {
+	$prj = group_getunixname ($group_id);
 	return util_make_link('/wiki/g/'.$prj.'/'.rawurlencode($page), $page);
 }
 
