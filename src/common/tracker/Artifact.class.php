@@ -196,15 +196,11 @@ class Artifact extends FFError {
 				$user = $importData['user'];
 		} else {
 			if (!forge_check_perm ('tracker',$this->ArtifactType->getID(),'submit')) {
-					$this->setError(_('You are not currently allowed to submit items to this tracker.'));
-					return false;
+				$this->setError(_('You are not currently allowed to submit items to this tracker.'));
+				return false;
 			}
 
-			if (session_loggedin()) {
-				$user=user_getid();
-			} else {
-				$user=100;
-			}
+			$user_id = ((session_loggedin()) ? user_getid() : 100);
 		}
 
 		//
@@ -838,11 +834,7 @@ class Artifact extends FFError {
 		if (array_key_exists('user', $importData)){
 			$user = $importData['user'];
 		} else {
-			if (!session_loggedin()) {
-				$user=100;
-			} else {
-				$user=user_getid();
-			}
+			$user_id = ((session_loggedin()) ? user_getid() : 100);
 		}
 		if (array_key_exists('time',$importData)){
 			$time = $importData['time'];
