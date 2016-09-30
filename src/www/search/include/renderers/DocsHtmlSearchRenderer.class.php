@@ -4,7 +4,7 @@
  *
  * Copyright 2004 (c) Dominik Haas, GForge Team
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013,2015 Franck Villaume - TrivialDev
+ * Copyright 2013,2015-2016 Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of National Education
  * http://fusionforge.org
  *
@@ -47,7 +47,9 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 
 		$this->tableHeaders = array(
 			_('Directory'),
-			_('&nbsp;'),
+			'&nbsp;',
+			_('Filename'),
+			_('Version'),
 			_('Title'),
 			_('Description'),
 			_('Actions')
@@ -122,10 +124,13 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			if ($document->isURL()) {
 				$cells[][] = util_make_link($document->getFileName(), html_image($document->getFileTypeImage(), 22, 22), array('title' => _('Visit this link')), true);
 			} else {
-				$cells[][] = util_make_link('/docman/view.php/'.$document->Group->getID().'/'.$document->getID().'/'.urlencode($document->getFileName()), html_image($document->getFileTypeImage(), 22, 22), array('title' => _('View this document')));
+				$cells[][] = util_make_link('/docman/view.php/'.$document->Group->getID().'/versions/'.$document->getID().'/'.$row['version'], html_image($document->getFileTypeImage(), 22, 22), array('title' => _('View this document')));
 			}
+			$cells[][] = $row['filename'];
+			$cells[][] = $row['version'];
 			$cells[][] = $row['title'];
-			$cells[][] = $row['description'];
+			// we call util_gen_cross_ref on top of row['description'] to keep the search engine mark
+			$cells[][] = util_gen_cross_ref($row['description'], $document->Group->getID());
 			if (forge_check_perm('docman', $document->Group->getID(), 'approve')) {
 				if (!$document->getLocked() && !$document->getReserved()) {
 					$cells[][] = util_make_link('/docman/?group_id='.$document->Group->getID().'&view=listfile&dirid='.$document->getDocGroupID().'&filedetailid='.$document->getID(), $HTML->getEditFilePic(_('Edit this document')), array('title' => _('Edit this document')));
