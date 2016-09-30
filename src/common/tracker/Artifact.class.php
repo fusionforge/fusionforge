@@ -200,7 +200,7 @@ class Artifact extends FFError {
 				return false;
 			}
 
-			$user_id = ((session_loggedin()) ? user_getid() : 100);
+			$user = ((session_loggedin()) ? user_getid() : 100);
 		}
 
 		//
@@ -834,7 +834,7 @@ class Artifact extends FFError {
 		if (array_key_exists('user', $importData)){
 			$user = $importData['user'];
 		} else {
-			$user_id = ((session_loggedin()) ? user_getid() : 100);
+			$user = ((session_loggedin()) ? user_getid() : 100);
 		}
 		if (array_key_exists('time',$importData)){
 			$time = $importData['time'];
