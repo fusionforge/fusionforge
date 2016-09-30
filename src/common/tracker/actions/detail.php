@@ -198,12 +198,13 @@ $nb = $count? ' ('.$count.')' : '';
 			<input type="file" name="input_file3" /><br />
 			<input type="file" name="input_file4" /><br />
 		<?php } ?>
-	<?php
+		<?php
 		//
 		// print a list of files attached to this Artifact
 		//
 			$ath->renderFiles($group_id, $ah);
 		?>
+		</td></tr>
 	</table>
 	</div>
 <?php
