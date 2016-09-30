@@ -179,8 +179,8 @@ if ($searchString) {
 	$result = $docsHtmlSearchRenderer->searchQuery->getData($docsHtmlSearchRenderer->searchQuery->getRowsPerPage(),$docsHtmlSearchRenderer->searchQuery->getOffset());
 	$nbDocs = count($result);
 	$max = $docsHtmlSearchRenderer->searchQuery->getRowsTotalCount();
-	echo $HTML->paging_top($start, $paging, $max, $nbDocs, $redirect_url.'&view=search&textsearch='.$searchString.'&insideDocuments='.$insideDocuments.'&search_type='.$search_type.'&includesubprojects='.$subprojectsIncluded.'&limitByStartDate='.$limitByStartDate.'&limitByEndDate='.$limitByEndDate.'&start_date='.$received_begin.'&end_date='.$received_end);
+	echo $HTML->paging_top($start, $paging, $max, $nbDocs, $redirect_url.'&view=search&textsearch='.urlencode($searchString).'&insideDocuments='.$insideDocuments.'&search_type='.$search_type.'&includesubprojects='.$subprojectsIncluded.'&limitByStartDate='.$limitByStartDate.'&limitByEndDate='.$limitByEndDate.'&start_date='.$received_begin.'&end_date='.$received_end);
 	$docsHtmlSearchRenderer->writeBody(false);
-	echo $HTML->paging_bottom($start, $paging, $max, $redirect_url.'&view=search&textsearch='.$searchString.'&insideDocuments='.$insideDocuments.'&search_type='.$search_type.'&includesubprojects='.$subprojectsIncluded.'&limitByStartDate='.$limitByStartDate.'&limitByEndDate='.$limitByEndDate.'&start_date='.$received_begin.'&end_date='.$received_end);
+	echo $HTML->paging_bottom($start, $paging, $max, $redirect_url.'&view=search&textsearch='.urlencode($searchString).'&insideDocuments='.$insideDocuments.'&search_type='.$search_type.'&includesubprojects='.$subprojectsIncluded.'&limitByStartDate='.$limitByStartDate.'&limitByEndDate='.$limitByEndDate.'&start_date='.$received_begin.'&end_date='.$received_end);
 }
 echo html_ac(html_ap() -2);
