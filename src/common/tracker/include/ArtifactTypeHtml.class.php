@@ -548,6 +548,8 @@ EOS;
 
 			echo $HTML->listTableBottom();
 			echo '</td></tr>';
+		} else {
+			echo $HTML->information(_('No attached documents'));
 		}
 	}
 

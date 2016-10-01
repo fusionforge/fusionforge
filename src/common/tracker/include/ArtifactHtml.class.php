@@ -5,7 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2015, 2016, Franck Villaume - TrivialDev
+ * Copyright 2015-2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -57,7 +57,7 @@ class ArtifactHtml extends Artifact {
 	}
 
 	function showMessages() {
-
+		global $HTML;
 		if (session_loggedin()) {
 			$u = session_get_user();
 			$order = $u->getPreference('tracker_messages_order');
@@ -130,8 +130,7 @@ function hide_edit_button(id) {
 			echo '</tbody></table>';
 
 		} else {
-			echo '
-				<p>'._('No Comments Have Been Posted').'</p>';
+			echo $HTML->information(_('No Comments Have Been Posted'));
 		}
 	}
 
@@ -148,7 +147,7 @@ function hide_edit_button(id) {
 			$title_arr[]=_('Date');
 			$title_arr[]=_('By');
 
-			echo $HTML->listTableTop ($title_arr);
+			echo $HTML->listTableTop($title_arr);
 
 			$artifactType =& $this->getArtifactType();
 
@@ -169,7 +168,7 @@ function hide_edit_button(id) {
 					if (db_result($result, $i, 'old_value'))
 						echo date(_('Y-m-d H:i'),db_result($result, $i, 'old_value'));
 					else
-						echo '<i>None</i>';
+						echo '<i>'._('None').'</i>';
 				} else {
 
 					echo db_result($result, $i, 'old_value');
@@ -183,8 +182,7 @@ function hide_edit_button(id) {
 			echo $HTML->listTableBottom();
 
 		} else {
-			echo '
-			<p>'._('No Changes Have Been Made to This Item').'</p>';
+			echo $HTML->information(_('No Changes Have Been Made to This Item'));
 		}
 
 	}
