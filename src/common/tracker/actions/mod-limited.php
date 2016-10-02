@@ -46,8 +46,6 @@ jQuery(document).ready(function() {
 });
 //]]></script>
 
-	<h1>[#<?php echo $ah->getID(); ?>] <?php echo $ah->getSummary(); ?></h1>
-
 <?php
 echo $HTML->openForm(array('id' => 'trackermodlimitedform', 'action' => '/tracker/?group_id='.$group_id.'&atid='.$ath->getID(), 'enctype' => 'multipart/form-data', 'method' => 'post'));
 ?>
