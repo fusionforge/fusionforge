@@ -70,7 +70,7 @@ class AuthBuiltinPlugin extends ForgeAuthPlugin {
 		$result .= html_e('p', array(), _('Cookies must be enabled past this point.'), false);
 		$result .= $HTML->openForm(array('action' => '/plugins/'.$this->name.'/post-login.php', 'method' => 'post'));
 		$result .= html_e('input', array('type' => 'hidden', 'name' => 'form_key', 'value' => form_generate_key()));
-		$result .= html_e('input', array('type' => 'hidden', 'name' => 'return_to', 'value' => htmlspecialchars(stripslashes($return_to))));
+		$result .= html_e('input', array('type' => 'hidden', 'name' => 'return_to', 'value' => $return_to));
 		$result .= html_ao('p');
 		if (forge_get_config('require_unique_email')) {
 			$result .= _('Login name or email address')._(':');
