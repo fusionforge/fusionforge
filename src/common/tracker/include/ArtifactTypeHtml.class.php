@@ -473,10 +473,8 @@ EOS;
 		}
 
 		$totalPercentage = 0;
-
+		echo '<tr><td colspan="2">';
 		if ($taskcount > 0) {
-			echo '<tr><td colspan="2">';
-			echo '<b>'._("Related Tasks")._(':').'</b><br/>';
 			$title_arr = array();
 			$title_arr[] = _('Task Id and Summary');
 			$title_arr[] = _('Progress');
@@ -513,8 +511,10 @@ EOS;
 			echo "\n<hr /><p style=\"text-align:right;\">";
 			echo _('Average completion rate')._(': ').(int)($totalPercentage/$taskcount).'%';
 			echo "</p>\n";
-			echo '</td></tr>';
+		} else {
+			echo $HTML->information(_('No related tasks'));
 		}
+		echo '</td></tr>';
 	}
 
 	function renderFiles($group_id, $ah) {
