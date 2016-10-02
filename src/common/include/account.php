@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2010, Franck Villaume - Capgemini
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2016, Franck Villaume - TrivialDev
  * Copyright (C) 2015  Inria (Sylvain Beucler)
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -100,8 +100,8 @@ function account_namevalid($name, $unix=false, $check_exists=true) {
 		$GLOBALS['register_error'] = _('Name is too short. It must be at least 3 characters.');
 		return false;
 	}
-	if (strlen($name) > 15) {
-		$GLOBALS['register_error'] = _('Name is too long. It must be less than 15 characters.');
+	if (strlen($name) > 32) {
+		$GLOBALS['register_error'] = _('Name is too long. It must be less than 32 characters.');
 		return false;
 	}
 
