@@ -260,8 +260,7 @@ foreach ($pluginsListeners as $pluginsListener) {
 		<p>
 		<strong><?php echo _('Post Comment')._(': ') ?><?php echo notepad_button('document.forms.trackermodform.details') ?></strong><br />
 		<textarea id="tracker-comment" name="details" rows="7" cols="60" title="<?php echo util_html_secure(html_get_tooltip_description('comment')) ?>"></textarea></p>
-		<h2><?php echo _('Comments')._(': ');
-echo '</h2>';
+		<?php
 $ah->showMessages();
 		?>
 	</td></tr>
@@ -283,7 +282,6 @@ $count=count($file_list);
 $nb = $count? ' ('.$count.')' : '';
 ?>
 <div id="tabber-attachments" class="tabbertab" title="<?php echo _('Attachments').$nb; ?>">
-<h2><?php echo _('Existing Files')._(':'); ?></h2>
 <table width="80%">
 	<tr><td colspan="2">
         <strong><?php echo _('Attach Files')._(':'); ?></strong> <?php echo('('._('max upload size')._(': ').human_readable_bytes(util_get_maxuploadfilesize()).')') ?><br />
@@ -314,7 +312,6 @@ $nb = $count? ' ('.$count.')' : '';
 </div>
 <?php } ?>
 <div id="tabber-changes" class="tabbertab" title="<?php echo _('Changes'); ?>">
-	<h2><?php echo _('Changes') ?></h2>
 	<?php $ah->showHistory(); ?>
 </div>
 	<?php $ah->showRelations(); ?>
