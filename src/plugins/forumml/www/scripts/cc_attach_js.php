@@ -26,6 +26,9 @@
 header("content-type: application/x-javascript");
 require_once 'env.inc.php';
 require_once 'pre.php';
+
+global $HTML;
+
 ?>
 
 function addHeader(cc,file,header_type)
@@ -45,7 +48,7 @@ function addHeader(cc,file,header_type)
   					+cc
   					+"'size=41></td><td align=center><a href=\"javascript:;\" onclick=\"removeHeader(\'"
   					+divIdName
-  					+"\')\"><img border='0' src=\"<?php echo getImage("ic/trash.png"); ?>\"></a></td></tr></table>";
+  					+"\')\"><?php echo $HTML->getDeletePic('', ''); ?></a></td></tr></table>";
   } else {
   	newdiv.innerHTML += "<table><tr><td width='65' align='right'><b><i><?php echo _('Attach:') ?> </i></b></td><td align=center width=350><input name='files["
   					+num
@@ -53,7 +56,7 @@ function addHeader(cc,file,header_type)
   					+file
   					+"'size=30></td><td align=center><a href=\"javascript:;\" onclick=\"removeHeader(\'"
   					+divIdName
-  					+"\')\"><img border='0' src=\"<?php echo getImage("ic/trash.png"); ?>\"></a></td></tr></table>";
+  					+"\')\"><?php echo $HTML->getDeletePic('', ''); ?></a></td></tr></table>";
   }
   ni.appendChild(newdiv);
 }
