@@ -207,7 +207,7 @@ function hide_edit_button(id) {
 					      "% $aid"));
 		if (db_numrows($res)>0) {
 			?>
-<div id="tabber-relations" class="tabbertab" title="<?php echo _('Backward Relations'); ?>">
+<div id="tabber-relations" class="tabbertab">
 <table class="fullwidth">
 	<tr>
 		<td colspan="2">

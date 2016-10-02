@@ -138,6 +138,9 @@ echo $HTML->listTableTop(); ?>
 <?php
 $count=db_numrows($ah->getMessages());
 $nb = $count? ' ('.$count.')' : '';
+$file_list = $ah->getFiles();
+$count=count($file_list);
+$nbf = $count? ' ('.$count.')' : '';
 $pm = plugin_manager_get_object();
 $pluginsListeners = $pm->GetHookListeners('artifact_extra_detail');
 $pluginfound = false;
@@ -150,11 +153,11 @@ foreach ($pluginsListeners as $pluginsListener) {
 ?>
 <div id="tabber">
 	<ul>
-	<li><a href="#tabber-comments"><?php echo _('Comments'); ?></a></li>
+	<li><a href="#tabber-comments"><?php echo _('Comments').$nb; ?></a></li>
 	<?php if ($group->usesPM()) { ?>
 	<li><a href="#tabber-tasks"><?php echo _('Related Tasks'); ?></a></li>
 	<?php } ?>
-	<li><a href="#tabber-attachments"><?php echo _('Attachments'); ?></a></li>
+	<li><a href="#tabber-attachments"><?php echo _('Attachments').$nbf; ?></a></li>
 	<?php if ($pluginfound) { ?>
 	<li><a href="#tabber-commits"><?php echo _('Commits'); ?></a></li>
 	<?php } ?>
@@ -163,7 +166,7 @@ foreach ($pluginsListeners as $pluginsListener) {
 	<li><a href="#tabber-relations"><?php echo _('Relations'); ?></a></li>
 	<?php } ?>
 	</ul>
-	<div id="tabber-comments" class="tabbertab" title="<?php echo _('Comments').$nb; ?>">
+	<div id="tabber-comments" class="tabbertab">
 		<?php echo $HTML->listTableTop();
 			if (forge_check_perm ('tracker',$ath->getID(),'submit')) { ?>
 			<tr><td colspan="2">
@@ -186,18 +189,14 @@ foreach ($pluginsListeners as $pluginsListener) {
 <?php
 if ($group->usesPM()) {
 ?>
-<div id="tabber-tasks" class="tabbertab" title="<?php echo _('Related Tasks'); ?>">
+<div id="tabber-tasks" class="tabbertab">
 	<?php
 		$ath->renderRelatedTasks($group, $ah);
 	?>
 </div>
 <?php }
-$tabcnt=0;
-$file_list = $ah->getFiles();
-$count=count($file_list);
-$nb = $count? ' ('.$count.')' : '';
 ?>
-	<div id="tabber-attachments" class="tabbertab" title="<?php echo _('Attachments').$nb; ?>">
+	<div id="tabber-attachments" class="tabbertab">
 	<?php echo $HTML->listTableTop(); ?>
 		<tr><td colspan="2">
 		<?php if (session_loggedin() && ($ah->getSubmittedBy() == user_getid())) { ?>
@@ -220,7 +219,7 @@ $nb = $count? ' ('.$count.')' : '';
 <?php
 	if ($pluginfound) {
 ?>
-	<div id="tabber-commits" class="tabbertab" title="<?php echo _('Commits'); ?>" >
+	<div id="tabber-commits" class="tabbertab">
 	<?php echo $HTML->listTableTop(); ?>
 	<tr><td colspan="2"><!-- dummy in case the hook is empty --></td></tr>
 		<?php
@@ -233,7 +232,7 @@ $nb = $count? ' ('.$count.')' : '';
 <?php
 	}
 ?>
-	<div id="tabber-changes" class="tabbertab" title="<?php echo _('Changes'); ?>">
+	<div id="tabber-changes" class="tabbertab">
 		<?php $ah->showHistory(); ?>
 	</div>
 	<?php $ah->showRelations(); ?>
