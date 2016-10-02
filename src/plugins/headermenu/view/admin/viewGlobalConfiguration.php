@@ -77,8 +77,8 @@ if (sizeof($linksHeaderMenuArray)) {
 			$cells[][] = $HTML->getRemovePic('', '', array('alt'=>_('link is off'), 'title'=>_('link is off')));
 			$content = util_make_link($actionurl.'&action=updateLinkStatus&linkid='.$link['id_headermenu'].'&linkstatus=1', html_image('docman/reserve-document.png', 22, 22, array('alt' => _('Activate this link'))), array('title' => _('Activate this link')));
 		}
-		$content .= util_make_link($actionurl.'&view=updateLinkValue&linkid='.$link['id_headermenu'], html_image('docman/edit-file.png', 22, 22, array('alt' => _('Edit this link'))), array('title' => _('Edit this link')));
-		$content .= util_make_link($actionurl.'&action=deleteLink&linkid='.$link['id_headermenu'], $HTML->getDeletePic('', '', array('alt' => _('Delete this link'), 'title' => _('Delete this link'))));
+		$content .= util_make_link($actionurl.'&view=updateLinkValue&linkid='.$link['id_headermenu'], $HTML->getEditFilePic(_('Edit this link'), 'editlink'), array('title' => _('Edit this link')));
+		$content .= util_make_link($actionurl.'&action=deleteLink&linkid='.$link['id_headermenu'], $HTML->getDeletePic(_('Delete this link'), 'deletelink'), array('title' => _('Delete this link')));
 		$cells[][] = $content;
 		echo $HTML->multiTableRow(array('id' => $link['id_headermenu']), $cells);
 	}
@@ -111,8 +111,8 @@ if (sizeof($linksOuterMenuArray)) {
 			$cells[][] = $HTML->getRemovePic('', '', array('alt'=>_('link is off'), 'title'=>_('link is off')));
 			$content = util_make_link($actionurl.'&action=updateLinkStatus&linkid='.$link['id_headermenu'].'&linkstatus=1', html_image('docman/reserve-document.png', 22, 22, array('alt'=>_('Activate this link'))), array('title' => _('Activate this link')));
 		}
-		$content .= util_make_link($actionurl.'&view=updateLinkValue&linkid='.$link['id_headermenu'], html_image('docman/edit-file.png',22,22, array('alt'=>_('Edit this link'))), array('title' => _('Edit this link')));
-		$content .= util_make_link($actionurl.'&action=deleteLink&linkid='.$link['id_headermenu'], $HTML->getDeletePic('', '', array('alt' => _('Delete this link'), 'title' => _('Delete this link'))));
+		$content .= util_make_link($actionurl.'&view=updateLinkValue&linkid='.$link['id_headermenu'], $HTML->getEditFilePic(_('Edit this link'), 'editlink'), array('title' => _('Edit this link')));
+		$content .= util_make_link($actionurl.'&action=deleteLink&linkid='.$link['id_headermenu'], $HTML->getDeletePic(_('Delete this link'), 'deletelink'), array('title' => _('Delete this link')));
 		$cells[][] = $content;
 		echo $HTML->multiTableRow(array('id' => $link['id_headermenu']), $cells);
 	}
