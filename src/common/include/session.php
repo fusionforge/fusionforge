@@ -391,9 +391,7 @@ function session_redirect_uri($loc, $permanent=true) {
  * @param  string $loc    Absolute path within the site
  */
 function session_redirect($loc, $permanent=true) {
-	util_save_messages();
 	session_redirect_uri(util_make_url($loc), $permanent);
-	exit;
 }
 
 /**
@@ -403,7 +401,6 @@ function session_redirect($loc, $permanent=true) {
  *	@return never returns
  */
 function session_redirect_external($url) {
-	util_save_messages();
 	session_redirect_uri($url, false);
 }
 
