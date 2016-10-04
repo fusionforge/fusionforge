@@ -2,6 +2,7 @@
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2016, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -47,53 +48,97 @@ class Widget_ProjectMembers extends Widget {
 
 		$iam_member = false ;
 		if (count($admins) > 0) {
-			$result .= '<span class="develtitle">'._('Project Admins').'</span><br />';
-			foreach ($admins as $u) {
-				$result .= '<div rel="doap:maintainer">'."\n";
+			$result .= '<div class="extractadmin"><span class="develtitle">'._('Project Admins').'</span><br />';
+			$resultcomplete = '<span class="completeadmin" style="display:none">';
+			$resultmore = false;
+			foreach ($admins as $key => $u) {
+				$resultlocal = '<div rel="doap:maintainer">'."\n";
 				// A foaf:Person that holds an account on the forge
 				$developer_url = util_make_url_u ($u->getUnixName(),$u->getID());
-				$result .= '<div typeof="foaf:Person" about="'.
+				$resultlocal .= '<div typeof="foaf:Person" about="'.
 					$developer_url.'#person' .'" >'."\n";
-				$result .= '<div rel="foaf:account">'."\n";
-				$result .= '<div typeof="sioc:UserAccount" about="'.
+				$resultlocal .= '<div rel="foaf:account">'."\n";
+				$resultlocal .= '<div typeof="sioc:UserAccount" about="'.
 					$developer_url.
 					'">'."\n";
-				$result .= util_display_user($u->getUnixName(),$u->getID(),$u->getRealName())."\n";
-				$result .= "</div>\n"; // /sioc:UserAccount
-				$result .= "</div>\n"; // /foaf:holdsAccount
-				$result .= "</div>\n"; // /foaf:Person
-				$result .= "</div>\n"; // /doap:maintainer|developer
+				$resultlocal .= util_display_user($u->getUnixName(),$u->getID(),$u->getRealName())."\n";
+				$resultlocal .= "</div>\n"; // /sioc:UserAccount
+				$resultlocal .= "</div>\n"; // /foaf:holdsAccount
+				$resultlocal .= "</div>\n"; // /foaf:Person
+				$resultlocal .= "</div>\n"; // /doap:maintainer|developer
 				if ($u->getID() == user_getid()) {
 					$iam_member = true ;
 				}
-				$seen[] = $u->getID() ;
+				$seen[] = $u->getID();
+				if ($key < 10) {
+					$result .= $resultlocal;
+				} else {
+					$resultcomplete .= $resultlocal;
+					$resultmore = true;
+				}
 			}
+			$resultcomplete .= '</span>';
+			$result .= $resultcomplete;
+			if ($resultmore) {
+				$result .= '<input type="button" class="seemoreadmin" value="'._('See more ...').'" />';
+				$result .= '<script type="text/javascript">';
+				$result .= 'toggleAdmin = function() { jQuery(".completeadmin").toggle(); };';
+				$result .= 'jQuery(document).ready(jQuery(".seemoreadmin").click(jQuery.proxy(this, "toggleAdmin")));';
+				$result .= '</script>';
+			}
+			$result .= '</div>';
 		}
 
 		if (count($members) > 0) {
-			$result .= '<span class="develtitle">'. _('Members')._(':').'</span><br />';
-			foreach ($members as $u) {
+			$headerresult = true;
+			$resultcomplete = '<span class="completemember" style="display: none">';
+			$resultmore = false;
+			foreach ($members as $key => $u) {
 				if (in_array ($u->getID(), $seen)) {
-					continue ;
+					continue;
 				}
-
-				$result .= '<div rel="doap:developer">'."\n";
+				if ($headerresult) {
+					if (count($admins) > 0) {
+						$result .= '<hr/>';
+					}
+					$result .= '<div class="extractmember"><span class="develtitle">'. _('Members')._(':').'</span><br />';
+					$headerresult = false;
+				}
+				$resultlocal = '<div rel="doap:developer">'."\n";
 				// A foaf:Person that holds an account on the forge
 				$developer_url = util_make_url_u ($u->getUnixName(),$u->getID());
-				$result .= '<div typeof="foaf:Person" about="'.
+				$resultlocal .= '<div typeof="foaf:Person" about="'.
 					$developer_url.'#person' .'" >'."\n";
-				$result .= '<div rel="foaf:account">'."\n";
-				$result .= '<div typeof="sioc:UserAccount" about="'.
+				$resultlocal .= '<div rel="foaf:account">'."\n";
+				$resultlocal .= '<div typeof="sioc:UserAccount" about="'.
 					$developer_url.
 					'">'."\n";
-				$result .= util_display_user($u->getUnixName(),$u->getID(),$u->getRealName())."\n";
-				$result .= "</div>\n"; // /sioc:UserAccount
-				$result .= "</div>\n"; // /foaf:holdsAccount
-				$result .= "</div>\n"; // /foaf:Person
-				$result .= "</div>\n"; // /doap:maintainer|developer
+				$resultlocal .= util_display_user($u->getUnixName(),$u->getID(),$u->getRealName())."\n";
+				$resultlocal .= "</div>\n"; // /sioc:UserAccount
+				$resultlocal .= "</div>\n"; // /foaf:holdsAccount
+				$resultlocal .= "</div>\n"; // /foaf:Person
+				$resultlocal .= "</div>\n"; // /doap:maintainer|developer
 				if ($u->getID() == user_getid()) {
 					$iam_member = true ;
 				}
+				if ($key < 10) {
+					$result .= $resultlocal;
+				} else {
+					$resultcomplete .= $resultlocal;
+					$resultmore = true;
+				}
+			}
+			$resultcomplete .= '</span>';
+			$result .= $resultcomplete;
+			if ($resultmore && !$headerresult) {
+				$result .= '<input type="button" class="seemoremember" value="'._('See more ...').'" />';
+				$result .= '<script type="text/javascript">';
+				$result .= 'toggleMember = function() { jQuery(".completemember").toggle(); };';
+				$result .= 'jQuery(document).ready(jQuery(".seemoremember").click(jQuery.proxy(this, "toggleMember")));';
+				$result .= '</script>';
+			}
+			if (!$headerresult) {
+				$result .= '</div>';
 			}
 		}
 
