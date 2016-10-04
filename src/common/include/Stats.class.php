@@ -26,10 +26,6 @@
 
 class Stats extends FFError {
 
-	function __construct() {
-		parent::__construct();
-	}
-
 	/**
 	 * Returns a resultset consisting of the month, day, total_users, pageviews, and sessions
 	 * from the stats_site tables
