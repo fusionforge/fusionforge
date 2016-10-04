@@ -417,7 +417,7 @@ function updateGroup($session_ser, $group_id, $is_public, $is_template, $status,
 		$error_msg .= $group->getErrorMessage();
 	}
 
-	if (!$group->updateAdmin(session_get_user(), $is_public, $group_type, $unix_box, $http_domain)) {
+	if (!$group->updateAdmin(session_get_user(), $unix_box, $http_domain)) {
 		$error_msg .= $group->getErrorMessage();
 	}
 

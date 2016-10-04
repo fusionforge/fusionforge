@@ -42,7 +42,7 @@ if (!$group || !is_object($group)) {
 }
 
 // This function performs very update
-function do_update(&$group, $is_template, $status, $group_type, $unix_box, $http_domain, $scm_box='') {
+function do_update(&$group, $is_template, $status, $unix_box, $http_domain, $scm_box='') {
 	global $feedback;
 	global $error_msg;
 
@@ -54,7 +54,7 @@ function do_update(&$group, $is_template, $status, $group_type, $unix_box, $http
 		return false;
 	}
 
-	if (!$group->updateAdmin(session_get_user(), $group_type, $unix_box, $http_domain)) {
+	if (!$group->updateAdmin(session_get_user(), $unix_box, $http_domain)) {
 		$error_msg .= $group->getErrorMessage();
 		db_rollback();
 		return false;
@@ -85,7 +85,7 @@ if (getStringFromRequest('submit')) {
 	$form_domain = getStringFromRequest('form_domain');
 	$form_scm_box = getStringFromRequest('form_scm_box');
 
-	do_update($group, $form_template, $form_status, 1, $form_box, $form_domain, $form_scm_box);
+	do_update($group, $form_template, $form_status, $form_box, $form_domain, $form_scm_box);
 
 } elseif (getStringFromRequest('resend')) {
 
