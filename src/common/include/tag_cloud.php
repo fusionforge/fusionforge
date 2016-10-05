@@ -102,7 +102,7 @@ function tag_cloud($params = array()) {
 	$res = db_query_params ('SELECT project_tags.name,project_tags.group_id
 					 FROM project_tags, groups
 					 WHERE project_tags.group_id = groups.group_id
-					 AND groups.status = $1 AND groups.type_id=1 AND groups.register_time > 0',
+					 AND groups.status = $1 AND groups.register_time > 0',
 				array ('A')) ;
 	$tag_count = array();
 	while ($row = db_fetch_array($res)) {
