@@ -456,6 +456,12 @@ function html_use_jquery() {
 function html_use_tablesorter() {
 	// html_use_jquery();
 	// use_javascript('/scripts/jquery-tablesorter/jquery.tablesorter.js');
+	echo html_ao('script', array('type' => 'text/javascript'));
+	?>
+	//<![CDATA[
+	var image_path = "<? echo util_make_uri('/images'); ?>";
+	//]]>
+	<?php
 	use_javascript('/js/sortable.js');
 }
 
