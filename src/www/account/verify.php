@@ -53,7 +53,7 @@ if (getStringFromRequest('submit')) {
 	} elseif ($u->getStatus()=='A'){
 		$error_msg = _('Account already active.');
 	} elseif (($u->getStatus() == 'S') || ($u->getStatus() == 'D')) {
-		$error_msg = _('Account is suspended or deleted','my');
+		$error_msg = _('Account is suspended or deleted');
 	} elseif ($confirm_hash != $u->getConfirmHash()) {
 		$error_msg = _('Cannot confirm account identity - invalid confirmation hash (or login name)');
 	} elseif (!session_login_valid($loginname, $passwd, 1)) {
