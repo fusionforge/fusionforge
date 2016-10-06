@@ -374,6 +374,13 @@ into the FusionForge database.");
 					$user_id = false;
 				}
 			}
+			if ($user_id) {
+				$this->saved_user = $userObject;
+				$cookie_user_id = $this->checkSessionCookie();
+				if ($cookie_user_id != $user_id) {
+					$this->setSessionCookie();
+				}
+			}
 		} else {
 			$user_id = $this->checkSessionCookie();
 		}

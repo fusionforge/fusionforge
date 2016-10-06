@@ -289,6 +289,9 @@ class Layout extends FFError {
 		$this->headerFavIcon();
 		$this->headerRSS();
 		$this->headerSearch();
+		echo '<script type="text/javascript">//<![CDATA[' .
+		"\n\tvar sys_url_base = " . minijson_encode(util_make_url("/"), false) . ";\n" .
+		"//]]></script>\n";
 		$this->headerJS();
 		$this->headerCSS();
 		$this->headerForgepluckerMeta();
