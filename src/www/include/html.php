@@ -521,7 +521,7 @@ function html_use_jqueryjqplotplugindateAxisRenderer() {
 
 function html_use_jqueryteamworkgantt() {
 	html_use_jquerybrowser();
-	use_javascript('/scripts/jquery-livequery/jquery.livequery.js');
+	use_javascript('/scripts/jquery-livequery/jquery.livequery.min.js');
 	use_javascript('/scripts/jquery-livequery/jquery.timers.js');
 	use_javascript('/scripts/jquery-teamwork-gantt/libs/platform.js');
 	use_javascript('/scripts/jquery-teamwork-gantt/libs/date.js');
