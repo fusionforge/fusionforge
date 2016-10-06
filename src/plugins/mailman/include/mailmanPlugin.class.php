@@ -178,7 +178,7 @@ class mailmanPlugin extends Plugin {
 					}
 					echo '
 						<tr '.$HTML->boxGetAltRowStyle(0).'>
-							<td class="align-center">'.util_make_link('/plugins/mailman/index.php?group_id='.$group->getID().'&action=unsubscribe&id='.$l->getID(),'<img src="'.$HTML->imgroot.'/ic/trash.png" height="16" width="16" '.'alt="" />').
+							<td class="align-center">'.util_make_link('/plugins/mailman/index.php?group_id='.$group->getID().'&action=unsubscribe&id='.$l->getID(), $HTML->getDeletePic(_('Unsubscribe from this mailing-list.'), _('Unsubscribe'))).
 						'</td>
 							<td style="width:99%">'.util_make_link('/plugins/mailman/index.php?group_id='.$group->getID().'&action=options&id='.$l->getID(),$l->getName()).'</td></tr>';
 					$last_group= $group->getID();

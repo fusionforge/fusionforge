@@ -84,7 +84,7 @@ if ($start < 0) {
 $HTML->header(array('title'=>_('Project List'),'pagename'=>'softwaremap'));
 $HTML->printSoftwareMapLinks();
 
-$nbProjects = FusionForge::getInstance()->getNumberOfProjects(array('status' => 'A', 'type_id' => 1, 'is_template' => 0), 'register_time > 0 AND group_id in (select ref_id FROM pfo_role_setting WHERE section_name = \'project_read\' and perm_val = 1 and role_id IN ('.$role_id.'))');
+$nbProjects = FusionForge::getInstance()->getNumberOfProjects(array('status' => 'A', 'is_template' => 0), 'register_time > 0 AND group_id in (select ref_id FROM pfo_role_setting WHERE section_name = \'project_read\' and perm_val = 1 and role_id IN ('.$role_id.'))');
 
 $projects = group_get_public_active_projects_asc($paging, $start);
 

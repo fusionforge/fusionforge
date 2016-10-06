@@ -5,8 +5,8 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 (c) Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2015, Franck Villaume - TrivialDev
  * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
+ * Copyright 2012-2016, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -61,8 +61,8 @@ echo $HTML->openForm(array('id' => 'trackermodform', 'action' => '/tracker/?grou
 
 <?php
 if (session_loggedin()) {
+echo $HTML->listTableTop();
 ?>
-<table width="80%">
 		<tr>
 			<td><?php
 				if ($ah->isMonitoring()) {
@@ -105,10 +105,10 @@ if (session_loggedin()) {
 				<input type="submit" name="submit" value="<?php echo _('Save Changes') ?>" />
 			</td>
 		</tr>
-</table>
+<?php echo $HTML->listTableBottom(); ?>
 <br />
 <?php } ?>
-<table width="80%">
+<?php echo $HTML->listTableTop(); ?>
 	<tr>
 		<td>
 			<strong><?php echo _('Submitted by')._(':'); ?></strong><br />
@@ -183,7 +183,6 @@ echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 		</td>
 	</tr>
 	<?php }
-		$ath->renderRelatedTasks($group, $ah);
 	?>
 	<tr>
 		<td colspan="2"><strong><?php echo _('Summary').utils_requiredField()._(':') ?></strong><br />
@@ -196,17 +195,20 @@ echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 		<div id="edit" class="hide">
 		<strong><?php echo _('Detailed description') ?><?php echo utils_requiredField(); ?><?php echo _(': ') ?><?php echo notepad_button('document.forms.trackermodform.description') ?></strong>
 		<br />
-		<textarea id="tracker-description" required="required" name="description" rows="30" cols="79" title="<?php echo html_get_tooltip_description('description') ?>"><?php echo $ah->getDetails(); ?></textarea>
+		<textarea id="tracker-description" required="required" name="description" rows="30" style="width: 100%" title="<?php echo html_get_tooltip_description('description') ?>"><?php echo $ah->getDetails(); ?></textarea>
 		</div>
 		<div id="show" style="display:block;">
 		<?php $ah->showDetails(true); ?>
 		</div>
 	</td></tr>
-</table>
+<?php echo $HTML->listTableBottom(); ?>
 <div id="tabber" >
 <?php
 $count=db_numrows($ah->getMessages());
 $nb = $count? ' ('.$count.')' : '';
+$file_list = $ah->getFiles();
+$count=count($file_list);
+$nbf = $count? ' ('.$count.')' : '';
 $pm = plugin_manager_get_object();
 $pluginsListeners = $pm->GetHookListeners('artifact_extra_detail');
 $pluginfound = false;
@@ -218,11 +220,11 @@ foreach ($pluginsListeners as $pluginsListener) {
 }
 ?>
 	<ul>
-	<li><a href="#tabber-comments"><?php echo _('Comments'); ?></a></li>
+	<li><a href="#tabber-comments"><?php echo _('Comments').$nb; ?></a></li>
 	<?php if ($group->usesPM()) { ?>
 	<li><a href="#tabber-tasks"><?php echo _('Related Tasks'); ?></a></li>
 	<?php } ?>
-	<li><a href="#tabber-attachments"><?php echo _('Attachments'); ?></a></li>
+	<li><a href="#tabber-attachments"><?php echo _('Attachments').$nbf; ?></a></li>
 	<?php if ($pluginfound) { ?>
 	<li><a href="#tabber-commits"><?php echo _('Commits'); ?></a></li>
 	<?php } ?>
@@ -231,8 +233,8 @@ foreach ($pluginsListeners as $pluginsListener) {
 	<li><a href="#tabber-relations"><?php echo _('Relations'); ?></a></li>
 	<?php } ?>
 	</ul>
-<div id="tabber-comments" class="tabbertab" title="<?php echo _('Comments').$nb; ?>">
-<table width="80%">
+<div id="tabber-comments" class="tabbertab">
+<?php echo $HTML->listTableTop(); ?>
 	<tr><td colspan="2">
 		<br /><strong><?php echo _('Use Canned Response')._(':'); ?></strong><br />
 		<?php
@@ -259,32 +261,25 @@ foreach ($pluginsListeners as $pluginsListener) {
 		/* ]]> */</script>
 		<p>
 		<strong><?php echo _('Post Comment')._(': ') ?><?php echo notepad_button('document.forms.trackermodform.details') ?></strong><br />
-		<textarea id="tracker-comment" name="details" rows="7" cols="60" title="<?php echo util_html_secure(html_get_tooltip_description('comment')) ?>"></textarea></p>
-		<h2><?php echo _('Comments')._(': ');
-echo '</h2>';
+		<textarea id="tracker-comment" name="details" rows="7" style="width: 100%" title="<?php echo util_html_secure(html_get_tooltip_description('comment')) ?>"></textarea></p>
+		<?php
 $ah->showMessages();
 		?>
 	</td></tr>
-</table>
+<?php echo $HTML->listTableBottom(); ?>
 </div>
 <?php
 if ($group->usesPM()) {
 ?>
-<div id="tabber-tasks" class="tabbertab" title="<?php echo _('Related Tasks'); ?>">
+<div id="tabber-tasks" class="tabbertab">
 	<?php
 		$ath->renderRelatedTasks($group, $ah);
 	?>
 </div>
-<?php } ?>
-<?php
-$tabcnt=0;
-$file_list = $ah->getFiles();
-$count=count($file_list);
-$nb = $count? ' ('.$count.')' : '';
+<?php }
 ?>
-<div id="tabber-attachments" class="tabbertab" title="<?php echo _('Attachments').$nb; ?>">
-<h2><?php echo _('Existing Files')._(':'); ?></h2>
-<table width="80%">
+<div id="tabber-attachments" class="tabbertab">
+<?php echo $HTML->listTableTop(); ?>
 	<tr><td colspan="2">
         <strong><?php echo _('Attach Files')._(':'); ?></strong> <?php echo('('._('max upload size')._(': ').human_readable_bytes(util_get_maxuploadfilesize()).')') ?><br />
         <input type="file" name="input_file0" size="30" /><br />
@@ -299,35 +294,34 @@ $nb = $count? ' ('.$count.')' : '';
 		$ath->renderFiles($group_id, $ah);
 		?>
 	</td></tr>
-</table>
+<?php echo $HTML->listTableBottom(); ?>
 </div>
 <?php if ($pluginfound) { ?>
-<div id="tabber-commits" class="tabbertab" title="<?php echo _('Commits'); ?>">
-<table width="80%">
+<div id="tabber-commits" class="tabbertab">
+<?php echo $HTML->listTableTop(); ?>
 <tr><td colspan="2"><!-- dummy in case the hook is empty --></td></tr>
 	<?php
 		$hookParams['artifact_id'] = $aid;
 		$hookParams['group_id'] = $group_id;
 		plugin_hook("artifact_extra_detail",$hookParams);
 	?>
-</table>
+<?php echo $HTML->listTableBottom(); ?>
 </div>
 <?php } ?>
-<div id="tabber-changes" class="tabbertab" title="<?php echo _('Changes'); ?>">
-	<h2><?php echo _('Changes') ?></h2>
+<div id="tabber-changes" class="tabbertab">
 	<?php $ah->showHistory(); ?>
 </div>
 	<?php $ah->showRelations(); ?>
 </div>
-<?php if (session_loggedin()) { ?>
-	<table class="fullwidth">
+<?php if (session_loggedin()) {
+	echo $HTML->listTableTop(); ?>
 		<tr>
 			<td>
 				<input type="submit" name="submit" value="<?php echo _('Save Changes') ?>" />
 			</td>
 		</tr>
-	</table>
-<?php }
+	<?php echo $HTML->listTableBottom();
+}
 echo $HTML->closeForm();
 $ath->footer();
 

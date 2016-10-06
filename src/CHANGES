@@ -39,6 +39,7 @@ FusionForge 6.X:
 
 FusionForge 6.0.5:
 * Plugin SCM SVN: fix activity when SVN repository is private [#813] (TrivialDev)
+* Plugin SCM SVN: fix support old svn clients (Inria)
 * Plugin SCM Git: fix activity when Git repository is private [#825] (TrivialDev)
 * Plugin MoinMoin: fix httpd permissions & 404 on CentOS [#809] (TrivialDev)
 * Project Task: fix CSV import [#823] (Peter Katzmann)

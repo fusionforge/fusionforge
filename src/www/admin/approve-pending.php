@@ -193,18 +193,18 @@ while ($row_grp = db_fetch_array($res_grp)) {
 	// ########################## OTHER INFO
 
 //	print "<p><strong>" ._('Other Information')."</strong></p>";
-	print "<tr><td>" ._('Project Unix Name') . _(': '). "</td><td>".$row_grp['unix_group_name']."</td></tr>";
+	print "<tr><td>" ._('Project Unix Name') . _(':'). "</td><td>".$row_grp['unix_group_name']."</td></tr>";
 
-	print "<tr><td>" ._('Submitted Description')._(': '). "</td><td><blockquote>".$row_grp['short_description']."</blockquote></td></tr>";
+	print "<tr><td>" ._('Submitted Description')._(':'). "</td><td><blockquote>".$row_grp['short_description']."</blockquote></td></tr>";
 
-	print "<tr><td>" ._('Purpose of submission:'). "</td><td><blockquote>".$row_grp['register_purpose']."</blockquote></td></tr>";
+	print "<tr><td>" ._('Purpose of submission')._(':'). "</td><td><blockquote>".$row_grp['register_purpose']."</blockquote></td></tr>";
 
 	if ($row_grp['license']=="other") {
-		print "<tr><td>" ._('License Other')._(': '). "</td><td><blockquote>".$row_grp['license_other']."</blockquote></td></tr>";
+		print "<tr><td>" ._('License Other')._(':'). "</td><td><blockquote>".$row_grp['license_other']."</blockquote></td></tr>";
 	}
 
 	if (isset($row_grp['status_comment'])) {
-		print "<tr><td>" ._('Pending reason')._(': '). "</td><td><span class=\"important\">".$row_grp['status_comment']."</span></td></tr>";
+		print "<tr><td>" ._('Pending reason')._(':'). "</td><td><span class=\"important\">".$row_grp['status_comment']."</span></td></tr>";
 	}
 
 	$submitter = NULL ;

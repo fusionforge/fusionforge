@@ -83,13 +83,7 @@ function &group_get_object($group_id, $res = false) {
 			/*
 				check group type and set up object
 			*/
-			if (db_result($res,0,'type_id') == 1) {
-				//project
-				$GROUP_OBJ["_".$group_id."_"] = new Group($group_id, $res);
-			} else {
-				//invalid
-				$GROUP_OBJ["_".$group_id."_"] = false;
-			}
+			$GROUP_OBJ["_".$group_id."_"] = new Group($group_id, $res);
 		}
 	}
 	return $GROUP_OBJ["_".$group_id."_"];
@@ -181,7 +175,7 @@ function group_get_public_active_projects_asc($max_query_limit = -1, $offset = 0
 	$res_grp = db_query_params ('
 			SELECT group_id, group_name, unix_group_name, short_description, register_time
 			FROM groups
-			WHERE status = $1 AND type_id=1 AND is_template=0 AND register_time > 0
+			WHERE status = $1 AND is_template=0 AND register_time > 0
 			AND group_id in (select ref_id FROM pfo_role_setting WHERE section_name = $2 and perm_val = 1 and role_id IN ('.$role_id.'))
 			ORDER BY group_name ASC
 			',
@@ -218,7 +212,7 @@ function group_get_readable_projects_using_tag_asc($selected_tag, $max_query_lim
 		FROM project_tags, groups
 		WHERE LOWER(name) = $1
 		AND project_tags.group_id = groups.group_id
-		AND groups.status = $2 AND groups.type_id=1 AND groups.is_template=0 AND groups.register_time > 0
+		AND groups.status = $2 AND groups.is_template=0 AND groups.register_time > 0
 		AND groups.group_id in (select ref_id FROM pfo_role_setting WHERE section_name = $3 and perm_val = 1 and role_id IN ('.$role_id.'))
 		ORDER BY groups.group_name ASC',
 		array(strtolower($selected_tag), 'A', 'project_read'),
@@ -458,13 +452,12 @@ class Group extends FFError {
 	 * This function require site admin privilege.
 	 *
 	 * @param	object	$user		User requesting operation (for access control).
-	 * @param	int	$type_id	Group type. Obsolete parameter NOT USED.
 	 * @param	string	$unix_box	Machine on which group's home directory located.
 	 * @param	string	$http_domain	Domain which serves group's WWW.
 	 * @return	bool	status.
 	 * @access	public
 	 */
-	function updateAdmin(&$user, $type_id, $unix_box, $http_domain) {
+	function updateAdmin(&$user, $unix_box, $http_domain) {
 		$perm =& $this->getPermission();
 
 		if (!$perm || !is_object($perm)) {

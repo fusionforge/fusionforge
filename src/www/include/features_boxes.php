@@ -167,7 +167,7 @@ function show_sitestats() {
 
 function show_newest_projects() {
 	global $HTML;
-	$res_newproj = db_query_params ('SELECT group_id,unix_group_name,group_name,register_time FROM groups WHERE status=$1 AND type_id=1 AND register_time > 0 ORDER BY register_time DESC', array ('A'));
+	$res_newproj = db_query_params ('SELECT group_id,unix_group_name,group_name,register_time FROM groups WHERE status=$1 AND register_time > 0 ORDER BY register_time DESC', array ('A'));
 
 	$return = '';
 

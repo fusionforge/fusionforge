@@ -190,7 +190,7 @@ for ($i=0; $i<$combolistrows; $i++)
 			echo '
 			<tr '. $HTML->boxGetAltRowStyle($i) .'><td class="align-center">'.
 				util_make_link('/snippet/delete.php?type=frompackage&snippet_version_id='.db_result($result,$i,'snippet_version_id').'&snippet_package_version_id='.$snippet_package_version_id,
-						html_image("ic/trash.png", 16, 16)).'</td><td style="width:99%">'.
+						$HTML->getDeletePic(_('Remove this snippet version'), _('Delete'))).'</td><td style="width:99%">'.
 				db_result($result,$i,'name').' '.db_result($result,$i,'version')."</td></tr>";
 
 			$last_group=db_result($result,$i,'group_id');

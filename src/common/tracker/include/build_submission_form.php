@@ -3,7 +3,7 @@
  * Generic Tracker facility
  *
  * Copyright 1999-2001 (c) VA Linux Systems; 2005 GForge, LLC
- * Copyright 2012,2015, Franck Villaume - TrivialDev
+ * Copyright 2012,2015-2016, Franck Villaume - TrivialDev
  * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org/
  *
@@ -39,7 +39,7 @@ function artifact_submission_form($ath, $group, $summary='', $details='', $assig
 		$content = html_ao('div', array('class'=>'login_warning_msg'));
 		$content .= $HTML->warning_msg(_('Please').' '.util_make_link('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI')), _('login')));
 		$content .= _('If you <strong>cannot</strong> login, then enter your email address here')._(':');
-		$content .= html_e('p',array(), html_e('input', array('type'=>'text', 'name'=>'user_email', 'size'=>'50', 'maxlength'=>'255')));
+		$content .= html_e('p',array(), html_e('input', array('type'=>'email', 'name'=>'user_email', 'size'=>'50', 'maxlength'=>'255')));
 		$content .= html_ac(html_ap() - 1);
 		$cells = array();
 		$cells[][] = $content;
@@ -77,7 +77,7 @@ function artifact_submission_form($ath, $group, $summary='', $details='', $assig
 
 	$content = html_e('strong', array(), _('Detailed description').utils_requiredField()._(':'));
 	$content .= notepad_button('document.forms.trackeraddform.details').html_e('br');
-	$content .= html_e('textarea', array('id'=>'tracker-description', 'required'=>'required', 'name'=>'details', 'rows'=>'20', 'cols'=>'79', 'title'=>util_html_secure(html_get_tooltip_description('description'))), $details, false);
+	$content .= html_e('textarea', array('id'=>'tracker-description', 'required'=>'required', 'name'=>'details', 'rows'=>'20', 'style'=>'width: 100%', 'title'=>util_html_secure(html_get_tooltip_description('description'))), $details, false);
 	$cells = array();
 	$cells[] = array($content, 'colspan'=>'2');
 	echo $HTML->multiTableRow(array(), $cells);

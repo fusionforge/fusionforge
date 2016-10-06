@@ -55,20 +55,7 @@ if (session_loggedin()) {
 //
 //	Validate return_to
 //
-if ($return_to) {
-	$tmpreturn = explode('?',$return_to);
-	$rtpath = $tmpreturn[0];
-
-	if (@is_file(forge_get_config('url_root').$rtpath)
-	    || @is_dir(forge_get_config('url_root').$rtpath)
-	    || (strpos($rtpath,'/projects') == 0)
-	    || (strpos($rtpath,'/plugins/mediawiki') == 0)) {
-		$newrt = $return_to;
-	} else {
-		$newrt = '/';
-	}
-	$return_to = $newrt;
-}
+validate_return_to($return_to);
 
 if (forge_get_config('use_ssl') && !session_issecure()) {
 	//force use of SSL for login

@@ -1,8 +1,8 @@
 <?php
 /**
- * FusionForge export projects list in RSS 2.0
- * Copyright Scott Grayban <sgrayban@borgnet.us>
- * http://fusionforge.org/
+ * FusionForge Docman constants
+ *
+ * Copyright 2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -20,23 +20,9 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once '../env.inc.php';
-require_once $gfcommon.'include/pre.php';
-require_once $gfwww.'export/rss_utils.inc';
-
-header("Content-Type: text/xml; charset=utf-8");
-print '<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0">
-';
-
-$limit = getIntFromRequest('limit', 10);
-
-$res = db_query_params('SELECT group_id,group_name,unix_group_name,homepage,short_description,register_time FROM groups
-			WHERE status = $1 AND is_template=0 AND register_time > 0
-			ORDER BY register_time DESC',
-			array ('A'),
-			$limit);
-
-rss_dump_project_result_set($res,forge_get_config ('forge_name')._(': ')._('New Projects Listing'));
-?>
-</rss>
+define('DOCMAN__TITLE_MIN_SIZE', 5);
+define('DOCMAN__TITLE_MAX_SIZE', 255);
+define('DOCMAN__DESCRIPTION_MIN_SIZE', 10);
+define('DOCMAN__DESCRIPTION_MAX_SIZE', 255);
+define('DOCMAN__COMMENT_MAX_SIZE', 255);
+define('DOCMAN__INFAMOUS_USER_ID', 100);
