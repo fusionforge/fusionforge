@@ -90,7 +90,7 @@ if ($selected_tag) {
 	if ($start < 0) {
 		$start = 0;
 	}
-	$nbProjects = FusionForge::getInstance()->getNumberOfProjectsUsingTags(array('groups.status' => 'A', 'groups.type_id' => 1, 'groups.is_template' => 0, 'LOWER(name)' => strtolower($selected_tag)), 'register_time > 0 AND groups.group_id in (select ref_id FROM pfo_role_setting WHERE section_name = \'project_read\' and perm_val = 1 and role_id IN ('.$role_id.'))');
+	$nbProjects = FusionForge::getInstance()->getNumberOfProjectsUsingTags(array('groups.status' => 'A', 'groups.is_template' => 0, 'LOWER(name)' => strtolower($selected_tag)), 'register_time > 0 AND groups.group_id in (select ref_id FROM pfo_role_setting WHERE section_name = \'project_read\' and perm_val = 1 and role_id IN ('.$role_id.'))');
 	$projects = group_get_readable_projects_using_tag_asc($selected_tag, $paging, $start);
 
 	$max = ($nbProjects > ($start + $paging)) ? ($start + $paging) : $nbProjects;

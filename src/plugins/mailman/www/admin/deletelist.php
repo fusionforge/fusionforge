@@ -68,7 +68,7 @@ mailman_header(array(
 
 ?>
 <h3><?php echo $ml->getName(); ?></h3>
-<?php echo $HTML->openForm(array('method' => 'post', 'action' => getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;id='.$ml->getID())); ?>
+<?php echo $HTML->openForm(array('method' => 'post', 'action' => getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&id='.$ml->getID())); ?>
 <p>
 <input id="sure" type="checkbox" name="sure" value="1">
 <label for="sure">

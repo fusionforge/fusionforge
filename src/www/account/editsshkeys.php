@@ -56,7 +56,7 @@ if (count($sshKeysArray)) {
 		$cells[][] = $sshKey['algorithm'];
 		$cells[][] = $sshKey['fingerprint'];
 		$cells[][] = date(_('Y-m-d H:i'), $sshKey['upload']);
-		$cells[][] = util_make_link('/account/?&action=deletesshkey&keyid='.$sshKey['keyid'], html_image('docman/trash-empty.png',22,22,array('alt'=>_('Delete this ssh key.'))), array('title' => _('Delete this ssh key.')));
+		$cells[][] = util_make_link('/account/?&action=deletesshkey&keyid='.$sshKey['keyid'], $HTML->getDeletePic(_('Delete this ssh key'), 'delete ssh key'));
 		echo $HTML->multiTableRow(array(), $cells);
 	}
 	echo $HTML->listTableBottom();

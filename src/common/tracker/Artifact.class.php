@@ -196,15 +196,11 @@ class Artifact extends FFError {
 				$user = $importData['user'];
 		} else {
 			if (!forge_check_perm ('tracker',$this->ArtifactType->getID(),'submit')) {
-					$this->setError(_('You are not currently allowed to submit items to this tracker.'));
-					return false;
+				$this->setError(_('You are not currently allowed to submit items to this tracker.'));
+				return false;
 			}
 
-			if (session_loggedin()) {
-				$user=user_getid();
-			} else {
-				$user=100;
-			}
+			$user = ((session_loggedin()) ? user_getid() : 100);
 		}
 
 		//
@@ -521,7 +517,7 @@ class Artifact extends FFError {
 		$res = db_query_params ('DELETE FROM artifact_extra_field_data WHERE artifact_id=$1',
 					array ($this->getID())) ;
 		if (!$res) {
-			$this->setError(_('Error deleting extra field data: ').db_error());
+			$this->setError(_('Error deleting extra field data')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -532,7 +528,7 @@ class Artifact extends FFError {
 		$res = db_query_params ('DELETE FROM artifact_file WHERE artifact_id=$1',
 					array ($this->getID())) ;
 		if (!$res) {
-			$this->setError(_('Error deleting file from db: ').db_error());
+			$this->setError(_('Error deleting file from db')._(': ').db_error());
 			db_rollback();
 			ArtifactStorage::instance()->rollback();
 			return false;
@@ -540,7 +536,7 @@ class Artifact extends FFError {
 		$res = db_query_params ('DELETE FROM artifact_message WHERE artifact_id=$1',
 					array ($this->getID())) ;
 		if (!$res) {
-			$this->setError(_('Error deleting message: ').db_error());
+			$this->setError(_('Error deleting message')._(': ').db_error());
 			db_rollback();
 			ArtifactStorage::instance()->rollback();
 			return false;
@@ -548,14 +544,14 @@ class Artifact extends FFError {
 		$res = db_query_params ('DELETE FROM artifact_history WHERE artifact_id=$1',
 					array ($this->getID())) ;
 		if (!$res) {
-			$this->setError(_('Error deleting history: ').db_error());
+			$this->setError(_('Error deleting history')._(': ').db_error());
 			db_rollback();
 			ArtifactStorage::instance()->rollback();
 			return false;
 		}
 		$MonitorElementObject = new MonitorElement('artifact');
 		if (!$MonitorElementObject->clearMonitor($this->getID())) {
-			$this->setError(_('Error deleting monitor: ').db_error());
+			$this->setError(_('Error deleting monitor')._(': ').db_error());
 			db_rollback();
 			ArtifactStorage::instance()->rollback();
 			return false;
@@ -563,7 +559,7 @@ class Artifact extends FFError {
 		$res = db_query_params ('DELETE FROM artifact WHERE artifact_id=$1',
 					array ($this->getID())) ;
 		if (!$res) {
-			$this->setError(_('Error deleting artifact: ').db_error());
+			$this->setError(_('Error deleting artifact')._(': ').db_error());
 			db_rollback();
 			ArtifactStorage::instance()->rollback();
 			return false;
@@ -574,7 +570,7 @@ class Artifact extends FFError {
 				WHERE group_artifact_id=$1',
 						array ($this->getID())) ;
 			if (!$res) {
-				$this->setError(_('Error updating artifact counts: ').db_error());
+				$this->setError(_('Error updating artifact counts')._(': ').db_error());
 				db_rollback();
 				ArtifactStorage::instance()->rollback();
 				return false;
@@ -584,7 +580,7 @@ class Artifact extends FFError {
 				WHERE group_artifact_id=$1',
 						array ($this->getID())) ;
 			if (!$res) {
-				$this->setError(_('Error updating artifact counts: ').db_error());
+				$this->setError(_('Error updating artifact counts')._(': ').db_error());
 				db_rollback();
 				ArtifactStorage::instance()->rollback();
 				return false;
@@ -805,7 +801,7 @@ class Artifact extends FFError {
 			}
 		}
 		if(array_key_exists('time', $importData)){
-			$time = $importData['time'];;
+			$time = $importData['time'];
 		} else {
 			$time = time();
 		}
@@ -838,11 +834,7 @@ class Artifact extends FFError {
 		if (array_key_exists('user', $importData)){
 			$user = $importData['user'];
 		} else {
-			if (!session_loggedin()) {
-				$user=100;
-			} else {
-				$user=user_getid();
-			}
+			$user = ((session_loggedin()) ? user_getid() : 100);
 		}
 		if (array_key_exists('time',$importData)){
 			$time = $importData['time'];

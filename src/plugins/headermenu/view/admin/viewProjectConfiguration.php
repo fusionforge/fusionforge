@@ -76,8 +76,8 @@ if (sizeof($linksArray)) {
 			$cells[][] = $HTML->getRemovePic('', '', array('alt'=>_('link is off'), 'title'=>_('link is off')));
 			$actionsLinks = util_make_link('/plugins/'.$headermenu->name.'?type=projectadmin&group_id='.$group_id.'&action=updateLinkStatus&linkid='.$link['id_headermenu'].'&linkstatus=1', html_image('docman/reserve-document.png', 22, 22, array('alt'=>_('Activate this link'))), array('title' => _('Activate this link')));
 		}
-		$actionsLinks .= util_make_link('/plugins/'.$headermenu->name.'?type=projectadmin&group_id='.$group_id.'&view=updateLinkValue&linkid='.$link['id_headermenu'], html_image('docman/edit-file.png',22,22, array('alt'=>_('Edit this link'))), array('title' => _('Edit this link')));
-		$actionsLinks .= util_make_link('/plugins/'.$headermenu->name.'?type=projectadmin&group_id='.$group_id.'&action=deleteLink&linkid='.$link['id_headermenu'], html_image('docman/trash-empty.png',22,22, array('alt'=>_('Delete this link'))), array('title' => _('Delete this link')));
+		$actionsLinks .= util_make_link('/plugins/'.$headermenu->name.'?type=projectadmin&group_id='.$group_id.'&view=updateLinkValue&linkid='.$link['id_headermenu'], $HTML->getEditFilePic(_('Edit this link'), 'editdocument'), array('title' => _('Edit this link')));
+		$actionsLinks .= util_make_link('/plugins/'.$headermenu->name.'?type=projectadmin&group_id='.$group_id.'&action=deleteLink&linkid='.$link['id_headermenu'], $HTML->getDeletePic(_('Delete this link'), 'trashdir'), array('title' => _('Delete this link')));
 		$cells[][] = $actionsLinks;
 		echo $HTML->multiTableRow(array('id' => $link['id_headermenu']), $cells);
 	}

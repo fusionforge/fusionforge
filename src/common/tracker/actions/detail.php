@@ -4,8 +4,8 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2015, Franck Villaume - TrivialDev
  * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
+ * Copyright 2012-2016, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -47,8 +47,8 @@ jQuery(document).ready(function() {
 
 <?php
 echo $HTML->openForm(array('id' => 'trackerdetailform', 'action' => '/tracker/?group_id='.$group_id.'&atid='.$ath->getID(), 'method' => 'post', 'enctype' => 'multipart/form-data'));
-if (session_loggedin()) { ?>
-	<table class="fullwidth">
+if (session_loggedin()) {
+	echo $HTML->listTableTop(); ?>
 		<tr>
 			<td>
 				<?php
@@ -81,9 +81,9 @@ if (session_loggedin()) { ?>
 				<input type="submit" name="submit" value="<?php echo _('Save Changes') ?>" />
 			</td>
 		</tr>
-	</table>
-<?php } ?>
-	<table width="80%">
+<?php echo $HTML->listTableBottom(); ?>
+<?php }
+echo $HTML->listTableTop(); ?>
 		<tr>
 			<td>
 				<strong><?php echo _('Date')._(':'); ?></strong><br />
@@ -121,7 +121,6 @@ if (session_loggedin()) { ?>
 
 		<?php
 			$ath->renderExtraFields($ah->getExtraFieldData(),true,'none',false,'Any',array(),false,'DISPLAY');
-			$ath->renderRelatedTasks($group, $ah);
 		?>
 
 		<tr>
@@ -135,10 +134,13 @@ if (session_loggedin()) { ?>
 			<br />
 			<?php $ah->showDetails(); ?>
 		</td></tr>
-</table>
+<?php echo $HTML->listTableBottom(); ?>
 <?php
 $count=db_numrows($ah->getMessages());
 $nb = $count? ' ('.$count.')' : '';
+$file_list = $ah->getFiles();
+$count=count($file_list);
+$nbf = $count? ' ('.$count.')' : '';
 $pm = plugin_manager_get_object();
 $pluginsListeners = $pm->GetHookListeners('artifact_extra_detail');
 $pluginfound = false;
@@ -151,8 +153,11 @@ foreach ($pluginsListeners as $pluginsListener) {
 ?>
 <div id="tabber">
 	<ul>
-	<li><a href="#tabber-comments"><?php echo _('Comments'); ?></a></li>
-	<li><a href="#tabber-attachments"><?php echo _('Attachments'); ?></a></li>
+	<li><a href="#tabber-comments"><?php echo _('Comments').$nb; ?></a></li>
+	<?php if ($group->usesPM()) { ?>
+	<li><a href="#tabber-tasks"><?php echo _('Related Tasks'); ?></a></li>
+	<?php } ?>
+	<li><a href="#tabber-attachments"><?php echo _('Attachments').$nbf; ?></a></li>
 	<?php if ($pluginfound) { ?>
 	<li><a href="#tabber-commits"><?php echo _('Commits'); ?></a></li>
 	<?php } ?>
@@ -161,10 +166,10 @@ foreach ($pluginsListeners as $pluginsListener) {
 	<li><a href="#tabber-relations"><?php echo _('Relations'); ?></a></li>
 	<?php } ?>
 	</ul>
-	<div id="tabber-comments" class="tabbertab" title="<?php echo _('Comments').$nb; ?>">
-		<table width="80%">
+	<div id="tabber-comments" class="tabbertab">
+		<?php echo $HTML->listTableTop();
+			if (forge_check_perm ('tracker',$ath->getID(),'submit')) { ?>
 			<tr><td colspan="2">
-				<?php if (forge_check_perm ('tracker',$ath->getID(),'submit')) { ?>
 				<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>" />
 				<input type="hidden" name="func" value="postmod" />
 				<input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
@@ -172,23 +177,27 @@ foreach ($pluginsListeners as $pluginsListener) {
 				<p>
 				<strong><?php echo _('Add A Comment')._(':'); ?></strong>
 				<?php echo notepad_button('document.forms.trackerdetailform.details') ?><br />
-				<textarea name="details" rows="10" cols="60"></textarea>
+				<textarea name="details" rows="10" style="width: 100%" ></textarea>
 				</p>
-				<?php } ?>
 			</td></tr>
+			<?php } ?>
 			<tr><td colspan="2">
 			<?php $ah->showMessages(); ?>
 			</td></tr>
-	</table>
+	<?php echo $HTML->listTableBottom(); ?>
 	</div>
 <?php
-$tabcnt=0;
-$file_list = $ah->getFiles();
-$count=count($file_list);
-$nb = $count? ' ('.$count.')' : '';
+if ($group->usesPM()) {
 ?>
-	<div id="tabber-attachments" class="tabbertab" title="<?php echo _('Attachments').$nb; ?>">
-	<table width="80%">
+<div id="tabber-tasks" class="tabbertab">
+	<?php
+		$ath->renderRelatedTasks($group, $ah);
+	?>
+</div>
+<?php }
+?>
+	<div id="tabber-attachments" class="tabbertab">
+	<?php echo $HTML->listTableTop(); ?>
 		<tr><td colspan="2">
 		<?php if (session_loggedin() && ($ah->getSubmittedBy() == user_getid())) { ?>
 			<strong><?php echo _('Attach Files')._(':'); ?></strong>  <?php echo('('._('max upload size')._(': ').human_readable_bytes(util_get_maxuploadfilesize()).')') ?><br />
@@ -198,44 +207,45 @@ $nb = $count? ' ('.$count.')' : '';
 			<input type="file" name="input_file3" /><br />
 			<input type="file" name="input_file4" /><br />
 		<?php } ?>
-	<?php
+		<?php
 		//
 		// print a list of files attached to this Artifact
 		//
 			$ath->renderFiles($group_id, $ah);
 		?>
-	</table>
+		</td></tr>
+	<?php echo $HTML->listTableBottom(); ?>
 	</div>
 <?php
 	if ($pluginfound) {
 ?>
-	<div id="tabber-commits" class="tabbertab" title="<?php echo _('Commits'); ?>" >
-	<table width="80%">
+	<div id="tabber-commits" class="tabbertab">
+	<?php echo $HTML->listTableTop(); ?>
 	<tr><td colspan="2"><!-- dummy in case the hook is empty --></td></tr>
 		<?php
 			$hookParams['artifact_id'] = $aid;
 			$hookParams['group_id'] = $group_id;
 			plugin_hook("artifact_extra_detail",$hookParams);
 		?>
-	</table>
+	<?php echo $HTML->listTableBottom(); ?>
 	</div>
 <?php
 	}
 ?>
-	<div id="tabber-changes" class="tabbertab" title="<?php echo _('Changes'); ?>">
+	<div id="tabber-changes" class="tabbertab">
 		<?php $ah->showHistory(); ?>
 	</div>
 	<?php $ah->showRelations(); ?>
 </div>
-<?php if (session_loggedin()) { ?>
-	<table class="fullwidth">
+<?php if (session_loggedin()) {
+	echo $HTML->listTableTop(); ?>
 		<tr>
 			<td>
 				<input type="submit" name="submit" value="<?php echo _('Save Changes') ?>" />
 			</td>
 		</tr>
-	</table>
-<?php }
+	<?php echo $HTML->listTableBottom();
+}
 echo $HTML->closeForm();
 $ath->footer();
 

@@ -29,9 +29,6 @@ class PluginMoinMoin extends FForge_SeleniumTestCase
 
 	function testMoinMoin()
 	{
-		$this->skip_on_rpm_installs();
-		$this->skip_on_centos();
-
 		$this->loadAndCacheFixture();
 
 		$this->changeConfig(array("moinmoin" => array("use_frame" => "no")));
@@ -45,8 +42,9 @@ class PluginMoinMoin extends FForge_SeleniumTestCase
 		$this->clickAndWait("submit");
 		$this->assertTrue($this->isTextPresent("Project information updated"));
 
-		$this->cron_for_plugin("create-wikis.php", "moinmoin");
-		$this->pause("5000"); //wait for cronjob to be executed
+		$this->waitSystasks();
+		$this->pause("8000"); //wait for cronjob to be executed
+
 		$this->gotoProject('ProjectA');
 		$this->clickAndWait("link=MoinMoinWiki");
 		$this->assertFalse($this->isTextPresent("ConfigurationError"));

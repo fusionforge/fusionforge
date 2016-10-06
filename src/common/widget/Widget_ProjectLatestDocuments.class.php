@@ -76,8 +76,8 @@ class Widget_ProjectLatestDocuments extends Widget {
 		} else {
 			html_use_tablesorter();
 			$result .= $HTML->getJavascripts();
-			$tabletop = array(_('Date'), _('File Name'), _('Title'), _('Author'), _('Path'));
-			$classth = array('', '', '', '', '');
+			$tabletop = array(_('Date'), _('File Type'), _('File Name'), _('Title'), _('Author'), _('Path'));
+			$classth = array('', '', '', '', '', '');
 			if (session_loggedin()) {
 				$tabletop[] = _('Status');
 				$classth[] = '';
@@ -105,16 +105,17 @@ class Widget_ProjectLatestDocuments extends Widget {
 					$path = $ndg->getPath(true, true);
 					switch ($filetype) {
 						case "URL": {
-							$docurl = util_make_link($filename, $filename, array(), true);
+							$docurl = util_make_link($filename, html_image($doc->getFileTypeImage(), 22, 22, array('alt'=>$doc->getFileType())), array(), true);
 							break;
 						}
 						default: {
-							$docurl = util_make_link('/docman/view.php/'.$group_id.'/'.$docid.'/'.urlencode($filename), '<strong>'.$filename.'</strong>');
+							$docurl = util_make_link('/docman/view.php/'.$group_id.'/'.$docid.'/'.urlencode($filename), html_image($doc->getFileTypeImage(), 22, 22, array('alt'=>$doc->getFileType())));
 						}
 					}
 					$cells = array();
 					$cells[][] = date(_('Y-m-d'),$realdate);
 					$cells[][] = $docurl;
+					$cells[][] = $filename;
 					$cells[][] = $title;
 					$cells[][] = make_user_link($user_name, $realname);
 					$cells[][] = $path;

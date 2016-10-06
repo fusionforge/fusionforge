@@ -5,7 +5,7 @@
  * Copyright 2010, FusionForge Team
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
- * Copyright 2015, Franck Villaume - TrivialDev
+ * Copyright 2015-2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -79,7 +79,7 @@ foreach ($fields as $f => $name) {
 					util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&id='.$f.'&customize_list=1&post_changes=1&updownorder_field=1&new_pos='.(($pos == count($browse_fields) - 1)? $pos + 1 : $pos + 2), html_image('ic/btn_down.png', 19, 18, array('alt' => _('Down')))).
 					'</td>'."\n".
 					'<td class="align-center">'.
-					util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&id='.$f.'&customize_list=1&post_changes=1&delete_field=1', html_image('ic/trash.png','','',array('alt' => _('Delete')))).
+					util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&id='.$f.'&customize_list=1&post_changes=1&delete_field=1', $HTML->getDeletePic(_('Remove this field'), 'trashfield')).
 					'</td>'."\n".
 					'</tr>'."\n";
 	}

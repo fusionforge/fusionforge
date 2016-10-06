@@ -26,8 +26,12 @@ forge_define_config_item('use_frame', 'moinmoin', false);
 forge_set_config_item_bool('use_frame', 'moinmoin');
 
 class MoinMoinPlugin extends Plugin {
-	function __construct() {
-		parent::__construct();
+	public $systask_types = array(
+		'MOINMOIN_CREATE_WIKI' => 'create-wikis.php',
+	);
+
+	function __construct($id = 0) {
+		parent::__construct($id);
 		$this->name = "moinmoin";
 		$this->text = _("MoinMoinWiki") ; // To show in the tabs, use...
 		$this->pkg_desc =
@@ -157,6 +161,17 @@ _("This plugin allows each project to embed MoinMoinWiki under a tab.");
 				break ;
 			}
 		}
+	}
+
+	function groupisactivecheckboxpost(&$params) {
+			if (!parent::groupisactivecheckboxpost($params))
+					return false;
+			if (getIntFromRequest('use_moinmoin') == 1) {
+				$systasksq = new SystasksQ();
+				$group_id = $params['group'];
+				$systasksq->add($this->getID(), 'MOINMOIN_CREATE_WIKI', $group_id);
+			}
+			return true;
 	}
 }
 

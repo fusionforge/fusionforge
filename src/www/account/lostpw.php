@@ -40,7 +40,7 @@ if (getStringFromRequest('submit')) {
 
 	$u = user_get_object_by_name($loginname);
 
-	if (!$u || !is_object($u)){
+	if (!$u || !is_object($u) || ($u->getStatus() == 'S') || ($u->getStatus() == 'D')){
 		form_release_key(getStringFromRequest('form_key'));
 		exit_error(_('That user does not exist.'),'my');
 	}

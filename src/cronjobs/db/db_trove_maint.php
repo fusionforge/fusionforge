@@ -44,7 +44,6 @@ db_query_params ('INSERT INTO trove_agg
 FROM groups g
 LEFT JOIN project_weekly_metric USING (group_id), trove_group_link tgl, pfo_role_setting prs
 WHERE tgl.group_id=g.group_id
-AND g.type_id = 1
 AND g.status = $1
 AND g.group_id = prs.ref_id
 AND prs.section_name = $2
@@ -93,7 +92,6 @@ $res = db_query_params ('SELECT trove_cat.trove_cat_id,trove_cat.parent,count(gr
 		groups.group_id=trove_group_link.group_id,
         pfo_role_setting prs
 	WHERE (groups.status=$1 OR groups.status IS NULL)
-	AND (groups.type_id=1 OR groups.status IS NULL)
 	AND groups.group_id = prs.ref_id
 	AND prs.section_name = $2
 	AND prs.role_id = 1

@@ -102,7 +102,7 @@ function people_add_to_skill_inventory($skill_id,$skill_level_id,$skill_year_id)
 			$result = db_query_params("INSERT INTO people_skill_inventory (user_id,skill_id,skill_level_id,skill_year_id)
 						VALUES ($1, $2, $3, $4)", array(user_getid() ,$skill_id, $skill_level_id, $skill_year_id));
 			if (!$result || db_affected_rows($result) < 1) {
-				$error_msg .= _('Error inserting into skill inventory: ');
+				$error_msg .= _('Error inserting into skill inventory')._(': ');
 				$error_msg .= db_error();
 			} else {
 				$feedback .= _('Added to skill inventory');

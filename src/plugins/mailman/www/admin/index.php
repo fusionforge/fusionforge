@@ -187,7 +187,7 @@ if ($group_id) {
 					'admin' => 1));
 		?>
 			<h3><?php echo $mailingList->getName(); ?></h3>
-		<?php echo $HTML->openForm(array('method' => 'post', 'action' => getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_list_id='.$mailingList->getID())); ?>
+		<?php echo $HTML->openForm(array('method' => 'post', 'action' => getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&group_list_id='.$mailingList->getID())); ?>
 			<input type="hidden" name="post_changes" value="y" />
 			<input type="hidden" name="change_status" value="y" />
 			<p>

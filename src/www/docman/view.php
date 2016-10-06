@@ -120,6 +120,7 @@ if (is_numeric($docid)) {
 	ob_end_clean();
 	$file_path = $dv->getFilePath();
 	$length = filesize($file_path);
+	$d->downloadUp();
 	utils_headers_download($dv->getFileName(), $dv->getFileType(), $length);
 	readfile_chunked($file_path);
 

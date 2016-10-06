@@ -47,8 +47,7 @@ class SysTasksQ extends FFError {
 		}
 		$res = db_query_qpa($qpa);
 		if (!$res) {
-			$this->setError(sprintf(_('Error: Cannot create system action: %s'),
-									db_error()));
+			$this->setError(_('Error: Cannot create system action')._(': ').db_error());
 			return false;
 		}
 		if (db_numrows($res) >= 1) {
@@ -64,8 +63,7 @@ class SysTasksQ extends FFError {
 			) VALUES ($1, $2, $3, $4, now())',
 			array($plugin_id, $systask_type, $group_id, $user_id));
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError(sprintf(_('Error: Cannot create system action: %s'),
-									db_error()));
+			$this->setError(_('Error: Cannot create system action')._(': ').db_error());
 			return false;
 		}
 		return true;

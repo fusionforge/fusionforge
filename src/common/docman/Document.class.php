@@ -34,6 +34,7 @@ require_once $gfcommon.'docman/DocumentStorage.class.php';
 require_once $gfcommon.'docman/DocumentVersion.class.php';
 require_once $gfcommon.'include/MonitorElement.class.php';
 require_once $gfcommon.'include/utils_crossref.php';
+require_once $gfcommon.'docman/include/constants.php';
 
 $DOCUMENT_OBJ = array();
 
@@ -92,7 +93,7 @@ class Document extends FFError {
 	function __construct(&$Group, $docid = false, $arr = false) {
 		parent::__construct();
 		if (!$Group || !is_object($Group)) {
-			$this->setError(_('No Valid Group Object'));
+			$this->setError(_('Invalid Project'));
 			return;
 		}
 		if ($Group->isError()) {
@@ -129,36 +130,60 @@ class Document extends FFError {
 	/**
 	 * create - use this function to create a new entry in the database.
 	 *
-	 * @param	string	$filename		The filename of this document. Can be a URL.
-	 * @param	string	$filetype		The filetype of this document. If filename is URL, this should be 'URL';
-	 * @param	string	$data			The absolute path file itself.
-	 * @param	int	$doc_group		The doc_group id of the doc_groups table.
-	 * @param	string	$title			The title of this document.
-	 * @param	string	$description		The description of this document.
-	 * @param	int	$stateid		The state id of the document. At creation, cannot be deleted status.
-	 * @param	string	$vcomment		The comment of the new created version
-	 * @param	int	$createtimestamp	Timestamp of the creation of this document
+	 * @param	string	$filename	The filename of this document. Can be a URL.
+	 * @param	string	$filetype	The filetype of this document. If filename is URL, this should be 'URL';
+	 * @param	string	$data		The absolute path file itself.
+	 * @param	int	$doc_group	The doc_group id of the doc_groups table.
+	 * @param	string	$title		The title of this document.
+	 * @param	string	$description	The description of this document.
+	 * @param	int	$stateid	The state id of the document. At creation, cannot be deleted status.
+	 * @param	string	$vcomment	The comment of the new created version
+	 * @param	array	$importData	Array of data to change creator, time of creation, bypass permission check and do not send notification like:
+	 *					array('user' => 127, 'time' => 1234556789, 'nopermcheck' => 1, 'nonotice' => 1)
 	 * @return	bool	success.
 	 */
-	function create($filename, $filetype, $data, $doc_group, $title, $description, $stateid = 0, $vcomment = '', $createtimestamp = null) {
-		if (strlen($title) < 5) {
+	function create($filename, $filetype, $data, $doc_group, $title, $description, $stateid = 0, $vcomment = '', $importData = array()) {
+		if (strlen($title) < DOCMAN__TITLE_MIN_SIZE) {
 			$this->setError(_('Title Must Be At Least 5 Characters'));
 			return false;
 		}
-		if (strlen($description) < 10) {
+		if (strlen($description) < DOCMAN__DESCRIPTION_MIN_SIZE) {
 			$this->setError(_('Document Description Must Be At Least 10 Characters'));
 			return false;
 		}
 
-		$user_id = ((session_loggedin()) ? user_getid() : 100);
+		if (strlen($title) > DOCMAN__TITLE_MAX_SIZE) {
+			$this->setError(sprintf(_('Title Must Be Max %d Characters'), DOCMAN__TITLE_MAX_SIZE));
+			return false;
+		}
 
-		$doc_initstatus = '3';
+		if (strlen($description) > DOCMAN__DESCRIPTION_MAX_SIZE) {
+			$this->setError(sprintf(_('Document Description Must Be Max %d Characters'), DOCMAN__DESCRIPTION_MAX_SIZE));
+			return false;
+		}
+
+		if (strlen($description) > DOCMAN__COMMENT_MAX_SIZE) {
+			$this->setError(sprintf(_('Document Comment Must Be Max %d Characters'), DOCMAN__COMMENT_MAX_SIZE));
+			return false;
+		}
+
+		if (isset($importData['user'])) {
+			$user_id = $importData['user'];
+		} else {
+			$user_id = ((session_loggedin()) ? user_getid() : DOCMAN__INFAMOUS_USER_ID);
+		}
+
 		$perm =& $this->Group->getPermission();
-		if ($perm && is_object($perm) && $perm->isDocEditor()) {
-			if ($stateid && $stateid != 2) {
-				$doc_initstatus = $stateid;
-			} else {
-				$doc_initstatus = '1';
+		if (isset($importData['nopermcheck']) && $importData['nopermcheck']) {
+			$doc_initstatus = $stateid;
+		} else {
+			$doc_initstatus = '3';
+			if ($perm && is_object($perm) && $perm->isDocEditor()) {
+				if ($stateid && $stateid != 2) {
+					$doc_initstatus = $stateid;
+				} else {
+					$doc_initstatus = '1';
+				}
 			}
 		}
 
@@ -194,7 +219,7 @@ class Document extends FFError {
 		}
 
 		db_begin();
-		$createtimestamp = (($createtimestamp) ? $createtimestamp : time());
+		$createtimestamp = (isset($importData['time']))? $importData['time'] : time();
 		$result = db_query_params('INSERT INTO doc_data (group_id, createdate, doc_group, stateid)
 						VALUES ($1, $2, $3, $4)',
 						array($this->Group->getID(), $createtimestamp, $doc_group, $doc_initstatus));
@@ -237,7 +262,7 @@ class Document extends FFError {
 			return false;
 		}
 
-		if ($perm->isDocEditor()) {
+		if ($perm->isDocEditor() || (isset($importData['nopermcheck']) && $importData['nopermcheck'])) {
 			$localDg = documentgroup_get_object($doc_group, $this->Group->getID());
 			if (!$localDg->update($localDg->getName(), $localDg->getParentID(), 1, $localDg->getState(), $createtimestamp)) {
 				$this->setError(_('Error updating document group')._(': ').$localDg->getErrorMessage());
@@ -248,8 +273,10 @@ class Document extends FFError {
 				return false;
 			}
 		}
-		$this->sendNotice(true);
-		$this->sendApprovalNotice();
+		if (!isset($importData['nonotice'])) {
+			$this->sendNotice(true);
+			$this->sendApprovalNotice();
+		}
 		db_commit();
 		if ($filesize) {
 			DocumentStorage::instance()->commit();
@@ -800,36 +827,60 @@ class Document extends FFError {
 	 * @param	int	$version		The version to update. Default is 1.
 	 * @param	int	$current_version	Is the current version? default is 1.
 	 * @param	int	$new_version		To create a new version? default is 0. == No.
-	 * @param	int	$updatetimestamp	Timestamp of this update.
+	 * @param	array	$importData		Array of data to change creator, time of creation, bypass permission check and do not send notification like:
+	 *						array('user' => 127, 'time' => 1234556789, 'nopermcheck' => 1, 'nonotice' => 1)
 	 * @param	string	$vcomment		The comment of this version
 	 * @return	boolean	success.
 	 */
-	function update($filename, $filetype, $data, $doc_group, $title, $description, $stateid, $version = 1, $current_version = 1, $new_version = 0, $updatetimestamp = null, $vcomment = '') {
+	function update($filename, $filetype, $data, $doc_group, $title, $description, $stateid, $version = 1, $current_version = 1, $new_version = 0, $importData = array(), $vcomment = '') {
 
 		$perm =& $this->Group->getPermission();
-		if (!$perm || !is_object($perm) || !$perm->isDocEditor()) {
-			$this->setPermissionDeniedError();
+		if (!isset($importData['nopermcheck'])) {
+			if (!$perm || !is_object($perm) || !$perm->isDocEditor()) {
+				$this->setPermissionDeniedError();
+				return false;
+			}
+		}
+
+		if (isset($importData['user'])) {
+			$user = user_get_object($importData['user']);
+		} else {
+			$user = session_get_user();
+		}
+		if (!isset($importData['nopermcheck'])) {
+			if ($this->getLocked() && ($this->getLockedBy() != $user->getID())) {
+				$this->setPermissionDeniedError();
+				return false;
+			}
+		}
+
+		if (strlen($title) < DOCMAN__TITLE_MIN_SIZE) {
+			$this->setError(sprintf(_('Title Must Be At Least %d Characters'), DOCMAN__TITLE_MIN_SIZE));
 			return false;
 		}
 
-		$user = session_get_user();
-		if ($this->getLocked() && ($this->getLockedBy() != $user->getID())) {
-			$this->setPermissionDeniedError();
+		if (strlen($description) < DOCMAN__DESCRIPTION_MIN_SIZE) {
+			$this->setError(sprintf(_('Document Description Must Be At Least %d Characters'), DOCMAN__DESCRIPTION_MIN_SIZE));
 			return false;
 		}
 
-		if (strlen($title) < 5) {
-			$this->setError(_('Title Must Be At Least 5 Characters'));
+		if (strlen($title) > DOCMAN__TITLE_MAX_SIZE) {
+			$this->setError(sprintf(_('Title Must Be Max %d Characters'), DOCMAN__TITLE_MAX_SIZE));
 			return false;
 		}
 
-		if (strlen($description) < 10) {
-			$this->setError(_('Document Description Must Be At Least 10 Characters'));
+		if (strlen($description) > DOCMAN__DESCRIPTION_MAX_SIZE) {
+			$this->setError(sprintf(_('Document Description Must Be Max %d Characters'), DOCMAN__DESCRIPTION_MAX_SIZE));
+			return false;
+		}
+
+		if (strlen($description) > DOCMAN__COMMENT_MAX_SIZE) {
+			$this->setError(sprintf(_('Document Comment Must Be Max %d Characters'), DOCMAN__COMMENT_MAX_SIZE));
 			return false;
 		}
 
 		db_begin();
-		$updatetimestamp = (($updatetimestamp) ? $updatetimestamp : time());
+		$updatetimestamp = ((isset($importData['time'])) ? $importData['time'] : time());
 		$colArr = array('stateid', 'doc_group', 'updatedate', 'locked', 'locked_by');
 		$valArr = array($stateid, $doc_group, $updatetimestamp, 0, NULL);
 		if (!$this->setValueinDB($colArr, $valArr)) {
@@ -881,7 +932,7 @@ class Document extends FFError {
 			if (isset($kwords)) {
 				$version_kwords = $kwords;
 			}
-			$serial_id = $dv->create($this->getID(), $title, $description, user_getid(), $filetype, $filename, $filesize, $version_kwords, $updatetimestamp, $version, $current_version, $vcomment);
+			$serial_id = $dv->create($this->getID(), $title, $description, $user->getID(), $filetype, $filename, $filesize, $version_kwords, $updatetimestamp, $version, $current_version, $vcomment);
 			if (!$serial_id) {
 				$this->setOnUpdateError(_('Error updating document version')._(': ').$dv->getErrorMessage());
 				db_rollback();

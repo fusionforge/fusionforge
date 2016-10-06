@@ -5,7 +5,7 @@
  * Copyright 1999-2000 (c) The SourceForge Crew
  * Copyright 2010, FusionForge Team
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013-2014, Franck Villaume - TrivialDev
+ * Copyright 2013-2014,2016, Franck Villaume - TrivialDev
  * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
@@ -83,10 +83,6 @@ if ($group_id && $atid) {
 		getStringFromRequest('post_changes_alphaorder')) {
 		include $gfcommon.'tracker/actions/admin-updates.php';
 
-	} elseif (getStringFromRequest('edittemplate')) {
-
-		include $gfcommon.'tracker/views/form-edittemplate.php';
-
 	} elseif (getStringFromRequest('deletetemplate')) {
 
 		$confirm = getStringFromRequest('confirm');
@@ -139,6 +135,10 @@ if ($group_id && $atid) {
 	} elseif ($action == 'customize_list') {
 
 		include $gfcommon.'tracker/views/form-customizelist.php';
+
+	}  elseif (getStringFromRequest('edittemplate')) {
+
+		include $gfcommon.'tracker/views/form-edittemplate.php';
 
 	} elseif ($action == 'workflow') {
 
