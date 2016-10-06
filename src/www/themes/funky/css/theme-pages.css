@@ -223,12 +223,12 @@
 }
 
 .docman_li_treecontent {
-	list-style-image: url('/themes/funky/images/ic/folder.png');
+	list-style-image: url('../images/ic/folder.png');
 	margin: 2px;
 }
 
 .docman_li_treecontent_selected {
-	list-style-image: url('/themes/funky/images/docman/directory-with-documents.png');
+	list-style-image: url('../images/docman/directory-with-documents.png');
 	margin: 2px;
 }
 
