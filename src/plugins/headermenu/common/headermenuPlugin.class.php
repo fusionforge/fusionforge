@@ -430,12 +430,12 @@ in the main menu (outermenu) or in the project menu (groupmenu).");
 				html_use_jquery();
 				html_use_jqueryui();
 				use_javascript('/plugins/'.$this->name.'/scripts/HeaderMenuController.js');
-				html_use_tablesorter();
 				$group_id = getIntFromRequest('group_id');
 				$params['toptab'] = 'admin';
 				$params['group'] = $group_id;
 				$params['title'] = _('Menu Tabs Manager Admin');
 				site_project_header($params);
+				html_use_tablesorter();
 				$returned = true;
 				break;
 			}
