@@ -168,6 +168,8 @@ class Navigation extends FFError {
 	 * Get the searchBox HTML code.
 	 */
 	function getSearchBox() {
+		global $HTML;
+		
 		$vars = $this->getSearchBoxData();
 		$res = "";
 		$res .= $HTML->openForm(array('id' => 'searchBox', 'action' => '/search/', 'method' => 'get'));
@@ -176,11 +178,12 @@ class Navigation extends FFError {
 		$searchEngines = $vars['search_engines'];
 		for($i = 0, $max = count($searchEngines); $i < $max; $i++) {
 			$searchEngine =& $searchEngines[$i];
-			$attrs = array('value' => $searchEngine->getType());
-			if ( $type_of_search == $searchEngine->getType()) {
+			$type = $searchEngine['value'];
+			$attrs = array('value' => $type);
+			if ( $type_of_search == $type) {
 				$attrs['selected'] = 'selected';
 			}
-			$res .= html_e('option', $attrs, $searchEngine->getLabel($parameters), false);
+			$res .= html_e('option', $attrs, $searchEngine['name'], false);
 		}
 		$res .= html_ac(html_ap() - 1);
 
