@@ -54,7 +54,7 @@ if (!$user || !is_object($user)) {
     exit_error(_('Could Not Get User'),'home');
 } elseif ($user->isError()) {
     exit_error($user->getErrorMessage(),'my');
-} elseif (($u->getStatus == 'D') || ($u->getStatus == 'D')) {
+} elseif (($u->getStatus == 'S') || ($u->getStatus == 'D')) {
 	exit_error(_('Account is suspended or deleted','my'));
 }
 

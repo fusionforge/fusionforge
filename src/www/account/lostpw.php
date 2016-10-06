@@ -40,7 +40,7 @@ if (getStringFromRequest('submit')) {
 
 	$u = user_get_object_by_name($loginname);
 
-	if (!$u || !is_object($u) || ($u->getStatus == 'D') || ($u->getStatus == 'S')){
+	if (!$u || !is_object($u) || ($u->getStatus == 'S') || ($u->getStatus == 'D')){
 		form_release_key(getStringFromRequest('form_key'));
 		exit_error(_('That user does not exist.'),'my');
 	}
@@ -53,8 +53,6 @@ if (getStringFromRequest('submit')) {
 	if ($u->isError()) {
 		form_release_key(getStringFromRequest('form_key'));
 		exit_error($u->getErrorMessage(),'my');
-	} elseif (($u->getStatus == 'D') || ($u->getStatus == 'D')) {
-		exit_error(_('Account is suspended or deleted','my'));
 	} else {
 
 		$message = sprintf(_('Someone (presumably you) on the %s site requested a password change through email verification.'),
