@@ -1,1 +1,1 @@
-alter table groups drop column type_id;
+ALTER TABLE groups DROP COLUMN type_id;
