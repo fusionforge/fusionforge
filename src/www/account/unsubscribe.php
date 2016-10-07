@@ -55,7 +55,7 @@ if (!$user || !is_object($user)) {
 } elseif ($user->isError()) {
     exit_error($user->getErrorMessage(),'my');
 } elseif (($u->getStatus() == 'S') || ($u->getStatus() == 'D')) {
-	exit_error(_('Account is suspended or deleted','my'));
+	exit_error(_('Account is suspended or deleted'),'my');
 }
 
 $all=getStringFromRequest('all');
