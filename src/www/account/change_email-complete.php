@@ -53,7 +53,7 @@ if (!$u || !is_object($u)) {
 } elseif ($u->isError()) {
 	exit_error($u->getErrorMessage(),'my');
 } elseif (($u->getStatus() == 'S') || ($u->getStatus() == 'D')) {
-	exit_error(_('Account is suspended or deleted','my'));
+	exit_error(_('Account is suspended or deleted'),'my');
 }
 
 if (!$u->setEmail($u->getNewEmail())) {

@@ -66,6 +66,12 @@ if ($g->isError())
 	exit_error($g->getErrorMessage(), 'docman');
 
 $dirid = getIntFromRequest('dirid', 0);
+if ($dirid) {
+	$chkdg = documentgroup_get_object($dirid, $g->getID());
+	if (!is_object($chkdg)) {
+		session_redirect('/docman/?group_id='.$group_id);
+	}
+}
 
 $childgroup_id = getIntFromRequest('childgroup_id');
 
