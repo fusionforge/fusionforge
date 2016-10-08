@@ -228,11 +228,6 @@ EOF
     REMOVEDEPS=$DEPS
     backport_rpm_from_fedora libnss-pgsql
 
-    # moin: no available package for RHEL; though it's available in Fedora
-    DEPS="python-devel"
-    REMOVEDEPS=$DEPS
-    backport_rpm_from_fedora moin
-
     DEPS="dos2unix"
     REMOVEDEPS=$DEPS
     backport_rpm_from_fedora php-nusoap
