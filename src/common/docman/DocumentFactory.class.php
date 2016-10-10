@@ -1,4 +1,4 @@
-?php
+<?php
 /**
  * FusionForge Documentation Manager
  *
