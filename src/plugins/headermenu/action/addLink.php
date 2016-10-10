@@ -46,17 +46,17 @@ if (!empty($name) && !empty($linkmenu)) {
 				if (util_check_url($link)) {
 					if ($headermenu->addLink($link, $name, $description, $linkmenu)) {
 						$feedback = _('Task succeeded.');
-						session_redirect($redirect_url);
+						session_redirect($redirect_url, false);
 					}
 					$error_msg = _('Task failed');
-					session_redirect($redirect_url);
+					session_redirect($redirect_url, false);
 				} else {
 					$error_msg = _('Provided Link is not a valid URL.');
-					session_redirect($redirect_url);
+					session_redirect($redirect_url, false);
 				}
 			}
 			$warning_msg = _('Missing Link URL.');
-			session_redirect($redirect_url);
+			session_redirect($redirect_url, false);
 			break;
 		}
 		case 'outermenu':
@@ -69,27 +69,27 @@ if (!empty($name) && !empty($linkmenu)) {
 					}
 					if ($headermenu->addLink($link, $name, $description, $linkmenu, $linktype, $group_id)) {
 						$feedback = _('Task succeeded.');
-						session_redirect($redirect_url);
+						session_redirect($redirect_url, false);
 					}
 					$error_msg = _('Task failed');
-					session_redirect($redirect_url);
+					session_redirect($redirect_url, false);
 				} else {
 					$error_msg = _('Provided Link is not a valid URL.');
-					session_redirect($redirect_url);
+					session_redirect($redirect_url, false);
 				}
 			}
 			if (!empty($htmlcode)) {
 				if ($headermenu->addLink('', $name, $description, $linkmenu, 'htmlcode', $group_id, $htmlcode)) {
 					$feedback = _('Task succeeded.');
-					session_redirect($redirect_url);
+					session_redirect($redirect_url, false);
 				}
 				$error_msg = _('Task failed');
-				session_redirect($redirect_url);
+				session_redirect($redirect_url, false);
 			}
 			$warning_msg = _('Missing Link URL or HTML Page.');
-			session_redirect($redirect_url);
+			session_redirect($redirect_url, false);
 		}
 	}
 }
 $warning_msg = _('No link to create or name missing.');
-session_redirect($redirect_url);
+session_redirect($redirect_url, false);
