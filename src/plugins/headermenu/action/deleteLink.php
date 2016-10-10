@@ -34,10 +34,10 @@ if (isset($group_id) && $group_id) {
 if (!empty($idLink)) {
 	if ($headermenu->deleteLink($idLink)) {
 		$feedback = _('Link deleted');
-		session_redirect($redirect_url);
+		session_redirect($redirect_url, false);
 	}
 	$error_msg = _('Task failed');
-	session_redirect($redirect_url);
+	session_redirect($redirect_url, false);
 }
 $warning_msg = _('Missing Link to be deleted.');
-session_redirect($redirect_url);
+session_redirect($redirect_url, false);
