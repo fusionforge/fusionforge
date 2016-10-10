@@ -685,7 +685,12 @@ class DocumentGroup extends FFError {
 		}
 		if ($includename) {
 			if ($url) {
-				$browselink = '/docman/?view=listfile&dirid='.$this->getID();
+				if ($this->getState() == 2) {
+					$view = 'listtrashfile';
+				} else {
+					$view = 'listfile';
+				}
+				$browselink = '/docman/?view='.$view.'&dirid='.$this->getID();
 				if (isset($GLOBALS['childgroup_id']) && $GLOBALS['childgroup_id']) {
 					$browselink .= '&childgroup_id='.$GLOBALS['childgroup_id'];
 				}
