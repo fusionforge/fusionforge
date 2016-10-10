@@ -35,10 +35,10 @@ if (isset($group_id) && $group_id) {
 if (!empty($idLink)) {
 	if ($headermenu->updateLinkStatus($idLink, $linkStatus)) {
 		$feedback = _('Link Status updated');
-		session_redirect($redirect_url);
+		session_redirect($redirect_url, false);
 	}
 	$error_msg = _('Task failed');
-	session_redirect($redirect_url);
+	session_redirect($redirect_url, false);
 }
 $warning_msg = _('Missing Link or status to be updated.');
-session_redirect($redirect_url);
+session_redirect($redirect_url, false);

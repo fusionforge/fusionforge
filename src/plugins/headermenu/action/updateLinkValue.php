@@ -45,17 +45,17 @@ if (!empty($idLink) && !empty($name)) {
 				if (util_check_url($link)) {
 					if ($headermenu->updateLink($idLink, $link, $name, $description, $linkmenu)) {
 						$feedback = _('Task succeeded.');
-						session_redirect($redirect_url);
+						session_redirect($redirect_url, false);
 					}
 					$error_msg = _('Task failed');
-					session_redirect($redirect_url);
+					session_redirect($redirect_url, false);
 				} else {
 					$error_msg = _('Provided Link is not a valid URL.');
-					session_redirect($redirect_url);
+					session_redirect($redirect_url, false);
 				}
 			}
 			$warning_msg = _('Missing Link URL.');
-			session_redirect($redirect_url);
+			session_redirect($redirect_url, false);
 			break;
 		}
 		case 'outermenu':
@@ -64,27 +64,27 @@ if (!empty($idLink) && !empty($name)) {
 				if (util_check_url($link)) {
 					if ($headermenu->updateLink($idLink, $link, $name, $description, $linkmenu, $typemenu)) {
 						$feedback = _('Task succeeded.');
-						session_redirect($redirect_url);
+						session_redirect($redirect_url, false);
 					}
 					$error_msg = _('Task failed');
-					session_redirect($redirect_url);
+					session_redirect($redirect_url, false);
 				} else {
 					$error_msg = _('Provided Link is not a valid URL.');
-					session_redirect($redirect_url);
+					session_redirect($redirect_url, false);
 				}
 			}
 			if (!empty($htmlcode) && $typemenu == 'htmlcode') {
 				if ($headermenu->updateLink($idLink, '', $name, $description, $linkmenu, 'htmlcode', $htmlcode)) {
 					$feedback = _('Task succeeded.');
-					session_redirect($redirect_url);
+					session_redirect($redirect_url, false);
 				}
 				$error_msg = _('Task failed');
-				session_redirect($redirect_url);
+				session_redirect($redirect_url, false);
 			}
 			$warning_msg = _('Missing Link URL or HTML Page.');
-			session_redirect($redirect_url);
+			session_redirect($redirect_url, false);
 		}
 	}
 }
 $warning_msg = _('No link to update or name missing.');
-session_redirect($redirect_url);
+session_redirect($redirect_url, false);
