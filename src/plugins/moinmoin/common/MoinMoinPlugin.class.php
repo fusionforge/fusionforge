@@ -45,7 +45,6 @@ _("This plugin allows each project to embed MoinMoinWiki under a tab.");
 		$this->hooks[] = "role_unlink_project";
 		$this->hooks[] = "role_translate_strings";
 		$this->hooks[] = "role_get_setting";
-		$this->hooks[] = "project_admin_plugins"; // to show up in the admin page for group
 		$this->hooks[] = "clone_project_from_template" ;
 	}
 
@@ -138,8 +137,8 @@ _("This plugin allows each project to embed MoinMoinWiki under a tab.");
 						      $project->getID()));
 			}
 		} elseif ($hookname == "role_translate_strings") {
-			$right = new PluginSpecificRoleSetting ($role,
-							       'plugin_moinmoin_access') ;
+			$role =& $params['role'];
+			$right = new PluginSpecificRoleSetting ($role, 'plugin_moinmoin_access') ;
 			$right->setDescription (_('MoinMoin Wiki access')) ;
 			$right->setValueDescriptions (array ('0' => _('No Access'),
 							     '1' => _('Read access'),
@@ -160,6 +159,9 @@ _("This plugin allows each project to embed MoinMoinWiki under a tab.");
 				}
 				break ;
 			}
+		} elseif ($hookname == 'clone_project_from_template') {
+			$systasksq = new SystasksQ();
+			$systasksq->add($this->getID(), 'MOINMOIN_CREATE_WIKI', $group_id);
 		}
 	}
 
