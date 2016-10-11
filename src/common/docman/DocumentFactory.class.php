@@ -81,7 +81,7 @@ class DocumentFactory extends FFError {
 	/**
 	 * The docgroupstate
 	 * @var	int	Contains the valid state of documentgroups to retrieve documents using getDocuments.
-	 *		Default value is 1 which means public any
+	 *		Default value is 1 which means public
 	 */
 	var $docgroupstate = 1;
 
@@ -273,7 +273,7 @@ class DocumentFactory extends FFError {
 
 	/**
 	 * setDocGroupState - call this before getDocuments() to setup correct permission settings for retrieve authorized documents.
-	 * default value is 1 which means : no limit.
+	 * default value is 1 which means : public.
 	 *
 	 * @param	array	$state	The array of valid state of documentgroups
 	 * @access	public
@@ -348,7 +348,7 @@ class DocumentFactory extends FFError {
 						array($this->Group->getID(), $this->docgroupstate));
 		$result = db_query_qpa($qpa);
 		if (!$result) {
-			$this->setError('getFromStorage:'.db_error());
+			$this->setError('ValidDocumentGroups:'.db_error());
 			return false;
 		}
 		while ($arr = db_fetch_array($result)) {

@@ -426,7 +426,7 @@ DocManListFileController.prototype =
 								filenametdcontent.attr('href', eachdocparams.docManURL+'/view.php/'+eachdocparams.groupId+'/versions/'+eachdocparams.id+'/'+val.version.substring(1));
 							}
 						} else {
-							filenametdcontent = val.filename;
+							filenametdcontent = jQuery('<span>'+val.filename+'</span>');
 						}
 						versionactiontdcontent = '';
 						versionActionsArrayLength = val.versionactions.length;

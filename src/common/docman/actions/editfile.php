@@ -149,7 +149,7 @@ if ($version) {
 		$filename = $file_url;
 		$filetype = 'URL';
 	}
-} elseif (($d->getDocGroupID() != $doc_group) || ($d->getState() != $stateid)) {
+} elseif (($d->getDocGroupID() != $doc_group) || ($d->getStateID() != $stateid)) {
 	// we do the update based on the current version.
 	$dv = documentversion_get_object($current_version_radio, $docid, $group_id);
 	$filename = $dv->getFileName();
