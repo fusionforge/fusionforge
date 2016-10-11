@@ -113,6 +113,7 @@ jQuery(document).ready(function() {
 		buttonEditDirectory:	jQuery('#docman-editdirectory'),
 		docManURL:		'<?php echo util_make_uri('/docman') ?>',
 		lockIntervalDelay:	60000, //in microsecond and if you change this value, please update the check value 600
+		childGroupId:           <?php echo util_ifsetor($childgroup_id, 0) ?>,
 		divLeft:		jQuery('#leftdiv'),
 		divRight:		jQuery('#rightdiv'),
 		divEditFile:		jQuery('#editFile'),
