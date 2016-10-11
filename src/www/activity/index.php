@@ -358,22 +358,35 @@ echo $HTML->closeForm();
 					$stateid = $document->getStateID();
 					if ($stateid != 1 && !forge_check_perm('docman', $arr['group_id'], 'approve')) {
 						$docmanerror = 1;
+						break;
 					}
 					$dg = documentgroup_get_object($arr['ref_id'], $arr['group_id']);
 					if (!$dg || $dg->isError() || !$dg->getPath(true, false)) {
 						$docmanerror = 1;
+						break;
 					}
-					$icon = html_image('ic/docman16b.png', '', '', array('alt'=>_('Documents')));
-					$url = util_make_link('docman/?group_id='.$arr['group_id'].'&view=listfile&dirid='.$arr['ref_id'],_('Document').' '.$arr['description']);
+					$icon = html_image($document->getFileTypeImage(), 22, 22, array('alt' => $document->getFileType()));
+					if ($document->getStateID() == 2) {
+						$view = 'listtrashfile';
+					} else {
+						$view = 'listfile';
+					}
+					$url = util_make_link('docman/?group_id='.$arr['group_id'].'&view='.$view.'&dirid='.$arr['ref_id'],_('Document').' '.$arr['description']);
 					break;
 				}
 				case 'docgroupnew': {
 					$dg = documentgroup_get_object($arr['subref_id'], $arr['group_id']);
 					if (!$dg || $dg->isError() || !$dg->getPath(true, false)) {
 						$docmanerror = 1;
+						break;
 					}
-					$icon = html_image('ic/cfolder15.png', '', '', array("alt"=>_('Directory')));
-					$url = util_make_link('docman/?group_id='.$arr['group_id'].'&view=listfile&dirid='.$arr['subref_id'],_('Directory').' '.$arr['description']);
+					$icon = $HTML->getFolderPic('', _('Directory'));
+					if ($dg->getState() == 2) {
+						$view = 'listtrashfile';
+					} else {
+						$view = 'listfile';
+					}
+					$url = util_make_link('docman/?group_id='.$arr['group_id'].'&view='.$view.'&dirid='.$arr['subref_id'],_('Directory').' '.$arr['description']);
 					break;
 				}
 				default: {
