@@ -36,7 +36,7 @@ if [ -e /etc/debian_version ]; then
 	subversion viewvc python-pycurl git xinetd \
 	php-twig \
 	python-moinmoin libapache2-mod-wsgi python-psycopg2 \
-	unoconv poppler-utils
+	unoconv poppler-utils dpkg-dev
     if ! dpkg-vendor --is Ubuntu; then
 	apt-get install locales-all  # https://bugs.launchpad.net/ubuntu/+source/glibc/+bug/1394929
     fi
