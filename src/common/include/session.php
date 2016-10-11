@@ -5,9 +5,9 @@
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2001-2002, 2009, Roland Mas
  * Copyright 2004-2005, GForge, LLC
- * Copyright 2013, Franck Villaume - TrivialDev
  * Copyright © 2013
  *	Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
+ * Copyright 2013,2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -322,7 +322,10 @@ function session_check_ip($oldip, $newip) {
  *	@return bool
  */
 function session_issecure() {
-	return (strtoupper(getStringFromServer('HTTPS')) == "ON");
+	if ((strtoupper(getStringFromServer('HTTPS')) == 'ON') || (strtoupper(getStringFromServer('HTTP_X_FORWARDED_PROTO')) == 'HTTPS')) {
+		return true;
+	}
+	return false;
 }
 
 /**

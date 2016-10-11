@@ -5,7 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 (c) FusionForge Team
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013-2014, Franck Villaume - TrivialDev
+ * Copyright 2013-2014,2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -56,7 +56,7 @@ $accept_conditions = getIntFromRequest ('accept_conditions');
 
 if (forge_get_config('use_ssl') && !session_issecure()) {
 	//force use of SSL for login
-	header('Location: https://'.getStringFromServer('HTTP_HOST').getStringFromServer('REQUEST_URI'));
+	header('Location: https://'.getStringFromServer('HTTP_HOST').forge_get_config('url_prefix').getStringFromServer('REQUEST_URI'));
 }
 
 if (!$theme_id || !is_numeric($theme_id)) {
