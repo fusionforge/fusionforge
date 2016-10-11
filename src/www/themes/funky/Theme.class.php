@@ -230,7 +230,12 @@ class Theme_Funky extends Layout {
 			$attrs['class'] = 'tg-middle';
 			$attrs['style'] = 'width:'.$tabwidth.'%';
 			$return .= html_ao('td', $attrs);
-			$return .= html_ao('a', array('href' => $TABS_DIRS[$i], 'id' => md5($TABS_DIRS[$i])));
+			$ahrefAttrs['id'] =  md5($TABS_DIRS[$i]);
+			$ahrefAttrs['href'] = $TABS_DIRS[$i];
+			if (preg_match('/^https?:\/\//', $TABS_DIRS[$i])) {
+				$ahrefAttrs['target'] = '_blank';
+			}
+			$return .= html_ao('a', $ahrefAttrs);
 			$attrs = array();
 			if ($selected == $i)
 				$attrs['class'] = 'selected';
