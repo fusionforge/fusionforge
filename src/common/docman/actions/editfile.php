@@ -151,6 +151,9 @@ if ($version) {
 	}
 } elseif (($d->getDocGroupID() != $doc_group) || ($d->getStateID() != $stateid)) {
 	// we do the update based on the current version.
+	if (!$current_version_radio) {
+		$current_version_radio = $d->getVersion();
+	}
 	$dv = documentversion_get_object($current_version_radio, $docid, $group_id);
 	$filename = $dv->getFileName();
 	$filetype = $dv->getFileType();

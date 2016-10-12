@@ -36,15 +36,13 @@ sysdebug_off();
 // Disable error_reporting as it breaks XML generated output.
 error_reporting(0);
 
-$uri = util_make_base_url();
+$uri = util_make_url();
 // 1. include client and server
 require_once 'nusoap/nusoap.php';
 //$debug = true;
 // 2. instantiate server object
 $server = new soap_server();
 $server->setDebugLevel(0);
-//configureWSDL($serviceName,$namespace = false,$endpoint = false,$style='rpc', $transport = 'http://schemas.xmlsoap.org/soap/http');
-//$server->configureWSDL('GForgeAPI',$uri);
 $server->configureWSDL('FusionForgeAPI',$uri,false,'rpc','http://schemas.xmlsoap.org/soap/http',$uri);
 
 // add types
