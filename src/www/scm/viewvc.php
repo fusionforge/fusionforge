@@ -84,7 +84,7 @@ if (!forge_check_perm('scm', $Group->getID(), 'read')) {
 
 $unix_name = $Group->getUnixName();
 $u = session_get_user();
-if ($external_scm) {
+if ($external_scm && !$Group->usesPlugin('scmcvs')) {
 	if ($Group->enableAnonSCM())
 		$server_script = '/anonscm/viewvc';
 	else
