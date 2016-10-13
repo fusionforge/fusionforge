@@ -228,8 +228,13 @@ over it to the project's administrator.");
 			return false;
 		}
 
-		$repo = forge_get_config('repos_path', 'scmcvs') . '/' . $project->getUnixName() ;
-		$locks_dir = forge_get_config('repos_path', 'scmcvs') . '/cvs-locks/' . $project->getUnixName() ;
+		$repo_prefix = forge_get_config('repos_path', 'scmcvs');
+		if (!is_dir($repo_prefix) && !mkdir($repo_prefix, 0755, true)) {
+			return false;
+		}
+
+		$repo = $repo_prefix . '/' . $project->getUnixName() ;
+		$locks_dir = $repo_prefix . '/cvs-locks/' . $project->getUnixName() ;
 
 		$repo_exists = false ;
 		if (is_dir ($repo) && is_dir ("$repo/CVSROOT")) {
