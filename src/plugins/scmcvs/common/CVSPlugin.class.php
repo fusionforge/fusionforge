@@ -212,10 +212,9 @@ over it to the project's administrator.");
 			return;
 		}
 
-		if ($project->usesPlugin ($this->name)) {
-			if ($this->browserDisplayable ($project)) {
-				session_redirect("/scm/viewvc.php/?root=".$project->getUnixName());
-			}
+		if ($project->usesPlugin($this->name)) {
+			$iframe_src = '/scm/viewvc.php?root='.$project->getUnixName();
+			htmlIframe($iframe_src, array('id'=>'scmcvs_iframe'));
 		}
 	}
 
@@ -237,11 +236,8 @@ over it to the project's administrator.");
 			$repo_exists = true ;
 		}
 
-		if (forge_get_config('use_shell')) {
-			$unix_group = 'scm_' . $project->getUnixName() ;
-		} else {
-			$unix_group = forge_get_config ('apache_user') ;
-		}
+		$rw_unix_group = $project->getUnixName() . '_scmrw';
+		$ro_unix_group = $project->getUnixName() . '_scmro';
 
 		if (!$repo_exists) {
 			if (!@mkdir($repo, 0700)) {
@@ -256,41 +252,34 @@ over it to the project's administrator.");
 			system ("chgrp $unix_group $locks_dir") ;
 			system ("chmod 3777 $locks_dir") ;
 
-			if (forge_get_config('use_shell')) {
-				$cvs_binary_version = get_cvs_binary_version();
-				if ($cvs_binary_version == '1.12') {
-					util_create_file_with_contents("$repo/CVSROOT/config", "SystemAuth=no\nLockDir=$locks_dir\nUseNewInfoFmtStrings=yes\n");
-				}
-				if ($cvs_binary_version == '1.11') {
-					util_create_file_with_contents("$repo/CVSROOT/config", "SystemAuth=no\nLockDir=$locks_dir\n");
-				}
-				if ($project->enableAnonSCM()) {
-					util_create_file_with_contents ("$repo/CVSROOT/readers", "anonymous\n");
-					util_create_file_with_contents ("$repo/CVSROOT/passwd", "anonymous:\n");
-					system ("chmod -R g+rwXs,o+rX-w $repo") ;
-				} else {
-					util_create_file_with_contents ("$repo/CVSROOT/readers", "\n");
-					util_create_file_with_contents ("$repo/CVSROOT/passwd", "\n");
-					system ("chmod -R g+rwXs,o-rwx $repo") ;
-				}
-				system ("chgrp -R $unix_group $repo") ;
-			} else {
-				$unix_user = forge_get_config ('apache_user') ;
-				system ("chmod -R g-rwx,o-rwx $repo") ;
-				system ("chown -R $unix_user:$unix_group $repo") ;
+			$cvs_binary_version = get_cvs_binary_version();
+			if ($cvs_binary_version == '1.12') {
+				util_create_file_with_contents("$repo/CVSROOT/config", "SystemAuth=no\nLockDir=$locks_dir\nUseNewInfoFmtStrings=yes\n");
 			}
-		}
-
-		if (forge_get_config('use_shell')) {
+			if ($cvs_binary_version == '1.11') {
+				util_create_file_with_contents("$repo/CVSROOT/config", "SystemAuth=no\nLockDir=$locks_dir\n");
+			}
+			system ("chmod -R g+rwXs,o+rX-w $repo") ;
+			$apache_user = forge_get_config('apache_user');
 			if ($project->enableAnonSCM()) {
 				util_create_file_with_contents ("$repo/CVSROOT/readers", "anonymous\n");
-				util_create_file_with_contents ("$repo/CVSROOT/passwd", "anonymous:\n");
-				system ("chmod g+rwXs,o+rX-w $repo") ;
+				util_create_file_with_contents ("$repo/CVSROOT/passwd", "anonymous::$apache_user\n");
 			} else {
 				util_create_file_with_contents ("$repo/CVSROOT/readers", "\n");
 				util_create_file_with_contents ("$repo/CVSROOT/passwd", "\n");
-				system ("chmod g+rwXs,o-rwx $repo") ;
 			}
+			system ("chgrp -R $rw_unix_group $repo") ;
+			system ("chgrp $ro_unix_group $repo");
+		}
+
+		if ($project->enableAnonSCM()) {
+			util_create_file_with_contents ("$repo/CVSROOT/readers", "anonymous\n");
+			util_create_file_with_contents ("$repo/CVSROOT/passwd", "anonymous::$apache_user\n");
+			system ("chmod g+rwXs,o+rX-w $repo") ;
+		} else {
+			util_create_file_with_contents ("$repo/CVSROOT/readers", "\n");
+			util_create_file_with_contents ("$repo/CVSROOT/passwd", "\n");
+			system ("chmod g+rwXs,o-rwx $repo") ;
 		}
 	}
 
