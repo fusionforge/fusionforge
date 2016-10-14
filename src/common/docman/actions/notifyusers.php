@@ -71,7 +71,8 @@ $body = _('Project')._(': ').$d->Group->getPublicName()."\n";
 $body .= _('Document Folder')._(': ').$d->getDocGroupName()."\n";
 $body = _('Document Title')._(': ').$d->getName()."\n";
 $body .= _('Document Filename')._(': ').$d->getFileName()."\n";
-$body .= _('Direct Link')._(': ').util_make_url('/docman/?group_id='.$d->Group->getID().'&view=listfile&dirid='.$d->getDocGroupID().'&filedetailid='.$d->getID());
+$body .= _('Direct Link')._(': ').util_make_url('/docman/?group_id='.$d->Group->getID().'&view=listfile&dirid='.$d->getDocGroupID().'&filedetailid='.$d->getID())."\n";
+$body .= _('Notification Comments')._(':')."\n";
 $body .= $details;
 $sendEmails = 0;
 foreach ($emailsArr as $key => $toEmail) {
