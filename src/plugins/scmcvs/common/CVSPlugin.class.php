@@ -243,6 +243,7 @@ over it to the project's administrator.");
 
 		$rw_unix_group = $project->getUnixName() . '_scmrw';
 		$ro_unix_group = $project->getUnixName() . '_scmro';
+		$apache_user = forge_get_config('apache_user');
 
 		if (!$repo_exists) {
 			if (!@mkdir($repo, 0700)) {
@@ -265,7 +266,6 @@ over it to the project's administrator.");
 				util_create_file_with_contents("$repo/CVSROOT/config", "SystemAuth=no\nLockDir=$locks_dir\n");
 			}
 			system ("chmod -R g+rwXs,o+rX-w $repo") ;
-			$apache_user = forge_get_config('apache_user');
 			if ($project->enableAnonSCM()) {
 				util_create_file_with_contents ("$repo/CVSROOT/readers", "anonymous\n");
 				util_create_file_with_contents ("$repo/CVSROOT/passwd", "anonymous::$apache_user\n");
