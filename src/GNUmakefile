@@ -61,7 +61,7 @@ install-config: install-base-dirs
 			> $(DESTDIR)$(config_path)/config.ini; \
 	fi
 
-install-common: install-config install-plugin-authbuiltin
+install-common: install-config install-plugin-authbuiltin install-plugin-globalactivity
 	$(MAKE) -C locale DESTDIR=$(DESTDIR) PREFIX=$(PREFIX) install
 	$(CP_R) VERSION bin common templates $(DESTDIR)$(pkgdatadir)/
 	chmod 755 $(DESTDIR)$(pkgdatadir)/bin/ssh_akc.php

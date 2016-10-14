@@ -1,0 +1,39 @@
+Globalactivity plugin
+
+This plugin provides a forge-wide view into the activities of all
+projects (modulo permissions).  It can be seen as an aggregate of all
+the project-wide "activity" pages.
+
+The relevant data is also made available through a SOAP API.
+
+The method is called globalactivity_getActivity.  It takes four
+parameters:
+
+- a session token (as for the rest of the SOAP API): string (as
+  returned from the login method), possibly empty if the API is to be
+  used anonymously;
+
+- a start date: integer (Unix timestamp: number of seconds since
+  1970-01-01 00:00:00 UTC);
+
+- an end date: integer (ditto);
+
+- a list of sections for which to list events (array of strings), to
+  be picked among: scmsvn, svngit, svnhg, trackeropen, trackerclose,
+  frsrelease, forumpost, news, taskopen, taskclose, taskdelete,
+  docmannew, docmanupdate, docgroupnew.  An empty list means no
+  filtering.
+
+The return value is an array of GlobalActivityEntry; a
+GlobalActivityEntry is a hash with the following keys: group_id
+(identifier for the project on the forge), section (see above, with a
+quirk: scmsvn, scmgit and scmhg all end up in the same "scm" section),
+ref_id (meaning differs across sections), subref_id (ditto),
+description (title, commit number, or otherwise descriptive text),
+activity_date (as a Unix timestamp).
+
+Despite its name, the plugin also provides a non-global SOAP method
+called globalactivity_getActivityForProject, which takes a group_id as
+an extra parameter between the end date and the list of sections.  It
+returns an array of GlobalActivityEntry that only concerns the
+requested project.

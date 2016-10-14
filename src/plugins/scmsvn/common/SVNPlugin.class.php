@@ -647,8 +647,10 @@ some control over it to the project's administrator.");
 				}
 			}
 		}
-		$params['ids'][] = $this->name;
-		$params['texts'][] = _('Subversion Commits');
+		if (!in_array($this->name, $params['ids'])) {
+			$params['ids'][] = $this->name;
+			$params['texts'][] = _('Subversion Commits');
+		}
 		return true;
 	}
 
