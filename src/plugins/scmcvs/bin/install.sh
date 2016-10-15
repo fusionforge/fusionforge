@@ -1,13 +1,8 @@
 #! /bin/sh
 # 
-# Configure CVS for Sourceforge
-# Christian Bayle, Roland Mas, debian-sf (Sourceforge for Debian)
-
-if [ ! -e /etc/debian_version ]; then
-    echo "CVS installation script only supported on Debian"
-    echo "Please consider switching to a maintained SCM"
-    exit 0
-fi
+# Configure CVS for FusionForge
+# Copyright 2014 Sylvain Beucler
+# Copyright 2014, 2016 Roland Mas
 
 PATH=$(forge_get_config binary_path):$PATH
 source_path=`forge_get_config source_path`
@@ -23,20 +18,27 @@ fi
 
 case "$1" in
     configure)
-	echo "Modifying inetd for cvs server"
-	echo "CVS usual config is changed for gforge one"
-        # First, dedupe the commented lines
-	update-inetd --remove  "cvspserver	stream	tcp	nowait.400	root	/usr/sbin/tcpd	$source_path/bin/cvs-pserver"
-	update-inetd --remove  "cvspserver	stream	tcp	nowait.400	root	/usr/sbin/tcpd	$source_path/plugins/scmcvs/bin/cvs-pserver"
-	update-inetd --remove  "cvspserver	stream	tcp	nowait.400	root	/usr/sbin/tcpd	$source_path/plugins/scmcvs/bin/cvs-pserver"
-	update-inetd --comment-chars "#SF_WAS_HERE#" --enable cvspserver
-        # Then, insinuate ourselves
-	update-inetd --comment-chars "#SF_WAS_HERE#" --disable cvspserver
-	update-inetd --add  "cvspserver	stream	tcp	nowait.400	root	/usr/sbin/tcpd	$source_path/plugins/scmcvs/sbin/cvs-pserver"
+	scmcvs_repos_path=$(forge_get_config repos_path scmcvs)
+	source_path=$(forge_get_config source_path)
+
+	echo "Modifying xinetd for CVS server"
+	if [ ! -e /etc/xinetd.d/fusionforge-plugin-scmcvs ]; then
+	    cat > /etc/xinetd.d/fusionforge-plugin-scmcvs <<-EOF
+		service cvspserver
+		{
+		    port            = 2401
+		    socket_type     = stream
+		    wait            = no
+		    user            = root
+		    server          = $source_path/plugins/scmcvs/sbin/cvs-pserver
+		}
+		EOF
+	fi
+	service xinetd restart
 
 	rm -f $data_path/dumps/*cvs*dump
 
-	if [ ! -e $data_path/chroot/cvs ] ; then
+	if [ -e $data_path/chroot/cvsroot ] && [ ! -e $data_path/chroot/cvs ] ; then
 	    cd $data_path/chroot
 	    ln -s cvsroot cvs
 	fi
@@ -46,14 +48,11 @@ case "$1" in
 	[ -d /etc/ssh-nonfree ] && invoke-rc.d ssh-nonfree restart || true
 	;;
 
-    purge)
-	echo "Purging inetd for cvs server"
-	# echo "You should dpkg-reconfigure cvs to use std install"
-	update-inetd --remove  "cvspserver	stream	tcp	nowait.400	root	/usr/sbin/tcpd	$source_path/plugins/scmcvs/sbin/cvs-pserver"
-	update-inetd --comment-chars "#SF_WAS_HERE#" --enable cvspserver
+    remove)
+	rm -f /etc/xinetd.d/fusionforge-plugin-scmgit
 	;;
 
     *)
-	echo "Usage: $0 {configure|purge}"
+	echo "Usage: $0 {configure|remove}"
 	exit 1
 esac

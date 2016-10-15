@@ -7,6 +7,9 @@ Requires: subversion, viewvc, python-pycurl, xinetd, rsync
 %package plugin-scmbzr
 Requires: bzr, mod_wsgi, loggerhead
 
+%package plugin-scmcvs
+Requires: cvs, viewvc, xinetd
+
 %package plugin-scmhg
 Requires: mercurial
 
@@ -35,6 +38,9 @@ Requires: ckeditor
 Requires: php-pear-HTTP
 
 %package plugin-externalsearch
+Requires:
+
+%package plugin-globalactivity
 Requires:
 
 %package plugin-gravatar

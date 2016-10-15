@@ -350,7 +350,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 				}
 				$nextcell .= util_make_link($redirecturl.'&action=monitorfile&option='.$option.'&fileid='.$d->getID(), $image, array('title' => $titleMonitor));
 			}
-			$nextcell .= util_make_link('#', html_image('ic/mail-send.png', 22, 22, array('alt' => _('Notify'))), array('onclick' => 'javascript:controllerListFile.toggleNotifyUserView({action:\''.util_make_uri($notifyaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' , id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', title:\''.addslashes($d->getName()).'\', filename:\''.addslashes($d->getFileName()).'\', description:'.json_encode($d->getDescription()).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', isHtml:\''.$d->isHtml().'\', docManURL:\''.util_make_uri('/docman').'\'})', 'title' => _('Notify users')), true);
+			$nextcell .= util_make_link('#', html_image('ic/mail-send.png', 22, 22, array('alt' => _('Notify'))), array('onclick' => 'javascript:controllerListFile.toggleNotifyUserView({action:\''.util_make_uri($notifyaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' , id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', title:\''.addslashes($d->getName()).'\', filename:\''.addslashes($d->getFileName()).'\', description:'.json_encode($d->getDescription()).', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', isHtml:\''.$d->isHtml().'\', docManURL:\''.util_make_uri('/docman').'\'})', 'title' => _('Notify users')), true);
 			$cells[][] = $nextcell;
 		}
 		echo $HTML->multiTableRow(array(), $cells);

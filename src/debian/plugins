@@ -15,7 +15,7 @@ Depends:
 Recommends: fusionforge-scm
 
 Package: fusionforge-plugin-scmcvs
-Depends: php-cli | php5-cli, cvs, viewvc, libphp-snoopy, openbsd-inetd | inet-superserver, update-inetd, libipc-run-perl, liburi-perl, ${perl:Depends}
+Depends: php-cli | php5-cli, cvs, viewvc, libphp-snoopy, xinetd, ${perl:Depends}
 Recommends: fusionforge-scm
 
 Package: fusionforge-plugin-scmdarcs

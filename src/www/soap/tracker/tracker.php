@@ -941,7 +941,11 @@ function addArtifactFile($session_ser,$group_id,$group_artifact_id,$artifact_id,
 	$bin_data = base64_decode($base64_contents);
 	$filesize = strlen($bin_data);
 
-	$res = $af->create($filename,$filetype,$filesize,$bin_data,$description);
+	// Bugfix: Send filename and not the content
+	$tmpfname = tempnam("/tmp", "forgeupload");
+	file_put_contents($tmpfname, $bin_data);
+
+	$res = $af->create($filename,$filetype,$filesize,$tmpfname,$description);
 
 	if (!$res) {
 		return new soap_fault('','addArtifactFile',$af->getErrorMessage(),$af->getErrorMessage());

@@ -181,13 +181,19 @@ class Artifact extends FFError {
 	 * @param	int	$priority	The artifacts priority.
 	 * @param	array	$extra_fields	Array of extra fields like: array(15=>'foobar',22=>'1');
 	 * @param	array	$importData	Array of data to change submitter and time of submit like:
-	 *						array('user' => 127, 'time' => 1234556789)
+	 *						array('user' => 127, 'time' => 1234556789, 'nopermcheck' => true, 'nonotice' => true)
 	 * @return	bool	id on success / false on failure.
 	 */
 	function create($summary, $details, $assigned_to=100, $priority=3, $extra_fields=array(), $importData = array()) {
 		//
 		//	make sure this person has permission to add artifacts
 		//
+
+		if (isset($importData['nonotice']) && $importData['nonotice']) {
+			$sendNotice = false;
+		} else {
+			$sendNotice = true;
+		}
 
 		//
 		//	get the user_id
@@ -282,7 +288,9 @@ class Artifact extends FFError {
 			//
 			//	now send an email if appropriate
 			//
-			$this->mailFollowupEx(0, 1);
+			if ($sendNotice) {
+				$this->mailFollowupEx(0, 1);
+			}
 			db_commit();
 
 			return $artifact_id;
@@ -759,7 +767,7 @@ class Artifact extends FFError {
 	 * @param	bool	$by		Email $string address of message creator.
 	 * @param	bool	$send_followup	Whether $bool to email out a followup.
 	 * @param	array	$importData	Array of data to change submitter and time of submit like:
-	 *						array('user' => 127, 'time' => 1234556789)
+	 *						array('user' => 127, 'time' => 1234556789, 'nopermcheck' => true, 'nonotice' => true)
 	 *
 	 * @return	bool	success.
 	 */
@@ -771,6 +779,12 @@ class Artifact extends FFError {
 		if (!forge_check_perm ('tracker',$this->ArtifactType->getID(),'submit')) {
 			$this->setError(_('You are not currently allowed to submit items to this tracker.'));
 			return false;
+		}
+
+		if (isset($importData['nonotice']) && $importData['nonotice']) {
+			$sendNotice = false;
+		} else {
+			$sendNotice = true;
 		}
 
 		if(array_key_exists('user', $importData)){
@@ -814,7 +828,7 @@ class Artifact extends FFError {
 
 		$this->updateLastModifiedDate($importData);
 
-		if ($send_followup) {
+		if ($send_followup && $sendNotice) {
 			$this->mailFollowupEx($time, 2, false);
 		}
 		return $res;
@@ -826,7 +840,7 @@ class Artifact extends FFError {
 	 * @param	string	$field_name	The name of the field in the database being modified.
 	 * @param	string	$old_value	The former value of this field.
 	 * @param	array	$importData	Array of data to change submitter and time of submit like:
-	 *						array('user' => 127, 'time' => 1234556789)
+	 *						array('user' => 127, 'time' => 1234556789, 'nopermcheck' => true, 'nonotice' => true)
 	 * @access	private
 	 * @return	boolean	success.
 	 */
@@ -898,7 +912,7 @@ class Artifact extends FFError {
 	 * @param	array	$extra_fields		Array of extra fields like: array(15=>'foobar',22=>'1');
 	 * @param	string  $description		The description.
 	 * @param	array	$importData	Array of data to change submitter and time of submit like:
-	 *						array('user' => 127, 'time' => 1234556789)
+	 *						array('user' => 127, 'time' => 1234556789, 'nopermcheck' => true, 'nonotice' => true)
 	 * @return	boolean	success.
 	 */
 	function update($priority,$status_id,
@@ -908,15 +922,21 @@ class Artifact extends FFError {
 		if (array_key_exists('user', $importData)){
 			$user = $importData['user'];
 		}
-		if (empty($importData)) {
-			$isAnImport = false;
+		if (isset($importData['nopermcheck']) && $importData['nopermcheck']) {
+			$permCheck = false;
 		} else {
-			$isAnImport = true;
+			$permCheck = true;
+		}
+
+		if (isset($importData['nonotice']) && $importData['nonotice']) {
+			$sendNotice = false;
+		} else {
+			$sendNotice = true;
 		}
 		/*
 			Field-level permission checking
 		*/
-		if (!$isAnImport) {
+		if ($permCheck) {
 			if (!forge_check_perm ('tracker', $this->ArtifactType->getID(), 'manager')) {
 				// Non-managers cannot modify these fields
 				$priority=$this->getPriority();
@@ -980,7 +1000,7 @@ class Artifact extends FFError {
 		}
 
 		// Check that assigned_to is a tech for the tracker
-		if ($assigned_to != 100 && !$isAnImport) {
+		if ($assigned_to != 100 && $permCheck) {
 			if (!forge_check_perm_for_user ($assigned_to, 'tracker', $this->ArtifactType->getID(), 'tech')) {
 				$this->setError(_("Invalid assigned person: must be a technician"));
 				return false;
@@ -1010,7 +1030,7 @@ class Artifact extends FFError {
 				return false;
 			}
 			//	do they have perms for new ArtifactType?
-			if (!forge_check_perm ('tracker', $newArtifactType->getID(), 'manager') && !$isAnImport) {
+			if (!forge_check_perm ('tracker', $newArtifactType->getID(), 'manager') && $permCheck) {
 				$this->setPermissionDeniedError();
 				db_rollback();
 				return false;
@@ -1097,7 +1117,7 @@ class Artifact extends FFError {
 			}
 
 			// Check that assigned_to is a tech in the new tracker
-			if ($assigned_to != 100 && !$isAnImport) {
+			if ($assigned_to != 100 && $permCheck) {
 				if (!forge_check_perm ('tracker', $newArtifactType->getID(), 'tech')) {
 					$assigned_to = 100;
 				}
@@ -1224,7 +1244,7 @@ class Artifact extends FFError {
 		}
 
 		if ($update || $send_message){
-			if (!empty($changes)) {
+			if (!empty($changes) && $sendNotice) {
 				// Send the email with changes
 				$this->mailFollowupEx($time, 2, false, $changes);
 			}
@@ -1307,10 +1327,10 @@ class Artifact extends FFError {
 				skip it and continue to next item
 
 */
-		if (empty($importData)) {
-			$isAnImport = false;
+		if (isset($importData['nopermcheck']) && $importData['nopermcheck']) {
+			$permCheck = false;
 		} else {
-			$isAnImport = true;
+			$permCheck = true;
 		}
 		$update = false;
 
@@ -1326,7 +1346,7 @@ class Artifact extends FFError {
 
 		// If there is a status field, then check against the workflow.
 		// Unless if we change type.
-		if ((!isset($changes['Type']) || !$changes['Type']) && !$isAnImport) {
+		if ((!isset($changes['Type']) || !$changes['Type']) && $permCheck) {
 			for ($i=0; $i<count($efk); $i++) {
 				$efid=$efk[$i];
 				$type=$ef[$efid]['field_type'];
@@ -1364,7 +1384,7 @@ class Artifact extends FFError {
 			$type=$ef[$efid]['field_type'];
 
 			// check required fields
-			if (($ef[$efid]['is_required'] || in_array($efid, $rf)) && !$isAnImport) {
+			if (($ef[$efid]['is_required'] || in_array($efid, $rf)) && $permCheck) {
 				if (!array_key_exists($efid, $extra_fields)) {
 					if ($type == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 						$this->setError(_('Status Custom Field Must Be Set'));
@@ -1404,7 +1424,7 @@ class Artifact extends FFError {
 					$type == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT ||
 					$type == ARTIFACT_EXTRAFIELDTYPE_RADIO ||
 					$type == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX)
-					&& !$isAnImport) {
+					&& $permCheck) {
 				$allowed = false;
 				if (!is_null($ef[$efid]['parent']) && !empty($ef[$efid]['parent']) && $ef[$efid]['parent']!='100') {
 					$aefParentId = $ef[$efid]['parent'];
@@ -1442,7 +1462,7 @@ class Artifact extends FFError {
 					!empty($ef[$efid]['pattern']) &&
 					!empty($extra_fields[$efid]) &&
 					!preg_match('/'.$ef[$efid]['pattern'].'/', $extra_fields[$efid]) &&
-					!$isAnImport) {
+					$permCheck) {
 				$this->setError(sprintf(_("Field %s doesn't match the pattern."), $ef[$efid]['field_name']));
 				return false;
 			}
@@ -1493,7 +1513,7 @@ class Artifact extends FFError {
 							$changes["extra_fields"][$efid] = 1;
 						}
 
-						$this->addHistory($field_name, $this->ArtifactType->getElementName(array_reverse($old_values)));
+						$this->addHistory($field_name, $this->ArtifactType->getElementName(array_reverse($old_values)),$importData);
 						$update = true;
 
 						db_query_params ('DELETE FROM artifact_extra_field_data WHERE	artifact_id=$1 AND extra_field_id=$2',
@@ -1517,9 +1537,9 @@ class Artifact extends FFError {
 
 					// Adding history with previous value.
 					if (($type == ARTIFACT_EXTRAFIELDTYPE_SELECT) || ($type == ARTIFACT_EXTRAFIELDTYPE_RADIO) || ($type == ARTIFACT_EXTRAFIELDTYPE_STATUS)) {
-						$this->addHistory($field_name,$this->ArtifactType->getElementName(db_result($resd,0,'field_data')));
+						$this->addHistory($field_name,$this->ArtifactType->getElementName(db_result($resd,0,'field_data')),$importData);
 					} else {
-						$this->addHistory($field_name, db_result($resd,0,'field_data'));
+						$this->addHistory($field_name, db_result($resd,0,'field_data'),$importData);
 					}
 					$update = true;
 				}
