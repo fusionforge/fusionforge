@@ -295,6 +295,11 @@ if (is_numeric($docid)) {
 			}
 			foreach ($arr_fileid as $docid) {
 				if (!empty($docid)) {
+					if (strpos($docid, '-') !== false) {
+						$docArr = explode('-', $docid);
+						$g = group_get_object($docArr[0]);
+						$docid =  $docArr[1];
+					}
 					$d = new Document($g, $docid);
 					if (!$d || !is_object($d)) {
 						@unlink($file);
