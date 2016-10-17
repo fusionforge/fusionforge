@@ -214,7 +214,6 @@ class FFError {
 	function isMissingParamsError(){
 		return ($this->error_code == ERROR__MISSING_PARAMS_ERROR);
 	}
-
 }
 
 // Local Variables:
