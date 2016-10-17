@@ -89,7 +89,6 @@ if (!forge_get_config('use_activity')) {
 if (!$plugin) {
 	exit_disabled();
 }
-	
 
 site_header(array('title'=>_('Global activity')));
 

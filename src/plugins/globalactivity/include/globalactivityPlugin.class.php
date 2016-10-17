@@ -59,7 +59,7 @@ class globalactivityPlugin extends Plugin {
 			array(),
 			array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:GlobalActivityEntry[]')),
 			'tns:GlobalActivityEntry');
-		
+
 		$server->register(
 			'globalactivity_getActivity',
 			array('session_ser'=>'xsd:string',
@@ -91,7 +91,7 @@ class globalactivityPlugin extends Plugin {
 			$rendered_end = $rendered_begin;
 			$rendered_begin = $tmp;
 		}
-		
+
 		if (forge_get_config('use_forum')) {
 			$ids[]		= 'forumpost';
 			$texts[]	= _('Forum Post');
@@ -230,7 +230,7 @@ class globalactivityPlugin extends Plugin {
 			$res = db_query_params('SELECT group_id FROM groups WHERE status=$1',
 								   array('A'));
 		}
-		
+
 		if (db_error()) {
 			exit_error(db_error(), 'home');
 		}
@@ -313,7 +313,7 @@ function &globalactivity_getActivity($session_ser,$begin,$end,$show=array()) {
 	$res2 = array();
 	foreach ($results as $res) {
 		$r = array();
-		
+
 		foreach ($keys as $k) {
 			$r[$k] = $res[$k];
 		}
@@ -355,7 +355,7 @@ function &globalactivity_getActivityForProject($session_ser,$begin,$end,$group_i
 	$res2 = array();
 	foreach ($results as $res) {
 		$r = array();
-		
+
 		foreach ($keys as $k) {
 			$r[$k] = $res[$k];
 		}
