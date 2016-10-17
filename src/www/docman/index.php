@@ -65,15 +65,18 @@ if (!$g->usesDocman())
 if ($g->isError())
 	exit_error($g->getErrorMessage(), 'docman');
 
+$childgroup_id = getIntFromRequest('childgroup_id', 0);
 $dirid = getIntFromRequest('dirid', 0);
 if ($dirid) {
-	$chkdg = documentgroup_get_object($dirid, $g->getID());
+	if ($childgroup_id) {
+		$chkdg = documentgroup_get_object($dirid, group_get_object($childgroup_id)->getID());
+	} else {
+		$chkdg = documentgroup_get_object($dirid, $g->getID());
+	}
 	if (!is_object($chkdg)) {
 		session_redirect('/docman/?group_id='.$group_id);
 	}
 }
-
-$childgroup_id = getIntFromRequest('childgroup_id');
 
 /* everything sounds ok, now let's do the job */
 $action = getStringFromRequest('action');

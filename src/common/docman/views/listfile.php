@@ -36,6 +36,7 @@ global $g; // the Group object
 global $dm; // the docman manager
 global $warning_msg;
 global $start; // use to set the offset
+global $childgroup_id;
 
 $linkmenu = 'listfile';
 $baseredirecturl = '/docman/?group_id='.$group_id;
@@ -46,7 +47,6 @@ include ($gfcommon.'docman/views/tree.php');
 echo html_ac(html_ap() - 1);
 
 // plugin projects-hierarchy support
-$childgroup_id = getIntFromRequest('childgroup_id');
 if ($childgroup_id) {
 	$redirecturl .= '&childgroup_id='.$childgroup_id;
 	$g = group_get_object($childgroup_id);
@@ -104,17 +104,17 @@ if ($dirid) {
 	$ndg = documentgroup_get_object($dirid, $g->getID());
 	if ($ndg->isError()) {
 		$error_msg = $ndg->getErrorMessage();
-		session_redirect($baseredirecturl);
+		session_redirect($baseredirecturl, false);
 	}
 	$DocGroupName = $ndg->getName();
 	$dgpath = $ndg->getPath(true, false);
 	if (!$DocGroupName) {
 		$error_msg = $g->getErrorMessage();
-		session_redirect($baseredirecturl);
+		session_redirect($baseredirecturl, false);
 	}
 	if (($ndg->getState() != 1 && $ndg->getState() != 5) || !$dgpath) {
 		$error_msg = _('Invalid folder');
-		session_redirect($baseredirecturl.'&view=listfile');
+		session_redirect($baseredirecturl.'&view=listfile', false);
 	}
 	$nbDocs = $ndg->getNumberOfDocuments(1);
 	if (forge_check_perm('docman', $g->getID(), 'approve')) {
@@ -315,12 +315,12 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 			$nextcell = '';
 			$editfileaction = '/docman/?action=editfile&fromview=listfile&dirid='.$d->getDocGroupID();
 			$notifyaction = '/docman/?action=notifyusers&fromview=listfile&dirid='.$d->getDocGroupID();
-			if (isset($GLOBALS['childgroup_id']) && $GLOBALS['childgroup_id']) {
-				$editfileaction .= '&childgroup_id='.$GLOBALS['childgroup_id'];
-				$notifyaction .= '&childgroup_id='.$GLOBALS['childgroup_id'];
+			if ($childgroup_id) {
+				$editfileaction .= '&childgroup_id='.$childgroup_id;
+				$notifyaction .= '&childgroup_id='.$childgroup_id;
 			}
-			$editfileaction .= '&group_id='.$GLOBALS['group_id'];
-			$notifyaction .= '&group_id='.$GLOBALS['group_id'];
+			$editfileaction .= '&group_id='.$group_id;
+			$notifyaction .= '&group_id='.$group_id;
 			if (!$d->getLocked() && !$d->getReserved()) {
 				$nextcell .= util_make_link($redirecturl.'&action=trashfile&fileid='.$d->getID(), $HTML->getDeletePic(_('Move this document to trash'), 'delfile'));
 				$nextcell .= util_make_link('#', $HTML->getEditFilePic(_('Edit this document'), 'editdocument'), array('onclick' => 'javascript:controllerListFile.toggleEditFileView({action:\''.util_make_uri($editfileaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' , id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json').', docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').', isText:\''.$d->isText().'\', isHtml:\''.$d->isHtml().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri('/docman').'\'})', 'title' => _('Edit this document')), true);
