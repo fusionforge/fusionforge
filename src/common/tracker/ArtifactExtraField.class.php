@@ -426,20 +426,20 @@ class ArtifactExtraField extends FFError {
 	}
 
 	/**
-	 * is_hidden_on_submit - whether this field is hidden on a new submission or not.
+	 * isHiddenOnSubmit - whether this field is hidden on a new submission or not.
 	 *
 	 * @return	boolean	required.
 	 */
-	function is_hidden_on_submit() {
+	function isHiddenOnSubmit() {
 		return $this->data_array['is_hidden_on_submit'];
 	}
 
 	/**
-	 * is_disabled - whether this field is disabled or not.
+	 * isDisabled - whether this field is disabled or not.
 	 *
 	 * @return	boolean	required.
 	 */
-	function is_disabled() {
+	function isDisabled() {
 		return $this->data_array['is_disabled'];
 	}
 

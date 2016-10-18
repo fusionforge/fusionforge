@@ -65,7 +65,7 @@ if (!$ac || !is_object($ac)) {
 	echo html_ac(html_ap() - 1);
 
 	echo html_ao('p');
-	echo html_build_checkbox('is_disabled', false, $ac->is_disabled());
+	echo html_build_checkbox('is_disabled', false, $ac->isDisabled());
 	echo html_e('label', array('for'=>'is_disabled'), _('Field is disabled'));
 	echo html_ac(html_ap() - 1);
 
@@ -75,7 +75,7 @@ if (!$ac || !is_object($ac)) {
 	echo html_ac(html_ap() - 1);
 
 	echo html_ao('p');
-	echo html_build_checkbox('is_hidden_on_submit', false, $ac->is_hidden_on_submit());
+	echo html_build_checkbox('is_hidden_on_submit', false, $ac->isHiddenOnSubmit());
 	echo html_e('label', array('for'=>'is_hidden_on_submit'), _('Hide this Field on a new submission'));
 	echo html_ac(html_ap() - 1);
 
