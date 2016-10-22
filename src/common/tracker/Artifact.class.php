@@ -7,7 +7,7 @@
  * Copyright 2009, Roland Mas
  * Copyright (C) 2009-2013 Alain Peyrat, Alcatel-Lucent
  * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
- * Copyright 2014-2015, Franck Villaume - TrivialDev
+ * Copyright 2014-2016, Franck Villaume - TrivialDev
  * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -26,7 +26,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-/*
+/**
  * Standard Alcatel-Lucent disclaimer for contributing to open source
  *
  * "The Artifact ("Contribution") has not been tested and/or
@@ -47,7 +47,7 @@
  * TOGETHER WITH THE SOFTWARE TO WHICH THE CONTRIBUTION RELATES OR ON A STAND
  * ALONE BASIS."
  */
-require_once $gfcommon.'include/FFError.class.php';
+require_once $gfcommon.'include/FFObject.class.php';
 require_once $gfcommon.'tracker/ArtifactMessage.class.php';
 require_once $gfcommon.'tracker/ArtifactExtraField.class.php';
 require_once $gfcommon.'tracker/ArtifactWorkflow.class.php';
@@ -85,7 +85,7 @@ function &artifact_get_object($artifact_id,$data=false) {
 	return $ARTIFACT_OBJ["_".$artifact_id."_"];
 }
 
-class Artifact extends FFError {
+class Artifact extends FFObject {
 
 	/**
 	 * Resource ID.
@@ -141,7 +141,11 @@ class Artifact extends FFError {
 	 *						ONLY OPTIONAL WHEN YOU PLAN TO IMMEDIATELY CALL ->create()
 	 */
 	function __construct(&$ArtifactType, $data=false) {
-		parent::__construct();
+		if (is_int($data)) {
+			parent::__construct($data, get_class());
+		} else {
+			parent::__construct();
+		}
 
 		$this->ArtifactType =& $ArtifactType;
 
@@ -568,6 +572,13 @@ class Artifact extends FFError {
 					array ($this->getID())) ;
 		if (!$res) {
 			$this->setError(_('Error deleting artifact')._(': ').db_error());
+			db_rollback();
+			ArtifactStorage::instance()->rollback();
+			return false;
+		}
+
+		if (!$this->removeAllAssociations()) {
+			// error message already set by FFObject class.
 			db_rollback();
 			ArtifactStorage::instance()->rollback();
 			return false;
@@ -2017,6 +2028,10 @@ class Artifact extends FFError {
 			return true;
 		}
 		return false;
+	}
+
+	function getPermalink() {
+		return '/tracker/a_follow.php/'.$this->getID();
 	}
 }
 

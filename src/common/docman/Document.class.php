@@ -26,7 +26,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'include/FFError.class.php';
+require_once $gfcommon.'include/FFObject.class.php';
 require_once $gfcommon.'docman/Parsedata.class.php';
 require_once $gfcommon.'docman/DocumentManager.class.php';
 require_once $gfcommon.'docman/DocumentGroup.class.php';
@@ -48,25 +48,29 @@ $DOCUMENT_OBJ = array();
  * @param	int|bool	$res		The result set handle ("SELECT * FROM docdata_vw WHERE docid=$1")
  * @return	Document	a document object or false on failure
  */
-function &document_get_object($doc_id, $group_id, $res = false) {
+function &document_get_object($doc_id, $group_id = false, $res = false) {
 	global $DOCUMENT_OBJ;
 	if (!isset($DOCUMENT_OBJ["_".$doc_id."_"])) {
 		if ($res) {
 			//the db result handle was passed in
-		} else {
+		} elseif ($group_id) {
 			$res = db_query_params('SELECT * FROM docdata_vw WHERE docid = $1 and group_id = $2',
 						array($doc_id, $group_id));
+		} else {
+			$res = db_query_params('SELECT * FROM docdata_vw WHERE docid = $1',
+						array($doc_id));
 		}
 		if (!$res || db_numrows($res) < 1) {
 			$DOCUMENT_OBJ["_".$doc_id."_"] = false;
 		} else {
-			$DOCUMENT_OBJ["_".$doc_id."_"] = new Document(group_get_object($group_id), $doc_id, db_fetch_array($res));
+			$arr = db_fetch_array($res);
+			$DOCUMENT_OBJ["_".$doc_id."_"] = new Document(group_get_object($arr['group_id']), $doc_id, $arr);
 		}
 	}
 	return $DOCUMENT_OBJ["_".$doc_id."_"];
 }
 
-class Document extends FFError {
+class Document extends FFObject {
 
 	/**
 	 * Associative array of data from db.
@@ -91,7 +95,7 @@ class Document extends FFError {
 	 * @internal	param	\The $array associative array of data.
 	 */
 	function __construct(&$Group, $docid = false, $arr = false) {
-		parent::__construct();
+		parent::__construct($docid, get_class());
 		if (!$Group || !is_object($Group)) {
 			$this->setError(_('Invalid Project'));
 			return;
@@ -391,6 +395,14 @@ class Document extends FFError {
 	 */
 	function getStateID() {
 		return $this->data_array['stateid'];
+	}
+
+	function getView() {
+		$view = 'listfile';
+		if ($this->getStateID() == 2) {
+			$view = 'listtrashfile';
+		}
+		return $view;
 	}
 
 	/**
@@ -1084,6 +1096,12 @@ class Document extends FFError {
 			db_rollback();
 			return false;
 		}
+
+		if (!$this->removeAllAssociations()) {
+			// error message already set by FFObject class.
+			db_rollback();
+			return false;
+		}
 		db_commit();
 
 		foreach ($serialids as $serialid) {
@@ -1200,6 +1218,10 @@ class Document extends FFError {
 		}
 		$this->sendNotice(false);
 		return true;
+	}
+
+	function getPermalink() {
+		return '/docman/d_follow.php/'.$this->getID();
 	}
 }
 

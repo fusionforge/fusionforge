@@ -23,6 +23,7 @@
  */
 
 require_once $gfcommon.'docman/Document.class.php';
+require_once $gfcommon.'tracker/Artifact.class.php';
 
 function util_gen_cross_ref ($text, $group_id) {
 
@@ -53,16 +54,11 @@ function _page2url($group_id,$page) {
 
 function _artifactid2url ($id, $mode='') {
 	$text = '[#'.$id.']';
-	$res = db_query_params ('SELECT group_id, artifact.group_artifact_id, summary, status_id
-			FROM artifact, artifact_group_list
-			WHERE artifact_id=$1
-			AND artifact.group_artifact_id=artifact_group_list.group_artifact_id',
-				array ($id)) ;
-	if (db_numrows($res) == 1) {
-		$row = db_fetch_array($res);
-		$url = '/tracker/?func=detail&aid='.$id.'&group_id='.$row['group_id'].'&atid='.$row['group_artifact_id'];
-		$arg['title'] = util_html_secure($row['summary']);
-		if ($row['status_id'] == 2) {
+	$artifactObject = artifact_get_object($id);
+	if ($artifactObject && is_object($artifactObject) && !$artifactObject->isError()) {
+		$arg['title'] = util_html_secure($artifactObject->getSummary());
+		$url = $artifactObject->getPermalink();
+		if ($artifactObject->getStatusID() == 2) {
 			$arg['class'] = 'artifact_closed';
 		}
 		if ($mode == 'title') {
@@ -121,8 +117,7 @@ function _documentid2url($id, $group_id) {
 	$text = '[D'.$id.']';
 	$d = document_get_object($id, $group_id);
 	if ($d && is_object($d) && !$d->isError()) {
-		$view = (($d->getStateID() != 2) ? 'listfile' : 'listtrashfile');
-		$url = '/docman/?group_id='.$group_id.'&view='.$view.'&dirid='.$d->getDocGroupID().'&filedetailid='.$d->getID();
+		$url = $d->getPermalink();
 		$arg['title'] = $d->getName().' ['.$d->getFileName().']';
 		return util_make_link($url, $text, $arg);
 	}

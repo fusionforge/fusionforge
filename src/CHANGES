@@ -10,6 +10,7 @@ FusionForge 6.X:
 * Docman: support private directory. (TrivialDev)
 * Docman: support document versioning. (TrivialDev)
 * Docman: support cross ref. forum, documents, task or artifact. (TrivialDev)
+* Core System: support object association n-n, bidirectional (Artifact, Document) (TrivialDev)
 * FRS: link package release to tracker roadmap. (TrivialDev)
 * Layout: new dynamic quickNav menu: based on user activity to select 5 more visited projects (TrivialDev)
 * Plugin AuthBuiltin: add captcha after 3 attempts with the same login [#795] (TrivialDev)

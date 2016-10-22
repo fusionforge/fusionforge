@@ -232,6 +232,9 @@ foreach ($pluginsListeners as $pluginsListener) {
 	<?php if ($ah->hasRelations()) { ?>
 	<li><a href="#tabber-relations"><?php echo _('Relations'); ?></a></li>
 	<?php } ?>
+	<?php if (forge_get_config('use_object_associations')) { ?>
+	<li><a href="#tabber-object-associations"><?php echo _('Associations'); ?></a></li>
+	<?php } ?>
 	</ul>
 <div id="tabber-comments" class="tabbertab">
 <?php echo $HTML->listTableTop(); ?>
@@ -312,6 +315,13 @@ if ($group->usesPM()) {
 	<?php $ah->showHistory(); ?>
 </div>
 	<?php $ah->showRelations(); ?>
+	<?php if (forge_get_config('use_object_associations')) { ?>
+	<div id="tabber-object-associations" class="tabbertab">
+		<?php $ah->showAssociations(); ?>
+		<?php if (forge_check_perm ('tracker',$ath->getID(),'submit')) {
+			$ah->showAddAssociations(); } ?>
+	</div>
+	<?php } ?>
 </div>
 <?php if (session_loggedin()) {
 	echo $HTML->listTableTop(); ?>

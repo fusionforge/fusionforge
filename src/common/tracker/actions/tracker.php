@@ -237,6 +237,7 @@ switch (getStringFromRequest('func')) {
 		$extra_fields = getStringFromRequest('extra_fields');
 		$user_email = getStringFromRequest('user_email', false);
 		$was_error = false;
+		$newobjectsassociation = getStringFromRequest('newobjectsassociation', false);
 
 		/*
 			Technicians can modify limited fields - to be certain
@@ -364,6 +365,16 @@ switch (getStringFromRequest('func')) {
 						} else {
 							$feedback .= ' <br />'._('File Upload: Successful');
 						}
+					}
+				}
+
+				// Admin, Techs and Submitter can associate object
+				if ($newobjectsassociation) {
+					if (!$ah->addAssociations($newobjectsassociation)) {
+						$error_msg .= '<br />'._('Associate Object: Error')._(': ').$ah->getErrorMessage();
+						$was_error = true;
+					} else {
+						$feedback .= '<br />'._('Associate Object: Successful');
 					}
 				}
 
