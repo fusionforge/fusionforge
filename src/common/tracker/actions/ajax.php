@@ -25,11 +25,9 @@ $function = getStringFromRequest('function');
 
 switch ($function) {
 	case 'get_canned_response':
-		//$atid = getIntFromRequest('atid');
 		$canned_response_id = getIntFromRequest('canned_response_id');
 		echo get_canned_response($canned_response_id);
 		break;
-
 	default:
 		echo '';
 		break;
