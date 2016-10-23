@@ -550,6 +550,10 @@ class FRSRelease extends FFObject {
 		}
 		return $roadmaps;
 	}
+
+	function getPermalink() {
+		return '/frs/r_follow.php/'.$this->getID();
+	}
 }
 
 // Local Variables:

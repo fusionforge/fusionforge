@@ -24,6 +24,7 @@
 
 require_once $gfcommon.'docman/Document.class.php';
 require_once $gfcommon.'tracker/Artifact.class.php';
+require_once $gfcommon.'frs/FRSRelease.class.php';
 
 function util_gen_cross_ref ($text, $group_id) {
 
@@ -119,6 +120,18 @@ function _documentid2url($id, $group_id) {
 	if ($d && is_object($d) && !$d->isError()) {
 		$url = $d->getPermalink();
 		$arg['title'] = $d->getName().' ['.$d->getFileName().']';
+		return util_make_link($url, $text, $arg);
+	}
+	return $text;
+}
+
+
+function _frsreleaseid2url($id) {
+	$text = '[R'.$id.']';
+	$frsr = frsrelease_get_object($id);
+	if ($frsr && is_object($frsr) && !$frsr->isError()) {
+		$url = $frsr->getPermalink();
+		$arg['title'] = $frsr->getName();
 		return util_make_link($url, $text, $arg);
 	}
 	return $text;
