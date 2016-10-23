@@ -50,6 +50,14 @@ if(!$frsr->getFRSPackage()->isPublic()) {
 echo html_e('h2', array(), _('File Release Notes and Changelog'));
 echo html_e('h3', array(), _('Release Name')._(': ').util_make_link('/frs/?group_id='.$group_id.'&release_id='.$release_id, $frsr->getName()));
 
+if (forge_get_config('use_object_associations')) {
+	echo html_ao('div', array('id' => 'tabber'));
+	$elementsLi = array();
+	$elementsLi[] = array('content' => util_make_link('#tabber-changelog', _('Change Log & Notes'), array('title' => _('View Changelog & Notes.')), true));
+	$elementsLi[] = array('content' => util_make_link('#tabber-association', _('Associations'), array('title' => _('View Associated Objects.')), true));
+	echo $HTML->html_list($elementsLi);
+	echo html_ao('div', array('id' => 'tabber-changelog', 'class' => 'tabbertab'));
+}
 // Show preformatted or plain notes/changes
 if ($frsr->getPreformatted()) {
 	$htmltag = 'pre';
@@ -61,10 +69,21 @@ if (strlen($frsr->getNotes())) {
 	echo $HTML->boxTop(_('Release Notes'));
 	echo html_e($htmltag, array(), $frsr->getNotes());
 	echo $HTML->boxBottom();
+} else {
+	echo $HTML->information(_('No release notes'));
 }
 
 if (strlen($frsr->getChanges())) {
 	echo $HTML->boxTop(_('Change Log'));
 	echo html_e($htmltag, array(), $frsr->getChanges());
 	echo $HTML->boxBottom();
+} else {
+	echo $HTML->information(_('No change log'));
+}
+
+if (forge_get_config('use_object_associations')) {
+	echo html_ac(html_ap() -1);
+	echo html_ao('div', array('id' => 'tabber-association', 'class' => 'tabbertab'));
+	echo $frsr->showAssociations();
+	echo html_ac(html_ap() -2);
 }
