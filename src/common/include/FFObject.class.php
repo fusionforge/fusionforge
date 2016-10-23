@@ -30,6 +30,7 @@
  */
 
 require_once $gfcommon.'include/FFError.class.php';
+require_once $gfcommon.'include/utils_crossref.php';
 
 class FFObject extends FFError {
 
@@ -112,13 +113,13 @@ class FFObject extends FFError {
 		}
 	}
 
-	function getRefObject($objectId, $objectRefId, $objectType) {
+	function getLinkObject($objectId, $objectRefId, $objectType) {
 		switch ($objectType) {
 			case 'Document':
-				return document_get_object($objectId, $objectRefId);
+				return _documentid2url($objectId, $objectRefId);
 				break;
 			case 'Artifact':
-				return artifact_get_object($objectId);
+				return _artifactid2url($objectId);
 				break;
 		}
 	}
@@ -177,12 +178,13 @@ class FFObject extends FFError {
 		if (is_object($object)) {
 			$objectType = get_class($object);
 			$objectRefId = $this->getRefID($object);
-			if (!isset($this->associateArray[$objectType][$objectRefId][$object->getID()])) {
+			if ((isset($this->associatedToArray[$objectType][$objectRefId]) && !in_array($object->getID(), $this->associatedToArray[$objectType][$objectRefId]))
+				|| !isset($this->associatedToArray[$objectType][$objectRefId])) {
 				$res = db_query_params('INSERT INTO fusionforge_object_assiociation (from_id, from_object_type, from_ref_id, to_object_type, to_id, to_ref_id)
 								VALUES ($1, $2, $3, $4, $5, $6)',
 							array($this->getID(), $this->getRealClass($this), $this->getRefID($this), $objectType, $object->getID(), $objectRefId));
 				if ($res) {
-					$this->associateArray[$objectType][$objectRefId][] = $object->getID();
+					$this->associatedToArray[$objectType][$objectRefId][] = $object->getID();
 					return true;
 				} else {
 					$this->setError(_('Cannot insert association')._(': ').db_error());
@@ -196,59 +198,47 @@ class FFObject extends FFError {
 		return false;
 	}
 
-	function removeAssociationTo($object) {
-		if (is_object($object)) {
-			$objectType = get_class($object);
-			$objectRefId = $this->getRefID($object);
-			if (isset($this->associateArray[$objectType][$objectRefId][$object->getID()])) {
-				$res = db_query_params('DELETE FROM fusionforge_object_assiociation WHERE from_id = $1 AND from_object_type = $2
-								AND to_object_type = $3 AND to_id = $4',
-							array($this->getID(), $this->getRealClass($this), $objectType, $object->getID()));
-				if ($res) {
-					unset($this->associateArray[$objectType][$objectRefId][$object->getID()]);
-					return true;
-				} else {
-					$this->setError(_('Cannot delete association')._(': ').db_error());
-				}
+	function removeAssociationTo($objectId, $objectRefId, $objectType) {
+		if (isset($this->associatedToArray[$objectType][$objectRefId]) && in_array($objectId, $this->associatedToArray[$objectType][$objectRefId])) {
+			$res = db_query_params('DELETE FROM fusionforge_object_assiociation WHERE from_id = $1 AND from_object_type = $2
+							AND to_object_type = $3 AND to_id = $4',
+						array($this->getID(), $this->getRealClass($this), $objectType, $objectId));
+			if ($res) {
+				unset($this->associatedToArray[$objectType][$objectRefId][$objectId]);
+				return true;
 			} else {
-				$this->setError(_('Association does not existing'));
+				$this->setError(_('Cannot delete association')._(': ').db_error());
 			}
 		} else {
-			$this->setError(_('Cannot remove association to a non-object'));
+			$this->setError(_('Association To does not existing'));
 		}
 		return false;
 	}
 
-	function removeAssociationFrom($object) {
-		if (is_object($object)) {
-			$objectType = get_class($object);
-			$objectRefId = $this->getRefID($object);
-			if (isset($this->associateArray[$objectType][$objectRefId][$object->getID()])) {
-				$res = db_query_params('DELETE FROM fusionforge_object_assiociation WHERE from_id = $1 AND from_object_type = $2
-								AND to_object_type = $3 AND to_id = $4',
-							array($objectType, $object->getID(), $this->getID(), get_class($this)));
-				if ($res) {
-					unset($this->associateArray[$objectType][$objectRefId][$object->getID()]);
-					return true;
-				} else {
-					$this->setError(_('Cannot delete association')._(': ').db_error());
-				}
+	function removeAssociationFrom($objectId, $objectRefId, $objectType) {
+		if (isset($this->associatedFromArray[$objectType][$objectRefId]) && in_array($objectId, $this->associatedFromArray[$objectType][$objectRefId])) {
+			$res = db_query_params('DELETE FROM fusionforge_object_assiociation WHERE from_id = $1 AND from_object_type = $2
+							AND to_object_type = $3 AND to_id = $4',
+						array($objectType, $objectId, $this->getID(), $this->getRealClass($this)));
+			if ($res) {
+				unset($this->associatedFromArray[$objectType][$objectRefId][$objectId]);
+				return true;
 			} else {
-				$this->setError(_('Association does not existing'));
+				$this->setError(_('Cannot delete association')._(': ').db_error());
 			}
 		} else {
-			$this->setError(_('Cannot remove association to a non-object'));
+			$this->setError(_('Association From does not existing'));
 		}
 		return false;
 	}
 
 	function removeAllAssociations() {
 		$res = db_query_params('DELETE FROM fusionforge_object_assiociation WHERE (from_id = $1 AND from_object_type = $2)
-											OR (to_id = $1 AND to_object_type $ 4)',
-					array($this->getID(), get_class(), $this->getID(), get_class()));
+											OR (to_id = $1 AND to_object_type = $2)',
+					array($this->getID(), get_class($this)));
 		if ($res) {
-			$this->associateToArray = array();
-			$this->associateFromArray = array();
+			$this->associatedToArray = array();
+			$this->associatedFromArray = array();
 			return true;
 		} else {
 			$this->setError(_('Unable to remove all associations')._(': ').db_error());
@@ -267,7 +257,7 @@ class FFObject extends FFError {
 							$tabletop = array('', _('Associated Object'), _('Associated Object ID'));
 							$classth = array('', '', '');
 							if ($url !== false) {
-								echo html_e('p', array(), _('Remove all association action'));
+								echo html_e('p', array(), _('Remove all associations')._(': ').util_make_link($url.'&link=any', $HTML->getDeletePic(_('Drop all associated from and to objects.'))));
 								$tabletop[] = _('Actions');
 								$classth[] = 'unsortable';
 							}
@@ -275,15 +265,12 @@ class FFObject extends FFError {
 							$displayHeader = true;
 						}
 						foreach ($objectIds as $objectId) {
-							$object = $this->getRefObject($objectId, $objectRefId, $objectType);
 							$cells = array();
 							$cells[][] = _('To');
 							$cells[][] = $objectType;
-							$cells[][] = util_make_link($object->getPermalink(), $objectId);
+							$cells[][] = $this->getLinkObject($objectId, $objectRefId, $objectType);
 							if ($url !== false) {
-								$cells[][] = _('Remove action');
-							} else {
-								$cells[][] = '';
+								$cells[][] = util_make_link($url.'&link=to&objecttype='.$objectType.'&objectrefid='.$objectRefId.'&objectid='.$objectId, $HTML->getDeletePic(_('Remove this association'), _('Remove this association')));
 							}
 							echo $HTML->multiTableRow(array(), $cells);
 						}
@@ -299,7 +286,7 @@ class FFObject extends FFError {
 							$tabletop = array('', _('Associated Object'), _('Associated Object ID'));
 							$classth = array('', '', '');
 							if ($url !== false) {
-								echo html_e('p', array(), _('Remove all association action'));
+								echo html_e('p', array(), util_make_link($url.'&link=any', $HTML->getDeletePic(_('Remove all associations'), _('Remove all associations'))));
 								$tabletop[] = _('Actions');
 								$classth[] = 'unsortable';
 							}
@@ -307,15 +294,12 @@ class FFObject extends FFError {
 							$displayHeader = true;
 						}
 						foreach ($objectIds as $objectId) {
-							$object = $this->getRefObject($objectId, $objectRefId, $objectType);
 							$cells = array();
 							$cells[][] = _('From');
 							$cells[][] = $objectType;
-							$cells[][] = util_make_link($object->getPermalink(), $objectId);
+							$cells[][] = $this->getLinkObject($objectId, $objectRefId, $objectType);
 							if ($url !== false) {
-								$cells[][] = _('Remove action');
-							} else {
-								$cells[][] = '';
+								$cells[][] = util_make_link($url.'&link=from&objecttype='.$objectType.'&objectRefId='.$objectRefId.'&objectId='.$objectId, $HTML->getDeletePic(_('Remove this association'), _('Remove this association')));
 							}
 							echo $HTML->multiTableRow(array(), $cells);
 						}

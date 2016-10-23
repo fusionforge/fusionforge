@@ -65,7 +65,7 @@ define('ARTIFACT_MAIL_MARKER', '#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+');
  * @param	array|bool	$data		The result array, if it's passed in
  * @return	Artifact	Artifact object
  */
-function &artifact_get_object($artifact_id,$data=false) {
+function &artifact_get_object($artifact_id, $data=false) {
 	global $ARTIFACT_OBJ;
 	if (!isset($ARTIFACT_OBJ["_".$artifact_id."_"])) {
 		if ($data) {
@@ -80,7 +80,7 @@ function &artifact_get_object($artifact_id,$data=false) {
 			$data = db_fetch_array($res);
 		}
 		$ArtifactType =& artifactType_get_object($data["group_artifact_id"]);
-		$ARTIFACT_OBJ["_".$artifact_id."_"]= new Artifact($ArtifactType,$data);
+		$ARTIFACT_OBJ["_".$artifact_id."_"]= new Artifact($ArtifactType, $data);
 	}
 	return $ARTIFACT_OBJ["_".$artifact_id."_"];
 }
@@ -140,9 +140,11 @@ class Artifact extends FFObject {
 	 * @param	int|bool	$data		(primary key from database OR complete assoc array)
 	 *						ONLY OPTIONAL WHEN YOU PLAN TO IMMEDIATELY CALL ->create()
 	 */
-	function __construct(&$ArtifactType, $data=false) {
-		if (is_int($data)) {
-			parent::__construct($data, get_class());
+	function __construct(&$ArtifactType, $data = false) {
+		if (is_array($data)) {
+			parent::__construct($data['artifact_id'], 'Artifact');
+		} elseif (is_int($data)) {
+			parent::__construct($data, 'Artifact');
 		} else {
 			parent::__construct();
 		}

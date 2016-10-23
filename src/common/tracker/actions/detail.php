@@ -241,9 +241,12 @@ if ($group->usesPM()) {
 	<?php $ah->showRelations(); ?>
 	<?php if (forge_get_config('use_object_associations')) { ?>
 	<div id="tabber-object-associations" class="tabbertab">
-		<?php $ah->showAssociations(); ?>
-		<?php if (forge_check_perm ('tracker',$ath->getID(),'submit')) {
-			$ah->showAddAssociations(); } ?>
+	<?php if (forge_check_perm ('tracker',$ath->getID(),'submit')) {
+		$ah->showAssociations('/tracker/?rtype=ajax&aid='.$ah->getID().'&group_id='.$ath->Group->getID().'&atid='.$ath->getID().'&func=removeassoc');
+		$ah->showAddAssociations();
+		} else {
+		$ah->showAssociations();
+		} ?>
 	</div>
 	<?php } ?>
 </div>

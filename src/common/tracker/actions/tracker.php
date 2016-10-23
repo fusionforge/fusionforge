@@ -4,8 +4,8 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
- * Copyright 2012-2014, Franck Villaume - TrivialDev
  * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
+ * Copyright 2012-2014,2016 Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -26,6 +26,8 @@
 
 global $group;
 global $atid;
+global $feedback;
+global $error_msg;
 
 //
 //	Create the ArtifactType object
@@ -42,7 +44,7 @@ if ($ath->isError()) {
 		exit_error($ath->getErrorMessage(),'tracker');
 	}
 }
-$error_msg = '';
+
 switch (getStringFromRequest('func')) {
 
 	case 'add' : {
@@ -606,6 +608,35 @@ switch (getStringFromRequest('func')) {
 		include $gfcommon.'tracker/actions/browse.php';
 		break;
 	}
+	case 'removeassoc':
+		$aid = getIntFromRequest('aid');
+		$artifact = artifact_get_object($aid);
+		$objectRefId = getStringFromRequest('objectrefid');
+		$objectId = getStringFromRequest('objectid');
+		$objectType = getStringFromRequest('objecttype');
+		$link = getStringFromRequest('link');
+		$was_error = false;
+		if ($link == 'to') {
+			if (!$artifact->removeAssociationTo($objectId, $objectRefId, $objectType)) {
+				$error_msg = $artifact->getErrorMessage();
+				$was_error = true;
+			}
+		} elseif ($link == 'from') {
+			if (!$artifact->removeAssociationFrom($objectId, $objectRefId, $objectType)) {
+				$error_msg = $artifact->getErrorMessage();
+				$was_error = true;
+			}
+		} elseif ($link == 'any') {
+			if (!$artifact->removeAllAssociations()) {
+				$error_msg = $artifact->getErrorMessage();
+				$was_error = true;
+			}
+		}
+		if (!$was_error) {
+			$feedback = _('Associations removed successfully');
+		}
+		session_redirect('/tracker/?group_id='.$group_id.'&atid='.$atid.'&aid='.$aid, false);
+		break;
 	default : {
 		include $gfcommon.'tracker/actions/browse.php';
 		break;
