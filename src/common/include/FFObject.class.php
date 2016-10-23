@@ -274,6 +274,7 @@ class FFObject extends FFError {
 	function showAssociations($url = false) {
 		global $HTML;
 		$displayHeader = false;
+		$content = '';
 		if (count($this->getAssociatedTo()) > 0) {
 			foreach ($this->getAssociatedTo() as $objectType => $objectRefIds) {
 				foreach ($objectRefIds as $objectRefId => $objectIds) {
@@ -282,11 +283,11 @@ class FFObject extends FFError {
 							$tabletop = array('', _('Associated Object'), _('Associated Object ID'));
 							$classth = array('', '', '');
 							if ($url !== false) {
-								echo html_e('p', array(), _('Remove all associations')._(': ').util_make_link($url.'&link=any', $HTML->getDeletePic(_('Drop all associated from and to objects.'))));
+								$content .= html_e('p', array(), _('Remove all associations')._(': ').util_make_link($url.'&link=any', $HTML->getDeletePic(_('Drop all associated from and to objects.'))));
 								$tabletop[] = _('Actions');
 								$classth[] = 'unsortable';
 							}
-							echo $HTML->listTableTop($tabletop, array(), 'sortable', 'sortable_association', $classth);
+							$content .= $HTML->listTableTop($tabletop, array(), 'sortable', 'sortable_association', $classth);
 							$displayHeader = true;
 						}
 						foreach ($objectIds as $objectId) {
@@ -297,7 +298,7 @@ class FFObject extends FFError {
 							if ($url !== false) {
 								$cells[][] = util_make_link($url.'&link=to&objecttype='.$objectType.'&objectrefid='.$objectRefId.'&objectid='.$objectId, $HTML->getDeletePic(_('Remove this association'), _('Remove this association')));
 							}
-							echo $HTML->multiTableRow(array(), $cells);
+							$content .= $HTML->multiTableRow(array(), $cells);
 						}
 					}
 				}
@@ -311,11 +312,11 @@ class FFObject extends FFError {
 							$tabletop = array('', _('Associated Object'), _('Associated Object ID'));
 							$classth = array('', '', '');
 							if ($url !== false) {
-								echo html_e('p', array(), util_make_link($url.'&link=any', $HTML->getDeletePic(_('Remove all associations'), _('Remove all associations'))));
+								$content .= html_e('p', array(), util_make_link($url.'&link=any', $HTML->getDeletePic(_('Remove all associations'), _('Remove all associations'))));
 								$tabletop[] = _('Actions');
 								$classth[] = 'unsortable';
 							}
-							echo $HTML->listTableTop($tabletop, array(), 'sortable', 'sortable_association', $classth);
+							$content .= $HTML->listTableTop($tabletop, array(), 'sortable', 'sortable_association', $classth);
 							$displayHeader = true;
 						}
 						foreach ($objectIds as $objectId) {
@@ -326,29 +327,32 @@ class FFObject extends FFError {
 							if ($url !== false) {
 								$cells[][] = util_make_link($url.'&link=from&objecttype='.$objectType.'&objectRefId='.$objectRefId.'&objectId='.$objectId, $HTML->getDeletePic(_('Remove this association'), _('Remove this association')));
 							}
-							echo $HTML->multiTableRow(array(), $cells);
+							$content .= $HTML->multiTableRow(array(), $cells);
 						}
 					}
 				}
 			}
 		}
 		if ($displayHeader) {
-			echo $HTML->listTableBottom();
+			$content .= $HTML->listTableBottom();
 		} else {
-			echo $HTML->information(_('No associated object.'));
+			$content .= $HTML->information(_('No associated object.'));
 		}
+		return $content;
 	}
 
 	function showAddAssociations($url = false) {
 		global $HTML;
+		$content = '';
 		echo _('Add new associate object')._(':');
 		if ($url !== false) {
-			echo $HTML->openForm(array('action' => $url, 'method' => 'post'));
+			$content .= $HTML->openForm(array('action' => $url, 'method' => 'post'));
 		}
-		echo html_e('input', array('type' => 'text', 'value' => '', 'name' => 'newobjectsassociation', 'title' => _('Use standard reference such #nnn, Dnnn, to add object association. Comma separeted')));
+		$content .= html_e('input', array('type' => 'text', 'value' => '', 'name' => 'newobjectsassociation', 'title' => _('Use standard reference such #nnn, Dnnn, to add object association. Comma separeted')));
 		if ($url !== false) {
-			echo html_e('input', array('type' => 'submit', 'value' => _('Add')));
-			echo $HTML->closeForm();
+			$content .= html_e('input', array('type' => 'submit', 'value' => _('Add')));
+			$content .= $HTML->closeForm();
 		}
+		return $content;
 	}
 }

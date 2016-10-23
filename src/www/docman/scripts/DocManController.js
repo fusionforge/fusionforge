@@ -440,6 +440,15 @@ DocManListFileController.prototype =
 				}
 			}, this));
 
+		jQuery.getJSON(this.listfileparams.docManURL + '/?group_id=' + docid_groupid + '&action=getassociations&docid='+ this.docparams.id, jQuery.proxy(function(data){
+			if (typeof data.html != 'undefined') {
+					jQuery('#tabbereditfile-association > .feedback').remove();
+					jQuery('#tabbereditfile-association > .error').remove();
+					jQuery('#tabbereditfile-association > .warning_msg').remove();
+					jQuery('#tabbereditfile-association').prepend(data.html);
+				}
+			}, this));
+
 		jQuery('#editdocdata').attr('action', this.docparams.action);
 
 		jQuery.get(this.docparams.docManURL+'/', {

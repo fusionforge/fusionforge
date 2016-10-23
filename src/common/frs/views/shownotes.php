@@ -83,7 +83,6 @@ if (strlen($frsr->getChanges())) {
 
 if (forge_get_config('use_object_associations')) {
 	echo html_ac(html_ap() -1);
-	echo html_ao('div', array('id' => 'tabber-association', 'class' => 'tabbertab'));
-	echo $frsr->showAssociations();
-	echo html_ac(html_ap() -2);
+	echo html_e('div', array('id' => 'tabber-association', 'class' => 'tabbertab'), $frsr->showAssociations());
+	echo html_ac(html_ap() -1);
 }

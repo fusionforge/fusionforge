@@ -48,7 +48,8 @@ jQuery(document).ready(function() {
 		buttonFile:		jQuery('#editButtonFile'),
 		buttonUrl:		jQuery('#editButtonUrl'),
 		buttonManualUpload:	jQuery('#editButtonManualUpload'),
-		buttonEditor:		jQuery('#editButtonEditor')
+		buttonEditor:		jQuery('#editButtonEditor'),
+		divAssociation:		jQuery('#tabbereditfile-association')
 	});
 });
 
@@ -66,6 +67,14 @@ $cells[] = array(_('State')._(':'), 'class' => 'docman_editfile_title');
 $cells[][] = html_e('select', array('name' => 'stateid', 'id' => 'stateid'), '', false);
 echo $HTML->multiTableRow(array(), $cells);
 echo $HTML->listTableBottom();
+if (forge_get_config('use_object_associations')) {
+	echo html_ao('div', array('id' => 'tabbereditfile'));
+	$elementsLi = array();
+	$elementsLi[] = array('content' => util_make_link('#tabbereditfile-version', _('Edit Versions'), array('title' => _('View/Add/Remove document version.')), true));
+	$elementsLi[] = array('content' => util_make_link('#tabbereditfile-association', _('Associations'), array('title' => _('Add/Remove associated objects.')), true));
+	echo $HTML->html_list($elementsLi);
+	echo html_ao('div', array('id' => 'tabbereditfile-version', 'class' => 'tabbertab'));
+}
 $thArr = array(_('ID (x)'), _('Filename'), _('Title'), _('Description'), _('Comment'), _('Author'), _('Last Time'), _('Size'), _('Actions'));
 $thTitle = array(_('x does mark the current version'), '', '', '', '', '', '', '', '', '', '');
 $thSizeCssArr = array(array('style' => 'width: 60px'), array('style' => 'width: 150px'), array('style' => 'width: 150px'), array('style' => 'width: 150px'), array('style' => 'width: 110px'),
@@ -146,5 +155,15 @@ echo $HTML->listTableBottom();
 echo html_e('input', array('type' => 'hidden', 'id' => 'docid', 'name' => 'docid'));
 echo html_e('input', array('type' => 'hidden', 'id' => 'edit_version', 'name' => 'edit_version'));
 echo html_e('input', array('type' => 'hidden', 'id' => 'new_version', 'name' => 'new_version', 'value' => 0));
+if (forge_get_config('use_object_associations')) {
+	echo html_ac(html_ap() -1);
+	echo html_e('div', array('id' => 'tabbereditfile-association', 'class' => 'tabbertab'), '', false);
+	echo '<script type="text/javascript">//<![CDATA[
+			jQuery(document).ready(function() {
+				jQuery("#tabbereditfile").tabs();
+			});
+			//]]></script>';
+	echo html_ac(html_ap() -1);
+}
 echo $HTML->closeForm();
 echo html_ac(html_ap() -1);

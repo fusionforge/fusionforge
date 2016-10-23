@@ -311,10 +311,10 @@ if ($group->usesPM()) {
 	<?php if (forge_get_config('use_object_associations')) { ?>
 	<div id="tabber-object-associations" class="tabbertab">
 	<?php if (forge_check_perm ('tracker',$ath->getID(),'submit')) {
-		$ah->showAssociations('/tracker/?func=removeassoc&aid='.$ah->getID().'&group_id='.$ath->Group->getID().'&atid='.$ath->getID());
-		$ah->showAddAssociations();
+			echo $ah->showAssociations('/tracker/?func=removeassoc&aid='.$ah->getID().'&group_id='.$ath->Group->getID().'&atid='.$ath->getID());
+			echo $ah->showAddAssociations();
 		} else {
-		$ah->showAssociations();
+			echo $ah->showAssociations();
 		} ?>
 	</div>
 	<?php } ?>
