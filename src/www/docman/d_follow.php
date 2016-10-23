@@ -28,7 +28,7 @@
 
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
-require_once $gfcommon.'document/Document.class.php';
+require_once $gfcommon.'docman/Document.class.php';
 
 $docid = getIntFromRequest('docid');
 if (!$docid) {
