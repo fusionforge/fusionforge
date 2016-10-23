@@ -38,11 +38,11 @@ echo $HTML->openForm(array('id' => 'notifyusersdoc', 'name' => 'notifyusersdoc',
 echo $HTML->listTableTop(array());
 $cells = array();
 $cells[] = array(_('Document Title')._(':'));
-$cells[][] = html_e('span', array('id' => 'notifytitle', 'type' => 'text', 'name' => 'title'));
+$cells[][] = html_e('span', array('id' => 'notifytitle', 'type' => 'text', 'name' => 'title'), '', false);
 echo $HTML->multiTableRow(array(), $cells);
 $cells = array();
 $cells[] = array(_('Description')._(':'));
-$cells[][] = html_e('span', array('id' => 'notifydescription', 'type' => 'text', 'name' => 'description'));
+$cells[][] = html_e('span', array('id' => 'notifydescription', 'type' => 'text', 'name' => 'description'), '', false);
 echo $HTML->multiTableRow(array(), $cells);
 $cells = array();
 $cells[] = array(_('File')._(':'));
