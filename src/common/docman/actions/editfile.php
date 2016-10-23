@@ -73,6 +73,7 @@ $current_version_radio = getIntFromRequest('doc_version_cv_radio');
 $current_version = getIntFromRequest('current_version', 0);
 $version = getIntFromRequest('edit_version', 0);
 $new_version = getIntFromRequest('new_version', 0);
+$newobjectsassociation = getStringFromRequest('newobjectsassociation');
 
 if (!$docid) {
 	$warning_msg = _('No document found to update');
@@ -162,6 +163,13 @@ if ($version) {
 	$vcomment = $dv->getComment();
 	$version = $current_version_radio;
 	$current_version = 1;
+} elseif ($newobjectsassociation) {
+	if (!$d->addAssociations($newobjectsassociation)) {
+		$error_msg = $d->getErrorMessage();
+	} else {
+		$feedback = sprintf(_('Document [D%s] updated successfully.'), $d->getID());
+	}
+	session_redirect($urlparam);
 } else {
 	$warning_msg = _('No action to perform');
 	session_redirect($urlparam);

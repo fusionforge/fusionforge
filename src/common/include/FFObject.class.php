@@ -343,8 +343,7 @@ class FFObject extends FFError {
 
 	function showAddAssociations($url = false) {
 		global $HTML;
-		$content = '';
-		echo _('Add new associate object')._(':');
+		$content = html_ao('span', array()). _('Add new associate object')._(':');
 		if ($url !== false) {
 			$content .= $HTML->openForm(array('action' => $url, 'method' => 'post'));
 		}
@@ -353,6 +352,7 @@ class FFObject extends FFError {
 			$content .= html_e('input', array('type' => 'submit', 'value' => _('Add')));
 			$content .= $HTML->closeForm();
 		}
+		$content .= html_ac(html_ap() -1);
 		return $content;
 	}
 }
