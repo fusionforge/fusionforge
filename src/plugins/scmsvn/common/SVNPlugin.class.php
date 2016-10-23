@@ -188,11 +188,6 @@ some control over it to the project's administrator.");
 			}
 		}
 		$b .= '</div>';
-		$b .= '<script type="text/javascript">//<![CDATA[
-			jQuery(document).ready(function() {
-				jQuery("#tabber").tabs();
-			});
-			//]]></script>';
 		return $b;
 	}
 

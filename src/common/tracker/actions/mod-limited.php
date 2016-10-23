@@ -39,14 +39,6 @@ $ath->header(array ('title'=> $ah->getStringID().' '. $ah->getSummary(), 'atid'=
 
 echo notepad_func();
 
-?>
-<script type="text/javascript">//<![CDATA[
-jQuery(document).ready(function() {
-	jQuery("#tabber").tabs();
-});
-//]]></script>
-
-<?php
 echo $HTML->openForm(array('id' => 'trackermodlimitedform', 'action' => '/tracker/?group_id='.$group_id.'&atid='.$ath->getID(), 'enctype' => 'multipart/form-data', 'method' => 'post'));
 ?>
 <input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>" />

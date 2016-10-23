@@ -241,11 +241,6 @@ control over it to the project's administrator.");
 			}
 		}
 		$b .= '</div>';
-		$b .= '<script type="text/javascript">//<![CDATA[
-			jQuery(document).ready(function() {
-				jQuery("#tabber").tabs();
-			});
-			//]]></script>';
 		if (session_loggedin()) {
 			$u = user_get_object(user_getid());
 			if ($u->getUnixStatus() == 'A') {

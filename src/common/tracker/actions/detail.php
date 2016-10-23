@@ -37,15 +37,6 @@ $ath->header(array ('title'=> $ah->getStringID().' '. $ah->getSummary(), 'atid'=
 
 echo notepad_func();
 
-?>
-
-<script type="text/javascript">//<![CDATA[
-jQuery(document).ready(function() {
-	jQuery("#tabber").tabs();
-});
-//]]></script>
-
-<?php
 echo $HTML->openForm(array('id' => 'trackerdetailform', 'action' => '/tracker/?group_id='.$group_id.'&atid='.$ath->getID(), 'method' => 'post', 'enctype' => 'multipart/form-data'));
 if (session_loggedin()) {
 	echo $HTML->listTableTop(); ?>

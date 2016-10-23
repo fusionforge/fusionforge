@@ -72,15 +72,6 @@ function display_login_form($return_to = '/', $triggered = false, $full_page = f
 
 	if (count ($params['html_snippets']) > 1) {
 		$use_tabber = true;
-		html_use_jqueryui();
-		echo $HTML->getJavascripts();
-		echo $HTML->getStylesheets();
-		echo '
-			<script type="text/javascript">//<![CDATA[
-			jQuery(document).ready(function() {
-				jQuery("#tabber").tabs();
-			});
-			//]]></script>';
 		echo '<div id="tabber">';
 	} else {
 		$use_tabber = false;

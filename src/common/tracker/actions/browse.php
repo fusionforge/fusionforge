@@ -321,8 +321,6 @@ echo '
 jQuery(document).ready(function() {';
 if ($af->query_type == 'custom') {
 	echo '	jQuery("#tabber").tabs({active: 1});';
-} else {
-	echo '	jQuery("#tabber").tabs();';
 }
 echo '
 });
