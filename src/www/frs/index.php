@@ -92,6 +92,7 @@ if (file_exists(forge_get_config('source_path').'/common/frs/actions/'.$action.'
 
 html_use_jqueryui();
 html_use_coolfieldset();
+html_use_tablesorter();
 use_javascript('/frs/scripts/FRSController.js');
 
 site_project_header(array('title' => _('Project Filelist for ').$g->getPublicName(), 'group' => $group_id, 'toptab' => 'frs'));

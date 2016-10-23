@@ -86,6 +86,9 @@ class FFObject extends FFError {
 			case 'ArtifactHtml':
 				return $object->ArtifactType->getID();
 				break;
+			case 'FRSRelease':
+				return $object->FRSPackage->getID();
+				break;
 		}
 	}
 
@@ -97,6 +100,9 @@ class FFObject extends FFError {
 			case 'Artifact':
 			case 'ArtifactHtml':
 				return $object->ArtifactType->Group->getID();
+				break;
+			case 'FRSRelease':
+				return $object->FRSPackage->Group->getID();
 				break;
 		}
 	}
@@ -110,6 +116,9 @@ class FFObject extends FFError {
 			case 'ArtifactHtml':
 				return 'Artifact';
 				break;
+			case 'FRSRelease':
+				return 'FRSRelease';
+				break;
 		}
 	}
 
@@ -120,6 +129,9 @@ class FFObject extends FFError {
 				break;
 			case 'Artifact':
 				return _artifactid2url($objectId);
+				break;
+			case 'FRSRelease':
+				return _frsreleaseid2url($objectId);
 				break;
 		}
 	}
@@ -132,6 +144,9 @@ class FFObject extends FFError {
 			case 'Artifact':
 			case 'ArtifactHtml':
 				return forge_check_perm('tracker', $objectRefId, 'read');
+				break;
+			case 'FRSRelease':
+				return forge_check_perm('frs', $objectRefId, 'file');
 				break;
 		}
 	}
@@ -158,6 +173,16 @@ class FFObject extends FFError {
 					$artifactObject = artifact_get_object($artifactId);
 					if (is_object($artifactObject)) {
 						$statusArr[] = $this->addAssociationTo($artifactObject);
+					} else {
+						$this->setError(_('Unable to retrieve object ref')._(': ').$objectRef);
+						$statusArr[] = false;
+					}
+				} elseif (preg_match('/^[Rr][0-9]+/', $objectRef)) {
+					//Artifact Ref.
+					$frsreleaseid = substr($objectRef, 1);
+					$frsreleaseObject = frsrelease_get_object($frsreleaseid);
+					if (is_object($frsreleaseObject)) {
+						$statusArr[] = $this->addAssociationTo($frsreleaseObject);
 					} else {
 						$this->setError(_('Unable to retrieve object ref')._(': ').$objectRef);
 						$statusArr[] = false;

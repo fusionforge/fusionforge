@@ -204,6 +204,16 @@ if ($g->usesTracker()) {
 	include $gfcommon.'frs/views/linktrackerroadmap.php';
 }
 
+if (forge_get_config('use_object_associations')) {
+	echo html_e('hr');
+	echo html_e('h2', array(), _('Associate Objects To/From This Release'));
+	$frsr->showAssociations('/frs/?action=deleteassociation&group_id='.$group_id.'&package_id='.$package_id.'&release_id='.$release_id);
+	echo $HTML->openForm(array('action' => '/frs/?action=addassociation&group_id='.$group_id.'&package_id='.$package_id.'&release_id='.$release_id, 'method' => 'post'));
+	$frsr->showAddAssociations();
+	echo html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Associate Objects')));
+	echo $HTML->closeForm();
+}
+
 echo html_e('hr');
 echo html_e('h2', array(), _('Monitoring Information'));
 echo html_e('p', array(), sprintf(ngettext('There is %s user monitoring this package.', 'There are %s users monitoring this package.', $frsp->getMonitorCount()), $frsp->getMonitorCount()));
