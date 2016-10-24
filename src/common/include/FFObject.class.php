@@ -244,7 +244,7 @@ class FFObject extends FFError {
 		if (isset($this->associatedFromArray[$objectType][$objectRefId]) && in_array($objectId, $this->associatedFromArray[$objectType][$objectRefId])) {
 			$res = db_query_params('DELETE FROM fusionforge_object_assiociation WHERE from_id = $1 AND from_object_type = $2
 							AND to_object_type = $3 AND to_id = $4',
-						array($objectType, $objectId, $this->getID(), $this->getRealClass($this)));
+						array($objectId, $objectType, $this->getRealClass($this), $this->getID()));
 			if ($res) {
 				unset($this->associatedFromArray[$objectType][$objectRefId][$objectId]);
 				return true;
@@ -312,7 +312,7 @@ class FFObject extends FFError {
 							$tabletop = array('', _('Associated Object'), _('Associated Object ID'));
 							$classth = array('', '', '');
 							if ($url !== false) {
-/bin/bash: q: command not found
+								$content .= html_e('p', array(), _('Remove all associations')._(': ').util_make_link($url.'&link=any', $HTML->getDeletePic(_('Remove all associations'), _('Remove all associations'))));
 								$tabletop[] = _('Actions');
 								$classth[] = 'unsortable';
 							}
@@ -325,7 +325,7 @@ class FFObject extends FFError {
 							$cells[][] = $objectType;
 							$cells[][] = $this->getLinkObject($objectId, $objectRefId, $objectType);
 							if ($url !== false) {
-								$cells[][] = util_make_link($url.'&link=from&objecttype='.$objectType.'&objectRefId='.$objectRefId.'&objectId='.$objectId, $HTML->getDeletePic(_('Remove this association'), _('Remove this association')));
+								$cells[][] = util_make_link($url.'&link=from&objecttype='.$objectType.'&objectrefid='.$objectRefId.'&objectid='.$objectId, $HTML->getDeletePic(_('Remove this association'), _('Remove this association')));
 							}
 							$content .= $HTML->multiTableRow(array(), $cells);
 						}
