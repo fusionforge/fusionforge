@@ -39,7 +39,7 @@ $docid = getIntFromRequest('docid');
 if ($docid) {
 	$documentObject = document_get_object($docid, $group_id);
 	if ($documentObject && !$documentObject->isError()) {
-		$result['html'] = $documentObject->showAssociations('/docman/?group_id='.$group_id.'&action=deleteassociations&docid='.$docid);
+		$result['html'] = $documentObject->showAssociations('/docman/?action=deleteassociations&group_id='.$group_id.'&dirid='.$documentObject->getDocGroupID().'&docid='.$docid);
 		$result['html'] .= $documentObject->showAddAssociations();
 	} else {
 		$result['html'] = $HTML->warning_msg(_('Cannot retrieve document')._(': ').$docid);
