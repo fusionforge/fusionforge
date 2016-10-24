@@ -33,6 +33,7 @@ global $HTML;
 */
 $boxid = getIntFromRequest('boxid');
 $ac = new ArtifactExtraField($ath,$boxid);
+$ef_type = $ac->getType();
 if (!$ac || !is_object($ac)) {
 	exit_error(_('Unable to create ArtifactExtraField Object'),'tracker');
 } elseif ($ac->isError()) {
@@ -55,6 +56,10 @@ if (!$ac || !is_object($ac)) {
 		echo html_ao('p');
 		echo html_e('label', array('for'=>'name'), html_e('strong', array(), _('Element')._(':')).html_e('br'));
 		echo html_e('input', array('type'=>'text', 'id'=>'name', 'name'=>'name', 'value'=>$ao->getName()));
+		if (in_array($ef_type, unserialize(ARTIFACT_EXTRAFIELDTYPE_CHOICETYPE))) {
+			echo html_build_checkbox('is_default', false, $ao->isDefault());
+			echo html_e('label', array('for'=>'is_default'), _('Default value'));
+		}
 		echo html_ac(html_ap()-1);
 		// Show a pop-up box to choose the possible statuses that this element will map to
 		if ($ac->getType() == ARTIFACT_EXTRAFIELDTYPE_STATUS) {

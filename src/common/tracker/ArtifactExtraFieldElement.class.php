@@ -101,7 +101,7 @@ class ArtifactExtraFieldElement extends FFError {
 	 * @param	int	$status_id	Id the box that contains the choice (optional).
 	 * @return	bool	true on success / false on failure.
 	 */
-	function create($name,$status_id=0,$auto_assign_to=100) {
+	function create($name,$status_id=0,$auto_assign_to=100,$is_default=0) {
 		//
 		//	data validation
 		//
@@ -137,6 +137,26 @@ class ArtifactExtraFieldElement extends FFError {
 		if ($result && db_affected_rows($result) > 0) {
 			$this->clearError();
 			$id=db_insertid($result,'artifact_extra_field_elements','element_id');
+
+			if ($is_default) {
+				$type = $this->ArtifactExtraField->getType();
+				if (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPE_SINGLECHOICETYPE))) {
+					$result = db_query_params ('DELETE FROM artifact_extra_field_default WHERE extra_field_id = $1',
+							array ($this->ArtifactExtraField->getID()));
+					if (!$result) {
+						$this->setError(db_error());
+						db_rollback();
+						return false;
+					}
+				}
+				$result = db_query_params ('INSERT INTO artifact_extra_field_default (extra_field_id, default_value) VALUES ($1,$2)',
+						array ($this->ArtifactExtraField->getID(),$id));
+				if (!$result) {
+					$this->setError(db_error());
+					db_rollback();
+					return false;
+				}
+			}
 			//
 			//	Now set up our internal data structures
 			//
@@ -167,7 +187,7 @@ class ArtifactExtraFieldElement extends FFError {
 	 * @return	boolean	success.
 	 */
 	function fetchData($id) {
-		$res = db_query_params ('SELECT * FROM artifact_extra_field_elements WHERE element_id=$1',
+		$res = db_query_params ('SELECT *, 0 AS is_default FROM artifact_extra_field_elements WHERE element_id=$1',
 					array ($id)) ;
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError('ArtifactExtraField: Invalid ArtifactExtraFieldElement ID');
@@ -175,6 +195,16 @@ class ArtifactExtraFieldElement extends FFError {
 		}
 		$this->data_array = db_fetch_array($res);
 		db_free_result($res);
+		$default = db_query_params ('SELECT 1 FROM artifact_extra_field_default WHERE default_value=$1',
+				array ($id)) ;
+		if (!$default) {
+			$this->setError('ArtifactExtraField: Invalid ArtifactExtraFieldElement ID');
+			return false;
+		}
+		if (db_numrows($default) >= 1) {
+			$this->data_array['is_default'] = true;
+		}
+		db_free_result($default);
 		return true;
 	}
 
@@ -247,6 +277,15 @@ class ArtifactExtraFieldElement extends FFError {
 			$values[] = $arr['parent_element_id'];
 		}
 		return $values;
+	}
+
+	/**
+	 * isDefault - whether this field element is default value or not.
+	 *
+	 * @return	boolean
+	 */
+	function isDefault() {
+		return $this->data_array['is_default'];
 	}
 
 	/**
@@ -347,9 +386,10 @@ class ArtifactExtraFieldElement extends FFError {
 	 *
 	 * @param	string	$name		Name of the choice in a box.
 	 * @param	int	$status_id	Optional for status box - maps to either open/closed.
+	 * @param	boolean	$is_default	Set this element as default value
 	 * @return	bool	success.
 	 */
-	function update($name, $status_id=0, $auto_assign_to=100) {
+	function update($name, $status_id=0, $auto_assign_to=100, $is_default=false) {
 		if (!forge_check_perm ('tracker_admin', $this->ArtifactExtraField->ArtifactType->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
@@ -381,12 +421,43 @@ class ArtifactExtraFieldElement extends FFError {
 						  $status_id,
 						  $auto_assign_to,
 						  $this->getID())) ;
-		if ($result && db_affected_rows($result) > 0) {
-			return true;
-		} else {
+		if (!$result || db_affected_rows($result) == 0) {
 			$this->setError(db_error());
 			return false;
 		}
+
+		$default = db_query_params ('SELECT 1 FROM artifact_extra_field_default WHERE default_value=$1',
+				array ($this->getID())) ;
+		if (!$default) {
+			$this->setError('ArtifactExtraField: Invalid ArtifactExtraFieldElement ID');
+			return false;
+		}
+		if (db_numrows($default) >= 1 && !$is_default) {
+			$result = db_query_params ('DELETE FROM artifact_extra_field_default WHERE extra_field_id = $1 AND default_value = $2',
+					array ($this->ArtifactExtraField->getID(), $this->getID()));
+			if (!$result) {
+				$this->setError(db_error());
+				return false;
+			}
+		}
+		if (db_numrows($default) == 0 && $is_default) {
+			if (in_array($this->ArtifactExtraField->getType(), unserialize(ARTIFACT_EXTRAFIELDTYPE_SINGLECHOICETYPE))) {
+				$result = db_query_params ('DELETE FROM artifact_extra_field_default WHERE extra_field_id = $1',
+						array ($this->ArtifactExtraField->getID()));
+				if (!$result) {
+					$this->setError(db_error());
+					$return = false;
+				}
+			}
+			$result = db_query_params ('INSERT INTO artifact_extra_field_default (extra_field_id, default_value) VALUES ($1,$2)',
+					array ($this->ArtifactExtraField->getID(), $this->getID()));
+			if (!$result) {
+				$this->setError(db_error());
+				return false;
+			}
+		}
+		db_free_result($default);
+		return true;
 	}
 
 	/**

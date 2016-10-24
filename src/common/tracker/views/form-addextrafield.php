@@ -251,6 +251,10 @@ echo html_e('label', array('for'=>'attribute2'), _('Maxlength')._(':'));
 echo html_e('input', array('type'=>'text', 'name'=>'attribute2', 'value'=>'80', 'size'=>'2', 'maxlength'=>'2')).html_e('br');
 echo html_ac(html_ap() - 1);
 
+echo html_ao('p', array('class'=>'for-text for-textarea for-integer'));
+
+echo html_ac(html_ap() - 1);
+
 echo html_ao('p', array('class'=>'for-text'));
 echo _('Pattern');
 echo html_e('input', array('type'=>'text', 'name'=>'pattern', 'value'=>'', 'size'=>'50', 'maxlength'=>'255')).html_e('br');

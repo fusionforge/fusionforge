@@ -289,6 +289,27 @@ function html_build_select_box_from_array($vals, $select_name, $checked_val = 'x
 }
 
 /**
+ * html_build_radio_button() - Render radio button control
+ *
+ * @param	string		$name		name of control
+ * @param	bool|string	$value		value of control (if false then no attribute value)
+ * @param	bool		$checked	true if control should be selected
+ * @param	array		$attrs		Array of other attributes for this element
+ * @return	html code for radio button control
+ */
+function html_build_radio_button($name, $value, $checked, $attrs=array()) {
+	if ($value === false) {
+		$attrs = array_merge(array('id' => $name, 'name' => $name, 'type' => 'radio'), $attrs);
+	} else {
+		$attrs = array_merge(array('id' => $name, 'name' => $name, 'value' => $value, 'type' => 'radio'), $attrs);
+	}
+	if ($checked) {
+		$attrs['checked'] = 'checked';
+	}
+	return html_e('input', $attrs);
+}
+
+/**
  * html_build_radio_buttons_from_arrays() - Takes two arrays, with the first array being the "id" or value and the other
  * array being the text you want displayed.
  *

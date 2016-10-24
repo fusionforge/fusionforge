@@ -152,6 +152,62 @@ if (!$ac || !is_object($ac)) {
 		echo html_e('input', array('type'=>'hidden', 'name'=>'autoassign', 'value'=>0));
 	}
 
+	switch ($efType) {
+		case ARTIFACT_EXTRAFIELDTYPE_TEXT:
+			echo html_ao('p');
+			echo html_e('label', array('for'=>'default'),_('Default value'));
+			$attrs = array('type'=>'text', 'id'=>'default', 'name'=>'default', 'value'=>$ac->getDefaultValues(), 'size'=>$ac->getAttribute1(), 'maxlength'=>$ac->getAttribute2());
+			if ($ac->getPattern() != '') {
+				$attrs['pattern'] = $ac->getPattern();
+			}
+			echo html_e('input', $attrs);
+			echo html_ac(html_ap() - 1);
+			break;
+		case ARTIFACT_EXTRAFIELDTYPE_TEXTAREA:
+			echo html_ao('p');
+			echo html_e('label', array('for'=>'default'),_('Default value'));
+			echo html_e('textarea', array('id'=>'default', 'name'=>'default', 'value'=>$ac->getDefaultValues(), 'rows'=>$ac->getAttribute1(), 'cols'=>$ac->getAttribute2()));
+			echo html_ac(html_ap() - 1);
+			break;
+		case ARTIFACT_EXTRAFIELDTYPE_INTEGER:
+			echo html_ao('p');
+			echo html_e('label', array('for'=>'default'),_('Default value'));
+			$attrs = array('type'=>'number', 'id'=>'default', 'name'=>'default', 'value'=>$ac->getDefaultValues(), 'size'=>$ac->getAttribute1(), 'maxlength'=>$ac->getAttribute2(), 'min'=>0);
+			if ($ac->getPattern() != '') {
+				$attrs['pattern'] = $ac->getPattern();
+			}
+			echo html_e('input', $attrs);
+			echo html_ac(html_ap() - 1);
+			break;
+//		case ARTIFACT_EXTRAFIELDTYPE_DATETIME:
+		case ARTIFACT_EXTRAFIELDTYPE_USER:
+			echo html_ao('p');
+			echo html_e('label', array('for'=>'default'),_('Default value'));
+			$arr = $ac->getAvailableValues();
+			$selectedRolesId = array();
+			for ($i=0; $i<count($arr); $i++) {
+				$selectedRolesId[$i]=$arr[$i]['element_name'];
+			}
+			$roles = $ac->getArtifactType()->getGroup()->getRoles();
+			$userArray = array();
+			foreach ($roles as $role) {
+				if (in_array($role->getID(), $selectedRolesId)) {
+					foreach ($role->getUsers() as $user) {
+						$userArray[$user->getID()] = $user->getRealName().(($user->getStatus()=='S') ? ' '._('[SUSPENDED]') : '');
+					}
+				}
+			}
+			$default = $ac->getDefaultValues();
+			if (is_integer($default) && !isset($userArray[$default]) && $default!=100) {
+				$checkedUser = user_get_object($default);
+				$userArray[$checkedUser->getID()] = $checkedUser->getRealName().' '._('[DELETED]');
+			}
+			asort($userArray,SORT_FLAG_CASE | SORT_STRING);
+			$keys = array_keys($userArray);
+			$vals = array_values($userArray);
+			echo html_build_select_box_from_arrays ($keys,$vals,'default',$default,true,'nobody');
+			echo html_ac(html_ap() - 1);
+	}
 
 	echo $HTML->warning_msg(_('It is not recommended that you change the custom field name because other things are dependent upon it. When you change the custom field name, all related items will be changed to the new name.'));
 

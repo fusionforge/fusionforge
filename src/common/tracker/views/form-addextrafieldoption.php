@@ -35,7 +35,8 @@ if (!$ac || !is_object($ac)) {
 } elseif ($ac->isError()) {
 	exit_error($ac->getErrorMessage(),'tracker');
 } else {
-	$efearr=$ath->getExtraFieldElements($boxid);
+//	$efearr=$ath->getExtraFieldElements($boxid);
+	$efearr=$ac->getAvailableValues();
 	$title = sprintf(_('Add/Update Custom Field Elements in %s'), $ath->getName());
 	$ath->adminHeader(array('title'=>$title, 'modal'=>1));
 	echo html_e('h2', array(), _('Custom Field Name')._(': ').$ac->getName());
@@ -51,8 +52,25 @@ if (!$ac || !is_object($ac)) {
 			}
 			$title_arr[]=_('Up/Down positions');
 			$title_arr[]=_('Elements Defined');
+			if (in_array($efType, unserialize(ARTIFACT_EXTRAFIELDTYPE_CHOICETYPE))) {
+				$title_arr[]=_('Default');
+			}
 			$title_arr[]='';
 			echo $HTML->listTableTop ($title_arr,false, ' ');
+			if (in_array($efType, unserialize(ARTIFACT_EXTRAFIELDTYPE_SINGLECHOICETYPE))) {
+				$row_attrs = array('class'=>$HTML->boxGetAltRowStyle(-1,true));
+				$cells = array();
+				$cells[] = array('', 'class'=>'align-right');
+				if ($efType == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
+					$cells[] = array('');
+				}
+				$cells[] = array('', 'class'=>'align-center');
+				$cells[] = array(_('None'));
+				$content = html_build_radio_button('is_default', 100, true);
+				$cells[] = array($content, 'class'=>'align-center');
+				$cells[] = array('', 'class'=>'align-center');
+				echo $HTML->multiTableRow($row_attrs, $cells);
+			}
 			for ($i=0; $i < $rows; $i++) {
 				$row_attrs = array('class'=>$HTML->boxGetAltRowStyle($i,true));
 				$cells = array();
@@ -65,6 +83,15 @@ if (!$ac || !is_object($ac)) {
 				$content .= util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&boxid='.$boxid.'&id='.$efearr[$i]['element_id'].'&updownorder_opt=1&new_pos='.(($i == $rows - 1)? $i + 1 : $i + 2), html_image('ic/btn_down.png','19','18',array('alt'=>'Down', 'title'=>_('Move Down this custom field element'))));
 				$cells[] = array($content, 'class'=>'align-center');
 				$cells[] = array($efearr[$i]['element_name']);
+
+				if (in_array($efType, unserialize(ARTIFACT_EXTRAFIELDTYPE_MULTICHOICETYPE))) {
+					$content = html_build_checkbox('is_default['. $efearr[$i]['element_id'] .']', false, $efearr[$i]['is_default']);
+					$cells[] = array($content, 'class'=>'align-center');
+				} elseif (in_array($efType, unserialize(ARTIFACT_EXTRAFIELDTYPE_SINGLECHOICETYPE))) {
+					$content = html_build_radio_button('is_default', $efearr[$i]['element_id'], $efearr[$i]['is_default']);
+					$cells[] = array($content, 'class'=>'align-center');
+				}
+
 				$content = util_make_link('/tracker/admin/?update_opt=1&id='.$efearr[$i]['element_id'].'&boxid='.$boxid.'&group_id='.$group_id.'&atid='. $ath->getID(), html_image('ic/configure.png','22','22',array('alt'=>_('Edit'), 'title'=>_('Edit custom field element'))));
 				$cells[] = array($content, 'class'=>'align-center');
 				echo $HTML->multiTableRow($row_attrs, $cells);
@@ -79,6 +106,10 @@ if (!$ac || !is_object($ac)) {
 			}
 			$content = html_e('input', array('type'=>'submit', 'name'=>'post_changes_alphaorder', 'value'=>_('Alphabetical order')));
 			$cells[] = array($content, 'class'=>'align-left');
+			if (in_array($efType, unserialize(ARTIFACT_EXTRAFIELDTYPE_CHOICETYPE))) {
+				$content = html_e('input', array('type'=>'submit', 'name'=>'post_changes_default', 'value'=>_('Update default')));
+				$cells[] = array($content, 'class'=>'align-center');
+			}
 			echo $HTML->multiTableRow($row_attrs, $cells);
 			echo $HTML->listTableBottom();
 			echo $HTML->closeForm();
@@ -105,7 +136,9 @@ if (!$ac || !is_object($ac)) {
 		$g=$ath->getGroup();
 		$roles = $g->getRoles();
 		foreach ($roles as $role) {
-			$vals[$role->getID()]=$role->getName();
+			if (!in_array(get_class($role), array('RoleLoggedIn','RoleAnonymous'))){
+				$vals[$role->getID()]=$role->getName();
+			}
 		}
 		// end
 		asort($vals,SORT_FLAG_CASE);

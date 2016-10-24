@@ -80,6 +80,7 @@ if ($group_id && $atid) {
 	if (getStringFromRequest('post_changes') ||
 		getStringFromRequest('updownorder_opt') ||
 		getStringFromRequest('post_changes_order') ||
+		getStringFromRequest('post_changes_default') ||
 		getStringFromRequest('post_changes_alphaorder')) {
 		include $gfcommon.'tracker/actions/admin-updates.php';
 
@@ -116,7 +117,7 @@ if ($group_id && $atid) {
 		$action = $next;
 	} else {
 		$actions = array('add_extrafield', 'customize_list', 'workflow', 'workflow_roles', 'workflow_required_fields', 'add_opt',
-			'updownorder_opt', 'post_changes_order', 'post_changes_alphaorder', 'copy_opt', 'add_canned',
+			'updownorder_opt', 'post_changes_order', 'post_changes_alphaorder', 'post_changes_default', 'copy_opt', 'add_canned',
 			'clone_tracker', 'edittemplate',
 			'update_canned', 'delete_canned', 'update_box', 'update_opt', 'delete', 'delete_opt', 'deleteextrafield','update_type');
 		$action = '';
@@ -155,6 +156,7 @@ if ($group_id && $atid) {
 	} elseif ($action == 'add_opt' ||
 			  $action == 'updownorder_opt' ||
 			  $action == 'post_changes_order' ||
+			  $action == 'post_changes_default' ||
 			  $action == 'post_changes_alphaorder') {
 
 		include $gfcommon.'tracker/views/form-addextrafieldoption.php';

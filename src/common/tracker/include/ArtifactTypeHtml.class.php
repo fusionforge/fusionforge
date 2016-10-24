@@ -578,7 +578,11 @@ EOS;
 	 * @return	string	HTML template.
 	 */
 	function generateRenderHTML($types=array(), $mode) {
-		$efarr = $this->getExtraFields($types);
+		if ($mode == 'NEW') {
+			$efarr = $this->getExtraFields($types, false, false);
+		} else {
+			$efarr = $this->getExtraFields($types);
+		}
 		//each two columns, we'll reset this and start a new row
 
 		$return = '

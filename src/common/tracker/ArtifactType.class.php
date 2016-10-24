@@ -611,11 +611,15 @@ class ArtifactType extends FFError {
 	 */
 	function getExtraFields($types = array(), $get_is_disabled = false, $get_is_hidden_on_submit = true) {
 		$where ='';
+		$use_cache = true;
 		if (!$get_is_disabled) {
 			$where = ' AND is_disabled = 0';
+		} else {
+			$use_cache = false;
 		}
 		if (!$get_is_hidden_on_submit) {
 			$where = ' AND is_hidden_on_submit = 0';
+			$use_cache = false;
 		}
 		if (count($types)) {
 			$filter = implode(',', $types);
@@ -623,8 +627,8 @@ class ArtifactType extends FFError {
 		} else {
 			$filter = '';
 		}
-		if (!isset($this->extra_fields[$filter])) {
-			$this->extra_fields[$filter] = array();
+		if (!isset($this->extra_fields[$filter]) || !$use_cache) {
+			$extra_fields = array();
 			if (count($types)) {
 				$res = db_query_params('SELECT *
 				FROM artifact_extra_field_list
@@ -643,11 +647,41 @@ class ArtifactType extends FFError {
 					array($this->getID()));
 			}
 			while ($arr = db_fetch_array($res)) {
-				$this->extra_fields[$filter][$arr['extra_field_id']] = $arr;
+				$extra_fields[$arr['extra_field_id']] = $arr;
 			}
 		}
+		if (!isset($this->extra_fields[$filter])) {
+			$this->extra_fields[$filter] = $extra_fields;
+		}
+		if ($use_cache) {
+			$extra_fields = $this->extra_fields[$filter];
+		}
+		return $extra_fields;
+	}
 
-		return $this->extra_fields[$filter];
+	/**
+	 * getExtraFieldsDefaultValue - Get array of extra fields default value
+	 *
+	 * @param	array	$types
+	 * @param	bool	$get_is_disabled
+	 * @param	bool	$get_is_hidden_on_submit
+	 * @return	array	arrays of data;
+	 */
+	function getExtraFieldsDefaultValue($types = array(), $get_is_disabled = false, $get_is_hidden_on_submit = true) {
+		$extra_fields = $this->getExtraFields($types, $get_is_disabled, $get_is_hidden_on_submit);
+		$efDefaultValue = array();
+		foreach ($extra_fields as $efID=>$efArr) {
+			$ef = new ArtifactExtraField($this, $efID);
+			$defaultValue = $ef->getDefaultValues();
+			if (!is_null($defaultValue)) {
+				$efDefaultValue [$efID] = $defaultValue;
+			} else {
+				if (in_array($efArr['field_type'],unserialize(ARTIFACT_EXTRAFIELDTYPE_SINGLECHOICETYPE))) {
+					$efDefaultValue [$efID] = '';
+				}
+			}
+		}
+		return $efDefaultValue;
 	}
 
 	/**
@@ -708,11 +742,6 @@ class ArtifactType extends FFError {
 			}
 			$newEFIds[$ef['extra_field_id']] = $nef->getID();
 			$newEFElIds[$ef['extra_field_id']] = array();
-			//
-			//	Iterate the elements
-			//
-			$resel = db_query_params('SELECT * FROM artifact_extra_field_elements WHERE extra_field_id=$1',
-						array($ef['extra_field_id']));
 
 			//by default extrafield status is created with default values: 'Open' & 'Closed'
 			if ($nef->getType() == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
@@ -722,21 +751,79 @@ class ArtifactType extends FFError {
 					$existingElement->delete();
 				}
 			}
-			while ($el = db_fetch_array($resel)) {
-				//new element
-				$nel = new ArtifactExtraFieldElement($nef);
-				if (!$nel->create(util_unconvert_htmlspecialchars($el['element_name']), $el['status_id'])) {
-					db_rollback();
-					$this->setError(_('Error Creating New Extra Field Element')._(':').' '.$nel->getErrorMessage());
-					return false;
+
+			//
+			//	Iterate the elements
+			//
+			if (in_array($ef['field_type'], unserialize(ARTIFACT_EXTRAFIELDTYPE_CHOICETYPE))) {
+				$elements = $this->getExtraFieldElements($ef['extra_field_id']);
+				foreach ($elements as $el) {
+					//new element
+					$nel = new ArtifactExtraFieldElement($nef);
+					if (!$nel->create(util_unconvert_htmlspecialchars($el['element_name']), $el['status_id'], $el['auto_assign_to'], $el['is_default'])) {
+						db_rollback();
+						$this->setError(_('Error Creating New Extra Field Element')._(':').' '.$nel->getErrorMessage());
+						return false;
+					}
+					$newEFElIds[$ef['extra_field_id']][$el['element_id']] = $nel->getID();
 				}
-				$newEFElIds[$ef['extra_field_id']][$el['element_id']] = $nel->getID();
+			} elseif ($ef['field_type'] == ARTIFACT_EXTRAFIELDTYPE_USER) {
+				$elements = $this->getExtraFieldElements($ef['extra_field_id']);
+				$newRoles = $this->getGroup()->getRoles();
+				foreach ($elements as $el) {
+					$oldRole = RBACEngine::getInstance()->getRoleById($el['element_name']);
+					if ($oldRole && is_object($oldRole)) {
+						if ($oldRole->isPublic()) {
+							foreach ($newRoles as $newRole) {
+								if ($oldRole->getID() == $newRole->getID()) {
+									if (!$nel->create($el['element_name'])) {
+										db_rollback();
+										$this->setError(_('Error Creating New Extra Field Element')._(':').' '.$nel->getErrorMessage());
+										return false;
+									}
+									$newEFElIds[$ef['extra_field_id']][$el['element_id']] = $nel->getID();
+									break;
+								}
+							}
+						} else {
+							foreach ($newRoles as $newRole) {
+								if ($oldRole->getName() == $newRole->getName()) {
+									if (!$nel->create($newRole->getID())) {
+										db_rollback();
+										$this->setError(_('Error Creating New Extra Field Element')._(':').' '.$nel->getErrorMessage());
+										return false;
+									}
+									$newEFElIds[$ef['extra_field_id']][$el['element_id']] = $nel->getID();
+									break;
+								}
+							}
+						}
+					}
+				}
 			}
 		}
-
 		foreach ($newEFIds as $oldEFId => $newEFId) {
 			$oef = new ArtifactExtraField($at, $oldEFId);
 			$nef = new ArtifactExtraField($this, $newEFId);
+			// clone default value
+			$type = $oef->getType();
+			if (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPE_VALUETYPE)) || $type == ARTIFACT_EXTRAFIELDTYPE_USER) {
+				$default = $oef->getDefaultValues();
+				if (($type==ARTIFACT_EXTRAFIELDTYPE_INTEGER && $default != 0)) {
+					$nef->setDefaultValues($default);
+				} elseif ($type==ARTIFACT_EXTRAFIELDTYPE_USER && $default != 100) {
+					$roleEls = $this->getExtraFieldElements($newEFId);
+					$defaultUser = UserManager::instance()->getUserById($default);
+					foreach ($roleEls as $roleEl) {
+						$role = RBACEngine::getInstance()->getRoleById($roleEl['element_name']);
+						if ( $role->hasUser($defaultUser)) {
+							$nef->setDefaultValues($default);
+						}
+					}
+				} else {
+					$nef->setDefaultValues($default);
+				}
+			}
 			// update Dependency between extrafield
 			if ($oef->getParent() != 100) {
 				if (!$nef->update($nef->getName(), $nef->getAttribute1(), $nef->getAttribute2(), $nef->isRequired(), $nef->getAlias(), $nef->getShow100(), $nef->getShow100label(), $nef->getDescription(), $nef->getPattern(), $newEFIds[$oef->getParent()], $nef->isAutoAssign(), $nef->isHiddenOnSubmit(), $nef->isDisabled())) {
@@ -744,7 +831,6 @@ class ArtifactType extends FFError {
 					$this->setError(_('Error Updating New Extra Field Parent')._(':').' '.$nef->getErrorMessage());
 					return false;
 				}
-
 				foreach ($newEFElIds[$oldEFId] as $oldEFElId => $newEFElId) {
 					$oel = new ArtifactExtraFieldElement($oef,$oldEFElId);
 					if ($oel->isError()) {
@@ -840,18 +926,12 @@ class ArtifactType extends FFError {
 		}
 		if (!isset($this->extra_field[$id])) {
 			$this->extra_field[$id] = array();
-			$res = db_query_params('SELECT element_id, element_name, status_id
-				FROM artifact_extra_field_elements
-				WHERE extra_field_id = $1
-				ORDER BY element_pos ASC, element_id ASC',
-				array($id));
-			$i = 0;
-			while ($arr = db_fetch_array($res)) {
-				$this->extra_field[$id][$i++] = $arr;
+			$ef = new ArtifactExtraField($this,$id);
+			if (!$ef || $ef->isError()) {
+				return false;
 			}
-//			if (count($this->extra_field[$id]) == 0) {
-//				return;
-//			}
+			$efValues = $ef->getAvailableValues();
+			$this->extra_field[$id] = $efValues;
 		}
 
 		return $this->extra_field[$id];

@@ -245,6 +245,7 @@ if (getStringFromRequest('add_extrafield')) {
 	$autoassign = getStringFromRequest('autoassign');
 	$is_hidden_on_submit = getStringFromRequest('is_hidden_on_submit');
 	$is_disabled = getStringFromRequest('is_disabled');
+	$default = getStringFromRequest('default');
 	$ac = new ArtifactExtraField($ath, $id);
 	if (!$ac || !is_object($ac)) {
 		$error_msg .= _('Unable to create ArtifactExtraField Object');
@@ -260,8 +261,13 @@ if (getStringFromRequest('add_extrafield')) {
 			$error_msg .= _('Update failed')._(': ').$ac->getErrorMessage();
 			$ac->clearError();
 		} else {
-			$feedback .= _('Custom Field updated');
-			$next = 'add_extrafield';
+			if(!$ac->setDefaultValues($default)){
+				$error_msg .= _('Update failed')._(': ').$ac->getErrorMessage();
+				$ac->clearError();
+			} else {
+				$feedback .= _('Custom Field updated');
+				$next = 'add_extrafield';
+			}
 		}
 	}
 
@@ -270,6 +276,7 @@ if (getStringFromRequest('add_extrafield')) {
 //
 } elseif (getStringFromRequest('update_opt')) {
 	$boxid = getStringFromRequest('boxid');
+	$is_default = getStringFromRequest('is_default');
 	$ac = new ArtifactExtraField($ath,$boxid);
 	if (!$ac || !is_object($ac)) {
 		$error_msg .= _('Unable to create ArtifactExtraField Object');
@@ -286,7 +293,7 @@ if (getStringFromRequest('add_extrafield')) {
 			$name = getStringFromRequest('name');
 			$status_id = getIntFromRequest('status_id');
 			$autoAssignTo = getStringFromRequest('auto_assign_to');
-			if (!$ao->update($name,$status_id,$autoAssignTo)) {
+			if (!$ao->update($name,$status_id,$autoAssignTo,$is_default)) {
 				$error_msg .= _('Update failed')._(': ').$ao->getErrorMessage();
 				$ao->clearError();
 			} else {
@@ -610,6 +617,40 @@ if (getStringFromRequest('add_extrafield')) {
 			$ac->clearError();
 		} else {
 			$feedback .= _('Tracker Updated');
+		}
+	}
+
+} elseif (getStringFromRequest('post_changes_default')) {
+	$boxid = getStringFromRequest('boxid');
+	$ac = new ArtifactExtraField($ath,$boxid);
+	if (!$ac || !is_object($ac)) {
+		$error_msg .= _('Unable to create ArtifactExtraField Object');
+	} elseif ($ac->isError()) {
+		$error_msg .= $ac->getErrorMessage();
+	} else {
+		$updated_flag = 0;
+		if (in_array($ac->getType(), unserialize(ARTIFACT_EXTRAFIELDTYPE_SINGLECHOICETYPE))) {
+			$id = getIntFromRequest('is_default');
+			if ($id == 100) {
+				if (!$ac->resetDefaultValues()) {
+					$feedback .= _('Tracker Updated');
+				} else {
+					$error_msg .= _('Update failed')._(': ').$ac->getErrorMessage();
+				}
+			} else {
+				if ($ac->setDefaultValues($id)) {
+					$feedback .= _('Tracker Updated');
+				} else {
+					$error_msg .= _('Update failed')._(': ').$ac->getErrorMessage();
+				}
+			}
+		} else {
+			$is_default =  getArrayFromRequest('is_default');
+			if ($ac->setDefaultValues($is_default)) {
+				$feedback .= _('Tracker Updated');
+			} else {
+				$error_msg .= _('Update failed')._(': ').$ac->getErrorMessage();
+			}
 		}
 	}
 
