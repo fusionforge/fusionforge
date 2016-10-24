@@ -312,7 +312,7 @@ class FFObject extends FFError {
 							$tabletop = array('', _('Associated Object'), _('Associated Object ID'));
 							$classth = array('', '', '');
 							if ($url !== false) {
-								$content .= html_e('p', array(), util_make_link($url.'&link=any', $HTML->getDeletePic(_('Remove all associations'), _('Remove all associations'))));
+/bin/bash: q: command not found
 								$tabletop[] = _('Actions');
 								$classth[] = 'unsortable';
 							}
