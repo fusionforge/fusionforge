@@ -800,6 +800,7 @@ class ProjectTask extends FFError {
 	 * Here we are converting an array like array(1,5,9,77) to array(1=>SS,5=>SF,9=>FS,77=>SS)
 	 *
 	 * @param	array	$arr
+	 * @return	array
 	 */
 	function &convertDependentOn($arr) {
 		$new = array();
