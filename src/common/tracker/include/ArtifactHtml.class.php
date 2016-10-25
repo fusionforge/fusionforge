@@ -101,7 +101,7 @@ function hide_edit_button(id) {
 <tbody>';
 
 			for ($i=0; $i < $rows; $i++) {
-				echo '<tr onmouseover="show_edit_button(\'edit_bt_'.$i.'\')" onmouseout="hide_edit_button(\'edit_bt_'.$i.'\')" '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td>';
+				echo '<tr onmouseover="show_edit_button(\'edit_bt_'.$i.'\')" onmouseout="hide_edit_button(\'edit_bt_'.$i.'\')" '. $HTML->boxGetAltRowStyle($i) .'><td>';
 
 				$params = array('user_id' => db_result($result,$i,'user_id'), 'size' => 's');
 				plugin_hook("user_logo", $params);
