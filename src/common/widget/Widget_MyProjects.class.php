@@ -87,7 +87,7 @@ class Widget_MyProjects extends Widget {
 									array('onClick' => 'return confirm("'._("Quit this project?").'")')).
 						'</td></tr>';
 				} else {
-					$html_my_projects .= '</td><td>&nbsp;</td></tr>';
+					$html_my_projects .= '</td><td></td></tr>';
 				}
 			}
 			$html_my_projects .= $HTML->listTableBottom();
