@@ -45,7 +45,6 @@ function util_gen_cross_ref($text, $group_id) {
 
 	// Handle FusionForge [Dnnn] Syntax => links to document.
 	$text = preg_replace_callback('/\[D(\d+)\]/', create_function('$matches', 'return _documentid2url($matches[1],'.$group_id.');'), $text);
-	return $text;
 
 	// Handle FusionForge [Rnnn] Syntax => links to frs release.
 	$text = preg_replace_callback('/\[R(\d+)\]/', create_function('$matches', 'return _frsreleaseid2url($matches[1]);'), $text);
