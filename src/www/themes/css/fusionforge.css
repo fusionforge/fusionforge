@@ -1022,7 +1022,62 @@ table.boxed th, table.bordered th {
     background-color: #d8d8d8;
 }
 
+table.sortable th.header,
+table.sortable th.headerSortUp,
+table.sortable th.headerSortDown {
+    cursor: pointer;
+}
+
+table.sortable th.header span {
+    background-image: url(../../images/sort_none.gif);
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}
+
+table.sortable th.headerSortUp span {
+    background-image: url(../../images/sort_up.gif);
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}
+
+table.sortable th.headerSortDown span {
+    background-image: url(../../images/sort_down.gif);
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}
+
+table.id_sortable th.header,
+table.id_sortable th.headerSortUp,
+table.id_sortable th.headerSortDown {
+    cursor: pointer;
+}
+
+table.id_sortable th.header span {
+    background-image: url(../../images/sort_none.gif);
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}
+
+table.id_sortable th.headerSortUp span {
+    background-image: url(../../images/sort_up.gif);
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}
+
+table.id_sortable th.headerSortDown span {
+    background-image: url(../../images/sort_down.gif);
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}
+
 /* overwrite some css for splitter to avoid overlap with jquery modal panel */
 .vsplitter {
 	z-index: 100 !important;
 }
+
