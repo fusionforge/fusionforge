@@ -33,7 +33,7 @@ FusionForge 6.X:
 * Tracker: fix extrafield cloning when not using default template fusionforge project [#829] (TrivialDev)
 * Tracker: add support for autoassign [#151] & [#149] (TrivialDev)
 * Tracker: add default value support for extrafields (TrivialDev)
-* Utils: cross ref document. Use [DNNN] where NNN is the ID of the document. (TrivialDev)
+* Utils: cross ref document/release. Use [DNNN]/[RNNN] where NNN is the ID of the document/frs release. (TrivialDev)
 * Web UI: upgrade splitter jquery plugin to 0.20.0 (TrivialDev)
 * Web UI: upgrade jquery ui to 1.12.1 (TrivialDev)
 * Web UI: upgrade jquery to 1.12.4 (Nokia)

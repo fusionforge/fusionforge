@@ -26,7 +26,7 @@ require_once $gfcommon.'docman/Document.class.php';
 require_once $gfcommon.'tracker/Artifact.class.php';
 require_once $gfcommon.'frs/FRSRelease.class.php';
 
-function util_gen_cross_ref ($text, $group_id) {
+function util_gen_cross_ref($text, $group_id) {
 
 	// Handle URL in links, replace them with hyperlinks.
 	$text = util_make_links($text);
@@ -45,6 +45,10 @@ function util_gen_cross_ref ($text, $group_id) {
 
 	// Handle FusionForge [Dnnn] Syntax => links to document.
 	$text = preg_replace_callback('/\[D(\d+)\]/', create_function('$matches', 'return _documentid2url($matches[1],'.$group_id.');'), $text);
+	return $text;
+
+	// Handle FusionForge [Rnnn] Syntax => links to frs release.
+	$text = preg_replace_callback('/\[R(\d+)\]/', create_function('$matches', 'return _frsreleaseid2url($matches[1]);'), $text);
 	return $text;
 }
 
