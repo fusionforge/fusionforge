@@ -60,8 +60,8 @@ if ($rows > 0) {
 		$id=str_replace('@','',$efarr[$i]['alias']);
 		echo '<tr id="field-'.$id.'" '. $HTML->boxGetAltRowStyle($rownb) .">\n".
 			'<td>'.$efarr[$i]['field_name'].(($efarr[$i]['is_required']) ? utils_requiredField() : '').
-				util_make_link('/tracker/admin/?update_box=1&id='.$efarr[$i]['extra_field_id'].'&group_id='.$group_id.'&atid='.$ath->getID(), ' ['._('Edit').']').
-				util_make_link('/tracker/admin/?deleteextrafield=1&id='.$efarr[$i]['extra_field_id'].'&group_id='.$group_id.'&atid='. $ath->getID(), ' ['._('Delete').']').
+				util_make_link('/tracker/admin/?update_box=1&id='.$efarr[$i]['extra_field_id'].'&group_id='.$group_id.'&atid='.$ath->getID(), $HTML->getEditFilePic(_('Edit'))).
+				util_make_link('/tracker/admin/?deleteextrafield=1&id='.$efarr[$i]['extra_field_id'].'&group_id='.$group_id.'&atid='. $ath->getID(), $HTML->getDeletePic(_('Delete'))).
 				util_make_link('/tracker/admin/?copy_opt=1&id='.$efarr[$i]['extra_field_id'].'&group_id='.$group_id.'&atid='. $ath->getID(), ' ['._('Copy').']').
 				"</td>\n";
 		echo '<td>'.$eftypes[$efarr[$i]['field_type']]."</td>\n";
