@@ -53,7 +53,7 @@ function _page2url($group_id,$page) {
 	return util_make_link('/wiki/g/'.$prj.'/'.rawurlencode($page), $page);
 }
 
-function _artifactid2url ($id, $mode='') {
+function _artifactid2url($id, $mode = '') {
 	$text = '[#'.$id.']';
 	$artifactObject = artifact_get_object($id);
 	if ($artifactObject && is_object($artifactObject) && !$artifactObject->isError()) {
@@ -63,7 +63,7 @@ function _artifactid2url ($id, $mode='') {
 			$arg['class'] = 'artifact_closed';
 		}
 		if ($mode == 'title') {
-			return util_make_link($url, $text, $arg).util_make_link($url, $row['summary']).'<br />';
+			return util_make_link($url, $text, $arg).' '.util_make_link($url, $artifactObject->getSummary()).'<br />';
 		} else {
 			return util_make_link($url, $text, $arg);
 		}
