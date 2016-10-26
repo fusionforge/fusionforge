@@ -113,9 +113,9 @@ if ($rows > 0) {
 					echo $rolesarray[$elearray[$j]['element_name']];
 				} else {
 					echo $elearray[$j]['element_name'];
-					echo util_make_link('/tracker/admin/?update_opt=1&id='.$elearray[$j]['element_id'].'&group_id='.$group_id.'&atid='.$ath->getID().'&boxid='.$efarr[$i]['extra_field_id'], ' ['._('Edit').']');
+					echo util_make_link('/tracker/admin/?update_opt=1&id='.$elearray[$j]['element_id'].'&group_id='.$group_id.'&atid='.$ath->getID().'&boxid='.$efarr[$i]['extra_field_id'], $HTML->getEditFilePic(_('Edit')));
 				}
-				echo util_make_link('/tracker/admin/?delete_opt=1&id='.$elearray[$j]['element_id'].'&group_id='.$group_id.'&atid='.$ath->getID().'&boxid='.$efarr[$i]['extra_field_id'], ' ['._('Delete').']');
+				echo util_make_link('/tracker/admin/?delete_opt=1&id='.$elearray[$j]['element_id'].'&group_id='.$group_id.'&atid='.$ath->getID().'&boxid='.$efarr[$i]['extra_field_id'], $HTML->getDeletePic(_('Delete')));
 				echo '<br />';
 			}
 		} else {
