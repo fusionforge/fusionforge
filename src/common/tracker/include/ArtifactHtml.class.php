@@ -6,6 +6,7 @@
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright 2015-2016, Franck Villaume - TrivialDev
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -200,6 +201,7 @@ function hide_edit_button(id) {
 		AND artifact.artifact_id = artifact_extra_field_data.artifact_id
 		AND groups.group_id = artifact_group_list.group_id
 		AND (field_data = $1 OR field_data LIKE $2 OR field_data LIKE $3 OR field_data LIKE $4)
+		AND artifact.is_deleted = 0
 		ORDER BY artifact_group_list.group_id ASC, name ASC, artifact.artifact_id ASC',
 					array($aid,
 					      "$aid %",

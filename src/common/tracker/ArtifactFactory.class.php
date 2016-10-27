@@ -5,6 +5,7 @@
  * Copyright 2002, GForge, LLC
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -49,6 +50,7 @@ class ArtifactFactory extends FFError {
 	var $last_changed;
 	var $submitted_by;
 	var $assigned_to;
+	var $last_modified_by;
 	var $offset;
 	var $max_rows;
 	var $fetched_rows;
@@ -178,6 +180,7 @@ class ArtifactFactory extends FFError {
 				$aq = new ArtifactQuery($this->ArtifactType, $this->query_id);
 				$this->submitted_by=$aq->getSubmitter();
 				$_assigned_to=$aq->getAssignee();
+				$this->last_modified_by=$aq->getLastModifier();
 				$_status=$aq->getStatus();
 				$_extra_fields=$aq->getExtraFields();
 				$this->moddaterange = $aq->getModDateRange();
@@ -203,6 +206,7 @@ class ArtifactFactory extends FFError {
 					   'submitted_by',
 					   'priority',
 					   'last_modified_date',
+					   'last_modified_by',
 					   '_votes',
 					   '_voters',
 					   '_votage') ;
@@ -318,7 +322,7 @@ class ArtifactFactory extends FFError {
 				$res = db_query_params ('SELECT field_type FROM artifact_extra_field_list WHERE extra_field_id=$1',
 							array($keys[$i])) ;
 				$type = db_result($res,0,'field_type');
-				if ($type == 4 or $type == 6) {
+				if ($type == ARTIFACT_EXTRAFIELDTYPE_TEXT or $type == ARTIFACT_EXTRAFIELDTYPE_TEXTAREA) {
 					$wheresql .= ' AND aefd'.$i.'.field_data LIKE $'.$paramcount++ ;
 					$params[] = $vals[$i];
 				} else {
@@ -362,6 +366,18 @@ class ArtifactFactory extends FFError {
 			} else {
 				$wheresql .= ' AND assigned_to = $'.$paramcount++ ;
 				$params[] = $this->assigned_to ;
+			}
+		}
+
+		//if assigned to selected, and more to where clause
+		if ($this->last_modified_by) {
+			if (is_array($this->last_modified_by)) {
+				$wheresql .= ' AND last_modified_by = ANY ($'.$paramcount++ ;
+				$params[] = db_int_array_to_any_clause ($this->last_modified_by) ;
+				$wheresql .= ')' ;
+			} else {
+				$wheresql .= ' AND last_modified_by = $'.$paramcount++ ;
+				$params[] = $this->last_modified_by ;
 			}
 		}
 
@@ -432,17 +448,28 @@ class ArtifactFactory extends FFError {
 							    'close_date',
 							    'assigned_to',
 							    'submitted_by',
+							    'last_modified_by',
 							    'priority',
 							    '_votage',
 							    '_voters',
 							    '_votes'));
 
 		if ($sortcol != 'extra' && $sortcol != '_votes' && $sortcol != '_voters' && $sortcol != '_votage' ) {
+			switch ($sortcol) {
+				case 'assigned_to':
+					$sortcol = 'assigned_realname';
+					break;
+				case 'submitted_by':
+					$sortcol = 'submitted_realname';
+					break;
+				case 'last_modified_by':
+					$sortcol = 'assigned_realname';
+					break;
+			}
 			$ordersql = " ORDER BY Artifacts.group_artifact_id $sortorder, Artifacts.$sortcol $sortorder" ;
 		} else {
 			$ordersql = ''  ;
 		}
-
 		$result = db_query_params ('SELECT * FROM (' . $selectsql . $wheresql . ') AS Artifacts' . $ordersql,
 					   $params) ;
 		$rows = db_numrows($result);

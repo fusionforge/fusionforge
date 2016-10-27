@@ -9,6 +9,7 @@
  * Copyright 2011, Iñigo Martinez
  * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
  * Copyright 2014, Stéphane-Eymeric Bredthauer
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -203,6 +204,7 @@ $order_name_arr[]=_('Priority');
 $order_name_arr[]=_('Summary');
 $order_name_arr[]=_('Open Date');
 $order_name_arr[]=_('Last Modified Date');
+$order_name_arr[]=_('Last Modifier');
 $order_name_arr[]=_('Close Date');
 $order_name_arr[]=_('Submitter');
 $order_name_arr[]=_('Assignee');
@@ -216,6 +218,7 @@ $order_arr[]='priority';
 $order_arr[]='summary';
 $order_arr[]='open_date';
 $order_arr[]='last_modified_date';
+$order_arr[]='last_modified_by';
 $order_arr[]='close_date';
 $order_arr[]='submitted_by';
 $order_arr[]='assigned_to';
@@ -547,40 +550,63 @@ if ($art_arr && $art_cnt > 0) {
 	$pager = '';
 
 	$browse_fields = explode(',', "id,".$ath->getBrowseList());
+	if (!in_array($_sort_col,$browse_fields)) {
+		$browse_fields[] = $_sort_col;
+	}
+
 	$title_arr=array();
 	foreach ($browse_fields as $f) {
 		$title=$f;
-		if (intval($f) > 0) {
-			$title = $ath->getExtraFieldName($f);
-		} else {
-			if ($f == 'id')
+		switch ($f) {
+			case 'id':
 				$title=_('Id');
-			if ($f == 'summary')
+				break;
+			case 'summary':
 				$title=_('Summary');
-			if ($f == 'details')
+				break;
+			case 'details':
 				$title=_('Description');
-			if ($f == 'open_date')
+				break;
+			case 'open_date':
 				$title=_('Open Date');
-			if ($f == 'close_date')
+				break;
+			case 'close_date':
 				$title=_('Close Date');
-			if ($f == 'status_id')
+				break;
+			case 'status_id':
 				$title=_('State');
-			if ($f == 'priority')
+				break;
+			case 'priority':
 				$title=_('Priority');
-			if ($f == 'assigned_to')
+				break;
+			case'assigned_to':
 				$title=_('Assigned to');
-			if ($f == 'submitted_by')
+				break;
+			case'submitted_by':
 				$title=_('Submitted by');
-			if ($f == 'related_tasks')
+				break;
+			case 'related_tasks':
 				$title=_('Related Tasks');
-			if ($f == 'last_modified_date')
+				break;
+			case 'last_modified_date':
 				$title=_('Last Modified Date');
-			if ($f == '_votes')
+				break;
+			case 'last_modified_by':
+				$title=_('Last Modifier');
+				break;
+			case '_votes':
 				$title = _('# Votes');
-			if ($f == '_voters')
+				break;
+			case '_voters':
 				$title = _('# Voters');
-			if ($f == '_votage')
+				break;
+			case '_votage':
 				$title = _('% Voted');
+				break;
+			default:
+				if (intval($f) > 0) {
+					$title = $ath->getExtraFieldName($f);
+				}
 		}
 		$title_arr[] = $title;
 	}
@@ -597,81 +623,100 @@ if ($art_arr && $art_cnt > 0) {
 		echo '
 		<tr class=priority'. $art_arr[$i]->getPriority().'>';
 		foreach ($browse_fields as $f) {
-			if ($f == 'id') {
-				echo '<td style="white-space: nowrap;">'.
-				($IS_ADMIN?'<input type="checkbox" name="artifact_id_list[]" value="'.
-				$art_arr[$i]->getID() .'" /> ':'').
-				util_make_link('/tracker/?func=detail&aid='.
-				$art_arr[$i]->getID().
-				'&group_id='. $group_id .'&atid='.
-				$ath->getID(),
-				$art_arr[$i]->getID()).
-				'</td>';
-			} elseif ($f == 'summary') {
-		 		echo '<td>'.
-				util_make_link('/tracker/?func=detail&aid='.
-				$art_arr[$i]->getID() .
-				'&group_id='. $group_id .'&atid='.
-				$ath->getID(),
-				$art_arr[$i]->getSummary()).
-				'</td>';
-			} elseif ($f == 'open_date') {
-				echo '<td>'. (($set != 'closed' && $art_arr[$i]->getOpenDate() < $then)?'* ':'&nbsp; ') .
-				date(_('Y-m-d H:i'),$art_arr[$i]->getOpenDate()) .'</td>';
-			} elseif ($f == 'status_id') {
-				echo '<td>'. $art_arr[$i]->getStatusName() .'</td>';
-			} elseif ($f == 'priority') {
-				echo '<td class="priority'.$art_arr[$i]->getPriority()  .'">'. $art_arr[$i]->getPriority() .'</td>';
-			} elseif ($f == 'assigned_to') {
-				echo '<td>'. $art_arr[$i]->getAssignedRealName() .'</td>';
-			} elseif ($f == 'submitted_by') {
-				echo '<td>'. $art_arr[$i]->getSubmittedRealName() .'</td>';
-			} elseif ($f == 'close_date') {
-				echo '<td>'. ($art_arr[$i]->getCloseDate() ?
-				date(_('Y-m-d H:i'),$art_arr[$i]->getCloseDate()) :'&nbsp; ') .'</td>';
-			} elseif ($f == 'details') {
-				echo '<td>'. $art_arr[$i]->getDetails() .'</td>';
-			} elseif ($f == 'related_tasks') {
-				echo '<td>';
-				$tasks_res = $art_arr[$i]->getRelatedTasks();
-				$s ='';
-				while ($rest = db_fetch_array($tasks_res)) {
-					$link = '/pm/task.php?func=detailtask&project_task_id='.$rest['project_task_id'].
-						'&group_id='.$group_id.'&group_project_id='.$rest['group_project_id'];
-					$title = '[T'.$rest['project_task_id'].']';
-					if ($rest['status_id'] == 2) {
-						$title = '<span class="strike">'.$title.'</span>';
+			switch ($f) {
+				case 'id':
+					echo '<td style="white-space: nowrap;">'.
+						($IS_ADMIN?'<input type="checkbox" name="artifact_id_list[]" value="'.
+						$art_arr[$i]->getID() .'" /> ':'').
+						util_make_link('/tracker/?func=detail&aid='.
+						$art_arr[$i]->getID().
+						'&group_id='. $group_id .'&atid='.
+						$ath->getID(),
+						$art_arr[$i]->getID()).
+						'</td>';
+					break;
+				case 'summary':
+					echo '<td>'.
+						util_make_link('/tracker/?func=detail&aid='.
+						$art_arr[$i]->getID() .
+						'&group_id='. $group_id .'&atid='.
+						$ath->getID(),
+						$art_arr[$i]->getSummary()).
+						'</td>';
+					break;
+				case 'open_date':
+					echo '<td>'. (($set != 'closed' && $art_arr[$i]->getOpenDate() < $then)?'* ':'&nbsp; ') .
+						date(_('Y-m-d H:i'),$art_arr[$i]->getOpenDate()) .'</td>';
+					break;
+				case 'status_id':
+					echo '<td>'. $art_arr[$i]->getStatusName() .'</td>';
+					break;
+				case 'priority':
+					echo '<td class="priority'.$art_arr[$i]->getPriority()  .'">'. $art_arr[$i]->getPriority() .'</td>';
+					break;
+				case 'assigned_to':
+					echo '<td>'. $art_arr[$i]->getAssignedRealName() .'</td>';
+					break;
+				case'submitted_by':
+					echo '<td>'. $art_arr[$i]->getSubmittedRealName() .'</td>';
+					break;
+				case 'last_modified_by':
+					echo '<td>'. $art_arr[$i]->getLastModifiedRealName() .'</td>';
+					break;
+				case 'close_date':
+					echo '<td>'. ($art_arr[$i]->getCloseDate() ?
+						date(_('Y-m-d H:i'),$art_arr[$i]->getCloseDate()) :'&nbsp; ') .'</td>';
+					break;
+				case 'details':
+					echo '<td>'. $art_arr[$i]->getDetails() .'</td>';
+					break;
+				case 'related_tasks':
+					echo '<td>';
+					$tasks_res = $art_arr[$i]->getRelatedTasks();
+					$s ='';
+					while ($rest = db_fetch_array($tasks_res)) {
+						$link = '/pm/task.php?func=detailtask&project_task_id='.$rest['project_task_id'].
+							'&group_id='.$group_id.'&group_project_id='.$rest['group_project_id'];
+						$title = '[T'.$rest['project_task_id'].']';
+						if ($rest['status_id'] == 2) {
+							$title = '<span class="strike">'.$title.'</span>';
+						}
+						echo $s.util_make_link($link, $title, array( 'title' => util_html_secure($rest['summary'])));
+						$s = ' ';
 					}
-					echo $s.util_make_link($link, $title, array( 'title' => util_html_secure($rest['summary'])));
-					$s = ' ';
-				}
-				echo '</td>';
-			} elseif ($f == 'last_modified_date') {
-				echo '<td>'. ($art_arr[$i]->getLastModifiedDate() ?
-				date(_('Y-m-d H:i'),$art_arr[$i]->getLastModifiedDate()) :'&nbsp; ') .'</td>';
-			} elseif (intval($f) > 0) {
-				// Now display extra-fields (fields are numbers).
-				$value = $extra_data[$f]['value'];
-				if ($extra_data[$f]['type'] == 9) {
-					$value = preg_replace('/\b(\d+)\b/e', "_artifactid2url('\\1')", $value);
-				} elseif ($extra_data[$f]['type'] == 7) {
-					if ($art_arr[$i]->getStatusID() == 2) {
-						$value = '<span class="strike">'.$value.'</span>';
+					echo '</td>';
+					break;
+				case 'last_modified_date':
+					echo '<td>'. ($art_arr[$i]->getLastModifiedDate() ?
+						date(_('Y-m-d H:i'),$art_arr[$i]->getLastModifiedDate()) :'&nbsp; ') .'</td>';
+					break;
+				case '_votes':
+					$v = $art_arr[$i]->getVotes();
+					echo html_e('td', array(), $v[0], false);
+					break;
+				case '_voters':
+					echo html_e('td', array(), $voters, false);
+					break;
+				case '_votage':
+					$v = $art_arr[$i]->getVotes();
+					echo html_e('td', array(), $v[2], false);
+					break;
+				default:
+					if (intval($f) > 0) {
+						// Now display extra-fields (fields are numbers).
+						$value = $extra_data[$f]['value'];
+						if ($extra_data[$f]['type'] == 9) {
+							$value = preg_replace('/\b(\d+)\b/e', "_artifactid2url('\\1')", $value);
+						} elseif ($extra_data[$f]['type'] == 7) {
+							if ($art_arr[$i]->getStatusID() == 2) {
+								$value = '<span class="strike">'.$value.'</span>';
+							}
+						}
+						echo '<td>' . $value .'</td>';
+					} else {
+						// Display ? for unknown values.
+						echo '<td>?</td>';
 					}
-
-				}
-				echo '<td>' . $value .'</td>';
-			} elseif ($f == '_votes') {
-				$v = $art_arr[$i]->getVotes();
-				echo html_e('td', array(), $v[0], false);
-			} elseif ($f == '_voters') {
-				echo html_e('td', array(), $voters, false);
-			} elseif ($f == '_votage') {
-				$v = $art_arr[$i]->getVotes();
-				echo html_e('td', array(), $v[2], false);
-			} else {
-				// Display ? for unknown values.
-				echo '<td>?</td>';
 			}
 		}
 		echo '</tr>';

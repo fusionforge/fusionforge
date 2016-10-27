@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2009, Roland Mas
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -178,7 +179,7 @@ class ArtifactFile extends FFError {
 			if (!array_key_exists('time', $importData)){
 				$this->Artifact->addHistory('File Added',$id.': '.$filename);
 			}
-			$this->Artifact->updateLastModifiedDate();
+			$this->Artifact->updateLastModified();
 			$this->clearError();
 			return $id;
 		}

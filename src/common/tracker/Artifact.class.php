@@ -494,6 +494,42 @@ class Artifact extends FFObject {
 		return $this->data_array['last_modified_date'];
 	}
 
+		/**
+	 * getLastModifiedBy - get ID of last modifier.
+	 *
+	 * @return	int	user_id of modifier.
+	 */
+	function getLastModifiedBy() {
+		return $this->data_array['last_modified_by'];
+	}
+
+	/**
+	 * getLastModifiedEmail - get email of modifier.
+	 *
+	 * @return	string	The email of modifier.
+	 */
+	function getLastModifiedEmail() {
+		return $this->data_array['last_modified_email'];
+	}
+
+	/**
+	 * getLastModifiedRealName - get real name of modifier.
+	 *
+	 * @return	string	The real name of modifier.
+	 */
+	function getLastModifiedRealName() {
+		return $this->data_array['last_modified_realname'];
+	}
+
+	/**
+	 * getLastModifiedUnixName - get login name of modifier.
+	 *
+	 * @return	string	The unix name of modifier.
+	 */
+	function getLastModifiedUnixName() {
+		return $this->data_array['last_modified_unixname'];
+	}
+
 	/**
 	 * getSummary - get text summary of artifact.
 	 *
@@ -513,7 +549,7 @@ class Artifact extends FFObject {
 	}
 
 	/**
-	 * delete - delete this tracker and all its related data.
+	 * delete - "delete" this artifact and all its related data, artifact is taged deleted
 	 *
 	 * @param	bool	$sure I'm Sure.
 	 * @return	bool	true/false;
@@ -528,88 +564,51 @@ class Artifact extends FFObject {
 			return false;
 		}
 		db_begin();
-		$res = db_query_params ('DELETE FROM artifact_extra_field_data WHERE artifact_id=$1',
-					array ($this->getID())) ;
-		if (!$res) {
-			$this->setError(_('Error deleting extra field data')._(': ').db_error());
-			db_rollback();
-			return false;
-		}
 
-		ArtifactStorage::instance()->deleteFromQuery('SELECT id FROM artifact_file WHERE artifact_id=$1',
-					array ($this->getID())) ;
-
-		$res = db_query_params ('DELETE FROM artifact_file WHERE artifact_id=$1',
-					array ($this->getID())) ;
-		if (!$res) {
-			$this->setError(_('Error deleting file from db')._(': ').db_error());
-			db_rollback();
-			ArtifactStorage::instance()->rollback();
-			return false;
-		}
-		$res = db_query_params ('DELETE FROM artifact_message WHERE artifact_id=$1',
-					array ($this->getID())) ;
-		if (!$res) {
-			$this->setError(_('Error deleting message')._(': ').db_error());
-			db_rollback();
-			ArtifactStorage::instance()->rollback();
-			return false;
-		}
-		$res = db_query_params ('DELETE FROM artifact_history WHERE artifact_id=$1',
-					array ($this->getID())) ;
-		if (!$res) {
-			$this->setError(_('Error deleting history')._(': ').db_error());
-			db_rollback();
-			ArtifactStorage::instance()->rollback();
-			return false;
-		}
 		$MonitorElementObject = new MonitorElement('artifact');
 		if (!$MonitorElementObject->clearMonitor($this->getID())) {
 			$this->setError(_('Error deleting monitor')._(': ').db_error());
 			db_rollback();
-			ArtifactStorage::instance()->rollback();
 			return false;
 		}
-		$res = db_query_params ('DELETE FROM artifact WHERE artifact_id=$1',
+
+		$res = db_query_params ('UPDATE artifact SET is_deleted=1 WHERE artifact_id=$1',
 					array ($this->getID())) ;
 		if (!$res) {
 			$this->setError(_('Error deleting artifact')._(': ').db_error());
 			db_rollback();
-			ArtifactStorage::instance()->rollback();
 			return false;
 		}
 
 		if (!$this->removeAllAssociations()) {
 			// error message already set by FFObject class.
 			db_rollback();
-			ArtifactStorage::instance()->rollback();
 			return false;
 		}
 
+		// update counts: /!\ counts is also update by a trigger artifactgroup_update_trig
+		// and 2 rules artifact_delete_agg (for real delete), artifact_insert_agg
 		if ($this->getStatusID() == 1) {
 			$res = db_query_params ('UPDATE artifact_counts_agg SET count=count-1,open_count=open_count-1
 				WHERE group_artifact_id=$1',
-						array ($this->getID())) ;
+						array ($this->getArtifactType()->getID())) ;
+			var_dump($res1);
 			if (!$res) {
 				$this->setError(_('Error updating artifact counts')._(': ').db_error());
 				db_rollback();
-				ArtifactStorage::instance()->rollback();
 				return false;
 			}
 		} elseif ($this->getStatusID() == 2) {
 			$res = db_query_params ('UPDATE artifact_counts_agg SET count=count-1
 				WHERE group_artifact_id=$1',
-						array ($this->getID())) ;
+						array ($this->getArtifactType()->getID())) ;
 			if (!$res) {
 				$this->setError(_('Error updating artifact counts')._(': ').db_error());
 				db_rollback();
-				ArtifactStorage::instance()->rollback();
 				return false;
 			}
 		}
-
 		db_commit();
-		ArtifactStorage::instance()->commit();
 		return true;
 	}
 
@@ -839,7 +838,7 @@ class Artifact extends FFObject {
 					       $time,
 					       htmlspecialchars($body))) ;
 
-		$this->updateLastModifiedDate($importData);
+		$this->updateLastModified($importData);
 
 		if ($send_followup && $sendNotice) {
 			$this->mailFollowupEx($time, 2, false);
@@ -1273,20 +1272,26 @@ class Artifact extends FFObject {
 	}
 
 	/**
-	 * updateLastModifiedDate - update the last_modified_date attribute of this artifact.
+	 * updateLastModified - update last_modified_date & last_modified_by attribute of this artifact.
 	 * @param	array	$importData	Array of data to change submitter and time of submit like:
 	 *						array('user' => 127, 'time' => 1234556789)
 	 *
 	 * @return	bool	true on success / false on failure
 	 */
-	function updateLastModifiedDate($importData = array()) {
+	function updateLastModified($importData = array()) {
 		if (array_key_exists('time',$importData)){
 			$time = $importData['time'];
 		} else {
 			$time = time();
 		}
-		$res = db_query_params ('UPDATE artifact SET last_modified_date=$1 WHERE artifact_id=$2',
-			array ($time, $this->getID()));
+		if (array_key_exists('user',$importData)){
+			$user = $importData['user'];
+		} else {
+			$user = ((session_loggedin()) ? user_getid() : 100);
+		}
+
+		$res = db_query_params ('UPDATE artifact SET last_modified_date=$1, last_modified_by=$2 WHERE artifact_id=$3',
+			array ($time, $user, $this->getID()));
 		return (!$res);
 	}
 
@@ -1647,7 +1652,7 @@ class Artifact extends FFObject {
 		unset($this->extra_field_data);
 
 		if ($update)
-			$this->updateLastModifiedDate($importData);
+			$this->updateLastModified($importData);
 
 		return true;
 	}
@@ -2054,15 +2059,19 @@ class ArtifactComparator {
 			}
 			break ;
 		case 'assigned_to':
-			$namecmp = strcoll (user_get_object($a->getAssignedTo())->getRealName(),
-					    user_get_object($b->getAssignedTo())->getRealName()) ;
+			$namecmp = strcoll ($a->getAssignedRealName(),$b->getAssignedRealName()) ;
 			if ($namecmp != 0) {
 				return $namecmp ;
 			}
 			break ;
 		case 'submitted_by':
-			$namecmp = strcoll (user_get_object($a->getSubmittedBy())->getRealName(),
-					    user_get_object($b->getSubmittedBy())->getRealName()) ;
+			$namecmp = strcoll ($a->getSubmittedRealName(),$b->getSubmittedRealName()) ;
+			if ($namecmp != 0) {
+				return $namecmp ;
+			}
+			break ;
+		case 'last_modified_by':
+			$namecmp = strcoll ($a->getLastModifiedRealName(),$b->getLastModifiedRealName()) ;
 			if ($namecmp != 0) {
 				return $namecmp ;
 			}

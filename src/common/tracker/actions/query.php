@@ -4,6 +4,7 @@
  * Copyright 2010 (c) Fusionforge Team
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * Copyright 2012-2015, Franck Villaume - TrivialDev
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -56,6 +57,7 @@ if (getStringFromRequest('submit')) {
 		$_status = getStringFromRequest('_status');
 		$_submitted_by = getStringFromRequest('_submitted_by');
 		$_assigned_to = getStringFromRequest('_assigned_to');
+		$_last_modified_by = getStringFromRequest('_last_modified_by');
 		$_sort_col = getStringFromRequest('_sort_col');
 		$_sort_ord = getStringFromRequest('_sort_ord');
 		$extra_fields = getStringFromRequest('extra_fields');
@@ -67,7 +69,7 @@ if (getStringFromRequest('submit')) {
 		$_followups = getStringFromRequest('_followups');
 		$query_options = array_keys(getArrayFromRequest('query_options'));
 		if (!$aq->create($query_name,$_status,$_assigned_to,$_moddaterange,$_sort_col,$_sort_ord,$extra_fields,$_opendaterange,$_closedaterange,
-			$_summary,$_description,$_followups,$query_type, $query_options, $_submitted_by)) {
+			$_summary,$_description,$_followups,$query_type, $query_options, $_submitted_by, $_last_modified_by)) {
 			form_release_key(getStringFromRequest('form_key'));
 			exit_error($aq->getErrorMessage(),'tracker');
 		} else {
@@ -106,6 +108,7 @@ if (getStringFromRequest('submit')) {
 		$_status = getStringFromRequest('_status');
 		$_submitted_by = getStringFromRequest('_submitted_by');
 		$_assigned_to = getStringFromRequest('_assigned_to');
+		$_last_modified_by = getStringFromRequest('_last_modified_by');
 		$_sort_col = getStringFromRequest('_sort_col');
 		$_sort_ord = getStringFromRequest('_sort_ord');
 		$_moddaterange = getStringFromRequest('_moddaterange');
@@ -117,7 +120,7 @@ if (getStringFromRequest('submit')) {
 		$extra_fields = getStringFromRequest('extra_fields');
 		$query_options = array_keys(getArrayFromRequest('query_options'));
 		if (!$aq->update($query_name,$_status,$_assigned_to,$_moddaterange,$_sort_col,$_sort_ord,$extra_fields,$_opendaterange,$_closedaterange,
-			$_summary,$_description,$_followups,$query_type, $query_options, $_submitted_by)) {
+			$_summary,$_description,$_followups,$query_type, $query_options, $_submitted_by,$_last_modified_by)) {
 			exit_error($aq->getErrorMessage(),'tracker');
 		} else {
 			$feedback .= _('Query Updated');
@@ -170,6 +173,7 @@ if (getStringFromRequest('submit')) {
 //
 $_submitted_by=$aq->getSubmitter();
 $_assigned_to=$aq->getAssignee();
+$_last_modified_by=$aq->getLastModifier();
 $_status=$aq->getStatus();
 $extra_fields=$aq->getExtraFields();
 $_sort_col=$aq->getSortCol();
@@ -185,7 +189,10 @@ $query_type=$aq->getQueryType();
 //	creating a submitter box
 $submitter_box = $ath->submitterBox('_submitted_by[]',$_submitted_by,true,'none','-1',false,true);
 //	creating a custom technician box which includes "any" and "unassigned"
-$tech_box=$ath->technicianBox('_assigned_to[]',$_assigned_to,true,'none','-1',false,true);
+$tech_box = $ath->technicianBox('_assigned_to[]',$_assigned_to,true,'none','-1',false,true);
+//	creating a last modifier box
+$last_modifier_box = $ath->lastModifierBox('_last_modified_by[]',$_last_modified_by,true,'none','-1',false,true);
+
 
 //
 //	custom order by arrays to build a pop-up box
@@ -199,6 +206,7 @@ $order_name_arr[]=_('Last Modified Date');
 $order_name_arr[]=_('Close Date');
 $order_name_arr[]=_('Submitter');
 $order_name_arr[]=_('Assignee');
+$order_name_arr[]=_('Last Modifier');
 
 $order_arr=array();
 $order_arr[]='artifact_id';
@@ -209,6 +217,7 @@ $order_arr[]='last_modified_date';
 $order_arr[]='close_date';
 $order_arr[]='submitted_by';
 $order_arr[]='assigned_to';
+$order_arr[]='last_modified_by';
 
 //
 //	custom sort arrays to build pop-up box
@@ -343,6 +352,9 @@ if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
 	echo '<tr>
 		<td class="top"><strong>'._('Submitter')._(': ').'</strong><br />'. $submitter_box .'</td>
 		<td class="top"><strong>'._('Assignee')._(': ').'</strong><br />'. $tech_box .'</td>
+	</tr>
+	<tr>
+		<td class="top"><strong>'._('Last Modifier')._(': ').'</strong><br />'. $last_modifier_box .'</td>
 	</tr>';
 	$ath->renderExtraFields($extra_fields,true,'none',true,'Any',array(),false,'QUERY');
 

@@ -111,6 +111,13 @@ class ArtifactType extends FFError {
 	var $submitters_res;
 
 	/**
+	 * Last Modifiers db resource ID.
+	 *
+	 * @var	int	$last_modifiers_res.
+	 */
+	var $last_modifiers_res;
+
+	/**
 	 * Status db resource ID.
 	 *
 	 * @var	int	$status_res.
@@ -134,14 +141,14 @@ class ArtifactType extends FFError {
 	/**
 	 * Array of element names so they only have to be fetched once from db.
 	 *
-	 * @var	array	 $data_array.
+	 * @var	array	 $element_name.
 	 */
 	var $element_name;
 
 	/**
 	 * Array of element status so they only have to be fetched once from db.
 	 *
-	 * @var	array	$data_array.
+	 * @var	array	$element_status.
 	 */
 	var $element_status;
 
@@ -1107,6 +1114,22 @@ class ArtifactType extends FFError {
 				array($this->getID()));
 		}
 		return $this->submitters_res;
+	}
+
+	/**
+	 * getLastModifiers - returns a result set of last modifiers.
+	 *
+	 * @return	resource	database result set.
+	 */
+	function getLastModifiers() {
+		if (!isset($this->last_modifiers_res)) {
+			$this->last_modifiers_res = db_query_params('SELECT DISTINCT last_modified_by, last_modified_realname
+				FROM artifact_vw
+				WHERE group_artifact_id=$1
+				ORDER BY last_modified_realname',
+					array($this->getID()));
+		}
+		return $this->last_modifiers_res;
 	}
 
 	/**

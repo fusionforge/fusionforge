@@ -6,6 +6,7 @@
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
  * Copyright 2015-2016, Franck Villaume - TrivialDev
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -45,6 +46,7 @@ $fields = array (
 	'priority'  => _('Priority'),
 	'assigned_to' => _('Assigned to'),
 	'submitted_by' => _('Submitted by'),
+	'last_modified_by' => _('Last Modified by'),
 	'close_date' => _('Close Date'),
 	'details' => _('Detailed description'),
 	'related_tasks' => _('Related Tasks'),
