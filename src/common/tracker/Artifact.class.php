@@ -592,7 +592,6 @@ class Artifact extends FFObject {
 			$res = db_query_params ('UPDATE artifact_counts_agg SET count=count-1,open_count=open_count-1
 				WHERE group_artifact_id=$1',
 						array ($this->getArtifactType()->getID())) ;
-			var_dump($res1);
 			if (!$res) {
 				$this->setError(_('Error updating artifact counts')._(': ').db_error());
 				db_rollback();
