@@ -5,7 +5,7 @@ ALTER TABLE artifact
    ADD COLUMN is_deleted integer NOT NULL DEFAULT 0,
    ADD CONSTRAINT artifact_last_modified_by_fk FOREIGN KEY (last_modified_by)
       REFERENCES users (user_id) MATCH FULL
-      ON UPDATE NO ACTION ON DELETE NO ACTION
+      ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 CREATE OR REPLACE VIEW artifact_vw AS 
  SELECT
