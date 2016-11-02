@@ -3,7 +3,7 @@
  * SOAP Tracker Include - this file contains wrapper functions for the tracker query interface
  *
  * Copyright 2004 (c) GForge, LLC
- * http://gforge.org
+ * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -148,9 +148,9 @@ function queries_to_soap($queries) {
 				// $value may be a int. We wrap it in an array.
 				if (!is_array($values)) $values = array($values);
 				$extra_fields[] = array(
-									"extra_field_id"	=> $extra_field_id,
-									"values"			=> $values
-									);
+							"extra_field_id"	=> $extra_field_id,
+							"values"			=> $values
+							);
 			}
 
 			$assignee = $artifactQuery->getAssignee();
@@ -165,19 +165,19 @@ function queries_to_soap($queries) {
 			}
 
 			$result[] = array(
-						"artifact_query_id"	=> $artifactQuery->getID(),
-						"name"		=> $artifactQuery->getName(),
-						"fields"	=> array(
-										"sortcol"	=> $artifactQuery->getSortCol(),
-										"sortord"	=> $artifactQuery->getSortOrd(),
-										"moddaterange"	=> $artifactQuery->getModDateRange(),
-										"assignee"	=> $assignee,
-										"status"	=> $artifactQuery->getStatus(),
-										"extra_fields"	=> $extra_fields,
-										"opendaterange"	=> $artifactQuery->getOpenDateRange(),
-										"closedaterange"	=> $artifactQuery->getCloseDateRange()
-										),
-						);
+					"artifact_query_id"	=> $artifactQuery->getID(),
+					"name"		=> $artifactQuery->getName(),
+					"fields"	=> array(
+								"sortcol"	=> $artifactQuery->getSortCol(),
+								"sortord"	=> $artifactQuery->getSortOrd(),
+								"moddaterange"	=> $artifactQuery->getModDateRange(),
+								"assignee"	=> $assignee,
+								"status"	=> $artifactQuery->getStatus(),
+								"extra_fields"	=> $extra_fields,
+								"opendaterange"	=> $artifactQuery->getOpenDateRange(),
+								"closedaterange"	=> $artifactQuery->getCloseDateRange()
+								),
+					);
 		}
 	}
 

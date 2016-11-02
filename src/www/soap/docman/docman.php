@@ -573,8 +573,8 @@ function getDocumentGroup($session_ser,$group_id,$doc_group) {
 	}
 
 	$documentGroup=array('doc_group_id'=>$dg->getID(),
-									'parent_doc_group'=>$dg->getParentID(),
-									'groupname'=>$dg->getName());
+				'parent_doc_group'=>$dg->getParentID(),
+				'groupname'=>$dg->getName());
 
 	return $documentGroup;
 }

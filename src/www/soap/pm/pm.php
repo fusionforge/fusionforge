@@ -4,7 +4,7 @@
  *
  * Copyright 2004 (c) GForge, LLC
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * http://gforge.org
+ * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -598,7 +598,7 @@ function projecttasks_to_soap($pt_arr) {
 			$dependent_on_tmp = $pt_arr[$i]->getDependentOn();
 			foreach ($dependent_on_tmp as $dependent_on_id => $link_type) {
 				$dependent_on[] = array("task_id" => $dependent_on_id,
-										"link_type" => $link_type);
+							"link_type" => $link_type);
 			}
 
 			//build the assigned_to array
@@ -606,8 +606,8 @@ function projecttasks_to_soap($pt_arr) {
 			$assigned_ids = $pt_arr[$i]->getAssignedTo();
 			foreach ($assigned_ids as $assigned_id) {
 				$assigned_to[] = array("user_id" => $assigned_id,
-										"percent_effort" => 0		// TODO: This should be implemented
-									);
+							"percent_effort" => 0		// TODO: This should be implemented
+							);
 			}
 
 			$sort_id = $pt_arr[$i]->getExternalID();

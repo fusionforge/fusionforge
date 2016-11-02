@@ -3,7 +3,7 @@
  * SOAP User Include - this file contains wrapper functions for the SOAP interface
  *
  * Copyright 2004 (c) GForge, LLC
- * http://gforge.org
+ * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -51,50 +51,50 @@ $server->wsdl->addComplexType(
 
 // Array of users
 $server->wsdl->addComplexType(
-    'ArrayOfUser',
-    'complexType',
-    'array',
-    '',
-    'SOAP-ENC:Array',
-    array(),
-    array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:User[]')),
-    'tns:User');
+	'ArrayOfUser',
+	'complexType',
+	'array',
+	'',
+	'SOAP-ENC:Array',
+	array(),
+	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:User[]')),
+	'tns:User');
 
 //getUsers (id array)
 $server->register(
-    'getUsers',
-    array('session_ser'=>'string','user_ids'=>'tns:ArrayOfint'),
-    array('userResponse'=>'tns:ArrayOfUser'),
-    $uri,
-    $uri.'#getUsers','rpc','encoded'
+	'getUsers',
+	array('session_ser'=>'string','user_ids'=>'tns:ArrayOfint'),
+	array('userResponse'=>'tns:ArrayOfUser'),
+	$uri,
+	$uri.'#getUsers','rpc','encoded'
 );
 
 //getActiveUsers ()
 $server->register(
-    'getActiveUsers',
-    array('session_ser'=>'string'),
-    array('userResponse'=>'tns:ArrayOfUser'),
-    $uri,
-    $uri.'#getActiveUsers','rpc','encoded'
+	'getActiveUsers',
+	array('session_ser'=>'string'),
+	array('userResponse'=>'tns:ArrayOfUser'),
+	$uri,
+	$uri.'#getActiveUsers','rpc','encoded'
 );
 
 //[Yosu] getGroupUsers (session_ser, group_id)
 $server->register(
-    'getGroupUsers',
-    array('session_ser'=>'xsd:string',
-	 'group_id'=>'xsd:int'),
-    array('return'=>'tns:ArrayOfUser'),
-    $uri,
-    $uri.'#getGroupUsers','rpc','encoded'
+	'getGroupUsers',
+	array('session_ser'=>'xsd:string',
+		'group_id'=>'xsd:int'),
+	array('return'=>'tns:ArrayOfUser'),
+	$uri,
+	$uri.'#getGroupUsers','rpc','encoded'
 );
 
 //getUsersByName (unix_name array)
 $server->register(
-    'getUsersByName',
-    array('session_ser'=>'string','user_ids'=>'tns:ArrayOfstring'),
-    array('userResponse'=>'tns:ArrayOfUser'),
-    $uri,
-    $uri.'#getUsersByName','rpc','encoded'
+	'getUsersByName',
+	array('session_ser'=>'string','user_ids'=>'tns:ArrayOfstring'),
+	array('userResponse'=>'tns:ArrayOfUser'),
+	$uri,
+	$uri.'#getUsersByName','rpc','encoded'
 );
 
 //addUser (unix_name,firstname,lastname,password1,password2,email,
@@ -102,86 +102,86 @@ $server->register(
 	//theme_id,unix_box='shell',address='',address2='',phone='',fax='',
 	//title='',ccode='US',send_mail)
 $server->register(
-    'addUser',
-    array('unix_name'=>'xsd:string','firstname'=>'xsd:string',
-	'lastname'=>'xsd:string','password1'=>'xsd:string',
-	'password2'=>'xsd:string','email'=>'xsd:string',
-	'mail_site'=>'xsd:string','mail_va'=>'xsd:string',
-	'language_id'=>'xsd:int','timezone'=>'xsd:string',
-	'jabber_address'=>'xsd:string','jabber_only'=>'xsd:int',
-	'theme_id'=>'xsd:int','unix_box'=>'xsd:string',
-	'address'=>'xsd:string','address2'=>'xsd:string',
-	'phone'=>'xsd:string','fax'=>'xsd:string',
-	'title'=>'xsd:string','ccode'=>'xsd:string'),
-    array('addUserResonse'=>'xsd:int'),
-    $uri,
-    $uri.'#addUser','rpc','encoded'
+	'addUser',
+	array('unix_name'=>'xsd:string','firstname'=>'xsd:string',
+		'lastname'=>'xsd:string','password1'=>'xsd:string',
+		'password2'=>'xsd:string','email'=>'xsd:string',
+		'mail_site'=>'xsd:string','mail_va'=>'xsd:string',
+		'language_id'=>'xsd:int','timezone'=>'xsd:string',
+		'jabber_address'=>'xsd:string','jabber_only'=>'xsd:int',
+		'theme_id'=>'xsd:int','unix_box'=>'xsd:string',
+		'address'=>'xsd:string','address2'=>'xsd:string',
+		'phone'=>'xsd:string','fax'=>'xsd:string',
+		'title'=>'xsd:string','ccode'=>'xsd:string'),
+	array('addUserResonse'=>'xsd:int'),
+	$uri,
+	$uri.'#addUser','rpc','encoded'
 );
 
 //updateUser  (session_ser,user_id,firstname,lastname,language_id,timezone,mail_site,mail_va,use_ratings,dummy1,dummy2,theme_id,address,address2,phone,fax,title,ccode)
 $server->register(
-    'updateUser',
-    array('session_ser'=>'xsd:string',
-	'user_id'=>'xsd:string',
-	'firstname'=>'xsd:string',
-	'lastname'=>'xsd:string',
-	'language_id'=>'xsd:int',
-	'timezone'=>'xsd:string',
-	'mail_site'=>'xsd:string',
-	'mail_va'=>'xsd:string',
-	'use_ratings'=>'xsd:string',
-	'jabber_address'=>'xsd:string',
-	'jabber_only'=>'xsd:int',
-	'theme_id'=>'xsd:int',
-	'address'=>'xsd:string',
-	'address2'=>'xsd:string',
-	'phone'=>'xsd:string',
-	'fax'=>'xsd:string',
-	'title'=>'xsd:string',
-	'ccode'=>'xsd:string'),
-    array('updateUserResonse'=>'xsd:int'),
-    $uri,
-    $uri.'#updateUser','rpc','encoded'
+	'updateUser',
+	array('session_ser'=>'xsd:string',
+		'user_id'=>'xsd:string',
+		'firstname'=>'xsd:string',
+		'lastname'=>'xsd:string',
+		'language_id'=>'xsd:int',
+		'timezone'=>'xsd:string',
+		'mail_site'=>'xsd:string',
+		'mail_va'=>'xsd:string',
+		'use_ratings'=>'xsd:string',
+		'jabber_address'=>'xsd:string',
+		'jabber_only'=>'xsd:int',
+		'theme_id'=>'xsd:int',
+		'address'=>'xsd:string',
+		'address2'=>'xsd:string',
+		'phone'=>'xsd:string',
+		'fax'=>'xsd:string',
+		'title'=>'xsd:string',
+		'ccode'=>'xsd:string'),
+	array('updateUserResonse'=>'xsd:int'),
+	$uri,
+	$uri.'#updateUser','rpc','encoded'
 );
 
 //deleteUser  (session_ser,user_id)
 $server->register(
-    'deleteUser',
-    array('session_ser'=>'xsd:string','user_id'=>'xsd:string'),
-    array('deleteUserResonse'=>'xsd:boolean'),
-    $uri,
-    $uri.'#deleteUser','rpc','encoded'
+	'deleteUser',
+	array('session_ser'=>'xsd:string','user_id'=>'xsd:string'),
+	array('deleteUserResonse'=>'xsd:boolean'),
+	$uri,
+	$uri.'#deleteUser','rpc','encoded'
 );
 
 //changeStatus  (session_ser,user_id,status)
 $server->register(
-    'changeStatus',
-    array('session_ser'=>'xsd:string',
-	'user_id'=>'xsd:string',
-	'status'=>'xsd:string'),
-    array('changeStatusResonse'=>'xsd:boolean'),
-    $uri,
-    $uri.'#changeStatus','rpc','encoded'
+	'changeStatus',
+	array('session_ser'=>'xsd:string',
+		'user_id'=>'xsd:string',
+		'status'=>'xsd:string'),
+	array('changeStatusResonse'=>'xsd:boolean'),
+	$uri,
+	$uri.'#changeStatus','rpc','encoded'
 );
 
 //changePassword  (session_ser,user_id,password)
 $server->register(
-    'changePassword',
-    array('session_ser'=>'xsd:string',
-	'user_id'=>'xsd:string',
-	'password'=>'xsd:string'),
-    array('changePasswordResonse'=>'xsd:boolean'),
-    $uri,
-    $uri.'#changePassword','rpc','encoded'
+	'changePassword',
+	array('session_ser'=>'xsd:string',
+		'user_id'=>'xsd:string',
+		'password'=>'xsd:string'),
+	array('changePasswordResonse'=>'xsd:boolean'),
+	$uri,
+	$uri.'#changePassword','rpc','encoded'
 );
 
 //getGroups (id array)
 $server->register(
-    'userGetGroups',
-    array('session_ser'=>'string','user_id'=>'xsd:int'),
-    array('groupResponse'=>'tns:ArrayOfGroup'),
-    $uri,
-    $uri.'#userGetGroups','rpc','encoded'
+	'userGetGroups',
+	array('session_ser'=>'string','user_id'=>'xsd:int'),
+	array('groupResponse'=>'tns:ArrayOfGroup'),
+	$uri,
+	$uri.'#userGetGroups','rpc','encoded'
 );
 
 //get user objects for array of user_ids

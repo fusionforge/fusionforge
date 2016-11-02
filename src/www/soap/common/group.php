@@ -3,6 +3,7 @@
  * SOAP Group Include - this file contains wrapper functions for the SOAP interface
  *
  * Copyright 2004 (c) GForge, LLC
+ * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -63,14 +64,14 @@ $server->wsdl->addComplexType(
 
 // Array of groups
 $server->wsdl->addComplexType(
-    'ArrayOfGroup',
-    'complexType',
-    'array',
-    '',
-    'SOAP-ENC:Array',
-    array(),
-    array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:Group[]')),
-    'tns:Group');
+	'ArrayOfGroup',
+	'complexType',
+	'array',
+	'',
+	'SOAP-ENC:Array',
+	array(),
+	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:Group[]')),
+	'tns:Group');
 
 // [Yosu] Add The definition of a role object
 $server->wsdl->addComplexType(
@@ -96,177 +97,177 @@ $server->wsdl->addComplexType(
 
 //[Yosu] Array of roles
 $server->wsdl->addComplexType(
-    'ArrayOfRole',
-    'complexType',
-    'array',
-    '',
-    'SOAP-ENC:Array',
-    array(),
-    array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:Role[]')),
-    'tns:Role');
+	'ArrayOfRole',
+	'complexType',
+	'array',
+	'',
+	'SOAP-ENC:Array',
+	array(),
+	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:Role[]')),
+	'tns:Role');
 
 //getGroups (id array)
 $server->register(
-    'getGroups',
-    array('session_ser'=>'xsd:string','group_ids'=>'tns:ArrayOfint'),
-    array('return'=>'tns:ArrayOfGroup'),
-    $uri,
-    $uri.'#getGroups','rpc','encoded'
+	'getGroups',
+	array('session_ser'=>'xsd:string','group_ids'=>'tns:ArrayOfint'),
+	array('return'=>'tns:ArrayOfGroup'),
+	$uri,
+	$uri.'#getGroups','rpc','encoded'
 );
 
 //getGroupsByName (unix_name array)
 $server->register(
-    'getGroupsByName',
-    array('session_ser'=>'xsd:string','group_names'=>'tns:ArrayOfstring'),
-    array('return'=>'tns:ArrayOfGroup'),
-    $uri,
-    $uri.'#getGroupsByName','rpc','encoded'
+	'getGroupsByName',
+	array('session_ser'=>'xsd:string','group_names'=>'tns:ArrayOfstring'),
+	array('return'=>'tns:ArrayOfGroup'),
+	$uri,
+	$uri.'#getGroupsByName','rpc','encoded'
 );
 
 //getPublicProjectNames ()
 $server->register(
-    'getPublicProjectNames',
-    array('session_ser'=>'xsd:string'),
-    array('return'=>'tns:ArrayOfstring'),
-    $uri,
-    $uri.'#getPublicProjectNames','rpc','encoded'
+	'getPublicProjectNames',
+	array('session_ser'=>'xsd:string'),
+	array('return'=>'tns:ArrayOfstring'),
+	$uri,
+	$uri.'#getPublicProjectNames','rpc','encoded'
 );
 
 // getGroupByStatus
 $server->register(
-    'getGroupByStatus',
-    array('session_ser'=>'xsd:string',
-	'status'=>'xsd:string'),
-    array('return'=>'tns:ArrayOfGroup'),
-    $uri,
-    $uri.'#getGroupByStatus','rpc','encoded'
+	'getGroupByStatus',
+	array('session_ser'=>'xsd:string',
+		'status'=>'xsd:string'),
+	array('return'=>'tns:ArrayOfGroup'),
+	$uri,
+	$uri.'#getGroupByStatus','rpc','encoded'
 );
 
 // approveGroup
 $server->register(
-    'approveGroup',
-    array('session_ser'=>'xsd:string',
-	'group_id'=>'xsd:int'),
-    array('return'=>'xsd:boolean'),
-    $uri,
-    $uri.'#approveGroup','rpc','encoded'
+	'approveGroup',
+	array('session_ser'=>'xsd:string',
+		'group_id'=>'xsd:int'),
+	array('return'=>'xsd:boolean'),
+	$uri,
+	$uri.'#approveGroup','rpc','encoded'
 );
 
 //addGroup ($user, $group_name, $unix_name, $description, $purpose, $unix_box = 'shell1', $scm_box = 'cvs1', $is_public = 1, $send_mail = true, $built_from_template = 0)
 $server->register(
-    'addGroup',
-    array('session_ser'=>'xsd:string',
-	'group_name'=>'xsd:string',
-	'unix_name'=>'xsd:string',
-	'description'=>'xsd:string',
-	'purpose'=>'xsd:string',
-	'unix_box'=>'xsd:string',
-	'scm_box'=>'xsd:string',
-	'is_public'=>'xsd:int',
-	'send_mail'=>'xsd:boolean',
-	'built_from_template'=>'xsd:int'),
-    array('return'=>'xsd:boolean'),
-    $uri,
-    $uri.'#addGroup','rpc','encoded'
+	'addGroup',
+	array('session_ser'=>'xsd:string',
+		'group_name'=>'xsd:string',
+		'unix_name'=>'xsd:string',
+		'description'=>'xsd:string',
+		'purpose'=>'xsd:string',
+		'unix_box'=>'xsd:string',
+		'scm_box'=>'xsd:string',
+		'is_public'=>'xsd:int',
+		'send_mail'=>'xsd:boolean',
+		'built_from_template'=>'xsd:int'),
+	array('return'=>'xsd:boolean'),
+	$uri,
+	$uri.'#addGroup','rpc','encoded'
 );
 
 //updateGroup ($group_id, $is_public, $is_template, $status, $group_type, $unix_box, $http_domain, $scm_box)
 $server->register(
-    'updateGroup',
-    array('session_ser'=>'xsd:string',
-	'group_id'=>'xsd:int',
-	'is_public'=>'xsd:int',
-	'is_template'=>'xsd:int',
-	'status'=>'xsd:string',
-	'group_type'=>'xsd:string',
-	'unix_box'=>'xsd:string',
-	'http_domain'=>'xsd:string',
-	'scm_box'=>'xsd:string'),
-    array('return'=>'xsd:boolean'),
-    $uri,
-    $uri.'#updateGroup','rpc','encoded'
+	'updateGroup',
+	array('session_ser'=>'xsd:string',
+		'group_id'=>'xsd:int',
+		'is_public'=>'xsd:int',
+		'is_template'=>'xsd:int',
+		'status'=>'xsd:string',
+		'group_type'=>'xsd:string',
+		'unix_box'=>'xsd:string',
+		'http_domain'=>'xsd:string',
+		'scm_box'=>'xsd:string'),
+	array('return'=>'xsd:boolean'),
+	$uri,
+	$uri.'#updateGroup','rpc','encoded'
 );
 
 //function updateGroup($session_ser, $group_id, $form_group_name, $form_homepage, $form_shortdesc, $use_mail, $use_survey, $use_forum, $use_pm,
 //	$use_scm, $use_news, $use_docman, $new_doc_address, $send_all_docs, $use_ftp, $use_tracker, $use_frs, $use_stats, $tags)
 $server->register(
-    'updateGroup2',
-    array('session_ser'=>'xsd:string',
-	'group_id'=>'xsd:int',
-        'form_group_name'=>'xsd:string',
-        'form_homepage'=>'xsd:string',
-        'form_shortdesc'=>'xsd:string',
-        'use_mail'=>'xsd:string',
-        'use_survey'=>'xsd:string',
-        'use_forum'=>'xsd:string',
-        'use_pm'=>'xsd:string',
-        'use_scm'=>'xsd:string',
-        'use_news'=>'xsd:string',
-        'use_docman'=>'xsd:string',
-        'new_doc_address'=>'xsd:string',
-        'send_all_docs'=>'xsd:string',
-        'use_ftp'=>'xsd:string',
-        'use_tracker'=>'xsd:string',
-        'use_frs'=>'xsd:string',
-        'use_stats'=>'xsd:string',
-        'tags'=>'xsd:string'),
-    array('return'=>'xsd:boolean'),
-    $uri,
-    $uri.'#updateGroup2','rpc','encoded'
+	'updateGroup2',
+	array('session_ser'=>'xsd:string',
+		'group_id'=>'xsd:int',
+		'form_group_name'=>'xsd:string',
+		'form_homepage'=>'xsd:string',
+		'form_shortdesc'=>'xsd:string',
+		'use_mail'=>'xsd:string',
+		'use_survey'=>'xsd:string',
+		'use_forum'=>'xsd:string',
+		'use_pm'=>'xsd:string',
+		'use_scm'=>'xsd:string',
+		'use_news'=>'xsd:string',
+		'use_docman'=>'xsd:string',
+		'new_doc_address'=>'xsd:string',
+		'send_all_docs'=>'xsd:string',
+		'use_ftp'=>'xsd:string',
+		'use_tracker'=>'xsd:string',
+		'use_frs'=>'xsd:string',
+		'use_stats'=>'xsd:string',
+		'tags'=>'xsd:string'),
+	array('return'=>'xsd:boolean'),
+	$uri,
+	$uri.'#updateGroup2','rpc','encoded'
 );
 
 //deleteGroup ($group_id)
 $server->register(
-    'deleteGroup',
-    array('session_ser'=>'xsd:string',
-	'group_id'=>'xsd:int'),
-    array('return'=>'xsd:boolean'),
-    $uri,
-    $uri.'#deleteGroup','rpc','encoded'
+	'deleteGroup',
+	array('session_ser'=>'xsd:string',
+		'group_id'=>'xsd:int'),
+	array('return'=>'xsd:boolean'),
+	$uri,
+	$uri.'#deleteGroup','rpc','encoded'
 );
 
 //[Yosu] addUserToGroup (session_ser, user_unix_name, group_id, role_id)
 $server->register(
-    'addUserToGroup',
-    array('session_ser'=>'xsd:string',
-	 'user_unix_name'=>'xsd:string',
-         'group_id'=>'xsd:int',
-         'role_id'=>'xsd:int'),
-    array('addUserToGroupResonse'=>'xsd:boolean'),
-    $uri,
-    $uri.'#addUserToGroup','rpc','encoded'
+	'addUserToGroup',
+	array('session_ser'=>'xsd:string',
+		'user_unix_name'=>'xsd:string',
+		'group_id'=>'xsd:int',
+		'role_id'=>'xsd:int'),
+	array('addUserToGroupResonse'=>'xsd:boolean'),
+	$uri,
+	$uri.'#addUserToGroup','rpc','encoded'
 );
 
 //[Yosu] removeUserFromGroup (session_ser, user_id, role_id)
 $server->register(
-    'removeUserFromGroup',
-    array('session_ser'=>'xsd:string',
-         'user_id'=>'xsd:string',
-         'role_id'=>'xsd:int'),
-    array('removeUserFromGroupResonse'=>'xsd:boolean'),
-    $uri,
-    $uri.'#removeUserFromGroup','rpc','encoded'
+	'removeUserFromGroup',
+	array('session_ser'=>'xsd:string',
+		'user_id'=>'xsd:string',
+		'role_id'=>'xsd:int'),
+	array('removeUserFromGroupResonse'=>'xsd:boolean'),
+	$uri,
+	$uri.'#removeUserFromGroup','rpc','encoded'
 );
 
 //[Yosu] getGroupRoles (session_ser, group_id)
 $server->register(
-    'getGroupRoles',
-    array('session_ser'=>'xsd:string',
-	 'group_id'=>'xsd:int'),
-    array('return'=>'tns:ArrayOfRole'),
-    $uri,
-    $uri.'#getGroupRoles','rpc','encoded'
+	'getGroupRoles',
+	array('session_ser'=>'xsd:string',
+		'group_id'=>'xsd:int'),
+	array('return'=>'tns:ArrayOfRole'),
+	$uri,
+	$uri.'#getGroupRoles','rpc','encoded'
 );
 
 //[Yosu] getUserRolesForGroup (session_ser, group_id, user_id)
 $server->register(
-    'getUserRolesForGroup',
-    array('session_ser'=>'xsd:string',
-	 'group_id'=>'xsd:int',
-	 'user_id'=>'xsd:int'),
-    array('return'=>'tns:ArrayOfRole'),
-    $uri,
-    $uri.'#getUserRolesForGroup','rpc','encoded'
+	'getUserRolesForGroup',
+	array('session_ser'=>'xsd:string',
+		'group_id'=>'xsd:int',
+		'user_id'=>'xsd:int'),
+	array('return'=>'tns:ArrayOfRole'),
+	$uri,
+	$uri.'#getUserRolesForGroup','rpc','encoded'
 );
 
 //[Yosu] addGroupRole ($session_ser, $group_id, $role_name, $project_read, $project_admin, $frs, $scm, $docman,
