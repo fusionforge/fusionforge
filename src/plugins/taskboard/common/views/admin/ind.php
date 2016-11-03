@@ -65,7 +65,7 @@ if (!$tb_arr || count($tb_arr) < 1) {
 				$cells[][] = util_make_link('/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&taskboard_id='.$tb_arr[$j]->getID(),
 						html_image("ic/tracker20w.png", 20, 20).' '.$tb_arr[$j]->getName());
 				$cells[][] = $tb_arr[$j]->getDescription();
-				echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($j, true)), $cells);
+				echo $HTML->multiTableRow(array(), $cells);
 			}
 		}
 	}
