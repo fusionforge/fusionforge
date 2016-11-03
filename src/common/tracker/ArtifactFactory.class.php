@@ -94,8 +94,9 @@ class ArtifactFactory extends FFError {
 	 * @param	int	$_assigned_to	Include this param if you want to limit to a certain assignee.
 	 * @param	int	$_status	Include this param if you want to limit to a particular status.
 	 * @param	array	$_extra_fields	Array of extra fields & elements to limit the query to.
+	 * @param	int	$_changed_from	Set this param if you want to limit to a specific range of time (now minus _changed_from int value)
 	 */
-	function setup($offset,$order_col,$sort,$max_rows,$set,$_assigned_to,$_status,$_extra_fields=array()) {
+	function setup($offset, $order_col, $sort, $max_rows, $set, $_assigned_to, $_status, $_extra_fields = array(), $_changed_from = 0) {
 
 		if ((!$offset) || ($offset < 0)) {
 			$this->offset=0;
@@ -257,6 +258,10 @@ class ArtifactFactory extends FFError {
 				}
 			}
 			$_changed=0;
+		}
+		//ugly hack to force _changed value to parameter
+		if ($_changed_from) {
+			$_changed = $_changed_from;
 		}
 
 		$this->sort=$_sort_ord;

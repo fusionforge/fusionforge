@@ -202,7 +202,8 @@ $server->register(
 		'group_id'=>'xsd:int',
 		'group_artifact_id'=>'xsd:int',
 		'assigned_to'=>'xsd:int',
-		'status'=>'xsd:int'
+		'status'=>'xsd:int',
+		'changed_from' => 'xsd:int'
 	),
 	array('getArtifactsResponse'=>'tns:ArrayOfArtifact'),
 	$uri,$uri.'#getArtifacts','rpc','encoded'
@@ -696,7 +697,7 @@ function getArtifactTechnicians($session_ser,$group_id,$group_artifact_id) {
 //
 //	getArtifacts
 //
-function getArtifacts($session_ser,$group_id,$group_artifact_id,$assigned_to,$status) {
+function getArtifacts($session_ser, $group_id, $group_artifact_id, $assigned_to, $status, $changed_from) {
 	continue_session($session_ser);
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
@@ -726,7 +727,7 @@ function getArtifacts($session_ser,$group_id,$group_artifact_id,$assigned_to,$st
 		$set = false;
 	}
 
-	$af->setup(0,'','',0,$set,$assigned_to,$status);
+	$af->setup(0, '', '', 0, $set, $assigned_to, $status, array(), $changed_from);
 	$artifacts = $af->getArtifacts();
 	if ($artifacts === false) {
 		return new soap_fault('','getArtifacts',$af->getErrorMessage(),$af->getErrorMessage());
