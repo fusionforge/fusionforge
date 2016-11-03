@@ -41,11 +41,11 @@ class TaskBoardHtml extends TaskBoard {
 
 		$labels[] = _('View Taskboards');
 		$links[]  = '/plugins/taskboard/?group_id='.$group_id;
-		$attr   = array(array('title' => _('Get the list of available taskboards')));
+		$attr     = array(array('title' => _('Get the list of available taskboards')));
 		if (session_loggedin()) {
 			if (forge_check_perm('tracker_admin', $group_id)) {
 				$labels[] = _('Taskboards Administration');
-				$links[]  = 'plugins/taskboard/admin/?group_id='.$group_id;
+				$links[]  = '/plugins/taskboard/admin/?group_id='.$group_id;
 				$attr[]   = array('title' => _('Global administration for taskboards.'));
 			}
 		}
@@ -65,34 +65,33 @@ class TaskBoardHtml extends TaskBoard {
 			if (forge_check_perm('tracker_admin', $group_id)) {
 				$release_id = getIntFromRequest('release_id','');
 				$view = getStringFromRequest('view','');
-				if($release_id) {
+				if ($release_id) {
 					if( $view == 'edit_release' ) {
 						$labels[] = _('Delete release');
 						$links[]  = '/plugins/taskboard/releases/?group_id='.$group_id.'&taskboard_id='.$taskboard_id.'&release_id='.$release_id.'&view=delete_release';
+						$attr[]   = array();
 					} else {
 						$labels[] = _('Edit release');
 						$links[]  = '/plugins/taskboard/releases/?group_id='.$group_id.'&taskboard_id='.$taskboard_id.'&release_id='.$release_id.'&view=edit_release';
+						$attr[]   = array();
 					}
 				}
-			}
-		}
 
-		if (session_loggedin()) {
-			if (forge_check_perm('tracker_admin', $group_id)) {
 				if ($taskboard_id) {
 					$labels[] = _('Administration');
 					$links[]  = '/plugins/taskboard/admin/?group_id='.$group_id.'&taskboard_id='.$taskboard_id;
 					$attr[]   = array('title' => _('Administration for this taskboard.'));
 				}
-				$view = getStringFromRequest('view');
+
 				if ($view == 'edit_column') {
 					$labels[] = _('Configure Columns');
 					$links[]  = '/plugins/taskboard/admin/?group_id='.$group_id.'&taskboard_id='.$taskboard_id.'&view=columns';
-
+					$attr[]   = array();
 					$column_id = getIntFromRequest('column_id', '');
 					if ($column_id) {
 						$labels[] = _('Delete Column');
 						$links[]  = '/plugins/taskboard/admin/?group_id='.$group_id.'&taskboard_id='.$taskboard_id.'&column_id='.$column_id.'&view=delete_column';
+						$attr[]   = array();
 					}
 				}
 			}
