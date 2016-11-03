@@ -1,6 +1,8 @@
 <?php
 /**
  * Copyright 2005 (c) GForge Group, LLC
+ * Copyright 2016, Franck Villaume - TrivialDev
+ * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -45,11 +47,11 @@ $_sort_col = getStringFromRequest('_sort_col');
 $_sort_ord = getStringFromRequest('_sort_ord');
 $max_rows = getIntFromRequest('max_rows');
 $set = getStringFromRequest('set');
-$_assigned_to = getStringFromRequest('_assigned_to');
-$_status = getStringFromRequest('_status');
-$_changed_from = getStringFromRequest('_changed_from');
+$_assigned_to = getIntFromRequest('_assigned_to');
+$_status = getIntFromRequest('_status');
+$_changed_from = getIntFromRequest('_changed_from', 0);
 
-$af->setup($offset,$_sort_col,$_sort_ord,$max_rows,$set,$_assigned_to,$_status,$_changed_from);
+$af->setup($offset,$_sort_col,$_sort_ord,$max_rows,$set,$_assigned_to,$_status, array(), $_changed_from);
 
 $at_arr = $af->getArtifacts();
 
