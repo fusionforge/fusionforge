@@ -31,6 +31,7 @@
  * @param	array	$qpa2		Second query resource ID
  */
 function reports_quick_graph($title, $qpa1, $qpa2) {
+	global $HTML;
 	$result1 = db_query_qpa($qpa1);
 	$result2 = db_query_qpa($qpa2);
 	if ($result1 && $result2 && db_numrows($result2) > 0) {
