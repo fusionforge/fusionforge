@@ -24,7 +24,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-/*
+/**
  * Standard Alcatel-Lucent disclaimer for contributing to open source
  *
  * "The Artifact ("Contribution") has not been tested and/or
