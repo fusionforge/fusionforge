@@ -24,15 +24,6 @@ require_once $gfcommon.'tracker/ArtifactFactory.class.php';
 
 global $ath;
 
-$headers = getIntFromRequest('headers');
-$sep = getFilteredStringFromRequest('sep', '/^[,;]$/', ',');
-
-$date = date('Y-m-d');
-
-sysdebug_off();
-header('Content-type: text/csv');
-header('Content-disposition: filename="trackers-'.$date.'.csv"');
-
 session_require_perm ('tracker', $ath->getID(), 'read') ;
 
 $af = new ArtifactFactory($ath);
@@ -42,6 +33,16 @@ if (!$af || !is_object($af)) {
 	exit_error($af->getErrorMessage(),'tracker');
 }
 
+
+$headers = getIntFromRequest('headers');
+$sep = getFilteredStringFromRequest('sep', '/^[,;]$/', ',');
+$date = date('Y-m-d-His');
+$date_format = _('Y-m-d');
+
+sysdebug_off();
+header('Content-type: text/csv');
+header('Content-disposition: filename="trackers-'.$date.'.csv"');
+
 $offset = getStringFromRequest('offset');
 $_sort_col = getStringFromRequest('_sort_col');
 $_sort_ord = getStringFromRequest('_sort_ord');
@@ -49,7 +50,13 @@ $max_rows = getIntFromRequest('max_rows');
 $set = getStringFromRequest('set');
 $_assigned_to = getIntFromRequest('_assigned_to');
 $_status = getIntFromRequest('_status');
-$_changed_from = getIntFromRequest('_changed_from', 0);
+$received_changed_from = getStringFromRequest('_changed_from', 0);
+if ($received_changed_from) {
+	$arrDateBegin = DateTime::createFromFormat($date_format, $received_changed_from);
+	$_changed_from = $arrDateBegin->getTimestamp();
+} else {
+	$_changed_from = 0;
+}
 
 $af->setup($offset,$_sort_col,$_sort_ord,$max_rows,$set,$_assigned_to,$_status, array(), $_changed_from);
 

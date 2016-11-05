@@ -4,7 +4,7 @@
  *
  * Copyright 2002, GForge, LLC
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2016, Franck Villaume - TrivialDev
  * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -80,7 +80,7 @@ class ArtifactFactory extends FFError {
 			return;
 		}
 		$this->ArtifactType =& $ArtifactType;
-		$this->changed_from = 0x7ffffff; // Any
+		$this->changed_from = 0; // Any
 	}
 
 	/**
@@ -94,7 +94,7 @@ class ArtifactFactory extends FFError {
 	 * @param	int	$_assigned_to	Include this param if you want to limit to a certain assignee.
 	 * @param	int	$_status	Include this param if you want to limit to a particular status.
 	 * @param	array	$_extra_fields	Array of extra fields & elements to limit the query to.
-	 * @param	int	$_changed_from	Set this param if you want to limit to a specific range of time (now minus _changed_from int value)
+	 * @param	int	$_changed_from	Set this param if you want to limit from an UNIX epoch time. Default = 0, no limit in time.
 	 */
 	function setup($offset, $order_col, $sort, $max_rows, $set, $_assigned_to, $_status, $_extra_fields = array(), $_changed_from = 0) {
 
@@ -269,17 +269,7 @@ class ArtifactFactory extends FFError {
 		$this->status=$_status;
 		$this->assigned_to=$_assigned_to;
 		$this->extra_fields=$_extra_fields;
-		$this->setChangedFrom($_changed);
-	}
-
-	/**
-	 * setChangedFrom - sets up changed-from and last-changed before you call getArtifacts().
-	 *
-	 * @param	int	$changed_from	The changed_from - offset time(sec) from now
-	 */
-	function setChangedFrom($changed_from) {
-		$this->changed_from = ($changed_from <= 0) ? 0x7fffffff : $changed_from;
-		$this->last_changed = time() - $this->changed_from;
+		$this->last_changed=$_changed;
 	}
 
 	/**
