@@ -501,7 +501,7 @@ if ($art_arr && $art_cnt > 0) {
 		$legend = '';
 		if (is_array($states)) {
 			foreach($states as $name) {
-				if ($count[$name]) {
+				if (isset($count[$name]) && $count[$name]) {
 					$graph  .= '<td style="background: '.$colors[$i].'; width: '.$percent[$name].'%;">&nbsp;</td>';
 					$legend .= '<td style="white-space: nowrap; width: '.$percent[$name].'%;">'."<i>$name: $count[$name] ($percent[$name]%)</i></td>";
 				}
