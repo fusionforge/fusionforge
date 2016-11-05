@@ -106,7 +106,7 @@ function show_news_approve_form($qpa_pending, $qpa_rejected, $qpa_approved, $for
 		echo '<h2>'.sprintf(_('These items were rejected this past week or were not intended for front page (total: %d).'), $rows).'</h2>';
 		echo $HTML->listTableTop($title_arr);
 		for ($i=0; $i<$rows; $i++) {
-			show_news_item($items[$i], $i, false, false);
+			show_news_item($items[$i], $i, false, false, $form_url);
 		}
 		echo $HTML->listTableBottom();
 	}
@@ -129,7 +129,7 @@ function show_news_approve_form($qpa_pending, $qpa_rejected, $qpa_approved, $for
 		echo '<h2>'.sprintf(_('These items were approved this past week (total: %d).'), $rows).'</h2>';
 		echo $HTML->listTableTop($title_arr);
 		for ($i=0; $i < $rows; $i++) {
-			show_news_item($items[$i], $i, false, false);
+			show_news_item($items[$i], $i, false, false, $form_url);
 		}
 		echo $HTML->listTableBottom();
 	}
