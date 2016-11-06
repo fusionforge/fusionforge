@@ -118,20 +118,21 @@ $format = $headers ? _(' with headers') : _(' without headers');
 $format .= _(' using ')."'".htmlentities($sep)."'"._(' as separator.');
 ?>
 <p><?php echo _('This page allows you to export the items using a CSV (<a href="http://en.wikipedia.org/wiki/Comma-separated_values">Comma Separated Values</a>) File. This format can be used to view your entries using your favorite spreadsheet software.'); ?></p>
-<h2><?php echo _('Export as a CSV file'); ?></h2>
-
-<strong><?php echo _('Selected CSV Format')._(': '); ?></strong>CSV<?php echo $format.' '.util_make_link($url.'&func=format_csv', $HTML->getConfigurePic(_('Modify this CSV format.'))); ?>
 <?php
+echo $HTML->information(_('By default, export uses filter as setup in the browse page. To overwrite, please use Advanced Options'));
+echo html_e('h2', array(), _('Export as a CSV file'));
+echo html_e('strong', array(), _('Selected CSV Format')._(': ')).'CSV'.$format.' '.util_make_link($url.'&func=format_csv', $HTML->getConfigurePic(_('Modify this CSV format.')));
 echo $HTML->openForm(array('action' => $url.'&func=downloadcsv', 'method' => 'post'));
 echo html_ao('fieldset', array('id' => 'fieldset1_closed', 'class' => 'coolfieldset'));
 echo html_e('legend', array(), _('Advanced Options'));
 echo html_ao('div');
+echo html_e('p', array(), _('Overwrite default filter. (No filtering)')._(': ').html_e('input', array('type' => 'checkbox', 'name' => 'overwrite_filter', 'value' => 'overwrite')));
 $attrsInputLimitByStartDate = array('type' => 'checkbox', 'id' => 'limitByLastModifiedDate', 'name' => 'limitByLastModifiedDate', 'value' => 1, 'title' => _('Set last modified date limitation for this export. If not enable, not limitation.'));
 $attrsDatePickerLimitByStartDate = array('id' => 'datepicker_start', 'name' => '_changed_from', 'size' => 10, 'maxlength' => 10, 'disabled' => 'disabled');
 echo html_e('p', array(), _('Set dates')._(': ').html_e('br').
 			_('From')._(': ').html_e('input', $attrsInputLimitByStartDate).html_e('input', $attrsDatePickerLimitByStartDate));
 echo html_ac(html_ap() - 2);
-echo html_e('input', array('type' => 'submit', 'value' => _('Download CSV file')));
+echo html_e('p', array(), html_e('input', array('type' => 'submit', 'value' => _('Download CSV file'))));
 echo $HTML->closeForm();
 
 $ath->footer();

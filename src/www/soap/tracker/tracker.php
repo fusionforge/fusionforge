@@ -204,7 +204,8 @@ $server->register(
 		'group_artifact_id'=>'xsd:int',
 		'assigned_to'=>'xsd:int',
 		'status'=>'xsd:int',
-		'changed_from' => 'xsd:int'
+		'changed_from' => 'xsd:int',
+		'overwrite_query' => 'xsd:int'
 	),
 	array('getArtifactsResponse'=>'tns:ArrayOfArtifact'),
 	$uri,$uri.'#getArtifacts','rpc','encoded'
@@ -281,7 +282,8 @@ $server->register(
 		'group_artifact_id'=>'xsd:int',
 		'assigned_to'=>'xsd:int',
 		'status'=>'xsd:int',
-		'changed_from' => 'xsd:int'
+		'changed_from' => 'xsd:int',
+		'overwrite_query' => 'xsd:int'
 	),
 	array('getArtifactsResponse'=>'tns:ArrayOfFlattedArtifact'),
 	$uri,$uri.'#getFlattedArtifacts','rpc','encoded'
@@ -775,7 +777,7 @@ function getArtifactTechnicians($session_ser,$group_id,$group_artifact_id) {
 //
 //	getArtifacts
 //
-function getArtifacts($session_ser, $group_id, $group_artifact_id, $assigned_to, $status, $changed_from) {
+function getArtifacts($session_ser, $group_id, $group_artifact_id, $assigned_to, $status, $changed_from, $overwrite_query) {
 	continue_session($session_ser);
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
@@ -799,7 +801,9 @@ function getArtifacts($session_ser, $group_id, $group_artifact_id, $assigned_to,
 	}
 
 	// this is a bit hacky...
-	if ($assigned_to || $status) {
+	if ($overwrite_query) {
+		$set = 'overwrite';
+	} elseif ($assigned_to || $status) {
 		$set = "custom";
 	} else {
 		$set = false;
@@ -817,7 +821,7 @@ function getArtifacts($session_ser, $group_id, $group_artifact_id, $assigned_to,
 //
 //	getFlattedArtifacts
 //
-function getFlattedArtifacts($session_ser, $group_id, $group_artifact_id, $assigned_to, $status, $changed_from) {
+function getFlattedArtifacts($session_ser, $group_id, $group_artifact_id, $assigned_to, $status, $changed_from, $overwrite_query) {
 	continue_session($session_ser);
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
@@ -841,7 +845,9 @@ function getFlattedArtifacts($session_ser, $group_id, $group_artifact_id, $assig
 	}
 
 	// this is a bit hacky...
-	if ($assigned_to || $status) {
+	if ($overwrite_query) {
+		$set = 'overwrite';
+	} elseif ($assigned_to || $status) {
 		$set = "custom";
 	} else {
 		$set = false;

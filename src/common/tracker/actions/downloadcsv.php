@@ -36,12 +36,11 @@ if (!$af || !is_object($af)) {
 
 $headers = getIntFromRequest('headers');
 $sep = getFilteredStringFromRequest('sep', '/^[,;]$/', ',');
-$date = date('Y-m-d-His');
 $date_format = _('Y-m-d');
 
 sysdebug_off();
 header('Content-type: text/csv');
-header('Content-disposition: filename="trackers-'.$date.'.csv"');
+header('Content-disposition: filename="trackers-'.date('Y-m-d-His').'.csv"');
 
 $offset = getStringFromRequest('offset');
 $_sort_col = getStringFromRequest('_sort_col');
@@ -51,6 +50,10 @@ $set = getStringFromRequest('set');
 $_assigned_to = getIntFromRequest('_assigned_to');
 $_status = getIntFromRequest('_status');
 $received_changed_from = getStringFromRequest('_changed_from', 0);
+$overwrite_filter = getStringFromRequest('overwrite_filter', false);
+if ($overwrite_filter) {
+	$set = $overwrite_filter;
+}
 if ($received_changed_from) {
 	$arrDateBegin = DateTime::createFromFormat($date_format, $received_changed_from);
 	$_changed_from = $arrDateBegin->getTimestamp();
