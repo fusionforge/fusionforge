@@ -182,6 +182,7 @@ $server->wsdl->addComplexType(
 		'extra_fields'=>array('name'=>'extra_fields', 'type' => 'tns:ArrayOfArtifactExtraFieldsData')
 	)
 );
+
 //ArrayOfArtifact
 $server->wsdl->addComplexType(
 	'ArrayOfArtifact',
@@ -207,6 +208,83 @@ $server->register(
 	),
 	array('getArtifactsResponse'=>'tns:ArrayOfArtifact'),
 	$uri,$uri.'#getArtifacts','rpc','encoded'
+);
+
+
+// ArtifactExtraFieldsValue
+$server->wsdl->addComplexType(
+	'ArtifactExtraFieldsValue',
+	'complexType',
+	'struct',
+	'sequence',
+	'',
+	array(
+		'extra_field_name' => array('name'=>'extra_field_name', 'type' => 'xsd:string'),
+		'field_value' => array('name'=>'field_value', 'type' => 'xsd:string')
+	)
+);
+
+//ArrayOfArtifactExtraFieldsValue
+$server->wsdl->addComplexType(
+	'ArrayOfArtifactExtraFieldsValue',
+	'complexType',
+	'array',
+	'',
+	'SOAP-ENC:Array',
+	array(),
+	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:ArtifactExtraFieldsValue[]')),
+	'tns:ArtifactExtraFieldsValue'
+);
+
+//FlattedArtifact
+$server->wsdl->addComplexType(
+	'FlattedArtifact',
+	'complexType',
+	'struct',
+	'sequence',
+	'',
+	array(
+		'artifact_id' => array('name'=>'artifact_id', 'type' => 'xsd:int'),
+		'group_artifact_id' => array('name'=>'group_artifact_id', 'type' => 'xsd:int'),
+		'status_id' => array('name'=>'status_id', 'type' => 'xsd:int'),
+		'priority' => array('name'=>'priority', 'type' => 'xsd:int'),
+		'submitted_by' => array('name'=>'submitted_by', 'type' => 'xsd:int'),
+		'assigned_to' => array('name'=>'assigned_to', 'type' => 'xsd:int'),
+		'open_date' => array('name'=>'open_date', 'type' => 'xsd:int'),
+		'last_modified_date' => array('name'=>'last_modified_date', 'type' => 'xsd:int'),
+		'close_date' => array('name'=>'close_date', 'type' => 'xsd:int'),
+		'summary' => array('name'=>'summary', 'type' => 'xsd:string'),
+		'details' => array('name'=>'details', 'type' => 'xsd:string'),
+		'extra_fields'=>array('name'=>'extra_fields', 'type' => 'tns:ArrayOfArtifactExtraFieldsValue')
+	)
+);
+
+
+//ArrayOfFlattedArtifact
+$server->wsdl->addComplexType(
+	'ArrayOfFlattedArtifact',
+	'complexType',
+	'array',
+	'',
+	'SOAP-ENC:Array',
+	array(),
+	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:FlattedArtifact[]')),
+	'tns:FlattedArtifact'
+);
+
+//getFlattedArtifacts
+$server->register(
+	'getFlattedArtifacts',
+	array(
+		'session_ser'=>'xsd:string',
+		'group_id'=>'xsd:int',
+		'group_artifact_id'=>'xsd:int',
+		'assigned_to'=>'xsd:int',
+		'status'=>'xsd:int',
+		'changed_from' => 'xsd:int'
+	),
+	array('getArtifactsResponse'=>'tns:ArrayOfFlattedArtifact'),
+	$uri,$uri.'#getFlattedArtifacts','rpc','encoded'
 );
 
 //addArtifact
@@ -737,6 +815,49 @@ function getArtifacts($session_ser, $group_id, $group_artifact_id, $assigned_to,
 }
 
 //
+//	getFlattedArtifacts
+//
+function getFlattedArtifacts($session_ser, $group_id, $group_artifact_id, $assigned_to, $status, $changed_from) {
+	continue_session($session_ser);
+	$grp = group_get_object($group_id);
+	if (!$grp || !is_object($grp)) {
+		return new soap_fault('','getFlattedArtifacts','Could Not Get Project','Could Not Get Project');
+	} elseif ($grp->isError()) {
+		return new soap_fault('','getFlattedArtifacts',$grp->getErrorMessage(),$grp->getErrorMessage());
+	}
+
+	$at = new ArtifactType($grp,$group_artifact_id);
+	if (!$at || !is_object($at)) {
+		return new soap_fault('','getFlattedArtifacts','Could Not Get ArtifactType','Could Not Get ArtifactType');
+	} elseif ($at->isError()) {
+		return new soap_fault('','getFlattedArtifacts',$at->getErrorMessage(),$at->getErrorMessage());
+	}
+
+	$af = new ArtifactFactory($at);
+	if (!$af || !is_object($af)) {
+		return new soap_fault('','getFlattedArtifacts','Could Not Get ArtifactFactory','Could Not Get ArtifactFactory');
+	} elseif ($af->isError()) {
+		return new soap_fault('','getFlattedArtifacts',$af->getErrorMessage(),$af->getErrorMessage());
+	}
+
+	// this is a bit hacky...
+	if ($assigned_to || $status) {
+		$set = "custom";
+	} else {
+		$set = false;
+	}
+
+	$af->setup(0, '', '', 0, $set, $assigned_to, $status, array(), $changed_from);
+	$artifacts = $af->getArtifacts();
+	if ($artifacts === false) {
+		return new soap_fault('','getFlattedArtifacts',$af->getErrorMessage(),$af->getErrorMessage());
+	}
+	return util_strip_unprintable(flattedartifacts_to_soap($artifacts));
+
+}
+
+
+//
 //	Get artifact by ID
 //
 function getArtifact($session_ser,$group_id,$group_artifact_id,$artifact_id) {
@@ -760,7 +881,6 @@ function artifacts_to_soap($at_arr) {
 
 				if(count($at_arr[$i]) < 1) { continue; }
 				$flddata=array();
-				$fldelementdata=array();
 				$extrafieldsdata=array();
 				$extrafieldsdata=$at_arr[$i]->getExtraFieldData();
 
@@ -778,6 +898,58 @@ function artifacts_to_soap($at_arr) {
 							//** Retrieving the extra field data
 							$fldarr=array('extra_field_id'=>$ky,'field_data'=>$vl);
 						}
+						$flddata[]=$fldarr;
+						unset($fldarr);
+					}
+				}
+				$return[]=array(
+					'artifact_id'=>$at_arr[$i]->data_array['artifact_id'],
+					'group_artifact_id'=>$at_arr[$i]->data_array['group_artifact_id'],
+					'status_id'=>$at_arr[$i]->data_array['status_id'],
+					'priority'=>$at_arr[$i]->data_array['priority'],
+					'submitted_by'=>$at_arr[$i]->data_array['submitted_by'],
+					'assigned_to'=>$at_arr[$i]->data_array['assigned_to'],
+					'open_date'=>$at_arr[$i]->data_array['open_date'],
+					'last_modified_date'=>$at_arr[$i]->data_array['last_modified_date'],
+					'close_date'=>$at_arr[$i]->data_array['close_date'],
+					'summary'=>$at_arr[$i]->data_array['summary'],
+					'details'=>$at_arr[$i]->data_array['details'],
+					'extra_fields'=>$flddata
+				);
+			}
+		}
+	}
+	return $return;
+}
+
+//
+//	convert array of artifacts to soap data structure
+//
+function flattedartifacts_to_soap($at_arr) {
+	$return = array();
+	if (is_array($at_arr) && count($at_arr) > 0) {
+		for ($i=0; $i<count($at_arr); $i++) {
+			if ($at_arr[$i]->isError()) {
+				//skip if error
+			} else {
+				//NEEDS THOROUGH COMMENTS AND EXPLANATION
+				//***********
+				// Retrieving the artifact details
+				//**checks whether there is any artifact details exists for this object, if not continue with next loop
+
+				if(count($at_arr[$i]) < 1) { continue; }
+				$flddata=array();
+				$extrafieldsdatatext=array();
+				$extrafieldsdatatext=$at_arr[$i]->getExtraFieldDataText();
+
+				//********
+				//** Retrieving the extra field data and the element data
+				//** checks whether there is any extra fields data available for this artifact
+				//** and checks for the extra element data for the multiselect and checkbox type
+				if(is_array($extrafieldsdatatext) && count($extrafieldsdatatext) > 0) {
+					foreach ($extrafieldsdatatext as $extrafielddatatext) {
+						$fldarr = array();
+						$fldarr = array('extra_field_name' => $extrafielddatatext[0], 'field_value' => $extrafielddatatext[1]);
 						$flddata[]=$fldarr;
 						unset($fldarr);
 					}

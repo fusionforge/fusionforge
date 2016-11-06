@@ -23,6 +23,7 @@ FusionForge 6.X:
 * Site Admin: add paging system in userlist page [#799] (TrivialDev)
 * Site Admin: support widgets for forge home page (TrivialDev)
 * Soap: getArtifacts tracker function: support changed_from parameter (TrivialDev)
+* Soap: getFlattedArtifacts function: to return as CSV export. All data in 1 call (TrivialDev)
 * Spellcheck (Anders Jonsson)
 * Taskboard: support multiple taskboards per project [#785] (TrivialDev)
 * Taskboard: support filtering tasks [#786] (TrivialDev)
