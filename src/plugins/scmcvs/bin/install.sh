@@ -44,12 +44,11 @@ case "$1" in
 	fi
 
 	# Restart some services
-	[ -d /etc/ssh ] && invoke-rc.d ssh restart || true
-	[ -d /etc/ssh-nonfree ] && invoke-rc.d ssh-nonfree restart || true
+	[ -d /etc/ssh ] && service $(forge_get_config ssh_service) restart || true
 	;;
 
     remove)
-	rm -f /etc/xinetd.d/fusionforge-plugin-scmgit
+	rm -f /etc/xinetd.d/fusionforge-plugin-scmcvs
 	;;
 
     *)
