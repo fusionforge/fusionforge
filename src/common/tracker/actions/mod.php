@@ -227,8 +227,8 @@ foreach ($pluginsListeners as $pluginsListener) {
 	<?php } ?>
 	<?php if (forge_get_config('use_object_associations')) {
 			$anf = '';
-		if ($this->getAssociationCounter()) {
-			$anf = ' ('.$this->getAssociationCounter().')';
+		if ($ah->getAssociationCounter()) {
+			$anf = ' ('.$ah->getAssociationCounter().')';
 		} ?>
 	<li><a href="#tabber-object-associations"><?php echo _('Associations').$anf; ?></a></li>
 	<?php } ?>
