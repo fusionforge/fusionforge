@@ -135,6 +135,7 @@ class Widget_ProjectLatestDocuments extends Widget {
 							$action .= util_make_link('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$docgroup.'&action=monitorfile&option='.$option.'&fileid='.$doc->getID(), $image, array('title' => $titleMonitor));
 							if (forge_check_perm('docman', $group_id, 'approve') && !$doc->getLocked()) {
 								$action .= util_make_link('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$docgroup.'&action=trashfile&fileid='.$doc->getID(), $HTML->getDeletePic('', _('Move this document to trash')), array('title' => _('Move this document to trash')));
+								$action .= util_make_link('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$docgroup.'&filedetailid='.$doc->getID(), $HTML->getEditFilePic(_('Edit this document')), array('title' => _('Edit this document')));
 							}
 						}
 						$cells[][] = $action;
