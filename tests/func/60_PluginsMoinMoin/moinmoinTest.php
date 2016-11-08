@@ -43,7 +43,7 @@ class PluginMoinMoin extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("Project information updated"));
 
 		$this->waitSystasks();
-		$this->pause("8000"); //wait for cronjob to be executed
+		$this->pause("10000"); //wait for cronjob to be executed
 
 		$this->gotoProject('ProjectA');
 		$this->clickAndWait("link=MoinMoinWiki");
