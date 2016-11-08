@@ -156,8 +156,12 @@ foreach ($pluginsListeners as $pluginsListener) {
 	<?php if ($ah->hasRelations()) { ?>
 	<li><a href="#tabber-relations"><?php echo _('Relations'); ?></a></li>
 	<?php } ?>
-	<?php if (forge_get_config('use_object_associations')) { ?>
-	<li><a href="#tabber-object-associations"><?php echo _('Associations'); ?></a></li>
+	<?php if (forge_get_config('use_object_associations')) {
+		$anf = '';
+		if ($this->getAssociationCounter()) {
+			$anf = ' ('.$this->getAssociationCounter().')';
+		} ?>
+	<li><a href="#tabber-object-associations"><?php echo _('Associations').$anf; ?></a></li>
 	<?php } ?>
 	</ul>
 	<div id="tabber-comments" class="tabbertab">

@@ -54,7 +54,11 @@ if (forge_get_config('use_object_associations')) {
 	echo html_ao('div', array('id' => 'tabber'));
 	$elementsLi = array();
 	$elementsLi[] = array('content' => util_make_link('#tabber-changelog', _('Change Log & Notes'), array('title' => _('View Changelog & Notes.')), true));
-	$elementsLi[] = array('content' => util_make_link('#tabber-association', _('Associations'), array('title' => _('View Associated Objects.')), true));
+	$anf = '';
+	if ($frsr->getAssociationCounter()) {
+		$anf = ' ('.$frsr->getAssociationCounter().')';
+	}
+	$elementsLi[] = array('content' => util_make_link('#tabber-association', _('Associations').$anf, array('title' => _('View Associated Objects.')), true));
 	echo $HTML->html_list($elementsLi);
 	echo html_ao('div', array('id' => 'tabber-changelog', 'class' => 'tabbertab'));
 }

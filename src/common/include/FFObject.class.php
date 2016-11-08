@@ -48,6 +48,12 @@ class FFObject extends FFError {
 	 */
 	var $associatedFromArray = array();
 
+	/**
+	 *
+	 * @var int	$associationCounter
+	 */
+	var $associationCounter = 0;
+
 	function __construct($id = false, $objectType = false) {
 		parent::__construct();
 		if (forge_get_config('use_object_associations') && $id && $objectType) {
@@ -56,6 +62,7 @@ class FFObject extends FFError {
 			if ($res && db_numrows($res)) {
 				while ($arr = db_fetch_array($res)) {
 					$this->associatedToArray[$arr[0]][$arr[1]][] = $arr[2];
+					$this->associationCounter++;
 				}
 			}
 			$res = db_query_params('SELECT from_object_type, from_ref_id, from_id FROM fusionforge_object_assiociation WHERE to_id = $1 AND to_object_type = $2',
@@ -63,6 +70,7 @@ class FFObject extends FFError {
 			if ($res && db_numrows($res)) {
 				while ($arr = db_fetch_array($res)) {
 					$this->associatedFromArray[$arr[0]][$arr[1]][] = $arr[2];
+					$this->associationCounter++;
 				}
 			}
 		}
@@ -75,6 +83,10 @@ class FFObject extends FFError {
 
 	function getAssociatedFrom() {
 		return $this->associatedFromArray;
+	}
+
+	function getAssociationCounter() {
+		return $this->associationCounter;
 	}
 
 	function getRefID($object) {
