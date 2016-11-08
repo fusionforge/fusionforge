@@ -102,18 +102,29 @@ if ($rows > 0) {
 				$rolesarray[$role->getID()]=$role->getName();
 			}
 		}
+		if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RELEASE && !isset($packages)) {
+			$packagesarray = array();
+			$packages = $packages = get_frs_packages($ath->getGroup());
+			foreach ($packages as $package) {
+				$packagesarray[$package->getID()]=$package->getName();
+			}
+		}
 
 		if (!empty($elearray)) {
 			$optrows=count($elearray);
 
 			echo '<td>';
 			for ($j=0; $j <$optrows; $j++) {
-
-				if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_USER) {
-					echo $rolesarray[$elearray[$j]['element_name']];
-				} else {
-					echo $elearray[$j]['element_name'];
-					echo util_make_link('/tracker/admin/?update_opt=1&id='.$elearray[$j]['element_id'].'&group_id='.$group_id.'&atid='.$ath->getID().'&boxid='.$efarr[$i]['extra_field_id'], $HTML->getEditFilePic(_('Edit')));
+				switch ($efarr[$i]['field_type']) {
+					case ARTIFACT_EXTRAFIELDTYPE_USER:
+						echo $rolesarray[$elearray[$j]['element_name']];
+						break;
+					case ARTIFACT_EXTRAFIELDTYPE_RELEASE:
+						echo $packagesarray[$elearray[$j]['element_name']];
+						break;
+					default:
+						echo $elearray[$j]['element_name'];
+						echo util_make_link('/tracker/admin/?update_opt=1&id='.$elearray[$j]['element_id'].'&group_id='.$group_id.'&atid='.$ath->getID().'&boxid='.$efarr[$i]['extra_field_id'], $HTML->getEditFilePic(_('Edit')));
 				}
 				echo util_make_link('/tracker/admin/?delete_opt=1&id='.$elearray[$j]['element_id'].'&group_id='.$group_id.'&atid='.$ath->getID().'&boxid='.$efarr[$i]['extra_field_id'], $HTML->getDeletePic(_('Delete')));
 				echo '<br />';
@@ -121,19 +132,22 @@ if ($rows > 0) {
 		} else {
 			echo '<td>';
 		}
-
 		echo "</td>\n";
 		echo "<td>\n";
-		if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_SELECT
-			|| $efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RADIO
-			|| $efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX
-			|| $efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT
-			|| $efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
+		switch ($efarr[$i]['field_type']) {
+			case ARTIFACT_EXTRAFIELDTYPE_USER:
+				echo util_make_link('/tracker/admin/?add_opt=1&boxid='.$efarr[$i]['extra_field_id'].'&group_id='.$group_id.'&atid='.$ath->getID(), '['._('Add/remove roles for user choices').']');
+				break;
+			case ARTIFACT_EXTRAFIELDTYPE_RELEASE:
+				echo util_make_link('/tracker/admin/?add_opt=1&boxid='.$efarr[$i]['extra_field_id'].'&group_id='.$group_id.'&atid='.$ath->getID(), '['._('Add/remove packages for release choices').']');
+				break;
+			case ARTIFACT_EXTRAFIELDTYPE_SELECT:
+			case ARTIFACT_EXTRAFIELDTYPE_RADIO:
+			case ARTIFACT_EXTRAFIELDTYPE_CHECKBOX:
+			case ARTIFACT_EXTRAFIELDTYPE_MULTISELECT:
+			case ARTIFACT_EXTRAFIELDTYPE_STATUS:
 			echo util_make_link('/tracker/admin/?add_opt=1&boxid='.$efarr[$i]['extra_field_id'].'&group_id='.$group_id.'&atid='.$ath->getID(), '['._('Add/Reorder choices').']');
 		}
-		if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_USER) {
-					echo util_make_link('/tracker/admin/?add_opt=1&boxid='.$efarr[$i]['extra_field_id'].'&group_id='.$group_id.'&atid='.$ath->getID(), '['._('Add/remove roles for user choices').']');
-				}
 		echo "</td>\n";
 		echo "</tr>\n";
 	}
@@ -183,52 +197,70 @@ $jsvariable ="
 	var size = '"._("Size")."';
 	var maxLength = '". _("Maxlength")."';
 	var rows = '"._("Rows")."';
-	var columns = '". _("Columns")."';";
+	var columns = '". _("Columns")."';
+	var typeSelect = ".ARTIFACT_EXTRAFIELDTYPE_SELECT.";
+	var typeCheckBox = ".ARTIFACT_EXTRAFIELDTYPE_CHECKBOX.";
+	var typeRadio = ".ARTIFACT_EXTRAFIELDTYPE_RADIO.";
+	var typeText = ".ARTIFACT_EXTRAFIELDTYPE_TEXT.";
+	var typeMultiSelect = ".ARTIFACT_EXTRAFIELDTYPE_MULTISELECT.";
+	var typeTextArea = ".ARTIFACT_EXTRAFIELDTYPE_TEXTAREA.";
+	var typeStatus = ".ARTIFACT_EXTRAFIELDTYPE_STATUS.";
+	var typeRelation = ".ARTIFACT_EXTRAFIELDTYPE_RELATION.";
+	var typeInteger = ".ARTIFACT_EXTRAFIELDTYPE_INTEGER.";
+	var typeFormula = ".ARTIFACT_EXTRAFIELDTYPE_FORMULA.";
+	var typeDateTime = ".ARTIFACT_EXTRAFIELDTYPE_DATETIME.";
+	var typeUser = ".ARTIFACT_EXTRAFIELDTYPE_USER.";
+	var typeRelease = ".ARTIFACT_EXTRAFIELDTYPE_RELEASE.";";
+
 $javascript = <<<'EOS'
 	$("p[class^='for-']").hide()
-	$("input[value=1]").on('change', function(){
+	$("input[value="+typeSelect+"]").on('change', function(){
 		$("p.for-select").show();
 		$("p[class^='for-']:not(.for-select)").hide();
 	});
-	$("input[value=2]").on('change', function(){
+	$("input[value="+typeCheckBox+"]").on('change', function(){
 		$("p.for-check").show();
 		$("p[class^='for-']:not(.for-check)").hide();
 	});
-	$("input[value=3]").on('change', function(){
+	$("input[value="+typeRadio+"]").on('change', function(){
 		$("p.for-radio").show();
 		$("p[class^='for-']:not(.for-radio)").hide();
 	});
-	$("input[value=4]").on('change', function(){
+	$("input[value="+typeText+"]").on('change', function(){
 		$("label[for='attribute1']").text(size);
 		$("label[for='attribute2']").text(maxLength);
 		$("p.for-text").show();
 		$("p[class^='for-']:not(.for-text)").hide();
 	});
-	$("input[value=5]").on('change', function(){
+	$("input[value="+typeMultiSelect+"]").on('change', function(){
 		$("p.for-multiselect").show();
 		$("p[class^='for-']:not(.for-multiselect)").hide();
 	});
-	$("input[value=6]").on('change', function(){
+	$("input[value="+typeTextArea+"]").on('change', function(){
 		$("label[for='attribute1']").text(rows);
 		$("label[for='attribute2']").text(columns);
 		$("p.for-textarea").show();
 		$("p[class^='for-']:not(.for-textarea)").hide();
 	});
-	$("input[value=9]").on('change', function(){
+	$("input[value="+typeRelation+"]").on('change', function(){
 		$("label[for='attribute1']").text(size);
 		$("label[for='attribute2']").text(maxLength);
 		$("p.for-relation").show();
 		$("p[class^='for-']:not(.for-relation)").hide();
 	});
-	$("input[value=10]").on('change', function(){
+	$("input[value="+typeInteger+"]").on('change', function(){
 		$("label[for='attribute1']").text(size);
 		$("label[for='attribute2']").text(maxLength);
 		$("p.for-integer").show();
 		$("p[class^='for-']:not(.for-integer)").hide();
 	});
-	$("input[value=14]").on('change', function(){
+	$("input[value="+typeUser+"]").on('change', function(){
 		$("p.for-user").show();
 		$("p[class^='for-']:not(.for-user)").hide();
+	});
+	$("input[value="+typeRelease+"]").on('change', function(){
+		$("p.for-release").show();
+		$("p[class^='for-']:not(.for-release)").hide();
 	});
 
 EOS;
@@ -251,16 +283,12 @@ echo html_e('label', array('for'=>'attribute2'), _('Maxlength')._(':'));
 echo html_e('input', array('type'=>'text', 'name'=>'attribute2', 'value'=>'80', 'size'=>'2', 'maxlength'=>'2')).html_e('br');
 echo html_ac(html_ap() - 1);
 
-echo html_ao('p', array('class'=>'for-text for-textarea for-integer'));
-
-echo html_ac(html_ap() - 1);
-
 echo html_ao('p', array('class'=>'for-text'));
 echo _('Pattern');
 echo html_e('input', array('type'=>'text', 'name'=>'pattern', 'value'=>'', 'size'=>'50', 'maxlength'=>'255')).html_e('br');
 echo html_ac(html_ap() - 1);
 
-echo html_ao('p', array('class'=>'for-select for-multiselect for-radio for-check'));
+echo html_ao('p', array('class'=>'for-select for-multiselect for-radio for-check for-release'));
 echo html_build_checkbox('hide100', false, false);
 echo html_e('label', array('for'=>'hide100'), _('Hide the default none value'));
 echo html_e('br');

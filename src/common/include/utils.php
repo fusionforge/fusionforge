@@ -9,6 +9,7 @@
  *	Thorsten Glaser <t.glaser@tarent.de>
  * Copyright 2010-2012, Alain Peyrat - Alcatel-Lucent
  * Copyright 2013,2016, Franck Villaume - TrivialDev
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivalDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -1752,6 +1753,10 @@ function utils_headers_download($filename, $mimetype, $size) {
 	/* https://blogs.msdn.com/b/ie/archive/2008/09/02/ie8-security-part-vi-beta-2-update.aspx?Redirected=true */
 	/* IE6 ignores this, but IE6 users have higher security concerns than this.. */
 	header('X-Content-Type-Options: nosniff');
+}
+
+function compareObjectName ($a, $b) {
+	return strcoll($a->getName(),$b->getName()) ;
 }
 
 // Local Variables:

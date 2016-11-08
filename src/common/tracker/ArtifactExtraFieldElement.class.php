@@ -241,7 +241,19 @@ class ArtifactExtraFieldElement extends FFError {
 	 * @return	string	The name.
 	 */
 	function getName() {
-		return $this->data_array['element_name'];
+		switch ($this->ArtifactExtraField->getType()) {
+			case ARTIFACT_EXTRAFIELDTYPE_USER:
+				$role = RBACEngine::getInstance()->getRoleById($this->data_array['element_name']);
+				$name = $role->getName();
+				break;
+			case ARTIFACT_EXTRAFIELDTYPE_RELEASE:
+				$package = frspackage_get_object($this->data_array['element_name']);
+				$name = $package->getName();
+				break;
+			default:
+				$name = $this->data_array['element_name'];
+		}
+		return $name;
 	}
 
 	/**

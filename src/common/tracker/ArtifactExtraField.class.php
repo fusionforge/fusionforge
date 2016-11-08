@@ -36,10 +36,16 @@ define('ARTIFACT_EXTRAFIELDTYPE_STATUS',7);
 //define('ARTIFACT_EXTRAFIELDTYPE_ASSIGNEE',8);
 define('ARTIFACT_EXTRAFIELDTYPE_RELATION',9);
 define('ARTIFACT_EXTRAFIELDTYPE_INTEGER',10);
+/* reserved for aljeux extension, for merge into FusionForge */
 define('ARTIFACT_EXTRAFIELDTYPE_FORMULA',11);
+/* reserved for Evolvis extension, for merge into FusionForge */
 define('ARTIFACT_EXTRAFIELDTYPE_DATETIME',12);
+/* 12: reserved DATETIME*/
+/* 13: reserved SLA */
 define('ARTIFACT_EXTRAFIELDTYPE_SLA',13);
 define('ARTIFACT_EXTRAFIELDTYPE_USER',14);
+/* 15: reserved MULTIUSER */
+define('ARTIFACT_EXTRAFIELDTYPE_RELEASE',16);
 
 define ("ARTIFACT_EXTRAFIELDTYPE_SINGLECHOICETYPE", serialize (array (ARTIFACT_EXTRAFIELDTYPE_SELECT, ARTIFACT_EXTRAFIELDTYPE_RADIO, ARTIFACT_EXTRAFIELDTYPE_STATUS)));
 define ("ARTIFACT_EXTRAFIELDTYPE_MULTICHOICETYPE", serialize (array (ARTIFACT_EXTRAFIELDTYPE_CHECKBOX, ARTIFACT_EXTRAFIELDTYPE_MULTISELECT)));
@@ -555,7 +561,7 @@ class ArtifactExtraField extends FFError {
 				$this->setError(_('Unable to set default value')._(':').$default);
 				$return = false;
 			}
-		} elseif (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPE_VALUETYPE)) || $type == ARTIFACT_EXTRAFIELDTYPE_USER) {
+		} elseif (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPE_VALUETYPE)) || $type == ARTIFACT_EXTRAFIELDTYPE_USER || $type == ARTIFACT_EXTRAFIELDTYPE_RELEASE) {
 			$efID = $this->getID();
 			$res = db_query_params ('SELECT default_value FROM artifact_extra_field_default WHERE extra_field_id=$1',
 					array ($efID)) ;
@@ -603,6 +609,7 @@ class ArtifactExtraField extends FFError {
 	 * @return	string|integer|array
 	 */
 	function getDefaultValues() {
+		$return = false;
 		$res = db_query_params ('SELECT default_value FROM artifact_extra_field_default WHERE extra_field_id=$1',
 				array ($this->getID()));
 		$type = $this->getType();
@@ -612,7 +619,7 @@ class ArtifactExtraField extends FFError {
 			if ($type == ARTIFACT_EXTRAFIELDTYPE_INTEGER && is_null($return)) {
 				$return = 0;
 			}
-		} elseif ($type == ARTIFACT_EXTRAFIELDTYPE_USER) {
+		} elseif ($type == ARTIFACT_EXTRAFIELDTYPE_USER || $type == ARTIFACT_EXTRAFIELDTYPE_RELEASE) {
 			$row = db_fetch_array($res);
 			if (!$row) {
 				$return = 100;
@@ -647,7 +654,8 @@ class ArtifactExtraField extends FFError {
 			ARTIFACT_EXTRAFIELDTYPE_STATUS => _('Status'),
 			ARTIFACT_EXTRAFIELDTYPE_RELATION => _('Relation between artifacts'),
 			ARTIFACT_EXTRAFIELDTYPE_INTEGER => _('Integer'),
-			ARTIFACT_EXTRAFIELDTYPE_USER => _('User Select Box')
+			ARTIFACT_EXTRAFIELDTYPE_USER => _('User'),
+			ARTIFACT_EXTRAFIELDTYPE_RELEASE => _('Release')
 			);
 	}
 
@@ -691,7 +699,7 @@ class ArtifactExtraField extends FFError {
 					}
 					$return[] = $row;
 				}
-			} elseif ($type == ARTIFACT_EXTRAFIELDTYPE_USER) {
+			} elseif ($type == ARTIFACT_EXTRAFIELDTYPE_USER || $type == ARTIFACT_EXTRAFIELDTYPE_RELEASE) {
 				while ($row = db_fetch_array($res)) {
 					if ($row['element_id']==$default) {
 						$row['is_default']=1;
@@ -797,12 +805,11 @@ class ArtifactExtraField extends FFError {
 		$autoassign = ($autoassign ? 1 : 0);
 		$is_hidden_on_submit = ($is_hidden_on_submit ? 1 : 0);
 		$is_disabled = ($is_disabled ? 1 : 0);
-		$parent = (is_integer($parent) ? $parent : 100);
+		$parent = ((integer)$parent ? $parent : 100);
 
 		if (!($alias = $this->generateAlias($alias,$name))) {
 			return false;
 		}
-
 		$result = db_query_params ('UPDATE artifact_extra_field_list
 			SET field_name = $1,
 			description = $2,

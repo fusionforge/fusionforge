@@ -113,7 +113,7 @@ if (!$ac || !is_object($ac)) {
 	} else {
 		echo html_e('input', array('type'=>'hidden', 'name'=>'pattern', 'value'=>''));
 	}
-	if (in_array($efType, array(ARTIFACT_EXTRAFIELDTYPE_RADIO, ARTIFACT_EXTRAFIELDTYPE_CHECKBOX,ARTIFACT_EXTRAFIELDTYPE_SELECT,ARTIFACT_EXTRAFIELDTYPE_MULTISELECT))) {
+	if (in_array($efType, array(ARTIFACT_EXTRAFIELDTYPE_RADIO, ARTIFACT_EXTRAFIELDTYPE_CHECKBOX,ARTIFACT_EXTRAFIELDTYPE_SELECT,ARTIFACT_EXTRAFIELDTYPE_MULTISELECT,ARTIFACT_EXTRAFIELDTYPE_USER,ARTIFACT_EXTRAFIELDTYPE_RELEASE))) {
 		echo html_ao('p');
 		echo html_build_checkbox('hide100', false, !$ac->getShow100());
 		echo html_e('label', array('for'=>'hide100'), _('Hide the default none value'));
@@ -123,7 +123,11 @@ if (!$ac || !is_object($ac)) {
 		echo html_e('label', array('for'=>'show100label'), html_e('b', array(), _('Label for the none value')).html_e('br'));
 		echo html_e('input', array('type'=>'text', 'name'=>'show100label', 'value'=>$ac->getShow100label(), 'size'=>'30'));
 		echo html_ac(html_ap() - 1);
-
+	} else {
+		echo html_e('input', array('type'=>'hidden', 'name'=>'hide100', 'value'=>0));
+		echo html_e('input', array('type'=>'hidden', 'name'=>'show100label', 'value'=>''));
+	}
+	if (in_array($efType, array(ARTIFACT_EXTRAFIELDTYPE_RADIO, ARTIFACT_EXTRAFIELDTYPE_CHECKBOX,ARTIFACT_EXTRAFIELDTYPE_SELECT,ARTIFACT_EXTRAFIELDTYPE_MULTISELECT))) {
 		$pfarr = $ath->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_RADIO, ARTIFACT_EXTRAFIELDTYPE_CHECKBOX,ARTIFACT_EXTRAFIELDTYPE_SELECT,ARTIFACT_EXTRAFIELDTYPE_MULTISELECT));
 		$parentField = array();
 		$progenyField = $ac->getProgeny();
@@ -139,11 +143,9 @@ if (!$ac || !is_object($ac)) {
 		echo html_build_select_box_from_arrays(array_keys($parentField), array_values($parentField), 'parent', $ac->getParent(), true, 'none').html_e('br');
 		echo html_ac(html_ap() - 1);
 	} else {
-		echo html_e('input', array('type'=>'hidden', 'name'=>'hide100', 'value'=>0));
-		echo html_e('input', array('type'=>'hidden', 'name'=>'show100label', 'value'=>''));
 		echo html_e('input', array('type'=>'hidden', 'name'=>'parent', 'value'=>100));
 	}
-	if (in_array($efType, array(ARTIFACT_EXTRAFIELDTYPE_RADIO, ARTIFACT_EXTRAFIELDTYPE_SELECT))) {
+	if (in_array($efType, array(ARTIFACT_EXTRAFIELDTYPE_RADIO, ARTIFACT_EXTRAFIELDTYPE_SELECT, ARTIFACT_EXTRAFIELDTYPE_RELEASE))) {
 		echo html_ao('p');
 		echo html_build_checkbox('autoassign', false, $ac->isAutoAssign());
 		echo html_e('label', array('for'=>'autoassign'), _('Field that triggers auto-assignment rules'));
@@ -155,58 +157,37 @@ if (!$ac || !is_object($ac)) {
 	switch ($efType) {
 		case ARTIFACT_EXTRAFIELDTYPE_TEXT:
 			echo html_ao('p');
-			echo html_e('label', array('for'=>'default'),_('Default value'));
-			$attrs = array('type'=>'text', 'id'=>'default', 'name'=>'default', 'value'=>$ac->getDefaultValues(), 'size'=>$ac->getAttribute1(), 'maxlength'=>$ac->getAttribute2());
-			if ($ac->getPattern() != '') {
-				$attrs['pattern'] = $ac->getPattern();
-			}
-			echo html_e('input', $attrs);
+			echo html_e('label', array('for'=>'extra_fields['.$ac->getID().']'),_('Default value'));
+			echo $ath->renderTextField($ac->getID(),$ac->getDefaultValues(), $ac->getAttribute1(), $ac->getAttribute2());
 			echo html_ac(html_ap() - 1);
 			break;
 		case ARTIFACT_EXTRAFIELDTYPE_TEXTAREA:
 			echo html_ao('p');
-			echo html_e('label', array('for'=>'default'),_('Default value'));
-			echo html_e('textarea', array('id'=>'default', 'name'=>'default', 'value'=>$ac->getDefaultValues(), 'rows'=>$ac->getAttribute1(), 'cols'=>$ac->getAttribute2()));
+			echo html_e('label', array('for'=>'extra_fields['.$ac->getID().']'),_('Default value'));
+			echo html_e('br');
+			echo $ath->renderTextArea($ac->getID(),$ac->getDefaultValues(), $ac->getAttribute1(), $ac->getAttribute2());
 			echo html_ac(html_ap() - 1);
 			break;
 		case ARTIFACT_EXTRAFIELDTYPE_INTEGER:
 			echo html_ao('p');
-			echo html_e('label', array('for'=>'default'),_('Default value'));
-			$attrs = array('type'=>'number', 'id'=>'default', 'name'=>'default', 'value'=>$ac->getDefaultValues(), 'size'=>$ac->getAttribute1(), 'maxlength'=>$ac->getAttribute2(), 'min'=>0);
-			if ($ac->getPattern() != '') {
-				$attrs['pattern'] = $ac->getPattern();
-			}
-			echo html_e('input', $attrs);
+			echo html_e('label', array('for'=>'extra_fields['.$ac->getID().']'),_('Default value'));
+			echo $ath->renderIntegerField($ac->getID(),$ac->getDefaultValues(), $ac->getAttribute1(), $ac->getAttribute2());
 			echo html_ac(html_ap() - 1);
 			break;
 //		case ARTIFACT_EXTRAFIELDTYPE_DATETIME:
 		case ARTIFACT_EXTRAFIELDTYPE_USER:
 			echo html_ao('p');
-			echo html_e('label', array('for'=>'default'),_('Default value'));
-			$arr = $ac->getAvailableValues();
-			$selectedRolesId = array();
-			for ($i=0; $i<count($arr); $i++) {
-				$selectedRolesId[$i]=$arr[$i]['element_name'];
-			}
-			$roles = $ac->getArtifactType()->getGroup()->getRoles();
-			$userArray = array();
-			foreach ($roles as $role) {
-				if (in_array($role->getID(), $selectedRolesId)) {
-					foreach ($role->getUsers() as $user) {
-						$userArray[$user->getID()] = $user->getRealName().(($user->getStatus()=='S') ? ' '._('[SUSPENDED]') : '');
-					}
-				}
-			}
-			$default = $ac->getDefaultValues();
-			if (is_integer($default) && !isset($userArray[$default]) && $default!=100) {
-				$checkedUser = user_get_object($default);
-				$userArray[$checkedUser->getID()] = $checkedUser->getRealName().' '._('[DELETED]');
-			}
-			asort($userArray,SORT_FLAG_CASE | SORT_STRING);
-			$keys = array_keys($userArray);
-			$vals = array_values($userArray);
-			echo html_build_select_box_from_arrays ($keys,$vals,'default',$default,true,'nobody');
+			echo html_e('label', array('for'=>'extra_fields['.$ac->getID().']'),_('Default value'));
+			echo $ath->renderUserField($ac->getID(),$ac->getDefaultValues(),true,'nobody');
 			echo html_ac(html_ap() - 1);
+			break;
+		case ARTIFACT_EXTRAFIELDTYPE_RELEASE:
+			echo $ath->javascript();
+			echo html_ao('p');
+			echo html_e('label', array('for'=>'extra_fields['.$ac->getID().']'),_('Default value'));
+			echo $ath->renderReleaseField($ac->getID(),$ac->getDefaultValues(),true,'none');
+			echo html_ac(html_ap() - 1);
+			break;
 	}
 
 	echo $HTML->warning_msg(_('It is not recommended that you change the custom field name because other things are dependent upon it. When you change the custom field name, all related items will be changed to the new name.'));

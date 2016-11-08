@@ -339,119 +339,15 @@ class ArtifactTypeHtml extends ArtifactType {
 				}
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_USER) {
 				$str = $this->renderUserField($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['show100'],$efarr[$i]['show100label'],$show_any,$text_any,false, $attrs);
+			} elseif  ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RELEASE) {
+				$str = $this->renderReleaseField($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['show100'],$efarr[$i]['show100label'],$show_any,$text_any,false, $attrs);
 			}
 			$template = str_replace('{$PostName:'.$efarr[$i]['field_name'].'}',$post_name,$template);
 			$template = str_replace('{$'.$efarr[$i]['field_name'].'}',$str,$template);
 		}
 		if($template != NULL){
 			if ($mode == 'UPDATE' || $mode == 'NEW') {
-				$jsvariable ="
-	var invalidSelectMsg = '"._("One or more of the selected options is not allowed")."';
-	var invalidInputMsg = '". _("This choice is not allowed")."';";
-				$javascript = <<<'EOS'
-	$.expr[':'].invalid = function(elem, index, match) {
-		for (let invalid of document.querySelectorAll(':invalid') )  {
-			if (elem === invalid) { return true; }
-		}
-		return false;
-	};
-	$(".autoassign[name^='extra_fields']").on('change', function(){
-		if ($(this).prop('tagName') == 'SELECT') {
-			var elmnts = $(this).children('option:selected');
-		} else {
-			var elmnts = $(this).siblings('input:checked');
-		}
-		elmnts.each(function(i){
-			var aat = $(this).data("autoassignto");
-			$("select#tracker-assigned_to option[value="+aat.id+"]").prop('selected', true);
-			$("span#tracker-assigned_to").text(aat.name);
-		});
-	});
-	$(".with-depcy[name^='extra_fields']").on('change', function(){
-		if ($(this).prop('tagName') == 'SELECT') {
-			var elmnts = $(this).children('option:selected');
-		} else {
-			var elmnts = $(this).siblings('input:checked');
-		}
-		elmnts.each(function(i){
-			var dep = $(this).data("dependency");
-			if (this.value!='100') {
-				$(dep).each(function(j, val) {
-					$("select[name^='extra_fields["+val.field+"]']:invalid, input[name^='extra_fields["+val.field+"]']:invalid").each(function() {
-						this.setCustomValidity("");
-						$(this).off("change.invalid");
-					});
-					$("select[name^='extra_fields["+val.field+"]'] option").each(function(k,opt){
-						if (this.value!='100') {
-							if ($.inArray(parseInt(this.value),val.elmnt)>-1) {
-								$(this).prop('disabled', false).removeClass('option_disabled');
-							} else if (i==0) {
-								$(this).prop('disabled', true);
-								$(this).addClass('option_disabled');
-							}
-						}
-					});
-					$("input[name^='extra_fields["+val.field+"]']").each(function(k,opt){
-						if (this.value!='100') {
-							if ($.inArray(parseInt(this.value),val.elmnt)>-1) {
-								$(this).prop('disabled', false).removeClass($(this).attr('type')+'_disabled');
-							} else if (i==0) {
-								$(this).prop('disabled', true);
-								$(this).addClass($(this).attr('type')+'_disabled');
-							}
-						}
-					});
-				});
-			} else {
-				$(dep.fields).each(function(j, val) {
-					$("select[name^='extra_fields["+val+"]']:invalid, input[name^='extra_fields["+val+"]']:invalid").each(function() {
-						this.setCustomValidity("");
-					});
-					$("select[name^='extra_fields["+val+"]'] option.option_disabled").each(function() {
-						$(this).prop('disabled', false).removeClass('option_disabled');
-					});
-					$("input.radio_disable[name^='extra_fields["+val+"]']").each(function() {
-						$(this).prop('disabled', false).removeClass('radio_disabled');
-					});
-					$("input.checkbox_disabled[name^='extra_fields["+val+"]']").each(function() {
-						$(this).prop('disabled', false).removeClass('checkbox_disabled');
-					});
-				});
-			}
-		});
-		$("select[name^='extra_fields'] option:selected:disabled").parent().each(function() {
-			$(this).children('option:selected:disabled').prop('disabled', false);
-			this.setCustomValidity(invalidSelectMsg);
-			$(this).on("change.invalid", function() {
-				$(this).children('option.option_disabled:not(:disabled):not(:selected)').prop('disabled', true);
-				if (!$(this).children('option.option_disabled:selected').length) {
-					this.setCustomValidity("");
-					$(this).off("change.invalid");
-				}
-			});
-		});
-		$("input[name^='extra_fields']:checked:disabled").each(function() {
-			$(this).prop('disabled', false);
-			this.setCustomValidity(invalidInputMsg);
-			if ($(this).attr('type') == 'radio') {
-				$(this).siblings('input[type="radio"]').on("change.invalid", function() {
-					$(this).siblings('input[type="radio"]:invalid').prop('disabled', true).addClass('input_disabled').each(function() {
-						this.setCustomValidity("");
-					});
-					$(this).siblings('input[type="radio"]').off("change.invalid");
-					$(this).off("change.invalid");
-				});
-			} else {
-				$(this).on("change.invalid", function() {
-					$(this).prop('disabled', true);
-					this.setCustomValidity("");
-					$(this).off("change.invalid");
-				});
-			}
-		});
-	});
-EOS;
-				echo html_e('script', array( 'type'=>'text/javascript'), '//<![CDATA['."\n".'$(function(){'.$jsvariable."\n".$javascript.'});'."\n".'//]]>');
+				echo $this->javascript();
 			}
 			echo $template;
 		}
@@ -607,7 +503,8 @@ EOS;
 				$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RADIO ||
 				$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT ||
 				$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_STATUS ||
-				$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_USER) {
+				$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_USER ||
+				$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RELEASE	) {
 
 				$return .= '
 					<td class="halfwidth top">'.$name.'<br />{$'.$efarr[$i]['field_name'].'}</td>';
@@ -728,7 +625,7 @@ EOS;
 	}
 
 	/**
-	 * renderUserField - this function builds pop up box with choices.
+	 * renderUserField - this function builds pop up box with users.
 	 *
 	 * @param	int		$extra_field_id	The ID of this field.
 	 * @param	string		$checked	The item that should be checked
@@ -766,6 +663,74 @@ EOS;
 		$keys = array_keys($userArray);
 		$vals = array_values($userArray);
 		return html_build_select_box_from_arrays ($keys,$vals,'extra_fields['.$extra_field_id.']',$checked,$show_100,$text_100,$show_any,$text_any, $allowed, $attrs);
+	}
+
+	/**
+	 * renderReleaseField - this function builds 2 pop up boxes with packages & releases.
+	 *
+	 * @param	int		$extra_field_id	The ID of this field.
+	 * @param	string		$checked	The item that should be checked
+	 * @param	bool|string	$show_100	Whether to show the '100 row'
+	 * @param	string		$text_100	What to call the '100 row'
+	 * @param	bool		$show_any
+	 * @param	string		$text_any
+	 * @param	bool		$allowed
+	 * @param	array		$attrs
+	 * @return	string		HTML code for the box and choices
+	 */
+	function renderReleaseField ($extra_field_id,$checked='xzxz',$show_100=false,$text_100='none',$show_any=false,$text_any='Any', $allowed=false, $attrs = array ()) {
+		if ($text_100 == 'none'){
+			$text_100=_('None');
+		}
+
+		$releasesArray = array();
+		$defaultRelease = $checked;
+		$releaseAttrs = $attrs;
+		$releasesAttrs =  array();
+
+		$packagesArray = array();
+		$defaultPackage = 100;
+		$packageAttrs = array('class'=>'package');
+		$packagesAttrs = array();
+
+		$arr = $this->getExtraFieldElements($extra_field_id);
+		$selectedPackagesId = array();
+		for ($i=0; $i<count($arr); $i++) {
+			$selectedPackagesId[$i]=$arr[$i]['element_name'];
+		}
+		$packages = get_frs_packages($this->getGroup());
+
+		if ((integer)$defaultRelease!=0 && $defaultRelease!=100) {
+			$releaseObj = frsrelease_get_object($defaultRelease);
+			$defaultPackage = $releaseObj->getFRSPackage()->getID();
+		}
+
+		uasort($packages, 'compareObjectName');
+		foreach ($packages as $package) {
+			if (in_array($package->getID(), $selectedPackagesId)) {
+				$packagesArray[$package->getID()] = $package->getName();
+				$releasesList = '';
+				$releases = $package->getReleases();
+				uasort($releases, 'compareObjectName');
+				foreach ($releases as $release) {
+					$releasesArray[$release->getID()] = $release->getName();
+					$releasesList .= (empty($releasesList) ? '':', ').$release->getID();
+					if ($defaultPackage == 100 || $defaultPackage==$package->getID()) {
+						$allowed[] = $release->getID();
+					}
+				}
+				$releasesList = '{"field": '.$extra_field_id.', "elmnt": ['.$releasesList.']}';
+				$packagesAttrs [] = array('data-releases'=>$releasesList);
+			}
+		}
+		$keys = array_keys($packagesArray);
+		$vals = array_values($packagesArray);
+
+		$return = html_build_select_box_from_arrays ($keys,$vals,'package['.$extra_field_id.']',$defaultPackage,$show_100,$text_100,$show_any,$text_any, false, $packageAttrs, $packagesAttrs);
+		$keys = array_keys($releasesArray);
+		$vals = array_values($releasesArray);
+		$return .= html_build_select_box_from_arrays ($keys,$vals,'extra_fields['.$extra_field_id.']',$defaultRelease,$show_100,$text_100,$show_any,$text_any, $allowed, $releaseAttrs, $releasesAttrs);
+		return $return;
 	}
 
 	/**
@@ -1093,6 +1058,143 @@ EOS;
 			$text_100=_('None');
 		}
 		return html_build_select_box($this->getStatuses(),$name,$checked,$show_100,$text_100);
+	}
+
+	function javascript() {
+		$jsvariable ="
+	var invalidSelectMsg = '"._("One or more of the selected options is not allowed")."';
+	var invalidInputMsg = '". _("This choice is not allowed")."';";
+		$javascript = <<<'EOS'
+	$.expr[':'].invalid = function(elem, index, match) {
+		for (let invalid of document.querySelectorAll(':invalid') )  {
+			if (elem === invalid) { return true; }
+		}
+		return false;
+	};
+	$(".package").on('change', function(){
+		$(this).children('option:selected').each(function(i){
+			var releases = $(this).data("releases");
+			$("select[name^='extra_fields["+releases.field+"]']")[0].setCustomValidity("");
+			$("select[name^='extra_fields["+releases.field+"]'] option").not( "[value='100']" ).each(function(j,opt){
+				if (this.value!='100') {
+					if ($.inArray(parseInt(this.value),releases.elmnt)>-1) {
+						$(this).prop('disabled', false).removeClass('option_disabled');
+					} else {
+						$(this).prop('disabled', true);
+						$(this).addClass('option_disabled');
+					}
+				}
+			});
+			$("select[name^='extra_fields["+releases.field+"]'] option:selected:disabled").parent().each(function() {
+				$(this).children('option:selected:disabled').prop('disabled', false);
+				this.setCustomValidity(invalidSelectMsg);
+				$(this).on("change.invalid", function() {
+					$(this).children('option.option_disabled:not(:disabled):not(:selected)').prop('disabled', true);
+					if (!$(this).children('option.option_disabled:selected').length) {
+						this.setCustomValidity("");
+						$(this).off("change.invalid");
+					}
+				});
+			});
+		});
+	});
+	$(".autoassign[name^='extra_fields']").on('change', function(){
+		if ($(this).prop('tagName') == 'SELECT') {
+			var elmnts = $(this).children('option:selected');
+		} else {
+			var elmnts = $(this).siblings('input:checked');
+		}
+		elmnts.each(function(i){
+			var aat = $(this).data("autoassignto");
+			$("select#tracker-assigned_to option[value="+aat.id+"]").prop('selected', true);
+			$("span#tracker-assigned_to").text(aat.name);
+		});
+	});
+	$(".with-depcy[name^='extra_fields']").on('change', function(){
+		if ($(this).prop('tagName') == 'SELECT') {
+			var elmnts = $(this).children('option:selected');
+		} else {
+			var elmnts = $(this).siblings('input:checked');
+		}
+		elmnts.each(function(i){
+			var dep = $(this).data("dependency");
+			if (this.value!='100') {
+				$(dep).each(function(j, val) {
+					$("select[name^='extra_fields["+val.field+"]']:invalid, input[name^='extra_fields["+val.field+"]']:invalid").each(function() {
+						this.setCustomValidity("");
+						$(this).off("change.invalid");
+					});
+					$("select[name^='extra_fields["+val.field+"]'] option").each(function(k,opt){
+						if (this.value!='100') {
+							if ($.inArray(parseInt(this.value),val.elmnt)>-1) {
+								$(this).prop('disabled', false).removeClass('option_disabled');
+							} else if (i==0) {
+								$(this).prop('disabled', true);
+								$(this).addClass('option_disabled');
+							}
+						}
+					});
+					$("input[name^='extra_fields["+val.field+"]']").each(function(k,opt){
+						if (this.value!='100') {
+							if ($.inArray(parseInt(this.value),val.elmnt)>-1) {
+								$(this).prop('disabled', false).removeClass($(this).attr('type')+'_disabled');
+							} else if (i==0) {
+								$(this).prop('disabled', true);
+								$(this).addClass($(this).attr('type')+'_disabled');
+							}
+						}
+					});
+				});
+			} else {
+				$(dep.fields).each(function(j, val) {
+					$("select[name^='extra_fields["+val+"]']:invalid, input[name^='extra_fields["+val+"]']:invalid").each(function() {
+						this.setCustomValidity("");
+					});
+					$("select[name^='extra_fields["+val+"]'] option.option_disabled").each(function() {
+						$(this).prop('disabled', false).removeClass('option_disabled');
+					});
+					$("input.radio_disable[name^='extra_fields["+val+"]']").each(function() {
+						$(this).prop('disabled', false).removeClass('radio_disabled');
+					});
+					$("input.checkbox_disabled[name^='extra_fields["+val+"]']").each(function() {
+						$(this).prop('disabled', false).removeClass('checkbox_disabled');
+					});
+				});
+			}
+		});
+		$("select[name^='extra_fields'] option:selected:disabled").parent().each(function() {
+			$(this).children('option:selected:disabled').prop('disabled', false);
+			this.setCustomValidity(invalidSelectMsg);
+			$(this).on("change.invalid", function() {
+				$(this).children('option.option_disabled:not(:disabled):not(:selected)').prop('disabled', true);
+				if (!$(this).children('option.option_disabled:selected').length) {
+					this.setCustomValidity("");
+					$(this).off("change.invalid");
+				}
+			});
+		});
+		$("input[name^='extra_fields']:checked:disabled").each(function() {
+			$(this).prop('disabled', false);
+			this.setCustomValidity(invalidInputMsg);
+			if ($(this).attr('type') == 'radio') {
+				$(this).siblings('input[type="radio"]').on("change.invalid", function() {
+					$(this).siblings('input[type="radio"]:invalid').prop('disabled', true).addClass('input_disabled').each(function() {
+						this.setCustomValidity("");
+					});
+					$(this).siblings('input[type="radio"]').off("change.invalid");
+					$(this).off("change.invalid");
+				});
+			} else {
+				$(this).on("change.invalid", function() {
+					$(this).prop('disabled', true);
+					this.setCustomValidity("");
+					$(this).off("change.invalid");
+				});
+			}
+		});
+	});
+EOS;
+		return html_e('script', array( 'type'=>'text/javascript'), '//<![CDATA['."\n".'$(function(){'.$jsvariable."\n".$javascript.'});'."\n".'//]]>');
 	}
 
 }

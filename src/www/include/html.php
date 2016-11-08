@@ -648,7 +648,7 @@ function html_build_select_box_from_arrays($vals, $texts, $select_name,
 	//we don't always want the default Any row shown
 	if ($show_any) {
 		$opt_attrs = array('value' => '');
-		if ($checked_val)
+		if ($checked_val ='')
 			$opt_attrs['selected'] = 'selected';
 		$return .= html_e('option', $opt_attrs, util_html_secure($text_any), false);
 		$have_a_subelement = true;
@@ -662,8 +662,9 @@ function html_build_select_box_from_arrays($vals, $texts, $select_name,
 		if (!empty($attrs_100)) {
 			$opt_attrs = array_merge($opt_attrs, $attrs_100);
 		}
-		if ($checked_val)
+		if ($checked_val == '100') {
 			$opt_attrs['selected'] = 'selected';
+		}
 		$return .= html_e('option', $opt_attrs, util_html_secure($text_100), false);
 		$have_a_subelement = true;
 	}

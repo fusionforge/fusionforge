@@ -470,6 +470,7 @@ class ArtifactType extends FFError {
 			WHERE group_artifact_id=$2',
 					array ($extra_field_id,
 					       $this->getID()));
+		$this->fetchData($this->getID());
 		return $res;
 	}
 
@@ -493,6 +494,7 @@ class ArtifactType extends FFError {
 			WHERE group_artifact_id=$2',
 				array ($extra_field_id,
 				       $this->getID()));
+		$this->fetchData($this->getID());
 		return $res;
 	}
 

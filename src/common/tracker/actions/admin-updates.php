@@ -245,7 +245,13 @@ if (getStringFromRequest('add_extrafield')) {
 	$autoassign = getStringFromRequest('autoassign');
 	$is_hidden_on_submit = getStringFromRequest('is_hidden_on_submit');
 	$is_disabled = getStringFromRequest('is_disabled');
-	$default = getStringFromRequest('default', false);
+	$defaultArr = getArrayFromRequest('extra_fields', false);
+	if (isset($defaultArr[$id])) {
+		$default = $defaultArr[$id];
+	} else {
+		$default = false;
+	}
+
 	$ac = new ArtifactExtraField($ath, $id);
 	if (!$ac || !is_object($ac)) {
 		$error_msg .= _('Unable to create ArtifactExtraField Object');
