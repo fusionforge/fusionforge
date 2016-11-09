@@ -71,7 +71,7 @@ if (forge_get_config('use_object_associations')) {
 	echo html_ao('div', array('id' => 'tabbereditfile'));
 	$elementsLi = array();
 	$elementsLi[] = array('content' => util_make_link('#tabbereditfile-version', _('Edit Versions'), array('title' => _('View/Add/Remove document version.')), true));
-	$elementsLi[] = array('content' => util_make_link('#tabbereditfile-association', _('Associations'), array('title' => _('Add/Remove associated objects.')), true));
+	$elementsLi[] = array('content' => util_make_link('#tabbereditfile-association', _('Associations'), array('id' => 'associationtab', 'title' => _('Add/Remove associated objects.')), true));
 	echo $HTML->html_list($elementsLi);
 	echo html_ao('div', array('id' => 'tabbereditfile-version', 'class' => 'tabbertab'));
 }

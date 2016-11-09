@@ -451,6 +451,9 @@ DocManListFileController.prototype =
 					jQuery('#tabbereditfile-association > span').remove();
 					jQuery('#tabbereditfile-association').prepend(data.html);
 				}
+				if (typeof data.htmltab != 'undefined') {
+					jQuery('#associationtab').text(data.htmltab);
+				}
 			}, this));
 
 		jQuery('#editdocdata').attr('action', this.docparams.action);
