@@ -405,6 +405,7 @@ DocManListFileController.prototype =
 					jQuery('#editFile > .feedback').remove();
 					jQuery('#editFile > .error').remove();
 					jQuery('#editFile > .warning_msg').remove();
+					jQuery('#editFile > .information').remove();
 					jQuery('#editFile').prepend(data.html);
 				} else {
 					jQuery('#sortable_doc_version_table > tbody').children().remove();
@@ -445,6 +446,7 @@ DocManListFileController.prototype =
 					jQuery('#tabbereditfile-association > .feedback').remove();
 					jQuery('#tabbereditfile-association > .error').remove();
 					jQuery('#tabbereditfile-association > .warning_msg').remove();
+					jQuery('#tabbereditfile-association > .information').remove();
 					jQuery('#tabbereditfile-association > table').remove();
 					jQuery('#tabbereditfile-association > span').remove();
 					jQuery('#tabbereditfile-association').prepend(data.html);
