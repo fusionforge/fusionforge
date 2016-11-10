@@ -458,7 +458,7 @@ class ArtifactFactory extends FFError {
 					$sortcol = 'submitted_realname';
 					break;
 				case 'last_modified_by':
-					$sortcol = 'assigned_realname';
+					$sortcol = 'last_modified_realname';
 					break;
 			}
 			$ordersql = " ORDER BY Artifacts.group_artifact_id $sortorder, Artifacts.$sortcol $sortorder" ;

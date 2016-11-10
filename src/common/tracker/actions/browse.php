@@ -548,9 +548,8 @@ if ($art_arr && $art_cnt > 0) {
 	}
 
 	$pager = '';
-
 	$browse_fields = explode(',', "id,".$ath->getBrowseList());
-	if (!in_array($_sort_col,$browse_fields)) {
+	if (!in_array($_sort_col,$browse_fields) && $_sort_col!='artifact_id') {
 		$browse_fields[] = $_sort_col;
 	}
 
