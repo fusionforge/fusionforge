@@ -61,16 +61,20 @@ class FFObject extends FFError {
 						array($id, $objectType));
 			if ($res && db_numrows($res)) {
 				while ($arr = db_fetch_array($res)) {
-					$this->associatedToArray[$arr[0]][$arr[1]][] = $arr[2];
-					$this->associationCounter++;
+					if ($this->checkPermWrapper($arr[0], $arr[1])) {
+						$this->associatedToArray[$arr[0]][$arr[1]][] = $arr[2];
+						$this->associationCounter++;
+					}
 				}
 			}
 			$res = db_query_params('SELECT from_object_type, from_ref_id, from_id FROM fusionforge_object_assiociation WHERE to_id = $1 AND to_object_type = $2',
 						array($id, $objectType));
 			if ($res && db_numrows($res)) {
 				while ($arr = db_fetch_array($res)) {
-					$this->associatedFromArray[$arr[0]][$arr[1]][] = $arr[2];
-					$this->associationCounter++;
+					if ($this->checkPermWrapper($arr[0], $arr[1])) {
+						$this->associatedFromArray[$arr[0]][$arr[1]][] = $arr[2];
+						$this->associationCounter++;
+					}
 				}
 			}
 		}
@@ -290,28 +294,26 @@ class FFObject extends FFError {
 		if (count($this->getAssociatedTo()) > 0) {
 			foreach ($this->getAssociatedTo() as $objectType => $objectRefIds) {
 				foreach ($objectRefIds as $objectRefId => $objectIds) {
-					if ($this->checkPermWrapper($objectType, $objectRefId)) {
-						if (!$displayHeader) {
-							$tabletop = array('', _('Associated Object'), _('Associated Object ID'));
-							$classth = array('', '', '');
-							if ($url !== false) {
-								$content .= html_e('p', array(), _('Remove all associations')._(': ').util_make_link($url.'&link=any', $HTML->getDeletePic(_('Drop all associated from and to objects.'))));
-								$tabletop[] = _('Actions');
-								$classth[] = 'unsortable';
-							}
-							$content .= $HTML->listTableTop($tabletop, array(), 'sortable', 'sortable_association', $classth);
-							$displayHeader = true;
+					if (!$displayHeader) {
+						$tabletop = array('', _('Associated Object'), _('Associated Object ID'));
+						$classth = array('', '', '');
+						if ($url !== false) {
+							$content .= html_e('p', array(), _('Remove all associations')._(': ').util_make_link($url.'&link=any', $HTML->getDeletePic(_('Drop all associated from and to objects.'))));
+							$tabletop[] = _('Actions');
+							$classth[] = 'unsortable';
 						}
-						foreach ($objectIds as $objectId) {
-							$cells = array();
-							$cells[][] = _('To');
-							$cells[][] = $objectType;
-							$cells[][] = $this->getLinkObject($objectId, $objectRefId, $objectType);
-							if ($url !== false) {
-								$cells[][] = util_make_link($url.'&link=to&objecttype='.$objectType.'&objectrefid='.$objectRefId.'&objectid='.$objectId, $HTML->getDeletePic(_('Remove this association'), _('Remove this association')));
-							}
-							$content .= $HTML->multiTableRow(array(), $cells);
+						$content .= $HTML->listTableTop($tabletop, array(), 'sortable', 'sortable_association', $classth);
+						$displayHeader = true;
+					}
+					foreach ($objectIds as $objectId) {
+						$cells = array();
+						$cells[][] = _('To');
+						$cells[][] = $objectType;
+						$cells[][] = $this->getLinkObject($objectId, $objectRefId, $objectType);
+						if ($url !== false) {
+							$cells[][] = util_make_link($url.'&link=to&objecttype='.$objectType.'&objectrefid='.$objectRefId.'&objectid='.$objectId, $HTML->getDeletePic(_('Remove this association'), _('Remove this association')));
 						}
+						$content .= $HTML->multiTableRow(array(), $cells);
 					}
 				}
 			}
@@ -319,28 +321,26 @@ class FFObject extends FFError {
 		if (count($this->getAssociatedFrom()) > 0) {
 			foreach ($this->getAssociatedFrom() as $objectType => $objectRefIds) {
 				foreach ($objectRefIds as $objectRefId => $objectIds) {
-					if ($this->checkPermWrapper($objectType, $objectRefId)) {
-						if (!$displayHeader) {
-							$tabletop = array('', _('Associated Object'), _('Associated Object ID'));
-							$classth = array('', '', '');
-							if ($url !== false) {
-								$content .= html_e('p', array(), _('Remove all associations')._(': ').util_make_link($url.'&link=any', $HTML->getDeletePic(_('Remove all associations'), _('Remove all associations'))));
-								$tabletop[] = _('Actions');
-								$classth[] = 'unsortable';
-							}
-							$content .= $HTML->listTableTop($tabletop, array(), 'sortable', 'sortable_association', $classth);
-							$displayHeader = true;
+					if (!$displayHeader) {
+						$tabletop = array('', _('Associated Object'), _('Associated Object ID'));
+						$classth = array('', '', '');
+						if ($url !== false) {
+							$content .= html_e('p', array(), _('Remove all associations')._(': ').util_make_link($url.'&link=any', $HTML->getDeletePic(_('Remove all associations'), _('Remove all associations'))));
+							$tabletop[] = _('Actions');
+							$classth[] = 'unsortable';
 						}
-						foreach ($objectIds as $objectId) {
-							$cells = array();
-							$cells[][] = _('From');
-							$cells[][] = $objectType;
-							$cells[][] = $this->getLinkObject($objectId, $objectRefId, $objectType);
-							if ($url !== false) {
-								$cells[][] = util_make_link($url.'&link=from&objecttype='.$objectType.'&objectrefid='.$objectRefId.'&objectid='.$objectId, $HTML->getDeletePic(_('Remove this association'), _('Remove this association')));
-							}
-							$content .= $HTML->multiTableRow(array(), $cells);
+						$content .= $HTML->listTableTop($tabletop, array(), 'sortable', 'sortable_association', $classth);
+						$displayHeader = true;
+					}
+					foreach ($objectIds as $objectId) {
+						$cells = array();
+						$cells[][] = _('From');
+						$cells[][] = $objectType;
+						$cells[][] = $this->getLinkObject($objectId, $objectRefId, $objectType);
+						if ($url !== false) {
+							$cells[][] = util_make_link($url.'&link=from&objecttype='.$objectType.'&objectrefid='.$objectRefId.'&objectid='.$objectId, $HTML->getDeletePic(_('Remove this association'), _('Remove this association')));
 						}
+						$content .= $HTML->multiTableRow(array(), $cells);
 					}
 				}
 			}
