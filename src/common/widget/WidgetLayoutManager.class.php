@@ -2,7 +2,7 @@
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013-2015, Franck Villaume - TrivialDev
+ * Copyright 2013-2016, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -506,7 +506,7 @@ class WidgetLayoutManager {
 				}
 			}
 		}
-		$this->feedback($owner_id, $owner_type);
+		$this->feedback();
 	}
 
 	function _retrieveStructureOfLayout($layout_id) {
@@ -686,23 +686,11 @@ class WidgetLayoutManager {
 			db_query_params($sql,array($name,$content_id,$owner_type,$owner_id,$layout_id,$column_id));
 			echo db_error();
 		}
-		$this->feedback($owner_id, $owner_type);
+		$this->feedback();
 	}
 
-	protected function feedback($owner_id, $owner_type) {
+	protected function feedback() {
 		global $feedback;
-		$link = util_make_uri('/');
-		if ($owner_type == self::OWNER_TYPE_GROUP) {
-			//retrieve the short name of the project
-			if ($project = ProjectManager::instance()->getProject($owner_id)) {
-				$hp = Codendi_HTMLPurifier::instance();
-				$link = util_make_uri('/projects/'.  $hp->purify($project->getUnixName(), CODENDI_PURIFIER_CONVERT_HTML));
-			}
-		} elseif ($owner_type == self::OWNER_TYPE_USER) {
-			$link = util_make_uri('/my/');
-		} elseif ($owner_type == self::OWNER_TYPE_HOME) {
-			$link = util_make_uri('/');
-		}
 		$feedback .= _('Your dashboard has been updated.');
 	}
 
