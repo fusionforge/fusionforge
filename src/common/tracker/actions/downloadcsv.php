@@ -77,6 +77,7 @@ if ($headers) {
 		'open_date'.$sep.
 		'close_date'.$sep.
 		'last_modified_date'.$sep.
+		'last_modified_by'.$sep.
 		'summary'.$sep.
 		'details'.$sep.
 		'_votes'.$sep.
@@ -112,6 +113,7 @@ for ($i=0; $i<count($at_arr); $i++) {
 		'"'.$open_date.'"'.$sep.
 		'"'.$close_date.'"'.$sep.
 		'"'.$update_date.'"'.$sep.
+		'"'.$at_arr[$i]-->getLastModifiedRealName().'"'.$sep.
 		'"'.fix4csv($at_arr[$i]->getSummary()).'"'.$sep.
 		'"'.fix4csv($at_arr[$i]->getDetails()).'"'.$sep.
 		$votes[0].$sep.
