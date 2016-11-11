@@ -36,7 +36,8 @@ class FFObject extends FFError {
 
 	/**
 	 * store id & objectType of association.
-	 * array[objectType] = array(id, id, ...)
+	 * array[objectType][refId] = array(id, id, ...)
+	 * where objectType is the object class, refId is the reference of the section for permission check, id is the object id itself
 	 *
 	 * @var	array	$associatedToArray
 	 */
