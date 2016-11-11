@@ -43,14 +43,13 @@ class WidgetLayout_Row {
 	function display($readonly, $owner_id, $owner_type) {
 		global $HTML;
 		echo $HTML->listTableTop(array(), array(), '', 'mainwidget_table'.$this->id);
-		echo html_ao('tbody');
 		echo html_ao('tr', array('style' => 'vertical-align:top;'));
 		$last = count($this->columns) - 1;
 		$i = 0;
 		foreach($this->columns as $key => $nop) {
 			$this->columns[$key]->display($readonly, $owner_id, $owner_type, $is_last = ($i++ == $last));
 		}
-		echo html_ac(html_ap() -2);
+		echo html_ac(html_ap() -1);
 		echo $HTML->listTableBottom();
 	}
 
