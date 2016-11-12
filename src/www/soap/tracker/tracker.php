@@ -176,7 +176,7 @@ $server->wsdl->addComplexType(
 		'assigned_to' => array('name'=>'assigned_to', 'type' => 'xsd:int'),
 		'open_date' => array('name'=>'open_date', 'type' => 'xsd:int'),
 		'last_modified_date' => array('name'=>'last_modified_date', 'type' => 'xsd:int'),
-		'last_modified_by' => => array('name'=>'last_modified_by', 'type' => 'xsd:int'),
+		'last_modified_by' => array('name'=>'last_modified_by', 'type' => 'xsd:int'),
 		'close_date' => array('name'=>'close_date', 'type' => 'xsd:int'),
 		'summary' => array('name'=>'summary', 'type' => 'xsd:string'),
 		'details' => array('name'=>'details', 'type' => 'xsd:string'),
