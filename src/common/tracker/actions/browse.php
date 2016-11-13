@@ -5,9 +5,9 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 Roland Mas
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2015, Franck Villaume - TrivialDev
  * Copyright 2011, Iñigo Martinez
  * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
+ * Copyright 2012-2016, Franck Villaume - TrivialDev
  * Copyright 2014, Stéphane-Eymeric Bredthauer
  * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
@@ -112,8 +112,13 @@ if (!isset($_sort_col)) {
 	$_sort_ord = 'DESC';
 }
 
+if (!isset($_changed)) {
+	$_changed = 0x7fffffff;
+}
+
 $_sort_col = getStringFromRequest('_sort_col',$_sort_col);
 $_sort_ord = getStringFromRequest('_sort_ord',$_sort_ord);
+$_changed = getStringFromRequest('_changed', $_changed);
 $set = getStringFromRequest('set');
 $_assigned_to = getIntFromRequest('_assigned_to');
 $_status = getIntFromRequest('_status');
@@ -144,7 +149,7 @@ if (is_array($_extra_fields)){
 	}
 }
 
-$af->setup($start,$_sort_col,$_sort_ord,$paging,$set,$_assigned_to,$_status,$aux_extra_fields);
+$af->setup($start, $_sort_col, $_sort_ord, $paging, $set, $_assigned_to, $_status, $aux_extra_fields, time() - $_changed);
 //
 //	These vals are sanitized and/or retrieved from ArtifactFactory stored settings
 //
@@ -284,7 +289,7 @@ echo $HTML->paging_top($start, $paging, $art_cnt, $max, '/tracker/?group_id='.$g
 echo $ath->renderBrowseInstructions();
 
 //
-//	statuses can be custom in GForge 4.5+
+//	statuses can be custom in FusionForge 4.5+
 //
 if ($ath->usesCustomStatuses()) {
 	$aux_extra_fields = array();
@@ -386,13 +391,12 @@ if (db_numrows($res)>0) {
 	&nbsp;&nbsp;'.util_make_link('/tracker/?atid='. $ath->getID().'&group_id='.$group_id.'&func=query', _('Build Query')).'
 	</td></tr></table>';
 	echo $HTML->closeForm();
-	?>
-		<script type="text/javascript">/* <![CDATA[ */
-		jQuery('#query_id').change(function() {
-			location.href = '<?php echo util_make_url('/tracker/?group_id='.$group_id.'&atid='.$ath->getID().'&power_query=1&query_id='); ?>'+$('#query_id').val();
+	echo '
+		<script type="text/javascript">//<![CDATA[
+		jQuery("#query_id").change(function() {
+			location.href = '.util_make_url('/tracker/?group_id='.$group_id.'&atid='.$ath->getID().'&power_query=1&query_id=').'+jQuery("#query_id").val();
 		});
-		/* ]]> */</script>
-	<?php
+		//]]></script>';
 } else {
 
 	echo util_make_link('/tracker/?atid='.$ath->getID().'&group_id='.$group_id.'&func=query','<strong>'._('Build Query').'</strong>');
@@ -407,11 +411,13 @@ echo '
 	<table>
 	<tr>
 	<td>
-	'._('Assignee')._(': ').'<br>'. $tech_box .'
+	'._('Assignee')._(':').'<br>'. $tech_box .'
 	</td>
 	<td>
-	'._('State')._(': ').'<br>'. $status_box .'
+	'._('State')._(':').'<br>'. $status_box .'
 	</td>
+	<td>
+	'._('Changed')._(':').'<br>'.html_build_select_box_from_arrays($changed_arr, $changed_name_arr, '_changed', $_changed, false).'
 	<td>';
 
 // Compute the list of fields which can be sorted.
@@ -578,10 +584,10 @@ if ($art_arr && $art_cnt > 0) {
 			case 'priority':
 				$title=_('Priority');
 				break;
-			case'assigned_to':
+			case 'assigned_to':
 				$title=_('Assigned to');
 				break;
-			case'submitted_by':
+			case 'submitted_by':
 				$title=_('Submitted by');
 				break;
 			case 'related_tasks':
@@ -656,7 +662,7 @@ if ($art_arr && $art_cnt > 0) {
 				case 'assigned_to':
 					echo '<td>'. $art_arr[$i]->getAssignedRealName() .'</td>';
 					break;
-				case'submitted_by':
+				case 'submitted_by':
 					echo '<td>'. $art_arr[$i]->getSubmittedRealName() .'</td>';
 					break;
 				case 'last_modified_by':
