@@ -35,10 +35,10 @@ $server->wsdl->addComplexType(
 	'sequence',
 	'',
 	array(
-	'package_id' => array('name'=>'package_id', 'type' => 'xsd:int'),
-	'name' => array('name'=>'name', 'type' => 'xsd:string'),
-	'status_id' => array('name'=>'description', 'type' => 'xsd:string'),
-	'is_public' => array('name'=>'is_public', 'type' => 'xsd:int'),
+	'package_id' => array('name' => 'package_id', 'type' => 'xsd:int'),
+	'name' => array('name' => 'name', 'type' => 'xsd:string'),
+	'status_id' => array('name' => 'description', 'type' => 'xsd:string'),
+	'is_public' => array('name' => 'is_public', 'type' => 'xsd:int'),
 	)
 );
 
@@ -49,17 +49,17 @@ $server->wsdl->addComplexType(
 	'',
 	'SOAP-ENC:Array',
 	array(),
-	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:FRSPackage[]')),
+	array(array('ref' => 'SOAP-ENC:arrayType', 'wsdl:arrayType' => 'tns:FRSPackage[]')),
 	'tns:FRSPackage'
 );
 
 $server->register(
 	'getPackages',
 	array(
-		'session_ser'=>'xsd:string',
-		'group_id'=>'xsd:int'),
-	array('getPackagesResponse'=>'tns:ArrayOfFRSPackage'),
-		$uri,$uri.'#getPackages','rpc','encoded'
+		'session_ser' => 'xsd:string',
+		'group_id' => 'xsd:int'),
+	array('getPackagesResponse' => 'tns:ArrayOfFRSPackage'),
+		$uri, $uri.'#getPackages', 'rpc', 'encoded'
 );
 
 $server->wsdl->addComplexType(
@@ -69,8 +69,8 @@ $server->wsdl->addComplexType(
 	'sequence',
 	'',
 	array(
-	'type_id' => array('name'=>'type_id', 'type' => 'xsd:int'),
-	'name' => array('name'=>'name', 'type' => 'xsd:string'),
+	'type_id' => array('name' => 'type_id', 'type' => 'xsd:int'),
+	'name' => array('name' => 'name', 'type' => 'xsd:string'),
 	)
 );
 $server->wsdl->addComplexType(
@@ -80,15 +80,15 @@ $server->wsdl->addComplexType(
 	'',
 	'SOAP-ENC:Array',
 	array(),
-	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:FRSFileType[]')),
+	array(array('ref' => 'SOAP-ENC:arrayType', 'wsdl:arrayType' => 'tns:FRSFileType[]')),
 	'tns:FRSFileType'
 );
 
 $server->register(
 	'getFileTypes',
-	array('session_ser'=>'xsd:string'),
-	array('getFileTypeResponse'=>'tns:ArrayOfFRSFileType'),
-		$uri,$uri.'#getFileTypes','rpc','encoded'
+	array('session_ser' => 'xsd:string'),
+	array('getFileTypeResponse' => 'tns:ArrayOfFRSFileType'),
+		$uri, $uri.'#getFileTypes', 'rpc', 'encoded'
 );
 
 $server->wsdl->addComplexType(
@@ -98,8 +98,8 @@ $server->wsdl->addComplexType(
 	'sequence',
 	'',
 	array(
-	'processor_id' => array('name'=>'processor_id', 'type' => 'xsd:int'),
-	'name' => array('name'=>'name', 'type' => 'xsd:string'),
+	'processor_id' => array('name' => 'processor_id', 'type' => 'xsd:int'),
+	'name' => array('name' => 'name', 'type' => 'xsd:string'),
 	)
 );
 $server->wsdl->addComplexType(
@@ -109,25 +109,25 @@ $server->wsdl->addComplexType(
 	'',
 	'SOAP-ENC:Array',
 	array(),
-	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:FRSFileProcessorType[]')),
+	array(array('ref' => 'SOAP-ENC:arrayType', 'wsdl:arrayType' => 'tns:FRSFileProcessorType[]')),
 	'tns:FRSFileProcessorType'
 );
 $server->register(
 	'getFileProcessorTypes',
-	array('session_ser'=>'xsd:string'),
-	array('getFileProcessorTypeResponse'=>'tns:ArrayOfFRSFileProcessorType'),
-		$uri,$uri.'#getFileProcessorTypes','rpc','encoded'
+	array('session_ser' => 'xsd:string'),
+	array('getFileProcessorTypeResponse' => 'tns:ArrayOfFRSFileProcessorType'),
+		$uri, $uri.'#getFileProcessorTypes', 'rpc', 'encoded'
 );
 
 $server->register(
 	'addPackage',
 	array(
-		'session_ser'=>'xsd:string',
-		'group_id'=>'xsd:int',
-		'package_name'=>'xsd:string',
-		'is_public'=>'xsd:int'),
-	array('addPackageResponse'=>'xsd:int'),
-		$uri,$uri.'#addPackage','rpc','encoded'
+		'session_ser' => 'xsd:string',
+		'group_id' => 'xsd:int',
+		'package_name' => 'xsd:string',
+		'is_public' => 'xsd:int'),
+	array('addPackageResponse' => 'xsd:int'),
+		$uri, $uri.'#addPackage', 'rpc', 'encoded'
 );
 
 $server->wsdl->addComplexType(
@@ -137,12 +137,12 @@ $server->wsdl->addComplexType(
 	'sequence',
 	'',
 	array(
-	'release_id' => array('name'=>'release_id', 'type' => 'xsd:int'),
-	'name' => array('name'=>'name', 'type' => 'xsd:string'),
-	'notes' => array('name'=>'notes', 'type' => 'xsd:string'),
-	'changes' => array('name'=>'changes', 'type' => 'xsd:string'),
-	'status_id' => array('name'=>'description', 'type' => 'xsd:string'),
-	'release_date' => array('name'=>'release_date', 'type' => 'xsd:int'),
+	'release_id' => array('name' => 'release_id', 'type' => 'xsd:int'),
+	'name' => array('name' => 'name', 'type' => 'xsd:string'),
+	'notes' => array('name' => 'notes', 'type' => 'xsd:string'),
+	'changes' => array('name' => 'changes', 'type' => 'xsd:string'),
+	'status_id' => array('name' => 'description', 'type' => 'xsd:string'),
+	'release_date' => array('name' => 'release_date', 'type' => 'xsd:int'),
 	)
 );
 
@@ -153,32 +153,32 @@ $server->wsdl->addComplexType(
 	'',
 	'SOAP-ENC:Array',
 	array(),
-	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:FRSRelease[]')),
+	array(array('ref' => 'SOAP-ENC:arrayType', 'wsdl:arrayType' => 'tns:FRSRelease[]')),
 	'tns:FRSRelease'
 );
 
 $server->register(
 	'getReleases',
 	array(
-		'session_ser'=>'xsd:string',
-		'group_id'=>'xsd:int',
-		'package_id'=>'xsd:int'),
-	array('getPackagesResponse'=>'tns:ArrayOfFRSRelease'),
-		$uri,$uri.'#getReleases','rpc','encoded'
+		'session_ser' => 'xsd:string',
+		'group_id' => 'xsd:int',
+		'package_id' => 'xsd:int'),
+	array('getPackagesResponse' => 'tns:ArrayOfFRSRelease'),
+		$uri, $uri.'#getReleases', 'rpc', 'encoded'
 );
 
 $server->register(
 	'addRelease',
 	array(
-		'session_ser'=>'xsd:string',
-		'group_id'=>'xsd:int',
-		'package_id'=>'xsd:int',
-		'name'=>'xsd:string',
-		'notes'=>'xsd:string',
-		'changes'=>'xsd:string',
-		'release_date'=>'xsd:int'),
-	array('addRelease'=>'xsd:int'),
-		$uri,$uri.'#addRelease','rpc','encoded'
+		'session_ser' => 'xsd:string',
+		'group_id' => 'xsd:int',
+		'package_id' => 'xsd:int',
+		'name' => 'xsd:string',
+		'notes' => 'xsd:string',
+		'changes' => 'xsd:string',
+		'release_date' => 'xsd:int'),
+	array('addRelease' => 'xsd:int'),
+		$uri, $uri.'#addRelease', 'rpc', 'encoded'
 );
 
 $server->wsdl->addComplexType(
@@ -188,14 +188,14 @@ $server->wsdl->addComplexType(
 	'sequence',
 	'',
 	array(
-		'file_id' => array('name'=>'file_id', 'type' => 'xsd:int'),
-		'name' => array('name'=>'name', 'type' => 'xsd:string'),
-		'size' => array('name'=>'size', 'type' => 'xsd:int'),
-		'type' => array('name'=>'type', 'type' => 'xsd:string'),
-		'processor' => array('name'=>'processor', 'type' => 'xsd:string'),
-		'downloads' => array('name'=>'downloads', 'type' => 'xsd:int'),
-		'release' => array('name'=>'release_time', 'type' => 'xsd:int'),
-		'date' => array('name'=>'date', 'type' => 'xsd:int'),
+		'file_id' => array('name' => 'file_id', 'type' => 'xsd:int'),
+		'name' => array('name' => 'name', 'type' => 'xsd:string'),
+		'size' => array('name' => 'size', 'type' => 'xsd:int'),
+		'type' => array('name' => 'type', 'type' => 'xsd:string'),
+		'processor' => array('name' => 'processor', 'type' => 'xsd:string'),
+		'downloads' => array('name' => 'downloads', 'type' => 'xsd:int'),
+		'release' => array('name' => 'release_time', 'type' => 'xsd:int'),
+		'date' => array('name' => 'date', 'type' => 'xsd:int'),
 	)
 );
 
@@ -206,73 +206,73 @@ $server->wsdl->addComplexType(
 	'',
 	'SOAP-ENC:Array',
 	array(),
-	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:FRSFile[]')),
+	array(array('ref' => 'SOAP-ENC:arrayType', 'wsdl:arrayType' => 'tns:FRSFile[]')),
 	'tns:FRSFile'
 );
 
 $server->register(
 	'getFiles',
 	array(
-		'session_ser'=>'xsd:string',
-		'group_id'=>'xsd:int',
-		'package_id'=>'xsd:int',
-		'release_id'=>'xsd:int'),
-	array('getFilesResponse'=>'tns:ArrayOfFRSFile'),
-		$uri,$uri.'#getFiles','rpc','encoded'
+		'session_ser' => 'xsd:string',
+		'group_id' => 'xsd:int',
+		'package_id' => 'xsd:int',
+		'release_id' => 'xsd:int'),
+	array('getFilesResponse' => 'tns:ArrayOfFRSFile'),
+		$uri, $uri.'#getFiles', 'rpc', 'encoded'
 );
 
 $server->register(
 	'getFile',
 	array(
-		'session_ser'=>'xsd:string',
-		'group_id'=>'xsd:int',
-		'package_id'=>'xsd:int',
-		'release_id'=>'xsd:int',
-		'file_id'=>'xsd:int'),
-	array('getFileResponse'=>'xsd:string'),
-		$uri,$uri.'#getFile','rpc','encoded'
+		'session_ser' => 'xsd:string',
+		'group_id' => 'xsd:int',
+		'package_id' => 'xsd:int',
+		'release_id' => 'xsd:int',
+		'file_id' => 'xsd:int'),
+	array('getFileResponse' => 'xsd:string'),
+		$uri, $uri.'#getFile', 'rpc', 'encoded'
 );
 
 $server->register(
 	'addFile',
 	array(
-		'session_ser'=>'xsd:string',
-		'group_id'=>'xsd:int',
-		'package_id'=>'xsd:int',
-		'release_id'=>'xsd:int',
-		'name'=>'xsd:string',
-		'base64_contents'=>'xsd:string',
-		'type_id'=>'xsd:int',
-		'processor_id'=>'xsd:int',
-		'release_time'=>'xsd:int'
+		'session_ser' => 'xsd:string',
+		'group_id' => 'xsd:int',
+		'package_id' => 'xsd:int',
+		'release_id' => 'xsd:int',
+		'name' => 'xsd:string',
+		'base64_contents' => 'xsd:string',
+		'type_id' => 'xsd:int',
+		'processor_id' => 'xsd:int',
+		'release_time' => 'xsd:int'
 		),
-	array('addFile'=>'xsd:string'),
-		$uri,$uri.'#addFile','rpc','encoded'
+	array('addFile' => 'xsd:string'),
+		$uri, $uri.'#addFile', 'rpc', 'encoded'
 );
 
 $server->register(
         'addUploadedFile',
         array(
-                'session_ser'=>'xsd:string',
-                'group_id'=>'xsd:int',
-                'package_id'=>'xsd:int',
-                'release_id'=>'xsd:int',
-                'file_name'=>'xsd:string',
-                'type_id'=>'xsd:int',
-                'processor_id'=>'xsd:int',
-                'release_time'=>'xsd:int'
+                'session_ser' => 'xsd:string',
+                'group_id' => 'xsd:int',
+                'package_id' => 'xsd:int',
+                'release_id' => 'xsd:int',
+                'file_name' => 'xsd:string',
+                'type_id' => 'xsd:int',
+                'processor_id' => 'xsd:int',
+                'release_time' => 'xsd:int'
                 ),
-        array('addUploadedFile'=>'xsd:string'),
-        $uri,$uri.'#addUploadedFile','rpc','encoded'
+        array('addUploadedFile' => 'xsd:string'),
+        $uri, $uri.'#addUploadedFile', 'rpc', 'encoded'
 );
 
-function getPackages($session_ser,$group_id) {
+function getPackages($session_ser, $group_id) {
 	continue_session($session_ser);
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
-		return new soap_fault('','getPackages','Could Not Get Project','Could Not Get Project');
+		return new soap_fault('', 'getPackages', 'Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {
-		return new soap_fault('','getPackages',$grp->getErrorMessage(),$grp->getErrorMessage());
+		return new soap_fault('', 'getPackages', $grp->getErrorMessage(), $grp->getErrorMessage());
 	}
 
 	$pkg_arr = get_frs_packages($grp);
@@ -311,13 +311,13 @@ function getFileProcessorTypes($session_ser) {
 	return fileprocessortypes_to_soap($pkg_arr);
 }
 
-function addPackage($session_ser,$group_id,$package_name,$is_public) {
+function addPackage($session_ser, $group_id, $package_name, $is_public) {
 	continue_session($session_ser);
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
-		return new soap_fault('','addPackage','Could Not Get Project','Could Not Get Project');
+		return new soap_fault('', 'addPackage', 'Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {
-		return new soap_fault('','addPackage',$grp->getErrorMessage(),$grp->getErrorMessage());
+		return new soap_fault('', 'addPackage', $grp->getErrorMessage(), $grp->getErrorMessage());
 	}
 
 	$frsp = new FRSPackage($grp);
@@ -328,20 +328,20 @@ function addPackage($session_ser,$group_id,$package_name,$is_public) {
 	}
 }
 
-function getReleases($session_ser,$group_id,$package_id) {
+function getReleases($session_ser, $group_id, $package_id) {
 	continue_session($session_ser);
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
-		return new soap_fault('','getReleases','Could Not Get Project','Could Not Get Project');
+		return new soap_fault('', 'getReleases', 'Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {
-		return new soap_fault('','getReleases',$grp->getErrorMessage(),$grp->getErrorMessage());
+		return new soap_fault('', 'getReleases', $grp->getErrorMessage(), $grp->getErrorMessage());
 	}
 
 	$frsp = frspackage_get_object($package_id);
 	if (!$frsp || !is_object($frsp)) {
-		return new soap_fault('','getReleases','Could Not Get Package','Could Not Get Package');
+		return new soap_fault('', 'getReleases', 'Could Not Get Package','Could Not Get Package');
 	} elseif ($frsp->isError()) {
-		return new soap_fault('','getReleases',$frsp->getErrorMessage(),$frsp->getErrorMessage());
+		return new soap_fault('', 'getReleases', $frsp->getErrorMessage(), $frsp->getErrorMessage());
 	}
 
 	$release_arr = $frsp->getReleases();
@@ -372,54 +372,54 @@ function releases_to_soap(&$release_arr) {
 	return $return;
 }
 
-function addRelease($session_ser,$group_id,$package_id,$name,$notes,$changes,$release_date) {
+function addRelease($session_ser, $group_id, $package_id, $name, $notes, $changes, $release_date) {
 	continue_session($session_ser);
 
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
-		return new soap_fault('','getPackages','Could Not Get Project','Could Not Get Project');
+		return new soap_fault('', 'getPackages', 'Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {
-		return new soap_fault('','getPackages',$grp->getErrorMessage(),$grp->getErrorMessage());
+		return new soap_fault('', 'getPackages', $grp->getErrorMessage(), $grp->getErrorMessage());
 	}
 
 	$frsp = frspackage_get_object($package_id);
 	if (!$frsp || !is_object($frsp)) {
-		return new soap_fault('','getReleases','Could Not Get Package','Could Not Get Package');
+		return new soap_fault('', 'getReleases', 'Could Not Get Package','Could Not Get Package');
 	} elseif ($frsp->isError()) {
-		return new soap_fault('','getReleases',$frsp->getErrorMessage(),$frsp->getErrorMessage());
+		return new soap_fault('', 'getReleases', $frsp->getErrorMessage(), $frsp->getErrorMessage());
 	}
 
 	$frsr = new FRSRelease($frsp);
-	if (!$frsr->create($name,$notes,$changes,0,$release_date)) {
+	if (!$frsr->create($name, $notes, $changes,0, $release_date)) {
 		return new soap_fault('', 'addRelease', $frsr->getErrorMessage(), $frsr->getErrorMessage());
 	} else {
 		return $frsr->getID();
 	}
 }
 
-function getFiles($session_ser,$group_id,$package_id,$release_id) {
+function getFiles($session_ser, $group_id, $package_id, $release_id) {
 	continue_session($session_ser);
 
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
-		return new soap_fault('','getFiles','Could Not Get Project','Could Not Get Project');
+		return new soap_fault('', 'getFiles', 'Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {
-		return new soap_fault('','getFiles',$grp->getErrorMessage(),$grp->getErrorMessage());
+		return new soap_fault('', 'getFiles', $grp->getErrorMessage(), $grp->getErrorMessage());
 	}
 
 	$frsp =& frspackage_get_object($package_id);
 	if (!$frsp || !is_object($frsp)) {
-		return new soap_fault('','getFiles','Could Not Get Package','Could Not Get Package');
+		return new soap_fault('', 'getFiles', 'Could Not Get Package','Could Not Get Package');
 	} elseif ($frsp->isError()) {
-		return new soap_fault('','getFiles',$frsp->getErrorMessage(),$frsp->getErrorMessage());
+		return new soap_fault('', 'getFiles', $frsp->getErrorMessage(), $frsp->getErrorMessage());
 	}
 
 	//TODO: Check that the release belongs to the package
 	$frsr =& frsrelease_get_object($release_id);
 	if (!$frsr || !is_object($frsr)) {
-		return new soap_fault('','getFiles','Could Not Get Release','Could Not Get Release');
+		return new soap_fault('', 'getFiles', 'Could Not Get Release','Could Not Get Release');
 	} elseif ($frsr->isError()) {
-		return new soap_fault('','getFiles',$frsr->getErrorMessage(),$frsr->getErrorMessage());
+		return new soap_fault('', 'getFiles', $frsr->getErrorMessage(), $frsr->getErrorMessage());
 	}
 
 	$files_arr =& $frsr->getFiles();
@@ -487,35 +487,35 @@ function fileprocessortypes_to_soap($files_arr) {
 	return $return;
 }
 
-function getFile($session_ser,$group_id,$package_id,$release_id,$file_id) {
+function getFile($session_ser, $group_id, $package_id, $release_id, $file_id) {
 	continue_session($session_ser);
 
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
-		return new soap_fault('','getFile','Could Not Get Project','Could Not Get Project');
+		return new soap_fault('', 'getFile', 'Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {
-		return new soap_fault('','getFile',$grp->getErrorMessage(),$grp->getErrorMessage());
+		return new soap_fault('', 'getFile', $grp->getErrorMessage(), $grp->getErrorMessage());
 	}
 
 	$frsp =& frspackage_get_object($package_id);
 	if (!$frsp || !is_object($frsp)) {
-		return new soap_fault('','getFile','Could Not Get Package','Could Not Get Package');
+		return new soap_fault('', 'getFile', 'Could Not Get Package','Could Not Get Package');
 	} elseif ($frsp->isError()) {
-		return new soap_fault('','getFile',$frsp->getErrorMessage(),$frsp->getErrorMessage());
+		return new soap_fault('', 'getFile', $frsp->getErrorMessage(), $frsp->getErrorMessage());
 	}
 
 	$frsr =& frsrelease_get_object($release_id);
 	if (!$frsr || !is_object($frsr)) {
-		return new soap_fault('','getFile','Could Not Get Release','Could Not Get Release');
+		return new soap_fault('', 'getFile', 'Could Not Get Release','Could Not Get Release');
 	} elseif ($frsr->isError()) {
-		return new soap_fault('','getFile',$frsr->getErrorMessage(),$frsr->getErrorMessage());
+		return new soap_fault('', 'getFile', $frsr->getErrorMessage(), $frsr->getErrorMessage());
 	}
 
 	$frsf = new FRSFile($frsr, $file_id);
 	if (!$frsf || !is_object($frsf)) {
-		return new soap_fault('','getFile','Could Not Get File','Could Not Get File');
+		return new soap_fault('', 'getFile', 'Could Not Get File','Could Not Get File');
 	} elseif ($frsf->isError()) {
-		return new soap_fault('','getFile',$frsf->getErrorMessage(),$frsf->getErrorMessage());
+		return new soap_fault('', 'getFile', $frsf->getErrorMessage(), $frsf->getErrorMessage());
 	}
 
 	$file_location = forge_get_config('upload_dir').'/'.
@@ -524,7 +524,7 @@ function getFile($session_ser,$group_id,$package_id,$release_id,$file_id) {
 				$frsf->FRSRelease->getFileName().'/'.
 				$frsf->getName();
 	if (!file_exists($file_location)) {
-		return new soap_fault('','getFile','File doesn\'t exist in server','File doesn\'t exist in server');
+		return new soap_fault('', 'getFile', 'File doesn\'t exist in server','File doesn\'t exist in server');
 	}
 
 	$fh = fopen($file_location, "rb");
@@ -533,46 +533,46 @@ function getFile($session_ser,$group_id,$package_id,$release_id,$file_id) {
 	return base64_encode($contents);
 }
 
-function addFile($session_ser,$group_id,$package_id,$release_id,$name,$base64_contents,$type_id,$processor_id,$release_time) {
+function addFile($session_ser, $group_id, $package_id, $release_id, $name, $base64_contents, $type_id, $processor_id, $release_time) {
 	continue_session($session_ser);
 
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
-		return new soap_fault('','addFile','Could Not Get Project','Could Not Get Project');
+		return new soap_fault('', 'addFile', 'Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {
-		return new soap_fault('','addFile',$grp->getErrorMessage(),$grp->getErrorMessage());
+		return new soap_fault('', 'addFile', $grp->getErrorMessage(), $grp->getErrorMessage());
 	}
 
 	$frsp =& frspackage_get_object($package_id);
 	if (!$frsp || !is_object($frsp)) {
-		return new soap_fault('','addFile','Could Not Get Package','Could Not Get Package');
+		return new soap_fault('', 'addFile', 'Could Not Get Package','Could Not Get Package');
 	} elseif ($frsp->isError()) {
-		return new soap_fault('','addFile',$frsp->getErrorMessage(),$frsp->getErrorMessage());
+		return new soap_fault('', 'addFile', $frsp->getErrorMessage(), $frsp->getErrorMessage());
 	}
 
 	$frsr =& frsrelease_get_object($release_id);
 	if (!$frsr || !is_object($frsr)) {
-		return new soap_fault('','addFile','Could Not Get Release','Could Not Get Release');
+		return new soap_fault('', 'addFile', 'Could Not Get Release','Could Not Get Release');
 	} elseif ($frsr->isError()) {
-		return new soap_fault('','addFile',$frsr->getErrorMessage(),$frsr->getErrorMessage());
+		return new soap_fault('', 'addFile', $frsr->getErrorMessage(), $frsr->getErrorMessage());
 	}
 
 	$frsf = new FRSFile($frsr);
 	if (!$frsf || !is_object($frsf)) {
-		return new soap_fault('','addFile','Could Not Get File','Could Not Get File');
+		return new soap_fault('', 'addFile', 'Could Not Get File','Could Not Get File');
 	}
 
 	$tmpname = tempnam("/tmp", "gforge_cli_frs");
 	$fh = fopen($tmpname, "wb");
 	if (!$fh) {
-		return new soap_fault('','addFile','Could not create temporary file in directory /tmp');
+		return new soap_fault('', 'addFile', 'Could not create temporary file in directory /tmp');
 	}
 	fwrite($fh, base64_decode($base64_contents));
 	fclose($fh);
 
-	if (!$frsf->create($name,$tmpname,$type_id,$processor_id,$release_time)) {
+	if (!$frsf->create($name, $tmpname, $type_id, $processor_id, $release_time)) {
 		@unlink($tmpname);
-		return new soap_fault('','addFile',$frsf->getErrorMessage(),$frsf->getErrorMessage());
+		return new soap_fault('', 'addFile', $frsf->getErrorMessage(), $frsf->getErrorMessage());
 	} else {
 		@unlink($tmpname);
 		return $frsf->getID();

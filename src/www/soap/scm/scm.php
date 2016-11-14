@@ -43,21 +43,21 @@ $server->wsdl->addComplexType(
 
 $server->register(
 	'getSCMData',
-	array('session_ser'=>'xsd:string','group_id'=>'xsd:int'),
-	array('getSCMDataResponse'=>'tns:GroupSCMData'),
+	array('session_ser' => 'xsd:string', 'group_id' => 'xsd:int'),
+	array('getSCMDataResponse' => 'tns:GroupSCMData'),
 	$uri,
-	$uri.'#getSCMData','rpc','encoded'
+	$uri.'#getSCMData', 'rpc', 'encoded'
 );
 
 function getSCMData($session_ser, $group_id) {
 	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
-		return new soap_fault('','getSCMData','Could Not Get Project','Could Not Get Project');
+		return new soap_fault('', 'getSCMData', 'Could Not Get Project', 'Could Not Get Project');
 	} elseif ($grp->isError()) {
-		return new soap_fault('','getSCMData',$grp->getErrorMessage(),$grp->getErrorMessage());
+		return new soap_fault('', 'getSCMData', $grp->getErrorMessage(), $grp->getErrorMessage());
 	}
 	if (!$grp->usesSCM()) {
-		return new soap_fault('','getSCMData','SCM is not enabled in this project');
+		return new soap_fault('', 'getSCMData', 'SCM is not enabled in this project');
 	}
 
 	$res = array();

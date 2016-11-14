@@ -28,15 +28,15 @@ require_once $gfcommon.'reporting/TimeEntry.class.php';
 $server->register(
 	'addTimeEntry',
 	array(
-		'session_ser'=>'xsd:string',
-		'projectTaskId'=>'xsd:int',
-		'week'=>'xsd:int',
-		'daysAdjust'=>'xsd:int',
-		'timeCode'=>'xsd:int',
-		'hours'=>'xsd:float'
+		'session_ser' => 'xsd:string',
+		'projectTaskId' => 'xsd:int',
+		'week' => 'xsd:int',
+		'daysAdjust' => 'xsd:int',
+		'timeCode' => 'xsd:int',
+		'hours' => 'xsd:float'
 	),
-	array('addTimeEntryResponse'=>'xsd:int'),
-	$uri,$uri.'#addTimeEntry','rpc','encoded'
+	array('addTimeEntryResponse' => 'xsd:int'),
+	$uri, $uri.'#addTimeEntry', 'rpc', 'encoded'
 );
 
 //
