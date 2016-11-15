@@ -239,8 +239,8 @@ if ($DocGroupName) {
 }
 
 if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
-	$tabletop = array(html_e('input', array('id' => 'checkallactive', 'type' => 'checkbox', 'title' => _('Select / Deselect all documents for massaction'), 'onClick' => 'controllerListFile.checkAll("checkeddocidactive", "active")')), '', _('File Name'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'), _('View'));
-	$classth = array('unsortable', 'unsortable', '', '', '', '', '', '', '', '');
+	$tabletop = array(html_e('input', array('id' => 'checkallactive', 'type' => 'checkbox', 'title' => _('Select / Deselect all documents for massaction'), 'onClick' => 'controllerListFile.checkAll("checkeddocidactive", "active")')), '', 'ID', _('File Name'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'), _('View'));
+	$classth = array('unsortable', 'unsortable', '', '', '', '', '', '', '', '', '');
 	if (forge_check_perm('docman', $ndg->Group->getID(), 'approve')) {
 		$tabletop[] = _('Actions');
 		$classth[] = 'unsortable';
@@ -273,6 +273,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 				$cells[][] =  util_make_link('/docman/view.php/'.$d->Group->getID().'/'.$d->getID(), html_image($d->getFileTypeImage(), 22, 22, array('alt' => $d->getFileType())), array('title' => _('View this document')));
 			}
 		}
+		$cells[][] = 'D'.$d->getID();
 		$nextcell = '';
 		if (($d->getUpdated() && $time_new > (time() - $d->getUpdated())) || $time_new > (time() - $d->getCreated())) {
 			$nextcell = $HTML->getNewPic(_('Created or updated since less than 7 days'), 'new').'&nbsp;';

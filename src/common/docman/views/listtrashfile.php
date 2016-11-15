@@ -150,8 +150,8 @@ if ($DocGroupName) {
 }
 
 if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
-	$tabletop = array(html_e('input', array('id' => 'checkallactive', 'title' => _('Select / Deselect all documents for massaction'), 'type' => 'checkbox', 'onClick' => 'controllerListFile.checkAll("checkeddocidactive", "active")')), '', _('File Name'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'), _('Actions'));
-	$classth = array('unsortable', 'unsortable', '', '', '', '', '', '', '', 'unsortable');
+	$tabletop = array(html_e('input', array('id' => 'checkallactive', 'title' => _('Select / Deselect all documents for massaction'), 'type' => 'checkbox', 'onClick' => 'controllerListFile.checkAll("checkeddocidactive", "active")')), '', 'ID', _('File Name'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'), _('Actions'));
+	$classth = array('unsortable', 'unsortable', '', '', '', '', '', '', '', '', 'unsortable');
 	echo html_ao('div', array('class' => 'docmanDiv'));
 	echo $HTML->listTableTop($tabletop, array(), 'sortable', 'sortable_docman_listfile', $classth);
 	$time_new = 604800;
@@ -167,6 +167,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 				$cells[][] = util_make_link('/docman/view.php/'.$group_id.'/'.$d->getID().'/'.urlencode($d->getFileName()), html_image($d->getFileTypeImage(), 20, 20, array('alt' => $d->getFileType())), array('title' => _('View this document')));
 			}
 		}
+		$cells[][] = 'D'.$d->getID();
 		$nextcell ='';
 		if (($d->getUpdated() && $time_new > (time() - $d->getUpdated())) || $time_new > (time() - $d->getCreated())) {
 			$nextcell.= $HTML->getNewPic(_('Created or updated since less than 7 days'), 'new', array('class' => 'docman-newdocument')).'&nbsp;';
