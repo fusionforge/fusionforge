@@ -74,7 +74,7 @@ if (!$ac || !is_object($ac)) {
 			}
 			echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&boxid='.$boxid, 'method' => 'post'));
 			echo html_e('input', array('type'=>'hidden', 'name'=>'update_checked_opt', 'value'=>'y'));
-			echo html_build_checkboxes_from_array($vals, 'element', $checked_array, true);
+			echo html_build_checkboxes_from_array($vals, 'element', $checked_array, true, false);
 			echo html_e('input', array('type'=>'submit', 'name'=>'post_changes', 'value'=>_('Submit')));
 			echo $HTML->closeForm();
 			break;
@@ -96,7 +96,7 @@ if (!$ac || !is_object($ac)) {
 			}
 			echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&boxid='.$boxid, 'method' => 'post'));
 			echo html_e('input', array('type'=>'hidden', 'name'=>'update_checked_opt', 'value'=>'y'));
-			echo html_build_checkboxes_from_array($vals, 'element', $checked_array, true);
+			echo html_build_checkboxes_from_array($vals, 'element', $checked_array, true, false);
 			echo html_e('input', array('type'=>'submit', 'name'=>'post_changes', 'value'=>_('Submit')));
 			echo $HTML->closeForm();
 			break;

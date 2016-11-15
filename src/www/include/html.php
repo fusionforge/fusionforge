@@ -906,13 +906,13 @@ function html_build_checkbox($name, $value, $checked, $attrs=array()) {
  * @param	bool	$show_100
  * @return	string	html code for checkbox control
  */
-function html_build_checkboxes_from_array($vals, $check_name, $checked=array(), $checkall=false, $show_100) {
+function html_build_checkboxes_from_array($vals, $check_name, $checked=array(), $checkall=false, $show_100=true, $text_100='none', $allowed=false, $attrs=array(), $checkbox_attrs=array(), $attrs_100=array()) {
 	$values = array_keys($vals);
 	$texts =  array_values($vals);
-	return html_build_checkboxes_from_arrays($values, $texts, $check_name, $checked, $checkall, false);
+	return html_build_checkboxes_from_arrays($values, $texts, $check_name, $checked, $checkall, $show_100, $text_100, $allowed, $attrs, $checkbox_attrs, $attrs_100);
 }
 
-function html_build_checkboxes_from_arrays($vals, $texts, $check_name, $checked=array(), $checkall=false, $show_100=true, $text_100='none', $allowed=false, $attrs=array(),$checkbox_attrs=array(),$attrs_100=array()) {
+function html_build_checkboxes_from_arrays($vals, $texts, $check_name, $checked=array(), $checkall=false, $show_100=true, $text_100='none', $allowed=false, $attrs=array(), $checkbox_attrs=array(), $attrs_100=array()) {
 	if ($text_100 == 'none') {
 		$text_100 = _('None');
 	}

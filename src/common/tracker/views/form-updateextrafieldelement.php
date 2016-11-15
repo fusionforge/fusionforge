@@ -74,7 +74,7 @@ if (!$ac || !is_object($ac)) {
 				$parentFieldElmntVals[$parentFieldElmnt['element_id']] = $parentFieldElmnt['element_name'];
 			}
 			$checkedElmntsArr = $ao->getParentElements();
-			echo html_build_checkboxes_from_array($parentFieldElmntVals, 'parent_elements', $checkedElmntsArr, true);
+			echo html_build_checkboxes_from_array($parentFieldElmntVals, 'parent_elements', $checkedElmntsArr, true, false);
 		}
 		if ($ac->isAutoAssign()) {
 			echo html_e('strong',array(),_('Auto assign to')._(':')).html_e('br');
