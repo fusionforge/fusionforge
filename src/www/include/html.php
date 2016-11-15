@@ -924,6 +924,8 @@ function html_build_checkboxes_from_arrays($vals, $texts, $check_name, $checked=
 
 	$title = (empty($attrs['title']) ? array() : array('title' => $attrs['title']));
 	if ($checkall) {
+		$attrs_checkall = $attrs;
+		unset($attrs_checkall['required']);
 		$javascript = '//<![CDATA[
 							$(window).load(function(){
 								$("#checkall_'.$check_name.'").change(function () {
@@ -933,12 +935,38 @@ function html_build_checkboxes_from_arrays($vals, $texts, $check_name, $checked=
 						//]]';
 		$return .= html_e('script', array( 'type'=>'text/javascript'), $javascript);
 		$return .= html_ao('p');
-		$return .= html_e('input', array_merge( array( 'type' => 'checkbox', 'name' => 'checkall_'.$check_name, 'id' => 'checkall_'.$check_name ), $attrs));
+		$return .= html_e('input', array_merge( array( 'type' => 'checkbox', 'name' => 'checkall_'.$check_name, 'id' => 'checkall_'.$check_name ), $attrs_checkall));
 		$return .= html_e('label', array_merge( array( 'for' => 'checkall_'.$check_name), $title), _('Check all'), false);
 		$return .= html_ac(html_ap() - 1);
 	}
-	$return .= html_ao('p');
 
+	if (isset($attrs['required']) && $attrs['required']=='required') {
+		$javascript = '//<![CDATA[
+							$(function() {
+								$("input[name=\''.$check_name.'[]\']:checkbox[required]").on("change", function() {
+									var requiredCheckboxes = $(this).parent().children(":checkbox");
+									if (requiredCheckboxes.is(":checked")) {
+										requiredCheckboxes.prop("required", false);
+										requiredCheckboxes.each(function() {
+											this.setCustomValidity("");
+										});
+									} else {
+										requiredCheckboxes.prop("required", true)
+									}
+								});
+								$("input[name=\''.$check_name.'[]\']:checkbox[required]").each(function() {
+									$(this).on("invalid", function() {
+										this.setCustomValidity("");
+										if (!this.validity.valid) {
+											this.setCustomValidity("'._("Please, select at least one of these options").'");
+										}
+									})
+								});
+							});
+						//]]';
+		$return .= html_e('script', array( 'type'=>'text/javascript'), $javascript);
+	}
+	$return .= html_ao('p');
 	if ($show_100) {
 		if (in_array('100', $checked)) {
 			$attrs_100['checked']='checked';
