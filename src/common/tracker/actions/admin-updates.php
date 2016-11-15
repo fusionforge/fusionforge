@@ -267,12 +267,14 @@ if (getStringFromRequest('add_extrafield')) {
 			$error_msg .= _('Update failed')._(': ').$ac->getErrorMessage();
 			$ac->clearError();
 		} else {
-			if($default && !$ac->setDefaultValues($default)){
-				$error_msg .= _('Update failed')._(': ').$ac->getErrorMessage();
-				$ac->clearError();
-			} else {
-				$feedback .= _('Custom Field updated');
-				$next = 'add_extrafield';
+			if($default!==false) {
+				if (!$ac->setDefaultValues($default)){
+					$error_msg .= _('Update failed')._(': ').$ac->getErrorMessage();
+					$ac->clearError();
+				} else {
+					$feedback .= _('Custom Field updated');
+					$next = 'add_extrafield';
+				}
 			}
 		}
 	}
@@ -634,29 +636,15 @@ if (getStringFromRequest('add_extrafield')) {
 	} elseif ($ac->isError()) {
 		$error_msg .= $ac->getErrorMessage();
 	} else {
-		$updated_flag = 0;
 		if (in_array($ac->getType(), unserialize(ARTIFACT_EXTRAFIELDTYPE_SINGLECHOICETYPE))) {
-			$id = getIntFromRequest('is_default');
-			if ($id == 100) {
-				if (!$ac->resetDefaultValues()) {
-					$feedback .= _('Tracker Updated');
-				} else {
-					$error_msg .= _('Update failed')._(': ').$ac->getErrorMessage();
-				}
-			} else {
-				if ($ac->setDefaultValues($id)) {
-					$feedback .= _('Tracker Updated');
-				} else {
-					$error_msg .= _('Update failed')._(': ').$ac->getErrorMessage();
-				}
-			}
+			$is_default = getIntFromRequest('is_default');
 		} else {
 			$is_default =  getArrayFromRequest('is_default');
-			if ($ac->setDefaultValues($is_default)) {
-				$feedback .= _('Tracker Updated');
-			} else {
-				$error_msg .= _('Update failed')._(': ').$ac->getErrorMessage();
-			}
+		}
+		if ($ac->setDefaultValues($is_default)) {
+			$feedback .= _('Default value(s) Updated');
+		} else {
+			$error_msg .= _('Update default value(s) failed')._(': ').$ac->getErrorMessage();
 		}
 	}
 

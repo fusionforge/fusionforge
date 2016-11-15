@@ -50,7 +50,7 @@ define('ARTIFACT_EXTRAFIELDTYPE_RELEASE',16);
 define ("ARTIFACT_EXTRAFIELDTYPE_SINGLECHOICETYPE", serialize (array (ARTIFACT_EXTRAFIELDTYPE_SELECT, ARTIFACT_EXTRAFIELDTYPE_RADIO, ARTIFACT_EXTRAFIELDTYPE_STATUS)));
 define ("ARTIFACT_EXTRAFIELDTYPE_MULTICHOICETYPE", serialize (array (ARTIFACT_EXTRAFIELDTYPE_CHECKBOX, ARTIFACT_EXTRAFIELDTYPE_MULTISELECT)));
 define ("ARTIFACT_EXTRAFIELDTYPE_CHOICETYPE", serialize (array_merge(unserialize(ARTIFACT_EXTRAFIELDTYPE_SINGLECHOICETYPE), unserialize(ARTIFACT_EXTRAFIELDTYPE_MULTICHOICETYPE))));
-define ("ARTIFACT_EXTRAFIELDTYPE_SPECALCHOICETYPE", serialize(array( ARTIFACT_EXTRAFIELDTYPE_USER )));
+define ("ARTIFACT_EXTRAFIELDTYPE_SPECALCHOICETYPE", serialize(array(ARTIFACT_EXTRAFIELDTYPE_USER, ARTIFACT_EXTRAFIELDTYPE_RELEASE)));
 define ("ARTIFACT_EXTRAFIELDTYPE_VALUETYPE", serialize (array (ARTIFACT_EXTRAFIELDTYPE_TEXT,ARTIFACT_EXTRAFIELDTYPE_TEXTAREA,ARTIFACT_EXTRAFIELDTYPE_RELATION,ARTIFACT_EXTRAFIELDTYPE_INTEGER,ARTIFACT_EXTRAFIELDTYPE_FORMULA,ARTIFACT_EXTRAFIELDTYPE_DATETIME)));
 
 class ArtifactExtraField extends FFError {
@@ -527,17 +527,21 @@ class ArtifactExtraField extends FFError {
 					}
 				}
 			} elseif (is_integer($default)) {
-				$efe = new ArtifactExtraFieldElement($this, $default);
-				if (!$efe || !is_object($efe)) {
-					if (is_object($efe)) {
-						$this->setError(_('Unable to create extra field element').' (id='.$default.') '._(':').$efe->getErrorMessage());
-					} else {
-						$this->setError(_('Unable to create extra field element'.' (id='.$default.')'));
+				if ($default == '100') {
+					$return = $this->resetDefaultValues();
+				} else {
+					$efe = new ArtifactExtraFieldElement($this, $default);
+					if (!$efe || !is_object($efe)) {
+						if (is_object($efe)) {
+							$this->setError(_('Unable to create extra field element').' (id='.$default.') '._(':').$efe->getErrorMessage());
+						} else {
+							$this->setError(_('Unable to create extra field element'.' (id='.$default.')'));
+						}
+						$return = false;
+					} elseif (!$efe->update($efe->getName(), $efe->getStatusID(), $efe->getAutoAssignto(), true)) {
+						$this->setError(_('Unable to update extra field element').' '.$efe->getName().' '._(':').$efe->getErrorMessage());
+						$return = false;
 					}
-					$return = false;
-				} elseif (!$efe->update($efe->getName(), $efe->getStatusID(), $efe->getAutoAssignto(), true)) {
-					$this->setError(_('Unable to update extra field element').' '.$efe->getName().' '._(':').$efe->getErrorMessage());
-					$return = false;
 				}
 			} else {
 				$this->setError(_('Unable to set default value')._(':').$default);
@@ -545,36 +549,47 @@ class ArtifactExtraField extends FFError {
 			}
 		} elseif (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPE_SINGLECHOICETYPE))) {
 			if (is_integer($default)) {
-				$efe = new ArtifactExtraFieldElement($this, $default);
-				if (!$efe || !is_object($efe)) {
-					if (is_object($efe)) {
-						$this->setError(_('Unable to create extra field element').' (id='.$default.') '._(':').$efe->getErrorMessage());
-					} else {
-						$this->setError(_('Unable to create extra field element'.' (id='.$default.')'));
+				if ($default == '100') {
+					$return = $this->resetDefaultValues();
+				} else {
+					$efe = new ArtifactExtraFieldElement($this, $default);
+					if (!$efe || !is_object($efe)) {
+						if (is_object($efe)) {
+							$this->setError(_('Unable to create extra field element').' (id='.$default.') '._(':').$efe->getErrorMessage());
+						} else {
+							$this->setError(_('Unable to create extra field element'.' (id='.$default.')'));
+						}
+						$return = false;
+					} elseif (!$efe->update($efe->getName(), $efe->getStatusID(), $efe->getAutoAssignto(), true)) {
+						$this->setError(_('Unable to update extra field element').' '.$efe->getName().' '._(':').$efe->getErrorMessage());
+						$return = false;
 					}
-					$return = false;
-				} elseif (!$efe->update($efe->getName(), $efe->getStatusID(), $efe->getAutoAssignto(), true)) {
-					$this->setError(_('Unable to update extra field element').' '.$efe->getName().' '._(':').$efe->getErrorMessage());
-					$return = false;
 				}
 			} else {
 				$this->setError(_('Unable to set default value')._(':').$default);
 				$return = false;
 			}
-		} elseif (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPE_VALUETYPE)) || $type == ARTIFACT_EXTRAFIELDTYPE_USER || $type == ARTIFACT_EXTRAFIELDTYPE_RELEASE) {
-			$efID = $this->getID();
-			$res = db_query_params ('SELECT default_value FROM artifact_extra_field_default WHERE extra_field_id=$1',
-					array ($efID)) ;
-			if (db_numrows($res) > 0) {
-				$res = db_query_params ('UPDATE artifact_extra_field_default SET default_value = $1 WHERE extra_field_id=$2',
-						array ($default, $efID));
+		} elseif (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPE_VALUETYPE)) || in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPE_SPECALCHOICETYPE))) {
+			if (in_array($type,unserialize(ARTIFACT_EXTRAFIELDTYPE_SPECALCHOICETYPE)) && $default=='100' ||
+					$type==ARTIFACT_EXTRAFIELDTYPE_INTEGER && $default=='0' ||
+					$type==ARTIFACT_EXTRAFIELDTYPE_TEXT && trim($default)=='' ||
+					$type==ARTIFACT_EXTRAFIELDTYPE_TEXTAREA && trim($default)=='') {
+				$return = $this->resetDefaultValues();
 			} else {
-				$res = db_query_params ('INSERT INTO artifact_extra_field_default (extra_field_id, default_value) VALUES ($1,$2)',
-						array ($efID, $default)) ;
-			}
-			if (!$res) {
-				$this->setError(db_error());
-				$return = false;
+				$efID = $this->getID();
+				$res = db_query_params ('SELECT default_value FROM artifact_extra_field_default WHERE extra_field_id=$1',
+						array ($efID)) ;
+				if (db_numrows($res) > 0) {
+					$res = db_query_params ('UPDATE artifact_extra_field_default SET default_value = $1 WHERE extra_field_id=$2',
+							array ($default, $efID));
+				} else {
+					$res = db_query_params ('INSERT INTO artifact_extra_field_default (extra_field_id, default_value) VALUES ($1,$2)',
+							array ($efID, $default)) ;
+				}
+				if (!$res) {
+					$this->setError(db_error());
+					$return = false;
+				}
 			}
 		}
 		return $return;
@@ -586,19 +601,13 @@ class ArtifactExtraField extends FFError {
 	 * @return	boolean
 	 */
 	function resetDefaultValues() {
-		$type = $this->getType();
-		$return = true;
-		if (in_array($type, ARTIFACT_EXTRAFIELDTYPE_SPECALCHOICETYPE)) {
-			//drop fake artifact_extra_field_elements set with is_default = 1
-		} elseif (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPE_MULTICHOICETYPE)) || in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPE_SINGLECHOICETYPE))) {
-			$result = db_query_params ('DELETE FROM artifact_extra_field_default WHERE extra_field_id = $1',
-					array ($this->getID()));
-			if (!$result) {
-				$this->setError(db_error());
-				$return = false;
-			}
-		} elseif (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPE_VALUETYPE))) {
-			//drop fake artifact_extra_field_elements set with is_default = 1
+		$result = db_query_params ('DELETE FROM artifact_extra_field_default WHERE extra_field_id = $1',
+				array ($this->getID()));
+		if (!$result) {
+			$this->setError(db_error());
+			$return = false;
+		} else {
+			$return = true;
 		}
 		return $return;
 	}
