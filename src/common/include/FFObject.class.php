@@ -360,7 +360,7 @@ class FFObject extends FFError {
 		if ($url !== false) {
 			$content .= $HTML->openForm(array('action' => $url, 'method' => 'post'));
 		}
-		$content .= html_e('input', array('type' => 'text', 'value' => '', 'name' => 'newobjectsassociation', 'title' => _('Use standard reference such #nnn, Dnnn, to add object association. Comma separeted')));
+		$content .= html_e('input', array('type' => 'text', 'value' => '', 'name' => 'newobjectsassociation', 'title' => _('Use standard reference such #nnn, Dnnn, to add object association. Comma separated')));
 		if ($url !== false) {
 			$content .= html_e('input', array('type' => 'submit', 'value' => _('Add')));
 			$content .= $HTML->closeForm();
