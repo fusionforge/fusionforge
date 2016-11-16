@@ -41,6 +41,7 @@ if ($docid) {
 	if ($documentObject && !$documentObject->isError()) {
 		$result['html'] = $documentObject->showAssociations('/docman/?action=deleteassociations&group_id='.$group_id.'&dirid='.$documentObject->getDocGroupID().'&docid='.$docid);
 		$result['html'] .= $documentObject->showAddAssociations();
+		$result['htmltab'] = _('Associations').' ('.$documentObject->getAssociationCounter().')';
 	} else {
 		$result['html'] = $HTML->warning_msg(_('Cannot retrieve document')._(': ').$docid);
 	}
