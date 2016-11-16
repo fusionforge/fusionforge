@@ -134,5 +134,5 @@ if ($owner) {
 	}
 }
 if (!$request->isAjax()) {
-	session_redirect($redirect);
+	session_redirect($redirect, false);
 }
