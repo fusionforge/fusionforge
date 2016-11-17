@@ -116,7 +116,7 @@ if (!$ac || !is_object($ac)) {
 				}
 				$title_arr[]='';
 				echo $HTML->listTableTop ($title_arr,false, ' ');
-				if (in_array($efType, unserialize(ARTIFACT_EXTRAFIELDTYPE_SINGLECHOICETYPE))) {
+				if (in_array($efType, unserialize(ARTIFACT_EXTRAFIELDTYPE_CHOICETYPE))) {
 					$row_attrs = array('class'=>$HTML->boxGetAltRowStyle(-1,true));
 					$cells = array();
 					$cells[] = array('', 'class'=>'align-right');
@@ -125,7 +125,29 @@ if (!$ac || !is_object($ac)) {
 					}
 					$cells[] = array('', 'class'=>'align-center');
 					$cells[] = array(_('None'));
-					$content = html_build_radio_button('is_default', 100, true);
+					if (in_array($efType, unserialize(ARTIFACT_EXTRAFIELDTYPE_MULTICHOICETYPE))) {
+						$defaultValues = $ac->getDefaultValues();
+						if (is_array($defaultValues)) {
+							if (in_array('100', $defaultValues)) {
+								$content = html_build_checkbox('is_default[100]', false, true);
+							} else {
+								$content = html_build_checkbox('is_default[100]', false, false);
+							}
+						} else {
+							if ($defaultValues == 100) {
+								$content = html_build_checkbox('is_default[100]', false, true);
+							} else {
+								$content = html_build_checkbox('is_default[100]', false, false);
+							}
+						}
+					} elseif (in_array($efType, unserialize(ARTIFACT_EXTRAFIELDTYPE_SINGLECHOICETYPE))) {
+						$defaultValues = $ac->getDefaultValues();
+						if ($defaultValues == 100) {
+							$content = html_build_radio_button('is_default', 100, true);
+						} else {
+							$content = html_build_radio_button('is_default', 100, false);
+						}
+					}
 					$cells[] = array($content, 'class'=>'align-center');
 					$cells[] = array('', 'class'=>'align-center');
 					echo $HTML->multiTableRow($row_attrs, $cells);

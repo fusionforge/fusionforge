@@ -827,6 +827,7 @@ class ArtifactType extends FFError {
 						$role = RBACEngine::getInstance()->getRoleById($roleEl['element_name']);
 						if ( $role->hasUser($defaultUser)) {
 							$nef->setDefaultValues($default);
+							break;
 						}
 					}
 				} else {

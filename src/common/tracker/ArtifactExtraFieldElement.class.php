@@ -301,6 +301,40 @@ class ArtifactExtraFieldElement extends FFError {
 	}
 
 	/**
+	 * setAsDefault - set this field element as default value or not.
+	 *
+	 * @param	isDefault	boolean true-> set as default, false->unset as default
+	 * @return	boolean
+	 */
+	function setAsDefault($isDefault) {
+		if ($this->isDefault() && !$is_default) {
+			$result = db_query_params ('DELETE FROM artifact_extra_field_default WHERE extra_field_id = $1 AND default_value = $2',
+					array ($this->ArtifactExtraField->getID(), $this->getID()));
+			if (!$result) {
+				$this->setError(db_error());
+				return false;
+			}
+		} elseif (!$this->isDefault() && $is_default) {
+			if (in_array($this->ArtifactExtraField->getType(), unserialize(ARTIFACT_EXTRAFIELDTYPE_SINGLECHOICETYPE))) {
+				$result = db_query_params ('DELETE FROM artifact_extra_field_default WHERE extra_field_id = $1',
+						array ($this->ArtifactExtraField->getID()));
+				if (!$result) {
+					$this->setError(db_error());
+					$return = false;
+				}
+			}
+			$result = db_query_params ('INSERT INTO artifact_extra_field_default (extra_field_id, default_value) VALUES ($1,$2)',
+					array ($this->ArtifactExtraField->getID(), $this->getID()));
+			if (!$result) {
+				$this->setError(db_error());
+				return false;
+			}
+		}
+		return true;
+	}
+
+
+	/**
 	 * getChildrenElements - return the array of the elements of children fields who depend on current element
 	 *
 	 * @return	array of parent elements
@@ -438,37 +472,9 @@ class ArtifactExtraFieldElement extends FFError {
 			return false;
 		}
 
-		$default = db_query_params ('SELECT 1 FROM artifact_extra_field_default WHERE default_value=$1',
-				array ($this->getID())) ;
-		if (!$default) {
-			$this->setError('ArtifactExtraField: Invalid ArtifactExtraFieldElement ID');
+		if (!$this->setAsDefault($is_default)) {
 			return false;
 		}
-		if (db_numrows($default) >= 1 && !$is_default) {
-			$result = db_query_params ('DELETE FROM artifact_extra_field_default WHERE extra_field_id = $1 AND default_value = $2',
-					array ($this->ArtifactExtraField->getID(), $this->getID()));
-			if (!$result) {
-				$this->setError(db_error());
-				return false;
-			}
-		}
-		if (db_numrows($default) == 0 && $is_default) {
-			if (in_array($this->ArtifactExtraField->getType(), unserialize(ARTIFACT_EXTRAFIELDTYPE_SINGLECHOICETYPE))) {
-				$result = db_query_params ('DELETE FROM artifact_extra_field_default WHERE extra_field_id = $1',
-						array ($this->ArtifactExtraField->getID()));
-				if (!$result) {
-					$this->setError(db_error());
-					$return = false;
-				}
-			}
-			$result = db_query_params ('INSERT INTO artifact_extra_field_default (extra_field_id, default_value) VALUES ($1,$2)',
-					array ($this->ArtifactExtraField->getID(), $this->getID()));
-			if (!$result) {
-				$this->setError(db_error());
-				return false;
-			}
-		}
-		db_free_result($default);
 		return true;
 	}
 

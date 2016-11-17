@@ -640,6 +640,7 @@ if (getStringFromRequest('add_extrafield')) {
 			$is_default = getIntFromRequest('is_default');
 		} else {
 			$is_default =  getArrayFromRequest('is_default');
+			$is_default = array_keys($is_default);
 		}
 		if ($ac->setDefaultValues($is_default)) {
 			$feedback .= _('Default value(s) Updated');
