@@ -367,7 +367,8 @@ function session_cookie($name, $value, $domain='', $expiration=0) {
 /**
  *	session_redirect_uri() - Redirect browser
  *
- *	@param		string	Absolute URI
+ *	@param	string	$loc	Absolute URI
+ *	@param	bool	$permanent
  *	@return never returns
  */
 function session_redirect_uri($loc, $permanent=true) {
