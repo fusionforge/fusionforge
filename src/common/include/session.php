@@ -44,7 +44,7 @@ $session_ser = '';
 /**
  *	session_build_session_token() - Construct session token for the user
  *
- *	@param		int		$user_id	User_id of the logged in user
+ *	@param	int	$user_id	User_id of the logged in user
  *	@return string token value
  */
 function session_build_session_token($user_id) {
@@ -392,6 +392,7 @@ function session_redirect_uri($loc, $permanent=true) {
  * session_redirect() - Redirect browser within the site and exit.
  *
  * @param  string $loc    Absolute path within the site
+ * @param  bool   $permanent
  */
 function session_redirect($loc, $permanent=true) {
 	session_redirect_uri(util_make_url($loc), $permanent);
@@ -408,7 +409,7 @@ function session_redirect_external($url) {
 }
 
 /**
- *	session_redirect404() - Redirect browser to 404 error page
+ *	session_redirect404() - Redirect browser to 404 error page and exit.
  *
  *	@return never returns
  */
@@ -771,8 +772,7 @@ function setup_tz_from_context() {
 /**
  *	session_get_user() - Wrapper function to return the User object for the logged in user.
  *
- *	@return User
- *	@access public
+ *	@return FFUser
  */
 function &session_get_user() {
 	global $G_SESSION;
