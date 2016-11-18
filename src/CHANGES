@@ -44,6 +44,7 @@ FusionForge 6.X:
 * Widget ProjectScmStats: new widget for project to display SCM stats (TrivialDev)
 
 FusionForge 6.0.5:
+* Forum: fix redirection cache [#835] & [#836] (TrivialDev)
 * Plugin SCM SVN: fix activity when SVN repository is private [#813] (TrivialDev)
 * Plugin SCM SVN: fix support old svn clients (Inria)
 * Plugin SCM Git: fix activity when Git repository is private [#825] (TrivialDev)
