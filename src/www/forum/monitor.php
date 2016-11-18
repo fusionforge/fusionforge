@@ -5,6 +5,7 @@
  * Copyright 1999-2001, Tim Perdue - Sourceforge
  * Copyright 2002, Tim Perdue - GForge, LLC
  * Copyright 2010 (c) Franck Villaume - Capgemini
+ * Copyright 2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -53,7 +54,7 @@ if ($forum_id && $group_id) {
 		$confirm = getStringFromRequest('confirm');
 		$cancel = getStringFromRequest('cancel');
 		if ($cancel) {
-			session_redirect('/forum/forum.php?forum_id='.$forum_id.'&group_id='.$group_id);
+			session_redirect('/forum/forum.php?forum_id='.$forum_id.'&group_id='.$group_id, false);
 		}
 		if (!$confirm) {
 			forum_header(array('title'=>_('Stop Monitoring'), 'modal' => 1));
@@ -70,14 +71,14 @@ if ($forum_id && $group_id) {
 			exit_error($f->getErrorMessage(),'forums');
 		} else {
 			$feedback = _('Forum Monitoring Deactivated');
-			session_redirect('/forum/forum.php?forum_id='.$forum_id.'&group_id='.$group_id);
+			session_redirect('/forum/forum.php?forum_id='.$forum_id.'&group_id='.$group_id, false);
 		}
-	} elseif(getIntFromRequest('start')) {
+	} elseif (getIntFromRequest('start')) {
 		if (!$f->setMonitor()) {
 			exit_error($f->getErrorMessage(),'forums');
 		} else {
 			$feedback = _('Forum Monitoring Started');
-			session_redirect('/forum/forum.php?forum_id='.$forum_id.'&group_id='.$group_id);
+			session_redirect('/forum/forum.php?forum_id='.$forum_id.'&group_id='.$group_id, false);
 		}
 	}
 } else {
