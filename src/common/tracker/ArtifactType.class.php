@@ -685,7 +685,7 @@ class ArtifactType extends FFError {
 			if (!is_null($defaultValue)) {
 				$efDefaultValue [$efID] = $defaultValue;
 			} else {
-				if (in_array($efArr['field_type'],unserialize(ARTIFACT_EXTRAFIELDTYPE_SINGLECHOICETYPE))) {
+				if (in_array($efArr['field_type'],unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_SINGLECHOICE))) {
 					$efDefaultValue [$efID] = '';
 				}
 			}
@@ -764,7 +764,7 @@ class ArtifactType extends FFError {
 			//
 			//	Iterate the elements
 			//
-			if (in_array($ef['field_type'], unserialize(ARTIFACT_EXTRAFIELDTYPE_CHOICETYPE))) {
+			if (in_array($ef['field_type'], unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_CHOICE))) {
 				$elements = $this->getExtraFieldElements($ef['extra_field_id']);
 				foreach ($elements as $el) {
 					//new element
@@ -816,7 +816,7 @@ class ArtifactType extends FFError {
 			$nef = new ArtifactExtraField($this, $newEFId);
 			// clone default value
 			$type = $oef->getType();
-			if (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPE_VALUETYPE)) || $type == ARTIFACT_EXTRAFIELDTYPE_USER) {
+			if (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_VALUE)) || $type == ARTIFACT_EXTRAFIELDTYPE_USER) {
 				$default = $oef->getDefaultValues();
 				if (($type==ARTIFACT_EXTRAFIELDTYPE_INTEGER && $default != 0)) {
 					$nef->setDefaultValues($default);

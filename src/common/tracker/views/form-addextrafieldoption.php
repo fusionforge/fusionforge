@@ -111,12 +111,12 @@ if (!$ac || !is_object($ac)) {
 				}
 				$title_arr[]=_('Up/Down positions');
 				$title_arr[]=_('Elements Defined');
-				if (in_array($efType, unserialize(ARTIFACT_EXTRAFIELDTYPE_CHOICETYPE))) {
+				if (in_array($efType, unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_CHOICE))) {
 					$title_arr[]=_('Default');
 				}
 				$title_arr[]='';
 				echo $HTML->listTableTop ($title_arr,false, ' ');
-				if (in_array($efType, unserialize(ARTIFACT_EXTRAFIELDTYPE_CHOICETYPE))) {
+				if (in_array($efType, unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_CHOICE))) {
 					$row_attrs = array('class'=>$HTML->boxGetAltRowStyle(-1,true));
 					$cells = array();
 					$cells[] = array('', 'class'=>'align-right');
@@ -125,7 +125,7 @@ if (!$ac || !is_object($ac)) {
 					}
 					$cells[] = array('', 'class'=>'align-center');
 					$cells[] = array(_('None'));
-					if (in_array($efType, unserialize(ARTIFACT_EXTRAFIELDTYPE_MULTICHOICETYPE))) {
+					if (in_array($efType, unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_MULTICHOICE))) {
 						$defaultValues = $ac->getDefaultValues();
 						if (is_array($defaultValues)) {
 							if (in_array('100', $defaultValues)) {
@@ -140,7 +140,7 @@ if (!$ac || !is_object($ac)) {
 								$content = html_build_checkbox('is_default[100]', false, false);
 							}
 						}
-					} elseif (in_array($efType, unserialize(ARTIFACT_EXTRAFIELDTYPE_SINGLECHOICETYPE))) {
+					} elseif (in_array($efType, unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_SINGLECHOICE))) {
 						$defaultValues = $ac->getDefaultValues();
 						if ($defaultValues == 100) {
 							$content = html_build_radio_button('is_default', 100, true);
@@ -164,10 +164,9 @@ if (!$ac || !is_object($ac)) {
 					$content .= util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&boxid='.$boxid.'&id='.$efearr[$i]['element_id'].'&updownorder_opt=1&new_pos='.(($i == $rows - 1)? $i + 1 : $i + 2), html_image('ic/btn_down.png','19','18',array('alt'=>'Down', 'title'=>_('Move Down this custom field element'))));
 					$cells[] = array($content, 'class'=>'align-center');
 					$cells[] = array($efearr[$i]['element_name']);
-					if (in_array($efType, unserialize(ARTIFACT_EXTRAFIELDTYPE_MULTICHOICETYPE))) {
+					if (in_array($efType, unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_MULTICHOICE))) {
 						$content = html_build_checkbox('is_default['. $efearr[$i]['element_id'] .']', false, $efearr[$i]['is_default']);
 						$cells[] = array($content, 'class'=>'align-center');
-					} elseif (in_array($efType, unserialize(ARTIFACT_EXTRAFIELDTYPE_SINGLECHOICETYPE))) {
 						$content = html_build_radio_button('is_default', $efearr[$i]['element_id'], $efearr[$i]['is_default']);
 						$cells[] = array($content, 'class'=>'align-center');
 					}
@@ -185,7 +184,7 @@ if (!$ac || !is_object($ac)) {
 				}
 				$content = html_e('input', array('type'=>'submit', 'name'=>'post_changes_alphaorder', 'value'=>_('Alphabetical order')));
 				$cells[] = array($content, 'class'=>'align-left');
-				if (in_array($efType, unserialize(ARTIFACT_EXTRAFIELDTYPE_CHOICETYPE))) {
+				if (in_array($efType, unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_CHOICE))) {
 					$content = html_e('input', array('type'=>'submit', 'name'=>'post_changes_default', 'value'=>_('Update default')));
 					$cells[] = array($content, 'class'=>'align-center');
 				}

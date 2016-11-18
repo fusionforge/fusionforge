@@ -636,7 +636,7 @@ if (getStringFromRequest('add_extrafield')) {
 	} elseif ($ac->isError()) {
 		$error_msg .= $ac->getErrorMessage();
 	} else {
-		if (in_array($ac->getType(), unserialize(ARTIFACT_EXTRAFIELDTYPE_SINGLECHOICETYPE))) {
+		if (in_array($ac->getType(), unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_SINGLECHOICE))) {
 			$is_default = getIntFromRequest('is_default');
 		} else {
 			$is_default =  getArrayFromRequest('is_default');

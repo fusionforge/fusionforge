@@ -47,11 +47,11 @@ define('ARTIFACT_EXTRAFIELDTYPE_USER',14);
 /* 15: reserved MULTIUSER */
 define('ARTIFACT_EXTRAFIELDTYPE_RELEASE',16);
 
-define ("ARTIFACT_EXTRAFIELDTYPE_SINGLECHOICETYPE", serialize (array (ARTIFACT_EXTRAFIELDTYPE_SELECT, ARTIFACT_EXTRAFIELDTYPE_RADIO, ARTIFACT_EXTRAFIELDTYPE_STATUS)));
-define ("ARTIFACT_EXTRAFIELDTYPE_MULTICHOICETYPE", serialize (array (ARTIFACT_EXTRAFIELDTYPE_CHECKBOX, ARTIFACT_EXTRAFIELDTYPE_MULTISELECT)));
-define ("ARTIFACT_EXTRAFIELDTYPE_CHOICETYPE", serialize (array_merge(unserialize(ARTIFACT_EXTRAFIELDTYPE_SINGLECHOICETYPE), unserialize(ARTIFACT_EXTRAFIELDTYPE_MULTICHOICETYPE))));
-define ("ARTIFACT_EXTRAFIELDTYPE_SPECALCHOICETYPE", serialize(array(ARTIFACT_EXTRAFIELDTYPE_USER, ARTIFACT_EXTRAFIELDTYPE_RELEASE)));
-define ("ARTIFACT_EXTRAFIELDTYPE_VALUETYPE", serialize (array (ARTIFACT_EXTRAFIELDTYPE_TEXT,ARTIFACT_EXTRAFIELDTYPE_TEXTAREA,ARTIFACT_EXTRAFIELDTYPE_RELATION,ARTIFACT_EXTRAFIELDTYPE_INTEGER,ARTIFACT_EXTRAFIELDTYPE_FORMULA,ARTIFACT_EXTRAFIELDTYPE_DATETIME)));
+define ("ARTIFACT_EXTRAFIELDTYPEGROUP_SINGLECHOICE", serialize (array (ARTIFACT_EXTRAFIELDTYPE_SELECT, ARTIFACT_EXTRAFIELDTYPE_RADIO, ARTIFACT_EXTRAFIELDTYPE_STATUS)));
+define ("ARTIFACT_EXTRAFIELDTYPEGROUP_MULTICHOICE", serialize (array (ARTIFACT_EXTRAFIELDTYPE_CHECKBOX, ARTIFACT_EXTRAFIELDTYPE_MULTISELECT)));
+define ("ARTIFACT_EXTRAFIELDTYPEGROUP_CHOICE", serialize (array_merge(unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_SINGLECHOICE), unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_MULTICHOICE))));
+define ("ARTIFACT_EXTRAFIELDTYPEGROUP_SPECALCHOICE", serialize(array(ARTIFACT_EXTRAFIELDTYPE_USER, ARTIFACT_EXTRAFIELDTYPE_RELEASE)));
+define ("ARTIFACT_EXTRAFIELDTYPEGROUP_VALUE", serialize (array (ARTIFACT_EXTRAFIELDTYPE_TEXT,ARTIFACT_EXTRAFIELDTYPE_TEXTAREA,ARTIFACT_EXTRAFIELDTYPE_RELATION,ARTIFACT_EXTRAFIELDTYPE_INTEGER,ARTIFACT_EXTRAFIELDTYPE_FORMULA,ARTIFACT_EXTRAFIELDTYPE_DATETIME)));
 
 class ArtifactExtraField extends FFError {
 
@@ -494,7 +494,7 @@ class ArtifactExtraField extends FFError {
 	function setDefaultValues($default) {
 		$type = $this->getType();
 		$return = true;
-		if (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPE_MULTICHOICETYPE))) {
+		if (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_MULTICHOICE))) {
 			if (is_array($default)) {
 				$efValues = $this->getAvailableValues();
 				$oldDefault = $this->getDefaultValues();
@@ -544,7 +544,7 @@ class ArtifactExtraField extends FFError {
 				$this->setError(_('Unable to set default value')._(':').$default);
 				$return = false;
 			}
-		} elseif (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPE_SINGLECHOICETYPE))) {
+		} elseif (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_SINGLECHOICE))) {
 			if (is_integer($default)) {
 				if ($default == '100') {
 					$return = $this->resetDefaultValues();
@@ -566,8 +566,8 @@ class ArtifactExtraField extends FFError {
 				$this->setError(_('Unable to set default value')._(':').$default);
 				$return = false;
 			}
-		} elseif (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPE_VALUETYPE)) || in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPE_SPECALCHOICETYPE))) {
-			if (in_array($type,unserialize(ARTIFACT_EXTRAFIELDTYPE_SPECALCHOICETYPE)) && $default=='100' ||
+		} elseif (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_VALUE)) || in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_SPECALCHOICE))) {
+			if (in_array($type,unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_SPECALCHOICE)) && $default=='100' ||
 					$type==ARTIFACT_EXTRAFIELDTYPE_INTEGER && $default=='0' ||
 					$type==ARTIFACT_EXTRAFIELDTYPE_TEXT && trim($default)=='' ||
 					$type==ARTIFACT_EXTRAFIELDTYPE_TEXTAREA && trim($default)=='') {
@@ -619,7 +619,7 @@ class ArtifactExtraField extends FFError {
 		$res = db_query_params ('SELECT default_value FROM artifact_extra_field_default WHERE extra_field_id=$1',
 				array ($this->getID()));
 		$type = $this->getType();
-		if (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPE_VALUETYPE))) {
+		if (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_VALUE))) {
 			$row = db_fetch_array($res);
 			$return = $row['default_value'];
 			if (is_null($return) && $type == ARTIFACT_EXTRAFIELDTYPE_INTEGER) {
@@ -636,7 +636,7 @@ class ArtifactExtraField extends FFError {
 			} else {
 				$return = (integer)$row['default_value'];
 			}
-		} elseif (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPE_SINGLECHOICETYPE))) {
+		} elseif (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_SINGLECHOICE))) {
 			$row = db_fetch_array($res);
 			if (!$row) {
 				if ($this->getShow100()) {
@@ -647,7 +647,7 @@ class ArtifactExtraField extends FFError {
 			} else {
 				$return = (integer)$row['default_value'];
 			}
-		} elseif (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPE_MULTICHOICETYPE))) {
+		} elseif (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_MULTICHOICE))) {
 			$return = array();
 			while ($row = db_fetch_array($res)) {
 				$return[] = $row['default_value'];
@@ -696,7 +696,7 @@ class ArtifactExtraField extends FFError {
 	 */
 	function getAvailableValues() {
 		$type = $this->getType();
-		if (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPE_VALUETYPE))) {
+		if (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_VALUE))) {
 			$return = array();;
 		} else {
 			$res = db_query_params ('SELECT *, 0 AS is_default
@@ -707,14 +707,14 @@ class ArtifactExtraField extends FFError {
 			$default = $this->getDefaultValues();
 
 			$return = array();
-			if (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPE_SINGLECHOICETYPE))) {
+			if (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_SINGLECHOICE))) {
 				while ($row = db_fetch_array($res)) {
 					if ($row['element_id']==$default) {
 						$row['is_default']=1;
 					}
 					$return[] = $row;
 				}
-			} elseif (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPE_MULTICHOICETYPE))) {
+			} elseif (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_MULTICHOICE))) {
 				while ($row = db_fetch_array($res)) {
 					if (in_array($row['element_id'],$default)) {
 						$row['is_default']=1;

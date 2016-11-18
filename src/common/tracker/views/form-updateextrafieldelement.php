@@ -56,7 +56,7 @@ if (!$ac || !is_object($ac)) {
 		echo html_ao('p');
 		echo html_e('label', array('for'=>'name'), html_e('strong', array(), _('Element')._(':')).html_e('br'));
 		echo html_e('input', array('type'=>'text', 'id'=>'name', 'name'=>'name', 'value'=>$ao->getName()));
-		if (in_array($ef_type, unserialize(ARTIFACT_EXTRAFIELDTYPE_CHOICETYPE))) {
+		if (in_array($ef_type, unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_CHOICE))) {
 			echo html_build_checkbox('is_default', false, $ao->isDefault());
 			echo html_e('label', array('for'=>'is_default'), _('Default value'));
 		}

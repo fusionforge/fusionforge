@@ -140,7 +140,7 @@ class ArtifactExtraFieldElement extends FFError {
 
 			if ($is_default) {
 				$type = $this->ArtifactExtraField->getType();
-				if (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPE_SINGLECHOICETYPE))) {
+				if (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_SINGLECHOICE))) {
 					$result = db_query_params ('DELETE FROM artifact_extra_field_default WHERE extra_field_id = $1',
 							array ($this->ArtifactExtraField->getID()));
 					if (!$result) {
@@ -315,7 +315,7 @@ class ArtifactExtraFieldElement extends FFError {
 				return false;
 			}
 		} elseif (!$this->isDefault() && $is_default) {
-			if (in_array($this->ArtifactExtraField->getType(), unserialize(ARTIFACT_EXTRAFIELDTYPE_SINGLECHOICETYPE))) {
+			if (in_array($this->ArtifactExtraField->getType(), unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_SINGLECHOICE))) {
 				$result = db_query_params ('DELETE FROM artifact_extra_field_default WHERE extra_field_id = $1',
 						array ($this->ArtifactExtraField->getID()));
 				if (!$result) {
