@@ -303,7 +303,7 @@ class FFObject extends FFError {
 							$tabletop[] = _('Actions');
 							$classth[] = 'unsortable';
 						}
-						$content .= $HTML->listTableTop($tabletop, array(), 'sortable', 'sortable_association', $classth);
+						$content .= $HTML->listTableTop($tabletop, array(), 'full sortable', 'sortable_association', $classth);
 						$displayHeader = true;
 					}
 					foreach ($objectIds as $objectId) {
@@ -330,7 +330,7 @@ class FFObject extends FFError {
 							$tabletop[] = _('Actions');
 							$classth[] = 'unsortable';
 						}
-						$content .= $HTML->listTableTop($tabletop, array(), 'sortable', 'sortable_association', $classth);
+						$content .= $HTML->listTableTop($tabletop, array(), 'full sortable', 'sortable_association', $classth);
 						$displayHeader = true;
 					}
 					foreach ($objectIds as $objectId) {
