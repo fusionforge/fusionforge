@@ -30,6 +30,7 @@ FusionForge 6.X:
 * Tracker: keep values in artifact new submit form on error. (TrivialDev)
 * Tracker: add new extrafield: text regex (TrivialDev)
 * Tracker: add new extrafield: User (TrivialDev)
+* Tracker: add new extrafield: DateTime (TrivialDev)
 * Tracker: add support for mandatory fields on workflow of artifact (TrivialDev)
 * Tracker: add support for description on extrafield to be used in tooltip (TrivialDev)
 * Tracker: fix extrafield cloning when not using default template fusionforge project [#829] (TrivialDev)
