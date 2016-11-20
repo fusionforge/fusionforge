@@ -182,4 +182,3 @@ class Widget_TrackerComment extends Widget {
 		return _('Trackers');
 	}
 }
-
