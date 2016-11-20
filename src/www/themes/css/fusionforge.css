@@ -4,6 +4,7 @@
  * Copyright 2009 Matthieu Faure // Open-s.com
  * Copyright 2010 Franck Villaume - Capgemini
  * Copyright 2014 Franck Villaume - TrivialDev
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -1081,3 +1082,7 @@ table.id_sortable th.headerSortDown span {
 	z-index: 100 !important;
 }
 
+/* datetimepicker */
+.xdsoft_datetimepicker .active {
+	background: none;
+}

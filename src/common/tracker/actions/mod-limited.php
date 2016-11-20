@@ -6,6 +6,7 @@
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
  * Copyright 2012-2016, Franck Villaume - TrivialDev
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -35,9 +36,11 @@ global $HTML;
 
 html_use_jqueryui();
 html_use_coolfieldset();
+html_use_jquerydatetimepicker();
 $ath->header(array ('title'=> $ah->getStringID().' '. $ah->getSummary(), 'atid'=>$ath->getID()));
 
 echo notepad_func();
+echo init_datetimepicker();
 
 echo $HTML->openForm(array('id' => 'trackermodlimitedform', 'action' => '/tracker/?group_id='.$group_id.'&atid='.$ath->getID(), 'enctype' => 'multipart/form-data', 'method' => 'post'));
 ?>

@@ -580,6 +580,24 @@ function html_use_jquerybrowser() {
 	use_javascript('/scripts/jquery-auto-height/jquery.browser.js');
 }
 
+function html_use_jquerymousewheel() {
+	html_use_jquery();
+	use_javascript('/scripts/jquery-mousewheel/jquery.mousewheel.js');
+}
+
+function html_use_phpdateformatter() {
+	use_javascript('/scripts/php-date-formatter/js/php-date-formatter.js');
+}
+
+function html_use_jquerydatetimepicker() {
+	html_use_jquery();
+	html_use_phpdateformatter();
+	html_use_jquerymousewheel();
+	use_javascript('/scripts/jquery-datetimepicker/jquery.datetimepicker.js');
+	use_stylesheet('/scripts/jquery-datetimepicker/jquery.datetimepicker.css');
+}
+
+
 /**
  * html_build_select_box_from_arrays() - Takes two arrays, with the first array being the "id" or value and the other
  * array being the text you want displayed.

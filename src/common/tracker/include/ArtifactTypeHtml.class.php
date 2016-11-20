@@ -337,6 +337,8 @@ class ArtifactTypeHtml extends ArtifactType {
 				if ($mode == 'UPDATE' || $mode == 'NEW') {
 					$post_name = html_image('ic/forum_edit.gif', 37, 15 ,array('title'=>"Click to edit", 'alt'=>"Click to edit", 'onclick'=>"switch2edit(this, 'show$i', 'edit$i')"));
 				}
+			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_DATETIME) {
+				$str = $this->renderDatetime($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']], $attrs);
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_USER) {
 				$str = $this->renderUserField($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['show100'],$efarr[$i]['show100label'],$show_any,$text_any,false, $attrs);
 			} elseif  ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RELEASE) {
@@ -511,7 +513,8 @@ class ArtifactTypeHtml extends ArtifactType {
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_TEXT ||
 				$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_INTEGER ||
-				$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RELATION) {
+				$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RELATION ||
+				$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_DATETIME) {
 
 				//text fields might be really wide, so need a row to themselves.
 				if (($col_count == 1) && ($efarr[$i]['attribute1'] > 30)) {
@@ -964,6 +967,20 @@ class ArtifactTypeHtml extends ArtifactType {
 		return html_e('textarea', array_merge(array('name'=>'extra_fields['.$extra_field_id.']', 'rows'=>$rows, 'cols'=>$cols), $attrs), $contents, false);
 	}
 
+	
+	/**
+	 * renderDatetime - this function builds a Datetime field.
+	 *
+	 * @param	int	$extra_field_id	The ID of this field.
+	 * @param	string	$datetime	datetime for this field.
+	 * @param	array	$attrs		Array of other attributes
+	 * @return	string	datetime.
+	 */
+	function renderDatetime($extra_field_id,$datetime, $attrs = array()) {
+		$return .= html_e('input', array_merge(array('type'=>'text', 'class'=>'datetimepicker'),$attrs));
+		return $return;
+	}
+	
 	function technicianBox ($name='assigned_to[]',$checked='xzxz',$show_100=true,$text_100='none',$extra_id='-1',$extra_name='',$multiple=false) {
 		if ($text_100=='none'){
 			$text_100=_('Nobody');

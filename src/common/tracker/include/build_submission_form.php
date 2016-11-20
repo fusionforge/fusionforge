@@ -23,12 +23,14 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 require_once 'note.php';
+require_once 'jquery_plugins.php';
 function artifact_submission_form($ath, $group, $summary='', $details='', $assigned_to=100, $priority=null, $extra_fields=array()) {
 	global $HTML;
 	/*
 		Show the free-form text submitted by the project admin
 	*/
 	echo notepad_func();
+	echo init_datetimepicker();
 	echo $ath->renderSubmitInstructions();
 	echo $HTML->openForm(array('id' => 'trackeraddform', 'action' => '/tracker/?group_id='.$group->getID().'&atid='.$ath->getID(), 'method' => 'post', 'enctype' => 'multipart/form-data'));
 	echo html_e('input', array( 'type'=>'hidden', 'name'=>'form_key', 'value'=>form_generate_key()));

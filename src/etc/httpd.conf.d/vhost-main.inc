@@ -90,6 +90,9 @@ Alias ${FF__core__url_prefix}scripts/jquery-livequery/ ${FF__core__source_path}/
 Alias ${FF__core__url_prefix}scripts/jquery-teamwork-gantt/ ${FF__core__source_path}/vendor/jquery-teamwork-gantt/
 Alias ${FF__core__url_prefix}scripts/jquery-splitter/ ${FF__core__source_path}/vendor/jquery-splitter/
 Alias ${FF__core__url_prefix}scripts/jquery-auto-height/ ${FF__core__source_path}/vendor/jquery-auto-height/
+Alias ${FF__core__url_prefix}scripts/php-date-formatter/ ${FF__core__source_path}/vendor/php-date-formatter/
+Alias ${FF__core__url_prefix}scripts/jquery-mousewheel/ ${FF__core__source_path}/vendor/jquery-mousewheel/
+Alias ${FF__core__url_prefix}scripts/jquery-datetimepicker/ ${FF__core__source_path}/vendor/jquery-datetimepicker/
 
 # For FusionForge without DNS delegation, uncomment this
 # and remove 30-vhosts-projects.conf

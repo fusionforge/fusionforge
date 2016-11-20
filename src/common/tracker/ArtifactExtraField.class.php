@@ -47,6 +47,10 @@ define('ARTIFACT_EXTRAFIELDTYPE_USER',14);
 /* 15: reserved MULTIUSER */
 define('ARTIFACT_EXTRAFIELDTYPE_RELEASE',16);
 
+define('ARTIFACT_EXTRAFIELDSUBTYPE_DATE',1);
+define('ARTIFACT_EXTRAFIELDSUBTYPE_TIME',2);
+define('ARTIFACT_EXTRAFIELDSUBTYPE_DATETIME',3);
+
 define ("ARTIFACT_EXTRAFIELDTYPEGROUP_SINGLECHOICE", serialize (array (ARTIFACT_EXTRAFIELDTYPE_SELECT, ARTIFACT_EXTRAFIELDTYPE_RADIO, ARTIFACT_EXTRAFIELDTYPE_STATUS)));
 define ("ARTIFACT_EXTRAFIELDTYPEGROUP_MULTICHOICE", serialize (array (ARTIFACT_EXTRAFIELDTYPE_CHECKBOX, ARTIFACT_EXTRAFIELDTYPE_MULTISELECT)));
 define ("ARTIFACT_EXTRAFIELDTYPEGROUP_CHOICE", serialize (array_merge(unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_SINGLECHOICE), unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_MULTICHOICE))));
@@ -675,6 +679,7 @@ class ArtifactExtraField extends FFError {
 			ARTIFACT_EXTRAFIELDTYPE_STATUS => _('Status'),
 			ARTIFACT_EXTRAFIELDTYPE_RELATION => _('Relation between artifacts'),
 			ARTIFACT_EXTRAFIELDTYPE_INTEGER => _('Integer'),
+			ARTIFACT_EXTRAFIELDTYPE_DATETIME => _('Datetime'),
 			ARTIFACT_EXTRAFIELDTYPE_USER => _('User'),
 			ARTIFACT_EXTRAFIELDTYPE_RELEASE => _('Release')
 			);
@@ -716,7 +721,7 @@ class ArtifactExtraField extends FFError {
 				}
 			} elseif (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_MULTICHOICE))) {
 				while ($row = db_fetch_array($res)) {
-					if (in_array($row['element_id'],$default)) {
+					if (!is_null($default) && in_array($row['element_id'],$default)) {
 						$row['is_default']=1;
 					}
 					$return[] = $row;
@@ -730,7 +735,7 @@ class ArtifactExtraField extends FFError {
 				}
 			} else {
 				while ($row = db_fetch_array($res)) {
-					if (in_array($row['element_id'],$default)) {
+					if (!is_null($default) && in_array($row['element_id'],$default)) {
 						$row['is_default']=1;
 					}
 					$return[] = $row;
