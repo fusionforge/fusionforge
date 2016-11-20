@@ -34,8 +34,6 @@ $good = false;
 $redirect   = '/';
 $owner = $request->get('owner');
 
-error_log($owner);
-
 if ($owner) {
 	$owner_id   = (int)substr($owner, 1);
 	$owner_type = substr($owner, 0, 1);
