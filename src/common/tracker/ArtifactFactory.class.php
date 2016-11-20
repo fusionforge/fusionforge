@@ -141,7 +141,7 @@ class ArtifactFactory extends FFError {
 						$order_col=$pref_arr[2];
 						$sort=$pref_arr[3];
 						$_changed=$pref_arr[4];
-						if ($this->ArtifactType->usesCustomStatuses()) {
+						if ($this->ArtifactType->usesCustomStatuses() && isset($pref_arr[5])) {
 							$_extra_fields=unserialize($pref_arr[5]);
 						} else {
 							$_status=$pref_arr[1];

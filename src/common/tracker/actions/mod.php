@@ -194,7 +194,7 @@ echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 		<textarea id="tracker-description" required="required" name="description" rows="30" style="width: 100%" title="<?php echo html_get_tooltip_description('description') ?>"><?php echo $ah->getDetails(); ?></textarea>
 		</div>
 		<div id="show" style="display:block;">
-		<?php $ah->showDetails(true); ?>
+		<?php echo $ah->showDetails(true); ?>
 		</div>
 	</td></tr>
 <?php echo $HTML->listTableBottom(); ?>
@@ -265,9 +265,7 @@ foreach ($pluginsListeners as $pluginsListener) {
 		<p>
 		<strong><?php echo _('Post Comment')._(': ') ?><?php echo notepad_button('document.forms.trackermodform.details') ?></strong><br />
 		<textarea id="tracker-comment" name="details" rows="7" style="width: 100%" title="<?php echo util_html_secure(html_get_tooltip_description('comment')) ?>"></textarea></p>
-		<?php
-$ah->showMessages();
-		?>
+		<?php echo $ah->showMessages(); ?>
 	</td></tr>
 <?php echo $HTML->listTableBottom(); ?>
 </div>
@@ -290,14 +288,13 @@ if ($group->usesPM()) {
         <input type="file" name="input_file2" size="30" /><br />
         <input type="file" name="input_file3" size="30" /><br />
         <input type="file" name="input_file4" size="30" /><br />
-		<?php
-		//
-		// print a list of files attached to this Artifact
-		//
-		$ath->renderFiles($group_id, $ah);
-		?>
 	</td></tr>
-<?php echo $HTML->listTableBottom(); ?>
+<?php echo $HTML->listTableBottom();
+//
+// print a list of files attached to this Artifact
+//
+echo $ath->renderFiles($group_id, $ah);
+?>
 </div>
 <?php if ($pluginfound) { ?>
 <div id="tabber-commits" class="tabbertab">
@@ -312,10 +309,10 @@ if ($group->usesPM()) {
 </div>
 <?php } ?>
 <div id="tabber-changes" class="tabbertab">
-	<?php $ah->showHistory(); ?>
+	<?php echo $ah->showHistory(); ?>
 </div>
-	<?php $ah->showRelations(); ?>
-	<?php if (forge_get_config('use_object_associations')) { ?>
+	<?php echo $ah->showRelations();
+	if (forge_get_config('use_object_associations')) { ?>
 	<div id="tabber-object-associations" class="tabbertab">
 	<?php if (forge_check_perm ('tracker',$ath->getID(),'submit')) {
 			echo $ah->showAssociations('/tracker/?func=removeassoc&aid='.$ah->getID().'&group_id='.$ath->Group->getID().'&atid='.$ath->getID());

@@ -966,12 +966,12 @@ class ArtifactType extends FFError {
 			return 'None';
 		}
 		if (!isset($this->element_name[$choice_id])) {
-			$res = db_query_params('SELECT element_id,extra_field_id,element_name
+			$res = db_query_params('SELECT element_id, element_name
 				FROM artifact_extra_field_elements
 				WHERE element_id = ANY ($1)',
 						array(db_int_array_to_any_clause(explode(',', $choice_id))));
 			if (db_numrows($res) > 1) {
-				$arr = util_result_column_to_array($res, 2);
+				$arr = util_result_column_to_array($res, 1);
 				$this->element_name[$choice_id] = implode(',', $arr);
 			} else {
 				$this->element_name[$choice_id] = db_result($res, 0, 'element_name');

@@ -361,6 +361,8 @@ class ArtifactTypeHtml extends ArtifactType {
 			return;
 		}
 
+		$return = '';
+
 		$taskcount = db_numrows($ah->getRelatedTasks());
 		db_result_reset($ah->getRelatedTasks());
 
@@ -371,7 +373,6 @@ class ArtifactTypeHtml extends ArtifactType {
 		}
 
 		$totalPercentage = 0;
-		echo '<tr><td colspan="2">';
 		if ($taskcount > 0) {
 			$title_arr = array();
 			$title_arr[] = _('Task Id and Summary');
@@ -380,7 +381,7 @@ class ArtifactTypeHtml extends ArtifactType {
 			$title_arr[] = _('End Date');
 			$title_arr[] = _('Status');
 			(($is_admin) ? $title_arr[]=_('Remove Relation') : '');
-			echo $HTML->listTableTop($title_arr);
+			$return .= $HTML->listTableTop($title_arr);
 
 			for ($i = 0; $i < $taskcount; $i++) {
 				$taskinfo  = db_fetch_array($ah->relatedtasks, $i);
@@ -393,7 +394,7 @@ class ArtifactTypeHtml extends ArtifactType {
 					$startdate = date(_('Y-m-d H:i'), $taskinfo['start_date']);
 					$enddate   = date(_('Y-m-d H:i'), $taskinfo['end_date']);
 					$status   = $taskinfo['status_name'];
-					echo '<tr>
+					$return .=  '<tr>
 							<td>'.util_make_link('/pm/task.php?func=detailtask&project_task_id='.$taskid.'&group_id='.$groupid.'&group_project_id='.$projectid, '[T'.$taskid.'] '.$summary).'</td>
 							<td><div class="percentbar" style="width: 100px;">
 								<div style="width:'.round($taskinfo['percent_complete']).'px;"></div></div></td>
@@ -404,51 +405,51 @@ class ArtifactTypeHtml extends ArtifactType {
 						'</tr>';
 				}
 			}
-			echo $HTML->listTableBottom();
+			$return .=  $HTML->listTableBottom();
 
-			echo "\n<hr /><p style=\"text-align:right;\">";
-			echo _('Average completion rate')._(': ').(int)($totalPercentage/$taskcount).'%';
-			echo "</p>\n";
+			$return .=  "\n<hr /><p style=\"text-align:right;\">";
+			$return .=  _('Average completion rate')._(': ').(int)($totalPercentage/$taskcount).'%';
+			$return .=  "</p>\n";
 		} else {
-			echo $HTML->information(_('No related tasks'));
+			$return .=  $HTML->information(_('No related tasks'));
 		}
-		echo '</td></tr>';
+		return $return;
 	}
 
 	function renderFiles($group_id, $ah) {
 		global $HTML;
 		$file_list =& $ah->getFiles();
 		$count=count($file_list);
-
+		$return = '';
 		if ($count > 0) {
-			echo '<tr><td colspan="2">';
-			echo '<b>'._("Attachments")._(':').'</b>'.'<br/>';
+
+			$return .= '<strong>'._("Attachments")._(':').'</strong>'.'<br/>';
 			$title_arr=array();
 			$title_arr[] = _('Size');
 			$title_arr[] = _('Name');
 			$title_arr[] = _('Date');
 			$title_arr[] = _('By');
 			$title_arr[] = _('Download');
-			echo $HTML->listTableTop($title_arr);
+			$return .= $HTML->listTableTop($title_arr);
 
 			foreach ($file_list as $file) {
-				echo '<tr>';
-				echo '<td>'.human_readable_bytes($file->getSize()).'</td>';
-				echo '<td>'.htmlspecialchars($file->getName()).'</td>';
-				echo '<td>'.date(_('Y-m-d H:i'), $file->getDate()).'</td>';
-				echo '<td>'.$file->getSubmittedUnixName().'</td>';
-				echo '<td>'.util_make_link('/tracker/download.php/'.$group_id.'/'. $this->getID().'/'. $ah->getID() .'/'.$file->getID().'/'.$file->getName(), htmlspecialchars($file->getName())).'</td>';
+				$return .= '<tr>';
+				$return .= '<td>'.human_readable_bytes($file->getSize()).'</td>';
+				$return .= '<td>'.htmlspecialchars($file->getName()).'</td>';
+				$return .= '<td>'.date(_('Y-m-d H:i'), $file->getDate()).'</td>';
+				$return .= '<td>'.$file->getSubmittedUnixName().'</td>';
+				$return .= '<td>'.util_make_link('/tracker/download.php/'.$group_id.'/'. $this->getID().'/'. $ah->getID() .'/'.$file->getID().'/'.$file->getName(), htmlspecialchars($file->getName())).'</td>';
 				if (forge_check_perm ('tracker', $this->getID(), 'tech')) {
-					echo '<td><input type="checkbox" name="delete_file[]" value="'. $file->getID() .'">'._('Delete').'</td>';
+					$return .= '<td><input type="checkbox" name="delete_file[]" value="'. $file->getID() .'">'._('Delete').'</td>';
 				}
-				echo '</tr>';
+				$return .= '</tr>';
 			}
 
-			echo $HTML->listTableBottom();
-			echo '</td></tr>';
+			$return .= $HTML->listTableBottom();
 		} else {
-			echo $HTML->information(_('No attached documents'));
+			$return .= $HTML->information(_('No attached documents'));
 		}
+		return $return;
 	}
 
 	/**
@@ -472,7 +473,7 @@ class ArtifactTypeHtml extends ArtifactType {
 	 * generateRenderHTML
 	 *
 	 * @param	array	$types
-	 * @param	string	$mode	Display mode (QUERY OR DISPLAY)
+	 * @param	string	$mode	Display mode (QUERY OR DISPLAY OR NEW)
 	 * @return	string	HTML template.
 	 */
 	function generateRenderHTML($types=array(), $mode) {
@@ -623,7 +624,6 @@ class ArtifactTypeHtml extends ArtifactType {
 		if ($show_100 && !empty($aefChildren)) {
 			$attrs_100 = array( 'data-dependency'=>'{"fields": ['.implode(', ',$aefChildren).']}');
 		}
-
 		return html_build_select_box_from_arrays ($vals,$texts,'extra_fields['.$extra_field_id.']',$checked,$show_100,$text_100,$show_any,$text_any, $allowed, $attrs, $opt_attrs, $attrs_100);
 	}
 
@@ -967,7 +967,7 @@ class ArtifactTypeHtml extends ArtifactType {
 		return html_e('textarea', array_merge(array('name'=>'extra_fields['.$extra_field_id.']', 'rows'=>$rows, 'cols'=>$cols), $attrs), $contents, false);
 	}
 
-	
+
 	/**
 	 * renderDatetime - this function builds a Datetime field.
 	 *
@@ -976,11 +976,10 @@ class ArtifactTypeHtml extends ArtifactType {
 	 * @param	array	$attrs		Array of other attributes
 	 * @return	string	datetime.
 	 */
-	function renderDatetime($extra_field_id,$datetime, $attrs = array()) {
-		$return .= html_e('input', array_merge(array('type'=>'text', 'class'=>'datetimepicker'),$attrs));
-		return $return;
+	function renderDatetime($extra_field_id, $datetime, $attrs = array()) {
+		return html_e('input', array_merge(array('type'=>'text', 'class'=>'datetimepicker'), $attrs));
 	}
-	
+
 	function technicianBox ($name='assigned_to[]',$checked='xzxz',$show_100=true,$text_100='none',$extra_id='-1',$extra_name='',$multiple=false) {
 		if ($text_100=='none'){
 			$text_100=_('Nobody');

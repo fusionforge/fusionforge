@@ -123,7 +123,7 @@ echo $HTML->listTableTop(); ?>
 
 		<tr><td colspan="2">
 			<br />
-			<?php $ah->showDetails(); ?>
+			<?php echo $ah->showDetails(); ?>
 		</td></tr>
 <?php echo $HTML->listTableBottom(); ?>
 <?php
@@ -180,7 +180,7 @@ foreach ($pluginsListeners as $pluginsListener) {
 			</td></tr>
 			<?php } ?>
 			<tr><td colspan="2">
-			<?php $ah->showMessages(); ?>
+			<?php echo $ah->showMessages(); ?>
 			</td></tr>
 	<?php echo $HTML->listTableBottom(); ?>
 	</div>
@@ -189,7 +189,7 @@ if ($group->usesPM()) {
 ?>
 <div id="tabber-tasks" class="tabbertab">
 	<?php
-		$ath->renderRelatedTasks($group, $ah);
+		echo $ath->renderRelatedTasks($group, $ah);
 	?>
 </div>
 <?php }
@@ -205,14 +205,13 @@ if ($group->usesPM()) {
 			<input type="file" name="input_file3" /><br />
 			<input type="file" name="input_file4" /><br />
 		<?php } ?>
-		<?php
-		//
-		// print a list of files attached to this Artifact
-		//
-			$ath->renderFiles($group_id, $ah);
-		?>
 		</td></tr>
-	<?php echo $HTML->listTableBottom(); ?>
+	<?php echo $HTML->listTableBottom();
+	//
+	// print a list of files attached to this Artifact
+	//
+	echo $ath->renderFiles($group_id, $ah);
+	?>
 	</div>
 <?php
 	if ($pluginfound) {
@@ -231,10 +230,10 @@ if ($group->usesPM()) {
 	}
 ?>
 	<div id="tabber-changes" class="tabbertab">
-		<?php $ah->showHistory(); ?>
+		<?php echo $ah->showHistory(); ?>
 	</div>
-	<?php $ah->showRelations(); ?>
-	<?php if (forge_get_config('use_object_associations')) { ?>
+	<?php echo $ah->showRelations();
+	if (forge_get_config('use_object_associations')) { ?>
 	<div id="tabber-object-associations" class="tabbertab">
 	<?php if (forge_check_perm ('tracker',$ath->getID(),'submit')) {
 			echo $ah->showAssociations('/tracker/?rtype=ajax&aid='.$ah->getID().'&group_id='.$ath->Group->getID().'&atid='.$ath->getID().'&func=removeassoc');

@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2012,2014,2016 Franck Villaume - TrivialDev
+ * Copyright 2012,2014,2016, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -57,6 +57,13 @@ require_once $gfcommon.'widget/Widget_HomeLatestNews.class.php';
 require_once $gfcommon.'widget/Widget_HomeStats.class.php';
 require_once $gfcommon.'widget/Widget_HomeTagCloud.class.php';
 require_once $gfcommon.'widget/Widget_HomeVersion.class.php';
+
+require_once $gfcommon.'widget/Widget_TrackerComment.class.php';
+require_once $gfcommon.'widget/Widget_TrackerContent.class.php';
+require_once $gfcommon.'widget/Widget_TrackerDefaultActions.class.php';
+require_once $gfcommon.'widget/Widget_TrackerGeneral.class.php';
+require_once $gfcommon.'widget/Widget_TrackerMain.class.php';
+require_once $gfcommon.'widget/Widget_TrackerSummary.class.php';
 
 /**
  * FusionForge Layout Widget
@@ -278,6 +285,24 @@ require_once $gfcommon.'widget/Widget_HomeVersion.class.php';
 			case 'projectlatestcommits':
 				$o = new Widget_ProjectLatestCommits();
 				break;
+			case 'trackercontent':
+				$o = new Widget_TrackerContent();
+				break;
+			case 'trackercomment':
+				$o = new Widget_TrackerComment();
+				break;
+			case 'trackerdefaultactions':
+				$o = new Widget_TrackerDefaultActions();
+				break;
+			case 'trackergeneral':
+				$o = new Widget_TrackerGeneral();
+				break;
+			case 'trackermain':
+				$o = new Widget_TrackerMain();
+				break;
+			case 'trackersummary':
+				$o = new Widget_TrackerSummary();
+				break;
 			default:
 				//$em = EventManager::instance();
 				//$em->processEvent('widget_instance', array('widget' => $widget_name, 'instance' => &$o));
@@ -312,6 +337,9 @@ require_once $gfcommon.'widget/Widget_HomeVersion.class.php';
 				break;
 			case WidgetLayoutManager::OWNER_TYPE_HOME:
 				$widgets = array('hometagcloud', 'homeversion', 'homelatestnews', 'homestats', 'homedetailactivitymostactiveprojectweek');
+				break;
+			case WidgetLayoutManager::OWNER_TYPE_TRACKER:
+				$widgets = array('trackercontent', 'trackercomment', 'trackerdefaultactions', 'trackergeneral', 'trackermain', 'trackersummary');
 				break;
 			default:
 				$widgets = array();
@@ -358,5 +386,13 @@ require_once $gfcommon.'widget/Widget_HomeVersion.class.php';
 	}
 	function getIframeUrl($owner_id, $owner_type) {
 		return '/widgets/widget.php?owner='. $owner_type.$owner_id .'&amp;action=iframe&amp;name%5B'. $this->id .'%5D='. $this->getInstanceId();
+	}
+
+	function canBeMinize() {
+		return true;
+	}
+
+	function canBeRemove() {
+		return true;
 	}
 }

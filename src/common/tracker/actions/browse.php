@@ -394,7 +394,7 @@ if (db_numrows($res)>0) {
 	echo '
 		<script type="text/javascript">//<![CDATA[
 		jQuery("#query_id").change(function() {
-			location.href = '.util_make_url('/tracker/?group_id='.$group_id.'&atid='.$ath->getID().'&power_query=1&query_id=').'+jQuery("#query_id").val();
+			location.href = "'.util_make_url('/tracker/?group_id='.$group_id.'&atid='.$ath->getID().'&power_query=1&query_id=').'"+jQuery("#query_id").val();
 		});
 		//]]></script>';
 } else {

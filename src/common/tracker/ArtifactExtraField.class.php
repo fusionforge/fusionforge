@@ -721,7 +721,7 @@ class ArtifactExtraField extends FFError {
 				}
 			} elseif (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_MULTICHOICE))) {
 				while ($row = db_fetch_array($res)) {
-					if (!is_null($default) && in_array($row['element_id'],$default)) {
+					if (is_array($default) && in_array($row['element_id'], $default)) {
 						$row['is_default']=1;
 					}
 					$return[] = $row;

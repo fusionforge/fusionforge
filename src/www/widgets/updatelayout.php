@@ -34,6 +34,8 @@ $good = false;
 $redirect   = '/';
 $owner = $request->get('owner');
 
+error_log($owner);
+
 if ($owner) {
 	$owner_id   = (int)substr($owner, 1);
 	$owner_type = substr($owner, 0, 1);
@@ -65,6 +67,17 @@ if ($owner) {
 			}
 			$good = true;
 			break;
+		case WidgetLayoutManager::OWNER_TYPE_TRACKER:
+			if ($at = artifactType_get_object($owner_id)) {
+				$_REQUEST['group_id'] = $_GET['group_id'] = $at->Group->getID();
+				$request->params['group_id'] = $at->Group->getID(); //bad!
+				$redirect = '/tracker/?group_id='.$at->Group->getID().'&atid='.$at->getID();
+				if (!forge_check_global_perm('forge_admin') && !forge_check_perm('tracker_admin', $at->getID())) {
+					$GLOBALS['Response']->redirect($redirect);
+				}
+				$good = true;
+			}
+			break;
 		default:
 			break;
 	}
@@ -74,7 +87,6 @@ if ($owner) {
 			if ($request->exist('name')) {
 				$param = $request->get('name');
 				$name = array_pop(array_keys($param));
-				$instance_id = (int)$param[$name];
 			}
 			switch($request->get('action')) {
 				case 'widget':
@@ -85,14 +97,13 @@ if ($owner) {
 								switch($action) {
 									case 'remove':
 										$instance_id = (int)$param[$name][$action];
-										if ($owner_type == WidgetLayoutManager::OWNER_TYPE_GROUP) {
-											if (forge_check_perm ('project_admin', $owner_id, NULL)) {
+										if (($owner_type == WidgetLayoutManager::OWNER_TYPE_GROUP) && (forge_check_perm ('project_admin', $owner_id, NULL))) {
 												$lm->removeWidget($owner_id, $owner_type, $layout_id, $name, $instance_id, $widget);
-											}
-										} elseif ($owner_type == WidgetLayoutManager::OWNER_TYPE_HOME) {
-											if (forge_check_global_perm('forge_admin')) {
+										} elseif (($owner_type == WidgetLayoutManager::OWNER_TYPE_HOME) && (forge_check_global_perm('forge_admin'))) {
 												$lm->removeWidget($owner_id, $owner_type, $layout_id, $name, $instance_id, $widget);
-											}
+										} elseif (($owner_type == WidgetLayoutManager::OWNER_TYPE_TRACKER) && (forge_check_perm('tracker_admin', $owner_id))) {
+												error_log('ici');
+												$lm->removeWidget($owner_id, $owner_type, $layout_id, $name, $instance_id, $widget);
 										} else {
 											$lm->removeWidget($owner_id, $owner_type, $layout_id, $name, $instance_id, $widget);
 										}

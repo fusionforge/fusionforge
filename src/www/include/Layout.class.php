@@ -1375,22 +1375,22 @@ if (isset($params['group']) && $params['group']) {
 		echo html_ao('div', array('class' => 'widget_titlebar '. ($readonly?'':'widget_titlebar_handle')));
 		echo html_e('div', array('class' => 'widget_titlebar_title'), $widget->getTitle(), false);
 		if (!$readonly) {
-			echo html_ao('div', array('class' => 'widget_titlebar_close'));
-			echo util_make_link('/widgets/updatelayout.php?owner='.$owner_type.$owner_id.'&action=widget&name['.$widget->id.'][remove]='.$widget->getInstanceId().'&column_id='.$column_id.'&layout_id='.$layout_id, $this->getPicto('ic/close.png', _('Close'), _('Close')));
-			echo html_ac(html_ap() -1);
-			if ($is_minimized) {
-				echo html_ao('div', array('class' => 'widget_titlebar_maximize'));
-				echo util_make_link('/widgets/updatelayout.php?owner='.$owner_type.$owner_id.'&action=maximize&name['.$widget->id.']='.$widget->getInstanceId().'&column_id='.$column_id.'&layout_id='.$layout_id, $this->getPicto($this->_getTogglePlusForWidgets(), _('Maximize'), _('Maximize')));
-				echo html_ac(html_ap() -1);
-			} else {
-				echo html_ao('div', array('class' => 'widget_titlebar_minimize'));
-				echo util_make_link('/widgets/updatelayout.php?owner='.$owner_type.$owner_id.'&action=minimize&name['.$widget->id.']='.$widget->getInstanceId().'&column_id='.$column_id.'&layout_id='.$layout_id, $this->getPicto($this->_getToggleMinusForWidgets(), _('Minimize'), _('Minimize')));
-				echo html_ac(html_ap() -1);
+			if ($widget->canBeRemove()) {
+				echo html_e('div', array('class' => 'widget_titlebar_close'),
+					util_make_link('/widgets/updatelayout.php?owner='.$owner_type.$owner_id.'&action=widget&name['.$widget->id.'][remove]='.$widget->getInstanceId().'&column_id='.$column_id.'&layout_id='.$layout_id, $this->getPicto('ic/close.png', _('Close'), _('Close'))));
+			}
+			if ($widget->canBeMinize()) {
+				if ($is_minimized) {
+					echo html_e('div', array('class' => 'widget_titlebar_maximize'),
+						util_make_link('/widgets/updatelayout.php?owner='.$owner_type.$owner_id.'&action=maximize&name['.$widget->id.']='.$widget->getInstanceId().'&column_id='.$column_id.'&layout_id='.$layout_id, $this->getPicto($this->_getTogglePlusForWidgets(), _('Maximize'), _('Maximize'))));
+				} else {
+					echo html_e('div', array('class' => 'widget_titlebar_minimize'),
+						util_make_link('/widgets/updatelayout.php?owner='.$owner_type.$owner_id.'&action=minimize&name['.$widget->id.']='.$widget->getInstanceId().'&column_id='.$column_id.'&layout_id='.$layout_id, $this->getPicto($this->_getToggleMinusForWidgets(), _('Minimize'), _('Minimize'))));
+				}
 			}
 			if (strlen($widget->hasPreferences())) {
-				echo html_ao('div', array('class' => 'widget_titlebar_prefs'));
-				echo util_make_link('/widgets/updatelayout.php?owner='.$owner_type.$owner_id.'&action=preferences&name['.$widget->id.']='.$widget->getInstanceId().'&layout_id='.$layout_id, _('Preferences'));
-				echo html_ac(html_ap() -1);
+				echo html_e('div', array('class' => 'widget_titlebar_prefs'),
+					util_make_link('/widgets/updatelayout.php?owner='.$owner_type.$owner_id.'&action=preferences&name['.$widget->id.']='.$widget->getInstanceId().'&layout_id='.$layout_id, _('Preferences')));
 			}
 		}
 		if ($widget->hasRss()) {

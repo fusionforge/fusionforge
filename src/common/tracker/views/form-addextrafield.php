@@ -323,10 +323,12 @@ echo html_ac(html_ap() - 1);
 echo $HTML->closeForm();
 
 echo html_e('h2', array(), _('Custom Field Rendering Template'));
-echo html_ao('p');
-echo util_make_link('/tracker/admin/?edittemplate=1&group_id='.$group_id.'&atid='.$ath->getID(), _('Edit template')).html_e('br');
-echo util_make_link('/tracker/admin/?deletetemplate=1&group_id='.$group_id.'&atid='.$ath->getID(), _('Delete template'));
-echo html_ac(html_ap() - 1);
+if (forge_get_config('use_tracker_widget_display')) {
+	echo $HTML->warning_msg(_('You have to use widgets to render extrafields on submit/update artifact. Click on submit new to get access to layout update.'));
+} else {
+	echo html_e('p', array(), util_make_link('/tracker/admin/?edittemplate=1&group_id='.$group_id.'&atid='.$ath->getID(), _('Edit template')).html_e('br')
+				.util_make_link('/tracker/admin/?deletetemplate=1&group_id='.$group_id.'&atid='.$ath->getID(), _('Delete template')));
+}
 
 $ath->footer();
 

@@ -58,6 +58,8 @@ require_once $gfcommon.'include/MonitorElement.class.php';
 // user response
 define('ARTIFACT_MAIL_MARKER', '#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+');
 
+$ARTIFACT_OBJ = array();
+
 /**
  * Factory method which creates an Artifact from an artifact ID
  *
@@ -670,6 +672,12 @@ class Artifact extends FFObject {
 	function getHistory() {
 		return db_query_params ('SELECT * FROM artifact_history_user_vw WHERE artifact_id=$1 ORDER BY entrydate DESC, id ASC',
 					array ($this->getID())) ;
+	}
+
+	function hasMessages() {
+		$res = db_query_params('SELECT count(id) FROM artifact_message WHERE artifact_id=$1', array($this->getID()));
+		$row = db_fetch_array($res);
+		return $row[0];
 	}
 
 	/**

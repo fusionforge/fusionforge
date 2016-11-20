@@ -30,18 +30,19 @@ require_once $gfcommon.'include/preplugins.php';
  * Manage layouts for users, groups and homepage
  */
 class WidgetLayoutManager {
-	const OWNER_TYPE_USER  = 'u';
+
 	/**
-	 * Layout for project home
-	 * @var string
+	 * define constants for type of widget page
 	 */
-	const OWNER_TYPE_GROUP = 'g';
-	const OWNER_TYPE_HOME  = 'h';
+	const OWNER_TYPE_USER    = 'u';
+	const OWNER_TYPE_GROUP   = 'g';
+	const OWNER_TYPE_HOME    = 'h';
+	const OWNER_TYPE_TRACKER = 't';
 
 	/**
 	 * displayLayout
 	 *
-	 * Display the default layout for the "owner". It may be the home page, the project summary page or /my/ page.
+	 * Display the default layout for the "owner". It may be the home page, the project summary page, the project tracker artifact view page, or /my/ page.
 	 *
 	 * @param	int	$owner_id
 	 * @param	string	$owner_type
@@ -58,6 +59,9 @@ class WidgetLayoutManager {
 				$this->displayLayout($owner_id,$owner_type);
 			} elseif ($owner_type == self::OWNER_TYPE_HOME) {
 				$this->createDefaultLayoutForForge($owner_id);
+				$this->displayLayout($owner_id, $owner_type);
+			} elseif ($owner_type == self::OWNER_TYPE_TRACKER) {
+				$this->createDefaultLayoutForTracker($owner_id);
 				$this->displayLayout($owner_id, $owner_type);
 			}
 		} else {
@@ -108,28 +112,33 @@ class WidgetLayoutManager {
 	 * @return	boolean	true if the user can update the layout (add/remove widget, collapse, set preferences, ...)
 	 */
 	function _currentUserCanUpdateLayout($owner_id, $owner_type) {
-		$readonly = true;
+		$modify = false;
 		$request =& HTTPRequest::instance();
 		switch ($owner_type) {
 			case self::OWNER_TYPE_USER:
 				if (user_getid() == $owner_id) { //Current user can only update its own /my/ page
-					$readonly = false;
+					$modify = true;
 				}
 				break;
 			case self::OWNER_TYPE_GROUP:
-				if (forge_check_perm('project_admin', $owner_id, NULL)) { //Only project admin
-					$readonly = false;
+				if (forge_check_perm('project_admin', $owner_id)) { //Only project admin
+					$modify = true;
 				}
 				break;
 			case self::OWNER_TYPE_HOME:
 				if (forge_check_global_perm('forge_admin')) { //Only site admin
-					$readonly = false;
+					$modify = true;
+				}
+				break;
+			case self::OWNER_TYPE_TRACKER:
+				if (forge_check_global_perm('tracker_admin', $owner_id)) { //Only tracker admin
+					$modify = true;
 				}
 				break;
 			default:
 				break;
 		}
-		return !$readonly;
+		return $modify;
 	}
 	/**
 	 * createDefaultLayoutForUser
@@ -146,11 +155,10 @@ class WidgetLayoutManager {
 	 * @param	int	$owner_id The id of the newly created user
 	 */
 	function createDefaultLayoutForUser($owner_id) {
-		$owner_type = self::OWNER_TYPE_USER;
 		db_begin();
 		$success = true;
 		$sql = "INSERT INTO owner_layouts(layout_id, is_default, owner_id, owner_type) VALUES (1, 1, $1, $2)";
-		if (db_query_params($sql, array($owner_id, $owner_type))) {
+		if (db_query_params($sql, array($owner_id, self::OWNER_TYPE_USER))) {
 
 			$sql = "INSERT INTO layouts_contents(owner_id, owner_type, layout_id, column_id, name, rank) VALUES ";
 
@@ -162,7 +170,7 @@ class WidgetLayoutManager {
 			$args[] = "($1, $2, 1, 2, 'mymonitoredfp', 1)";
 
 			foreach($args as $a) {
-				if (!db_query_params($sql.$a,array($owner_id,$owner_type))) {
+				if (!db_query_params($sql.$a,array($owner_id, self::OWNER_TYPE_USER))) {
 					$success = false;
 					break;
 				}
@@ -170,7 +178,7 @@ class WidgetLayoutManager {
 
 			/*  $em =& EventManager::instance();
 			    $widgets = array();
-			    $em->processEvent('default_widgets_for_new_owner', array('widgets' => &$widgets, 'owner_type' => $owner_type));
+			    $em->processEvent('default_widgets_for_new_owner', array('widgets' => &$widgets, 'owner_type' => self::OWNER_TYPE_USER));
 			    foreach($widgets as $widget) {
 			    $sql .= ",($13, $14, 1, $15, $16, $17)";
 			    }*/
@@ -206,6 +214,60 @@ class WidgetLayoutManager {
 			}
 		} else
 			$success = false;
+		if (!$success) {
+			$success = db_error();
+			db_rollback();
+			exit_error(sprintf(_('DB Error: %s'), $success), 'widgets');
+		}
+		db_commit();
+	}
+
+	function createDefaultLayoutForTracker($owner_id) {
+		db_begin();
+		$success = true;
+		$sql = "INSERT INTO owner_layouts (owner_id, owner_type, layout_id, is_default) values ($1, $2, $3, $4)";
+		if (db_query_params($sql, array($owner_id, self::OWNER_TYPE_TRACKER, 1, 1))) {
+
+			$sql = "INSERT INTO layouts_contents (owner_id, owner_type, layout_id, column_id, name, rank) VALUES ";
+
+			$args[] = "($1, $2, 1, 1, 'trackersummary', 1)";
+			$args[] = "($1, $2, 1, 1, 'trackermain', 2)";
+			$args[] = "($1, $2, 1, 1, 'trackerdefaultactions', 3)";
+			$args[] = "($1, $2, 1, 2, 'trackergeneral', 1)";
+			$args[] = "($1, $2, 1, 2, 'trackercomment', 2)";
+
+			// owner_id is an atid
+			$at = artifactType_get_object($owner_id);
+			$extrafields = $at->getExtraFields(array());
+			if (count($extrafields) > 0) {
+
+			}
+
+			foreach($args as $a) {
+				if (!db_query_params($sql.$a,array($owner_id, self::OWNER_TYPE_TRACKER))) {
+					$success = false;
+					break;
+				}
+			}
+
+			if (count($extrafields) > 0) {
+				$res = db_query_params('INSERT INTO artifact_display_widget (owner_id, title, cols) VALUES ($1, $2, $3)', array($owner_id, _('Default ExtraField 2-columns Widget'), 2));
+				$content_id = db_insertid($res, 'artifact_display_widget', 'id');
+				$row_id = 1;
+				$column_id = 1;
+				foreach ($extrafields as $key => $extrafield) {
+					$column_id = ($key % 2) + 1; // 1 or 2
+					if ($column_id == 2) {
+						$row_id++;
+					}
+					db_query_params('INSERT INTO artifact_display_widget_field (id, field_id, column_id, row_id) VALUES ($1, $2, $3, $4)', array($content_id, $extrafield['extra_field_id'], $column_id, $row_id));
+				}
+				db_query_params('INSERT INTO layouts_contents (owner_id, owner_type, layout_id, column_id, name, rank, content_id) VALUES ($1, $2, 1, 2, $3, 3, $4)',
+						array($owner_id, self::OWNER_TYPE_TRACKER, 'trackercontent', $content_id));
+			}
+		} else {
+			$success = false;
+		}
 		if (!$success) {
 			$success = db_error();
 			db_rollback();
@@ -705,6 +767,7 @@ class WidgetLayoutManager {
 	 * @param	object	$widget
 	 */
 	function removeWidget($owner_id, $owner_type, $layout_id, $name, $instance_id, &$widget) {
+		error_log('o='.$owner_id.',t='.$owner_type.',layout_id='.$layout_id.',instance_id='.$instance_id);
 		$sql = "DELETE FROM layouts_contents WHERE owner_type =$1 AND owner_id = $2 AND layout_id = $3 AND name = $4 AND content_id = $5";
 		db_query_params($sql,array($owner_type,$owner_id,$layout_id,$name,$instance_id));
 		if (!db_error()) {
