@@ -1626,8 +1626,13 @@ class Artifact extends FFObject {
 			if ($extra_fields[$efid] === '') {
 				//nothing in field to update - text fields may be blank
 			} else {
-				//determine the type of field and whether it should have multiple rows supporting it
 				$type=$ef[$efid]['field_type'];
+				//special treatment for DATETIME
+				if ($type == ARTIFACT_EXTRAFIELDTYPE_DATETIME && $extra_fields[$efid]!='' ) {
+					$dateTime = DateTime::createFromFormat('Y-m-d H:i', $extra_fields[$efid]);
+					$extra_fields[$efid] = $dateTime->format('U');
+				}
+				//determine the type of field and whether it should have multiple rows supporting it
 				if (($type == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) || ($type==ARTIFACT_EXTRAFIELDTYPE_MULTISELECT)) {
 					$multi_rows=true;
 					$count=count($extra_fields[$efid]);

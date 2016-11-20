@@ -183,11 +183,12 @@ class ArtifactTypeHtml extends ArtifactType {
 			$keys=array_keys($efarr);
 			for ($k=0; $k<count($keys); $k++) {
 				$i=$keys[$k];
-				if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_SELECT ||
-					$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX ||
-					$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RADIO ||
-					$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_STATUS ||
-					$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT) {
+				$type = $efarr[$i]['field_type'];
+				if ($type == ARTIFACT_EXTRAFIELDTYPE_SELECT ||
+					$type == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX ||
+					$type == ARTIFACT_EXTRAFIELDTYPE_RADIO ||
+					$type == ARTIFACT_EXTRAFIELDTYPE_STATUS ||
+					$type == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT) {
 					$efarr[$i]['field_type'] = ARTIFACT_EXTRAFIELDTYPE_MULTISELECT;
 				} else {
 					$efarr[$i]['field_type'] = ARTIFACT_EXTRAFIELDTYPE_TEXT;
@@ -206,12 +207,13 @@ class ArtifactTypeHtml extends ArtifactType {
 					$selected[$efarr[$i]['extra_field_id']] = '';
 
 				$value = $selected[$efarr[$i]['extra_field_id']];
+				$type = $efarr[$i]['field_type'];
 
-				if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_SELECT ||
-					$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX ||
-					$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RADIO ||
-					$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_STATUS ||
-					$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT) {
+				if ($type == ARTIFACT_EXTRAFIELDTYPE_SELECT ||
+					$type == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX ||
+					$type == ARTIFACT_EXTRAFIELDTYPE_RADIO ||
+					$type == ARTIFACT_EXTRAFIELDTYPE_STATUS ||
+					$type == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT) {
 					if ($value == 100) {
 						$value = $efarr[$i]['show100label'];
 					} else {
@@ -228,13 +230,15 @@ class ArtifactTypeHtml extends ArtifactType {
 						}
 						$value = join('<br />', $new);
 					}
-				} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_TEXT ||
-					$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_TEXTAREA) {
+				} elseif ($type == ARTIFACT_EXTRAFIELDTYPE_TEXT ||
+						$type == ARTIFACT_EXTRAFIELDTYPE_TEXTAREA) {
 					$value = preg_replace('/((http|https|ftp):\/\/\S+)/',
 								"<a href=\"\\1\" target=\"_blank\">\\1</a>", $value);
-				} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RELATION) {
+				} elseif ($type == ARTIFACT_EXTRAFIELDTYPE_RELATION) {
 					// Convert artifact id to links.
 					$value = preg_replace_callback('/\b(\d+)\b/', create_function('$matches', 'return _artifactid2url($matches[1], \'title\');'), $value);
+				} elseif ($type == ARTIFACT_EXTRAFIELDTYPE_DATETIME && $value!='') {
+					$value =  date('Y-m-d H:i', $value);
 				}
 				$template = str_replace('{$PostName:'.$efarr[$i]['field_name'].'}', $post_name, $template);
 				$template = str_replace('{$'.$efarr[$i]['field_name'].'}', $value, $template);
@@ -977,7 +981,10 @@ class ArtifactTypeHtml extends ArtifactType {
 	 * @return	string	datetime.
 	 */
 	function renderDatetime($extra_field_id, $datetime, $attrs = array()) {
-		return html_e('input', array_merge(array('type'=>'text', 'class'=>'datetimepicker'), $attrs));
+		if (!$datetime=='') {
+			$datetime = date('Y-m-d H:i',$datetime);
+		}
+		return html_e('input', array_merge(array('type'=>'text', 'name'=>'extra_fields['.$extra_field_id.']', 'class'=>'datetimepicker', 'value'=>$datetime),$attrs));
 	}
 
 	function technicianBox ($name='assigned_to[]',$checked='xzxz',$show_100=true,$text_100='none',$extra_id='-1',$extra_name='',$multiple=false) {
