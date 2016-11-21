@@ -303,10 +303,10 @@ class ArtifactExtraFieldElement extends FFError {
 	/**
 	 * setAsDefault - set this field element as default value or not.
 	 *
-	 * @param	isDefault	boolean true-> set as default, false->unset as default
+	 * @param	is_default	boolean true-> set as default, false->unset as default
 	 * @return	boolean
 	 */
-	function setAsDefault($isDefault) {
+	function setAsDefault($is_default) {
 		if ($this->isDefault() && !$is_default) {
 			$result = db_query_params ('DELETE FROM artifact_extra_field_default WHERE extra_field_id = $1 AND default_value = $2',
 					array ($this->ArtifactExtraField->getID(), $this->getID()));
@@ -329,8 +329,9 @@ class ArtifactExtraFieldElement extends FFError {
 				$this->setError(db_error());
 				return false;
 			}
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 
