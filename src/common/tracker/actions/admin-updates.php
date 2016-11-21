@@ -284,7 +284,7 @@ if (getStringFromRequest('add_extrafield')) {
 //
 } elseif (getStringFromRequest('update_opt')) {
 	$boxid = getStringFromRequest('boxid');
-	$is_default = getStringFromRequest('is_default');
+	$is_default = getStringFromRequest('is_default', false);
 	$ac = new ArtifactExtraField($ath,$boxid);
 	if (!$ac || !is_object($ac)) {
 		$error_msg .= _('Unable to create ArtifactExtraField Object');
@@ -301,7 +301,7 @@ if (getStringFromRequest('add_extrafield')) {
 			$name = getStringFromRequest('name');
 			$status_id = getIntFromRequest('status_id');
 			$autoAssignTo = getStringFromRequest('auto_assign_to');
-			if (!$ao->update($name,$status_id,$autoAssignTo,$is_default)) {
+			if (!$ao->update($name, $status_id, $autoAssignTo, $is_default)) {
 				$error_msg .= _('Update failed')._(': ').$ao->getErrorMessage();
 				$ao->clearError();
 			} else {
