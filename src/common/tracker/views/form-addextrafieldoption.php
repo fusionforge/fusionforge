@@ -167,6 +167,7 @@ if (!$ac || !is_object($ac)) {
 					if (in_array($efType, unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_MULTICHOICE))) {
 						$content = html_build_checkbox('is_default['. $efearr[$i]['element_id'] .']', false, $efearr[$i]['is_default']);
 						$cells[] = array($content, 'class'=>'align-center');
+					} else {
 						$content = html_build_radio_button('is_default', $efearr[$i]['element_id'], $efearr[$i]['is_default']);
 						$cells[] = array($content, 'class'=>'align-center');
 					}
