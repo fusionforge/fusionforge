@@ -314,6 +314,7 @@ class ArtifactExtraFieldElement extends FFError {
 				$this->setError(db_error());
 				return false;
 			}
+			return true;
 		} elseif (!$this->isDefault() && $is_default) {
 			if (in_array($this->ArtifactExtraField->getType(), unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_SINGLECHOICE))) {
 				$result = db_query_params ('DELETE FROM artifact_extra_field_default WHERE extra_field_id = $1',
