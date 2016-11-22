@@ -307,34 +307,44 @@ class ArtifactExtraFieldElement extends FFError {
 	 * @return	boolean
 	 */
 	function setAsDefault($is_default) {
-		if ($this->isDefault() && !$is_default) {
-			$result = db_query_params ('DELETE FROM artifact_extra_field_default WHERE extra_field_id = $1 AND default_value = $2',
-					array ($this->ArtifactExtraField->getID(), $this->getID()));
-			if (!$result) {
-				$this->setError(db_error());
-				return false;
-			}
-			return true;
-		} elseif (!$this->isDefault() && $is_default) {
-			if (in_array($this->ArtifactExtraField->getType(), unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_SINGLECHOICE))) {
-				$result = db_query_params ('DELETE FROM artifact_extra_field_default WHERE extra_field_id = $1',
-						array ($this->ArtifactExtraField->getID()));
+		if ($is_default) {
+			if ($this->isDefault()) {
+				//nothing to do
+				return true;
+			} else {
+				// inject it!
+				if (in_array($this->ArtifactExtraField->getType(), unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_SINGLECHOICE))) {
+					$result = db_query_params ('DELETE FROM artifact_extra_field_default WHERE extra_field_id = $1',
+								array ($this->ArtifactExtraField->getID()));
+					if (!$result) {
+						$this->setError(db_error());
+						$return = false;
+					}
+				}
+				$result = db_query_params ('INSERT INTO artifact_extra_field_default (extra_field_id, default_value) VALUES ($1,$2)',
+								array ($this->ArtifactExtraField->getID(), $this->getID()));
 				if (!$result) {
 					$this->setError(db_error());
-					$return = false;
+					return false;
 				}
+				return true;
 			}
-			$result = db_query_params ('INSERT INTO artifact_extra_field_default (extra_field_id, default_value) VALUES ($1,$2)',
-					array ($this->ArtifactExtraField->getID(), $this->getID()));
-			if (!$result) {
-				$this->setError(db_error());
-				return false;
+		} else {
+			if ($this->isDefault()) {
+				// remove it!
+				$result = db_query_params ('DELETE FROM artifact_extra_field_default WHERE extra_field_id = $1 AND default_value = $2',
+							array ($this->ArtifactExtraField->getID(), $this->getID()));
+				if (!$result) {
+					$this->setError(db_error());
+					return false;
+				}
+				return true;
+			} else {
+				//nothing to do
+				return true;
 			}
-			return true;
 		}
-		return false;
 	}
-
 
 	/**
 	 * getChildrenElements - return the array of the elements of children fields who depend on current element
