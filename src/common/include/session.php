@@ -371,7 +371,7 @@ function session_cookie($name, $value, $domain='', $expiration=0) {
  *	@param	bool	$permanent
  *	@return never returns
  */
-function session_redirect_uri($loc, $permanent=true) {
+function session_redirect_uri($loc, $permanent = true) {
 	util_save_messages();
 	if ($permanent)
 		sysdebug_off("Status: 301 Moved Permanently", true, 301);
@@ -395,7 +395,7 @@ function session_redirect_uri($loc, $permanent=true) {
  * @param  string $loc    Absolute path within the site
  * @param  bool   $permanent
  */
-function session_redirect($loc, $permanent=true) {
+function session_redirect($loc, $permanent = false) {
 	session_redirect_uri(util_make_url($loc), $permanent);
 }
 
