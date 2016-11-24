@@ -389,7 +389,9 @@ function html_build_radio_buttons_from_arrays(
 				$radio_attrs ['checked'] = 'checked';
 			}
 			if (is_array($allowed) && !in_array($vals[$i], $allowed)) {
-				$radio_attrs['disabled'] = 'disabled';
+				if ((string)$vals[$i] != (string)$checked_val) {
+					$radio_attrs['disabled'] = 'disabled';
+				}
 				$radio_attrs['class'] = (isset($radio_attrs['class']) ? $radio_attrs['class'].' ':'').'radio_disabled';
 			}
 			if (isset($radios_attrs[$i]) && is_array($radios_attrs[$i])) {
@@ -700,7 +702,9 @@ function html_build_select_box_from_arrays($vals, $texts, $select_name,
 				$opt_attrs['selected'] = 'selected';
 			}
 			if (is_array($allowed) && !in_array($vals[$i], $allowed)) {
-				$opt_attrs['disabled'] = 'disabled';
+				if ((string)$vals[$i] != (string)$checked_val) {
+					$opt_attrs['disabled'] = 'disabled';
+				}
 				$opt_attrs['class'] = (isset($opt_attrs['class']) ? $opt_attrs['class'].' ':'').'option_disabled';
 			}
 			if (isset($opts_attrs[$i]) && is_array($opts_attrs[$i])) {
@@ -883,7 +887,9 @@ function html_build_multiple_select_box_from_arrays(
 				$opt_attrs = array_merge($opt_attrs, $opts_attrs[$i]);
 			}
 			if (is_array($allowed) && !in_array($vals[$i], $allowed)) {
-				$opt_attrs['disabled'] = 'disabled';
+				if (!in_array('100', $checked_array)) {
+					$opt_attrs['disabled'] = 'disabled';
+				}
 				$opt_attrs['class'] = (isset($opt_attrs['class']) ? $opt_attrs['class'].' ':'').'option_disabled';
 			}
 			$return .= html_e('option', $opt_attrs, $texts[$i], false);
@@ -959,20 +965,21 @@ function html_build_checkboxes_from_arrays($vals, $texts, $check_name, $checked=
 	}
 
 	if (isset($attrs['required']) && $attrs['required']=='required') {
+		$attrs['class'] = (isset($attrs['class']) ? $attrs['class'].' ' : '').'checkbox_required';
 		$javascript = '//<![CDATA[
 							$(function() {
-								$("input[name=\''.$check_name.'[]\']:checkbox[required]").on("change", function() {
+								$("input.checkbox_required[name=\''.$check_name.'[]\']:checkbox").on("change", function() {
 									var requiredCheckboxes = $(this).parent().children(":checkbox");
+									requiredCheckboxes.each(function() {
+										this.setCustomValidity("");
+									});
 									if (requiredCheckboxes.is(":checked")) {
 										requiredCheckboxes.prop("required", false);
-										requiredCheckboxes.each(function() {
-											this.setCustomValidity("");
-										});
 									} else {
 										requiredCheckboxes.prop("required", true)
 									}
 								});
-								$("input[name=\''.$check_name.'[]\']:checkbox[required]").each(function() {
+								$("input.checkbox_required[name=\''.$check_name.'[]\']:checkbox").each(function() {
 									$(this).on("invalid", function() {
 										this.setCustomValidity("");
 										if (!this.validity.valid) {
@@ -983,6 +990,9 @@ function html_build_checkboxes_from_arrays($vals, $texts, $check_name, $checked=
 							});
 						//]]';
 		$return .= html_e('script', array( 'type'=>'text/javascript'), $javascript);
+		if (!empty($checked)) {
+			unset($attrs['required']);
+		}
 	}
 	$return .= html_ao('p');
 	if ($show_100) {
@@ -999,7 +1009,9 @@ function html_build_checkboxes_from_arrays($vals, $texts, $check_name, $checked=
 			$checkbox_attrs[$i]['checked']='checked';
 		}
 		if ($allowed && !in_array($vals[$i], $allowed)) {
-			$checkbox_attrs[$i]['disabled'] = 'disabled';
+			if (!in_array($vals[$i], $checked)) {
+				$checkbox_attrs[$i]['disabled'] = 'disabled';
+			}
 			$checkbox_attrs[$i]['class'] = (isset($checkbox_attrs[$i]['class']) ? $checkbox_attrs[$i]['class'].' ' : '').'checkbox_disabled';
 		}
 		$return .= html_e('input', array_merge( array( 'type' => 'checkbox', 'name' => $check_name.'[]', 'id' => $check_name.'_'.$vals[$i], 'value' => $vals[$i]), $attrs, (isset($checkbox_attrs[$i]) ? $checkbox_attrs[$i] : array())));
