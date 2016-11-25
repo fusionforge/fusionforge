@@ -137,7 +137,9 @@ function frs_add_file_from_form($release, $type_id, $processor_id, $release_date
 
 	$filechecks = false;
 
-	if ($userfile && is_uploaded_file($userfile['tmp_name']) && util_is_valid_filename($userfile['name'])) {
+	$filenamecheck  = util_is_valid_filename($userfile['name']);
+
+	if ($userfile && is_uploaded_file($userfile['tmp_name']) && $filenamecheck) {
 		$infile = $userfile['tmp_name'];
 		$fname = $userfile['name'];
 		$move = true;
@@ -152,7 +154,7 @@ function frs_add_file_from_form($release, $type_id, $processor_id, $release_date
 				return _('The uploaded file was only partially uploaded.');
 			break;
 			default:
-				return _('Unknown file upload error.');
+				return _('Unknown file upload error. => ');
 			break;
 		}
 	} elseif (forge_get_config('use_ftp_uploads') && $ftp_filename && util_is_valid_filename($ftp_filename) && is_file($upload_dir.'/'.$ftp_filename)) {
@@ -173,6 +175,8 @@ function frs_add_file_from_form($release, $type_id, $processor_id, $release_date
 		$filechecks = true;
 	} elseif ($userfile && $userfile['error'] == UPLOAD_ERR_NO_FILE) {
 		return _('Must select a file.');
+	} elseif ($userfile && $filenamecheck) {
+		return _('Invalid characters in file name.');
 	}
 
 	if ($filechecks) {
