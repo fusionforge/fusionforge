@@ -1,7 +1,8 @@
 <?php
 /**
- * scmhook postReceiveEmail Plugin Class
+ * scmhook GitPostReceiveEmail Plugin Class
  * Copyright 2013, Benoit Debaenst - TrivialDev
+ * Copyright 2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -43,7 +44,7 @@ class GitPostReceiveEmail extends scmhook {
 		require_once $gfcommon.'mail/MailingList.class.php';
 		require_once $gfcommon.'mail/MailingListFactory.class.php';
 
-		if ($this->group->usesMail() && forge_get_config('use_ssh','scmgit')) {
+		if ($this->group->usesMail()) {
 			$mlFactory = new MailingListFactory($this->group);
 			$mlArray = $mlFactory->getMailingLists();
 			$mlCount = count($mlArray);
@@ -52,11 +53,9 @@ class GitPostReceiveEmail extends scmhook {
 				if ($currentList->getListEmail() == $this->group->getUnixName().'-commits@'.forge_get_config('lists_host'))
 					return true;
 			}
-			$this->disabledMessage = _('Hook not available due to missing dependency: Project has no commit mailing-list: ').$this->group->getUnixName().'-commits';
+			$this->disabledMessage = _('Hook not available due to missing dependency')._(': ')._('Project has no commit mailing-list: ').$this->group->getUnixName().'-commits';
 		} elseif (!$this->group->usesMail()) {
-			$this->disabledMessage = _('Hook not available due to missing dependency: Project not using mailing-list.');
-		} elseif (!forge_get_config('use_ssh','scm_git')) {
-			$this->disabledMessage = _('Hook not available due to missing dependency: Forge not using SSH for Git.');
+			$this->disabledMessage = _('Hook not available due to missing dependency')._(': ')._('Project not using mailing-list.');
 		}
 		return false;
 	}

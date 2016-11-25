@@ -1,7 +1,7 @@
 #! /usr/bin/php
 <?php
 /**
- * Fusionforge Plugin SVNTracker HTTPPoster
+ * Fusionforge Plugin Git Tracker HTTPPoster
  *
  * Portions Copyright 2004 (c) Roland Mas <99.roland.mas @nospam@ aist.enst.fr>
  * The rest Copyright 2004 (c) Francisco Gimeno <kikov @nospam@ kikov.org>
