@@ -46,6 +46,7 @@ FusionForge 6.X:
 
 FusionForge 6.0.5:
 * Forum: fix redirection cache [#835] & [#836] (TrivialDev)
+* FRS: fix error message on file upload with accent in filename [#838] (TrivialDev)
 * Plugin SCM SVN: fix activity when SVN repository is private [#813] (TrivialDev)
 * Plugin SCM SVN: fix support old svn clients (Inria)
 * Plugin SCM Git: fix activity when Git repository is private [#825] (TrivialDev)
