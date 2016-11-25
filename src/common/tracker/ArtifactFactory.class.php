@@ -320,6 +320,14 @@ class ArtifactFactory extends FFError {
 				if ($type == ARTIFACT_EXTRAFIELDTYPE_TEXT or $type == ARTIFACT_EXTRAFIELDTYPE_TEXTAREA) {
 					$wheresql .= ' AND aefd'.$i.'.field_data LIKE $'.$paramcount++ ;
 					$params[] = $vals[$i];
+				} elseif ($type == ARTIFACT_EXTRAFIELDTYPE_DATE || $type == ARTIFACT_EXTRAFIELDTYPE_DATETIME) {
+					preg_match('/([0-9]{4}-[0-9]{2}-[0-9]{2}) ([0-9]{4}-[0-9]{2}-[0-9]{2})/', $vals[$i], $matches);
+					$strartDate = DateTime::createFromFormat('!Y-m-d', $matches[1]);
+					$endDate = DateTime::createFromFormat('!Y-m-d', $matches[2]);
+					$wheresql .= ' AND cast(aefd'.$i.'.field_data AS BIGINT) BETWEEN $'.$paramcount++;
+					$params[] = $strartDate->format('U');
+					$wheresql .= ' AND $'.$paramcount++;
+					$params[] = $endDate->format('U');
 				} else {
 					if (is_array($vals[$i])) {
 						$wheresql .= ' AND aefd'.$i.'.field_data = ANY ($'.$paramcount++ .')' ;

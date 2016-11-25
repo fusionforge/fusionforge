@@ -630,7 +630,8 @@ function html_build_select_box_from_arrays($vals, $texts, $select_name,
 					   $show_any = false, $text_any = 'any',
 					   $allowed = false, $attrs = array(),
 					   $opts_attrs = array(),
-					   $attrs_100 = array()) {
+					   $attrs_100 = array(),
+					   $optgroup = array()) {
 	if ($text_100 == 'none') {
 		$text_100 = _('None');
 	}
@@ -690,7 +691,9 @@ function html_build_select_box_from_arrays($vals, $texts, $select_name,
 	}
 
 	$checked_found = false;
-
+	$withGroup = !empty($optgroup);
+	$currentGroup = '';
+	$groupOpen = false;
 	for ($i = 0; $i < $rows; $i++) {
 		//  uggh - sorry - don't show the 100 row
 		//  if it was shown above, otherwise do show it
@@ -710,9 +713,21 @@ function html_build_select_box_from_arrays($vals, $texts, $select_name,
 			if (isset($opts_attrs[$i]) && is_array($opts_attrs[$i])) {
 				$opt_attrs = array_merge($opt_attrs, $opts_attrs[$i]);
 			}
+			if ($withGroup && $vals[$i] != '100' && $optgroup[$i]!=$currentGroup) {
+				if ($currentGroup!='' && $groupOpen) {
+					$return .= html_ac(html_ap() - 1);
+					$groupOpen = false;
+				}
+				$return .= html_ao('optgroup',array('label'=>$optgroup[$i]));
+				$groupOpen = true;
+				$currentGroup = $optgroup[$i];
+			}
 			$return .= html_e('option', $opt_attrs, util_html_secure($texts[$i]));
 			$have_a_subelement = true;
 		}
+	}
+	if ($withGroup && $groupOpen) {
+		$return .= html_ac(html_ap() - 1);
 	}
 	//
 	//	If the passed in "checked value" was never "SELECTED"
@@ -850,11 +865,12 @@ function html_build_multiple_select_box($result, $name, $checked_array, $size = 
  * @throws	Exception
  */
 function html_build_multiple_select_box_from_arrays(
-		$vals, $texts, $name, $checked_array, $size = 8,
+		$vals, $texts, $name, $checked_array=array(), $size = 8,
 		$show_100 = true, $text_100 = 'none',
 		$allowed = false, $attrs = array(),
-		$opts_attrs = array(), $attrs_100 = array()) {
-	$return = html_ao('select', array_merge(array('name' => $name, 'multiple' => 'multiple', 'size' => $size), $attrs));
+		$opts_attrs = array(), $attrs_100 = array(),
+		$optgroup = array()) {
+	$return = html_ao('select', array_merge($attrs, array('name' => $name, 'multiple' => 'multiple', 'size' => $size)));
 	if ($show_100) {
 		if ($text_100 == 'none') {
 			$text_100 = _('None');
@@ -871,6 +887,10 @@ function html_build_multiple_select_box_from_arrays(
 		}
 		$return .= html_e('option', $opt_attrs, $text_100, false);
 	}
+
+	$withGroup = !empty($optgroup);
+	$currentGroup = '';
+	$groupOpen = false;
 
 	$rows = count($vals);
 	for ($i = 0; $i < $rows; $i++) {
@@ -891,6 +911,15 @@ function html_build_multiple_select_box_from_arrays(
 					$opt_attrs['disabled'] = 'disabled';
 				}
 				$opt_attrs['class'] = (isset($opt_attrs['class']) ? $opt_attrs['class'].' ':'').'option_disabled';
+			}
+			if ($withGroup && $vals[$i]!='100' && $optgroup[$i]!=$currentGroup) {
+				if ($currentGroup!='' && $groupOpen) {
+					$return .= html_ac(html_ap() - 1);
+					$groupOpen = false;
+				}
+				$return .= html_ao('optgroup', array('label'=>$optgroup[$i]));
+				$groupOpen = true;
+				$currentGroup = $optgroup[$i];
 			}
 			$return .= html_e('option', $opt_attrs, $texts[$i], false);
 		}

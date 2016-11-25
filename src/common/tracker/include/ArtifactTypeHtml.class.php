@@ -185,11 +185,20 @@ class ArtifactTypeHtml extends ArtifactType {
 				$i=$keys[$k];
 				$type = $efarr[$i]['field_type'];
 				if ($type == ARTIFACT_EXTRAFIELDTYPE_SELECT ||
-					$type == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX ||
-					$type == ARTIFACT_EXTRAFIELDTYPE_RADIO ||
-					$type == ARTIFACT_EXTRAFIELDTYPE_STATUS ||
-					$type == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT) {
+						$type == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX ||
+						$type == ARTIFACT_EXTRAFIELDTYPE_RADIO ||
+						$type == ARTIFACT_EXTRAFIELDTYPE_STATUS ||
+						$type == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT) {
 					$efarr[$i]['field_type'] = ARTIFACT_EXTRAFIELDTYPE_MULTISELECT;
+				} elseif ($type == ARTIFACT_EXTRAFIELDTYPE_USER ||
+						$type == ARTIFACT_EXTRAFIELDTYPE_MULTIUSER) {
+					$efarr[$i]['field_type'] = ARTIFACT_EXTRAFIELDTYPE_MULTIUSER;
+				} elseif ($type == ARTIFACT_EXTRAFIELDTYPE_RELEASE ||
+						$type == ARTIFACT_EXTRAFIELDTYPE_MULTIRELEASE) {
+					$efarr[$i]['field_type'] = ARTIFACT_EXTRAFIELDTYPE_MULTIRELEASE;
+				} elseif ($type == ARTIFACT_EXTRAFIELDTYPE_DATETIME ||
+						$type == ARTIFACT_EXTRAFIELDTYPE_DATE) {
+					$efarr[$i]['field_type'] = ARTIFACT_EXTRAFIELDTYPE_DATERANGE;
 				} else {
 					$efarr[$i]['field_type'] = ARTIFACT_EXTRAFIELDTYPE_TEXT;
 				}
@@ -345,8 +354,17 @@ class ArtifactTypeHtml extends ArtifactType {
 				$str = $this->renderDatetime($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']], $attrs);
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_USER) {
 				$str = $this->renderUserField($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['show100'],$efarr[$i]['show100label'],$show_any,$text_any,false, $attrs);
-			} elseif  ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RELEASE) {
+			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_MULTIUSER) {
+				$str = $this->renderMultiUserField($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['show100'],$efarr[$i]['show100label'],$show_any,$text_any,false, $attrs);
+			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RELEASE) {
 				$str = $this->renderReleaseField($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['show100'],$efarr[$i]['show100label'],$show_any,$text_any,false, $attrs);
+			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_MULTIRELEASE) {
+				$str = $this->renderMultiReleaseField($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['show100'],$efarr[$i]['show100label'],$show_any,$text_any,false, $attrs);
+			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_DATERANGE) {
+				if ($mode == 'QUERY') {
+					$post_name =  ' <i>'._('(YYYY-MM-DD YYYY-MM-DD Format)').'</i>';
+				}
+				$str = $this->renderDateRange($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']], $attrs);
 			}
 			$template = str_replace('{$PostName:'.$efarr[$i]['field_name'].'}',$post_name,$template);
 			$template = str_replace('{$'.$efarr[$i]['field_name'].'}',$str,$template);
@@ -673,6 +691,57 @@ class ArtifactTypeHtml extends ArtifactType {
 	}
 
 	/**
+	 * renderMultiUserField - this function builds pop up box with users.
+	 *
+	 * @param	int		$extra_field_id	The ID of this field.
+	 * @param	string		$checked	The item that should be checked
+	 * @param	bool|string	$show_100	Whether to show the '100 row'
+	 * @param	string		$text_100	What to call the '100 row'
+	 * @param	bool		$show_any
+	 * @param	string		$text_any
+	 * @param	bool		$allowed
+	 * @param	array		$attrs
+	 * @return	string		HTML code for the box and choices
+	 */
+	function renderMultiUserField ($extra_field_id,$checked='xzxz',$show_100=false,$text_100='none',$show_any=false,$text_any='Any', $allowed=false, $attrs = array ()) {
+		if ($text_100 == 'none' || $text_100 == 'nobody'){
+			$text_100=_('Nobody');
+		}
+
+		if (!$checked) {
+			$checked=array();
+		}
+		if (!is_array($checked)) {
+			$checked = explode(',',$checked);
+		}
+
+		$arr = $this->getExtraFieldElements($extra_field_id);
+		$selectedRolesId = array();
+		for ($i=0; $i<count($arr); $i++) {
+			$selectedRolesId[$i]=$arr[$i]['element_name'];
+		}
+		$roles = $this->getGroup()->getRoles();
+		$userArray = array();
+		foreach ($roles as $role) {
+			if (in_array($role->getID(), $selectedRolesId)) {
+				foreach ($role->getUsers() as $user) {
+					$userArray[$user->getID()] = $user->getRealName().(($user->getStatus()=='S') ? ' '._('[SUSPENDED]') : '');
+				}
+			}
+		}
+		if (is_integer($checked) && !isset($userArray[$checked])) {
+			$checkedUser = user_get_object($checked);
+			$userArray[$checkedUser->getID()] = $checkedUser->getRealName().' '._('[DELETED]');
+		}
+		asort($userArray,SORT_FLAG_CASE | SORT_STRING);
+		$size = min( count($userArray)+1, 15);
+		$keys = array_keys($userArray);
+		$vals = array_values($userArray);
+
+		return html_build_multiple_select_box_from_arrays ($keys,$vals,'extra_fields['.$extra_field_id.'][]',$checked,$size, $show_100,$text_100,$allowed, $attrs);
+	}
+
+	/**
 	 * renderReleaseField - this function builds 2 pop up boxes with packages & releases.
 	 *
 	 * @param	int		$extra_field_id	The ID of this field.
@@ -691,53 +760,83 @@ class ArtifactTypeHtml extends ArtifactType {
 		}
 
 		$releasesArray = array();
-		$defaultRelease = $checked;
-		$releaseAttrs = $attrs;
 		$releasesAttrs =  array();
-
-		$packagesArray = array();
-		$defaultPackage = 100;
-		$packageAttrs = array('class'=>'package');
-		$packagesAttrs = array();
+		$optGroup = array();
 
 		$arr = $this->getExtraFieldElements($extra_field_id);
 		$selectedPackagesId = array();
 		for ($i=0; $i<count($arr); $i++) {
 			$selectedPackagesId[$i]=$arr[$i]['element_name'];
 		}
+
 		$packages = get_frs_packages($this->getGroup());
-
-		if ((integer)$defaultRelease!=0 && $defaultRelease!=100) {
-			$releaseObj = frsrelease_get_object($defaultRelease);
-			$defaultPackage = $releaseObj->getFRSPackage()->getID();
-		}
-
 		uasort($packages, 'compareObjectName');
 		foreach ($packages as $package) {
 			if (in_array($package->getID(), $selectedPackagesId)) {
-				$packagesArray[$package->getID()] = $package->getName();
-				$releasesList = '';
 				$releases = $package->getReleases();
 				uasort($releases, 'compareObjectName');
 				foreach ($releases as $release) {
+					$optGroup[] = $package->getName();
 					$releasesArray[$release->getID()] = $release->getName();
-					$releasesList .= (empty($releasesList) ? '':', ').$release->getID();
-					if ($defaultPackage == 100 || $defaultPackage==$package->getID()) {
-						$allowed[] = $release->getID();
-					}
 				}
-				$releasesList = '{"field": '.$extra_field_id.', "elmnt": ['.$releasesList.']}';
-				$packagesAttrs [] = array('data-releases'=>$releasesList);
 			}
 		}
-		$keys = array_keys($packagesArray);
-		$vals = array_values($packagesArray);
 
-		$return = html_build_select_box_from_arrays ($keys,$vals,'package['.$extra_field_id.']',$defaultPackage,$show_100,$text_100,$show_any,$text_any, false, $packageAttrs, $packagesAttrs);
 		$keys = array_keys($releasesArray);
 		$vals = array_values($releasesArray);
-		$return .= html_build_select_box_from_arrays ($keys,$vals,'extra_fields['.$extra_field_id.']',$defaultRelease,$show_100,$text_100,$show_any,$text_any, $allowed, $releaseAttrs, $releasesAttrs);
-		return $return;
+		return html_build_select_box_from_arrays ($keys,$vals,'extra_fields['.$extra_field_id.']',$checked,$show_100,$text_100,$show_any,$text_any, $allowed, $attrs, $releasesAttrs, array(), $optGroup);
+	}
+
+	/**
+	 * renderMultiReleaseField - this function builds 2 pop up boxes with packages & releases.
+	 *
+	 * @param	int		$extra_field_id	The ID of this field.
+	 * @param	string		$checked	The item that should be checked
+	 * @param	bool|string	$show_100	Whether to show the '100 row'
+	 * @param	string		$text_100	What to call the '100 row'
+	 * @param	bool		$show_any
+	 * @param	string		$text_any
+	 * @param	bool		$allowed
+	 * @param	array		$attrs
+	 * @return	string		HTML code for the box and choices
+	 */
+	function renderMultiReleaseField ($extra_field_id,$checked='xzxz',$show_100=false,$text_100='none',$show_any=false,$text_any='Any', $allowed=false, $attrs = array ()) {
+		if ($text_100 == 'none'){
+			$text_100=_('None');
+		}
+		if (!$checked) {
+			$checked=array();
+		}
+		if (!is_array($checked)) {
+			$checked = explode(',',$checked);
+		}
+
+		$releasesArray = array();
+		$releasesAttrs =  array();
+		$optGroup = array();
+
+		$arr = $this->getExtraFieldElements($extra_field_id);
+		$selectedPackagesId = array();
+		for ($i=0; $i<count($arr); $i++) {
+			$selectedPackagesId[$i]=$arr[$i]['element_name'];
+		}
+
+		$packages = get_frs_packages($this->getGroup());
+		uasort($packages, 'compareObjectName');
+		foreach ($packages as $package) {
+			if (in_array($package->getID(), $selectedPackagesId)) {
+				$releases = $package->getReleases();
+				uasort($releases, 'compareObjectName');
+				foreach ($releases as $release) {
+					$optGroup[] = $package->getName();
+					$releasesArray[$release->getID()] = $release->getName();
+				}
+			}
+		}
+		$size = min( count($releasesArray)+1, 15);
+		$keys = array_keys($releasesArray);
+		$vals = array_values($releasesArray);
+		return html_build_multiple_select_box_from_arrays ($keys,$vals,'extra_fields['.$extra_field_id.'][]',$checked,$size, $show_100,$text_100,$allowed, $attrs, $releasesAttrs, array(), $optGroup);
 	}
 
 	/**
@@ -987,6 +1086,12 @@ class ArtifactTypeHtml extends ArtifactType {
 		return html_e('input', array_merge(array('type'=>'text', 'name'=>'extra_fields['.$extra_field_id.']', 'class'=>'datetimepicker', 'value'=>$datetime),$attrs));
 	}
 
+	function renderDateRange($extra_field_id, $dateRange, $attrs = array()) {
+		// http://html5pattern.com/Dates
+		// Date with leapyear-check
+		$datepattern = '(?:19|20)(?:(?:[13579][26]|[02468][048])-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))|(?:[0-9]{2}-(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:29|30))|(?:(?:0[13578]|1[02])-31)))';
+		return html_e('input', array_merge(array('type'=>'text', 'name'=>'extra_fields['.$extra_field_id.']', 'pattern'=>$datepattern.' '.$datepattern, 'maxlength'=>21, 'size'=>21, 'value'=>$dateRange),$attrs));
+	}
 	function technicianBox ($name='assigned_to[]',$checked='xzxz',$show_100=true,$text_100='none',$extra_id='-1',$extra_name='',$multiple=false) {
 		if ($text_100=='none'){
 			$text_100=_('Nobody');
