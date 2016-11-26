@@ -368,7 +368,7 @@ class Widget_TrackerContent extends Widget {
 								/* reserved for Evolvis extension, for merge into FusionForge */
 								case ARTIFACT_EXTRAFIELDTYPE_DATETIME:
 									if ($readonly) {
-										$cells[] = array($cellContent.$value, 'style' => 'vertical-align: top;');
+										$cells[] = array($cellContent.date('Y-m-d H:i', $value), 'style' => 'vertical-align: top;');
 									} else {
 										$cells[] = array($cellContent.$ath->renderDatetime($extrafieldID, $value, $attrs), 'style' => 'vertical-align: top;');
 									}
@@ -395,9 +395,13 @@ class Widget_TrackerContent extends Widget {
 									if ($readonly) {
 										if ($value != 0) {
 											$releaseObj = frsrelease_get_object($value);
-											$value = $releaseObj->FRSPackage->getName().' - '.$releaseObj->getName();
+											if (is_object($releaseObj)) {
+												$value = $releaseObj->FRSPackage->getName().' - '.$releaseObj->getName();
+												$cells[] = array($cellContent.$value, 'style' => 'vertical-align: top;');
+											} else {
+												$cells[][] = '&nbsp;';
+											}
 										}
-										$cells[] = array($cellContent.$value, 'style' => 'vertical-align: top;');
 									} else {
 										$cells[] = array($cellContent.$ath->renderReleaseField($extrafieldID, $value, $extrafieldObject->getShow100(), $extrafieldObject->getShow100label(), false, false, false, $attrs), 'style' => 'vertical-align: top;');
 									}
