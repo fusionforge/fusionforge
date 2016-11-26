@@ -3,7 +3,7 @@
  * Tracker Facility
  *
  * Copyright 2010 (c) FusionForge Team
- * Copyright 2014-2015, Franck Villaume - TrivialDev
+ * Copyright 2014-2016, Franck Villaume - TrivialDev
  * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
@@ -29,6 +29,9 @@ global $HTML;
 //  FORM TO BUILD SELECTION BOXES
 //
 
+
+html_use_tablesorter();
+
 $title = sprintf(_('Manage Custom Fields for %s'), $ath->getName());
 $ath->adminHeader(array('title'=>$title, 'modal'=>1));
 
@@ -41,24 +44,34 @@ $keys=array_keys($efarr);
 $rows=count($keys);
 if ($rows > 0) {
 
-	$title_arr=array();
-	$title_arr[]=_('Custom Fields Defined');
-	$title_arr[]=_('Type');
-	$title_arr[]=_('Enabled');
-	$title_arr[]=_('Required');
-	$title_arr[]=_('Shown on Submit');
-	$title_arr[]=_('Auto Assign');
-	$title_arr[]=_('Depend on');
-	$title_arr[]=_('Elements Defined');
-	$title_arr[]=_('Add Options');
+	$title_arr = array();
+	$classth = array();
+	$title_arr[] = _('Custom Fields Defined');
+	$classth[]   = 'unsortable';
+	$title_arr[] = _('Type');
+	$classth[]   = '';
+	$title_arr[] = _('Enabled');
+	$classth[]   = 'unsortable';
+	$title_arr[] = _('Required');
+	$classth[]   = 'unsortable';
+	$title_arr[] = _('Shown on Submit');
+	$classth[]   = 'unsortable';
+	$title_arr[] = _('Auto Assign');
+	$classth[]   = 'unsortable';
+	$title_arr[] = _('Depend on');
+	$classth[]   = 'unsortable';
+	$title_arr[] = _('Elements Defined');
+	$classth[]   = 'unsortable';
+	$title_arr[] = _('Add Options');
+	$classth[]   = 'unsortable';
 	$autoAssignFieldId = $ath->getAutoAssignField();
-	echo $HTML->listTableTop($title_arr);
+	echo $HTML->listTableTop($title_arr, array(), 'full sortable', 'sortable_extrafields', $classth);
 	$rownb = 0;
 	for ($k=0; $k < $rows; $k++) {
 		$i=$keys[$k];
 		$rownb++;
 		$id=str_replace('@','',$efarr[$i]['alias']);
-		echo '<tr id="field-'.$id.'" '. $HTML->boxGetAltRowStyle($rownb) .">\n".
+		echo '<tr id="field-'.$id.'" >'."\n".
 			'<td>'.$efarr[$i]['field_name'].(($efarr[$i]['is_required']) ? utils_requiredField() : '').
 				util_make_link('/tracker/admin/?update_box=1&id='.$efarr[$i]['extra_field_id'].'&group_id='.$group_id.'&atid='.$ath->getID(), $HTML->getEditFilePic(_('Edit'))).
 				util_make_link('/tracker/admin/?deleteextrafield=1&id='.$efarr[$i]['extra_field_id'].'&group_id='.$group_id.'&atid='. $ath->getID(), $HTML->getDeletePic(_('Delete'))).
