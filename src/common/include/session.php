@@ -346,10 +346,8 @@ function session_cookie($name, $value, $domain='', $expiration=0) {
 	if ($expiration) {
 		$expiration = time() + $expiration;
 	}
-	/* evolvis: force secure (SSL-only) session cookies */
-	//$force_secure = true;
-	/* not (yet?) in FusionForge */
-	$force_secure = false;
+	/* force secure (SSL-only) session cookies if relevant */
+	$force_secure = forge_get_config('use_ssl');
 	if ($force_secure && !session_issecure()) {
 		return;
 	}
