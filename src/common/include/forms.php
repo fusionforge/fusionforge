@@ -56,14 +56,14 @@ function form_generate_key() {
  *
  */
 function form_key_is_valid($key) {
-	// Fail back mode if key is empty. This can happen when there is
-	// a problem with the generation. In this case, it may be better
-	// to disable this check instead of blocking all the application.
+	// Fail if key is empty
 	if (empty($key))
-		return true;
+		return false;
 
 	db_begin();
-	$res = db_query_params ('SELECT * FROM form_keys WHERE key=$1 and is_used=0 FOR UPDATE', array ($key));
+	$res = db_query_params ('SELECT * FROM form_keys WHERE key=$1 and is_used=0 AND creation_date > $2 FOR UPDATE',
+                            array ($key,
+                                   time()-600));
 	if (!$res || !db_numrows($res)) {
 		db_rollback();
 		return false;
