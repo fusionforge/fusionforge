@@ -282,11 +282,13 @@ if (getenv('FUSIONFORGE_NO_DB') != 'true' and forge_get_config('database_name') 
 		// If logged in, set up a $LUSER var referencing
 		// the logged in user's object
 		// and setup theme
+        // and refresh session cookies
 		if (session_loggedin()) {
 			$LUSER =& session_get_user();
 			$use_tooltips = $LUSER->usesTooltips();
 			header('Cache-Control: private');
 			$x_theme = $LUSER->setUpTheme();
+            session_refresh();
 		} else {
 			$use_tooltips = 1;
 			$x_theme = forge_get_config('default_theme');

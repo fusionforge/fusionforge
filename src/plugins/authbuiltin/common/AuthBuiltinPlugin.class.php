@@ -45,6 +45,7 @@ class AuthBuiltinPlugin extends ForgeAuthPlugin {
 		// get_extra_roles - add new roles not necessarily stored in the database
 		// restrict_roles - filter out unwanted roles
 		$this->_addHook('close_auth_session');
+		$this->_addHook("refresh_auth_session");
 
 		$this->declareConfigVars();
 	}

@@ -85,6 +85,9 @@ abstract class ForgeAuthPlugin extends Plugin {
 		case 'close_auth_session':
 			$this->closeAuthSession($params);
 			break;
+		case 'refresh_auth_session':
+			$this->refreshAuthSession($params);
+			break;
 		default:
 			// Forgot something
 		}
@@ -225,6 +228,10 @@ abstract class ForgeAuthPlugin extends Plugin {
 			return false;
 		}
 	}
+
+    function refreshAuthSession() {
+            $this->setSessionCookie();
+    }
 
 	protected function unsetSessionCookie() {
 		session_set_cookie($this->getCookieName(), '');

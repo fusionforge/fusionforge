@@ -755,6 +755,11 @@ function session_continue($sessionKey) {
 	return true;
 }
 
+function session_refresh() {
+	$params = array();
+	plugin_hook('refresh_auth_session', $params);
+}
+
 function setup_tz_from_context() {
 	$user = session_get_user();
 	if (!is_object($user) || $user->isError()) {
