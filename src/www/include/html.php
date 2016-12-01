@@ -639,6 +639,7 @@ function html_build_select_box_from_arrays($vals, $texts, $select_name,
 		$text_100 = _('Nobody');
 	}
 	$have_a_subelement = false;
+	$attrsFieldset = array('style' => 'padding: 0 !important; border: 0 !important; display: inline;');
 	$return = '';
 
 	$rows = count($vals);
@@ -652,9 +653,10 @@ function html_build_select_box_from_arrays($vals, $texts, $select_name,
 
 	if (empty($attrs['title'])) {
 		//TODO: remove this ugly ack to get something more generic...
-		$attrs['title'] = util_html_secure(html_get_tooltip_description($select_name));
+		$attrsFieldset['title'] = util_html_secure(html_get_tooltip_description($select_name));
 	} else {
-		$attrs['title'] = util_html_secure($attrs['title']);
+		$attrsFieldset['title'] = util_html_secure($attrs['title']);
+		unset($attrs['title']);
 	}
 
 	if (!empty($attrs['title'])) {
@@ -664,6 +666,7 @@ function html_build_select_box_from_arrays($vals, $texts, $select_name,
 		}
 	}
 	$attrs['name'] = $select_name;
+	$return .= html_ao('fieldset', $attrsFieldset);
 	$return .= html_ao('select', $attrs);
 
 	//we don't always want the default Any row shown
@@ -748,7 +751,7 @@ function html_build_select_box_from_arrays($vals, $texts, $select_name,
 		$return .= html_e('option', array(), '', false);
 	}
 
-	$return .= html_ac(html_ap() -1);
+	$return .= html_ac(html_ap() -2);
 	return $return;
 }
 
