@@ -344,7 +344,7 @@ if ($rows < 1) {
 			<tr>
 			<td>'._('Priority')._(':').'</td>
 			<td>';
-			build_priority_select_box ('priority', '100', true);
+			echo build_priority_select_box ('priority', '100', true);
 			echo '</td>
 			</tr>
 
