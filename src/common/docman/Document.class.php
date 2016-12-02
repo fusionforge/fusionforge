@@ -152,7 +152,7 @@ class Document extends FFObject {
 			return false;
 		}
 		if (strlen($description) < DOCMAN__DESCRIPTION_MIN_SIZE) {
-			$this->setError(_('Document Description Must Be At Least 10 Characters'));
+			$this->setError(sprintf_('Document Description Must Be At Least %d Characters'), DOCMAN__DESCRIPTION_MIN_SIZE));
 			return false;
 		}
 
