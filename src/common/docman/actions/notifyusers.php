@@ -56,30 +56,33 @@ if ($d->isError()) {
 	session_redirect($urlparam);
 }
 
-$emails = getStringFromRequest('emails', null);
-if (!$emails) {
-	$warning_msg = _('No email address found.');
+$userIDs = getArrayFromRequest('notify-userids', array());
+if (count($userIDS) <= 0) {
+	$warning_msg = _('No users selected for notification.');
 	session_redirect($urlparam);
 }
+
+$emailsArr = array();
+foreach ($userIDs as $userID) {
+	$user = user_get_object($userID);
+	$emailsArr[] = $user->getEmail();
+}
+
 $details = getStringFromRequest('details');
 $sanitizer = new TextSanitizer();
 $details = $sanitizer->SanitizeHtml($details);
-$emailsErrArr = validate_emails($emails, ',');
-$emailsArr = explode(',', $emails);
 $subject = '['.$d->Group->getPublicName().'] '._('Notification on document').' - '.$d->getName();
 $body = _('Project')._(': ').$d->Group->getPublicName()."\n";
 $body .= _('Document Folder')._(': ').$d->getDocGroupName()."\n";
-$body = _('Document Title')._(': ').$d->getName()."\n";
+$body .= _('Document Title')._(': ').$d->getName()."\n";
 $body .= _('Document Filename')._(': ').$d->getFileName()."\n";
 $body .= _('Direct Link')._(': ').util_make_url('/docman/?group_id='.$d->Group->getID().'&view=listfile&dirid='.$d->getDocGroupID().'&filedetailid='.$d->getID())."\n";
 $body .= _('Notification Comments')._(':')."\n";
 $body .= $details;
 $sendEmails = 0;
 foreach ($emailsArr as $key => $toEmail) {
-	if (!in_array(trim($toEmail), $emailsErrArr)) {
-		util_send_message(trim($toEmail), $subject, $body);
-		$sendEmails++;
-	}
+	util_send_message(trim($toEmail), $subject, $body);
+	$sendEmails++;
 }
 
 $feedback = sprintf(ngettext('%s user notified.', '%s users notified.', $sendEmails), $sendEmails);

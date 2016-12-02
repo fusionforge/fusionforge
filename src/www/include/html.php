@@ -599,6 +599,11 @@ function html_use_jquerydatetimepicker() {
 	use_stylesheet('/scripts/jquery-datetimepicker/jquery.datetimepicker.css');
 }
 
+function html_use_jquerygentleselect() {
+	html_use_jquery();
+	use_javascript('/scripts/jquery-gentleSelect/jquery-gentleSelect.js');
+	use_stylesheet('/scripts/jquery-gentleSelect/jquery-gentleSelect.css');
+}
 
 /**
  * html_build_select_box_from_arrays() - Takes two arrays, with the first array being the "id" or value and the other
@@ -868,7 +873,7 @@ function html_build_multiple_select_box($result, $name, $checked_array, $size = 
  * @throws	Exception
  */
 function html_build_multiple_select_box_from_arrays(
-		$vals, $texts, $name, $checked_array=array(), $size = 8,
+		$vals, $texts, $name, $checked_array = array(), $size = 8,
 		$show_100 = true, $text_100 = 'none',
 		$allowed = false, $attrs = array(),
 		$opts_attrs = array(), $attrs_100 = array(),
