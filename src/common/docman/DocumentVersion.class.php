@@ -43,6 +43,16 @@ function &documentversion_get_object($ver_id, $docid, $group_id, $res = false) {
 	return $DOCUMENTVERSION_OBJ['_'.$ver_id.'_'];
 }
 
+function &documentversion_get_object_by_serialid($serial_id, $docid, $group_id, $res = false) {
+	$res = db_query_params('SELECT serial_id, version, docid, current_version, title, updatedate, createdate, created_by, description, filename, filetype, filesize FROM doc_data_version WHERE serial_id = $1 AND docid = $2',
+						array($serial_id, $docid));
+	if ($res && (db_numrows($res) == 1)) {
+		$arr = db_fetch_array($res);
+		return documentversion_get_object($arr['version'], $docid, $group_id, $res);
+	}
+	return false;
+}
+
 class DocumentVersion extends FFError {
 	/**
 	 * Associative array of data from db.
