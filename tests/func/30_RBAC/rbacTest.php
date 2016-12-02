@@ -467,7 +467,7 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 
 		$this->assertTrue($this->isElementPresent("//input[@value='Link external role']/../../div/fieldset/select/option[.='Senior Developer (in project MetaProject)']")) ;
-		$this->select("//input[@value='Link external role']/../../div/select", "label=Senior Developer (in project MetaProject)") ;
+		$this->select("//input[@value='Link external role']/../../div/fieldset/select", "label=Senior Developer (in project MetaProject)") ;
 		$this->click("//input[@value='Link external role']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isElementPresent("//td/form/div[contains(.,'Senior Developer (in project MetaProject)')]/../div/input[contains(@value,'Unlink Role')]"));
