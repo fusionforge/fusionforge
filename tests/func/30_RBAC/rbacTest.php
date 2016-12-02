@@ -466,7 +466,7 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->click("link=Users and permissions");
 		$this->waitForPageToLoad("30000");
 
-		$this->assertTrue($this->isElementPresent("//input[@value='Link external role']/../../div/select/option[.='Senior Developer (in project MetaProject)']")) ;
+		$this->assertTrue($this->isElementPresent("//input[@value='Link external role']/../../div/fieldset/select/option[.='Senior Developer (in project MetaProject)']")) ;
 		$this->select("//input[@value='Link external role']/../../div/select", "label=Senior Developer (in project MetaProject)") ;
 		$this->click("//input[@value='Link external role']") ;
 		$this->waitForPageToLoad("30000");
@@ -498,9 +498,9 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->click("link=Users and permissions");
 		$this->waitForPageToLoad("30000");
 
-		$this->assertTrue($this->isElementPresent("//input[@value='Link external role']/../../div/select/option[.='Documentation masters (global role)']")) ;
-		$this->assertFalse($this->isElementPresent("//input[@value='Link external role']/../../div/select/option[.='Project moderators (global role)']")) ;
-		$this->select("//input[@value='Link external role']/../../div/select", "label=Documentation masters (global role)") ;
+		$this->assertTrue($this->isElementPresent("//input[@value='Link external role']/../../div/fieldset/select/option[.='Documentation masters (global role)']")) ;
+		$this->assertFalse($this->isElementPresent("//input[@value='Link external role']/../../div/fieldset/select/option[.='Project moderators (global role)']")) ;
+		$this->select("//input[@value='Link external role']/../../div/fieldset/select", "label=Documentation masters (global role)") ;
 		$this->click("//input[@value='Link external role']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isElementPresent("//td/form/div[contains(.,'Documentation masters (global role)')]/../div/input[contains(@value,'Unlink Role')]"));
@@ -610,19 +610,19 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->click ("//td/form/div[contains(.,'Anonymous')]/../div/input[@value='Edit Permissions']") ;
 		$this->waitForPageToLoad("30000");
 
-		$this->select("//tr/td[contains(.,'first-news')]/../td/select", "label=Read only");
+		$this->select("//tr/td[contains(.,'first-news')]/../td/fieldset/select", "label=Read only");
 		$this->click ("//input[@value='Submit']") ;
 		$this->waitForPageToLoad("30000");
-		$this->assertSelected("//tr/td[contains(.,'first-news')]/../td/select", "Read only");
+		$this->assertSelected("//tr/td[contains(.,'first-news')]/../td/fieldset/select", "Read only");
 
-		$this->select("//tr/td[contains(.,'first-news')]/../td/select", "label=Moderated post");
+		$this->select("//tr/td[contains(.,'first-news')]/../td/fieldset/select", "label=Moderated post");
 		$this->click ("//input[@value='Submit']") ;
 		$this->waitForPageToLoad("30000");
-		$this->assertSelected("//tr/td[contains(.,'first-news')]/../td/select", "Moderated post");
+		$this->assertSelected("//tr/td[contains(.,'first-news')]/../td/fieldset/select", "Moderated post");
 
-		$this->select("//tr/td[contains(.,'first-news')]/../td/select", "label=Unmoderated post");
+		$this->select("//tr/td[contains(.,'first-news')]/../td/fieldset/select", "label=Unmoderated post");
 		$this->click ("//input[@value='Submit']") ;
 		$this->waitForPageToLoad("30000");
-		$this->assertSelected("//tr/td[contains(.,'first-news')]/../td/select", "Unmoderated post");
+		$this->assertSelected("//tr/td[contains(.,'first-news')]/../td/fieldset/select", "Unmoderated post");
 	}
 }
