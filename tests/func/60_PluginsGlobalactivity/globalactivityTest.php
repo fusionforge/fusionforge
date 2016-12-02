@@ -127,13 +127,13 @@ class GlobalActivity extends FForge_SeleniumTestCase
 
 		$soapclient = new SoapClient(WSDL_URL);
 		$this->assertNotNull($soapclient);
-		
+
 		$userid = FORGE_ADMIN_USERNAME;
 		$passwd = FORGE_ADMIN_PASSWORD;
-		
+
 		$response = $soapclient->login($userid, $passwd);
 		$session = $response;
-		
+
 		$response = $soapclient->globalactivity_getActivity($session,time()-3600,time(),array());
 		$found = False;
 		foreach ($response as $data) {
@@ -215,12 +215,12 @@ class GlobalActivity extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=Users and permissions");
 		$this->clickAndWait ("//td/form/div[contains(.,'Anonymous')]/../div/input[@value='Edit Permissions']") ;
 		$this->select("//select[contains(@name,'data[project_read]')]", "label=Visible");
-		$this->select("//tr/td[.='Bugs']/../td/select[contains(@name,'data[tracker]')]", "label=No Access");
-		$this->select("//tr/td[.='Patches']/../td/select[contains(@name,'data[tracker]')]", "label=No Access");
-		$this->select("//tr/td[.='To Do']/../td/select[contains(@name,'data[pm]')]", "label=No Access");
-		$this->select("//tr/td[.='Next Release']/../td/select[contains(@name,'data[pm]')]", "label=No Access");
-		$this->select("//tr/td[.='open-discussion']/../td/select[contains(@name,'data[forum]')]", "label=No Access");
-		$this->select("//tr/td[.='developers-discussion']/../td/select[contains(@name,'data[forum]')]", "label=No Access");
+		$this->select("//tr/td[.='Bugs']/../td/fieldset/select[contains(@name,'data[tracker]')]", "label=No Access");
+		$this->select("//tr/td[.='Patches']/../td/fieldset/select[contains(@name,'data[tracker]')]", "label=No Access");
+		$this->select("//tr/td[.='To Do']/../td/fieldset/select[contains(@name,'data[pm]')]", "label=No Access");
+		$this->select("//tr/td[.='Next Release']/../td/fieldset/select[contains(@name,'data[pm]')]", "label=No Access");
+		$this->select("//tr/td[.='open-discussion']/../td/fieldset/select[contains(@name,'data[forum]')]", "label=No Access");
+		$this->select("//tr/td[.='developers-discussion']/../td/fieldset/select[contains(@name,'data[forum]')]", "label=No Access");
 		$this->select("//select[contains(@name,'data[docman]')]", "label=Read only");
 		$this->clickAndWait ("//input[@value='Submit']") ;
 
