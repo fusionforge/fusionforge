@@ -97,15 +97,15 @@ if ($dgf->getNested($stateidArr) == NULL) {
 	echo $HTML->listTableTop(array(), array(), 'infotable');
 	$cells = array();
 	$cells[][] = _('Document Title').utils_requiredField();
-	$cells[][] = html_e('input', array('pattern' => '.{5,}', 'placeholder' => _('Document Title').' '.sprintf(_('(at least %s characters)'), 5), 'title' => _('Document Title')._(': ')._('Refers to the relatively brief title of the document (e.g. How to use the download server).'), 'type' => 'text', 'name' => 'title', 'size' => 40, 'maxlength' => 255, 'required' => 'required'));
+	$cells[][] = html_e('input', array('pattern' => '.{5,}', 'placeholder' => _('Document Title').' '.sprintf(_('(at least %s characters)'), DOCMAN__TITLE_MIN_SIZE), 'title' => _('Document Title')._(': ')._('Refers to the relatively brief title of the document (e.g. How to use the download server).'), 'type' => 'text', 'name' => 'title', 'size' => 40, 'maxlength' => DOCMAN__TITLE_MAX_SIZE, 'required' => 'required'));
 	echo $HTML->multiTableRow(array(), $cells);
 	$cells = array();
 	$cells[][] = _('Description') .utils_requiredField();
-	$cells[][] = html_e('textarea', array('pattern' => '.{10,}', 'placeholder' => _('Description').' '.sprintf(_('(at least %s characters)'), 10), 'title' => _('Editing tips:http,https or ftp: Hyperlinks. [#NNN]: Tracker id NNN. [TNNN]: Task id NNN. [wiki:&lt;pagename&gt;]: Wiki page. [forum:&lt;msg_id&gt;]: Forum post. [DNNN]: Document id NNN.'), 'name' => 'description', 'rows' => 5, 'cols' => 50, 'maxlength' => 255, 'required' => 'required'), '', false);
+	$cells[][] = html_e('textarea', array('pattern' => '.{10,}', 'placeholder' => _('Description').' '.sprintf(_('(at least %s characters)'), DOCMAN__DESCRIPTION_MIN_SIZE), 'title' => _('Editing tips:http,https or ftp: Hyperlinks. [#NNN]: Tracker id NNN. [TNNN]: Task id NNN. [wiki:&lt;pagename&gt;]: Wiki page. [forum:&lt;msg_id&gt;]: Forum post. [DNNN]: Document id NNN.'), 'name' => 'description', 'rows' => 5, 'cols' => 50, 'maxlength' => DOCMAN__DESCRIPTION_MAX_SIZE, 'required' => 'required'), '', false);
 	echo $HTML->multiTableRow(array(), $cells);
 	$cells = array();
 	$cells[][] = _('Comment');
-	$cells[][] = html_e('textarea', array('placeholder' => _('Add free comment'), 'name' => 'vcomment', 'rows' => 5, 'cols' => 50, 'maxlength' => 255), '', false);
+	$cells[][] = html_e('textarea', array('placeholder' => _('Add free comment'), 'name' => 'vcomment', 'rows' => 5, 'cols' => 50, 'maxlength' => DOCMAN__COMMENT_MAX_SIZE), '', false);
 	echo $HTML->multiTableRow(array(), $cells);
 	$cells = array();
 	$cells[][] = _('Type of Document') .utils_requiredField();
