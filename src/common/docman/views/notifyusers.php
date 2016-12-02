@@ -33,24 +33,32 @@ if (!forge_check_perm('docman', $group_id, 'approve')) {
 	session_redirect('/docman/?group_id='.$group_id);
 }
 
+$userObjects = $g->getUsers();
+$userNameArray = array();
+$userIDArray = array();
+foreach ($userObjects as $userObject) {
+	$userNameArray[] = $userObject->getRealname();
+	$userIDArray[]   = $userObject->getID();
+}
+
 echo html_ao('div', array('id' => 'notifyUsers'));
 echo $HTML->openForm(array('id' => 'notifyusersdoc', 'name' => 'notifyusersdoc', 'method' => 'post', 'enctype' => 'multipart/form-data'));
 echo $HTML->listTableTop(array());
 $cells = array();
-$cells[] = array(_('Document Title')._(':'));
+$cells[][] = _('Document Title')._(':');
 $cells[][] = html_e('span', array('id' => 'notifytitle', 'type' => 'text', 'name' => 'title'), '', false);
 echo $HTML->multiTableRow(array(), $cells);
 $cells = array();
-$cells[] = array(_('Description')._(':'));
+$cells[][] = _('Description')._(':');
 $cells[][] = html_e('span', array('id' => 'notifydescription', 'type' => 'text', 'name' => 'description'), '', false);
 echo $HTML->multiTableRow(array(), $cells);
 $cells = array();
-$cells[] = array(_('File')._(':'));
+$cells[][] = _('File')._(':');
 $cells[][] = html_e('a', array('id' => 'notifyfilelink'), '', false);
 echo $HTML->multiTableRow(array(), $cells);
 $cells = array();
-$cells[] = array(_('Users Email to notify')._(':'));
-$cells[][] = html_e('input', array('title' => _('Add email addresses, comma separated'), 'id' => 'emails', 'type' => 'text', 'name' => 'emails', 'size' => '40'));
+$cells[][] = _('Users to notify')._(':');
+$cells[][] = html_e('p', array(), html_build_multiple_select_box_from_arrays($userIDArray, $userNameArray, 'userids[]', array(), 8, false, 'none', false, array('id' => 'notify-userids')));
 echo $HTML->multiTableRow(array(), $cells);
 $cells = array();
 $cells[] = array(_('Specific content to be added to the email body'), 'colspan' => 2, 'title' => _('Project, Folder, Title, Filename and direct link to the document will be added automatically.'));
