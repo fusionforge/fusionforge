@@ -338,28 +338,28 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->click("link=Users and permissions");
 		$this->waitForPageToLoad("30000");
 		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "guru") ;
-		$this->select("//input[@value='Add Member']/../select[@name='role_id']", "label=Senior Developer");
+		$this->select("//input[@value='Add Member']/../fieldset/select[@name='role_id']", "label=Senior Developer");
 		$this->click ("//input[@value='Add Member']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("guru Lastname"));
 		$this->assertTrue($this->isElementPresent("//tr/td/a[.='guru Lastname']/../../td/div[contains(.,'Senior Developer')]")) ;
 
 		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "trainee") ;
-		$this->select("//input[@value='Add Member']/../select[@name='role_id']", "label=Junior Developer");
+		$this->select("//input[@value='Add Member']/../fieldset/select[@name='role_id']", "label=Junior Developer");
 		$this->click ("//input[@value='Add Member']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("trainee Lastname"));
 		$this->assertTrue($this->isElementPresent("//tr/td/a[.='trainee Lastname']/../../td/div[contains(.,'Junior Developer')]")) ;
 
 		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "docmaster") ;
-		$this->select("//input[@value='Add Member']/../select[@name='role_id']", "label=Doc Writer");
+		$this->select("//input[@value='Add Member']/../fieldset/select[@name='role_id']", "label=Doc Writer");
 		$this->click ("//input[@value='Add Member']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("docmaster Lastname"));
 		$this->assertTrue($this->isElementPresent("//tr/td/a[.='docmaster Lastname']/../../td/div[contains(.,'Doc Writer')]")) ;
 
 		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "bigboss") ;
-		$this->select("//input[@value='Add Member']/../select[@name='role_id']", "label=Senior Developer");
+		$this->select("//input[@value='Add Member']/../fieldset/select[@name='role_id']", "label=Senior Developer");
 		$this->click ("//input[@value='Add Member']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("bigboss Lastname"));
@@ -376,7 +376,7 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->assertFalse($this->isTextPresent("trainee Lastname"));
 
 		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "trainee") ;
-		$this->select("//input[@value='Add Member']/../select[@name='role_id']", "label=Junior Developer");
+		$this->select("//input[@value='Add Member']/../fieldset/select[@name='role_id']", "label=Junior Developer");
 		$this->click ("//input[@value='Add Member']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("trainee Lastname"));
@@ -512,7 +512,7 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->click("link=Users and permissions");
 		$this->waitForPageToLoad("30000");
 		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "guru") ;
-		$this->select("//input[@value='Add Member']/../select[@name='role_id']", "label=Admin");
+		$this->select("//input[@value='Add Member']/../fieldset/select[@name='role_id']", "label=Admin");
 		$this->click ("//input[@value='Add Member']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("guru Lastname"));
@@ -547,7 +547,7 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Temporary role"));
 		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "trainee") ;
-		$this->select("//input[@value='Add Member']/../select[@name='role_id']", "label=Temporary role");
+		$this->select("//input[@value='Add Member']/../fieldset/select[@name='role_id']", "label=Temporary role");
 		$this->click ("//input[@value='Add Member']") ;
 		$this->waitForPageToLoad("30000");
 		$this->click ("//td/form/div[contains(.,'Temporary role')]/../../form/div/input[@value='Delete role']") ;
