@@ -541,7 +541,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->click("link=Users and permissions");
 		$this->waitForPageToLoad("30000");
 		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "ratatouille") ;
-		$this->select("//input[@value='Add Member']/../select[@name='role_id']", "label=Trainee");
+		$this->select("//input[@value='Add Member']/../fieldset/select[@name='role_id']", "label=Trainee");
 		$this->click ("//input[@value='Add Member']") ;
 		$this->waitForPageToLoad("30000");
 
@@ -550,12 +550,12 @@ class Search extends FForge_SeleniumTestCase
 		$this->click ("//td/form/div[contains(.,'Trainee')]/../div/input[@value='Edit Permissions']") ;
 		$this->waitForPageToLoad("30000");
 		$this->select("//select[contains(@name,'data[project_read]')]", "label=Visible");
-		$this->select("//tr/td[.='Bugs']/../td/select[contains(@name,'data[tracker]')]", "label=Read only");
-		$this->select("//tr/td[.='Patches']/../td/select[contains(@name,'data[tracker]')]", "label=No Access");
-		$this->select("//tr/td[.='To Do']/../td/select[contains(@name,'data[pm]')]", "label=Read only");
-		$this->select("//tr/td[.='Next Release']/../td/select[contains(@name,'data[pm]')]", "label=No Access");
-		$this->select("//tr/td[.='open-discussion']/../td/select[contains(@name,'data[forum]')]", "label=Read only");
-		$this->select("//tr/td[.='developers-discussion']/../td/select[contains(@name,'data[forum]')]", "label=No Access");
+		$this->select("//tr/td[.='Bugs']/../td/fieldset/select[contains(@name,'data[tracker]')]", "label=Read only");
+		$this->select("//tr/td[.='Patches']/../td/fieldset/select[contains(@name,'data[tracker]')]", "label=No Access");
+		$this->select("//tr/td[.='To Do']/../td/fieldset/select[contains(@name,'data[pm]')]", "label=Read only");
+		$this->select("//tr/td[.='Next Release']/../td/fieldset/select[contains(@name,'data[pm]')]", "label=No Access");
+		$this->select("//tr/td[.='open-discussion']/../td/fieldset/select[contains(@name,'data[forum]')]", "label=Read only");
+		$this->select("//tr/td[.='developers-discussion']/../td/fieldset/select[contains(@name,'data[forum]')]", "label=No Access");
 		$this->select("//select[contains(@name,'data[docman]')]", "label=Read only");
 		$this->click ("//input[@value='Submit']") ;
 		$this->waitForPageToLoad("30000");
@@ -565,12 +565,12 @@ class Search extends FForge_SeleniumTestCase
 		$this->click ("//td/form/div[contains(.,'Anonymous')]/../div/input[@value='Edit Permissions']") ;
 		$this->waitForPageToLoad("30000");
 		$this->select("//select[contains(@name,'data[project_read]')]", "label=Visible");
-		$this->select("//tr/td[.='Bugs']/../td/select[contains(@name,'data[tracker]')]", "label=No Access");
-		$this->select("//tr/td[.='Patches']/../td/select[contains(@name,'data[tracker]')]", "label=No Access");
-		$this->select("//tr/td[.='To Do']/../td/select[contains(@name,'data[pm]')]", "label=No Access");
-		$this->select("//tr/td[.='Next Release']/../td/select[contains(@name,'data[pm]')]", "label=No Access");
-		$this->select("//tr/td[.='open-discussion']/../td/select[contains(@name,'data[forum]')]", "label=No Access");
-		$this->select("//tr/td[.='developers-discussion']/../td/select[contains(@name,'data[forum]')]", "label=No Access");
+		$this->select("//tr/td[.='Bugs']/../td/fieldset/select[contains(@name,'data[tracker]')]", "label=No Access");
+		$this->select("//tr/td[.='Patches']/../td/fieldset/select[contains(@name,'data[tracker]')]", "label=No Access");
+		$this->select("//tr/td[.='To Do']/../td/fieldset/select[contains(@name,'data[pm]')]", "label=No Access");
+		$this->select("//tr/td[.='Next Release']/../td/fieldset/select[contains(@name,'data[pm]')]", "label=No Access");
+		$this->select("//tr/td[.='open-discussion']/../td/fieldset/select[contains(@name,'data[forum]')]", "label=No Access");
+		$this->select("//tr/td[.='developers-discussion']/../td/fieldset/select[contains(@name,'data[forum]')]", "label=No Access");
 		$this->select("//select[contains(@name,'data[docman]')]", "label=No Access");
 		$this->click ("//input[@value='Submit']") ;
 		$this->waitForPageToLoad("30000");
