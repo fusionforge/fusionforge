@@ -2,7 +2,7 @@
 /**
  * Copyright (C) 2010-2013 Alain Peyrat - Alcatel-Lucent
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2013,2015 Franck Villaume - TrivialDev
+ * Copyright 2013,2015-2016, Franck Villaume - TrivialDev
  * Copyright (C) 2015  Inria (Sylvain Beucler)
  *
  * This file is part of FusionForge.
@@ -46,12 +46,10 @@
 
 require_once dirname(dirname(__FILE__)).'/SeleniumForge.php';
 
-class CreateDocURL extends FForge_SeleniumTestCase
-{
+class CreateDocURL extends FForge_SeleniumTestCase {
 	public $fixture = 'projecta';
 
-	function testCreateDocURL()
-	{
+	function testCreateDocURL() {
 		$this->loadAndCacheFixture();
 		$this->switchUser(FORGE_ADMIN_USERNAME);
 
@@ -84,8 +82,36 @@ class CreateDocURL extends FForge_SeleniumTestCase
 		$this->assertTextPresent("Documents folder docdirectory moved to trash successfully");
 	}
 
-	function testCreateMultipleDocs()
-	{
+	function testCreateMultipleDocs() {
+		$this->loadAndCacheFixture();
+		$this->switchUser(FORGE_ADMIN_USERNAME);
+
+		$this->gotoProject('ProjectA');
+		$this->clickAndWait("link=Docs");
+		$this->clickAndWait("addItemDocmanMenu");
+		// ugly hack until we fix behavior in docman when no folders exist. We need to click twice on the link
+		$this->clickAndWait("addItemDocmanMenu");
+		$this->click("id=tab-new-document");
+		$this->type("title", "My document");
+		$this->type("//textarea[@name='description']", "My Description");
+		$this->type("//textarea[@name='vcomment']", "My Comment");
+		$this->click("//input[@name='type' and @value='pasteurl']");
+		$this->type("file_url", URL."/terms.php");
+		$this->clickAndWait("//input[@name='submit' and @value='Submit Information']");
+		$this->assertTextPresent("Document ".URL."/terms.php submitted successfully");
+
+		$this->gotoProject('ProjectA');
+		$this->clickAndWait("link=Docs");
+		$this->clickAndWait("addItemDocmanMenu");
+		$this->type("title", " My document ");
+		$this->type("//textarea[@name='description']", "My Description");
+		$this->click("//input[@name='type' and @value='pasteurl']");
+		$this->type("file_url", URL."/terms.php");
+		$this->clickAndWait("//input[@name='submit' and @value='Submit Information']");
+		$this->assertTextPresent("Document already published in this folder");
+	}
+
+	function testDisplayVersionDoc() {
 		$this->loadAndCacheFixture();
 		$this->switchUser(FORGE_ADMIN_USERNAME);
 
@@ -101,15 +127,10 @@ class CreateDocURL extends FForge_SeleniumTestCase
 		$this->type("file_url", URL."/terms.php");
 		$this->clickAndWait("//input[@name='submit' and @value='Submit Information']");
 		$this->assertTextPresent("Document ".URL."/terms.php submitted successfully");
-
-		$this->gotoProject('ProjectA');
-		$this->clickAndWait("link=Docs");
-		$this->clickAndWait("addItemDocmanMenu");
-		$this->type("title", " My document ");
-		$this->type("//textarea[@name='description']", "My Description");
-		$this->click("//input[@name='type' and @value='pasteurl']");
-		$this->type("file_url", URL."/terms.php");
-		$this->clickAndWait("//input[@name='submit' and @value='Submit Information']");
-		$this->assertTextPresent("Document already published in this folder");
+		$this->clickAndWait("listFileDocmanMenu");
+		$this->clickAndWait("link=Uncategorized Submissions");
+		$this->click("css=img[alt='editdocument']");
+		$this->click("id=versiontab");
+		$this->assertTextPresent("Versions");
 	}
 }
