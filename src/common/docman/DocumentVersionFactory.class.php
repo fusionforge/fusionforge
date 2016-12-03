@@ -88,7 +88,7 @@ class DocumentVersionFactory extends FFError {
 				}
 				$arr['versionactions'][] = util_make_link('#', $HTML->getEditFilePic(_('Edit this version'), 'editversion'), array('id' => 'version_action_edit', 'onclick' => 'javascript:controllerListFile.toggleEditVersionView({title: \''.addslashes($arr['title']).'\', description: '.json_encode($arr['description']).', version: '.ltrim($arr['version'], '_').', current_version: '.$arr['current_version'].', isURL: '.$isURL.', isText: '.$isText.', isHtml: '.$isHtml.', filename: \''.addslashes($arr['filename']).'\', vcomment: \''.addslashes($arr['vcomment']).'\'})'), true);
 				if ($numrows > 1) {
-					$arr['versionactions'][] = util_make_link('#', $HTML->getRemovePic(_('Permanently delete this version'), 'delversion'), array('id' => 'version_action_delete', 'onclick' => 'javascript:controllerListFile.deleteVersion({version: '.$arr['version'].'})'), true);
+					$arr['versionactions'][] = util_make_link('#', $HTML->getRemovePic(_('Permanently delete this version'), 'delversion'), array('id' => 'version_action_delete', 'onclick' => 'javascript:controllerListFile.deleteVersion({version: '.ltrim($arr['version'], '_').'})'), true);
 				}
 				$versions[$arr['version']] = $arr;
 			}
