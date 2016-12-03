@@ -175,7 +175,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		$cells[] = array($nextcell.$d->getFileName(), 'style' => 'word-wrap: break-word; max-width: 250px;');
 		$cells[] = array($d->getName(), 'style' => 'word-wrap: break-word; max-width: 250px;');
 		$cells[] = array($d->getDescription(), 'style' => 'word-wrap: break-word; max-width: 250px;');
-		$cells[][] =  make_user_link($d->getCreatorUserName(), $d->getCreatorRealName());
+		$cells[][] =  util_display_user($d->getCreatorUserName(), $d->getCreatorID(), $d->getCreatorRealName());
 		if ($d->getUpdated()) {
 			$cells[] = array(date(_('Y-m-d H:i'), $d->getUpdated()), 'sorttable_customkey' => $d->getUpdated());
 		} else {

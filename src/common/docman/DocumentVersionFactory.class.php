@@ -34,7 +34,7 @@ class DocumentVersionFactory extends FFError {
 
 	/**
 	 * @param	$Document
-	 * @internal	param			\The $object Document object to which this version factory is associated.
+	 * @internal	param		\The $object Document object to which this version factory is associated.
 	 */
 	function __construct(&$Document) {
 		parent::__construct();
@@ -67,7 +67,7 @@ class DocumentVersionFactory extends FFError {
 			$numrows = db_numrows($res);
 			while ($arr = db_fetch_array($res)) {
 				$user = user_get_object($arr['created_by']);
-				$arr['created_by_username'] = $user->getRealName();
+				$arr['created_by_username'] = util_display_user($user->getUnixName(), $user->getID(), $user->getRealName());
 				$arr['filesize_readable'] = human_readable_bytes($arr['filesize']);
 				if ($arr['updatedate']) {
 					$arr['lastdate'] = date(_('Y-m-d H:i'), $arr['updatedate']);
@@ -104,7 +104,12 @@ class DocumentVersionFactory extends FFError {
 			while ($arr = db_fetch_array($res)) {
 				$serialids[] = $arr[0];
 			}
+			$this->serialids = $serialids;
 		}
 		return $serialids;
+	}
+
+	function getDBResVersionSerialIDs() {
+		return db_query_params('SELECT serial_id, version FROM doc_data_version WHERE docid = $1 ORDER BY version DESC', array($this->Document->getID()));
 	}
 }
