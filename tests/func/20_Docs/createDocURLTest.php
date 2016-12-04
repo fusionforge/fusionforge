@@ -130,6 +130,7 @@ class CreateDocURL extends FForge_SeleniumTestCase {
 		$this->clickAndWait("listFileDocmanMenu");
 		$this->clickAndWait("link=Uncategorized Submissions");
 		$this->click("css=img[alt='editdocument']");
+		$this->waitForPageToLoad("30000");
 		$this->assertTextPresent("1 (x)");
 	}
 }
