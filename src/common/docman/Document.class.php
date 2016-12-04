@@ -1016,7 +1016,7 @@ class Document extends FFObject {
 			$body .= _('Submitter')._(': ').$this->getCreatorRealName()." (".$this->getCreatorUserName().") \n";
 			$body .= "\n\n-------------------------------------------------------\n".
 				_('For more info, visit:').
-				"\n\n" . util_make_url('/docman/?group_id='.$this->Group->getID().'&view=listfile&dirid='.$this->getDocGroupID());
+				"\n\n" . util_make_url('/docman/?group_id='.$this->Group->getID().'&view=listfile&dirid='.$this->getDocGroupID().'&filedetailid='.$this->getID());
 
 			$BCCarray = explode(',',$BCC);
 			foreach ($BCCarray as $dest_email) {
