@@ -177,31 +177,46 @@ class FFObject extends FFError {
 				if (preg_match('/^[Dd][0-9]+/', $objectRef)) {
 					//Document Ref.
 					$documentId = substr($objectRef, 1);
-					$documentObject = document_get_object($documentId, $this->getGroupID($this));
-					if (is_object($documentObject)) {
-						$statusArr[] = $this->addAssociationTo($documentObject);
+					if ($documentId != $this->getID()) {
+						$documentObject = document_get_object($documentId, $this->getGroupID($this));
+						if (is_object($documentObject)) {
+							$statusArr[] = $this->addAssociationTo($documentObject);
+						} else {
+							$this->setError(_('Unable to retrieve object ref')._(': ').$objectRef);
+							$statusArr[] = false;
+						}
 					} else {
-						$this->setError(_('Unable to retrieve object ref')._(': ').$objectRef);
+						$this->setError(_('Unable to associate to itself'));
 						$statusArr[] = false;
 					}
 				} elseif (preg_match('/^#[0-9]+/', $objectRef)) {
 					//Artifact Ref.
 					$artifactId = substr($objectRef, 1);
-					$artifactObject = artifact_get_object($artifactId);
-					if (is_object($artifactObject)) {
-						$statusArr[] = $this->addAssociationTo($artifactObject);
+					if ($artifactId != $this->getID()) {
+						$artifactObject = artifact_get_object($artifactId);
+						if (is_object($artifactObject)) {
+							$statusArr[] = $this->addAssociationTo($artifactObject);
+						} else {
+							$this->setError(_('Unable to retrieve object ref')._(': ').$objectRef);
+							$statusArr[] = false;
+						}
 					} else {
-						$this->setError(_('Unable to retrieve object ref')._(': ').$objectRef);
+						$this->setError(_('Unable to associate to itself'));
 						$statusArr[] = false;
 					}
 				} elseif (preg_match('/^[Rr][0-9]+/', $objectRef)) {
 					//Artifact Ref.
-					$frsreleaseid = substr($objectRef, 1);
-					$frsreleaseObject = frsrelease_get_object($frsreleaseid);
-					if (is_object($frsreleaseObject)) {
-						$statusArr[] = $this->addAssociationTo($frsreleaseObject);
+					$frsreleaseId = substr($objectRef, 1);
+					if ($frsreleaseId != $this->getID()) {
+						$frsreleaseObject = frsrelease_get_object($frsreleaseId);
+						if (is_object($frsreleaseObject)) {
+							$statusArr[] = $this->addAssociationTo($frsreleaseObject);
+						} else {
+							$this->setError(_('Unable to retrieve object ref')._(': ').$objectRef);
+							$statusArr[] = false;
+						}
 					} else {
-						$this->setError(_('Unable to retrieve object ref')._(': ').$objectRef);
+						$this->setError(_('Unable to associate to itself'));
 						$statusArr[] = false;
 					}
 				} else {

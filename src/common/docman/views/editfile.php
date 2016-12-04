@@ -49,7 +49,8 @@ jQuery(document).ready(function() {
 		buttonUrl:		jQuery('#editButtonUrl'),
 		buttonManualUpload:	jQuery('#editButtonManualUpload'),
 		buttonEditor:		jQuery('#editButtonEditor'),
-		divAssociation:		jQuery('#tabbereditfile-association')
+		divAssociation:		jQuery('#tabbereditfile-association'),
+		divReview:		jQuery('#tabbereditfile-review')
 	});
 });
 
@@ -67,14 +68,18 @@ $cells[] = array(_('State')._(':'), 'class' => 'docman_editfile_title');
 $cells[][] = html_e('select', array('name' => 'stateid', 'id' => 'stateid'), '', false);
 echo $HTML->multiTableRow(array(), $cells);
 echo $HTML->listTableBottom();
-if (forge_get_config('use_object_associations')) {
-	echo html_ao('div', array('id' => 'tabbereditfile'));
-	$elementsLi = array();
-	$elementsLi[] = array('content' => util_make_link('#tabbereditfile-version', _('Edit Versions'), array('title' => _('View/Add/Remove document version.')), true));
-	$elementsLi[] = array('content' => util_make_link('#tabbereditfile-association', _('Associations'), array('id' => 'associationtab', 'title' => _('Add/Remove associated objects.')), true));
-	echo $HTML->html_list($elementsLi);
-	echo html_ao('div', array('id' => 'tabbereditfile-version', 'class' => 'tabbertab'));
+echo html_ao('div', array('id' => 'tabbereditfile'));
+$elementsLi = array();
+$elementsLi[] = array('content' => util_make_link('#tabbereditfile-version', _('Versions'), array('id' => 'versiontab', 'title' => _('View/Add/Remove document version.')), true));
+if (forge_get_config('use_docman_review')) {
+	$elementsLi[] = array('content' => util_make_link('#tabbereditfile-review', _('Reviews'), array('id' => 'reviewtab', 'title' => _('View/Start/Comment document review.')), true));
 }
+if (forge_get_config('use_object_associations')) {
+	$elementsLi[] = array('content' => util_make_link('#tabbereditfile-association', _('Associations'), array('id' => 'associationtab', 'title' => _('Add/Remove associated objects.')), true));
+}
+echo $HTML->html_list($elementsLi);
+echo html_ao('div', array('id' => 'tabbereditfile-version', 'class' => 'tabbertab'));
+
 $thArr = array(_('ID (x)'), _('Filename'), _('Title'), _('Description'), _('Comment'), _('Author'), _('Last Time'), _('Size'), _('Actions'));
 $thTitle = array(_('x does mark the current version'), '', '', '', '', '', '', '', '', '', '');
 $thSizeCssArr = array(array('style' => 'width: 60px'), array('style' => 'width: 150px'), array('style' => 'width: 150px'), array('style' => 'width: 150px'), array('style' => 'width: 110px'),
@@ -86,11 +91,11 @@ echo html_e('button', array('id' => 'doc_version_addbutton', 'type' => 'button',
 echo $HTML->listTableTop(array(), array(), 'listing full hide', 'doc_version_edit');
 $cells = array();
 $cells[] = array(_('Document Title').utils_requiredField()._(':'), 'class' => 'docman_editfile_title');
-$cells[][] = html_e('input', array('pattern' => '.{5,}', 'title' => sprintf(_('(at least %s characters)'), 5), 'id' => 'title', 'type' => 'text', 'name' => 'title', 'size' => '40', 'maxlength' => '255'));
+$cells[][] = html_e('input', array('pattern' => '.{5,}', 'required' => 'required', 'title' => sprintf(_('(at least %s characters)'), 5), 'id' => 'title', 'type' => 'text', 'name' => 'title', 'size' => '40', 'maxlength' => '255'));
 echo $HTML->multiTableRow(array(), $cells);
 $cells = array();
 $cells[] = array(_('Description').utils_requiredField()._(':'), 'class' => 'docman_editfile_description');
-$cells[][] = html_e('textarea', array('pattern' => '.{10,}', 'title' => _('Editing tips:http,https or ftp: Hyperlinks. [#NNN]: Tracker id NNN. [TNNN]: Task id NNN. [wiki:&lt;pagename&gt;]: Wiki page. [forum:&lt;msg_id&gt;]: Forum post. [DNNN]: Document id NNN.').
+$cells[][] = html_e('textarea', array('pattern' => '.{10,}', 'required' => 'required', 'title' => _('Editing tips:http,https or ftp: Hyperlinks. [#NNN]: Tracker id NNN. [TNNN]: Task id NNN. [wiki:&lt;pagename&gt;]: Wiki page. [forum:&lt;msg_id&gt;]: Forum post. [DNNN]: Document id NNN.').
 										sprintf(_('at least %s characters)'), 10), 'id' => 'description', 'name' => 'description', 'maxlength' => '255', 'rows' => '5', 'cols' => '50'), '', false);
 echo $HTML->multiTableRow(array(), $cells);
 $cells = array();
@@ -151,19 +156,26 @@ $cells = array();
 $cells[] = array(_('File')._(':'), 'class' => 'docman_editfile_file');
 $cells[][] = html_e('input', array('type' => 'file', 'name' => 'uploaded_data')).html_e('br').'('._('max upload size')._(': ').human_readable_bytes(util_get_maxuploadfilesize()).')';
 echo $HTML->multiTableRow(array('id' => 'uploadnewroweditfile', 'class' => 'hide'), $cells);
+$cells = array();
+$cells[] = array($HTML->addRequiredFieldsInfoBox(), 'colspan' => 2);
+echo $HTML->multiTableRow(array(), $cells);
 echo $HTML->listTableBottom();
 echo html_e('input', array('type' => 'hidden', 'id' => 'docid', 'name' => 'docid'));
 echo html_e('input', array('type' => 'hidden', 'id' => 'edit_version', 'name' => 'edit_version'));
 echo html_e('input', array('type' => 'hidden', 'id' => 'new_version', 'name' => 'new_version', 'value' => 0));
-if (forge_get_config('use_object_associations')) {
-	echo html_ac(html_ap() -1);
-	echo html_e('div', array('id' => 'tabbereditfile-association', 'class' => 'tabbertab'), '', false);
-	echo '<script type="text/javascript">//<![CDATA[
-			jQuery(document).ready(function() {
-				jQuery("#tabbereditfile").tabs();
-			});
-			//]]></script>';
-	echo html_ac(html_ap() -1);
+echo html_e('input', array('type' => 'hidden', 'id' => 'subaction', 'name' => 'subaction', 'value' => 'version'));
+echo html_ac(html_ap() -1);
+if (forge_get_config('use_docman_review')) {
+	echo html_e('div', array('id' => 'tabbereditfile-review', 'class' => 'tabbertab'), '', false);
 }
+if (forge_get_config('use_object_associations')) {
+	echo html_e('div', array('id' => 'tabbereditfile-association', 'class' => 'tabbertab'), '', false);
+}
+echo '<script type="text/javascript">//<![CDATA[
+		jQuery(document).ready(function() {
+			jQuery("#tabbereditfile").tabs();
+		});
+		//]]></script>';
+echo html_ac(html_ap() -1);
 echo $HTML->closeForm();
 echo html_ac(html_ap() -1);

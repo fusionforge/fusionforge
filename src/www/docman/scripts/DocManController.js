@@ -64,6 +64,15 @@ DocManListFileController.prototype =
 		if (typeof(this.listfileparams.buttonAddItem) != 'undefined') {
 			this.listfileparams.buttonAddItem.click(jQuery.proxy(this, "toggleAddItemView"));
 		}
+		if (typeof(jQuery('#versiontab')) != 'undefined') {
+			jQuery('#versiontab').click(jQuery.proxy(this, "setRequiredInputs", jQuery('#versiontab')));
+		}
+		if (typeof(jQuery('#reviewtab')) != 'undefined') {
+			jQuery('#reviewtab').click(jQuery.proxy(this, "setRequiredInputs", jQuery('#reviewtab')));
+		}
+		if (typeof(jQuery('#associationtab')) != 'undefined') {
+			jQuery('#associationtab').click(jQuery.proxy(this, "setRequiredInputs", jQuery('#associationtab')));
+		}
 	},
 
 	resizableDiv: function() {
@@ -107,7 +116,6 @@ DocManListFileController.prototype =
 			autoOpen: false,
 			width: 1000,
 			modal: true,
-			title: this.listfileparams.divEditTitle,
 			buttons: {
 				Save: jQuery.proxy(function() {
 					jQuery('#editdocdata').submit();
@@ -183,14 +191,13 @@ DocManListFileController.prototype =
 		var modalId = this.listfileparams.divNotifyUsers;
 		jQuery(modalId).dialog({
 			autoOpen: false,
-			width: 475,
+			width: 600,
 			modal: true,
-			title: this.listfileparams.divNotifyTitle,
 			buttons: {
 				Save: { text: this.listfileparams.divNotifySaveButtonTxt,
 					click: jQuery.proxy(function() {
 					jQuery('#notifyusersdoc').submit();
-					var id = jQuery('#notifydocid').attr('value');
+					var id = jQuery('#docid').attr('value');
 					jQuery.get(this.listfileparams.docManURL+'/', {
 						group_id:	this.listfileparams.groupId,
 						action:		'lock',
@@ -212,7 +219,7 @@ DocManListFileController.prototype =
 					jQuery(modalId).dialog( "close" );
 				}, this)},
 				Cancel: jQuery.proxy(function() {
-					var id = jQuery('#notifydocid').attr('value');
+					var id = jQuery('#docid').attr('value');
 					jQuery.get(this.listfileparams.docManURL+'/', {
 						group_id:	this.listfileparams.groupId,
 						action:		'lock',
@@ -236,7 +243,7 @@ DocManListFileController.prototype =
 			}
 		});
 		jQuery(modalId).bind('dialogclose', jQuery.proxy(function() {
-			var id = jQuery('#notifydocid').attr('value');
+			var id = jQuery('#docid').attr('value');
 			jQuery.get(this.listfileparams.docManURL+'/', {
 				group_id:	this.listfileparams.groupId,
 				action:		'lock',
@@ -457,6 +464,27 @@ DocManListFileController.prototype =
 				}
 			}, this));
 
+		jQuery.getJSON(this.listfileparams.docManURL + '/?group_id=' + docid_groupid + '&action=getdocreviews&docid='+ this.docparams.id, jQuery.proxy(function(data){
+				if (typeof data.html != 'undefined') {
+					jQuery('#tabbereditfile-review > .feedback').remove();
+					jQuery('#tabbereditfile-review > .error').remove();
+					jQuery('#tabbereditfile-review > .warning_msg').remove();
+					jQuery('#tabbereditfile-review > .information').remove();
+					jQuery('#tabbereditfile-review > table').remove();
+					jQuery('#tabbereditfile-review > span').remove();
+					jQuery('#tabbereditfile-review > p').remove();
+					jQuery('#editfile-createreview').remove();
+					jQuery('#doc_review_addbutton').remove();
+					jQuery('#tabbereditfile-review').prepend(data.html);
+					jQuery('#doc_review_addbutton').button();
+				}
+				if (typeof data.htmltab != 'undefined') {
+					jQuery('#reviewtab').text(data.htmltab);
+				}
+				jQuery('#review-select-mandatory-users').gentleSelect({columns: 3, itemWidth: 150});
+				jQuery('#review-select-optional-users').gentleSelect({columns: 3, itemWidth: 150});
+			}, this));
+
 		jQuery('#editdocdata').attr('action', this.docparams.action);
 
 		jQuery.get(this.docparams.docManURL+'/', {
@@ -469,7 +497,9 @@ DocManListFileController.prototype =
 			});
 		this.lockInterval[this.docparams.id] = setInterval("jQuery.get('" + this.docparams.docManURL + "/', {group_id:"+this.docparams.groupId+", action:'lock', lock:1, type:'file', itemid:"+this.docparams.id+", childgroup_id:"+this.docparams.childGroupId+"})", this.docparams.lockIntervalDelay);
 		this.lockInterval[this.docparams.docgroupId] = setInterval("jQuery.get('" + this.docparams.docManURL + "/', {group_id:"+this.docparams.groupId+", action:'lock', lock:1, type: 'dir', itemid:"+this.docparams.docgroupId+", childgroup_id:"+this.docparams.childGroupId+"})", this.docparams.lockIntervalDelay);
-		jQuery(this.listfileparams.divEditFile).dialog('open');
+		jQuery('#tabbereditfile').tabs("option", "active", 0);
+		this.setRequiredInputs(jQuery('#versiontab'));
+		jQuery(this.listfileparams.divEditFile).dialog('option', 'title', '[D'+this.docparams.id+'] '+this.listfileparams.divEditTitle).dialog('open');
 		return false;
 	},
 
@@ -490,8 +520,50 @@ DocManListFileController.prototype =
 		}
 	},
 
+	toggleAddReviewView: function() {
+		jQuery('#review-title').val('');
+		jQuery('#review-description').val('');
+		jQuery('#datepicker_end_review_date').val('');
+		jQuery('#review-serialid').val();
+		jQuery('[class^=gentle]').remove();
+		jQuery('#review-select-mandatory-users').val('');
+		jQuery('#review-select-optional-users').val('');
+		jQuery('#review-select-mandatory-users').gentleSelect({columns: 3, itemWidth: 150});
+		jQuery('#review-select-optional-users').gentleSelect({columns: 3, itemWidth: 150});
+		if (jQuery('#editfile-createreview').is(':visible')) {
+			jQuery('#editfile-createreview').hide();
+			jQuery('#new_review').val(0);
+		} else {
+			jQuery('#new_review').val(1);
+			jQuery('#editfile-createreview').show();
+		}
+	},
+
+	toggleEditReviewView: function(params) {
+		this.review = params;
+		if (jQuery('#editfile-createreview').is(':visible')) {
+			jQuery('#editfile-createreview').hide();
+			jQuery('#new_review').val(0);
+			jQuery('#review_id').val(0);
+		} else {
+			jQuery('#review_id').val(this.review.review);
+			jQuery('#review-title').val(this.review.title);
+			jQuery('#review-description').val(this.review.description);
+			jQuery('#datepicker_end_review_date').val(this.review.endreviewdate);
+			jQuery('#review-serialid').val(this.review.serialid);
+			jQuery('[class^=gentle]').remove();
+			jQuery('#review-select-mandatory-users').val(this.review.mandatoryusers);
+			jQuery('#review-select-optional-users').val(this.review.optionalusers);
+			jQuery('#review-select-mandatory-users').gentleSelect({columns: 3, itemWidth: 150});
+			jQuery('#review-select-optional-users').gentleSelect({columns: 3, itemWidth: 150});
+			jQuery('#new_review').val(0);
+			jQuery('#editfile-createreview').show();
+		}
+	},
+
 	toggleEditVersionView: function(params) {
 		this.version = params;
+		jQuery('#new_version').val(0);
 		if (this.version.isHtml) {
 			jQuery('#defaulteditfiletype').val('text/html');
 		}
@@ -567,12 +639,46 @@ DocManListFileController.prototype =
 				if (typeof data.status != 'undefined') {
 					if (data.status == 1) {
 						jQuery('#docversion'+this.version).remove();
+						//adjust review tab & version tab number?
+						if (jQuery('#docversionreview'+this.version) != 'undefined') {
+							jQuery('#docversionreview'+this.version).parent.remove();
+						}
 						if (jQuery('#sortable_doc_version_table tr').length <= 2) {
 							jQuery('#version_action_delete').remove();
 						}
 					}
 				}
 			}, this.delversion));
+	},
+
+	deleteReview: function(params) {
+		this.delreview = params;
+		jQuery.getJSON(this.docparams.docManURL + '/?group_id=' + this.docparams.groupId + '&action=deletereview&docid='+this.docparams.id+'&review='+this.delreview.review , jQuery.proxy(function(data){
+				if (typeof data.html != 'undefined') {
+					jQuery('#editFile > .feedback').remove();
+					jQuery('#editFile > .error').remove();
+					jQuery('#editFile > .warning_msg').remove();
+					jQuery('#editFile').prepend(data.html);
+				}
+				if (typeof data.status != 'undefined') {
+					if (data.status == 1) {
+						jQuery('#docreview'+this.review).remove();
+						//adjust review tab number?
+					}
+				}
+			}, this.delreview));
+	},
+
+	reminderReview: function(params) {
+		this.reminderreview = params;
+		jQuery.getJSON(this.docparams.docManURL + '/?group_id=' + this.docparams.groupId + '&action=reminderreview&docid='+this.docparams.id+'&review='+this.reminderreview.review , jQuery.proxy(function(data){
+				if (typeof data.html != 'undefined') {
+					jQuery('#editFile > .feedback').remove();
+					jQuery('#editFile > .error').remove();
+					jQuery('#editFile > .warning_msg').remove();
+					jQuery('#editFile').prepend(data.html);
+				}
+			}, this.reminderreview));
 	},
 
 	toggleMoveFileView: function() {
@@ -595,7 +701,7 @@ DocManListFileController.prototype =
 	toggleNotifyUserView: function(params) {
 		this.notifyparams = params;
 		jQuery('#notifytitle').text(this.notifyparams.title);
-		jQuery('#notifydescription').text(this.notifyparams.description);
+		jQuery('#notifydescription').html(this.notifyparams.description);
 		jQuery('#notifydocid').val(this.notifyparams.id);
 		jQuery('#notifyfilelink').text(this.notifyparams.filename);
 		if (this.notifyparams.statusId != 2) {
@@ -617,7 +723,8 @@ DocManListFileController.prototype =
 			});
 		this.lockInterval[this.notifyparams.id] = setInterval("jQuery.get('" + this.notifyparams.docManURL + "/', {group_id:"+this.notifyparams.groupId+",action:'lock',lock:1,type:'file',itemid:"+this.notifyparams.id+",childgroup_id:"+this.notifyparams.childGroupId+"})", this.notifyparams.lockIntervalDelay);
 		this.lockInterval[this.notifyparams.docgroupId] = setInterval("jQuery.get('" + this.notifyparams.docManURL + "/', {group_id:"+this.notifyparams.groupId+",action:'lock',lock:1,type:'dir',itemid:"+this.notifyparams.docgroupId+",childgroup_id:"+this.notifyparams.childGroupId+"})", this.notifyparams.lockIntervalDelay);
-		jQuery(this.listfileparams.divNotifyUsers).dialog('open');
+		jQuery('#notify-userids').gentleSelect({columns: 2, itemWidth: 120});
+		jQuery(this.listfileparams.divNotifyUsers).dialog('option', 'title', '[D'+this.notifyparams.id+'] '+this.listfileparams.divNotifyTitle).dialog('open');
 
 		return false;
 
@@ -660,6 +767,25 @@ DocManListFileController.prototype =
 				jQuery('#massaction'+id).show();
 				break;
 			}
+		}
+	},
+
+	setRequiredInputs: function(id) {
+		if (id.attr('id') == 'reviewtab') {
+			jQuery('#tabbereditfile-version :input').not(':input[type=hidden], :input[type=button]').prop('disabled', true);
+			jQuery('#tabbereditfile-association').prop('disabled', true);
+			jQuery('#tabbereditfile-review :input').removeAttr('disabled');
+			jQuery('#subaction').val('review');
+		} else if (id.attr('id') == 'associationtab') {
+			jQuery('#tabbereditfile-version :input').not(':input[type=hidden], :input[type=button]').prop('disabled', true);
+			jQuery('#tabbereditfile-association').removeAttr('disabled');
+			jQuery('#tabbereditfile-review :input').prop('disabled', true);
+			jQuery('#subaction').val('association');
+		} else if (id.attr('id') == 'versiontab') {
+			jQuery('#tabbereditfile-version :input').not(':input[type=hidden], :input[type=button]').removeAttr('disabled');
+			jQuery('#tabbereditfile-association').prop('disabled', true);
+			jQuery('#tabbereditfile-review :input').prop('disabled', true);
+			jQuery('#subaction').val('version');
 		}
 	}
 };
