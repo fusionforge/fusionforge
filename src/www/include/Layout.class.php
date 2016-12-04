@@ -1290,6 +1290,10 @@ if (isset($params['group']) && $params['group']) {
 		return $this->getPicto('ic/mail16b.png', $title, $alt);
 	}
 
+	function getMailNotifyPic($title = '', $alt = '') {
+		return $this->getPicto('ic/mail-send.png', $title, $alt);
+	}
+
 	function getPmPic($title = '', $alt = '') {
 		return $this->getPicto('ic/taskman20g.png', $title, $alt);
 	}
