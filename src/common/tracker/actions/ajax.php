@@ -3,6 +3,7 @@
  * Tracker Facility
  *
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2016 Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -21,6 +22,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+require_once $gfwww.'include/expression.php';
+
+global $group;
+global $atid;
+
 $sysdebug_enable = false;
 
 $function = getStringFromRequest('function');
@@ -29,6 +35,10 @@ switch ($function) {
 	case 'get_canned_response':
 		$canned_response_id = getIntFromRequest('canned_response_id');
 		echo get_canned_response($canned_response_id);
+		break;
+	case 'get_formulas_results':
+		$extra_fields = getArrayFromRequest('extra_fields');
+		echo get_formulas_results($group, $atid, $extra_fields);
 		break;
 	default:
 		echo '';
@@ -44,4 +54,75 @@ function get_canned_response($id) {
 	else {
 		return db_result($result, 0, 'body');
 	}
+}
+
+function get_formulas_results($group, $atid, $extra_fields=array()){
+	$ret = array('messages' => '');
+	$at = new ArtifactType($group, $atid);
+	if (!$at || !is_object($at)) {
+		$ret['messages'] = _('ArtifactType could not be created');
+		return json_encode($ret);
+		exit();
+	}
+	if ($at->isError()) {
+		$ret['messages'] = $at->getErrorMessage();
+		return json_encode($ret);
+		exit();
+	}
+
+	$expr = new Expression();
+
+	// Variable assignment
+	$extraFields = $at->getExtraFields();
+	foreach ($extraFields as $extraField) {
+		if (isset($extra_fields[$extraField['extra_field_id']])) {
+			if ($extraField['field_type']==ARTIFACT_EXTRAFIELDTYPE_INTEGER) {
+				$varAss = $extraField['alias'].'='.$extra_fields[$extraField['extra_field_id']];
+				$expr->evaluate($varAss);
+			} elseif ($extraField['field_type']==ARTIFACT_EXTRAFIELDTYPE_TEXT) {
+				$varAss = $extraField['alias'].'="'.$extra_fields[$extraField['extra_field_id']].'"';
+				$expr->evaluate($varAss);
+			}
+		}
+	}
+
+	// formula
+	$result = array();
+	foreach ($extraFields as $extraField) {
+		$ef = new ArtifactExtraField($at,$extraField['extra_field_id']);
+		if (!$ef || !is_object($ef)) {
+			$ret['messages'] = _('ArtifactExtraField could not be created');
+			return json_encode($ret);
+			exit();
+		}
+		if ($ef->isError()) {
+			$ret['messages'] = $ef->getErrorMessage();
+			return json_encode($ret);
+			exit();
+		}
+		$formula = $ef->getFormula();
+		if (in_array($extraField['field_type'], unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_VALUE))) {
+			if (!empty($formula)) {
+				$value = $expr->evaluate($formula);
+				$result [] = array( 'id'=>$extraField['extra_field_id'], 'value'=>$value, 'error'=>$expr->last_error );
+			}
+		} elseif (in_array($extraField['field_type'], unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_CHOICE))) {
+			if (is_array($formula)) {
+				$formulas = $formula;
+				$valueArr = array();
+				foreach ($formulas as $key=>$formula) {
+					$value = $expr->evaluate($formula);
+					if ($value) {
+						$valueArr[]=$key;
+						if (in_array($extraField['field_type'], unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_SINGLECHOICE))) {
+							breack;
+						}
+					}
+				}
+				$result [] = array( 'id'=>$extraField['extra_field_id'], 'value'=>$valueArr, 'error'=>$expr->last_error);
+			}
+		}
+	}
+	$ret['fields'] = $result;
+	return json_encode($ret);
 }

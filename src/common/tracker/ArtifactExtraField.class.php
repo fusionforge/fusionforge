@@ -663,6 +663,80 @@ class ArtifactExtraField extends FFError {
 	}
 
 	/**
+	 * getFormula - Get formula(s) to calculate field
+	 *
+	 * @return	string|array
+	 */
+	function getFormula() {
+		$return = false;
+		$res = db_query_params ('SELECT id, formula FROM artifact_extra_field_formula WHERE extra_field_id=$1',
+				array ($this->getID()));
+		$type = $this->getType();
+		if (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_VALUE))) {
+			if (db_numrows($res) > 0) {
+				$row = db_fetch_array($res);
+				$return = $row['formula'];
+			} else {
+				$return ='';
+			}
+		} elseif (in_array($type, array_merge(unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_SPECALCHOICE), unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_CHOICE)))) {
+			$return = array();
+			while ($row = db_fetch_array($res)) {
+				$return[$row['id']] = $row['formula'];
+			}
+		}
+		return $return;
+	}
+
+	/**
+	 * setFormula - set formula to calculate field value
+	 *
+	 * @param	string	$formula	formula
+	 * @return	string|array
+	 */
+	function setFormula($formula) {
+		$formula = $trim($formula);
+		$return = true;
+		if ($formula=='') {
+			$this->resetFormula();
+		} else {
+			$type = $this->getType();
+			$efID = $this->getID();
+			$res = db_query_params ('SELECT id, formula FROM artifact_extra_field_formula WHERE extra_field_id=$1',
+					array ($efID)) ;
+			if (db_numrows($res) > 0) {
+				$res = db_query_params ('UPDATE artifact_extra_field_formula SET formula = $1 WHERE extra_field_id=$2',
+						array ($formula, $efID));
+			} else {
+				$res = db_query_params ('INSERT INTO artifact_extra_field_formula (extra_field_id, formula) VALUES ($1,$2)',
+						array ($efID, $formula)) ;
+			}
+			if (!$res) {
+				$this->setError(db_error());
+				$return = false;
+			}
+		}
+		return $return;
+	}
+
+	/**
+	 * resetFormula - reset formula
+	 *
+	 * @return	boolean
+	 */
+	function resetFormula() {
+		$result = db_query_params ('DELETE FROM artifact_extra_field_formula WHERE extra_field_id = $1',
+				array ($this->getID()));
+		if (!$result) {
+			$this->setError(db_error());
+			$return = false;
+		} else {
+			$return = true;
+		}
+		return $return;
+	}
+
+	/**
 	 * getAvailableTypes - the types of text fields and their names available.
 	 *
 	 * @return	array	types.

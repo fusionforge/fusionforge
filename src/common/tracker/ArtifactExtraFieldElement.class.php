@@ -346,6 +346,61 @@ class ArtifactExtraFieldElement extends FFError {
 		}
 	}
 
+	function getFormula() {
+		$return = false;
+		$res = db_query_params ('SELECT formula FROM artifact_extra_field_formula WHERE extra_field_id=$1 AND id=$2',
+				array ($this->ArtifactExtraField->getID(),
+					$this->getID()));
+		if (db_numrows($res) > 0) {
+			$row = db_fetch_array($res);
+			$return = $row['formula'];
+		} else {
+			$return ='';
+		}
+		return $return;
+	}
+
+	function setFormula($formula) {
+		$formula = trim($formula);
+		$return = true;
+		if ($formula=='') {
+			$this->resetFormula();
+		} else {
+			$res = db_query_params ('SELECT id, formula FROM artifact_extra_field_formula WHERE extra_field_id=$1 and id=$2',
+				array ($this->ArtifactExtraField->getID(),
+					$this->getID()));
+			if (db_numrows($res) > 0) {
+				$res = db_query_params ('UPDATE artifact_extra_field_formula SET formula = $1 WHERE extra_field_id=$2 and id=$3',
+					array ($formula,
+						$this->ArtifactExtraField->getID(),
+						$this->getID()));
+			} else {
+				$res = db_query_params ('INSERT INTO artifact_extra_field_formula (extra_field_id, id, formula) VALUES ($1,$2,$3)',
+					array ($this->ArtifactExtraField->getID(),
+						$this->getID(),
+						$formula));
+			}
+			if (!$res) {
+				$this->setError(db_error());
+				$return = false;
+			}
+		}
+		return $return;
+	}
+
+	function resetFormula() {
+		$result = db_query_params ('DELETE FROM artifact_extra_field_formula WHERE extra_field_id=$1 and id=$2',
+				array ($this->ArtifactExtraField->getID(),
+					$this->getID()));
+		if (!$result) {
+			$this->setError(db_error());
+			$return = false;
+		} else {
+			$return = true;
+		}
+		return $return;
+	}
+
 	/**
 	 * getChildrenElements - return the array of the elements of children fields who depend on current element
 	 *

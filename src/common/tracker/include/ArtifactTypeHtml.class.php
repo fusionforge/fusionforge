@@ -255,6 +255,15 @@ class ArtifactTypeHtml extends ArtifactType {
 			echo $template;
 			return ;
 		}
+		if ($mode == 'UPDATE' || $mode == 'NEW') {
+			if ($mode == 'NEW') {
+				$efInFormula = $this->getExtraFieldsInFormula($types, false, false);
+				$efWithFormula = $this->getExtraFieldsWithFormula($types, false, false);
+			} else {
+				$efInFormula = $this->getExtraFieldsInFormula($types);
+				$efWithFormula = $this->getExtraFieldsWithFormula($types);
+			}
+		}
 
 		$keys = array_keys($efarr);
 		for ($k = 0; $k < count($keys); $k++) {
@@ -267,6 +276,16 @@ class ArtifactTypeHtml extends ArtifactType {
 			}
 			if ($efarr[$i]['is_required'] == 1 && $mode != 'QUERY') {
 				$attrs['required'] = 'required';
+			}
+
+			if ($mode == 'UPDATE' || $mode == 'NEW') {
+				if (in_array($efarr[$i]['extra_field_id'],$efInFormula)) {
+					$attrs['class'] = (empty($attrs['class']) ? '':$attrs['class'].' ').'in-formula';
+				}
+				if (in_array($efarr[$i]['extra_field_id'],$efWithFormula)) {
+					$attrs['class'] = (empty($attrs['class']) ? '':$attrs['class'].' ').'with-formula readonly';
+					$attrs['readonly'] = 'readonly';
+				}
 			}
 
 			if (!isset($selected[$efarr[$i]['extra_field_id']]))
@@ -1034,7 +1053,9 @@ class ArtifactTypeHtml extends ArtifactType {
 	 * @return	string	HTML code of corresponding input tag.
 	 */
 	function renderIntegerField ($extra_field_id, $contents, $size, $maxlength, $attrs = array()) {
-		return html_e('input', array_merge(array('type'=>'number', 'name'=>'extra_fields['.$extra_field_id.']', 'value'=>$contents, 'size'=>$size, 'maxlength'=>$maxlength, 'min'=>0), $attrs));
+		$intAttrs = array('type'=>'number', 'name'=>'extra_fields['.$extra_field_id.']', 'value'=>$contents, 'size'=>$size, 'maxlength'=>$maxlength, 'min'=>0);
+		$newattrs =  array_merge($intAttrs, $attrs);
+		return html_e('input',$newattrs);
 	}
 
 	/**
@@ -1195,7 +1216,9 @@ class ArtifactTypeHtml extends ArtifactType {
 	function javascript() {
 		$jsvariable ="
 	var invalidSelectMsg = '"._("One or more of the selected options is not allowed")."';
-	var invalidInputMsg = '". _("This choice is not allowed")."';";
+	var invalidInputMsg = '". _("This choice is not allowed")."';
+	var groupId =".$this->Group->getID().";
+	var atId = ".$this->getID().";";
 		$javascript = <<<'EOS'
 	$.expr[':'].invalid = function(elem, index, match) {
 		for (let invalid of document.querySelectorAll(':invalid') )  {
@@ -1203,31 +1226,71 @@ class ArtifactTypeHtml extends ArtifactType {
 		}
 		return false;
 	};
-	$(".package").on('change', function(){
-		$(this).children('option:selected').each(function(i){
-			var releases = $(this).data("releases");
-			$("select[name^='extra_fields["+releases.field+"]']")[0].setCustomValidity("");
-			$("select[name^='extra_fields["+releases.field+"]'] option").not( "[value='100']" ).each(function(j,opt){
-				if (this.value!='100') {
-					if ($.inArray(parseInt(this.value),releases.elmnt)>-1) {
-						$(this).prop('disabled', false).removeClass('option_disabled');
-					} else {
-						$(this).prop('disabled', true);
-						$(this).addClass('option_disabled');
-					}
+	$("input[type='radio'].readonly, input[type='checkbox'].readonly").on('click', function(){
+		return false;
+	}).on('keydown', function(event){
+		if(event.keyCode !== 9) return false;
+	});
+	$(".in-formula[name^='extra_fields']").on('change', function(){
+		$.ajax({
+			type: 'POST',
+			url: 'index.php',
+			data: 'rtype=ajax&function=get_formulas_results&group_id='+groupId+'&atid='+atId+'&'+$("[name^='extra_fields']" ).serialize(),
+			async: false,
+			dataType: 'json',
+			success: function(answer){
+				if(answer['message']) {
+					showMessage(answer['message'], 'error');
 				}
-			});
-			$("select[name^='extra_fields["+releases.field+"]'] option:selected:disabled").parent().each(function() {
-				$(this).children('option:selected:disabled').prop('disabled', false);
-				this.setCustomValidity(invalidSelectMsg);
-				$(this).on("change.invalid", function() {
-					$(this).children('option.option_disabled:not(:disabled):not(:selected)').prop('disabled', true);
-					if (!$(this).children('option.option_disabled:selected').length) {
-						this.setCustomValidity("");
-						$(this).off("change.invalid");
+				fields = answer['fields'];
+				$.each(fields, function (index, field) {
+					fieldObj = $("[name^='extra_fields["+field.id+"]']");
+				console.log(fieldObj);
+				console.log(fieldObj.is("input[type='radio']"));
+					if (fieldObj.is("input[type='checkbox']")){
+				console.log("checkbox");
+						fieldObj.each(function() {
+							var in_array = -1;
+							for (var key in field.value) {
+								if (field.value[key] == $(this).val()) {
+									in_array = key;
+									break;
+								}
+							}
+							if (in_array > -1) {
+								$(this).prop("checked",true);
+							} else {
+								$(this).prop("checked",false);
+							}
+						});
+					} else if (fieldObj.is("input[type='radio']")){
+				console.log("radio");
+						fieldObj.each(function() {
+							console.log($(this));
+							var in_array = -1;
+							for (var key in field.value) {
+								if (field.value[key] == $(this).val()) {
+									in_array = key;
+									break;
+								}
+							}
+							console.log(in_array);
+							if (in_array > -1) {
+								$(this).prop("checked",true);
+							} else {
+								$(this).prop("checked",false);
+							}
+						});
+					} else if (fieldObj.is("input")){
+						fieldObj.val(field.value);
+					} else if (fieldObj.is("select")){
+						fieldObj.val(field.value);
+					}  else if (fieldObj.is("textarea")){
+						fieldObj.val(field.value);
 					}
 				});
-			});
+				return true;
+			}
 		});
 	});
 	$(".autoassign[name^='extra_fields']").on('change', function(){
