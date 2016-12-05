@@ -1347,7 +1347,7 @@ if (isset($params['group']) && $params['group']) {
 	}
 
 	function getClosedTicketPic($title = '', $alt = '', $otherAttr = array()) {
-		return $this->getPicto('ic/ticket-close.png', $title, $alt, 20, 20, $otherAttr);
+		return $this->getPicto('ic/ticket-closed.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
 	function getErrorPic($title = '', $alt = '', $otherAttr = array()) {
