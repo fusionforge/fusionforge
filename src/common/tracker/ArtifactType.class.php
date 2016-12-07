@@ -694,6 +694,51 @@ class ArtifactType extends FFError {
 	}
 
 	/**
+	 * getExtraFieldsInFormula - Get array of extra fields used in formula
+	 *
+	 * @param	array	$types
+	 * @param	bool	$get_is_disabled
+	 * @param	bool	$get_is_hidden_on_submit
+	 * @return	array	arrays of data;
+	 */
+	function getExtraFieldsInFormula($types = array(), $get_is_disabled = false, $get_is_hidden_on_submit = true) {
+		$return = array();
+		$extra_fields = $this->getExtraFields($types, $get_is_disabled, $get_is_hidden_on_submit);
+		$res = db_query_params('SELECT string_agg(formula,chr(10)) FROM artifact_extra_field_formula NATURAL INNER JOIN artifact_extra_field_list WHERE is_disabled=0 AND group_artifact_id=$1',
+				array ($this->getID()));
+		if (db_numrows($res) > 0) {
+			$row = db_fetch_array($res);
+			if (preg_match_all("/([a-z]\w*)/m", $row[0], $matches)) {
+				foreach ($extra_fields as $extra_field) {
+					if (in_array($extra_field['alias'],$matches[0])) {
+						$return[]=$extra_field['extra_field_id'];
+					}
+				}
+			}
+		}
+		return $return;
+	}
+
+	/**
+	 * getExtraFieldsWithFormula - Get array of extra fields with formula
+	 *
+	 * @param	array	$types
+	 * @param	bool	$get_is_disabled
+	 * @param	bool	$get_is_hidden_on_submit
+	 * @return	array	arrays of data;
+	 */
+	function getExtraFieldsWithFormula($types = array(), $get_is_disabled = false, $get_is_hidden_on_submit = true) {
+		$return = array();
+		$extra_fields = $this->getExtraFields($types, $get_is_disabled, $get_is_hidden_on_submit);
+		$res = db_query_params('SELECT extra_field_id FROM artifact_extra_field_formula NATURAL INNER JOIN artifact_extra_field_list WHERE is_disabled=0 AND group_artifact_id=$1',
+				array ($this->getID()));
+		while ($arr = db_fetch_array($res)) {
+			$return []= $arr['extra_field_id'];
+		}
+		return $return;
+	}
+
+	/**
 	 * cloneFieldsFrom - clone all the fields and elements from another tracker
 	 *
 	 * @param	int	$clone_tracker_id	id of the cloned tracker

@@ -90,6 +90,12 @@ if (!$ac || !is_object($ac)) {
 		} else {
 			echo html_e('input', array('type'=>'hidden', 'name'=>'auto_assign_to', 'value'=>100));
 		}
+
+		echo html_ao('p');
+		echo html_e('label', array('for'=>'formula'), html_e('strong', array(), _('Formula')._(':')).html_e('br'));
+		echo html_e('textarea', array('type'=>'text', 'id'=>'formula', 'name'=>'formula', 'rows'=>4, 'cols'=>50), $ao->getFormula(), false);
+		echo html_ac(html_ap()-1);
+
 		echo $HTML->warning_msg(_('It is not recommended that you change the custom field name because other things are dependent upon it. When you change the custom field name, all related items will be changed to the new name.'));
 		echo html_ao('p');
 		echo html_e('input', array('type'=>'submit', 'name'=>'post_changes', 'value'=> _('Update')));

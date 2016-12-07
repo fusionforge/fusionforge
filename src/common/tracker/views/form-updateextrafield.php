@@ -190,6 +190,15 @@ if (!$ac || !is_object($ac)) {
 			break;
 	}
 
+	if (in_array($efType, array(ARTIFACT_EXTRAFIELDTYPE_TEXT, ARTIFACT_EXTRAFIELDTYPE_INTEGER, ARTIFACT_EXTRAFIELDTYPE_TEXTAREA))) {
+		echo html_ao('p');
+		echo html_e('label', array('for'=>'formula'), _('Formula to calculate field value'));
+		echo html_e('textarea', array('type'=>'text', 'name'=>'formula', 'rows'=>4, 'cols'=>50), $ac->getFormula(), false);
+		echo html_ac(html_ap() - 1);
+	} else {
+		echo html_e('input', array('type'=>'hidden', 'name'=>'formula', 'value'=>''));
+	}
+
 	echo $HTML->warning_msg(_('It is not recommended that you change the custom field name because other things are dependent upon it. When you change the custom field name, all related items will be changed to the new name.'));
 
 	echo html_ao('p');

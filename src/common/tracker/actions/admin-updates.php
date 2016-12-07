@@ -246,6 +246,7 @@ if (getStringFromRequest('add_extrafield')) {
 	$is_hidden_on_submit = getStringFromRequest('is_hidden_on_submit');
 	$is_disabled = getStringFromRequest('is_disabled');
 	$defaultArr = getArrayFromRequest('extra_fields', false);
+	$formula = getStringFromRequest('formula');
 	if (isset($defaultArr[$id])) {
 		$default = $defaultArr[$id];
 	} else {
@@ -266,16 +267,20 @@ if (getStringFromRequest('add_extrafield')) {
 		if (!$ac->update($name, $attribute1, $attribute2, $is_required, $alias, $show100, $show100label, $description, $pattern, $parent, $autoassign, $is_hidden_on_submit, $is_disabled)) {
 			$error_msg .= _('Update failed')._(': ').$ac->getErrorMessage();
 			$ac->clearError();
-		} else {
-			if($default!==false) {
+		} elseif (!$ac->setFormula($formula)){
+				$error_msg .= _('Update field formula failed')._(': ').$ac->getErrorMessage();
+				$ac->clearError();
+		} elseif ($default!==false) {
 				if (!$ac->setDefaultValues($default)){
-					$error_msg .= _('Update failed')._(': ').$ac->getErrorMessage();
+					$error_msg .= _('Update field default value failed')._(': ').$ac->getErrorMessage();
 					$ac->clearError();
 				} else {
 					$feedback .= _('Custom Field updated');
 					$next = 'add_extrafield';
 				}
-			}
+		} else {
+			$feedback .= _('Custom Field updated');
+			$next = 'add_extrafield';
 		}
 	}
 
@@ -285,6 +290,7 @@ if (getStringFromRequest('add_extrafield')) {
 } elseif (getStringFromRequest('update_opt')) {
 	$boxid = getStringFromRequest('boxid');
 	$is_default = getStringFromRequest('is_default', false);
+	$formula = getStringFromRequest('formula', '');
 	$ac = new ArtifactExtraField($ath,$boxid);
 	if (!$ac || !is_object($ac)) {
 		$error_msg .= _('Unable to create ArtifactExtraField Object');
@@ -311,8 +317,14 @@ if (getStringFromRequest('add_extrafield')) {
 					$error_msg .= _('Update failed')._(': ').$ao->getErrorMessage();
 					$ao->clearError();
 				} else {
-				$feedback .= html_e('br')._('Parent Elements updated');
-				$next = 'add_extrafield';
+					$feedback .= html_e('br')._('Parent Elements updated');
+					if (!$ao->setFormula($formula)) {
+						$error_msg .= _('Update failed')._(': ').$ao->getErrorMessage();
+						$ao->clearError();
+					} else {
+						$feedback .= html_e('br')._('Formula updated');
+						$next = 'add_extrafield';
+					}
 				}
 			}
 		}
