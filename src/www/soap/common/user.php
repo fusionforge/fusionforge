@@ -168,18 +168,18 @@ $server->register(
 //get user objects for array of user_ids
 function &getUsers($session_ser,$user_ids) {
 	continue_session($session_ser);
-	$usrs =& user_get_objects($user_ids);
-	if (!$usrs) {
+	$users = filter_users_by_read_access(user_get_objects($user_ids));
+	if (!$users) {
 		return new soap_fault ('3001','user','Could Not Get Users By Id','Could Not Get Users By Id');
 	}
 
-	return users_to_soap($usrs);
+	return users_to_soap($users);
 }
 
 //get user objects for array of unix_names
 function getUsersByName($session_ser,$user_names) {
 	continue_session($session_ser);
-	$usrs =& user_get_objects_by_name($user_names);
+	$usrs = filter_users_by_read_access(user_get_objects_by_name($user_names));
 	if (!$usrs) {
 		return new soap_fault ('3002','user','Could Not Get Users By Name','Could Not Get Users By Name');
 	}
@@ -204,8 +204,8 @@ function addUser($unix_name,$firstname,$lastname,$password1,$password2,$email,
 //update user object
 function updateUser ($session_ser,$user_id,$firstname,$lastname,$language_id,$timezone,$mail_site,$mail_va,$use_ratings,$jabber_address,$jabber_only,$theme_id,$address,$address2,$phone,$fax,$title,$ccode){
 	continue_session($session_ser);
-	$user =& user_get_object($user_id);
-	if (!$user || !is_object($user)) {
+	$user = user_get_object($user_id);
+	if (!$user || !is_object($user) || !($u->getID() == user_getid() || forge_check_global_perm('forge_admin'))) {
 		return new soap_fault ('updateUser','Could Not Get User','Could Not Get User');
 	}
 
@@ -219,8 +219,8 @@ function updateUser ($session_ser,$user_id,$firstname,$lastname,$language_id,$ti
 //delete user object
 function deleteUser ($session_ser,$user_id){
 	continue_session($session_ser);
-	$user =& user_get_object($user_id);
-	if (!$user || !is_object($user)) {
+	$user = user_get_object($user_id);
+	if (!$user || !is_object($user) || !forge_check_global_perm('forge_admin')) {
 		return new soap_fault ('deleteUser','Could Not Get User','Could Not Get User');
 	}elseif ($user->isError()){
 		return new soap_fault ('deleteUser',$user->getErrorMessage(),$user->getErrorMessage());
@@ -236,8 +236,8 @@ function deleteUser ($session_ser,$user_id){
 //change status user object
 function changeStatus ($session_ser,$user_id,$status){
 	continue_session($session_ser);
-	$user =& user_get_object($user_id);
-	if (!$user || !is_object($user)) {
+	$user = user_get_object($user_id);
+	if (!$user || !is_object($user) || !forge_check_global_perm('forge_admin')) {
 		return new soap_fault ('changeStatus','Could Not Get User','Could Not Get User');
 	}elseif ($user->isError()){
 		return new soap_fault ('changeStatus',$user->getErrorMessage(),$user->getErrorMessage());
@@ -253,8 +253,8 @@ function changeStatus ($session_ser,$user_id,$status){
 //change password user object
 function changePassword ($session_ser,$user_id,$password){
 	continue_session($session_ser);
-	$user =& user_get_object($user_id);
-	if (!$user || !is_object($user)) {
+	$user = user_get_object($user_id);
+	if (!$user || !is_object($user) || !($u->getID() == user_getid() || forge_check_global_perm('forge_admin'))) {
 		return new soap_fault ('changePassword','Could Not Get User','Could Not Get User');
 	}elseif ($user->isError()){
 		return new soap_fault ('changePassword',$user->getErrorMessage(),$user->getErrorMessage());
@@ -270,8 +270,8 @@ function changePassword ($session_ser,$user_id,$password){
 //get groups for user_id
 function &userGetGroups($session_ser,$user_id) {
 	continue_session($session_ser);
-	$user =& user_get_object($user_id);
-	if (!$user) {
+	$user = user_get_object($user_id);
+	if (!$user || !is_object($user) || !($u->getID() == user_getid() || forge_check_global_perm('forge_admin'))) {
 		return new soap_fault ('3003','user','Could Not Get Users Projects','Could Not Get Users Projects');
 	}
 	return groups_to_soap($user->getGroups());

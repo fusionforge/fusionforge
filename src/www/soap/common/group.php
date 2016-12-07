@@ -89,7 +89,7 @@ function &getGroups($session_ser,$group_ids) {
 		$inputArgs = $inputArgs.':'.$group_ids[i];
 	}
 
-	$grps = group_get_objects($group_ids);
+	$grps = filter_groups_by_read_access(group_get_objects($group_ids));
 	if (!$grps) {
 		return new soap_fault ('2001','group','Could Not Get Projects by Id'.$inputArgs,$feedback);
 	}
@@ -99,7 +99,7 @@ function &getGroups($session_ser,$group_ids) {
 
 function &getGroupsByName($session_ser,$group_names) {
 	session_continue($session_ser);
-	$grps = group_get_objects_by_name($group_names);
+	$grps = filter_groups_by_read_access(group_get_objects_by_name($group_names));
 	if (!$grps) {
 		return new soap_fault ('2002','group','Could Not Get Projects by Name','Could Not Get Projects by Name');
 	}
