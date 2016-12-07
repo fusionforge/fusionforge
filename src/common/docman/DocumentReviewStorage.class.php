@@ -59,4 +59,3 @@ class DocumentReviewStorage extends Storage {
 		return forge_get_config('data_path').'/docmanreview';
 	}
 }
-
