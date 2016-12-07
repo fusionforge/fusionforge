@@ -56,7 +56,7 @@ echo html_ao('div', array('id' => 'docman_search', 'class' => 'docmanDivIncluded
 echo $HTML->openForm(array('method' => 'post', 'action' => util_make_uri('/docman/?group_id='.$group_id.'&view=search')));
 echo html_ao('div', array('id' => 'docman_search_query_words'));
 echo html_e('span', array('id' => 'docman_search_query_label'), _('Query').utils_requiredField()._(': '));
-echo html_e('input', array('type' => 'text', 'name' => 'textsearch', 'id' => 'textsearch', 'size' => 48, 'value' => $searchString, 'required' => 'required', 'placeholder' => _('Searched words')));
+echo html_e('input', array('type' => 'text', 'name' => 'textsearch', 'id' => 'textsearch', 'size' => 48, 'value' => stripslashes(htmlspecialchars($searchString)), 'required' => 'required', 'placeholder' => _('Searched words')));
 echo html_e('input', array('type' => 'submit', 'value' => _('Search')));
 echo html_ac(html_ap() - 1);
 echo html_ao('div', array('id' => 'docman_search_query_ckeckbox'));
