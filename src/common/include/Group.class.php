@@ -157,6 +157,16 @@ function group_get_object_by_publicname($groupname) {
 	return group_get_object(db_result($res, 0, 'group_id'), $res);
 }
 
+function filter_groups_by_read_access($grps) {
+	$filteredgrps = array();
+	foreach ($grps as $g) {
+		if (forge_check_perm ('project_read', $g->getID())) {
+			$filteredgrps[] = $g;
+		}
+	}
+	return $filteredgrps;
+}
+
 /**
  * get_public_active_projects_asc() - Get a list of rows for public active projects (initially in trove/full_list)
  *

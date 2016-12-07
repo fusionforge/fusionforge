@@ -336,7 +336,7 @@ function &getGroups($session_ser,$group_ids) {
 		$inputArgs = $inputArgs.':'.$group_ids[$i];
 	}
 
-	$grps = group_get_objects($group_ids);
+	$grps = filter_groups_by_read_access(group_get_objects($group_ids));
 	if (!$grps) {
 		return new soap_fault ('2001','group','Could Not Get Projects by Id'.$inputArgs,$feedback);
 	}
@@ -346,7 +346,7 @@ function &getGroups($session_ser,$group_ids) {
 
 function &getGroupsByName($session_ser,$group_names) {
 	session_continue($session_ser);
-	$grps = group_get_objects_by_name($group_names);
+	$grps = filter_groups_by_read_access(group_get_objects_by_name($group_names));
 	if (!$grps) {
 		return new soap_fault ('2002','group','Could Not Get Projects by Name','Could Not Get Projects by Name');
 	}
@@ -371,7 +371,7 @@ function getGroupByStatus($session_ser, $status) {
 	continue_session($session_ser);
 
 	$res = db_query_params('SELECT group_id FROM groups WHERE status=$1', array($status));
-	$grps = group_get_objects(util_result_column_to_array($res,0));
+	$grps = filter_groups_by_read_access(group_get_objects(util_result_column_to_array($res,0)));
 
 	if ($grps < 0) {
 		return new soap_fault ('2004','group','Could Not Get Projects by Status','Could Not Get Projects by Status');
@@ -412,6 +412,10 @@ function updateGroup($session_ser, $group_id, $is_public, $is_template, $status,
 	continue_session($session_ser);
 	$group = group_get_object($group_id);
 	$error_msg = '';
+
+	if (!forge_check_global_perm('forge_admin')) {
+		return new soap_fault ('2007','group','Permission denied', 'Permission denied');
+	}
 
 	if (!$group->setStatus(session_get_user(), $status)) {
 		$error_msg .= $group->getErrorMessage();
