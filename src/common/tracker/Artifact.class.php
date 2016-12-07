@@ -67,22 +67,21 @@ $ARTIFACT_OBJ = array();
  * @param	array|bool	$data		The result array, if it's passed in
  * @return	Artifact	Artifact object
  */
-function &artifact_get_object($artifact_id, $data=false) {
+function &artifact_get_object($artifact_id, $data = false) {
 	global $ARTIFACT_OBJ;
 	if (!isset($ARTIFACT_OBJ["_".$artifact_id."_"])) {
 		if ($data) {
 			//the db result handle was passed in
 		} else {
-			$res = db_query_params ('SELECT * FROM artifact_vw WHERE artifact_id=$1',
-						array ($artifact_id)) ;
-			if (db_numrows($res) <1) {
-				$ARTIFACT_OBJ["_".$artifact_id."_"]=false;
-				return false;
+			$res = db_query_params('SELECT * FROM artifact_vw WHERE artifact_id=$1', array($artifact_id));
+			if (db_numrows($res) < 1) {
+				$ARTIFACT_OBJ["_".$artifact_id."_"] = false;
+				return $ARTIFACT_OBJ["_".$artifact_id."_"];
 			}
 			$data = db_fetch_array($res);
 		}
 		$ArtifactType =& artifactType_get_object($data["group_artifact_id"]);
-		$ARTIFACT_OBJ["_".$artifact_id."_"]= new Artifact($ArtifactType, $data);
+		$ARTIFACT_OBJ["_".$artifact_id."_"] = new Artifact($ArtifactType, $data);
 	}
 	return $ARTIFACT_OBJ["_".$artifact_id."_"];
 }
