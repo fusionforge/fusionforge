@@ -837,7 +837,7 @@ class ArtifactTypeHtml extends ArtifactType {
 				}
 			}
 		}
-		$size = min( count($releasesArray)+1, 15);
+		$size = min( count($releasesArray) + count($optGroup) + 1, 15);
 		$keys = array_keys($releasesArray);
 		$vals = array_values($releasesArray);
 		return html_build_multiple_select_box_from_arrays ($keys,$vals,'extra_fields['.$extra_field_id.'][]',$checked,$size, $show_100,$text_100,$allowed, $attrs, $releasesAttrs, array(), $optGroup);
