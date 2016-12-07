@@ -530,6 +530,8 @@ DocManListFileController.prototype =
 		jQuery('#review-select-optional-users').val('');
 		jQuery('#review-select-mandatory-users').gentleSelect({columns: 3, itemWidth: 150});
 		jQuery('#review-select-optional-users').gentleSelect({columns: 3, itemWidth: 150});
+		jQuery('#editfile-userstatusreview').empty();
+		jQuery('#editfile-completedreview').empty();
 		if (jQuery('#editfile-createreview').is(':visible')) {
 			jQuery('#editfile-createreview').hide();
 			jQuery('#new_review').val(0);
@@ -545,6 +547,9 @@ DocManListFileController.prototype =
 			jQuery('#editfile-createreview').hide();
 			jQuery('#new_review').val(0);
 			jQuery('#review_id').val(0);
+			jQuery('#review_complete').val(0);
+			jQuery('#editfile-userstatusreview').empty();
+			jQuery('#editfile-completedreview').empty();
 		} else {
 			jQuery('#review_id').val(this.review.review);
 			jQuery('#review-title').val(this.review.title);
@@ -552,10 +557,24 @@ DocManListFileController.prototype =
 			jQuery('#datepicker_end_review_date').val(this.review.endreviewdate);
 			jQuery('#review-serialid').val(this.review.serialid);
 			jQuery('[class^=gentle]').remove();
-			jQuery('#review-select-mandatory-users').val(this.review.mandatoryusers);
-			jQuery('#review-select-optional-users').val(this.review.optionalusers);
-			jQuery('#review-select-mandatory-users').gentleSelect({columns: 3, itemWidth: 150});
-			jQuery('#review-select-optional-users').gentleSelect({columns: 3, itemWidth: 150});
+			if (this.review.complete) {
+				jQuery('#review_complete').val(1);
+				jQuery.getJSON(this.docparams.docManURL + '/?group_id=' + this.docparams.groupId + '&action=getdocreviewcompleteform&docid='+this.docparams.id+'&revid='+this.review.review , jQuery.proxy(function(data){
+					if (typeof data.html != 'undefined') {
+						jQuery('#editfile-completedreview').prepend(data.html);
+					}
+				}, this.review));
+			} else {
+				jQuery('#review-select-mandatory-users').val(this.review.mandatoryusers);
+				jQuery('#review-select-optional-users').val(this.review.optionalusers);
+				jQuery('#review-select-mandatory-users').gentleSelect({columns: 3, itemWidth: 150});
+				jQuery('#review-select-optional-users').gentleSelect({columns: 3, itemWidth: 150});
+			}
+			jQuery.getJSON(this.docparams.docManURL + '/?group_id=' + this.docparams.groupId + '&action=getdocreviewuserstatus&docid='+this.docparams.id+'&revid='+this.review.review , jQuery.proxy(function(data){
+				if (typeof data.html != 'undefined') {
+					jQuery('#editfile-userstatusreview').prepend(data.html);
+				}
+			}, this.review));
 			jQuery('#new_review').val(0);
 			jQuery('#editfile-createreview').show();
 		}

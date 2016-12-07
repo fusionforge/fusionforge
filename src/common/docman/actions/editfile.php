@@ -194,6 +194,7 @@ switch ($subaction) {
 		$reviewoptionalusers = getArrayFromRequest('review-select-optional-users', array());
 		$new_review = getIntFromRequest('new_review');
 		$reviewid = getIntFromRequest('review_id');
+		$reviewcompletedchecked = getIntFromRequest('review-completedchecked');
 		if ($reviewversionserialid) {
 			if ($new_review) {
 				$dr = new DocumentReview($d);
@@ -204,10 +205,18 @@ switch ($subaction) {
 				}
 			} else {
 				$dr = new DocumentReview($d, $reviewid);
-				if ($dr->update($reviewversionserialid, $reviewtitle, $reviewdescription, $reviewenddate, $reviewmandatoryusers, $reviewoptionalusers)) {
-					$feedback = _('Review updated');
+				if ($reviewcompletedchecked) {
+					if ($dr->close($reviewversionserialid, $reviewtitle, $reviewdescription)) {
+						$feedback = _('Review closed successfully');
+					} else {
+						$error_msg = $dr->getErrorMessage();
+					}
 				} else {
-					$error_msg = $dr->getErrorMessage();
+					if ($dr->update($reviewversionserialid, $reviewtitle, $reviewdescription, $reviewenddate, $reviewmandatoryusers, $reviewoptionalusers)) {
+						$feedback = _('Review updated');
+					} else {
+						$error_msg = $dr->getErrorMessage();
+					}
 				}
 			}
 		} else {

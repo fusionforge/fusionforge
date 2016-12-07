@@ -21,6 +21,9 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+require_once $gfcommon.'docman/DocumentReview.class.php';
+require_once $gfcommon.'docman/DocumentReviewCommentFactory.class.php';
+
 class DocumentReviewFactory extends FFError {
 	/**
 	 * The Document object.
@@ -71,7 +74,7 @@ class DocumentReviewFactory extends FFError {
 		$return = '';
 		$this->getReviews($serialids);
 		if ($this->getReviewsCounter() > 0) {
-			$titleArr = array('ID', _('Version'), _('Title'), _('Created By'), _('Status'), _('End date'), _('Progress'), _('Comments'), _('Actions'));
+			$titleArr = array('ID', _('Version'), _('Title'), _('Created By'), _('Status'), _('Start date'), _('End date'), _('Progress'), _('Comments'), _('Actions'));
 			$classth = array('', '', '', '', '', 'unsortable');
 			$return .= $HTML->listTableTop($titleArr, array(), 'full sortable', 'sortable_docman_listreview', $classth);
 			foreach ($this->reviews as $thereview) {
@@ -82,27 +85,30 @@ class DocumentReviewFactory extends FFError {
 				$cells[] = array($dr->getTitle(), 'title' => $dr->getDescription());
 				$cells[][] = $dr->getCreateByRealNameLink();
 				$cells[][] = $dr->getStatusIcon();
+				$cells[][] = strftime(_('%Y-%m-%d'), $dr->getStartdate());
 				$overdue = '';
-				if (time() > $dr->getEnddate()) {
+				if (($dr->getStatusID() != 2) && (time() > $dr->getEnddate())) {
 					$overdue = $HTML->getErrorPic(_('Review overdue'), 'overdue');
 				}
 				$cells[][] = strftime(_('%Y-%m-%d'), $dr->getEnddate()).$overdue;
 				$cells[][] = $dr->getProgressbar();
-				$cells[][] = $dr->getNbComments();
+				$drcf = new DocumentReviewCommentFactory($dr);
+				$cells[][] = $drcf->getNbComments();
 				$actions = '';
 				$user = session_get_user();
 				$users = $dr->getUsers(array(1, 2));
-				if ($user->getID() == $dr->getCreatedBy()) {
-					$actions .= $dr->getReminderAction().$dr->getEditAction();
-					if ($dr->isCompleted()) {
-						$actions .= $dr->getCompleteAction();
+				if ($dr->getStatusID() != 2) {
+					if ($user->getID() == $dr->getCreatedBy()) {
+						$actions .= $dr->getReminderAction().$dr->getEditAction().$dr->getCompleteAction();
 					}
-				}
-				if (($dr->getStatusID() == 1) && (($user->getID() == $dr->getCreatedBy()) || in_array($user->getID(), $users))) {
-					$actions .= $dr->getCommentAction();
-				}
-				if ($user->getID() == $dr->getCreatedBy()) {
-					$actions .= $dr->getDeleteAction();
+					if (($dr->getStatusID() == 1) && (($user->getID() == $dr->getCreatedBy()) || in_array($user->getID(), $users))) {
+						$actions .= $dr->getCommentAction();
+					}
+					if ($user->getID() == $dr->getCreatedBy()) {
+						$actions .= $dr->getDeleteAction();
+					}
+				} else {
+					$actionns .= $dr->getReadAction();
 				}
 
 				$cells[][] = $actions;

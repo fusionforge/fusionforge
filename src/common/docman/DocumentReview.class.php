@@ -95,13 +95,19 @@ class DocumentReview extends FFError {
 		return $this->data_array['enddate'];
 	}
 
+	function getStartdate() {
+		return $this->data_array['startdate'];
+	}
+
 	function getUsers($statusid = array(), $type = false) {
-		$qpa = db_construct_qpa(false, 'SELECT * FROM doc_review_users WHERE revid = $1', array($this->getID()));
+		$qpa = db_construct_qpa(false, 'SELECT revid, userid, typeid, doc_review_users.statusid, updatedate, doc_review_users_status.name as statusname
+						FROM doc_review_users, doc_review_users_status
+						WHERE doc_review_users.statusid = doc_review_users_status.statusid AND revid = $1', array($this->getID()));
 		if ($statusid && is_array($statusid)) {
-			$qpa = db_construct_qpa($qpa, ' AND statusid = ANY ($1)', array(db_int_array_to_any_clause($statusid)));
+			$qpa = db_construct_qpa($qpa, ' AND doc_review_users.statusid = ANY ($1)', array(db_int_array_to_any_clause($statusid)));
 		}
 		if ($type) {
-			$qpa = db_construct_qpa($qpa, ' AND typeid = $1', array($type));
+			$qpa = db_construct_qpa($qpa, ' AND doc_review_users.typeid = $1', array($type));
 		}
 		$res = db_query_qpa($qpa);
 		$users = array();
@@ -147,7 +153,7 @@ class DocumentReview extends FFError {
 
 	function getVersion() {
 		if (isset($this->version) && $this->version) {
-			return $this-version;
+			return $this->version;
 		}
 		$res = db_query_params('SELECT version FROM doc_data_version, doc_review_version WHERE doc_data_version.serial_id = doc_review_version.serialid AND doc_review_version.revid = $1',
 					array($this->getID()));
@@ -155,7 +161,7 @@ class DocumentReview extends FFError {
 			$this->version = db_result($res, 0, 0);
 			return $this->version;
 		} else {
-			return $this->setError(db_error());
+			return db_error();
 		}
 	}
 
@@ -168,17 +174,21 @@ class DocumentReview extends FFError {
 			$this->serialid = db_result($res, 0, 0);
 			return $this->serialid;
 		} else {
-			return $this->setError(db_error());
+			return db_error();
 		}
 	}
-
 
 	function getDeleteAction() {
 		global $HTML;
 		return util_make_link('#', $HTML->getRemovePic(_('Permanently delete this review'), 'delreview'), array('id' => 'review_action_delete', 'onclick' => 'javascript:controllerListFile.deleteReview({review: '.$this->getID().'})'), true);
 	}
 
-	function getEditAction() {
+	function getReadAction() {
+		global $HTML;
+		return util_make_link('#', $HTML->getEditFilePic(_('View this review'), 'viewreview'), array('id' => 'review_action_view', 'onclick' => 'javascript:controllerListFile.viewReview({review: '.$this->getID().'})'), true);
+	}
+
+	function getEditAction($edit = true) {
 		global $HTML;
 		$enddate = strftime(_('%Y-%m-%d'), $this->getEnddate());
 		$users = $this->getUsers(array(1, 2));
@@ -191,13 +201,25 @@ class DocumentReview extends FFError {
 				$optionalUsers[] = $user['userid'];
 			}
 		}
-		return util_make_link('#', $HTML->getConfigurePic(_('Edit this review'), 'editreview'),
+		if ($edit) {
+			return util_make_link('#', $HTML->getConfigurePic(_('Edit this review'), 'editreview'),
 					array('id' => 'review_action_edit', 'onclick' => 'javascript:controllerListFile.toggleEditReviewView({review: '.$this->getID().', title: \''.addslashes($this->getTitle()).'\',
 																		description: \''.addslashes($this->getDescription()).'\',
 																		endreviewdate: \''.util_html_encode($enddate).'\',
 																		serialid: '.$this->getSerialID().',
 																		mandatoryusers: '.json_encode($mandatoryUsers).',
 																		optionalusers: '.json_encode($optionalUsers).',})'), true);
+		} else {
+			return util_make_link('#', $HTML->getClosedTicketPic(_('Complete this review'), 'completereview'),
+					array('id' => 'review_action_complete', 'onclick' => 'javascript:controllerListFile.toggleEditReviewView({review: '.$this->getID().', title: \''.addslashes($this->getTitle()).'\',
+																		description: \''.addslashes($this->getDescription()).'\',
+																		endreviewdate: \''.util_html_encode($enddate).'\',
+																		serialid: '.$this->getSerialID().',
+																		mandatoryusers: '.json_encode($mandatoryUsers).',
+																		optionalusers: '.json_encode($optionalUsers).',
+																		complete: 1})'), true);
+
+		}
 	}
 
 	function getReminderAction() {
@@ -206,13 +228,24 @@ class DocumentReview extends FFError {
 	}
 
 	function getCompleteAction() {
-		global $HTML;
-		return util_make_link('#', $HTML->getClosedTicketPic(_('Complete this review'), 'completereview'), array('id' => 'review_action_complete', 'onclick' => 'javascript:controllerListFile.toggleCompleteReviewView({review: '.$this->getID().'})'), true);
+		return $this->getEditAction(false);
 	}
 
 	function getCommentAction() {
 		global $HTML;
 		return util_make_link('#', $HTML->getEditFilePic(_('Comment the review'), 'remindercomment'), array('id' => 'review_action_comment', 'onclick' => 'javascript:controllerListFile.toggleCommentReviewView({review: '.$this->getID().'})'), true);
+	}
+
+	function showCompleteFormHTML() {
+		global $HTML;
+		$return = $HTML->listTableTop();
+		$cells = array();
+		$cells[] = array(_('Close the review')._(':'), 'style' => 'width: 30%;');
+		$cells[][] = html_e('input', array('type' => 'checkbox', 'name' => 'review-completedchecked', 'value' => 1));
+		$return .= $HTML->multiTableRow(array(), $cells);
+		$return .= $HTML->listTableBottom();
+		$return .= html_ac(html_ap() -1);
+		return $return;
 	}
 
 	function showCreateFormHTML() {
@@ -256,16 +289,45 @@ class DocumentReview extends FFError {
 			$cells[][] = _('Add optional reviewers')._(':');
 			$cells[][] = html_e('p', array(), html_build_multiple_select_box_from_arrays($userIDArray, $userNameArray, 'review-select-optional-users[]', array(), 8, false, 'none', false, array('id' => 'review-select-optional-users')));
 			$return .= $HTML->multiTableRow(array(), $cells);
+			$cells = array();
 			$return .= $HTML->listTableBottom();
 			$return .= $HTML->addRequiredFieldsInfoBox();
 			$return .= html_e('input', array('type' => 'hidden', 'id' => 'new_review', 'name' => 'new_review', 'value' => 0));
 			$return .= html_e('input', array('type' => 'hidden', 'id' => 'review_id', 'name' => 'review_id', 'value' => 0));
+			$return .= html_e('input', array('type' => 'hidden', 'id' => 'review_complete', 'name' => 'review_complete', 'value' => 0));
 			$return .= html_ac(html_ap() -1);
+			$return .= html_e('div', array('id' => 'editfile-userstatusreview'), '', false);
+			$return .= html_e('div', array('id' => 'editfile-completedreview'), '', false);
 			$javascript = 'jQuery("#datepicker_end_review_date").datepicker({dateFormat: "'.$date_format_js.'"});';
 			$return .= html_e('script', array( 'type'=>'text/javascript'), '//<![CDATA['."\n".$javascript."\n".'//]]>');
 		} else {
 			$return = $HTML->error_msg(_('Cannot get Document Versions'));
 		}
+		return $return;
+	}
+
+	function showUsersStatusHTML() {
+		global $HTML;
+		$mandatoryUsers = $this->getMandatoryUsers();
+		$optionalUsers = $this->getOptionalUsers();
+		$return = $HTML->listTableTop(array(_('Reviewer Name'), _('M/O'), _('Status')));
+		foreach ($mandatoryUsers as $mandatoryUser) {
+			$cells = array();
+			$userObject = user_get_object($mandatoryUser['userid']);
+			$cells[][] = util_display_user($userObject->getUnixName(), $userObject->getID(), $userObject->getRealName());
+			$cells[][] = _('mandatory');
+			$cells[][] = $mandatoryUser['statusname'];
+			$return .= $HTML->multiTableRow(array(), $cells);
+		}
+		foreach ($optionalUsers as $optionalUser) {
+			$cells = array();
+			$userObject = user_get_object($optionalUser['userid']);
+			$cells[][] = util_display_user($userObject->getUnixName(), $userObject->getID(), $userObject->getRealName());
+			$cells[][] = _('mandatory');
+			$cells[][] = $optionalUser['statusname'];
+			$return .= $HTML->multiTableRow(array(), $cells);
+		}
+		$return .= $HTML->listTableBottom();
 		return $return;
 	}
 
@@ -391,9 +453,9 @@ class DocumentReview extends FFError {
 	function getProgressbar() {
 		$doneMandatoryUsers = array();
 		$mandatoryUsers = $this->getMandatoryUsers();
-		foreach ($mandatoryUsers as $mandarotyUser) {
-			if ($mandarotyUser['statusid'] == 2) {
-				$doneMandatoryUsers[] = $mandarotyUser;
+		foreach ($mandatoryUsers as $mandatoryUser) {
+			if ($mandatoryUser['statusid'] == 2) {
+				$doneMandatoryUsers[] = $mandatoryUser;
 			}
 		}
 		$percentDoneMandatoryUsers = ((count($doneMandatoryUsers) / count($mandatoryUsers)) * 100).'%';
@@ -409,7 +471,7 @@ class DocumentReview extends FFError {
 		} else {
 			$percentDoneOptionalUsers = _('n/a');
 		}
-		return html_e('span', array('title' => _('% of mandotary users with status done - % of optional users with status done')), $percentDoneMandatoryUsers.' - '.$percentDoneOptionalUsers);
+		return html_e('span', array('title' => _('% of mandatory users with status done - % of optional users with status done')), $percentDoneMandatoryUsers.' - '.$percentDoneOptionalUsers);
 	}
 
 	function delete() {
@@ -458,9 +520,9 @@ class DocumentReview extends FFError {
 				db_query_params('UPDATE doc_review_version SET serialid = $1 WHERE revid = $2', array($reviewversionserialid, $this->getID()));
 			}
 			$mandatoryUsers = $this->getMandatoryUsers();
-			$mandarotyUserIDs = array();
+			$mandatoryUserIDs = array();
 			foreach ($mandatoryUsers as $mandatoryUser) {
-				$mandarotyUserIDs[] = $mandatoryUser['userid'];
+				$mandatoryUserIDs[] = $mandatoryUser['userid'];
 			}
 			$optionalUsers = $this->getOptionalUsers();
 			$optionalUserIDs = array();
@@ -468,9 +530,8 @@ class DocumentReview extends FFError {
 				$optionalUserIDs[] = $optionalUser['userid'];
 			}
 			foreach ($reviewmandatoryusers as $reviewmandatoryuser) {
-				if (in_array($reviewmandatoryuser, $mandarotyUserIDs)) {
-					unset($mandarotyUserIDs[array_search($reviewmandatoryuser, $mandarotyUserIDs)]);
-					var_dump($mandarotyUserIDs);
+				if (in_array($reviewmandatoryuser, $mandatoryUserIDs)) {
+					unset($mandatoryUserIDs[array_search($reviewmandatoryuser, $mandatoryUserIDs)]);
 				} elseif (in_array($reviewmandatoryuser, $optionalUserIDs)) {
 					db_query_params('UPDATE doc_review_users SET typeid = $1 WHERE userid = $2 AND revid = $3', array(1, $reviewmandatoryuser, $this->getID()));
 					unset($optionalUserIDs[array_search($reviewmandatoryuser, $optionalUserIDs)]);
@@ -479,16 +540,16 @@ class DocumentReview extends FFError {
 				}
 			}
 			foreach ($reviewoptionalusers as $reviewoptionaluser) {
-				if (in_array($reviewoptionaluser, $mandarotyUserIDs)) {
+				if (in_array($reviewoptionaluser, $mandatoryUserIDs)) {
 					db_query_params('UPDATE doc_review_users SET typeid = $1 WHERE userid = $2 AND revid = $3', array(2, $reviewoptionaluser, $this->getID()));
-					unset($mandarotyUserIDs[array_search($reviewoptionaluser, $mandarotyUserIDs)]);
+					unset($mandatoryUserIDs[array_search($reviewoptionaluser, $mandatoryUserIDs)]);
 				} elseif (in_array($reviewoptionaluser, $optionalUserIDs)) {
 					unset($optionalUserIDs[array_search($reviewoptionaluser, $optionalUserIDs)]);
 				} else {
 					db_query_params('INSERT INTO doc_review_users (revid, userid, typeid, statusid) VALUES ($1, $2, $3, $4)', array($this->getID(), $reviewoptionaluser, 2, 1));
 				}
 			}
-			foreach ($mandarotyUserIDs as $mandarotyUserID) {
+			foreach ($mandatoryUserIDs as $mandarotyUserID) {
 				db_query_params('DELETE from doc_review_users WHERE userid = $1 AND revid = $2', array($mandarotyUserID, $this->getID()));
 			}
 			foreach ($optionalUserIDs as $optionalUserID) {
@@ -502,22 +563,16 @@ class DocumentReview extends FFError {
 		return false;
 	}
 
-	function getNbComments() {
-		$res = db_query_params('SELECT COUNT(commentid) FROM doc_review_comments WHERE revid = $1', array($this->getID()));
+	function close($reviewversionserialid, $reviewtitle, $reviewdescription) {
+		$res = db_query_params('UPDATE doc_review SET (enddate, title, description, statusid) = ($1, $2, $3, $4) WHERE revid = $5',
+					array(time(), $reviewtitle, $reviewdescription, 2, $this->getID()));
 		if ($res) {
-			return db_result($res, 0, 0);
-		}
-		return null;
-	}
-
-	function getComments() {
-		return array();
-	}
-
-	function isCompleted() {
-		if ($this->getStatusID() == 2) {
+			if ($reviewversionserialid != $this->getSerialID()) {
+				db_query_params('UPDATE doc_review_version SET serialid = $1 WHERE revid = $2', array($reviewversionserialid, $this->getID()));
+			}
 			return true;
 		} else {
+			$this->setError(db_error());
 			return false;
 		}
 	}
