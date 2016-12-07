@@ -90,18 +90,18 @@ $server->register(
 //get user objects for array of user_ids
 function &getUsers($session_ser,$user_ids) {
 	continue_session($session_ser);
-	$usrs =& user_get_objects($user_ids);
-	if (!$usrs) {
+	$users = filter_users_by_read_access(user_get_objects($user_ids));
+	if (!$users) {
 		return new soap_fault ('3001','user','Could Not Get Users By Id','Could Not Get Users By Id');
 	}
 
-	return users_to_soap($usrs);
+	return users_to_soap($users);
 }
 
 //get user objects for array of unix_names
 function getUsersByName($session_ser,$user_names) {
 	continue_session($session_ser);
-	$usrs =& user_get_objects_by_name($user_names);
+	$usrs = filter_users_by_read_access(user_get_objects_by_name($user_names));
 	if (!$usrs) {
 		return new soap_fault ('3002','user','Could Not Get Users By Name','Could Not Get Users By Name');
 	}
@@ -112,8 +112,8 @@ function getUsersByName($session_ser,$user_names) {
 //get groups for user_id
 function &userGetGroups($session_ser,$user_id) {
 	continue_session($session_ser);
-	$user =& user_get_object($user_id);
-	if (!$user) {
+	$user = user_get_object($user_id);
+	if (!$user || !is_object($user) || !($u->getID() == user_getid() || forge_check_global_perm('forge_admin'))) {
 		return new soap_fault ('3003','user','Could Not Get Users Projects','Could Not Get Users Projects');
 	}
 	return groups_to_soap($user->getGroups());
