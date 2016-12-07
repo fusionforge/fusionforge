@@ -1016,7 +1016,7 @@ class Document extends FFObject {
 			$body .= _('Submitter')._(': ').$this->getCreatorRealName()." (".$this->getCreatorUserName().") \n";
 			$body .= "\n\n-------------------------------------------------------\n".
 				_('For more info, visit:').
-				"\n\n" . util_make_url('/docman/?group_id='.$this->Group->getID().'&view=listfile&dirid='.$this->getDocGroupID().'&filedetailid='.$this->getID());
+				"\n\n" . util_make_url($this->getPermalink());
 
 			$BCCarray = explode(',',$BCC);
 			foreach ($BCCarray as $dest_email) {
@@ -1043,7 +1043,7 @@ class Document extends FFObject {
 
 		$subject="[" . forge_get_config('forge_name') ."] ".util_unconvert_htmlspecialchars($doc_name);
 		$body = "\n"._('A new document has been uploaded and waiting to be approved by you')._(': ').
-		"\n".util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$this->getDocGroupID().'&filedetailid='.$this->getID()).
+		"\n".util_make_url($this->getPermalink()).
 		"\n"._('by').(': ').$name."\n";
 
 		$sanitizer = new TextSanitizer();
