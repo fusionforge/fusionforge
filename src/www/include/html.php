@@ -932,6 +932,9 @@ function html_build_multiple_select_box_from_arrays(
 			$return .= html_e('option', $opt_attrs, $texts[$i], false);
 		}
 	}
+	if ($groupOpen) {
+		$return .= html_ac(html_ap() -1);
+	}
 	$return .= html_ac(html_ap() -1);
 	return $return;
 }
