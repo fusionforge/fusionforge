@@ -366,12 +366,7 @@ echo $HTML->closeForm();
 						break;
 					}
 					$icon = html_image($document->getFileTypeImage(), 22, 22, array('alt' => $document->getFileType()));
-					if ($document->getStateID() == 2) {
-						$view = 'listtrashfile';
-					} else {
-						$view = 'listfile';
-					}
-					$url = util_make_link('docman/?group_id='.$arr['group_id'].'&view='.$view.'&dirid='.$arr['ref_id'],_('Document').' '.$arr['description']);
+					$url = util_make_link($document->getPermalink(),_('Document').' '.$arr['description']);
 					break;
 				}
 				case 'docgroupnew': {
