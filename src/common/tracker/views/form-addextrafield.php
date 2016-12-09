@@ -51,11 +51,11 @@ if ($rows > 0) {
 	$title_arr[] = _('Type');
 	$classth[]   = '';
 	$title_arr[] = _('Enabled');
-	$classth[]   = 'unsortable';
+	$classth[]   = '';
 	$title_arr[] = _('Required');
-	$classth[]   = 'unsortable';
+	$classth[]   = '';
 	$title_arr[] = _('Shown on Submit');
-	$classth[]   = 'unsortable';
+	$classth[]   = '';
 	$title_arr[] = _('Auto Assign');
 	$classth[]   = 'unsortable';
 	$title_arr[] = _('Depend on');
@@ -79,19 +79,19 @@ if ($rows > 0) {
 				"</td>\n";
 		echo '<td>'.$eftypes[$efarr[$i]['field_type']]."</td>\n";
 		if ($efarr[$i]['is_disabled'] == 0) {
-			echo '<td class="align-center">'.html_image("ic/check.png",'15','13').'</td>'."\n";
+			echo '<td class="align-center" content="1" >'.html_image("ic/check.png",'15','13').'</td>'."\n";
 		} else {
-			echo '<td></td>'."\n";
+			echo '<td content="0" ></td>'."\n";
 		}
 		if ($efarr[$i]['is_required'] == 1) {
-			echo '<td class="align-center">'.html_image("ic/check.png",'15','13').'</td>'."\n";
+			echo '<td class="align-center" content="1" >'.html_image("ic/check.png",'15','13').'</td>'."\n";
 		} else {
-			echo '<td></td>'."\n";
+			echo '<td content="0" ></td>'."\n";
 		}
 		if ($efarr[$i]['is_hidden_on_submit'] == 0) {
-			echo '<td class="align-center">'.html_image("ic/check.png",'15','13').'</td>'."\n";
+			echo '<td class="align-center" content="1" >'.html_image("ic/check.png",'15','13').'</td>'."\n";
 		} else {
-			echo '<td></td>'."\n";
+			echo '<td content="0" ></td>'."\n";
 		}
 		if ($autoAssignFieldId==$i) {
 			echo '<td class="align-center">'.html_image("ic/check.png",'15','13').'</td>'."\n";
