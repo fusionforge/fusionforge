@@ -199,11 +199,11 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			$result .= $renderer->getRows();
 			$result .= $HTML->listTableBottom();
 		} elseif(method_exists($renderer, 'getSections') && (count($renderer->getSections($this->groupId)) == 0)) {
-			$result .= '<p>'.sprintf(_('No matches found for “%s”'), $this->words);
+                $result .= '<p>'.sprintf(_('No matches found for “%s”'), stripslashes(htmlspecialchars($this->words)));
 			$result .= _(' - ');
 			$result .= _('No sections available (check your permissions)').'</p>';
 		} else {
-			$result .= '<p>'.sprintf(_('No matches found for “%s”'), $this->words).'</p>';
+                $result .= '<p>'.sprintf(_('No matches found for “%s”'), stripslashes(htmlspecialchars($this->words))).'</p>';
 		}
 		return $result;
 	}

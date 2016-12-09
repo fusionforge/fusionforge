@@ -161,10 +161,11 @@ define('INSTALL_OS', getenv('INSTALL_OS'));
 // These are deduced from the previous definitions.
 
 // URL to access the application
-define ('URL', 'http://'.HOST.'/');
+define ('URL', 'https://'.HOST.'/');
 
 // WSDL of the forges SOAP API
-define ('WSDL_URL', URL.'soap/index.php?wsdl');
+// define ('WSDL_URL', URL.'soap/index.php?wsdl');
+define ('WSDL_URL', 'http://'.HOST.'/soap/index.php?wsdl');
 EOF
 
 echo "Starting Selenium"

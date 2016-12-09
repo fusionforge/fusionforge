@@ -90,7 +90,7 @@ echo html_ac(html_ap() - 1);
 echo $HTML->openForm(array('method' => 'post', 'action' => '/docman/?group_id='.$group_id.'&view=search'));
 echo html_e('div', array('id' => 'docman_search_query_words'),
 		html_e('span', array('id' => 'docman_search_query_label'), _('Query').utils_requiredField()._(': ')).
-		html_e('input', array('type' => 'text', 'name' => 'textsearch', 'id' => 'textsearch', 'size' => 48, 'value' => $searchString, 'required' => 'required', 'placeholder' => _('Searched words'))).
+html_e('input', array('type' => 'text', 'name' => 'textsearch', 'id' => 'textsearch', 'size' => 48, 'value' => stripslashes(htmlspecialchars($searchString)), 'required' => 'required', 'placeholder' => _('Searched words'))).
 		html_e('input', array('type' => 'submit', 'value' => _('Search'))));
 echo html_ao('div', array('id' => 'docman_search_query_ckeckbox'));
 echo html_e('input', $attrsInputSearchAll)._('With all the words');

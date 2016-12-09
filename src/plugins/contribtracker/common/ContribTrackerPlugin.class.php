@@ -348,7 +348,7 @@ class ContribTrackerLegalStructure extends FFError {
 	var $data_array ;
 
 	function ContribTrackerLegalStructure ($id=false) {
-		$this->Error () ;
+		$this->FFError () ;
 		if (!$id) {
 			return true ;
 		}
@@ -452,7 +452,7 @@ class ContribTrackerActor extends FFError {
 	var $data_array ;
 
 	function ContribTrackerActor ($id=false) {
-		$this->Error () ;
+		$this->FFError () ;
 		if (!$id) {
 			return true ;
 		}
@@ -589,7 +589,7 @@ class ContribTrackerContribution extends FFError {
 	var $data_array ;
 
 	function ContribTrackerContribution ($id=false) {
-		$this->Error () ;
+		$this->FFError () ;
 		if (!$id) {
 			return true ;
 		}
@@ -726,7 +726,7 @@ class ContribTrackerParticipation extends FFError {
 	var $data_array ;
 
 	function ContribTrackerParticipation ($id=false) {
-		$this->Error () ;
+		$this->FFError () ;
 		if (!$id) {
 			return true ;
 		}

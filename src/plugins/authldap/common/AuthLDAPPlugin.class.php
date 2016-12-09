@@ -48,6 +48,7 @@ into the FusionForge database.");
 		$this->_addHook("fetch_authenticated_user");
 		$this->_addHook("sync_account_info");
 		$this->_addHook("close_auth_session");
+		$this->_addHook("refresh_auth_session");
 
 		$this->ldap_conn = false;
 		$this->saved_login = '';

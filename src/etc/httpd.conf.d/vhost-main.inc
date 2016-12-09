@@ -19,6 +19,7 @@ SetEnv FF__core__config_path "${FF__core__config_path}"
 <Directory ${FF__core__source_path}/www>
   Options Indexes FollowSymlinks
   AllowOverride All
+  Options -Indexes
 
   # define access restrictions for the main site
   Include ${FF__core__config_path}/httpd.conf.d/auth-main.inc
@@ -66,6 +67,7 @@ SetEnv FF__core__config_path "${FF__core__config_path}"
   AllowOverride All
 
   Include ${FF__core__config_path}/httpd.conf.d/auth-main.inc
+  Options -Indexes
 
 </Directory>
 
