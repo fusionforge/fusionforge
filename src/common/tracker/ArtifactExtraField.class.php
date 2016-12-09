@@ -695,7 +695,7 @@ class ArtifactExtraField extends FFError {
 	 * @return	string|array
 	 */
 	function setFormula($formula) {
-		$formula = $trim($formula);
+		$formula = trim($formula);
 		$return = true;
 		if ($formula=='') {
 			$this->resetFormula();
