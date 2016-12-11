@@ -133,7 +133,7 @@ if (is_array($d_arr) && count($d_arr) > 0) {
 }
 
 $df->setStateID(array(3));
-$d_pending_arr = $df->getDocuments();
+$d_pending_arr = $df->getDocuments(1);
 
 if (is_array($d_pending_arr) && count($d_pending_arr) > 0) {
 	// Get the document groups info
