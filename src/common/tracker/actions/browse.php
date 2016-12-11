@@ -324,15 +324,11 @@ print '<span rel="http://www.w3.org/2002/07/owl#sameAs" resource="" ></span>'."\
 print '<span rev="doap:bug-database sioc:space_of" resource="'. $proj_url .'" ></span>'."\n";
 print "</div>\n"; // end of about
 
-echo '
-<script type="text/javascript">//<![CDATA[
-jQuery(document).ready(function() {';
 if ($af->query_type == 'custom') {
-	echo '	jQuery("#tabber").tabs({active: 1});';
+	$javascript = 'jQuery(document).ready(function() {jQuery("#tabber").tabs({active: 1});});';
+	echo html_e('script', array( 'type'=>'text/javascript'), '//<![CDATA['."\n".$javascript."\n".'//]]>');
 }
 echo '
-});
-//]]></script>
 <div id="tabber" class="tabber">
 	<ul>
 	<li><a href="#tabber-advancedquery" title="'._('Use project queries or build and use your own queries.').'">'._('Advanced queries').'</a></li>
