@@ -678,7 +678,7 @@ function html_build_select_box_from_arrays($vals, $texts, $select_name,
 	//we don't always want the default Any row shown
 	if ($show_any) {
 		$opt_attrs = array('value' => '');
-		if ($checked_val ='')
+		if ($checked_val == '')
 			$opt_attrs['selected'] = 'selected';
 		$return .= html_e('option', $opt_attrs, util_html_secure($text_any), false);
 		$have_a_subelement = true;
@@ -1087,9 +1087,10 @@ function build_priority_select_box($name = 'priority', $checked_val = '3', $noch
  * @param	string		$checked_val	The value to be checked
  * @param	bool		$nochange	Whether to make 'No Change' selected.
  * @param	bool|array	$attrs		Array of other attributes for this select element
+ * @param	bool		$show_any	Display the 'Any' value
  * @return string
  */
-function html_build_priority_select_box($name = 'priority', $checked_val = '3', $nochange = false, $attrs = array()) {
+function html_build_priority_select_box($name = 'priority', $checked_val = '3', $nochange = false, $attrs = array(), $show_any = false) {
 	if (empty($attrs['title'])) {
 		$attrs['title'] = util_html_secure(html_get_tooltip_description($name));
 	} else {
@@ -1105,7 +1106,12 @@ function html_build_priority_select_box($name = 'priority', $checked_val = '3', 
 		$show_100 = false;
 		$text_100 = '';
 	}
-	return html_build_select_box_from_arrays($vals, $texts, $name, $checked_val, $show_100, $text_100, false, '', false, $attrs);
+	if ($show_any) {
+		$any_text = _('Any');
+	} else {
+		$any_text = '';
+	}
+	return html_build_select_box_from_arrays($vals, $texts, $name, $checked_val, $show_100, $text_100, $show_any, $any_text, false, $attrs);
 }
 
 /**
