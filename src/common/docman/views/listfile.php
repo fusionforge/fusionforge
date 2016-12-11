@@ -238,6 +238,15 @@ if ($DocGroupName) {
 	}
 }
 
+// to be used by pendingfiles.php
+$edittitle = _('Edit this document, add version');
+if (forge_get_config('use_object_associations')) {
+	$edittitle .= ', '._('associate to other objects');
+}
+if (forge_get_config('use_docman_review')) {
+	$edittitle .= ', '._('create or comment a review');
+}
+
 if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 	$tabletop = array(html_e('input', array('id' => 'checkallactive', 'type' => 'checkbox', 'title' => _('Select / Deselect all documents for massaction'), 'onClick' => 'controllerListFile.checkAll("checkeddocidactive", "active")')), '', 'ID', _('File Name'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'), _('View'));
 	$classth = array('unsortable', 'unsortable', '', '', '', '', '', '', '', '', '');
@@ -322,13 +331,6 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 			}
 			$editfileaction .= '&group_id='.$group_id;
 			$notifyaction .= '&group_id='.$group_id;
-			$edittitle = _('Edit this document, add version');
-			if (forge_get_config('use_object_associations')) {
-				$edittitle .= ', '._('associate to other objects');
-			}
-			if (forge_get_config('use_docman_review')) {
-				$edittitle .= ', '._('create or comment a review');
-			}
 			if (!$d->getLocked() && !$d->getReserved()) {
 				$nextcell .= util_make_link($redirecturl.'&action=trashfile&fileid='.$d->getID(), $HTML->getDeletePic(_('Move this document to trash'), 'delfile'));
 
