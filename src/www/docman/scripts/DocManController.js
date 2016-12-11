@@ -556,8 +556,9 @@ DocManListFileController.prototype =
 			jQuery('#review-description').val(this.review.description);
 			jQuery('#datepicker_end_review_date').val(this.review.endreviewdate);
 			jQuery('#review-serialid').val(this.review.serialid);
-			jQuery('[class^=gentle]').remove();
 			if (this.review.complete) {
+				jQuery('#tr-mandatory-reviewers').hide();
+				jQuery('#tr-optional-reviewers').hide();
 				jQuery('#review_complete').val(1);
 				jQuery.getJSON(this.docparams.docManURL + '/?group_id=' + this.docparams.groupId + '&action=getdocreviewcompleteform&docid='+this.docparams.id+'&revid='+this.review.review , jQuery.proxy(function(data){
 					if (typeof data.html != 'undefined') {
@@ -565,6 +566,9 @@ DocManListFileController.prototype =
 					}
 				}, this.review));
 			} else {
+				jQuery('#tr-mandatory-reviewers').show();
+				jQuery('#tr-optional-reviewers').show();
+				jQuery('[class^=gentle]').remove();
 				jQuery('#review-select-mandatory-users').val(this.review.mandatoryusers);
 				jQuery('#review-select-optional-users').val(this.review.optionalusers);
 				jQuery('#review-select-mandatory-users').gentleSelect({columns: 3, itemWidth: 150});
