@@ -626,6 +626,7 @@ function html_use_jquerygentleselect() {
  * @param	array		$attrs		Array of other attributes for this select element
  * @param	array		$opts_attrs
  * @param	array		$attrs_100
+ * @param	array		$optgroup
  * @return	string
  * @throws Exception
  */
@@ -869,6 +870,7 @@ function html_build_multiple_select_box($result, $name, $checked_array, $size = 
  * @param	array	$attrs Array of other attributes for this select element
  * @param	array	$opts_attrs
  * @param	array	$attrs_100
+ * @param	array	$optgroup
  * @return	string
  * @throws	Exception
  */
