@@ -37,7 +37,7 @@ if (!forge_check_perm('docman', $group_id, 'approve')) {
 
 $docid = getIntFromRequest('docid');
 $revid = getIntFromRequest('revid');
-if ($docid & $revid) {
+if ($docid && $revid) {
 	$documentObject = document_get_object($docid, $group_id);
 	if ($documentObject && !$documentObject->isError()) {
 		$dr = new DocumentReview($documentObject, $revid);
@@ -50,7 +50,7 @@ if ($docid & $revid) {
 		$result['html'] = $HTML->warning_msg(_('Cannot retrieve document')._(': ').$docid);
 	}
 } else {
-	$result['html'] = $HTML->warning_msg(_('No document ID or no review id. Cannot retrieve inforamtion.'));
+	$result['html'] = $HTML->warning_msg(_('No document ID or no review id. Cannot retrieve information.'));
 }
 
 echo json_encode($result);
