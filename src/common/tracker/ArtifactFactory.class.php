@@ -86,17 +86,19 @@ class ArtifactFactory extends FFError {
 	/**
 	 * setup - sets up limits and sorts before you call getArtifacts().
 	 *
-	 * @param	int	$offset		The offset - number of rows to skip.
-	 * @param	string	$order_col	The column to sort on.
-	 * @param	string	$sort		The way to order - ASC or DESC.
-	 * @param	int	$max_rows	The max number of rows to return.
-	 * @param	string	$set		Whether to set these prefs into the user_prefs table - use "custom".
-	 * @param	int	$_assigned_to	Include this param if you want to limit to a certain assignee.
-	 * @param	int	$_status	Include this param if you want to limit to a particular status.
-	 * @param	array	$_extra_fields	Array of extra fields & elements to limit the query to.
-	 * @param	int	$_changed_from	Set this param if you want to limit from an UNIX epoch time. Default = 0, no limit in time.
+	 * @param	int	$offset			The offset - number of rows to skip.
+	 * @param	string	$order_col		The column to sort on.
+	 * @param	string	$sort			The way to order - ASC or DESC.
+	 * @param	int	$max_rows		The max number of rows to return.
+	 * @param	string	$set			Whether to set these prefs into the user_prefs table - use "custom".
+	 * @param	int	$_assigned_to		Include this param if you want to limit to a certain assignee.
+	 * @param	int	$_status		Include this param if you want to limit to a particular status.
+	 * @param	array	$_extra_fields		Array of extra fields & elements to limit the query to.
+	 * @param	int	$_changed_from		Set this param if you want to limit from an UNIX epoch time. Default = 0, no limit in time.
+	 * @param	int	$_last_modified_by	Include this param if you want to limit to a certain last modifier
+	 * @param	int	$_priority		Set this param if you want to limit to a certain priority
 	 */
-	function setup($offset, $order_col, $sort, $max_rows, $set, $_assigned_to, $_status, $_extra_fields = array(), $_changed_from = 0) {
+	function setup($offset, $order_col, $sort, $max_rows, $set, $_assigned_to, $_status, $_extra_fields = array(), $_changed_from = 0, $_last_modified_by = 0, $_priority = 0) {
 
 		if ((!$offset) || ($offset < 0)) {
 			$this->offset=0;
@@ -264,12 +266,14 @@ class ArtifactFactory extends FFError {
 			$_changed = $_changed_from;
 		}
 
-		$this->sort=$_sort_ord;
-		$this->order_col=$_order_col;
-		$this->status=$_status;
-		$this->assigned_to=$_assigned_to;
-		$this->extra_fields=$_extra_fields;
-		$this->last_changed=$_changed;
+		$this->sort             = $_sort_ord;
+		$this->order_col        = $_order_col;
+		$this->status           = $_status;
+		$this->assigned_to      = $_assigned_to;
+		$this->extra_fields     = $_extra_fields;
+		$this->last_changed     = $_changed;
+		$this->last_modified_by = $_last_modified_by;
+		$this->priority         = $_priority;
 	}
 
 	/**
@@ -387,6 +391,11 @@ class ArtifactFactory extends FFError {
 		if ($this->last_changed > 0) {
 			$wheresql .= ' AND last_modified_date > $'.$paramcount++ ;
 			$params[] = $this->last_changed ;
+		}
+
+		if ($this->priority > 0) {
+			$wheresql .= ' AND priority = $'.$paramcount++ ;
+			$params[] = $this->priority ;
 		}
 
 		//add constraint of range of modified dates

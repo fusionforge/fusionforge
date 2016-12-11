@@ -119,6 +119,8 @@ if (!isset($_changed)) {
 $_sort_col = getStringFromRequest('_sort_col',$_sort_col);
 $_sort_ord = getStringFromRequest('_sort_ord',$_sort_ord);
 $_changed = getStringFromRequest('_changed', $_changed);
+$_last_modified_by = getIntFromRequest('_last_modified_by');
+$_priority = getIntFromRequest('_priority');
 $set = getStringFromRequest('set');
 $_assigned_to = getIntFromRequest('_assigned_to');
 $_status = getIntFromRequest('_status');
@@ -149,7 +151,7 @@ if (is_array($_extra_fields)){
 	}
 }
 
-$af->setup($start, $_sort_col, $_sort_ord, $paging, $set, $_assigned_to, $_status, $aux_extra_fields, time() - $_changed);
+$af->setup($start, $_sort_col, $_sort_ord, $paging, $set, $_assigned_to, $_status, $aux_extra_fields, time() - $_changed, $_last_modified_by, $_priority);
 //
 //	These vals are sanitized and/or retrieved from ArtifactFactory stored settings
 //
@@ -174,31 +176,16 @@ html_use_coolfieldset();
 $ath->header(array('atid'=>$ath->getID(), 'title'=>$ath->getName()));
 
 /**
- *
  *	Build the powerful browsing options pop-up boxes
- *
  */
 
 //
 //	creating a custom technician box which includes "any" and "unassigned"
 //
-$engine = RBACEngine::getInstance () ;
-$techs = $engine->getUsersByAllowedAction ('tracker', $ath->getID(), 'tech') ;
-
-$tech_id_arr = array () ;
-$tech_name_arr = array () ;
-
-foreach ($techs as $tech) {
-	$tech_id_arr[] = $tech->getID() ;
-	$tech_name_arr[] = $tech->getRealName() ;
-}
-$tech_id_arr[]='0';  //this will be the 'any' row
-$tech_name_arr[]=_('Any');
-
 if (is_array($_assigned_to)) {
 	$_assigned_to='';
 }
-$tech_box=html_build_select_box_from_arrays ($tech_id_arr,$tech_name_arr,'_assigned_to',$_assigned_to,true,_('Unassigned'));
+$tech_box = $ath->technicianBox('_assigned_to', $_assigned_to, true, _('Unassigned'), '0', _('Any'));
 
 //
 //	custom order by arrays to build a pop-up box
@@ -246,7 +233,7 @@ $sort_arr[]='DESC';
 //	custom changed arrays to build pop-up box
 //
 $changed_name_arr=array();
-$changed_name_arr[]=_('Any changes');
+$changed_name_arr[]=_('Any');
 $changed_name_arr[]=_('Last 24 h');
 $changed_name_arr[]=_('Last 7 days');
 $changed_name_arr[]=_('Last 2 weeks');
@@ -288,9 +275,6 @@ echo $HTML->paging_top($start, $paging, $art_cnt, $max, '/tracker/?group_id='.$g
  */
 echo $ath->renderBrowseInstructions();
 
-//
-//	statuses can be custom in FusionForge 4.5+
-//
 if ($ath->usesCustomStatuses()) {
 	$aux_extra_fields = array();
 	if (is_array($_extra_fields)){
@@ -304,12 +288,12 @@ if ($ath->usesCustomStatuses()) {
 		$aux_extra_fields = $_extra_fields;
 	}
 	$checked_status = isset($aux_extra_fields[$ath->getCustomStatusField()]) ? $aux_extra_fields[$ath->getCustomStatusField()] : '';
-	$status_box=$ath->renderSelect ($ath->getCustomStatusField(), $checked_status, false, '', true, _('Any'));
+	$status_box = $ath->renderSelect ($ath->getCustomStatusField(), $checked_status, false, '', true, _('Any'));
 } else {
 	if (is_array($_status)) {
 		$_status='';
 	}
-	$status_box = $ath->statusBox('_status',$_status,true,_('Any'));
+	$status_box = $ath->statusBox('_status', $_status, true, _('Any'));
 }
 
 // start of RDFa
@@ -354,13 +338,8 @@ if (db_numrows($res)>0) {
 	echo '<input type="hidden" name="group_id" value="'.$group_id.'" />';
 	echo '<input type="hidden" name="atid" value="'.$ath->getID().'" />';
 	echo '<input type="hidden" name="power_query" value="1" />';
-	echo '	<table class="fullwidth">
-	<tr>
-	<td>
-	';
-	$optgroup['key'] = 'type';
-	$optgroup['values'][0] = 'Private queries';
-	$optgroup['values'][1] = 'Project queries';
+	echo $HTML->listTableTop().
+		'<tr><td>';
 	echo '<select name="query_id" id="query_id">';
 	echo '<option value="100">' . _('Select One') . '</option>';
 	$current = '';
@@ -383,36 +362,52 @@ if (db_numrows($res)>0) {
 	echo '</select>
 	<noscript><input type="submit" name="run" value="'._('Power Query').'" /></noscript>
 	&nbsp;&nbsp;'.util_make_link('/tracker/?atid='. $ath->getID().'&group_id='.$group_id.'&func=query', _('Build Query')).'
-	</td></tr></table>';
+	</td></tr>'.$HTML->listTableBottom();
 	echo $HTML->closeForm();
-	echo '
-		<script type="text/javascript">//<![CDATA[
-		jQuery("#query_id").change(function() {
-			location.href = "'.util_make_url('/tracker/?group_id='.$group_id.'&atid='.$ath->getID().'&power_query=1&query_id=').'"+jQuery("#query_id").val();
-		});
-		//]]></script>';
+	$javascript = 'jQuery("#query_id").change(function() {location.href = "'.util_make_url('/tracker/?group_id='.$group_id.'&atid='.$ath->getID().'&power_query=1&query_id=').'"+jQuery("#query_id").val();});';
+	echo html_e('script', array( 'type'=>'text/javascript'), '//<![CDATA['."\n".$javascript."\n".'//]]>');
 } else {
 
 	echo util_make_link('/tracker/?atid='.$ath->getID().'&group_id='.$group_id.'&func=query','<strong>'._('Build Query').'</strong>');
 }
-echo '
-	</div>
+echo ' </div>
 	<div id="tabber-simplefiltering">';
+$sort_fields = explode(',', $ath->getBrowseList());
 echo $HTML->openForm(array('action' => '/tracker/?group_id='.$group_id.'&atid='.$ath->getID(), 'method' => 'post'));
 echo '
 	<input type="hidden" name="query_id" value="-1" />
 	<input type="hidden" name="set" value="custom" />
 	<table>
-	<tr>
-	<td>
-	'._('Assignee')._(':').'<br>'. $tech_box .'
-	</td>
-	<td>
-	'._('State')._(':').'<br>'. $status_box .'
-	</td>
-	<td>
-	'._('Changed')._(':').'<br>'.html_build_select_box_from_arrays($changed_arr, $changed_name_arr, '_changed', $_changed, false).'
-	<td>';
+	<tr>';
+foreach ($sort_fields as $sort_field) {
+	switch ($sort_field) {
+		case 'assigned_to':
+			echo '<td>'._('Assignee')._(':').html_e('br').$tech_box.'</td>';
+			break;
+		case 'last_modified_by':
+			echo '<td>'._('Modified by')._(':').html_e('br').$ath->lastModifierBox('_last_modified_by', $_last_modified_by, false, false, '0', _('Any')).'</td>';
+			break;
+		case 'last_modified_date':
+			echo '<td>'._('Changed')._(':').html_e('br').html_build_select_box_from_arrays($changed_arr, $changed_name_arr, '_changed', $_changed, false).'<td>';
+			break;
+		case 'status_id':
+			echo '<td>'._('State')._(':').'<br>'. $status_box.'</td>';
+			break;
+		case 'submitted_by':
+		case 'close_date':
+		case 'open_date':
+		case '_votes':
+		case '_voters':
+		case '_votage':
+		case 'details':
+		case 'summary':
+			//no ordering on these columns yet.
+		default:
+			//build a box for extrafield ?
+			// no support yet.
+			break;
+	}
+}
 
 // Compute the list of fields which can be sorted.
 $efarr = $ath->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_TEXT,
@@ -427,8 +422,9 @@ for ($k=0; $k<count($keys); $k++) {
 	$order_name_arr[] = $efarr[$i]['field_name'];
 	$order_arr[] = $efarr[$i]['extra_field_id'];
 }
-
-echo _('Order by')._(': ').'<br>'.
+echo '<td>'._('Priority')._(':').html_e('br').
+	html_build_priority_select_box('_priority', $_priority, false, array(), true).'</td>';
+echo '<td>'._('Order by')._(':').'<br>'.
 	html_build_select_box_from_arrays($order_arr,$order_name_arr,'_sort_col',$_sort_col,false) .
 	html_build_select_box_from_arrays($sort_arr,$sort_name_arr,'_sort_ord',$_sort_ord,false) .
 	'</td>
@@ -611,7 +607,7 @@ if ($art_arr && $art_cnt > 0) {
 	}
 
 	if ($start < $max) {
-		echo $HTML->listTableTop ($title_arr);
+		echo $HTML->listTableTop($title_arr);
 	}
 
 	$then=(time()-$ath->getDuePeriod());
@@ -753,10 +749,10 @@ if ($art_arr && $art_cnt > 0) {
 	*/
 	if ($IS_ADMIN) {
 		echo '<fieldset id="fieldset1_closed" class="coolfieldset">
-	<legend>'._('Mass Update').'</legend>
-	<div>
-		<table class="fullwidth" id="admin_mass_update">
-			<tr><td colspan="2">';
+			<legend>'._('Mass Update').'</legend>
+			<div>';
+		echo $HTML->listTableTop(array(), array(), 'fullwidth', 'admin_mass_update');
+		echo '	<tr><td colspan="2">';
 		echo $HTML->information(_('If you wish to apply changes to all items selected above, use these controls to change their properties and click once on “Mass Update”.')).'
 			</td></tr>';
 
@@ -799,10 +795,9 @@ if ($art_arr && $art_cnt > 0) {
 		echo '<td colspan="2"><strong>'._('Canned Response')._(':').'</strong><br />';
 		echo $ath->cannedResponseBox ('canned_response') .'</td></tr>
 
-			<tr><td colspan="3" class="align-center"><input type="submit" name="submit" value="'._('Mass Update').'" /></td></tr>
-			</table>';
-		echo '</div>
-		</fieldset>';
+			<tr><td colspan="3" class="align-center"><input type="submit" name="submit" value="'._('Mass Update').'" /></td></tr>';
+		echo $HTML->listTableBottom();
+		echo '</div></fieldset>';
 		echo $HTML->closeForm();
 	}
 
