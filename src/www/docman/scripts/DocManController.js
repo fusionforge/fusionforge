@@ -648,6 +648,12 @@ DocManListFileController.prototype =
 
 	deleteVersion: function(params) {
 		this.delversion = params;
+		jQuery('#editfile-createreview').hide();
+		jQuery('#new_review').val(0);
+		jQuery('#review_id').val(0);
+		jQuery('#review_complete').val(0);
+		jQuery('#editfile-userstatusreview').empty();
+		jQuery('#editfile-completedreview').empty();
 		jQuery.getJSON(this.docparams.docManURL + '/?group_id=' + this.docparams.groupId + '&action=deleteversion&docid='+this.docparams.id+'&version='+this.delversion.version , jQuery.proxy(function(data){
 				if (typeof data.html != 'undefined') {
 					jQuery('#editFile > .feedback').remove();
@@ -672,6 +678,7 @@ DocManListFileController.prototype =
 
 	deleteReview: function(params) {
 		this.delreview = params;
+
 		jQuery.getJSON(this.docparams.docManURL + '/?group_id=' + this.docparams.groupId + '&action=deletereview&docid='+this.docparams.id+'&review='+this.delreview.review , jQuery.proxy(function(data){
 				if (typeof data.html != 'undefined') {
 					jQuery('#editFile > .feedback').remove();
