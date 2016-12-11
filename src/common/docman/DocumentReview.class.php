@@ -243,6 +243,16 @@ class DocumentReview extends FFError {
 		$cells[] = array(_('Close the review')._(':'), 'style' => 'width: 30%;');
 		$cells[][] = html_e('input', array('type' => 'checkbox', 'name' => 'review-completedchecked', 'value' => 1));
 		$return .= $HTML->multiTableRow(array(), $cells);
+		if ($this->Document->getStateID() == 3) {
+			$cells = array();
+			$cells[][] = _('Validate the document?')._(':');
+			$cells[][] = html_e('input', array('type' => 'checkbox', 'name' => 'review-validatedocument', 'value' => 1));
+			$return .= $HTML->multiTableRow(array(), $cells);
+		}
+		$cells = array();
+		$cells[][] = _('Conclusion Comment')._(':');
+		$cells[][] = html_e('textarea', array('id' => 'review-completedcomment', 'name' => 'review-completedcomment', 'style' => 'width: 100%; box-sizing: border-box;', 'rows' => 3, 'required' => 'required', 'pattern' => '.{10,}', 'placeholder' => _('Description').' '.sprintf(_('(at least %s characters)'), DOCMAN__REVIEW_DESCRIPTION_MIN_SIZE), 'maxlength' => DOCMAN__REVIEW_DESCRIPTION_MAX_SIZE), '', false);
+		$return .= $HTML->multiTableRow(array(), $cells);
 		$return .= $HTML->listTableBottom();
 		$return .= html_ac(html_ap() -1);
 		return $return;
@@ -284,11 +294,11 @@ class DocumentReview extends FFError {
 			$cells = array();
 			$cells[][] =_('Add mandatory reviewers').utils_requiredField()._(':');
 			$cells[][] = html_e('p', array(), html_build_multiple_select_box_from_arrays($userIDArray, $userNameArray, 'review-select-mandatory-users[]', array(), 8, false, 'none', false, array('id' => 'review-select-mandatory-users')));
-			$return .= $HTML->multiTableRow(array(), $cells);
+			$return .= $HTML->multiTableRow(array('id' => 'tr-mandatory-reviewers'), $cells);
 			$cells = array();
 			$cells[][] = _('Add optional reviewers')._(':');
 			$cells[][] = html_e('p', array(), html_build_multiple_select_box_from_arrays($userIDArray, $userNameArray, 'review-select-optional-users[]', array(), 8, false, 'none', false, array('id' => 'review-select-optional-users')));
-			$return .= $HTML->multiTableRow(array(), $cells);
+			$return .= $HTML->multiTableRow(array('id' => 'tr-optional-reviewers'), $cells);
 			$cells = array();
 			$return .= $HTML->listTableBottom();
 			$return .= $HTML->addRequiredFieldsInfoBox();
