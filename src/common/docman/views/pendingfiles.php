@@ -87,9 +87,9 @@ jQuery(document).ready(function() {
 			$cells[] = array($d->getDescription(), 'style' => 'word-wrap: break-word; max-width: 250px;');
 			$cells[][] = make_user_link($d->getCreatorUserName(), $d->getCreatorRealName());
 			if ( $d->getUpdated() ) {
-				$cells[] = array(date(_('Y-m-d H:i'), $d->getUpdated()), 'sorttable_customkey' => $d->getUpdated());
+				$cells[] = array(date(_('Y-m-d H:i'), $d->getUpdated()), 'content' => $d->getUpdated());
 			} else {
-				$cells[] = array(date(_('Y-m-d H:i'), $d->getCreated()), 'sorttable_customkey' => $d->getCreated());
+				$cells[] = array(date(_('Y-m-d H:i'), $d->getCreated()), 'content' => $d->getCreated());
 			}
 			$cells[][] =$d->getStateName();
 			switch ($d->getFileType()) {
@@ -107,7 +107,7 @@ jQuery(document).ready(function() {
 				$editfileaction .= '&childgroup_id='.$childgroup_id;
 			}
 			$editfileaction .= '&group_id='.$group_id;
-			$cells[][] = util_make_link('#', html_image('docman/edit-file.png', 22, 22, array('alt' => _('Edit this document'))), array('onclick' => 'javascript:controllerListPending.toggleEditFileView({action:\''.util_make_uri($editfileaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json').', docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').', title:\''.addslashes($d->getName()).'\', filename:\''.addslashes($d->getFileName()).'\', description:\''.addslashes($d->getDescription()).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri("docman").'\'})', 'title' => _('Edit this document')), true).
+			$cells[][] = util_make_link('#', $HTML->getEditFilePic($edittitle, 'editdocument'), array('onclick' => 'javascript:controllerListPending.toggleEditFileView({action:\''.util_make_uri($editfileaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json').', docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').', title:\''.addslashes($d->getName()).'\', filename:\''.addslashes($d->getFileName()).'\', description:\''.addslashes($d->getDescription()).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri("docman").'\'})', 'title' => _('Edit this document')), true).
 					util_make_link('#', html_image('docman/validate.png', 22, 22, array('alt' => _('Activate in this folder'))), array('onclick' => 'window.location.href=\''.util_make_uri($redirecturl.'&action=validatefile&fileid='.$d->getID()).'\'', 'title' => _('Activate in this folder')), true);
 			echo $HTML->multiTableRow(array(), $cells);
 		}
