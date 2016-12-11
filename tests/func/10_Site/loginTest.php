@@ -162,7 +162,7 @@ class LoginProcess extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("Forge Admin"));
 		$this->assertTrue($this->isTextPresent("Log Out"));
 		// Shorten session validity delay
-		$this->changeConfig("[core]\nsession_expire = 10\n");
+		$this->changeConfig(array("core" => array("session_expire" => "10")));
 		// Ensure session cookie is refreshed
 		sleep(5);
 		$this->open( ROOT );
