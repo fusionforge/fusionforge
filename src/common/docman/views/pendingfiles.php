@@ -53,7 +53,9 @@ jQuery(document).ready(function() {
 		docManURL:		'<?php echo util_make_uri('/docman') ?>',
 		lockIntervalDelay:	60000, //in microsecond and if you change this value, please update the check value 600
 		divEditFile:		jQuery('#editFile'),
-		divEditTitle:		'<?php echo _("Edit document dialog box") ?>'
+		divEditTitle:		'<?php echo _("Edit document dialog box") ?>',
+		childGroupId:		<?php echo util_ifsetor($childgroup_id, 0) ?>,
+		tableAddVersion:	jQuery('#doc_version_edit')
 	});
 });
 //]]>
