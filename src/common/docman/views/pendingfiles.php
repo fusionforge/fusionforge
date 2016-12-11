@@ -62,8 +62,8 @@ jQuery(document).ready(function() {
 	if (isset($nested_pending_docs[$dirid]) && is_array($nested_pending_docs[$dirid])) {
 		echo html_ao('div', array('class' => 'docmanDiv'));
 		echo html_e('h4', array('class' => 'docman_h4'), _('Pending files'), false);
-		$tabletop = array(html_e('input', array('id' => 'checkallpending', 'type' => 'checkbox', 'onClick' => 'controllerListPending.checkAll("checkeddocidpending", "pending")')), '', _('File Name'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'), _('Actions'));
-		$classth = array('unsortable', 'unsortable', '', '', '', '', '', '', '', 'unsortable');
+		$tabletop = array(html_e('input', array('id' => 'checkallpending', 'type' => 'checkbox', 'onClick' => 'controllerListPending.checkAll("checkeddocidpending", "pending")')), '', 'ID', _('File Name'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'), _('View'), _('Actions'));
+		$classth = array('unsortable', 'unsortable', '', '', '', '', '', '', '', '', '', 'unsortable');
 		echo $HTML->listTableTop($tabletop, array(), 'sortable_docman_listfile', 'sortable', $classth);
 		$time_new = 604800;
 		foreach ($nested_pending_docs[$dirid] as $d) {
@@ -78,6 +78,7 @@ jQuery(document).ready(function() {
 					$cells[][] = util_make_link('/docman/view.php/'.$g->getID().'/'.$d->getID().'/'.urlencode($d->getFileName()), html_image($d->getFileTypeImage(), 20, 20, array('alt'=>$d->getFileType())), array('title' => _('View this document')));
 				}
 			}
+			$cells[][] = 'D'.$d->getID();
 			$nextcell = '';
 			if (($d->getUpdated() && $time_new > (time() - $d->getUpdated())) || $time_new > (time() - $d->getCreated())) {
 				$nextcell.= $HTML->getNewPic(_('Created or updated since less than 7 days'), 'new', array('class' => 'docman-newdocument')).'&nbsp;';
@@ -85,7 +86,7 @@ jQuery(document).ready(function() {
 			$cells[] = array($nextcell.$d->getFileName(), 'style' => 'word-wrap: break-word; max-width: 250px;');
 			$cells[] = array($d->getName(), 'style' => 'word-wrap: break-word; max-width: 250px;');
 			$cells[] = array($d->getDescription(), 'style' => 'word-wrap: break-word; max-width: 250px;');
-			$cells[][] = make_user_link($d->getCreatorUserName(), $d->getCreatorRealName());
+			$cells[][] = util_display_user($d->getCreatorUserName(), $d->getCreatorID(), $d->getCreatorRealName());
 			if ( $d->getUpdated() ) {
 				$cells[] = array(date(_('Y-m-d H:i'), $d->getUpdated()), 'content' => $d->getUpdated());
 			} else {
@@ -102,6 +103,7 @@ jQuery(document).ready(function() {
 					break;
 				}
 			}
+			$cells[][] = $d->getDownload();
 			$editfileaction = '/docman/?action=editfile&fromview=listfile&dirid='.$d->getDocGroupID();
 			if ($childgroup_id) {
 				$editfileaction .= '&childgroup_id='.$childgroup_id;
