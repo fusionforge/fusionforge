@@ -90,17 +90,17 @@ echo $HTML->listTableBottom();
 echo html_e('button', array('id' => 'doc_version_addbutton', 'type' => 'button', 'onclick' => 'javascript:controllerListFile.toggleAddVersionView()'), _('Add new version'));
 echo $HTML->listTableTop(array(), array(), 'listing full hide', 'doc_version_edit');
 $cells = array();
-$cells[] = array(_('Document Title').utils_requiredField()._(':'), 'class' => 'docman_editfile_title');
-$cells[][] = html_e('input', array('pattern' => '.{5,}', 'required' => 'required', 'title' => sprintf(_('(at least %s characters)'), 5), 'id' => 'title', 'type' => 'text', 'name' => 'title', 'size' => '40', 'maxlength' => '255'));
+$cells[] = array(_('Document Title').utils_requiredField()._(':'), 'class' => 'docman_editfile_title', 'style' => 'width: 40%');
+$cells[][] = html_e('input', array('pattern' => '.{5,}', 'required' => 'required', 'title' => sprintf(_('(at least %s characters)'), 5), 'id' => 'title', 'type' => 'text', 'name' => 'title', 'maxlength' => '255', 'style' => 'box-sizing: border-box; width: 100%'));
 echo $HTML->multiTableRow(array(), $cells);
 $cells = array();
 $cells[] = array(_('Description').utils_requiredField()._(':'), 'class' => 'docman_editfile_description');
 $cells[][] = html_e('textarea', array('pattern' => '.{10,}', 'required' => 'required', 'title' => _('Editing tips:http,https or ftp: Hyperlinks. [#NNN]: Tracker id NNN. [TNNN]: Task id NNN. [wiki:&lt;pagename&gt;]: Wiki page. [forum:&lt;msg_id&gt;]: Forum post. [DNNN]: Document id NNN.').
-										sprintf(_('at least %s characters)'), 10), 'id' => 'description', 'name' => 'description', 'maxlength' => '255', 'rows' => '5', 'cols' => '50'), '', false);
+										sprintf(_('at least %s characters)'), 10), 'id' => 'description', 'name' => 'description', 'maxlength' => '255', 'rows' => '5', 'style' => 'box-sizing: border-box; width: 100%'), '', false);
 echo $HTML->multiTableRow(array(), $cells);
 $cells = array();
 $cells[] = array(_('Comment')._(':'), 'class' => 'docman_editfile_comment');
-$cells[][] = html_e('textarea', array('id' => 'vcomment', 'name' => 'vcomment', 'maxlength' => '255', 'rows' => '5', 'cols' => '50'), '', false);
+$cells[][] = html_e('textarea', array('id' => 'vcomment', 'name' => 'vcomment', 'maxlength' => '255', 'rows' => '5', 'style' => 'box-sizing: border-box; width: 100%'), '', false);
 echo $HTML->multiTableRow(array(), $cells);
 if ($g->useDocmanSearch()) {
 	$cells = array();
@@ -150,7 +150,7 @@ if ($g->useCreateOnline()) {
 
 $cells = array();
 $cells[] = array(_('Specify an new outside URL where the file will be referenced').utils_requiredField()._(':'), 'class' => 'docman_editfile_title');
-$cells[][] = html_e('input', array('id' => 'editFileurl', 'type' => 'url', 'name' => 'file_url', 'size' => '50', 'pattern' => 'ftp://.+|https?://.+'));
+$cells[][] = html_e('input', array('id' => 'editFileurl', 'type' => 'url', 'name' => 'file_url', 'style' => 'box-sizing: border-box; width: 100%', 'pattern' => 'ftp://.+|https?://.+'));
 echo $HTML->multiTableRow(array('id' => 'fileurlroweditfile', 'class' => 'hide'), $cells);
 $cells = array();
 $cells[] = array(_('File')._(':'), 'class' => 'docman_editfile_file');
