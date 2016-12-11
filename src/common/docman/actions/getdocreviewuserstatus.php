@@ -50,7 +50,7 @@ if ($docid && $revid) {
 		$result['html'] = $HTML->warning_msg(_('Cannot retrieve document')._(': ').$docid);
 	}
 } else {
-	$result['html'] = $HTML->warning_msg(_('No document ID or no review id. Cannot retrieve information.').$docid.$revid);
+	$result['html'] = $HTML->warning_msg(_('No document ID or no review id. Cannot retrieve information.'));
 }
 
 echo json_encode($result);
