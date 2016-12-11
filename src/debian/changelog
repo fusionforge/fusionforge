@@ -4,8 +4,9 @@ fusionforge (6.0.50-0) UNRELEASED; urgency=medium
 
  -- Roland Mas <lolando@debian.org>  Wed, 24 Jun 2015 11:32:26 +0200
 
-fusionforge (6.0.4-1+) UNRELEASED; urgency=medium
+fusionforge (6.0.5-0) UNRELEASED; urgency=medium
 
+  * New upstream release.
   * More packaging fixes for php7.0:
   * Bug fix: "PHP 7.0 Transition", thanks to Ondřej Surý (Closes:
     #821486).
