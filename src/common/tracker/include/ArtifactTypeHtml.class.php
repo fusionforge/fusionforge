@@ -1117,16 +1117,17 @@ class ArtifactTypeHtml extends ArtifactType {
 		$datepattern = '(?:19|20)(?:(?:[13579][26]|[02468][048])-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))|(?:[0-9]{2}-(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:29|30))|(?:(?:0[13578]|1[02])-31)))';
 		return html_e('input', array_merge(array('type'=>'text', 'name'=>'extra_fields['.$extra_field_id.']', 'pattern'=>$datepattern.' '.$datepattern, 'maxlength'=>21, 'size'=>21, 'value'=>$dateRange),$attrs));
 	}
-	function technicianBox ($name='assigned_to[]',$checked='xzxz',$show_100=true,$text_100='none',$extra_id='-1',$extra_name='',$multiple=false) {
+
+	function technicianBox($name = 'assigned_to[]', $checked = 'xzxz', $show_100 = true, $text_100 = 'none', $extra_id = '-1', $extra_name = '', $multiple = false) {
 		if ($text_100=='none'){
 			$text_100=_('Nobody');
 		}
 
-		$engine = RBACEngine::getInstance () ;
-		$techs = $engine->getUsersByAllowedAction ('tracker', $this->getID(), 'tech') ;
+		$engine = RBACEngine::getInstance();
+		$techs = $engine->getUsersByAllowedAction('tracker', $this->getID(), 'tech') ;
 
-		$ids = array () ;
-		$names = array () ;
+		$ids = array();
+		$names = array();
 
 		sortUserList($techs);
 
@@ -1144,10 +1145,10 @@ class ArtifactTypeHtml extends ArtifactType {
 			if (!is_array($checked)) {
 				$checked = explode(',',$checked);
 			}
-			$size = min( count($ids)+1, 15);
-			return html_build_multiple_select_box_from_arrays ($ids,$names,$name,$checked,$size,$show_100,$text_100);
+			$size = min(count($ids)+1, 15);
+			return html_build_multiple_select_box_from_arrays($ids, $names, $name, $checked, $size, $show_100, $text_100);
 		} else {
-			return html_build_select_box_from_arrays ($ids,$names,$name,$checked,$show_100,$text_100);
+			return html_build_select_box_from_arrays($ids, $names, $name, $checked, $show_100, $text_100);
 		}
 	}
 
