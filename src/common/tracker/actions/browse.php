@@ -328,13 +328,11 @@ if ($af->query_type == 'custom') {
 	$javascript = 'jQuery(document).ready(function() {jQuery("#tabber").tabs({active: 1});});';
 	echo html_e('script', array( 'type'=>'text/javascript'), '//<![CDATA['."\n".$javascript."\n".'//]]>');
 }
-echo '
-<div id="tabber" class="tabber">
-	<ul>
-	<li><a href="#tabber-advancedquery" title="'._('Use project queries or build and use your own queries.').'">'._('Advanced queries').'</a></li>
-	<li><a href="#tabber-simplefiltering" title="'._('Filtering by assignee, state, priority.').'">'._('Simple Filtering and Sorting').'</a></li>
-	</ul>
-	<div id="tabber-advancedquery">';
+echo '<div id="tabber" class="tabber">';
+$elementLi[] = array('content' => util_make_link('#tabber-advancedquery', _('Advanced queries'), array('title' => _('Use project queries or build and use your own queries.')), true));
+$elementLi[] = array('content' => util_make_link('#tabber-simplefiltering', _('Simple Filtering and Sorting'), array('title' => _('Filtering by assignee, state, priority.')), true));
+echo $HTML->html_list($elementLi);
+echo '<div id="tabber-advancedquery">';
 
 if (session_loggedin()) {
 	$res = db_query_params ('SELECT artifact_query_id,query_name, CASE WHEN query_type>0 THEN 1 ELSE 0 END as type
