@@ -1,0 +1,13 @@
+0. INSTALLATION of Softwareheritage Plugin
+
+i.e. : if the directory where the plugins are is  /srv/www/gforge/plugins you should end up 
+	with /srv/www/gforge/plugins/softwareheritage and all the files in it
+
+1. CONFIGURATION
+
+A) Make the symbolic links for each section
+
+(this is just an example, you should change the variables for what you have on your installation)
+
+/$GFORGEDIR/www/plugins/softwareheritage -> /$GFORGEPLUGINSDIR/softwareheritage/www
+/$ETC/gforge ->  /$GFORGEPLUGINSDIR/softwareheritage/etc/plugins/softwareheritage
