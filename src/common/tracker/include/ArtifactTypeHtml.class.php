@@ -1106,7 +1106,8 @@ class ArtifactTypeHtml extends ArtifactType {
 	 */
 	function renderDatetime($extra_field_id, $datetime, $attrs = array()) {
 		if (!$datetime=='') {
-			$datetime = date('Y-m-d H:i',$datetime);
+			$datetime_format = _('Y-m-d H:i');
+			$datetime = date($datetime_format,$datetime);
 		}
 		return html_e('input', array_merge(array('type'=>'text', 'name'=>'extra_fields['.$extra_field_id.']', 'class'=>'datetimepicker', 'value'=>$datetime),$attrs));
 	}
