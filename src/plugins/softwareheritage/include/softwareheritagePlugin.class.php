@@ -75,8 +75,6 @@ function &softwareheritage_repositoryList($session_ser) {
 	$params['results'] = &$results;
 	plugin_hook('get_scm_repo_list',$params);
 
-	error_log(print_r($params,true));
-
 	$res2 = array();
 	foreach ($results as $res) {
 		if (forge_check_perm('scm',$res['group_id'],'read')) {
