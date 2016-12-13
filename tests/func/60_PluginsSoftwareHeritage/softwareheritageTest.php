@@ -108,5 +108,10 @@ class SoftwareHeritage extends FForge_SeleniumTestCase
 		$response = $soapclient->softwareheritage_repositoryInfo($session,'projecta/git/projecta');
 		$this->assertNotEquals(NULL,$response);
 		$this->assertEquals(3,count($response->repository_urls));
+		
+		$response = $soapclient->softwareheritage_repositoryInfo($session,'projectb/svn/projectb');
+		$this->assertNotEquals(NULL,$response);
+		$this->assertEquals(4,count($response->repository_urls));
+		
 	}
 }

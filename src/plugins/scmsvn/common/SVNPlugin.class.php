@@ -57,6 +57,7 @@ some control over it to the project's administrator.");
 		$this->_addHook('scm_generate_snapshots');
 		$this->_addHook('scm_gather_stats');
 		$this->_addHook('get_scm_repo_list');
+		$this->_addHook('get_scm_repo_info');
 		$this->_addHook('activity');
 
 		$this->provides['svn'] = true;
@@ -733,6 +734,11 @@ some control over it to the project's administrator.");
 	}
 
     function get_scm_repo_list(&$params) {
+		if (array_key_exists('group_name',$params)) {
+			$unix_group_name = $params['group_name'];
+		} else {
+			$unix_group_name = '';
+		}
 		$protocol = forge_get_config('use_ssl', 'scmsvn')? 'https' : 'http';
 		if (session_loggedin()) {
 			$u = user_get_object(user_getid());
@@ -740,10 +746,17 @@ some control over it to the project's administrator.");
 		}
 		
 		$results = array();
-		$res = db_query_params("SELECT unix_group_name, groups.group_id FROM groups
+		if ($unix_group_name) {
+			$res = db_query_params("SELECT unix_group_name, groups.group_id FROM groups
+			JOIN group_plugin ON (groups.group_id=group_plugin.group_id)
+			WHERE groups.status=$1 AND group_plugin.plugin_id=$2 AND groups.unix_group_name=$3
+			ORDER BY unix_group_name", array('A', $this->getID(),$unix_group_name));
+		} else {
+			$res = db_query_params("SELECT unix_group_name, groups.group_id FROM groups
 			JOIN group_plugin ON (groups.group_id=group_plugin.group_id)
 			WHERE groups.status=$1 AND group_plugin.plugin_id=$2
 			ORDER BY unix_group_name", array('A', $this->getID()));
+		}			
 		while ($arr = db_fetch_array($res)) {
 			if (!forge_check_perm('scm', $arr['group_id'], 'read')) {
 				continue;
@@ -772,6 +785,23 @@ some control over it to the project's administrator.");
 
 		foreach ($results as $res) {
 			$params['results'][] = $res;
+		}
+	}
+
+    function get_scm_repo_info(&$params) {
+		$rid = $params['repository_id'];
+		$e = explode('/',$rid);
+		if ($e[1] != 'svn') {
+			return;
+		}
+		$g = $e[0];
+		$p = array('group_name' => $g);
+		$this->get_scm_repo_list($p);
+		foreach ($p['results'] as $r) {
+			if ($r['repository_id'] == $rid) {
+				$params['results'] = $r;
+				return;
+			}
 		}
 	}
 }
