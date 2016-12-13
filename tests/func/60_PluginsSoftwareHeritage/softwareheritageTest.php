@@ -56,6 +56,8 @@ class SoftwareHeritage extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=Request a personal repository");
 		$this->assertTextPresent("You have now requested a personal Git repository");
 
+		$this->createProject('ProjectB','scmsvn');
+
 		// Run the cronjob to create repositories
 		$this->waitSystasks();
 
@@ -85,6 +87,9 @@ class SoftwareHeritage extends FForge_SeleniumTestCase
 		$this->assertTrue(array_key_exists('projecta/git/other-repo',$repos));
 		$this->assertTrue(array_key_exists('projecta/git/users/admin',$repos));
 
+		$this->assertTrue(array_key_exists('projectb/svn/projectb',$repos));
+		$this->assertEquals(4,count($repos['projectb/svn/projectb']->repository_urls));
+
 		// Get repository list as anonymous
 		$response = $soapclient->softwareheritage_repositoryList('');
 		$repos = array();
@@ -95,5 +100,8 @@ class SoftwareHeritage extends FForge_SeleniumTestCase
 		$this->assertEquals(1,count($repos['projecta/git/projecta']->repository_urls));
 		$this->assertTrue(array_key_exists('projecta/git/other-repo',$repos));
 		$this->assertTrue(array_key_exists('projecta/git/users/admin',$repos));
+
+		$this->assertTrue(array_key_exists('projectb/svn/projectb',$repos));
+		$this->assertEquals(2,count($repos['projectb/svn/projectb']->repository_urls));
 	}
 }
