@@ -52,6 +52,7 @@ control over it to the project's administrator.");
 		$this->_addHook('scm_add_repo');
 		$this->_addHook('scm_delete_repo');
 		$this->_addHook('get_scm_repo_list');
+		$this->_addHook('get_scm_repo_info');
 		$this->_addHook('widget_instance', 'myPageBox', false);
 		$this->_addHook('widgets', 'widgets', false);
 		$this->_addHook('activity');
@@ -1266,8 +1267,12 @@ control over it to the project's administrator.");
 		return $commits;
 	}
 
-
     function get_scm_repo_list(&$params) {
+		if (array_key_exists('group_name',$params)) {
+			$unix_group_name = $params['group_name'];
+		} else {
+			$unix_group_name = '';
+		}
 		$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
 		if (session_loggedin()) {
 			$u = user_get_object(user_getid());
@@ -1275,10 +1280,17 @@ control over it to the project's administrator.");
 		}
 		
 		$results = array();
-		$res = db_query_params("SELECT unix_group_name, groups.group_id FROM groups
+		if ($unix_group_name) {
+			$res = db_query_params("SELECT unix_group_name, groups.group_id FROM groups
+			JOIN group_plugin ON (groups.group_id=group_plugin.group_id)
+			WHERE groups.status=$1 AND group_plugin.plugin_id=$2 AND groups.unix_group_name=$3
+			ORDER BY unix_group_name", array('A', $this->getID(), $unix_group_name));
+		} else {
+			$res = db_query_params("SELECT unix_group_name, groups.group_id FROM groups
 			JOIN group_plugin ON (groups.group_id=group_plugin.group_id)
 			WHERE groups.status=$1 AND group_plugin.plugin_id=$2
 			ORDER BY unix_group_name", array('A', $this->getID()));
+		}
 		while ($arr = db_fetch_array($res)) {
 			if (!forge_check_perm('scm', $arr['group_id'], 'read')) {
 				continue;
@@ -1301,12 +1313,21 @@ control over it to the project's administrator.");
 							   'repository_urls' => $urls,
 				);
 		}
-		$res = db_query_params("SELECT unix_group_name, groups.group_id, repo_name
+		if ($unix_group_name) {
+			$res = db_query_params("SELECT unix_group_name, groups.group_id, repo_name
+			FROM groups
+			JOIN group_plugin ON (groups.group_id=group_plugin.group_id)
+			JOIN scm_secondary_repos ON (groups.group_id=scm_secondary_repos.group_id)
+			WHERE groups.status=$1 AND group_plugin.plugin_id=$2 AND groups.unix_group_name=$3
+			ORDER BY unix_group_name, repo_name", array('A', $this->getID(), $unix_group_name));
+		} else {
+			$res = db_query_params("SELECT unix_group_name, groups.group_id, repo_name
 			FROM groups
 			JOIN group_plugin ON (groups.group_id=group_plugin.group_id)
 			JOIN scm_secondary_repos ON (groups.group_id=scm_secondary_repos.group_id)
 			WHERE groups.status=$1 AND group_plugin.plugin_id=$2
 			ORDER BY unix_group_name, repo_name", array('A', $this->getID()));
+		}
 		while ($arr = db_fetch_array($res)) {
 			if (!forge_check_perm('scm', $arr['group_id'], 'read')) {
 				continue;
@@ -1329,13 +1350,23 @@ control over it to the project's administrator.");
 							   'repository_urls' => $urls,
 				);
 		}
-		$res = db_query_params("SELECT unix_group_name, groups.group_id, user_name
+		if ($unix_group_name) {
+			$res = db_query_params("SELECT unix_group_name, groups.group_id, user_name
+			FROM groups
+			JOIN group_plugin ON (groups.group_id=group_plugin.group_id)
+			JOIN scm_personal_repos ON (groups.group_id=scm_personal_repos.group_id)
+			JOIN users ON (scm_personal_repos.user_id=users.user_id)
+			WHERE groups.status=$1 AND group_plugin.plugin_id=$2 AND users.status=$3 AND groups.unix_group_name=$4
+			ORDER BY unix_group_name, user_name", array('A', $this->getID(), 'A', $unix_group_name));
+		} else {
+			$res = db_query_params("SELECT unix_group_name, groups.group_id, user_name
 			FROM groups
 			JOIN group_plugin ON (groups.group_id=group_plugin.group_id)
 			JOIN scm_personal_repos ON (groups.group_id=scm_personal_repos.group_id)
 			JOIN users ON (scm_personal_repos.user_id=users.user_id)
 			WHERE groups.status=$1 AND group_plugin.plugin_id=$2 AND users.status=$3
 			ORDER BY unix_group_name, user_name", array('A', $this->getID(), 'A'));
+		}			
 		while ($arr = db_fetch_array($res)) {
 			if (!forge_check_perm('scm', $arr['group_id'], 'read')) {
 				continue;
@@ -1361,6 +1392,23 @@ control over it to the project's administrator.");
 
 		foreach ($results as $res) {
 			$params['results'][] = $res;
+		}
+	}
+
+    function get_scm_repo_info(&$params) {
+		$rid = $params['repository_id'];
+		$e = explode('/',$rid);
+		if ($e[1] != 'git') {
+			return;
+		}
+		$g = $e[0];
+		$p = array('group_name' => $g);
+		$this->get_scm_repo_list($p);
+		foreach ($p['results'] as $r) {
+			if ($r['repository_id'] == $rid) {
+				$params['results'] = $r;
+				return;
+			}
 		}
 	}
 }

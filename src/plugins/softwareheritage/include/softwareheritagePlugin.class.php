@@ -63,6 +63,14 @@ class softwareheritagePlugin extends Plugin {
 			array('return'=>'tns:ArrayOfSoftwareheritageRepositoryInfo'),
 			$uri,
                        $uri.'#softwareheritage_repositoryList','rpc','encoded');
+
+		$server->register(
+			'softwareheritage_repositoryInfo',
+			array('session_ser'=>'xsd:string',
+				'repository_id'=>'xsd:string'),
+			array('return'=>'tns:SoftwareheritageRepositoryInfo'),
+			$uri,
+                       $uri.'#softwareheritage_repositoryInfo','rpc','encoded');
 	}
 
 
@@ -83,6 +91,22 @@ function &softwareheritage_repositoryList($session_ser) {
 	}
 
 	return $res2;
+}
+
+function &softwareheritage_repositoryInfo($session_ser, $repository_id) {
+	continue_session($session_ser);
+
+	$results = NULL;
+	$params['repository_id'] = $repository_id;
+	$params['results'] = &$results;
+	plugin_hook('get_scm_repo_info',$params);
+
+	if ($params['results'] == NULL) {
+		$sf = new soap_fault('','softwareheritage_repositoryInfo',_('Error when fetching repository info'),_('Error when fetching repository info'));
+		return $sf;
+	}
+
+	return $params['results'];
 }
 
 // Local Variables:

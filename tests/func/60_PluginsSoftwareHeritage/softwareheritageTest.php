@@ -103,5 +103,10 @@ class SoftwareHeritage extends FForge_SeleniumTestCase
 
 		$this->assertTrue(array_key_exists('projectb/svn/projectb',$repos));
 		$this->assertEquals(2,count($repos['projectb/svn/projectb']->repository_urls));
+
+		// Get repository info as admin
+		$response = $soapclient->softwareheritage_repositoryInfo($session,'projecta/git/projecta');
+		$this->assertNotEquals(NULL,$response);
+		$this->assertEquals(3,count($response->repository_urls));
 	}
 }
