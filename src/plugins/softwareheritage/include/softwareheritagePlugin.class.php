@@ -26,6 +26,7 @@ class softwareheritagePlugin extends Plugin {
 		$this->Plugin($id) ;
 		$this->name = "softwareheritage";
 		$this->text = "Software Heritage"; // To show in the tabs, use...
+		$this->_addHook('register_soap');
 	}
 
 	public function register_soap(&$params) {
@@ -33,79 +34,57 @@ class softwareheritagePlugin extends Plugin {
 		$uri = 'http://'.forge_get_config('web_host');
 
 		$server->wsdl->addComplexType(
-			'SoftwareheritageEntry',
+			'SoftwareheritageRepositoryInfo',
 			'complexType',
 			'struct',
 			'sequence',
 			'',
 			array(
 				'group_id' => array('name'=>'group_id', 'type' => 'xsd:int'),
-				'section' => array('name'=>'section', 'type' => 'xsd:string'),
-				'ref_id' => array('name'=>'ref_id', 'type' => 'xsd:string'),
-				'subref_id' => array('name'=>'subref_id', 'type' => 'xsd:string'),
-				'description' => array('name'=>'description', 'type' => 'xsd:string'),
-				'activity_date' => array('name'=>'activity_date', 'type' => 'xsd:int')
+				'repository_id' => array('name'=>'repository_id', 'type' => 'xsd:string'),
+				'repository_urls' => array('name'=>'repository_urls', 'type' => 'tns:ArrayOfstring'),
+				'repository_type' => array('name'=>'repository_type', 'type' => 'xsd:string'),
 				)
 			);
 
 		$server->wsdl->addComplexType(
-			'ArrayOfSoftwareheritageEntry',
+			'ArrayOfSoftwareheritageRepositoryInfo',
 			'complexType',
 			'array',
 			'',
 			'SOAP-ENC:Array',
 			array(),
-			array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:SoftwareheritageEntry[]')),
-			'tns:SoftwareheritageEntry');
+			array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:SoftwareheritageRepositoryInfo[]')),
+			'tns:SoftwareheritageRepositoryInfo');
                
 		$server->register(
-			'softwareheritage_getActivity',
-			array('session_ser'=>'xsd:string',
-				  'begin'=>'xsd:int',
-				  'end'=>'xsd:int',
-				  'show'=>'tns:ArrayOfstring',),
-			array('return'=>'tns:ArrayOfSoftwareheritageEntry'),
+			'softwareheritage_repositoryList',
+			array('session_ser'=>'xsd:string'),
+			array('return'=>'tns:ArrayOfSoftwareheritageRepositoryInfo'),
 			$uri,
-                       $uri.'#softwareheritage_getActivity','rpc','encoded');
+                       $uri.'#softwareheritage_repositoryList','rpc','encoded');
 	}
 
 
-	function &softwareheritage_getActivity($session_ser,$begin,$end,$show=array()) {
-		continue_session($session_ser);
+}
 
-		$plugin = plugin_get_object('softwareheritage');
-		if (!forge_get_config('use_activity')
-			|| !$plugin) {
-			return new soap_fault ('','softwareheritage_getActivity','Software Heritage not available','Software Heritage not available');
+function &softwareheritage_repositoryList($session_ser) {
+	continue_session($session_ser);
+
+	$results = array();
+	$params['results'] = &$results;
+	plugin_hook('get_scm_repo_list',$params);
+
+	error_log(print_r($params,true));
+
+	$res2 = array();
+	foreach ($results as $res) {
+		if (forge_check_perm('scm',$res['group_id'],'read')) {
+			$res2[] = $res;
 		}
-
-		$ids = array();
-		$texts = array();
-       
-		$results = $plugin->getData($begin,$end,$show,$ids,$texts);
-
-		$keys = array(
-			'group_id',
-			'section',
-			'ref_id',
-			'subref_id',
-			'description',
-			'activity_date',
-			);
-
-
-		$res2 = array();
-		foreach ($results as $res) {
-			$r = array();
-               
-			foreach ($keys as $k) {
-				$r[$k] = $res[$k];
-			}
-			$res2[] = $r;
-		}
-
-		return $res2;
 	}
+
+	return $res2;
 }
 
 // Local Variables:
