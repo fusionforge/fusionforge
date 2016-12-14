@@ -104,7 +104,7 @@ $cells[][] = html_e('textarea', array('id' => 'vcomment', 'name' => 'vcomment', 
 echo $HTML->multiTableRow(array(), $cells);
 if ($g->useDocmanSearch()) {
 	$cells = array();
-	$cells[] =  array(_('Both fields are used by the document search engine.'), 'colspan' => 2);
+	$cells[] =  array(_('Both title & description fields can be parsed by the document search engine.'), 'colspan' => 2);
 	echo $HTML->multiTableRow(array(), $cells);
 }
 $cells = array();
