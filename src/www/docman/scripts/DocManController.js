@@ -594,7 +594,7 @@ DocManListFileController.prototype =
 			jQuery('#defaulteditfiletype').val('text/plain');
 		}
 		if (this.version.isText) {
-			jQuery.getJSON(this.listfileparams.docManURL+'/?group_id='+this.docparams.groupId+'&action=getfile&type=file&itemid='+this.docparams.id+'&version='+this.version.version, jQuery.proxy(function(data){
+			jQuery.getJSON(this.listfileparams.docManURL+'/?group_id='+this.version.groupId+'&action=getfile&type=file&itemid='+this.version.id+'&version='+this.version.version, jQuery.proxy(function(data){
 				if (data) {
 					jQuery('#defaulteditzone').text(data.body);
 				}
@@ -610,7 +610,7 @@ DocManListFileController.prototype =
 				jQuery('#editonlineroweditfile').hide();
 				jQuery('#editor').attr('disabled', true);
 				jQuery('#editButtonUrl').prop('checked', true);
-			} else if (this.docparams.useCreateOnline && this.version.isText){
+			} else if (this.listfileparams.useCreateOnline && this.version.isText){
 				jQuery('#fileurlroweditfile').hide();
 				jQuery('#uploadnewroweditfile').hide();
 				jQuery('#editonlineroweditfile').show();

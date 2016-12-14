@@ -55,7 +55,8 @@ jQuery(document).ready(function() {
 		divEditFile:		jQuery('#editFile'),
 		divEditTitle:		'<?php echo _("Edit document dialog box") ?>',
 		childGroupId:		<?php echo util_ifsetor($childgroup_id, 0) ?>,
-		tableAddVersion:	jQuery('#doc_version_edit')
+		tableAddVersion:	jQuery('#doc_version_edit'),
+		useCreateOnline:	<?php echo $g->useCreateOnline() ?>
 	});
 });
 //]]>
