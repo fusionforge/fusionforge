@@ -132,10 +132,9 @@ class CreateDocURL extends FForge_SeleniumTestCase {
 		$this->click("css=img[alt='editdocument']");
 		$this->pause("10000");
 		$this->assertTextPresent("1 (x)");
-		//TODO: to be fixed
-		//$this->select('id=stateid', 'label=pending');
-		//$this->clickAndWait("xpath=(//button[@type='button'])[4]");
-		//$this->assertTextPresent("Pending files");
-		//$this->assertTextPresent("terms.php");
+		$this->select('id=stateid', 'label=pending');
+		$this->clickAndWait("xpath=(//button[@type='button'])[3]");
+		$this->assertTextPresent("updated successfully");
+		$this->assertTextPresent("Pending files");
 	}
 }
