@@ -86,6 +86,7 @@ if ($owner) {
 				$param = $request->get('name');
 				$name = array_pop(array_keys($param));
 			}
+			$instance_id = (int)$param[$name][$action];
 			switch($request->get('action')) {
 				case 'widget':
 					if ($name && $request->exist('layout_id')) {
@@ -94,7 +95,6 @@ if ($owner) {
 								$action = array_pop(array_keys($param[$name]));
 								switch($action) {
 									case 'remove':
-										$instance_id = (int)$param[$name][$action];
 										if (($owner_type == WidgetLayoutManager::OWNER_TYPE_GROUP) && (forge_check_perm ('project_admin', $owner_id, NULL))) {
 												$lm->removeWidget($owner_id, $owner_type, $layout_id, $name, $instance_id, $widget);
 										} elseif (($owner_type == WidgetLayoutManager::OWNER_TYPE_HOME) && (forge_check_global_perm('forge_admin'))) {
