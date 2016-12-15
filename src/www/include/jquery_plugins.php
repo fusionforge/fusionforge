@@ -29,6 +29,6 @@ function init_datetimepicker() {
 		$language_code = substr($language_code, 0, 2);
 	}
 	$datetime_format = _('Y-m-d H:i');
-	$javascript = "$.datetimepicker.setLocale('".$language_code."'); $('.datetimepicker').datetimepicker({format:".$datetime_format."'});";
+	$javascript = "$.datetimepicker.setLocale('".$language_code."'); $('.datetimepicker').datetimepicker({format:'".$datetime_format."'});";
 	return html_e('script', array( 'type'=>'text/javascript'), '//<![CDATA['."\n".'$(function(){'.$javascript.'});'."\n".'//]]>');
 }
