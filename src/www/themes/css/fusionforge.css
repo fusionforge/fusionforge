@@ -633,6 +633,10 @@ p.information {
 	background-image: url('../../images/widget/widget-preview-project_documentsactivity-en_US.png');
 }
 
+.widget-preview-mysystasks-en_US {
+	background-image: url('../../images/widget/widget-preview-mysystasks-en_US.png');
+}
+
 /* }}} */
 
 /* {{{ Layout Manager */
