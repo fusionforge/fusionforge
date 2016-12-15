@@ -22,7 +22,6 @@
  */
 
 function init_datetimepicker() {
-
 	// awful hack
 	$language_code = language_name_to_locale_code(choose_language_from_context ());
 	if (!in_array($language_code,array('en-GB','pt-BR','sr-YU','zh-TW'))) {
