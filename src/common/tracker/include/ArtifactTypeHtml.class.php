@@ -80,7 +80,7 @@ class ArtifactTypeHtml extends ArtifactType {
 				$attr[]   = array('title' => _('Add this tracker from your monitoring.'));
 			}
 
-			if (forge_check_perm ('tracker', $this->getID(), 'manager')) {
+			if (forge_check_perm('tracker_admin', $group_id)) {
 				$labels[] = _('Administration');
 				$links[]  = '/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID();
 				$attr[]   = array('title' => _('Global administration for trackers. Create, clone, workflow, fields ...'));
