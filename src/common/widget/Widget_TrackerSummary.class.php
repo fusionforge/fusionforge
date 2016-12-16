@@ -65,18 +65,22 @@ class Widget_TrackerSummary extends Widget {
 		$inputAttrs = array('type' => 'text', 'name' => 'summary', 'style' => 'width:99%', 'value' => $summary);
 		if ($func == 'detail') {
 			$inputAttrs['value'] = $ah->getSummary();
-		}
-		if (!forge_check_perm('tracker', $atid, 'submit')) {
-			$inputAttrs['disabled'] = 'disabled';
+			if (forge_check_perm('tracker', $atid, 'manager')) {
+				$inputAttrs['required'] = 'required';
+				$requiredInfo = utils_requiredField();
+			} else {
+				$inputAttrs['disabled'] = 'disabled';
+				$requiredInfo = '';
+			}
 			$return .= html_e('input', array('type' => 'hidden', 'name' => 'summary', 'value' => $ah->getSummary()));
-			$requiredInfo = '';
+
 		} else {
 			$inputAttrs['required'] = 'required';
 			$requiredInfo = utils_requiredField();
 		}
 		$return .= html_e('p', array(), _('Summary')._(': ').$requiredInfo.html_e('input', $inputAttrs));
 		if ($func == 'detail') {
-			if (forge_check_perm('tracker', $atid, 'tech')) {
+			if (forge_check_perm('tracker', $atid, 'manager')) {
 				$editable = true;
 			} else {
 				$editable = false;
