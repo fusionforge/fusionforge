@@ -1,25 +1,24 @@
 <?php
 /**
- * Minimal complete JSON generator and parser for FusionForge
+ * Minimal complete JSON generator and parser for FusionForge and SimKolab
  *
- * Copyright © 2010, 2011, 2012, 2014
- *	Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
- * All rights reserved.
+ * Copyright © 2010, 2011, 2012, 2014, 2016
+ *	mirabilos <t.glaser@tarent.de>
  *
- * This file is part of FusionForge. FusionForge is free software;
- * you can redistribute it and/or modify it under the terms of the
- * GNU General Public License as published by the Free Software
- * Foundation; either version 2 of the License, or (at your option)
- * any later version.
+ * Provided that these terms and disclaimer and all copyright notices
+ * are retained or reproduced in an accompanying document, permission
+ * is granted to deal in this work without restriction, including un‐
+ * limited rights to use, publicly perform, distribute, sell, modify,
+ * merge, give away, or sublicence.
  *
- * FusionForge is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with FusionForge; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ * This work is provided “AS IS” and WITHOUT WARRANTY of any kind, to
+ * the utmost extent permitted by applicable law, neither express nor
+ * implied; without malicious intent or gross negligence. In no event
+ * may a licensor, author or contributor be held liable for indirect,
+ * direct, other damage, loss, or other issues arising in any way out
+ * of dealing in the work, even if advised of the possibility of such
+ * damage or existence of a defect, except proven that it results out
+ * of said person’s immediate fault when using the work as intended.
  *-
  * Do *not* use PHP’s json_encode because it is broken.
  * Note that JSON is case-sensitive.  My notes are at:
@@ -41,6 +40,20 @@
  * out:	string encoded
  */
 function minijson_encode($x, $ri="", $depth=32) {
+	return (minijson_encode_internal($x, $ri, $depth, false, false));
+}
+
+/**
+ * Encodes content as JSON for debugging (not round-trip safe).
+ *
+ * in:	array x (Value to be encoded)
+ * in:	string indent or bool false to skip beautification
+ * in:	integer	recursion depth
+ * in:	integer truncation size (0 to not truncate), makes output not JSON
+ * in:	bool whether to pretty-print resources as strings
+ * out:	string encoded
+ */
+function minijson_encode_internal($x, $ri, $depth, $truncsz, $dumprsrc) {
 	if (!$depth-- || !isset($x) || is_null($x) || (is_float($x) &&
 	    (is_nan($x) || is_infinite($x))))
 		return "null";
@@ -69,6 +82,13 @@ function minijson_encode($x, $ri="", $depth=32) {
 	}
 	if (is_string($x)) {
 		$rs = "\"";
+
+		if ($truncsz && (strlen($x) > $truncsz)) {
+			/* truncate very long texts */
+			$rs = "TOO_LONG_STRING_TRUNCATED:\"";
+			$x = substr($x, 0, $truncsz);
+		}
+
 		$x .= "\0";
 		/*
 		 * A bit unbelievable: not only does mb_check_encoding
@@ -178,7 +198,8 @@ function minijson_encode($x, $ri="", $depth=32) {
 					$rs .= ",\n";
 				if ($si !== false)
 					$rs .= $si;
-				$rs .= minijson_encode($x[$v], $si, $depth);
+				$rs .= minijson_encode_internal($x[$v], $si,
+				    $depth, $truncsz, $dumprsrc);
 			}
 			if ($ri !== false)
 				$rs .= "\n" . $ri;
@@ -199,12 +220,14 @@ function minijson_encode($x, $ri="", $depth=32) {
 				$rs .= ",\n";
 			if ($si !== false)
 				$rs .= $si;
-			$rs .= minijson_encode((string)$v, false, $depth);
+			$rs .= minijson_encode_internal((string)$v, false,
+			    $depth, $truncsz, $dumprsrc);
 			if ($ri === false)
 				$rs .= ":";
 			else
 				$rs .= ": ";
-			$rs .= minijson_encode($x[$v], $si, $depth);
+			$rs .= minijson_encode_internal($x[$v], $si,
+			    $depth, $truncsz, $dumprsrc);
 		}
 		if ($ri !== false)
 			$rs .= "\n" . $ri;
@@ -235,12 +258,14 @@ function minijson_encode($x, $ri="", $depth=32) {
 				$rs .= ",\n";
 			if ($si !== false)
 				$rs .= $si;
-			$rs .= minijson_encode($s, false, $depth);
+			$rs .= minijson_encode_internal($s, false,
+			    $depth, $truncsz, $dumprsrc);
 			if ($ri === false)
 				$rs .= ":";
 			else
 				$rs .= ": ";
-			$rs .= minijson_encode($x[$v], $si, $depth);
+			$rs .= minijson_encode_internal($x[$v], $si,
+			    $depth, $truncsz, $dumprsrc);
 		}
 		if ($ri !== false)
 			$rs .= "\n" . $ri;
@@ -248,10 +273,26 @@ function minijson_encode($x, $ri="", $depth=32) {
 		return $rs;
 	}
 
+	/* http://de2.php.net/manual/en/function.is-resource.php#103942 */
+	if ($dumprsrc && !is_null(@get_resource_type($x))) {
+		$k = "" . (string)get_resource_type($x);
+		$rs = "{";
+		if ($ri !== false)
+			$rs .= "\n" . $ri . "  ";
+		$rs .= "\"\\u0000resource\":";
+		if ($ri !== false)
+			$rs .= " ";
+		$rs .= minijson_encode_internal($k, false,
+		    $depth, $truncsz, $dumprsrc);
+		if ($ri !== false)
+			$rs .= "\n" . $ri;
+		$rs .= "}";
+		return $rs;
+	}
+
 	/* treat everything else as array or string */
-	if (!is_scalar($x))
-		return minijson_encode((array)$x, $ri, $depth);
-	return minijson_encode((string)$x, $ri, $depth);
+	return minijson_encode_internal(is_scalar($x) ? (string)$x : (array)$x,
+	    $ri, $depth, $truncsz, $dumprsrc);
 }
 
 /**
