@@ -46,7 +46,7 @@ class ArtifactHtml extends Artifact {
 		$title_arr = array();
 		if ($editable === true) {
 			$title_arr[] = '<div style="width:100%; line-height: 20px;">' .
-				'<div style="float:left;">' . _('Detailed description')._(':') . '</div>' .
+				'<div style="float:left;">' . _('Detailed description')._(':') .utils_requiredField().'</div>' .
 				'<div>' . $HTML->getEditFilePic(_('Edit this message'), _('Edit this message'), array('class' => 'mini_buttons tip-ne', 'onclick'=>"switch2edit(this, 'showdescription', 'editdescription')")) . '</div>' .
 				'</div>';
 		} else {
