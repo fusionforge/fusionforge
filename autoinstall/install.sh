@@ -58,7 +58,7 @@ else
 	# Initial installation
 	yum --enablerepo=epel install -y fusionforge fusionforge-shell fusionforge-scm \
 	    fusionforge-plugin-scmcvs fusionforge-plugin-scmsvn fusionforge-plugin-scmgit \
-	    fusionforge-plugin-blocks fusionforge-plugin-online_help fusionforge-plugin-taskboard \
+	    fusionforge-plugin-blocks fusionforge-plugin-taskboard \
 	    fusionforge-plugin-message fusionforge-plugin-moinmoin
     fi
 fi
