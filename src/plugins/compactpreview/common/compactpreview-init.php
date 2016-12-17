@@ -1,6 +1,6 @@
 <?php
-
 /**
+ * CompactPreviewPlugin init
  *
  * This file is part of FusionForge.
  *
