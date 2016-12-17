@@ -652,7 +652,8 @@ DocManListFileController.prototype =
 
 	deleteVersion: function(params) {
 		this.delversion = params;
-		jQuery.getJSON(this.docparams.docManURL + '/?group_id=' + this.docparams.groupId + '&action=deleteversion&docid='+this.docparams.id+'&version='+this.delversion.version , jQuery.proxy(function(data){
+		console.log(this);
+		jQuery.getJSON(this.listfileparams.docManURL + '/?group_id=' + this.delversion.groupId + '&action=deleteversion&docid='+this.delversion.docid+'&version='+this.delversion.version , jQuery.proxy(function(data){
 				if (typeof data.html != 'undefined') {
 					jQuery('#editFile > .feedback').remove();
 					jQuery('#editFile > .error').remove();
