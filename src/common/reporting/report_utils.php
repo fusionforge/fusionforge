@@ -520,7 +520,7 @@ function report_graph($type, $SPAN, $start, $end) {
 				}
 				for ($j = 0; $j < count($timeStampArr); $j++) {
 					if (in_array($timeStampArrFormat[$j], $wrdates)) {
-						$thekey = array_search($timeStampArr[$j], $wrdates);
+						$thekey = array_search($timeStampArr[$j], $rdates);
 						if (isset($ydata[$z][$thekey])) {
 							if ($ydata[$z][$thekey] === false) {
 								$ydata[$z][$thekey] = 0;
