@@ -560,7 +560,7 @@ DocManListFileController.prototype =
 				jQuery('#tr-mandatory-reviewers').hide();
 				jQuery('#tr-optional-reviewers').hide();
 				jQuery('#review_complete').val(1);
-				jQuery.getJSON(this.docparams.docManURL + '/?group_id=' + this.docparams.groupId + '&action=getdocreviewcompleteform&docid='+this.docparams.id+'&revid='+this.review.review , jQuery.proxy(function(data){
+				jQuery.getJSON(this.listfileparams.docManURL + '/?group_id=' + this.review.groupId + '&action=getdocreviewcompleteform&docid='+this.review.docid+'&revid='+this.review.review , jQuery.proxy(function(data){
 					if (typeof data.html != 'undefined') {
 						jQuery('#editfile-completedreview').prepend(data.html);
 					}
@@ -574,7 +574,7 @@ DocManListFileController.prototype =
 				jQuery('#review-select-mandatory-users').gentleSelect({columns: 3, itemWidth: 150});
 				jQuery('#review-select-optional-users').gentleSelect({columns: 3, itemWidth: 150});
 			}
-			jQuery.getJSON(this.docparams.docManURL + '/?group_id=' + this.docparams.groupId + '&action=getdocreviewuserstatus&docid='+this.docparams.id+'&revid='+this.review.review , jQuery.proxy(function(data){
+			jQuery.getJSON(this.listfileparams.docManURL + '/?group_id=' + this.review.groupId + '&action=getdocreviewuserstatus&docid='+this.review.docid+'&revid='+this.review.review , jQuery.proxy(function(data){
 				if (typeof data.html != 'undefined') {
 					jQuery('#editfile-userstatusreview').prepend(data.html);
 				}

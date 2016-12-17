@@ -208,7 +208,9 @@ class DocumentReview extends FFError {
 																		endreviewdate: \''.util_html_encode($enddate).'\',
 																		serialid: '.$this->getSerialID().',
 																		mandatoryusers: '.json_encode($mandatoryUsers).',
-																		optionalusers: '.json_encode($optionalUsers).',})'), true);
+																		optionalusers: '.json_encode($optionalUsers).',
+																		docid: '.$this->Document->getID().',
+																		groupId: '.$this->Document->Group->getID().'})'), true);
 		} else {
 			return util_make_link('#', $HTML->getClosedTicketPic(_('Complete this review'), 'completereview'),
 					array('id' => 'review_action_complete', 'onclick' => 'javascript:controllerListFile.toggleEditReviewView({review: '.$this->getID().', title: \''.addslashes($this->getTitle()).'\',
@@ -217,8 +219,9 @@ class DocumentReview extends FFError {
 																		serialid: '.$this->getSerialID().',
 																		mandatoryusers: '.json_encode($mandatoryUsers).',
 																		optionalusers: '.json_encode($optionalUsers).',
+																		docid: '.$this->Document->getID().',
+																		groupId: '.$this->Document->Group->getID().',
 																		complete: 1})'), true);
-
 		}
 	}
 
