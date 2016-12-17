@@ -75,7 +75,7 @@ foreach ($members as $user) {
 		$content .= $user->getRealName();
 	}
 	$cells[][] = html_e('div', array('about' => $member_uri, 'typeof' => 'sioc:UserAccount'), $content);
-	$cells[][] = util_display_user($user->getUnixName(),$user->getID(),$user->getUnixName(), 's');
+	$cells[][] = util_display_user($user->getUnixName(), $user->getID(), $user->getRealName(), 's');
 
 	$roles = RBACEngine::getInstance()->getAvailableRolesForUser ($user) ;
 	sortRoleList ($roles) ;
