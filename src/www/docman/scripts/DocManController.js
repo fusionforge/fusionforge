@@ -393,6 +393,8 @@ DocManListFileController.prototype =
 		this.docparams = params;
 		this.listfileparams.tableAddVersion.hide();
 		jQuery('#doc_group').empty();
+		jQuery('#editfile-userstatusreview').empty();
+		jQuery('#editfile-completedreview').empty();
                 for (var i = 0; i < this.docparams.docgroupDict.length; i++) {
                         jQuery('#doc_group').append(jQuery('<option>').text(this.docparams.docgroupDict[i][1]).attr('value', this.docparams.docgroupDict[i][0]));
                 };
