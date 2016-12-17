@@ -86,7 +86,7 @@ if ($sw) {
 	$cells[][] = html_e('strong', array(), _('Type')._(':').html_e('br').report_span_box('SPAN', $SPAN));
 	$cells[][] = html_e('strong', array(), _('Start Date')._(':').html_e('br').report_months_box($report, 'start', $start));
 	$cells[][] = html_e('strong', array(), _('End Date')._(':').html_e('br').report_months_box($report, 'end', $end));
-	$cells[][] = html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Refresh')));
+	$cells[][] = html_e('br').html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Refresh')));
 	echo $HTML->multiTableRow(array(), $cells);
 	echo $HTML->listTableBottom();
 	echo $HTML->closeForm();

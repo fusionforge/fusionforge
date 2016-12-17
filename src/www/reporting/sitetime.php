@@ -79,7 +79,7 @@ echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method'
 <td><strong><?php echo _('Type')._(':'); ?></strong><br /><?php echo html_build_select_box_from_arrays($a2,$a,'type',$type,false); ?></td>
 <td><strong><?php echo _('Start Date')._(':'); ?></strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
 <td><strong><?php echo _('End Date')._(':'); ?></strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
-<td>
+<td><br>
 	<input type="hidden" name="typ" value="<?php echo $typ; ?>" />
 	<input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" />
 </td>
