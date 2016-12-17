@@ -1354,6 +1354,10 @@ if (isset($params['group']) && $params['group']) {
 		return $this->getPicto('ic/stop.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
+	function getTagPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/tag.png', $title, $alt, 20, 20, $otherAttr);
+	}
+
 	function getPicto($url, $title, $alt, $width = 20, $height = 20, $otherAttr = array()) {
 		$otherAttr['title'] = $title;
 		if (!$alt) {

@@ -474,7 +474,7 @@ if (! isset($ihm) || $ihm !== true) {
 					util_make_link('/tracker/admin/?group_id='.$group_id.'&roadmap_id='.$roadmap->getID().'&admin_roadmap=1&update_roadmap=1',
 							$HTML->getConfigurePic(_('Modify roadmap'), 'modifyroadmap')).
 					util_make_link('/tracker/admin/?group_id='.$group_id.'&roadmap_id='.$roadmap->getID().'&admin_roadmap=1&manage_release=1',
-							html_image('ic/tag.png','','',array('alt' => _('Manage releases'), 'title' => _('Manage releases')))).
+							$HTML->getTagPic(_('Manage releases'), 'managereleases')).
 					util_make_link('/tracker/admin/?group_id='.$group_id.'&roadmap_id='.$roadmap->getID().'&admin_roadmap=1&delete_roadmap=1',
 							$HTML->getDeletePic(_('Delete roadmap'), 'delroadmap')).
 					'</td>'."\n".
