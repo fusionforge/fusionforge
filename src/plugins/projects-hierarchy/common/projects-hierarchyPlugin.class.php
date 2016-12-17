@@ -329,6 +329,7 @@ _('Organise projects hierarchically, relation type 1-n');
 	 * @access	public
 	 */
 	function redirect($http_referer, $type, $message) {
+		global $warning_msg, $feedback, $error_msg;
 		switch ($type) {
 			case 'warning_msg': {
 				$warning_msg = $message;
