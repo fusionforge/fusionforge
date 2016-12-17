@@ -1073,7 +1073,7 @@ function util_make_link_u($username, $user_id, $text) {
  */
 function util_display_user($username, $user_id = 0, $text = '', $size = 'xs') {
 	// Invoke user_link_with_tooltip plugin
-	$hook_params = array('resource_type' => 'user', 'username' => $username, 'user_id' => $user_id, 'size' => $size, 'user_link' => '');
+	$hook_params = array('resource_type' => 'user', 'username' => $username, 'user_id' => $user_id, 'size' => $size, 'link_text' => $text, 'user_link' => '');
 	plugin_hook_by_reference('user_link_with_tooltip', $hook_params);
 	if ($hook_params['user_link'] != '') {
 		return $hook_params['user_link'];
