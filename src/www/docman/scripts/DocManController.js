@@ -561,6 +561,7 @@ DocManListFileController.prototype =
 				jQuery('#tr-optional-reviewers').hide();
 				jQuery('#review_complete').val(1);
 				jQuery.getJSON(this.listfileparams.docManURL + '/?group_id=' + this.review.groupId + '&action=getdocreviewcompleteform&docid='+this.review.docid+'&revid='+this.review.review , jQuery.proxy(function(data){
+					jQuery('#editfile-completedreview').empty();
 					if (typeof data.html != 'undefined') {
 						jQuery('#editfile-completedreview').prepend(data.html);
 					}
@@ -575,6 +576,7 @@ DocManListFileController.prototype =
 				jQuery('#review-select-optional-users').gentleSelect({columns: 3, itemWidth: 150});
 			}
 			jQuery.getJSON(this.listfileparams.docManURL + '/?group_id=' + this.review.groupId + '&action=getdocreviewuserstatus&docid='+this.review.docid+'&revid='+this.review.review , jQuery.proxy(function(data){
+				jQuery('#editfile-userstatusreview').empty();
 				if (typeof data.html != 'undefined') {
 					jQuery('#editfile-userstatusreview').prepend(data.html);
 				}
