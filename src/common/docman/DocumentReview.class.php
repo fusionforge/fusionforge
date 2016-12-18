@@ -365,7 +365,7 @@ class DocumentReview extends FFError {
 			foreach ($comments as $comment) {
 				$cells = array();
 				$cells[][] = strftime(_('%Y-%m-%d'),$comment->getCreateDate());
-				$cells[][] = $comment->getPosterRealName();
+				$cells[][] = util_display_user($comment->getPosterUnixName(), $comment->getPosterID(), $comment->getPosterRealName());
 				$cells[][] = $comment->getReviewComment();
 				$cells[][] = $comment->getAttachment();
 				$return .= $HTML->multiTableRow(array(), $cells);

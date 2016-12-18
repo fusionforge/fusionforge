@@ -73,6 +73,11 @@ class DocumentReviewComment extends FFError {
 		return $userObject->getRealName();
 	}
 
+	function getPosterUnixName() {
+		$userObject = user_get_object($this->getPosterID());
+		return $userObject->getUnixName();
+	}
+
 	function getReviewComment() {
 		$result = util_gen_cross_ref($this->data_array['rcomment'], $this->DocumentReview->Document->Group->getID());
 		$result = nl2br($result);
