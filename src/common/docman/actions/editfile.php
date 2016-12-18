@@ -71,6 +71,8 @@ switch ($fromview) {
 	}
 }
 
+$sanitizer = new TextSanitizer();
+
 switch ($subaction) {
 	case 'version':
 		$title = getStringFromRequest('title');
@@ -86,8 +88,8 @@ switch ($subaction) {
 		$current_version = getIntFromRequest('current_version', 0);
 		$version = getIntFromRequest('edit_version', 0);
 		$new_version = getIntFromRequest('new_version', 0);
-		$sanitizer = new TextSanitizer();
 		$details = $sanitizer->SanitizeHtml($details);
+		$vcomment = $sanitizer->SanitizeHtml($vcomment);
 		$data = '';
 
 		if ($version) {
@@ -184,7 +186,9 @@ switch ($subaction) {
 		break;
 	case 'review':
 		$reviewtitle = getStringFromRequest('review-title');
+		$reviewtitle = $sanitizer->SanitizeHtml($reviewtitle);
 		$reviewdescription = getStringFromRequest('review-description');
+		$reviewdescription = $sanitizer->SanitizeHtml($reviewdescription);
 		$reviewversionserialid = getIntFromRequest('review-serialid', null);
 		$reviewenddateraw = getStringFromRequest('review-enddate');
 		$date_format = _('%Y-%m-%d');
@@ -196,11 +200,13 @@ switch ($subaction) {
 		$reviewid = getIntFromRequest('review_id');
 		$reviewcompletedchecked = getIntFromRequest('review-completedchecked');
 		$reviewconclusioncomment = getStringFromRequest('review-completedcomment', '');
+		$reviewconclusioncomment = $sanitizer->SanitizeHtml($reviewconclusioncomment);
 		$reviewvalidatedocument = getIntFromRequest('review-validatedocument');
 		$reviewfinalstatus = getIntFromRequest('review-finalstatus');
 		$reviewcurrentversion = getIntFromRequest('review-currentversion');
 		$reviewnewcomment = getIntFromRequest('review_newcomment');
 		$reviewcomment = getStringFromRequest('review-comment');
+		$reviewcomment = $sanitizer->SanitizeHtml($reviewcomment);
 		$reviewdone = getIntFromRequest('review-done');
 		if ($reviewversionserialid) {
 			if ($new_review) {
