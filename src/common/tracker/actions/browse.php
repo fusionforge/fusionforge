@@ -363,6 +363,13 @@ if (db_numrows($res)>0) {
 echo ' </div>
 	<div id="tabber-simplefiltering">';
 $sort_fields = explode(',', $ath->getBrowseList());
+// Get the list of fields which can be sorted.
+$efarr = $ath->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_TEXT,
+				    ARTIFACT_EXTRAFIELDTYPE_TEXTAREA,
+				    ARTIFACT_EXTRAFIELDTYPE_INTEGER,
+				    ARTIFACT_EXTRAFIELDTYPE_SELECT,
+				    ARTIFACT_EXTRAFIELDTYPE_RADIO,
+				    ARTIFACT_EXTRAFIELDTYPE_STATUS));
 echo $HTML->openForm(array('action' => '/tracker/?group_id='.$group_id.'&atid='.$ath->getID(), 'method' => 'post'));
 echo '
 	<input type="hidden" name="query_id" value="-1" />
@@ -391,21 +398,20 @@ foreach ($sort_fields as $sort_field) {
 		case '_votage':
 		case 'details':
 		case 'summary':
+			break;
 			//no ordering on these columns yet.
 		default:
+			if (intval($sort_field) > 0) {
+				if ($efarr[$sort_field]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
+					echo '<td>'.$ath->getExtraFieldName($sort_field)._(':').'<br>'.$status_box.'</td>';
+				}
+			}
 			//build a box for extrafield ?
 			// no support yet.
 			break;
 	}
 }
 
-// Compute the list of fields which can be sorted.
-$efarr = $ath->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_TEXT,
-				    ARTIFACT_EXTRAFIELDTYPE_TEXTAREA,
-				    ARTIFACT_EXTRAFIELDTYPE_INTEGER,
-				    ARTIFACT_EXTRAFIELDTYPE_SELECT,
-				    ARTIFACT_EXTRAFIELDTYPE_RADIO,
-				    ARTIFACT_EXTRAFIELDTYPE_STATUS));
 $keys=array_keys($efarr);
 for ($k=0; $k<count($keys); $k++) {
 	$i=$keys[$k];
