@@ -184,6 +184,9 @@ DocManListFileController.prototype =
 			});
 			clearInterval(this.lockInterval[id]);
 			clearInterval(this.lockInterval[this.listfileparams.docgroupId]);
+			jQuery('#editfile-userstatusreview').remove();
+			jQuery('#editfile-completedreview').remove();
+			jQuery('#editfile-datepickerreview-script').remove();
 		}, this));
 	},
 

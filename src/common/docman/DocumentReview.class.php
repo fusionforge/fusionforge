@@ -327,7 +327,7 @@ class DocumentReview extends FFError {
 			$return .= html_e('div', array('id' => 'editfile-userstatusreview'), '', false);
 			$return .= html_e('div', array('id' => 'editfile-completedreview'), '', false);
 			$javascript = 'jQuery("#datepicker_end_review_date").datepicker({dateFormat: "'.$date_format_js.'"});';
-			$return .= html_e('script', array( 'type'=>'text/javascript'), '//<![CDATA['."\n".$javascript."\n".'//]]>');
+			$return .= html_e('script', array( 'type'=>'text/javascript', 'id' => 'editfile-datepickerreview-script'), '//<![CDATA['."\n".$javascript."\n".'//]]>');
 		} else {
 			$return = $HTML->error_msg(_('Cannot get Document Versions'));
 		}
