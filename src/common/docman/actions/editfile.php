@@ -201,6 +201,7 @@ switch ($subaction) {
 		$reviewcurrentversion = getIntFromRequest('review-currentversion');
 		$reviewnewcomment = getIntFromRequest('review_newcomment');
 		$reviewcomment = getStringFromRequest('review-comment');
+		$reviewdone = getIntFromRequest('review-done');
 		if ($reviewversionserialid) {
 			if ($new_review) {
 				$dr = new DocumentReview($d);
@@ -212,7 +213,11 @@ switch ($subaction) {
 			} elseif ($reviewnewcomment) {
 				$dr = new DocumentReview($d, $reviewid);
 				$drc = new DocumentReviewComment($dr);
-				if ($drc->create(user_getid(), $reviewid, $reviewcomment, time())) {
+				$now = time();
+				if ($drc->create(user_getid(), $reviewid, $reviewcomment, $now)) {
+					if ($reviewdone) {
+						$dr->setUserDone(user_getid(), $now);
+					}
 					$feedback = _('Review commented successfully');
 				} else {
 					$error_msg = $drc->getErrorMessage();

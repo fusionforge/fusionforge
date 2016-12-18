@@ -344,6 +344,10 @@ class DocumentReview extends FFError {
 		$cells[][] = html_e('textarea', array('id' => 'review-comment', 'name' => 'review-comment', 'style' => 'width: 100%; box-sizing: border-box;', 'rows' => 3, 'required' => 'required', 'pattern' => '.{10,}', 'placeholder' => _('Add your comment').' '.sprintf(_('(at least %s characters)'), DOCMAN__REVIEW_DESCRIPTION_MIN_SIZE), 'maxlength' => DOCMAN__REVIEW_DESCRIPTION_MAX_SIZE), '', false);
 		$return .= $HTML->multiTableRow(array(), $cells);
 		$cells = array();
+		$cells[][] = _('Review done')._(':');
+		$cells[][] = html_e('input', array('type' => 'checkbox', 'name' => 'review-done', 'value' => 1 ,'title' => _('Tick if you want to set your pending review done as reviewer.')));
+		$return .= $HTML->multiTableRow(array(), $cells);
+		$cells = array();
 		$cells[][] = _('Attachment')._(':');
 		$cells[][] = html_e('input', array('type' => 'file', 'name' => 'review-attachment')).html_e('br').'('._('max upload size')._(': ').human_readable_bytes(util_get_maxuploadfilesize()).')';
 		$return .= $HTML->multiTableRow(array(), $cells);
@@ -658,6 +662,16 @@ class DocumentReview extends FFError {
 		} else {
 			$this->setError(db_error());
 			db_rollback();
+			return false;
+		}
+	}
+
+	function setUserDone($userid, $updatedate) {
+		$res = db_query_params('UPDATE doc_review_users SET (statusid, updatedate) = ($1, $2) WHERE revid = $3 and userid = $4', array(2, $updatedate, $this->getID(), $userid));
+		if ($res) {
+			return true;
+		} else {
+			$this->setError(db_error());
 			return false;
 		}
 	}
