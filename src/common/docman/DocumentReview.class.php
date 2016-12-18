@@ -136,6 +136,10 @@ class DocumentReview extends FFError {
 			case 2:
 				$img = $HTML->getClosedTicketPic(_('Closed'), _('Closed'));
 				break;
+			case 4:
+				$img = $HTML->getTagPic(_('Validated'), _('Validated'));
+				break;
+			case 3:
 			default:
 				$img = $HTML->getErrorPic(_('On error'), _('On error'));
 				break;
@@ -249,12 +253,23 @@ class DocumentReview extends FFError {
 		if ($this->Document->getStateID() == 3) {
 			$cells = array();
 			$cells[][] = _('Validate the document?')._(':');
-			$cells[][] = html_e('input', array('type' => 'checkbox', 'name' => 'review-validatedocument', 'value' => 1));
+			$cells[][] = html_e('input', array('type' => 'checkbox', 'name' => 'review-validatedocument', 'value' => 1 ,'title' => _('Tick if you want to move from pending to active status this document.')));
+			$return .= $HTML->multiTableRow(array(), $cells);
+		}
+		$dv = documentversion_get_object($this->getVersion(), $this->Document->getID(), $this->Document->Group->getID());
+		if (!$dv->isCurrent()) {
+			$cells = array();
+			$cells[][] = _('Make this version as current')._(':');
+			$cells[][] = html_e('input', array('type' => 'checkbox', 'name' => 'review-currentversion', 'value' => 1 ,'title' => _('Tick if you want to make this document version as the current version.')));
 			$return .= $HTML->multiTableRow(array(), $cells);
 		}
 		$cells = array();
+		$cells[][] = _('Final Status')._(':');
+		$cells[][] = html_build_select_box_from_arrays(array(2,4), array(_('Closed'), _('Validated')), 'review-finalstatus', false, false, '', false, '', false, array('id' => 'review-finalstatus'));
+		$return .= $HTML->multiTableRow(array(), $cells);
+		$cells = array();
 		$cells[][] = _('Conclusion Comment')._(':');
-		$cells[][] = html_e('textarea', array('id' => 'review-completedcomment', 'name' => 'review-completedcomment', 'style' => 'width: 100%; box-sizing: border-box;', 'rows' => 3, 'required' => 'required', 'pattern' => '.{10,}', 'placeholder' => _('Description').' '.sprintf(_('(at least %s characters)'), DOCMAN__REVIEW_DESCRIPTION_MIN_SIZE), 'maxlength' => DOCMAN__REVIEW_DESCRIPTION_MAX_SIZE), '', false);
+		$cells[][] = html_e('textarea', array('id' => 'review-completedcomment', 'name' => 'review-completedcomment', 'style' => 'width: 100%; box-sizing: border-box;', 'rows' => 3, 'required' => 'required', 'pattern' => '.{10,}', 'placeholder' => _('Final comment').' '.sprintf(_('(at least %s characters)'), DOCMAN__REVIEW_DESCRIPTION_MIN_SIZE), 'maxlength' => DOCMAN__REVIEW_DESCRIPTION_MAX_SIZE), '', false);
 		$return .= $HTML->multiTableRow(array(), $cells);
 		$return .= $HTML->listTableBottom();
 		$return .= html_ac(html_ap() -1);
@@ -428,7 +443,7 @@ class DocumentReview extends FFError {
 			$body .= _('Review submitter')._(': ').$createdbyuser->getRealName().' ('.$createdbyuser->getUnixName().") \n";
 			$body .= "\n\n-------------------------------------------------------\n".
 				_('Please review, visit')._(':').
-				"\n\n" . util_make_url('/docman/?group_id='.$this->Document->Group->getID().'&view=listfile&dirid='.$this->Document->getDocGroupID().'&filedetailid='.$this->Document->getID());
+				"\n\n" . util_make_url($this->Document->getPermalink());
 
 			foreach ($users as $user) {
 				$userObject = user_get_object($user[1]);
@@ -576,16 +591,34 @@ class DocumentReview extends FFError {
 		return false;
 	}
 
-	function close($reviewversionserialid, $reviewtitle, $reviewdescription) {
+	function close($reviewversionserialid, $reviewtitle, $reviewdescription, $reviewfinalstatus, $reviewvalidatedocument, $reviewcurrentversion) {
+		db_begin();
 		$res = db_query_params('UPDATE doc_review SET (enddate, title, description, statusid) = ($1, $2, $3, $4) WHERE revid = $5',
-					array(time(), $reviewtitle, $reviewdescription, 2, $this->getID()));
+					array(time(), $reviewtitle, $reviewdescription, $reviewfinalstatus, $this->getID()));
 		if ($res) {
 			if ($reviewversionserialid != $this->getSerialID()) {
+				unset($this->version);
 				db_query_params('UPDATE doc_review_version SET serialid = $1 WHERE revid = $2', array($reviewversionserialid, $this->getID()));
 			}
+			if ($reviewvalidatedocument && !$this->Document->setState('1')) {
+				$this->setError($this->Document->getErrorMessage());
+				db_rollback();
+				return false;
+			}
+
+			if ($reviewcurrentversion) {
+				$dv = documentversion_get_object($this->getVersion(), $this->Document->getID(), $this->Document->Group->GetID());
+				if (!$dv->update($this->getVersion(), $dv->getTitle(), $dv->getDescription(), $dv->getFiletype(), $dv->getFilename(), $dv->getFilesize(), time(), 1, $dv->getComment())) {
+					$this->setError($dv->getErrorMessage());
+					db_rollback();
+					return false;
+				}
+			}
+			db_commit();
 			return true;
 		} else {
 			$this->setError(db_error());
+			db_rollback();
 			return false;
 		}
 	}

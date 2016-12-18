@@ -172,6 +172,9 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		if (($d->getUpdated() && $time_new > (time() - $d->getUpdated())) || $time_new > (time() - $d->getCreated())) {
 			$nextcell.= $HTML->getNewPic(_('Created or updated since less than 7 days'), 'new', array('class' => 'docman-newdocument')).'&nbsp;';
 		}
+		if ($d->hasValidatedReview()) {
+			$nextcell .= $HTML->getTagPic(_('Document reviewed and validated'), 'reviewed').'&nbsp;';
+		}
 		$cells[] = array($nextcell.$d->getFileName(), 'style' => 'word-wrap: break-word; max-width: 250px;');
 		$cells[] = array($d->getName(), 'style' => 'word-wrap: break-word; max-width: 250px;');
 		$cells[] = array($d->getDescription(), 'style' => 'word-wrap: break-word; max-width: 250px;');

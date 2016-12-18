@@ -196,6 +196,9 @@ switch ($subaction) {
 		$reviewid = getIntFromRequest('review_id');
 		$reviewcompletedchecked = getIntFromRequest('review-completedchecked');
 		$reviewconclusioncomment = getStringFromRequest('review-completedcomment', '');
+		$reviewvalidatedocument = getIntFromRequest('review-validatedocument');
+		$reviewfinalstatus = getIntFromRequest('review-finalstatus');
+		$reviewcurrentversion = getIntFromRequest('review-currentversion');
 		if ($reviewversionserialid) {
 			if ($new_review) {
 				$dr = new DocumentReview($d);
@@ -210,7 +213,7 @@ switch ($subaction) {
 					if (strlen($reviewconclusioncomment) > 0) {
 						$reviewdescription = $reviewconclusioncomment;
 					}
-					if ($dr->close($reviewversionserialid, $reviewtitle, $reviewdescription)) {
+					if ($dr->close($reviewversionserialid, $reviewtitle, $reviewdescription, $reviewfinalstatus, $reviewvalidatedocument, $reviewcurrentversion)) {
 						$feedback = _('Review closed successfully');
 					} else {
 						$error_msg = $dr->getErrorMessage();

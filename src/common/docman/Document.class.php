@@ -1223,6 +1223,11 @@ class Document extends FFObject {
 	function getPermalink() {
 		return '/docman/d_follow.php/'.$this->getID();
 	}
+
+	function hasValidatedReview() {
+		$dv = documentversion_get_object($this->getVersion(), $this->getID(), $this->Group->getID());
+		return $dv->hasValidatedReview();
+	}
 }
 
 // Local Variables:

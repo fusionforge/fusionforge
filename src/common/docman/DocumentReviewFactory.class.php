@@ -87,7 +87,7 @@ class DocumentReviewFactory extends FFError {
 				$cells[][] = $dr->getStatusIcon();
 				$cells[][] = strftime(_('%Y-%m-%d'), $dr->getStartdate());
 				$overdue = '';
-				if (($dr->getStatusID() != 2) && (time() > $dr->getEnddate())) {
+				if (($dr->getStatusID() != 2 && $dr->getStatusID() != 4) && (time() > $dr->getEnddate())) {
 					$overdue = $HTML->getErrorPic(_('Review overdue'), 'overdue');
 				}
 				$cells[][] = strftime(_('%Y-%m-%d'), $dr->getEnddate()).$overdue;
@@ -97,7 +97,7 @@ class DocumentReviewFactory extends FFError {
 				$actions = '';
 				$user = session_get_user();
 				$users = $dr->getUsers(array(1, 2));
-				if ($dr->getStatusID() != 2) {
+				if ($dr->getStatusID() != 2 && $dr->getStatusID() != 4) {
 					if ($user->getID() == $dr->getCreatedBy()) {
 						$actions .= $dr->getReminderAction().$dr->getEditAction().$dr->getCompleteAction();
 					}

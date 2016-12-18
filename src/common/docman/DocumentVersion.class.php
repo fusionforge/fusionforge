@@ -403,4 +403,14 @@ class DocumentVersion extends FFError {
 		}
 		return true;
 	}
+
+	function hasValidatedReview() {
+		$res = db_query_params('SELECT statusid FROM doc_review, doc_review_version
+					WHERE statusid = $1 AND doc_review.revid = doc_review_version.revid AND doc_review_version.serialid = $2',
+					array(4, $this->getID()));
+		if ($res && (db_numrows($res) > 0)) {
+			return true;
+		}
+		return false;
+	}
 }
