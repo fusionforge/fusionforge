@@ -34,6 +34,8 @@ require_once $gfcommon.'docman/DocumentGroup.class.php';
 require_once $gfcommon.'docman/DocumentGroupFactory.class.php';
 require_once $gfcommon.'docman/DocumentReview.class.php';
 require_once $gfcommon.'docman/DocumentReviewFactory.class.php';
+require_once $gfcommon.'docman/DocumentReviewComment.class.php';
+require_once $gfcommon.'docman/DocumentReviewCommentFactory.class.php';
 require_once $gfcommon.'docman/DocumentVersion.class.php';
 require_once $gfcommon.'docman/DocumentVersionFactory.class.php';
 require_once $gfcommon.'docman/include/utils.php';

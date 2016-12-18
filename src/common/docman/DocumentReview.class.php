@@ -240,7 +240,7 @@ class DocumentReview extends FFError {
 
 	function getCommentAction() {
 		global $HTML;
-		return util_make_link('#', $HTML->getEditFilePic(_('Comment the review'), 'remindercomment'), array('id' => 'review_action_comment', 'onclick' => 'javascript:controllerListFile.toggleCommentReviewView({review: '.$this->getID().'})'), true);
+		return util_make_link('#', $HTML->getEditFilePic(_('Comment the review'), 'remindercomment'), array('id' => 'review_action_comment', 'onclick' => 'javascript:controllerListFile.toggleCommentReviewView({review: '.$this->getID().', groupId: '.$this->Document->Group->getID().', docid: '.$this->Document->getID().'})'), true);
 	}
 
 	function showCompleteFormHTML() {
@@ -323,13 +323,52 @@ class DocumentReview extends FFError {
 			$return .= html_e('input', array('type' => 'hidden', 'id' => 'new_review', 'name' => 'new_review', 'value' => 0));
 			$return .= html_e('input', array('type' => 'hidden', 'id' => 'review_id', 'name' => 'review_id', 'value' => 0));
 			$return .= html_e('input', array('type' => 'hidden', 'id' => 'review_complete', 'name' => 'review_complete', 'value' => 0));
+			$return .= html_e('input', array('type' => 'hidden', 'id' => 'review_newcomment', 'name' => 'review_newcomment', 'value' => 0));
 			$return .= html_ac(html_ap() -1);
 			$return .= html_e('div', array('id' => 'editfile-userstatusreview'), '', false);
 			$return .= html_e('div', array('id' => 'editfile-completedreview'), '', false);
+			$return .= html_e('div', array('id' => 'editfile-commentreview'), '', false);
 			$javascript = 'jQuery("#datepicker_end_review_date").datepicker({dateFormat: "'.$date_format_js.'"});';
 			$return .= html_e('script', array( 'type'=>'text/javascript', 'id' => 'editfile-datepickerreview-script'), '//<![CDATA['."\n".$javascript."\n".'//]]>');
 		} else {
 			$return = $HTML->error_msg(_('Cannot get Document Versions'));
+		}
+		return $return;
+	}
+
+	function showCommentFormHTML() {
+		global $HTML;
+		$return = $HTML->listTableTop();
+		$cells = array();
+		$cells[] = array(_('Comment').utils_requiredField()._(':'), 'style' => 'width: 30%;');
+		$cells[][] = html_e('textarea', array('id' => 'review-comment', 'name' => 'review-comment', 'style' => 'width: 100%; box-sizing: border-box;', 'rows' => 3, 'required' => 'required', 'pattern' => '.{10,}', 'placeholder' => _('Add your comment').' '.sprintf(_('(at least %s characters)'), DOCMAN__REVIEW_DESCRIPTION_MIN_SIZE), 'maxlength' => DOCMAN__REVIEW_DESCRIPTION_MAX_SIZE), '', false);
+		$return .= $HTML->multiTableRow(array(), $cells);
+		$cells = array();
+		$cells[][] = _('Attachment')._(':');
+		$cells[][] = html_e('input', array('type' => 'file', 'name' => 'review-attachment')).html_e('br').'('._('max upload size')._(': ').human_readable_bytes(util_get_maxuploadfilesize()).')';
+		$return .= $HTML->multiTableRow(array(), $cells);
+		$return .= $HTML->listTableBottom();
+		return $return;
+	}
+
+	function showCommentsHTML() {
+		global $HTML;
+		$return = '';
+		$drcf = new DocumentReviewCommentFactory($this);
+		if ($drcf->getNbComments()) {
+			$return .= $HTML->listTableTop(array(_('Date'), _('Author'), _('Comment'), _('Attachment')));
+			$comments = $drcf->getComments();
+			foreach ($comments as $comment) {
+				$cells = array();
+				$cells[][] = strftime(_('%Y-%m-%d'),$comment->getCreateDate());
+				$cells[][] = $comment->getPosterRealName();
+				$cells[][] = $comment->getReviewComment();
+				$cells[][] = $comment->getAttachment();
+				$return .= $HTML->multiTableRow(array(), $cells);
+			}
+			$return .= $HTML->listTableTop();
+		} else {
+			$return .= $HTML->information(_('No comment posted.'));
 		}
 		return $return;
 	}

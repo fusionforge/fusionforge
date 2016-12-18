@@ -187,6 +187,7 @@ DocManListFileController.prototype =
 			jQuery('#editfile-userstatusreview').remove();
 			jQuery('#editfile-completedreview').remove();
 			jQuery('#editfile-datepickerreview-script').remove();
+			jQuery('#editfile-commentreview').remove();
 		}, this));
 	},
 
@@ -398,6 +399,7 @@ DocManListFileController.prototype =
 		jQuery('#doc_group').empty();
 		jQuery('#editfile-userstatusreview').empty();
 		jQuery('#editfile-completedreview').empty();
+		jQuery('#editfile-commentreview').empty();
                 for (var i = 0; i < this.docparams.docgroupDict.length; i++) {
                         jQuery('#doc_group').append(jQuery('<option>').text(this.docparams.docgroupDict[i][1]).attr('value', this.docparams.docgroupDict[i][0]));
                 };
@@ -526,6 +528,7 @@ DocManListFileController.prototype =
 	},
 
 	toggleAddReviewView: function() {
+		jQuery('#review_newcomment').val(0);
 		jQuery('#review-title').val('');
 		jQuery('#review-description').val('');
 		jQuery('#datepicker_end_review_date').val('');
@@ -537,6 +540,7 @@ DocManListFileController.prototype =
 		jQuery('#review-select-optional-users').gentleSelect({columns: 3, itemWidth: 150});
 		jQuery('#editfile-userstatusreview').empty();
 		jQuery('#editfile-completedreview').empty();
+		jQuery('#editfile-commentreview').empty();
 		if (jQuery('#editfile-createreview').is(':visible')) {
 			jQuery('#editfile-createreview').hide();
 			jQuery('#new_review').val(0);
@@ -548,6 +552,8 @@ DocManListFileController.prototype =
 
 	toggleEditReviewView: function(params) {
 		this.review = params;
+		jQuery('#editfile-commentreview').empty();
+		jQuery('#review_newcomment').val(0);
 		if (jQuery('#editfile-createreview').is(':visible')) {
 			jQuery('#editfile-createreview').hide();
 			jQuery('#new_review').val(0);
@@ -589,6 +595,24 @@ DocManListFileController.prototype =
 			jQuery('#new_review').val(0);
 			jQuery('#editfile-createreview').show();
 		}
+	},
+
+	toggleCommentReviewView: function(params) {
+		this.comment = params;
+		jQuery('#editfile-createreview').hide();
+		jQuery('#new_review').val(0);
+		jQuery('#review_id').val(0);
+		jQuery('#review_complete').val(0);
+		jQuery('#review_newcomment').val(1);
+		jQuery('#review_id').val(this.comment.review);
+		jQuery('#editfile-userstatusreview').empty();
+		jQuery('#editfile-completedreview').empty();
+		jQuery.getJSON(this.listfileparams.docManURL + '/?group_id=' + this.comment.groupId + '&action=getdocreviewcomments&docid='+this.comment.docid+'&revid='+this.comment.review , jQuery.proxy(function(data){
+			jQuery('#editfile-commentreview').empty();
+			if (typeof data.html != 'undefined') {
+				jQuery('#editfile-commentreview').prepend(data.html);
+			}
+		}, this.comment));
 	},
 
 	toggleEditVersionView: function(params) {

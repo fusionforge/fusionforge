@@ -199,6 +199,8 @@ switch ($subaction) {
 		$reviewvalidatedocument = getIntFromRequest('review-validatedocument');
 		$reviewfinalstatus = getIntFromRequest('review-finalstatus');
 		$reviewcurrentversion = getIntFromRequest('review-currentversion');
+		$reviewnewcomment = getIntFromRequest('review_newcomment');
+		$reviewcomment = getStringFromRequest('review-comment');
 		if ($reviewversionserialid) {
 			if ($new_review) {
 				$dr = new DocumentReview($d);
@@ -206,6 +208,14 @@ switch ($subaction) {
 					$feedback = _('Review created');
 				} else {
 					$error_msg = $dr->getErrorMessage();
+				}
+			} elseif ($reviewnewcomment) {
+				$dr = new DocumentReview($d, $reviewid);
+				$drc = new DocumentReviewComment($dr);
+				if ($drc->create(user_getid(), $reviewid, $reviewcomment, time())) {
+					$feedback = _('Review commented successfully');
+				} else {
+					$error_msg = $drc->getErrorMessage();
 				}
 			} else {
 				$dr = new DocumentReview($d, $reviewid);
@@ -227,7 +237,7 @@ switch ($subaction) {
 				}
 			}
 		} else {
-			$warning_msg = _('Missing version to create review');
+			$warning_msg = _('Missing flag action');
 		}
 		break;
 }

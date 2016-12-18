@@ -52,6 +52,13 @@ class DocumentReviewCommentFactory extends FFError {
 	}
 
 	function getComments() {
-		return array();
+		$commentsArr = array();
+		$res = db_query_params('SELECT commentid FROM doc_review_comments WHERE revid = $1 ORDER BY createdate DESC', array($this->DocumentReview->getID()));
+		if ($res && (db_numrows($res) > 0)) {
+			while ($arr = db_fetch_array($res)) {
+				$commentsArr[] = new DocumentReviewComment($this->DocumentReview, $arr['commentid']);
+			}
+		}
+		return $commentsArr;
 	}
 }
