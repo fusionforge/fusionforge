@@ -340,27 +340,17 @@ if (db_numrows($res)>0) {
 	echo '<input type="hidden" name="power_query" value="1" />';
 	echo $HTML->listTableTop().
 		'<tr><td>';
-	echo '<select name="query_id" id="query_id">';
-	echo '<option value="100">' . _('Select One') . '</option>';
-	$current = '';
 	$selected = $af->getDefaultQuery();
+	$value_arr = array();
+	$text_arr = array();
+	$opt_group_arr = array();
 	while ($row = db_fetch_array($res)) {
-		if ($current != $row['type']) {
-			if ($current !== '')
-				echo '</optgroup>';
-			$label = $row['type'] ? _('Project') : _('Private');
-			echo '<optgroup label="'.$label.'">';
-			$current = $row['type'];
-		}
-		echo '<option value="'.$row['artifact_query_id'].'"';
-		if ($row['artifact_query_id'] == $selected)
-			echo ' selected="selected"';
-		echo '>'. $row['query_name'] .'</option>'."\n";
+		$value_arr[] = $row['artifact_query_id'];
+		$text_arr[] = $row['query_name'];
+		$opt_group_arr[] = ($row['type'] ? _('Project') : _('Private'));
 	}
-	if ($current !== '')
-		echo '</optgroup>';
-	echo '</select>
-	<noscript><input type="submit" name="run" value="'._('Power Query').'" /></noscript>
+	echo html_build_select_box_from_arrays($value_arr, $text_arr, 'query_id', $af->getDefaultQuery(), true, _('Select One'), false, '', false, array('id' => 'query_id'), array(), array(), $opt_group_arr);
+	echo '<noscript><input type="submit" name="run" value="'._('Power Query').'" /></noscript>
 	&nbsp;&nbsp;'.util_make_link('/tracker/?atid='. $ath->getID().'&group_id='.$group_id.'&func=query', _('Build Query')).'
 	</td></tr>'.$HTML->listTableBottom();
 	echo $HTML->closeForm();
