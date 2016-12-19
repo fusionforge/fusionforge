@@ -119,7 +119,7 @@ class DocumentReviewComment extends FFError {
 		$res = db_query_params('SELECT * FROM doc_review_attachments WHERE commentid = $1', array($this->getID()));
 		if ($res && (db_numrows($res) > 0)) {
 			$attachArr = db_fetch_array($res);
-			return util_make_link('/docman/view.php/', $attachArr['filename']);
+			return util_make_link('/docman/view.php/'.$this->DocumentReview->Document->Group->getID().'/review/'.$attachArr['attachid'], $attachArr['filename']);
 		} else {
 			return '';
 		}
