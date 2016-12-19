@@ -42,7 +42,7 @@ if ($docid && $revid) {
 	if ($documentObject && !$documentObject->isError()) {
 		$dr = new DocumentReview($documentObject, $revid);
 		if ($dr && !$dr->isError()) {
-			$result['html'] .= $dr->showCompleteFormHTML();
+			$result['html'] = $dr->showCompleteFormHTML();
 		} else {
 			$result['html'] = $HTML->warning_msg(_('Cannot retrieve review')._(': ').$revid);
 		}

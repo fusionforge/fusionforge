@@ -24,9 +24,11 @@
 require_once $gfcommon.'include/FFError.class.php';
 require_once $gfcommon.'docman/DocumentStorage.class.php';
 
+$DOCUMENTVERSION_OBJ = array();
+
 function &documentversion_get_object($ver_id, $docid, $group_id, $res = false) {
 	global $DOCUMENTVERSION_OBJ;
-	if (!isset($DOCUMENTVERSION_OBJ['_'.$ver_id.'_'])) {
+	if (!isset($DOCUMENTVERSION_OBJ['_'.$ver_id.'-'.$docid.'_'])) {
 		if ($res) {
 			//the db result handle was passed in
 		} else {
@@ -35,12 +37,12 @@ function &documentversion_get_object($ver_id, $docid, $group_id, $res = false) {
 						array($ver_id, $docid));
 		}
 		if (!$res || db_numrows($res) < 1) {
-			$DOCUMENTVERSION_OBJ['_'.$ver_id.'_'] = false;
+			$DOCUMENTVERSION_OBJ['_'.$ver_id.'-'.$docid.'_'] = false;
 		} else {
-			$DOCUMENTVERSION_OBJ['_'.$ver_id.'_'] = new DocumentVersion(document_get_object($docid, $group_id), $ver_id, db_fetch_array($res));
+			$DOCUMENTVERSION_OBJ['_'.$ver_id.'-'.$docid.'_'] = new DocumentVersion(document_get_object($docid, $group_id), $ver_id, db_fetch_array($res));
 		}
 	}
-	return $DOCUMENTVERSION_OBJ['_'.$ver_id.'_'];
+	return $DOCUMENTVERSION_OBJ['_'.$ver_id.'-'.$docid.'_'];
 }
 
 function &documentversion_get_object_by_serialid($serial_id, $docid, $group_id, $res = false) {

@@ -44,7 +44,7 @@ if ($docid) {
 		$dr = new DocumentReview($documentObject);
 		if ($drf && $dvf && $dr && !$drf->isError() && !$dvf->isError() && !$dr->isError()) {
 			$serialIDs = $dvf->getSerialIDs();
-			$result['html'] .= $drf->getReviewsHTML($serialIDs);
+			$result['html'] = $drf->getReviewsHTML($serialIDs);
 			$result['html'] .= $dr->showCreateFormHTML();
 			$result['htmltab'] = _('Reviews').' ('.$drf->getReviewsCounter().')';
 		} else {
