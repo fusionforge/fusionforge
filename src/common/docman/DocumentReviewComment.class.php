@@ -21,6 +21,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+require_once $gfcommon.'/docman/DocumentReviewStorage.class.php';
+
 class DocumentReviewComment extends FFError {
 	/**
 	 * The DocumentReview object.
@@ -57,7 +59,13 @@ class DocumentReviewComment extends FFError {
 		$res = db_query_params('SELECT * FROM doc_review_comments WHERE commentid = $1', array($commentid));
 		if ($res) {
 			$this->data_array = db_fetch_array($res);
+			return true;
 		}
+		return false;
+	}
+
+	function getID() {
+		return $this->data_array['commentid'];
 	}
 
 	function getCreateDate() {
@@ -84,15 +92,20 @@ class DocumentReviewComment extends FFError {
 		return $result;
 	}
 
-	function getAttachment() {
-		return '';
-	}
-
-	function create($userid, $reviewid, $rcomment, $createdate) {
+	function attachFile($filename, $filetype, $createdate, $data) {
 		db_begin();
-		$res = db_query_params('INSERT INTO doc_review_comments (revid, userid, rcomment, createdate) VALUES ($1, $2, $3, $4)',
-					array($reviewid, $userid, $rcomment, $createdate));
-		if ($res) {
+		$filesize = filesize($data);
+		$res = db_query_params('INSERT INTO doc_review_attachments (createdate, commentid, filename, filetype, filesize) VALUES ($1, $2, $3, $4, $5)',
+					array($createdate, $this->getID(), $filename, $filetype, $filesize));
+		$attachid = db_insertid($res, 'doc_review_attachments', 'attachid');
+		if ($attachid) {
+			if (!DocumentReviewStorage::instance()->store($attachid, $data)) {
+				DocumentReviewStorage::instance()->rollback();
+				db_rollback();
+				$this->setError(DocumentReviewStorage::instance()->getErrorMessage());
+				return false;
+			}
+			DocumentReviewStorage::instance()->commit();
 			db_commit();
 			return true;
 		} else {
@@ -100,5 +113,31 @@ class DocumentReviewComment extends FFError {
 			$this->setError(db_error());
 			return false;
 		}
+	}
+
+	function getAttachment() {
+		$res = db_query_params('SELECT * FROM doc_review_attachments WHERE commentid = $1', array($this->getID()));
+		if ($res && (db_numrows($res) > 0)) {
+			$attachArr = db_fetch_array($res);
+			return util_make_link('/docman/view.php/', $attachArr['filename']);
+		} else {
+			return '';
+		}
+	}
+
+	function create($userid, $reviewid, $rcomment, $createdate) {
+		db_begin();
+		$res = db_query_params('INSERT INTO doc_review_comments (revid, userid, rcomment, createdate) VALUES ($1, $2, $3, $4)',
+					array($reviewid, $userid, $rcomment, $createdate));
+		if ($res) {
+			$commentid = db_insertid($res, 'doc_review_comments', 'commentid');
+			if ($this->fetchData($commentid)) {
+				db_commit();
+				return true;
+			}
+		}
+		db_rollback();
+		$this->setError(db_error());
+		return false;
 	}
 }

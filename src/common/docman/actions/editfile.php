@@ -217,12 +217,30 @@ switch ($subaction) {
 					$error_msg = $dr->getErrorMessage();
 				}
 			} elseif ($reviewnewcomment) {
+				$reviewattachment = getUploadedFile('review-attachment');
+				if (!empty($reviewattachment) && $reviewattachment['name']) {
+					if (!is_uploaded_file($reviewattachment['tmp_name'])) {
+						$error_msg = sprintf(_('Invalid file attack attempt %s.'), $reviewattachment['name']);
+						session_redirect($urlparam);
+					}
+					$data = $reviewattachment['tmp_name'];
+					$filename = $reviewattachment['name'];
+					if (function_exists('finfo_open')) {
+						$finfo = finfo_open(FILEINFO_MIME_TYPE);
+						$filetype = finfo_file($finfo, $reviewattachment['tmp_name']);
+					} else {
+						$filetype = $reviewattachment['type'];
+					}
+				}
 				$dr = new DocumentReview($d, $reviewid);
 				$drc = new DocumentReviewComment($dr);
 				$now = time();
 				if ($drc->create(user_getid(), $reviewid, $reviewcomment, $now)) {
 					if ($reviewdone) {
 						$dr->setUserDone(user_getid(), $now);
+					}
+					if (isset($filename)) {
+						$drc->attachFile($filename, $filetype, $now, $data);
 					}
 					$feedback = _('Review commented successfully');
 				} else {

@@ -95,6 +95,7 @@ case "$1" in
 	# Setup Docman/FRS/Forum/Tracker/RSS attachments
 	# (not done in 'make install' because e.g. dpkg ignores existing dirs, cf. DP10.9[1])
 	chown $apache_user: $data_path/docman/
+	chown $apache_user: $data_path/docman/review/
 	chown $apache_user: $data_path/download/
 	chown $apache_user: $data_path/forum/
 	chown $apache_user: $data_path/forum/pending/
