@@ -98,8 +98,8 @@ install-web: install-base-dirs
 	$(CP_R) vendor www $(DESTDIR)$(pkgdatadir)/
 	$(CP_R) --no-clobber etc/httpd.conf* $(DESTDIR)$(config_path)
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/docman/
+	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/docman/review/
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/download/
-	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/download/review/
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/forum/
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/forum/pending/
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/tracker/
