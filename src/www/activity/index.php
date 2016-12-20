@@ -313,12 +313,12 @@ echo $HTML->closeForm();
 				}
 				case 'trackeropen': {
 					$icon = html_image('ic/tracker20g.png','','',array('alt'=>_('Trackers')));
-					$url = util_make_link('/tracker/?func=detail&atid='.$arr['ref_id'].'&aid='.$arr['subref_id'].'&group_id='.$arr['group_id'],_('Tracker Item').' [#'.$arr['subref_id'].'] '.$arr['description'].' '._('Opened'));
+					$url = util_make_link('/tracker/a_follow.php/'.$arr['subref_id'],_('Tracker Item').' [#'.$arr['subref_id'].'] '.$arr['description'].' '._('Opened'));
 					break;
 				}
 				case 'trackerclose': {
 					$icon = html_image('ic/tracker20g.png','','',array('alt'=>_('Trackers')));
-					$url = util_make_link('/tracker/?func=detail&atid='.$arr['ref_id'].'&aid='.$arr['subref_id'].'&group_id='.$arr['group_id'],_('Tracker Item').' [#'.$arr['subref_id'].'] '.$arr['description'].' '._('Closed'));
+					$url = util_make_link('/tracker/a_follow.php/'.$arr['subref_id'],_('Tracker Item').' [#'.$arr['subref_id'].'] '.$arr['description'].' '._('Closed'));
 					break;
 				}
 				case 'frsrelease': {
@@ -338,18 +338,18 @@ echo $HTML->closeForm();
 				}
 				case 'taskopen': {
 					$icon = html_image('ic/taskman20w.png','','',array('alt'=>_('Tasks')));
-					$url = util_make_link('/pm/task.php?func=detailtask&project_task_id='.$arr['subref_id'].'&group_id='.$arr['group_id'].'&group_project_id='.$arr['ref_id'],_('Tasks').' '.$arr['description']);
+					$url = util_make_link('/pm/t_follow.php/'.$arr['subref_id'],_('Tasks').' '.$arr['description']);
 					break;
 				}
 				case 'taskclose': {
 					$icon = html_image('ic/taskman20w.png','','',array('alt'=>_('Tasks')));
-					$url = util_make_link('/pm/task.php?func=detailtask&project_task_id='.$arr['subref_id'].'&group_id='.$arr['group_id'].'&group_project_id='.$arr['ref_id'],_('Tasks').' '.$arr['description']);
+					$url = util_make_link('/pm/t_follow.php/'.$arr['subref_id'],_('Tasks').' '.$arr['description']);
 					break;
 				}
 
 				case 'taskdelete': {
 					$icon = html_image('ic/taskman20w.png','','',array('alt'=>_('Tasks')));
-					$url = util_make_link('/pm/task.php?func=detailtask&project_task_id='.$arr['subref_id'].'&group_id='.$arr['group_id'].'&group_project_id='.$arr['ref_id'],_('Tasks').' '.$arr['description']);
+					$url = util_make_link('/pm/t_follow.php/'.$arr['subref_id'],_('Tasks').' '.$arr['description']);
 					break;
 				}
 				case 'docmannew':
@@ -381,7 +381,7 @@ echo $HTML->closeForm();
 					} else {
 						$view = 'listfile';
 					}
-					$url = util_make_link('docman/?group_id='.$arr['group_id'].'&view='.$view.'&dirid='.$arr['subref_id'],_('Directory').' '.$arr['description']);
+					$url = util_make_link('/docman/?group_id='.$arr['group_id'].'&view='.$view.'&dirid='.$arr['subref_id'],_('Directory').' '.$arr['description']);
 					break;
 				}
 				default: {
