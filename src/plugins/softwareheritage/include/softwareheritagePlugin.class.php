@@ -148,6 +148,16 @@ function &softwareheritage_repositoryInfo($session_ser, $repository_id) {
 function &softwareheritage_repositoryActivity($session_ser, $t0, $t1) {
 	continue_session($session_ser);
 
+	if ($t1 < $t0) {
+		$t2 = $t1;
+		$t1 = $t0;
+		$t0 = $t2;
+	}
+	$maxspan = 86400*31;
+	if ($t1 - $t0 > $maxspan) {
+		$t0 = $t1 - $maxspan;
+	}
+
 	$params = array('t0' => $t0,
 					't1' => $t1);
 	$results = array();
