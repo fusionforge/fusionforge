@@ -58,7 +58,6 @@ some control over it to the project's administrator.");
 		$this->_addHook('scm_gather_stats');
 		$this->_addHook('get_scm_repo_list');
 		$this->_addHook('get_scm_repo_info');
-		$this->_addHook('get_scm_repo_activity');
 		$this->_addHook('parse_scm_repo_activities');
 		$this->_addHook('activity');
 

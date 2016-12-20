@@ -158,12 +158,15 @@ function &softwareheritage_repositoryActivity($session_ser, $t0, $t1) {
 		$t0 = $t1 - $maxspan;
 	}
 
-	$params = array('t0' => $t0,
-					't1' => $t1);
 	$results = array();
-	$params['results'] = &$results;
-	plugin_hook('get_scm_repo_activity',$params);
-
+	$res = db_query_params("SELECT tstamp, repository_id, group_id FROM scm_activities WHERE tstamp BETWEEN $1 AND $2 ORDER BY tstamp, group_id, repository_id",
+						   array($t0,
+								 $t1));
+	while ($arr = db_fetch_array($res)) {
+		$results[] = array('timestamp' => $arr['tstamp'],
+						   'repository_id' => $arr['repository_id'],
+						   'group_id' => $arr['group_id']);
+	}
 	$res2 = array();
 	foreach ($results as $res) {
 		if (forge_check_perm('scm',$res['group_id'],'read')) {
