@@ -61,7 +61,10 @@ class SoftwareHeritage extends FForge_SeleniumTestCase
 		// Run the cronjob to create repositories
 		$this->waitSystasks();
 
-		// Get the address of the repo
+		sleep(1);
+		$t0 = time();
+
+		// Get the address of the Git repo
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
@@ -112,10 +115,34 @@ class SoftwareHeritage extends FForge_SeleniumTestCase
 		$this->assertEquals(0, $ret);
 		$this->runCommandTimeout("$t/".FORGE_ADMIN_USERNAME, "git push --quiet --all", "GIT_SSL_NO_VERIFY=true");
 
+
+		// Get the address of the SVN repo
+		$this->open(ROOT);
+		$this->clickAndWait("link=ProjectB");
+		$this->clickAndWait("link=SCM");
+		$p = $this->getText("//tt[contains(.,'svn checkout --username ".FORGE_ADMIN_USERNAME." http')]");
+		$p = preg_replace(",^svn checkout --username ".FORGE_ADMIN_USERNAME." ,", "", $p);
+
+		// Create a local clone, add stuff, push it to the repo
+		$t = exec("mktemp -d /tmp/svnTest.XXXXXX");
+		$auth = "--username ".FORGE_ADMIN_USERNAME." --password ".FORGE_ADMIN_PASSWORD;
+		$globalopts = "--trust-server-cert --non-interactive";
+		$this->runCommandTimeout($t, "svn checkout $globalopts $auth $p projectb");
+		sleep(2);
+		$this->runCommand("echo 'this is a simple text' > $t/projectb/mytext.txt");
+		$this->runCommandTimeout("$t/projectb", "svn add mytext.txt");
+		$this->runCommandTimeout("$t/projectb", "svn commit $globalopts $auth -m'Adding file'");
+		sleep(2);
+		$this->runCommand("echo 'another simple text' >> $t/projectb/mytext.txt");
+		$this->runCommandTimeout("$t/projectb", "svn commit $globalopts $auth -m'Modifying file'");
+		sleep(2);
+
+
+		// Collect activities
 		$this->cron("scm/parse_scm_repo_activities.php");
 
-		// Check SOAP
 
+		// Check SOAP
 		$soapclient = new SoapClient(WSDL_URL,
 		array('cache_wsdl' => WSDL_CACHE_NONE,
 		'trace' => true));
@@ -164,10 +191,11 @@ class SoftwareHeritage extends FForge_SeleniumTestCase
 		$response = $soapclient->softwareheritage_repositoryInfo($session,'projectb/svn/projectb');
 		$this->assertNotEquals(NULL,$response);
 		$this->assertEquals(4,count($response->repository_urls));
-		
-		$response = $soapclient->softwareheritage_repositoryActivity($session,time()-120,time());
+
+		// Get activities for repositories		
+		$response = $soapclient->softwareheritage_repositoryActivity($session,$t0,time());
 		$this->assertNotEquals(NULL,$response);
-		$this->assertEquals(3,count($response));
+		$this->assertEquals(5,count($response));
 		sleep(15);
 		$response = $soapclient->softwareheritage_repositoryActivity($session,time()-10,time());
 		$this->assertNotEquals(NULL,$response);

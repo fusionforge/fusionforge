@@ -58,6 +58,8 @@ some control over it to the project's administrator.");
 		$this->_addHook('scm_gather_stats');
 		$this->_addHook('get_scm_repo_list');
 		$this->_addHook('get_scm_repo_info');
+		$this->_addHook('get_scm_repo_activity');
+		$this->_addHook('parse_scm_repo_activities');
 		$this->_addHook('activity');
 
 		$this->provides['svn'] = true;
@@ -801,6 +803,55 @@ some control over it to the project's administrator.");
 			if ($r['repository_id'] == $rid) {
 				$params['results'] = $r;
 				return;
+			}
+		}
+	}
+
+    function parse_scm_repo_activities(&$params) {
+		$repos = array();
+		$res = db_query_params("SELECT unix_group_name, groups.group_id FROM groups
+			JOIN group_plugin ON (groups.group_id=group_plugin.group_id)
+			WHERE groups.status=$1 AND group_plugin.plugin_id=$2
+			ORDER BY unix_group_name", array('A', $this->getID()));
+		while ($arr = db_fetch_array($res)) {
+			$el = array();
+			$el['rpath'] = $this->svn_root_fs.'/'.$arr['unix_group_name'];
+			$el['rid'] = $arr['unix_group_name'].'/svn/'.$arr['unix_group_name'];
+			$el['gid'] = $arr['group_id'];
+			$repos[] = $el;
+		}
+
+		$lastactivities = array();
+		$res = db_query_params("SELECT repository_id, max(tstamp) AS last FROM scm_activities WHERE plugin_id=$1 GROUP BY repository_id",
+							   array($this->getID()));
+		while ($arr = db_fetch_array($res)) {
+			$lastactivities[$arr['repository_id']] = $arr['last'];
+		}
+		
+		foreach ($repos as $rdata) {
+			$since = "";
+			if (array_key_exists($rdata['rid'], $lastactivities)) {
+				$since = '-r {$(date -d @'.$lastactivities[$rdata['rid']].' -Iseconds)}:HEAD';
+			}
+			$rpath = $rdata['rpath'];
+			$tstamps = array();
+			$f = popen("svn log -q 'file:///$rpath' $since 2> /dev/null", "r");
+			while (($l = fgets($f, 4096)) !== false) {
+				if (preg_match("/.*?\|.*\|(?P<tstamp>[-0-9 :+]+)/", $l, $matches)) {
+					$t = strtotime($matches['tstamp']);
+					if (array_key_exists($rdata['rid'], $lastactivities)
+						&& $t <= $lastactivities[$rdata['rid']]) {
+						continue;
+					}
+					$tstamps[$t] = 1;
+				}
+			}
+			foreach ($tstamps as $t => $v) {
+				$res = db_query_params("INSERT INTO scm_activities (group_id, plugin_id, repository_id, tstamp) VALUES ($1,$2,$3,$4)",
+									   array($rdata['gid'],
+											 $this->getID(),
+											 $rdata['rid'],
+											 $t));
 			}
 		}
 	}
