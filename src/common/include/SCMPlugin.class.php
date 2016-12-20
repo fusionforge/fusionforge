@@ -330,6 +330,18 @@ abstract class SCMPlugin extends Plugin {
 		return true;
 	}
 
+    function get_scm_repo_activity(&$params) {
+		$res = db_query_params("SELECT tstamp, repository_id, group_id FROM scm_activities WHERE plugin_id=$1 AND tstamp BETWEEN $2 AND $3 ORDER BY group_id, repository_id, tstamp",
+							   array($this->getID(),
+									 $params['t0'],
+									 $params['t1']));
+		while ($arr = db_fetch_array($res)) {
+			$params['results'][] = array('timestamp' => $arr['tstamp'],
+										 'repository_id' => $arr['repository_id'],
+										 'group_id' => $arr['group_id']);
+		}
+	}
+
 	function checkParams ($params) {
 		$group_id = $params['group_id'] ;
 		$project = group_get_object($group_id);

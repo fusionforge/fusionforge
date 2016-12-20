@@ -61,6 +61,58 @@ class SoftwareHeritage extends FForge_SeleniumTestCase
 		// Run the cronjob to create repositories
 		$this->waitSystasks();
 
+		// Get the address of the repo
+		$this->open(ROOT);
+		$this->clickAndWait("link=ProjectA");
+		$this->clickAndWait("link=SCM");
+		$p = $this->getText("//tt[contains(.,'git clone http') and contains(.,'".FORGE_ADMIN_USERNAME."@') and contains(.,'projecta.git')]");
+		$p = preg_replace(",^git clone ,", "", $p);
+		$p = preg_replace(",@,", ":".FORGE_ADMIN_PASSWORD."@", $p);
+
+		// Create a local clone, add stuff, push it to the repo
+		$t = exec("mktemp -d /tmp/gitTest.XXXXXX");
+		$this->runCommandTimeout($t, "git clone --quiet $p", "GIT_SSL_NO_VERIFY=true");
+
+		system("echo 'this is a simple text' > $t/projecta/mytext.txt");
+		system("cd $t/projecta && git add mytext.txt && git commit --quiet -a -m'Adding file'", $ret);
+		system("echo 'another simple text' >> $t/projecta/mytext.txt");
+		system("cd $t/projecta && git commit --quiet -a -m'Modifying file'", $ret);
+		$this->assertEquals(0, $ret);
+		$this->runCommandTimeout("$t/projecta", "git push --quiet --all", "GIT_SSL_NO_VERIFY=true");
+
+		// Push a second batch of changes after a while
+		sleep(2);
+		system("echo 'yet another simple text' >> $t/projecta/mytext.txt");
+		system("cd $t/projecta && git commit --quiet -a -m'Modifying file again'", $ret);
+		$this->assertEquals(0, $ret);
+		$this->runCommandTimeout("$t/projecta", "git push --quiet --all", "GIT_SSL_NO_VERIFY=true");
+		system("cd $t/projecta && git commit --quiet -a -m'Modifying file again'", $ret);
+
+		// Push a third batch of changes, on a branch
+		system("cd $t/projecta && git checkout -b testbranch", $ret);
+		system("echo 'text on a branch' >> $t/projecta/mytext.txt");
+		system("cd $t/projecta && git commit --quiet -a -m'Modifying file on the branch'", $ret);
+		$this->assertEquals(0, $ret);
+		$this->runCommandTimeout("$t/projecta", "git push --quiet --all", "GIT_SSL_NO_VERIFY=true");
+
+		// Get the address of the personal repo
+		$this->open(ROOT);
+		$this->clickAndWait("link=ProjectA");
+		$this->clickAndWait("link=SCM");
+		$p = $this->getText("//tt[contains(.,'git clone http') and contains(.,'".FORGE_ADMIN_USERNAME."@') and contains(.,'".FORGE_ADMIN_USERNAME.".git')]");
+		$p = preg_replace(",^git clone ,", "", $p);
+		$p = preg_replace(",@,", ":".FORGE_ADMIN_PASSWORD."@", $p);
+
+		// Create a local clone, add stuff, push it to the repo
+		$t = exec("mktemp -d /tmp/gitTest.XXXXXX");
+		$this->runCommandTimeout($t, "git clone --quiet $p", "GIT_SSL_NO_VERIFY=true");
+
+		system("echo 'text in personal repo' > $t/".FORGE_ADMIN_USERNAME."/mytext.txt");
+		system("cd $t/".FORGE_ADMIN_USERNAME." && git add mytext.txt && git commit --quiet -a -m'Adding file'", $ret);
+		$this->assertEquals(0, $ret);
+		$this->runCommandTimeout("$t/".FORGE_ADMIN_USERNAME, "git push --quiet --all", "GIT_SSL_NO_VERIFY=true");
+
+		$this->cron("scm/parse_scm_repo_activities.php");
 
 		// Check SOAP
 
@@ -113,5 +165,12 @@ class SoftwareHeritage extends FForge_SeleniumTestCase
 		$this->assertNotEquals(NULL,$response);
 		$this->assertEquals(4,count($response->repository_urls));
 		
+		$response = $soapclient->softwareheritage_repositoryActivity($session,time()-120,time());
+		$this->assertNotEquals(NULL,$response);
+		$this->assertEquals(3,count($response));
+		sleep(15);
+		$response = $soapclient->softwareheritage_repositoryActivity($session,time()-10,time());
+		$this->assertNotEquals(NULL,$response);
+		$this->assertEquals(0,count($response));
 	}
 }

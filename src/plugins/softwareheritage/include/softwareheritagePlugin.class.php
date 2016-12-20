@@ -71,6 +71,40 @@ class softwareheritagePlugin extends Plugin {
 			array('return'=>'tns:SoftwareheritageRepositoryInfo'),
 			$uri,
                        $uri.'#softwareheritage_repositoryInfo','rpc','encoded');
+
+		$server->wsdl->addComplexType(
+			'SoftwareheritageActivity',
+			'complexType',
+			'struct',
+			'sequence',
+			'',
+			array(
+				'group_id' => array('name'=>'group_id', 'type' => 'xsd:int'),
+				'repository_id' => array('name'=>'repository_id', 'type' => 'xsd:string'),
+				'timestamp' => array('name'=>'timestamp', 'type' => 'xsd:int'),
+				)
+			);
+
+		$server->wsdl->addComplexType(
+			'ArrayOfSoftwareheritageActivity',
+			'complexType',
+			'array',
+			'',
+			'SOAP-ENC:Array',
+			array(),
+			array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:SoftwareheritageActivity[]')),
+			'tns:SoftwareheritageActivity');
+               
+		$server->register(
+			'softwareheritage_repositoryActivity',
+			array('session_ser'=>'xsd:string',
+				  't0'=>'xsd:int',
+				  't1'=>'xsd:int'
+				),
+			array('return'=>'tns:ArrayOfSoftwareheritageActivity'),
+			$uri,
+                       $uri.'#softwareheritage_repositoryActivity','rpc','encoded');
+
 	}
 
 
@@ -79,6 +113,7 @@ class softwareheritagePlugin extends Plugin {
 function &softwareheritage_repositoryList($session_ser) {
 	continue_session($session_ser);
 
+	$params = array();
 	$results = array();
 	$params['results'] = &$results;
 	plugin_hook('get_scm_repo_list',$params);
@@ -96,6 +131,7 @@ function &softwareheritage_repositoryList($session_ser) {
 function &softwareheritage_repositoryInfo($session_ser, $repository_id) {
 	continue_session($session_ser);
 
+	$params = array();
 	$results = NULL;
 	$params['repository_id'] = $repository_id;
 	$params['results'] = &$results;
@@ -107,6 +143,25 @@ function &softwareheritage_repositoryInfo($session_ser, $repository_id) {
 	}
 
 	return $params['results'];
+}
+
+function &softwareheritage_repositoryActivity($session_ser, $t0, $t1) {
+	continue_session($session_ser);
+
+	$params = array('t0' => $t0,
+					't1' => $t1);
+	$results = array();
+	$params['results'] = &$results;
+	plugin_hook('get_scm_repo_activity',$params);
+
+	$res2 = array();
+	foreach ($results as $res) {
+		if (forge_check_perm('scm',$res['group_id'],'read')) {
+			$res2[] = $res;
+		}
+	}
+
+	return $res2;
 }
 
 // Local Variables:
