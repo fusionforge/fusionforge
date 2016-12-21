@@ -77,13 +77,11 @@ install_selenium() {
 	      -O /usr/share/selenium/selenium-server.jar
     
     # Add alias to /etc/hosts
-    for h in $(hostname -I) ; do
-	if ! grep -q ^$h /etc/hosts ; then
-	    echo $h $(hostname -f) $(hostname)>> /etc/hosts
-	fi
-	grep -q "^$h.*$(forge_get_config scm_host)" /etc/hosts || sed -i -e "s/^$h.*/& $(forge_get_config scm_host)/" /etc/hosts
-    done
-
+    if ! grep -q ^$(hostname -i) /etc/hosts ; then
+	echo $(hostname -i) $(hostname -f) $(hostname)>> /etc/hosts
+    fi
+    grep -q "^$(hostname -i).*$(forge_get_config scm_host)" /etc/hosts || sed -i -e "s/^$(hostname -i).*/& $(forge_get_config scm_host)/" /etc/hosts
+    
     # Fix screenshot default black background (/usr/share/{php,pear}) (fix available upstream)
     patch -N /usr/share/*/PHPUnit/Extensions/SeleniumTestCase.php <<'EOF' || true
 --- /usr/share/php/PHPUnit/Extensions/SeleniumTestCase.php-dist	2014-02-10 19:48:34.000000000 +0000
