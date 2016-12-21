@@ -61,7 +61,7 @@ class SoftwareHeritage extends FForge_SeleniumTestCase
 		// Run the cronjob to create repositories
 		$this->waitSystasks();
 
-		sleep(1);
+		sleep(2);
 		$t0 = time();
 
 		// Get the address of the Git repo
