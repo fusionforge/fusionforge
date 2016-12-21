@@ -193,11 +193,19 @@ class SoftwareHeritage extends FForge_SeleniumTestCase
 		$this->assertEquals(4,count($response->repository_urls));
 
 		// Get activities for repositories		
-		$response = $soapclient->softwareheritage_repositoryActivity($session,$t0,time());
+		$response = $soapclient->softwareheritage_repositoryActivity($session,$t0,time(),0,0);
 		$this->assertNotEquals(NULL,$response);
 		$this->assertEquals(5,count($response));
+		// Check limit/offset
+		$response = $soapclient->softwareheritage_repositoryActivity($session,$t0,time(),2,0);
+		$this->assertNotEquals(NULL,$response);
+		$this->assertEquals(2,count($response));
+		$response = $soapclient->softwareheritage_repositoryActivity($session,$t0,time(),0,2);
+		$this->assertNotEquals(NULL,$response);
+		$this->assertEquals(3,count($response));
+		// Check time range
 		sleep(15);
-		$response = $soapclient->softwareheritage_repositoryActivity($session,time()-10,time());
+		$response = $soapclient->softwareheritage_repositoryActivity($session,time()-10,time(),0,0);
 		$this->assertNotEquals(NULL,$response);
 		$this->assertEquals(0,count($response));
 	}

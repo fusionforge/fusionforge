@@ -99,7 +99,9 @@ class softwareheritagePlugin extends Plugin {
 			'softwareheritage_repositoryActivity',
 			array('session_ser'=>'xsd:string',
 				  't0'=>'xsd:int',
-				  't1'=>'xsd:int'
+				  't1'=>'xsd:int',
+				  'limit'=>'xsd:int',
+				  'offset'=>'xsd:int',
 				),
 			array('return'=>'tns:ArrayOfSoftwareheritageActivity'),
 			$uri,
@@ -145,7 +147,7 @@ function &softwareheritage_repositoryInfo($session_ser, $repository_id) {
 	return $params['results'];
 }
 
-function &softwareheritage_repositoryActivity($session_ser, $t0, $t1) {
+function &softwareheritage_repositoryActivity($session_ser, $t0, $t1, $limit=0, $offset=0) {
 	continue_session($session_ser);
 
 	if ($t1 < $t0) {
@@ -157,24 +159,35 @@ function &softwareheritage_repositoryActivity($session_ser, $t0, $t1) {
 	if ($t1 - $t0 > $maxspan) {
 		$t0 = $t1 - $maxspan;
 	}
+	$maxnum = 1000;
+	if ($limit > $maxnum || $limit <= 0) {
+		$limit = $maxnum;
+	}
 
 	$results = array();
 	$res = db_query_params("SELECT tstamp, repository_id, group_id FROM scm_activities WHERE tstamp BETWEEN $1 AND $2 ORDER BY tstamp, group_id, repository_id",
 						   array($t0,
-								 $t1));
+								 $t1,
+							   ));
+	$counter = 0;
+	$skipped = 0;
 	while ($arr = db_fetch_array($res)) {
-		$results[] = array('timestamp' => $arr['tstamp'],
-						   'repository_id' => $arr['repository_id'],
-						   'group_id' => $arr['group_id']);
-	}
-	$res2 = array();
-	foreach ($results as $res) {
-		if (forge_check_perm('scm',$res['group_id'],'read')) {
-			$res2[] = $res;
+		if ($counter >= $limit) {
+			break;
+		}
+		if (forge_check_perm('scm',$arr['group_id'],'read')) {
+			if ($skipped >= $offset) {
+				$results[] = array('timestamp' => $arr['tstamp'],
+								   'repository_id' => $arr['repository_id'],
+								   'group_id' => $arr['group_id']);
+				$counter = $counter + 1;
+			} else {
+				$skipped = $skipped + 1;
+			}
 		}
 	}
 
-	return $res2;
+	return $results;
 }
 
 // Local Variables:
