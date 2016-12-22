@@ -21,7 +21,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'/docman/DocumentReviewStorage.class.php';
+require_once $gfcommon.'docman/DocumentReviewStorage.class.php';
 
 class DocumentReviewCommentAttachment extends FFError {
 
