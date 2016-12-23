@@ -1000,10 +1000,8 @@ function html_build_checkboxes_from_arrays($vals, $texts, $check_name, $checked=
 							});
 						//]]';
 		$return .= html_e('script', array( 'type'=>'text/javascript'), $javascript);
-		$return .= html_ao('p');
-		$return .= html_e('input', array_merge( array( 'type' => 'checkbox', 'name' => 'checkall_'.$check_name, 'id' => 'checkall_'.$check_name ), $attrs_checkall));
-		$return .= html_e('label', array_merge( array( 'for' => 'checkall_'.$check_name), $title), _('Check all'), false);
-		$return .= html_ac(html_ap() - 1);
+		$return .= html_p('p', array(), html_e('input', array_merge( array( 'type' => 'checkbox', 'name' => 'checkall_'.$check_name, 'id' => 'checkall_'.$check_name ), $attrs_checkall)).
+						html_e('label', array_merge( array( 'for' => 'checkall_'.$check_name), $title), _('Check all'), false));
 	}
 
 	if (isset($attrs['required']) && $attrs['required']=='required') {
