@@ -151,9 +151,6 @@ if ($rows > 0) {
 			case ARTIFACT_EXTRAFIELDTYPE_USER:
 				echo util_make_link('/tracker/admin/?add_opt=1&boxid='.$efarr[$i]['extra_field_id'].'&group_id='.$group_id.'&atid='.$ath->getID(), '['._('Add/remove roles for user choices').']');
 				break;
-			case ARTIFACT_EXTRAFIELDTYPE_RELEASE:
-				echo util_make_link('/tracker/admin/?add_opt=1&boxid='.$efarr[$i]['extra_field_id'].'&group_id='.$group_id.'&atid='.$ath->getID(), '['._('Add/remove packages for release choices').']');
-				break;
 			case ARTIFACT_EXTRAFIELDTYPE_SELECT:
 			case ARTIFACT_EXTRAFIELDTYPE_RADIO:
 			case ARTIFACT_EXTRAFIELDTYPE_CHECKBOX:

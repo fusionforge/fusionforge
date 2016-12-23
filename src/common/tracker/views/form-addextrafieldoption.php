@@ -78,28 +78,6 @@ if (!$ac || !is_object($ac)) {
 			echo html_e('input', array('type'=>'submit', 'name'=>'post_changes', 'value'=>_('Submit')));
 			echo $HTML->closeForm();
 			break;
-		case ARTIFACT_EXTRAFIELDTYPE_RELEASE:
-			$vals = array();
-			// specific for release select box
-			echo html_e('p',array(),_('Choose packages used for the release select box'));
-			$g=$ath->getGroup();
-			$packages = get_frs_packages($g);
-			foreach ($packages as $package) {
-				$vals[$package->getID()]=$package->getName();
-			}
-			// end
-			asort($vals,SORT_FLAG_CASE);
-			$rows=count($efearr);
-			$checked_array = array();
-			for ($i=0; $i < $rows; $i++) {
-				$checked_array []= $efearr[$i]['element_name'];
-			}
-			echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&boxid='.$boxid, 'method' => 'post'));
-			echo html_e('input', array('type'=>'hidden', 'name'=>'update_checked_opt', 'value'=>'y'));
-			echo html_build_checkboxes_from_array($vals, 'element', $checked_array, true, false);
-			echo html_e('input', array('type'=>'submit', 'name'=>'post_changes', 'value'=>_('Submit')));
-			echo $HTML->closeForm();
-			break;
 		default:
 			$rows=count($efearr);
 			if ($rows > 0) {

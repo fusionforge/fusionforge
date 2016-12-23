@@ -777,7 +777,7 @@ class ArtifactTypeHtml extends ArtifactType {
 	 * @param	array		$attrs
 	 * @return	string		HTML code for the box and choices
 	 */
-	function renderReleaseField ($extra_field_id,$checked='xzxz',$show_100=false,$text_100='none',$show_any=false,$text_any='Any', $allowed=false, $attrs = array ()) {
+	function renderReleaseField($extra_field_id, $checked = 'xzxz', $show_100 = false, $text_100 = 'none', $show_any = false, $text_any = 'Any', $allowed = false, $attrs = array ()) {
 		if ($text_100 == 'none'){
 			$text_100=_('None');
 		}
@@ -792,22 +792,21 @@ class ArtifactTypeHtml extends ArtifactType {
 			$selectedPackagesId[$i]=$arr[$i]['element_name'];
 		}
 
-		$packages = get_frs_packages($this->getGroup());
+		$fpFactory = new FRSPackageFactory($this->getGroup());
+		$packages = $fpFactory->getFRSs(true);
 		uasort($packages, 'compareObjectName');
 		foreach ($packages as $package) {
-			if (in_array($package->getID(), $selectedPackagesId)) {
-				$releases = $package->getReleases();
-				uasort($releases, 'compareObjectName');
-				foreach ($releases as $release) {
-					$optGroup[] = $package->getName();
-					$releasesArray[$release->getID()] = $release->getName();
-				}
+			$releases = $package->getReleases();
+			uasort($releases, 'compareObjectName');
+			foreach ($releases as $release) {
+				$optGroup[] = $package->getName();
+				$releasesArray[$release->getID()] = $release->getName();
 			}
 		}
 
 		$keys = array_keys($releasesArray);
 		$vals = array_values($releasesArray);
-		return html_build_select_box_from_arrays ($keys,$vals,'extra_fields['.$extra_field_id.']',$checked,$show_100,$text_100,$show_any,$text_any, $allowed, $attrs, $releasesAttrs, array(), $optGroup);
+		return html_build_select_box_from_arrays($keys, $vals, 'extra_fields['.$extra_field_id.']', $checked, $show_100, $text_100, $show_any, $text_any, $allowed, $attrs, $releasesAttrs, array(), $optGroup);
 	}
 
 	/**
