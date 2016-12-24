@@ -817,7 +817,6 @@ function getArtifacts($session_ser, $group_id, $group_artifact_id, $assigned_to,
 		return new soap_fault('', 'getArtifacts', $af->getErrorMessage(), $af->getErrorMessage());
 	}
 	return util_strip_unprintable(artifacts_to_soap($artifacts));
-
 }
 
 //
@@ -861,7 +860,6 @@ function getFlattedArtifacts($session_ser, $group_id, $group_artifact_id, $assig
 		return new soap_fault('', 'getFlattedArtifacts', $af->getErrorMessage(), $af->getErrorMessage());
 	}
 	return util_strip_unprintable(flattedartifacts_to_soap($artifacts));
-
 }
 
 //
@@ -957,7 +955,7 @@ function flattedartifacts_to_soap($at_arr) {
 				if(is_array($extrafieldsdatatext) && count($extrafieldsdatatext) > 0) {
 					foreach ($extrafieldsdatatext as $extrafielddatatext) {
 						$fldarr = array();
-						$fldarr = array('extra_field_name' => $extrafielddatatext[0], 'field_value' => $extrafielddatatext[1]);
+						$fldarr = array('extra_field_name' => $extrafielddatatext['name'], 'field_value' => $extrafielddatatext['value']);
 						$flddata[]=$fldarr;
 						unset($fldarr);
 					}
