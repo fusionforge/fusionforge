@@ -1118,7 +1118,7 @@ class ArtifactTypeHtml extends ArtifactType {
 		return html_e('input', array_merge(array('type'=>'text', 'name'=>'extra_fields['.$extra_field_id.']', 'pattern'=>$datepattern.' '.$datepattern, 'maxlength'=>21, 'size'=>21, 'value'=>$dateRange),$attrs));
 	}
 
-	function technicianBox($name = 'assigned_to[]', $checked = 'xzxz', $show_100 = true, $text_100 = 'none', $extra_id = '-1', $extra_name = '', $multiple = false) {
+	function technicianBox($name = 'assigned_to[]', $checked = 'xzxz', $show_100 = true, $text_100 = 'none', $extra_id = '-1', $extra_name = '', $multiple = false, $attrs = array()) {
 		if ($text_100=='none'){
 			$text_100=_('Nobody');
 		}
@@ -1146,13 +1146,13 @@ class ArtifactTypeHtml extends ArtifactType {
 				$checked = explode(',',$checked);
 			}
 			$size = min(count($ids)+1, 15);
-			return html_build_multiple_select_box_from_arrays($ids, $names, $name, $checked, $size, $show_100, $text_100);
+			return html_build_multiple_select_box_from_arrays($ids, $names, $name, $checked, $size, $show_100, $text_100, false, '', false, $attrs);
 		} else {
-			return html_build_select_box_from_arrays($ids, $names, $name, $checked, $show_100, $text_100);
+			return html_build_select_box_from_arrays($ids, $names, $name, $checked, $show_100, $text_100, false, '', false, $attrs);
 		}
 	}
 
-	function submitterBox ($name='submitted_by[]',$checked='xzxz',$show_100=true,$text_100='none',$extra_id='-1',$extra_name='',$multiple=false) {
+	function submitterBox($name = 'submitted_by[]', $checked = 'xzxz', $show_100 = true, $text_100 = 'none', $extra_id = '-1', $extra_name = '', $multiple = false, $attrs = array()) {
 		if ($text_100=='none'){
 			$text_100=_('Nobody');
 		}
@@ -1169,9 +1169,9 @@ class ArtifactTypeHtml extends ArtifactType {
 				$checked = explode(',',$checked);
 			}
 			$size = min( count($ids)+1, 15);
-			return html_build_multiple_select_box_from_arrays ($ids,$names,$name,$checked,$size,$show_100,$text_100);
+			return html_build_multiple_select_box_from_arrays($ids, $names, $name, $checked, $size, $show_100, $text_100, false, '', false, $attrs);
 		} else {
-			return html_build_select_box_from_arrays ($ids,$names,$name,$checked,$show_100,$text_100);
+			return html_build_select_box_from_arrays($ids, $names, $name, $checked, $show_100, $text_100, false, '', false, $attrs);
 		}
 	}
 
