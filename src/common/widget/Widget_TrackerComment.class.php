@@ -102,7 +102,7 @@ class Widget_TrackerComment extends Widget {
 			$divContent = '';
 			if (forge_check_perm('tracker', $atid, 'tech')) {
 				$divContent .= html_e('strong', array(), _('Use Canned Response')._(':')).html_e('br').
-						$ath->cannedResponseBox('canned_response', 'xzxz', array('form' => 'trackerform')).' '.util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&add_canned=1', '('._('Admin').')').html_e('br').
+						$ath->cannedResponseBox('tracker-canned_response', 'xzxz', array('form' => 'trackerform')).' '.util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&add_canned=1', '('._('Admin').')').html_e('br').
 						'<script type="text/javascript">//<![CDATA[
 							jQuery("#tracker-canned_response").change(function() {
 								jQuery.ajax({

@@ -241,7 +241,7 @@ foreach ($pluginsListeners as $pluginsListener) {
 	<tr><td colspan="2">
 		<br /><strong><?php echo _('Use Canned Response')._(':'); ?></strong><br />
 		<?php
-		echo $ath->cannedResponseBox('canned_response');
+		echo $ath->cannedResponseBox('tracker-canned_response');
 		echo " ";
 		echo util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&add_canned=1', '('._('Admin').')');
 		?>

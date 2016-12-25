@@ -1199,6 +1199,9 @@ class ArtifactTypeHtml extends ArtifactType {
 	}
 
 	function cannedResponseBox($name = 'canned_response', $checked = 'xzxz', $attrs = array()) {
+		if (!isset($attrs['id'])) {
+			$attrs['id'] = $name;
+		}
 		return html_build_select_box($this->getCannedResponses(), $name, $checked, true, 'none', false, '', false, $attrs);
 	}
 
