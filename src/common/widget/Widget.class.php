@@ -176,7 +176,7 @@ require_once $gfcommon.'widget/Widget_TrackerSummary.class.php';
 	 * @param string $widget_name
 	 * @return Widget instance
 	 */
-	static  function & getInstance($widget_name) {
+	static function & getInstance($widget_name) {
 		$o = null;
 		switch($widget_name) {
 			case 'homelatestnews':
