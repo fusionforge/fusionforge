@@ -369,15 +369,19 @@ class FFObject extends FFError {
 		return $content;
 	}
 
-	function showAddAssociations($url = false) {
+	function showAddAssociations($url = false, $formid = false) {
 		global $HTML;
 		$content = html_ao('span', array()). _('Add new associate object')._(':');
-		if ($url !== false) {
-			$content .= $HTML->openForm(array('action' => $url, 'method' => 'post'));
+		$attrs = array();
+		if ($formid) {
+			$attrs['form'] = $formid;
 		}
-		$content .= html_e('input', array('type' => 'text', 'value' => '', 'name' => 'newobjectsassociation', 'title' => _('Use standard reference such #nnn, Dnnn, to add object association. Comma separated')));
 		if ($url !== false) {
-			$content .= html_e('input', array('type' => 'submit', 'value' => _('Add')));
+			$content .= $HTML->openForm(array_merge($attrs, array('action' => $url, 'method' => 'post')));
+		}
+		$content .= html_e('input', array_merge($attrs, array('type' => 'text', 'value' => '', 'name' => 'newobjectsassociation', 'title' => _('Use standard reference such #nnn, Dnnn, to add object association. Comma separated'))));
+		if ($url !== false) {
+			$content .= html_e('input', array_merge($attrs, array('type' => 'submit', 'value' => _('Add'))));
 			$content .= $HTML->closeForm();
 		}
 		$content .= html_ac(html_ap() -1);
