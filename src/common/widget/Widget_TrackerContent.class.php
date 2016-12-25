@@ -439,4 +439,33 @@ class Widget_TrackerContent extends Widget {
 	function canBeMinize() {
 		return false;
 	}
+
+	function hasPreferences() {
+		return true;
+	}
+
+	function getPreferences() {
+		return $this->getPartialPreferencesFormTitle($this->getTitle());
+	}
+
+	function updatePreferences(&$request) {
+		$done = false;
+		$vContentId = new Valid_UInt('content_id');
+		$vContentId->required();
+		if ($request->valid($vContentId)) {
+			$vTitle = new Valid_String('title');
+			if($request->valid($vTitle)) {
+				$title = htmlspecialchars($request->get('title'));
+			} else {
+				$title = '';
+			}
+
+			if ($title) {
+				$sql = "UPDATE artifact_display_widget SET title = $1 WHERE owner_id =$2 AND id = $3";
+				$res = db_query_params($sql,array($title, $this->owner_id, (int)$request->get('content_id')));
+				$done = true;
+			}
+		}
+		return $done;
+	}
 }
