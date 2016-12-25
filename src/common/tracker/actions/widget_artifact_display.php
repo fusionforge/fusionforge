@@ -69,15 +69,15 @@ if (forge_check_perm('tracker_admin', $atid)) {
 	echo html_ac($ap);
 }
 // plugin_hook('message');
-echo $HTML->openForm(array('name' => 'trackerform', 'action' => '/tracker/?group_id='.$group_id.'&atid='.$ath->getID(), 'enctype' => 'multipart/form-data', 'method' => 'post'));
-echo html_e('input', array('type' => 'hidden', 'name' => 'form_key', 'value' => form_generate_key()));
+echo $HTML->openForm(array('id' => 'trackerform', 'name' => 'trackerform', 'action' => '/tracker/?group_id='.$group_id.'&atid='.$ath->getID(), 'enctype' => 'multipart/form-data', 'method' => 'post'));
+echo html_e('input', array('type' => 'hidden', 'name' => 'form_key', 'value' => form_generate_key(), 'form' => 'trackerform'));
 if ($func == 'add') {
-	echo html_e('input', array('type' => 'hidden', 'name' => 'func', 'value' => 'postadd'));
+	echo html_e('input', array('type' => 'hidden', 'name' => 'func', 'value' => 'postadd', 'form' => 'trackerform'));
 } elseif ($func == 'detail') {
-	echo html_e('input', array('type' => 'hidden', 'name' => 'func', 'value' => 'postmod'));
-	echo html_e('input', array('type' => 'hidden', 'name' => 'artifact_id', 'value' => $ah->getID()));
+	echo html_e('input', array('type' => 'hidden', 'name' => 'func', 'value' => 'postmod', 'form' => 'trackerform'));
+	echo html_e('input', array('type' => 'hidden', 'name' => 'artifact_id', 'value' => $ah->getID(), 'form' => 'trackerform'));
 }
+echo $HTML->closeForm();
 $lm = new WidgetLayoutManager();
 $lm->displayLayout($atid, WidgetLayoutManager::OWNER_TYPE_TRACKER);
-echo $HTML->closeForm();
 $ath->footer();

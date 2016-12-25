@@ -213,7 +213,7 @@ class Widget_TrackerContent extends Widget {
 							} elseif (isset($extra_fields[$extrafieldID])) {
 								$value = $extra_fields[$extrafieldID];
 							}
-							$attrs = array();
+							$attrs = array('form' => 'trackerform');
 							$mandatory = '';
 							if ($extrafieldObject->isRequired() && !$readonly) {
 								$mandatory = utils_requiredField();
@@ -427,7 +427,7 @@ class Widget_TrackerContent extends Widget {
 			}
 		}
 		if (!$readonly) {
-			$return .= html_e('p', array('class' => 'middleRight'), html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Save Changes'), 'title' => _('Save is validating the complete form'))));
+			$return .= html_e('p', array('class' => 'middleRight'), html_e('input', array('form' => 'trackerform', 'type' => 'submit', 'name' => 'submit', 'value' => _('Save Changes'), 'title' => _('Save is validating the complete form'))));
 		}
 		return $return;
 	}

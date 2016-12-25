@@ -62,7 +62,7 @@ class Widget_TrackerSummary extends Widget {
 		global $details;
 
 		$return = '';
-		$inputAttrs = array('type' => 'text', 'name' => 'summary', 'style' => 'width:99%', 'value' => $summary);
+		$inputAttrs = array('form' => 'trackerform', 'type' => 'text', 'name' => 'summary', 'style' => 'width:99%', 'value' => $summary);
 		if ($func == 'detail') {
 			$inputAttrs['value'] = $ah->getSummary();
 			if (forge_check_perm('tracker', $atid, 'manager')) {
@@ -85,13 +85,13 @@ class Widget_TrackerSummary extends Widget {
 			} else {
 				$editable = false;
 			}
-			$return .= $ah->showDetails($editable);
+			$return .= $ah->showDetails($editable, array('form' => 'trackerform'));
 		} elseif ($func == 'add') {
 			$return .= notepad_func();
 			$return .= $HTML->listTableTop();
 			$content = html_e('strong', array(), _('Detailed description').$requiredInfo._(':'));
 			$content .= notepad_button('document.forms.trackerform.details');
-			$content .= html_e('textarea', array('id'=>'tracker-description', 'required'=>'required', 'name'=>'details', 'rows'=>'20', 'style'=>'box-sizing: border-box; width: 100%', 'title'=>util_html_secure(html_get_tooltip_description('description'))), $details, false);
+			$content .= html_e('textarea', array('form' => 'trackerform', 'id'=>'tracker-description', 'required'=>'required', 'name'=>'details', 'rows'=>'20', 'style'=>'box-sizing: border-box; width: 100%', 'title'=>util_html_secure(html_get_tooltip_description('description'))), $details, false);
 			$cells = array();
 			$cells[][] = $content;
 			$return .= $HTML->multiTableRow(array(), $cells);
@@ -100,7 +100,7 @@ class Widget_TrackerSummary extends Widget {
 		}
 		if (forge_check_perm('tracker', $atid, 'submit')) {
 			$return .= $HTML->addRequiredFieldsInfoBox();
-			$return .= html_e('p', array('class' => 'middleRight'), html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Save Changes'), 'title' => _('Save is validating the complete form'))));
+			$return .= html_e('p', array('class' => 'middleRight'), html_e('input', array('form' => 'trackerform', 'type' => 'submit', 'name' => 'submit', 'value' => _('Save Changes'), 'title' => _('Save is validating the complete form'))));
 		}
 		return $return;
 	}
