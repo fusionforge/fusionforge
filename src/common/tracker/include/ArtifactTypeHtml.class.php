@@ -1198,20 +1198,20 @@ class ArtifactTypeHtml extends ArtifactType {
 		}
 	}
 
-	function cannedResponseBox ($name='canned_response',$checked='xzxz') {
-		return html_build_select_box ($this->getCannedResponses(),$name,$checked);
+	function cannedResponseBox($name = 'canned_response', $checked = 'xzxz', $attrs = array()) {
+		return html_build_select_box($this->getCannedResponses(), $name, $checked, true, 'none', false, '', false, $attrs);
 	}
 
 	/**
 	 * statusBox - show the statuses - automatically shows the "custom statuses" if they exist
 	 *
-	 *
+	 * @return string	HTML code
 	 */
-	function statusBox ($name='status_id',$checked='xzxz',$show_100=false,$text_100='none') {
+	function statusBox($name = 'status_id', $checked = 'xzxz', $show_100 = false,$text_100 = 'none', $attrs = array()) {
 		if ($text_100=='none'){
 			$text_100=_('None');
 		}
-		return html_build_select_box($this->getStatuses(),$name,$checked,$show_100,$text_100);
+		return html_build_select_box($this->getStatuses(), $name, $checked, $show_100, $text_100, false, '', false, $attrs);
 	}
 
 	function javascript() {
