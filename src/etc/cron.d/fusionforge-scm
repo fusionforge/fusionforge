@@ -10,4 +10,4 @@ PATH=@bindir@:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 0 3 * * * root forge_run_job scm/generate_scm_snapshots.php
 
 # Gather activities from SCM repositories
-0 3 * * * root forge_run_job scm/parse_scm_repo_activities.php
+0 */3 * * * root forge_run_job scm/parse_scm_repo_activities.php
