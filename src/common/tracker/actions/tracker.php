@@ -241,7 +241,7 @@ switch (getStringFromRequest('func')) {
 		$resolution_id = getIntFromRequest('resolution_id');
 		$assigned_to = getStringFromRequest('assigned_to');
 		$summary = getStringFromRequest('summary');
-		$canned_response = getStringFromRequest('canned_response');
+		$canned_response = getStringFromRequest('tracker-canned_response');
 		$details = getStringFromRequest('details');
 		$description = getStringFromRequest('description');
 		$new_artifact_type_id = getIntFromRequest('new_artifact_type_id');
