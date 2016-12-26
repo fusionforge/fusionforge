@@ -112,8 +112,8 @@ class Widget_TrackerContent extends Widget {
 		$artifactTypeObject = artifactType_get_object($atid);
 		$availableExtraFields = $artifactTypeObject->getExtraFields();
 		$stillAvailableExtraFields = $this->availableExtrafields($owner_id, $availableExtraFields);
-		$content = html_e('p', array(), sprintf(_('Tick available ExtraFields from %s to display into this widget'), $artifactTypeObject->getName())._(':'));
 		if (count($stillAvailableExtraFields) > 0) {
+			$content = html_e('p', array(), sprintf(_('Tick available custom fields from %s to display into this widget'), $artifactTypeObject->getName())._(':'));
 			$content .= $HTML->listTableTop(array('', '', _('Column ID'), _('Row ID')));
 			foreach ($stillAvailableExtraFields as $key => $stillAvailableExtraField) {
 				$cells = array();
@@ -124,6 +124,8 @@ class Widget_TrackerContent extends Widget {
 				$content .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($key, true)), $cells);
 			}
 			$content .= $HTML->listTableBottom();
+		} else {
+			$content = $HTML->information(_('No custom fields available to link to this widget'));
 		}
 		return $content;
 	}
