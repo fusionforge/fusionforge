@@ -2672,6 +2672,9 @@ class Group extends FFError {
 				}
 			}
 
+			$lm = new WidgetLayoutManager();
+			$lm->createDefaultLayoutForProject($this->getID(), $template->getID());
+
 			// second computation to clone fields and workflow
 			if (forge_get_config('use_tracker')) {
 				if ($template->usesTracker()) {
@@ -2679,13 +2682,13 @@ class Group extends FFError {
 					foreach ($oldatf->getArtifactTypes() as $o) {
 						$t = artifactType_get_object($id_mappings['tracker'][$o->getID()]);
 						$id_mappings['tracker'][$o->getID()] = $t->getID();
-						$t->cloneFieldsFrom($o->getID(), $o->Group->getID(), $id_mappings);
+						$newEFIds = $t->cloneFieldsFrom($o->getID(), $o->Group->getID(), $id_mappings);
+						if (forge_get_config('use_tracker_widget_display')) {
+							$lm->createDefaultLayoutForTracker($t->getID(), $o->getID(), $newEFIds);
+						}
 					}
 				}
 			}
-
-			$lm = new WidgetLayoutManager();
-			$lm->createDefaultLayoutForProject ($this->getID(), $template->getID());
 
 			$params = array();
 			$params['template'] = $template;

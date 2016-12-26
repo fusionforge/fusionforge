@@ -952,7 +952,7 @@ class ArtifactType extends FFError {
 		}
 
 		db_commit();
-		return true;
+		return $newEFIds;
 	}
 
 	/**

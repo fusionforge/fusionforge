@@ -222,48 +222,90 @@ class WidgetLayoutManager {
 		db_commit();
 	}
 
-	function createDefaultLayoutForTracker($owner_id) {
+	function createDefaultLayoutForTracker($owner_id, $template_id = 0, $newEFIds = array()) {
 		db_begin();
 		$success = true;
-		$sql = "INSERT INTO owner_layouts (owner_id, owner_type, layout_id, is_default) values ($1, $2, $3, $4)";
-		if (db_query_params($sql, array($owner_id, self::OWNER_TYPE_TRACKER, 1, 1))) {
-
-			$sql = "INSERT INTO layouts_contents (owner_id, owner_type, layout_id, column_id, name, rank) VALUES ";
-
-			$args[] = "($1, $2, 1, 1, 'trackersummary', 1)";
-			$args[] = "($1, $2, 1, 1, 'trackermain', 2)";
-			$args[] = "($1, $2, 1, 1, 'trackerdefaultactions', 3)";
-			$args[] = "($1, $2, 1, 2, 'trackergeneral', 1)";
-			$args[] = "($1, $2, 1, 2, 'trackercomment', 2)";
-
-			// owner_id is an atid
-			$at = artifactType_get_object($owner_id);
-			$extrafields = $at->getExtraFields(array());
-			if (count($extrafields) > 0) {
-
+		$notemplate = true;
+		if ($template_id) {
+			$res = db_query_params('SELECT layout_id FROM owner_layouts WHERE owner_type = $1 AND owner_id = $2', array(self::OWNER_TYPE_TRACKER, $template_id));
+			if ($res && db_numrows($res) == 1) {
+				$res = db_query_params('INSERT INTO owner_layouts(layout_id, is_default, owner_id, owner_type)
+						SELECT layout_id, is_default, $1, owner_type
+						FROM owner_layouts
+						WHERE owner_type = $2
+						AND owner_id = $3', array($owner_id, self::OWNER_TYPE_TRACKER, $template_id));
+				$notemplate = false;
 			}
+		}
+		if ($notemplate) {
+			$res = db_query_params('INSERT INTO owner_layouts (owner_id, owner_type, layout_id, is_default) values ($1, $2, $3, $4)', array($owner_id, self::OWNER_TYPE_TRACKER, 1, 1));
+		}
+		if ($res) {
+			if ($notemplate) {
+				$sql = "INSERT INTO layouts_contents (owner_id, owner_type, layout_id, column_id, name, rank) VALUES ";
 
-			foreach($args as $a) {
-				if (!db_query_params($sql.$a,array($owner_id, self::OWNER_TYPE_TRACKER))) {
-					$success = false;
-					break;
-				}
-			}
+				$args[] = "($1, $2, 1, 1, 'trackersummary', 1)";
+				$args[] = "($1, $2, 1, 1, 'trackermain', 2)";
+				$args[] = "($1, $2, 1, 1, 'trackerdefaultactions', 3)";
+				$args[] = "($1, $2, 1, 2, 'trackergeneral', 1)";
+				$args[] = "($1, $2, 1, 2, 'trackercomment', 2)";
 
-			if (count($extrafields) > 0) {
-				$res = db_query_params('INSERT INTO artifact_display_widget (owner_id, title, cols) VALUES ($1, $2, $3)', array($owner_id, _('Default ExtraField 2-columns Widget'), 2));
-				$content_id = db_insertid($res, 'artifact_display_widget', 'id');
-				$row_id = 1;
-				$column_id = 1;
-				foreach ($extrafields as $key => $extrafield) {
-					$column_id = ($key % 2) + 1; // 1 or 2
-					if ($column_id == 2) {
-						$row_id++;
+				foreach($args as $a) {
+					if (!db_query_params($sql.$a,array($owner_id, self::OWNER_TYPE_TRACKER))) {
+						$success = false;
+						break;
 					}
-					db_query_params('INSERT INTO artifact_display_widget_field (id, field_id, column_id, row_id) VALUES ($1, $2, $3, $4)', array($content_id, $extrafield['extra_field_id'], $column_id, $row_id));
 				}
-				db_query_params('INSERT INTO layouts_contents (owner_id, owner_type, layout_id, column_id, name, rank, content_id) VALUES ($1, $2, 1, 2, $3, 3, $4)',
-						array($owner_id, self::OWNER_TYPE_TRACKER, 'trackercontent', $content_id));
+
+				// owner_id is an atid
+				$at = artifactType_get_object($owner_id);
+				$extrafields = $at->getExtraFields(array());
+				if (count($extrafields) > 0) {
+					$res = db_query_params('INSERT INTO artifact_display_widget (owner_id, title, cols) VALUES ($1, $2, $3)', array($owner_id, _('Default ExtraField 2-columns Widget'), 2));
+					$content_id = db_insertid($res, 'artifact_display_widget', 'id');
+					$row_id = 1;
+					$column_id = 1;
+					foreach ($extrafields as $key => $extrafield) {
+						$column_id = ($key % 2) + 1; // 1 or 2
+						if ($column_id == 2) {
+							$row_id++;
+						}
+						db_query_params('INSERT INTO artifact_display_widget_field (id, field_id, column_id, row_id) VALUES ($1, $2, $3, $4)', array($content_id, $extrafield['extra_field_id'], $column_id, $row_id));
+					}
+					db_query_params('INSERT INTO layouts_contents (owner_id, owner_type, layout_id, column_id, name, rank, content_id) VALUES ($1, $2, 1, 2, $3, 3, $4)',
+							array($owner_id, self::OWNER_TYPE_TRACKER, 'trackercontent', $content_id));
+				}
+			} else {
+				$sql = "SELECT layout_id, column_id, name, rank, is_minimized, is_removed, display_preferences, content_id
+					FROM layouts_contents
+					WHERE owner_type = $1
+					AND owner_id = $2
+					";
+				if ($req = db_query_params($sql,array( self::OWNER_TYPE_TRACKER,$template_id))) {
+					while ($data = db_fetch_array($req)) {
+						$content_id = 0;
+						if ($data['name'] == 'trackercontent') {
+							$res = db_query_params('SELECT title, cols FROM artifact_display_widget WHERE owner_id = $1 AND id = $2', array($template_id, $data['content_id']));
+							if ($res && db_numrows($res) > 0) {
+								$arr = db_fetch_array($res);
+								db_query_params('INSERT INTO artifact_display_widget (owner_id, title, cols) VALUES ($1, $2, $3)', array($owner_id, $arr['title'], $arr['cols']));
+								$content_id = db_insertid($res, 'artifact_display_widget', 'id');
+								$res2 = db_query_params('SELECT field_id, column_id, row_id FROM artifact_display_widget_field WHERE id = $1', array($data['content_id']));
+								if ($res2 && db_numrows($res2) > 0) {
+									while ($arr2 = db_fetch_array($res2)) {
+										db_query_params('INSERT INTO artifact_display_widget_field (id, field_id, column_id, row_id) VALUES ($1, $2, $3, $4)',
+												array($content_id, $newEFIds[$arr2['field_id']], $arr2['column_id'], $arr2['row_id']));
+										echo db_error();
+									}
+								}
+							}
+						}
+						$sql = 'INSERT INTO layouts_contents (owner_id, owner_type, content_id, layout_id, column_id, name, rank, is_minimized, is_removed, display_preferences)
+							VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)';
+						db_query_params($sql, array($owner_id, self::OWNER_TYPE_TRACKER, $content_id,  $data['layout_id'],  $data['column_id'],  $data['name'],  $data['rank'],  $data['is_minimized'],  $data['is_removed'],  $data['display_preferences']));
+						echo db_error();
+					}
+				}
 			}
 		} else {
 			$success = false;
