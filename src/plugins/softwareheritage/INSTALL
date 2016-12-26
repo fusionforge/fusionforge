@@ -11,3 +11,6 @@ A) Make the symbolic links for each section
 
 /$GFORGEDIR/www/plugins/softwareheritage -> /$GFORGEPLUGINSDIR/softwareheritage/www
 /$ETC/gforge ->  /$GFORGEPLUGINSDIR/softwareheritage/etc/plugins/softwareheritage
+
+B) Run the configure-existing-git-repos.sh script to enable reflogs in existing Git repositories
+
