@@ -94,10 +94,6 @@ class Widget_ProjectLatestDocuments extends Widget {
 					$createdate = $doc->getCreated();
 					$realdate = ($updatedate >= $createdate) ? $updatedate : $createdate;
 					$filename = $doc->getFileName();
-					$title = $doc->getName();
-					$realname = $doc->getCreatorRealName();
-					$user_name = $doc->getCreatorUserName();
-					$statename = $doc->getStateName();
 					$filetype = $doc->getFileType();
 					$docid = $doc->getID();
 					$docgroup = $doc->getDocGroupID();
@@ -109,18 +105,18 @@ class Widget_ProjectLatestDocuments extends Widget {
 							break;
 						}
 						default: {
-							$docurl = util_make_link('/docman/view.php/'.$group_id.'/'.$docid.'/'.urlencode($filename), html_image($doc->getFileTypeImage(), 22, 22, array('alt'=>$doc->getFileType())));
+							$docurl = util_make_link('/docman/view.php/'.$group_id.'/'.$docid, html_image($doc->getFileTypeImage(), 22, 22, array('alt'=>$doc->getFileType())));
 						}
 					}
 					$cells = array();
-					$cells[][] = date(_('Y-m-d'),$realdate);
+					$cells[][] = date(_('Y-m-d'), $realdate);
 					$cells[][] = $docurl;
 					$cells[][] = $filename;
-					$cells[][] = $title;
-					$cells[][] = make_user_link($user_name, $realname);
+					$cells[] = array($doc->getName(), 'title' => $doc->getDescription());
+					$cells[][] = util_display_user($doc->getCreatorUserName(), $doc->getCreatorID(), $doc->getCreatorRealName());
 					$cells[][] = $path;
 					if (session_loggedin()) {
-						$cells[][] = $statename;
+						$cells[][] = $doc->getStateName();
 						$action = '';
 						if ($doc->getStateID() != 2) {
 							if ($doc->isMonitoredBy(UserManager::instance()->getCurrentUser()->getID())) {
@@ -135,7 +131,7 @@ class Widget_ProjectLatestDocuments extends Widget {
 							$action .= util_make_link('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$docgroup.'&action=monitorfile&option='.$option.'&fileid='.$doc->getID(), $image, array('title' => $titleMonitor));
 							if (forge_check_perm('docman', $group_id, 'approve') && !$doc->getLocked()) {
 								$action .= util_make_link('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$docgroup.'&action=trashfile&fileid='.$doc->getID(), $HTML->getDeletePic('', _('Move this document to trash')), array('title' => _('Move this document to trash')));
-								$action .= util_make_link('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$docgroup.'&filedetailid='.$doc->getID(), $HTML->getEditFilePic(_('Edit this document')), array('title' => _('Edit this document')));
+								$action .= util_make_link($doc->getPermalink(), $HTML->getEditFilePic(_('Edit this document')), array('title' => _('Edit this document')));
 							}
 						}
 						$cells[][] = $action;

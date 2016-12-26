@@ -110,12 +110,12 @@ class Widget_MyProjectsLastDocuments extends Widget {
 										break;
 									}
 									default: {
-										$docurl = util_make_link('/docman/view.php/'.$g->getID().'/'.$doc->getID().'/'.urlencode($doc->getFileName()), html_image($doc->getFileTypeImage(), 22, 22, array('alt'=>$doc->getFileType())));
+										$docurl = util_make_link('/docman/view.php/'.$g->getID().'/'.$doc->getID(), html_image($doc->getFileTypeImage(), 22, 22, array('alt'=>$doc->getFileType())));
 									}
 								}
 								$html .= '<td>'.$docurl.'</td>';
 								$html .= '<td>'.$doc->getFileName().'</td>';
-								$html .= '<td>'.make_user_link($doc->getCreatorUserName(), $doc->getCreatorRealName()).'</td>';
+								$html .= '<td>'.util_display_user($doc->getCreatorUserName(), $doc->getCreatorID(), $doc->getCreatorRealName()).'</td>';
 								if ( $doc->getUpdated() ) {
 									$html .= '<td>'.date(_('Y-m-d H:i'), $doc->getUpdated()).'</td>';
 								} else {
