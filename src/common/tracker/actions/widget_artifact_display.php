@@ -35,15 +35,13 @@ if (!isset($func)) {
 	$func = getStringFromRequest('func');
 }
 
-$sql = "SELECT l.*
-		FROM layouts AS l INNER JOIN owner_layouts AS o ON(l.id = o.layout_id)
+$lm = new WidgetLayoutManager();
+$sql = "SELECT l.* FROM layouts AS l INNER JOIN owner_layouts AS o ON(l.id = o.layout_id)
 		WHERE o.owner_type = $1
 		AND o.owner_id = $2
-		AND o.is_default = 1
-		";
+		AND o.is_default = 1";
 $res = db_query_params($sql,array('t', $atid));
-if($res && db_numrows($res)<1) {
-	$lm = new WidgetLayoutManager();
+if($res && db_numrows($res) < 1) {
 	$lm->createDefaultLayoutForTracker($atid);
 	$res = db_query_params($sql,array('t', $atid));
 }
@@ -58,17 +56,19 @@ if ($func == 'add') {
 }
 
 if (forge_check_perm('tracker_admin', $atid)) {
-	$ap = html_ap();
-	echo html_ao('ul', array('class' => 'widget_toolbar'));
 	$url = '/widgets/widgets.php?owner=t'.$atid.'&layout_id='.$id;
 	$labels = array(_('Add widgets'), _('Customize Layout'));
 	$urls = array($url, $url.'&update=layout');
+	$attrs = array();
+	$attrs[] = array('title' => _('Customfields must be linked to a widget to be displayed. Use “Add widgets” to create new widget to link and organize your customfields.'));
+	$attrs[] = array('title' => _('General layout to display “Submit New” form or detailed view of an existing artifact can be customize. Use “Customize Layout” to that purpose.'));
+	$elementsLi = array();
 	for ($i = 0; $i < count($urls); $i++) {
-		echo html_e('li', array(), util_make_link($urls[$i], $labels[$i]));
+		$elementsLi[] = array('content' => util_make_link($urls[$i], $labels[$i]), 'attrs' => $attrs[$i]);
 	}
-	echo html_ac($ap);
+	echo $HTML->html_list($elementsLi, array('class' => 'widget_toolbar'));
 }
-// plugin_hook('message');
+
 echo $HTML->openForm(array('id' => 'trackerform', 'name' => 'trackerform', 'action' => '/tracker/?group_id='.$group_id.'&atid='.$ath->getID(), 'enctype' => 'multipart/form-data', 'method' => 'post'));
 echo html_e('input', array('type' => 'hidden', 'name' => 'form_key', 'value' => form_generate_key(), 'form' => 'trackerform'));
 if ($func == 'add') {
@@ -78,6 +78,5 @@ if ($func == 'add') {
 	echo html_e('input', array('type' => 'hidden', 'name' => 'artifact_id', 'value' => $ah->getID(), 'form' => 'trackerform'));
 }
 echo $HTML->closeForm();
-$lm = new WidgetLayoutManager();
 $lm->displayLayout($atid, WidgetLayoutManager::OWNER_TYPE_TRACKER);
 $ath->footer();
