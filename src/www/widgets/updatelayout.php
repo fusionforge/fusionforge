@@ -70,8 +70,11 @@ if ($owner) {
 				$_REQUEST['group_id'] = $_GET['group_id'] = $at->Group->getID();
 				$request->params['group_id'] = $at->Group->getID(); //bad!
 				$redirect = '/tracker/?group_id='.$at->Group->getID().'&atid='.$at->getID();
-				if ($request->get('func') == 'detail' && $request->get('aid')) {
-					$redirect .= '&func=detail&aid='.$request->get('aid');
+				if ((strlen($request->get('func')) > 0)) {
+					$redirect .= '&func='.$request->get('func');
+					if ($request->get('aid')) {
+						$redirect .= '&aid='.$request->get('aid');
+					}
 				}
 				if (!forge_check_global_perm('forge_admin') && !forge_check_perm('tracker_admin', $at->getID())) {
 					$GLOBALS['Response']->redirect($redirect);
@@ -104,7 +107,6 @@ if ($owner) {
 										} elseif (($owner_type == WidgetLayoutManager::OWNER_TYPE_HOME) && (forge_check_global_perm('forge_admin'))) {
 												$lm->removeWidget($owner_id, $owner_type, $layout_id, $name, $instance_id, $widget);
 										} elseif (($owner_type == WidgetLayoutManager::OWNER_TYPE_TRACKER) && (forge_check_perm('tracker_admin', $owner_id))) {
-												error_log('ici');
 												$lm->removeWidget($owner_id, $owner_type, $layout_id, $name, $instance_id, $widget);
 										} else {
 											$lm->removeWidget($owner_id, $owner_type, $layout_id, $name, $instance_id, $widget);

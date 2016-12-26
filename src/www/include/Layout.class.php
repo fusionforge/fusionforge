@@ -1411,8 +1411,10 @@ if (isset($params['group']) && $params['group']) {
 			if (strlen($widget->hasPreferences())) {
 				$url = '/widgets/updatelayout.php?owner='.$owner_type.$owner_id.'&action=preferences&name['.$widget->id.']='.$widget->getInstanceId().'&layout_id='.$layout_id;
 				if ($owner_type == WidgetLayoutManager::OWNER_TYPE_TRACKER) {
-					global $aid;
-					$url .= '&func=detail&aid='.$aid;
+					$url .= '&func='.getStringFromRequest('func');
+					if (getIntFromRequest('aid')) {
+						$url .= '&aid='.getIntFromRequest('aid');
+					}
 				}
 				echo html_e('div', array('class' => 'widget_titlebar_prefs'), util_make_link($url, _('Preferences')));
 			}

@@ -451,7 +451,12 @@ class Widget_TrackerContent extends Widget {
 	function getPreferencesForm($layout_id, $owner_id, $owner_type) {
 		global $HTML;
 		global $aid;
-		$prefs  = $HTML->openForm(array('method' => 'post', 'action' => '/widgets/widget.php?owner='.$owner_type.$owner_id.'&action=update&name['.$this->id.']='.$this->getInstanceId().'&content_id='.$this->getInstanceId().'&layout_id='.$layout_id.'&func=detail&aid='.$aid));
+		global $func;
+		$url = '/widgets/widget.php?owner='.$owner_type.$owner_id.'&action=update&name['.$this->id.']='.$this->getInstanceId().'&content_id='.$this->getInstanceId().'&layout_id='.$layout_id.'&func='.$func;
+		if ($aid) {
+			$url .= '&aid='.$aid;
+		}
+		$prefs  = $HTML->openForm(array('method' => 'post', 'action' => $url));
 		$prefs .= html_ao('fieldset').html_e('legend', array(), _('Preferences'));
 		$prefs .= $this->getPreferences();
 		$prefs .= html_e('br');
