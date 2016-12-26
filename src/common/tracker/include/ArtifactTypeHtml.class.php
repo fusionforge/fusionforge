@@ -40,12 +40,13 @@ class ArtifactTypeHtml extends ArtifactType {
 		if (!forge_get_config('use_tracker')) {
 			exit_disabled();
 		}
-		$group_id= $this->Group->getID();
+		global $group_id;
+		$group_id = $this->Group->getID();
 
 		//required by new site_project_header
-		$params['group']=$group_id;
-		$params['toptab']='tracker';
-		$params['tabtext']=$this->getName();
+		$params['group']   = $group_id;
+		$params['toptab']  = 'tracker';
+		$params['tabtext'] = $this->getName();
 
 		$labels = array();
 		$links  = array();
