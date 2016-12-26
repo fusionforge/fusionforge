@@ -43,6 +43,10 @@ class Widget_TrackerContent extends Widget {
 		return $this->trackercontent_title ? $hp->purify($this->trackercontent_title, CODENDI_PURIFIER_CONVERT_HTML)  : _('Tracker Content Box');
 	}
 
+	function getColumns() {
+		return $this->trackercolumns;
+	}
+
 	function isUnique() {
 		return false;
 	}
@@ -57,17 +61,21 @@ class Widget_TrackerContent extends Widget {
 
 	function loadContent($id) {
 		$this->content_id = $id;
-		$this->trackercontent_title = $this->getTitleBlock($id);
+		$this->fetchData($id);
+
 	}
 
-	function getTitleBlock($id) {
-		$res = db_query_params('select title from artifact_display_widget where id = $1', array($id));
+	function fetchData($id) {
+		$res = db_query_params('select * from artifact_display_widget where id = $1', array($id));
 		$title = false;
+		$columns = 0;
 		if ($res) {
 			$arr = db_fetch_array($res);
-			$title = $arr[0];
+			$title = $arr['title'];
+			$columns = $arr['cols'];
 		}
-		return $title;
+		$this->trackercontent_title = $title;
+		$this->trackercolumns = $columns;
 	}
 
 	function create(&$request) {
@@ -98,7 +106,7 @@ class Widget_TrackerContent extends Widget {
 		return html_e('p', array(), _('Number of vertical columns')._(':').html_e('input', array('type' => 'number', 'name' => 'columns', 'value' => $column_number, 'step' => 1, 'min' => 1, 'title' => _('Set number of columns to split your box into columns'))));
 	}
 
-	private function getExtraFieldsForm($owner_id) {
+	private function getAvailableExtraFieldsForm($owner_id) {
 		global $HTML;
 		$atid = $owner_id;
 		$artifactTypeObject = artifactType_get_object($atid);
@@ -118,6 +126,34 @@ class Widget_TrackerContent extends Widget {
 			$content .= $HTML->listTableBottom();
 		}
 		return $content;
+	}
+
+	private function getExtraFieldsForm($id) {
+		global $HTML;
+		global $ath;
+		global $atid;
+		$artifactTypeObject = artifactType_get_object($atid);
+		$layoutExtraFieldIDs = $this->getLayoutExtraFieldIDs($id);
+		$content = html_e('p', array(), sprintf(_('Adjust already used ExtraFields from %s to display into this widget'), $artifactTypeObject->getName())._(':'));
+		if (count($layoutExtraFieldIDs) > 0) {
+			$content .= $HTML->listTableTop(array('', '', _('Column ID'), _('Row ID')));
+			foreach ($layoutExtraFieldIDs as $row_id => $column_id) {
+				foreach ($column_id as $key => $extrafieldIDs) {
+					foreach ($extrafieldIDs as $extrafieldID) {
+						$extrafieldObject = new ArtifactExtraField($ath, $extrafieldID);
+						$cells = array();
+						$cells[][] = $extrafieldObject->getName();
+						$cells[][] = html_e('input', array('type' => 'checkbox', 'name' => 'extrafieldids[]', 'value' => $extrafieldID, 'checked' => 'checked'));
+						$cells[][] = html_e('input', array('type' => 'number', 'name' => 'extrafield_column_ids[]', 'value' => $key, 'step' => 1, 'min' => 1, 'title' => _('Set the column number accordingly to the number of columns you created')));
+						$cells[][] = html_e('input', array('type' => 'number', 'name' => 'extrafield_row_ids[]', 'value' => $row_id, 'step' => 1, 'min' => 1, 'title' => _('Set the row number accordingly to organize the extrafields')));
+						$content .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($key, true)), $cells);
+					}
+				}
+			}
+			$content .= $HTML->listTableBottom();
+		}
+		return $content;
+
 	}
 
 	private function availableExtrafields($owner_id, $extrafields) {
@@ -157,7 +193,7 @@ class Widget_TrackerContent extends Widget {
 		$owner_id = (int)substr($request->get('owner'), 1);
 		$content = $this->getPartialPreferencesFormTitle(_('Enter title of Tracker Content Box'));
 		$content .= $this->getPartialPreferencesFormColumns(1);
-		$content .= $this->getExtraFieldsForm($owner_id);
+		$content .= $this->getAvailableExtraFieldsForm($owner_id);
 		return $content;
 	}
 
@@ -445,7 +481,10 @@ class Widget_TrackerContent extends Widget {
 	}
 
 	function getPreferences() {
-		return $this->getPartialPreferencesFormTitle($this->getTitle());
+		return $this->getPartialPreferencesFormTitle($this->getTitle()).
+			$this->getPartialPreferencesFormColumns($this->getColumns()).
+			$this->getAvailableExtraFieldsForm($this->owner_id).
+			$this->getExtraFieldsForm($this->content_id);
 	}
 
 	function getPreferencesForm($layout_id, $owner_id, $owner_type) {
@@ -478,10 +517,29 @@ class Widget_TrackerContent extends Widget {
 			} else {
 				$title = '';
 			}
+			$vColumns = new Valid_String('columns');
+			if($request->valid($vColumns)) {
+				$columns = (int)$request->get('columns');
+			} else {
+				$columns = 1;
+			}
 
 			if ($title) {
 				$sql = "UPDATE artifact_display_widget SET title = $1 WHERE owner_id =$2 AND id = $3";
 				$res = db_query_params($sql,array($title, $this->owner_id, (int)$request->get('content_id')));
+				$done = true;
+			}
+			if ($columns) {
+				$sql = "UPDATE artifact_display_widget SET cols = $1 WHERE owner_id =$2 AND id = $3";
+				$res = db_query_params($sql,array($columns, $this->owner_id, (int)$request->get('content_id')));
+				$done = true;
+			}
+			$extrafieldIDs = getArrayFromRequest('extrafieldids');
+			$extrafieldIDColumns = getArrayFromRequest('extrafield_column_ids');
+			$extrafieldIDRows = getArrayFromRequest('extrafield_row_ids');
+			$res = db_query_params('DELETE FROM artifact_display_widget_field WHERE id = $1', array((int)$request->get('content_id')));
+			foreach ($extrafieldIDs as $key => $extrafieldID) {
+				db_query_params('INSERT INTO artifact_display_widget_field (id, field_id, column_id, row_id) VALUES ($1, $2, $3, $4)', array((int)$request->get('content_id'), $extrafieldID, $extrafieldIDColumns[$key], $extrafieldIDRows[$key]));
 				$done = true;
 			}
 		}
