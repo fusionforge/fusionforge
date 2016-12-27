@@ -38,7 +38,7 @@ class WidgetLayout_Row_Column {
 	function display($readonly, $owner_id, $owner_type, $is_last) {
 		echo html_ao('td', array('style' => 'height:10px; width:'. $this->width .'%; '. (!$is_last ? 'padding-right:20px;' : ''), 'id' => $this->getColumnId()));
 		foreach ($this->contents as $key => $nop) {
-		$this->contents[$key]['content']->display($this->row->layout->id, $this->id, $readonly, $this->contents[$key]['is_minimized'], $this->contents[$key]['display_preferences'], $owner_id, $owner_type);
+			$this->contents[$key]['content']->display($this->row->layout->id, $this->id, $readonly, $this->contents[$key]['is_minimized'], $this->contents[$key]['display_preferences'], $owner_id, $owner_type);
 		}
 		echo html_ac(html_ap() -1);
 	}
