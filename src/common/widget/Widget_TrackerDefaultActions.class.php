@@ -34,7 +34,7 @@ class Widget_TrackerDefaultActions extends Widget {
 		if (!$owner_id) {
 			$owner_id = $request->get('atid');
 		}
-		if (forge_check_perm('tracker', $owner_id, 'tech') && ($func == 'detail')) {
+		if ($func == 'detail' || forge_check_perm('tracker_admin', $owner_id)) {
 			parent::__construct('trackerdefaultactions', $owner_id, WidgetLayoutManager::OWNER_TYPE_TRACKER);
 			$this->content['title'] = _('Actions');
 		}
@@ -59,43 +59,48 @@ class Widget_TrackerDefaultActions extends Widget {
 		global $group;
 		global $aid;
 		global $atid;
+		global $func;
 		global $HTML;
-		$return = $HTML->listTableTop();
-		$cells = array();
-		if ($ah->isMonitoring()) {
-			$img="xmail16w.png";
-			$text=_('Stop monitoring');
-		} else {
-			$img="mail16w.png";
-			$text=_('Monitor');
-		}
-		$i = 0;
-		$cells[][] = util_make_link('/tracker/?group_id='.$group_id.'&artifact_id='.$ah->getID().'&atid='.$ath->getID().'&func=monitor', html_e('strong', array(), html_image('ic/'.$img, 20, 20).' '.$text), array('id' => 'tracker-monitor', 'title' => util_html_secure(html_get_tooltip_description('monitor'))));
-		$return .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i++, true)), $cells);
-		$votes = $ah->getVotes();
-		if ($votes[1]) {
+		if ($func == 'detail') {
+			$return = $HTML->listTableTop();
 			$cells = array();
-			$cellContent = html_e('span', array('id' => 'tracker-votes', 'title' => html_get_tooltip_description('votes')), html_e('strong', array(), _('Votes') . _(': ')).sprintf('%1$d/%2$d (%3$d%%)', $votes[0], $votes[1], $votes[2]));
-			if ($ath->canVote()) {
-				if ($ah->hasVote()) {
-					$key = 'pointer_down';
-					$txt = _('Retract Vote');
-				} else {
-					$key = 'pointer_up';
-					$txt = _('Cast Vote');
-				}
-				$cellContent .= util_make_link('/tracker/?group_id='.$group_id.'&aid='.$ah->getID().'&atid='.$ath->getID().'&func='.$key, html_image('ic/'.$key.'.png', 16, 16), array('id' => 'tracker-vote', 'alt' => $txt, 'title' => util_html_secure(html_get_tooltip_description('vote'))));
+			if ($ah->isMonitoring()) {
+				$img="xmail16w.png";
+				$text=_('Stop monitoring');
+			} else {
+				$img="mail16w.png";
+				$text=_('Monitor');
 			}
-			$cells[][] = $cellContent;
+			$i = 0;
+			$cells[][] = util_make_link('/tracker/?group_id='.$group_id.'&artifact_id='.$ah->getID().'&atid='.$ath->getID().'&func=monitor', html_e('strong', array(), html_image('ic/'.$img, 20, 20).' '.$text), array('id' => 'tracker-monitor', 'title' => util_html_secure(html_get_tooltip_description('monitor'))));
 			$return .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i++, true)), $cells);
+			$votes = $ah->getVotes();
+			if ($votes[1]) {
+				$cells = array();
+				$cellContent = html_e('span', array('id' => 'tracker-votes', 'title' => html_get_tooltip_description('votes')), html_e('strong', array(), _('Votes') . _(': ')).sprintf('%1$d/%2$d (%3$d%%)', $votes[0], $votes[1], $votes[2]));
+				if ($ath->canVote()) {
+					if ($ah->hasVote()) {
+						$key = 'pointer_down';
+						$txt = _('Retract Vote');
+					} else {
+						$key = 'pointer_up';
+						$txt = _('Cast Vote');
+					}
+					$cellContent .= util_make_link('/tracker/?group_id='.$group_id.'&aid='.$ah->getID().'&atid='.$ath->getID().'&func='.$key, html_image('ic/'.$key.'.png', 16, 16), array('id' => 'tracker-vote', 'alt' => $txt, 'title' => util_html_secure(html_get_tooltip_description('vote'))));
+				}
+				$cells[][] = $cellContent;
+				$return .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i++, true)), $cells);
+			}
+			if (forge_check_perm('tracker', $atid, 'manager')) {
+				$cells = array();
+				$cells[][] = util_make_link('/tracker/?func=deleteartifact&aid='.$aid.'&group_id='.$group_id.'&atid='.$atid, $HTML->getDeletePic().html_e('strong', array(), _('Delete')));
+				$return .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i++, true)), $cells);
+			}
+			$return .= $HTML->listTableBottom();
+			return $return;
+		} else {
+			return $HTML->information(_('No action available.'));
 		}
-		if (forge_check_perm('tracker', $atid, 'manager')) {
-			$cells = array();
-			$cells[][] = util_make_link('/tracker/?func=deleteartifact&aid='.$aid.'&group_id='.$group_id.'&atid='.$atid, $HTML->getDeletePic().html_e('strong', array(), _('Delete')));
-			$return .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i++, true)), $cells);
-		}
-		$return .= $HTML->listTableBottom();
-		return $return;
 	}
 
 	function canBeRemove() {

@@ -41,31 +41,6 @@ $ath->adminHeader(array('title'=>sprintf(_('Update settings for %s'),
 	$ath->getName()),
 	'modal'=>1));
 
-if (forge_get_config('use_tracker_widget_display')) {
-	$sql = "SELECT l.* FROM layouts AS l INNER JOIN owner_layouts AS o ON(l.id = o.layout_id)
-			WHERE o.owner_type = $1
-			AND o.owner_id = $2
-			AND o.is_default = 1";
-	$res = db_query_params($sql,array('t', $atid));
-	if($res && db_numrows($res) < 1) {
-		$lm = new WidgetLayoutManager();
-		$lm->createDefaultLayoutForTracker($atid);
-		$res = db_query_params($sql,array('t', $atid));
-	}
-	$id = db_result($res, 0 , 'id');
-	$url = '/widgets/widgets.php?owner=t'.$atid.'&layout_id='.$id;
-	$labels = array(_('Add widgets'), _('Customize Layout'));
-	$attrs = array();
-	$attrs[] = array('title' => _('Customfields must be linked to a widget to be displayed. Use “Add widgets” to create new widget to link and organize your customfields.'));
-	$attrs[] = array('title' => _('General layout to display “Submit New” form or detailed view of an existing artifact can be customize. Use “Customize Layout” to that purpose.'));
-	$urls = array($url, $url.'&update=layout');
-	$elementsLi = array();
-	for ($i = 0; $i < count($urls); $i++) {
-		$elementsLi[] = array('content' => util_make_link($urls[$i], $labels[$i]), 'attrs' => $attrs[$i]);
-	}
-	echo $HTML->html_list($elementsLi, array('class' => 'widget_toolbar'));
-}
-
 echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID(), 'method' => 'post'));
 
 echo html_e('input', array('type'=>'hidden', 'name'=>'update_type', 'value'=>'y'));

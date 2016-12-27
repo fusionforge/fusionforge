@@ -55,20 +55,6 @@ if ($func == 'add') {
 	$ath->header(array('title'=> $ah->getStringID().' '. $ah->getSummary(), 'atid'=>$ath->getID()));
 }
 
-if (forge_check_perm('tracker_admin', $atid)) {
-	$url = '/widgets/widgets.php?owner=t'.$atid.'&layout_id='.$id;
-	$labels = array(_('Add widgets'), _('Customize Layout'));
-	$urls = array($url, $url.'&update=layout');
-	$attrs = array();
-	$attrs[] = array('title' => _('Customfields must be linked to a widget to be displayed. Use “Add widgets” to create new widget to link and organize your customfields.'));
-	$attrs[] = array('title' => _('General layout to display “Submit New” form or detailed view of an existing artifact can be customize. Use “Customize Layout” to that purpose.'));
-	$elementsLi = array();
-	for ($i = 0; $i < count($urls); $i++) {
-		$elementsLi[] = array('content' => util_make_link($urls[$i], $labels[$i]), 'attrs' => $attrs[$i]);
-	}
-	echo $HTML->html_list($elementsLi, array('class' => 'widget_toolbar'));
-}
-
 echo $HTML->openForm(array('id' => 'trackerform', 'name' => 'trackerform', 'action' => '/tracker/?group_id='.$group_id.'&atid='.$ath->getID(), 'enctype' => 'multipart/form-data', 'method' => 'post'));
 echo html_e('input', array('type' => 'hidden', 'name' => 'form_key', 'value' => form_generate_key(), 'form' => 'trackerform'));
 if ($func == 'add') {

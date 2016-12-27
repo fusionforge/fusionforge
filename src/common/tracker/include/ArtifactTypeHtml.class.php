@@ -32,6 +32,7 @@ require_once $gfcommon.'tracker/ArtifactExtraFieldElement.class.php';
 require_once $gfcommon.'tracker/ArtifactWorkflow.class.php';
 require_once $gfcommon.'include/utils_crossref.php';
 require_once $gfcommon.'include/UserManager.class.php';
+require_once $gfcommon.'widget/WidgetLayoutManager.class.php';
 
 class ArtifactTypeHtml extends ArtifactType {
 
@@ -85,6 +86,27 @@ class ArtifactTypeHtml extends ArtifactType {
 				$labels[] = _('Administration');
 				$links[]  = '/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID();
 				$attr[]   = array('title' => _('Global administration for trackers. Create, clone, workflow, fields ...'));
+
+				if (forge_get_config('use_tracker_widget_display')) {
+					$sql = "SELECT l.* FROM layouts AS l INNER JOIN owner_layouts AS o ON(l.id = o.layout_id)
+							WHERE o.owner_type = $1
+							AND o.owner_id = $2
+							AND o.is_default = 1";
+					$res = db_query_params($sql,array('t', $this->getID()));
+					if($res && db_numrows($res) < 1) {
+						$lm = new WidgetLayoutManager();
+						$lm->createDefaultLayoutForTracker($this->getID());
+						$res = db_query_params($sql,array('t', $this->getID()));
+					}
+					$id = db_result($res, 0 , 'id');
+					$url = '/widgets/widgets.php?owner=t'.$this->getID().'&layout_id='.$id;
+					$labels[] = _('Add widgets');
+					$labels[] = _('Customize Layout');
+					$attr[] = array('title' => _('Customfields must be linked to a widget to be displayed. Use “Add widgets” to create new widget to link and organize your customfields.'));
+					$attr[] = array('title' => _('General layout to display “Submit New” form or detailed view of an existing artifact can be customize. Use “Customize Layout” to that purpose.'));
+					$links[] = $url;
+					$links[] = $url.'&update=layout';
+				}
 			}
 		}
 
