@@ -24,6 +24,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+require_once $gfcommon.'widget/WidgetLayoutManager.class.php';
+
 global $ath;
 global $error_msg;
 global $feedback;
@@ -395,11 +397,16 @@ if (getStringFromRequest('add_extrafield')) {
 	if (!$clone_id) {
 		exit_missing_param('',array(_('Clone ID')),'tracker');
 	}
-	if (!$ath->cloneFieldsFrom($clone_id)) {
-		exit_error(_('Error cloning fields: ').$ath->getErrorMessage(),'tracker');
-	} else {
+	$newEFIds = $ath->cloneFieldsFrom($clone_id);
+	if (is_array($newEFIds)) {
+		if (forge_get_config('use_tracker_widget_display')) {
+			$lm = new WidgetLayoutManager();
+			$lm->createDefaultLayoutForTracker($ath->getID(), $clone_id, $newEFIds);
+		}
 		$feedback .= _('Successfully Cloned Tracker Fields ');
 		$next = '*main*';
+	} else {
+		exit_error(_('Error cloning fields')._(': ').$ath->getErrorMessage(), 'tracker');
 	}
 
 //
