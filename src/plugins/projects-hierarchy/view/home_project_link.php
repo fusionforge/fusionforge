@@ -1,6 +1,6 @@
 <?php
 /**
- * projects_hierarchyPlugin Class
+ * Projects Hierarchy Plugin
  *
  * Copyright 2006 (c) Fabien Regnier - Sogeti
  * Copyright 2010-2011, Franck Villaume - Capgemini
@@ -55,9 +55,9 @@ if (sizeof($parent) || sizeof($childs)) {
 		echo html_ac(html_ap() -1);
 	}
 	if (sizeof($childs)) {
-		if (sizeof($parent))
+		if (sizeof($parent)) {
 			echo html_e('hr');
-
+		}
 		echo html_ao('ul');
 		foreach ($childs as $child) {
 			$childGroup = group_get_object($child);

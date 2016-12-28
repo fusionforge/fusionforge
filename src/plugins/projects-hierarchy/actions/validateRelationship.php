@@ -1,6 +1,6 @@
 <?php
 /**
- * docman hierarchy view
+ * Projects Hierarchy Plugin
  *
  * Copyright 2011, Franck Villaume - Capgemini
  * http://fusionforge.org

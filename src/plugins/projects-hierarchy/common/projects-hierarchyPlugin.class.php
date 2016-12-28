@@ -1,6 +1,6 @@
 <?php
 /**
- * projects_hierarchyPlugin Class
+ * Projects Hierarchy Plugin
  *
  * Copyright 2006 (c) Fabien Regnier - Sogeti
  * Copyright 2010-2011, Franck Villaume - Capgemini
@@ -30,7 +30,7 @@ class projects_hierarchyPlugin extends Plugin {
 		$this->name = 'projects-hierarchy';
 		$this->text = _('Project Hierarchy'); // To show in the tabs, use...
 		$this->pkg_desc =
-_('Organise projects hierarchically, relation type 1-n');
+_('Organise projects hierarchically, relation type 1-n.');
 		$this->_addHook('groupisactivecheckbox'); // The "use ..." checkbox in editgroupinfo
 		$this->_addHook('groupisactivecheckboxpost');
 		$this->_addHook('hierarchy_views'); // include specific views
@@ -90,7 +90,7 @@ _('Organise projects hierarchically, relation type 1-n');
 				$group_id = $params['group_id'];
 				$group = group_get_object($group_id);
 				if ($group->usesPlugin($this->name)) {
-					echo html_e('p', array(), util_make_link('/plugins/'.$this->name.'/?group_id='.$group_id.'&type=admin&pluginname='.$this->name, _('Hierarchy Admin'), array('title'=>_('Configure the projects-hierarchy plugin (docman, tree, delegate, globalconf features)'))));
+					echo html_e('p', array(), util_make_link('/plugins/'.$this->name.'/?group_id='.$group_id.'&type=admin&pluginname='.$this->name, _('Hierarchy Admin'), array('title'=>_('Configure the projects-hierarchy plugin (docman, tree, globalconf features)'))));
 				}
 				$returned = true;
 				break;
@@ -105,8 +105,9 @@ _('Organise projects hierarchically, relation type 1-n');
 						if (db_numrows($res1) > 0) {
 							$res2 = db_query_params('SELECT count(*) as used FROM plugin_projects_hierarchy_relationship where status = $1',
 										array('t'));
-							if ($res2)
+							if ($res2) {
 								$row = db_fetch_array($res2);
+							}
 							if ($row['used']) {
 								$hierarchy_used = true;
 							}
@@ -198,14 +199,15 @@ _('Organise projects hierarchically, relation type 1-n');
 		echo html_ao('ul', array('id' => 'tree'));
 		echo $this->getTree();
 		echo html_ac(html_ap() -1);
-		echo html_ao('script', array('type' => 'text/javascript')).'//<![CDATA['."\n";
-		echo 'jQuery(document).ready(function() {
-				if (typeof(jQuery(\'#tree\').simpleTreeMenu) != "undefined") {
-					jQuery(\'#tree\').simpleTreeMenu();
+		$javascript = <<<'EOS'
+			jQuery(document).ready(function() {
+				if (typeof(jQuery('#tree').simpleTreeMenu) != "undefined") {
+					jQuery('#tree').simpleTreeMenu();
 				}
 			})
-			//]]>'."\n";
-		echo html_ac(html_ap() - 2);
+EOS;
+		echo html_e('script', array( 'type'=>'text/javascript'), '//<![CDATA['."\n".'jQuery(function(){'.$javascript.'});'."\n".'//]]>');
+		echo html_ac(html_ap() - 1);
 	}
 
 	/**
@@ -223,7 +225,6 @@ _('Organise projects hierarchically, relation type 1-n');
 		switch ($status) {
 			case 'validated': {
 				$statusCondition = 't';
-
 				break;
 			}
 			case 'pending': {
@@ -237,27 +238,27 @@ _('Organise projects hierarchically, relation type 1-n');
 		}
 		switch ($order) {
 			case 'parent': {
-				$qpa = db_construct_qpa(false, 'SELECT project_id as id FROM plugin_projects_hierarchy_relationship
+				$qpa = db_construct_qpa(false, 'SELECT project_id AS id FROM plugin_projects_hierarchy_relationship
 							WHERE sub_project_id = $1', array($group_id));
-				if (isset($statusCondition))
+				if (isset($statusCondition)) {
 					$qpa = db_construct_qpa($qpa, ' AND status = $1', array($statusCondition));
-
+				}
 				$res = db_query_qpa($qpa);
 				break;
 			}
 			case 'child': {
-				$qpa = db_construct_qpa(false, 'SELECT sub_project_id as id FROM plugin_projects_hierarchy_relationship
+				$qpa = db_construct_qpa(false, 'SELECT sub_project_id AS id FROM plugin_projects_hierarchy_relationship
 							WHERE project_id = $1', array($group_id));
-				if (isset($statusCondition))
+				if (isset($statusCondition)) {
 					$qpa = db_construct_qpa($qpa, ' AND status = $1', array($statusCondition));
-
+				}
 				$res = db_query_qpa($qpa);
 				break;
 			}
 			case 'root': {
-				$qpa = db_construct_qpa(false, 'SELECT DISTINCT project_id as id FROM plugin_projects_hierarchy_relationship',
+				$res = db_query_params('SELECT project_id AS id FROM plugin_projects_hierarchy_relationship
+							WHERE project_id NOT IN (SELECT DISTINCT sub_project_id FROM plugin_projects_hierarchy_relationship)',
 							array());
-				$res = db_query_qpa($qpa);
 				break;
 			}
 			default: {
@@ -293,13 +294,13 @@ _('Organise projects hierarchically, relation type 1-n');
 	function getDocmanStatus($group_id) {
 		$res = db_query_params('SELECT docman FROM plugin_projects_hierarchy WHERE project_id = $1 limit 1',
 					array($group_id));
-		if (!$res)
+		if (!$res) {
 			return false;
-
+		}
 		$resArr = db_fetch_array($res);
-		if ($resArr['docman'] == 't')
+		if ($resArr['docman'] == 't') {
 			return true;
-
+		}
 		return false;
 	}
 
@@ -314,9 +315,9 @@ _('Organise projects hierarchically, relation type 1-n');
 		$res = db_query_params('UPDATE plugin_projects_hierarchy set docman = $1 WHERE project_id = $2',
 					array($status, $group_id));
 
-		if (!$res)
+		if (!$res) {
 			return false;
-
+		}
 		return true;
 	}
 
@@ -379,9 +380,10 @@ _('Organise projects hierarchically, relation type 1-n');
 	function add($group_id) {
 		if (!$this->exists($group_id)) {
 			$globalConf = $this->getGlobalconf();
-			$res = db_query_params('INSERT INTO plugin_projects_hierarchy (project_id, tree, docman, delegate) VALUES ($1, $2, $3, $4)', array($group_id, (int)$globalConf['tree'], (int)$globalConf['docman'], (int)$globalConf['delegate']));
-			if (!$res)
+			$res = db_query_params('INSERT INTO plugin_projects_hierarchy (project_id, tree, docman) VALUES ($1, $2, $3)', array($group_id, (int)$globalConf['tree'], (int)$globalConf['docman']));
+			if (!$res) {
 				return false;
+			}
 		}
 		return true;
 	}
@@ -426,9 +428,9 @@ _('Organise projects hierarchically, relation type 1-n');
 			if (!$this->hasRelation($project_id, $sub_project_id)) {
 				$res = db_query_params('INSERT INTO plugin_projects_hierarchy_relationship (project_id, sub_project_id)
 							VALUES ($1, $2)', array($project_id, $sub_project_id));
-				if (!$res)
+				if (!$res) {
 					return false;
-
+				}
 				return true;
 			}
 		}
@@ -449,9 +451,9 @@ _('Organise projects hierarchically, relation type 1-n');
 				$res = db_query_params('DELETE FROM plugin_projects_hierarchy_relationship
 							WHERE project_id = $1 AND sub_project_id = $2',
 							array($project_id, $sub_project_id));
-				if (!$res)
+				if (!$res) {
 					return false;
-
+				}
 				return true;
 			}
 		}
@@ -472,9 +474,9 @@ _('Organise projects hierarchically, relation type 1-n');
 				$res = db_query_params('DELETE FROM plugin_projects_hierarchy_relationship
 							WHERE project_id = $1 AND sub_project_id = $2',
 							array($sub_project_id, $project_id));
-				if (!$res)
+				if (!$res) {
 					return false;
-
+				}
 				return true;
 			}
 		}
@@ -495,8 +497,9 @@ _('Organise projects hierarchically, relation type 1-n');
 						WHERE ( project_id = $1 AND sub_project_id = $2 )
 						OR ( project_id = $2 AND sub_project_id = $1 )',
 						array($project_id, $sub_project_id));
-			if ($res && db_numrows($res) == 1 )
+			if ($res && db_numrows($res) == 1 ) {
 				return true;
+			}
 		}
 		return false;
 	}
@@ -529,11 +532,12 @@ _('Organise projects hierarchically, relation type 1-n');
 						}
 					}
 					$res = db_query_qpa($qpa);
-					if (!$res)
+					if (!$res) {
 						return false;
-
-					if (db_affected_rows($res))
+					}
+					if (db_affected_rows($res)) {
 						return true;
+					}
 				} else {
 					$qpa = db_construct_qpa(false, 'DELETE FROM plugin_projects_hierarchy_relationship');
 					switch ($relation) {
@@ -553,11 +557,12 @@ _('Organise projects hierarchically, relation type 1-n');
 						}
 					}
 					$res = db_query_qpa($qpa);
-					if (!$res)
+					if (!$res) {
 						return false;
-
-					if (db_affected_rows($res))
+					}
+					if (db_affected_rows($res)) {
 						return true;
+					}
 				}
 			}
 		}
@@ -573,12 +578,12 @@ _('Organise projects hierarchically, relation type 1-n');
 	 */
 	function exists($group_id) {
 		$res = db_query_params('SELECT project_id FROM plugin_projects_hierarchy WHERE project_id = $1', array($group_id));
-		if (!$res)
+		if (!$res) {
 			return false;
-
-		if (db_numrows($res))
+		}
+		if (db_numrows($res)) {
 			return true;
-
+		}
 		return false;
 	}
 
@@ -589,7 +594,7 @@ _('Organise projects hierarchically, relation type 1-n');
 	 * @access	public
 	 */
 	function getAdminOptionLink() {
-		return util_make_link('/plugins/'.$this->name.'/?type=globaladmin',_('Global Hierarchy admin'), array('title'=>_('Configure the projects-hierarchy plugin (docman, tree, delegate, globalconf features)')));
+		return util_make_link('/plugins/'.$this->name.'/?type=globaladmin',_('Global Hierarchy admin'), array('title'=>_('Configure the projects-hierarchy plugin (docman, tree, globalconf features)')));
 	}
 
 	/**
@@ -691,7 +696,6 @@ _('Organise projects hierarchically, relation type 1-n');
 				$returnArr[$column] = 0;
 			}
 		}
-
 		return $returnArr;
 	}
 
@@ -726,27 +730,26 @@ _('Organise projects hierarchically, relation type 1-n');
 	/**
 	 * updateGlobalConf - update the global configuration in database
 	 *
-	 * @param	array	$confArr configuration array (tree, docman, delegate)
+	 * @param	array	$confArr configuration array (tree, docman)
 	 * @return	bool	true on success
 	 */
 	function updateGlobalConf($confArr) {
-		if (!isset($confArr['tree']) || !isset($confArr['docman']) || !isset($confArr['delegate']))
+		if (!isset($confArr['tree']) || !isset($confArr['docman'])) {
 			return false;
-
+		}
 		$res = db_query_params('truncate plugin_projects_hierarchy_global',array());
-		if (!$res)
+		if (!$res) {
 			return false;
-
-		$res = db_query_params('insert into plugin_projects_hierarchy_global (tree, docman, delegate)
-					values ($1, $2, $3)',
+		}
+		$res = db_query_params('insert into plugin_projects_hierarchy_global (tree, docman)
+					values ($1, $2)',
 					array(
 						$confArr['tree'],
 						$confArr['docman'],
-						$confArr['delegate']
 					));
-		if (!$res)
+		if (!$res) {
 			return false;
-
+		}
 		return true;
 	}
 
@@ -754,26 +757,25 @@ _('Organise projects hierarchically, relation type 1-n');
 	 * updateConf - update the configuration in database for this project
 	 *
 	 * @param	integer	$project_id
-	 * @param	array	$confArr configuration array (tree, docman, delegate)
+	 * @param	array	$confArr configuration array (tree, docman)
 	 * @return	bool	true on success
 	 */
 	function updateConf($project_id, $confArr) {
-		if (!isset($confArr['tree']) || !isset($confArr['docman']) || !isset($confArr['delegate']) || !isset($confArr['globalconf']))
+		if (!isset($confArr['tree']) || !isset($confArr['docman']) || !isset($confArr['globalconf'])) {
 			return false;
-
+		}
 		$res = db_query_params('update plugin_projects_hierarchy
-					set (tree, docman, delegate, globalconf) = ($1, $2, $3, $4)
-					where project_id = $5',
+					set (tree, docman, globalconf) = ($1, $2, $3)
+					where project_id = $4',
 					array(
 						$confArr['tree'],
 						$confArr['docman'],
-						$confArr['delegate'],
 						$confArr['globalconf'],
 						$project_id
 					));
-		if (!$res)
+		if (!$res) {
 			return false;
-
+		}
 		return true;
 	}
 
@@ -858,13 +860,10 @@ _('Organise projects hierarchically, relation type 1-n');
 	 * @access	public
 	 */
 	function is_child($group_id) {
-		if (count($this->getFamily($group_id, 'parent', true, 'any'))>0)
+		if (count($this->getFamily($group_id, 'parent', true, 'any')) > 0) {
 			return true;
-		else
+		} else {
 			return false;
+		}
 	}
 }
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:

@@ -1,5 +1,6 @@
 <?php
 /**
+ * Projects Hierarchy Plugin
  * docman hierarchy view
  *
  * Copyright 2011, Franck Villaume - Capgemini

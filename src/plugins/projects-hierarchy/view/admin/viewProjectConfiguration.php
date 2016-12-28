@@ -1,6 +1,6 @@
 <?php
 /**
- * Projects Hierarchy plugin
+ * Projects Hierarchy Plugin
  *
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright 2014, Franck Villaume - TrivialDev
@@ -49,17 +49,6 @@ if (!$projectsHierarchyProjectConf) {
 		$inputAttrs['checked'] = 'checked';
 	$cells[][] = html_e('input', $inputAttrs);
 	echo $HTML->multiTableRow(array(), $cells);
-
-	/* Not Yet Implemented */
-	/*
-	$cells = array();
-	$cells[][] = html_e('label', array('id' => 'projectsHierarchy-delegate', 'title' => _('Enable full rights and configuration delegation to parent.')), _('Enable delegate'));
-	$inputAttrs = array('type' => 'checkbox', 'name' => 'delegate', 'value' => 1);
-	if ($projectsHierarchyProjectConf['delegate'])
-		$inputAttrs['checked'] = 'checked';
-	$cells[][] = html_e('input', $inputAttrs);
-	echo $HTML->multiTableRow(array(), $cells);
-	*/
 
 	$cells = array();
 	$cells[][] = html_e('label', array('id' => 'projectsHierarchy-globalconf', 'title' => _('Use forge global configuration. Superseed any configuration done at project level.')), _('Enable forge global configuration'));

@@ -27,7 +27,6 @@ global $projectsHierarchy; // the projects-hierarchy plugin object
 $confArr = array();
 $confArr['tree'] = getIntFromRequest('tree');
 $confArr['docman'] = getIntFromRequest('docman');
-$confArr['delegate'] = 0;
 
 if (!$projectsHierarchy->updateGlobalConf($confArr)) {
 	$error_msg = _('Failed to update global configuration.');

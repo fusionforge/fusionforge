@@ -27,7 +27,6 @@ global $group_id;
 $confArr = array();
 $confArr['tree'] = getIntFromRequest('tree');
 $confArr['docman'] = getIntFromRequest('docman');
-$confArr['delegate'] = 0;
 $confArr['globalconf'] = getIntFromRequest('globalconf');
 
 if (!$projectsHierarchy->updateConf($group_id, $confArr)) {
