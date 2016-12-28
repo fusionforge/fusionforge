@@ -271,7 +271,7 @@ class WidgetLayoutManager {
 				$at = artifactType_get_object($owner_id);
 				$extrafields = $at->getExtraFields(array());
 				if (count($extrafields) > 0) {
-					$res = db_query_params('INSERT INTO artifact_display_widget (owner_id, title, cols) VALUES ($1, $2, $3)', array($owner_id, _('Default ExtraField 2-columns Widget'), 2));
+					$res = db_query_params('INSERT INTO artifact_display_widget (owner_id, title) VALUES ($1, $2)', array($owner_id, _('Default ExtraField 2-columns Widget')));
 					$content_id = db_insertid($res, 'artifact_display_widget', 'id');
 					$row_id = 1;
 					$column_id = 1;
@@ -280,7 +280,7 @@ class WidgetLayoutManager {
 						if ($column_id == 2) {
 							$row_id++;
 						}
-						db_query_params('INSERT INTO artifact_display_widget_field (id, field_id, column_id, row_id) VALUES ($1, $2, $3, $4)', array($content_id, $extrafield['extra_field_id'], $column_id, $row_id));
+						db_query_params('INSERT INTO artifact_display_widget_field (id, field_id, column_id, row_id, width, section) VALUES ($1, $2, $3, $4, $5, $6)', array($content_id, $extrafield['extra_field_id'], $column_id, $row_id, 50, ''));
 					}
 					db_query_params('INSERT INTO layouts_contents (owner_id, owner_type, layout_id, column_id, name, rank, content_id) VALUES ($1, $2, 1, 2, $3, 3, $4)',
 							array($owner_id, self::OWNER_TYPE_TRACKER, 'trackercontent', $content_id));
@@ -295,16 +295,16 @@ class WidgetLayoutManager {
 					while ($data = db_fetch_array($req)) {
 						$content_id = 0;
 						if ($data['name'] == 'trackercontent') {
-							$res = db_query_params('SELECT title, cols FROM artifact_display_widget WHERE owner_id = $1 AND id = $2', array($template_id, $data['content_id']));
+							$res = db_query_params('SELECT title FROM artifact_display_widget WHERE owner_id = $1 AND id = $2', array($template_id, $data['content_id']));
 							if ($res && db_numrows($res) > 0) {
 								$arr = db_fetch_array($res);
-								db_query_params('INSERT INTO artifact_display_widget (owner_id, title, cols) VALUES ($1, $2, $3)', array($owner_id, $arr['title'], $arr['cols']));
+								db_query_params('INSERT INTO artifact_display_widget (owner_id, title) VALUES ($1, $2)', array($owner_id, $arr['title']));
 								$content_id = db_insertid($res, 'artifact_display_widget', 'id');
-								$res2 = db_query_params('SELECT field_id, column_id, row_id FROM artifact_display_widget_field WHERE id = $1', array($data['content_id']));
+								$res2 = db_query_params('SELECT field_id, column_id, row_id, width, section FROM artifact_display_widget_field WHERE id = $1', array($data['content_id']));
 								if ($res2 && db_numrows($res2) > 0) {
 									while ($arr2 = db_fetch_array($res2)) {
-										db_query_params('INSERT INTO artifact_display_widget_field (id, field_id, column_id, row_id) VALUES ($1, $2, $3, $4)',
-												array($content_id, $newEFIds[$arr2['field_id']], $arr2['column_id'], $arr2['row_id']));
+										db_query_params('INSERT INTO artifact_display_widget_field (id, field_id, column_id, row_id, width, section) VALUES ($1, $2, $3, $4, $5, $6)',
+												array($content_id, $newEFIds[$arr2['field_id']], $arr2['column_id'], $arr2['row_id'], $arr2['width'], $arr2['section']));
 										echo db_error();
 									}
 								}
