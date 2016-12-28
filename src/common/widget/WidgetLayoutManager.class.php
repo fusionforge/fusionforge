@@ -410,7 +410,7 @@ class WidgetLayoutManager {
 			$action = 'widget';
 		}
 		echo $HTML->html_list($elementsLi, array('class' => 'widget_toolbar'));
-		echo $HTML->openForm(array('action' => '/widgets/updatelayout.php?owner='.$owner_type.$owner_id.'&action='.$action.'&layout_id='.$layout_id, 'method' => 'post'));
+		echo $HTML->openForm(array('id' => 'builder', 'action' => '/widgets/updatelayout.php?owner='.$owner_type.$owner_id.'&action='.$action.'&layout_id='.$layout_id, 'method' => 'post'));
 		if ($update_layout) {
 			?>
 			<script type='text/javascript'>//<![CDATA[
@@ -819,7 +819,6 @@ class WidgetLayoutManager {
 	 * @param	object	$widget
 	 */
 	function removeWidget($owner_id, $owner_type, $layout_id, $name, $instance_id, &$widget) {
-		error_log('o='.$owner_id.',t='.$owner_type.',layout_id='.$layout_id.',instance_id='.$instance_id);
 		$sql = "DELETE FROM layouts_contents WHERE owner_type =$1 AND owner_id = $2 AND layout_id = $3 AND name = $4 AND content_id = $5";
 		db_query_params($sql,array($owner_type,$owner_id,$layout_id,$name,$instance_id));
 		if (!db_error()) {

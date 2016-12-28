@@ -380,6 +380,12 @@ p.information {
 .widget_preferences form {
 	margin:0;
 }
+.widget_section_title {
+	padding: 2px;
+	font-variant: small-caps;
+	border-bottom: 1px solid #bcbcad;
+	margin-bottom: 4px;
+}
 .widget_titlebar {
 	font-weight: bold;
 	text-align: center;
@@ -699,9 +705,9 @@ div.layout-manager-column-remove_hover {
 	color:red;
 	cursor:pointer;
 }
-.layout-manager-column-width {
+/*.layout-manager-column-width {
 	padding-top:2.5em;
-}
+}*/
 
 .layout-manager-chooser {
 	vertical-align:top
@@ -711,6 +717,17 @@ div.layout-manager-column-remove_hover {
 }
 .layout-manager-chooser_selected {
 	background:#f0f0f0;
+}
+
+div.ef-column-remove {
+	padding:0 0.5em 0.5em 0.5em;
+	font-size:0.8em;
+	color:#fff;
+	float:right;
+}
+div.ef-column-remove_hover {
+	color:red;
+	cursor:pointer;
 }
 
 /* }}} */

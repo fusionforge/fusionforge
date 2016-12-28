@@ -26,7 +26,6 @@ require_once $gfwww.'include/jquery_plugins.php';
 
 class Widget_TrackerContent extends Widget {
 	var $trackercontent_title;
-	var $trackercolumns;
 
 	function __construct() {
 		$request =& HTTPRequest::instance();
@@ -43,10 +42,6 @@ class Widget_TrackerContent extends Widget {
 		return $this->trackercontent_title ? $hp->purify($this->trackercontent_title, CODENDI_PURIFIER_CONVERT_HTML)  : _('Tracker Content Box');
 	}
 
-	function getColumns() {
-		return $this->trackercolumns;
-	}
-
 	function isUnique() {
 		return false;
 	}
@@ -56,7 +51,7 @@ class Widget_TrackerContent extends Widget {
 	}
 
 	function getDescription() {
-		return _("Create an empty widget to link fields together and then organize the artifact display view (update & submit new).");
+		return _('Create an empty widget to link fields together and then organize the artifact display view (update & submit new).');
 	}
 
 	function loadContent($id) {
@@ -66,29 +61,33 @@ class Widget_TrackerContent extends Widget {
 	}
 
 	function fetchData($id) {
-		$res = db_query_params('select * from artifact_display_widget where id = $1', array($id));
-		$title = false;
-		$columns = 0;
+		$res = db_query_params('SELECT title FROM artifact_display_widget WHERE id = $1', array($id));
 		if ($res) {
-			$arr = db_fetch_array($res);
-			$title = $arr['title'];
-			$columns = $arr['cols'];
+			$title = db_result($res, 0, 'title');
 		}
 		$this->trackercontent_title = $title;
-		$this->trackercolumns = $columns;
 	}
 
 	function create(&$request) {
 		$hp = Codendi_HTMLPurifier::instance();
 		$this->trackercontent_title = $hp->purify($request->get('title'), CODENDI_PURIFIER_CONVERT_HTML);
-		$this->trackercolumns = (int)$request->get('columns');
-		$res = db_query_params('INSERT INTO artifact_display_widget (owner_id, title, cols) VALUES ($1, $2, $3)', array($this->owner_id, $this->trackercontent_title, $this->trackercolumns));
+		$trackerrows = getArrayFromRequest('trackercontent_layout');
+		$trackerextrafields = getArrayFromRequest('trackercontent_ef');
+		$res = db_query_params('INSERT INTO artifact_display_widget (owner_id, title) VALUES ($1, $2)', array($this->owner_id, $this->trackercontent_title));
 		$content_id = db_insertid($res, 'artifact_display_widget', 'id');
-		$extrafieldIDs = getArrayFromRequest('extrafieldids');
-		$extrafieldIDColumns = getArrayFromRequest('extrafield_column_ids');
-		$extrafieldIDRows = getArrayFromRequest('extrafield_row_ids');
-		foreach ($extrafieldIDs as $key => $extrafieldID) {
-			db_query_params('INSERT INTO artifact_display_widget_field (id, field_id, column_id, row_id) VALUES ($1, $2, $3, $4)', array($content_id, $extrafieldID, $extrafieldIDColumns[$key], $extrafieldIDRows[$key]));
+		foreach ($trackerrows as $rowkey => $trackerrow) {
+			$columns = explode(',', $trackerrow);
+			$extrafields = explode(',', $trackerextrafields[$rowkey]);
+			$rowid = $rowkey;
+			foreach ($columns as $columnkey => $column) {
+				if ($extrafields[$columnkey] == "fake") {
+					$extrafieldid = 0;
+				} else {
+					$extrafieldid = substr($extrafields[$columnkey], 2); //remove prefix ef
+				}
+				db_query_params('INSERT INTO artifact_display_widget_field (id, field_id, column_id, row_id, width) VALUES ($1, $2, $3, $4, $5)',
+						array($content_id, $extrafieldid, $columnkey, $rowid, $column));
+			}
 		}
 		return $content_id;
 	}
@@ -102,60 +101,194 @@ class Widget_TrackerContent extends Widget {
 		return html_e('p', array(), _('Title')._(':').html_e('input', array('type' => 'text', 'name' => 'title', 'size' => 30, 'value' => htmlspecialchars($title))));
 	}
 
-	private function getPartialPreferencesFormColumns($column_number) {
-		return html_e('p', array(), _('Number of vertical columns')._(':').html_e('input', array('type' => 'number', 'name' => 'columns', 'value' => $column_number, 'step' => 1, 'min' => 1, 'title' => _('Set number of columns to split your box into columns'))));
+	private function buildRenderWidget() {
+		global $HTML;
+		global $ath;
+		$content = html_e('p', array(), _('Build your layout and drag & drop customfields in cells')._(':'));
+		$content .= $HTML->listTableTop(array(), array(), '', 'layout-manager').
+				'<tr>
+				<td>'
+				.html_e('div', array('class' => 'layout-manager-row-add'), '+');
+		$layoutExtraFieldIDs = $this->getLayoutExtraFieldIDs($this->content_id);
+		if (count($layoutExtraFieldIDs) > 0) {
+			foreach ($layoutExtraFieldIDs as $row_id => $column_id) {
+				$cells = array();
+				$content .= '<table class="layout-manager-row" id="widget_layout_build">
+							<tr>
+							<td class="layout-manager-column-add">+</td>';
+				foreach ($column_id as $extrafieldID) {
+					$keys = array_keys($extrafieldID);
+					if ($keys[0]) {
+						$extrafieldObject = new ArtifactExtraField($ath, $keys[0]);
+						$divEF = html_e('div', array('id' => 'ef'.$keys[0], 'class' => 'wb_extrafield', 'style' => 'background: #e6e6e6 none repeat scroll 0 0; padding: 2px; text-align: center;'), $extrafieldObject->getName().'<div id="xef'.$keys[0].'" class="ef-widget-remove">x</div>');
+					} else {
+						$divEF = '<div id="fake" class="wb_extrafield" style="display: hidden" />';
+					}
+
+					$content .= '<td class="layout-manager-column" width="'.$extrafieldID[$keys[0]][0].'%">
+							<div class="layout-manager-column-remove">x</div>
+							<div class="layout-manager-column-width">
+							'._('Section Title')._(':').'<br  />
+							<input type="text" value="'.htmlspecialchars($extrafieldID[$keys[0]][1]).'" size="20" maxsize="20" /><br />
+							<input type="number" value="'.$extrafieldID[$keys[0]][0].'" autocomplete="off" size="1" maxlength="3" />%
+							</div>';
+					$content .= $divEF;
+					$content .= '</td><td class="layout-manager-column-add">+</td>';
+				}
+				$content .= '</tr></table>';
+			}
+		} else {
+			$content .= '<table class="layout-manager-row" id="widget_layout_build">
+				<tr>
+				<td class="layout-manager-column-add">+</td>';
+			$content .= '<td class="layout-manager-column">
+				<div class="layout-manager-column-remove">x</div>
+				<div class="layout-manager-column-width">
+				'._('Section Title')._(':').'<br  />
+				<input type="text" value="" size="20" maxsize="20" /><br />
+				<input type="number" value="50" autocomplete="off" size="1" maxlength="3" />%
+				</div>
+				<div id="fake" class="wb_extrafield" style="display: hidden" />
+				</td>
+				<td class="layout-manager-column-add">+</td>';
+			$content .= '<td class="layout-manager-column">
+				<div class="layout-manager-column-remove">x</div>
+				<div class="layout-manager-column-width">
+				'._('Section Title')._(':').'<br  />
+				<input type="text" value="" size="20" maxsize="20" /><br />
+				<input type="number" value="50" autocomplete="off" size="1" maxlength="3" />%
+				</div>
+				<div id="fake" class="wb_extrafield" style="display: hidden" />
+				</td>
+				<td class="layout-manager-column-add">+</td>
+				</tr></table>';
+		}
+		$content .= html_e('div', array('class' => 'layout-manager-row-add'), '+');
+		$content .= '</td>
+			</tr>'.
+			$HTML->listTableBottom();
+		$javascript = <<<'EOS'
+				var controllerWidgetBuilder;
+				jQuery(document).ready(function() {
+					controllerWidgetBuilder = new WidgetBuilderController({
+						buttonAddRow:		jQuery('.layout-manager-row-add'),
+						buttonAddColumn:	jQuery('.layout-manager-column-add'),
+						buttonRemoveColumn:	jQuery('.layout-manager-column-remove'),
+						buttonRemoveEF:		jQuery('.ef-widget-remove')
+					});
+					jQuery('.layout-manager-column').droppable({
+										accept: '#extrafield_table .wb_extrafield',
+										drop: function(event, ui) {
+											ui.draggable.appendTo(this).css('position', '');
+											ui.draggable.parent().droppable('destroy');
+											ui.draggable.parent().find('#fake').remove();
+											ui.draggable.find('#x'+ui.draggable.attr('id')).show()},
+										over: function(event, ui) {
+											ui.helper.css('z-index', 1);
+										},
+					});
+					if (jQuery("[name='name[trackercontent][add]']") != 'undefined') {
+						jQuery("[name='name[trackercontent][add]']").click(function(){
+							var form = jQuery(this).parents('form').first();
+							form.find('.layout-manager-row').each(function(i, e) {
+								jQuery('<input>', {
+									type: 'hidden',
+									name: 'trackercontent_layout[]',
+									value: jQuery(e).find('.layout-manager-column input[type=number]').map(function(){ return this.value;}).get().join(',')
+								}).appendTo(form);
+								jQuery('<input>', {
+									type: 'hidden',
+									name: 'trackercontent_ef[]',
+									value: jQuery(e).find('.layout-manager-column > .wb_extrafield').map(function(){ return this.id;}).get().join(',')
+								}).appendTo(form);
+								jQuery('<input>', {
+									type: 'hidden',
+									name: 'trackercontent_title[]',
+									value: jQuery(e).find('.layout-manager-column input[type=text]').map(function(){ return this.value;}).get().join(',')
+								}).appendTo(form);
+							});
+						});
+					}
+					if (jQuery("[name='trackercontent-submit']") != 'undefined') {
+						jQuery("[name='trackercontent-submit']").click(function(){
+							var form = jQuery(this).parents('form').first();
+							form.find('.layout-manager-row').each(function(i, e) {
+								jQuery('<input>', {
+									type: 'hidden',
+									name: 'trackercontent_layout[]',
+									value: jQuery(e).find('.layout-manager-column input[type=number]').map(function(){ return this.value;}).get().join(',')
+								}).appendTo(form);
+								jQuery('<input>', {
+									type: 'hidden',
+									name: 'trackercontent_ef[]',
+									value: jQuery(e).find('.layout-manager-column > .wb_extrafield').map(function(){ return this.id;}).get().join(',')
+								}).appendTo(form);
+								jQuery('<input>', {
+									type: 'hidden',
+									name: 'trackercontent_title[]',
+									value: jQuery(e).find('.layout-manager-column input[type=text]').map(function(){ return this.value;}).get().join(',')
+								}).appendTo(form);
+							});
+						});
+					}
+				});
+EOS;
+		$content .= html_e('script', array( 'type'=>'text/javascript'), '//<![CDATA['."\n".'jQuery(function(){'.$javascript.'});'."\n".'//]]>');
+		return $content;
 	}
 
-	private function getAvailableExtraFieldsForm($owner_id) {
+	private function getAvailableExtraFieldsForm($owner_id, $preference = false) {
 		global $HTML;
 		$atid = $owner_id;
 		$artifactTypeObject = artifactType_get_object($atid);
 		$availableExtraFields = $artifactTypeObject->getExtraFields();
 		$stillAvailableExtraFields = $this->availableExtrafields($owner_id, $availableExtraFields);
-		if (count($stillAvailableExtraFields) > 0) {
-			$content = html_e('p', array(), sprintf(_('Tick available custom fields from %s to display into this widget'), $artifactTypeObject->getName())._(':'));
-			$content .= $HTML->listTableTop(array('', '', _('Column ID'), _('Row ID')));
-			foreach ($stillAvailableExtraFields as $key => $stillAvailableExtraField) {
-				$cells = array();
-				$cells[][] = util_unconvert_htmlspecialchars($stillAvailableExtraField['field_name']);
-				$cells[][] = html_e('input', array('type' => 'checkbox', 'name' => 'extrafieldids[]', 'value' => $stillAvailableExtraField[0]));
-				$cells[][] = html_e('input', array('type' => 'number', 'name' => 'extrafield_column_ids[]', 'value' => 1, 'step' => 1, 'min' => 1, 'title' => _('Set the column number accordingly to the number of columns you created')));
-				$cells[][] = html_e('input', array('type' => 'number', 'name' => 'extrafield_row_ids[]', 'value' => 1, 'step' => 1, 'min' => 1, 'title' => _('Set the row number accordingly to organize the extrafields')));
-				$content .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($key, true)), $cells);
-			}
-			$content .= $HTML->listTableBottom();
-		} else {
-			$content = $HTML->information(_('No custom fields available to link to this widget'));
+		$arr = array();
+		if ($preference) {
+			$arr = $this->getExtraFieldIDs($owner_id);
 		}
-		return $content;
-	}
-
-	private function getExtraFieldsForm($id) {
-		global $HTML;
-		global $ath;
-		global $atid;
-		$artifactTypeObject = artifactType_get_object($atid);
-		$layoutExtraFieldIDs = $this->getLayoutExtraFieldIDs($id);
-		$content = html_e('p', array(), sprintf(_('Adjust already used ExtraFields from %s to display into this widget'), $artifactTypeObject->getName())._(':'));
-		if (count($layoutExtraFieldIDs) > 0) {
-			$content .= $HTML->listTableTop(array('', '', _('Column ID'), _('Row ID')));
-			foreach ($layoutExtraFieldIDs as $row_id => $column_id) {
-				foreach ($column_id as $key => $extrafieldIDs) {
-					foreach ($extrafieldIDs as $extrafieldID) {
-						$extrafieldObject = new ArtifactExtraField($ath, $extrafieldID);
-						$cells = array();
-						$cells[][] = $extrafieldObject->getName();
-						$cells[][] = html_e('input', array('type' => 'checkbox', 'name' => 'extrafieldids[]', 'value' => $extrafieldID, 'checked' => 'checked'));
-						$cells[][] = html_e('input', array('type' => 'number', 'name' => 'extrafield_column_ids[]', 'value' => $key, 'step' => 1, 'min' => 1, 'title' => _('Set the column number accordingly to the number of columns you created')));
-						$cells[][] = html_e('input', array('type' => 'number', 'name' => 'extrafield_row_ids[]', 'value' => $row_id, 'step' => 1, 'min' => 1, 'title' => _('Set the row number accordingly to organize the extrafields')));
-						$content .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($key, true)), $cells);
-					}
+		if (count($stillAvailableExtraFields) > 0 || count($arr) > 0) {
+			$content = html_e('p', array(), sprintf(_('Drag & drop into your layout the available custom fields from %s to display into this widget'), $artifactTypeObject->getName())._(':'));
+			$content .= $HTML->listTableTop(array(), array(), 'full', 'extrafield_table');
+		}
+		if (count($stillAvailableExtraFields) > 0) {
+			$cells = array();
+			for ($i = 0; count($stillAvailableExtraFields) > $i; $i++) {
+				$cells[] = array(html_e('div', array('id' => 'ef'.$stillAvailableExtraFields[$i][0], 'class' => 'wb_extrafield', 'style' => 'background: #e6e6e6 none repeat scroll 0 0; padding: 2px; text-align: center;'), util_unconvert_htmlspecialchars($stillAvailableExtraFields[$i]['field_name']).'<div id="xef'.$stillAvailableExtraFields[$i][0].'" style="display: none" class="ef-widget-remove">x</div>'), 'id' => 'tdef'.$stillAvailableExtraFields[$i][0], 'class' => 'td-droppable', 'width' => '50%');
+				if ((($i % 2) > 0) || count($stillAvailableExtraFields) == 1) {
+					$content .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
+					$cells = array();
 				}
 			}
+		}
+		if (count($arr) > 0) {
+			$cells = array();
+			for ($i = 0; count($arr) > $i; $i++) {
+				$cells[] = array('', 'id' => 'tdef'.$arr[$i], 'width' => '50%');
+				if ((($i % 2) > 0) || count($arr) == 1) {
+					$content .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
+					$cells = array();
+				}
+			}
+		}
+		if (count($stillAvailableExtraFields) > 0 || count($arr) > 0) {
 			$content .= $HTML->listTableBottom();
+			$javascript = <<<'EOS'
+				jQuery(document).ready(function() {
+					var wb_extrafield_start;
+					jQuery('.wb_extrafield', '#extrafield_table').draggable({
+												cursor: "move",
+												helper: "clone",
+												});
+				});
+EOS;
+			$content .= html_e('script', array( 'type'=>'text/javascript'), '//<![CDATA['."\n".'jQuery(function(){'.$javascript.'});'."\n".'//]]>');
+		}
+
+		if (!isset($content)) {
+			$content = $HTML->information(_('No customfields available to link to a widget'));
 		}
 		return $content;
-
 	}
 
 	private function availableExtrafields($owner_id, $extrafields) {
@@ -180,11 +313,12 @@ class Widget_TrackerContent extends Widget {
 	}
 
 	private function getLayoutExtraFieldIDs($id) {
-		$res = db_query_params('select row_id, column_id, field_id from artifact_display_widget_field where id = $1 order by row_id, column_id', array($id));
+		$res = db_query_params('select row_id, column_id, field_id, width, section from artifact_display_widget_field where id = $1 order by row_id, column_id', array($id));
 		$extrafieldIDs = array();
 		if ($res && (db_numrows($res) > 0)) {
 			while ($arr = db_fetch_array($res)) {
-				$extrafieldIDs[$arr[0]][$arr[1]][] = $arr[2];
+				// row_id is unique, column_id is unique per row, field_id is unique, width is not unique, section is not unique
+				$extrafieldIDs[$arr[0]][$arr[1]][$arr[2]] = array($arr[3], $arr[4]);
 			}
 		}
 		return $extrafieldIDs;
@@ -194,7 +328,7 @@ class Widget_TrackerContent extends Widget {
 		$request =& HTTPRequest::instance();
 		$owner_id = (int)substr($request->get('owner'), 1);
 		$content = $this->getPartialPreferencesFormTitle(_('Enter title of Tracker Content Box'));
-		$content .= $this->getPartialPreferencesFormColumns(1);
+		$content .= $this->buildRenderWidget();
 		$content .= $this->getAvailableExtraFieldsForm($owner_id);
 		return $content;
 	}
@@ -217,7 +351,6 @@ class Widget_TrackerContent extends Widget {
 		$readonly = false;
 		if (count($layoutExtraFieldIDs) > 0) {
 			$mandatoryDisplay = false;
-			$return .= $HTML->listTableTop();
 			$selected = array();
 			$i = 0;
 			if (is_object($ah)) {
@@ -228,16 +361,17 @@ class Widget_TrackerContent extends Widget {
 			if (!forge_check_perm('tracker', $atid, 'submit')) {
 				$readonly = true;
 			}
-			$maxcol = 0;
 			foreach ($layoutExtraFieldIDs as $row_id => $column_id) {
-				$numcol = 1;
+				$return .= $HTML->listTableTop();
 				$cells = array();
-				foreach ($column_id as $key => $extrafieldIDs) {
-					if ($key != $numcol) {
-						$cells[][] = '&nbsp;';
-					}
-					foreach ($extrafieldIDs as $extrafieldID) {
-						$extrafieldObject = new ArtifactExtraField($ath, $extrafieldID);
+				foreach ($column_id as $extrafieldID) {
+					$keys = array_keys($extrafieldID);
+					if ($keys[0]) {
+						$cellContent = '';
+						if (strlen($extrafieldID[$keys[0]][1]) > 0) {
+							$cellContent .= html_e('div', array('class' => 'widget_section_title'), htmlspecialchars($extrafieldID[$keys[0]][1]));
+						}
+						$extrafieldObject = new ArtifactExtraField($ath, $keys[0]);
 						if ($func == 'add') {
 							$display = !(int)$extrafieldObject->isHiddenOnSubmit();
 						} else {
@@ -246,10 +380,10 @@ class Widget_TrackerContent extends Widget {
 						if ($display) {
 							$value = null;
 							$allowed = false;
-							if (isset($selected[$extrafieldID])) {
-								$value = $selected[$extrafieldID];
-							} elseif (isset($extra_fields[$extrafieldID])) {
-								$value = $extra_fields[$extrafieldID];
+							if (isset($selected[$keys[0]])) {
+								$value = $selected[$keys[0]];
+							} elseif (isset($extra_fields[$keys[0]])) {
+								$value = $extra_fields[$keys[0]];
 							}
 							$attrs = array('form' => 'trackerform');
 							$mandatory = '';
@@ -261,7 +395,7 @@ class Widget_TrackerContent extends Widget {
 							if (strlen($extrafieldObject->getDescription()) > 0) {
 								$attrs['title'] = $extrafieldObject->getDescription();
 							}
-							$cellContent = html_e('strong', array(), $extrafieldObject->getName()._(':')).$mandatory.html_e('br');
+							$cellContent .= html_e('strong', array(), $extrafieldObject->getName()._(':')).$mandatory.html_e('br');
 							switch ($extrafieldObject->getType()) {
 								case ARTIFACT_EXTRAFIELDTYPE_SELECT:
 									if ($readonly) {
@@ -270,14 +404,14 @@ class Widget_TrackerContent extends Widget {
 										} else {
 											$value = $ath->getElementName($value);
 										}
-										$cells[] = array($cellContent.$value, 'style' => 'vertical-align: top;');
+										$cellContent .= $value;
 									} else {
 										$parent = $extrafieldObject->getParent();
 										if (!is_null($parent) && !empty($parent) && $parent != '100') {
 											$selectedElmnts = (isset($selected[$parent]) ? $selected[$parent] : '');
 											$allowed = $aef->getAllowedValues($selectedElmnts);
 										}
-										$cells[] = array($cellContent.$ath->renderSelect($extrafieldID, $value, $extrafieldObject->getShow100(), $extrafieldObject->getShow100label(), false, false, $allowed, $attrs), 'style' => 'vertical-align: top;');
+										$cellContent .= $ath->renderSelect($keys[0], $value, $extrafieldObject->getShow100(), $extrafieldObject->getShow100label(), false, false, $allowed, $attrs);
 									}
 									break;
 								case ARTIFACT_EXTRAFIELDTYPE_CHECKBOX:
@@ -287,14 +421,14 @@ class Widget_TrackerContent extends Widget {
 										} else {
 											$value = explode(',', $ath->getElementName($value));
 										}
-										$cells[] = array($cellContent.join(html_e('br'), $value), 'style' => 'vertical-align: top;');
+										$cellContent .= join(html_e('br'), $value);
 									} else {
 										$parent = $extrafieldObject->getParent();
 										if (!is_null($parent) && !empty($parent) && $parent != '100') {
 											$selectedElmnts = (isset($selected[$parent]) ? $selected[$parent] : '');
 											$allowed = $aef->getAllowedValues($selectedElmnts);
 										}
-										$cells[] = array($cellContent.$ath->renderCheckbox($extrafieldID, $value, $extrafieldObject->getShow100(), $extrafieldObject->getShow100label(), $allowed, $attrs), 'style' => 'vertical-align: top;');
+										$cellContent .= $ath->renderCheckbox($keys[0], $value, $extrafieldObject->getShow100(), $extrafieldObject->getShow100label(), $allowed, $attrs);
 									}
 									break;
 								case ARTIFACT_EXTRAFIELDTYPE_RADIO:
@@ -304,14 +438,14 @@ class Widget_TrackerContent extends Widget {
 										} else {
 											$value = $ath->getElementName($value);
 										}
-										$cells[] = array($cellContent.$value, 'style' => 'vertical-align: top;');
+										$cellContent .= $value;
 									} else {
 										$parent = $extrafieldObject->getParent();
 										if (!is_null($parent) && !empty($parent) && $parent != '100') {
 											$selectedElmnts = (isset($selected[$parent]) ? $selected[$parent] : '');
 											$allowed = $aef->getAllowedValues($selectedElmnts);
 										}
-										$cells[] = array($cellContent.$ath->renderRadio($extrafieldID, $value, $extrafieldObject->getShow100(), $extrafieldObject->getShow100label(), false, false, $allowed, $attrs), 'style' => 'vertical-align: top;');
+										$cellContent .= $ath->renderRadio($keys[0], $value, $extrafieldObject->getShow100(), $extrafieldObject->getShow100label(), false, false, $allowed, $attrs);
 									}
 									break;
 								case ARTIFACT_EXTRAFIELDTYPE_TEXT:
@@ -321,13 +455,13 @@ class Widget_TrackerContent extends Widget {
 										} else {
 											$value = '&nbsp;';
 										}
-										$cells[] = array($cellContent.$value, 'style' => 'vertical-align: top;');
+										$cellContent .= $value;
 									} else {
 										$attrs['style'] = 'box-sizing: border-box; width: 100%';
 										if ($extrafieldObject->getPattern()) {
 											$attrs['pattern'] = $extrafieldObject->getPattern();
 										}
-										$cells[] = array($cellContent.$ath->renderTextField($extrafieldID, $value, $extrafieldObject->getAttribute1(), $extrafieldObject->getAttribute2(), $attrs), 'style' => 'vertical-align: top;');
+										$cellContent .= $ath->renderTextField($keys[0], $value, $extrafieldObject->getAttribute1(), $extrafieldObject->getAttribute2(), $attrs);
 									}
 									break;
 								case ARTIFACT_EXTRAFIELDTYPE_MULTISELECT:
@@ -337,14 +471,14 @@ class Widget_TrackerContent extends Widget {
 										} else {
 											$value = explode(',', $ath->getElementName($value));
 										}
-										$cells[] = array($cellContent.join(html_e('br'), $value), 'style' => 'vertical-align: top;');
+										$cellContent .= join(html_e('br'), $value);
 									} else {
 										$parent = $extrafieldObject->getParent();
 										if (!is_null($parent) && !empty($parent) && $parent != '100') {
 											$selectedElmnts = (isset($selected[$parent]) ? $selected[$parent] : '');
 											$allowed = $aef->getAllowedValues($selectedElmnts);
 										}
-										$cells[] = array($cellContent.$ath->renderMultiSelectBox($extrafieldID, $value, $extrafieldObject->getShow100(), $extrafieldObject->getShow100label(), $allowed, $attrs), 'style' => 'vertical-align: top;');
+										$cellContent .= $ath->renderMultiSelectBox($keys[0], $value, $extrafieldObject->getShow100(), $extrafieldObject->getShow100label(), $allowed, $attrs);
 									}
 									break;
 								case ARTIFACT_EXTRAFIELDTYPE_TEXTAREA:
@@ -354,10 +488,10 @@ class Widget_TrackerContent extends Widget {
 										} else {
 											$value = '&nbsp;';
 										}
-										$cells[] = array($cellContent.$value, 'style' => 'vertical-align: top;');
+										$cellContent .= $value;
 									} else {
 										$attrs['style'] = 'box-sizing: border-box; width: 100%';
-										$cells[] = array($cellContent.$ath->renderTextArea($extrafieldID, $value, $extrafieldObject->getAttribute1(), $extrafieldObject->getAttribute2(), $attrs), 'style' => 'vertical-align: top;');
+										$cellContent .= $ath->renderTextArea($keys[0], $value, $extrafieldObject->getAttribute1(), $extrafieldObject->getAttribute2(), $attrs);
 									}
 									break;
 								case ARTIFACT_EXTRAFIELDTYPE_STATUS:
@@ -367,37 +501,37 @@ class Widget_TrackerContent extends Widget {
 										} else {
 											$value = $ath->getElementName($value);
 										}
-										$cells[] = array($cellContent.$value, 'style' => 'vertical-align: top;');
+										$cellContent .= $value;
 									} else {
-										$atw = new ArtifactWorkflow($ath, $extrafieldID);
+										$atw = new ArtifactWorkflow($ath, $keys[0]);
 										// Special treatment for the initial step (Submit). In this case, the initial value is the first value.
 										if (!$value) {
 											$value = 100;
 										}
 										$allowed = $atw->getNextNodes($value);
 										$allowed[] = $value;
-										$cells[] = array($cellContent.$ath->renderSelect($extrafieldID, $value, false, $extrafieldObject->getShow100label(), false, false, $allowed, $attrs), 'style' => 'vertical-align: top;');
+										$cellContent .= $ath->renderSelect($keys[0], $value, false, $extrafieldObject->getShow100label(), false, false, $allowed, $attrs);
 									}
 									break;
 								//case ARTIFACT_EXTRAFIELDTYPE_ASSIGNEE:
 								case ARTIFACT_EXTRAFIELDTYPE_RELATION:
 									if ($readonly) {
 										$value = preg_replace_callback('/\b(\d+)\b/', create_function('$matches', 'return _artifactid2url($matches[1], \'title\');'), $value);
-										$cells[] = array($cellContent.$value, 'style' => 'vertical-align: top;');
+										$cellContent .= $value;
 									} else {
 										// specific rewrite of cellContent
 										$cellContent = '<div style="width:100%; line-height: 20px;">' .
 												'<div style="float:left;">'.html_e('strong', array(), $extrafieldObject->getName()._(':')).$mandatory.'</div>' .
-												'<div>' . $HTML->getEditFilePic(_('Click to edit'), _('Click to edit'), array('class' => 'mini_buttons tip-ne', 'onclick'=>"switch2edit(this, 'show$extrafieldID', 'edit$extrafieldID')")) . '</div>' .
+												'<div>' . $HTML->getEditFilePic(_('Click to edit'), _('Click to edit'), array('class' => 'mini_buttons tip-ne', 'onclick'=>"switch2edit(this, 'show$keys[0]', 'edit$keys[0]')")).'</div>'.
 												'</div>';
-										$cells[] = array($cellContent.$ath->renderRelationField($extrafieldID, $value, $extrafieldObject->getAttribute1(), $extrafieldObject->getAttribute2(), $attrs), 'style' => 'vertical-align: top;');
+										$cellContent .= $ath->renderRelationField($keys[0], $value, $extrafieldObject->getAttribute1(), $extrafieldObject->getAttribute2(), $attrs);
 									}
 									break;
 								case ARTIFACT_EXTRAFIELDTYPE_INTEGER:
 									if ($readonly) {
-										$cells[] = array($cellContent.$value, 'style' => 'vertical-align: top;');
+										$cellContent .= $value;
 									} else {
-										$cells[] = array($cellContent.$ath->renderIntegerField($extrafieldID, $value, $extrafieldObject->getAttribute1(), $extrafieldObject->getAttribute2(), $attrs), 'style' => 'vertical-align: top;');
+										$cellContent .= $ath->renderIntegerField($keys[0], $value, $extrafieldObject->getAttribute1(), $extrafieldObject->getAttribute2(), $attrs);
 									}
 									break;
 								/* reserved for aljeux extension, for merge into FusionForge */
@@ -406,9 +540,9 @@ class Widget_TrackerContent extends Widget {
 								/* reserved for Evolvis extension, for merge into FusionForge */
 								case ARTIFACT_EXTRAFIELDTYPE_DATETIME:
 									if ($readonly) {
-										$cells[] = array($cellContent.date('Y-m-d H:i', $value), 'style' => 'vertical-align: top;');
+										$cellContent .= date('Y-m-d H:i', $value);
 									} else {
-										$cells[] = array($cellContent.$ath->renderDatetime($extrafieldID, $value, $attrs), 'style' => 'vertical-align: top;');
+										$cellContent .= $ath->renderDatetime($keys[0], $value, $attrs);
 									}
 									break;
 								/* 12: reserved DATETIME*/
@@ -423,9 +557,9 @@ class Widget_TrackerContent extends Widget {
 											$user = user_get_object($value);
 											$value = $user->getRealName().' ('.html_e('samp', array(), util_make_link_u($user->getUnixname(),$value,$user->getUnixname())).')';
 										}
-										$cells[] = array($cellContent.$value, 'style' => 'vertical-align: top;');
+										$cellContent .= $value;
 									} else {
-										$cells[] = array($cellContent.$ath->renderUserField($extrafieldID, $value, $extrafieldObject->getShow100(), $extrafieldObject->getShow100label(), false, false, false, $attrs), 'style' => 'vertical-align: top;');
+										$cellContent .= $ath->renderUserField($keys[0], $value, $extrafieldObject->getShow100(), $extrafieldObject->getShow100label(), false, false, false, $attrs);
 									}
 									break;
 								/* 15: reserved MULTIUSER */
@@ -435,29 +569,27 @@ class Widget_TrackerContent extends Widget {
 											$releaseObj = frsrelease_get_object($value);
 											if (is_object($releaseObj)) {
 												$value = $releaseObj->FRSPackage->getName().' - '.$releaseObj->getName();
-												$cells[] = array($cellContent.$value, 'style' => 'vertical-align: top;');
+												$cellContent .= $value;
 											} else {
-												$cells[][] = '&nbsp;';
+												$cellContent .= '&nbsp;';
 											}
 										}
 									} else {
-										$cells[] = array($cellContent.$ath->renderReleaseField($extrafieldID, $value, $extrafieldObject->getShow100(), $extrafieldObject->getShow100label(), false, false, false, $attrs), 'style' => 'vertical-align: top;');
+										$cellContent .= $ath->renderReleaseField($keys[0], $value, $extrafieldObject->getShow100(), $extrafieldObject->getShow100label(), false, false, false, $attrs);
 									}
 									break;
 							}
+						} else {
+							$cellContent = '&nbsp';
 						}
+					} else {
+						$cellContent = '&nbsp;';
 					}
-					$numcol++;
-					if ($numcol > $maxcol) {
-						$maxcol = $numcol;
-					}
+					$cells[] = array($cellContent, 'width' => $extrafieldID[$keys[0]][0].'%', 'style' => 'vertical-align: top;');
 				}
-				while (count($cells) < ($maxcol -1)) {
-					$cells[][] = '&nbsp;';
-				}
-				$return .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i++, true)), $cells);
+				$return .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($row_id, true)), $cells);
+				$return .= $HTML->listTableBottom();
 			}
-			$return .= $HTML->listTableBottom();
 			$return .= $ath->javascript();
 			$return .= init_datetimepicker();
 			if ($mandatoryDisplay) {
@@ -484,9 +616,8 @@ class Widget_TrackerContent extends Widget {
 
 	function getPreferences() {
 		return $this->getPartialPreferencesFormTitle($this->getTitle()).
-			$this->getPartialPreferencesFormColumns($this->getColumns()).
-			$this->getAvailableExtraFieldsForm($this->owner_id).
-			$this->getExtraFieldsForm($this->content_id);
+			$this->buildRenderWidget().
+			$this->getAvailableExtraFieldsForm($this->owner_id, true);
 	}
 
 	function getPreferencesForm($layout_id, $owner_id, $owner_type) {
@@ -502,46 +633,49 @@ class Widget_TrackerContent extends Widget {
 		$prefs .= $this->getPreferences();
 		$prefs .= html_e('br');
 		$prefs .= html_e('input', array('type' => 'submit', 'name' => 'cancel', 'value' => _('Cancel')));
-		$prefs .= html_e('input', array('type' => 'submit', 'value' => _('Submit')));
+		$prefs .= html_e('input', array('type' => 'submit', 'name' => 'trackercontent-submit', 'value' => _('Submit')));
 		$prefs .= html_ac(html_ap() - 1);
 		$prefs .= $HTML->closeForm();
 		return $prefs;
 	}
 
 	function updatePreferences(&$request) {
+		$sanitizer = new TextSanitizer();
 		$done = false;
 		$vContentId = new Valid_UInt('content_id');
 		$vContentId->required();
 		if ($request->valid($vContentId)) {
 			$vTitle = new Valid_String('title');
 			if($request->valid($vTitle)) {
-				$title = htmlspecialchars($request->get('title'));
+				$title = $sanitizer->SanitizeHtml($request->get('title'));
 			} else {
 				$title = '';
 			}
-			$vColumns = new Valid_String('columns');
-			if($request->valid($vColumns)) {
-				$columns = (int)$request->get('columns');
-			} else {
-				$columns = 1;
-			}
-
+			$content_id = (int)$request->get('content_id');
 			if ($title) {
 				$sql = "UPDATE artifact_display_widget SET title = $1 WHERE owner_id =$2 AND id = $3";
-				$res = db_query_params($sql,array($title, $this->owner_id, (int)$request->get('content_id')));
+				$res = db_query_params($sql,array($title, $this->owner_id, $content_id));
 				$done = true;
 			}
-			if ($columns) {
-				$sql = "UPDATE artifact_display_widget SET cols = $1 WHERE owner_id =$2 AND id = $3";
-				$res = db_query_params($sql,array($columns, $this->owner_id, (int)$request->get('content_id')));
-				$done = true;
-			}
-			$extrafieldIDs = getArrayFromRequest('extrafieldids');
-			$extrafieldIDColumns = getArrayFromRequest('extrafield_column_ids');
-			$extrafieldIDRows = getArrayFromRequest('extrafield_row_ids');
-			$res = db_query_params('DELETE FROM artifact_display_widget_field WHERE id = $1', array((int)$request->get('content_id')));
-			foreach ($extrafieldIDs as $key => $extrafieldID) {
-				db_query_params('INSERT INTO artifact_display_widget_field (id, field_id, column_id, row_id) VALUES ($1, $2, $3, $4)', array((int)$request->get('content_id'), $extrafieldID, $extrafieldIDColumns[$key], $extrafieldIDRows[$key]));
+			$trackerrows = getArrayFromRequest('trackercontent_layout');
+			$trackerextrafields = getArrayFromRequest('trackercontent_ef');
+			$trackercelltitles = getArrayFromRequest('trackercontent_title');
+			$res = db_query_params('DELETE FROM artifact_display_widget_field WHERE id = $1', array($content_id));
+			foreach ($trackerrows as $rowkey => $trackerrow) {
+				$columns = explode(',', $trackerrow);
+				$extrafields = explode(',', $trackerextrafields[$rowkey]);
+				$celltitle = explode(',', $trackercelltitles[$rowkey]);
+				$rowid = $rowkey;
+				foreach ($columns as $columnkey => $column) {
+					if ($extrafields[$columnkey] == "fake") {
+						$extrafieldid = 0;
+					} else {
+						$extrafieldid = substr($extrafields[$columnkey], 2); //remove prefix ef
+					}
+					$section = $sanitizer->SanitizeHtml($celltitle[$columnkey]);
+					db_query_params('INSERT INTO artifact_display_widget_field (id, field_id, column_id, row_id, width, section) VALUES ($1, $2, $3, $4, $5, $6)',
+							array($content_id, $extrafieldid, $columnkey, $rowid, $column, $section));
+				}
 				$done = true;
 			}
 		}

@@ -92,7 +92,7 @@ if (session_loggedin()) {
 					break;
 				case WidgetLayoutManager::OWNER_TYPE_TRACKER:
 					if ($at = artifactType_get_object($owner_id)) {
-
+						use_javascript('/widgets/scripts/WidgetController.js');
 						$_REQUEST['group_id'] = $_GET['group_id'] = $at->Group->getID();
 						$request->params['group_id'] = $at->Group->getID(); //bad!
 						$redirect = '/tracker/?group_id='. $at->Group->getID();
