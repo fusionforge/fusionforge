@@ -37,9 +37,28 @@ WidgetBuilderController.prototype =
 				if (jQuery('#layout-manager').find('.layout-manager-column').length == 1) {
 					alert('You must keep at least one column in your layout.');
 				} else if (tr.find('.layout-manager-column').length == 1) {
+					console.log('ici');
+					if (tr.find('.wb_extrafield')) {
+						divef = tr.find('.wb_extrafield');
+						divef.find('.ef-widget-remove').hide();
+						divef.appendTo(jQuery('#td'+divef.attr('id')));
+						divef.draggable({
+							cursor: "move",
+							helper: "clone",
+						});
+					}
 					tr.parents('table').first().next().remove();
 					tr.parents('table').first().remove();
 				} else {
+					if (jQuery(e).parent().find('.wb_extrafield')) {
+						divef = jQuery(e).parent().find('.wb_extrafield');
+						divef.find('.ef-widget-remove').hide();
+						divef.appendTo(jQuery('#td'+divef.attr('id')));
+						divef.draggable({
+							cursor: "move",
+							helper: "clone",
+						});
+					}
 					jQuery(e).parent().next().remove();
 					jQuery(e).parent().remove();
 					WidgetBuilderController.prototype.distributeWidth(tr);
@@ -50,7 +69,11 @@ WidgetBuilderController.prototype =
 	loadAddColumn: function(i, e) {
 		jQuery(e).mouseenter(function(){jQuery(this).addClass('layout-manager-column-add_hover')})
 			.mouseleave(function(){jQuery(this).removeClass('layout-manager-column-add_hover')});
-		jQuery(e).click(function(){
+		jQuery(e).bind('click', this.params, function(f){
+				sectionTitle = 'Section Title:';
+				if (typeof(f.data) != 'undefined') {
+					sectionTitle = f.data.labelTitle;
+				}
 				var newCol = jQuery('<td></td>');
 				newCol.addClass('layout-manager-column');
 				newCol.append('<div>x</div>');
@@ -67,7 +90,7 @@ WidgetBuilderController.prototype =
 					});
 				newCol.children('div').addClass('layout-manager-column-remove');
 				WidgetBuilderController.prototype.loadRemoveColumn(0, newCol.children('div'));
-				newCol.append('<div class="layout-manager-column-width"><input type="number" value="" autocomplete="off" size="1" maxlength="3" />%</div>');
+				newCol.append('<div class="layout-manager-column-width">'+sectionTitle+'<br /><input type="text" value="" size="20" maxsize="20" /><br /><input type="number" value="" autocomplete="off" size="1" maxlength="3" />%</div>');
 				newCol.append('<div id="fake" class="wb_extrafield" />');
 				jQuery(e).parent().append(newCol);
 				newCol = jQuery('<td>+</td>');

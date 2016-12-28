@@ -136,6 +136,7 @@ class Widget_TrackerContent extends Widget {
 					$content .= '</td><td class="layout-manager-column-add">+</td>';
 				}
 				$content .= '</tr></table>';
+				$content .= html_e('div', array('class' => 'layout-manager-row-add'), '+');
 			}
 		} else {
 			$content .= '<table class="layout-manager-row" id="widget_layout_build">
@@ -162,11 +163,12 @@ class Widget_TrackerContent extends Widget {
 				</td>
 				<td class="layout-manager-column-add">+</td>
 				</tr></table>';
+			$content .= html_e('div', array('class' => 'layout-manager-row-add'), '+');
 		}
-		$content .= html_e('div', array('class' => 'layout-manager-row-add'), '+');
 		$content .= '</td>
 			</tr>'.
 			$HTML->listTableBottom();
+		$jsvariable = "var sectiontitle = '"._("Section Title")._(":")."';";
 		$javascript = <<<'EOS'
 				var controllerWidgetBuilder;
 				jQuery(document).ready(function() {
@@ -174,7 +176,8 @@ class Widget_TrackerContent extends Widget {
 						buttonAddRow:		jQuery('.layout-manager-row-add'),
 						buttonAddColumn:	jQuery('.layout-manager-column-add'),
 						buttonRemoveColumn:	jQuery('.layout-manager-column-remove'),
-						buttonRemoveEF:		jQuery('.ef-widget-remove')
+						buttonRemoveEF:		jQuery('.ef-widget-remove'),
+						labelTitle:		sectiontitle
 					});
 					jQuery('.layout-manager-column').droppable({
 										accept: '#extrafield_table .wb_extrafield',
@@ -233,7 +236,7 @@ class Widget_TrackerContent extends Widget {
 					}
 				});
 EOS;
-		$content .= html_e('script', array( 'type'=>'text/javascript'), '//<![CDATA['."\n".'jQuery(function(){'.$javascript.'});'."\n".'//]]>');
+		$content .= html_e('script', array( 'type'=>'text/javascript'), '//<![CDATA['."\n".'jQuery(function(){'.$jsvariable."\n".$javascript.'});'."\n".'//]]>');
 		return $content;
 	}
 
