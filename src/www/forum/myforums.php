@@ -46,7 +46,7 @@ $group_id = getIntFromRequest("group_id");
 if ($group_id) {
 	forum_header(array('title'=>_('My Monitored Forums')));
 } else {
-	site_header(array('title'=>_('My Monitored Forums'), 'user_id' => $user_id));
+	site_user_header(array('title'=>_('My Monitored Forums')));
 }
 
 //get the user monitored forums
