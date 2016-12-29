@@ -1,5 +1,4 @@
 <?php
-
 /**
  * FusionForge Monitored Forums Track Page
  *
@@ -8,7 +7,7 @@
  * Copyright 2005 (c) - Daniel Perez
  * Copyright 2010 (c) Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -52,9 +51,12 @@ if ($group_id) {
 
 //get the user monitored forums
 $MonitorElementObject = new MonitorElement('forum');
-$monitoredForumsIdsArray = $MonitorElementObject->getMonitedByUserIdInArray($user_id);
-
-if (!$monitoredForumsIdsArray) {
+if ($group_id) {
+	$monitoredForumsIdsArray = $MonitorElementObject->getMonitoredIdsByGroupIdByUserIdInArray($group_id, $user_id);
+} else {
+	$monitoredForumsIdsArray = $MonitorElementObject->getMonitedByUserIdInArray($user_id);
+}
+if (!is_array($monitoredForumsIdsArray)) {
 	echo $HTML->error_msg($MonitorElementObject->getErrorMessage());
 	forum_footer();
 	exit;
@@ -66,14 +68,8 @@ if (count($monitoredForumsIdsArray) < 1) {
 	exit;
 }
 
-$tablearr = array(_('Project'),_('Forum'), _('Threads'),
-				_('Posts'), _('Last Post'), _('New Content?'));
-echo $HTML->listTableTop($tablearr);
+echo $HTML->listTableTop(array(_('Project'),_('Forum'), _('Threads'), _('Posts'), _('Last Post'), _('New Content?')));
 
-$i = 0;
-$j = 0;
-
-$f = array();
 //CHECK : if we won't ever be needing to store each forum/fmf, etc for each pass, don't use an array and use the same variable like $fmf instead of $fmf[$i], etc
 for($i = 0; $i < sizeof($monitoredForumsIdsArray); $i++) {
 	if (forge_check_perm('forum', $monitoredForumsIdsArray[$i], 'read')) {
@@ -134,7 +130,7 @@ for($i = 0; $i < sizeof($monitoredForumsIdsArray); $i++) {
 			$date = $forumObject->getMostRecentDate()? date(_('Y-m-d H:i'),$forumObject->getMostRecentDate()) : '';
 			$cells = array();
 			$cells[][] = $this_forum_group->getPublicName();
-			$cells[][] = util_make_link('/forum/forum.php?forum_id='.$forumObject->getID().'&group_id='.$this_forum_group->getID(), html_image('ic/forum20w.png').'&nbsp;'.$forumObject->getName());
+			$cells[][] = util_make_link('/forum/forum.php?forum_id='.$forumObject->getID().'&group_id='.$this_forum_group->getID(), $HTML->getForumPic().'&nbsp;'.$forumObject->getName());
 			$cells[] = array($forumObject->getThreadCount(), 'class' => 'align-center');
 			$cells[] = array($forumObject->getMessageCount(), 'class' => 'align-center');
 			$cells[] = array($date, 'class' => 'align-center');
