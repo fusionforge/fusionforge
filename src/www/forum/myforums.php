@@ -68,7 +68,8 @@ if (count($monitoredForumsIdsArray) < 1) {
 	exit;
 }
 
-echo $HTML->listTableTop(array(_('Project'),_('Forum'), _('Threads'), _('Posts'), _('Last Post'), _('New Content?')));
+echo $HTML->listTableTop(array(_('Project'),_('Forum'), _('Threads'), _('Posts'), _('Last Post'), _('New Content?')), array(), '', '', array(), array(),
+			array(array(), array(), array('class' => 'align-center'),  array('class' => 'align-center'),  array('class' => 'align-center'),  array('class' => 'align-center')));
 
 //CHECK : if we won't ever be needing to store each forum/fmf, etc for each pass, don't use an array and use the same variable like $fmf instead of $fmf[$i], etc
 for($i = 0; $i < sizeof($monitoredForumsIdsArray); $i++) {
@@ -93,20 +94,8 @@ for($i = 0; $i < sizeof($monitoredForumsIdsArray); $i++) {
 				exit_error($fmf->getErrorMessage(), 'forums');
 			}
 
-			$fmf->setup($offset,$style,$max_rows,$set);
-			$style=$fmf->getStyle();
-			$max_rows=$fmf->max_rows;
-			$offset=$fmf->offset;
+			$fmf->setup();
 			$msg_arr = $fmf->nestArray($fmf->getNested());
-			if ($fmf->isError()) {
-				exit_error($fmf->getErrorMessage(), 'forums');
-			}
-			$rows=count($msg_arr[0]);
-			$avail_rows=$fmf->fetched_rows;
-			if ($rows > $max_rows) {
-				$rows=$max_rows;
-			}
-
 			$new_content = '&nbsp;';
 			//this loops through every message AND followup, in search of new messages.
 			//anything that's new ( new thread or followup) is considered to be a "new thing" and the forum
@@ -116,7 +105,7 @@ for($i = 0; $i < sizeof($monitoredForumsIdsArray); $i++) {
 					foreach ($forum_msg_arr as $forum_msg) {
 						if ($forumObject->getSavedDate() < $forum_msg->getPostDate()) {
 							//we've got ourselves a new message or followup for this forum. note that, exit the search
-							$new_content = html_image('ic/add.png','', '', array('alt' => 'new'));
+							$new_content = $HTML->getNewPic('', 'new');
 							break;
 						}
 					}
