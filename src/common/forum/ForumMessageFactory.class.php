@@ -65,12 +65,12 @@ class ForumMessageFactory extends FFError {
 	/**
 	 * setup - call this function before getThreaded/nested/etc to set up the user preferences.
 	 *
-	 * @param	int    $offset   The number of rows to skip.
-	 * @param	string $style    The style of forum, whether it's nested, ultimate, etc.
-	 * @param	int	   $max_rows The maximum number of rows to return.
-	 * @param	int	   $set      Whether to set these prefs into the database - use "custom".
+	 * @param	int	$offset		The number of rows to skip.
+	 * @param	string	$style		The style of forum, whether it's nested, ultimate, etc.
+	 * @param	int	$max_rows	The maximum number of rows to return.
+	 * @param	int	$set		Whether to set these prefs into the database - use "custom".
 	 */
-	function setup($offset,$style,$max_rows,$set) {
+	function setup($offset = 0, $style = 'ultimate', $max_rows = 25, $set = 'no') {
 //echo "<br />offset: $offset| style: $style|max_rows: $max_rows|set: $set+";
 		if ((!$offset) || ($offset < 0)) {
 			$this->offset=0;
@@ -85,25 +85,25 @@ class ForumMessageFactory extends FFError {
 			$max_rows=25;
 		}
 		if (session_loggedin()) {
-			$u =& session_get_user();
-			$_pref=$style.'|'.$max_rows;
-			if ($set=='custom') {
+			$u = & session_get_user();
+			$_pref = $style.'|'.$max_rows;
+			if ($set == 'custom') {
 				if ($u->getPreference('forum_style')) {
 					if ($_pref == $u->getPreference('forum_style')) {
 						//pref already stored
 					} else {
 						//set the pref
-						$u->setPreference ('forum_style',$_pref);
+						$u->setPreference('forum_style', $_pref);
 					}
 				} else {
 					//set the pref
-					$u->setPreference ('forum_style',$_pref);
+					$u->setPreference('forum_style', $_pref);
 				}
 			} else {
 				if ($u->getPreference('forum_style')) {
-					$_pref_arr=explode ('|',$u->getPreference('forum_style'));
-					$style=$_pref_arr[0];
-					$max_rows=$_pref_arr[1];
+					$_pref_arr = explode ('|',$u->getPreference('forum_style'));
+					$style = $_pref_arr[0];
+					$max_rows = $_pref_arr[1];
 				} else {
 					//no saved pref and we're not setting
 					//one because this is all default settings
