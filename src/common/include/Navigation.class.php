@@ -216,6 +216,7 @@ class Navigation extends FFError {
 	 *	$result['selected']: number of the selected menu entry.
 	 */
 	function getSiteMenu() {
+		//WARNING: REQUEST_URI does not include prefix. DO NOT use util_make_uri in test to find the selected tab.
 		$request_uri = getStringFromServer('REQUEST_URI');
 
 		$menu = array();
@@ -236,10 +237,11 @@ class Navigation extends FFError {
 			$menu['titles'][] = _('My Page');
 			$menu['urls'][] = util_make_uri('/my/');
 			$menu['tooltips'][] = _('Your Page, widgets selected by you to follow your items.');
-			if (strstr($request_uri, util_make_uri('/my/'))
-				|| strstr($request_uri, util_make_uri('/account/'))
-				|| strstr($request_uri, util_make_uri('/register/'))
-				|| strstr($request_uri, util_make_uri('/themes/'))
+			if (strstr($request_uri, '/my/')
+				|| strstr($request_uri, '/account/')
+				|| strstr($request_uri, '/register/')
+				|| strstr($request_uri, '/themes/')
+				|| strstr($request_uri, '/forum/myforums.php')
 				)
 			{
 				$selected = count($menu['urls'])-1;
@@ -250,7 +252,7 @@ class Navigation extends FFError {
 			$menu['titles'][] = _('Projects');
 			$menu['urls'][] = util_make_uri('/softwaremap/');
 			$menu['tooltips'][] = _('Map of projects, by categories or types.');
-			if (strstr($request_uri, util_make_uri('/softwaremap/'))) {
+			if (strstr($request_uri, '/softwaremap/')) {
 				$selected = count($menu['urls'])-1;
 			}
 		}
@@ -259,7 +261,7 @@ class Navigation extends FFError {
 			$menu['titles'][] = _('Code Snippets');
 			$menu['urls'][] = util_make_uri('/snippet/');
 			$menu['tooltips'][] = _('Tooling library. Small coding tips.');
-			if (strstr($request_uri, util_make_uri('/snippet/'))) {
+			if (strstr($request_uri, '/snippet/')) {
 				$selected = count($menu['urls'])-1;
 			}
 		}
@@ -268,7 +270,7 @@ class Navigation extends FFError {
 			$menu['titles'][] = _('Project Openings');
 			$menu['urls'][] = util_make_uri('/people/');
 			$menu['tooltips'][] = _('Hiring Market Place.');
-			if (strstr($request_uri, util_make_uri('/people/'))) {
+			if (strstr($request_uri, '/people/')) {
 				$selected=count($menu['urls'])-1;
 			}
 		}
@@ -294,7 +296,7 @@ class Navigation extends FFError {
 			$menu['titles'][] = _('Site Admin');
 			$menu['urls'][] = util_make_uri('/admin/');
 			$menu['tooltips'][] = _('Administration Submenu to handle global configuration, users & projects.');
-			if (strstr($request_uri, util_make_uri('/admin/')) || strstr($request_uri, 'type=globaladmin')) {
+			if (strstr($request_uri, '/admin/') || strstr($request_uri, 'type=globaladmin')) {
 				$selected = count($menu['urls'])-1;
 			}
 		}
@@ -302,7 +304,7 @@ class Navigation extends FFError {
 			$menu['titles'][] = _('Reporting');
 			$menu['urls'][] = util_make_uri('/reporting/');
 			$menu['tooltips'][] = _('Statistics about visits, users & projects in time frame.');
-			if (strstr($request_uri, util_make_uri('/reporting/'))) {
+			if (strstr($request_uri, '/reporting/')) {
 				$selected = count($menu['urls'])-1;
 			}
 		}
@@ -336,7 +338,6 @@ class Navigation extends FFError {
 		}
 
 		$menu['selected'] = $selected;
-
 		return $menu;
 	}
 
