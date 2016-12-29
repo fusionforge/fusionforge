@@ -114,6 +114,7 @@ class Widget_MyMonitoredForums extends Widget {
 					}
 					if (!$setListTableTop) {
 						$html_my_monitored_forums .= $HTML->listTableBottom();
+						$html_my_monitored_forums .= html_e('p', array(), _('Detailed page about monitored forums')._(': ').util_make_link('/forum/myforums.php', _('Here')));
 					}
 				}
 			} else {
