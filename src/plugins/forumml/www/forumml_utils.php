@@ -75,17 +75,17 @@ function plugin_forumml_show_search_results($p,$result,$group_id,$list_id) {
 		$res1 = getForumMLDao()->getSpecificMessage($rows['id_message'],$list_id)->getRow();
 		$subject = mb_decode_mimeheader($res1['value']);
 		$res2 = getForumMLDao()->getHeaderValue($rows['id_message'],array(2,3));
-    	$k = 1;
-        while ($rows2 =$res2->getRow()) {
-        	$header[$k] = $rows2['value'];
-        	$k++;
-        }
-	    $from = mb_decode_mimeheader($header[1]);
+		$k = 1;
+		while ($rows2 =$res2->getRow()) {
+			$header[$k] = $rows2['value'];
+			$k++;
+		}
+		$from = mb_decode_mimeheader($header[1]);
 
-        // Replace '<' by '&lt;' and '>' by '&gt;'. Otherwise the email adress won't be displayed
-        // because it will be considered as an xhtml tag.
-        $from = preg_replace('/\</', '&lt;', $from);
-        $from = preg_replace('/\>/', '&gt;', $from);
+		// Replace '<' by '&lt;' and '>' by '&gt;'. Otherwise the email adress won't be displayed
+		// because it will be considered as an xhtml tag.
+		$from = preg_replace('/\</', '&lt;', $from);
+		$from = preg_replace('/\>/', '&gt;', $from);
 
 		$date = date("Y-m-d H:i",strtotime($header[2]));
 		// purify message subject (CODENDI_PURIFIER_FORUMML level)
@@ -730,5 +730,4 @@ function plugin_forumml_process_mail($plug,$reply=false) {
 		}
 	}
 	return $continue;
-
 }
