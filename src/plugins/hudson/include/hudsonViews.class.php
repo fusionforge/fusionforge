@@ -3,7 +3,7 @@
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
  * Copyright (c) 2010 Alcatel-Lucent
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013-2014, Franck Villaume - TrivialDev
+ * Copyright 2013-2014,2016, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -398,10 +398,11 @@ class hudsonViews extends Views {
 	}
 
 	function _display_add_job_form($group_id) {
+		global $HTML;
 		$project_manager = ProjectManager::instance();
 		$project = $project_manager->getProject($group_id);
 
-		echo '<a href="#" onclick="jQuery(\'#hudson_add_job\').slideToggle(); return false;">' . getIcon("ic/add.png") . ' '._("Add job").'</a>';
+		echo '<a href="#" onclick="jQuery(\'#hudson_add_job\').slideToggle(); return false;">' . $HTML->getNewPic() . ' '._("Add job").'</a>';
 		echo ' '.$this->_getHelp('HudsonService', true);
 		echo '<div id="hudson_add_job" class="hide" >';
 		echo ' <form action="">'."\n";
