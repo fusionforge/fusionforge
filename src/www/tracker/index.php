@@ -82,10 +82,8 @@ if (getStringFromRequest('rtype') == 'ajax') {
 
 if ($group_id && $atid) {
 	include $gfcommon.'tracker/actions/tracker.php';
-
 } elseif ($group_id) {
 	include $gfcommon.'tracker/actions/ind.php';
-
 }
 
 // Local Variables:
