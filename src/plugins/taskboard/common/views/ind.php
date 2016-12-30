@@ -3,6 +3,7 @@
  * Taskboard Front Page
  *
  * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
+ * Copyright 2016, Franck Villaume - TrivialDev
  *
  * http://fusionforge.org/
  *
@@ -41,14 +42,11 @@ html_use_tablesorter();
 $taskboardFactory->header();
 if (!$tb_arr || count($tb_arr) < 1) {
 	echo $HTML->information(_('No taskboards have been set up, or you cannot view them.'));
-	echo '<p>';
-	echo sprintf(_('The Admin for this project will have to set up data types using the %1$s admin page %2$s'), '<a href="'.util_make_uri('/plugins/'.$pluginTaskboard->name.'/?group_id='.$group_id).'">', '</a>');
-	echo "</p>";
+	echo html_e('p', array(), sprintf(_('The Admin for this project will have to set up data types using the %1$s admin page %2$s'), '<a href="'.util_make_uri('/plugins/'.$pluginTaskboard->name.'/?group_id='.$group_id).'">', '</a>'));
 } else {
-	echo '<p>'._('Choose a taskboard.').'</p>';
+	echo html_e('p', array(), _('Choose a taskboard.'));
 	$tablearr = array(_('Taskboard'),_('Description'));
 	echo $HTML->listTableTop($tablearr, false, 'full sortable sortable_table_taskboard', 'sortable_table_taskboard');
-
 	for ($j = 0; $j < count($tb_arr); $j++) {
 		if (is_object($tb_arr[$j])) {
 			if ($tb_arr[$j]->isError()) {
@@ -56,7 +54,7 @@ if (!$tb_arr || count($tb_arr) < 1) {
 			} else {
 				$cells = array();
 				$cells[][] = util_make_link('/plugins/'.$pluginTaskboard->name.'/?group_id='.$group_id.'&taskboard_id='.$tb_arr[$j]->getID(),
-								html_image("ic/tracker20w.png", 20, 20).' '.$tb_arr[$j]->getName());
+								$HTML->getFollowPic().' '.$tb_arr[$j]->getName());
 				$cells[][] = $tb_arr[$j]->getDescription();
 				echo $HTML->multiTableRow(array(), $cells);
 			}

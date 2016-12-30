@@ -3,7 +3,7 @@
  * Tracker Link & List for administration
  *
  * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
- * Copyright 2015 Franck Villaume - TrivialDev
+ * Copyright 2015,2016, Franck Villaume - TrivialDev
  * Copyright 2016, Stéphane-Eymeric Bredtthauer - TrivialDev
  *
  * http://fusionforge.org
@@ -52,7 +52,7 @@ echo html_e('p', array(), util_make_link('/plugins/'.$pluginTaskboard->name.'/ad
 if (!$tb_arr || count($tb_arr) < 1) {
 	echo $HTML->information(_('No taskboards have been set up, or you cannot view them.'));
 } else {
-	echo '<p>'._('Choose a taskboard.').'</p>';
+	echo html_e('p', array(), _('Choose a taskboard.'));
 	$tablearr = array(_('Taskboard'),_('Description'));
 	echo $HTML->listTableTop($tablearr, false, 'full sortable sortable_table_taskboard', 'sortable_table_taskboard');
 
@@ -63,7 +63,7 @@ if (!$tb_arr || count($tb_arr) < 1) {
 			} else {
 				$cells = array();
 				$cells[][] = util_make_link('/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&taskboard_id='.$tb_arr[$j]->getID(),
-						html_image("ic/tracker20w.png", 20, 20).' '.$tb_arr[$j]->getName());
+						$HTML->getFollowPic().' '.$tb_arr[$j]->getName());
 				$cells[][] = $tb_arr[$j]->getDescription();
 				echo $HTML->multiTableRow(array(), $cells);
 			}

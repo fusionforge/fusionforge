@@ -102,8 +102,7 @@ if (!isset($at_arr) || !$at_arr || count($at_arr) < 1) {
 
 	for ($j = 0; $j < count($at_arr); $j++) {
 		$cells = array();
-		$cells[][] = util_make_link('/tracker/admin/?atid='.$at_arr[$j]->getID().'&group_id='.$group_id, html_image('ic/tracker20w.png', 20, 20).'&nbsp;'.
-						$at_arr[$j]->getName());
+		$cells[][] = util_make_link('/tracker/admin/?atid='.$at_arr[$j]->getID().'&group_id='.$group_id, $HTML->getFollowPic().'&nbsp;'.$at_arr[$j]->getName());
 		$cells[][] = $at_arr[$j]->getDescription();
 		echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($j, true)), $cells);
 	}
