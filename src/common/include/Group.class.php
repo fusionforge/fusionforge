@@ -1857,7 +1857,7 @@ class Group extends FFError {
 		for ($i=0; $i<db_numrows($res); $i++) {
 			$Forum = new Forum($news_group,db_result($res,$i,'forum_id'));
 			if (!$Forum->delete(1,1)) {
-				$this->setError(_("Could Not Delete News Forum: %d"),$Forum->getID());
+				$this->setError(_('Could not delete News Forum')._(': '),$Forum->getID());
 				return false;
 			}
 		}
@@ -1866,7 +1866,7 @@ class Group extends FFError {
 		for ($i = 0; $i < db_numrows($res); $i++) {
 			$Forum = new Forum($this, db_result($res, $i, 'forum_id'));
 			if (!$Forum->delete(1, 1)) {
-				$this->setError(_("Could Not Delete News Forum: %d"), $Forum->getID());
+				$this->setError(_('Could not delete News Forum')._(': '), $Forum->getID());
 				return false;
 			}
 		}
@@ -1874,7 +1874,7 @@ class Group extends FFError {
 		$res = db_query_params('DELETE FROM news_bytes WHERE group_id=$1',
 					array($this->getID()));
 		if (!$res) {
-			$this->setError(_('Error Deleting News: ').db_error());
+			$this->setError(_('Error Deleting News')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -1885,7 +1885,7 @@ class Group extends FFError {
 		$res = db_query_params('DELETE FROM doc_data WHERE group_id=$1',
 					array($this->getID()));
 		if (!$res) {
-			$this->setError(_('Error Deleting Documents: ').db_error());
+			$this->setError(_('Error Deleting Documents')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -1893,7 +1893,7 @@ class Group extends FFError {
 		$res = db_query_params('DELETE FROM doc_groups WHERE group_id=$1',
 					array($this->getID()));
 		if (!$res) {
-			$this->setError(_('Error Deleting Documents: ').db_error());
+			$this->setError(_('Error Deleting Documents')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -1903,7 +1903,7 @@ class Group extends FFError {
 		//
 		$res=db_query_params('DELETE FROM project_tags WHERE group_id=$1', array($this->getID()));
 		if (!$res) {
-			$this->setError(_('Error Deleting Tags: ').db_error());
+			$this->setError(_('Error Deleting Tags')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -1914,7 +1914,7 @@ class Group extends FFError {
 		$res = db_query_params('DELETE FROM group_history WHERE group_id=$1',
 					array($this->getID()));
 		if (!$res) {
-			$this->setError(_('Error Deleting Project History: ').db_error());
+			$this->setError(_('Error Deleting Project History')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -1925,7 +1925,7 @@ class Group extends FFError {
 		$res = db_query_params('DELETE FROM group_plugin WHERE group_id=$1',
 					array($this->getID()));
 		if (!$res) {
-			$this->setError(_('Error Deleting Project Plugins: ').db_error());
+			$this->setError(_('Error Deleting Project Plugins')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -1936,7 +1936,7 @@ class Group extends FFError {
 		$res = db_query_params ('DELETE FROM stats_cvs_group WHERE group_id=$1',
 					array($this->getID()));
 		if (!$res) {
-			$this->setError(_('Error Deleting SCM Statistics: ').db_error());
+			$this->setError(_('Error Deleting SCM Statistics')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -1994,7 +1994,7 @@ class Group extends FFError {
 		$res = db_query_params('DELETE FROM trove_group_link WHERE group_id=$1',
 					array($this->getID()));
 		if (!$res) {
-			$this->setError(_('Error Deleting Trove: ').db_error());
+			$this->setError(_('Error Deleting Trove')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -2002,7 +2002,7 @@ class Group extends FFError {
 		$res = db_query_params('DELETE FROM trove_agg WHERE group_id=$1',
 					array($this->getID()));
 		if (!$res) {
-			$this->setError(_('Error Deleting Trove: ').db_error());
+			$this->setError(_('Error Deleting Trove')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -2013,7 +2013,7 @@ class Group extends FFError {
 		$res = db_query_params('DELETE FROM project_sums_agg WHERE group_id=$1',
 					array($this->getID()));
 		if (!$res) {
-			$this->setError(_('Error Deleting Counters: ').db_error());
+			$this->setError(_('Error Deleting Counters')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -2023,7 +2023,7 @@ class Group extends FFError {
 						time(),
 						0));
 		if (!$res) {
-			$this->setError(_('Error Deleting Project:').' '.db_error());
+			$this->setError(_('Error Deleting Project')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -2042,7 +2042,7 @@ class Group extends FFError {
 		$res = db_query_params('DELETE FROM groups WHERE group_id=$1',
 					array($this->getID()));
 		if (!$res) {
-			$this->setError(_('Error Deleting Project:').' '.db_error());
+			$this->setError(_('Error Deleting Project')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -2217,7 +2217,7 @@ class Group extends FFError {
 			}
 		}
 		if (count($found_roles) == 0) {
-			$this->setError(sprintf(_('Error: User not removed: %s')));
+			$this->setError(_('Error')._(': ')._('User not removed')._(': ').$user_id);
 			db_rollback();
 			return false;
 		}
@@ -2241,7 +2241,7 @@ class Group extends FFError {
 						array($this->getID(),
 							$user_id));
 		if (!$res) {
-			$this->setError(_('Error: artifact:').' '.db_error());
+			$this->setError(_('Error')._(': ')._('artifact')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -2262,7 +2262,7 @@ class Group extends FFError {
 						array($this->getID(),
 							$user_id));
 		if (!$res) {
-			$this->setError(sprintf(_('Error: project_assigned_to %d: %s'), 1, db_error()));
+			$this->setError(_('Error')._(': ').sprintf(_('project_assigned_to %d: %s'), 1, db_error()));
 			db_rollback();
 			return false;
 		}
@@ -2275,7 +2275,7 @@ class Group extends FFError {
 						array($this->getID(),
 							$user_id));
 		if (!$res) {
-			$this->setError(sprintf(_('Error: project_assigned_to %d: %s'), 2, db_error()));
+			$this->setError(_('Error')._(': ').sprintf(_('project_assigned_to %d: %s'), 2, db_error()));
 			db_rollback();
 			return false;
 		}
@@ -2350,7 +2350,7 @@ class Group extends FFError {
 			}
 		}
 		if ($found_role == NULL) {
-			$this->setError(sprintf(_('Error: User not removed: %s')));
+			$this->setError(_('Error')._(': ').sprintf(_('User not removed: %s'), $user_id));
 			db_rollback();
 			return false;
 		}
