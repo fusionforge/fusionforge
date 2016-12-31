@@ -322,6 +322,117 @@ EOS;
 	}
 
 	/**
+	 * getForumStatus - returns the forum status for this project
+	 *
+	 * @param	integer	group_id
+	 * @return	boolean	true/false
+	 * @access	public
+	 */
+	function getForumStatus($group_id) {
+		$res = db_query_params('SELECT forum FROM plugin_projects_hierarchy WHERE project_id = $1 limit 1',
+					array($group_id));
+		if (!$res) {
+			return false;
+		}
+		$resArr = db_fetch_array($res);
+		if ($resArr['forum'] == 't') {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * setForumStatus - allow parent to list your forums and allow yourself to select your childs to be browsed.
+	 *
+	 * @param	integer	your groud_id
+	 * @param	boolean	the status to set
+	 * @return	boolean	success or not
+	 */
+	function setForumStatus($group_id, $status = 0) {
+		$res = db_query_params('UPDATE plugin_projects_hierarchy set forum = $1 WHERE project_id = $2',
+					array($status, $group_id));
+
+		if (!$res) {
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * getTrackerStatus - returns the tracker status for this project
+	 *
+	 * @param	integer	group_id
+	 * @return	boolean	true/false
+	 * @access	public
+	 */
+	function getTrackerStatus($group_id) {
+		$res = db_query_params('SELECT tracker FROM plugin_projects_hierarchy WHERE project_id = $1 limit 1',
+					array($group_id));
+		if (!$res) {
+			return false;
+		}
+		$resArr = db_fetch_array($res);
+		if ($resArr['tracker'] == 't') {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * setTrackerStatus - allow parent to list your trackers and allow yourself to select your childs to be browsed.
+	 *
+	 * @param	integer	your groud_id
+	 * @param	boolean	the status to set
+	 * @return	boolean	success or not
+	 */
+	function setTrackerStatus($group_id, $status = 0) {
+		$res = db_query_params('UPDATE plugin_projects_hierarchy set tracker = $1 WHERE project_id = $2',
+					array($status, $group_id));
+
+		if (!$res) {
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * getFRSStatus - returns the FRS status for this project
+	 *
+	 * @param	integer	group_id
+	 * @return	boolean	true/false
+	 * @access	public
+	 */
+	function getFRSStatus($group_id) {
+		$res = db_query_params('SELECT frs FROM plugin_projects_hierarchy WHERE project_id = $1 limit 1',
+					array($group_id));
+		if (!$res) {
+			return false;
+		}
+		$resArr = db_fetch_array($res);
+		if ($resArr['frs'] == 't') {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * setFRSStatus - allow parent to list your FRS packages & releases and allow yourself to select your childs to be browsed.
+	 *
+	 * @param	integer	your groud_id
+	 * @param	boolean	the status to set
+	 * @return	boolean	success or not
+	 */
+	function setFRSStatus($group_id, $status = 0) {
+		$res = db_query_params('UPDATE plugin_projects_hierarchy set frs = $1 WHERE project_id = $2',
+					array($status, $group_id));
+
+		if (!$res) {
+			return false;
+		}
+		return true;
+	}
+
+	/**
 	 * redirect - encapsulate session_redirect to handle correctly the redirection URL
 	 *
 	 * @param	string	usually http_referer from $_SERVER
@@ -380,7 +491,8 @@ EOS;
 	function add($group_id) {
 		if (!$this->exists($group_id)) {
 			$globalConf = $this->getGlobalconf();
-			$res = db_query_params('INSERT INTO plugin_projects_hierarchy (project_id, tree, docman) VALUES ($1, $2, $3)', array($group_id, (int)$globalConf['tree'], (int)$globalConf['docman']));
+			$res = db_query_params('INSERT INTO plugin_projects_hierarchy (project_id, tree, docman, forum, frs, tracker) VALUES ($1, $2, $3, $4, $5, $6)',
+						array($group_id, (int)$globalConf['tree'], (int)$globalConf['docman'], (int)$globalConf['forum'], (int)$globalConf['frs'], (int)$globalConf['tracker']));
 			if (!$res) {
 				return false;
 			}
@@ -734,19 +846,16 @@ EOS;
 	 * @return	bool	true on success
 	 */
 	function updateGlobalConf($confArr) {
-		if (!isset($confArr['tree']) || !isset($confArr['docman'])) {
+		if (!isset($confArr['tree']) || !isset($confArr['docman']) || !isset($confArr['frs']) || !isset($confArr['forum']) || !isset($confArr['tracker'])) {
 			return false;
 		}
-		$res = db_query_params('truncate plugin_projects_hierarchy_global',array());
+		$res = db_query_params('TRUNCATE plugin_projects_hierarchy_global',array());
 		if (!$res) {
 			return false;
 		}
-		$res = db_query_params('insert into plugin_projects_hierarchy_global (tree, docman)
-					values ($1, $2)',
-					array(
-						$confArr['tree'],
-						$confArr['docman'],
-					));
+		$res = db_query_params('INSERT INTO plugin_projects_hierarchy_global (tree, docman, frs, forum, tracker) VALUES ($1, $2, $3, $4, $5)',
+					array($confArr['tree'], $confArr['docman'], $confArr['frs'], $confArr['forum'], $confArr['tracker'])
+					);
 		if (!$res) {
 			return false;
 		}
@@ -761,18 +870,13 @@ EOS;
 	 * @return	bool	true on success
 	 */
 	function updateConf($project_id, $confArr) {
-		if (!isset($confArr['tree']) || !isset($confArr['docman']) || !isset($confArr['globalconf'])) {
+		if (!isset($confArr['tree']) || !isset($confArr['docman']) || !isset($confArr['frs']) || !isset($confArr['forum']) || !isset($confArr['tracker']) || !isset($confArr['globalconf'])) {
 			return false;
 		}
 		$res = db_query_params('update plugin_projects_hierarchy
-					set (tree, docman, globalconf) = ($1, $2, $3)
-					where project_id = $4',
-					array(
-						$confArr['tree'],
-						$confArr['docman'],
-						$confArr['globalconf'],
-						$project_id
-					));
+					set (tree, docman, frs, forum, tracker, globalconf) = ($1, $2, $3, $4, $5, $6)
+					where project_id = $7',
+					array($confArr['tree'], $confArr['docman'], $confArr['frs'], $confArr['forum'], $confArr['tracker'], $confArr['globalconf'], $project_id));
 		if (!$res) {
 			return false;
 		}

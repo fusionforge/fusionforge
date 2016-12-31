@@ -5,7 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
  * Copyright 2010 (c) FusionForge Team
- * Copyright 2013-2014, Franck Villaume - TrivialDev
+ * Copyright 2013-2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -32,20 +32,41 @@ global $g; // group object
 global $fpFactory; // frs package factory package
 
 $FRSPackages = $fpFactory->getFRSs(true);
+if (count($FRSPackages) < 1) {
+	$localInformation = _('There are no file packages defined for this project.');
+}
+
+$child_has_p = false;
+if ($g->usesPlugin('projects-hierarchy')) {
+	$projectsHierarchy = plugin_get_object('projects-hierarchy');
+	$projectIDsArray = $projectsHierarchy->getFamily($group_id, 'child', true, 'validated');
+	foreach ($projectIDsArray as $projectid) {
+		$childGroupObject = group_get_object($projectid);
+		if ($childGroupObject && is_object($childGroupObject) && !$childGroupObject->isError()) {
+			if ($childGroupObject->usesFRS() && $projectsHierarchy->getFRSStatus($childGroupObject->getID())) {
+				$childfpf = new FRSPackageFactory($childGroupObject);
+				$child_frsp = $childfpf->getFRSs(true);
+				if (count($child_frsp) > 0) {
+					$FRSPackages = array_merge($FRSPackages, $child_frsp);
+					$child_has_p = true;
+				}
+			}
+		}
+		unset($childGroupObject);
+	}
+}
 
 if (count($FRSPackages) < 1) {
 	echo $HTML->information(_('There are no file packages defined for this project.'));
 } else {
-	echo html_ao('script', array('type' => 'text/javascript'));
-	?>
-	//<![CDATA[
+	$javascript = <<<'EOS'
 	var controllerFRS;
 	jQuery(document).ready(function() {
 		controllerFRS = new FRSController();
 	});
-	//]]>
-	<?php
-	echo html_ac(html_ap() - 1);
+EOS;
+	echo html_e('script', array( 'type'=>'text/javascript'), '//<![CDATA['."\n".'jQuery(function(){'.$javascript.'});'."\n".'//]]>');
+
 	echo html_ao('div', array('id' => 'forge-frs', 'class' => 'underline-link'));
 
 	$content = _('Below is a list of all files of the project.').' ';
@@ -66,8 +87,13 @@ if (count($FRSPackages) < 1) {
 	$proj_stats['size']     = 0;
 
 	// Iterate and show the packages
+	$current_groupid = $group_id;
 	foreach ($FRSPackages as $FRSPackage) {
 
+		if ($FRSPackage->Group->getID() != $current_groupid) {
+			echo html_e('h2', array(), sprintf(_('Child Project %s Packages'), util_make_link('/frs/?group_id='.$FRSPackage->Group->getID(), $FRSPackage->Group->getPublicName())));
+			$current_groupid = $FRSPackage->Group->getID();
+		}
 		$package_id = $FRSPackage->getID();
 		$package_name = $FRSPackage->getName();
 		$url = '/frs/?group_id='.$FRSPackage->Group->getID().'&package_id='.$package_id.'&action=monitor';

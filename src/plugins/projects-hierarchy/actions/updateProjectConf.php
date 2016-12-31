@@ -2,7 +2,7 @@
 /**
  * Projects Hierarchy plugin
  *
- * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright 2011,2016, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -25,9 +25,12 @@ global $projectsHierarchy; // the projects-hierarchy plugin object
 global $group_id;
 
 $confArr = array();
-$confArr['tree'] = getIntFromRequest('tree');
 $confArr['docman'] = getIntFromRequest('docman');
+$confArr['forum'] = getIntFromRequest('forum');
+$confArr['frs'] = getIntFromRequest('frs');
 $confArr['globalconf'] = getIntFromRequest('globalconf');
+$confArr['tracker'] = getIntFromRequest('tracker');
+$confArr['tree'] = getIntFromRequest('tree');
 
 if (!$projectsHierarchy->updateConf($group_id, $confArr)) {
 	$error_msg = _('Failed to update configuration.');
