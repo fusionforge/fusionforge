@@ -643,6 +643,18 @@ p.information {
 	background-image: url('../../images/widget/widget-preview-mysystasks-en_US.png');
 }
 
+.widget-preview-trackergeneral-en_US {
+	background-image: url('../../images/widget/widget-preview-trackergeneral-en_US.png');
+}
+
+.widget-preview-trackerdefaultactions-en_US {
+	background-image: url('../../images/widget/widget-preview-trackerdefaultactions-en_US.png');
+}
+
+.widget-preview-trackermain-en_US {
+	background-image: url('../../images/widget/widget-preview-trackermain-en_US.png');
+}
+
 /* }}} */
 
 /* {{{ Layout Manager */
