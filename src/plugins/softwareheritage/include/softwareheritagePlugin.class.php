@@ -59,7 +59,10 @@ class softwareheritagePlugin extends Plugin {
                
 		$server->register(
 			'softwareheritage_repositoryList',
-			array('session_ser'=>'xsd:string'),
+			array('session_ser'=>'xsd:string',
+				  'limit'=>'xsd:int',
+				  'offset'=>'xsd:int',
+				),
 			array('return'=>'tns:ArrayOfSoftwareheritageRepositoryInfo'),
 			$uri,
                        $uri.'#softwareheritage_repositoryList','rpc','encoded');
@@ -112,8 +115,13 @@ class softwareheritagePlugin extends Plugin {
 
 }
 
-function &softwareheritage_repositoryList($session_ser) {
+function &softwareheritage_repositoryList($session_ser, $limit=0, $offset=0) {
 	continue_session($session_ser);
+
+	$maxnum = 1000;
+	if ($limit > $maxnum || $limit <= 0) {
+		$limit = $maxnum;
+	}
 
 	$params = array();
 	$results = array();
@@ -126,6 +134,23 @@ function &softwareheritage_repositoryList($session_ser) {
 			$res2[] = $res;
 		}
 	}
+	$res = $res2;
+
+	$counter = 0;
+	$skipped = 0;
+	$res2 = array();
+	foreach ($res as $r) {
+		if ($counter >= $limit) {
+			break;
+		}
+		if ($skipped >= $offset) {
+			$res2[] = $r;
+			$counter = $counter + 1;
+		} else {
+			$skipped = $skipped + 1;
+		}
+	}
+	$res = $res2;
 
 	return $res2;
 }

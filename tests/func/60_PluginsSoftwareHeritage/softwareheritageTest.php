@@ -156,7 +156,7 @@ class SoftwareHeritage extends FForge_SeleniumTestCase
 		$this->assertNotEquals($session,"");
 
 		// Get repository list as admin
-		$response = $soapclient->softwareheritage_repositoryList($session);
+		$response = $soapclient->softwareheritage_repositoryList($session,100,0);
 		$repos = array();
 		foreach ($response as $data) {
 			$repos[$data->repository_id] = $data;
@@ -170,7 +170,7 @@ class SoftwareHeritage extends FForge_SeleniumTestCase
 		$this->assertEquals(4,count($repos['projectb/svn/projectb']->repository_urls));
 
 		// Get repository list as anonymous
-		$response = $soapclient->softwareheritage_repositoryList('');
+		$response = $soapclient->softwareheritage_repositoryList('',100,0);
 		$repos = array();
 		foreach ($response as $data) {
 			$repos[$data->repository_id] = $data;
