@@ -136,16 +136,14 @@ function &softwareheritage_repositoryList($session_ser, $limit=0, $offset=0) {
 	}
 	$res = $res2;
 
-	$counter = 0;
 	$skipped = 0;
 	$res2 = array();
 	foreach ($res as $r) {
-		if ($counter >= $limit) {
+		if (count($res2) >= $limit) {
 			break;
 		}
 		if ($skipped >= $offset) {
 			$res2[] = $r;
-			$counter = $counter + 1;
 		} else {
 			$skipped = $skipped + 1;
 		}
@@ -194,21 +192,18 @@ function &softwareheritage_repositoryActivity($session_ser, $t0, $t1, $limit=0, 
 						   array($t0,
 								 $t1,
 							   ));
-	$counter = 0;
 	$skipped = 0;
-	while ($arr = db_fetch_array($res)) {
-		if ($counter >= $limit) {
-			break;
+	while ((count($results) < $limit) && ($arr = db_fetch_array($res))) {
+		if (!forge_check_perm('scm',$arr['group_id'],'read')) {
+			continue;
 		}
-		if (forge_check_perm('scm',$arr['group_id'],'read')) {
-			if ($skipped >= $offset) {
-				$results[] = array('timestamp' => $arr['tstamp'],
-								   'repository_id' => $arr['repository_id'],
-								   'group_id' => $arr['group_id']);
-				$counter = $counter + 1;
-			} else {
-				$skipped = $skipped + 1;
-			}
+
+		if ($skipped >= $offset) {
+			$results[] = array('timestamp' => $arr['tstamp'],
+							   'repository_id' => $arr['repository_id'],
+							   'group_id' => $arr['group_id']);
+		} else {
+			$skipped = $skipped + 1;
 		}
 	}
 
