@@ -25,6 +25,7 @@ src/www/scm/viewvc/viewvc.org/*.zip
 src/.pc
 fusionforge*.orig.tar.bz2
 fusionforge-*.tar.bz2
+fusionforge_*.tar.xz
 src/fusionforge-*.tar.bz2
 # Debian packaging
 src/debian/control
