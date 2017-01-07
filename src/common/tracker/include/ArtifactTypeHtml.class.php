@@ -819,7 +819,7 @@ class ArtifactTypeHtml extends ArtifactType {
 		$packages = $fpFactory->getFRSs(true);
 		uasort($packages, 'compareObjectName');
 		foreach ($packages as $package) {
-			$releases = $package->getReleases();
+			$releases = $package->getReleases(false);
 			uasort($releases, 'compareObjectName');
 			foreach ($releases as $release) {
 				$optGroup[] = $package->getName();
