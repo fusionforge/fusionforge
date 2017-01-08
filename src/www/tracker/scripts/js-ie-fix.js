@@ -32,7 +32,7 @@ function iefixform() {
 	jQuery('[form*="trackerform"]').each(function(index){
 		if (this.name != 'submit' && !jQuery(this).parent().is('form')) {
 			jQuery(this).clone(true).css('display', 'none').appendTo(jQuery('#trackerform'));
-			jQuery('#trackerform').submit();
 		}
 	});
+	jQuery('#trackerform').submit();
 }
