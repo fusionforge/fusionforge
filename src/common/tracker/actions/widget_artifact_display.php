@@ -50,6 +50,7 @@ $id = db_result($res, 0 , 'id');
 html_use_jqueryui();
 html_use_jquerydatetimepicker();
 use_javascript('/widgets/scripts/WidgetController.js');
+use_javascript('/tracker/scripts/js-ie-fix.js');
 if ($func == 'add') {
 	$ath->header(array('title' => _('Submit New'), 'modal' => 1));
 } elseif ($func == 'detail') {

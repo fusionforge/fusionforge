@@ -100,7 +100,7 @@ class Widget_TrackerSummary extends Widget {
 		}
 		if (forge_check_perm('tracker', $atid, 'submit')) {
 			$return .= $HTML->addRequiredFieldsInfoBox();
-			$return .= html_e('p', array('class' => 'middleRight'), html_e('input', array('form' => 'trackerform', 'type' => 'submit', 'name' => 'submit', 'value' => _('Save Changes'), 'title' => _('Save is validating the complete form'))));
+			$return .= html_e('p', array('class' => 'middleRight'), html_e('input', array('form' => 'trackerform', 'type' => 'submit', 'name' => 'submit', 'value' => _('Save Changes'), 'title' => _('Save is validating the complete form'), 'onClick' => 'iefixform()')));
 		}
 		return $return;
 	}

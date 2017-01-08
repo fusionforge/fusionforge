@@ -165,7 +165,7 @@ class Widget_TrackerComment extends Widget {
 		$return .= html_e('div', array('id' => 'tabber'), $HTML->html_list($elementsLi).$tabberContent);
 
 		if (forge_check_perm('tracker', $atid, 'submit')) {
-			$return .= html_e('p', array('class' => 'middleRight'), html_e('input', array('form' => 'trackerform', 'type' => 'submit', 'name' => 'submit', 'value' => _('Save Changes'))));
+			$return .= html_e('p', array('class' => 'middleRight'), html_e('input', array('form' => 'trackerform', 'type' => 'submit', 'name' => 'submit', 'value' => _('Save Changes'), 'title' => _('Save is validating the complete form'), 'onClick' => 'iefixform()')));
 		}
 		return $return;
 	}
