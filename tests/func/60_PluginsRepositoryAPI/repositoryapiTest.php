@@ -139,7 +139,7 @@ class RepositoryAPI extends FForge_SeleniumTestCase
 
 
 		// Collect activities
-		$this->cron("scm/parse_scm_repo_activities.php");
+		$this->cron_for_plugin("parse_scm_repo_activities.php", "repositoryapi");
 
 
 		// Check SOAP
