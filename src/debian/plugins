@@ -88,7 +88,7 @@ Depends:
 Package: fusionforge-plugin-scmhook
 Depends: php-cli | php5-cli, php-curl | php5-curl, mksh, ${perl:Depends}
 
-Package: fusionforge-plugin-softwareheritage
+Package: fusionforge-plugin-repositoryapi
 Depends:
 
 Package: fusionforge-plugin-sysauthldap

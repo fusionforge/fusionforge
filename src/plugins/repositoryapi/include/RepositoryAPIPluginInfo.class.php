@@ -17,15 +17,17 @@
  * You should have received a copy of the GNU General Public License
  * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
  *
- * Portions Copyright 2010 (c) Mélanie Le Bail
- * Portions Copyright 2011 (c) France Telecom, Coclico project
+ * Copyright 2010 (c) Mélanie Le Bail
+ * Copyright 2011 (c) France Telecom, Coclico project
  */
+require_once 'common/plugin/PluginInfo.class.php';
+require_once 'RepositoryAPIPluginDescriptor.class.php';
 
-require_once 'common/plugin/PluginDescriptor.class.php';
+class RepositoryAPIPluginInfo extends PluginInfo {
 
-class SoftwareheritagePluginDescriptor extends PluginDescriptor {
-
-    function SoftwareheritagePluginDescriptor() {
-        $this->PluginDescriptor(_('Softwareheritage'), 'v1.0', _('Metadata retrieval API for Software Heritage'));
+    function RepositoryAPIPluginInfo(&$plugin) {
+        $this->PluginInfo($plugin);
+        $this->setPluginDescriptor(new RepositoryAPIPluginDescriptor());
     }
+
 }

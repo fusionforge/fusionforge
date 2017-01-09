@@ -20,11 +20,11 @@
  */
 
 global $gfplugins;
-require_once $gfplugins.'softwareheritage/include/softwareheritagePlugin.class.php' ;
+require_once $gfplugins.'repositoryapi/include/repositoryapiPlugin.class.php' ;
 
-$softwareheritagePluginObject = new softwareheritagePlugin ;
+$repositoryapiPluginObject = new repositoryapiPlugin ;
 
-register_plugin ($softwareheritagePluginObject) ;
+register_plugin ($repositoryapiPluginObject) ;
 
 // Local Variables:
 // mode: php

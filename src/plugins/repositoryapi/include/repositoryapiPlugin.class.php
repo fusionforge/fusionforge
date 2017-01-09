@@ -1,7 +1,7 @@
 <?php
 
 /**
- * softwareheritagePlugin Class
+ * repositoryapiPlugin Class
  *
  *
  * This file is part of FusionForge.
@@ -21,11 +21,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-class softwareheritagePlugin extends Plugin {
+class repositoryapiPlugin extends Plugin {
 	public function __construct($id=0) {
 		$this->Plugin($id) ;
-		$this->name = "softwareheritage";
-		$this->text = "Software Heritage"; // To show in the tabs, use...
+		$this->name = "repositoryapi";
+		$this->text = "Repository API"; // To show in the tabs, use...
 		$this->_addHook('register_soap');
 	}
 
@@ -34,7 +34,7 @@ class softwareheritagePlugin extends Plugin {
 		$uri = 'http://'.forge_get_config('web_host');
 
 		$server->wsdl->addComplexType(
-			'SoftwareheritageRepositoryInfo',
+			'RepositoryAPIRepositoryInfo',
 			'complexType',
 			'struct',
 			'sequence',
@@ -48,35 +48,35 @@ class softwareheritagePlugin extends Plugin {
 			);
 
 		$server->wsdl->addComplexType(
-			'ArrayOfSoftwareheritageRepositoryInfo',
+			'ArrayOfRepositoryAPIRepositoryInfo',
 			'complexType',
 			'array',
 			'',
 			'SOAP-ENC:Array',
 			array(),
-			array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:SoftwareheritageRepositoryInfo[]')),
-			'tns:SoftwareheritageRepositoryInfo');
+			array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:RepositoryAPIRepositoryInfo[]')),
+			'tns:RepositoryAPIRepositoryInfo');
                
 		$server->register(
-			'softwareheritage_repositoryList',
+			'repositoryapi_repositoryList',
 			array('session_ser'=>'xsd:string',
 				  'limit'=>'xsd:int',
 				  'offset'=>'xsd:int',
 				),
-			array('return'=>'tns:ArrayOfSoftwareheritageRepositoryInfo'),
+			array('return'=>'tns:ArrayOfRepositoryAPIRepositoryInfo'),
 			$uri,
-                       $uri.'#softwareheritage_repositoryList','rpc','encoded');
+                       $uri.'#repositoryapi_repositoryList','rpc','encoded');
 
 		$server->register(
-			'softwareheritage_repositoryInfo',
+			'repositoryapi_repositoryInfo',
 			array('session_ser'=>'xsd:string',
 				'repository_id'=>'xsd:string'),
-			array('return'=>'tns:SoftwareheritageRepositoryInfo'),
+			array('return'=>'tns:RepositoryAPIRepositoryInfo'),
 			$uri,
-                       $uri.'#softwareheritage_repositoryInfo','rpc','encoded');
+                       $uri.'#repositoryapi_repositoryInfo','rpc','encoded');
 
 		$server->wsdl->addComplexType(
-			'SoftwareheritageActivity',
+			'RepositoryAPIActivity',
 			'complexType',
 			'struct',
 			'sequence',
@@ -89,33 +89,33 @@ class softwareheritagePlugin extends Plugin {
 			);
 
 		$server->wsdl->addComplexType(
-			'ArrayOfSoftwareheritageActivity',
+			'ArrayOfRepositoryAPIActivity',
 			'complexType',
 			'array',
 			'',
 			'SOAP-ENC:Array',
 			array(),
-			array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:SoftwareheritageActivity[]')),
-			'tns:SoftwareheritageActivity');
+			array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:RepositoryAPIActivity[]')),
+			'tns:RepositoryAPIActivity');
                
 		$server->register(
-			'softwareheritage_repositoryActivity',
+			'repositoryapi_repositoryActivity',
 			array('session_ser'=>'xsd:string',
 				  't0'=>'xsd:int',
 				  't1'=>'xsd:int',
 				  'limit'=>'xsd:int',
 				  'offset'=>'xsd:int',
 				),
-			array('return'=>'tns:ArrayOfSoftwareheritageActivity'),
+			array('return'=>'tns:ArrayOfRepositoryAPIActivity'),
 			$uri,
-                       $uri.'#softwareheritage_repositoryActivity','rpc','encoded');
+                       $uri.'#repositoryapi_repositoryActivity','rpc','encoded');
 
 	}
 
 
 }
 
-function &softwareheritage_repositoryList($session_ser, $limit=0, $offset=0) {
+function &repositoryapi_repositoryList($session_ser, $limit=0, $offset=0) {
 	continue_session($session_ser);
 
 	$maxnum = 1000;
@@ -153,7 +153,7 @@ function &softwareheritage_repositoryList($session_ser, $limit=0, $offset=0) {
 	return $res2;
 }
 
-function &softwareheritage_repositoryInfo($session_ser, $repository_id) {
+function &repositoryapi_repositoryInfo($session_ser, $repository_id) {
 	continue_session($session_ser);
 
 	$params = array();
@@ -163,14 +163,14 @@ function &softwareheritage_repositoryInfo($session_ser, $repository_id) {
 	plugin_hook('get_scm_repo_info',$params);
 
 	if ($params['results'] == NULL) {
-		$sf = new soap_fault('','softwareheritage_repositoryInfo',_('Error when fetching repository info'),_('Error when fetching repository info'));
+		$sf = new soap_fault('','repositoryapi_repositoryInfo',_('Error when fetching repository info'),_('Error when fetching repository info'));
 		return $sf;
 	}
 
 	return $params['results'];
 }
 
-function &softwareheritage_repositoryActivity($session_ser, $t0, $t1, $limit=0, $offset=0) {
+function &repositoryapi_repositoryActivity($session_ser, $t0, $t1, $limit=0, $offset=0) {
 	continue_session($session_ser);
 
 	if ($t1 < $t0) {

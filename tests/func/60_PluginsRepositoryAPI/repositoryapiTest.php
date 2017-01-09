@@ -23,15 +23,15 @@
 
 require_once dirname(dirname(__FILE__)).'/SeleniumForge.php';
 
-class SoftwareHeritage extends FForge_SeleniumTestCase
+class RepositoryAPI extends FForge_SeleniumTestCase
 {
 	public $fixture = 'projecta';
 
-	function testSoftwareHeritage()
+	function testRepositoryAPI()
 	{
 		$this->loadAndCacheFixture();
 
-		$this->activatePlugin('softwareheritage');
+		$this->activatePlugin('repositoryapi');
 		$this->activatePlugin('scmgit');
 
 		$this->open(ROOT);
@@ -156,7 +156,7 @@ class SoftwareHeritage extends FForge_SeleniumTestCase
 		$this->assertNotEquals($session,"");
 
 		// Get repository list as admin
-		$response = $soapclient->softwareheritage_repositoryList($session,100,0);
+		$response = $soapclient->repositoryapi_repositoryList($session,100,0);
 		$repos = array();
 		foreach ($response as $data) {
 			$repos[$data->repository_id] = $data;
@@ -170,7 +170,7 @@ class SoftwareHeritage extends FForge_SeleniumTestCase
 		$this->assertEquals(4,count($repos['projectb/svn/projectb']->repository_urls));
 
 		// Get repository list as anonymous
-		$response = $soapclient->softwareheritage_repositoryList('',100,0);
+		$response = $soapclient->repositoryapi_repositoryList('',100,0);
 		$repos = array();
 		foreach ($response as $data) {
 			$repos[$data->repository_id] = $data;
@@ -184,28 +184,28 @@ class SoftwareHeritage extends FForge_SeleniumTestCase
 		$this->assertEquals(2,count($repos['projectb/svn/projectb']->repository_urls));
 
 		// Get repository info as admin
-		$response = $soapclient->softwareheritage_repositoryInfo($session,'projecta/git/projecta');
+		$response = $soapclient->repositoryapi_repositoryInfo($session,'projecta/git/projecta');
 		$this->assertNotEquals(NULL,$response);
 		$this->assertEquals(3,count($response->repository_urls));
 		
-		$response = $soapclient->softwareheritage_repositoryInfo($session,'projectb/svn/projectb');
+		$response = $soapclient->repositoryapi_repositoryInfo($session,'projectb/svn/projectb');
 		$this->assertNotEquals(NULL,$response);
 		$this->assertEquals(4,count($response->repository_urls));
 
 		// Get activities for repositories		
-		$response = $soapclient->softwareheritage_repositoryActivity($session,$t0,time(),0,0);
+		$response = $soapclient->repositoryapi_repositoryActivity($session,$t0,time(),0,0);
 		$this->assertNotEquals(NULL,$response);
 		$this->assertEquals(5,count($response));
 		// Check limit/offset
-		$response = $soapclient->softwareheritage_repositoryActivity($session,$t0,time(),2,0);
+		$response = $soapclient->repositoryapi_repositoryActivity($session,$t0,time(),2,0);
 		$this->assertNotEquals(NULL,$response);
 		$this->assertEquals(2,count($response));
-		$response = $soapclient->softwareheritage_repositoryActivity($session,$t0,time(),0,2);
+		$response = $soapclient->repositoryapi_repositoryActivity($session,$t0,time(),0,2);
 		$this->assertNotEquals(NULL,$response);
 		$this->assertEquals(3,count($response));
 		// Check time range
 		sleep(15);
-		$response = $soapclient->softwareheritage_repositoryActivity($session,time()-10,time(),0,0);
+		$response = $soapclient->repositoryapi_repositoryActivity($session,time()-10,time(),0,0);
 		$this->assertNotEquals(NULL,$response);
 		$this->assertEquals(0,count($response));
 	}

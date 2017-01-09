@@ -57,6 +57,6 @@ fi
         install-plugin-scmcvs install-plugin-scmsvn install-plugin-scmgit \
         install-plugin-blocks install-plugin-moinmoin \
         install-plugin-taskboard install-plugin-message \
-	install-plugin-softwareheritage
+	install-plugin-repositoryapi
     make post-install
 )
