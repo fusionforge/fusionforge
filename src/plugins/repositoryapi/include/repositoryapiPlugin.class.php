@@ -85,6 +85,7 @@ class repositoryapiPlugin extends Plugin {
 				'group_id' => array('name'=>'group_id', 'type' => 'xsd:int'),
 				'repository_id' => array('name'=>'repository_id', 'type' => 'xsd:string'),
 				'timestamp' => array('name'=>'timestamp', 'type' => 'xsd:int'),
+				'type' => array('name'=>'type', 'type' => 'xsd:string'),
 				)
 			);
 
@@ -188,7 +189,8 @@ function &repositoryapi_repositoryActivity($session_ser, $t0, $t1, $limit=0, $of
 	}
 
 	$results = array();
-	$res = db_query_params("SELECT tstamp, repository_id, group_id FROM scm_activities WHERE tstamp BETWEEN $1 AND $2 ORDER BY tstamp, group_id, repository_id",
+	// "type" is "change" only so far, but extensible for the future
+	$res = db_query_params("SELECT tstamp, repository_id, group_id, 'change' AS type FROM scm_activities WHERE tstamp BETWEEN $1 AND $2 ORDER BY tstamp, group_id, repository_id",
 						   array($t0,
 								 $t1,
 							   ));
@@ -201,7 +203,8 @@ function &repositoryapi_repositoryActivity($session_ser, $t0, $t1, $limit=0, $of
 		if ($skipped >= $offset) {
 			$results[] = array('timestamp' => $arr['tstamp'],
 							   'repository_id' => $arr['repository_id'],
-							   'group_id' => $arr['group_id']);
+							   'group_id' => $arr['group_id'],
+							   'type' => $arr['type']);
 		} else {
 			$skipped = $skipped + 1;
 		}
