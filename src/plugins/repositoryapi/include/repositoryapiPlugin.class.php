@@ -23,7 +23,7 @@
 
 class repositoryapiPlugin extends Plugin {
 	public function __construct($id=0) {
-		$this->Plugin($id) ;
+		parent::__construct($id) ;
 		$this->name = "repositoryapi";
 		$this->text = "Repository API"; // To show in the tabs, use...
 		$this->_addHook('register_soap');
