@@ -3,7 +3,7 @@
 /**
  * FusionForge source control management
  *
- * Copyright 2016, Roland Mas
+ * Copyright 2016-2017, Roland Mas
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the

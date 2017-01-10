@@ -2,7 +2,7 @@
 /**
  * FusionForge plugin system
  *
- * Copyright 2002, 2009, Roland Mas
+ * Copyright 2002-2017, Roland Mas
  * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
