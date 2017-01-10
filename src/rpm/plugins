@@ -92,3 +92,6 @@ Requires:
 
 %package plugin-webanalytics
 Requires:
+
+%package plugin-repositoryapi
+Requires:
