@@ -1,6 +1,6 @@
 <?php
 /**
- * Manage Effort Units for the Forge (Site Admin page) 
+ * Manage Effort Units for the Forge (Site Admin page)
  *
  * Copyright 2017, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org/

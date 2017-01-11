@@ -2,7 +2,7 @@
 /**
  *
  * Expression - PHP Class to safely evaluate math expressions
- * 
+ *
  * Copyright 2005 Miles Kaufmann <http://www.twmagic.com/>
  * Copyright 2012 - 2015 Johan Falk <http://magisterfalk.wordpress.com/>
  * Copyright 2015 Colin Kiegel <http://colin-kiegel.github.io/>
@@ -149,7 +149,7 @@ class Expression {
 			}
 			$this->f [$fnn] = array (
 					'args' => $args,
-					'func' => $stack 
+					'func' => $stack
 			);
 			return true;
 			// ===============
@@ -187,7 +187,7 @@ class Expression {
 		$ops_p = array (
 				':' => 0, ':?' => 0,
 				'?' => 1,
-				'&&' => 2, '||' => 2, 
+				'&&' => 2, '||' => 2,
 				'>' => 3, '<' => 3, '>=' => 3, '<=' => 3, '==' => 3, '!=' => 3, '=~' => 3,
 				'+' => 4, '-' => 4,
 				'*' => 5, '/' => 5, '_' => 5, '%' => 5,
