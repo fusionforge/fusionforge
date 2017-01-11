@@ -4,7 +4,7 @@
  *
  * Copyright 2010 (c) FusionForge Team
  * Copyright 2014-2016, Franck Villaume - TrivialDev
- * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
+ * Copyright 2016-2017, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -220,7 +220,8 @@ $jsvariable ="
 	var typeFormula = ".ARTIFACT_EXTRAFIELDTYPE_FORMULA.";
 	var typeDateTime = ".ARTIFACT_EXTRAFIELDTYPE_DATETIME.";
 	var typeUser = ".ARTIFACT_EXTRAFIELDTYPE_USER.";
-	var typeRelease = ".ARTIFACT_EXTRAFIELDTYPE_RELEASE.";";
+	var typeRelease = ".ARTIFACT_EXTRAFIELDTYPE_RELEASE.";
+	var typeEffort = ".ARTIFACT_EXTRAFIELDTYPE_EFFORT.";";
 
 $javascript = <<<'EOS'
 	$("p[class^='for-']").hide()
@@ -272,6 +273,12 @@ $javascript = <<<'EOS'
 		$("p.for-release").show();
 		$("p[class^='for-']:not(.for-release)").hide();
 	});
+	$("input[value="+typeEffort+"]").on('change', function(){
+		$("label[for='attribute1']").text(size);
+		$("label[for='attribute2']").text(maxLength);
+		$("p.for-effort").show();
+		$("p[class^='for-']:not(.for-effort)").hide();
+	});
 
 EOS;
 echo html_e('script', array( 'type'=>'text/javascript'), '//<![CDATA['."\n".'$(function(){'.$jsvariable."\n".$javascript.'});'."\n".'//]]>');
@@ -286,7 +293,7 @@ $texts = array_values($eftypes);
 echo html_build_radio_buttons_from_arrays($vals, $texts, 'field_type', '', false, '', false ,'', false, array('required'=>'required') );
 echo html_ac(html_ap() - 1);
 
-echo html_ao('p', array('class'=>'for-text for-textarea for-integer for-relation'));
+echo html_ao('p', array('class'=>'for-text for-textarea for-integer for-relation for-effort'));
 echo html_e('label', array('for'=>'attribute1'), _('Size')._(':'));
 echo html_e('input', array('type'=>'text', 'name'=>'attribute1', 'value'=>'20', 'size'=>'2', 'maxlength'=>'2')).html_e('br');
 echo html_e('label', array('for'=>'attribute2'), _('Maxlength')._(':'));

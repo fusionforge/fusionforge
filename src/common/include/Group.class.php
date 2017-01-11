@@ -8,6 +8,7 @@
  * Copyright 2010-2012, Alain Peyrat - Alcatel-Lucent
  * Copyright 2012-2016, Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of National Education
+ * Copyright 2017, Stéphane-Eymeric Bredthauer - TrivilDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -3127,6 +3128,34 @@ if there is anything we can do to help you.
 			db_commit();
 			return true;
 		}
+	}
+
+	/**
+	 *
+	 * @param	integer	$unit_set_id	the effort unit set id
+	 * @return	bool
+	 */
+	function setEffortUnitSet($unit_set_id) {
+		db_begin();
+		$res = db_query_params ('UPDATE groups SET unit_set_id=$1 WHERE group_id=$2',
+				array($unit_set_id, $this->getID()));
+		if ($res) {
+			$this->data_array['unit_set_id']=$unit_set_id;
+			db_commit();
+			return true;
+		} else {
+			db_rollback();
+			return false;
+		}
+	}
+
+	/**
+	 * getEffortUnitSet - Get the effort unit set id.
+	 *
+	 * @return	integer	The id of the effort unit set.
+	 */
+	function getEffortUnitSet() {
+		return $this->data_array['unit_set_id'];
 	}
 }
 

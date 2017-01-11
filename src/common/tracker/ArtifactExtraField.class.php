@@ -5,7 +5,7 @@
  * Copyright 2004, Anthony J. Pugliese
  * Copyright 2009, Roland Mas
  * Copyright 2014, Franck Villaume - TrivialDev
- * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
+ * Copyright 2016-2017, Stéphane-Eymeric Bredthauer - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -49,6 +49,7 @@ define('ARTIFACT_EXTRAFIELDTYPE_MULTIRELEASE',17);
 define('ARTIFACT_EXTRAFIELDTYPE_DATE',18);
 define('ARTIFACT_EXTRAFIELDTYPE_DATETIMERANGE', 19);
 define('ARTIFACT_EXTRAFIELDTYPE_DATERANGE', 20);
+define('ARTIFACT_EXTRAFIELDTYPE_EFFORT',21);
 
 define ("ARTIFACT_EXTRAFIELDTYPEGROUP_SINGLECHOICE", serialize (array (ARTIFACT_EXTRAFIELDTYPE_SELECT, ARTIFACT_EXTRAFIELDTYPE_RADIO, ARTIFACT_EXTRAFIELDTYPE_STATUS)));
 define ("ARTIFACT_EXTRAFIELDTYPEGROUP_MULTICHOICE", serialize (array (ARTIFACT_EXTRAFIELDTYPE_CHECKBOX, ARTIFACT_EXTRAFIELDTYPE_MULTISELECT)));
@@ -754,7 +755,8 @@ class ArtifactExtraField extends FFError {
 			ARTIFACT_EXTRAFIELDTYPE_INTEGER => _('Integer'),
 			ARTIFACT_EXTRAFIELDTYPE_DATETIME => _('Datetime'),
 			ARTIFACT_EXTRAFIELDTYPE_USER => _('User'),
-			ARTIFACT_EXTRAFIELDTYPE_RELEASE => _('Release')
+			ARTIFACT_EXTRAFIELDTYPE_RELEASE => _('Release'),
+			ARTIFACT_EXTRAFIELDTYPE_EFFORT => _('Effort')
 			);
 	}
 

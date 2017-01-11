@@ -4,7 +4,7 @@
  *
  * Copyright 2010 (c) FusionForge Team
  * Copyright 2014-2015, Franck Villaume - TrivialDev
- * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
+ * Copyright 2016-2017, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -91,7 +91,7 @@ if (!$ac || !is_object($ac)) {
 		echo html_e('input', array('type'=>'text', 'id'=>'attribute2', 'name'=>'attribute2', 'value'=>$ac->getAttribute2(), 'size'=>'2', 'maxlength'=>'2'));
 		echo html_ac(html_ap() - 1);
 
-	} elseif ($efType == ARTIFACT_EXTRAFIELDTYPE_TEXT || $efType == ARTIFACT_EXTRAFIELDTYPE_INTEGER || $efType == ARTIFACT_EXTRAFIELDTYPE_RELATION) {
+	} elseif ($efType == ARTIFACT_EXTRAFIELDTYPE_TEXT || $efType == ARTIFACT_EXTRAFIELDTYPE_INTEGER || $efType == ARTIFACT_EXTRAFIELDTYPE_RELATION || $efType == ARTIFACT_EXTRAFIELDTYPE_EFFORT) {
 		echo html_ao('p');
 		echo html_e('label', array('for'=>'attribute1'), _('Size'));
 		echo html_e('input', array('type'=>'text', 'id'=>'attribute1', 'name'=>'attribute1', 'value'=>$ac->getAttribute1(), 'size'=>'2', 'maxlength'=>'2'));

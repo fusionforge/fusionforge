@@ -7,7 +7,7 @@
  * Copyright 2010, FusionForge Team
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright 2012-2016, Franck Villaume - TrivialDev
- * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
+ * Copyright 2016-2017, Stéphane-Eymeric Bredthauer - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -113,6 +113,7 @@ if (!isset($at_arr) || !$at_arr || count($at_arr) < 1) {
 	if (!empty($roadmaps)) {
 		echo html_e('p', array('id' => 'roadmapadminlink'), util_make_link('/tracker/admin/?group_id='.$group_id.'&admin_roadmap=1', _('Manage your roadmaps.')));
 	}
+	echo html_e('p', array('id' => 'efforunitsadminlink'), util_make_link('/tracker/admin/?group_id='.$group_id.'&effort_units=1', _('Manage your Effort Units.')));
 }
 
 //

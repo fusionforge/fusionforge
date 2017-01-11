@@ -7,7 +7,7 @@
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * Copyright 2014,2016, Franck Villaume - TrivialDev
- * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
+ * Copyright 2016-2017, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -30,6 +30,7 @@ require_once $gfcommon.'tracker/ArtifactType.class.php';
 require_once $gfcommon.'tracker/ArtifactExtraField.class.php';
 require_once $gfcommon.'tracker/ArtifactExtraFieldElement.class.php';
 require_once $gfcommon.'tracker/ArtifactWorkflow.class.php';
+require_once $gfcommon.'tracker/EffortUnitFactory.class.php';
 require_once $gfcommon.'include/utils_crossref.php';
 require_once $gfcommon.'include/UserManager.class.php';
 require_once $gfcommon.'widget/WidgetLayoutManager.class.php';
@@ -134,6 +135,10 @@ class ArtifactTypeHtml extends ArtifactType {
 		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&update_type=1';
 		$title_arr[]=_('Update Settings');
 		$attr_arr[] = array('title'=>_('Set up preferences like expiration times, email addresses.'));
+
+		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&effort_units=1';
+		$title_arr[]=_('Manage Effort Units');
+		$attr_arr[] = array('title'=>_('Manage Effort Units for Effort custom extra field.'));
 
 		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&add_extrafield=1';
 		$title_arr[]=_('Manage Custom Fields');
@@ -407,6 +412,8 @@ class ArtifactTypeHtml extends ArtifactType {
 					$post_name =  ' <i>'._('(YYYY-MM-DD YYYY-MM-DD Format)').'</i>';
 				}
 				$str = $this->renderDateRange($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']], $attrs);
+			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_EFFORT) {
+				$str = $this->renderEffort($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['attribute1'],$efarr[$i]['attribute2'], $attrs);
 			}
 			$template = str_replace('{$PostName:'.$efarr[$i]['field_name'].'}',$post_name,$template);
 			$template = str_replace('{$'.$efarr[$i]['field_name'].'}',$str,$template);
@@ -583,7 +590,8 @@ class ArtifactTypeHtml extends ArtifactType {
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_TEXT ||
 				$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_INTEGER ||
 				$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RELATION ||
-				$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_DATETIME) {
+				$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_DATETIME ||
+					$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_EFFORT) {
 
 				//text fields might be really wide, so need a row to themselves.
 				if (($col_count == 1) && ($efarr[$i]['attribute1'] > 30)) {
@@ -1141,6 +1149,44 @@ class ArtifactTypeHtml extends ArtifactType {
 		return html_e('input', array_merge(array('type'=>'text', 'name'=>'extra_fields['.$extra_field_id.']', 'pattern'=>$datepattern.' '.$datepattern, 'maxlength'=>21, 'size'=>21, 'value'=>$dateRange),$attrs));
 	}
 
+	/**
+	 * renderEffort - this function builds a Effort extra field.
+	 *
+	 * @param	int	$extra_field_id	The ID of this field.
+	 * @param	string	$contents	The data for this field.
+	 * @param	string	$size
+	 * @param	string	$maxlength
+	 * @param	array	$attrs		Array of other attributes
+	 * @return	string	text area and data.
+	 */
+	function renderEffort ($extra_field_id, $contents, $size, $maxlength, $attrs = array()) {
+		$effortUnitSet = New EffortUnitSet($this, $this->getEffortUnitSet());
+		$effortUnitFactory = New EffortUnitFactory($effortUnitSet);
+		$units = $effortUnitFactory->getUnits();
+		if (!$contents) {
+			reset($units);
+			$contents = '0U'.key($units);
+		}
+		$pos = strpos($contents, 'U');
+		if ($pos) {
+			$value = substr($contents, 0, $pos);
+			$unitId = substr($contents, $pos+strlen($contents));
+		} else {
+			$value = 0;
+			$unitId = null;
+		}
+		if (isset($attrs['class'])) {
+			$attrs['class'] .= ' effort';
+		} else {
+			$attrs['class'] = 'effort';
+		}
+		$attrs['data-effortid'] = $extra_field_id;
+		$return = html_e('input', array('type'=>'hidden', 'name'=>'extra_fields['.$extra_field_id.']', 'value'=>$contents));
+		$return .= html_e('input', array_merge(array('type'=>'number', 'name'=>'value['.$extra_field_id.']', 'value'=>$value, 'size'=>$size, 'maxlength'=>$maxlength, 'min'=>0), $attrs));
+		$return .= html_build_select_box_from_array($units, 'unit['.$extra_field_id.']', $unitId, false, $attrs);
+		return $return;
+	}
+
 	function technicianBox($name = 'assigned_to[]', $checked = 'xzxz', $show_100 = true, $text_100 = 'none', $extra_id = '-1', $extra_name = '', $multiple = false, $attrs = array()) {
 		if ($text_100=='none'){
 			$text_100=_('Nobody');
@@ -1253,6 +1299,11 @@ class ArtifactTypeHtml extends ArtifactType {
 		}
 		return false;
 	};
+	$(".effort").on('change', function(){
+		var effortid = $(this).data("effortid");
+		console.log(effortid);
+		$("input[name='extra_fields["+effortid+"]']").val($("input[name='value["+effortid+"]']").val()+'U'+$("select[name='unit["+effortid+"]']").val())
+	});
 	$("input[type='radio'].readonly, input[type='checkbox'].readonly").on('click', function(){
 		return false;
 	}).on('keydown', function(event){
@@ -1272,10 +1323,7 @@ class ArtifactTypeHtml extends ArtifactType {
 				fields = answer['fields'];
 				$.each(fields, function (index, field) {
 					fieldObj = $("[name^='extra_fields["+field.id+"]']");
-				console.log(fieldObj);
-				console.log(fieldObj.is("input[type='radio']"));
 					if (fieldObj.is("input[type='checkbox']")){
-				console.log("checkbox");
 						fieldObj.each(function() {
 							var in_array = -1;
 							for (var key in field.value) {
@@ -1291,9 +1339,7 @@ class ArtifactTypeHtml extends ArtifactType {
 							}
 						});
 					} else if (fieldObj.is("input[type='radio']")){
-				console.log("radio");
 						fieldObj.each(function() {
-							console.log($(this));
 							var in_array = -1;
 							for (var key in field.value) {
 								if (field.value[key] == $(this).val()) {
@@ -1301,7 +1347,6 @@ class ArtifactTypeHtml extends ArtifactType {
 									break;
 								}
 							}
-							console.log(in_array);
 							if (in_array > -1) {
 								$(this).prop("checked",true);
 							} else {

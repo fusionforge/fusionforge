@@ -12,6 +12,7 @@
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright 2013-2014, Franck Villaume - TrivialDev
+ * Copyright 2017, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -208,6 +209,7 @@ echo html_ac(html_ap() - 1);
 <ul>
 	<li><?php echo util_make_link('/admin/massmail.php', sprintf(_('Mail Engine for %s Subscribers'), forge_get_config ('forge_name'))); ?></li>
 	<li><?php echo util_make_link('/admin/unsubscribe.php', forge_get_config('forge_name').' '._('Site Mailings Maintenance')); ?></li>
+	<li><?php echo util_make_link('/admin/effortunitsedit.php', _('Manage Effort Units')); ?></li>
 	<li><?php echo util_make_link('/admin/edit_frs_filetype.php', _('Add, Delete, or Edit File Types')); ?></li>
 	<li><?php echo util_make_link('/admin/edit_frs_processor.php', _('Add, Delete, or Edit Processors')); ?></li>
 	<li><?php echo util_make_link('/admin/edit_theme.php', _('Add, Delete, or Edit Themes')); ?></li>
