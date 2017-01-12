@@ -2,7 +2,7 @@
 /**
  * FusionForge Effort Unit Factory
  *
- * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
+ * Copyright 2017, Stéphane-Eymeric Bredthauer - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -142,5 +142,44 @@ class EffortUnitFactory extends FFError {
 			}
 		}
 		return false;
+	}
+
+	function encodedToValue($encoded){
+		$value = 0;
+		if (preg_match('/^(\d+)U(\d+)$/',$encoded,$matches)) {
+			$value = intval($matches[1]);
+		}
+		return $value;
+	}
+
+	function encodedToUnitId($encoded) {
+		if (preg_match('/^(\d+)U(\d+)$/',$encoded,$matches)) {
+			$unitId = intval($matches[2]);
+		} else {
+			$units = $this->getUnitsArr();
+			reset($units);
+			$unitId = key($units);
+		}
+		return $unitId;
+	}
+
+	function encodedToUnitName($encoded) {
+		$units = $this->getUnitsArr();
+		if (preg_match('/^(\d+)U(\d+)$/',$encoded,$matches)) {
+			$unitName = $units[$matches[2]];
+		} else {
+			$unitName = reset($units);
+		}
+		return $unitName;
+	}
+
+	function encodedToString($encoded) {
+		$units = $this->getUnitsArr();
+		if (preg_match('/^(\d+)U(\d+)$/',$encoded,$matches)) {
+			$string = intval($matches[1]).' '.$units[$matches[2]];
+		} else {
+			$string = '0 '.reset($units);
+		}
+		return $string;
 	}
 }

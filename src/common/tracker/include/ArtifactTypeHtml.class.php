@@ -276,6 +276,12 @@ class ArtifactTypeHtml extends ArtifactType {
 					$value = preg_replace_callback('/\b(\d+)\b/', create_function('$matches', 'return _artifactid2url($matches[1], \'title\');'), $value);
 				} elseif ($type == ARTIFACT_EXTRAFIELDTYPE_DATETIME && $value!='') {
 					$value =  date('Y-m-d H:i', $value);
+				} elseif ($type == ARTIFACT_EXTRAFIELDTYPE_EFFORT) {
+					if (!isset($effortUnitSet)) {
+						$effortUnitSet = New EffortUnitSet($this, $this->getEffortUnitSet());
+						$effortUnitFactory = New EffortUnitFactory($effortUnitSet);
+					}
+					$value = $effortUnitFactory->encodedToString($value);
 				}
 				$template = str_replace('{$PostName:'.$efarr[$i]['field_name'].'}', $post_name, $template);
 				$template = str_replace('{$'.$efarr[$i]['field_name'].'}', $value, $template);
@@ -1162,19 +1168,9 @@ class ArtifactTypeHtml extends ArtifactType {
 	function renderEffort ($extra_field_id, $contents, $size, $maxlength, $attrs = array()) {
 		$effortUnitSet = New EffortUnitSet($this, $this->getEffortUnitSet());
 		$effortUnitFactory = New EffortUnitFactory($effortUnitSet);
-		$units = $effortUnitFactory->getUnits();
-		if (!$contents) {
-			reset($units);
-			$contents = '0U'.key($units);
-		}
-		$pos = strpos($contents, 'U');
-		if ($pos) {
-			$value = substr($contents, 0, $pos);
-			$unitId = substr($contents, $pos+strlen($contents));
-		} else {
-			$value = 0;
-			$unitId = null;
-		}
+		$units = $effortUnitFactory->getUnitsArr();
+		$value = $effortUnitFactory->encodedToValue($contents);
+		$unitId = $effortUnitFactory->encodedToUnitId($contents);
 		if (isset($attrs['class'])) {
 			$attrs['class'] .= ' effort';
 		} else {
