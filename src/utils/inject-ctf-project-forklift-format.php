@@ -1,7 +1,7 @@
 #! /usr/bin/php -f
 <?php
 /**
- * Copyright 2016, Franck Villaume - TrivialDev
+ * Copyright 2016,2017, Franck Villaume - TrivialDev
  * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
@@ -929,8 +929,12 @@ function inject_document(&$g, $document, $folderId, $project_path) {
 				$versionComment = substr($versionComment, 0, MAXSIZE__DOCUMENT_VCOMMENT);
 				echo 'New document comment: '.$versionComment."\n";
 			}
-			$createUserObject = user_get_object_by_name($ff_ctf_mapping['user'][$createdByUsername]);
-			$importData = array('nonotice' => 1, 'nocheck' => 1, 'user' => $createUserObject->getID(), 'time' => strtotime($createdate));
+			$createUserID = get_user_id_by_name($ff_ctf_mapping['user'][$createdByUsername]);
+			if ($createUserID == false) {
+				echo 'Creator User do not exist: use default admin user'."\n";
+				$createUserID = $adminUser->getID();
+			}
+			$importData = array('nonotice' => 1, 'nocheck' => 1, 'user' => $createUserID, 'time' => strtotime($createdate));
 			if ($first_version) {
 				if ($d->create($filename, $filetype, $filedata, $folderId, $document_title, $document_description, 1, $versionComment, $importData)) {
 					$resxid = db_query_params('insert into ctf_mapping (xid, ffobject, ffid) values ($1, $2, $3)',
@@ -958,12 +962,16 @@ function inject_document(&$g, $document, $folderId, $project_path) {
 	}
 	if (!$first_version && (strlen($lockByUsername) > 0)) {
 		if (isset($ff_ctf_mapping['user'][$lockByUsername])) {
-			$ffUserObject = user_get_object($ff_ctf_mapping['user'][$lockByUsername]);
-			if ($d->setReservedBy(1, $ffUserObject->getID())) {
-				echo 'document reserved'."\n";
-			} else {
-				echo 'Error: unable to reserved document: '.$d->getErrorMessage()."\n";
-				$d->clearError();
+			$ffUserID = get_user_id_by_name($ff_ctf_mapping['user'][$lockByUsername]);
+			if ($ffUserID != false) {
+				if ($d->setReservedBy(1, $ffUserID)) {
+					echo 'document reserved'."\n";
+				} else {
+					echo 'Error: unable to reserved document: '.$d->getErrorMessage()."\n";
+					$d->clearError();
+				}
+			}  else {
+				echo 'Warning! cannot set reservation. username not existing.'."\n";
 			}
 		} else {
 			echo 'Warning! cannot set reservation. username not existing.'."\n";
@@ -1768,7 +1776,7 @@ function inject_field(&$t, $field, &$default_values, $project_path, $tracker_xid
 	}
 	if ($continue) {
 
-		// suppression des valeurs Open et Closed
+		// delete default Open and Closed
 		if ($field_type == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 			$statusFieldValues = $f->getAvailableValues();
 			$id = get_element_id_by_name($statusFieldValues,'Open');
