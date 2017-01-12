@@ -77,6 +77,7 @@ class FFError {
 		$this->error_state=true;
 		$this->error_message=$string;
 		$this->error_code=$code;
+		ForgeLog::log($string, 'error');
 		return false;
 	}
 

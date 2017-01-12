@@ -213,6 +213,7 @@ require $gfcommon.'include/constants.php';
 
 // Base error library for new objects
 require_once $gfcommon.'include/FFError.class.php';
+require_once $gfcommon.'include/ForgeLog.class.php';
 
 // Database abstraction
 // From here database is required
