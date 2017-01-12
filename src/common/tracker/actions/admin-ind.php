@@ -113,7 +113,6 @@ if (!isset($at_arr) || !$at_arr || count($at_arr) < 1) {
 	if (!empty($roadmaps)) {
 		echo html_e('p', array('id' => 'roadmapadminlink'), util_make_link('/tracker/admin/?group_id='.$group_id.'&admin_roadmap=1', _('Manage your roadmaps.')));
 	}
-	echo html_e('p', array('id' => 'efforunitsadminlink'), util_make_link('/tracker/admin/?group_id='.$group_id.'&effort_units=1', _('Manage your Effort Units.')));
 }
 
 //
