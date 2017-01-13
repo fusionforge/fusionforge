@@ -194,7 +194,7 @@ class EffortUnitSet extends FFError {
 	function _recursive_copy($from_unit) {
 		$new_unit = new EffortUnit($this);
 		$new_unit_id = $new_unit->copy($from_unit);
-		$from_unit_set = $from_unit->getEffortUnits();
+		$from_unit_set = $from_unit->getEffortUnitSet();
 		$from_unit_factory = new EffortUnitFactory($from_unit_set);
 		$units = $from_unit_factory->getUnits();
 		foreach ($units as $unit) {

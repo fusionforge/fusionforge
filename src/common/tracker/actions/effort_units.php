@@ -296,12 +296,12 @@ function add_unit(&$effortUnitSet){
 	echo $inputParameters;
 	echo html_e('input', array('type'=>'hidden', 'name'=>'function', 'value'=>'postadd'));
 	echo html_ao('p');
-	echo html_e('label', array('for'=>'name'),_('Name'));
-	echo html_e('input', array('type'=>'text', 'name'=>'name', 'id'=>'name'));
+	echo html_e('label', array('for'=>'name'),_('Name').utils_requiredField()._(': '));
+	echo html_e('input', array('type'=>'text', 'name'=>'name', 'id'=>'name', 'required'=>'required'));
 	echo html_ac(html_ap() - 1);
 	echo html_ao('p');
-	echo html_e('label', array('for'=>'factor'),_('Definition'));
-	echo html_e('input', array('type'=>'number', 'name'=>'factor', 'id'=>'factor', 'min'=>0));
+	echo html_e('label', array('for'=>'factor'),_('Definition').utils_requiredField()._(': '));
+	echo html_e('input', array('type'=>'number', 'name'=>'factor', 'id'=>'factor', 'min'=>1, 'required'=>'required'));
 	$unitFactory = new EffortUnitFactory($effortUnitSet);
 	$unitsArr = $unitFactory->getUnitsArr();
 	echo html_build_select_box_from_array($unitsArr, 'to_unit');
@@ -359,16 +359,16 @@ function edit_unit (&$effortUnitSet) {
 	echo html_e('input', array('type'=>'hidden', 'name'=>'form_key', 'value'=>form_generate_key()));
 	echo $inputParameters;
 	echo html_ao('p');
-	echo html_e('label', array('for'=>'name'),_('Name'));
-	echo html_e('input', array('type'=>'text', 'name'=>'name', 'id'=>'name', 'value'=> $unit->getName()));
+	echo html_e('label', array('for'=>'name'),_('Name').utils_requiredField()._(': '));
+	echo html_e('input', array('type'=>'text', 'name'=>'name', 'id'=>'name', 'value'=> $unit->getName(), 'required'=>'required'));
 	echo html_ac(html_ap() - 1);
 	if ($unit->isBaseUnit()) {
 		echo html_e('input', array('type'=>'hidden', 'name'=>'factor', 'value'=>1 ));
 		echo html_e('input', array('type'=>'hidden', 'name'=>'to_unit', 'value'=>$unit->getToUnit() ));
 	} else {
 		echo html_ao('p');
-		echo html_e('label', array('for'=>'factor'),_('Definition'));
-		echo html_e('input', array('type'=>'number', 'name'=>'factor', 'id'=>'factor', 'min'=>0, 'value'=> $unit->getConversionFactor()));
+		echo html_e('label', array('for'=>'factor'),_('Definition').utils_requiredField()._(': '));
+		echo html_e('input', array('type'=>'number', 'name'=>'factor', 'id'=>'factor', 'min'=>1, 'value'=> $unit->getConversionFactor()));
 		$unitFactory = new EffortUnitFactory($effortUnitSet);
 		$unitsArr = $unitFactory->getUnitsArr();
 		unset($unitsArr[$unit->getID()]);
@@ -449,6 +449,7 @@ function postdelete_unit(&$effortUnitSet) {
 		echo $HTML->error_msg(_('You haven\' confirm the delete of the Unit'));
 		return false;
 	}
+	$name = $unit->getName();
 	$unit->delete();
 	if ($unit->isError()) {
 		echo $HTML->error_msg($unit->getErrorMessage());

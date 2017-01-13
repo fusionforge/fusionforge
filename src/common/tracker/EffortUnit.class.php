@@ -104,6 +104,21 @@ class EffortUnit extends FFError {
 	 * @return	bool	success or not
 	 */
 	function create($name, $conversion_factor, $to_unit, $unit_position = false, $is_base_unit = false, $importData = array()) {
+		if (!ctype_digit(strval($conversion_factor)) || $conversion_factor<1) {
+			$this->setError(_('Conversion factor must be an integer greater or equal to 1'));
+			return false;
+		}
+		$name = trim($name);
+		if ($name=='') {
+			$this->setError(_('An Unit name is required'));
+			return false;
+		}
+		$res = db_query_params('SELECT 1 FROM effort_unit WHERE unit_name = $1 AND unit_set_id = $2', array(htmlspecialchars($name), $this->EffortUnitSet->GetID()));
+		if (db_numrows($res) > 0) {
+			$this->setError(sprintf(_('Unit name %s already exist'),$name));
+			return false;
+		}
+		
 		db_begin();
 		if(array_key_exists('user', $importData)){
 			$user = $importData['user'];
@@ -118,8 +133,18 @@ class EffortUnit extends FFError {
 		if ($is_base_unit) {
 			$to_unit = 1;
 		}
+		
+		if (!$unit_position) {
+			
+			$res = db_query_params('SELECT MAX(unit_position) AS max_position FROM effort_unit WHERE unit_set_id = $1', array($this->EffortUnitSet->GetID()));
+			if (db_numrows($res) > 0) {
+				$unit_position =  db_result($res, 0, 'max_position') + 1;
+			} else {
+				return 0;
+			}
+		}
 		$res = db_query_params('INSERT INTO effort_unit(unit_set_id, unit_name, conversion_factor, to_unit, unit_position, is_base_unit, created_date, created_by, modified_date, modified_by) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)',
-				array($this->EffortUnitSet->GetID(), $name, $conversion_factor, $to_unit, $unit_position, ($is_base_unit?1:0), $time, $user, $time, $user));
+				array($this->EffortUnitSet->GetID(), htmlspecialchars($name), $conversion_factor, $to_unit, $unit_position, ($is_base_unit?1:0), $time, $user, $time, $user));
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setError(_('Error')._(':').' '._('Cannot create Effort Unit')._(':').' '.db_error());
 			db_rollback();
@@ -243,6 +268,20 @@ class EffortUnit extends FFError {
 	}
 
 	function update($name, $conversion_factor, $to_unit, $importData = array()){
+		if (!ctype_digit(strval($conversion_factor)) || $conversion_factor<1) {
+			$this->setError(_('Conversion factor must be an integer greater or equal to 1'));
+			return false;
+		}
+		$name = trim($name);
+		if ($name=='') {
+			$this->setError(_('An Unit name is required'));
+			return false;
+		}
+		$res = db_query_params('SELECT 1 FROM effort_unit WHERE unit_name = $1 AND unit_set_id = $2', array(htmlspecialchars($name), $this->EffortUnitSet->GetID()));
+		if (db_numrows($res) > 0) {
+			$this->setError(sprintf(_('Unit name %s already exist'),$name));
+			return false;
+		}
 		db_begin();
 		if(array_key_exists('user', $importData)){
 			$user = $importData['user'];
@@ -255,7 +294,7 @@ class EffortUnit extends FFError {
 			$time = time();
 		}
 		$res = db_query_params('UPDATE effort_unit SET unit_name=$1, conversion_factor=$2, to_unit=$3, modified_date=$4, modified_by=$5 WHERE unit_id=$6',
-				array($name, $conversion_factor, $to_unit, $time, $user, $this->getID()));
+				array(htmlspecialchars($name), $conversion_factor, $to_unit, $time, $user, $this->getID()));
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setError(_('Error')._(':').' '._('Cannot update Effort Unit')._(':').' '.db_error());
 			db_rollback();
