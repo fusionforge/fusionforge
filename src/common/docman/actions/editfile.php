@@ -89,7 +89,6 @@ switch ($subaction) {
 		$version = getIntFromRequest('edit_version', 0);
 		$new_version = getIntFromRequest('new_version', 0);
 		$details = $sanitizer->SanitizeHtml($details);
-		$vcomment = $sanitizer->SanitizeHtml($vcomment);
 		$data = '';
 
 		if ($version) {

@@ -113,7 +113,7 @@ $cells[][] = html_e('input', array('type' => 'checkbox', 'title' => _('Make this
 echo $HTML->multiTableRow(array(), $cells);
 $cells = array();
 $cells[][] = _('Type of Document') .utils_requiredField();
-$nextcell = html_e('input', array('type' => 'radio', 'id' => 'editButtonFile', 'name' => 'type', 'value' => 'httpupload', 'checked' => 'checked', 'required' => 'required')).html_e('label', array('for' => 'editButtonFile'), _('File')).
+$nextcell = html_e('input', array('type' => 'radio', 'id' => 'editButtonFile', 'name' => 'type', 'value' => 'httpupload', 'required' => 'required')).html_e('label', array('for' => 'editButtonFile'), _('File')).
 		html_e('input', array('type' => 'radio', 'id' => 'editButtonUrl', 'name' => 'type', 'value' => 'pasteurl', 'required' => 'required')).html_e('label', array('for' => 'editButtonUrl'), _('URL'));
 if (forge_get_config('use_manual_uploads')) {
 	$nextcell .= html_e('input', array('type' => 'radio', 'id' => 'editButtonManualUpload', 'name' => 'type', 'value' => 'manualupload', 'required' => 'required')).html_e('label', array('for' => 'editButtonManualUpload'), _('Already-uploaded file'));
