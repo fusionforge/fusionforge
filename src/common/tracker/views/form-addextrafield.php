@@ -224,50 +224,65 @@ $jsvariable ="
 	var typeEffort = ".ARTIFACT_EXTRAFIELDTYPE_EFFORT.";";
 
 $javascript = <<<'EOS'
-	$("p[class^='for-']").hide()
+	$("p[class^='for-']").hide();
+	$("[name='parent']").hide();
 	$("input[value="+typeSelect+"]").on('change', function(){
 		$("p.for-select").show();
 		$("p[class^='for-']:not(.for-select)").hide();
+		$("[name='parent']").show();
 	});
 	$("input[value="+typeCheckBox+"]").on('change', function(){
 		$("p.for-check").show();
 		$("p[class^='for-']:not(.for-check)").hide();
+		$("[name='parent']").show();
 	});
 	$("input[value="+typeRadio+"]").on('change', function(){
 		$("p.for-radio").show();
 		$("p[class^='for-']:not(.for-radio)").hide();
+		$("[name='parent']").show();
 	});
 	$("input[value="+typeText+"]").on('change', function(){
 		$("label[for='attribute1']").text(size);
 		$("label[for='attribute2']").text(maxLength);
 		$("p.for-text").show();
 		$("p[class^='for-']:not(.for-text)").hide();
+		$("[name='parent']").hide();
 	});
 	$("input[value="+typeMultiSelect+"]").on('change', function(){
 		$("p.for-multiselect").show();
 		$("p[class^='for-']:not(.for-multiselect)").hide();
+		$("[name='parent']").show();
 	});
 	$("input[value="+typeTextArea+"]").on('change', function(){
 		$("label[for='attribute1']").text(rows);
 		$("label[for='attribute2']").text(columns);
 		$("p.for-textarea").show();
 		$("p[class^='for-']:not(.for-textarea)").hide();
+		$("[name='parent']").hide();
 	});
 	$("input[value="+typeRelation+"]").on('change', function(){
 		$("label[for='attribute1']").text(size);
 		$("label[for='attribute2']").text(maxLength);
 		$("p.for-relation").show();
 		$("p[class^='for-']:not(.for-relation)").hide();
+		$("[name='parent']").hide();
 	});
 	$("input[value="+typeInteger+"]").on('change', function(){
 		$("label[for='attribute1']").text(size);
 		$("label[for='attribute2']").text(maxLength);
 		$("p.for-integer").show();
 		$("p[class^='for-']:not(.for-integer)").hide();
+		$("[name='parent']").hide();
+	});
+	$("input[value="+typeDateTime+"]").on('change', function(){
+		$("p.for-release").show();
+		$("p[class^='for-']:not(.for-datetime)").hide();
+		$("[name='parent']").hide();
 	});
 	$("input[value="+typeUser+"]").on('change', function(){
 		$("p.for-user").show();
 		$("p[class^='for-']:not(.for-user)").hide();
+		$("[name='parent']").hide();
 	});
 	$("input[value="+typeRelease+"]").on('change', function(){
 		$("p.for-release").show();
@@ -313,7 +328,7 @@ echo html_e('label', array('for'=>'show100label'), _('Label for the none value')
 echo html_e('input', array('type'=>'text', 'name'=>'show100label', 'value'=>_('none'), 'size'=>'30')).html_e('br');
 echo html_ac(html_ap() - 1);
 
-echo html_ao('p', array('class'=>'for-select for-multiselect for-radio for-check'));
+echo html_e('p', array('class'=>'for-select for-multiselect for-radio for-check'), html_e('label', array('for'=>'parent'), _('Parent Field')));
 $pfarr = $ath->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_RADIO, ARTIFACT_EXTRAFIELDTYPE_CHECKBOX,ARTIFACT_EXTRAFIELDTYPE_SELECT,ARTIFACT_EXTRAFIELDTYPE_MULTISELECT), false, true);
 $parentField = array();
 if (is_array($pfarr)) {
@@ -322,9 +337,7 @@ if (is_array($pfarr)) {
 	}
 }
 asort($parentField,SORT_FLAG_CASE | SORT_STRING);
-echo html_e('label', array('for'=>'parent'), _('Parent Field'));
 echo html_build_select_box_from_arrays(array_keys($parentField), array_values($parentField), 'parent', null, true, 'none').html_e('br');
-echo html_ac(html_ap() - 1);
 
 echo html_ao('p', array('class'=>'for-select for-multiselect for-radio for-check'));
 echo html_build_checkbox('autoassign', false, false);
