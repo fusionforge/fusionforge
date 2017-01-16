@@ -262,6 +262,43 @@ class EffortUnit extends FFError {
 			db_rollback();
 			return false;
 		}
+
+		// Update unit define with this unit
+		$res = db_query_params('UPDATE effort_unit AS eu1
+								SET conversion_factor = eu1.conversion_factor*eu2.conversion_factor,
+									to_unit = eu2.to_unit
+								FROM effort_unit AS eu2
+								WHERE
+									eu1.to_unit = eu2.unit_id AND
+									eu2.unit_id = $1',
+								array($this->getID()));
+		if (!$res) {
+			$this->setError(_('Error deleting Effort Unit')._(': ').db_error());
+			db_rollback();
+			return false;
+		}
+
+		// Update extra_field data using this unit
+		$res = db_query_params('WITH t AS (
+									SELECT data_id
+										FROM artifact_extra_field_data
+										INNER JOIN artifact_extra_field_list USING (extra_field_id)
+										INNER JOIN artifact_group_list USING (group_artifact_id)
+									WHERE
+										field_type = $1 AND
+										field_data like $2 AND
+										unit_set_id = $3
+									)
+								UPDATE artifact_extra_field_data AS d
+								SET field_data = $4*CAST(SUBSTRING(field_data FROM \'#"%#"U%\' FOR \'#\') AS INTEGER) || \'U\' || $5 
+								FROM t 	
+								WHERE d.data_id = t.data_id',
+								array(ARTIFACT_EXTRAFIELDTYPE_EFFORT,'%U'.$this->getID(), $this->getEffortUnitSet()->getID(), $this->getConversionFactor(),$this->getToUnit()));
+		if (!$res) {
+			$this->setError(_('Error deleting Effort Unit')._(': ').db_error());
+			db_rollback();
+			return false;
+		}
 		$data_array['is_deleted'] = 1;
 		db_commit();
 		return true;
