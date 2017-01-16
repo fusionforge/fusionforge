@@ -2,7 +2,7 @@
 /**
  * Generic Tracker Content Widget Class
  *
- * Copyright 2016, Franck Villaume - TrivialDev
+ * Copyright 2016,2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is a part of Fusionforge.
@@ -585,6 +585,17 @@ EOS;
 										}
 									} else {
 										$cellContent .= $ath->renderReleaseField($keys[0], $value, $extrafieldObject->getShow100(), $extrafieldObject->getShow100label(), false, false, false, $attrs);
+									}
+									break;
+								case ARTIFACT_EXTRAFIELDTYPE_EFFORT:
+									if ($readonly) {
+										if ($value) {
+											$cellContent .= $value;
+										} else {
+											$cellContent .= _('Undefined');
+										}
+									} else {
+										$cellContent .= $ath->renderEffort($keys[0], $value, $extrafieldObject->getAttribute1(), $extrafieldObject->getAttribute2(), $attrs);
 									}
 									break;
 							}
