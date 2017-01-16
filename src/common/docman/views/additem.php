@@ -83,7 +83,7 @@ if (forge_check_perm('docman', $group_id, 'approve')) {
 	} else {
 		echo $HTML->openForm(array('id' => 'injectzip', 'name' => 'injectzip', 'method' => 'post', 'action' => '/docman/?group_id='.$group_id.'&action=injectzip&dirid='.$dirid, 'enctype' => 'multipart/form-data'));
 		echo html_ao('p');
-		echo html_e('label', array(), _('Upload archive:'), false);
+		echo html_e('label', array(), _('Upload archive')._(':'), false);
 		echo html_e('input', array('type' => 'file', 'name' => 'uploaded_zip', 'required' => 'required'));
 		echo html_e('span', array(), '('._('max upload size')._(': ').human_readable_bytes(util_get_maxuploadfilesize()).')', false);
 		echo html_e('input', array('id' => 'submitinjectzip', 'type' => 'button', 'value' => _('Inject Tree')));
