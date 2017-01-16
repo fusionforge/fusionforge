@@ -126,7 +126,7 @@ class EffortUnitSet extends FFError {
 					return false;
 				}
 				if (db_numrows($res)>0) {
-					$this->setError(sprintf(_('Effort Unit Set already exist for tracker $s'),$this->ArtifactType->getName()));
+					$this->setError(sprintf(_('Effort Unit Set already exist for tracker %s'),$this->ArtifactType->getName()));
 					db_rollback();
 					return false;
 				}
@@ -142,7 +142,7 @@ class EffortUnitSet extends FFError {
 					return false;
 				}
 				if (db_numrows($res)>0) {
-					$this->setError(sprintf(_('Effort Unit Set already exist for project $s'),$this->Group->getPublicName()));
+					$this->setError(sprintf(_('Effort Unit Set already exist for project %s'),$this->Group->getPublicName()));
 					db_rollback();
 					return false;
 				}
@@ -173,11 +173,13 @@ class EffortUnitSet extends FFError {
 	}
 
 	function copy($from_unit_set){
+		db_begin();
 		$unit_set_id = $this->create();
 		$from_unit_factory = new EffortUnitFactory($from_unit_set);
 		$from_baseUnit = $from_unit_factory->getBaseUnit();
-		//$from_baseUnit_id = $from_baseUnit->getID();
+
 		if (!$this->_recursive_copy($from_baseUnit)) {
+			db_rollback();
 			return false;
 		}
 		switch ($this->objectLevel) {
@@ -188,20 +190,57 @@ class EffortUnitSet extends FFError {
 				$this->ArtifactType->setEffortUnitSet($this->getID());
 				break;
 		}
+		db_commit();
 		return true;
 	}
 
 	function _recursive_copy($from_unit) {
+		db_begin();
 		$new_unit = new EffortUnit($this);
+		if (!$new_unit) {
+			$this->setError(_('Error coping Effort Unit').' '.$from_unit->getName());
+			db_rollback();
+			return false;
+		}
 		$new_unit_id = $new_unit->copy($from_unit);
+		if (!$new_unit_id || $new_unit->isError()) {
+			$this->setError(_('Error coping Effort Unit').' '.$from_unit->getName()._(':').' '.$new_unit->getErrorMessage());
+			db_rollback();
+			return false;
+		}
+		// Update artifacts data
+		$res = db_query_params('WITH t AS (
+									SELECT data_id
+										FROM artifact_extra_field_data
+										INNER JOIN artifact_extra_field_list USING (extra_field_id)
+										INNER JOIN artifact_group_list USING (group_artifact_id)
+									WHERE
+										field_type = $1 AND
+										field_data like $2 AND
+										unit_set_id = $3
+									)
+								UPDATE artifact_extra_field_data AS d
+								SET field_data = CAST(SUBSTRING(field_data FROM \'#"%#"U%\' FOR \'#\') AS INTEGER) || \'U\' || $4
+								FROM t
+								WHERE d.data_id = t.data_id',
+				array(ARTIFACT_EXTRAFIELDTYPE_EFFORT,'%U'.$from_unit->getID(), $from_unit->getEffortUnitSet()->getID(), $new_unit_id));
+		if (!$res) {
+			$this->setError(_('Error coping Effort Unit')._(': ').db_error());
+			db_rollback();
+			return false;
+		}
 		$from_unit_set = $from_unit->getEffortUnitSet();
 		$from_unit_factory = new EffortUnitFactory($from_unit_set);
 		$units = $from_unit_factory->getUnits();
 		foreach ($units as $unit) {
 			if ($unit->getToUnit()==$from_unit->getID() && $unit->getID()!=$from_unit->getID()) {
-				$this->_recursive_copy($unit);
+				if (!$this->_recursive_copy($unit)) {
+					db_rollback();
+					return false;
+				}
 			}
 		}
+		db_commit();
 		return true;
 	}
 

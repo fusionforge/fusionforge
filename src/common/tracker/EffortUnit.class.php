@@ -113,7 +113,7 @@ class EffortUnit extends FFError {
 			$this->setError(_('An Unit name is required'));
 			return false;
 		}
-		$res = db_query_params('SELECT 1 FROM effort_unit WHERE unit_name = $1 AND unit_set_id = $2', array(htmlspecialchars($name), $this->EffortUnitSet->GetID()));
+		$res = db_query_params('SELECT 1 FROM effort_unit WHERE is_deleted <> 1 AND unit_name = $1 AND unit_set_id = $2', array(htmlspecialchars($name), $this->EffortUnitSet->GetID()));
 		if (db_numrows($res) > 0) {
 			$this->setError(sprintf(_('Unit name %s already exist'),$name));
 			return false;
@@ -140,7 +140,7 @@ class EffortUnit extends FFError {
 			if (db_numrows($res) > 0) {
 				$unit_position =  db_result($res, 0, 'max_position') + 1;
 			} else {
-				return 0;
+				$unit_position = 0;
 			}
 		}
 		$res = db_query_params('INSERT INTO effort_unit(unit_set_id, unit_name, conversion_factor, to_unit, unit_position, is_base_unit, created_date, created_by, modified_date, modified_by) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)',
@@ -290,8 +290,8 @@ class EffortUnit extends FFError {
 										unit_set_id = $3
 									)
 								UPDATE artifact_extra_field_data AS d
-								SET field_data = $4*CAST(SUBSTRING(field_data FROM \'#"%#"U%\' FOR \'#\') AS INTEGER) || \'U\' || $5 
-								FROM t 	
+								SET field_data = $4*CAST(SUBSTRING(field_data FROM \'#"%#"U%\' FOR \'#\') AS INTEGER) || \'U\' || $5
+								FROM t
 								WHERE d.data_id = t.data_id',
 								array(ARTIFACT_EXTRAFIELDTYPE_EFFORT,'%U'.$this->getID(), $this->getEffortUnitSet()->getID(), $this->getConversionFactor(),$this->getToUnit()));
 		if (!$res) {
@@ -314,7 +314,7 @@ class EffortUnit extends FFError {
 			$this->setError(_('An Unit name is required'));
 			return false;
 		}
-		$res = db_query_params('SELECT 1 FROM effort_unit WHERE unit_name = $1 AND unit_set_id = $2', array(htmlspecialchars($name), $this->EffortUnitSet->GetID()));
+		$res = db_query_params('SELECT 1 FROM effort_unit WHERE is_deleted <> 1 AND unit_name = $1 AND unit_id <> $2 AND unit_set_id = $3', array(htmlspecialchars($name), $this->getID(), $this->EffortUnitSet->GetID()));
 		if (db_numrows($res) > 0) {
 			$this->setError(sprintf(_('Unit name %s already exist'),$name));
 			return false;
@@ -404,7 +404,7 @@ class EffortUnit extends FFError {
 		} else {
 			$to_unit_id = 1;
 		}
-		if (!$this->create($name, $conversion_factor, $to_unit_id, $position, $is_base_unit)) {
-		}
+		$id = $this->create($name, $conversion_factor, $to_unit_id, $position, $is_base_unit);
+		return $id;
 	}
 }
