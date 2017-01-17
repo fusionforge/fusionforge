@@ -147,7 +147,8 @@ class EffortUnitFactory extends FFError {
 	function encodedToValue($encoded){
 		$value = 0;
 		if (preg_match('/^(\d+)U(\d+)$/',$encoded,$matches)) {
-			$value = intval($matches[1]);
+			$unit = new EffortUnit($this->EffortUnitSet, $matches[2]);
+			$value = intval(intval($matches[1])/$unit->getConversionFactorForBaseUnit());
 		}
 		return $value;
 	}
@@ -174,10 +175,11 @@ class EffortUnitFactory extends FFError {
 	}
 
 	function encodedToString($encoded) {
-		$units = $this->getUnitsArr();
 		if (preg_match('/^(\d+)U(\d+)$/',$encoded,$matches)) {
-			$string = intval($matches[1]).' '.$units[$matches[2]];
+			$unit = new EffortUnit($this->EffortUnitSet, $matches[2]);
+			$string = intval(intval($matches[1])/$unit->getConversionFactorForBaseUnit()).' '.$unit->getName();
 		} else {
+			$units = $this->getUnitsArr();
 			$string = '0 '.reset($units);
 		}
 		return $string;

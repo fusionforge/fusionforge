@@ -1168,7 +1168,15 @@ class ArtifactTypeHtml extends ArtifactType {
 	function renderEffort ($extra_field_id, $contents, $size, $maxlength, $attrs = array()) {
 		$effortUnitSet = New EffortUnitSet($this, $this->getEffortUnitSet());
 		$effortUnitFactory = New EffortUnitFactory($effortUnitSet);
-		$units = $effortUnitFactory->getUnitsArr();
+		$units = $effortUnitFactory->getUnits();
+		$vals = array();
+		$texts = array();
+		$factors = array();
+		foreach ($units as $unit) {
+			$vals [] = $unit->getID();
+			$texts [] = $unit->getName();
+			$opts_attrs []['data-factor'] = $unit->getConversionFactorForBaseUnit();
+		}
 		$value = $effortUnitFactory->encodedToValue($contents);
 		$unitId = $effortUnitFactory->encodedToUnitId($contents);
 		if (isset($attrs['class'])) {
@@ -1177,9 +1185,9 @@ class ArtifactTypeHtml extends ArtifactType {
 			$attrs['class'] = 'effort';
 		}
 		$attrs['data-effortid'] = $extra_field_id;
-		$return = html_e('input', array('type'=>'hidden', 'name'=>'extra_fields['.$extra_field_id.']', 'value'=>$contents));
+		$return = html_e('input', array('type'=>'hidden', 'name'=>'extra_fields['.$extra_field_id.']', 'value'=>$value.'U'.$unitId));
 		$return .= html_e('input', array_merge(array('type'=>'number', 'name'=>'value['.$extra_field_id.']', 'value'=>$value, 'size'=>$size, 'maxlength'=>$maxlength, 'min'=>0), $attrs));
-		$return .= html_build_select_box_from_array($units, 'unit['.$extra_field_id.']', $unitId, false, $attrs);
+		$return .= html_build_select_box_from_arrays($vals, $texts, 'unit['.$extra_field_id.']', $unitId, false, '', false, '', false, $attrs, $opts_attrs);
 		return $return;
 	}
 
@@ -1295,10 +1303,15 @@ class ArtifactTypeHtml extends ArtifactType {
 		}
 		return false;
 	};
-	$(".effort").on('change', function(){
+	$("input.effort").on('change', function(){
+		var effortid = $(this).data("effortid");
+		$("input[name='extra_fields["+effortid+"]']").val($("input[name='value["+effortid+"]']").val()*$("select[name='unit["+effortid+"]'] option:selected").data('factor')+'U'+$("select[name='unit["+effortid+"]']").val());
+	});
+	$("select.effort").on('change', function(){
 		var effortid = $(this).data("effortid");
 		console.log(effortid);
-		$("input[name='extra_fields["+effortid+"]']").val($("input[name='value["+effortid+"]']").val()+'U'+$("select[name='unit["+effortid+"]']").val())
+		$("input[name='value["+effortid+"]']").val(parseInt(parseInt($("input[name='extra_fields["+effortid+"]']").val())/$("select[name='unit["+effortid+"]'] option:selected").data('factor')));
+		$("input[name='extra_fields["+effortid+"]']").val($("input[name='value["+effortid+"]']").val()*$("select[name='unit["+effortid+"]'] option:selected").data('factor')+'U'+$("select[name='unit["+effortid+"]']").val());
 	});
 	$("input[type='radio'].readonly, input[type='checkbox'].readonly").on('click', function(){
 		return false;

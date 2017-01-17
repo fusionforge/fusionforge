@@ -211,7 +211,7 @@ class EffortUnit extends FFError {
 	/**
 	 * getMultiplier - get this unit base multiplier.
 	 *
-	 * @return	float	unit base multiplier.
+	 * @return	integer	unit base multiplier.
 	 */
 	function getConversionFactor() {
 		return $this->data_array['conversion_factor'];
@@ -290,10 +290,10 @@ class EffortUnit extends FFError {
 										unit_set_id = $3
 									)
 								UPDATE artifact_extra_field_data AS d
-								SET field_data = $4*CAST(SUBSTRING(field_data FROM \'#"%#"U%\' FOR \'#\') AS INTEGER) || \'U\' || $5
+								SET field_data = CAST(SUBSTRING(field_data FROM \'#"%#"U%\' FOR \'#\') AS INTEGER) || \'U\' || $4
 								FROM t
 								WHERE d.data_id = t.data_id',
-								array(ARTIFACT_EXTRAFIELDTYPE_EFFORT,'%U'.$this->getID(), $this->getEffortUnitSet()->getID(), $this->getConversionFactor(),$this->getToUnit()));
+								array(ARTIFACT_EXTRAFIELDTYPE_EFFORT,'%U'.$this->getID(), $this->getEffortUnitSet()->getID(), $this->getToUnit()));
 		if (!$res) {
 			$this->setError(_('Error deleting Effort Unit')._(': ').db_error());
 			db_rollback();
@@ -319,6 +319,7 @@ class EffortUnit extends FFError {
 			$this->setError(sprintf(_('Unit name %s already exist'),$name));
 			return false;
 		}
+		$old_conversion_factor = $this->getConversionFactor();
 		db_begin();
 		if(array_key_exists('user', $importData)){
 			$user = $importData['user'];
@@ -330,21 +331,45 @@ class EffortUnit extends FFError {
 		} else {
 			$time = time();
 		}
+
 		$res = db_query_params('UPDATE effort_unit SET unit_name=$1, conversion_factor=$2, to_unit=$3, modified_date=$4, modified_by=$5 WHERE unit_id=$6',
 				array(htmlspecialchars($name), $conversion_factor, $to_unit, $time, $user, $this->getID()));
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError(_('Error')._(':').' '._('Cannot update Effort Unit')._(':').' '.db_error());
+			$this->setError(_('Error')._(':').' '._('Cannot update Effort Unit1')._(':').' '.db_error());
 			db_rollback();
 			return false;
 		}
-
+		if ($old_conversion_factor != $conversion_factor) {
+			$units = array_merge(array($this), $this->getUnitsDependingOn());
+			foreach ($units as $unit) {
+				$res = db_query_params('WITH t AS (
+										SELECT data_id
+											FROM artifact_extra_field_data
+											INNER JOIN artifact_extra_field_list USING (extra_field_id)
+											INNER JOIN artifact_group_list USING (group_artifact_id)
+										WHERE
+											field_type = $1 AND
+											field_data like $2 AND
+											unit_set_id = $3
+										)
+									UPDATE artifact_extra_field_data AS d
+									SET field_data = (CAST(SUBSTRING(field_data FROM \'#"%#"U%\' FOR \'#\') AS INTEGER)*$4)/$5 || \'U\' || $6
+									FROM t
+									WHERE d.data_id = t.data_id',
+						array(ARTIFACT_EXTRAFIELDTYPE_EFFORT,'%U'.$unit->getID(), $this->EffortUnitSet->getID(), $conversion_factor, $old_conversion_factor, $unit->getID()));
+				if (!$res) {
+					$this->setError(_('Error')._(':').' '._('Cannot update Effort Unit2')._(':').' '.db_error());
+					db_rollback();
+					return false;
+				}
+			}
+		}
 		if (!$this->fetchData($this->getID())) {
 			db_rollback();
 			return false;
 		}
 		db_commit();
 		return true;
-
 	}
 
 	function updatePosition($unit_position) {
@@ -406,5 +431,28 @@ class EffortUnit extends FFError {
 		}
 		$id = $this->create($name, $conversion_factor, $to_unit_id, $position, $is_base_unit);
 		return $id;
+	}
+
+	function getConversionFactorForBaseUnit() {
+		$factor = $this->getConversionFactor();
+		$toUnitId = $this->getToUnit();
+		$toUnit = new EffortUnit($this->EffortUnitSet,$toUnitId);
+		if (!$toUnit->isBaseUnit()) {
+			$factor *= $toUnit->getConversionFactorForBaseUnit();
+		}
+		return $factor;
+	}
+
+	function getUnitsDependingOn(){
+		$unitsDependingOn = array();
+		$effortUnitFactory = new EffortUnitFactory($this->EffortUnitSet);
+		$units = $effortUnitFactory->getUnits();
+		foreach ($units as $unit) {
+			if ($unit->getToUnit()==$this->getID()) {
+				$unitsDependingOn[] = $unit;
+				$unitsDependingOn = array_merge($unitsDependingOn, $unit->getUnitsDependingOn());
+			}
+		}
+		return $unitsDependingOn;
 	}
 }

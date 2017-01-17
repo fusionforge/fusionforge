@@ -188,6 +188,13 @@ if (!$ac || !is_object($ac)) {
 			echo $ath->renderReleaseField($ac->getID(),$ac->getDefaultValues(),true,'none');
 			echo html_ac(html_ap() - 1);
 			break;
+		case ARTIFACT_EXTRAFIELDTYPE_EFFORT:
+			echo $ath->javascript();
+			echo html_ao('p');
+			echo html_e('label', array('for'=>'extra_fields['.$ac->getID().']'),_('Default value'));
+			echo $ath->renderEffort($ac->getID(),$ac->getDefaultValues(),$ac->getAttribute1(), $ac->getAttribute2());
+			echo html_ac(html_ap() - 1);
+			break;
 	}
 
 	if (in_array($efType, array(ARTIFACT_EXTRAFIELDTYPE_TEXT, ARTIFACT_EXTRAFIELDTYPE_INTEGER, ARTIFACT_EXTRAFIELDTYPE_TEXTAREA))) {
