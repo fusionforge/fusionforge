@@ -92,7 +92,7 @@ if (count($at_arr) < 1) {
 			$cells = array();
 			if ($child_has_at) {
 				if ($at_arr[$j]->Group->getID() != $group->getID()) {
-					$cells[] = array(sprintf(_('Child project %s Tracker'), util_make_link('/tracker/?group='.$at_arr[$j]->Group->getID(), $at_arr[$j]->Group->getPublicName())), 'content' => $at_arr[$j]->Group->getID());
+					$cells[] = array(sprintf(_('Child project %s Tracker'), util_make_link('/tracker/?group_id='.$at_arr[$j]->Group->getID(), $at_arr[$j]->Group->getPublicName())), 'content' => $at_arr[$j]->Group->getID());
 				} else {
 					$cells[] = array('', 'content' => $at_arr[$j]->Group->getID());
 				}
