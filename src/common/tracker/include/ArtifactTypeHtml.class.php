@@ -1177,6 +1177,7 @@ class ArtifactTypeHtml extends ArtifactType {
 			$texts [] = $unit->getName();
 			$opts_attrs []['data-factor'] = $unit->getConversionFactorForBaseUnit();
 		}
+		$valueInUnitBase = $effortUnitFactory->encodedToValueInBaseUnit($contents);
 		$value = $effortUnitFactory->encodedToValue($contents);
 		$unitId = $effortUnitFactory->encodedToUnitId($contents);
 		if (isset($attrs['class'])) {
@@ -1189,7 +1190,7 @@ class ArtifactTypeHtml extends ArtifactType {
 		if (isset($attrs['form'])) {
 			$hiddenAttrs['form'] = $attrs['form'];
 		}
-		$return = html_e('input', array_merge(array('type'=>'hidden', 'name'=>'extra_fields['.$extra_field_id.']', 'value'=>$value.'U'.$unitId), $hiddenAttrs));
+		$return = html_e('input', array_merge(array('type'=>'hidden', 'name'=>'extra_fields['.$extra_field_id.']', 'value'=>$valueInUnitBase.'U'.$unitId), $hiddenAttrs));
 		$return .= html_e('input', array_merge(array('type'=>'number', 'name'=>'value['.$extra_field_id.']', 'value'=>$value, 'size'=>$size, 'maxlength'=>$maxlength, 'min'=>0), $attrs));
 		$return .= html_build_select_box_from_arrays($vals, $texts, 'unit['.$extra_field_id.']', $unitId, false, '', false, '', false, $attrs, $opts_attrs);
 		return $return;
@@ -1307,13 +1308,8 @@ class ArtifactTypeHtml extends ArtifactType {
 		}
 		return false;
 	};
-	$("input.effort").on('change', function(){
+	$(".effort").on('change', function(){
 		var effortid = $(this).data("effortid");
-		$("input[name='extra_fields["+effortid+"]']").val($("input[name='value["+effortid+"]']").val()*$("select[name='unit["+effortid+"]'] option:selected").data('factor')+'U'+$("select[name='unit["+effortid+"]']").val());
-	});
-	$("select.effort").on('change', function(){
-		var effortid = $(this).data("effortid");
-		$("input[name='value["+effortid+"]']").val(parseInt(parseInt($("input[name='extra_fields["+effortid+"]']").val())/$("select[name='unit["+effortid+"]'] option:selected").data('factor')));
 		$("input[name='extra_fields["+effortid+"]']").val($("input[name='value["+effortid+"]']").val()*$("select[name='unit["+effortid+"]'] option:selected").data('factor')+'U'+$("select[name='unit["+effortid+"]']").val());
 	});
 	$("input[type='radio'].readonly, input[type='checkbox'].readonly").on('click', function(){

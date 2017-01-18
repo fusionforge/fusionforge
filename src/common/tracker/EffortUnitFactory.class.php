@@ -153,6 +153,14 @@ class EffortUnitFactory extends FFError {
 		return $value;
 	}
 
+	function encodedToValueInBaseUnit($encoded){
+		$value = 0;
+		if (preg_match('/^(\d+)U(\d+)$/',$encoded,$matches)) {
+			$value = intval(intval($matches[1]));
+		}
+		return $value;
+	}
+
 	function encodedToUnitId($encoded) {
 		if (preg_match('/^(\d+)U(\d+)$/',$encoded,$matches)) {
 			$unitId = intval($matches[2]);
