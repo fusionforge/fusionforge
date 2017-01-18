@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright 2005 (c) GForge Group, LLC
- * Copyright 2016, Franck Villaume - TrivialDev
+ * Copyright 2016-2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -124,8 +124,16 @@ for ($i=0; $i<count($at_arr); $i++) {
 	//	Show the extra fields
 	//
  	$efd = $at_arr[$i]->getExtraFieldDataText();
- 	foreach ( $efd as $efd_pair ) {
- 		$value = $efd_pair["value"];
+ 	foreach ( $efd as $key => $efd_pair ) {
+		if ($efd_pair['type'] == ARTIFACT_EXTRAFIELDTYPE_EFFORT) {
+			if (!isset($effortUnitSet)) {
+				$effortUnitSet = new EffortUnitSet($ath, $ath->getEffortUnitSet());
+				$effortUnitFactory = new EffortUnitFactory($effortUnitSet);
+			}
+			$value = $effortUnitFactory->encodedToString($efd_pair['value']);
+		} else {
+			$value = $efd_pair["value"];
+		}
  		echo $sep.'"'. fix4csv($value) .'"';
  	}
  	echo "\n";
