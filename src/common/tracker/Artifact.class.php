@@ -8,7 +8,7 @@
  * Copyright (C) 2009-2013 Alain Peyrat, Alcatel-Lucent
  * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
  * Copyright 2014-2016, Franck Villaume - TrivialDev
- * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
+ * Copyright 2016-2017, Stéphane-Eymeric Bredthauer - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -1921,6 +1921,7 @@ class Artifact extends FFObject {
 				case ARTIFACT_EXTRAFIELDTYPE_TEXTAREA:
 				case ARTIFACT_EXTRAFIELDTYPE_RELATION:
 				case ARTIFACT_EXTRAFIELDTYPE_INTEGER:
+				case ARTIFACT_EXTRAFIELDTYPE_EFFORT:
 					if (isset($efd[$efid])) {
 						$value = $efd[$efid];
 					} else {

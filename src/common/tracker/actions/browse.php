@@ -9,7 +9,7 @@
  * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
  * Copyright 2012-2017, Franck Villaume - TrivialDev
  * Copyright 2014, Stéphane-Eymeric Bredthauer
- * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
+ * Copyright 2016-2017, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -702,6 +702,12 @@ if ($art_arr && $art_cnt > 0) {
 							if ($art_arr[$i]->getStatusID() == 2) {
 								$value = '<span class="strike">'.$value.'</span>';
 							}
+						} elseif ($extra_data[$f]['type'] == ARTIFACT_EXTRAFIELDTYPE_EFFORT) {
+							if (!isset($effortUnitSet)) {
+								$effortUnitSet = new EffortUnitSet($ath, $ath->getEffortUnitSet());
+								$effortUnitFactory = new EffortUnitFactory($effortUnitSet);
+							}
+							$value = $effortUnitFactory->encodedToString($value);
 						}
 						echo '<td>' . $value .'</td>';
 					} else {
