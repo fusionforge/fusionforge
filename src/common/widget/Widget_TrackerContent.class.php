@@ -590,7 +590,9 @@ EOS;
 								case ARTIFACT_EXTRAFIELDTYPE_EFFORT:
 									if ($readonly) {
 										if ($value) {
-											$cellContent .= $value;
+											$effortUnitSet = New EffortUnitSet($ath, $ath->getEffortUnitSet());
+											$effortUnitFactory = New EffortUnitFactory($effortUnitSet);
+											$cellContent .= $effortUnitFactory->encodedToString($value);;
 										} else {
 											$cellContent .= _('Undefined');
 										}
