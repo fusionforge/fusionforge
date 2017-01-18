@@ -1185,7 +1185,11 @@ class ArtifactTypeHtml extends ArtifactType {
 			$attrs['class'] = 'effort';
 		}
 		$attrs['data-effortid'] = $extra_field_id;
-		$return = html_e('input', array('type'=>'hidden', 'name'=>'extra_fields['.$extra_field_id.']', 'value'=>$value.'U'.$unitId));
+		$hiddenAttrs = array();
+		if (isset($attrs['form'])) {
+			$hiddenAttrs['form'] = $attrs['form'];
+		}
+		$return = html_e('input', array_merge(array('type'=>'hidden', 'name'=>'extra_fields['.$extra_field_id.']', 'value'=>$value.'U'.$unitId), $hiddenAttrs));
 		$return .= html_e('input', array_merge(array('type'=>'number', 'name'=>'value['.$extra_field_id.']', 'value'=>$value, 'size'=>$size, 'maxlength'=>$maxlength, 'min'=>0), $attrs));
 		$return .= html_build_select_box_from_arrays($vals, $texts, 'unit['.$extra_field_id.']', $unitId, false, '', false, '', false, $attrs, $opts_attrs);
 		return $return;
@@ -1309,7 +1313,6 @@ class ArtifactTypeHtml extends ArtifactType {
 	});
 	$("select.effort").on('change', function(){
 		var effortid = $(this).data("effortid");
-		console.log(effortid);
 		$("input[name='value["+effortid+"]']").val(parseInt(parseInt($("input[name='extra_fields["+effortid+"]']").val())/$("select[name='unit["+effortid+"]'] option:selected").data('factor')));
 		$("input[name='extra_fields["+effortid+"]']").val($("input[name='value["+effortid+"]']").val()*$("select[name='unit["+effortid+"]'] option:selected").data('factor')+'U'+$("select[name='unit["+effortid+"]']").val());
 	});
