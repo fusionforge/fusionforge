@@ -7,7 +7,7 @@
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2011, Iñigo Martinez
  * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
- * Copyright 2012-2016, Franck Villaume - TrivialDev
+ * Copyright 2012-2017, Franck Villaume - TrivialDev
  * Copyright 2014, Stéphane-Eymeric Bredthauer
  * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
@@ -401,7 +401,7 @@ foreach ($sort_fields as $sort_field) {
 			break;
 			//no ordering on these columns yet.
 		default:
-			if (intval($sort_field) > 0) {
+			if (intval($sort_field) > 0 && isset($efarr[$sort_field])) {
 				if ($efarr[$sort_field]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 					echo '<td>'.$ath->getExtraFieldName($sort_field)._(':').'<br>'.$status_box.'</td>';
 				}
