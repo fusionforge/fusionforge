@@ -696,9 +696,9 @@ if ($art_arr && $art_cnt > 0) {
 					if (intval($f) > 0) {
 						// Now display extra-fields (fields are numbers).
 						$value = $extra_data[$f]['value'];
-						if ($extra_data[$f]['type'] == 9) {
+						if ($extra_data[$f]['type'] == ARTIFACT_EXTRAFIELDTYPE_RELATION) {
 							$value = preg_replace('/\b(\d+)\b/e', "_artifactid2url('\\1')", $value);
-						} elseif ($extra_data[$f]['type'] == 7) {
+						} elseif ($extra_data[$f]['type'] == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 							if ($art_arr[$i]->getStatusID() == 2) {
 								$value = '<span class="strike">'.$value.'</span>';
 							}

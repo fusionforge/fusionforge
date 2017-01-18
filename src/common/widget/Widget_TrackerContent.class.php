@@ -592,7 +592,7 @@ EOS;
 										if ($value) {
 											$effortUnitSet = New EffortUnitSet($ath, $ath->getEffortUnitSet());
 											$effortUnitFactory = New EffortUnitFactory($effortUnitSet);
-											$cellContent .= $effortUnitFactory->encodedToString($value);;
+											$cellContent .= $effortUnitFactory->encodedToString($value);
 										} else {
 											$cellContent .= _('Undefined');
 										}
