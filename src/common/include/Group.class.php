@@ -8,7 +8,7 @@
  * Copyright 2010-2012, Alain Peyrat - Alcatel-Lucent
  * Copyright 2012-2016, Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of National Education
- * Copyright 2017, Stéphane-Eymeric Bredthauer - TrivilDev
+ * Copyright 2017, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
