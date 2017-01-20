@@ -319,7 +319,6 @@ class EffortUnit extends FFError {
 			$this->setError(sprintf(_('Unit name %s already exist'),$name));
 			return false;
 		}
-		$old_conversion_factor = $this->getConversionFactor();
 		db_begin();
 		if(array_key_exists('user', $importData)){
 			$user = $importData['user'];
@@ -331,16 +330,24 @@ class EffortUnit extends FFError {
 		} else {
 			$time = time();
 		}
-
+		// get conversion factor for base unit before update
+		$old_factor = $this->getConversionFactorForBaseUnit();
+		// get depenfing units before update
+		$units = array_merge(array($this), $this->getUnitsDependingOn());
 		$res = db_query_params('UPDATE effort_unit SET unit_name=$1, conversion_factor=$2, to_unit=$3, modified_date=$4, modified_by=$5 WHERE unit_id=$6',
 				array(htmlspecialchars($name), $conversion_factor, $to_unit, $time, $user, $this->getID()));
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError(_('Error')._(':').' '._('Cannot update Effort Unit1')._(':').' '.db_error());
+			$this->setError(_('Error')._(':').' '._('Cannot update Effort Unit')._(':').' '.db_error());
 			db_rollback();
 			return false;
 		}
-		if ($old_conversion_factor != $conversion_factor) {
-			$units = array_merge(array($this), $this->getUnitsDependingOn());
+		if (!$this->fetchData($this->getID())) {
+			db_rollback();
+			return false;
+		}
+		// get conversion factor for base unit after update
+		$new_factor = $this->getConversionFactorForBaseUnit();
+		if ($old_factor != $new_factor) {
 			foreach ($units as $unit) {
 				$res = db_query_params('WITH t AS (
 										SELECT data_id
@@ -356,17 +363,35 @@ class EffortUnit extends FFError {
 									SET field_data = (CAST(SUBSTRING(field_data FROM \'#"%#"U%\' FOR \'#\') AS INTEGER)*$4)/$5 || \'U\' || $6
 									FROM t
 									WHERE d.data_id = t.data_id',
-						array(ARTIFACT_EXTRAFIELDTYPE_EFFORT,'%U'.$unit->getID(), $this->EffortUnitSet->getID(), $conversion_factor, $old_conversion_factor, $unit->getID()));
+						array(ARTIFACT_EXTRAFIELDTYPE_EFFORT,'%U'.$unit->getID(), $this->EffortUnitSet->getID(), $new_factor, $old_factor, $unit->getID()));
 				if (!$res) {
-					$this->setError(_('Error')._(':').' '._('Cannot update Effort Unit2')._(':').' '.db_error());
+					$this->setError(_('Error')._(':').' '._('Cannot update Effort Unit (artifacts data update)')._(':').' '.db_error());
 					db_rollback();
+					$this->fetchData($this->getID());
+					return false;
+				}
+				$res = db_query_params('WITH t AS (
+										SELECT default_id
+											FROM artifact_extra_field_default
+											INNER JOIN artifact_extra_field_list USING (extra_field_id)
+											INNER JOIN artifact_group_list USING (group_artifact_id)
+										WHERE
+											field_type = $1 AND
+											default_value like $2 AND
+											unit_set_id = $3
+										)
+									UPDATE artifact_extra_field_default AS d
+									SET default_value = (CAST(SUBSTRING(default_value FROM \'#"%#"U%\' FOR \'#\') AS INTEGER)*$4)/$5 || \'U\' || $6
+									FROM t
+									WHERE d.default_id = t.default_id',
+						array(ARTIFACT_EXTRAFIELDTYPE_EFFORT,'%U'.$unit->getID(), $this->EffortUnitSet->getID(), $new_factor, $old_factor, $unit->getID()));
+				if (!$res) {
+					$this->setError(_('Error')._(':').' '._('Cannot update Effort Unit (default value update)')._(':').' '.db_error());
+					db_rollback();
+					$this->fetchData($this->getID());
 					return false;
 				}
 			}
-		}
-		if (!$this->fetchData($this->getID())) {
-			db_rollback();
-			return false;
 		}
 		db_commit();
 		return true;
