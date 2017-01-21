@@ -88,8 +88,11 @@ if ($headers) {
 	//	Show the extra fields
 	//
 	$ef = $ath->getExtraFields();
-	$keys=array_keys($ef);
-	for ($i=0; $i<count($keys); $i++) {
+	$keys = array_keys($ef);
+	for ($i = 0; $i < count($keys); $i++) {
+		if ($ef[$keys[$i]]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_EFFORT) {
+			echo $sep.'"'.'effort_unit for '.$ef[$keys[$i]]['field_name'].'"';
+		}
 		echo $sep.'"'.$ef[$keys[$i]]['field_name'].'"';
 	}
 	echo "\n";
@@ -130,7 +133,16 @@ for ($i=0; $i<count($at_arr); $i++) {
 				$effortUnitSet = new EffortUnitSet($ath, $ath->getEffortUnitSet());
 				$effortUnitFactory = new EffortUnitFactory($effortUnitSet);
 			}
-			$value = $effortUnitFactory->encodedToString($efd_pair['value']);
+			$units = $effortUnitFactory->getUnits();
+			$unitId = $effortUnitFactory->encodedToUnitId($efd_pair['value']);
+			$unittexts = _('Unknown');
+			foreach ($units as $unit) {
+				if ($unit->getID() == $unitId) {
+					$unittexts = $unit->getName();
+				}
+			}
+			echo $sep.'"'. fix4csv($unittexts) .'"';
+			$value = $effortUnitFactory->encodedToValue($efd_pair['value']);
 		} else {
 			$value = $efd_pair["value"];
 		}
