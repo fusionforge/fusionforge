@@ -1276,7 +1276,7 @@ class ArtifactTypeHtml extends ArtifactType {
 			$size = min(count($ids)+1, 15);
 			return html_build_multiple_select_box_from_arrays($ids, $names, $name, $checked, $size, $show_100, $text_100, false, $attrs);
 		} else {
-			return html_build_select_box_from_arrays($ids, $names, $name, $checked, $show_100, $text_100, false, $attrs);
+			return html_build_select_box_from_arrays($ids, $names, $name, $checked, $show_100, $text_100, false, false, false, $attrs);
 		}
 	}
 
