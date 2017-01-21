@@ -365,11 +365,14 @@ echo ' </div>
 $sort_fields = explode(',', $ath->getBrowseList());
 // Get the list of fields which can be sorted.
 $efarr = $ath->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_TEXT,
-				    ARTIFACT_EXTRAFIELDTYPE_TEXTAREA,
-				    ARTIFACT_EXTRAFIELDTYPE_INTEGER,
-				    ARTIFACT_EXTRAFIELDTYPE_SELECT,
-				    ARTIFACT_EXTRAFIELDTYPE_RADIO,
-				    ARTIFACT_EXTRAFIELDTYPE_STATUS));
+					ARTIFACT_EXTRAFIELDTYPE_TEXTAREA,
+					ARTIFACT_EXTRAFIELDTYPE_INTEGER,
+					ARTIFACT_EXTRAFIELDTYPE_SELECT,
+					ARTIFACT_EXTRAFIELDTYPE_RADIO,
+					ARTIFACT_EXTRAFIELDTYPE_STATUS,
+					ARTIFACT_EXTRAFIELDTYPE_DATE,
+					ARTIFACT_EXTRAFIELDTYPE_DATETIME,
+					ARTIFACT_EXTRAFIELDTYPE_EFFORT));
 echo $HTML->openForm(array('action' => '/tracker/?group_id='.$group_id.'&atid='.$ath->getID(), 'method' => 'post'));
 echo '
 	<input type="hidden" name="query_id" value="-1" />

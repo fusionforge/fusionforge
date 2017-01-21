@@ -1921,6 +1921,8 @@ class Artifact extends FFObject {
 				case ARTIFACT_EXTRAFIELDTYPE_TEXTAREA:
 				case ARTIFACT_EXTRAFIELDTYPE_RELATION:
 				case ARTIFACT_EXTRAFIELDTYPE_INTEGER:
+				case ARTIFACT_EXTRAFIELDTYPE_DATE:
+				case ARTIFACT_EXTRAFIELDTYPE_DATETIME:
 				case ARTIFACT_EXTRAFIELDTYPE_EFFORT:
 					if (isset($efd[$efid])) {
 						$value = $efd[$efid];
@@ -2139,7 +2141,18 @@ class ArtifactComparator {
 			}
 			$af=$aa[$criterion]['value'];
 			$bf=$ba[$criterion]['value'];
-			$namecmp = strcoll ($af,$bf) ;
+			switch ($aa[$criterion]['type']) {
+				case ARTIFACT_EXTRAFIELDTYPE_EFFORT:
+					$namecmp = intval($af)-intval($bf);
+					break;
+				case ARTIFACT_EXTRAFIELDTYPE_INTEGER:
+				case ARTIFACT_EXTRAFIELDTYPE_DATE:
+				case ARTIFACT_EXTRAFIELDTYPE_DATETIME:
+					$numecmp = $af-$bf;
+					break;
+				default:
+					$namecmp = strcoll ($af,$bf);
+			}
 			if ($namecmp != 0) {
 				return $namecmp ;
 			}
