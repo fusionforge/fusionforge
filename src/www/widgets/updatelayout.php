@@ -91,8 +91,8 @@ if ($owner) {
 			if ($request->exist('name')) {
 				$param = $request->get('name');
 				$name = array_pop(array_keys($param));
+				$instance_id = (int)$param[$name];
 			}
-			$instance_id = (int)$param[$name];
 			switch($request->get('action')) {
 				case 'widget':
 					if ($name && $request->exist('layout_id')) {
