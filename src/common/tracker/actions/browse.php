@@ -649,13 +649,25 @@ if ($art_arr && $art_cnt > 0) {
 					echo '<td class="priority'.$art_arr[$i]->getPriority()  .'">'. $art_arr[$i]->getPriority() .'</td>';
 					break;
 				case 'assigned_to':
-					echo '<td>'. $art_arr[$i]->getAssignedRealName() .'</td>';
+					if($art_arr[$i]->getAssignedTo() != 100) {
+						echo '<td>'.util_display_user($art_arr[$i]->getAssignedUnixName(), $art_arr[$i]->getAssignedTo(), $art_arr[$i]->getAssignedRealName()).'</td>';
+					} else {
+						echo '<td>'. $art_arr[$i]->getAssignedRealName() .'</td>';
+					}
 					break;
 				case 'submitted_by':
-					echo '<td>'. $art_arr[$i]->getSubmittedRealName() .'</td>';
+					if($art_arr[$i]->getSubmittedBy() != 100) {
+						echo '<td>'.util_display_user($art_arr[$i]->getSubmittedUnixName(), $art_arr[$i]->getSubmittedBy(), $art_arr[$i]->getSubmittedRealName()).'</td>';
+					} else {
+						echo '<td>'.$art_arr[$i]->getSubmittedRealName().'</td>';
+					}
 					break;
 				case 'last_modified_by':
-					echo '<td>'. $art_arr[$i]->getLastModifiedRealName() .'</td>';
+					if($art_arr[$i]->getLastModifiedRealName() != 100) {
+						echo '<td>'.util_display_user($art_arr[$i]->getLastModifiedUnixName(), $art_arr[$i]->getLastModifiedBy(), $art_arr[$i]->getLastModifiedRealName()).'</td>';
+					} else {
+						echo '<td>'.$art_arr[$i]->getLastModifiedRealName().'</td>';
+					}
 					break;
 				case 'close_date':
 					echo '<td>'. ($art_arr[$i]->getCloseDate() ?
