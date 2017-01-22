@@ -2,7 +2,7 @@
 /**
  * General Tracker Content Widget Class
  *
- * Copyright 2016, Franck Villaume - TrivialDev
+ * Copyright 2016-2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is a part of Fusionforge.
@@ -72,13 +72,11 @@ class Widget_TrackerGeneral extends Widget {
 			$return = $HTML->listTableTop();
 			$cells = array();
 			$cells[][] = html_e('strong', array(), _('Submitted by')._(':'));
-			$cellContent = $ah->getSubmittedRealName();
 			if($ah->getSubmittedBy() != 100) {
-				$unixName = $ah->getSubmittedUnixName();
-				$by = $ah->getSubmittedBy();
-				$cellContent .= ' ('.html_e('samp', array(), util_make_link_u($unixName, $by, $unixName)).')';
+				$cells[][] = util_display_user($ah->getSubmittedUnixName(), $ah->getSubmittedBy(), $ah->getSubmittedRealName());
+			} else {
+				$cells[][] = $ah->getSubmittedRealName();
 			}
-			$cells[][] = $cellContent;
 			$return .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i++, true)), $cells);
 			$cells = array();
 			$cells[][] = html_e('strong', array(), _('Date Submitted')._(':'));
@@ -86,13 +84,11 @@ class Widget_TrackerGeneral extends Widget {
 			$return .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i++, true)), $cells);
 			$cells = array();
 			$cells[][] = html_e('strong', array(), _('Last Modified by')._(':'));
-			$cellContent = $ah->getLastModifiedRealName();
 			if($ah->getLastModifiedBy() != 100) {
-				$unixName = $ah->getLastModifiedUnixName();
-				$by = $ah->getLastModifiedBy();
-				$cellContent .= ' ('.html_e('samp', array(), util_make_link_u($unixName, $by, $unixName)).')';
+				$cells[][] = util_display_user($ah->getLastModifiedUnixName(), $ah->getLastModifiedBy(), $ah->getLastModifiedRealName());
+			} else {
+				$cells[][] = $ah->getLastModifiedRealName();
 			}
-			$cells[][] = $cellContent;
 			$return .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i++, true)), $cells);
 			$cells = array();
 			$cells[][] = html_e('strong', array(), _('Last Modified')._(':'));
