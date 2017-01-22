@@ -5,7 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2015-2016, Franck Villaume - TrivialDev
+ * Copyright 2015-2017, Franck Villaume - TrivialDev
  * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
@@ -94,14 +94,8 @@ function hide_edit_button(id) {
 }
 /* ]]> */</script>';
 			$return .= '<img style="display: none;" id="img_order" src="" alt="" />';
-			$return .= '<table class="listing full" id="messages_list">
-<thead>
-<tr>
-<th>
-<a name="sort" href="#sort" class="sortheader" onclick="thead = true;ts_resortTable(this, 0);submitOrder();return false;">'._('Message').'<span id="order_span" sortdir="'.$order.'" class="sortarrow">&nbsp;&nbsp;<img src="/images/sort_'.$img_order.'.gif" alt="'.$char_order.'" /></span></a></th>
-</tr>
-</thead>
-<tbody>';
+			$thArray = array('<a name="sort" href="#sort" class="sortheader" onclick="thead = true;ts_resortTable(this, 0);submitOrder();return false;">'._('Message').'<span id="order_span" sortdir="'.$order.'" class="sortarrow">&nbsp;&nbsp;<img src="/images/sort_'.$img_order.'.gif" alt="'.$char_order.'" /></span></a>');
+			$return .= $HTML->listTableTop($thArray, array(), 'listing full sortable', 'messages_list');
 
 			for ($i=0; $i < $rows; $i++) {
 				$return .= '<tr onmouseover="show_edit_button(\'edit_bt_'.$i.'\')" onmouseout="hide_edit_button(\'edit_bt_'.$i.'\')" ><td>';
@@ -131,7 +125,7 @@ function hide_edit_button(id) {
 				$return .= '</td></tr>';
 			}
 
-			$return .= '</tbody></table>';
+			$return .= $HTML->listTableBottom();
 
 		} else {
 			$return .= $HTML->information(_('No Comments Have Been Posted'));
