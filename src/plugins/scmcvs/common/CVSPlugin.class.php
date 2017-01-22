@@ -3,7 +3,7 @@
  * FusionForge CVS plugin
  *
  * Copyright 2004-2009, Roland Mas
- * Copyright 2013,2016, Franck Villaume - TrivialDev
+ * Copyright 2013,2016-2017, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -183,20 +183,20 @@ over it to the project's administrator.");
 			$total = array('adds' => 0, 'commits' => 0);
 
 			while($data = db_fetch_array($result)) {
-				$b .= '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
-				$b .= '<td class="halfwidth">' ;
-				$b .= util_make_link_u ($data['user_name'], $data['user_id'], $data['realname']) ;
-				$b .= '</td><td class="onequarterwidth align-right">'.$data['adds']. '</td>'.
-					'<td class="onequarterwidth align-right">'.$data['commits'].'</td></tr>';
+				$cells = array();
+				$cells[] = array(util_display_user($data['user_name'], $data['user_id'], $data['realname']), 'class' => 'halfwidth');
+				$cells[] = array($data['adds'], 'class' => 'onequarterwidth align-right');
+				$cells[] = array($data['updates'], 'class' => 'onequarterwidth align-right');
+				$b .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
 				$total['adds'] += $data['adds'];
-				$total['commits'] += $data['commits'];
+				$total['updates'] += $data['commits'];
 				$i++;
 			}
-			$b .= '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
-			$b .= '<td class="halfwidth"><strong>'._('Total').':</strong></td>'.
-				'<td class="onequarterwidth align-right"><strong>'.$total['adds']. '</strong></td>'.
-				'<td class="onequarterwidth align-right"><strong>'.$total['commits'].'</strong></td>';
-			$b .= '</tr>';
+			$cells = array();
+			$cells[] = array(html_e('strong', array(), _('Total')._(':')), 'class' => 'halfwidth');
+			$cells[] = array($total['adds'], 'class' => 'onequarterwidth align-right');
+			$cells[] = array($total['commits'], 'class' => 'onequarterwidth align-right');
+			$b .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
 			$b .= $HTML->listTableBottom();
 		} else {
 			$b .= $HTML->information(_('No history yet'));
