@@ -2,7 +2,7 @@
 /**
  * Widget_ProjectLatestCommits
  *
- * Copyright 2014 Franck Villaume - TrivialDev
+ * Copyright 2014,2017, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -41,7 +41,7 @@ class Widget_ProjectLatestCommits extends Widget {
 		return _('5 Latest Commits');
 	}
 
-	public function _getLinkToCommit($project, $commit_id, $pluginName) {
+	public function _getLinkToCommit($project, $commit_id) {
 		return util_make_link('/scm/browser.php?group_id='.$project->getID().'&commit='.$commit_id, _('commit')._(': ').$commit_id);
 	}
 
@@ -69,7 +69,7 @@ class Widget_ProjectLatestCommits extends Widget {
 				}
 				$html .= html_e('div', array('class' => $HTML->boxGetAltRowStyle($key, true), 'style' => 'border-bottom:1px solid #ddd'),
 						html_e('div', array('style' => 'font-size:0.98em'),
-							$this->_getLinkToCommit($project, $revision['commit_id'], $revision['pluginName']).
+							$this->_getLinkToCommit($project, $revision['commit_id']).
 							' '._('on').' '.
 							date(_("Y-m-d H:i"), $revision['date'])).
 						html_e('div', array('style' => 'padding-left:20px; padding-bottom:4px; color:#555'),
