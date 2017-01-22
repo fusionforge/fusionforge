@@ -4,7 +4,7 @@
  *
  * Copyright 2004 (c) GForge, LLC
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2016, Franck Villaume - TrivialDev
+ * Copyright 2016-2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -955,6 +955,11 @@ function flattedartifacts_to_soap($at_arr) {
 				if(is_array($extrafieldsdatatext) && count($extrafieldsdatatext) > 0) {
 					foreach ($extrafieldsdatatext as $extrafielddatatext) {
 						$fldarr = array();
+						if ($extrafielddatatext['type'] == ARTIFACT_EXTRAFIELDTYPE_EFFORT) {
+							$effortUnitSet = New EffortUnitSet($at_arr[$i]->ArtifactType, $at_arr[$i]->ArtifactType->getEffortUnitSet());
+							$effortUnitFactory = New EffortUnitFactory($effortUnitSet);
+							$extrafielddatatext['value'] = $effortUnitFactory->encodedToString($extrafielddatatext['value']);
+						}
 						$fldarr = array('extra_field_name' => $extrafielddatatext['name'], 'field_value' => $extrafielddatatext['value']);
 						$flddata[]=$fldarr;
 						unset($fldarr);
