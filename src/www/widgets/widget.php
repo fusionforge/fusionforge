@@ -55,9 +55,7 @@ if ($request->valid($vOwner)) {
 			}
 			break;
 		case WidgetLayoutManager::OWNER_TYPE_HOME:
-			if (forge_check_global_perm('forge_admin')) {
-				$good = true;
-			}
+			$good = true;
 			break;
 		case WidgetLayoutManager::OWNER_TYPE_TRACKER:
 			if ($at = artifactType_get_object($owner_id)) {
