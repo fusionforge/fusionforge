@@ -38,4 +38,3 @@ class Widget_HomeRss extends Widget_Rss {
 		return _("Include public rss (or atom) feeds into forge homepage.");
 	}
 }
-
