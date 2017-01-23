@@ -980,26 +980,28 @@ if (isset($params['group']) && $params['group']) {
 	 * feedback() - returns the htmlized feedback string when an action is performed.
 	 *
 	 * @param	string	$feedback	feedback string
+	 * @param	array	$attr		html attributes
 	 * @return	string	htmlized feedback
 	 */
-	function feedback($feedback) {
+	function feedback($feedback, $attr = array()) {
 		if (!$feedback) {
 			return '';
 		} else {
-			return html_e('p', array('class' => 'feedback'), strip_tags($feedback, '<br>'), true);
+			return html_e('p', array_merge(array('class' => 'feedback'), $attr), strip_tags($feedback, '<br>'), true);
 		}
 	}
 	/**
 	 * warning_msg() - returns the htmlized warning string when an action is performed.
 	 *
 	 * @param	string	$msg	msg string
+	 * @param	array	$attr	html attributes
 	 * @return	string	htmlized warning
 	 */
-	function warning_msg($msg) {
+	function warning_msg($msg, $attr = array()) {
 		if (!$msg) {
 			return '';
 		} else {
-			return html_e('p', array('class' => 'warning_msg'), strip_tags($msg, '<br>'), true);
+			return html_e('p', array_merge(array('class' => 'warning_msg'), $attr), strip_tags($msg, '<br>'), true);
 		}
 	}
 
@@ -1007,13 +1009,14 @@ if (isset($params['group']) && $params['group']) {
 	 * error_msg() - returns the htmlized error string when an action is performed.
 	 *
 	 * @param	string	$msg	msg string
+	 * @param	array	$attr	html attributes
 	 * @return	string	htmlized error
 	 */
-	function error_msg($msg) {
+	function error_msg($msg, $attr = array()) {
 		if (!$msg) {
 			return '';
 		} else {
-			return html_e('p', array('class' => 'error'), strip_tags($msg, '<br>'), true);
+			return html_e('p', array_merge(array('class' => 'error'), $attr), strip_tags($msg, '<br>'), true);
 		}
 	}
 
