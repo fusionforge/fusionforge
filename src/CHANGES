@@ -29,7 +29,7 @@ FusionForge 6.X:
 * Taskboard: support multiple taskboards per project [#785] (TrivialDev)
 * Taskboard: support filtering tasks [#786] (TrivialDev)
 * Tracker: keep values in artifact new submit form on error. (TrivialDev)
-* Tracker: add new customfield: text regex (TrivialDev)
+* Tracker: add new customfield parameter: text regex (TrivialDev)
 * Tracker: add new customfield: User (TrivialDev)
 * Tracker: add new customfield: DateTime (TrivialDev)
 * Tracker: add new customfield: Release (TrivialDev)
