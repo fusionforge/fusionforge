@@ -269,7 +269,7 @@ Offer DAV or SSH access.");
 			$conf .= "baseurl = /hg";
 			$conf .= "\ndescription = ".$project->getUnixName();
 			$conf .= "\nstyle = paper";
-			$conf .= "\nallow_push = *"; //every user ( see apache configuration) is allowed to push
+			$conf .= "\nallow_push = *"; // every user (see Apache configuration) is allowed to push
 			$conf .= "\nallow_read = *"; // every user is allowed to clone and pull
 			if (!forge_get_config('use_ssl', 'scmhg')) {
 				$conf .= "\npush_ssl = 0";
@@ -277,8 +277,8 @@ Offer DAV or SSH access.");
 			fwrite($f, $conf);
 			fclose($f);
 			system("chgrp -R $unix_group $repo");
-			system("chmod 770 $repo" );
-			system("find $repo -type d | xargs chmod g+s" );
+			system("chmod 770 $repo");
+			system("find $repo -type d | xargs chmod g+s");
 			system("chmod 660 $repo/.hg/hgrc");
 		}
 
@@ -300,10 +300,10 @@ Offer DAV or SSH access.");
 		$password_data = '';
 		$hgusers = array();
 		foreach ($groups as $project) {
-			if ( !$project->isActive()) {
+			if (!$project->isActive()) {
 				continue;
 			}
-			if ( !$project->usesSCM()) {
+			if (!$project->usesSCM()) {
 				continue;
 			}
 			$push = "";
@@ -461,7 +461,7 @@ Offer DAV or SSH access.");
 		if (!$project) {
 			return false;
 		}
-		if (! $project->usesPlugin($this->name)) {
+		if (!$project->usesPlugin($this->name)) {
 			return false;
 		}
 
@@ -470,7 +470,7 @@ Offer DAV or SSH access.");
 			$year = $params['year'];
 			$month = $params['month'];
 			$day = $params['day'];
-			$month_string = sprintf("%04d%02d", $year, $month );
+			$month_string = sprintf("%04d%02d", $year, $month);
 			$start_time = gmmktime(0, 0, 0, $month, $day, $year);
 			$end_time = $start_time + 86400;
 			$usr_adds    = array();
@@ -569,7 +569,7 @@ Offer DAV or SSH access.");
 			}
 
 			// building the user list
-			$user_list = array_unique( array_merge( array_keys( $usr_adds ), array_keys( $usr_updates ), array_keys( $usr_deletes ), array_keys( $usr_commits ) ) );
+			$user_list = array_unique(array_merge(array_keys($usr_adds), array_keys($usr_updates), array_keys($usr_deletes), array_keys($usr_commits)));
 
 			foreach ($user_list as $user) {
 				// Trying to get user id from user name or email
