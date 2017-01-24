@@ -8,7 +8,7 @@
  * Copyright (c) 2010, 2011, 2012
  *	Thorsten Glaser <t.glaser@tarent.de>
  * Copyright 2010-2012, Alain Peyrat - Alcatel-Lucent
- * Copyright 2013,2016, Franck Villaume - TrivialDev
+ * Copyright 2013,2016-2017, Franck Villaume - TrivialDev
  * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivalDev
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -799,9 +799,10 @@ function human_readable_bytes($bytes, $base10 = false, $round = 0, $labels = arr
  * ls - lists a specified directory and returns an array of files
  * @param	string	$dir	the path of the directory to list
  * @param	bool	$filter	whether to filter out directories and illegal filenames
+ * @param	string	$regex	filter filename based on this regex
  * @return	array	array of file names.
  */
-function &ls($dir, $filter = false) {
+function &ls($dir, $filter = false, $regex = false) {
 	$out = array();
 
 	if (is_dir($dir) && ($h = opendir($dir))) {
@@ -813,6 +814,11 @@ function &ls($dir, $filter = false) {
 					!is_file($dir."/".$f)
 				)
 					continue;
+			}
+			if ($regex !== false) {
+				if (!preg_match($regex, $f)) {
+					continue;
+				}
 			}
 			$out[] = $f;
 		}
