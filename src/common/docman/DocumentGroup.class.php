@@ -259,10 +259,6 @@ class DocumentGroup extends FFError {
 	 * @access	public
 	 */
 	function injectArchive($uploaded_data) {
-		if (!is_uploaded_file($uploaded_data['tmp_name'])) {
-			$this->setError(_('Invalid file name.'));
-			return false;
-		}
 		if (function_exists('finfo_open')) {
 			$finfo = finfo_open(FILEINFO_MIME_TYPE);
 			$uploaded_data_type = finfo_file($finfo, $uploaded_data['tmp_name']);

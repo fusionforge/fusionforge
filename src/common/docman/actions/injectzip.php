@@ -3,7 +3,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2014,2015-2016, Franck Villaume - TrivialDev
+ * Copyright 2014,2015-2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -38,10 +38,25 @@ if (!forge_check_perm('docman', $group_id, 'approve')) {
 	session_redirect($return_url);
 }
 
-$uploaded_zip = getUploadedFile('uploaded_zip');
-if (empty($uploaded_zip['name'])) {
-	$error_msg = _('Missing file or limit size exceeded');
-	session_redirect($return_url);
+$uploadtype = getStringFromRequest('type');
+if ($uploadtype == 'httpupload') {
+	$uploaded_zip = getUploadedFile('uploaded_zip');
+	if (empty($uploaded_zip['name'])) {
+		$error_msg = _('Missing file or limit size exceeded');
+		session_redirect($return_url);
+	}
+	if (strlen($uploaded_zip['tmp_name']) > 0 && !is_uploaded_file($uploaded_zip['tmp_name'])) {
+		$error_msg = _('Invalid file name.');
+		session_redirect($return_url);
+	}
+} elseif ($uploadtype == 'manualupload') {
+	$uploaded_zip = array();
+	$uploaded_zip['type'] = 'application/zip';
+	$uploaded_zip['tmp_name'] = forge_get_config('groupdir_prefix').'/'.$g->getUnixName().'/incoming/'.getStringFromRequest('manual_path');
+	if (!is_file($uploaded_zip['tmp_name'])) {
+		$error_msg = _('Missing file');
+		session_redirect($return_url);
+	}
 }
 
 if ($dirid) {
