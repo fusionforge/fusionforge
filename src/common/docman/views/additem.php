@@ -83,8 +83,10 @@ if (forge_check_perm('docman', $group_id, 'approve')) {
 	} else {
 		echo $HTML->openForm(array('id' => 'injectzip', 'name' => 'injectzip', 'method' => 'post', 'action' => '/docman/?group_id='.$group_id.'&action=injectzip&dirid='.$dirid, 'enctype' => 'multipart/form-data'));
 		if (forge_get_config('use_manual_uploads')) {
-			echo html_e('input', array('type' => 'radio', 'id' => 'buttonFileZip', 'name' => 'type', 'value' => 'httpupload', 'checked' => '	', 'required' => 'required')).html_e('span', array(), _('File'), false);
+			echo html_e('input', array('type' => 'radio', 'id' => 'buttonFileZip', 'name' => 'type', 'value' => 'httpupload', 'checked' => 'checked', 'required' => 'required')).html_e('span', array(), _('File'), false);
 			echo html_e('input', array('type' => 'radio', 'id' => 'buttonManualUploadZip', 'name' => 'type', 'value' => 'manualupload', 'required' => 'required')).html_e('span', array(), _('Already-uploaded file'), false);
+		} else {
+			echo html_e('input', array('type' => 'hidden', 'name' => 'type', 'value' => 'httpupload'));
 		}
 		echo html_e('div', array('id' => 'upload_zip_p'), html_e('input', array('type' => 'file', 'id' => 'uploaded_zip', 'name' => 'uploaded_zip', 'required' => 'required')).
 					html_e('span', array(), '('._('max upload size')._(': ').human_readable_bytes(util_get_maxuploadfilesize()).')', false));
