@@ -503,6 +503,14 @@ function postcopy_set(&$effortUnitSet) {
 	}
 	$object = $effortUnitSet->getObject();
 	$newEffortUnitSet = new EffortUnitSet($object);
+	if (!$newEffortUnitSet) {
+		echo $HTML->error_msg(_('Error coping Effort Unit Set')._(':').' '._('Error on new EffortUnitSet'));
+		return false;
+	}
+	if ($newEffortUnitSet->isError()) {
+		echo $HTML->error_msg(_('Error coping Effort Unit Set')._(':').' '._('Error on new EffortUnitSet').' '.$newEffortUnitSet->getErrorMessage());
+		return false;
+	}
 	if (!$newEffortUnitSet->copy($effortUnitSet)) {
 		echo $HTML->error_msg(_('Error coping Effort Unit Set')._(':').' '.$newEffortUnitSet->getErrorMessage());
 		return false;
