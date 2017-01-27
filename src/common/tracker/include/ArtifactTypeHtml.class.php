@@ -345,7 +345,6 @@ class ArtifactTypeHtml extends ArtifactType {
 			}
 
 			if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_SELECT) {
-
 				$str = $this->renderSelect($efarr[$i]['extra_field_id'], $selected[$efarr[$i]['extra_field_id']], $efarr[$i]['show100'], $efarr[$i]['show100label'], $show_any, $text_any, $allowed, $attrs);
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) {
@@ -698,17 +697,17 @@ class ArtifactTypeHtml extends ArtifactType {
 						$dependency .= (empty($dependency) ? '':', ').'{"field":'.$key.', "elmnt": ['.implode(', ', $cElmnt).']}';
 					}
 					$dependency = '['.$dependency.']';
-					$opt_attrs[$i]= array( 'data-dependency'=>$dependency);
+					$opt_attrs[$i]= array('data-dependency'=>$dependency);
 				}
 			}
 			if ($aef->isAutoAssign()) {
 				$autoAssignTo = UserManager::instance()->getUserById($aefe->getAutoAssignto());
-				$opt_attrs[$i]=array_merge(isset($opt_attrs[$i]) ? $opt_attrs[$i] : array(), array( 'data-autoassignto'=>'{"id":'.$aefe->getAutoAssignto().', "name":"'.$autoAssignTo->getRealName().' ('.$autoAssignTo->getUnixName().')"}'));
+				$opt_attrs[$i]=array_merge(isset($opt_attrs[$i]) ? $opt_attrs[$i] : array(), array('data-autoassignto'=>'{"id":'.$aefe->getAutoAssignto().', "name":"'.$autoAssignTo->getRealName().' ('.$autoAssignTo->getUnixName().')"}'));
 			}
 		}
 
 		if ($show_100 && !empty($aefChildren)) {
-			$attrs_100 = array( 'data-dependency'=>'{"fields": ['.implode(', ', $aefChildren).']}');
+			$attrs_100 = array('data-dependency'=>'{"fields": ['.implode(', ', $aefChildren).']}');
 		}
 		return html_build_select_box_from_arrays($vals, $texts,'extra_fields['.$extra_field_id.']', $checked, $show_100, $text_100, $show_any, $text_any, $allowed, $attrs, $opt_attrs, $attrs_100);
 	}
@@ -798,7 +797,7 @@ class ArtifactTypeHtml extends ArtifactType {
 			$userArray[$checkedUser->getID()] = $checkedUser->getRealName().' '._('[DELETED]');
 		}
 		asort($userArray,SORT_FLAG_CASE | SORT_STRING);
-		$size = min( count($userArray)+1, 15);
+		$size = min(count($userArray)+1, 15);
 		$keys = array_keys($userArray);
 		$vals = array_values($userArray);
 
@@ -896,7 +895,7 @@ class ArtifactTypeHtml extends ArtifactType {
 				}
 			}
 		}
-		$size = min( count($releasesArray) + count($optGroup) + 1, 15);
+		$size = min(count($releasesArray) + count($optGroup) + 1, 15);
 		$keys = array_keys($releasesArray);
 		$vals = array_values($releasesArray);
 		return html_build_multiple_select_box_from_arrays($keys, $vals,'extra_fields['.$extra_field_id.'][]', $checked, $size, $show_100, $text_100, $allowed, $attrs, $releasesAttrs, array(), $optGroup);
@@ -947,11 +946,11 @@ class ArtifactTypeHtml extends ArtifactType {
 			}
 			if ($aef->isAutoAssign()) {
 				$autoAssignTo = UserManager::instance()->getUserById($aefe->getAutoAssignto());
-				$radios_attrs[$i]=array_merge(isset($radios_attrs[$i]) ? $radios_attrs[$i] : array(), array( 'data-autoassignto'=>'{"id":'.$aefe->getAutoAssignto().', "name":"'.$autoAssignTo->getRealName().' ('.$autoAssignTo->getUnixName().')"}'));
+				$radios_attrs[$i]=array_merge(isset($radios_attrs[$i]) ? $radios_attrs[$i] : array(), array('data-autoassignto'=>'{"id":'.$aefe->getAutoAssignto().', "name":"'.$autoAssignTo->getRealName().' ('.$autoAssignTo->getUnixName().')"}'));
 			}
 		}
 		if ($show_100 && !empty($aefChildren)) {
-			$attrs_100 = array( 'data-dependency'=>'{"fields": ['.implode(', ', $aefChildren).']}');
+			$attrs_100 = array('data-dependency'=>'{"fields": ['.implode(', ', $aefChildren).']}');
 		}
 		return html_build_radio_buttons_from_arrays($vals, $texts,'extra_fields['.$extra_field_id.']', $checked, $show_100, $text_100, $show_any, $text_any, $allowed, $attrs, $radios_attrs, $attrs_100);
 	}
@@ -1057,13 +1056,13 @@ class ArtifactTypeHtml extends ArtifactType {
 						$dependency .= (empty($dependency) ? '':', ').'{"field":'.$key.', "elmnt": ['.implode(', ', $cElmnt).']}';
 					}
 					$dependency = '['.$dependency.']';
-					$opt_attrs[$i]= array( 'data-dependency'=>$dependency);
+					$opt_attrs[$i]= array('data-dependency'=>$dependency);
 				}
 			}
 		}
-		$size = min( count($arr)+1, 15);
+		$size = min(count($arr)+1, 15);
 		if ($show_100 && !empty($aefChildren)) {
-			$attrs_100 = array( 'data-dependency'=>'{"fields": ['.implode(', ', $aefChildren).']}');
+			$attrs_100 = array('data-dependency'=>'{"fields": ['.implode(', ', $aefChildren).']}');
 		}
 		return html_build_multiple_select_box_from_arrays($vals, $texts,"extra_fields[$extra_field_id][]", $checked, $size, $show_100, $text_100, $allowed, $attrs, $opt_attrs, $attrs_100);
 	}
@@ -1117,8 +1116,8 @@ class ArtifactTypeHtml extends ArtifactType {
 		// Convert artifact id to links.
 		$html_contents = preg_replace_callback('/\b(\d+)\b/', create_function('$matches', 'return _artifactid2url($matches[1], \'title\');'), $contents);
 		$edit_contents = $this->renderTextField ($extra_field_id, $contents, $size, $maxlength);
-		return html_e('div',array_merge(array( 'id'=>'edit'.$extra_field_id, 'style'=>'display: none', 'title'=>_('Tip: Enter a space-separated list of artifact ids ([#NNN] also accepted)')), $attrs), $edit_contents)
-			.html_e('div',array_merge(array( 'id'=>'show'.$extra_field_id, 'style'=>'display: block'), $attrs), $html_contents);
+		return html_e('div',array_merge(array('id'=>'edit'.$extra_field_id, 'style'=>'display: none', 'title'=>_('Tip: Enter a space-separated list of artifact ids ([#NNN] also accepted)')), $attrs), $edit_contents)
+			.html_e('div',array_merge(array('id'=>'show'.$extra_field_id, 'style'=>'display: block'), $attrs), $html_contents);
 	}
 
 	/**
@@ -1134,7 +1133,6 @@ class ArtifactTypeHtml extends ArtifactType {
 	function renderTextArea($extra_field_id, $contents, $rows, $cols, $attrs = array()) {
 		return html_e('textarea', array_merge(array('name'=>'extra_fields['.$extra_field_id.']', 'rows'=>$rows, 'cols'=>$cols), $attrs), $contents, false);
 	}
-
 
 	/**
 	 * renderDatetime - this function builds a Datetime field.
@@ -1214,7 +1212,7 @@ class ArtifactTypeHtml extends ArtifactType {
 		}
 		$contentsFrom = '0U'.$vals[0];
 		$contentsTo = '0U'.$vals[0];
-		if (preg_match('/^(\d+U\d+) ?(\d+U\d+)?$/',$contents,$matches)) {
+		if (preg_match('/^(\d+U\d+) ?(\d+U\d+)?$/', $contents, $matches)) {
 			$contentsFrom = $matches[1];
 			$contentsTo = $matches[2];
 		}
@@ -1296,14 +1294,14 @@ class ArtifactTypeHtml extends ArtifactType {
 			if (!is_array($checked)) {
 				$checked = explode(',', $checked);
 			}
-			$size = min( count($ids)+1, 15);
+			$size = min(count($ids)+1, 15);
 			return html_build_multiple_select_box_from_arrays($ids, $names, $name, $checked, $size, $show_100, $text_100, false, $attrs);
 		} else {
 			return html_build_select_box_from_arrays($ids, $names, $name, $checked, $show_100, $text_100, false, $attrs);
 		}
 	}
 
-	function lastModifierBox ($name='last_modified_by[]', $checked='xzxz', $show_100=true, $text_100='none', $extra_id='-1', $extra_name='', $multiple=false) {
+	function lastModifierBox($name='last_modified_by[]', $checked='xzxz', $show_100=true, $text_100='none', $extra_id='-1', $extra_name='', $multiple=false) {
 		if ($text_100=='none'){
 			$text_100=_('Nobody');
 		}
@@ -1319,7 +1317,7 @@ class ArtifactTypeHtml extends ArtifactType {
 			if (!is_array($checked)) {
 				$checked = explode(',', $checked);
 			}
-			$size = min( count($ids)+1, 15);
+			$size = min(count($ids)+1, 15);
 			return html_build_multiple_select_box_from_arrays($ids, $names, $name, $checked, $size, $show_100, $text_100);
 		} else {
 			return html_build_select_box_from_arrays($ids, $names, $name, $checked, $show_100, $text_100);
@@ -1523,7 +1521,7 @@ class ArtifactTypeHtml extends ArtifactType {
 		});
 	});
 EOS;
-		return html_e('script', array( 'type'=>'text/javascript'), '//<![CDATA['."\n".'$(function(){'.$jsvariable."\n".$javascript.'});'."\n".'//]]>');
+		return html_e('script', array('type'=>'text/javascript'), '//<![CDATA['."\n".'$(function(){'.$jsvariable."\n".$javascript.'});'."\n".'//]]>');
 	}
 
 }
