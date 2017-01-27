@@ -146,7 +146,7 @@ function session_check_session_cookie($session_cookie) {
 		return false;
 	}
 	if ((forge_get_config('session_expire') > 0) &&
-	    ($time - time() >= forge_get_config('session_expire'))) {
+	    (time() - $time >= forge_get_config('session_expire'))) {
 		error_log("session_check_session_cookie failed: expired !");
 		return false;
 	}
