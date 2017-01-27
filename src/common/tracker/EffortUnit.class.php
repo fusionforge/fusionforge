@@ -25,21 +25,22 @@ require_once $gfcommon.'tracker/EffortUnitSet.class.php';
 
 class EffortUnit extends FFError {
 
-
-	var $EffortUnitSet;
 	/**
-	 * Associative array of data from db.
-	 *
-	 * @var	array	$data_array.
+	 * @var	EffortUnitSet	$EffortUnitSet	Effort unit set to which the unit belongs.
 	 */
-	var $data_array;
+	private $EffortUnitSet;
 
-	var $level;
+	/**
+	 * @var	array	$data_array	Associative array of data from db.
+	 */
+	private $data_array;
+
 	/**
 	 * EffortUnit - EffortUnit object constructor
 	 *
-	 * @param	int|bool	$id	Required - Id of the Effort Unit you want to instantiate.
-	 * @param	int|bool	$res	Database result from select query OR associative array of all columns.
+	 * @param	EffortUnitSet	$EffortUnitSet	Required - Effort Unit Set.
+	 * @param	integer|boolean	$id	Required - Id of the Effort Unit you want to instantiate.
+	 * @param	integer|boolean	$res	Database result from select query OR associative array of all columns.
 	 */
 	function __construct(&$EffortUnitSet, $id = false, $res = false) {
 		parent::__construct();
@@ -78,8 +79,8 @@ class EffortUnit extends FFError {
 	/**
 	 * fetchData - May need to refresh database fields if an update occurred.
 	 *
-	 * @param	int	$unit_id The unit_id.
-	 * @return	bool	success or not
+	 * @param	integer	$unit_id The unit_id.
+	 * @return	boolean	success or not
 	 */
 	function fetchData($unit_id) {
 		$res = db_query_params ('SELECT * FROM effort_unit WHERE unit_id=$1',
@@ -98,7 +99,7 @@ class EffortUnit extends FFError {
 	 * @param	string	$name				The name of the unit.
 	 * @param	integer	$conversion_factor	The conversion factor to define the current unit.
 	 * @param	integer	$to_unit			The unity used for the definition of the current unit.
-	 * @param	integre	$unit_position		The position of the unit when listed.
+	 * @param	integer	$unit_position		The position of the unit when listed.
 	 * @param	boolean	$is_base_unit		True if this unit is a base unit.
 	 * @param	array	$importData			For import
 	 * @return	bool	success or not
@@ -200,6 +201,11 @@ class EffortUnit extends FFError {
 		return $this->data_array['to_unit'];
 	}
 
+	/**
+	 * getToUnitName - get unit name use to define this unit.
+	 *
+	 * @return	string	unit name use to define this unit.
+	 */
 	function getToUnitName() {
 		if (!empty($this->data_array['to_unit'])) {
 			$toUnit = new EffortUnit($this->EffortUnitSet, $this->data_array['to_unit']);
@@ -209,9 +215,9 @@ class EffortUnit extends FFError {
 		}
 	}
 	/**
-	 * getMultiplier - get this unit base multiplier.
+	 * getConversionFactor - get conversion factor that define this unit .
 	 *
-	 * @return	integer	unit base multiplier.
+	 * @return	integer	conversion factor.
 	 */
 	function getConversionFactor() {
 		return $this->data_array['conversion_factor'];
@@ -226,6 +232,11 @@ class EffortUnit extends FFError {
 		return $this->data_array['unit_position'];
 	}
 
+	/**
+	 * getEffortUnitSet - get Effort Unit Set of this unit.
+	 *
+	 * @return	EffortUnitSet	Effort Unit Set.
+	 */
 	function &getEffortUnitSet(){
 		return $this->EffortUnitSet;
 	}
@@ -239,10 +250,21 @@ class EffortUnit extends FFError {
 		return ($this->data_array['is_deleted']?true:false);
 	}
 
+	/**
+	 * isBaseUnit - this Effort Unit is or not the base unit.
+	 *
+	 * @return	boolean	is or not base unit.
+	 */
 	function isBaseUnit() {
 		return ($this->data_array['is_base_unit']?true:false);
 	}
 
+	/**
+	 * delete - delete this Effort Unit.
+	 * @param	array	$importData			For import
+	 *
+	 * @return	boolean	success or not.
+	 */
 	function delete($importData = array()) {
 		db_begin();
 		if(array_key_exists('user', $importData)){
@@ -304,6 +326,15 @@ class EffortUnit extends FFError {
 		return true;
 	}
 
+	/**
+	 * update - update this Effort Unit, name or definition.
+	 * @param	string	$name				The name of the unit.
+	 * @param	integer	$conversion_factor	The conversion factor to define the current unit.
+	 * @param	integer	$to_unit			The unity used for the definition of the current unit.
+	 * @param	array	$importData			For import
+	 *
+	 * @return	boolean	success or not.
+	 */
 	function update($name, $conversion_factor, $to_unit, $importData = array()){
 		if (!ctype_digit(strval($conversion_factor)) || $conversion_factor<1) {
 			$this->setError(_('Conversion factor must be an integer greater or equal to 1'));
@@ -397,8 +428,13 @@ class EffortUnit extends FFError {
 		return true;
 	}
 
+	/**
+	 * updatePosition - Update this Effort Unit dispaly position.
+	 * @param integer	$unit_position	new position
+	 *
+	 * @return	boolean	success or not.
+	 */
 	function updatePosition($unit_position) {
-
 		$result=db_query_params ('UPDATE effort_unit SET unit_position= $1 WHERE unit_id=$2',
 				array($unit_position, $this->getID()));
 		if ($result && db_affected_rows($result) > 0) {
@@ -410,6 +446,12 @@ class EffortUnit extends FFError {
 		}
 	}
 
+	/**
+	 * reorderUnits - Reorder all units.
+	 * @param integer	$new_position	new position of this unit
+	 *
+	 * @return	boolean	success or not.
+	 */
 	function reorderUnits($new_position) {
 		$unitFactory = new EffortUnitFactory($this->EffortUnitSet);
 		$unitsData = $unitFactory->getUnitsData();
@@ -442,7 +484,14 @@ class EffortUnit extends FFError {
 		return true;
 	}
 
+	/**
+	 * copy - copy definition from an other unit.
+	 * @param	EffortUnit	$from_unit	Unit to be copied
+	 *
+	 * @return	boolean	success or not.
+	 */
 	function copy($from_unit) {
+		db_begin();
 		$name = $from_unit->getName();
 		$conversion_factor = $from_unit->getConversionFactor();
 		$position = $from_unit->getPosition();
@@ -455,9 +504,59 @@ class EffortUnit extends FFError {
 			$to_unit_id = 1;
 		}
 		$id = $this->create($name, $conversion_factor, $to_unit_id, $position, $is_base_unit);
+		if ($id) {
+			// Update artifacts data
+			$res = db_query_params('WITH t AS (
+										SELECT data_id
+											FROM artifact_extra_field_data
+											INNER JOIN artifact_extra_field_list USING (extra_field_id)
+											INNER JOIN artifact_group_list USING (group_artifact_id)
+										WHERE
+											field_type = $1 AND
+											field_data like $2 AND
+											unit_set_id = $3
+										)
+									UPDATE artifact_extra_field_data AS d
+									SET field_data = CAST(SUBSTRING(field_data FROM \'#"%#"U%\' FOR \'#\') AS INTEGER) || \'U\' || $4
+									FROM t
+									WHERE d.data_id = t.data_id',
+					array(ARTIFACT_EXTRAFIELDTYPE_EFFORT,'%U'.$from_unit->getID(), $from_unit->getEffortUnitSet()->getID(), $id));
+			if (!$res) {
+				$this->setError(_('Error coping Effort Unit')._(': ').db_error());
+				db_rollback();
+				return false;
+			}
+			// Update default values
+			$res = db_query_params('WITH t AS (
+										SELECT default_id
+											FROM artifact_extra_field_default
+											INNER JOIN artifact_extra_field_list USING (extra_field_id)
+											INNER JOIN artifact_group_list USING (group_artifact_id)
+										WHERE
+											field_type = $1 AND
+											default_value like $2 AND
+											unit_set_id = $3
+										)
+									UPDATE artifact_extra_field_default AS d
+									SET default_value = CAST(SUBSTRING(default_value FROM \'#"%#"U%\' FOR \'#\') AS INTEGER) || \'U\' || $4
+									FROM t
+									WHERE d.default_id = t.default_id',
+					array(ARTIFACT_EXTRAFIELDTYPE_EFFORT,'%U'.$from_unit->getID(), $from_unit->getEffortUnitSet()->getID(), $id));
+			if (!$res) {
+				$this->setError(_('Error')._(':').' '._('Cannot update Effort Unit (default value update)')._(':').' '.db_error());
+				db_rollback();
+				return false;
+			}
+		}
+		db_commit();
 		return $id;
 	}
 
+	/**
+	 * getConversionFactorForBaseUnit - get conversion factor for Base Unit.
+	 *
+	 * @return	integer	conversion factor.
+	 */
 	function getConversionFactorForBaseUnit() {
 		$factor = $this->getConversionFactor();
 		$toUnitId = $this->getToUnit();
@@ -468,6 +567,11 @@ class EffortUnit extends FFError {
 		return $factor;
 	}
 
+	/**
+	 * getUnitsDependingOn - get array of units depending on this unit.
+	 *
+	 * @return	array	array of EffortUnit depending on this unit.
+	 */
 	function getUnitsDependingOn(){
 		$unitsDependingOn = array();
 		$effortUnitFactory = new EffortUnitFactory($this->EffortUnitSet);
@@ -479,5 +583,29 @@ class EffortUnit extends FFError {
 			}
 		}
 		return $unitsDependingOn;
+	}
+
+	/**
+	 * isEquivalentTo - test if this unit is equivalent to the other.
+	 * @param	EffortUnit $effortUnit	Unit to compare to
+	 *
+	 * @return	boolean	success or not.
+	 */
+	function isEquivalentTo($effortUnit){
+		if ($this->getName() != $effortUnit->getName()) {
+			return false;
+		}
+		if ($this->getConversionFactor() != $effortUnit->getConversionFactor()) {
+			return false;
+		}
+		if ($this->isBaseUnit() && $effortUnit->isBaseUnit()) {
+			return true;
+		}
+		$thisToUnit = new EffortUnit($this->EffortUnitSet, $this->getToUnit());
+		$toUnit = new EffortUnit($effortUnit->EffortUnitSet, $effortUnit->getToUnit());
+		if (!$toUnit->isEquivalentTo($thisToUnit)) {
+			return false;
+		}
+		return true;
 	}
 }

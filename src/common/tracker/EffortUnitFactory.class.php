@@ -27,22 +27,24 @@ require_once $gfcommon.'tracker/EffortUnit.class.php';
 class EffortUnitFactory extends FFError {
 
 	/**
-	 * The Effort Unit Set.
-	 *
-	 * @var	 object	Effort Unit Set.
+	 * @var	EffortUnitSet	$EffortUnitSet	Effort Unit Set of the factory.
 	 */
-	var $EffortUnitSet;
+	private $EffortUnitSet;
 
 	/**
-	 * The Effort Units array.
-	 *
-	 * @var	 array	Effort Units.
+	 * @var	 array	$Units array of EffortUnit object.
 	 */
-	var $Units;
+	private $Units;
 
+	/**
+	 * @var	 array	$UnitsData array of EffortUnits data.
+	 */
 	var $UnitsData;
+
 	/**
-	 * @param	Object	$EffortUnitSet	The Effort Unit Set object to which this EffortUnitFactory is associated.
+	 * EffortUnitFactory - EffortUnitFactory object constructor
+	 *
+	 * @param	EffortUnitSet	$EffortUnitSet	The Effort Unit Set object to which this EffortUnitFactory is associated.
 	 */
 	function __construct(&$EffortUnitSet) {
 		parent::__construct();
@@ -124,6 +126,11 @@ class EffortUnitFactory extends FFError {
 		return $result ;
 	}
 
+	/**
+	 * getBaseUnit - return the base EffortUnit object.
+	 *
+	 * @return	EffortUnit	the base EffortUnit object.
+	 */
 	function getBaseUnit() {
 		$units = $this->getUnits();
 		foreach($units as $unit) {
@@ -134,6 +141,12 @@ class EffortUnitFactory extends FFError {
 		return false;
 	}
 
+	/**
+	 * getUnitByName - get a EffortUnit object by name.
+	 *
+	 * @param	string	$name	the name of the EffortUnit
+	 * @return	EffortUnit	the base EffortUnit object.
+	 */
 	function getUnitByName($name) {
 		$units = $this->getUnits();
 		foreach($units as $unit) {
@@ -144,6 +157,12 @@ class EffortUnitFactory extends FFError {
 		return false;
 	}
 
+	/**
+	 * encodedToValue - return the value of an effort expressed in encoded unit.
+	 *
+	 * @param	string	$encoded	encoded effort
+	 * @return	integer	the value of an effort expressed in encoded unit.
+	 */
 	function encodedToValue($encoded){
 		$value = 0;
 		if (preg_match('/^(\d+)U(\d+)$/',$encoded,$matches)) {
@@ -153,6 +172,12 @@ class EffortUnitFactory extends FFError {
 		return $value;
 	}
 
+	/**
+	 * encodedToValueInBaseUnit - return the value of an effort expressed in base unit.
+	 *
+	 * @param	string	$encoded	encoded effort
+	 * @return	integer	the value of an effort expressed in base unit.
+	 */
 	function encodedToValueInBaseUnit($encoded){
 		$value = 0;
 		if (preg_match('/^(\d+)U(\d+)$/',$encoded,$matches)) {
@@ -161,6 +186,12 @@ class EffortUnitFactory extends FFError {
 		return $value;
 	}
 
+	/**
+	 * encodedToUnitId - return the unit id of an encoded effort.
+	 *
+	 * @param	string	$encoded	encoded effort
+	 * @return	integer	the unit id of an encoded effort.
+	 */
 	function encodedToUnitId($encoded) {
 		if (preg_match('/^(\d+)U(\d+)$/',$encoded,$matches)) {
 			$unitId = intval($matches[2]);
@@ -172,6 +203,12 @@ class EffortUnitFactory extends FFError {
 		return $unitId;
 	}
 
+	/**
+	 * encodedToUnitName - return the unit name of an encoded effort.
+	 *
+	 * @param	string	$encoded	encoded effort
+	 * @return	string	the unit name of an encoded effort.
+	 */
 	function encodedToUnitName($encoded) {
 		$units = $this->getUnitsArr();
 		if (preg_match('/^(\d+)U(\d+)$/',$encoded,$matches)) {
@@ -182,6 +219,12 @@ class EffortUnitFactory extends FFError {
 		return $unitName;
 	}
 
+	/**
+	 * encodedToString - return the value and the unit name of an encoded effort.
+	 *
+	 * @param	string	$encoded	encoded effort
+	 * @return	string	the value and the unit name of an encoded effort.
+	 */
 	function encodedToString($encoded) {
 		if (preg_match('/^(\d+)U(\d+)$/',$encoded,$matches)) {
 			$unit = new EffortUnit($this->EffortUnitSet, $matches[2]);

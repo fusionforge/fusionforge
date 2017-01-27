@@ -2683,7 +2683,7 @@ class Group extends FFError {
 					foreach ($oldatf->getArtifactTypes() as $o) {
 						$t = artifactType_get_object($id_mappings['tracker'][$o->getID()]);
 						$id_mappings['tracker'][$o->getID()] = $t->getID();
-						$newEFIds = $t->cloneFieldsFrom($o->getID(), $o->Group->getID(), $id_mappings);
+						$newEFIds = $t->cloneFieldsFrom($o->getID(), $id_mappings);
 						if (forge_get_config('use_tracker_widget_display')) {
 							$lm->createDefaultLayoutForTracker($t->getID(), $o->getID(), $newEFIds);
 						}

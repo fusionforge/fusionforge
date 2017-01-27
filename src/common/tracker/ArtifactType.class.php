@@ -29,6 +29,7 @@
 require_once $gfcommon.'include/FFError.class.php';
 require_once $gfcommon.'tracker/ArtifactExtraFieldElement.class.php';
 require_once $gfcommon.'tracker/ArtifactStorage.class.php';
+require_once $gfcommon.'tracker/EffortUnitSet.class.php';
 require_once $gfcommon.'include/MonitorElement.class.php';
 
 /**
@@ -249,9 +250,10 @@ class ArtifactType extends FFError {
 			status_timeout,
 			submit_instructions,
 			browse_instructions,
-			datatype)
+			datatype,
+			unit_set_id)
 			VALUES
-			($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)',
+			($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)',
 					array($this->Group->getID(),
 							htmlspecialchars($name),
 							htmlspecialchars($description),
@@ -261,7 +263,9 @@ class ArtifactType extends FFError {
 							1209600,
 							htmlspecialchars($submit_instructions),
 							htmlspecialchars($browse_instructions),
-							$datatype));
+							$datatype,
+							$this->Group->getEffortUnitSet()
+					));
 
 		$id = db_insertid($res, 'artifact_group_list', 'group_artifact_id');
 
@@ -746,20 +750,8 @@ class ArtifactType extends FFError {
 	 * @param	array	$id_mappings		array mapping between template objects and new project objects
 	 * @return	boolean	true/false on success
 	 */
-	function cloneFieldsFrom($clone_tracker_id, $group_id = null, $id_mappings = array()) {
-		if ($group_id) {
-			$g = group_get_object($group_id);
-		} else {
-			$g = group_get_object(forge_get_config('template_group'));
-		}
-		if (!$g || !is_object($g)) {
-			$this->setError(_('Could Not Get Template Group'));
-			return false;
-		} elseif ($g->isError()) {
-			$this->setError(_('Template Group Error').' '.$g->getErrorMessage());
-			return false;
-		}
-		$at = new ArtifactType($g,$clone_tracker_id);
+	function cloneFieldsFrom($clone_tracker_id, $id_mappings = array()) {
+		$at = artifactType_get_object($clone_tracker_id);
 		if (!$at || !is_object($at)) {
 			$this->setError(_('Could Not Get Tracker To Clone'));
 			return false;
@@ -767,6 +759,99 @@ class ArtifactType extends FFError {
 			$this->setError(_('Clone Tracker Error').' '.$at->getErrorMessage());
 			return false;
 		}
+
+		// Effort Unit Set
+		$ef_effort = $at->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_EFFORT));
+		if (!empty($ef_effort)) {
+			$eus = new EffortUnitSet($at, $at->getEffortUnitSet());
+			$this_eus = new EffortUnitSet($this, $this->getEffortUnitSet());
+			switch ($eus->getLevel()) {
+				case EFFORTUNITSET_FORGE_LEVEL:
+					switch ($this_eus->getLevel()) {
+						case EFFORTUNITSET_PROJECT_LEVEL:
+							if (!$this_eus->isEquivalentTo($eus)) {
+								// make a copy at the tracker level
+								$new_eus = new EffortUnitSet($this);
+								$new_eus->copy($eus);
+								$this->setEffortUnitSet($new_eus->getID());
+							}
+							break;
+						case EFFORTUNITSET_TRACKER_LEVEL:
+							if (!$this_eus->isEquivalentTo($eus)) {
+								$this->setError(_('Clone Tracker Error')._(':').' '._('Effort Unit Set already define and not compatible'));
+								return false;
+							}
+							break;
+					}
+					break;
+				case EFFORTUNITSET_PROJECT_LEVEL:
+					switch ($this_eus->getLevel()) {
+						case EFFORTUNITSET_FORGE_LEVEL:
+							$new_eus_id = getEffortUnitSetForLevel($this, EFFORTUNITSET_PROJECT_LEVEL);
+							if ($new_eus_id) {
+								$new_eus = new EffortUnitSet($this, $new_eus_id);
+								if (!$new_eus->isEquivalentTo($eus)) {
+									$this->setEffortUnitSet($new_eus->getID());
+								} else {
+									// make a copy at the tracker level
+									$new_eus = new EffortUnitSet($this);
+									$new_eus->copy($eus);
+									$this->setEffortUnitSet($new_eus->getID());
+								}
+							} else {
+								// make a copy at the project level
+								$new_eus = new EffortUnitSet($this->Group);
+								$new_eus->copy($eus);
+								$this->setEffortUnitSet($new_eus->getID());
+							}
+							break;
+						case EFFORTUNITSET_PROJECT_LEVEL:
+							if (!$this_eus->isEquivalentTo($eus)) {
+								// make a copy at the tracker level
+								$new_eus = new EffortUnitSet($this);
+								$new_eus->copy($eus);
+								$this->setEffortUnitSet($new_eus->getID());
+							}
+							break;
+						case EFFORTUNITSET_TRACKER_LEVEL:
+							if (!$this_eus->isEquivalentTo($eus)) {
+								$this->setError(_('Clone Tracker Error')._(':').' '._('Effort Unit Set already define and not compatible'));
+								return false;
+							}
+							break;
+					}
+					break;
+				case EFFORTUNITSET_TRACKER_LEVEL:
+					switch ($this_eus->getLevel()) {
+						case EFFORTUNITSET_FORGE_LEVEL:
+						case EFFORTUNITSET_PROJECT_LEVEL:
+							$new_eus_id = getEffortUnitSetForLevel($this, EFFORTUNITSET_TRACKER_LEVEL);
+							if ($new_eus_id) {
+								$new_eus = new EffortUnitSet($this, $new_eus_id);
+								if (!$new_eus->isEquivalentTo($eus)) {
+									$this->setEffortUnitSet($new_eus->getID());
+								} else {
+									$this->setError(_('Clone Tracker Error')._(':').' '._('Effort Unit Set already define and not compatible'));
+									return false;
+								}
+							} else {
+								// make a copy at the tracker level
+								$new_eus = new EffortUnitSet($this);
+								$new_eus->copy($eus);
+								$this->setEffortUnitSet($new_eus->getID());
+							}
+							break;
+						case EFFORTUNITSET_TRACKER_LEVEL:
+							if (!$this_eus->isEquivalentTo($eus)) {
+								$this->setError(_('Clone Tracker Error')._(':').' '._('Effort Unit Set already define and not compatible'));
+								return false;
+							}
+							break;
+					}
+					break;
+			}
+		}
+
 		// do not filter and get disabled fields as well
 		$efs = $at->getExtraFields(array(), true);
 
