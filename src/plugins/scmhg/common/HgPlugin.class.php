@@ -659,7 +659,7 @@ Offer DAV or SSH access.");
 			if (is_dir($repo) && is_dir($repo.'/.hg') && chdir($repo)) {
 				$start_time = $params['begin'];
 				$end_time = $params['end'];
-				$pipe = popen("hg log --template '{date|shortdate}||{author|email}||{desc}||{node}\n' -d '$start_time 0 to $end_time 0'", 'r');
+				$pipe = popen("hg log --template '{date}||{author|email}||{desc}||{node}\n' -d '$start_time 0 to $end_time 0'", 'r');
 				while (!feof($pipe) && $data = fgets($pipe)) {
 					$line = trim($data);
 					$splitedLine = explode('||', $line);
