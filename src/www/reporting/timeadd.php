@@ -210,8 +210,8 @@ if ($week) {
 
 <h2><?php echo _('Change Week') ?></h2>
 
-<?php echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'))); ?>
-	method="get"><?php echo report_weeks_box($report,'week'); ?><input
+<?php echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'get')); ?>
+	<?php echo report_weeks_box($report,'week'); ?><input
 	type="submit" name="submit" value="<?php echo _('Change Week'); ?>" />
 		<?php
 		echo $HTML->closeForm();
