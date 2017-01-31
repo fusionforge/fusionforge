@@ -4,7 +4,7 @@
  * Copyright 2010, Antoine Mercadal - Capgemini
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2011, Alain Peyrat
- * Copyright 2011-2016, Franck Villaume - TrivialDev
+ * Copyright 2011-2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -449,7 +449,7 @@ DocManListFileController.prototype =
 							versionactiontdcontent += val.versionactions[i];
 						}
 						// please sync with the editfile.php widths if you change it here.
-						var htmlString = '<tr id="docversion'+val.version.substr(1)+'" ><td style="width: 60px">'+val.version.substr(1)+currenttdcontent+'</td><td style="width: 150px">'+filenametdcontent[0].outerHTML+'</td><td style="width: 150px">'+val.title+'</td><td style="width: 150px">'+val.new_description.replace('\\n', '<br />')+'</td><td style="width: 110px">'+val.vcomment.replace('\\n', '<br />')+'</td><td style="width: 100px">'+val.created_by_username+'</td><td style="width: 100px">'+val.lastdate+'</td><td style="width: 50px">'+val.filesize_readable+'</td><td style="width: 50px">'+versionactiontdcontent+'</td></tr>'
+						var htmlString = '<tr id="docversion'+val.version.substr(1)+'" ><td style="width: 60px">'+val.version.substr(1)+currenttdcontent+'</td><td style="width: 150px">'+filenametdcontent[0].outerHTML+'</td><td style="width: 150px">'+val.title+'</td><td style="width: 150px">'+val.new_description.replace(/\\n/g, '<br />')+'</td><td style="width: 110px">'+val.vcomment.replace(/\\n/g, '<br />')+'</td><td style="width: 100px">'+val.created_by_username+'</td><td style="width: 100px">'+val.lastdate+'</td><td style="width: 50px">'+val.filesize_readable+'</td><td style="width: 50px">'+versionactiontdcontent+'</td></tr>'
 						jQuery('#sortable_doc_version_table > tbody:last-child').append(htmlString);
 						});
 				}
@@ -531,6 +531,7 @@ DocManListFileController.prototype =
 		jQuery('#review_newcomment').val(0);
 		jQuery('#review-title').val('');
 		jQuery('#review-description').val('');
+		jQuery('#review-notificationcomment').val('');
 		jQuery('#datepicker_end_review_date').val('');
 		jQuery('#review-serialid').val();
 		jQuery('[class^=gentle]').remove();
@@ -547,6 +548,7 @@ DocManListFileController.prototype =
 		} else {
 			jQuery('#new_review').val(1);
 			jQuery('#editfile-createreview').show();
+			jQuery('#review-notificationcomment-row').show();
 		}
 	},
 
@@ -564,7 +566,7 @@ DocManListFileController.prototype =
 		} else {
 			jQuery('#review_id').val(this.review.review);
 			jQuery('#review-title').val(this.review.title);
-			jQuery('#review-description').val(this.review.description);
+			jQuery('#review-description').val(this.review.description.replace(/\\n/g, String.fromCharCode(13,10)));
 			jQuery('#datepicker_end_review_date').val(this.review.endreviewdate);
 			jQuery('#review-serialid').val(this.review.serialid);
 			if (this.review.complete) {
@@ -594,6 +596,7 @@ DocManListFileController.prototype =
 			}, this.review));
 			jQuery('#new_review').val(0);
 			jQuery('#editfile-createreview').show();
+			jQuery('#review-notificationcomment-row').hide();
 		}
 	},
 
@@ -655,8 +658,8 @@ DocManListFileController.prototype =
 				jQuery('#editButtonFile').prop('checked', true);
 			}
 			jQuery('#title').val(this.version.title);
-			jQuery('#description').val(this.version.description.replace('\\n', String.fromCharCode(13,10)));
-			jQuery('#vcomment').val(this.version.vcomment.replace('\\n', String.fromCharCode(13,10)));
+			jQuery('#description').val(this.version.description.replace(/\\n/g, String.fromCharCode(13,10)));
+			jQuery('#vcomment').val(this.version.vcomment.replace(/\\n/g, String.fromCharCode(13,10)));
 			jQuery('#edit_version').val(this.version.version);
 			if (this.version.current_version == 1) {
 				jQuery('#current_version').attr('checked', 'checked').prop('checked', true);

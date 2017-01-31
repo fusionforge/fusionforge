@@ -5,7 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2012,2016, Franck Villaume - TrivialDev
+ * Copyright 2012,2016-2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -207,10 +207,11 @@ switch ($subaction) {
 		$reviewcomment = getStringFromRequest('review-comment');
 		$reviewcomment = $sanitizer->SanitizeHtml($reviewcomment);
 		$reviewdone = getIntFromRequest('review-done');
+		$reviewnotificationcomment = getStringFromRequest('review-notificationcomment');
 		if ($reviewversionserialid) {
 			if ($new_review) {
 				$dr = new DocumentReview($d);
-				if ($dr->create($reviewversionserialid, $reviewtitle, $reviewdescription, $reviewenddate, $reviewmandatoryusers, $reviewoptionalusers)) {
+				if ($dr->create($reviewversionserialid, $reviewtitle, $reviewdescription, $reviewenddate, $reviewmandatoryusers, $reviewoptionalusers, $reviewnotificationcomment)) {
 					$feedback = _('Review created');
 				} else {
 					$error_msg = $dr->getErrorMessage();

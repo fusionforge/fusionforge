@@ -2,7 +2,7 @@
 /**
  * FusionForge Documentation Manager
  *
- * Copyright 2016, Franck Villaume - TrivialDev
+ * Copyright 2016,2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -73,6 +73,7 @@ class DocumentReviewFactory extends FFError {
 		global $HTML;
 		$return = '';
 		$this->getReviews($serialids);
+		$add_button = true;
 		if ($this->getReviewsCounter() > 0) {
 			$titleArr = array('ID', _('Version'), _('Title'), _('Created By'), _('Status'), _('Start date'), _('End date'), _('Progress'), _('Comments'), _('Actions'));
 			$classth = array('', '', '', '', '', 'unsortable');
@@ -113,12 +114,17 @@ class DocumentReviewFactory extends FFError {
 
 				$cells[][] = $actions;
 				$return .= $HTML->multiTableRow(array('id' => 'docreview'.$thereview[0]), $cells);
+				if ($dr->getStatusID() == 1) {
+					$add_button = false;
+				}
 			}
 			$return .= $HTML->listTableBottom();
 		} else {
 			$return = $HTML->information(_('No Reviews.'));
 		}
-		$return .= html_e('button', array('id' => 'doc_review_addbutton', 'type' => 'button', 'onclick' => 'javascript:controllerListFile.toggleAddReviewView()'), _('Add new review'));
+		if ($add_button) {
+			$return .= html_e('button', array('id' => 'doc_review_addbutton', 'type' => 'button', 'onclick' => 'javascript:controllerListFile.toggleAddReviewView()'), _('Add new review'));
+		}
 		return $return;
 	}
 
