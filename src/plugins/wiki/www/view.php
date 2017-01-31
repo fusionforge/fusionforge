@@ -22,7 +22,7 @@
 /*
  * Standard Alcatel-Lucent disclaimer for contributing to open source
  *
- * "The Configuration File ("Contribution") has not been tested and/or
+ * "The File Viewer ("Contribution") has not been tested and/or
  * validated for release as or in products, combinations with products or
  * other commercial use. Any use of the Contribution is entirely made at
  * the user's own responsibility and the user can not rely on any features,
@@ -81,7 +81,7 @@ $filename = basename($filepath);
 
 if (strncmp($basepath, $filepath, strlen($basepath)) !== 0) {
     error_log("DEBUG: basepath=$basepath, filepath=$filepath");
-    exit_error('Invalid path: No access');
+    exit_error(_('Invalid path: No access'));
 }
 
 if ($filepath && is_file($filepath)) {
@@ -107,7 +107,3 @@ if ($filepath && is_file($filepath)) {
     require_once $gfwww . '404.php';
 }
 
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:
