@@ -87,7 +87,9 @@ class DocumentVersionFactory extends FFError {
 					$isHtml = 1;
 				}
 				$new_description = util_gen_cross_ref($arr['description'], $this->Document->Group->getID());
-				$arr['new_description'] = nl2br($new_description);
+				$arr['new_description'] = str_replace(array("\r\n", "\r", "\n"), "\\n", $new_description);
+				$arr['description'] = str_replace(array("\r\n", "\r", "\n"), "\\n", $arr['description']);
+				$arr['vcomment'] = str_replace(array("\r\n", "\r", "\n"), "\\n", $arr['vcomment']);
 				$arr['versionactions'][] = util_make_link('#', $HTML->getEditFilePic(_('Edit this version'), 'editversion'), array('id' => 'version_action_edit', 'onclick' => 'javascript:controllerListFile.toggleEditVersionView({title: \''.addslashes($arr['title']).'\', description: \''.addslashes($arr['description']).'\', new_description: \''.addslashes($arr['new_description']).'\', version: '.ltrim($arr['version'], '_').', current_version: '.$arr['current_version'].', isURL: '.$isURL.', isText: '.$isText.', isHtml: '.$isHtml.', filename: \''.addslashes($arr['filename']).'\', vcomment: \''.addslashes($arr['vcomment']).'\', docid: '.$arr['docid'].', groupId: '.$this->Document->Group->getID().'})'), true);
 				if ($numrows > 1) {
 					$arr['versionactions'][] = util_make_link('#', $HTML->getRemovePic(_('Permanently delete this version'), 'delversion'), array('id' => 'version_action_delete', 'onclick' => 'javascript:controllerListFile.deleteVersion({version: '.ltrim($arr['version'], '_').', docid: '.$arr['docid'].', groupId: '.$this->Document->Group->getID().'})'), true);
