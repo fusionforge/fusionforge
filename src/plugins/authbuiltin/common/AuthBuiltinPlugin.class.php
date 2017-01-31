@@ -27,11 +27,8 @@
  */
 
 class AuthBuiltinPlugin extends ForgeAuthPlugin {
-	/**
-	 * AuthBuiltinPlugin() - constructor
-	 *
-	 */
-	function AuthBuiltinPlugin() {
+
+	function __construct() {
 		parent::__construct();
 
 		$this->name = 'authbuiltin';
