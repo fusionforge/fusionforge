@@ -6,7 +6,7 @@
  * Copyright 2010 (c) Fusionforge Team
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2014,2016, Franck Villaume - TrivialDev
+ * Copyright 2014,2016-2017, Franck Villaume - TrivialDev
  * Copyright 2016-2017, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
@@ -517,7 +517,7 @@ class ArtifactTypeHtml extends ArtifactType {
 				$return .= '<td>'.human_readable_bytes($file->getSize()).'</td>';
 				$return .= '<td>'.htmlspecialchars($file->getName()).'</td>';
 				$return .= '<td>'.date(_('Y-m-d H:i'), $file->getDate()).'</td>';
-				$return .= '<td>'.$file->getSubmittedUnixName().'</td>';
+				$return .= '<td>'.util_display_user($file->getSubmittedUnixName(), $file->getSubmittedBy(), $file->getSubmittedRealName()).'</td>';
 				$return .= '<td>'.util_make_link('/tracker/download.php/'.$group_id.'/'. $this->getID().'/'. $ah->getID() .'/'.$file->getID().'/'.$file->getName(), htmlspecialchars($file->getName())).'</td>';
 				if (forge_check_perm('tracker', $this->getID(), 'tech')) {
 					$return .= '<td><input type="checkbox" name="delete_file[]" value="'. $file->getID() .'">'._('Delete').'</td>';
