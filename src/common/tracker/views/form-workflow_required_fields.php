@@ -76,7 +76,9 @@ $extra_fields = $ath->getExtraFields() ;
 foreach ($extra_fields as $key => $row) {
 	$extra_fields_names[$key] = $row['field_name'];
 }
-array_multisort($extra_fields_names, SORT_ASC, SORT_LOCALE_STRING | SORT_FLAG_CASE, $extra_fields);
+// PHP5.3 compatibility - SORT_FLAG_CASE only since PHP5.4
+$sort_flags = defined('SORT_FLAG_CASE')? SORT_LOCALE_STRING | SORT_FLAG_CASE : SORT_LOCALE_STRING;
+array_multisort($extra_fields_names, SORT_ASC, $sort_flags, $extra_fields);
 
 foreach ($extra_fields as $field) {
 	if ($field['field_type'] != ARTIFACT_EXTRAFIELDTYPE_STATUS) {
