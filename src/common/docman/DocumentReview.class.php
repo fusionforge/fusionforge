@@ -189,7 +189,7 @@ class DocumentReview extends FFError {
 
 	function getReadAction() {
 		global $HTML;
-		return util_make_link('#', $HTML->getEditFilePic(_('View this review'), 'viewreview'), array('id' => 'review_action_view', 'onclick' => 'javascript:controllerListFile.viewReview({review: '.$this->getID().'})'), true);
+		return util_make_link('#', $HTML->getEditFilePic(_('View comments of this review'), 'viewreview'), array('id' => 'review_action_view', 'onclick' => 'javascript:controllerListFile.toggleCommentReviewView({review: '.$this->getID().', groupId: '.$this->Document->Group->getID().', docid: '.$this->Document->getID().'})'), true);
 	}
 
 	function getEditAction($edit = true) {
@@ -398,7 +398,7 @@ class DocumentReview extends FFError {
 			$cells = array();
 			$userObject = user_get_object($optionalUser['userid']);
 			$cells[][] = util_display_user($userObject->getUnixName(), $userObject->getID(), $userObject->getRealName());
-			$cells[][] = _('mandatory');
+			$cells[][] = _('optional');
 			$cells[][] = $optionalUser['statusname'];
 			$return .= $HTML->multiTableRow(array(), $cells);
 		}
@@ -501,9 +501,9 @@ class DocumentReview extends FFError {
 			foreach ($users as $user) {
 				$userObject = user_get_object($user[1]);
 				if ($user[2] == 1) {
-					$sub_label = "\n"._('Your review is MANDATORY')."\n";
+					$sub_label = "\n\n"._('Your review is MANDATORY')."\n";
 				} elseif ($user[2] == 2) {
-					$sub_label = "\n"._('Your review is optional')."\n";
+					$sub_label = "\n\n"._('Your review is optional')."\n";
 				}
 				util_send_message($userObject->getEmail(), $subject, $body.$sub_label.$body2, 'noreply@'.forge_get_config('web_host'), '', _('Docman'));
 			}

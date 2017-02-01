@@ -102,14 +102,20 @@ class DocumentReviewFactory extends FFError {
 					if ($user->getID() == $dr->getCreatedBy()) {
 						$actions .= $dr->getReminderAction().$dr->getEditAction().$dr->getCompleteAction();
 					}
-					if (($dr->getStatusID() == 1) && (($user->getID() == $dr->getCreatedBy()) || in_array($user->getID(), $users))) {
+					$userfound = false;
+					foreach ($users as $ruser) {
+						if ($user->getID() == $ruser['userid']) {
+							$userfound = true;
+						}
+					}
+					if (($dr->getStatusID() == 1) && (($user->getID() == $dr->getCreatedBy()) || $userfound)) {
 						$actions .= $dr->getCommentAction();
 					}
 					if ($user->getID() == $dr->getCreatedBy()) {
 						$actions .= $dr->getDeleteAction();
 					}
 				} else {
-					$actionns .= $dr->getReadAction();
+					$actions .= $dr->getReadAction();
 				}
 
 				$cells[][] = $actions;
