@@ -746,7 +746,6 @@ class ArtifactType extends FFError {
 	 * cloneFieldsFrom - clone all the fields and elements from another tracker
 	 *
 	 * @param	int	$clone_tracker_id	id of the cloned tracker
-	 * @param	int	$group_id		id of the project template to use.
 	 * @param	array	$id_mappings		array mapping between template objects and new project objects
 	 * @return	boolean	true/false on success
 	 */
@@ -868,7 +867,7 @@ class ArtifactType extends FFError {
 			//new field in this tracker
 			$nef = new ArtifactExtraField($this);
 			foreach ($current_efs as $current_ef) {
-				if ($current_ef['field_name'] == $ef['field_name']) {
+				if ($current_ef['field_name'] == $ef['field_name'] || $current_ef['field_type'] == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 					// we delete the current extra field and use the template one...
 					$current_ef_todelete = new ArtifactExtraField($this, $current_ef);
 					$current_ef_todelete->delete(true,true);
@@ -961,11 +960,13 @@ class ArtifactType extends FFError {
 						}
 					}
 				} else {
-					$nef->setDefaultValues($default);
+					if ($default) {
+						$nef->setDefaultValues($default);
+					}
 				}
 			}
 			// update Dependency between extrafield
-			if ($oef->getParent() != 100) {
+			if (!empty($oef->getParent()) && $oef->getParent() != 100) {
 				if (!$nef->update($nef->getName(), $nef->getAttribute1(), $nef->getAttribute2(), $nef->isRequired(), $nef->getAlias(), $nef->getShow100(), $nef->getShow100label(), $nef->getDescription(), $nef->getPattern(), $newEFIds[$oef->getParent()], $nef->isAutoAssign(), $nef->isHiddenOnSubmit(), $nef->isDisabled())) {
 					db_rollback();
 					$this->setError(_('Error Updating New Extra Field Parent')._(':').' '.$nef->getErrorMessage());

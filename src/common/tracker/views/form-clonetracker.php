@@ -59,7 +59,7 @@ if (count($ids) < 1) {
 	?>
 	<input type="hidden" name="clone_tracker" value="y" />
 	<?php
-	echo $HTML->warning_msg(_('WARNING!!! Cloning this tracker will duplicate all the fields and all the elements from those fields into this tracker. There is nothing to prevent you from cloning multiple times or making a huge mess. If you have preexisting extrafields with same name, they will be dropped. You have been warned!'));
+	echo $HTML->warning_msg(_('WARNING!!! Cloning this tracker will duplicate all the fields and all the elements from those fields into this tracker. There is nothing to prevent you from cloning multiple times or making a huge mess. If you have preexisting custom fields with same name or a preexisting custom status type field, they will be dropped. You have been warned!'));
 	?>
 	<p><?php echo html_build_select_box_from_arrays($ids,$titles,'clone_id','',false); ?></p>
 	<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" />
