@@ -1350,6 +1350,9 @@ class ArtifactTypeHtml extends ArtifactType {
 	var groupId =".$this->Group->getID().";
 	var atId = ".$this->getID().";";
 		$javascript = <<<'EOS'
+	function showMessage( msg_text, msg_class) {
+		$("div#maindiv h1").append($("<p>", { "class": msg_class }).html( msg_text )).show();
+	};
 	$.expr[':'].invalid = function(elem, index, match) {
 		for (let invalid of document.querySelectorAll(':invalid') )  {
 			if (elem === invalid) { return true; }
@@ -1382,6 +1385,9 @@ class ArtifactTypeHtml extends ArtifactType {
 				}
 				fields = answer['fields'];
 				$.each(fields, function (index, field) {
+					if (field.error!=null){
+						showMessage(field.error, 'error');
+					}
 					fieldObj = $("[name^='extra_fields["+field.id+"]']");
 					if (fieldObj.is("input[type='checkbox']")){
 						fieldObj.each(function() {

@@ -57,31 +57,43 @@ function get_canned_response($id) {
 }
 
 function get_formulas_results($group, $atid, $extra_fields=array()){
-	$ret = array('messages' => '');
+	$ret = array('message' => '');
 	$at = new ArtifactType($group, $atid);
 	if (!$at || !is_object($at)) {
-		$ret['messages'] = _('ArtifactType could not be created');
+		$ret['message'] = _('ArtifactType could not be created');
 		return json_encode($ret);
 		exit();
 	}
 	if ($at->isError()) {
-		$ret['messages'] = $at->getErrorMessage();
+		$ret['message'] = $at->getErrorMessage();
 		return json_encode($ret);
 		exit();
 	}
 
 	$expr = new Expression();
+	$expr->suppress_errors = true;
 
 	// Variable assignment
 	$extraFields = $at->getExtraFields();
 	foreach ($extraFields as $extraField) {
 		if (isset($extra_fields[$extraField['extra_field_id']])) {
+			$varAss = false;
 			if ($extraField['field_type']==ARTIFACT_EXTRAFIELDTYPE_INTEGER) {
 				$varAss = $extraField['alias'].'='.$extra_fields[$extraField['extra_field_id']];
-				$expr->evaluate($varAss);
 			} elseif ($extraField['field_type']==ARTIFACT_EXTRAFIELDTYPE_TEXT) {
 				$varAss = $extraField['alias'].'="'.$extra_fields[$extraField['extra_field_id']].'"';
+			} elseif ($extraField['field_type']==ARTIFACT_EXTRAFIELDTYPE_SELECT) {
+				$ef = new ArtifactExtraField($at, $extraField['extra_field_id']);
+				$efe = new ArtifactExtraFieldElement($ef,$extra_fields[$extraField['extra_field_id']] );
+				$varAss =  $extraField['alias'].'="'.$efe->getName().'"';
+			}
+			if ($varAss) {
 				$expr->evaluate($varAss);
+				if ($expr->last_error) {
+					$ret['message'] = $expr->last_error;
+					return json_encode($ret);
+					exit();
+				}
 			}
 		}
 	}
@@ -91,35 +103,47 @@ function get_formulas_results($group, $atid, $extra_fields=array()){
 	foreach ($extraFields as $extraField) {
 		$ef = new ArtifactExtraField($at,$extraField['extra_field_id']);
 		if (!$ef || !is_object($ef)) {
-			$ret['messages'] = _('ArtifactExtraField could not be created');
+			$ret['message'] = _('ArtifactExtraField could not be created');
 			return json_encode($ret);
 			exit();
 		}
 		if ($ef->isError()) {
-			$ret['messages'] = $ef->getErrorMessage();
+			$ret['message'] = $ef->getErrorMessage();
 			return json_encode($ret);
 			exit();
 		}
 		$formula = $ef->getFormula();
-		if (in_array($extraField['field_type'], unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_VALUE))) {
-			if (!empty($formula)) {
-				$value = $expr->evaluate($formula);
-				$result [] = array( 'id'=>$extraField['extra_field_id'], 'value'=>$value, 'error'=>$expr->last_error );
-			}
-		} elseif (in_array($extraField['field_type'], unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_CHOICE))) {
-			if (is_array($formula)) {
-				$formulas = $formula;
-				$valueArr = array();
-				foreach ($formulas as $key=>$formula) {
+		if ($formula) {
+			if (in_array($extraField['field_type'], unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_VALUE))) {
+				if (!empty($formula)) {
 					$value = $expr->evaluate($formula);
-					if ($value) {
-						$valueArr[]=$key;
-						if (in_array($extraField['field_type'], unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_SINGLECHOICE))) {
-							breack;
+					if ($expr->last_error) {
+						$ret['message'] = $expr->last_error;
+						return json_encode($ret);
+						exit();
+					}
+					$result [] = array( 'id'=>$extraField['extra_field_id'], 'value'=>$value, 'error'=>$expr->last_error );
+				}
+			} elseif (in_array($extraField['field_type'], unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_CHOICE))) {
+				if (is_array($formula)) {
+					$formulas = $formula;
+					$valueArr = array();
+					foreach ($formulas as $key=>$formula) {
+						$value = $expr->evaluate($formula);
+						if ($expr->last_error) {
+							$ret['message'] = $expr->last_error;
+							return json_encode($ret);
+							exit();
+						}
+						if ($value) {
+							$valueArr[]=$key;
+							if (in_array($extraField['field_type'], unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_SINGLECHOICE))) {
+								break;
+							}
 						}
 					}
+					$result [] = array( 'id'=>$extraField['extra_field_id'], 'value'=>$valueArr, 'error'=>$expr->last_error);
 				}
-				$result [] = array( 'id'=>$extraField['extra_field_id'], 'value'=>$valueArr, 'error'=>$expr->last_error);
 			}
 		}
 	}
