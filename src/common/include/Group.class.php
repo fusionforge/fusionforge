@@ -1860,7 +1860,7 @@ class Group extends FFError {
 		for ($i=0; $i<db_numrows($res); $i++) {
 			$Forum = new Forum($news_group,db_result($res,$i,'forum_id'));
 			if (!$Forum->delete(1,1)) {
-				$this->setError(_('Could not delete News Forum')._(': '),$Forum->getID());
+				$this->setError(_('Could not delete News Forum')._(': ').$Forum->getID());
 				return false;
 			}
 		}
@@ -1869,7 +1869,7 @@ class Group extends FFError {
 		for ($i = 0; $i < db_numrows($res); $i++) {
 			$Forum = new Forum($this, db_result($res, $i, 'forum_id'));
 			if (!$Forum->delete(1, 1)) {
-				$this->setError(_('Could not delete News Forum')._(': '), $Forum->getID());
+				$this->setError(_('Could not delete News Forum')._(': ').$Forum->getID());
 				return false;
 			}
 		}
