@@ -1701,7 +1701,9 @@ class Group extends FFError {
 				return false;
 			}
 			$tag = trim($tag);
-			if ($tag == '' || array_search($tag, $inserted) !== false) continue;
+			if ($tag == '' || array_search($tag, $inserted) !== false) {
+				continue;
+			}
 			$sql = 'INSERT INTO project_tags (group_id,name) VALUES ($1, $2)';
 			$res = db_query_params($sql, array($this->getID(), $tag));
 			if (!$res) {
