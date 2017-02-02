@@ -106,4 +106,3 @@ if ($filepath && is_file($filepath)) {
     header("HTTP/1.0 404 Not Found");
     require_once $gfwww . '404.php';
 }
-
