@@ -966,7 +966,8 @@ class ArtifactType extends FFError {
 				}
 			}
 			// update Dependency between extrafield
-			if (!empty($oef->getParent()) && $oef->getParent() != 100) {
+			$oefParent = $oef->getParent();
+			if (!empty($oefParent) && $oef->getParent() != 100) {
 				if (!$nef->update($nef->getName(), $nef->getAttribute1(), $nef->getAttribute2(), $nef->isRequired(), $nef->getAlias(), $nef->getShow100(), $nef->getShow100label(), $nef->getDescription(), $nef->getPattern(), $newEFIds[$oef->getParent()], $nef->isAutoAssign(), $nef->isHiddenOnSubmit(), $nef->isDisabled())) {
 					db_rollback();
 					$this->setError(_('Error Updating New Extra Field Parent')._(':').' '.$nef->getErrorMessage());
