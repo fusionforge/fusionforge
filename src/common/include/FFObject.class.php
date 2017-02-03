@@ -267,7 +267,7 @@ class FFObject extends FFError {
 				$this->setError(_('Cannot delete association')._(': ').db_error());
 			}
 		} else {
-			$this->setError(_('Association To does not existing'));
+			$this->setError(_('Association To does not exist'));
 		}
 		return false;
 	}
@@ -284,7 +284,7 @@ class FFObject extends FFError {
 				$this->setError(_('Cannot delete association')._(': ').db_error());
 			}
 		} else {
-			$this->setError(_('Association From does not existing'));
+			$this->setError(_('Association From does not exist'));
 		}
 		return false;
 	}
