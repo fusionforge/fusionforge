@@ -538,7 +538,7 @@ class ArtifactExtraField extends FFError {
 					if (is_object($efe)) {
 						$this->setError(_('Unable to create extra field element').' (id='.$default.') '._(':').$efe->getErrorMessage());
 					} else {
-						$this->setError(_('Unable to create extra field element'.' (id='.$default.')'));
+						$this->setError(_('Unable to create extra field element').' (id='.$default.')');
 					}
 					$return = false;
 				} elseif (!$efe->setAsDefault(true)) {
