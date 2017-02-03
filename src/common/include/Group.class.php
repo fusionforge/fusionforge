@@ -1852,7 +1852,7 @@ class Group extends FFError {
 		$res = db_query_params('SELECT forum_id FROM news_bytes WHERE group_id=$1',
 					array($this->getID()));
 		if (!$res) {
-			$this->setError(_('Error Deleting News: ').db_error());
+			$this->setError(_('Error Deleting News')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
