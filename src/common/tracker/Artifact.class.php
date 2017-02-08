@@ -1853,9 +1853,7 @@ class Artifact extends FFObject {
 		}
 
 		$body .= "\n\nYou can respond by visiting: ".
-			"\n".util_make_url ('/tracker/?func=detail&atid='. $this->ArtifactType->getID() .
-					    "&aid=". $this->getID() .
-					    "&group_id=". $this->ArtifactType->Group->getID());
+			"\n".$this->getPermalink();
 
 		//only send if some recipients were found
 		if (count($emails) < 1 && count($monitor_ids) < 1) {
