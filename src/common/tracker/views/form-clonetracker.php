@@ -47,7 +47,7 @@ foreach ($arr_g as $g) {
 	}
 }
 
-$ath->adminHeader(array ('title'=>_('Clone Tracker'), 'modal'=>1));
+$ath->adminHeader(array('title'=>_('Clone Tracker'), 'modal'=>1));
 
 if (count($ids) < 1) {
 	echo $HTML->warning_msg(_('The site administrator must first set up template trackers in the template project with default values and set permissions properly so you can access them.'));

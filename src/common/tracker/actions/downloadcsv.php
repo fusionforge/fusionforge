@@ -126,8 +126,8 @@ for ($i=0; $i<count($at_arr); $i++) {
 	//
 	//	Show the extra fields
 	//
- 	$efd = $at_arr[$i]->getExtraFieldDataText();
- 	foreach ( $efd as $key => $efd_pair ) {
+	$efd = $at_arr[$i]->getExtraFieldDataText();
+	foreach ( $efd as $key => $efd_pair ) {
 		if ($efd_pair['type'] == ARTIFACT_EXTRAFIELDTYPE_EFFORT) {
 			if (!isset($effortUnitSet)) {
 				$effortUnitSet = new EffortUnitSet($ath, $ath->getEffortUnitSet());
@@ -146,9 +146,9 @@ for ($i=0; $i<count($at_arr); $i++) {
 		} else {
 			$value = $efd_pair["value"];
 		}
- 		echo $sep.'"'. fix4csv($value) .'"';
- 	}
- 	echo "\n";
+		echo $sep.'"'. fix4csv($value) .'"';
+	}
+	echo "\n";
 }
 
 function fix4csv ($value) {

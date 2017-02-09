@@ -361,14 +361,14 @@ if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
 	// Compute the list of fields which can be sorted.
 	// Currently, only scalar artifacts are taken.
 	$efarr = $ath->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_TEXT,
-						ARTIFACT_EXTRAFIELDTYPE_TEXTAREA,
-						ARTIFACT_EXTRAFIELDTYPE_INTEGER,
-						ARTIFACT_EXTRAFIELDTYPE_SELECT,
-						ARTIFACT_EXTRAFIELDTYPE_RADIO,
-						ARTIFACT_EXTRAFIELDTYPE_STATUS,
-						ARTIFACT_EXTRAFIELDTYPE_DATE,
-						ARTIFACT_EXTRAFIELDTYPE_DATETIME,
-						ARTIFACT_EXTRAFIELDTYPE_EFFORT));
+					    ARTIFACT_EXTRAFIELDTYPE_TEXTAREA,
+					    ARTIFACT_EXTRAFIELDTYPE_INTEGER,
+					    ARTIFACT_EXTRAFIELDTYPE_SELECT,
+					    ARTIFACT_EXTRAFIELDTYPE_RADIO,
+					    ARTIFACT_EXTRAFIELDTYPE_STATUS,
+					    ARTIFACT_EXTRAFIELDTYPE_DATE,
+					    ARTIFACT_EXTRAFIELDTYPE_DATETIME,
+					    ARTIFACT_EXTRAFIELDTYPE_EFFORT));
 	$keys=array_keys($efarr);
 	for ($k=0; $k<count($keys); $k++) {
 		$i=$keys[$k];

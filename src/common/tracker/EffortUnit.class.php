@@ -119,7 +119,7 @@ class EffortUnit extends FFError {
 			$this->setError(sprintf(_('Unit name %s already exist'),$name));
 			return false;
 		}
-		
+
 		db_begin();
 		if(array_key_exists('user', $importData)){
 			$user = $importData['user'];
@@ -134,9 +134,8 @@ class EffortUnit extends FFError {
 		if ($is_base_unit) {
 			$to_unit = 1;
 		}
-		
+
 		if (!$unit_position) {
-			
 			$res = db_query_params('SELECT MAX(unit_position) AS max_position FROM effort_unit WHERE unit_set_id = $1', array($this->EffortUnitSet->GetID()));
 			if (db_numrows($res) > 0) {
 				$unit_position =  db_result($res, 0, 'max_position') + 1;
