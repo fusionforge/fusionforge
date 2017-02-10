@@ -4,7 +4,7 @@
  *
  * Copyright 2004, Anthony J. Pugliese
  * Copyright 2009, Roland Mas
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2017, Franck Villaume - TrivialDev
  * Copyright 2016-2017, Stéphane-Eymeric Bredthauer - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -1028,15 +1028,22 @@ class ArtifactExtraField extends FFError {
 	function validateAlias($alias) {
 		// these are reserved alias names
 		static $reserved_alias = array(
-			"project",
-			"priority",
-			"assigned_to",
-			"submitted_by",
-			"open_date",
-			"close_date",
-			"summary",
-			"details",
-			"last_modified_date"
+			'assigned_to',
+			'close_date',
+			'details',
+			'id',
+			'last_modified_by',
+			'last_modified_date',
+			'open_date',
+			'priority',
+			'project', //why???
+			'related_tasks',
+			'status_id',
+			'submitted_by',
+			'summary',
+			'_votes',
+			'_voters',
+			'_votage'
 		);
 
 		if (strlen($alias) == 0) return true;		// empty alias

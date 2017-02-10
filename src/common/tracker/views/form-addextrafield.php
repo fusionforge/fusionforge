@@ -3,7 +3,7 @@
  * Tracker Facility
  *
  * Copyright 2010 (c) FusionForge Team
- * Copyright 2014-2016, Franck Villaume - TrivialDev
+ * Copyright 2014-2017, Franck Villaume - TrivialDev
  * Copyright 2016-2017, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
@@ -180,7 +180,7 @@ echo html_ac(html_ap() - 1);
 
 echo html_ao('p');
 echo html_e('strong', array(), _('Field alias')._(':')).html_e('br');
-echo html_e('input', array('type'=>'text', 'name'=>'alias', 'value'=>'', 'size'=>'15', 'maxlength'=>'30'));
+echo html_e('input', array('type'=>'text', 'name'=>'alias', 'value'=>'', 'size'=>'15', 'maxlength'=>'30', 'pattern' => '[A-Za-z0-9-_@]+', 'title' => _('Only letters, numbers, hyphens (-), at sign (@) and underscores (_) allowed.')));
 echo html_ac(html_ap() - 1);
 
 echo html_ao('p');
