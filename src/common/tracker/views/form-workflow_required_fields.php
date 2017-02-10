@@ -58,7 +58,7 @@ foreach ($elearray as $e) {
 	$name[ $e['element_id'] ] = $e['element_name'];
 }
 
-$title = sprintf(_('Configuring required files for the transitions from %1$s to %2$s'), $name[$from], $name[$next]);
+$title = sprintf(_('Configuring required fields for the transitions from %1$s to %2$s'), $name[$from], $name[$next]);
 $ath->adminHeader(array('title'=>$title,
 	'pagename'=>'tracker_admin_customize_liste',
 	'titlevals'=>array($ath->getName())));
