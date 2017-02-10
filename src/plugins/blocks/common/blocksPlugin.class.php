@@ -120,8 +120,8 @@ control over it to the project's administrator.");
 		} elseif ($content) {
 			return $this->parseContent($content);
 		} else {
-			return '<table width="100%" border="1" cellpadding="0" cellspacing="0">'.
-					'<tr><td align="center">block: '.$name.'</td></tr></table><br />';
+			return '<table class="fullwidth boxed">'.
+					'<tr><td class="align-center">block: '.$name.'</td></tr></table><br />';
 		}
 	}
 
