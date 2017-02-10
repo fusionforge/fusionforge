@@ -49,7 +49,7 @@ $res = db_query_params ('SELECT g.unix_group_name, agl.name AS tracker_name, aef
 			AND aefl.extra_field_id != $2
 			AND aefl.field_type IN (1,2,3,5,7)',
 			array (db_int_array_to_any_clause ($project_ids),
-			       $id));
+				$id));
 		if (db_numrows($res) < 1) {
 			exit_error(_('Cannot find a destination tracker where you have administration rights.'),'tracker');
 		}
@@ -66,13 +66,12 @@ echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&a
 		?>
 		<table>
 		<tr>
-		<td></td><th>
+		<th>
 		<?php echo _('Copy From') ?>
 		<?php echo $fb->getName() ?>
 		</th><td></td><th>
 		<?php echo _('Into trackers and custom fields') ?>
-		</th></tr><tr><th>
-		</th>
+		</th></tr><tr>
 		<td class="top">
 		<input type="hidden" name="copy_opt" value="copy" />
 		<input type="hidden" name="id" value="<?php echo $id; ?>" />
@@ -91,15 +90,14 @@ echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&a
 
 		echo html_build_select_box_from_arrays($id_arr,$name_arr,'selectid',$selectid,false);
 		echo '</td></tr>';
-		echo '<tr><td>';
 ?>
-		<br />
-	 	<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" />
-		</td></tr></table>
+		</table>
+
+		<p><input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
 
 <?php
 echo $HTML->closeForm();
-		$ath->footer();
+$ath->footer();
 
 // Local Variables:
 // mode: php
