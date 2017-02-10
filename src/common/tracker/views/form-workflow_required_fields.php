@@ -83,14 +83,15 @@ array_multisort($extra_fields_names, SORT_ASC, $sort_flags, $extra_fields);
 foreach ($extra_fields as $field) {
 	if ($field['field_type'] != ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 		$value = in_array($field['extra_field_id'], $requiredFields)? ' checked="checked"' : '';
-		$str = '<input type="checkbox" name="extrafield['.$field['extra_field_id'].']"'.$value.' />';
-		$str .= ' '.$field['field_name'];
-		echo $str."<br />\n";
+		echo '<input type="checkbox" id="extrafield['.$field['extra_field_id'].']" name="extrafield['.$field['extra_field_id'].']"'.$value.' />';
+		echo '<label for="extrafield['.$field['extra_field_id'].']">'.$field['field_name'].'</label>';
+		echo "<br />\n";
 	}
 }
 ?>
 <p>
-<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
+<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" />
+</p>
 <?php
 echo $HTML->closeForm();
 $ath->footer();
