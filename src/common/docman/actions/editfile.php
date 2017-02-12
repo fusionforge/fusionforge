@@ -208,6 +208,7 @@ switch ($subaction) {
 		$reviewcomment = $sanitizer->SanitizeHtml($reviewcomment);
 		$reviewdone = getIntFromRequest('review-done');
 		$reviewnotificationcomment = getStringFromRequest('review-notificationcomment');
+		$remindernotification = getStringFromRequest('review-remindernotification');
 		if ($reviewversionserialid) {
 			if ($new_review) {
 				$dr = new DocumentReview($d);
@@ -245,6 +246,18 @@ switch ($subaction) {
 					$feedback = _('Review commented successfully');
 				} else {
 					$error_msg = $drc->getErrorMessage();
+				}
+			} elseif ($remindernotification) {
+				$dr = new DocumentReview($d, $reviewid);
+				if ($dr && !$dr->isError()) {
+					$users = $dr->getUsers(array(1));
+					if ($dr->sendNotice($users, false, $remindernotification)) {
+						$feedback = _('Reminder sent successfully.');
+					} else {
+						$error_msg = _('No reminder sent for review ID')._(': ').$reviewid;
+					}
+				} else {
+					$error_msg = _('Cannot create object documentreview');
 				}
 			} else {
 				$dr = new DocumentReview($d, $reviewid);

@@ -542,6 +542,8 @@ DocManListFileController.prototype =
 		jQuery('#editfile-userstatusreview').empty();
 		jQuery('#editfile-completedreview').empty();
 		jQuery('#editfile-commentreview').empty();
+		jQuery('#editfile-remindernotification').hide();
+		jQuery('#review-remindernotification').val('');
 		if (jQuery('#editfile-createreview').is(':visible')) {
 			jQuery('#editfile-createreview').hide();
 			jQuery('#new_review').val(0);
@@ -556,6 +558,8 @@ DocManListFileController.prototype =
 		this.review = params;
 		jQuery('#editfile-commentreview').empty();
 		jQuery('#review_newcomment').val(0);
+		jQuery('#editfile-remindernotification').hide();
+		jQuery('#review-remindernotification').val('');
 		if (jQuery('#editfile-createreview').is(':visible')) {
 			jQuery('#editfile-createreview').hide();
 			jQuery('#new_review').val(0);
@@ -610,6 +614,8 @@ DocManListFileController.prototype =
 		jQuery('#review_id').val(this.comment.review);
 		jQuery('#editfile-userstatusreview').empty();
 		jQuery('#editfile-completedreview').empty();
+		jQuery('#editfile-remindernotification').hide();
+		jQuery('#review-remindernotification').val('');
 		jQuery.getJSON(this.listfileparams.docManURL + '/?group_id=' + this.comment.groupId + '&action=getdocreviewcomments&docid='+this.comment.docid+'&revid='+this.comment.review , jQuery.proxy(function(data){
 			jQuery('#editfile-commentreview').empty();
 			if (typeof data.html != 'undefined') {
@@ -716,6 +722,8 @@ DocManListFileController.prototype =
 		jQuery('#review_complete').val(0);
 		jQuery('#editfile-userstatusreview').empty();
 		jQuery('#editfile-completedreview').empty();
+		jQuery('#editfile-remindernotification').hide();
+		jQuery('#review-remindernotification').val('');
 		jQuery.getJSON(this.docparams.docManURL + '/?group_id=' + this.docparams.groupId + '&action=deletereview&docid='+this.docparams.id+'&review='+this.delreview.review , jQuery.proxy(function(data){
 				if (typeof data.html != 'undefined') {
 					jQuery('#editFile > .feedback').remove();
@@ -734,14 +742,17 @@ DocManListFileController.prototype =
 
 	reminderReview: function(params) {
 		this.reminderreview = params;
-		jQuery.getJSON(this.docparams.docManURL + '/?group_id=' + this.docparams.groupId + '&action=reminderreview&docid='+this.docparams.id+'&review='+this.reminderreview.review , jQuery.proxy(function(data){
-				if (typeof data.html != 'undefined') {
-					jQuery('#editFile > .feedback').remove();
-					jQuery('#editFile > .error').remove();
-					jQuery('#editFile > .warning_msg').remove();
-					jQuery('#editFile').prepend(data.html);
-				}
-			}, this.reminderreview));
+		if (jQuery('#editfile-remindernotification').is(':visible')) {
+			jQuery('#editfile-remindernotification').hide();
+			jQuery('#review-remindernotification').val('');
+		} else {
+			jQuery('#new_review').val(0);
+			jQuery('#editfile-createreview').hide();
+			jQuery('#editfile-commentreview').empty();
+			jQuery('#editfile-userstatusreview').empty();
+			jQuery('#editfile-completedreview').empty();
+			jQuery('#editfile-remindernotification').show();
+		}
 	},
 
 	toggleMoveFileView: function() {

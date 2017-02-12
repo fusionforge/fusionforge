@@ -332,6 +332,7 @@ class DocumentReview extends FFError {
 			$return .= html_e('div', array('id' => 'editfile-userstatusreview'), '', false);
 			$return .= html_e('div', array('id' => 'editfile-completedreview'), '', false);
 			$return .= html_e('div', array('id' => 'editfile-commentreview'), '', false);
+			$return .= html_e('div', array('id' => 'editfile-remindernotification', 'style' => 'display:none'), _('Notification reminder comment')._(':').html_e('textarea', array('id' => 'review-remindernotification', 'name' => 'review-remindernotification', 'style' => 'width: 100%; box-sizing: border-box;', 'rows' => 3), '', false));
 			$javascript = 'jQuery("#datepicker_end_review_date").datepicker({dateFormat: "'.$date_format_js.'"});';
 			$return .= html_e('script', array( 'type'=>'text/javascript', 'id' => 'editfile-datepickerreview-script'), '//<![CDATA['."\n".$javascript."\n".'//]]>');
 		} else {
