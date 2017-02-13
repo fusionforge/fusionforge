@@ -167,6 +167,7 @@ if (!$ac || !is_object($ac)) {
 					$content = html_e('input', array('type'=>'submit', 'name'=>'post_changes_default', 'value'=>_('Update default')));
 					$cells[] = array($content, 'class'=>'align-center');
 				}
+				$cells[] = array('');
 				echo $HTML->multiTableRow($row_attrs, $cells);
 				echo $HTML->listTableBottom();
 				echo $HTML->closeForm();
@@ -177,7 +178,7 @@ if (!$ac || !is_object($ac)) {
 			echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&boxid='.$boxid.'&atid='.$ath->getID(), 'method' => 'post'));
 			echo html_e('input', array('type'=>'hidden', 'name'=>'add_opt', 'value'=>'y'));
 			echo html_e('label', array('for'=>'name'),html_e('strong', array(), _('Add New Element')._(':')));
-			echo html_e('input', array('type'=>'text', 'id'=>'name', 'name'=>'name', 'value'=>'', 'size'=>'15', 'maxlength'=>'30'));
+			echo html_e('input', array('type'=>'text', 'id'=>'name', 'name'=>'name', 'value'=>'', 'size'=>'15', 'maxlength'=>'30', 'required'=>'required'));
 			// Show a pop-up box to choose the possible statuses that this element will map to
 			if ($efType == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 				echo html_e('strong', array(), _('Status'));
