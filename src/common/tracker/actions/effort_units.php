@@ -158,7 +158,7 @@ function show_units(&$effortUnitSet){
 			break;
 		case EFFORTUNITSET_PROJECT_LEVEL:
 			echo html_e('h2', array(), _('Effort Unit Set'));
-			echo sprintf(_('The Project "%s" is using'),$effortUnitSet->getGroup()->getPublicName()).' ';
+			echo sprintf(_('The Project “%s” is using'),$effortUnitSet->getGroup()->getPublicName()).' ';
 			$AvailableEffortUnitSets = getAvailableEffortUnitSets($effortUnitSet->getGroup());
 			switch ($effortUnitSet->getLevel()) {
 				case EFFORTUNITSET_FORGE_LEVEL:
@@ -167,14 +167,14 @@ function show_units(&$effortUnitSet){
 					$isEditable = false;
 					break;
 				case EFFORTUNITSET_PROJECT_LEVEL:
-					echo sprintf(_('Project "%s" level Effort Unit Set'),$effortUnitSet->getGroup()->getPublicName());
+					echo sprintf(_('Project “%s” level Effort Unit Set'),$effortUnitSet->getGroup()->getPublicName());
 						$isEditable = true;
 					break;
 			}
 			break;
 		case EFFORTUNITSET_TRACKER_LEVEL:
 			echo html_e('h2', array(), _('Effort Unit Set'));
-			echo sprintf(_('The Tracker "%s" is using'),$effortUnitSet->getArtifactType()->getName()).' ';
+			echo sprintf(_('The Tracker “%s” is using'),$effortUnitSet->getArtifactType()->getName()).' ';
 			$AvailableEffortUnitSets = getAvailableEffortUnitSets($effortUnitSet->getArtifactType());
 			switch ($effortUnitSet->getLevel()) {
 				case EFFORTUNITSET_FORGE_LEVEL:
@@ -183,12 +183,12 @@ function show_units(&$effortUnitSet){
 					$isEditable = false;
 					break;
 				case EFFORTUNITSET_PROJECT_LEVEL:
-					$currentSetName = sprintf(_('Project "%s" level Effort Unit Set'),$effortUnitSet->getGroup()->getPublicName());
+					$currentSetName = sprintf(_('Project “%s” level Effort Unit Set'),$effortUnitSet->getGroup()->getPublicName());
 					echo $currentSetName.' '.util_make_link('/project/admin/effortunits.php?group_id='.$effortUnitSet->getGroup()->getID(),'('._('Admin').')',true);
 					$isEditable = false;
 					break;
 				case EFFORTUNITSET_TRACKER_LEVEL:
-					echo sprintf(_('Tracker "%s" level Effort Unit Set'),$effortUnitSet->getArtifactType()->getName());
+					echo sprintf(_('Tracker “%s” level Effort Unit Set'),$effortUnitSet->getArtifactType()->getName());
 					$isEditable = true;
 					break;
 			}

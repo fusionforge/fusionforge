@@ -434,13 +434,13 @@ function getAvailableEffortUnitSets(&$Object=null) {
 		case EFFORTUNITSET_TRACKER_LEVEL:
 			$id = getEffortUnitSetForLevel($Object,EFFORTUNITSET_TRACKER_LEVEL);
 			if ($id) {
-				$effortUnitSets[$id] = sprintf(_('Tracker "%s" level Effort Unit Set'),$at_name);
+				$effortUnitSets[$id] = sprintf(_('Tracker “%s” level Effort Unit Set'),$at_name);
 			}
 			// no break
 		case EFFORTUNITSET_PROJECT_LEVEL:
 			$id = getEffortUnitSetForLevel($Object,EFFORTUNITSET_PROJECT_LEVEL);
 			if ($id) {
-				$effortUnitSets[$id] = sprintf(_('Project "%s" level Effort Unit Set'),$group_name);
+				$effortUnitSets[$id] = sprintf(_('Project “%s” level Effort Unit Set'),$group_name);
 			}
 			// no break
 		case EFFORTUNITSET_FORGE_LEVEL:
@@ -507,7 +507,7 @@ function getEffortUnitSetForLevel(&$Object,$level) {
 			$res = db_query_params ('SELECT unit_set_id FROM effort_unit_set WHERE group_id=$1 AND group_artifact_id=$2 AND level=$3',
 			array($group_id, $atid, EFFORTUNITSET_TRACKER_LEVEL));
 			if (!$res) {
-				$this->setError(sprintf(_('Error getting Tracker "%s" level Effort Unit Set'),$at_name), db_error());
+				$this->setError(sprintf(_('Error getting Tracker “%s” level Effort Unit Set'),$at_name), db_error());
 				return false;
 			}
 			if (db_numrows($res)>0) {
@@ -521,7 +521,7 @@ function getEffortUnitSetForLevel(&$Object,$level) {
 			$res = db_query_params ('SELECT unit_set_id FROM effort_unit_set WHERE group_id=$1 AND group_artifact_id IS NULL AND level=$2',
 			array($group_id, EFFORTUNITSET_PROJECT_LEVEL));
 			if (!$res) {
-				$this->setError(sprintf(_('Error getting Project "%s" level Effort Unit Set'),$group_name), db_error());
+				$this->setError(sprintf(_('Error getting Project “%s” level Effort Unit Set'),$group_name), db_error());
 				return false;
 			}
 			if (db_numrows($res)>0) {
