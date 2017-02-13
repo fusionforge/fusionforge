@@ -165,8 +165,9 @@ if (session_loggedin()) {
 	plugin_hook_by_reference("text_editor",$params);
 
 	echo $params['content'].'<br />';
-	echo '<div><input type="submit" name="submit" value="'._('Submit').'" />
-		</div>';
+	echo '<p>';
+	echo '<input type="submit" name="submit" value="'._('Submit').'" />';
+	echo '</p>';
 	echo $HTML->closeForm();
 
 	news_footer();
