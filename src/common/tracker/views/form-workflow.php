@@ -118,7 +118,7 @@ echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&a
 				$str = '<input type="checkbox" name="'.$name.'"'.$value.' />';
 				if ($value) {
 					$url = '/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&workflow_roles=1&from='.$status['element_id'].'&next='.$s['element_id'];
-					$str .= util_make_link($url, html_image('ic/acl_roles20.png', 20, 20, array('alt'=>_('Edit Roles'))), array('title' => _('Edit roles')));
+					$str .= util_make_link($url, html_image('ic/acl_roles20.png', 20, 20, array('alt'=>_('Edit Roles'))), array('title' => _('Edit Roles')));
 					$url = '/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&workflow_required_fields=1&from='.$status['element_id'].'&next='.$s['element_id'];
 					$str .= util_make_link($url, html_image('ic/required.png', 20, 20, array('alt'=>_('Edit Required Fields'))), array('title' => _('Edit required fields')));
 				} else {
