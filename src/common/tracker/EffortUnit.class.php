@@ -116,7 +116,7 @@ class EffortUnit extends FFError {
 		}
 		$res = db_query_params('SELECT 1 FROM effort_unit WHERE is_deleted <> 1 AND unit_name = $1 AND unit_set_id = $2', array(htmlspecialchars($name), $this->EffortUnitSet->GetID()));
 		if (db_numrows($res) > 0) {
-			$this->setError(sprintf(_('Unit name %s already exist'),$name));
+			$this->setError(sprintf(_('Unit name %s already exists'),$name));
 			return false;
 		}
 
@@ -346,7 +346,7 @@ class EffortUnit extends FFError {
 		}
 		$res = db_query_params('SELECT 1 FROM effort_unit WHERE is_deleted <> 1 AND unit_name = $1 AND unit_id <> $2 AND unit_set_id = $3', array(htmlspecialchars($name), $this->getID(), $this->EffortUnitSet->GetID()));
 		if (db_numrows($res) > 0) {
-			$this->setError(sprintf(_('Unit name %s already exist'),$name));
+			$this->setError(sprintf(_('Unit name %s already exists'),$name));
 			return false;
 		}
 		db_begin();
