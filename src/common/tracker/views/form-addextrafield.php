@@ -344,7 +344,7 @@ echo html_build_checkbox('autoassign', false, false);
 echo html_e('label', array('for'=>'autoassign'), _('Field that triggers auto-assignment rules'));
 echo html_ac(html_ap() - 1);
 
-echo $HTML->warning_msg(_('Warning: this add new custom field'));
+echo $HTML->warning_msg(_('Warning: this adds a new custom field!'));
 
 echo html_ao('p');
 echo html_e('input', array('type'=>'submit', 'name'=>'post_changes', 'value'=>_('Add Custom Field')));
