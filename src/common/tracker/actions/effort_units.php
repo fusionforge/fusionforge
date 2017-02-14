@@ -446,7 +446,7 @@ function postdelete_unit(&$effortUnitSet) {
 	}
 	$sure = getIntFromRequest('confirm_delete',0);
 	if (!$sure) {
-		echo $HTML->error_msg(_('You haven\'t confirm the delete of the Unit'));
+		echo $HTML->error_msg(_('You haven\'t confirmed the deletion of the Unit'));
 		return false;
 	}
 	$name = $unit->getName();
@@ -498,21 +498,21 @@ function postcopy_set(&$effortUnitSet) {
 	global $HTML;
 	$sure = getIntFromRequest('confirm_copy',0);
 	if (!$sure) {
-		echo $HTML->error_msg( _('You haven\' confirm the copy of the Effort Unit Set'));
+		echo $HTML->error_msg( _('You haven\'t confirmed the copy of the Effort Unit Set'));
 		return false;
 	}
 	$object = $effortUnitSet->getObject();
 	$newEffortUnitSet = new EffortUnitSet($object);
 	if (!$newEffortUnitSet) {
-		echo $HTML->error_msg(_('Error coping Effort Unit Set')._(':').' '._('Error on new EffortUnitSet'));
+		echo $HTML->error_msg(_('Error copying Effort Unit Set')._(':').' '._('Error on new EffortUnitSet'));
 		return false;
 	}
 	if ($newEffortUnitSet->isError()) {
-		echo $HTML->error_msg(_('Error coping Effort Unit Set')._(':').' '._('Error on new EffortUnitSet').' '.$newEffortUnitSet->getErrorMessage());
+		echo $HTML->error_msg(_('Error copying Effort Unit Set')._(':').' '._('Error on new EffortUnitSet').' '.$newEffortUnitSet->getErrorMessage());
 		return false;
 	}
 	if (!$newEffortUnitSet->copy($effortUnitSet)) {
-		echo $HTML->error_msg(_('Error coping Effort Unit Set')._(':').' '.$newEffortUnitSet->getErrorMessage());
+		echo $HTML->error_msg(_('Error copying Effort Unit Set')._(':').' '.$newEffortUnitSet->getErrorMessage());
 		return false;
 	}
 	if ($newEffortUnitSet->isError()) {
