@@ -223,7 +223,6 @@ class WidgetLayoutManager {
 	}
 
 	function createDefaultLayoutForTracker($owner_id, $template_id = 0, $newEFIds = array()) {
-		var_dump($owner_id);
 		db_begin();
 		$success = true;
 		$notemplate = true;
