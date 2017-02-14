@@ -7,7 +7,7 @@
  * Copyright 2009, Roland Mas
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
- * Copyright 2014,2016, Franck Villaume - TrivialDev
+ * Copyright 2014,2016-2017, Franck Villaume - TrivialDev
  * Copyright 2016-2017, Stéphane-Eymeric Bredthauer - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -854,8 +854,8 @@ class ArtifactType extends FFError {
 		// do not filter and get disabled fields as well
 		$efs = $at->getExtraFields(array(), true);
 
-		// get current getExtraFields if any
-		$current_efs = $this->getExtraFields();
+		// get current getExtraFields if any and includes disabled fields as well...
+		$current_efs = $this->getExtraFields(array(), true);
 
 		//
 		//	Iterate list of extra fields

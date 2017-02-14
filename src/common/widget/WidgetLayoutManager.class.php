@@ -223,22 +223,23 @@ class WidgetLayoutManager {
 	}
 
 	function createDefaultLayoutForTracker($owner_id, $template_id = 0, $newEFIds = array()) {
+		var_dump($owner_id);
 		db_begin();
 		$success = true;
 		$notemplate = true;
+		$res = db_query_params('SELECT content_id FROM layouts_contents WHERE content_id != $1 AND owner_type = $2 AND owner_id = $3', array(0, 't', $owner_id));
+		if ($res && db_numrows($res) > 0) {
+			$contentIdArr = util_result_column_to_array($res);
+			foreach ($contentIdArr as $contentId) {
+				db_query_params('DELETE FROM artifact_display_widget_field WHERE id = $1', array($contentId));
+				db_query_params('DELETE FROM artifact_display_widget WHERE id = $1 AND owner_id = $2', array($contentId, $owner_id));
+			}
+		}
+		db_query_params('DELETE FROM layouts_contents WHERE owner_id = $1 AND owner_type = $2', array($owner_id, 't'));
+		db_query_params('DELETE FROM owner_layouts WHERE owner_id = $1 AND owner_type = $2', array($owner_id, 't'));
 		if ($template_id) {
 			$res = db_query_params('SELECT layout_id FROM owner_layouts WHERE owner_type = $1 AND owner_id = $2', array(self::OWNER_TYPE_TRACKER, $template_id));
 			if ($res && db_numrows($res) == 1) {
-				$res = db_query_params('SELECT content_id FROM layouts_contents WHERE content_id != $1 AND owner_type = $2 AND owner_id = $3', array(0, 't', $owner_id));
-				if ($res && db_numrows($res) > 0) {
-					$contentIdArr = util_result_column_to_array($res);
-					foreach ($contentIdArr as $contentId) {
-						db_query_params('DELETE FROM artifact_display_widget_field WHERE id = $1', array($contentId));
-						db_query_params('DELETE FROM artifact_display_widget WHERE id = $1 AND owner_id = $2', array($contentId, $owner_id));
-					}
-				}
-				db_query_params('DELETE FROM layouts_contents WHERE owner_id = $1 AND owner_type = $2', array($owner_id, 't'));
-				db_query_params('DELETE FROM owner_layouts WHERE owner_id = $1 AND owner_type = $2', array($owner_id, 't'));
 				$res = db_query_params('INSERT INTO owner_layouts(layout_id, is_default, owner_id, owner_type)
 						SELECT layout_id, is_default, $1, owner_type
 						FROM owner_layouts
