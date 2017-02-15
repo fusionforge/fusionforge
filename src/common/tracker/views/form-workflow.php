@@ -120,7 +120,7 @@ echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&a
 					$url = '/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&workflow_roles=1&from='.$status['element_id'].'&next='.$s['element_id'];
 					$str .= util_make_link($url, html_image('ic/acl_roles20.png', 20, 20, array('alt'=>_('Edit Roles'))), array('title' => _('Edit Roles')));
 					$url = '/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&workflow_required_fields=1&from='.$status['element_id'].'&next='.$s['element_id'];
-					$str .= util_make_link($url, html_image('ic/required.png', 20, 20, array('alt'=>_('Edit Required Fields'))), array('title' => _('Edit required fields')));
+					$str .= util_make_link($url, html_image('ic/required.png', 20, 20, array('alt'=>_('Edit Required Fields'))), array('title' => _('Edit Required Fields')));
 				} else {
 					$str .= ' '.html_image('spacer.gif', 20, 20);
 					$str .= ' '.html_image('spacer.gif', 20, 20);
