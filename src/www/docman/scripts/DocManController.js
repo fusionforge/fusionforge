@@ -273,7 +273,8 @@ DocManListFileController.prototype =
 	 */
 	toggleEditDirectoryView: function() {
 		if (!this.listfileparams.divEditDirectory.is(":visible")) {
-			jQuery.getJSON(this.listfileparams.docManURL + '/?group_id='+this.listfileparams.groupId+'&action=lock&json=1&type=dir&itemid='+this.listfileparams.docgroupId+'&childgroup_id='+this.listfileparams.childGroupId, jQuery.proxy(function(data){
+			var nocache = new Date().getTime();
+			jQuery.getJSON(this.listfileparams.docManURL + '/?group_id='+this.listfileparams.groupId+'&action=lock&json=1&type=dir&itemid='+this.listfileparams.docgroupId+'&childgroup_id='+this.listfileparams.childGroupId+'&rqd='+nocache, jQuery.proxy(function(data){
 				if (typeof data.html != 'undefined') {
 					jQuery('#maindiv > .feedback').remove();
 					jQuery('#maindiv > .error').remove();
@@ -334,7 +335,8 @@ DocManListFileController.prototype =
 	 */
 	toggleAddItemView: function() {
 		if (!this.listfileparams.divAddItem.is(":visible")) {
-			jQuery.getJSON(this.listfileparams.docManURL + '/?group_id='+this.listfileparams.groupId+'&action=lock&json=1&type=dir&itemid='+this.listfileparams.docgroupId+'&childgroup_id='+this.listfileparams.childGroupId, jQuery.proxy(function(data){
+			var nocache = new Date().getTime();
+			jQuery.getJSON(this.listfileparams.docManURL + '/?group_id='+this.listfileparams.groupId+'&action=lock&json=1&type=dir&itemid='+this.listfileparams.docgroupId+'&childgroup_id='+this.listfileparams.childGroupId+'&rqd='+nocache, jQuery.proxy(function(data){
 				if (typeof data.html != 'undefined') {
 					jQuery('#maindiv > .feedback').remove();
 					jQuery('#maindiv > .error').remove();
@@ -414,7 +416,8 @@ DocManListFileController.prototype =
 		if (this.listfileparams.childGroupId != 0) {
 			docid_groupid = this.listfileparams.childGroupId;
 		}
-		jQuery.getJSON(this.listfileparams.docManURL + '/?group_id=' + docid_groupid + '&action=getdocversions&docid='+ this.docparams.id, jQuery.proxy(function(data){
+		var nocache = new Date().getTime();
+		jQuery.getJSON(this.listfileparams.docManURL + '/?group_id=' + docid_groupid + '&action=getdocversions&docid='+ this.docparams.id+'&rqd='+nocache, jQuery.proxy(function(data){
 				if (typeof data.html != 'undefined') {
 					jQuery('#editFile > .feedback').remove();
 					jQuery('#editFile > .error').remove();
@@ -455,7 +458,7 @@ DocManListFileController.prototype =
 				}
 			}, this));
 
-		jQuery.getJSON(this.listfileparams.docManURL + '/?group_id=' + docid_groupid + '&action=getassociations&docid='+ this.docparams.id, jQuery.proxy(function(data){
+		jQuery.getJSON(this.listfileparams.docManURL + '/?group_id=' + docid_groupid + '&action=getassociations&docid='+ this.docparams.id+'&rqd='+nocache, jQuery.proxy(function(data){
 				if (typeof data.html != 'undefined') {
 					jQuery('#tabbereditfile-association > .feedback').remove();
 					jQuery('#tabbereditfile-association > .error').remove();
@@ -471,7 +474,7 @@ DocManListFileController.prototype =
 				}
 			}, this));
 
-		jQuery.getJSON(this.listfileparams.docManURL + '/?group_id=' + docid_groupid + '&action=getdocreviews&docid='+ this.docparams.id, jQuery.proxy(function(data){
+		jQuery.getJSON(this.listfileparams.docManURL + '/?group_id=' + docid_groupid + '&action=getdocreviews&docid='+ this.docparams.id+'&rqd='+nocache, jQuery.proxy(function(data){
 				if (typeof data.html != 'undefined') {
 					jQuery('#tabbereditfile-review > .feedback').remove();
 					jQuery('#tabbereditfile-review > .error').remove();
@@ -573,11 +576,12 @@ DocManListFileController.prototype =
 			jQuery('#review-description').val(this.review.description.replace(/\\n/g, String.fromCharCode(13,10)));
 			jQuery('#datepicker_end_review_date').val(this.review.endreviewdate);
 			jQuery('#review-serialid').val(this.review.serialid);
+			var nocache = new Date().getTime();
 			if (this.review.complete) {
 				jQuery('#tr-mandatory-reviewers').hide();
 				jQuery('#tr-optional-reviewers').hide();
 				jQuery('#review_complete').val(1);
-				jQuery.getJSON(this.listfileparams.docManURL + '/?group_id=' + this.review.groupId + '&action=getdocreviewcompleteform&docid='+this.review.docid+'&revid='+this.review.review , jQuery.proxy(function(data){
+				jQuery.getJSON(this.listfileparams.docManURL + '/?group_id=' + this.review.groupId + '&action=getdocreviewcompleteform&docid='+this.review.docid+'&revid='+this.review.review+'&rqd='+nocache, jQuery.proxy(function(data){
 					jQuery('#editfile-completedreview').empty();
 					if (typeof data.html != 'undefined') {
 						jQuery('#editfile-completedreview').prepend(data.html);
@@ -592,7 +596,7 @@ DocManListFileController.prototype =
 				jQuery('#review-select-mandatory-users').gentleSelect({columns: 3, itemWidth: 150});
 				jQuery('#review-select-optional-users').gentleSelect({columns: 3, itemWidth: 150});
 			}
-			jQuery.getJSON(this.listfileparams.docManURL + '/?group_id=' + this.review.groupId + '&action=getdocreviewuserstatus&docid='+this.review.docid+'&revid='+this.review.review , jQuery.proxy(function(data){
+			jQuery.getJSON(this.listfileparams.docManURL + '/?group_id=' + this.review.groupId + '&action=getdocreviewuserstatus&docid='+this.review.docid+'&revid='+this.review.review+'&rqd='+nocache, jQuery.proxy(function(data){
 				jQuery('#editfile-userstatusreview').empty();
 				if (typeof data.html != 'undefined') {
 					jQuery('#editfile-userstatusreview').prepend(data.html);
@@ -616,7 +620,8 @@ DocManListFileController.prototype =
 		jQuery('#editfile-completedreview').empty();
 		jQuery('#editfile-remindernotification').hide();
 		jQuery('#review-remindernotification').val('');
-		jQuery.getJSON(this.listfileparams.docManURL + '/?group_id=' + this.comment.groupId + '&action=getdocreviewcomments&docid='+this.comment.docid+'&revid='+this.comment.review , jQuery.proxy(function(data){
+		var nocache = new Date().getTime();
+		jQuery.getJSON(this.listfileparams.docManURL + '/?group_id=' + this.comment.groupId + '&action=getdocreviewcomments&docid='+this.comment.docid+'&revid='+this.comment.review+'&rqd='+nocache, jQuery.proxy(function(data){
 			jQuery('#editfile-commentreview').empty();
 			if (typeof data.html != 'undefined') {
 				jQuery('#editfile-commentreview').prepend(data.html);
@@ -634,7 +639,8 @@ DocManListFileController.prototype =
 			jQuery('#defaulteditfiletype').val('text/plain');
 		}
 		if (this.version.isText) {
-			jQuery.getJSON(this.listfileparams.docManURL+'/?group_id='+this.version.groupId+'&action=getfile&type=file&itemid='+this.version.id+'&version='+this.version.version, jQuery.proxy(function(data){
+			var nocache = new Date().getTime();
+			jQuery.getJSON(this.listfileparams.docManURL+'/?group_id='+this.version.groupId+'&action=getfile&type=file&itemid='+this.version.id+'&version='+this.version.version+'&rqd='+nocache, jQuery.proxy(function(data){
 				if (data) {
 					jQuery('#defaulteditzone').text(data.body);
 				}
@@ -692,7 +698,8 @@ DocManListFileController.prototype =
 
 	deleteVersion: function(params) {
 		this.delversion = params;
-		jQuery.getJSON(this.listfileparams.docManURL + '/?group_id=' + this.delversion.groupId + '&action=deleteversion&docid='+this.delversion.docid+'&version='+this.delversion.version , jQuery.proxy(function(data){
+		var nocache = new Date().getTime();
+		jQuery.getJSON(this.listfileparams.docManURL + '/?group_id=' + this.delversion.groupId + '&action=deleteversion&docid='+this.delversion.docid+'&version='+this.delversion.version+'&rqd='+nocache, jQuery.proxy(function(data){
 				if (typeof data.html != 'undefined') {
 					jQuery('#editFile > .feedback').remove();
 					jQuery('#editFile > .error').remove();
@@ -724,7 +731,8 @@ DocManListFileController.prototype =
 		jQuery('#editfile-completedreview').empty();
 		jQuery('#editfile-remindernotification').hide();
 		jQuery('#review-remindernotification').val('');
-		jQuery.getJSON(this.docparams.docManURL + '/?group_id=' + this.docparams.groupId + '&action=deletereview&docid='+this.docparams.id+'&review='+this.delreview.review , jQuery.proxy(function(data){
+		var nocache = new Date().getTime();
+		jQuery.getJSON(this.docparams.docManURL + '/?group_id=' + this.docparams.groupId + '&action=deletereview&docid='+this.docparams.id+'&review='+this.delreview.review+'&rqd='+nocache, jQuery.proxy(function(data){
 				if (typeof data.html != 'undefined') {
 					jQuery('#editFile > .feedback').remove();
 					jQuery('#editFile > .error').remove();
