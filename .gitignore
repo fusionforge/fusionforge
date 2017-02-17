@@ -39,3 +39,5 @@ src/fusionforge.spec
 .buildpath
 .project
 .settings/
+# PhpStorm
+.idea/
