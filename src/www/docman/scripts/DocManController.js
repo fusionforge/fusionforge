@@ -112,6 +112,7 @@ DocManListFileController.prototype =
 
 	initModalEditWindow: function() {
 		var modalId = this.listfileparams.divEditFile;
+		this.listfileparams.nocache = new Date().getTime();
 		jQuery(modalId).dialog({
 			autoOpen: false,
 			width: 1000,
@@ -126,7 +127,8 @@ DocManListFileController.prototype =
 						lock:		0,
 						itemid:		id,
 						type:		'file',
-						childgroup_id:	this.listfileparams.childGroupId
+						childgroup_id:	this.listfileparams.childGroupId,
+						rqd:		this.listfileparams.nocache
 					});
 					jQuery.get(this.listfileparams.docManURL+'/', {
 						group_id:	this.listfileparams.groupId,
@@ -134,7 +136,8 @@ DocManListFileController.prototype =
 						lock:		0,
 						itemid:		this.listfileparams.docgroupId,
 						type:		'dir',
-						childgroup_id:	this.listfileparams.childGroupId
+						childgroup_id:	this.listfileparams.childGroupId,
+						rqd:		this.listfileparams.nocache
 					});
 					clearInterval(this.lockInterval[id]);
 					clearInterval(this.lockInterval[this.listfileparams.docgroupId]);
@@ -148,7 +151,8 @@ DocManListFileController.prototype =
 						lock:		0,
 						itemid:		id,
 						type:		'file',
-						childgroup_id:	this.listfileparams.childGroupId
+						childgroup_id:	this.listfileparams.childGroupId,
+						rqd:		this.listfileparams.nocache
 					});
 					jQuery.get(this.listfileparams.docManURL+'/', {
 						group_id:	this.listfileparams.groupId,
@@ -156,7 +160,8 @@ DocManListFileController.prototype =
 						lock:		0,
 						itemid:		this.listfileparams.docgroupId,
 						type:		'dir',
-						childgroup_id:	this.listfileparams.childGroupId
+						childgroup_id:	this.listfileparams.childGroupId,
+						rqd:		this.listfileparams.nocache
 					});
 					clearInterval(this.lockInterval[id]);
 					clearInterval(this.lockInterval[this.listfileparams.docgroupId]);
@@ -172,7 +177,8 @@ DocManListFileController.prototype =
 				lock:		0,
 				itemid:		id,
 				type:		'file',
-				childgroup_id:	this.listfileparams.childGroupId
+				childgroup_id:	this.listfileparams.childGroupId,
+				rqd:		this.listfileparams.nocache
 			});
 			jQuery.get(this.listfileparams.docManURL+'/', {
 				group_id:	this.listfileparams.groupId,
@@ -180,7 +186,8 @@ DocManListFileController.prototype =
 				lock:		0,
 				itemid:		this.listfileparams.docgroupId,
 				type:		'dir',
-				childgroup_id:	this.listfileparams.childGroupId
+				childgroup_id:	this.listfileparams.childGroupId,
+				rqd:		this.listfileparams.nocache
 			});
 			clearInterval(this.lockInterval[id]);
 			clearInterval(this.lockInterval[this.listfileparams.docgroupId]);
@@ -193,6 +200,7 @@ DocManListFileController.prototype =
 
 	initModelNotifyWindow: function() {
 		var modalId = this.listfileparams.divNotifyUsers;
+		this.listfileparams.nocache = new Date().getTime();
 		jQuery(modalId).dialog({
 			autoOpen: false,
 			width: 600,
@@ -208,7 +216,8 @@ DocManListFileController.prototype =
 						lock:		0,
 						itemid:		id,
 						type:		'file',
-						childgroup_id:	this.listfileparams.childGroupId
+						childgroup_id:	this.listfileparams.childGroupId,
+						rqd:		this.listfileparams.nocache
 					});
 					jQuery.get(this.listfileparams.docManURL+'/', {
 						group_id:	this.listfileparams.groupId,
@@ -216,7 +225,8 @@ DocManListFileController.prototype =
 						lock:		0,
 						itemid:		this.listfileparams.docgroupId,
 						type:		'dir',
-						childgroup_id:	this.listfileparams.childGroupId
+						childgroup_id:	this.listfileparams.childGroupId,
+						rqd:		this.listfileparams.nocache
 					});
 					clearInterval(this.lockInterval[id]);
 					clearInterval(this.lockInterval[this.listfileparams.docgroupId]);
@@ -230,7 +240,8 @@ DocManListFileController.prototype =
 						lock:		0,
 						itemid:		id,
 						type:		'file',
-						childgroup_id:	this.listfileparams.childGroupId
+						childgroup_id:	this.listfileparams.childGroupId,
+						rqd:		this.listfileparams.nocache
 					});
 					jQuery.get(this.listfileparams.docManURL+'/', {
 						group_id:	this.listfileparams.groupId,
@@ -238,7 +249,8 @@ DocManListFileController.prototype =
 						lock:		0,
 						itemid:		this.listfileparams.docgroupId,
 						type:		'dir',
-						childgroup_id:	this.listfileparams.childGroupId
+						childgroup_id:	this.listfileparams.childGroupId,
+						rqd:		this.listfileparams.nocache
 					});
 					clearInterval(this.lockInterval[id]);
 					clearInterval(this.lockInterval[this.listfileparams.docgroupId]);
@@ -254,7 +266,8 @@ DocManListFileController.prototype =
 				lock:		0,
 				itemid:		id,
 				type:		'file',
-				childgroup_id:	this.listfileparams.childGroupId
+				childgroup_id:	this.listfileparams.childGroupId,
+				rqd:		this.listfileparams.nocache
 			});
 			jQuery.get(this.listfileparams.docManURL+'/', {
 				group_id:	this.listfileparams.groupId,
@@ -262,7 +275,8 @@ DocManListFileController.prototype =
 				lock:		0,
 				itemid:		this.listfileparams.docgroupId,
 				type:		'dir',
-				childgroup_id:	this.listfileparams.childGroupId
+				childgroup_id:	this.listfileparams.childGroupId,
+				rqd:		this.listfileparams.nocache
 			});
 			clearInterval(this.lockInterval[id]);
 			clearInterval(this.lockInterval[this.listfileparams.docgroupId]);
@@ -272,9 +286,9 @@ DocManListFileController.prototype =
 	/*! toggle edit group view div visibility
 	 */
 	toggleEditDirectoryView: function() {
+		this.listfileparams.nocache = new Date().getTime();
 		if (!this.listfileparams.divEditDirectory.is(":visible")) {
-			var nocache = new Date().getTime();
-			jQuery.getJSON(this.listfileparams.docManURL + '/?group_id='+this.listfileparams.groupId+'&action=lock&json=1&type=dir&itemid='+this.listfileparams.docgroupId+'&childgroup_id='+this.listfileparams.childGroupId+'&rqd='+nocache, jQuery.proxy(function(data){
+			jQuery.getJSON(this.listfileparams.docManURL + '/?group_id='+this.listfileparams.groupId+'&action=lock&json=1&type=dir&itemid='+this.listfileparams.docgroupId+'&childgroup_id='+this.listfileparams.childGroupId+'&rqd='+this.listfileparams.nocache, jQuery.proxy(function(data){
 				if (typeof data.html != 'undefined') {
 					jQuery('#maindiv > .feedback').remove();
 					jQuery('#maindiv > .error').remove();
@@ -294,9 +308,10 @@ DocManListFileController.prototype =
 						lock:		1,
 						type:		'dir',
 						itemid:		this.listfileparams.docgroupId,
-						childgroup_id:	this.listfileparams.childGroupId
+						childgroup_id:	this.listfileparams.childGroupId,
+						rqd:		this.listfileparams.nocache
 					});
-					this.lockInterval[this.listfileparams.docgroupId] = setInterval("jQuery.get('" + this.listfileparams.docManURL + "/', {group_id:"+this.listfileparams.groupId+", action:'lock', lock:1, type:'dir', itemid:"+this.listfileparams.docgroupId+", childgroup_id:"+this.listfileparams.childGroupId+"})", this.listfileparams.lockIntervalDelay);
+					this.lockInterval[this.listfileparams.docgroupId] = setInterval("jQuery.get('" + this.listfileparams.docManURL + "/', {group_id:"+this.listfileparams.groupId+", action:'lock', lock:1, type:'dir', itemid:"+this.listfileparams.docgroupId+", childgroup_id:"+this.listfileparams.childGroupId+", rqd:"+this.listfileparams.nocache+"})", this.listfileparams.lockIntervalDelay);
 					if (typeof(this.listfileparams.divLeft) != 'undefined' && typeof(this.listfileparams.divRight) != 'undefined') {
 						if (this.listfileparams.divLeft.outerHeight() > computeHeight) {
 							jQuery('#views').height(this.listfileparams.divLeft.outerHeight());
@@ -317,7 +332,8 @@ DocManListFileController.prototype =
 				lock:		0,
 				type:		'dir',
 				itemid:		this.listfileparams.docgroupId,
-				childgroup_id:	this.listfileparams.childGroupId
+				childgroup_id:	this.listfileparams.childGroupId,
+				rqd:		this.listfileparams.nocache
 			});
 			clearInterval(this.lockInterval[this.listfileparams.docgroupId]);
 			if (typeof(this.listfileparams.divLeft) != 'undefined' && typeof(this.listfileparams.divRight) != 'undefined') {
@@ -334,9 +350,9 @@ DocManListFileController.prototype =
 	/*! toggle add item view div visibility
 	 */
 	toggleAddItemView: function() {
+		this.listfileparams.nocache = new Date().getTime();
 		if (!this.listfileparams.divAddItem.is(":visible")) {
-			var nocache = new Date().getTime();
-			jQuery.getJSON(this.listfileparams.docManURL + '/?group_id='+this.listfileparams.groupId+'&action=lock&json=1&type=dir&itemid='+this.listfileparams.docgroupId+'&childgroup_id='+this.listfileparams.childGroupId+'&rqd='+nocache, jQuery.proxy(function(data){
+			jQuery.getJSON(this.listfileparams.docManURL + '/?group_id='+this.listfileparams.groupId+'&action=lock&json=1&type=dir&itemid='+this.listfileparams.docgroupId+'&childgroup_id='+this.listfileparams.childGroupId+'&rqd='+this.listfileparams.nocache, jQuery.proxy(function(data){
 				if (typeof data.html != 'undefined') {
 					jQuery('#maindiv > .feedback').remove();
 					jQuery('#maindiv > .error').remove();
@@ -351,7 +367,7 @@ DocManListFileController.prototype =
 						itemid:		this.listfileparams.docgroupId,
 						childgroup_id:	this.listfileparams.childGroupId
 					});
-					this.lockInterval[this.listfileparams.docgroupId] = setInterval("jQuery.get('"+this.listfileparams.docManURL+"/', {group_id:"+this.listfileparams.groupId+", action:'lock', lock:1, type:'dir', itemid:"+this.listfileparams.docgroupId+", childgroup_id:"+this.listfileparams.childGroupId+"})", this.listfileparams.lockIntervalDelay);
+					this.lockInterval[this.listfileparams.docgroupId] = setInterval("jQuery.get('"+this.listfileparams.docManURL+"/', {group_id:"+this.listfileparams.groupId+", action:'lock', lock:1, type:'dir', itemid:"+this.listfileparams.docgroupId+", childgroup_id:"+this.listfileparams.childGroupId+", rqd:"+this.listfileparams.nocache+"})", this.listfileparams.lockIntervalDelay);
 					this.listfileparams.divAddItem.show();
 					this.listfileparams.divEditDirectory.hide();
 					computeHeight = this.listfileparams.divRight.outerHeight() + jQuery(this.listfileparams.divAddItem).outerHeight();
@@ -373,7 +389,8 @@ DocManListFileController.prototype =
 				lock:		0,
 				type:		'dir',
 				itemid:		this.listfileparams.docgroupId,
-				childgroup_id:	this.listfileparams.childGroupId
+				childgroup_id:	this.listfileparams.childGroupId,
+				rqd:		this.listfileparams.nocache
 			});
 			clearInterval(this.lockInterval[this.listfileparams.docgroupId]);
 			this.listfileparams.divAddItem.hide();
@@ -503,10 +520,11 @@ DocManListFileController.prototype =
 				lock:		1,
 				type:		'dir',
 				itemid:		this.docparams.docgroupId,
-				childgroup_id:	this.docparams.childGroupId
+				childgroup_id:	this.docparams.childGroupId,
+				rqd:		nocache
 			});
-		this.lockInterval[this.docparams.id] = setInterval("jQuery.get('" + this.docparams.docManURL + "/', {group_id:"+this.docparams.groupId+", action:'lock', lock:1, type:'file', itemid:"+this.docparams.id+", childgroup_id:"+this.docparams.childGroupId+"})", this.docparams.lockIntervalDelay);
-		this.lockInterval[this.docparams.docgroupId] = setInterval("jQuery.get('" + this.docparams.docManURL + "/', {group_id:"+this.docparams.groupId+", action:'lock', lock:1, type: 'dir', itemid:"+this.docparams.docgroupId+", childgroup_id:"+this.docparams.childGroupId+"})", this.docparams.lockIntervalDelay);
+		this.lockInterval[this.docparams.id] = setInterval("jQuery.get('" + this.docparams.docManURL + "/', {group_id:"+this.docparams.groupId+", action:'lock', lock:1, type:'file', itemid:"+this.docparams.id+", childgroup_id:"+this.docparams.childGroupId+", rqd:"+nocache+"})", this.docparams.lockIntervalDelay);
+		this.lockInterval[this.docparams.docgroupId] = setInterval("jQuery.get('" + this.docparams.docManURL + "/', {group_id:"+this.docparams.groupId+", action:'lock', lock:1, type: 'dir', itemid:"+this.docparams.docgroupId+", childgroup_id:"+this.docparams.childGroupId+", rqd:"+nocache+"})", this.docparams.lockIntervalDelay);
 		jQuery('#tabbereditfile').tabs("option", "active", 0);
 		this.setRequiredInputs(jQuery('#versiontab'));
 		jQuery(this.listfileparams.divEditFile).dialog('option', 'title', '[D'+this.docparams.id+'] '+this.listfileparams.divEditTitle).dialog('open');
@@ -782,6 +800,7 @@ DocManListFileController.prototype =
 
 	toggleNotifyUserView: function(params) {
 		this.notifyparams = params;
+		this.nofifyparams.nocache = new Date().getTime();
 		jQuery('#notifytitle').text(this.notifyparams.title);
 		jQuery('#notifydescription').html(this.notifyparams.description);
 		jQuery('#notifydocid').val(this.notifyparams.id);
@@ -801,10 +820,11 @@ DocManListFileController.prototype =
 				lock:		1,
 				type:		'dir',
 				itemid:		this.notifyparams.docgroupId,
-				childgroup_id:	this.notifyparams.childGroupId
+				childgroup_id:	this.notifyparams.childGroupId,
+				rqd:		this.nofifyparams.nocache
 			});
-		this.lockInterval[this.notifyparams.id] = setInterval("jQuery.get('" + this.notifyparams.docManURL + "/', {group_id:"+this.notifyparams.groupId+",action:'lock',lock:1,type:'file',itemid:"+this.notifyparams.id+",childgroup_id:"+this.notifyparams.childGroupId+"})", this.notifyparams.lockIntervalDelay);
-		this.lockInterval[this.notifyparams.docgroupId] = setInterval("jQuery.get('" + this.notifyparams.docManURL + "/', {group_id:"+this.notifyparams.groupId+",action:'lock',lock:1,type:'dir',itemid:"+this.notifyparams.docgroupId+",childgroup_id:"+this.notifyparams.childGroupId+"})", this.notifyparams.lockIntervalDelay);
+		this.lockInterval[this.notifyparams.id] = setInterval("jQuery.get('" + this.notifyparams.docManURL + "/', {group_id:"+this.notifyparams.groupId+",action:'lock',lock:1,type:'file',itemid:"+this.notifyparams.id+",childgroup_id:"+this.notifyparams.childGroupId+", rqd:"+this.nofifyparams.nocache+"})", this.notifyparams.lockIntervalDelay);
+		this.lockInterval[this.notifyparams.docgroupId] = setInterval("jQuery.get('" + this.notifyparams.docManURL + "/', {group_id:"+this.notifyparams.groupId+",action:'lock',lock:1,type:'dir',itemid:"+this.notifyparams.docgroupId+",childgroup_id:"+this.notifyparams.childGroupId+", rqd:"+this.nofifyparams.nocache+"})", this.notifyparams.lockIntervalDelay);
 		jQuery('#notify-userids').gentleSelect({columns: 2, itemWidth: 120});
 		jQuery(this.listfileparams.divNotifyUsers).dialog('option', 'title', '[D'+this.notifyparams.id+'] '+this.listfileparams.divNotifyTitle).dialog('open');
 
