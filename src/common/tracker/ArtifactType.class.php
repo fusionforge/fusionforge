@@ -1498,6 +1498,54 @@ class ArtifactType extends FFError {
 	function getEffortUnitSet() {
 		return $this->data_array['unit_set_id'];
 	}
+
+	/**
+	 * getSettings - Get all parameters of this tracker
+	 *
+	 * @return	array	all parameters into an multidimensional array
+	 */
+	function getSettings() {
+		// Get list of extra fields for this artifact
+		$extrafields = array();
+		$tmpextrafields = $this->getExtraFields();
+		foreach ($tmpextrafields as $extrafield) {
+			$aefobj = new ArtifactExtraField($this, $extrafield["extra_field_id"]);
+
+			// array of available values
+			$avtmp = $aefobj->getAvailableValues();
+			$avs = array();
+			for ($j=0; $j < count($avtmp); $j++) {
+				$avs[$j]["element_id"] = $avtmp[$j]["element_id"];
+				$avs[$j]["element_name"] = $avtmp[$j]["element_name"];
+				$avs[$j]["status_id"] = $avtmp[$j]["status_id"];
+			}
+
+			$extrafields[] = array(
+				"extra_field_id"=> $aefobj->getID(),
+				"field_name"	=> $aefobj->getName(),
+				"field_type"	=> $aefobj->getType(),
+				"attribute1"	=> $aefobj->getAttribute1(),
+				"attribute2"	=> $aefobj->getAttribute2(),
+				"is_required"	=> $aefobj->isRequired(),
+				"alias"			=> $aefobj->getAlias(),
+				"available_values"	=> $avs,
+				"default_selected_id" => 0		//TODO (not implemented yet)
+			);
+		}
+
+		$return = array(
+				'group_artifact_id' => $this->data_array['group_artifact_id'],
+				'group_id' => $this->data_array['group_id'],
+				'name' => $this->data_array['name'],
+				'description' => $this->data_array['description'],
+				'due_period' => $this->data_array['due_period'],
+				'datatype' => $this->data_array['datatype'],
+				'status_timeout' => $this->data_array['status_timeout'],
+				'extra_fields' => $extrafields,
+				'custom_status_field' => $this->data_array['custom_status_field']
+			);
+		return $return;
+	}
 }
 
 // Local Variables:
