@@ -153,7 +153,6 @@ if (getStringFromRequest('submit')) {
 		} else {
 			$feedback .= _('Query Deleted');;
 		}
-		$query_id=0;
 		session_redirect('/tracker/?atid='.$atid.'&group_id='.$group_id.'&func=browse');
 	} else {
 		exit_error(_('Missing Build Query Action'),'tracker');
