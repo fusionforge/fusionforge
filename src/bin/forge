@@ -4,6 +4,7 @@
  * FusionForge source control management
  *
  * Copyright 2012, Alain Peyrat
+ * Copyright 2017, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -26,10 +27,44 @@ require (dirname(__FILE__).'/../common/include/env.inc.php');
 require_once $gfcommon.'include/pre.php';
 
 class CliActions {
-	function help () {
+	function help($method = null) {
 		$methods = join('|', get_class_methods($this));
-		echo "Usage: .../forge ($methods) [arguments...]\n" ;
-		exit (1) ;
+		switch ($method) {
+			case 'help':
+				echo "Use: .../forge help ($methods)\n";
+				echo "to get detail on each command\n";
+				break;
+			case 'pluginActivate':
+				echo "Use: .../forge pluginActivate <pluginName>\n";
+				echo "to activate the <pluginName> plugin\n";
+				break;
+			case 'pluginDeactivate':
+				echo "Use: .../forge pluginDeactivate <pluginName>\n";
+				echo "to deactivate the <pluginName> plugin\n";
+				break;
+			case 'trackerDump':
+				echo "Use: .../forge trackerDump <atid> [setup|artifacts|both] [json|raw]\n";
+				echo "to dump a tracker from a specific project.\n";
+				echo "the following functions are available:\n";
+				echo " - setup: (default option)\n";
+				echo "   use it to dump the full configuration of the tracker\n";
+				echo " - artifacts:\n";
+				echo "   use it to dump all the artifacts of the tracker\n";
+				echo " - both:\n";
+				echo "   use it to dump the full configuration of the tracker and the artifacts\n";
+// 				echo " - full:\n";
+// 				echo "   use it to dump the full configuration of the tracker and the artifacts + any attachements if any\n";
+				echo "the following output formats are available:\n";
+				echo " - json:\n";
+				echo "   pretty json formated string output\n";
+				echo " - raw: (default)\n";
+				echo "   standard PHP array print_r format\n";
+				break;
+			default:
+				echo "Usage: .../forge ($methods) [arguments...]\n" ;
+				echo "Get more info use: .../forge help help\n";
+				break;
+		}
 	}
 
 	function pluginActivate ($name) {
@@ -44,11 +79,72 @@ class CliActions {
 		$pm = plugin_manager_get_object();
 		$pm->deactivate($name);
 	}
+
+	function trackerDump($atid, $params = array('setup', 'json')) {
+		$at = artifactType_get_object($atid);
+		$trackerDump = array();
+		if ($at && is_object($at) && !$at->isError()) {
+			switch ($params[0]) {
+				case 'full':
+					//TODO: how to identify files to retrieve and generate a zip file?
+				case 'both':
+					$trackerDump['setup'] = $at->getSettings();
+				case 'artifacts':
+					require_once $gfcommon.'tracker/ArtifactFactory.class.php';
+					$af = new ArtifactFactory($at);
+					if ($af && is_object($af) && !$at->isError()) {
+						$af->setup(0, '', '', 0, 'overwrite', false, false, array(), false);
+						$artifacts = $af->getArtifacts();
+						foreach ($artifacts as $artf) {
+							//we do not need this information.
+							unset($artf->ArtifactType);
+						}
+						$trackerDump['artifacts'] = $artifacts;
+					} else {
+						$trackerDump['error'][] = _('Unable to retrieve artifacts');
+					}
+					break;
+				case 'setup':
+					$trackerDump['setup'] = $at->getSettings();
+					break;
+				default:
+					$trackerDump['error'][] = _('Unknown function');
+					break;
+			}
+		} else {
+			$trackerDump['error'][] = _('Unable to get tracker id')._(': ').$atid;
+		}
+
+		if (isset($params[1])) {
+			if (in_array($params[1], array('json', 'raw'))) {
+				$format = $params[1];
+			} else {
+				$trackerDump['error'][] = _('Unknown format. Fallback to raw');
+			}
+		} else {
+			$format = 'raw';
+		}
+		switch ($format) {
+			case 'json':
+				echo json_encode($trackerDump, JSON_PRETTY_PRINT)."\n";
+				break;
+			case 'raw':
+			default:
+				print_r($trackerDump);
+		}
+	}
 }
 
-if (count($argv) == 3) {
+if (count($argv) >= 3) {
 	$action = $argv[1];
 	$name   = $argv[2];
+	if (count($argv) >= 3) {
+		$j = 0;
+		for ($i = 3; $i < count($argv); $i++) {
+			$params[$j] = $argv[$i];
+			$j++;
+		}
+	}
 } else {
 	$action = 'help';
 	$name   = '';
@@ -56,12 +152,11 @@ if (count($argv) == 3) {
 
 $ctl = new CliActions();
 if (method_exists($ctl, $action)) {
-	$ctl->$action($name);
+	if (isset($params)) {
+		$ctl->$action($name, $params);
+	} else {
+		$ctl->$action($name);
+	}
 } else {
 	$ctl->help();
 }
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:
