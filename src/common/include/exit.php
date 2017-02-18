@@ -113,6 +113,7 @@ function exit_missing_param($url = '', $missing_params = array(), $toptab = '') 
  * @param	string	$toptab needed for navigation
  */
 function exit_disabled($toptab = 'summary') {
+	header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden");
 	exit_error(_('The Site Administrator has turned off this feature.'), $toptab);
 }
 
