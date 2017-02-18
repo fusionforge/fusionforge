@@ -411,7 +411,7 @@ class ArtifactType extends FFError {
 	}
 
 	/**
-	 * getReturnEmailAddress() - return the return email address for notification emails
+	 * getReturnEmailAddress - return the return email address for notification emails
 	 *
 	 * @return	string	return email address
 	 */
@@ -1401,7 +1401,7 @@ class ArtifactType extends FFError {
 	}
 
 	/**
-	 * getBrowseList - get the free-form string strings.
+	 * getBrowseList - get the list of columns in browse page.
 	 *
 	 * @return	string	instructions.
 	 */
@@ -1422,14 +1422,14 @@ class ArtifactType extends FFError {
 	}
 
 	/**
-	 * setCustomStatusField - set the extra_field_id of the field containing the custom status.
+	 * setBrowseList - set the list of columns in browse page.
 	 *
-	 * @param	int	$list	The extra field id.
+	 * @param	string	$list	string comma separated of ids of custom field and names of internal fields.
 	 * @return	boolean	success.
 	 */
 	function setBrowseList($list) {
 		$res = db_query_params('UPDATE artifact_group_list
-		    SET browse_list=$1
+			SET browse_list=$1
 			WHERE group_artifact_id=$2',
 			array($list,
 				$this->getID()));
