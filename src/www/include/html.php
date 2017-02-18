@@ -850,10 +850,10 @@ function html_build_multiple_select_box($result, $name, $checked_array, $size = 
 	$texts = array();
 	$rows = db_numrows($result);
 	for ($i = 0; $i < $rows; $i++) {
-		$vals = db_result($result, $i, 0);
-		$texts = substr(db_result($result, $i, 1), 0, 35);
+		$vals[] = db_result($result, $i, 0);
+		$texts[] = substr(db_result($result, $i, 1), 0, 35);
 	}
-	return html_build_multiple_select_box_from_arrays($vals, $texts, $name, $checked_array, $size, $show_100, $text_100, $attrs);
+	return html_build_multiple_select_box_from_arrays($vals, $texts, $name, $checked_array, $size, $show_100, $text_100, false, $attrs);
 }
 
 /**
@@ -925,7 +925,7 @@ function html_build_multiple_select_box_from_arrays(
 			if ($withGroup && $vals[$i]!='100' && $optgroup[$i]!=$currentGroup) {
 				if ($currentGroup!='' && $groupOpen) {
 					$return .= html_ac(html_ap() - 1);
-					$groupOpen = false;
+					$groupOpen = false; // @fixme see $groupOpen below
 				}
 				$return .= html_ao('optgroup', array('label'=>$optgroup[$i]));
 				$groupOpen = true;
@@ -1131,7 +1131,7 @@ function html_buildcheckboxarray($options, $name, $checked_array) {
 				$checked = 1;
 			}
 		}
-		echo html_e('br').html_build_checkbox($name, $value, $checked).$options[$i];
+		echo html_e('br').html_build_checkbox($name, false, $checked).$options[$i];
 	}
 }
 
