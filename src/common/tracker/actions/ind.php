@@ -94,7 +94,7 @@ if (count($at_arr) < 1) {
 				if ($at_arr[$j]->Group->getID() != $group->getID()) {
 					$cells[] = array(sprintf(_('Child project %s Tracker'), util_make_link('/tracker/?group_id='.$at_arr[$j]->Group->getID(), $at_arr[$j]->Group->getPublicName())), 'content' => $at_arr[$j]->Group->getID());
 				} else {
-					$cells[] = array('', 'content' => $at_arr[$j]->Group->getID());
+					$cells[] = array(sprintf(_('Project %s Tracker'), $at_arr[$j]->Group->getPublicName()), 'content' => $at_arr[$j]->Group->getID());
 				}
 			}
 			$cells[][] = util_make_link('/tracker/?atid='.$at_arr[$j]->getID().'&group_id='.$at_arr[$j]->Group->getID().'&func=browse', $HTML->getFollowPic().' '.$at_arr[$j]->getName());
