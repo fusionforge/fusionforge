@@ -867,19 +867,18 @@ function html_build_multiple_select_box($result, $name, $checked_array, $size = 
  * @param	bool	$show_100	Whether or not to show the '100 row'
  * @param	string	$text_100	What to call the '100 row' defaults to none.
  * @param	bool	$allowed
- * @param	array	$attrs Array of other attributes for this select element
+ * @param	array	$attrs		Array of other attributes for this select element
  * @param	array	$opts_attrs
  * @param	array	$attrs_100
  * @param	array	$optgroup
  * @return	string
  * @throws	Exception
  */
-function html_build_multiple_select_box_from_arrays(
-		$vals, $texts, $name, $checked_array = array(), $size = 8,
-		$show_100 = true, $text_100 = 'none',
-		$allowed = false, $attrs = array(),
-		$opts_attrs = array(), $attrs_100 = array(),
-		$optgroup = array()) {
+function html_build_multiple_select_box_from_arrays($vals, $texts, $name, $checked_array = array(), $size = 8,
+						$show_100 = true, $text_100 = 'none',
+						$allowed = false, $attrs = array(),
+						$opts_attrs = array(), $attrs_100 = array(),
+						$optgroup = array()) {
 	$return = html_ao('select', array_merge($attrs, array('name' => $name, 'multiple' => 'multiple', 'size' => $size)));
 	if ($show_100) {
 		if ($text_100 == 'none') {
@@ -925,7 +924,7 @@ function html_build_multiple_select_box_from_arrays(
 			if ($withGroup && $vals[$i]!='100' && $optgroup[$i]!=$currentGroup) {
 				if ($currentGroup!='' && $groupOpen) {
 					$return .= html_ac(html_ap() - 1);
-					$groupOpen = false; // @fixme see $groupOpen below
+					$groupOpen = false;
 				}
 				$return .= html_ao('optgroup', array('label'=>$optgroup[$i]));
 				$groupOpen = true;
@@ -950,7 +949,7 @@ function html_build_multiple_select_box_from_arrays(
  * @param	array		$attrs		Array of other attributes for this element
  * @return	html code for checkbox control
  */
-function html_build_checkbox($name, $value, $checked, $attrs=array()) {
+function html_build_checkbox($name, $value, $checked, $attrs = array()) {
 	if ($value === false) {
 		$attrs = array_merge(array('id' => $name, 'name' => $name, 'type' => 'checkbox'), $attrs);
 	} else {
