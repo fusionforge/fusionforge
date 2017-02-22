@@ -22,8 +22,6 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-$no_gz_buffer=true;
-
 require_once '../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfconfig.'plugins/mantisbt/config.php';
