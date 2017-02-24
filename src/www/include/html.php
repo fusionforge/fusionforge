@@ -1112,29 +1112,6 @@ function html_build_priority_select_box($name = 'priority', $checked_val = '3', 
 }
 
 /**
- * html_buildcheckboxarray() - Build an HTML checkbox array.
- *
- * @param	array	$options	Options array
- * @param	string	$name		Checkbox name
- * @param	array	$checked_array	Array of boxes to be pre-checked
- */
-function html_buildcheckboxarray($options, $name, $checked_array) {
-	$option_count = count($options);
-	$checked_count = count($checked_array);
-
-	for ($i = 1; $i <= $option_count; $i++) {
-		$checked = 0;
-
-		for ($j = 0; $j < $checked_count; $j++) {
-			if ($i == $checked_array[$j]) {
-				$checked = 1;
-			}
-		}
-		echo html_e('br').html_build_checkbox($name, false, $checked).$options[$i];
-	}
-}
-
-/**
  * site_header() - everything required to handle security and
  * add navigation for user pages like /my/ and /account/
  *
