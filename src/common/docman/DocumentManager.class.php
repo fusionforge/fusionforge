@@ -158,13 +158,13 @@ class DocumentManager extends FFError {
 	}
 
 	/**
-	 *  getTree - display recursively the content of the doc_group. Only doc_groups within doc_groups.
+	 *  getHTMLTree - display recursively the content of the doc_group. Only doc_groups within doc_groups.
 	 *
 	 * @param	int	$selecteddir	the selected directory
 	 * @param	string	$linkmenu	the type of link in the menu
 	 * @param	int	$docGroupId	the doc_group to start: default 0
 	 */
-	function getTree($selecteddir, $linkmenu, $docGroupId = 0) {
+	function getHTMLTree($selecteddir, $linkmenu, $docGroupId = 0) {
 		global $g; // the master group of all the groups .... anyway. Needed to support projects-hierarchy plugin
 		$dg = new DocumentGroup($this->Group);
 		switch ($linkmenu) {
@@ -240,7 +240,7 @@ class DocumentManager extends FFError {
 				}
 				if ($dg->getSubgroup($subGroupIdValue, $doc_group_stateid)) {
 					echo html_ao('ul', array('class' => 'simpleTreeMenu'));
-					$this->getTree($selecteddir, $linkmenu, $subGroupIdValue);
+					$this->getHTMLTree($selecteddir, $linkmenu, $subGroupIdValue);
 					echo html_ac(html_ap() - 1);
 				}
 				echo html_ac(html_ap() -1);
