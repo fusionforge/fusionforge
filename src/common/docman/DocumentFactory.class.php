@@ -7,7 +7,7 @@
  * Copyright 2009, Roland Mas
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2016, Franck Villaume - TrivialDev
+ * Copyright 2012-2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -28,6 +28,7 @@
 
 require_once $gfcommon.'include/FFError.class.php';
 require_once $gfcommon.'docman/Document.class.php';
+require_once $gfcommon.'docman/DocumentVersionFactory.class.php';
 
 class DocumentFactory extends FFError {
 
@@ -332,6 +333,21 @@ class DocumentFactory extends FFError {
 			return NULL;
 		}
 
+		return $return;
+	}
+
+	function getDocumentsWithVersions() {
+		$return = null;
+		$docs = $this->getDocuments(1);
+		if (is_array($docs)) {
+			foreach ($docs as $doc) {
+				$dvf = new DocumentVersionFactory($doc);
+				$docArr = array();
+				$docArr['docid'] = $doc->getID();
+				$docArr['versions'] = $dvf->getVersions();
+				$return[] = $docArr;
+			}
+		}
 		return $return;
 	}
 

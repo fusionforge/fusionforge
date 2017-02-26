@@ -2,7 +2,7 @@
 /**
  * FusionForge Documentation Manager
  *
- * Copyright 2016, Franck Villaume - TrivialDev
+ * Copyright 2016-2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -44,7 +44,7 @@ if ($docid) {
 	if ($documentObject && !$documentObject->isError()) {
 		$dvf = new DocumentVersionFactory($documentObject);
 		if ($dvf && !$dvf->isError()) {
-			$result = $dvf->getVersions($limit, $start);
+			$result = $dvf->getHTMLVersions($limit, $start);
 		} else {
 			$result['html'] = $HTML->warning_msg(_('Cannot retrieve versions')._(': ').$docid);
 		}

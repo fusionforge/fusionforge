@@ -25,6 +25,7 @@
 
 require (dirname(__FILE__).'/../common/include/env.inc.php');
 require_once $gfcommon.'include/pre.php';
+require_once $gfcommon.'tracker/ArtifactFactory.class.php';
 
 class CliActions {
 	function help($method = null) {
@@ -43,17 +44,31 @@ class CliActions {
 				echo "to deactivate the <pluginName> plugin\n";
 				break;
 			case 'trackerDump':
-				echo "Use: .../forge trackerDump <atid> [setup|artifacts|both] [json|raw]\n";
+				echo "Use: .../forge trackerDump <atid> [setup|artifacts] [json|raw]\n";
 				echo "to dump a tracker from a specific project.\n";
 				echo "the following functions are available:\n";
 				echo " - setup: (default option)\n";
 				echo "   use it to dump the full configuration of the tracker\n";
 				echo " - artifacts:\n";
 				echo "   use it to dump all the artifacts of the tracker\n";
-				echo " - both:\n";
-				echo "   use it to dump the full configuration of the tracker and the artifacts\n";
-// 				echo " - full:\n";
+// 				echo " - all:\n";
 // 				echo "   use it to dump the full configuration of the tracker and the artifacts + any attachements if any\n";
+				echo "the following output formats are available:\n";
+				echo " - json:\n";
+				echo "   pretty json formated string output\n";
+				echo " - raw: (default)\n";
+				echo "   standard PHP array print_r format\n";
+				break;
+			case 'docmanDump':
+				echo "Use: .../forge trackerDump <groupid> [setup|tree|all] [json|raw]\n";
+				echo "to dump docman from a specific project.\n";
+				echo "the following functions are available:\n";
+				echo " - setup: (default option)\n";
+				echo "   use it to dump the full configuration of the document management tool\n";
+				echo " - tree:\n";
+				echo "   use it to dump the complete tree of the document management tool\n";
+				echo " - all:\n";
+				echo "   use it to dump the full configuration and the tree\n";
 				echo "the following output formats are available:\n";
 				echo " - json:\n";
 				echo "   pretty json formated string output\n";
@@ -85,12 +100,9 @@ class CliActions {
 		$trackerDump = array();
 		if ($at && is_object($at) && !$at->isError()) {
 			switch ($params[0]) {
-				case 'full':
-					//TODO: how to identify files to retrieve and generate a zip file?
-				case 'both':
+				case 'all':
 					$trackerDump['setup'] = $at->getSettings();
 				case 'artifacts':
-					require_once $gfcommon.'tracker/ArtifactFactory.class.php';
 					$af = new ArtifactFactory($at);
 					if ($af && is_object($af) && !$at->isError()) {
 						$af->setup(0, '', '', 0, 'overwrite', false, false, array(), false);
@@ -124,16 +136,65 @@ class CliActions {
 		} else {
 			$format = 'raw';
 		}
+		$this->print_result($trackerDump, $format);
+	}
+
+	function docmanDump($group_id, $params = array('setup', 'json')) {
+		$group = group_get_object($group_id);
+		if ($group && is_object($group) && !$group->isError()) {
+			if ($group->usesDocman()) {
+				$dm = new DocumentManager($group);
+				$docmanDump = array();
+				if ($dm && is_object($dm) && !$dm->isError()) {
+					switch ($params[0]) {
+						case 'all':
+							$docmanDump['setup'] = $dm->getSettings();
+						case 'tree':
+							$tree = $dm->getTree();
+							$docmanDump['tree'] = $tree;
+							break;
+						case 'setup':
+							$docmanDump['setup'] = $dm->getSettings();
+							break;
+						default:
+							$docmanDump['error'][] = _('Unknown function');
+							break;
+					}
+				} else {
+					$docmanDump['error'][] = _('Unable to get document manager for group id')._(': ').$group_id;
+				}
+			} else {
+				$docmanDump['error'][] = _('Document manager not enabled for group id')._(': ').$group_id;
+			}
+		} else {
+			$docmanDump['error'][] = _('Unable to get group id')._(': ').$group_id;
+		}
+		if (isset($params[1])) {
+			if (in_array($params[1], array('json', 'raw'))) {
+				$format = $params[1];
+			} else {
+				$docmanDump['error'][] = _('Unknown format. Fallback to raw');
+			}
+		} else {
+			$format = 'raw';
+		}
+		$this->print_result($docmanDump, $format);
+	}
+
+	function print_result($arrayDump, $format) {
+
 		switch ($format) {
 			case 'json':
-				echo json_encode($trackerDump, JSON_PRETTY_PRINT)."\n";
+				echo json_encode($arrayDump, JSON_PRETTY_PRINT)."\n";
 				break;
 			case 'raw':
 			default:
-				print_r($trackerDump);
+				print_r($arrayDump);
 		}
 	}
 }
+
+session_set_admin();
 
 if (count($argv) >= 3) {
 	$action = $argv[1];

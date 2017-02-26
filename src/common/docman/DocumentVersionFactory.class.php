@@ -2,7 +2,7 @@
 /**
  * FusionForge Documentation Manager
  *
- * Copyright 2016, Franck Villaume - TrivialDev
+ * Copyright 2016-2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -51,13 +51,13 @@ class DocumentVersionFactory extends FFError {
 	}
 
 	/**
-	 * getVersions - retrieve a limited number of version of a document
+	 * getHTMLVersions - retrieve a limited number of version of a document
 	 *
 	 * @param	int	$limit	the number of versions to retrieve. Default is 0 = No limit
 	 * @param	int	$start	Paging the retrieve. Start point. Default is 0.
 	 * @return	array	Array of enriched version datas from database.
 	 */
-	function getVersions($limit = 0, $start = 0) {
+	function getHTMLVersions($limit = 0, $start = 0) {
 		global $HTML;
 		$versions = array();
 		// everything but data_words! Too much memory consumption.
@@ -95,6 +95,21 @@ class DocumentVersionFactory extends FFError {
 					$arr['versionactions'][] = util_make_link('#', $HTML->getRemovePic(_('Permanently delete this version'), 'delversion'), array('id' => 'version_action_delete', 'onclick' => 'javascript:controllerListFile.deleteVersion({version: '.ltrim($arr['version'], '_').', docid: '.$arr['docid'].', groupId: '.$this->Document->Group->getID().'})'), true);
 				}
 				$versions[$arr['version']] = $arr;
+			}
+		}
+		db_free_result($res);
+		return $versions;
+	}
+
+	function getVersions() {
+		$versions = array();
+		// everything but data_words! Too much memory consumption.
+		$res = db_query_params('SELECT serial_id, version as version, docid, current_version, title, updatedate, createdate, created_by, description, filename, filetype, filesize, vcomment FROM doc_data_version WHERE docid = $1 ORDER by version DESC',
+					array($this->Document->getID()));
+		if ($res) {
+			$numrows = db_numrows($res);
+			while ($arr = db_fetch_array($res)) {
+				$versions[] = $arr;
 			}
 		}
 		db_free_result($res);

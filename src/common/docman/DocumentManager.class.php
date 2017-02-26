@@ -2,7 +2,7 @@
 /**
  * FusionForge Documentation Manager
  *
- * Copyright 2011-2014,2016, Franck Villaume - TrivialDev
+ * Copyright 2011-2014,2016-2017, Franck Villaume - TrivialDev
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2013, French Ministry of National Education
  * http://fusionforge.org
@@ -246,6 +246,45 @@ class DocumentManager extends FFError {
 				echo html_ac(html_ap() -1);
 			}
 		}
+	}
+
+	/**
+	 * getTree - retrieve the tree structure into an organized array
+	 *
+	 * @param	int	$docGroupId	the doc_group to start: default 0
+	 */
+	function getTree($docGroupId = 0) {
+		$dg = new DocumentGroup($this->Group);
+		$stateid = array(1, 2, 3, 4, 5);
+		$tree = $dg->getSubgroup($docGroupId, $stateid);
+		if (sizeof($tree)) {
+			foreach ($tree as $key => $value) {
+				$tree[$key] = (array)documentgroup_get_object($value, $this->Group->getID());
+				unset($tree[$key]['Group']);
+				$tree[$key]['subdocgroups'] = $this->getTree($value);
+				$df = new DocumentFactory($this->Group);
+				$df->setDocGroupID($value);
+				$df->setStateID($stateid);
+				$df->setOrder(array('docid'));
+				$tree[$key]['files'] = (array)$df->getDocumentsWithVersions();
+			}
+		}
+		return $tree;
+	}
+
+	/**
+	 * getSettings - return the configuration flags of the docman
+	 *
+	 */
+	function getSettings() {
+		$settingsArr = array();
+		$settingsArr['new_doc_address']          = $this->Group->data_array['new_doc_address'];
+		$settingsArr['send_all_docs']            = $this->Group->data_array['send_all_docs'];
+		$settingsArr['use_docman_search']        = $this->Group->data_array['use_docman_search'];
+		$settingsArr['force_docman_reindex']     = $this->Group->data_array['force_docman_reindex'];
+		$settingsArr['use_webdav']               = $this->Group->data_array['use_webdav'];
+		$settingsArr['use_docman_create_online'] = $this->Group->data_array['use_docman_create_online'];
+		return $settingsArr;
 	}
 
 	/**
