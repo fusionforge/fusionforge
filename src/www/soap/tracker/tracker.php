@@ -598,7 +598,6 @@ function getArtifactTypes($session_ser, $group_id) {
 //
 function artifacttype_to_soap($at_arr) {
 	$return = array();
-
 	if (is_array($at_arr) && count($at_arr) > 0) {
 		for ($i=0; $i<count($at_arr); $i++) {
 			if ($at_arr[$i]->isError()) {
