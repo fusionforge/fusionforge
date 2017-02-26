@@ -26,6 +26,7 @@
 require (dirname(__FILE__).'/../common/include/env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'tracker/ArtifactFactory.class.php';
+require_once $gfcommon.'tracker/ArtifactTypeFactory.class.php';
 
 class CliActions {
 	function help($method = null) {
@@ -44,15 +45,15 @@ class CliActions {
 				echo "to deactivate the <pluginName> plugin\n";
 				break;
 			case 'trackerDump':
-				echo "Use: .../forge trackerDump <atid> [setup|artifacts] [json|raw]\n";
+				echo "Use: .../forge trackerDump <atid> [setup|data|all] [json|raw]\n";
 				echo "to dump a tracker from a specific project.\n";
 				echo "the following functions are available:\n";
 				echo " - setup: (default option)\n";
 				echo "   use it to dump the full configuration of the tracker\n";
-				echo " - artifacts:\n";
+				echo " - data:\n";
 				echo "   use it to dump all the artifacts of the tracker\n";
-// 				echo " - all:\n";
-// 				echo "   use it to dump the full configuration of the tracker and the artifacts + any attachements if any\n";
+				echo " - all:\n";
+				echo "   use it to dump the full configuration of the tracker and the artifacts\n";
 				echo "the following output formats are available:\n";
 				echo " - json:\n";
 				echo "   pretty json formated string output\n";
@@ -60,12 +61,12 @@ class CliActions {
 				echo "   standard PHP array print_r format\n";
 				break;
 			case 'docmanDump':
-				echo "Use: .../forge trackerDump <groupid> [setup|tree|all] [json|raw]\n";
+				echo "Use: .../forge trackerDump <groupid> [setup|data|all] [json|raw]\n";
 				echo "to dump docman from a specific project.\n";
 				echo "the following functions are available:\n";
 				echo " - setup: (default option)\n";
 				echo "   use it to dump the full configuration of the document management tool\n";
-				echo " - tree:\n";
+				echo " - data:\n";
 				echo "   use it to dump the complete tree of the document management tool\n";
 				echo " - all:\n";
 				echo "   use it to dump the full configuration and the tree\n";
@@ -75,6 +76,21 @@ class CliActions {
 				echo " - raw: (default)\n";
 				echo "   standard PHP array print_r format\n";
 				break;
+			case 'groupDump':
+				echo "Use: .../forge groupDump <groupid> [setup|data|all] [json|raw]\n";
+				echo "to dump a group.\n";
+				echo "the following functions are available:\n";
+				echo " - setup: (default option)\n";
+				echo "   use it to dump the full configuration of the group including configuration of each feature used\n";
+				echo " - data:\n";
+				echo "   use it to dump the complete data\n";
+				echo " - all:\n";
+				echo "   use it to dump the full configuration and the data\n";
+				echo "the following output formats are available:\n";
+				echo " - json:\n";
+				echo "   pretty json formated string output\n";
+				echo " - raw: (default)\n";
+				echo "   standard PHP array print_r format\n";
 			default:
 				echo "Usage: .../forge ($methods) [arguments...]\n" ;
 				echo "Get more info use: .../forge help help\n";
@@ -95,14 +111,96 @@ class CliActions {
 		$pm->deactivate($name);
 	}
 
+	function groupDump($group_id, $params = array('setup', 'json', 'print')) {
+		$groupDump = array();
+		$group = group_get_object($group_id);
+		if ($group && is_object($group) && !$group->isError()) {
+			switch ($params[0]) {
+				case 'all':
+					$groupDump['setup'] = (array)$group;
+					$groupDump['setup']['membersArr'] = $group->getMembers(false);
+					if ($group->usesDocman()) {
+						$groupDump['docman'] = $this->docmanDump($group_id, array('all', 'return'));
+					}
+					if ($group->usesTracker()) {
+						$atf = new ArtifactTypeFactory($group);
+						$atid_arr = $atf->getAllArtifactTypeIds();
+						foreach ($atid_arr as $atid) {
+							$groupDump['trackers'][] = $this->trackerDump($atid, array('all', 'return'));
+						}
+					}
+					if ($group->usesForum()) {
+						$groupDump['forums'] = array();
+					}
+					if ($group->usesFRS()) {
+						$groupDump['frs'] = array();
+					}
+					if ($group->usesNews()) {
+						$groupDump['news'] = array();
+					}
+					break;
+				case 'data':
+					if ($group->usesDocman()) {
+						$groupDump['docman'] = $this->docmanDump($group_id, array('data', 'return'));
+					}
+					if ($group->usesTracker()) {
+						$atf = new ArtifactTypeFactory($group);
+						$atid_arr = $atf->getAllArtifactTypeIds();
+						foreach ($atid_arr as $atid) {
+							$groupDump['trackers'][] = $this->trackerDump($atid, array('data', 'return'));
+						}
+					}
+					if ($group->usesForum()) {
+						$groupDump['forums'] = array();
+					}
+					if ($group->usesFRS()) {
+						$groupDump['frs'] = array();
+					}
+					if ($group->usesNews()) {
+						$groupDump['news'] = array();
+					}
+					break;
+				case 'setup':
+					$groupDump['setup'] = (array)$group;
+					$groupDump['setup']['membersArr'] = $group->getMembers(false);
+					if ($group->usesDocman()) {
+						$groupDump['docman'] = $this->docmanDump($group_id, array('setup', 'return'));
+					}
+					if ($group->usesTracker()) {
+						$atf = new ArtifactTypeFactory($group);
+						$atid_arr = $atf->getAllArtifactTypeIds();
+						foreach ($atid_arr as $atid) {
+							$groupDump['trackers'][] = $this->trackerDump($atid, array('setup', 'return'));
+						}
+					}
+					if ($group->usesForum()) {
+						$groupDump['forums'] = array();
+					}
+					if ($group->usesFRS()) {
+						$groupDump['frs'] = array();
+					}
+					if ($group->usesNews()) {
+						$groupDump['news'] = array();
+					}
+					break;
+				default:
+					$groupDump['error'][] = _('Unknown function');
+					break;
+			}
+		} else {
+			$groupDump['error'][] = _('Unable to get group id')._(': ').$group_id;
+		}
+		$this->print_result($groupDump, $params);
+	}
+
 	function trackerDump($atid, $params = array('setup', 'json')) {
+		$trackerDump['trackerid'] = $atid;
 		$at = artifactType_get_object($atid);
-		$trackerDump = array();
 		if ($at && is_object($at) && !$at->isError()) {
 			switch ($params[0]) {
 				case 'all':
 					$trackerDump['setup'] = $at->getSettings();
-				case 'artifacts':
+				case 'data':
 					$af = new ArtifactFactory($at);
 					if ($af && is_object($af) && !$at->isError()) {
 						$af->setup(0, '', '', 0, 'overwrite', false, false, array(), false);
@@ -111,7 +209,7 @@ class CliActions {
 							//we do not need this information.
 							unset($artf->ArtifactType);
 						}
-						$trackerDump['artifacts'] = $artifacts;
+						$trackerDump['data'] = $artifacts;
 					} else {
 						$trackerDump['error'][] = _('Unable to retrieve artifacts');
 					}
@@ -126,32 +224,23 @@ class CliActions {
 		} else {
 			$trackerDump['error'][] = _('Unable to get tracker id')._(': ').$atid;
 		}
-
-		if (isset($params[1])) {
-			if (in_array($params[1], array('json', 'raw'))) {
-				$format = $params[1];
-			} else {
-				$trackerDump['error'][] = _('Unknown format. Fallback to raw');
-			}
-		} else {
-			$format = 'raw';
-		}
-		$this->print_result($trackerDump, $format);
+		$this->print_result($trackerDump, $params);
+		return $trackerDump;
 	}
 
 	function docmanDump($group_id, $params = array('setup', 'json')) {
+		$docmanDump = array();
 		$group = group_get_object($group_id);
 		if ($group && is_object($group) && !$group->isError()) {
 			if ($group->usesDocman()) {
 				$dm = new DocumentManager($group);
-				$docmanDump = array();
 				if ($dm && is_object($dm) && !$dm->isError()) {
 					switch ($params[0]) {
 						case 'all':
 							$docmanDump['setup'] = $dm->getSettings();
-						case 'tree':
+						case 'data':
 							$tree = $dm->getTree();
-							$docmanDump['tree'] = $tree;
+							$docmanDump['data'] = $tree;
 							break;
 						case 'setup':
 							$docmanDump['setup'] = $dm->getSettings();
@@ -169,21 +258,24 @@ class CliActions {
 		} else {
 			$docmanDump['error'][] = _('Unable to get group id')._(': ').$group_id;
 		}
+		$this->print_result($docmanDump, $params);
+		return $docmanDump;
+	}
+
+	function print_result($arrayDump, $params) {
 		if (isset($params[1])) {
-			if (in_array($params[1], array('json', 'raw'))) {
+			if (in_array($params[1], array('json', 'raw', 'return'))) {
 				$format = $params[1];
 			} else {
-				$docmanDump['error'][] = _('Unknown format. Fallback to raw');
+				$arrayDump['error'][] = _('Unknown format. Fallback to raw');
 			}
 		} else {
 			$format = 'raw';
 		}
-		$this->print_result($docmanDump, $format);
-	}
-
-	function print_result($arrayDump, $format) {
-
 		switch ($format) {
+			case 'return':
+				return true;
+				break;
 			case 'json':
 				echo json_encode($arrayDump, JSON_PRETTY_PRINT)."\n";
 				break;
