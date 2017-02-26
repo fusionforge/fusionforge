@@ -1507,7 +1507,7 @@ class ArtifactType extends FFError {
 	function getSettings() {
 		// Get list of extra fields for this artifact
 		$extrafields = array();
-		$tmpextrafields = $this->getExtraFields();
+		$tmpextrafields = $this->getExtraFields(array(), true);
 		foreach ($tmpextrafields as $extrafield) {
 			$aefobj = new ArtifactExtraField($this, $extrafield["extra_field_id"]);
 
