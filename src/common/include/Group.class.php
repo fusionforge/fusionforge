@@ -251,34 +251,6 @@ class Group extends FFError {
 	var $membersArr;
 
 	/**
-	 * Whether the use is an admin/super user of this project.
-	 *
-	 * @var	bool	$is_admin.
-	 */
-	var $is_admin;
-
-	/**
-	 * Artifact types result handle.
-	 *
-	 * @var	int	$types_res.
-	 */
-	var $types_res;
-
-	/**
-	 * Associative array of data for plugins.
-	 *
-	 * @var	array	$plugins_data.
-	 */
-	var $plugins_data;
-
-	/**
-	 * Associative array of data for the group menu.
-	 *
-	 * @var	array	$menu_data.
-	 */
-	var $menu_data;
-
-	/**
 	 * Group - Group object constructor - use group_get_object() to instantiate.
 	 *
 	 * @param	int|bool	$id	Required - Id of the group you want to instantiate.
