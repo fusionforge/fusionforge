@@ -1585,7 +1585,7 @@ function html_a_apply($scopy) {
  */
 function html_trove_limit_navigation_box($php_self, $querytotalcount, $trove_browselimit, $page, $textintro = '') {
 	if ($textintro != '') {
-		$html_limit = sprintf(_(' Displaying %1$s per page. Projects sorted by alphabetical order.'), $trove_browselimit);
+		$html_limit = sprintf(_('Displaying %d per page. Projects sorted by alphabetical order.'), $trove_browselimit);
 	} else {
 		$html_limit = $textintro;
 	}
