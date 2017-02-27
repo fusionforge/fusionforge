@@ -1050,7 +1050,7 @@ class ArtifactExtraField extends FFError {
 
 		// invalid chars?
 		if (preg_match("/[^[:alnum:]_@\\-]/", $alias)) {
-			$this->setError(_('The alias contains invalid characters. Only letters, numbers, hyphens (-), at sign (@) and underscores (_) allowed.'));
+			$this->setError(_('The alias contains invalid characters.').' '._('Only letters, numbers, hyphens (-), at sign (@) and underscores (_) allowed.'));
 			return false;
 		} elseif (in_array($alias, $reserved_alias)) {	// alias is reserved?
 			$this->setError(sprintf(_('“%s” is a reserved alias. Please provide another name.'), $alias));
