@@ -44,6 +44,20 @@ class CliActions {
 				echo "Use: .../forge pluginDeactivate <pluginName>\n";
 				echo "to deactivate the <pluginName> plugin\n";
 				break;
+			case 'artifactDump':
+				echo "Use: .../forge artifactDump <aid> [latest|all] [json|raw]\n";
+				echo "to dump an artifact from a specific tracker of a project.\n";
+				echo "the following functions are available:\n";
+				echo " - latest: (default option)\n";
+				echo "   use it to dump the latest value of the artifact\n";
+				echo " - all:\n";
+				echo "   use it to dump the full history and latest value of the artifact\n";
+				echo "the following output formats are available:\n";
+				echo " - json:\n";
+				echo "   pretty json formated string output\n";
+				echo " - raw: (default)\n";
+				echo "   standard PHP array print_r format\n";
+				break;
 			case 'trackerDump':
 				echo "Use: .../forge trackerDump <atid> [setup|data|all] [json|raw]\n";
 				echo "to dump a tracker from a specific project.\n";
@@ -109,6 +123,42 @@ class CliActions {
 	function pluginDeactivate ($name) {
 		$pm = plugin_manager_get_object();
 		$pm->deactivate($name);
+	}
+
+	function artifactDump($aid, $params = array('latest', 'json', 'print')) {
+		$artifactDump = array();
+		$artf = artifact_get_object($aid);
+		if ($artf && is_object($artf) && !$artf->isError()) {
+			switch ($params[0]) {
+				case 'all':
+					$artifactDump['history'] = $artf->getHistory();
+				case 'latest':
+					$artifactDump['artifact'] = (array)$artf;
+					$artifactDump['monitor'] = $artf->getMonitorIds();
+					$artifactDump['messages'] = array();
+					$messages = $artf->getMessages();
+					if (db_numrows($messages) > 0) {
+						while ($arr = db_fetch_array($messages)) {
+							$artifactDump['messages'] = $arr;
+						}
+					}
+					$artifactDump['files'] = $artf->getFiles();
+					$artifactDump['tasks'] = array();
+					$tasks = $artf->getRelatedTasks();
+					if (db_numrows($tasks) > 0) {
+						while ($arr = db_fetch_array($tasks)) {
+							$artifactDump['tasks'][] = $arr;
+						}
+					}
+					break;
+				default:
+					$artifactDump['error'][] = _('Unknown function');
+					break;
+			}
+		} else {
+			$artifactDump['error'][] = _('Unable to get artifact id')._(': ').$aid;
+		}
+		$this->print_result($artifactDump, $params);
 	}
 
 	function groupDump($group_id, $params = array('setup', 'json', 'print')) {
