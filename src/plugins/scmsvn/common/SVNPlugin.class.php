@@ -326,7 +326,7 @@ some control over it to the project's administrator.");
 		$config_fname = forge_get_config('data_path').'/scmsvn-auth.inc';
 		$config_f = fopen($config_fname.'.new', 'w');
 
-		$res = db_query_params("SELECT login, passwd FROM nss_passwd WHERE status=$1", array('A'));
+		$res = db_query_params("SELECT login FROM nss_passwd WHERE status=$1", array('A'));
 		while ($arr = db_fetch_array($res)) {
 			fwrite($config_f, 'Use ScmsvnUser '.$arr['login']."\n");
 		}
