@@ -7,7 +7,7 @@
  * Copyright 2009, Roland Mas
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2011-2016, Franck Villaume - TrivialDev
+ * Copyright 2011-2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -605,6 +605,16 @@ class Document extends FFObject {
 	function getMonitoredUserEmailAddress() {
 		$MonitorElementObject = new MonitorElement('docdata');
 		return $MonitorElementObject->getAllEmailsInCommatSeparated($this->getID());
+	}
+
+	/**
+	 * getMonitorIds - get user ids monitoring this Document.
+	 *
+	 * @return	array of user ids monitoring this Artifact.
+	 */
+	function getMonitorIds() {
+		$MonitorElementObject = new MonitorElement('artifact');
+		return $MonitorElementObject->getMonitorUsersIdsInArray($this->getID());
 	}
 
 	/**
