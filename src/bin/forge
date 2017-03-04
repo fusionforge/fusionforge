@@ -125,20 +125,29 @@ class CliActions {
 		$pm->deactivate($name);
 	}
 
-	function artifactDump($aid, $params = array('latest', 'json', 'print')) {
+	function artifactDump($aid, $params = array('latest', 'json')) {
 		$artifactDump = array();
+		$artifactDump['id'] = $aid;
 		$artf = artifact_get_object($aid);
 		if ($artf && is_object($artf) && !$artf->isError()) {
 			switch ($params[0]) {
 				case 'all':
-					$artifactDump['history'] = $artf->getHistory();
+					$artifactDump['history'] = array();
+					$hist = $artf->getHistory();
+					if (db_numrows($hist) > 0) {
+						while ($arr = db_fetch_array($hist, null, PGSQL_ASSOC)) {
+							$artifactDump['history'][] = $arr;
+						}
+					}
+
 				case 'latest':
 					$artifactDump['artifact'] = (array)$artf;
+					unset($artifactDump['artifact']['ArtifactType']);
 					$artifactDump['monitor'] = $artf->getMonitorIds();
 					$artifactDump['messages'] = array();
 					$messages = $artf->getMessages();
 					if (db_numrows($messages) > 0) {
-						while ($arr = db_fetch_array($messages)) {
+						while ($arr = db_fetch_array($messages, null, PGSQL_ASSOC)) {
 							$artifactDump['messages'] = $arr;
 						}
 					}
@@ -146,7 +155,7 @@ class CliActions {
 					$artifactDump['tasks'] = array();
 					$tasks = $artf->getRelatedTasks();
 					if (db_numrows($tasks) > 0) {
-						while ($arr = db_fetch_array($tasks)) {
+						while ($arr = db_fetch_array($tasks, null, PGSQL_ASSOC)) {
 							$artifactDump['tasks'][] = $arr;
 						}
 					}
@@ -158,11 +167,14 @@ class CliActions {
 		} else {
 			$artifactDump['error'][] = _('Unable to get artifact id')._(': ').$aid;
 		}
+		ksort($artifactDump);
 		$this->print_result($artifactDump, $params);
+		return $artifactDump;
 	}
 
-	function groupDump($group_id, $params = array('setup', 'json', 'print')) {
+	function groupDump($group_id, $params = array('setup', 'json')) {
 		$groupDump = array();
+		$groupDump['id'] = $group_id;
 		$group = group_get_object($group_id);
 		if ($group && is_object($group) && !$group->isError()) {
 			switch ($params[0]) {
@@ -240,11 +252,12 @@ class CliActions {
 		} else {
 			$groupDump['error'][] = _('Unable to get group id')._(': ').$group_id;
 		}
+		ksort($groupDump);
 		$this->print_result($groupDump, $params);
 	}
 
 	function trackerDump($atid, $params = array('setup', 'json')) {
-		$trackerDump['trackerid'] = $atid;
+		$trackerDump['id'] = $atid;
 		$at = artifactType_get_object($atid);
 		if ($at && is_object($at) && !$at->isError()) {
 			switch ($params[0]) {
@@ -256,10 +269,8 @@ class CliActions {
 						$af->setup(0, '', '', 0, 'overwrite', false, false, array(), false);
 						$artifacts = $af->getArtifacts();
 						foreach ($artifacts as $artf) {
-							//we do not need this information.
-							unset($artf->ArtifactType);
+							$trackerDump['data'][] = $this->artifactDump($artf->getID(), array('all', 'return'));
 						}
-						$trackerDump['data'] = $artifacts;
 					} else {
 						$trackerDump['error'][] = _('Unable to retrieve artifacts');
 					}
@@ -274,6 +285,7 @@ class CliActions {
 		} else {
 			$trackerDump['error'][] = _('Unable to get tracker id')._(': ').$atid;
 		}
+		ksort($trackerDump);
 		$this->print_result($trackerDump, $params);
 		return $trackerDump;
 	}
@@ -308,6 +320,7 @@ class CliActions {
 		} else {
 			$docmanDump['error'][] = _('Unable to get group id')._(': ').$group_id;
 		}
+		ksort($docmanDump);
 		$this->print_result($docmanDump, $params);
 		return $docmanDump;
 	}
