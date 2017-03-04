@@ -5,6 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2017, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -94,7 +95,7 @@ function news_show_latest($group_id=0,$limit=10,$show_summaries=true,$allow_subm
 	}
 	$result = db_query_params ('
 SELECT groups.group_name, groups.unix_group_name, groups.group_id,
-       users.user_name, users.realname,
+       users.user_name, users.realname, users.user_id,
        news_bytes.forum_id, news_bytes.summary, news_bytes.post_date,
        news_bytes.details
 FROM users,news_bytes,groups
@@ -121,7 +122,7 @@ ORDER BY post_date DESC',
 		for ($i=0; $i<$rows; $i++) {
 			$t_thread_title = db_result($result,$i,'summary');
 			$t_thread_url = "/forum/forum.php?forum_id=" . db_result($result,$i,'forum_id');
-			$t_thread_author = db_result($result,$i,'realname');
+			$t_thread_author = util_display_user(db_result($result,$i,'user_name'),db_result($result,$i,'user_id'),db_result($result,$i,'realname'));
 
 			$return .= '<div class="one-news bordure-dessous">';
 			$return .= "\n";
