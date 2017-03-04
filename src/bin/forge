@@ -27,6 +27,7 @@ require (dirname(__FILE__).'/../common/include/env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'tracker/ArtifactFactory.class.php';
 require_once $gfcommon.'tracker/ArtifactTypeFactory.class.php';
+require_once $gfcommon.'docman/DocumentReviewFactory.class.php';
 
 class CliActions {
 	function help($method = null) {
@@ -68,6 +69,20 @@ class CliActions {
 				echo "   use it to dump all the artifacts of the tracker\n";
 				echo " - all:\n";
 				echo "   use it to dump the full configuration of the tracker and the artifacts\n";
+				echo "the following output formats are available:\n";
+				echo " - json:\n";
+				echo "   pretty json formated string output\n";
+				echo " - raw: (default)\n";
+				echo "   standard PHP array print_r format\n";
+				break;
+			case 'documentDump':
+				echo "Use: .../forge documentDump <docid> [latest|all] [json|raw]\n";
+				echo "to dump a document from a specific project.\n";
+				echo "the following functions are available:\n";
+				echo " - latest: (default option)\n";
+				echo "   use it to dump the latest value of the document\n";
+				echo " - all:\n";
+				echo "   use it to dump the full history and latest value of the document\n";
 				echo "the following output formats are available:\n";
 				echo " - json:\n";
 				echo "   pretty json formated string output\n";
@@ -139,7 +154,6 @@ class CliActions {
 							$artifactDump['history'][] = $arr;
 						}
 					}
-
 				case 'latest':
 					$artifactDump['artifact'] = (array)$artf;
 					unset($artifactDump['artifact']['ArtifactType']);
@@ -288,6 +302,35 @@ class CliActions {
 		ksort($trackerDump);
 		$this->print_result($trackerDump, $params);
 		return $trackerDump;
+	}
+
+	function documentDump($docid, $params = array('latest', 'json')) {
+		$documentDump = array();
+		$documentDump['id'] = $docid;
+		$doc = document_get_object($docid);
+		if ($doc && is_object($doc) && !$doc->isError()) {
+			switch ($params[0]) {
+				case 'all':
+					$dvf = new DocumentVersionFactory($doc);
+					$documentDump['versions'] = $dvf->getVersions();
+					$serialIDs = $dvf->getSerialIDs();
+					$drf = new DocumentReviewFactory($doc);
+					$documentDump['reviews'] = $drf->getReviews();
+				case 'latest':
+					$documentDump['document'] = (array)$doc;
+					unset($documentDump['document']['Group']);
+					$documentDump['monitor'] = $doc->getMonitorIds();
+					break;
+				default:
+					$documentDump['error'][] = _('Unknown function');
+					break;
+			}
+		} else {
+			$documentDump['error'][] = _('Unable to get document id')._(': ').$docid;
+		}
+		ksort($documentDump);
+		$this->print_result($documentDump, $params);
+		return $documentDump;
 	}
 
 	function docmanDump($group_id, $params = array('setup', 'json')) {
