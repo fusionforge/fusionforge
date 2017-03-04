@@ -47,6 +47,7 @@ FusionForge 6.X:
 * Web UI: upgrade jquery ui to 1.12.1 (TrivialDev)
 * Web UI: upgrade jquery to 1.12.4 (Nokia)
 * Widget MySystasks: new widget for user to display systasks perform on user projects (TrivialDev)
+* Widget ProjectlatestArtifact: new widget for project to display the 5 more recent artifacts (TrivialDev)
 * Widget ProjectScmStats: new widget for project to display SCM stats (TrivialDev)
 * Widget HomeRss: new widget for Forge home page to display RSS flow (TrivialDev)
 

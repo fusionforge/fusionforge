@@ -48,6 +48,7 @@ require_once $gfcommon.'widget/Widget_ProjectLatestNews.class.php';
 require_once $gfcommon.'widget/Widget_ProjectPublicAreas.class.php';
 require_once $gfcommon.'widget/Widget_ProjectRss.class.php';
 require_once $gfcommon.'widget/Widget_ProjectLatestCommits.class.php';
+require_once $gfcommon.'widget/Widget_ProjectLatestArtifacts.class.php';
 //require_once $gfcommon.'widget/Widget_ProjectTwitterFollow.class.php';
 //require_once $gfcommon.'widget/Widget_ProjectWikiPage.class.php';
 require_once $gfcommon.'widget/Widget_ProjectScmStats.class.php';
@@ -289,6 +290,9 @@ require_once $gfcommon.'widget/Widget_TrackerSummary.class.php';
 			case 'projectlatestcommits':
 				$o = new Widget_ProjectLatestCommits();
 				break;
+			case 'projectlatestartifacts':
+				$o = new Widget_ProjectLatestArtifacts();
+				break;
 			case 'trackercontent':
 				$o = new Widget_TrackerContent();
 				break;
@@ -336,7 +340,7 @@ require_once $gfcommon.'widget/Widget_TrackerSummary.class.php';
 				// project home widgets
 				$widgets = array('projectdescription', 'projectmembers', 'projectinfo', 'projectscmstats',
 						'projectlatestfilereleases', 'projectlatestdocuments', 'projectlatestnews', 'projectpublicareas', //'projectwikipage' //not yet
-						'projectlatestcommits', 'projecttwitterfollow', 'projectrss', 'projectdocumentsactivity',
+						'projectlatestcommits', 'projecttwitterfollow', 'projectrss', 'projectdocumentsactivity', 'projectlatestartifacts'
 						);
 				break;
 			case WidgetLayoutManager::OWNER_TYPE_HOME:
