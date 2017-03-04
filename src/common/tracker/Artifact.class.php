@@ -862,7 +862,7 @@ class Artifact extends FFObject {
 	 * @access	private
 	 * @return	boolean	success.
 	 */
-	function addHistory($field_name,$old_value, $importData = array()) {
+	function addHistory($field_name, $old_value, $importData = array()) {
 		if (array_key_exists('user', $importData)){
 			$user = $importData['user'];
 		} else {
@@ -878,7 +878,7 @@ class Artifact extends FFObject {
 					       $field_name,
 					       $old_value,
 					       $user,
-					       $time)) ;
+					       $time));
 	}
 
 	/**
@@ -1285,7 +1285,7 @@ class Artifact extends FFObject {
 	 * @return	bool	true on success / false on failure
 	 */
 	function updateLastModified($importData = array()) {
-		if (array_key_exists('time',$importData)){
+		if (array_key_exists('time', $importData)){
 			$time = $importData['time'];
 		} else {
 			$time = time();
