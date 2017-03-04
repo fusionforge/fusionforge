@@ -7,7 +7,7 @@
  * Copyright 2009, Roland Mas
  * Copyright (C) 2009-2013 Alain Peyrat, Alcatel-Lucent
  * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
- * Copyright 2014-2016, Franck Villaume - TrivialDev
+ * Copyright 2014-2017, Franck Villaume - TrivialDev
  * Copyright 2016-2017, Stéphane-Eymeric Bredthauer - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -654,9 +654,9 @@ class Artifact extends FFObject {
 	}
 
 	/**
-	 * getMonitorIds - array of email addresses monitoring this Artifact.
+	 * getMonitorIds - get user ids monitoring this Artifact.
 	 *
-	 * @return	array of email addresses monitoring this Artifact.
+	 * @return	array of user ids monitoring this Artifact.
 	 */
 	function getMonitorIds() {
 		$MonitorElementObject = new MonitorElement('artifact');
