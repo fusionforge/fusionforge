@@ -64,7 +64,7 @@ class Widget_ProjectLatestArtifacts extends Widget {
 		foreach ($ats as $at) {
 			$atids[] = $at->getID();
 		}
-		$artifacts = db_query_params('SELECT * FROM artifact_vw WHERE group_artifact_id = ANY ($1) ORDER BY last_modified_date, artifact_id', array(db_int_array_to_any_clause($atids)), self::NB_ARTIFACTS_TO_DISPLAY);
+		$artifacts = db_query_params('SELECT * FROM artifact_vw WHERE group_artifact_id = ANY ($1) ORDER BY last_modified_date DESC, artifact_id', array(db_int_array_to_any_clause($atids)), self::NB_ARTIFACTS_TO_DISPLAY);
 		if (db_numrows($artifacts) > 0) {
 			html_use_tablesorter();
 			$html .= $HTML->getJavascripts();
