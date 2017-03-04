@@ -35,7 +35,7 @@ class DocumentReviewFactory extends FFError {
 	/**
 	 * @var array	$reviews Reviews of this document
 	 */
-	var $reviews;
+	var $reviews = array();
 
 	/**
 	 * @param	$Document
