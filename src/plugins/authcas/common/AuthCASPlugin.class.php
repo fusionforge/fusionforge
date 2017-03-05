@@ -1,5 +1,6 @@
 <?php
-/** External authentication via CAS for FusionForge
+/**
+ * External authentication via CAS for FusionForge
  * Copyright 2007, Benoit Lavenier <benoit.lavenier@ifremer.fr>
  * Copyright 2011, Roland Mas
  *
@@ -28,7 +29,6 @@ require_once $gfcommon.'include/AuthPlugin.class.php';
  */
 class AuthCASPlugin extends ForgeAuthPlugin {
 	function __construct() {
-		global $gfconfig;
 		parent::__construct();
 		$this->name = "authcas";
 		$this->text = _("CAS authentication");
@@ -99,7 +99,7 @@ server.");
 		$params['transparent_redirect_urls'][$this->name] = util_make_url('/plugins/'.$this->name.'/post-login.php?return_to='.htmlspecialchars(stripslashes($return_to)).'&login=1');
 	}
 
-    /**
+	/**
 	 * Is there a valid session?
 	 * @param unknown_type $params
 	 */
@@ -126,7 +126,6 @@ server.");
 			if ($this->isSufficient()) {
 				$this->saved_user = $user;
 				$params['results'][$this->name] = FORGE_AUTH_AUTHORITATIVE_ACCEPT;
-
 			} else {
 				$params['results'][$this->name] = FORGE_AUTH_NOT_AUTHORITATIVE;
 			}

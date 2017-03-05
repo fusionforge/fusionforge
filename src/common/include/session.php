@@ -188,7 +188,7 @@ function session_logout() {
  *
  */
 function session_login_valid($loginname, $passwd, $allowpending = 0) {
-	global $feedback, $error_msg, $warning_msg;
+	global $feedback, $warning_msg;
 
 	if (!$loginname || !$passwd) {
 		$warning_msg = _('Missing Password Or User Name');
@@ -236,7 +236,7 @@ function session_login_valid_dbonly($loginname, $passwd, $allowpending) {
 		$userstatus = $usr['status'] ;
 
 		if ($usr['unix_pw'] !== crypt($passwd, $usr['unix_pw'])) {
-			// (crypt) unix_pw does not patch
+			// (crypt) unix_pw does not match
 			$error_msg = _('Invalid Password Or User Name');
 			return false;
 		}

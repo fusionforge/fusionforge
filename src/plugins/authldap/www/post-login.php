@@ -30,7 +30,7 @@ Header( "Cache-Control: must-revalidate");
 
 require_once '../../../www/env.inc.php';
 require_once $gfcommon.'include/pre.php';
-require_once '../../../www/include/login-form.php';
+require_once $gfwww.'include/login-form.php';
 
 global $error_msg, $warning_msg;
 
@@ -41,24 +41,6 @@ $login = getStringFromRequest('login');
 $form_loginname = getStringFromRequest('form_loginname');
 $form_pw = getStringFromRequest('form_pw');
 $triggered = getIntFromRequest('triggered');
-
-//
-//	Validate return_to
-//
-if ($return_to) {
-	$tmpreturn=explode('?',$return_to);
-	$rtpath = $tmpreturn[0] ;
-
-	if (@is_file(forge_get_config('url_root').$rtpath)
-	    || @is_dir(forge_get_config('url_root').$rtpath)
-	    || (strpos($rtpath,'/projects') == 0)
-	    || (strpos($rtpath,'/plugins/mediawiki') == 0)) {
-		$newrt = $return_to ;
-	} else {
-		$newrt = '/' ;
-	}
-	$return_to = $newrt ;
-}
 
 if (forge_get_config('use_ssl') && !session_issecure()) {
 	//force use of SSL for login
@@ -82,6 +64,7 @@ if ($login) {
 			$plugin->startSession($form_loginname);
 		}
 		if ($return_to) {
+			validate_return_to($return_to);
 			session_redirect($return_to);
 		} else {
 			session_redirect('/my');
