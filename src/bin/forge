@@ -259,7 +259,7 @@ class CliActions {
 						$groupDump['forums'] = array();
 					}
 					if ($group->usesFRS()) {
-						$groupDump['frs'] = array();
+						$groupDump['frs'] = $this->frsDump($group_id, array('setup', 'return'));
 					}
 					if ($group->usesNews()) {
 						$groupDump['news'] = array();
@@ -372,6 +372,43 @@ class CliActions {
 		ksort($docmanDump);
 		$this->print_result($docmanDump, $params);
 		return $docmanDump;
+	}
+
+	function frsDump($group_id, $params = array('setup', 'json')) {
+		$frsDump = array();
+		$group = group_get_object($group_id);
+		if ($group && is_object($group) && !$group->isError()) {
+			if ($group->usesFRS()) {
+				$frsp = new FRSPackageFactory($group);
+				if ($frsp && is_object($frsp) && !$frsp->isError()) {
+					switch ($params[0]) {
+						case 'all':
+							$frsDump['setup'] = $frsp->getFRSs();
+						case 'data':
+							break;
+						case 'setup':
+							$frss = $frsp->getFRSs();
+							foreach ($frss as $frs) {
+								unset($frs->Group);
+								$frsDump['setup'][] = $frs;
+							}
+							break;
+						default:
+							$frsDump['error'][] = _('Unknown function');
+							break;
+					}
+				} else {
+					$docmanDump['error'][] = _('Unable to get document manager for group id')._(': ').$group_id;
+				}
+			} else {
+				$frsDump['error'][] = _('FRS not enabled for group id')._(': ').$group_id;
+			}
+		} else {
+			$frsDump['error'][] = _('Unable to get group id')._(': ').$group_id;
+		}
+		ksort($frsDump);
+		$this->print_result($frsDump, $params);
+		return $frsDump;
 	}
 
 	function print_result($arrayDump, $params) {
