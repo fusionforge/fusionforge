@@ -29,7 +29,6 @@ require_once $gfcommon.'include/AuthPlugin.class.php';
  */
 class AuthHTTPDPlugin extends ForgeAuthPlugin {
 	function __construct() {
-		global $gfconfig;
 		parent::__construct();
 		$this->name = "authhttpd";
 		$this->text = _("HTTPD authentication");
@@ -52,8 +51,8 @@ FusionForge, for instance where Kerberos is used.");
 
 	/**
 	 * Display a form to input credentials
-	 * @param unknown_type $params
-	 * @return boolean
+	 * @param	array	$params
+	 * @return	boolean
 	 */
 	function displayAuthForm(&$params) {
 		global $HTML;
@@ -76,8 +75,8 @@ FusionForge, for instance where Kerberos is used.");
 	}
 
 	/**
-	 * Is there a valid session?
-	 * @param unknown_type $params
+	 * checkAuthSession - Is there a valid session?
+	 * @param	array	$params
 	 */
 	function checkAuthSession(&$params) {
 		$this->saved_user = NULL;
@@ -112,8 +111,8 @@ FusionForge, for instance where Kerberos is used.");
 	}
 
 	/**
-	 * What FFUser is logged in?
-	 * @param unknown_type $params
+	 * fetchAuthUser - What FFUser is logged in?
+	 * @param	array	$params
 	 */
 	function fetchAuthUser(&$params) {
 		if ($this->saved_user && $this->isSufficient()) {

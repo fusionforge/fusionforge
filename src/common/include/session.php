@@ -337,7 +337,7 @@ function session_issecure() {
  *	@param	string	$name		Name of cookie
  *	@param	string	$value		Value of cookie
  *	@param	string	$domain		Domain scope (default '')
- *	@param	int		$expiration	Expiration time in UNIX seconds (default 0)
+ *	@param	int	$expiration	Expiration time in UNIX seconds (default 0)
  */
 function session_set_cookie($name, $value, $domain='', $expiration=0) {
 	session_cookie($name, $value, $domain, $expiration);
