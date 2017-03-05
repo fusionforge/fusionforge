@@ -48,6 +48,7 @@
  * ALONE BASIS."
  */
 require_once $gfcommon.'include/FFObject.class.php';
+require_once $gfcommon.'tracker/ArtifactFile.class.php';
 require_once $gfcommon.'tracker/ArtifactMessage.class.php';
 require_once $gfcommon.'tracker/ArtifactExtraField.class.php';
 require_once $gfcommon.'tracker/ArtifactWorkflow.class.php';
