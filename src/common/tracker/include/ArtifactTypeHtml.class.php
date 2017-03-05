@@ -435,7 +435,7 @@ class ArtifactTypeHtml extends ArtifactType {
 		}
 	}
 
-	function renderRelatedTasks($group, $ah) {
+	function renderRelatedTasks($group, $ah, $formid = null) {
 		global $HTML;
 		if (!$group->usesPM()) {
 			return;
@@ -480,7 +480,7 @@ class ArtifactTypeHtml extends ArtifactType {
 							<td>'.$startdate.'</td>
 							<td>'.$enddate.'</td>
 							<td>'.$status.' ('.$taskinfo['percent_complete'].'%)</td>'.
-						(($is_admin) ? '<td><input type="checkbox" name="remlink[]" value="'.$taskid.'" /></td>' : '').
+						(($is_admin) ? '<td><input type="checkbox" '.(($formid) ? 'form="'.$formid.'"' : '').' name="remlink[]" value="'.$taskid.'" /></td>' : '').
 						'</tr>';
 				}
 			}

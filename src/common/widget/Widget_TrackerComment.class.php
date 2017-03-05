@@ -128,7 +128,7 @@ class Widget_TrackerComment extends Widget {
 			$tabberContent .= html_e('div', array('id' => 'tabber-comments', 'class' => 'tabbertab'), $divContent.$ah->showMessages());
 			if ($group->usesPM()) {
 				$tabberContent .= html_e('div', array('id' => 'tabber-tasks', 'class' => 'tabbertab'),
-							$ath->renderRelatedTasks($group, $ah).
+							$ath->renderRelatedTasks($group, $ah, 'trackerform').
 							util_make_link('/tracker/?func=taskmgr&group_id='.$group_id.'&atid='.$atid.'&aid='.$aid, html_image('ic/taskman20w.png', 20, 20).'<strong>'._('Build Task Relation').'</strong>'));
 			}
 		}
