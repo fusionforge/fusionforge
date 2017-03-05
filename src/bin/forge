@@ -150,7 +150,7 @@ class CliActions {
 					$artifactDump['history'] = array();
 					$hist = $artf->getHistory();
 					if (db_numrows($hist) > 0) {
-						while ($arr = db_fetch_array($hist, null, PGSQL_ASSOC)) {
+						while ($arr = db_fetch_array($hist, PGSQL_ASSOC)) {
 							$artifactDump['history'][] = $arr;
 						}
 					}
@@ -161,18 +161,24 @@ class CliActions {
 					$artifactDump['messages'] = array();
 					$messages = $artf->getMessages();
 					if (db_numrows($messages) > 0) {
-						while ($arr = db_fetch_array($messages, null, PGSQL_ASSOC)) {
-							$artifactDump['messages'] = $arr;
+						while ($arr = db_fetch_array($messages, PGSQL_ASSOC)) {
+							$artifactDump['messages'][] = $arr;
 						}
 					}
-					$artifactDump['files'] = $artf->getFiles();
-					$artifactDump['tasks'] = array();
+					$files = $artf->getFiles();
+					foreach ($files as $file) {
+						unset($file->Artifact);
+						$artifactDump['artifact']['files'][] = (array)$file;
+					}
+					$artifactDump['artifact']['relatedtasks'] = array();
 					$tasks = $artf->getRelatedTasks();
 					if (db_numrows($tasks) > 0) {
-						while ($arr = db_fetch_array($tasks, null, PGSQL_ASSOC)) {
-							$artifactDump['tasks'][] = $arr;
+						while ($arr = db_fetch_array($tasks, PGSQL_ASSOC)) {
+							$artifactDump['artifact']['relatedtasks'][] = $arr;
 						}
 					}
+					$artifactDump['artifact']['votes'] = $artf->getVotes();
+					$artifactDump['artifact']['extra_field_data'] = $artf->getExtraFieldDataText();
 					break;
 				default:
 					$artifactDump['error'][] = _('Unknown function');
