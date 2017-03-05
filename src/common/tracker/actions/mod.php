@@ -274,7 +274,7 @@ if ($group->usesPM()) {
 ?>
 <div id="tabber-tasks" class="tabbertab">
 	<?php
-		$ath->renderRelatedTasks($group, $ah);
+		echo $ath->renderRelatedTasks($group, $ah);
 	?>
 </div>
 <?php }

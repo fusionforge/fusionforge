@@ -451,7 +451,6 @@ class ArtifactTypeHtml extends ArtifactType {
 		} else {
 			$is_admin=false;
 		}
-
 		$totalPercentage = 0;
 		if ($taskcount > 0) {
 			$title_arr = array();
@@ -464,7 +463,7 @@ class ArtifactTypeHtml extends ArtifactType {
 			$return .= $HTML->listTableTop($title_arr);
 
 			for ($i = 0; $i < $taskcount; $i++) {
-				$taskinfo  = db_fetch_array($ah->relatedtasks, $i);
+				$taskinfo  = db_fetch_array_by_row($ah->relatedtasks, $i);
 				$totalPercentage += $taskinfo['percent_complete'];
 				$taskid    = $taskinfo['project_task_id'];
 				$projectid = $taskinfo['group_project_id'];
@@ -473,9 +472,9 @@ class ArtifactTypeHtml extends ArtifactType {
 					$summary   = util_unconvert_htmlspecialchars($taskinfo['summary']);
 					$startdate = date(_('Y-m-d H:i'), $taskinfo['start_date']);
 					$enddate   = date(_('Y-m-d H:i'), $taskinfo['end_date']);
-					$status   = $taskinfo['status_name'];
-					$return .=  '<tr>
-							<td>'.util_make_link('/pm/task.php?func=detailtask&project_task_id='.$taskid.'&group_id='.$groupid.'&group_project_id='.$projectid, '[T'.$taskid.'] '.$summary).'</td>
+					$status    = $taskinfo['status_name'];
+					$return   .=  '<tr>
+							<td>'.util_make_link('/pm/t_follow.php/'.$taskid, '[T'.$taskid.'] '.$summary).'</td>
 							<td><div class="percentbar" style="width: 100px;">
 								<div style="width:'.round($taskinfo['percent_complete']).'px;"></div></div></td>
 							<td>'.$startdate.'</td>
