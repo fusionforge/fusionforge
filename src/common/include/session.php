@@ -198,16 +198,28 @@ function session_login_valid($loginname, $passwd, $allowpending = 0) {
 	$hook_params = array();
 	$hook_params['loginname'] = $loginname;
 	$hook_params['passwd'] = $passwd;
-	$result = plugin_hook("session_before_login", $hook_params);
+	$hook_params['results'] = array();
+	plugin_hook_by_reference("session_login_valid", $hook_params);
+	$plugin_session_login_valid = false;
 
 	// Refuse login if not all the plugins are ok.
-	if (!$result) {
-		if (!util_ifsetor($feedback)) {
-			$warning_msg = _('Invalid Password Or User Name');
+	foreach ($params['results'] as $p => $r) {
+		$plugin_session_login_valid = true;
+		if ($r == FORGE_AUTH_AUTHORITATIVE_ACCEPT) {
+			$seen_yes = true;
+		} elseif ($r == FORGE_AUTH_AUTHORITATIVE_REJECT) {
+			$seen_no = true;
 		}
+	}
+	if ($plugin_session_login_valid) {
+		if ($seen_yes && !$seen_no) {
+			return true;
+		}
+		$warning_msg = _('Invalid Password Or User Name');
 		return false;
 	}
 
+	//fallback => rely on database.
 	return session_login_valid_dbonly($loginname, $passwd, $allowpending);
 }
 

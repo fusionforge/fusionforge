@@ -49,6 +49,7 @@ into the FusionForge database.");
 		$this->_addHook("sync_account_info");
 		$this->_addHook("close_auth_session");
 		$this->_addHook("refresh_auth_session");
+		$this->_addHook('session_login_valid');
 
 		$this->ldap_conn = false;
 		$this->saved_login = '';
@@ -269,6 +270,11 @@ into the FusionForge database.");
 		$info = ldap_get_entries($this->ldap_conn,$res);
 		$data = $info[0];
 		return $data;
+	}
+
+	function session_login_valid($params) {
+		$params['results'][] = $this->checkLDAPCredentials($params['loginname'], $params['passwd']);
+		return true;
 	}
 
 	function checkLDAPCredentials($loginname, $passwd) {

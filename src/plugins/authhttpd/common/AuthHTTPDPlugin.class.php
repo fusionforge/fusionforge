@@ -40,6 +40,7 @@ FusionForge, for instance where Kerberos is used.");
 		$this->_addHook("check_auth_session");
 		$this->_addHook("fetch_authenticated_user");
 		$this->_addHook("close_auth_session");
+		$this->_addHook('session_valid_login');
 
 		$this->saved_login = '';
 		$this->saved_user = NULL;
@@ -72,6 +73,25 @@ FusionForge, for instance where Kerberos is used.");
 		$params['html_snippets'][$this->name] = $result;
 
 		$params['transparent_redirect_urls'][$this->name] = util_make_url('/plugins/'.$this->name.'/post-login.php?return_to='.htmlspecialchars(stripslashes($return_to)));
+	}
+
+
+	function session_login_valid($params) {
+		$user = user_get_object_by_name($params['loginname']);
+		if ($user) {
+			if ($this->isSufficient()) {
+				$params['results'][$this->name] = FORGE_AUTH_AUTHORITATIVE_ACCEPT;
+			} else {
+				$params['results'][$this->name] = FORGE_AUTH_NOT_AUTHORITATIVE;
+			}
+		} else {
+			if ($this->isRequired()) {
+				$params['results'][$this->name] = FORGE_AUTH_AUTHORITATIVE_REJECT;
+			} else {
+				$params['results'][$this->name] = FORGE_AUTH_NOT_AUTHORITATIVE;
+			}
+		}
+		return true;
 	}
 
 	/**
