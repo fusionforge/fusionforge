@@ -122,7 +122,7 @@ if ($group_id && $atid) {
 			'updownorder_opt', 'post_changes_order', 'post_changes_alphaorder', 'post_changes_default', 'copy_opt', 'add_canned',
 			'clone_tracker', 'edittemplate',
 			'update_canned', 'delete_canned', 'update_box', 'update_opt', 'delete', 'delete_opt', 'deleteextrafield','update_type',
-			'effort_units'
+			'effort_units', 'edit_formula'
 		);
 		$action = '';
 		foreach ($actions as $a) {
@@ -241,6 +241,10 @@ if ($group_id && $atid) {
 	} elseif ($action == 'effort_units') {
 
 		include $gfcommon.'tracker/actions/effort_units.php';
+
+	} elseif ($action == 'edit_formula') {
+
+			include $gfcommon.'tracker/views/form-editformula.php';
 
 	} else {
 

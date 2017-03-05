@@ -93,7 +93,8 @@ if (!$ac || !is_object($ac)) {
 
 		echo html_ao('p');
 		echo html_e('label', array('for'=>'formula'), html_e('strong', array(), _('Formula')._(':')).html_e('br'));
-		echo html_e('textarea', array('type'=>'text', 'id'=>'formula', 'name'=>'formula', 'rows'=>4, 'cols'=>50), $ao->getFormula(), false);
+		echo html_e('textarea', array('type'=>'text', 'id'=>'formula', 'name'=>'formula', 'rows'=>4, 'cols'=>50), $ao->getFormula(), false).html_e('br');;
+		echo html_e('button', array('onclick'=>'location.href="/tracker/admin/?edit_formula=1&group_id='.$group_id.'&id='.$id.'&atid='.$ath->getID().'&boxid='.$boxid.'"; return false;'),_('Edit formula'));
 		echo html_ac(html_ap()-1);
 
 		echo $HTML->warning_msg(_('It is not recommended that you change the custom field name because other things are dependent upon it. When you change the custom field name, all related items will be changed to the new name.'));

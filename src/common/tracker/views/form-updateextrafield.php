@@ -200,7 +200,10 @@ if (!$ac || !is_object($ac)) {
 	if (in_array($efType, array(ARTIFACT_EXTRAFIELDTYPE_TEXT, ARTIFACT_EXTRAFIELDTYPE_INTEGER, ARTIFACT_EXTRAFIELDTYPE_TEXTAREA))) {
 		echo html_ao('p');
 		echo html_e('label', array('for'=>'formula'), _('Formula to calculate field value'));
+		echo html_e('br');
 		echo html_e('textarea', array('type'=>'text', 'name'=>'formula', 'rows'=>4, 'cols'=>50), $ac->getFormula(), false);
+		echo html_e('br');
+		echo html_e('button', array('onclick'=>'location.href="/tracker/admin/?edit_formula=1&group_id='.$group_id.'&id='.$id.'&atid='.$ath->getID().'"; return false;'),_('Edit formula'));
 		echo html_ac(html_ap() - 1);
 	} else {
 		echo html_e('input', array('type'=>'hidden', 'name'=>'formula', 'value'=>''));

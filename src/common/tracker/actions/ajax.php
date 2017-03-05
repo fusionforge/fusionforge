@@ -22,7 +22,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfwww.'include/expression.php';
+require_once $gfcommon.'tracker/ArtifactExpression.class.php';
 
 global $group;
 global $atid;
@@ -70,27 +70,37 @@ function get_formulas_results($group, $atid, $extra_fields=array()){
 		exit();
 	}
 
-	$expr = new Expression();
-	$expr->suppress_errors = true;
+	$expr = new ArtifactExpression();
 
 	// Variable assignment
 	$extraFields = $at->getExtraFields();
 	foreach ($extraFields as $extraField) {
 		if (isset($extra_fields[$extraField['extra_field_id']])) {
 			$varAss = false;
-			if ($extraField['field_type']==ARTIFACT_EXTRAFIELDTYPE_INTEGER) {
+			$type = $extraField['field_type'];
+			if ($type==ARTIFACT_EXTRAFIELDTYPE_INTEGER) {
 				$varAss = $extraField['alias'].'='.$extra_fields[$extraField['extra_field_id']];
-			} elseif ($extraField['field_type']==ARTIFACT_EXTRAFIELDTYPE_TEXT) {
-				$varAss = $extraField['alias'].'="'.$extra_fields[$extraField['extra_field_id']].'"';
-			} elseif ($extraField['field_type']==ARTIFACT_EXTRAFIELDTYPE_SELECT) {
+			} elseif ($type==ARTIFACT_EXTRAFIELDTYPE_TEXT ||
+					$type==ARTIFACT_EXTRAFIELDTYPE_TEXTAREA ||
+					$type==ARTIFACT_EXTRAFIELDTYPE_RELATION) {
+				$varAss = $extraField['alias'].'="'.addslashes($extra_fields[$extraField['extra_field_id']]).'"';
+			} elseif (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_SINGLECHOICE))) {
 				$ef = new ArtifactExtraField($at, $extraField['extra_field_id']);
 				$efe = new ArtifactExtraFieldElement($ef,$extra_fields[$extraField['extra_field_id']] );
-				$varAss =  $extraField['alias'].'="'.$efe->getName().'"';
+				$varAss =  $extraField['alias'].'="'.addslashes($efe->getName()).'"';
+			} elseif (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_MULTICHOICE))) {
+				$var = array();
+				$ef = new ArtifactExtraField($at, $extraField['extra_field_id']);
+				foreach ($extra_fields[$extraField['extra_field_id']] as $element_id) {
+					$efe = new ArtifactExtraFieldElement($ef,$element_id);
+					$var[]=  $efe->getName();
+				}
+				$varAss =  $extraField['alias'].'=\''. json_encode($var).'\'';
 			}
 			if ($varAss) {
 				$expr->evaluate($varAss);
-				if ($expr->last_error) {
-					$ret['message'] = $expr->last_error;
+				if ($expr->isError()) {
+					$ret['message'] = $expr->getErrorMessage()._(':').' '.$varAss;
 					return json_encode($ret);
 					exit();
 				}
@@ -117,12 +127,12 @@ function get_formulas_results($group, $atid, $extra_fields=array()){
 			if (in_array($extraField['field_type'], unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_VALUE))) {
 				if (!empty($formula)) {
 					$value = $expr->evaluate($formula);
-					if ($expr->last_error) {
-						$ret['message'] = $expr->last_error;
+					if ($expr->isError()) {
+						$ret['message'] = $expr->getErrorMessage();
 						return json_encode($ret);
 						exit();
 					}
-					$result [] = array( 'id'=>$extraField['extra_field_id'], 'value'=>$value, 'error'=>$expr->last_error );
+					$result [] = array( 'id'=>$extraField['extra_field_id'], 'value'=>$value, 'error'=>($expr->isError()?$expr->getErrorMessage():null));
 				}
 			} elseif (in_array($extraField['field_type'], unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_CHOICE))) {
 				if (is_array($formula)) {
@@ -130,8 +140,8 @@ function get_formulas_results($group, $atid, $extra_fields=array()){
 					$valueArr = array();
 					foreach ($formulas as $key=>$formula) {
 						$value = $expr->evaluate($formula);
-						if ($expr->last_error) {
-							$ret['message'] = $expr->last_error;
+						if ($expr->isError()) {
+							$ret['message'] = $expr->getErrorMessage();
 							return json_encode($ret);
 							exit();
 						}
@@ -142,7 +152,7 @@ function get_formulas_results($group, $atid, $extra_fields=array()){
 							}
 						}
 					}
-					$result [] = array( 'id'=>$extraField['extra_field_id'], 'value'=>$valueArr, 'error'=>$expr->last_error);
+					$result [] = array( 'id'=>$extraField['extra_field_id'], 'value'=>$valueArr, 'error'=>($expr->isError()?$expr->getErrorMessage():null));
 				}
 			}
 		}

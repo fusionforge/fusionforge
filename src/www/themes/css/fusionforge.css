@@ -1115,3 +1115,8 @@ table.id_sortable th.headerSortDown span {
 input[readonly], select[readonly] {
 	background-color:#ebebeb;
 }
+
+span.insert {
+	cursor:pointer;
+	color:green;
+}
