@@ -613,7 +613,7 @@ class Document extends FFObject {
 	 * @return	array of user ids monitoring this Artifact.
 	 */
 	function getMonitorIds() {
-		$MonitorElementObject = new MonitorElement('artifact');
+		$MonitorElementObject = new MonitorElement('docdata');
 		return $MonitorElementObject->getMonitorUsersIdsInArray($this->getID());
 	}
 

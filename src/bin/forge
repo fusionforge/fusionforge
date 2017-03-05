@@ -321,7 +321,7 @@ class CliActions {
 					$documentDump['versions'] = $dvf->getVersions();
 					$serialIDs = $dvf->getSerialIDs();
 					$drf = new DocumentReviewFactory($doc);
-					$documentDump['reviews'] = $drf->getReviews();
+					$documentDump['reviews'] = $drf->getReviews($serialIDs);
 				case 'latest':
 					$documentDump['document'] = (array)$doc;
 					unset($documentDump['document']['Group']);
