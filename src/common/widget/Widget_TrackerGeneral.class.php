@@ -101,6 +101,10 @@ class Widget_TrackerGeneral extends Widget {
 				$cells[][] = date(_('Y-m-d H:i'), $close_date);
 				$return .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i++, true)), $cells);
 			}
+			$cells = array();
+			$cells[][] = html_e('strong', array(), util_make_link($ah->getPermalink(), _('Permalink'))._(':'));
+			$cells[][] = util_make_url($ah->getPermalink());
+			$return .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i++, true)), $cells);
 			$return .= $HTML->listTableBottom();
 		}
 		return $return;
