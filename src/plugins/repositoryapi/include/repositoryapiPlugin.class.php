@@ -3,7 +3,6 @@
 /**
  * repositoryapiPlugin Class
  *
- *
  * Copyright 2016-2017, Roland Mas
  * https://fusionforge.org
  *
@@ -101,6 +100,18 @@ class repositoryapiPlugin extends Plugin {
 			array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:RepositoryAPIActivity[]')),
 			'tns:RepositoryAPIActivity');
                
+		$server->wsdl->addComplexType(
+			'RepositoryAPIActivityReturn',
+			'complexType',
+			'struct',
+			'sequence',
+			'',
+			array(
+				'effective_t0'=>'xsd:int',
+				'effective_t1'=>'xsd:int',
+				'activities' => array('name'=>'activities', 'type' => 'tns:ArrayOfRepositoryAPIActivity'),
+				)
+			);
 		$server->register(
 			'repositoryapi_repositoryActivity',
 			array('session_ser'=>'xsd:string',
@@ -109,7 +120,7 @@ class repositoryapiPlugin extends Plugin {
 				  'limit'=>'xsd:int',
 				  'offset'=>'xsd:int',
 				),
-			array('return'=>'tns:ArrayOfRepositoryAPIActivity'),
+			array('return'=>'tns:RepositoryAPIActivityReturn'),
 			$uri,
                        $uri.'#repositoryapi_repositoryActivity','rpc','encoded');
 
@@ -212,7 +223,13 @@ function &repositoryapi_repositoryActivity($session_ser, $t0, $t1, $limit=0, $of
 		}
 	}
 
-	return $results;
+	$return = array(
+		'effective_t0' => $t0,
+		'effective_t1' => $t1,
+		'activities' => $results,
+		);
+
+	return $return;
 }
 
 // Local Variables:

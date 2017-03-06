@@ -1,8 +1,6 @@
 <?php
 /**
- * Copyright 2011, Roland Mas
- * Copyright 2013, Franck Villaume - TrivialDev
- * Copyright (C) 2015  Inria (Sylvain Beucler)
+ * Copyright 2016-2017, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -195,18 +193,18 @@ class RepositoryAPI extends FForge_SeleniumTestCase
 		// Get activities for repositories		
 		$response = $soapclient->repositoryapi_repositoryActivity($session,$t0,time(),0,0);
 		$this->assertNotEquals(NULL,$response);
-		$this->assertEquals(5,count($response));
+		$this->assertEquals(5,count($response->activities));
 		// Check limit/offset
 		$response = $soapclient->repositoryapi_repositoryActivity($session,$t0,time(),2,0);
 		$this->assertNotEquals(NULL,$response);
-		$this->assertEquals(2,count($response));
+		$this->assertEquals(2,count($response->activities));
 		$response = $soapclient->repositoryapi_repositoryActivity($session,$t0,time(),0,2);
 		$this->assertNotEquals(NULL,$response);
-		$this->assertEquals(3,count($response));
+		$this->assertEquals(3,count($response->activities));
 		// Check time range
 		sleep(15);
 		$response = $soapclient->repositoryapi_repositoryActivity($session,time()-10,time(),0,0);
 		$this->assertNotEquals(NULL,$response);
-		$this->assertEquals(0,count($response));
+		$this->assertEquals(0,count($response->activities));
 	}
 }
