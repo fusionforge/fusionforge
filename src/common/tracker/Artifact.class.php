@@ -806,17 +806,17 @@ class Artifact extends FFObject {
 			$sendNotice = true;
 		}
 
-		if(array_key_exists('user', $importData)){
-				$user_id = $importData['user'];
-				$user = user_get_object($user_id);
-				if (!$user || !is_object($user)) {
-					$this->setError('Error: Logged In User But Could Not Get User Object');
-					return false;
-				}
-				$by=$user->getEmail();
+		if(array_key_exists('user', $importData)) {
+			$user_id = $importData['user'];
+			$user = user_get_object($user_id);
+			if (!$user || !is_object($user)) {
+				$this->setError('Error: Logged In User But Could Not Get User Object');
+				return false;
+			}
+			$by=$user->getEmail();
 		} else {
 			if (session_loggedin()) {
-				$user_id=user_getid();
+				$user_id = user_getid();
 				$user = user_get_object($user_id);
 				if (!$user || !is_object($user)) {
 					$this->setError('Error: Logged In User But Could Not Get User Object');
@@ -824,9 +824,9 @@ class Artifact extends FFObject {
 				}
 				//	we'll store this email even though it will likely never be used -
 				//	since we have their correct user_id, we can join the USERS table to get email
-				$by=$user->getEmail();
+				$by = $user->getEmail();
 			} else {
-				$user_id=100;
+				$user_id = 100;
 				if (!$by || !validate_email($by)) {
 					$this->setMissingParamsError();
 					return false;
@@ -1169,7 +1169,7 @@ class Artifact extends FFObject {
 			if ($status_id != 1) {
 				$qpa = db_construct_qpa($qpa, ' close_date=$1,', array($time));
 			} else {
-			  $qpa = db_construct_qpa($qpa, ' close_date=$1,', array(0));
+				$qpa = db_construct_qpa($qpa, ' close_date=$1,', array(0));
 			}
 			$this->addHistory('close_date', $this->getCloseDate(), $importData);
 		}
@@ -1383,7 +1383,7 @@ class Artifact extends FFObject {
 							$efid));
 					$from_status = (db_numrows($res)>0) ? db_result($res,0,'field_data') : 100;
 					$to_status = $extra_fields[$efid];
-						if ($from_status != $to_status) {
+					if ($from_status != $to_status) {
 						$status_changed = true;
 						$atw = new ArtifactWorkflow($this->ArtifactType, $efid);
 						if (!$atw->checkEvent($from_status, $to_status)) {
@@ -1996,11 +1996,11 @@ class Artifact extends FFObject {
 		return (db_numrows($res) == 1);
 	}
 
-       /**
-        * getVotes - get number of valid cast and potential votes
-        *
-        * @return	array	(votes, voters, percent)
-        */
+	/**
+	 * getVotes - get number of valid cast and potential votes
+	 *
+	 * @return	array	(votes, voters, percent)
+	 */
 	function getVotes() {
 		if ($this->votes !== false) {
 			return $this->votes;
@@ -2041,9 +2041,9 @@ class Artifact extends FFObject {
 					AND (field_data = $1 OR field_data LIKE $2 OR field_data LIKE $3 OR field_data LIKE $4)
 					ORDER BY artifact_group_list.group_id ASC, name ASC, artifact.artifact_id ASC',
 					array($aid,
-					      "$aid %",
-					      "% $aid %",
-					      "% $aid"));
+						"$aid %",
+						"% $aid %",
+						"% $aid"));
 		if (db_numrows($res)>0) {
 			return true;
 		}
@@ -2147,7 +2147,7 @@ class ArtifactComparator {
 				case ARTIFACT_EXTRAFIELDTYPE_INTEGER:
 				case ARTIFACT_EXTRAFIELDTYPE_DATE:
 				case ARTIFACT_EXTRAFIELDTYPE_DATETIME:
-					$numecmp = $af-$bf;
+					$namecmp = $af-$bf;
 					break;
 				default:
 					$namecmp = strcoll ($af,$bf);
