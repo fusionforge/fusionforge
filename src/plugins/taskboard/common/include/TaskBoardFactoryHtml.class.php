@@ -24,7 +24,7 @@ require_once $gfplugins.'taskboard/common/TaskBoardFactory.class.php';
 class TaskBoardFactoryHtml extends TaskBoardFactory {
 	function header($params=array()) {
 		global $HTML;
-		
+
 		if (!forge_get_config('use_tracker')) {
 			exit_disabled();
 		}

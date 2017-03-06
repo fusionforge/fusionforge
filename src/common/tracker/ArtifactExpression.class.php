@@ -25,7 +25,7 @@ require_once $gfcommon.'include/FFError.class.php';
 require_once $gfwww.'include/expression.php';
 
 class ArtifactExpression extends FFError {
-	
+
 	private $expression;
 	private $arithmeticOperators = array (
 											array('=','Assignment','a = b'),
@@ -55,19 +55,19 @@ class ArtifactExpression extends FFError {
 	private $otherOperators = array(
 									array('?:','Conditional operator','a ? b : c')
 	);
-	
+
 	private $functionsDescription = array();
-	
+
 	public function __construct()
 	{
 		$this->functionsDescription = array('in_array'=>_('Test if a value is in an (json) array'));
-		
+
 		$this->expression = new Expression;
 		$this->expression->suppress_errors = true;
 		$this->expression->fb = array();
 		$this->expression->functions ['in_array'] = 'expr_in_array';
 	}
-	
+
 	public function evaluate($expression) {
 		$return = null;
 		$this->clearError();
@@ -83,21 +83,21 @@ class ArtifactExpression extends FFError {
 		}
 		return $return;
 	}
-	
+
 	public function getVariables() {
 		return $this->expression->vars();
 	}
-	
+
 	public function getFunctions () {
 		$builtInFunctions = $this->expression->fb;
 		$customFunctions = array_keys($this->expression->functions);
 		return array_merge($builtInFunctions, $customFunctions);
 	}
-	
+
 	public function getUserDefineFunctions () {
 		return array_keys($this->expression->f);
 	}
-	
+
 	public function getOperators() {
 		return array(
 						array(_('Arithmetic operators'), $this->arithmeticOperators),
@@ -106,12 +106,12 @@ class ArtifactExpression extends FFError {
 						array(_('Other operators'), $this->otherOperators)
 					);
 	}
-	
+
 	public function getFunctionDescription($function) {
 		return $this->functionsDescription[$function];
 	}
 }
 function expr_in_array($value, $jsonArray) {
 	$array = json_decode($jsonArray, true);
-	return in_array($value, $array);	
+	return in_array($value, $array);
 }

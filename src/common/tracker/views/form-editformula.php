@@ -91,7 +91,7 @@ if ($rows > 0) {
 		$cells[] = array($eftypes[$efarr[$i]['field_type']], 'class'=>'align-right');
 
 		//$id=str_replace('@','',$efarr[$i]['alias']);
-		
+
 				/*
 				 List of possible options for a user built Selection Box
 				 */
@@ -113,7 +113,7 @@ if ($rows > 0) {
 					}
 				}
 */
-		
+
 				$content = '';
 				if (!empty($elearray)) {
 					$optrows=count($elearray);
@@ -131,10 +131,10 @@ if ($rows > 0) {
 						}
 						$content .= html_e('br');
 					}
-				} 
-				
+				}
+
 				$cells[] = array($content, 'class'=>'align-right');
-				
+
 				echo $HTML->multiTableRow($row_attrs, $cells);
 	}
 	echo $HTML->listTableBottom();
