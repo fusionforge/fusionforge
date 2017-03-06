@@ -161,5 +161,4 @@ class Widget_ProjectLatestDocuments extends Widget {
 	function getDescription() {
 		return _('List the 5 most recent documents published by team project.');
 	}
-
 }

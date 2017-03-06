@@ -112,4 +112,3 @@ class Widget_ProjectLatestArtifacts extends Widget {
 		return $project->usesTracker();
 	}
 }
-
