@@ -364,8 +364,12 @@ EOS;
 			$i = 0;
 			if (is_object($ah)) {
 				$selected = $ah->getExtraFieldData();
+				$efInFormula = $ath->getExtraFieldsInFormula($selected, false, false);
+				$efWithFormula = $ath->getExtraFieldsWithFormula($selected, false, false);
 			} elseif ($func = 'add') {
 				$selected = $ath->getExtraFieldsDefaultValue();
+				$efInFormula = $ath->getExtraFieldsInFormula($selected);
+				$efWithFormula = $ath->getExtraFieldsWithFormula($selected);
 			}
 			if (!forge_check_perm('tracker', $atid, 'submit')) {
 				$readonly = true;
@@ -403,6 +407,13 @@ EOS;
 							}
 							if (strlen($extrafieldObject->getDescription()) > 0) {
 								$attrs['title'] = $extrafieldObject->getDescription();
+							}
+							if (in_array($extrafieldObject->getID(), $efInFormula)) {
+								$attrs['class'] = (empty($attrs['class']) ? '' : $attrs['class'].' ').'in-formula';
+							}
+							if (in_array($extrafieldObject->getID(), $efWithFormula)) {
+								$attrs['class'] = (empty($attrs['class']) ? '' : $attrs['class'].' ').'with-formula readonly';
+								$attrs['readonly'] = 'readonly';
 							}
 							$cellContent .= html_e('strong', array(), $extrafieldObject->getName()._(':')).$mandatory.html_e('br');
 							switch ($extrafieldObject->getType()) {
