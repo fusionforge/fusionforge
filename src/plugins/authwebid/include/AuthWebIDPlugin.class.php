@@ -288,7 +288,7 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 			$res = db_query_params('INSERT INTO plugin_authwebid_user_identities (user_id, webid_identity) VALUES ($1,$2)',
 					array ($user_id, $webid_identity));
 			if (!$res || db_affected_rows($res) < 1) {
-				$error_msg = sprintf(_('Cannot insert new identity: %s'), db_error());
+				$error_msg = _('Cannot insert new identity')._(': ').db_error();
 			}
 		}
 		return $error_msg;
