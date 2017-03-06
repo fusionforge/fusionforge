@@ -49,7 +49,7 @@ if (!$ac || !is_object($ac)) {
 if (!$efe_id) {
 	$formula = $ac->getFormula();
 } else {
-	$ao = new ArtifactExtraFieldElement($ac,$id);
+	$ao = new ArtifactExtraFieldElement($ac,$efe_id);
 	if (!$ao || !is_object($ao)) {
 		exit_error(_('Unable to create ArtifactExtraFieldElement Object'),'tracker');
 	} elseif ($ao->isError()) {
@@ -239,7 +239,7 @@ echo html_e('input', array('type'=>'submit', 'name'=>'post_changes', 'value'=>_(
 if (!$efe_id) {
 	echo html_e('input', array('type'=>'button', 'onclick'=>'location.href="/tracker/admin/?update_box=1&group_id='.$group_id.'&id='.$ef_id.'&atid='.$ath->getID().'"; return false;','value'=>_('Cancel')));
 }else {
-	echo html_e('input', array('type'=>'button', 'onclick'=>'location.href="/tracker/admin/?update_opt=1&id='&efe_id.'&group_id='.$group_id.'&atid='.$ath->getID().'&boxid='.$ef_id.'"; return false;','value'=>_('Cancel')));
+	echo html_e('input', array('type'=>'button', 'onclick'=>'location.href="/tracker/admin/?update_opt=1&id='.$efe_id.'&group_id='.$group_id.'&atid='.$ath->getID().'&boxid='.$ef_id.'"; return false;','value'=>_('Cancel')));
 }
 echo html_ac(html_ap() - 1);
 
