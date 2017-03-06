@@ -364,12 +364,12 @@ EOS;
 			$i = 0;
 			if (is_object($ah)) {
 				$selected = $ah->getExtraFieldData();
-				$efInFormula = $ath->getExtraFieldsInFormula($selected, false, false);
-				$efWithFormula = $ath->getExtraFieldsWithFormula($selected, false, false);
+				$efInFormula = $ath->getExtraFieldsInFormula();
+				$efWithFormula = $ath->getExtraFieldsWithFormula();
 			} elseif ($func = 'add') {
 				$selected = $ath->getExtraFieldsDefaultValue();
-				$efInFormula = $ath->getExtraFieldsInFormula($selected);
-				$efWithFormula = $ath->getExtraFieldsWithFormula($selected);
+				$efInFormula = $ath->getExtraFieldsInFormula(array(), false, false);
+				$efWithFormula = $ath->getExtraFieldsWithFormula(array(), false, false);
 			}
 			if (!forge_check_perm('tracker', $atid, 'submit')) {
 				$readonly = true;
