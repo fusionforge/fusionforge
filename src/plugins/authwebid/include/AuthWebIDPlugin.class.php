@@ -305,7 +305,7 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 		$res = db_query_params('DELETE FROM plugin_authwebid_user_identities WHERE user_id=$1 AND webid_identity=$2',
 								array($user_id, $webid_identity));
 		if (!$res || db_affected_rows($res) < 1) {
-			$error_msg = sprintf(_('Cannot delete identity: %s'), db_error());
+			$error_msg = _('Cannot delete identity')._(': ').db_error();
 		}
 		return $error_msg;
 	}
