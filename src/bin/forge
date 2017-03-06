@@ -383,7 +383,11 @@ class CliActions {
 				if ($frsp && is_object($frsp) && !$frsp->isError()) {
 					switch ($params[0]) {
 						case 'all':
-							$frsDump['setup'] = $frsp->getFRSs();
+							$frss = $frsp->getFRSs();
+							foreach ($frss as $frs) {
+								unset($frs->Group);
+								$frsDump['setup'][] = $frs;
+							}
 						case 'data':
 							break;
 						case 'setup':
