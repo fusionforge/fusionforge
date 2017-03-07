@@ -592,7 +592,7 @@ class DocumentReview extends FFError {
 			return false;
 		}
 		if ((is_array($reviewmandatoryusers) && count($reviewmandatoryusers) == 0) || (!is_array($reviewmandatoryusers))) {
-			$this->setError(_('Missing mandatory reviewers').$reviewmandatoryusers);
+			$this->setError(_('Missing mandatory reviewers'));
 			return false;
 		}
 		if (!is_array($reviewoptionalusers)) {
