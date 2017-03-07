@@ -30,7 +30,6 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/gettext.php';
 require_once $gfcommon.'include/FusionForge.class.php';
 
-ini_set('memory_limit','32M');
 sysdebug_off();
 
 // Disable error_reporting as it breaks XML generated output.
