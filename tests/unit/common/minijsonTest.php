@@ -386,29 +386,29 @@ class Minijson_Tests extends PHPUnit_Framework_TestCase
 		$parsed = 'bla';
 		$presult = minijson_decode($this->s_orig, $parsed);
 		$this->assertTrue($presult);
-		$this->assertEquals('array', gettype($parsed), "FAIL parse-basic");
+		$this->assertEquals('array', gettype($parsed), 'FAIL parse-basic');
 
 		$printrd = print_r($parsed, true);
-		$this->assertEquals($this->s_printr, $printrd, "parsed");
+		$this->assertEquals($this->s_printr, $printrd, 'parsed');
 
 		$encoded = minijson_encode($parsed, false);
-		$this->assertEquals($this->s_ecompact, $encoded, "encode-compact");
+		$this->assertEquals($this->s_ecompact, $encoded, 'encode-compact');
 		$reparsed = 'bla';
 		$presult = minijson_decode($encoded, $reparsed);
-		$this->assertTrue($presult, "can-reparse-compact");
-		$this->assertEquals('array', gettype($reparsed), "FAIL reparse-compact-basic");
+		$this->assertTrue($presult, 'can-reparse-compact');
+		$this->assertEquals('array', gettype($reparsed), 'FAIL reparse-compact-basic');
 
 		$printrd = print_r($reparsed, true);
-		$this->assertEquals($this->s_printrs, $printrd, "reparsed-compact");
+		$this->assertEquals($this->s_printrs, $printrd, 'reparsed-compact');
 
 		$encoded = minijson_encode($parsed);
-		$this->assertEquals($this->s_epadded, $encoded, "encode-padded");
+		$this->assertEquals($this->s_epadded, $encoded, 'encode-padded');
 		$reparsed = 'bla';
 		$presult = minijson_decode($encoded, $reparsed);
-		$this->assertTrue($presult, "can-reparse-padded");
-		$this->assertEquals('array', gettype($reparsed), "FAIL reparse-padded-basic");
+		$this->assertTrue($presult, 'can-reparse-padded');
+		$this->assertEquals('array', gettype($reparsed), 'FAIL reparse-padded-basic');
 
 		$printrd = print_r($reparsed, true);
-		$this->assertEquals($this->s_printrs, $printrd, "reparsed-padded");
+		$this->assertEquals($this->s_printrs, $printrd, 'reparsed-padded');
 	}
 }
