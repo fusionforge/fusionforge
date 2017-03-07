@@ -28,14 +28,10 @@ require_once $gfwww.'news/news_utils.php';
 require_once $gfcommon.'forum/Forum.class.php';
 require_once $gfwww.'include/features_boxes.php';
 
-$HTML->header(array('title'=> _('Terms of use')));
+$HTML->header(array('title'=> sprintf (_('%s Terms of Use'),
+					forge_get_config ('forge_name'))));
 ?>
-
-<table class="fullwidth" cellpadding="5">
-<tr><td class="twothirdswidth top">
-	<h3><?php printf (_('%s Terms of Use'), forge_get_config ('forge_name')); ?></h3>
 <p>
-
 <?php
 	if ( file_exists(forge_get_config('custom_path') . '/terms.php') ) {
 		include forge_get_config('custom_path') . '/terms.php';
@@ -44,13 +40,7 @@ $HTML->header(array('title'=> _('Terms of use')));
 			forge_get_config ('forge_name')) ;
 	}
 ?>
-
 </p>
-
-</td>
-
-<td class="onethirdwidth top">
-</td></tr></table>
 
 <?php
 
