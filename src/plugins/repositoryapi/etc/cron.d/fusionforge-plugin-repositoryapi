@@ -1,2 +1,2 @@
 # Gather activities from SCM repositories
-0 */3 * * * root forge_run_job scm/parse_scm_repo_activities.php
+0 */3 * * * root forge_run_plugin_job repositoryapi parse_scm_repo_activities.php
