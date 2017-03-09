@@ -1146,7 +1146,12 @@ class ArtifactTypeHtml extends ArtifactType {
 			$datetime_format = _('Y-m-d H:i');
 			$datetime = date($datetime_format, $datetime);
 		}
-		return html_e('input', array_merge(array('type'=>'text', 'name'=>'extra_fields['.$extra_field_id.']', 'class'=>'datetimepicker', 'value'=>$datetime), $attrs));
+		if (isset($attrs['class'])) {
+			$attrs['class'] = $attrs['class'] . ' datetimepicker';
+		} else {
+			$attrs['class'] = 'datetimepicker';
+		}
+		return html_e('input', array_merge(array('type'=>'text', 'name'=>'extra_fields['.$extra_field_id.']', 'value'=>$datetime), $attrs));
 	}
 
 	function renderDateRange($extra_field_id, $dateRange, $attrs = array()) {
@@ -1372,10 +1377,11 @@ class ArtifactTypeHtml extends ArtifactType {
 		if(event.keyCode !== 9) return false;
 	});
 	$(".in-formula[name^='extra_fields']").on('change', function(){
+		console.log('rtype=ajax&function=get_formulas_results&group_id='+groupId+'&atid='+atId+'&status='+$("select[name='status_id'] option:selected").text()+'&assigned_to='+$("select[name='assigned_to'] option:selected").text()+'&priority='+$("select[name='priority'] option:selected").text()+'&summary='+$('input#tracker-summary').val()+'&description='+$('textarea#tracker-description').val()+'&'+$("[name^='extra_fields']" ).serialize());
 		$.ajax({
 			type: 'POST',
 			url: 'index.php',
-			data: 'rtype=ajax&function=get_formulas_results&group_id='+groupId+'&atid='+atId+'&'+$("[name^='extra_fields']" ).serialize(),
+			data: 'rtype=ajax&function=get_formulas_results&group_id='+groupId+'&atid='+atId+'&status='+$("select[name='status_id'] option:selected").text()+'&assigned_to='+$("select[name='assigned_to'] option:selected").text()+'&priority='+$("select[name='priority'] option:selected").text()+'&summary='+$('input#tracker-summary').val()+'&description='+$('textarea#tracker-description').val()+'&'+$("[name^='extra_fields']" ).serialize(),
 			async: false,
 			dataType: 'json',
 			success: function(answer){

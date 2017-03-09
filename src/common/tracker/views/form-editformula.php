@@ -59,6 +59,19 @@ if (!$efe_id) {
 }
 
 $efarr = $ath->getExtraFields(array(),false,true);
+$efarr [] = array('field_name'=>'Assigned to','alias'=>'assigned_to', 'field_type'=>ARTIFACT_EXTRAFIELDTYPE_USER,'extra_field_id'=>0);
+$efarr [] = array('field_name'=>'Priority','alias'=>'priority', 'field_type'=>ARTIFACT_EXTRAFIELDTYPE_SELECT, 'extra_field_id'=>0);
+$efarr [] = array('field_name'=>'Summary','alias'=>'summary', 'field_type'=>ARTIFACT_EXTRAFIELDTYPE_TEXT ,'extra_field_id'=>0);
+$efarr [] = array('field_name'=>'Detailed description','alias'=>'description', 'field_type'=>ARTIFACT_EXTRAFIELDTYPE_TEXTAREA, 'extra_field_id'=>0);
+
+if (!$ath->usesCustomStatuses()) {
+	$efarr [] = array('field_name'=>'Status','alias'=>'status', 'field_type'=>'');
+}
+
+usort($efarr, function($a, $b) {
+	return strcasecmp($a['field_name'],$b['field_name']);
+});
+
 $eftypes=ArtifactExtraField::getAvailableTypes();
 $keys=array_keys($efarr);
 $rows=count($keys);
@@ -71,7 +84,7 @@ echo html_e('p',array(),_('Variable'));
 if ($rows > 0) {
 	$title_arr = array();
 	$classth = array();
-	$title_arr[] = _('Custom Fields');
+	$title_arr[] = _('Fields');
 	$classth[]   = '';
 	$title_arr[] = _('Variable');
 	$classth[]   = '';
@@ -90,52 +103,69 @@ if ($rows > 0) {
 		$cells[] = array(html_e('span',array('class'=>'insert'),$efarr[$i]['alias']), 'class'=>'align-right');
 		$cells[] = array($eftypes[$efarr[$i]['field_type']], 'class'=>'align-right');
 
-		//$id=str_replace('@','',$efarr[$i]['alias']);
-
-				/*
-				 List of possible options for a user built Selection Box
-				 */
-
+		switch ($efarr[$i]['field_name']) {
+			case 'Status':
+				if (!$ath->usesCustomStatuses()) {
+					$statuses = util_result_column_to_array($ath->getStatuses(),1);
+					$elearray = array();
+					$i=0;
+					foreach ($statuses as $status) {
+						$elearray [$i++] = array('element_name'=>$status);
+					}
+				} else {
+					$elearray = $ath->getExtraFieldElements($efarr[$i]['extra_field_id']);
+				}
+				break;
+			case 'Priority':
+				$elearray = array();
+				for ($i = 0; $i < 5; $i++) {
+					$elearray[$i] = array('element_name'=>$i+1);
+				}
+				break;
+			case 'Summary':
+			case 'Detailed description':
+			case 'Assigned to':
+				$elearray = array();
+				break;
+			default:
 				$elearray = $ath->getExtraFieldElements($efarr[$i]['extra_field_id']);
+		}
 /*
-				if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_USER && !isset($roles)) {
-					$rolesarray = array();
-					$roles = $ath->getGroup()->getRoles();
-					foreach ($roles as $role) {
-						$rolesarray[$role->getID()]=$role->getName();
-					}
-				}
-				if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RELEASE && !isset($packages)) {
-					$packagesarray = array();
-					$packages = $packages = get_frs_packages($ath->getGroup());
-					foreach ($packages as $package) {
-						$packagesarray[$package->getID()]=$package->getName();
-					}
-				}
+		if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_USER && !isset($roles)) {
+			$rolesarray = array();
+			$roles = $ath->getGroup()->getRoles();
+			foreach ($roles as $role) {
+				$rolesarray[$role->getID()]=$role->getName();
+			}
+		}
+		if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RELEASE && !isset($packages)) {
+			$packagesarray = array();
+			$packages = $packages = get_frs_packages($ath->getGroup());
+			foreach ($packages as $package) {
+				$packagesarray[$package->getID()]=$package->getName();
+			}
+		}
 */
+		$content = '';
+		if (!empty($elearray)) {
+			$optrows=count($elearray);
 
-				$content = '';
-				if (!empty($elearray)) {
-					$optrows=count($elearray);
-
-					for ($j=0; $j <$optrows; $j++) {
-						switch ($efarr[$i]['field_type']) {
-							case ARTIFACT_EXTRAFIELDTYPE_USER:
-								$content .= $rolesarray[$elearray[$j]['element_name']];
-								break;
-							case ARTIFACT_EXTRAFIELDTYPE_RELEASE:
-								$content .= $packagesarray[$elearray[$j]['element_name']];
-								break;
-							default:
-								$content .= html_e('span',array('class'=>'insert'),$elearray[$j]['element_name']);
-						}
-						$content .= html_e('br');
-					}
+			for ($j=0; $j <$optrows; $j++) {
+				switch ($efarr[$i]['field_type']) {
+					case ARTIFACT_EXTRAFIELDTYPE_USER:
+						$content .= $rolesarray[$elearray[$j]['element_name']];
+						break;
+					case ARTIFACT_EXTRAFIELDTYPE_RELEASE:
+						$content .= $packagesarray[$elearray[$j]['element_name']];
+						break;
+					default:
+						$content .= html_e('span',array('class'=>'insert'),$elearray[$j]['element_name']);
 				}
-
-				$cells[] = array($content, 'class'=>'align-right');
-
-				echo $HTML->multiTableRow($row_attrs, $cells);
+				$content .= html_e('br');
+			}
+		}
+		$cells[] = array($content, 'class'=>'align-right');
+		echo $HTML->multiTableRow($row_attrs, $cells);
 	}
 	echo $HTML->listTableBottom();
 } else {
@@ -251,5 +281,22 @@ echo html_e('p', array(), _('The instructions have to be terminated with a semic
 echo html_e('p', array(), _('The instructions must be separated by carriage returns'));
 echo html_e('p', array(), _('Each line that begins with a hash mark is a comment'));
 echo html_e('p', array(), _('The last line must be the value to be calculated from the field'));
-
+if (!$efe_id) {
+	echo html_e('p', array(), _('Example to define wished_date in function of priority, submit_date and severity')._(':'));
+	echo html_ao('code');
+	echo '(priority==1)'.html_e('br');
+	echo '&nbsp&nbsp&nbsp&nbsp? datetime_add(submit_date,\'P1D\')'.html_e('br');
+	echo '&nbsp&nbsp&nbsp&nbsp: (priority == 2)'.html_e('br');
+	echo '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp? datetime_add(submit_date,\'P3D\')'.html_e('br');
+	echo '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp: (priority == 3 || severity == \'Low\')'.html_e('br');
+	echo '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp? datetime_add(submit_date,\'P5D\')'.html_e('br');
+	echo '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp: datetime_add(submit_date,\'P7D\');';
+	echo html_ac(html_ap() - 1);
+} else {
+	echo html_e('p', array(), _('Example to define priority value according to impact and severity matrix').' '._('(formula for priority is not yet available)'));
+	echo html_e('p', array(), _('For the element \'3\' of the priority field')._(':'));
+	echo html_ao('code');
+	echo 'impact == \'high\' && severity == \'Low\'';
+	echo html_ac(html_ap() - 1);
+}
 $ath->footer();

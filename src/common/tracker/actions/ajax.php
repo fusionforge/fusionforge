@@ -38,7 +38,12 @@ switch ($function) {
 		break;
 	case 'get_formulas_results':
 		$extra_fields = getArrayFromRequest('extra_fields');
-		echo get_formulas_results($group, $atid, $extra_fields);
+		$status = getStringFromRequest('status');
+		$assigned_to = getStringFromRequest('assigned_to');
+		$priority = getStringFromRequest('priority');
+		$summary = getStringFromRequest('summary');
+		$description = getStringFromRequest('description');
+		echo get_formulas_results($group, $atid, $extra_fields, $status, $assigned_to, $priority, $summary, $description);
 		break;
 	default:
 		echo '';
@@ -56,7 +61,7 @@ function get_canned_response($id) {
 	}
 }
 
-function get_formulas_results($group, $atid, $extra_fields=array()){
+function get_formulas_results($group, $atid, $extra_fields=array(), $status='', $assigned_to='', $priority=0, $summary='', $description=''){
 	$ret = array('message' => '');
 	$at = new ArtifactType($group, $atid);
 	if (!$at || !is_object($at)) {
@@ -72,22 +77,57 @@ function get_formulas_results($group, $atid, $extra_fields=array()){
 
 	$expr = new ArtifactExpression();
 
-	// Variable assignment
+	// Constants assignment
+	// Internal Fields
+	if (!$at->usesCustomStatuses()) {
+		$expr->setConstant('status', $status);
+		if ($expr->isError()) {
+			$ret['message'] = $expr->getErrorMessage()._(':').' status=\''.$status.'\'';
+			return json_encode($ret);
+			exit();
+		}
+	}
+	$expr->setConstant('assigned_to', $assigned_to);
+	if ($expr->isError()) {
+		$ret['message'] = $expr->getErrorMessage()._(':').' assigned_to=\''.$assigned_to.'\'';
+		return json_encode($ret);
+		exit();
+	}
+	$expr->setConstant('priority', $priority);
+	if ($expr->isError()) {
+		$ret['message'] = $expr->getErrorMessage()._(':').' priority=\''.$priority.'\'';
+		return json_encode($ret);
+		exit();
+	}
+	$expr->setConstant('summary', $summary);
+	if ($expr->isError()) {
+		$ret['message'] = $expr->getErrorMessage()._(':').' summary=\''.$summary.'\'';
+		return json_encode($ret);
+		exit();
+	}
+	$expr->setConstant('description', $description);
+	if ($expr->isError()) {
+		$ret['message'] = $expr->getErrorMessage()._(':').' description=\''.$description.'\'';
+		return json_encode($ret);
+		exit();
+	}
+	// Extra Fields
 	$extraFields = $at->getExtraFields();
 	foreach ($extraFields as $extraField) {
 		if (isset($extra_fields[$extraField['extra_field_id']])) {
-			$varAss = false;
+			$value = '';
 			$type = $extraField['field_type'];
 			if ($type==ARTIFACT_EXTRAFIELDTYPE_INTEGER) {
-				$varAss = $extraField['alias'].'='.$extra_fields[$extraField['extra_field_id']];
+				$value = (integer)$extra_fields[$extraField['extra_field_id']];
 			} elseif ($type==ARTIFACT_EXTRAFIELDTYPE_TEXT ||
 					$type==ARTIFACT_EXTRAFIELDTYPE_TEXTAREA ||
-					$type==ARTIFACT_EXTRAFIELDTYPE_RELATION) {
-				$varAss = $extraField['alias'].'="'.addslashes($extra_fields[$extraField['extra_field_id']]).'"';
+					$type==ARTIFACT_EXTRAFIELDTYPE_RELATION ||
+					$type==ARTIFACT_EXTRAFIELDTYPE_DATETIME) {
+				$value = addslashes($extra_fields[$extraField['extra_field_id']]);
 			} elseif (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_SINGLECHOICE))) {
 				$ef = new ArtifactExtraField($at, $extraField['extra_field_id']);
 				$efe = new ArtifactExtraFieldElement($ef,$extra_fields[$extraField['extra_field_id']] );
-				$varAss =  $extraField['alias'].'="'.addslashes($efe->getName()).'"';
+				$value = addslashes($efe->getName());
 			} elseif (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_MULTICHOICE))) {
 				$var = array();
 				$ef = new ArtifactExtraField($at, $extraField['extra_field_id']);
@@ -95,15 +135,13 @@ function get_formulas_results($group, $atid, $extra_fields=array()){
 					$efe = new ArtifactExtraFieldElement($ef,$element_id);
 					$var[]=  $efe->getName();
 				}
-				$varAss =  $extraField['alias'].'=\''. json_encode($var).'\'';
+				$value = json_encode($var);
 			}
-			if ($varAss) {
-				$expr->evaluate($varAss);
-				if ($expr->isError()) {
-					$ret['message'] = $expr->getErrorMessage()._(':').' '.$varAss;
-					return json_encode($ret);
-					exit();
-				}
+			$expr->setConstant($extraField['alias'], $value);
+			if ($expr->isError()) {
+				$ret['message'] = $expr->getErrorMessage()._(':').' '.$extraField['alias'].'='.($type==ARTIFACT_EXTRAFIELDTYPE_INTEGER?'':'\'').$value.($type==ARTIFACT_EXTRAFIELDTYPE_INTEGER?'':'\'');
+				return json_encode($ret);
+				exit();
 			}
 		}
 	}

@@ -197,7 +197,7 @@ if (!$ac || !is_object($ac)) {
 			break;
 	}
 
-	if (in_array($efType, array(ARTIFACT_EXTRAFIELDTYPE_TEXT, ARTIFACT_EXTRAFIELDTYPE_INTEGER, ARTIFACT_EXTRAFIELDTYPE_TEXTAREA))) {
+	if (in_array($efType, array(ARTIFACT_EXTRAFIELDTYPE_TEXT, ARTIFACT_EXTRAFIELDTYPE_INTEGER, ARTIFACT_EXTRAFIELDTYPE_TEXTAREA, ARTIFACT_EXTRAFIELDTYPE_DATE, ARTIFACT_EXTRAFIELDTYPE_DATETIME))) {
 		echo html_ao('p');
 		echo html_e('label', array('for'=>'formula'), _('Formula to calculate field value'));
 		echo html_e('br');
