@@ -211,7 +211,7 @@ switch ($subaction) {
 		$remindernotification = getStringFromRequest('review-remindernotification');
 		if ($reviewversionserialid) {
 			$now = time();
-			if ($new_review) {
+			if ($new_review == 1) {
 				$dr = new DocumentReview($d);
 				if ($dr->create($reviewversionserialid, $reviewtitle, $reviewdescription, $reviewenddate, $reviewmandatoryusers, $reviewoptionalusers, $reviewnotificationcomment)) {
 					$feedback = _('Review created');
@@ -247,7 +247,7 @@ switch ($subaction) {
 				} else {
 					$error_msg = $drc->getErrorMessage();
 				}
-			} elseif ($remindernotification) {
+			} elseif ($new_review == 2) {
 				$dr = new DocumentReview($d, $reviewid);
 				if ($dr && !$dr->isError()) {
 					$users = $dr->getUsers(array(1));

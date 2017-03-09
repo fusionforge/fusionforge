@@ -805,7 +805,7 @@ DocManListFileController.prototype =
 			jQuery('#editfile-remindernotification').hide();
 			jQuery('#review-remindernotification').val('');
 		} else {
-			jQuery('#new_review').val(0);
+			jQuery('#new_review').val(2);
 			jQuery('#editfile-createreview').hide();
 			jQuery('#editfile-commentreview').empty();
 			jQuery('#editfile-userstatusreview').empty();
