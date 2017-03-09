@@ -210,6 +210,7 @@ switch ($subaction) {
 		$reviewnotificationcomment = getStringFromRequest('review-notificationcomment');
 		$remindernotification = getStringFromRequest('review-remindernotification');
 		if ($reviewversionserialid) {
+			$now = time();
 			if ($new_review) {
 				$dr = new DocumentReview($d);
 				if ($dr->create($reviewversionserialid, $reviewtitle, $reviewdescription, $reviewenddate, $reviewmandatoryusers, $reviewoptionalusers, $reviewnotificationcomment)) {
@@ -235,7 +236,6 @@ switch ($subaction) {
 				}
 				$dr = new DocumentReview($d, $reviewid);
 				$drc = new DocumentReviewComment($dr);
-				$now = time();
 				if ($drc->create(user_getid(), $reviewid, $reviewcomment, $now)) {
 					if ($reviewdone) {
 						$dr->setUserDone(user_getid(), $now);
@@ -263,7 +263,8 @@ switch ($subaction) {
 				$dr = new DocumentReview($d, $reviewid);
 				if ($reviewcompletedchecked) {
 					if (strlen($reviewconclusioncomment) > 0) {
-						$reviewdescription = $reviewconclusioncomment;
+						$drc = new DocumentReviewComment($dr);
+						$drc->create(user_getid(), $reviewid, $reviewconclusioncomment, $now);
 					}
 					if ($dr->close($reviewversionserialid, $reviewtitle, $reviewdescription, $reviewfinalstatus, $reviewvalidatedocument, $reviewcurrentversion)) {
 						$feedback = _('Review closed successfully');
