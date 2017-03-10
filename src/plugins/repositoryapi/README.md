@@ -17,3 +17,7 @@ projects (modulo permissions).  It can be seen as an aggregate of all
 the project-wide "activity" pages.
 
 The relevant data is made available through a SOAP API.
+
+## Documentation
+
+All doc is in the [Documentation directory](Documentation/README.md).
