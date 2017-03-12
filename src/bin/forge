@@ -90,7 +90,7 @@ class CliActions {
 				echo "   standard PHP array print_r format\n";
 				break;
 			case 'docmanDump':
-				echo "Use: .../forge trackerDump <groupid> [setup|data|all] [json|raw]\n";
+				echo "Use: .../forge docmanDump <groupid> [setup|data|all] [json|raw]\n";
 				echo "to dump docman from a specific project.\n";
 				echo "the following functions are available:\n";
 				echo " - setup: (default option)\n";
@@ -99,6 +99,38 @@ class CliActions {
 				echo "   use it to dump the complete tree of the document management tool\n";
 				echo " - all:\n";
 				echo "   use it to dump the full configuration and the tree\n";
+				echo "the following output formats are available:\n";
+				echo " - json:\n";
+				echo "   pretty json formated string output\n";
+				echo " - raw: (default)\n";
+				echo "   standard PHP array print_r format\n";
+				break;
+			case 'packageDump':
+				echo "Use: .../forge packageDump <packageid> [setup|data|all] [json|raw]\n";
+				echo "to dump a spectific FRS package from a specific project.\n";
+				echo "the following functions are available:\n";
+				echo " - setup: (default option)\n";
+				echo "   use it to dump all releases of this package & setup of this package\n";
+				echo " - data:\n";
+				echo "   use it to dump all files of this package\n";
+				echo " - all:\n";
+				echo "   use it to dump all releases + setup & files of this package\n";
+				echo "the following output formats are available:\n";
+				echo " - json:\n";
+				echo "   pretty json formated string output\n";
+				echo " - raw: (default)\n";
+				echo "   standard PHP array print_r format\n";
+				break;
+			case 'frsDump':
+				echo "Use: .../forge frsDump <groupid> [setup|data|all] [json|raw]\n";
+				echo "to dump FRS from a specific project.\n";
+				echo "the following functions are available:\n";
+				echo " - setup: (default option)\n";
+				echo "   use it to dump all packages & releases of the FRS management tool\n";
+				echo " - data:\n";
+				echo "   use it to dump all files of the FRS management tool\n";
+				echo " - all:\n";
+				echo "   use it to dump all packages & releases and the files\n";
 				echo "the following output formats are available:\n";
 				echo " - json:\n";
 				echo "   pretty json formated string output\n";
@@ -402,7 +434,7 @@ class CliActions {
 							break;
 					}
 				} else {
-					$docmanDump['error'][] = _('Unable to get document manager for group id')._(': ').$group_id;
+					$frsDump['error'][] = _('Unable to get FRS for group id')._(': ').$group_id;
 				}
 			} else {
 				$frsDump['error'][] = _('FRS not enabled for group id')._(': ').$group_id;
@@ -413,6 +445,37 @@ class CliActions {
 		ksort($frsDump);
 		$this->print_result($frsDump, $params);
 		return $frsDump;
+	}
+
+	function packageDump($packageid, $params = array('setup', 'json')) {
+		$packageDump = array();
+		$package = frspackage_get_object($packageid);
+		if ($package && is_object($package) && !$package->isError()) {
+			switch ($params[0]) {
+				case 'all':
+					$frsrs = $package->getReleases();
+					foreach ($frsrs as $frsr) {
+						$packageDump['setup'][] = $frsr;
+					}
+				case 'data':
+					break;
+				case 'setup':
+					$frsrs = $package->getReleases();
+					foreach ($frsrs as $frsr) {
+						unset($frsr->FRSPackage);
+						$packageDump['setup'][] = $frsr;
+					}
+					break;
+				default:
+					$packageDump['error'][] = _('Unknown function');
+					break;
+			}
+		} else {
+			$packageDump['error'][] = _('Unable to get package id')._(': ').$packageid;
+		}
+		ksort($packageDump);
+		$this->print_result($packageDump, $params);
+		return $packageDump;
 	}
 
 	function print_result($arrayDump, $params) {
