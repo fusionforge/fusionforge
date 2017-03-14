@@ -173,7 +173,6 @@ class CliActions {
 	}
 
 	function artifactDump($aid, $params = array('latest', 'json')) {
-		$artifactDump = array();
 		$artifactDump['id'] = $aid;
 		$artf = artifact_get_object($aid);
 		if ($artf && is_object($artf) && !$artf->isError()) {
@@ -225,7 +224,6 @@ class CliActions {
 	}
 
 	function groupDump($group_id, $params = array('setup', 'json')) {
-		$groupDump = array();
 		$groupDump['id'] = $group_id;
 		$group = group_get_object($group_id);
 		if ($group && is_object($group) && !$group->isError()) {
@@ -323,6 +321,7 @@ class CliActions {
 						foreach ($artifacts as $artf) {
 							$trackerDump['data'][] = $this->artifactDump($artf->getID(), array('all', 'return'));
 						}
+						$trackerDump['monitor'] = $at->getMonitorIds();
 					} else {
 						$trackerDump['error'][] = _('Unable to retrieve artifacts');
 					}
@@ -343,7 +342,6 @@ class CliActions {
 	}
 
 	function documentDump($docid, $params = array('latest', 'json')) {
-		$documentDump = array();
 		$documentDump['id'] = $docid;
 		$doc = document_get_object($docid);
 		if ($doc && is_object($doc) && !$doc->isError()) {
@@ -411,27 +409,11 @@ class CliActions {
 		$group = group_get_object($group_id);
 		if ($group && is_object($group) && !$group->isError()) {
 			if ($group->usesFRS()) {
-				$frsp = new FRSPackageFactory($group);
-				if ($frsp && is_object($frsp) && !$frsp->isError()) {
-					switch ($params[0]) {
-						case 'all':
-							$frss = $frsp->getFRSs();
-							foreach ($frss as $frs) {
-								unset($frs->Group);
-								$frsDump['setup'][] = $frs;
-							}
-						case 'data':
-							break;
-						case 'setup':
-							$frss = $frsp->getFRSs();
-							foreach ($frss as $frs) {
-								unset($frs->Group);
-								$frsDump['setup'][] = $frs;
-							}
-							break;
-						default:
-							$frsDump['error'][] = _('Unknown function');
-							break;
+				$frsfp = new FRSPackageFactory($group);
+				if ($frsfp && is_object($frsfp) && !$frsfp->isError()) {
+					$frspIds = $frsfp->getAllPackagesIds();
+					foreach ($frspIds as $frspId) {
+						$frsDump['package'][] = $this->packageDump($frspId, array('all', 'return'));
 					}
 				} else {
 					$frsDump['error'][] = _('Unable to get FRS for group id')._(': ').$group_id;
@@ -448,22 +430,28 @@ class CliActions {
 	}
 
 	function packageDump($packageid, $params = array('setup', 'json')) {
-		$packageDump = array();
+		$packageDump['id'] = $packageid;
 		$package = frspackage_get_object($packageid);
 		if ($package && is_object($package) && !$package->isError()) {
+			unset($package->Group);
+			$packageDump['setup'] = (array)$package;
 			switch ($params[0]) {
 				case 'all':
 					$frsrs = $package->getReleases();
+					$packageDump['setup']['package_releases'] = array();
 					foreach ($frsrs as $frsr) {
-						$packageDump['setup'][] = $frsr;
+						unset($frsr->FRSPackage);
+						$packageDump['setup']['package_releases'][] = $frsr;
 					}
+					$packageDump['monitor'] = $package->getMonitorIds();
 				case 'data':
 					break;
 				case 'setup':
 					$frsrs = $package->getReleases();
+					$packageDump['setup']['package_releases'] = array();
 					foreach ($frsrs as $frsr) {
 						unset($frsr->FRSPackage);
-						$packageDump['setup'][] = $frsr;
+						$packageDump['setup']['package_releases'][] = $frsr;
 					}
 					break;
 				default:
