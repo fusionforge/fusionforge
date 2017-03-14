@@ -48,7 +48,7 @@ contributions, along with their authors.");
 				return;
 			}
 			if ( $project->usesPlugin ( $this->name ) ) {
-				$params['TITLES'][] = '<nobr>'._('Contribution tracker').'</nobr>' ;
+				$params['TITLES'][] = _('Contribution tracker');
 				$params['TOOLTIPS'][] = _('Follow the contributions by contributors to this project');
 				$params['DIRS'][]='/plugins/'.$this->name.'/?group_id=' . $group_id ;
 				$params['ADMIN'][]='';
