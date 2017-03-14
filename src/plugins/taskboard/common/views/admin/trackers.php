@@ -117,7 +117,7 @@ if (!$atf || !is_object($atf) || $atf->isError()) {
 		$content .= $HTML->listTableBottom();
 		$content .= $HTML->boxBottom();
 		$cells[] = array($content, 'width' => '50%');
-		$content = $HTML->boxTop(_('User story tracker'));
+		$content = $HTML->boxTop(_('User stories tracker'));
 		$content .= $HTML->listTableTop();
 		$innercells = array();
 		$innercells[][] = html_e('strong', array(), _('User stories tracker'));
