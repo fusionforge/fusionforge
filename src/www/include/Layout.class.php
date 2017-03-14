@@ -1362,7 +1362,9 @@ if (isset($params['group']) && $params['group']) {
 	}
 
 	function getPicto($url, $title, $alt, $width = 20, $height = 20, $otherAttr = array()) {
-		$otherAttr['title'] = $title;
+		if ($title != '') {
+			$otherAttr['title'] = $title;
+		}
 		if (!$alt) {
 			$otherAttr['alt'] = $title;
 		} else {
