@@ -150,8 +150,9 @@ if (!$atf || !is_object($atf) || $atf->isError()) {
 		$releaseTrackerInputAttr2 = array('type' => 'radio', 'name' => 'release_field_tracker', 'value' => 2, 'id' => 'release_tracker2');
 		($release_field_tracker == 2 ? $releaseTrackerInputAttr2['checked'] = 'checked' : $releaseTrackerInputAttr1['checked'] = 'checked');
 
-		$innercells[][] = html_e('input', $releaseTrackerInputAttr1).'&nbsp;'._('by tasks').html_e('br').
-				html_e('input', $releaseTrackerInputAttr2).'&nbsp;'._('by user stories');
+		$innercells[][] = html_e('label', array('for' => 'release_tracker1'), html_e('input', $releaseTrackerInputAttr1).'&nbsp;'._('by tasks')).
+				html_e('br').
+				html_e('label', array('for' => 'release_tracker2'), html_e('input', $releaseTrackerInputAttr2).'&nbsp;'._('by user stories'));
 		$content .= $HTML->multiTableRow(array(), $innercells);
 		$innercells = array();
 		$innercells[][] = html_e('strong', array(), _('Release field'));
@@ -303,7 +304,7 @@ jQuery(function($){
 			dataType: 'json',
 			data : {
 				action : 'get_trackers_fields',
-				group_id     : <?php echo $group_id ?>,
+				group_id : <?php echo $group_id ?>,
 				taskboard_id : <?php echo $taskboard_id ?>,
 				'trackers[]' : trackers
 			},
