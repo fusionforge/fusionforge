@@ -30,7 +30,7 @@ jQuery(function(){
 
 	// One instance that's reused to show info for the current resource
 	var container = jQuery('<div id="resourcePopupContainer">'
-			+ '<table width="" border="0" cellspacing="0" cellpadding="0" class="resourcePopupPopup">'
+			+ '<table class="resourcePopupPopup">'
 			+ '<tr>'
 			+ '   <td class="corner topLeft"></td>'
 			+ '   <td class="top"></td>'

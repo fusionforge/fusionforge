@@ -59,7 +59,7 @@ if (count($taskboard->getUsedTrackersIds()) == 0) {
 		$cells[][] = ( $column->getMaxTasks() ? $column->getMaxTasks() : '&nbsp;' );
 		$cells[][] = implode(', ', array_values($column->getResolutions()));
 		$cells[][] = $column->getResolutionByDefault();
-		echo $HTML->multiTableRow(array('valign' => 'middle'), $cells);
+		echo $HTML->multiTableRow(array('class' => 'middle'), $cells);
 	}
 	echo $HTML->listTableBottom();
 

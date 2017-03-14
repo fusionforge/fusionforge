@@ -102,7 +102,7 @@ if (!$atf || !is_object($atf) || $atf->isError()) {
 			$innercells[][] = $tracker->getDescription();
 			$innercells[][] = '<input type="checkbox" name="use[]" value="'.$tracker_id.'" class="use_tracker" '.(in_array($tracker_id, $trackers_selected) ? 'checked="checked"' : '' ).'>';
 			$innercells[][] = $taskboard->colorBgChooser('bg['.$tracker_id.']', (array_key_exists($tracker_id, $trackers_bgcolor) ? $trackers_bgcolor[$tracker_id] : NULL ));
-			$content .= $HTML->multiTableRow(array('valign' => 'middle'), $innercells);
+			$content .= $HTML->multiTableRow(array('class' => 'middle'), $innercells);
 		}
 		$content .= $HTML->listTableBottom();
 		$content .= $HTML->listTableTop();
@@ -116,7 +116,7 @@ if (!$atf || !is_object($atf) || $atf->isError()) {
 		$content .= $HTML->multiTableRow(array(), $innercells);
 		$content .= $HTML->listTableBottom();
 		$content .= $HTML->boxBottom();
-		$cells[] = array($content, 'width' => '50%');
+		$cells[] = array($content, 'class' => 'halfwidth');
 		$content = $HTML->boxTop(_('User stories tracker'));
 		$content .= $HTML->listTableTop();
 		$innercells = array();
@@ -160,8 +160,8 @@ if (!$atf || !is_object($atf) || $atf->isError()) {
 		$content .= $HTML->multiTableRow(array(), $innercells);
 		$content .= $HTML->listTableBottom();
 		$content .= $HTML->boxBottom();
-		$cells[] = array($content, 'width' => '50%');
-		echo $HTML->multiTableRow(array('valign' => 'top'), $cells);
+		$cells[] = array($content, 'class' => 'halfwidth');
+		echo $HTML->multiTableRow(array('class' => 'top'), $cells);
 		echo $HTML->listTableBottom();
 		echo html_e('p', array(), html_e('input', array('type' => 'submit', 'name' => 'post_changes', 'value' => _('Submit'))));
 		echo $HTML->addRequiredFieldsInfoBox();

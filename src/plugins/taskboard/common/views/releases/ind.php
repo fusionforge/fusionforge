@@ -73,7 +73,7 @@ foreach ($taskboardReleases as $release) {
 	}
 
 	echo '
-	<tr valign="middle"'.$current_release.'>
+	<tr class="middle"'.$current_release.'>
 		<td>'.$release_title.'</td>
 		<td>'.date("Y-m-d", $release->getStartDate()).'</td>
 		<td>'.date("Y-m-d", $release->getEndDate()).'</td>
