@@ -466,6 +466,32 @@ class CliActions {
 		return $packageDump;
 	}
 
+	function releaseDump($releaseid, $params = array('setup', 'json')) {
+		$releaseDump['id'] = $releaseid;
+		$release = frsrelease_get_object($releaseid);
+		if ($release && is_object($release) && !$release->isError()) {
+			switch($params[0]) {
+				case 'all':
+					unset($release->FRSPackage);
+					$releaseDump['setup'] = $release;
+				case 'data':
+					break;
+				case 'setup':
+					unset($release->FRSPackage);
+					$releaseDump['setup'] = $release;
+					break;
+				default:
+					$releaseDump['error'][] = _('Unknown function');
+					break;
+			}
+		} else {
+			$releaseDump['error'][] = _('Unable to get release id')._(': ').$releaseid;
+		}
+		ksort($releaseDump);
+		$this->print_result($releaseDump, $params);
+		return $releaseDump;
+	}
+
 	function print_result($arrayDump, $params) {
 		if (isset($params[1])) {
 			if (in_array($params[1], array('json', 'raw', 'return'))) {
