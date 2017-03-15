@@ -409,9 +409,9 @@ echo '
 echo '<tr>
 		<td colspan="2">'.
 		'<p><strong>'._('Options')._(':').'</strong><br />
-		<input type="checkbox" name="query_options[bargraph]" '.
+		<input id="bargraph" type="checkbox" name="query_options[bargraph]" '.
 	((in_array('bargraph', $aq->getQueryOptions())) ? 'checked="checked"' : '')
-.'/>'._('Display a short summary box on top of the list (roadmap status).').'</p>
+.'/><label for="bargraph">'._('Display a short summary box on top of the list (roadmap status).').'</label></p>
 		</td>
 	</tr>';
 echo $HTML->listTableBottom();
