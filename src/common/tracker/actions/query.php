@@ -306,7 +306,7 @@ echo '<input type="hidden" name="form_key" value="'.form_generate_key().'" />
 	echo '
 		</td>
 		<td class="top">
-		<input type="text" name="query_name" value="'.$aq->getName().'" size="20" maxlength="30" /></td>
+		<input required="required" type="text" name="query_name" value="'.$aq->getName().'" size="20" maxlength="30" /></td>
 	</tr>
 </table>';
 
