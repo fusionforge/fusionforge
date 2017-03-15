@@ -49,7 +49,7 @@ if (getStringFromRequest('post_changes')) {
 	if(!$ret) {
 		$error_msg = $taskboard->getErrorMessage();
 	} else {
-		$feedback = _('Success on something here');
+		$feedback = _('Successfully Updated');
 	}
 }
 

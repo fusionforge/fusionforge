@@ -50,7 +50,7 @@ if (getStringFromRequest('submit')) {
 		if (!$r->updateTimeCode($time_code,$category_name)) {
 			$error_msg = $r->getErrorMessage();
 		} else {
-			$feedback = _('Update Successful');
+			$feedback = _('Successfully Updated');
 		}
 
 		$time_code=false;

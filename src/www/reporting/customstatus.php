@@ -51,7 +51,7 @@ if (getStringFromRequest('submit')) {
 		if (!$r->updateStatusID($status_id,$status_name)) {
 			$error_msg = $r->getErrorMessage();
 		} else {
-			$feedback = _('Update Successful');
+			$feedback = _('Successfully Updated');
 		}
 
 		$status_id=false;
