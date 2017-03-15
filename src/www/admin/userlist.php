@@ -128,25 +128,25 @@ function show_users_list($users, $filter = '', $sortorder = 'realname', $start, 
 		if ($u->getStatus() != 'D') {
 			$nextcell = util_make_link('/developer/?form_dev='.$u->getID(),_('User Profile'));
 		} else {
-			$nextcell = '<s>'._('User Profile').'</s>';
+			$nextcell = '<span class="strike">'._('User Profile').'</span>';
 		}
 		$cells[] = array($nextcell, 'width' => '15%', 'class' => 'align-center');
 		if ($u->getStatus() != 'A') {
 			$nextcell = util_make_link('/admin/userlist.php?action=activate&user_id='.$u->getID().$filter,_('Activate'));
 		} else {
-			$nextcell = '<s>'._('Activate').'</s>';
+			$nextcell = '<span class="strike">'._('Activate').'</span>';
 		}
 		$cells[] = array($nextcell, 'width' => '15%', 'class' => 'align-center');
 		if ($u->getStatus() != 'D') {
 			$nextcell = util_make_link('/admin/userlist.php?action=delete&user_id='.$u->getID().$filter,_('Delete'));
 		} else {
-			$nextcell = '<s>'._('Delete').'</s>';
+			$nextcell = '<span class="strike">'._('Delete').'</span>';
 		}
 		$cells[] = array($nextcell, 'width' => '15%', 'class' => 'align-center');
 		if ($u->getStatus() != 'S') {
 			$nextcell = util_make_link('/admin/userlist.php?action=suspend&user_id='.$u->getID().$filter,_('Suspend'));
 		} else {
-			$nextcell = '<s>'._('Suspend').'</s>';
+			$nextcell = '<span class="strike">'._('Suspend').'</span>';
 		}
 		$cells[] = array($nextcell, 'width' => '15%', 'class' => 'align-center');
 		$cells[] = array(util_make_link('/admin/passedit.php?user_id='.$u->getID().$filter,_('Change Password')), 'width' => '12%', 'class' => 'align-center');
