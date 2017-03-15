@@ -266,7 +266,7 @@ echo '<table style="margin-left:auto;margin-right:auto"><tr><td>' .
 
 echo $HTML->openForm(array('action' => '/tracker/?func=query&group_id='.$group_id.'&atid='.$ath->getID(), 'method' => 'post'));
 echo '<input type="hidden" name="form_key" value="'.form_generate_key().'" />
-<table align="center" border="3" cellpadding="4" rules="groups" frame="box" width="100%" class="tablecontent">
+<table class="tablecontent fullwidth">
 	<tr>
 		<td>
 			<input type="submit" name="submit" value="'._('Save Changes').'" />
@@ -381,22 +381,22 @@ if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
 echo '
 	<tr>
 		<td colspan="2" style="white-space: nowrap;">'.
-		'<strong>'._('Last Modified Date range')._(':').'</strong> <i>(YYYY-MM-DD YYYY-MM-DD Format)</i><br />
-		<input type="text" name="_moddaterange" size="21" maxlength="21" value="'. htmlspecialchars($_moddaterange) .'" /><p/>
-		<strong>'._('Open Date range')._(':').'</strong> <i>(YYYY-MM-DD YYYY-MM-DD Format)</i><br />
-		<input type="text" name="_opendaterange" size="21" maxlength="21" value="'. htmlspecialchars($_opendaterange) .'" /><p/>
-		<strong>'._('Close Date range')._(':').'</strong> <i>(YYYY-MM-DD YYYY-MM-DD Format)</i><br />
-		<input type="text" name="_closedaterange" size="21" maxlength="21" value="'. htmlspecialchars($_closedaterange) .'" />
+		'<p><strong>'._('Last Modified Date range')._(':').'</strong> <i>(YYYY-MM-DD YYYY-MM-DD Format)</i><br />
+		<input type="text" name="_moddaterange" size="21" maxlength="21" value="'. htmlspecialchars($_moddaterange) .'" /></p>
+		<p><strong>'._('Open Date range')._(':').'</strong> <i>(YYYY-MM-DD YYYY-MM-DD Format)</i><br />
+		<input type="text" name="_opendaterange" size="21" maxlength="21" value="'. htmlspecialchars($_opendaterange) .'" /></p>
+		<p><strong>'._('Close Date range')._(':').'</strong> <i>(YYYY-MM-DD YYYY-MM-DD Format)</i><br />
+		<input type="text" name="_closedaterange" size="21" maxlength="21" value="'. htmlspecialchars($_closedaterange) .'" /></p>
 		</td>
 	</tr>
 	<tr>
 		<td colspan="2">'.
-		'<strong>'._('Summary')._(': ').'</strong> '.$tips.'<br />
-		<input type="text" name="_summary" size="40" value="'. htmlspecialchars($_summary) .'" /><p/>
-		<strong>'._('Detailed description')._(': ').'</strong> '.$tips.'<br />
-		<input type="text" name="_description" size="40" value="'. htmlspecialchars($_description) .'" /><p/>
-		<strong>'._('Comments')._(': ').'</strong> '.$tips.'<br />
-		<input type="text" name="_followups" size="40" value="'. htmlspecialchars($_followups) .'" />
+		'<p><strong>'._('Summary')._(': ').'</strong> '.$tips.'<br />
+		<input type="text" name="_summary" size="40" value="'. htmlspecialchars($_summary) .'" /></p>
+		<p><strong>'._('Detailed description')._(': ').'</strong> '.$tips.'<br />
+		<input type="text" name="_description" size="40" value="'. htmlspecialchars($_description) .'" /></p>
+		<p><strong>'._('Comments')._(': ').'</strong> '.$tips.'<br />
+		<input type="text" name="_followups" size="40" value="'. htmlspecialchars($_followups) .'" /></p>
 		</td>
 	</tr>
 	<tr>
