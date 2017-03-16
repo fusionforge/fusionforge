@@ -1229,29 +1229,6 @@ if (isset($params['group']) && $params['group']) {
 		return $return;
 	}
 
-	/**
-	 * @todo use listTableTop and make this function deprecated ?
-	 */
-	function html_table_top($cols, $summary = '', $class = '', $extra_params = '') {
-		$return = '<table summary="' . $summary . '" ';
-		if ($class) {
-			$return .= 'class="' . $class . '" ';
-		}
-		if (is_array($extra_params)) {
-			foreach ($extra_params as $key => $extra_params_value) {
-				$return .= $key . '="' . $extra_params_value . '" ';
-			}
-		}
-		$return .= '>';
-		$return .= '<thead><tr>';
-		$nbCols = count($cols);
-		for ($i = 0; $i < $nbCols; $i++) {
-			$return .= '<th scope="col">' . $cols[$i] . '</th>';
-		}
-		$return .= '</tr></thead>';
-		return $return;
-	}
-
 	function getMonitorPic($title = '', $alt = '') {
 		return $this->getPicto('ic/mail16w.png', $title, $alt);
 	}
