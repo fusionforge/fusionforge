@@ -1245,9 +1245,8 @@ if (isset($params['group']) && $params['group']) {
 		return $this->getPicto('ic/manual16c.png', $title, $alt);
 	}
 
-	/* no picto for download */
 	function getDownloadPic($title = '', $alt = '') {
-		return $this->getPicto('ic/save.png', $title, $alt);
+		return $this->getPicto('ic/download.png', $title, $alt);
 	}
 
 	function getHomePic($title = '', $alt = '') {
