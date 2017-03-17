@@ -1347,6 +1347,15 @@ class ArtifactTypeHtml extends ArtifactType {
 		return html_build_select_box($this->getStatuses(), $name, $checked, $show_100, $text_100, false, '', false, $attrs);
 	}
 
+	/**
+	 * priorityBox - show the priorities
+	 *
+	 * @return string	HTML code
+	 */
+	function priorityBox($name = 'priority', $checked_val = '3', $nochange = false, $attrs = array(), $show_any = false){
+		return html_build_priority_select_box($name, $checked_val, $nochange, $attrs, $show_any);
+	}
+
 	function javascript() {
 		$jsvariable ="
 	var invalidSelectMsg = '"._("One or more of the selected options is not allowed")."';
@@ -1376,12 +1385,11 @@ class ArtifactTypeHtml extends ArtifactType {
 	}).on('keydown', function(event){
 		if(event.keyCode !== 9) return false;
 	});
-	$(".in-formula[name^='extra_fields']").on('change', function(){
-		console.log('rtype=ajax&function=get_formulas_results&group_id='+groupId+'&atid='+atId+'&status='+$("select[name='status_id'] option:selected").text()+'&assigned_to='+$("select[name='assigned_to'] option:selected").text()+'&priority='+$("select[name='priority'] option:selected").text()+'&summary='+$('input#tracker-summary').val()+'&description='+$('textarea#tracker-description').val()+'&'+$("[name^='extra_fields']" ).serialize());
+	$(".in-formula").on('change', function(){
 		$.ajax({
 			type: 'POST',
 			url: 'index.php',
-			data: 'rtype=ajax&function=get_formulas_results&group_id='+groupId+'&atid='+atId+'&status='+$("select[name='status_id'] option:selected").text()+'&assigned_to='+$("select[name='assigned_to'] option:selected").text()+'&priority='+$("select[name='priority'] option:selected").text()+'&summary='+$('input#tracker-summary').val()+'&description='+$('textarea#tracker-description').val()+'&'+$("[name^='extra_fields']" ).serialize(),
+			data: 'rtype=ajax&function=get_formulas_results&group_id='+groupId+'&atid='+atId+'&status='+$("select[name='status_id'] option:selected").text()+'&assigned_to='+$("select[name='assigned_to'] option:selected").text()+'&priority='+$("select[name='priority'] option:selected").text()+'&'+$("[name^='extra_fields'], #tracker-summary, #tracker-description").serialize(),
 			async: false,
 			dataType: 'json',
 			success: function(answer){

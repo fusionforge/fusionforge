@@ -65,7 +65,7 @@ $efarr [] = array('field_name'=>'Summary','alias'=>'summary', 'field_type'=>ARTI
 $efarr [] = array('field_name'=>'Detailed description','alias'=>'description', 'field_type'=>ARTIFACT_EXTRAFIELDTYPE_TEXTAREA, 'extra_field_id'=>0);
 
 if (!$ath->usesCustomStatuses()) {
-	$efarr [] = array('field_name'=>'Status','alias'=>'status', 'field_type'=>'');
+	$efarr [] = array('field_name'=>'Status','alias'=>'status', 'field_type'=>ARTIFACT_EXTRAFIELDTYPE_STATUS);
 }
 
 usort($efarr, function($a, $b) {

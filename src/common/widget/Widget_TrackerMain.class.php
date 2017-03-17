@@ -63,6 +63,7 @@ class Widget_TrackerMain extends Widget {
 		$return = $HTML->listTableTop();
 		$i = 0;
 		$atf = new ArtifactTypeFactory ($group);
+		$fieldInFormula = $ath->getFieldsInFormula();
 		$cells = array();
 		if (forge_check_perm('tracker', $atid, 'manager') && ($func == 'detail')) {
 			$tids = array();
@@ -87,10 +88,15 @@ class Widget_TrackerMain extends Widget {
 		$cells = array();
 		$cells[][] = html_e('strong', array(), _('Assigned to')._(': '));
 		if (forge_check_perm('tracker', $atid, 'manager')) {
-			if ($func == 'detail') {
-				$cells[][] = $ath->technicianBox('assigned_to', $ah->getAssignedTo(), true, 'none', -1, '', false, array('form' => 'trackerform'));
+			if (in_array('assigned_to', $fieldInFormula)) {
+				$techBoxClass = 'in-formula';
 			} else {
-				$cells[][] = $ath->technicianBox('assigned_to', $assigned_to, true, 'none', -1, '', false, array('form' => 'trackerform'));
+				$techBoxClass = '';
+			}
+			if ($func == 'detail') {
+				$cells[][] = $ath->technicianBox('assigned_to', $ah->getAssignedTo(), true, 'none', -1, '', false, array('form' => 'trackerform', 'class'=>$class));
+			} else {
+				$cells[][] = $ath->technicianBox('assigned_to', $assigned_to, true, 'none', -1, '', false, array('form' => 'trackerform', 'class'=>$class));
 			}
 		} else {
 			$cells[][] = $ah->getAssignedRealName().' ('.$ah->getAssignedUnixName().')';
@@ -100,10 +106,15 @@ class Widget_TrackerMain extends Widget {
 			$cells = array();
 			$cells[][] = html_e('strong', array(), _('State')._(': '));
 			if (forge_check_perm('tracker', $atid, 'tech')) {
-				if ($func == 'detail') {
-					$cells[][] = $ath->statusBox('status_id', $ah->getStatusID(), false, '', array('form' => 'trackerform'));
+				if (in_array('status', $fieldInFormula)) {
+					$class = 'in-formula';
 				} else {
-					$cells[][] = $ath->statusBox('status_id', 'xzxz', false, '', array('form' => 'trackerform'));
+					$class = '';
+				}
+				if ($func == 'detail') {
+					$cells[][] = $ath->statusBox('status_id', $ah->getStatusID(), false, '', array('form' => 'trackerform', 'class'=>$class));
+				} else {
+					$cells[][] = $ath->statusBox('status_id', 'xzxz', false, '', array('form' => 'trackerform', 'class'=>$class));
 				}
 			} else {
 				$cells[][] = $ah->getStatusName();
@@ -114,9 +125,14 @@ class Widget_TrackerMain extends Widget {
 		$cells[][] = html_e('strong', array(), _('Priority')._(': '));
 		if (forge_check_perm('tracker', $atid, 'manager')) {
 			if ($func == 'detail') {
-				$cells[][] = build_priority_select_box('priority', $ah->getPriority(), false, array('form' => 'trackerform'));
+				if (in_array('priority', $fieldInFormula)) {
+					$class = 'in-formula';
+				} else {
+					$class = '';
+				}
+				$cells[][] = $ath->priorityBox('priority', $ah->getPriority(), false, array('form' => 'trackerform', 'class'=>$class));
 			} else {
-				$cells[][] = build_priority_select_box('priority', $priority, false, array('form' => 'trackerform'));
+				$cells[][] = $ath->priorityBox('priority', $priority, false, array('form' => 'trackerform', 'class'=>$class));
 			}
 		} else {
 			$cells[][] = $ah->getPriority();

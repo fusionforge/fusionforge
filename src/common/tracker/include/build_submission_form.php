@@ -58,32 +58,46 @@ function artifact_submission_form($ath, $group, $summary='', $details='', $assig
 
 	$ath->renderExtraFields($extra_fields,true,'none',false,'Any',array(),false,'NEW');
 
+	$fieldInFormula = $ath->getFieldsInFormula();
+
 	if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
 		$content = html_e('strong', array(), _('Assigned to')._(':')).html_e('br');
-		$content .= $ath->technicianBox('assigned_to', $assigned_to);
+		if (in_array('assigned_to', $fieldInFormula)) {
+			$content .= $ath->technicianBox('assigned_to', $assigned_to, true, 'none', -1, '', false, array('class'=>'in-formula'));
+		} else {
+			$content .= $ath->technicianBox('assigned_to', $assigned_to);
+		}
 		$content .= '&nbsp;'.util_make_link('/tracker/admin/?group_id='.$group->getID().'&atid='.$ath->getID().'&update_users=1', '('._('Admin').')' );
 		$cells = array();
 		$cells[][] = $content;
 
 		$content = html_e('strong', array(), _('Priority')._(':')).html_e('br');
-		if (empty($priority)) {
-			$content .= html_build_priority_select_box('priority');
+		if (in_array('priority', $fieldInFormula)) {
+			$content .= $ath->priorityBox('priority',$priority, false, array('class'=>'in-formula'));
 		} else {
-			$content .= html_build_priority_select_box('priority',$priority);
+			$content .= $ath->priorityBox('priority',$priority);
 		}
 		$cells[][] = $content;
 
 		echo $HTML->multiTableRow(array(), $cells);
 	}
 	$content = html_e('strong', array(), _('Summary').utils_requiredField()._(':')).html_e('br');
-	$content .= html_e('input', array('id'=>'tracker-summary', 'value'=>$summary, 'required'=>'required', 'type'=>'text', 'name'=>'summary', 'size'=>'80', 'maxlength'=>'255', 'title'=>util_html_secure(html_get_tooltip_description('summary'))));
+	if (in_array('summary', $fieldInFormula)) {
+		$content .= html_e('input', array('id'=>'tracker-summary', 'value'=>$summary, 'required'=>'required', 'type'=>'text', 'name'=>'summary', 'size'=>'80', 'maxlength'=>'255', 'title'=>util_html_secure(html_get_tooltip_description('summary')), 'class'=>'in-formula'));
+	} else {
+		$content .= html_e('input', array('id'=>'tracker-summary', 'value'=>$summary, 'required'=>'required', 'type'=>'text', 'name'=>'summary', 'size'=>'80', 'maxlength'=>'255', 'title'=>util_html_secure(html_get_tooltip_description('summary'))));
+	}
 	$cells = array();
 	$cells[] = array($content, 'colspan'=>'2');
 	echo $HTML->multiTableRow(array(), $cells);
 
 	$content = html_e('strong', array(), _('Detailed description').utils_requiredField()._(':'));
 	$content .= notepad_button('document.forms.trackeraddform.details').html_e('br');
-	$content .= html_e('textarea', array('id'=>'tracker-description', 'required'=>'required', 'name'=>'details', 'rows'=>'20', 'style'=>'width: 100%', 'title'=>util_html_secure(html_get_tooltip_description('description'))), $details, false);
+	if (in_array('description', $fieldInFormula)) {
+		$content .= html_e('textarea', array('id'=>'tracker-description', 'required'=>'required', 'name'=>'details', 'rows'=>'20', 'class'=>'fullwidth in-formula', 'title'=>util_html_secure(html_get_tooltip_description('description'))), $details, false);
+	} else {
+		$content .= html_e('textarea', array('id'=>'tracker-description', 'required'=>'required', 'name'=>'details', 'rows'=>'20', 'class'=>'fullwidth', 'title'=>util_html_secure(html_get_tooltip_description('description'))), $details, false);
+	}
 	$cells = array();
 	$cells[] = array($content, 'colspan'=>'2');
 	echo $HTML->multiTableRow(array(), $cells);

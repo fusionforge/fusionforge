@@ -202,7 +202,6 @@ class Expression {
 		 * }
 		 */
 		$first_argument = false;
-		$ternary = false;
 		while ( 1 ) { // 1 Infinite Loop ;)
 			$op = substr ( $expr, $index, 2 ); // get the first two characters at the current index
 			if (preg_match ( "/^[+\-*\/^_\"<>=%(){\[!~,?:](?!=|~)/", $op ) || preg_match ( "/\w/", $op )) {

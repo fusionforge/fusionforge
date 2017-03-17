@@ -60,8 +60,8 @@ class ArtifactExpression extends FFError {
 
 	public function __construct()
 	{
-		$this->functionsDescription = array('in_array'=>_('Test if a value is in an (json) array'));
-		$this->functionsDescription = array('datetime_add'=>_('Add to a date/time a duration (duration in ISO 8601 Format)'));
+		$this->functionsDescription['in_array'] = _('Test if a value is in an (json) array');
+		$this->functionsDescription['datetime_add'] = _('Add to a date/time a duration (duration in ISO 8601 Format)');
 		$this->expression = new Expression;
 		$this->expression->suppress_errors = true;
 		$this->expression->fb = array();
@@ -118,7 +118,7 @@ class ArtifactExpression extends FFError {
 		if (is_integer($value)) {
 			$expression = $name.'='.$value;
 		} else {
-			$expression = $name.'=\''.$value.'\'';
+			$expression = $name.'='.json_encode($value);
 		}
 		$result = $this->expression->evaluate($expression);
 		$result = $this->vb[] = $name;
@@ -131,8 +131,17 @@ function expr_in_array($value, $jsonArray) {
 }
 
 function expr_datetime_add($datetime, $interval) {
+	if (!trim($datetime)) {
+		return '';
+	}
 	$dateTimeObj = DateTime::createFromFormat(_('Y-m-d H:i'), $datetime);
+	if (!$dateTimeObj) {
+		return '';
+	}
 	$intervalObj = new DateInterval($interval);
+	if (!$intervalObj) {
+		return '';
+	}
 	$dateTimeObj->add($intervalObj);
 	return $dateTimeObj->format(_('Y-m-d H:i'));
 }

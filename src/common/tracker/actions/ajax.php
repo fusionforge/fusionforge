@@ -80,6 +80,9 @@ function get_formulas_results($group, $atid, $extra_fields=array(), $status='', 
 	// Constants assignment
 	// Internal Fields
 	if (!$at->usesCustomStatuses()) {
+		if (!$status) {
+			$status = $at->getStatusName(1);
+		}
 		$expr->setConstant('status', $status);
 		if ($expr->isError()) {
 			$ret['message'] = $expr->getErrorMessage()._(':').' status=\''.$status.'\'';
@@ -111,6 +114,7 @@ function get_formulas_results($group, $atid, $extra_fields=array(), $status='', 
 		return json_encode($ret);
 		exit();
 	}
+
 	// Extra Fields
 	$extraFields = $at->getExtraFields();
 	foreach ($extraFields as $extraField) {
@@ -119,11 +123,12 @@ function get_formulas_results($group, $atid, $extra_fields=array(), $status='', 
 			$type = $extraField['field_type'];
 			if ($type==ARTIFACT_EXTRAFIELDTYPE_INTEGER) {
 				$value = (integer)$extra_fields[$extraField['extra_field_id']];
-			} elseif ($type==ARTIFACT_EXTRAFIELDTYPE_TEXT ||
-					$type==ARTIFACT_EXTRAFIELDTYPE_TEXTAREA ||
-					$type==ARTIFACT_EXTRAFIELDTYPE_RELATION ||
+			} elseif ($type==ARTIFACT_EXTRAFIELDTYPE_RELATION ||
 					$type==ARTIFACT_EXTRAFIELDTYPE_DATETIME) {
 				$value = addslashes($extra_fields[$extraField['extra_field_id']]);
+			} elseif ($type==ARTIFACT_EXTRAFIELDTYPE_TEXT ||
+					$type==ARTIFACT_EXTRAFIELDTYPE_TEXTAREA ) {
+				$value = $extra_fields[$extraField['extra_field_id']];
 			} elseif (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_SINGLECHOICE))) {
 				$ef = new ArtifactExtraField($at, $extraField['extra_field_id']);
 				$efe = new ArtifactExtraFieldElement($ef,$extra_fields[$extraField['extra_field_id']] );

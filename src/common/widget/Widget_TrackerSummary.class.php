@@ -61,6 +61,8 @@ class Widget_TrackerSummary extends Widget {
 		global $summary;
 		global $details;
 
+		$fieldInFormula = $ath->getFieldsInFormula();
+
 		$return = '';
 		$inputAttrs = array('form' => 'trackerform', 'type' => 'text', 'name' => 'summary', 'style' => 'width:99%', 'value' => $summary);
 		if ($func == 'detail') {
@@ -78,20 +80,29 @@ class Widget_TrackerSummary extends Widget {
 			$inputAttrs['required'] = 'required';
 			$requiredInfo = utils_requiredField();
 		}
+		if (in_array('summary', $fieldInFormula)) {
+			$inputAttrs['class'] = 'in-formula';
+		}
 		$return .= html_e('p', array(), _('Summary')._(': ').$requiredInfo.html_e('input', $inputAttrs));
+
+		if (in_array('description', $fieldInFormula)) {
+			$class = 'in-formula';
+		} else {
+			$class = '';
+		}
 		if ($func == 'detail') {
 			if (forge_check_perm('tracker', $atid, 'manager')) {
 				$editable = true;
 			} else {
 				$editable = false;
 			}
-			$return .= $ah->showDetails($editable, array('form' => 'trackerform'));
+			$return .= $ah->showDetails($editable, array('form' => 'trackerform', 'class'=>$class));
 		} elseif ($func == 'add') {
 			$return .= notepad_func();
 			$return .= $HTML->listTableTop();
 			$content = html_e('strong', array(), _('Detailed description').$requiredInfo._(':'));
 			$content .= notepad_button('document.forms.trackerform.details');
-			$content .= html_e('textarea', array('form' => 'trackerform', 'id'=>'tracker-description', 'required'=>'required', 'name'=>'details', 'rows'=>'20', 'style'=>'box-sizing: border-box; width: 100%', 'title'=>util_html_secure(html_get_tooltip_description('description'))), $details, false);
+			$content .= html_e('textarea', array('form' => 'trackerform', 'id'=>'tracker-description', 'required'=>'required', 'name'=>'details', 'rows'=>'20', 'class'=>$class, 'style'=>'box-sizing: border-box; width: 100%', 'title'=>util_html_secure(html_get_tooltip_description('description'))), $details, false);
 			$cells = array();
 			$cells[][] = $content;
 			$return .= $HTML->multiTableRow(array(), $cells);
