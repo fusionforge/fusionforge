@@ -156,9 +156,7 @@ if (count($ids) < 1) {
 				$displayTableTop = 1;
 			}
 			if ($last_day != strftime($date_format, $arr['activity_date'])) {
-				//	echo $HTML->listTableBottom($theader);
 				echo '<tr class="tableheading"><td colspan="4">'.strftime($date_format, $arr['activity_date']).'</td></tr>';
-				//	echo $HTML->listTableTop($theader);
 				$last_day=strftime($date_format, $arr['activity_date']);
 			}
 			switch (@$arr['section']) {
@@ -236,7 +234,7 @@ if (count($ids) < 1) {
 			echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($j++, true)), $cells);
 		}
 		if ($displayTableTop) {
-			echo $HTML->listTableBottom($theader);
+			echo $HTML->listTableBottom();
 		}
 		if (!$displayTableTop) {
 			echo $HTML->information(_('No Activity Found'));
@@ -246,6 +244,5 @@ if (count($ids) < 1) {
 	echo '</div>';
 	echo '</div>';
 }
-
 
 site_project_footer();
