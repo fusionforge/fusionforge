@@ -226,7 +226,7 @@ if (session_loggedin()) {
 		$warning_msg .= _('Skill deletion cancelled');
 	}
 
-	people_header(array('title'=>_('Edit Your Profile')));
+	people_header(array('title'=>_('Edit your profile')));
 
 	//for security, include group_id
 	$result = db_query_params("SELECT * FROM users WHERE user_id=$1", array(user_getid()));
