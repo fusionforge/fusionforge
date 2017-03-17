@@ -25,7 +25,7 @@ class ContribTrackerPlugin extends Plugin {
 	function __construct() {
 		parent::__construct();
 		$this->name = "contribtracker";
-		$this->text = _("Contribution Tracker"); // To show in the tabs, use...
+		$this->text = _("Contribution tracker"); // To show in the tabs, use...
 		$this->pkg_desc =
 _("This plugin allows each project to display a list of significant
 contributions, along with their authors.");
