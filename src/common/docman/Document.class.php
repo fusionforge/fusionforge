@@ -148,7 +148,7 @@ class Document extends FFObject {
 	 */
 	function create($filename, $filetype, $data, $doc_group, $title, $description, $stateid = 0, $vcomment = '', $importData = array()) {
 		if (strlen($title) < DOCMAN__TITLE_MIN_SIZE) {
-			$this->setError(_('Title Must Be At Least 5 Characters'));
+			$this->setError(sprintf(_('Title Must Be At Least %d Characters'), DOCMAN__TITLE_MIN_SIZE));
 			return false;
 		}
 		if (strlen($description) < DOCMAN__DESCRIPTION_MIN_SIZE) {
