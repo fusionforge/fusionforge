@@ -3,6 +3,7 @@
  * Generic Tracker Content Widget Class
  *
  * Copyright 2016,2017, Franck Villaume - TrivialDev
+ * Copyright 2017, Stephane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
  * This file is a part of Fusionforge.
