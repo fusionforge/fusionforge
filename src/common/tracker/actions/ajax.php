@@ -40,7 +40,7 @@ switch ($function) {
 		$extra_fields = getArrayFromRequest('extra_fields');
 		$status = getStringFromRequest('status');
 		$assigned_to = getStringFromRequest('assigned_to');
-		$priority = getStringFromRequest('priority');
+		$priority = getIntFromRequest('priority',3);
 		$summary = getStringFromRequest('summary');
 		$description = getStringFromRequest('description');
 		echo get_formulas_results($group, $atid, $extra_fields, $status, $assigned_to, $priority, $summary, $description);

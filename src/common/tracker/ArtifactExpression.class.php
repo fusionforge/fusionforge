@@ -62,11 +62,13 @@ class ArtifactExpression extends FFError {
 	{
 		$this->functionsDescription['in_array'] = _('Test if a value is in an (json) array');
 		$this->functionsDescription['datetime_add'] = _('Add to a date/time a duration (duration in ISO 8601 Format)');
+		$this->functionsDescription['intval'] = _('Get the integer value of a variable');
 		$this->expression = new Expression;
 		$this->expression->suppress_errors = true;
 		$this->expression->fb = array();
 		$this->expression->functions ['in_array'] = 'expr_in_array';
 		$this->expression->functions ['datetime_add'] = 'expr_datetime_add';
+		$this->expression->functions ['intval'] = 'expr_intval';
 	}
 
 	public function evaluate($expression) {
@@ -144,4 +146,8 @@ function expr_datetime_add($datetime, $interval) {
 	}
 	$dateTimeObj->add($intervalObj);
 	return $dateTimeObj->format(_('Y-m-d H:i'));
+}
+
+function expr_intval($value) {
+	return intval($value);
 }
