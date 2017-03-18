@@ -751,10 +751,10 @@ class Artifact extends FFObject {
 			$rows=db_numrows($res);
 			if ($rows > 0) {
 				for ($i=0; $i < $rows; $i++) {
-					$this->files[$i]=new ArtifactFile($this,db_fetch_array($res));
+					$this->files[$i] = new ArtifactFile($this, db_fetch_array($res));
 				}
 			} else {
-				$this->files=array();
+				$this->files = array();
 			}
 		}
 		return $this->files;
