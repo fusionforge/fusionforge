@@ -150,9 +150,10 @@ class CliActions {
 				}
 			}
 			$files = $artf->getFiles();
-			foreach ($files as $file) {
+			foreach ($files as $key => $file) {
 				unset($file->Artifact);
-				$artifactDump['artifact']['files'][] = (array)$file;
+				$artifactDump['artifact']['files'][$key] = (array)$file;
+				$artifactDump['artifact']['files'][$key]['storageref'] = $file->getFile();
 			}
 			$artifactDump['artifact']['relatedtasks'] = array();
 			$tasks = $artf->getRelatedTasks();
