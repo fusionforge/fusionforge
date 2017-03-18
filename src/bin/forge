@@ -46,13 +46,8 @@ class CliActions {
 				echo "to deactivate the <pluginName> plugin\n";
 				break;
 			case 'artifactDump':
-				echo "Use: .../forge artifactDump <aid> [latest|all] [json|raw]\n";
+				echo "Use: .../forge artifactDump <aid> [json|raw]\n";
 				echo "to dump an artifact from a specific tracker of a project.\n";
-				echo "the following functions are available:\n";
-				echo " - latest: (default option)\n";
-				echo "   use it to dump the latest value of the artifact\n";
-				echo " - all:\n";
-				echo "   use it to dump the full history and latest value of the artifact\n";
 				echo "the following output formats are available:\n";
 				echo " - json:\n";
 				echo "   pretty json formated string output\n";
@@ -60,15 +55,8 @@ class CliActions {
 				echo "   standard PHP array print_r format\n";
 				break;
 			case 'trackerDump':
-				echo "Use: .../forge trackerDump <atid> [setup|data|all] [json|raw]\n";
+				echo "Use: .../forge trackerDump <atid> [json|raw]\n";
 				echo "to dump a tracker from a specific project.\n";
-				echo "the following functions are available:\n";
-				echo " - setup: (default option)\n";
-				echo "   use it to dump the full configuration of the tracker\n";
-				echo " - data:\n";
-				echo "   use it to dump all the artifacts of the tracker\n";
-				echo " - all:\n";
-				echo "   use it to dump the full configuration of the tracker and the artifacts\n";
 				echo "the following output formats are available:\n";
 				echo " - json:\n";
 				echo "   pretty json formated string output\n";
@@ -76,13 +64,8 @@ class CliActions {
 				echo "   standard PHP array print_r format\n";
 				break;
 			case 'documentDump':
-				echo "Use: .../forge documentDump <docid> [latest|all] [json|raw]\n";
+				echo "Use: .../forge documentDump <docid> [json|raw]\n";
 				echo "to dump a document from a specific project.\n";
-				echo "the following functions are available:\n";
-				echo " - latest: (default option)\n";
-				echo "   use it to dump the latest value of the document\n";
-				echo " - all:\n";
-				echo "   use it to dump the full history and latest value of the document\n";
 				echo "the following output formats are available:\n";
 				echo " - json:\n";
 				echo "   pretty json formated string output\n";
@@ -90,15 +73,8 @@ class CliActions {
 				echo "   standard PHP array print_r format\n";
 				break;
 			case 'docmanDump':
-				echo "Use: .../forge docmanDump <groupid> [setup|data|all] [json|raw]\n";
+				echo "Use: .../forge docmanDump <groupid> [json|raw]\n";
 				echo "to dump docman from a specific project.\n";
-				echo "the following functions are available:\n";
-				echo " - setup: (default option)\n";
-				echo "   use it to dump the full configuration of the document management tool\n";
-				echo " - data:\n";
-				echo "   use it to dump the complete tree of the document management tool\n";
-				echo " - all:\n";
-				echo "   use it to dump the full configuration and the tree\n";
 				echo "the following output formats are available:\n";
 				echo " - json:\n";
 				echo "   pretty json formated string output\n";
@@ -106,15 +82,8 @@ class CliActions {
 				echo "   standard PHP array print_r format\n";
 				break;
 			case 'packageDump':
-				echo "Use: .../forge packageDump <packageid> [setup|data|all] [json|raw]\n";
+				echo "Use: .../forge packageDump <packageid> [json|raw]\n";
 				echo "to dump a spectific FRS package from a specific project.\n";
-				echo "the following functions are available:\n";
-				echo " - setup: (default option)\n";
-				echo "   use it to dump all releases of this package & setup of this package\n";
-				echo " - data:\n";
-				echo "   use it to dump all files of this package\n";
-				echo " - all:\n";
-				echo "   use it to dump all releases + setup & files of this package\n";
 				echo "the following output formats are available:\n";
 				echo " - json:\n";
 				echo "   pretty json formated string output\n";
@@ -122,15 +91,9 @@ class CliActions {
 				echo "   standard PHP array print_r format\n";
 				break;
 			case 'frsDump':
-				echo "Use: .../forge frsDump <groupid> [setup|data|all] [json|raw]\n";
+				echo "Use: .../forge frsDump <groupid> [json|raw]\n";
 				echo "to dump FRS from a specific project.\n";
 				echo "the following functions are available:\n";
-				echo " - setup: (default option)\n";
-				echo "   use it to dump all packages & releases of the FRS management tool\n";
-				echo " - data:\n";
-				echo "   use it to dump all files of the FRS management tool\n";
-				echo " - all:\n";
-				echo "   use it to dump all packages & releases and the files\n";
 				echo "the following output formats are available:\n";
 				echo " - json:\n";
 				echo "   pretty json formated string output\n";
@@ -138,15 +101,8 @@ class CliActions {
 				echo "   standard PHP array print_r format\n";
 				break;
 			case 'groupDump':
-				echo "Use: .../forge groupDump <groupid> [setup|data|all] [json|raw]\n";
+				echo "Use: .../forge groupDump <groupid> [json|raw]\n";
 				echo "to dump a group.\n";
-				echo "the following functions are available:\n";
-				echo " - setup: (default option)\n";
-				echo "   use it to dump the full configuration of the group including configuration of each feature used\n";
-				echo " - data:\n";
-				echo "   use it to dump the complete data\n";
-				echo " - all:\n";
-				echo "   use it to dump the full configuration and the data\n";
 				echo "the following output formats are available:\n";
 				echo " - json:\n";
 				echo "   pretty json formated string output\n";
@@ -172,224 +128,134 @@ class CliActions {
 		$pm->deactivate($name);
 	}
 
-	function artifactDump($aid, $params = array('latest', 'json')) {
+	function artifactDump($aid, $format = 'json') {
 		$artifactDump['id'] = $aid;
 		$artf = artifact_get_object($aid);
 		if ($artf && is_object($artf) && !$artf->isError()) {
-			switch ($params[0]) {
-				case 'all':
-					$artifactDump['history'] = array();
-					$hist = $artf->getHistory();
-					if (db_numrows($hist) > 0) {
-						while ($arr = db_fetch_array($hist, PGSQL_ASSOC)) {
-							$artifactDump['history'][] = $arr;
-						}
-					}
-				case 'latest':
-					$artifactDump['artifact'] = (array)$artf;
-					unset($artifactDump['artifact']['ArtifactType']);
-					$artifactDump['monitor'] = $artf->getMonitorIds();
-					$artifactDump['messages'] = array();
-					$messages = $artf->getMessages();
-					if (db_numrows($messages) > 0) {
-						while ($arr = db_fetch_array($messages, PGSQL_ASSOC)) {
-							$artifactDump['messages'][] = $arr;
-						}
-					}
-					$files = $artf->getFiles();
-					foreach ($files as $file) {
-						unset($file->Artifact);
-						$artifactDump['artifact']['files'][] = (array)$file;
-					}
-					$artifactDump['artifact']['relatedtasks'] = array();
-					$tasks = $artf->getRelatedTasks();
-					if (db_numrows($tasks) > 0) {
-						while ($arr = db_fetch_array($tasks, PGSQL_ASSOC)) {
-							$artifactDump['artifact']['relatedtasks'][] = $arr;
-						}
-					}
-					$artifactDump['artifact']['votes'] = $artf->getVotes();
-					$artifactDump['artifact']['extra_field_data'] = $artf->getExtraFieldDataText();
-					break;
-				default:
-					$artifactDump['error'][] = _('Unknown function');
-					break;
+			$artifactDump['history'] = array();
+			$hist = $artf->getHistory();
+			if (db_numrows($hist) > 0) {
+				while ($arr = db_fetch_array($hist, PGSQL_ASSOC)) {
+					$artifactDump['history'][] = $arr;
+				}
 			}
+			$artifactDump['artifact'] = (array)$artf;
+			unset($artifactDump['artifact']['ArtifactType']);
+			$artifactDump['monitor'] = $artf->getMonitorIds();
+			$artifactDump['messages'] = array();
+			$messages = $artf->getMessages();
+			if (db_numrows($messages) > 0) {
+				while ($arr = db_fetch_array($messages, PGSQL_ASSOC)) {
+					$artifactDump['messages'][] = $arr;
+				}
+			}
+			$files = $artf->getFiles();
+			foreach ($files as $file) {
+				unset($file->Artifact);
+				$artifactDump['artifact']['files'][] = (array)$file;
+			}
+			$artifactDump['artifact']['relatedtasks'] = array();
+			$tasks = $artf->getRelatedTasks();
+			if (db_numrows($tasks) > 0) {
+				while ($arr = db_fetch_array($tasks, PGSQL_ASSOC)) {
+					$artifactDump['artifact']['relatedtasks'][] = $arr;
+				}
+			}
+			$artifactDump['artifact']['votes'] = $artf->getVotes();
+			$artifactDump['artifact']['extra_field_data'] = $artf->getExtraFieldDataText();
 		} else {
 			$artifactDump['error'][] = _('Unable to get artifact id')._(': ').$aid;
 		}
 		ksort($artifactDump);
-		$this->print_result($artifactDump, $params);
+		$this->print_result($artifactDump, $format);
 		return $artifactDump;
 	}
 
-	function groupDump($group_id, $params = array('setup', 'json')) {
+	function groupDump($group_id, $format = 'json') {
 		$groupDump['id'] = $group_id;
 		$group = group_get_object($group_id);
 		if ($group && is_object($group) && !$group->isError()) {
-			switch ($params[0]) {
-				case 'all':
-					$groupDump['setup'] = (array)$group;
-					$groupDump['setup']['membersArr'] = $group->getMembers(false);
-					if ($group->usesDocman()) {
-						$groupDump['docman'] = $this->docmanDump($group_id, array('all', 'return'));
-					}
-					if ($group->usesTracker()) {
-						$atf = new ArtifactTypeFactory($group);
-						$atid_arr = $atf->getAllArtifactTypeIds();
-						foreach ($atid_arr as $atid) {
-							$groupDump['trackers'][] = $this->trackerDump($atid, array('all', 'return'));
-						}
-					}
-					if ($group->usesForum()) {
-						$groupDump['forums'] = array();
-					}
-					if ($group->usesFRS()) {
-						$groupDump['frs'] = array();
-					}
-					if ($group->usesNews()) {
-						$groupDump['news'] = array();
-					}
-					break;
-				case 'data':
-					if ($group->usesDocman()) {
-						$groupDump['docman'] = $this->docmanDump($group_id, array('data', 'return'));
-					}
-					if ($group->usesTracker()) {
-						$atf = new ArtifactTypeFactory($group);
-						$atid_arr = $atf->getAllArtifactTypeIds();
-						foreach ($atid_arr as $atid) {
-							$groupDump['trackers'][] = $this->trackerDump($atid, array('data', 'return'));
-						}
-					}
-					if ($group->usesForum()) {
-						$groupDump['forums'] = array();
-					}
-					if ($group->usesFRS()) {
-						$groupDump['frs'] = array();
-					}
-					if ($group->usesNews()) {
-						$groupDump['news'] = array();
-					}
-					break;
-				case 'setup':
-					$groupDump['setup'] = (array)$group;
-					$groupDump['setup']['membersArr'] = $group->getMembers(false);
-					if ($group->usesDocman()) {
-						$groupDump['docman'] = $this->docmanDump($group_id, array('setup', 'return'));
-					}
-					if ($group->usesTracker()) {
-						$atf = new ArtifactTypeFactory($group);
-						$atid_arr = $atf->getAllArtifactTypeIds();
-						foreach ($atid_arr as $atid) {
-							$groupDump['trackers'][] = $this->trackerDump($atid, array('setup', 'return'));
-						}
-					}
-					if ($group->usesForum()) {
-						$groupDump['forums'] = array();
-					}
-					if ($group->usesFRS()) {
-						$groupDump['frs'] = $this->frsDump($group_id, array('setup', 'return'));
-					}
-					if ($group->usesNews()) {
-						$groupDump['news'] = array();
-					}
-					break;
-				default:
-					$groupDump['error'][] = _('Unknown function');
-					break;
+			$groupDump['setup'] = (array)$group;
+			$groupDump['setup']['membersArr'] = $group->getMembers(false);
+			if ($group->usesDocman()) {
+				$groupDump['docman'] = $this->docmanDump($group_id, 'return');
+			}
+			if ($group->usesTracker()) {
+				$atf = new ArtifactTypeFactory($group);
+				$atid_arr = $atf->getAllArtifactTypeIds();
+				foreach ($atid_arr as $atid) {
+					$groupDump['trackers'][] = $this->trackerDump($atid, 'return');
+				}
+			}
+			if ($group->usesForum()) {
+				$groupDump['forums'] = array();
+			}
+			if ($group->usesFRS()) {
+				$groupDump['frs'] = $this->frsDump($group_id, 'return');
+			}
+			if ($group->usesNews()) {
+				$groupDump['news'] = array();
 			}
 		} else {
 			$groupDump['error'][] = _('Unable to get group id')._(': ').$group_id;
 		}
 		ksort($groupDump);
-		$this->print_result($groupDump, $params);
+		$this->print_result($groupDump, $format);
 	}
 
-	function trackerDump($atid, $params = array('setup', 'json')) {
+	function trackerDump($atid, $format = 'json') {
 		$trackerDump['id'] = $atid;
 		$at = artifactType_get_object($atid);
 		if ($at && is_object($at) && !$at->isError()) {
-			switch ($params[0]) {
-				case 'all':
-					$trackerDump['setup'] = $at->getSettings();
-				case 'data':
-					$af = new ArtifactFactory($at);
-					if ($af && is_object($af) && !$at->isError()) {
-						$af->setup(0, '', '', 0, 'overwrite', false, false, array(), false);
-						$artifacts = $af->getArtifacts();
-						foreach ($artifacts as $artf) {
-							$trackerDump['data'][] = $this->artifactDump($artf->getID(), array('all', 'return'));
-						}
-						$trackerDump['monitor'] = $at->getMonitorIds();
-					} else {
-						$trackerDump['error'][] = _('Unable to retrieve artifacts');
-					}
-					break;
-				case 'setup':
-					$trackerDump['setup'] = $at->getSettings();
-					break;
-				default:
-					$trackerDump['error'][] = _('Unknown function');
-					break;
+			$trackerDump['setup'] = $at->getSettings();
+			$af = new ArtifactFactory($at);
+			if ($af && is_object($af) && !$at->isError()) {
+				$af->setup(0, '', '', 0, 'overwrite', false, false, array(), false);
+				$artifacts = $af->getArtifacts();
+				foreach ($artifacts as $artf) {
+					$trackerDump['data'][] = $this->artifactDump($artf->getID(), 'return');
+				}
+				$trackerDump['monitor'] = $at->getMonitorIds();
+			} else {
+				$trackerDump['error'][] = _('Unable to retrieve artifacts');
 			}
 		} else {
 			$trackerDump['error'][] = _('Unable to get tracker id')._(': ').$atid;
 		}
 		ksort($trackerDump);
-		$this->print_result($trackerDump, $params);
+		$this->print_result($trackerDump, $format);
 		return $trackerDump;
 	}
 
-	function documentDump($docid, $params = array('latest', 'json')) {
+	function documentDump($docid, $format = 'json') {
 		$documentDump['id'] = $docid;
 		$doc = document_get_object($docid);
 		if ($doc && is_object($doc) && !$doc->isError()) {
-			switch ($params[0]) {
-				case 'all':
-					$dvf = new DocumentVersionFactory($doc);
-					$documentDump['versions'] = $dvf->getVersions();
-					$serialIDs = $dvf->getSerialIDs();
-					$drf = new DocumentReviewFactory($doc);
-					$documentDump['reviews'] = $drf->getReviews($serialIDs);
-				case 'latest':
-					$documentDump['document'] = (array)$doc;
-					unset($documentDump['document']['Group']);
-					$documentDump['monitor'] = $doc->getMonitorIds();
-					break;
-				default:
-					$documentDump['error'][] = _('Unknown function');
-					break;
-			}
+			$dvf = new DocumentVersionFactory($doc);
+			$documentDump['versions'] = $dvf->getVersions();
+			$serialIDs = $dvf->getSerialIDs();
+			$drf = new DocumentReviewFactory($doc);
+			$documentDump['reviews'] = $drf->getReviews($serialIDs);
+			$documentDump['document'] = (array)$doc;
+			unset($documentDump['document']['Group']);
+			$documentDump['monitor'] = $doc->getMonitorIds();
 		} else {
 			$documentDump['error'][] = _('Unable to get document id')._(': ').$docid;
 		}
 		ksort($documentDump);
-		$this->print_result($documentDump, $params);
+		$this->print_result($documentDump, $format);
 		return $documentDump;
 	}
 
-	function docmanDump($group_id, $params = array('setup', 'json')) {
+	function docmanDump($group_id, $format = 'json') {
 		$docmanDump = array();
 		$group = group_get_object($group_id);
 		if ($group && is_object($group) && !$group->isError()) {
 			if ($group->usesDocman()) {
 				$dm = new DocumentManager($group);
 				if ($dm && is_object($dm) && !$dm->isError()) {
-					switch ($params[0]) {
-						case 'all':
-							$docmanDump['setup'] = $dm->getSettings();
-						case 'data':
-							$tree = $dm->getTree();
-							$docmanDump['data'] = $tree;
-							break;
-						case 'setup':
-							$docmanDump['setup'] = $dm->getSettings();
-							break;
-						default:
-							$docmanDump['error'][] = _('Unknown function');
-							break;
-					}
+					$docmanDump['setup'] = $dm->getSettings();
+					$docmanDump['data'] = $dm->getTree();
 				} else {
 					$docmanDump['error'][] = _('Unable to get document manager for group id')._(': ').$group_id;
 				}
@@ -400,11 +266,11 @@ class CliActions {
 			$docmanDump['error'][] = _('Unable to get group id')._(': ').$group_id;
 		}
 		ksort($docmanDump);
-		$this->print_result($docmanDump, $params);
+		$this->print_result($docmanDump, $format);
 		return $docmanDump;
 	}
 
-	function frsDump($group_id, $params = array('setup', 'json')) {
+	function frsDump($group_id, $format = 'json') {
 		$frsDump = array();
 		$group = group_get_object($group_id);
 		if ($group && is_object($group) && !$group->isError()) {
@@ -413,7 +279,7 @@ class CliActions {
 				if ($frsfp && is_object($frsfp) && !$frsfp->isError()) {
 					$frspIds = $frsfp->getAllPackagesIds();
 					foreach ($frspIds as $frspId) {
-						$frsDump['package'][] = $this->packageDump($frspId, array('all', 'return'));
+						$frsDump['package'][] = $this->packageDump($frspId, 'return');
 					}
 				} else {
 					$frsDump['error'][] = _('Unable to get FRS for group id')._(': ').$group_id;
@@ -425,84 +291,53 @@ class CliActions {
 			$frsDump['error'][] = _('Unable to get group id')._(': ').$group_id;
 		}
 		ksort($frsDump);
-		$this->print_result($frsDump, $params);
+		$this->print_result($frsDump, $format);
 		return $frsDump;
 	}
 
-	function packageDump($packageid, $params = array('setup', 'json')) {
+	function packageDump($packageid, $format = 'json') {
 		$packageDump['id'] = $packageid;
 		$package = frspackage_get_object($packageid);
 		if ($package && is_object($package) && !$package->isError()) {
 			unset($package->Group);
 			$packageDump['setup'] = (array)$package;
-			switch ($params[0]) {
-				case 'all':
-					$frsrs = $package->getReleases();
-					$packageDump['setup']['package_releases'] = array();
-					foreach ($frsrs as $frsr) {
-						unset($frsr->FRSPackage);
-						$packageDump['setup']['package_releases'][] = $frsr;
-					}
-					$packageDump['monitor'] = $package->getMonitorIds();
-				case 'data':
-					break;
-				case 'setup':
-					$frsrs = $package->getReleases();
-					$packageDump['setup']['package_releases'] = array();
-					foreach ($frsrs as $frsr) {
-						unset($frsr->FRSPackage);
-						$packageDump['setup']['package_releases'][] = $frsr;
-					}
-					break;
-				default:
-					$packageDump['error'][] = _('Unknown function');
-					break;
+			$frsrs = $package->getReleases();
+			$packageDump['setup']['package_releases'] = array();
+			foreach ($frsrs as $frsr) {
+				unset($frsr->FRSPackage);
+				$packageDump['setup']['package_releases'][] = $frsr;
 			}
+			$packageDump['monitor'] = $package->getMonitorIds();
 		} else {
 			$packageDump['error'][] = _('Unable to get package id')._(': ').$packageid;
 		}
 		ksort($packageDump);
-		$this->print_result($packageDump, $params);
+		$this->print_result($packageDump, $format);
 		return $packageDump;
 	}
 
-	function releaseDump($releaseid, $params = array('setup', 'json')) {
+	function releaseDump($releaseid, $format = 'json') {
 		$releaseDump['id'] = $releaseid;
 		$release = frsrelease_get_object($releaseid);
 		if ($release && is_object($release) && !$release->isError()) {
-			switch($params[0]) {
-				case 'all':
-					unset($release->FRSPackage);
-					$releaseDump['setup'] = $release;
-				case 'data':
-					break;
-				case 'setup':
-					unset($release->FRSPackage);
-					$releaseDump['setup'] = $release;
-					break;
-				default:
-					$releaseDump['error'][] = _('Unknown function');
-					break;
-			}
+			unset($release->FRSPackage);
+			$releaseDump['setup'] = $release;
 		} else {
 			$releaseDump['error'][] = _('Unable to get release id')._(': ').$releaseid;
 		}
 		ksort($releaseDump);
-		$this->print_result($releaseDump, $params);
+		$this->print_result($releaseDump, $format);
 		return $releaseDump;
 	}
 
-	function print_result($arrayDump, $params) {
-		if (isset($params[1])) {
-			if (in_array($params[1], array('json', 'raw', 'return'))) {
-				$format = $params[1];
-			} else {
-				$arrayDump['error'][] = _('Unknown format. Fallback to raw');
-			}
+	function print_result($arrayDump, $format = 'json') {
+		if (in_array($format, array('json', 'raw', 'return'))) {
+			$lformat = $format;
 		} else {
-			$format = 'raw';
+			$arrayDump['error'][] = _('Unknown format. Fallback to raw');
+			$lformat = 'raw';
 		}
-		switch ($format) {
+		switch ($lformat) {
 			case 'return':
 				return true;
 				break;
