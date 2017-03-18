@@ -731,12 +731,12 @@ class ArtifactType extends FFError {
 	function getFieldsInFormula() {
 		$return = array();
 		if ($this->usesCustomStatuses()) {
-			$fields = array( 'assigned_to','priority','summary','description');
+			$fields = array('assigned_to','priority','summary','description');
 		} else {
-			$fields = array( 'assigned_to','priority','summary','description','status');
+			$fields = array('assigned_to','priority','summary','description','status');
 		}
 		$res = db_query_params('SELECT string_agg(formula,chr(10)) FROM artifact_extra_field_formula NATURAL INNER JOIN artifact_extra_field_list WHERE is_disabled=0 AND group_artifact_id=$1',
-				array ($this->getID()));
+					array($this->getID()));
 		if (db_numrows($res) > 0) {
 			$row = db_fetch_array($res);
 			if (preg_match_all("/([a-z]\w*)/m", $row[0], $matches)) {
