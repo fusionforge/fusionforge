@@ -108,8 +108,15 @@ class DocumentVersionFactory extends FFError {
 					array($this->Document->getID()));
 		if ($res) {
 			$numrows = db_numrows($res);
+			$i = 0;
 			while ($arr = db_fetch_array($res)) {
-				$versions[] = $arr;
+				$versions[$i] = $arr;
+				if ($arr['filetype'] != 'URL') {
+					$versions[$i]['storageref'] = DocumentStorage::instance()->get($arr['serial_id']);
+				} else {
+					$versions[$i]['storageref'] = null;
+				}
+				$i++;
 			}
 		}
 		db_free_result($res);
