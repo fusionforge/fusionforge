@@ -3,6 +3,7 @@
  * Main Tracker Content Widget Class
  *
  * Copyright 2016, Franck Villaume - TrivialDev
+ * Copyright 2017, Stephane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
  * This file is a part of Fusionforge.
@@ -89,14 +90,14 @@ class Widget_TrackerMain extends Widget {
 		$cells[][] = html_e('strong', array(), _('Assigned to')._(': '));
 		if (forge_check_perm('tracker', $atid, 'manager')) {
 			if (in_array('assigned_to', $fieldInFormula)) {
-				$techBoxClass = 'in-formula';
+				$class = 'in-formula';
 			} else {
-				$techBoxClass = '';
+				$class = '';
 			}
 			if ($func == 'detail') {
-				$cells[][] = $ath->technicianBox('assigned_to', $ah->getAssignedTo(), true, 'none', -1, '', false, array('form' => 'trackerform', 'class'=>$class));
+				$cells[][] = $ath->technicianBox('assigned_to', $ah->getAssignedTo(), true, 'none', -1, '', false, array('form' => 'trackerform', 'class' => $class));
 			} else {
-				$cells[][] = $ath->technicianBox('assigned_to', $assigned_to, true, 'none', -1, '', false, array('form' => 'trackerform', 'class'=>$class));
+				$cells[][] = $ath->technicianBox('assigned_to', $assigned_to, true, 'none', -1, '', false, array('form' => 'trackerform', 'class' => $class));
 			}
 		} else {
 			$cells[][] = $ah->getAssignedRealName().' ('.$ah->getAssignedUnixName().')';
@@ -112,9 +113,9 @@ class Widget_TrackerMain extends Widget {
 					$class = '';
 				}
 				if ($func == 'detail') {
-					$cells[][] = $ath->statusBox('status_id', $ah->getStatusID(), false, '', array('form' => 'trackerform', 'class'=>$class));
+					$cells[][] = $ath->statusBox('status_id', $ah->getStatusID(), false, '', array('form' => 'trackerform', 'class' => $class));
 				} else {
-					$cells[][] = $ath->statusBox('status_id', 'xzxz', false, '', array('form' => 'trackerform', 'class'=>$class));
+					$cells[][] = $ath->statusBox('status_id', 'xzxz', false, '', array('form' => 'trackerform', 'class' => $class));
 				}
 			} else {
 				$cells[][] = $ah->getStatusName();
@@ -124,15 +125,15 @@ class Widget_TrackerMain extends Widget {
 		$cells = array();
 		$cells[][] = html_e('strong', array(), _('Priority')._(': '));
 		if (forge_check_perm('tracker', $atid, 'manager')) {
-			if ($func == 'detail') {
-				if (in_array('priority', $fieldInFormula)) {
-					$class = 'in-formula';
-				} else {
-					$class = '';
-				}
-				$cells[][] = $ath->priorityBox('priority', $ah->getPriority(), false, array('form' => 'trackerform', 'class'=>$class));
+			if (in_array('priority', $fieldInFormula)) {
+				$class = 'in-formula';
 			} else {
-				$cells[][] = $ath->priorityBox('priority', $priority, false, array('form' => 'trackerform', 'class'=>$class));
+				$class = '';
+			}
+			if ($func == 'detail') {
+				$cells[][] = $ath->priorityBox('priority', $ah->getPriority(), false, array('form' => 'trackerform', 'class' => $class));
+			} else {
+				$cells[][] = $ath->priorityBox('priority', $priority, false, array('form' => 'trackerform', 'class' => $class));
 			}
 		} else {
 			$cells[][] = $ah->getPriority();
