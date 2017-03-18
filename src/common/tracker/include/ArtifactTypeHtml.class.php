@@ -1389,7 +1389,7 @@ class ArtifactTypeHtml extends ArtifactType {
 		$.ajax({
 			type: 'POST',
 			url: 'index.php',
-			data: 'rtype=ajax&function=get_formulas_results&group_id='+groupId+'&atid='+atId+'&status='+$("select[name='status_id'] option:selected").text()+'&assigned_to='+$("select[name='assigned_to'] option:selected").text()+'&priority='+$("select[name='priority'] option:selected").text()+'&'+$("[name^='extra_fields'], #tracker-summary, #tracker-description").serialize(),
+			data: 'rtype=ajax&function=get_formulas_results&group_id='+groupId+'&atid='+atId+'&status='+$("select[name='status_id'] option:selected").text()+'&assigned_to='+$("select[name='assigned_to'] option:selected").text()+'&'+$("[name^='extra_fields'], #tracker-summary, #tracker-description, [name='priority']").serialize(),
 			async: false,
 			dataType: 'json',
 			success: function(answer){
