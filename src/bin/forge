@@ -32,6 +32,11 @@ require_once $gfcommon.'docman/DocumentReviewFactory.class.php';
 class CliActions {
 	function help($method = null) {
 		$methods = join('|', get_class_methods($this));
+		$dumpFormatInfo = "the following output formats are available:\n".
+				  " - json:\n".
+				  "   pretty json formated string output\n".
+				  " - raw: (default)\n".
+				  "   standard PHP array print_r format\n";
 		switch ($method) {
 			case 'help':
 				echo "Use: .../forge help ($methods)\n";
@@ -48,66 +53,37 @@ class CliActions {
 			case 'artifactDump':
 				echo "Use: .../forge artifactDump <aid> [json|raw]\n";
 				echo "to dump an artifact from a specific tracker of a project.\n";
-				echo "the following output formats are available:\n";
-				echo " - json:\n";
-				echo "   pretty json formated string output\n";
-				echo " - raw: (default)\n";
-				echo "   standard PHP array print_r format\n";
+				echo $dumpFormatInfo;
 				break;
 			case 'trackerDump':
 				echo "Use: .../forge trackerDump <atid> [json|raw]\n";
 				echo "to dump a tracker from a specific project.\n";
-				echo "the following output formats are available:\n";
-				echo " - json:\n";
-				echo "   pretty json formated string output\n";
-				echo " - raw: (default)\n";
-				echo "   standard PHP array print_r format\n";
+				echo $dumpFormatInfo;
 				break;
 			case 'documentDump':
 				echo "Use: .../forge documentDump <docid> [json|raw]\n";
 				echo "to dump a document from a specific project.\n";
-				echo "the following output formats are available:\n";
-				echo " - json:\n";
-				echo "   pretty json formated string output\n";
-				echo " - raw: (default)\n";
-				echo "   standard PHP array print_r format\n";
+				echo $dumpFormatInfo;
 				break;
 			case 'docmanDump':
 				echo "Use: .../forge docmanDump <groupid> [json|raw]\n";
 				echo "to dump docman from a specific project.\n";
-				echo "the following output formats are available:\n";
-				echo " - json:\n";
-				echo "   pretty json formated string output\n";
-				echo " - raw: (default)\n";
-				echo "   standard PHP array print_r format\n";
+				echo $dumpFormatInfo;
 				break;
 			case 'packageDump':
 				echo "Use: .../forge packageDump <packageid> [json|raw]\n";
 				echo "to dump a spectific FRS package from a specific project.\n";
-				echo "the following output formats are available:\n";
-				echo " - json:\n";
-				echo "   pretty json formated string output\n";
-				echo " - raw: (default)\n";
-				echo "   standard PHP array print_r format\n";
+				echo $dumpFormatInfo;
 				break;
 			case 'frsDump':
 				echo "Use: .../forge frsDump <groupid> [json|raw]\n";
 				echo "to dump FRS from a specific project.\n";
-				echo "the following functions are available:\n";
-				echo "the following output formats are available:\n";
-				echo " - json:\n";
-				echo "   pretty json formated string output\n";
-				echo " - raw: (default)\n";
-				echo "   standard PHP array print_r format\n";
+				echo $dumpFormatInfo;
 				break;
 			case 'groupDump':
 				echo "Use: .../forge groupDump <groupid> [json|raw]\n";
 				echo "to dump a group.\n";
-				echo "the following output formats are available:\n";
-				echo " - json:\n";
-				echo "   pretty json formated string output\n";
-				echo " - raw: (default)\n";
-				echo "   standard PHP array print_r format\n";
+				echo $dumpFormatInfo;
 			default:
 				echo "Usage: .../forge ($methods) [arguments...]\n" ;
 				echo "Get more info use: .../forge help help\n";
@@ -189,7 +165,11 @@ class CliActions {
 				}
 			}
 			if ($group->usesForum()) {
-				$groupDump['forums'] = array();
+				$ff = new ForumFactory($group);
+				$ffid_arr = $ff->getAllForumIds();
+				foreach ($ffid_arr as $ffid) {
+					$groupDump['forums'][] = $this->forumDump($ffid, 'return');
+				}
 			}
 			if ($group->usesFRS()) {
 				$groupDump['frs'] = $this->frsDump($group_id, 'return');
@@ -197,11 +177,26 @@ class CliActions {
 			if ($group->usesNews()) {
 				$groupDump['news'] = array();
 			}
+			plugin_hook_by_reference('pluginDump', $groupDump);
 		} else {
 			$groupDump['error'][] = _('Unable to get group id')._(': ').$group_id;
 		}
 		ksort($groupDump);
 		$this->print_result($groupDump, $format);
+	}
+
+	function forumDump($fid, $format = 'json') {
+		$forumDump['id'] = $fid;
+		$forum = forum_get_object($fid);
+		if ($forum && is_object($forum) && !$forum->isError()) {
+			unset($forum->Group);
+			$forumDump['setup'] = (array)$forum;
+		} else {
+			$forumDump['error'][] = _('Unable to get forum id')._(': ').$fid;
+		}
+		ksort($forumDump);
+		$this->print_result($forumDump, $format);
+		return $forumDump;
 	}
 
 	function trackerDump($atid, $format = 'json') {
