@@ -343,8 +343,14 @@ class DocumentFactory extends FFError {
 			foreach ($docs as $doc) {
 				$dvf = new DocumentVersionFactory($doc);
 				$docArr = array();
-				$docArr['docid'] = $doc->getID();
+				$docArr['id'] = $doc->getID();
+				$docArr['document'] = (array)$doc;
+				unset($docArr['document']['Group']);
 				$docArr['versions'] = $dvf->getVersions();
+				$docArr['monitor'] = $doc->getMonitorIds();
+				$serialIDs = $dvf->getSerialIDs();
+				$drf = new DocumentReviewFactory($doc);
+				$docArr['reviews'] = $drf->getReviews($serialIDs);
 				$return[] = $docArr;
 			}
 		}
