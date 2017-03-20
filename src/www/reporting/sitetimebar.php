@@ -94,8 +94,7 @@ if ($typ=='r') {
 	$report->setData($res,1);
 	$data=$report->getData();
 	$labels=$report->getDates();
-	echo $HTML->listTableTop (array(_('Week'),
-			_('Time')));
+	echo $HTML->listTableTop(array(_('Week'), _('Time')));
 
 	for ($i=0; $i<count($labels); $i++) {
 
@@ -104,7 +103,7 @@ if ($typ=='r') {
 
 	}
 
-	echo $HTML->listTableBottom ();
+	echo $HTML->listTableBottom();
 
 } elseif ($start != $end) {
 	report_sitetimebargraph($start, $end);

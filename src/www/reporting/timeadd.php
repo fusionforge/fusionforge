@@ -150,7 +150,7 @@ if ($week) {
 		$xi = 0;
 		$total_hours = 0;
 
-		echo $HTML->listTableTop ($title_arr);
+		echo $HTML->listTableTop($title_arr);
 		while ($r=db_fetch_array($res)) {
 			echo '<tr '.$HTML->boxGetAltRowStyle($xi++).'>
 				<td class="align-center">'.$r['name'].'</td>

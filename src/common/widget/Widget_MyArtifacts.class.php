@@ -112,17 +112,17 @@ class Widget_MyArtifacts extends Widget {
 		global $HTML;
 		$atf = new ArtifactsForUser(@UserManager::instance()->getCurrentUser());
 		$my_artifacts = array();
-		if ($this->_artifact_show == 'ASM'){
-			$my_artifacts = $atf->getArtifactsFromSQLwithParams('SELECT * FROM artifact_vw av where (av.submitted_by=$1 OR av.assigned_to=$1 OR av.artifact_id IN (select artifact_monitor.artifact_id FROM artifact_monitor WHERE artifact_monitor.user_id = $1)) AND av.status_id=1 ORDER BY av.group_artifact_id, av.artifact_id DESC',array( UserManager::instance()->getCurrentUser()->getID()));
+		if ($this->_artifact_show == 'ASM') {
+			$my_artifacts = $atf->getArtifactsFromSQLwithParams('SELECT * FROM artifact_vw av where (av.submitted_by=$1 OR av.assigned_to=$1 OR av.artifact_id IN (select artifact_monitor.artifact_id FROM artifact_monitor WHERE artifact_monitor.user_id = $1)) AND av.status_id=1 ORDER BY av.group_artifact_id, av.artifact_id DESC',array(UserManager::instance()->getCurrentUser()->getID()));
 		}
-		if ($this->_artifact_show == 'AS'){
-			$my_artifacts = $atf->getArtifactsFromSQLwithParams('SELECT * FROM artifact_vw av where (av.submitted_by=$1 OR av.assigned_to=$1) AND av.status_id=1 ORDER BY av.group_artifact_id, av.artifact_id DESC',array( UserManager::instance()->getCurrentUser()->getID()));
+		if ($this->_artifact_show == 'AS') {
+			$my_artifacts = $atf->getArtifactsFromSQLwithParams('SELECT * FROM artifact_vw av where (av.submitted_by=$1 OR av.assigned_to=$1) AND av.status_id=1 ORDER BY av.group_artifact_id, av.artifact_id DESC',array(UserManager::instance()->getCurrentUser()->getID()));
 		}
-		if ($this->_artifact_show == 'AM'){
-			$my_artifacts = $atf->getArtifactsFromSQLwithParams('SELECT * FROM artifact_vw av where (av.assigned_to=$1 OR av.artifact_id IN (select artifact_monitor.artifact_id FROM artifact_monitor WHERE artifact_monitor.user_id = $1)) AND av.status_id=1 ORDER BY av.group_artifact_id, av.artifact_id DESC',array( UserManager::instance()->getCurrentUser()->getID()));
+		if ($this->_artifact_show == 'AM') {
+			$my_artifacts = $atf->getArtifactsFromSQLwithParams('SELECT * FROM artifact_vw av where (av.assigned_to=$1 OR av.artifact_id IN (select artifact_monitor.artifact_id FROM artifact_monitor WHERE artifact_monitor.user_id = $1)) AND av.status_id=1 ORDER BY av.group_artifact_id, av.artifact_id DESC',array(UserManager::instance()->getCurrentUser()->getID()));
 		}
-		if ($this->_artifact_show == 'SM'){
-			$my_artifacts = $atf->getArtifactsFromSQLwithParams('SELECT * FROM artifact_vw av where (av.submitted_by=$1 OR av.artifact_id IN (select artifact_monitor.artifact_id FROM artifact_monitor WHERE artifact_monitor.user_id = $1)) AND av.status_id=1 ORDER BY av.group_artifact_id, av.artifact_id DESC',array( UserManager::instance()->getCurrentUser()->getID()));
+		if ($this->_artifact_show == 'SM') {
+			$my_artifacts = $atf->getArtifactsFromSQLwithParams('SELECT * FROM artifact_vw av where (av.submitted_by=$1 OR av.artifact_id IN (select artifact_monitor.artifact_id FROM artifact_monitor WHERE artifact_monitor.user_id = $1)) AND av.status_id=1 ORDER BY av.group_artifact_id, av.artifact_id DESC',array(UserManager::instance()->getCurrentUser()->getID()));
 		}
 		if ($this->_artifact_show== 'S') {
 			$my_artifacts = $atf->getSubmittedArtifactsByGroup();
@@ -131,11 +131,11 @@ class Widget_MyArtifacts extends Widget {
 			$my_artifacts = $atf->getAssignedArtifactsByGroup();
 		}
 		if ($this->_artifact_show== 'M') {
-			$my_artifacts = $atf->getArtifactsFromSQLwithParams('SELECT * FROM artifact_vw av where (av.artifact_id IN (select artifact_monitor.artifact_id FROM artifact_monitor WHERE artifact_monitor.user_id = $1)) AND av.status_id=1 ORDER BY av.group_artifact_id, av.artifact_id DESC',array( UserManager::instance()->getCurrentUser()->getID()));;
+			$my_artifacts = $atf->getArtifactsFromSQLwithParams('SELECT * FROM artifact_vw av where (av.artifact_id IN (select artifact_monitor.artifact_id FROM artifact_monitor WHERE artifact_monitor.user_id = $1)) AND av.status_id=1 ORDER BY av.group_artifact_id, av.artifact_id DESC',array(UserManager::instance()->getCurrentUser()->getID()));;
 		}
 
 		if (count($my_artifacts) > 0) {
-			$html_my_artifacts = $HTML->listTableTop(array());
+			$html_my_artifacts = $HTML->listTableTop();
 			$html_my_artifacts .= $this->_display_artifacts($my_artifacts, 1);
 			$html_my_artifacts .= $HTML->listTableBottom();
 		} else {
@@ -180,7 +180,7 @@ class Widget_MyArtifacts extends Widget {
 		$allIds = array();
 
 		$pm = ProjectManager::instance();
-		foreach ($list_trackers as $trackers_array ) {
+		foreach ($list_trackers as $trackers_array) {
 			$atid = $trackers_array->getArtifactType()->getID();
 			$group_id = $trackers_array->getArtifactType()->getGroup()->getID();
 
@@ -194,7 +194,8 @@ class Widget_MyArtifacts extends Widget {
 
 				//work on the tracker of the last round if there was one
 				if ($atid != $atid_old && $count_aids != 0) {
-					list($hide_now,$count_diff,$hide_url) = my_hide_url('artifact', $atid_old, $hide_item_id, $count_aids, $hide_artifact);
+					list($hide_now,$count_diff,$hide_url) =
+						my_hide_url('artifact', $atid_old, $hide_item_id, $count_aids, $hide_artifact);
 					$count_new = max(0, $count_diff);
 					$cells = array();
 					$cells[] = array($hide_url.

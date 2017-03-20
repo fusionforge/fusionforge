@@ -58,7 +58,7 @@ if (!$ac || !is_object($ac)) {
 			$g=$ath->getGroup();
 			$roles = $g->getRoles();
 			foreach ($roles as $role) {
-				if (!in_array(get_class($role), array('RoleLoggedIn','RoleAnonymous'))){
+				if (!in_array(get_class($role), array('RoleLoggedIn','RoleAnonymous'))) {
 					$vals[$role->getID()]=$role->getName();
 				}
 			}
@@ -93,7 +93,7 @@ if (!$ac || !is_object($ac)) {
 					$title_arr[]=_('Default');
 				}
 				$title_arr[]='';
-				echo $HTML->listTableTop ($title_arr,false, ' ');
+				echo $HTML->listTableTop($title_arr, false, ' ');
 				if (in_array($efType, unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_CHOICE))) {
 					$row_attrs = array('class'=>$HTML->boxGetAltRowStyle(-1,true));
 					$cells = array();
@@ -184,7 +184,7 @@ if (!$ac || !is_object($ac)) {
 				echo html_e('strong', array(), _('Status'));
 				echo $ath->statusBox('status_id',1,false,false);
 			}
-			echo html_e('input', array( 'type'=>'submit', 'name'=>'post_changes', 'value'=>_('Submit')));
+			echo html_e('input', array('type'=>'submit', 'name'=>'post_changes', 'value'=>_('Submit')));
 			echo $HTML->closeForm();
 	}
 	if ($efType != ARTIFACT_EXTRAFIELDTYPE_USER) {} else {}

@@ -41,11 +41,11 @@ class ProjectTaskHTML extends ProjectTask {
 	}
 
 	function multipleAssignedBox ($name='assigned_to[]') {
-		$engine = RBACEngine::getInstance () ;
+		$engine = RBACEngine::getInstance();
 		$techs = $engine->getUsersByAllowedAction ('pm', $this->ProjectGroup->getID(), 'tech') ;
 
-		$tech_id_arr = array () ;
-		$tech_name_arr = array () ;
+		$tech_id_arr = array();
+		$tech_name_arr = array();
 
 		foreach ($techs as $tech) {
 			$tech_id_arr[] = $tech->getID() ;
@@ -54,7 +54,7 @@ class ProjectTaskHTML extends ProjectTask {
 
 		//get the data so we can mark items as SELECTED
 		$arr2 = $this->getAssignedTo();
-		return html_build_multiple_select_box_from_arrays ($tech_id_arr,$tech_name_arr,$name,$arr2);
+		return html_build_multiple_select_box_from_arrays($tech_id_arr,$tech_name_arr,$name,$arr2);
 	}
 
 	function showDependentTasks () {
@@ -63,7 +63,7 @@ class ProjectTaskHTML extends ProjectTask {
 			FROM project_task,project_dependencies
 			WHERE project_task.project_task_id=project_dependencies.project_task_id
 			AND project_dependencies.is_dependent_on_task_id=$1',
-			array($this->getID() ));
+			array($this->getID()));
 		$rows=db_numrows($result);
 		if ($rows > 0) {
 			echo html_e('h3', array(), _('Tasks That Depend on This Task'));
@@ -72,7 +72,7 @@ class ProjectTaskHTML extends ProjectTask {
 			$title_arr[]=_('Task Id');
 			$title_arr[]=_('Task Summary');
 
-			echo $HTML->listTableTop ($title_arr);
+			echo $HTML->listTableTop($title_arr);
 
 			for ($i = 0; $i < $rows; $i++) {
 				$cells = array();
@@ -107,7 +107,7 @@ class ProjectTaskHTML extends ProjectTask {
 			$title_arr[]=_('Open Date');
 			(($is_admin) ? $title_arr[]=_('Remove Relation') : '');
 
-			echo $HTML->listTableTop ($title_arr);
+			echo $HTML->listTableTop($title_arr);
 
 			for ($i = 0; $i < $rows; $i++) {
 				$cells = array();
@@ -189,7 +189,7 @@ class ProjectTaskHTML extends ProjectTask {
 			$title_arr[]=_('Date');
 			$title_arr[]=_('By');
 
-			echo $HTML->listTableTop ($title_arr);
+			echo $HTML->listTableTop($title_arr);
 
 			for ($i = 0; $i < $rows; $i++) {
 				$field = db_result($result, $i, 'field_name');

@@ -32,7 +32,7 @@ function people_header($params) {
 		$params['toptab'] = 'people';
 		$params['group'] = $group_id;
 		site_project_header($params);
-	} elseif (isset($_SERVER['HTTP_REFERER']) && strstr($_SERVER['HTTP_REFERER'], 'account')){
+	} elseif (isset($_SERVER['HTTP_REFERER']) && strstr($_SERVER['HTTP_REFERER'], 'account')) {
 		$params['toptab'] = 'my';
 		site_user_header($params);
 	} else {
@@ -131,7 +131,7 @@ function people_show_skill_inventory($user_id) {
 	$title_arr[]=_('Experience');
 
 
-	echo $HTML->listTableTop ($title_arr);
+	echo $HTML->listTableTop($title_arr);
 
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
@@ -162,7 +162,7 @@ function people_edit_skill_inventory($user_id) {
 	$title_arr[]=_('Experience');
 	$title_arr[]=_('Action');
 
-	echo $HTML->listTableTop ($title_arr);
+	echo $HTML->listTableTop($title_arr);
 
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
@@ -245,7 +245,7 @@ function people_show_job_inventory($job_id) {
 	$title_arr[]=_('Level');
 	$title_arr[]=_('Experience');
 
-	echo $HTML->listTableTop ($title_arr);
+	echo $HTML->listTableTop($title_arr);
 
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
@@ -308,7 +308,7 @@ function people_edit_job_inventory($job_id,$group_id) {
 	$title_arr[]=_('Experience').utils_requiredField();
 	$title_arr[]=_('Action');
 
-	echo $HTML->listTableTop ($title_arr);
+	echo $HTML->listTableTop($title_arr);
 
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
@@ -375,7 +375,7 @@ function people_show_category_table() {
 		if ($added && ((count($categories) - 1) > 0)) {
 			for ($j = 0; $j < (count($categories) - 1); $j++) {
 				$found = 0;
-				if ( $categories[$j]['category_id'] == $categories[$i]['category_id'] ) {
+				if ($categories[$j]['category_id'] == $categories[$i]['category_id']) {
 					$categories[$j]['total'] += $categories[$i]['total'];
 					$found = 1;
 					break;
@@ -451,7 +451,7 @@ function people_show_job_list($result) {
 	if (count($projects) < 1) {
 		$return = $HTML->warning_msg(_('None Found'));
 	} else {
-		$return = $HTML->listTableTop ($title_arr);
+		$return = $HTML->listTableTop($title_arr);
 		for ($i = 0; $i < count($projects); $i++) {
 			$return .= '
 				<tr '. $HTML->boxGetAltRowStyle($i) . '>

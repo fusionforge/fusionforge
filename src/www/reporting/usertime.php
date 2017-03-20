@@ -115,7 +115,7 @@ if ($sw) {
 
 		}
 
-		echo $HTML->listTableBottom ();
+		echo $HTML->listTableBottom();
 
 	} elseif ($dev_id && $start != $end) {
 		report_timegraph('user', $type, $start, $end, $dev_id);

@@ -46,7 +46,7 @@ class SurveyHTML extends FFError {
 		$params['toptab'] = 'surveys';
 		$params['group'] = $group_id;
 
-		if ($project = group_get_object($group_id)){
+		if ($project = group_get_object($group_id)) {
 			if (!$project->usesSurvey()) {
 				exit_disabled();
 			}
@@ -99,7 +99,7 @@ class SurveyHTML extends FFError {
 	 * @param	Survey	$q	Question Question Object
 	 * @return	string
 	 */
-	function showAddQuestionForm( &$q ) {
+	function showAddQuestionForm(&$q) {
 		global $group_id;
 		global $HTML;
 
@@ -144,7 +144,7 @@ class SurveyHTML extends FFError {
 	 * @param	Survey	$s	Question Question Object
 	 * @return	string
 	 */
-	function showAddSurveyForm( &$s) {
+	function showAddSurveyForm(&$s) {
 		global $group_id;
 		global $survey_id;
 		global $HTML;
@@ -153,7 +153,7 @@ class SurveyHTML extends FFError {
 		if (! $survey_id && ! count($s->getAddableQuestionInstances())) {
 			$ret = '<p>' . sprintf(_('Please %1$s create a question %2$s before creating a survey'),
 								  '<a href="'.util_make_url('/survey/admin/question.php?group_id='.$group_id).'">',
-             					  '</a>') .
+								  '</a>') .
 				   '</p>';
 			return $ret;
 		}
@@ -205,7 +205,7 @@ class SurveyHTML extends FFError {
 			$title_arr[] = "&nbsp;";
 			$title_arr[] = _('Questions');
 			$title_arr[] = "&nbsp;";
-			$ret.= $HTML->listTableTop ($title_arr);
+			$ret.= $HTML->listTableTop($title_arr);
 		}
 
 		for($i = 0;  $i  <  count($arr_to_add);  $i++)  {
@@ -294,7 +294,7 @@ class SurveyHTML extends FFError {
 
 		/* Head information */
 		$title_arr = array(_('Question ID'), _('Question'), _('Type'), _('Edit/Delete'));
-		$ret.= $HTML->listTableTop ($title_arr);
+		$ret.= $HTML->listTableTop($title_arr);
 
 		for($i = 0;  $i  <  count($questions);  $i++)  {
 			if ($questions[$i]->isError()) {
@@ -327,7 +327,7 @@ class SurveyHTML extends FFError {
 			      $show_vote=0, $show_edit=0, $show_result=0,
 			      $show_result_graph=0, $show_result_comment=0,
 			      $show_result_csv=0,
-			      $show_inactive=0 ) {
+			      $show_inactive=0) {
 		global $user_id;
 		global $group_id;
 		global $HTML;
@@ -370,7 +370,7 @@ class SurveyHTML extends FFError {
 			$title_arr[] = _("CSV");
 		}
 
-		$ret.= $HTML->listTableTop ($title_arr);
+		$ret.= $HTML->listTableTop($title_arr);
 
 		/* Color index for table */
 		$color_index=0;
@@ -655,7 +655,7 @@ class SurveyHTML extends FFError {
 					//print 100 chars in words per line
 					foreach ($words as $word) {
 						// if we have a stupidly strange word with lots of letters, we'll make a new line for it and split it
-						if ( (strlen($word)>100) && ((strlen($word)+$linelength)>100)) {
+						if ((strlen($word)>100) && ((strlen($word)+$linelength)>100)) {
 							$chunks = $this->split_str($word,50);
 							foreach ($chunks as $chunk) {
 								$ret .= $chunk;
@@ -702,7 +702,7 @@ class SurveyHTML extends FFError {
 		for ($i=0;$i<$cnt;$i+=$split_lengt) {
 			$rslt[]= substr($str,$i,$split_lengt);
 		}
- 		return $rslt;
+		return $rslt;
 	}
 
 	/**

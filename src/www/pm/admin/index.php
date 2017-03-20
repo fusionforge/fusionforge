@@ -188,7 +188,7 @@ if ($add_cat && $group_project_id) {
 		$title_arr=array();
 		$title_arr[]=_('Id');
 		$title_arr[]=_('Title');
-		echo $HTML->listTableTop ($title_arr);
+		echo $HTML->listTableTop($title_arr);
 		for ($i=0; $i < $rows; $i++) {
 			$cells = array();
 			$cells[][] = db_result($result, $i, 'category_id');

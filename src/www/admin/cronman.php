@@ -72,7 +72,7 @@ if ($totalCount) {
 		_('Message')
 	);
 
-	echo $HTML->listTableTop ($title_arr);
+	echo $HTML->listTableTop($title_arr);
 
 	for ($i=0; $i<db_numrows($res); $i++) {
 		$cells = array();

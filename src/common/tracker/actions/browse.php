@@ -136,7 +136,7 @@ if ($set == 'custom') {
 	}
 }
 
-if (is_array($_extra_fields)){
+if (is_array($_extra_fields)) {
 	$keys=array_keys($_extra_fields);
 	foreach ($keys as $key) {
 		if ($_extra_fields[$key] != 'Array') {
@@ -144,7 +144,7 @@ if (is_array($_extra_fields)){
 		}
 	}
 } else {
-	if (isset($_extra_fields)){
+	if (isset($_extra_fields)) {
 		$aux_extra_fields = $_extra_fields;
 	} else {
 		$aux_extra_fields = '';
@@ -277,7 +277,7 @@ echo $ath->renderBrowseInstructions();
 
 if ($ath->usesCustomStatuses()) {
 	$aux_extra_fields = array();
-	if (is_array($_extra_fields)){
+	if (is_array($_extra_fields)) {
 		$keys=array_keys($_extra_fields);
 		foreach ($keys as $key) {
 			if (!is_array($_extra_fields[$key])) {

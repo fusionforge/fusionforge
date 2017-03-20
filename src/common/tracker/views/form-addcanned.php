@@ -44,7 +44,7 @@ if ($result && $rows > 0) {
 	$title_arr[]=_('Title');
 	$title_arr[]=_('Operation');
 
-	echo $HTML->listTableTop ($title_arr);
+	echo $HTML->listTableTop($title_arr);
 
 	for ($i=0; $i < $rows; $i++) {
 		$id = db_result($result, $i, 'id');

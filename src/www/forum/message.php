@@ -114,7 +114,7 @@ if ($msg_id) {
 //	$title_arr=array();
 //	$title_arr[]=_('Message')._(': ').$msg_id;
 
-//	echo $GLOBALS['HTML']->listTableTop ($title_arr);
+//	echo $GLOBALS['HTML']->listTableTop($title_arr);
 
 	$url = util_make_url('/forum/message.php?msg_id='. $msg_id .'&amp;group_id='.$group_id);
 
@@ -162,7 +162,7 @@ if ($msg_id) {
 	$title_arr[]=_('Author');
 	$title_arr[]=_('Date');
 
-	$ret_val = $HTML->listTableTop ($title_arr);
+	$ret_val = $HTML->listTableTop($title_arr);
 
 	$rows=count($msg_arr[0]);
 

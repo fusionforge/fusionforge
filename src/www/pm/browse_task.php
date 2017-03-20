@@ -277,7 +277,7 @@ if ($rows < 1) {
 		if ($_view=="detail") {
 			echo '
 			<tr class="priority'.$pt_arr[$i]->getPriority() .'">
-				<td>&nbsp;</td><td colspan="'.(count($title_arr)-1).'">'. nl2br( $pt_arr[$i]->getDetails() ) .'</td>
+				<td>&nbsp;</td><td colspan="'.(count($title_arr)-1).'">'. nl2br($pt_arr[$i]->getDetails()) .'</td>
 			</tr>';
 		}
 	}

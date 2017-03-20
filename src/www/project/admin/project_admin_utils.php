@@ -161,7 +161,7 @@ function show_grouphistory($group_id) {
 		$title_arr[]=_('Date');
 		$title_arr[]=_('By');
 
-		echo $HTML->listTableTop ($title_arr);
+		echo $HTML->listTableTop($title_arr);
 		for ($i=0; $i < $rows; $i++) {
 			$field = db_result($result, $i, 'field_name');
 			$cells = array();

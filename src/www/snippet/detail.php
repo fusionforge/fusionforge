@@ -69,7 +69,7 @@ if ($type=='snippet') {
 		$title_arr[]= _('Author');
 		$title_arr[]= _('Delete');
 
-		echo $HTML->listTableTop ($title_arr);
+		echo $HTML->listTableTop($title_arr);
 
 		/*
 			get the newest version of this snippet, so we can display its code
@@ -153,7 +153,7 @@ if ($type=='snippet') {
 		$title_arr[]= _('Author');
 		$title_arr[]= _('Actions');
 
-		echo $HTML->listTableTop ($title_arr);
+		echo $HTML->listTableTop($title_arr);
 
 		/*
 			determine the newest version of this package,
