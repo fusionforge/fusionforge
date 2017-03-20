@@ -192,7 +192,7 @@ class Artifact extends FFObject {
 	 *						array('user' => 127, 'time' => 1234556789, 'nopermcheck' => true, 'nonotice' => true)
 	 * @return	bool	id on success / false on failure.
 	 */
-	function create($summary, $details, $assigned_to=100, $priority=3, $extra_fields=array(), $importData = array()) {
+	function create($summary, $details, $assigned_to=100, $priority=3, $extra_fields = array(), $importData = array()) {
 		//
 		//	make sure this person has permission to add artifacts
 		//
@@ -838,12 +838,12 @@ class Artifact extends FFObject {
 		} else {
 			$time = time();
 		}
-		$res = db_query_params ('INSERT INTO artifact_message (artifact_id,submitted_by,from_email,adddate,body) VALUES ($1,$2,$3,$4,$5)',
+		$res = db_query_params('INSERT INTO artifact_message (artifact_id,submitted_by,from_email,adddate,body) VALUES ($1,$2,$3,$4,$5)',
 					array ($this->getID(),
 					       $user_id,
 					       $by,
 					       $time,
-					       htmlspecialchars($body))) ;
+					       htmlspecialchars($body)));
 
 		$this->updateLastModified($importData);
 
@@ -936,7 +936,7 @@ class Artifact extends FFObject {
 	 */
 	function update($priority,$status_id,
 		$assigned_to,$summary,$canned_response,$details,$new_artifact_type_id,
-		$extra_fields=array(), $description='', $importData=array()) {
+		$extra_fields = array(), $description='', $importData = array()) {
 
 		if (array_key_exists('user', $importData)){
 			$user = $importData['user'];
@@ -1241,7 +1241,7 @@ class Artifact extends FFObject {
 		*/
 		if ($canned_response != 100) {
 			//don't care if this response is for this group - could be hacked
-			$acr=new ArtifactCanned($this->ArtifactType,$canned_response);
+			$acr = new ArtifactCanned($this->ArtifactType,$canned_response);
 			if (!$acr || !is_object($acr)) {
 				$this->setError(_('Could Not Create Canned Response Object'));
 			} elseif ($acr->isError()) {
@@ -1361,7 +1361,7 @@ class Artifact extends FFObject {
 
 		//get a list of extra fields for this artifact_type
 		$ef = $this->ArtifactType->getExtraFields();
-		$efk=array_keys($ef);
+		$efk = array_keys($ef);
 
 		if (empty($extra_fields) && empty($ef)) {
 			return true;
@@ -1499,7 +1499,7 @@ class Artifact extends FFObject {
 				if (($type == ARTIFACT_EXTRAFIELDTYPE_SELECT) || ($type == ARTIFACT_EXTRAFIELDTYPE_RADIO)) {
 					$extra_fields[$efid]='100';
 				} elseif (($type == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT) || ($type == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX)) {
-					$extra_fields[$efid]=array('100');
+					$extra_fields[$efid] = array('100');
 				} else {
 					db_query_params ('DELETE FROM artifact_extra_field_data WHERE artifact_id=$1 AND extra_field_id=$2',
 								   array ($this->getID(),
@@ -1726,7 +1726,7 @@ class Artifact extends FFObject {
 		$monitor_ids = array();
 
 		if (!$changes) {
-			$changes=array();
+			$changes = array();
 		}
 
 		$sess = session_get_user();
@@ -1862,9 +1862,9 @@ class Artifact extends FFObject {
 		}
 
 		if (count($monitor_ids) < 1) {
-			$monitor_ids=array();
+			$monitor_ids = array();
 		} else {
-			$monitor_ids=array_unique($monitor_ids);
+			$monitor_ids = array_unique($monitor_ids);
 		}
 
 		$from = $this->ArtifactType->getReturnEmailAddress();
@@ -2072,13 +2072,13 @@ class ArtifactComparator {
 			}
 			break ;
 		case 'assigned_to':
-			$namecmp = strcoll ($a->getAssignedRealName(),$b->getAssignedRealName()) ;
+			$namecmp = strcoll($a->getAssignedRealName(),$b->getAssignedRealName());
 			if ($namecmp != 0) {
 				return $namecmp ;
 			}
 			break ;
 		case 'submitted_by':
-			$namecmp = strcoll ($a->getSubmittedRealName(),$b->getSubmittedRealName()) ;
+			$namecmp = strcoll($a->getSubmittedRealName(),$b->getSubmittedRealName());
 			if ($namecmp != 0) {
 				return $namecmp ;
 			}
