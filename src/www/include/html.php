@@ -1432,6 +1432,8 @@ function html_e($name, $attrs = array(), $content = "", $shortform = true, $inde
 	return $rv;
 }
 
+global $html_autoclose_stack, $html_autoclose_pos;
+
 $html_autoclose_stack = array();
 $html_autoclose_pos = 0;
 
