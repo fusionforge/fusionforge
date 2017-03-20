@@ -472,7 +472,7 @@ class ArtifactType extends FFError {
 	function setCustomStatusField($extra_field_id) {
 		$res = db_query_params('UPDATE artifact_group_list SET custom_status_field=$1
 			WHERE group_artifact_id=$2',
-					array ($extra_field_id,
+					array($extra_field_id,
 					       $this->getID()));
 		$this->fetchData($this->getID());
 		return $res;
@@ -496,7 +496,7 @@ class ArtifactType extends FFError {
 	function setAutoAssignField($extra_field_id) {
 		$res = db_query_params('UPDATE artifact_group_list SET auto_assign_field=$1
 			WHERE group_artifact_id=$2',
-				array ($extra_field_id,
+				array($extra_field_id,
 				       $this->getID()));
 		$this->fetchData($this->getID());
 		return $res;
@@ -1192,25 +1192,20 @@ class ArtifactType extends FFError {
 			WHERE group_artifact_id=$1
 			AND artifact.artifact_id=artifact_extra_field_data.artifact_id)',
 				array($this->getID()));
-//echo '0.1'.db_error();
 		db_query_params('DELETE FROM artifact_extra_field_elements
 			WHERE EXISTS (SELECT extra_field_id FROM artifact_extra_field_list
 			WHERE group_artifact_id=$1
 			AND artifact_extra_field_list.extra_field_id = artifact_extra_field_elements.extra_field_id)',
-				 array ($this->getID()));
-//echo '0.2'.db_error();
+				 array($this->getID()));
 		db_query_params('DELETE FROM artifact_extra_field_list
 			WHERE group_artifact_id=$1',
-			array ($this->getID()));
-//echo '0.3'.db_error();
+			array($this->getID()));
 		db_query_params('DELETE FROM artifact_canned_responses
 			WHERE group_artifact_id=$1',
-				 array ($this->getID()));
-//echo '1'.db_error();
+				 array($this->getID()));
 		db_query_params('DELETE FROM artifact_counts_agg
 			WHERE group_artifact_id=$1',
-				 array ($this->getID()));
-//echo '5'.db_error();
+				 array($this->getID()));
 
 		ArtifactStorage::instance()->deleteFromQuery('SELECT id FROM artifact_file
 			WHERE EXISTS (SELECT artifact_id FROM artifact
@@ -1223,34 +1218,27 @@ class ArtifactType extends FFError {
 			WHERE group_artifact_id=$1
 			AND artifact.artifact_id=artifact_file.artifact_id)',
 				array($this->getID()));
-//echo '6'.db_error();
 		db_query_params('DELETE FROM artifact_message
 			WHERE EXISTS (SELECT artifact_id FROM artifact
 			WHERE group_artifact_id=$1
 			AND artifact.artifact_id=artifact_message.artifact_id)',
 				array($this->getID()));
-//echo '7'.db_error();
 		db_query_params('DELETE FROM artifact_history
 			WHERE EXISTS (SELECT artifact_id FROM artifact
 			WHERE group_artifact_id=$1
 			AND artifact.artifact_id=artifact_history.artifact_id)',
 				array($this->getID()));
-//echo '8'.db_error();
 		db_query_params('DELETE FROM artifact_monitor
 			WHERE EXISTS (SELECT artifact_id FROM artifact
 			WHERE group_artifact_id=$1
 			AND artifact.artifact_id=artifact_monitor.artifact_id)',
 				array($this->getID()));
-//echo '9'.db_error();
 		db_query_params('DELETE FROM artifact
 			WHERE group_artifact_id=$1',
 				array($this->getID()));
-//echo '4'.db_error();
 		db_query_params('DELETE FROM artifact_group_list
 			WHERE group_artifact_id=$1',
 				array($this->getID()));
-//echo '11'.db_error();
-
 		$MonitorElementObject = new MonitorElement('artifact_type');
 		$MonitorElementObject->clearMonitor($this->getID());
 
@@ -1406,7 +1394,7 @@ class ArtifactType extends FFError {
 			submit_instructions=$7,
 			browse_instructions=$8
 			WHERE group_artifact_id=$9 AND group_id=$10',
-					 array (
+					 array(
 						 htmlspecialchars($name),
 						 htmlspecialchars($description),
 						 $email_all,
