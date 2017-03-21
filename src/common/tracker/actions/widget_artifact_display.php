@@ -35,18 +35,6 @@ if (!isset($func)) {
 	$func = getStringFromRequest('func');
 }
 
-$lm = new WidgetLayoutManager();
-$sql = "SELECT l.* FROM layouts AS l INNER JOIN owner_layouts AS o ON(l.id = o.layout_id)
-		WHERE o.owner_type = $1
-		AND o.owner_id = $2
-		AND o.is_default = 1";
-$res = db_query_params($sql,array('t', $atid));
-if($res && db_numrows($res) < 1) {
-	$lm->createDefaultLayoutForTracker($atid);
-	$res = db_query_params($sql,array('t', $atid));
-}
-$id = db_result($res, 0 , 'id');
-
 html_use_jqueryui();
 html_use_jquerydatetimepicker();
 use_javascript('/widgets/scripts/WidgetController.js');
@@ -66,5 +54,6 @@ if ($func == 'add') {
 	echo html_e('input', array('type' => 'hidden', 'name' => 'artifact_id', 'value' => $ah->getID(), 'form' => 'trackerform'));
 }
 echo $HTML->closeForm();
+$lm = new WidgetLayoutManager();
 $lm->displayLayout($atid, WidgetLayoutManager::OWNER_TYPE_TRACKER);
 $ath->footer();
