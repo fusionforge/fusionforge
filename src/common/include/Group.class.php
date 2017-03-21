@@ -6,7 +6,7 @@
  * Copyright 2009-2013, Roland Mas
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2010-2012, Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2016, Franck Villaume - TrivialDev
+ * Copyright 2012-2017, Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of National Education
  * Copyright 2017, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
@@ -34,7 +34,6 @@ require_once $gfcommon.'forum/Forum.class.php';
 require_once $gfcommon.'forum/ForumFactory.class.php';
 require_once $gfcommon.'pm/ProjectGroup.class.php';
 require_once $gfcommon.'pm/ProjectGroupFactory.class.php';
-require_once $gfcommon.'include/Role.class.php';
 require_once $gfcommon.'frs/FRSPackage.class.php';
 require_once $gfcommon.'frs/FRSRelease.class.php';
 require_once $gfcommon.'docman/DocumentGroup.class.php';
@@ -45,6 +44,8 @@ require_once $gfcommon.'survey/SurveyFactory.class.php';
 require_once $gfcommon.'survey/SurveyQuestionFactory.class.php';
 require_once $gfcommon.'include/gettext.php';
 require_once $gfcommon.'include/GroupJoinRequest.class.php';
+require_once $gfcommon.'include/Role.class.php';
+require_once $gfcommon.'widget/WidgetLayoutManager.class.php';
 
 $GROUP_OBJ=array();
 
@@ -3130,6 +3131,11 @@ if there is anything we can do to help you.
 	 */
 	function getEffortUnitSet() {
 		return $this->data_array['unit_set_id'];
+	}
+
+	function getWidgetLayoutConfig() {
+		$lm = new WidgetLayoutManager();
+		return $lm->getLayout($this->getID(), WidgetLayoutManager::OWNER_TYPE_GROUP);
 	}
 }
 

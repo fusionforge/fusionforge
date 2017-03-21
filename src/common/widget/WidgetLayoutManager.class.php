@@ -974,6 +974,51 @@ class WidgetLayoutManager {
 		}
 	}
 
+	function getLayout($owner_id, $owner_type) {
+		$layout = null;
+		$sql = "SELECT l.*
+			FROM layouts AS l INNER JOIN owner_layouts AS o ON(l.id = o.layout_id)
+			WHERE o.owner_type = $1
+			AND o.owner_id = $2
+			AND o.is_default = 1
+			";
+		$req = db_query_params($sql, array($owner_type ,$owner_id));
+		if ($data = db_fetch_array($req)) {
+			$layout = new WidgetLayout($data['id'], $data['name'], $data['description'], $data['scope']);
+			$sql = 'SELECT * FROM layouts_rows WHERE layout_id = $1 ORDER BY rank';
+			$req_rows = db_query_params($sql,array($layout->id));
+			while ($data = db_fetch_array($req_rows)) {
+				$row = new WidgetLayout_Row($data['id'], $data['rank']);
+				$sql = 'SELECT * FROM layouts_rows_columns WHERE layout_row_id = $1';
+				$req_cols = db_query_params($sql,array($row->id));
+				while ($data = db_fetch_array($req_cols)) {
+					$col = new WidgetLayout_Row_Column($data['id'], $data['width']);
+					$sql = "SELECT * FROM layouts_contents WHERE owner_type = $1  AND owner_id = $2 AND column_id = $3 ORDER BY rank";
+					$req_content = db_query_params($sql,array($owner_type, $owner_id, $col->id));
+					while ($data = db_fetch_array($req_content)) {
+						$c = Widget::getInstance($data['name']);
+						if ($c && $c->isAvailable()) {
+							$c->loadContent($data['content_id']);
+							$col->add($c, $data['is_minimized'], $data['display_preferences']);
+						}
+						unset($c);
+					}
+					$row->add($col);
+					unset($col);
+				}
+				foreach ($row->columns as $lcol) {
+					unset($lcol->row);
+				}
+				$layout->add($row);
+				unset($row);
+				foreach ($layout->rows as $lrow) {
+					unset($lrow->layout);
+				}
+			}
+		}
+		return (array)$layout;
+	}
+
 	/**
 	 * compute the differences between two arrays
 	 * @param array $tab1

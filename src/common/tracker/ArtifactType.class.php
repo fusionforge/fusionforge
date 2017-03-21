@@ -31,6 +31,7 @@ require_once $gfcommon.'tracker/ArtifactExtraFieldElement.class.php';
 require_once $gfcommon.'tracker/ArtifactStorage.class.php';
 require_once $gfcommon.'tracker/EffortUnitSet.class.php';
 require_once $gfcommon.'include/MonitorElement.class.php';
+require_once $gfcommon.'widget/WidgetLayoutManager.class.php';
 
 /**
  * Gets an ArtifactType object from the artifact type id
@@ -1536,30 +1537,35 @@ class ArtifactType extends FFError {
 			}
 
 			$extrafields[] = array(
-				"extra_field_id"=> $aefobj->getID(),
-				"field_name"	=> $aefobj->getName(),
-				"field_type"	=> $aefobj->getType(),
-				"attribute1"	=> $aefobj->getAttribute1(),
-				"attribute2"	=> $aefobj->getAttribute2(),
-				"is_required"	=> $aefobj->isRequired(),
+				"extra_field_id"	=> $aefobj->getID(),
+				"field_name"		=> $aefobj->getName(),
+				"field_type"		=> $aefobj->getType(),
+				"attribute1"		=> $aefobj->getAttribute1(),
+				"attribute2"		=> $aefobj->getAttribute2(),
+				"is_required"		=> $aefobj->isRequired(),
 				"alias"			=> $aefobj->getAlias(),
 				"available_values"	=> $avs,
-				"default_selected_id" => 0		//TODO (not implemented yet)
+				"default_selected_id"	=> 0		//TODO (not implemented yet)
 			);
 		}
 
 		$return = array(
-				'group_artifact_id' => $this->data_array['group_artifact_id'],
-				'group_id' => $this->data_array['group_id'],
-				'name' => $this->data_array['name'],
-				'description' => $this->data_array['description'],
-				'due_period' => $this->data_array['due_period'],
-				'datatype' => $this->data_array['datatype'],
-				'status_timeout' => $this->data_array['status_timeout'],
-				'extra_fields' => $extrafields,
-				'custom_status_field' => $this->data_array['custom_status_field']
-			);
+				'group_artifact_id'	=> $this->data_array['group_artifact_id'],
+				'group_id'		=> $this->data_array['group_id'],
+				'name'			=> $this->data_array['name'],
+				'description'		=> $this->data_array['description'],
+				'due_period'		=> $this->data_array['due_period'],
+				'datatype'		=> $this->data_array['datatype'],
+				'status_timeout'	=> $this->data_array['status_timeout'],
+				'extra_fields'		=> $extrafields,
+				'custom_status_field'	=> $this->data_array['custom_status_field'],
+				'use_tracker_widget_display' => $this->getWidgetLayoutConfig());
 		return $return;
+	}
+
+	function getWidgetLayoutConfig() {
+		$lm = new WidgetLayoutManager();
+		return $lm->getLayout($this->getID(), WidgetLayoutManager::OWNER_TYPE_TRACKER);
 	}
 }
 

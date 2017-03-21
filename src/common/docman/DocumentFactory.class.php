@@ -349,8 +349,10 @@ class DocumentFactory extends FFError {
 				$docArr['versions'] = $dvf->getVersions();
 				$docArr['monitor'] = $doc->getMonitorIds();
 				$serialIDs = $dvf->getSerialIDs();
-				$drf = new DocumentReviewFactory($doc);
-				$docArr['reviews'] = $drf->getReviews($serialIDs);
+				if (forge_get_config('use_docman_review')) {
+					$drf = new DocumentReviewFactory($doc);
+					$docArr['reviews'] = $drf->getReviews($serialIDs);
+				}
 				$return[] = $docArr;
 			}
 		}

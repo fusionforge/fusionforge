@@ -195,12 +195,16 @@ class CliActions {
 		return $artifactDump;
 	}
 
-	function groupDump($group_id, $format = 'json') {
+	function groupDump($lgroup_id, $format = 'json') {
+		// that is ugly... group_id is used as global var. it needs to be defined.
+		global $group_id;
+		$group_id = $lgroup_id;
 		$groupDump['id'] = $group_id;
 		$group = group_get_object($group_id);
 		if ($group && is_object($group) && !$group->isError()) {
 			$groupDump['setup'] = (array)$group;
 			$groupDump['setup']['membersArr'] = $group->getMembers(false);
+			$groupDump['setup']['homepage'] = $group->getWidgetLayoutConfig();
 			if ($group->usesDocman()) {
 				$groupDump['docman'] = $this->docmanDump($group_id, 'return');
 			}
@@ -413,8 +417,8 @@ if (count($argv) >= 3) {
 
 $ctl = new CliActions();
 if (method_exists($ctl, $action)) {
-	if (isset($params)) {
-		$ctl->$action($name, $params);
+	if (isset($params[0])) {
+		$ctl->$action($name, $params[0]);
 	} else {
 		$ctl->$action($name);
 	}
