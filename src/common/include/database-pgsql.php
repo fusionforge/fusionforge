@@ -638,8 +638,8 @@ function db_fetch_array_by_row($qhandle, $row) {
  * @return	int		id of the primary key or 0 on failure.
  */
 function db_insertid($qhandle, $table_name, $pkey_field_name, $dbserver = NULL) {
-	$sql = 'SELECT currval(pg_get_serial_sequence($1, $2)) AS id';
-	$res = db_query_params($sql, array($table_name, $pkey_field_name), -1, 0, $dbserver);
+	$sql = "SELECT max($pkey_field_name) AS id FROM $table_name";
+	$res = db_query_params($sql, array(), -1, 0, $dbserver);
 	if (db_numrows($res) > 0) {
 		return db_result($res, 0, 'id');
 	} else {
