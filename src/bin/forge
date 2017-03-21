@@ -203,7 +203,8 @@ class CliActions {
 		$group = group_get_object($group_id);
 		if ($group && is_object($group) && !$group->isError()) {
 			$groupDump['setup'] = (array)$group;
-			$groupDump['setup']['membersArr'] = $group->getMembers(false);
+			$groupDump['setup']['members'] = $group->getMembers(false);
+			$groupDump['setup']['roles'] = $group->getRoles();
 			$groupDump['setup']['homepage'] = $group->getWidgetLayoutConfig();
 			if ($group->usesDocman()) {
 				$groupDump['docman'] = $this->docmanDump($group_id, 'return');
