@@ -75,14 +75,29 @@ $release_box = html_build_select_box_from_arrays($release_id_arr, $release_name_
 echo $HTML->openForm(array('action' => '/plugins/taskboard/releases/?group_id='.$group_id.'&taskboard_id='.$taskboard_id.'&action=edit_release', 'method' => 'post'));
 echo html_e('input', array('type' => 'hidden', 'name' => 'post_changes', 'value' => 'y'));
 echo html_e('input', array('type' => 'hidden', 'name' => 'release_id', 'value' => $release->getID()));
-echo html_e('h2', array(), _('Edit release')._(':'));
+echo html_e('h2', array(), _('Edit release'));
 echo $HTML->listTableTop();
 ?>
-	<tr><td><strong><?php echo _('Release') ?></strong>&nbsp;<?php echo utils_requiredField(); ?></td><td><?php echo $release_box; ?></td></tr>
-	<tr><td><strong><?php echo _('Start Date') ?></strong>&nbsp;<?php echo utils_requiredField(); ?></td><td><input type="text" name="start_date" value="<?php echo $start_date ?>"></td></tr>
-	<tr><td><strong><?php echo _('End Date') ?></strong>&nbsp;<?php echo utils_requiredField(); ?></td><td><input type="text" name="end_date" value="<?php echo $end_date ?>"></td></tr>
-	<tr><td><strong><?php echo _('Goals') ?></strong></td><td><textarea name="goals" cols="79" rows="5" ><?php echo htmlspecialchars($goals) ?></textarea></td></tr>
-	<tr><td><strong><?php echo _('Page URL') ?></strong></td><td><input type="text" name="page_url" value="<?php echo htmlspecialchars($page_url) ?>"></td></tr>
+	<tr>
+		<td><strong><?php echo _('Release').utils_requiredField()._(':'); ?></strong></td>
+		<td><?php echo $release_box; ?></td>
+	</tr>
+	<tr>
+		<td><label for="start_date"><strong><?php echo _('Start Date').utils_requiredField()._(':'); ?></strong></label></td>
+		<td><input id="start_date" type="text" name="start_date" value="<?php echo $start_date ?>"></td>
+	</tr>
+	<tr>
+		<td><label for="end_date"><strong><?php echo _('End Date').utils_requiredField()._(':'); ?></strong></label></td>
+		<td><input id="end_date" type="text" name="end_date" value="<?php echo $end_date ?>"></td>
+	</tr>
+	<tr>
+		<td><label for="goals"><strong><?php echo _('Goals')._(':'); ?></strong></label></td>
+		<td><textarea id="goals" name="goals" cols="79" rows="5" ><?php echo htmlspecialchars($goals) ?></textarea></td>
+	</tr>
+	<tr>
+		<td><label for="page_url"><strong><?php echo _('Page URL')._(':'); ?></strong></label></td>
+		<td><input id="page_url" type="text" name="page_url" value="<?php echo htmlspecialchars($page_url) ?>"></td>
+	</tr>
 <?php
 echo $HTML->listTableBottom();
 echo html_e('p', array(), html_e('input', array('type' => 'submit', 'name' => 'post_changes', 'value' => _('Submit'))));
