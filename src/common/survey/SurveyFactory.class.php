@@ -5,7 +5,7 @@
  * Copyright 2004, Sung Kim/GForge, LLC
  * Copyright 2009, Roland Mas
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013,2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -75,10 +75,9 @@ class SurveyFactory extends FFError {
 	}
 
 	/**
-	 * getSurveyQuestion - get an array of Survey Question objects
-	 * for this Group and Survey id if survey_id is given.
+	 * getSurveys - get an array of Survey objects for this Group.
 	 *
- 	 * @return	array	The array of Survey Question objects.
+ 	 * @return	array	The array of Survey objects.
 	 */
 	function &getSurveys() {
 		/* We already have it */
@@ -101,6 +100,24 @@ class SurveyFactory extends FFError {
 		return $this->surveys;
 	}
 
+	/**
+	 * getSurveysIds - get an array of Survey IDs for this Group
+	 *
+	 * @return	array	The array of Survey IDs
+	 */
+	function getSurveysIds() {
+		$surveyids = array();
+		if ($this->surveys) {
+			foreach ($this->surveys as $surveyObject) {
+				$surveyids[] = $surveyObject->getID();
+			}
+		} else {
+			$result = db_query_params('SELECT survey_id FROM surveys WHERE group_id = $1 ORDER BY survey_id DESC',
+						array($this->Group->getID()));
+			$surveyids = util_result_column_to_array($result);
+		}
+		return $surveyids;
+	}
 }
 
 // Local Variables:

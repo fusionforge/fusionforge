@@ -203,13 +203,14 @@ class CliActions {
 		$group = group_get_object($group_id);
 		if ($group && is_object($group) && !$group->isError()) {
 			$groupDump['setup'] = (array)$group;
-			$groupDump['setup']['members'] = $group->getMembers(false);
+			$groupDump['setup']['membersArr'] = $group->getMembers(false);
 			$groupDump['setup']['roles'] = $group->getRoles();
 			$groupDump['setup']['homepage'] = $group->getWidgetLayoutConfig();
 			if ($group->usesDocman()) {
 				$groupDump['docman'] = $this->docmanDump($group_id, 'return');
 			}
 			if ($group->usesTracker()) {
+				$groupDump['trackers'] = array();
 				$atf = new ArtifactTypeFactory($group);
 				$atid_arr = $atf->getAllArtifactTypeIds();
 				foreach ($atid_arr as $atid) {
@@ -217,6 +218,7 @@ class CliActions {
 				}
 			}
 			if ($group->usesForum()) {
+				$groupDump['forums'] = array();
 				$ff = new ForumFactory($group);
 				$ffid_arr = $ff->getAllForumIds();
 				foreach ($ffid_arr as $ffid) {
@@ -229,12 +231,41 @@ class CliActions {
 			if ($group->usesNews()) {
 				$groupDump['news'] = array();
 			}
+			if ($group->usesSurvey()) {
+				$groupDump['surveys'] = array();
+				$sf = new SurveyFactory($group);
+				$sfid_arr = $sf->getSurveysIds();
+				foreach ($sfid_arr as $sfid) {
+					$groupDump['surveys'][] = $this->surveyDump($sfid, 'return');
+				}
+			}
 			plugin_hook_by_reference('pluginDump', $groupDump);
 		} else {
 			$groupDump['error'][] = _('Unable to get group id')._(': ').$group_id;
 		}
 		ksort($groupDump);
 		$this->print_result($groupDump, $format);
+	}
+
+	function newsDump($nid, $format = 'json') {
+		$newsDump['id'] = $nid;
+		ksort($newsDump);
+		$this->print_result($newsDump, $format);
+		return $newsDump;
+	}
+
+	function surveyDump($sid, $format = 'json') {
+		$surveyDump['id'] = $sid;
+		$surveyObject = survey_get_object($sid);
+		$surveyObject->getQuestionInstances();
+		$surveyDump['setup'] = (array)$surveyObject;
+		unset($surveyDump['setup']['Group']);
+		foreach($surveyDump['setup']['all_question_array'] as $question) {
+			unset($question->Group);
+		}
+		ksort($surveyDump);
+		$this->print_result($surveyDump, $format);
+		return $surveyDump;
 	}
 
 	function forumDump($fid, $format = 'json') {
