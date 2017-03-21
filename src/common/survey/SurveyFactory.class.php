@@ -59,7 +59,7 @@ class SurveyFactory extends FFError {
 		}
 		if (!$skip_check && !$Group->usesSurvey()) {
 			$this->setError(sprintf(_('%s does not use the Survey tool'),
-			    $Group->getPublicName()));
+							$Group->getPublicName()));
 			return;
 		}
 		$this->Group =& $Group;
@@ -77,7 +77,7 @@ class SurveyFactory extends FFError {
 	/**
 	 * getSurveys - get an array of Survey objects for this Group.
 	 *
- 	 * @return	array	The array of Survey objects.
+	 * @return	array	The array of Survey objects.
 	 */
 	function &getSurveys() {
 		/* We already have it */
