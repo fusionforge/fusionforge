@@ -64,7 +64,7 @@ if (count($taskboard->getUsedTrackersIds()) == 0) {
 	echo $HTML->listTableBottom();
 
 	$unused_resolutions = array_values($taskboard->getUnusedResolutions());
-	echo html_e('h2', array(), _('Add new column').(':'));
+	echo html_e('h2', array(), _('Add new column'));
 	if (count($unused_resolutions)) {
 		echo $HTML->openForm(array('action' => '/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&taskboard_id='.$taskboard_id.'&action=columns', 'method' => 'post'));
 		echo html_e('input', array('type' => 'hidden', 'name' => 'post_changes', 'value' => 'y'));
