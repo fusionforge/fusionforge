@@ -41,7 +41,7 @@ if($task) {
 		}
 	}
 } else {
-	$ret['alert'] = _('Task is not found. Taskboard will be reloaded.');
+	$ret['alert'] = _('Task is not found. Task Board will be reloaded.');
 }
 
 echo json_encode($ret);

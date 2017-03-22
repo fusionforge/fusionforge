@@ -29,7 +29,7 @@ $taskboard_id = getIntFromRequest('taskboard_id');
 if ($taskboard_id) {
 	$taskboard->header(
 		array(
-			'title' => $taskboard->getName()._(': ')._('Administration - Configure Taskboard'),
+			'title' => $taskboard->getName()._(': ')._('Administration - Configure Task Board'),
 			'pagename' => _('Administration'),
 			'sectionvals' => array($group->getPublicName()),
 			'group' => $group_id
@@ -45,7 +45,7 @@ if ($taskboard_id) {
 
 	$taskboardFactory->header(
 		array(
-			'title' => _('Taskboards for ').$taskboardFactory->Group->getPublicName()._(': ')._('Administration - Create New Taskboard'),
+			'title' => _('Task Boards for ').$taskboardFactory->Group->getPublicName()._(': ')._('Administration - Create New Task Board'),
 			'pagename' => _('Administration'),
 			'sectionvals' => array($group->getPublicName()),
 			'group' => $group_id
@@ -60,12 +60,12 @@ if ($taskboard_id) {
 	echo html_e('input', array('type' => 'hidden', 'name' => 'taskboard_id','value'=>$taskboard_id));
 }
 echo html_ao('p');
-echo html_e('strong', array(), _('Taskboard Name').utils_requiredField());
+echo html_e('strong', array(), _('Task Board Name').utils_requiredField());
 echo html_e('br');
 echo html_e('input', array('type' => 'text', 'name' => 'taskboard_name', 'size'=>60, 'required'=>'required','value'=>$taskboard_name));
 echo html_ac(html_ap()-1);
 echo html_ao('p');
-echo html_e('strong', array(), _('Taskboard Description'));
+echo html_e('strong', array(), _('Task Board Description'));
 echo html_e('br');
 echo html_e('textarea', array('name' => 'taskboard_description', 'rows'=>3, 'cols'=>50),$taskboard_description,false);
 echo html_ac(html_ap()-1);

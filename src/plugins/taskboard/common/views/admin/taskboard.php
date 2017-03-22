@@ -41,17 +41,17 @@ $taskboard->header(
 $taskboard_id = $taskboard->getID();
 
 echo html_e('p', array(), util_make_link('/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&taskboard_id='.$taskboard_id.'&view=init',
-		html_e('strong', array(), _('Configure Taskboard')))
-		.html_e('br'). _('Change Taskboard name and description.'));
+		html_e('strong', array(), _('Configure Task Board')))
+		.html_e('br'). _('Change Task Board name and description.'));
 
 echo html_e('p', array(), util_make_link('/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&taskboard_id='.$taskboard_id.'&view=trackers',
 					html_e('strong', array(), _('Configure Trackers used')))
-			.html_e('br'). _('Choose and configure trackers, used with taskboard.'));
+			.html_e('br'). _('Choose and configure trackers, used with Task Board.'));
 
 echo html_e('p', array(), util_make_link('/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&taskboard_id='.$taskboard_id.'&view=columns',
 					html_e('strong', array(), _('Configure Columns')))
-			.html_e('br'). _('Configure taskboard columns.'));
+			.html_e('br'). _('Configure Task Board columns.'));
 
 echo html_e('p', array(), util_make_link('/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&taskboard_id='.$taskboard_id.'&view=delete_taskboard',
-		html_e('strong', array(), _('Delete taskboard')))
-		.html_e('br'). _('Permanently delete this taskboard.'));
+		html_e('strong', array(), _('Delete Task Board')))
+		.html_e('br'). _('Permanently delete this Task Board.'));

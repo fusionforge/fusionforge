@@ -79,7 +79,7 @@ if (!$atf || !is_object($atf) || $atf->isError()) {
 
 		if (count($trackers) > 0) {
 			if (count($trackers_selected) == 0) {
-				echo $HTML->warning_msg(_('Choose at least one tracker for using with taskboard.'));
+				echo $HTML->warning_msg(_('Choose at least one tracker for using with Task Board.'));
 			} else {
 				echo html_e('div', array('id' => 'messages', 'class' => 'warning', 'style' => 'display: none;'), '', false);
 			}
@@ -295,7 +295,7 @@ jQuery(function($){
 		});
 
 		if( trackers.length == 0 ) {
-			showMessage("<?php echo _('Choose at least one tracker for using with taskboard.'); ?>", "warning");
+			showMessage("<?php echo _('Choose at least one tracker for using with Task Board.'); ?>", "warning");
 		}
 
 		$.ajax({

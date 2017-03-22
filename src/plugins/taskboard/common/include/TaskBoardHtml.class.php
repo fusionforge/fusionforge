@@ -39,12 +39,12 @@ class TaskBoardHtml extends TaskBoard {
 		$params['toptab'] = 'taskboard';
 		$params['group'] = $group_id;
 
-		$labels[] = _('View Taskboards');
+		$labels[] = _('View Task Boards');
 		$links[]  = '/plugins/taskboard/?group_id='.$group_id;
 		$attr     = array(array('title' => _('Get the list of available taskboards')));
 		if (session_loggedin()) {
 			if (forge_check_perm('tracker_admin', $group_id)) {
-				$labels[] = _('Taskboards Administration');
+				$labels[] = _('Task Boards Administration');
 				$links[]  = '/plugins/taskboard/admin/?group_id='.$group_id;
 				$attr[]   = array('title' => _('Global administration for taskboards.'));
 			}
@@ -130,5 +130,4 @@ class TaskBoardHtml extends TaskBoard {
 
 		return $ret;
 	}
-
 }

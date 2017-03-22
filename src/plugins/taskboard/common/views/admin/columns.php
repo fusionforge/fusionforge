@@ -33,7 +33,7 @@ $taskboard->header(
 );
 
 if (count($taskboard->getUsedTrackersIds()) == 0) {
-	echo $HTML->warning_msg(_('Choose at least one tracker for using with taskboard.'));
+	echo $HTML->warning_msg(_('Choose at least one tracker for using with Task Board.'));
 } else {
 	if ($taskboard->isError()) {
 		echo $HTML->error_msg($taskboard->getErrorMessage());

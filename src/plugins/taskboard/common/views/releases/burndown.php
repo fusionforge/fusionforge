@@ -80,7 +80,7 @@ foreach( $release_snapshots as $snapshot ) {
 
 ?>
 <div id="taskboard-burndown-chart-nav">
-	<button id="taskboard-view-btn"><?php echo _('Taskboard'); ?></button>
+	<button id="taskboard-view-btn"><?php echo _('Task Board'); ?></button>
 	<br/>
 </div>
 
