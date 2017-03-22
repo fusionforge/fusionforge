@@ -74,18 +74,18 @@ class TaskboardFactory extends FFError {
 	 * @return	array	The array of Taskboard object ids.
 	 */
 	function &getAllTaskboardIds() {
-		$result = array () ;
-		$res = db_query_params ('SELECT taskboard_id FROM plugin_taskboard
+		$result = array();
+		$res = db_query_params('SELECT taskboard_id FROM plugin_taskboard
 			WHERE group_id=$1
 			ORDER BY taskboard_id ASC',
-					array ($this->Group->getID())) ;
+					array($this->Group->getID()));
 		if (!$res) {
 			return $result ;
 		}
 		while ($arr = db_fetch_array($res)) {
-			$result[] = $arr['taskboard_id'] ;
+			$result[] = $arr['taskboard_id'];
 		}
-		return $result ;
+		return $result;
 	}
 
 	/**
@@ -98,7 +98,7 @@ class TaskboardFactory extends FFError {
 			return $this->Taskboards;
 		}
 
-		$this->Taskboards = array () ;
+		$this->Taskboards = array();
 		$ids = $this->getAllTaskboardIds() ;
 
 		foreach ($ids as $id) {
