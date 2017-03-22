@@ -67,7 +67,7 @@ class Widget_MySystasks extends Widget {
 		}
 
 		$title_arr = array(
-			_('Task ID'),
+			_('Task Id'),
 			_('Plugin'),
 			_('SysTask Type'),
 			_('Project Name'),

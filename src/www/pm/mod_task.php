@@ -55,7 +55,7 @@ echo $HTML->openForm(array('action' => '/pm/task.php?group_id='.$group_id.'&grou
 		<td><strong><?php echo _('Submitted by') . _(': '); ?></strong><br />
 			<?php echo $pt->getSubmittedRealName(); ?> (<?php echo $pt->getSubmittedUnixName(); ?>)</td>
 		<td><input type="submit" value="<?php echo _('Submit') ?>" name="submit" /></td>
-		<td><strong>Task ID:</strong> <?php echo $project_task_id; ?> @ <?php
+		<td><strong><?php echo _('Task Id') . _(': '); ?></strong> <?php echo $project_task_id; ?> @ <?php
 		echo forge_get_config ('web_host') ; ?></td>
 	</tr>
 

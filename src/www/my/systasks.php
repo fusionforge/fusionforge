@@ -52,7 +52,7 @@ if (empty($gids))
 $gids = implode(',', $gids);
 
 $title_arr = array(
-	_('Task ID'),
+	_('Task Id'),
 	_('Plugin'),
 	_('SysTask Type'),
 	_('Group ID'),
