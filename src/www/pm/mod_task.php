@@ -79,12 +79,12 @@ echo $HTML->openForm(array('action' => '/pm/task.php?group_id='.$group_id.'&grou
 
 	<tr>
 		<td>
-		<strong><?php echo _('Percent Complete') . _(': '); ?></strong><br />
+		<strong><?php echo _('Percent Complete')._(': '); ?></strong><br />
 		<?php $pg->percentCompleteBox('percent_complete',$pt->getPercentComplete()); ?>
 		</td>
 
 		<td>
-		<strong><?php echo _('Priority') . _(': '); ?></strong><br />
+		<strong><?php echo _('Priority')._(': '); ?></strong><br />
 		<?php echo build_priority_select_box('priority',$pt->getPriority()); ?>
 		</td>
 
@@ -98,8 +98,8 @@ echo $HTML->openForm(array('action' => '/pm/task.php?group_id='.$group_id.'&grou
 
 	<tr>
 		<td>
-		<strong><?php echo _('Task Summary') . _(': '); ?></strong><br />
-		<input type="text" name="summary" size="65" maxlength="65" value="<?php echo $pt->getSummary(); ?>" />
+		<label for="summary"><strong><?php echo _('Task Summary')._(': '); ?></strong></label><br />
+		<input id="summary" type="text" name="summary" size="65" maxlength="65" value="<?php echo $pt->getSummary(); ?>" />
 		</td>
 		<td colspan="2">
 		<?php echo util_make_link('/pm/task.php?func=deletetask&project_task_id='.$project_task_id.'&group_id='.$group_id.'&group_project_id='.$group_project_id, $HTML->getDeletePic(_('Delete this task'), _('Delete this task')).' '._('Delete this task')); ?>
@@ -113,6 +113,7 @@ echo $HTML->openForm(array('action' => '/pm/task.php?group_id='.$group_id.'&grou
 
 	<tr>
 		<td colspan="3">
+		<p>
 		<strong><?php echo _('Original Comment') . _(': '); ?></strong><br />
 		<?php
 			$sanitizer = new TextSanitizer();
@@ -124,11 +125,15 @@ echo $HTML->openForm(array('action' => '/pm/task.php?group_id='.$group_id.'&grou
 				echo $body;
 			}
 		?>
-		<p />
-		<strong><?php echo _('Add A Comment') . _(': '); ?></strong><?php echo notepad_button('document.forms.modtaskform.details') ?><br />
+		</p>
+		<p>
+		<label for="details"><strong><?php echo _('Add A Comment') . _(': '); ?></strong></label>
+		<?php echo notepad_button('document.forms.modtaskform.details') ?>
+		</p>
 <?php
 $GLOBALS['editor_was_set_up']=false;
 $params = array() ;
+$params['id'] = 'details';
 $params['name'] = 'details';
 $params['width'] = "800";
 $params['height'] = "300";
@@ -196,14 +201,14 @@ unset($GLOBALS['editor_was_set_up']);
 
 	<tr>
 		<td>
-		<strong><?php echo _('Estimated Hours') . _(': '); ?></strong><br />
-		<input type="number" name="hours" size="5" value="<?php echo $pt->getHours(); ?>" />
+		<label for="hours"><strong><?php echo _('Estimated Hours') . _(': '); ?></strong></label><br />
+		<input id="hours" type="number" name="hours" size="5" value="<?php echo $pt->getHours(); ?>" />
 		</td>
 
 		<td colspan="2">
 		<strong><?php echo _('Status') . _(': '); ?></strong><br />
 		<?php
-		echo $pg->statusBox('status_id', $pt->getStatusID(), false );
+		echo $pg->statusBox('status_id', $pt->getStatusID(), false);
 		?>
 		</td>
 	</tr>
