@@ -1362,6 +1362,38 @@ class ArtifactTypeHtml extends ArtifactType {
 	var invalidInputMsg = '". _("This choice is not allowed")."';
 	var groupId =".$this->Group->getID().";
 	var atId = ".$this->getID().";";
+
+		$effortUnitSet = New EffortUnitSet($this, $this->getEffortUnitSet());
+		if ($effortUnitSet->isAutoconvert()) {
+			$jseffort = <<<'EOS'
+	$("select.effort").on('change', function(){
+		var effortid = $(this).data("effortid");
+		var value = parseInt(parseInt($("input[name='extra_fields["+effortid+"]']").val())/$("select[name='unit["+effortid+"]'] option:selected").data('factor'));
+		$("input[name='value["+effortid+"]']").val(value);
+		$("input[name='extra_fields["+effortid+"]']").val(value*$("select[name='unit["+effortid+"]'] option:selected").data('factor')+'U'+$("select[name='unit["+effortid+"]']").val());
+	});
+	$("input.effort").on('change', function(){
+		var effortid = $(this).data("effortid");
+		var value = $("input[name='value["+effortid+"]']").val();
+		$("input[name='extra_fields["+effortid+"]']").val(value*$("select[name='unit["+effortid+"]'] option:selected").data('factor')+'U'+$("select[name='unit["+effortid+"]']").val());
+	});
+	$(".effort-range").on('change', function(){
+		var effortid = $(this).data("effortid");
+		$("input[name='extra_fields["+effortid+"]']").val($("input[name='value_from["+effortid+"]']").val()*$("select[name='unit_from["+effortid+"]'] option:selected").data('factor')+'U'+$("select[name='unit_from["+effortid+"]']").val()+' '+$("input[name='value_to["+effortid+"]']").val()*$("select[name='unit_to["+effortid+"]'] option:selected").data('factor')+'U'+$("select[name='unit_to["+effortid+"]']").val());
+	});
+EOS;
+		} else {
+		$jseffort = <<<'EOS'
+	$(".effort").on('change', function(){
+		var effortid = $(this).data("effortid");
+		$("input[name='extra_fields["+effortid+"]']").val($("input[name='value["+effortid+"]']").val()*$("select[name='unit["+effortid+"]'] option:selected").data('factor')+'U'+$("select[name='unit["+effortid+"]']").val());
+	});
+	$(".effort-range").on('change', function(){
+		var effortid = $(this).data("effortid");
+		$("input[name='extra_fields["+effortid+"]']").val($("input[name='value_from["+effortid+"]']").val()*$("select[name='unit_from["+effortid+"]'] option:selected").data('factor')+'U'+$("select[name='unit_from["+effortid+"]']").val()+' '+$("input[name='value_to["+effortid+"]']").val()*$("select[name='unit_to["+effortid+"]'] option:selected").data('factor')+'U'+$("select[name='unit_to["+effortid+"]']").val());
+	});
+EOS;
+		}
 		$javascript = <<<'EOS'
 	function showMessage( msg_text, msg_class) {
 		$("div#maindiv h1").append($("<p>", { "class": msg_class }).html( msg_text )).show();
@@ -1372,14 +1404,6 @@ class ArtifactTypeHtml extends ArtifactType {
 		}
 		return false;
 	};
-	$(".effort").on('change', function(){
-		var effortid = $(this).data("effortid");
-		$("input[name='extra_fields["+effortid+"]']").val($("input[name='value["+effortid+"]']").val()*$("select[name='unit["+effortid+"]'] option:selected").data('factor')+'U'+$("select[name='unit["+effortid+"]']").val());
-	});
-	$(".effort-range").on('change', function(){
-		var effortid = $(this).data("effortid");
-		$("input[name='extra_fields["+effortid+"]']").val($("input[name='value_from["+effortid+"]']").val()*$("select[name='unit_from["+effortid+"]'] option:selected").data('factor')+'U'+$("select[name='unit_from["+effortid+"]']").val()+' '+$("input[name='value_to["+effortid+"]']").val()*$("select[name='unit_to["+effortid+"]'] option:selected").data('factor')+'U'+$("select[name='unit_to["+effortid+"]']").val());
-	});
 	$("input[type='radio'].readonly, input[type='checkbox'].readonly").on('click', function(){
 		return false;
 	}).on('keydown', function(event){
@@ -1540,7 +1564,7 @@ class ArtifactTypeHtml extends ArtifactType {
 		});
 	});
 EOS;
-		return html_e('script', array('type'=>'text/javascript'), '//<![CDATA['."\n".'$(function(){'.$jsvariable."\n".$javascript.'});'."\n".'//]]>');
+		return html_e('script', array('type'=>'text/javascript'), '//<![CDATA['."\n".'$(function(){'.$jsvariable."\n".$jseffort."\n".$javascript.'});'."\n".'//]]>');
 	}
 
 }

@@ -116,10 +116,11 @@ class EffortUnitSet extends FFError {
 	/**
 	 * create - Create new Effort Unit Set in the database.
 	 *
+	 * @param	boolean	$is_autoconvert		set if unit is auto convert
 	 * @param	array	$importData			For import
 	 * @return	bool	success or not
 	 */
-	function create($importData = array()) {
+	function create($is_autoconvert = 0, $importData = array()) {
 		if(array_key_exists('user', $importData)){
 			$user = $importData['user'];
 		} else {
@@ -143,8 +144,8 @@ class EffortUnitSet extends FFError {
 					$this->setError(sprintf(_('Effort Unit Set already exist for tracker %s'),$this->ArtifactType->getName()));
 					return false;
 				}
-				$query ='INSERT INTO effort_unit_set(level, group_id, group_artifact_id, created_date, created_by) VALUES($1, $2, $3, $4, $5)';
-				$params = array(EFFORTUNITSET_TRACKER_LEVEL, $this->Group->getID(), $this->ArtifactType->getID(), $time, $user);
+				$query ='INSERT INTO effort_unit_set(level, group_id, group_artifact_id, created_date, created_by, is_autoconvert) VALUES($1, $2, $3, $4, $5, $6)';
+				$params = array(EFFORTUNITSET_TRACKER_LEVEL, $this->Group->getID(), $this->ArtifactType->getID(), $time, $user, $is_autoconvert);
 				break;
 			case EFFORTUNITSET_PROJECT_LEVEL:
 				$res = db_query_params('SELECT 1 FROM effort_unit_set WHERE group_id=$1 AND group_artifact_id IS NULL AND level=$2',
@@ -157,8 +158,8 @@ class EffortUnitSet extends FFError {
 					$this->setError(sprintf(_('Effort Unit Set already exist for project %s'),$this->Group->getPublicName()));
 					return false;
 				}
-				$query ='INSERT INTO effort_unit_set(level, group_id, created_date, created_by) VALUES($1, $2, $3, $4)';
-				$params = array(EFFORTUNITSET_PROJECT_LEVEL, $this->Group->getID(), $time, $user);
+				$query ='INSERT INTO effort_unit_set(level, group_id, created_date, created_by, is_autoconvert) VALUES($1, $2, $3, $4, $5)';
+				$params = array(EFFORTUNITSET_PROJECT_LEVEL, $this->Group->getID(), $time, $user, $is_autoconvert);
 				break;
 			case EFFORTUNITSET_FORGE_LEVEL:
 			default:
@@ -382,6 +383,32 @@ class EffortUnitSet extends FFError {
 		} else {
 			return false;
 		}
+		return true;
+	}
+
+	/**
+	 * isAutoconvert - test if for this unit set, value will be convert on an unit change.
+	 *
+	 * @return	boolean	true/false.
+	 */
+	function isAutoconvert(){
+		return ($this->data_array['is_autoconvert']?true:false);
+	}
+
+	/**
+	 * update - update Effort Unit Set in the database.
+	 *
+	 * @param	boolean	$is_autoconvert		set if unit is auto convert
+	 * @return	boolean	true/false.
+	 */
+	function update($is_autoconvert){
+		$res = db_query_params ('UPDATE effort_unit_set SET is_autoconvert=$1 WHERE unit_set_id=$2',
+				array (($is_autoconvert?1:0), $this->getID())) ;
+		if (!$res) {
+			$this->setError(_('Error updating Effort Unit Set')._(': ').db_error());
+			return false;
+		}
+		$this->fetchData($this->getID());
 		return true;
 	}
 }
