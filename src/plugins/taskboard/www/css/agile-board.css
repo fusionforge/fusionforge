@@ -83,8 +83,6 @@
 	width: 100%;
 	/* border: solid #CCCCCC 1px; */
 	height: 80px;
-	-moz-box-shadow: 0 4px 8px rgba(0,0,0,0.5);
-	-webkit-box-shadow: 0 4px 8px rgba(0,0,0,0.5);
 	box-shadow: 0 4px 8px rgba(0,0,0,0.5);
 }
 

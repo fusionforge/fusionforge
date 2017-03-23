@@ -82,12 +82,6 @@ a {
 	text-decoration:none;
 	font-weight: bold;
 	color: #7D88CC;
-	-webkit-transition-property: background-color, color, height, shadow;
-	-webkit-transition-duration: 0.3s;
-	-moz-transition-property: background-color, color, height, shadow;
-	-moz-transition-duration: 0.3s;
-	-o-transition-property: background-color, color, height, shadow;
-	-o-transition-duration: 0.3s;
 	transition-property: background-color, color, height, shadow;
 	transition-duration: 0.3s;
 }
@@ -223,12 +217,6 @@ hr {
   text-decoration:none;
   font-weight: bold;
   color: #7D88CC;
-  -webkit-transition-property: background-color, color, height, shadow;
-  -webkit-transition-duration: 0.3s;
-  -moz-transition-property: background-color, color, height, shadow;
-  -moz-transition-duration: 0.3s;
-  -o-transition-property: background-color, color, height, shadow;
-  -o-transition-duration: 0.3s;
   transition-property: background-color, color, height, shadow;
   transition-duration: 0.3s;
 }
@@ -314,21 +302,11 @@ hr {
 	border-bottom: 0;
 	border-top-left-radius: 6px;
 	border-top-right-radius: 6px;
-	-webkit-top-right-border-radius: 6px;
-	-webkit-top-left-border-radius: 6px;
-	-moz-border-radius-topright: 6px;
-	-moz-border-radius-topleft: 6px;
 	background-color: #909DB7;
 	line-height: 17px;
 	color: black;
 	text-shadow: 1px 1px #B2BFD9;
 	margin: 0 2px;
-	-webkit-transition-property: background-color, color, height, shadow;
-	-webkit-transition-duration: 0.3s;
-	-moz-transition-property: background-color, color, height, shadow;
-	-moz-transition-duration: 0.3s;
-	-o-transition-property: background-color, color, height, shadow;
-	-o-transition-duration: 0.3s;
 	transition-property: background-color, color, height, shadow;
 	transition-duration: 0.3s;
 }
@@ -605,10 +583,6 @@ a.topTabSelected:hover {
 	border-bottom: none;
 	border-top-left-radius: 6px;
 	border-top-right-radius: 6px;
-	-webkit-top-right-border-radius: 6px;
-	-webkit-top-left-border-radius: 6px;
-	-moz-border-radius-topright: 6px;
-	-moz-border-radius-topleft: 6px;
 	margin-right: 10px;
 	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(white), to(#f7f7f7));
 }
@@ -632,8 +606,6 @@ a.topTabSelected:hover {
 	border: 1px solid red;
 	padding: 7px;
 	border-radius: 6px;
-	-webkit-border-radius: 6px;
-	-moz-border-radius: 6px;
 	text-shadow: 1px 1px #ff7c73;
 	text-align: left;
 	font-size: small;
@@ -647,8 +619,6 @@ a.topTabSelected:hover {
 	border: 1px solid #ffa500; /* orange */
 	padding: 7px;
 	border-radius: 6px;
-	-webkit-border-radius: 6px;
-	-moz-border-radius: 6px;
 	text-shadow: 1px 1px #fff5CA;
 	text-align: left;
 	font-weight: normal;
@@ -661,8 +631,6 @@ a.topTabSelected:hover {
 	border: 1px solid green;
 	padding: 7px;
 	border-radius: 6px;
-	-webkit-border-radius: 6px;
-	-moz-border-radius: 6px;
 	text-shadow: 1px 1px #DFF59f;
 	text-align: left;
 	font-weight: normal;
@@ -675,8 +643,6 @@ p.information {
 	border: 1px solid #3a5fa5;
 	padding: 7px;
 	border-radius: 6px;
-	-webkit-border-radius: 6px;
-	-moz-border-radius: 6px;
 	text-shadow: 1px 1px #DFF59f;
 	text-align: left;
 	font-weight: normal;
@@ -689,8 +655,6 @@ p.information {
 	border: 1px solid red;
 	padding: 7px;
 	border-radius: 6px;
-	-webkit-border-radius: 6px;
-	-moz-border-radius: 6px;
 	text-shadow: 1px 1px #ff7c73;
 	color: black;
 	margin: 2px 3px 3px;
@@ -701,8 +665,6 @@ p.information {
 	border: 1px solid red;
 	padding: 7px;
 	border-radius: 6px;
-	-webkit-border-radius: 6px;
-	-moz-border-radius: 6px;
 	text-shadow: 1px 1px #ff7c73;
 	color: black;
 	margin: 2px 3px 3px;
@@ -719,10 +681,6 @@ p.information {
 	margin-top: 20px;
 	border-bottom-left-radius: 6px;
 	border-bottom-right-radius: 6px;
-	-webkit-bottom-right-border-radius: 6px;
-	-webkit-bottom-left-border-radius: 6px;
-	-moz-border-radius-bottomright: 6px;
-	-moz-border-radius-bottomleft: 6px;
 	text-align: center;
 	color: #dcdcdc;
 	text-shadow: 1px 1px white;
@@ -732,12 +690,8 @@ p.information {
 	float: right;
 }
 
-
-
 .info-box h2 {
 	font-size: 1.3em;
-	-moz-border-radius: 0.5em 0.5em 0 0;
-	-webkit-border-radius: 0.5em 0.5em 0 0;
 	border-radius: 0.5em 0.5em 0 0;
 	color: white;
 	background: #34b234;
@@ -763,8 +717,6 @@ p.information {
 	color: #565c5e;
 	padding: 1px 4px 4px 4px;
 	margin-bottom: 8px;
-	-moz-border-radius: 0.5em 0.5em 0 0;
-	-webkit-border-radius: 0.5em 0.5em 0 0;
 	border-radius: 0.5em 0.5em 0 0;
 }
 
