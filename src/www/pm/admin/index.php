@@ -84,20 +84,23 @@ if (getStringFromRequest('post_changes')) {
 
 	} elseif ($add_cat) {
 		$name = getStringFromRequest('name');
-
 		/*
 			Add a project_category
 		*/
 		session_require_perm ('pm', $pg->getID(), 'manager') ;
 
-		$pc = new ProjectCategory($pg);
-		if (!$pc || !is_object($pc)) {
-			exit_error(_('Unable to create ProjectCategory Object'),'pm');
+		if (trim($name) == '') {
+			$error_msg .= _('Name is required');
 		} else {
-			if (!$pc->create($name)) {
-				$error_msg .= _('Insert Error')._(': ').$pc->getErrorMessage();
+			$pc = new ProjectCategory($pg);
+			if (!$pc || !is_object($pc)) {
+				exit_error(_('Unable to create ProjectCategory Object'),'pm');
 			} else {
-				$feedback .= _('Category Inserted');
+				if (!$pc->create($name)) {
+					$error_msg .= _('Insert Error')._(': ').$pc->getErrorMessage();
+				} else {
+					$feedback .= _('Category Inserted');
+				}
 			}
 		}
 
@@ -200,6 +203,9 @@ if ($add_cat && $group_project_id) {
 	} else {
 		echo $HTML->information(_('No categories defined'));
 	}
+	?>
+	<p class="important"><?php echo _('Once you add a category, it cannot be deleted') ?></p>
+	<?php
 	echo $HTML->openForm(array('action' => '/pm/admin/?group_id='.$group_id, 'method' => 'post'));
 	?>
 	<p>
@@ -210,7 +216,6 @@ if ($add_cat && $group_project_id) {
 	</label>
 	<input id="name" required="required" type="text" name="name" value="" />
 	</p>
-	<p class="important"><?php echo _('Once you add a category, it cannot be deleted') ?></p>
 	<p><input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
 	<?php
 	echo $HTML->closeForm();
