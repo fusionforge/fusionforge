@@ -132,6 +132,7 @@ switch (getStringFromRequest('function','')) {
 	case 'update_set':
 		update_set($effortUnitSet);
 		show_units($effortUnitSet);
+		break;
 	default:
 		show_units($effortUnitSet);
 }
