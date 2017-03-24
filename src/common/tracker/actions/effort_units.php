@@ -129,6 +129,9 @@ switch (getStringFromRequest('function','')) {
 		postcopy_set($effortUnitSet);
 		show_units($effortUnitSet);
 		break;
+	case 'update_set':
+		update_set($effortUnitSet);
+		show_units($effortUnitSet);
 	default:
 		show_units($effortUnitSet);
 }
@@ -158,6 +161,7 @@ function show_units(&$effortUnitSet){
 			break;
 		case EFFORTUNITSET_PROJECT_LEVEL:
 			echo html_e('h2', array(), _('Effort Unit Set'));
+			echo html_ao('p');
 			echo sprintf(_('The Project “%s” is using'),$effortUnitSet->getGroup()->getPublicName()).' ';
 			$AvailableEffortUnitSets = getAvailableEffortUnitSets($effortUnitSet->getGroup());
 			switch ($effortUnitSet->getLevel()) {
@@ -171,9 +175,11 @@ function show_units(&$effortUnitSet){
 						$isEditable = true;
 					break;
 			}
+			echo html_ao('p');
 			break;
 		case EFFORTUNITSET_TRACKER_LEVEL:
 			echo html_e('h2', array(), _('Effort Unit Set'));
+			echo html_ao('p');
 			echo sprintf(_('The Tracker “%s” is using'),$effortUnitSet->getArtifactType()->getName()).' ';
 			$AvailableEffortUnitSets = getAvailableEffortUnitSets($effortUnitSet->getArtifactType());
 			switch ($effortUnitSet->getLevel()) {
@@ -192,6 +198,7 @@ function show_units(&$effortUnitSet){
 					$isEditable = true;
 					break;
 			}
+			echo html_ao('p');
 			break;
 	}
 
@@ -207,6 +214,22 @@ function show_units(&$effortUnitSet){
 		echo html_ac(html_ap() - 1);
 		echo html_ao('p');
 		echo html_e('input',array('type'=>'submit', 'value'=>_('Copy')));
+		echo html_ac(html_ap() - 1);
+		echo $HTML->closeForm();
+	} else {
+		echo $HTML->openForm(array('action' => $currentURL, 'method' => 'get'));
+		echo $inputParameters;
+		echo html_ao('p');
+		if ($effortUnitSet->isAutoconvert()) {
+			echo html_e('input', array('type'=>'checkbox', 'name'=>'is_autoconvert', 'checked'=>'checked'));
+		} else {
+			echo html_e('input', array('type'=>'checkbox', 'name'=>'is_autoconvert'));
+		}
+		echo html_e('label', array('for'=>'is_autoconvert'),_('Enable auto convert effort value'));
+		echo html_ac(html_ap() - 1);
+		echo html_ao('p');
+		echo html_e('input', array('type'=>'hidden', 'name'=>'function', 'value'=>'update_set'));
+		echo html_e('input', array('type'=>'submit', 'value'=>_('Update')));
 		echo html_ac(html_ap() - 1);
 		echo $HTML->closeForm();
 	}
@@ -519,6 +542,22 @@ function postcopy_set(&$effortUnitSet) {
 	}
 	$effortUnitSet = $newEffortUnitSet;
 	echo $HTML->feedback(sprintf(_('Effort Unit Set successfully copied.')));
+	return true;
+}
+
+function update_set(&$effortUnitSet) {
+	global $HTML;
+	$isAutoconvert = (getStringFromRequest('is_autoconvert')=='on'?1:0);
+	var_dump($isAutoconvert);
+	if (!$effortUnitSet->update($isAutoconvert)) {
+		echo $HTML->error_msg(_('Error updating Effort Unit Set')._(':').' '.$effortUnitSet->getErrorMessage());
+		return false;
+	}
+	if ($effortUnitSet->isError()) {
+		echo $HTML->error_msg($effortUnitSet->getErrorMessage());
+		return false;
+	}
+	echo $HTML->feedback(sprintf(_('Effort Unit Set successfully updated.')));
 	return true;
 }
 
