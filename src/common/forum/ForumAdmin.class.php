@@ -328,7 +328,6 @@ class ForumAdmin extends FFError {
 				$ids .= db_result($res,$i,'msg_id') . ",";
 			}
 
-			$i = 2;
 			echo $HTML->listTableTop($title);
 			while ($onemsg = db_fetch_array($res)) {
 				echo "

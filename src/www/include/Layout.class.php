@@ -641,7 +641,6 @@ if (isset($params['group']) && $params['group']) {
 	 */
 	function listTableTop($titleArray = array(), $linksArray = array(), $class = '', $id = '', $thClassArray = array(), $thTitleArray = array(), $thOtherAttrsArray = array()) {
 		$attrs = array('class' => 'listing');
-		$args = '';
 		if ($class) {
 			$attrs['class'] .= ' '.$class;
 		} else {

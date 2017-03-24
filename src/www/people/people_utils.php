@@ -186,8 +186,6 @@ function people_edit_skill_inventory($user_id) {
 
 	}
 	//add a new skill
-	$i++; //for row coloring
-
 	echo '<tr class="tableheading"><td colspan="4">'._('Add a new skill').'/td></tr>';
 	echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
 	echo '<tr>
@@ -198,7 +196,6 @@ function people_edit_skill_inventory($user_id) {
 	</tr>';
 	echo $HTML->closeForm();
 	echo $HTML->listTableBottom();
-
 }
 
 
@@ -335,8 +332,6 @@ function people_edit_job_inventory($job_id,$group_id) {
 
 	}
 	//add a new skill
-	(isset($i)) ? $i++ : $i = 0; //for row coloring
-
 	echo '<tr><td colspan="4"><h3>'._('Add a new skill').'</h3></td></tr>
 	<tr>';
 	echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
