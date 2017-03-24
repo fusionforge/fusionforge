@@ -862,7 +862,7 @@ function html_build_multiple_select_box($result, $name, $checked_array, $size = 
  * @param	array	$vals
  * @param	array	$texts		Text to be displayed
  * @param	string	$name		id of the items selected
- * @param	string	$checked_array	The item that should be checked
+ * @param	array	$checked_array	The item that should be checked
  * @param	int	$size		The size of this box
  * @param	bool	$show_100	Whether or not to show the '100 row'
  * @param	string	$text_100	What to call the '100 row' defaults to none.
@@ -924,7 +924,7 @@ function html_build_multiple_select_box_from_arrays($vals, $texts, $name, $check
 			if ($withGroup && $vals[$i]!='100' && $optgroup[$i]!=$currentGroup) {
 				if ($currentGroup!='' && $groupOpen) {
 					$return .= html_ac(html_ap() - 1);
-					$groupOpen = false;
+					$groupOpen = false; // @fixme see $groupOpen below
 				}
 				$return .= html_ao('optgroup', array('label'=>$optgroup[$i]));
 				$groupOpen = true;
@@ -969,6 +969,11 @@ function html_build_checkbox($name, $value, $checked, $attrs = array()) {
  * @param	array	$checked
  * @param	bool	$checkall
  * @param	bool	$show_100
+ * @param	string	$text_100
+ * @param	bool	$allowed
+ * @param	array	$attrs
+ * @param	array	$checkbox_attrs
+ * @param	array	$attrs_100
  * @return	string	html code for checkbox control
  */
 function html_build_checkboxes_from_array($vals, $check_name, $checked=array(), $checkall=false, $show_100=true, $text_100='none', $allowed=false, $attrs=array(), $checkbox_attrs=array(), $attrs_100=array()) {

@@ -44,7 +44,7 @@ $DOCUMENT_OBJ = array();
  * You should always use this instead of instantiating the object directly
  *
  * @param	int		$doc_id		The ID of the document - required
- * @param	int		$group_id	Group ID of the project - required
+ * @param	int|bool	$group_id	Group ID of the project - required
  * @param	int|bool	$res		The result set handle ("SELECT * FROM docdata_vw WHERE docid=$1")
  * @return	Document	a document object or false on failure
  */

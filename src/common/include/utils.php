@@ -797,10 +797,10 @@ function human_readable_bytes($bytes, $base10 = false, $round = 0, $labels = arr
 
 /**
  * ls - lists a specified directory and returns an array of files
- * @param	string	$dir	the path of the directory to list
- * @param	bool	$filter	whether to filter out directories and illegal filenames
- * @param	string	$regex	filter filename based on this regex
- * @return	array	array of file names.
+ * @param	string		$dir	the path of the directory to list
+ * @param	bool		$filter	whether to filter out directories and illegal filenames
+ * @param	string|bool	$regex	filter filename based on this regex
+ * @return	array		array of file names.
  */
 function &ls($dir, $filter = false, $regex = false) {
 	$out = array();
