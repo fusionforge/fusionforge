@@ -66,13 +66,10 @@ if (getStringFromRequest('post_changes')) {
 	}
 
 	if (getStringFromRequest('addproject')) {
+		/* Add new subproject */
 		$project_name = getStringFromRequest('project_name');
 		$description = getStringFromRequest('description');
 		$send_all_posts_to = getStringFromRequest('send_all_posts_to');
-
-		/*
-			Add new subproject
-		*/
 		session_require_perm ('pm_admin', $group_id) ;
 		if (!$pg->create($project_name,$description,$send_all_posts_to)) {
 			exit_error($pg->getErrorMessage(),'pm');
@@ -83,10 +80,8 @@ if (getStringFromRequest('post_changes')) {
 		}
 
 	} elseif ($add_cat) {
+		/* Add a project_category */
 		$name = getStringFromRequest('name');
-		/*
-			Add a project_category
-		*/
 		session_require_perm ('pm', $pg->getID(), 'manager') ;
 
 		if (trim($name) == '') {
@@ -105,37 +100,36 @@ if (getStringFromRequest('post_changes')) {
 		}
 
 	} elseif ($update_cat) {
-		$id = getIntFromRequest('id');
+		/* Update a project_category */
 		$name = getStringFromRequest('name');
-
-		/*
-			Update a project_category
-		*/
-		session_require_perm ('pm', $pg->getID(), 'manager') ;
-
-		$pc = new ProjectCategory($pg,$id);
-		if (!$pc || !is_object($pc)) {
-			exit_error(_('Unable to create ProjectCategory Object'),'pm');
-		} elseif ($pc->isError()) {
-			exit_error($pc->getErrorMessage(),'pm');
+		if (trim($name) == '') {
+			$error_msg .= _('Name is required');
 		} else {
-			if (!$pc->update($name)) {
-				exit_error(_('Update failed')._(': ').$pc->getErrorMessage(),'pm');
+			$id = getIntFromRequest('id');
+			session_require_perm ('pm', $pg->getID(), 'manager') ;
+
+			$pc = new ProjectCategory($pg,$id);
+			if (!$pc || !is_object($pc)) {
+				exit_error(_('Unable to create ProjectCategory Object'),'pm');
+			} elseif ($pc->isError()) {
+				exit_error($pc->getErrorMessage(),'pm');
 			} else {
-				$feedback .= _('Category Updated');
-				$update_cat=false;
-				$add_cat=true;
+				if (!$pc->update($name)) {
+					exit_error(_('Update failed')._(': ').$pc->getErrorMessage(),'pm');
+				} else {
+					$feedback .= _('Category Updated');
+					$update_cat=false;
+					$add_cat=true;
+				}
 			}
 		}
 
 	} elseif (getStringFromRequest('update_pg')) {
+		/* Update a subproject */
 		$project_name = getStringFromRequest('project_name');
 		$description = getStringFromRequest('description');
 		$send_all_posts_to = getStringFromRequest('send_all_posts_to');
 
-		/*
-			Update a subproject
-		*/
 		session_require_perm ('pm', $pg->getID(), 'manager') ;
 
 		if (!$pg->update($project_name,$description,$send_all_posts_to)) {
@@ -145,12 +139,10 @@ if (getStringFromRequest('post_changes')) {
 		}
 
 	} elseif ($delete) {
+		/* Delete a subproject */
 		$sure = getStringFromRequest('sure');
 		$really_sure = getStringFromRequest('really_sure');
 
-		/*
-			Delete a subproject
-		*/
 		session_require_perm ('pm', $pg->getID(), 'manager') ;
 
 		if (!$pg->delete(getStringFromRequest('sure'),getStringFromRequest('really_sure'))) {
