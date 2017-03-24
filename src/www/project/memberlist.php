@@ -90,7 +90,7 @@ foreach ($members as $user) {
 	if (forge_get_config('use_people')) {
 		$cells[] = array(util_make_link('/people/viewprofile.php?user_id='.$user->getID(), _('View')), 'class' => 'align-center');
 	}
-	echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i++, true)), $cells);
+	echo $HTML->multiTableRow(array(), $cells);
 }
 // end of community member description block
 echo $HTML->listTableBottom();

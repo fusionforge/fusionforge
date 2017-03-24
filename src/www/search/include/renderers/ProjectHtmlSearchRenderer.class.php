@@ -66,7 +66,7 @@ class ProjectHtmlSearchRenderer extends HtmlSearchRenderer {
 
 		foreach ($result as $row) {
 			$i++;
-			$return .= '<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i).'>'
+			$return .= '<tr>'
 				.'<td style="width: 30%"><a href="'.util_make_url('/projects/'.$row['unix_group_name'].'/').'">'
 				.html_image('ic/msg.png', 10, 12)
 				.' '.$this->highlightTargetWords($row['group_name']).'</a></td>'

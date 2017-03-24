@@ -216,7 +216,7 @@ class SurveyHTML extends FFError {
 			}
 
 			if ($i%3==0) {
-				$ret.= "<tr ". $HTML->boxGetAltRowStyle($i) .">\n";
+				$ret.= "<tr>\n";
 			}
 
 			$ret.= '<td><input type="checkbox" id="to_add_'.$i.'" name="to_add[]" value="'.$arr_to_add[$i]->getID().'" />'.
@@ -253,7 +253,7 @@ class SurveyHTML extends FFError {
 				continue;
 			}
 
-			$ret.= "<tr ". $HTML->boxGetAltRowStyle($i) .">\n";
+			$ret.= "<tr>\n";
 
 			$ret.= '<td>'.$arr_to_del[$i]->getID().'</td>';
 			$ret.= '<td>'.$arr_to_del[$i]->getQuestion().'</td>';
@@ -302,7 +302,7 @@ class SurveyHTML extends FFError {
 				continue;
 			}
 
-			$ret.= "<tr ". $HTML->boxGetAltRowStyle($i) .">\n";
+			$ret.= "<tr>\n";
 			$ret.= '<td>'.util_make_link('/survey/admin/question.php?group_id='.$group_id.'&question_id='.$questions[$i]->getID(), $questions[$i]->getID()).'</td>'."\n";
 			$ret.= '<td>'.$questions[$i]->getQuestion().'</td>';
 			$ret.= '<td>'.$questions[$i]->getQuestionStringType().'</td>';
@@ -382,7 +382,7 @@ class SurveyHTML extends FFError {
 
 			$displaycount++;
 
-			$ret.= "<tr ". $HTML->boxGetAltRowStyle($color_index++) .">\n";
+			$ret.= "<tr>\n";
 			if ($show_id) {
 				$ret.= '<td>'.$surveys[$i]->getID().'</td>';
 			}

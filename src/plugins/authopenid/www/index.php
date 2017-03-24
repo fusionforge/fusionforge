@@ -154,7 +154,7 @@ if($res) {
 	while ($row = db_fetch_array($res)) {
 		$openid_identity = 	$row['openid_identity'];
 
-		echo '<tr '.$HTML->boxGetAltRowStyle($i).'>';
+		echo '<tr>';
 		echo '<td>'. $openid_identity .'</td>';
 		echo '<td>'.util_make_link('/plugins/authopenid/?openid_identity='.urlencode($openid_identity).'&delete=1', _('delete')).'</td>';
 		echo '</tr>';

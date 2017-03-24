@@ -54,7 +54,7 @@ while ($row = db_fetch_array($res)) {
 	$cells[][] = date(_('Y-m-d H:i'), $row['time']);
 	$cells[][] = util_display_user($row['user_name'], $row['user_id'], $row['realname']);
 	$cells[][] = $row['ip_addr'];
-	echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i++, true)), $cells);
+	echo $HTML->multiTableRow(array(), $cells);
 }
 echo $HTML->listTableBottom();
 $HTML->footer();

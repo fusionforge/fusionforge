@@ -72,7 +72,7 @@ $select = '';
 foreach ($fields as $f => $name) {
 	$pos = array_search($f, $browse_fields);
 	if ($pos !== false) {
-		$rows[$pos] = '<tr '. $HTML->boxGetAltRowStyle($pos) .'>'.'<td>'.$name.'</td>'."\n".
+		$rows[$pos] = '<tr>'.'<td>'.$name.'</td>'."\n".
 					'<td class="align-right">'.
 					($pos + 1).' --&gt; <input type="text" name="order['.$f.']" value="" size="3" maxlength="3" />'.
 					'</td>'."\n".

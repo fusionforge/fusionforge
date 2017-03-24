@@ -363,7 +363,7 @@ if (getIntFromRequest('manage_release') ||
 
 		$rows = array();
 		for ($pos = count($release_order) - 1; $pos >= 0; $pos--) {
-			$rows[$pos] = '<tr '. $HTML->boxGetAltRowStyle($pos) .'>'.'<td>'.'&#160;&#160;&#160;'.$release_order[$pos].'</td>'."\n".
+			$rows[$pos] = '<tr>'.'<td>'.'&#160;&#160;&#160;'.$release_order[$pos].'</td>'."\n".
 						'<td class="align-right">'.
 						($pos + 1).'&#160;--&gt;&#160;<input type="text" name="order['.$release_order[$pos].']" value="" size="3" maxlength="3" />'.
 						'</td>'."\n".
@@ -438,7 +438,7 @@ if (! isset($ihm) || $ihm !== true) {
 		} elseif ($roadmap->isError()) {
 			echo $roadmap->getErrorMessage();
 		} else {
-			$rows[$pos] = '<tr '. $HTML->boxGetAltRowStyle($pos) .'>'.
+			$rows[$pos] = '<tr>'.
 					'<td><input type="checkbox" name="roadmap_states['.$roadmap->getID().']" value="1"'.($roadmap->getState() ? ' checked="checked"' : '').' /></td>'.
 					'<td>'.$roadmap->getName().'</td>'."\n".
 					'<td class="align-center"><input type="radio" name="default_roadmap" value="'.$roadmap->getID().'"'.($roadmap->isDefault() ? ' checked="checked"' : '').' /></td>'.

@@ -68,7 +68,7 @@ class ForumsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 				$lastForumName = $currentForumName;
 				$rowColor = 0;
 			}
-			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($rowColor) .'>'
+			$return .= '<tr>'
 						. '<td width="5%"></td>'
 						. '<td><a href="'.util_make_url ('/forum/message.php?msg_id='. $row['msg_id']).'">'
 							. html_image('ic/msg.png').' '.$row['subject']

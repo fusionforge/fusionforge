@@ -184,7 +184,7 @@ if ($msg_id) {
 			$ah_begin='';
 			$ah_end='';
 		}
-		$ret_val .= '<tr '. $HTML->boxGetAltRowStyle($total_rows) .'>
+		$ret_val .= '<tr>
 			<td>'. $ah_begin .
 			html_image('ic/msg.png').' ';
 		/*

@@ -418,7 +418,7 @@ class ForumHTML extends FFError {
 				$total_rows++;
 
 				$ret_val .= '
-					<tr '. $HTML->boxGetAltRowStyle($total_rows) .'><td style="white-space: nowrap;">';
+					<tr><td style="white-space: nowrap;">';
 				/*
 					How far should it indent?
 				*/

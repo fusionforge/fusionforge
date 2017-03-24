@@ -276,7 +276,7 @@ foreach ($members as $user) {
 					html_e('input', array('type' => 'hidden', 'name' => 'role_id', 'value' => $role->getID())).
 					html_e('input', array('type' => 'submit', 'name' => 'rmuser', 'value' => _('Remove'))).
 					$HTML->closeForm()), 'colspan' => 2);
-		$content .=  $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $localcells);
+		$content .=  $HTML->multiTableRow(array(), $localcells);
 	}
 
 	$localcells = array();
@@ -287,7 +287,7 @@ foreach ($members as $user) {
 				html_e('div', array('class' => 'float_left'), role_box($group_id,'role_id',$role->getID())).
 				html_e('div', array('class' => 'float_right'), html_e('input', array('type' => 'submit', 'name' => 'adduser', 'value' => _('Grant extra role')))).
 				$HTML->closeForm(), 'colspan' => 2);
-	$content .=  $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $localcells);
+	$content .=  $HTML->multiTableRow(array(), $localcells);
 }
 $content .=  $HTML->listTableBottom();
 $content .=  $HTML->boxBottom();

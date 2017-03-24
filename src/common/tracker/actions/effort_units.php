@@ -239,7 +239,6 @@ function show_units(&$effortUnitSet){
 		$thTitleArray = array();
 		$thOtherAttrsArray = array();
 		echo $HTML->listTableTop($titleArray, $linksArray, $class, $id, $thClassArray, $thTitleArray, $thOtherAttrsArray);
-		$i=0;
 		foreach($units as $unit) {
 			$cells = array();
 			if ($isEditable) {
@@ -265,8 +264,7 @@ function show_units(&$effortUnitSet){
 			}
 			$cells[][] = $content;
 			$cells[][] = ($unit->isBaseUnit()?_('Base Unit'):$unit->getConversionFactor().' x '.$unit->getToUnitName());
-			echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
-			$i += 1;
+			echo $HTML->multiTableRow(array(), $cells);
 		}
 		echo $HTML->listTableBottom();
 	} else {

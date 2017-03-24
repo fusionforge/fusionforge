@@ -59,7 +59,7 @@ if (!isset($errorPage)){
 				$cells[][] = _('Milestone');
 			}
 			$cells[][] = util_make_link('/plugins/'.$mantisbt->name.'/?type=admin&group_id='.$group_id.'&view=editVersion&idVersion='.$version->id, _('Update'));
-			echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($key, true)), $cells);
+			echo $HTML->multiTableRow(array(), $cells);
 		}
 		echo $HTML->listTableBottom();
 	} else {

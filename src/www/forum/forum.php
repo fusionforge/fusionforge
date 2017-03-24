@@ -279,7 +279,7 @@ if ($forum_id) {
 			$cells[][] = util_make_link('/forum/message.php?msg_id='.$msg->getID().'&group_id='.$group_id.'&reply=0', html_image('ic/msg.png').' '.$msgSubject);
 			$cells[][] = util_display_user($msg->getPosterName(), $msg->getPosterID(), $msg->getPosterRealName());
 			$cells[][] = relative_date($msg->getPostDate());
-			$ret_val .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($total_rows, true)), $cells);
+			$ret_val .= $HTML->multiTableRow(array(), $cells);
 			if ($msg->hasFollowups()) {
 				$ret_val .= $fh->showSubmessages($msg_arr,$msg->getID(),1);
 			}
@@ -346,7 +346,7 @@ if ($forum_id) {
 				/*
 						show the subject and poster
 				*/
-				$ret_val .= '<tr '. $HTML->boxGetAltRowStyle($i) .'><td>'
+				$ret_val .= '<tr><td>'
 					.util_make_link('/forum/forum.php?thread_id='.$row['thread_id'].'&forum_id='.$forum_id.'&group_id='.$group_id,
 							html_image('ic/cfolder15.png').' '. $subject).'</td>'
 					.'<td>'.util_display_user($row['user_name'], $row['user_id'], $row['realname']).'</td>'.

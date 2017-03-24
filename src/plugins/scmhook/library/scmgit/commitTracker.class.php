@@ -123,7 +123,7 @@ class GitCommitTracker extends scmhook {
 				$cells[][] = $this->getActualVersionLink($group->getUnixName(), $Row['file'], $Row['actual_version']);
 				$cells[][] = htmlspecialchars($Row['log_text']);
 				$cells[][] = util_make_link_u($Row['author'], user_get_object_by_name($Row['author'])->getId(), $Row['author']);
-				$return .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
+				$return .= $HTML->multiTableRow(array(), $cells);
 			}
 			$return .= $HTML->listTableBottom();
 			$return .= '</td></tr>';

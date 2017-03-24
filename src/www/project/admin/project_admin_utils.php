@@ -178,7 +178,7 @@ function show_grouphistory($group_id) {
 			}
 			$cells[][] = date(_('Y-m-d H:i'),db_result($result, $i, 'adddate'));
 			$cells[][] = db_result($result, $i, 'user_name');
-			echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
+			echo $HTML->multiTableRow(array(), $cells);
 		}
 		echo $HTML->listTableBottom();
 

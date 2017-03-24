@@ -166,7 +166,7 @@ if (!$result || $rows < 1) {
         echo $GLOBALS['HTML']->listTableTop($title_arr);
 
         for ( $i = 0; $i < $rows; $i++ ) {
-                print        "<tr ". $HTML->boxGetAltRowStyle($i)."><td><a href=\""
+                print        "<tr><td><a href=\""
                         . db_result($result, $i, 'project_link')."\" target=\"blank\">"
                         . html_image("ic/msg.png", 10, 12)."&nbsp;"
                         . highlight_target_words($array,db_result($result, $i, 'project_title'))."</a></td>

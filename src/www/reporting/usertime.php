@@ -109,10 +109,7 @@ if ($sw) {
 		echo $HTML->listTableTop(array(_('Type'), _('Time')));
 
 		for ($i=0; $i<count($labels); $i++) {
-
-			echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>'.
-				'<td>'. $labels[$i] .'</td><td>'. $data[$i] .'</td></tr>';
-
+			echo '<tr>'.'<td>'. $labels[$i] .'</td><td>'. $data[$i] .'</td></tr>';
 		}
 
 		echo $HTML->listTableBottom();

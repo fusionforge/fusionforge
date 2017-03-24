@@ -150,7 +150,7 @@ function show_users_list($users, $filter = '', $sortorder = 'realname', $start, 
 		}
 		$cells[] = array($nextcell, 'width' => '15%', 'class' => 'align-center');
 		$cells[] = array(util_make_link('/admin/passedit.php?user_id='.$u->getID().$filter,_('Change Password')), 'width' => '12%', 'class' => 'align-center');
-		echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($key, true)), $cells);
+		echo $HTML->multiTableRow(array(), $cells);
 	}
 	echo $HTML->listTableBottom();
 	echo $HTML->paging_bottom($start, $paging, $totalUsers, '/admin/userlist.php?sortorder='.$sortorder.$filter);

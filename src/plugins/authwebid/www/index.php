@@ -104,7 +104,7 @@ if( count($pendingwebids) ) {
 
 	$i = 0;
 	foreach($pendingwebids as $webid_identity) {
-		echo '<tr '.$HTML->boxGetAltRowStyle($i).'>';
+		echo '<tr>';
 		echo '<td><i>'. $webid_identity .'</i></td>';
 		echo '<td><b>'. $plugin->displayAuthentifyViaIdPLink(util_make_uri('/plugins/authwebid/index.php'), _('Confirm binding')) . '</b></td>';
 		echo '<td>'.util_make_link('/plugins/authwebid/?webid_identity='.urlencode('pending:'.$webid_identity).'&delete=1', _('remove')).'</td>';
@@ -145,7 +145,7 @@ if(count($boundwebids)) {
 	$i = 0;
 
 	foreach($boundwebids as $webid_identity) {
-		echo '<tr '.$HTML->boxGetAltRowStyle($i).'>';
+		echo '<tr>';
 		echo '<td>'. $webid_identity .'</td>';
 		echo '<td>'.util_make_link('/plugins/authwebid/?webid_identity='.urlencode($webid_identity).'&delete=1', _('remove')).'</td>';
 		echo '</tr>';

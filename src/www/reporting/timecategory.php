@@ -73,7 +73,7 @@ $arr[]=_('Category Name');
 echo $HTML->listTableTop($arr);
 
 for ($i=0; $i<db_numrows($res); $i++) {
-	echo '<tr '.$HTML->boxGetAltRowStyle($i).'><td>'.db_result($res,$i,'time_code').'</td>
+	echo '<tr><td>'.db_result($res,$i,'time_code').'</td>
 		<td><a href="timecategory.php?time_code='.db_result($res,$i,'time_code').'">'.db_result($res,$i,'category_name').'</a></td></tr>';
 }
 

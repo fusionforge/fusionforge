@@ -595,7 +595,7 @@ function ShowResultSet($result, $title = '', $linkify = false, $displayHeaders =
 
 		/*  Create the rows  */
 		for ($j = 0; $j < $rows; $j++) {
-			echo '<tr '.$HTML->boxGetAltRowStyle($j).'>';
+			echo '<tr>';
 			for ($i = 0; $i < $cols; $i++) {
 				if (in_array($i, $colsToKeep)) {
 					if ($linkify && $i == 0) {

@@ -628,26 +628,6 @@ if (isset($params['group']) && $params['group']) {
 	}
 
 	/**
-	 * boxGetAltRowStyle() - Get an alternating row style for tables.
-	 *
-	 * @param	int	$i		Row number
-	 * @param	bool	$classonly	Return class name only
-	 * @return	string	the class code
-	 */
-	function boxGetAltRowStyle($i, $classonly = false) {
-		if ($i % 2 == 0) {
-			$ret = 'altRowStyleEven';
-		} else {
-			$ret = 'altRowStyleOdd';
-		}
-		if ($classonly) {
-			return $ret;
-		} else {
-			return 'class="'.$ret.'"';
-		}
-	}
-
-	/**
 	 * listTableTop() - Takes an array of titles and builds the first row of a new table.
 	 *
 	 * @param	array	$titleArray		The array of titles

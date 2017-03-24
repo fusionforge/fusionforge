@@ -131,7 +131,7 @@ if (count($FRSPackages) == 0) {
 			$content .= util_make_link('/frs/?view=showreleases&package_id='.$FRSPackage->getID().'&group_id='.$group_id, $HTML->getConfigurePic(_('Edit Releases'), _('Edit Releases')));
 		}
 		$cells[] = array($content, 'style' => 'white-space: nowrap;', 'align' => 'center');
-		echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($key, true), 'id' => 'pkgid'.$FRSPackage->getID()), $cells);
+		echo $HTML->multiTableRow(array('id' => 'pkgid'.$FRSPackage->getID()), $cells);
 	}
 	echo $HTML->listTableBottom();
 	if ($permissionlevel >= 4) { // admin

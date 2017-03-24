@@ -155,7 +155,6 @@ echo html_e('h2', array('id' => 'active'), _('Active Deliveries')._(':'));
 
 $seen = false;
 
-$i = 0;
 while ($row = db_fetch_array($res)) {
 	if (!$seen) {
 		echo $HTML->listTableTop($title);
@@ -168,7 +167,7 @@ while ($row = db_fetch_array($res)) {
 	$cells[][] = $row['subject'];
 	$cells[][] = date(_('Y-m-d H:i'), $row['queued_date']);
 	$cells[][] = $row['last_userid'];
-	echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i++, true)), $cells);
+	echo $HTML->multiTableRow(array(), $cells);
 }
 
 if ($seen) {

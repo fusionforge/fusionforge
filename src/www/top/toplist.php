@@ -54,7 +54,6 @@ echo $HTML->listTableTop($arr);
 echo db_error();
 
 $display_rank = 0;
-$i=0;
 while ($row_top = db_fetch_array($res_top)) {
 	if (!forge_check_perm('project_read', $row_top['group_id'])) {
 		continue;
@@ -67,12 +66,11 @@ while ($row_top = db_fetch_array($res_top)) {
 	 * pageviews_proj: project_read probably enough
 	 * forumposts_week: forum read? no idea…
 	 */
-	$i++;
 	if ($row_top["items"] == 0) {
 		continue;
 	}
 	$display_rank++;
-	print '<tr '. $HTML->boxGetAltRowStyle($i) .'><td class="align-right">'.$display_rank
+	print '<tr><td class="align-right">'.$display_rank
 		.'</td><td>'.util_make_link_g (strtolower($row_top['unix_group_name']),@$row_top['group_id'],stripslashes($row_top['group_name']))
 		.'</td><td class="align-right">'.$row_top['items']
 		.'&nbsp;&nbsp;&nbsp;</td>'

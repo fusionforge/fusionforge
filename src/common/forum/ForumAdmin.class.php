@@ -332,7 +332,7 @@ class ForumAdmin extends FFError {
 			echo $HTML->listTableTop($title);
 			while ($onemsg = db_fetch_array($res)) {
 				echo "
-				<tr " . $HTML->boxGetAltRowStyle($i++). ">
+				<tr>
 					<td>$onemsg[forum_name]</td>
 					<td><a href=\"#\" onclick=\"window.open('pendingmsgdetail.php?msg_id=$onemsg[msg_id]&amp;forum_id=$onemsg[group_forum_id]&amp;group_id=$group_id','PendingMessageDetail','width=800,height=600,status=no,resizable=yes');\">$onemsg[subject]</a></td>
 					<td><div class=\"align-right\">" . html_build_select_box_from_assoc($options,"doaction[]",1) . "</div></td>

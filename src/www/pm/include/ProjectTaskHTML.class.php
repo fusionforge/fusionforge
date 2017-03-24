@@ -78,7 +78,7 @@ class ProjectTaskHTML extends ProjectTask {
 				$cells = array();
 				$cells[][] = util_make_link('/pm/task.php?func=detailtask&project_task_id='. db_result($result, $i, 'project_task_id'). '&group_id='. $this->ProjectGroup->Group->getID() . '&group_project_id='. $this->ProjectGroup->getID(), db_result($result, $i, 'project_task_id'));
 				$cells[][] = db_result($result, $i, 'summary');
-				echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
+				echo $HTML->multiTableRow(array(), $cells);
 			}
 			echo $HTML->listTableBottom();
 		} else {
@@ -118,7 +118,7 @@ class ProjectTaskHTML extends ProjectTask {
 				if ($is_admin) {
 					$cells[][] = '<input type="checkbox" name="rem_artifact_id[]" value="'.db_result($res,$i,'artifact_id').'" />';
 				}
-				echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
+				echo $HTML->multiTableRow(array(), $cells);
 			}
 			echo $HTML->listTableBottom();
 		} else {
@@ -162,7 +162,7 @@ class ProjectTaskHTML extends ProjectTask {
 				}
 				$cells[][] = date(_('Y-m-d H:i'),db_result($result, $i, 'postdate'));
 				$cells[][] = db_result($result, $i, 'user_name');
-				echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
+				echo $HTML->multiTableRow(array(), $cells);
 			}
 			echo $HTML->listTableBottom();
 		} else {
@@ -212,7 +212,7 @@ class ProjectTaskHTML extends ProjectTask {
 				$cells[][] = $content;
 				$cells[][] = date(_('Y-m-d H:i'),db_result($result, $i, 'mod_date'));
 				$cells[][] = db_result($result, $i, 'user_name');
-				echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
+				echo $HTML->multiTableRow(array(), $cells);
 			}
 			echo $HTML->listTableBottom();
 		} else {

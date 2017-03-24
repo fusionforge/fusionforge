@@ -95,7 +95,7 @@ if (!$ac || !is_object($ac)) {
 				$title_arr[]='';
 				echo $HTML->listTableTop($title_arr, false, ' ');
 				if (in_array($efType, unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_CHOICE))) {
-					$row_attrs = array('class'=>$HTML->boxGetAltRowStyle(-1,true));
+					$row_attrs = array();
 					$cells = array();
 					$cells[] = array('', 'class'=>'align-right');
 					if ($efType == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
@@ -131,7 +131,7 @@ if (!$ac || !is_object($ac)) {
 					echo $HTML->multiTableRow($row_attrs, $cells);
 				}
 				for ($i=0; $i < $rows; $i++) {
-					$row_attrs = array('class'=>$HTML->boxGetAltRowStyle($i,true));
+					$row_attrs = array();
 					$cells = array();
 					$content = ($i + 1).' --&gt;'.html_e('input', array('type'=>'text', 'name'=>'order['. $efearr[$i]['element_id'] .']', 'value'=>'', 'size'=>'3', 'maxlength'=>'3'));
 					$cells[] = array($content, 'class'=>'align-right');

@@ -122,7 +122,7 @@ class Widget_MySurveys extends Widget {
 						$group_survey_id = $survey->getID();
 						$survey_title = $survey->getTitle();
 						$html .= '
-							<tr '. $HTML->boxGetAltRowStyle($i) .'><td style="width:99%">'.
+							<tr><td style="width:99%">'.
 							'&nbsp;&nbsp;&nbsp;-&nbsp;'.
 							util_make_link('/survey/survey.php?group_id='.$group_id.'&survey_id='.$group_survey_id, $survey_title).
 							'</td></tr>';

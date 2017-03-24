@@ -159,7 +159,7 @@ function snippet_show_package_snippets($version) {
 
 		for ($i=0; $i<$rows; $i++) {
 			echo '
-			<tr '. $HTML->boxGetAltRowStyle($i) .'><td>'.db_result($result,$i,'snippet_version_id').
+			<tr><td>'.db_result($result,$i,'snippet_version_id').
 				'</td><td>'.
 				util_make_link('/snippet/download.php?type=snippet&id='.db_result($result,$i,'snippet_version_id'),db_result($result,$i,'version')).
 				'</td><td>'.

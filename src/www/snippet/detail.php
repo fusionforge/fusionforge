@@ -78,7 +78,7 @@ if ($type=='snippet') {
 
 		for ($i=0; $i<$rows; $i++) {
 			echo '
-				<tr '. $HTML->boxGetAltRowStyle($i) .'><td>'.db_result($result,$i,'snippet_version_id').
+				<tr><td>'.db_result($result,$i,'snippet_version_id').
 				'</td><td>'.
 				util_make_link('/snippet/download.php?type=snippet&id='.db_result($result,$i,'snippet_version_id'), '<strong>'. db_result($result,$i,'version').'</strong>').'</td><td>'.
 				date(_('Y-m-d H:i'),db_result($result,$i,'post_date')).'</td><td>'.
@@ -163,7 +163,7 @@ if ($type=='snippet') {
 
 		for ($i=0; $i<$rows; $i++) {
 			echo '
-			<tr '. $HTML->boxGetAltRowStyle($i) .'><td>'.
+			<tr><td>'.
 			util_make_link('/snippet/detail.php?type=packagever&id='.db_result($result,$i,'snippet_package_version_id'), '<strong>'.db_result($result,$i,'version').'</strong>').'</td><td>'.
 				date(_('Y-m-d H:i'),db_result($result,$i,'post_date')).'</td><td>'.
 				util_make_link_u (db_result($result, $i, 'user_name'), db_result($result, $i, 'user_id'),db_result($result, $i, 'realname')).'</td>'.

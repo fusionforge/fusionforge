@@ -45,7 +45,7 @@ if(count($t_consumers)>0)	{
 
 	$i = 0;
 	foreach( $t_consumers as $t_consumer ) { ?>
-	<tr <?php echo $HTML->boxGetAltRowStyle($i++) ?>>
+	<tr>
     <td><?php echo ( $t_consumer->getName() ) ?></td>
     <td class="center"><?php echo ( $t_consumer->getURL() ) ?></td>
 	<td class="center"><?php echo ( $t_consumer->getDesc() ) ?></td>

@@ -141,7 +141,6 @@ if (count($ids) < 1) {
 
 
 		$displayTableTop = 0;
-		$j = 0;
 		$last_day = 0;
 		foreach ($results as $arr) {
 			$group_id = $arr['group_id'];
@@ -231,7 +230,7 @@ if (count($ids) < 1) {
 			} else {
 				$cells[][] = $arr['realname'];
 			}
-			echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($j++, true)), $cells);
+			echo $HTML->multiTableRow(array(), $cells);
 		}
 		if ($displayTableTop) {
 			echo $HTML->listTableBottom();

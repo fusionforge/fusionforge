@@ -117,7 +117,7 @@ if ($pattern) {
 			$cells[][] = $row['email'];
 			$cells[][] = $row['mail_siteupdates'];
 			$cells[][] = $row['mail_va'];
-			echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i++, true)), $cells);
+			echo $HTML->multiTableRow(array(), $cells);
 		}
 		echo $HTML->listTableBottom();
 	} else {

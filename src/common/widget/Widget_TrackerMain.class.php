@@ -62,7 +62,6 @@ class Widget_TrackerMain extends Widget {
 		global $priority;
 
 		$return = $HTML->listTableTop();
-		$i = 0;
 		$atf = new ArtifactTypeFactory ($group);
 		$fieldInFormula = $ath->getFieldsInFormula();
 		$cells = array();
@@ -85,7 +84,7 @@ class Widget_TrackerMain extends Widget {
 			$cells[][] = html_e('strong', array(), _('Data Type')._(': '));
 			$cells[][] = $ath->getName();
 		}
-		$return .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i++, true)), $cells);
+		$return .= $HTML->multiTableRow(array(), $cells);
 		$cells = array();
 		$cells[][] = html_e('strong', array(), _('Assigned to')._(': '));
 		if (forge_check_perm('tracker', $atid, 'manager')) {
@@ -102,7 +101,7 @@ class Widget_TrackerMain extends Widget {
 		} else {
 			$cells[][] = $ah->getAssignedRealName().' ('.$ah->getAssignedUnixName().')';
 		}
-		$return .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i++, true)), $cells);
+		$return .= $HTML->multiTableRow(array(), $cells);
 		if (!$ath->usesCustomStatuses()) {
 			$cells = array();
 			$cells[][] = html_e('strong', array(), _('State')._(': '));
@@ -120,7 +119,7 @@ class Widget_TrackerMain extends Widget {
 			} else {
 				$cells[][] = $ah->getStatusName();
 			}
-			$return .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i++, true)), $cells);
+			$return .= $HTML->multiTableRow(array(), $cells);
 		}
 		$cells = array();
 		$cells[][] = html_e('strong', array(), _('Priority')._(': '));
@@ -138,7 +137,7 @@ class Widget_TrackerMain extends Widget {
 		} else {
 			$cells[][] = $ah->getPriority();
 		}
-		$return .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i++, true)), $cells);
+		$return .= $HTML->multiTableRow(array(), $cells);
 		$return .= $HTML->listTableBottom();
 		if (forge_check_perm('tracker', $atid, 'tech')) {
 			$return .= html_e('p', array('class' => 'middleRight'), html_e('input', array('form' => 'trackerform', 'type' => 'submit', 'name' => 'submit', 'value' => _('Save Changes'), 'title' => _('Save is validating the complete form'), 'onClick' => 'iefixform()')));

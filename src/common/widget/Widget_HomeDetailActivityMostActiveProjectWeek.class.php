@@ -69,7 +69,6 @@ class Widget_HomeDetailActivityMostActiveProjectWeek extends Widget {
 			usort($activities, 'Widget_HomeDetailActivityMostActiveProjectWeek::date_compare');
 			$displayTableTop = 0;
 			$last_day = 0;
-			$j = 0;
 			foreach ($activities as $activity) {
 				$docmanerror = 0;
 				if (!$this->check_perm_for_activity($activity)) {
@@ -172,7 +171,7 @@ class Widget_HomeDetailActivityMostActiveProjectWeek extends Widget {
 				} else {
 					$cells[][] = $activity['realname'];
 				}
-				echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($j++, true)), $cells);
+				echo $HTML->multiTableRow(array(), $cells);
 			}
 			if ($displayTableTop) {
 				echo $HTML->listTableBottom();

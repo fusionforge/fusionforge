@@ -538,11 +538,13 @@ a.topTabSelected:hover {
 	padding: 4px;
 }
 
+table.listing tbody tr:nth-child(even),
 .bgcolor-grey,
 .even {
 	background-color: #CDDCF3;
 }
 
+table.listing tbody tr:nth-child(odd),
 .bgcolor-white,
 .odd {
 	background-color: #FFFFFF;

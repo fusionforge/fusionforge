@@ -97,7 +97,7 @@ if ($rows > 0) {
 	for ($k=0; $k < $rows; $k++) {
 		$i=$keys[$k];
 		$rownb++;
-		$row_attrs = array('class'=>$HTML->boxGetAltRowStyle($rownb,true));
+		$row_attrs = array();
 		$cells = array();
 		$cells[] = array($efarr[$i]['field_name'], 'class'=>'align-right');
 		$cells[] = array(html_e('span',array('class'=>'insert'),$efarr[$i]['alias']), 'class'=>'align-right');
@@ -189,7 +189,7 @@ echo $HTML->listTableTop($title_arr, array(), 'full sortable', 'sortable_fuction
 $rownb = 0;
 foreach ($functions as $function) {
 	$rownb++;
-	$row_attrs = array('class'=>$HTML->boxGetAltRowStyle($rownb,true));
+	$row_attrs = array();
 	$cells = array();
 	$cells[] = array(html_e('span', array('class'=>'insert'), $function), 'class'=>'align-right');
 	$cells[] = array($expression->getFunctionDescription($function), 'class'=>'align-right');
@@ -216,7 +216,7 @@ foreach ($operatorTypes as $operatorType) {
 	$rownb = 0;
 	foreach ($operators as $operator) {
 		$rownb++;
-		$row_attrs = array('class'=>$HTML->boxGetAltRowStyle($rownb,true));
+		$row_attrs = array();
 		$cells = array();
 		$cells[] = array(html_e('span', array('class'=>'insert'), $operator[0]), 'class'=>'align-right');
 		$cells[] = array($operator[1], 'class'=>'align-right');

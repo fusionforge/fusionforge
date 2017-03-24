@@ -73,7 +73,7 @@ class cvstrackerPlugin extends Plugin {
 
 			for ($i=0; $i<$Rows; $i++) {
 				$Row = db_fetch_array($DBResult);
-				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
+				echo '<tr>'.
 				'<td>'. $this->getFileLink($group->getUnixName(),
 						$Row['file'],$Row['actual_version']). '</td>'.
 				'<td>'. date(_('Y-m-d'), $Row['cvs_date']).'</td>'.

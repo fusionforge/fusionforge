@@ -58,7 +58,7 @@ class Widget_MyProjects extends Widget {
 				if ($g->getStatus() != 'A') continue;
 				$i++;
 				$html_my_projects .= '
-				<tr '. $HTML->boxGetAltRowStyle($i) .'><td style="width:99%">'.
+				<tr><td style="width:99%">'.
 					util_make_link('/projects/'.$g->getUnixName(), $g->getPublicName());
 
 				$isadmin = false;

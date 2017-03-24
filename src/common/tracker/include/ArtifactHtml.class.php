@@ -53,8 +53,8 @@ class ArtifactHtml extends Artifact {
 			$title_arr[] = _('Detailed description');
 		}
 		$return .= $HTML->listTableTop($title_arr);
-		$return .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle(0, true), 'id' => 'editdescription', 'style' => 'display:none'), array(array(html_e('textarea', array_merge($editattrs, array('id' => 'tracker-description', 'required' => 'required', 'name' => 'description', 'rows' => 20, 'style' => 'box-sizing: box-border; width: 99%;', 'title' => util_html_secure(html_get_tooltip_description('description')))), $result), 'style' => 'display: block; box-sizing:border-box;')));
-		$return .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle(0, true), 'id' => 'showdescription'), array(array($result_html)));
+		$return .= $HTML->multiTableRow(array('id' => 'editdescription', 'style' => 'display:none'), array(array(html_e('textarea', array_merge($editattrs, array('id' => 'tracker-description', 'required' => 'required', 'name' => 'description', 'rows' => 20, 'style' => 'box-sizing: box-border; width: 99%;', 'title' => util_html_secure(html_get_tooltip_description('description')))), $result), 'style' => 'display: block; box-sizing:border-box;')));
+		$return .= $HTML->multiTableRow(array('id' => 'showdescription'), array(array($result_html)));
 		$return .= $HTML->listTableBottom();
 		return $return;
 	}
@@ -155,7 +155,7 @@ function hide_edit_button(id) {
 			for ($i=0; $i < $rows; $i++) {
 				$field=db_result($result, $i, 'field_name');
 				$return .= '
-				<tr '. $HTML->boxGetAltRowStyle($i) .'><td>'.$field.'</td><td>';
+				<tr><td>'.$field.'</td><td>';
 
 				if ($field == 'status_id') {
 

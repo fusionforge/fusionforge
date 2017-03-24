@@ -260,12 +260,12 @@ EOS;
 			for ($i = 0; count($stillAvailableExtraFields) > $i; $i++) {
 				$cells[] = array(html_e('div', array('id' => 'ef'.$stillAvailableExtraFields[$i][0], 'class' => 'wb_extrafield', 'style' => 'background: #e6e6e6 none repeat scroll 0 0; padding: 2px; text-align: center;'), util_unconvert_htmlspecialchars($stillAvailableExtraFields[$i]['field_name']).'<div id="xef'.$stillAvailableExtraFields[$i][0].'" style="display: none" class="ef-widget-remove">x</div>'), 'id' => 'tdef'.$stillAvailableExtraFields[$i][0], 'class' => 'td-droppable', 'width' => '50%');
 				if ($i % 2) {
-					$content .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
+					$content .= $HTML->multiTableRow(array(), $cells);
 					$cells = array();
 				}
 			}
 			if (count($cells)) {
-				$content .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
+				$content .= $HTML->multiTableRow(array(), $cells);
 			}
 		}
 		if (count($arr) > 0) {
@@ -273,12 +273,12 @@ EOS;
 			for ($i = 0; count($arr) > $i; $i++) {
 				$cells[] = array('', 'id' => 'tdef'.$arr[$i], 'width' => '50%');
 				if ($i % 2) {
-					$content .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
+					$content .= $HTML->multiTableRow(array(), $cells);
 					$cells = array();
 				}
 			}
 			if (count($cells)) {
-				$content .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
+				$content .= $HTML->multiTableRow(array(), $cells);
 			}
 		}
 		if (count($stillAvailableExtraFields) > 0 || count($arr) > 0) {
@@ -621,7 +621,7 @@ EOS;
 					}
 					$cells[] = array($cellContent, 'width' => $extrafieldID[$keys[0]][0].'%', 'style' => 'vertical-align: top;');
 				}
-				$return .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($row_id, true)), $cells);
+				$return .= $HTML->multiTableRow(array(), $cells);
 				$return .= $HTML->listTableBottom();
 			}
 			$return .= $ath->javascript();

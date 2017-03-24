@@ -185,24 +185,6 @@ class Theme_Funky extends Layout {
 		return html_ac(html_ap() -1).'<!-- class="box-surround" -->'."\n";
 	}
 
-	/**
-	 * boxGetAltRowStyle() - Get an alternating row style for tables
-	 *
-	 * @param	int	$i		Row number
-	 * @param	bool	$classonly	Return class name only
-	 * @return	string
-	 */
-	function boxGetAltRowStyle($i, $classonly = false) {
-		if ($i % 2 == 0)
-			$ret = 'bgcolor-white';
-		else
-			$ret = 'bgcolor-grey';
-		if ($classonly)
-			return $ret;
-		else
-			return 'class="'.$ret.'"';
-	}
-
 	function tabGenerator($TABS_DIRS, $TABS_TITLES, $TABS_TOOLTIPS, $nested=false,  $selected=false, $sel_tab_bgcolor='WHITE',  $total_width='100%') {
 		$count = count($TABS_DIRS);
 

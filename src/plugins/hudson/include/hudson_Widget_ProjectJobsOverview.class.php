@@ -100,7 +100,7 @@ class hudson_Widget_ProjectJobsOverview extends HudsonOverviewWidget {
 					$cells = array();
 					$cells[][] = html_abs_image($job->getStatusIcon(), '15', '15', array('title' => $job->getStatus()));
 					$cells[] = array(util_make_link('/plugins/hudson/?action=view_job&group_id='.$this->group_id.'&job_id='.$job_id, $job->getName()), 'style' => 'width: 99%');
-					$html .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($job_id, true)), $cells);
+					$html .= $HTML->multiTableRow(array(), $cells);
 				} catch (Exception $e) {
 					// Do not display wrong jobs
 				}

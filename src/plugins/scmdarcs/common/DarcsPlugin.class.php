@@ -202,7 +202,7 @@ over it to the project's administrator.");
 			$total = array('adds' => 0, 'commits' => 0);
 
 			while($data = db_fetch_array($result)) {
-				$b .= '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
+				$b .= '<tr>';
 				$b .= '<td width="50%">';
 				$b .= util_make_link_u($data['user_name'], $data['user_id'], $data['realname']);
 				$b .= '</td><td width="25%" align="right">'.$data['adds']. '</td>'.
@@ -211,7 +211,7 @@ over it to the project's administrator.");
 				$total['commits'] += $data['commits'];
 				$i++;
 			}
-			$b .= '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
+			$b .= '<tr>';
 			$b .= '<td width="50%"><strong>'._('Total').':</strong></td>'.
 				'<td width="25%" align="right"><strong>'.$total['adds']. '</strong></td>'.
 				'<td width="25%" align="right"><strong>'.$total['commits'].'</strong></td>';

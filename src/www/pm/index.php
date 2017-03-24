@@ -167,7 +167,7 @@ if (count($pg_arr) < 1 || $pg_arr == false) {
 			echo $pg_arr[$j]->getErrorMessage();
 		} else {
 		echo '
-		<tr '. $HTML->boxGetAltRowStyle($j) . '>
+		<tr>
 			<td>'.util_make_link('/pm/task.php?group_project_id='.$pg_arr[$j]->getID().'&group_id='.$group_id.'&func=browse', html_image("ic/taskman20w.png", 20, 20) . ' &nbsp;'.$pg_arr[$j]->getID()).'</td>
 			<td>'.util_make_link('/pm/task.php?group_project_id='.$pg_arr[$j]->getID().'&group_id='.$group_id.'&func=browse', $pg_arr[$j]->getName()).'</td>
 			<td>'.$pg_arr[$j]->getDescription() .'</td>
@@ -177,7 +177,6 @@ if (count($pg_arr) < 1 || $pg_arr == false) {
 		}
 	}
 	echo $HTML->listTableBottom();
-
 }
 
 pm_footer();

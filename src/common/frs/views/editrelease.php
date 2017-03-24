@@ -184,7 +184,7 @@ if(count($files)) {
 		$cells[][] = '<input type="text" name="release_time" value="'.date('Y-m-d', $file->getReleaseTime()).'" size="10" maxlength="10" />';
 		$deleteUrlAction = util_make_uri('/frs/?action=deletefile&package_id='.$package_id.'&group_id='.$group_id.'&file_id='.$file->getID());
 		$cells[][] = '<input type="submit" name="submit" value="'._('Update/Refresh').'" />'.util_make_link('#', $HTML->getDeletePic(_('Delete this file'), _('Delete file')), array('onclick' => 'javascript:controllerFRS.toggleConfirmBox({idconfirmbox: \'confirmbox1\', do: \''._('Delete the file').' '.$file->getName().'\', cancel: \''._('Cancel').'\', height: 150, width: 400, action: \''.$deleteUrlAction.'\'})' ), true);
-		echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($key, true)), $cells);
+		echo $HTML->multiTableRow(array(), $cells);
 		echo $HTML->listTableBottom();
 		echo $HTML->closeForm();
 	}

@@ -111,7 +111,7 @@ class DocsAllHtmlSearchRenderer extends HtmlSearchRenderer {
 			}
 			$cells[][] = $row['title'];
 			$cells[][] = $row['description'];
-			$return .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($rowColor, true)), $cells);
+			$return .= $HTML->multiTableRow(array(), $cells);
 			$rowColor++;
 		}
 		return $return;

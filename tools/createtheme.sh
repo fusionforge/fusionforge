@@ -583,19 +583,6 @@ if (\$params['group']) {
 	}
 
 	/**
-	 * boxGetAltRowStyle() - Get an alternating row style for tables
-	 *
-	 * @param			   int			 Row number
-	 */
-	function boxGetAltRowStyle(\$i) {
-		if (\$i % 2 == 0) {
-			return 'BGCOLOR="#FFFFFF"';
-		} else {
-			return 'BGCOLOR="' . \$this->COLOR_LTBACK1 . '"';
-		}
-	}
-
-	/**
 	 * boxBottom() - Bottom HTML box
 	 *
 	 * @param   bool	Whether to echo or return the results

@@ -259,7 +259,7 @@ class Widget_MyArtifacts extends Widget {
 						$cells[] = array($trackers_array->getPriority(), 'class' => 'priority'.$trackers_array->getPriority());
 						$cells[][] = util_make_link('/tracker/?func=detail&group_id='.$group_id.'&aid='.$aid.'&atid='.$atid, stripslashes($summary), array('title' => _('Browse this artifact')));
 						$cells[] = array($AS_flag, 'title' => $AS_title, 'class' => 'small');
-						$html .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($count_aids, true)), $cells);
+						$html .= $HTML->multiTableRow(array(), $cells);
 					}
 				}
 				$aid_old = $aid;

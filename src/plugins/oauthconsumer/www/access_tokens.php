@@ -13,7 +13,7 @@ if(count($access_tokens)>0)	{
 	echo $HTML->listTableTop(array(_('Provider'), _('Token Key'), _('Token Secret'), '', ''));
 	$i = 0;
 	foreach( $access_tokens as $token ) { ?>
-		<tr <?php echo $HTML->boxGetAltRowStyle($i++) ?>>
+		<tr>
 		<td class="center"><?php echo ( OAuthProvider::get_provider($token->get_provider_id())->get_name() ) ?></td>
 	    <td class="center"><?php echo ( $token->get_token_key() ) ?></td>
 		<td class="center"><?php echo ( $token->get_token_secret() ) ?></td>

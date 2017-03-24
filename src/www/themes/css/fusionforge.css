@@ -46,12 +46,14 @@ label {
 }
 
 /* From old gforge-compat */
+table.listing tbody tr:nth-child(even),
 .altrowstyleeven,
 .even {
 	background-color: #eaeaea;
 	font-weight: normal;
 }
 
+table.listing tbody tr:nth-child(odd),
 .altrowstyleodd,
 .odd {
 	background-color: #e0e0e0;

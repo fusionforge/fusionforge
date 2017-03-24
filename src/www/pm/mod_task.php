@@ -260,8 +260,6 @@ $title_arr[]=_('Category');
 $title_arr[]=_('User');
 $title_arr[]=' ';
 
-$xi = 0;
-
 $report=new Report();
 if ($report->isError()) {
 	exit_error($report->getErrorMessage(), 'pm');
@@ -272,7 +270,7 @@ echo $HTML->openForm(array('array' => '/reporting/timeadd.php', 'id' => 'time-tr
 echo '<input type="hidden" name="project_task_id" value="'.$project_task_id.'" />
 	<input type="hidden" name="submit" value="1" />';
 echo $HTML->listTableTop ($title_arr);
-echo '<tr '.$HTML->boxGetAltRowStyle($xi++).'>
+echo '<tr>
 		<td class="align-center">'. report_weeks_box($report, 'week') .'</td>
 		<td class="align-center">'. report_day_adjust_box() .'</td>
 		<td class="align-center"><input id="time-tracking-hours" type="text" required="required" name="hours" value="" size="3" maxlength="3" /></td>
@@ -299,7 +297,7 @@ $total_hours =0;
 for ($i=0; $i<db_numrows($res); $i++) {
 
 	echo '
-	<tr '.$HTML->boxGetAltRowStyle($xi++).'>
+	<tr>
 	<td></td>
 	<td>'.date(_('Y-m-d H:i'),db_result($res,$i,'report_date')).'</td>
 	<td>'.db_result($res,$i,'hours').'</td>
@@ -311,7 +309,7 @@ for ($i=0; $i<db_numrows($res); $i++) {
 }
 
 echo '
-<tr '.$HTML->boxGetAltRowStyle($xi++).'>
+<tr>
 <td><strong>'._('Total')._(': ').'</strong></td>
 <td></td>
 <td>'.$total_hours.'</td>

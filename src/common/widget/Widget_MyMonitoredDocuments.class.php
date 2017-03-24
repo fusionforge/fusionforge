@@ -93,7 +93,7 @@ class Widget_MyMonitoredDocuments extends Widget {
 							$cells[] = array(util_make_link('/docman/?group_id='.$distinctMonitorGroupId.'&action=monitorfile&option=stop&view=listfile&dirid='.$documentObject->getDocGroupID().'&fileid='.$documentObject->getID(),
 									$HTML->getDeletePic(_('Stop monitoring'), _('Stop monitoring'), array('onClick' => 'return confirm("'._('Stop monitoring this document?').'")'))),
 									'class' => 'align-center');
-							$html .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($key, true)), $cells);
+							$html .= $HTML->multiTableRow(array(), $cells);
 
 						}
 					}

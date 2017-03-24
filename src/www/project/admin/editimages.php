@@ -287,7 +287,7 @@ for ($i=0; $i<$rows; $i++) {
 	}
 
 	echo '
-	<tr '. $HTML->boxGetAltRowStyle($i) .'>'
+	<tr>'
 	.'<td class="align-center">'
 	 .util_make_link(getStringFromServer('PHP_SELF').'?submit=1&group_id='.$group_id.'&remove=1&id='.db_result($result,$i,'id'), '['._('Del').']')
 	 .util_make_link(getStringFromServer('PHP_SELF').'?&group_id='.$group_id.'&mode=edit&id='.db_result($result,$i,'id'), '['._('Edit').']')

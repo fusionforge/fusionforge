@@ -55,7 +55,7 @@ class Widget_MyBookmarks extends Widget {
 				$cells[] = array(util_make_link('/my/bookmark_delete.php?bookmark_id='.db_result($result,$i,'bookmark_id'),
 						$HTML->getDeletePic(_('Delete'), _('Delete'), array('onClick' => 'return confirm("'._('Delete this bookmark?').'")'))),
 						'style' => 'text-align:right');
-				$html_my_bookmarks .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
+				$html_my_bookmarks .= $HTML->multiTableRow(array(), $cells);
 			}
 			$html_my_bookmarks .= $HTML->listTableBottom();
 		}

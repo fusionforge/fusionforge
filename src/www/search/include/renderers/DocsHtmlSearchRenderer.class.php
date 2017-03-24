@@ -140,7 +140,7 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			} else {
 				$cells[][] = '&nbsp;';
 			}
-			$return .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($rowColor, true)), $cells);
+			$return .= $HTML->multiTableRow(array(), $cells);
 			$rowColor++;
 		}
 		$content = html_ao('span', array('id' => 'massactionactive', 'class' => 'hide'));

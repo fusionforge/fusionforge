@@ -82,11 +82,10 @@ if (!$res || db_numrows($res) < 1) {
 	//
 	for ($i=0; $i<db_numrows($res); $i++) {
 
-		echo '<tr '. $HTML->boxGetAltRowStyle($i) . '>
+		echo '<tr>
 			<td>'.db_result($res,$i,'realname').'</td>
 			<td>'.db_result($res,$i,'user_name').'</td>
 			<td>'.role_box($group_id,'addrole['. db_result($res,$i,'user_id') .']','').'</td></tr>';
-
 	}
 
 	echo $HTML->listTableBottom();

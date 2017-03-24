@@ -111,7 +111,7 @@ class SvnCommitTracker extends scmhook {
 				$cells[][] = $this->getActualVersionLink($group->getUnixName(), $Row['file'], $Row['actual_version']);
 				$cells[][] = htmlspecialchars($Row['log_text']);
 				$cells[][] = util_make_link_u($Row['author'], user_get_object_by_name($Row['author'])->getId(), $Row['author']);
-				echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
+				echo $HTML->multiTableRow(array(), $cells);
 			}
 			echo $HTML->listTableBottom();
 			echo "</td>\n";
