@@ -43,7 +43,7 @@ function user_personal_information($user, $compact = false, $title = false) {
 	if ($params['content']) {
 		$user_logo = $params['content'];
 	}
-	$html = $HTML->listTableTop();
+	$html = $HTML->listTableTop(array(), array(), 'full');
 	if($compact) {
 
 		if($title) {
