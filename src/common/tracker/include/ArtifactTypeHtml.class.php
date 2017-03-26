@@ -509,6 +509,9 @@ class ArtifactTypeHtml extends ArtifactType {
 			$title_arr[] = _('Date');
 			$title_arr[] = _('By');
 			$title_arr[] = _('Download');
+			if (forge_check_perm('tracker', $this->getID(), 'tech')) {
+				$title_arr[] = '';
+			}
 			$return .= $HTML->listTableTop($title_arr);
 
 			foreach ($file_list as $file) {
