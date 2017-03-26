@@ -392,7 +392,7 @@ class EffortUnitSet extends FFError {
 	 * @return	boolean	true/false.
 	 */
 	function isAutoconvert(){
-		return ($this->data_array['is_autoconvert']?true:false);
+		return ($this->data_array['is_autoconvert']? true : false);
 	}
 
 	/**
