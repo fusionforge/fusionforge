@@ -8,7 +8,7 @@
  * Copyright 2010-2012, Alain Peyrat - Alcatel-Lucent
  * Copyright © 2011 Thorsten Glaser – tarent GmbH
  * Copyright 2011 - Marc-Etienne Vargenau, Alcatel-Lucent
- * Copyright 2012-2016, Franck Villaume - TrivialDev
+ * Copyright 2012-2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -640,11 +640,11 @@ if (isset($params['group']) && $params['group']) {
 	 * @return	string	the html code
 	 */
 	function listTableTop($titleArray = array(), $linksArray = array(), $class = '', $id = '', $thClassArray = array(), $thTitleArray = array(), $thOtherAttrsArray = array()) {
-		$attrs = array('class' => 'listing');
+		$attrs = array();
 		if ($class) {
-			$attrs['class'] .= ' '.$class;
+			$attrs['class'] = $class;
 		} else {
-			$attrs['class'] .= ' full';
+			$attrs['class'] = 'full listing';
 		}
 		if ($id) {
 			$attrs['id'] = $id;

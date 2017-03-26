@@ -606,7 +606,7 @@ if ($art_arr && $art_cnt > 0) {
 	}
 
 	if ($start < $max) {
-		echo $HTML->listTableTop($title_arr);
+		echo $HTML->listTableTop($title_arr, array(), 'full');
 	}
 
 	$then=(time()-$ath->getDuePeriod());
