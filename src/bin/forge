@@ -230,6 +230,15 @@ class CliActions {
 			}
 			if ($group->usesNews()) {
 				$groupDump['news'] = array();
+				$resultdb = db_query_params ('SELECT forum_id FROM news_bytes WHERE news_bytes.group_id = $1',
+								array($group_id));
+				$forumIds = array();
+				if ($resultdb && db_numrows($resultdb)) {
+					$forumIds = util_result_column_to_array($resultdb);
+				}
+				foreach ($forumIds as $forumId) {
+					$groupDump['news'][] = $this->forumDump($forumId, 'return');
+				}
 			}
 			if ($group->usesSurvey()) {
 				$groupDump['surveys'] = array();
