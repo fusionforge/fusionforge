@@ -256,13 +256,6 @@ class CliActions {
 		$this->print_result($groupDump, $format);
 	}
 
-	function newsDump($nid, $format = 'json') {
-		$newsDump['id'] = $nid;
-		ksort($newsDump);
-		$this->print_result($newsDump, $format);
-		return $newsDump;
-	}
-
 	function surveyDump($sid, $format = 'json') {
 		$surveyDump['id'] = $sid;
 		$surveyObject = survey_get_object($sid);
