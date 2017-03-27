@@ -222,9 +222,9 @@ function show_units(&$effortUnitSet){
 		echo $inputParameters;
 		echo html_ao('p');
 		if ($effortUnitSet->isAutoconvert()) {
-			echo html_e('input', array('type'=>'checkbox', 'name'=>'is_autoconvert', 'checked'=>'checked'));
+			echo html_e('input', array('id'=>'is_autoconvert', 'type'=>'checkbox', 'name'=>'is_autoconvert', 'checked'=>'checked'));
 		} else {
-			echo html_e('input', array('type'=>'checkbox', 'name'=>'is_autoconvert'));
+			echo html_e('input', array('id'=>'is_autoconvert', 'type'=>'checkbox', 'name'=>'is_autoconvert'));
 		}
 		echo html_e('label', array('for'=>'is_autoconvert'),_('Enable auto convert effort value'));
 		echo html_ac(html_ap() - 1);
