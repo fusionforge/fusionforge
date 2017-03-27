@@ -82,7 +82,7 @@ echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&a
 		$to_title_arr[]='<div><span>'.$to.$status['element_name'].'</span></div>';
 		$class_arr[]='rotate';
 	}
-	echo $HTML->listTableTop($title_arr, false, 'table-header-rotated','',$class_arr);
+	echo $HTML->listTableTop($title_arr, array(), 'table-header-rotated', '', $class_arr);
 	echo "\n";
 
 	// Special treatment for the initial value (in the Submit form).
@@ -105,7 +105,7 @@ echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&a
 		$totitle_arr[] = $title_arr[$i]? $to_title_arr[$i] : '';
 		$class_arr[]='rotate';
 	}
-	echo $HTML->listTableTop($totitle_arr, false, 'table-header-rotated','',$class_arr);
+	echo $HTML->listTableTop($totitle_arr, array(), 'table-header-rotated','',$class_arr);
 
 	$i=1;
 	foreach ($elearray as $status) {

@@ -45,7 +45,7 @@ if (count($taskboard->getUsedTrackersIds()) == 0) {
 	$columns = $taskboard->getColumns();
 	$tablearr = array(_('Order'), _('Title'), _('Max number of tasks'), _('Assigned resolutions'), _('Drop resolution'));
 
-	echo $HTML->listTableTop($tablearr, false, 'sortable_table_tracker', 'sortable_table_tracker');
+	echo $HTML->listTableTop($tablearr, array(), 'sortable_table_tracker', 'sortable_table_tracker');
 	foreach ($columns as $column) {
 		$downLink = '';
 		if ($column->getOrder() < count($columns)) {

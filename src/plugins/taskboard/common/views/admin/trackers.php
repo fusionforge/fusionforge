@@ -94,7 +94,7 @@ if (!$atf || !is_object($atf) || $atf->isError()) {
 		$cells = array();
 		$tablearr = array(_('Tracker'), _('Description'), _('Use'), _('Card background color'));
 		$content = $HTML->boxTop(_('Tasks trackers'));
-		$content .= $HTML->listTableTop($tablearr, false, 'sortable_table_tracker', 'sortable_table_tracker');
+		$content .= $HTML->listTableTop($tablearr, array(), 'sortable_table_tracker', 'sortable_table_tracker');
 		foreach ($trackers as $tracker) {
 			$tracker_id = $tracker->getID();
 			$innercells = array();
