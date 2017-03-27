@@ -46,7 +46,7 @@ if (!$tb_arr || count($tb_arr) < 1) {
 } else {
 	echo html_e('p', array(), _('Choose a Task Board.'));
 	$tablearr = array(_('Task Board'),_('Description'));
-	echo $HTML->listTableTop($tablearr, false, 'full sortable sortable_table_taskboard', 'sortable_table_taskboard');
+	echo $HTML->listTableTop($tablearr, array(), 'full sortable sortable_table_taskboard', 'sortable_table_taskboard');
 	for ($j = 0; $j < count($tb_arr); $j++) {
 		if (is_object($tb_arr[$j])) {
 			if ($tb_arr[$j]->isError()) {

@@ -327,7 +327,7 @@ project independently.");
 				echo html_e('h3', array(), sprintf(_('%s Hooks'), $hooktype), false);
 				$tabletop = array('', _('Hook'), _('Description'));
 				$classth = array('unsortable', '', '');
-				echo $HTML->listTableTop($tabletop, false, "sortable_scmhook_$hooktype", 'sortable', $classth);
+				echo $HTML->listTableTop($tabletop, array(), "sortable_scmhook_$hooktype", 'sortable', $classth);
 				foreach ($hooks as $hook) {
 					if (! empty($hook->onlyGlobalAdmin) && ! Permission::isGlobalAdmin()) {
 						echo '<tr class="hide" ><td>';
@@ -393,7 +393,7 @@ project independently.");
 			echo html_e('h3', array(), _('serve-push-pull-bundle Hooks'), false);
 			$tabletop = array('', _('Hook Name'), _('Description'));
 			$classth = array('unsortable', '', '');
-			echo $HTML->listTableTop($tabletop, false, 'sortable_scmhook_serve-push-pull-bundle', 'sortable', $classth);
+			echo $HTML->listTableTop($tabletop, array(), 'sortable_scmhook_serve-push-pull-bundle', 'sortable', $classth);
 			foreach ($hooksServePushPullBundle as $hookServePushPullBundle) {
 				if (! empty($hookServePushPullBundle->onlyGlobalAdmin) && ! Permission::isGlobalAdmin()) {
 					echo '<tr class="hide" ><td>';
@@ -442,7 +442,7 @@ project independently.");
 			echo html_e('h3', array(), _('post-receive Hooks'), false);
 			$tabletop = array('', _('Hook Name'), _('Description'));
 			$classth = array('unsortable', '', '');
-			echo $HTML->listTableTop($tabletop, false, 'sortable_scmhook_post-receive', 'sortable', $classth);
+			echo $HTML->listTableTop($tabletop, array(), 'sortable_scmhook_post-receive', 'sortable', $classth);
 			foreach ($hooksPostReceive as $hookPostReceive) {
 				if (! empty($hookPostReceive->onlyGlobalAdmin) && ! Permission::isGlobalAdmin()) {
 					echo '<tr class="hide" ><td>';

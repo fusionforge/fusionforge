@@ -82,7 +82,7 @@ if (count($at_arr) < 1) {
 	if (isset($localInformation)) {
 		echo $localInformation;
 	}
-	echo $HTML->listTableTop($tablearr, false, 'full sortable sortable_table_tracker', 'sortable_table_tracker', array(), array(), $thclass);
+	echo $HTML->listTableTop($tablearr, array(), 'full sortable sortable_table_tracker', 'sortable_table_tracker', array(), array(), $thclass);
 	for ($j = 0; $j < count($at_arr); $j++) {
 		if (!is_object($at_arr[$j])) {
 			//just skip it

@@ -70,7 +70,7 @@ class Widget_ProjectLatestArtifacts extends Widget {
 			$html .= $HTML->getJavascripts();
 			$tabletop = array(_('Date'), _('Id'), _('Summary'), _('Tracker'), _('Status'), _('Priority'), _('Last Modified By'));
 			$classth = array('', '', '', '', '', '');
-			$html .= $HTML->listTableTop($tabletop, false, 'sortable_widget_tracker_listartifact full', 'sortable', $classth);
+			$html .= $HTML->listTableTop($tabletop, array(), 'sortable_widget_tracker_listartifact full', 'sortable', $classth);
 			while ($artifact = db_fetch_array($artifacts)) {
 				$cells = array();
 				$artf = artifact_get_object($artifact['artifact_id'], $artifact);
