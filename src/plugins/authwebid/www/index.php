@@ -100,7 +100,7 @@ echo html_e('h2', array(), _('Bind a new WebID'));
 // display a table of WebIDs pending binding
 $pendingwebids = $plugin->getStoredPendingWebIDs($u->getID());
 if( count($pendingwebids) ) {
-	echo $HTML->listTableTop(array(_('Already pending WebIDs you could bind to your account'), ''));
+	echo $HTML->listTableTop(array(_('Already pending WebIDs you could bind to your account')));
 
 	$i = 0;
 	foreach($pendingwebids as $webid_identity) {
@@ -141,7 +141,7 @@ echo $HTML->closeForm();
 $boundwebids = $plugin->getStoredBoundWebIDs($u->getID());
 
 if(count($boundwebids)) {
-	echo $HTML->listTableTop(array(_('WebIDs already bound to your account, which you can use to login'), ''));
+	echo $HTML->listTableTop(array(_('WebIDs already bound to your account, which you can use to login')));
 	$i = 0;
 
 	foreach($boundwebids as $webid_identity) {

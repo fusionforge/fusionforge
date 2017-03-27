@@ -93,7 +93,7 @@ if (!$ac || !is_object($ac)) {
 					$title_arr[]=_('Default');
 				}
 				$title_arr[]='';
-				echo $HTML->listTableTop($title_arr, false, ' ');
+				echo $HTML->listTableTop($title_arr);
 				if (in_array($efType, unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_CHOICE))) {
 					$row_attrs = array();
 					$cells = array();

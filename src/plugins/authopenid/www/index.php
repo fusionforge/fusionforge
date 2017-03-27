@@ -144,7 +144,7 @@ echo $HTML->boxTop(_('My OpenID identities'));
 </fieldset>
 <?php
 echo $HTML->closeForm();
-echo $HTML->listTableTop(array(_('Identity'), ''));
+echo $HTML->listTableTop(array(_('Identity')));
 
 $res = db_query_params('SELECT openid_identity FROM plugin_authopenid_user_identities WHERE user_id =$1',
 							    array($u->getID()));

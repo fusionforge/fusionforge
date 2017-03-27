@@ -394,7 +394,7 @@ if (getIntFromRequest('manage_release') ||
 			$title_arr[] = _('Current/New positions');
 			$title_arr[] = _('Up/Down positions');
 
-			echo $HTML->listTableTop($title_arr, false, ' ');
+			echo $HTML->listTableTop($title_arr);
 			echo implode('', $rows);
 			echo '<tr class="noborder">
 					<td>
@@ -476,7 +476,7 @@ if (! isset($ihm) || $ihm !== true) {
 		//$title_arr[] = _('Up/Down positions');
 		$title_arr[] = _('Actions');
 
-		echo $HTML->listTableTop($title_arr, false, ' ');
+		echo $HTML->listTableTop($title_arr);
 		echo implode('', $rows);
 		echo $HTML->listTableBottom();
 	}

@@ -106,7 +106,7 @@ $title_arr[] = _('Current/New positions');
 $title_arr[] = _('Up/Down positions');
 $title_arr[] = _('Delete');
 
-echo $HTML->listTableTop($title_arr,false, ' ');
+echo $HTML->listTableTop($title_arr);
 echo implode('', $rows);
 echo '<tr class="noborder">
 	<td>
