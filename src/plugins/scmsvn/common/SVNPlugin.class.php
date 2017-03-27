@@ -117,10 +117,10 @@ some control over it to the project's administrator.");
 		$b .= '<p>' ;
 		$module = $this->topModule($project);
 		if (forge_get_config('use_ssh', 'scmsvn')) {
-			$b .= '<tt>svn checkout svn://'.forge_get_config('scm_host').$this->svn_root_fs.'/'.$project->getUnixName().$module.'</tt><br />';
+			$b .= '<span class="tt">svn checkout svn://'.forge_get_config('scm_host').$this->svn_root_fs.'/'.$project->getUnixName().$module.'</span><br />';
 		}
 		if (forge_get_config('use_dav', 'scmsvn')) {
-				$b .= '<p><tt>svn checkout http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. forge_get_config('scm_host'). '/anonscm/svn/'.$project->getUnixName().$module.'</tt></p>' ;
+				$b .= '<p><span class="tt">svn checkout http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. forge_get_config('scm_host'). '/anonscm/svn/'.$project->getUnixName().$module.'</span></p>' ;
 		}
 		$b .= '</p>';
 		return $b;
@@ -152,7 +152,7 @@ some control over it to the project's administrator.");
 				$b .= ' ';
 				$b .= _('Enter your site password when prompted.');
 				$b .= '</p>';
-				$b .= '<p><tt>svn checkout svn+ssh://'.$d.'@' . forge_get_config('scm_host') . $this->svn_root_fs .'/'. $project->getUnixName().$module.'</tt></p>' ;
+				$b .= '<p><span class="tt">svn checkout svn+ssh://'.$d.'@' . forge_get_config('scm_host') . $this->svn_root_fs .'/'. $project->getUnixName().$module.'</span></p>' ;
 				$b .= '</div>';
 			}
 			if (forge_get_config('use_dav', 'scmsvn')) {
@@ -160,7 +160,7 @@ some control over it to the project's administrator.");
 				$b .= '<p>';
 				$b .= _('Enter your site password when prompted.');
 				$b .= '</p>';
-				$b .= '<p><tt>svn checkout --username '.$d.' http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. forge_get_config('scm_host'). '/authscm/'.$d.'/svn/'.$project->getUnixName().$module.'</tt></p>' ;
+				$b .= '<p><span class="tt">svn checkout --username '.$d.' http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. forge_get_config('scm_host'). '/authscm/'.$d.'/svn/'.$project->getUnixName().$module.'</span></p>' ;
 				$b .= '</div>';
 			}
 		} else {
@@ -173,7 +173,7 @@ some control over it to the project's administrator.");
 				$b .= ' ';
 				$b .= _('Enter your site password when prompted.');
 				$b .= '</p>';
-				$b .= '<p><tt>svn checkout svn+ssh://<i>'._('developername').'</i>@' . forge_get_config('scm_host') . $this->svn_root_fs .'/'. $project->getUnixName().$module.'</tt></p>' ;
+				$b .= '<p><span class="tt">svn checkout svn+ssh://<i>'._('developername').'</i>@' . forge_get_config('scm_host') . $this->svn_root_fs .'/'. $project->getUnixName().$module.'</span></p>' ;
 				$b .= '</div>';
 			}
 			if (forge_get_config('use_dav', 'scmsvn')) {
@@ -183,7 +183,7 @@ some control over it to the project's administrator.");
 				$b .= ' ';
 				$b .= _('Enter your site password when prompted.');
 				$b .= '</p>';
-				$b .= '<p><tt>svn checkout --username <i>'._('developername').'</i> http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. forge_get_config('scm_host'). '/authscm/<i>'._('developername').'</i>/svn/'.$project->getUnixName().$module.'</tt></p>' ;
+				$b .= '<p><span class="tt">svn checkout --username <i>'._('developername').'</i> http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. forge_get_config('scm_host'). '/authscm/<i>'._('developername').'</i>/svn/'.$project->getUnixName().$module.'</span></p>' ;
 				$b .= '</div>';
 			}
 		}
