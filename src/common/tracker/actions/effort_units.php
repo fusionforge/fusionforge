@@ -268,14 +268,14 @@ function show_units(&$effortUnitSet){
 			if ($isEditable) {
 				$pos =  $unit->getPosition();
 				if ($pos==1) {
-					$content = html_image('ic/btn_up.png','19','18',array('alt'=>'Up'));
+					$content = html_image('ic/btn_up.png', 19, 18, array('alt'=>'Up'));
 				} else {
-					$content = util_make_link($currentURL.'?'.($urlParameters ? $urlParameters.'&':'').'unit_id='.$unit->getID().'&new_pos='.($pos - 1).'&function=updownorder', html_image('ic/btn_up.png','19','18',array('alt'=>'Up', 'title'=>_('Move Up this custom field element'))));
+					$content = util_make_link($currentURL.'?'.($urlParameters ? $urlParameters.'&':'').'unit_id='.$unit->getID().'&new_pos='.($pos - 1).'&function=updownorder', html_image('ic/btn_up.png', 19, 18, array('alt'=>'Up', 'title'=>_('Move Up this custom field element'))));
 				}
 				if ($pos == count($units)) {
-					$content .= html_image('ic/btn_down.png','19','18',array('alt'=>'Down'));
+					$content .= html_image('ic/btn_down.png', 19, 18, array('alt'=>'Down'));
 				} else {
-					$content .= util_make_link($currentURL.'?'.($urlParameters ? $urlParameters.'&':'').'unit_id='.$unit->getID().'&new_pos='.($pos + 1).'&function=updownorder', html_image('ic/btn_down.png','19','18',array('alt'=>'Down', 'title'=>_('Move Down this custom field element'))));
+					$content .= util_make_link($currentURL.'?'.($urlParameters ? $urlParameters.'&':'').'unit_id='.$unit->getID().'&new_pos='.($pos + 1).'&function=updownorder', html_image('ic/btn_down.png', 19, 18, array('alt'=>'Down', 'title'=>_('Move Down this custom field element'))));
 				}
 				$cells[] = array($content, 'class'=>'align-center');
 			}
