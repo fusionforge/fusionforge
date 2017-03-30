@@ -426,7 +426,7 @@ class Layout extends FFError {
 		echo html_e('meta', array('name' => 'Forge-Identification', 'content' => $ff->software_name.':'.$ff->software_version));
 	}
 
-	function bodyHeader($params){
+	function bodyHeader($params) {
 		?>
 			<div class="header">
 			<table class="fullwidth" id="headertable">
@@ -524,9 +524,9 @@ if (isset($params['group']) && $params['group']) {
 				<td width="10" class="footer3" ><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="2" height="1" alt="" /></td>
 			</tr>
 			<tr>
-				<td class="align-left footer1" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/bottomleft-inner.png" height="11" width="11" alt="" /></td>
+				<td class="align-left footer1" width="9"></td>
 				<td class="footer3"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="1" height="1" alt="" /></td>
-				<td class="align-right footer1" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/bottomright-inner.png" height="11" width="11" alt="" /></td>
+				<td class="align-right footer1" width="9"></td>
 			</tr>
 			</table>
 
@@ -536,9 +536,9 @@ if (isset($params['group']) && $params['group']) {
 		<td width="10" class="footer2"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="2" height="1" alt="" /></td>
 	</tr>
 	<tr>
-		<td class="align-left footer2" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/bottomleft.png" height="9" width="9" alt="" /></td>
+		<td class="align-left footer2" width="9"></td>
 		<td class="footer2" colspan="3"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="1" height="1" alt="" /></td>
-		<td class="align-right footer2" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/bottomright.png" height="9" width="9" alt="" /></td>
+		<td class="align-right footer2" width="9"></td>
 	</tr>
 </table>
 <?php
