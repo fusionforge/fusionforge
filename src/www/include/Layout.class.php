@@ -386,9 +386,9 @@ class Layout extends FFError {
 	}
 
 	/**
- 	 * headerLinkedDataAutodiscovery() - creates the link+alternate links to alternate
- 	 * 		representations for Linked Data autodiscovery
- 	 */
+	 * headerLinkedDataAutodiscovery() - creates the link+alternate links to alternate
+	 *		representations for Linked Data autodiscovery
+	 */
 	function headerLinkedDataAutodiscovery() {
 
 		// retrieve the script's prefix
