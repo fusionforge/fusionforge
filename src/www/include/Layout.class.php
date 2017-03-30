@@ -465,11 +465,11 @@ class Layout extends FFError {
 	</tr>
 
 	<tr>
-		<td class="align-left toptab" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/topleft.png" height="9" width="9" alt="" /></td>
+		<td class="align-left toptab" width="9"></td>
 		<td class="toptab" width="30"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="30" height="1" alt="" /></td>
 		<td class="toptab"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="1" height="1" alt="" /></td>
 		<td class="toptab" width="30"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="30" height="1" alt="" /></td>
-		<td class="align-right toptab" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/topright.png" height="9" width="9" alt="" /></td>
+		<td class="align-right toptab" width="9"></td>
 	</tr>
 
 	<tr>
@@ -501,9 +501,9 @@ if (isset($params['group']) && $params['group']) {
 
 ?>
 			<tr>
-				<td class="align-left projecttab" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/topleft-inner.png" height="9" width="9" alt="" /></td>
+				<td class="align-left projecttab" width="9"></td>
 				<td class="projecttab" ><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="1" height="1" alt="" /></td>
-				<td class="align-right projecttab"  width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/topright-inner.png" height="9" width="9" alt="" /></td>
+				<td class="align-right projecttab"  width="9"></td>
 			</tr>
 
 			<tr>
@@ -574,19 +574,17 @@ if (isset($params['group']) && $params['group']) {
 	function boxTop($title, $id = '') {
 		return '
 			<!-- Box Top Start -->
-
-			<table class="fullwidth" style="background:url('.$this->imgroot.'vert-grad.png)">
+			<table class="fullwidth">
 			<tr class="align-center">
-			<td class="top align-right" width="10" style="background:url('.$this->imgbaseurl.'box-topleft.png)"><img src="'.$this->imgbaseurl.'clear.png" width="10" height="20" alt="" /></td>
-			<td class="fullwidth" style="background:url('.$this->imgbaseurl.'box-grad.png)"><span class="titlebar">'.$title.'</span></td>
-			<td class="top" width="10" style="background:url('.$this->imgbaseurl.'box-topright.png)"><img src="'.$this->imgbaseurl.'clear.png" width="10" height="20" alt="" /></td>
+			<td class="top align-right" width="10" "><img src="'.$this->imgbaseurl.'clear.png" width="10" height="20" alt="" /></td>
+			<td class="fullwidth"><span class="titlebar">'.$title.'</span></td>
+			<td class="top" width="10"><img src="'.$this->imgbaseurl.'clear.png" width="10" height="20" alt="" /></td>
 			</tr>
 			<tr>
 			<td colspan="3">
-			<table cellspacing="2" cellpadding="2" class="fullwidth">
+			<table class="fullwidth">
 			<tr class="align-left">
 			<td colspan="2">
-
 			<!-- Box Top End -->';
 	}
 
@@ -603,7 +601,7 @@ if (isset($params['group']) && $params['group']) {
 			</td>
 			</tr>
 			<tr class="align-center">
-			<td colspan="2" style="background:url('.$this->imgbaseurl.'box-grad.png)"><span class="titlebar">'.$title.'</span></td>
+			<td colspan="2"><span class="titlebar">'.$title.'</span></td>
 			</tr>
 			<tr class="align-left">
 			<td colspan="2">
