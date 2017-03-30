@@ -740,9 +740,9 @@ if (isset($params['group']) && $params['group']) {
 		echo $this->tabGenerator($menu['urls'], $menu['titles'], $menu['tooltips'], true, $menu['selected'], 'white');
 	}
 
-	function tabGenerator($TABS_DIRS, $TABS_TITLES, $TABS_TOOLTIPS, $nested=false, $selected=false, $sel_tab_bgcolor='white', $total_width='100%') {
+	function tabGenerator($tabs_dirs, $tabs_titles, $tabs_tooltips, $nested=false, $selected=false, $sel_tab_bgcolor='white', $total_width='100%') {
 
-		$count=count($TABS_DIRS);
+		$count=count($tabs_dirs);
 		$width=intval((100/$count));
 
 		$return = '';
@@ -774,7 +774,7 @@ if (isset($params['group']) && $params['group']) {
 				$return .= '
 					<td '.$rowspan.'class="top" width="10" style="background:url('.$this->imgbaseurl . 'theme-'.$inner.'-end-'.(($issel) ? '' : 'not').'selected.png)">'.
 					'<img src="'.$this->imgbaseurl . 'clear.png" height="25" width="10" alt="" /></td>'.
-					'<td '.$rowspan.'style="background:url('.$this->imgbaseurl . $bgimg.')" width="'.$width.'%" align="center">'.util_make_link ($TABS_DIRS[$i],$TABS_TITLES[$i],array('class'=>(($issel)?'tabsellink':'tablink')),true).'</td>';
+					'<td '.$rowspan.'style="background:url('.$this->imgbaseurl . $bgimg.')" width="'.$width.'%" align="center">'.util_make_link ($tabs_dirs[$i],$tabs_titles[$i],array('class'=>(($issel)?'tabsellink':'tablink')),true).'</td>';
 			} elseif ($i==$count-1) {
 				//
 				//	this is the last tab, choose an image with name-end
@@ -789,7 +789,7 @@ if (isset($params['group']) && $params['group']) {
 				$return .= '
 					<td '.$rowspan.'colspan="2" class="top" width="20" style="background:url('.$this->imgbaseurl . 'theme-'.$inner.'-'.(($wassel) ? '' : 'not').'selected-'.(($issel) ? '' : 'not').'selected.png)">'.
 					'<img src="'.$this->imgbaseurl . 'clear.png" height="2" width="20" alt="" /></td>'.
-					'<td '.$rowspan.'style="background:url('.$this->imgbaseurl . $bgimg.')" width="'.$width.'%" align="center">'.util_make_link($TABS_DIRS[$i], $TABS_TITLES[$i], array('class'=>(($issel)?'tabsellink':'tablink')), true).'</td>';
+					'<td '.$rowspan.'style="background:url('.$this->imgbaseurl . $bgimg.')" width="'.$width.'%" align="center">'.util_make_link($tabs_dirs[$i], $tabs_titles[$i], array('class'=>(($issel)?'tabsellink':'tablink')), true).'</td>';
 				//
 				//	Last graphic on right-side
 				//
@@ -811,7 +811,7 @@ if (isset($params['group']) && $params['group']) {
 				$return .= '
 					<td '.$rowspan.'colspan="2" class="top" width="20" style="background:url('.$this->imgbaseurl . 'theme-'.$inner.'-'.(($wassel) ? '' : 'not').'selected-'.(($issel) ? '' : 'not').'selected.png)">'.
 					'<img src="'.$this->imgbaseurl . 'clear.png" height="2" width="20" alt="" /></td>'.
-					'<td '.$rowspan.'style="background:url('.$this->imgbaseurl . $bgimg.')" width="'.$width.'%" align="center">'.util_make_link($TABS_DIRS[$i], $TABS_TITLES[$i], array('class'=>(($issel)?'tabsellink':'tablink')), true).'</td>';
+					'<td '.$rowspan.'style="background:url('.$this->imgbaseurl . $bgimg.')" width="'.$width.'%" align="center">'.util_make_link($tabs_dirs[$i], $tabs_titles[$i], array('class'=>(($issel)?'tabsellink':'tablink')), true).'</td>';
 
 			}
 		}
@@ -822,13 +822,13 @@ if (isset($params['group']) && $params['group']) {
 		//
 		if ($selected == 0) {
 			$beg_cols=0;
-			$end_cols=((count($TABS_DIRS)*3)-3);
-		} elseif ($selected == (count($TABS_DIRS)-1)) {
-			$beg_cols=((count($TABS_DIRS)*3)-3);
+			$end_cols=((count($tabs_dirs)*3)-3);
+		} elseif ($selected == (count($tabs_dirs)-1)) {
+			$beg_cols=((count($tabs_dirs)*3)-3);
 			$end_cols=0;
 		} else {
 			$beg_cols=($selected*3);
-			$end_cols=(((count($TABS_DIRS)*3)-3)-$beg_cols);
+			$end_cols=(((count($tabs_dirs)*3)-3)-$beg_cols);
 		}
 		$return .= '<tr>';
 		if ($beg_cols > 0) {

@@ -407,8 +407,8 @@ class Navigation extends FFError {
 
 			/* Homepage
 			// check for use_home_tab?
-			$TABS_DIRS[]='http://'. $this->getHomePage();
-			$TABS_TITLES[]=_('Home Page');
+			$tabs_dirs[]='http://'. $this->getHomePage();
+			$tabs_titles[]=_('Home Page');
 			*/
 
 			// Project Activity
