@@ -25,7 +25,7 @@ class WidgetLayout_Row {
 	var $columns;
 	var $layout;
 
-	function WidgetLayout_Row($id, $rank) {
+	function __construct($id, $rank) {
 		$this->id      = $id;
 		$this->rank    = $rank;
 		$this->columns = array();
