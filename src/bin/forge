@@ -126,21 +126,10 @@ class CliActions {
 	}
 
 	function getZipDump($file, $format = 'json') {
-		if (!is_file($file)) {
-			echo _('Unable to load file')._(': ').$file;
+		$stream = $this->loadFile($file, $format);
+		if (!$stream) {
 			return false;
 		}
-		if (!in_array($format, array('json', 'raw'))) {
-			echo _('Wrong file format')._('? ').$format;
-			return false;
-		}
-		$stream_ori = file_get_contents($file);
-		if ($format == 'json') {
-			$stream = json_decode($stream_ori, true);
-		} else {
-			$stream = $stream_ori;
-		}
-		unset($stream_ori);
 		$time = time();
 		$zipfile = 'fusionforge-zipDump-'.$time.'.zip';
 		global $zip;
@@ -150,19 +139,25 @@ class CliActions {
 			return false;
 		}
 
-		function copyStorageRef($value, $key) {
+		function copyStorageRef(&$value, $key) {
 			global $zip;
 			if ($key == 'storageref' && $value != null) {
 				if (is_file($value) && is_readable($value)) {
 					$localname = str_replace(forge_get_config('data_path').'/', '', $value);
 					$zip->addFile($value, $localname);
+					$value = $localname;
 				}
 			}
 		}
 
 		array_walk_recursive($stream, 'copyStorageRef');
-		$zip->addFile($file, basename($file));
+		if ($format == 'json') {
+			$stream  = json_encode($stream, JSON_PRETTY_PRINT);
+		}
+		file_put_contents('parameter.'.$format, $stream);
+		$zip->addFile('parameter.'.$format, basename('parameter.'.$format));
 		$zip->close();
+		@unlink('parameter.'.$format);
 		return file_exists($zipfile);
 	}
 
@@ -343,6 +338,59 @@ class CliActions {
 		return $documentDump;
 	}
 
+	function documentImport($file, $format = 'json') {
+		$stream = $this->loadFile($file, $format);
+		if (!$stream) {
+			return false;
+		}
+		$group_id = $stream['document']['data_array']['group_id'];
+		$group = group_get_object($group_id);
+		if ($group && is_object($group) && !$group->isError() && $group->usesDocman()) {
+			$firstversion = true;
+			$path = getcwd();
+			foreach ($stream['versions'] as $version) {
+				if ($version['filetype'] != 'URL' && $version['storageref'] != null) {
+					if (!is_file($path.'/'.$version['storageref'])) {
+						echo _('Invalid file name.')."\n";
+						return false;
+					}
+					$filedataname = $path.'/'.$version['storageref'];
+					if (function_exists('finfo_open')) {
+						$finfo = finfo_open(FILEINFO_MIME_TYPE);
+						$filedatatype = finfo_file($finfo, $filedataname);
+					} else {
+						$filedatatype = 'application/binary';
+					}
+				}
+				$doc_group_id = $stream['document']['data_array']['doc_group'];
+				$doc_group = documentgroup_get_object_byid($doc_group_id);
+				if (!$doc_group || !is_object($doc_group) || $doc_group->isError()) {
+					echo _('Invalid document group (folder)')._(': ').$doc_group_id."\n";
+					return false;
+				}
+				if ($firstversion == true) {
+					$d = new Document($group);
+					$importData['user'] = $version['created_by'];
+					$importData['nopermcheck'] = true;
+					$importData['nonotice'] = true;
+					$importData['time'] = $version['createdate'];
+					if (!$d->create($version['filename'], $filedatatype, $filedataname, $doc_group_id, $version['title'], $version['description'], $stream['document']['data_array']['stateid'], $version['vcomment'])) {
+						echo $d->getErrorMessage()."\n";
+						return false;
+					} else {
+						$firstversion = false;
+					}
+				} else {
+					//add other versions
+				}
+				//set default versions
+				//add reviews
+			}
+		} else {
+			echo _('Unable to get project to inject document')._(': ').$group_id."\n";
+		}
+	}
+
 	function docgroupDump($docgroup_id, $format = 'json') {
 		$docgroupDump['id'] = $docgroup_id;
 		$docgroup = documentgroup_get_object_byid($docgroup_id);
@@ -467,6 +515,25 @@ class CliActions {
 			default:
 				print_r($arrayDump);
 		}
+	}
+
+	function loadFile($file, $format) {
+		if (!is_file($file)) {
+			echo _('Unable to load file')._(': ').$file;
+			return false;
+		}
+		if (!in_array($format, array('json', 'raw'))) {
+			echo _('Wrong file format')._('? ').$format;
+			return false;
+		}
+		$stream_ori = file_get_contents($file);
+		if ($format == 'json') {
+			$stream = json_decode($stream_ori, true);
+		} else {
+			$stream = $stream_ori;
+		}
+		unset($stream_ori);
+		return $stream;
 	}
 }
 
