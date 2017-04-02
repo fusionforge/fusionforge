@@ -186,7 +186,7 @@ class Navigation extends FFError {
 		$res = array();
 		if (session_loggedin()) {
 			$u = user_get_object(user_getid());
-			$res['titles'][] = sprintf("%s (%s)", _('Log Out'), $u->getRealName());
+			$res['titles'][] = sprintf("%s (%s)", _('Log Out'), util_display_user($u->getUnixName(), $u->getID(), $u->getRealName()));
 			$res['urls'][] = util_make_uri('/account/logout.php');
 
 			$res['titles'][] = _('My Account');

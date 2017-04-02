@@ -1093,7 +1093,7 @@ function util_display_user($username, $user_id = 0, $text = '', $size = 'xs') {
 
 	$url = util_make_link_u($username, $user_id, $text);
 	if ($params['content']) {
-		return $params['content'].$url.'<div class="new_line"></div>';
+		return $params['content'].$url;
 	}
 	return $url;
 }
