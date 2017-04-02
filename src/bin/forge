@@ -65,9 +65,19 @@ class CliActions {
 				echo "to dump a document from a specific project.\n";
 				echo $dumpFormatInfo;
 				break;
+			case 'docgroupDump':
+				echo "Use: .../forge docgroupDump <docgroupid> [json|raw]\n";
+				echo "to dump a document group (folder) from a specific project.\n";
+				echo $dumpFormatInfo;
+				break;
 			case 'docmanDump':
 				echo "Use: .../forge docmanDump <groupid> [json|raw]\n";
 				echo "to dump docman from a specific project.\n";
+				echo $dumpFormatInfo;
+				break;
+			case 'releaseDump':
+				echo "Use: .../forge releaseDump <releaseid> [json|raw]\n";
+				echo "to dump a spectific FRS release from a specific project.\n";
 				echo $dumpFormatInfo;
 				break;
 			case 'packageDump':
@@ -78,6 +88,11 @@ class CliActions {
 			case 'frsDump':
 				echo "Use: .../forge frsDump <groupid> [json|raw]\n";
 				echo "to dump FRS from a specific project.\n";
+				echo $dumpFormatInfo;
+				break;
+			case 'surveyDump':
+				echo "Use: .../forge surveyDump <surveyid> [json|raw]\n";
+				echo "to dump a specific survey from a specific project.\n";
 				echo $dumpFormatInfo;
 				break;
 			case 'groupDump':
@@ -326,6 +341,29 @@ class CliActions {
 		ksort($documentDump);
 		$this->print_result($documentDump, $format);
 		return $documentDump;
+	}
+
+	function docgroupDump($docgroup_id, $format = 'json') {
+		$docgroupDump['id'] = $docgroup_id;
+		$docgroup = documentgroup_get_object_byid($docgroup_id);
+		if ($docgroup && is_object($docgroup) && !$docgroup->isError()) {
+			$dm = new DocumentManager($docgroup->getGroup());
+			if ($dm && is_object($dm) && !$dm->isError()) {
+				$docgroupDump['subdocgroups'] = $dm->getTree($docgroup_id);
+				$df = new DocumentFactory($docgroup->getGroup());
+				$df->setDocGroupID($docgroup_id);
+				$df->setStateID(array(1, 2, 3, 4, 5));
+				$df->setOrder(array('docid'));
+				$docgroupDump['files'] = (array)$df->getDocumentsWithVersions();
+			} else {
+				$docgroupDump['error'][] = _('Unable to get document manager for docgroup id')._(': ').$docgroup_id;
+			}
+		} else {
+			$docgroupDump['error'][] = _('Unable to get docgroup id')._(': ').$docgroup_id;
+		}
+		ksort($docgroupDump);
+		$this->print_result($docgroupDump, $format);
+		return $docgroupDump;
 	}
 
 	function docmanDump($group_id, $format = 'json') {

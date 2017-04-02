@@ -59,6 +59,25 @@ function &documentgroup_get_object($docgroup_id, $group_id, $res = false) {
 	return $DOCUMENTGROUP_OBJ["_".$docgroup_id."_"];
 }
 
+function &documentgroup_get_object_byid($docgroup_id, $res = false) {
+	global $DOCUMENTGROUP_OBJ;
+	if (!isset($DOCUMENTGROUP_OBJ["_".$docgroup_id."_"])) {
+		if ($res) {
+			//the db result handle was passed in
+		} else {
+			$res = db_query_params('SELECT * FROM doc_groups WHERE doc_group = $1',
+						array($docgroup_id));
+		}
+		if (!$res || db_numrows($res) < 1) {
+			$DOCUMENTGROUP_OBJ["_".$docgroup_id."_"] = false;
+		} else {
+			$arr = db_fetch_array($res);
+			$DOCUMENTGROUP_OBJ["_".$docgroup_id."_"] = new DocumentGroup(group_get_object($arr['group_id']), $arr);
+		}
+	}
+	return $DOCUMENTGROUP_OBJ["_".$docgroup_id."_"];
+}
+
 class DocumentGroup extends FFError {
 
 	/**
