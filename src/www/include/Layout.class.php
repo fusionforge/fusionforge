@@ -576,7 +576,7 @@ if (isset($params['group']) && $params['group']) {
 			<!-- Box Top Start -->
 			<table class="fullwidth">
 			<tr class="align-center">
-			<td class="top align-right" width="10" "><img src="'.$this->imgbaseurl.'clear.png" width="10" height="20" alt="" /></td>
+			<td class="top align-right" width="10"><img src="'.$this->imgbaseurl.'clear.png" width="10" height="20" alt="" /></td>
 			<td class="fullwidth"><span class="titlebar">'.$title.'</span></td>
 			<td class="top" width="10"><img src="'.$this->imgbaseurl.'clear.png" width="10" height="20" alt="" /></td>
 			</tr>
