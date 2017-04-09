@@ -361,6 +361,9 @@ class CliActions {
 					} else {
 						$filedatatype = 'application/binary';
 					}
+				} else {
+					$filedatatype = $version['filetype'];
+					$filedataname = '';
 				}
 				$doc_group_id = $stream['document']['data_array']['doc_group'];
 				$doc_group = documentgroup_get_object_byid($doc_group_id);
@@ -368,20 +371,23 @@ class CliActions {
 					echo _('Invalid document group (folder)')._(': ').$doc_group_id."\n";
 					return false;
 				}
+				$importData['user'] = $version['created_by'];
+				$importData['nopermcheck'] = true;
+				$importData['nonotice'] = true;
+				$importData['time'] = $version['createdate'];
 				if ($firstversion == true) {
 					$d = new Document($group);
-					$importData['user'] = $version['created_by'];
-					$importData['nopermcheck'] = true;
-					$importData['nonotice'] = true;
-					$importData['time'] = $version['createdate'];
-					if (!$d->create($version['filename'], $filedatatype, $filedataname, $doc_group_id, $version['title'], $version['description'], $stream['document']['data_array']['stateid'], $version['vcomment'])) {
+					if (!$d->create($version['filename'], $filedatatype, $filedataname, $doc_group_id, $version['title'], $version['description'], $stream['document']['data_array']['stateid'], $version['vcomment'], $importData)) {
 						echo $d->getErrorMessage()."\n";
 						return false;
 					} else {
 						$firstversion = false;
 					}
 				} else {
-					//add other versions
+					if (!$d->update($version['filename'], $filedatatype, $filedataname, $doc_group_id, $version['title'], $version['description'], $stream['document']['data_array']['stateid'], 0, 0, 1, $importData, $version['vcomment'])) {
+						echo $d->getErrorMessage()."\n";
+						return false;
+					}
 				}
 				//set default versions
 				//add reviews
