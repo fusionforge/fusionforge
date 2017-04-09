@@ -169,7 +169,7 @@ switch ($subaction) {
 			session_redirect($urlparam);
 		}
 
-		if (!$d->update($filename, $filetype, $data, $doc_group, $title, $description, $stateid, $version, $current_version, $new_version, null, $vcomment)) {
+		if (!$d->update($filename, $filetype, $data, $doc_group, $title, $description, $stateid, $version, $current_version, $new_version, array(), $vcomment)) {
 			$error_msg = $d->getErrorMessage();
 		} else {
 			$feedback = sprintf(_('Document [D%s] updated successfully.'), $d->getID());
