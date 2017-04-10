@@ -44,7 +44,7 @@ $server = new soap_server();
 $server->setDebugLevel(0);
 $server->soap_defencoding = 'UTF-8';
 $server->encode_utf8 = true;
-$server->configureWSDL('FusionForgeAPI',$uri,false,'rpc','http://schemas.xmlsoap.org/soap/http',$uri);
+$server->configureWSDL('FusionForgeAPI',$uri,$uri.'/soap/index.php','rpc','http://schemas.xmlsoap.org/soap/http',$uri);
 
 // add types
 $server->wsdl->addComplexType(
