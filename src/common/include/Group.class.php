@@ -6,8 +6,9 @@
  * Copyright 2009-2013, Roland Mas
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2010-2012, Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2016, Franck Villaume - TrivialDev
+ * Copyright 2012-2017, Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of National Education
+ * Copyright 2017, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -33,7 +34,6 @@ require_once $gfcommon.'forum/Forum.class.php';
 require_once $gfcommon.'forum/ForumFactory.class.php';
 require_once $gfcommon.'pm/ProjectGroup.class.php';
 require_once $gfcommon.'pm/ProjectGroupFactory.class.php';
-require_once $gfcommon.'include/Role.class.php';
 require_once $gfcommon.'frs/FRSPackage.class.php';
 require_once $gfcommon.'frs/FRSRelease.class.php';
 require_once $gfcommon.'docman/DocumentGroup.class.php';
@@ -44,6 +44,8 @@ require_once $gfcommon.'survey/SurveyFactory.class.php';
 require_once $gfcommon.'survey/SurveyQuestionFactory.class.php';
 require_once $gfcommon.'include/gettext.php';
 require_once $gfcommon.'include/GroupJoinRequest.class.php';
+require_once $gfcommon.'include/Role.class.php';
+require_once $gfcommon.'widget/WidgetLayoutManager.class.php';
 
 $GROUP_OBJ=array();
 
@@ -248,34 +250,6 @@ class Group extends FFError {
 	 * @var	array	$membersArr.
 	 */
 	var $membersArr;
-
-	/**
-	 * Whether the use is an admin/super user of this project.
-	 *
-	 * @var	bool	$is_admin.
-	 */
-	var $is_admin;
-
-	/**
-	 * Artifact types result handle.
-	 *
-	 * @var	int	$types_res.
-	 */
-	var $types_res;
-
-	/**
-	 * Associative array of data for plugins.
-	 *
-	 * @var	array	$plugins_data.
-	 */
-	var $plugins_data;
-
-	/**
-	 * Associative array of data for the group menu.
-	 *
-	 * @var	array	$menu_data.
-	 */
-	var $menu_data;
 
 	/**
 	 * Group - Group object constructor - use group_get_object() to instantiate.
@@ -1700,7 +1674,9 @@ class Group extends FFError {
 				return false;
 			}
 			$tag = trim($tag);
-			if ($tag == '' || array_search($tag, $inserted) !== false) continue;
+			if ($tag == '' || array_search($tag, $inserted) !== false) {
+				continue;
+			}
 			$sql = 'INSERT INTO project_tags (group_id,name) VALUES ($1, $2)';
 			$res = db_query_params($sql, array($this->getID(), $tag));
 			if (!$res) {
@@ -1849,7 +1825,7 @@ class Group extends FFError {
 		$res = db_query_params('SELECT forum_id FROM news_bytes WHERE group_id=$1',
 					array($this->getID()));
 		if (!$res) {
-			$this->setError(_('Error Deleting News: ').db_error());
+			$this->setError(_('Error Deleting News')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -1857,7 +1833,7 @@ class Group extends FFError {
 		for ($i=0; $i<db_numrows($res); $i++) {
 			$Forum = new Forum($news_group,db_result($res,$i,'forum_id'));
 			if (!$Forum->delete(1,1)) {
-				$this->setError(_('Could not delete News Forum')._(': '),$Forum->getID());
+				$this->setError(_('Could not delete News Forum')._(': ').$Forum->getID());
 				return false;
 			}
 		}
@@ -1866,7 +1842,7 @@ class Group extends FFError {
 		for ($i = 0; $i < db_numrows($res); $i++) {
 			$Forum = new Forum($this, db_result($res, $i, 'forum_id'));
 			if (!$Forum->delete(1, 1)) {
-				$this->setError(_('Could not delete News Forum')._(': '), $Forum->getID());
+				$this->setError(_('Could not delete News Forum')._(': ').$Forum->getID());
 				return false;
 			}
 		}
@@ -2682,7 +2658,7 @@ class Group extends FFError {
 					foreach ($oldatf->getArtifactTypes() as $o) {
 						$t = artifactType_get_object($id_mappings['tracker'][$o->getID()]);
 						$id_mappings['tracker'][$o->getID()] = $t->getID();
-						$newEFIds = $t->cloneFieldsFrom($o->getID(), $o->Group->getID(), $id_mappings);
+						$newEFIds = $t->cloneFieldsFrom($o->getID(), $id_mappings);
 						if (forge_get_config('use_tracker_widget_display')) {
 							$lm->createDefaultLayoutForTracker($t->getID(), $o->getID(), $newEFIds);
 						}
@@ -3127,6 +3103,39 @@ if there is anything we can do to help you.
 			db_commit();
 			return true;
 		}
+	}
+
+	/**
+	 *
+	 * @param	integer	$unit_set_id	the effort unit set id
+	 * @return	bool
+	 */
+	function setEffortUnitSet($unit_set_id) {
+		db_begin();
+		$res = db_query_params ('UPDATE groups SET unit_set_id=$1 WHERE group_id=$2',
+				array($unit_set_id, $this->getID()));
+		if ($res) {
+			$this->data_array['unit_set_id']=$unit_set_id;
+			db_commit();
+			return true;
+		} else {
+			db_rollback();
+			return false;
+		}
+	}
+
+	/**
+	 * getEffortUnitSet - Get the effort unit set id.
+	 *
+	 * @return	integer	The id of the effort unit set.
+	 */
+	function getEffortUnitSet() {
+		return $this->data_array['unit_set_id'];
+	}
+
+	function getWidgetLayoutConfig() {
+		$lm = new WidgetLayoutManager();
+		return $lm->getLayout($this->getID(), WidgetLayoutManager::OWNER_TYPE_GROUP);
 	}
 }
 

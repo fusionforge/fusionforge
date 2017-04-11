@@ -155,17 +155,28 @@ echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 	</tr>
 	<?php
 		$ath->renderExtraFields($ah->getExtraFieldData(),true,'none',false,'Any',array(),false,'UPDATE');
+		$fieldInFormula = $ath->getFieldsInFormula();
 	?>
 	<tr>
 		<td><strong><?php echo _('Assigned to')._(': ') ?></strong><br />
 		<?php
-		echo $ath->technicianBox('assigned_to', $ah->getAssignedTo() );
+		if (in_array('assigned_to', $fieldInFormula)) {
+			echo $ath->technicianBox('assigned_to', $ah->getAssignedTo(), true, 'none', -1, '', false, array('class'=>'in-formula'));
+		} else {
+			echo $ath->technicianBox('assigned_to', $ah->getAssignedTo());
+		}
 		echo " ";
 		echo util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&update_users=1', '('._('Admin').')');
 		?>
 		</td><td>
 		<strong><?php echo _('Priority'). _(': ') ?></strong><br />
-		<?php echo build_priority_select_box('priority',$ah->getPriority()); ?>
+		<?php
+		if (in_array('priority', $fieldInFormula)) {
+			echo $ath->priorityBox('priority',$ah->getPriority(), false, array('class'=>'in-formula'));
+		} else {
+			echo $ath->priorityBox('priority',$ah->getPriority());
+		}
+		?>
 		</td>
 	</tr>
 
@@ -173,7 +184,13 @@ echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 	<tr>
 		<td>
 			<strong><?php echo _('State')._(': ') ?></strong><br />
-			<?php echo $ath->statusBox ('status_id', $ah->getStatusID() ); ?>
+			<?php
+				if (in_array('status', $fieldInFormula)) {
+					echo $ath->statusBox('status_id', $ah->getStatusID(), false, 'none', array('class'=>'in-formula'));
+				} else {
+					echo $ath->statusBox('status_id', $ah->getStatusID());
+				}
+			?>
 		</td>
 		<td>
 		</td>
@@ -182,20 +199,27 @@ echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 	?>
 	<tr>
 		<td colspan="2"><strong><?php echo _('Summary').utils_requiredField()._(':') ?></strong><br />
-		<input id="tracker-summary" required="required" title="<?php echo _('The summary text-box represents a short tracker item summary. Useful when browsing through several tracker items.') ?>" type="text" name="summary" size="70" value="<?php
-			echo $ah->getSummary();
-			?>" maxlength="255" />
+		<?php if (in_array('summary', $fieldInFormula)) { ?>
+			<input id="tracker-summary" required="required" title="<?php echo _('The summary text-box represents a short tracker item summary. Useful when browsing through several tracker items.') ?>" type="text" name="summary" size="70" value="<?php
+				echo $ah->getSummary();
+				?>" maxlength="255" class="in-formula"/>
+		<?php } else { ?>
+			<input id="tracker-summary" required="required" title="<?php echo _('The summary text-box represents a short tracker item summary. Useful when browsing through several tracker items.') ?>" type="text" name="summary" size="70" value="<?php
+				echo $ah->getSummary();
+				?>" maxlength="255" />
+		<?php } ?>
 		</td>
 	</tr>
 	<tr><td colspan="2">
-		<div id="edit" class="hide">
-		<strong><?php echo _('Detailed description') ?><?php echo utils_requiredField(); ?><?php echo _(': ') ?><?php echo notepad_button('document.forms.trackermodform.description') ?></strong>
-		<br />
-		<textarea id="tracker-description" required="required" name="description" rows="30" style="width: 100%" title="<?php echo html_get_tooltip_description('description') ?>"><?php echo $ah->getDetails(); ?></textarea>
-		</div>
-		<div id="show" style="display:block;">
-		<?php echo $ah->showDetails(true); ?>
-		</div>
+
+		<?php
+			if (in_array('description', $fieldInFormula)) {
+				echo $ah->showDetails(true, array('class'=>'in-formula'));
+			} else {
+				echo $ah->showDetails(true);
+			}
+		?>
+
 	</td></tr>
 <?php echo $HTML->listTableBottom(); ?>
 <div id="tabber" >
@@ -274,7 +298,7 @@ if ($group->usesPM()) {
 ?>
 <div id="tabber-tasks" class="tabbertab">
 	<?php
-		$ath->renderRelatedTasks($group, $ah);
+		echo $ath->renderRelatedTasks($group, $ah);
 	?>
 </div>
 <?php }

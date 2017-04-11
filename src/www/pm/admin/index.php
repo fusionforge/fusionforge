@@ -66,13 +66,10 @@ if (getStringFromRequest('post_changes')) {
 	}
 
 	if (getStringFromRequest('addproject')) {
+		/* Add new subproject */
 		$project_name = getStringFromRequest('project_name');
 		$description = getStringFromRequest('description');
 		$send_all_posts_to = getStringFromRequest('send_all_posts_to');
-
-		/*
-			Add new subproject
-		*/
 		session_require_perm ('pm_admin', $group_id) ;
 		if (!$pg->create($project_name,$description,$send_all_posts_to)) {
 			exit_error($pg->getErrorMessage(),'pm');
@@ -83,56 +80,56 @@ if (getStringFromRequest('post_changes')) {
 		}
 
 	} elseif ($add_cat) {
+		/* Add a project_category */
 		$name = getStringFromRequest('name');
-
-		/*
-			Add a project_category
-		*/
 		session_require_perm ('pm', $pg->getID(), 'manager') ;
 
-		$pc = new ProjectCategory($pg);
-		if (!$pc || !is_object($pc)) {
-			exit_error(_('Unable to create ProjectCategory Object'),'pm');
+		if (trim($name) == '') {
+			$error_msg .= _('Name is required');
 		} else {
-			if (!$pc->create($name)) {
-				$error_msg .= _('Insert Error')._(': ').$pc->getErrorMessage();
+			$pc = new ProjectCategory($pg);
+			if (!$pc || !is_object($pc)) {
+				exit_error(_('Unable to create ProjectCategory Object'),'pm');
 			} else {
-				$feedback .= _('Category Inserted');
+				if (!$pc->create($name)) {
+					$error_msg .= _('Insert Error')._(': ').$pc->getErrorMessage();
+				} else {
+					$feedback .= _('Category Inserted');
+				}
 			}
 		}
 
 	} elseif ($update_cat) {
-		$id = getIntFromRequest('id');
+		/* Update a project_category */
 		$name = getStringFromRequest('name');
-
-		/*
-			Update a project_category
-		*/
-		session_require_perm ('pm', $pg->getID(), 'manager') ;
-
-		$pc = new ProjectCategory($pg,$id);
-		if (!$pc || !is_object($pc)) {
-			exit_error(_('Unable to create ProjectCategory Object'),'pm');
-		} elseif ($pc->isError()) {
-			exit_error($pc->getErrorMessage(),'pm');
+		if (trim($name) == '') {
+			$error_msg .= _('Name is required');
 		} else {
-			if (!$pc->update($name)) {
-				exit_error(_('Update failed')._(': ').$pc->getErrorMessage(),'pm');
+			$id = getIntFromRequest('id');
+			session_require_perm ('pm', $pg->getID(), 'manager') ;
+
+			$pc = new ProjectCategory($pg,$id);
+			if (!$pc || !is_object($pc)) {
+				exit_error(_('Unable to create ProjectCategory Object'),'pm');
+			} elseif ($pc->isError()) {
+				exit_error($pc->getErrorMessage(),'pm');
 			} else {
-				$feedback .= _('Category Updated');
-				$update_cat=false;
-				$add_cat=true;
+				if (!$pc->update($name)) {
+					exit_error(_('Update failed')._(': ').$pc->getErrorMessage(),'pm');
+				} else {
+					$feedback .= _('Category Updated');
+					$update_cat=false;
+					$add_cat=true;
+				}
 			}
 		}
 
 	} elseif (getStringFromRequest('update_pg')) {
+		/* Update a subproject */
 		$project_name = getStringFromRequest('project_name');
 		$description = getStringFromRequest('description');
 		$send_all_posts_to = getStringFromRequest('send_all_posts_to');
 
-		/*
-			Update a subproject
-		*/
 		session_require_perm ('pm', $pg->getID(), 'manager') ;
 
 		if (!$pg->update($project_name,$description,$send_all_posts_to)) {
@@ -142,12 +139,10 @@ if (getStringFromRequest('post_changes')) {
 		}
 
 	} elseif ($delete) {
+		/* Delete a subproject */
 		$sure = getStringFromRequest('sure');
 		$really_sure = getStringFromRequest('really_sure');
 
-		/*
-			Delete a subproject
-		*/
 		session_require_perm ('pm', $pg->getID(), 'manager') ;
 
 		if (!$pg->delete(getStringFromRequest('sure'),getStringFromRequest('really_sure'))) {
@@ -188,18 +183,21 @@ if ($add_cat && $group_project_id) {
 		$title_arr=array();
 		$title_arr[]=_('Id');
 		$title_arr[]=_('Title');
-		echo $HTML->listTableTop ($title_arr);
+		echo $HTML->listTableTop($title_arr);
 		for ($i=0; $i < $rows; $i++) {
 			$cells = array();
 			$cells[][] = db_result($result, $i, 'category_id');
 			$cells[][] = util_make_link('/pm/admin/?update_cat=1&amp;id='.db_result($result, $i, 'category_id').'&amp;group_id='.$group_id.'&amp;group_project_id='. $pg->getID(),
 							db_result($result, $i, 'category_name'));
-			echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
+			echo $HTML->multiTableRow(array(), $cells);
 		}
 		echo $HTML->listTableBottom();
 	} else {
 		echo $HTML->information(_('No categories defined'));
 	}
+	?>
+	<p class="important"><?php echo _('Once you add a category, it cannot be deleted') ?></p>
+	<?php
 	echo $HTML->openForm(array('action' => '/pm/admin/?group_id='.$group_id, 'method' => 'post'));
 	?>
 	<p>
@@ -210,7 +208,6 @@ if ($add_cat && $group_project_id) {
 	</label>
 	<input id="name" required="required" type="text" name="name" value="" />
 	</p>
-	<p class="important"><?php echo _('Once you add a category, it cannot be deleted') ?></p>
 	<p><input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
 	<?php
 	echo $HTML->closeForm();

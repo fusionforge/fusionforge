@@ -53,7 +53,7 @@ if (!$projectsHierarchyGlobalConf) {
 	echo $HTML->multiTableRow(array(), $cells);
 
 	$cells = array();
-	$cells[][] = html_e('label', array('id' => 'projectsHierarchy-forum', 'title' => _('Enable hierarchical view for browsing in forum main page.')), _('Enable Forum'));
+	$cells[][] = html_e('label', array('id' => 'projectsHierarchy-forum', 'title' => _('Enable hierarchical view for browsing in Forum main page.')), _('Enable Forum'));
 	$inputAttrs = array('type' => 'checkbox', 'name' => 'forum', 'value' => 1);
 	if ($projectsHierarchyGlobalConf['forum']) {
 		$inputAttrs['checked'] = 'checked';

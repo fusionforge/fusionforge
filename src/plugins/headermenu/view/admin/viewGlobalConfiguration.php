@@ -59,7 +59,7 @@ if (sizeof($linksHeaderMenuArray)) {
 	echo html_e('h2', array(), _('Manage available tabs in headermenu'), false);
 	$tabletop = array(_('Order'), _('Tab Type'), _('Displayed Name'), _('Description'), _('Status'), _('Actions'));
 	$classth = array('', '', '', '', '', 'unsortable');
-	echo $HTML->listTableTop($tabletop, false, 'sortable_headermenu_listlinks', 'sortable', $classth);
+	echo $HTML->listTableTop($tabletop, array(), 'sortable_headermenu_listlinks', 'sortable', $classth);
 	foreach ($linksHeaderMenuArray as $link) {
 		$cells = array();
 		$cells[] = array($link['ordering'], 'class' => 'align-center');
@@ -93,7 +93,7 @@ if (sizeof($linksOuterMenuArray)) {
 	echo html_e('h2', array(), _('Manage available tabs in outermenu'), false);
 	$tabletop = array(_('Order'), _('Tab Type'), _('Displayed Name'), _('Description'), _('Status'), _('Actions'));
 	$classth = array('', '', '', '', '', 'unsortable');
-	echo $HTML->listTableTop($tabletop, false, 'sortable_outermenu_listlinks', 'sortable', $classth);
+	echo $HTML->listTableTop($tabletop, array(), 'sortable_outermenu_listlinks', 'sortable', $classth);
 	foreach ($linksOuterMenuArray as $link) {
 		$cells = array();
 		$cells[] = array($link['ordering'], 'class' => 'align-center');

@@ -25,7 +25,7 @@ require_once dirname(dirname(__FILE__)).'/SeleniumForge.php';
 class ScmSvnSSHTest extends FForge_SeleniumTestCase
 {
 	public $fixture = 'projecta';
-	
+
 	function testScmSvnSSH()
 	{
 		$this->changeConfig(array("scmsvn" => array("use_ssh" => "yes",
@@ -52,7 +52,7 @@ class ScmSvnSSHTest extends FForge_SeleniumTestCase
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
-		$p = $this->getText("//tt[contains(.,'svn checkout svn+ssh')]");
+		$p = $this->getText("//span[contains(.,'svn checkout svn+ssh')]");
 		$p = preg_replace(",^svn checkout ,", "", $p);
 
 		// Create a local checkout, commit stuff

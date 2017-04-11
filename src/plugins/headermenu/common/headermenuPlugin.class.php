@@ -3,7 +3,7 @@
 /**
  * headermenuPlugin Class
  *
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2014,2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -126,7 +126,7 @@ in the main menu (outermenu) or in the project menu (groupmenu).");
 		$availableLinks = $this->getAvailableLinks('headermenu');
 		foreach ($availableLinks as $link) {
 			if ($link['is_enable']) {
-				$params['links'][] = util_make_link($link['url'], htmlspecialchars($link['name']), array(), true);
+				$params['links'][] = util_make_link($link['url'], htmlspecialchars($link['name']), array('title' => htmlspecialchars($link['description'])), true);
 			}
 		}
 		return true;

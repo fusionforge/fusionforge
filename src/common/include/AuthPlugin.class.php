@@ -61,7 +61,7 @@ abstract class ForgeAuthPlugin extends Plugin {
 			// no default implementation, but see AuthBuiltinPlugin::displayAuthForm()
 			//  $params can be passed with a 'return_to' attribute
 			//  it should return an HTML dialog appened to passed $params['html_snippets']
-            //  it may return a redirection URL appened to  $params['transparent_redirect_urls']
+			//  it may return a redirection URL appened to  $params['transparent_redirect_urls']
 			$this->displayAuthForm($params);
 			break;
 		case 'display_create_user_form':
@@ -99,7 +99,7 @@ abstract class ForgeAuthPlugin extends Plugin {
 	protected $saved_user;
 
 	/**
-	 * Is there a valid session?
+	 * checkAuthSession - Is there a valid session?
 	 *
 	 * @param	array	$params
 	 * @return	FORGE_AUTH_AUTHORITATIVE_ACCEPT, FORGE_AUTH_AUTHORITATIVE_REJECT or FORGE_AUTH_NOT_AUTHORITATIVE
@@ -195,7 +195,7 @@ abstract class ForgeAuthPlugin extends Plugin {
 	}
 
 	/**
-	 * Sets the session cookie according to the user in $this->saved_user
+	 * setSessionCookie - Sets the session cookie according to the user in $this->saved_user
 	 */
 	protected function setSessionCookie() {
 		if($this->saved_user) {
@@ -205,7 +205,7 @@ abstract class ForgeAuthPlugin extends Plugin {
 	}
 
 	/**
-	 * Start a new session for a user
+	 * startSession - Start a new session for a user
 	 *
 	 * @param	string	$username
 	 * @return	boolean

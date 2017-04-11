@@ -71,9 +71,8 @@ class Widget_TrackerDefaultActions extends Widget {
 				$img="mail16w.png";
 				$text=_('Monitor');
 			}
-			$i = 0;
 			$cells[][] = util_make_link('/tracker/?group_id='.$group_id.'&artifact_id='.$ah->getID().'&atid='.$ath->getID().'&func=monitor', html_e('strong', array(), html_image('ic/'.$img, 20, 20).' '.$text), array('id' => 'tracker-monitor', 'title' => util_html_secure(html_get_tooltip_description('monitor'))));
-			$return .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i++, true)), $cells);
+			$return .= $HTML->multiTableRow(array(), $cells);
 			$votes = $ah->getVotes();
 			if ($votes[1]) {
 				$cells = array();
@@ -89,12 +88,12 @@ class Widget_TrackerDefaultActions extends Widget {
 					$cellContent .= util_make_link('/tracker/?group_id='.$group_id.'&aid='.$ah->getID().'&atid='.$ath->getID().'&func='.$key, html_image('ic/'.$key.'.png', 16, 16), array('id' => 'tracker-vote', 'alt' => $txt, 'title' => util_html_secure(html_get_tooltip_description('vote'))));
 				}
 				$cells[][] = $cellContent;
-				$return .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i++, true)), $cells);
+				$return .= $HTML->multiTableRow(array(), $cells);
 			}
 			if (forge_check_perm('tracker', $atid, 'manager')) {
 				$cells = array();
 				$cells[][] = util_make_link('/tracker/?func=deleteartifact&aid='.$aid.'&group_id='.$group_id.'&atid='.$atid, $HTML->getDeletePic().html_e('strong', array(), _('Delete')));
-				$return .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i++, true)), $cells);
+				$return .= $HTML->multiTableRow(array(), $cells);
 			}
 			$return .= $HTML->listTableBottom();
 			return $return;

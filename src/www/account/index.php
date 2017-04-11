@@ -291,7 +291,7 @@ if (forge_get_config('use_shell')) {
 		if (is_array($sshKeysArray) && count($sshKeysArray)) {
 			$tabletop = array(_('Name'), _('Algorithm'), _('Fingerprint'), _('Uploaded'));
 			$classth = array('', '', '', '');
-			echo $HTML->listTableTop($tabletop, false, 'sortable_sshkeys_listlinks', 'sortable', $classth);
+			echo $HTML->listTableTop($tabletop, array(), 'sortable_sshkeys_listlinks', 'sortable', $classth);
 			foreach($sshKeysArray as $sshKey) {
 				$cells = array();
 				$cells[][] = $sshKey['name'];

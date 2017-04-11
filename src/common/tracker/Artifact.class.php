@@ -7,8 +7,8 @@
  * Copyright 2009, Roland Mas
  * Copyright (C) 2009-2013 Alain Peyrat, Alcatel-Lucent
  * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
- * Copyright 2014-2016, Franck Villaume - TrivialDev
- * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
+ * Copyright 2014-2017, Franck Villaume - TrivialDev
+ * Copyright 2016-2017, Stéphane-Eymeric Bredthauer - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -48,6 +48,7 @@
  * ALONE BASIS."
  */
 require_once $gfcommon.'include/FFObject.class.php';
+require_once $gfcommon.'tracker/ArtifactFile.class.php';
 require_once $gfcommon.'tracker/ArtifactMessage.class.php';
 require_once $gfcommon.'tracker/ArtifactExtraField.class.php';
 require_once $gfcommon.'tracker/ArtifactWorkflow.class.php';
@@ -191,7 +192,7 @@ class Artifact extends FFObject {
 	 *						array('user' => 127, 'time' => 1234556789, 'nopermcheck' => true, 'nonotice' => true)
 	 * @return	bool	id on success / false on failure.
 	 */
-	function create($summary, $details, $assigned_to=100, $priority=3, $extra_fields=array(), $importData = array()) {
+	function create($summary, $details, $assigned_to=100, $priority=3, $extra_fields = array(), $importData = array()) {
 		//
 		//	make sure this person has permission to add artifacts
 		//
@@ -654,9 +655,9 @@ class Artifact extends FFObject {
 	}
 
 	/**
-	 * getMonitorIds - array of email addresses monitoring this Artifact.
+	 * getMonitorIds - get user ids monitoring this Artifact.
 	 *
-	 * @return	array of email addresses monitoring this Artifact.
+	 * @return	array of user ids monitoring this Artifact.
 	 */
 	function getMonitorIds() {
 		$MonitorElementObject = new MonitorElement('artifact');
@@ -750,10 +751,10 @@ class Artifact extends FFObject {
 			$rows=db_numrows($res);
 			if ($rows > 0) {
 				for ($i=0; $i < $rows; $i++) {
-					$this->files[$i]=new ArtifactFile($this,db_fetch_array($res));
+					$this->files[$i] = new ArtifactFile($this, db_fetch_array($res));
 				}
 			} else {
-				$this->files=array();
+				$this->files = array();
 			}
 		}
 		return $this->files;
@@ -805,17 +806,17 @@ class Artifact extends FFObject {
 			$sendNotice = true;
 		}
 
-		if(array_key_exists('user', $importData)){
-				$user_id = $importData['user'];
-				$user = user_get_object($user_id);
-				if (!$user || !is_object($user)) {
-					$this->setError('Error: Logged In User But Could Not Get User Object');
-					return false;
-				}
-				$by=$user->getEmail();
+		if(array_key_exists('user', $importData)) {
+			$user_id = $importData['user'];
+			$user = user_get_object($user_id);
+			if (!$user || !is_object($user)) {
+				$this->setError('Error: Logged In User But Could Not Get User Object');
+				return false;
+			}
+			$by=$user->getEmail();
 		} else {
 			if (session_loggedin()) {
-				$user_id=user_getid();
+				$user_id = user_getid();
 				$user = user_get_object($user_id);
 				if (!$user || !is_object($user)) {
 					$this->setError('Error: Logged In User But Could Not Get User Object');
@@ -823,9 +824,9 @@ class Artifact extends FFObject {
 				}
 				//	we'll store this email even though it will likely never be used -
 				//	since we have their correct user_id, we can join the USERS table to get email
-				$by=$user->getEmail();
+				$by = $user->getEmail();
 			} else {
-				$user_id=100;
+				$user_id = 100;
 				if (!$by || !validate_email($by)) {
 					$this->setMissingParamsError();
 					return false;
@@ -837,12 +838,12 @@ class Artifact extends FFObject {
 		} else {
 			$time = time();
 		}
-		$res = db_query_params ('INSERT INTO artifact_message (artifact_id,submitted_by,from_email,adddate,body) VALUES ($1,$2,$3,$4,$5)',
+		$res = db_query_params('INSERT INTO artifact_message (artifact_id,submitted_by,from_email,adddate,body) VALUES ($1,$2,$3,$4,$5)',
 					array ($this->getID(),
 					       $user_id,
 					       $by,
 					       $time,
-					       htmlspecialchars($body))) ;
+					       htmlspecialchars($body)));
 
 		$this->updateLastModified($importData);
 
@@ -862,7 +863,7 @@ class Artifact extends FFObject {
 	 * @access	private
 	 * @return	boolean	success.
 	 */
-	function addHistory($field_name,$old_value, $importData = array()) {
+	function addHistory($field_name, $old_value, $importData = array()) {
 		if (array_key_exists('user', $importData)){
 			$user = $importData['user'];
 		} else {
@@ -878,7 +879,7 @@ class Artifact extends FFObject {
 					       $field_name,
 					       $old_value,
 					       $user,
-					       $time)) ;
+					       $time));
 	}
 
 	/**
@@ -935,7 +936,7 @@ class Artifact extends FFObject {
 	 */
 	function update($priority,$status_id,
 		$assigned_to,$summary,$canned_response,$details,$new_artifact_type_id,
-		$extra_fields=array(), $description='', $importData=array()) {
+		$extra_fields = array(), $description='', $importData = array()) {
 
 		if (array_key_exists('user', $importData)){
 			$user = $importData['user'];
@@ -1168,7 +1169,7 @@ class Artifact extends FFObject {
 			if ($status_id != 1) {
 				$qpa = db_construct_qpa($qpa, ' close_date=$1,', array($time));
 			} else {
-			  $qpa = db_construct_qpa($qpa, ' close_date=$1,', array(0));
+				$qpa = db_construct_qpa($qpa, ' close_date=$1,', array(0));
 			}
 			$this->addHistory('close_date', $this->getCloseDate(), $importData);
 		}
@@ -1240,7 +1241,7 @@ class Artifact extends FFObject {
 		*/
 		if ($canned_response != 100) {
 			//don't care if this response is for this group - could be hacked
-			$acr=new ArtifactCanned($this->ArtifactType,$canned_response);
+			$acr = new ArtifactCanned($this->ArtifactType,$canned_response);
 			if (!$acr || !is_object($acr)) {
 				$this->setError(_('Could Not Create Canned Response Object'));
 			} elseif ($acr->isError()) {
@@ -1285,7 +1286,7 @@ class Artifact extends FFObject {
 	 * @return	bool	true on success / false on failure
 	 */
 	function updateLastModified($importData = array()) {
-		if (array_key_exists('time',$importData)){
+		if (array_key_exists('time', $importData)){
 			$time = $importData['time'];
 		} else {
 			$time = time();
@@ -1360,7 +1361,7 @@ class Artifact extends FFObject {
 
 		//get a list of extra fields for this artifact_type
 		$ef = $this->ArtifactType->getExtraFields();
-		$efk=array_keys($ef);
+		$efk = array_keys($ef);
 
 		if (empty($extra_fields) && empty($ef)) {
 			return true;
@@ -1382,7 +1383,7 @@ class Artifact extends FFObject {
 							$efid));
 					$from_status = (db_numrows($res)>0) ? db_result($res,0,'field_data') : 100;
 					$to_status = $extra_fields[$efid];
-						if ($from_status != $to_status) {
+					if ($from_status != $to_status) {
 						$status_changed = true;
 						$atw = new ArtifactWorkflow($this->ArtifactType, $efid);
 						if (!$atw->checkEvent($from_status, $to_status)) {
@@ -1498,7 +1499,7 @@ class Artifact extends FFObject {
 				if (($type == ARTIFACT_EXTRAFIELDTYPE_SELECT) || ($type == ARTIFACT_EXTRAFIELDTYPE_RADIO)) {
 					$extra_fields[$efid]='100';
 				} elseif (($type == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT) || ($type == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX)) {
-					$extra_fields[$efid]=array('100');
+					$extra_fields[$efid] = array('100');
 				} else {
 					db_query_params ('DELETE FROM artifact_extra_field_data WHERE artifact_id=$1 AND extra_field_id=$2',
 								   array ($this->getID(),
@@ -1628,7 +1629,7 @@ class Artifact extends FFObject {
 				$type=$ef[$efid]['field_type'];
 				//special treatment for DATETIME
 				if ($type == ARTIFACT_EXTRAFIELDTYPE_DATETIME && $extra_fields[$efid]!='' ) {
-					$dateTime = DateTime::createFromFormat('Y-m-d H:i', $extra_fields[$efid]);
+					$dateTime = DateTime::createFromFormat(_('Y-m-d H:i'), $extra_fields[$efid]);
 					$extra_fields[$efid] = $dateTime->format('U');
 				}
 				//determine the type of field and whether it should have multiple rows supporting it
@@ -1725,7 +1726,7 @@ class Artifact extends FFObject {
 		$monitor_ids = array();
 
 		if (!$changes) {
-			$changes=array();
+			$changes = array();
 		}
 
 		$sess = session_get_user();
@@ -1853,9 +1854,7 @@ class Artifact extends FFObject {
 		}
 
 		$body .= "\n\nYou can respond by visiting: ".
-			"\n".util_make_url ('/tracker/?func=detail&atid='. $this->ArtifactType->getID() .
-					    "&aid=". $this->getID() .
-					    "&group_id=". $this->ArtifactType->Group->getID());
+			"\n".$this->getPermalink();
 
 		//only send if some recipients were found
 		if (count($emails) < 1 && count($monitor_ids) < 1) {
@@ -1863,9 +1862,9 @@ class Artifact extends FFObject {
 		}
 
 		if (count($monitor_ids) < 1) {
-			$monitor_ids=array();
+			$monitor_ids = array();
 		} else {
-			$monitor_ids=array_unique($monitor_ids);
+			$monitor_ids = array_unique($monitor_ids);
 		}
 
 		$from = $this->ArtifactType->getReturnEmailAddress();
@@ -1921,6 +1920,9 @@ class Artifact extends FFObject {
 				case ARTIFACT_EXTRAFIELDTYPE_TEXTAREA:
 				case ARTIFACT_EXTRAFIELDTYPE_RELATION:
 				case ARTIFACT_EXTRAFIELDTYPE_INTEGER:
+				case ARTIFACT_EXTRAFIELDTYPE_DATE:
+				case ARTIFACT_EXTRAFIELDTYPE_DATETIME:
+				case ARTIFACT_EXTRAFIELDTYPE_EFFORT:
 					if (isset($efd[$efid])) {
 						$value = $efd[$efid];
 					} else {
@@ -1994,11 +1996,11 @@ class Artifact extends FFObject {
 		return (db_numrows($res) == 1);
 	}
 
-       /**
-        * getVotes - get number of valid cast and potential votes
-        *
-        * @return	array	(votes, voters, percent)
-        */
+	/**
+	 * getVotes - get number of valid cast and potential votes
+	 *
+	 * @return	array	(votes, voters, percent)
+	 */
 	function getVotes() {
 		if ($this->votes !== false) {
 			return $this->votes;
@@ -2039,9 +2041,9 @@ class Artifact extends FFObject {
 					AND (field_data = $1 OR field_data LIKE $2 OR field_data LIKE $3 OR field_data LIKE $4)
 					ORDER BY artifact_group_list.group_id ASC, name ASC, artifact.artifact_id ASC',
 					array($aid,
-					      "$aid %",
-					      "% $aid %",
-					      "% $aid"));
+						"$aid %",
+						"% $aid %",
+						"% $aid"));
 		if (db_numrows($res)>0) {
 			return true;
 		}
@@ -2070,13 +2072,13 @@ class ArtifactComparator {
 			}
 			break ;
 		case 'assigned_to':
-			$namecmp = strcoll ($a->getAssignedRealName(),$b->getAssignedRealName()) ;
+			$namecmp = strcoll($a->getAssignedRealName(),$b->getAssignedRealName());
 			if ($namecmp != 0) {
 				return $namecmp ;
 			}
 			break ;
 		case 'submitted_by':
-			$namecmp = strcoll ($a->getSubmittedRealName(),$b->getSubmittedRealName()) ;
+			$namecmp = strcoll($a->getSubmittedRealName(),$b->getSubmittedRealName());
 			if ($namecmp != 0) {
 				return $namecmp ;
 			}
@@ -2138,7 +2140,18 @@ class ArtifactComparator {
 			}
 			$af=$aa[$criterion]['value'];
 			$bf=$ba[$criterion]['value'];
-			$namecmp = strcoll ($af,$bf) ;
+			switch ($aa[$criterion]['type']) {
+				case ARTIFACT_EXTRAFIELDTYPE_EFFORT:
+					$namecmp = intval($af)-intval($bf);
+					break;
+				case ARTIFACT_EXTRAFIELDTYPE_INTEGER:
+				case ARTIFACT_EXTRAFIELDTYPE_DATE:
+				case ARTIFACT_EXTRAFIELDTYPE_DATETIME:
+					$namecmp = $af-$bf;
+					break;
+				default:
+					$namecmp = strcoll ($af,$bf);
+			}
 			if ($namecmp != 0) {
 				return $namecmp ;
 			}

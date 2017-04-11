@@ -200,7 +200,7 @@ for ($i=0; $i<count($keys); $i++) {
 				} else {
 					$txt='';
 				}
-				echo '<tr '. $HTML->boxGetAltRowStyle($j++) . '>
+				echo '<tr>
 				<td style="padding-left: 4em;">'.$rbac_edit_section_names[$keys[$i]].'</td>
 				<td>'.db_result($res,$q,'forum_name').'</td>
 				<td>'.html_build_select_box_from_assoc(
@@ -219,7 +219,7 @@ for ($i=0; $i<count($keys); $i++) {
 			FROM project_group_list WHERE group_id=$1',
 			array($group_id));
 		for ($q=0; $q<db_numrows($res); $q++) {
-			echo '<tr '. $HTML->boxGetAltRowStyle($j++) . '>
+			echo '<tr>
 			<td style="padding-left: 4em;">'.$rbac_edit_section_names[$keys[$i]].'</td>
 			<td>'.db_result($res,$q,'project_name').'</td>
 			<td>'.html_build_select_box_from_assoc(
@@ -254,7 +254,7 @@ for ($i=0; $i<count($keys); $i++) {
 				} else {
 					$txt='';
 				}
-				echo '<tr '. $HTML->boxGetAltRowStyle($j++) . '>
+				echo '<tr>
 				<td style="padding-left: 4em;">'.$rbac_edit_section_names[$keys[$i]].'</td>
 				<td>'.db_result($res,$q,'name').'</td>
 				<td>'.html_build_select_box_from_assoc(
@@ -279,13 +279,13 @@ for ($i=0; $i<count($keys); $i++) {
 									$role->getVal($keys[$i],db_result($res,$q,'package_id')),
 									false,
 									false);
-			echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($j++, true)), $cells);
+			echo $HTML->multiTableRow(array(), $cells);
 		}
 //
 //	Handle all other settings for all roles
 //
 	} else {
-		echo '<tr '. $HTML->boxGetAltRowStyle($j++) . '>
+		echo '<tr>
 		<td colspan="2"><strong>'.$rbac_edit_section_names[$keys[$i]].'</strong></td>
 		<td>';
 		echo html_build_select_box_from_assoc($role->getRoleVals($keys[$i]), "data[".$keys[$i]."][$group_id]", $role->getVal($keys[$i],$group_id), false, false ) ;

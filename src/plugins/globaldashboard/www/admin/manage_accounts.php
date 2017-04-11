@@ -87,7 +87,7 @@ function listStoredRemoteAccounts($user_id) {
 			$cells[][] = util_make_link($account['forge_account_uri'], $account['forge_account_uri'], array(), true);
 			$cells[][] = util_make_link('/plugins/globaldashboard/admin/edit_account_page.php?type=user&id='.$user_id.'&pluginname=globaldashboard&action=edit&account_id='.$account['account_id'], _('Edit'), array()).
 					util_make_link('/plugins/globaldashboard/admin/delete_account.php?account_id='.$account['account_id'].'&user_id='.$account['user_id'], _('Delete'), array());
-			$html .= $HTML->multitableRow(array('class' => $HTML->boxGetAltRowStyle($i++, true)), $cells);
+			$html .= $HTML->multitableRow(array(), $cells);
 		}
 		$html .= $HTML->listTableBottom();
 		echo $html;

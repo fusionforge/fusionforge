@@ -102,7 +102,7 @@ class UserCompactResource extends CompactResource {
 
 		$url = util_make_link($resource_url, $link_text, array('class' => $css_class), true);
 		if ($logo_params['content']) {
-			$html = $logo_params['content'] . $url .'<div class="new_line"></div>';
+			$html = $logo_params['content'].$url;
 		} else {
 			$html = $url;
 		}

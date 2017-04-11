@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2016, Franck Villaume - TrivialDev
+ * Copyright 2016-2017, Franck Villaume - TrivialDev
  * This file is a part of Fusionforge.
  *
  * Fusionforge is free software; you can redistribute it and/or modify
@@ -69,7 +69,6 @@ class Widget_HomeDetailActivityMostActiveProjectWeek extends Widget {
 			usort($activities, 'Widget_HomeDetailActivityMostActiveProjectWeek::date_compare');
 			$displayTableTop = 0;
 			$last_day = 0;
-			$j = 0;
 			foreach ($activities as $activity) {
 				$docmanerror = 0;
 				if (!$this->check_perm_for_activity($activity)) {
@@ -92,13 +91,13 @@ class Widget_HomeDetailActivityMostActiveProjectWeek extends Widget {
 						break;
 					}
 					case 'trackeropen': {
-						$icon = html_image('ic/tracker20g.png','','',array('alt'=>_('Trackers')));
-						$url = util_make_link('/tracker/?func=detail&atid='.$activity['ref_id'].'&aid='.$activity['subref_id'].'&group_id='.$activity['group_id'],_('Tracker Item').' [#'.$activity['subref_id'].'] '.$activity['description'].' '._('Opened'));
+						$icon = $HTML->getOpenTicketPic(_('Tracker Open'), 'trackeropen');
+						$url = util_make_link('/tracker/a_follow.php/'.$activity['subref_id'],_('Tracker Item').' [#'.$activity['subref_id'].'] '.$activity['description'].' '._('Open'));
 						break;
 					}
 					case 'trackerclose': {
-						$icon = html_image('ic/tracker20g.png','','',array('alt'=>_('Trackers')));
-						$url = util_make_link('/tracker/?func=detail&atid='.$activity['ref_id'].'&aid='.$activity['subref_id'].'&group_id='.$activity['group_id'],_('Tracker Item').' [#'.$activity['subref_id'].'] '.$activity['description'].' '._('Closed'));
+						$icon = $HTML->getClosedTicketPic(_('Tracker Closed'), 'trackerclose');
+						$url = util_make_link('/tracker/a_follow.php/'.$activity['subref_id'],_('Tracker Item').' [#'.$activity['subref_id'].'] '.$activity['description'].' '._('Closed'));
 						break;
 					}
 					case 'frsrelease': {
@@ -120,7 +119,7 @@ class Widget_HomeDetailActivityMostActiveProjectWeek extends Widget {
 					case 'taskclose':
 					case 'taskdelete': {
 						$icon = html_image('ic/taskman20w.png','','',array('alt'=>_('Tasks')));
-						$url = util_make_link('/pm/task.php?func=detailtask&project_task_id='.$activity['subref_id'].'&group_id='.$activity['group_id'].'&group_project_id='.$activity['ref_id'],_('Tasks').' '.$activity['description']);
+						$url = util_make_link('/pm/t_follow.php/'.$activity['subref_id'],_('Tasks').' '.$activity['description']);
 						break;
 					}
 					case 'docmannew':
@@ -135,7 +134,7 @@ class Widget_HomeDetailActivityMostActiveProjectWeek extends Widget {
 							$docmanerror = 1;
 						}
 						$icon = html_image('ic/docman16b.png', '', '', array('alt'=>_('Documents')));
-						$url = util_make_link('docman/?group_id='.$activity['group_id'].'&view=listfile&dirid='.$activity['ref_id'],_('Document').' '.$activity['description']);
+						$url = util_make_link($document->getPermalink(),_('Document').' '.$activity['description']);
 						break;
 					}
 					case 'docgroupnew': {
@@ -172,7 +171,7 @@ class Widget_HomeDetailActivityMostActiveProjectWeek extends Widget {
 				} else {
 					$cells[][] = $activity['realname'];
 				}
-				echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($j++, true)), $cells);
+				echo $HTML->multiTableRow(array(), $cells);
 			}
 			if ($displayTableTop) {
 				echo $HTML->listTableBottom();

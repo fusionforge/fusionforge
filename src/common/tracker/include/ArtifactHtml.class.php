@@ -5,7 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2015-2016, Franck Villaume - TrivialDev
+ * Copyright 2015-2017, Franck Villaume - TrivialDev
  * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
@@ -53,8 +53,8 @@ class ArtifactHtml extends Artifact {
 			$title_arr[] = _('Detailed description');
 		}
 		$return .= $HTML->listTableTop($title_arr);
-		$return .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle(0, true), 'id' => 'editdescription', 'style' => 'display:none'), array(array(html_e('textarea', array_merge($editattrs, array('id' => 'tracker-description', 'required' => 'required', 'name' => 'description', 'rows' => 20, 'style' => 'box-sizing: box-border; width: 99%;', 'title' => util_html_secure(html_get_tooltip_description('description')))), $result), 'style' => 'display: block; box-sizing:border-box;')));
-		$return .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle(0, true), 'id' => 'showdescription'), array(array($result_html)));
+		$return .= $HTML->multiTableRow(array('id' => 'editdescription', 'style' => 'display:none'), array(array(html_e('textarea', array_merge($editattrs, array('id' => 'tracker-description', 'required' => 'required', 'name' => 'description', 'rows' => 20, 'style' => 'box-sizing: box-border; width: 99%;', 'title' => util_html_secure(html_get_tooltip_description('description')))), $result), 'style' => 'display: block; box-sizing:border-box;')));
+		$return .= $HTML->multiTableRow(array('id' => 'showdescription'), array(array($result_html)));
 		$return .= $HTML->listTableBottom();
 		return $return;
 	}
@@ -94,14 +94,8 @@ function hide_edit_button(id) {
 }
 /* ]]> */</script>';
 			$return .= '<img style="display: none;" id="img_order" src="" alt="" />';
-			$return .= '<table class="listing full" id="messages_list">
-<thead>
-<tr>
-<th>
-<a name="sort" href="#sort" class="sortheader" onclick="thead = true;ts_resortTable(this, 0);submitOrder();return false;">'._('Message').'<span id="order_span" sortdir="'.$order.'" class="sortarrow">&nbsp;&nbsp;<img src="/images/sort_'.$img_order.'.gif" alt="'.$char_order.'" /></span></a></th>
-</tr>
-</thead>
-<tbody>';
+			$thArray = array('<a name="sort" href="#sort" class="sortheader" onclick="thead = true;ts_resortTable(this, 0);submitOrder();return false;">'._('Message').'<span id="order_span" sortdir="'.$order.'" class="sortarrow">&nbsp;&nbsp;<img src="/images/sort_'.$img_order.'.gif" alt="'.$char_order.'" /></span></a>');
+			$return .= $HTML->listTableTop($thArray, array(), 'listing full sortable', 'messages_list');
 
 			for ($i=0; $i < $rows; $i++) {
 				$return .= '<tr onmouseover="show_edit_button(\'edit_bt_'.$i.'\')" onmouseout="hide_edit_button(\'edit_bt_'.$i.'\')" ><td>';
@@ -131,7 +125,7 @@ function hide_edit_button(id) {
 				$return .= '</td></tr>';
 			}
 
-			$return .= '</tbody></table>';
+			$return .= $HTML->listTableBottom();
 
 		} else {
 			$return .= $HTML->information(_('No Comments Have Been Posted'));
@@ -161,7 +155,7 @@ function hide_edit_button(id) {
 			for ($i=0; $i < $rows; $i++) {
 				$field=db_result($result, $i, 'field_name');
 				$return .= '
-				<tr '. $HTML->boxGetAltRowStyle($i) .'><td>'.$field.'</td><td>';
+				<tr><td>'.$field.'</td><td>';
 
 				if ($field == 'status_id') {
 

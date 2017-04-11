@@ -58,9 +58,8 @@ class NewsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$rowsCount = count($result);
 
 		$return = '';
-		$i = 0;
 		foreach ($result as $row) {
-			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'
+			$return .= '<tr>'
 				. '<td><a href="'.util_make_url ('/forum/forum.php?forum_id='. $row['forum_id']).'">'
 				. html_image('ic/msg.png', 10, 12)
 				. ' '.$row['summary'].'</a></td>

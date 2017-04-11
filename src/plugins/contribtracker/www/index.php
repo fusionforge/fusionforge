@@ -111,7 +111,7 @@ if ($group_id) {
 		$contribs = $plugin->getContributionsByGroup ($group);
 
 		if (count ($contribs) == 0) {
-			print '<h1>'._('No contributions').'</h1>';
+			print '<h2>'._('No contributions').'</h2>';
 			print _('No contributions have been recorded for this project yet.');
 		} else {
 			foreach ($contribs as $c) {
@@ -179,10 +179,10 @@ if ($group_id) {
 	$contribs = $plugin->getContributions ();
 
 	if (count ($contribs) == 0) {
-		print '<h1>'._('No contributions').'</h1>';
+		print '<h2>'._('No contributions').'</h2>';
 		print _('No contributions have been recorded yet.');
 	} else {
-		print '<h1>'._('Latest contributions').'</h1>';
+		print '<h2>'._('Latest contributions').'</h2>';
 
 		$i = 1;
 		foreach ($contribs as $c) {

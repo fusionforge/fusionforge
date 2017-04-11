@@ -58,7 +58,7 @@ foreach ($elearray as $e) {
 	$name[ $e['element_id'] ] = $e['element_name'];
 }
 
-$title = sprintf(_('Configuring required files for the transitions from %1$s to %2$s'), $name[$from], $name[$next]);
+$title = sprintf(_('Configuring required fields for the transitions from %1$s to %2$s'), $name[$from], $name[$next]);
 $ath->adminHeader(array('title'=>$title,
 	'pagename'=>'tracker_admin_customize_liste',
 	'titlevals'=>array($ath->getName())));
@@ -76,19 +76,22 @@ $extra_fields = $ath->getExtraFields() ;
 foreach ($extra_fields as $key => $row) {
 	$extra_fields_names[$key] = $row['field_name'];
 }
-array_multisort($extra_fields_names, SORT_ASC, SORT_LOCALE_STRING | SORT_FLAG_CASE, $extra_fields);
+// PHP5.3 compatibility - SORT_FLAG_CASE only since PHP5.4
+$sort_flags = defined('SORT_FLAG_CASE')? SORT_LOCALE_STRING | SORT_FLAG_CASE : SORT_LOCALE_STRING;
+array_multisort($extra_fields_names, SORT_ASC, $sort_flags, $extra_fields);
 
 foreach ($extra_fields as $field) {
 	if ($field['field_type'] != ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 		$value = in_array($field['extra_field_id'], $requiredFields)? ' checked="checked"' : '';
-		$str = '<input type="checkbox" name="extrafield['.$field['extra_field_id'].']"'.$value.' />';
-		$str .= ' '.$field['field_name'];
-		echo $str."<br />\n";
+		echo '<input type="checkbox" id="extrafield['.$field['extra_field_id'].']" name="extrafield['.$field['extra_field_id'].']"'.$value.' />';
+		echo '<label for="extrafield['.$field['extra_field_id'].']">'.$field['field_name'].'</label>';
+		echo "<br />\n";
 	}
 }
 ?>
 <p>
-<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
+<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" />
+</p>
 <?php
 echo $HTML->closeForm();
 $ath->footer();

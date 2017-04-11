@@ -71,7 +71,7 @@ class TasksHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 				$lastProjectName = $currentProjectName;
 				$rowColor = 0;
 			}
-			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($rowColor) .'>'
+			$return .= '<tr>'
 						. ' <td style="width: 5%">&nbsp;</td>'
 						. ' <td>'.$row['project_task_id'].'</td>'
 						. ' <td>'

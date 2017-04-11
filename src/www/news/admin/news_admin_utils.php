@@ -36,7 +36,7 @@ function show_news_approve_form($qpa_pending, $qpa_rejected, $qpa_approved, $for
 	function show_news_item($row, $i, $approved, $selectable, $form_url) {
 		global $HTML;
 
-		echo '<tr '. $HTML->boxGetAltRowStyle($i) . '><td>';
+		echo '<tr><td>';
 		if ($selectable) {
 			echo '<input type="checkbox" '
 			.'name="news_id[]" value="'

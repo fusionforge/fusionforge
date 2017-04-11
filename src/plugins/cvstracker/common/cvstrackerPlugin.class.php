@@ -69,11 +69,11 @@ class cvstrackerPlugin extends Plugin {
 			echo '<h4>'._('Links to related CVS commits').':</h4>';
 
 			$title_arr=$this->getTitleArr();
-			echo $GLOBALS['HTML']->listTableTop ($title_arr);
+			echo $GLOBALS['HTML']->listTableTop($title_arr);
 
 			for ($i=0; $i<$Rows; $i++) {
 				$Row = db_fetch_array($DBResult);
-				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
+				echo '<tr>'.
 				'<td>'. $this->getFileLink($group->getUnixName(),
 						$Row['file'],$Row['actual_version']). '</td>'.
 				'<td>'. date(_('Y-m-d'), $Row['cvs_date']).'</td>'.
@@ -118,7 +118,7 @@ class cvstrackerPlugin extends Plugin {
 	* Return a link to the File in cvsweb
 	*
 	* @param    String  $GroupName is the Name of the project
-	* @param    String  $FileName  is the FileName ( with path )
+	* @param    String  $FileName  is the FileName (with path)
 	*
 	* @return   String  The string containing a link to the File in the cvsweb
 	*
@@ -133,7 +133,7 @@ class cvstrackerPlugin extends Plugin {
 	* Return a link to the File in cvsweb in the specified Version
 	*
 	* @param    String  $GroupName is the Name of the project
-	* @param    String  $FileName  is the FileName ( with path )
+	* @param    String  $FileName  is the FileName (with path)
 	* @param    String  $Version   the version to retrieve
 	*
 	* @return   String  The string containing a link to the File in the cvsweb
@@ -150,7 +150,7 @@ class cvstrackerPlugin extends Plugin {
 	* Return a link to the diff between two versions of a File in cvsweb
 	*
 	* @param    String  $GroupName is the Name of the project
-	* @param    String  $FileName  is the FileName ( with path )
+	* @param    String  $FileName  is the FileName (with path)
 	* @param    String  $PrevVersion   First version to retrieve
 	* @param    String  $ActualVersion Second version to retrieve
 	*
@@ -176,10 +176,10 @@ class cvstrackerPlugin extends Plugin {
 		$FOut = fopen($path, "a");
 		if($FOut) {
 			fwrite($FOut, "# BEGIN added by gforge-plugin-cvstracker\n");
-			if ( $cvs_binary_version == "1.12" ) {
+			if ($cvs_binary_version == "1.12") {
 				$Line = "ALL ( php -q -d include_path=".ini_get('include_path')." ".forge_get_config('plugins_path')."/cvstracker/bin/post.php %r %p %{sVv} )\n";
 			}
-			if ( $cvs_binary_version == "1.11") {
+			if ($cvs_binary_version == "1.11") {
 				$Line = "ALL ( php -q -d include_path=".ini_get('include_path')." ".forge_get_config('plugins_path')."/cvstracker/bin/post.php ".$group->getUnixName()." %{sVv} )\n";
 			}
 			fwrite($FOut,$Line);
@@ -198,7 +198,7 @@ class cvstrackerPlugin extends Plugin {
 		$cvs_binary_version = get_cvs_binary_version();
 		$array=array();
 		$array[]="# BEGIN added by gforge-plugin-cvstracker\n";
-		if ( $cvs_binary_version == "1.11" ) {
+		if ($cvs_binary_version == "1.11") {
 				$array[] = "ALL ( php -q -d include_path=".ini_get('include_path')." ".forge_get_config('plugins_path')."/cvstracker/bin/post.php ".$group->getUnixName()." %{sVv} )\n";
 		}else { //it's version 1.12
 			$array[] = "ALL ( php -q -d include_path=".ini_get('include_path')." ".forge_get_config('plugins_path')."/cvstracker/bin/post.php %r %p %{sVv} )\n";
@@ -288,8 +288,8 @@ class cvstrackerPlugin extends Plugin {
 							preg_match("/cvstracker/",$Line)) {
 								$LineFound = TRUE;
 							}
-				 	}
-				 	fclose($FIn);
+					}
+					fclose($FIn);
 				}
 				if($LineFound == FALSE) {
 					$this->addCvsTrackerToFile($Group, $newfile);

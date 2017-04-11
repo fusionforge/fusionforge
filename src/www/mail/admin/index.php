@@ -164,11 +164,11 @@ if ($group_id) {
 			for ($j = 0; $j < $mlCount; $j++) {
 				$currentList =& $mlArray[$j];
 				if ($currentList->isError()) {
-					echo '<tr '. $HTML->boxGetAltRowStyle($j) . '><td>';
+					echo '<tr><td>';
 					echo $currentList->getErrorMessage();
 					echo '</td></tr>';
 				} else {
-					echo '<tr '. $HTML->boxGetAltRowStyle($j) . '><td>'.$currentList->getName().'</td></tr>';
+					echo '<tr><td>'.$currentList->getName().'</td></tr>';
 				}
 			}
 			echo $HTML->listTableBottom();
@@ -273,11 +273,11 @@ if ($group_id) {
 			for ($i = 0; $i < $mlCount; $i++) {
 				$currentList =& $mlArray[$i];
 				if ($currentList->isError()) {
-					echo '<tr '. $HTML->boxGetAltRowStyle($i) .'><td colspan="4">';
+					echo '<tr><td colspan="4">';
 					echo $currentList->getErrorMessage();
 					echo '</td></tr>';
 				} else {
-					echo '<tr '. $HTML->boxGetAltRowStyle($i) . '><td>'.
+					echo '<tr><td>'.
 					'<strong>'.$currentList->getName().'</strong><br />'.
 					htmlspecialchars($currentList->getDescription()).'</td>';
 					echo '<td class="align-center">';

@@ -2,7 +2,7 @@
 /**
  *
  * Expression - PHP Class to safely evaluate math expressions
- * 
+ *
  * Copyright 2005 Miles Kaufmann <http://www.twmagic.com/>
  * Copyright 2012 - 2015 Johan Falk <http://magisterfalk.wordpress.com/>
  * Copyright 2015 Colin Kiegel <http://colin-kiegel.github.io/>
@@ -98,7 +98,7 @@ class Expression {
 			'cos', 'cosh', 'arccos', 'acos', 'arccosh', 'acosh',
 			'tan', 'tanh', 'arctan', 'atan', 'arctanh', 'atanh',
 			'sqrt', 'abs', 'ln', 'log');
-	var $functions = array (); // function defined outside of Expression as closures
+	var $functions = array (); // function defined outside of Expression
 	function __construct() {
 		// make the variables a little more accurate
 		$this->v ['pi'] = pi ();
@@ -149,7 +149,7 @@ class Expression {
 			}
 			$this->f [$fnn] = array (
 					'args' => $args,
-					'func' => $stack 
+					'func' => $stack
 			);
 			return true;
 			// ===============
@@ -178,16 +178,16 @@ class Expression {
 		$index = 0;
 		$stack = new ExpressionStack ();
 		$output = array (); // postfix form of expression, to be passed to pfx()
-		$expr = trim ( strtolower ( $expr ) );
+		$expr = trim ($expr);
 		
 		$ops = array ('+', '-', '*', '/', '^', '_', '%', '>', '<', '>=', '<=', '==', '!=', '=~', '&&', '||', '!', '?', ':', '?:');
 		$ops_r = array ('+' => 0, '-' => 0, '*' => 0, '/' => 0, '^' => 1, '_' => 0, '%' => 0, '>' => 0, '<' => 0, '>=' => 0, '<=' => 0, '==' => 0, '!=' => 0, '=~' => 0, '&&' => 0, '||' => 0, '!' => 0, '?' => 1, ':' => 0, '?:' => 0); // right-associative operator?
 		// $ops_p = array('+'=>4,'-'=>4,'*'=>4,'/'=>4,'_'=>4,'%'=>4,'^'=>5,'>'=>2,'<'=>2,
 		// '>='=>2,'<='=>2,'=='=>2,'!='=>2,'=~'=>2,'&&'=>1,'||'=>1,'!'=>5); // operator precedence
 		$ops_p = array (
-				':' => 0, ':?' => 0,
+				':' => 0, '?:' => 0,
 				'?' => 1,
-				'&&' => 2, '||' => 2, 
+				'&&' => 2, '||' => 2,
 				'>' => 3, '<' => 3, '>=' => 3, '<=' => 3, '==' => 3, '!=' => 3, '=~' => 3,
 				'+' => 4, '-' => 4,
 				'*' => 5, '/' => 5, '_' => 5, '%' => 5,
@@ -202,7 +202,6 @@ class Expression {
 		 * }
 		 */
 		$first_argument = false;
-		$ternary = false;
 		while ( 1 ) { // 1 Infinite Loop ;)
 			$op = substr ( $expr, $index, 2 ); // get the first two characters at the current index
 			if (preg_match ( "/^[+\-*\/^_\"<>=%(){\[!~,?:](?!=|~)/", $op ) || preg_match ( "/\w/", $op )) {
@@ -242,9 +241,9 @@ class Expression {
 				// heart of the algorithm:
 				$o2 = $stack->last ();
 				while ( $stack->count > 0 and ($o2 = $stack->last ()) and in_array ( $o2, $ops ) and ($ops_r [$op] ? $ops_p [$op] < $ops_p [$o2] : $ops_p [$op] <= $ops_p [$o2]) ) {
-					$val = $stack->pop ();
-					if ($val != '?') {
-						$output [] = $val; // pop stuff off the stack into the output
+					$pop = $stack->pop ();
+					if ($pop != '?') {
+						$output [] = $pop; // pop stuff off the stack into the output
 					} else {
 						$op = '?:';
 						break;	
@@ -269,8 +268,8 @@ class Expression {
 				if (preg_match ( "/^([a-z]\w*)\($/", $stack->last ( 2 ), $matches )) { // did we just close a function?
 					$fnn = $matches [1]; // get the function name
 					$arg_count = $stack->pop (); // see how many arguments there were (cleverly stored on the stack, thank you)
-					$val = $stack->pop();
-					$output [] = $val; // pop the function and push onto the output
+					$pop = $stack->pop();
+					$output [] = $pop; // pop the function and push onto the output
 					if (in_array ( $fnn, $this->fb )) { // check the argument count
 						if ($arg_count > 1) {
 							return $this->trigger ( "too many arguments ($arg_count given, 1 expected)" );
@@ -306,8 +305,8 @@ class Expression {
 				if ($first_argument) {
 					$first_argument = false;
 				} else {
-					$val = $stack->pop ();
-					$stack->push ( $val + 1 ); // increment the argument count
+					$pop = $stack->pop ();
+					$stack->push ( $pop + 1 ); // increment the argument count
 				}
 				$stack->push ( '(' ); // put the ( back on, we'll need to pop back to it again
 				$index ++;
@@ -348,8 +347,8 @@ class Expression {
 						if (! preg_match ( "/^([a-z]\w*)\($/", $stack->last ( 2 ), $matches )) {
 							return $this->trigger ( "unexpected error" );
 						}
-						$val = $stack->pop ();
-						$stack->push ( $val + 1 ); // increment the argument count
+						$pop = $stack->pop ();
+						$stack->push ( $pop + 1 ); // increment the argument count
 						$stack->push ( '(' ); // put the ( back on, we'll need to pop back to it again
 					}
 				}
@@ -519,12 +518,13 @@ class Expression {
 						}
 						$args [] = $stack->pop ();
 					}
+					$args = array_reverse($args);
 					$stack->push ( $reflection->invokeArgs ( $args ) );
 				}
 				// if the token is a number or variable, push it on the stack
 			} else {
 				if (preg_match ( '/^([\[{](?>"(?:[^"]|\\")*"|[^[{\]}]|(?1))*[\]}])$/', $token ) || preg_match ( "/^(null|true|false)$/", $token )) { // json
-				                                               // return $this->trigger("invalid json " . $token);
+					// return $this->trigger("invalid json " . $token);
 					if ($token == 'null') {
 						$value = null;
 					} elseif ($token == 'true') {

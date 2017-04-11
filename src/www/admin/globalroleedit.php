@@ -224,7 +224,7 @@ for ($i=0; $i<count($keys); $i++) {
 	$cells = array();
 	$cells[] = array('<strong>'.$rbac_edit_section_names[$keys[$i]].'</strong>', 'colspan' => 2);
 	$cells[][] = html_build_select_box_from_assoc($role->getRoleVals($keys[$i]), "data[".$keys[$i]."][-1]", $role->getVal($keys[$i],-1), false, false );
-	echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
+	echo $HTML->multiTableRow(array(), $cells);
 }
 echo $HTML->listTableBottom();
 

@@ -60,8 +60,7 @@ if (getStringFromRequest('sig') != '') {
 			} else {
 				$feedback = _('The IdP has confirmed that you own this WebID. It is now bound to your account.');
 			}
-		}
-		else {
+		} else {
 			// or it's the first time we went to the IdP, and we wait until the confirmation of the binding to really use it
 			$error_msg = $plugin->addStoredPendingWebID($u->getID(), $webid_identity);
 			if ($error_msg) {
@@ -90,79 +89,75 @@ $title = sprintf(_('Manage WebID identities for user %s'), $u->getUnixName());
 site_user_header(array('title'=>$title));
 
 echo $HTML->boxTop(_('My WebID identities'));
-
+echo html_e('h2', array(), _('Bind a new WebID'));
 ?>
-	<h2><?php echo _('Bind a new WebID'); ?></h2>
+<p><?php
 
-		<p><?php
+	echo _('You can add your own WebID identities in the form below.') . '<br />';
+	echo _('Once you have confirmed their binding to your fusionforge account, you may use them to login.') ?></p>
 
-			echo _('You can add your own WebID identities in the form below.') . '<br />';
-			echo _('Once you have confirmed their binding to your fusionforge account, you may use them to login.') ?></p>
+<?php
+// display a table of WebIDs pending binding
+$pendingwebids = $plugin->getStoredPendingWebIDs($u->getID());
+if( count($pendingwebids) ) {
+	echo $HTML->listTableTop(array(_('Already pending WebIDs you could bind to your account')));
 
-		<?php
-		// display a table of WebIDs pending binding
-		$pendingwebids = $plugin->getStoredPendingWebIDs($u->getID());
-		if( count($pendingwebids) ) {
-			echo $HTML->listTableTop(array(_('Already pending WebIDs you could bind to your account'), ''));
-
-			$i = 0;
-			foreach($pendingwebids as $webid_identity) {
-				echo '<tr '.$HTML->boxGetAltRowStyle($i).'>';
-				echo '<td><i>'. $webid_identity .'</i></td>';
-				echo '<td><b>'. $plugin->displayAuthentifyViaIdPLink(util_make_uri('/plugins/authwebid/index.php'), _('Confirm binding')) . '</b></td>';
-				echo '<td>'.util_make_link('/plugins/authwebid/?webid_identity='.urlencode('pending:'.$webid_identity).'&delete=1', _('remove')).'</td>';
-				echo '</tr>';
-				$i++;
-			}
-			echo $HTML->listTableBottom();
-		}
-		//This form isn't one any more actually, but decorations is nice like this
-		echo $HTML->openForm(array('name' => 'new_identity', 'action' => '/plugins/authwebid/', 'method' => 'post'))
+	$i = 0;
+	foreach($pendingwebids as $webid_identity) {
+		echo '<tr>';
+		echo '<td><i>'. $webid_identity .'</i></td>';
+		echo '<td><b>'. $plugin->displayAuthentifyViaIdPLink(util_make_uri('/plugins/authwebid/index.php'), _('Confirm binding')) . '</b></td>';
+		echo '<td>'.util_make_link('/plugins/authwebid/?webid_identity='.urlencode('pending:'.$webid_identity).'&delete=1', _('remove')).'</td>';
+		echo '</tr>';
+		$i++;
+	}
+	echo $HTML->listTableBottom();
+}
+//This form isn't one any more actually, but decorations is nice like this
+echo $HTML->openForm(array('name' => 'new_identity', 'action' => '/plugins/authwebid/', 'method' => 'post'))
+?>
+	<fieldset>
+		<legend><?php echo _('Bind a new WebID'); ?></legend>
+		<p>
+			<?php
+				echo '</p><p>';
+				// redirect link to the IdP
+				// This might as well confirm binding just as if using the Confirm link, if user has only one WebID recognized by the IdP
+				echo '<b>'. $plugin->displayAuthentifyViaIdPLink(util_make_uri('/plugins/authwebid/index.php'),
+												sprintf( _('Click here to initiate the addition of a new WebID validated via %s'),
+													$plugin->delegate_webid_auth_to)) . '</b>';
 		?>
-			<fieldset>
-				<legend><?php echo _('Bind a new WebID'); ?></legend>
-				<p>
-					<?php
-						echo '</p><p>';
-						// redirect link to the IdP
-						// This might as well confirm binding just as if using the Confirm link, if user has only one WebID recognized by the IdP
-						echo '<b>'. $plugin->displayAuthentifyViaIdPLink(util_make_uri('/plugins/authwebid/index.php'),
-																		sprintf( _('Click here to initiate the addition of a new WebID validated via %s'),
-																				 $plugin->delegate_webid_auth_to)) . '</b>';
-				?>
-				</p>
-			</fieldset>
-		<?php
-		echo $HTML->closeForm();
-		?>
-		<h2><?php echo _('My WebIDs'); ?></h2>
-		<?php
+		</p>
+	</fieldset>
+<?php
+echo $HTML->closeForm();
+?>
+<h2><?php echo _('My WebIDs'); ?></h2>
+<?php
 
-		// now display existing bound identities
+// now display existing bound identities
 
 
-		$boundwebids = $plugin->getStoredBoundWebIDs($u->getID());
+$boundwebids = $plugin->getStoredBoundWebIDs($u->getID());
 
-		if(count($boundwebids)) {
-			echo $HTML->listTableTop(array(_('WebIDs already bound to your account, which you can use to login'), ''));
-			$i = 0;
+if(count($boundwebids)) {
+	echo $HTML->listTableTop(array(_('WebIDs already bound to your account, which you can use to login')));
+	$i = 0;
 
-			foreach($boundwebids as $webid_identity) {
-				echo '<tr '.$HTML->boxGetAltRowStyle($i).'>';
-				echo '<td>'. $webid_identity .'</td>';
-				echo '<td>'.util_make_link('/plugins/authwebid/?webid_identity='.urlencode($webid_identity).'&delete=1', _('remove')).'</td>';
-				echo '</tr>';
-				$i++;
-			}
+	foreach($boundwebids as $webid_identity) {
+		echo '<tr>';
+		echo '<td>'. $webid_identity .'</td>';
+		echo '<td>'.util_make_link('/plugins/authwebid/?webid_identity='.urlencode($webid_identity).'&delete=1', _('remove')).'</td>';
+		echo '</tr>';
+		$i++;
+	}
 
-			echo $HTML->listTableBottom();
-		}
-		else {
-			echo '<p>'. _("You haven't yet bound any WebID to your account") . '</p>';
-		}
+	echo $HTML->listTableBottom();
+} else {
+	echo html_e('p', array(), _("You haven't yet bound any WebID to your account"));
+}
 
-
-		echo $HTML->boxBottom();
+echo $HTML->boxBottom();
 
 site_user_footer();
 

@@ -51,7 +51,7 @@ if (getStringFromRequest('submit')) {
 		if (!$r->updateStatusID($status_id,$status_name)) {
 			$error_msg = $r->getErrorMessage();
 		} else {
-			$feedback = _('Update Successful');
+			$feedback = _('Successfully Updated');
 		}
 
 		$status_id=false;
@@ -78,7 +78,7 @@ if ($status_id) {
 echo $HTML->listTableTop($arr);
 
 for ($i=0; $i<db_numrows($res); $i++) {
-	echo '<tr '.$HTML->boxGetAltRowStyle($i).'><td>'.db_result($res,$i,'status_id').'</td>
+	echo '<tr><td>'.db_result($res,$i,'status_id').'</td>
 		<td>'.util_make_link('/reporting/customstatus.php?status_id='.db_result($res,$i,'status_id'), db_result($res,$i,'status_name')).'</td></tr>';
 }
 

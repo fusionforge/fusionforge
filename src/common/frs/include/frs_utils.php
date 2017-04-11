@@ -154,7 +154,7 @@ function frs_add_file_from_form($release, $type_id, $processor_id, $release_date
 				return _('The uploaded file was only partially uploaded.');
 			break;
 			default:
-				return _('Unknown file upload error. => ');
+				return _('Unknown file upload error.').' => ';
 			break;
 		}
 	} elseif (forge_get_config('use_ftp_uploads') && $ftp_filename && util_is_valid_filename($ftp_filename) && is_file($upload_dir.'/'.$ftp_filename)) {

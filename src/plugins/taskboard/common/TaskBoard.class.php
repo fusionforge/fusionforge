@@ -110,7 +110,7 @@ class TaskBoard extends FFError {
 			return false;
 		}
 		if ($Group->isError()) {
-			$this->setError(_('Taskboard')._(': ').$Group->getErrorMessage());
+			$this->setError(_('Task Board')._(': ').$Group->getErrorMessage());
 			return false;
 		}
 
@@ -182,7 +182,7 @@ class TaskBoard extends FFError {
 					$user_stories_reference_field, $user_stories_sort_field, $first_column_by_default)
 			);
 		if (!$res) {
-			$this->setError(_('Cannot create taskboard'));
+			$this->setError(_('Cannot create Task Board'));
 			$ret = false;
  		} else {
 			$this->data_array['taskboard_id'] = db_insertid($res,'plugin_taskboard','taskboard_id');
@@ -236,7 +236,7 @@ class TaskBoard extends FFError {
 		}
 
 		if( count($trackers) == 0 && !$updateOnlyName) {
-			$this->setError(_('Taskboard must be linked at least to one tracker'));
+			$this->setError(_('Task Board must be linked at least to one tracker'));
 			return false;
 		}
 
@@ -260,7 +260,7 @@ class TaskBoard extends FFError {
 					);
 		}
 		if (!$res) {
-			$this->setError(_('Cannot update taskboard'));
+			$this->setError(_('Cannot update Task Board'));
 			$ret = false;
 		} else {
 			$this->fetchData();
@@ -311,7 +311,7 @@ class TaskBoard extends FFError {
 	function delete() {
 		$res = db_query_params('DELETE FROM plugin_taskboard WHERE taskboard_id = $1', array($this->getID()));
 		if (!$res) {
-			$this->setError(_('Taskboard')._(': ')._('Cannot delete taskboard'));
+			$this->setError(_('Task Board')._(': ')._('Cannot delete Task Board'));
 			return false;
 		}
 		return true;
@@ -345,7 +345,7 @@ class TaskBoard extends FFError {
 		}
 		$res = db_query_params('SELECT * FROM plugin_taskboard WHERE taskboard_id=$1', array($taskboard_id));
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError(_('Taskboard')._(': ')._('Invalid TaskBoardID'));
+			$this->setError(_('Task Board')._(': ')._('Invalid TaskBoardID'));
 			return false;
 		}
 		$this->data_array = db_fetch_array($res);
@@ -461,7 +461,7 @@ class TaskBoard extends FFError {
 	function getUsedTrackersIds() {
 		$res = db_query_params('SELECT * FROM plugin_taskboard_trackers WHERE taskboard_id = $1', array ($this->getID()));
 		if (!$res) {
-			$this->setError(_('Taskboard')._(': ')._('Cannot get list of used trackers.'));
+			$this->setError(_('Task Board')._(': ')._('Cannot get list of used trackers.'));
 			return false;
 		}
 
@@ -481,7 +481,7 @@ class TaskBoard extends FFError {
 	function getUsedTrackersData() {
 		$res = db_query_params('SELECT * FROM plugin_taskboard_trackers WHERE taskboard_id = $1', array ($this->getID()));
 		if (!$res) {
-			$this->setError(_('Taskboard')._(': ')._('Cannot get list of used trackers.'));
+			$this->setError(_('Task Board')._(': ')._('Cannot get list of used trackers.'));
 			return false;
 		}
 
@@ -501,7 +501,7 @@ class TaskBoard extends FFError {
 	function cleanUsedTrackers() {
 		$res = db_query_params('DELETE FROM plugin_taskboard_trackers WHERE taskboard_id = $1', array ($this->getID()));
 		if (!$res) {
-			$this->setError(_('Taskboard')._(': ')._('Cannot empty list of used trackers.'));
+			$this->setError(_('Task Board')._(': ')._('Cannot empty list of used trackers.'));
 				 return false;
 		}
 
@@ -519,7 +519,7 @@ class TaskBoard extends FFError {
 	function addUsedTracker($tracker_id, $bgcolor='') {
 		$res = db_query_params('INSERT INTO plugin_taskboard_trackers(taskboard_id, group_artifact_id, card_background_color) VALUES($1, $2, $3)', array($this->getID(), $tracker_id, $bgcolor));
 		 if (!$res) {
-			$this->setError(_('Taskboard')._(': ')._('Cannot add used tracker'));
+			$this->setError(_('Task Board')._(': ')._('Cannot add used tracker'));
 			return false;
 		}
 
@@ -537,7 +537,7 @@ class TaskBoard extends FFError {
 	function updateUsedTracker($tracker_id, $bgcolor = '') {
 		 $res = db_query_params('UPDATE plugin_taskboard_trackers SET card_background_color = $1 WHERE group_artifact_id = $2', array($bgcolor, $tracker_id));
 		if (!$res) {
-			$this->setError(_('Taskboard')._(': ')._('Cannot update used tracker'));
+			$this->setError(_('Task Board')._(': ')._('Cannot update used tracker'));
 			return false;
 		}
 
@@ -554,7 +554,7 @@ class TaskBoard extends FFError {
 	function deleteUsedTracker($tracker_id) {
 		$res = db_query_params('DELETE FROM plugin_taskboard_trackers WHERE group_artifact_id = $1', array($tracker_id));
 		if (!$res) {
-			$this->setError(_('Taskboard')._(': ')._('Cannot delete used tracker'));
+			$this->setError(_('Task Board')._(': ')._('Cannot delete used tracker'));
 			return false;
 		}
 
@@ -794,7 +794,7 @@ class TaskBoard extends FFError {
 	function getColumns() {
 		$res = db_query_params('SELECT * FROM plugin_taskboard_columns WHERE taskboard_id=$1 ORDER BY order_num', array ($this->getID()));
 		if (!$res) {
-			$this->setError(_('Taskboard')._(': ')._('Cannot get list of columns.'));
+			$this->setError(_('Task Board')._(': ')._('Cannot get list of columns.'));
 			return false;
 		}
 
@@ -945,7 +945,7 @@ class TaskBoard extends FFError {
 	function getReleases() {
 		$res = db_query_params('SELECT * FROM plugin_taskboard_releases WHERE taskboard_id = $1 ORDER BY start_date, end_date', array($this->getID()));
 		if (!$res) {
-			$this->setError(_('Taskboard')._(': ')._('Cannot get list of releases.'));
+			$this->setError(_('Task Board')._(': ')._('Cannot get list of releases.'));
 			return false;
 		}
 
@@ -973,7 +973,7 @@ class TaskBoard extends FFError {
 				)
 			);
 		if (!$res) {
-			$this->setError(_('Taskboard')._(': ')._('Cannot get current release.'));
+			$this->setError(_('Task Board')._(': ')._('Cannot get current release.'));
 			return false;
 		} else {
 			$row =  db_fetch_array($res);
@@ -1026,7 +1026,7 @@ class TaskBoard extends FFError {
 				array($this->getID())
 			);
 		if (!$res) {
-			$this->setError(_('Taskboard')._(': ')._('Cannot get used resolutions'));
+			$this->setError(_('Task Board')._(': ')._('Cannot get used resolutions'));
 			return false;
 		}
 

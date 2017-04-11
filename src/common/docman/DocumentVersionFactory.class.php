@@ -2,7 +2,7 @@
 /**
  * FusionForge Documentation Manager
  *
- * Copyright 2016, Franck Villaume - TrivialDev
+ * Copyright 2016-2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -51,13 +51,13 @@ class DocumentVersionFactory extends FFError {
 	}
 
 	/**
-	 * getVersions - retrieve a limited number of version of a document
+	 * getHTMLVersions - retrieve a limited number of version of a document
 	 *
 	 * @param	int	$limit	the number of versions to retrieve. Default is 0 = No limit
 	 * @param	int	$start	Paging the retrieve. Start point. Default is 0.
 	 * @return	array	Array of enriched version datas from database.
 	 */
-	function getVersions($limit = 0, $start = 0) {
+	function getHTMLVersions($limit = 0, $start = 0) {
 		global $HTML;
 		$versions = array();
 		// everything but data_words! Too much memory consumption.
@@ -87,12 +87,36 @@ class DocumentVersionFactory extends FFError {
 					$isHtml = 1;
 				}
 				$new_description = util_gen_cross_ref($arr['description'], $this->Document->Group->getID());
-				$arr['new_description'] = nl2br($new_description);
-				$arr['versionactions'][] = util_make_link('#', $HTML->getEditFilePic(_('Edit this version'), 'editversion'), array('id' => 'version_action_edit', 'onclick' => 'javascript:controllerListFile.toggleEditVersionView({title: \''.addslashes($arr['title']).'\', description: '.json_encode($arr['description']).', new_description: '.json_encode($arr['new_description']).', version: '.ltrim($arr['version'], '_').', current_version: '.$arr['current_version'].', isURL: '.$isURL.', isText: '.$isText.', isHtml: '.$isHtml.', filename: \''.addslashes($arr['filename']).'\', vcomment: \''.addslashes($arr['vcomment']).'\', docid: '.$arr['docid'].', groupId: '.$this->Document->Group->getID().'})'), true);
+				$arr['new_description'] = str_replace(array("\r\n", "\r", "\n"), "\\n", $new_description);
+				$arr['description'] = str_replace(array("\r\n", "\r", "\n"), "\\n", $arr['description']);
+				$arr['vcomment'] = str_replace(array("\r\n", "\r", "\n"), "\\n", $arr['vcomment']);
+				$arr['versionactions'][] = util_make_link('#', $HTML->getEditFilePic(_('Edit this version'), 'editversion'), array('id' => 'version_action_edit', 'onclick' => 'javascript:controllerListFile.toggleEditVersionView({title: \''.addslashes($arr['title']).'\', description: \''.addslashes($arr['description']).'\', new_description: \''.addslashes($arr['new_description']).'\', version: '.ltrim($arr['version'], '_').', current_version: '.$arr['current_version'].', isURL: '.$isURL.', isText: '.$isText.', isHtml: '.$isHtml.', filename: \''.addslashes($arr['filename']).'\', vcomment: \''.addslashes($arr['vcomment']).'\', docid: '.$arr['docid'].', groupId: '.$this->Document->Group->getID().'})'), true);
 				if ($numrows > 1) {
 					$arr['versionactions'][] = util_make_link('#', $HTML->getRemovePic(_('Permanently delete this version'), 'delversion'), array('id' => 'version_action_delete', 'onclick' => 'javascript:controllerListFile.deleteVersion({version: '.ltrim($arr['version'], '_').', docid: '.$arr['docid'].', groupId: '.$this->Document->Group->getID().'})'), true);
 				}
 				$versions[$arr['version']] = $arr;
+			}
+		}
+		db_free_result($res);
+		return $versions;
+	}
+
+	function getVersions() {
+		$versions = array();
+		// everything but data_words! Too much memory consumption.
+		$res = db_query_params('SELECT serial_id, version as version, docid, current_version, title, updatedate, createdate, created_by, description, filename, filetype, filesize, vcomment FROM doc_data_version WHERE docid = $1 ORDER by version DESC',
+					array($this->Document->getID()));
+		if ($res) {
+			$numrows = db_numrows($res);
+			$i = 0;
+			while ($arr = db_fetch_array($res)) {
+				$versions[$i] = $arr;
+				if ($arr['filetype'] != 'URL') {
+					$versions[$i]['storageref'] = DocumentStorage::instance()->get($arr['serial_id']);
+				} else {
+					$versions[$i]['storageref'] = null;
+				}
+				$i++;
 			}
 		}
 		db_free_result($res);

@@ -2,7 +2,8 @@
 /**
  * Generic Tracker Content Widget Class
  *
- * Copyright 2016, Franck Villaume - TrivialDev
+ * Copyright 2016,2017, Franck Villaume - TrivialDev
+ * Copyright 2017, Stephane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
  * This file is a part of Fusionforge.
@@ -259,12 +260,12 @@ EOS;
 			for ($i = 0; count($stillAvailableExtraFields) > $i; $i++) {
 				$cells[] = array(html_e('div', array('id' => 'ef'.$stillAvailableExtraFields[$i][0], 'class' => 'wb_extrafield', 'style' => 'background: #e6e6e6 none repeat scroll 0 0; padding: 2px; text-align: center;'), util_unconvert_htmlspecialchars($stillAvailableExtraFields[$i]['field_name']).'<div id="xef'.$stillAvailableExtraFields[$i][0].'" style="display: none" class="ef-widget-remove">x</div>'), 'id' => 'tdef'.$stillAvailableExtraFields[$i][0], 'class' => 'td-droppable', 'width' => '50%');
 				if ($i % 2) {
-					$content .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
+					$content .= $HTML->multiTableRow(array(), $cells);
 					$cells = array();
 				}
 			}
 			if (count($cells)) {
-				$content .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
+				$content .= $HTML->multiTableRow(array(), $cells);
 			}
 		}
 		if (count($arr) > 0) {
@@ -272,12 +273,12 @@ EOS;
 			for ($i = 0; count($arr) > $i; $i++) {
 				$cells[] = array('', 'id' => 'tdef'.$arr[$i], 'width' => '50%');
 				if ($i % 2) {
-					$content .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
+					$content .= $HTML->multiTableRow(array(), $cells);
 					$cells = array();
 				}
 			}
 			if (count($cells)) {
-				$content .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
+				$content .= $HTML->multiTableRow(array(), $cells);
 			}
 		}
 		if (count($stillAvailableExtraFields) > 0 || count($arr) > 0) {
@@ -364,8 +365,12 @@ EOS;
 			$i = 0;
 			if (is_object($ah)) {
 				$selected = $ah->getExtraFieldData();
+				$efInFormula = $ath->getExtraFieldsInFormula();
+				$efWithFormula = $ath->getExtraFieldsWithFormula();
 			} elseif ($func = 'add') {
 				$selected = $ath->getExtraFieldsDefaultValue();
+				$efInFormula = $ath->getExtraFieldsInFormula(array(), false, false);
+				$efWithFormula = $ath->getExtraFieldsWithFormula(array(), false, false);
 			}
 			if (!forge_check_perm('tracker', $atid, 'submit')) {
 				$readonly = true;
@@ -403,6 +408,13 @@ EOS;
 							}
 							if (strlen($extrafieldObject->getDescription()) > 0) {
 								$attrs['title'] = $extrafieldObject->getDescription();
+							}
+							if (in_array($extrafieldObject->getID(), $efInFormula)) {
+								$attrs['class'] = (empty($attrs['class']) ? '' : $attrs['class'].' ').'in-formula';
+							}
+							if (in_array($extrafieldObject->getID(), $efWithFormula)) {
+								$attrs['class'] = (empty($attrs['class']) ? '' : $attrs['class'].' ').'with-formula readonly';
+								$attrs['readonly'] = 'readonly';
 							}
 							$cellContent .= html_e('strong', array(), $extrafieldObject->getName()._(':')).$mandatory.html_e('br');
 							switch ($extrafieldObject->getType()) {
@@ -587,6 +599,19 @@ EOS;
 										$cellContent .= $ath->renderReleaseField($keys[0], $value, $extrafieldObject->getShow100(), $extrafieldObject->getShow100label(), false, false, false, $attrs);
 									}
 									break;
+								case ARTIFACT_EXTRAFIELDTYPE_EFFORT:
+									if ($readonly) {
+										if ($value) {
+											$effortUnitSet = New EffortUnitSet($ath, $ath->getEffortUnitSet());
+											$effortUnitFactory = New EffortUnitFactory($effortUnitSet);
+											$cellContent .= $effortUnitFactory->encodedToString($value);
+										} else {
+											$cellContent .= _('Undefined');
+										}
+									} else {
+										$cellContent .= $ath->renderEffort($keys[0], $value, $extrafieldObject->getAttribute1(), $extrafieldObject->getAttribute2(), $attrs);
+									}
+									break;
 							}
 						} else {
 							$cellContent = '&nbsp';
@@ -596,7 +621,7 @@ EOS;
 					}
 					$cells[] = array($cellContent, 'width' => $extrafieldID[$keys[0]][0].'%', 'style' => 'vertical-align: top;');
 				}
-				$return .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($row_id, true)), $cells);
+				$return .= $HTML->multiTableRow(array(), $cells);
 				$return .= $HTML->listTableBottom();
 			}
 			$return .= $ath->javascript();
@@ -606,7 +631,7 @@ EOS;
 			}
 		}
 		if (!$readonly) {
-			$return .= html_e('p', array('class' => 'middleRight'), html_e('input', array('form' => 'trackerform', 'type' => 'submit', 'name' => 'submit', 'value' => _('Save Changes'), 'title' => _('Save is validating the complete form'))));
+			$return .= html_e('p', array('class' => 'middleRight'), html_e('input', array('form' => 'trackerform', 'type' => 'submit', 'name' => 'submit', 'value' => _('Save Changes'), 'title' => _('Save is validating the complete form'), 'onClick' => 'iefixform()')));
 		}
 		return $return;
 	}

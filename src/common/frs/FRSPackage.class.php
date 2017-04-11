@@ -394,7 +394,7 @@ class FRSPackage extends FFError {
 	 *
 	 * @return	array	The array of user_id's.
 	 */
-	function &getMonitorIDs() {
+	function getMonitorIDs() {
 		$MonitorElementObject = new MonitorElement('frspackage');
 		return $MonitorElementObject->getMonitorUsersIdsInArray($this->getID());
 	}

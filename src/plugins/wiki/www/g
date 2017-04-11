@@ -75,7 +75,7 @@ if (defined('WIKI_SOAP')) {
         $group_id = $help->getID();
     } else {
         // Test system don't have help project, use projecta instead.
-        $group_id = 6;
+        $group_id = group_get_object_by_name('projecta')->getID();
     }
 }
 
@@ -149,6 +149,9 @@ if (! isset($group_id) || ! isset($project)) {
 
     // Do not use a directory per user but only one (per project)
     define('UPLOAD_USERDIR', false);
+
+    // Allow Load File only from /tmp
+    define('ALLOWED_LOAD', '/tmp');
 
     // Use black list of extensions instead of white list
     define('DISABLE_UPLOAD_ONLY_ALLOWED_EXTENSIONS', true);
@@ -270,10 +273,12 @@ if (! isset($group_id) || ! isset($project)) {
         // clear out the globals, just in case...
     }
 
+    $wiki_path = forge_get_config('wiki_path', 'wiki');
+
     // Load the default configuration.
-    require_once(dirname(__FILE__).'/lib/prepend.php');
-    require_once(dirname(__FILE__).'/lib/IniConfig.php');
-    IniConfig(dirname(__FILE__)."/config/config-default.ini");
+    require_once($wiki_path.'/lib/prepend.php');
+    require_once($wiki_path.'/lib/IniConfig.php');
+    IniConfig($wiki_path."/config/config-default.ini");
 
     // Override the default configuration for VARIABLES after index.php:
     // E.g. Use another DB:
@@ -284,7 +289,8 @@ if (! isset($group_id) || ! isset($project)) {
     $DBParams['prefix'] = "plugin_wiki_";
 
     // Start the wiki
-    include dirname(__FILE__).'/lib/main.php';
+    chdir($wiki_path);
+    include $wiki_path.'/lib/main.php';
 }
 
 /**

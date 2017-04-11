@@ -103,7 +103,7 @@ class Widget_MyProjectsLastDocuments extends Widget {
 							$count = count($df->Documents[$key]);
 							for ($i=0; $i < $count; $i++) {
 								$doc =& $df->Documents[$key][$i];
-								$html .= '<tr '. $HTML->boxGetAltRowStyle($j) .'>';
+								$html .= '<tr>';
 								switch ($doc->getFileType()) {
 									case "URL": {
 										$docurl = util_make_link($doc->getFileName(), html_image($doc->getFileTypeImage(), 22, 22, array('alt'=>$doc->getFileType())), array(), true);

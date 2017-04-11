@@ -6,8 +6,8 @@
  * Copyright 2010 (c) Fusionforge Team
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2014,2016, Franck Villaume - TrivialDev
- * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
+ * Copyright 2014,2016-2017, Franck Villaume - TrivialDev
+ * Copyright 2016-2017, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -30,6 +30,7 @@ require_once $gfcommon.'tracker/ArtifactType.class.php';
 require_once $gfcommon.'tracker/ArtifactExtraField.class.php';
 require_once $gfcommon.'tracker/ArtifactExtraFieldElement.class.php';
 require_once $gfcommon.'tracker/ArtifactWorkflow.class.php';
+require_once $gfcommon.'tracker/EffortUnitFactory.class.php';
 require_once $gfcommon.'include/utils_crossref.php';
 require_once $gfcommon.'include/UserManager.class.php';
 require_once $gfcommon.'widget/WidgetLayoutManager.class.php';
@@ -62,7 +63,7 @@ class ArtifactTypeHtml extends ArtifactType {
 		$labels[] = _('Export CSV');
 		$links[]  = '/tracker/?func=csv&group_id='.$group_id.'&atid='. $this->getID();
 		$attr[]   = array('title' => _('Download data from this tracker as csv file.'));
-		if (forge_check_perm ('tracker',$this->getID(),'submit')) {
+		if (forge_check_perm('tracker', $this->getID(),'submit')) {
 			$labels[] = _('Submit New');
 			$links[]  = '/tracker/?func=add&group_id='.$group_id.'&atid='. $this->getID();
 			$attr[]   = array('title' => _('Add a new issue.'));
@@ -134,6 +135,10 @@ class ArtifactTypeHtml extends ArtifactType {
 		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&update_type=1';
 		$title_arr[]=_('Update Settings');
 		$attr_arr[] = array('title'=>_('Set up preferences like expiration times, email addresses.'));
+
+		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&effort_units=1';
+		$title_arr[]=_('Manage Effort Units');
+		$attr_arr[] = array('title'=>_('Manage Effort Units for Effort custom extra field.'));
 
 		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&add_extrafield=1';
 		$title_arr[]=_('Manage Custom Fields');
@@ -222,6 +227,8 @@ class ArtifactTypeHtml extends ArtifactType {
 				} elseif ($type == ARTIFACT_EXTRAFIELDTYPE_DATETIME ||
 						$type == ARTIFACT_EXTRAFIELDTYPE_DATE) {
 					$efarr[$i]['field_type'] = ARTIFACT_EXTRAFIELDTYPE_DATERANGE;
+				} elseif ($type == ARTIFACT_EXTRAFIELDTYPE_EFFORT) {
+					$efarr[$i]['field_type'] = ARTIFACT_EXTRAFIELDTYPE_EFFORTRANGE;
 				} else {
 					$efarr[$i]['field_type'] = ARTIFACT_EXTRAFIELDTYPE_TEXT;
 				}
@@ -254,7 +261,7 @@ class ArtifactTypeHtml extends ArtifactType {
 						// Convert the values (ids) to names in the ids order.
 						$new = array();
 						for ($j=0; $j<count($arr); $j++) {
-							if (is_array($value) && in_array($arr[$j]['element_id'],$value)) {
+							if (is_array($value) && in_array($arr[$j]['element_id'], $value)) {
 								$new[]= $arr[$j]['element_name'];
 							} elseif ($arr[$j]['element_id'] === $value) {
 								$new[] = $arr[$j]['element_name'];
@@ -271,6 +278,12 @@ class ArtifactTypeHtml extends ArtifactType {
 					$value = preg_replace_callback('/\b(\d+)\b/', create_function('$matches', 'return _artifactid2url($matches[1], \'title\');'), $value);
 				} elseif ($type == ARTIFACT_EXTRAFIELDTYPE_DATETIME && $value!='') {
 					$value =  date('Y-m-d H:i', $value);
+				} elseif ($type == ARTIFACT_EXTRAFIELDTYPE_EFFORT) {
+					if (!isset($effortUnitSet)) {
+						$effortUnitSet = New EffortUnitSet($this, $this->getEffortUnitSet());
+						$effortUnitFactory = New EffortUnitFactory($effortUnitSet);
+					}
+					$value = $effortUnitFactory->encodedToString($value);
 				}
 				$template = str_replace('{$PostName:'.$efarr[$i]['field_name'].'}', $post_name, $template);
 				$template = str_replace('{$'.$efarr[$i]['field_name'].'}', $value, $template);
@@ -302,10 +315,10 @@ class ArtifactTypeHtml extends ArtifactType {
 			}
 
 			if ($mode == 'UPDATE' || $mode == 'NEW') {
-				if (in_array($efarr[$i]['extra_field_id'],$efInFormula)) {
+				if (in_array($efarr[$i]['extra_field_id'], $efInFormula)) {
 					$attrs['class'] = (empty($attrs['class']) ? '':$attrs['class'].' ').'in-formula';
 				}
-				if (in_array($efarr[$i]['extra_field_id'],$efWithFormula)) {
+				if (in_array($efarr[$i]['extra_field_id'], $efWithFormula)) {
 					$attrs['class'] = (empty($attrs['class']) ? '':$attrs['class'].' ').'with-formula readonly';
 					$attrs['readonly'] = 'readonly';
 				}
@@ -326,22 +339,21 @@ class ArtifactTypeHtml extends ArtifactType {
 				if (!is_null($efarr[$i]['parent']) && !empty($efarr[$i]['parent']) && $efarr[$i]['parent']!='100') {
 					$aefParentId = $efarr[$i]['parent'];
 					$selectedElmnts = (isset($selected[$aefParentId]) ? $selected[$aefParentId] : '');
-					$aef = new ArtifactExtraField($this,$efarr[$i]['extra_field_id']);
+					$aef = new ArtifactExtraField($this, $efarr[$i]['extra_field_id']);
 					$allowed = $aef->getAllowedValues($selectedElmnts);
 				}
 			}
 
 			if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_SELECT) {
-
-				$str = $this->renderSelect($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['show100'],$efarr[$i]['show100label'],$show_any,$text_any,$allowed, $attrs);
+				$str = $this->renderSelect($efarr[$i]['extra_field_id'], $selected[$efarr[$i]['extra_field_id']], $efarr[$i]['show100'], $efarr[$i]['show100label'], $show_any, $text_any, $allowed, $attrs);
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) {
 
-				$str = $this->renderCheckbox($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['show100'],$efarr[$i]['show100label'], $allowed, $attrs);
+				$str = $this->renderCheckbox($efarr[$i]['extra_field_id'], $selected[$efarr[$i]['extra_field_id']], $efarr[$i]['show100'], $efarr[$i]['show100label'], $allowed, $attrs);
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RADIO) {
 
-				$str = $this->renderRadio($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['show100'],$efarr[$i]['show100label'],$show_any, $text_any, $allowed, $attrs);
+				$str = $this->renderRadio($efarr[$i]['extra_field_id'], $selected[$efarr[$i]['extra_field_id']], $efarr[$i]['show100'], $efarr[$i]['show100label'], $show_any, $text_any, $allowed, $attrs);
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_TEXT ||
 					$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_INTEGER) {
@@ -350,9 +362,9 @@ class ArtifactTypeHtml extends ArtifactType {
 					$attrs['pattern'] = $efarr[$i]['pattern'];
 				}
 				if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_TEXT) {
-					$str = $this->renderTextField($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['attribute1'],$efarr[$i]['attribute2'], $attrs);
+					$str = $this->renderTextField($efarr[$i]['extra_field_id'], $selected[$efarr[$i]['extra_field_id']], $efarr[$i]['attribute1'], $efarr[$i]['attribute2'], $attrs);
 				} else {
-					$str = $this->renderIntegerField($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['attribute1'],$efarr[$i]['attribute2'], $attrs);
+					$str = $this->renderIntegerField($efarr[$i]['extra_field_id'], $selected[$efarr[$i]['extra_field_id']], $efarr[$i]['attribute1'], $efarr[$i]['attribute2'], $attrs);
 				}
 				if ($mode == 'QUERY') {
 					$post_name =  ' <i>'._('(%% for wildcards)').'</i>&nbsp;&nbsp;&nbsp;';
@@ -360,14 +372,14 @@ class ArtifactTypeHtml extends ArtifactType {
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_TEXTAREA) {
 
-				$str = $this->renderTextArea($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['attribute1'],$efarr[$i]['attribute2'], $attrs);
+				$str = $this->renderTextArea($efarr[$i]['extra_field_id'], $selected[$efarr[$i]['extra_field_id']], $efarr[$i]['attribute1'], $efarr[$i]['attribute2'], $attrs);
 				if ($mode == 'QUERY') {
 					$post_name =  ' <i>'._('(%% for wildcards)').'</i>';
 				}
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT) {
 
-				$str = $this->renderMultiSelectBox($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['show100'],$efarr[$i]['show100label'], $allowed, $attrs);
+				$str = $this->renderMultiSelectBox($efarr[$i]['extra_field_id'], $selected[$efarr[$i]['extra_field_id']], $efarr[$i]['show100'], $efarr[$i]['show100label'], $allowed, $attrs);
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 
@@ -384,42 +396,46 @@ class ArtifactTypeHtml extends ArtifactType {
 
 				$allowed = $atw->getNextNodes($selected_node);
 				$allowed[] = $selected_node;
-				$str = $this->renderSelect($efarr[$i]['extra_field_id'],$selected_node,$status_show_100,$text_100,$show_any,$text_any, $allowed, $attrs);
+				$str = $this->renderSelect($efarr[$i]['extra_field_id'], $selected_node, $status_show_100, $text_100, $show_any, $text_any, $allowed, $attrs);
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RELATION) {
 
-				$str = $this->renderRelationField($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['attribute1'],$efarr[$i]['attribute2'], $attrs);
+				$str = $this->renderRelationField($efarr[$i]['extra_field_id'], $selected[$efarr[$i]['extra_field_id']], $efarr[$i]['attribute1'], $efarr[$i]['attribute2'], $attrs);
 				if ($mode == 'UPDATE' || $mode == 'NEW') {
-					$post_name = html_image('ic/forum_edit.gif', 37, 15 ,array('title'=>"Click to edit", 'alt'=>"Click to edit", 'onclick'=>"switch2edit(this, 'show$i', 'edit$i')"));
+					$post_name = html_image('ic/forum_edit.png', 37, 15 ,array('title'=>"Click to edit", 'alt'=>"Click to edit", 'onclick'=>"switch2edit(this, 'show$i', 'edit$i')"));
 				}
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_DATETIME) {
-				$str = $this->renderDatetime($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']], $attrs);
+				$str = $this->renderDatetime($efarr[$i]['extra_field_id'], $selected[$efarr[$i]['extra_field_id']], $attrs);
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_USER) {
-				$str = $this->renderUserField($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['show100'],$efarr[$i]['show100label'],$show_any,$text_any,false, $attrs);
+				$str = $this->renderUserField($efarr[$i]['extra_field_id'], $selected[$efarr[$i]['extra_field_id']], $efarr[$i]['show100'], $efarr[$i]['show100label'], $show_any, $text_any,false, $attrs);
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_MULTIUSER) {
-				$str = $this->renderMultiUserField($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['show100'],$efarr[$i]['show100label'],$show_any,$text_any,false, $attrs);
+				$str = $this->renderMultiUserField($efarr[$i]['extra_field_id'], $selected[$efarr[$i]['extra_field_id']], $efarr[$i]['show100'], $efarr[$i]['show100label'], $show_any, $text_any,false, $attrs);
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RELEASE) {
-				$str = $this->renderReleaseField($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['show100'],$efarr[$i]['show100label'],$show_any,$text_any,false, $attrs);
+				$str = $this->renderReleaseField($efarr[$i]['extra_field_id'], $selected[$efarr[$i]['extra_field_id']], $efarr[$i]['show100'], $efarr[$i]['show100label'], $show_any, $text_any,false, $attrs);
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_MULTIRELEASE) {
-				$str = $this->renderMultiReleaseField($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['show100'],$efarr[$i]['show100label'],$show_any,$text_any,false, $attrs);
+				$str = $this->renderMultiReleaseField($efarr[$i]['extra_field_id'], $selected[$efarr[$i]['extra_field_id']], $efarr[$i]['show100'], $efarr[$i]['show100label'], $show_any, $text_any,false, $attrs);
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_DATERANGE) {
 				if ($mode == 'QUERY') {
 					$post_name =  ' <i>'._('(YYYY-MM-DD YYYY-MM-DD Format)').'</i>';
 				}
-				$str = $this->renderDateRange($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']], $attrs);
+				$str = $this->renderDateRange($efarr[$i]['extra_field_id'], $selected[$efarr[$i]['extra_field_id']], $attrs);
+			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_EFFORT) {
+				$str = $this->renderEffort($efarr[$i]['extra_field_id'], $selected[$efarr[$i]['extra_field_id']], $efarr[$i]['attribute1'], $efarr[$i]['attribute2'], $attrs);
+			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_EFFORTRANGE) {
+				$str = $this->renderEffortRange($efarr[$i]['extra_field_id'], $selected[$efarr[$i]['extra_field_id']], $efarr[$i]['attribute1'], $efarr[$i]['attribute2'], $attrs);
 			}
-			$template = str_replace('{$PostName:'.$efarr[$i]['field_name'].'}',$post_name,$template);
-			$template = str_replace('{$'.$efarr[$i]['field_name'].'}',$str,$template);
+			$template = str_replace('{$PostName:'.$efarr[$i]['field_name'].'}', $post_name, $template);
+			$template = str_replace('{$'.$efarr[$i]['field_name'].'}', $str, $template);
 		}
 		if($template != NULL){
-			if ($mode == 'UPDATE' || $mode == 'NEW') {
+			if ($mode == 'UPDATE' || $mode == 'NEW' || $mode == 'QUERY') {
 				echo $this->javascript();
 			}
 			echo $template;
 		}
 	}
 
-	function renderRelatedTasks($group, $ah) {
+	function renderRelatedTasks($group, $ah, $formid = null) {
 		global $HTML;
 		if (!$group->usesPM()) {
 			return;
@@ -435,7 +451,6 @@ class ArtifactTypeHtml extends ArtifactType {
 		} else {
 			$is_admin=false;
 		}
-
 		$totalPercentage = 0;
 		if ($taskcount > 0) {
 			$title_arr = array();
@@ -448,7 +463,7 @@ class ArtifactTypeHtml extends ArtifactType {
 			$return .= $HTML->listTableTop($title_arr);
 
 			for ($i = 0; $i < $taskcount; $i++) {
-				$taskinfo  = db_fetch_array($ah->relatedtasks, $i);
+				$taskinfo  = db_fetch_array_by_row($ah->relatedtasks, $i);
 				$totalPercentage += $taskinfo['percent_complete'];
 				$taskid    = $taskinfo['project_task_id'];
 				$projectid = $taskinfo['group_project_id'];
@@ -457,15 +472,15 @@ class ArtifactTypeHtml extends ArtifactType {
 					$summary   = util_unconvert_htmlspecialchars($taskinfo['summary']);
 					$startdate = date(_('Y-m-d H:i'), $taskinfo['start_date']);
 					$enddate   = date(_('Y-m-d H:i'), $taskinfo['end_date']);
-					$status   = $taskinfo['status_name'];
-					$return .=  '<tr>
-							<td>'.util_make_link('/pm/task.php?func=detailtask&project_task_id='.$taskid.'&group_id='.$groupid.'&group_project_id='.$projectid, '[T'.$taskid.'] '.$summary).'</td>
+					$status    = $taskinfo['status_name'];
+					$return   .=  '<tr>
+							<td>'.util_make_link('/pm/t_follow.php/'.$taskid, '[T'.$taskid.'] '.$summary).'</td>
 							<td><div class="percentbar" style="width: 100px;">
 								<div style="width:'.round($taskinfo['percent_complete']).'px;"></div></div></td>
 							<td>'.$startdate.'</td>
 							<td>'.$enddate.'</td>
 							<td>'.$status.' ('.$taskinfo['percent_complete'].'%)</td>'.
-						(($is_admin) ? '<td><input type="checkbox" name="remlink[]" value="'.$taskid.'" /></td>' : '').
+						(($is_admin) ? '<td><input type="checkbox" '.(($formid) ? 'form="'.$formid.'"' : '').' name="remlink[]" value="'.$taskid.'" /></td>' : '').
 						'</tr>';
 				}
 			}
@@ -494,6 +509,9 @@ class ArtifactTypeHtml extends ArtifactType {
 			$title_arr[] = _('Date');
 			$title_arr[] = _('By');
 			$title_arr[] = _('Download');
+			if (forge_check_perm('tracker', $this->getID(), 'tech')) {
+				$title_arr[] = '';
+			}
 			$return .= $HTML->listTableTop($title_arr);
 
 			foreach ($file_list as $file) {
@@ -501,9 +519,9 @@ class ArtifactTypeHtml extends ArtifactType {
 				$return .= '<td>'.human_readable_bytes($file->getSize()).'</td>';
 				$return .= '<td>'.htmlspecialchars($file->getName()).'</td>';
 				$return .= '<td>'.date(_('Y-m-d H:i'), $file->getDate()).'</td>';
-				$return .= '<td>'.$file->getSubmittedUnixName().'</td>';
+				$return .= '<td>'.util_display_user($file->getSubmittedUnixName(), $file->getSubmittedBy(), $file->getSubmittedRealName()).'</td>';
 				$return .= '<td>'.util_make_link('/tracker/download.php/'.$group_id.'/'. $this->getID().'/'. $ah->getID() .'/'.$file->getID().'/'.$file->getName(), htmlspecialchars($file->getName())).'</td>';
-				if (forge_check_perm ('tracker', $this->getID(), 'tech')) {
+				if (forge_check_perm('tracker', $this->getID(), 'tech')) {
 					$return .= '<td><input type="checkbox" name="delete_file[]" value="'. $file->getID() .'">'._('Delete').'</td>';
 				}
 				$return .= '</tr>';
@@ -527,7 +545,7 @@ class ArtifactTypeHtml extends ArtifactType {
 		// Use template only for the browse (not for query or mass update)
 		if (($mode === 'DISPLAY' || $mode === 'DETAIL' || $mode === 'UPDATE' || $mode == 'NEW')
 			&& $this->data_array['custom_renderer']) {
-			return preg_replace('/<!--(\S+.*?)-->/','{$\\1}',$this->data_array['custom_renderer']);
+			return preg_replace('/<!--(\S+.*?)-->/','{$\\1}', $this->data_array['custom_renderer']);
 		} else {
 			return $this->generateRenderHTML($types, $mode);
 		}
@@ -583,7 +601,8 @@ class ArtifactTypeHtml extends ArtifactType {
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_TEXT ||
 				$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_INTEGER ||
 				$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RELATION ||
-				$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_DATETIME) {
+				$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_DATETIME ||
+					$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_EFFORT) {
 
 				//text fields might be really wide, so need a row to themselves.
 				if (($col_count == 1) && ($efarr[$i]['attribute1'] > 30)) {
@@ -647,7 +666,7 @@ class ArtifactTypeHtml extends ArtifactType {
 	 * @param	array		$attrs
 	 * @return	string		HTML code for the box and choices
 	 */
-	function renderSelect ($extra_field_id,$checked='xzxz',$show_100=false,$text_100='none',$show_any=false,$text_any='Any', $allowed=false, $attrs = array ()) {
+	function renderSelect($extra_field_id, $checked='xzxz', $show_100=false, $text_100='none', $show_any=false, $text_any='Any', $allowed=false, $attrs = array()) {
 		if ($text_100 == 'none'){
 			$text_100=_('None');
 		}
@@ -680,19 +699,19 @@ class ArtifactTypeHtml extends ArtifactType {
 						$dependency .= (empty($dependency) ? '':', ').'{"field":'.$key.', "elmnt": ['.implode(', ', $cElmnt).']}';
 					}
 					$dependency = '['.$dependency.']';
-					$opt_attrs[$i]= array( 'data-dependency'=>$dependency);
+					$opt_attrs[$i]= array('data-dependency'=>$dependency);
 				}
 			}
 			if ($aef->isAutoAssign()) {
 				$autoAssignTo = UserManager::instance()->getUserById($aefe->getAutoAssignto());
-				$opt_attrs[$i]=array_merge(isset($opt_attrs[$i]) ? $opt_attrs[$i] : array(), array( 'data-autoassignto'=>'{"id":'.$aefe->getAutoAssignto().', "name":"'.$autoAssignTo->getRealName().' ('.$autoAssignTo->getUnixName().')"}'));
+				$opt_attrs[$i]=array_merge(isset($opt_attrs[$i]) ? $opt_attrs[$i] : array(), array('data-autoassignto'=>'{"id":'.$aefe->getAutoAssignto().', "name":"'.$autoAssignTo->getRealName().' ('.$autoAssignTo->getUnixName().')"}'));
 			}
 		}
 
 		if ($show_100 && !empty($aefChildren)) {
-			$attrs_100 = array( 'data-dependency'=>'{"fields": ['.implode(', ',$aefChildren).']}');
+			$attrs_100 = array('data-dependency'=>'{"fields": ['.implode(', ', $aefChildren).']}');
 		}
-		return html_build_select_box_from_arrays ($vals,$texts,'extra_fields['.$extra_field_id.']',$checked,$show_100,$text_100,$show_any,$text_any, $allowed, $attrs, $opt_attrs, $attrs_100);
+		return html_build_select_box_from_arrays($vals, $texts,'extra_fields['.$extra_field_id.']', $checked, $show_100, $text_100, $show_any, $text_any, $allowed, $attrs, $opt_attrs, $attrs_100);
 	}
 
 	/**
@@ -708,7 +727,7 @@ class ArtifactTypeHtml extends ArtifactType {
 	 * @param	array		$attrs
 	 * @return	string		HTML code for the box and choices
 	 */
-	function renderUserField ($extra_field_id,$checked='xzxz',$show_100=false,$text_100='none',$show_any=false,$text_any='Any', $allowed=false, $attrs = array ()) {
+	function renderUserField($extra_field_id, $checked='xzxz', $show_100=false, $text_100='none', $show_any=false, $text_any='Any', $allowed=false, $attrs = array()) {
 		if ($text_100 == 'none' || $text_100 == 'nobody'){
 			$text_100=_('Nobody');
 		}
@@ -733,7 +752,7 @@ class ArtifactTypeHtml extends ArtifactType {
 		asort($userArray,SORT_FLAG_CASE | SORT_STRING);
 		$keys = array_keys($userArray);
 		$vals = array_values($userArray);
-		return html_build_select_box_from_arrays ($keys,$vals,'extra_fields['.$extra_field_id.']',$checked,$show_100,$text_100,$show_any,$text_any, $allowed, $attrs);
+		return html_build_select_box_from_arrays($keys, $vals,'extra_fields['.$extra_field_id.']', $checked, $show_100, $text_100, $show_any, $text_any, $allowed, $attrs);
 	}
 
 	/**
@@ -749,7 +768,7 @@ class ArtifactTypeHtml extends ArtifactType {
 	 * @param	array		$attrs
 	 * @return	string		HTML code for the box and choices
 	 */
-	function renderMultiUserField ($extra_field_id,$checked='xzxz',$show_100=false,$text_100='none',$show_any=false,$text_any='Any', $allowed=false, $attrs = array ()) {
+	function renderMultiUserField($extra_field_id, $checked='xzxz', $show_100=false, $text_100='none', $show_any=false, $text_any='Any', $allowed=false, $attrs = array()) {
 		if ($text_100 == 'none' || $text_100 == 'nobody'){
 			$text_100=_('Nobody');
 		}
@@ -758,7 +777,7 @@ class ArtifactTypeHtml extends ArtifactType {
 			$checked=array();
 		}
 		if (!is_array($checked)) {
-			$checked = explode(',',$checked);
+			$checked = explode(',', $checked);
 		}
 
 		$arr = $this->getExtraFieldElements($extra_field_id);
@@ -780,11 +799,11 @@ class ArtifactTypeHtml extends ArtifactType {
 			$userArray[$checkedUser->getID()] = $checkedUser->getRealName().' '._('[DELETED]');
 		}
 		asort($userArray,SORT_FLAG_CASE | SORT_STRING);
-		$size = min( count($userArray)+1, 15);
+		$size = min(count($userArray)+1, 15);
 		$keys = array_keys($userArray);
 		$vals = array_values($userArray);
 
-		return html_build_multiple_select_box_from_arrays ($keys,$vals,'extra_fields['.$extra_field_id.'][]',$checked,$size, $show_100,$text_100,$allowed, $attrs);
+		return html_build_multiple_select_box_from_arrays($keys, $vals,'extra_fields['.$extra_field_id.'][]', $checked, $size, $show_100, $text_100, $allowed, $attrs);
 	}
 
 	/**
@@ -800,7 +819,7 @@ class ArtifactTypeHtml extends ArtifactType {
 	 * @param	array		$attrs
 	 * @return	string		HTML code for the box and choices
 	 */
-	function renderReleaseField($extra_field_id, $checked = 'xzxz', $show_100 = false, $text_100 = 'none', $show_any = false, $text_any = 'Any', $allowed = false, $attrs = array ()) {
+	function renderReleaseField($extra_field_id, $checked = 'xzxz', $show_100 = false, $text_100 = 'none', $show_any = false, $text_any = 'Any', $allowed = false, $attrs = array()) {
 		if ($text_100 == 'none'){
 			$text_100=_('None');
 		}
@@ -819,7 +838,7 @@ class ArtifactTypeHtml extends ArtifactType {
 		$packages = $fpFactory->getFRSs(true);
 		uasort($packages, 'compareObjectName');
 		foreach ($packages as $package) {
-			$releases = $package->getReleases();
+			$releases = $package->getReleases(false);
 			uasort($releases, 'compareObjectName');
 			foreach ($releases as $release) {
 				$optGroup[] = $package->getName();
@@ -845,7 +864,7 @@ class ArtifactTypeHtml extends ArtifactType {
 	 * @param	array		$attrs
 	 * @return	string		HTML code for the box and choices
 	 */
-	function renderMultiReleaseField ($extra_field_id,$checked='xzxz',$show_100=false,$text_100='none',$show_any=false,$text_any='Any', $allowed=false, $attrs = array ()) {
+	function renderMultiReleaseField($extra_field_id, $checked='xzxz', $show_100=false, $text_100='none', $show_any=false, $text_any='Any', $allowed=false, $attrs=array()) {
 		if ($text_100 == 'none'){
 			$text_100=_('None');
 		}
@@ -853,7 +872,7 @@ class ArtifactTypeHtml extends ArtifactType {
 			$checked=array();
 		}
 		if (!is_array($checked)) {
-			$checked = explode(',',$checked);
+			$checked = explode(',', $checked);
 		}
 
 		$releasesArray = array();
@@ -878,10 +897,10 @@ class ArtifactTypeHtml extends ArtifactType {
 				}
 			}
 		}
-		$size = min( count($releasesArray) + count($optGroup) + 1, 15);
+		$size = min(count($releasesArray) + count($optGroup) + 1, 15);
 		$keys = array_keys($releasesArray);
 		$vals = array_values($releasesArray);
-		return html_build_multiple_select_box_from_arrays ($keys,$vals,'extra_fields['.$extra_field_id.'][]',$checked,$size, $show_100,$text_100,$allowed, $attrs, $releasesAttrs, array(), $optGroup);
+		return html_build_multiple_select_box_from_arrays($keys, $vals,'extra_fields['.$extra_field_id.'][]', $checked, $size, $show_100, $text_100, $allowed, $attrs, $releasesAttrs, array(), $optGroup);
 	}
 
 	/**
@@ -896,7 +915,7 @@ class ArtifactTypeHtml extends ArtifactType {
 	 * @param	array	$attrs		Array of other attributes
 	 * @return	string	HTML code using radio buttons
 	 */
-	function renderRadio ($extra_field_id,$checked='xzxz',$show_100=false,$text_100='none',$show_any=false,$text_any='Any', $allowed = false, $attrs = array()) {
+	function renderRadio($extra_field_id, $checked='xzxz', $show_100=false, $text_100='none', $show_any=false, $text_any='Any', $allowed = false, $attrs = array()) {
 
 		$arr = $this->getExtraFieldElements($extra_field_id);
 		$aef = new ArtifactExtraField($this, $extra_field_id);
@@ -929,13 +948,13 @@ class ArtifactTypeHtml extends ArtifactType {
 			}
 			if ($aef->isAutoAssign()) {
 				$autoAssignTo = UserManager::instance()->getUserById($aefe->getAutoAssignto());
-				$radios_attrs[$i]=array_merge(isset($radios_attrs[$i]) ? $radios_attrs[$i] : array(), array( 'data-autoassignto'=>'{"id":'.$aefe->getAutoAssignto().', "name":"'.$autoAssignTo->getRealName().' ('.$autoAssignTo->getUnixName().')"}'));
+				$radios_attrs[$i]=array_merge(isset($radios_attrs[$i]) ? $radios_attrs[$i] : array(), array('data-autoassignto'=>'{"id":'.$aefe->getAutoAssignto().', "name":"'.$autoAssignTo->getRealName().' ('.$autoAssignTo->getUnixName().')"}'));
 			}
 		}
 		if ($show_100 && !empty($aefChildren)) {
-			$attrs_100 = array( 'data-dependency'=>'{"fields": ['.implode(', ',$aefChildren).']}');
+			$attrs_100 = array('data-dependency'=>'{"fields": ['.implode(', ', $aefChildren).']}');
 		}
-		return html_build_radio_buttons_from_arrays ($vals,$texts,'extra_fields['.$extra_field_id.']',$checked,$show_100,$text_100,$show_any,$text_any,$allowed,$attrs,$radios_attrs,$attrs_100);
+		return html_build_radio_buttons_from_arrays($vals, $texts,'extra_fields['.$extra_field_id.']', $checked, $show_100, $text_100, $show_any, $text_any, $allowed, $attrs, $radios_attrs, $attrs_100);
 	}
 
 	/**
@@ -948,7 +967,7 @@ class ArtifactTypeHtml extends ArtifactType {
 	 * @param	array		$attrs		Array of other attributes
 	 * @return	string		radio buttons
 	 */
-	function renderCheckbox ($extra_field_id,$checked=array(),$show_100=false,$text_100='none', $allowed=false, $attrs = array()) {
+	function renderCheckbox($extra_field_id, $checked=array(), $show_100=false, $text_100='none', $allowed=false, $attrs = array()) {
 		if ($text_100 == 'none'){
 			$text_100=_('None');
 		}
@@ -992,9 +1011,9 @@ class ArtifactTypeHtml extends ArtifactType {
 			}
 		}
 		if ($show_100 && !empty($aefChildren)) {
-			$attrs_100['data-dependency'] ='{"fields": ['.implode(', ',$aefChildren).']}';
+			$attrs_100['data-dependency'] ='{"fields": ['.implode(', ', $aefChildren).']}';
 		}
-		return html_build_checkboxes_from_arrays($vals,$texts,'extra_fields['.$extra_field_id.']',$checked,false,$show_100,$text_100,$allowed,$attrs,$chk_attrs,$attrs_100);
+		return html_build_checkboxes_from_arrays($vals, $texts,'extra_fields['.$extra_field_id.']', $checked,false, $show_100, $text_100, $allowed, $attrs, $chk_attrs, $attrs_100);
 	}
 
 	/**
@@ -1007,12 +1026,12 @@ class ArtifactTypeHtml extends ArtifactType {
 	 * @param	array		$attrs		Array of other attributes
 	 * @return	string		radio multiselectbox
 	 */
-	function renderMultiSelectBox($extra_field_id,$checked=array(),$show_100=false,$text_100='none', $allowed=false, $attrs=array()) {
+	function renderMultiSelectBox($extra_field_id, $checked=array(), $show_100=false, $text_100='none', $allowed=false, $attrs=array()) {
 		if (!$checked) {
 			$checked=array();
 		}
 		if (!is_array($checked)) {
-			$checked = explode(',',$checked);
+			$checked = explode(',', $checked);
 		}
 		$arr = $this->getExtraFieldElements($extra_field_id);
 		$aef = new ArtifactExtraField($this, $extra_field_id);
@@ -1039,15 +1058,15 @@ class ArtifactTypeHtml extends ArtifactType {
 						$dependency .= (empty($dependency) ? '':', ').'{"field":'.$key.', "elmnt": ['.implode(', ', $cElmnt).']}';
 					}
 					$dependency = '['.$dependency.']';
-					$opt_attrs[$i]= array( 'data-dependency'=>$dependency);
+					$opt_attrs[$i]= array('data-dependency'=>$dependency);
 				}
 			}
 		}
-		$size = min( count($arr)+1, 15);
+		$size = min(count($arr)+1, 15);
 		if ($show_100 && !empty($aefChildren)) {
-			$attrs_100 = array( 'data-dependency'=>'{"fields": ['.implode(', ',$aefChildren).']}');
+			$attrs_100 = array('data-dependency'=>'{"fields": ['.implode(', ', $aefChildren).']}');
 		}
-		return html_build_multiple_select_box_from_arrays($vals,$texts,"extra_fields[$extra_field_id][]",$checked,$size,$show_100,$text_100, $allowed, $attrs, $opt_attrs, $attrs_100);
+		return html_build_multiple_select_box_from_arrays($vals, $texts,"extra_fields[$extra_field_id][]", $checked, $size, $show_100, $text_100, $allowed, $attrs, $opt_attrs, $attrs_100);
 	}
 
 	/**
@@ -1060,7 +1079,7 @@ class ArtifactTypeHtml extends ArtifactType {
 	 * @param	array	$attrs		Array of other attributes
 	 * @return	string	HTML code of corresponding input tag.
 	 */
-	function renderTextField ($extra_field_id, $contents, $size, $maxlength, $attrs = array()) {
+	function renderTextField($extra_field_id, $contents, $size, $maxlength, $attrs = array()) {
 		return html_e('input', array_merge(array('type'=>'text', 'name'=>'extra_fields['.$extra_field_id.']', 'value'=>$contents, 'size'=>$size, 'maxlength'=>$maxlength), $attrs));
 	}
 
@@ -1074,10 +1093,10 @@ class ArtifactTypeHtml extends ArtifactType {
 	 * @param	array	$attrs		Array of other attributes
 	 * @return	string	HTML code of corresponding input tag.
 	 */
-	function renderIntegerField ($extra_field_id, $contents, $size, $maxlength, $attrs = array()) {
+	function renderIntegerField($extra_field_id, $contents, $size, $maxlength, $attrs = array()) {
 		$intAttrs = array('type'=>'number', 'name'=>'extra_fields['.$extra_field_id.']', 'value'=>$contents, 'size'=>$size, 'maxlength'=>$maxlength, 'min'=>0);
 		$newattrs =  array_merge($intAttrs, $attrs);
-		return html_e('input',$newattrs);
+		return html_e('input', $newattrs);
 	}
 
 	/**
@@ -1090,7 +1109,7 @@ class ArtifactTypeHtml extends ArtifactType {
 	 * @param	array	$attrs		Array of other attributes
 	 * @return	string	text area and data.
 	 */
-	function renderRelationField ($extra_field_id,$contents,$size,$maxlength, $attrs = array()) {
+	function renderRelationField($extra_field_id, $contents, $size, $maxlength, $attrs = array()) {
 		$arr = $this->getExtraFieldElements($extra_field_id);
 		for ($i=0; $i<count($arr); $i++) {
 			$keys[$i]=$arr[$i]['element_id'];
@@ -1098,9 +1117,9 @@ class ArtifactTypeHtml extends ArtifactType {
 		}
 		// Convert artifact id to links.
 		$html_contents = preg_replace_callback('/\b(\d+)\b/', create_function('$matches', 'return _artifactid2url($matches[1], \'title\');'), $contents);
-		$edit_contents = $this->renderTextField ($extra_field_id,$contents,$size,$maxlength);
-		return html_e('div',array_merge(array( 'id'=>'edit'.$extra_field_id, 'style'=>'display: none', 'title'=>_('Tip: Enter a space-separated list of artifact ids ([#NNN] also accepted)')), $attrs), $edit_contents)
-			.html_e('div',array_merge(array( 'id'=>'show'.$extra_field_id, 'style'=>'display: block'), $attrs), $html_contents);
+		$edit_contents = $this->renderTextField ($extra_field_id, $contents, $size, $maxlength);
+		return html_e('div',array_merge(array('id'=>'edit'.$extra_field_id, 'style'=>'display: none', 'title'=>_('Tip: Enter a space-separated list of artifact ids ([#NNN] also accepted)')), $attrs), $edit_contents)
+			.html_e('div',array_merge(array('id'=>'show'.$extra_field_id, 'style'=>'display: block'), $attrs), $html_contents);
 	}
 
 	/**
@@ -1113,10 +1132,9 @@ class ArtifactTypeHtml extends ArtifactType {
 	 * @param	array	$attrs		Array of other attributes
 	 * @return	string	text area and data.
 	 */
-	function renderTextArea ($extra_field_id,$contents,$rows,$cols, $attrs = array()) {
+	function renderTextArea($extra_field_id, $contents, $rows, $cols, $attrs = array()) {
 		return html_e('textarea', array_merge(array('name'=>'extra_fields['.$extra_field_id.']', 'rows'=>$rows, 'cols'=>$cols), $attrs), $contents, false);
 	}
-
 
 	/**
 	 * renderDatetime - this function builds a Datetime field.
@@ -1129,23 +1147,115 @@ class ArtifactTypeHtml extends ArtifactType {
 	function renderDatetime($extra_field_id, $datetime, $attrs = array()) {
 		if (!$datetime=='') {
 			$datetime_format = _('Y-m-d H:i');
-			$datetime = date($datetime_format,$datetime);
+			$datetime = date($datetime_format, $datetime);
 		}
-		return html_e('input', array_merge(array('type'=>'text', 'name'=>'extra_fields['.$extra_field_id.']', 'class'=>'datetimepicker', 'value'=>$datetime),$attrs));
+		if (isset($attrs['class'])) {
+			$attrs['class'] = $attrs['class'] . ' datetimepicker';
+		} else {
+			$attrs['class'] = 'datetimepicker';
+		}
+		return html_e('input', array_merge(array('type'=>'text', 'name'=>'extra_fields['.$extra_field_id.']', 'value'=>$datetime), $attrs));
 	}
 
 	function renderDateRange($extra_field_id, $dateRange, $attrs = array()) {
 		// http://html5pattern.com/Dates
 		// Date with leapyear-check
 		$datepattern = '(?:19|20)(?:(?:[13579][26]|[02468][048])-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))|(?:[0-9]{2}-(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:29|30))|(?:(?:0[13578]|1[02])-31)))';
-		return html_e('input', array_merge(array('type'=>'text', 'name'=>'extra_fields['.$extra_field_id.']', 'pattern'=>$datepattern.' '.$datepattern, 'maxlength'=>21, 'size'=>21, 'value'=>$dateRange),$attrs));
+		return html_e('input', array_merge(array('type'=>'text', 'name'=>'extra_fields['.$extra_field_id.']', 'pattern'=>$datepattern.' '.$datepattern, 'maxlength'=>21, 'size'=>21, 'value'=>$dateRange), $attrs));
+	}
+
+	/**
+	 * renderEffort - this function builds a Effort extra field.
+	 *
+	 * @param	int	$extra_field_id	The ID of this field.
+	 * @param	string	$contents	The data for this field.
+	 * @param	string	$size
+	 * @param	string	$maxlength
+	 * @param	array	$attrs		Array of other attributes
+	 * @return	string	text area and data.
+	 */
+	function renderEffort($extra_field_id, $contents, $size, $maxlength, $attrs = array()) {
+		$effortUnitSet = New EffortUnitSet($this, $this->getEffortUnitSet());
+		$effortUnitFactory = New EffortUnitFactory($effortUnitSet);
+		$units = $effortUnitFactory->getUnits();
+		$vals = array();
+		$texts = array();
+		$factors = array();
+		foreach ($units as $unit) {
+			$vals [] = $unit->getID();
+			$texts [] = $unit->getName();
+			$opts_attrs []['data-factor'] = $unit->getConversionFactorForBaseUnit();
+		}
+		$valueInUnitBase = $effortUnitFactory->encodedToValueInBaseUnit($contents);
+		$value = $effortUnitFactory->encodedToValue($contents);
+		$unitId = $effortUnitFactory->encodedToUnitId($contents);
+		if (isset($attrs['class'])) {
+			$attrs['class'] .= ' effort';
+		} else {
+			$attrs['class'] = 'effort';
+		}
+		$attrs['data-effortid'] = $extra_field_id;
+		$hiddenAttrs = array();
+		if (isset($attrs['form'])) {
+			$hiddenAttrs['form'] = $attrs['form'];
+		}
+		$return = html_e('input', array_merge(array('type'=>'hidden', 'name'=>'extra_fields['.$extra_field_id.']', 'value'=>$valueInUnitBase.'U'.$unitId), $hiddenAttrs));
+		$return .= html_e('input', array_merge(array('type'=>'number', 'name'=>'value['.$extra_field_id.']', 'value'=>$value, 'size'=>$size, 'maxlength'=>$maxlength, 'min'=>0), $attrs));
+		$return .= html_build_select_box_from_arrays($vals, $texts, 'unit['.$extra_field_id.']', $unitId, false, '', false, '', false, $attrs, $opts_attrs);
+		return $return;
+	}
+
+	function renderEffortRange($extra_field_id, $contents, $size, $maxlength, $attrs = array()) {
+		$effortUnitSet = New EffortUnitSet($this, $this->getEffortUnitSet());
+		$effortUnitFactory = New EffortUnitFactory($effortUnitSet);
+		$units = $effortUnitFactory->getUnits();
+		$vals = array();
+		$texts = array();
+		$opts_attrs = array();
+		foreach ($units as $unit) {
+			$vals [] = $unit->getID();
+			$texts [] = $unit->getName();
+			$opts_attrs []['data-factor'] = $unit->getConversionFactorForBaseUnit();
+		}
+		$contentsFrom = '0U'.$vals[0];
+		$contentsTo = '0U'.$vals[0];
+		if (preg_match('/^(\d+U\d+) ?(\d+U\d+)?$/', $contents, $matches)) {
+			$contentsFrom = $matches[1];
+			$contentsTo = $matches[2];
+		}
+		$valueInUnitBaseFrom = $effortUnitFactory->encodedToValueInBaseUnit($contentsFrom);
+		$valueInUnitBaseTo = $effortUnitFactory->encodedToValueInBaseUnit($contentsTo);
+		$valueFrom = $effortUnitFactory->encodedToValue($contentsFrom);
+		$valueTo = $effortUnitFactory->encodedToValue($contentsTo);
+		$unitIdFrom = $effortUnitFactory->encodedToUnitId($contentsFrom);
+		$unitIdTo = $effortUnitFactory->encodedToUnitId($contentsTo);
+		$attrs['data-effortid'] = $extra_field_id;
+		if (isset($attrs['class'])) {
+			$attrs['class'] .= ' effort-range';
+		} else {
+			$attrs['class'] = 'effort-range';
+		}
+		$attrsFrom = $attrs;
+		$attrsTo = $attrs;
+		$hiddenAttrs = array();
+		if (isset($attrs['form'])) {
+			$hiddenAttrs['form'] = $attrs['form'];
+		}
+		$return = html_e('input', array_merge(array('type'=>'hidden', 'name'=>'extra_fields['.$extra_field_id.']', 'value'=>$valueInUnitBaseFrom.'U'.$unitIdFrom.' '.$valueInUnitBaseTo.'U'.$unitIdTo), $hiddenAttrs));
+		$return .= _('Between')._(':').html_e('br');
+		$return .= html_e('input', array_merge(array('type'=>'number', 'name'=>'value_from['.$extra_field_id.']', 'value'=>$valueFrom, 'size'=>$size, 'maxlength'=>$maxlength, 'min'=>0), $attrsFrom));
+		$return .= html_build_select_box_from_arrays($vals, $texts, 'unit_from['.$extra_field_id.']', $unitIdFrom, false, '', false, '', false, $attrsFrom, $opts_attrs);
+		$return .= html_e('br');
+		$return .= _('and')._(':').html_e('br');
+		$return .= html_e('input', array_merge(array('type'=>'number', 'name'=>'value_to['.$extra_field_id.']', 'value'=>$valueTo, 'size'=>$size, 'maxlength'=>$maxlength, 'min'=>0), $attrsTo));
+		$return .= html_build_select_box_from_arrays($vals, $texts, 'unit_to['.$extra_field_id.']', $unitIdTo, false, '', false, '', false, $attrsTo, $opts_attrs);
+		return $return;
 	}
 
 	function technicianBox($name = 'assigned_to[]', $checked = 'xzxz', $show_100 = true, $text_100 = 'none', $extra_id = '-1', $extra_name = '', $multiple = false, $attrs = array()) {
 		if ($text_100=='none'){
 			$text_100=_('Nobody');
 		}
-
 		$engine = RBACEngine::getInstance();
 		$techs = $engine->getUsersByAllowedAction('tracker', $this->getID(), 'tech') ;
 
@@ -1166,12 +1276,12 @@ class ArtifactTypeHtml extends ArtifactType {
 
 		if ($multiple) {
 			if (!is_array($checked)) {
-				$checked = explode(',',$checked);
+				$checked = explode(',', $checked);
 			}
 			$size = min(count($ids)+1, 15);
-			return html_build_multiple_select_box_from_arrays($ids, $names, $name, $checked, $size, $show_100, $text_100, false, '', false, $attrs);
+			return html_build_multiple_select_box_from_arrays($ids, $names, $name, $checked, $size, $show_100, $text_100, false, $attrs);
 		} else {
-			return html_build_select_box_from_arrays($ids, $names, $name, $checked, $show_100, $text_100, false, '', false, $attrs);
+			return html_build_select_box_from_arrays($ids, $names, $name, $checked, $show_100, $text_100, false, false, false, $attrs);
 		}
 	}
 
@@ -1189,16 +1299,16 @@ class ArtifactTypeHtml extends ArtifactType {
 
 		if ($multiple) {
 			if (!is_array($checked)) {
-				$checked = explode(',',$checked);
+				$checked = explode(',', $checked);
 			}
-			$size = min( count($ids)+1, 15);
-			return html_build_multiple_select_box_from_arrays($ids, $names, $name, $checked, $size, $show_100, $text_100, false, '', false, $attrs);
+			$size = min(count($ids)+1, 15);
+			return html_build_multiple_select_box_from_arrays($ids, $names, $name, $checked, $size, $show_100, $text_100, false, $attrs);
 		} else {
-			return html_build_select_box_from_arrays($ids, $names, $name, $checked, $show_100, $text_100, false, '', false, $attrs);
+			return html_build_select_box_from_arrays($ids, $names, $name, $checked, $show_100, $text_100, false, $attrs);
 		}
 	}
 
-	function lastModifierBox ($name='last_modified_by[]',$checked='xzxz',$show_100=true,$text_100='none',$extra_id='-1',$extra_name='',$multiple=false) {
+	function lastModifierBox($name='last_modified_by[]', $checked='xzxz', $show_100=true, $text_100='none', $extra_id='-1', $extra_name='', $multiple=false) {
 		if ($text_100=='none'){
 			$text_100=_('Nobody');
 		}
@@ -1212,12 +1322,12 @@ class ArtifactTypeHtml extends ArtifactType {
 
 		if ($multiple) {
 			if (!is_array($checked)) {
-				$checked = explode(',',$checked);
+				$checked = explode(',', $checked);
 			}
-			$size = min( count($ids)+1, 15);
-			return html_build_multiple_select_box_from_arrays ($ids,$names,$name,$checked,$size,$show_100,$text_100);
+			$size = min(count($ids)+1, 15);
+			return html_build_multiple_select_box_from_arrays($ids, $names, $name, $checked, $size, $show_100, $text_100);
 		} else {
-			return html_build_select_box_from_arrays ($ids,$names,$name,$checked,$show_100,$text_100);
+			return html_build_select_box_from_arrays($ids, $names, $name, $checked, $show_100, $text_100);
 		}
 	}
 
@@ -1233,11 +1343,20 @@ class ArtifactTypeHtml extends ArtifactType {
 	 *
 	 * @return string	HTML code
 	 */
-	function statusBox($name = 'status_id', $checked = 'xzxz', $show_100 = false,$text_100 = 'none', $attrs = array()) {
+	function statusBox($name = 'status_id', $checked = 'xzxz', $show_100 = false, $text_100 = 'none', $attrs = array()) {
 		if ($text_100=='none'){
 			$text_100=_('None');
 		}
 		return html_build_select_box($this->getStatuses(), $name, $checked, $show_100, $text_100, false, '', false, $attrs);
+	}
+
+	/**
+	 * priorityBox - show the priorities
+	 *
+	 * @return string	HTML code
+	 */
+	function priorityBox($name = 'priority', $checked_val = '3', $nochange = false, $attrs = array(), $show_any = false){
+		return html_build_priority_select_box($name, $checked_val, $nochange, $attrs, $show_any);
 	}
 
 	function javascript() {
@@ -1246,7 +1365,42 @@ class ArtifactTypeHtml extends ArtifactType {
 	var invalidInputMsg = '". _("This choice is not allowed")."';
 	var groupId =".$this->Group->getID().";
 	var atId = ".$this->getID().";";
+
+		$effortUnitSet = New EffortUnitSet($this, $this->getEffortUnitSet());
+		if ($effortUnitSet->isAutoconvert()) {
+			$jseffort = <<<'EOS'
+	$("select.effort").on('change', function(){
+		var effortid = $(this).data("effortid");
+		var value = parseInt(parseInt($("input[name='extra_fields["+effortid+"]']").val())/$("select[name='unit["+effortid+"]'] option:selected").data('factor'));
+		$("input[name='value["+effortid+"]']").val(value);
+		$("input[name='extra_fields["+effortid+"]']").val(value*$("select[name='unit["+effortid+"]'] option:selected").data('factor')+'U'+$("select[name='unit["+effortid+"]']").val());
+	});
+	$("input.effort").on('change', function(){
+		var effortid = $(this).data("effortid");
+		var value = $("input[name='value["+effortid+"]']").val();
+		$("input[name='extra_fields["+effortid+"]']").val(value*$("select[name='unit["+effortid+"]'] option:selected").data('factor')+'U'+$("select[name='unit["+effortid+"]']").val());
+	});
+	$(".effort-range").on('change', function(){
+		var effortid = $(this).data("effortid");
+		$("input[name='extra_fields["+effortid+"]']").val($("input[name='value_from["+effortid+"]']").val()*$("select[name='unit_from["+effortid+"]'] option:selected").data('factor')+'U'+$("select[name='unit_from["+effortid+"]']").val()+' '+$("input[name='value_to["+effortid+"]']").val()*$("select[name='unit_to["+effortid+"]'] option:selected").data('factor')+'U'+$("select[name='unit_to["+effortid+"]']").val());
+	});
+EOS;
+		} else {
+		$jseffort = <<<'EOS'
+	$(".effort").on('change', function(){
+		var effortid = $(this).data("effortid");
+		$("input[name='extra_fields["+effortid+"]']").val($("input[name='value["+effortid+"]']").val()*$("select[name='unit["+effortid+"]'] option:selected").data('factor')+'U'+$("select[name='unit["+effortid+"]']").val());
+	});
+	$(".effort-range").on('change', function(){
+		var effortid = $(this).data("effortid");
+		$("input[name='extra_fields["+effortid+"]']").val($("input[name='value_from["+effortid+"]']").val()*$("select[name='unit_from["+effortid+"]'] option:selected").data('factor')+'U'+$("select[name='unit_from["+effortid+"]']").val()+' '+$("input[name='value_to["+effortid+"]']").val()*$("select[name='unit_to["+effortid+"]'] option:selected").data('factor')+'U'+$("select[name='unit_to["+effortid+"]']").val());
+	});
+EOS;
+		}
 		$javascript = <<<'EOS'
+	function showMessage( msg_text, msg_class) {
+		$("div#maindiv h1").append($("<p>", { "class": msg_class }).html( msg_text )).show();
+	};
 	$.expr[':'].invalid = function(elem, index, match) {
 		for (let invalid of document.querySelectorAll(':invalid') )  {
 			if (elem === invalid) { return true; }
@@ -1258,11 +1412,11 @@ class ArtifactTypeHtml extends ArtifactType {
 	}).on('keydown', function(event){
 		if(event.keyCode !== 9) return false;
 	});
-	$(".in-formula[name^='extra_fields']").on('change', function(){
+	$(".in-formula").on('change', function(){
 		$.ajax({
 			type: 'POST',
 			url: 'index.php',
-			data: 'rtype=ajax&function=get_formulas_results&group_id='+groupId+'&atid='+atId+'&'+$("[name^='extra_fields']" ).serialize(),
+			data: 'rtype=ajax&function=get_formulas_results&group_id='+groupId+'&atid='+atId+'&status='+$("select[name='status_id'] option:selected").text()+'&assigned_to='+$("select[name='assigned_to'] option:selected").text()+'&'+$("[name^='extra_fields'], #tracker-summary, #tracker-description, [name='priority']").serialize(),
 			async: false,
 			dataType: 'json',
 			success: function(answer){
@@ -1271,11 +1425,11 @@ class ArtifactTypeHtml extends ArtifactType {
 				}
 				fields = answer['fields'];
 				$.each(fields, function (index, field) {
+					if (field.error!=null){
+						showMessage(field.error, 'error');
+					}
 					fieldObj = $("[name^='extra_fields["+field.id+"]']");
-				console.log(fieldObj);
-				console.log(fieldObj.is("input[type='radio']"));
 					if (fieldObj.is("input[type='checkbox']")){
-				console.log("checkbox");
 						fieldObj.each(function() {
 							var in_array = -1;
 							for (var key in field.value) {
@@ -1291,9 +1445,7 @@ class ArtifactTypeHtml extends ArtifactType {
 							}
 						});
 					} else if (fieldObj.is("input[type='radio']")){
-				console.log("radio");
 						fieldObj.each(function() {
-							console.log($(this));
 							var in_array = -1;
 							for (var key in field.value) {
 								if (field.value[key] == $(this).val()) {
@@ -1301,7 +1453,6 @@ class ArtifactTypeHtml extends ArtifactType {
 									break;
 								}
 							}
-							console.log(in_array);
 							if (in_array > -1) {
 								$(this).prop("checked",true);
 							} else {
@@ -1416,7 +1567,7 @@ class ArtifactTypeHtml extends ArtifactType {
 		});
 	});
 EOS;
-		return html_e('script', array( 'type'=>'text/javascript'), '//<![CDATA['."\n".'$(function(){'.$jsvariable."\n".$javascript.'});'."\n".'//]]>');
+		return html_e('script', array('type'=>'text/javascript'), '//<![CDATA['."\n".'$(function(){'.$jsvariable."\n".$jseffort."\n".$javascript.'});'."\n".'//]]>');
 	}
 
 }

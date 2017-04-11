@@ -30,6 +30,6 @@ echo '<div style="width:98%; text-align:right; padding:5px;" >';
 echo $HTML->openForm(array('name' => 'jump',  'method' => 'post', 'action' => '/plugins/'.$mantisbt->name.'/?type='.$type.'&group_id='.$group_id.'&view=viewIssue'));
 echo '<span>'. _('Jump to ticket')._(':'). '</span>';
 echo '<input type="text" name="idBug" />';
-echo '<input type="submit" value="'._('Ok').'" />';
+echo '<input type="submit" value="'._('OK').'" />';
 echo $HTML->closeForm();
 echo '</div>';

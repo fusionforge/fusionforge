@@ -26,9 +26,8 @@ class TaskBoardPlugin extends Plugin {
 	function __construct() {
 		parent::__construct();
 		$this->name = 'taskboard';
-		$this->text = 'Task Board'; // To show in the tabs, use...
-		$this->pkg_desc =
-_('Agile TaskBoard: Supports Scrum and Kanban methodologies.');
+		$this->text = _('Task Board'); // To show in the tabs, use...
+		$this->pkg_desc = _('Agile Task Board: Supports Scrum and Kanban methodologies.');
 		$this->hooks[] = 'project_admin_plugins'; // to show up in the admin page fro group
 		$this->hooks[] = 'groupmenu';
 		$this->hooks[] = 'groupisactivecheckbox'; // The "use ..." checkbox in editgroupinfo

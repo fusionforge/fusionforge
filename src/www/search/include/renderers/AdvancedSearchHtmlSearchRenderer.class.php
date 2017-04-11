@@ -190,20 +190,20 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 
 		$result .= '<h2><a name="'.$section.'"></a>'.$title.'</h2>';
 
-		$result = $renderer->searchQuery->getData($renderer->searchQuery->getRowsPerPage(),$renderer->searchQuery->getOffset());
+		$res = $renderer->searchQuery->getData($renderer->searchQuery->getRowsPerPage(),$renderer->searchQuery->getOffset());
 
-		if (count($result) > 0) {
+		if (count($res) > 0) {
 			if ($renderer->searchQuery->getRowsTotalCount() >= $renderer->searchQuery->getRowsPerPage())
 				$result .= '<i>' . sprintf(_('Note: only the first %d results for this category are displayed.'), $renderer->searchQuery->getRowsPerPage()) . '</i>';
 			$result .= $HTML->listTabletop($renderer->tableHeaders);
 			$result .= $renderer->getRows();
 			$result .= $HTML->listTableBottom();
 		} elseif(method_exists($renderer, 'getSections') && (count($renderer->getSections($this->groupId)) == 0)) {
-                $result .= '<p>'.sprintf(_('No matches found for “%s”'), stripslashes(htmlspecialchars($this->words)));
+			$result .= '<p>'.sprintf(_('No matches found for “%s”'), stripslashes(htmlspecialchars($this->words)));
 			$result .= _(' - ');
 			$result .= _('No sections available (check your permissions)').'</p>';
 		} else {
-                $result .= '<p>'.sprintf(_('No matches found for “%s”'), stripslashes(htmlspecialchars($this->words))).'</p>';
+			$result .= '<p>'.sprintf(_('No matches found for “%s”'), stripslashes(htmlspecialchars($this->words))).'</p>';
 		}
 		return $result;
 	}

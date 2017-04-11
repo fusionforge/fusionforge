@@ -24,17 +24,21 @@ class WidgetLayout_Row_Column {
 	var $width;
 	var $contents;
 	var $row;
-	function WidgetLayout_Row_Column($id, $width) {
+
+	function __construct($id, $width) {
 		$this->id       = $id;
 		$this->width    = $width;
 		$this->contents = array();
 	}
+
 	function setRow(&$row) {
 		$this->row =& $row;
 	}
+
 	function add(&$c, $is_minimized, $display_preferences) {
 		$this->contents[] = array('content' => &$c, 'is_minimized' => $is_minimized, 'display_preferences' => $display_preferences);
 	}
+
 	function display($readonly, $owner_id, $owner_type, $is_last) {
 		echo html_ao('td', array('style' => 'height:10px; width:'. $this->width .'%; '. (!$is_last ? 'padding-right:20px;' : ''), 'id' => $this->getColumnId()));
 		foreach ($this->contents as $key => $nop) {
@@ -42,6 +46,7 @@ class WidgetLayout_Row_Column {
 		}
 		echo html_ac(html_ap() -1);
 	}
+
 	function getColumnId() {
 		return 'widgetlayout_col_'. $this->id;
 	}

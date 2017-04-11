@@ -94,17 +94,16 @@ if ($typ=='r') {
 	$report->setData($res,1);
 	$data=$report->getData();
 	$labels=$report->getDates();
-	echo $HTML->listTableTop (array(_('Week'),
-			_('Time')));
+	echo $HTML->listTableTop(array(_('Week'), _('Time')));
 
 	for ($i=0; $i<count($labels); $i++) {
 
-		echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>'.
+		echo '<tr>'.
 		'<td>'. $labels[$i] .'</td><td>'. $data[$i] .'</td></tr>';
 
 	}
 
-	echo $HTML->listTableBottom ();
+	echo $HTML->listTableBottom();
 
 } elseif ($start != $end) {
 	report_sitetimebargraph($start, $end);

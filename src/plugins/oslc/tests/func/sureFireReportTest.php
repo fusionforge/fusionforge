@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))).'/tests/func/Testing/SeleniumGforge.php';
+require_once dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))) . '/tests/func/SeleniumForge.php';
 
 // This will analize the HTML report generated out of the OSLC
 // provider JUnit test suite by the Maven Surefire plugin to detect if

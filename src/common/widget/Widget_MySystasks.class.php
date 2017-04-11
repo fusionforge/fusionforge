@@ -67,7 +67,7 @@ class Widget_MySystasks extends Widget {
 		}
 
 		$title_arr = array(
-			_('Task ID'),
+			_('Task Id'),
 			_('Plugin'),
 			_('SysTask Type'),
 			_('Project Name'),
@@ -94,7 +94,7 @@ class Widget_MySystasks extends Widget {
 				. ' (+' . round(db_result($res, $i,'queued'), 1) . 's)';
 			$cells[][] = date("H:i:s", db_result($res, $i,'stopped'))
 				. ' (+' . round(db_result($res, $i,'run'), 1) . 's)';
-			$html_my_systasks .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i+1, true)), $cells);
+			$html_my_systasks .= $HTML->multiTableRow(array(), $cells);
 		}
 
 		$html_my_systasks .= $HTML->listTableBottom();

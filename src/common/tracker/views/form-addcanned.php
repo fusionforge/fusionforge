@@ -44,11 +44,11 @@ if ($result && $rows > 0) {
 	$title_arr[]=_('Title');
 	$title_arr[]=_('Operation');
 
-	echo $HTML->listTableTop ($title_arr);
+	echo $HTML->listTableTop($title_arr);
 
 	for ($i=0; $i < $rows; $i++) {
 		$id = db_result($result, $i, 'id');
-		echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>'.
+		echo '<tr>'.
 			'<td>'.$id.'</td>'.
 			'<td>'.util_make_link('/tracker/admin/?update_canned=1&id='.$id.'&group_id='.$group_id.'&atid='.$ath->getID(), db_result($result, $i, 'title')).'</td>
 			<td>'.util_make_link('/tracker/admin/?delete_canned=1&id='.$id.'&group_id='.$group_id.'&atid='. $ath->getID(), _('Delete')).'</td></tr>';

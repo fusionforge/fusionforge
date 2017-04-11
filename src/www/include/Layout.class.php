@@ -8,7 +8,7 @@
  * Copyright 2010-2012, Alain Peyrat - Alcatel-Lucent
  * Copyright © 2011 Thorsten Glaser – tarent GmbH
  * Copyright 2011 - Marc-Etienne Vargenau, Alcatel-Lucent
- * Copyright 2012-2016, Franck Villaume - TrivialDev
+ * Copyright 2012-2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -386,9 +386,9 @@ class Layout extends FFError {
 	}
 
 	/**
- 	 * headerLinkedDataAutodiscovery() - creates the link+alternate links to alternate
- 	 * 		representations for Linked Data autodiscovery
- 	 */
+	 * headerLinkedDataAutodiscovery() - creates the link+alternate links to alternate
+	 *		representations for Linked Data autodiscovery
+	 */
 	function headerLinkedDataAutodiscovery() {
 
 		// retrieve the script's prefix
@@ -426,7 +426,7 @@ class Layout extends FFError {
 		echo html_e('meta', array('name' => 'Forge-Identification', 'content' => $ff->software_name.':'.$ff->software_version));
 	}
 
-	function bodyHeader($params){
+	function bodyHeader($params) {
 		?>
 			<div class="header">
 			<table class="fullwidth" id="headertable">
@@ -465,11 +465,11 @@ class Layout extends FFError {
 	</tr>
 
 	<tr>
-		<td class="align-left toptab" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/topleft.png" height="9" width="9" alt="" /></td>
+		<td class="align-left toptab" width="9"></td>
 		<td class="toptab" width="30"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="30" height="1" alt="" /></td>
 		<td class="toptab"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="1" height="1" alt="" /></td>
 		<td class="toptab" width="30"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="30" height="1" alt="" /></td>
-		<td class="align-right toptab" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/topright.png" height="9" width="9" alt="" /></td>
+		<td class="align-right toptab" width="9"></td>
 	</tr>
 
 	<tr>
@@ -501,9 +501,9 @@ if (isset($params['group']) && $params['group']) {
 
 ?>
 			<tr>
-				<td class="align-left projecttab" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/topleft-inner.png" height="9" width="9" alt="" /></td>
+				<td class="align-left projecttab" width="9"></td>
 				<td class="projecttab" ><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="1" height="1" alt="" /></td>
-				<td class="align-right projecttab"  width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/topright-inner.png" height="9" width="9" alt="" /></td>
+				<td class="align-right projecttab"  width="9"></td>
 			</tr>
 
 			<tr>
@@ -524,9 +524,9 @@ if (isset($params['group']) && $params['group']) {
 				<td width="10" class="footer3" ><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="2" height="1" alt="" /></td>
 			</tr>
 			<tr>
-				<td class="align-left footer1" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/bottomleft-inner.png" height="11" width="11" alt="" /></td>
+				<td class="align-left footer1" width="9"></td>
 				<td class="footer3"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="1" height="1" alt="" /></td>
-				<td class="align-right footer1" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/bottomright-inner.png" height="11" width="11" alt="" /></td>
+				<td class="align-right footer1" width="9"></td>
 			</tr>
 			</table>
 
@@ -536,9 +536,9 @@ if (isset($params['group']) && $params['group']) {
 		<td width="10" class="footer2"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="2" height="1" alt="" /></td>
 	</tr>
 	<tr>
-		<td class="align-left footer2" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/bottomleft.png" height="9" width="9" alt="" /></td>
+		<td class="align-left footer2" width="9"></td>
 		<td class="footer2" colspan="3"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="1" height="1" alt="" /></td>
-		<td class="align-right footer2" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/bottomright.png" height="9" width="9" alt="" /></td>
+		<td class="align-right footer2" width="9"></td>
 	</tr>
 </table>
 <?php
@@ -574,19 +574,17 @@ if (isset($params['group']) && $params['group']) {
 	function boxTop($title, $id = '') {
 		return '
 			<!-- Box Top Start -->
-
-			<table class="fullwidth" style="background:url('.$this->imgroot.'vert-grad.png)">
+			<table class="fullwidth">
 			<tr class="align-center">
-			<td class="top align-right" width="10" style="background:url('.$this->imgbaseurl.'box-topleft.png)"><img src="'.$this->imgbaseurl.'clear.png" width="10" height="20" alt="" /></td>
-			<td class="fullwidth" style="background:url('.$this->imgbaseurl.'box-grad.png)"><span class="titlebar">'.$title.'</span></td>
-			<td class="top" width="10" style="background:url('.$this->imgbaseurl.'box-topright.png)"><img src="'.$this->imgbaseurl.'clear.png" width="10" height="20" alt="" /></td>
+			<td class="top align-right" width="10"><img src="'.$this->imgbaseurl.'clear.png" width="10" height="20" alt="" /></td>
+			<td class="fullwidth"><span class="titlebar">'.$title.'</span></td>
+			<td class="top" width="10"><img src="'.$this->imgbaseurl.'clear.png" width="10" height="20" alt="" /></td>
 			</tr>
 			<tr>
 			<td colspan="3">
-			<table cellspacing="2" cellpadding="2" class="fullwidth">
+			<table class="fullwidth">
 			<tr class="align-left">
 			<td colspan="2">
-
 			<!-- Box Top End -->';
 	}
 
@@ -603,7 +601,7 @@ if (isset($params['group']) && $params['group']) {
 			</td>
 			</tr>
 			<tr class="align-center">
-			<td colspan="2" style="background:url('.$this->imgbaseurl.'box-grad.png)"><span class="titlebar">'.$title.'</span></td>
+			<td colspan="2"><span class="titlebar">'.$title.'</span></td>
 			</tr>
 			<tr class="align-left">
 			<td colspan="2">
@@ -628,26 +626,6 @@ if (isset($params['group']) && $params['group']) {
 	}
 
 	/**
-	 * boxGetAltRowStyle() - Get an alternating row style for tables.
-	 *
-	 * @param	int	$i		Row number
-	 * @param	bool	$classonly	Return class name only
-	 * @return	string	the class code
-	 */
-	function boxGetAltRowStyle($i, $classonly = false) {
-		if ($i % 2 == 0) {
-			$ret = 'altRowStyleEven';
-		} else {
-			$ret = 'altRowStyleOdd';
-		}
-		if ($classonly) {
-			return $ret;
-		} else {
-			return 'class="'.$ret.'"';
-		}
-	}
-
-	/**
 	 * listTableTop() - Takes an array of titles and builds the first row of a new table.
 	 *
 	 * @param	array	$titleArray		The array of titles
@@ -660,12 +638,11 @@ if (isset($params['group']) && $params['group']) {
 	 * @return	string	the html code
 	 */
 	function listTableTop($titleArray = array(), $linksArray = array(), $class = '', $id = '', $thClassArray = array(), $thTitleArray = array(), $thOtherAttrsArray = array()) {
-		$attrs = array('class' => 'listing');
-		$args = '';
+		$attrs = array();
 		if ($class) {
-			$attrs['class'] .= ' '.$class;
+			$attrs['class'] = $class;
 		} else {
-			$attrs['class'] .= ' full';
+			$attrs['class'] = 'full listing';
 		}
 		if ($id) {
 			$attrs['id'] = $id;
@@ -690,7 +667,7 @@ if (isset($params['group']) && $params['group']) {
 					$thAttrs['title'] = $thTitleArray[$i];
 				}
 				$cell = $titleArray[$i];
-				if ($linksArray && isset($linksArray[$i])) {
+				if ($linksArray && !empty($linksArray[$i])) {
 					$cell = util_make_link($linksArray[$i], $titleArray[$i]);
 				}
 				$return .= html_e('th', $thAttrs, $cell, false);
@@ -763,9 +740,9 @@ if (isset($params['group']) && $params['group']) {
 		echo $this->tabGenerator($menu['urls'], $menu['titles'], $menu['tooltips'], true, $menu['selected'], 'white');
 	}
 
-	function tabGenerator($TABS_DIRS, $TABS_TITLES, $TABS_TOOLTIPS, $nested=false, $selected=false, $sel_tab_bgcolor='white', $total_width='100%') {
+	function tabGenerator($tabs_dirs, $tabs_titles, $tabs_tooltips, $nested=false, $selected=false, $sel_tab_bgcolor='white', $total_width='100%') {
 
-		$count=count($TABS_DIRS);
+		$count=count($tabs_dirs);
 		$width=intval((100/$count));
 
 		$return = '';
@@ -797,7 +774,7 @@ if (isset($params['group']) && $params['group']) {
 				$return .= '
 					<td '.$rowspan.'class="top" width="10" style="background:url('.$this->imgbaseurl . 'theme-'.$inner.'-end-'.(($issel) ? '' : 'not').'selected.png)">'.
 					'<img src="'.$this->imgbaseurl . 'clear.png" height="25" width="10" alt="" /></td>'.
-					'<td '.$rowspan.'style="background:url('.$this->imgbaseurl . $bgimg.')" width="'.$width.'%" align="center">'.util_make_link ($TABS_DIRS[$i],$TABS_TITLES[$i],array('class'=>(($issel)?'tabsellink':'tablink')),true).'</td>';
+					'<td '.$rowspan.'style="background:url('.$this->imgbaseurl . $bgimg.')" width="'.$width.'%" align="center">'.util_make_link ($tabs_dirs[$i],$tabs_titles[$i],array('class'=>(($issel)?'tabsellink':'tablink')),true).'</td>';
 			} elseif ($i==$count-1) {
 				//
 				//	this is the last tab, choose an image with name-end
@@ -812,7 +789,7 @@ if (isset($params['group']) && $params['group']) {
 				$return .= '
 					<td '.$rowspan.'colspan="2" class="top" width="20" style="background:url('.$this->imgbaseurl . 'theme-'.$inner.'-'.(($wassel) ? '' : 'not').'selected-'.(($issel) ? '' : 'not').'selected.png)">'.
 					'<img src="'.$this->imgbaseurl . 'clear.png" height="2" width="20" alt="" /></td>'.
-					'<td '.$rowspan.'style="background:url('.$this->imgbaseurl . $bgimg.')" width="'.$width.'%" align="center">'.util_make_link($TABS_DIRS[$i], $TABS_TITLES[$i], array('class'=>(($issel)?'tabsellink':'tablink')), true).'</td>';
+					'<td '.$rowspan.'style="background:url('.$this->imgbaseurl . $bgimg.')" width="'.$width.'%" align="center">'.util_make_link($tabs_dirs[$i], $tabs_titles[$i], array('class'=>(($issel)?'tabsellink':'tablink')), true).'</td>';
 				//
 				//	Last graphic on right-side
 				//
@@ -834,7 +811,7 @@ if (isset($params['group']) && $params['group']) {
 				$return .= '
 					<td '.$rowspan.'colspan="2" class="top" width="20" style="background:url('.$this->imgbaseurl . 'theme-'.$inner.'-'.(($wassel) ? '' : 'not').'selected-'.(($issel) ? '' : 'not').'selected.png)">'.
 					'<img src="'.$this->imgbaseurl . 'clear.png" height="2" width="20" alt="" /></td>'.
-					'<td '.$rowspan.'style="background:url('.$this->imgbaseurl . $bgimg.')" width="'.$width.'%" align="center">'.util_make_link($TABS_DIRS[$i], $TABS_TITLES[$i], array('class'=>(($issel)?'tabsellink':'tablink')), true).'</td>';
+					'<td '.$rowspan.'style="background:url('.$this->imgbaseurl . $bgimg.')" width="'.$width.'%" align="center">'.util_make_link($tabs_dirs[$i], $tabs_titles[$i], array('class'=>(($issel)?'tabsellink':'tablink')), true).'</td>';
 
 			}
 		}
@@ -845,13 +822,13 @@ if (isset($params['group']) && $params['group']) {
 		//
 		if ($selected == 0) {
 			$beg_cols=0;
-			$end_cols=((count($TABS_DIRS)*3)-3);
-		} elseif ($selected == (count($TABS_DIRS)-1)) {
-			$beg_cols=((count($TABS_DIRS)*3)-3);
+			$end_cols=((count($tabs_dirs)*3)-3);
+		} elseif ($selected == (count($tabs_dirs)-1)) {
+			$beg_cols=((count($tabs_dirs)*3)-3);
 			$end_cols=0;
 		} else {
 			$beg_cols=($selected*3);
-			$end_cols=(((count($TABS_DIRS)*3)-3)-$beg_cols);
+			$end_cols=(((count($tabs_dirs)*3)-3)-$beg_cols);
 		}
 		$return .= '<tr>';
 		if ($beg_cols > 0) {
@@ -980,26 +957,28 @@ if (isset($params['group']) && $params['group']) {
 	 * feedback() - returns the htmlized feedback string when an action is performed.
 	 *
 	 * @param	string	$feedback	feedback string
+	 * @param	array	$attr		html attributes
 	 * @return	string	htmlized feedback
 	 */
-	function feedback($feedback) {
+	function feedback($feedback, $attr = array()) {
 		if (!$feedback) {
 			return '';
 		} else {
-			return html_e('p', array('class' => 'feedback'), strip_tags($feedback, '<br>'), true);
+			return html_e('p', array_merge(array('class' => 'feedback'), $attr), strip_tags($feedback, '<br>'), true);
 		}
 	}
 	/**
 	 * warning_msg() - returns the htmlized warning string when an action is performed.
 	 *
 	 * @param	string	$msg	msg string
+	 * @param	array	$attr	html attributes
 	 * @return	string	htmlized warning
 	 */
-	function warning_msg($msg) {
+	function warning_msg($msg, $attr = array()) {
 		if (!$msg) {
 			return '';
 		} else {
-			return html_e('p', array('class' => 'warning_msg'), strip_tags($msg, '<br>'), true);
+			return html_e('p', array_merge(array('class' => 'warning_msg'), $attr), strip_tags($msg, '<br>'), true);
 		}
 	}
 
@@ -1007,13 +986,14 @@ if (isset($params['group']) && $params['group']) {
 	 * error_msg() - returns the htmlized error string when an action is performed.
 	 *
 	 * @param	string	$msg	msg string
+	 * @param	array	$attr	html attributes
 	 * @return	string	htmlized error
 	 */
-	function error_msg($msg) {
+	function error_msg($msg, $attr = array()) {
 		if (!$msg) {
 			return '';
 		} else {
-			return html_e('p', array('class' => 'error'), strip_tags($msg, '<br>'), true);
+			return html_e('p', array_merge(array('class' => 'error'), $attr), strip_tags($msg, '<br>'), true);
 		}
 	}
 
@@ -1226,29 +1206,6 @@ if (isset($params['group']) && $params['group']) {
 		return $return;
 	}
 
-	/**
-	 * @todo use listTableTop and make this function deprecated ?
-	 */
-	function html_table_top($cols, $summary = '', $class = '', $extra_params = '') {
-		$return = '<table summary="' . $summary . '" ';
-		if ($class) {
-			$return .= 'class="' . $class . '" ';
-		}
-		if (is_array($extra_params)) {
-			foreach ($extra_params as $key => $extra_params_value) {
-				$return .= $key . '="' . $extra_params_value . '" ';
-			}
-		}
-		$return .= '>';
-		$return .= '<thead><tr>';
-		$nbCols = count($cols);
-		for ($i = 0; $i < $nbCols; $i++) {
-			$return .= '<th scope="col">' . $cols[$i] . '</th>';
-		}
-		$return .= '</tr></thead>';
-		return $return;
-	}
-
 	function getMonitorPic($title = '', $alt = '') {
 		return $this->getPicto('ic/mail16w.png', $title, $alt);
 	}
@@ -1265,9 +1222,8 @@ if (isset($params['group']) && $params['group']) {
 		return $this->getPicto('ic/manual16c.png', $title, $alt);
 	}
 
-	/* no picto for download */
 	function getDownloadPic($title = '', $alt = '') {
-		return $this->getPicto('ic/save.png', $title, $alt);
+		return $this->getPicto('ic/download.png', $title, $alt);
 	}
 
 	function getHomePic($title = '', $alt = '') {
@@ -1359,7 +1315,9 @@ if (isset($params['group']) && $params['group']) {
 	}
 
 	function getPicto($url, $title, $alt, $width = 20, $height = 20, $otherAttr = array()) {
-		$otherAttr['title'] = $title;
+		if ($title != '') {
+			$otherAttr['title'] = $title;
+		}
 		if (!$alt) {
 			$otherAttr['alt'] = $title;
 		} else {

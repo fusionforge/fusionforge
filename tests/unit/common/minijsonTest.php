@@ -112,8 +112,8 @@ class Minijson_Tests extends PHPUnit_Framework_TestCase
 
     [4] => -42
     [5] => 1
-    [6] => 
-    [7] => 
+    [6] => ' . '
+    [7] => ' . '
     [8] => Array
         (
             [integer] => 1234567890
@@ -123,11 +123,11 @@ class Minijson_Tests extends PHPUnit_Framework_TestCase
             [] => 2.3456789012E+76
             [zero] => 0
             [one] => 1
-            [space] =>  
+            [space] =>  ' . '
             [quote] => "
             [backslash] => \\
-            [controls] => 
-	
+            [controls] => ' . '
+	' . '
             [slash] => / & /
             [alpha] => abcdefghijklmnopqrstuvwyz
             [ALPHA] => ABCDEFGHIJKLMNOPQRSTUVWYZ
@@ -136,8 +136,8 @@ class Minijson_Tests extends PHPUnit_Framework_TestCase
             [special] => `1~!@#$%^&*()_+-={\':[,]}|;.</>?
             [hex] => ģ䕧覫췯ꯍ
             [true] => 1
-            [false] => 
-            [null] => 
+            [false] => ' . '
+            [null] => ' . '
             [array] => Array
                 (
                 )
@@ -149,7 +149,7 @@ class Minijson_Tests extends PHPUnit_Framework_TestCase
             [address] => 50 St. James Street
             [url] => http://www.JSON.org/
             [comment] => // /* <!-- --
-            [# -- --> */] =>  
+            [# -- --> */] =>  ' . '
             [ s p a c e d ] => Array
                 (
                     [0] => 1
@@ -174,7 +174,7 @@ class Minijson_Tests extends PHPUnit_Framework_TestCase
 
             [jsontext] => {"object with 1 member":["array with 1 element"]}
             [quotes] => &#34; " %22 0x22 034 &#x22;
-            [/\\"쫾몾ꮘﳞ볚
+            [/\\"쫾몾ꮘﳞ볚' . '
 	`1~!@#$%^&*()_+-=[]{}|;:\',./<>?] => A key can be any string
         )
 
@@ -214,8 +214,8 @@ class Minijson_Tests extends PHPUnit_Framework_TestCase
 
     [4] => -42
     [5] => 1
-    [6] => 
-    [7] => 
+    [6] => ' . '
+    [7] => ' . '
     [8] => Array
         (
             [] => 2.3456789012E+76
@@ -230,8 +230,8 @@ class Minijson_Tests extends PHPUnit_Framework_TestCase
                     [6] => 7
                 )
 
-            [# -- --> */] =>  
-            [/\\"쫾몾ꮘﳞ볚
+            [# -- --> */] =>  ' . '
+            [/\\"쫾몾ꮘﳞ볚' . '
 	`1~!@#$%^&*()_+-=[]{}|;:\',./<>?] => A key can be any string
             [0123456789] => digit
             [ALPHA] => ABCDEFGHIJKLMNOPQRSTUVWYZ
@@ -255,15 +255,15 @@ class Minijson_Tests extends PHPUnit_Framework_TestCase
                     [6] => 7
                 )
 
-            [controls] => 
-	
+            [controls] => ' . '
+	' . '
             [digit] => 0123456789
             [e] => 1.23456789E-13
-            [false] => 
+            [false] => ' . '
             [hex] => ģ䕧覫췯ꯍ
             [integer] => 1234567890
             [jsontext] => {"object with 1 member":["array with 1 element"]}
-            [null] => 
+            [null] => ' . '
             [object] => Array
                 (
                 )
@@ -273,7 +273,7 @@ class Minijson_Tests extends PHPUnit_Framework_TestCase
             [quotes] => &#34; " %22 0x22 034 &#x22;
             [real] => -9876.54321
             [slash] => / & /
-            [space] =>  
+            [space] =>  ' . '
             [special] => `1~!@#$%^&*()_+-={\':[,]}|;.</>?
             [true] => 1
             [url] => http://www.JSON.org/
@@ -386,29 +386,29 @@ class Minijson_Tests extends PHPUnit_Framework_TestCase
 		$parsed = 'bla';
 		$presult = minijson_decode($this->s_orig, $parsed);
 		$this->assertTrue($presult);
-		$this->assertEquals('array', gettype($parsed), "FAIL parse-basic");
+		$this->assertEquals('array', gettype($parsed), 'FAIL parse-basic');
 
 		$printrd = print_r($parsed, true);
-		$this->assertEquals($this->s_printr, $printrd, "parsed");
+		$this->assertEquals($this->s_printr, $printrd, 'parsed');
 
 		$encoded = minijson_encode($parsed, false);
-		$this->assertEquals($this->s_ecompact, $encoded, "encode-compact");
+		$this->assertEquals($this->s_ecompact, $encoded, 'encode-compact');
 		$reparsed = 'bla';
 		$presult = minijson_decode($encoded, $reparsed);
-		$this->assertTrue($presult, "can-reparse-compact");
-		$this->assertEquals('array', gettype($reparsed), "FAIL reparse-compact-basic");
+		$this->assertTrue($presult, 'can-reparse-compact');
+		$this->assertEquals('array', gettype($reparsed), 'FAIL reparse-compact-basic');
 
 		$printrd = print_r($reparsed, true);
-		$this->assertEquals($this->s_printrs, $printrd, "reparsed-compact");
+		$this->assertEquals($this->s_printrs, $printrd, 'reparsed-compact');
 
 		$encoded = minijson_encode($parsed);
-		$this->assertEquals($this->s_epadded, $encoded, "encode-padded");
+		$this->assertEquals($this->s_epadded, $encoded, 'encode-padded');
 		$reparsed = 'bla';
 		$presult = minijson_decode($encoded, $reparsed);
-		$this->assertTrue($presult, "can-reparse-padded");
-		$this->assertEquals('array', gettype($reparsed), "FAIL reparse-padded-basic");
+		$this->assertTrue($presult, 'can-reparse-padded');
+		$this->assertEquals('array', gettype($reparsed), 'FAIL reparse-padded-basic');
 
 		$printrd = print_r($reparsed, true);
-		$this->assertEquals($this->s_printrs, $printrd, "reparsed-padded");
+		$this->assertEquals($this->s_printrs, $printrd, 'reparsed-padded');
 	}
 }

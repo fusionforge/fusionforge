@@ -150,9 +150,9 @@ if ($week) {
 		$xi = 0;
 		$total_hours = 0;
 
-		echo $HTML->listTableTop ($title_arr);
+		echo $HTML->listTableTop($title_arr);
 		while ($r=db_fetch_array($res)) {
-			echo '<tr '.$HTML->boxGetAltRowStyle($xi++).'>
+			echo '<tr>
 				<td class="align-center">'.$r['name'].'</td>
 				<td class="align-center">'. date( 'D, M d, Y',$r['report_date']) .'</td>
 				<td class="align-center"><!-- <input type="text" name="hours" value="'. $r['hours'] .'" size="3" maxlength="3" /> -->'.$r['hours'].'</td>
@@ -177,7 +177,7 @@ if ($week) {
 			echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF').'?week='.$week, 'method' => 'post'));
 			echo '<input type="hidden" name="submit" value="1" />
 			<input type="hidden" name="week" value="'.$week.'" />
-			<tr '.$HTML->boxGetAltRowStyle($xi++).'>
+			<tr>
 				<td class="align-center">'. html_build_select_box ($respt,'project_task_id',false,false) .'</td>
 				<td class="align-center">'.report_day_adjust_box().'</td>
 				<td class="align-center"><input type="text" name="hours" value="" size="3" maxlength="3" /></td>
@@ -188,7 +188,7 @@ if ($week) {
 			echo $HTML->closeForm();
 		}
 		if (!isset($total_hours)) $total_hours = '';
-		echo '<tr '.$HTML->boxGetAltRowStyle($xi++).'><td colspan="2"><strong>'._('Total Hours')._(':').'</strong></td>';
+		echo '<tr><td colspan="2"><strong>'._('Total Hours')._(':').'</strong></td>';
 		echo '<td class="align-center"><strong>'.$total_hours.'</strong></td><td colspan="2"></td></tr>';
 		echo $HTML->listTableBottom();
 	}
@@ -210,8 +210,8 @@ if ($week) {
 
 <h2><?php echo _('Change Week') ?></h2>
 
-<?php echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'))); ?>
-	method="get"><?php echo report_weeks_box($report,'week'); ?><input
+<?php echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'get')); ?>
+	<?php echo report_weeks_box($report,'week'); ?><input
 	type="submit" name="submit" value="<?php echo _('Change Week'); ?>" />
 		<?php
 		echo $HTML->closeForm();

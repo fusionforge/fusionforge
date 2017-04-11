@@ -850,10 +850,10 @@ function html_build_multiple_select_box($result, $name, $checked_array, $size = 
 	$texts = array();
 	$rows = db_numrows($result);
 	for ($i = 0; $i < $rows; $i++) {
-		$vals = db_result($result, $i, 0);
-		$texts = substr(db_result($result, $i, 1), 0, 35);
+		$vals[] = db_result($result, $i, 0);
+		$texts[] = substr(db_result($result, $i, 1), 0, 35);
 	}
-	return html_build_multiple_select_box_from_arrays($vals, $texts, $name, $checked_array, $size, $show_100, $text_100, $attrs);
+	return html_build_multiple_select_box_from_arrays($vals, $texts, $name, $checked_array, $size, $show_100, $text_100, false, $attrs);
 }
 
 /**
@@ -862,24 +862,23 @@ function html_build_multiple_select_box($result, $name, $checked_array, $size = 
  * @param	array	$vals
  * @param	array	$texts		Text to be displayed
  * @param	string	$name		id of the items selected
- * @param	string	$checked_array	The item that should be checked
+ * @param	array	$checked_array	The item that should be checked
  * @param	int	$size		The size of this box
  * @param	bool	$show_100	Whether or not to show the '100 row'
  * @param	string	$text_100	What to call the '100 row' defaults to none.
  * @param	bool	$allowed
- * @param	array	$attrs Array of other attributes for this select element
+ * @param	array	$attrs		Array of other attributes for this select element
  * @param	array	$opts_attrs
  * @param	array	$attrs_100
  * @param	array	$optgroup
  * @return	string
  * @throws	Exception
  */
-function html_build_multiple_select_box_from_arrays(
-		$vals, $texts, $name, $checked_array = array(), $size = 8,
-		$show_100 = true, $text_100 = 'none',
-		$allowed = false, $attrs = array(),
-		$opts_attrs = array(), $attrs_100 = array(),
-		$optgroup = array()) {
+function html_build_multiple_select_box_from_arrays($vals, $texts, $name, $checked_array = array(), $size = 8,
+						$show_100 = true, $text_100 = 'none',
+						$allowed = false, $attrs = array(),
+						$opts_attrs = array(), $attrs_100 = array(),
+						$optgroup = array()) {
 	$return = html_ao('select', array_merge($attrs, array('name' => $name, 'multiple' => 'multiple', 'size' => $size)));
 	if ($show_100) {
 		if ($text_100 == 'none') {
@@ -925,7 +924,7 @@ function html_build_multiple_select_box_from_arrays(
 			if ($withGroup && $vals[$i]!='100' && $optgroup[$i]!=$currentGroup) {
 				if ($currentGroup!='' && $groupOpen) {
 					$return .= html_ac(html_ap() - 1);
-					$groupOpen = false;
+					$groupOpen = false; // @fixme see $groupOpen below
 				}
 				$return .= html_ao('optgroup', array('label'=>$optgroup[$i]));
 				$groupOpen = true;
@@ -950,7 +949,7 @@ function html_build_multiple_select_box_from_arrays(
  * @param	array		$attrs		Array of other attributes for this element
  * @return	html code for checkbox control
  */
-function html_build_checkbox($name, $value, $checked, $attrs=array()) {
+function html_build_checkbox($name, $value, $checked, $attrs = array()) {
 	if ($value === false) {
 		$attrs = array_merge(array('id' => $name, 'name' => $name, 'type' => 'checkbox'), $attrs);
 	} else {
@@ -970,6 +969,11 @@ function html_build_checkbox($name, $value, $checked, $attrs=array()) {
  * @param	array	$checked
  * @param	bool	$checkall
  * @param	bool	$show_100
+ * @param	string	$text_100
+ * @param	bool	$allowed
+ * @param	array	$attrs
+ * @param	array	$checkbox_attrs
+ * @param	array	$attrs_100
  * @return	string	html code for checkbox control
  */
 function html_build_checkboxes_from_array($vals, $check_name, $checked=array(), $checkall=false, $show_100=true, $text_100='none', $allowed=false, $attrs=array(), $checkbox_attrs=array(), $attrs_100=array()) {
@@ -1110,29 +1114,6 @@ function html_build_priority_select_box($name = 'priority', $checked_val = '3', 
 		$any_text = '';
 	}
 	return html_build_select_box_from_arrays($vals, $texts, $name, $checked_val, $show_100, $text_100, $show_any, $any_text, false, $attrs);
-}
-
-/**
- * html_buildcheckboxarray() - Build an HTML checkbox array.
- *
- * @param	array	$options	Options array
- * @param	string	$name		Checkbox name
- * @param	array	$checked_array	Array of boxes to be pre-checked
- */
-function html_buildcheckboxarray($options, $name, $checked_array) {
-	$option_count = count($options);
-	$checked_count = count($checked_array);
-
-	for ($i = 1; $i <= $option_count; $i++) {
-		$checked = 0;
-
-		for ($j = 0; $j < $checked_count; $j++) {
-			if ($i == $checked_array[$j]) {
-				$checked = 1;
-			}
-		}
-		echo html_e('br').html_build_checkbox($name, $value, $checked).$options[$i];
-	}
 }
 
 /**
@@ -1456,6 +1437,8 @@ function html_e($name, $attrs = array(), $content = "", $shortform = true, $inde
 	return $rv;
 }
 
+global $html_autoclose_stack, $html_autoclose_pos;
+
 $html_autoclose_stack = array();
 $html_autoclose_pos = 0;
 
@@ -1609,7 +1592,7 @@ function html_a_apply($scopy) {
  */
 function html_trove_limit_navigation_box($php_self, $querytotalcount, $trove_browselimit, $page, $textintro = '') {
 	if ($textintro != '') {
-		$html_limit = sprintf(_(' Displaying %1$s per page. Projects sorted by alphabetical order.'), $trove_browselimit);
+		$html_limit = sprintf(_('Displaying %d per page. Projects sorted by alphabetical order.'), $trove_browselimit);
 	} else {
 		$html_limit = $textintro;
 	}

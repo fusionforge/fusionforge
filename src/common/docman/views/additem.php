@@ -82,12 +82,42 @@ if (forge_check_perm('docman', $group_id, 'approve')) {
 		echo $HTML->warning_msg(_('You MUST first create at least one folder to upload your archive.'));
 	} else {
 		echo $HTML->openForm(array('id' => 'injectzip', 'name' => 'injectzip', 'method' => 'post', 'action' => '/docman/?group_id='.$group_id.'&action=injectzip&dirid='.$dirid, 'enctype' => 'multipart/form-data'));
-		echo html_ao('p');
-		echo html_e('label', array(), _('Upload archive:'), false);
-		echo html_e('input', array('type' => 'file', 'name' => 'uploaded_zip', 'required' => 'required'));
-		echo html_e('span', array(), '('._('max upload size')._(': ').human_readable_bytes(util_get_maxuploadfilesize()).')', false);
-		echo html_e('input', array('id' => 'submitinjectzip', 'type' => 'button', 'value' => _('Inject Tree')));
-		echo html_ac(html_ap() -1);
+		if (forge_get_config('use_manual_uploads')) {
+			echo html_e('input', array('type' => 'radio', 'id' => 'buttonFileZip', 'name' => 'type', 'value' => 'httpupload', 'checked' => 'checked', 'required' => 'required')).html_e('span', array(), _('File'), false);
+			echo html_e('input', array('type' => 'radio', 'id' => 'buttonManualUploadZip', 'name' => 'type', 'value' => 'manualupload', 'required' => 'required')).html_e('span', array(), _('Already-uploaded file'), false);
+		} else {
+			echo html_e('input', array('type' => 'hidden', 'name' => 'type', 'value' => 'httpupload'));
+		}
+		echo html_e('div', array('id' => 'upload_zip_p'), html_e('input', array('type' => 'file', 'id' => 'uploaded_zip', 'name' => 'uploaded_zip', 'required' => 'required')).
+					html_e('span', array(), '('._('max upload size')._(': ').human_readable_bytes(util_get_maxuploadfilesize()).')', false));
+		if (forge_get_config('use_manual_uploads')) {
+			$incoming = forge_get_config('groupdir_prefix')."/".$g->getUnixName()."/incoming";
+			$manual_files_arr = ls($incoming, true, '/\.zip$/');
+			if (count($manual_files_arr)) {
+				echo html_e('div', array('id' => 'manual_upload_p'), html_build_select_box_from_arrays($manual_files_arr, $manual_files_arr, 'manual_path', '').
+						html_e('br').
+						html_e('span', array(), sprintf(_('Pick a file already uploaded (by SFTP or SCP) to the <a href="%1$s">project\'s incoming directory</a> (%2$s).'),
+										'sftp://'.forge_get_config('shell_host').$incoming.'/', $incoming), false));
+			} else {
+				echo $HTML->warning_msg(sprintf(_('You need first to upload file in %s'), $incoming), array('id' => 'manual_upload_p'));
+			}
+			$javascript = <<<'EOS'
+				jQuery('#manual_upload_p').hide();
+				jQuery('#buttonFileZip').click(function() {
+									jQuery('#upload_zip_p').show();
+									jQuery('#uploaded_zip').attr('required', 'required');
+									jQuery('#manual_upload_p').hide();
+									});
+				jQuery('#buttonManualUploadZip').click(function() {
+									jQuery('#upload_zip_p').hide();
+									jQuery('#uploaded_zip').removeAttr('required');
+									jQuery('#manual_upload_p').show();
+									});
+
+EOS;
+			echo html_e('script', array( 'type'=>'text/javascript'), '//<![CDATA['."\n".'jQuery(function(){'.$javascript.'});'."\n".'//]]>');
+		}
+		echo html_e('p', array(), html_e('input', array('id' => 'submitinjectzip', 'type' => 'button', 'value' => _('Inject Tree'))));
 		echo $HTML->closeForm();
 	}
 	echo html_ac(html_ap() -2);

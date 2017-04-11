@@ -218,7 +218,7 @@ if (!session_loggedin()) {
 		for ($i=0; $i<$rows; $i++) {
 			$date   = relative_date(db_result($result,$i,'date_posted'));
 			$public = db_result($result,$i,'is_public') ? _('Public') : _('Private');
-			$row_attrs = array('class' => $HTML->boxGetAltRowStyle($i,true));
+			$row_attrs = array();
 			$cell_data = array();
 			$cell_data [] = array(util_make_link('/my/diary.php?diary_id='.db_result($result,$i,'id'), db_result($result,$i,'summary')));
 			$cell_data [] = array($date);

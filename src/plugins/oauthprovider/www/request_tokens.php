@@ -68,7 +68,7 @@ if(count($t_tokens)>0) {
 	$i=0;
 	foreach( $t_tokens as $t_token ) {
 		$consumer = OauthAuthzConsumer::load($t_token->getConsumerId());
-		echo '<tr '.$HTML->boxGetAltRowStyle($i).'>';
+		echo '<tr>';
 		if(forge_check_global_perm ('forge_admin'))	{
 			echo '<td>'.util_make_link('/plugins/'.$pluginname.'/consumer_manage.php?consumer_id=' . $t_token->getConsumerId(), $consumer->getName()).'</td>';
 		}else {

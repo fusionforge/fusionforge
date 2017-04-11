@@ -120,10 +120,10 @@ some control over it to the project's administrator.");
 		$b .= '<p>' ;
 		$module = $this->topModule($project);
 		if (forge_get_config('use_ssh', 'scmsvn')) {
-			$b .= '<tt>svn checkout svn://'.forge_get_config('scm_host').$this->svn_root_fs.'/'.$project->getUnixName().$module.'</tt><br />';
+			$b .= '<span class="tt">svn checkout svn://'.forge_get_config('scm_host').$this->svn_root_fs.'/'.$project->getUnixName().$module.'</span><br />';
 		}
 		if (forge_get_config('use_dav', 'scmsvn')) {
-				$b .= '<p><tt>svn checkout http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. forge_get_config('scm_host'). '/anonscm/svn/'.$project->getUnixName().$module.'</tt></p>' ;
+				$b .= '<p><span class="tt">svn checkout http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. forge_get_config('scm_host'). '/anonscm/svn/'.$project->getUnixName().$module.'</span></p>' ;
 		}
 		$b .= '</p>';
 		return $b;
@@ -155,7 +155,7 @@ some control over it to the project's administrator.");
 				$b .= ' ';
 				$b .= _('Enter your site password when prompted.');
 				$b .= '</p>';
-				$b .= '<p><tt>svn checkout svn+ssh://'.$d.'@' . forge_get_config('scm_host') . $this->svn_root_fs .'/'. $project->getUnixName().$module.'</tt></p>' ;
+				$b .= '<p><span class="tt">svn checkout svn+ssh://'.$d.'@' . forge_get_config('scm_host') . $this->svn_root_fs .'/'. $project->getUnixName().$module.'</span></p>' ;
 				$b .= '</div>';
 			}
 			if (forge_get_config('use_dav', 'scmsvn')) {
@@ -163,7 +163,7 @@ some control over it to the project's administrator.");
 				$b .= '<p>';
 				$b .= _('Enter your site password when prompted.');
 				$b .= '</p>';
-				$b .= '<p><tt>svn checkout --username '.$d.' http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. forge_get_config('scm_host'). '/authscm/'.$d.'/svn/'.$project->getUnixName().$module.'</tt></p>' ;
+				$b .= '<p><span class="tt">svn checkout --username '.$d.' http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. forge_get_config('scm_host'). '/authscm/'.$d.'/svn/'.$project->getUnixName().$module.'</span></p>' ;
 				$b .= '</div>';
 			}
 		} else {
@@ -176,7 +176,7 @@ some control over it to the project's administrator.");
 				$b .= ' ';
 				$b .= _('Enter your site password when prompted.');
 				$b .= '</p>';
-				$b .= '<p><tt>svn checkout svn+ssh://<i>'._('developername').'</i>@' . forge_get_config('scm_host') . $this->svn_root_fs .'/'. $project->getUnixName().$module.'</tt></p>' ;
+				$b .= '<p><span class="tt">svn checkout svn+ssh://<i>'._('developername').'</i>@' . forge_get_config('scm_host') . $this->svn_root_fs .'/'. $project->getUnixName().$module.'</span></p>' ;
 				$b .= '</div>';
 			}
 			if (forge_get_config('use_dav', 'scmsvn')) {
@@ -186,7 +186,7 @@ some control over it to the project's administrator.");
 				$b .= ' ';
 				$b .= _('Enter your site password when prompted.');
 				$b .= '</p>';
-				$b .= '<p><tt>svn checkout --username <i>'._('developername').'</i> http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. forge_get_config('scm_host'). '/authscm/<i>'._('developername').'</i>/svn/'.$project->getUnixName().$module.'</tt></p>' ;
+				$b .= '<p><span class="tt">svn checkout --username <i>'._('developername').'</i> http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. forge_get_config('scm_host'). '/authscm/<i>'._('developername').'</i>/svn/'.$project->getUnixName().$module.'</span></p>' ;
 				$b .= '</div>';
 			}
 		}
@@ -226,17 +226,17 @@ some control over it to the project's administrator.");
 			_('Adds'),
 			_('Updates')
 			);
-			$b .= $HTML->listTableTop($tableHeaders, false, '', 'repo-history');
+			$b .= $HTML->listTableTop($tableHeaders, array(), '', 'repo-history');
 
 			$i = 0;
 			$total = array('adds' => 0, 'updates' => 0);
 
 			while($data = db_fetch_array($result)) {
 				$cells = array();
-				$cells[] = array(util_make_link_u($data['user_name'], $data['user_id'], $data['realname']), 'class' => 'halfwidth');
+				$cells[] = array(util_display_user($data['user_name'], $data['user_id'], $data['realname']), 'class' => 'halfwidth');
 				$cells[] = array($data['adds'], 'class' => 'onequarterwidth align-right');
 				$cells[] = array($data['updates'], 'class' => 'onequarterwidth align-right');
-				$b .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
+				$b .= $HTML->multiTableRow(array(), $cells);
 				$total['adds'] += $data['adds'];
 				$total['updates'] += $data['updates'];
 				$i++;
@@ -245,7 +245,7 @@ some control over it to the project's administrator.");
 			$cells[] = array(html_e('strong', array(), _('Total')._(':')), 'class' => 'halfwidth');
 			$cells[] = array($total['adds'], 'class' => 'onequarterwidth align-right');
 			$cells[] = array($total['updates'], 'class' => 'onequarterwidth align-right');
-			$b .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
+			$b .= $HTML->multiTableRow(array(), $cells);
 			$b .= $HTML->listTableBottom();
 		} else {
 			$b .= $HTML->information(_('No history yet'));
@@ -329,7 +329,7 @@ some control over it to the project's administrator.");
 		$config_fname = forge_get_config('data_path').'/scmsvn-auth.inc';
 		$config_f = fopen($config_fname.'.new', 'w');
 
-		$res = db_query_params("SELECT login, passwd FROM nss_passwd WHERE status=$1", array('A'));
+		$res = db_query_params("SELECT login FROM nss_passwd WHERE status=$1", array('A'));
 		while ($arr = db_fetch_array($res)) {
 			fwrite($config_f, 'Use ScmsvnUser '.$arr['login']."\n");
 		}

@@ -5,7 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
  * Copyright 2010 (c) FusionForge Team
- * Copyright 2013-2014,2016, Franck Villaume - TrivialDev
+ * Copyright 2013-2014,2016-2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -82,10 +82,6 @@ EOS;
 		echo html_e('p', array(), util_make_link('/frs/?view=qrs&group_id='.$group_id, _('To create a new release click here.')));
 	}
 
-	$proj_stats['packages'] = count($FRSPackages);
-	$proj_stats['releases'] = 0;
-	$proj_stats['size']     = 0;
-
 	// Iterate and show the packages
 	$current_groupid = $group_id;
 	foreach ($FRSPackages as $FRSPackage) {
@@ -116,8 +112,6 @@ EOS;
 		// get the releases of the package
 		$FRSPackageReleases = $FRSPackage->getReleases(false);
 		$num_releases = count($FRSPackageReleases);
-
-		$proj_stats['releases'] += $num_releases;
 
 		$package_name_protected = $HTML->toSlug($package_name);
 		$package_ziplink = '';
@@ -185,26 +179,21 @@ EOS;
 				$res_files = $FRSPackageRelease->getFiles();
 				$num_files = count($FRSPackageRelease);
 
-				@$proj_stats['files'] += $num_files;
-
 				// Switch whether release_id exists and/or release_id == package_release['release_id']
 				if (!$release_id || $release_id == $package_release_id) {
-					// no release_id
-					$cell_data = array();
-					$cell_data[] = _('File Name');
-					$cell_data[] = _('Date');
-					$cell_data[] = _('Size');
-					$cell_data[] = _('D/L');
-					$cell_data[] = _('Arch');
-					$cell_data[] = _('Type');
-					$cell_data[] = _('Latest');
-					echo $HTML->listTableTop($cell_data);
 					// no release_id OR no release_id OR release_id is current one
 					if ( !$res_files || $num_files < 1 ) {
-						$cells = array();
-						$cells[] = array('&nbsp;&nbsp;'.html_e('em', array(), _('No files')), 'colspan' => 7);
-						echo $HTML->multiTableRow(array(), $cells);
+						echo $HTML->information(_('No files'));
 					} else {
+						$cell_data = array();
+						$cell_data[] = _('File Name');
+						$cell_data[] = _('Date');
+						$cell_data[] = _('Size');
+						$cell_data[] = _('D/L');
+						$cell_data[] = _('Arch');
+						$cell_data[] = _('Type');
+						$cell_data[] = _('Latest');
+						echo $HTML->listTableTop($cell_data);
 						// now iterate and show the files in this release....
 						foreach ($res_files as $res_file) {
 							$cells = array();
@@ -215,14 +204,10 @@ EOS;
 							$cells[][] = $res_file->getProcessor();
 							$cells[][] = $res_file->getFileType();
 							$cells[][] = util_make_link('/frs/download.php/latestfile/'.$FRSPackage->getID().'/'.$res_file->getName(), _('Latest version'));
-
-							$proj_stats['size'] += $res_file->getSize();
-							@$proj_stats['downloads'] += $res_file->getDownloads();
-
 							echo $HTML->multiTableRow(array(), $cells);
 						}
+						echo $HTML->listTableBottom();
 					}
-					echo $HTML->listTableBottom();
 					echo $HTML->boxBottom();
 				}
 			} //for: release(s)

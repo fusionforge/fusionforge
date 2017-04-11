@@ -53,7 +53,7 @@ echo html_e('p', array(), util_make_link('/plugins/'.$pluginTaskboard->name.'/re
 
 $tablearr = array(_('Title'),_('Start Date'),_('End Date'), _('Goals'), _('Page'), _('Charts'));
 
-echo $HTML->listTableTop($tablearr, false, 'sortable_table_tracker', 'sortable_table_tracker');
+echo $HTML->listTableTop($tablearr, array(), 'sortable_table_tracker', 'sortable_table_tracker');
 
 $today = strtotime(date('Y-m-d'));
 foreach ($taskboardReleases as $release) {
@@ -73,7 +73,7 @@ foreach ($taskboardReleases as $release) {
 	}
 
 	echo '
-	<tr valign="middle"'.$current_release.'>
+	<tr class="middle"'.$current_release.'>
 		<td>'.$release_title.'</td>
 		<td>'.date("Y-m-d", $release->getStartDate()).'</td>
 		<td>'.date("Y-m-d", $release->getEndDate()).'</td>

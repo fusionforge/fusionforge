@@ -72,14 +72,14 @@ if ($totalCount) {
 		_('Message')
 	);
 
-	echo $HTML->listTableTop ($title_arr);
+	echo $HTML->listTableTop($title_arr);
 
 	for ($i=0; $i<db_numrows($res); $i++) {
 		$cells = array();
 		$cells[][] = date(_('Y-m-d H:i'), db_result($res,$i,'rundate'));
 		$cells[][] = $cron_arr[db_result($res,$i,'job')];
 		$cells[][] = nl2br(htmlentities(db_result($res,$i,'output')));
-		echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i+1, true)), $cells);
+		echo $HTML->multiTableRow(array(), $cells);
 	}
 
 	echo $HTML->listTableBottom();

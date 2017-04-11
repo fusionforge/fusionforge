@@ -62,8 +62,7 @@ try {
 					array ($u->getID(),
 					$plugin->openid->identity)) ;
 				if (!$res || db_affected_rows($res) < 1) {
-					$error_msg = sprintf(_('Cannot insert new identity: %s'),
-						     db_error());
+					$error_msg = _('Cannot insert new identity')._(': ').db_error();
 				} else {
 					$feedback = _('Identity successfully added');
 					$openid_identity = 'http://';
@@ -79,14 +78,14 @@ try {
 // called to add a new identity
 if (getStringFromRequest('addidentity') != '') {
 	if ($openid_identity == '' || $openid_identity == 'http://') {
-		$error_msg = _('Error: Missing URL for the new identity');
+		$error_msg = _('Error')._(': ')._('Missing URL for the new identity');
 	} elseif (!util_check_url($openid_identity)) {
-		$error_msg = _('Error: Malformed URL (only http, https and ftp allowed)');
+		$error_msg = _('Error')._(': ')._('Malformed URL (only http, https and ftp allowed)');
 	} else {
 		$res = db_query_params('SELECT openid_identity FROM plugin_authopenid_user_identities WHERE openid_identity =$1',
 					array($openid_identity));
 		if ($res && db_numrows($res) > 0) {
-			$error_msg = _('Error: identity already used by a forge user.');
+			$error_msg = _('Error')._(': ')._('identity already used by a forge user.');
 		} else {
 
 			// TODO : redirect and check that the identity is authorized for the user
@@ -112,7 +111,7 @@ if (getStringFromRequest('addidentity') != '') {
 	$res = db_query_params('DELETE FROM plugin_authopenid_user_identities WHERE user_id=$1 AND openid_identity=$2',
 				array($u->getID(), $openid_identity));
 	if (!$res || db_affected_rows($res) < 1) {
-		$error_msg = sprintf(_('Cannot delete identity: %s'), db_error());
+		$error_msg = _('Cannot delete identity')._(': ').db_error();
 	}
 	else {
 		$feedback = _('Identity successfully deleted');
@@ -145,7 +144,7 @@ echo $HTML->boxTop(_('My OpenID identities'));
 </fieldset>
 <?php
 echo $HTML->closeForm();
-echo $HTML->listTableTop(array(_('Identity'), ''));
+echo $HTML->listTableTop(array(_('Identity')));
 
 $res = db_query_params('SELECT openid_identity FROM plugin_authopenid_user_identities WHERE user_id =$1',
 							    array($u->getID()));
@@ -155,7 +154,7 @@ if($res) {
 	while ($row = db_fetch_array($res)) {
 		$openid_identity = 	$row['openid_identity'];
 
-		echo '<tr '.$HTML->boxGetAltRowStyle($i).'>';
+		echo '<tr>';
 		echo '<td>'. $openid_identity .'</td>';
 		echo '<td>'.util_make_link('/plugins/authopenid/?openid_identity='.urlencode($openid_identity).'&delete=1', _('delete')).'</td>';
 		echo '</tr>';

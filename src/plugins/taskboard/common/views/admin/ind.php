@@ -46,15 +46,15 @@ html_use_tablesorter();
 
 $taskboardFactory->header();
 echo html_e('p', array(), util_make_link('/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&view=init',
-		html_e('strong', array(), _('Initialize a new taskboard')))
-		.html_e('br'). _('Create initial taskboard configuration'));
+		html_e('strong', array(), _('Initialize a new Task Board')))
+		.html_e('br'). _('Create initial Task Board configuration'));
 
 if (!$tb_arr || count($tb_arr) < 1) {
-	echo $HTML->information(_('No taskboards have been set up, or you cannot view them.'));
+	echo $HTML->information(_('No Task Boards have been set up, or you cannot view them.'));
 } else {
-	echo html_e('p', array(), _('Choose a taskboard.'));
-	$tablearr = array(_('Taskboard'),_('Description'));
-	echo $HTML->listTableTop($tablearr, false, 'full sortable sortable_table_taskboard', 'sortable_table_taskboard');
+	echo html_e('p', array(), _('Choose a Task Board.'));
+	$tablearr = array(_('Task Board'), _('Description'));
+	echo $HTML->listTableTop($tablearr, array(), 'full sortable sortable_table_taskboard', 'sortable_table_taskboard');
 
 	for ($j = 0; $j < count($tb_arr); $j++) {
 		if (is_object($tb_arr[$j])) {

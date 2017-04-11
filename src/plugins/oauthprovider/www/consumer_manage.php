@@ -35,8 +35,6 @@ session_require_global_perm('forge_admin');
 $f_consumer_id = getIntFromGet( 'consumer_id' );
 
 $t_consumer = OauthAuthzConsumer::load( $f_consumer_id );
-
-$i = 0;
 ?>
 
 <br/>
@@ -51,33 +49,32 @@ $i = 0;
 </td>
 </tr>
 
-<tr <?php echo $HTML->boxGetAltRowStyle($i++) ?>>
-
+<tr>
 <td class="category"><?php echo _('Name') ?></td>
 <td colspan="2"><?php echo ( $t_consumer->getName() ) ?></td>
 </tr>
 
-<tr <?php echo $HTML->boxGetAltRowStyle($i++) ?>>
+<tr>
 <td class="category"><?php echo _('URL') ?></td>
 <td colspan="2"><?php echo ( $t_consumer->getUrl() ) ?></td>
 </tr>
 
-<tr <?php echo $HTML->boxGetAltRowStyle($i++) ?>>
+<tr>
 <td class="category"><?php echo _('Description') ?></td>
 <td colspan="2"><?php echo ( $t_consumer->getDesc() ) ?></td>
 </tr>
 
-<tr <?php echo $HTML->boxGetAltRowStyle($i++) ?>>
+<tr>
 <td class="category"><?php echo _('Email') ?></td>
 <td colspan="2"><?php echo ( $t_consumer->getEmail() ) ?></td>
 </tr>
 
-<tr <?php echo $HTML->boxGetAltRowStyle($i++) ?>>
+<tr>
 <td class="category"><?php echo _('Key') ?></td>
 <td colspan="2"><?php echo ( $t_consumer->key ) ?></td>
 </tr>
 
-<tr <?php echo $HTML->boxGetAltRowStyle($i++) ?>>
+<tr>
 <td class="category"><?php echo _('Secret') ?></td>
 <td colspan="2"><?php echo ( $t_consumer->secret ) ?></td>
 </tr>

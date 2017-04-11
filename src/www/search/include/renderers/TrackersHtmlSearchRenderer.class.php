@@ -70,7 +70,7 @@ class TrackersHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 				$lastTracker = $currentTracker;
 				$rowColor = 0;
 			}
-			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($rowColor) .'>'
+			$return .= '<tr>'
 						. '<td style="width: 5%">&nbsp;</td>'
 						. '<td>'.$row['artifact_id'].'</td>'
 						. '<td>'.util_make_link('/tracker/?func=detail&group_id='.$this->groupId.'&aid='.$row['artifact_id'].'&atid='.$row['group_artifact_id'],

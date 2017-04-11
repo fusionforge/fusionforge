@@ -4,7 +4,7 @@ SOAP server.
 Server Setup
 
 1. Extract the tar file into the root GForge directory.  For example, if
-your root diectory is @SOURCE_PATH@/www, then
+your root directory is @SOURCE_PATH@/www, then
 
 	cd @SOURCE_PATH@/www ; tar xvf {tarfile}
 

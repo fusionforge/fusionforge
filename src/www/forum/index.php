@@ -113,9 +113,9 @@ if ($group_id) {
 			$cells = array();
 			if ($child_has_f) {
 				if ($farr[$j]->Group->getID() != $group_id) {
-					$cells[] = array(sprintf(_('Child project %s Forum'), util_make_link('/forum/?group='.$farr[$j]->Group->getID(), $farr[$j]->Group->getPublicName())), 'content' => $farr[$j]->Group->getID());
+					$cells[] = array(sprintf(_('Child project %s Forum'), util_make_link('/forum/?group_id='.$farr[$j]->Group->getID(), $farr[$j]->Group->getPublicName())), 'content' => $farr[$j]->Group->getID());
 				} else {
-					$cells[] = array('', 'content' => $farr[$j]->Group->getID());
+					$cells[] = array(sprintf(_('Project %s Forum'), $farr[$j]->Group->getPublicName()), 'content' => $farr[$j]->Group->getID());
 				}
 			}
 			$cells[][] = util_make_link('/forum/forum.php?forum_id='.$farr[$j]->getID().'&group_id='.$farr[$j]->Group->getID(), $HTML->getForumPic().' '.$farr[$j]->getName());

@@ -92,14 +92,14 @@ if ($typ =='r') {
 	$labels = $report->labels;
 	$data = $report->getData();
 
-	echo $HTML->listTableTop (array(_('Type'), _('Time')));
+	echo $HTML->listTableTop(array(_('Type'), _('Time')));
 
 	for ($i=0; $i<count($labels); $i++) {
-		echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>'.
+		echo '<tr>'.
 			 '<td>'. $labels[$i] .'</td><td>'. $data[$i] .'</td></tr>';
 	}
 
-	echo $HTML->listTableBottom ();
+	echo $HTML->listTableBottom();
 } elseif ($start != $end) {
 	report_timegraph('site', $type, $start, $end);
 }

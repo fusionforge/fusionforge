@@ -73,7 +73,7 @@ class SurveyQuestionFactory extends FFError {
 	}
 
 	/**
-	 * getSurveyQuestion - get an array of Survey Question objects
+	 * getSurveyQuestions - get an array of Survey Question objects
 	 *                     for this Group and Survey id if survey_id is given.
 	 *
  	 * @return	array	The array of Survey Question objects.

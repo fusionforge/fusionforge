@@ -52,7 +52,7 @@ if (empty($gids))
 $gids = implode(',', $gids);
 
 $title_arr = array(
-	_('Task ID'),
+	_('Task Id'),
 	_('Plugin'),
 	_('SysTask Type'),
 	_('Group ID'),
@@ -93,7 +93,7 @@ for ($i=0; $i<db_numrows($res); $i++) {
 		. ' (+' . round(db_result($res, $i,'queued'), 1) . 's)';
 	$cells[][] = date("H:i:s", db_result($res, $i,'stopped'))
 		. ' (+' . round(db_result($res, $i,'run'), 1) . 's)';
-	echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i+1, true)), $cells);
+	echo $HTML->multiTableRow(array(), $cells);
 }
 
 echo $HTML->listTableBottom();

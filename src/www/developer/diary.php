@@ -84,7 +84,7 @@ if ($diary_user) {
 			</tr>';
 		for ($i=0; $i<$rows; $i++) {
 			echo '
-			<tr '. $HTML->boxGetAltRowStyle($i) .'><td>'.util_make_link('/developer/diary.php?diary_id='.db_result($result,$i,'id').'&diary_user='. $diary_user, db_result($result,$i,'summary')).'</td>'.
+			<tr><td>'.util_make_link('/developer/diary.php?diary_id='.db_result($result,$i,'id').'&diary_user='. $diary_user, db_result($result,$i,'summary')).'</td>'.
 				'<td>'. date(_('Y-m-d H:i'), db_result($result,$i,'date_posted')).'</td></tr>';
 		}
 		echo '

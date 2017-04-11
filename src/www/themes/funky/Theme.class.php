@@ -185,26 +185,8 @@ class Theme_Funky extends Layout {
 		return html_ac(html_ap() -1).'<!-- class="box-surround" -->'."\n";
 	}
 
-	/**
-	 * boxGetAltRowStyle() - Get an alternating row style for tables
-	 *
-	 * @param	int	$i		Row number
-	 * @param	bool	$classonly	Return class name only
-	 * @return	string
-	 */
-	function boxGetAltRowStyle($i, $classonly = false) {
-		if ($i % 2 == 0)
-			$ret = 'bgcolor-white';
-		else
-			$ret = 'bgcolor-grey';
-		if ($classonly)
-			return $ret;
-		else
-			return 'class="'.$ret.'"';
-	}
-
-	function tabGenerator($TABS_DIRS, $TABS_TITLES, $TABS_TOOLTIPS, $nested=false,  $selected=false, $sel_tab_bgcolor='WHITE',  $total_width='100%') {
-		$count = count($TABS_DIRS);
+	function tabGenerator($tabs_dirs, $tabs_titles, $tabs_tooltips, $nested=false,  $selected=false, $sel_tab_bgcolor='WHITE',  $total_width='100%') {
+		$count = count($tabs_dirs);
 
 		if ($count < 1) {
 			return '';
@@ -231,9 +213,9 @@ class Theme_Funky extends Layout {
 			$attrs['style'] = 'width:'.$tabwidth.'%';
 			$return .= html_ao('td', $attrs);
 			$attrs = array();
-			$attrs['id'] =  md5($TABS_DIRS[$i]);
-			$attrs['href'] = $TABS_DIRS[$i];
-			if (preg_match('/^https?:\/\//', $TABS_DIRS[$i])) {
+			$attrs['id'] =  md5($tabs_dirs[$i]);
+			$attrs['href'] = $tabs_dirs[$i];
+			if (preg_match('/^https?:\/\//', $tabs_dirs[$i])) {
 				$attrs['target'] = '_blank';
 			}
 			$return .= html_ao('a', $attrs);
@@ -242,11 +224,11 @@ class Theme_Funky extends Layout {
 				$attrs['class'] = 'selected';
 
 			$return .= html_ao('span', $attrs);
-			$attrs = array('title' => $TABS_TOOLTIPS[$i]);
+			$attrs = array('title' => $tabs_tooltips[$i]);
 			if ($nested)
 				$attrs['class'] = 'nested';
 
-			$return .= html_e('span', $attrs, $TABS_TITLES[$i], false);
+			$return .= html_e('span', $attrs, $tabs_titles[$i], false);
 			$return .= html_ac(html_ap() - 3);
 		}
 

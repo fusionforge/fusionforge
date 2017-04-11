@@ -46,7 +46,7 @@ class scmgit_Widget_MyRepositories extends Widget {
 		$scmgitplugin = plugin_get_object('scmgit');
 		$GitRepositories = $this->getMyRepositoriesList($scmgitplugin);
 		if (count($GitRepositories)) {
-			$returnhtml = $HTML->listTableTop(array());
+			$returnhtml = $HTML->listTableTop();
 			foreach ($GitRepositories as $GitRepository) {
 				$project = group_get_object($GitRepository);
 				$cells = array();

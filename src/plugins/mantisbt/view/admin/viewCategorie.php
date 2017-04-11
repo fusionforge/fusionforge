@@ -64,7 +64,7 @@ if (!isset($errorPage)){
 						'<input type="submit" value="'._('Delete').'" />'.
 						$HTML->closeForm();
 			}
-			echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($key, true)), $cells);
+			echo $HTML->multiTableRow(array(), $cells);
 		}
 		echo $HTML->listTableBottom();
 	} else {

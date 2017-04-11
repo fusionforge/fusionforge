@@ -95,7 +95,8 @@ class SvnCommitTracker extends scmhook {
 		$Rows= db_numrows($DBResult);
 
 		if ($Rows > 0) {
-			echo '<tr><td>';
+			echo "<tr>\n";
+			echo "<td>\n";
 			echo html_e('h2', array(), _('Related SVN commits'), false);
 
 			$title_arr = $this->getTitleArr();
@@ -110,10 +111,11 @@ class SvnCommitTracker extends scmhook {
 				$cells[][] = $this->getActualVersionLink($group->getUnixName(), $Row['file'], $Row['actual_version']);
 				$cells[][] = htmlspecialchars($Row['log_text']);
 				$cells[][] = util_make_link_u($Row['author'], user_get_object_by_name($Row['author'])->getId(), $Row['author']);
-				echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
+				echo $HTML->multiTableRow(array(), $cells);
 			}
 			echo $HTML->listTableBottom();
-			echo '</td></tr>';
+			echo "</td>\n";
+			echo "</tr>\n";
 		}
 	}
 

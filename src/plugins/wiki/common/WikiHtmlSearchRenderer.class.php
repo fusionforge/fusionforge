@@ -63,7 +63,7 @@ class WikiHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		foreach ($result as $row) {
 			$data = unserialize($row['versiondata']);
 			$page_name = preg_replace('/%2f/i', '/', rawurlencode($row['pagename']));
-			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'
+			$return .= '<tr>'
 				. '<td><a href="/wiki/g/'. $group_name.'/'. $page_name .'">'
 				. html_image('ic/msg.png', 10, 12)
 				. ' '.$row['pagename'].'</a></td>

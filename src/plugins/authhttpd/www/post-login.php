@@ -32,7 +32,7 @@ Header( "Cache-Control: must-revalidate");
 
 require_once '../../../www/env.inc.php';
 require_once $gfcommon.'include/pre.php';
-require_once '../../../www/include/login-form.php';
+require_once $gfwww.'include/login-form.php';
 
 $plugin = plugin_get_object('authhttpd');
 
@@ -52,12 +52,9 @@ if ($plugin->isSufficient() && isset($GLOBALS['REMOTE_USER'])) {
 }
 if ($return_to) {
 	validate_return_to($return_to);
-
-	header ("Location: " . util_make_url($return_to));
-	exit;
+	session_redirect($return_to);
 } else {
-	header ("Location: " . util_make_url("/my"));
-	exit;
+	session_redirect('/my');
 }
 
 // Local Variables:

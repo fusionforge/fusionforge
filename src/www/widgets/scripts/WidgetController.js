@@ -2,7 +2,7 @@
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2008. All rights reserved
  * Originally written by Nicolas Terray, 2008
  *
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is a part of Fusionforge.
@@ -37,7 +37,6 @@ WidgetBuilderController.prototype =
 				if (jQuery('#layout-manager').find('.layout-manager-column').length == 1) {
 					alert('You must keep at least one column in your layout.');
 				} else if (tr.find('.layout-manager-column').length == 1) {
-					console.log('ici');
 					if (tr.find('.wb_extrafield')) {
 						divef = tr.find('.wb_extrafield');
 						divef.find('.ef-widget-remove').hide();

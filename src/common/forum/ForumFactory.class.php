@@ -137,7 +137,7 @@ class ForumFactory extends FFError {
 
 		if (session_loggedin()) {
 			if (!forge_check_perm ('forum_admin', $this->Group->getID())) {
-				$this->setError(_("You don't have a permission to access this page"));
+				$this->setError(_('You are not allowed to access this page'));
 				$this->forums = false;
 			} else {
 				$result = db_query_params('SELECT * FROM forum_group_list_vw
@@ -146,7 +146,7 @@ class ForumFactory extends FFError {
 							array($this->Group->getID())) ;
 			}
 		} else {
-			$this->setError(_("You don't have a permission to access this page"));
+			$this->setError(_('You are not allowed to access this page'));
 			$this->forums = false;
 		}
 

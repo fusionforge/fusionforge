@@ -106,6 +106,6 @@ class Widget_MyAdmin extends Widget {
 		$cells = array();
 		$cells[][] = $text;
 		$cells[] = array($value, 'style' => 'white-space:nowrap; width:20%; background:'. $bgcolor .'; color:'. $textcolor .'; padding: 2px 8px; font-weight:bold; text-align:center;');
-		return $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
+		return $HTML->multiTableRow(array(), $cells);
 	}
 }

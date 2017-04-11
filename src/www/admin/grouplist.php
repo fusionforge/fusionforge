@@ -195,7 +195,7 @@ if (count($rows)) {
 		$cells[][] = $grp['license_name'];
 		$cells[][] = $grp['members'];
 		$cells[][] = $grp['is_template'];
-		echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($key, true)), $cells);
+		echo $HTML->multiTableRow(array(), $cells);
 	}
 	echo $HTML->listTableBottom();
 	echo $HTML->paging_bottom($start, $paging, $totalProjects, '/admin/grouplist.php?sortorder='.$sortorder.$filter);

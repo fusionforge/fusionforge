@@ -95,11 +95,7 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 		}
 		$return_to = $params['return_to'];
 
-		$result = '';
-
-		$result .= '<p>';
-		$result .= _('Cookies must be enabled past this point.');
-		$result .= '</p>';
+		$result = html_e('p', array(), _('Cookies must be enabled past this point.'));
 
 		// TODO Use a trusted IdP that was configured previously by the forge admin, and which is trusted by the libAuthentication checks
 		//$result .= '<a href="https://foafssl.org/srv/idp?authreqissuer='. util_make_url('/plugins/authwebid/post-login.php') .'">Click here to Login via foafssl.org</a>';
@@ -113,7 +109,7 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 
     /**
 	 * Is there a valid session?
-	 * @param unknown_type $params
+	 * @param	array	$params
 	 */
 	function checkAuthSession(&$params) {
 		$this->saved_user = NULL;
@@ -139,7 +135,6 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 			if ($this->isSufficient()) {
 				$this->saved_user = $user;
 				$params['results'][$this->name] = FORGE_AUTH_AUTHORITATIVE_ACCEPT;
-
 			} else {
 				$params['results'][$this->name] = FORGE_AUTH_NOT_AUTHORITATIVE;
 			}
@@ -154,8 +149,8 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 
 	/**
 	 * Retrieve the user_name for a WebID URI stored in DB as a known ID
-	 * @param string $webid_identity
-	 * @return string
+	 * @param	string	$webid_identity
+	 * @return	string
 	 */
 	public function getUserNameFromWebIDIdentity($webid_identity) {
 		$user_name = FALSE;
@@ -172,8 +167,8 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 
 	/**
 	 * Check if a WebID is already used and bound to an account
-	 * @param string $webid_identity
-	 * @return boolean
+	 * @param	string	$webid_identity
+	 * @return	boolean
 	 */
 	public function existStoredWebID($webid_identity) {
 		$res = db_query_params('SELECT webid_identity FROM plugin_authwebid_user_identities WHERE webid_identity =$1',
@@ -188,8 +183,8 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 
 	/**
 	 * Load WebIDs already bound to an account (not the pending ones)
-	 * @param string $user_id
-	 * @return array
+	 * @param	string	$user_id
+	 * @return	array
 	 */
 	public function getStoredBoundWebIDs($user_id) {
 		$boundwebids = array();
@@ -211,9 +206,9 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 
 	/**
 	 * Check if a WebID is pending confirmation of binding for a user
-	 * @param string $user_id
-	 * @param string $webid_identity
-	 * @return boolean
+	 * @param	string	$user_id
+	 * @param	string	$webid_identity
+	 * @return	boolean
 	 */
 	public function isStoredPendingWebID($user_id, $webid_identity) {
 		// the pending WebIDs will be prefixed in the DB by 'pending:'
@@ -227,16 +222,15 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 			} else {
 				return FALSE;
 			}
-		}
-		else {
+		} else {
 			return FALSE;
 		}
 	}
 
 	/**
 	 * Load WebIDs already stored, but pending confirmation by a user
-	 * @param string $user_id
-	 * @return array
+	 * @param	string	$user_id
+	 * @return	array
 	 */
 	public function getStoredPendingWebIDs($user_id) {
 		$pendingwebids = array();
@@ -258,9 +252,9 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 
 	/**
 	 * Convert a WebID pending binding to a bound one
-	 * @param string $user_id
-	 * @param string $webid_identity
-	 * @return string
+	 * @param	string	$user_id
+	 * @param	string	$webid_identity
+	 * @return	string
 	 */
 	public function bindStoredWebID($user_id, $webid_identity) {
 		$error_msg = NULL;
@@ -275,17 +269,16 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 
 	/**
 	 * Store a WebID as pending binding to an account
-	 * @param string $user_id
-	 * @param string $webid_identity
-	 * @return string
+	 * @param	string	$user_id
+	 * @param	string	$webid_identity
+	 * @return	string
 	 */
 	public function addStoredPendingWebID($user_id, $webid_identity) {
 		$error_msg = NULL;
 		// make sure not to add as pending to one account an already bound WebID for another
 		if ($this->existStoredWebID($webid_identity)) {
 			$error_msg = _('WebID already used');
-		}
-		else {
+		} else {
 			// prefix it with the 'pending:' prefix
 			$webid_identity = 'pending:' . $webid_identity;
 			// make sure to not add the same pending WebID for two different accounts
@@ -295,7 +288,7 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 			$res = db_query_params('INSERT INTO plugin_authwebid_user_identities (user_id, webid_identity) VALUES ($1,$2)',
 					array ($user_id, $webid_identity));
 			if (!$res || db_affected_rows($res) < 1) {
-				$error_msg = sprintf(_('Cannot insert new identity: %s'), db_error());
+				$error_msg = _('Cannot insert new identity')._(': ').db_error();
 			}
 		}
 		return $error_msg;
@@ -303,16 +296,16 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 
 	/**
 	 * Remove a WebID (possibly pending) from the table
-	 * @param string $user_id
-	 * @param string $webid_identity
-	 * @return string
+	 * @param	string	$user_id
+	 * @param	string	$webid_identity
+	 * @return	string
 	 */
 	public function removeStoredWebID($user_id, $webid_identity) {
 		$error_msg = NULL;
 		$res = db_query_params('DELETE FROM plugin_authwebid_user_identities WHERE user_id=$1 AND webid_identity=$2',
 								array($user_id, $webid_identity));
 		if (!$res || db_affected_rows($res) < 1) {
-			$error_msg = sprintf(_('Cannot delete identity: %s'), db_error());
+			$error_msg = _('Cannot delete identity')._(': ').db_error();
 		}
 		return $error_msg;
 	}
@@ -351,7 +344,7 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 
 	/**
 	 * Return current WebID if the delegated Auth has proceeded
-	 * @return string
+	 * @return	string
 	 */
 	public function getCurrentWebID() {
 		$webid = FALSE;

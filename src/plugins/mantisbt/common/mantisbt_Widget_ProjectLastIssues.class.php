@@ -68,7 +68,7 @@ class mantisBT_Widget_ProjectLastIssues extends Widget {
 			html_use_tablesorter();
 			echo $HTML->getJavascripts();
 			$arrTitle = array(_('ID'), _('Title'), _('Status'), _('Category'));
-			$content .= $HTML->listTableTop($arrTitle, false, 'sortable_widget_mantisbt_listissues full', 'sortable');
+			$content .= $HTML->listTableTop($arrTitle, array(), 'sortable_widget_mantisbt_listissues full', 'sortable');
 			foreach ($arrayBugs as $bug) {
 				$localCells = array();
 				$localCells[][] = util_make_link('/plugins/'.$mantisbt->name.'/?type=group&group_id='.$group_id.'&idBug='.$bug->id.'&view=viewIssue', $bug->id);

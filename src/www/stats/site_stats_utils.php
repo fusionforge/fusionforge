@@ -289,7 +289,7 @@ function stats_site_projects( $report, $orderby, $projects, $trove ) {
 
 		$i = $offset;
 		while ( $row = db_fetch_array($res) ) {
-			print	'<tr ' . $GLOBALS['HTML']->boxGetAltRowStyle($i) . ' style="text-align:right">'
+			print	'<tr style="text-align:right">'
 				. '<td>' . ($i + 1)." " . util_make_link ('/project/stats/?group_id='.$row["group_id"], $row["group_name"]) . '</td>'
 				. '<td>&nbsp;&nbsp;' . number_format( $row["site_views"],0 ) . '</td>'
 				. '<td>&nbsp;&nbsp;' . number_format( $row["subdomain_views"],0 ) . '</td>';
@@ -369,7 +369,7 @@ function stats_site_projects_daily( $span ) {
 		while ( $row = db_fetch_array($res) ) {
 			 $i++;
 
-			print	'<tr ' . $GLOBALS['HTML']->boxGetAltRowStyle($i) . ' style="text-align:right">'
+			print	'<tr style="text-align:right">'
 				. '<td>' . gmstrftime("%d %b %Y", mktime(0,0,1,substr($row["month"],4,2),$row["day"],substr($row["month"],0,4)) ) . '</td>'
 				. '<td>' . number_format( $row["site_page_views"],0 ) . '</td>'
 				. '<td>' . number_format( $row["subdomain_views"],0 ) . '</td>'
@@ -424,7 +424,7 @@ function stats_site_projects_monthly() {
 		while ( $row = db_fetch_array($res) ) {
 			$i++;
 
-			print	'<tr ' . $GLOBALS['HTML']->boxGetAltRowStyle($i) . 'style="text-align:right">'
+			print	'<tr style="text-align:right">'
 				. '<td>' . $row['month'] . '</td>'
 				. '<td>' . number_format( $row["site_page_views"],0 ) . '</td>'
 				. '<td>' . number_format( $row["subdomain_views"],0 ) . '</td>'

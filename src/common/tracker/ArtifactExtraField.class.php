@@ -4,8 +4,8 @@
  *
  * Copyright 2004, Anthony J. Pugliese
  * Copyright 2009, Roland Mas
- * Copyright 2014, Franck Villaume - TrivialDev
- * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
+ * Copyright 2014,2017, Franck Villaume - TrivialDev
+ * Copyright 2016-2017, Stéphane-Eymeric Bredthauer - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -49,12 +49,14 @@ define('ARTIFACT_EXTRAFIELDTYPE_MULTIRELEASE',17);
 define('ARTIFACT_EXTRAFIELDTYPE_DATE',18);
 define('ARTIFACT_EXTRAFIELDTYPE_DATETIMERANGE', 19);
 define('ARTIFACT_EXTRAFIELDTYPE_DATERANGE', 20);
+define('ARTIFACT_EXTRAFIELDTYPE_EFFORT',21);
+define('ARTIFACT_EXTRAFIELDTYPE_EFFORTRANGE',22);
 
 define ("ARTIFACT_EXTRAFIELDTYPEGROUP_SINGLECHOICE", serialize (array (ARTIFACT_EXTRAFIELDTYPE_SELECT, ARTIFACT_EXTRAFIELDTYPE_RADIO, ARTIFACT_EXTRAFIELDTYPE_STATUS)));
 define ("ARTIFACT_EXTRAFIELDTYPEGROUP_MULTICHOICE", serialize (array (ARTIFACT_EXTRAFIELDTYPE_CHECKBOX, ARTIFACT_EXTRAFIELDTYPE_MULTISELECT)));
 define ("ARTIFACT_EXTRAFIELDTYPEGROUP_CHOICE", serialize (array_merge(unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_SINGLECHOICE), unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_MULTICHOICE))));
 define ("ARTIFACT_EXTRAFIELDTYPEGROUP_SPECALCHOICE", serialize(array(ARTIFACT_EXTRAFIELDTYPE_USER, ARTIFACT_EXTRAFIELDTYPE_RELEASE)));
-define ("ARTIFACT_EXTRAFIELDTYPEGROUP_VALUE", serialize (array (ARTIFACT_EXTRAFIELDTYPE_TEXT,ARTIFACT_EXTRAFIELDTYPE_TEXTAREA,ARTIFACT_EXTRAFIELDTYPE_RELATION,ARTIFACT_EXTRAFIELDTYPE_INTEGER,ARTIFACT_EXTRAFIELDTYPE_FORMULA,ARTIFACT_EXTRAFIELDTYPE_DATETIME)));
+define ("ARTIFACT_EXTRAFIELDTYPEGROUP_VALUE", serialize (array (ARTIFACT_EXTRAFIELDTYPE_TEXT,ARTIFACT_EXTRAFIELDTYPE_TEXTAREA,ARTIFACT_EXTRAFIELDTYPE_RELATION,ARTIFACT_EXTRAFIELDTYPE_INTEGER,ARTIFACT_EXTRAFIELDTYPE_FORMULA,ARTIFACT_EXTRAFIELDTYPE_DATETIME, ARTIFACT_EXTRAFIELDTYPE_EFFORT)));
 
 class ArtifactExtraField extends FFError {
 
@@ -536,7 +538,7 @@ class ArtifactExtraField extends FFError {
 					if (is_object($efe)) {
 						$this->setError(_('Unable to create extra field element').' (id='.$default.') '._(':').$efe->getErrorMessage());
 					} else {
-						$this->setError(_('Unable to create extra field element'.' (id='.$default.')'));
+						$this->setError(_('Unable to create extra field element').' (id='.$default.')');
 					}
 					$return = false;
 				} elseif (!$efe->setAsDefault(true)) {
@@ -557,7 +559,7 @@ class ArtifactExtraField extends FFError {
 						if (is_object($efe)) {
 							$this->setError(_('Unable to create extra field element').' (id='.$default.') '._(':').$efe->getErrorMessage());
 						} else {
-							$this->setError(_('Unable to create extra field element'.' (id='.$default.')'));
+							$this->setError(_('Unable to create extra field element').' (id='.$default.')');
 						}
 						$return = false;
 					} elseif (!$efe->setAsDefault(true)) {
@@ -573,7 +575,8 @@ class ArtifactExtraField extends FFError {
 			if (in_array($type,unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_SPECALCHOICE)) && $default=='100' ||
 					$type==ARTIFACT_EXTRAFIELDTYPE_INTEGER && $default=='0' ||
 					$type==ARTIFACT_EXTRAFIELDTYPE_TEXT && trim($default)=='' ||
-					$type==ARTIFACT_EXTRAFIELDTYPE_TEXTAREA && trim($default)=='') {
+					$type==ARTIFACT_EXTRAFIELDTYPE_TEXTAREA && trim($default)=='' ||
+					$type==ARTIFACT_EXTRAFIELDTYPE_EFFORT && intVal($default)==0) {
 				$return = $this->resetDefaultValues();
 			} else {
 				$efID = $this->getID();
@@ -754,7 +757,8 @@ class ArtifactExtraField extends FFError {
 			ARTIFACT_EXTRAFIELDTYPE_INTEGER => _('Integer'),
 			ARTIFACT_EXTRAFIELDTYPE_DATETIME => _('Datetime'),
 			ARTIFACT_EXTRAFIELDTYPE_USER => _('User'),
-			ARTIFACT_EXTRAFIELDTYPE_RELEASE => _('Release')
+			ARTIFACT_EXTRAFIELDTYPE_RELEASE => _('Release'),
+			ARTIFACT_EXTRAFIELDTYPE_EFFORT => _('Effort')
 			);
 	}
 
@@ -1024,22 +1028,29 @@ class ArtifactExtraField extends FFError {
 	function validateAlias($alias) {
 		// these are reserved alias names
 		static $reserved_alias = array(
-			"project",
-			"priority",
-			"assigned_to",
-			"submitted_by",
-			"open_date",
-			"close_date",
-			"summary",
-			"details",
-			"last_modified_date"
+			'assigned_to',
+			'close_date',
+			'details',
+			'id',
+			'last_modified_by',
+			'last_modified_date',
+			'open_date',
+			'priority',
+			'project', //why???
+			'related_tasks',
+			'status_id',
+			'submitted_by',
+			'summary',
+			'_votes',
+			'_voters',
+			'_votage'
 		);
 
 		if (strlen($alias) == 0) return true;		// empty alias
 
 		// invalid chars?
 		if (preg_match("/[^[:alnum:]_@\\-]/", $alias)) {
-			$this->setError(_('The alias contains invalid characters. Only letters, numbers, hyphens (-), at sign (@) and underscores (_) allowed.'));
+			$this->setError(_('The alias contains invalid characters.').' '._('Only letters, numbers, hyphens (-), at sign (@) and underscores (_) allowed.'));
 			return false;
 		} elseif (in_array($alias, $reserved_alias)) {	// alias is reserved?
 			$this->setError(sprintf(_('“%s” is a reserved alias. Please provide another name.'), $alias));

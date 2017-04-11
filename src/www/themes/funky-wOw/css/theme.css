@@ -52,6 +52,7 @@ a:hover {
 	background-color: #FFE613;
 }
 
+table.listing tbody tr:nth-child(even),
 .even,
 .bgcolor-grey {
 	background-color: #FFF3B8;

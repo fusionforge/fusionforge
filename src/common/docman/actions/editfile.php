@@ -5,7 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2012,2016, Franck Villaume - TrivialDev
+ * Copyright 2012,2016-2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -89,7 +89,6 @@ switch ($subaction) {
 		$version = getIntFromRequest('edit_version', 0);
 		$new_version = getIntFromRequest('new_version', 0);
 		$details = $sanitizer->SanitizeHtml($details);
-		$vcomment = $sanitizer->SanitizeHtml($vcomment);
 		$data = '';
 
 		if ($version) {
@@ -170,7 +169,7 @@ switch ($subaction) {
 			session_redirect($urlparam);
 		}
 
-		if (!$d->update($filename, $filetype, $data, $doc_group, $title, $description, $stateid, $version, $current_version, $new_version, null, $vcomment)) {
+		if (!$d->update($filename, $filetype, $data, $doc_group, $title, $description, $stateid, $version, $current_version, $new_version, array(), $vcomment)) {
 			$error_msg = $d->getErrorMessage();
 		} else {
 			$feedback = sprintf(_('Document [D%s] updated successfully.'), $d->getID());
@@ -208,10 +207,13 @@ switch ($subaction) {
 		$reviewcomment = getStringFromRequest('review-comment');
 		$reviewcomment = $sanitizer->SanitizeHtml($reviewcomment);
 		$reviewdone = getIntFromRequest('review-done');
+		$reviewnotificationcomment = getStringFromRequest('review-notificationcomment');
+		$remindernotification = getStringFromRequest('review-remindernotification');
 		if ($reviewversionserialid) {
-			if ($new_review) {
+			$now = time();
+			if ($new_review == 1) {
 				$dr = new DocumentReview($d);
-				if ($dr->create($reviewversionserialid, $reviewtitle, $reviewdescription, $reviewenddate, $reviewmandatoryusers, $reviewoptionalusers)) {
+				if ($dr->create($reviewversionserialid, $reviewtitle, $reviewdescription, $reviewenddate, $reviewmandatoryusers, $reviewoptionalusers, $reviewnotificationcomment)) {
 					$feedback = _('Review created');
 				} else {
 					$error_msg = $dr->getErrorMessage();
@@ -234,7 +236,6 @@ switch ($subaction) {
 				}
 				$dr = new DocumentReview($d, $reviewid);
 				$drc = new DocumentReviewComment($dr);
-				$now = time();
 				if ($drc->create(user_getid(), $reviewid, $reviewcomment, $now)) {
 					if ($reviewdone) {
 						$dr->setUserDone(user_getid(), $now);
@@ -246,11 +247,24 @@ switch ($subaction) {
 				} else {
 					$error_msg = $drc->getErrorMessage();
 				}
+			} elseif ($new_review == 2) {
+				$dr = new DocumentReview($d, $reviewid);
+				if ($dr && !$dr->isError()) {
+					$users = $dr->getUsers(array(1));
+					if ($dr->sendNotice($users, false, $remindernotification)) {
+						$feedback = _('Reminder sent successfully.');
+					} else {
+						$error_msg = _('No reminder sent for review ID')._(': ').$reviewid;
+					}
+				} else {
+					$error_msg = _('Cannot create object documentreview');
+				}
 			} else {
 				$dr = new DocumentReview($d, $reviewid);
 				if ($reviewcompletedchecked) {
 					if (strlen($reviewconclusioncomment) > 0) {
-						$reviewdescription = $reviewconclusioncomment;
+						$drc = new DocumentReviewComment($dr);
+						$drc->create(user_getid(), $reviewid, $reviewconclusioncomment, $now);
 					}
 					if ($dr->close($reviewversionserialid, $reviewtitle, $reviewdescription, $reviewfinalstatus, $reviewvalidatedocument, $reviewcurrentversion)) {
 						$feedback = _('Review closed successfully');

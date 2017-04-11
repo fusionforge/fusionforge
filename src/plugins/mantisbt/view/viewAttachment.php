@@ -54,7 +54,7 @@ if (empty($msg)) {
 					$contentCell .= '<input type=button value="'._('Delete').'" onclick="window.location.href=\'/plugins/'.$mantisbt->name.'/?type='.$type.'&group_id='.$group_id.'&idBug='.$idBug.'&idAttachment='.$attachement->id.'&action=deleteAttachment&view=viewIssue\'">';
 
 				$cells[][] = $contentCell;
-				echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($key, true)), $cells);
+				echo $HTML->multiTableRow(array(), $cells);
 			}
 			echo $HTML->listTableBottom();
 		} else {

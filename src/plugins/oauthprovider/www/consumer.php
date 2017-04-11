@@ -41,18 +41,18 @@ if(forge_check_global_perm ('forge_admin')) $t_can_manage = true;
 if(count($t_consumers)>0)	{
 	echo $HTML->boxTop(_('OAuth consumers'));
 
-	echo $HTML->listTableTop(array(_('Consumer'), _('URL'), _('Description'), _('Email'), _('Key'), _('Secret'), '', ''));
+	echo $HTML->listTableTop(array(_('Consumer'), _('URL'), _('Description'), _('Email'), _('Key'), _('Secret')));
 
 	$i = 0;
 	foreach( $t_consumers as $t_consumer ) { ?>
-	<tr <?php echo $HTML->boxGetAltRowStyle($i++) ?>>
-    <td><?php echo ( $t_consumer->getName() ) ?></td>
-    <td class="center"><?php echo ( $t_consumer->getURL() ) ?></td>
-	<td class="center"><?php echo ( $t_consumer->getDesc() ) ?></td>
-	<td class="center"><?php echo ( $t_consumer->getEmail() ) ?></td>
-	<td><?php echo ( $t_consumer->key) ?></td>
+	<tr>
+    <td><?php echo $t_consumer->getName() ?></td>
+    <td class="center"><?php echo $t_consumer->getURL() ?></td>
+	<td class="center"><?php echo $t_consumer->getDesc() ?></td>
+	<td class="center"><?php echo $t_consumer->getEmail() ?></td>
+	<td><?php echo $t_consumer->key ?></td>
     <td><?php
-	echo ( $t_consumer->secret);
+	echo $t_consumer->secret;
 	?></td>
 	<?php
 

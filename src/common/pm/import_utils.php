@@ -51,14 +51,18 @@ function &pm_import_tasks($group_project_id, &$tasks, $replace=true) {
 		//  Create a linked list based on the msproj_id
 		//
 		for ($i=0; $i<$count; $i++) {
-			$msprojid[$tasks[$i]['msproj_id']] =& $tasks[$i];
-			$resrc = $tasks[$i]['resources'];
-			for ($j=0; $j<count($resrc); $j++) {
-				//validate user - see if they really exist as techs in this subproject
-				if (!util_ifsetor($tarr[strtolower($resrc[$j]['user_name'])])) {
-					//create list of bogus names to send back
-					if (array_search(strtolower($resrc[$j]['user_name']),$invalid_names) === false) {
-						$invalid_names[]=$resrc[$j]['user_name'];
+			if (isset($tasks[$i]['msproj_id'])) {
+				$msprojid[$tasks[$i]['msproj_id']] =& $tasks[$i];
+			}
+			if (isset($tasks[$i]['resources'])) {
+				$resrc = $tasks[$i]['resources'];
+				for ($j=0; $j<count($resrc); $j++) {
+					//validate user - see if they really exist as techs in this subproject
+					if (!util_ifsetor($tarr[strtolower($resrc[$j]['user_name'])])) {
+						//create list of bogus names to send back
+						if (array_search(strtolower($resrc[$j]['user_name']),$invalid_names) === false) {
+							$invalid_names[]=$resrc[$j]['user_name'];
+						}
 					}
 				}
 			}
@@ -109,10 +113,12 @@ function &pm_import_tasks($group_project_id, &$tasks, $replace=true) {
 						}
 						//map users
 						$assignees=array();
-						$resrc = $tasks[$i]['resources'];
-						for ($ucount=0; $ucount< count($resrc); $ucount++) {
-							//get their user_id from the $tarr we created earlier
-							$assignees[]=$tarr[strtolower($resrc[$ucount]['user_name'])];
+						if (isset($tasks[$i]['resources'])) {
+							$resrc = $tasks[$i]['resources'];
+							for ($ucount=0; $ucount< count($resrc); $ucount++) {
+								//get their user_id from the $tarr we created earlier
+								$assignees[]=$tarr[strtolower($resrc[$ucount]['user_name'])];
+							}
 						}
 						//don't do anything with dependencies yet - we may only have
 						//the MSprojid from dependent items
@@ -144,7 +150,7 @@ function &pm_import_tasks($group_project_id, &$tasks, $replace=true) {
 						} else {
 							$category_id = $pt->getCategoryID();
 						}
-
+						$deps = array();
 						if (!$pt->create(
 							$tasks[$i]['name'],
 							$tasks[$i]['notes'],
@@ -155,7 +161,7 @@ function &pm_import_tasks($group_project_id, &$tasks, $replace=true) {
 							$category_id,
 							$percent_complete,
 							$assignees,
-							$deps = array(),
+							$deps,
 							$tasks[$i]['duration'],
 							$tasks[$i]['parent_id'])) {
 							$array['success']=false;
@@ -167,7 +173,9 @@ function &pm_import_tasks($group_project_id, &$tasks, $replace=true) {
 //successful
 							$tasks[$i]['id']  = $pt->getID();
 							$tasks[$i]['obj'] = $pt;
-							$pt->setExternalID($tasks[$i]['msproj_id']);
+							if (isset($tasks[$i]['msproj_id'])) {
+								$pt->setExternalID($tasks[$i]['msproj_id']);
+							}
 							$pt = null;
 						}
 					}
@@ -190,10 +198,12 @@ function &pm_import_tasks($group_project_id, &$tasks, $replace=true) {
 
 						//map users
 						$assignees=array();
-						$resrc = $tasks[$i]['resources'];
-						for ($ucount=0; $ucount<count($resrc); $ucount++) {
-							//get their user_id from the $tarr we created earlier
-							$assignees[]=$tarr[strtolower($resrc[$ucount]['user_name'])];
+						if (isset($tasks[$i]['resources'])) {
+							$resrc = $tasks[$i]['resources'];
+							for ($ucount=0; $ucount<count($resrc); $ucount++) {
+								//get their user_id from the $tarr we created earlier
+								$assignees[]=$tarr[strtolower($resrc[$ucount]['user_name'])];
+							}
 						}
 
 						//don't do anything with dependencies yet - we may only have the
@@ -227,6 +237,8 @@ function &pm_import_tasks($group_project_id, &$tasks, $replace=true) {
 							$category_id = $pt->getCategoryID();
 						}
 
+						$depends_on = $pt->getDependentOn();
+
 						if (!$pt->update(
 							$tasks[$i]['name'],
 							$tasks[$i]['notes'],
@@ -238,7 +250,7 @@ function &pm_import_tasks($group_project_id, &$tasks, $replace=true) {
 							$category_id,
 							$percent_complete,
 							$assignees,
-							$pt->getDependentOn(),
+							$depends_on,
 							$pg->getID(),
 							$tasks[$i]['duration'],
 							$tasks[$i]['parent_id'])) {
@@ -252,7 +264,9 @@ function &pm_import_tasks($group_project_id, &$tasks, $replace=true) {
 //successful
 							$tasks[$i]['id']  = $pt->getID();
 							$tasks[$i]['obj'] = $pt;
-							$pt->setExternalID($tasks[$i]['msproj_id']);
+							if (isset($tasks[$i]['msproj_id'])) {
+								$pt->setExternalID($tasks[$i]['msproj_id']);
+							}
 							$pt = null;
 
 						}
@@ -270,33 +284,32 @@ function &pm_import_tasks($group_project_id, &$tasks, $replace=true) {
 			if (!$was_error) {
 				//iterate the tasks
 				for ($i=0; $i<$count; $i++) {
-					$darr=$tasks[$i]['dependenton'];
+					if (isset($tasks[$i]['dependenton'])) {
+						$darr=$tasks[$i]['dependenton'];
 
-					$deps=array();
-					//iterate each dependency in a task
-					for ($dcount=0; $dcount<count($darr); $dcount++) {
-						//get the id of the task we're dependent on -
-						// may have to get it from msprojid linked list
-						$id=$darr[$dcount]['task_id'];
-						if ($id < 1) {
-							$id=$msprojid[$darr[$dcount]['msproj_id']]['id'];
+						$deps=array();
+						//iterate each dependency in a task
+						for ($dcount=0; $dcount<count($darr); $dcount++) {
+							//get the id of the task we're dependent on -
+							// may have to get it from msprojid linked list
+							$id=$darr[$dcount]['task_id'];
+							if ($id < 1) {
+								$id=$msprojid[$darr[$dcount]['msproj_id']]['id'];
+							}
+							//prevent task from being dependent on itself
+							if ($id == $tasks[$i]['id']) {
+								continue;
+							}
+							$deps[$id]=$darr[$dcount]['link_type'];
 						}
-						//prevent task from being dependent on itself
-						if ($id == $tasks[$i]['id']) {
-							continue;
+						if (isset($tasks[$i]['obj']) && is_object($tasks[$i]['obj'])) {
+							if (!$tasks[$i]['obj']->setDependentOn($deps)) {
+								$was_error=true;
+								$array['success']=false;
+							}
 						}
-						$deps[$id]=$darr[$dcount]['link_type'];
+						unset($deps);
 					}
-					if (isset($tasks[$i]['obj']) && is_object($tasks[$i]['obj'])) {
-						if (!$tasks[$i]['obj']->setDependentOn($deps)) {
-							$was_error=true;
-							$array['success']=false;
-						}
-					} else {
-		//				$was_error=true;
-		//				$array['success']=false;
-					}
-					unset($deps);
 				} //iterates tasks to do dependencies
 			}
 

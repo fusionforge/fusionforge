@@ -49,12 +49,12 @@ if (!$group_id) {
 	if ( ! ($group->usesPlugin($pluginTaskboard->name))) {//check if the group has the plugin active
 		exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'),$pluginTaskboard->name),'home');
 	}
-	
+
 	if ($taskboard_id) {
 		include $gfplugins.'taskboard/common/views/taskboard.php';
-	
+
 	} else {
 		include $gfplugins.'taskboard/common/views/ind.php';
-	
+
 	}
 }

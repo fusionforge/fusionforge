@@ -44,9 +44,9 @@ if (!$tb_arr || count($tb_arr) < 1) {
 	echo $HTML->information(_('No taskboards have been set up, or you cannot view them.'));
 	echo html_e('p', array(), sprintf(_('The Admin for this project will have to set up data types using the %1$s admin page %2$s'), '<a href="'.util_make_uri('/plugins/'.$pluginTaskboard->name.'/?group_id='.$group_id).'">', '</a>'));
 } else {
-	echo html_e('p', array(), _('Choose a taskboard.'));
-	$tablearr = array(_('Taskboard'),_('Description'));
-	echo $HTML->listTableTop($tablearr, false, 'full sortable sortable_table_taskboard', 'sortable_table_taskboard');
+	echo html_e('p', array(), _('Choose a Task Board.'));
+	$tablearr = array(_('Task Board'),_('Description'));
+	echo $HTML->listTableTop($tablearr, array(), 'full sortable sortable_table_taskboard', 'sortable_table_taskboard');
 	for ($j = 0; $j < count($tb_arr); $j++) {
 		if (is_object($tb_arr[$j])) {
 			if ($tb_arr[$j]->isError()) {

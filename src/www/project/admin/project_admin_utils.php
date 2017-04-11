@@ -6,7 +6,8 @@
  * Copyright 2002-2004 (c) GForge Team
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Coyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2017, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -61,6 +62,10 @@ function project_admin_header($params) {
 	$labels[] = _('Project History');
 	$attr_r[] = array('title' => _('Show the significant change of your project.'));
 	$links[] = '/project/admin/history.php?group_id='.$group_id;
+
+	$labels[] = _('Effort Units');
+	$attr_r[] = array('title' => _('Manage Effort Units used in your project.'));
+	$links[] = '/project/admin/effortunits.php?group_id='.$group_id;
 
 	if(forge_get_config('use_people')) {
 		$labels[] = _('Post Jobs');
@@ -156,7 +161,7 @@ function show_grouphistory($group_id) {
 		$title_arr[]=_('Date');
 		$title_arr[]=_('By');
 
-		echo $HTML->listTableTop ($title_arr);
+		echo $HTML->listTableTop($title_arr);
 		for ($i=0; $i < $rows; $i++) {
 			$field = db_result($result, $i, 'field_name');
 			$cells = array();
@@ -173,7 +178,7 @@ function show_grouphistory($group_id) {
 			}
 			$cells[][] = date(_('Y-m-d H:i'),db_result($result, $i, 'adddate'));
 			$cells[][] = db_result($result, $i, 'user_name');
-			echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
+			echo $HTML->multiTableRow(array(), $cells);
 		}
 		echo $HTML->listTableBottom();
 

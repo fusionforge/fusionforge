@@ -4,7 +4,7 @@
  * Copyright 2010, Antoine Mercadal - Capgemini
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2011, Alain Peyrat
- * Copyright 2011-2016, Franck Villaume - TrivialDev
+ * Copyright 2011-2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -112,6 +112,7 @@ DocManListFileController.prototype =
 
 	initModalEditWindow: function() {
 		var modalId = this.listfileparams.divEditFile;
+		this.listfileparams.nocache = new Date().getTime();
 		jQuery(modalId).dialog({
 			autoOpen: false,
 			width: 1000,
@@ -126,7 +127,8 @@ DocManListFileController.prototype =
 						lock:		0,
 						itemid:		id,
 						type:		'file',
-						childgroup_id:	this.listfileparams.childGroupId
+						childgroup_id:	this.listfileparams.childGroupId,
+						rqd:		this.listfileparams.nocache
 					});
 					jQuery.get(this.listfileparams.docManURL+'/', {
 						group_id:	this.listfileparams.groupId,
@@ -134,7 +136,8 @@ DocManListFileController.prototype =
 						lock:		0,
 						itemid:		this.listfileparams.docgroupId,
 						type:		'dir',
-						childgroup_id:	this.listfileparams.childGroupId
+						childgroup_id:	this.listfileparams.childGroupId,
+						rqd:		this.listfileparams.nocache
 					});
 					clearInterval(this.lockInterval[id]);
 					clearInterval(this.lockInterval[this.listfileparams.docgroupId]);
@@ -148,7 +151,8 @@ DocManListFileController.prototype =
 						lock:		0,
 						itemid:		id,
 						type:		'file',
-						childgroup_id:	this.listfileparams.childGroupId
+						childgroup_id:	this.listfileparams.childGroupId,
+						rqd:		this.listfileparams.nocache
 					});
 					jQuery.get(this.listfileparams.docManURL+'/', {
 						group_id:	this.listfileparams.groupId,
@@ -156,7 +160,8 @@ DocManListFileController.prototype =
 						lock:		0,
 						itemid:		this.listfileparams.docgroupId,
 						type:		'dir',
-						childgroup_id:	this.listfileparams.childGroupId
+						childgroup_id:	this.listfileparams.childGroupId,
+						rqd:		this.listfileparams.nocache
 					});
 					clearInterval(this.lockInterval[id]);
 					clearInterval(this.lockInterval[this.listfileparams.docgroupId]);
@@ -172,7 +177,8 @@ DocManListFileController.prototype =
 				lock:		0,
 				itemid:		id,
 				type:		'file',
-				childgroup_id:	this.listfileparams.childGroupId
+				childgroup_id:	this.listfileparams.childGroupId,
+				rqd:		this.listfileparams.nocache
 			});
 			jQuery.get(this.listfileparams.docManURL+'/', {
 				group_id:	this.listfileparams.groupId,
@@ -180,7 +186,8 @@ DocManListFileController.prototype =
 				lock:		0,
 				itemid:		this.listfileparams.docgroupId,
 				type:		'dir',
-				childgroup_id:	this.listfileparams.childGroupId
+				childgroup_id:	this.listfileparams.childGroupId,
+				rqd:		this.listfileparams.nocache
 			});
 			clearInterval(this.lockInterval[id]);
 			clearInterval(this.lockInterval[this.listfileparams.docgroupId]);
@@ -193,6 +200,7 @@ DocManListFileController.prototype =
 
 	initModelNotifyWindow: function() {
 		var modalId = this.listfileparams.divNotifyUsers;
+		this.listfileparams.nocache = new Date().getTime();
 		jQuery(modalId).dialog({
 			autoOpen: false,
 			width: 600,
@@ -208,7 +216,8 @@ DocManListFileController.prototype =
 						lock:		0,
 						itemid:		id,
 						type:		'file',
-						childgroup_id:	this.listfileparams.childGroupId
+						childgroup_id:	this.listfileparams.childGroupId,
+						rqd:		this.listfileparams.nocache
 					});
 					jQuery.get(this.listfileparams.docManURL+'/', {
 						group_id:	this.listfileparams.groupId,
@@ -216,7 +225,8 @@ DocManListFileController.prototype =
 						lock:		0,
 						itemid:		this.listfileparams.docgroupId,
 						type:		'dir',
-						childgroup_id:	this.listfileparams.childGroupId
+						childgroup_id:	this.listfileparams.childGroupId,
+						rqd:		this.listfileparams.nocache
 					});
 					clearInterval(this.lockInterval[id]);
 					clearInterval(this.lockInterval[this.listfileparams.docgroupId]);
@@ -230,7 +240,8 @@ DocManListFileController.prototype =
 						lock:		0,
 						itemid:		id,
 						type:		'file',
-						childgroup_id:	this.listfileparams.childGroupId
+						childgroup_id:	this.listfileparams.childGroupId,
+						rqd:		this.listfileparams.nocache
 					});
 					jQuery.get(this.listfileparams.docManURL+'/', {
 						group_id:	this.listfileparams.groupId,
@@ -238,7 +249,8 @@ DocManListFileController.prototype =
 						lock:		0,
 						itemid:		this.listfileparams.docgroupId,
 						type:		'dir',
-						childgroup_id:	this.listfileparams.childGroupId
+						childgroup_id:	this.listfileparams.childGroupId,
+						rqd:		this.listfileparams.nocache
 					});
 					clearInterval(this.lockInterval[id]);
 					clearInterval(this.lockInterval[this.listfileparams.docgroupId]);
@@ -254,7 +266,8 @@ DocManListFileController.prototype =
 				lock:		0,
 				itemid:		id,
 				type:		'file',
-				childgroup_id:	this.listfileparams.childGroupId
+				childgroup_id:	this.listfileparams.childGroupId,
+				rqd:		this.listfileparams.nocache
 			});
 			jQuery.get(this.listfileparams.docManURL+'/', {
 				group_id:	this.listfileparams.groupId,
@@ -262,7 +275,8 @@ DocManListFileController.prototype =
 				lock:		0,
 				itemid:		this.listfileparams.docgroupId,
 				type:		'dir',
-				childgroup_id:	this.listfileparams.childGroupId
+				childgroup_id:	this.listfileparams.childGroupId,
+				rqd:		this.listfileparams.nocache
 			});
 			clearInterval(this.lockInterval[id]);
 			clearInterval(this.lockInterval[this.listfileparams.docgroupId]);
@@ -272,8 +286,9 @@ DocManListFileController.prototype =
 	/*! toggle edit group view div visibility
 	 */
 	toggleEditDirectoryView: function() {
+		this.listfileparams.nocache = new Date().getTime();
 		if (!this.listfileparams.divEditDirectory.is(":visible")) {
-			jQuery.getJSON(this.listfileparams.docManURL + '/?group_id='+this.listfileparams.groupId+'&action=lock&json=1&type=dir&itemid='+this.listfileparams.docgroupId+'&childgroup_id='+this.listfileparams.childGroupId, jQuery.proxy(function(data){
+			jQuery.getJSON(this.listfileparams.docManURL + '/?group_id='+this.listfileparams.groupId+'&action=lock&json=1&type=dir&itemid='+this.listfileparams.docgroupId+'&childgroup_id='+this.listfileparams.childGroupId+'&rqd='+this.listfileparams.nocache, jQuery.proxy(function(data){
 				if (typeof data.html != 'undefined') {
 					jQuery('#maindiv > .feedback').remove();
 					jQuery('#maindiv > .error').remove();
@@ -293,9 +308,10 @@ DocManListFileController.prototype =
 						lock:		1,
 						type:		'dir',
 						itemid:		this.listfileparams.docgroupId,
-						childgroup_id:	this.listfileparams.childGroupId
+						childgroup_id:	this.listfileparams.childGroupId,
+						rqd:		this.listfileparams.nocache
 					});
-					this.lockInterval[this.listfileparams.docgroupId] = setInterval("jQuery.get('" + this.listfileparams.docManURL + "/', {group_id:"+this.listfileparams.groupId+", action:'lock', lock:1, type:'dir', itemid:"+this.listfileparams.docgroupId+", childgroup_id:"+this.listfileparams.childGroupId+"})", this.listfileparams.lockIntervalDelay);
+					this.lockInterval[this.listfileparams.docgroupId] = setInterval("jQuery.get('" + this.listfileparams.docManURL + "/', {group_id:"+this.listfileparams.groupId+", action:'lock', lock:1, type:'dir', itemid:"+this.listfileparams.docgroupId+", childgroup_id:"+this.listfileparams.childGroupId+", rqd:"+this.listfileparams.nocache+"})", this.listfileparams.lockIntervalDelay);
 					if (typeof(this.listfileparams.divLeft) != 'undefined' && typeof(this.listfileparams.divRight) != 'undefined') {
 						if (this.listfileparams.divLeft.outerHeight() > computeHeight) {
 							jQuery('#views').height(this.listfileparams.divLeft.outerHeight());
@@ -304,7 +320,10 @@ DocManListFileController.prototype =
 						}
 					}
 				}
-			}, this));
+			}, this)).fail(function(jqXHR, textStatus, errorThrown) {
+					error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
+					jQuery('#maindiv').prepend(error_msg);
+				});
 		} else {
 			this.listfileparams.divEditDirectory.hide();
 			computeHeight = this.listfileparams.divRight.outerHeight() - this.listfileparams.divEditDirectory.outerHeight();
@@ -316,7 +335,8 @@ DocManListFileController.prototype =
 				lock:		0,
 				type:		'dir',
 				itemid:		this.listfileparams.docgroupId,
-				childgroup_id:	this.listfileparams.childGroupId
+				childgroup_id:	this.listfileparams.childGroupId,
+				rqd:		this.listfileparams.nocache
 			});
 			clearInterval(this.lockInterval[this.listfileparams.docgroupId]);
 			if (typeof(this.listfileparams.divLeft) != 'undefined' && typeof(this.listfileparams.divRight) != 'undefined') {
@@ -333,8 +353,9 @@ DocManListFileController.prototype =
 	/*! toggle add item view div visibility
 	 */
 	toggleAddItemView: function() {
+		this.listfileparams.nocache = new Date().getTime();
 		if (!this.listfileparams.divAddItem.is(":visible")) {
-			jQuery.getJSON(this.listfileparams.docManURL + '/?group_id='+this.listfileparams.groupId+'&action=lock&json=1&type=dir&itemid='+this.listfileparams.docgroupId+'&childgroup_id='+this.listfileparams.childGroupId, jQuery.proxy(function(data){
+			jQuery.getJSON(this.listfileparams.docManURL + '/?group_id='+this.listfileparams.groupId+'&action=lock&json=1&type=dir&itemid='+this.listfileparams.docgroupId+'&childgroup_id='+this.listfileparams.childGroupId+'&rqd='+this.listfileparams.nocache, jQuery.proxy(function(data){
 				if (typeof data.html != 'undefined') {
 					jQuery('#maindiv > .feedback').remove();
 					jQuery('#maindiv > .error').remove();
@@ -349,7 +370,7 @@ DocManListFileController.prototype =
 						itemid:		this.listfileparams.docgroupId,
 						childgroup_id:	this.listfileparams.childGroupId
 					});
-					this.lockInterval[this.listfileparams.docgroupId] = setInterval("jQuery.get('"+this.listfileparams.docManURL+"/', {group_id:"+this.listfileparams.groupId+", action:'lock', lock:1, type:'dir', itemid:"+this.listfileparams.docgroupId+", childgroup_id:"+this.listfileparams.childGroupId+"})", this.listfileparams.lockIntervalDelay);
+					this.lockInterval[this.listfileparams.docgroupId] = setInterval("jQuery.get('"+this.listfileparams.docManURL+"/', {group_id:"+this.listfileparams.groupId+", action:'lock', lock:1, type:'dir', itemid:"+this.listfileparams.docgroupId+", childgroup_id:"+this.listfileparams.childGroupId+", rqd:"+this.listfileparams.nocache+"})", this.listfileparams.lockIntervalDelay);
 					this.listfileparams.divAddItem.show();
 					this.listfileparams.divEditDirectory.hide();
 					computeHeight = this.listfileparams.divRight.outerHeight() + jQuery(this.listfileparams.divAddItem).outerHeight();
@@ -363,7 +384,10 @@ DocManListFileController.prototype =
 						}
 					}
 				}
-			}, this));
+			}, this)).fail(function(jqXHR, textStatus, errorThrown) {
+					error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
+					jQuery('#maindiv').prepend(error_msg);
+				});
 		} else {
 			jQuery.get(this.listfileparams.docManURL+'/', {
 				group_id:	this.listfileparams.groupId,
@@ -371,7 +395,8 @@ DocManListFileController.prototype =
 				lock:		0,
 				type:		'dir',
 				itemid:		this.listfileparams.docgroupId,
-				childgroup_id:	this.listfileparams.childGroupId
+				childgroup_id:	this.listfileparams.childGroupId,
+				rqd:		this.listfileparams.nocache
 			});
 			clearInterval(this.lockInterval[this.listfileparams.docgroupId]);
 			this.listfileparams.divAddItem.hide();
@@ -414,7 +439,8 @@ DocManListFileController.prototype =
 		if (this.listfileparams.childGroupId != 0) {
 			docid_groupid = this.listfileparams.childGroupId;
 		}
-		jQuery.getJSON(this.listfileparams.docManURL + '/?group_id=' + docid_groupid + '&action=getdocversions&docid='+ this.docparams.id, jQuery.proxy(function(data){
+		var nocache = new Date().getTime();
+		jQuery.getJSON(this.listfileparams.docManURL + '/?group_id=' + docid_groupid + '&action=getdocversions&docid='+ this.docparams.id+'&rqd='+nocache, jQuery.proxy(function(data){
 				if (typeof data.html != 'undefined') {
 					jQuery('#editFile > .feedback').remove();
 					jQuery('#editFile > .error').remove();
@@ -449,13 +475,16 @@ DocManListFileController.prototype =
 							versionactiontdcontent += val.versionactions[i];
 						}
 						// please sync with the editfile.php widths if you change it here.
-						var htmlString = '<tr id="docversion'+val.version.substr(1)+'" ><td style="width: 60px">'+val.version.substr(1)+currenttdcontent+'</td><td style="width: 150px">'+filenametdcontent[0].outerHTML+'</td><td style="width: 150px">'+val.title+'</td><td style="width: 150px">'+val.new_description+'</td><td style="width: 110px">'+val.vcomment+'</td><td style="width: 100px">'+val.created_by_username+'</td><td style="width: 100px">'+val.lastdate+'</td><td style="width: 50px">'+val.filesize_readable+'</td><td style="width: 50px">'+versionactiontdcontent+'</td></tr>'
+						var htmlString = '<tr id="docversion'+val.version.substr(1)+'" ><td style="width: 60px">'+val.version.substr(1)+currenttdcontent+'</td><td style="width: 150px">'+filenametdcontent[0].outerHTML+'</td><td style="width: 150px">'+val.title+'</td><td style="width: 150px">'+val.new_description.replace(/\\n/g, '<br />')+'</td><td style="width: 110px">'+val.vcomment.replace(/\\n/g, '<br />')+'</td><td style="width: 100px">'+val.created_by_username+'</td><td style="width: 100px">'+val.lastdate+'</td><td style="width: 50px">'+val.filesize_readable+'</td><td style="width: 50px">'+versionactiontdcontent+'</td></tr>'
 						jQuery('#sortable_doc_version_table > tbody:last-child').append(htmlString);
 						});
 				}
-			}, this));
+			}, this)).fail(function(jqXHR, textStatus, errorThrown) {
+					error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
+					jQuery('#editFile').prepend(error_msg);
+				});
 
-		jQuery.getJSON(this.listfileparams.docManURL + '/?group_id=' + docid_groupid + '&action=getassociations&docid='+ this.docparams.id, jQuery.proxy(function(data){
+		jQuery.getJSON(this.listfileparams.docManURL + '/?group_id=' + docid_groupid + '&action=getassociations&docid='+ this.docparams.id+'&rqd='+nocache, jQuery.proxy(function(data){
 				if (typeof data.html != 'undefined') {
 					jQuery('#tabbereditfile-association > .feedback').remove();
 					jQuery('#tabbereditfile-association > .error').remove();
@@ -469,9 +498,12 @@ DocManListFileController.prototype =
 				if (typeof data.htmltab != 'undefined') {
 					jQuery('#associationtab').text(data.htmltab);
 				}
-			}, this));
+			}, this)).fail(function(jqXHR, textStatus, errorThrown) {
+					error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
+					jQuery('#tabbereditfile-association').prepend(error_msg);
+				});
 
-		jQuery.getJSON(this.listfileparams.docManURL + '/?group_id=' + docid_groupid + '&action=getdocreviews&docid='+ this.docparams.id, jQuery.proxy(function(data){
+		jQuery.getJSON(this.listfileparams.docManURL + '/?group_id=' + docid_groupid + '&action=getdocreviews&docid='+ this.docparams.id+'&rqd='+nocache, jQuery.proxy(function(data){
 				if (typeof data.html != 'undefined') {
 					jQuery('#tabbereditfile-review > .feedback').remove();
 					jQuery('#tabbereditfile-review > .error').remove();
@@ -490,7 +522,10 @@ DocManListFileController.prototype =
 				}
 				jQuery('#review-select-mandatory-users').gentleSelect({columns: 3, itemWidth: 150});
 				jQuery('#review-select-optional-users').gentleSelect({columns: 3, itemWidth: 150});
-			}, this));
+			}, this)).fail(function(jqXHR, textStatus, errorThrown) {
+					error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
+					jQuery('#tabbereditfile-association').prepend(error_msg);
+				});
 
 		jQuery('#editdocdata').attr('action', this.docparams.action);
 
@@ -500,10 +535,11 @@ DocManListFileController.prototype =
 				lock:		1,
 				type:		'dir',
 				itemid:		this.docparams.docgroupId,
-				childgroup_id:	this.docparams.childGroupId
+				childgroup_id:	this.docparams.childGroupId,
+				rqd:		nocache
 			});
-		this.lockInterval[this.docparams.id] = setInterval("jQuery.get('" + this.docparams.docManURL + "/', {group_id:"+this.docparams.groupId+", action:'lock', lock:1, type:'file', itemid:"+this.docparams.id+", childgroup_id:"+this.docparams.childGroupId+"})", this.docparams.lockIntervalDelay);
-		this.lockInterval[this.docparams.docgroupId] = setInterval("jQuery.get('" + this.docparams.docManURL + "/', {group_id:"+this.docparams.groupId+", action:'lock', lock:1, type: 'dir', itemid:"+this.docparams.docgroupId+", childgroup_id:"+this.docparams.childGroupId+"})", this.docparams.lockIntervalDelay);
+		this.lockInterval[this.docparams.id] = setInterval("jQuery.get('" + this.docparams.docManURL + "/', {group_id:"+this.docparams.groupId+", action:'lock', lock:1, type:'file', itemid:"+this.docparams.id+", childgroup_id:"+this.docparams.childGroupId+", rqd:"+nocache+"})", this.docparams.lockIntervalDelay);
+		this.lockInterval[this.docparams.docgroupId] = setInterval("jQuery.get('" + this.docparams.docManURL + "/', {group_id:"+this.docparams.groupId+", action:'lock', lock:1, type: 'dir', itemid:"+this.docparams.docgroupId+", childgroup_id:"+this.docparams.childGroupId+", rqd:"+nocache+"})", this.docparams.lockIntervalDelay);
 		jQuery('#tabbereditfile').tabs("option", "active", 0);
 		this.setRequiredInputs(jQuery('#versiontab'));
 		jQuery(this.listfileparams.divEditFile).dialog('option', 'title', '[D'+this.docparams.id+'] '+this.listfileparams.divEditTitle).dialog('open');
@@ -531,6 +567,7 @@ DocManListFileController.prototype =
 		jQuery('#review_newcomment').val(0);
 		jQuery('#review-title').val('');
 		jQuery('#review-description').val('');
+		jQuery('#review-notificationcomment').val('');
 		jQuery('#datepicker_end_review_date').val('');
 		jQuery('#review-serialid').val();
 		jQuery('[class^=gentle]').remove();
@@ -541,12 +578,15 @@ DocManListFileController.prototype =
 		jQuery('#editfile-userstatusreview').empty();
 		jQuery('#editfile-completedreview').empty();
 		jQuery('#editfile-commentreview').empty();
+		jQuery('#editfile-remindernotification').hide();
+		jQuery('#review-remindernotification').val('');
 		if (jQuery('#editfile-createreview').is(':visible')) {
 			jQuery('#editfile-createreview').hide();
 			jQuery('#new_review').val(0);
 		} else {
 			jQuery('#new_review').val(1);
 			jQuery('#editfile-createreview').show();
+			jQuery('#review-notificationcomment-row').show();
 		}
 	},
 
@@ -554,6 +594,8 @@ DocManListFileController.prototype =
 		this.review = params;
 		jQuery('#editfile-commentreview').empty();
 		jQuery('#review_newcomment').val(0);
+		jQuery('#editfile-remindernotification').hide();
+		jQuery('#review-remindernotification').val('');
 		if (jQuery('#editfile-createreview').is(':visible')) {
 			jQuery('#editfile-createreview').hide();
 			jQuery('#new_review').val(0);
@@ -564,19 +606,23 @@ DocManListFileController.prototype =
 		} else {
 			jQuery('#review_id').val(this.review.review);
 			jQuery('#review-title').val(this.review.title);
-			jQuery('#review-description').val(this.review.description);
+			jQuery('#review-description').val(this.review.description.replace(/\\n/g, String.fromCharCode(13,10)));
 			jQuery('#datepicker_end_review_date').val(this.review.endreviewdate);
 			jQuery('#review-serialid').val(this.review.serialid);
+			var nocache = new Date().getTime();
 			if (this.review.complete) {
 				jQuery('#tr-mandatory-reviewers').hide();
 				jQuery('#tr-optional-reviewers').hide();
 				jQuery('#review_complete').val(1);
-				jQuery.getJSON(this.listfileparams.docManURL + '/?group_id=' + this.review.groupId + '&action=getdocreviewcompleteform&docid='+this.review.docid+'&revid='+this.review.review , jQuery.proxy(function(data){
+				jQuery.getJSON(this.listfileparams.docManURL + '/?group_id=' + this.review.groupId + '&action=getdocreviewcompleteform&docid='+this.review.docid+'&revid='+this.review.review+'&rqd='+nocache, jQuery.proxy(function(data){
 					jQuery('#editfile-completedreview').empty();
 					if (typeof data.html != 'undefined') {
 						jQuery('#editfile-completedreview').prepend(data.html);
 					}
-				}, this.review));
+				}, this.review)).fail(function(jqXHR, textStatus, errorThrown) {
+					error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
+					jQuery('#editfile-completedreview').prepend(error_msg);
+				});
 			} else {
 				jQuery('#tr-mandatory-reviewers').show();
 				jQuery('#tr-optional-reviewers').show();
@@ -586,14 +632,18 @@ DocManListFileController.prototype =
 				jQuery('#review-select-mandatory-users').gentleSelect({columns: 3, itemWidth: 150});
 				jQuery('#review-select-optional-users').gentleSelect({columns: 3, itemWidth: 150});
 			}
-			jQuery.getJSON(this.listfileparams.docManURL + '/?group_id=' + this.review.groupId + '&action=getdocreviewuserstatus&docid='+this.review.docid+'&revid='+this.review.review , jQuery.proxy(function(data){
+			jQuery.getJSON(this.listfileparams.docManURL + '/?group_id=' + this.review.groupId + '&action=getdocreviewuserstatus&docid='+this.review.docid+'&revid='+this.review.review+'&rqd='+nocache, jQuery.proxy(function(data){
 				jQuery('#editfile-userstatusreview').empty();
 				if (typeof data.html != 'undefined') {
 					jQuery('#editfile-userstatusreview').prepend(data.html);
 				}
-			}, this.review));
+			}, this.review)).fail(function(jqXHR, textStatus, errorThrown) {
+					error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
+					jQuery('#editfile-userstatusreview').prepend(error_msg);
+				});
 			jQuery('#new_review').val(0);
 			jQuery('#editfile-createreview').show();
+			jQuery('#review-notificationcomment-row').hide();
 		}
 	},
 
@@ -607,12 +657,18 @@ DocManListFileController.prototype =
 		jQuery('#review_id').val(this.comment.review);
 		jQuery('#editfile-userstatusreview').empty();
 		jQuery('#editfile-completedreview').empty();
-		jQuery.getJSON(this.listfileparams.docManURL + '/?group_id=' + this.comment.groupId + '&action=getdocreviewcomments&docid='+this.comment.docid+'&revid='+this.comment.review , jQuery.proxy(function(data){
+		jQuery('#editfile-remindernotification').hide();
+		jQuery('#review-remindernotification').val('');
+		var nocache = new Date().getTime();
+		jQuery.getJSON(this.listfileparams.docManURL + '/?group_id=' + this.comment.groupId + '&action=getdocreviewcomments&docid='+this.comment.docid+'&revid='+this.comment.review+'&rqd='+nocache, jQuery.proxy(function(data){
 			jQuery('#editfile-commentreview').empty();
 			if (typeof data.html != 'undefined') {
 				jQuery('#editfile-commentreview').prepend(data.html);
 			}
-		}, this.comment));
+		}, this.comment)).fail(function(jqXHR, textStatus, errorThrown) {
+					error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
+					jQuery('#editfile-commentreview').prepend(error_msg);
+				});
 	},
 
 	toggleEditVersionView: function(params) {
@@ -625,11 +681,15 @@ DocManListFileController.prototype =
 			jQuery('#defaulteditfiletype').val('text/plain');
 		}
 		if (this.version.isText) {
-			jQuery.getJSON(this.listfileparams.docManURL+'/?group_id='+this.version.groupId+'&action=getfile&type=file&itemid='+this.version.id+'&version='+this.version.version, jQuery.proxy(function(data){
+			var nocache = new Date().getTime();
+			jQuery.getJSON(this.listfileparams.docManURL+'/?group_id='+this.version.groupId+'&action=getfile&type=file&itemid='+this.version.id+'&version='+this.version.version+'&rqd='+nocache, jQuery.proxy(function(data){
 				if (data) {
 					jQuery('#defaulteditzone').text(data.body);
 				}
-			}, this));
+			}, this)).fail(function(jqXHR, textStatus, errorThrown) {
+					error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
+					jQuery('#defaulteditzone').prepend(error_msg);
+				});
 		}
 
 		if (!this.listfileparams.tableAddVersion.is(':visible')) {
@@ -655,8 +715,8 @@ DocManListFileController.prototype =
 				jQuery('#editButtonFile').prop('checked', true);
 			}
 			jQuery('#title').val(this.version.title);
-			jQuery('#description').val(this.version.description);
-			jQuery('#vcomment').val(this.version.vcomment);
+			jQuery('#description').val(this.version.description.replace(/\\n/g, String.fromCharCode(13,10)));
+			jQuery('#vcomment').val(this.version.vcomment.replace(/\\n/g, String.fromCharCode(13,10)));
 			jQuery('#edit_version').val(this.version.version);
 			if (this.version.current_version == 1) {
 				jQuery('#current_version').attr('checked', 'checked').prop('checked', true);
@@ -683,7 +743,8 @@ DocManListFileController.prototype =
 
 	deleteVersion: function(params) {
 		this.delversion = params;
-		jQuery.getJSON(this.listfileparams.docManURL + '/?group_id=' + this.delversion.groupId + '&action=deleteversion&docid='+this.delversion.docid+'&version='+this.delversion.version , jQuery.proxy(function(data){
+		var nocache = new Date().getTime();
+		jQuery.getJSON(this.listfileparams.docManURL + '/?group_id=' + this.delversion.groupId + '&action=deleteversion&docid='+this.delversion.docid+'&version='+this.delversion.version+'&rqd='+nocache, jQuery.proxy(function(data){
 				if (typeof data.html != 'undefined') {
 					jQuery('#editFile > .feedback').remove();
 					jQuery('#editFile > .error').remove();
@@ -702,7 +763,10 @@ DocManListFileController.prototype =
 						}
 					}
 				}
-			}, this.delversion));
+			}, this.delversion)).fail(function(jqXHR, textStatus, errorThrown) {
+					error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
+					jQuery('#editFile').prepend(error_msg);
+				});
 	},
 
 	deleteReview: function(params) {
@@ -713,7 +777,10 @@ DocManListFileController.prototype =
 		jQuery('#review_complete').val(0);
 		jQuery('#editfile-userstatusreview').empty();
 		jQuery('#editfile-completedreview').empty();
-		jQuery.getJSON(this.docparams.docManURL + '/?group_id=' + this.docparams.groupId + '&action=deletereview&docid='+this.docparams.id+'&review='+this.delreview.review , jQuery.proxy(function(data){
+		jQuery('#editfile-remindernotification').hide();
+		jQuery('#review-remindernotification').val('');
+		var nocache = new Date().getTime();
+		jQuery.getJSON(this.docparams.docManURL + '/?group_id=' + this.docparams.groupId + '&action=deletereview&docid='+this.docparams.id+'&review='+this.delreview.review+'&rqd='+nocache, jQuery.proxy(function(data){
 				if (typeof data.html != 'undefined') {
 					jQuery('#editFile > .feedback').remove();
 					jQuery('#editFile > .error').remove();
@@ -726,19 +793,26 @@ DocManListFileController.prototype =
 						//adjust review tab number?
 					}
 				}
-			}, this.delreview));
+			}, this.delreview)).fail(function(jqXHR, textStatus, errorThrown) {
+					error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
+					jQuery('#editFile').prepend(error_msg);
+				});
 	},
 
 	reminderReview: function(params) {
 		this.reminderreview = params;
-		jQuery.getJSON(this.docparams.docManURL + '/?group_id=' + this.docparams.groupId + '&action=reminderreview&docid='+this.docparams.id+'&review='+this.reminderreview.review , jQuery.proxy(function(data){
-				if (typeof data.html != 'undefined') {
-					jQuery('#editFile > .feedback').remove();
-					jQuery('#editFile > .error').remove();
-					jQuery('#editFile > .warning_msg').remove();
-					jQuery('#editFile').prepend(data.html);
-				}
-			}, this.reminderreview));
+		if (jQuery('#editfile-remindernotification').is(':visible')) {
+			jQuery('#editfile-remindernotification').hide();
+			jQuery('#review-remindernotification').val('');
+		} else {
+			jQuery('#new_review').val(2);
+			jQuery('#review_id').val(this.reminderreview.review);
+			jQuery('#editfile-createreview').hide();
+			jQuery('#editfile-commentreview').empty();
+			jQuery('#editfile-userstatusreview').empty();
+			jQuery('#editfile-completedreview').empty();
+			jQuery('#editfile-remindernotification').show();
+		}
 	},
 
 	toggleMoveFileView: function() {
@@ -760,6 +834,7 @@ DocManListFileController.prototype =
 
 	toggleNotifyUserView: function(params) {
 		this.notifyparams = params;
+		this.nofifyparams.nocache = new Date().getTime();
 		jQuery('#notifytitle').text(this.notifyparams.title);
 		jQuery('#notifydescription').html(this.notifyparams.description);
 		jQuery('#notifydocid').val(this.notifyparams.id);
@@ -779,10 +854,11 @@ DocManListFileController.prototype =
 				lock:		1,
 				type:		'dir',
 				itemid:		this.notifyparams.docgroupId,
-				childgroup_id:	this.notifyparams.childGroupId
+				childgroup_id:	this.notifyparams.childGroupId,
+				rqd:		this.nofifyparams.nocache
 			});
-		this.lockInterval[this.notifyparams.id] = setInterval("jQuery.get('" + this.notifyparams.docManURL + "/', {group_id:"+this.notifyparams.groupId+",action:'lock',lock:1,type:'file',itemid:"+this.notifyparams.id+",childgroup_id:"+this.notifyparams.childGroupId+"})", this.notifyparams.lockIntervalDelay);
-		this.lockInterval[this.notifyparams.docgroupId] = setInterval("jQuery.get('" + this.notifyparams.docManURL + "/', {group_id:"+this.notifyparams.groupId+",action:'lock',lock:1,type:'dir',itemid:"+this.notifyparams.docgroupId+",childgroup_id:"+this.notifyparams.childGroupId+"})", this.notifyparams.lockIntervalDelay);
+		this.lockInterval[this.notifyparams.id] = setInterval("jQuery.get('" + this.notifyparams.docManURL + "/', {group_id:"+this.notifyparams.groupId+",action:'lock',lock:1,type:'file',itemid:"+this.notifyparams.id+",childgroup_id:"+this.notifyparams.childGroupId+", rqd:"+this.nofifyparams.nocache+"})", this.notifyparams.lockIntervalDelay);
+		this.lockInterval[this.notifyparams.docgroupId] = setInterval("jQuery.get('" + this.notifyparams.docManURL + "/', {group_id:"+this.notifyparams.groupId+",action:'lock',lock:1,type:'dir',itemid:"+this.notifyparams.docgroupId+",childgroup_id:"+this.notifyparams.childGroupId+", rqd:"+this.nofifyparams.nocache+"})", this.notifyparams.lockIntervalDelay);
 		jQuery('#notify-userids').gentleSelect({columns: 2, itemWidth: 120});
 		jQuery(this.listfileparams.divNotifyUsers).dialog('option', 'title', '[D'+this.notifyparams.id+'] '+this.listfileparams.divNotifyTitle).dialog('open');
 

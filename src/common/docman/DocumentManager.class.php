@@ -2,7 +2,7 @@
 /**
  * FusionForge Documentation Manager
  *
- * Copyright 2011-2014,2016, Franck Villaume - TrivialDev
+ * Copyright 2011-2014,2016-2017, Franck Villaume - TrivialDev
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2013, French Ministry of National Education
  * http://fusionforge.org
@@ -158,13 +158,13 @@ class DocumentManager extends FFError {
 	}
 
 	/**
-	 *  getTree - display recursively the content of the doc_group. Only doc_groups within doc_groups.
+	 *  getHTMLTree - display recursively the content of the doc_group. Only doc_groups within doc_groups.
 	 *
 	 * @param	int	$selecteddir	the selected directory
 	 * @param	string	$linkmenu	the type of link in the menu
 	 * @param	int	$docGroupId	the doc_group to start: default 0
 	 */
-	function getTree($selecteddir, $linkmenu, $docGroupId = 0) {
+	function getHTMLTree($selecteddir, $linkmenu, $docGroupId = 0) {
 		global $g; // the master group of all the groups .... anyway. Needed to support projects-hierarchy plugin
 		$dg = new DocumentGroup($this->Group);
 		switch ($linkmenu) {
@@ -240,12 +240,52 @@ class DocumentManager extends FFError {
 				}
 				if ($dg->getSubgroup($subGroupIdValue, $doc_group_stateid)) {
 					echo html_ao('ul', array('class' => 'simpleTreeMenu'));
-					$this->getTree($selecteddir, $linkmenu, $subGroupIdValue);
+					$this->getHTMLTree($selecteddir, $linkmenu, $subGroupIdValue);
 					echo html_ac(html_ap() - 1);
 				}
 				echo html_ac(html_ap() -1);
 			}
 		}
+	}
+
+	/**
+	 * getTree - retrieve the tree structure into an organized array
+	 *
+	 * @param	int	$docGroupId	the doc_group to start: default 0
+	 */
+	function getTree($docGroupId = 0) {
+		$dg = new DocumentGroup($this->Group);
+		$stateid = array(1, 2, 3, 4, 5);
+		$tree = $dg->getSubgroup($docGroupId, $stateid);
+		if (sizeof($tree)) {
+			foreach ($tree as $key => $value) {
+				$tree[$key] = (array)documentgroup_get_object($value, $this->Group->getID());
+				unset($tree[$key]['Group']);
+				$tree[$key]['subdocgroups'] = $this->getTree($value);
+				$df = new DocumentFactory($this->Group);
+				$df->setDocGroupID($value);
+				$df->setStateID($stateid);
+				$df->setOrder(array('docid'));
+				$tree[$key]['files'] = (array)$df->getDocumentsWithVersions();
+			}
+		}
+		return $tree;
+	}
+
+	/**
+	 * getSettings - return the configuration flags of the docman
+	 *
+	 */
+	function getSettings() {
+		$settingsArr = array();
+		$settingsArr['new_doc_address']          = $this->Group->data_array['new_doc_address'];
+		$settingsArr['send_all_docs']            = $this->Group->data_array['send_all_docs'];
+		$settingsArr['use_docman_search']        = $this->Group->data_array['use_docman_search'];
+		$settingsArr['force_docman_reindex']     = $this->Group->data_array['force_docman_reindex'];
+		$settingsArr['use_webdav']               = $this->Group->data_array['use_webdav'];
+		$settingsArr['use_docman_create_online'] = $this->Group->data_array['use_docman_create_online'];
+		$settingsArr['use_docman_review']        = forge_get_config('use_docman_review');
+		return $settingsArr;
 	}
 
 	/**

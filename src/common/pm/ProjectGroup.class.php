@@ -139,7 +139,7 @@ class ProjectGroup extends FFError {
 	 */
 	function create($project_name,$description,$send_all_posts_to='') {
 		if (strlen($project_name) < 3) {
-			$this->setError(_('Title Must Be At Least 5 Characters'));
+			$this->setError(sprintf(_('Title Must Be At Least %d Characters'), 3));
 			return false;
 		}
 		if (strlen($description) < 10) {
@@ -332,7 +332,7 @@ class ProjectGroup extends FFError {
 	 */
 	function update($project_name, $description, $send_all_posts_to = '') {
 		if (strlen($project_name) < 3) {
-			$this->setError(_('Title Must Be At Least 5 Characters'));
+			$this->setError(sprintf(_('Title Must Be At Least %d Characters'), 3));
 			return false;
 		}
 		if (strlen($description) < 10) {

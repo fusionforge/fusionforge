@@ -276,7 +276,7 @@ foreach ($projects as $p) {
 	$cells[][] = util_unconvert_htmlspecialchars(htmlspecialchars($p->getPublicName()));
 	$cells[][] = $p->getUnixName();
 	$cells[] = array(util_make_link('/project/admin/?group_id='.$p->getID(),'['._('Project Admin').']'), 'width' => '40%');
-	echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i++, true)), $cells);
+	echo $HTML->multiTableRow(array(), $cells);
 	$userProjectsIdArray[] = $p->getID();
 }
 
@@ -305,7 +305,7 @@ if ($fullListProjectsQueryResult) {
 			$cells[][] = $projectObject->getUnixName();
 			$cells[][] = util_make_link('/project/admin/?group_id='.$projectObject->getID(),'['._('Project Admin').']');
 			$cells[][] = role_box($projectObject->getID(),'role_id-'.$projectObject->getID());
-			echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i++, true)), $cells);
+			echo $HTML->multiTableRow(array(), $cells);
 		}
 	}
 	echo $HTML->listTableBottom();

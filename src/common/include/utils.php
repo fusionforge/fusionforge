@@ -8,7 +8,7 @@
  * Copyright (c) 2010, 2011, 2012
  *	Thorsten Glaser <t.glaser@tarent.de>
  * Copyright 2010-2012, Alain Peyrat - Alcatel-Lucent
- * Copyright 2013,2016, Franck Villaume - TrivialDev
+ * Copyright 2013,2016-2017, Franck Villaume - TrivialDev
  * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivalDev
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -595,7 +595,7 @@ function ShowResultSet($result, $title = '', $linkify = false, $displayHeaders =
 
 		/*  Create the rows  */
 		for ($j = 0; $j < $rows; $j++) {
-			echo '<tr '.$HTML->boxGetAltRowStyle($j).'>';
+			echo '<tr>';
 			for ($i = 0; $i < $cols; $i++) {
 				if (in_array($i, $colsToKeep)) {
 					if ($linkify && $i == 0) {
@@ -797,11 +797,12 @@ function human_readable_bytes($bytes, $base10 = false, $round = 0, $labels = arr
 
 /**
  * ls - lists a specified directory and returns an array of files
- * @param	string	$dir	the path of the directory to list
- * @param	bool	$filter	whether to filter out directories and illegal filenames
- * @return	array	array of file names.
+ * @param	string		$dir	the path of the directory to list
+ * @param	bool		$filter	whether to filter out directories and illegal filenames
+ * @param	string|bool	$regex	filter filename based on this regex
+ * @return	array		array of file names.
  */
-function &ls($dir, $filter = false) {
+function &ls($dir, $filter = false, $regex = false) {
 	$out = array();
 
 	if (is_dir($dir) && ($h = opendir($dir))) {
@@ -813,6 +814,11 @@ function &ls($dir, $filter = false) {
 					!is_file($dir."/".$f)
 				)
 					continue;
+			}
+			if ($regex !== false) {
+				if (!preg_match($regex, $f)) {
+					continue;
+				}
 			}
 			$out[] = $f;
 		}
@@ -1087,7 +1093,7 @@ function util_display_user($username, $user_id = 0, $text = '', $size = 'xs') {
 
 	$url = util_make_link_u($username, $user_id, $text);
 	if ($params['content']) {
-		return $params['content'].$url.'<div class="new_line"></div>';
+		return $params['content'].$url;
 	}
 	return $url;
 }
@@ -1298,11 +1304,10 @@ function debug_string_backtrace() {
 
 	// Remove first item from backtrace as it's this function
 	// which is redundant.
-	$trace = preg_replace('/^#0\s+'.__FUNCTION__."[^\n]*\n/", '',
-		$trace, 1);
+	$trace = preg_replace('/^#0\s+'.__FUNCTION__."[^\n]*\n/", '', $trace, 1);
 
 	// Renumber backtrace items.
-	$trace = preg_replace('/^#(\d+)/me', '\'#\' . ($1 - 1)', $trace);
+	$trace = preg_replace_callback('/^#(\d+)/m', function($m) { return '#' . (ltrim($m[0], '#') - 1); }, $trace);
 
 	return $trace;
 }

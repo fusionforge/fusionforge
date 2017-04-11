@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2012,2014,2016, Franck Villaume - TrivialDev
+ * Copyright 2012,2014,2016-2017, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -48,6 +48,7 @@ require_once $gfcommon.'widget/Widget_ProjectLatestNews.class.php';
 require_once $gfcommon.'widget/Widget_ProjectPublicAreas.class.php';
 require_once $gfcommon.'widget/Widget_ProjectRss.class.php';
 require_once $gfcommon.'widget/Widget_ProjectLatestCommits.class.php';
+require_once $gfcommon.'widget/Widget_ProjectLatestArtifacts.class.php';
 //require_once $gfcommon.'widget/Widget_ProjectTwitterFollow.class.php';
 //require_once $gfcommon.'widget/Widget_ProjectWikiPage.class.php';
 require_once $gfcommon.'widget/Widget_ProjectScmStats.class.php';
@@ -57,6 +58,7 @@ require_once $gfcommon.'widget/Widget_HomeLatestNews.class.php';
 require_once $gfcommon.'widget/Widget_HomeStats.class.php';
 require_once $gfcommon.'widget/Widget_HomeTagCloud.class.php';
 require_once $gfcommon.'widget/Widget_HomeVersion.class.php';
+require_once $gfcommon.'widget/Widget_HomeRss.class.php';
 
 require_once $gfcommon.'widget/Widget_TrackerComment.class.php';
 require_once $gfcommon.'widget/Widget_TrackerContent.class.php';
@@ -194,6 +196,9 @@ require_once $gfcommon.'widget/Widget_TrackerSummary.class.php';
 			case 'homedetailactivitymostactiveprojectweek';
 				$o = new Widget_HomeDetailActivityMostActiveProjectWeek();
 				break;
+			case 'homerss';
+				$o = new Widget_HomeRss();
+				break;
 			case 'mysurveys':
 				$o = new Widget_MySurveys();
 				break;
@@ -285,6 +290,9 @@ require_once $gfcommon.'widget/Widget_TrackerSummary.class.php';
 			case 'projectlatestcommits':
 				$o = new Widget_ProjectLatestCommits();
 				break;
+			case 'projectlatestartifacts':
+				$o = new Widget_ProjectLatestArtifacts();
+				break;
 			case 'trackercontent':
 				$o = new Widget_TrackerContent();
 				break;
@@ -332,11 +340,11 @@ require_once $gfcommon.'widget/Widget_TrackerSummary.class.php';
 				// project home widgets
 				$widgets = array('projectdescription', 'projectmembers', 'projectinfo', 'projectscmstats',
 						'projectlatestfilereleases', 'projectlatestdocuments', 'projectlatestnews', 'projectpublicareas', //'projectwikipage' //not yet
-						'projectlatestcommits', 'projecttwitterfollow', 'projectrss', 'projectdocumentsactivity',
+						'projectlatestcommits', 'projecttwitterfollow', 'projectrss', 'projectdocumentsactivity', 'projectlatestartifacts'
 						);
 				break;
 			case WidgetLayoutManager::OWNER_TYPE_HOME:
-				$widgets = array('hometagcloud', 'homeversion', 'homelatestnews', 'homestats', 'homedetailactivitymostactiveprojectweek');
+				$widgets = array('hometagcloud', 'homeversion', 'homelatestnews', 'homestats', 'homedetailactivitymostactiveprojectweek', 'homerss');
 				break;
 			case WidgetLayoutManager::OWNER_TYPE_TRACKER:
 				$widgets = array('trackercontent', 'trackercomment', 'trackerdefaultactions', 'trackergeneral', 'trackermain', 'trackersummary');

@@ -239,9 +239,9 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		$analysed_path = $this->analyse($subpath, $group_id);
 
 		if ($analysed_path['isdir']) {
-			echo "<html><meta http-equiv='Content-Type' content='text/html charset=UTF-8' /><head><title>"._('Index of').' '.htmlspecialchars($subpath)."</title></head>\n";
+			echo "<html><head><meta http-equiv='Content-Type' content='text/html charset=UTF-8' /><title>"._('Index of').' '.urldecode($subpath)."</title></head>\n";
 			echo "<body>\n";
-			echo html_e('h1', array(), _('Index of').' '.htmlspecialchars($subpath));
+			echo html_e('h1', array(), _('Index of').' '.urldecode($subpath));
 			echo "<ul>";
 			if ( '/' != $subpath ) {
 				if ('/' == strrchr($options['path'], '/')) {
@@ -261,7 +261,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 				$subpath .= '/';
 			}
 			while ($arr = db_fetch_array($res)) {
-				echo '<li>'.util_make_link('/docman/view.php/'.$group_id.'/webdav'.$subpath.$arr['groupname'], $arr['groupname']).'</li>';
+				echo '<li>'.util_make_link('/docman/view.php/'.$group_id.'/webdav'.$subpath.urlencode($arr['groupname']), $arr['groupname']).'</li>';
 			}
 			$res = db_query_params('select filename, filetype from docdata_vw where group_id = $1 and doc_group = $2 and stateid = ANY ($3)',
 						array($group_id, $analysed_path['doc_group'], db_int_array_to_any_clause(array(1, 5))));
@@ -608,7 +608,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 			if ($path_arr[$i] == '') {
 				continue;
 			}
-			$analysed_path = $this->whatIsIt($path_arr[$i], $group_id, $analysed_path);
+			$analysed_path = $this->whatIsIt(urldecode($path_arr[$i]), $group_id, $analysed_path);
 		}
 
 		return $analysed_path;

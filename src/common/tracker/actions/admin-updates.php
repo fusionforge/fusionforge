@@ -287,6 +287,58 @@ if (getStringFromRequest('add_extrafield')) {
 	}
 
 //
+//	Update formula for an extra field
+//
+} elseif (getStringFromRequest('update_box_formula')) {
+	$id = getStringFromRequest('id');
+	$formula = getStringFromRequest('formula');
+
+	$ac = new ArtifactExtraField($ath, $id);
+	if (!$ac || !is_object($ac)) {
+		$error_msg .= _('Unable to create ArtifactExtraField Object');
+	} elseif ($ac->isError()) {
+		$error_msg .= $ac->getErrorMessage();
+	} else {
+		if (!$ac->setFormula($formula)){
+			$error_msg .= _('Update field formula failed')._(': ').$ac->getErrorMessage();
+			$ac->clearError();
+		} else {
+			$feedback .= _('Field formula updated');
+			$next = 'update_box';
+		}
+	}
+
+//
+//	Update formula for an extra field element
+//
+} elseif (getStringFromRequest('update_opt_formula')) {
+	$boxid = getStringFromRequest('boxid');
+	$is_default = getStringFromRequest('is_default', false);
+	$formula = getStringFromRequest('formula', '');
+	$ac = new ArtifactExtraField($ath,$boxid);
+	if (!$ac || !is_object($ac)) {
+		$error_msg .= _('Unable to create ArtifactExtraField Object');
+	} elseif ($ac->isError()) {
+		$error_msg .= $ac->getErrorMessage();
+	} else {
+		$id = getStringFromRequest('id');
+		$ao = new ArtifactExtraFieldElement($ac,$id);
+		if (!$ao || !is_object($ao)) {
+			$error_msg .= _('Unable to create ArtifactExtraFieldElement Object');
+		} elseif ($ao->isError()) {
+			$error_msg .= $ao->getErrorMessage();
+		} else {
+			if (!$ao->setFormula($formula)){
+				$error_msg .= _('Update field formula failed')._(': ').$ao->getErrorMessage();
+				$ao->clearError();
+			} else {
+				$feedback .= _('Field element formula updated');
+				$next = 'update_opt';
+			}
+		}
+	}
+
+//
 //	Update an Element
 //
 } elseif (getStringFromRequest('update_opt')) {

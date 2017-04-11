@@ -212,7 +212,7 @@ if ($type == 'admin') {
 		$cells[] = array(html_e('input', $inputAttr), 'class' => 'align-center');
 		$cells[][] = $help;
 		$cells[][] = util_make_link('/plugins/blocks/?id='.$id.'&type=configure&pluginname=blocks&name='.urlencode($b), _('Configure'));
-		echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($b, true)), $cells);
+		echo $HTML->multiTableRow(array(), $cells);
 	}
 	echo $HTML->listTableBottom();
 	print '<p class="align-center"><input type="submit" value="' .

@@ -79,7 +79,7 @@ if (!$atf || !is_object($atf) || $atf->isError()) {
 
 		if (count($trackers) > 0) {
 			if (count($trackers_selected) == 0) {
-				echo $HTML->warning_msg(_('Choose at least one tracker for using with taskboard.'));
+				echo $HTML->warning_msg(_('Choose at least one tracker for using with Task Board.'));
 			} else {
 				echo html_e('div', array('id' => 'messages', 'class' => 'warning', 'style' => 'display: none;'), '', false);
 			}
@@ -94,7 +94,7 @@ if (!$atf || !is_object($atf) || $atf->isError()) {
 		$cells = array();
 		$tablearr = array(_('Tracker'), _('Description'), _('Use'), _('Card background color'));
 		$content = $HTML->boxTop(_('Tasks trackers'));
-		$content .= $HTML->listTableTop($tablearr, false, 'sortable_table_tracker', 'sortable_table_tracker');
+		$content .= $HTML->listTableTop($tablearr, array(), 'sortable_table_tracker', 'sortable_table_tracker');
 		foreach ($trackers as $tracker) {
 			$tracker_id = $tracker->getID();
 			$innercells = array();
@@ -102,7 +102,7 @@ if (!$atf || !is_object($atf) || $atf->isError()) {
 			$innercells[][] = $tracker->getDescription();
 			$innercells[][] = '<input type="checkbox" name="use[]" value="'.$tracker_id.'" class="use_tracker" '.(in_array($tracker_id, $trackers_selected) ? 'checked="checked"' : '' ).'>';
 			$innercells[][] = $taskboard->colorBgChooser('bg['.$tracker_id.']', (array_key_exists($tracker_id, $trackers_bgcolor) ? $trackers_bgcolor[$tracker_id] : NULL ));
-			$content .= $HTML->multiTableRow(array('valign' => 'middle'), $innercells);
+			$content .= $HTML->multiTableRow(array('class' => 'middle'), $innercells);
 		}
 		$content .= $HTML->listTableBottom();
 		$content .= $HTML->listTableTop();
@@ -116,8 +116,8 @@ if (!$atf || !is_object($atf) || $atf->isError()) {
 		$content .= $HTML->multiTableRow(array(), $innercells);
 		$content .= $HTML->listTableBottom();
 		$content .= $HTML->boxBottom();
-		$cells[] = array($content, 'width' => '50%');
-		$content = $HTML->boxTop(_('User story tracker'));
+		$cells[] = array($content, 'class' => 'halfwidth');
+		$content = $HTML->boxTop(_('User stories tracker'));
 		$content .= $HTML->listTableTop();
 		$innercells = array();
 		$innercells[][] = html_e('strong', array(), _('User stories tracker'));
@@ -150,8 +150,9 @@ if (!$atf || !is_object($atf) || $atf->isError()) {
 		$releaseTrackerInputAttr2 = array('type' => 'radio', 'name' => 'release_field_tracker', 'value' => 2, 'id' => 'release_tracker2');
 		($release_field_tracker == 2 ? $releaseTrackerInputAttr2['checked'] = 'checked' : $releaseTrackerInputAttr1['checked'] = 'checked');
 
-		$innercells[][] = html_e('input', $releaseTrackerInputAttr1).'&nbsp;'._('by tasks').html_e('br').
-				html_e('input', $releaseTrackerInputAttr2).'&nbsp;'._('by user stories');
+		$innercells[][] = html_e('label', array('for' => 'release_tracker1'), html_e('input', $releaseTrackerInputAttr1).'&nbsp;'._('by tasks')).
+				html_e('br').
+				html_e('label', array('for' => 'release_tracker2'), html_e('input', $releaseTrackerInputAttr2).'&nbsp;'._('by user stories'));
 		$content .= $HTML->multiTableRow(array(), $innercells);
 		$innercells = array();
 		$innercells[][] = html_e('strong', array(), _('Release field'));
@@ -159,8 +160,8 @@ if (!$atf || !is_object($atf) || $atf->isError()) {
 		$content .= $HTML->multiTableRow(array(), $innercells);
 		$content .= $HTML->listTableBottom();
 		$content .= $HTML->boxBottom();
-		$cells[] = array($content, 'width' => '50%');
-		echo $HTML->multiTableRow(array('valign' => 'top'), $cells);
+		$cells[] = array($content, 'class' => 'halfwidth');
+		echo $HTML->multiTableRow(array('class' => 'top'), $cells);
 		echo $HTML->listTableBottom();
 		echo html_e('p', array(), html_e('input', array('type' => 'submit', 'name' => 'post_changes', 'value' => _('Submit'))));
 		echo $HTML->addRequiredFieldsInfoBox();
@@ -294,7 +295,7 @@ jQuery(function($){
 		});
 
 		if( trackers.length == 0 ) {
-			showMessage("<?php echo _('Choose at least one tracker for using with taskboard.'); ?>", "warning");
+			showMessage("<?php echo _('Choose at least one tracker for using with Task Board.'); ?>", "warning");
 		}
 
 		$.ajax({
@@ -303,7 +304,7 @@ jQuery(function($){
 			dataType: 'json',
 			data : {
 				action : 'get_trackers_fields',
-				group_id     : <?php echo $group_id ?>,
+				group_id : <?php echo $group_id ?>,
 				taskboard_id : <?php echo $taskboard_id ?>,
 				'trackers[]' : trackers
 			},

@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright 2005 (c) GForge Group, LLC
- * Copyright 2016, Franck Villaume - TrivialDev
+ * Copyright 2016-2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -88,8 +88,11 @@ if ($headers) {
 	//	Show the extra fields
 	//
 	$ef = $ath->getExtraFields();
-	$keys=array_keys($ef);
-	for ($i=0; $i<count($keys); $i++) {
+	$keys = array_keys($ef);
+	for ($i = 0; $i < count($keys); $i++) {
+		if ($ef[$keys[$i]]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_EFFORT) {
+			echo $sep.'"'.'effort_unit for '.$ef[$keys[$i]]['field_name'].'"';
+		}
 		echo $sep.'"'.$ef[$keys[$i]]['field_name'].'"';
 	}
 	echo "\n";
@@ -123,12 +126,29 @@ for ($i=0; $i<count($at_arr); $i++) {
 	//
 	//	Show the extra fields
 	//
- 	$efd = $at_arr[$i]->getExtraFieldDataText();
- 	foreach ( $efd as $efd_pair ) {
- 		$value = $efd_pair["value"];
- 		echo $sep.'"'. fix4csv($value) .'"';
- 	}
- 	echo "\n";
+	$efd = $at_arr[$i]->getExtraFieldDataText();
+	foreach ( $efd as $key => $efd_pair ) {
+		if ($efd_pair['type'] == ARTIFACT_EXTRAFIELDTYPE_EFFORT) {
+			if (!isset($effortUnitSet)) {
+				$effortUnitSet = new EffortUnitSet($ath, $ath->getEffortUnitSet());
+				$effortUnitFactory = new EffortUnitFactory($effortUnitSet);
+			}
+			$units = $effortUnitFactory->getUnits();
+			$unitId = $effortUnitFactory->encodedToUnitId($efd_pair['value']);
+			$unittexts = _('Unknown');
+			foreach ($units as $unit) {
+				if ($unit->getID() == $unitId) {
+					$unittexts = $unit->getName();
+				}
+			}
+			echo $sep.'"'. fix4csv($unittexts) .'"';
+			$value = $effortUnitFactory->encodedToValue($efd_pair['value']);
+		} else {
+			$value = $efd_pair["value"];
+		}
+		echo $sep.'"'. fix4csv($value) .'"';
+	}
+	echo "\n";
 }
 
 function fix4csv ($value) {

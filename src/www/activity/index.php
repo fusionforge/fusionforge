@@ -5,7 +5,7 @@
  * Copyright 1999 dtype
  * Copyright 2006 (c) GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2012-2016, Franck Villaume - TrivialDev
+ * Copyright 2012-2017, Franck Villaume - TrivialDev
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2014, Benoit Debaenst - TrivialDev
  * http://fusionforge.org/
@@ -312,12 +312,12 @@ echo $HTML->closeForm();
 					break;
 				}
 				case 'trackeropen': {
-					$icon = html_image('ic/tracker20g.png','','',array('alt'=>_('Trackers')));
+					$icon = $HTML->getOpenTicketPic(_('Tracker Open'), 'trackeropen');
 					$url = util_make_link('/tracker/a_follow.php/'.$arr['subref_id'],_('Tracker Item').' [#'.$arr['subref_id'].'] '.$arr['description'].' '._('Opened'));
 					break;
 				}
 				case 'trackerclose': {
-					$icon = html_image('ic/tracker20g.png','','',array('alt'=>_('Trackers')));
+					$icon = $HTML->getClosedTicketPic(_('Tracker Closed'), 'trackerclose');
 					$url = util_make_link('/tracker/a_follow.php/'.$arr['subref_id'],_('Tracker Item').' [#'.$arr['subref_id'].'] '.$arr['description'].' '._('Closed'));
 					break;
 				}
@@ -404,7 +404,7 @@ echo $HTML->closeForm();
 			} else {
 				$cells[][] = $arr['realname'];
 			}
-			echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($j++, true)), $cells);
+			echo $HTML->multiTableRow(array(), $cells);
 		}
 		if ($displayTableTop) {
 			echo $HTML->listTableBottom();

@@ -174,10 +174,10 @@ class mailmanPlugin extends Plugin {
 				foreach ($lists as $l) {
 					$group = $l->getGroup();
 					if ($group->getID() != $last_group) {
-						echo ' <tr '. $HTML->boxGetAltRowStyle(1) .'><td colspan="2">'.util_make_link ('/plugins/mailman/index.php?group_id='.$group->getID(),$group->getPublicName()).'</td></tr>';
+						echo ' <tr><td colspan="2">'.util_make_link ('/plugins/mailman/index.php?group_id='.$group->getID(),$group->getPublicName()).'</td></tr>';
 					}
 					echo '
-						<tr '.$HTML->boxGetAltRowStyle(0).'>
+						<tr>
 							<td class="align-center">'.util_make_link('/plugins/mailman/index.php?group_id='.$group->getID().'&action=unsubscribe&id='.$l->getID(), $HTML->getDeletePic(_('Unsubscribe from this mailing-list.'), _('Unsubscribe'))).
 						'</td>
 							<td style="width:99%">'.util_make_link('/plugins/mailman/index.php?group_id='.$group->getID().'&action=options&id='.$l->getID(),$l->getName()).'</td></tr>';

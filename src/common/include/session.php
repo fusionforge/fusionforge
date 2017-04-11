@@ -146,7 +146,7 @@ function session_check_session_cookie($session_cookie) {
 		return false;
 	}
 	if ((forge_get_config('session_expire') > 0) &&
-	    ($time - time() >= forge_get_config('session_expire'))) {
+	    (time() - $time >= forge_get_config('session_expire'))) {
 		error_log("session_check_session_cookie failed: expired !");
 		return false;
 	}
@@ -188,7 +188,7 @@ function session_logout() {
  *
  */
 function session_login_valid($loginname, $passwd, $allowpending = 0) {
-	global $feedback, $error_msg, $warning_msg;
+	global $feedback, $warning_msg;
 
 	if (!$loginname || !$passwd) {
 		$warning_msg = _('Missing Password Or User Name');
@@ -198,16 +198,28 @@ function session_login_valid($loginname, $passwd, $allowpending = 0) {
 	$hook_params = array();
 	$hook_params['loginname'] = $loginname;
 	$hook_params['passwd'] = $passwd;
-	$result = plugin_hook("session_before_login", $hook_params);
+	$hook_params['results'] = array();
+	plugin_hook_by_reference("session_login_valid", $hook_params);
+	$plugin_session_login_valid = false;
 
 	// Refuse login if not all the plugins are ok.
-	if (!$result) {
-		if (!util_ifsetor($feedback)) {
-			$warning_msg = _('Invalid Password Or User Name');
+	foreach ($params['results'] as $p => $r) {
+		$plugin_session_login_valid = true;
+		if ($r == FORGE_AUTH_AUTHORITATIVE_ACCEPT) {
+			$seen_yes = true;
+		} elseif ($r == FORGE_AUTH_AUTHORITATIVE_REJECT) {
+			$seen_no = true;
 		}
+	}
+	if ($plugin_session_login_valid) {
+		if ($seen_yes && !$seen_no) {
+			return true;
+		}
+		$warning_msg = _('Invalid Password Or User Name');
 		return false;
 	}
 
+	//fallback => rely on database.
 	return session_login_valid_dbonly($loginname, $passwd, $allowpending);
 }
 
@@ -236,7 +248,7 @@ function session_login_valid_dbonly($loginname, $passwd, $allowpending) {
 		$userstatus = $usr['status'] ;
 
 		if ($usr['unix_pw'] !== crypt($passwd, $usr['unix_pw'])) {
-			// (crypt) unix_pw does not patch
+			// (crypt) unix_pw does not match
 			$error_msg = _('Invalid Password Or User Name');
 			return false;
 		}
@@ -337,7 +349,7 @@ function session_issecure() {
  *	@param	string	$name		Name of cookie
  *	@param	string	$value		Value of cookie
  *	@param	string	$domain		Domain scope (default '')
- *	@param	int		$expiration	Expiration time in UNIX seconds (default 0)
+ *	@param	int	$expiration	Expiration time in UNIX seconds (default 0)
  */
 function session_set_cookie($name, $value, $domain='', $expiration=0) {
 	session_cookie($name, $value, $domain, $expiration);

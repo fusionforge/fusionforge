@@ -58,7 +58,7 @@ if (!$ac || !is_object($ac)) {
 			$g=$ath->getGroup();
 			$roles = $g->getRoles();
 			foreach ($roles as $role) {
-				if (!in_array(get_class($role), array('RoleLoggedIn','RoleAnonymous'))){
+				if (!in_array(get_class($role), array('RoleLoggedIn','RoleAnonymous'))) {
 					$vals[$role->getID()]=$role->getName();
 				}
 			}
@@ -93,9 +93,9 @@ if (!$ac || !is_object($ac)) {
 					$title_arr[]=_('Default');
 				}
 				$title_arr[]='';
-				echo $HTML->listTableTop ($title_arr,false, ' ');
+				echo $HTML->listTableTop($title_arr);
 				if (in_array($efType, unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_CHOICE))) {
-					$row_attrs = array('class'=>$HTML->boxGetAltRowStyle(-1,true));
+					$row_attrs = array();
 					$cells = array();
 					$cells[] = array('', 'class'=>'align-right');
 					if ($efType == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
@@ -131,7 +131,7 @@ if (!$ac || !is_object($ac)) {
 					echo $HTML->multiTableRow($row_attrs, $cells);
 				}
 				for ($i=0; $i < $rows; $i++) {
-					$row_attrs = array('class'=>$HTML->boxGetAltRowStyle($i,true));
+					$row_attrs = array();
 					$cells = array();
 					$content = ($i + 1).' --&gt;'.html_e('input', array('type'=>'text', 'name'=>'order['. $efearr[$i]['element_id'] .']', 'value'=>'', 'size'=>'3', 'maxlength'=>'3'));
 					$cells[] = array($content, 'class'=>'align-right');
@@ -167,6 +167,7 @@ if (!$ac || !is_object($ac)) {
 					$content = html_e('input', array('type'=>'submit', 'name'=>'post_changes_default', 'value'=>_('Update default')));
 					$cells[] = array($content, 'class'=>'align-center');
 				}
+				$cells[] = array('');
 				echo $HTML->multiTableRow($row_attrs, $cells);
 				echo $HTML->listTableBottom();
 				echo $HTML->closeForm();
@@ -177,13 +178,13 @@ if (!$ac || !is_object($ac)) {
 			echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&boxid='.$boxid.'&atid='.$ath->getID(), 'method' => 'post'));
 			echo html_e('input', array('type'=>'hidden', 'name'=>'add_opt', 'value'=>'y'));
 			echo html_e('label', array('for'=>'name'),html_e('strong', array(), _('Add New Element')._(':')));
-			echo html_e('input', array('type'=>'text', 'id'=>'name', 'name'=>'name', 'value'=>'', 'size'=>'15', 'maxlength'=>'30'));
+			echo html_e('input', array('type'=>'text', 'id'=>'name', 'name'=>'name', 'value'=>'', 'size'=>'15', 'maxlength'=>'30', 'required'=>'required'));
 			// Show a pop-up box to choose the possible statuses that this element will map to
 			if ($efType == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 				echo html_e('strong', array(), _('Status'));
 				echo $ath->statusBox('status_id',1,false,false);
 			}
-			echo html_e('input', array( 'type'=>'submit', 'name'=>'post_changes', 'value'=>_('Submit')));
+			echo html_e('input', array('type'=>'submit', 'name'=>'post_changes', 'value'=>_('Submit')));
 			echo $HTML->closeForm();
 	}
 	if ($efType != ARTIFACT_EXTRAFIELDTYPE_USER) {} else {}

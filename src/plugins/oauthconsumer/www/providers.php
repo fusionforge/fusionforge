@@ -11,10 +11,10 @@ if(forge_check_global_perm ('forge_admin')) $admin_access = true;
 
 if(count($providers)>0)	{
 	echo $HTML->boxTop(_('OAuth Providers'));
-	echo $HTML->listTableTop(array(_('Name'), _('Description'), _('Consumer Key'), _('Consumer Secret'), _('Request Token URL'), _('Authorization URL'), _('Access Token URL'), '', ''));
+	echo $HTML->listTableTop(array(_('Name'), _('Description'), _('Consumer Key'), _('Consumer Secret'), _('Request Token URL'), _('Authorization URL'), _('Access Token URL')));
 	$i = 0;
 	foreach( $providers as $provider ) { ?>
-		<tr <?php echo $HTML->boxGetAltRowStyle($i++) ?>>
+		<tr>
 		<td class="center"><?php echo ( $provider->get_name() ) ?></td>
 	    <td class="center"><?php echo ( $provider->get_description() ) ?></td>
 		<td class="center"><?php echo ( $provider->get_consumer_key() ) ?></td>

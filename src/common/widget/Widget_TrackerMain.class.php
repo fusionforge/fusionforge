@@ -3,6 +3,7 @@
  * Main Tracker Content Widget Class
  *
  * Copyright 2016, Franck Villaume - TrivialDev
+ * Copyright 2017, Stephane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
  * This file is a part of Fusionforge.
@@ -61,8 +62,8 @@ class Widget_TrackerMain extends Widget {
 		global $priority;
 
 		$return = $HTML->listTableTop();
-		$i = 0;
 		$atf = new ArtifactTypeFactory ($group);
+		$fieldInFormula = $ath->getFieldsInFormula();
 		$cells = array();
 		if (forge_check_perm('tracker', $atid, 'manager') && ($func == 'detail')) {
 			$tids = array();
@@ -83,48 +84,63 @@ class Widget_TrackerMain extends Widget {
 			$cells[][] = html_e('strong', array(), _('Data Type')._(': '));
 			$cells[][] = $ath->getName();
 		}
-		$return .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i++, true)), $cells);
+		$return .= $HTML->multiTableRow(array(), $cells);
 		$cells = array();
 		$cells[][] = html_e('strong', array(), _('Assigned to')._(': '));
 		if (forge_check_perm('tracker', $atid, 'manager')) {
-			if ($func == 'detail') {
-				$cells[][] = $ath->technicianBox('assigned_to', $ah->getAssignedTo(), true, 'none', -1, '', false, array('form' => 'trackerform'));
+			if (in_array('assigned_to', $fieldInFormula)) {
+				$class = 'in-formula';
 			} else {
-				$cells[][] = $ath->technicianBox('assigned_to', $assigned_to, true, 'none', -1, '', false, array('form' => 'trackerform'));
+				$class = '';
+			}
+			if ($func == 'detail') {
+				$cells[][] = $ath->technicianBox('assigned_to', $ah->getAssignedTo(), true, 'none', -1, '', false, array('form' => 'trackerform', 'class' => $class));
+			} else {
+				$cells[][] = $ath->technicianBox('assigned_to', $assigned_to, true, 'none', -1, '', false, array('form' => 'trackerform', 'class' => $class));
 			}
 		} else {
 			$cells[][] = $ah->getAssignedRealName().' ('.$ah->getAssignedUnixName().')';
 		}
-		$return .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i++, true)), $cells);
+		$return .= $HTML->multiTableRow(array(), $cells);
 		if (!$ath->usesCustomStatuses()) {
 			$cells = array();
 			$cells[][] = html_e('strong', array(), _('State')._(': '));
 			if (forge_check_perm('tracker', $atid, 'tech')) {
-				if ($func == 'detail') {
-					$cells[][] = $ath->statusBox('status_id', $ah->getStatusID(), false, '', array('form' => 'trackerform'));
+				if (in_array('status', $fieldInFormula)) {
+					$class = 'in-formula';
 				} else {
-					$cells[][] = $ath->statusBox('status_id', 'xzxz', false, '', array('form' => 'trackerform'));
+					$class = '';
+				}
+				if ($func == 'detail') {
+					$cells[][] = $ath->statusBox('status_id', $ah->getStatusID(), false, '', array('form' => 'trackerform', 'class' => $class));
+				} else {
+					$cells[][] = $ath->statusBox('status_id', 'xzxz', false, '', array('form' => 'trackerform', 'class' => $class));
 				}
 			} else {
 				$cells[][] = $ah->getStatusName();
 			}
-			$return .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i++, true)), $cells);
+			$return .= $HTML->multiTableRow(array(), $cells);
 		}
 		$cells = array();
 		$cells[][] = html_e('strong', array(), _('Priority')._(': '));
 		if (forge_check_perm('tracker', $atid, 'manager')) {
-			if ($func == 'detail') {
-				$cells[][] = build_priority_select_box('priority', $ah->getPriority(), false, array('form' => 'trackerform'));
+			if (in_array('priority', $fieldInFormula)) {
+				$class = 'in-formula';
 			} else {
-				$cells[][] = build_priority_select_box('priority', $priority, false, array('form' => 'trackerform'));
+				$class = '';
+			}
+			if ($func == 'detail') {
+				$cells[][] = $ath->priorityBox('priority', $ah->getPriority(), false, array('form' => 'trackerform', 'class' => $class));
+			} else {
+				$cells[][] = $ath->priorityBox('priority', $priority, false, array('form' => 'trackerform', 'class' => $class));
 			}
 		} else {
 			$cells[][] = $ah->getPriority();
 		}
-		$return .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i++, true)), $cells);
+		$return .= $HTML->multiTableRow(array(), $cells);
 		$return .= $HTML->listTableBottom();
 		if (forge_check_perm('tracker', $atid, 'tech')) {
-			$return .= html_e('p', array('class' => 'middleRight'), html_e('input', array('form' => 'trackerform', 'type' => 'submit', 'name' => 'submit', 'value' => _('Save Changes'), 'title' => _('Save is validating the complete form'))));
+			$return .= html_e('p', array('class' => 'middleRight'), html_e('input', array('form' => 'trackerform', 'type' => 'submit', 'name' => 'submit', 'value' => _('Save Changes'), 'title' => _('Save is validating the complete form'), 'onClick' => 'iefixform()')));
 		}
 		return $return;
 	}

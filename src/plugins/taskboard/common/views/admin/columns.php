@@ -33,7 +33,7 @@ $taskboard->header(
 );
 
 if (count($taskboard->getUsedTrackersIds()) == 0) {
-	echo $HTML->warning_msg(_('Choose at least one tracker for using with taskboard.'));
+	echo $HTML->warning_msg(_('Choose at least one tracker for using with Task Board.'));
 } else {
 	if ($taskboard->isError()) {
 		echo $HTML->error_msg($taskboard->getErrorMessage());
@@ -45,7 +45,7 @@ if (count($taskboard->getUsedTrackersIds()) == 0) {
 	$columns = $taskboard->getColumns();
 	$tablearr = array(_('Order'), _('Title'), _('Max number of tasks'), _('Assigned resolutions'), _('Drop resolution'));
 
-	echo $HTML->listTableTop($tablearr, false, 'sortable_table_tracker', 'sortable_table_tracker');
+	echo $HTML->listTableTop($tablearr, array(), 'sortable_table_tracker', 'sortable_table_tracker');
 	foreach ($columns as $column) {
 		$downLink = '';
 		if ($column->getOrder() < count($columns)) {
@@ -59,12 +59,12 @@ if (count($taskboard->getUsedTrackersIds()) == 0) {
 		$cells[][] = ( $column->getMaxTasks() ? $column->getMaxTasks() : '&nbsp;' );
 		$cells[][] = implode(', ', array_values($column->getResolutions()));
 		$cells[][] = $column->getResolutionByDefault();
-		echo $HTML->multiTableRow(array('valign' => 'middle'), $cells);
+		echo $HTML->multiTableRow(array('class' => 'middle'), $cells);
 	}
 	echo $HTML->listTableBottom();
 
 	$unused_resolutions = array_values($taskboard->getUnusedResolutions());
-	echo html_e('h2', array(), _('Add new column').(':'));
+	echo html_e('h2', array(), _('Add new column'));
 	if (count($unused_resolutions)) {
 		echo $HTML->openForm(array('action' => '/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&taskboard_id='.$taskboard_id.'&action=columns', 'method' => 'post'));
 		echo html_e('input', array('type' => 'hidden', 'name' => 'post_changes', 'value' => 'y'));

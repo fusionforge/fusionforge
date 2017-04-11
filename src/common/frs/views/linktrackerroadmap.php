@@ -59,7 +59,7 @@ if (count($enabledRoadmaps)) {
 				//$cells[] = array(html_e('input', array('type' => 'checkbox', 'value' => $enabledRoadmap->getID(), 'class' => 'checkedrelidroadactive', 'title' => _('Select / Deselect this roadmap for massaction'), 'onClick' => 'controllerFRS.checkgeneral("roadactive")')), 'style' => 'width: 2%; padding: 0px;');
 				$cells[] = array($enabledRoadmap->getName().' - '.$releaseRoadmap, 'style' => 'white-space: nowrap; width: 30%');
 				$cells[][] = '<input type="hidden" name="roadmap_release" value="'.$releaseRoadmap.'"><input type="submit" name="submit" value="'.$labelInput.'" />';
-				echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
+				echo $HTML->multiTableRow(array(), $cells);
 				echo $HTML->listTableBottom();
 				echo $HTML->closeForm();
 				$i++;

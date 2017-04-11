@@ -26,6 +26,43 @@
 require_once $gfcommon.'include/FFError.class.php';
 require_once $gfcommon.'survey/SurveyQuestionFactory.class.php';
 
+$SURVEY_OBJ = array();
+
+/**
+ * survey_get_object() - Get the survey object.
+ *
+ * survey_get_object() is useful so you can pool survey objects/save database queries
+ * You should always use this instead of instantiating the object directly.
+ *
+ * You can now optionally pass in a db result handle. If you do, it re-uses that query
+ * to instantiate the objects.
+ *
+ * IMPORTANT! That db result must contain all fields
+ * from surveys table or you will have problems
+ *
+ * @param	int		$survey_id	Required
+ * @param	int|bool	$res		Result set handle ("SELECT * FROM surveys WHERE survey_id = xx")
+ * @return	Survey|bool	A survey object or false on failure
+ */
+function &survey_get_object($survey_id, $res = false) {
+	global $SURVEY_OBJ;
+	if (!isset($SURVEY_OBJ["_".$survey_id."_"])) {
+		if ($res) {
+			//the db result handle was passed in
+		} else {
+			$res = db_query_params('SELECT * FROM surveys WHERE survey_id=$1', array($survey_id));
+		}
+		if (!$res || db_numrows($res) < 1) {
+			$SURVEY_OBJ["_".$survey_id."_"] = false;
+		} else {
+			$arr = db_fetch_array($res);
+			$groupObject = group_get_object($arr['group_id']);
+			$SURVEY_OBJ["_".$survey_id."_"] = new Survey($groupObject, $survey_id, $arr);
+		}
+	}
+	return $SURVEY_OBJ["_".$survey_id."_"];
+}
+
 class Survey extends FFError {
 
 	/**
@@ -88,10 +125,10 @@ class Survey extends FFError {
 	/**
 	 * create - use this function to create a survey
 	 *
-	 * @param string $survey_title The survey title
-	 * @param array  $add_questions The question numbers to be added
-	 * @param int $is_active 1: Active, 0: Inactive
-	 * @param int $is_result_public
+	 * @param	string		$survey_title The survey title
+	 * @param	array		$add_questions The question numbers to be added
+	 * @param	int		$is_active 1: Active, 0: Inactive
+	 * @param	int		$is_result_public
 	 * @param	Allow|int	$double_vote
 	 * @internal	param		\The $string survey title
 	 * @internal	param		array	$int The question numbers to be added
@@ -135,10 +172,10 @@ class Survey extends FFError {
 	/**
 	 * update - use this function to update a survey
 	 *
-	 * @param string $survey_title The survey title
-	 * @param array  $add_questions The question numbers to be added
-	 * @param array  $del_questions The question numbers to be deleted
-	 * @param int $is_active 1: Active, 0: Inactive
+	 * @param	string		$survey_title The survey title
+	 * @param	array		$add_questions The question numbers to be added
+	 * @param	array		$del_questions The question numbers to be deleted
+	 * @param	int		$is_active 1: Active, 0: Inactive
 	 * @param	int		$is_result_public
 	 * @param	Allow|int	$double_vote
 	 * @internal	param		\The $string survey title
@@ -439,7 +476,7 @@ class Survey extends FFError {
 	 * private question string deal methods
 	 * TODO: Add a joint table for surveys and survey_questions.
 	 *       Deal with DBMS not comma separated string
-     ***************************************************************/
+	 ***************************************************************/
 
 	/**
 	 * _fillSurveyQuestions - Get all Survey Questions using SurveyQuestionFactory

@@ -128,11 +128,10 @@ if (!session_loggedin()) {
 							$cell_attrs = array('colspan' => (array_sum($display_col)+1), 'align' => 'left', 'style' => 'color: darkred; border-bottom: 1px solid #A0A0C0; border-top: 1px dotted #A0A0C0; background-color: #CACADA;');
 							$cell_data = array(array_merge((array)$cell_text, $cell_attrs));
 							echo $HTML->multiTableRow(array(), $cell_data);
-							$toggle=0;
 
 							foreach($art_arr as $art) {
 								$cell_data = array();
-								$row_attrs = array('class' => $HTML->boxGetAltRowStyle($toggle++, true));
+								$row_attrs = array();
 								$cell_attrs = array('class' => 'align-center');
 								$cell_text = $art->getID();
 								$cell_data [] = array_merge((array)$cell_text, $cell_attrs);

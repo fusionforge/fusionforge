@@ -217,7 +217,7 @@ function drawUserStories() {
 		if (i % 2) {
 			evenOdd = 'odd';
 		}
-		l_sHtml += "<tr class='agile-user-story-"+ us.id +" "+evenOdd+"' valign='top'>\n";
+		l_sHtml += "<tr class='agile-user-story-"+ us.id +" "+evenOdd+"' class='top'>\n";
 		if( bShowUserStories ) {
 			start=1;
 			l_sHtml += '<td class="agile-phase agile-user-stories">';

@@ -80,7 +80,7 @@ class AuthOpenIDPlugin extends ForgeAuthPlugin {
 		$result .= $HTML->openForm(array('action' => '/plugins/'.$this->name.'/post-login.php', 'method' => 'get'));
 		$result .= '<input type="hidden" name="form_key" value="' . form_generate_key() . '"/>
 <input type="hidden" name="return_to" value="' . htmlspecialchars(stripslashes($return_to)) . '" />
-Your OpenID identifier: <input type="text" name="openid_identifier" />
+'._('Your OpenID identifier')._(': ').'<input type="text" name="openid_identifier" />
 <input type="submit" name="login" value="' . _('Login via OpenID') . '" />';
 		$result .= $HTML->closeForm();
 
@@ -88,9 +88,9 @@ Your OpenID identifier: <input type="text" name="openid_identifier" />
 
 	}
 
-    /**
+	/**
 	 * Is there a valid session?
-	 * @param unknown_type $params
+	 * @param	array	$params
 	 */
 
 	function checkAuthSession(&$params) {
@@ -117,7 +117,6 @@ Your OpenID identifier: <input type="text" name="openid_identifier" />
 			if ($this->isSufficient()) {
 				$this->saved_user = $user;
 				$params['results'][$this->name] = FORGE_AUTH_AUTHORITATIVE_ACCEPT;
-
 			} else {
 				$params['results'][$this->name] = FORGE_AUTH_NOT_AUTHORITATIVE;
 			}

@@ -2,7 +2,7 @@
 /**
  * FusionForge Documentation Manager
  *
- * Copyright 2016, Franck Villaume - TrivialDev
+ * Copyright 2016,2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -189,7 +189,7 @@ class DocumentReview extends FFError {
 
 	function getReadAction() {
 		global $HTML;
-		return util_make_link('#', $HTML->getEditFilePic(_('View this review'), 'viewreview'), array('id' => 'review_action_view', 'onclick' => 'javascript:controllerListFile.viewReview({review: '.$this->getID().'})'), true);
+		return util_make_link('#', $HTML->getEditFilePic(_('View comments of this review'), 'viewreview'), array('id' => 'review_action_view', 'onclick' => 'javascript:controllerListFile.toggleCommentReviewView({review: '.$this->getID().', groupId: '.$this->Document->Group->getID().', docid: '.$this->Document->getID().'})'), true);
 	}
 
 	function getEditAction($edit = true) {
@@ -208,7 +208,7 @@ class DocumentReview extends FFError {
 		if ($edit) {
 			return util_make_link('#', $HTML->getConfigurePic(_('Edit this review'), 'editreview'),
 					array('id' => 'review_action_edit', 'onclick' => 'javascript:controllerListFile.toggleEditReviewView({review: '.$this->getID().', title: \''.addslashes($this->getTitle()).'\',
-																		description: \''.addslashes($this->getDescription()).'\',
+																		description: \''.addslashes(str_replace(array("\r\n", "\r", "\n"), "\\n", $this->getDescription())).'\',
 																		endreviewdate: \''.util_html_encode($enddate).'\',
 																		serialid: '.$this->getSerialID().',
 																		mandatoryusers: '.json_encode($mandatoryUsers).',
@@ -218,7 +218,7 @@ class DocumentReview extends FFError {
 		} else {
 			return util_make_link('#', $HTML->getClosedTicketPic(_('Complete this review'), 'completereview'),
 					array('id' => 'review_action_complete', 'onclick' => 'javascript:controllerListFile.toggleEditReviewView({review: '.$this->getID().', title: \''.addslashes($this->getTitle()).'\',
-																		description: \''.addslashes($this->getDescription()).'\',
+																		description: \''.addslashes(str_replace(array("\r\n", "\r", "\n"), "\\n", $this->getDescription())).'\',
 																		endreviewdate: \''.util_html_encode($enddate).'\',
 																		serialid: '.$this->getSerialID().',
 																		mandatoryusers: '.json_encode($mandatoryUsers).',
@@ -240,7 +240,7 @@ class DocumentReview extends FFError {
 
 	function getCommentAction() {
 		global $HTML;
-		return util_make_link('#', $HTML->getEditFilePic(_('Comment the review'), 'remindercomment'), array('id' => 'review_action_comment', 'onclick' => 'javascript:controllerListFile.toggleCommentReviewView({review: '.$this->getID().', groupId: '.$this->Document->Group->getID().', docid: '.$this->Document->getID().'})'), true);
+		return util_make_link('#', $HTML->getEditFilePic(_('Comment the review and/or view the existing comments if any.'), 'remindercomment'), array('id' => 'review_action_comment', 'onclick' => 'javascript:controllerListFile.toggleCommentReviewView({review: '.$this->getID().', groupId: '.$this->Document->Group->getID().', docid: '.$this->Document->getID().'})'), true);
 	}
 
 	function showCompleteFormHTML() {
@@ -318,6 +318,10 @@ class DocumentReview extends FFError {
 			$cells[][] = html_e('p', array(), html_build_multiple_select_box_from_arrays($userIDArray, $userNameArray, 'review-select-optional-users[]', array(), 8, false, 'none', false, array('id' => 'review-select-optional-users')));
 			$return .= $HTML->multiTableRow(array('id' => 'tr-optional-reviewers'), $cells);
 			$cells = array();
+			$cells[][] = _('Notification comment')._(':');
+			$cells[][] = html_e('textarea', array('id' => 'review-notificationcomment', 'name' => 'review-notificationcomment', 'style' => 'width: 100%; box-sizing: border-box;', 'rows' => 3, 'pattern' => '.{10,}', 'placeholder' => _('Add a specific comment for the mail notification here'), 'maxlength' => DOCMAN__REVIEW_DESCRIPTION_MAX_SIZE), '', false);
+			$return .= $HTML->multiTableRow(array('id' => 'review-notificationcomment-row'), $cells);
+			$cells = array();
 			$return .= $HTML->listTableBottom();
 			$return .= $HTML->addRequiredFieldsInfoBox();
 			$return .= html_e('input', array('type' => 'hidden', 'id' => 'new_review', 'name' => 'new_review', 'value' => 0));
@@ -328,6 +332,7 @@ class DocumentReview extends FFError {
 			$return .= html_e('div', array('id' => 'editfile-userstatusreview'), '', false);
 			$return .= html_e('div', array('id' => 'editfile-completedreview'), '', false);
 			$return .= html_e('div', array('id' => 'editfile-commentreview'), '', false);
+			$return .= html_e('div', array('id' => 'editfile-remindernotification', 'style' => 'display:none'), _('Notification reminder comment')._(':').html_e('textarea', array('id' => 'review-remindernotification', 'name' => 'review-remindernotification', 'style' => 'width: 100%; box-sizing: border-box;', 'rows' => 3), '', false));
 			$javascript = 'jQuery("#datepicker_end_review_date").datepicker({dateFormat: "'.$date_format_js.'"});';
 			$return .= html_e('script', array( 'type'=>'text/javascript', 'id' => 'editfile-datepickerreview-script'), '//<![CDATA['."\n".$javascript."\n".'//]]>');
 		} else {
@@ -394,7 +399,7 @@ class DocumentReview extends FFError {
 			$cells = array();
 			$userObject = user_get_object($optionalUser['userid']);
 			$cells[][] = util_display_user($userObject->getUnixName(), $userObject->getID(), $userObject->getRealName());
-			$cells[][] = _('mandatory');
+			$cells[][] = _('optional');
 			$cells[][] = $optionalUser['statusname'];
 			$return .= $HTML->multiTableRow(array(), $cells);
 		}
@@ -402,7 +407,7 @@ class DocumentReview extends FFError {
 		return $return;
 	}
 
-	function create($reviewversionserialid, $reviewtitle, $reviewdescription, $reviewenddate, $reviewmandatoryusers, $reviewoptionalusers = array()) {
+	function create($reviewversionserialid, $reviewtitle, $reviewdescription, $reviewenddate, $reviewmandatoryusers, $reviewoptionalusers = array(), $reviewnotificationcomment = false) {
 		if (!is_int($reviewversionserialid) && $reviewversionserialid < 1) {
 			$this->setError(_('Missing Version ID to create review'));
 			return false;
@@ -420,7 +425,7 @@ class DocumentReview extends FFError {
 			return false;
 		}
 		if ((is_array($reviewmandatoryusers) && count($reviewmandatoryusers) == 0) || (!is_array($reviewmandatoryusers))) {
-			$this->setError(_('Missing mandatory reviewers').$reviewmandatoryusers);
+			$this->setError(_('Missing mandatory reviewers'));
 			return false;
 		}
 		if (!is_array($reviewoptionalusers)) {
@@ -451,7 +456,7 @@ class DocumentReview extends FFError {
 				$notifyUsers[] = $arg;
 
 			}
-			$this->sendNotice($notifyUsers, true);
+			$this->sendNotice($notifyUsers, true, $reviewnotificationcomment);
 			db_commit();
 			return true;
 		} else {
@@ -468,7 +473,7 @@ class DocumentReview extends FFError {
 	 * @param	boolean	true = new review, false = reminder
 	 * @return	bool
 	 */
-	function sendNotice($users, $new = false) {
+	function sendNotice($users, $new = false, $reviewnotificationcomment = false) {
 		if (count($users) > 0) {
 			$createdbyuser = user_get_object($this->getCreatedBy());
 			if ($new) {
@@ -484,13 +489,24 @@ class DocumentReview extends FFError {
 			$body .= _('Document version title')._(': ').$dv->getTitle()."\n";
 			$body .= _('Document version description')._(': ').util_unconvert_htmlspecialchars($dv->getDescription())."\n";
 			$body .= _('Review submitter')._(': ').$createdbyuser->getRealName().' ('.$createdbyuser->getUnixName().") \n";
-			$body .= "\n\n-------------------------------------------------------\n".
+			$body .= _('Review due date')._(': ').strftime(_('%Y-%m-%d'), $this->getEnddate())."\n";
+			if ($reviewnotificationcomment) {
+				$body .= _('Specific comment from submitter')._(':')."\n";
+				$body .= '-------------------------------------------------------'."\n";
+				$body .= $reviewnotificationcomment;
+			}
+			$body2 = "\n\n-------------------------------------------------------\n".
 				_('Please review, visit')._(':').
 				"\n\n" . util_make_url($this->Document->getPermalink());
 
 			foreach ($users as $user) {
 				$userObject = user_get_object($user[1]);
-				util_send_message($userObject->getEmail(), $subject, $body, 'noreply@'.forge_get_config('web_host'), '', _('Docman'));
+				if ($user[2] == 1) {
+					$sub_label = "\n\n"._('Your review is MANDATORY')."\n";
+				} elseif ($user[2] == 2) {
+					$sub_label = "\n\n"._('Your review is optional')."\n";
+				}
+				util_send_message($userObject->getEmail(), $subject, $body.$sub_label.$body2, 'noreply@'.forge_get_config('web_host'), '', _('Docman'));
 			}
 			return true;
 		}
@@ -576,7 +592,7 @@ class DocumentReview extends FFError {
 			return false;
 		}
 		if ((is_array($reviewmandatoryusers) && count($reviewmandatoryusers) == 0) || (!is_array($reviewmandatoryusers))) {
-			$this->setError(_('Missing mandatory reviewers').$reviewmandatoryusers);
+			$this->setError(_('Missing mandatory reviewers'));
 			return false;
 		}
 		if (!is_array($reviewoptionalusers)) {

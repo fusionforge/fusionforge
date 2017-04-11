@@ -164,7 +164,7 @@ if ($report->isError()) {
 		echo $HTML->html_chartid('chart1');
 		$tabletop = array(_('Folder'), _('Document'), _('User'), _('Date'));
 		$classth = array('', '', '', '');
-		echo $HTML->listTableTop($tabletop, false, 'sortable_docman_listfile', 'sortable', $classth);
+		echo $HTML->listTableTop($tabletop, array(), 'sortable_docman_listfile', 'sortable', $classth);
 		for ($i = 0; $i < count($data); $i++) {
 			$ndg = documentgroup_get_object($data[$i][3], $group_id);
 			$cells = array();

@@ -25,7 +25,7 @@ class ContribTrackerPlugin extends Plugin {
 	function __construct() {
 		parent::__construct();
 		$this->name = "contribtracker";
-		$this->text = _("Contribution Tracker"); // To show in the tabs, use...
+		$this->text = _("Contribution tracker"); // To show in the tabs, use...
 		$this->pkg_desc =
 _("This plugin allows each project to display a list of significant
 contributions, along with their authors.");
@@ -48,7 +48,7 @@ contributions, along with their authors.");
 				return;
 			}
 			if ( $project->usesPlugin ( $this->name ) ) {
-				$params['TITLES'][] = '<nobr>'._('Contribution tracker').'</nobr>' ;
+				$params['TITLES'][] = _('Contribution tracker');
 				$params['TOOLTIPS'][] = _('Follow the contributions by contributors to this project');
 				$params['DIRS'][]='/plugins/'.$this->name.'/?group_id=' . $group_id ;
 				$params['ADMIN'][]='';

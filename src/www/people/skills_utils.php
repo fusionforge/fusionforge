@@ -80,7 +80,7 @@ function displayUserSkills($user_id, $allowEdit) {
 			}
 
 			/* now print out the row, formatted nicely */
-			echo '<tr '. $HTML->boxGetAltRowStyle($i+1) . '>';
+			echo '<tr>';
 			if($allowEdit) {
 				echo '<td><input type="checkbox" name="skill_edit[]" value="'.db_result($result, $i, 'skills_data_id').'" /></td>';
 				echo '<td><input type="checkbox" name="skill_delete[]" value="'.db_result($result, $i, 'skills_data_id').'" /></td>';
@@ -146,7 +146,7 @@ function handle_multi_edit($skill_ids = array()) {
 			$finishM = substr($finish, 4, 2);
 
 			echo '<table>'.
-				'<tr '.$HTML->boxGetAltRowStyle($i+1).'>'.
+				'<tr>'.
 				'<td><h3>'.db_result($result, $i,'title').'</h3></td></tr>'.
 				'<tr><td>'.
 				'<table class="fullwidth">'.
@@ -155,7 +155,7 @@ function handle_multi_edit($skill_ids = array()) {
 						'<td >'._('Start Date').'</td>'.
 						'<td >'._('End Date').'</td>'.
 					'</tr>';
-			echo '<tr '.$HTML->boxGetAltRowStyle($i+1).'>'.
+			echo '<tr>'.
 						'<td>'.html_build_select_box($skills, 'type[]',db_result($result, $i,'type') , false, '').'</td>'.
 						'<td>'.html_build_select_box_from_arrays($monthArrayVals,$monthArray, 'startM[]', $startM, false, '').
 							html_build_select_box_from_arrays($yearArray,$yearArray, 'startY[]', $startY, false, '').'</td>'.
@@ -164,7 +164,7 @@ function handle_multi_edit($skill_ids = array()) {
 					'</tr>'.
 				'</table>'.
 				'</td></tr>'.
-				'<tr '.$HTML->boxGetAltRowStyle($i+1).'><td>'.
+				'<tr><td>'.
 				'<table>'.
 					'<tr class="tableheading">'.
 						'<td>'._('Title (max 100 characters)').'</td>'.

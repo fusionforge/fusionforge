@@ -332,6 +332,21 @@ class ArtifactFactory extends FFError {
 					$params[] = $strartDate->format('U');
 					$wheresql .= ' AND $'.$paramcount++;
 					$params[] = $endDate->format('U');
+				} elseif ($type == ARTIFACT_EXTRAFIELDTYPE_EFFORT) {
+					if (preg_match('/^(\d+U\d+) ?(\d+U\d+)?$/',$vals[$i],$matches)) {
+						$startEffort = intval($matches[1]);
+						$endEffort = intval($matches[2]);
+						if ($startEffort>$endEffort) {
+							$startEffort=$endEffort;
+							$endEffort=intval($matches[1]);
+						}
+						if ($endEffort) {
+							$wheresql .= ' AND cast(substring(aefd'.$i.'.field_data from \'^[0-9]+\') AS BIGINT) BETWEEN $'.$paramcount++;
+							$params[] = $startEffort;
+							$wheresql .= ' AND $'.$paramcount++;
+							$params[] = $endEffort;
+						}
+					}
 				} else {
 					if (is_array($vals[$i])) {
 						$wheresql .= ' AND aefd'.$i.'.field_data = ANY ($'.$paramcount++ .')' ;
@@ -344,7 +359,6 @@ class ArtifactFactory extends FFError {
 				$wheresql .= ' AND aefd'.$i.'.artifact_id=artifact_vw.artifact_id' ;
 			}
 		}
-
 		//if status selected, and more to where clause
 		if ($this->status && ($this->status != 100)) {
 			//for open tasks, add status=100 to make sure we show all
@@ -451,7 +465,6 @@ class ArtifactFactory extends FFError {
 
 		$sortorder = util_ensure_value_in_set ($this->sort,
 						       array ('ASC', 'DESC')) ;
-
 		$sortcol = util_ensure_value_in_set ($this->order_col,
 						     array ('extra',
 							    'artifact_id',

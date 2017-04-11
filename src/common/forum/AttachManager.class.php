@@ -134,7 +134,7 @@ class AttachManager extends FFError {
 		}
 		if ($attachid) {
 			$attach = "<br/>
-			<a href=\"javascript:manageattachments('".util_make_url("/forum/attachment.php?attachid=$attachid&amp;group_id=$group_id&amp;forum_id=$forum_id$pend")."','no');\">" . html_image('ic/cfolder15.png', 15, 13) . db_result($res,0,'filename') . "</a>  (" . db_result($res,0,'counter') . ") downloads";
+			<a href=\"javascript:manageattachments('".util_make_url("/forum/attachment.php?attachid=$attachid&amp;group_id=$group_id&amp;forum_id=$forum_id$pend")."','no');\">" . html_image('ic/attach.png', '', '') . db_result($res,0,'filename') . "</a>  (" . db_result($res,0,'counter') . ") downloads";
 			$attach_userid = db_result($res,0,'userid');
 
 			$f = $msg->getForum();
@@ -144,8 +144,8 @@ class AttachManager extends FFError {
 				if ( ((user_getid() == $attach_userid)
 				      || (forge_check_perm ('forum_admin', $f->Group->getID())))
 				     && (!$msg->isPending()) ) { //only permit the user who created the attach to delete it, or an admin
-					$attach .= "   <a href=\"javascript:manageattachments('/forum/attachment.php?attachid=$attachid&amp;group_id=$group_id&amp;forum_id=$forum_id&amp;msg_id=$msg_id&amp;edit=yes','no');\">" .  "<font size=\"-3\">" .  html_image('ic/forum_edit.gif', 37, 15, array('alt'=>_("Edit"))) . "</font></a>";
-					$attach .= "     <a href=\"javascript:manageattachments('/forum/attachment.php?attachid=$attachid&amp;group_id=$group_id&amp;forum_id=$forum_id&amp;delete=yes','yes');\">" .  "<font size=\"-3\">" .  html_image('ic/forum_delete.gif', 16, 18, array('alt'=>_("Delete"))) . "</font></a>";
+					$attach .= "   <a href=\"javascript:manageattachments('/forum/attachment.php?attachid=$attachid&amp;group_id=$group_id&amp;forum_id=$forum_id&amp;msg_id=$msg_id&amp;edit=yes','no');\">" . html_image('ic/attach_edit.png', '', '', array('alt'=>_("Edit"))) . "</a>";
+					$attach .= "     <a href=\"javascript:manageattachments('/forum/attachment.php?attachid=$attachid&amp;group_id=$group_id&amp;forum_id=$forum_id&amp;delete=yes','yes');\">" .  html_image('ic/attach_delete.png', '', '', array('alt'=>_("Delete"))) . "</a>";
 				}
 			}
 		} else {
@@ -159,7 +159,7 @@ class AttachManager extends FFError {
 				if ( ((user_getid() == $msg->getPosterID())
 				      || (forge_check_perm ('forum_admin', $f->Group->getID())))
 				     && (!$msg->isPending()) ) { //only permit the user who created the message to insert an attach
-					$attach .= "   <a href=\"javascript:manageattachments('".util_make_url ("/forum/attachment.php?attachid=0&amp;group_id=$group_id&amp;forum_id=$forum_id&amp;msg_id=$msg_id&amp;edit=yes")."','no');\">" .  "<font size=\"-3\">" .  html_image('ic/forum_add.gif', 37, 15, array('alt'=>_("Add"))) . "</font></a>";
+					$attach .= "   <a href=\"javascript:manageattachments('".util_make_url ("/forum/attachment.php?attachid=0&amp;group_id=$group_id&amp;forum_id=$forum_id&amp;msg_id=$msg_id&amp;edit=yes")."','no');\">" .  html_image('ic/attach_add.png', '', '', array('alt'=>_("Add"))) . "</a>";
 				}
 			}
 		}

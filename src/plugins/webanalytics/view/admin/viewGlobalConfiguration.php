@@ -31,7 +31,7 @@ if (sizeof($linksArray)) {
 	echo $HTML->boxTop(_('Manage available links'));
 	$tabletop = array(_('Name'), _('Standard JavaScript Tracking code'), _('Is Active'), _('Actions'));
 	$classth = array('','','','unsortable');
-	echo $HTML->listTableTop($tabletop, false, 'sortable_webanalytics_listlinks', 'sortable', $classth);
+	echo $HTML->listTableTop($tabletop, array(), 'sortable_webanalytics_listlinks', 'sortable', $classth);
 	foreach ($linksArray as $link) {
 		$cells = array();
 		$cells[][] = htmlentities($link['name']);

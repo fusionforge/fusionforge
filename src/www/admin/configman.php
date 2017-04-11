@@ -102,7 +102,7 @@ foreach ($sections as $section) {
 		} else {
 			$class = '';
 		}
-		echo '<tr '. $HTML->boxGetAltRowStyle($counter++) .'><td>'.$var ;
+		echo '<tr><td>'.$var ;
 		if ($c->is_bool ($section, $var)) {
 			print " (boolean)" ;
 		}

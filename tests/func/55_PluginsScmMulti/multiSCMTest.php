@@ -77,7 +77,7 @@ class multiSCMTest extends FForge_SeleniumTestCase
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
-		$p = $this->getText("//tt[contains(.,'svn checkout svn+ssh')]");
+		$p = $this->getText("//span[contains(.,'svn checkout svn+ssh')]");
 		$p = preg_replace(",^svn checkout ,", "", $p);
 		$t = exec("mktemp -d /tmp/svnTest.XXXXXX");
 		system("cd $t && svn checkout $p projecta", $ret);

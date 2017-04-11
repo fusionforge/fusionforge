@@ -32,7 +32,7 @@ function people_header($params) {
 		$params['toptab'] = 'people';
 		$params['group'] = $group_id;
 		site_project_header($params);
-	} elseif (isset($_SERVER['HTTP_REFERER']) && strstr($_SERVER['HTTP_REFERER'], 'account')){
+	} elseif (isset($_SERVER['HTTP_REFERER']) && strstr($_SERVER['HTTP_REFERER'], 'account')) {
 		$params['toptab'] = 'my';
 		site_user_header($params);
 	} else {
@@ -131,7 +131,7 @@ function people_show_skill_inventory($user_id) {
 	$title_arr[]=_('Experience');
 
 
-	echo $HTML->listTableTop ($title_arr);
+	echo $HTML->listTableTop($title_arr);
 
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
@@ -141,7 +141,7 @@ function people_show_skill_inventory($user_id) {
 	} else {
 		for ($i=0; $i < $rows; $i++) {
 			echo '
-			<tr '. $HTML->boxGetAltRowStyle($i) .'>
+			<tr>
 				<td>'.db_result($result,$i,'skill_name').'</td>
 				<td>'.db_result($result,$i,'level_name').'</td>
 				<td>'.db_result($result,$i,'year_name').'</td></tr>';
@@ -162,7 +162,7 @@ function people_edit_skill_inventory($user_id) {
 	$title_arr[]=_('Experience');
 	$title_arr[]=_('Action');
 
-	echo $HTML->listTableTop ($title_arr);
+	echo $HTML->listTableTop($title_arr);
 
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
@@ -174,23 +174,21 @@ function people_edit_skill_inventory($user_id) {
 			echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
 			echo '
 			<input type="hidden" name="skill_inventory_id" value="'.db_result($result,$i,'skill_inventory_id').'" />
-			<tr '. $HTML->boxGetAltRowStyle($i) .'>
+			<tr>
 				<td>'. people_get_skill_name(db_result($result,$i,'skill_id')) .'</td>
 				<td>'. people_skill_level_box('skill_level_id',db_result($result,$i,'skill_level_id')). '</td>
 				<td>'. people_skill_year_box('skill_year_id',db_result($result,$i,'skill_year_id')). '</td>
 				<td style="white-space:nowrap"><input type="submit" name="update_skill_inventory" value="'._('Update').'" /> &nbsp;
 					<input type="submit" name="delete_from_skill_inventory" value="'._('Delete').'" /></td>
-				</tr>';
+			</tr>';
 			echo $HTML->closeForm();
 		}
 
 	}
 	//add a new skill
-	$i++; //for row coloring
-
 	echo '<tr class="tableheading"><td colspan="4">'._('Add a new skill').'/td></tr>';
 	echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
-	echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>
+	echo '<tr>
 		<td>'. people_skill_box('skill_id'). '</td>
 		<td>'. people_skill_level_box('skill_level_id'). '</td>
 		<td>'. people_skill_year_box('skill_year_id'). '</td>
@@ -198,7 +196,6 @@ function people_edit_skill_inventory($user_id) {
 	</tr>';
 	echo $HTML->closeForm();
 	echo $HTML->listTableBottom();
-
 }
 
 
@@ -245,7 +242,7 @@ function people_show_job_inventory($job_id) {
 	$title_arr[]=_('Level');
 	$title_arr[]=_('Experience');
 
-	echo $HTML->listTableTop ($title_arr);
+	echo $HTML->listTableTop($title_arr);
 
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
@@ -255,10 +252,11 @@ function people_show_job_inventory($job_id) {
 	} else {
 		for ($i=0; $i < $rows; $i++) {
 			echo '
-			<tr '. $HTML->boxGetAltRowStyle($i) .'>
+			<tr>
 				<td>'.db_result($result,$i,'skill_name').'</td>
 				<td>'.db_result($result,$i,'level_name').'</td>
-				<td>'.db_result($result,$i,'year_name').'</td></tr>';
+				<td>'.db_result($result,$i,'year_name').'</td>
+			</tr>';
 
 		}
 	}
@@ -308,7 +306,7 @@ function people_edit_job_inventory($job_id,$group_id) {
 	$title_arr[]=_('Experience').utils_requiredField();
 	$title_arr[]=_('Action');
 
-	echo $HTML->listTableTop ($title_arr);
+	echo $HTML->listTableTop($title_arr);
 
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
@@ -319,7 +317,7 @@ function people_edit_job_inventory($job_id,$group_id) {
 		}
 	} else {
 		for ($i=0; $i < $rows; $i++) {
-			echo '<tr '. $HTML->boxGetAltRowStyle($i) . '>';
+			echo '<tr>';
 			echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
 			echo '<input type="hidden" name="job_inventory_id" value="'. db_result($result,$i,'job_inventory_id') .'" />
 			<input type="hidden" name="job_id" value="'. db_result($result,$i,'job_id') .'" />
@@ -334,10 +332,8 @@ function people_edit_job_inventory($job_id,$group_id) {
 
 	}
 	//add a new skill
-	(isset($i)) ? $i++ : $i = 0; //for row coloring
-
 	echo '<tr><td colspan="4"><h3>'._('Add a new skill').'</h3></td></tr>
-	<tr '. $HTML->boxGetAltRowStyle($i) . '>';
+	<tr>';
 	echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
 	echo '<input type="hidden" name="job_id" value="'. $job_id .'" />
 	<input type="hidden" name="group_id" value="'.$group_id.'" />
@@ -375,7 +371,7 @@ function people_show_category_table() {
 		if ($added && ((count($categories) - 1) > 0)) {
 			for ($j = 0; $j < (count($categories) - 1); $j++) {
 				$found = 0;
-				if ( $categories[$j]['category_id'] == $categories[$i]['category_id'] ) {
+				if ($categories[$j]['category_id'] == $categories[$i]['category_id']) {
 					$categories[$j]['total'] += $categories[$i]['total'];
 					$found = 1;
 					break;
@@ -396,7 +392,7 @@ function people_show_category_table() {
 	} else {
 		$return = $HTML->listTableTop($title_arr);
 		for ($i = 0; $i< count($categories); $i++) {
-			$return .= '<tr '. $HTML->boxGetAltRowStyle($i) .'>
+			$return .= '<tr>
 				<td>'.util_make_link('/people/?category_id='.$categories[$i]['category_id'], $categories[$i]['name']).' ('.$categories[$i]['total'].')</td>
 				</tr>';
 		}
@@ -451,10 +447,10 @@ function people_show_job_list($result) {
 	if (count($projects) < 1) {
 		$return = $HTML->warning_msg(_('None Found'));
 	} else {
-		$return = $HTML->listTableTop ($title_arr);
+		$return = $HTML->listTableTop($title_arr);
 		for ($i = 0; $i < count($projects); $i++) {
 			$return .= '
-				<tr '. $HTML->boxGetAltRowStyle($i) . '>
+				<tr>
 					<td>'.util_make_link('/people/viewjob.php?group_id='.$projects[$i]['group_id'].'&job_id='.$projects[$i]['job_id'], $projects[$i]['title']) .'</td>
 					<td>'.$projects[$i]['category_name'].'</td>
 					<td>'.date(_('Y-m-d H:i'), $projects[$i]['post_date']).'</td>

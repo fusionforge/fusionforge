@@ -153,7 +153,6 @@ if (getStringFromRequest('submit')) {
 		} else {
 			$feedback .= _('Query Deleted');;
 		}
-		$query_id=0;
 		session_redirect('/tracker/?atid='.$atid.'&group_id='.$group_id.'&func=browse');
 	} else {
 		exit_error(_('Missing Build Query Action'),'tracker');
@@ -267,7 +266,7 @@ echo '<table style="margin-left:auto;margin-right:auto"><tr><td>' .
 
 echo $HTML->openForm(array('action' => '/tracker/?func=query&group_id='.$group_id.'&atid='.$ath->getID(), 'method' => 'post'));
 echo '<input type="hidden" name="form_key" value="'.form_generate_key().'" />
-<table align="center" border="3" cellpadding="4" rules="groups" frame="box" width="100%" class="tablecontent">
+<table class="tablecontent fullwidth">
 	<tr>
 		<td>
 			<input type="submit" name="submit" value="'._('Save Changes').'" />
@@ -307,7 +306,7 @@ echo '<input type="hidden" name="form_key" value="'.form_generate_key().'" />
 	echo '
 		</td>
 		<td class="top">
-		<input type="text" name="query_name" value="'.$aq->getName().'" size="20" maxlength="30"  required="required" /></td>
+		<input required="required" type="text" name="query_name" value="'.$aq->getName().'" size="20" maxlength="30" /></td>
 	</tr>
 </table>';
 
@@ -365,7 +364,10 @@ if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
 					    ARTIFACT_EXTRAFIELDTYPE_INTEGER,
 					    ARTIFACT_EXTRAFIELDTYPE_SELECT,
 					    ARTIFACT_EXTRAFIELDTYPE_RADIO,
-					    ARTIFACT_EXTRAFIELDTYPE_STATUS));
+					    ARTIFACT_EXTRAFIELDTYPE_STATUS,
+					    ARTIFACT_EXTRAFIELDTYPE_DATE,
+					    ARTIFACT_EXTRAFIELDTYPE_DATETIME,
+					    ARTIFACT_EXTRAFIELDTYPE_EFFORT));
 	$keys=array_keys($efarr);
 	for ($k=0; $k<count($keys); $k++) {
 		$i=$keys[$k];
@@ -379,22 +381,22 @@ if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
 echo '
 	<tr>
 		<td colspan="2" style="white-space: nowrap;">'.
-		'<strong>'._('Last Modified Date range')._(':').'</strong> <i>(YYYY-MM-DD YYYY-MM-DD Format)</i><br />
-		<input type="text" name="_moddaterange" size="21" maxlength="21" value="'. htmlspecialchars($_moddaterange) .'" /><p/>
-		<strong>'._('Open Date range')._(':').'</strong> <i>(YYYY-MM-DD YYYY-MM-DD Format)</i><br />
-		<input type="text" name="_opendaterange" size="21" maxlength="21" value="'. htmlspecialchars($_opendaterange) .'" /><p/>
-		<strong>'._('Close Date range')._(':').'</strong> <i>(YYYY-MM-DD YYYY-MM-DD Format)</i><br />
-		<input type="text" name="_closedaterange" size="21" maxlength="21" value="'. htmlspecialchars($_closedaterange) .'" />
+		'<p><strong>'._('Last Modified Date range')._(':').'</strong> <i>(YYYY-MM-DD YYYY-MM-DD Format)</i><br />
+		<input type="text" name="_moddaterange" size="21" maxlength="21" value="'. htmlspecialchars($_moddaterange) .'" /></p>
+		<p><strong>'._('Open Date range')._(':').'</strong> <i>(YYYY-MM-DD YYYY-MM-DD Format)</i><br />
+		<input type="text" name="_opendaterange" size="21" maxlength="21" value="'. htmlspecialchars($_opendaterange) .'" /></p>
+		<p><strong>'._('Close Date range')._(':').'</strong> <i>(YYYY-MM-DD YYYY-MM-DD Format)</i><br />
+		<input type="text" name="_closedaterange" size="21" maxlength="21" value="'. htmlspecialchars($_closedaterange) .'" /></p>
 		</td>
 	</tr>
 	<tr>
 		<td colspan="2">'.
-		'<strong>'._('Summary')._(': ').'</strong> '.$tips.'<br />
-		<input type="text" name="_summary" size="40" value="'. htmlspecialchars($_summary) .'" /><p/>
-		<strong>'._('Detailed description')._(': ').'</strong> '.$tips.'<br />
-		<input type="text" name="_description" size="40" value="'. htmlspecialchars($_description) .'" /><p/>
-		<strong>'._('Comments')._(': ').'</strong> '.$tips.'<br />
-		<input type="text" name="_followups" size="40" value="'. htmlspecialchars($_followups) .'" />
+		'<p><strong>'._('Summary')._(': ').'</strong> '.$tips.'<br />
+		<input type="text" name="_summary" size="40" value="'. htmlspecialchars($_summary) .'" /></p>
+		<p><strong>'._('Detailed description')._(': ').'</strong> '.$tips.'<br />
+		<input type="text" name="_description" size="40" value="'. htmlspecialchars($_description) .'" /></p>
+		<p><strong>'._('Comments')._(': ').'</strong> '.$tips.'<br />
+		<input type="text" name="_followups" size="40" value="'. htmlspecialchars($_followups) .'" /></p>
 		</td>
 	</tr>
 	<tr>
@@ -407,9 +409,9 @@ echo '
 echo '<tr>
 		<td colspan="2">'.
 		'<p><strong>'._('Options')._(':').'</strong><br />
-		<input type="checkbox" name="query_options[bargraph]" '.
+		<input id="bargraph" type="checkbox" name="query_options[bargraph]" '.
 	((in_array('bargraph', $aq->getQueryOptions())) ? 'checked="checked"' : '')
-.'/>'._('Display a short summary box on top of the list (roadmap status).').'</p>
+.'/><label for="bargraph">'._('Display a short summary box on top of the list (roadmap status).').'</label></p>
 		</td>
 	</tr>';
 echo $HTML->listTableBottom();

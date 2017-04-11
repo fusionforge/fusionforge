@@ -4,7 +4,7 @@
  *
  * Copyright 2009, Roland Mas
  * Copyright 2009, Mehdi Dogguy <mehdi@debian.org>
- * Copyright 2012-2014,2016, Franck Villaume - TrivialDev
+ * Copyright 2012-2014,2016-2017, Franck Villaume - TrivialDev
  * Copyright © 2013
  *	Thorsten Glaser <t.glaser@tarent.de>
  * http://fusionforge.org
@@ -194,7 +194,7 @@ control over it to the project's administrator.");
 				$b .= html_e('p', array(), _('SSH must be installed on your client machine.'));
 				$htmlRepo = '';
 				foreach ($repo_list as $repo_name) {
-						$htmlRepo .= html_e('tt', array(), 'git clone git+ssh://'.$d.'@' . forge_get_config('scm_host') . forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git').html_e('br');
+					$htmlRepo .= html_e('tt', array(), 'git clone git+ssh://'.$d.'@' . forge_get_config('scm_host') . forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git').html_e('br');
 				}
 				$b .= html_e('p', array(), $htmlRepo);
 				$b .= '</div>';
@@ -203,10 +203,9 @@ control over it to the project's administrator.");
 				$b .= '<div id="tabber-smarthttp" class="tabbertab" >';
 				$b .= html_e('p', array(), _('Enter your site password when prompted.'));
 				$htmlRepo = '';
-
 				$protocol = forge_get_config('use_ssl', 'scmgit') ? 'https' : 'http';
 				foreach ($repo_list as $repo_name) {
-					$htmlRepo .= '<tt>git clone '.$protocol.'://'.$d.'@' . forge_get_config('scm_host').'/authscm/'.$d.'/git/'.$project->getUnixName() .'/'. $repo_name .'.git</tt><br />';
+					$htmlRepo .= html_e('tt', array(), 'git clone '.$protocol.'://'.$d.'@' . forge_get_config('scm_host').'/authscm/'.$d.'/git/'.$project->getUnixName() .'/'. $repo_name .'.git').html_e('br');
 				}
 				$b .= html_e('p', array(), $htmlRepo);
 				$b .= '</div>';
@@ -237,7 +236,7 @@ control over it to the project's administrator.");
 					' '. _('Enter your site password when prompted.'));
 				$htmlRepo = '';
 				foreach ($repo_list as $repo_name) {
-					$b .= '<tt>git clone '.$protocol.'://<i>'._('developername').'</i>@' . forge_get_config('scm_host').'/authscm/<i>'._('developername').'</i>/git/'.$project->getUnixName() .'/'. $repo_name .'.git</tt><br />';
+					$htmlRepo .= '<tt>git clone '.$protocol.'://<i>'._('developername').'</i>@' . forge_get_config('scm_host').'/authscm/<i>'._('developername').'</i>/git/'.$project->getUnixName() .'/'. $repo_name .'.git</tt><br />';
 				}
 				$b .= html_e('p', array(), $htmlRepo);
 				$b .= '</div>';
@@ -371,17 +370,17 @@ control over it to the project's administrator.");
 					_('Adds'),
 					_('Updates')
 			);
-			$b .= $HTML->listTableTop($tableHeaders, false, '', 'repo-history');
+			$b .= $HTML->listTableTop($tableHeaders, array(), '', 'repo-history');
 
 			$i = 0;
 			$total = array('adds' => 0, 'updates' => 0);
 
 			while ($data = db_fetch_array($result)) {
 				$cells = array();
-				$cells[] = array(util_make_link_u($data['user_name'], $data['user_id'], $data['realname']), 'class' => 'halfwidth');
+				$cells[] = array(util_display_user($data['user_name'], $data['user_id'], $data['realname']), 'class' => 'halfwidth');
 				$cells[] = array($data['adds'], 'class' => 'onequarterwidth align-right');
 				$cells[] = array($data['updates'], 'class' => 'onequarterwidth align-right');
-				$b .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
+				$b .= $HTML->multiTableRow(array(), $cells);
 				$total['adds'] += $data['adds'];
 				$total['updates'] += $data['updates'];
 				$i++;
@@ -390,7 +389,7 @@ control over it to the project's administrator.");
 			$cells[] = array(html_e('strong', array(), _('Total')._(':')), 'class' => 'halfwidth');
 			$cells[] = array($total['adds'], 'class' => 'onequarterwidth align-right');
 			$cells[] = array($total['updates'], 'class' => 'onequarterwidth align-right');
-			$b .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
+			$b .= $HTML->multiTableRow(array(), $cells);
 			$b .= $HTML->listTableBottom();
 		} else {
 			$b .= $HTML->information(_('No history yet'));
@@ -1188,7 +1187,7 @@ control over it to the project's administrator.");
 				$deleteForm .= html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Delete')));
 				$deleteForm .= $HTML->closeForm();
 				$cells[][] = $deleteForm;
-				echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($key, true)), $cells);
+				echo $HTML->multiTableRow(array(), $cells);
 			}
 			echo $HTML->listTableBottom();
 		}

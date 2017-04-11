@@ -68,7 +68,7 @@ class ForumMessageFactory extends FFError {
 	 * @param	int	$offset		The number of rows to skip.
 	 * @param	string	$style		The style of forum, whether it's nested, ultimate, etc.
 	 * @param	int	$max_rows	The maximum number of rows to return.
-	 * @param	int	$set		Whether to set these prefs into the database - use "custom".
+	 * @param	string	$set		Whether to set these prefs into the database - use "custom".
 	 */
 	function setup($offset = 0, $style = 'ultimate', $max_rows = 25, $set = 'no') {
 //echo "<br />offset: $offset| style: $style|max_rows: $max_rows|set: $set+";

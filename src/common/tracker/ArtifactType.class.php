@@ -7,8 +7,8 @@
  * Copyright 2009, Roland Mas
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
- * Copyright 2014,2016, Franck Villaume - TrivialDev
- * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
+ * Copyright 2014,2016-2017, Franck Villaume - TrivialDev
+ * Copyright 2016-2017, Stéphane-Eymeric Bredthauer - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -29,7 +29,9 @@
 require_once $gfcommon.'include/FFError.class.php';
 require_once $gfcommon.'tracker/ArtifactExtraFieldElement.class.php';
 require_once $gfcommon.'tracker/ArtifactStorage.class.php';
+require_once $gfcommon.'tracker/EffortUnitSet.class.php';
 require_once $gfcommon.'include/MonitorElement.class.php';
+require_once $gfcommon.'widget/WidgetLayoutManager.class.php';
 
 /**
  * Gets an ArtifactType object from the artifact type id
@@ -249,9 +251,10 @@ class ArtifactType extends FFError {
 			status_timeout,
 			submit_instructions,
 			browse_instructions,
-			datatype)
+			datatype,
+			unit_set_id)
 			VALUES
-			($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)',
+			($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)',
 					array($this->Group->getID(),
 							htmlspecialchars($name),
 							htmlspecialchars($description),
@@ -261,7 +264,9 @@ class ArtifactType extends FFError {
 							1209600,
 							htmlspecialchars($submit_instructions),
 							htmlspecialchars($browse_instructions),
-							$datatype));
+							$datatype,
+							$this->Group->getEffortUnitSet()
+					));
 
 		$id = db_insertid($res, 'artifact_group_list', 'group_artifact_id');
 
@@ -407,7 +412,7 @@ class ArtifactType extends FFError {
 	}
 
 	/**
-	 * getReturnEmailAddress() - return the return email address for notification emails
+	 * getReturnEmailAddress - return the return email address for notification emails
 	 *
 	 * @return	string	return email address
 	 */
@@ -468,7 +473,7 @@ class ArtifactType extends FFError {
 	function setCustomStatusField($extra_field_id) {
 		$res = db_query_params('UPDATE artifact_group_list SET custom_status_field=$1
 			WHERE group_artifact_id=$2',
-					array ($extra_field_id,
+					array($extra_field_id,
 					       $this->getID()));
 		$this->fetchData($this->getID());
 		return $res;
@@ -492,7 +497,7 @@ class ArtifactType extends FFError {
 	function setAutoAssignField($extra_field_id) {
 		$res = db_query_params('UPDATE artifact_group_list SET auto_assign_field=$1
 			WHERE group_artifact_id=$2',
-				array ($extra_field_id,
+				array($extra_field_id,
 				       $this->getID()));
 		$this->fetchData($this->getID());
 		return $res;
@@ -720,6 +725,33 @@ class ArtifactType extends FFError {
 	}
 
 	/**
+	 * getFieldsInFormula - Get array of extra fields used in formula
+	 *
+	 * @return	array	arrays of data;
+	 */
+	function getFieldsInFormula() {
+		$return = array();
+		if ($this->usesCustomStatuses()) {
+			$fields = array('assigned_to','priority','summary','description');
+		} else {
+			$fields = array('assigned_to','priority','summary','description','status');
+		}
+		$res = db_query_params('SELECT string_agg(formula,chr(10)) FROM artifact_extra_field_formula NATURAL INNER JOIN artifact_extra_field_list WHERE is_disabled=0 AND group_artifact_id=$1',
+					array($this->getID()));
+		if (db_numrows($res) > 0) {
+			$row = db_fetch_array($res);
+			if (preg_match_all("/([a-z]\w*)/m", $row[0], $matches)) {
+				foreach ($fields as $field) {
+					if (in_array($field,$matches[0])) {
+						$return[]=$field;
+					}
+				}
+			}
+		}
+		return $return;
+	}
+
+	/**
 	 * getExtraFieldsWithFormula - Get array of extra fields with formula
 	 *
 	 * @param	array	$types
@@ -742,24 +774,11 @@ class ArtifactType extends FFError {
 	 * cloneFieldsFrom - clone all the fields and elements from another tracker
 	 *
 	 * @param	int	$clone_tracker_id	id of the cloned tracker
-	 * @param	int	$group_id		id of the project template to use.
 	 * @param	array	$id_mappings		array mapping between template objects and new project objects
 	 * @return	boolean	true/false on success
 	 */
-	function cloneFieldsFrom($clone_tracker_id, $group_id = null, $id_mappings = array()) {
-		if ($group_id) {
-			$g = group_get_object($group_id);
-		} else {
-			$g = group_get_object(forge_get_config('template_group'));
-		}
-		if (!$g || !is_object($g)) {
-			$this->setError(_('Could Not Get Template Group'));
-			return false;
-		} elseif ($g->isError()) {
-			$this->setError(_('Template Group Error').' '.$g->getErrorMessage());
-			return false;
-		}
-		$at = new ArtifactType($g,$clone_tracker_id);
+	function cloneFieldsFrom($clone_tracker_id, $id_mappings = array()) {
+		$at = artifactType_get_object($clone_tracker_id);
 		if (!$at || !is_object($at)) {
 			$this->setError(_('Could Not Get Tracker To Clone'));
 			return false;
@@ -767,11 +786,104 @@ class ArtifactType extends FFError {
 			$this->setError(_('Clone Tracker Error').' '.$at->getErrorMessage());
 			return false;
 		}
+
+		// Effort Unit Set
+		$ef_effort = $at->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_EFFORT));
+		if (!empty($ef_effort)) {
+			$eus = new EffortUnitSet($at, $at->getEffortUnitSet());
+			$this_eus = new EffortUnitSet($this, $this->getEffortUnitSet());
+			switch ($eus->getLevel()) {
+				case EFFORTUNITSET_FORGE_LEVEL:
+					switch ($this_eus->getLevel()) {
+						case EFFORTUNITSET_PROJECT_LEVEL:
+							if (!$this_eus->isEquivalentTo($eus)) {
+								// make a copy at the tracker level
+								$new_eus = new EffortUnitSet($this);
+								$new_eus->copy($eus);
+								$this->setEffortUnitSet($new_eus->getID());
+							}
+							break;
+						case EFFORTUNITSET_TRACKER_LEVEL:
+							if (!$this_eus->isEquivalentTo($eus)) {
+								$this->setError(_('Clone Tracker Error')._(':').' '._('Effort Unit Set already define and not compatible'));
+								return false;
+							}
+							break;
+					}
+					break;
+				case EFFORTUNITSET_PROJECT_LEVEL:
+					switch ($this_eus->getLevel()) {
+						case EFFORTUNITSET_FORGE_LEVEL:
+							$new_eus_id = getEffortUnitSetForLevel($this, EFFORTUNITSET_PROJECT_LEVEL);
+							if ($new_eus_id) {
+								$new_eus = new EffortUnitSet($this, $new_eus_id);
+								if (!$new_eus->isEquivalentTo($eus)) {
+									$this->setEffortUnitSet($new_eus->getID());
+								} else {
+									// make a copy at the tracker level
+									$new_eus = new EffortUnitSet($this);
+									$new_eus->copy($eus);
+									$this->setEffortUnitSet($new_eus->getID());
+								}
+							} else {
+								// make a copy at the project level
+								$new_eus = new EffortUnitSet($this->Group);
+								$new_eus->copy($eus);
+								$this->setEffortUnitSet($new_eus->getID());
+							}
+							break;
+						case EFFORTUNITSET_PROJECT_LEVEL:
+							if (!$this_eus->isEquivalentTo($eus)) {
+								// make a copy at the tracker level
+								$new_eus = new EffortUnitSet($this);
+								$new_eus->copy($eus);
+								$this->setEffortUnitSet($new_eus->getID());
+							}
+							break;
+						case EFFORTUNITSET_TRACKER_LEVEL:
+							if (!$this_eus->isEquivalentTo($eus)) {
+								$this->setError(_('Clone Tracker Error')._(':').' '._('Effort Unit Set already define and not compatible'));
+								return false;
+							}
+							break;
+					}
+					break;
+				case EFFORTUNITSET_TRACKER_LEVEL:
+					switch ($this_eus->getLevel()) {
+						case EFFORTUNITSET_FORGE_LEVEL:
+						case EFFORTUNITSET_PROJECT_LEVEL:
+							$new_eus_id = getEffortUnitSetForLevel($this, EFFORTUNITSET_TRACKER_LEVEL);
+							if ($new_eus_id) {
+								$new_eus = new EffortUnitSet($this, $new_eus_id);
+								if (!$new_eus->isEquivalentTo($eus)) {
+									$this->setEffortUnitSet($new_eus->getID());
+								} else {
+									$this->setError(_('Clone Tracker Error')._(':').' '._('Effort Unit Set already define and not compatible'));
+									return false;
+								}
+							} else {
+								// make a copy at the tracker level
+								$new_eus = new EffortUnitSet($this);
+								$new_eus->copy($eus);
+								$this->setEffortUnitSet($new_eus->getID());
+							}
+							break;
+						case EFFORTUNITSET_TRACKER_LEVEL:
+							if (!$this_eus->isEquivalentTo($eus)) {
+								$this->setError(_('Clone Tracker Error')._(':').' '._('Effort Unit Set already define and not compatible'));
+								return false;
+							}
+							break;
+					}
+					break;
+			}
+		}
+
 		// do not filter and get disabled fields as well
 		$efs = $at->getExtraFields(array(), true);
 
-		// get current getExtraFields if any
-		$current_efs = $this->getExtraFields();
+		// get current getExtraFields if any and includes disabled fields as well...
+		$current_efs = $this->getExtraFields(array(), true);
 
 		//
 		//	Iterate list of extra fields
@@ -783,7 +895,7 @@ class ArtifactType extends FFError {
 			//new field in this tracker
 			$nef = new ArtifactExtraField($this);
 			foreach ($current_efs as $current_ef) {
-				if ($current_ef['field_name'] == $ef['field_name']) {
+				if ($current_ef['field_name'] == $ef['field_name'] || $current_ef['field_type'] == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 					// we delete the current extra field and use the template one...
 					$current_ef_todelete = new ArtifactExtraField($this, $current_ef);
 					$current_ef_todelete->delete(true,true);
@@ -876,11 +988,14 @@ class ArtifactType extends FFError {
 						}
 					}
 				} else {
-					$nef->setDefaultValues($default);
+					if ($default) {
+						$nef->setDefaultValues($default);
+					}
 				}
 			}
 			// update Dependency between extrafield
-			if ($oef->getParent() != 100) {
+			$oefParent = $oef->getParent();
+			if (!empty($oefParent) && $oef->getParent() != 100) {
 				if (!$nef->update($nef->getName(), $nef->getAttribute1(), $nef->getAttribute2(), $nef->isRequired(), $nef->getAlias(), $nef->getShow100(), $nef->getShow100label(), $nef->getDescription(), $nef->getPattern(), $newEFIds[$oef->getParent()], $nef->isAutoAssign(), $nef->isHiddenOnSubmit(), $nef->isDisabled())) {
 					db_rollback();
 					$this->setError(_('Error Updating New Extra Field Parent')._(':').' '.$nef->getErrorMessage());
@@ -1078,25 +1193,20 @@ class ArtifactType extends FFError {
 			WHERE group_artifact_id=$1
 			AND artifact.artifact_id=artifact_extra_field_data.artifact_id)',
 				array($this->getID()));
-//echo '0.1'.db_error();
 		db_query_params('DELETE FROM artifact_extra_field_elements
 			WHERE EXISTS (SELECT extra_field_id FROM artifact_extra_field_list
 			WHERE group_artifact_id=$1
 			AND artifact_extra_field_list.extra_field_id = artifact_extra_field_elements.extra_field_id)',
-				 array ($this->getID()));
-//echo '0.2'.db_error();
+				 array($this->getID()));
 		db_query_params('DELETE FROM artifact_extra_field_list
 			WHERE group_artifact_id=$1',
-			array ($this->getID()));
-//echo '0.3'.db_error();
+			array($this->getID()));
 		db_query_params('DELETE FROM artifact_canned_responses
 			WHERE group_artifact_id=$1',
-				 array ($this->getID()));
-//echo '1'.db_error();
+				 array($this->getID()));
 		db_query_params('DELETE FROM artifact_counts_agg
 			WHERE group_artifact_id=$1',
-				 array ($this->getID()));
-//echo '5'.db_error();
+				 array($this->getID()));
 
 		ArtifactStorage::instance()->deleteFromQuery('SELECT id FROM artifact_file
 			WHERE EXISTS (SELECT artifact_id FROM artifact
@@ -1109,34 +1219,27 @@ class ArtifactType extends FFError {
 			WHERE group_artifact_id=$1
 			AND artifact.artifact_id=artifact_file.artifact_id)',
 				array($this->getID()));
-//echo '6'.db_error();
 		db_query_params('DELETE FROM artifact_message
 			WHERE EXISTS (SELECT artifact_id FROM artifact
 			WHERE group_artifact_id=$1
 			AND artifact.artifact_id=artifact_message.artifact_id)',
 				array($this->getID()));
-//echo '7'.db_error();
 		db_query_params('DELETE FROM artifact_history
 			WHERE EXISTS (SELECT artifact_id FROM artifact
 			WHERE group_artifact_id=$1
 			AND artifact.artifact_id=artifact_history.artifact_id)',
 				array($this->getID()));
-//echo '8'.db_error();
 		db_query_params('DELETE FROM artifact_monitor
 			WHERE EXISTS (SELECT artifact_id FROM artifact
 			WHERE group_artifact_id=$1
 			AND artifact.artifact_id=artifact_monitor.artifact_id)',
 				array($this->getID()));
-//echo '9'.db_error();
 		db_query_params('DELETE FROM artifact
 			WHERE group_artifact_id=$1',
 				array($this->getID()));
-//echo '4'.db_error();
 		db_query_params('DELETE FROM artifact_group_list
 			WHERE group_artifact_id=$1',
 				array($this->getID()));
-//echo '11'.db_error();
-
 		$MonitorElementObject = new MonitorElement('artifact_type');
 		$MonitorElementObject->clearMonitor($this->getID());
 
@@ -1292,7 +1395,7 @@ class ArtifactType extends FFError {
 			submit_instructions=$7,
 			browse_instructions=$8
 			WHERE group_artifact_id=$9 AND group_id=$10',
-					 array (
+					 array(
 						 htmlspecialchars($name),
 						 htmlspecialchars($description),
 						 $email_all,
@@ -1314,7 +1417,7 @@ class ArtifactType extends FFError {
 	}
 
 	/**
-	 * getBrowseList - get the free-form string strings.
+	 * getBrowseList - get the list of columns in browse page.
 	 *
 	 * @return	string	instructions.
 	 */
@@ -1335,14 +1438,14 @@ class ArtifactType extends FFError {
 	}
 
 	/**
-	 * setCustomStatusField - set the extra_field_id of the field containing the custom status.
+	 * setBrowseList - set the list of columns in browse page.
 	 *
-	 * @param	int	$list	The extra field id.
+	 * @param	string	$list	string comma separated of ids of custom field and names of internal fields.
 	 * @return	boolean	success.
 	 */
 	function setBrowseList($list) {
 		$res = db_query_params('UPDATE artifact_group_list
-		    SET browse_list=$1
+			SET browse_list=$1
 			WHERE group_artifact_id=$2',
 			array($list,
 				$this->getID()));
@@ -1381,6 +1484,88 @@ class ArtifactType extends FFError {
 			}
 		}
 		return $this->voters;
+	}
+
+
+	/**
+	 *
+	 * @param	integer	$unit_set_id	the effort unit set id
+	 * @return	bool
+	 */
+	function setEffortUnitSet($unit_set_id) {
+		db_begin();
+		$res = db_query_params ('UPDATE artifact_group_list SET unit_set_id=$1 WHERE group_artifact_id=$2',
+				array($unit_set_id, $this->getID()));
+		if ($res) {
+			$this->data_array['unit_set_id']=$unit_set_id;
+			db_commit();
+			return true;
+		} else {
+			db_rollback();
+			return false;
+		}
+	}
+
+	/**
+	 * getEffortUnitSet - Get the effort unit set id.
+	 *
+	 * @return	integer	The id of the effort unit set.
+	 */
+	function getEffortUnitSet() {
+		return $this->data_array['unit_set_id'];
+	}
+
+	/**
+	 * getSettings - Get all parameters of this tracker
+	 *
+	 * @return	array	all parameters into an multidimensional array
+	 */
+	function getSettings() {
+		// Get list of extra fields for this artifact
+		$extrafields = array();
+		$tmpextrafields = $this->getExtraFields(array(), true);
+		foreach ($tmpextrafields as $extrafield) {
+			$aefobj = new ArtifactExtraField($this, $extrafield["extra_field_id"]);
+
+			// array of available values
+			$avtmp = $aefobj->getAvailableValues();
+			$avs = array();
+			for ($j=0; $j < count($avtmp); $j++) {
+				$avs[$j]["element_id"] = $avtmp[$j]["element_id"];
+				$avs[$j]["element_name"] = $avtmp[$j]["element_name"];
+				$avs[$j]["status_id"] = $avtmp[$j]["status_id"];
+			}
+
+			$extrafields[] = array(
+				"extra_field_id"	=> $aefobj->getID(),
+				"field_name"		=> $aefobj->getName(),
+				"field_type"		=> $aefobj->getType(),
+				"attribute1"		=> $aefobj->getAttribute1(),
+				"attribute2"		=> $aefobj->getAttribute2(),
+				"is_required"		=> $aefobj->isRequired(),
+				"alias"			=> $aefobj->getAlias(),
+				"available_values"	=> $avs,
+				"default_selected_id"	=> 0		//TODO (not implemented yet)
+			);
+		}
+
+		$return = array(
+				'group_artifact_id'	=> $this->data_array['group_artifact_id'],
+				'group_id'		=> $this->data_array['group_id'],
+				'name'			=> $this->data_array['name'],
+				'description'		=> $this->data_array['description'],
+				'due_period'		=> $this->data_array['due_period'],
+				'datatype'		=> $this->data_array['datatype'],
+				'status_timeout'	=> $this->data_array['status_timeout'],
+				'extra_fields'		=> $extrafields,
+				'custom_status_field'	=> $this->data_array['custom_status_field'],
+				'use_tracker_widget_display' => $this->getWidgetLayoutConfig());
+		return $return;
+	}
+
+	function getWidgetLayoutConfig() {
+		$lm = new WidgetLayoutManager();
+		return $lm->getLayout($this->getID(), WidgetLayoutManager::OWNER_TYPE_TRACKER);
 	}
 }
 

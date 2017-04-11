@@ -41,11 +41,11 @@ class ProjectTaskHTML extends ProjectTask {
 	}
 
 	function multipleAssignedBox ($name='assigned_to[]') {
-		$engine = RBACEngine::getInstance () ;
+		$engine = RBACEngine::getInstance();
 		$techs = $engine->getUsersByAllowedAction ('pm', $this->ProjectGroup->getID(), 'tech') ;
 
-		$tech_id_arr = array () ;
-		$tech_name_arr = array () ;
+		$tech_id_arr = array();
+		$tech_name_arr = array();
 
 		foreach ($techs as $tech) {
 			$tech_id_arr[] = $tech->getID() ;
@@ -54,7 +54,7 @@ class ProjectTaskHTML extends ProjectTask {
 
 		//get the data so we can mark items as SELECTED
 		$arr2 = $this->getAssignedTo();
-		return html_build_multiple_select_box_from_arrays ($tech_id_arr,$tech_name_arr,$name,$arr2);
+		return html_build_multiple_select_box_from_arrays($tech_id_arr,$tech_name_arr,$name,$arr2);
 	}
 
 	function showDependentTasks () {
@@ -63,7 +63,7 @@ class ProjectTaskHTML extends ProjectTask {
 			FROM project_task,project_dependencies
 			WHERE project_task.project_task_id=project_dependencies.project_task_id
 			AND project_dependencies.is_dependent_on_task_id=$1',
-			array($this->getID() ));
+			array($this->getID()));
 		$rows=db_numrows($result);
 		if ($rows > 0) {
 			echo html_e('h3', array(), _('Tasks That Depend on This Task'));
@@ -72,13 +72,13 @@ class ProjectTaskHTML extends ProjectTask {
 			$title_arr[]=_('Task Id');
 			$title_arr[]=_('Task Summary');
 
-			echo $HTML->listTableTop ($title_arr);
+			echo $HTML->listTableTop($title_arr);
 
 			for ($i = 0; $i < $rows; $i++) {
 				$cells = array();
 				$cells[][] = util_make_link('/pm/task.php?func=detailtask&project_task_id='. db_result($result, $i, 'project_task_id'). '&group_id='. $this->ProjectGroup->Group->getID() . '&group_project_id='. $this->ProjectGroup->getID(), db_result($result, $i, 'project_task_id'));
 				$cells[][] = db_result($result, $i, 'summary');
-				echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
+				echo $HTML->multiTableRow(array(), $cells);
 			}
 			echo $HTML->listTableBottom();
 		} else {
@@ -107,7 +107,7 @@ class ProjectTaskHTML extends ProjectTask {
 			$title_arr[]=_('Open Date');
 			(($is_admin) ? $title_arr[]=_('Remove Relation') : '');
 
-			echo $HTML->listTableTop ($title_arr);
+			echo $HTML->listTableTop($title_arr);
 
 			for ($i = 0; $i < $rows; $i++) {
 				$cells = array();
@@ -118,7 +118,7 @@ class ProjectTaskHTML extends ProjectTask {
 				if ($is_admin) {
 					$cells[][] = '<input type="checkbox" name="rem_artifact_id[]" value="'.db_result($res,$i,'artifact_id').'" />';
 				}
-				echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
+				echo $HTML->multiTableRow(array(), $cells);
 			}
 			echo $HTML->listTableBottom();
 		} else {
@@ -162,7 +162,7 @@ class ProjectTaskHTML extends ProjectTask {
 				}
 				$cells[][] = date(_('Y-m-d H:i'),db_result($result, $i, 'postdate'));
 				$cells[][] = db_result($result, $i, 'user_name');
-				echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
+				echo $HTML->multiTableRow(array(), $cells);
 			}
 			echo $HTML->listTableBottom();
 		} else {
@@ -189,7 +189,7 @@ class ProjectTaskHTML extends ProjectTask {
 			$title_arr[]=_('Date');
 			$title_arr[]=_('By');
 
-			echo $HTML->listTableTop ($title_arr);
+			echo $HTML->listTableTop($title_arr);
 
 			for ($i = 0; $i < $rows; $i++) {
 				$field = db_result($result, $i, 'field_name');
@@ -212,7 +212,7 @@ class ProjectTaskHTML extends ProjectTask {
 				$cells[][] = $content;
 				$cells[][] = date(_('Y-m-d H:i'),db_result($result, $i, 'mod_date'));
 				$cells[][] = db_result($result, $i, 'user_name');
-				echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
+				echo $HTML->multiTableRow(array(), $cells);
 			}
 			echo $HTML->listTableBottom();
 		} else {

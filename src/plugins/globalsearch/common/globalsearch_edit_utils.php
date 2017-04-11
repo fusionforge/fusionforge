@@ -215,7 +215,7 @@ function globalsearch_admin_table_show () {
                 echo '</tr>';
 
                 for ($j = 0; $j < $rows; $j++) {
-                        echo '<tr '. $HTML->boxGetAltRowStyle($j) . '>';
+                        echo '<tr>';
 
                         $id = db_result($result,$j,0);
                         echo '<td>'.util_make_link(getStringFromServer('PHP_SELF').'?function=edit&amp;id='.$id, '['._('edit').']');

@@ -7,9 +7,9 @@
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2011, Iñigo Martinez
  * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
- * Copyright 2012-2016, Franck Villaume - TrivialDev
+ * Copyright 2012-2017, Franck Villaume - TrivialDev
  * Copyright 2014, Stéphane-Eymeric Bredthauer
- * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
+ * Copyright 2016-2017, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -136,7 +136,7 @@ if ($set == 'custom') {
 	}
 }
 
-if (is_array($_extra_fields)){
+if (is_array($_extra_fields)) {
 	$keys=array_keys($_extra_fields);
 	foreach ($keys as $key) {
 		if ($_extra_fields[$key] != 'Array') {
@@ -144,7 +144,7 @@ if (is_array($_extra_fields)){
 		}
 	}
 } else {
-	if (isset($_extra_fields)){
+	if (isset($_extra_fields)) {
 		$aux_extra_fields = $_extra_fields;
 	} else {
 		$aux_extra_fields = '';
@@ -277,7 +277,7 @@ echo $ath->renderBrowseInstructions();
 
 if ($ath->usesCustomStatuses()) {
 	$aux_extra_fields = array();
-	if (is_array($_extra_fields)){
+	if (is_array($_extra_fields)) {
 		$keys=array_keys($_extra_fields);
 		foreach ($keys as $key) {
 			if (!is_array($_extra_fields[$key])) {
@@ -365,11 +365,14 @@ echo ' </div>
 $sort_fields = explode(',', $ath->getBrowseList());
 // Get the list of fields which can be sorted.
 $efarr = $ath->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_TEXT,
-				    ARTIFACT_EXTRAFIELDTYPE_TEXTAREA,
-				    ARTIFACT_EXTRAFIELDTYPE_INTEGER,
-				    ARTIFACT_EXTRAFIELDTYPE_SELECT,
-				    ARTIFACT_EXTRAFIELDTYPE_RADIO,
-				    ARTIFACT_EXTRAFIELDTYPE_STATUS));
+					ARTIFACT_EXTRAFIELDTYPE_TEXTAREA,
+					ARTIFACT_EXTRAFIELDTYPE_INTEGER,
+					ARTIFACT_EXTRAFIELDTYPE_SELECT,
+					ARTIFACT_EXTRAFIELDTYPE_RADIO,
+					ARTIFACT_EXTRAFIELDTYPE_STATUS,
+					ARTIFACT_EXTRAFIELDTYPE_DATE,
+					ARTIFACT_EXTRAFIELDTYPE_DATETIME,
+					ARTIFACT_EXTRAFIELDTYPE_EFFORT));
 echo $HTML->openForm(array('action' => '/tracker/?group_id='.$group_id.'&atid='.$ath->getID(), 'method' => 'post'));
 echo '
 	<input type="hidden" name="query_id" value="-1" />
@@ -401,7 +404,7 @@ foreach ($sort_fields as $sort_field) {
 			break;
 			//no ordering on these columns yet.
 		default:
-			if (intval($sort_field) > 0) {
+			if (intval($sort_field) > 0 && isset($efarr[$sort_field])) {
 				if ($efarr[$sort_field]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 					echo '<td>'.$ath->getExtraFieldName($sort_field)._(':').'<br>'.$status_box.'</td>';
 				}
@@ -603,7 +606,7 @@ if ($art_arr && $art_cnt > 0) {
 	}
 
 	if ($start < $max) {
-		echo $HTML->listTableTop($title_arr);
+		echo $HTML->listTableTop($title_arr, array(), 'full');
 	}
 
 	$then=(time()-$ath->getDuePeriod());
@@ -646,13 +649,25 @@ if ($art_arr && $art_cnt > 0) {
 					echo '<td class="priority'.$art_arr[$i]->getPriority()  .'">'. $art_arr[$i]->getPriority() .'</td>';
 					break;
 				case 'assigned_to':
-					echo '<td>'. $art_arr[$i]->getAssignedRealName() .'</td>';
+					if($art_arr[$i]->getAssignedTo() != 100) {
+						echo '<td>'.util_display_user($art_arr[$i]->getAssignedUnixName(), $art_arr[$i]->getAssignedTo(), $art_arr[$i]->getAssignedRealName()).'</td>';
+					} else {
+						echo '<td>'. $art_arr[$i]->getAssignedRealName() .'</td>';
+					}
 					break;
 				case 'submitted_by':
-					echo '<td>'. $art_arr[$i]->getSubmittedRealName() .'</td>';
+					if($art_arr[$i]->getSubmittedBy() != 100) {
+						echo '<td>'.util_display_user($art_arr[$i]->getSubmittedUnixName(), $art_arr[$i]->getSubmittedBy(), $art_arr[$i]->getSubmittedRealName()).'</td>';
+					} else {
+						echo '<td>'.$art_arr[$i]->getSubmittedRealName().'</td>';
+					}
 					break;
 				case 'last_modified_by':
-					echo '<td>'. $art_arr[$i]->getLastModifiedRealName() .'</td>';
+					if($art_arr[$i]->getLastModifiedRealName() != 100) {
+						echo '<td>'.util_display_user($art_arr[$i]->getLastModifiedUnixName(), $art_arr[$i]->getLastModifiedBy(), $art_arr[$i]->getLastModifiedRealName()).'</td>';
+					} else {
+						echo '<td>'.$art_arr[$i]->getLastModifiedRealName().'</td>';
+					}
 					break;
 				case 'close_date':
 					echo '<td>'. ($art_arr[$i]->getCloseDate() ?
@@ -696,12 +711,18 @@ if ($art_arr && $art_cnt > 0) {
 					if (intval($f) > 0) {
 						// Now display extra-fields (fields are numbers).
 						$value = $extra_data[$f]['value'];
-						if ($extra_data[$f]['type'] == 9) {
+						if ($extra_data[$f]['type'] == ARTIFACT_EXTRAFIELDTYPE_RELATION) {
 							$value = preg_replace('/\b(\d+)\b/e', "_artifactid2url('\\1')", $value);
-						} elseif ($extra_data[$f]['type'] == 7) {
+						} elseif ($extra_data[$f]['type'] == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 							if ($art_arr[$i]->getStatusID() == 2) {
 								$value = '<span class="strike">'.$value.'</span>';
 							}
+						} elseif ($extra_data[$f]['type'] == ARTIFACT_EXTRAFIELDTYPE_EFFORT) {
+							if (!isset($effortUnitSet)) {
+								$effortUnitSet = new EffortUnitSet($ath, $ath->getEffortUnitSet());
+								$effortUnitFactory = new EffortUnitFactory($effortUnitSet);
+							}
+							$value = $effortUnitFactory->encodedToString($value);
 						}
 						echo '<td>' . $value .'</td>';
 					} else {

@@ -57,9 +57,9 @@ if (getStringFromRequest('post_changes')) {
 		} else {
 			db_commit();
 			if ($taskboard_id) {
-				$feedback = _('Taskboard successfully updated');
+				$feedback = _('Task Board successfully updated');
 			} else {
-				$feedback = _('Taskboard successfully created');
+				$feedback = _('Task Board successfully created');
 			}
 			session_redirect('/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&taskboard_id='.$taskboard->getID(), false);
 		}

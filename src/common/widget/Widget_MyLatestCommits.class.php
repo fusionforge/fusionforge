@@ -33,7 +33,7 @@ class Widget_MyLatestCommits extends Widget {
 	*/
 	private $_nb_commits;
 
-	public function __construct() {
+	function __construct() {
 		parent::__construct('mylatestcommits');
 		$this->_nb_commits = UserManager::instance()->getCurrentUser()->getPreference('my_latests_commits_nb_display');
 		if($this->_nb_commits === false) {
@@ -94,7 +94,7 @@ class Widget_MyLatestCommits extends Widget {
 						if (strlen($revision['description']) > 255) {
 							$revisionDescription .= ' [...]';
 						}
-						$html .= html_e('div', array('class' => $HTML->boxGetAltRowStyle($key, true), 'style' => 'border-bottom:1px solid #ddd'),
+						$html .= html_e('div', array('style' => 'border-bottom:1px solid #ddd'),
 								html_e('div', array('style' => 'font-size:0.98em'),
 									$this->_getLinkToCommit($project, $revision['commit_id'], $revision['pluginName']).
 									' '._('on').' '.

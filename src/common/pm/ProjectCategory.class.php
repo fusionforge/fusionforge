@@ -43,7 +43,6 @@ class ProjectCategory extends FFError {
 	/**
 	 * @param	object	   	$ProjectGroup	ProjectGroup object.
 	 * @param	array|bool	$data		(all fields from project_category) OR category_id from database.
-	 * @return	boolean		success.
 	 */
 	function __construct(&$ProjectGroup, $data=false) {
 		parent::__construct();

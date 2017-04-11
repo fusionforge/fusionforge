@@ -53,7 +53,7 @@ if (sizeof($linksArray)) {
 	echo $HTML->information(_('You can reorder tabs, just drag & drop rows in the table below and save order. Please note that those extra tabs can only appear after the standard tabs. And you can only move them inside the set of extra tabs.'));
 	$tabletop = array(_('Order'), _('Tab Type'), _('Displayed Name'), _('Description'), _('Status'), _('Actions'));
 	$classth = array('', '', '', '', '', 'unsortable');
-	echo $HTML->listTableTop($tabletop, false, 'sortable_headermenu_listlinks', 'sortable', $classth);
+	echo $HTML->listTableTop($tabletop, array(), 'sortable_headermenu_listlinks', 'sortable', $classth);
 	foreach ($linksArray as $link) {
 		$cells = array();
 		$cells[] = array($link['ordering'], 'class' => 'align-center');

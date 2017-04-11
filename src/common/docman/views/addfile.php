@@ -169,7 +169,7 @@ if ($dgf->getNested($stateidArr) == NULL) {
 		echo html_ac(html_ap() - 2);
 	} else {
 		$cells = array();
-		$cells[][] = _('Documents folder that document belongs in');
+		$cells[][] = _('Folder that document belongs to');
 		$cells[][] = $dm->showSelectNestedGroups($dgf->getNested($stateidArr), 'doc_group', false, $dirid);
 		echo $HTML->multiTableRow(array(), $cells);
 	}

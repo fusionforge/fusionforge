@@ -43,10 +43,12 @@ if (!$acr || !is_object($acr)) {
 	?>
 	<input type="hidden" name="update_canned" value="y" />
 	<input type="hidden" name="id" value="<?php echo $acr->getID(); ?>" />
+	<p>
 	<label for="title">
-	<strong><?php echo _('Title') . _(':') ?></strong><br />
+		<strong><?php echo _('Title') . _(':') ?></strong><br />
 	</label>
 	<input id="title" type="text" name="title" value="<?php echo $acr->getTitle(); ?>" size="80" maxlength="80" />
+	</p>
 	<p>
 	<label for="body">
 	<strong><?php echo _('Message Body') . _(':') ?></strong><br />

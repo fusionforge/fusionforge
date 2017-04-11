@@ -4,7 +4,7 @@
  *
  * Copyright 2004 (c) GForge, LLC
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2016, Franck Villaume - TrivialDev
+ * Copyright 2016-2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -598,51 +598,12 @@ function getArtifactTypes($session_ser, $group_id) {
 //
 function artifacttype_to_soap($at_arr) {
 	$return = array();
-
 	if (is_array($at_arr) && count($at_arr) > 0) {
 		for ($i=0; $i<count($at_arr); $i++) {
 			if ($at_arr[$i]->isError()) {
 				//skip if error
 			} else {
-				// Get list of extra fields for this artifact
-				$extrafields = array();
-				$tmpextrafields = $at_arr[$i]->getExtraFields();
-				foreach ($tmpextrafields as $extrafield) {
-					$aefobj = new ArtifactExtraField($at_arr[$i], $extrafield["extra_field_id"]);
-
-					// array of available values
-					$avtmp = $aefobj->getAvailableValues();
-					$avs = array();
-					for ($j=0; $j < count($avtmp); $j++) {
-						$avs[$j]["element_id"] = $avtmp[$j]["element_id"];
-						$avs[$j]["element_name"] = $avtmp[$j]["element_name"];
-						$avs[$j]["status_id"] = $avtmp[$j]["status_id"];
-					}
-
-					$extrafields[] = array(
-						"extra_field_id"=> $aefobj->getID(),
-						"field_name"	=> $aefobj->getName(),
-						"field_type"	=> $aefobj->getType(),
-						"attribute1"	=> $aefobj->getAttribute1(),
-						"attribute2"	=> $aefobj->getAttribute2(),
-						"is_required"	=> $aefobj->isRequired(),
-						"alias"			=> $aefobj->getAlias(),
-						"available_values"	=> $avs,
-						"default_selected_id" => 0		//TODO (not implemented yet)
-					);
-				}
-
-				$return[]=array(
-					'group_artifact_id' => $at_arr[$i]->data_array['group_artifact_id'],
-					'group_id' => $at_arr[$i]->data_array['group_id'],
-					'name' => $at_arr[$i]->data_array['name'],
-					'description' => $at_arr[$i]->data_array['description'],
-					'due_period' => $at_arr[$i]->data_array['due_period'],
-					'datatype' => $at_arr[$i]->data_array['datatype'],
-					'status_timeout' => $at_arr[$i]->data_array['status_timeout'],
-					'extra_fields' => $extrafields,
-					'custom_status_field' => $at_arr[$i]->data_array['custom_status_field']
-				);
+				$return[] = $at_arr[$i]->getSettings();
 			}
 		}
 	}
@@ -955,6 +916,11 @@ function flattedartifacts_to_soap($at_arr) {
 				if(is_array($extrafieldsdatatext) && count($extrafieldsdatatext) > 0) {
 					foreach ($extrafieldsdatatext as $extrafielddatatext) {
 						$fldarr = array();
+						if ($extrafielddatatext['type'] == ARTIFACT_EXTRAFIELDTYPE_EFFORT) {
+							$effortUnitSet = New EffortUnitSet($at_arr[$i]->ArtifactType, $at_arr[$i]->ArtifactType->getEffortUnitSet());
+							$effortUnitFactory = New EffortUnitFactory($effortUnitSet);
+							$extrafielddatatext['value'] = $effortUnitFactory->encodedToString($extrafielddatatext['value']);
+						}
 						$fldarr = array('extra_field_name' => $extrafielddatatext['name'], 'field_value' => $extrafielddatatext['value']);
 						$flddata[]=$fldarr;
 						unset($fldarr);

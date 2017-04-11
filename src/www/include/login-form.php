@@ -67,7 +67,7 @@ function display_login_form($return_to = '/', $triggered = false, $full_page = f
 	}
 
 	if ($triggered) {
-		echo $HTML->warning_msg(_('You\'ve been redirected to this login page because you have tried accessing a page that was not available to you as an anonymous user.'));
+		echo $HTML->warning_msg(_("You've been redirected to this login page because you have tried accessing a page that was not available to you as an anonymous user."));
 	}
 
 	if (count ($params['html_snippets']) > 1) {

@@ -3,8 +3,8 @@
  * Tracker Facility
  *
  * Copyright 2010 (c) FusionForge Team
- * Copyright 2014-2016, Franck Villaume - TrivialDev
- * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
+ * Copyright 2014-2017, Franck Villaume - TrivialDev
+ * Copyright 2016-2017, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -79,22 +79,22 @@ if ($rows > 0) {
 				"</td>\n";
 		echo '<td>'.$eftypes[$efarr[$i]['field_type']]."</td>\n";
 		if ($efarr[$i]['is_disabled'] == 0) {
-			echo '<td class="align-center" content="1" >'.html_image("ic/check.png",'15','13').'</td>'."\n";
+			echo '<td class="align-center" content="1" >'.html_image("ic/check.png", 15, 13).'</td>'."\n";
 		} else {
 			echo '<td content="0" ></td>'."\n";
 		}
 		if ($efarr[$i]['is_required'] == 1) {
-			echo '<td class="align-center" content="1" >'.html_image("ic/check.png",'15','13').'</td>'."\n";
+			echo '<td class="align-center" content="1" >'.html_image("ic/check.png", 15, 13).'</td>'."\n";
 		} else {
 			echo '<td content="0" ></td>'."\n";
 		}
 		if ($efarr[$i]['is_hidden_on_submit'] == 0) {
-			echo '<td class="align-center" content="1" >'.html_image("ic/check.png",'15','13').'</td>'."\n";
+			echo '<td class="align-center" content="1" >'.html_image("ic/check.png", 15, 13).'</td>'."\n";
 		} else {
 			echo '<td content="0" ></td>'."\n";
 		}
 		if ($autoAssignFieldId==$i) {
-			echo '<td class="align-center">'.html_image("ic/check.png",'15','13').'</td>'."\n";
+			echo '<td class="align-center">'.html_image("ic/check.png", 15, 13).'</td>'."\n";
 		} else {
 			echo '<td></td>'."\n";
 		}
@@ -180,7 +180,7 @@ echo html_ac(html_ap() - 1);
 
 echo html_ao('p');
 echo html_e('strong', array(), _('Field alias')._(':')).html_e('br');
-echo html_e('input', array('type'=>'text', 'name'=>'alias', 'value'=>'', 'size'=>'15', 'maxlength'=>'30'));
+echo html_e('input', array('type'=>'text', 'name'=>'alias', 'value'=>'', 'size'=>'15', 'maxlength'=>'30', 'pattern' => '[A-Za-z0-9-_@]+', 'title' => _('Only letters, numbers, hyphens (-), at sign (@) and underscores (_) allowed.')));
 echo html_ac(html_ap() - 1);
 
 echo html_ao('p');
@@ -220,57 +220,79 @@ $jsvariable ="
 	var typeFormula = ".ARTIFACT_EXTRAFIELDTYPE_FORMULA.";
 	var typeDateTime = ".ARTIFACT_EXTRAFIELDTYPE_DATETIME.";
 	var typeUser = ".ARTIFACT_EXTRAFIELDTYPE_USER.";
-	var typeRelease = ".ARTIFACT_EXTRAFIELDTYPE_RELEASE.";";
+	var typeRelease = ".ARTIFACT_EXTRAFIELDTYPE_RELEASE.";
+	var typeEffort = ".ARTIFACT_EXTRAFIELDTYPE_EFFORT.";";
 
 $javascript = <<<'EOS'
-	$("p[class^='for-']").hide()
+	$("p[class^='for-']").hide();
+	$("[name='parent']").hide();
 	$("input[value="+typeSelect+"]").on('change', function(){
 		$("p.for-select").show();
 		$("p[class^='for-']:not(.for-select)").hide();
+		$("[name='parent']").show();
 	});
 	$("input[value="+typeCheckBox+"]").on('change', function(){
 		$("p.for-check").show();
 		$("p[class^='for-']:not(.for-check)").hide();
+		$("[name='parent']").show();
 	});
 	$("input[value="+typeRadio+"]").on('change', function(){
 		$("p.for-radio").show();
 		$("p[class^='for-']:not(.for-radio)").hide();
+		$("[name='parent']").show();
 	});
 	$("input[value="+typeText+"]").on('change', function(){
 		$("label[for='attribute1']").text(size);
 		$("label[for='attribute2']").text(maxLength);
 		$("p.for-text").show();
 		$("p[class^='for-']:not(.for-text)").hide();
+		$("[name='parent']").hide();
 	});
 	$("input[value="+typeMultiSelect+"]").on('change', function(){
 		$("p.for-multiselect").show();
 		$("p[class^='for-']:not(.for-multiselect)").hide();
+		$("[name='parent']").show();
 	});
 	$("input[value="+typeTextArea+"]").on('change', function(){
 		$("label[for='attribute1']").text(rows);
 		$("label[for='attribute2']").text(columns);
 		$("p.for-textarea").show();
 		$("p[class^='for-']:not(.for-textarea)").hide();
+		$("[name='parent']").hide();
 	});
 	$("input[value="+typeRelation+"]").on('change', function(){
 		$("label[for='attribute1']").text(size);
 		$("label[for='attribute2']").text(maxLength);
 		$("p.for-relation").show();
 		$("p[class^='for-']:not(.for-relation)").hide();
+		$("[name='parent']").hide();
 	});
 	$("input[value="+typeInteger+"]").on('change', function(){
 		$("label[for='attribute1']").text(size);
 		$("label[for='attribute2']").text(maxLength);
 		$("p.for-integer").show();
 		$("p[class^='for-']:not(.for-integer)").hide();
+		$("[name='parent']").hide();
+	});
+	$("input[value="+typeDateTime+"]").on('change', function(){
+		$("p.for-release").show();
+		$("p[class^='for-']:not(.for-datetime)").hide();
+		$("[name='parent']").hide();
 	});
 	$("input[value="+typeUser+"]").on('change', function(){
 		$("p.for-user").show();
 		$("p[class^='for-']:not(.for-user)").hide();
+		$("[name='parent']").hide();
 	});
 	$("input[value="+typeRelease+"]").on('change', function(){
 		$("p.for-release").show();
 		$("p[class^='for-']:not(.for-release)").hide();
+	});
+	$("input[value="+typeEffort+"]").on('change', function(){
+		$("label[for='attribute1']").text(size);
+		$("label[for='attribute2']").text(maxLength);
+		$("p.for-effort").show();
+		$("p[class^='for-']:not(.for-effort)").hide();
 	});
 
 EOS;
@@ -286,7 +308,7 @@ $texts = array_values($eftypes);
 echo html_build_radio_buttons_from_arrays($vals, $texts, 'field_type', '', false, '', false ,'', false, array('required'=>'required') );
 echo html_ac(html_ap() - 1);
 
-echo html_ao('p', array('class'=>'for-text for-textarea for-integer for-relation'));
+echo html_ao('p', array('class'=>'for-text for-textarea for-integer for-relation for-effort'));
 echo html_e('label', array('for'=>'attribute1'), _('Size')._(':'));
 echo html_e('input', array('type'=>'text', 'name'=>'attribute1', 'value'=>'20', 'size'=>'2', 'maxlength'=>'2')).html_e('br');
 echo html_e('label', array('for'=>'attribute2'), _('Maxlength')._(':'));
@@ -306,7 +328,7 @@ echo html_e('label', array('for'=>'show100label'), _('Label for the none value')
 echo html_e('input', array('type'=>'text', 'name'=>'show100label', 'value'=>_('none'), 'size'=>'30')).html_e('br');
 echo html_ac(html_ap() - 1);
 
-echo html_ao('p', array('class'=>'for-select for-multiselect for-radio for-check'));
+echo html_e('p', array('class'=>'for-select for-multiselect for-radio for-check'), html_e('label', array('for'=>'parent'), _('Parent Field')));
 $pfarr = $ath->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_RADIO, ARTIFACT_EXTRAFIELDTYPE_CHECKBOX,ARTIFACT_EXTRAFIELDTYPE_SELECT,ARTIFACT_EXTRAFIELDTYPE_MULTISELECT), false, true);
 $parentField = array();
 if (is_array($pfarr)) {
@@ -315,16 +337,14 @@ if (is_array($pfarr)) {
 	}
 }
 asort($parentField,SORT_FLAG_CASE | SORT_STRING);
-echo html_e('label', array('for'=>'parent'), _('Parent Field'));
 echo html_build_select_box_from_arrays(array_keys($parentField), array_values($parentField), 'parent', null, true, 'none').html_e('br');
-echo html_ac(html_ap() - 1);
 
 echo html_ao('p', array('class'=>'for-select for-multiselect for-radio for-check'));
 echo html_build_checkbox('autoassign', false, false);
 echo html_e('label', array('for'=>'autoassign'), _('Field that triggers auto-assignment rules'));
 echo html_ac(html_ap() - 1);
 
-echo $HTML->warning_msg(_('Warning: this add new custom field'));
+echo $HTML->warning_msg(_('Warning: this adds a new custom field!'));
 
 echo html_ao('p');
 echo html_e('input', array('type'=>'submit', 'name'=>'post_changes', 'value'=>_('Add Custom Field')));

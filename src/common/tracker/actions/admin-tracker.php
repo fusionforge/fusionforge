@@ -4,6 +4,7 @@
  *
  * Copyright 2010, FusionForge Team
  * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2017, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -41,6 +42,12 @@ echo '<p>';
 echo util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&update_type=1', '<strong>'._('Update Settings').'</strong>');
 echo '<br />';
 echo _('Set up preferences like expiration times, email addresses.');
+echo '</p>';
+
+echo '<p>';
+echo util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&effort_units=1', '<strong>'._('Manage Effort Units').'</strong>');
+echo '<br />';
+echo _('Manage Effort Units for Effort custom extra field.');
 echo '</p>';
 
 echo '<p>';

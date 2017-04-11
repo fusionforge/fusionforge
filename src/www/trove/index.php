@@ -175,9 +175,8 @@ $html_limit .= sprintf (ngettext ('<strong>%d</strong> project in result set.',
 
 // only display pages stuff if there is more to display
 if ($querytotalcount > $TROVE_BROWSELIMIT) {
-	$html_limit .= ' ' . sprintf (ngettext ('Displaying %d project per page. Projects sorted by activity ranking.',
-						'Displaying %d projects per page. Projects sorted by activity ranking.',
-						$TROVE_BROWSELIMIT),
+	$html_limit .= ' ' . sprintf(
+					  _('Displaying %d projects per page. Projects sorted by activity ranking.'),
 				      $TROVE_BROWSELIMIT)
 		. '<br />';
 

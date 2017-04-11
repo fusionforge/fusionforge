@@ -24,7 +24,7 @@ require_once $gfplugins.'taskboard/common/TaskBoardFactory.class.php';
 class TaskBoardFactoryHtml extends TaskBoardFactory {
 	function header($params=array()) {
 		global $HTML;
-		
+
 		if (!forge_get_config('use_tracker')) {
 			exit_disabled();
 		}
@@ -33,16 +33,16 @@ class TaskBoardFactoryHtml extends TaskBoardFactory {
 
 		$params['group']=$group_id;
 		if (!isset($params['title'])) {
-			$params['title']=sprintf(_('Taskboards for %s'), $this->Group->getPublicName());
+			$params['title'] = sprintf(_('Task Boards for %s'), $this->Group->getPublicName());
 		}
 		$params['toptab']='taskboard';
 
-		$labels = array(_('View Taskboards'));
+		$labels = array(_('View Task Boards'));
 		$links  = array('plugins/taskboard/?group_id='.$group_id);
 		$attr   = array(array('title' => _('Get the list of available taskboards')));
 		if (session_loggedin()) {
 			if (forge_check_perm('tracker_admin', $group_id)) {
-				$labels[] = _('Taskboards Administration');
+				$labels[] = _('Task Boards Administration');
 				$links[]  = 'plugins/taskboard/admin/?group_id='.$group_id;
 				$attr[]   = array('title' => _('Global administration for taskboards.'));
 			}

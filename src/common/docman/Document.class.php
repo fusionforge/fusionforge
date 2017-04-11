@@ -7,7 +7,7 @@
  * Copyright 2009, Roland Mas
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2011-2016, Franck Villaume - TrivialDev
+ * Copyright 2011-2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -44,7 +44,7 @@ $DOCUMENT_OBJ = array();
  * You should always use this instead of instantiating the object directly
  *
  * @param	int		$doc_id		The ID of the document - required
- * @param	int		$group_id	Group ID of the project - required
+ * @param	int|bool	$group_id	Group ID of the project - required
  * @param	int|bool	$res		The result set handle ("SELECT * FROM docdata_vw WHERE docid=$1")
  * @return	Document	a document object or false on failure
  */
@@ -148,7 +148,7 @@ class Document extends FFObject {
 	 */
 	function create($filename, $filetype, $data, $doc_group, $title, $description, $stateid = 0, $vcomment = '', $importData = array()) {
 		if (strlen($title) < DOCMAN__TITLE_MIN_SIZE) {
-			$this->setError(_('Title Must Be At Least 5 Characters'));
+			$this->setError(sprintf(_('Title Must Be At Least %d Characters'), DOCMAN__TITLE_MIN_SIZE));
 			return false;
 		}
 		if (strlen($description) < DOCMAN__DESCRIPTION_MIN_SIZE) {
@@ -605,6 +605,16 @@ class Document extends FFObject {
 	function getMonitoredUserEmailAddress() {
 		$MonitorElementObject = new MonitorElement('docdata');
 		return $MonitorElementObject->getAllEmailsInCommatSeparated($this->getID());
+	}
+
+	/**
+	 * getMonitorIds - get user ids monitoring this Document.
+	 *
+	 * @return	array of user ids monitoring this Artifact.
+	 */
+	function getMonitorIds() {
+		$MonitorElementObject = new MonitorElement('docdata');
+		return $MonitorElementObject->getMonitorUsersIdsInArray($this->getID());
 	}
 
 	/**

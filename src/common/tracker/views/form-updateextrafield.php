@@ -3,8 +3,8 @@
  * Tracker Facility
  *
  * Copyright 2010 (c) FusionForge Team
- * Copyright 2014-2015, Franck Villaume - TrivialDev
- * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
+ * Copyright 2014-2015,2017, Franck Villaume - TrivialDev
+ * Copyright 2016-2017, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -56,7 +56,7 @@ if (!$ac || !is_object($ac)) {
 
 	echo html_ao('p');
 	echo html_e('label', array('for'=>'alias'), html_e('strong', array(), _('Field alias')._(':')).html_e('br'));
-	echo html_e('input', array('type'=>'text', 'id'=>'alias', 'name'=>'alias', 'value'=>$ac->getAlias(), 'size'=>'15', 'maxlength'=>'30'));
+	echo html_e('input', array('type'=>'text', 'id'=>'alias', 'name'=>'alias', 'value'=>$ac->getAlias(), 'size'=>'15', 'maxlength'=>'30', 'pattern' => '[A-Za-z0-9-_@]+', 'title' => _('Only letters, numbers, hyphens (-), at sign (@) and underscores (_) allowed.')));
 	echo html_ac(html_ap() - 1);
 
 	echo html_ao('p');
@@ -91,7 +91,7 @@ if (!$ac || !is_object($ac)) {
 		echo html_e('input', array('type'=>'text', 'id'=>'attribute2', 'name'=>'attribute2', 'value'=>$ac->getAttribute2(), 'size'=>'2', 'maxlength'=>'2'));
 		echo html_ac(html_ap() - 1);
 
-	} elseif ($efType == ARTIFACT_EXTRAFIELDTYPE_TEXT || $efType == ARTIFACT_EXTRAFIELDTYPE_INTEGER || $efType == ARTIFACT_EXTRAFIELDTYPE_RELATION) {
+	} elseif ($efType == ARTIFACT_EXTRAFIELDTYPE_TEXT || $efType == ARTIFACT_EXTRAFIELDTYPE_INTEGER || $efType == ARTIFACT_EXTRAFIELDTYPE_RELATION || $efType == ARTIFACT_EXTRAFIELDTYPE_EFFORT) {
 		echo html_ao('p');
 		echo html_e('label', array('for'=>'attribute1'), _('Size'));
 		echo html_e('input', array('type'=>'text', 'id'=>'attribute1', 'name'=>'attribute1', 'value'=>$ac->getAttribute1(), 'size'=>'2', 'maxlength'=>'2'));
@@ -188,12 +188,22 @@ if (!$ac || !is_object($ac)) {
 			echo $ath->renderReleaseField($ac->getID(),$ac->getDefaultValues(),true,'none');
 			echo html_ac(html_ap() - 1);
 			break;
+		case ARTIFACT_EXTRAFIELDTYPE_EFFORT:
+			echo $ath->javascript();
+			echo html_ao('p');
+			echo html_e('label', array('for'=>'extra_fields['.$ac->getID().']'),_('Default value'));
+			echo $ath->renderEffort($ac->getID(),$ac->getDefaultValues(),$ac->getAttribute1(), $ac->getAttribute2());
+			echo html_ac(html_ap() - 1);
+			break;
 	}
 
-	if (in_array($efType, array(ARTIFACT_EXTRAFIELDTYPE_TEXT, ARTIFACT_EXTRAFIELDTYPE_INTEGER, ARTIFACT_EXTRAFIELDTYPE_TEXTAREA))) {
+	if (in_array($efType, array(ARTIFACT_EXTRAFIELDTYPE_TEXT, ARTIFACT_EXTRAFIELDTYPE_INTEGER, ARTIFACT_EXTRAFIELDTYPE_TEXTAREA, ARTIFACT_EXTRAFIELDTYPE_DATE, ARTIFACT_EXTRAFIELDTYPE_DATETIME))) {
 		echo html_ao('p');
 		echo html_e('label', array('for'=>'formula'), _('Formula to calculate field value'));
+		echo html_e('br');
 		echo html_e('textarea', array('type'=>'text', 'name'=>'formula', 'rows'=>4, 'cols'=>50), $ac->getFormula(), false);
+		echo html_e('br');
+		echo html_e('button', array('onclick'=>'location.href="/tracker/admin/?edit_formula=1&group_id='.$group_id.'&id='.$id.'&atid='.$ath->getID().'"; return false;'),_('Edit formula'));
 		echo html_ac(html_ap() - 1);
 	} else {
 		echo html_e('input', array('type'=>'hidden', 'name'=>'formula', 'value'=>''));

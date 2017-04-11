@@ -7,7 +7,7 @@
  * Copyright 2009, Roland Mas
  * Copyright 2010, Franck Villaume - Capgemini
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2016, Franck Villaume - TrivialDev
+ * Copyright 2012-2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -54,6 +54,25 @@ function &documentgroup_get_object($docgroup_id, $group_id, $res = false) {
 			$DOCUMENTGROUP_OBJ["_".$docgroup_id."_"] = false;
 		} else {
 			$DOCUMENTGROUP_OBJ["_".$docgroup_id."_"] = new DocumentGroup(group_get_object($group_id), db_fetch_array($res));
+		}
+	}
+	return $DOCUMENTGROUP_OBJ["_".$docgroup_id."_"];
+}
+
+function &documentgroup_get_object_byid($docgroup_id, $res = false) {
+	global $DOCUMENTGROUP_OBJ;
+	if (!isset($DOCUMENTGROUP_OBJ["_".$docgroup_id."_"])) {
+		if ($res) {
+			//the db result handle was passed in
+		} else {
+			$res = db_query_params('SELECT * FROM doc_groups WHERE doc_group = $1',
+						array($docgroup_id));
+		}
+		if (!$res || db_numrows($res) < 1) {
+			$DOCUMENTGROUP_OBJ["_".$docgroup_id."_"] = false;
+		} else {
+			$arr = db_fetch_array($res);
+			$DOCUMENTGROUP_OBJ["_".$docgroup_id."_"] = new DocumentGroup(group_get_object($arr['group_id']), $arr);
 		}
 	}
 	return $DOCUMENTGROUP_OBJ["_".$docgroup_id."_"];
@@ -259,10 +278,6 @@ class DocumentGroup extends FFError {
 	 * @access	public
 	 */
 	function injectArchive($uploaded_data) {
-		if (!is_uploaded_file($uploaded_data['tmp_name'])) {
-			$this->setError(_('Invalid file name.'));
-			return false;
-		}
 		if (function_exists('finfo_open')) {
 			$finfo = finfo_open(FILEINFO_MIME_TYPE);
 			$uploaded_data_type = finfo_file($finfo, $uploaded_data['tmp_name']);
