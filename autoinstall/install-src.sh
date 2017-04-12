@@ -39,6 +39,20 @@ if [ -e /etc/debian_version ]; then
     if ! dpkg-vendor --is Ubuntu; then
 	apt-get install locales-all  # https://bugs.launchpad.net/ubuntu/+source/glibc/+bug/1394929
     fi
+elif [ -e /etc/SuSE-release ]; then
+	suse_check_release
+	suse_install_repos
+	suse_install_rpms make gettext-runtime php5 php5-gettext php5-posix php5-pgsql \
+		apache2 apache2-mod_php5 apache2-mod_wsgi apache2-mod_mpm_itk \
+		postgresql-server subversion \
+		php5-pear php5-pear-htmlpurifier \
+		mailman postfix  \
+		openssh  \
+		cvs rcs perl-IPC-Run perl-URI \
+		subversion-server  \
+		git git-web \
+		python-psycopg2 \
+		mediawiki moinmoin-wiki
 else
     yum install -y make tar
     backports_rpm

@@ -242,3 +242,33 @@ EOF
     # TODO: postfix: rebuild from RHEL/CentOS sources with pgsql enabled,
     # so we can test mta-postfix
 }
+
+function suse_check_release {
+	supported=$(. /etc/os-release; echo $VERSION | grep "42\.[12]")
+	if test -z "$supported"; then
+		echo "unsupported openSUSE version"
+		exit 1
+	fi
+}
+
+function suse_install_repos {
+	has_repo=$(zypper lr | grep 'Apache:Modules' | sed 's,  ,,g')
+	if test -z "$has_repo"; then
+		dist_path=$(. /etc/os-release; echo $PRETTY_NAME | sed 's, ,_,g')
+		zypper ar http://download.opensuse.org/repositories/Apache:/Modules/$dist_path/ Apache:Modules
+	fi
+}
+
+function suse_install_rpms {
+	# Install build dependencies
+	modules="$*"
+	instmods=""
+	for m in $modules; do
+		if ! rpm -q $m >/dev/null; then
+			instmods="$instmods $m"
+		fi
+	done
+	if [ -n "$instmods" ] ; then
+		zypper install -y $instmods
+	fi
+}

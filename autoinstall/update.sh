@@ -4,6 +4,8 @@
 if [ -e /etc/debian_version ]; then
     aptitude update
     aptitude -y dist-upgrade
+elif [ -e /etc/SuSE-release ]; then
+    zypper update -y
 else
     yum upgrade
 fi

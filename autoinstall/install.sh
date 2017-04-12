@@ -49,6 +49,16 @@ if [ -e /etc/debian_version ]; then
 	    apt-get install locales-all  # https://bugs.launchpad.net/ubuntu/+source/glibc/+bug/1394929
 	fi
     fi
+elif [ -e /etc/SuSE-release ]; then
+	suse_check_release
+	suse_install_repos
+	if rpm -q fusionforge >/dev/null ; then
+		zypper update -y
+	else
+		suse_install_rpms make tar fusionforge fusionforge-shell fusionforge-scm \
+			fusionforge-plugin-scmcvs fusionforge-plugin-scmsvn fusionforge-plugin-scmgit \
+			fusionforge-plugin-blocks fusionforge-plugin-online_help fusionforge-plugin-taskboard \
+			fusionforge-plugin-message
 else
     yum install -y make tar
     backports_rpm
