@@ -1,4 +1,5 @@
 <?php
+if (count(get_included_files()) === 1) define('__main__', __FILE__);
 /**
  * Minimal complete JSON generator and parser for FusionForge and SimKolab
  *
@@ -23,6 +24,11 @@
  * Do *not* use PHP’s json_encode because it is broken.
  * Note that JSON is case-sensitive.  My notes are at:
  * https://www.mirbsd.org/cvs.cgi/contrib/hosted/tg/json.txt?rev=HEAD
+ *
+ * Call as CLI script to filter input as JSON pretty-printer. Options
+ * are -c (compact output, no indentation or spaces), -d depth (parse
+ * depth defaulting to 32), -r (pretty-print resources as string) and
+ * -t truncsz (truncation size).
  */
 
 /*-
@@ -704,4 +710,81 @@ function minijson_decode_number(&$j, &$p, &$ov) {
 	}
 	$ov = (float)$s;
 	return true;
+}
+
+if (defined('__main__') && constant('__main__') === __FILE__) {
+	function usage($rc=1) {
+		fwrite(STDERR,
+		    "Syntax: minijson.php [-cr] [-d depth] [-t truncsz]\n");
+		exit($rc);
+	}
+
+	$indent = '';
+	$depth = 32;
+	$truncsz = 0;
+	$rsrc = false;
+	array_shift($argv);	/* argv[0] */
+	while (count($argv)) {
+		$arg = array_shift($argv);
+		/* only options, no arguments (Unix filter) */
+		if ($arg[0] !== '-')
+			usage();
+		if ($arg === '--' && count($argv))
+			usage();
+		if ($arg === '-')
+			usage();
+		$arg = str_split($arg);
+		array_shift($arg);	/* initial ‘-’ */
+		/* parse select arguments */
+		while (count($arg)) {
+			switch ($arg[0]) {
+			case 'c':
+				$indent = false;
+				break;
+			case 'd':
+				if (!count($argv))
+					usage();
+				$depth = array_shift($argv);
+				if (!preg_match('/^[1-9][0-9]*$/', $depth))
+					usage();
+				if ((string)(int)$depth !== $depth)
+					usage();
+				$depth = (int)$depth;
+				break;
+			case 'h':
+			case '?':
+				usage(0);
+			case 'r':
+				$rsrc = true;
+				break;
+			case 't':
+				if (!count($argv))
+					usage();
+				$truncsz = array_shift($argv);
+				if (!preg_match('/^[1-9][0-9]*$/', $truncsz))
+					usage();
+				if ((string)(int)$truncsz !== $truncsz)
+					usage();
+				$truncsz = (int)$truncsz;
+				break;
+			default:
+				usage();
+			}
+			array_shift($arg);
+		}
+	}
+
+	$idat = file_get_contents('php://stdin');
+	$odat = '';
+	if (!minijson_decode($idat, $odat, $depth)) {
+		fwrite(STDERR, 'JSON decoding of input failed: ' .
+		    minijson_encode(array(
+			'input' => $idat,
+			'message' => $odat,
+		    )) . "\n");
+		exit(1);
+	}
+	fwrite(STDOUT, minijson_encode_internal($odat, $indent, $depth,
+	    $truncsz, $rsrc) . "\n");
+	exit(0);
 }
