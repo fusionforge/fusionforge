@@ -2,7 +2,7 @@
 /**
  * FusionForge Documentation Manager
  *
- * Copyright 2012-2016, Franck Villaume - TrivialDev
+ * Copyright 2012-2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -60,7 +60,7 @@ echo html_ac(html_ap() - 1);
 
 echo html_ao('div', array('id' => 'editFile'));
 echo $HTML->openForm(array('id' => 'editdocdata', 'name' => 'editdocdata', 'method' => 'post', 'enctype' => 'multipart/form-data'));
-echo $HTML->listTableTop();
+echo $HTML->listTableTop(array(), array(), 'full');
 $cells = array();
 $cells[] = array(_('Folder that document belongs to')._(':'), 'class' => 'docman_editfile_title');
 $cells[][] = html_e('select', array('name' => 'doc_group', 'id' => 'doc_group'), '', false);
