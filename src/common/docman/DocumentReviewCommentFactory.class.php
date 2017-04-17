@@ -22,6 +22,7 @@
  */
 
 require_once $gfcommon.'docman/DocumentReviewComment.class.php';
+require_once $gfcommon.'docman/DocumentReviewCommentAttachment.class.php';
 
 class DocumentReviewCommentFactory extends FFError {
 	/**
@@ -57,8 +58,17 @@ class DocumentReviewCommentFactory extends FFError {
 		$commentsArr = array();
 		$res = db_query_params('SELECT commentid FROM doc_review_comments WHERE revid = $1 ORDER BY createdate DESC', array($this->DocumentReview->getID()));
 		if ($res && (db_numrows($res) > 0)) {
+			$i = 0;
 			while ($arr = db_fetch_array($res)) {
-				$commentsArr[] = new DocumentReviewComment($this->DocumentReview, $arr['commentid']);
+				$commentsArr[$i] = new DocumentReviewComment($this->DocumentReview, $arr['commentid']);
+				$attachid = $commentsArr[$i]->getAttachmentID();
+				if ($attachid) {
+					$drca = new DocumentReviewCommentAttachment($attachid);
+					$commentsArr[$i]->storageref = $drca->getFilePath();
+				} else {
+					$commentsArr[$i]->storageref = null;
+				}
+				$i++;
 			}
 		}
 		return $commentsArr;

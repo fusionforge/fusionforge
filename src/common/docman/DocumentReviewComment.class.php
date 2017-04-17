@@ -125,6 +125,16 @@ class DocumentReviewComment extends FFError {
 		}
 	}
 
+	function getAttachmentID() {
+		$attachid = null;
+		$res = db_query_params('SELECT attachid FROM doc_review_attachments WHERE commentid = $1', array($this->getID()));
+		if ($res && (db_numrows($res) > 0)) {
+			$attachArr = db_fetch_array($res);
+			$attachid = $attachArr['attachid'];
+		}
+		return $attachid;
+	}
+
 	function create($userid, $reviewid, $rcomment, $createdate) {
 		db_begin();
 		$res = db_query_params('INSERT INTO doc_review_comments (revid, userid, rcomment, createdate) VALUES ($1, $2, $3, $4)',

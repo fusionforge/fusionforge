@@ -418,6 +418,15 @@ class CliActions {
 						echo $dr->getErrorMessage()."\n";
 						db_rollback();
 						return false;
+					} else {
+						foreach($review['comments'] as $comment) {
+							$nc = new DocumentReviewComment($dr);
+							if (!$nc->create($comment['data_array']['userid'], $dr->getID(), $comment['data_array']['rcomment'], $comment['data_array']['createdate'])) {
+								echo $nc->getErrorMessage()."\n";
+								db_rollback();
+								return false;
+							}
+						}
 					}
 				}
 			}
