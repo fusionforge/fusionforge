@@ -425,6 +425,14 @@ class CliActions {
 								echo $nc->getErrorMessage()."\n";
 								db_rollback();
 								return false;
+							} else {
+								if ($comment['attachment']['storageref'] != null) {
+									if (!$nc->attachFile($comment['attachment']['data_array']['filename'], $comment['attachment']['data_array']['filetype'], $comment['attachment']['data_array']['createdate'], $comment['attachment']['storageref'])) {
+										echo $nc->getErrorMessage()."\n";
+										db_rollback();
+										return false;
+									}
+								}
 							}
 						}
 					}
