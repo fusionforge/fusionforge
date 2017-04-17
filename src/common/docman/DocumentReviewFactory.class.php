@@ -2,7 +2,7 @@
 /**
  * FusionForge Documentation Manager
  *
- * Copyright 2016,2017, Franck Villaume - TrivialDev
+ * Copyright 2016-2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -61,7 +61,13 @@ class DocumentReviewFactory extends FFError {
 					array(db_int_array_to_any_clause($serialids), $this->Document->getID()));
 		if ($res) {
 			while ($arr = db_fetch_array($res)) {
-				$serialid = $arr['serialid'];
+				$dr = new DocumentReview($this->Document, $arr['revid']);
+				$drcf = new DocumentReviewCommentFactory($dr);
+				$arr['comments'] = $drcf->getComments();
+				foreach ($arr['comments'] as $comment) {
+					unset($comment->DocumentReview);
+				}
+				$arr['users'] = $dr->getUsers();
 				$this->reviews[] = $arr;
 			}
 		}
