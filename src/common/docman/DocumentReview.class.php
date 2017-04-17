@@ -2,7 +2,7 @@
 /**
  * FusionForge Documentation Manager
  *
- * Copyright 2016,2017, Franck Villaume - TrivialDev
+ * Copyright 2016-2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -407,7 +407,8 @@ class DocumentReview extends FFError {
 		return $return;
 	}
 
-	function create($reviewversionserialid, $reviewtitle, $reviewdescription, $reviewenddate, $reviewmandatoryusers, $reviewoptionalusers = array(), $reviewnotificationcomment = false) {
+	function create($reviewversionserialid, $reviewtitle, $reviewdescription, $reviewenddate, $reviewmandatoryusers, $reviewoptionalusers = array(), $reviewnotificationcomment = false, $importData = array()) {
+		$now = time();
 		if (!is_int($reviewversionserialid) && $reviewversionserialid < 1) {
 			$this->setError(_('Missing Version ID to create review'));
 			return false;
@@ -420,7 +421,7 @@ class DocumentReview extends FFError {
 			$this->setError(sprintf(_('Review Description must be %d characters minimum and %d characters maximum'), DOCMAN__REVIEW_DESCRIPTION_MIN_SIZE, DOCMAN__REVIEW_DESCRIPTION_MAX_SIZE));
 			return false;
 		}
-		if ($reviewenddate < time()) {
+		if (!isset($importData['enddate']) && $reviewenddate < $now) {
 			$this->setError(_('Review End date is in the past. Please set it the future'));
 			return false;
 		}
@@ -433,10 +434,19 @@ class DocumentReview extends FFError {
 			return false;
 		}
 
-		$user = session_get_user();
+		if (isset($importData['user'])) {
+			$user_id = $importData['user'];
+		} else {
+			$user_id = ((session_loggedin()) ? user_getid() : DOCMAN__INFAMOUS_USER_ID);
+		}
+		if (isset($importData['startdate'])) {
+			$now = $importData['startdate'];
+		}
+
+		$user = user_get_object($user_id);
 		db_begin();
 		$res = db_query_params('INSERT INTO doc_review (created_by, statusid, docid, startdate, enddate, title, description) VALUES ($1, $2, $3, $4, $5, $6, $7)',
-					array($user->getID(), 1, $this->Document->getID(), time(), $reviewenddate, $reviewtitle, $reviewdescription));
+					array($user->getID(), 1, $this->Document->getID(), $now, $reviewenddate, $reviewtitle, $reviewdescription));
 		if ($res) {
 			$notifyUsers = array();
 			$revid = db_insertid($res, 'doc_review', 'revid');
@@ -456,7 +466,9 @@ class DocumentReview extends FFError {
 				$notifyUsers[] = $arg;
 
 			}
-			$this->sendNotice($notifyUsers, true, $reviewnotificationcomment);
+			if (!isset($importData['nonotice'])) {
+				$this->sendNotice($notifyUsers, true, $reviewnotificationcomment);
+			}
 			db_commit();
 			return true;
 		} else {
