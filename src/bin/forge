@@ -345,13 +345,16 @@ class CliActions {
 		}
 		$group_id = $stream['document']['data_array']['group_id'];
 		$group = group_get_object($group_id);
+		$importSerialIdRef = array();
 		if ($group && is_object($group) && !$group->isError() && $group->usesDocman()) {
+			db_begin();
 			$firstversion = true;
 			$path = getcwd();
-			foreach ($stream['versions'] as $version) {
+			foreach ($stream['versions'] as $key => $version) {
 				if ($version['filetype'] != 'URL' && $version['storageref'] != null) {
 					if (!is_file($path.'/'.$version['storageref'])) {
 						echo _('Invalid file name.')."\n";
+						db_rollback();
 						return false;
 					}
 					$filedataname = $path.'/'.$version['storageref'];
@@ -369,6 +372,7 @@ class CliActions {
 				$doc_group = documentgroup_get_object_byid($doc_group_id);
 				if (!$doc_group || !is_object($doc_group) || $doc_group->isError()) {
 					echo _('Invalid document group (folder)')._(': ').$doc_group_id."\n";
+					db_rollback();
 					return false;
 				}
 				$importData['user'] = $version['created_by'];
@@ -379,19 +383,45 @@ class CliActions {
 					$d = new Document($group);
 					if (!$d->create($version['filename'], $filedatatype, $filedataname, $doc_group_id, $version['title'], $version['description'], $stream['document']['data_array']['stateid'], $version['vcomment'], $importData)) {
 						echo $d->getErrorMessage()."\n";
+						db_rollback();
 						return false;
 					} else {
 						$firstversion = false;
 					}
 				} else {
-					if (!$d->update($version['filename'], $filedatatype, $filedataname, $doc_group_id, $version['title'], $version['description'], $stream['document']['data_array']['stateid'], 0, 0, 1, $importData, $version['vcomment'])) {
+					if (!$d->update($version['filename'], $filedatatype, $filedataname, $doc_group_id, $version['title'], $version['description'], $stream['document']['data_array']['stateid'], 0, $version['current_version'], 1, $importData, $version['vcomment'])) {
 						echo $d->getErrorMessage()."\n";
+						db_rollback();
 						return false;
 					}
 				}
-				//set default versions
-				//add reviews
+				$dv = new DocumentVersion($d, $key + 1);
+				$importSerialIdRef[$version['serial_id']] = $dv->getID();
 			}
+			if ($d && !$d->isError()) {
+				foreach($stream['reviews'] as $review) {
+					$dr = new DocumentReview($d);
+					$reviewmandatoryusers = array();
+					$reviewoptionalusers = array();
+					foreach($review['users'] as $reviewuser) {
+						if ($reviewuser['typeid'] == 1) {
+							$reviewmandatoryusers[] = $reviewuser['userid'];
+						} elseif ($reviewuser['typeid'] == 2) {
+							$reviewoptionalusers[] = $reviewuser['userid'];
+						}
+					}
+					$importData['user'] = $review['created_by'];
+					$importData['startdate'] = $review['startdate'];
+					$importData['enddate'] = $review['enddate'];
+					$importData['nonotice'] = true;
+					if (!$dr->create($importSerialIdRef[$review['serialid']], $review['title'], $review['description'], $review['enddate'], $reviewmandatoryusers, $reviewoptionalusers, false, $importData)) {
+						echo $dr->getErrorMessage()."\n";
+						db_rollback();
+						return false;
+					}
+				}
+			}
+			db_commit();
 		} else {
 			echo _('Unable to get project to inject document')._(': ').$group_id."\n";
 		}
