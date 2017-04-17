@@ -2,7 +2,7 @@
 /**
  * FusionForge Documentation Manager
  *
- * Copyright 2016, Franck Villaume - TrivialDev
+ * Copyright 2016-2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -20,6 +20,8 @@
  * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
+
+require_once $gfcommon.'docman/DocumentReviewComment.class.php';
 
 class DocumentReviewCommentFactory extends FFError {
 	/**
