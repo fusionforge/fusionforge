@@ -450,6 +450,8 @@ class CliActions {
 		if ($docgroup && is_object($docgroup) && !$docgroup->isError()) {
 			$dm = new DocumentManager($docgroup->getGroup());
 			if ($dm && is_object($dm) && !$dm->isError()) {
+				$docgroupDump = (array)$docgroup;
+				unset($docgroupDump['Group']);
 				$docgroupDump['subdocgroups'] = $dm->getTree($docgroup_id);
 				$df = new DocumentFactory($docgroup->getGroup());
 				$df->setDocGroupID($docgroup_id);
@@ -465,6 +467,21 @@ class CliActions {
 		ksort($docgroupDump);
 		$this->print_result($docgroupDump, $format);
 		return $docgroupDump;
+	}
+
+	function docgroupImport() {
+		$stream = $this->loadFile($file, $format);
+		if (!$stream) {
+			return false;
+		}
+		$group_id = $stream['document']['data_array']['group_id'];
+		$group = group_get_object($group_id);
+		$importSerialIdRef = array();
+		if ($group && is_object($group) && !$group->isError() && $group->usesDocman()) {
+			//TODO: do it!
+		} else {
+			echo _('Unable to get project to inject document group')._(': ').$group_id."\n";
+		}
 	}
 
 	function docmanDump($group_id, $format = 'json') {
