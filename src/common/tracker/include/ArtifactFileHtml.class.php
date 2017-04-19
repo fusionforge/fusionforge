@@ -30,7 +30,7 @@ class ArtifactFileHtml extends ArtifactFile {
 
 	function upload($input_file,$input_file_name,$input_file_type,$description) {
 		if (!util_check_fileupload($input_file)) {
-			$this->setError(_('ArtifactFile')._(': ')._('Invalid filename'));
+			$this->setError(_('ArtifactFile')._(': ')._('Invalid file name.'));
 			return false;
 		}
 		$size = @filesize($input_file);
