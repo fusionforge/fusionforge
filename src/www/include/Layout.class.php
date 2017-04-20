@@ -40,7 +40,7 @@ require_once $gfcommon.'include/constants.php';
 require_once $gfcommon.'include/FusionForge.class.php';
 require_once $gfcommon.'include/Navigation.class.php';
 
-class Layout extends FFError {
+abstract class Layout extends FFError {
 
 	/**
 	 * Which doctype to use. Can be configured in the
@@ -571,22 +571,7 @@ if (isset($params['group']) && $params['group']) {
 	 * @param   string  $id
 	 * @return	string	the html code
 	 */
-	function boxTop($title, $id = '') {
-		return '
-			<!-- Box Top Start -->
-			<table class="fullwidth">
-			<tr class="align-center">
-			<td class="top align-right" width="10"><img src="'.$this->imgbaseurl.'clear.png" width="10" height="20" alt="" /></td>
-			<td class="fullwidth"><span class="titlebar">'.$title.'</span></td>
-			<td class="top" width="10"><img src="'.$this->imgbaseurl.'clear.png" width="10" height="20" alt="" /></td>
-			</tr>
-			<tr>
-			<td colspan="3">
-			<table class="fullwidth">
-			<tr class="align-left">
-			<td colspan="2">
-			<!-- Box Top End -->';
-	}
+	abstract function boxTop($title, $id = '');
 
 	/**
 	 * boxMiddle() - Middle HTML box.
@@ -595,35 +580,14 @@ if (isset($params['group']) && $params['group']) {
 	 * @param   string  $id
 	 * @return	string	The html code
 	 */
-	function boxMiddle($title, $id = '') {
-		return '
-			<!-- Box Middle Start -->
-			</td>
-			</tr>
-			<tr class="align-center">
-			<td colspan="2"><span class="titlebar">'.$title.'</span></td>
-			</tr>
-			<tr class="align-left">
-			<td colspan="2">
-			<!-- Box Middle End -->';
-	}
+	abstract function boxMiddle($title, $id = '');
 
 	/**
 	 * boxBottom() - Bottom HTML box.
 	 *
 	 * @return	string	the html code
 	 */
-	function boxBottom() {
-		return '
-			<!-- Box Bottom Start -->
-			</td>
-			</tr>
-			</table>
-			</td>
-			</tr>
-			</table><br />
-			<!-- Box Bottom End -->';
-	}
+	abstract function boxBottom();
 
 	/**
 	 * listTableTop() - Takes an array of titles and builds the first row of a new table.
