@@ -99,11 +99,6 @@ abstract class Layout extends FFError {
 	 */
 	var $navigation;
 
-	/**
-	 * The color bars in pm reporting
-	 */
-	var $COLOR_LTBACK1 = '#C0C0C0';
-
 	var $js = array();
 	var $js_min = array();
 	var $javascripts = array();
