@@ -60,14 +60,16 @@ class ArtifactExpression extends FFError {
 
 	public function __construct()
 	{
-		$this->functionsDescription['in_array'] = _('Test if a value is in an (json) array');
-		$this->functionsDescription['datetime_add'] = _('Add to a date/time a duration (duration in ISO 8601 Format)');
+		$this->functionsDescription['in_array'] = _('Checks if a value exists in an (json) array');
+		$this->functionsDescription['datetime_add'] = _('Adds to a date/time a duration (duration in ISO 8601 Format)');
+		$this->functionsDescription['datetime_sub'] = _('Subtracts to a date/time a duration (duration in ISO 8601 Format)');
 		$this->functionsDescription['intval'] = _('Get the integer value of a variable');
 		$this->expression = new Expression;
 		$this->expression->suppress_errors = true;
 		$this->expression->fb = array();
 		$this->expression->functions ['in_array'] = 'expr_in_array';
 		$this->expression->functions ['datetime_add'] = 'expr_datetime_add';
+		$this->expression->functions ['datetime_sub'] = 'expr_datetime_sub';
 		$this->expression->functions ['intval'] = 'expr_intval';
 	}
 
@@ -145,6 +147,22 @@ function expr_datetime_add($datetime, $interval) {
 		return '';
 	}
 	$dateTimeObj->add($intervalObj);
+	return $dateTimeObj->format(_('Y-m-d H:i'));
+}
+
+function expr_datetime_sub($datetime, $interval) {
+	if (!trim($datetime)) {
+		return '';
+	}
+	$dateTimeObj = DateTime::createFromFormat(_('Y-m-d H:i'), $datetime);
+	if (!$dateTimeObj) {
+		return '';
+	}
+	$intervalObj = new DateInterval($interval);
+	if (!$intervalObj) {
+		return '';
+	}
+	$dateTimeObj->sub($intervalObj);
 	return $dateTimeObj->format(_('Y-m-d H:i'));
 }
 
