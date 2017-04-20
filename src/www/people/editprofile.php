@@ -241,8 +241,8 @@ if (session_loggedin()) {
 		<p>
 		<strong>'._('Publicly Viewable')._(':').'</strong><br />
 		<input type="hidden" name="form_key" value="'.form_generate_key().'">
-		<input type="radio" name="people_view_skills" value="0" '. ((db_result($result,0,'people_view_skills')==0)?'checked="checked"':'') .' /> <strong>'._('No').'</strong><br />
-		<input type="radio" name="people_view_skills" value="1" '. ((db_result($result,0,'people_view_skills')==1)?'checked="checked"':'') .' /> <strong>'._('Yes').'</strong></p>
+		<input id="people_view_skills_no" type="radio" name="people_view_skills" value="0" '. ((db_result($result,0,'people_view_skills')==0)?'checked="checked"':'') .' /> <label for="people_view_skills_no"><strong>'._('No').'</strong></label><br />
+		<input id="people_view_skills_yes" type="radio" name="people_view_skills" value="1" '. ((db_result($result,0,'people_view_skills')==1)?'checked="checked"':'') .' /> <label for="people_view_skills_yes"><strong>'._('Yes').'</strong></label></p>
 		<p>
 		<input type="submit" name="update_profile" value="'._('Update Permissions').'"></p>';
 		echo $HTML->closeForm();
