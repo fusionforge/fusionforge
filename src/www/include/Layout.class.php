@@ -509,36 +509,7 @@ if (isset($params['group']) && $params['group']) {
 
 	}
 
-	function footer($params = array()) {
-
-	?>
-
-			<!-- end main body row -->
-
-				</td>
-				<td width="10" class="footer3" ><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="2" height="1" alt="" /></td>
-			</tr>
-			<tr>
-				<td class="align-left footer1" width="9"></td>
-				<td class="footer3"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="1" height="1" alt="" /></td>
-				<td class="align-right footer1" width="9"></td>
-			</tr>
-			</table>
-
-		<!-- end inner body row -->
-
-		</td>
-		<td width="10" class="footer2"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="2" height="1" alt="" /></td>
-	</tr>
-	<tr>
-		<td class="align-left footer2" width="9"></td>
-		<td class="footer2" colspan="3"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="1" height="1" alt="" /></td>
-		<td class="align-right footer2" width="9"></td>
-	</tr>
-</table>
-<?php
-		$this->footerEnd();
-	}
+	abstract function footer($params = array());
 
 	function footerEnd() { ?>
 

@@ -161,15 +161,6 @@ table.listing tbody tr:nth-child(odd),
 	text-decoration: none;
 }
 
-td.footer1,
-td.footer2 {
-	background-color: #E0E0E0;
-}
-
-td.footer3 {
-	background-color: #fff;
-}
-
 td.notseltab {
 	background-color: #909090;
 }
