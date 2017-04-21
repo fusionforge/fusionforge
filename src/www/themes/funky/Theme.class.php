@@ -39,6 +39,65 @@ class Theme_Funky extends Layout {
 		$this->addStylesheet('/scripts/jquery-ui/css/overcast/jquery-ui.theme-1.12.1.css');
 	}
 
+	/**
+	 * headerJS() - creates the JS headers and calls the plugin javascript hook
+	 * @todo generalize this
+	 */
+	function headerJS() {
+		global $use_tooltips;
+
+		echo html_e('script', array('type' => 'text/javascript', 'src' => util_make_uri('/js/common.js')), '', false);
+		plugin_hook("javascript_file");
+
+		// invoke the 'javascript' hook for custom javascript addition
+		$params = array('return' => false);
+		plugin_hook("javascript", $params);
+		$javascript = $params['return'];
+		if($javascript) {
+			echo html_ao('script', array('type' => 'text/javascript')).'//<![CDATA['."\n";
+			echo $javascript;
+			echo "\n".'//]]'."\n";
+			echo html_ac(html_ap() -1);
+		}
+		html_use_storage();
+		html_use_coolfieldset();
+		html_use_jqueryui();
+		echo $this->getJavascripts();
+		echo html_ao('script', array('type' => 'text/javascript'));
+		echo '	//<![CDATA[
+			jQuery(window).load(function(){
+				setTimeout("jQuery(\'.feedback\').hide(\'slow\')", 5000);
+				setInterval(function() {
+						setTimeout("jQuery(\'.feedback\').hide(\'slow\')", 5000);
+					}, 5000);
+				jQuery("button").button();
+				jQuery(":submit").button();
+				jQuery(":reset").button();
+				jQuery(":button").button();
+				jQuery("#tabber").tabs();
+			});
+			//]]>'."\n";
+		if ($use_tooltips) {
+			echo '	jQuery(document).ready(
+					function() {
+						jQuery(document).tooltip({
+								show: {
+									effect: \'slideDown\'
+									},
+								track: true,
+								open: function (event, ui) {
+									setTimeout(function () {
+										jQuery(ui.tooltip).hide(\'slideUp\');
+										}, 5000);
+									}
+								});
+					}
+				);'."\n";
+		}
+		echo html_ac(html_ap() -1);
+	}
+}
+
 	function bodyHeader($params) {
 		if (!isset($params['h1']) && isset($params['title'])) {
 			$params['h1'] = $params['title'];
@@ -59,7 +118,7 @@ class Theme_Funky extends Layout {
 		}
 		$params['links'] = &$links;
 		plugin_hook('headermenu', $params);
-		$template = isset($params['template']) ?  $params['template'] : ' | ';
+		$template = isset($params['template']) ? $params['template'] : ' | ';
 		$cells[] = array(implode($template, $links), 'id' => 'header-col2');
 		echo $this->multiTableRow(array(), $cells);
 		$cells = array();
@@ -185,7 +244,7 @@ class Theme_Funky extends Layout {
 		return html_ac(html_ap() -1).'<!-- class="box-surround" -->'."\n";
 	}
 
-	function tabGenerator($tabs_dirs, $tabs_titles, $tabs_tooltips, $nested=false,  $selected=false, $sel_tab_bgcolor='white',  $total_width='100%') {
+	function tabGenerator($tabs_dirs, $tabs_titles, $tabs_tooltips, $nested=false, $selected=false, $sel_tab_bgcolor='white', $total_width='100%') {
 		$count = count($tabs_dirs);
 
 		if ($count < 1) {
@@ -213,7 +272,7 @@ class Theme_Funky extends Layout {
 			$attrs['style'] = 'width:'.$tabwidth.'%';
 			$return .= html_ao('td', $attrs);
 			$attrs = array();
-			$attrs['id'] =  md5($tabs_dirs[$i]);
+			$attrs['id'] = md5($tabs_dirs[$i]);
 			$attrs['href'] = $tabs_dirs[$i];
 			if (preg_match('/^https?:\/\//', $tabs_dirs[$i])) {
 				$attrs['target'] = '_blank';
@@ -263,7 +322,7 @@ class Theme_Funky extends Layout {
 	 * @return	string	Html to build a submenu.
 	 */
 	function printSubMenu($title_arr, $links_arr, $attr_arr) {
-		$count  = count($title_arr) - 1;
+		$count = count($title_arr) - 1;
 		$return = '';
 
 		if (!count($attr_arr)) {
@@ -292,70 +351,11 @@ class Theme_Funky extends Layout {
 	 * @return	string	Html to build a submenu.
 	 */
 	function subMenu($title_arr, $links_arr, $attr_arr = array()) {
-		$return  = $this->beginSubMenu();
+		$return = $this->beginSubMenu();
 		$return .= $this->printSubMenu($title_arr, $links_arr, $attr_arr);
 		$return .= $this->endSubMenu();
 		return $return;
 	}
-
-	/**
-	 * headerJS() - creates the JS headers and calls the plugin javascript hook
-	 * @todo generalize this
-	 */
-	function headerJS() {
-		global $use_tooltips;
-
-		echo html_e('script', array('type' => 'text/javascript', 'src' => util_make_uri('/js/common.js')), '', false);
-		plugin_hook("javascript_file");
-
-		// invoke the 'javascript' hook for custom javascript addition
-		$params = array('return' => false);
-		plugin_hook("javascript", $params);
-		$javascript = $params['return'];
-		if($javascript) {
-			echo html_ao('script', array('type' => 'text/javascript')).'//<![CDATA['."\n";
-			echo $javascript;
-			echo "\n".'//]]'."\n";
-			echo html_ac(html_ap() -1);
-		}
-		html_use_storage();
-		html_use_coolfieldset();
-		html_use_jqueryui();
-		echo $this->getJavascripts();
-		echo html_ao('script', array('type' => 'text/javascript'));
-		echo '	//<![CDATA[
-			jQuery(window).load(function(){
-				setTimeout("jQuery(\'.feedback\').hide(\'slow\')", 5000);
-				setInterval(function() {
-						setTimeout("jQuery(\'.feedback\').hide(\'slow\')", 5000);
-					}, 5000);
-				jQuery("button").button();
-				jQuery(":submit").button();
-				jQuery(":reset").button();
-				jQuery(":button").button();
-				jQuery("#tabber").tabs();
-			});
-			//]]>'."\n";
-		if ($use_tooltips) {
-			echo '	jQuery(document).ready(
-					function() {
-						jQuery(document).tooltip({
-								show: {
-									effect: \'slideDown\'
-									},
-								track: true,
-								open: function (event, ui) {
-									setTimeout(function () {
-										jQuery(ui.tooltip).hide(\'slideUp\');
-										}, 5000);
-									}
-								});
-					}
-				);'."\n";
-		}
-		echo html_ac(html_ap() -1);
-	}
-}
 
 // Local Variables:
 // mode: php
