@@ -185,7 +185,7 @@ class Theme_Funky extends Layout {
 		return html_ac(html_ap() -1).'<!-- class="box-surround" -->'."\n";
 	}
 
-	function tabGenerator($tabs_dirs, $tabs_titles, $tabs_tooltips, $nested=false,  $selected=false, $sel_tab_bgcolor='WHITE',  $total_width='100%') {
+	function tabGenerator($tabs_dirs, $tabs_titles, $tabs_tooltips, $nested=false,  $selected=false, $sel_tab_bgcolor='white',  $total_width='100%') {
 		$count = count($tabs_dirs);
 
 		if ($count < 1) {
