@@ -1209,19 +1209,19 @@ if (isset($params['group']) && $params['group']) {
 		if (!$readonly) {
 			if ($widget->canBeRemove()) {
 				echo html_e('div', array('class' => 'widget_titlebar_close'),
-					util_make_link('/widgets/updatelayout.php?owner='.$owner_type.$owner_id.'&action=widget&name['.$widget->id.'][remove]='.$widget->getInstanceId().'&column_id='.$column_id.'&layout_id='.$layout_id, $this->getPicto('ic/close.png', _('Close'), _('Close'))));
+					util_make_link('/widgets/updatelayout.php?owner='.$owner_type.$owner_id.'&action=widget&name%5B'.$widget->id.'%5D%5Bremove%5D='.$widget->getInstanceId().'&column_id='.$column_id.'&layout_id='.$layout_id, $this->getPicto('ic/close.png', _('Close'), _('Close'))));
 			}
 			if ($widget->canBeMinize()) {
 				if ($is_minimized) {
 					echo html_e('div', array('class' => 'widget_titlebar_maximize'),
-						util_make_link('/widgets/updatelayout.php?owner='.$owner_type.$owner_id.'&action=maximize&name['.$widget->id.']='.$widget->getInstanceId().'&column_id='.$column_id.'&layout_id='.$layout_id, $this->getPicto($this->_getTogglePlusForWidgets(), _('Maximize'), _('Maximize'))));
+						util_make_link('/widgets/updatelayout.php?owner='.$owner_type.$owner_id.'&action=maximize&name%5B'.$widget->id.'%5D='.$widget->getInstanceId().'&column_id='.$column_id.'&layout_id='.$layout_id, $this->getPicto($this->_getTogglePlusForWidgets(), _('Maximize'), _('Maximize'))));
 				} else {
 					echo html_e('div', array('class' => 'widget_titlebar_minimize'),
-						util_make_link('/widgets/updatelayout.php?owner='.$owner_type.$owner_id.'&action=minimize&name['.$widget->id.']='.$widget->getInstanceId().'&column_id='.$column_id.'&layout_id='.$layout_id, $this->getPicto($this->_getToggleMinusForWidgets(), _('Minimize'), _('Minimize'))));
+						util_make_link('/widgets/updatelayout.php?owner='.$owner_type.$owner_id.'&action=minimize&name%5B'.$widget->id.'%5D='.$widget->getInstanceId().'&column_id='.$column_id.'&layout_id='.$layout_id, $this->getPicto($this->_getToggleMinusForWidgets(), _('Minimize'), _('Minimize'))));
 				}
 			}
 			if (strlen($widget->hasPreferences())) {
-				$url = '/widgets/updatelayout.php?owner='.$owner_type.$owner_id.'&action=preferences&name['.$widget->id.']='.$widget->getInstanceId().'&layout_id='.$layout_id;
+				$url = '/widgets/updatelayout.php?owner='.$owner_type.$owner_id.'&action=preferences&name%5B'.$widget->id.'%5D='.$widget->getInstanceId().'&layout_id='.$layout_id;
 				if ($owner_type == WidgetLayoutManager::OWNER_TYPE_TRACKER) {
 					$url .= '&func='.getStringFromRequest('func');
 					if (getIntFromRequest('aid')) {
