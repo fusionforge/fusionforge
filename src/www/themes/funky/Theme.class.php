@@ -78,13 +78,13 @@ class Theme_Funky extends Layout {
 
 		plugin_hook('message');
 
-		if(isset($GLOBALS['error_msg']) && $GLOBALS['error_msg']) {
+		if (isset($GLOBALS['error_msg']) && $GLOBALS['error_msg']) {
 			echo $this->error_msg($GLOBALS['error_msg']);
 		}
-		if(isset($GLOBALS['warning_msg']) && $GLOBALS['warning_msg']) {
+		if (isset($GLOBALS['warning_msg']) && $GLOBALS['warning_msg']) {
 			echo $this->warning_msg($GLOBALS['warning_msg']);
 		}
-		if(isset($GLOBALS['feedback']) && $GLOBALS['feedback']) {
+		if (isset($GLOBALS['feedback']) && $GLOBALS['feedback']) {
 			echo $this->feedback($GLOBALS['feedback']);
 		}
 
