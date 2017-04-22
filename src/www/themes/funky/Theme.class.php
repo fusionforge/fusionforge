@@ -96,7 +96,6 @@ class Theme_Funky extends Layout {
 		}
 		echo html_ac(html_ap() -1);
 	}
-}
 
 	function bodyHeader($params) {
 		if (!isset($params['h1']) && isset($params['title'])) {
@@ -356,6 +355,7 @@ class Theme_Funky extends Layout {
 		$return .= $this->endSubMenu();
 		return $return;
 	}
+}
 
 // Local Variables:
 // mode: php
