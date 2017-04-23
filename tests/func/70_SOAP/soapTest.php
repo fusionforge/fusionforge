@@ -32,9 +32,11 @@ class SoapTest extends FForge_SeleniumTestCase
 		$this->session = NULL;
 		$this->soapclient = NULL;
 
-		$this->soapclient = new SoapClient(WSDL_URL,
-						array('cache_wsdl' => WSDL_CACHE_NONE,
-							'trace' => true));
+		$soapclient = new SoapClient(WSDL_URL,
+					array('cache_wsdl' => WSDL_CACHE_NONE,
+						'stream_context' => stream_context_create(array('ssl' => array('verify_peer' => false,
+														'verify_peer_name' => false,
+														'allow_self_signed' => true)))));
 
 		$this->assertNotNull($this->soapclient);
 	}
