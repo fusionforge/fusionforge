@@ -32,7 +32,7 @@ class repositoryapiPlugin extends Plugin {
 
 	public function register_soap(&$params) {
 		$server = &$params['server'];
-		$uri = 'http://'.forge_get_config('web_host');
+		$uri = util_make_url();
 
 		$server->wsdl->addComplexType(
 			'RepositoryAPIRepositoryInfo',
@@ -57,7 +57,7 @@ class repositoryapiPlugin extends Plugin {
 			array(),
 			array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:RepositoryAPIRepositoryInfo[]')),
 			'tns:RepositoryAPIRepositoryInfo');
-               
+
 		$server->register(
 			'repositoryapi_repositoryList',
 			array('session_ser'=>'xsd:string',
@@ -99,7 +99,7 @@ class repositoryapiPlugin extends Plugin {
 			array(),
 			array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:RepositoryAPIActivity[]')),
 			'tns:RepositoryAPIActivity');
-               
+
 		$server->wsdl->addComplexType(
 			'RepositoryAPIActivityReturn',
 			'complexType',
