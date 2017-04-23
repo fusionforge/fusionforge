@@ -118,7 +118,7 @@ class RepositoryAPI extends FForge_SeleniumTestCase
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectB");
 		$this->clickAndWait("link=SCM");
-		$p = $this->getText("//tt[contains(.,'svn checkout --username ".FORGE_ADMIN_USERNAME." http')]");
+		$p = $this->getText("//span[contains(.,'svn checkout --username ".FORGE_ADMIN_USERNAME." http')]");
 		$p = preg_replace(",^svn checkout --username ".FORGE_ADMIN_USERNAME." ,", "", $p);
 
 		// Create a local clone, add stuff, push it to the repo
