@@ -37,6 +37,9 @@ class CliActions {
 				  "   pretty json formated string output\n".
 				  " - raw: (default)\n".
 				  "   standard PHP array print_r format\n";
+		$importFormatInfo = "The <file> must contain the exact information to import.\n".
+				    "Best practice is to reuse the result of an export and modify it.\n".
+				    "Use getZipDump function to get binary organization sample.\n";
 		switch ($method) {
 			case 'help':
 				echo "Use: .../forge help ($methods)\n";
@@ -64,6 +67,11 @@ class CliActions {
 				echo "Use: .../forge documentDump <docid> [json|raw]\n";
 				echo "to dump a document from a specific project.\n";
 				echo $dumpFormatInfo;
+				break;
+			case 'documentImport':
+				echo "Use: .../forge documentImport <file> [json|raw]\n";
+				echo "to import a document.\n";
+				echo $dumpFormatInfo.$importFormatInfo;
 				break;
 			case 'docgroupDump':
 				echo "Use: .../forge docgroupDump <docgroupid> [json|raw]\n";
@@ -319,31 +327,32 @@ class CliActions {
 	}
 
 	function documentDump($docid, $format = 'json') {
-		$documentDump['id'] = $docid;
 		$doc = document_get_object($docid);
 		if ($doc && is_object($doc) && !$doc->isError()) {
 			$dvf = new DocumentVersionFactory($doc);
+			$documentDump = (array)$doc;
+			unset($documentDump['Group']);
 			$documentDump['versions'] = $dvf->getVersions();
 			$serialIDs = $dvf->getSerialIDs();
 			$drf = new DocumentReviewFactory($doc);
 			$documentDump['reviews'] = $drf->getReviews($serialIDs);
-			$documentDump['document'] = (array)$doc;
-			unset($documentDump['document']['Group']);
 			$documentDump['monitor'] = $doc->getMonitorIds();
 		} else {
 			$documentDump['error'][] = _('Unable to get document id')._(': ').$docid;
 		}
+		$documentDump['id'] = $docid;
 		ksort($documentDump);
 		$this->print_result($documentDump, $format);
 		return $documentDump;
 	}
 
 	function documentImport($file, $format = 'json') {
+		global $importRefMapping;
 		$stream = $this->loadFile($file, $format);
 		if (!$stream) {
 			return false;
 		}
-		$group_id = $stream['document']['data_array']['group_id'];
+		$group_id = $this->getMappingId($stream['data_array']['group_id'], 'group');
 		$group = group_get_object($group_id);
 		$importSerialIdRef = array();
 		if ($group && is_object($group) && !$group->isError() && $group->usesDocman()) {
@@ -368,20 +377,22 @@ class CliActions {
 					$filedatatype = $version['filetype'];
 					$filedataname = '';
 				}
-				$doc_group_id = $stream['document']['data_array']['doc_group'];
+
+				$doc_group_id = $this->getMappingId($stream['data_array']['doc_group'], 'doc_group');
 				$doc_group = documentgroup_get_object_byid($doc_group_id);
 				if (!$doc_group || !is_object($doc_group) || $doc_group->isError()) {
 					echo _('Invalid document group (folder)')._(': ').$doc_group_id."\n";
 					db_rollback();
 					return false;
 				}
-				$importData['user'] = $version['created_by'];
+				$created_by = $this->getMappingId($version['created_by'], 'user');
+				$importData['user'] = $created_by;
 				$importData['nopermcheck'] = true;
 				$importData['nonotice'] = true;
 				$importData['time'] = $version['createdate'];
 				if ($firstversion == true) {
 					$d = new Document($group);
-					if (!$d->create($version['filename'], $filedatatype, $filedataname, $doc_group_id, $version['title'], $version['description'], $stream['document']['data_array']['stateid'], $version['vcomment'], $importData)) {
+					if (!$d->create($version['filename'], $filedatatype, $filedataname, $doc_group_id, $version['title'], $version['description'], $stream['data_array']['stateid'], $version['vcomment'], $importData)) {
 						echo $d->getErrorMessage()."\n";
 						db_rollback();
 						return false;
@@ -389,7 +400,7 @@ class CliActions {
 						$firstversion = false;
 					}
 				} else {
-					if (!$d->update($version['filename'], $filedatatype, $filedataname, $doc_group_id, $version['title'], $version['description'], $stream['document']['data_array']['stateid'], 0, $version['current_version'], 1, $importData, $version['vcomment'])) {
+					if (!$d->update($version['filename'], $filedatatype, $filedataname, $doc_group_id, $version['title'], $version['description'], $stream['data_array']['stateid'], 0, $version['current_version'], 1, $importData, $version['vcomment'])) {
 						echo $d->getErrorMessage()."\n";
 						db_rollback();
 						return false;
@@ -404,13 +415,15 @@ class CliActions {
 					$reviewmandatoryusers = array();
 					$reviewoptionalusers = array();
 					foreach($review['users'] as $reviewuser) {
+						$userid = $this->getMappingId($reviewuser['userid'], 'user');
 						if ($reviewuser['typeid'] == 1) {
-							$reviewmandatoryusers[] = $reviewuser['userid'];
+							$reviewmandatoryusers[] = $userid;
 						} elseif ($reviewuser['typeid'] == 2) {
-							$reviewoptionalusers[] = $reviewuser['userid'];
+							$reviewoptionalusers[] = $userid;
 						}
 					}
-					$importData['user'] = $review['created_by'];
+					$created_by = $this->getMappingId($review['created_by'], 'user');
+					$importData['user'] = $created_by;
 					$importData['startdate'] = $review['startdate'];
 					$importData['enddate'] = $review['enddate'];
 					$importData['nonotice'] = true;
@@ -426,7 +439,7 @@ class CliActions {
 								db_rollback();
 								return false;
 							} else {
-								if ($comment['attachment']['storageref'] != null) {
+								if (isset($comment['attachment']['storageref']) && $comment['attachment']['storageref'] != null) {
 									if (!$nc->attachFile($comment['attachment']['data_array']['filename'], $comment['attachment']['data_array']['filetype'], $comment['attachment']['data_array']['createdate'], $comment['attachment']['storageref'])) {
 										echo $nc->getErrorMessage()."\n";
 										db_rollback();
@@ -439,13 +452,16 @@ class CliActions {
 				}
 			}
 			db_commit();
+			$importRefMapping['document'][$stream['data_array']['docid']] = $d->getID();
+			echo _('Document injected')."\n";
+			return true;
 		} else {
 			echo _('Unable to get project to inject document')._(': ').$group_id."\n";
+			return false;
 		}
 	}
 
 	function docgroupDump($docgroup_id, $format = 'json') {
-		$docgroupDump['id'] = $docgroup_id;
 		$docgroup = documentgroup_get_object_byid($docgroup_id);
 		if ($docgroup && is_object($docgroup) && !$docgroup->isError()) {
 			$dm = new DocumentManager($docgroup->getGroup());
@@ -464,23 +480,37 @@ class CliActions {
 		} else {
 			$docgroupDump['error'][] = _('Unable to get docgroup id')._(': ').$docgroup_id;
 		}
+		$docgroupDump['id'] = $docgroup_id;
 		ksort($docgroupDump);
 		$this->print_result($docgroupDump, $format);
 		return $docgroupDump;
 	}
 
-	function docgroupImport() {
+	function docgroupImport($file, $format = 'json') {
+		global $importRefMapping;
 		$stream = $this->loadFile($file, $format);
 		if (!$stream) {
 			return false;
 		}
-		$group_id = $stream['document']['data_array']['group_id'];
+		$group_id = $this->getMappingId($stream['data_array']['group_id'], 'group');
 		$group = group_get_object($group_id);
 		$importSerialIdRef = array();
 		if ($group && is_object($group) && !$group->isError() && $group->usesDocman()) {
-			//TODO: do it!
+			db_begin();
+			$dg = new DocumentGroup($group);
+			$parent_doc_group = $this->getMappingId($stream['data_array']['parent_doc_group'], 'doc_group');
+			if (!$dg->create($stream['data_array']['groupname'], $parent_doc_group, $stream['data_array']['stateid'], $stream['data_array']['createdate'])) {
+				echo $dg->getErrorMessage()."\n";
+				db_rollback();
+				return false;
+			}
+			db_commit();
+			$importRefMapping['doc_group'][$stream['data_array']['doc_group']] = $dg->getID();
+			echo _('Document Group injected')."\n";
+			return true;
 		} else {
 			echo _('Unable to get project to inject document group')._(': ').$group_id."\n";
+			return false;
 		}
 	}
 
@@ -604,6 +634,15 @@ class CliActions {
 		}
 		unset($stream_ori);
 		return $stream;
+	}
+
+	function getMappingId($idtofind, $objecttofind) {
+		if (isset($importRefMapping[$objecttofind][$idtofind])) {
+			return $importRefMapping[$objecttofind][$idtofind];
+		} else {
+			//not found, return the idtofind.
+			return $idtofind;
+		}
 	}
 }
 
