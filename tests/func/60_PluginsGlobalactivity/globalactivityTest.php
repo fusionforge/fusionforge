@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright 2011, Roland Mas
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013,2017, Franck Villaume - TrivialDev
  * Copyright (C) 2015  Inria (Sylvain Beucler)
  *
  * This file is part of FusionForge.
@@ -125,7 +125,11 @@ class GlobalActivity extends FForge_SeleniumTestCase
 
 		// Check SOAP
 
-		$soapclient = new SoapClient(WSDL_URL);
+		$soapclient = new SoapClient(WSDL_URL,
+					array('cache_wsdl' => WSDL_CACHE_NONE,
+						'stream_context' => stream_context_create(array('ssl' => array('verify_peer' => false,
+														'verify_peer_name' => false,
+														'allow_self_signed' => true)))));
 		$this->assertNotNull($soapclient);
 
 		$userid = FORGE_ADMIN_USERNAME;
