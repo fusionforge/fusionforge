@@ -26,29 +26,29 @@ set -e
 
 # Install FusionForge packages
 if [ -e /etc/debian_version ]; then
-    export DEBIAN_FRONTEND=noninteractive
-    export UCF_FORCE_CONFFNEW=yes
-    export LANG=C
-    APT="apt-get -y -o Dpkg::Options::=--force-confnew"
-    backports_deb
-    if dpkg-query -s fusionforge >/dev/null 2>&1; then
-	# Already installed, upgrading
-	$APT dist-upgrade
-    else
-	# Initial installation
-	$APT install fusionforge
+	export DEBIAN_FRONTEND=noninteractive
+	export UCF_FORCE_CONFFNEW=yes
+	export LANG=C
+	APT="apt-get -y -o Dpkg::Options::=--force-confnew"
+	backports_deb
+	if dpkg-query -s fusionforge >/dev/null 2>&1; then
+		# Already installed, upgrading
+		$APT dist-upgrade
+	else
+		# Initial installation
+		$APT install fusionforge
 
-	# Additional components for testsuite
-	$APT install fusionforge-shell fusionforge-scm \
-	    fusionforge-plugin-scmcvs fusionforge-plugin-scmsvn fusionforge-plugin-scmgit fusionforge-plugin-scmbzr \
-	    fusionforge-plugin-moinmoin \
-	    fusionforge-plugin-blocks fusionforge-plugin-taskboard \
-	    fusionforge-plugin-message fusionforge-plugin-repositoryapi
-	$APT install dpkg-dev
-	if ! dpkg-vendor --is Ubuntu; then
-	    apt-get install locales-all  # https://bugs.launchpad.net/ubuntu/+source/glibc/+bug/1394929
+		# Additional components for testsuite
+		$APT install fusionforge-shell fusionforge-scm \
+		fusionforge-plugin-scmcvs fusionforge-plugin-scmsvn fusionforge-plugin-scmgit fusionforge-plugin-scmbzr \
+		fusionforge-plugin-moinmoin \
+		fusionforge-plugin-blocks fusionforge-plugin-taskboard \
+		fusionforge-plugin-message fusionforge-plugin-repositoryapi
+		$APT install dpkg-dev
+		if ! dpkg-vendor --is Ubuntu; then
+		apt-get install locales-all  # https://bugs.launchpad.net/ubuntu/+source/glibc/+bug/1394929
+		fi
 	fi
-    fi
 elif [ -e /etc/SuSE-release ]; then
 	suse_check_release
 	suse_install_repos
@@ -59,17 +59,18 @@ elif [ -e /etc/SuSE-release ]; then
 			fusionforge-plugin-scmcvs fusionforge-plugin-scmsvn fusionforge-plugin-scmgit \
 			fusionforge-plugin-blocks fusionforge-plugin-online_help fusionforge-plugin-taskboard \
 			fusionforge-plugin-message
+	fi
 else
-    yum install -y make tar
-    backports_rpm
-    if rpm -q fusionforge >/dev/null ; then
-	yum upgrade -y
-    else
-	# Initial installation
-	yum --enablerepo=epel install -y fusionforge fusionforge-shell fusionforge-scm \
-	    fusionforge-plugin-scmcvs fusionforge-plugin-scmsvn fusionforge-plugin-scmgit \
-	    fusionforge-plugin-blocks fusionforge-plugin-taskboard \
-	    fusionforge-plugin-message fusionforge-plugin-moinmoin \
-	    fusionforge-plugin-globalactivity fusionforge-plugin-repositoryapi
-    fi
+	yum install -y make tar
+	backports_rpm
+	if rpm -q fusionforge >/dev/null ; then
+		yum upgrade -y
+	else
+		# Initial installation
+		yum --enablerepo=epel install -y fusionforge fusionforge-shell fusionforge-scm \
+		fusionforge-plugin-scmcvs fusionforge-plugin-scmsvn fusionforge-plugin-scmgit \
+		fusionforge-plugin-blocks fusionforge-plugin-taskboard \
+		fusionforge-plugin-message fusionforge-plugin-moinmoin \
+		fusionforge-plugin-globalactivity fusionforge-plugin-repositoryapi
+	fi
 fi
