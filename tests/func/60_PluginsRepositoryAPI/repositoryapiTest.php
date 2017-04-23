@@ -142,13 +142,15 @@ class RepositoryAPI extends FForge_SeleniumTestCase
 
 		// Check SOAP
 		$soapclient = new SoapClient(WSDL_URL,
-		array('cache_wsdl' => WSDL_CACHE_NONE,
-		'trace' => true));
+					array('cache_wsdl' => WSDL_CACHE_NONE,
+						'stream_context' => stream_context_create(array('ssl' => array('verify_peer' => false,
+														'verify_peer_name' => false,
+														'allow_self_signed' => true)))));
 		$this->assertNotNull($soapclient);
-		
+
 		$userid = FORGE_ADMIN_USERNAME;
 		$passwd = FORGE_ADMIN_PASSWORD;
-		
+
 		$response = $soapclient->login($userid, $passwd);
 		$session = $response;
 		$this->assertNotEquals($session,"");
@@ -185,12 +187,12 @@ class RepositoryAPI extends FForge_SeleniumTestCase
 		$response = $soapclient->repositoryapi_repositoryInfo($session,'projecta/git/projecta');
 		$this->assertNotEquals(NULL,$response);
 		$this->assertEquals(3,count($response->repository_urls));
-		
+
 		$response = $soapclient->repositoryapi_repositoryInfo($session,'projectb/svn/projectb');
 		$this->assertNotEquals(NULL,$response);
 		$this->assertEquals(4,count($response->repository_urls));
 
-		// Get activities for repositories		
+		// Get activities for repositories
 		$response = $soapclient->repositoryapi_repositoryActivity($session,$t0,time(),0,0);
 		$this->assertNotEquals(NULL,$response);
 		$this->assertEquals(5,count($response->activities));
