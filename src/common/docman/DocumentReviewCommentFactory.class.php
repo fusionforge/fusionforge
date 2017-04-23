@@ -66,8 +66,6 @@ class DocumentReviewCommentFactory extends FFError {
 					$drca = new DocumentReviewCommentAttachment($attachid);
 					$commentsArr[$i]->attachment = $drca;
 					$commentsArr[$i]->attachment->storageref = $drca->getFilePath();
-				} else {
-					$commentsArr[$i]->attachment->storageref = null;
 				}
 				$i++;
 			}
