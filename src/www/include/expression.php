@@ -170,16 +170,16 @@ class Expression {
 		}
 		return $output;
 	}
-	
+
 	// ===================== HERE BE INTERNAL METHODS ====================\\
-	
+
 	// Convert infix to postfix notation
 	function nfx($expr) {
 		$index = 0;
 		$stack = new ExpressionStack ();
 		$output = array (); // postfix form of expression, to be passed to pfx()
 		$expr = trim ($expr);
-		
+
 		$ops = array ('+', '-', '*', '/', '^', '_', '%', '>', '<', '>=', '<=', '==', '!=', '=~', '&&', '||', '!', '?', ':', '?:');
 		$ops_r = array ('+' => 0, '-' => 0, '*' => 0, '/' => 0, '^' => 1, '_' => 0, '%' => 0, '>' => 0, '<' => 0, '>=' => 0, '<=' => 0, '==' => 0, '!=' => 0, '=~' => 0, '&&' => 0, '||' => 0, '!' => 0, '?' => 1, ':' => 0, '?:' => 0); // right-associative operator?
 		// $ops_p = array('+'=>4,'-'=>4,'*'=>4,'/'=>4,'_'=>4,'%'=>4,'^'=>5,'>'=>2,'<'=>2,
@@ -194,7 +194,7 @@ class Expression {
 				'^' => 6, '!' => 6); // operator precedence
 		$expecting_op = false; // we use this in syntax-checking the expression
 								// and determining when a - is a negation
-		
+
 		/*
 		 * we allow all characters because of strings
 		 * if (preg_match("%[^\w\s+*^\/()\.,-<>=&~|!\"\\\\/]%", $expr, $matches)) { // make sure the characters are all good
@@ -246,7 +246,7 @@ class Expression {
 						$output [] = $pop; // pop stuff off the stack into the output
 					} else {
 						$op = '?:';
-						break;	
+						break;
 					}
 				}
 				// many thanks: http://en.wikipedia.org/wiki/Reverse_Polish_notation#The_algorithm_in_detail
@@ -380,7 +380,7 @@ class Expression {
 		}
 		return $output;
 	}
-	
+
 	// evaluate postfix notation
 	function pfx($tokens, $vars = array()) {
 		$binaryOperator = array ('+', '-', '*', '/', '^', '<', '>', '<=', '>=', '==', '&&', '||', '!=', '=~', '%');
@@ -456,7 +456,7 @@ class Expression {
 						break;
 					case '=~' :
 						$value = @preg_match ( $op2, $op1, $match );
-						
+
 						if (! is_int ( $value )) {
 							return $this->trigger ( "Invalid regex " . json_encode ( $op2 ) );
 						}
@@ -560,7 +560,7 @@ class Expression {
 			return $this->trigger ( "internal error" );
 		return $stack->pop ();
 	}
-	
+
 	// trigger an error, but nicely, if need be
 	function trigger($msg) {
 		$this->last_error = $msg;

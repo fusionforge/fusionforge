@@ -1282,7 +1282,7 @@ control over it to the project's administrator.");
 			$u = user_get_object(user_getid());
 			$d = $u->getUnixName();
 		}
-		
+
 		$results = array();
 		if ($unix_group_name) {
 			$res = db_query_params("SELECT unix_group_name, groups.group_id FROM groups
@@ -1370,7 +1370,7 @@ control over it to the project's administrator.");
 			JOIN users ON (scm_personal_repos.user_id=users.user_id)
 			WHERE groups.status=$1 AND group_plugin.plugin_id=$2 AND users.status=$3
 			ORDER BY unix_group_name, user_name", array('A', $this->getID(), 'A'));
-		}			
+		}
 		while ($arr = db_fetch_array($res)) {
 			if (!forge_check_perm('scm', $arr['group_id'], 'read')) {
 				continue;
@@ -1465,7 +1465,7 @@ control over it to the project's administrator.");
 		while ($arr = db_fetch_array($res)) {
 			$lastactivities[$arr['repository_id']] = $arr['last'];
 		}
-		
+
 		foreach ($repos as $rdata) {
 			$since = "";
 			if (array_key_exists($rdata['rid'], $lastactivities)) {

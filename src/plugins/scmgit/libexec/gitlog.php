@@ -69,7 +69,7 @@ if ($mode == 'date_range') {
 	if (!ctype_digit($limit))
 		die('Invalid limit');
 	$options = "--max-count=$limit";
-	
+
 	if ($mode == 'latest_user') {
 		$email = $_GET['email'];
 		$realname = $_GET['realname'];

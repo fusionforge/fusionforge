@@ -89,7 +89,7 @@ while ( $row = db_fetch_array($res) ) {
 		$params['template_groups'] = $template_groups;
 		$params['name'] = $name;
 		$params['groups_dir'] = $groups_dir;
-		
+
 		util_sudo_effective_user($file_owner,
 					 "populate_initial_wiki",
 					 $params);

@@ -138,7 +138,7 @@ function install_hooks($params) {
 			$returnvalue = false;
 			break;
 		}
-		
+
 		if ($returnvalue) {
 			cron_debug("INFO hooks updated for project ".$group->getUnixName());
 		} else {
