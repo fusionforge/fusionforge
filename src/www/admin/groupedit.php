@@ -193,10 +193,10 @@ printf(_('With PFO-RBAC, the “is_public” property is gone. Instead, to make 
 
 <tr>
 <td>
-<?php echo _('HTTP Domain')._(':') ?>
+<label for="form_domain"><?php echo _('HTTP Domain')._(':') ?></label>
 </td>
 <td>
-<input size="40" type="text" name="form_domain" value="<?php echo $group->getDomain(); ?>" />
+<input size="40" id="form_domain" type="text" name="form_domain" value="<?php echo $group->getDomain(); ?>" />
 </td>
 </tr>
 
