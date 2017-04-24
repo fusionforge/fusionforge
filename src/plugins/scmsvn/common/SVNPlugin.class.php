@@ -67,7 +67,7 @@ some control over it to the project's administrator.");
 	}
 
 	function getDefaultServer() {
-		return forge_get_config('default_server', 'scmsvn') ;
+		return forge_get_config('default_server', 'scmsvn');
 	}
 
 	function printShortStats($params) {
@@ -78,7 +78,7 @@ some control over it to the project's administrator.");
 
 		if ($project->usesPlugin($this->name) && forge_check_perm('scm', $project->getID(), 'read')) {
 			$result = db_query_params('SELECT sum(updates) AS updates, sum(adds) AS adds FROM stats_cvs_group WHERE group_id=$1',
-						  array ($project->getID())) ;
+						array($project->getID()));
 			$commit_num = db_result($result,0,'updates');
 			$add_num    = db_result($result,0,'adds');
 			if (!$commit_num) {
@@ -123,7 +123,7 @@ some control over it to the project's administrator.");
 			$b .= '<span class="tt">svn checkout svn://'.forge_get_config('scm_host').$this->svn_root_fs.'/'.$project->getUnixName().$module.'</span><br />';
 		}
 		if (forge_get_config('use_dav', 'scmsvn')) {
-				$b .= '<p><span class="tt">svn checkout http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. forge_get_config('scm_host'). '/anonscm/svn/'.$project->getUnixName().$module.'</span></p>' ;
+			$b .= '<p><span class="tt">svn checkout http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. forge_get_config('scm_host'). '/anonscm/svn/'.$project->getUnixName().$module.'</span></p>' ;
 		}
 		$b .= '</p>';
 		return $b;
@@ -147,7 +147,7 @@ some control over it to the project's administrator.");
 		$b .= '</ul>';
 		if (session_loggedin()) {
 			$u = user_get_object(user_getid());
-			$d = $u->getUnixName() ;
+			$d = $u->getUnixName();
 			if (forge_get_config('use_ssh', 'scmsvn')) {
 				$b .= '<div id="tabber-ssh" class="tabbertab" >';
 				$b .= '<p>';
@@ -208,24 +208,24 @@ some control over it to the project's administrator.");
 		$b .= '<p>[' ;
 		$b .= util_make_link ("/scm/browser.php?group_id=".$project->getID(),
 								sprintf(_('Browse %s Repository'), 'Subversion')
-			) ;
+		) ;
 		$b .= ']</p>' ;
 		return $b ;
 	}
 
 	function getStatsBlock($project) {
-		global $HTML ;
-		$b = '' ;
+		global $HTML;
+		$b = '';
 
 		$result = db_query_params('SELECT u.realname, u.user_name, u.user_id, sum(updates) as updates, sum(adds) as adds, sum(adds+updates) as combined FROM stats_cvs_user s, users u WHERE group_id=$1 AND s.user_id=u.user_id AND (updates>0 OR adds >0) GROUP BY u.user_id, realname, user_name, u.user_id ORDER BY combined DESC, realname',
-					  array ($project->getID()));
+			array($project->getID()));
 
 		if (db_numrows($result) > 0) {
 			$tableHeaders = array(
-			_('Name'),
-			_('Adds'),
-			_('Updates')
-			);
+				_('Name'),
+				_('Adds'),
+				_('Updates')
+				);
 			$b .= $HTML->listTableTop($tableHeaders, array(), '', 'repo-history');
 
 			$i = 0;
@@ -351,7 +351,7 @@ some control over it to the project's administrator.");
 			return false;
 		}
 
-		if (! $project->usesPlugin($this->name)) {
+		if (!$project->usesPlugin($this->name)) {
 			return false;
 		}
 
@@ -376,7 +376,7 @@ some control over it to the project's administrator.");
 			$usr_commits = array();
 
 			$repo = forge_get_config('repos_path', 'scmsvn') . '/' . $project->getUnixName();
-			if (!is_dir ($repo) || !is_file ("$repo/format")) {
+			if (!is_dir($repo) || !is_file ("$repo/format")) {
 				db_rollback();
 				return false;
 			}
@@ -388,19 +388,19 @@ some control over it to the project's administrator.");
 
 			// cleaning stats_cvs_* table for the current day
 			$res = db_query_params('DELETE FROM stats_cvs_group WHERE month=$1 AND day=$2 AND group_id=$3',
-						array($month_string,
-						       $day,
-						       $project->getID()));
+				array($month_string,
+					$day,
+					$project->getID()));
 			if(!$res) {
-				echo "Error while cleaning stats_cvs_group\n" ;
+				echo "Error while cleaning stats_cvs_group\n";
 				db_rollback();
 				return false;
 			}
 
 			$res = db_query_params ('DELETE FROM stats_cvs_user WHERE month=$1 AND day=$2 AND group_id=$3',
-						array ($month_string,
-						       $day,
-						       $project->getID())) ;
+				array ($month_string,
+					$day,
+					$project->getID()));
 			if(!$res) {
 				echo "Error while cleaning stats_cvs_user\n" ;
 				db_rollback () ;
@@ -416,9 +416,9 @@ some control over it to the project's administrator.");
 				$data = fgets ($pipe, 4096)) {
 				if (!xml_parse ($xml_parser, $data, feof ($pipe))) {
 					$this->setError("Unable to parse XML with error " .
-					      xml_error_string(xml_get_error_code($xml_parser)) .
-					      " on line " .
-					      xml_get_current_line_number($xml_parser));
+						xml_error_string(xml_get_error_code($xml_parser)) .
+						" on line " .
+						xml_get_current_line_number($xml_parser));
 					db_rollback () ;
 					return false ;
 					break;
@@ -430,15 +430,15 @@ some control over it to the project's administrator.");
 			// inserting group results in stats_cvs_groups
 			if ($updates > 0 || $adds > 0 || $deletes > 0 || $commits > 0) {
 				if (!db_query_params('INSERT INTO stats_cvs_group (month,day,group_id,checkouts,commits,adds,updates,deletes) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
-						      array ($month_string,
-							     $day,
-							     $project->getID(),
-							     0,
-							     $commits,
-							     $adds,
-							     $updates,
-							     $deletes))) {
-					echo "Error while inserting into stats_cvs_group\n" ;
+					array($month_string,
+						$day,
+						$project->getID(),
+						0,
+						$commits,
+						$adds,
+						$updates,
+						$deletes))) {
+					echo "Error while inserting into stats_cvs_group\n";
 					db_rollback();
 					return false;
 				}
@@ -447,9 +447,9 @@ some control over it to the project's administrator.");
 			// building the user list
 			$user_list = array_unique( array_merge( array_keys( $usr_adds ), array_keys( $usr_updates ),  array_keys( $usr_deletes ), array_keys( $usr_commits )) );
 
-			foreach ( $user_list as $user ) {
-				// trying to get user id from user name
-				$u = user_get_object_by_name ($user) ;
+			foreach ($user_list as $user) {
+				// Trying to get user id from user name
+				$u = user_get_object_by_name($user);
 				if ($u) {
 					$user_id = $u->getID();
 				} else {
@@ -461,7 +461,7 @@ some control over it to the project's administrator.");
 				$ua = isset($usr_adds[$user]) ? $usr_adds[$user] : 0 ;
 				$ud = isset($usr_deletes[$user]) ? $usr_deletes[$user] : 0 ;
 				if ($uu > 0 || $ua > 0 || $uc > 0 || $ud > 0) {
-					if (!db_query_params ('INSERT INTO stats_cvs_user (month,day,group_id,user_id,commits,adds, updates, deletes) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
+					if (!db_query_params('INSERT INTO stats_cvs_user (month,day,group_id,user_id,commits,adds, updates, deletes) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
 							      array ($month_string,
 								     $day,
 								     $project->getID(),
@@ -470,9 +470,9 @@ some control over it to the project's administrator.");
 								     $ua,
 								     $uu,
 								     $ud))) {
-						echo "Error while inserting into stats_cvs_user\n" ;
-						db_rollback () ;
-						return false ;
+						echo "Error while inserting into stats_cvs_user\n";
+						db_rollback();
+						return false;
 					}
 				}
 			}
@@ -497,16 +497,16 @@ some control over it to the project's administrator.");
 		$snapshot = forge_get_config('scm_snapshots_path').'/'.$group_name.'-scm-latest.tar'.util_get_compressed_file_extension();
 		$tarball = forge_get_config('scm_tarballs_path').'/'.$group_name.'-scmroot.tar'.util_get_compressed_file_extension();
 
-		if (! $project->usesPlugin($this->name)) {
+		if (!$project->usesPlugin($this->name)) {
 			return false;
 		}
 
-		if (! $project->enableAnonSCM()) {
+		if (!$project->enableAnonSCM()) {
 			if (is_file($snapshot)) {
-				unlink ($snapshot);
+				unlink($snapshot);
 			}
 			if (is_file($tarball)) {
-				unlink ($tarball);
+				unlink($tarball);
 			}
 			return false;
 		}
@@ -514,32 +514,32 @@ some control over it to the project's administrator.");
 		$toprepo = forge_get_config('repos_path', 'scmsvn');
 		$repo = $toprepo . '/' . $project->getUnixName();
 
-		if (!is_dir ($repo) || !is_file ("$repo/format")) {
+		if (!is_dir($repo) || !is_file ("$repo/format")) {
 			if (is_file($snapshot)) {
-				unlink ($snapshot) ;
+				unlink($snapshot);
 			}
 			if (is_file($tarball)) {
-				unlink ($tarball) ;
+				unlink($tarball);
 			}
-			return false ;
+			return false;
 		}
 
-		$tmp = trim (`mktemp -d`) ;
+		$tmp = trim(`mktemp -d`);
 		if ($tmp == '') {
-			return false ;
+			return false;
 		}
-		$today = date ('Y-m-d') ;
+		$today = date('Y-m-d');
 		$dir = $project->getUnixName ()."-$today" ;
-		system ("mkdir -p $tmp") ;
+		system("mkdir -p $tmp") ;
 		$code = 0 ;
 		system ("svn ls file://$repo/trunk > /dev/null 2> /dev/null", $code) ;
 		if ($us) {
 			if ($code == 0) {
 				system ("cd $tmp ; svn export file://$repo/trunk $dir > /dev/null 2>&1") ;
 				system ("tar cCf $tmp - $dir |".forge_get_config('compression_method')."> $tmp/snapshot") ;
-				chmod ("$tmp/snapshot", 0644) ;
-				copy ("$tmp/snapshot", $snapshot) ;
-				unlink ("$tmp/snapshot") ;
+				chmod("$tmp/snapshot", 0644);
+				copy("$tmp/snapshot", $snapshot);
+				unlink("$tmp/snapshot");
 				system ("rm -rf $tmp/$dir") ;
 			} else {
 				if (is_file($snapshot)) {
@@ -549,11 +549,11 @@ some control over it to the project's administrator.");
 		}
 
 		if ($ut) {
-			system ("tar cCf $toprepo - ".$project->getUnixName() ."|".forge_get_config('compression_method')."> $tmp/tarball") ;
-			chmod ("$tmp/tarball", 0644) ;
-			copy ("$tmp/tarball", $tarball) ;
-			unlink ("$tmp/tarball") ;
-			system ("rm -rf $tmp") ;
+			system("tar cCf $toprepo - ".$project->getUnixName() ."|".forge_get_config('compression_method')."> $tmp/tarball") ;
+			chmod("$tmp/tarball", 0644);
+			copy("$tmp/tarball", $tarball);
+			unlink("$tmp/tarball");
+			system("rm -rf $tmp");
 		}
 	}
 
@@ -572,7 +572,7 @@ some control over it to the project's administrator.");
 
 		$group_id = $params['group'];
 		$project = group_get_object($group_id);
-		if (! $project->usesPlugin($this->name)) {
+		if (!$project->usesPlugin($this->name)) {
 			return false;
 		}
 
@@ -954,7 +954,6 @@ function curl2xml($ch, $data) {
 				   'activity');
 	return strlen($data);
 }
-
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"
