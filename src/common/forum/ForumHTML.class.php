@@ -506,11 +506,11 @@ class ForumHTML extends FFError {
 			<table><tr><td class="top">
 			</td><td class="top">
 			<p>
-			<strong><?php echo _('Subject').utils_requiredField()._(':'); ?></strong><br />
-				<input type="text" autofocus="autofocus" required="required" name="subject" value="<?php echo $subject; ?>" size="80" maxlength="80" />
+			<label for="subject"><strong><?php echo _('Subject').utils_requiredField()._(':'); ?></strong></label><br />
+				<input id="subject" type="text" autofocus="autofocus" required="required" name="subject" value="<?php echo $subject; ?>" size="80" maxlength="80" />
 			</p>
 			<p>
-			<strong><?php echo _('Message').utils_requiredField()._(': '); ?></strong>
+			<label for="body"><strong><?php echo _('Message').utils_requiredField()._(': '); ?></strong></label>
 			<?php echo notepad_button('document.forms.ForumEditForm.body'); ?>
 			</p>
 			<?php
@@ -523,7 +523,7 @@ class ForumHTML extends FFError {
 			plugin_hook("text_editor",$params);
 			if (!$GLOBALS['editor_was_set_up']) {
 				//if we don't have any plugin for text editor, display a simple textarea edit box
-				echo '<textarea required="required" name="body" rows="10" cols="70">' . $body . '</textarea>';
+				echo '<textarea id="body" required="required" name="body" rows="10" cols="70">' . $body . '</textarea>';
 			}
 			unset($GLOBALS['editor_was_set_up']);
 				?>
