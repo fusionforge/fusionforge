@@ -1094,7 +1094,7 @@ abstract class Layout extends FFError {
 		if (!$readonly) {
 			if ($widget->canBeRemove()) {
 				echo html_e('div', array('class' => 'widget_titlebar_close'),
-					util_make_link('/widgets/updatelayout.php?owner='.$owner_type.$owner_id.'&action=widget&name%5B'.$widget->id.'%5D%5Bremove%5D='.$widget->getInstanceId().'&column_id='.$column_id.'&layout_id='.$layout_id, $this->getPicto('ic/close.png', _('Close'), _('Close'))));
+					util_make_link('/widgets/updatelayout.php?owner='.$owner_type.$owner_id.'&action=widget&name%5B'.$widget->id.'%5D%5Bremove%5D='.$widget->getInstanceId().'&column_id='.$column_id.'&layout_id='.$layout_id, $this->getPicto('ic/close.png', _('Remove block'), _('Remove block')), array('onclick' => 'return confirm('."'"._('Do you really want to remove this block?')."'".');')));
 			}
 			if ($widget->canBeMinize()) {
 				if ($is_minimized) {
