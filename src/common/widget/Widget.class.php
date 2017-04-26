@@ -100,7 +100,7 @@ require_once $gfcommon.'widget/Widget_TrackerSummary.class.php';
 	}
 	function getPreferencesForm($layout_id, $owner_id, $owner_type) {
 		global $HTML;
-		$prefs  = $HTML->openForm(array('method' => 'post', 'action' => '/widgets/widget.php?owner='.$owner_type.$owner_id.'&action=update&name['.$this->id.']='.$this->getInstanceId().'&content_id='.$this->getInstanceId().'&layout_id='.$layout_id));
+		$prefs  = $HTML->openForm(array('method' => 'post', 'action' => '/widgets/widget.php?owner='.$owner_type.$owner_id.'&action=update&name%5B'.$this->id.'%5D='.$this->getInstanceId().'&content_id='.$this->getInstanceId().'&layout_id='.$layout_id));
 		$prefs .= html_ao('fieldset').html_e('legend', array(), _('Preferences'));
 		$prefs .= $this->getPreferences();
 		$prefs .= html_e('br');
