@@ -1369,29 +1369,29 @@ class ArtifactTypeHtml extends ArtifactType {
 		$effortUnitSet = New EffortUnitSet($this, $this->getEffortUnitSet());
 		if ($effortUnitSet->isAutoconvert()) {
 			$jseffort = <<<'EOS'
-	$("select.effort").on('change', function(){
+	$("select.effort").change(function(){
 		var effortid = $(this).data("effortid");
 		var value = parseInt(parseInt($("input[name='extra_fields["+effortid+"]']").val())/$("select[name='unit["+effortid+"]'] option:selected").data('factor'));
 		$("input[name='value["+effortid+"]']").val(value);
 		$("input[name='extra_fields["+effortid+"]']").val(value*$("select[name='unit["+effortid+"]'] option:selected").data('factor')+'U'+$("select[name='unit["+effortid+"]']").val());
 	});
-	$("input.effort").on('change', function(){
+	$("input.effort").change(function(){
 		var effortid = $(this).data("effortid");
 		var value = $("input[name='value["+effortid+"]']").val();
 		$("input[name='extra_fields["+effortid+"]']").val(value*$("select[name='unit["+effortid+"]'] option:selected").data('factor')+'U'+$("select[name='unit["+effortid+"]']").val());
 	});
-	$(".effort-range").on('change', function(){
+	$(".effort-range").change(function(){
 		var effortid = $(this).data("effortid");
 		$("input[name='extra_fields["+effortid+"]']").val($("input[name='value_from["+effortid+"]']").val()*$("select[name='unit_from["+effortid+"]'] option:selected").data('factor')+'U'+$("select[name='unit_from["+effortid+"]']").val()+' '+$("input[name='value_to["+effortid+"]']").val()*$("select[name='unit_to["+effortid+"]'] option:selected").data('factor')+'U'+$("select[name='unit_to["+effortid+"]']").val());
 	});
 EOS;
 		} else {
 		$jseffort = <<<'EOS'
-	$(".effort").on('change', function(){
+	$(".effort").change(function(){
 		var effortid = $(this).data("effortid");
 		$("input[name='extra_fields["+effortid+"]']").val($("input[name='value["+effortid+"]']").val()*$("select[name='unit["+effortid+"]'] option:selected").data('factor')+'U'+$("select[name='unit["+effortid+"]']").val());
 	});
-	$(".effort-range").on('change', function(){
+	$(".effort-range").change(function(){
 		var effortid = $(this).data("effortid");
 		$("input[name='extra_fields["+effortid+"]']").val($("input[name='value_from["+effortid+"]']").val()*$("select[name='unit_from["+effortid+"]'] option:selected").data('factor')+'U'+$("select[name='unit_from["+effortid+"]']").val()+' '+$("input[name='value_to["+effortid+"]']").val()*$("select[name='unit_to["+effortid+"]'] option:selected").data('factor')+'U'+$("select[name='unit_to["+effortid+"]']").val());
 	});
@@ -1412,7 +1412,7 @@ EOS;
 	}).on('keydown', function(event){
 		if(event.keyCode !== 9) return false;
 	});
-	$(".in-formula").on('change', function(){
+	$(".in-formula").change(function(){
 		$.ajax({
 			type: 'POST',
 			url: 'index.php',
@@ -1471,7 +1471,7 @@ EOS;
 			}
 		});
 	});
-	$(".autoassign[name^='extra_fields']").on('change', function(){
+	$(".autoassign[name^='extra_fields']").change(function(){
 		if ($(this).prop('tagName') == 'SELECT') {
 			var elmnts = $(this).children('option:selected');
 		} else {
@@ -1483,7 +1483,7 @@ EOS;
 			$("span#tracker-assigned_to").text(aat.name);
 		});
 	});
-	$(".with-depcy[name^='extra_fields']").on('change', function(){
+	$(".with-depcy[name^='extra_fields']").change(function(){
 		if ($(this).prop('tagName') == 'SELECT') {
 			var elmnts = $(this).children('option:selected');
 		} else {
