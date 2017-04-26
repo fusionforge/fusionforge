@@ -42,11 +42,11 @@ class Widget_ProjectMembers extends Widget {
 		$pm = ProjectManager::instance();
 		$project = $pm->getProject($group_id);
 
-		$admins = $project->getAdmins() ;
-		$members = $project->getUsers() ;
-		$seen = array () ;
+		$admins = $project->getAdmins();
+		$members = $project->getUsers();
+		$seen = array();
 
-		$iam_member = false ;
+		$iam_member = false;
 		if (count($admins) > 0) {
 			$result .= '<div class="extractadmin"><span class="develtitle">'._('Project Admins').'</span><br />';
 			$resultcomplete = '<span class="completeadmin" style="display:none">';
@@ -54,7 +54,7 @@ class Widget_ProjectMembers extends Widget {
 			foreach ($admins as $key => $u) {
 				$resultlocal = '<div rel="doap:maintainer">'."\n";
 				// A foaf:Person that holds an account on the forge
-				$developer_url = util_make_url_u ($u->getUnixName(),$u->getID());
+				$developer_url = util_make_url_u($u->getUnixName(),$u->getID());
 				$resultlocal .= '<div typeof="foaf:Person" about="'.
 					$developer_url.'#person' .'" >'."\n";
 				$resultlocal .= '<div rel="foaf:account">'."\n";
@@ -67,7 +67,7 @@ class Widget_ProjectMembers extends Widget {
 				$resultlocal .= "</div>\n"; // /foaf:Person
 				$resultlocal .= "</div>\n"; // /doap:maintainer|developer
 				if ($u->getID() == user_getid()) {
-					$iam_member = true ;
+					$iam_member = true;
 				}
 				$seen[] = $u->getID();
 				if ($key < 10) {
@@ -94,7 +94,7 @@ class Widget_ProjectMembers extends Widget {
 			$resultcomplete = '<span class="completemember" style="display: none">';
 			$resultmore = false;
 			foreach ($members as $key => $u) {
-				if (in_array ($u->getID(), $seen)) {
+				if (in_array($u->getID(), $seen)) {
 					continue;
 				}
 				if ($headerresult) {
@@ -106,7 +106,7 @@ class Widget_ProjectMembers extends Widget {
 				}
 				$resultlocal = '<div rel="doap:developer">'."\n";
 				// A foaf:Person that holds an account on the forge
-				$developer_url = util_make_url_u ($u->getUnixName(),$u->getID());
+				$developer_url = util_make_url_u($u->getUnixName(),$u->getID());
 				$resultlocal .= '<div typeof="foaf:Person" about="'.
 					$developer_url.'#person' .'" >'."\n";
 				$resultlocal .= '<div rel="foaf:account">'."\n";
@@ -119,7 +119,7 @@ class Widget_ProjectMembers extends Widget {
 				$resultlocal .= "</div>\n"; // /foaf:Person
 				$resultlocal .= "</div>\n"; // /doap:maintainer|developer
 				if ($u->getID() == user_getid()) {
-					$iam_member = true ;
+					$iam_member = true;
 				}
 				if ($key < 10) {
 					$result .= $resultlocal;
@@ -145,14 +145,14 @@ class Widget_ProjectMembers extends Widget {
 		$result .= '<p><span rel="sioc:has_usergroup">';
 		$result .= '<span about="members/" typeof="sioc:UserGroup">';
 		$result .= '<span rel="http://www.w3.org/2002/07/owl#sameAs">';
-		$result .= util_make_link ('/project/memberlist.php?group_id='.$group_id,sprintf(_('View the %d Member(s)'),count($members)));
+		$result .= util_make_link('/project/memberlist.php?group_id='.$group_id,sprintf(_('View the %d Member(s)'),count($members)));
 		$result .= '</span>';
 		$result .= '</span>';
 		$result .= '</span></p>';
 		// end of project usergroup description
 
 		if (!$iam_member) {
-			$result .= '<p>'.util_make_link ('/project/request.php?group_id='.$group_id,_('Request to join')).'</p>';
+			$result .= '<p>'.util_make_link('/project/request.php?group_id='.$group_id,_('Request to join')).'</p>';
 		}
 
 		return $result;
