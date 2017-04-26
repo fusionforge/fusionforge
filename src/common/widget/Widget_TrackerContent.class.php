@@ -123,7 +123,7 @@ class Widget_TrackerContent extends Widget {
 						$extrafieldObject = new ArtifactExtraField($ath, $keys[0]);
 						$divEF = html_e('div', array('id' => 'ef'.$keys[0], 'class' => 'wb_extrafield', 'style' => 'background: #e6e6e6 none repeat scroll 0 0; padding: 2px; text-align: center;'), $extrafieldObject->getName().'<div id="xef'.$keys[0].'" class="ef-widget-remove">x</div>');
 					} else {
-						$divEF = '<div id="fake" class="wb_extrafield" style="display: hidden" />';
+						$divEF = '<div id="fake" class="wb_extrafield" style="display: none"></div>';
 					}
 
 					$content .= '<td class="layout-manager-column" width="'.$extrafieldID[$keys[0]][0].'%">
@@ -150,7 +150,7 @@ class Widget_TrackerContent extends Widget {
 				<input type="text" value="" size="20" maxsize="20" /><br />
 				<input type="number" value="50" autocomplete="off" size="1" maxlength="3" />%
 				</div>
-				<div id="fake" class="wb_extrafield" style="display: hidden" />
+				<div id="fake" class="wb_extrafield" style="display: none"></div>
 				</td>
 				<td class="layout-manager-column-add">+</td>';
 			$content .= '<td class="layout-manager-column">
@@ -160,7 +160,7 @@ class Widget_TrackerContent extends Widget {
 				<input type="text" value="" size="20" maxsize="20" /><br />
 				<input type="number" value="50" autocomplete="off" size="1" maxlength="3" />%
 				</div>
-				<div id="fake" class="wb_extrafield" style="display: hidden" />
+				<div id="fake" class="wb_extrafield" style="display: none"></div>
 				</td>
 				<td class="layout-manager-column-add">+</td>
 				</tr></table>';
@@ -362,7 +362,6 @@ EOS;
 		if (count($layoutExtraFieldIDs) > 0) {
 			$mandatoryDisplay = false;
 			$selected = array();
-			$i = 0;
 			if (is_object($ah)) {
 				$selected = $ah->getExtraFieldData();
 				$efInFormula = $ath->getExtraFieldsInFormula();
@@ -688,13 +687,13 @@ EOS;
 			$content_id = (int)$request->get('content_id');
 			if ($title) {
 				$sql = "UPDATE artifact_display_widget SET title = $1 WHERE owner_id =$2 AND id = $3";
-				$res = db_query_params($sql,array($title, $this->owner_id, $content_id));
+				db_query_params($sql,array($title, $this->owner_id, $content_id));
 				$done = true;
 			}
 			$trackerrows = getArrayFromRequest('trackercontent_layout');
 			$trackerextrafields = getArrayFromRequest('trackercontent_ef');
 			$trackercelltitles = getArrayFromRequest('trackercontent_title');
-			$res = db_query_params('DELETE FROM artifact_display_widget_field WHERE id = $1', array($content_id));
+			db_query_params('DELETE FROM artifact_display_widget_field WHERE id = $1', array($content_id));
 			foreach ($trackerrows as $rowkey => $trackerrow) {
 				$columns = explode(',', $trackerrow);
 				$extrafields = explode(',', $trackerextrafields[$rowkey]);
