@@ -70,7 +70,6 @@ class Widget_ProjectLatestDocuments extends Widget {
 		$df->getDocuments();
 
 		$keys = array_keys($df->Documents);
-		$j = 0;
 		if (!count($keys)) {
 			$result .= $HTML->information(_('This project has not published any documents.'));
 		} else {

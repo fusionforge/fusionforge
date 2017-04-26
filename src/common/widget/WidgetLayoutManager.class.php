@@ -664,7 +664,6 @@ class WidgetLayoutManager {
 				}
 				echo html_ac(html_ap() - 1);
 				foreach($categs as $c => $ws) {
-					$i = 0;
 					$widget_rows = array();
 					// display widgets of the category
 					foreach($ws as $widget_name => $widget) {
@@ -787,7 +786,7 @@ class WidgetLayoutManager {
 				AND owner_id = $4
 				AND name = $5
 				AND layout_id = $6";
-			$res = db_query_params($sql,array($column_id,$rank,$owner_type, $owner_id,$name, $layout_id));
+			db_query_params($sql,array($column_id,$rank,$owner_type, $owner_id,$name, $layout_id));
 			echo db_error();
 		} else {
 			//Insert
@@ -935,7 +934,7 @@ class WidgetLayoutManager {
 						WHERE owner_type = $1
 						AND owner_id = $2
 						AND column_id = $3". $_and;
-					$res = db_query_params($sql,array($owner_type, $owner_id, $column_id));
+					db_query_params($sql,array($owner_type, $owner_id, $column_id));
 					echo db_error();
 				}
 
@@ -958,7 +957,7 @@ class WidgetLayoutManager {
 						WHERE owner_type = $2
 						AND owner_id = $3' . $_and ."
 						AND layout_id = $4";
-					$res = db_query_params($sql,array($column_id,$owner_type,$owner_id,$layout_id));
+					db_query_params($sql,array($column_id,$owner_type,$owner_id,$layout_id));
 					echo db_error();
 				}
 

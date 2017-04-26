@@ -102,7 +102,6 @@ class Widget_MyAdmin extends Widget {
 	}
 	function _get_admin_row($i, $text, $value, $bgcolor, $textcolor = 'white') {
 		global $HTML;
-		$i=$i++;
 		$cells = array();
 		$cells[][] = $text;
 		$cells[] = array($value, 'style' => 'white-space:nowrap; width:20%; background:'. $bgcolor .'; color:'. $textcolor .'; padding: 2px 8px; font-weight:bold; text-align:center;');

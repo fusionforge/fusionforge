@@ -63,7 +63,6 @@ require_once 'Widget.class.php';
 			$items = array_slice($rss->get_items(), 0, $max_items);
 			if (count($items)) {
 				$content .= $HTML->listTableTop();
-				$i = 0;
 				foreach($items as $key => $item){
 					$content .= '<tr><td style="width:99%">';
 					if ($image = $item->get_link(0, 'image')) {
