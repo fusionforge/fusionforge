@@ -30,15 +30,11 @@ require_once $gfcommon.'widget/Widget_MyMonitoredFp.class.php';
 require_once $gfcommon.'widget/Widget_MyLatestCommits.class.php';
 require_once $gfcommon.'widget/Widget_MyProjectsLastDocuments.class.php';
 require_once $gfcommon.'widget/Widget_MyArtifacts.class.php';
-//require_once $gfcommon.'widget/Widget_MySrs.class.php';
 require_once $gfcommon.'widget/Widget_MyTasks.class.php';
 require_once $gfcommon.'widget/Widget_MyRss.class.php';
 require_once $gfcommon.'widget/Widget_MyAdmin.class.php';
 require_once $gfcommon.'widget/Widget_MySystasks.class.php';
-//require_once $gfcommon.'widget/Widget_MyTwitterFollow.class.php';
-//require_once $gfcommon.'widget/Widget_MyWikiPage.class.php';
-
-require_once $gfcommon.'widget/Widget_ProjectDescription.class.php' ;
+require_once $gfcommon.'widget/Widget_ProjectDescription.class.php';
 require_once $gfcommon.'widget/Widget_ProjectMembers.class.php';
 require_once $gfcommon.'widget/Widget_ProjectInfo.class.php';
 require_once $gfcommon.'widget/Widget_ProjectLatestFileReleases.class.php';
@@ -49,17 +45,13 @@ require_once $gfcommon.'widget/Widget_ProjectPublicAreas.class.php';
 require_once $gfcommon.'widget/Widget_ProjectRss.class.php';
 require_once $gfcommon.'widget/Widget_ProjectLatestCommits.class.php';
 require_once $gfcommon.'widget/Widget_ProjectLatestArtifacts.class.php';
-//require_once $gfcommon.'widget/Widget_ProjectTwitterFollow.class.php';
-//require_once $gfcommon.'widget/Widget_ProjectWikiPage.class.php';
 require_once $gfcommon.'widget/Widget_ProjectScmStats.class.php';
-
 require_once $gfcommon.'widget/Widget_HomeDetailActivityMostActiveProjectWeek.class.php';
 require_once $gfcommon.'widget/Widget_HomeLatestNews.class.php';
 require_once $gfcommon.'widget/Widget_HomeStats.class.php';
 require_once $gfcommon.'widget/Widget_HomeTagCloud.class.php';
 require_once $gfcommon.'widget/Widget_HomeVersion.class.php';
 require_once $gfcommon.'widget/Widget_HomeRss.class.php';
-
 require_once $gfcommon.'widget/Widget_TrackerComment.class.php';
 require_once $gfcommon.'widget/Widget_TrackerContent.class.php';
 require_once $gfcommon.'widget/Widget_TrackerDefaultActions.class.php';
@@ -232,10 +224,7 @@ require_once $gfcommon.'widget/Widget_TrackerSummary.class.php';
 					|| forge_check_global_perm('approve_news')) {
 					$o = new Widget_MyAdmin();
 				}
-				break;/*
-			case 'mysrs':
-				$o = new Widget_MySrs();
-				break;*/
+				break;
 			case 'mymonitoredfp':
 				$o = new Widget_MyMonitoredFp();
 				break;
@@ -244,13 +233,7 @@ require_once $gfcommon.'widget/Widget_TrackerSummary.class.php';
 				break;
 			case 'mysystasks':
 				$o = new Widget_MySystasks();
-				break;/*
-			case 'mytwitterfollow':
-				$o = new Widget_MyTwitterFollow();
 				break;
-			case 'mywikipage':                   //not yet
-				$o = new Widget_MyWikiPage();
-				break;*/
 			case 'projectdescription':
 				$o = new Widget_ProjectDescription();
 				break;
@@ -277,13 +260,7 @@ require_once $gfcommon.'widget/Widget_TrackerSummary.class.php';
 				break;
 			case 'projectrss':
 				$o = new Widget_ProjectRss();
-				break;/*
-			case 'projecttwitterfollow':
-				$o = new Widget_ProjectTwitterFollow();
 				break;
-			case 'projectwikipage':                    //not yet
-				$o = new Widget_ProjectWikiPage();
-				break;*/
 			case 'projectscmstats':
 				$o = new Widget_ProjectScmStats();
 				break;
@@ -332,15 +309,15 @@ require_once $gfcommon.'widget/Widget_TrackerSummary.class.php';
 		switch ($owner_type) {
 			case WidgetLayoutManager::OWNER_TYPE_USER:
 				$widgets = array('myadmin', 'mysurveys', 'myprojects', 'mybookmarks',
-						'mymonitoredforums', 'mymonitoredfp', 'myartifacts', 'mysystasks', //'mywikipage' //not yet
+						'mymonitoredforums', 'mymonitoredfp', 'myartifacts', 'mysystasks',
 						'mytasks', 'mylatestcommits', 'myrss', 'mymonitoreddocuments', 'myprojectslastdocuments',
 						);
 				break;
 			case WidgetLayoutManager::OWNER_TYPE_GROUP:
 				// project home widgets
 				$widgets = array('projectdescription', 'projectmembers', 'projectinfo', 'projectscmstats',
-						'projectlatestfilereleases', 'projectlatestdocuments', 'projectlatestnews', 'projectpublicareas', //'projectwikipage' //not yet
-						'projectlatestcommits', 'projecttwitterfollow', 'projectrss', 'projectdocumentsactivity', 'projectlatestartifacts'
+						'projectlatestfilereleases', 'projectlatestdocuments', 'projectlatestnews', 'projectpublicareas',
+						'projectlatestcommits', 'projectrss', 'projectdocumentsactivity', 'projectlatestartifacts'
 						);
 				break;
 			case WidgetLayoutManager::OWNER_TYPE_HOME:
