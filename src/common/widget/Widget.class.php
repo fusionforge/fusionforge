@@ -326,7 +326,7 @@ require_once $gfcommon.'widget/Widget_TrackerSummary.class.php';
 	/**
 	 * getCodendiWidgets - Static
 	 * @param unknown_type $owner_type
-	 * @return multitype:
+	 * @return mixed
 	 */
 	static function getCodendiWidgets($owner_type) {
 		switch ($owner_type) {
