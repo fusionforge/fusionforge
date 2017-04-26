@@ -1137,7 +1137,7 @@ abstract class Layout extends FFError {
 		}
 		if ($widget->isAjax()) {
 			echo html_ao('div', array('id' => $element_id.'-ajax'));
-			echo '<noscript><iframe width="99%" frameborder="0" src="'. $widget->getIframeUrl($owner_id, $owner_type) .'"></iframe></noscript>';
+			echo '<noscript><iframe style="width:99%; border:none;" src="'. $widget->getIframeUrl($owner_id, $owner_type) .'"></iframe></noscript>';
 			echo html_ac(html_ap() -1);
 		} else {
 			echo $widget->getContent();
