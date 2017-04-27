@@ -167,6 +167,7 @@ if (!session_loggedin()) {
 
 	site_user_header(array('title' => _('My Diary and Notes')));
 
+	$params['id'] = 'details';
 	$params['name'] = 'details';
 	$params['body'] = $_details;
 	$params['height'] = '350';
@@ -182,13 +183,15 @@ if (!session_loggedin()) {
 	echo html_e('input', array('type' => 'hidden', 'name' => $proc_str, 'value' => '1'));
 	echo html_e('input', array('type' => 'hidden', 'name' => 'diary_id', 'value' => $_diary_id));
 	echo $HTML->listTableTop();
-	echo html_ao('tr').html_ao('td');
-	echo html_e('strong', array(),_('Summary')._(':')).'<br />';
-	echo html_e('input', array( 'required' => 'required', 'type' => 'text', 'name' => 'summary', 'size' => '60', 'maxlength' => '60', 'value' => $_summary));
+	echo html_ao('tr').html_ao('td').html_ao('label', array('for' => 'summary'));
+	echo html_e('strong', array(), _('Summary')._(':')).'<br />';
+	echo html_ac(html_ap()-1);
+	echo html_e('input', array('id' => 'summary', 'required' => 'required', 'type' => 'text', 'name' => 'summary', 'size' => '60', 'maxlength' => '60', 'value' => $_summary));
 	echo html_ac(html_ap()-2);
 
-	echo html_ao('tr').html_ao('td');
+	echo html_ao('tr').html_ao('td').html_ao('label', array('for' => 'details'));
 	echo html_e('strong', array(),_('Details')._(':')).'<br />';
+	echo html_ac(html_ap()-1);
 	echo $params['content'];
 	echo html_ac(html_ap()-2);
 
@@ -196,9 +199,9 @@ if (!session_loggedin()) {
 	echo html_ao('p');
 	echo html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Submit'))).'&nbsp;';
 	if ($_is_public) {
-		echo html_e('input', array('type' => 'checkbox', 'name' => 'is_public', 'value' => '1', 'checked' => 'checked'))._('Is Public');
+		echo html_e('input', array('id' => 'is_public', 'type' => 'checkbox', 'name' => 'is_public', 'value' => '1', 'checked' => 'checked')).'<label for="is_public">'._('Is Public').'</label>';
 	} else {
-		echo html_e('input', array('type' => 'checkbox', 'name' => 'is_public', 'value' => '1'))._('Is Public');
+		echo html_e('input', array('id' => 'is_public', 'type' => 'checkbox', 'name' => 'is_public', 'value' => '1')).'<label for="is_public">'._('Is Public').'</label>';
 	}
 	echo html_ac(html_ap()-1);
 
