@@ -758,7 +758,9 @@ class ArtifactExtraField extends FFError {
 			ARTIFACT_EXTRAFIELDTYPE_DATETIME => _('Datetime'),
 			ARTIFACT_EXTRAFIELDTYPE_USER => _('User'),
 			ARTIFACT_EXTRAFIELDTYPE_RELEASE => _('Release'),
-			ARTIFACT_EXTRAFIELDTYPE_EFFORT => _('Effort')
+			ARTIFACT_EXTRAFIELDTYPE_EFFORT => _('Effort'),
+			ARTIFACT_EXTRAFIELDTYPE_FORMULA => _('Formula'),
+			ARTIFACT_EXTRAFIELDTYPE_SLA => _('SLA')
 			);
 	}
 
@@ -863,6 +865,18 @@ class ArtifactExtraField extends FFError {
 			$return[] = $row['child_element_id'];
 		}
 		return $return;
+	}
+
+
+	/**
+	 * setRequired - Set the required for this extra field
+	 *
+	 * @param	int	$required		value of the field.
+	 * @param	int	$id				id of the field.
+	 */
+	function setRequired($required, $id) {
+		$res = db_query_params ('UPDATE artifact_extra_field_list SET is_required = $1 WHERE extra_field_id = $2',
+				array ($required, $id));
 	}
 
 	/**
@@ -1173,6 +1187,76 @@ class ArtifactExtraField extends FFError {
 		}
 
 		return true;
+	}
+
+	/**
+	 *    getMandatoryExtraFields - List of possible user built extra fields
+	 *    set up for this artifact type.
+	 *
+	 * @return array arrays of data;
+	 */
+	static function getMandatoryExtraFields($atid) {
+		$return = array();
+
+		$res = db_query_params('SELECT *
+				FROM artifact_extra_field_list
+				WHERE group_artifact_id=$1
+				AND is_required = 1
+				ORDER BY field_type ASC, alias ASC',
+				array($atid));
+
+		while ($arr = db_fetch_array($res)) {
+			$return[] = $arr;
+		}
+
+		return $return;
+	}
+
+	/**
+	 *    getAllExtraFields - List of possible user built extra fields
+	 *    set up for this artifact type.
+	 *
+	 * @return array arrays of data;
+	 */
+	static function getAllExtraFields($atid) {
+		$return = array();
+
+		$res = db_query_params('SELECT *
+				FROM artifact_extra_field_list
+				WHERE group_artifact_id=$1
+				ORDER BY field_type ASC, alias ASC',
+				array($atid));
+
+		while ($arr = db_fetch_array($res)) {
+			$return[] = $arr;
+		}
+
+		return $return;
+	}
+
+	/**
+	 *    checkExtraFieldElements - Check the elements for extra fields
+	 *    set up for this artifact type.
+	 *
+	 * @return boolean;
+	 */
+	static function checkExtraFieldElements($field_id, $element_name) {
+		$return = false;
+
+		$result = db_query_params('SELECT element_id
+				FROM artifact_extra_field_elements
+				WHERE extra_field_id=$1
+				AND element_name=$2',
+				array($field_id, trim($element_name)));
+
+		if ($result) {
+			while ($row = db_fetch_array($result)) {
+				if ($row['element_id'] > 0)
+					return $row['element_id'];
+			}
+		}
+
+		return $return;
 	}
 
 }
