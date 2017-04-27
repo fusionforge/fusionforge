@@ -1252,6 +1252,128 @@ class ArtifactTypeHtml extends ArtifactType {
 		return $return;
 	}
 
+	/**
+	 *	renderFormulaField - this function builds a formula field (RO).
+	 *
+	 *	@param 		string	$contents The data for this field.
+	 *	@return		string
+	 */
+	function renderFormulaField($contents) {
+		return $contents;
+	}
+
+	/**
+	 *	renderSLAField - this function builds a formula field (RO).
+	 *
+	 *  @param	    int	    $extra_field_id	The ID of this field.
+	 *	@param 		string	$contents The data for this field.
+	 *	@return		string
+	 */
+	function renderSLAField($extra_field_id, $contents, $ef) {
+		global $aid;
+
+		if (!isset($aid) ||!$aid) {
+			return '';
+		}
+
+		$config = parse_ini_string($ef["attributes"]);
+		$field_name = $config['field'];
+		$rule = explode(':', $config['values']);
+
+		if (!isset($config['start_id']) || $aid >= $config['start_id']) {
+			// Get Max value from
+			// @todo use global variable $aid !!!
+			$artifact = artifact_get_object($aid);
+			$value = $artifact->getFieldDataByKey('alias', $field_name);
+			$field = $artifact->getFieldTypeByKey('alias', $field_name);
+			$elements = $artifact->ArtifactType->getExtraFieldElements($field['extra_field_id']);
+			for ($i = 0; $i < count($elements); $i++) {
+				if ($elements[$i]['element_name'] == $value) {
+					$max = 60 * $rule[$i];
+					continue;
+				}
+			}
+
+			if (!isset($max)) {
+				$value = '<span class="label label-warning">Not Set</span>';
+			} elseif ($ef['alias'] == 'response_time') {
+				// Implement Response SLA: Time from create to first comment.
+				$messages = $artifact->getMessageObjects();
+				if (count($messages) > 0) {
+					$message = $messages[count($messages) - 1];
+					$current_time = $message->getAddDate();
+					$timer_is_running = false;
+				} elseif ($artifact->getStatusID() == 2) {
+					$current_time = $artifact->getCloseDate();
+					$timer_is_running = false;
+				} else {
+					$current_time = time();
+					$timer_is_running = true;
+				}
+				$time = $current_time - $artifact->getOpenDate();
+				$percent = round(100 * $time / $max);
+				$remaining = $max - $time;
+				if ($remaining >= 0) {
+					$value = gmdate("G\h i", $remaining);
+				} else {
+					$value = '<b>-' . gmdate("G\h i", -$remaining) . "</b>";
+				}
+
+				if (!$timer_is_running) {
+					if ($remaining >= 0) {
+						$value = '<span class="label label-success">' . _('OK') . '</span>';
+					} else {
+						$value = '<span class="label label-danger">' . _('Missed') . '</span>';
+					}
+				} else {
+					if ($percent > 90) {
+						$value = '<span class="sla-alert">' . $value . '</span>';
+					} elseif ($percent > 80) {
+						$value = '<span class="sla-warning">' . $value . '</span>';
+					} else {
+						$value = '<span class="sla-normal">' . $value . '</span>';
+					}
+				}
+			} elseif ($ef['alias'] == 'resolution_time') {
+				// Implement Resolution SLA: Time from create to closed state.
+				list($last_status_change, $timer, $timer_is_running) = json_decode($contents);
+
+				$time = $timer;
+				if ($timer_is_running) {
+					$time += time() - $last_status_change;
+				}
+
+				$percent = round(100 * $time / $max);
+				$remaining = $max - $time;
+				if ($remaining >= 0) {
+					$value = gmdate("G\h i", $remaining);
+				} else {
+					$value = '<b>-' . gmdate("G\h i", -$remaining) . "</b>";
+				}
+				if ($artifact->getStatusID() == 2) {
+					if ($remaining >= 0) {
+						$value = '<span class="label label-success">' . _('OK') . '</span>';
+					} else {
+						$value = '<span class="label label-danger">' . _('Missed') . '</span>';
+					}
+				} else {
+					if (!$timer_is_running) {
+						$value = ' <span class="label label-info">' . _('Suspended') . '</span>';
+					} elseif ($percent > 90) {
+						$value = '<span class="sla-alert">' . $value . '</span>';
+					} elseif ($percent > 80) {
+						$value = '<span class="sla-warning">' . $value . '</span>';
+					} else {
+						$value = '<span class="sla-normal">' . $value . '</span>';
+					}
+				}
+			}
+		} else {
+			$value = '<span class="label label-default">' . _('Not Available') . '</span>';
+		}
+		return $value;
+	}
+
 	function technicianBox($name = 'assigned_to[]', $checked = 'xzxz', $show_100 = true, $text_100 = 'none', $extra_id = '-1', $extra_name = '', $multiple = false, $attrs = array()) {
 		if ($text_100=='none'){
 			$text_100=_('Nobody');
