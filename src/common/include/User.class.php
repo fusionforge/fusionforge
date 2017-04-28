@@ -486,21 +486,19 @@ class FFUser extends FFError {
 	 * @return bool    success or not
 	 */
 	function sendRegistrationEmail() {
-		$message = stripcslashes(sprintf(_('Thank you for registering on the %3$s web site. You have
-account with username %1$s created for you. In order
-to complete your registration, visit the following url:
-
-<%2$s>
-
-You have 1 week to confirm your account. After this time, your account will be deleted.
-
-(If you don\'t see any URL above, it is likely due to a bug in your mail client.
-Use one below, but make sure it is entered as the single line.)
-
-%2$s'),
-			$this->getUnixName(),
-			util_make_url('/account/verify.php?confirm_hash=_'.$this->getConfirmHash()),
-			forge_get_config('forge_name')));
+		$message = sprintf(_('Thank you for registering on the %s web site.'), forge_get_config('forge_name'));
+		$message .= "\n";
+		$message .= sprintf(_('You have account with username %s created for you.'), $this->getUnixName());
+		$message .= "\n";
+		$message .= _('In order to complete your registration, visit the following url:');
+		$message .= "\n\n";
+		$message .= '<'.util_make_url('/account/verify.php?confirm_hash=_'.$this->getConfirmHash()).'>';
+		$message .= "\n\n";
+		$message .= _('You have 1 week to confirm your account. After this time, your account will be deleted.');
+		$message .= "\n\n";
+		$message .= _("(If you don't see any URL above, it is likely due to a bug in your mail client. Use one below, but make sure it is entered as the single line.)");
+		$message .= "\n\n";
+		$message .= util_make_url('/account/verify.php?confirm_hash=_'.$this->getConfirmHash());
 		$message .= "\n\n";
 		$message .= _('Enjoy the site.');
 		$message .= "\n\n";
