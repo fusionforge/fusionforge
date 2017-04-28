@@ -1524,11 +1524,18 @@ EOS;
 		$("div#maindiv h1").append($("<p>", { "class": msg_class }).html( msg_text )).show();
 	};
 	$.expr[':'].invalid = function(elem, index, match) {
-		for (let invalid of document.querySelectorAll(':invalid') )  {
-			if (elem === invalid) { return true; }
+		var invalids = document.querySelectorAll(':invalid'), result = false, len = invalids.length;
+		if (len) {
+			for (var i=0; i<len; i++) {
+				if (elem === invalids[i]) {
+					result = true;
+					break;
+				}
 		}
-		return false;
+		}
+		return result;
 	};
+
 	$("input[type='radio'].readonly, input[type='checkbox'].readonly").on('click', function(){
 		return false;
 	}).on('keydown', function(event){
