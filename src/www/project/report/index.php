@@ -36,31 +36,31 @@ function GetTime ($timedifference) {
 
 		$mval = ($timedifference / 2592000);
 		$monthval = intval($mval);
-		if ($monthval > 1 ) {
+		if ($monthval > 1) {
 			return "$monthval Months Ago";
 		}
 
 		$wval = ($timedifference / 604800);
 		$weektime = intval($wval);
-		if ($weektime > 1 ) {
+		if ($weektime > 1) {
 			return "$weektime Weeks Ago";
 		}
 
 		$dval = ($timedifference / 86400) ;
 		$daytime = intval($dval);
-		if ($daytime > 1 ) {
+		if ($daytime > 1) {
 			return "$daytime Days Ago";
 		}
 
 		$hval = ($timedifference / 3600);
 		$hourtime = intval($hval);
-		if ($hourtime > 1 ) {
+		if ($hourtime > 1) {
 			return "$hourtime Hours Ago";
 		}
 
 		$mval = ($timedifference  / 60);
 		$minutetime = intval($mval);
-		if ( $minutetime > 1 ) {
+		if ($minutetime > 1) {
 			return "$minutetime Minutes Ago";
 		}
 
@@ -72,38 +72,36 @@ function GetTime ($timedifference) {
 
 		$mval = ($timedifference / 2592000);
 		$monthval = intval($mval);
-		if ($monthval > 1 ) {
+		if ($monthval > 1) {
 			return "Next $monthval Months";
 		}
 
 		$wval = ($timedifference / 604800);
 		$weektime = intval($wval);
-		if ($weektime > 1 ) {
+		if ($weektime > 1) {
 			return "Next $weektime Weeks";
 		}
 
 		$dval = ($timedifference / 86400) ;
 		$daytime = intval($dval);
-		if ($daytime > 1 ) {
+		if ($daytime > 1) {
 			return "Next $daytime Days";
 		}
 
 		$hval = ($timedifference / 3600);
 		$hourtime = intval($hval);
-		if ($hourtime > 1 ) {
+		if ($hourtime > 1) {
 			return "Next $hourtime Hours";
 		}
 
 		$mval = ($timedifference  / 60);
 		$minutetime = intval($mval);
-		if ( $minutetime > 1 ) {
+		if ($minutetime > 1) {
 			return "Next $minutetime Minutes";
 		}
 
 		return "Next $timedifference Seconds";
-
 	}
-
 }
 
 //
@@ -143,7 +141,7 @@ echo $HTML->listTableTop($title_arr);
 foreach ($group->getUsers() as $member) {
 	$cells = array();
 	$link = util_make_link_u ($member->getUnixName(), $member->getID(), $member->getRealName()) ;
-	if ( RBACEngine::getInstance()->isActionAllowedForUser($member,'project_admin',$group->getID())) {
+	if (RBACEngine::getInstance()->isActionAllowedForUser($member,'project_admin',$group->getID())) {
 		$cells[][] = html_e('strong', array(), $link);
 	} else {
 		$cells[][] = $link;
@@ -174,11 +172,11 @@ foreach ($group->getUsers() as $member) {
 			$cells = array();
 			$cells[][] = util_make_link('/tracker/?func=detail&aid='. $artifact->getID() .'&group_id='.$artifact->ArtifactType->Group->getID().'&atid='.$artifact->ArtifactType->getID(), $artifact->ArtifactType->getName().' '.$artifact->getID());
 			$cells[][] = $artifact->getSummary();
-			$cells[][] = GetTime( time() - $artifact->getOpenDate());
+			$cells[][] = GetTime(time() - $artifact->getOpenDate());
 			$messages = db_query_params("select adddate FROM artifact_message_user_vw ".
 							"WHERE artifact_id=$1 ".
 							"ORDER by adddate DESC", array($artifact->getID()));
-			if ( db_numrows($messages)) {
+			if (db_numrows($messages)) {
 				$cells[][] = GetTime(time() - db_result($messages, 0, 'adddate'));
 			} else {
 				$cells[][] = GetTime(time() - $artifact->getOpenDate());;
