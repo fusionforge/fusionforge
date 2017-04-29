@@ -498,14 +498,26 @@ class CliActions {
 		if ($group && is_object($group) && !$group->isError() && $group->usesDocman()) {
 			db_begin();
 			$dg = new DocumentGroup($group);
-			$parent_doc_group = $this->getMappingId($stream['data_array']['parent_doc_group'], 'doc_group');
+			$parent_doc_group = (int)$this->getMappingId($stream['data_array']['parent_doc_group'], 'doc_group');
 			if (!$dg->create($stream['data_array']['groupname'], $parent_doc_group, $stream['data_array']['stateid'], $stream['data_array']['createdate'])) {
 				echo $dg->getErrorMessage()."\n";
 				db_rollback();
 				return false;
 			}
-			db_commit();
 			$importRefMapping['doc_group'][$stream['data_array']['doc_group']] = $dg->getID();
+			if (isset($stream['subdocgroups']) && is_array($stream['subdocgroups'])) {
+				foreach ($stream['subdocgroups'] as $subdocgroup) {
+					$filename = 'docgroupDump-'.$subdocgroup['data_array']['doc_group'].'.'.$format;
+					$this->createSubfile($filename, $subdocgroup, $format);
+					if (!$this->docgroupImport($filename, $format)) {
+						echo _('Unable to inject child docgroup')."\n";
+						db_rollback();
+						return false;
+					}
+					@unlink($filename);
+				}
+			}
+			db_commit();
 			echo _('Document Group injected')."\n";
 			return true;
 		} else {
@@ -637,12 +649,22 @@ class CliActions {
 	}
 
 	function getMappingId($idtofind, $objecttofind) {
+		global $importRefMapping;
 		if (isset($importRefMapping[$objecttofind][$idtofind])) {
 			return $importRefMapping[$objecttofind][$idtofind];
 		} else {
 			//not found, return the idtofind.
 			return $idtofind;
 		}
+	}
+
+	function createSubfile($filename, $data, $format) {
+		if ($format == 'json') {
+			$stream = json_encode($data, JSON_PRETTY_PRINT);
+		} else {
+			$stream = $data;
+		}
+		file_put_contents($filename, $stream);
 	}
 }
 
