@@ -78,9 +78,9 @@ install_listfiles lists
 for i in $(sed -n 's/^%package plugin-//p' rpm/plugins); do \
     install_listfiles plugin-$i
 done
-# Manually handling the 3 python glue files for MoinMoin integration
+# Manually handling the python glue files for MoinMoin integration & RepositoryAPI documentation
 echo %{_datadir}/%{name}/plugins/moinmoin/lib/ >> plugin-moinmoin.rpmfiles
-
+echo %{_datadir}/%{name}/plugins/repositoryapi/Documentation/ >> plugin-repositoryapi.rpmfiles
 
 %package common
 Summary: Collaborative development tool - shared files
