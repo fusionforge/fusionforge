@@ -45,7 +45,7 @@ if (!forge_check_perm('docman', $g->getID(), 'approve')) {
 $arr_fileid = explode(',', getStringFromRequest('fileid'));
 foreach ($arr_fileid as $fileid) {
 	if (!empty($fileid)) {
-		$d = document_get_object($fileid, $group_id);
+		$d = document_get_object($fileid, $g->getID());
 		if ($d->isError() || !$d->delete()) {
 			$error_msg = $d->getErrorMessage();
 			session_redirect($urlredirect);
