@@ -173,6 +173,8 @@ class CliActions {
 		$artifactDump['id'] = $aid;
 		$artf = artifact_get_object($aid);
 		if ($artf && is_object($artf) && !$artf->isError()) {
+			$artifactDump = (array)$artf;
+			unset($artifactDump['ArtifactType']);
 			$artifactDump['history'] = array();
 			$hist = $artf->getHistory();
 			if (db_numrows($hist) > 0) {
@@ -180,8 +182,6 @@ class CliActions {
 					$artifactDump['history'][] = $arr;
 				}
 			}
-			$artifactDump['artifact'] = (array)$artf;
-			unset($artifactDump['artifact']['ArtifactType']);
 			$artifactDump['monitor'] = $artf->getMonitorIds();
 			$artifactDump['messages'] = array();
 			$messages = $artf->getMessages();
@@ -193,24 +193,59 @@ class CliActions {
 			$files = $artf->getFiles();
 			foreach ($files as $key => $file) {
 				unset($file->Artifact);
-				$artifactDump['artifact']['files'][$key] = (array)$file;
-				$artifactDump['artifact']['files'][$key]['storageref'] = $file->getFile();
+				$artifactDump['files'][$key] = (array)$file;
+				$artifactDump['files'][$key]['storageref'] = $file->getFile();
 			}
-			$artifactDump['artifact']['relatedtasks'] = array();
+			$artifactDump['relatedtasks'] = array();
 			$tasks = $artf->getRelatedTasks();
 			if (db_numrows($tasks) > 0) {
 				while ($arr = db_fetch_array($tasks, PGSQL_ASSOC)) {
-					$artifactDump['artifact']['relatedtasks'][] = $arr;
+					$artifactDump['relatedtasks'][] = $arr;
 				}
 			}
-			$artifactDump['artifact']['votes'] = $artf->getVotes();
-			$artifactDump['artifact']['extra_field_data'] = $artf->getExtraFieldDataText();
+			$artifactDump['votes'] = $artf->getVotes();
+			$artifactDump['extra_field_data'] = $artf->getExtraFieldDataText();
 		} else {
 			$artifactDump['error'][] = _('Unable to get artifact id')._(': ').$aid;
 		}
 		ksort($artifactDump);
 		$this->print_result($artifactDump, $format);
 		return $artifactDump;
+	}
+
+	function artifactImport($file, $format = 'json') {
+		global $importRefMapping;
+		$stream = $this->loadFile($file, $format);
+		if (!$stream) {
+			return false;
+		}
+		$group_artifact_id = $this->getMappingId($stream['data_array']['group_artifact_id'], 'tracker');
+		$at = artifactType_get_object($group_artifact_id);
+		if ($at && is_object($at) && !$at->isError()) {
+			db_begin();
+			$artf = new Artifact($at);
+			$summary = $stream['data_array']['summary'];
+			$details = $stream['data_array']['details'];
+			$assigned_to = $this->getMappingId($stream['data_array']['assigned_to'], 'user');
+			$priority = $stream['data_array']['priority'];
+			$extra_fields = array();
+			$importData['user'] = $this->getMappingId($stream['data_array']['submitted_by'], 'user');
+			$importData['nopermcheck'] = true;
+			$importData['nonotice'] = true;
+			$importData['time'] = $stream['data_array']['open_date'];
+			if (!$artf->create($summary, $details, $assigned_to, $priority, $extra_fields, $importData)) {
+				echo $artf->getErrorMessage()."\n";
+				db_rollback();
+				return false;
+			}
+			db_commit();
+			$importRefMapping['artifact'][$stream['data_array']['artifact_id']] = null;
+			echo _('Artifact injected')."\n";
+			return true;
+		} else {
+			echo _('Unable to get tracker to inject artifact')._(': ').$group_artifact_id."\n";
+			return false;
+		}
 	}
 
 	function groupDump($lgroup_id, $format = 'json') {
@@ -385,8 +420,7 @@ class CliActions {
 					db_rollback();
 					return false;
 				}
-				$created_by = $this->getMappingId($version['created_by'], 'user');
-				$importData['user'] = $created_by;
+				$importData['user'] = $this->getMappingId($version['created_by'], 'user');
 				$importData['nopermcheck'] = true;
 				$importData['nonotice'] = true;
 				$importData['time'] = $version['createdate'];
@@ -422,8 +456,7 @@ class CliActions {
 							$reviewoptionalusers[] = $userid;
 						}
 					}
-					$created_by = $this->getMappingId($review['created_by'], 'user');
-					$importData['user'] = $created_by;
+					$importData['user'] = $this->getMappingId($review['created_by'], 'user');
 					$importData['startdate'] = $review['startdate'];
 					$importData['enddate'] = $review['enddate'];
 					$importData['nonotice'] = true;
