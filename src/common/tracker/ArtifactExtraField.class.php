@@ -781,9 +781,9 @@ class ArtifactExtraField extends FFError {
 	function getAvailableValues() {
 		$type = $this->getType();
 		if (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_VALUE))) {
-			$return = array();;
+			$return = array();
 		} else {
-			$res = db_query_params ('SELECT *, 0 AS is_default
+			$res = db_query_params('SELECT *, 0 AS is_default
 						FROM artifact_extra_field_elements
 						WHERE extra_field_id=$1
 						ORDER BY element_pos ASC, element_id ASC',
@@ -793,29 +793,29 @@ class ArtifactExtraField extends FFError {
 			$return = array();
 			if (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_SINGLECHOICE))) {
 				while ($row = db_fetch_array($res)) {
-					if ($row['element_id']==$default) {
-						$row['is_default']=1;
+					if ($row['element_id'] == $default) {
+						$row['is_default'] = 1;
 					}
 					$return[] = $row;
 				}
 			} elseif (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_MULTICHOICE))) {
 				while ($row = db_fetch_array($res)) {
 					if (is_array($default) && in_array($row['element_id'], $default)) {
-						$row['is_default']=1;
+						$row['is_default'] = 1;
 					}
 					$return[] = $row;
 				}
 			} elseif ($type == ARTIFACT_EXTRAFIELDTYPE_USER || $type == ARTIFACT_EXTRAFIELDTYPE_RELEASE) {
 				while ($row = db_fetch_array($res)) {
-					if ($row['element_id']==$default) {
-						$row['is_default']=1;
+					if ($row['element_id'] == $default) {
+						$row['is_default'] = 1;
 					}
 					$return[] = $row;
 				}
 			} else {
 				while ($row = db_fetch_array($res)) {
 					if (!is_null($default) && in_array($row['element_id'],$default)) {
-						$row['is_default']=1;
+						$row['is_default'] = 1;
 					}
 					$return[] = $row;
 				}
@@ -896,7 +896,7 @@ class ArtifactExtraField extends FFError {
 	 * @param	int	$parent		Parent extra field id.
 	 * @return	bool	success.
 	 */
-	function update($name, $attribute1, $attribute2, $is_required = 0, $alias = "", $show100 = true, $show100label = 'none', $description = '', $pattern='', $parent=100, $autoassign=0, $is_hidden_on_submit=0, $is_disabled=0) {
+	function update($name, $attribute1, $attribute2, $is_required = 0, $alias = "", $show100 = true, $show100label = 'none', $description = '', $pattern = '', $parent = 100, $autoassign = 0, $is_hidden_on_submit = 0, $is_disabled = 0) {
 		if (!forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
