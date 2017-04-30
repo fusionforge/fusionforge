@@ -208,7 +208,7 @@ class ArtifactType extends FFError {
 	 * @param	bool	$email_all		(1) true (0) false - whether to email on all updates.
 	 * @param	string	$email_address		The address to send new entries and updates to.
 	 * @param	int	$due_period		Days before this item is considered overdue.
-	 * @param	bool	$use_resolution		(1) true (0) false - whether the resolution box should be shown.
+	 * @param	bool	$use_resolution		(1) true (0) false - whether the resolution box should be shown. //TODO: unused parameter. to be drop!
 	 * @param	string	$submit_instructions	Free-form string that project admins can place on the submit page.
 	 * @param	string	$browse_instructions	Free-form string that project admins can place on the browse page.
 	 * @param	int	$datatype		(1) bug tracker, (2) Support Tracker, (3) Patch Tracker, (4) features (0) other.
@@ -235,7 +235,6 @@ class ArtifactType extends FFError {
 			}
 		}
 
-		$use_resolution = ((!$use_resolution) ? 0 : $use_resolution);
 		$email_all = ((!$email_all) ? 0 : $email_all);
 
 		db_begin();
@@ -1340,7 +1339,7 @@ class ArtifactType extends FFError {
 	 * @param	string	$email_address		The address to send new entries and updates to.
 	 * @param	int	$due_period		Days before this item is considered overdue.
 	 * @param	int	$status_timeout		 Days before stale items time out.
-	 * @param	bool	$use_resolution		(1) true (0) false - whether the resolution box should be shown.
+	 * @param	bool	$use_resolution		(1) true (0) false - whether the resolution box should be shown. //TODO: unused parameter. to be drop!
 	 * @param	string	$submit_instructions	Free-form string that project admins can place on the submit page.
 	 * @param	string	$browse_instructions	Free-form string that project admins can place on the browse page.
 	 * @return	bool	true on success, false on failure.
@@ -1383,7 +1382,6 @@ class ArtifactType extends FFError {
 		}
 
 		$email_all = ((!$email_all) ? 0 : $email_all);
-		$use_resolution = ((!$use_resolution) ? 0 : $use_resolution);
 
 		$res = db_query_params('UPDATE artifact_group_list SET
 			name=$1,
@@ -1497,7 +1495,7 @@ class ArtifactType extends FFError {
 		$res = db_query_params ('UPDATE artifact_group_list SET unit_set_id=$1 WHERE group_artifact_id=$2',
 				array($unit_set_id, $this->getID()));
 		if ($res) {
-			$this->data_array['unit_set_id']=$unit_set_id;
+			$this->data_array['unit_set_id'] = $unit_set_id;
 			db_commit();
 			return true;
 		} else {
@@ -1531,34 +1529,51 @@ class ArtifactType extends FFError {
 			$avtmp = $aefobj->getAvailableValues();
 			$avs = array();
 			for ($j=0; $j < count($avtmp); $j++) {
-				$avs[$j]["element_id"] = $avtmp[$j]["element_id"];
-				$avs[$j]["element_name"] = $avtmp[$j]["element_name"];
-				$avs[$j]["status_id"] = $avtmp[$j]["status_id"];
+				$avs[$j]['auto_assign_to']	= $avtmp[$j]['auto_assign_to'];
+				$avs[$j]['element_id']		= $avtmp[$j]['element_id'];
+				$avs[$j]['element_name']	= $avtmp[$j]['element_name'];
+				$avs[$j]['is_default']		= $avtmp[$j]['is_default'];
+				$avs[$j]['status_id']		= $avtmp[$j]['status_id'];
 			}
 
 			$extrafields[] = array(
-				"extra_field_id"	=> $aefobj->getID(),
-				"field_name"		=> $aefobj->getName(),
-				"field_type"		=> $aefobj->getType(),
-				"attribute1"		=> $aefobj->getAttribute1(),
-				"attribute2"		=> $aefobj->getAttribute2(),
-				"is_required"		=> $aefobj->isRequired(),
-				"alias"			=> $aefobj->getAlias(),
-				"available_values"	=> $avs,
-				"default_selected_id"	=> 0		//TODO (not implemented yet)
-			);
+				'alias'			=> $aefobj->getAlias(),
+				'attribute1'		=> $aefobj->getAttribute1(),
+				'attribute2'		=> $aefobj->getAttribute2(),
+				'autoassign'		=> $aefobj->isAutoAssign(),
+				'available_values'	=> $avs,
+				'description'		=> $aefobj->getDescription(),
+				'extra_field_id'	=> $aefobj->getID(),
+				'field_name'		=> $aefobj->getName(),
+				'field_type'		=> $aefobj->getType(),
+				'is_disabled'		=> $aefobj->isDisabled(),
+				'is_hidden_on_submit'	=> $aefobj->isHiddenOnSubmit(),
+				'is_required'		=> $aefobj->isRequired(),
+				'name'			=> $aefobj->getName(),
+				'pattern'		=> $aefobj->getPattern(),
+				'parent'		=> $aefobj->getParent(),
+				'show100'		=> $aefobj->getShow100(),
+				'show100label'		=> $aefobj->getShow100label()
+							);
 		}
 
 		$return = array(
-				'group_artifact_id'	=> $this->data_array['group_artifact_id'],
-				'group_id'		=> $this->data_array['group_id'],
-				'name'			=> $this->data_array['name'],
-				'description'		=> $this->data_array['description'],
-				'due_period'		=> $this->data_array['due_period'],
-				'datatype'		=> $this->data_array['datatype'],
-				'status_timeout'	=> $this->data_array['status_timeout'],
+				'browse_list'		=> $this->getBrowseList(),
+				'browse_instructions'	=> $this->getBrowseInstructions(),
+				'custom_status_field'	=> $this->getCustomStatusField(),
+				'datatype'		=> $this->getDataType(),
+				'description'		=> $this->getDescription(),
+				'due_period'		=> $this->getDuePeriod(),
+				'email_address'		=> $this->getEmailAddress(),
+				'email_all_updates'	=> $this->emailAll(),
 				'extra_fields'		=> $extrafields,
-				'custom_status_field'	=> $this->data_array['custom_status_field'],
+
+				'group_artifact_id'	=> $this->getID(),
+				'group_id'		=> $this->getGroup()->getID(),
+				'name'			=> $this->getName(),
+				'status_timeout'	=> $this->getStatusTimeout(),
+				'submit_instructions'	=> $this->getSubmitInstructions(),
+				'unit_set_id'		=> $this->getEffortUnitSet(),
 				'use_tracker_widget_display' => $this->getWidgetLayoutConfig());
 		return $return;
 	}
