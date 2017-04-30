@@ -58,10 +58,20 @@ class CliActions {
 				echo "to dump an artifact from a specific tracker of a project.\n";
 				echo $dumpFormatInfo;
 				break;
+			case 'artifactImport':
+				echo "Use: .../forge artifactImport <file> [json|raw]\n";
+				echo "to import an artifact.\n";
+				echo $dumpFormatInfo.$importFormatInfo;
+				break;
 			case 'trackerDump':
 				echo "Use: .../forge trackerDump <atid> [json|raw]\n";
 				echo "to dump a tracker from a specific project.\n";
 				echo $dumpFormatInfo;
+				break;
+			case 'trackerImport':
+				echo "Use: .../forge trackerImport <file> [json|raw]\n";
+				echo "to import a tracker and all his elements.\n";
+				echo $dumpFormatInfo.$importFormatInfo;
 				break;
 			case 'documentDump':
 				echo "Use: .../forge documentDump <docid> [json|raw]\n";
@@ -77,6 +87,11 @@ class CliActions {
 				echo "Use: .../forge docgroupDump <docgroupid> [json|raw]\n";
 				echo "to dump a document group (folder) from a specific project.\n";
 				echo $dumpFormatInfo;
+				break;
+			case 'docgroupImport':
+				echo "Use: .../forge docgroupImport <file> [json|raw]\n";
+				echo "to import a document group (folder) and all his elements.\n";
+				echo $dumpFormatInfo.$importFormatInfo;
 				break;
 			case 'docmanDump':
 				echo "Use: .../forge docmanDump <groupid> [json|raw]\n";
@@ -239,7 +254,7 @@ class CliActions {
 				return false;
 			}
 			db_commit();
-			$importRefMapping['artifact'][$stream['data_array']['artifact_id']] = null;
+			$importRefMapping['artifact'][$stream['data_array']['artifact_id']] = $artf->getID();
 			echo _('Artifact injected')."\n";
 			return true;
 		} else {
@@ -359,6 +374,53 @@ class CliActions {
 		ksort($trackerDump);
 		$this->print_result($trackerDump, $format);
 		return $trackerDump;
+	}
+
+	function trackerImport($file, $format = 'json') {
+		global $importRefMapping;
+		$stream = $this->loadFile($file, $format);
+		if (!$stream) {
+			return false;
+		}
+		$group_id = $this->getMappingId($stream['setup']['group_id'], 'group');
+		$group = group_get_object($group_id);
+		if ($group && is_object($group) && !$group->isError() && $group->usesTracker()) {
+			db_begin();
+			$at = new ArtifactType($group);
+			$name = $stream['setup']['name'];
+			$description = $stream['setup']['description'];
+			$email_all = $stream['setup']['email_all_updates'];
+			$email_address = $stream['setup']['email_address'];
+			$due_period = $stream['setup']['due_period']/(60*60*24); //in days
+			$submit_instructions = $stream['setup']['submit_instructions'];
+			$browse_instructions = $stream['setup']['browse_instructions'];
+			if (!$at->create($name, $description, $email_all, $email_address, $due_period, 0, $submit_instructions, $browse_instructions)) {
+				echo $at->getErrorMessage()."\n";
+				db_rollback();
+				return false;
+			}
+			if (isset($stream['setup']['extra_fields']) && is_array($stream['setup']['extra_fields'])) {
+				foreach ($stream['setup']['extra_fields'] as $extra_field) {
+					$ef = new ArtifactExtraField($at);
+					if (!$ef->create($extra_field['name'], $extra_field['field_type'], $extra_field['attribute1'], $extra_field['attribute2'],
+							$extra_field['is_required'], $extra_field['alias'], $extra_field['show100'], $extra_field['show100label'],
+							$extra_field['description'], $extra_field['pattern'], $extra_field['parent'], $extra_field['autoassign'],
+							$extra_field['is_hidden_on_submit'], $extra_field['is_disabled'])) {
+						echo $ef->getErrorMessage()."\n";
+						db_rollback();
+						return false;
+					}
+					$importRefMapping['extrafield'][$extra_field['extra_field_id']] = $ef->getID();
+				}
+			}
+			db_commit();
+			$importRefMapping['artifact_type'][$stream['setup']['group_artifact_id']] = $at->getID();
+			echo _('Tracker injected')."\n";
+			return true;
+		} else {
+			echo _('Unable to get project to inject tracker')._(': ').$group_id."\n";
+			return false;
+		}
 	}
 
 	function documentDump($docid, $format = 'json') {
