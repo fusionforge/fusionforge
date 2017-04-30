@@ -6,6 +6,7 @@
  * Copyright 2009, Roland Mas
  * Copyright 2009, Alcatel-Lucent
  * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
+ * Copyright 2017, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -23,7 +24,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-/*
+/**
  * Standard Alcatel-Lucent disclaimer for contributing to open source
  *
  * "The Artifact ("Contribution") has not been tested and/or
@@ -68,7 +69,7 @@ class ArtifactExtraFieldElement extends FFError {
 	 * @param	object		$ArtifactExtraField	ArtifactExtraField object.
 	 * @param	array|bool	$data			(all fields from artifact_file_user_vw) OR id from database.
 	 */
-	function __construct(&$ArtifactExtraField,$data=false) {
+	function __construct(&$ArtifactExtraField, $data = false) {
 		parent::__construct();
 
 		// Was ArtifactExtraField legit?
@@ -99,9 +100,11 @@ class ArtifactExtraFieldElement extends FFError {
 	 *
 	 * @param	string	$name		Name of the choice
 	 * @param	int	$status_id	Id the box that contains the choice (optional).
+	 * @param	int	$auto_assign_to	Id of user for autoassign rule. Default value is 100
+	 * @param	int	$is_default	is this value by default? Default value is 0 => No.
 	 * @return	bool	true on success / false on failure.
 	 */
-	function create($name,$status_id=0,$auto_assign_to=100,$is_default=0) {
+	function create($name, $status_id = 0, $auto_assign_to = 100, $is_default = 0) {
 		//
 		//	data validation
 		//
@@ -227,7 +230,7 @@ class ArtifactExtraFieldElement extends FFError {
 	}
 
 	/**
-	 * getBoxID - get this  artifact box id.
+	 * getBoxID - get this artifact box id.
 	 *
 	 * @return	int	The id #.
 	 */
@@ -355,7 +358,7 @@ class ArtifactExtraFieldElement extends FFError {
 			$row = db_fetch_array($res);
 			$return = $row['formula'];
 		} else {
-			$return ='';
+			$return = '';
 		}
 		return $return;
 	}
