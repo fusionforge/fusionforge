@@ -517,6 +517,18 @@ class CliActions {
 					@unlink($filename);
 				}
 			}
+			if (isset($stream['files']) && is_array($stream['files'])) {
+				foreach ($stream['files'] as $file) {
+					$filename = 'documentDump-'.$file['data_array']['docid'].'.'.$format;
+					$this->createSubfile($filename, $file, $format);
+					if (!$this->documentImport($filename, $format)) {
+						echo _('Unable to inject child file')."\n";
+						db_rollback();
+						return false;
+					}
+					@unlink($filename);
+				}
+			}
 			db_commit();
 			echo _('Document Group injected')."\n";
 			return true;
