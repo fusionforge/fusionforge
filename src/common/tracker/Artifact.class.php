@@ -1682,12 +1682,12 @@ class Artifact extends FFObject {
 			$ef = $this->ArtifactType->getExtraFields();
 			while ($arr = db_fetch_array($res)) {
 				$type=$ef[$arr['extra_field_id']]['field_type'];
-				if (($type == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) || ($type==ARTIFACT_EXTRAFIELDTYPE_MULTISELECT)) {
+				if (($type == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) || ($type == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT)) {
 					//accumulate a sub-array of values in cases where you may have multiple rows
 					if (!array_key_exists($arr['extra_field_id'], $this->extra_field_data) || !is_array($this->extra_field_data[$arr['extra_field_id']])) {
 						$this->extra_field_data[$arr['extra_field_id']] = array();
 					}
-					$this->extra_field_data[$arr['extra_field_id']][]=$arr['field_data'];
+					$this->extra_field_data[$arr['extra_field_id']][] = $arr['field_data'];
 				} else {
 					$this->extra_field_data[$arr['extra_field_id']] = $arr['field_data'];
 				}

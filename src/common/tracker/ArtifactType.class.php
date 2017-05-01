@@ -223,7 +223,7 @@ class ArtifactType extends FFError {
 		}
 
 		if (!$name || !$description || !$due_period) {
-			$this->setError(_('ArtifactType: Name, Description, Due Period, and Status Timeout are required'));
+			$this->setError(_('ArtifactType')._(': ')._('Name, Description, Due Period, and Status Timeout are required'));
 			return false;
 		}
 
@@ -270,7 +270,7 @@ class ArtifactType extends FFError {
 		$id = db_insertid($res, 'artifact_group_list', 'group_artifact_id');
 
 		if (!$res || !$id) {
-			$this->setError('ArtifactType: '.db_error());
+			$this->setError(_('ArtifactType')._(': ').db_error());
 			db_rollback();
 			return false;
 		} else {
@@ -301,7 +301,7 @@ class ArtifactType extends FFError {
 			array($artifact_type_id,
 				$this->Group->getID()));
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError('ArtifactType: Invalid ArtifactTypeID');
+			$this->setError(_('ArtifactType')._(': ')._('Invalid ArtifactTypeID'));
 			return false;
 		}
 		$this->data_array = db_fetch_array($res);
@@ -529,12 +529,12 @@ class ArtifactType extends FFError {
 				$res = db_query_params('SELECT status_id FROM artifact_extra_field_elements WHERE element_id=$1',
 					array($element_id));
 				if (!$res) {
-					$this->setError('Error Remapping Status: '.db_error());
+					$this->setError(_('Error Remapping Status')._(': ').db_error());
 					return false;
 				}
 				$status_id = db_result($res, 0, 'status_id');
 				if ($status_id < 1 || $status_id > 4) {
-					$this->setError('INVALID STATUS REMAP: '.$status_id.' FROM SELECTED ELEMENT: '.$element_id);
+					$this->setError(sprintf(_('INVALID STATUS REMAP: %d FROM SELECTED ELEMENT: %d'), $status_id, $element_id));
 					return false;
 				}
 			} else {
@@ -542,7 +542,7 @@ class ArtifactType extends FFError {
 				$res = db_query_params('SELECT status_id FROM artifact_extra_field_elements WHERE extra_field_id=$1 ORDER BY element_id ASC LIMIT 1 OFFSET 0',
 					array($csfield));
 				if (db_numrows($res) == 0) { // No values available
-					$this->setError('Error Remapping Status');
+					$this->setError(_('Error Remapping Status'));
 					return false;
 				}
 				$status_id = db_result($res, 0, 'status_id');
