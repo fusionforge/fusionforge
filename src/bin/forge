@@ -243,7 +243,7 @@ class CliActions {
 		if (!$stream) {
 			return false;
 		}
-		$group_artifact_id = $this->getMappingId($stream['data_array']['group_artifact_id'], 'tracker');
+		$group_artifact_id = $this->getMappingId($stream['data_array']['group_artifact_id'], 'artifact_type');
 		$at = artifactType_get_object($group_artifact_id);
 		if ($at && is_object($at) && !$at->isError()) {
 			db_begin();
@@ -268,8 +268,30 @@ class CliActions {
 				db_rollback();
 				return false;
 			}
-			db_commit();
 			$importRefMapping['artifact'][$stream['data_array']['artifact_id']] = $artf->getID();
+			if (isset($stream['files']) && is_array($stream['files'])) {
+				$path = getcwd();
+				foreach ($stream['files'] as $file) {
+					if (isset($file['storageref']) && is_file($path.'/'.$file['storageref'])) {
+						$filedataname = $path.'/'.$file['storageref'];
+						if (function_exists('finfo_open')) {
+							$finfo = finfo_open(FILEINFO_MIME_TYPE);
+							$filedatatype = finfo_file($finfo, $filedataname);
+						} else {
+							$filedatatype = $file['data_array']['filetype'];
+						}
+						$af = new ArtifactFile($artf);
+						$importFileData['user'] = $this->getMappingId($file['data_array']['submitted_by'], 'user');
+						$importFileData['time'] = $file['data_array']['adddate'];
+						if (!$af->create($file['data_array']['filename'], $filedatatype, $file['data_array']['filesize'], $filedataname, $file['data_array']['description'], $importData)) {
+							echo $af->getErrorMessage()."\n";
+							db_rollback();
+							return false;
+						}
+					}
+				}
+			}
+			db_commit();
 			echo _('Artifact injected')."\n";
 			return true;
 		} else {
@@ -409,6 +431,7 @@ class CliActions {
 				db_rollback();
 				return false;
 			}
+			$importRefMapping['artifact_type'][$stream['setup']['group_artifact_id']] = $at->getID();
 			if (isset($stream['setup']['extra_fields']) && is_array($stream['setup']['extra_fields'])) {
 				foreach ($stream['setup']['extra_fields'] as $extra_field) {
 					$ef = new ArtifactExtraField($at);
@@ -444,8 +467,19 @@ class CliActions {
 					}
 				}
 			}
+			if (isset($stream['data']) && is_array($stream['data'])) {
+				foreach ($stream['data'] as $n_artifact) {
+					$filename = 'artifactDump-'.$n_artifact['data_array']['artifact_id'].'.'.$format;
+					$this->createSubfile($filename, $n_artifact, $format);
+					if (!$this->artifactImport($filename, $format)) {
+						echo _('Unable to inject child artifact')."\n";
+						db_rollback();
+						return false;
+					}
+					@unlink($filename);
+				}
+			}
 			db_commit();
-			$importRefMapping['artifact_type'][$stream['setup']['group_artifact_id']] = $at->getID();
 			echo _('Tracker injected')."\n";
 			return true;
 		} else {
