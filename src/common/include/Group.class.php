@@ -47,7 +47,7 @@ require_once $gfcommon.'include/GroupJoinRequest.class.php';
 require_once $gfcommon.'include/Role.class.php';
 require_once $gfcommon.'widget/WidgetLayoutManager.class.php';
 
-$GROUP_OBJ=array();
+$GROUP_OBJ = array();
 
 /**
  * group_get_object() - Get the group object.
@@ -299,7 +299,7 @@ class Group extends FFError {
 		$res = db_query_params ('SELECT * FROM groups WHERE group_id=$1',
 					array($group_id));
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError(sprintf('fetchData(): %s', db_error()));
+			$this->setError('fetchData()'._(': ').db_error());
 			return false;
 		}
 		$this->data_array = db_fetch_array($res);
@@ -353,9 +353,9 @@ class Group extends FFError {
 			return false;
 		} else {
 
-			// Check if sys_use_project_vhost for homepage
+			// Check if use_project_vhost for homepage
 			if (forge_get_config('use_project_vhost')) {
-				$homepage = $unix_name.".".forge_get_config('web_host');
+				$homepage = $unix_name.'.'.forge_get_config('web_host');
 			} else {
 				$homepage = forge_get_config('web_host')."/www/".$unix_name."/";
 			}
@@ -391,14 +391,14 @@ class Group extends FFError {
 							md5(util_randbytes()),
 							$built_from_template));
 			if (!$res || db_affected_rows($res) < 1) {
-				$this->setError(sprintf(_('Error: Cannot create group: %s'),db_error()));
+				$this->setError(_('Error')._(': ')._('Cannot create group')._(': ').db_error());
 				db_rollback();
 				return false;
 			}
 
 			$id = db_insertid($res, 'groups', 'group_id');
 			if (!$id) {
-				$this->setError(sprintf(_('Error: Cannot get group id: %s'),db_error()));
+				$this->setError(_('Error')._(': ')._('Cannot get group id')._(': ').db_error());
 				db_rollback();
 				return false;
 			}
@@ -409,9 +409,7 @@ class Group extends FFError {
 			}
 
 			$gjr = new GroupJoinRequest($this);
-			$gjr->create($user->getID(),
-					'Fake GroupJoinRequest to store the creator of a project',
-					false);
+			$gjr->create($user->getID(), 'Fake GroupJoinRequest to store the creator of a project', false);
 
 			$hook_params = array();
 			$hook_params['group'] = $this;
@@ -465,7 +463,7 @@ class Group extends FFError {
 						$this->getID()));
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError(_('Error: Cannot change group properties: %s'),db_error());
+			$this->setError(_('Error')._(': ')._('Cannot change group properties')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -491,29 +489,29 @@ class Group extends FFError {
 	 *
 	 * Unlike updateAdmin(), this function accessible to project admin.
 	 *
-	 * @param object	$user		User requesting operation (for access control).
-	 * @param string	$group_name
-	 * @param string	$homepage
-	 * @param string	$short_description
-	 * @param bool	$use_mail
-	 * @param bool	$use_survey
-	 * @param bool	$use_forum
-	 * @param bool	$use_pm
-	 * @param bool	$use_pm_depend_box
-	 * @param bool	$use_scm
-	 * @param bool	$use_news
-	 * @param bool	$use_docman
-	 * @param string	$new_doc_address
-	 * @param bool	$send_all_docs
-	 * @param int	$logo_image_id XXXX UNUSED XXXX -> see getLogoImageID function
-	 * @param bool	$use_ftp
-	 * @param bool	$use_tracker
-	 * @param bool	$use_frs
-	 * @param bool	$use_stats
-	 * @param string	$tags
-	 * @param bool	$use_activity
-	 * @param bool	$is_public		group is publicly accessible
-	 * @return int    status.
+	 * @param	object	$user		User requesting operation (for access control).
+	 * @param	string	$group_name
+	 * @param	string	$homepage
+	 * @param	string	$short_description
+	 * @param	bool	$use_mail
+	 * @param	bool	$use_survey
+	 * @param	bool	$use_forum
+	 * @param	bool	$use_pm
+	 * @param	bool	$use_pm_depend_box
+	 * @param	bool	$use_scm
+	 * @param	bool	$use_news
+	 * @param	bool	$use_docman
+	 * @param	string	$new_doc_address
+	 * @param	bool	$send_all_docs
+	 * @param	int	$logo_image_id XXXX UNUSED XXXX -> see getLogoImageID function
+	 * @param	bool	$use_ftp
+	 * @param	bool	$use_tracker
+	 * @param	bool	$use_frs
+	 * @param	bool	$use_stats
+	 * @param	string	$tags
+	 * @param	bool	$use_activity
+	 * @param	bool	$is_public		group is publicly accessible
+	 * @return	int	status.
 	 * @access    public
 	 */
 	function update(&$user, $group_name, $homepage, $short_description, $use_mail, $use_survey, $use_forum,
@@ -595,7 +593,7 @@ class Group extends FFError {
 
 		$homepage = ltrim($homepage);
 		if (!$homepage) {
-			$homepage = util_make_url('/projects/' . $this->getUnixName() . '/');
+			$homepage = util_make_url('/projects/'.$this->getUnixName().'/');
 		}
 
 		db_begin();
@@ -639,13 +637,13 @@ class Group extends FFError {
 						$this->getID()));
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError(sprintf(_('Error updating project information: %s'), db_error()));
+			$this->setError(_('Error updating project information')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
 
 		if (!$this->setUseDocman($use_docman)) {
-			$this->setError(sprintf(_('Error updating project information: use_docman %s'), db_error()));
+			$this->setError(_('Error updating project information use_docman')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -741,7 +739,7 @@ class Group extends FFError {
 		// Check that status transition is valid
 		if ($this->getStatus() != $status
 			&& !array_key_exists($this->getStatus(). $status, $allowed_status_changes)) {
-			$this->setError(_('Invalid Status Change From: ').$this->getStatus(). _(' To: '.$status));
+			$this->setError(_('Invalid Status Change From')._(': ').$this->getStatus()._(' To ')._(': ').$status);
 			return false;
 		}
 
@@ -752,7 +750,7 @@ class Group extends FFError {
 			WHERE group_id=$2', array($status, $this->getID()));
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError(sprintf(_('Error: Cannot change group status: %s'),db_error()));
+			$this->setError(_('Error')._(': ')._('Cannot change group status')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -814,7 +812,7 @@ class Group extends FFError {
 	 * @return	bool	is_active.
 	 */
 	function isActive() {
-		if ($this->getStatus()=='A') {
+		if ($this->getStatus() == 'A') {
 			return true;
 		} else {
 			return false;
@@ -842,7 +840,7 @@ class Group extends FFError {
 		$res = db_query_params('UPDATE groups SET is_template=$1 WHERE group_id=$2',
 					array($booleanparam, $this->getID()));
 		if ($res) {
-			$this->data_array['is_template']=$booleanparam;
+			$this->data_array['is_template'] = $booleanparam;
 			db_commit();
 			return true;
 		} else {
@@ -1097,7 +1095,7 @@ class Group extends FFError {
 		$res = db_query_params('UPDATE groups SET use_scm=$1 WHERE group_id=$2',
 					array($booleanparam, $this->getID()));
 		if ($res) {
-			$this->data_array['use_scm']=$booleanparam;
+			$this->data_array['use_scm'] = $booleanparam;
 			db_commit();
 			return true;
 		} else {
@@ -1139,7 +1137,7 @@ class Group extends FFError {
 		$res = db_query_params('UPDATE groups SET use_mail=$1 WHERE group_id=$2',
 					array($booleanparam, $this->getID()));
 		if ($res) {
-			$this->data_array['use_mail']=$booleanparam;
+			$this->data_array['use_mail'] = $booleanparam;
 			db_commit();
 			return true;
 		} else {
@@ -1167,7 +1165,7 @@ class Group extends FFError {
 		$res = db_query_params('UPDATE groups SET use_news=$1 WHERE group_id=$2',
 					array($booleanparam, $this->getID()));
 		if ($res) {
-			$this->data_array['use_news']=$booleanparam;
+			$this->data_array['use_news'] = $booleanparam;
 			db_commit();
 			return true;
 		} else {
@@ -1195,7 +1193,7 @@ class Group extends FFError {
 		$res = db_query_params('UPDATE groups SET use_activity=$1 WHERE group_id=$2',
 					array($booleanparam, $this->getID()));
 		if ($res) {
-			$this->data_array['use_activity']=$booleanparam;
+			$this->data_array['use_activity'] = $booleanparam;
 			db_commit();
 			return true;
 		} else {
@@ -1229,7 +1227,7 @@ class Group extends FFError {
 		$res = db_query_params('UPDATE groups SET use_forum=$1 WHERE group_id=$2',
 					array($booleanparam, $this->getID()));
 		if ($res) {
-			$this->data_array['use_forum']=$booleanparam;
+			$this->data_array['use_forum'] = $booleanparam;
 			db_commit();
 			return true;
 		} else {
@@ -1566,6 +1564,27 @@ class Group extends FFError {
 		return $this->data_array['new_doc_address'];
 	}
 
+	function setDocEmailAddress($email) {
+		$invalid_mails = validate_emails($email);
+		if (count($invalid_mails) > 0) {
+			$this->setError(sprintf(ngettext('New Doc Address Appeared Invalid: %s', 'New Doc Addresses Appeared Invalid: %s', count($invalid_mails)),implode(',',$invalid_mails)));
+			return false;
+		}
+		db_begin();
+		$res = db_query_params('UPDATE groups SET new_doc_address = $1 WHERE group_id = $2',
+					array($email, $this->getID()));
+
+		if (!$res) {
+			$this->setError(_('Error')._(': ')._('Cannot Update Group new_doc_address')._(': ').db_error());
+			db_rollback();
+			return false;
+		} else {
+			$this->data_array['new_doc_address'] = $email;
+			db_commit();
+			return true;
+		}
+	}
+
 	/**
 	 * docEmailAll - whether or not this group has opted to use receive notices on all doc updates.
 	 *
@@ -1573,6 +1592,22 @@ class Group extends FFError {
 	 */
 	function docEmailAll() {
 		return $this->data_array['send_all_docs'];
+	}
+
+	function setDocEmailAll($status) {
+		db_begin();
+		$res = db_query_params('UPDATE groups SET send_all_docs = $1 WHERE group_id = $2',
+					array($status, $this->getID()));
+
+		if (!$res) {
+			$this->setError(_('Error')._(': ')._('Cannot Update Group send_all_docs')._(': ').db_error());
+			db_rollback();
+			return false;
+		} else {
+			$this->data_array['send_all_docs'] = $status;
+			db_commit();
+			return true;
+		}
 	}
 
 	/**
@@ -1628,11 +1663,11 @@ class Group extends FFError {
 				return true;
 			} else {
 				db_rollback();
-				$this->setError(_("Could not insert homepage to database"));
+				$this->setError(_('Could not insert homepage to database'));
 				return false;
 			}
 		} else {
-			$this->setError(_("Homepage cannot be empty"));
+			$this->setError(_('Homepage cannot be empty'));
 			return false;
 		}
 	}
@@ -1659,7 +1694,7 @@ class Group extends FFError {
 		$sql = 'DELETE FROM project_tags WHERE group_id=$1';
 		$res = db_query_params($sql, array($this->getID()));
 		if (!$res) {
-			$this->setError('Deleting old tags: '.db_error());
+			$this->setError(_('Deleting old tags')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -1680,8 +1715,7 @@ class Group extends FFError {
 			$sql = 'INSERT INTO project_tags (group_id,name) VALUES ($1, $2)';
 			$res = db_query_params($sql, array($this->getID(), $tag));
 			if (!$res) {
-				$this->setError(_('Setting tags:') . ' ' .
-					db_error());
+				$this->setError(_('Setting tags')._(': ').db_error());
 				db_rollback();
 				return false;
 			}
@@ -1728,7 +1762,7 @@ class Group extends FFError {
 		$members = $this->getMembers(false);
 		foreach ($members as $i) {
 			if(!$this->removeUser($i->getID())) {
-				$this->setError(_('Could not properly remove member:').' '.$i->getID());
+				$this->setError(_('Could not properly remove member')._(': ').$i->getID());
 				return false;
 			}
 		}
@@ -1751,7 +1785,7 @@ class Group extends FFError {
 				continue;
 			}
 			if (!$i->delete(1,1)) {
-				$this->setError(_('Could not properly delete the tracker:').' '.$i->getErrorMessage());
+				$this->setError(_('Could not properly delete the tracker')._(': ').$i->getErrorMessage());
 				return false;
 			}
 		}
@@ -1765,7 +1799,7 @@ class Group extends FFError {
 				continue;
 			}
 			if (!$i->delete()) {
-				$this->setError(_('Could not properly delete the roadmap:') . ' ' . $i->getErrorMessage());
+				$this->setError(_('Could not properly delete the roadmap')._(': ').$i->getErrorMessage());
 				return false;
 			}
 		}
@@ -1780,7 +1814,7 @@ class Group extends FFError {
 				continue;
 			}
 			if(!$i->delete(1,1)) {
-				$this->setError(_('Could not properly delete the forum:').' '.$i->getErrorMessage());
+				$this->setError(_('Could not properly delete the forum')._(': ').$i->getErrorMessage());
 				return false;
 			}
 		}
@@ -1795,7 +1829,7 @@ class Group extends FFError {
 				continue;
 			}
 			if (!$i->delete(1,1)) {
-				$this->setError(_('Could not properly delete the ProjectGroup:').' '.$i->getErrorMessage());
+				$this->setError(_('Could not properly delete the ProjectGroup')._(': ').$i->getErrorMessage());
 				return false;
 			}
 		}
@@ -1806,7 +1840,7 @@ class Group extends FFError {
 		$res = db_query_params('SELECT * FROM frs_package WHERE group_id=$1',
 					array($this->getID()));
 		if (!$res) {
-			$this->setError(_('Error FRS Packages: ').db_error());
+			$this->setError(_('Error FRS Packages')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -1814,7 +1848,7 @@ class Group extends FFError {
 		while ($arr = db_fetch_array($res)) {
 			$frsp=new FRSPackage($this, $arr['package_id'], $arr);
 			if (!$frsp->delete(1, 1)) {
-				$this->setError(_('Could not properly delete the FRSPackage:').' '.$frsp->getErrorMessage());
+				$this->setError(_('Could not properly delete the FRSPackage')._(': ').$frsp->getErrorMessage());
 				return false;
 			}
 		}
@@ -1869,7 +1903,7 @@ class Group extends FFError {
 		$res = db_query_params('DELETE FROM doc_groups WHERE group_id=$1',
 					array($this->getID()));
 		if (!$res) {
-			$this->setError(_('Error Deleting Documents')._(': ').db_error());
+			$this->setError(_('Error Deleting Document Groups')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -2269,7 +2303,7 @@ class Group extends FFError {
 		$hook_params['group_id'] = $this->getID();
 		$hook_params['user'] = user_get_object($user_id);
 		$hook_params['user_id'] = $user_id;
-		plugin_hook ("group_removeuser", $hook_params);
+		plugin_hook("group_removeuser", $hook_params);
 
 		//audit trail
 		$this->addHistory(_('Removed User'), $user_id);
@@ -2309,7 +2343,7 @@ class Group extends FFError {
 			$this->setError(_('Could Not Get Role'));
 			return false;
 		} elseif ($newrole->isError()) {
-			$this->setError(sprintf(_('Role: %s'),$role->getErrorMessage()));
+			$this->setError(_('Role')._(': ').$role->getErrorMessage());
 			return false;
 		} elseif ($newrole->getHomeProject() == NULL
 			  || $newrole->getHomeProject()->getID() != $this->getID()) {
@@ -2326,14 +2360,14 @@ class Group extends FFError {
 			}
 		}
 		if ($found_role == NULL) {
-			$this->setError(_('Error')._(': ').sprintf(_('User not removed: %s'), $user_id));
+			$this->setError(_('Error')._(': ')._('User not removed')._(': ').$user_id);
 			db_rollback();
 			return false;
 		}
 		$found_role->removeUser ($user);
 		$newrole->addUser ($user);
 
-		$this->addHistory(_('Updated User'),$user_id);
+		$this->addHistory(_('Updated User'), $user_id);
 		return true;
 	}
 
@@ -2350,8 +2384,8 @@ class Group extends FFError {
                     $old_value = '';
             }
 
-		return db_query_params ('INSERT INTO group_history(group_id,field_name,old_value,mod_by,adddate)
-			VALUES ($1,$2,$3,$4,$5)',
+		return db_query_params('INSERT INTO group_history(group_id,field_name,old_value,mod_by,adddate)
+						VALUES ($1,$2,$3,$4,$5)',
 					array($this->getID(),
 						$field_name,
 						$old_value,
@@ -2374,7 +2408,7 @@ class Group extends FFError {
 
 		global $SYS;
 
-		$members = $this->getUsers (true);
+		$members = $this->getUsers(true);
 
 		foreach ($members as $member) {
 			$user_id = $member->getID();
@@ -2406,7 +2440,7 @@ class Group extends FFError {
 	 * @return array of User objects for this group.
 	 */
 	function getMembers($onlyactive = true) {
-		return $this->getUsers (true, $onlyactive);
+		return $this->getUsers(true, $onlyactive);
 	}
 
 	/**
@@ -2416,9 +2450,9 @@ class Group extends FFError {
 	 * @return	string	String after replacements
 	 */
 	function replaceTemplateStrings($string) {
-		$string = str_replace ('UNIXNAME', $this->getUnixName(), $string);
-		$string = str_replace ('PUBLICNAME', $this->getPublicName(), $string);
-		$string = str_replace ('DESCRIPTION', $this->getDescription(), $string);
+		$string = str_replace('UNIXNAME', $this->getUnixName(), $string);
+		$string = str_replace('PUBLICNAME', $this->getPublicName(), $string);
+		$string = str_replace('DESCRIPTION', $this->getDescription(), $string);
 		return $string;
 	}
 
@@ -2434,7 +2468,7 @@ class Group extends FFError {
 		require_once $gfcommon.'widget/WidgetLayoutManager.class.php';
 
 		if ($this->getStatus()=='A') {
-			$this->setError(_("Group already active"));
+			$this->setError(_('Group already active'));
 			return false;
 		}
 
@@ -2673,7 +2707,8 @@ class Group extends FFError {
 			plugin_hook_by_reference ('clone_project_from_template', $params);
 		} else {
 			// Disable everything - except use_scm (manually set in the registration page)
-			db_query_params ('UPDATE groups SET use_mail=0, use_survey=0, use_forum=0, use_pm=0, use_pm_depend_box=0, use_news=0, use_docman=0, use_ftp=0, use_tracker=0, use_frs=0, use_stats=0 WHERE group_id=$1',
+			db_query_params ('UPDATE groups SET use_mail = 0, use_survey = 0, use_forum = 0, use_pm = 0, use_pm_depend_box = 0, use_news = 0,
+								use_docman = 0, use_ftp = 0, use_tracker = 0, use_frs = 0, use_stats = 0 WHERE group_id = $1',
 				array($this->getID()));
 		}
 
@@ -2715,7 +2750,7 @@ class Group extends FFError {
 		$admins = RBACEngine::getInstance()->getUsersByAllowedAction ('project_admin', $this->getID());
 
 		if (count($admins) < 1) {
-			$this->setError(_("Group does not have any administrators."));
+			$this->setError(_('Group does not have any administrators.'));
 			return false;
 		}
 
@@ -2778,14 +2813,14 @@ if there is anything we can do to help you.
 	 * @return	bool	completion status.
 	 * @access	public
 	 */
-	function sendRejectionEmail($response_id, $message="zxcv") {
+	function sendRejectionEmail($response_id, $message = 'zxcv') {
 		$submitters = array();
 		foreach (get_group_join_requests ($this) as $gjr) {
 			$submitters[] = user_get_object($gjr->getUserID());
 		}
 
 		if (count ($submitters) < 1) {
-			$this->setError(_("Group does not have any administrators."));
+			$this->setError(_('Group does not have any administrators.'));
 			return false;
 		}
 
@@ -2807,7 +2842,7 @@ if there is anything we can do to help you.
 					"response_text");
 			}
 
-			util_send_message($admin->getEmail(), sprintf(_('%s Project Denied'), forge_get_config ('forge_name')), $response);
+			util_send_message($admin->getEmail(), sprintf(_('%s Project Denied'), forge_get_config('forge_name')), $response);
 			setup_gettext_from_context();
 		}
 
@@ -2831,14 +2866,14 @@ if there is anything we can do to help you.
 			$submitters[] = user_get_object($gjr->getUserID());
 		}
 		if (count ($submitters) < 1) {
-			$this->setError(_("Could not find user who has submitted the project."));
+			$this->setError(_('Could not find user who has submitted the project.'));
 			return false;
 		}
 
-		$admins = RBACEngine::getInstance()->getUsersByAllowedAction ('approve_projects', -1);
+		$admins = RBACEngine::getInstance()->getUsersByAllowedAction('approve_projects', -1);
 
 		if (count($admins) < 1) {
-			$this->setError(_("There is no administrator to send the mail to."));
+			$this->setError(_('There is no administrator to send the mail to.'));
 			return false;
 		}
 
@@ -2846,7 +2881,7 @@ if there is anything we can do to help you.
 			$admin_email = $admin->getEmail();
 			setup_gettext_for_user ($admin);
 
-			$message = sprintf(_('New %s Project Submitted'), forge_get_config ('forge_name')) . "\n\n"
+			$message = sprintf(_('New %s Project Submitted'), forge_get_config('forge_name')) . "\n\n"
 					. _('Project Full Name')._(': ').htmlspecialchars_decode($this->getPublicName()) . "\n"
 					. _('Submitted Description')._(': ').htmlspecialchars_decode($this->getRegistrationPurpose()) . "\n";
 
@@ -2976,7 +3011,7 @@ if there is anything we can do to help you.
 						$this->getID()));
 
 		if (!$res) {
-			$this->setError(sprintf(_('Error: Cannot Update Group Unix Status: %s'),db_error()));
+			$this->setError(_('Error')._(': ')._('Cannot Update Group Unix Status')._(': ').db_error());
 			db_rollback();
 			return false;
 		} else {
@@ -2996,7 +3031,7 @@ if there is anything we can do to help you.
 				}
 			}
 
-			$this->data_array['unix_status']=$status;
+			$this->data_array['unix_status'] = $status;
 			db_commit();
 			return true;
 		}
@@ -3036,16 +3071,15 @@ if there is anything we can do to help you.
 
 	function setDocmanCreateOnlineStatus($status) {
 		db_begin();
-		/* if we activate search engine, we probably want to reindex */
-		$res = db_query_params('UPDATE groups SET use_docman_create_online=$1 WHERE group_id=$2',
+		$res = db_query_params('UPDATE groups SET use_docman_create_online = $1 WHERE group_id = $2',
 					array($status, $this->getID()));
 
 		if (!$res) {
-			$this->setError(sprintf(_('Error: Cannot Update Group DocmanCreateOnline Status: %s'),db_error()));
+			$this->setError(_('Error')._(': ')._('Cannot Update Group DocmanCreateOnline Status')._(': ').db_error());
 			db_rollback();
 			return false;
 		} else {
-			$this->data_array['use_docman_create_online']=$status;
+			$this->data_array['use_docman_create_online'] = $status;
 			db_commit();
 			return true;
 		}
@@ -3053,17 +3087,16 @@ if there is anything we can do to help you.
 
 	function setDocmanWebdav($status) {
 		db_begin();
-		/* if we activate search engine, we probably want to reindex */
-		$res = db_query_params('UPDATE groups SET use_webdav=$1 WHERE group_id=$2',
+		$res = db_query_params('UPDATE groups SET use_webdav = $1 WHERE group_id = $2',
 					array($status,
 						   $this->getID()));
 
 		if (!$res) {
-			$this->setError(sprintf(_('Error: Cannot Update Group UseWebdab Status: %s'),db_error()));
+			$this->setError(_('Error')._(': ')._('Cannot Update Group UseWebdav Status')._(': ').db_error());
 			db_rollback();
 			return false;
 		} else {
-			$this->data_array['use_webdav']=$status;
+			$this->data_array['use_webdav'] = $status;
 			db_commit();
 			return true;
 		}
@@ -3072,16 +3105,15 @@ if there is anything we can do to help you.
 	function setDocmanSearchStatus($status) {
 		db_begin();
 		/* if we activate search engine, we probably want to reindex */
-		$res = db_query_params('UPDATE groups SET use_docman_search=$1, force_docman_reindex=$1 WHERE group_id=$2',
-					array($status,
-						$this->getID()));
+		$res = db_query_params('UPDATE groups SET use_docman_search = $1, force_docman_reindex = $1 WHERE group_id = $2',
+					array($status, $this->getID()));
 
 		if (!$res) {
-			$this->setError(sprintf(_('Error: Cannot Update Group UseDocmanSearch Status: %s'),db_error()));
+			$this->setError(_('Error')._(': ')._('Cannot Update Group UseDocmanSearch Status')._(': ').db_error());
 			db_rollback();
 			return false;
 		} else {
-			$this->data_array['use_docman_search']=$status;
+			$this->data_array['use_docman_search'] = $status;
 			db_commit();
 			return true;
 		}
@@ -3089,17 +3121,15 @@ if there is anything we can do to help you.
 
 	function setDocmanForceReindexSearch($status) {
 		db_begin();
-		/* if we activate search engine, we probably want to reindex */
-		$res = db_query_params('UPDATE groups SET force_docman_reindex=$1 WHERE group_id=$2',
-					array($status,
-						$this->getID()));
+		$res = db_query_params('UPDATE groups SET force_docman_reindex = $1 WHERE group_id = $2',
+					array($status, $this->getID()));
 
 		if (!$res) {
-			$this->setError(sprintf(_('Error: Cannot Update Group force_docman_reindex %s'),db_error()));
+			$this->setError(_('Error')._(': ')._('Cannot Update Group force_docman_reindex')._(': ').db_error());
 			db_rollback();
 			return false;
 		} else {
-			$this->data_array['force_docman_reindex']=$status;
+			$this->data_array['force_docman_reindex'] = $status;
 			db_commit();
 			return true;
 		}
@@ -3115,7 +3145,7 @@ if there is anything we can do to help you.
 		$res = db_query_params ('UPDATE groups SET unit_set_id=$1 WHERE group_id=$2',
 				array($unit_set_id, $this->getID()));
 		if ($res) {
-			$this->data_array['unit_set_id']=$unit_set_id;
+			$this->data_array['unit_set_id'] = $unit_set_id;
 			db_commit();
 			return true;
 		} else {
