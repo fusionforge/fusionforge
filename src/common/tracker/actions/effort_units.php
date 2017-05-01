@@ -176,7 +176,7 @@ function show_units(&$effortUnitSet){
 						$isEditable = true;
 					break;
 			}
-			echo html_ao('p');
+			echo html_ac(html_ap() - 1);
 			break;
 		case EFFORTUNITSET_TRACKER_LEVEL:
 			echo html_e('h2', array(), _('Effort Unit Set'));
@@ -199,7 +199,7 @@ function show_units(&$effortUnitSet){
 					$isEditable = true;
 					break;
 			}
-			echo html_ao('p');
+			echo html_ac(html_ap() - 1);
 			break;
 	}
 
