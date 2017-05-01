@@ -721,6 +721,51 @@ class CliActions {
 		return $docmanDump;
 	}
 
+	function docmanImport($file, $format = 'json') {
+		global $importRefMapping;
+		$stream = $this->loadFile($file, $format);
+		if (!$stream) {
+			return false;
+		}
+		$group_id = $this->getMappingId($stream['setup']['group_id'], 'group');
+		$group = group_get_object($group_id);
+		if ($group && is_object($group) && !$group->isError() && $group->usesDocman()) {
+			db_begin();
+			if (isset($stream['setup']['new_doc_address'])) {
+				$group->setDocEmailAddress($stream['setup']['new_doc_address']);
+			}
+			if (isset($stream['setup']['use_docman_search'])) {
+				$group->setDocmanSearchStatus($stream['setup']['use_docman_search']);
+			}
+			if (isset($stream['setup']['use_webdav'])) {
+				$group->setDocmanWebdav($stream['setup']['use_webdav']);
+			}
+			if (isset($stream['setup']['use_docman_create_online'])) {
+				$group->setDocmanCreateOnlineStatus($stream['setup']['use_docman_create_online']);
+			}
+			if (isset($stream['setup']['send_all_docs'])) {
+				$group->setDocmanCreateOnlineStatus($stream['setup']['send_all_docs']);
+			}
+			if (isset($stream['data']) && is_array($stream['data'])) {
+				foreach ($stream['data'] as $element) {
+					$filename = 'docgroupDump-'.$element['data_array']['doc_group'].'.'.$format;
+					$this->createSubfile($filename, $element, $format);
+					if (!$this->docgroupImport($filename, $format)) {
+						echo _('Unable to inject child element')."\n";
+						db_rollback();
+						return false;
+					}
+					@unlink($filename);
+				}
+			}
+			db_commit();
+			echo _('Docman injected')."\n";
+		} else {
+			echo _('Unable to get project to inject docman')._(': ').$group_id."\n";
+			return false;
+		}
+	}
+
 	function frsDump($group_id, $format = 'json') {
 		$frsDump = array();
 		$group = group_get_object($group_id);
