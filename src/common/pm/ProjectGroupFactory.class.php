@@ -45,19 +45,18 @@ class ProjectGroupFactory extends FFError {
 	/**
 	 * @param	Group	$Group	The Group object to which this ProjectGroupFactory is associated.
 	*/
-	function __construct(&$Group, $skip_check=false) {
+	function __construct(&$Group, $skip_check = false) {
 		parent::__construct();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(_('Invalid Project'));
 			return;
 		}
 		if ($Group->isError()) {
-			$this->setError('ProjectGroup: '.$Group->getErrorMessage());
+			$this->setError('ProjectGroup'._(': ').$Group->getErrorMessage());
 			return;
 		}
 		if (!$skip_check && !$Group->usesPM()) {
-			$this->setError(sprintf(_('%s does not use the Project Management tool'),
-			    $Group->getPublicName()));
+			$this->setError(sprintf(_('%s does not use the Project Management tool'), $Group->getPublicName()));
 			return;
 		}
 		$this->Group =& $Group;
@@ -105,7 +104,6 @@ class ProjectGroupFactory extends FFError {
 		}
 		return $this->projectGroups;
 	}
-
 }
 
 // Local Variables:
