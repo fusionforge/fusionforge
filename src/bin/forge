@@ -310,6 +310,9 @@ class CliActions {
 			$groupDump['setup'] = (array)$group;
 			$groupDump['setup']['membersArr'] = $group->getMembers(false);
 			$groupDump['setup']['roles'] = $group->getRoles();
+			foreach ($groupDump['setup']['roles'] as $role) {
+				unset($role->Group);
+			}
 			$groupDump['setup']['homepage'] = $group->getWidgetLayoutConfig();
 			if ($group->usesDocman()) {
 				$groupDump['docman'] = $this->docmanDump($group_id, 'return');
@@ -353,12 +356,28 @@ class CliActions {
 					$groupDump['surveys'][] = $this->surveyDump($sfid, 'return');
 				}
 			}
+			if ($group->usesPM()) {
+				$groupDump['pm'] = array();
+				$pgf = new ProjectGroupFactory($group);
+				$pgfid_arr = $pgf->getAllProjectGroupIds();
+				foreach ($pgfid_arr as $pgfid) {
+					$groupDump['pm'][] = $this->pmDump($pgfid, 'return');
+				}
+			}
 			plugin_hook_by_reference('pluginDump', $groupDump);
 		} else {
 			$groupDump['error'][] = _('Unable to get group id')._(': ').$group_id;
 		}
 		ksort($groupDump);
 		$this->print_result($groupDump, $format);
+	}
+
+	function groupImport($file, $format = 'json') {
+		global $importRefMapping;
+		$stream = $this->loadFile($file, $format);
+		if (!$stream) {
+			return false;
+		}
 	}
 
 	function surveyDump($sid, $format = 'json') {
@@ -824,6 +843,20 @@ class CliActions {
 		ksort($releaseDump);
 		$this->print_result($releaseDump, $format);
 		return $releaseDump;
+	}
+
+	function pmDump($projectgroupid, $format = 'json') {
+		$pmDump['id'] = $projectgroupid;
+		$pg = projectgroup_get_object($projectgroupid);
+		if ($pg && is_object($pg) && !$pg->isError()) {
+			unset($pg->Group);
+			$pmDump['setup'] = (array)$pg;
+		} else {
+			$pmDump['error'][] = _('Unable to get project group id')._(': ').$projectgroupid;
+		}
+		ksort($pmDump);
+		$this->print_result($pmDump, $format);
+		return $pmDump;
 	}
 
 	function print_result($arrayDump, $format = 'json') {
