@@ -46,7 +46,7 @@ echo $HTML->openForm(array('id' => 'addtaskform', 'action' => '/pm/task.php?grou
 <input type="hidden" name="add_artifact_id[]" value="<?php echo $related_artifact_id; ?>" />
 
 <?php
-echo $HTML->listTableTop();
+echo $HTML->listTableTop(array(), array(), 'full');
 $cells = array();
 $cells[][] = '<strong>'._('Category')._(':').'</strong><br />'.
 		$pg->categoryBox('category_id').util_make_link('/pm/admin/?group_id='.$group_id.'&add_cat=1&group_project_id='.$group_project_id,'('._('Admin').')');

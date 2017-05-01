@@ -36,7 +36,7 @@ function artifact_submission_form($ath, $group, $summary='', $details='', $assig
 	echo html_e('input', array( 'type'=>'hidden', 'name'=>'form_key', 'value'=>form_generate_key()));
 	echo html_e('input', array( 'type'=>'hidden', 'name'=>'func', 'value'=>'postadd'));
 	echo html_e('input', array( 'type'=>'hidden', 'name'=>'MAX_FILE_SIZE', 'value'=>'10000000'));
-	echo $HTML->listTableTop();
+	echo $HTML->listTableTop(array(), array(), 'full');
 	if (!session_loggedin()) {
 		$content = html_ao('div', array('class'=>'login_warning_msg'));
 		$content .= $HTML->warning_msg(_('Please').' '.util_make_link('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI')), _('login')));
