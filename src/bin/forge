@@ -219,7 +219,16 @@ class CliActions {
 				}
 			}
 			$artifactDump['votes'] = $artf->getVotes();
-			$artifactDump['extra_field_data'] = $artf->getExtraFieldDataText();
+			$extra_field_data = $artf->getExtraFieldDataText();
+			$extra_field_element_ids = $artf->getExtraFieldData();
+			if (is_array($extra_field_element_ids)) {
+				foreach ($extra_field_element_ids as $key => $extra_field_element_id) {
+					if (isset($extra_field_data[$key])) {
+						$extra_field_data[$key]['element_id'] = $extra_field_element_id;
+					}
+				}
+			}
+			$artifactDump['extra_field_data'] = $extra_field_data;
 		} else {
 			$artifactDump['error'][] = _('Unable to get artifact id')._(': ').$aid;
 		}
@@ -239,16 +248,22 @@ class CliActions {
 		if ($at && is_object($at) && !$at->isError()) {
 			db_begin();
 			$artf = new Artifact($at);
-			$summary = $stream['data_array']['summary'];
-			$details = $stream['data_array']['details'];
 			$assigned_to = $this->getMappingId($stream['data_array']['assigned_to'], 'user');
-			$priority = $stream['data_array']['priority'];
 			$extra_fields = array();
+			if (isset($stream['extra_field_data']) && is_array($stream['extra_field_data'])) {
+				foreach ($stream['extra_field_data'] as $key => $extra_field_data) {
+					if (isset($extra_field_data['element_id'])) {
+						$efid = $this->getMappingId($key, 'extrafield');
+						$elid = $this->getMappingId($extra_field_data['element_id'], 'extrafield_element');
+						$extra_fields[$efid] = $elid;
+					}
+				}
+			}
 			$importData['user'] = $this->getMappingId($stream['data_array']['submitted_by'], 'user');
 			$importData['nopermcheck'] = true;
 			$importData['nonotice'] = true;
 			$importData['time'] = $stream['data_array']['open_date'];
-			if (!$artf->create($summary, $details, $assigned_to, $priority, $extra_fields, $importData)) {
+			if (!$artf->create($stream['data_array']['summary'], $stream['data_array']['details'], $assigned_to, $stream['data_array']['priority'], $extra_fields, $importData)) {
 				echo $artf->getErrorMessage()."\n";
 				db_rollback();
 				return false;
@@ -387,14 +402,9 @@ class CliActions {
 		if ($group && is_object($group) && !$group->isError() && $group->usesTracker()) {
 			db_begin();
 			$at = new ArtifactType($group);
-			$name = $stream['setup']['name'];
-			$description = $stream['setup']['description'];
-			$email_all = $stream['setup']['email_all_updates'];
-			$email_address = $stream['setup']['email_address'];
 			$due_period = $stream['setup']['due_period']/(60*60*24); //in days
-			$submit_instructions = $stream['setup']['submit_instructions'];
-			$browse_instructions = $stream['setup']['browse_instructions'];
-			if (!$at->create($name, $description, $email_all, $email_address, $due_period, 0, $submit_instructions, $browse_instructions)) {
+			if (!$at->create($stream['setup']['name'], $stream['setup']['description'], $stream['setup']['email_all_updates'], $stream['setup']['email_address'],
+					$due_period, 0, $stream['setup']['submit_instructions'], $stream['setup']['browse_instructions'])) {
 				echo $at->getErrorMessage()."\n";
 				db_rollback();
 				return false;
@@ -411,6 +421,27 @@ class CliActions {
 						return false;
 					}
 					$importRefMapping['extrafield'][$extra_field['extra_field_id']] = $ef->getID();
+					if (isset($extra_field['available_values']) && is_array($extra_field['available_values'])) {
+						$clean_status = true;
+						foreach ($extra_field['available_values'] as $available_value) {
+							$efe = new ArtifactExtraFieldElement($ef);
+							//by default extrafield status is created with default values: 'Open' & 'Closed'
+							if ($clean_status && $ef->getType() == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
+								$existingElements = $ef->getAvailableValues();
+								foreach($existingElements as $existingElement) {
+									$existingElement = new ArtifactExtraFieldElement($ef, $existingElement);
+									$existingElement->delete();
+								}
+								$clean_status = false;
+							}
+							if (!$efe->create($available_value['element_name'], $available_value['status_id'], $available_value['auto_assign_to'], $available_value['is_default'])) {
+								echo $efe->getErrorMessage()."\n";
+								db_rollback();
+								return false;
+							}
+							$importRefMapping['extrafield_element'][$available_value['element_id']] = $efe->getID();
+						}
+					}
 				}
 			}
 			db_commit();
