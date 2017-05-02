@@ -1358,7 +1358,7 @@ class ArtifactType extends FFError {
 		}
 
 		if (!$name || !$description || !$due_period || !$status_timeout) {
-			$this->setError(_('ArtifactType: Name, Description, Due Period, and Status Timeout are required'));
+			$this->setError(_('ArtifactType')._(': ')._('Name, Description, Due Period, and Status Timeout are required'));
 			return false;
 		}
 
