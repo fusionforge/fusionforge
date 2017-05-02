@@ -39,7 +39,6 @@ class DocumentReviewFactory extends FFError {
 
 	/**
 	 * @param	$Document
-	 * @internal	param		\The $object Document object to which this review factory is associated.
 	 */
 	function __construct(&$Document) {
 		parent::__construct();

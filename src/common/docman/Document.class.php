@@ -90,9 +90,6 @@ class Document extends FFObject {
 	 * @param	$Group
 	 * @param	bool	$docid
 	 * @param	bool	$arr
-	 * @internal	param	\The $object Group object to which this document is associated.
-	 * @internal	param	\The $int docid.
-	 * @internal	param	\The $array associative array of data.
 	 */
 	function __construct(&$Group, $docid = false, $arr = false) {
 		parent::__construct($docid, get_class());
@@ -621,8 +618,7 @@ class Document extends FFObject {
 	 * isMonitoredBy - get the monitored status of this document for a specific user id.
 	 *
 	 * @param	string	$userid
-	 * @internal	param	\User $int ID
-	 * @return	boolean	true if monitored by this user
+	 * @return	bool	true if monitored by this user
 	 */
 	function isMonitoredBy($userid = 'ALL') {
 		$MonitorElementObject = new MonitorElement('docdata');
@@ -704,9 +700,7 @@ class Document extends FFObject {
 	 * @param	int	$stateLock	the status to be set
 	 * @param	string	$userid		the lock owner
 	 * @param	int	$thistime	the epoch time
-	 * @internal	param	\The $int status of the lock.
-	 * @internal	param	\The $int userid who set the lock.
-	 * @return	boolean	success or not.
+	 * @return	bool	success or not.
 	 */
 	function setLock($stateLock, $userid = NULL, $thistime = 0) {
 		$colArr = array('locked', 'locked_by', 'lockdate');

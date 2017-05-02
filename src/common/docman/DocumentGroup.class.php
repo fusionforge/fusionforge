@@ -99,8 +99,6 @@ class DocumentGroup extends FFError {
 	 *
 	 * @param	$Group
 	 * @param	bool	$data
-	 * @internal	param	\Group $object object.
-	 * @internal	param	array $OR doc_group id from database.
 	 */
 	function __construct(&$Group, $data = false) {
 		parent::__construct();
@@ -145,8 +143,7 @@ class DocumentGroup extends FFError {
 	 *							2 = deleted
 	 *							5 = private
 	 * @param	int	$createtimestamp	Timestamp of the directory creation
-	 * @internal	param	\Item $string name.
-	 * @return	boolean	true on success / false on failure.
+	 * @return	bool	true on success / false on failure.
 	 * @access	public
 	 */
 	function create($name, $parent_doc_group = 0, $state = 1, $createtimestamp = null, $forcecreate = false) {
@@ -229,8 +226,7 @@ class DocumentGroup extends FFError {
 	 *
 	 * @param	int	$doc_groupid
 	 * @param	int	$project_group_id
-	 * @internal	param	\Document $integer Group Id, integer Project Group Id
-	 * @return	boolean	success
+	 * @return	bool	success
 	 * @access	public
 	 */
 	function delete($doc_groupid, $project_group_id) {
@@ -421,8 +417,7 @@ class DocumentGroup extends FFError {
 	 * isMonitoredBy - get the monitored status of this document directory for a specific user id.
 	 *
 	 * @param	string	$userid
-	 * @internal	param	\User $int ID
-	 * @return	boolean	true if monitored by this user
+	 * @return	bool	true if monitored by this user
 	 */
 	function isMonitoredBy($userid = 'ALL') {
 		$MonitorElementObject = new MonitorElement('docgroup');
@@ -560,10 +555,7 @@ class DocumentGroup extends FFError {
 	 * @param	array	$nested_groups
 	 * @param	object	$document_factory
 	 * @param	int	$stateid
-	 * @internal	param	Array $array of nested groups information, fetched from DocumentGroupFactory class
-	 * @internal	param	\The $object DocumentFactory object
-	 * @internal	param	int $State of the documents
-	 * @return	boolean	success
+	 * @return	bool	success
 	 * @access	public
 	 */
 	function hasDocuments(&$nested_groups, &$document_factory, $stateid = 0) {
@@ -990,9 +982,7 @@ class DocumentGroup extends FFError {
 	 * @param	int	$stateLock	the status to be set
 	 * @param	string	$userid		the lock owner
 	 * @param	int	$thistime	the epoch time
-	 * @internal	param	\The $int status of the lock.
-	 * @internal	param	\The $int userid who set the lock.
-	 * @return	boolean	success or not.
+	 * @return	bool	success or not.
 	 */
 	function setLock($stateLock, $userid = NULL, $thistime = 0) {
 		$colArr = array('locked', 'locked_by', 'lockdate');

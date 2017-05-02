@@ -111,9 +111,6 @@ class FRSPackage extends FFError {
 	 * @param	$Group
 	 * @param	bool	$package_id
 	 * @param	bool	$arr
-	 * @internal	param	\The $object Group object to which this FRSPackage is associated.
-	 * @internal	param	\The $int package_id.
-	 * @internal	param	\The $array associative array of data.
 	 */
 	function __construct(&$Group, $package_id = false, $arr = false) {
 		parent::__construct();
@@ -150,7 +147,6 @@ class FRSPackage extends FFError {
 	 * create - create a new FRSPackage in the database.
 	 *
 	 * @param	$name
-	 * @internal	param	\The $string name of this package.
 	 * @return	boolean	success.
 	 */
 	function create($name) {
@@ -503,9 +499,9 @@ class FRSPackage extends FFError {
 	/**
 	 * delete - delete this package and all its related data.
 	 *
-	 * @param	bool	I'm Sure.
-	 * @param	bool	I'm REALLY sure.
-	 * @return	bool	true/false;
+	 * @param	bool	$sure		I'm Sure.
+	 * @param	bool	$really_sure	I'm REALLY sure.
+	 * @return	bool
 	 */
 	function delete($sure, $really_sure) {
 		if (!$sure || !$really_sure) {

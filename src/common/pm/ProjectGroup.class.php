@@ -90,9 +90,6 @@ class ProjectGroup extends FFError {
 	 * @param	$Group
 	 * @param	bool	$group_project_id
 	 * @param	bool	$arr
-	 * @internal	param	\The $object Group object to which this forum is associated.
-	 * @internal	param	\The $int group_project_id.
-	 * @internal	param	\The $array associative array of data.
 	 */
 	function __construct(&$Group, $group_project_id = false, $arr = false) {
 		parent::__construct();

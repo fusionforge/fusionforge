@@ -97,7 +97,6 @@ class DocumentFactory extends FFError {
 
 	/**
 	 * @param	$Group
-	 * @internal	param	\The $object Group object to which this DocumentFactory is associated.
 	 */
 	function __construct(&$Group) {
 		parent::__construct();
@@ -298,7 +297,6 @@ class DocumentFactory extends FFError {
 	 * getDocuments - returns an array of Document objects.
 	 *
 	 * @param	int	$nocache	Force to reset the cached data if any available.
-	 * @internal	param	\no $integer cache : force reinit $this->Documents : default: cache is used
 	 * @return	array	Document objects.
 	 * @access	public
 	 */

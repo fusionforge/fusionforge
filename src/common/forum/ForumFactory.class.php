@@ -169,9 +169,6 @@ class ForumFactory extends FFError {
 	 * @param	$group_forum_id
 	 * @param	$thread_id
 	 * @param	bool $old_forum_id
-	 * @internal	param \The $string forum ID
-	 * @internal	param \The $int thread_id of the tread to change.
-	 * @internal	param \The $string old forum ID
 	 *
 	 * Note: old forum ID is useless if forum_agg_msg_count table is no longer used
 	 *

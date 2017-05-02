@@ -74,19 +74,16 @@ class DocumentVersion extends FFError {
 	 * @param	$Document
 	 * @param	bool			$verid
 	 * @param	bool			$arr
-	 * @internal	param			\The $object Document object to which this version is associated.
-	 * @internal	param			\The $int verid.
-	 * @internal	param			\The $array associative array of data.
 	 */
 	function __construct(&$Document, $verid = false, $arr = false) {
 		parent::__construct();
 		if (!$Document || !is_object($Document)) {
 			$this->setError(_('No Valid Document Object'));
-			return false;
+			return;
 		}
 		if ($Document->isError()) {
 			$this->setError(_('Document Version')._(': ').$Document->getErrorMessage());
-			return false;
+			return;
 		}
 		$this->Document =& $Document;
 		if ($verid) {

@@ -90,9 +90,6 @@ class Survey extends FFError {
 	 * @param	$Group
 	 * @param	bool	$survey_id
 	 * @param	bool	$arr
-	 * @internal	param	\The $object Group object to which this survey is associated.
-	 * @internal	param	\The $int survey_id.
-	 * @internal	param	\The $array associative array of data.
 	 */
 	function __construct(&$Group, $survey_id = false, $arr = false) {
 		parent::__construct();
@@ -130,13 +127,7 @@ class Survey extends FFError {
 	 * @param	int		$is_active 1: Active, 0: Inactive
 	 * @param	int		$is_result_public
 	 * @param	Allow|int	$double_vote
-	 * @internal	param		\The $string survey title
-	 * @internal	param		array	$int The question numbers to be added
-	 * @internal	param		$is_active 1: Active, 0: Inactive
-	 * For future options
-	 * @internal	param		$is_result_public 0: Admins Only, 1: Group Members, 2: FusionForge user, 3:voted user 4:Every body
-	 * @internal	param		\Allow $double_vote double vote if it is 1
-	 * @return boolean success.
+	 * @return	bool	success.
 	 */
 	function create($survey_title, $add_questions, $is_active = 0, $is_public = 1, $is_result_public = 0, $double_vote = 0) {
 		if (!$survey_title) {
@@ -178,13 +169,7 @@ class Survey extends FFError {
 	 * @param	int		$is_active 1: Active, 0: Inactive
 	 * @param	int		$is_result_public
 	 * @param	Allow|int	$double_vote
-	 * @internal	param		\The $string survey title
-	 * @internal	param		array $int The question numbers to be added
-	 * @internal	param		array $int The question numbers to be deleted
-	 * @internal	param		$is_active 1: Active, 0: Inactive
-	 * @internal	param		$is_result_public 0: Admins Only, 1: Group Members, 2: FusionForge user, 3:voted user 4:Every body
-	 * @internal	param		\Allow $double_vote double vote if it is 1
-	 * @return	boolean		success.
+	 * @return	bool		success.
 	 */
 	function update($survey_title, &$add_questions, &$del_questions, $is_active = 0, $is_public = 1, $is_result_public = 0, $double_vote = 0) {
 		if (!$survey_title) {
