@@ -71,13 +71,13 @@ class TrackersHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 				$rowColor = 0;
 			}
 			$return .= '<tr>'
-						. '<td style="width: 5%">&nbsp;</td>'
-						. '<td>'.$row['artifact_id'].'</td>'
-						. '<td>'.util_make_link('/tracker/?func=detail&group_id='.$this->groupId.'&aid='.$row['artifact_id'].'&atid='.$row['group_artifact_id'],
+						.'<td style="width: 5%"></td>'
+						.'<td>'.$row['artifact_id'].'</td>'
+						.'<td>'.util_make_link('/tracker/?func=detail&group_id='.$this->groupId.'&aid='.$row['artifact_id'].'&atid='.$row['group_artifact_id'],
 									html_image('ic/tracker20g.png').' '.$row['summary'])
-							.'</td>'
-						. '<td style="width: 15%">'.$row['realname'].'</td>'
-						. '<td style="width: 15%">'.relative_date($row['open_date']).'</td></tr>';
+						.'</td>'
+						.'<td style="width: 15%">'.$row['realname'].'</td>'
+						.'<td style="width: 15%">'.relative_date($row['open_date']).'</td></tr>';
 			$rowColor++;
 		}
 		return $return;
