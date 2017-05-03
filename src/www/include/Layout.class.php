@@ -43,15 +43,6 @@ require_once $gfcommon.'include/Navigation.class.php';
 abstract class Layout extends FFError {
 
 	/**
-	 * Which doctype to use. Can be configured in the
-	 * constructor. If set to 'strict', headerHTMLDeclaration will
-	 * create a doctype definition that uses the strict doctype,
-	 * otherwise it will use the transitional doctype.
-	 * @var string $doctype
-	 */
-	var $doctype = 'transitional';
-
-	/**
 	 * The default main page content
 	 * @var	string	$rootindex
 	 */
@@ -296,19 +287,12 @@ abstract class Layout extends FFError {
 
 	/**
 	 * headerHTMLDeclaration() - generates the HTML declaration, i.e. the
-	 * XML declaration, the doctype definition, and the opening <html>.
+	 * HTML 5 doctype definition, and the opening <html>.
 	 *
 	 */
 	function headerHTMLDeclaration() {
-		global $sysDTDs, $sysXMLNSs;
-
-		print '<' . '?xml version="1.0" encoding="utf-8"?>'."\n";
-		if (!util_ifsetor($this->doctype) || !util_ifsetor($sysDTDs[$this->doctype])) {
-			$this->doctype = 'transitional';
-		}
-		echo $sysDTDs[$this->doctype]['doctype'] . "\n";
-		echo '<html xml:lang="' . _('en') . '" lang="' . _('en') .
-		    '" ' . $sysXMLNSs . ">\n";
+		print "<!DOCTYPE html>\n";
+		echo '<html xml:lang="' . _('en') . '" lang="' . _('en') .  '" ' . ">\n";
 	}
 
 	/**
