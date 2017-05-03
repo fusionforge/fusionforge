@@ -29,7 +29,7 @@ require_once $gfcommon.'search/ExportProjectSearchQuery.class.php';
  * callback function used during the RSS export
  *
  * @param array $dataRow array containing data for the current row
- * @return string additionnal information added in the RSS document
+ * @return string additional information added in the RSS document
  */
 function rssProjectCallback($dataRow) {
 	$result = db_query_params ('SELECT trove_cat.fullpath FROM trove_group_link, trove_cat
@@ -51,7 +51,7 @@ class ProjectRssSearchRenderer extends RssSearchRenderer {
 	/**
 	 * @param string $words words we are searching for
 	 * @param int $offset offset
-	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
+	 * @param bool $isExact if we want to search for all the words or if only one matching the query is sufficient
 	 */
 	function __construct($words, $offset, $isExact) {
 

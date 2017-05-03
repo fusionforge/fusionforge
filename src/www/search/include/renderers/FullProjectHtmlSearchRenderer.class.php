@@ -50,14 +50,14 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	/**
 	 * flag to define whether the result must contain all words or only one of them
 	 *
-	 * @var boolean $isExact
+	 * @var bool $isExact
 	 */
 	var $isExact;
 
 	/**
 	 * @param string $words words we are searching for
 	 * @param int $offset offset
-	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
+	 * @param bool $isExact if we want to search for all the words or if only one matching the query is sufficient
 	 * @param int $groupId group id
 	 */
 	function __construct($words, $offset, $isExact, $groupId) {
@@ -79,6 +79,8 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 
 	/**
 	 * writeBody - write the Body of the output
+	 *
+	 * @param bool $withpanel
 	 */
 	function writeBody($withpanel = true) {
 		global $HTML;

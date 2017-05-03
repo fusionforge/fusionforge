@@ -45,7 +45,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	/**
 	 * flag to define whether the result must contain all words or only one of them
 	 *
-	 * @var boolean $isExact
+	 * @var bool $isExact
 	 */
 	var $isExact;
 
@@ -59,7 +59,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	/**
 	 * @param string $words words we are searching for
 	 * @param int $offset offset
-	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
+	 * @param bool $isExact if we want to search for all the words or if only one matching the query is sufficient
 	 * @param int $groupId group id
 	 */
 	function __construct($words, $offset, $isExact, $groupId) {
@@ -93,6 +93,8 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 
 	/**
 	 * writeBody - write the Body of the output
+	 *
+	 * @param bool $withpanel
 	 */
 	function writeBody($withpanel = true) {
 		global $HTML;
@@ -285,9 +287,10 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	}
 
 	/**
-	* handleTransferInformation - marks parentsections if child is marked and processes cookie information
-	*
-	*/
+	 * handleTransferInformation - marks parentsections if child is marked and processes cookie information
+	 *
+	 * @param array $sectionarray
+	 */
 	function handleTransferInformation(&$sectionarray) {
 		//get through all sections
 		//if a childsection is marked to search in, mark the parent too

@@ -24,9 +24,6 @@
 
 require_once $gfwww.'search/include/renderers/HtmlSearchRenderer.class.php';
 
-/**
- *
- */
 class HtmlGroupSearchRenderer extends HtmlSearchRenderer {
 
 	/** TODO: Find what for is $offset, looks like it's not used, added to remove warning
@@ -48,7 +45,7 @@ class HtmlGroupSearchRenderer extends HtmlSearchRenderer {
 	/**
 	 * @param string  $typeOfSearch type of the search (Software, Forum, People and so on)
 	 * @param string  $words        words we are searching for
-	 * @param boolean $isExact      if we want to search for all the words or if only one matching the query is sufficient
+	 * @param bool    $isExact      if we want to search for all the words or if only one matching the query is sufficient
 	 * @param object  $searchQuery  SearchQuery instance
 	 * @param int     $groupId      group id
 	 * @param string  $topTab

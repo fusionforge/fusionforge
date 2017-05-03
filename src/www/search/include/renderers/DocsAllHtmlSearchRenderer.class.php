@@ -33,7 +33,7 @@ class DocsAllHtmlSearchRenderer extends HtmlSearchRenderer {
 	/**
 	 * @param	string	$words words we are searching for
 	 * @param	int	$offset offset
-	 * @param	boolean	$isExact if we want to search for all the words or if only one matching the query is sufficient
+	 * @param	bool	$isExact if we want to search for all the words or if only one matching the query is sufficient
 	 * @param	array|string	$sections array of all sections to search in (array of strings)
 	 */
 	function __construct($words, $offset, $isExact, $sections = SEARCH__ALL_SECTIONS) {

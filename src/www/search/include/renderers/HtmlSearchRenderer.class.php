@@ -38,7 +38,7 @@ class HtmlSearchRenderer extends SearchRenderer {
 	/**
 	 * @param string  $typeOfSearch type of the search (Software, Forum, People and so on)
 	 * @param string  $words        words we are searching for
-	 * @param boolean $isExact      if we want to search for all the words or if only one matching the query is sufficient
+	 * @param bool    $isExact      if we want to search for all the words or if only one matching the query is sufficient
 	 * @param object  $searchQuery  SearchQuery instance
 	 */
 	function __construct($typeOfSearch, $words, $isExact, $searchQuery) {
@@ -74,6 +74,8 @@ class HtmlSearchRenderer extends SearchRenderer {
 
 	/**
 	 * writeBody - write the body
+	 *
+	 * @param bool $withpanel
 	 */
 	function writeBody($withpanel = true) {
 		echo $this->writeResults($withpanel);
@@ -89,6 +91,8 @@ class HtmlSearchRenderer extends SearchRenderer {
 
 	/**
 	 * getResults - get the html output which will display the search results
+	 *
+	 * @param bool $withpanel
 	 *
 	 * @return string html output
 	 */
@@ -186,7 +190,7 @@ class HtmlSearchRenderer extends SearchRenderer {
 	/**
 	 * implementsRedirectToResult - check if the current object implements the redirect to result feature by having a redirectToResult method
 	 *
-	 * @return boolean true if our object implements search by id, false otherwise.
+	 * @return bool true if our object implements search by id, false otherwise.
 	 */
 	function implementsRedirectToResult() {
 		return method_exists($this, 'redirectToResult');

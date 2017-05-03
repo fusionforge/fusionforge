@@ -29,7 +29,7 @@ class ForumsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	/**
 	 * @param string       $words    words we are searching for
 	 * @param int          $offset   offset
-	 * @param boolean      $isExact  if we want to search for all the words or if only one matching the query is sufficient
+	 * @param bool         $isExact  if we want to search for all the words or if only one matching the query is sufficient
 	 * @param int          $groupId  group id
 	 * @param array|string $sections array of all sections to search in (array of strings)
 	 */

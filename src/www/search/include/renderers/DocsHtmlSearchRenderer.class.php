@@ -33,9 +33,11 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	/**
 	 * @param string $words words we are searching for
 	 * @param int $offset offset
-	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
+	 * @param bool $isExact if we want to search for all the words or if only one matching the query is sufficient
 	 * @param int $groupId group id
 	 * @param array|string $sections array of all sections to search in (array of strings)
+	 * @param int|string $rowsPerPage
+	 * @param array $options
 	 */
 	function __construct($words, $offset, $isExact, $groupId, $sections = SEARCH__ALL_SECTIONS, $rowsPerPage = SEARCH__DEFAULT_ROWS_PER_PAGE, $options = array()) {
 
