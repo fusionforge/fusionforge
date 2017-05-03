@@ -450,7 +450,7 @@ EOS;
 
 			if ($countLines >= $break) {
 				if (($countLines - $break) < ($break - $countLines)) {
-					$return .= '</td><td width="33%">';
+					$return .= '</td><td style="width: 33%">';
 					$break += $breakLimit;
 				}
 			}
