@@ -371,7 +371,6 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		echo $HTML->multiTableRow(array(), $cells);
 	}
 	echo $HTML->listTableBottom();
-	echo html_ao('p');
 	echo html_ao('span', array('id' => 'massactionactive', 'class' => 'hide'));
 	echo html_e('span', array('id' => 'docman-massactionmessage', 'title' => _('Actions availables for selected documents, you need to check at least one document to get actions')), _('Mass actions for selected documents')._(':'), false);
 	if (forge_check_perm('docman', $ndg->Group->getID(), 'approve')) {
@@ -385,7 +384,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		}
 	}
 	echo util_make_link('#', html_image('docman/download-directory-zip.png', 22, 22, array('alt' => _('Download as a ZIP'))) , array('onclick' => 'window.location.href=\''.util_make_uri('/docman/view.php/'.$g->getID().'/zip/selected/'.$dirid.'/\'+controllerListFile.buildUrlByCheckbox("active")'), 'title' => _('Download as a ZIP')), true);
-	echo html_ac(html_ap() - 3);
+	echo html_ac(html_ap() - 2);
 	if (forge_check_perm('docman', $ndg->Group->getID(), 'approve') && session_loggedin()) {
 		echo html_ao('div', array('class' => 'docman_div_include hide', 'id' => 'movefile'));
 		include ($gfcommon.'docman/views/movefile.php');
