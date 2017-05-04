@@ -1205,7 +1205,6 @@ class ArtifactExtraField extends FFError {
 	}
 
 	/**
-<<<<<<< 5c02d437ae2ab9d01370cc9aec4ecc46f3602746
 	 *    getMandatoryExtraFields - List of possible user built extra fields
 	 *    set up for this artifact type.
 	 *
@@ -1274,7 +1273,7 @@ class ArtifactExtraField extends FFError {
 
 		return $return;
 	}
-	
+
 	/**
 	 * getAvailableAggregationRules - the types of text fields and their names available.
 	 *
