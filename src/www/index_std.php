@@ -24,7 +24,7 @@
 require_once $gfcommon.'include/FusionForge.class.php';
 ?>
 <!-- whole page table -->
-<table id="bd" class="fullwidth" summary="">
+<table id="bd" class="fullwidth">
 <tr>
 <td id="bd-col1">
 	<h2 id="title-home-page"><img src="<?php echo util_make_uri ('/images/fusionforge-resized.png') ?>" alt="FusionForge"/></h2>
