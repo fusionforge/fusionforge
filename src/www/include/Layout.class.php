@@ -263,7 +263,7 @@ abstract class Layout extends FFError {
 		$this->headerHTMLDeclaration();
 		echo html_ao('head');
 		echo html_e('meta', array('http-equiv' => 'Content-Type', 'content' => 'text/html; charset=utf-8'));
-		echo html_e('meta', array('http-equiv' => 'X-UA-Compatible', 'content' => 'IE=9; IE=8; IE=EDGE'));
+		echo html_e('meta', array('http-equiv' => 'X-UA-Compatible', 'content' => 'IE=edge'));
 		if (isset($params['meta-description'])) {
 			echo html_e('meta', array('name' => 'description', 'content' => $params['meta-description']));
 		}
