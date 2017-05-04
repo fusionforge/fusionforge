@@ -53,7 +53,6 @@ a:hover {
 }
 
 table.listing tbody tr:nth-child(even),
-.even,
 .bgcolor-grey {
 	background-color: #FFF3B8;
 }
@@ -119,7 +118,7 @@ p.information {
 }
 
 #activity_submit {
-	margin-top: 10px;
+	margin-top:10px;
 }
 
 #activity_submit input {

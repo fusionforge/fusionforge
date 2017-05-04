@@ -539,14 +539,12 @@ a.topTabSelected:hover {
 }
 
 table.listing tbody tr:nth-child(even),
-.bgcolor-grey,
-.even {
+.bgcolor-grey {
 	background-color: #CDDCF3;
 }
 
 table.listing tbody tr:nth-child(odd),
-.bgcolor-white,
-.odd {
+.bgcolor-white {
 	background-color: #FFFFFF;
 }
 
@@ -672,7 +670,6 @@ p.information {
 	margin: 2px 3px 3px;
 }
 
-
 footer {
 	padding: 10px;
 	background: rgb(66, 69, 82) url("../images/header/header-bg.png");
@@ -742,7 +739,6 @@ footer img {
 }
 
 #activity_select {
-
 }
 
 #activity_label,
@@ -754,7 +750,6 @@ footer img {
 
 #activity_startdate,
 #activity_enddate {
-
 }
 
 #activity_submit {
