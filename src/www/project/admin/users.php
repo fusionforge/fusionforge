@@ -383,7 +383,7 @@ if (count ($unused_external_roles)) {
 
 $content .=  $HTML->boxBottom();
 $cells[][] = $content;
-echo $HTML->multiTableRow(array('valign' => 'top'), $cells);
+echo $HTML->multiTableRow(array('class' => 'top'), $cells);
 echo $HTML->listTableBottom();
 project_admin_footer();
 
