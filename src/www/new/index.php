@@ -86,7 +86,7 @@ if (!$res_new || db_numrows($res_new) < 1) {
 		// avoid duplicates of different file types
 		if (!isset($seen[$row_new['group_id']])) {
 			print '
-			<tr valign="top">
+			<tr class="top">
 				<td colspan="2">'.
 				util_make_link_g ($row_new['unix_group_name'],$row_new['group_id'],'<strong>'.$row_new['group_name'].'</strong>').'
 				</td>
@@ -102,7 +102,7 @@ if (!$res_new || db_numrows($res_new) < 1) {
 				<td>'.date("M d, h:iA",$row_new['release_date']).'
 				</td>
 			</tr>
-			<tr valign="top">
+			<tr class="top">
 				<td colspan="2">&nbsp;<br />';
 		if ($row_new['short_description']) {
 			print '<em>'.$row_new['short_description'].'</em>';
