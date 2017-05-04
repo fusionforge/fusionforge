@@ -321,7 +321,7 @@ echo '<div id="workSpace" style="padding:0; overflow-y:auto; overflow-x:hidden; 
           </tr>
         </table>
       </td>
-      <td valign="top">
+      <td class="top">
         <table cellpadding="5">
           <tr>
           <td colspan="2"><label for="status">status</label><br><div id="status" class="taskStatus" status=""></div></td>
