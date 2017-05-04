@@ -146,12 +146,12 @@ if ($release_box) {
 
 <div>
 	<form>
-		<table cellspacing="0" width="100%">
-			<tr valign="middle">
-				<td width="10%">
+		<table class="full">
+			<tr class="middle">
+				<td style="width:10%">
 					<?php echo _('Assignee')._(': '); ?>
 				</td>
-				<td width="10%">
+				<td style="width:10%">
 					<?php echo $tech_box ; ?>
 				</td>
 				<td colspan="<?php echo $colspan ?>">
@@ -184,9 +184,9 @@ if ($release_box) {
 			</tr>
 		</table>
 	</form>
-	<table cellspacing="0" width="100%">
-		<tr valign="middle">
-			<td width="10%">
+	<table class="full">
+		<tr class="middle">
+			<td style="width:10%">
 				<?php
 					echo html_build_checkbox('filter-tasks-chk', false, false);
 					echo html_e('label', array('for'=>'filter-tasks-chk'), _('Filter tasks')._(': '));
@@ -201,7 +201,7 @@ if ($release_box) {
 				?>
 			</td>
 		</tr>
-		<tr valign="middle">
+		<tr class="middle">
 			<td>
 				<?php
 					echo html_build_checkbox('hide-unlinked-task-chk', false, false);
@@ -217,7 +217,7 @@ if ($release_box) {
 
 <table id="agile-board">
 	<thead>
-		<tr valign="top">
+		<tr class="top">
 
 		<?php if( $user_stories_tracker ) { ?>
 			<td class="agile-phase-title" style="width: <?php echo $column_width ?>%;"><?php echo  _('User stories')?></td>
