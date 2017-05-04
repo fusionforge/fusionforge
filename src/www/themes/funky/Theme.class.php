@@ -161,7 +161,7 @@ class Theme_Funky extends Layout {
 
 	function footer($params = array()) {
 		$this->bodyFooter($params);
-		echo html_ao('div', array('class' => 'footer'));
+		echo html_ao('footer');
 		echo $this->navigation->getPoweredBy();
 		echo $this->navigation->getShowSource();
 		echo html_e('div', array('style' => 'clear:both'), '', false);

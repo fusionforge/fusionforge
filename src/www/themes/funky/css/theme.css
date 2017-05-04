@@ -673,10 +673,7 @@ p.information {
 }
 
 
-/*
-	footer
-*/
-.footer {
+footer {
 	padding: 10px;
 	background: rgb(66, 69, 82) url("../images/header/header-bg.png");
 	border-top: 1px solid #f7f7f7;
@@ -688,7 +685,7 @@ p.information {
 	text-shadow: 1px 1px white;
 }
 
-.footer img {
+footer img {
 	float: right;
 }
 
