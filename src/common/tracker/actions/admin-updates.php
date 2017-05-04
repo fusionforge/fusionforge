@@ -249,6 +249,8 @@ if (getStringFromRequest('add_extrafield')) {
 	$is_disabled = getStringFromRequest('is_disabled');
 	$defaultArr = getArrayFromRequest('extra_fields', false);
 	$formula = getStringFromRequest('formula');
+	$aggregation_rule = getIntFromRequest('aggregation_rule',0);
+	$distribution_rule = getIntFromRequest('distribution_rule',0);
 	if (isset($defaultArr[$id])) {
 		$default = $defaultArr[$id];
 	} else {
@@ -266,7 +268,7 @@ if (getStringFromRequest('add_extrafield')) {
 		} else {
 			$show100 = 1;
 		}
-		if (!$ac->update($name, $attribute1, $attribute2, $is_required, $alias, $show100, $show100label, $description, $pattern, $parent, $autoassign, $is_hidden_on_submit, $is_disabled)) {
+		if (!$ac->update($name, $attribute1, $attribute2, $is_required, $alias, $show100, $show100label, $description, $pattern, $parent, $autoassign, $is_hidden_on_submit, $is_disabled, $aggregation_rule, $distribution_rule)) {
 			$error_msg .= _('Update failed')._(': ').$ac->getErrorMessage();
 			$ac->clearError();
 		} elseif (!$ac->setFormula($formula)){

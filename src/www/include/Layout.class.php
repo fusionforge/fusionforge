@@ -1013,6 +1013,10 @@ abstract class Layout extends FFError {
 		return $this->getPicto('ic/edit-file.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
+	function getEditFieldPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/forum_edit.png', $title, $alt, 20, 20, $otherAttr);
+	}
+
 	function getNewPic($title = '', $alt = '', $otherAttr = array()) {
 		return $this->getPicto('ic/add.png', $title, $alt, 20, 20, $otherAttr);
 	}

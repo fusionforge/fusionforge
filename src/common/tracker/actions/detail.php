@@ -141,20 +141,34 @@ foreach ($pluginsListeners as $pluginsListener) {
 		break;
 	}
 }
+$count=db_numrows($ah->getHistory());
+$nbh = $count? ' ('.$count.')' : '';
 ?>
 <div id="tabber">
 	<ul>
 	<li><a href="#tabber-comments"><?php echo _('Comments').$nb; ?></a></li>
-	<?php if ($group->usesPM()) { ?>
-	<li><a href="#tabber-tasks"><?php echo _('Related Tasks'); ?></a></li>
+	<?php if ($group->usesPM()) {
+		$count= db_numrows($ah->getRelatedTasks());
+		$nbrt = $count? ' ('.$count.')' : '';
+	?>
+	<li><a href="#tabber-tasks"><?php echo _('Related Tasks').$nbrt; ?></a></li>
 	<?php } ?>
 	<li><a href="#tabber-attachments"><?php echo _('Attachments').$nbf; ?></a></li>
 	<?php if ($pluginfound) { ?>
 	<li><a href="#tabber-commits"><?php echo _('Commits'); ?></a></li>
 	<?php } ?>
-	<li><a href="#tabber-changes"><?php echo _('Changes'); ?></a></li>
-	<?php if ($ah->hasRelations()) { ?>
-	<li><a href="#tabber-relations"><?php echo _('Relations'); ?></a></li>
+	<li><a href="#tabber-changes"><?php echo _('Changes').$nbh; ?></a></li>
+	<?php if ($ah->hasRelations()) {
+		$count=db_numrows($ah->getRelations());
+		$nbr = $count? ' ('.$count.')' : '';
+	?>
+	<li><a href="#tabber-relations"><?php echo _('Relations').$nbr; ?></a></li>
+	<?php } ?>
+	<?php if (forge_get_config('use_artefacts_dependencies')) {
+		$count=$ah->hasChildren();
+		$nbc = $count? ' ('.$count.')' : '';
+	?>
+	<li><a href="#tabber-children"><?php echo _('Children').$nbc; ?></a></li>
 	<?php } ?>
 	<?php if (forge_get_config('use_object_associations')) {
 		$anf = '';
@@ -232,7 +246,14 @@ if ($group->usesPM()) {
 	<div id="tabber-changes" class="tabbertab">
 		<?php echo $ah->showHistory(); ?>
 	</div>
-	<?php echo $ah->showRelations();
+	<div id="tabber-relations" class="tabbertab">
+	<?php echo $ah->showRelations(); ?>
+	</div><?php
+	if (forge_get_config('use_artefacts_dependencies')) { ?>
+		<div id="tabber-children" class="tabbertab">
+			<?php echo $ah->showChildren(); ?>
+		</div><?php
+	}
 	if (forge_get_config('use_object_associations')) { ?>
 	<div id="tabber-object-associations" class="tabbertab">
 	<?php if (forge_check_perm ('tracker',$ath->getID(),'submit')) {

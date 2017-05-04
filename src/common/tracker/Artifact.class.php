@@ -127,9 +127,16 @@ class Artifact extends FFObject {
 	/**
 	 * Database result set of related tasks
 	 *
-	 * @var	result	$relatedtasks
+	 * @var	result	$related_tasks
 	 */
-	var $relatedtasks;
+	var $related_tasks;
+
+	/**
+	 * Database result set of children
+	 *
+	 * @var	result	$children
+	 */
+	var $children;
 
 	/**
 	 * cached return value of getVotes
@@ -766,8 +773,8 @@ class Artifact extends FFObject {
 	 * @return	resource	Database result set
 	 */
 	function getRelatedTasks() {
-		if (!$this->relatedtasks) {
-			$this->relatedtasks = db_query_params ('SELECT pt.group_project_id,pt.project_task_id,pt.summary,pt.start_date,pt.end_date,pgl.group_id,pt.status_id,pt.percent_complete,ps.status_name
+		if (!$this->related_tasks) {
+			$this->related_tasks = db_query_params ('SELECT pt.group_project_id,pt.project_task_id,pt.summary,pt.start_date,pt.end_date,pgl.group_id,pt.status_id,pt.percent_complete,ps.status_name
 			FROM project_task pt, project_group_list pgl, project_status ps
 			WHERE pt.group_project_id = pgl.group_project_id
                         AND ps.status_id = pt.status_id
@@ -776,7 +783,7 @@ class Artifact extends FFObject {
 				AND artifact_id = $1)',
 							       array ($this->getID())) ;
 		}
-		return $this->relatedtasks;
+		return $this->related_tasks;
 	}
 
 	/**
@@ -1582,7 +1589,7 @@ class Artifact extends FFObject {
 			// 3) Ensure that only integers are given.
 			// 4) Ensure that id corresponds to valid tracker id.
 			//
-			if ($type == ARTIFACT_EXTRAFIELDTYPE_RELATION) {
+			if ($type == ARTIFACT_EXTRAFIELDTYPE_RELATION || $type == ARTIFACT_EXTRAFIELDTYPE_PARENT) {
 				$value = preg_replace('/\[\#(\d+)\]/', "\\1", trim($extra_fields[$efid]));
 				$value = preg_replace('/\\s+/', ' ', $value);
 				$new = '';
@@ -1919,6 +1926,7 @@ class Artifact extends FFObject {
 				case ARTIFACT_EXTRAFIELDTYPE_TEXT:
 				case ARTIFACT_EXTRAFIELDTYPE_TEXTAREA:
 				case ARTIFACT_EXTRAFIELDTYPE_RELATION:
+				case ARTIFACT_EXTRAFIELDTYPE_PARENT:
 				case ARTIFACT_EXTRAFIELDTYPE_INTEGER:
 				case ARTIFACT_EXTRAFIELDTYPE_DATE:
 				case ARTIFACT_EXTRAFIELDTYPE_DATETIME:
@@ -2049,6 +2057,80 @@ class Artifact extends FFObject {
 		}
 		return false;
 	}
+
+	function  getRelations() {
+		$aid = $this->getID();
+		$res = db_query_params ('SELECT *
+		FROM artifact_extra_field_list, artifact_extra_field_data, artifact_group_list, artifact, groups
+		WHERE field_type = $1
+		AND artifact_extra_field_list.extra_field_id=artifact_extra_field_data.extra_field_id
+		AND artifact_group_list.group_artifact_id = artifact_extra_field_list.group_artifact_id
+		AND artifact.artifact_id = artifact_extra_field_data.artifact_id
+		AND groups.group_id = artifact_group_list.group_id
+		AND (field_data = $2 OR field_data LIKE $3 OR field_data LIKE $4 OR field_data LIKE $5)
+		AND artifact.is_deleted = 0
+		ORDER BY artifact_group_list.group_id ASC, name ASC, artifact.artifact_id ASC',
+				array(ARTIFACT_EXTRAFIELDTYPE_RELATION,
+						$aid,
+						"$aid %",
+						"% $aid %",
+						"% $aid"));
+		return $res;
+	}
+
+	function hasChildren() {
+		if (!$this->children) {
+			$res = $this->getChildren();
+		}
+		$nb = db_numrows($this->children);
+		if ($nb>0) {
+			return $nb;
+		}
+		return false;
+	}
+
+	function  getChildren() {
+		$aid = $this->getID();
+		if (!$this->children) {
+			$this->children = db_query_params ('SELECT *
+		FROM artifact_extra_field_list, artifact_extra_field_data, artifact_group_list, artifact, groups
+		WHERE field_type = $1
+		AND artifact_extra_field_list.extra_field_id=artifact_extra_field_data.extra_field_id
+		AND artifact_group_list.group_artifact_id = artifact_extra_field_list.group_artifact_id
+		AND artifact.artifact_id = artifact_extra_field_data.artifact_id
+		AND groups.group_id = artifact_group_list.group_id
+		AND field_data = $2
+		AND artifact.is_deleted = 0
+		ORDER BY artifact_group_list.group_id ASC, name ASC, artifact.artifact_id ASC',
+					array(ARTIFACT_EXTRAFIELDTYPE_PARENT,
+							$aid));
+		}
+		return $this->children;
+	}
+
+	function hasParent() {
+		return ($this->getParent?true:false);
+	}
+
+	function  getParent() {
+		$res = db_query_params ('SELECT field_data FROM
+									artifact_extra_field_data
+									NATURAL INNER JOIN artifact_extra_field_list
+								WHERE
+									field_type = $1
+										AND artifact_id = $2',
+					array(ARTIFACT_EXTRAFIELDTYPE_PARENT,
+							$this->getID()));
+		if (db_numrows($res) == 0) {
+			$return = false;
+		} else {
+			$data = db_fetch_array($res);
+			db_free_result($res);
+			$return = $data['field_data'];
+		}
+		return $return;
+	}
+
 
 	function getPermalink() {
 		return '/tracker/a_follow.php/'.$this->getID();

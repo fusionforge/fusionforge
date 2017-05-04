@@ -27,9 +27,6 @@ global $HTML;
 
 html_use_tablesorter();
 
-$title = sprintf(_('Manage Custom Fields for %s'), $ath->getName());
-$ath->adminHeader(array('title'=>$title, 'modal'=>1));
-
 $boxid = getIntFromRequest('boxid');
 if ($boxid) {
 	$ef_id = $boxid;
@@ -46,6 +43,9 @@ if (!$ac || !is_object($ac)) {
 	exit_error($ac->getErrorMessage());
 }
 
+$title = sprintf(_('Edit formula for %s'), $ath->getName());
+$ath->adminHeader(array('title'=>$title, 'modal'=>1));
+
 if (!$efe_id) {
 	$formula = $ac->getFormula();
 } else {
@@ -57,7 +57,6 @@ if (!$efe_id) {
 	}
 	$formula = $ao->getFormula();
 }
-
 $efarr = $ath->getExtraFields(array(),false,true);
 $efarr [] = array('field_name'=>'Assigned to','alias'=>'assigned_to', 'field_type'=>ARTIFACT_EXTRAFIELDTYPE_USER,'extra_field_id'=>0);
 $efarr [] = array('field_name'=>'Priority','alias'=>'priority', 'field_type'=>ARTIFACT_EXTRAFIELDTYPE_SELECT, 'extra_field_id'=>0);
@@ -252,7 +251,7 @@ $("textarea#formula").keydown(function(e) {
 EOS;
 echo html_e('script', array('type'=>'text/javascript'), '//<![CDATA['."\n".'$(function(){'.$javascript.'});'."\n".'//]]>');
 
-echo html_e('h2', array(), _('Edit formula'));
+echo html_e('h2', array(), _('Formula'));
 
 if (!$efe_id) {
 	echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&id='.$ef_id.'&atid='.$ath->getID(), 'method' => 'post'));

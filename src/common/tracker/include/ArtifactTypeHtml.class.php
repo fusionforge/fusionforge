@@ -199,6 +199,7 @@ class ArtifactTypeHtml extends ArtifactType {
                                $types = array(),
                                $status_show_100 = false,
                                $mode = '') {
+		global $HTML;
 		if ($mode == 'NEW') {
 			$efarr = $this->getExtraFields($types, false, false);
 		} else {
@@ -273,7 +274,7 @@ class ArtifactTypeHtml extends ArtifactType {
 						$type == ARTIFACT_EXTRAFIELDTYPE_TEXTAREA) {
 					$value = preg_replace('/((http|https|ftp):\/\/\S+)/',
 								"<a href=\"\\1\" target=\"_blank\">\\1</a>", $value);
-				} elseif ($type == ARTIFACT_EXTRAFIELDTYPE_RELATION) {
+				} elseif ($type == ARTIFACT_EXTRAFIELDTYPE_RELATION || $type == ARTIFACT_EXTRAFIELDTYPE_PARENT) {
 					// Convert artifact id to links.
 					$value = preg_replace_callback('/\b(\d+)\b/', create_function('$matches', 'return _artifactid2url($matches[1], \'title\');'), $value);
 				} elseif ($type == ARTIFACT_EXTRAFIELDTYPE_DATETIME && $value!='') {
@@ -399,10 +400,14 @@ class ArtifactTypeHtml extends ArtifactType {
 				$str = $this->renderSelect($efarr[$i]['extra_field_id'], $selected_node, $status_show_100, $text_100, $show_any, $text_any, $allowed, $attrs);
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RELATION) {
-
 				$str = $this->renderRelationField($efarr[$i]['extra_field_id'], $selected[$efarr[$i]['extra_field_id']], $efarr[$i]['attribute1'], $efarr[$i]['attribute2'], $attrs);
 				if ($mode == 'UPDATE' || $mode == 'NEW') {
-					$post_name = html_image('ic/forum_edit.png', 37, 15 ,array('title'=>"Click to edit", 'alt'=>"Click to edit", 'onclick'=>"switch2edit(this, 'show$i', 'edit$i')"));
+					$post_name = $HTML->getEditFieldPic(_('Click to edit'), $alt = _('Click to edit'), array('onclick'=>"switch2edit(this, 'show$i', 'edit$i')"));
+				}
+			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_PARENT) {
+				$str = $this->renderParentField($efarr[$i]['extra_field_id'], $selected[$efarr[$i]['extra_field_id']], $efarr[$i]['attribute1'], $efarr[$i]['attribute2'], $attrs);
+				if ($mode == 'UPDATE' || $mode == 'NEW') {
+					$post_name = $HTML->getEditFieldPic(_('Click to edit'), $alt = _('Click to edit'), array('onclick'=>"switch2edit(this, 'show$i', 'edit$i')"));
 				}
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_DATETIME) {
 				$str = $this->renderDatetime($efarr[$i]['extra_field_id'], $selected[$efarr[$i]['extra_field_id']], $attrs);
@@ -601,6 +606,7 @@ class ArtifactTypeHtml extends ArtifactType {
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_TEXT ||
 				$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_INTEGER ||
 				$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RELATION ||
+				$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_PARENT ||
 				$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_DATETIME ||
 					$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_EFFORT) {
 
@@ -1115,11 +1121,36 @@ class ArtifactTypeHtml extends ArtifactType {
 			$keys[$i]=$arr[$i]['element_id'];
 			$vals[$i]=$arr[$i]['element_name'];
 		}
+		$attrs['pattern']='^\d+(\s+\d+)*$';
 		// Convert artifact id to links.
 		$html_contents = preg_replace_callback('/\b(\d+)\b/', create_function('$matches', 'return _artifactid2url($matches[1], \'title\');'), $contents);
 		$edit_contents = $this->renderTextField ($extra_field_id, $contents, $size, $maxlength);
 		return html_e('div',array_merge(array('id'=>'edit'.$extra_field_id, 'style'=>'display: none', 'title'=>_('Tip: Enter a space-separated list of artifact ids ([#NNN] also accepted)')), $attrs), $edit_contents)
 			.html_e('div',array_merge(array('id'=>'show'.$extra_field_id, 'style'=>'display: block'), $attrs), $html_contents);
+	}
+
+	/**
+	 * renderParentField - this function builds a parent field.
+	 *
+	 * @param	int	$extra_field_id	The ID of this field.
+	 * @param	string	$contents	The data for this field.
+	 * @param	string	$size
+	 * @param	string	$maxlength
+	 * @param	array	$attrs		Array of other attributes
+	 * @return	string	text area and data.
+	 */
+	function renderParentField($extra_field_id, $contents, $size, $maxlength, $attrs = array()) {
+		$arr = $this->getExtraFieldElements($extra_field_id);
+		for ($i=0; $i<count($arr); $i++) {
+			$keys[$i]=$arr[$i]['element_id'];
+			$vals[$i]=$arr[$i]['element_name'];
+		}
+		$attrs['pattern']='^\d*$';
+		// Convert artifact id to links.
+		$html_contents = preg_replace_callback('/\b(\d+)\b/', create_function('$matches', 'return _artifactid2url($matches[1], \'title\');'), $contents);
+		$edit_contents = $this->renderTextField ($extra_field_id, $contents, $size, $maxlength);
+		return html_e('div',array_merge(array('id'=>'edit'.$extra_field_id, 'style'=>'display: none', 'title'=>_('Tip: Enter a space-separated list of artifact ids ([#NNN] also accepted)')), $attrs), $edit_contents)
+		.html_e('div',array_merge(array('id'=>'show'.$extra_field_id, 'style'=>'display: block'), $attrs), $html_contents);
 	}
 
 	/**
@@ -1548,6 +1579,7 @@ EOS;
 			data: 'rtype=ajax&function=get_formulas_results&group_id='+groupId+'&atid='+atId+'&status='+$("select[name='status_id'] option:selected").text()+'&assigned_to='+$("select[name='assigned_to'] option:selected").text()+'&'+$("[name^='extra_fields'], #tracker-summary, #tracker-description, [name='priority']").serialize(),
 			async: false,
 			dataType: 'json',
+			contentType:"application/json; charset=utf-8",
 			success: function(answer){
 				if(answer['message']) {
 					showMessage(answer['message'], 'error');

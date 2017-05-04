@@ -800,3 +800,7 @@ footer img {
 input, select {
 	vertical-align: middle;
 }
+
+.artifact_closed, .artifact_closed:hover {
+	text-decoration:line-through;
+}

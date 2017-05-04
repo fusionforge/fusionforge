@@ -51,12 +51,22 @@ define('ARTIFACT_EXTRAFIELDTYPE_DATETIMERANGE', 19);
 define('ARTIFACT_EXTRAFIELDTYPE_DATERANGE', 20);
 define('ARTIFACT_EXTRAFIELDTYPE_EFFORT',21);
 define('ARTIFACT_EXTRAFIELDTYPE_EFFORTRANGE',22);
+define('ARTIFACT_EXTRAFIELDTYPE_PARENT',23);
 
 define ("ARTIFACT_EXTRAFIELDTYPEGROUP_SINGLECHOICE", serialize (array (ARTIFACT_EXTRAFIELDTYPE_SELECT, ARTIFACT_EXTRAFIELDTYPE_RADIO, ARTIFACT_EXTRAFIELDTYPE_STATUS)));
 define ("ARTIFACT_EXTRAFIELDTYPEGROUP_MULTICHOICE", serialize (array (ARTIFACT_EXTRAFIELDTYPE_CHECKBOX, ARTIFACT_EXTRAFIELDTYPE_MULTISELECT)));
 define ("ARTIFACT_EXTRAFIELDTYPEGROUP_CHOICE", serialize (array_merge(unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_SINGLECHOICE), unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_MULTICHOICE))));
 define ("ARTIFACT_EXTRAFIELDTYPEGROUP_SPECALCHOICE", serialize(array(ARTIFACT_EXTRAFIELDTYPE_USER, ARTIFACT_EXTRAFIELDTYPE_RELEASE)));
 define ("ARTIFACT_EXTRAFIELDTYPEGROUP_VALUE", serialize (array (ARTIFACT_EXTRAFIELDTYPE_TEXT,ARTIFACT_EXTRAFIELDTYPE_TEXTAREA,ARTIFACT_EXTRAFIELDTYPE_RELATION,ARTIFACT_EXTRAFIELDTYPE_INTEGER,ARTIFACT_EXTRAFIELDTYPE_FORMULA,ARTIFACT_EXTRAFIELDTYPE_DATETIME, ARTIFACT_EXTRAFIELDTYPE_EFFORT)));
+
+define ("ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_NO_AGGREGATION", 0);
+define ("ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_SUM", 1);
+define ("ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_STATUS_CLOSE_RESTRICTED", 2);
+define ("ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_STATUS_CLOSE_UPWARDS", 3);
+
+define ("ARTIFACT_EXTRAFIELD_DISTRIBUTION_RULE_NO_DISTRIBUTION", 0);
+define ("ARTIFACT_EXTRAFIELD_DISTRIBUTION_RULE_STATUS_CLOSE_RECURSIVELY", 1);
+
 
 class ArtifactExtraField extends FFError {
 
@@ -123,7 +133,7 @@ class ArtifactExtraField extends FFError {
 	 * @param	int	$disabled		True or false to enable/disable the extrafield
 	 * @return	bool	true on success / false on failure.
 	 */
-	function create($name, $field_type, $attribute1, $attribute2, $is_required = 0, $alias = '', $show100 = true, $show100label = 'none', $description = '', $pattern = '', $parent = 100, $autoassign = 0, $is_hidden_on_submit = 0, $is_disabled = 0) {
+	function create($name, $field_type, $attribute1, $attribute2, $is_required = 0, $alias = '', $show100 = true, $show100label = 'none', $description = '', $pattern = '', $parent = 100, $autoassign = 0, $is_hidden_on_submit = 0, $is_disabled = 0, $aggregation_rule = 0, $distribution_rule = 0) {
 		//
 		//	data validation
 		//
@@ -177,8 +187,8 @@ class ArtifactExtraField extends FFError {
 		}
 
 		db_begin();
-		$result = db_query_params ('INSERT INTO artifact_extra_field_list (group_artifact_id, field_name, field_type, attribute1, attribute2, is_required, alias, show100, show100label, description, pattern, parent, is_hidden_on_submit, is_disabled)
-			VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)',
+		$result = db_query_params ('INSERT INTO artifact_extra_field_list (group_artifact_id, field_name, field_type, attribute1, attribute2, is_required, alias, show100, show100label, description, pattern, parent, is_hidden_on_submit, is_disabled, aggregation_rule, distribution_rule)
+			VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16)',
 					   array ($this->ArtifactType->getID(),
 							  htmlspecialchars($name),
 							  $field_type,
@@ -192,7 +202,9 @@ class ArtifactExtraField extends FFError {
 							  $pattern,
 							  $parent,
 							  $is_hidden_on_submit,
-							  $is_disabled));
+							  $is_disabled,
+							  $aggregation_rule,
+							  $distribution_rule));
 
 		if ($result && db_affected_rows($result) > 0) {
 			$this->clearError();
@@ -760,7 +772,8 @@ class ArtifactExtraField extends FFError {
 			ARTIFACT_EXTRAFIELDTYPE_RELEASE => _('Release'),
 			ARTIFACT_EXTRAFIELDTYPE_EFFORT => _('Effort'),
 			ARTIFACT_EXTRAFIELDTYPE_FORMULA => _('Formula'),
-			ARTIFACT_EXTRAFIELDTYPE_SLA => _('SLA')
+			ARTIFACT_EXTRAFIELDTYPE_SLA => _('SLA'),
+			ARTIFACT_EXTRAFIELDTYPE_PARENT => _('Parent artifact')
 			);
 	}
 
@@ -896,7 +909,7 @@ class ArtifactExtraField extends FFError {
 	 * @param	int	$parent		Parent extra field id.
 	 * @return	bool	success.
 	 */
-	function update($name, $attribute1, $attribute2, $is_required = 0, $alias = "", $show100 = true, $show100label = 'none', $description = '', $pattern = '', $parent = 100, $autoassign = 0, $is_hidden_on_submit = 0, $is_disabled = 0) {
+	function update($name, $attribute1, $attribute2, $is_required = 0, $alias = "", $show100 = true, $show100label = 'none', $description = '', $pattern = '', $parent = 100, $autoassign = 0, $is_hidden_on_submit = 0, $is_disabled = 0, $aggregation_rule = 0, $distribution_rule = 0) {
 		if (!forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
@@ -940,9 +953,11 @@ class ArtifactExtraField extends FFError {
 			pattern = $9,
 			parent = $10,
 			is_hidden_on_submit = $11,
-			is_disabled = $12
-			WHERE extra_field_id = $13
-			AND group_artifact_id = $14',
+			is_disabled = $12,
+			aggregation_rule = $13,
+			distribution_rule = $14
+			WHERE extra_field_id = $15
+			AND group_artifact_id = $16',
 					   array (htmlspecialchars($name),
 							  $description,
 							  $attribute1,
@@ -955,6 +970,8 @@ class ArtifactExtraField extends FFError {
 							  $parent,
 							  $is_hidden_on_submit,
 							  $is_disabled,
+							  $aggregation_rule,
+							  $distribution_rule,
 							  $this->getID(),
 							  $this->ArtifactType->getID())) ;
 		if ($result && db_affected_rows($result) > 0) {
@@ -1176,7 +1193,6 @@ class ArtifactExtraField extends FFError {
 	}
 
 	function alphaorderValues() {
-
 		$res = db_query_params ('SELECT element_id FROM artifact_extra_field_elements WHERE extra_field_id=$1 ORDER BY element_name ASC',
 			array($this->getID()));
 		$i = 1;
@@ -1185,11 +1201,11 @@ class ArtifactExtraField extends FFError {
 				return false;
 			$i++;
 		}
-
 		return true;
 	}
 
 	/**
+<<<<<<< 5c02d437ae2ab9d01370cc9aec4ecc46f3602746
 	 *    getMandatoryExtraFields - List of possible user built extra fields
 	 *    set up for this artifact type.
 	 *
@@ -1258,7 +1274,54 @@ class ArtifactExtraField extends FFError {
 
 		return $return;
 	}
+	
+	/**
+	 * getAvailableAggregationRules - the types of text fields and their names available.
+	 *
+	 * @return	array	rules.
+	 */
+	function getAvailableAggregationRules() {
+		$return= array(ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_NO_AGGREGATION => _('Parent value is not depending on children\'s values'));
+		$type = $this->getType();
+		if ($type == ARTIFACT_EXTRAFIELDTYPE_EFFORT) {
+			$return = array_merge($return, array(ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_SUM => _('Parent value is the sum of children\'s values')));
+		}
+		if ($type == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
+			$return = array_merge($return, array(
+													ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_STATUS_CLOSE_RESTRICTED => _('Deny closing the parent, as long as not all children have been closed'),
+													ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_STATUS_CLOSE_UPWARDS => _('Close the parent, after the last child has been closed')
+								));
+		}
+		if (count($return)==1) {
+			$return = array();
+		}
+		return $return;
+	}
 
+	function getAggregationRule() {
+		return $this->data_array['aggregation_rule'];
+	}
+
+	/**
+	* getAvailableDistributionRules- the types of text fields and their names available.
+	*
+	* @return	array	rules.
+	*/
+	function getAvailableDistributionRules() {
+		$return= array(ARTIFACT_EXTRAFIELD_DISTRIBUTION_RULE_NO_DISTRIBUTION => _('Parent value is not depending on children\'s values'));
+		$type = $this->getType();
+		if ($type == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
+			$return = array_merge($return, array(ARTIFACT_EXTRAFIELD_DISTRIBUTION_RULE_STATUS_CLOSE_RECURSIVELY => _('Closure of parent involves recursive closure of children')));
+		}
+		if (count($return)==1) {
+			$return = array();
+		}
+		return $return;
+	}
+
+	function getDistributionRule() {
+		return $this->data_array['distribution_rule'];
+	}
 }
 
 // Local Variables:

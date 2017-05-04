@@ -549,7 +549,6 @@ function postcopy_set(&$effortUnitSet) {
 function update_set(&$effortUnitSet) {
 	global $HTML;
 	$isAutoconvert = (getStringFromRequest('is_autoconvert')=='on'?1:0);
-	var_dump($isAutoconvert);
 	if (!$effortUnitSet->update($isAutoconvert)) {
 		echo $HTML->error_msg(_('Error updating Effort Unit Set')._(':').' '.$effortUnitSet->getErrorMessage());
 		return false;

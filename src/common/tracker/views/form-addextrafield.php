@@ -221,7 +221,8 @@ $jsvariable ="
 	var typeDateTime = ".ARTIFACT_EXTRAFIELDTYPE_DATETIME.";
 	var typeUser = ".ARTIFACT_EXTRAFIELDTYPE_USER.";
 	var typeRelease = ".ARTIFACT_EXTRAFIELDTYPE_RELEASE.";
-	var typeEffort = ".ARTIFACT_EXTRAFIELDTYPE_EFFORT.";";
+	var typeEffort = ".ARTIFACT_EXTRAFIELDTYPE_EFFORT.";
+	var typeParent = ".ARTIFACT_EXTRAFIELDTYPE_PARENT.";";
 
 $javascript = <<<'EOS'
 	$("p[class^='for-']").hide();
@@ -294,6 +295,12 @@ $javascript = <<<'EOS'
 		$("p.for-effort").show();
 		$("p[class^='for-']:not(.for-effort)").hide();
 	});
+	$("input[value="+typeParent+"]").on('change', function(){
+		$("label[for='attribute1']").text(size);
+		$("label[for='attribute2']").text(maxLength);
+		$("p.for-parent").show();
+		$("p[class^='for-']:not(.for-parent)").hide();
+	});
 
 EOS;
 echo html_e('script', array( 'type'=>'text/javascript'), '//<![CDATA['."\n".'$(function(){'.$jsvariable."\n".$javascript.'});'."\n".'//]]>');
@@ -303,12 +310,17 @@ echo html_e('strong', array(), _('Type of custom field').utils_requiredField()._
 if ($ath->usesCustomStatuses()) {
 	unset($eftypes[ARTIFACT_EXTRAFIELDTYPE_STATUS]);
 }
+
+if (!forge_get_config('use_artefacts_dependencies')) {
+	unset($eftypes[ARTIFACT_EXTRAFIELDTYPE_PARENT]);
+}
+
 $vals = array_keys($eftypes);
 $texts = array_values($eftypes);
 echo html_build_radio_buttons_from_arrays($vals, $texts, 'field_type', '', false, '', false ,'', false, array('required'=>'required') );
 echo html_ac(html_ap() - 1);
 
-echo html_ao('p', array('class'=>'for-text for-textarea for-integer for-relation for-effort'));
+echo html_ao('p', array('class'=>'for-text for-textarea for-integer for-relation for-effort for-parent'));
 echo html_e('label', array('for'=>'attribute1'), _('Size')._(':'));
 echo html_e('input', array('type'=>'text', 'name'=>'attribute1', 'value'=>'20', 'size'=>'2', 'maxlength'=>'2')).html_e('br');
 echo html_e('label', array('for'=>'attribute2'), _('Maxlength')._(':'));

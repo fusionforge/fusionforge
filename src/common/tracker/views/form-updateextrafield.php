@@ -209,6 +209,21 @@ if (!$ac || !is_object($ac)) {
 		echo html_e('input', array('type'=>'hidden', 'name'=>'formula', 'value'=>''));
 	}
 
+	$aggregationRules = $ac->getAvailableAggregationRules();
+	if (!empty($aggregationRules)) {
+		echo html_ao('p');
+		echo html_e('label', array('for'=>'aggregation_rule'), _('Dependency of parents on children'));
+		echo html_build_select_box_from_arrays(array_keys($aggregationRules), array_values($aggregationRules), 'aggregation_rule', $ac->getAggregationRule(), false).html_e('br');
+		echo html_ac(html_ap() - 1);
+	}
+	$distributionRules = $ac->getAvailableDistributionRules();
+	if (!empty($distributionRules)) {
+		echo html_ao('p');
+		echo html_e('label', array('for'=>'distribution_rule'), _('Dependency of children on parents'));
+		echo html_build_select_box_from_arrays(array_keys($distributionRules), array_values($distributionRules), 'distribution_rule', $ac->getDistributionRule(), false).html_e('br');
+		echo html_ac(html_ap() - 1);
+	}
+
 	echo $HTML->warning_msg(_('It is not recommended that you change the custom field name because other things are dependent upon it. When you change the custom field name, all related items will be changed to the new name.'));
 
 	echo html_ao('p');

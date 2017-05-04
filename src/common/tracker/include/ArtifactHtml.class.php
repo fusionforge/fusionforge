@@ -189,33 +189,16 @@ function hide_edit_button(id) {
 	}
 
 	function showRelations() {
-		$aid = $this->getID();
+		$result=$this->getRelations();
+		$rows= db_numrows($result);
 		$return = '';
-
-		// Search for all relations pointing to this record.
-
-		$res = db_query_params ('SELECT *
-		FROM artifact_extra_field_list, artifact_extra_field_data, artifact_group_list, artifact, groups
-		WHERE field_type=9
-		AND artifact_extra_field_list.extra_field_id=artifact_extra_field_data.extra_field_id
-		AND artifact_group_list.group_artifact_id = artifact_extra_field_list.group_artifact_id
-		AND artifact.artifact_id = artifact_extra_field_data.artifact_id
-		AND groups.group_id = artifact_group_list.group_id
-		AND (field_data = $1 OR field_data LIKE $2 OR field_data LIKE $3 OR field_data LIKE $4)
-		AND artifact.is_deleted = 0
-		ORDER BY artifact_group_list.group_id ASC, name ASC, artifact.artifact_id ASC',
-					array($aid,
-					      "$aid %",
-					      "% $aid %",
-					      "% $aid"));
-		if (db_numrows($res)>0) {
-			$return = '<div id="tabber-relations" class="tabbertab">
-					<table class="fullwidth">
-						<tr>
-							<td colspan="2">';
+		if ($rows > 0){
+			$return = '<table class="fullwidth">
+							<tr>
+								<td colspan="2">';
 			$current = '';
 			$end = '';
-			while ($arr = db_fetch_array($res)) {
+			while ($arr = db_fetch_array($result)) {
 				if (forge_check_perm('tracker', $arr['group_artifact_id'], 'read')) {
 					$title = $arr['group_name']._(': ').$arr['name'];
 					if ($title != $current) {
@@ -223,20 +206,54 @@ function hide_edit_button(id) {
 						$current = $title;
 						$end = '<br /><br />';
 					}
-					$text = '[#'.$arr['artifact_id'].']'.' '.$arr['summary'];
+					$text = '[#'.$arr['artifact_id'].']';
 					$url = '/tracker/?func=detail&aid='.$arr['artifact_id'].'&group_id='.$arr['group_id'].'&atid='.$arr['group_artifact_id'];
 					$arg['title'] = util_html_secure($arr['summary']);
 					if ($arr['status_id'] == 2) {
 						$arg['class'] = 'artifact_closed';
 					}
 					$return .= '<br/>&nbsp;&nbsp;&nbsp;';
-					$return .= util_make_link($url, $text, $arg).' <i>('._('Relation')._(': ').$arr['field_name'].')</i>';
+					$return .= util_make_link($url, $text, $arg).' '.util_make_link($url, $arr['summary']).' <i>('._('Relation')._(': ').$arr['field_name'].')</i>';
 				}
 			}
 			$return .= '</td>
 				</tr>
-				</table>
-				</div>';
+				</table>';
+		}
+		return $return;
+	}
+
+	function showChildren() {
+		$result=$this->getChildren();
+		$rows= db_numrows($result);
+		$return = '';
+		if ($rows > 0){
+			$return = '	<table class="fullwidth">
+							<tr>
+								<td colspan="2">';
+			$current = '';
+			$end = '';
+			while ($arr = db_fetch_array($result)) {
+				if (forge_check_perm('tracker', $arr['group_artifact_id'], 'read')) {
+					$title = $arr['group_name']._(': ').$arr['name'];
+					if ($title != $current) {
+						$return .= $end.'<strong>'.$title.'</strong>';
+						$current = $title;
+						$end = '<br /><br />';
+					}
+					$text = '[#'.$arr['artifact_id'].']';
+					$url = '/tracker/?func=detail&aid='.$arr['artifact_id'].'&group_id='.$arr['group_id'].'&atid='.$arr['group_artifact_id'];
+					$arg['title'] = util_html_secure($arr['summary']);
+					if ($arr['status_id'] == 2) {
+						$arg['class'] = 'artifact_closed';
+					}
+					$return .= '<br/>&nbsp;&nbsp;&nbsp;';
+					$return .= util_make_link($url, $text, $arg).' '.util_make_link($url, $arr['summary']).' <i>('._('Parent')._(': ').$arr['field_name'].')</i>';
+				}
+			}
+			$return .= '</td>
+				</tr>
+				</table>';
 		}
 		return $return;
 	}

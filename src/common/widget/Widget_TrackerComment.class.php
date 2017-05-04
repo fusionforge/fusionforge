@@ -67,7 +67,9 @@ class Widget_TrackerComment extends Widget {
 		if ($func == 'detail') {
 			$elementsLi[] = array('content' => util_make_link('#tabber-comments', _('Comments').$nb, false, true));
 			if ($group->usesPM()) {
-				$elementsLi[] = array('content' => util_make_link('#tabber-tasks', _('Related Tasks'), false, true));
+				$count= db_numrows($ah->getRelatedTasks());
+				$nbrt = $count? ' ('.$count.')' : '';
+				$elementsLi[] = array('content' => util_make_link('#tabber-tasks', _('Related Tasks').$nbrt, false, true));
 			}
 		}
 		$elementsLi[] = array('content' => util_make_link('#tabber-attachments', _('Attachments').$nbf, false, true));
@@ -85,9 +87,21 @@ class Widget_TrackerComment extends Widget {
 			if ($pluginfound) {
 				$elementsLi[] = array('content' => util_make_link('#tabber-commits', _('Commits'), false, true));
 			}
-			$elementsLi[] = array('content' => util_make_link('#tabber-changes', _('Changes'), false, true));
+			$count=db_numrows($ah->getHistory());
+			$nbh = $count? ' ('.$count.')' : '';
+			$elementsLi[] = array('content' => util_make_link('#tabber-changes', _('Changes').$nbh, false, true));
 			if ($ah->hasRelations()) {
-				$elementsLi[] = array('content' => util_make_link('#tabber-relations', _('Relations'), false, true));
+				$count=db_numrows($ah->getRelations());
+				$nbr = $count? ' ('.$count.')' : '';
+				$elementsLi[] = array('content' => util_make_link('#tabber-relations', _('Relations').$nbr, false, true));
+			}
+			if (forge_get_config('use_artefacts_dependencies')) {
+				$tabTitle = _('Children');
+				$nbChildren = $ah->hasChildren();
+				if ($nbChildren) {
+					$tabTitle .= ' ('.$nbChildren.')';
+				}
+				$elementsLi[] = array('content' => util_make_link('#tabber-children', $tabTitle, false, true));
 			}
 			if (forge_get_config('use_object_associations')) {
 				$tabTitle = _('Associations');
@@ -153,7 +167,12 @@ class Widget_TrackerComment extends Widget {
 		if ($func == 'detail') {
 			$tabberContent .= html_e('div', array('id' => 'tabber-changes', 'class' => 'tabbertab'),
 						$ah->showHistory());
-			$tabberContent .= $ah->showRelations();
+			$tabberContent .= html_e('div', array('id' => 'tabber-relations', 'class' => 'tabbertab'),
+						$ah->showRelations());
+			if (forge_get_config('use_artefacts_dependencies')) {
+				$tabberContent .= html_e('div', array('id' => 'tabber-children', 'class' => 'tabbertab'),
+						$ah->showChildren());
+			}
 			if (forge_get_config('use_object_associations')) {
 				$associationContent = $ah->showAssociations('/tracker/?func=removeassoc&aid='.$ah->getID().'&group_id='.$group_id.'&atid='.$ath->getID());
 				if (forge_check_perm('tracker', $atid, 'tech')) {
