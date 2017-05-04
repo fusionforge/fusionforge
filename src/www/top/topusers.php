@@ -96,12 +96,6 @@ while ($row_top = db_fetch_array($res_top)) {
 
 echo $HTML->listTableBottom();
 
-/*
-	<tr class="tablegetmore">
-        <td>'.(($offset>=$LIMIT)?'<a href="topusers.php?&offset='.($offset-50).'"><strong><-- More</strong></a>':'&nbsp;').'</td>
-	<td align="RIGHT"><a href="topusers.php?offset='.($offset+50).'"><strong>More --></strong></a></td></tr>
-';*/
-
 $HTML->footer();
 
 // Local Variables:
