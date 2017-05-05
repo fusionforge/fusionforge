@@ -95,12 +95,12 @@ class MailingList extends FFError {
 	/**
 	 *    create - use this function to create a new entry in the database.
 	 *
-	 * @param	$listName
-	 * @param	$description
-	 * @param	string		$isPublic
-	 * @param	bool		$creator_id
-	 * @param	int			$is_external Pass (1) if it should be public (0) for private.
-	 * @return	bool		success.
+	 * @param	string	$listName
+	 * @param	string	$description
+	 * @param	string	$isPublic
+	 * @param	bool	$creator_id
+	 * @param	int		$is_external Pass (1) if it should be public (0) for private.
+	 * @return	bool	success.
 	 */
 	function create($listName, $description, $isPublic = MAIL__MAILING_LIST_IS_PUBLIC, $creator_id = false, $is_external = 0) {
 		//
@@ -235,11 +235,11 @@ class MailingList extends FFError {
 	/**
 	 * update - use this function to update an entry in the database.
 	 *
-	 * @param	$description
-	 * @param	string		$isPublic
-	 * @param	string		$status The description of the mailing list
-	 * @param	int		$is_external Pass (1) if it should be public (0) for private
-	 * @return	boolean		success.
+	 * @param	string	$description
+	 * @param	string	$isPublic
+	 * @param	string	$status The description of the mailing list
+	 * @param	int	$is_external Pass (1) if it should be public (0) for private
+	 * @return	bool	success.
 	 */
 	function update($description, $isPublic = MAIL__MAILING_LIST_IS_PUBLIC, $status = 'xyzzy', $is_external=0) {
 		if(! forge_check_perm('project_admin', $this->Group->getID())) {
@@ -331,7 +331,7 @@ class MailingList extends FFError {
 	/**
 	 * getListAdmin - get the user who is the admin of this mailing list
 	 *
-	 * @return	User	The admin user
+	 * @return	FFUser	The admin user
 	 */
 	function getListAdmin() {
 		return user_get_object($this->dataArray['list_admin']);
