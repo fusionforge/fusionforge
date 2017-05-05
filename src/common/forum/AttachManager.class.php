@@ -58,6 +58,8 @@ class AttachManager extends FFError {
 	 * Function SetForumMsg
 	 *
 	 * Sets the forum message associated with the attachment
+	 *
+	 * @param $ForumMsg
 	 */
 	function SetForumMsg(&$ForumMsg) {
 		$this->ForumMsg =& $ForumMsg;
@@ -67,6 +69,9 @@ class AttachManager extends FFError {
 	 * Function GetAttachId
 	 *
 	 * Returns the attach id for the message id passed as a parameter or false if error
+	 *
+	 * @param int $msg_id
+	 * @return bool|mixed
 	 */
 	function GetAttachId($msg_id) {
 		$res = db_query_params ('SELECT attachmentid FROM forum_attachment WHERE msg_id=$1',
