@@ -22,11 +22,11 @@
  * Retrieve group_project_id and group_id for a specific project_task_id,
  * for URI construction and similar things.
  *
- * in:	int project_task_id
- * out:	false, or an associative array with
- *	- int project_task_id (copy)
- *	- int group_project_id
- *	- int group_id
+ * @param	int			$project_task_id
+ * @return	array|bool	false, or an associative array with
+ *    - int project_task_id (copy)
+ *    - int group_project_id
+ *    - int group_id
  */
 function getGroupProjectIdGroupId($project_task_id) {
 	$res = db_query_params('SELECT project_task.group_project_id, project_group_list.group_id FROM project_task ' .
@@ -52,8 +52,8 @@ function getGroupProjectIdGroupId($project_task_id) {
 /**
  * Check if the task behind project_task_id is considered public.
  *
- * in:	int project_task_id
- * out:	true, if it is; false otherwise
+ * @param	int		$project_task_id
+ * @return	bool	true, if it is public; false otherwise
  */
 function isProjectTaskInfoPublic($project_task_id) {
 	$res = db_query_params('SELECT group_project_id FROM project_task WHERE project_task_id=$1',
@@ -72,9 +72,9 @@ function isProjectTaskInfoPublic($project_task_id) {
  * Check whether the user has access to the project task by
  * means of common group membership.
  *
- * in:	int project_task_id
- *	str user_name (Unix user name)
- * out:	true, if he has; false otherwise
+ * @param	int		$project_task_id
+ * @param	string	$user_name Unix user name
+ * @return	bool	true, if he has access to the project task; false otherwise
  */
 function isUserAndTaskinSameGroup($project_task_id, $user_name) {
 	$res = db_query_params('SELECT group_project_id FROM project_task WHERE project_task_id=$1',
@@ -110,21 +110,21 @@ function isUserAndTaskinSameGroup($project_task_id, $user_name) {
 /**
  * Retrieve extended information about a project task.
  *
- * in:	int project_task_id
- * out:	false (if an error occured) or an associative array with
- *	- int project_task_id (copy)
- *	- int group_project_id (for URI construction)
- *	- int group_id (for URI construction)
- *	- str group_name
- *	- str summary (of the task)
- *	- int priority
- *	- int created_by (user ID)
- *	- str created_by_name (Unix user name)
- *	- int status_id
- *	- str status_name
- *	- int category_id
- *	- str category_name (of the per-group category the task is in)
- *	- str project_name (of the per-group subproject the task is in)
+ * @param	int			$project_task_id
+ * @return	array|bool	false (if an error occured) or an associative array with
+ *    - int project_task_id (copy)
+ *    - int group_project_id (for URI construction)
+ *    - int group_id (for URI construction)
+ *    - str group_name
+ *    - str summary (of the task)
+ *    - int priority
+ *    - int created_by (user ID)
+ *    - str created_by_name (Unix user name)
+ *    - int status_id
+ *    - str status_name
+ *    - int category_id
+ *    - str category_name (of the per-group category the task is in)
+ *    - str project_name (of the per-group subproject the task is in)
  */
 function getAllFromProjectTask($project_task_id) {
 	$res = db_query_params('SELECT ' .
