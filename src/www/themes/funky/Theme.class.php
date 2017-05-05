@@ -108,7 +108,7 @@ class Theme_Funky extends Layout {
 			$params['title'] = $params['title'] . " - ".forge_get_config('forge_name');
 		}
 
-		echo html_ao('header');
+		echo html_ao('header', array('role' => 'banner'));
 		echo $this->listTableTop(array(), array(), 'fullwidth', 'header');
 		$cells = array();
 		$cells[] = array(util_make_link('/', html_image('/header/top-logo.png', null, null, array('alt'=>'FusionForge Home'))), 'id' => 'header-col1');
@@ -136,7 +136,7 @@ class Theme_Funky extends Layout {
 		echo html_ac(html_ap() -1); // </nav>
 		echo html_ac(html_ap() -1); // </header>
 
-		echo html_ao('main', array('id' => 'maindiv'));
+		echo html_ao('main', array('id' => 'maindiv', 'role' => 'main'));
 		plugin_hook('message');
 
 		if (isset($GLOBALS['error_msg']) && $GLOBALS['error_msg']) {
@@ -165,7 +165,7 @@ class Theme_Funky extends Layout {
 
 	function footer($params = array()) {
 		$this->bodyFooter($params);
-		echo html_ao('footer');
+		echo html_ao('footer', array('role' => 'contentinfo'));
 		echo $this->navigation->getPoweredBy();
 		echo $this->navigation->getShowSource();
 		echo html_e('div', array('style' => 'clear:both'), '', false);
