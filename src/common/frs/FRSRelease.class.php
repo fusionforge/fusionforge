@@ -48,8 +48,8 @@ function get_frs_releases($package) {
  * Factory method which creates a FRSRelease from an release id
  *
  * @param	int	$release_id	The release id
- * @param	array	$data		The result array, if it's passed in
- * @return	object	FRSRelease object
+ * @param	array	$data	The result array, if it's passed in
+ * @return	object|bool		FRSRelease object
  */
 function frsrelease_get_object($release_id, $data = array()) {
 	global $FRSRELEASE_OBJ;
