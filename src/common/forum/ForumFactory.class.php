@@ -42,7 +42,8 @@ class ForumFactory extends FFError {
 	var $forums;
 
 	/**
-	 * @param	object	$Group	The Group object to which this forum is associated.
+	 * @param	object $Group The Group object to which this forum is associated.
+	 * @param	bool $skip_check
 	 */
 	function __construct(&$Group, $skip_check=false) {
 		parent::__construct();
