@@ -44,6 +44,7 @@ class MailingListFactory extends FFError {
 
 	/**
 	 * @param	Group	$Group The Group object to which these mailing lists are associated.
+	 * @param	bool	$skip_check
 	 */
 	function __construct(&$Group, $skip_check=false) {
 		parent::__construct();
@@ -76,7 +77,7 @@ class MailingListFactory extends FFError {
 	/**
 	 * getMailingLists - get an array of MailingList objects for this Group.
 	 *
-	 * @return	array	The array of MailingList objects.
+	 * @return	array|bool	The array of MailingList objects.
 	 */
 	function getMailingLists() {
 		if (isset($this->mailingLists) && is_array($this->mailingLists)) {

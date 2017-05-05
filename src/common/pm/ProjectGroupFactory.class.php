@@ -44,7 +44,8 @@ class ProjectGroupFactory extends FFError {
 
 	/**
 	 * @param	Group	$Group	The Group object to which this ProjectGroupFactory is associated.
-	*/
+	 * @param	bool	$skip_check
+	 */
 	function __construct(&$Group, $skip_check = false) {
 		parent::__construct();
 		if (!$Group || !is_object($Group)) {
