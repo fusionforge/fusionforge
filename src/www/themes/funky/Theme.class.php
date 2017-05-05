@@ -132,7 +132,7 @@ class Theme_Funky extends Layout {
 		}
 
 		echo html_ac(html_ap() -1);
-		echo html_ao('div', array('id' => 'maindiv'));
+		echo html_ao('main', array('id' => 'maindiv'));
 
 		plugin_hook('message');
 

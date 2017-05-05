@@ -874,8 +874,8 @@ fieldset {
 
 #ff-mw-wrapper {
 	position: relative;	/* so MW can position absolutely */
-	top: -1em;	/* undo div#maindiv */
-	left: -1em;	/* undo div#maindiv */
+	top: -1em;	/* undo #maindiv */
+	left: -1em;	/* undo #maindiv */
 	margin-right: -2em;
 	background: #f9f9f9 url(mw-headbg.jpg) 0 0 no-repeat;
 }

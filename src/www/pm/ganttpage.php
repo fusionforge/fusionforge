@@ -37,7 +37,7 @@ echo $HTML->getJavascripts();
 echo $HTML->getStylesheets();
 echo '</head>';
 echo html_ao('body');
-echo html_ao('div', array('id' => 'maindiv'));
+echo html_ao('main', array('id' => 'maindiv'));
 
 /* define global vars */
 global $pg;

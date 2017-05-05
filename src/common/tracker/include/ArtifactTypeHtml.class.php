@@ -1552,7 +1552,7 @@ EOS;
 		}
 		$javascript = <<<'EOS'
 	function showMessage( msg_text, msg_class) {
-		$("div#maindiv h1").append($("<p>", { "class": msg_class }).html( msg_text )).show();
+		$("#maindiv h1").append($("<p>", { "class": msg_class }).html( msg_text )).show();
 	};
 	$.expr[':'].invalid = function(elem, index, match) {
 		var invalids = document.querySelectorAll(':invalid'), result = false, len = invalids.length;
