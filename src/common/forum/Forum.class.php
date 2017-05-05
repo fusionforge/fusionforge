@@ -97,6 +97,7 @@ class Forum extends FFError {
 	 * @param	$Group
 	 * @param	bool	$group_forum_id
 	 * @param	bool	$arr
+	 * @param	bool	$is_news
 	 */
 	function __construct(&$Group, $group_forum_id = false, $arr = false, $is_news = false) {
 		parent::__construct();
