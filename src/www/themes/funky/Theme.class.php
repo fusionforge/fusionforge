@@ -108,6 +108,7 @@ class Theme_Funky extends Layout {
 			$params['title'] = $params['title'] . " - ".forge_get_config('forge_name');
 		}
 
+		echo html_ao('header');
 		echo $this->listTableTop(array(), array(), 'fullwidth', 'header');
 		$cells = array();
 		$cells[] = array(util_make_link('/', html_image('/header/top-logo.png', null, null, array('alt'=>'FusionForge Home'))), 'id' => 'header-col1');
@@ -130,10 +131,10 @@ class Theme_Funky extends Layout {
 		if (isset($params['group']) && $params['group']) {
 			$this->projectTabs($params['toptab'], $params['group']);
 		}
+		echo html_ac(html_ap() -1); // </div>
+		echo html_ac(html_ap() -1); // </header>
 
-		echo html_ac(html_ap() -1);
 		echo html_ao('main', array('id' => 'maindiv'));
-
 		plugin_hook('message');
 
 		if (isset($GLOBALS['error_msg']) && $GLOBALS['error_msg']) {
