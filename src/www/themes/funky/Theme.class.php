@@ -125,6 +125,7 @@ class Theme_Funky extends Layout {
 		$cells[] = array($this->quickNav().$this->searchBox(), 'id' => 'header-line2', 'colspan' => 2);
 		echo $this->multiTableRow(array(), $cells);
 		echo $this->listTableBottom();
+		echo html_ao('nav', array('role' => 'navigation'));
 		$this->outerTabs($params);
 		echo '<!-- inner tabs -->' . "\n";
 		echo html_ao('div', array('class' => 'innertabs'));
@@ -132,6 +133,7 @@ class Theme_Funky extends Layout {
 			$this->projectTabs($params['toptab'], $params['group']);
 		}
 		echo html_ac(html_ap() -1); // </div>
+		echo html_ac(html_ap() -1); // </nav>
 		echo html_ac(html_ap() -1); // </header>
 
 		echo html_ao('main', array('id' => 'maindiv'));
