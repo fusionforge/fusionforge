@@ -30,6 +30,13 @@
  * tooling library
  */
 
+/**
+ * doc_get_state_box
+ *
+ * @param string $checkedval
+ * @param array $removedval
+ */
+
 function doc_get_state_box($checkedval = 'xzxz', $removedval = array()) {
 	if (count($removedval)) {
 		//TODO: find an easier way to get != ANY($1)
