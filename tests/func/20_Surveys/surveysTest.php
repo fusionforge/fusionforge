@@ -112,7 +112,7 @@ class Surveys extends FForge_SeleniumTestCase
 		$this->assertTextPresent("3 (1)");
 		$this->assertTextPresent("1, 2, 3, 4, 5");
 		// Check that the number of votes is 1
-		$this->assertEquals("1", $this->getText("//div[@id='maindiv']/table/tbody/tr/td[5]"));
+		$this->assertEquals("1", $this->getText("//main[@id='maindiv']/table/tbody/tr/td[5]"));
 
 		// Now testing by adding new questions to the survey.
 		$this->clickAndWait("link=Surveys");

@@ -492,7 +492,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->gotoProject('ProjectA');
 		$this->clickAndWait('Link=Advanced search');
 		$this->click("//input[@class='checkthemall']");
-		$this->type("//div[@id='maindiv']//input[@name='words']", "needle");
+		$this->type("//main[@id='maindiv']//input[@name='words']", "needle");
 		$this->clickAndWait("//input[@name='submitbutton']");
 		$this->assertTrue($this->isTextPresent("Bug1"));
 		$this->assertFalse($this->isTextPresent("Bug2"));
@@ -510,7 +510,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->gotoProject('ProjectA');
 		$this->clickAndWait('Link=Advanced search');
 		$this->click("//input[@class='checkthemall']");
-		$this->type("//div[@id='maindiv']//input[@name='words']", "zongo");
+		$this->type("//main[@id='maindiv']//input[@name='words']", "zongo");
 		$this->clickAndWait("//input[@name='submitbutton']");
 		$this->assertTrue($this->isTextPresent("Bug1"));
 		$this->assertTrue($this->isTextPresent("Bug2"));
@@ -596,7 +596,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->gotoProject('ProjectA');
 		$this->clickAndWait('Link=Advanced search');
 		$this->click("//input[@class='checkthemall']");
-		$this->type("//div[@id='maindiv']//input[@name='words']", "zongo");
+		$this->type("//main[@id='maindiv']//input[@name='words']", "zongo");
 		$this->clickAndWait("//input[@name='submitbutton']");
 		$this->assertTrue($this->isTextPresent("Bug1"));
 		$this->assertFalse($this->isTextPresent("Bug2"));
@@ -634,7 +634,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->click("//input[@class='checkthemall']");
 		$this->assertFalse($this->isElementPresent("//input[@name='short_pm_checkall']"));
 		$this->assertFalse($this->isElementPresent("//input[@name='short_docman_checkall']"));
-		$this->type("//div[@id='maindiv']//input[@name='words']", "zongo");
+		$this->type("//main[@id='maindiv']//input[@name='words']", "zongo");
 		$this->clickAndWait("//input[@name='submitbutton']");
 		$this->assertFalse($this->isTextPresent("Bug1"));
 		$this->assertFalse($this->isTextPresent("Bug2"));
