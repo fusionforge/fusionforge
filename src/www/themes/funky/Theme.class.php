@@ -147,13 +147,14 @@ class Theme_Funky extends Layout {
 			echo $this->feedback($GLOBALS['feedback']);
 		}
 
-		if (isset($params['h1'])) {
+		if (!empty($params['h1'])) {
 			echo html_e('h1', array(), $params['h1'], false);
-		} elseif (isset($params['title'])) {
+		} elseif (!empty($params['title'])) {
 			echo html_e('h1', array('class' => 'hide'), $params['title'], false);
 		}
-		if (isset($params['submenu']))
+		if (isset($params['submenu'])) {
 			echo $params['submenu'];
+		}
 	}
 
 	function bodyFooter($params) {
