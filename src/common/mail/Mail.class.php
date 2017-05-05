@@ -34,7 +34,7 @@ class Mail {
 	var $_mimeType;
 	var $_additionalHeaders;
 
-	function Mail() {
+	function __construct() {
 		$charset = _('UTF-8');
 		if (!$charset) {
 			$charset = 'UTF-8';
@@ -79,14 +79,18 @@ class Mail {
 	}
 
 	/**
-	* Function to encode a header if necessary
-	* according to RFC2047
-	* Filename.......: class.html.mime.mail.inc
-	* Project........: HTML Mime mail class
-	* Last Modified..: Date: 2002/07/24 13:14:10
-	* CVS Revision...: Revision: 1.4
-	* Copyright......: 2001, 2002 Richard Heyes
-	*/
+	 * Function to encode a header if necessary
+	 * according to RFC2047
+	 * Filename.......: class.html.mime.mail.inc
+	 * Project........: HTML Mime mail class
+	 * Last Modified..: Date: 2002/07/24 13:14:10
+	 * CVS Revision...: Revision: 1.4
+	 * Copyright......: 2001, 2002 Richard Heyes
+	 *
+	 * @param	string	$input
+	 * @param	string	$charset
+	 * @return	string
+	 */
 	function _encodeHeader($input, $charset) {
 		preg_match_all('/(\s?\w*[\x80-\xFF]+\w*\s?)/', $input, $matches);
 		foreach ($matches[1] as $value) {
@@ -257,9 +261,12 @@ class Mail {
 	}
 
 	/**
-	* Perform effective email send.
-	* @access	protected
-	*/
+	 * Perform effective email send.
+	 *
+	 * @access	protected
+	 * @param	string	$mail
+	 * @return	bool
+	 */
 	function _sendmail($mail) {
 		$from = $this->getFrom();
 		$handle = popen(forge_get_config('sendmail_path')." -f'$from' -t -i", 'w');
