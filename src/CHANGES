@@ -1,5 +1,5 @@
 FusionForge 6.X:
-* HTML 5 Doctype (Nokia)
+* HTML 5 Doctype; use HTML 5 <header>, <main> and <footer> tags in Funky theme (Nokia)
 * Accounts: minimum password length is now 8 (Sylvain Beucler)
 * Accounts: add minimal constraints to password (upper-case, lower-case, non-alphanumeric check) [#826] (Inria)
 * Core System: support object association n-n, bidirectional (Artifact, Document, FRSRelease) (TrivialDev)
