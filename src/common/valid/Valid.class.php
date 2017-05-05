@@ -86,6 +86,7 @@ class Valid {
 	 *
 	 * ou can add a custom error message that will bypass the default one that
 	 * comes with the rule.
+	 *
 	 * @param Rule   $rule    Reference on rule.
 	 * @param string|bool $message Error message.
 	 */
@@ -117,7 +118,7 @@ class Valid {
 	 *
 	 * Note: If no error, no message raised. The message is raised with either
 	 * 'warning' or 'error' level according to required();
-	 * @param	String	Error message
+	 * @param	string	$msg	Error message
 	 */
 	function setErrorMessage($msg) {
 		$this->globalErrorMessage = $msg;
@@ -136,7 +137,10 @@ class Valid {
 
 	/**
 	 * Append feedback in the global Response object.
+	 *
 	 * @access private
+	 * @param string $level
+	 * @param string $error
 	 */
 	function addFeedback($level, $error) {
 		global $feedback, $error_msg, $warning_msg;
@@ -161,6 +165,7 @@ class Valid {
 	 *
 	 * Takes in account user requirement 'required' and
 	 * 'disableFeedback'. Empty error messages are discarded.
+	 *
 	 * @access private
 	 */
 	function populateFeedback() {
@@ -186,6 +191,7 @@ class Valid {
 	 *
 	 * If the test succeeded, the error message is cleared (either custom or
 	 * built-in messages).
+	 *
 	 * @access private
 	 * @param int	$i	Index of the Rule that was applied.
 	 * @param bool	$result	Result of the test.
