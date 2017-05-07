@@ -319,7 +319,7 @@ class Group extends FFError {
 	 * @param	string	$purpose		The purpose of the group.
 	 * @param	string	$unix_box
 	 * @param	string	$scm_box
-	 * @param	bool	$is_public
+	 * @param	bool	$is_public		///TODO: obsolete, do delete.
 	 * @param	bool	$send_mail		Whether to send an email or not
 	 * @param	int	$built_from_template	The id of the project this new project is based on
 	 * @param	int	$createtimestamp	The Time Stamp of creation to ease import.
