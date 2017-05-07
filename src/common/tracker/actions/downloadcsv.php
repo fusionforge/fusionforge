@@ -24,7 +24,7 @@ require_once $gfcommon.'tracker/ArtifactFactory.class.php';
 
 global $ath;
 
-session_require_perm ('tracker', $ath->getID(), 'read') ;
+session_require_perm('tracker', $ath->getID(), 'read');
 
 $af = new ArtifactFactory($ath);
 if (!$af || !is_object($af)) {
@@ -61,7 +61,7 @@ if ($received_changed_from) {
 	$_changed_from = 0;
 }
 
-$af->setup($offset,$_sort_col,$_sort_ord,$max_rows,$set,$_assigned_to,$_status, array(), $_changed_from);
+$af->setup($offset, $_sort_col, $_sort_ord, $max_rows, $set, $_assigned_to, $_status, array(), $_changed_from);
 
 $at_arr = $af->getArtifacts();
 
@@ -95,10 +95,11 @@ if ($headers) {
 		}
 		echo $sep.'"'.$ef[$keys[$i]]['field_name'].'"';
 	}
+	echo $sep.'comments';
 	echo "\n";
 }
 
-for ($i=0; $i<count($at_arr); $i++) {
+for ($i = 0; $i < count($at_arr); $i++) {
 
 	$open_date   = $at_arr[$i]->getOpenDate() ? date(_('Y-m-d H:i'),$at_arr[$i]->getOpenDate()) : '';
 	$update_date = $at_arr[$i]->getLastModifiedDate() ? date(_('Y-m-d H:i'),$at_arr[$i]->getLastModifiedDate()) : '';
@@ -123,9 +124,7 @@ for ($i=0; $i<count($at_arr); $i++) {
 		$votes[1].$sep.
 		$votes[2];
 
-	//
-	//	Show the extra fields
-	//
+	// Show the extra fields
 	$efd = $at_arr[$i]->getExtraFieldDataText();
 	foreach ( $efd as $key => $efd_pair ) {
 		if ($efd_pair['type'] == ARTIFACT_EXTRAFIELDTYPE_EFFORT) {
@@ -141,18 +140,31 @@ for ($i=0; $i<count($at_arr); $i++) {
 					$unittexts = $unit->getName();
 				}
 			}
-			echo $sep.'"'. fix4csv($unittexts) .'"';
+			echo $sep.'"'.fix4csv($unittexts).'"';
 			$value = $effortUnitFactory->encodedToValue($efd_pair['value']);
 		} else {
 			$value = $efd_pair["value"];
 		}
-		echo $sep.'"'. fix4csv($value) .'"';
+		echo $sep.'"'.fix4csv($value).'"';
 	}
+
+	// Include comments
+	$result = $at_arr[$i]->getMessages();
+	$comments = '';
+	while ($arr = db_fetch_array($result)) {
+		$date = date(_('Y-m-d H:i'), $arr['adddate']);
+		$realname = $arr['realname'];
+		$body = $arr['body'];
+		// replace all newline by ' ~ '
+		$body = str_replace(array("\r\n", "\r", "\n", PHP_EOL, chr(10), chr(13), chr(10).chr(13)), " ~ ", $body);
+		$comments .= ' *** '.$date.' --- '.$realname.' --- '.$body;
+	}
+	echo $sep.'"'.fix4csv($comments).'"';
 	echo "\n";
 }
 
-function fix4csv ($value) {
-	$value = util_unconvert_htmlspecialchars( $value );
+function fix4csv($value) {
+	$value = util_unconvert_htmlspecialchars($value);
 	$value = str_replace("\r\n", "\n", $value);
 	$value = str_replace('"', '""', $value);
 	return $value;
