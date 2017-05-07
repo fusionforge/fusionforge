@@ -304,6 +304,7 @@ class FFUser extends FFError {
 	 * @param	string		$ccode		The users ISO country_code.
 	 * @param	bool		$send_mail	Whether to send an email or not
 	 * @param	bool|int	$tooltips	The users preference for tooltips
+	 * @param	int		$createtime	The epoch creation time. Useful for migration
 	 * @return	bool|int	The newly created user ID
 	 *
 	 */
@@ -311,7 +312,7 @@ class FFUser extends FFError {
 					$mail_site, $mail_va, $language_id, $timezone,
 					$dummy1, $dummy2, $theme_id, $unix_box = 'shell',
 					$address = '', $address2 = '', $phone = '', $fax = '', $title = '',
-					$ccode = 'US', $send_mail = true, $tooltips = true, $createtimestamp = null) {
+					$ccode = 'US', $send_mail = true, $tooltips = true, $createtime = 0) {
 		global $SYS;
 		if (!$theme_id) {
 			$this->setError(_('You must supply a theme'));
@@ -417,7 +418,7 @@ class FFUser extends FFError {
 		// if we got this far, it must be good
 		$confirm_hash = substr(md5($password1.util_randbytes().microtime()), 0, 16);
 		db_begin();
-		$createtimestamp = (($createtimestamp) ? $createtimestamp : time());
+		$createtime = (($createtime) ? $createtime : time());
 		$result = db_query_params('INSERT INTO users (user_name,unix_pw,realname,firstname,lastname,email,add_date,status,confirm_hash,mail_siteupdates,mail_va,language,timezone,unix_box,address,address2,phone,fax,title,ccode,theme_id,tooltips,shell)
 							VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23)',
 			array($unix_name,
@@ -426,7 +427,7 @@ class FFUser extends FFError {
 				htmlspecialchars($firstname),
 				htmlspecialchars($lastname),
 				$email,
-				$createtimestamp,
+				$createtime,
 				'P',
 				$confirm_hash,
 				(($mail_site)? "1" : "0"),
@@ -451,7 +452,7 @@ class FFUser extends FFError {
 
 			$id = db_insertid($result, 'users', 'user_id');
 			if (!$id) {
-				$this->setError(_('Could Not Get User Id: ') .db_error());
+				$this->setError(_('Could Not Get User Id')._(': ').db_error());
 				db_rollback();
 				return false;
 			}
@@ -466,7 +467,7 @@ class FFUser extends FFError {
 			$hook_params['user_id'] = $this->getID();
 			$hook_params['user_name'] = $unix_name;
 			$hook_params['user_password'] = $password1;
-			$hook_params['user_timecreate'] = $createtimestamp;
+			$hook_params['user_timecreate'] = $createtime;
 			plugin_hook("user_create", $hook_params);
 
 			if ($send_mail) {
