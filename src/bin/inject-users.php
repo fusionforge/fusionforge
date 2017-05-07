@@ -50,7 +50,7 @@ while (! feof ($f)) {
 	$u = new FFUser () ;
 
 	$r = $u->create ($login, $fname, $lname, $password, $password, $email,
-			 1, 0, 1, 'UTC', '', '', getThemeIdFromName(forge_get_config('default_theme')),
+			 1, 0, 1, 'UTC', '', '', $themeId,
 			 'shell', '', '', '', '', '', 'US', false);
 
 	if (!$r) {
