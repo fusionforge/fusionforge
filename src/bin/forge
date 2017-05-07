@@ -28,6 +28,7 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'tracker/ArtifactFactory.class.php';
 require_once $gfcommon.'tracker/ArtifactTypeFactory.class.php';
 require_once $gfcommon.'docman/DocumentReviewFactory.class.php';
+require_once $gfcommon.'include/User.class.php';
 
 class CliActions {
 	function help($method = null) {
@@ -113,6 +114,11 @@ class CliActions {
 				echo "to dump FRS from a specific project.\n";
 				echo $dumpFormatInfo;
 				break;
+			case 'pmDump':
+				echo "Use: .../forge pmDump <groupid> [json|raw]\n";
+				echo "to dump Project Management (tasks) from a specific project.\n";
+				echo $dumpFormatInfo;
+				break;
 			case 'surveyDump':
 				echo "Use: .../forge surveyDump <surveyid> [json|raw]\n";
 				echo "to dump a specific survey from a specific project.\n";
@@ -121,6 +127,26 @@ class CliActions {
 			case 'groupDump':
 				echo "Use: .../forge groupDump <groupid> [json|raw]\n";
 				echo "to dump a group.\n";
+				echo $dumpFormatInfo;
+				break;
+			case 'groupImport':
+				echo "Use: .../forge groupImport <file> [json|raw]\n";
+				echo "to import a full group and all his elements.\n";
+				echo $dumpFormatInfo.$importFormatInfo;
+				break;
+			case 'userDump':
+				echo "Use: .../forge userDump <user_id> [json|raw]\n";
+				echo "to dump an user from the forge.\n";
+				echo $dumpFormatInfo;
+				break;
+			case 'userImport':
+				echo "Use: .../forge userImport <file> [json|raw]\n";
+				echo "to import an user.\n";
+				echo $dumpFormatInfo.$importFormatInfo;
+				break;
+			case 'forumDump':
+				echo "Use: .../forge forumDump <forum_id> [json|raw]\n";
+				echo "to dump a forum from the specific project.\n";
 				echo $dumpFormatInfo;
 				break;
 			case 'getZipDump':
@@ -311,7 +337,12 @@ class CliActions {
 			$groupDump['setup']['membersArr'] = $group->getMembers(false);
 			$groupDump['setup']['roles'] = $group->getRoles();
 			foreach ($groupDump['setup']['roles'] as $role) {
+				$users = $role->getUsers();
 				unset($role->Group);
+				$role->userids = array();
+				foreach ($users as $user) {
+					$role->userids[] = $user->getID();
+				}
 			}
 			$groupDump['setup']['homepage'] = $group->getWidgetLayoutConfig();
 			if ($group->usesDocman()) {
@@ -378,16 +409,162 @@ class CliActions {
 		if (!$stream) {
 			return false;
 		}
+		if (isset($stream['setup']['membersArr']) && is_array($stream['setup']['membersArr'])) {
+			foreach ($stream['setup']['membersArr'] as $member) {
+				$filename = 'userDump-'.$member['data_array']['user_id'].'.'.$format;
+				$this->createSubfile($filename, $member, $format);
+				if (!$this->userImport($filename, $format)) {
+					echo _('Unable to inject member')."\n";
+					db_rollback();
+					return false;
+				}
+				@unlink($filename);
+			}
+		}
+	}
+
+	function userDump($userid, $format = 'json') {
+		$user = user_get_object($userid);
+		if ($user && is_object($user) && !$user->isError()) {
+			$userDump = (array)$user;
+			unset($userDump['Group']);
+		} else {
+			$userDump['error'][] = _('Unable to get user id')._(': ').$userid;
+		}
+		$userDump['id'] = $userid;
+		ksort($userDump);
+		$this->print_result($userDump, $format);
+		return $userDump;
+		return true;
+	}
+
+	function userImport($file, $format = 'json') {
+		global $importRefMapping;
+		$stream = $this->loadFile($file, $format);
+		if (!$stream) {
+			return false;
+		}
+		$ffuser = user_get_object_by_name($stream['data_array']['user_name']);
+		if ($ffuser && is_object($ffuser) && !$ffuser->isError()) {
+			$importRefMapping['user'][$stream['data_array']['user_id']] = $ffuser->getID();
+			printf(_('User %s already exists. Mapping retrieved.'), $stream['data_array']['user_name'])."\n";
+			return true;
+		}
+		$ffuser = new FFUser();
+		if ($ffuser && is_object($ffuser) && !$ffuser->isError()) {
+			db_begin();
+			// need to check for each value to test if isset else set default value
+			if (isset($stream['data_array']['password'])) {
+				$password = $stream['data_array']['password'];
+			} else {
+				$password = 'Inject123$';
+			}
+			if (isset($stream['data_array']['mail_siteupdates'])) {
+				$mail_siteupdates = $stream['data_array']['mail_siteupdates'];
+			} else {
+				$mail_siteupdates = 0;
+			}
+			if (isset($stream['data_array']['mail_va'])) {
+				$mail_va = $stream['data_array']['mail_va'];
+			} else {
+				$mail_va = 0;
+			}
+			if (isset($stream['data_array']['language'])) {
+				$language_id = $stream['data_array']['language'];
+			} else {
+				$language_id = 1;
+			}
+			if (isset($stream['data_array']['timezone'])) {
+				$timezone = $stream['data_array']['timezone'];
+			} else {
+				$timezone = 'UTC';
+			}
+			if (isset($stream['data_array']['theme_id'])) {
+				$theme_id = $stream['data_array']['theme_id'];
+			} else {
+				$theme_id = getThemeIdFromName(forge_get_config('default_theme'));
+			}
+			if (isset($stream['data_array']['unix_box'])) {
+				$unix_box = $stream['data_array']['unix_box'];
+			} else {
+				$unix_box = 'shell';
+			}
+			if (isset($stream['data_array']['address'])) {
+				$address = $stream['data_array']['address'];
+			} else {
+				$address = '';
+			}
+			if (isset($stream['data_array']['address2'])) {
+				$address2 = $stream['data_array']['address2'];
+			} else {
+				$address2 = '';
+			}
+			if (isset($stream['data_array']['phone'])) {
+				$phone = $stream['data_array']['phone'];
+			} else {
+				$phone = '';
+			}
+			if (isset($stream['data_array']['fax'])) {
+				$fax = $stream['data_array']['fax'];
+			} else {
+				$fax = '';
+			}
+			if (isset($stream['data_array']['title'])) {
+				$title = $stream['data_array']['title'];
+			} else {
+				$title = '';
+			}
+			if (isset($stream['data_array']['ccode'])) {
+				$ccode = $stream['data_array']['ccode'];
+			} else {
+				$ccode = 'US';
+			}
+			if (isset($stream['data_array']['send_mail'])) {
+				$send_mail = $stream['data_array']['send_mail'];
+			} else {
+				$send_mail = true;
+			}
+			if (isset($stream['data_array']['tooltips'])) {
+				$tooltips = $stream['data_array']['tooltips'];
+			} else {
+				$tooltips = true;
+			}
+			if (isset($stream['data_array']['add_date'])) {
+				$createtimestamp = $stream['data_array']['add_date'];
+			} else {
+				$createtimestamp = null;
+			}
+			if (!$ffuser->create($stream['data_array']['user_name'], $stream['data_array']['firstname'], $stream['data_array']['lastname'], $password, $password,
+					$stream['data_array']['email'], $mail_siteupdates, $mail_va, $language_id, $timezone, null, null, $theme_id, $unix_box,
+					$address, $address2, $phone, $fax, $title, $ccode, $send_mail, $tooltips)) {
+				echo $ffuser->getErrorMessage()."\n";
+				db_rollback();
+				return false;
+			}
+			if (isset($stream['data_array']['user_id'])) {
+				$importRefMapping['user'][$stream['data_array']['user_id']] = $ffuser->getID();
+			}
+			echo _('User injected')."\n";
+			db_commit();
+			return true;
+		} else {
+			echo _('Unable to get user object to inject user')."\n";
+			return false;
+		}
 	}
 
 	function surveyDump($sid, $format = 'json') {
 		$surveyDump['id'] = $sid;
-		$surveyObject = survey_get_object($sid);
-		$surveyObject->getQuestionInstances();
-		$surveyDump['setup'] = (array)$surveyObject;
-		unset($surveyDump['setup']['Group']);
-		foreach($surveyDump['setup']['all_question_array'] as $question) {
-			unset($question->Group);
+		$survey = survey_get_object($sid);
+		if ($survey && is_object($survey) && !$survey->isError()) {
+			$survey->getQuestionInstances();
+			$surveyDump['setup'] = (array)$survey;
+			unset($surveyDump['setup']['Group']);
+			foreach($surveyDump['setup']['all_question_array'] as $question) {
+				unset($question->Group);
+			}
+		} else {
+			$surveyDump['error'][] = _('Unable to get survey id')._(': ').$sid;
 		}
 		ksort($surveyDump);
 		$this->print_result($surveyDump, $format);
