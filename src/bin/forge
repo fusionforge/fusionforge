@@ -409,6 +409,7 @@ class CliActions {
 		if (!$stream) {
 			return false;
 		}
+		db_begin();
 		if (isset($stream['setup']['membersArr']) && is_array($stream['setup']['membersArr'])) {
 			foreach ($stream['setup']['membersArr'] as $member) {
 				$filename = 'userDump-'.$member['data_array']['user_id'].'.'.$format;
@@ -420,6 +421,103 @@ class CliActions {
 				}
 				@unlink($filename);
 			}
+		}
+		$new_group = new Group();
+		if ($new_group && is_object($new_group) && !$new_group->isError()) {
+			//need to find a admin user
+			if (isset($stream['setup']['roles']) && is_array($stream['setup']['roles'])) {
+				foreach ($stream['setup']['roles'] as $role) {
+					if (isset($role['perms_array']['project_admin'][$stream['setup']['data_array']['group_id']]) && $role['perms_array']['project_admin'][$stream['setup']['data_array']['group_id']]) {
+						if (isset($role['userids']) && is_array($role['userids'])) {
+							foreach ($role['userids'] as $uid) {
+								$mappeduid = $this->getMappingId($uid, 'user');
+								$adminUser = user_get_object($mappeduid);
+								if ($adminUser && is_object($adminUser) && !$adminUser->isError()) {
+									break 2;
+								}
+							}
+						}
+					}
+				}
+			}
+			if (!isset($adminUser)) {
+				echo _('Warning')._(': ')._('No admin found. Use default forge admin')."\n";
+				$admins = RBACEngine::getInstance()->getUsersByAllowedAction("forge_admin", -1);
+				$adminUser = $admins[0];
+			}
+			if (isset($stream['setup']['data_array']['unix_box'])) {
+				$unix_box = $stream['setup']['data_array']['unix_box'];
+			} else {
+				$unix_box = 'shell1';
+			}
+			if (isset($stream['setup']['data_array']['scm_box'])) {
+				$scm_box = $stream['setup']['data_array']['scm_box'];
+			} else {
+				$scm_box = 'cvs1';
+			}
+			if (isset($stream['setup']['data_array']['scm_box'])) {
+				$scm_box = $stream['setup']['data_array']['scm_box'];
+			} else {
+				$scm_box = 'cvs1';
+			}
+			if (isset($stream['setup']['data_array']['register_time'])) {
+				$createtimestamp = $stream['setup']['data_array']['register_time'];
+			} else {
+				$createtimestamp = null;
+			}
+			if (!$new_group->create($adminUser, $stream['setup']['data_array']['group_name'], $stream['setup']['data_array']['unix_group_name'], $stream['setup']['data_array']['short_description'], $stream['setup']['data_array']['register_purpose'], $unix_box,
+				$scm_box, false, false, 0, $createtimestamp)) {
+				echo $new_group->getErrorMessage()."\n";
+				db_rollback();
+				return false;
+			} else {
+				//add users as members to the project
+				$default_role_ids = $new_group->getRolesId();
+				$default_role_id = $default_role_ids[0];
+				if (isset($stream['setup']['membersArr']) && is_array($stream['setup']['membersArr'])) {
+					foreach ($stream['setup']['membersArr'] as $member) {
+						$muid = $this->getMappingId($member['data_array']['user_id'], 'user');
+						$new_group->addUser($muid, $default_role_ids[0]);
+					}
+				}
+				//inject trackers if any
+				if (isset($stream['setup']['data_array']['use_tracker'])) {
+					$new_group->setUseTracker($stream['setup']['data_array']['use_tracker']);
+				}
+				if (isset($stream['trackers']) && is_array($stream['trackers'])) {
+					foreach ($stream['trackers'] as $tracker) {
+						$filename = 'trackerDump-'.$tracker['setup']['group_artifact_id'].'.'.$format;
+						$this->createSubfile($filename, $tracker, $format);
+						if (!$this->trackerImport($filename, $format)) {
+							echo _('Unable to inject tracker')."\n";
+							db_rollback();
+							return false;
+						}
+						@unlink($filename);
+					}
+				}
+				//inject docman if any
+				if (isset($stream['setup']['data_array']['use_docman'])) {
+					$new_group->setUseDocman($stream['setup']['data_array']['use_docman']);
+				}
+				if (isset($stream['docman'])) {
+					$filename = 'docmanDump-'.$stream['setup']['data_array']['group_id'].'.'.$format;
+					$this->createSubfile($filename, $stream['docman'], $format);
+					if (!$this->docmanImport($filename, $format)) {
+						echo _('Unable to inject docman')."\n";
+						db_rollback();
+						return false;
+					}
+					@unlink($filename);
+				}
+				echo _('Group imported.')."\n";
+				db_commit();
+				return true;
+			}
+		} else {
+			echo _('Unable to get group object to inject group')."\n";
+			db_rollback();
+			return false;
 		}
 	}
 
@@ -447,7 +545,7 @@ class CliActions {
 		$ffuser = user_get_object_by_name($stream['data_array']['user_name']);
 		if ($ffuser && is_object($ffuser) && !$ffuser->isError()) {
 			$importRefMapping['user'][$stream['data_array']['user_id']] = $ffuser->getID();
-			printf(_('User %s already exists. Mapping retrieved.'), $stream['data_array']['user_name'])."\n";
+			echo sprintf(_('User %s already exists. Mapping retrieved.'), $stream['data_array']['user_name'])."\n";
 			return true;
 		}
 		$ffuser = new FFUser();
