@@ -466,7 +466,7 @@ class CliActions {
 				$createtimestamp = null;
 			}
 			if (!$new_group->create($adminUser, $stream['setup']['data_array']['group_name'], $stream['setup']['data_array']['unix_group_name'], $stream['setup']['data_array']['short_description'], $stream['setup']['data_array']['register_purpose'], $unix_box,
-				$scm_box, false, false, 0, $createtimestamp)) {
+				$scm_box, false, 0, $createtimestamp)) {
 				echo $new_group->getErrorMessage()."\n";
 				db_rollback();
 				return false;

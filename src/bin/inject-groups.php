@@ -26,9 +26,8 @@ db_begin ();
 
 /*
  * Line format:
- * unixname:fullname:description:ispublic:username
+ * unixname:fullname:description:username
  * username is login of admin user
- * ispublic is 0/1
  * Beware of colons in text fields (fullname, description)!
 */
 
@@ -37,21 +36,20 @@ while (! feof ($f)) {
 	$l = trim (fgets ($f, 1024)) ;
 	if ($l == "") { continue ; } ;
 	$array = explode (':', $l) ;
-	$unixname = $array[0] ;
-	$fullname = $array[1] ;
-	$description = $array[2] ;
-	$is_public = $array[3] ;
-	$username = $array[4] ;
+	$unixname = $array[0];
+	$fullname = $array[1];
+	$description = $array[2];
+	$username = $array[3];
 
-	$u = user_get_object_by_name($username) ;
+	$u = user_get_object_by_name($username);
 	if (! $u) {
 		print "Error: invalid user\n" ;
-		db_rollback () ;
-		exit (1) ;
+		db_rollback();
+		exit(1);
 	}
 
-	$g = new Group () ;
-	$r = $g->create ($u, $fullname, $unixname, $description, 'Project injected into the database by inject-groups.php', 'shell', 'scm', $is_public, false) ;
+	$g = new Group();
+	$r = $g->create($u, $fullname, $unixname, $description, 'Project injected into the database by inject-groups.php', 'shell', 'scm', false);
 
 	if (!$r) {
 		print "Error: ". $g->getErrorMessage () . "\n" ;

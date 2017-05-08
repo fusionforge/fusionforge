@@ -319,14 +319,13 @@ class Group extends FFError {
 	 * @param	string	$purpose		The purpose of the group.
 	 * @param	string	$unix_box
 	 * @param	string	$scm_box
-	 * @param	bool	$is_public		///TODO: obsolete, do delete.
 	 * @param	bool	$send_mail		Whether to send an email or not
 	 * @param	int	$built_from_template	The id of the project this new project is based on
 	 * @param	int	$createtimestamp	The Time Stamp of creation to ease import.
 	 * @return	bool	success or not
 	 */
 	function create(&$user, $group_name, $unix_name, $description, $purpose, $unix_box = 'shell1',
-			$scm_box = 'cvs1', $is_public = true, $send_mail = true, $built_from_template = 0, $createtimestamp = null) {
+			$scm_box = 'cvs1', $send_mail = true, $built_from_template = 0, $createtimestamp = null) {
 		// $user is ignored - anyone can create pending group
 
 		global $SYS;

@@ -119,7 +119,7 @@ if (is_dir($project_path.'/project')) {
 				$fullname = substr($fullname, 0, MAXSIZE__GROUP_PROJECTNAME);
 			}
 			$description = trim((string)$simpleXmlLoadedFile->description);
-			$is_public = trim((string)$simpleXmlLoadedFile['accessLevel']);
+			//$is_public = trim((string)$simpleXmlLoadedFile['accessLevel']); <= to reuse to link anonymous access?
 			$username = trim((string)$simpleXmlLoadedFile->createdByUsername);
 			$ctfxid = trim((string)$simpleXmlLoadedFile['xid']);
 			$status = trim((string)$simpleXmlLoadedFile->status);
@@ -138,7 +138,7 @@ if (is_dir($project_path.'/project')) {
 			// now create the Group in DB
 			$g = new Group();
 			$r = $g->create($ctfUser, $fullname, $unixname, $description, 'Project injected into the database using CTF forklift XML export',
-					'shell', 'scm', $is_public, false);
+					'shell', 'scm', 0);
 
 			if (!$r) {
 				echo 'Error: '.$g->getErrorMessage()."\n";

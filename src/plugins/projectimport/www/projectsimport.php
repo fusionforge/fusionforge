@@ -234,7 +234,6 @@ class ProjectsImportPage extends FileManagerPage {
 					$description = $project->getDescription();
 					$purpose = 'Imported from JSON file';
 					$scm_host = '';
-					$is_public = $project->getIsPublic();
 					$send_mail = ! forge_get_config ('project_auto_approval') ;
 					$built_from_template = 0 ;
 
@@ -248,7 +247,6 @@ class ProjectsImportPage extends FileManagerPage {
 						$purpose,
 						'shell1',
 						$scm_host,
-						$is_public,
 						$send_mail,
 						$built_from_template);
 
@@ -273,7 +271,6 @@ class ProjectsImportPage extends FileManagerPage {
 
 					$htmlcontent .= '<p>full_name : '. $full_name .'</p>';
 					//$html .= '<p>purpose : '. $project->getPurpose() .'</p>';
-					$htmlcontent .= '<p>is_public : '. $is_public .'</p>';
 					$htmlcontent .= '</td></tr>';
 
 				}

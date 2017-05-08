@@ -152,7 +152,7 @@ $server->register(
 	$uri.'#approveGroup', 'rpc', 'encoded'
 );
 
-//addGroup ($user, $group_name, $unix_name, $description, $purpose, $unix_box = 'shell1', $scm_box = 'cvs1', $is_public = 1, $send_mail = true, $built_from_template = 0)
+//addGroup ($user, $group_name, $unix_name, $description, $purpose, $unix_box = 'shell1', $scm_box = 'cvs1', $send_mail = true, $built_from_template = 0)
 $server->register(
 	'addGroup',
 	array('session_ser' => 'xsd:string',
@@ -162,7 +162,6 @@ $server->register(
 		'purpose' => 'xsd:string',
 		'unix_box' => 'xsd:string',
 		'scm_box' => 'xsd:string',
-		'is_public' => 'xsd:int',
 		'send_mail' => 'xsd:boolean',
 		'built_from_template' => 'xsd:int'),
 	array('return' => 'xsd:boolean'),
@@ -395,11 +394,11 @@ function approveGroup($session_ser, $group_id) {
 }
 
 // add a group
-function addGroup($session_ser, $group_name, $unix_name, $description, $purpose, $unix_box, $scm_box, $is_public, $send_mail, $built_from_template) {
+function addGroup($session_ser, $group_name, $unix_name, $description, $purpose, $unix_box, $scm_box, $send_mail, $built_from_template) {
 	continue_session($session_ser);
 	$group = new Group();
 	$u = session_get_user();
-	$result = $group->create($u, $group_name, $unix_name, $description, $purpose, $unix_box, $scm_box, $is_public, $send_mail, $built_from_template);
+	$result = $group->create($u, $group_name, $unix_name, $description, $purpose, $unix_box, $scm_box, $send_mail, $built_from_template);
 
 	if (!$result) {
 		$errMsg = 'Could Not Add A New Project: '.$group->getErrorMessage();

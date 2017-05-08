@@ -120,7 +120,6 @@ if (getStringFromRequest('submit')) {
 		$purpose,
 		'shell1',
 		$scm_host,
-		0,
 		$send_mail,
 		$built_from_template
 	);
