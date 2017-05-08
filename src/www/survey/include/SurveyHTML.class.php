@@ -670,7 +670,7 @@ class SurveyHTML extends FFError {
 					foreach ($words as $word) {
 						// if we have a stupidly strange word with lots of letters, we'll make a new line for it and split it
 						if ((strlen($word)>100) && ((strlen($word)+$linelength)>100)) {
-							$chunks = $this->split_str($word,50);
+							$chunks = $this->str_split($word,50);
 							foreach ($chunks as $chunk) {
 								$ret .= $chunk;
 								$ret .= "<br />";
@@ -702,21 +702,6 @@ class SurveyHTML extends FFError {
 		}
 
 		return $ret;
-	}
-
-	/**
-	 * split_str - works as str_split of PHP5 - Converts a string to an array.
-	 *
-	 * @param	string	$str
-	 * @param	int		$split_lengt	length of chunk
-	 * @return	array	array of chunks of the string
-	 */
-	function split_str($str, $split_lengt=1) {
-		$cnt = strlen($str);
-		for ($i=0;$i<$cnt;$i+=$split_lengt) {
-			$rslt[]= substr($str,$i,$split_lengt);
-		}
-		return $rslt;
 	}
 
 	/**
