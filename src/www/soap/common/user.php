@@ -260,7 +260,7 @@ function addUser($unix_name, $firstname, $lastname, $password1, $password2, $ema
 function updateUser ($session_ser, $user_id, $firstname, $lastname, $language_id, $timezone, $mail_site, $mail_va, $use_ratings, $jabber_address, $jabber_only, $theme_id, $address, $address2, $phone, $fax, $title, $ccode) {
 	continue_session($session_ser);
 	$user = user_get_object($user_id);
-	if (!$user || !is_object($user) || !($u->getID() == user_getid() || forge_check_global_perm('forge_admin'))) {
+	if (!$user || !is_object($user) || !($user->getID() == user_getid() || forge_check_global_perm('forge_admin'))) {
 		return new soap_fault('updateUser', 'Could Not Get User', 'Could Not Get User');
 	}
 
@@ -309,7 +309,7 @@ function changeStatus ($session_ser, $user_id, $status) {
 function changePassword ($session_ser, $user_id, $password) {
 	continue_session($session_ser);
 	$user = user_get_object($user_id);
-	if (!$user || !is_object($user) || !($u->getID() == user_getid() || forge_check_global_perm('forge_admin'))) {
+	if (!$user || !is_object($user) || !($user->getID() == user_getid() || forge_check_global_perm('forge_admin'))) {
 		return new soap_fault('changePassword', 'Could Not Get User', 'Could Not Get User');
 	} elseif ($user->isError()) {
 		return new soap_fault('changePassword', $user->getErrorMessage(), $user->getErrorMessage());
