@@ -94,7 +94,7 @@ $server->wsdl->addComplexType(
 // session/authentication
 $server->register(
 	'login',
-	array('userid'=>'xsd:string','passwd'=>'xsd:string'),
+	array('username'=>'xsd:string','passwd'=>'xsd:string'),
 	array('loginResponse'=>'xsd:string'),
 	$uri,
 	$uri.'#login');
@@ -174,20 +174,20 @@ function continue_session($sessionKey) {
 /**
  * login - Logs in a SOAP client
  *
- * @param	string	$userid	userid	The user's unix id
- * @param	string	$passwd	passwd	The user's passwd in clear text
+ * @param	string	$username	username	The user's unix id
+ * @param	string	$passwd		passwd		The user's passwd in clear text
  *
  * @return	string	the session key
  */
-function login($userid, $passwd) {
+function login($username, $passwd) {
 	global $feedback, $session_ser;
 
 	setlocale (LC_TIME, _('en_US'));
 
-	$res = session_check_credentials_in_database($userid, $passwd);
+	$res = session_login_valid($username, $passwd);
 
 	if (!$res) {
-		return new soap_fault('1001', 'user', "Unable to log in with userid of ".$userid, $feedback);
+		return new soap_fault('1001', 'user', 'Unable to log in with username of '.$username, $feedback);
  	}
 
 	return session_build_session_token(user_getid());
