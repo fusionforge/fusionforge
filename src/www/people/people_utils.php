@@ -25,6 +25,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+/**
+ * people_header() - Display header for people pages
+ *
+ * @param array $params
+ */
 function people_header($params) {
 	global $group_id, $job_id, $HTML;
 

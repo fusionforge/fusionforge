@@ -26,9 +26,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-/*
-	Standard header to be used on all /project/admin/* pages
-*/
+/**
+ * project_admin_header() - Standard header to be used on all /project/admin/* pages
+ *
+ * @param	array	$params
+ */
 
 function project_admin_header($params) {
 	global $group_id, $HTML;

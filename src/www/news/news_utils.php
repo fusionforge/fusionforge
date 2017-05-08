@@ -24,6 +24,12 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+/**
+ * news_header() - Display header for news pages
+ *
+ * @param array $params
+ */
+
 function news_header($params) {
 	global $HTML, $group_id;
 

@@ -21,6 +21,12 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+/**
+ * validate_return_to()
+ *
+ * @param	string	$return_to
+ */
+
 function validate_return_to(&$return_to = '/') {
 	$newrt = '/';
 

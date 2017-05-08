@@ -22,6 +22,14 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+/**
+ * period2seconds()
+ *
+ * @param	string	$period_name
+ * @param	int		$span
+ * @return	int
+ */
+
 function period2seconds($period_name,$span) {
 	if (!$period_name || $period_name=="lifespan") {
 		return "";

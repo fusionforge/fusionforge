@@ -24,10 +24,15 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+/**
+ * show_news_approve_form() - Show list of waiting news items
+ *
+ * @param $qpa_pending
+ * @param $qpa_rejected
+ * @param $qpa_approved
+ * @param $form_url
+ */
 function show_news_approve_form($qpa_pending, $qpa_rejected, $qpa_approved, $form_url) {
-	/*
-		Show list of waiting news items
-	*/
 
 	global $HTML;
 

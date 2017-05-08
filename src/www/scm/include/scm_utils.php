@@ -24,6 +24,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+/**
+ * scm_header() - Display header for SCM pages
+ *
+ * @param	array	$params
+ */
 function scm_header($params) {
 	global $HTML;
 	if (!forge_get_config('use_scm')) {
