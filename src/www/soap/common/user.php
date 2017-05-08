@@ -326,7 +326,7 @@ function changePassword ($session_ser, $user_id, $password) {
 function userGetGroups($session_ser, $user_id) {
 	continue_session($session_ser);
 	$user = user_get_object($user_id);
-	if (!$user || !is_object($user) || !($u->getID() == user_getid() || forge_check_global_perm('forge_admin'))) {
+	if (!$user || !is_object($user) || !($user->getID() == user_getid() || forge_check_global_perm('forge_admin'))) {
 		return new soap_fault('3003', 'user', 'Could Not Get Users Projects', 'Could Not Get Users Projects');
 	}
 	return groups_to_soap($user->getGroups());
