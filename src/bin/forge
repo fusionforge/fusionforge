@@ -471,6 +471,7 @@ class CliActions {
 				db_rollback();
 				return false;
 			} else {
+				$importRefMapping['group'][$stream['setup']['data_array']['group_id']] = $new_group->getID();
 				//add users as members to the project
 				$default_role_ids = $new_group->getRolesId();
 				$default_role_id = $default_role_ids[0];
@@ -509,6 +510,15 @@ class CliActions {
 						return false;
 					}
 					@unlink($filename);
+				}
+				//setup homepage
+				if (isset($stream['setup']['homepage'])) {
+					$lm = new WidgetLayoutManager();
+					if (!$lm->createLayoutForProjectFromArray($this->getMappingId($stream['setup']['data_array']['group_id'], 'group'), $stream['setup']['homepage'])) {
+						echo _('Unable to create group homepage layout')."\n";
+						db_rollback();
+						return false;
+					}
 				}
 				echo _('Group imported.')."\n";
 				db_commit();
@@ -726,6 +736,14 @@ class CliActions {
 				return false;
 			}
 			$importRefMapping['artifact_type'][$stream['setup']['group_artifact_id']] = $at->getID();
+			if (isset($stream['setup']['use_tracker_widget_display'])) {
+				$lm = new WidgetLayoutManager();
+				if (!$lm->createLayoutForTrackerFromArray($this->getMappingId($stream['setup']['group_artifact_id'], 'artifact_type'), $stream['setup']['use_tracker_widget_display'])) {
+					echo _('Unable to create tracker layout')."\n";
+					db_rollback();
+					return false;
+				}
+			}
 			if (isset($stream['setup']['extra_fields']) && is_array($stream['setup']['extra_fields'])) {
 				foreach ($stream['setup']['extra_fields'] as $extra_field) {
 					$ef = new ArtifactExtraField($at);
