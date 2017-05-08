@@ -34,7 +34,9 @@ require_once $gfwww.'include/note.php';
 class SurveyHTML extends FFError {
 
 	/**
-	 * Show survey header
+	 * header() - Show survey header
+	 *
+	 * @param	array	$params
 	 */
 	function header($params) {
 		global $group_id,$is_admin_page,$HTML;
@@ -88,14 +90,17 @@ class SurveyHTML extends FFError {
 	}
 
 	/**
-	 * Show Survey footer
+	 * footer() - Show Survey footer
+	 *
+	 * @param	array	$params
 	 */
 	function footer($params = array()) {
 		site_project_footer($params);
 	}
 
 	/**
-	 * Show Add/Modify Question Forums
+	 * showAddQuestionForm() - Show Add/Modify Question Forums
+	 *
 	 * @param	Survey	$q	Question Question Object
 	 * @return	string
 	 */
@@ -140,7 +145,8 @@ class SurveyHTML extends FFError {
 	}
 
 	/**
-	 * Show Add/Modify Question Forums
+	 * showAddSurveyForm() - Show Add/Modify Question Forums
+	 *
 	 * @param	Survey	$s	Question Question Object
 	 * @return	string
 	 */
@@ -208,7 +214,7 @@ class SurveyHTML extends FFError {
 			$ret.= $HTML->listTableTop($title_arr);
 		}
 
-		for($i = 0;  $i  <  count($arr_to_add);  $i++)  {
+		for($i = 0;  $i < count($arr_to_add); $i++) {
 
 			if ($arr_to_add[$i]->isError()) {
 				echo $arr_to_add[$i]->getErrorMessage();
@@ -247,7 +253,7 @@ class SurveyHTML extends FFError {
 			$ret.= $HTML->listTableTop ($title_arr);
 		}
 
-		for($i = 0;  $i  <  count($arr_to_del);  $i++)  {
+		for($i = 0; $i < count($arr_to_del); $i++) {
 			if ($arr_to_del[$i]->isError()) {
 				echo $arr_to_del[$i]->getErrorMessage();
 				continue;
@@ -281,8 +287,9 @@ class SurveyHTML extends FFError {
 	}
 
 	/**
-	 * Show list of questions
+	 * showQuestions() - Show list of questions
 	 *
+	 * @param	$questions
 	 * @return	string
 	 */
 	function showQuestions(&$questions) {
@@ -296,7 +303,7 @@ class SurveyHTML extends FFError {
 		$title_arr = array(_('Question ID'), _('Question'), _('Type'), _('Edit/Delete'));
 		$ret.= $HTML->listTableTop($title_arr);
 
-		for($i = 0;  $i  <  count($questions);  $i++)  {
+		for($i = 0; $i < count($questions); $i++) {
 			if ($questions[$i]->isError()) {
 				echo $questions[$i]->getErrorMessage();
 				continue;
@@ -316,11 +323,22 @@ class SurveyHTML extends FFError {
 	}
 
 	/**
-	 * Show list of surveys
+	 * showSurveys() - Show list of surveys with many options
 	 *
-	 * Show surveys with many options
 	 * have to set $user_id to get the right show_vote option
-	 *
+	 * @param $surveys
+	 * @param int $show_id
+	 * @param int $show_questions
+	 * @param int $show_number_questions
+	 * @param int $show_number_votes
+	 * @param int $show_vote
+	 * @param int $show_edit
+	 * @param int $show_result
+	 * @param int $show_result_graph
+	 * @param int $show_result_comment
+	 * @param int $show_result_csv
+	 * @param int $show_inactive
+	 * @return string
 	 */
 	function showSurveys(&$surveys, $show_id=0, $show_questions=0,
 			      $show_number_questions=0, $show_number_votes=0,
@@ -372,9 +390,7 @@ class SurveyHTML extends FFError {
 
 		$ret.= $HTML->listTableTop($title_arr);
 
-		/* Color index for table */
-		$color_index=0;
-		for($i = 0;  $i  <  count($surveys);  $i++)  {
+		for($i = 0;  $i < count($surveys); $i++) {
 			if ($surveys[$i]->isError()) {
 				echo $surveys[$i]->getErrorMessage();
 				continue;
@@ -417,10 +433,8 @@ class SurveyHTML extends FFError {
 				$ret.= '<td>['.util_make_link('/survey/admin/survey.php?group_id='.$group_id.'&survey_id='. $surveys[$i]->getID(),_('Edit')).'] ';
 
 				/* We don't support delete yet. Need to delete all results as well */
-				/*
-				$ret.= '['.util_make_link ('/survey/admin/survey.php?delete=Y&group_id='.$group_id.'&survey_id='. $surveys[$i]->getID(),_('Delete')).']';
-                                */
-                                $ret.='</td>';
+				/* $ret.= '['.util_make_link ('/survey/admin/survey.php?delete=Y&group_id='.$group_id.'&survey_id='. $surveys[$i]->getID(),_('Delete')).']'; */
+				$ret.='</td>';
 			}
 			if ($show_result) {
 				/* Edit/Delete Link */
@@ -428,7 +442,7 @@ class SurveyHTML extends FFError {
 			}
 			if ($show_result_graph) {
 				/* Edit/Delete Link */
-				$ret.= '<td>['.util_make_link('/survey/admin/show_results.php?graph=yes&group_id='.$group_id.'&survey_id='.  $surveys[$i]->getID(),_('Result with Graph')).']</td>';
+				$ret.= '<td>['.util_make_link('/survey/admin/show_results.php?graph=yes&group_id='.$group_id.'&survey_id='. $surveys[$i]->getID(),_('Result with Graph')).']</td>';
 			}
 			if ($show_result_comment) {
 				/* Edit/Delete Link */
@@ -449,8 +463,9 @@ class SurveyHTML extends FFError {
 	}
 
 	/**
-	 * Show survey form - Show all forums of Survey
+	 * showSurveyForm - Show all forums of Survey
 	 *
+	 * @param	$s
 	 * @return	string
 	 */
 	function showSurveyForm(&$s) {
@@ -477,7 +492,7 @@ class SurveyHTML extends FFError {
 		/* Keep question numbers */
 		$index = 1;
 		$last_question_type = "";
-		for($i = 0; $i < count($questions); $i++)  {
+		for($i = 0; $i < count($questions); $i++) {
 			if ($questions[$i]->isError()) {
 				echo $questions[$i]->getErrorMessage();
 				continue;
@@ -519,8 +534,7 @@ class SurveyHTML extends FFError {
 				$ret.= $question_title.'<br />';
 				$ret.='<textarea name="_'.$question_id.'" rows="5" cols="60"></textarea>';
 				break;
-			case 3:	/* This is a Yes/No question.
-                           Show the Yes/No only if this is the first in a series */
+			case 3:	/* This is a Yes/No question. Show the Yes/No only if this is the first in a series */
 				if ($question_type != $last_question_type) {
 					$ret.= '<strong>Yes / No</strong><br />';
 				}
@@ -554,12 +568,12 @@ class SurveyHTML extends FFError {
 	}
 
 	/**
-	 * Show survey Result
+	 * showResult() - Show survey Result
 	 *
 	 * @param	object	$sr a Survey Response Factory
-	 * @param	int	$show_comment
+	 * @param	int		$show_comment
 	 * @param	string	$q_num
-	 * @param	int	$show_graph
+	 * @param	int		$show_graph
 	 * @return	string
 	 */
 	function showResult(&$sr, $show_comment=0, $q_num="", $show_graph=0) {
@@ -593,7 +607,7 @@ class SurveyHTML extends FFError {
 			  Show the 1-5 markers only if this is the first in a series */
 			$arr_name=array('No Answer', 'Low 1', '2', '3', '4', 'High 5', 'No Answer');
 			$arr_color=array('black', 'red', 'blue', 'yellow', 'green', 'brown', 'black');
-			$results[0] =  $votes - $results[1] - $results[2] - $results[3] - $results[4] - $results[5];
+			$results[0] = $votes - $results[1] - $results[2] - $results[3] - $results[4] - $results[5];
 
 			if ($show_graph) {
 				for ($j=5; $j>=0; $j--) {
@@ -620,8 +634,8 @@ class SurveyHTML extends FFError {
 			$arr_color=array('', 'red', 'blue', 'black');
 
 			$res[1] = $results[1]; /* Yes */
-			$res[2] =  $results[5]; /* No */
-			$res[3] =  $votes - $res[1] -$res[2];
+			$res[2] = $results[5]; /* No */
+			$res[3] = $votes - $res[1] -$res[2];
 
 			if ($show_graph) {
 				for ($j=1; $j<=3; $j++) {
@@ -691,10 +705,10 @@ class SurveyHTML extends FFError {
 	}
 
 	/**
-	 * split_str - works as str_split of PHP5 -  Converts a string to an array.
+	 * split_str - works as str_split of PHP5 - Converts a string to an array.
 	 *
 	 * @param	string	$str
-	 * @param	int	$split_lengt	length of chunk
+	 * @param	int		$split_lengt	length of chunk
 	 * @return	array	array of chunks of the string
 	 */
 	function split_str($str, $split_lengt=1) {
@@ -709,15 +723,15 @@ class SurveyHTML extends FFError {
 	 * _makeBar - make Precentage bar as a cell in a table. Starts with <tr> and ends with </tr>
 	 *
 	 * @param	string	$name		Name
-	 * @param	int	$percent	Percentage of the name
+	 * @param	int		$percent	Percentage of the name
 	 * @param	string	$color		Color
 	 * @return	string
 	 */
 	function _makeBar($name, $percent, $color) {
-		$ret = '<tr><td style=width: 30%">'.$name.'</td><td>';
-		$ret.= '<table style=width: '.$percent.'%"><tr>';
+		$ret = '<tr><td style="width: 30%">'.$name.'</td><td>';
+		$ret.= '<table style="width: '.$percent.'%"><tr>';
 		if ($percent) {
-			$ret.='<td style=width: 90%" bgcolor="'.$color.'">&nbsp;</td>';
+			$ret.='<td style="width: 90%" bgcolor="'.$color.'">&nbsp;</td>';
 		}
 
 		$ret.= '<td>'.sprintf("%.2f", $percent).'%</td></tr></table></td></tr>'."\n";
