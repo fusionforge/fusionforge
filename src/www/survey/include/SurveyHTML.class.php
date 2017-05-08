@@ -621,7 +621,7 @@ class SurveyHTML extends FFError {
 
 				for ($j=5; $j>=0; $j--) {
 					$percent = (float)$results[$j]*100/$votes;
-					$ret.= $this->_makeBar($arr_name[$j].' ('.$results[$j].')', $percent, $arr_color[$j]);
+					$ret.= $this->makeBar($arr_name[$j].' ('.$results[$j].')', $percent, $arr_color[$j]);
 				}
 				$ret.= '</table>';
 			}
@@ -647,7 +647,7 @@ class SurveyHTML extends FFError {
 				$ret.= '<table style="padding-left: 3em; width: 100%">';
 				for ($j=1; $j<=3; $j++) {
 					$result_per[$j] = (float)$res[$j]*100/$votes;
-					$ret.= $this->_makeBar($arr_name[$j].' ('.$res[$j].')', $result_per[$j], $arr_color[$j]);
+					$ret.= $this->makeBar($arr_name[$j].' ('.$res[$j].')', $result_per[$j], $arr_color[$j]);
 				}
 				$ret.= '</table>';
 			}
@@ -661,8 +661,8 @@ class SurveyHTML extends FFError {
 		case 5:	/* This is a text-field question. */
 			if ($show_comment) {
 				for($j=0; $j<$totalCount; $j++) {
-					$ret.='<hr /><strong>'._('Comments').
-						' # '.($j+1).'/'.$totalCount. '</strong><p/>';
+					$ret.='<hr /><p><strong>'._('Comments').
+						' # '.($j+1).'/'.$totalCount. '</strong></p>';
 					$ret.='<pre>';
 					$words = explode(" ",$results[$j]);
 					$linelength = 0;
@@ -705,14 +705,14 @@ class SurveyHTML extends FFError {
 	}
 
 	/**
-	 * _makeBar - make Precentage bar as a cell in a table. Starts with <tr> and ends with </tr>
+	 * makeBar - make Percentage bar as a cell in a table. Starts with <tr> and ends with </tr>
 	 *
 	 * @param	string	$name		Name
 	 * @param	int		$percent	Percentage of the name
 	 * @param	string	$color		Color
 	 * @return	string
 	 */
-	function _makeBar($name, $percent, $color) {
+	private function makeBar($name, $percent, $color) {
 		$ret = '<tr><td style="width: 30%">'.$name.'</td><td>';
 		$ret.= '<table style="width: '.$percent.'%"><tr>';
 		if ($percent) {
@@ -724,7 +724,7 @@ class SurveyHTML extends FFError {
 		return $ret;
 	}
 
-	function drawGraph($id, $graphType, $legend, $values) {
+	private function drawGraph($id, $graphType, $legend, $values) {
 		switch($graphType) {
 			case 'pie': {
 				$ret = '<script type="text/javascript">//<![CDATA['."\n";
