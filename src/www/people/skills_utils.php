@@ -22,6 +22,13 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+/**
+ * displayUserSkills()
+ *
+ * @param	int		$user_id
+ * @param	bool	$allowEdit
+ */
+
 function displayUserSkills($user_id, $allowEdit) {
 	global $HTML, $feedback;
 	$result=db_query_params("SELECT * FROM skills_data_types ORDER BY type_id ASC", array());
@@ -120,7 +127,7 @@ function handle_multi_edit($skill_ids = array()) {
 		$skills=db_query_params("SELECT * FROM skills_data_types WHERE type_id > 0", array());
 		if (!$skills || db_numrows($skills) < 1) {
 			$feedback .= _('No Such User')._(': ').db_error();
-			echo '<h2>'._('No Such User').'<h2>';
+			echo '<h2>'._('No Such User').'</h2>';
 		}
 
 		$yearArray = array();
