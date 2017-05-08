@@ -21,10 +21,16 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+/**
+ * getLanguageSelectionPopup()
+ *
+ * @param	array	$alreadyDefined
+ * @return	string
+ */
 function getLanguageSelectionPopup($alreadyDefined = array()) {
-	$res = db_query_params ('SELECT * FROM supported_languages WHERE language_id <> ALL ($1) ORDER BY name ASC',
-				array (db_int_array_to_any_clause ($alreadyDefined)));
-	return html_build_select_box ($res, 'language_id', 'xzxz', false);
+	$res = db_query_params('SELECT * FROM supported_languages WHERE language_id <> ALL ($1) ORDER BY name ASC',
+				array(db_int_array_to_any_clause ($alreadyDefined)));
+	return html_build_select_box($res, 'language_id', 'xzxz', false);
 }
 
 function getFilterUrl($filterArray, $currentId = 0) {
