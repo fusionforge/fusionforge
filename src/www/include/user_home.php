@@ -61,7 +61,7 @@ if (forge_get_config('use_diary')) {
 
 	$res = db_query_params('SELECT count(*) from user_diary WHERE user_id=$1 AND is_public=1',
 				array($user_id));
-	echo _('Diary/Note entries:').' '.db_result($res, 0, 0).'
+	echo _('Diary/Note entries')._(': ').db_result($res, 0, 0).'
 		<p>';
 		//.'<span rel="foaf:weblog">'
 		echo util_make_link('/developer/diary.php?diary_user='.$user_id,htmlentities(_('View Diary and Notes')));
@@ -93,7 +93,7 @@ if (count ($projects) < 1) {
 	<p><?php echo _('This user is not a member of any project.') ?></p>
 	<?php
 } else { // endif no groups
-	print "<p>"._('This user is a member of the following projects:')."</p>\n";
+	echo html_e('p', array(), _('This user is a member of the following projects')._(':'));
 
 	foreach ($projects as $p) {
 		if (!forge_check_perm('project_read', $p->getID())) {
