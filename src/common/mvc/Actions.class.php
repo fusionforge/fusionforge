@@ -32,22 +32,23 @@
  */
 class Actions {
 
-    var $_controler;
-    function Actions(&$controler) {
-        $this->_controler =& $controler;
+	var $_controler;
+
+	function __construct(&$controler) {
+		$this->_controler =& $controler;
     }
 
-    function getControler() {
-        return $this->_controler;
-    }
+	function getControler() {
+		return $this->_controler;
+	}
 
-  function check() {
-    return true;
-  }
+	function check() {
+		return true;
+	}
 
-  function process($action, $params = array()) {
-    if($this->check()) {
-      $this->$action($params);
-    }
-  }
+	function process($action, $params = array()) {
+		if($this->check()) {
+			$this->$action($params);
+		}
+	}
 }
