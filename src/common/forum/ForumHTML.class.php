@@ -373,7 +373,7 @@ class ForumHTML extends FFError {
 				$total_rows++;
 
 				//	  show the actual nested message
-				$ret_val .= $this->showNestedMessage ($msg_arr["$msg_id"][$i]).'<p />';
+				$ret_val .= $this->showNestedMessage ($msg_arr["$msg_id"][$i]).'<br />';
 
 				if ($msg_arr["$msg_id"][$i]->hasFollowups()) {
 					//	  Call yourself if there are followups
@@ -568,8 +568,8 @@ class ForumHTML extends FFError {
 			<td class="top">
 			</td>
 			<td class="top">
-			<strong><?php echo _('Subject').utils_requiredField()._(': '); ?></strong><br />
-				<input type="text" autofocus="autofocus" required="required" name="subject" value="<?php echo $subject; ?>" size="80" maxlength="80" />
+			<label for="subject"><strong><?php echo _('Subject').utils_requiredField()._(': '); ?></strong></label><br />
+				<input id="subject" type="text" autofocus="autofocus" required="required" name="subject" value="<?php echo $subject; ?>" size="80" maxlength="80" />
 			<br />
 		<strong><?php echo _('Message').utils_requiredField()._(': '); ?></strong>
 		<?php echo notepad_button('document.forms.ForumPostForm.body') ?><br />
