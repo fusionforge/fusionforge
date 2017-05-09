@@ -63,6 +63,9 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 	/**
 	 * HEAD - unused
 	 * @todo Do a correct implementation
+	 *
+	 * @param	array	$options
+	 * @return	bool
 	 */
 	function HEAD(&$options) {
 		return true;
@@ -212,6 +215,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 	 * called by HTTP_WebDAV_Server
 	 *
 	 * @param	array	$options	options passed by previous functions in HTTP_WebDAV_Server
+	 * @return	bool
 	 */
 	function GET(&$options) {
 		$arr_path = explode('/', rtrim($options['path'], '/'));
@@ -303,6 +307,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 	 * called by HTTP_WebDAV_Server
 	 *
 	 * @param	array	$options	options passed by previous functions in HTTP_WebDAV_Server
+	 * @return	string
 	 */
 	function PUT(&$options) {
 		$arr_path = explode('/', rtrim($options['path'], '/'));
@@ -417,6 +422,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 	 * called by HTTP_WebDAV_Server
 	 *
 	 * @param	array	$options	options passed by previous functions in HTTP_WebDAV_Server
+	 * @return	string
 	 */
 	function MKCOL(&$options) {
 		$arr_path = explode('/', rtrim($options['path'], '/'));
@@ -446,6 +452,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 	 * called by HTTP_WebDAV_Server
 	 *
 	 * @param	array	$options	options passed by previous functions in HTTP_WebDAV_Server
+	 * @return	string
 	 */
 	function MOVE(&$options) {
 		$arr_path = explode('/', rtrim($options['path'], '/'));
