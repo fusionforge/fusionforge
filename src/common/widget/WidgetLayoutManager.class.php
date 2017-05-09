@@ -53,10 +53,10 @@ class WidgetLayoutManager {
 		if($res && db_numrows($res)<1) {
 			if($owner_type == self::OWNER_TYPE_USER) {
 				$this->createDefaultLayoutForUser($owner_id);
-				$this->displayLayout($owner_id,$owner_type);
+				$this->displayLayout($owner_id, $owner_type);
 			} elseif ($owner_type == self::OWNER_TYPE_GROUP) {
 				$this->createDefaultLayoutForProject($owner_id, 1);
-				$this->displayLayout($owner_id,$owner_type);
+				$this->displayLayout($owner_id, $owner_type);
 			} elseif ($owner_type == self::OWNER_TYPE_HOME) {
 				$this->createDefaultLayoutForForge($owner_id);
 				$this->displayLayout($owner_id, $owner_type);
@@ -71,7 +71,7 @@ class WidgetLayoutManager {
 				AND o.owner_id = $2
 				AND o.is_default = 1
 				";
-			$req = db_query_params($sql, array($owner_type ,$owner_id));
+			$req = db_query_params($sql, array($owner_type, $owner_id));
 			if ($data = db_fetch_array($req)) {
 				$readonly = !$this->_currentUserCanUpdateLayout($owner_id, $owner_type);
 				$layout = new WidgetLayout($data['id'], $data['name'], $data['description'], $data['scope']);
@@ -291,7 +291,7 @@ class WidgetLayoutManager {
 					WHERE owner_type = $1
 					AND owner_id = $2
 					";
-				if ($req = db_query_params($sql,array( self::OWNER_TYPE_TRACKER,$template_id))) {
+				if ($req = db_query_params($sql,array(self::OWNER_TYPE_TRACKER, $template_id))) {
 					while ($data = db_fetch_array($req)) {
 						$content_id = 0;
 						if ($data['name'] == 'trackercontent') {
@@ -373,7 +373,7 @@ class WidgetLayoutManager {
 						if ($w->canBeUsedByProject($project)) {
 							$content_id = $w->cloneContent($w->content_id, $group_id, self::OWNER_TYPE_GROUP);
 							$sql = "INSERT INTO layouts_contents(owner_id, owner_type, content_id, layout_id, column_id, name, rank, is_minimized, is_removed, display_preferences)
-								VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10);
+								VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);
 							";
 							db_query_params($sql, array($group_id, self::OWNER_TYPE_GROUP, $content_id, $data['layout_id'], $data['column_id'], $data['name'], $data['rank'], $data['is_minimized'], $data['is_removed'], $data['display_preferences']));
 							echo db_error();
@@ -453,7 +453,7 @@ class WidgetLayoutManager {
 			AND owner_id = $2
 			AND layout_id = $3
 			AND content_id = 0 AND column_id <> 0";
-		$res = db_query_params($sql,array($owner_type,$owner_id,$layout_id));
+		$res = db_query_params($sql,array($owner_type, $owner_id, $layout_id));
 		while($data = db_fetch_array($res)) {
 			$used_widgets[] = $data['name'];
 		}
@@ -653,7 +653,7 @@ class WidgetLayoutManager {
 							AND owner_id   =$4
 							AND layout_id  =$5
 							AND column_id  =$6;";
-						db_query_params($sql,array($new_layout_id,$last_new_col_id,$owner_type,$owner_id,$old_layout_id,$old_col['id']));
+						db_query_params($sql,array($new_layout_id, $last_new_col_id, $owner_type, $owner_id, $old_layout_id, $old_col['id']));
 					}
 					$sql = "UPDATE owner_layouts
 						SET layout_id  = $1
@@ -739,7 +739,7 @@ class WidgetLayoutManager {
 						$widget_rows[$widget->getTitle()] = $row;
 					}
 					uksort($widget_rows, 'strnatcasecmp');
-					$additionnal_html .= '<div id="widget-categ-'. $c .'" class="widget-categ-class-void hide" ><h2 class="boxtitle">'. str_replace('_',' ',$hp->purify($c, CODENDI_PURIFIER_CONVERT_HTML)) .'</h2>';
+					$additionnal_html .= '<div id="widget-categ-'. $c .'" class="widget-categ-class-void hide" ><h2 class="boxtitle">'. str_replace('_',' ', $hp->purify($c, CODENDI_PURIFIER_CONVERT_HTML)) .'</h2>';
 					foreach($widget_rows as $row) {
 						$additionnal_html .= $row;
 					}
@@ -801,7 +801,7 @@ class WidgetLayoutManager {
 			AND u.layout_id = $4
 			AND u.column_id <> 0
 			ORDER BY col.rank, col.id";
-		$res = db_query_params($sql,array($layout_id,$owner_type,$owner_id,$layout_id));
+		$res = db_query_params($sql,array($layout_id, $owner_type, $owner_id, $layout_id));
 		echo db_error();
 		$column_id = db_result($res, 0, 'id');
 		if (!$column_id) {
@@ -829,7 +829,7 @@ class WidgetLayoutManager {
 			AND owner_id = $2
 			AND layout_id = $3
 			AND name = $4";
-		$res = db_query_params($sql,array($owner_type,$owner_id,$layout_id, $name));
+		$res = db_query_params($sql,array($owner_type, $owner_id, $layout_id, $name));
 		echo db_error();
 		if (db_numrows($res) && !$widget->isUnique() && db_result($res, 0, 'column_id') == 0) {
 			//search for rank
@@ -845,7 +845,7 @@ class WidgetLayoutManager {
 				AND owner_id = $4
 				AND name = $5
 				AND layout_id = $6";
-			db_query_params($sql, array($column_id, $rank,$owner_type, $owner_id,$name, $layout_id));
+			db_query_params($sql, array($column_id, $rank, $owner_type, $owner_id, $name, $layout_id));
 			echo db_error();
 		} else {
 			//Insert
@@ -1040,7 +1040,7 @@ class WidgetLayoutManager {
 			AND o.owner_id = $2
 			AND o.is_default = 1
 			";
-		$req = db_query_params($sql, array($owner_type ,$owner_id));
+		$req = db_query_params($sql, array($owner_type, $owner_id));
 		if ($data = db_fetch_array($req)) {
 			$layout = new WidgetLayout($data['id'], $data['name'], $data['description'], $data['scope']);
 			$sql = 'SELECT * FROM layouts_rows WHERE layout_id = $1 ORDER BY rank';
