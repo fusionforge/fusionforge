@@ -135,7 +135,7 @@ class SurveyHTML extends FFError {
 		$ret.='<input id="question" required="required" type="text" name="question" value="'.$question.'" size="60" maxlength="150" /></p>';
 		$ret.='<p><label for="question_type">'. _('Question Type')._(':').'</label><br />';
 
-		$result = db_query_params ('SELECT * FROM survey_question_types', array());
+		$result = db_query_params('SELECT * FROM survey_question_types', array());
 		$ret.= html_build_select_box($result,'question_type',$question_type,false);
 
 		$ret.='</p><p><input type="submit" name="submit" value="'.$question_button.'" /></p>' . "\n";
@@ -156,7 +156,7 @@ class SurveyHTML extends FFError {
 		global $HTML;
 
 		/* If no question is available */
-		if (! $survey_id && ! count($s->getAddableQuestionInstances())) {
+		if (!$survey_id && !count($s->getAddableQuestionInstances())) {
 			$ret = '<p>' . sprintf(_('Please %1$s create a question %2$s before creating a survey'),
 								  '<a href="'.util_make_url('/survey/admin/question.php?group_id='.$group_id).'">',
 								  '</a>') .
@@ -250,7 +250,7 @@ class SurveyHTML extends FFError {
 		if (count($arr_to_del) > 0) {
 			$ret.='<h2>'. _('Questions in this Survey').'</h2>';
 			$title_arr = array('', _('Question'), _('Type'), _('Order'), _('Delete from this Survey'));
-			$ret.= $HTML->listTableTop ($title_arr);
+			$ret.= $HTML->listTableTop($title_arr);
 		}
 
 		for($i = 0; $i < count($arr_to_del); $i++) {
@@ -264,8 +264,8 @@ class SurveyHTML extends FFError {
 			$ret.= '<td>'.$arr_to_del[$i]->getID().'</td>';
 			$ret.= '<td>'.$arr_to_del[$i]->getQuestion().'</td>';
 			$ret.= '<td>'.$arr_to_del[$i]->getQuestionStringType().'</td>';
-			$ret.= '<td><center>['.util_make_link ('/survey/admin/survey.php?group_id='.$group_id.'&survey_id='. $survey_id.'&is_up=1&updown=Y&question_id='.$arr_to_del[$i]->getID(),_('Up')).'] ';
-			$ret.= '['.util_make_link ('/survey/admin/survey.php?group_id='.$group_id.'&survey_id='. $survey_id.'&is_up=0&updown=Y&question_id='.$arr_to_del[$i]->getID(),_('Down')).']</center></td>';
+			$ret.= '<td><center>['.util_make_link('/survey/admin/survey.php?group_id='.$group_id.'&survey_id='. $survey_id.'&is_up=1&updown=Y&question_id='.$arr_to_del[$i]->getID(),_('Up')).'] ';
+			$ret.= '['.util_make_link('/survey/admin/survey.php?group_id='.$group_id.'&survey_id='. $survey_id.'&is_up=0&updown=Y&question_id='.$arr_to_del[$i]->getID(),_('Down')).']</center></td>';
 
 			$ret.= '<td><center><input type="checkbox" name="to_del[]" value="'.$arr_to_del[$i]->getID().'" /></center></td>';
 			$ret.= '</tr>';
@@ -433,7 +433,7 @@ class SurveyHTML extends FFError {
 				$ret.= '<td>['.util_make_link('/survey/admin/survey.php?group_id='.$group_id.'&survey_id='. $surveys[$i]->getID(),_('Edit')).'] ';
 
 				/* We don't support delete yet. Need to delete all results as well */
-				/* $ret.= '['.util_make_link ('/survey/admin/survey.php?delete=Y&group_id='.$group_id.'&survey_id='. $surveys[$i]->getID(),_('Delete')).']'; */
+				/* $ret.= '['.util_make_link('/survey/admin/survey.php?delete=Y&group_id='.$group_id.'&survey_id='. $surveys[$i]->getID(),_('Delete')).']'; */
 				$ret.='</td>';
 			}
 			if ($show_result) {
