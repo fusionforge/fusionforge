@@ -23,12 +23,6 @@ require_once 'DataAccessException.class.php';
 
 class DataAccess {
 
-    /**
-    * Constructs a new DataAccess object
-    */
-    function DataAccess() {
-
-    }
    function quoteSmart($value, $params = array()) {
 
         return $value;

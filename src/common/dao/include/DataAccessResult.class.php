@@ -18,13 +18,11 @@ class DataAccessResult  implements Iterator {
     var $_row;
     var $nb_rows;
 
-    function DataAccessResult($result) {
-        $this->result       = $result;
-
-            $this->_current = -1;
-            $this->_row     = false;
-            $this->rewind();
-
+    function __construct($result) {
+		$this->result = $result;
+		$this->_current = -1;
+		$this->_row = false;
+		$this->rewind();
     }
 
     /**

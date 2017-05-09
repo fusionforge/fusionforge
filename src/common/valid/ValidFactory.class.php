@@ -54,8 +54,8 @@ class Valid_GroupId extends Valid {
  * Check that 'pv' parameter is set to an acceptable value.
  */
 class Valid_Pv extends Valid {
-	function Valid_Pv() {
-		parent::Valid('pv');
+	function __construct() {
+		parent::__construct('pv');
 	}
 
 	function validate($value) {
@@ -88,7 +88,7 @@ class Valid_String extends Valid_Text {
  * Wrapper for 'WhiteList' rule
  */
 class Valid_WhiteList extends Valid {
-	function Valid_WhiteList($key, $whitelist) {
+	function __construct($key, $whitelist) {
 		parent::__construct($key);
 		$this->addRule(new Rule_WhiteList($whitelist));
 	}
@@ -113,13 +113,13 @@ class Valid_UserNameFormat extends Valid_String {
 class Valid_Email extends Valid_String {
 	var $separator;
 
-	function Valid_Email($key=null, $separator=null) {
+	function __construct($key=null, $separator=null) {
 		if(is_string($separator)) {
 			$this->separator = $separator;
 		} else {
 			$this->separator = null;
 		}
-		parent::Valid($key);
+		parent::__construct($key);
 	}
 
 	function validate($value) {

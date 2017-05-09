@@ -353,7 +353,7 @@ class PluginSpecificRoleSetting {
 	var $default_values = array();
 	var $global = false;
 
-	function PluginSpecificRoleSetting(&$role, $name, $global = false) {
+	function __construct(&$role, $name, $global = false) {
 		$this->global = $global;
 		$this->role =& $role;
 		$this->name = $name;

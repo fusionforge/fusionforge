@@ -25,8 +25,8 @@ require_once 'GlobalactivityPluginDescriptor.class.php';
 
 class GlobalactivityPluginInfo extends PluginInfo {
 
-    function GlobalactivityPluginInfo(&$plugin) {
-        $this->PluginInfo($plugin);
+    function __construct(&$plugin) {
+        parent::__construct($plugin);
         $this->setPluginDescriptor(new GlobalactivityPluginDescriptor());
     }
 
