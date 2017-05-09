@@ -21,6 +21,12 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+/**
+ * get_next_line()
+ *
+ * @param	$f
+ * @return	bool|string
+ */
 function get_next_line($f) {
 	$l = fgets($f);
 	if ($l === false) {
@@ -34,6 +40,12 @@ define ('GREEN', "\033[01;32m" );
 define ('NORMAL', "\033[00m" );
 define ('RED', "\033[01;31m" );
 
+/**
+ * parse_sql_file()
+ *
+ * @param	string	$filename
+ * @return	bool|array
+ */
 function parse_sql_file($filename) {
 	$f = fopen($filename, 'r');
 	if (!$f) {

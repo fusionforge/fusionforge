@@ -1361,6 +1361,10 @@ function util_get_compressed_file_extension() {
  *
  * Do not use this function if $val is “magic”,
  * for example, an overloaded \ArrayAccess.
+ *
+ * @param	$val
+ * @param	bool	$default
+ * @return	bool
  */
 function util_ifsetor(&$val, $default = false) {
 	return (isset($val) ? $val : $default);
@@ -1728,7 +1732,11 @@ function getThemeIdFromName($dirname) {
 }
 
 /**
- * Generate attachment download headers, with security checks around the MIME type
+ * utils_headers_download() - Generate attachment download headers, with security checks around the MIME type
+ *
+ * @param	string	$filename
+ * @param	string	$mimetype
+ * @param	int		$size
  */
 function utils_headers_download($filename, $mimetype, $size) {
 	/* SECURITY: do not serve content with JavaScript execution (and e.g. cookie theft) */

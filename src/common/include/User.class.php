@@ -53,7 +53,7 @@ function &user_get_object_by_name($user_name, $res = false) {
  *
  * @param string    $email The unix username - required
  * @param bool|int  $res   The result set handle ("SELECT * FROM USERS WHERE user_id=xx")
- * @return FFUser User object or false on failure
+ * @return FFUser|bool User object or false on failure
  */
 function user_get_object_by_email($email, $res = false) {
 	if (!validate_email($email)

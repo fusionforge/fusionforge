@@ -26,6 +26,13 @@ require_once $gfcommon.'docman/Document.class.php';
 require_once $gfcommon.'tracker/Artifact.class.php';
 require_once $gfcommon.'frs/FRSRelease.class.php';
 
+/**
+ * util_gen_cross_ref()
+ *
+ * @param	string	$text
+ * @param	int		$group_id
+ * @return	mixed|string
+ */
 function util_gen_cross_ref($text, $group_id) {
 
 	// Handle URL in links, replace them with hyperlinks.
