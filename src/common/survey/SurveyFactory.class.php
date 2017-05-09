@@ -45,6 +45,7 @@ class SurveyFactory extends FFError {
 
 	/**
 	 * @param	object	$Group	The Group object to which this survey is associated.
+	 * @param	bool	$skip_check
 	 */
 	function __construct(&$Group, $skip_check=false) {
 		parent::__construct();
