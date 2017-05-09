@@ -5,12 +5,10 @@
 class DataAccessObject {
 	 var $da;
 
-    //! A constructor
     /**
-    * Constructs the Dao
-    * @param DataAccess $da Instance of the DataAccess class
-    */
-    function DataAccessObject( & $da ) {
+     * @param DataAccess $da Instance of the DataAccess class
+     */
+    function __construct(&$da) {
         $this->table_name = 'CLASSNAME_MUST_BE_DEFINE_FOR_EACH_CLASS';
 
         $this->da=$da;
