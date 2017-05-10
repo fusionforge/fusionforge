@@ -483,8 +483,6 @@ class FFUser extends FFError {
 
 	/**
 	 * sendRegistrationEmail() - Send email for registration verification
-	 *
-	 * @return bool    success or not
 	 */
 	function sendRegistrationEmail() {
 		$message = sprintf(_('Thank you for registering on the %s web site.'), forge_get_config('forge_name'));
