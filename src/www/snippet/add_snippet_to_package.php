@@ -138,8 +138,8 @@ if (session_loggedin()) {
 
 	<table>
 	<tr><td colspan="2" class="align-center">
-		<strong><?php echo _('Add This Snippet Version ID')._(':'); ?></strong><br />
-		<select name="snippet_version_id">
+	<label for="snippet_version_id"><strong><?php echo _('Add This Snippet Version ID')._(':'); ?></strong></label><br />
+	<select id="snippet_version_id" name="snippet_version_id">
 <?php
 
 $combolistresult = db_query_params ('SELECT myname,snippet_version.snippet_version_id
@@ -168,7 +168,6 @@ for ($i=0; $i<$combolistrows; $i++)
 	</td></tr>
 	</table>
 	<?php echo $HTML->closeForm(); ?>
-	</p>
 	<?php
 	/*
 		Show the snippets in this package

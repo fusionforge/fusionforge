@@ -162,8 +162,8 @@ while ($row_grp = db_fetch_array($res_grp)) {
 	<?php print get_canned_responses();
 	echo util_make_link('/admin/responses_admin.php', _('(manage responses)')); ?>
 	<br />
-	<?php echo _('Custom response title and text'); ?><br />
-	<input type="text" name="response_title" size="30" maxlength="25" /><br />
+	<label for="response_title"><?php echo _('Custom response title and text'); ?></label><br />
+	<input id="response_title" type="text" name="response_title" size="30" maxlength="25"/><br />
 	<textarea name="response_text" rows="10" cols="50"></textarea>
 	<input type="checkbox" name="add_to_can" value="<?php echo _('Yes'); ?>" /><?php echo _('Add this custom response to canned responses') ;?>
 	<br />

@@ -93,16 +93,16 @@ if (session_loggedin()) {
 		<input type="hidden" name="id" value="<?php echo $id; ?>" />
 
 		<table>
-		<tr><td colspan="2"><strong><?php echo _('Version')._(':'). utils_requiredField(); ?></strong><br />
-			<input type="text" name="version" size="10" maxlength="15" required="required" />
+		<tr><td colspan="2"><label for="version"><strong><?php echo _('Version')._(':'). utils_requiredField(); ?></strong></label><br />
+			<input id="version" type="text" name="version" size="10" maxlength="15" required="required" />
 		</td></tr>
 
-		<tr><td colspan="2"><strong><?php echo _('Changes')._(':'). utils_requiredField(); ?></strong><br />
-			<textarea name="changes" rows="5" cols="45" required="required"></textarea>
+		<tr><td colspan="2"><label for="changes"><strong><?php echo _('Changes')._(':'). utils_requiredField(); ?></strong></label><br />
+			<textarea id="changes" name="changes" rows="5" cols="45" required="required"></textarea>
 		</td></tr>
 
-		<tr><td colspan="2"><strong><?php echo _('Paste the Code Here')._(':'). utils_requiredField(); ?></strong><br />
-			<textarea name="code" rows="30" cols="85" required="required"></textarea>
+		<tr><td colspan="2"><label for="code"><strong><?php echo _('Paste the Code Here')._(':'). utils_requiredField(); ?></strong></label><br />
+			<textarea id="code" name="code" rows="30" cols="85" required="required"></textarea>
 		</td></tr>
 
 		<tr><td colspan="2" class="align-center">
@@ -216,12 +216,12 @@ function show_add_snippet_box() {
 		<input type="hidden" name="id" value="<?php echo $id; ?>" />
 
 		<table>
-		<tr><td colspan="2"><strong><?php echo _('Version')._(':'); ?></strong><br />
-			<input type="text" name="version" size="10" maxlength="15" />
+		<tr><td colspan="2"><label for="version"><strong><?php echo _('Version')._(':'); ?></strong></label><br />
+			<input id="version" type="text" name="version" size="10" maxlength="15" />
 		</td></tr>
 
-		<tr><td colspan="2"><strong><?php echo _('Changes')._(':'); ?></strong><br />
-			<textarea name="changes" rows="5" cols="45"></textarea>
+		<tr><td colspan="2"><label for="changes"><strong><?php echo _('Changes')._(':'); ?></strong></label><br />
+			<textarea id="changes" name="changes" rows="5" cols="45"></textarea>
 		</td></tr>
 
 		<tr><td colspan="2" class="align-center">
@@ -229,7 +229,7 @@ function show_add_snippet_box() {
 			<br />
 			<input type="submit" name="submit" value="<?php echo _('Submit'); ?>" />
 		</td></tr>
-		</table></p>
+		</table>
 		<?php
 		echo $HTML->closeForm();
 		snippet_footer();

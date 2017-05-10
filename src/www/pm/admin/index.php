@@ -275,15 +275,12 @@ if ($add_cat && $group_project_id) {
 	<p>
 	<input type="hidden" name="addproject" value="y" />
 	<input type="hidden" name="post_changes" value="y" />
-	<strong><?php echo _('New Subproject Name').utils_requiredField()?></strong>
-	<br />
-	<input type="text" name="project_name" value="" size="15" maxlength="30" required="required" pattern=".{5,}" title="<?php echo _('At least 5 characters') ?>" />
-	<p />
+	<strong><?php echo _('New Subproject Name').utils_requiredField()?></strong><br />
+	<input type="text" name="project_name" value="" size="15" maxlength="30" required="required" pattern=".{5,}" title="<?php echo _('At least 5 characters') ?>" /><br />
 	<strong><?php echo _('Description').utils_requiredField() ?></strong><br />
-	<input type="text" name="description" value="" size="40" maxlength="80" required="required" pattern=".{10,}" title="<?php echo _('At least 10 characters') ?>" />
-	<p />
-	<strong><?php echo _('Send All Updates To')._(':'); ?></strong><br />
-	<input type="email" name="send_all_posts_to" value="" size="40" maxlength="80" /><p />
+	<input type="text" name="description" value="" size="40" maxlength="80" required="required" pattern=".{10,}" title="<?php echo _('At least 10 characters') ?>" /><br />
+	<label for="send_all_posts_to" ><strong><?php echo _('Send All Updates To')._(':'); ?></strong></label><br />
+	<input id="send_all_posts_to" type="email" name="send_all_posts_to" value="" size="40" maxlength="80" /><br />
 	<input type="submit" name="submit" value="<?php echo _('Submit') ?>" />
 	<?php
 	echo $HTML->closeForm();
