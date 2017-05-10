@@ -315,8 +315,8 @@ class Artifact extends FFObject {
 	/**
 	 * fetchData - re-fetch the data for this Artifact from the database.
 	 *
-	 * @param	int	$artifact_id	The artifact ID.
-	 * @return	boolean	success.
+	 * @param	int		$artifact_id	The artifact ID.
+	 * @return	bool	success.
 	 */
 	function fetchData($artifact_id) {
 		$this->votes = false;
@@ -689,7 +689,7 @@ class Artifact extends FFObject {
 	/**
 	 * getMessages - get the list of messages attached to this artifact.
 	 *
-	 * @param	string		$order
+	 * @param	string		$ascending
 	 * @return	resource	result set.
 	 */
 	function getMessages($ascending='up') {
@@ -719,7 +719,7 @@ class Artifact extends FFObject {
 	 *
 	 * @param	int		$msg_id id of the message.
 	 * @access	public
-	 * @return	resource	database result set.
+	 * @return	resource|bool	database result set.
 	 */
 	function getMessage($msg_id) {
 		if (!$msg_id) {
@@ -794,7 +794,7 @@ class Artifact extends FFObject {
 	 * @param	array	$importData	Array of data to change submitter and time of submit like:
 	 *						array('user' => 127, 'time' => 1234556789, 'nopermcheck' => true, 'nonotice' => true)
 	 *
-	 * @return	bool	success.
+	 * @return	bool|resource
 	 */
 	function addMessage($body,$by=false,$send_followup=false,$importData = array()) {
 		if (!$body) {
@@ -867,7 +867,7 @@ class Artifact extends FFObject {
 	 * @param	array	$importData	Array of data to change submitter and time of submit like:
 	 *						array('user' => 127, 'time' => 1234556789, 'nopermcheck' => true, 'nonotice' => true)
 	 * @access	private
-	 * @return	boolean	success.
+	 * @return	bool|resource
 	 */
 	function addHistory($field_name, $old_value, $importData = array()) {
 		if (array_key_exists('user', $importData)){
@@ -938,7 +938,7 @@ class Artifact extends FFObject {
 	 * @param	string  $description		The description.
 	 * @param	array	$importData	Array of data to change submitter and time of submit like:
 	 *						array('user' => 127, 'time' => 1234556789, 'nopermcheck' => true, 'nonotice' => true)
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function update($priority,$status_id,
 		$assigned_to,$summary,$canned_response,$details,$new_artifact_type_id,
@@ -1335,9 +1335,9 @@ class Artifact extends FFObject {
 	 * updateExtraFields - updates the extra data elements for this artifact
 	 * e.g. the extra fields created and defined by the admin.
 	 *
-	 * @param	array	Array of extra fields like: array(15=>'foobar',22=>'1');
-	 * @param	array	Array where changes to the extra fields should be logged
-	 * @param	array	Array of data to change submitter and time of submit like:
+	 * @param	array	$extra_fields   Array of extra fields like: array(15=>'foobar',22=>'1');
+	 * @param	array	$changes        Array where changes to the extra fields should be logged
+	 * @param	array	$importData     Array of data to change submitter and time of submit like:
 	 *						array('user' => 127, 'time' => 1234556789)
 	 *
 	 * @return	bool	true on success / false on failure
@@ -1705,9 +1705,12 @@ class Artifact extends FFObject {
 	/**
 	 * marker - adds the > symbol to fields that have been modified for the email message
 	 *
-	 *
+	 * @param	string	$prop_name
+	 * @param	array	$changes
+	 * @param	int		$extra_field_id
+	 * @return	string
 	 */
-	function marker($prop_name,$changes,$extra_field_id=0) {
+	function marker($prop_name, $changes, $extra_field_id=0) {
 		if ($prop_name == 'extra_fields' && isset($changes[$prop_name][$extra_field_id])) {
 			return '>';
 		} elseif ($prop_name != 'extra_fields' && isset($changes[$prop_name])) {
@@ -1725,11 +1728,9 @@ class Artifact extends FFObject {
 	 * @param	array	$more_addresses	Array of additional addresses to mail to
 	 * @param	array	$changes	Array of fields changed in this update
 	 * @access	private
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
-	function mailFollowupEx($tm, $type, $more_addresses = false, $changes='') {
-
-		$monitor_ids = array();
+	function mailFollowupEx($tm, $type, $more_addresses = array(), $changes = array()) {
 
 		if (!$changes) {
 			$changes = array();
@@ -1988,7 +1989,7 @@ class Artifact extends FFObject {
 	/**
 	 * hasVote - Check if a user has voted on this tracker item
 	 *
-	 * @param	int	$uid	user ID (default: current user)
+	 * @param	int|bool	$uid	user ID (default: current user)
 	 * @return	bool	true if a vote exists
 	 */
 	function hasVote($uid=false) {
@@ -2006,7 +2007,7 @@ class Artifact extends FFObject {
 	/**
 	 * getVotes - get number of valid cast and potential votes
 	 *
-	 * @return	array	(votes, voters, percent)
+	 * @return	array|bool	(votes, voters, percent)
 	 */
 	function getVotes() {
 		if ($this->votes !== false) {
