@@ -592,7 +592,6 @@ class ArtifactType extends FFError {
 			$feedback = _('Monitoring Stopped');
 			return true;
 		}
-		return false;
 	}
 
 	function isMonitoring() {

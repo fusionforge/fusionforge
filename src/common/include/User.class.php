@@ -1447,11 +1447,9 @@ class FFUser extends FFError {
 	 * setMD5Passwd - Changes user's MD5 password.
 	 *
 	 * @param	string	$md5	The MD5-hashed password.
-	 * @return	boolean	success.
 	 */
 	function setMD5Passwd($md5) {
 		exit(_('Error: Cannot Change User Password:').' '._('MD5 obsoleted'));
-		return false;
 	}
 
 	/**

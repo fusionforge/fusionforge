@@ -650,7 +650,6 @@ class Artifact extends FFObject {
 			$feedback = _('Monitoring Stopped');
 			return true;
 		}
-		return false;
 	}
 
 	function isMonitoring() {
