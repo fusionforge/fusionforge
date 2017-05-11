@@ -135,11 +135,11 @@ if (session_loggedin()) {
 	</tr>
 
 	<tr><td colspan="2">
-        <?php echo $HTML->html_input('version', '', _('Version').utils_requiredField()._(': '), 'text', '', array('size' => '10', 'maxlength' => '15')); ?>
+        <?php echo $HTML->html_input('version', '', _('Version').utils_requiredField()._(': '), 'text', '', array('size' => '10', 'maxlength' => '15', 'required' => 'required')); ?>
 	</td></tr>
 
 	<tr><td colspan="2">
-	    <?php echo $HTML->html_textarea('code', '', _('Paste the Code Here').utils_requiredField()._(': '), '', array('rows' => '30', 'cols' => '85')); ?>
+	    <?php echo $HTML->html_textarea('code', '', _('Paste the Code Here').utils_requiredField()._(': '), '', array('rows' => '30', 'cols' => '85', 'required' => 'required')); ?>
 	</td></tr>
 
 	<tr><td colspan="2" class="align-center">
