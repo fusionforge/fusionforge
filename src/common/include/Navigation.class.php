@@ -138,6 +138,7 @@ class Navigation extends FFError {
 			$exact = 1;
 		}
 
+		$res .= html_ao('div', array('role' => 'search'));
 		$res .= $HTML->openForm(array('id' => 'searchBox', 'action' => '/search/', 'method' => 'get'));
 		$res .= html_ao('div', array());
 		$parameters = array(
@@ -174,6 +175,7 @@ class Navigation extends FFError {
 		}
 		$res .= html_ac(html_ap() - 1);
 		$res .= $HTML->closeForm();
+		$res .= html_ac(html_ap() - 1);
 
 		return $res;
 	}
