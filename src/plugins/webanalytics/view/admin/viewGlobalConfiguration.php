@@ -62,7 +62,7 @@ $cells[][] = html_e('input', array('name' => 'name', 'type' => 'text', 'maxsize'
 echo $HTML->multiTableRow(array(), $cells);
 $cells = array();
 $cells[] = array(_('Standard JavaScript Tracking code').utils_requiredField()._(':'), 'style' => 'text-align:right');
-$cells[][] = html_e('textarea', array('name' => 'link', 'rows' => 15, 'cols' => 70, 'required' => 'required', 'placeholder' => _('Just paste your code here...')), '', false);
+$cells[][] = html_e('textarea', array('name' => 'link', 'rows' => 15, 'cols' => 70, 'style' => 'width: 100%; box-sizing: border-box;', 'required' => 'required', 'placeholder' => _('Just paste your code here...')), '', false);
 echo $HTML->multiTableRow(array(), $cells);
 $cells = array();
 $cells[] = array(html_e('input', array('type' => 'submit', 'value' => _('Add'))), 'colspan' => 2);
