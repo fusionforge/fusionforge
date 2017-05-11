@@ -43,8 +43,8 @@ if (sizeof($linksArray)) {
 			$cells[][] = html_image('docman/delete-directory.png', 22, 22, array('alt'=>_('link is off'), 'title'=>_('link is off')));
 			$nextcell = util_make_link('/plugins/'.$webanalytics->name.'/?type=globaladmin&action=updateLinkStatus&linkid='.$link['id_webanalytics'].'&linkstatus=1', html_image('docman/reserve-document.png', 22, 22, array('alt'=>_('Activate this link'))), array('title' => _('Activate this link')));
 		}
-		$nextcell .= util_make_link('/plugins/'.$webanalytics->name.'/?type=globaladmin&view=updateLinkValue&linkid='.$link['id_webanalytics'], html_image('docman/edit-file.png',22,22, array('alt'=>_('Edit this link'))), array('title' => _('Edit this link')));
-		$nextcell .= util_make_link('/plugins/'.$webanalytics->name.'/?type=globaladmin&action=deleteLink&linkid='.$link['id_webanalytics'], $HTML->getDeletePic('', '', array('alt' => _('Delete this link'), 'title' => _('Delete this link'))));
+		$nextcell .= util_make_link('/plugins/'.$webanalytics->name.'/?type=globaladmin&view=updateLinkValue&linkid='.$link['id_webanalytics'], $HTML->getEditFilePic(_('Edit this link'), _('Edit this link')));
+		$nextcell .= util_make_link('/plugins/'.$webanalytics->name.'/?type=globaladmin&action=deleteLink&linkid='.$link['id_webanalytics'], $HTML->getDeletePic(_('Delete this link'), _('Delete this link')));
 		$cells[][] = $nextcell;
 		echo $HTML->multiTableRow(array(), $cells);
 	}
