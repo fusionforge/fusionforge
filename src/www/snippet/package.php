@@ -129,7 +129,6 @@ function show_add_snippet_box() {
 	snippet_header(array('title'=>_('Submit A New Snippet Package')));
 
 	?>
-	</p>
 	<p>
 	<?php echo _('You can group together existing snippets into a package using this interface. Before creating your package, make sure all your snippets are in place and you have made a note of the snippet ID\'s.'); ?>
 	</p>
@@ -146,13 +145,21 @@ function show_add_snippet_box() {
 
 	<table>
 
-	<tr><td colspan="2"><strong><?php echo _('Title').utils_requiredField()._(':'); ?></strong><br />
-		<input type="text" required="required" name="name" size="45" maxlength="60" />
-	</td></tr>
+	<tr>
+	<td colspan="2">
+		<label for="name"><strong><?php echo _('Title').utils_requiredField()._(':'); ?></strong></label>
+		<br />
+		<input id="name" type="text" required="required" name="name" size="45" maxlength="60" />
+	</td>
+	</tr>
 
-	<tr><td colspan="2"><strong><?php echo _('Description').utils_requiredField()._(':'); ?></strong><br />
-		<textarea name="description" required="required" rows="5" cols="45"></textarea>
-	</td></tr>
+	<tr>
+	<td colspan="2">
+		<label for="description"><strong><?php echo _('Description').utils_requiredField()._(':'); ?></strong></label>
+		<br />
+		<textarea id="description" name="description" required="required" rows="5" cols="45"></textarea>
+	</td>
+	</tr>
 
 	<tr>
 	<td><strong><?php echo _('Language').utils_requiredField()._(':'); ?></strong><br />
@@ -168,9 +175,13 @@ function show_add_snippet_box() {
 	</td>
 	</tr>
 
-	<tr><td colspan="2"><strong><?php echo _('Version').utils_requiredField()._(':'); ?></strong><br />
-		<input type="text" required="required" name="version" size="10" maxlength="15" />
-	</td></tr>
+	<tr>
+	<td colspan="2">
+		<label for="version"><strong><?php echo _('Version').utils_requiredField()._(':'); ?></strong></label>
+		<br />
+		<input id="version" type="text" required="required" name="version" size="10" maxlength="15" />
+	</td>
+	</tr>
 
 	<tr><td colspan="2" class="align-center">
 		<strong><?php echo _('Make sure all info is complete and accurate'); ?></strong>
