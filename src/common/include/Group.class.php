@@ -83,7 +83,7 @@ function &group_get_object($group_id, $res = false) {
 			$GROUP_OBJ["_".$group_id."_"]=false;
 		} else {
 			/*
-				check group type and set up object
+				set up object
 			*/
 			$GROUP_OBJ["_".$group_id."_"] = new Group($group_id, $res);
 		}
