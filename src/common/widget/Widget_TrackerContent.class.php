@@ -27,6 +27,7 @@ require_once $gfwww.'include/jquery_plugins.php';
 
 class Widget_TrackerContent extends Widget {
 	var $trackercontent_title;
+	var $layoutExtraFieldIDs;
 
 	function __construct() {
 		$request =& HTTPRequest::instance();
@@ -58,7 +59,6 @@ class Widget_TrackerContent extends Widget {
 	function loadContent($id) {
 		$this->content_id = $id;
 		$this->fetchData($id);
-
 	}
 
 	function fetchData($id) {
@@ -67,6 +67,7 @@ class Widget_TrackerContent extends Widget {
 			$title = db_result($res, 0, 'title');
 		}
 		$this->trackercontent_title = $title;
+		$this->layoutExtraFieldIDs = $this->getLayoutExtraFieldIDs($id);
 	}
 
 	function create(&$request) {
@@ -110,9 +111,9 @@ class Widget_TrackerContent extends Widget {
 				'<tr>
 				<td>'
 				.html_e('div', array('class' => 'layout-manager-row-add'), '+');
-		$layoutExtraFieldIDs = $this->getLayoutExtraFieldIDs($this->content_id);
-		if (count($layoutExtraFieldIDs) > 0) {
-			foreach ($layoutExtraFieldIDs as $row_id => $column_id) {
+
+		if (count($this->layoutExtraFieldIDs) > 0) {
+			foreach ($this->layoutExtraFieldIDs as $row_id => $column_id) {
 				$cells = array();
 				$content .= '<table class="layout-manager-row" id="widget_layout_build">
 							<tr>
@@ -357,9 +358,8 @@ EOS;
 		global $extra_fields;
 
 		$return = '';
-		$layoutExtraFieldIDs = $this->getLayoutExtraFieldIDs($this->content_id);
 		$readonly = false;
-		if (count($layoutExtraFieldIDs) > 0) {
+		if (count($this->layoutExtraFieldIDs) > 0) {
 			$mandatoryDisplay = false;
 			$selected = array();
 			if (is_object($ah)) {
@@ -374,7 +374,7 @@ EOS;
 			if (!forge_check_perm('tracker', $atid, 'submit')) {
 				$readonly = true;
 			}
-			foreach ($layoutExtraFieldIDs as $row_id => $column_id) {
+			foreach ($this->layoutExtraFieldIDs as $row_id => $column_id) {
 				$return .= $HTML->listTableTop();
 				$cells = array();
 				foreach ($column_id as $extrafieldID) {

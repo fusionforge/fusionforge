@@ -338,7 +338,11 @@ class WidgetLayoutManager {
 	 * @param	array	$layoutDescArr  the descriptive array.
 	 */
 	function createLayoutForTrackerFromArray($owner_id, $layoutDescArr) {
-		return true;
+		if (isset($layoutDescArr['rows']) && is_array($layoutDescArr['rows'])) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**

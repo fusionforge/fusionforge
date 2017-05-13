@@ -736,14 +736,6 @@ class CliActions {
 				return false;
 			}
 			$importRefMapping['artifact_type'][$stream['setup']['group_artifact_id']] = $at->getID();
-			if (isset($stream['setup']['use_tracker_widget_display'])) {
-				$lm = new WidgetLayoutManager();
-				if (!$lm->createLayoutForTrackerFromArray($this->getMappingId($stream['setup']['group_artifact_id'], 'artifact_type'), $stream['setup']['use_tracker_widget_display'])) {
-					echo _('Unable to create tracker layout')."\n";
-					db_rollback();
-					return false;
-				}
-			}
 			if (isset($stream['setup']['extra_fields']) && is_array($stream['setup']['extra_fields'])) {
 				foreach ($stream['setup']['extra_fields'] as $extra_field) {
 					$ef = new ArtifactExtraField($at);
@@ -777,6 +769,14 @@ class CliActions {
 							$importRefMapping['extrafield_element'][$available_value['element_id']] = $efe->getID();
 						}
 					}
+				}
+			}
+			if (isset($stream['setup']['use_tracker_widget_display'])) {
+				$lm = new WidgetLayoutManager();
+				if (!$lm->createLayoutForTrackerFromArray($this->getMappingId($stream['setup']['group_artifact_id'], 'artifact_type'), $stream['setup']['use_tracker_widget_display'])) {
+					echo _('Unable to create tracker layout')."\n";
+					db_rollback();
+					return false;
 				}
 			}
 			if (isset($stream['data']) && is_array($stream['data'])) {
