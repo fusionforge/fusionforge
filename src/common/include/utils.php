@@ -1772,6 +1772,27 @@ function compareObjectName ($a, $b) {
 	return strcoll($a->getName(),$b->getName()) ;
 }
 
+/**
+ * compute the differences between two arrays //TODO: looks like array_udiff
+ * @param array $tab1
+ * @param array $tab2
+ * @return array
+ */
+function utils_array_diff_names($tab1, $tab2) {
+	$diff = array();
+	foreach($tab1 as $e1) {
+		$found = false;
+		reset($tab2);
+		while(!$found && list(,$e2) = each($tab2)) {
+			$found = !count(array_diff($e1, $e2));
+		}
+		if (!$found) {
+			$diff[] = $e1;
+		}
+	}
+	return $diff;
+}
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"

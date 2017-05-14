@@ -23,6 +23,7 @@
 require_once $gfcommon.'widget/WidgetLayout.class.php';
 require_once $gfcommon.'widget/Widget.class.php';
 require_once $gfcommon.'include/preplugins.php';
+require_once $gfcommon.'include/utils.php';
 
 /**
  * WidgetLayoutManager
@@ -312,7 +313,7 @@ class WidgetLayoutManager {
 						}
 						$sql = 'INSERT INTO layouts_contents (owner_id, owner_type, content_id, layout_id, column_id, name, rank, is_minimized, is_removed, display_preferences)
 							VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)';
-						db_query_params($sql, array($owner_id, self::OWNER_TYPE_TRACKER, $content_id,  $data['layout_id'],  $data['column_id'],  $data['name'],  $data['rank'],  $data['is_minimized'],  $data['is_removed'],  $data['display_preferences']));
+						db_query_params($sql, array($owner_id, self::OWNER_TYPE_TRACKER, $content_id, $data['layout_id'], $data['column_id'], $data['name'], $data['rank'], $data['is_minimized'], $data['is_removed'], $data['display_preferences']));
 						echo db_error();
 					}
 				}
@@ -339,10 +340,66 @@ class WidgetLayoutManager {
 	 */
 	function createLayoutForTrackerFromArray($owner_id, $layoutDescArr) {
 		if (isset($layoutDescArr['rows']) && is_array($layoutDescArr['rows'])) {
-			return true;
-		} else {
-			return false;
+			db_begin();
+			$res = db_query_params('SELECT content_id FROM layouts_contents WHERE content_id != $1 AND owner_type = $2 AND owner_id = $3', array(0, 't', $owner_id));
+			if ($res && db_numrows($res) > 0) {
+				$contentIdArr = util_result_column_to_array($res);
+				foreach ($contentIdArr as $contentId) {
+					db_query_params('DELETE FROM artifact_display_widget_field WHERE id = $1', array($contentId));
+					db_query_params('DELETE FROM artifact_display_widget WHERE id = $1 AND owner_id = $2', array($contentId, $owner_id));
+				}
+			}
+			db_query_params('DELETE FROM layouts_contents WHERE owner_id = $1 AND owner_type = $2', array($owner_id, 't'));
+			db_query_params('DELETE FROM owner_layouts WHERE owner_id = $1 AND owner_type = $2', array($owner_id, 't'));
+			$sql = "INSERT INTO layouts(name, description, scope) VALUES ('custom', '', 'P')";
+			if ($res = db_query_params($sql, array())) {
+				if ($new_layout_id = db_insertid($res, 'layouts', 'id')) {
+					$res = db_query_params('INSERT INTO owner_layouts (owner_id, owner_type, layout_id, is_default) values ($1, $2, $3, $4)', array($owner_id, self::OWNER_TYPE_TRACKER, $new_layout_id, 1));
+					if ($res) {
+						foreach ($layoutDescArr['rows'] as $row) {
+							$sql = "INSERT INTO layouts_rows(layout_id, rank) VALUES ($1, $2)";
+							if ($res = db_query_params($sql, array($new_layout_id, $row['rank']))) {
+								if ($row_id = db_insertid($res,'layouts_rows', 'id')) {
+									if (isset($row['columns']) && is_array($row['columns'])) {
+										foreach ($row['columns'] as $column) {
+											$sql = "INSERT INTO layouts_rows_columns(layout_row_id, width) VALUES ($1, $2)";
+											db_query_params($sql, array($row_id, $column['width']));
+											$column_id = db_insertid($res,'layouts_rows_columns', 'id');
+											if (isset($column['contents']) && is_array($column['contents'])) {
+												foreach ($column['contents'] as $nkey => $nwidget) {
+													$content_id = 0;
+													if ($nwidget['content']['id'] == 'trackercontent') {
+														$res = db_query_params('INSERT INTO artifact_display_widget (owner_id, title) VALUES ($1, $2)', array($owner_id, $nwidget['content']['trackercontent_title']));
+														$content_id = db_insertid($res, 'artifact_display_widget', 'id');
+														foreach ($nwidget['content']['layoutExtraFieldIDs'] as $efrkey => $efrow) {
+															foreach ($efrow as $efckey => $efcol) {
+																$key = key($efcol);
+																db_query_params('INSERT INTO artifact_display_widget_field (id, field_id, column_id, row_id, width, section) VALUES ($1, $2, $3, $4, $5, $6)', array($content_id, $key, $efckey, $efrkey, $efcol[$key][0], $efcol[$key][1]));
+															}
+														}
+													}
+													$sql = 'INSERT INTO layouts_contents (owner_id, owner_type, content_id, layout_id, column_id, name, rank, is_minimized, is_removed, display_preferences)
+															VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)';
+													db_query_params($sql, array($owner_id, self::OWNER_TYPE_TRACKER, $content_id, $new_layout_id, $column_id, $nwidget['content']['id'], $nkey, $nwidget['is_minimized'], 0, $nwidget['display_preferences']));
+													echo db_error();
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+						db_commit();
+						return true;
+					}
+				} else {
+					db_rollback();
+				}
+			} else {
+				db_rollback();
+			}
 		}
+		return false;
 	}
 
 	/**
@@ -410,11 +467,11 @@ class WidgetLayoutManager {
 					$sql = 'INSERT INTO owner_layouts(layout_id, is_default, owner_id, owner_type) VALUES ($1, $2, $3, $4)';
 					if (db_query_params($sql, array($new_layout_id, 1, $group_id, self::OWNER_TYPE_GROUP))) {
 						//Create rows & columns
-						foreach($layoutDescArr['rows'] as $cols) {
+						foreach($layoutDescArr['rows'] as $row) {
 							$sql = "INSERT INTO layouts_rows(layout_id, rank) VALUES ($1, $2)";
-							if ($res = db_query_params($sql, array($new_layout_id, $cols['rank']))) {
+							if ($res = db_query_params($sql, array($new_layout_id, $row['rank']))) {
 								if ($row_id = db_insertid($res,'layouts_rows', 'id')) {
-									foreach($cols['columns'] as $column) {
+									foreach($row['columns'] as $column) {
 										$sql = "INSERT INTO layouts_rows_columns(layout_row_id, width) VALUES ($1, $2)";
 										db_query_params($sql, array($row_id, $column['width']));
 										$column_id = db_insertid($res,'layouts_rows_columns', 'id');
@@ -980,7 +1037,7 @@ class WidgetLayoutManager {
 				}
 
 				//delete removed contents
-				$deleted_names = $this->_array_diff_names($originals, $names);
+				$deleted_names = utils_array_diff_names($originals, $names);
 				if (count($deleted_names)) {
 					$_and = '';
 					foreach($deleted_names as $id => $name) {
@@ -1002,7 +1059,7 @@ class WidgetLayoutManager {
 				}
 
 				//Insert new contents
-				$added_names = $this->_array_diff_names($names, $originals);
+				$added_names = utils_array_diff_names($names, $originals);
 				if (count($added_names)) {
 					$_and = '';
 					foreach($added_names as $name) {
@@ -1079,26 +1136,5 @@ class WidgetLayoutManager {
 			}
 		}
 		return (array)$layout;
-	}
-
-	/**
-	 * compute the differences between two arrays
-	 * @param array $tab1
-	 * @param array $tab2
-	 * @return array
-	 */
-	function _array_diff_names($tab1, $tab2) {
-		$diff = array();
-		foreach($tab1 as $e1) {
-			$found = false;
-			reset($tab2);
-			while(!$found && list(,$e2) = each($tab2)) {
-				$found = !count(array_diff($e1, $e2));
-			}
-			if (!$found) {
-				$diff[] = $e1;
-			}
-		}
-		return $diff;
 	}
 }
