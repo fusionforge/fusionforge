@@ -25,17 +25,17 @@ require_once 'Widget.class.php';
 
 class Widget_TrackerComment extends Widget {
 
-	var $content;
+	var $title;
 
 	function __construct() {
 		$request =& HTTPRequest::instance();
 		$owner_id   = (int)substr($request->get('owner'), 1);
 		parent::__construct('trackercomment', $owner_id, WidgetLayoutManager::OWNER_TYPE_TRACKER);
-		$this->content['title'] = _('Follow-up tabs');
+		$this->title = _('Follow-up tabs');
 	}
 
 	function getTitle() {
-		return $this->content['title'];
+		return $this->title;
 	}
 
 	function getDescription() {
@@ -43,7 +43,7 @@ class Widget_TrackerComment extends Widget {
 	}
 
 	function isAvailable() {
-		return isset($this->content['title']);
+		return isset($this->title);
 	}
 
 	function getContent() {

@@ -25,7 +25,7 @@ require_once 'Widget.class.php';
 
 class Widget_TrackerDefaultActions extends Widget {
 
-	var $content;
+	var $title;
 
 	function __construct() {
 		global $func;
@@ -36,12 +36,12 @@ class Widget_TrackerDefaultActions extends Widget {
 		}
 		if ($func == 'detail' || forge_check_perm('tracker_admin', $owner_id)) {
 			parent::__construct('trackerdefaultactions', $owner_id, WidgetLayoutManager::OWNER_TYPE_TRACKER);
-			$this->content['title'] = _('Actions');
+			$this->title = _('Actions');
 		}
 	}
 
 	function getTitle() {
-		return $this->content['title'];
+		return $this->title;
 	}
 
 	function getDescription() {
@@ -49,7 +49,7 @@ class Widget_TrackerDefaultActions extends Widget {
 	}
 
 	function isAvailable() {
-		return isset($this->content['title']);
+		return isset($this->title);
 	}
 
 	function getContent() {

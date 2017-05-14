@@ -26,17 +26,17 @@ require_once 'Widget.class.php';
 
 class Widget_TrackerMain extends Widget {
 
-	var $content;
+	var $title;
 
 	function __construct() {
 		$request =& HTTPRequest::instance();
 		$owner_id   = (int)substr($request->get('owner'), 1);
 		parent::__construct('trackermain', $owner_id, WidgetLayoutManager::OWNER_TYPE_TRACKER);
-		$this->content['title'] = _('Internal Fields');
+		$this->title = _('Internal Fields');
 	}
 
 	function getTitle() {
-		return $this->content['title'];
+		return $this->title;
 	}
 
 	function getDescription() {
@@ -44,7 +44,7 @@ class Widget_TrackerMain extends Widget {
 	}
 
 	function isAvailable() {
-		return isset($this->content['title']);
+		return isset($this->title);
 	}
 
 	function getContent() {

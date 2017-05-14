@@ -26,17 +26,17 @@ require_once $gfwww.'include/note.php';
 
 class Widget_TrackerSummary extends Widget {
 
-	var $content;
+	var $title;
 
 	function __construct() {
 		$request =& HTTPRequest::instance();
 		$owner_id   = (int)substr($request->get('owner'), 1);
 		parent::__construct('trackersummary', $owner_id, WidgetLayoutManager::OWNER_TYPE_TRACKER);
-		$this->content['title'] = _('Description');
+		$this->title = _('Description');
 	}
 
 	function getTitle() {
-		return $this->content['title'];
+		return $this->title;
 	}
 
 	function getDescription() {
@@ -44,7 +44,7 @@ class Widget_TrackerSummary extends Widget {
 	}
 
 	function isAvailable() {
-		return isset($this->content['title']);
+		return isset($this->title);
 	}
 
 	function getContent() {
