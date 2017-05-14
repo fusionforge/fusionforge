@@ -775,12 +775,12 @@ class CliActions {
 				$lm = new WidgetLayoutManager();
 				// remap the extrafield ids with the new ones if any
 				$artifact_layout = $stream['setup']['use_tracker_widget_display'];
-				foreach ($artifact_layout['rows'] as $row) {
-					foreach($row['columns'] as $column) {
-						foreach ($column['contents'] as $nwidget) {
+				foreach ($artifact_layout['rows'] as &$row) {
+					foreach($row['columns'] as &$column) {
+						foreach ($column['contents'] as &$nwidget) {
 							if ($nwidget['content']['id'] == 'trackercontent') {
-								foreach ($nwidget['content']['layoutExtraFieldIDs'] as $efrkey => $efrow) {
-									foreach ($efrow as $efckey => $efcol) {
+								foreach ($nwidget['content']['layoutExtraFieldIDs'] as $efrkey => &$efrow) {
+									foreach ($efrow as &$efcol) {
 										$key = key($efcol);
 										$nkey = $this->getMappingId($key, 'extrafield');
 										if ($nkey != $key) {
