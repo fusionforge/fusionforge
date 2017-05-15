@@ -42,7 +42,7 @@ FusionForge 6.X:
 * Tracker: add support for autoassign [#151] & [#149] (TrivialDev)
 * Tracker: add default value support for extrafields (TrivialDev)
 * Tracker: CSV export, support lastModifiedDate filtering (TrivialDev)
-* Tracker: CSV export, add comments [#853] (Dassaut Aviation)
+* Tracker: CSV export, add comments [#853] (Dassault Aviation)
 * Tracker: add new customfield: Effort (TrivialDev)
 * Tracker: new widget oriented display to replace the old "2 columns" view. (TrivialDev)
 * Utils: cross ref document/release. Use [DNNN]/[RNNN] where NNN is the ID of the document/frs release. (TrivialDev)
