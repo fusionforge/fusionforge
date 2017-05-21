@@ -128,7 +128,7 @@ ORDER BY post_date DESC',
 		for ($i=0; $i<$rows; $i++) {
 			$t_thread_title = db_result($result,$i,'summary');
 			$t_thread_url = "/forum/forum.php?forum_id=" . db_result($result,$i,'forum_id');
-			$t_thread_author = util_display_user(db_result($result,$i,'user_name'),db_result($result,$i,'user_id'),db_result($result,$i,'realname'));
+			$t_thread_author = util_display_user(db_result($result,$i,'user_name'), db_result($result,$i,'user_id'), db_result($result,$i,'realname'));
 
 			$return .= '<div class="one-news bordure-dessous">';
 			$return .= "\n";
@@ -161,9 +161,7 @@ ORDER BY post_date DESC',
 					$return .= '<h3>'. $t_thread_title . '</h3>';
 				}
 				$return .= "<div>";
-				$return .= '<em>';
 				$return .= $t_thread_author;
-				$return .= '</em>';
 				$return .= ' - ';
 				$return .= relative_date(db_result($result,$i,'post_date'));
 				$return .= ' - ';
