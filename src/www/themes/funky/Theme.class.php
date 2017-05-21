@@ -275,7 +275,7 @@ class Theme_Funky extends Layout {
 			$attrs['style'] = 'width:'.$tabwidth.'%';
 			$return .= html_ao('td', $attrs);
 			$attrs = array();
-			$attrs['id'] = md5($tabs_dirs[$i]);
+			$attrs['id'] = md5($tabs_dirs[$i]).rand();
 			$attrs['href'] = $tabs_dirs[$i];
 			if (preg_match('/^https?:\/\//', $tabs_dirs[$i])) {
 				$attrs['target'] = '_blank';

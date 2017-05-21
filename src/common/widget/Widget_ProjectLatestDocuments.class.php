@@ -83,7 +83,7 @@ class Widget_ProjectLatestDocuments extends Widget {
 				$tabletop[] = _('Actions');
 				$classth[] = 'unsortable';
 			}
-			$result .= $HTML->listTableTop($tabletop, array(), 'sortable_widget_docman_listfile full', 'sortable', $classth);
+			$result .= $HTML->listTableTop($tabletop, array(), 'sortable_widget_docman_listfile full', 'sortable_docman', $classth);
 
 			foreach ($keys as $key) {
 				$count = count($df->Documents[$key]);
