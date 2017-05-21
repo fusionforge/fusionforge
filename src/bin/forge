@@ -786,6 +786,19 @@ class CliActions {
 					}
 				}
 			}
+			if (isset($stream['setup']['browse_list'])) {
+				$colids = explode(',', $stream['setup']['browse_list']);
+				$browse_list = ',';
+				if (is_array($colids)) {
+					foreach($colids as $colid) {
+						$browse_list .= $this->getMappingId($colid, 'extrafield').',';
+					}
+				}
+				$browse_list = substr($browse_list, 1, -1);
+				if (strlen($browse_list)) {
+					$at->setBrowseList($browse_list);
+				}
+			}
 			if (isset($stream['setup']['use_tracker_widget_display'])) {
 				$lm = new WidgetLayoutManager();
 				// remap the extrafield ids with the new ones if any
