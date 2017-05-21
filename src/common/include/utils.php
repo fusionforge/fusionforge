@@ -446,8 +446,8 @@ function util_make_links($data = '') {
 		}
 		$data = str_replace('&gt;', "\1", $data);
 		$data = preg_replace("#([ \t]|^)www\.#i", " http://www.", $data);
-		$data = preg_replace("#([[:alnum:]]+)://([^[:space:]<\1]*)([[:alnum:]\#?/&=])#i", "<a href=\"\\1://\\2\\3\" target=\"_new\">\\1://\\2\\3</a>", $data);
-		$data = preg_replace("#([[:space:]]|^)(([a-z0-9_]|\\-|\\.)+@([^[:space:]<\1]*)([[:alnum:]-]))#i", "\\1<a href=\"mailto:\\2\" target=\"_new\">\\2</a>", $data);
+		$data = preg_replace("#([[:alnum:]]+)://([^[:space:]<\1]*)([[:alnum:]\#?/&=])#i", "<a href=\"\\1://\\2\\3\" target=\"_blank\">\\1://\\2\\3</a>", $data);
+		$data = preg_replace("#([[:space:]]|^)(([a-z0-9_]|\\-|\\.)+@([^[:space:]<\1]*)([[:alnum:]-]))#i", "\\1<a href=\"mailto:\\2\" target=\"_blank\">\\2</a>", $data);
 		$data = str_replace("\1", '&gt;', $data);
 		for ($i = 0; $i < count($mem); $i++) {
 			$data = preg_replace("/$randPattern/", $mem[$i], $data, 1);
@@ -482,10 +482,10 @@ function util_make_links($data = '') {
 		$line = str_replace('&gt;', "\1", $line);
 		$line = preg_replace("/([ \t]|^)www\./i", " http://www.", $line);
 		$line = preg_replace("/([[:alnum:]]+):\/\/([^[:space:]<\1]*)([[:alnum:]#?\/&=])/i",
-			"<a href=\"\\1://\\2\\3\" target=\"_new\">\\1://\\2\\3</a>", $line);
+			"<a href=\"\\1://\\2\\3\" target=\"_blank\">\\1://\\2\\3</a>", $line);
 		$line = preg_replace(
 			"/([[:space:]]|^)(([a-z0-9_]|\\-|\\.)+@([^[:space:]]*)([[:alnum:]-]))/i",
-			"\\1<a href=\"mailto:\\2\" target=\"_new\">\\2</a>",
+			"\\1<a href=\"mailto:\\2\" target=\"_blank\">\\2</a>",
 			$line
 		);
 		$line = str_replace("\1", '&gt;', $line);
