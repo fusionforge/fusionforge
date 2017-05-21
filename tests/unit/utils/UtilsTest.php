@@ -74,12 +74,12 @@ class Utils_Tests extends PHPUnit_Framework_TestCase
 	public function testUtilMakeLinks()
 	{
 		$this->assertEquals(
-			'a <a href="http://fusionforge.org/" target="_new">http://fusionforge.org/</a> b',
+			'a <a href="http://fusionforge.org/" target="_blank">http://fusionforge.org/</a> b',
 			util_make_links('a http://fusionforge.org/ b')
 		);
 
 		$this->assertEquals(
-			'a <a href="https://fusionforge.org/" target="_new">https://fusionforge.org/</a> b',
+			'a <a href="https://fusionforge.org/" target="_blank">https://fusionforge.org/</a> b',
 			util_make_links('a https://fusionforge.org/ b')
 		);
 
