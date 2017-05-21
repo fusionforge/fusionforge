@@ -3,7 +3,7 @@
  * FusionForge Plugin Message Class
  *
  * Copyright 2009, 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2017, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -30,7 +30,7 @@ class messagePlugin extends Plugin {
 
 	function __construct() {
 		parent::__construct();
-		$this->name = "message";
+		$this->name = 'message';
 		$this->text = _('Message');
 		$this->pkg_desc =
 _("This plugin allows the site administrator to display a message banner
@@ -46,20 +46,19 @@ on all pages, e.g. for maintenance announcements.");
 	}
 
 	function site_admin_option_hook() {
-		echo '<li>' . util_make_link ('/plugins/message/index.php', _('Configure Global Message')) . '</li>';
+		echo html_e('li', array(), util_make_link('/plugins/message/index.php', _('Configure Global Message')));
 	}
 
 	function getAdminOptionLink() {
-		return util_make_link ('/plugins/message/index.php', _('Configure Message'));
+		return util_make_link('/plugins/message/index.php', _('Configure Message'));
 	}
 
 	function message() {
 		$res = db_query_params('SELECT message FROM plugin_message', array());
-		if ($res && db_numrows($res)>0 && $message=db_result($res, 0, 'message')) {
-			echo '<div id="message_box">';
-			echo html_image("ic/close.png", '', '', array('alt'=>_('Close'), 'id'=>'message_close', 'style'=>'float:right;cursor:pointer'));
-			echo $message;
-			echo '</div>';
+		if ($res && db_numrows($res) > 0 && $message = db_result($res, 0, 'message')) {
+			echo html_e('div', array('id' => 'message_box'),
+					html_image("ic/close.png", '', '', array('alt'=>_('Close'), 'id'=>'message_close', 'style'=>'float:right; cursor:pointer;')).
+					$message);
 		}
 	}
 }
