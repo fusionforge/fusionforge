@@ -189,9 +189,9 @@ class Theme_Funky extends Layout {
 			$idtitle = $id.'-title';
 			$idtcont = $id.'-title-content';
 		} else {
-			$idid = '';
-			$idtitle = '';
-			$idtcont = '';
+			$idid = rand();
+			$idtitle = rand();
+			$idtcont = rand();
 		}
 
 		$t_result = '';
