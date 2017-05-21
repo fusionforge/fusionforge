@@ -494,12 +494,10 @@ if (getStringFromRequest('add_extrafield')) {
 		if ($field_to_add) {
 			$browse_fields = $ath->getBrowseList();
 			$result = $ath->setBrowseList(($browse_fields ? $browse_fields.',' : '').$field_to_add);
-		}
-		else {
+		} else {
 			$result = false;
 		}
-	}
-	elseif (getStringFromRequest('updownorder_field')) {
+	} elseif (getStringFromRequest('updownorder_field')) {
 		$id = getStringFromRequest('id');
 		$new_pos = getIntFromRequest('new_pos');
 		if ($new_pos) {
@@ -509,12 +507,10 @@ if (getStringFromRequest('add_extrafield')) {
 			$browse_fields[$new_pos - 1] = $id;
 			$browse_fields[$pos_of_id] = $val_at_new_pos;
 			$result = $ath->setBrowseList(implode(',', $browse_fields));
-		}
-		else {
+		} else {
 			$result = false;
 		}
-	}
-	elseif (getStringFromRequest('field_changes_order')) {
+	} elseif (getStringFromRequest('field_changes_order')) {
 		$order = getArrayFromRequest('order');
 
 		// Fields with not modified positions
@@ -536,13 +532,11 @@ if (getStringFromRequest('add_extrafield')) {
 				if (! isset($out_before[$new_pos]))
 					$out_before[$new_pos] = array();
 				$out_before[$new_pos][] = $field;
-			}
-			elseif ($new_pos > $list_size) {
+			} elseif ($new_pos > $list_size) {
 				if (! isset($out_after[$new_pos]))
 					$out_after[$new_pos] = array();
 				$out_after[$new_pos][] = $field;
-			}
-			else {
+			} else {
 				if (! isset($changed[$new_pos - 1]))
 					$changed[$new_pos - 1] = array();
 				$changed[$new_pos - 1][] = $field;
@@ -590,23 +584,20 @@ if (getStringFromRequest('add_extrafield')) {
 		$new_browse_fields = array_merge($start_browse_fields, $not_changed, $end_browse_fields);
 
 		$result = $ath->setBrowseList(implode(',', $new_browse_fields));
-	}
-	elseif (getStringFromRequest('delete_field')) {
+	} elseif (getStringFromRequest('delete_field')) {
 		$id = getStringFromRequest('id');
 		$browse_fields = explode(',',$ath->getBrowseList());
 		$pos = array_search($id, $browse_fields);
 		if ($pos !== false) {
 			array_splice($browse_fields, $pos, 1);
 			$result = $ath->setBrowseList(implode(',', $browse_fields));
-		}
-		else {
+		} else {
 			$result = false;
 		}
 	}
 	if ($result !== false) {
 		$feedback .= _('Tracker Updated');
-	}
-	else {
+	} else {
 		$error_msg .= _('Update failed')._(': ').$ath->getErrorMessage();
 		$ath->clearError();
 	}
