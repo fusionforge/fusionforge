@@ -43,7 +43,7 @@ class ArtifactMessage extends FFError {
 	 * @param	object		$Artifact	Artifact object.
 	 * @param	array|bool	$data		(all fields from artifact_history_user_vw) OR id from database.
 	 */
-	function __construct(&$Artifact, $data=false) {
+	function __construct(&$Artifact, $data = false) {
 		parent::__construct();
 
 		//was Artifact legit?
@@ -74,45 +74,57 @@ class ArtifactMessage extends FFError {
 	 * @param	string|bool	$by	Email of submitter (obsolete?).
 	 * @return	int|bool	id on success / false on failure.
 	 */
-	function create($body,$by=false) {
+	function create($body, $by = false, $importData = array()) {
 		if (!$body) {
 			$this->setMissingParamsError();
 			return false;
 		}
 
-		if (session_loggedin()) {
-			$user_id=user_getid();
+		if(array_key_exists('user', $importData)) {
+			$user_id = $importData['user'];
 			$user = user_get_object($user_id);
 			if (!$user || !is_object($user)) {
-				$this->setError(_('Error: Logged In User Bug - Could Not Get User Object'));
+				$this->setError('Error: Logged In User But Could Not Get User Object');
 				return false;
 			}
-			$body=_('Logged In: YES')." \nuser_id=$user_id\n\n".$body;
-
-			//  we'll store this email even though it will likely never be used -
-			//  since we have their correct user_id, we can join the USERS table to get email
-			$by=$user->getEmail();
+			$by = $user->getEmail();
 		} else {
-			$body=_('Logged In: NO')." \n\n".$body;
-			$user_id=100;
-			if (!$by || !validate_email($by)) {
-				$this->setMissingParamsError();
-				return false;
+			if (session_loggedin()) {
+				$user_id = user_getid();
+				$user = user_get_object($user_id);
+				if (!$user || !is_object($user)) {
+					$this->setError('Error: Logged In User But Could Not Get User Object');
+					return false;
+				}
+				//	we'll store this email even though it will likely never be used -
+				//	since we have their correct user_id, we can join the USERS table to get email
+				$by = $user->getEmail();
+			} else {
+				$user_id = 100;
+				if (!$by || !validate_email($by)) {
+					$this->setMissingParamsError();
+					return false;
+				}
 			}
 		}
+		if(array_key_exists('time', $importData)){
+			$time = $importData['time'];
+		} else {
+			$time = time();
+		}
 
-		$res = db_query_params ('INSERT INTO artifact_message (artifact_id,submitted_by,from_email,adddate,body)
-			VALUES ($1,$2,$3,$4,$5)',
+		$res = db_query_params ('INSERT INTO artifact_message (artifact_id, submitted_by, from_email, adddate, body)
+			VALUES ($1, $2, $3, $4, $5)',
 					array ($this->Artifact->getID(),
 					       $user_id,
 					       $by,
-					       time(),
+					       $time,
 					       htmlspecialchars($body))) ;
 		if (!$res) {
 			$this->setError(db_error());
 			return false;
 		} else {
-			$id=db_insertid($res,'artifact_message','id');
+			$id = db_insertid($res,'artifact_message','id');
 		}
 
 		//

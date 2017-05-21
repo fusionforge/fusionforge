@@ -796,12 +796,12 @@ class Artifact extends FFObject {
 	 *
 	 * @return	bool|resource
 	 */
-	function addMessage($body,$by=false,$send_followup=false,$importData = array()) {
+	function addMessage($body, $by = false, $send_followup = false, $importData = array()) {
 		if (!$body) {
 			$this->setMissingParamsError();
 			return false;
 		}
-		if (!forge_check_perm ('tracker',$this->ArtifactType->getID(),'submit')) {
+		if (!forge_check_perm ('tracker', $this->ArtifactType->getID(), 'submit')) {
 			$this->setError(_('You are not currently allowed to submit items to this tracker.'));
 			return false;
 		}
@@ -812,51 +812,17 @@ class Artifact extends FFObject {
 			$sendNotice = true;
 		}
 
-		if(array_key_exists('user', $importData)) {
-			$user_id = $importData['user'];
-			$user = user_get_object($user_id);
-			if (!$user || !is_object($user)) {
-				$this->setError('Error: Logged In User But Could Not Get User Object');
-				return false;
-			}
-			$by=$user->getEmail();
-		} else {
-			if (session_loggedin()) {
-				$user_id = user_getid();
-				$user = user_get_object($user_id);
-				if (!$user || !is_object($user)) {
-					$this->setError('Error: Logged In User But Could Not Get User Object');
-					return false;
-				}
-				//	we'll store this email even though it will likely never be used -
-				//	since we have their correct user_id, we can join the USERS table to get email
-				$by = $user->getEmail();
-			} else {
-				$user_id = 100;
-				if (!$by || !validate_email($by)) {
-					$this->setMissingParamsError();
-					return false;
-				}
+		$artfm = new ArtifactMessage($this);
+		$id = $artfm->create($body, $by, $importData);
+
+		if ($id) {
+			$this->updateLastModified($importData);
+
+			if ($send_followup && $sendNotice) {
+				$this->mailFollowupEx($time, 2, false);
 			}
 		}
-		if(array_key_exists('time', $importData)){
-			$time = $importData['time'];
-		} else {
-			$time = time();
-		}
-		$res = db_query_params('INSERT INTO artifact_message (artifact_id,submitted_by,from_email,adddate,body) VALUES ($1,$2,$3,$4,$5)',
-					array ($this->getID(),
-					       $user_id,
-					       $by,
-					       $time,
-					       htmlspecialchars($body)));
-
-		$this->updateLastModified($importData);
-
-		if ($send_followup && $sendNotice) {
-			$this->mailFollowupEx($time, 2, false);
-		}
-		return $res;
+		return $id;
 	}
 
 	/**
