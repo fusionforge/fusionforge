@@ -109,12 +109,10 @@ $title_arr[] = _('Delete');
 echo $HTML->listTableTop($title_arr);
 echo implode('', $rows);
 echo '<tr class="noborder">
-	<td>
-	</td>
-	<td class="align-right">
+	<td colspan="2" class="align-right">
 	<input type="submit" name="field_changes_order" value="'._('Reorder').'" />
 	</td>
-	<td>
+	<td colspan="2">
 	</td>
       </tr>';
 echo $HTML->listTableBottom();
