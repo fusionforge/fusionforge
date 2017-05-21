@@ -36,7 +36,7 @@ $ath->adminHeader(array('title'=>_('Customize Browse List'),
 */
 $efarr = $ath->getExtraFields();
 
-$browse_fields = explode(',',$ath->getBrowseList());
+$browse_fields = explode(',', $ath->getBrowseList());
 
 // Display regular fields.
 $fields = array (
