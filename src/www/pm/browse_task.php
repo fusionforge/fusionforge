@@ -66,8 +66,9 @@ if (session_loggedin()) {
 			$paging = 25;
 		}
 		$LUSER->setPreference('paging', $paging);
-	} else
+	} else {
 		$paging = $LUSER->getPreference('paging');
+	}
 }
 
 if(!isset($paging) || !$paging)

@@ -43,10 +43,11 @@ if (!$tinfo) {
 
 $asuser = getStringFromRequest('asuser');
 
-if (getIntFromRequest('text'))
+if (getIntFromRequest('text')) {
 	$asformat = 'text/plain; charset="UTF-8"';
-else
+} else {
 	$asformat = 'application/json; charset="UTF-8"';
+}
 
 $islogin = session_loggedin();
 $isadmin = forge_check_global_perm ('forge_admin');
@@ -66,10 +67,11 @@ if ($ispublic) {
 		$asuser = session_get_user()->getUnixName();
 	}
 
-	if (isUserAndTaskinSameGroup($tid, $asuser))
+	if (isUserAndTaskinSameGroup($tid, $asuser)) {
 		$showall = true;
-	else
+	} else {
 		$showall = false;
+	}
 } else {
 	$showall = false;
 }

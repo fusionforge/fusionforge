@@ -282,10 +282,11 @@ class ArtifactFactory extends FFError {
 	 * @return	int
 	 */
 	function getDefaultQuery() {
-		if ($this->query_type == 'query')
+		if ($this->query_type == 'query') {
 			return $this->query_id;
-		else
+		} else {
 			return '';
+		}
 	}
 
 	/**

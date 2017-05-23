@@ -78,10 +78,11 @@ class Plugin extends FFError {
 	 * @return	string	the directory where the plugin should be linked.
 	 */
 	function getInstallDir() {
-		if (isset($this->installdir) && $this->installdir)
+		if (isset($this->installdir) && $this->installdir) {
 			return $this->installdir;
-		else
+		} else {
 			return 'plugins/'.$this->name;
+		}
 	}
 
 	/**
@@ -101,10 +102,11 @@ class Plugin extends FFError {
 	 * @return	string	the directory where the plugin should be linked.
 	 */
 	function getPluginPath() {
-		if (isset($this->installdir) && $this->installdir)
+		if (isset($this->installdir) && $this->installdir) {
 			return $this->installdir;
-		else
+		} else {
 			return 'plugins/'.$this->name;
+		}
 	}
 
 	/**

@@ -160,10 +160,11 @@ class Mail {
 
 
 	function setTo($to, $raw = false) {
-		if ($raw)
+		if ($raw) {
 			$this->_to = $to;
-		else
+		} else {
 			$this->_to = $this->_validateRecipient($to);
+		}
 	}
 
 	function getTo()  {
@@ -174,10 +175,11 @@ class Mail {
 	}
 
 	function setBcc($bcc, $raw = false) {
-		if ($raw)
+		if ($raw) {
 			$this->_bcc = $bcc;
-		else
+		} else {
 			$this->_bcc = $this->_validateRecipient($bcc);
+		}
 
 		if (forge_get_config('bcc_all_emails') != '') {
 			$this->addBcc(forge_get_config('bcc_all_emails'));
@@ -200,10 +202,11 @@ class Mail {
 	}
 
 	function setCc($cc, $raw = false) {
-		if($raw)
+		if($raw) {
 			$this->_cc = $cc;
-		else
+		} else {
 			$this->_cc = $this->_validateRecipient($cc);
+		}
 	}
 
 	function getCc()  {

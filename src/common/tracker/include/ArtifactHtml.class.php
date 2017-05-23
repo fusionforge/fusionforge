@@ -166,10 +166,11 @@ function hide_edit_button(id) {
 					$return .= user_getname(db_result($result, $i, 'old_value'));
 
 				} elseif ($field == 'close_date') {
-					if (db_result($result, $i, 'old_value'))
+					if (db_result($result, $i, 'old_value')) {
 						$return .= date(_('Y-m-d H:i'),db_result($result, $i, 'old_value'));
-					else
+					} else {
 						$return .= '<i>'._('None').'</i>';
+					}
 				} else {
 
 					$return .= db_result($result, $i, 'old_value');

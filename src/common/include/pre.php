@@ -122,10 +122,11 @@ if (forge_get_config('use_ssl')) {
 
 forge_define_config_item ('installation_environment', 'core', 'production') ;
 $installation_environment = forge_get_config ('installation_environment') ;
-if ($installation_environment == 'development' || $installation_environment == 'integration')
+if ($installation_environment == 'development' || $installation_environment == 'integration') {
 	$default_sysdebug_enable = 'true';
-else
+} else {
 	$default_sysdebug_enable = 'false';
+}
 forge_define_config_item ('sysdebug_enable', 'core', $default_sysdebug_enable) ;
 forge_set_config_item_bool ('sysdebug_enable', 'core') ;
 forge_define_config_item ('sysdebug_phphandler', 'core', 'true') ;

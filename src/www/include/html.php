@@ -1168,8 +1168,9 @@ function site_project_header($params) {
 					$next .= '&return_to='.urlencode(getStringFromServer('REQUEST_URI'));
 				}
 				session_redirect($next);
-			} else
+			} else {
 				exit_error(_('Project access problem')._(': ').$project->getErrorMessage(), 'home');
+			}
 		}
 		exit_error(_('Project Problem')._(': ').$project->getErrorMessage(), 'home');
 	}

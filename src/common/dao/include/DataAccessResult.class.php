@@ -52,10 +52,11 @@ class DataAccessResult  implements Iterator {
     */
     function isError() {
         $error=db_error();
-        if (!empty($error))
+        if (!empty($error)) {
             return $error;
-        else
+        } else {
             return false;
+		}
     }
 
     // {{{ Iterator

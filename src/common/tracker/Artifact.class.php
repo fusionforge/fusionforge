@@ -1385,29 +1385,24 @@ class Artifact extends FFObject {
 				if (!array_key_exists($efid, $extra_fields)) {
 					if ($type == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 						$this->setError(_('Status Custom Field Must Be Set'));
-					}
-					else {
+					} else {
 						$this->setMissingParamsError($ef[$efid]['field_name']);
 					}
 					return false;
-				}
-				else {
+				} else {
 					if ($extra_fields[$efid] === '') {
 						if ($type == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 							$this->setError(_('Status Custom Field Must Be Set'));
-						}
-						else {
+						} else {
 							$this->setMissingParamsError($ef[$efid]['field_name']);
 						}
 						return false;
-					}
-					else {
+					} else {
 						if (($type == ARTIFACT_EXTRAFIELDTYPE_SELECT || $type == ARTIFACT_EXTRAFIELDTYPE_RADIO) &&
 							$extra_fields[$efid] == '100') {
 								$this->setMissingParamsError($ef[$efid]['field_name']);
 								return false;
-						}
-						elseif (($type == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT || $type == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) &&
+						} elseif (($type == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT || $type == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) &&
 								(count($extra_fields[$efid]) == 1 && $extra_fields[$efid][0] == '100')) {
 							$this->setMissingParamsError($ef[$efid]['field_name']);
 							return false;

@@ -183,8 +183,9 @@ class WidgetLayoutManager {
 			    foreach($widgets as $widget) {
 			    $sql .= ",($13, $14, 1, $15, $16, $17)";
 			    }*/
-		} else
+		} else {
 			$success = false;
+		}
 		if (!$success) {
 			$success = db_error();
 			db_rollback();
@@ -213,8 +214,9 @@ class WidgetLayoutManager {
 					break;
 				}
 			}
-		} else
+		} else {
 			$success = false;
+		}
 		if (!$success) {
 			$success = db_error();
 			db_rollback();
