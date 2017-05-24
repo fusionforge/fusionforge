@@ -812,7 +812,7 @@ if ($art_arr && $art_cnt > 0) {
 		echo '<td colspan="2"><strong>'._('Canned Response')._(':').'</strong><br />';
 		echo $ath->cannedResponseBox ('canned_response') .'</td></tr>
 
-			<tr><td colspan="3" class="align-center"><input type="submit" name="submit" value="'._('Mass Update').'" /></td></tr>';
+			<tr><td colspan="2" class="align-center"><input type="submit" name="submit" value="'._('Mass Update').'" /></td></tr>';
 		echo $HTML->listTableBottom();
 		echo '</div></fieldset>';
 		echo $HTML->closeForm();
