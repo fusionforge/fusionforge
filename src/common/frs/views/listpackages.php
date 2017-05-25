@@ -104,7 +104,7 @@ EOS;
 				$image = $HTML->getStartMonitoringPic($title);
 			}
 			$errorMessage = _('Unable to set monitoring');
-			$package_monitor = util_make_link('#', $image, array('id' => 'pkgid'.$package_id, 'onclick' => 'javascript:controllerFRS.doAction({action:\''.util_make_uri($url).'\', id:\'pkgid'.$package_id.'\'})'), true);
+			$package_monitor = html_e('span', array('class' => 'frs-monitor-package'), util_make_link('#', $image, array('id' => 'pkgid'.$package_id, 'onclick' => 'javascript:controllerFRS.doAction({action:\''.util_make_uri($url).'\', id:\'pkgid'.$package_id.'\'})'), true));
 		} else {
 			$package_monitor = '';
 		}
@@ -117,15 +117,11 @@ EOS;
 		$package_ziplink = '';
 		if ($FRSPackageReleases && $num_releases >= 1 && class_exists('ZipArchive') && file_exists($FRSPackage->getReleaseZipPath($FRSPackage->getNewestReleaseID()))) {
 			// display link to latest-release-as-zip
-			$package_ziplink = html_e('span',
-			  array('class' => 'frs-zip-package'),
-			  util_make_link(
-			    util_make_uri('/frs/download.php/latestzip/'.$FRSPackage->getID()
-			      .'/'.$FRSPackage->getNewestReleaseZipName()),
-			    $HTML->getZipPic(_('Download the newest release as ZIP.')
-			      .' '._('This link always points to the newest release as a ZIP file.'))));
+			$package_ziplink = html_e('span', array('class' => 'frs-zip-package'), util_make_link('/frs/download.php/latestzip/'.$FRSPackage->getID().'/'.$FRSPackage->getNewestReleaseZipName(),
+																$HTML->getZipPic(_('Download the newest release as ZIP.')
+																.' '._('This link always points to the newest release as a ZIP file.'))));
 		}
-		echo html_e('h2', array('id' => 'title_'. $package_name_protected), html_entity_decode($package_name).html_e('span', array('class' => 'frs-monitor-package'), $package_monitor).$package_ziplink);
+		echo html_e('h2', array('id' => 'title_'. $package_name_protected), html_entity_decode($package_name).$package_monitor.$package_ziplink);
 
 		if ( !$FRSPackageReleases || $num_releases < 1 ) {
 			echo $HTML->warning_msg(_('No releases'));
@@ -136,9 +132,7 @@ EOS;
 				$ziplink = '';
 				if (class_exists('ZipArchive')) {
 					if (file_exists($FRSPackage->getReleaseZipPath($package_release_id))) {
-						$ziplink .= util_make_link(
-						  util_make_uri('/frs/download.php/zip/'.$FRSPackageRelease->getID()
-						    .'/'.$FRSPackage->getReleaseZipName($FRSPackageRelease->getID())),
+						$ziplink .= util_make_link('/frs/download.php/zip/'.$FRSPackageRelease->getID().'/'.$FRSPackage->getReleaseZipName($FRSPackageRelease->getID()),
 						  $HTML->getZipPic(_('Download this release as ZIP.')
 						    .' '._('This link always points to this release as a ZIP file.')));
 					}
@@ -165,8 +159,9 @@ EOS;
 							$roadmapObject = new Roadmap($g, $linkedRoadmapID);
 							$rnum = 0;
 							foreach ($linkedRoadmap as $linkedRoadmapRelease) {
-								if ($rnum)
+								if ($rnum) {
 									$urls .= ' || ';
+								}
 								$urls .= util_make_link('/tracker/roadmap.php?group_id='.$group_id.'&release='.urlencode($linkedRoadmapRelease), $roadmapObject->getName().' - '.$linkedRoadmapRelease);
 								$rnum++;
 							}
@@ -197,13 +192,13 @@ EOS;
 						// now iterate and show the files in this release....
 						foreach ($res_files as $res_file) {
 							$cells = array();
-							$cells[][] = util_make_link('/frs/download.php/file/'.$res_file->getID().'/'.$res_file->getName(), $res_file->getName());
+							$cells[][] = util_make_link('/frs/download.php/file/'.$res_file->getID().'/'.urlencode($res_file->getName()), $res_file->getName());
 							$cells[][] = date(_('Y-m-d H:i'), $res_file->getReleaseTime());
 							$cells[][] = human_readable_bytes($res_file->getSize());
 							$cells[][] = ($res_file->getDownloads() ? number_format($res_file->getDownloads(), 0) : '0');
 							$cells[][] = $res_file->getProcessor();
 							$cells[][] = $res_file->getFileType();
-							$cells[][] = util_make_link('/frs/download.php/latestfile/'.$FRSPackage->getID().'/'.$res_file->getName(), _('Latest version'));
+							$cells[][] = util_make_link('/frs/download.php/latestfile/'.$FRSPackage->getID().'/'.urlencode($res_file->getName()), _('Latest version'));
 							echo $HTML->multiTableRow(array(), $cells);
 						}
 						echo $HTML->listTableBottom();
