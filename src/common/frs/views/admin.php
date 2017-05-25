@@ -130,7 +130,7 @@ if (count($FRSPackages) == 0) {
 		if (forge_check_perm('frs', $FRSPackage->getID(), 'file') && count($FRSPackage->getReleases()))  {
 			$content .= util_make_link('/frs/?view=showreleases&package_id='.$FRSPackage->getID().'&group_id='.$group_id, $HTML->getConfigurePic(_('Edit Releases'), _('Edit Releases')));
 		}
-		$cells[] = array($content, 'style' => 'white-space: nowrap;', 'align' => 'center');
+		$cells[] = array($content, 'style' => 'white-space: nowrap;', 'class' => 'align-center');
 		echo $HTML->multiTableRow(array('id' => 'pkgid'.$FRSPackage->getID()), $cells);
 	}
 	echo $HTML->listTableBottom();
