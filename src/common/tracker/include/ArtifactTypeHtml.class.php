@@ -440,7 +440,7 @@ class ArtifactTypeHtml extends ArtifactType {
 			$return .= $HTML->listTableTop($title_arr);
 
 			for ($i = 0; $i < $taskcount; $i++) {
-				$taskinfo  = db_fetch_array_by_row($ah->relatedtasks, $i);
+				$taskinfo  = db_fetch_array_by_row($ah->getRelatedTasks(), $i);
 				$totalPercentage += $taskinfo['percent_complete'];
 				$taskid    = $taskinfo['project_task_id'];
 				$projectid = $taskinfo['group_project_id'];
