@@ -834,7 +834,6 @@ DocManListFileController.prototype =
 
 	toggleNotifyUserView: function(params) {
 		this.notifyparams = params;
-		console.log(params);
 		var nocache = new Date().getTime();
 		jQuery('#notifytitle').text(this.notifyparams.title);
 		jQuery('#notifydescription').text(this.notifyparams.description);
