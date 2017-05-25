@@ -266,10 +266,10 @@ if ($report->isError()) {
 }
 $report->setStartDate($pt->ProjectGroup->Group->getStartDate());
 
-echo $HTML->openForm(array('array' => '/reporting/timeadd.php', 'id' => 'time-tracking', 'method' => 'post'));
+echo $HTML->openForm(array('action' => '/reporting/timeadd.php', 'id' => 'time-tracking', 'method' => 'post'));
 echo '<input type="hidden" name="project_task_id" value="'.$project_task_id.'" />
 	<input type="hidden" name="submit" value="1" />';
-echo $HTML->listTableTop ($title_arr);
+echo $HTML->listTableTop($title_arr);
 echo '<tr>
 		<td class="align-center">'. report_weeks_box($report, 'week') .'</td>
 		<td class="align-center">'. report_day_adjust_box() .'</td>
@@ -286,14 +286,14 @@ echo '<tr>
 //
 
 
-$res=db_query_params ('SELECT users.realname, rep_time_tracking.report_date, rep_time_tracking.hours, rep_time_category.category_name
+$res=db_query_params('SELECT users.realname, rep_time_tracking.report_date, rep_time_tracking.hours, rep_time_category.category_name
 	FROM users,rep_time_tracking,rep_time_category
 	WHERE
 	users.user_id=rep_time_tracking.user_id
 	AND rep_time_tracking.time_code=rep_time_category.time_code
 	AND rep_time_tracking.project_task_id=$1',
 			array($project_task_id));
-$total_hours =0;
+$total_hours = 0;
 for ($i=0; $i<db_numrows($res); $i++) {
 
 	echo '
