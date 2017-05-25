@@ -284,6 +284,7 @@ class DocumentManager extends FFError {
 		$settingsArr['use_webdav']               = $this->Group->data_array['use_webdav'];
 		$settingsArr['use_docman_create_online'] = $this->Group->data_array['use_docman_create_online'];
 		$settingsArr['use_docman_review']        = forge_get_config('use_docman_review');
+		$settingsArr['group_id']                 = $this->Group->getID();
 		return $settingsArr;
 	}
 
