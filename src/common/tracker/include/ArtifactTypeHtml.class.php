@@ -127,44 +127,16 @@ class ArtifactTypeHtml extends ArtifactType {
 		global $HTML;
 		$this->header($params);
 		$group_id= $this->Group->getID();
-
-		$links_arr[]='/tracker/admin/?group_id='.$group_id;
-		$title_arr[]=_('New Tracker');
-		$attr_arr[] = array('title'=>_('Create a new tracker.'));
-
-		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&update_type=1';
-		$title_arr[]=_('Update Settings');
-		$attr_arr[] = array('title'=>_('Set up preferences like expiration times, email addresses.'));
-
-		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&effort_units=1';
-		$title_arr[]=_('Manage Effort Units');
-		$attr_arr[] = array('title'=>_('Manage Effort Units for Effort custom extra field.'));
-
-		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&add_extrafield=1';
-		$title_arr[]=_('Manage Custom Fields');
-		$attr_arr[] = array('title'=>_('Add new boxes like Phases, Quality Metrics, Components, etc.  Once added they can be used with other selection boxes (for example, Categories or Groups) to describe and browse bugs or other artifact types.'));
-
-		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&workflow=1';
-		$title_arr[]=_('Manage Workflow');
-		$attr_arr[] = array('title'=>_('Edit tracker workflow.'));
-
-		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&customize_list=1';
-		$title_arr[]=_('Customize List');
-		$attr_arr[] = array('title'=>_('Customize display for the tracker.'));
-
-		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&add_canned=1';
-		$title_arr[]=_('Manage Canned Responses');
-		$attr_arr[] = array('title'=>_('Create/change generic response messages for the tracker.'));
-
-		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&clone_tracker=1';
-		$title_arr[]=_('Apply Template Tracker');
-		$attr_arr[] = array('title'=>_('Duplicate parameters and fields from a template trackers in this one.'));
-
-		$links_arr[]='/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&delete=1';
-		$title_arr[]=_('Delete');
-		$attr_arr[] = array('title'=>_('Permanently delete this tracker.'));
-
-		echo $HTML->printSubMenu($title_arr, $links_arr, $attr_arr);
+		$elementLi[] = array('content' => util_make_link('/tracker/admin/?group_id='.$group_id, _('New Tracker'), array('title'=>_('Create a new tracker.'))));
+		$elementLi[] = array('content' => util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&update_type=1', _('Update Settings'), array('title'=>_('Set up preferences like expiration times, email addresses.'))));
+		$elementLi[] = array('content' => util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&effort_units=1', _('Manage Effort Units'), array('title'=>_('Manage Effort Units for Effort custom extra field.'))));
+		$elementLi[] = array('content' => util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&add_extrafield=1', _('Manage Custom Fields'), array('title'=>_('Add new boxes like Phases, Quality Metrics, Components, etc.  Once added they can be used with other selection boxes (for example, Categories or Groups) to describe and browse bugs or other artifact types.'))));
+		$elementLi[] = array('content' => util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&workflow=1', _('Manage Workflow'), array('title'=>_('Edit tracker workflow.'))));
+		$elementLi[] = array('content' => util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&customize_list=1', _('Customize List'), array('title'=>_('Customize display for the tracker.'))));
+		$elementLi[] = array('content' => util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&add_canned=1', _('Manage Canned Responses'), array('title'=>_('Create/change generic response messages for the tracker.'))));
+		$elementLi[] = array('content' => util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&clone_tracker=1', _('Apply Template Tracker'), array('title'=>_('Duplicate parameters and fields from a template trackers in this one.'))));
+		$elementLi[] = array('content' => util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&delete=1', _('Delete'), array('title'=>_('Permanently delete this tracker.'))));
+		echo $HTML->html_list($elementLi);
 	}
 
 	function adminFooter($params) {
