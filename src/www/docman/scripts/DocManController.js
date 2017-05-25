@@ -834,9 +834,10 @@ DocManListFileController.prototype =
 
 	toggleNotifyUserView: function(params) {
 		this.notifyparams = params;
-		this.nofifyparams.nocache = new Date().getTime();
+		console.log(params);
+		var nocache = new Date().getTime();
 		jQuery('#notifytitle').text(this.notifyparams.title);
-		jQuery('#notifydescription').html(this.notifyparams.description);
+		jQuery('#notifydescription').text(this.notifyparams.description);
 		jQuery('#notifydocid').val(this.notifyparams.id);
 		jQuery('#notifyfilelink').text(this.notifyparams.filename);
 		if (this.notifyparams.statusId != 2) {
@@ -855,10 +856,10 @@ DocManListFileController.prototype =
 				type:		'dir',
 				itemid:		this.notifyparams.docgroupId,
 				childgroup_id:	this.notifyparams.childGroupId,
-				rqd:		this.nofifyparams.nocache
+				rqd:		nocache
 			});
-		this.lockInterval[this.notifyparams.id] = setInterval("jQuery.get('" + this.notifyparams.docManURL + "/', {group_id:"+this.notifyparams.groupId+",action:'lock',lock:1,type:'file',itemid:"+this.notifyparams.id+",childgroup_id:"+this.notifyparams.childGroupId+", rqd:"+this.nofifyparams.nocache+"})", this.notifyparams.lockIntervalDelay);
-		this.lockInterval[this.notifyparams.docgroupId] = setInterval("jQuery.get('" + this.notifyparams.docManURL + "/', {group_id:"+this.notifyparams.groupId+",action:'lock',lock:1,type:'dir',itemid:"+this.notifyparams.docgroupId+",childgroup_id:"+this.notifyparams.childGroupId+", rqd:"+this.nofifyparams.nocache+"})", this.notifyparams.lockIntervalDelay);
+		this.lockInterval[this.notifyparams.id] = setInterval("jQuery.get('" + this.notifyparams.docManURL + "/', {group_id:"+this.notifyparams.groupId+",action:'lock',lock:1,type:'file',itemid:"+this.notifyparams.id+",childgroup_id:"+this.notifyparams.childGroupId+", rqd:"+nocache+"})", this.notifyparams.lockIntervalDelay);
+		this.lockInterval[this.notifyparams.docgroupId] = setInterval("jQuery.get('" + this.notifyparams.docManURL + "/', {group_id:"+this.notifyparams.groupId+",action:'lock',lock:1,type:'dir',itemid:"+this.notifyparams.docgroupId+",childgroup_id:"+this.notifyparams.childGroupId+", rqd:"+nocache+"})", this.notifyparams.lockIntervalDelay);
 		jQuery('#notify-userids').gentleSelect({columns: 2, itemWidth: 120});
 		jQuery(this.listfileparams.divNotifyUsers).dialog('option', 'title', '[D'+this.notifyparams.id+'] '+this.listfileparams.divNotifyTitle).dialog('open');
 
