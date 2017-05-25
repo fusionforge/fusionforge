@@ -199,7 +199,7 @@ class Artifact extends FFObject {
 	 *						array('user' => 127, 'time' => 1234556789, 'nopermcheck' => true, 'nonotice' => true)
 	 * @return	bool	id on success / false on failure.
 	 */
-	function create($summary, $details, $assigned_to=100, $priority=3, $extra_fields = array(), $importData = array()) {
+	function create($summary, $details, $assigned_to = 100, $priority = 3, $extra_fields = array(), $importData = array()) {
 		//
 		//	make sure this person has permission to add artifacts
 		//
@@ -1558,7 +1558,7 @@ class Artifact extends FFObject {
 						// Control that the id is present in the db
 
 						$res = db_query_params ('SELECT artifact_id FROM artifact WHERE artifact_id=$1',
-			array($id));
+									array($id));
 						if (db_numrows($res) == 1) {
 							$new .= $id.' ';
 						} else {
@@ -1593,9 +1593,9 @@ class Artifact extends FFObject {
 			if ($extra_fields[$efid] === '') {
 				//nothing in field to update - text fields may be blank
 			} else {
-				$type=$ef[$efid]['field_type'];
+				$type = $ef[$efid]['field_type'];
 				//special treatment for DATETIME
-				if ($type == ARTIFACT_EXTRAFIELDTYPE_DATETIME && $extra_fields[$efid]!='' ) {
+				if ($type == ARTIFACT_EXTRAFIELDTYPE_DATETIME && $extra_fields[$efid] != '' ) {
 					$dateTime = DateTime::createFromFormat(_('Y-m-d H:i'), $extra_fields[$efid]);
 					$extra_fields[$efid] = $dateTime->format('U');
 				}
