@@ -1292,7 +1292,7 @@ abstract class Layout extends FFError {
 				$html_content .= $this->closeForm();
 			}
 		}
-		return html_e('span', $htmlAttr, $html_content, false);
+		return html_e('div', $htmlAttr, $html_content, false);
 	}
 
 	/**
