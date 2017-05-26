@@ -38,7 +38,7 @@ class hudson extends Controler {
 		return $this->themePath;
 	}
 	function getIconsPath() {
-		return $this->themePath . "/images/ic/";
+		return $this->themePath.'/images/ic/';
 	}
 
 	function request() {
@@ -59,11 +59,11 @@ class hudson extends Controler {
 								if ( $request->exist('hudson_job_url') && trim($request->get('hudson_job_url') != '') ) {
 									$this->action = 'addJob';
 								} else {
-									$error_msg .= _("Missing Hudson job url (eg: http://myCIserver:8080/hudson/job/MyJob)");
+									$error_msg .= _('Missing Hudson job url (eg: http://myCIserver:8080/hudson/job/MyJob)');
 								}
 								$this->view = 'projectOverview';
 							} else {
-								$error_msg .= _("Permission denied.");
+								$error_msg .= _('Permission denied.');
 								$this->view = 'projectOverview';
 							}
 							break;
@@ -72,10 +72,10 @@ class hudson extends Controler {
 								if ($request->exist('job_id')) {
 									$this->view = 'editJob';
 								} else {
-									$error_msg .= _("Missing Hudson job ID");
+									$error_msg .= _('Missing Hudson job ID');
 								}
 							} else {
-								$error_msg .= _("Permission denied.");
+								$error_msg .= _('Permission denied.');
 								$this->view = 'projectOverview';
 							}
 							break;
@@ -85,14 +85,14 @@ class hudson extends Controler {
 									if ($request->exist('new_hudson_job_url') && $request->get('new_hudson_job_url') != '') {
 										$this->action = 'updateJob';
 									} else {
-										$error_msg .= _("Missing Hudson job url (eg: http://myCIserver:8080/hudson/job/MyJob)");
+										$error_msg .= _('Missing Hudson job url (eg: http://myCIserver:8080/hudson/job/MyJob)');
 									}
 								} else {
-									$error_msg .= _("Missing Hudson job ID");
+									$error_msg .= _('Missing Hudson job ID');
 								}
 								$this->view = 'projectOverview';
 							} else {
-								$error_msg .= _("Permission denied.");
+								$error_msg .= _('Permission denied.');
 								$this->view = 'projectOverview';
 							}
 							break;
@@ -101,11 +101,11 @@ class hudson extends Controler {
 								if ($request->exist('job_id')) {
 									$this->action = 'deleteJob';
 								} else {
-									$error_msg .= _("Missing Hudson job ID");
+									$error_msg .= _('Missing Hudson job ID');
 								}
 								$this->view = 'projectOverview';
 							} else {
-								$error_msg .= _("Permission denied.");
+								$error_msg .= _('Permission denied.');
 								$this->view = 'projectOverview';
 							}
 							break;
@@ -129,13 +129,13 @@ class hudson extends Controler {
 							break;
 					}
 				} else {
-					$error_msg .= _("Permission denied.");
+					$error_msg .= _('Permission denied.');
 				}
 			} else {
-				$error_msg .= _("Hudson service is not enabled");
+				$error_msg .= _('Hudson service is not enabled.');
 			}
 		} else {
-			$error_msg .= _("Missing group_id parameter.");
+			$error_msg .= _('Missing group_id parameter.');
 		}
 	}
 }

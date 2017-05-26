@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Copyright (c) Xerox, 2009. All Rights Reserved.
  *
  * Originally written by Nicolas Terray, 2005. Xerox Codendi Team.
@@ -24,18 +24,17 @@ require_once 'include/DataAccess.class.php';
 
 class CodendiDataAccess extends DataAccess {
 
-    protected function __construct() {
+	function __construct() {
+		parent::__construct();
+	}
 
-      parent::__construct();
-    }
+	protected static $_instance;
 
-    protected static $_instance;
-    public static function instance() {
-        if (!isset(self::$_instance)) {
-            $c = __CLASS__;
-            self::$_instance = new $c;
-        }
-        return self::$_instance;
-    }
-
+	public static function instance() {
+		if (!isset(self::$_instance)) {
+			$c = __CLASS__;
+			self::$_instance = new $c;
+		}
+		return self::$_instance;
+	}
 }

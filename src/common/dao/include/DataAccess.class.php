@@ -23,9 +23,9 @@ require_once 'DataAccessException.class.php';
 
 class DataAccess {
 
-   function quoteSmart($value, $params = array()) {
+	function __construct() {}
 
-        return $value;
-    }
-
+	function quoteSmart($value, $params = array()) {
+		return $value;
+	}
 }
