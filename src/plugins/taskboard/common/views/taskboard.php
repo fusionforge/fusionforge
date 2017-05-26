@@ -130,16 +130,13 @@ if ($taskboard->getReleaseField()) {
 			$release_name_arr[] = $release_name;
 		}
 
-		$release_box=html_build_select_box_from_arrays ($release_id_arr,$release_name_arr,'_release',$current_release_title, false, 'none', true);
+		$release_box = html_build_select_box_from_arrays ($release_id_arr, $release_name_arr, '_release', $current_release_title, false, 'none', true);
 	}
 }
 
-$colspan=0;
+$colspan = 0;
 if ($release_box) {
 	$colspan = 2;
-	if ( forge_check_perm('tracker_admin', $group_id ) ) {
-		$colspan = 3;
-	}
 }
 ?>
 
@@ -202,7 +199,7 @@ if ($release_box) {
 			</td>
 		</tr>
 		<tr class="middle">
-			<td>
+			<td colspan="2">
 				<?php
 					echo html_build_checkbox('hide-unlinked-task-chk', false, false);
 					echo html_e('label', array('for'=>'hide-unlinked-task-chk'), _('Hide unlinked tasks'));
@@ -281,7 +278,7 @@ var gGroupId = <?php echo $group_id ?>;
 var gTaskboardId = <?php echo $taskboard_id ?>;
 var gIsManager = <?php echo ( $taskboard->TrackersAdapter->isManager() ? 'true' : 'false' ) ?>;
 var gIsTechnician = <?php echo ( $taskboard->TrackersAdapter->isTechnician() ? 'true' : 'false' ) ?>;
-var gAjaxUrl = '<?php echo util_make_url ('/plugins/'.$pluginTaskboard->name.'/ajax.php') ; ?>';
+var gAjaxUrl = '<?php echo util_make_url('/plugins/'.$pluginTaskboard->name.'/ajax.php') ?>';
 var gMessages = {
 	'notasks' : "<?php echo _('There are no tasks found.') ?>",
 	'progressByTasks' : "<?php echo _('Progress by tasks') ?>",
@@ -303,9 +300,9 @@ var gThemeRoot = "<?php echo $HTML->imgroot ?>";
 		);
 	}
 ?>
-var gReleases = <?php echo json_encode($releases) ;?>
+var gReleases = <?php echo json_encode($releases) ?>
 
-bShowUserStories = <?php echo $taskboard->getUserStoriesTrackerID() ? 'true' : 'false' ?>;
+bShowUserStories = <?php echo ( $taskboard->getUserStoriesTrackerID() ? 'true' : 'false' ) ?>;
 aUserStories = [];
 aPhases = []
 
@@ -438,7 +435,7 @@ jQuery( document ).ready(function( $ ) {
 
 		e.preventDefault();
 	});
-	<?php }?>
+	<?php } ?>
 
 
 	<?php } ?>
