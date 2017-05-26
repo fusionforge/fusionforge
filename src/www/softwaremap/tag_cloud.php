@@ -103,7 +103,7 @@ if ($selected_tag) {
 	for ($i_proj = 0; $i_proj < count($projects); $i_proj++) {
 		$row_grp = $projects[$i_proj];
 
-		echo $HTML->listTableTop();
+		echo $HTML->listTableTop(array(), array(), 'full');
 		$cells = array();
 		$content = util_make_link ('/projects/'. strtolower($row_grp['unix_group_name']).'/',
 				      '<strong>'.$row_grp['group_name'].'</strong> ');
