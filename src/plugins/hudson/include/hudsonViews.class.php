@@ -339,18 +339,18 @@ class hudsonViews extends Views {
 					} else {
 						echo '  <td>&nbsp;</td>';
 					}
-					echo '  <td align="center"><a href="'.$job->getUrl().'/rssAll" onclick="toggle_iframe(this); return false;"><img src="'.$this->getControler()->getIconsPath().'rss_feed.png" alt="'.vsprintf(_("RSS feed of all builds for %s job"),  array($row['name'])).'" title="'.vsprintf(_("RSS feed of all builds for %s job"),  array($row['name'])).'" /></a></td>'."\n";
+					echo '  <td class="align-center"><a href="'.$job->getUrl().'/rssAll" onclick="toggle_iframe(this); return false;"><img src="'.$this->getControler()->getIconsPath().'rss_feed.png" alt="'.vsprintf(_("RSS feed of all builds for %s job"),  array($row['name'])).'" title="'.vsprintf(_("RSS feed of all builds for %s job"),  array($row['name'])).'" /></a></td>'."\n";
 
 					if ($project->usesService('svn')) {
 						if ($row['use_svn_trigger'] == 1) {
-							echo '  <td align="center"><img src="'.$this->getControler()->getIconsPath().'server_lightning.png" alt="'._("SVN commit will trigger a build").'" title="'._("SVN commit will trigger a build").'" /></td>';
+							echo '  <td class="align-center"><img src="'.$this->getControler()->getIconsPath().'server_lightning.png" alt="'._("SVN commit will trigger a build").'" title="'._("SVN commit will trigger a build").'" /></td>';
 						} else {
 							echo '  <td>&nbsp;</td>';
 						}
 					}
 					if ($project->usesService('cvs')) {
 						if ($row['use_cvs_trigger'] == 1) {
-							echo '  <td align="center"><img src="'.$this->getControler()->getIconsPath().'server_lightning.png" alt="'._("CVS commit will trigger a build").'" title="'._("CVS commit will trigger a build").'" /></td>';
+							echo '  <td class="align-center"><img src="'.$this->getControler()->getIconsPath().'server_lightning.png" alt="'._("CVS commit will trigger a build").'" title="'._("CVS commit will trigger a build").'" /></td>';
 						} else {
 							echo '  <td>&nbsp;</td>';
 						}
@@ -431,7 +431,7 @@ class hudsonViews extends Views {
 			//echo '  </p>';
 			echo '   <br />';
 		}
-		echo '   <input type="submit" value="Add job" />';
+		echo '   <input type="submit" value="'._('Add job').'" />';
 		echo ' </form>';
 		echo '</div>';
 		//echo "<script type=\"text/javascript\">jQuery('#hudson_add_job').slideToggle();</script>\n";
