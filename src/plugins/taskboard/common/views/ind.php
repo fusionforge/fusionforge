@@ -29,7 +29,7 @@ require_once $gfplugins.'taskboard/common/include/TaskBoardFactoryHtml.class.php
 
 $taskboardFactory = new TaskBoardFactoryHtml($group);
 if (!$taskboardFactory || !is_object($taskboardFactory) || $taskboardFactory->isError()) {
-	exit_error(_('Could Not Get TaskBoardFactory'),'taskboard');
+	exit_error(_('Could Not Get TaskBoardFactory'), 'taskboard');
 }
 //$group_id = $group->getID();
 $tb_arr = $taskboardFactory->getTaskboards();

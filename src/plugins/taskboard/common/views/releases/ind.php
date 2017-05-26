@@ -22,22 +22,6 @@
 
 global $taskboard, $group, $group_id, $pluginTaskboard, $HTML;
 
-$taskboard->header(
-	array(
-		'title' => $taskboard->getName()._(': ')._('Releases'),
-		'pagename' => "Releases",
-		'sectionvals' => array($group->getPublicName()),
-		'group' => $group_id
-	)
-);
-
-?>
-
-<link rel="stylesheet" type="text/css" href="/plugins/taskboard/css/agile-board.css">
-
-<div id="messages" class="warning" style="display: none;"></div>
-<br/>
-<?php
 if (!$taskboard->getReleaseField()) {
 	exit_error(_('Release field is not configured'));
 }
@@ -48,6 +32,24 @@ $taskboardReleases = $taskboard->getReleases();
 if ($taskboardReleases === false) {
 	exit_error($taskboard->getErrorMessage());
 }
+
+$taskboard->header(
+	array(
+		'title' => $taskboard->getName()._(': ')._('Releases'),
+		'pagename' => "Releases",
+		'sectionvals' => array($group->getPublicName()),
+		'group' => $group_id
+	)
+);
+
+echo html_e('link', array('rel' => 'stylesheet', 'type' => 'text/css', 'href' => util_make_uri('/plugins/'.$pluginTaskboard->name.'/css/agile-board.css')));
+
+?>
+
+<div id="messages" class="warning" style="display: none;"></div>
+<br/>
+<?php
+
 
 echo html_e('p', array(), util_make_link('/plugins/'.$pluginTaskboard->name.'/releases/?group_id='.$group_id.'&taskboard_id='.$taskboard_id.'&view=add_release', html_e('strong', array(), _('Add release'))));
 
@@ -79,7 +81,7 @@ foreach ($taskboardReleases as $release) {
 		<td>'.date("Y-m-d", $release->getEndDate()).'</td>
 		<td>'.htmlspecialchars( $release->getGoals() ).'</td>
 		<td>'. ( $release->getPageUrl() ? '<a href="'.$release->getPageUrl().'" target="_blank">'.htmlspecialchars( $release->getPageUrl() ).'</a>' : '' ).'</td>
-		<td><a href="/plugins/'.$pluginTaskboard->name.'/releases/?group_id='.$group_id.'&taskboard_id='.$taskboard_id.'&release_id='.$release->getID().'&view=burndown">'._('Burndown').'</a>'.'</td>
+		<td>'. util_make_link('/plugins/'.$pluginTaskboard->name.'/releases/?group_id='.$group_id.'&taskboard_id='.$taskboard_id.'&release_id='.$release->getID().'&view=burndown', _('Burndown')).'</td>
 	</tr>
 	';
 }

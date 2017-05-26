@@ -22,8 +22,6 @@
 
 require_once '../../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
-
-global $gfplugins;
 require_once $gfplugins.'taskboard/common/include/TaskBoardHtml.class.php';
 
 $group_id = getIntFromRequest('group_id');
@@ -55,7 +53,7 @@ if (!$group_id) {
 		$allowedViews = array('add_release', 'delete_release', 'edit_release', 'burndown');
 		$view = getStringFromRequest('view');
 
-		if( in_array($view, $allowedViews) ) {
+		if (in_array($view, $allowedViews)) {
 			include($gfplugins.$pluginTaskboard->name.'/common/views/releases/'.$view.'.php' );
 		} else {
 			include($gfplugins.$pluginTaskboard->name.'/common/views/releases/ind.php' );

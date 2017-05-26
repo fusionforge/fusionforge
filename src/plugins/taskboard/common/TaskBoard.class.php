@@ -567,7 +567,7 @@ class TaskBoard extends FFError {
 	 * @return	array
 	 */
 	function getUserStories($release = NULL, $assigned_to = NULL) {
-		$stories=array(
+		$stories = array(
 			'0' => array(
 				'id' => 0,
 				'title' => _('Unlinked tasks'),
@@ -581,6 +581,10 @@ class TaskBoard extends FFError {
 			$tasks_trackers = $this->getUsedTrackersData();
 			foreach($tasks_trackers as $tasks_tracker_data) {
 				$tasks = $this->TrackersAdapter->getTasks($tasks_tracker_data['group_artifact_id'], $assigned_to, NULL, NULL);
+				if (!$tasks) {
+					$this->setError($this->TrackersAdapter->getErrorMessage());
+					return false;
+				}
 				foreach($tasks as $task) {
 					$task_maped = $this->getMappedTask($task);
 					if ($task_maped['user_story']==0) {

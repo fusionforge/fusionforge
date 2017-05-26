@@ -25,7 +25,7 @@ require_once $gfcommon.'tracker/ArtifactTypeFactory.class.php';
 require_once $gfcommon.'tracker/ArtifactFactory.class.php';
 require_once $gfcommon.'tracker/ArtifactExtraField.class.php';
 
-class TaskBoardBasicAdapter {
+class TaskBoardBasicAdapter extends FFError {
 	/**
 	 * The TaskBoard object.
 	 *
@@ -90,9 +90,11 @@ class TaskBoardBasicAdapter {
 		$at = $this->getUserStoriesTracker();
 		$af = new ArtifactFactory($at);
 		if (!$af || !is_object($af)) {
-			exit_error('Error','Could Not Get Factory');
+			$this->setError('Could Not Get Factory');
+			return false;
 		} elseif ($af->isError()) {
-			exit_error('Error',$af->getErrorMessage());
+			$this->setError($af->getErrorMessage());
+			return false;
 		}
 
 		$_status = 1;
@@ -204,9 +206,11 @@ class TaskBoardBasicAdapter {
 		if ($at) {
 			$af = new ArtifactFactory($at);
 			if (!$af || !is_object($af)) {
-				exit_error('Error','Could Not Get Factory');
+				$this->setError('Could Not Get Factory');
+				return false;
 			} elseif ($af->isError()) {
-				exit_error('Error',$af->getErrorMessage());
+				$this->setError($af->getErrorMessage());
+				return false;
 			}
 
 			$_status = 1;
