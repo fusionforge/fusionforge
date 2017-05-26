@@ -278,10 +278,18 @@ class CliActions {
 			$extra_fields = array();
 			if (isset($stream['extra_field_data']) && is_array($stream['extra_field_data'])) {
 				foreach ($stream['extra_field_data'] as $key => $extra_field_data) {
-					if (isset($extra_field_data['element_id'])) {
+					if (isset($extra_field_data['element_id']) && isset($extra_field_data['type'])) {
 						$efid = $this->getMappingId($key, 'extrafield');
-						$elid = $this->getMappingId($extra_field_data['element_id'], 'extrafield_element');
-						$extra_fields[$efid] = $elid;
+						if ($extra_field_data['type'] == ARTIFACT_EXTRAFIELDTYPE_DATETIME) {
+							$extra_fields[$efid] = date(_('Y-m-d H:i'), $extra_field_data['value']);
+						} else {
+							if (!is_array($extra_field_data['element_id'])) {
+								$elid = $this->getMappingId($extra_field_data['element_id'], 'extrafield_element');
+							} else {
+								$elid = array();
+							}
+							$extra_fields[$efid] = $elid;
+						}
 					}
 				}
 			}
@@ -488,43 +496,84 @@ class CliActions {
 			} else {
 				$importRefMapping['group'][$stream['setup']['data_array']['group_id']] = $new_group->getID();
 				//add users as members to the project
-				$default_role_ids = $new_group->getRolesId();
-				$default_role_id = $default_role_ids[0];
+				$role = new Role($new_group);
+				$adminperms = array('project_admin' => array ($new_group->getID() => 1));
+				$default_role_id = $role->create('TOBEDELETED', $adminperms, true);
 				if (isset($stream['setup']['membersArr']) && is_array($stream['setup']['membersArr'])) {
 					foreach ($stream['setup']['membersArr'] as $member) {
 						$muid = $this->getMappingId($member['data_array']['user_id'], 'user');
-						$new_group->addUser($muid, $default_role_ids[0]);
+						$new_group->addUser($muid, $default_role_id);
 					}
 				}
 				//inject trackers if any
-				if (isset($stream['setup']['data_array']['use_tracker'])) {
-					$new_group->setUseTracker($stream['setup']['data_array']['use_tracker']);
+				if (forge_get_config('use_tracker')) {
+					if (isset($stream['setup']['data_array']['use_tracker'])) {
+						$new_group->setUseTracker($stream['setup']['data_array']['use_tracker']);
+					}
+					if (isset($stream['trackers']) && is_array($stream['trackers'])) {
+						foreach ($stream['trackers'] as $tracker) {
+							$filename = 'trackerDump-'.$tracker['setup']['group_artifact_id'].'.'.$format;
+							$this->createSubfile($filename, $tracker, $format);
+							if (!$this->trackerImport($filename, $format)) {
+								echo _('Unable to inject tracker')."\n";
+								db_rollback();
+								return false;
+							}
+							@unlink($filename);
+						}
+					}
 				}
-				if (isset($stream['trackers']) && is_array($stream['trackers'])) {
-					foreach ($stream['trackers'] as $tracker) {
-						$filename = 'trackerDump-'.$tracker['setup']['group_artifact_id'].'.'.$format;
-						$this->createSubfile($filename, $tracker, $format);
-						if (!$this->trackerImport($filename, $format)) {
-							echo _('Unable to inject tracker')."\n";
+				//inject docman if any
+				if (forge_get_config('use_docman')) {
+					if (isset($stream['setup']['data_array']['use_docman'])) {
+						$new_group->setUseDocman($stream['setup']['data_array']['use_docman']);
+					}
+					if (isset($stream['docman'])) {
+						$filename = 'docmanDump-'.$stream['setup']['data_array']['group_id'].'.'.$format;
+						$this->createSubfile($filename, $stream['docman'], $format);
+						if (!$this->docmanImport($filename, $format)) {
+							echo _('Unable to inject docman')."\n";
 							db_rollback();
 							return false;
 						}
 						@unlink($filename);
 					}
 				}
-				//inject docman if any
-				if (isset($stream['setup']['data_array']['use_docman'])) {
-					$new_group->setUseDocman($stream['setup']['data_array']['use_docman']);
-				}
-				if (isset($stream['docman'])) {
-					$filename = 'docmanDump-'.$stream['setup']['data_array']['group_id'].'.'.$format;
-					$this->createSubfile($filename, $stream['docman'], $format);
-					if (!$this->docmanImport($filename, $format)) {
-						echo _('Unable to inject docman')."\n";
-						db_rollback();
-						return false;
+				// recompute if any association with activated & injected features.
+				// association between doc - artifact - frs release
+				if (forge_get_config('use_object_associations')) {
+					if (forge_get_config('use_docman') && isset($stream['docman']['data']) && is_array($stream['docman']['data'])) {
+						foreach ($stream['docman']['data'] as $stream_docgroup) {
+							if (isset($stream_docgroup['files']) && is_array($stream_docgroup['files'])) {
+								foreach ($stream_docgroup['files'] as $stream_file) {
+									// we do not compute associatedFromArray, since it will be compute by the related element
+									if (isset($stream_file['associatedToArray']) && is_array($stream_file['associatedToArray'])) {
+										$ndocid = $this->getMappingId($stream_file['data_array']['docid'], 'document');
+										$ndocObject = document_get_object($ndocid);
+										foreach ($stream_file['associatedToArray'] as $associatedToElement) {
+											if (isset($associatedToElement['Artifact']) && forge_get_config('use_tracker') && $new_group->usesTracker()) {
+												//TODO: compute it!
+											}
+											if (isset($associatedToElement['Document'][$stream['setup']['data_array']['group_id']]) && forge_get_config('use_docman') && $new_group->usesTracker() && is_array($associatedToElement['Document'][$stream['setup']['data_array']['group_id']])) {
+												foreach ($associatedToElement['Document'][$stream['setup']['data_array']['group_id']] as $refdocid) {
+													$nrefdocid = $this->getMappingId($refdocid, 'document');
+													$nrefdocObject = document_get_object($nrefdocid);
+													if (!$ndocObject->addAssociationTo($nrefdocObject)) {
+														echo $ndocObject->getErrorMessage()."\n";
+														db_rollback();
+														return false;
+													}
+												}
+											}
+											if (isset($associatedToElement['FRSRelease']) && forge_get_config('use_frs') && $new_group->usesFRS() && is_array($associatedToElement['FRSRelease'])) {
+												//TODO: compute it!
+											}
+										}
+									}
+								}
+							}
+						}
 					}
-					@unlink($filename);
 				}
 				//setup homepage
 				if (isset($stream['setup']['homepage'])) {
@@ -535,6 +584,18 @@ class CliActions {
 						return false;
 					}
 				}
+				//add new roles and link users to roles
+				//delete initial default role!
+// 				if (isset($stream['setup']['roles']) && is_array($stream['setup']['roles'])) {
+// 					foreach($stream['setup']['roles'] as $role_def) {
+// 						$role = new Role($new_group);
+// 						if (!$role->create($role_def['role_name'], $perms, true)) {
+// 							echo $role->getErrorMessage()."\n";
+// 							db_rollback();
+// 							return false;
+// 						}
+// 					}
+// 				}
 				echo _('Group imported.')."\n";
 				db_commit();
 				return true;
@@ -884,7 +945,7 @@ class CliActions {
 			foreach ($stream['versions'] as $key => $version) {
 				if ($version['filetype'] != 'URL' && $version['storageref'] != null) {
 					if (!is_file($path.'/'.$version['storageref'])) {
-						echo _('Invalid file name.')."\n";
+						echo $path.'/'.$version['storageref'].':'._('Invalid file name.')."\n";
 						db_rollback();
 						return false;
 					}
@@ -914,7 +975,7 @@ class CliActions {
 				if ($firstversion == true) {
 					$d = new Document($group);
 					if (!$d->create($version['filename'], $filedatatype, $filedataname, $doc_group_id, $version['title'], $version['description'], $stream['data_array']['stateid'], $version['vcomment'], $importData)) {
-						echo $d->getErrorMessage()."\n";
+						echo $version['filename'].':'.$d->getErrorMessage()."\n";
 						db_rollback();
 						return false;
 					} else {
@@ -922,7 +983,7 @@ class CliActions {
 					}
 				} else {
 					if (!$d->update($version['filename'], $filedatatype, $filedataname, $doc_group_id, $version['title'], $version['description'], $stream['data_array']['stateid'], 0, $version['current_version'], 1, $importData, $version['vcomment'])) {
-						echo $d->getErrorMessage()."\n";
+						echo $version['filename'].':'.$d->getErrorMessage()."\n";
 						db_rollback();
 						return false;
 					}
@@ -1018,11 +1079,21 @@ class CliActions {
 		if ($group && is_object($group) && !$group->isError() && $group->usesDocman()) {
 			db_begin();
 			$dg = new DocumentGroup($group);
-			$parent_doc_group = (int)$this->getMappingId($stream['data_array']['parent_doc_group'], 'doc_group');
-			if (!$dg->create($stream['data_array']['groupname'], $parent_doc_group, $stream['data_array']['stateid'], $stream['data_array']['createdate'])) {
-				echo $dg->getErrorMessage()."\n";
-				db_rollback();
-				return false;
+			if ($stream['data_array']['groupname'] == '.trash') {
+				$dm = new DocumentManager($group);
+				$dg = documentgroup_get_object_byid($dm->getTrashID());
+				if ($dg->isError()) {
+					echo $dg->getErrorMessage()."\n";
+					db_rollback();
+					return false;
+				}
+			} else {
+				$parent_doc_group = (int)$this->getMappingId($stream['data_array']['parent_doc_group'], 'doc_group');
+				if (!$dg->create($stream['data_array']['groupname'], $parent_doc_group, $stream['data_array']['stateid'], $stream['data_array']['createdate'])) {
+					echo $dg->getErrorMessage()."\n";
+					db_rollback();
+					return false;
+				}
 			}
 			$importRefMapping['doc_group'][$stream['data_array']['doc_group']] = $dg->getID();
 			if (isset($stream['subdocgroups']) && is_array($stream['subdocgroups'])) {
@@ -1120,6 +1191,7 @@ class CliActions {
 			}
 			db_commit();
 			echo _('Docman injected')."\n";
+			return true;
 		} else {
 			echo _('Unable to get project to inject docman')._(': ').$group_id."\n";
 			return false;
@@ -1260,7 +1332,7 @@ class CliActions {
 
 	private function parseStringForReference($string) {
 		$artf_refs = preg_match_all('/\[\#[1-9]{1,3}\]/', $string);
-		if ($artf_refs && is_array($artf_ref)) {
+		if ($artf_refs && is_array($artf_refs)) {
 			foreach ($artf_refs as $artf_ref) {
 				$artfid = substr($artf_ref, 2, -1); //remove [# & ]
 				$nartfid = $this->getMappingId($artfid, 'artifact');
