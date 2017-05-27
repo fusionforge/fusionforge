@@ -1103,8 +1103,8 @@ abstract class RoleExplicit extends BaseRole implements PFO_RoleExplicit {
 		return true;
 	}
 
-	public function addUser ($user) {
-		if (!$this->addUsers (array ($user))) {
+	public function addUser($user) {
+		if (!$this->addUsers(array($user))) {
 			return false;
 		}
 		$hook_params['user'] = $user;
@@ -1134,8 +1134,8 @@ abstract class RoleExplicit extends BaseRole implements PFO_RoleExplicit {
 		return true ;
 	}
 
-	public function removeUser ($user) {
-		if(!$this->removeUsers (array ($user))){
+	public function removeUser($user) {
+		if(!$this->removeUsers(array($user))){
 			return false;
 		}
 		$hook_params['user'] = $user;
@@ -1146,23 +1146,23 @@ abstract class RoleExplicit extends BaseRole implements PFO_RoleExplicit {
 	}
 
 	public function getUsers() {
-		$result = array () ;
+		$result = array();
 		$res = db_query_params ('SELECT user_id FROM pfo_user_role WHERE role_id=$1',
 					array ($this->getID())) ;
 		while ($arr = db_fetch_array($res)) {
 			$result[] = user_get_object ($arr['user_id']) ;
 		}
 
-		return $result ;
+		return $result;
 	}
 
 	public function hasUser($user) {
-		$res = db_query_params ('SELECT user_id FROM pfo_user_role WHERE user_id=$1 AND role_id=$2',
-					array ($user->getID(), $this->getID())) ;
+		$res = db_query_params('SELECT user_id FROM pfo_user_role WHERE user_id=$1 AND role_id=$2',
+					array($user->getID(), $this->getID()));
 		if ($res && db_numrows($res)) {
-			return true ;
+			return true;
 		} else {
-			return false ;
+			return false;
 		}
 	}
 
