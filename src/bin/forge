@@ -195,6 +195,8 @@ class CliActions {
 					$localname = str_replace(forge_get_config('data_path').'/', '', $value);
 					$zip->addFile($value, $localname);
 					$value = $localname;
+				} else {
+					$value = null;
 				}
 			}
 		}
@@ -392,7 +394,7 @@ class CliActions {
 			}
 			if ($group->usesNews()) {
 				$groupDump['news'] = array();
-				$resultdb = db_query_params ('SELECT forum_id FROM news_bytes WHERE news_bytes.group_id = $1',
+				$resultdb = db_query_params('SELECT forum_id FROM news_bytes WHERE news_bytes.group_id = $1',
 								array($group_id));
 				$forumIds = array();
 				if ($resultdb && db_numrows($resultdb)) {
@@ -500,13 +502,17 @@ class CliActions {
 					$new_group->setAsTemplate($stream['setup']['data_array']['is_template']);
 				}
 				//add users as members to the project
-				$role = new Role($new_group);
+				$defrole = new Role($new_group);
 				$adminperms = array('project_admin' => array ($new_group->getID() => 1));
-				$default_role_id = $role->create('TOBEDELETED', $adminperms, true);
+				$default_role_id = (int)$defrole->create('TOBEDELETED', $adminperms, true);
 				if (isset($stream['setup']['membersArr']) && is_array($stream['setup']['membersArr'])) {
 					foreach ($stream['setup']['membersArr'] as $member) {
-						$muid = $this->getMappingId($member['data_array']['user_id'], 'user');
-						$new_group->addUser($muid, $default_role_id);
+						$muid = (int)$this->getMappingId($member['data_array']['user_id'], 'user');
+						if (!$new_group->addUser($muid, $default_role_id)) {
+							echo _('Unable to add user to group with TOBEDELETED role')."\n";
+							db_rollback();
+							return false;
+						}
 					}
 				}
 				//inject trackers if any
@@ -590,16 +596,45 @@ class CliActions {
 				}
 				//add new roles and link users to roles
 				//delete initial default role!
-// 				if (isset($stream['setup']['roles']) && is_array($stream['setup']['roles'])) {
-// 					foreach($stream['setup']['roles'] as $role_def) {
-// 						$role = new Role($new_group);
-// 						if (!$role->create($role_def['role_name'], $perms, true)) {
-// 							echo $role->getErrorMessage()."\n";
-// 							db_rollback();
-// 							return false;
-// 						}
-// 					}
-// 				}
+				if (isset($stream['setup']['roles']) && is_array($stream['setup']['roles'])) {
+					foreach($stream['setup']['roles'] as $role_def) {
+						$role = new Role($new_group);
+						$perms = array();
+						if (isset($role_def['data_array']['role_class']) && $role_def['data_array']['role_class'] == 1) {
+							if (!$role->create($role_def['data_array']['role_name'], $perms, true)) {
+								echo $role->getErrorMessage()."\n";
+								db_rollback();
+								return false;
+							} else {
+								if (isset($role_def['userids']) && is_array($role_def['userids'])) {
+									foreach ($role_def['userids'] as $ruserid) {
+										$nruserid = (int)$this->getMappingId($ruserid, 'user');
+										if (!$new_group->addUser($nruserid, $role->getID())) {
+											echo _('Unable to add user to group with role')._(': ').$role_def['data_array']['role_name']."\n";
+											db_rollback();
+											return false;
+										} else {
+											echo sprintf(_('User %d added to group with role'), $nruserid)._(': ').$role_def['data_array']['role_name']."\n";
+										}
+									}
+								}
+							}
+						}
+					}
+					if (isset($stream['setup']['membersArr']) && is_array($stream['setup']['membersArr'])) {
+						$userObjectArr = array();
+						foreach ($stream['setup']['membersArr'] as $member) {
+							$muid = $this->getMappingId($member['data_array']['user_id'], 'user');
+							$userObjectArr[] = user_get_object($muid);
+						}
+					}
+					$defrole->removeUsers($userObjectArr);
+					$defrole->delete();
+				}
+				// set the final status
+				if (isset($stream['setup']['data_array']['status']) && $stream['setup']['data_array']['status'] == 'A') {
+					$new_group->approve($adminUser);
+				}
 				echo _('Group imported.')."\n";
 				db_commit();
 				return true;
