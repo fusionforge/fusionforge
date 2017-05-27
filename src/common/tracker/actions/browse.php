@@ -68,7 +68,7 @@ if (session_loggedin()) {
 
 	if($query_id) {
 		if ($query_id == '-1') {
-			$LUSER->setPreference('art_query'.$ath->getID(),'');
+			$LUSER->setPreference('art_query'.$ath->getID(), '');
 		} else {
 			$aq = new ArtifactQuery($ath,$query_id);
 			if (!$aq || !is_object($aq)) {
@@ -77,7 +77,7 @@ if (session_loggedin()) {
 			$aq->makeDefault();
 		}
 	} else {
-		$query_id= $LUSER->getPreference('art_query'.$ath->getID(),'');
+		$query_id = $LUSER->getPreference('art_query'.$ath->getID(), '');
 	}
 } elseif ($query_id) {
 	// If user is not logged, then use a cookie to store the current query.
@@ -92,7 +92,9 @@ if (session_loggedin()) {
 	$_COOKIE["GFTrackerQuery"] = serialize($gf_tracker);
 } elseif (isset($_COOKIE["GFTrackerQuery"])) {
 	$gf_tracker = unserialize($_COOKIE["GFTrackerQuery"]);
-	$query_id = (int)$gf_tracker[$ath->getID()];
+	if (isset($gf_tracker[$ath->getID()])) {
+		$query_id = (int)$gf_tracker[$ath->getID()];
+	}
 }
 
 if(!isset($paging) || !$paging)
