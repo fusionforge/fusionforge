@@ -150,7 +150,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	 *	@param	bool	$new_project
 	 *	@return bool|int		The id on success or false on failure.
 	 */
-	function create($role_name, $data, $new_project=false) {
+	function create($role_name, $data, $new_project = false) {
 		if ($this->Group == NULL) {
 			if (!forge_check_global_perm('forge_admin')) {
 				$this->setPermissionDeniedError();
@@ -177,7 +177,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 					       array (htmlspecialchars($role_name)));
 			if (db_numrows($res)) {
 				$this->setError(_('Cannot create a role with this name (already used)'));
-				db_rollback () ;
+				db_rollback();
 				return false;
 			}
 		} else {
@@ -185,36 +185,36 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 					       array ($this->Group->getID(), htmlspecialchars($role_name)));
 			if (db_numrows($res)) {
 				$this->setError(_('Cannot create a role with this name (already used)'));
-				db_rollback () ;
+				db_rollback();
 				return false;
 			}
 		}
 
 		if ($this->Group == NULL) {
 			$res = db_query_params ('INSERT INTO pfo_role (role_name) VALUES ($1)',
-						array (htmlspecialchars($role_name))) ;
+						array (htmlspecialchars($role_name)));
 		} else {
 			$res = db_query_params ('INSERT INTO pfo_role (home_group_id, role_name) VALUES ($1, $2)',
 						array ($this->Group->getID(),
-						       htmlspecialchars($role_name))) ;
+						       htmlspecialchars($role_name)));
 		}
 		if (!$res) {
 			$this->setError('create::'.db_error());
 			db_rollback();
 			return false;
 		}
-		$role_id=db_insertid($res,'pfo_role','role_id');
+		$role_id = db_insertid($res,'pfo_role','role_id');
 		if (!$role_id) {
 			$this->setError('create::db_insertid::'.db_error());
 			db_rollback();
 			return false;
 		}
-		$this->data_array['role_id'] = $role_id ;
-		$this->data_array['role_name'] = $role_name ;
+		$this->data_array['role_id'] = $role_id;
+		$this->data_array['role_name'] = $role_name;
 
-		$this->update ($role_name, $data) ;
+		$this->update($role_name, $data);
 
-		$this->normalizeData () ;
+		$this->normalizeData();
 
 		if (!$this->fetchData($role_id)) {
 			db_rollback();
@@ -281,13 +281,13 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 					$this->setError('Error: FRS'.db_error());
 					return false;
 				}
-				for ($j=0; $j<db_numrows($res); $j++) {
-					$data['frs'][db_result($res, $j, 'package_id')]= $v;
+				for ($j = 0; $j < db_numrows($res); $j++) {
+					$data['frs'][db_result($res, $j, 'package_id')] = $v;
 				}
 			}
 		}
 
-		return $this->create($name,$data,false);
+		return $this->create($name, $data, false);
 	}
 
 	/**
