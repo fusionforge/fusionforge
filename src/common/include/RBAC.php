@@ -1117,40 +1117,40 @@ abstract class RoleExplicit extends BaseRole implements PFO_RoleExplicit {
 	public function removeUsers($users) {
 		global $SYS;
 
-		$ids = array () ;
+		$ids = array();
 		foreach ($users as $user) {
-			$ids[] = $user->getID() ;
+			$ids[] = $user->getID();
 		}
 
-		$res = db_query_params ('DELETE FROM pfo_user_role WHERE user_id=ANY($1) AND role_id=$2',
-					array (db_int_array_to_any_clause($ids), $this->getID())) ;
+		$res = db_query_params('DELETE FROM pfo_user_role WHERE user_id = ANY($1) AND role_id = $2',
+					array(db_int_array_to_any_clause($ids), $this->getID()));
 
 		foreach ($this->getLinkedProjects() as $p) {
 			foreach ($ids as $uid) {
-				$SYS->sysGroupCheckUser($p->getID(),$uid) ;
+				$SYS->sysGroupCheckUser($p->getID(), $uid);
 			}
 		}
 
-		return true ;
+		return true;
 	}
 
 	public function removeUser($user) {
-		if(!$this->removeUsers(array($user))){
+		if (!$this->removeUsers(array($user))) {
 			return false;
 		}
 		$hook_params['user'] = $user;
 		$hook_params['role'] = $this;
-		plugin_hook ("role_removeuser", $hook_params);
+		plugin_hook("role_removeuser", $hook_params);
 
 		return true;
 	}
 
 	public function getUsers() {
 		$result = array();
-		$res = db_query_params ('SELECT user_id FROM pfo_user_role WHERE role_id=$1',
-					array ($this->getID())) ;
+		$res = db_query_params('SELECT user_id FROM pfo_user_role WHERE role_id=$1',
+					array($this->getID()));
 		while ($arr = db_fetch_array($res)) {
-			$result[] = user_get_object ($arr['user_id']) ;
+			$result[] = user_get_object($arr['user_id']);
 		}
 
 		return $result;
@@ -1181,11 +1181,11 @@ class RoleAnonymous extends BaseRole implements PFO_RoleAnonymous {
 	private $_role_id ;
 	public static function getInstance() {
 		if (isset(self::$_instance)) {
-			return self::$_instance ;
+			return self::$_instance;
 		}
 
-		$c = __CLASS__ ;
-		self::$_instance = new $c ;
+		$c = __CLASS__;
+		self::$_instance = new $c;
 
 		 /* drop vote rights from RoleAnonymous */
 		 // why ?????
@@ -1200,39 +1200,39 @@ class RoleAnonymous extends BaseRole implements PFO_RoleAnonymous {
 			self::$_instance->role_values[$x] = $y;
 		}
 
-		$res = db_query_params ('SELECT r.role_id FROM pfo_role r, pfo_role_class c WHERE r.role_class = c.class_id AND c.class_name = $1',
-					array ('PFO_RoleAnonymous')) ;
+		$res = db_query_params('SELECT r.role_id FROM pfo_role r, pfo_role_class c WHERE r.role_class = c.class_id AND c.class_name = $1',
+					array('PFO_RoleAnonymous')) ;
 		if (!$res || !db_numrows($res)) {
-			throw new Exception ("No PFO_RoleAnonymous role in the database") ;
+			throw new Exception(_('No PFO_RoleAnonymous role in the database'));
 		}
 		self::$_instance->_role_id = db_result ($res, 0, 'role_id') ;
 
 		$hook_params = array ();
 		$hook_params['role'] =& self::$_instance;
-		plugin_hook ("role_get", $hook_params);
+		plugin_hook ('role_get', $hook_params);
 
-		self::$_instance->fetchData (self::$_instance->_role_id) ;
+		self::$_instance->fetchData(self::$_instance->_role_id);
 
-		return self::$_instance ;
+		return self::$_instance;
 	}
 
 	public function getID () {
-		return $this->_role_id ;
+		return $this->_role_id;
 	}
 	public function isPublic () {
 		return true ;
 	}
 	public function setPublic ($flag) {
-		throw new Exception ("Can't setPublic() on RoleAnonymous") ;
+		throw new Exception(_('Cannot setPublic() on RoleAnonymous'));
 	}
 	public function getHomeProject () {
 		return NULL ;
 	}
 	public function getName () {
-		return _('Anonymous/not logged in') ;
+		return _('Anonymous/not logged in');
 	}
 	public function setName ($name) {
-		throw new Exception ("Can't setName() on RoleAnonymous") ;
+		throw new Exception(_('Cannot setName() on RoleAnonymous'));
 	}
 }
 
@@ -1242,54 +1242,54 @@ class RoleLoggedIn extends BaseRole implements PFO_RoleLoggedin {
 	private $_role_id ;
 	public static function getInstance() {
 		if (isset(self::$_instance)) {
-			return self::$_instance ;
+			return self::$_instance;
 		}
 
-		$c = __CLASS__ ;
-		self::$_instance = new $c ;
+		$c = __CLASS__;
+		self::$_instance = new $c;
 
-		$res = db_query_params ('SELECT r.role_id FROM pfo_role r, pfo_role_class c WHERE r.role_class = c.class_id AND c.class_name = $1',
-					array ('PFO_RoleLoggedIn')) ;
+		$res = db_query_params('SELECT r.role_id FROM pfo_role r, pfo_role_class c WHERE r.role_class = c.class_id AND c.class_name = $1',
+					array ('PFO_RoleLoggedIn'));
 		if (!$res || !db_numrows($res)) {
-			throw new Exception ("No PFO_RoleLoggedIn role in the database") ;
+			throw new Exception(_('No PFO_RoleLoggedIn role in the database'));
 		}
-		self::$_instance->_role_id = db_result ($res, 0, 'role_id') ;
+		self::$_instance->_role_id = db_result ($res, 0, 'role_id');
 
 		$hook_params = array ();
 		$hook_params['role'] =& self::$_instance;
-		plugin_hook ("role_get", $hook_params);
+		plugin_hook ('role_get', $hook_params);
 
-		self::$_instance->fetchData (self::$_instance->_role_id) ;
+		self::$_instance->fetchData (self::$_instance->_role_id);
 
-		return self::$_instance ;
+		return self::$_instance;
 	}
 
-	public function getID () {
-		return $this->_role_id ;
+	public function getID() {
+		return $this->_role_id;
 	}
-	public function isPublic () {
-		return true ;
+	public function isPublic() {
+		return true;
 	}
 	public function setPublic ($flag) {
-		throw new Exception ("Can't setPublic() on RoleLoggedIn") ;
+		throw new Exception(_('Cannot setPublic() on RoleLoggedIn'));
 	}
-	public function getHomeProject () {
-		return NULL ;
+	public function getHomeProject() {
+		return NULL;
 	}
-	public function getName () {
-		return _('Any user logged in') ;
+	public function getName() {
+		return _('Any user logged in');
 	}
-	public function setName ($name) {
-		throw new Exception ("Can't setName() on RoleLoggedIn") ;
+	public function setName($name) {
+		throw new Exception(_('Cannot setName() on RoleLoggedIn'));
 	}
 }
 
 abstract class RoleUnion extends BaseRole implements PFO_RoleUnion {
-	public function addRole ($role) {
-		throw new Exception ("Not implemented") ;
+	public function addRole($role) {
+		throw new Exception(_('Not implemented'));
 	}
-	public function removeRole ($role) {
-		throw new Exception ("Not implemented") ;
+	public function removeRole($role) {
+		throw new Exception(_('Not implemented'));
 	}
 }
 
@@ -1298,39 +1298,39 @@ abstract class RoleUnion extends BaseRole implements PFO_RoleUnion {
  *
  */
 class RoleComparator {
-	var $criterion = 'composite' ;
-	var $reference_project = NULL ;
+	var $criterion = 'composite';
+	var $reference_project = NULL;
 
 	function Compare ($a, $b) {
 		switch ($this->criterion) {
 		case 'name':
-			return strcoll ($a->getName(), $b->getName()) ;
+			return strcoll ($a->getName(), $b->getName());
 			break ;
 		case 'id':
-			$aid = $a->getID() ;
-			$bid = $b->getID() ;
+			$aid = $a->getID();
+			$bid = $b->getID();
 			if ($a == $b) {
 				return 0;
 			}
 			return ($a < $b) ? -1 : 1;
-			break ;
+			break;
 		case 'composite':
 		default:
 			if ($this->reference_project == NULL) {
-				return $this->CompareNoRef ($a, $b) ;
+				return $this->CompareNoRef ($a, $b);
 			}
-			$rpid = $this->reference_project->getID () ;
-			$ap = $a->getHomeProject() ;
-			$bp = $b->getHomeProject() ;
-			$a_is_local = ($ap != NULL && $ap->getID() == $rpid) ; // Local
-			$b_is_local = ($bp != NULL && $bp->getID() == $rpid) ;
+			$rpid = $this->reference_project->getID();
+			$ap = $a->getHomeProject();
+			$bp = $b->getHomeProject();
+			$a_is_local = ($ap != NULL && $ap->getID() == $rpid); // Local
+			$b_is_local = ($bp != NULL && $bp->getID() == $rpid);
 
 			if ($a_is_local && !$b_is_local) {
-				return -1 ;
+				return -1;
 			} elseif (!$a_is_local && $b_is_local) {
-				return 1 ;
+				return 1;
 			}
-			return $this->CompareNoRef ($a, $b) ;
+			return $this->CompareNoRef ($a, $b);
 		}
 	}
 
