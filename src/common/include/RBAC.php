@@ -962,10 +962,10 @@ abstract class BaseRole extends FFError {
 				$this->normalizePermsForSection ($new_pa, $section, $p->getID()) ;
 			}
 		}
-		$this->normalizePermsForSection ($new_pa, 'forge_admin', -1) ;
-		$this->normalizePermsForSection ($new_pa, 'approve_projects', -1) ;
-		$this->normalizePermsForSection ($new_pa, 'approve_news', -1) ;
-		$this->normalizePermsForSection ($new_pa, 'forge_stats', -1) ;
+		$this->normalizePermsForSection($new_pa, 'forge_admin', -1);
+		$this->normalizePermsForSection($new_pa, 'approve_projects', -1);
+		$this->normalizePermsForSection($new_pa, 'approve_news', -1);
+		$this->normalizePermsForSection($new_pa, 'forge_stats', -1);
 
 		$hook_params = array ();
 		$hook_params['role'] =& $this;
@@ -973,11 +973,13 @@ abstract class BaseRole extends FFError {
 		plugin_hook ("role_normalize", $hook_params);
 
 		// ...tracker-related settings
-		$new_pa['tracker'] = array () ;
+		$new_pa['tracker'] = array();
 		// Direct query to avoid querying each project - especially for global roles
-		foreach ($projects as $p)
+		$project_ids = array();
+		foreach ($projects as $p) {
 			$project_ids[] = $p->getID();
-		$res = db_query_params('SELECT group_artifact_id FROM artifact_group_list JOIN groups USING (group_id) WHERE use_tracker=1 AND group_id=ANY($1)',
+		}
+		$res = db_query_params('SELECT group_artifact_id FROM artifact_group_list JOIN groups USING (group_id) WHERE use_tracker = 1 AND group_id = ANY($1)',
 				       array(db_int_array_to_any_clause($project_ids)));
 		while ($row = db_fetch_array($res)) {
 			$tid = $row['group_artifact_id'];
@@ -1051,7 +1053,7 @@ abstract class BaseRole extends FFError {
 			}
 		}
 		// Save
-		$this->update ($this->getName(), $new_pa, false, false) ;
+		$this->update($this->getName(), $new_pa, false, false);
 		return true;
 	}
 }
@@ -1066,7 +1068,7 @@ abstract class RoleExplicit extends BaseRole implements PFO_RoleExplicit {
 	public function addUsers($users) {
 		global $SYS;
 
-		$ids = array () ;
+		$ids = array();
 		foreach ($users as $user) {
 			$ids[] = $user->getID();
 		}
@@ -1078,14 +1080,13 @@ abstract class RoleExplicit extends BaseRole implements PFO_RoleExplicit {
 			return false;
 		}
 		while ($arr = db_fetch_array($res)) {
-			$already_there[] = $arr['user_id'] ;
+			$already_there[] = $arr['user_id'];
 		}
 
 		foreach ($ids as $id) {
-			if (!in_array ($id, $already_there)) {
-				$res = db_query_params ('INSERT INTO pfo_user_role (user_id, role_id) VALUES ($1, $2)',
-							array ($id,
-							       $this->getID())) ;
+			if (!in_array($id, $already_there)) {
+				$res = db_query_params('INSERT INTO pfo_user_role (user_id, role_id) VALUES ($1, $2)',
+							array ($id, $this->getID()));
 				if (!$res) {
 					return false;
 				}
@@ -1216,22 +1217,22 @@ class RoleAnonymous extends BaseRole implements PFO_RoleAnonymous {
 		return self::$_instance;
 	}
 
-	public function getID () {
+	public function getID() {
 		return $this->_role_id;
 	}
-	public function isPublic () {
+	public function isPublic() {
 		return true ;
 	}
-	public function setPublic ($flag) {
+	public function setPublic($flag) {
 		throw new Exception(_('Cannot setPublic() on RoleAnonymous'));
 	}
-	public function getHomeProject () {
+	public function getHomeProject() {
 		return NULL ;
 	}
-	public function getName () {
+	public function getName() {
 		return _('Anonymous/not logged in');
 	}
-	public function setName ($name) {
+	public function setName($name) {
 		throw new Exception(_('Cannot setName() on RoleAnonymous'));
 	}
 }
