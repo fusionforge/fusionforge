@@ -2186,14 +2186,17 @@ class Group extends FFError {
 		//
 		$add_u = user_get_object($user_id);
 		$found = false;
-		foreach ($this->membersArr as $u) {
-			if ($u->getID() == $add_u->getID()) {
-				$found = true;
-				break;
+		if (is_array($this->membersArr)) {
+			foreach ($this->membersArr as $u) {
+				if ($u->getID() == $add_u->getID()) {
+					$found = true;
+					break;
+				}
+			}
+			if (!$found) {
+				$this->membersArr[] = $add_u;
 			}
 		}
-		if (!$found)
-			$this->membersArr[] = $add_u;
 
 		return true;
 	}
