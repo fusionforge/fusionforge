@@ -27,6 +27,7 @@ require (dirname(__FILE__).'/../common/include/env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'tracker/ArtifactFactory.class.php';
 require_once $gfcommon.'tracker/ArtifactTypeFactory.class.php';
+require_once $gfcommon.'tracker/EffortUnitFactory.class.php';
 require_once $gfcommon.'docman/DocumentReviewFactory.class.php';
 require_once $gfcommon.'include/User.class.php';
 
@@ -369,6 +370,9 @@ class CliActions {
 					$role->userids[] = $user->getID();
 				}
 			}
+			$effortUnitSet = new EffortUnitSet($group, $group->getEffortUnitSet());
+			$unitFactory = new EffortUnitFactory($effortUnitSet);
+			$groupDump['setup']['units_set'] = $unitFactory->getUnitsData();
 			$groupDump['setup']['homepage'] = $group->getWidgetLayoutConfig();
 			if ($group->usesDocman()) {
 				$groupDump['docman'] = $this->docmanDump($group_id, 'return');
@@ -897,6 +901,9 @@ class CliActions {
 		$at = artifactType_get_object($atid);
 		if ($at && is_object($at) && !$at->isError()) {
 			$trackerDump['setup'] = $at->getSettings();
+			$effortUnitSet = new EffortUnitSet($at, $at->getEffortUnitSet());
+			$unitFactory = new EffortUnitFactory($effortUnitSet);
+			$trackerDump['setup']['units_set'] = $unitFactory->getUnitsData();
 			$af = new ArtifactFactory($at);
 			if ($af && is_object($af) && !$at->isError()) {
 				$af->setup(0, '', '', 0, 'overwrite', false, false, array(), false);
