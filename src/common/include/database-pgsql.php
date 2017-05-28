@@ -457,7 +457,7 @@ function db_begin($dbserver = NULL) {
 	// programmatical transaction
 	$_sys_db_transaction_level++;
 	if ($_sys_db_transaction_level == 1) {
-		return db_query_params("BEGIN WORK", array(), -1, 0, $dbserver);
+		return db_query_params('BEGIN WORK', array(), -1, 0, $dbserver);
 	}
 
 	return true;
@@ -484,7 +484,7 @@ function db_commit($dbserver = NULL) {
 	// programmatical transaction ends
 	$_sys_db_transaction_level--;
 	if ($_sys_db_transaction_level == 0) {
-		return db_query_params("COMMIT", array(), -1, 0, $dbserver);
+		return db_query_params('COMMIT', array(), -1, 0, $dbserver);
 	}
 
 	return true;
@@ -511,7 +511,7 @@ function db_rollback($dbserver = NULL) {
 	// programmatical transaction ends
 	$_sys_db_transaction_level--;
 	if ($_sys_db_transaction_level == 0) {
-		return db_query_params("ROLLBACK", array(), -1, 0, $dbserver);
+		return db_query_params('ROLLBACK', array(), -1, 0, $dbserver);
 	}
 
 	return true;
@@ -557,8 +557,8 @@ function db_result($qhandle, $row, $field) {
  * @param	int	$row		Row number.
  * @return	boolean	True on success
  */
-function db_result_seek($qhandle,$row) {
-	return @pg_result_seek($qhandle,$row);
+function db_result_seek($qhandle, $row) {
+	return @pg_result_seek($qhandle, $row);
 }
 
 /**
