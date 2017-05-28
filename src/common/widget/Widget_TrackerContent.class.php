@@ -618,7 +618,7 @@ EOS;
 					} else {
 						$cellContent = '&nbsp;';
 					}
-					$cells[] = array($cellContent, 'width' => $extrafieldID[$keys[0]][0].'%', 'style' => 'vertical-align: top;');
+					$cells[] = array($cellContent, 'style' => 'vertical-align: top; width: '.$extrafieldID[$keys[0]][0].'%');
 				}
 				$return .= $HTML->multiTableRow(array(), $cells);
 				$return .= $HTML->listTableBottom();

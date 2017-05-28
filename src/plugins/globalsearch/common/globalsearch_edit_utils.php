@@ -59,7 +59,7 @@ function globalsearch_admin_table_postadd () {
 	}
 
         if (db_query_params ('INSERT INTO plugin_globalsearch_assoc_site (title, link, onlysw, enabled, rank)
-VALUES ($1, $2, $3, $4, $5)',
+				VALUES ($1, $2, $3, $4, $5)',
 			     array ($new_title,
 				    $new_link,
 				    $new_onlysw,
@@ -204,7 +204,7 @@ function globalsearch_admin_table_show () {
 		echo $HTML->multiTableRow(array(),$cell_data, TRUE);
 
 		echo '<tr>';
-		echo '<td width="5%"></td>';
+		echo '<td style="width:5%;"></td>';
 		echo '<td><strong>'._('Forge ID').'</strong></td>';
 		echo '<td><strong>'._('Title').'</strong></td>';
 		echo '<td><strong>'._('Link').'</strong></td>';

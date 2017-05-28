@@ -321,10 +321,9 @@ control over it to the project's administrator.");
 	function getBrowserLinkBlock($project) {
 		$b = html_e('h2', array(), _('Git Repository Browser'));
 		$b .= html_e('p', array(), _("Browsing the Git tree gives you a view into the current status"
-									 . " of this project's code. You may also view the complete"
-									 . " history of any file in the repository."));
-		$b .= html_e('p', array(), '['.util_make_link('/scm/browser.php?group_id='.$project->getID(),
-													  _('Browse main git repository')).']');
+						. " of this project's code. You may also view the complete"
+						. " history of any file in the repository."));
+		$b .= html_e('p', array(), '['.util_make_link('/scm/browser.php?group_id='.$project->getID(), _('Browse main git repository')).']');
 
 		# Extra repos
 		$result = db_query_params('SELECT repo_name FROM scm_secondary_repos WHERE group_id=$1 AND next_action = $2 AND plugin_id=$3 ORDER BY repo_name',

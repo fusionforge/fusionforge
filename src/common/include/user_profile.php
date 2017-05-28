@@ -55,7 +55,7 @@ function user_personal_information($user, $compact = false, $title = false) {
 
 	$html .= '<tr>';
 	if($user_logo) {
-		$html .= '<td width="150">'. $user_logo .'</td>';
+		$html .= '<td style="width: 150px;">'. $user_logo .'</td>';
 	}
 	else {
 		$html .= '<td></td>';

@@ -3,7 +3,7 @@
  *
  * Previous Copyright to FusionForge Team
  * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
- * Copyright 2016, Franck Villaume - TrivialDev
+ * Copyright 2016-2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -169,7 +169,7 @@ function drawBoardProgress() {
 	}
 
 	var html = '<table>';
-	html += '<tr><td width="' + parseInt( 100 / aPhases.length )  + '%" style="padding: 0;">' + gMessages.progressByTasks + ':</td><td style="padding: 0;">';
+	html += '<tr><td style="padding: 0; width: '+ parseInt( 100 / aPhases.length ) +'%">' + gMessages.progressByTasks + ':</td><td style="padding: 0;">';
 
 	var buf = 0;
 	for( var j=start; j<aPhases.length; j++) {
@@ -198,7 +198,7 @@ function drawBoardProgress() {
 		var wt = parseInt( totalCostCompleted/totalCostEstimated * 100);
 		// show progress by cost
 		html += '<table>';
-		html += '<tr><td width="' + parseInt( 100 / aPhases.length )  + '%" style="padding: 0;">' + gMessages.progressByCost + ':</td><td style="padding: 0;">';
+		html += '<tr><td style="padding: 0; width: '+ parseInt( 100 / aPhases.length ) +'">' + gMessages.progressByCost + ':</td><td style="padding: 0;">';
 		html += '<div class="agile-board-progress-bar-done" style="width: ' + wt + '%;" title="' + gMessages['completedCost'] + '">' + totalCostCompleted + '</div>';
 		html += '<div class="agile-board-progress-bar-remains" style="width: ' + ( 100 - wt ) + '%;" title="' + gMessages['remainingCost'] + '">' + totalCostRemaining + '</div>';
 		html += '</td></tr><table>';

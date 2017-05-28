@@ -3,7 +3,7 @@
  * FusionForge Darcs plugin
  *
  * Copyright 2009, Roland Mas
- * Copyright 2013-2014,2016, Franck Villaume - TrivialDev
+ * Copyright 2013-2014,2016-2017, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -96,6 +96,7 @@ over it to the project's administrator.");
 	}
 
 	function getInstructionForDarcs($project, $rw) {
+		global $HTML;
 		$repo_names = $this->getRepositories($project);
 		if (count($repo_names) > 0) {
 			$default_repo = "REPO";
@@ -113,22 +114,17 @@ over it to the project's administrator.");
 				$b .= '<p>'._('where REPO can be: ').implode(_(', '), $repo_names).'</p>';
 			}
 		} else if (is_dir($this->getRootRepositories($project))) {
-			$b = '<p><em>'._('No repositories defined.').'</em></p>';
+			$b = $HTML->information(_('No repositories defined.'));
 		} else {
-			$b = '<p><em>'._('Repository not yet created, wait an hour.').'</em></p>';
+			$b = $HTML->information(_('Repository not yet created, wait an hour.'));
 		}
 		return $b;
 	}
 
 	function getInstructionsForAnon($project) {
-		$b = '<h2>';
-		$b .=  _('Anonymous Darcs Access');
-		$b .= '</h2>';
-		$b .= '<p>';
-		$b .=  _('This project\'s Darcs repository can be checked out through anonymous access with the following command.');
-		$b .= '</p>';
+		$b = html_e('h2', array(), _('Anonymous Access'));
+		$b .= html_e('p', array(), _("This project's Darcs repository can be checked out through anonymous access with the following command."));
 		$b .= $this->getInstructionForDarcs($project, false);
-		$b .= '</p>';
 		return $b;
 	}
 
@@ -153,32 +149,25 @@ over it to the project's administrator.");
 		$b = '';
 		$filename = $project->getUnixName().'-scm-latest.tar'.util_get_compressed_file_extension();
 		if (file_exists(forge_get_config('scm_snapshots_path').'/'.$filename)) {
-			$b .= '<p>[';
-			$b .= util_make_link("/snapshots.php?group_id=".$project->getID(),
-					      _('Download the nightly snapshot')
-				);
-			$b .= ']</p>';
+			$b .= html_e('p', array(), '['.util_make_link("/snapshots.php?group_id=".$project->getID(), _('Download the nightly snapshot')).']');
 		}
 		return $b;
 	}
 
 	function getBrowserLinkBlock($project) {
+		global $HTML;
 		$b = html_e('h2', array(), _('Darcs Repository Browser'));
-		$b .= '<p>';
-		$b .= sprintf(_("Browsing the %s tree gives you a view into the current status of this project's code."), 'Darcs');
-		$b .= ' ';
-		$b .= _('You may also view the complete histories of any file in the repository.');
-		$b .= '</p>';
+		$b .= html_e('p', array(), _("Browsing the Darcs tree gives you a view into the current status"
+						. " of this project's code. You may also view the complete"
+						. " history of any file in the repository."));
 		$repo_names = $this->getRepositories($project);
 		if (count($repo_names) > 0) {
 			foreach ($repo_names as $repo_name) {
-				$b .= '<p>[';
-				$b .= util_make_link("/scm/browser.php?group_id=".$project->getID()."&repo_name=".$repo_name,
-									sprintf(_('Browse %s Repository'), 'Darcs') .' ' . $repo_name);
-				$b .= ']</p>';
+				$b .= html_e('p', array(), '['.util_make_link('/scm/browser.php?group_id='.$project->getID()."&repo_name=".$repo_name,
+									_('Browse Darcs repository').' '.$repo_name).']');
 			}
 		} else {
-			$b .= '<p>'._('No repositories to browse').'</p>';
+			$b .= $HTML->information(_('No repositories to browse'));
 		}
 		return $b;
 	}
@@ -192,30 +181,30 @@ over it to the project's administrator.");
 
 		if (db_numrows($result) > 0) {
 			$tableHeaders = array(
-				_('Name'),
-				_('Adds'),
-				_('Updates')
-				);
-			$b .= $HTML->listTableTop($tableHeaders);
+					_('Name'),
+					_('Adds'),
+					_('Updates')
+			);
+			$b .= $HTML->listTableTop($tableHeaders, array(), '', 'repo-history');
 
 			$i = 0;
 			$total = array('adds' => 0, 'commits' => 0);
 
-			while($data = db_fetch_array($result)) {
-				$b .= '<tr>';
-				$b .= '<td width="50%">';
-				$b .= util_make_link_u($data['user_name'], $data['user_id'], $data['realname']);
-				$b .= '</td><td width="25%" align="right">'.$data['adds']. '</td>'.
-					'<td width="25%" align="right">'.$data['commits'].'</td></tr>';
+			while ($data = db_fetch_array($result)) {
+				$cells = array();
+				$cells[] = array(util_display_user($data['user_name'], $data['user_id'], $data['realname']), 'class' => 'halfwidth');
+				$cells[] = array($data['adds'], 'class' => 'onequarterwidth align-right');
+				$cells[] = array($data['commits'], 'class' => 'onequarterwidth align-right');
+				$b .= $HTML->multiTableRow(array(), $cells);
 				$total['adds'] += $data['adds'];
 				$total['commits'] += $data['commits'];
 				$i++;
 			}
-			$b .= '<tr>';
-			$b .= '<td width="50%"><strong>'._('Total').':</strong></td>'.
-				'<td width="25%" align="right"><strong>'.$total['adds']. '</strong></td>'.
-				'<td width="25%" align="right"><strong>'.$total['commits'].'</strong></td>';
-			$b .= '</tr>';
+			$cells = array();
+			$cells[] = array(html_e('strong', array(), _('Total')._(':')), 'class' => 'halfwidth');
+			$cells[] = array($total['adds'], 'class' => 'onequarterwidth align-right');
+			$cells[] = array($total['commits'], 'class' => 'onequarterwidth align-right');
+			$b .= $HTML->multiTableRow(array(), $cells);
 			$b .= $HTML->listTableBottom();
 		} else {
 			$b .= $HTML->information(_('No history yet'));
@@ -592,11 +581,11 @@ over it to the project's administrator.");
 				while ($res = db_fetch_array($result)) {
 					array_push($nm, $res['repo_name']);
 				}
-				print '<p><strong>'._('Repository to be created: ').'</strong>'.
+				print '<p><strong>'._('Repository to be created')._(': ').'</strong>'.
 					implode(_(', '), $nm) . '</p>';
 			}
 
-			print '<p><strong>'._('Create new repository:').'</strong></p>';
+			print '<p><strong>'._('Create new repository')._(': ').'</strong></p>';
 			print '<p>'._('Repository name')._(': ');
 			print '<input type="string" name="scm_create_repo_name" size=16 maxlength=128 /></p>';
 			print '<p>'._('Clone')._(': ').
