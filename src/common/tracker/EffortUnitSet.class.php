@@ -59,7 +59,7 @@ class EffortUnitSet extends FFError {
 	 *
 	 * @param	Object	$Object Null, group, tracker object to which this EffortUnitSet is associated
 	 */
-	function __construct(&$Object=null, $unit_set_id=false, $arr=false) {
+	function __construct(&$Object = null, $unit_set_id = false, $arr = false) {
 		parent::__construct();
 		$this->Object = $Object;
 		if (!$Object) {
@@ -419,7 +419,7 @@ class EffortUnitSet extends FFError {
  *
  * @return	array	list of EffortUnitSets.
  */
-function getAvailableEffortUnitSets(&$Object=null) {
+function getAvailableEffortUnitSets(&$Object = null) {
 	if (!$Object) {
 		$class ='';
 	} else {
@@ -486,9 +486,9 @@ function getAvailableEffortUnitSets(&$Object=null) {
  *
  * @return	integer	EffortUnitSet ID.
  */
-function getEffortUnitSetForLevel(&$Object,$level) {
+function getEffortUnitSetForLevel(&$Object, $level) {
 	if (!$Object) {
-		$class ='';
+		$class = '';
 	} else {
 		$class = get_class($Object);
 	}
@@ -519,59 +519,44 @@ function getEffortUnitSetForLevel(&$Object,$level) {
 			}
 			$group_id = $Object->getID();
 			$group_name = $Object->getPublicName();
-			if ($level<EFFORTUNITSET_PROJECT_LEVEL) {
+			if ($level < EFFORTUNITSET_PROJECT_LEVEL) {
 				return false;
 			}
 			break;
 		case '':
-			if ($level<EFFORTUNITSET_FORGE_LEVEL) {
+			if ($level < EFFORTUNITSET_FORGE_LEVEL) {
 				return false;
 			}
 			break;
 	}
 	switch($level) {
 		case EFFORTUNITSET_TRACKER_LEVEL:
-			$res = db_query_params ('SELECT unit_set_id FROM effort_unit_set WHERE group_id=$1 AND group_artifact_id=$2 AND level=$3',
+			$res = db_query_params('SELECT unit_set_id FROM effort_unit_set WHERE group_id = $1 AND group_artifact_id = $2 AND level = $3',
 			array($group_id, $atid, EFFORTUNITSET_TRACKER_LEVEL));
 			if (!$res) {
 				$this->setError(sprintf(_('Error getting Tracker “%s” level Effort Unit Set'),$at_name), db_error());
 				return false;
 			}
-			if (db_numrows($res)>0) {
-				$row = db_fetch_array($res);
-				return $row['unit_set_id'];
-			} else {
-				return false;
-			}
 			break;
 		case EFFORTUNITSET_PROJECT_LEVEL:
-			$res = db_query_params ('SELECT unit_set_id FROM effort_unit_set WHERE group_id=$1 AND group_artifact_id IS NULL AND level=$2',
+			$res = db_query_params('SELECT unit_set_id FROM effort_unit_set WHERE group_id = $1 AND group_artifact_id IS NULL AND level = $2',
 			array($group_id, EFFORTUNITSET_PROJECT_LEVEL));
 			if (!$res) {
 				$this->setError(sprintf(_('Error getting Project “%s” level Effort Unit Set'),$group_name), db_error());
 				return false;
 			}
-			if (db_numrows($res)>0) {
-				$row = db_fetch_array($res);
-				return $row['unit_set_id'];
-			} else {
-				return false;
-			}
 			break;
 		case EFFORTUNITSET_FORGE_LEVEL:
-			$res = db_query_params ('SELECT unit_set_id FROM effort_unit_set WHERE group_id IS NULL AND group_artifact_id IS NULL AND level=$1',
+			$res = db_query_params('SELECT unit_set_id FROM effort_unit_set WHERE group_id IS NULL AND group_artifact_id IS NULL AND level = $1',
 			array(EFFORTUNITSET_FORGE_LEVEL));
 			if (!$res) {
 				$this->setError(_('Error getting Forge level Effort Unit Set'), db_error());
 				return false;
 			}
-			if (db_numrows($res)>0) {
-				$row = db_fetch_array($res);
-				return $row['unit_set_id'];
-			} else {
-				return false;
-			}
 			break;
+	}
+	if (db_numrows($res) > 0) {
+		return db_result($res, 0, 'unit_set_id');
 	}
 	return false;
 }
