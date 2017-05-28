@@ -43,7 +43,7 @@ if (!$atid && !$group_id) {
 	// Forge level
 	session_require_global_perm('forge_admin');
 	$title = _('Effort Units for the Forge');
-	$headerArr = array('title'=>$title);
+	$headerArr = array('title' => $title);
 	site_admin_header($headerArr);
 	// hardcode
 	$unitSetId = 1;
@@ -64,7 +64,7 @@ if (!$atid && !$group_id) {
 
 
 	$title = _('Effort Units for project').' '.$group->getPublicName();
-	$headerArr = array('title'=>$title, 'group'=>$group->getID());
+	$headerArr = array('title' => $title, 'group' => $group->getID());
 
 	project_admin_header($headerArr);
 	$object = $group;
@@ -81,7 +81,7 @@ if (!$atid && !$group_id) {
 	}
 	$ath = new ArtifactTypeHtml($group,$atid);
 	if (!$ath || !is_object($ath)) {
-		exit_error(_('ArtifactType could not be created'),'tracker');
+		exit_error(_('ArtifactType could not be created'), 'tracker');
 	}
 	if ($ath->isError()) {
 		exit_error($ath->getErrorMessage(),'tracker');
@@ -96,7 +96,7 @@ if (!$atid && !$group_id) {
 }
 $effortUnitSet = new EffortUnitSet($object, $unitSetId);
 
-switch (getStringFromRequest('function','')) {
+switch (getStringFromRequest('function', '')) {
 	case 'add':
 		add_unit($effortUnitSet);
 		break;

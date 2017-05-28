@@ -97,7 +97,7 @@ class EffortUnitFactory extends FFError {
 			return false;
 		}
 		foreach ($unitsArr as $unitArr) {
-			$unit = new EffortUnit($this->EffortUnitSet, true, $unitArr);
+			$unit = new EffortUnit($this->EffortUnitSet, $unitArr['unit_id'], $unitArr);
 			if (!$unit && $unit->isError()) {
 				$this->setError($unit->getErrorMessage());
 				return false;
@@ -121,7 +121,7 @@ class EffortUnitFactory extends FFError {
 			return false;
 		}
 		foreach ($unitsArr as $unitArr) {
-			$result[$unitArr['unit_id']]=$unitArr['unit_name'];
+			$result[$unitArr['unit_id']] = $unitArr['unit_name'];
 		}
 		return $result ;
 	}

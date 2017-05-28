@@ -63,7 +63,7 @@ class EffortUnitSet extends FFError {
 		parent::__construct();
 		$this->Object = $Object;
 		if (!$Object) {
-			$class ='';
+			$class = '';
 		} else {
 			$class = get_class($Object);
 		}
@@ -190,7 +190,7 @@ class EffortUnitSet extends FFError {
 	 * @param	EffortUnitSet	$from_unit_set Effort Unit Set to be copied
 	 * @return	bool	success or not
 	 */
-	function copy($from_unit_set){
+	function copy($from_unit_set) {
 		db_begin();
 		$unit_set_id = $this->create();
 		if (!$unit_set_id) {
@@ -359,7 +359,7 @@ class EffortUnitSet extends FFError {
 	 *
 	 * @return	boolean	true/false.
 	 */
-	function isEquivalentTo($effortUnitSet){
+	function isEquivalentTo($effortUnitSet) {
 		if ($this->getID() == $effortUnitSet->getID()) {
 			return true;
 		}
@@ -391,7 +391,7 @@ class EffortUnitSet extends FFError {
 	 *
 	 * @return	boolean	true/false.
 	 */
-	function isAutoconvert(){
+	function isAutoconvert() {
 		return ($this->data_array['is_autoconvert']? true : false);
 	}
 
@@ -401,7 +401,7 @@ class EffortUnitSet extends FFError {
 	 * @param	boolean	$is_autoconvert		set if unit is auto convert
 	 * @return	boolean	true/false.
 	 */
-	function update($is_autoconvert){
+	function update($is_autoconvert) {
 		$res = db_query_params ('UPDATE effort_unit_set SET is_autoconvert=$1 WHERE unit_set_id=$2',
 				array (($is_autoconvert?1:0), $this->getID())) ;
 		if (!$res) {

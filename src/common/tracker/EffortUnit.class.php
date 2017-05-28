@@ -66,7 +66,7 @@ class EffortUnit extends FFError {
 				if (db_numrows($res) < 1) {
 					//function in class we extended
 					$this->setError(_('Effort Unit Not Found'));
-					$this->data_array=array();
+					$this->data_array = array();
 					return;
 				} else {
 					//set up an associative array for use by other functions
