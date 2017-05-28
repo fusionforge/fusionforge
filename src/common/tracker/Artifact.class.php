@@ -2211,7 +2211,7 @@ class Artifact extends FFObject {
 
 	function hasChildren() {
 		if (!$this->children) {
-			$children = $this->getChildren();
+			$this->children = $this->getChildren();
 		}
 		$nb = count($this->children);
 		if ($nb>0) {
