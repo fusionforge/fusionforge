@@ -225,8 +225,8 @@ function hide_edit_button(id) {
 	}
 
 	function showChildren() {
-		$result=$this->getChildren();
-		$rows= db_numrows($result);
+		$children = $this->getChildren();
+		$rows= count($children);
 		$return = '';
 		if ($rows > 0){
 			$return = '	<table class="fullwidth">
@@ -234,7 +234,7 @@ function hide_edit_button(id) {
 								<td colspan="2">';
 			$current = '';
 			$end = '';
-			while ($arr = db_fetch_array($result)) {
+			foreach ($children as $arr) {
 				if (forge_check_perm('tracker', $arr['group_artifact_id'], 'read')) {
 					$title = $arr['group_name']._(': ').$arr['name'];
 					if ($title != $current) {

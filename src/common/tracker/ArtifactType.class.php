@@ -1581,6 +1581,18 @@ class ArtifactType extends FFError {
 		$lm = new WidgetLayoutManager();
 		return $lm->getLayout($this->getID(), WidgetLayoutManager::OWNER_TYPE_TRACKER);
 	}
+
+	function getExtraFieldByAlias($alias){
+		$return = false;
+		$efs = $this->getExtraFields();
+		foreach ($efs as $ef) {
+			if ($alias == $ef['alias']) {
+				$return = $ef;
+				break;
+			}
+		}
+		return $return;
+	}
 }
 
 // Local Variables:

@@ -134,9 +134,16 @@ class Artifact extends FFObject {
 	/**
 	 * Database result set of children
 	 *
-	 * @var	result	$children
+	 * @var	array	$children
 	 */
 	var $children;
+
+	/**
+	 * Database result set of parent
+	 *
+	 * @var	integer|boolean	$parent
+	 */
+	var $parent;
 
 	/**
 	 * cached return value of getVotes
@@ -1628,12 +1635,175 @@ class Artifact extends FFObject {
 				}
 			}
 		}
-		unset($this->extra_field_data);
 
-		if ($update)
+		// update parent
+		if ($this->hasParent()) {
+			$parentId = $this->getParent();
+			$parentArtifact = artifact_get_object($parentId);
+			$parentArtifact->updateOnChildChange($changes);
+		}
+
+		// update children
+		if ($this->hasChildren()) {
+			$childrenArray = $this->getChildren();
+
+			foreach ($childrenArray as $childArray) {
+				$childId = $childArray['artifact_id'];
+				$childArtifact = artifact_get_object($childId);
+				$childArtifact->updateOnParentChange($changes);
+			}
+		}
+
+		unset($this->extra_field_data);
+		if ($update) {
 			$this->updateLastModified($importData);
+		}
 
 		return true;
+	}
+
+	function updateOnParentChange($parentChanges) {
+		if ($this->hasParent()) {
+			$return = false;
+			$changes = false;
+
+			$extra_fields = $this->getExtraFieldData();
+			$priority = $this->getPriority();
+			$status_id = $this->getStatusID();
+			$status_id = $this->getArtifactType()->remapStatus($status_id, $extra_fields);
+			$assigned_to = $this->getAssignedTo();
+			$summary = $this->getSummary();
+			$canned_response = 100;
+			$details = "";
+			$artifact_type_id = $this->getArtifactType()->getID();
+			$description = $this->getDetails();
+			$at = $this->getArtifactType();
+			$ef = $at->getExtraFields();
+
+			$parent = $this->getParent();
+			$parentArtifact = artifact_get_object($parent);
+			$parentExtra_fields = $parentArtifact->getExtraFieldData();
+			$parentAt = $parentArtifact->getArtifactType();
+
+			foreach ($extra_fields as $key=>$value) {
+				$distribution_rule = $ef[$key]['distribution_rule'];
+				switch ($distribution_rule) {
+					case ARTIFACT_EXTRAFIELD_DISTRIBUTION_RULE_NO_DISTRIBUTION:
+						break;
+					case ARTIFACT_EXTRAFIELD_DISTRIBUTION_RULE_STATUS_CLOSE_RECURSIVELY:
+						$parentStatusID = $parentArtifact->getStatusID();
+						$parentStatusID = $parentAt->remapStatus($parentStatusID, $parentExtra_fields);
+						if (isset($parentChanges['status']) && $parentStatusID != 1 && $status_id == 1) {
+							$changes = true;
+							if ($parentAt->getID() == $at->getID()) {
+								$status_id = $parentStatusID;
+								if ($at->usesCustomStatuses()) {
+									$extra_fields[$at->getCustomStatusField()] = $parentExtra_fields[$parentAt->getCustomStatusField()];
+									$status_id = $at->remapStatus($status_id, $extra_fields);
+								}
+							} else {
+								if (!$at->usesCustomStatuses()) {
+									$status_id = 2; //closed
+								} else {
+									$parentStatusList = $parentAt->getExtraFieldElements($parentAt->getCustomStatusField());
+									$parentStatusName = $parentStatusList[$parentAt->getCustomStatusField()];
+									$statusList = $at->getExtraFieldElements($at->getCustomStatusField());
+									$found = false;
+									foreach ($statusList as $id->$statusName) {
+										if ($parentStatusName == $statusName) {
+											$found = true;
+											$extra_fields[$at->getCustomStatusField()] = $id;
+											$status_id = 2;
+											break;
+										}
+									}
+									//TODO: status not found
+								}
+							}
+						}
+						break;
+				}
+			}
+			if ($changes) {
+				return $this->update($priority,$status_id,
+						$assigned_to,$summary,$canned_response,$details,$artifact_type_id,
+						$extra_fields, $description);
+			}
+		} else {
+			return true;
+		}
+	}
+
+	function updateOnChildChange($childChanges) {
+		if ($this->hasChildren()) {
+			$return = false;
+			$changes = false;
+
+			$extra_fields = $this->getExtraFieldData();
+			$priority = $this->getPriority();
+			$status_id = $this->getStatusID();
+			$status_id = $this->getArtifactType()->remapStatus($status_id, $extra_fields);
+			$assigned_to = $this->getAssignedTo();
+			$summary = $this->getSummary();
+			$canned_response = 100;
+			$details = "";
+			$artifact_type_id = $this->getArtifactType()->getID();
+			$description = $this->getDetails();
+			$at = $this->getArtifactType();
+			$ef = $at->getExtraFields();
+
+			$children = $this->getChildren();
+
+			foreach ($extra_fields as $key=>$value) {
+				$aggregation_rule = $ef[$key]['aggregation_rule'];
+				$type = $ef[$key]['field_type'];
+				$alias = $ef[$key]['alias'];
+				switch ($aggregation_rule) {
+					case ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_NO_AGGREGATION:
+						break;
+					case ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_SUM:
+						switch ($type) {
+							case ARTIFACT_EXTRAFIELDTYPE_INTEGER:
+								$sum = 0;
+								break;
+						}
+						foreach ($children as $child) {
+							$childArtifact = artifact_get_object($child['artifact_id']);
+							$childExtra_fields = $childArtifact->getExtraFieldData();
+							if ($at->getID() == $child['group_artifact_id']) {
+								// same tracker
+								$childEf_id= $key;
+							} else {
+								$childAt = $childArtifact->getArtifactType();
+								$childEf= $childAt->getExtraFieldByAlias($alias);
+								if ($childEf) {
+									$childEf_id = $child_ef['extra_field_id'];
+								} else {
+									$childEf_id = false;
+								}
+							}
+							if ($childEf_id) {
+								switch ($type) {
+									case ARTIFACT_EXTRAFIELDTYPE_INTEGER:
+										$sum = $sum+$childExtra_fields[$childEf_id];
+										break;
+								}
+							}
+						}
+						$extra_fields[$key]=$sum;
+						$changes = true;
+						break;
+				}
+			}
+
+			if ($changes) {
+				return $this->update($priority,$status_id,
+						$assigned_to,$summary,$canned_response,$details,$artifact_type_id,
+						$extra_fields, $description);
+			}
+		} else {
+			return true;
+		}
 	}
 
 	/**
@@ -2041,9 +2211,9 @@ class Artifact extends FFObject {
 
 	function hasChildren() {
 		if (!$this->children) {
-			$res = $this->getChildren();
+			$children = $this->getChildren();
 		}
-		$nb = db_numrows($this->children);
+		$nb = count($this->children);
 		if ($nb>0) {
 			return $nb;
 		}
@@ -2051,45 +2221,50 @@ class Artifact extends FFObject {
 	}
 
 	function  getChildren() {
-		$aid = $this->getID();
 		if (!$this->children) {
-			$this->children = db_query_params ('SELECT *
-		FROM artifact_extra_field_list, artifact_extra_field_data, artifact_group_list, artifact, groups
-		WHERE field_type = $1
-		AND artifact_extra_field_list.extra_field_id=artifact_extra_field_data.extra_field_id
-		AND artifact_group_list.group_artifact_id = artifact_extra_field_list.group_artifact_id
-		AND artifact.artifact_id = artifact_extra_field_data.artifact_id
-		AND groups.group_id = artifact_group_list.group_id
-		AND field_data = $2
-		AND artifact.is_deleted = 0
-		ORDER BY artifact_group_list.group_id ASC, name ASC, artifact.artifact_id ASC',
-					array(ARTIFACT_EXTRAFIELDTYPE_PARENT,
-							$aid));
+			$res = db_query_params ('SELECT *
+													FROM artifact_extra_field_list, artifact_extra_field_data, artifact_group_list, artifact, groups
+													WHERE field_type = $1
+													AND artifact_extra_field_list.extra_field_id=artifact_extra_field_data.extra_field_id
+													AND artifact_group_list.group_artifact_id = artifact_extra_field_list.group_artifact_id
+													AND artifact.artifact_id = artifact_extra_field_data.artifact_id
+													AND groups.group_id = artifact_group_list.group_id
+													AND field_data = $2
+													AND artifact.is_deleted = 0
+													ORDER BY artifact_group_list.group_id ASC, name ASC, artifact.artifact_id ASC',
+								array(ARTIFACT_EXTRAFIELDTYPE_PARENT,
+										$this->getID()));
+			while ($row = db_fetch_array($res)) {
+				$this->children[] = $row;
+			}
+			db_free_result($res);
 		}
 		return $this->children;
 	}
 
 	function hasParent() {
-		return ($this->getParent?true:false);
+		return ($this->getParent()?true:false);
 	}
 
 	function  getParent() {
-		$res = db_query_params ('SELECT field_data FROM
-									artifact_extra_field_data
-									NATURAL INNER JOIN artifact_extra_field_list
-								WHERE
-									field_type = $1
-										AND artifact_id = $2',
-					array(ARTIFACT_EXTRAFIELDTYPE_PARENT,
-							$this->getID()));
-		if (db_numrows($res) == 0) {
-			$return = false;
-		} else {
-			$data = db_fetch_array($res);
-			db_free_result($res);
-			$return = $data['field_data'];
+		if (!isset($this->parent)) {
+			$res = db_query_params ('SELECT field_data FROM
+										artifact_extra_field_data
+										NATURAL INNER JOIN artifact_extra_field_list
+									WHERE
+										field_type = $1
+											AND artifact_id = $2',
+						array(ARTIFACT_EXTRAFIELDTYPE_PARENT,
+								$this->getID()));
+			if (db_numrows($res) == 0) {
+				$this->parent= false;
+			} else {
+				$data = db_fetch_array($res);
+				db_free_result($res);
+				$this->parent= $data['field_data'];
+			}
 		}
-		return $return;
+		return $this->parent;
 	}
 
 
