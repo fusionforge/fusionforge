@@ -509,9 +509,11 @@ class CliActions {
 					foreach ($stream['setup']['membersArr'] as $member) {
 						$muid = (int)$this->getMappingId($member['data_array']['user_id'], 'user');
 						if (!$new_group->addUser($muid, $default_role_id)) {
-							echo _('Unable to add user to group with TOBEDELETED role')."\n";
+							echo sprintf(_('Unable to add user to group with %s role'), 'TOBEDELETED')."\n";
 							db_rollback();
 							return false;
+						} else {
+							echo sprintf(_('User %d added to group with role'), $muid)._(': ').'TOBEDELETED'."\n";
 						}
 					}
 				}
@@ -519,34 +521,76 @@ class CliActions {
 				if (forge_get_config('use_tracker')) {
 					if (isset($stream['setup']['data_array']['use_tracker'])) {
 						$new_group->setUseTracker($stream['setup']['data_array']['use_tracker']);
-					}
-					if (isset($stream['trackers']) && is_array($stream['trackers'])) {
-						foreach ($stream['trackers'] as $tracker) {
-							$filename = 'trackerDump-'.$tracker['setup']['group_artifact_id'].'.'.$format;
-							$this->createSubfile($filename, $tracker, $format);
-							if (!$this->trackerImport($filename, $format)) {
-								echo _('Unable to inject tracker')."\n";
-								db_rollback();
-								return false;
+						if ($new_group->usesTracker() && isset($stream['trackers']) && is_array($stream['trackers'])) {
+							foreach ($stream['trackers'] as $tracker) {
+								$filename = 'trackerDump-'.$tracker['setup']['group_artifact_id'].'.'.$format;
+								$this->createSubfile($filename, $tracker, $format);
+								if (!$this->trackerImport($filename, $format)) {
+									echo _('Unable to inject tracker')."\n";
+									db_rollback();
+									return false;
+								}
+								@unlink($filename);
 							}
-							@unlink($filename);
 						}
+					} else {
+						$new_group->setUseTracker(false);
 					}
 				}
 				//inject docman if any
 				if (forge_get_config('use_docman')) {
 					if (isset($stream['setup']['data_array']['use_docman'])) {
 						$new_group->setUseDocman($stream['setup']['data_array']['use_docman']);
-					}
-					if (isset($stream['docman'])) {
-						$filename = 'docmanDump-'.$stream['setup']['data_array']['group_id'].'.'.$format;
-						$this->createSubfile($filename, $stream['docman'], $format);
-						if (!$this->docmanImport($filename, $format)) {
-							echo _('Unable to inject docman')."\n";
-							db_rollback();
-							return false;
+						if ($new_group->usesDocman() && isset($stream['docman'])) {
+							$filename = 'docmanDump-'.$stream['setup']['data_array']['group_id'].'.'.$format;
+							$this->createSubfile($filename, $stream['docman'], $format);
+							if (!$this->docmanImport($filename, $format)) {
+								echo _('Unable to inject docman')."\n";
+								db_rollback();
+								return false;
+							}
+							@unlink($filename);
 						}
-						@unlink($filename);
+					} else {
+						$new_group->setUseDocman(false);
+					}
+				}
+				// enable SCM if requested
+				if (forge_get_config('use_scm')) {
+					if (isset($stream['setup']['data_array']['use_scm'])) {
+						$new_group->setUseSCM($stream['setup']['data_array']['use_scm']);
+					} else {
+						$new_group->setUseSCM(false);
+					}
+				}
+				// enable activity if requested
+				if (forge_get_config('use_activity')) {
+					if (isset($stream['setup']['data_array']['use_activity'])) {
+						$new_group->setUseActivity($stream['setup']['data_array']['use_activity']);
+					} else {
+						$new_group->setUseActivity(false);
+					}
+				}
+				//inject FRS if any
+				if (forge_get_config('use_frs')) {
+					if (isset($stream['setup']['data_array']['use_frs'])) {
+						$new_group->setUseFRS($stream['setup']['data_array']['use_frs']);
+						if ($new_group->usesFRS() && isset($stream['frs'])) {
+							//TODO: do the injection :-)
+						}
+					} else {
+						$new_group->setUseFRS(false);
+					}
+				}
+				//inject forum if any
+				if (forge_get_config('use_forum')) {
+					if (isset($stream['setup']['data_array']['use_frs'])) {
+						$new_group->setUseForum($stream['setup']['data_array']['use_frs']);
+						if ($new_group->usesForum() && isset($stream['frs']) && is_array($stream['forums'])) {
+							//TODO: do the injection :-)
+						}
+					} else {
+						$new_group->setUseForum(false);
 					}
 				}
 				// recompute if any association with activated & injected features.
@@ -600,6 +644,46 @@ class CliActions {
 					foreach($stream['setup']['roles'] as $role_def) {
 						$role = new Role($new_group);
 						$perms = array();
+						if (isset($role_def['perms_array'])) {
+							foreach ($role_def['perms_array'] as $key => $value) {
+								switch ($key) {
+									case 'project_admin':
+									case 'project_read':
+									case 'scm':
+									case 'docman':
+									case 'frs_admin':
+									case 'new_frs':
+									case 'tracker_admin':
+									case 'new_tracker':
+									case 'forum_admin':
+									case 'new_forum':
+									case 'pm_admin':
+									case 'new_pm':
+										$perms[$key][$this->getMappingId($stream['setup']['data_array']['group_id'], 'group')] = current($value);
+										break;
+// 									case 'frs':
+// 										foreach ($value as $frsp_key => $frsp_val) {
+// 											$perms[$key][$this->getMappingId($frsp_key, 'package')] = $frsp_val;
+// 										}
+// 										break;
+// 									case 'forum':
+// 										foreach ($value as $fr_key => $fr_val) {
+// 											$perms[$key][$this->getMappingId($fr_key, 'forum')] = $fr_val;
+// 										}
+// 										break;
+									case 'tracker':
+										foreach ($value as $at_key => $at_val) {
+											$perms[$key][$this->getMappingId($at_key, 'tracker')] = $at_val;
+										}
+										break;
+// 									case 'pm':
+// 										foreach ($value as $pm_key => $pm_val) {
+// 											$perms[$key][$this->getMappingId($pm_key, 'subproject')] = $pm_val;
+// 										}
+// 										break;
+								}
+							}
+						}
 						if (isset($role_def['data_array']['role_class']) && $role_def['data_array']['role_class'] == 1) {
 							if (!$role->create($role_def['data_array']['role_name'], $perms, true)) {
 								echo $role->getErrorMessage()."\n";
