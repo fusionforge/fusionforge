@@ -1439,7 +1439,33 @@ class CliActions {
 		if (!$stream) {
 			return false;
 		}
-		return true;
+		$group_id = $this->getMappingId($stream['data_array']['group_id'], 'group');
+		$group = group_get_object($group_id);
+		if ($group && is_object($group) && !$group->isError() && $group->usesFRS()) {
+			db_begin();
+			$frsp = new FRSPackage($group);
+			if (!$frsp->create($stream['data_array']['name'], $stream['data_array']['status_id'])) {
+				echo $frsp->getErrorMessage()."\n";
+				db_rollback();
+				return false;
+			}
+			if (isset($stream['package_releases']) && is_array($stream['package_releases'])) {
+				foreach ($stream['package_releases'] as $prelease) {
+					$filename = 'releaseDump-'.$prelease['data_array']['release_id'].'.'.$format;
+					$this->createSubfile($filename, $prelease, $format);
+					if (!$this->releaseImport($filename, $format)) {
+						echo _('Unable to inject release')."\n";
+						db_rollback();
+						return false;
+					}
+					@unlink($filename);
+				}
+			}
+			db_commit();
+		} else {
+			echo _('Unable to get project to inject package')._(': ').$group_id."\n";
+			return false;
+		}
 	}
 
 	function releaseDump($releaseid, $format = 'json') {

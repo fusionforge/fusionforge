@@ -146,10 +146,11 @@ class FRSPackage extends FFError {
 	/**
 	 * create - create a new FRSPackage in the database.
 	 *
-	 * @param	$name
+	 * @param	string 	$name	Name of the package
+	 * @param	int	$status Status ID. Default is 1 => Active
 	 * @return	boolean	success.
 	 */
-	function create($name) {
+	function create($name, $status = 1) {
 		if (strlen($name) < 3) {
 			$this->setError(_('FRSPackage Name Must Be At Least 3 Characters'));
 			return false;
@@ -162,7 +163,7 @@ class FRSPackage extends FFError {
 			return false;
 		}
 
-		$res = db_query_params('SELECT * FROM frs_package WHERE group_id=$1 AND name=$2',
+		$res = db_query_params('SELECT * FROM frs_package WHERE group_id = $1 AND name = $2',
 					array($this->Group->getID(),
 						htmlspecialchars($name)));
 		if (db_numrows($res)) {
@@ -174,7 +175,7 @@ class FRSPackage extends FFError {
 		$result = db_query_params('INSERT INTO frs_package(group_id, name, status_id) VALUES ($1, $2, $3)',
 					array($this->Group->getID(),
 						htmlspecialchars($name),
-						1));
+						$status));
 		if (!$result) {
 			$this->setError(_('Error Adding Package')._(': ').db_error());
 			db_rollback();
@@ -216,7 +217,7 @@ class FRSPackage extends FFError {
 	 * @return	boolean	success.
 	 */
 	function fetchData($package_id) {
-		$res = db_query_params('SELECT * FROM frs_package WHERE package_id=$1 AND group_id=$2',
+		$res = db_query_params('SELECT * FROM frs_package WHERE package_id = $1 AND group_id = $2',
 					array($package_id, $this->Group->getID()));
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError(_('Invalid package_id'));
