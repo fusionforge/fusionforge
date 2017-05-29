@@ -133,9 +133,11 @@ class FRSRelease extends FFObject {
 	 * @param	string	$changes	The change log for the release.
 	 * @param	int	$preformatted	Whether the notes/log are preformatted with \n chars (1) true (0) false.
 	 * @param	int	$release_date	The unix date of the release.
+	 * @param	array	$importData	Array of data to change creator, time of creation, bypass permission check and do not send notification like:
+	 *					array('user' => 127, 'time' => 1234556789, 'nopermcheck' => 1, 'nonotice' => 1)
 	 * @return	boolean	success.
 	 */
-	function create($name, $notes, $changes, $preformatted, $release_date = false) {
+	function create($name, $notes, $changes, $preformatted, $release_date = false, $status_id = 1, $importData = array()) {
 		if (strlen($name) < 3) {
 			$this->setError(_('FRSRelease Name Must Be At Least 3 Characters'));
 			return false;
@@ -147,13 +149,25 @@ class FRSRelease extends FFObject {
 			$preformatted = 0;
 		}
 
-		if (!forge_check_perm('frs', $this->FRSPackage->getID(), 'release')) {
-			$this->setPermissionDeniedError();
-			return false;
+		if (isset($importData['user'])) {
+			$userid = $importData['user'];
+		} else {
+			$userid = user_getid();
 		}
 
-		if (!$release_date) {
-			$release_date=time();
+		if (!isset($importData['nopermcheck']) || (isset($importData['nopermcheck']) && !$importData['nopermcheck'])) {
+			if (!forge_check_perm_for_user(user_get_object($userid), 'frs', $this->FRSPackage->getID(), 'release')) {
+				$this->setPermissionDeniedError();
+				return false;
+			}
+		}
+
+		if (!$release_date || !isset($importData['time'])) {
+			$release_date = time();
+		} else {
+			if (isset($importData['time'])) {
+				$release_date = $importData['time'];
+			}
 		}
 		$res = db_query_params('SELECT * FROM frs_release WHERE package_id=$1 AND name=$2',
 					array ($this->FRSPackage->getID(),
@@ -171,8 +185,8 @@ class FRSRelease extends FFObject {
 						$preformatted,
 						htmlspecialchars($name),
 						$release_date,
-						user_getid(),
-						1));
+						$userid,
+						$status_id));
 		if (!$result) {
 			$this->setError(_('Error Adding Release: ').db_error());
 			db_rollback();

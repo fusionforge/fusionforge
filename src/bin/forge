@@ -601,7 +601,14 @@ class CliActions {
 					if (isset($stream['setup']['data_array']['use_frs'])) {
 						$new_group->setUseFRS($stream['setup']['data_array']['use_frs']);
 						if ($new_group->usesFRS() && isset($stream['frs'])) {
-							//TODO: do the injection :-)
+							$filename = 'frsDump-'.$stream['setup']['data_array']['group_id'].'.'.$format;
+							$this->createSubfile($filename, $stream['frs'], $format);
+							if (!$this->frsImport($filename, $format)) {
+								echo _('Unable to inject FRS')."\n";
+								db_rollback();
+								return false;
+							}
+							@unlink($filename);
 						}
 					} else {
 						$new_group->setUseFRS(false);
@@ -686,11 +693,11 @@ class CliActions {
 									case 'new_pm':
 										$perms[$key][$this->getMappingId($stream['setup']['data_array']['group_id'], 'group')] = current($value);
 										break;
-// 									case 'frs':
-// 										foreach ($value as $frsp_key => $frsp_val) {
-// 											$perms[$key][$this->getMappingId($frsp_key, 'package')] = $frsp_val;
-// 										}
-// 										break;
+									case 'frs':
+										foreach ($value as $frsp_key => $frsp_val) {
+											$perms[$key][$this->getMappingId($frsp_key, 'package')] = $frsp_val;
+										}
+										break;
 // 									case 'forum':
 // 										foreach ($value as $fr_key => $fr_val) {
 // 											$perms[$key][$this->getMappingId($fr_key, 'forum')] = $fr_val;
@@ -1449,6 +1456,7 @@ class CliActions {
 				db_rollback();
 				return false;
 			}
+			$importRefMapping['package'][$stream['data_array']['package_id']] = $frsp->getID();
 			if (isset($stream['package_releases']) && is_array($stream['package_releases'])) {
 				foreach ($stream['package_releases'] as $prelease) {
 					$filename = 'releaseDump-'.$prelease['data_array']['release_id'].'.'.$format;
@@ -1462,6 +1470,8 @@ class CliActions {
 				}
 			}
 			db_commit();
+			echo _('Package injected')."\n";
+			return true;
 		} else {
 			echo _('Unable to get project to inject package')._(': ').$group_id."\n";
 			return false;
@@ -1488,7 +1498,44 @@ class CliActions {
 		if (!$stream) {
 			return false;
 		}
-		return true;
+		$package_id = $this->getMappingId($stream['data_array']['package_id'], 'package');
+		$frsp = frspackage_get_object($package_id);
+		if ($frsp && is_object($frsp) && !$frsp->isError()) {
+			db_begin();
+			$frsr = new FRSRelease($frsp);
+			$importData['nopermcheck'] = 1;
+			if (isset($stream['data_array']['release_date'])) {
+				$importData['time'] = $stream['data_array']['release_date'];
+			}
+			if (isset($stream['data_array']['released_by'])) {
+				$importData['user'] = $this->getMappingId($stream['data_array']['released_by'], 'user');
+			}
+			if (isset($stream['data_array']['preformatted'])) {
+				$preformatted = $stream['data_array']['preformatted'];
+			} else {
+				$preformatted = 0;
+			}
+			if (isset($stream['data_array']['status_id'])) {
+				$status_id = $stream['data_array']['status_id'];
+			} else {
+				$status_id = 1;
+			}
+			if (!$frsr->create($stream['data_array']['name'], $stream['data_array']['notes'], $stream['data_array']['changes'], $preformatted, false, $status_id, $importData)) {
+				echo $frsr->getErrorMessage()."\n";
+				db_rollback();
+				return false;
+			}
+			if (isset($stream['release_files']) && is_array($stream['release_files'])) {
+				foreach ($stream['release_files'] as $rfile) {
+					echo 'TODO: support files'."\n";
+				}
+			}
+			db_commit();
+			echo _('Release injected')."\n";
+			return true;
+		} else {
+			echo _('Unable to get package to inject release')._(': ').$package_id."\n";
+		}
 	}
 
 	function pmDump($projectgroupid, $format = 'json') {
