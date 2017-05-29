@@ -1326,7 +1326,7 @@ class CliActions {
 				$group->setDocmanCreateOnlineStatus($stream['setup']['use_docman_create_online']);
 			}
 			if (isset($stream['setup']['send_all_docs'])) {
-				$group->setDocmanCreateOnlineStatus($stream['setup']['send_all_docs']);
+				$group->setDocEmailAll($stream['setup']['send_all_docs']);
 			}
 			if (isset($stream['data']) && is_array($stream['data'])) {
 				foreach ($stream['data'] as $element) {
@@ -1382,7 +1382,34 @@ class CliActions {
 		if (!$stream) {
 			return false;
 		}
-		return true;
+		$group_id = $this->getMappingId($stream['setup']['group_id'], 'group');
+		$group = group_get_object($group_id);
+		if ($group && is_object($group) && !$group->isError() && $group->usesDocman()) {
+			db_begin();
+			if (isset($stream['setup']['new_frs_address'])) {
+				$group->setFRSEmailAddress($stream['setup']['new_frs_address']);
+			}
+			if (isset($stream['setup']['send_frs_docs'])) {
+				$group->setFRSEmailAll($stream['setup']['send_frs_docs']);
+			}
+			if (isset($stream['package']) && is_array($stream['package'])) {
+				foreach ($stream['package'] as $element) {
+					$filename = 'packageDump-'.$element['data_array']['package_id'].'.'.$format;
+					$this->createSubfile($filename, $element, $format);
+					if (!$this->packageImport($filename, $format)) {
+						echo _('Unable to inject package element')."\n";
+						db_rollback();
+						return false;
+					}
+					@unlink($filename);
+				}
+			}
+			db_commit();
+			echo _('FRS injected')."\n";
+			return true;
+		} else {
+			echo _('Unable to get project to inject FRS')._(': ').$group_id."\n";
+		}
 	}
 
 	function packageDump($packageid, $format = 'json') {
@@ -1390,12 +1417,12 @@ class CliActions {
 		$package = frspackage_get_object($packageid);
 		if ($package && is_object($package) && !$package->isError()) {
 			unset($package->Group);
-			$packageDump['setup'] = (array)$package;
+			$packageDump = (array)$package;
 			$frsrs = $package->getReleases();
-			$packageDump['setup']['package_releases'] = array();
+			$packageDump['package_releases'] = array();
 			foreach ($frsrs as $frsr) {
 				unset($frsr->FRSPackage);
-				$packageDump['setup']['package_releases'][] = $frsr;
+				$packageDump['package_releases'][] = $frsr;
 			}
 			$packageDump['monitor'] = $package->getMonitorIds();
 		} else {
@@ -1420,7 +1447,7 @@ class CliActions {
 		$release = frsrelease_get_object($releaseid);
 		if ($release && is_object($release) && !$release->isError()) {
 			unset($release->FRSPackage);
-			$releaseDump['setup'] = $release;
+			$releaseDump = (array)$release;
 		} else {
 			$releaseDump['error'][] = _('Unable to get release id')._(': ').$releaseid;
 		}

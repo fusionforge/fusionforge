@@ -1618,6 +1618,27 @@ class Group extends FFError {
 		return $this->data_array['new_frs_address'];
 	}
 
+	function setFRSEmailAddress($email) {
+		$invalid_mails = validate_emails($email);
+		if (count($invalid_mails) > 0) {
+			$this->setError(sprintf(ngettext('New FRS Address Appeared Invalid: %s', 'New FRS Addresses Appeared Invalid: %s', count($invalid_mails)),implode(',',$invalid_mails)));
+			return false;
+		}
+		db_begin();
+		$res = db_query_params('UPDATE groups SET new_frs_address = $1 WHERE group_id = $2',
+					array($email, $this->getID()));
+
+		if (!$res) {
+			$this->setError(_('Error')._(': ')._('Cannot Update Group new_frs_address')._(': ').db_error());
+			db_rollback();
+			return false;
+		} else {
+			$this->data_array['new_frs_address'] = $email;
+			db_commit();
+			return true;
+		}
+	}
+
 	/**
 	 * frsEmailAll - whether or not this group has opted to use receive notices on all frs updates.
 	 *
@@ -1625,6 +1646,22 @@ class Group extends FFError {
 	 */
 	function frsEmailAll() {
 		return $this->data_array['send_all_frs'];
+	}
+
+	function setFRSEmailAll($status) {
+		db_begin();
+		$res = db_query_params('UPDATE groups SET send_all_frs = $1 WHERE group_id = $2',
+					array($status, $this->getID()));
+
+		if (!$res) {
+			$this->setError(_('Error')._(': ')._('Cannot Update Group send_frs_docs')._(': ').db_error());
+			db_rollback();
+			return false;
+		} else {
+			$this->data_array['send_frs_docs'] = $status;
+			db_commit();
+			return true;
+		}
 	}
 
 	/**
