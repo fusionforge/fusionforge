@@ -54,6 +54,7 @@ require_once $gfcommon.'tracker/ArtifactExtraField.class.php';
 require_once $gfcommon.'tracker/ArtifactWorkflow.class.php';
 require_once $gfcommon.'tracker/ArtifactStorage.class.php';
 require_once $gfcommon.'include/MonitorElement.class.php';
+require_once $gfcommon.'tracker/Effort.class.php';
 
 // This string is used when sending the notification mail for identifying the
 // user response
@@ -1766,6 +1767,14 @@ class Artifact extends FFObject {
 							case ARTIFACT_EXTRAFIELDTYPE_INTEGER:
 								$sum = 0;
 								break;
+							case ARTIFACT_EXTRAFIELDTYPE_EFFORT:
+								$effortUnitSet = new EffortUnitSet($at, $at->getEffortUnitSet());
+								$effortUnitFactory = new EffortUnitFactory($effortUnitSet);
+
+								$baseUnit = $effortUnitFactory->getBaseUnit();
+								$sum = 0;
+								$effortSum= new Effort(0, $baseUnit);
+								break;
 						}
 						foreach ($children as $child) {
 							$childArtifact = artifact_get_object($child['artifact_id']);
@@ -1787,6 +1796,10 @@ class Artifact extends FFObject {
 									case ARTIFACT_EXTRAFIELDTYPE_INTEGER:
 										$sum = $sum+$childExtra_fields[$childEf_id];
 										break;
+									case ARTIFACT_EXTRAFIELDTYPE_EFFORT:
+										$effort = encodedEffortToEffort($childExtra_fields[$childEf_id]);
+										$effortSum= $effortSum->add($effort);
+										$sum = $effortSum->toEncoded();
 								}
 							}
 						}

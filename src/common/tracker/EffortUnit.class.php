@@ -608,3 +608,28 @@ class EffortUnit extends FFError {
 		return true;
 	}
 }
+function getEffortUnitById($unit_id){
+	$res = db_query_params ('SELECT * FROM effort_unit INNER JOIN effort_unit_set USING (unit_set_id) WHERE unit_id=$1',
+			array($unit_id));
+	if (!$res || db_numrows($res) < 1) {
+		return false;
+	}
+	$data_array = db_fetch_array($res);
+	switch ($data_array['level']) {
+		case EFFORTUNITSET_FORGE_LEVEL:
+			$object = null;
+			break;
+		case EFFORTUNITSET_PROJECT_LEVEL:
+			$object= new Group($data_array['group_id']);
+			break;
+		case EFFORTUNITSET_TRACKER_LEVEL:
+			$Group = new Group($data_array['group_id']);
+			$object= new ArtifactType($Group, $data_array['group_artifact_id']);
+			break;
+		default:
+			$object = null;
+	}
+	$effortUnitSet = new EffortUnitSet($object, $data_array['unit_set_id']);
+	$effortUnit = new EffortUnit($effortUnitSet, $unit_id);
+	return $effortUnit;
+}

@@ -21,7 +21,6 @@
  */
 
 require_once $gfcommon.'include/FFError.class.php';
-require_once $gfcommon.'include/Group.class.php';
 
 define('EFFORTUNITSET_FORGE_LEVEL', 1);
 define('EFFORTUNITSET_PROJECT_LEVEL', 2);

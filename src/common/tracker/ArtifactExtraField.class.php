@@ -1282,9 +1282,9 @@ class ArtifactExtraField extends FFError {
 		$return= array(ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_NO_AGGREGATION => _('Parent value is not depending on children\'s values'));
 		$type = $this->getType();
 
-// 		if ($type == ARTIFACT_EXTRAFIELDTYPE_EFFORT) {
-// 			$return = array_merge($return, array(ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_SUM => _('Parent value is the sum of children\'s values')));
-// 		}
+		if ($type == ARTIFACT_EXTRAFIELDTYPE_EFFORT) {
+			$return = array_merge($return, array(ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_SUM => _('Parent value is the sum of children\'s values')));
+		}
 
 		if ($type == ARTIFACT_EXTRAFIELDTYPE_INTEGER) {
 			$return = array_merge($return, array(ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_SUM => _('Parent value is the sum of children\'s values')));
