@@ -25,11 +25,12 @@
 
 require (dirname(__FILE__).'/../common/include/env.inc.php');
 require_once $gfcommon.'include/pre.php';
+require_once $gfcommon.'include/User.class.php';
+require_once $gfcommon.'docman/DocumentReviewFactory.class.php';
+require_once $gfcommon.'frs/FRSManager.class.php';
 require_once $gfcommon.'tracker/ArtifactFactory.class.php';
 require_once $gfcommon.'tracker/ArtifactTypeFactory.class.php';
 require_once $gfcommon.'tracker/EffortUnitFactory.class.php';
-require_once $gfcommon.'docman/DocumentReviewFactory.class.php';
-require_once $gfcommon.'include/User.class.php';
 
 class CliActions {
 	function help($method = null) {
@@ -100,20 +101,40 @@ class CliActions {
 				echo "to dump docman from a specific project.\n";
 				echo $dumpFormatInfo;
 				break;
+			case 'docmanImport':
+				echo "Use: .../forge docmanImport <file> [json|raw]\n";
+				echo "to import a docman setup and all his elements.\n";
+				echo $dumpFormatInfo.$importFormatInfo;
+				break;
 			case 'releaseDump':
 				echo "Use: .../forge releaseDump <releaseid> [json|raw]\n";
 				echo "to dump a spectific FRS release from a specific project.\n";
 				echo $dumpFormatInfo;
+				break;
+			case 'releaseImport':
+				echo "Use: .../forge releaseImport <file> [json|raw]\n";
+				echo "to import a specific FRS release and all his elements into a package.\n";
+				echo $dumpFormatInfo.$importFormatInfo;
 				break;
 			case 'packageDump':
 				echo "Use: .../forge packageDump <packageid> [json|raw]\n";
 				echo "to dump a spectific FRS package from a specific project.\n";
 				echo $dumpFormatInfo;
 				break;
+			case 'packageImport':
+				echo "Use: .../forge packageImport <file> [json|raw]\n";
+				echo "to import a specific FRS package and all his elements.\n";
+				echo $dumpFormatInfo.$importFormatInfo;
+				break;
 			case 'frsDump':
 				echo "Use: .../forge frsDump <groupid> [json|raw]\n";
 				echo "to dump FRS from a specific project.\n";
 				echo $dumpFormatInfo;
+				break;
+			case 'frsImport':
+				echo "Use: .../forge frsImport <file> [json|raw]\n";
+				echo "to import a full FRS setup and all his elements.\n";
+				echo $dumpFormatInfo.$importFormatInfo;
 				break;
 			case 'pmDump':
 				echo "Use: .../forge pmDump <groupid> [json|raw]\n";
@@ -1333,6 +1354,8 @@ class CliActions {
 		$group = group_get_object($group_id);
 		if ($group && is_object($group) && !$group->isError()) {
 			if ($group->usesFRS()) {
+				$frsm = new FRSManager($group);
+				$frsDump['setup'] = $frsm->getSettings();
 				$frsfp = new FRSPackageFactory($group);
 				if ($frsfp && is_object($frsfp) && !$frsfp->isError()) {
 					$frspIds = $frsfp->getAllPackagesIds();
@@ -1351,6 +1374,15 @@ class CliActions {
 		ksort($frsDump);
 		$this->print_result($frsDump, $format);
 		return $frsDump;
+	}
+
+	function frsImport($file, $format = 'json') {
+		global $importRefMapping;
+		$stream = $this->loadFile($file, $format);
+		if (!$stream) {
+			return false;
+		}
+		return true;
 	}
 
 	function packageDump($packageid, $format = 'json') {
@@ -1374,6 +1406,15 @@ class CliActions {
 		return $packageDump;
 	}
 
+	function packageImport($file, $format = 'json') {
+		global $importRefMapping;
+		$stream = $this->loadFile($file, $format);
+		if (!$stream) {
+			return false;
+		}
+		return true;
+	}
+
 	function releaseDump($releaseid, $format = 'json') {
 		$releaseDump['id'] = $releaseid;
 		$release = frsrelease_get_object($releaseid);
@@ -1386,6 +1427,15 @@ class CliActions {
 		ksort($releaseDump);
 		$this->print_result($releaseDump, $format);
 		return $releaseDump;
+	}
+
+	function releaseImport($file, $format = 'json') {
+		global $importRefMapping;
+		$stream = $this->loadFile($file, $format);
+		if (!$stream) {
+			return false;
+		}
+		return true;
 	}
 
 	function pmDump($projectgroupid, $format = 'json') {
