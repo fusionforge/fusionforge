@@ -50,8 +50,9 @@ class FRSManager extends FFError {
 
 	function getSettings() {
 		$settings = array();
-		$settings['send_all_frs'] = $this->Group->frsEmailAll();
+		$settings['send_all_frs']    = $this->Group->frsEmailAll();
 		$settings['new_frs_address'] = $this->Group->getFRSEmailAddress();
+		$settings['group_id']        = $this->Group->getID();
 		return $settings;
 	}
 }
