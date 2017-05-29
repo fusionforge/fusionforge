@@ -1,5 +1,4 @@
 FusionForge 6.X:
-* HTML 5 Doctype; use HTML 5 <header>, <main> and <footer> tags in Funky theme (Nokia)
 * Accounts: minimum password length is now 8 (Sylvain Beucler)
 * Accounts: add minimal constraints to password (upper-case, lower-case, non-alphanumeric check) [#826] (Inria)
 * Core System: support object association n-n, bidirectional (Artifact, Document, FRSRelease) (TrivialDev)
@@ -14,6 +13,7 @@ FusionForge 6.X:
 * Docman: support cross ref. forum, documents, task or artifact. (TrivialDev)
 * Docman: add new document review feature. to review version, document and post comment to a document. (TrivialDev)
 * Docman: add manual upload method to inject zip feature. (TrivialDev)
+* Forge CLI: add dump/import functions to extract or import massively into FusionForge [#848]
 * FRS: link package release to tracker roadmap. (TrivialDev)
 * Install System: add support for OpenSuSE. [#849] (Ralf Habacker)
 * Layout: new dynamic quickNav menu: based on user activity to select 5 more visited projects (TrivialDev)
@@ -49,6 +49,7 @@ FusionForge 6.X:
 * Web UI: upgrade splitter jquery plugin to 0.20.0 (TrivialDev)
 * Web UI: upgrade jquery ui to 1.12.1 (TrivialDev)
 * Web UI: upgrade jquery to 1.12.4 (Nokia)
+* Web UI: HTML 5 Doctype; use HTML 5 <header>, <main> and <footer> tags in Funky theme (Nokia)
 * Widget MySystasks: new widget for user to display systasks perform on user projects (TrivialDev)
 * Widget ProjectlatestArtifact: new widget for project to display the 5 more recent artifacts (TrivialDev)
 * Widget ProjectScmStats: new widget for project to display SCM stats (TrivialDev)
