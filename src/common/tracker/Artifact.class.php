@@ -1466,6 +1466,7 @@ class Artifact extends FFObject {
 				$this->setError(sprintf(_("Field %s doesn't match the pattern."), $ef[$efid]['field_name']));
 				return false;
 			}
+
 //
 //	Force each field to have some value if it is a numeric field
 //	text fields will just be purged and skipped
@@ -1563,18 +1564,26 @@ class Artifact extends FFObject {
 				$new = '';
 				foreach (explode(' ',$value) as $id) {
 					if (preg_match('/^(\d+)$/', $id)) {
+						if ($id == $this->getID) {
+							$this->setError('Illegal id '.$id.', self reference for field: '.$ef[$efid]['field_name'].'.'); // @todo: lang
+							return false;
+						}
 						// Control that the id is present in the db
-
 						$res = db_query_params ('SELECT artifact_id FROM artifact WHERE artifact_id=$1',
 									array($id));
 						if (db_numrows($res) == 1) {
 							$new .= $id.' ';
 						} else {
-							$this->setError('Illegal id '.$id.', it\'s not a valid tracker id for field: '.$ef[$efid]['field_name'].'.'); // @todo: lang
+							$this->setError('Illegal id '.$id.', it\'s not a valid artifact id for field: '.$ef[$efid]['field_name'].'.'); // @todo: lang
+							return false;
+						}
+						$progeny = $this->getProgeny();
+						if (in_array($id, $progeny)) {
+							$this->setError('Illegal id '.$id.', circular dependency for field: '.$ef[$efid]['field_name'].'.'); // @todo: lang
 							return false;
 						}
 					} else {
-						$this->setError('Illegal value '.$id.', only trackers id are allowed for field: '.$ef[$efid]['field_name'].'.'); // @todo: lang
+						$this->setError('Illegal value '.$id.', only artifact id are allowed for field: '.$ef[$efid]['field_name'].'.'); // @todo: lang
 						return false;
 					}
 				}
@@ -2263,7 +2272,7 @@ class Artifact extends FFObject {
 		if (!isset($this->parent)) {
 			$res = db_query_params ('SELECT field_data FROM
 										artifact_extra_field_data
-										NATURAL INNER JOIN artifact_extra_field_list
+										INNER JOIN artifact_extra_field_list USING (extra_field_id)
 									WHERE
 										field_type = $1
 											AND artifact_id = $2',
@@ -2280,6 +2289,22 @@ class Artifact extends FFObject {
 		return $this->parent;
 	}
 
+	function getProgeny() {
+		$return = array();
+		$childrenArr = $this->getChildren();
+		if (is_array($childrenArr)) {
+			$at = $this->ArtifactType;
+			foreach ($childrenArr as $child) {
+				$return[] = $child['artifact_id'];
+				$childObj = new Artifact($at,$child['artifact_id']);
+				$childProgenyArr = $childObj->getProgeny();
+				if (is_array($childProgenyArr)) {
+					$return = array_merge($return, $childProgenyArr);
+				}
+			}
+		}
+		return $return;
+	}
 
 	function getPermalink() {
 		return '/tracker/a_follow.php/'.$this->getID();

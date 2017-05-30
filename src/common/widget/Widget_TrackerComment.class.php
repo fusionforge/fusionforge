@@ -96,12 +96,13 @@ class Widget_TrackerComment extends Widget {
 				$elementsLi[] = array('content' => util_make_link('#tabber-relations', _('Relations').$nbr, false, true));
 			}
 			if (forge_get_config('use_artefacts_dependencies')) {
-				$tabTitle = _('Children');
-				$nbChildren = $ah->hasChildren();
-				if ($nbChildren) {
-					$tabTitle .= ' ('.$nbChildren.')';
+				$tabTitle = _('Dependencies');
+				$nbChildren = $ah->hasChildren()?$ah->hasChildren():0;
+				$nbParent = $ah->hasParent()?1:0;
+				if ($nbChildren+$nbParent) {
+					$tabTitle .= ' ('.$nbParent.'/'.$nbChildren.')';
 				}
-				$elementsLi[] = array('content' => util_make_link('#tabber-children', $tabTitle, false, true));
+				$elementsLi[] = array('content' => util_make_link('#tabber-dependencies', $tabTitle, false, true));
 			}
 			if (forge_get_config('use_object_associations')) {
 				$tabTitle = _('Associations');
@@ -170,7 +171,10 @@ class Widget_TrackerComment extends Widget {
 			$tabberContent .= html_e('div', array('id' => 'tabber-relations', 'class' => 'tabbertab'),
 						$ah->showRelations());
 			if (forge_get_config('use_artefacts_dependencies')) {
-				$tabberContent .= html_e('div', array('id' => 'tabber-children', 'class' => 'tabbertab'),
+				$tabberContent .= html_e('div', array('id' => 'tabber-dependencies', 'class' => 'tabbertab'),
+						html_e('strong',array(),_('Parent')).html_e('br').
+						$ah->showParent().html_e('br').
+						html_e('strong',array(),_('Children')).html_e('br').
 						$ah->showChildren());
 			}
 			if (forge_get_config('use_object_associations')) {

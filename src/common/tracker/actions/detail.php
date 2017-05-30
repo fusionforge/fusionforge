@@ -165,10 +165,11 @@ $nbh = $count? ' ('.$count.')' : '';
 	<li><a href="#tabber-relations"><?php echo _('Relations').$nbr; ?></a></li>
 	<?php } ?>
 	<?php if (forge_get_config('use_artefacts_dependencies')) {
-		$count=$ah->hasChildren();
-		$nbc = $count? ' ('.$count.')' : '';
+		$countC=$ah->hasChildren()?$ah->hasChildren():0;
+		$countP=$ah->hasParent()?1:0;
+		$nbd = $countC+$countP? ' ('.$countP.'/'.$countC.')' : '';
 	?>
-	<li><a href="#tabber-children"><?php echo _('Children').$nbc; ?></a></li>
+	<li><a href="#tabber-dependencies"><?php echo _('Dependencies').$nbd; ?></a></li>
 	<?php } ?>
 	<?php if (forge_get_config('use_object_associations')) {
 		$anf = '';
@@ -250,8 +251,13 @@ if ($group->usesPM()) {
 	<?php echo $ah->showRelations(); ?>
 	</div><?php
 	if (forge_get_config('use_artefacts_dependencies')) { ?>
-		<div id="tabber-children" class="tabbertab">
-			<?php echo $ah->showChildren(); ?>
+		<div id="tabber-dependencies" class="tabbertab">
+			<?php
+				echo '<strong>'._('Parent').'</strong><br>';
+				echo $ah->showParent().'<br>';
+				echo '<strong>'._('Children').'</strong><br>';
+				echo $ah->showChildren();
+			?>
 		</div><?php
 	}
 	if (forge_get_config('use_object_associations')) { ?>

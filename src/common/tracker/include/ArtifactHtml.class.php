@@ -249,7 +249,7 @@ function hide_edit_button(id) {
 						$arg['class'] = 'artifact_closed';
 					}
 					$return .= '<br/>&nbsp;&nbsp;&nbsp;';
-					$return .= util_make_link($url, $text, $arg).' '.util_make_link($url, $arr['summary']).' <i>('._('Parent')._(': ').$arr['field_name'].')</i>';
+					$return .= util_make_link($url, $text, $arg).' '.util_make_link($url, $arr['summary']);
 				}
 			}
 			$return .= '</td>
@@ -258,6 +258,36 @@ function hide_edit_button(id) {
 		}
 		return $return;
 	}
+
+	function showParent() {
+		$parentId = $this->getParent();
+		$return = '';
+		if ($parentId){
+			$parent = artifact_get_object($parentId);
+			$return = '	<table class="fullwidth">
+							<tr>
+								<td colspan="2">';
+			$parentAt = $parent->getArtifactType();
+			if (forge_check_perm('tracker', $parentAt->getID(), 'read')) {
+				$parentG = $parentAt->getGroup();
+				$title = $parentG->getPublicName()._(': ').$parentAt->getName();
+				$return .= '<strong>'.$title.'</strong>';
+				$text = '[#'.$parent->getID().']';
+				$url = '/tracker/?func=detail&aid='.$parent->getID().'&group_id='.$parentG->getID().'&atid='.$parentAt->getID();
+				$arg['title'] = util_html_secure($parent->getSummary());
+				if ($parent->getStatusID() == 2) {
+					$arg['class'] = 'artifact_closed';
+				}
+				$return .= '<br/>&nbsp;&nbsp;&nbsp;';
+				$return .= util_make_link($url, $text, $arg).' '.util_make_link($url, $parent->getSummary());
+			}
+			$return .= '</td>
+				</tr>
+				</table>';
+		}
+		return $return;
+	}
+
 }
 
 // Local Variables:

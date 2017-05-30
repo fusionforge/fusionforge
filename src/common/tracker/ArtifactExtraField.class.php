@@ -848,7 +848,8 @@ class ArtifactExtraField extends FFError {
 		if ($parentId=='100') {
 			return false;
 		}
-		if ($this->getType() != ARTIFACT_EXTRAFIELDTYPE_SELECT &&
+		if ($this->getType() != ARTIFACT_EXTRAFIELDTYPE_STATUS &&
+				$this->getType() != ARTIFACT_EXTRAFIELDTYPE_SELECT &&
 				$this->getType() != ARTIFACT_EXTRAFIELDTYPE_MULTISELECT &&
 				$this->getType() != ARTIFACT_EXTRAFIELDTYPE_RADIO &&
 				$this->getType() != ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) {
@@ -1279,23 +1280,22 @@ class ArtifactExtraField extends FFError {
 	 * @return	array	rules.
 	 */
 	function getAvailableAggregationRules() {
-		$return= array(ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_NO_AGGREGATION => _('Parent value is not depending on children\'s values'));
+		$return = array();
+		$return[ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_NO_AGGREGATION] = _('Parent value is not depending on children\'s values');
 		$type = $this->getType();
 
 		if ($type == ARTIFACT_EXTRAFIELDTYPE_EFFORT) {
-			$return = array_merge($return, array(ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_SUM => _('Parent value is the sum of children\'s values')));
+			$return[ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_SUM] = _('Parent value is the sum of children\'s values');
 		}
 
 		if ($type == ARTIFACT_EXTRAFIELDTYPE_INTEGER) {
-			$return = array_merge($return, array(ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_SUM => _('Parent value is the sum of children\'s values')));
+			$return[ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_SUM] = _('Parent value is the sum of children\'s values');
 		}
 
-// 		if ($type == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
-// 			$return = array_merge($return, array(
-// 													ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_STATUS_CLOSE_RESTRICTED => _('Deny closing the parent, as long as not all children have been closed'),
-// 													ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_STATUS_CLOSE_UPWARDS => _('Close the parent, after the last child has been closed')
-// 								));
-// 		}
+		if ($type == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
+			$return[ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_STATUS_CLOSE_RESTRICTED] = _('Deny closing the parent, as long as not all children have been closed');
+			//$return[ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_STATUS_CLOSE_UPWARDS] = _('Close the parent, after the last child has been closed');
+		}
 
 		if (count($return)==1) {
 			$return = array();
@@ -1313,11 +1313,12 @@ class ArtifactExtraField extends FFError {
 	* @return	array	rules.
 	*/
 	function getAvailableDistributionRules() {
-		$return= array(ARTIFACT_EXTRAFIELD_DISTRIBUTION_RULE_NO_DISTRIBUTION => _('Parent value is not depending on children\'s values'));
+		$return = array();
+		$return[ARTIFACT_EXTRAFIELD_DISTRIBUTION_RULE_NO_DISTRIBUTION] = _('Parent value is not depending on children\'s values');
 		$type = $this->getType();
 
 		if ($type == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
-			$return = array_merge($return, array(ARTIFACT_EXTRAFIELD_DISTRIBUTION_RULE_STATUS_CLOSE_RECURSIVELY => _('Closure of parent involves recursive closure of children')));
+			$return[ARTIFACT_EXTRAFIELD_DISTRIBUTION_RULE_STATUS_CLOSE_RECURSIVELY] = _('Closure of parent involves recursive closure of children');
 		}
 
 		if (count($return)==1) {

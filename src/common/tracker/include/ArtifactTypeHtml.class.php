@@ -156,14 +156,14 @@ class ArtifactTypeHtml extends ArtifactType {
 	/**
 	 * renderExtraFields - ???
 	 *
-	 * @param	array	$selected
-	 * @param	bool	$show_100		Display the specific '100' value. Default is false.
-	 * @param	string	$text_100		Label displayed for the '100' value. Default is 'none'
-	 * @param	bool	$show_any
-	 * @param	string	$text_any
-	 * @param	array	$types
-	 * @param	bool	$status_show_100	Force display of the '100' value if needed. Default is false.
-	 * @param	string	$mode			QUERY, DISPLAY, UPDATE, NEW
+	 * @param	array			$selected
+	 * @param	bool			$show_100			Display the specific '100' value. Default is false.
+	 * @param	string			$text_100			Label displayed for the '100' value. Default is 'none'
+	 * @param	bool			$show_any
+	 * @param	string			$text_any
+	 * @param	array			$types
+	 * @param	bool			$status_show_100	Force display of the '100' value if needed. Default is false.
+	 * @param	string			$mode				QUERY, DISPLAY, UPDATE, NEW
 	 */
 	function renderExtraFields($selected = array(),
                                $show_100 = false, $text_100 = 'none',
@@ -172,6 +172,8 @@ class ArtifactTypeHtml extends ArtifactType {
                                $status_show_100 = false,
                                $mode = '') {
 		global $HTML;
+		global $ah;
+
 		if ($mode == 'NEW') {
 			$efarr = $this->getExtraFields($types, false, false);
 		} else {
@@ -304,11 +306,12 @@ class ArtifactTypeHtml extends ArtifactType {
 				$efarr[$i]['show100'] = $status_show_100;
 			}
 
+			$allowed=false;
+
 			if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_SELECT ||
 					$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX ||
 					$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RADIO ||
 					$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT) {
-				$allowed=false;
 				if (!is_null($efarr[$i]['parent']) && !empty($efarr[$i]['parent']) && $efarr[$i]['parent']!='100') {
 					$aefParentId = $efarr[$i]['parent'];
 					$selectedElmnts = (isset($selected[$aefParentId]) ? $selected[$aefParentId] : '');
@@ -355,6 +358,34 @@ class ArtifactTypeHtml extends ArtifactType {
 				$str = $this->renderMultiSelectBox($efarr[$i]['extra_field_id'], $selected[$efarr[$i]['extra_field_id']], $efarr[$i]['show100'], $efarr[$i]['show100label'], $allowed, $attrs);
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
+				// parent artifact can't be close if a child is still open
+				if ($mode == 'UPDATE' &&
+						$efarr[$i]['aggregation_rule'] == ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_STATUS_CLOSE_RESTRICTED &&
+						$ah->hasChildren()) {
+					$children = $ah->getChildren();
+					$childOpen = false;
+					foreach ($children as $child) {
+						if ($child['status_id'] == 1) {
+							$childOpen = true;
+							break;
+						}
+					}
+					if ($childOpen) {
+						$aef = new ArtifactExtraField($this, $efarr[$i]['extra_field_id']);
+						$statusArr = $aef->getAvailableValues();
+						$openStatus = array();
+						foreach ($statusArr as $status) {
+							if ($status['status_id']==1) {
+								$openStatus[] = $status['element_id'];
+							}
+						}
+						if ($allowed) {
+							$allowed = array_intersect($allowed, $openStatus);
+						} else {
+							$allowed = $openStatus;
+						}
+					}
+				}
 
 				// Get the allowed values from the workflow.
 				$atw = new ArtifactWorkflow($this, $efarr[$i]['extra_field_id']);
@@ -365,9 +396,15 @@ class ArtifactTypeHtml extends ArtifactType {
 					$selected_node = $selected[$efarr[$i]['extra_field_id']];
 				} else {
 					$selected_node = 100;
+
 				}
 
-				$allowed = $atw->getNextNodes($selected_node);
+				$allowedWF = $atw->getNextNodes($selected_node);
+				if ($allowed) {
+					$allowed = array_intersect($allowed, $allowedWF);
+				} else {
+					$allowed = $allowedWF;
+				}
 				$allowed[] = $selected_node;
 				$str = $this->renderSelect($efarr[$i]['extra_field_id'], $selected_node, $status_show_100, $text_100, $show_any, $text_any, $allowed, $attrs);
 
@@ -1093,7 +1130,6 @@ class ArtifactTypeHtml extends ArtifactType {
 			$keys[$i]=$arr[$i]['element_id'];
 			$vals[$i]=$arr[$i]['element_name'];
 		}
-		$attrs['pattern']='^\d+(\s+\d+)*$';
 		// Convert artifact id to links.
 		$html_contents = preg_replace_callback('/\b(\d+)\b/', create_function('$matches', 'return _artifactid2url($matches[1], \'title\');'), $contents);
 		$edit_contents = $this->renderTextField ($extra_field_id, $contents, $size, $maxlength);
@@ -1112,15 +1148,21 @@ class ArtifactTypeHtml extends ArtifactType {
 	 * @return	string	text area and data.
 	 */
 	function renderParentField($extra_field_id, $contents, $size, $maxlength, $attrs = array()) {
+		global $ah;
 		$arr = $this->getExtraFieldElements($extra_field_id);
 		for ($i=0; $i<count($arr); $i++) {
 			$keys[$i]=$arr[$i]['element_id'];
 			$vals[$i]=$arr[$i]['element_name'];
 		}
-		$attrs['pattern']='^\d*$';
+		$attrsTxt = array();
+		if (is_object($ah)) {
+			$attrsTxt['pattern']='^(?!'.$ah->getID().'$)\d*$';
+		} else {
+			$attrsTxt['pattern']='^\d*$';
+		}
 		// Convert artifact id to links.
 		$html_contents = preg_replace_callback('/\b(\d+)\b/', create_function('$matches', 'return _artifactid2url($matches[1], \'title\');'), $contents);
-		$edit_contents = $this->renderTextField ($extra_field_id, $contents, $size, $maxlength);
+		$edit_contents = $this->renderTextField ($extra_field_id, $contents, $size, $maxlength, $attrsTxt);
 		return html_e('div',array_merge(array('id'=>'edit'.$extra_field_id, 'style'=>'display: none', 'title'=>_('Tip: Enter a space-separated list of artifact ids ([#NNN] also accepted)')), $attrs), $edit_contents)
 		.html_e('div',array_merge(array('id'=>'show'.$extra_field_id, 'style'=>'display: block'), $attrs), $html_contents);
 	}

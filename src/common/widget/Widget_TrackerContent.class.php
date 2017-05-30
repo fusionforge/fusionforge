@@ -523,13 +523,47 @@ EOS;
 										}
 										$cellContent .= $value;
 									} else {
+										// parent artifact can't be close if a child is still open
+										if ( $func != "add" &&
+												$extrafieldObject->getAggregationRule() == ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_STATUS_CLOSE_RESTRICTED &&
+												$ah->hasChildren()) {
+											$children = $ah->getChildren();
+											$childOpen = false;
+											foreach ($children as $child) {
+												if ($child['status_id'] == 1) {
+													$childOpen = true;
+													break;
+												}
+											}
+											if ($childOpen) {
+												$extrafieldObject = new ArtifactExtraField($ath, $keys[0]);
+												//$aef = new ArtifactExtraField($this, $efarr[$i]['extra_field_id']);
+												$statusArr = $extrafieldObject->getAvailableValues();
+												$openStatus = array();
+												foreach ($statusArr as $status) {
+													if ($child['status_id'] == 1) {
+														$openStatus[] = $status['element_id'];
+													}
+												}
+												if ($allowed) {
+													$allowed = array_intersect($allowed, $openStatus);
+												} else {
+													$allowed = $openStatus;
+												}
+											}
+										}
 										$atw = new ArtifactWorkflow($ath, $keys[0]);
 										// Special treatment for the initial step (Submit). In this case, the initial value is the first value.
 										if (!$value) {
 											$value = 100;
 										}
-										$allowed = $atw->getNextNodes($value);
-										$allowed[] = $value;
+										$allowedWF = $atw->getNextNodes($value);
+										if ($allowed) {
+											$allowed = array_intersect($allowed, $allowedWF);
+										} else {
+											$allowed = $allowedWF;
+										}
+										$allowed[] = $selected_node;
 										$cellContent .= $ath->renderSelect($keys[0], $value, false, $extrafieldObject->getShow100label(), false, false, $allowed, $attrs);
 									}
 									break;
