@@ -49,11 +49,11 @@ class Effort extends FFError {
 
 		return;
 	}
-	
+
 	function getEffortUnit(){
 		return $this->effortUnit;
 	}
-	
+
 	function getValue(){
 		return $this->value;
 	}
