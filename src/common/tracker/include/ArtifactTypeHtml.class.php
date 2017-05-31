@@ -1131,8 +1131,12 @@ class ArtifactTypeHtml extends ArtifactType {
 			$vals[$i]=$arr[$i]['element_name'];
 		}
 		// Convert artifact id to links.
+		$attrsTxt = array();
+		if (isset($attrs['form'])) {
+			$attrsTxt['form'] = $attrs['form'];
+		}
 		$html_contents = preg_replace_callback('/\b(\d+)\b/', create_function('$matches', 'return _artifactid2url($matches[1], \'title\');'), $contents);
-		$edit_contents = $this->renderTextField ($extra_field_id, $contents, $size, $maxlength);
+		$edit_contents = $this->renderTextField ($extra_field_id, $contents, $size, $maxlength, $attrsTxt);
 		return html_e('div',array_merge(array('id'=>'edit'.$extra_field_id, 'style'=>'display: none', 'title'=>_('Tip: Enter a space-separated list of artifact ids ([#NNN] also accepted)')), $attrs), $edit_contents)
 			.html_e('div',array_merge(array('id'=>'show'.$extra_field_id, 'style'=>'display: block'), $attrs), $html_contents);
 	}
@@ -1155,6 +1159,9 @@ class ArtifactTypeHtml extends ArtifactType {
 			$vals[$i]=$arr[$i]['element_name'];
 		}
 		$attrsTxt = array();
+		if (isset($attrs['form'])) {
+			$attrsTxt['form'] = $attrs['form'];
+		}
 		if (is_object($ah)) {
 			$attrsTxt['pattern']='^(?!'.$ah->getID().'$)\d*$';
 		} else {
