@@ -563,7 +563,7 @@ EOS;
 										} else {
 											$allowed = $allowedWF;
 										}
-										$allowed[] = $selected_node;
+										$allowed[] = $value;
 										$cellContent .= $ath->renderSelect($keys[0], $value, false, $extrafieldObject->getShow100label(), false, false, $allowed, $attrs);
 									}
 									break;
@@ -579,6 +579,19 @@ EOS;
 												'<div>' . $HTML->getEditFilePic(_('Click to edit'), _('Click to edit'), array('class' => 'mini_buttons tip-ne', 'onclick'=>"switch2edit(this, 'show$keys[0]', 'edit$keys[0]')")).'</div>'.
 												'</div>';
 										$cellContent .= $ath->renderRelationField($keys[0], $value, $extrafieldObject->getAttribute1(), $extrafieldObject->getAttribute2(), $attrs);
+									}
+									break;
+								case ARTIFACT_EXTRAFIELDTYPE_PARENT:
+									if ($readonly) {
+										$value = preg_replace_callback('/\b(\d+)\b/', create_function('$matches', 'return _artifactid2url($matches[1], \'title\');'), $value);
+										$cellContent .= $value;
+									} else {
+										// specific rewrite of cellContent
+										$cellContent = '<div style="width:100%; line-height: 20px;">' .
+												'<div style="float:left;">'.html_e('strong', array(), $extrafieldObject->getName()._(':')).$mandatory.'</div>' .
+												'<div>' . $HTML->getEditFilePic(_('Click to edit'), _('Click to edit'), array('class' => 'mini_buttons tip-ne', 'onclick'=>"switch2edit(this, 'show$keys[0]', 'edit$keys[0]')")).'</div>'.
+												'</div>';
+										$cellContent .= $ath->renderParentField($keys[0], $value, $extrafieldObject->getAttribute1(), $extrafieldObject->getAttribute2(), $attrs);
 									}
 									break;
 								case ARTIFACT_EXTRAFIELDTYPE_INTEGER:
