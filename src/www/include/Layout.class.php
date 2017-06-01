@@ -1025,6 +1025,10 @@ abstract class Layout extends FFError {
 		return $this->getPicto('ic/add-16.png', $title, $alt, 16, 16, $otherAttr);
 	}
 
+	function getMinusPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/minus-16.png', $title, $alt, 16, 16, $otherAttr);
+	}
+
 	function getFolderPic($title = '', $alt = '', $otherAttr = array()) {
 		return $this->getPicto('ic/folder.png', $title, $alt, 20, 20, $otherAttr);
 	}

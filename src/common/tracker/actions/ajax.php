@@ -56,8 +56,21 @@ switch ($function) {
 		$child_id = getIntFromRequest('child_id');
 		echo add_child($aid, $child_id);
 		break;
+	case 'remove_parent':
+		$aid = getIntFromRequest('aid');
+		$parent_id = getIntFromRequest('parent_id');
+		echo remove_parent($aid, $parent_id);
+		break;
+	case 'remove_child':
+		$aid = getIntFromRequest('aid');
+		$child_id = getIntFromRequest('child_id');
+		echo remove_parent($child_id, $aid);
+		break;
 	default:
-		echo '';
+		$ret = array();
+		$ret['message'] = _('Unknown function').(':').' '.$function;
+		return json_encode($ret);
+		exit();
 		break;
 }
 
@@ -249,6 +262,20 @@ function add_child($parent_id, $child_id){
 	$at = $artifact->getArtifactType();
 	$parent= new ArtifactHtml($at, $parent_id);
 	$ret['children'] = $parent->showChildren();
+	return json_encode($ret);
+	exit();
+}
+
+function remove_parent($child_id, $parent_id){
+	$ret = array('message' => '');
+	$artifact = artifact_get_object($child_id);
+	$at = $artifact->getArtifactType();
+	$child = new ArtifactHtml($at, $child_id);
+	if (!$child->resetParent()) {
+		$ret['message']=$child->getErrorMessage();
+		return json_encode($ret);
+		exit();
+	}
 	return json_encode($ret);
 	exit();
 }

@@ -1652,10 +1652,7 @@ EOS;
 		});
 	});
 
-
-
-
-	$("img[name='addparent']").click(function(){
+	$("img.addparent").click(function(){
 		$.ajax({
 			type: 'POST',
 			url: 'index.php',
@@ -1671,14 +1668,16 @@ EOS;
 					$("div#show"+answer['parent_efid']).html(answer['parent_link']);
 					$("input#parent_id").val('');
 					$("div.addparent").addClass('hide');
+					$("img.removeparent").click(function(){
+						removeParent($(this).data("id"));
+					});
 				}
 				return true;
 			}
 		});
 	});
 
-
-	$("img[name='addchild']").click(function(){
+	$("img.addchild").click(function(){
 		$.ajax({
 			type: 'POST',
 			url: 'index.php',
@@ -1691,6 +1690,9 @@ EOS;
 				} else {
 					$("table.children").replaceWith(answer['children']);
 					$("input#child_id").val('');
+					$("img.removechild").click(function(){
+						removeChild($(this).data("id"));
+					});
 				}
 				return true;
 			}
@@ -1698,6 +1700,50 @@ EOS;
 	});
 
 
+	$("img.removeparent").click(function(){
+		removeParent($(this).data("id"));
+	});
+
+	function removeParent(id) {
+		$.ajax({
+			type: 'POST',
+			url: 'index.php',
+			data: 'rtype=ajax&function=remove_parent&group_id='+groupId+'&atid='+atId+'&aid='+$("input#aid").val()+'&parent_id='+id,
+			async: false,
+			dataType: 'json',
+			success: function(answer){
+				if(answer['message']) {
+					showMessage(answer['message'], 'error');
+				} else {
+					$("span#parent"+id).remove();
+					$("div.addparent").removeClass('hide');
+				}
+				return true;
+			}
+		});
+	};
+
+	$("img.removechild").click(function(){
+		removeChild($(this).data("id"));
+	});
+
+	function removeChild(id) {
+		$.ajax({
+			type: 'POST',
+			url: 'index.php',
+			data: 'rtype=ajax&function=remove_child&group_id='+groupId+'&atid='+atId+'&aid='+$("input#aid").val()+'&child_id='+id,
+			async: false,
+			dataType: 'json',
+			success: function(answer){
+				if(answer['message']) {
+					showMessage(answer['message'], 'error');
+				} else {
+					$("span#child"+id).remove();
+				}
+				return true;
+			}
+		});
+	};
 	$(".autoassign[name^='extra_fields']").change(function(){
 		if ($(this).prop('tagName') == 'SELECT') {
 			var elmnts = $(this).children('option:selected');

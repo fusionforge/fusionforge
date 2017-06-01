@@ -225,6 +225,11 @@ function hide_edit_button(id) {
 	}
 
 	function showChildren() {
+		global $HTML;
+		global $atid;
+		if (!forge_check_perm('tracker', $atid, 'submit')) {
+			$readonly = true;
+		}
 		$children = $this->getChildren();
 		$rows= count($children);
 		$return = '';
@@ -248,8 +253,13 @@ function hide_edit_button(id) {
 					if ($arr['status_id'] == 2) {
 						$arg['class'] = 'artifact_closed';
 					}
+					$return .= html_ao('span',array('id'=>'child'.$arr['artifact_id']));
 					$return .= '<br/>&nbsp;&nbsp;&nbsp;';
 					$return .= util_make_link($url, $text, $arg).' '.util_make_link($url, $arr['summary']);
+					if (!$readonly) {
+						$return .= $HTML->getMinusPic(_('Click to remove child'), _('Click to remove child'), array('class'=>'removechild', 'data-id'=>$arr['artifact_id']));
+					}
+					$return .= html_ac(html_ap()-1);
 				}
 			}
 			$return .= '</td>
@@ -260,6 +270,11 @@ function hide_edit_button(id) {
 	}
 
 	function showParent() {
+		global $HTML;
+		global $atid;
+		if (!forge_check_perm('tracker', $atid, 'submit')) {
+			$readonly = true;
+		}
 		$parentId = $this->getParent();
 		$return = '';
 		if ($parentId){
@@ -278,8 +293,13 @@ function hide_edit_button(id) {
 				if ($parent->getStatusID() == 2) {
 					$arg['class'] = 'artifact_closed';
 				}
+				$return .= html_ao('span',array('id'=>'parent'.$parent->getID()));
 				$return .= '<br/>&nbsp;&nbsp;&nbsp;';
 				$return .= util_make_link($url, $text, $arg).' '.util_make_link($url, $parent->getSummary());
+				if (!$readonly) {
+					$return .= $HTML->getMinusPic(_('Click to remove parent'), _('Click to remove parent'), array('class'=>'removeparent', 'data-id'=>$parent->getID()));
+				}
+				$return .= html_ac(html_ap()-1);
 			}
 			$return .= '</td>
 				</tr>
@@ -292,6 +312,10 @@ function hide_edit_button(id) {
 
 	function showDependencies() {
 		global $HTML;
+		global $atid;
+		if (!forge_check_perm('tracker', $atid, 'submit')) {
+			$readonly = true;
+		}
 		$return = '';
 		$ef_parent = $this->getArtifactType()->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_PARENT));
 		if (count($ef_parent)) {
@@ -299,22 +323,26 @@ function hide_edit_button(id) {
 			$return .= html_ao('div',array('class'=>'fullwidth'));
 			$return .= html_e('strong',array(),_('Parent')).html_e('br');
 			$return .= $this->showParent();
-			if ($this->hasParent()) {
-				$return .= html_ao('div',array('class'=>'fullwidth addparent hide'));
-			} else {
-				$return .= html_ao('div',array('class'=>'fullwidth addparent'));
+			if (!$readonly) {
+				if ($this->hasParent()) {
+					$return .= html_ao('div',array('class'=>'fullwidth addparent hide'));
+				} else {
+					$return .= html_ao('div',array('class'=>'fullwidth addparent'));
+				}
+				$return .= html_e('input', array('type'=>'text', 'id'=>'parent_id', 'value'=>'', 'size'=>20, 'maxlength'=>80, 'pattern'=>'^(?!'.$this->getID().'$)\d*$'));
+				$return .= $HTML->getAddPic(_('Click to add parent'), _('Click to add parent'), array('class'=>'addparent')).html_e('br');
+				$return .= html_ac(html_ap()-1);
 			}
-			$return .= html_e('input', array('type'=>'text', 'id'=>'parent_id', 'value'=>'', 'size'=>20, 'maxlength'=>80, 'pattern'=>'^(?!'.$this->getID().'$)\d*$'));
-			$return .= $HTML->getAddPic(_('Click to add parent'), _('Click to add parent'), array('name'=>'addparent')).html_e('br');
-			$return .= html_ac(html_ap()-1);
 			$return .= html_ac(html_ap()-1).html_e('br');
 			$return .= html_ao('div',array('class'=>'fullwidth'));
 			$return .= html_e('strong',array(),_('Children')).html_e('br');
 			$return .= $this->showChildren();
-			$return .= html_ao('div',array('class'=>'fullwidth addchild'));
-			$return .= html_e('input', array('type'=>'text', 'id'=>'child_id', 'value'=>'', 'size'=>20, 'maxlength'=>80, 'pattern'=>'^(?!'.$this->getID().'$)\d*$'));
-			$return .= $HTML->getAddPic(_('Click to add child'), _('Click to add child'), array('name'=>'addchild'));
-			$return .= html_ac(html_ap()-1);
+			if (!$readonly) {
+				$return .= html_ao('div',array('class'=>'fullwidth addchild'));
+				$return .= html_e('input', array('type'=>'text', 'id'=>'child_id', 'value'=>'', 'size'=>20, 'maxlength'=>80, 'pattern'=>'^(?!'.$this->getID().'$)\d*$'));
+				$return .= $HTML->getAddPic(_('Click to add child'), _('Click to add child'), array('class'=>'addchild'));
+				$return .= html_ac(html_ap()-1);
+			}
 			$return .= html_ac(html_ap()-1);
 		}
 		return $return;

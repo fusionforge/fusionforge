@@ -2340,6 +2340,34 @@ class Artifact extends FFObject {
 		return $return;
 	}
 
+	function resetParent(){
+		$return = false;
+		$update = false;
+		if (!$this->getParent()) {
+			return true;
+		}
+		$extra_fields = $this->getExtraFieldData();
+		$priority = $this->getPriority();
+		$status_id = $this->getStatusID();
+		$status_id = $this->getArtifactType()->remapStatus($status_id, $extra_fields);
+		$assigned_to = $this->getAssignedTo();
+		$summary = $this->getSummary();
+		$canned_response = 100;
+		$details = "";
+		$artifact_type_id = $this->getArtifactType()->getID();
+		$description = $this->getDetails();
+		$ef_parent_arr= $this->getArtifactType()->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_PARENT));
+		$ef_parent = array_shift($ef_parent_arr);
+		$ef_parent_id = $ef_parent['extra_field_id'];
+		$extra_fields[$ef_parent_id] = '';
+		$return = $this->update($priority,$status_id,
+				$assigned_to,$summary,$canned_response,$details,$artifact_type_id,
+				$extra_fields, $description);
+		unset($this->parent);
+		$this->fetchData($this->getID());
+		return $return;
+	}
+
 	function getPermalink() {
 		return '/tracker/a_follow.php/'.$this->getID();
 	}
