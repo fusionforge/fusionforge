@@ -172,10 +172,7 @@ class Widget_TrackerComment extends Widget {
 						$ah->showRelations());
 			if (forge_get_config('use_artefacts_dependencies')) {
 				$tabberContent .= html_e('div', array('id' => 'tabber-dependencies', 'class' => 'tabbertab'),
-						html_e('strong',array(),_('Parent')).html_e('br').
-						$ah->showParent().html_e('br').
-						html_e('strong',array(),_('Children')).html_e('br').
-						$ah->showChildren());
+						$ah->showDependencies());
 			}
 			if (forge_get_config('use_object_associations')) {
 				$associationContent = $ah->showAssociations('/tracker/?func=removeassoc&aid='.$ah->getID().'&group_id='.$group_id.'&atid='.$ath->getID());

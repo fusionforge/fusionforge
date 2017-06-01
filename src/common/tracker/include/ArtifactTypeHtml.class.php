@@ -1539,7 +1539,6 @@ class ArtifactTypeHtml extends ArtifactType {
 	var invalidInputMsg = '". _("This choice is not allowed")."';
 	var groupId =".$this->Group->getID().";
 	var atId = ".$this->getID().";";
-
 		$effortUnitSet = New EffortUnitSet($this, $this->getEffortUnitSet());
 		if ($effortUnitSet->isAutoconvert()) {
 			$jseffort = <<<'EOS'
@@ -1600,7 +1599,6 @@ EOS;
 			data: 'rtype=ajax&function=get_formulas_results&group_id='+groupId+'&atid='+atId+'&status='+$("select[name='status_id'] option:selected").text()+'&assigned_to='+$("select[name='assigned_to'] option:selected").text()+'&'+$("[name^='extra_fields'], #tracker-summary, #tracker-description, [name='priority']").serialize(),
 			async: false,
 			dataType: 'json',
-			contentType:"application/json; charset=utf-8",
 			success: function(answer){
 				if(answer['message']) {
 					showMessage(answer['message'], 'error');
@@ -1653,6 +1651,53 @@ EOS;
 			}
 		});
 	});
+
+
+
+
+	$("img[name='addparent']").click(function(){
+		$.ajax({
+			type: 'POST',
+			url: 'index.php',
+			data: 'rtype=ajax&function=add_parent&group_id='+groupId+'&atid='+atId+'&aid='+$("input#aid").val()+'&parent_id='+$("input#parent_id").val(),
+			async: false,
+			dataType: 'json',
+			success: function(answer){
+				if(answer['message']) {
+					showMessage(answer['message'], 'error');
+				} else {
+					$("table.parent").replaceWith(answer['parent']);
+					$("input[name='extra_fields["+answer['parent_efid']+"]']").val(answer['parent_id']);
+					$("div#show"+answer['parent_efid']).html(answer['parent_link']);
+					$("input#parent_id").val('');
+					$("div.addparent").addClass('hide');
+				}
+				return true;
+			}
+		});
+	});
+
+
+	$("img[name='addchild']").click(function(){
+		$.ajax({
+			type: 'POST',
+			url: 'index.php',
+			data: 'rtype=ajax&function=add_child&group_id='+groupId+'&atid='+atId+'&aid='+$("input#aid").val()+'&child_id='+$("input#child_id").val(),
+			async: false,
+			dataType: 'json',
+			success: function(answer){
+				if(answer['message']) {
+					showMessage(answer['message'], 'error');
+				} else {
+					$("table.children").replaceWith(answer['children']);
+					$("input#child_id").val('');
+				}
+				return true;
+			}
+		});
+	});
+
+
 	$(".autoassign[name^='extra_fields']").change(function(){
 		if ($(this).prop('tagName') == 'SELECT') {
 			var elmnts = $(this).children('option:selected');

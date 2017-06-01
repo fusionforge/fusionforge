@@ -23,6 +23,7 @@
  */
 
 require_once $gfcommon.'tracker/ArtifactExpression.class.php';
+require_once $gfcommon.'tracker/Artifact.class.php';
 
 global $group;
 global $atid;
@@ -44,6 +45,16 @@ switch ($function) {
 		$summary = getStringFromRequest('summary');
 		$description = getStringFromRequest('description');
 		echo get_formulas_results($group, $atid, $extra_fields, $status, $assigned_to, $priority, $summary, $description);
+		break;
+	case 'add_parent':
+		$aid = getIntFromRequest('aid');
+		$parent_id = getIntFromRequest('parent_id');
+		echo add_parent($aid, $parent_id);
+		break;
+	case 'add_child':
+		$aid = getIntFromRequest('aid');
+		$child_id = getIntFromRequest('child_id');
+		echo add_child($aid, $child_id);
 		break;
 	default:
 		echo '';
@@ -202,4 +213,42 @@ function get_formulas_results($group, $atid, $extra_fields=array(), $status='', 
 	}
 	$ret['fields'] = $result;
 	return json_encode($ret);
+}
+
+function add_parent($child_id, $parent_id){
+	$ret = array('message' => '');
+	$artifact = artifact_get_object($child_id);
+	$at = $artifact->getArtifactType();
+	$child = new ArtifactHtml($at, $child_id);
+	if (!$child->setParent($parent_id)) {
+		$ret['message']=$child->getErrorMessage();
+		return json_encode($ret);
+		exit();
+	}
+	$ret['parent_id'] = $parent_id;
+	$ef_parent_arr= $at->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_PARENT));
+	$ef_parent = array_shift($ef_parent_arr);
+	$ret['parent_efid'] = $ef_parent['extra_field_id'];
+	$ret['parent_link'] = _artifactid2url($parent_id, 'title');
+	$ret['parent'] = $child->showParent();
+	return json_encode($ret);
+	exit();
+}
+
+function add_child($parent_id, $child_id){
+	$ret = array('message' => '');
+	$artifact = artifact_get_object($child_id);
+	$at = $artifact->getArtifactType();
+	$child = new ArtifactHtml($at, $child_id);
+	if (!$child->setParent($parent_id)) {
+		$ret['message']=$child->getErrorMessage();
+		return json_encode($ret);
+		exit();
+	}
+	$artifact = artifact_get_object($parent_id);
+	$at = $artifact->getArtifactType();
+	$parent= new ArtifactHtml($at, $parent_id);
+	$ret['children'] = $parent->showChildren();
+	return json_encode($ret);
+	exit();
 }

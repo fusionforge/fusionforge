@@ -1564,7 +1564,7 @@ class Artifact extends FFObject {
 				$new = '';
 				foreach (explode(' ',$value) as $id) {
 					if (preg_match('/^(\d+)$/', $id)) {
-						if ($id == $this->getID) {
+						if ($id == $this->getID()) {
 							$this->setError('Illegal id '.$id.', self reference for field: '.$ef[$efid]['field_name'].'.'); // @todo: lang
 							return false;
 						}
@@ -2303,6 +2303,40 @@ class Artifact extends FFObject {
 				}
 			}
 		}
+		return $return;
+	}
+
+	function setParent($parent_id){
+		$return = false;
+		$update = false;
+		if ($this->getParent()) {
+			if ($this->getParent() == $parent_id) {
+				return true;
+			} else {
+				$this->setError(_('Error')._(':').' '.sprintf(_('Artifact $s has already a parent', $child_id)));
+				return false;
+			}
+		}
+		$extra_fields = $this->getExtraFieldData();
+		$priority = $this->getPriority();
+		$status_id = $this->getStatusID();
+		$status_id = $this->getArtifactType()->remapStatus($status_id, $extra_fields);
+		$assigned_to = $this->getAssignedTo();
+		$summary = $this->getSummary();
+		$canned_response = 100;
+		$details = "";
+		$artifact_type_id = $this->getArtifactType()->getID();
+		$description = $this->getDetails();
+		$ef_parent_arr= $this->getArtifactType()->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_PARENT));
+		$ef_parent = array_shift($ef_parent_arr);
+		$ef_parent_id = $ef_parent['extra_field_id'];
+		$extra_fields[$ef_parent_id] = $parent_id;
+		$ret['ef_parent_id'] = $ef_parent_id;
+		$return = $this->update($priority,$status_id,
+							$assigned_to,$summary,$canned_response,$details,$artifact_type_id,
+							$extra_fields, $description);
+		unset($this->parent);
+		$this->fetchData($this->getID());
 		return $return;
 	}
 

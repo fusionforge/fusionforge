@@ -277,11 +277,7 @@ echo $ath->renderFiles($group_id, $ah);
 </div><?php
 if (forge_get_config('use_artefacts_dependencies')) { ?>
 	<div id="tabber-dependencies" class="tabbertab">
-		<?php
-			echo '<strong>'._('Parent').'</strong><br>';
-			echo $ah->showParent().'<br>';
-			echo '<strong>'._('Children').'</strong><br>';
-			echo $ah->showChildren();
+		<?php echo $ah->showDependencies();
 		?>
 	</div><?php
 }
