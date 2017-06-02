@@ -12,7 +12,8 @@ RUN cd /opt/sources/fusionforge && source ./autoinstall/common-backports && \
          httpd mod_dav_svn mod_ssl postgresql-server postgresql-contrib nscd \
          cvs subversion viewvc python-pycurl git gitweb xinetd \
          moin mod_wsgi python-psycopg2 \
-         unoconv poppler-utils libreoffice-headless && \
+         unoconv poppler-utils libreoffice-headless \
+         cronie && \
     cd src/ && \
     make && \
     make install-base install-shell install-scm \
