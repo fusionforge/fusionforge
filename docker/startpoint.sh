@@ -23,6 +23,7 @@ set -e
 __postinstall() {
 /usr/local/share/fusionforge/post-install.d/common/common.sh configure
 /usr/local/share/fusionforge/post-install.d/web/web.sh rawconfigure
+/usr/local/share/fusionforge/post-install.d/shell/shell.sh rawconfigure
 }
 
 __run_supervisor() {
