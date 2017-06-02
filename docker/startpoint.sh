@@ -26,10 +26,15 @@ __postinstall() {
 /usr/local/share/fusionforge/post-install.d/shell/shell.sh rawconfigure
 }
 
+__etchost() {
+echo "127.0.0.1  scm."`hostname -f` >> /etc/hosts
+}
+
 __run_supervisor() {
 supervisord -n
 }
 
 # Call all functions
 __postinstall
+__etchost
 __run_supervisor
