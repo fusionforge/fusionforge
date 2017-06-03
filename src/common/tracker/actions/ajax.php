@@ -226,24 +226,28 @@ function get_formulas_results($group, $atid, $extra_fields=array(), $status='', 
 	}
 	$ret['fields'] = $result;
 	return json_encode($ret);
+	exit();
 }
 
 function add_parent($child_id, $parent_id) {
 	$ret = array('message' => '');
 	$artifact = artifact_get_object($child_id);
-	$at = $artifact->getArtifactType();
-	$child = new ArtifactHtml($at, $child_id);
-	if (!$child->setParent($parent_id)) {
-		$ret['message'] = $child->getErrorMessage();
-		return json_encode($ret);
-		exit();
+	if ($artifact && is_object($artifact) && !$artifact->isError()) {
+		$at = $artifact->getArtifactType();
+		$child = new ArtifactHtml($at, $child_id);
+		if (!$child->setParent($parent_id)) {
+			$ret['message'] = $child->getErrorMessage();
+		} else {
+			$ret['parent_id'] = $parent_id;
+			$ef_parent_arr= $at->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_PARENT));
+			$ef_parent = array_shift($ef_parent_arr);
+			$ret['parent_efid'] = $ef_parent['extra_field_id'];
+			$ret['parent_link'] = _artifactid2url($parent_id, 'title');
+			$ret['parent'] = $child->showParent();
+		}
+	} else {
+		$ret['message'] = _('Unable to get artifact');
 	}
-	$ret['parent_id'] = $parent_id;
-	$ef_parent_arr= $at->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_PARENT));
-	$ef_parent = array_shift($ef_parent_arr);
-	$ret['parent_efid'] = $ef_parent['extra_field_id'];
-	$ret['parent_link'] = _artifactid2url($parent_id, 'title');
-	$ret['parent'] = $child->showParent();
 	return json_encode($ret);
 	exit();
 }
@@ -251,17 +255,20 @@ function add_parent($child_id, $parent_id) {
 function add_child($parent_id, $child_id) {
 	$ret = array('message' => '');
 	$artifact = artifact_get_object($child_id);
-	$at = $artifact->getArtifactType();
-	$child = new ArtifactHtml($at, $child_id);
-	if (!$child->setParent($parent_id)) {
-		$ret['message'] = $child->getErrorMessage();
-		return json_encode($ret);
-		exit();
+	if ($artifact && is_object($artifact) && !$artifact->isError()) {
+		$at = $artifact->getArtifactType();
+		$child = new ArtifactHtml($at, $child_id);
+		if (!$child->setParent($parent_id)) {
+			$ret['message'] = $child->getErrorMessage();
+		} else {
+			$artifact = artifact_get_object($parent_id);
+			$at = $artifact->getArtifactType();
+			$parent= new ArtifactHtml($at, $parent_id);
+			$ret['children'] = $parent->showChildren();
+		}
+	} else {
+		$ret['message'] = _('Unable to get artifact');
 	}
-	$artifact = artifact_get_object($parent_id);
-	$at = $artifact->getArtifactType();
-	$parent= new ArtifactHtml($at, $parent_id);
-	$ret['children'] = $parent->showChildren();
 	return json_encode($ret);
 	exit();
 }
@@ -273,8 +280,6 @@ function remove_parent($child_id, $parent_id) {
 	$child = new ArtifactHtml($at, $child_id);
 	if (!$child->resetParent()) {
 		$ret['message'] = $child->getErrorMessage();
-		return json_encode($ret);
-		exit();
 	}
 	return json_encode($ret);
 	exit();
