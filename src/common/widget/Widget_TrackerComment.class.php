@@ -97,8 +97,8 @@ class Widget_TrackerComment extends Widget {
 			}
 			if (forge_get_config('use_artefacts_dependencies')) {
 				$tabTitle = _('Dependencies');
-				$nbChildren = $ah->hasChildren()?$ah->hasChildren():0;
-				$nbParent = $ah->hasParent()?1:0;
+				$nbChildren = $ah->hasChildren() ? $ah->hasChildren() : 0;
+				$nbParent = $ah->hasParent() ? 1 : 0;
 				if ($nbChildren+$nbParent) {
 					$tabTitle .= ' ('.$nbParent.'/'.$nbChildren.')';
 				}

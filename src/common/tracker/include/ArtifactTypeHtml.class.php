@@ -1715,7 +1715,7 @@ EOS;
 				if(answer['message']) {
 					showMessage(answer['message'], 'error');
 				} else {
-					$("span#parent"+id).remove();
+					$("table#parent"+id).remove();
 					$("div.addparent").removeClass('hide');
 				}
 				return true;

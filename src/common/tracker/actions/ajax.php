@@ -228,13 +228,13 @@ function get_formulas_results($group, $atid, $extra_fields=array(), $status='', 
 	return json_encode($ret);
 }
 
-function add_parent($child_id, $parent_id){
+function add_parent($child_id, $parent_id) {
 	$ret = array('message' => '');
 	$artifact = artifact_get_object($child_id);
 	$at = $artifact->getArtifactType();
 	$child = new ArtifactHtml($at, $child_id);
 	if (!$child->setParent($parent_id)) {
-		$ret['message']=$child->getErrorMessage();
+		$ret['message'] = $child->getErrorMessage();
 		return json_encode($ret);
 		exit();
 	}
@@ -248,13 +248,13 @@ function add_parent($child_id, $parent_id){
 	exit();
 }
 
-function add_child($parent_id, $child_id){
+function add_child($parent_id, $child_id) {
 	$ret = array('message' => '');
 	$artifact = artifact_get_object($child_id);
 	$at = $artifact->getArtifactType();
 	$child = new ArtifactHtml($at, $child_id);
 	if (!$child->setParent($parent_id)) {
-		$ret['message']=$child->getErrorMessage();
+		$ret['message'] = $child->getErrorMessage();
 		return json_encode($ret);
 		exit();
 	}
@@ -266,13 +266,13 @@ function add_child($parent_id, $child_id){
 	exit();
 }
 
-function remove_parent($child_id, $parent_id){
+function remove_parent($child_id, $parent_id) {
 	$ret = array('message' => '');
 	$artifact = artifact_get_object($child_id);
 	$at = $artifact->getArtifactType();
 	$child = new ArtifactHtml($at, $child_id);
 	if (!$child->resetParent()) {
-		$ret['message']=$child->getErrorMessage();
+		$ret['message'] = $child->getErrorMessage();
 		return json_encode($ret);
 		exit();
 	}

@@ -281,7 +281,7 @@ function hide_edit_button(id) {
 		$return = '';
 		if ($parentId){
 			$parent = artifact_get_object($parentId);
-			$return = '	<table class="parent fullwidth">
+			$return = $HTML->listTableTop(array(), array(), 'parent fullwidth', 'parent'.$parent->getID()).'
 							<tr>
 								<td colspan="2">';
 			$parentAt = $parent->getArtifactType();
@@ -295,7 +295,7 @@ function hide_edit_button(id) {
 				if ($parent->getStatusID() == 2) {
 					$arg['class'] = 'artifact_closed';
 				}
-				$return .= html_ao('span',array('id'=>'parent'.$parent->getID()));
+				$return .= html_ao('span');
 				$return .= '<br/>&nbsp;&nbsp;&nbsp;';
 				$return .= util_make_link($url, $text, $arg).' '.util_make_link($url, $parent->getSummary());
 				if (!$readonly) {
@@ -304,8 +304,7 @@ function hide_edit_button(id) {
 				$return .= html_ac(html_ap()-1);
 			}
 			$return .= '</td>
-				</tr>
-				</table>';
+				</tr>'.$HTML->listTableBottom();
 		} else {
 			$return = '	<table class="parent fullwidth"></table>';
 		}
