@@ -306,7 +306,7 @@ EOS;
 		$arr = $this->getExtraFieldIDs($owner_id);
 		$availableExtrafields = array();
 		foreach ($extrafields as $extrafield) {
-			if (!in_array($extrafield[0], $arr)) {
+			if (($extrafield[3] != ARTIFACT_EXTRAFIELDTYPE_PARENT) && !in_array($extrafield[0], $arr)) {
 				$availableExtrafields[] = $extrafield;
 			}
 		}
