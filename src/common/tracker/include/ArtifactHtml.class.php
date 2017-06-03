@@ -227,6 +227,7 @@ function hide_edit_button(id) {
 	function showChildren() {
 		global $HTML;
 		global $atid;
+		$readonly = false;
 		if (!forge_check_perm('tracker', $atid, 'submit')) {
 			$readonly = true;
 		}
@@ -272,6 +273,7 @@ function hide_edit_button(id) {
 	function showParent() {
 		global $HTML;
 		global $atid;
+		$readonly = false;
 		if (!forge_check_perm('tracker', $atid, 'submit')) {
 			$readonly = true;
 		}
@@ -313,6 +315,7 @@ function hide_edit_button(id) {
 	function showDependencies() {
 		global $HTML;
 		global $atid;
+		$readonly = false;
 		if (!forge_check_perm('tracker', $atid, 'submit')) {
 			$readonly = true;
 		}

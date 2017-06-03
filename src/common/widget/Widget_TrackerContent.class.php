@@ -604,15 +604,17 @@ EOS;
 								/* reserved for aljeux extension, for merge into FusionForge */
 								case ARTIFACT_EXTRAFIELDTYPE_FORMULA:
 									break;
-								/* reserved for Evolvis extension, for merge into FusionForge */
 								case ARTIFACT_EXTRAFIELDTYPE_DATETIME:
 									if ($readonly) {
-										$cellContent .= date('Y-m-d H:i', $value);
+										if ($value) {
+											$cellContent .= date('Y-m-d H:i', $value);
+										} else {
+											$cellContent .= _('None');
+										}
 									} else {
 										$cellContent .= $ath->renderDatetime($keys[0], $value, $attrs);
 									}
 									break;
-								/* 12: reserved DATETIME*/
 								/* 13: reserved SLA */
 								case ARTIFACT_EXTRAFIELDTYPE_SLA:
 									break;
@@ -652,7 +654,7 @@ EOS;
 											$effortUnitFactory = New EffortUnitFactory($effortUnitSet);
 											$cellContent .= $effortUnitFactory->encodedToString($value);
 										} else {
-											$cellContent .= _('Undefined');
+											$cellContent .= _('None');
 										}
 									} else {
 										$cellContent .= $ath->renderEffort($keys[0], $value, $extrafieldObject->getAttribute1(), $extrafieldObject->getAttribute2(), $attrs);
