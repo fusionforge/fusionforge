@@ -643,20 +643,19 @@ class ArtifactType extends FFError {
 			$extra_fields = array();
 			if (count($types)) {
 				$res = db_query_params('SELECT *
-				FROM artifact_extra_field_list
-				WHERE group_artifact_id=$1
-				AND field_type = ANY ($2)'.
-				$where.' '.
-				'ORDER BY field_type ASC',
-							array($this->getID(),
-									db_int_array_to_any_clause($types)));
+							FROM artifact_extra_field_list
+							WHERE group_artifact_id=$1
+							AND field_type = ANY ($2)'.
+							$where.' '.
+							'ORDER BY field_type ASC',
+							array($this->getID(), db_int_array_to_any_clause($types)));
 			} else {
 				$res = db_query_params('SELECT *
-				FROM artifact_extra_field_list
-				WHERE group_artifact_id=$1'.
-				$where.' '.
-				'ORDER BY field_type ASC',
-					array($this->getID()));
+							FROM artifact_extra_field_list
+							WHERE group_artifact_id=$1'.
+							$where.' '.
+							'ORDER BY field_type ASC',
+							array($this->getID()));
 			}
 			while ($arr = db_fetch_array($res)) {
 				$extra_fields[$arr['extra_field_id']] = $arr;

@@ -38,7 +38,6 @@ define('ARTIFACT_EXTRAFIELDTYPE_RELATION',9);
 define('ARTIFACT_EXTRAFIELDTYPE_INTEGER',10);
 /* reserved for aljeux extension, for merge into FusionForge */
 define('ARTIFACT_EXTRAFIELDTYPE_FORMULA',11);
-/* reserved for Evolvis extension, for merge into FusionForge */
 define('ARTIFACT_EXTRAFIELDTYPE_DATETIME',12);
 /* 13: reserved SLA */
 define('ARTIFACT_EXTRAFIELDTYPE_SLA',13);
