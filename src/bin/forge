@@ -638,14 +638,65 @@ class CliActions {
 										$ndocObject = document_get_object($ndocid);
 										foreach ($stream_file['associatedToArray'] as $associatedToElement) {
 											if (isset($associatedToElement['Artifact']) && forge_get_config('use_tracker') && $new_group->usesTracker()) {
-												//TODO: compute it!
+												foreach ($associatedToElement['Artifact'] as $refatid) {
+													foreach ($refatid as $refaid) {
+														$nrefaid = $this->getMappingId($refaid, 'artifact');
+														$nrefartf = artifact_get_object($nrefaid);
+														if (!$ndocObject->addAssociationTo($nrefartf)) {
+															echo $ndocObject->getErrorMessage()."\n";
+															db_rollback();
+															return false;
+														}
+													}
+												}
 											}
-											if (isset($associatedToElement['Document'][$stream['setup']['data_array']['group_id']]) && forge_get_config('use_docman') && $new_group->usesTracker() && is_array($associatedToElement['Document'][$stream['setup']['data_array']['group_id']])) {
+											if (isset($associatedToElement['Document'][$stream['setup']['data_array']['group_id']]) && $new_group->usesTracker() && is_array($associatedToElement['Document'][$stream['setup']['data_array']['group_id']])) {
 												foreach ($associatedToElement['Document'][$stream['setup']['data_array']['group_id']] as $refdocid) {
 													$nrefdocid = $this->getMappingId($refdocid, 'document');
 													$nrefdocObject = document_get_object($nrefdocid);
 													if (!$ndocObject->addAssociationTo($nrefdocObject)) {
 														echo $ndocObject->getErrorMessage()."\n";
+														db_rollback();
+														return false;
+													}
+												}
+											}
+											if (isset($associatedToElement['FRSRelease']) && forge_get_config('use_frs') && $new_group->usesFRS() && is_array($associatedToElement['FRSRelease'])) {
+												//TODO: compute it!
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+					if (forge_get_config('use_tracker') && isset($stream['trackers']) && is_array($stream['trackers']) {
+						foreach ($stream['trackers'] as $stream_tracker) {
+							if (isset($stream_tracker['data']) && is_array($stream_tracker['data'])) {
+								foreach ($stream_tracker['data'] as $stream_artifact) {
+									if (isset($stream_artifact['associatedToArray']) && is_array($stream_artifact['associatedToArray'])) {
+										$nartfid = $this->getMappingId($stream_artifact['data_array']['artifact_id'], 'artifact');
+										$nartfObject = artifact_get_object($nartfid);
+										foreach ($stream_file['associatedToArray'] as $associatedToElement) {
+											if (isset($associatedToElement['Artifact']) && $new_group->usesTracker()) {
+												foreach ($associatedToElement['Artifact'] as $refatid) {
+													foreach ($refatid as $refaid) {
+														$nrefaid = $this->getMappingId($refaid, 'artifact');
+														$nrefartf = artifact_get_object($nrefaid);
+														if (!$nartfObject->addAssociationTo($nrefartf)) {
+															echo $nartfObject->getErrorMessage()."\n";
+															db_rollback();
+															return false;
+														}
+													}
+												}
+											}
+											if (isset($associatedToElement['Document'][$stream['setup']['data_array']['group_id']]) && forge_get_config('use_docman') && $new_group->usesTracker() && is_array($associatedToElement['Document'][$stream['setup']['data_array']['group_id']])) {
+												foreach ($associatedToElement['Document'][$stream['setup']['data_array']['group_id']] as $refdocid) {
+													$nrefdocid = $this->getMappingId($refdocid, 'document');
+													$nrefdocObject = document_get_object($nrefdocid);
+													if (!$nartfObject->addAssociationTo($nrefdocObject)) {
+														echo $nartfObject->getErrorMessage()."\n";
 														db_rollback();
 														return false;
 													}
@@ -910,6 +961,16 @@ class CliActions {
 		return $surveyDump;
 	}
 
+	function surveyImport($file, $format = 'json') {
+		global $importRefMapping;
+		$stream = $this->loadFile($file, $format);
+		if (!$stream) {
+			return false;
+		}
+		echo _('surveyImport to be implemented');
+		return true;
+	}
+
 	function forumDump($fid, $format = 'json') {
 		$forumDump['id'] = $fid;
 		$forum = forum_get_object($fid);
@@ -922,6 +983,16 @@ class CliActions {
 		ksort($forumDump);
 		$this->print_result($forumDump, $format);
 		return $forumDump;
+	}
+
+	function forumImport($file, $format = 'json') {
+		global $importRefMapping;
+		$stream = $this->loadFile($file, $format);
+		if (!$stream) {
+			return false;
+		}
+		echo _('forumImport to be implemented');
+		return true;
 	}
 
 	function trackerDump($atid, $format = 'json') {
@@ -1130,9 +1201,10 @@ class CliActions {
 				$importData['nopermcheck'] = true;
 				$importData['nonotice'] = true;
 				$importData['time'] = $version['createdate'];
+				$description = $this->parseStringForReference($version['description']);
 				if ($firstversion == true) {
 					$d = new Document($group);
-					if (!$d->create($version['filename'], $filedatatype, $filedataname, $doc_group_id, $version['title'], $version['description'], $stream['data_array']['stateid'], $version['vcomment'], $importData)) {
+					if (!$d->create($version['filename'], $filedatatype, $filedataname, $doc_group_id, $version['title'], $description, $stream['data_array']['stateid'], $version['vcomment'], $importData)) {
 						echo $version['filename'].':'.$d->getErrorMessage()."\n";
 						db_rollback();
 						return false;
@@ -1140,7 +1212,7 @@ class CliActions {
 						$firstversion = false;
 					}
 				} else {
-					if (!$d->update($version['filename'], $filedatatype, $filedataname, $doc_group_id, $version['title'], $version['description'], $stream['data_array']['stateid'], 0, $version['current_version'], 1, $importData, $version['vcomment'])) {
+					if (!$d->update($version['filename'], $filedatatype, $filedataname, $doc_group_id, $version['title'], $description, $stream['data_array']['stateid'], 0, $version['current_version'], 1, $importData, $version['vcomment'])) {
 						echo $version['filename'].':'.$d->getErrorMessage()."\n";
 						db_rollback();
 						return false;
@@ -1550,6 +1622,16 @@ class CliActions {
 		ksort($pmDump);
 		$this->print_result($pmDump, $format);
 		return $pmDump;
+	}
+
+	function pmImport($file, $format = 'json') {
+		global $importRefMapping;
+		$stream = $this->loadFile($file, $format);
+		if (!$stream) {
+			return false;
+		}
+		echo _('pmImport to be implemented');
+		return true;
 	}
 
 	private function print_result($arrayDump, $format = 'json') {
