@@ -8,7 +8,7 @@
  * Copyright 2009-2010, Roland Mas
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * Copyright (C) 2012-2013 Marc-Etienne Vargenau - Alcatel-Lucent
- * Copyright 2013,2016, Franck Villaume - TrivialDev
+ * Copyright 2013,2016-2017, Franck Villaume - TrivialDev
  * Copyright 2014, Stéphane-Eymeric Bredthauer
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -137,7 +137,7 @@ if (!session_loggedin()) {
 								$cell_data [] = array_merge((array)$cell_text, $cell_attrs);
 								if ($display_col['summary']) {
 									$cell_attrs = array('class' => 'align-left');
-									$cell_text = util_make_link('/tracker/?func=detail&aid='.$art->getID().'&group_id='.$p->getID().'&atid='.$ath->getID(), $art->getSummary());
+									$cell_text = util_make_link($art->getPermalink(), $art->getSummary());
 									$cell_data [] = array_merge((array)$cell_text, $cell_attrs);
 								}
 								if ($display_col['changed']) {
@@ -169,13 +169,13 @@ if (!session_loggedin()) {
 									$result_tasks = $art->getRelatedTasks();
 									if($result_tasks) {
 										$cell_text ='';
-										$taskcount = db_numrows($art->relatedtasks);
+										$taskcount = db_numrows($art->getRelatedTasks());
 										if ($taskcount > 0) {
 											for ($itask = 0; $itask < $taskcount; $itask++) {
 												if($itask>0)
 													$cell_text .= html_e('br');
 
-												$taskinfo = db_fetch_array($art->relatedtasks, $itask);
+												$taskinfo = db_fetch_array($art->getRelatedTasks(), $itask);
 												$taskid = $taskinfo['project_task_id'];
 												$projectid = $taskinfo['group_project_id'];
 												$groupid   = $taskinfo['group_id'];
