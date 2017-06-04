@@ -670,7 +670,7 @@ class CliActions {
 							}
 						}
 					}
-					if (forge_get_config('use_tracker') && isset($stream['trackers']) && is_array($stream['trackers']) {
+					if (forge_get_config('use_tracker') && isset($stream['trackers']) && is_array($stream['trackers'])) {
 						foreach ($stream['trackers'] as $stream_tracker) {
 							if (isset($stream_tracker['data']) && is_array($stream_tracker['data'])) {
 								foreach ($stream_tracker['data'] as $stream_artifact) {
