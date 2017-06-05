@@ -33,7 +33,9 @@ RUN /usr/bin/initdb -D /var/lib/pgsql/data
 USER root
 ADD ./supervisord.conf /etc/supervisord.conf
 ADD ./startpoint.sh /startpoint.sh
+ADD ./postinstall.sh /postinstall.sh
 RUN chmod +x /startpoint.sh
+RUN chmod +x /postinstall.sh
 
 EXPOSE 22 80 443
 ENTRYPOINT ["/startpoint.sh"]
