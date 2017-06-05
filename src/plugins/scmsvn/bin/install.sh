@@ -29,7 +29,11 @@ case "$1" in
 		}
 		EOF
 	fi
-	service xinetd restart
+        if [ $is_docker -gt 0 ]; then
+            killall xinetd || true
+        else
+	    service xinetd restart
+        fi
 
 	# rsync access
 	if ! grep -q '^use chroot' /etc/rsyncd.conf 2>/dev/null; then

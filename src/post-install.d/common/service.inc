@@ -35,3 +35,7 @@ fi
 # set -e
 # service idontexist start || echo OK
 # service cron restart && echo OK
+
+# detect the execution environment
+# are we running in docker container?
+is_docker=$(grep -c docker /proc/self/cgroup)

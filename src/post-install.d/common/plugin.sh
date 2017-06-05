@@ -48,7 +48,11 @@ case "$2" in
 
 	# Restart Apache if new conffiles were added
 	if [ -d $source_path/plugins/$1/etc/httpd.conf.d/ ]; then
-	    service $apache_service reload >/dev/null || true
+            if [ $is_docker -gt 0 ]; then
+                killall httpd || true
+            else
+	        service $apache_service reload >/dev/null || true
+            fi
 	fi
 	;;
 
