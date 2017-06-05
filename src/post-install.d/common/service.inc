@@ -38,4 +38,4 @@ fi
 
 # detect the execution environment
 # are we running in docker container?
-is_docker=$(grep -c docker /proc/self/cgroup)
+is_docker=$(grep -c docker /proc/self/cgroup || true)
