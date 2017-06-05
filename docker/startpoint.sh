@@ -26,6 +26,19 @@ __postinstall() {
 /usr/local/share/fusionforge/post-install.d/shell/shell.sh rawconfigure
 }
 
+__zzzzlocalini() {
+echo '[core]' > /etc/fusionforge/config.ini.d/zzzz-local.ini
+if [[ ! -z ${PORT_HTTP} ]]; then
+   echo 'http_port = '${PORT_HTTP} >> /etc/fusionforge/config.ini.d/zzzz-local.ini
+fi
+if [[ ! -z ${PORT_HTTPS} ]]; then
+   echo 'https_port = '${PORT_HTTPS} >> /etc/fusionforge/config.ini.d/zzzz-local.ini
+fi
+if [[ ! -z ${PORT_SSH} ]]; then
+   echo 'ssh_port = '${PORT_SSH} >> /etc/fusionforge/config.ini.d/zzzz-local.ini
+fi
+}
+
 __etchost() {
 echo "127.0.0.1  scm."`hostname -f` >> /etc/hosts
 }
@@ -36,5 +49,6 @@ supervisord -n
 
 # Call all functions
 __postinstall
+__zzzzlocalini
 __etchost
 __run_supervisor
