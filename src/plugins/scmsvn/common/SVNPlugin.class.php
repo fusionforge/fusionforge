@@ -5,7 +5,7 @@
  * Copyright 2003-2010, Roland Mas, Franck Villaume
  * Copyright 2004, GForge, LLC
  * Copyright 2010, Alain Peyrat <aljeux@free.fr>
- * Copyright 2012-2014,2016, Franck Villaume - TrivialDev
+ * Copyright 2012-2014,2016-2017, Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of National Education
  *
  * This file is part of FusionForge.
@@ -38,6 +38,7 @@ forge_define_config_item('use_ssl', 'scmsvn', true);
 forge_set_config_item_bool('use_ssl', 'scmsvn');
 forge_define_config_item('anonsvn_login','scmsvn', 'anonsvn');
 forge_define_config_item('anonsvn_password','scmsvn', 'anonsvn');
+forge_define_config_item('ssh_port', 'core', 22);
 
 class SVNPlugin extends SCMPlugin {
 	function __construct() {
@@ -120,7 +121,11 @@ some control over it to the project's administrator.");
 		$b .= '<p>' ;
 		$module = $this->topModule($project);
 		if (forge_get_config('use_ssh', 'scmsvn')) {
-			$b .= '<span class="tt">svn checkout svn://'.forge_get_config('scm_host').$this->svn_root_fs.'/'.$project->getUnixName().$module.'</span><br />';
+			$ssh_port = '';
+			if (forge_get_config('ssh_port') != 22) {
+				$ssh_port = '--config-option="config:tunnels:ssh=ssh -p '.forge_get_config('ssh_port').'"';
+			}
+			$b .= '<span class="tt">svn '.$ssh_port.' checkout svn://'.forge_get_config('scm_host').$this->svn_root_fs.'/'.$project->getUnixName().$module.'</span><br />';
 		}
 		if (forge_get_config('use_dav', 'scmsvn')) {
 			$b .= '<p><span class="tt">svn checkout http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. forge_get_config('scm_host'). '/anonscm/svn/'.$project->getUnixName().$module.'</span></p>' ;
@@ -155,7 +160,11 @@ some control over it to the project's administrator.");
 				$b .= ' ';
 				$b .= _('Enter your site password when prompted.');
 				$b .= '</p>';
-				$b .= '<p><span class="tt">svn checkout svn+ssh://'.$d.'@' . forge_get_config('scm_host') . $this->svn_root_fs .'/'. $project->getUnixName().$module.'</span></p>' ;
+				$ssh_port = '';
+				if (forge_get_config('ssh_port') != 22) {
+					$ssh_port = '--config-option="config:tunnels:ssh=ssh -p '.forge_get_config('ssh_port').'"';
+				}
+				$b .= '<p><span class="tt">svn '.$ssh_port.' checkout svn+ssh://'.$d.'@' . forge_get_config('scm_host') . $this->svn_root_fs .'/'. $project->getUnixName().$module.'</span></p>' ;
 				$b .= '</div>';
 			}
 			if (forge_get_config('use_dav', 'scmsvn')) {
@@ -176,8 +185,11 @@ some control over it to the project's administrator.");
 				$b .= ' ';
 				$b .= _('Enter your site password when prompted.');
 				$b .= '</p>';
-				$b .= '<p><span class="tt">svn checkout svn+ssh://<i>'._('developername').'</i>@' . forge_get_config('scm_host') . $this->svn_root_fs .'/'. $project->getUnixName().$module.'</span></p>' ;
-				$b .= '</div>';
+				$ssh_port = '';
+				if (forge_get_config('ssh_port') != 22) {
+					$ssh_port = '--config-option="config:tunnels:ssh=ssh -p '.forge_get_config('ssh_port').'"';
+				}
+				$b .= '<p><span class="tt">svn '.$ssh_port.' checkout svn+ssh://<i>'._('developername').'</i>@' . forge_get_config('scm_host') . $this->svn_root_fs .'/'. $project->getUnixName().$module.'</span></p>' ; $b .= '</div>';
 			}
 			if (forge_get_config('use_dav', 'scmsvn')) {
 				$b .= '<div id="tabber-dav" class="tabbertab" >';
