@@ -47,7 +47,7 @@ case "$2" in
 	fi
 
 	# Restart Apache if new conffiles were added
-	if [ ! -d $source_path/plugins/$1/etc/httpd.conf.d/ ]; then
+	if [ -d $source_path/plugins/$1/etc/httpd.conf.d/ ]; then
 	    service $apache_service reload >/dev/null || true
 	fi
 	;;
