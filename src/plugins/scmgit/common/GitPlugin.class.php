@@ -34,6 +34,7 @@ forge_define_config_item('use_ssh', 'scmgit', false);
 forge_set_config_item_bool('use_ssh', 'scmgit');
 forge_define_config_item('use_ssl', 'scmgit', true);
 forge_set_config_item_bool('use_ssl', 'scmgit');
+forge_define_config_item('ssh_port', 'core', 22);
 
 class GitPlugin extends SCMPlugin {
 	function __construct() {
@@ -186,6 +187,10 @@ control over it to the project's administrator.");
 		if (!isset($configuration)) {
 			return $HTML->error_msg(_('Error')._(': ')._('No access protocol has been allowed for the Git plugin in scmgit.ini: use_ssh and use_smarthttp are disabled'));
 		}
+		$ssh_port = '';
+		if (forge_get_config('ssh_port') != 22) {
+			$ssh_port = ':'.forge_get_config('ssh_port');
+		}
 		if (session_loggedin()) {
 			$u = user_get_object(user_getid());
 			$d = $u->getUnixName();
@@ -194,7 +199,7 @@ control over it to the project's administrator.");
 				$b .= html_e('p', array(), _('SSH must be installed on your client machine.'));
 				$htmlRepo = '';
 				foreach ($repo_list as $repo_name) {
-					$htmlRepo .= html_e('tt', array(), 'git clone git+ssh://'.$d.'@' . forge_get_config('scm_host') . forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git').html_e('br');
+					$htmlRepo .= html_e('tt', array(), 'git clone git+ssh://'.$d.'@'.forge_get_config('scm_host').$ssh_port.forge_get_config('repos_path', 'scmgit').'/'.$project->getUnixName().'/'.$repo_name.'.git').html_e('br');
 				}
 				$b .= html_e('p', array(), $htmlRepo);
 				$b .= '</div>';
@@ -221,7 +226,7 @@ control over it to the project's administrator.");
 					' '. _('Substitute <em>developername</em> with the proper value.'));
 				$htmlRepo = '';
 				foreach ($repo_list as $repo_name) {
-					$htmlRepo .= html_e('tt', array(), 'git clone git+ssh://'.html_e('i', array(), _('developername'), true, false).'@' . forge_get_config('scm_host') . forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git').html_e('br');
+					$htmlRepo .= html_e('tt', array(), 'git clone git+ssh://'.html_e('i', array(), _('developername'), true, false).'@'.forge_get_config('scm_host').$ssh_port.forge_get_config('repos_path', 'scmgit').'/'.$project->getUnixName().'/'.$repo_name.'.git').html_e('br');
 				}
 				$b .= html_e('p', array(), $htmlRepo);
 				$b .= '</div>';
@@ -254,7 +259,7 @@ control over it to the project's administrator.");
 					$b .= html_e('h3', array(), _('Access to your personal repository'));
 					$b .= html_e('p', array(), _('You have a personal repository for this project, accessible through the following methods. Enter your site password when prompted.'));
 					if (forge_get_config('use_ssh', 'scmgit')) {
-						$b .= html_e('tt', array(), 'git clone git+ssh://'.$u->getUnixName().'@' . forge_get_config('scm_host') . forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/users/'. $u->getUnixName() .'.git').html_e('br');
+						$b .= html_e('tt', array(), 'git clone git+ssh://'.$u->getUnixName().'@'.forge_get_config('scm_host').$ssh_port.forge_get_config('repos_path', 'scmgit').'/'.$project->getUnixName().'/users/'.$u->getUnixName().'.git').html_e('br');
 					}
 					if (forge_get_config('use_smarthttp', 'scmgit')) {
 						$b .= html_e('tt', array(), 'git clone '.$protocol.'://'.$u->getUnixName().'@' . forge_get_config('scm_host').'/authscm/'.$u->getUnixName().'/git/'.$project->getUnixName() .'/users/'. $u->getUnixName() .'.git').html_e('br');
