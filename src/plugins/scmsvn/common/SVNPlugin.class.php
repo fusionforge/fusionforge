@@ -162,9 +162,9 @@ some control over it to the project's administrator.");
 				$b .= '</p>';
 				$ssh_port = '';
 				if (forge_get_config('ssh_port') != 22) {
-					$ssh_port = '--config-option="config:tunnels:ssh=ssh -p '.forge_get_config('ssh_port').'"';
+					$ssh_port = '--config-option="config:tunnels:ssh=ssh -p '.forge_get_config('ssh_port').'" ';
 				}
-				$b .= '<p><span class="tt">svn '.$ssh_port.' checkout svn+ssh://'.$d.'@' . forge_get_config('scm_host') . $this->svn_root_fs .'/'. $project->getUnixName().$module.'</span></p>' ;
+				$b .= '<p><span class="tt">svn '.$ssh_port.'checkout svn+ssh://'.$d.'@' . forge_get_config('scm_host') . $this->svn_root_fs .'/'. $project->getUnixName().$module.'</span></p>' ;
 				$b .= '</div>';
 			}
 			if (forge_get_config('use_dav', 'scmsvn')) {
@@ -187,9 +187,9 @@ some control over it to the project's administrator.");
 				$b .= '</p>';
 				$ssh_port = '';
 				if (forge_get_config('ssh_port') != 22) {
-					$ssh_port = '--config-option="config:tunnels:ssh=ssh -p '.forge_get_config('ssh_port').'"';
+					$ssh_port = '--config-option="config:tunnels:ssh=ssh -p '.forge_get_config('ssh_port').'" ';
 				}
-				$b .= '<p><span class="tt">svn '.$ssh_port.' checkout svn+ssh://<i>'._('developername').'</i>@' . forge_get_config('scm_host') . $this->svn_root_fs .'/'. $project->getUnixName().$module.'</span></p>' ; $b .= '</div>';
+				$b .= '<p><span class="tt">svn '.$ssh_port.'checkout svn+ssh://<i>'._('developername').'</i>@' . forge_get_config('scm_host') . $this->svn_root_fs .'/'. $project->getUnixName().$module.'</span></p>' ; $b .= '</div>';
 			}
 			if (forge_get_config('use_dav', 'scmsvn')) {
 				$b .= '<div id="tabber-dav" class="tabbertab" >';
