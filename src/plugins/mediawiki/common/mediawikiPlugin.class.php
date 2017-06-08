@@ -93,12 +93,12 @@ _("This plugin allows each project to embed Mediawiki under a tab.");
 			}
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][]=$this->text;
-				$params['DIRS'][]=util_make_url('/plugins/mediawiki/wiki/'.$project->getUnixName().'/index.php');
+				$params['DIRS'][]=util_make_uri('/plugins/mediawiki/wiki/'.$project->getUnixName().'/index.php');
 				if (session_loggedin()) {
 					$user = session_get_user();
 					$userperm = $project->getPermission();
 					if ($userperm->isAdmin()) {
-						$params['ADMIN'][] = util_make_url('/plugins/mediawiki/plugin_admin.php?group_id='.$project->getID());
+						$params['ADMIN'][] = util_make_uri('/plugins/mediawiki/plugin_admin.php?group_id='.$project->getID());
 					}
 				}
 				$params['TOOLTIPS'][] = _('Mediawiki Space');
