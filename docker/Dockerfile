@@ -13,14 +13,14 @@ RUN cd /opt/sources/fusionforge && source ./autoinstall/common-backports && \
          cvs subversion viewvc python-pycurl git gitweb xinetd \
          moin mod_wsgi python-psycopg2 \
          unoconv poppler-utils libreoffice-headless \
-         cronie && \
+         cronie mediawiki && \
     cd src/ && \
     make && \
     make install-base install-shell install-scm \
          install-plugin-scmcvs install-plugin-scmsvn install-plugin-scmgit \
          install-plugin-blocks install-plugin-moinmoin \
          install-plugin-taskboard install-plugin-message \
-         install-plugin-repositoryapi
+         install-plugin-repositoryapi install-plugin-mediawiki
 
 RUN yum --enablerepo=epel install -y supervisor
 
