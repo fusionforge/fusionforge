@@ -35,7 +35,8 @@ if [ -e /etc/debian_version ]; then
 	apache2 postgresql postgresql-contrib libnss-pgsql2 unscd \
 	cvs subversion viewvc python-pycurl git xinetd \
 	python-moinmoin libapache2-mod-wsgi python-psycopg2 \
-	unoconv poppler-utils dpkg-dev
+	unoconv poppler-utils dpkg-dev \
+        mediawiki
     if ! dpkg-vendor --is Ubuntu; then
 	apt-get install locales-all  # https://bugs.launchpad.net/ubuntu/+source/glibc/+bug/1394929
     fi
@@ -61,7 +62,8 @@ else
 	httpd mod_dav_svn mod_ssl postgresql-server postgresql-contrib nscd \
 	cvs subversion viewvc python-pycurl git gitweb xinetd \
 	moin mod_wsgi python-psycopg2 \
-	unoconv poppler-utils libreoffice-headless
+	unoconv poppler-utils libreoffice-headless \
+        mediawiki
 fi
 
 (
@@ -71,6 +73,7 @@ fi
         install-plugin-scmcvs install-plugin-scmsvn install-plugin-scmgit \
         install-plugin-blocks install-plugin-moinmoin \
         install-plugin-taskboard install-plugin-message \
-	install-plugin-repositoryapi
+	install-plugin-repositoryapi \
+        install-plugin-mediawiki
     make post-install
 )
