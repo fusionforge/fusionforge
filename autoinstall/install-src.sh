@@ -72,7 +72,9 @@ fi
         install-plugin-scmcvs install-plugin-scmsvn install-plugin-scmgit \
         install-plugin-blocks install-plugin-moinmoin \
         install-plugin-taskboard install-plugin-message \
-	install-plugin-repositoryapi \
-        install-plugin-mediawiki
+	install-plugin-repositoryapi
+    if [ -e /etc/centos-release ]; then
+        make install-plugin-mediawiki
+    fi
     make post-install
 )
