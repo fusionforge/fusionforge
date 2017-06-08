@@ -177,7 +177,6 @@ $GLOBALS['sys_session_expire'] = forge_get_config('session_expire');
 $GLOBALS['REMOTE_ADDR'] = getStringFromServer('REMOTE_ADDR') ;
 $GLOBALS['HTTP_USER_AGENT'] = getStringFromServer('HTTP_USER_AGENT') ;
 
-require_once("$IP/includes/Exception.php");
 require_once("$IP/includes/db/Database.php");
 if (forge_get_config('mw_dbtype', 'mediawiki')=='mysql'){
 	require_once 'DatabaseForgeMysql.php';

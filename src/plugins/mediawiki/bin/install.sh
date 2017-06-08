@@ -10,7 +10,7 @@ mediawikidir=$( \
     | tail -1)
 # Debian: /usr/share/mediawiki/
 # CentOS6: /usr/share/mediawiki119/
-# CentOS7: /usr/share/mediawiki/
+# CentOS7: /usr/share/mediawiki123/
 
 upgrade_mediawikis () {
     # Upgrade Mediawiki database schemas
@@ -35,7 +35,6 @@ case "$1" in
         ln -nfs $mediawikidir/maintenance          $plugindir/www/
         ln -nfs $mediawikidir/opensearch_desc.php  $plugindir/www/
         ln -nfs $mediawikidir/profileinfo.php      $plugindir/www/
-        ln -nfs $mediawikidir/redirect.php         $plugindir/www/
         ln -nfs $mediawikidir/thumb.php            $plugindir/www/
 
 	ln -nfs $mediawikidir/skins $plugindir/www/

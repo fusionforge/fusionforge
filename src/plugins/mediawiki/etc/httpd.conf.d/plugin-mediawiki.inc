@@ -17,3 +17,14 @@ AliasMatch ^/plugins/mediawiki/dumps/(.*)$ ${FF__core__data_path}/plugins/mediaw
 <Directory ${FF__core__data_path}/plugins/mediawiki/projects>
         Require all granted
 </Directory>
+
+<LocationMatch "${FF__core__url_prefix}plugins/mediawiki/wiki/[-a-zA-Z0-9_]*/skins/(.*)">
+  <IfVersion >= 2.3>
+    Require all granted
+  </IfVersion>
+  <IfVersion < 2.3>
+    order allow,deny
+    allow from all
+  </IfVersion>
+</LocationMatch>
+
