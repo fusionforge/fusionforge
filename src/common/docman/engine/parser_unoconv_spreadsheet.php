@@ -39,7 +39,7 @@ if (!is_file($fichin))
 	exit (1);
 
 $fichout = tempnam(sys_get_temp_dir(), 'docman');
-$cmd = "/usr/bin/unoconv -d spreadsheet -f pdf -o $fichout $fichin";
+$cmd = "HOME=/tmp; /usr/bin/unoconv -d spreadsheet -f pdf -o $fichout $fichin";
 $res = shell_exec($cmd);
 
 echo parser_pdf($fichout);
