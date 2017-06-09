@@ -1,6 +1,6 @@
 #!/bin/bash
 /usr/local/share/fusionforge/post-install.d/db/db.sh configure
 cd /opt/sources/fusionforge/src
-for pluginname in blocks mediawiki message repositoryapi scmgit scmsvn taskboard; do
+for pluginname in blocks mediawiki message moinmoin repositoryapi scmgit scmsvn taskboard; do
     make post-install-plugin-${pluginname}
 done
