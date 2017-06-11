@@ -58,7 +58,7 @@ if (getStringFromRequest('createvhost')) {
 			values ($1, $2, $3, $4)', array($vhost_name, $docdir, $cgidir, $group->getID()));
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$error_msg = _('Cannot insert VHOST entry:').db_error();
+			$error_msg = _('Cannot insert VHOST entry')._(': ').db_error();
 		} else {
 			$feedback = _('Virtual Host scheduled for creation.');
 			$group->addHistory('Added vhost '.$vhost_name.' ','');
@@ -97,7 +97,7 @@ if (getStringFromRequest('deletevhost')) {
 				$group_id));
 
 	if (!$res || db_affected_rows($res) < 1) {
-		$error_msg .= _('Could not delete VHOST entry:').db_error();
+		$error_msg .= _('Could not delete VHOST entry')._(': ').db_error();
 	} else {
 		$feedback .= _('VHOST deleted');
 		$group->addHistory('Virtual Host '.$row_vh['vhost_name'].' Removed','');
@@ -109,10 +109,10 @@ if (getStringFromRequest('deletevhost')) {
 
 project_admin_header(array('title'=>_('Virtual Host Management'),'group'=>$group->getID()));
 
-print '<h2>' . _('Add New Virtual Host') . '</h2>';
+echo html_e('h2', array(), _('Add New Virtual Host'));
 
 print '<p>';
-printf(_('To add a new virtual host - simply point a <strong>CNAME</strong> for <em>yourhost.org</em> at <strong>%1$s.%2$s</strong>.  %3$s does not currently host mail (i.e. cannot be an MX) or DNS</strong>.'), $group->getUnixName(), forge_get_config ('web_host'), forge_get_config ('forge_name'));
+printf(_('To add a new virtual host - simply point a <strong>CNAME</strong> for <em>yourhost.org</em> at <strong>%1$s.%2$s</strong>.  %3$s does not currently host mail (i.e. cannot be an MX) or DNS.'), $group->getUnixName(), forge_get_config ('web_host'), forge_get_config ('forge_name'));
 print '</p>';
 
 print '<p>';
@@ -148,7 +148,7 @@ if (db_numrows($res_db) > 0) {
 	}
 	echo $HTML->listTableBottom();
 } else {
-	echo '<p>'._('No VHOSTs defined').'</p>';
+	echo html_e('p', array(), _('No VHOSTs defined'));
 }
 
 project_admin_footer();
