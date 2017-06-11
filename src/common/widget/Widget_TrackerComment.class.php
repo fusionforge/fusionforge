@@ -167,9 +167,9 @@ class Widget_TrackerComment extends Widget {
 		}
 		if ($func == 'detail') {
 			$tabberContent .= html_e('div', array('id' => 'tabber-changes', 'class' => 'tabbertab'),
-						$ah->showHistory());
+						$ah->showHistory(), false);
 			$tabberContent .= html_e('div', array('id' => 'tabber-relations', 'class' => 'tabbertab'),
-						$ah->showRelations());
+						$ah->showRelations(), false);
 			if (forge_get_config('use_artefacts_dependencies')) {
 				$tabberContent .= html_e('div', array('id' => 'tabber-dependencies', 'class' => 'tabbertab'),
 						$ah->showDependencies());
