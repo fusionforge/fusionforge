@@ -42,7 +42,7 @@ class Widget_ProjectPublicAreas extends Widget {
 		$group_id = $request->get('group_id');
 		$pm = ProjectManager::instance();
 		$project = $pm->getProject($group_id);
-		$HTML = $GLOBALS['HTML'];
+		global $HTML;
 		// ################# Homepage Link
 
 		$result .= html_e('div', array('class' => 'public-area-box', 'rel' => 'doap:homepage'),
@@ -64,10 +64,9 @@ class Widget_ProjectPublicAreas extends Widget {
 
 			$rows = array();
 			while ($row = db_fetch_array($res)) {
-				if (!forge_check_perm('tracker',$row['group_artifact_id'],'read')) {
-					continue;
+				if (forge_check_perm('tracker', $row['group_artifact_id'], 'read')) {
+					$rows[] = $row;
 				}
-				$rows[] = $row;
 			}
 
 			if (count($rows) < 1) {
@@ -85,7 +84,7 @@ class Widget_ProjectPublicAreas extends Widget {
 					$contentLi .= sprintf(ngettext('(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', '(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', $row['open_count']), $row['open_count'], $row['count']);
 					$contentLi .= '<br />';
 					$contentLi .= '<span rel="sioc:has_space" resource="" ></span>'."\n";
-					$elementLi[] = array('content' => $contentLi, 'attrs' => array('about' => $tracker_stdzd_uri, 'typeof' => 'sioc:Container'));
+					$elementsLi[] = array('content' => $contentLi, 'attrs' => array('about' => $tracker_stdzd_uri, 'typeof' => 'sioc:Container'));
 				}
 				$result .= $HTML->html_list($elementsLi, array('class' => 'tracker', 'rel' => 'doap:bug-database'));
 			}
@@ -120,7 +119,7 @@ class Widget_ProjectPublicAreas extends Widget {
 
 		if ($project->usesDocman()) {
 			$result .= '<div class="public-area-box">';
-			$link_content = $HTML->getDocmanPic('') . ' ' . _('DocManager: Project Documentation');
+			$link_content = $HTML->getDocmanPic('') . ' ' . _('Document Manager');
 			//	<a rel="sioc:container_of" xmlns:sioc="http://rdfs.org/sioc/ns#" href="'.util_make_url ('/docman/?group_id='.$group_id).'">';
 			$result .= util_make_link('/docman/?group_id='.$group_id, $link_content);
 			$result .= '</div>';
