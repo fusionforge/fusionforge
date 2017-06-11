@@ -96,7 +96,7 @@ if (!$g->isActive()) {
 	$exit_errorlevel = 0;
 }
 $wgSitename         = $g->getPublicName() . " Wiki";
-$wgScriptPath       = forge_get_config('url_prefix').'/plugins/mediawiki/wiki/'.$fusionforgeproject;
+$wgScriptPath       = forge_get_config('url_prefix').'plugins/mediawiki/wiki/'.$fusionforgeproject;
 
 $wgEmergencyContact = forge_get_config('admin_email');
 $wgPasswordSender = forge_get_config('admin_email');
