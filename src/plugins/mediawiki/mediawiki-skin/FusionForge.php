@@ -191,8 +191,6 @@ echo $footerEnd;
 </div>
 <?php
 		$this->printTrail();
-		echo Html::closeElement( 'body' );
-		echo Html::closeElement( 'html' );
 		echo "</div></div>\n";
 		$GLOBALS['HTML']->footer($this->params);
 		wfRestoreWarnings();

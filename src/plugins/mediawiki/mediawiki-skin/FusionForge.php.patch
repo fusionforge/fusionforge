@@ -1,5 +1,5 @@
---- FusionForge.php.renamed	2017-06-08 12:10:54.904065528 +0000
-+++ FusionForge.php	2017-06-08 12:05:33.287459609 +0000
+--- FusionForge.php.renamed	2017-06-10 13:24:53.854529240 +0200
++++ FusionForge.php	2017-06-11 12:37:27.950559193 +0200
 @@ -39,12 +39,31 @@
  	var $skinname = 'fusionforge', $stylename = 'fusionforge',
  		$template = 'FusionForgeTemplate', $useHeadElement = true;
@@ -54,16 +54,18 @@
  ?><div id="globalWrapper">
  <div id="column-content"><div id="content" class="mw-body-primary" role="main">
  	<a id="top"></a>
-@@ -166,6 +193,8 @@
+@@ -164,8 +191,8 @@
+ </div>
+ <?php
  		$this->printTrail();
- 		echo Html::closeElement( 'body' );
- 		echo Html::closeElement( 'html' );
+-		echo Html::closeElement( 'body' );
+-		echo Html::closeElement( 'html' );
 +		echo "</div></div>\n";
 +		$GLOBALS['HTML']->footer($this->params);
  		wfRestoreWarnings();
  	} // end of execute() method
  
-@@ -185,6 +214,28 @@
+@@ -185,6 +212,28 @@
  			$sidebar['LANGUAGES'] = true;
  		}
  
