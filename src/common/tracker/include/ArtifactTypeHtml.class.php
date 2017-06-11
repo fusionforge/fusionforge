@@ -457,8 +457,8 @@ class ArtifactTypeHtml extends ArtifactType {
 
 		$return = '';
 
-		$taskcount = db_numrows($ah->getRelatedTasks());
-		db_result_reset($ah->getRelatedTasks());
+		$tasks = $ah->getRelatedTasks();
+		$taskcount = db_numrows($tasks);
 
 		if (forge_check_perm('tracker_admin', $ah->ArtifactType->Group->getID())) {
 			$is_admin=true;
@@ -476,8 +476,7 @@ class ArtifactTypeHtml extends ArtifactType {
 			(($is_admin) ? $title_arr[]=_('Remove Relation') : '');
 			$return .= $HTML->listTableTop($title_arr);
 
-			for ($i = 0; $i < $taskcount; $i++) {
-				$taskinfo  = db_fetch_array_by_row($ah->getRelatedTasks(), $i);
+			while ($taskinfo = db_fetch_array($tasks)) {
 				$totalPercentage += $taskinfo['percent_complete'];
 				$taskid    = $taskinfo['project_task_id'];
 				$projectid = $taskinfo['group_project_id'];
