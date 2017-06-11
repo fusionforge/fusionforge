@@ -17,21 +17,9 @@ AliasMatch "${FF__core__url_prefix}moin_static[0-9]*/(.*)" "/usr/share/moin/htdo
 </IfModule>
 
 <Location ${FF__core__url_prefix}plugins/moinmoin>
-  <IfVersion >= 2.3>
-    Require all granted
-  </IfVersion>
-  <IfVersion < 2.3>
-    order allow,deny
-    allow from all
-  </IfVersion>
+  Require all granted
 </Location>
 
 <LocationMatch "${FF__core__url_prefix}moin_static[0-9]*/(.*)">
-  <IfVersion >= 2.3>
-    Require all granted
-  </IfVersion>
-  <IfVersion < 2.3>
-    order allow,deny
-    allow from all
-  </IfVersion>
+  Require all granted
 </LocationMatch>

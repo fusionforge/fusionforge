@@ -8,6 +8,5 @@ AliasMatch ^/www/([^/]*)/(.*) ${FF__core__groupdir_prefix}/$1/htdocs/$2
 <Directory ${FF__core__groupdir_prefix}>
   Options Indexes FollowSymlinks
   AllowOverride All
-  
   Include ${FF__core__config_path}/httpd.conf.d/auth-projects.inc
 </Directory>
