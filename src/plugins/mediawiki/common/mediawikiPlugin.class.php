@@ -3,7 +3,7 @@
  * MediaWikiPlugin Class
  *
  * Copyright 2000-2011, Fusionforge Team
- * Copyright 2012,2014,2016, Franck Villaume - TrivialDev
+ * Copyright 2012,2014,2016-2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -42,28 +42,29 @@ class MediaWikiPlugin extends Plugin {
 
 	function __construct ($id=0) {
 		parent::__construct($id) ;
-		$this->name = "mediawiki" ;
-		$this->text = _("Mediawiki") ; // To show in the tabs, use...
+		$this->name = 'mediawiki' ;
+		$this->text = _('Mediawiki') ; // To show in the tabs, use...
 		$this->pkg_desc =
-_("This plugin allows each project to embed Mediawiki under a tab.");
-		$this->_addHook("groupmenu") ;	// To put into the project tabs
-		$this->_addHook("groupisactivecheckbox") ; // The "use ..." checkbox in editgroupinfo
-		$this->_addHook("groupisactivecheckboxpost") ; //
-		$this->_addHook("project_public_area");
-		$this->_addHook("role_get");
-		$this->_addHook("role_normalize");
-		$this->_addHook("role_unlink_project");
-		$this->_addHook("role_translate_strings");
-		$this->_addHook("role_has_permission");
-		$this->_addHook("role_get_setting");
-		$this->_addHook("list_roles_by_permission");
-		$this->_addHook("project_admin_plugins"); // to show up in the admin page for group
-		$this->_addHook("clone_project_from_template") ;
+_('This plugin allows each project to embed Mediawiki under a tab.');
+		$this->_addHook('groupmenu') ;	// To put into the project tabs
+		$this->_addHook('groupisactivecheckbox') ; // The "use ..." checkbox in editgroupinfo
+		$this->_addHook('groupisactivecheckboxpost'); //
+		$this->_addHook('project_public_area');
+		$this->_addHook('role_get');
+		$this->_addHook('role_normalize');
+		$this->_addHook('role_unlink_project');
+		$this->_addHook('role_translate_strings');
+		$this->_addHook('role_has_permission');
+		$this->_addHook('role_get_setting');
+		$this->_addHook('list_roles_by_permission');
+		$this->_addHook('project_admin_plugins'); // to show up in the admin page for group
+		$this->_addHook('clone_project_from_template');
 		$this->_addHook('group_delete');
+		$this->_addHook('activity');
 	}
 
 	function process() {
-		echo '<h1>Mediawiki</h1>';
+		echo html_e('h1', array(), 'Mediawiki');
 		echo $this->getPluginInfo()->getpropVal('answer');
 	}
 
@@ -83,7 +84,7 @@ _("This plugin allows each project to embed Mediawiki under a tab.");
 		} else {
 			$group_id=null;
 		}
-		if ($hookname == "groupmenu") {
+		if ($hookname == 'groupmenu') {
 			$project = group_get_object($group_id);
 			if (!$project || !is_object($project)) {
 				return;
@@ -103,8 +104,8 @@ _("This plugin allows each project to embed Mediawiki under a tab.");
 				}
 				$params['TOOLTIPS'][] = _('Mediawiki Space');
 			}
-			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
-		} elseif ($hookname == "project_public_area") {
+			(($params['toptab'] == $this->name) ? $params['selected'] = count($params['TITLES'])-1) : '' );
+		} elseif ($hookname == 'project_public_area') {
 			$project = group_get_object($group_id);
 			if (!$project || !is_object($project)) {
 				return;
@@ -119,63 +120,63 @@ _("This plugin allows each project to embed Mediawiki under a tab.");
 							'&nbsp;'.'Mediawiki');
 				$params['result'] .= '</div>';
 			}
-		} elseif ($hookname == "role_get") {
-			$role =& $params['role'] ;
+		} elseif ($hookname == 'role_get') {
+			$role =& $params['role'];
 
 			// Read access
-			$right = new PluginSpecificRoleSetting ($role,
-								'plugin_mediawiki_read') ;
-			$right->SetAllowedValues (array ('0', '1')) ;
-			$right->SetDefaultValues (array ('Admin' => '1',
-							 'Senior Developer' => '1',
-							 'Junior Developer' => '1',
-							 'Doc Writer' => '1',
-							 'Support Tech' => '1')) ;
+			$right = new PluginSpecificRoleSetting($role,
+								'plugin_mediawiki_read');
+			$right->SetAllowedValues(array('0', '1'));
+			$right->SetDefaultValues(array('Admin' => '1',
+							'Senior Developer' => '1',
+							'Junior Developer' => '1',
+							'Doc Writer' => '1',
+							'Support Tech' => '1'));
 
 			// Edit privileges
-			$right = new PluginSpecificRoleSetting ($role,
-								'plugin_mediawiki_edit') ;
-			$right->SetAllowedValues (array ('0', '1', '2', '3')) ;
-			$right->SetDefaultValues (array ('Admin' => '3',
-							 'Senior Developer' => '2',
-							 'Junior Developer' => '1',
-							 'Doc Writer' => '3',
-							 'Support Tech' => '0')) ;
+			$right = new PluginSpecificRoleSetting($role,
+								'plugin_mediawiki_edit');
+			$right->SetAllowedValues(array('0', '1', '2', '3'));
+			$right->SetDefaultValues(array('Admin' => '3',
+							'Senior Developer' => '2',
+							'Junior Developer' => '1',
+							'Doc Writer' => '3',
+							'Support Tech' => '0'));
 
 			// File upload privileges
-			$right = new PluginSpecificRoleSetting ($role,
-								'plugin_mediawiki_upload') ;
-			$right->SetAllowedValues (array ('0', '1', '2')) ;
-			$right->SetDefaultValues (array ('Admin' => '2',
-							 'Senior Developer' => '2',
-							 'Junior Developer' => '1',
-							 'Doc Writer' => '2',
-							 'Support Tech' => '0')) ;
+			$right = new PluginSpecificRoleSetting($role,
+								'plugin_mediawiki_upload');
+			$right->SetAllowedValues(array('0', '1', '2')) ;
+			$right->SetDefaultValues(array('Admin' => '2',
+							'Senior Developer' => '2',
+							'Junior Developer' => '1',
+							'Doc Writer' => '2',
+							'Support Tech' => '0'));
 
 			// Administrative tasks
-			$right = new PluginSpecificRoleSetting ($role,
-								'plugin_mediawiki_admin') ;
-			$right->SetAllowedValues (array ('0', '1')) ;
-			$right->SetDefaultValues (array ('Admin' => '1',
-							 'Senior Developer' => '0',
-							 'Junior Developer' => '0',
-							 'Doc Writer' => '0',
-							 'Support Tech' => '0')) ;
+			$right = new PluginSpecificRoleSetting($role,
+								'plugin_mediawiki_admin');
+			$right->SetAllowedValues(array('0', '1'));
+			$right->SetDefaultValues(array('Admin' => '1',
+							'Senior Developer' => '0',
+							'Junior Developer' => '0',
+							'Doc Writer' => '0',
+							'Support Tech' => '0'));
 
-		} elseif ($hookname == "role_normalize") {
-			$role =& $params['role'] ;
-			$new_pa =& $params['new_pa'] ;
+		} elseif ($hookname == 'role_normalize') {
+			$role =& $params['role'];
+			$new_pa =& $params['new_pa'];
 
-			$projects = $role->getLinkedProjects() ;
+			$projects = $role->getLinkedProjects();
 			foreach ($projects as $p) {
-				$role->normalizePermsForSection ($new_pa, 'plugin_mediawiki_read', $p->getID()) ;
-				$role->normalizePermsForSection ($new_pa, 'plugin_mediawiki_edit', $p->getID()) ;
-				$role->normalizePermsForSection ($new_pa, 'plugin_mediawiki_upload', $p->getID()) ;
-				$role->normalizePermsForSection ($new_pa, 'plugin_mediawiki_admin', $p->getID()) ;
+				$role->normalizePermsForSection($new_pa, 'plugin_mediawiki_read', $p->getID());
+				$role->normalizePermsForSection($new_pa, 'plugin_mediawiki_edit', $p->getID());
+				$role->normalizePermsForSection($new_pa, 'plugin_mediawiki_upload', $p->getID());
+				$role->normalizePermsForSection($new_pa, 'plugin_mediawiki_admin', $p->getID());
 			}
-		} elseif ($hookname == "role_unlink_project") {
-			$role =& $params['role'] ;
-			$project =& $params['project'] ;
+		} elseif ($hookname == 'role_unlink_project') {
+			$role =& $params['role'];
+			$project =& $params['project'];
 
 			$settings = array('plugin_mediawiki_read', 'plugin_mediawiki_edit', 'plugin_mediawiki_upload', 'plugin_mediawiki_admin');
 
@@ -185,27 +186,27 @@ _("This plugin allows each project to embed Mediawiki under a tab.");
 						      $s,
 						      $project->getID()));
 			}
-		} elseif ($hookname == "role_translate_strings") {
-			$right = new PluginSpecificRoleSetting ($role,
-							       'plugin_mediawiki_read') ;
-			$right->setDescription (_('Mediawiki read access')) ;
-			$right->setValueDescriptions (array ('0' => _('No reading'),
-							     '1' => _('Read access'))) ;
+		} elseif ($hookname == 'role_translate_strings') {
+			$right = new PluginSpecificRoleSetting($role,
+							       'plugin_mediawiki_read');
+			$right->setDescription(_('Mediawiki read access'));
+			$right->setValueDescriptions(array('0' => _('No reading'),
+							   '1' => _('Read access')));
 
-			$right = new PluginSpecificRoleSetting ($role,
-							       'plugin_mediawiki_edit') ;
+			$right = new PluginSpecificRoleSetting($role,
+							       'plugin_mediawiki_edit');
 			$right->setDescription (_('Mediawiki write access')) ;
-			$right->setValueDescriptions (array ('0' => _('No editing'),
-							     '1' => _('Edit existing pages only'),
-							     '2' => _('Edit and create pages'),
-							     '3' => _('Edit, create, move, delete pages'))) ;
+			$right->setValueDescriptions(array('0' => _('No editing'),
+							   '1' => _('Edit existing pages only'),
+							   '2' => _('Edit and create pages'),
+							   '3' => _('Edit, create, move, delete pages')));
 
-			$right = new PluginSpecificRoleSetting ($role,
-							       'plugin_mediawiki_upload') ;
-			$right->setDescription (_('Mediawiki file upload')) ;
-			$right->setValueDescriptions (array ('0' => _('No uploading'),
-							     '1' => _('Upload permitted'),
-							     '2' => _('Upload and re-upload'))) ;
+			$right = new PluginSpecificRoleSetting($role,
+							       'plugin_mediawiki_upload');
+			$right->setDescription(_('Mediawiki file upload')) ;
+			$right->setValueDescriptions(array('0' => _('No uploading'),
+							   '1' => _('Upload permitted'),
+							   '2' => _('Upload and re-upload')));
 
 			$right = new PluginSpecificRoleSetting ($role,
 							       'plugin_mediawiki_admin') ;
@@ -220,30 +221,30 @@ _("This plugin allows each project to embed Mediawiki under a tab.");
 			switch ($params['section']) {
 			case 'plugin_mediawiki_read':
 				if ($role->hasPermission('project_admin', $reference)) {
-					$params['result'] = 1 ;
+					$params['result'] = 1;
 				} else {
-					$params['result'] =  $value ;
+					$params['result'] =  $value;
 				}
 				break ;
 			case 'plugin_mediawiki_edit':
 				if ($role->hasPermission('project_admin', $reference)) {
-					$params['result'] = 3 ;
+					$params['result'] = 3;
 				} else {
-					$params['result'] =  $value ;
+					$params['result'] =  $value;
 				}
 				break ;
 			case 'plugin_mediawiki_upload':
 				if ($role->hasPermission('project_admin', $reference)) {
-					$params['result'] = 2 ;
+					$params['result'] = 2;
 				} else {
-					$params['result'] =  $value ;
+					$params['result'] =  $value;
 				}
 				break ;
 			case 'plugin_mediawiki_admin':
 				if ($role->hasPermission('project_admin', $reference)) {
-					$params['result'] = 1 ;
+					$params['result'] = 1;
 				} else {
-					$params['result'] =  $value ;
+					$params['result'] =  $value;
 				}
 				break ;
 			}
@@ -254,106 +255,103 @@ _("This plugin allows each project to embed Mediawiki under a tab.");
 				switch ($params['action']) {
 				case 'read':
 				default:
-					$params['result'] |= ($value >= 1) ;
-					break ;
+					$params['result'] |= ($value >= 1);
+					break;
 				}
 				break ;
 			case 'plugin_mediawiki_edit':
 				switch ($params['action']) {
 				case 'editexisting':
-					$params['result'] |= ($value >= 1) ;
-					break ;
+					$params['result'] |= ($value >= 1);
+					break;
 				case 'editnew':
-					$params['result'] |= ($value >= 2) ;
-					break ;
+					$params['result'] |= ($value >= 2);
+					break;
 				case 'editmove':
-					$params['result'] |= ($value >= 3) ;
-					break ;
+					$params['result'] |= ($value >= 3);
+					break;
 				}
 				break ;
 			case 'plugin_mediawiki_upload':
 				switch ($params['action']) {
 				case 'upload':
-					$params['result'] |= ($value >= 1) ;
-					break ;
+					$params['result'] |= ($value >= 1);
+					break;
 				case 'reupload':
-					$params['result'] |= ($value >= 2) ;
-					break ;
+					$params['result'] |= ($value >= 2);
+					break;
 				}
 				break ;
 			case 'plugin_mediawiki_admin':
 				switch ($params['action']) {
 				case 'admin':
 				default:
-					$params['result'] |= ($value >= 1) ;
-					break ;
+					$params['result'] |= ($value >= 1);
+					break;
 				}
 				break ;
 			}
-		} elseif ($hookname == "list_roles_by_permission") {
+		} elseif ($hookname == 'list_roles_by_permission') {
 			switch ($params['section']) {
 			case 'plugin_mediawiki_read':
 				switch ($params['action']) {
 				case 'read':
 				default:
-					$params['qpa'] = db_construct_qpa($params['qpa'], ' AND perm_val >= 1') ;
-					break ;
+					$params['qpa'] = db_construct_qpa($params['qpa'], ' AND perm_val >= 1');
+					break;
 				}
 				break ;
 			case 'plugin_mediawiki_edit':
 				switch ($params['action']) {
 				case 'editexisting':
-					$params['qpa'] = db_construct_qpa($params['qpa'], ' AND perm_val >= 1') ;
-					break ;
+					$params['qpa'] = db_construct_qpa($params['qpa'], ' AND perm_val >= 1');
+					break;
 				case 'editnew':
-					$params['qpa'] = db_construct_qpa($params['qpa'], ' AND perm_val >= 2') ;
-					break ;
+					$params['qpa'] = db_construct_qpa($params['qpa'], ' AND perm_val >= 2');
+					break;
 				case 'editmove':
-					$params['qpa'] = db_construct_qpa($params['qpa'], ' AND perm_val >= 3') ;
-					break ;
+					$params['qpa'] = db_construct_qpa($params['qpa'], ' AND perm_val >= 3');
+					break;
 				}
 				break ;
 			case 'plugin_mediawiki_upload':
 				switch ($params['action']) {
 				case 'upload':
-					$params['qpa'] = db_construct_qpa($params['qpa'], ' AND perm_val >= 1') ;
-					break ;
+					$params['qpa'] = db_construct_qpa($params['qpa'], ' AND perm_val >= 1');
+					break;
 				case 'reupload':
-					$params['qpa'] = db_construct_qpa($params['qpa'], ' AND perm_val >= 2') ;
-					break ;
+					$params['qpa'] = db_construct_qpa($params['qpa'], ' AND perm_val >= 2');
+					break;
 				}
 				break ;
 			case 'plugin_mediawiki_admin':
 				switch ($params['action']) {
 				case 'admin':
 				default:
-					$params['qpa'] = db_construct_qpa($params['qpa'], ' AND perm_val >= 1') ;
-					break ;
+					$params['qpa'] = db_construct_qpa($params['qpa'], ' AND perm_val >= 1');
+					break;
 				}
 				break ;
 			}
-		} elseif ($hookname == "project_admin_plugins") {
+		} elseif ($hookname == 'project_admin_plugins') {
 			$group_id = $params['group_id'];
 			$group = group_get_object($group_id);
 			if ($group->usesPlugin($this->name))
-				echo util_make_link(
-				    "/plugins/mediawiki/plugin_admin.php?group_id=" .
-				    $group->getID(), _("MediaWiki Plugin admin")) .
-				    "<br />";
-		} elseif ($hookname == "clone_project_from_template") {
-			$template = $params['template'] ;
-			$project = $params['project'] ;
-			$id_mappings = $params['id_mappings'] ;
+				echo util_make_link('/plugins/mediawiki/plugin_admin.php?group_id='. $group->getID(), _('MediaWiki Plugin admin')).'<br />';
+		} elseif ($hookname == 'clone_project_from_template') {
+			$template = $params['template'];
+			$project = $params['project'];
+			$id_mappings = $params['id_mappings'];
 
-			$sections = array ('plugin_mediawiki_read', 'plugin_mediawiki_edit', 'plugin_mediawiki_upload', 'plugin_mediawiki_admin') ;
+			$sections = array('plugin_mediawiki_read', 'plugin_mediawiki_edit', 'plugin_mediawiki_upload', 'plugin_mediawiki_admin');
 
 			foreach ($template->getRoles() as $oldrole) {
-				$newrole = RBACEngine::getInstance()->getRoleById ($id_mappings['role'][$oldrole->getID()]) ;
-				$oldsettings = $oldrole->getSettingsForProject ($template) ;
+				$newrole = RBACEngine::getInstance()->getRoleById ($id_mappings['role'][$oldrole->getID()]);
+				$oldsettings = $oldrole->getSettingsForProject ($template);
 
 				foreach ($sections as $section) {
 					if (isset ($oldsettings[$section][$template->getID()])) {
-						$newrole->setSetting ($section, $project->getID(), $oldsettings[$section][$template->getID()]) ;
+						$newrole->setSetting ($section, $project->getID(), $oldsettings[$section][$template->getID()]);
 					}
 				}
 			}
@@ -364,10 +362,24 @@ _("This plugin allows each project to embed Mediawiki under a tab.");
 				//delete the files and db schema
 				$schema = 'plugin_mediawiki_'.$projectObject->getUnixName();
 				// Sanitize schema name
-				$schema = strtr($schema, "-", "_");
+				$schema = strtr($schema, '-', '_');
 				db_query_params('drop schema $1 cascade', array($schema));
 				exec('/bin/rm -rf '.forge_get_config('projects_path', 'mediawiki').'/'.$projectObject->getUnixName());
 			}
+		} elseif ($hookname == 'activity') {
+			$group_id = $params['group'];
+			$project = group_get_object($group_id);
+			if (!$project->usesPlugin($this->name)) {
+				return false;
+			}
+			if (in_array($this->name, $params['show']) || (count($params['show']) < 1)) {
+			}
+			if (!in_array($this->name, $params['ids'])) {
+				$params['ids'][] = $this->name;
+				$params['texts'][] = _('Mediawiki Changes');
+			}
+			return true;
+		}
 		}
 	}
 
