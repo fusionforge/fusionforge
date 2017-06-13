@@ -92,9 +92,9 @@ _('This plugin allows each project to embed Mediawiki under a tab.');
 			if ($project->isError()) {
 				return;
 			}
-			if ( $project->usesPlugin ( $this->name ) ) {
-				$params['TITLES'][]=$this->text;
-				$params['DIRS'][]=util_make_uri('/plugins/mediawiki/wiki/'.$project->getUnixName().'/index.php');
+			if ($project->usesPlugin($this->name)) {
+				$params['TITLES'][] = $this->text;
+				$params['DIRS'][] = util_make_uri('/plugins/mediawiki/wiki/'.$project->getUnixName().'/index.php');
 				if (session_loggedin()) {
 					$user = session_get_user();
 					$userperm = $project->getPermission();
@@ -104,7 +104,7 @@ _('This plugin allows each project to embed Mediawiki under a tab.');
 				}
 				$params['TOOLTIPS'][] = _('Mediawiki Space');
 			}
-			(($params['toptab'] == $this->name) ? $params['selected'] = count($params['TITLES'])-1) : '' );
+			(($params['toptab'] == $this->name) ? $params['selected'] = (count($params['TITLES'])-1) : '' );
 		} elseif ($hookname == 'project_public_area') {
 			$project = group_get_object($group_id);
 			if (!$project || !is_object($project)) {
@@ -113,7 +113,7 @@ _('This plugin allows each project to embed Mediawiki under a tab.');
 			if ($project->isError()) {
 				return;
 			}
-			if ( $project->usesPlugin ( $this->name ) ) {
+			if ( $project->usesPlugin($this->name)) {
 				$params['result'] .= '<div class="public-area-box">';
 				$params['result'] .= util_make_link('/plugins/mediawiki/wiki/'.$project->getUnixName().'/index.php',
 							html_abs_image(util_make_url('/plugins/mediawiki/wiki/'.$project->getUnixName().'/skins/monobook/wiki.png'),'20','20',array('alt'=>'Mediawiki')).
@@ -214,9 +214,9 @@ _('This plugin allows each project to embed Mediawiki under a tab.');
 			$right->setValueDescriptions (array ('0' => _('No administrative access'),
 							     '1' => _('Edit interface, import XML dumps'))) ;
 		} elseif ($hookname == "role_get_setting") {
-			$role = $params['role'] ;
-			$reference = $params['reference'] ;
-			$value = $params['value'] ;
+			$role = $params['role'];
+			$reference = $params['reference'];
+			$value = $params['value'];
 
 			switch ($params['section']) {
 			case 'plugin_mediawiki_read':
