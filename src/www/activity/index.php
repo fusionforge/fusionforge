@@ -33,17 +33,17 @@ require_once $gfcommon.'docman/DocumentGroup.class.php';
 
 global $HTML;
 
-$group_id = getIntFromRequest("group_id");
-$received_begin = getStringFromRequest("start_date");
-$received_end = getStringFromRequest("end_date");
-$show = getArrayFromRequest("show");
+$group_id = getIntFromRequest('group_id');
+$received_begin = getStringFromRequest('start_date');
+$received_end = getStringFromRequest('end_date');
+$show = getArrayFromRequest('show');
 
 session_require_perm('project_read', $group_id);
 
 $date_format = _('%Y-%m-%d');
 $date_format_js = _('yy-mm-dd');
 
-if (!$received_begin || $received_begin==0) {
+if (!$received_begin || $received_begin == 0) {
 	$begin = (time()-(30*86400));
 	$rendered_begin = strftime($date_format, $begin);
 } else {
@@ -53,7 +53,7 @@ if (!$received_begin || $received_begin==0) {
 		$rendered_begin = strftime($date_format, $begin);
 	} else {
 		$begin = mktime(0, 0, 0, $tmp['tm_mon']+1, $tmp['tm_mday'], $tmp['tm_year'] + 1900);
-		$rendered_begin = strftime($date_format, $received_begin);
+		$rendered_begin = $received_begin;
 	}
 }
 if ($begin < 0) {
@@ -71,7 +71,7 @@ if (!$received_end || $received_end == 0) {
 		$rendered_end = strftime($date_format, $end);
 	} else {
 		$end = mktime(23, 59, 59, $tmp['tm_mon']+1, $tmp['tm_mday'], $tmp['tm_year'] + 1900);
-		$rendered_end = strftime($date_format, $received_end);
+		$rendered_end = $received_end;
 	}
 }
 
