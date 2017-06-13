@@ -94,12 +94,12 @@ _('This plugin allows each project to embed Mediawiki under a tab.');
 			}
 			if ($project->usesPlugin($this->name)) {
 				$params['TITLES'][] = $this->text;
-				$params['DIRS'][] = util_make_uri('/plugins/mediawiki/wiki/'.$project->getUnixName().'/index.php');
+				$params['DIRS'][] = util_make_uri('/plugins/'.$this->name.'/wiki/'.$project->getUnixName().'/index.php');
 				if (session_loggedin()) {
 					$user = session_get_user();
 					$userperm = $project->getPermission();
 					if ($userperm->isAdmin()) {
-						$params['ADMIN'][] = util_make_uri('/plugins/mediawiki/plugin_admin.php?group_id='.$project->getID());
+						$params['ADMIN'][] = util_make_uri('/plugins/'.$this->name.'/plugin_admin.php?group_id='.$project->getID());
 					}
 				}
 				$params['TOOLTIPS'][] = _('Mediawiki Space');
@@ -115,8 +115,8 @@ _('This plugin allows each project to embed Mediawiki under a tab.');
 			}
 			if ( $project->usesPlugin($this->name)) {
 				$params['result'] .= '<div class="public-area-box">';
-				$params['result'] .= util_make_link('/plugins/mediawiki/wiki/'.$project->getUnixName().'/index.php',
-							html_abs_image(util_make_url('/plugins/mediawiki/wiki/'.$project->getUnixName().'/skins/monobook/wiki.png'),'20','20',array('alt'=>'Mediawiki')).
+				$params['result'] .= util_make_link('/plugins/'.$this->name.'/wiki/'.$project->getUnixName().'/index.php',
+							html_abs_image(util_make_url('/plugins/'.$this->name.'/wiki/'.$project->getUnixName().'/skins/monobook/wiki.png'),'20','20',array('alt'=>'Mediawiki')).
 							'&nbsp;'.'Mediawiki');
 				$params['result'] .= '</div>';
 			}
@@ -373,13 +373,47 @@ _('This plugin allows each project to embed Mediawiki under a tab.');
 				return false;
 			}
 			if (in_array($this->name, $params['show']) || (count($params['show']) < 1)) {
+				$protocol = forge_get_config('use_ssl') ? 'https://' : 'http://';
+				$script_url = $protocol.forge_get_config('web_host').'/plugins/'.$this->name.'/wiki/'.$project->getUnixName().'/api.php'
+							.'?action=query'
+							.'&list=recentchanges'
+							.'&rcstart='.$params['begin']
+							.'&rcend='.$params['end'];
+				$filename = tempnam('/tmp', 'mediawikilog');
+				$f = fopen($filename, 'w');
+				$ch = curl_init();
+				curl_setopt($ch, CURLOPT_URL, $script_url);
+				curl_setopt($ch, CURLOPT_FILE, $f);
+				curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+				curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+				curl_setopt($ch, CURLOPT_COOKIE, @$_SERVER['HTTP_COOKIE']);  // for session validation
+				curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);  // for session validation
+				curl_setopt($ch, CURLOPT_HTTPHEADER,
+							array('X-Forwarded-For: '.$_SERVER['REMOTE_ADDR']));  // for session validation
+				$body = curl_exec($ch);
+				if ($body === false) {
+					$this->setError(curl_error($ch));
+				}
+				curl_close($ch);
+				fclose($f); // flush buffer
+				$f = fopen($filename, 'r');
+				unlink($filename);
+				while (!feof($f) && $data = fgets($f)) {
+					$result = array();
+					$result['section'] = 'mediawiki';
+					$result['group_id'] = $group_id;
+					$result['ref_id'] = 'something';
+					$result['description'] = 'yeah';
+					$result['activity_date'] = 0;
+					$result['subref_id'] = '';
+					$params['results'][] = $result;
+				}
 			}
 			if (!in_array($this->name, $params['ids'])) {
 				$params['ids'][] = $this->name;
 				$params['texts'][] = _('Mediawiki Changes');
 			}
 			return true;
-		}
 		}
 	}
 
