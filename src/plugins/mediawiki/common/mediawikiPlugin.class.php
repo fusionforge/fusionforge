@@ -377,8 +377,9 @@ _('This plugin allows each project to embed Mediawiki under a tab.');
 				$script_url = $protocol.forge_get_config('web_host').'/plugins/'.$this->name.'/wiki/'.$project->getUnixName().'/api.php'
 							.'?action=query'
 							.'&list=recentchanges'
-							.'&rcstart='.$params['begin']
-							.'&rcend='.$params['end'];
+							.'&format=json'
+							.'&rcstart='.date('Y-m-d\TH:i:s\Z,$params['end'])
+							.'&rcend='.date('Y-m-d\TH:i:s\Z,$params['begin']);
 				$filename = tempnam('/tmp', 'mediawikilog');
 				$f = fopen($filename, 'w');
 				$ch = curl_init();
