@@ -1,10 +1,17 @@
 FROM centos:centos7
-MAINTAINER FusionForge TrivialDev <franck.villaume@trivialdev.com>
+LABEL maintainer "franck.villaume@trivialdev.com"
+LABEL version "master"
+LABEL name "FusionForge"
+LABEL vendor "TrivialDev"
+LABEL description "all-in-one"
+LABEL license "GPLv2"
 
-RUN yum -y update; yum clean all
-RUN yum -y install git openssh-server; yum clean all
-RUN mkdir -p /opt/sources/ && cd /opt/sources && git clone https://scm.fusionforge.org/anonscm/git/fusionforge/fusionforge.git
-RUN cd /opt/sources/fusionforge && source ./autoinstall/common-backports && \
+RUN yum -y install git openssh-server && \
+    yum -y clean all;
+WORKDIR /opt/sources
+RUN git clone https://scm.fusionforge.org/anonscm/git/fusionforge/fusionforge.git
+WORKDIR /opt/sources/fusionforge
+RUN source ./autoinstall/common-backports && \
     yum install -y make tar && \
     backports_rpm && \
     yum --enablerepo=epel install -y httpd-itk && \
@@ -14,6 +21,7 @@ RUN cd /opt/sources/fusionforge && source ./autoinstall/common-backports && \
          moin mod_wsgi python-psycopg2 \
          unoconv poppler-utils libreoffice-headless \
          cronie mediawiki && \
+    yum -y clean all && \
     cd src/ && \
     make && \
     make install-base install-shell install-scm \
@@ -22,7 +30,8 @@ RUN cd /opt/sources/fusionforge && source ./autoinstall/common-backports && \
          install-plugin-taskboard install-plugin-message \
          install-plugin-repositoryapi install-plugin-mediawiki
 
-RUN yum --enablerepo=epel install -y supervisor
+RUN yum --enablerepo=epel install -y supervisor && \
+    yum -y clean all;
 
 RUN mkdir /var/run/sshd
 RUN /usr/sbin/sshd-keygen
@@ -31,11 +40,12 @@ USER postgres
 RUN /usr/bin/initdb -D /var/lib/pgsql/data
 
 USER root
-ADD ./supervisord.conf /etc/supervisord.conf
-ADD ./startpoint.sh /startpoint.sh
-ADD ./postinstall.sh /postinstall.sh
+COPY ./supervisord.conf /etc/supervisord.conf
+COPY ./startpoint.sh /startpoint.sh
+COPY ./postinstall.sh /postinstall.sh
 RUN chmod +x /startpoint.sh
 RUN chmod +x /postinstall.sh
 
 EXPOSE 22 80 443
 ENTRYPOINT ["/startpoint.sh"]
+CMD []
