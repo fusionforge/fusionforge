@@ -121,8 +121,8 @@ table.listing tbody tr:nth-child(odd),
 }
 
 .tableheading {
-	background-color: #d0d0d0;
-	font-weight: bold;
+	background-color: #d0d0d0 !important;
+	font-weight: bold !important;
 	text-align: center;
 }
 
