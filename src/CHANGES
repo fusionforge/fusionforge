@@ -20,6 +20,7 @@ FusionForge 6.X:
 * Plugin AuthBuiltin: add captcha after 3 attempts with the same login [#795] (TrivialDev)
 * Plugin AuthLDAP: support X_FORWARD_USER to delegate authentication and then retrieve user from LDAP (TrivialDev)
 * Plugin GlobalActivity: forge-wide aggregation for project activities (Roland Mas)
+* Plugin Mediawiki: support activity for public project (TrivialDev)
 * Projects Page: add paging system in full_list and tag_cloud subpages (TrivialDev)
 * SearchEngine: support only FTI queries (TrivialDev)
 * Search: index project tags and use them for search (Roland Mas)

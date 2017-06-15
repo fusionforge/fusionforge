@@ -277,6 +277,9 @@ echo $HTML->closeForm();
 						$cached_perms[$s][$ref] = forge_check_perm('docman', $group_id, 'read');
 						break;
 					}
+                                        case 'mediawiki':
+                                                $cached_perms[$s][$ref] = forge_check_perm('plugin_mediawiki_read', $group_id, 'read');
+                                                break;
 					default: {
 						// Must be a bug somewhere, we're supposed to handle all types
 						$cached_perms[$s][$ref] = false;

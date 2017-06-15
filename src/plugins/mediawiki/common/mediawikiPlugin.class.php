@@ -373,42 +373,53 @@ _('This plugin allows each project to embed Mediawiki under a tab.');
 				return false;
 			}
 			if (in_array($this->name, $params['show']) || (count($params['show']) < 1)) {
-				$protocol = forge_get_config('use_ssl') ? 'https://' : 'http://';
-				$script_url = $protocol.forge_get_config('web_host').'/plugins/'.$this->name.'/wiki/'.$project->getUnixName().'/api.php'
-							.'?action=query'
-							.'&list=recentchanges'
-							.'&format=json'
-							.'&rcstart='.date('Y-m-d\TH:i:s\Z',$params['end'])
-							.'&rcend='.date('Y-m-d\TH:i:s\Z',$params['begin']);
-				$filename = tempnam('/tmp', 'mediawikilog');
-				$f = fopen($filename, 'w');
-				$ch = curl_init();
-				curl_setopt($ch, CURLOPT_URL, $script_url);
-				curl_setopt($ch, CURLOPT_FILE, $f);
-				curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-				curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-				curl_setopt($ch, CURLOPT_COOKIE, @$_SERVER['HTTP_COOKIE']);  // for session validation
-				curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);  // for session validation
-				curl_setopt($ch, CURLOPT_HTTPHEADER,
-							array('X-Forwarded-For: '.$_SERVER['REMOTE_ADDR']));  // for session validation
-				$body = curl_exec($ch);
-				if ($body === false) {
-					$this->setError(curl_error($ch));
-				}
-				curl_close($ch);
-				fclose($f); // flush buffer
-				$f = fopen($filename, 'r');
-				unlink($filename);
-				while (!feof($f) && $data = fgets($f)) {
-					$result = array();
-					$result['section'] = 'mediawiki';
-					$result['group_id'] = $group_id;
-					$result['ref_id'] = 'something';
-					$result['description'] = 'yeah';
-					$result['activity_date'] = 0;
-					$result['subref_id'] = '';
-					$params['results'][] = $result;
-				}
+                                $protocol = forge_get_config('use_ssl') ? 'https://' : 'http://';
+                                $script_url = $protocol.forge_get_config('web_host').forge_get_config('url_prefix').'/plugins/'.$this->name.'/wiki/'.$project->getUnixName().'/api.php'
+                                                        .'?action=query'
+                                                        .'&list=recentchanges'
+                                                        .'&format=json'
+                                                        .'&rcstart='.date('Y-m-d\TH:i:s\Z',$params['end'])
+                                                        .'&rcend='.date('Y-m-d\TH:i:s\Z',$params['begin']);
+                                $filename = tempnam('/tmp', 'mediawikilog');
+                                $f = fopen($filename, 'w');
+                                $ch = curl_init();
+                                curl_setopt($ch, CURLOPT_URL, $script_url);
+                                curl_setopt($ch, CURLOPT_FILE, $f);
+                                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                                curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+                                curl_setopt($ch, CURLOPT_COOKIE, @$_SERVER['HTTP_COOKIE']);  // for session validation
+                                curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);  // for session validation
+                                curl_setopt($ch, CURLOPT_HTTPHEADER,
+                                                        array('X-Forwarded-For: '.$_SERVER['REMOTE_ADDR']));  // for session validation
+                                $body = curl_exec($ch);
+                                if ($body === false) {
+                                        $this->setError(curl_error($ch));
+                                }
+                                curl_close($ch);
+                                fclose($f); // flush buffer
+                                $jsoncontent = (array)json_decode(file_get_contents($filename), true);
+                                unlink($filename);
+                                if (isset($jsoncontent['query']['recentchanges'])) {
+                                        foreach($jsoncontent['query']['recentchanges'] as $recentchanges) {
+                                                $result = array();
+                                                $result['section'] = 'mediawiki';
+                                                $result['group_id'] = $group_id;
+                                                $result['activity_date'] = strtotime($recentchanges['timestamp']);
+                                                $result['link'] = forge_get_config('url_prefix').'plugins/'.$this->name.'/wiki/'.$project->getUnixName().'/index.php/'.str_replace(' ', '_',
+ $recentchanges['title']);
+                                                $title = 'Mediawiki ';
+                                                if ($recentchanges['type'] == 'new') {
+                                                        $title .= _('new element created')._(': ');
+                                                } else if ($recentchanges['type'] == 'edit') {
+                                                        $title .= _('modified element')._(': ');
+                                                } else if ($recentchanges['type'] == 'log') {
+                                                        $title .= _('stored element')._(': ');
+                                                }
+                                                $title .= $recentchanges['title'];
+                                                $result['title'] = $title;
+                                                $params['results'][] = $result;
+                                        }
+                                }
 			}
 			if (!in_array($this->name, $params['ids'])) {
 				$params['ids'][] = $this->name;
