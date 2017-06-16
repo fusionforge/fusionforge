@@ -15,20 +15,53 @@ RUN source ./autoinstall/common-backports && \
     yum install -y make tar && \
     backports_rpm && \
     yum --enablerepo=epel install -y httpd-itk && \
-    yum install -y gettext php-cli php-pgsql php-process php-mbstring php-pear-HTTP \
-         httpd mod_dav_svn mod_ssl postgresql-server postgresql-contrib nscd \
-         cvs subversion viewvc python-pycurl git gitweb xinetd \
-         moin mod_wsgi python-psycopg2 \
-         unoconv poppler-utils libreoffice-headless \
-         cronie mediawiki && \
+    yum install -y gettext \
+                   php-cli \
+                   php-pgsql \
+                   php-process \
+                   php-mbstring \
+                   php-pear-HTTP \
+                   httpd \
+                   mod_dav_svn \
+                   mod_ssl \
+                   postgresql-server \
+                   postgresql-contrib \
+                   nscd \
+                   cvs \
+                   subversion \
+                   viewvc \
+                   python-pycurl \
+                   git \
+                   gitweb \
+                   xinetd \
+                   moin \
+                   mod_wsgi \
+                   python-psycopg2 \
+                   unoconv \
+                   poppler-utils \
+                   libreoffice-headless \
+                   cronie \
+                   mediawiki && \
     yum -y clean all && \
     cd src/ && \
     make && \
-    make install-base install-shell install-scm \
-         install-plugin-scmcvs install-plugin-scmsvn install-plugin-scmgit \
-         install-plugin-blocks install-plugin-moinmoin \
-         install-plugin-taskboard install-plugin-message \
-         install-plugin-repositoryapi install-plugin-mediawiki
+    make install-base \
+         install-shell \
+         install-scm \
+         install-plugin-scmcvs \
+         install-plugin-scmsvn \
+         install-plugin-scmgit \
+         install-plugin-blocks \
+         install-plugin-moinmoin \
+         install-plugin-taskboard \
+         install-plugin-message \
+         install-plugin-repositoryapi \
+         install-plugin-mediawiki \
+         install-plugin-compactpreview \
+         install-plugin-headermenu \
+         install-plugin-gravatar \
+         install-plugin-scmhook \
+         install-plugin-webanalytics 
 
 RUN yum --enablerepo=epel install -y supervisor && \
     yum -y clean all;
