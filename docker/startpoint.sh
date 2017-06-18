@@ -28,6 +28,7 @@ __postinstall() {
 
 __zzzzlocalini() {
 echo '[core]' > /etc/fusionforge/config.ini.d/zzzz-local.ini
+echo 'is_docker = 1' >> /etc/fusionforge/config.ini.d/zzzz-local.ini
 if [[ ! -z ${PORT_HTTP} ]]; then
    echo 'http_port = '${PORT_HTTP} >> /etc/fusionforge/config.ini.d/zzzz-local.ini
 fi

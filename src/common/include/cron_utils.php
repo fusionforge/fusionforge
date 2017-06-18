@@ -117,7 +117,11 @@ function cron_reload_nscd() {
 }
 
 function cron_reload_apache() {
-        system("service apache2 reload || service httpd reload >/dev/null 2>&1");
+	if (forge_get_config('is_docker')) {
+		system('killall httpd >/dev/null 2>&1');
+	} else {
+		system("service apache2 reload || service httpd reload >/dev/null 2>&1");
+	}
 }
 
 function cron_regen_apache_auth() {
