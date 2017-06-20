@@ -3,8 +3,8 @@
  * scmhookPlugin Class
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2014, Franck Villaume - TrivialDev
  * Copyright 2012, Benoit Debaenst - TrivialDev
+ * Copyright 2012-2014,2017, Franck Villaume - TrivialDev
  * Copyright 2014, Sylvain Beucler - Inria
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -273,7 +273,7 @@ project independently.");
 		return $validHooks;
 	}
 
-	function artifact_extra_detail($params) {
+	function artifact_extra_detail(&$params) {
 		$hooksAvailable = $this->getAvailableHooks($params['group_id']);
 		$hooksEnabled = $this->getEnabledHooks($params['group_id']);
 		foreach ($hooksAvailable as $hookAvailable) {

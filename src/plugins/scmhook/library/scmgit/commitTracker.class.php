@@ -6,7 +6,7 @@
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2013-2014, Benoit Debaenst - TrivialDev
- * Copyright 2014,2016, Franck Villaume - TrivialDev
+ * Copyright 2014,2016-2017, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -56,7 +56,7 @@ class GitCommitTracker extends scmhook {
 		return $this->disabledMessage;
 	}
 
-	function artifact_extra_detail($params) {
+	function artifact_extra_detail(&$params) {
 		global $HTML;
 		$DBResult = db_query_params('SELECT * FROM plugin_scmhook_scmgit_committracker_data_master, plugin_scmhook_scmgit_committracker_data_artifact
 						WHERE plugin_scmhook_scmgit_committracker_data_artifact.group_artifact_id = $1
@@ -69,7 +69,7 @@ class GitCommitTracker extends scmhook {
 			$return = $this->getCommitEntries($DBResult, $params['group_id']);
 		}
 		if (isset($params['content'])) {
-			$params['content'] = $return;
+			$params['content'] .= $return;
 		} else {
 			echo $return;
 		}
@@ -78,8 +78,8 @@ class GitCommitTracker extends scmhook {
 	function task_extra_detail($params) {
 		$return = '';
 		$DBResult = db_query_params ('SELECT * FROM plugin_scmhook_scmgit_committracker_data_master, plugin_scmhook_scmgit_committracker_data_artifact
-						WHERE plugin_scmhook_scmgit_committracker_data_artifact.project_task_id=$1
-						AND plugin_scmhook_scmgit_committracker_data_master.holder_id=plugin_scmhook_scmgit_committracker_data_artifact.id
+						WHERE plugin_scmhook_scmgit_committracker_data_artifact.project_task_id = $1
+						AND plugin_scmhook_scmgit_committracker_data_master.holder_id = plugin_scmhook_scmgit_committracker_data_artifact.id
 						ORDER BY git_date',
 						array($params['task_id']));
 		if (!$DBResult) {
@@ -104,18 +104,17 @@ class GitCommitTracker extends scmhook {
 	function getCommitEntries($DBResult, $group_id) {
 		global $HTML;
 		$group = group_get_object($group_id);
-		$Rows= db_numrows($DBResult);
+		$Rows = db_numrows($DBResult);
 		$return = '';
 
 		if ($Rows > 0) {
-			echo '<tr><td>';
+			$return .= '<tr><td>';
 			$return .= html_e('h2', array(), _('Related Git commits'), false);
 
 			$title_arr = $this->getTitleArr($group_id);
 			$return .= $HTML->listTableTop($title_arr);
 
-			for ($i=0; $i<$Rows; $i++) {
-				$Row = db_fetch_array($DBResult);
+			while ($Row = db_fetch_array($DBResult)) {
 				$cells = array();
 				$cells[][] = $this->getFileLink($group->getUnixName(), $Row['file'], $Row['actual_version']);
 				$cells[][] = date(_('Y-m-d'), $Row['git_date']);

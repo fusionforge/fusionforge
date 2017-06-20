@@ -5,7 +5,7 @@
  * Copyright 2005, Guillaume Smet <guillaume-gforge@smet.org>
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2017, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -55,17 +55,23 @@ class SvnCommitTracker extends scmhook {
 		return $this->disabledMessage;
 	}
 
-	function artifact_extra_detail($params) {
+	function artifact_extra_detail(&$params) {
 		$DBResult = db_query_params('SELECT * FROM plugin_scmhook_scmsvn_committracker_data_master, plugin_scmhook_scmsvn_committracker_data_artifact
 						WHERE plugin_scmhook_scmsvn_committracker_data_artifact.group_artifact_id = $1
 						AND plugin_scmhook_scmsvn_committracker_data_master.holder_id = plugin_scmhook_scmsvn_committracker_data_artifact.id
 						ORDER BY svn_date',
 						array($params['artifact_id']));
 		if (!$DBResult) {
-			echo $HTML->error_msg(_('Unable to retrieve data'));
+			$return = $HTML->error_msg(_('Unable to retrieve data'));
 		} else {
-			$this->getCommitEntries($DBResult, $params['group_id']);
+			$return = $this->getCommitEntries($DBResult, $params['group_id']);
 		}
+                if (isset($params['content'])) {
+                        $params['content'] .= $return;
+                } else {
+                        echo $return;
+                }
+
 	}
 
 	function task_extra_detail($params) {
@@ -93,14 +99,14 @@ class SvnCommitTracker extends scmhook {
 		global $HTML;
 		$group = group_get_object($group_id);
 		$Rows= db_numrows($DBResult);
+		$return = '';
 
 		if ($Rows > 0) {
-			echo "<tr>\n";
-			echo "<td>\n";
-			echo html_e('h2', array(), _('Related SVN commits'), false);
+			$return .= "<tr><td>\n";
+			$return .= html_e('h2', array(), _('Related SVN commits'), false);
 
 			$title_arr = $this->getTitleArr();
-			echo $HTML->listTableTop($title_arr);
+			$return .= $HTML->listTableTop($title_arr);
 
 			for ($i=0; $i<$Rows; $i++) {
 				$Row = db_fetch_array($DBResult);
@@ -111,12 +117,12 @@ class SvnCommitTracker extends scmhook {
 				$cells[][] = $this->getActualVersionLink($group->getUnixName(), $Row['file'], $Row['actual_version']);
 				$cells[][] = htmlspecialchars($Row['log_text']);
 				$cells[][] = util_make_link_u($Row['author'], user_get_object_by_name($Row['author'])->getId(), $Row['author']);
-				echo $HTML->multiTableRow(array(), $cells);
+				$return .= $HTML->multiTableRow(array(), $cells);
 			}
-			echo $HTML->listTableBottom();
-			echo "</td>\n";
-			echo "</tr>\n";
+			$return .= $HTML->listTableBottom();
+			$return .= "</td></tr>\n";
 		}
+		return $return;
 	}
 
 	/**

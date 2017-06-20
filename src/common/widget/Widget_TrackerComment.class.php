@@ -2,7 +2,7 @@
 /**
  * Comment Tracker Content Widget Class
  *
- * Copyright 2016, Franck Villaume - TrivialDev
+ * Copyright 2016-2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is a part of Fusionforge.
@@ -161,9 +161,18 @@ class Widget_TrackerComment extends Widget {
 		$tabberContent .= html_e('div', array('id' => 'tabber-attachments', 'class' => 'tabbertab'),
 						$attachmentContent, false);
 		if ($pluginfound) {
-			//TODO: implement it!!!
+			$params = array();
+			$params['group_id'] = $group_id;
+			$params['artifact_id'] = $aid;
+			$params['content'] = '';
+			plugin_hook_by_reference('artifact_extra_detail', $params);
+			if ($params['content'] == '') {
+				$divcontent = $HTML->information(_('No related commits.'));
+			} else {
+				$divcontent = $HTML->listTableTop(array(), array(), 'full').$params['content'].$HTML->listTableBottom();
+			}
 			$tabberContent .= html_e('div', array('id' => 'tabber-commits', 'class' => 'tabbertab'),
-							'', false);
+							$divcontent, false);
 		}
 		if ($func == 'detail') {
 			$tabberContent .= html_e('div', array('id' => 'tabber-changes', 'class' => 'tabbertab'),
