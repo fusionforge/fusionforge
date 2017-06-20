@@ -63,7 +63,8 @@ RUN source ./autoinstall/common-backports && \
          install-plugin-scmhook \
          install-plugin-webanalytics 
 
-RUN yum --enablerepo=epel install -y supervisor && \
+RUN yum --enablerepo=epel install -y supervisor \
+                                     net-tools && \
     yum -y clean all;
 
 RUN mkdir /var/run/sshd
