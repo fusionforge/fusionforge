@@ -1049,6 +1049,18 @@ abstract class Layout extends FFError {
 		return $this->getPicto('ic/tag.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
+	function getNewsPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/write16w.png', $title, $alt, 20, 20, $otherAttr);
+	}
+
+	function getPointerUp($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/pointer_up.png', $title, $alt, 20, 20, $otherAttr);
+	}
+
+	function getPointerDown($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/pointer_down.png', $title, $alt, 20, 20, $otherAttr);
+	}
+
 	function getPicto($url, $title, $alt, $width = 20, $height = 20, $otherAttr = array()) {
 		if ($title != '') {
 			$otherAttr['title'] = $title;
