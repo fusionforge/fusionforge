@@ -631,6 +631,9 @@ p.information {
 	background-image: url('../../images/widget/widget-preview-trackercomment-en_US.png');
 }
 
+.widget-preview-trackersummary-en_US {
+	background-image: url('../../images/widget/widget-preview-trackersummary-en_US.png');
+}
 /* }}} */
 
 /* {{{ Layout Manager */
