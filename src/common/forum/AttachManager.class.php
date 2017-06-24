@@ -144,7 +144,7 @@ class AttachManager extends FFError {
 
 			$f = $msg->getForum();
 			if (!$f || !is_object($f)) {
-				exit_error(_('Could Not Get Forum Object'),'forums');
+				exit_error(_('Could Not Get Forum Object'), 'forums');
 			} else {
 				if ( ((user_getid() == $attach_userid)
 				      || (forge_check_perm ('forum_admin', $f->Group->getID())))
@@ -157,9 +157,8 @@ class AttachManager extends FFError {
 			//add attach for existing message
 			$f = $msg->getForum();
 			if (!$f || !is_object($f)) {
-				exit_error(_('Could Not Get Forum Object'),'forums');
+				exit_error(_('Could Not Get Forum Object'), 'forums');
 			} else {
-//				$attach = html_image('ic/cfolder15.png', 15, 13) . _('No attachment found');
 				$attach = '';
 				if ( ((user_getid() == $msg->getPosterID())
 				      || (forge_check_perm ('forum_admin', $f->Group->getID())))
