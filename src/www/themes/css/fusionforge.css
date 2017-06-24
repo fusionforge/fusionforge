@@ -627,6 +627,10 @@ p.information {
 	background-image: url('../../images/widget/widget-preview-trackermain-en_US.png');
 }
 
+.widget-preview-trackercomment-en_US {
+	background-image: url('../../images/widget/widget-preview-trackercomment-en_US.png');
+}
+
 /* }}} */
 
 /* {{{ Layout Manager */
