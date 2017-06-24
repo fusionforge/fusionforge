@@ -34,31 +34,32 @@ global $HTML;
 
 $received_begin = getStringFromRequest("start_date");
 $received_end = getStringFromRequest("end_date");
-$show = getArrayFromRequest("show",array('forumpost',
-										 'trackeropen',
-										 'trackerclose',
-										 'news',
-										 'taskopen',
-										 'taskclose',
-										 'taskdelete',
-										 'frsrelease',
-										 'docmannew',
-										 'docmanupdate',
-										 'docgroupnew'
+$show = getArrayFromRequest('show', array('forumpost',
+					  'trackeropen',
+					  'trackerclose',
+					  'news',
+					  'taskopen',
+					  'taskclose',
+					  'taskdelete',
+					  'frsrelease',
+					  'docmannew',
+					  'docmanupdate',
+					  'docgroupnew',
+					  'mediawiki'
 ));
 
 $date_format = _('%Y-%m-%d');
 
-if (!$received_begin || $received_begin==0) {
-	$begin = (time()-(30*86400));
+if (!$received_begin || $received_begin == 0) {
+	$begin = (time() - (30 * 86400));
 	$rendered_begin = strftime($date_format, $begin);
 } else {
 	$tmp = strptime($received_begin, $date_format);
 	if (!$tmp) {
-		$begin = (time()-(7*86400));
+		$begin = (time() - (7 * 86400));
 		$rendered_begin = strftime($date_format, $begin);
 	} else {
-		$begin = mktime(0, 0, 0, $tmp['tm_mon']+1, $tmp['tm_mday'], $tmp['tm_year'] + 1900);
+		$begin = mktime(0, 0, 0, $tmp['tm_mon'] + 1, $tmp['tm_mday'], $tmp['tm_year'] + 1900);
 		$rendered_begin = $received_begin;
 	}
 }
@@ -76,7 +77,7 @@ if (!$received_end || $received_end == 0) {
 		$end = time();
 		$rendered_end = strftime($date_format, $end);
 	} else {
-		$end = mktime(23, 59, 59, $tmp['tm_mon']+1, $tmp['tm_mday'], $tmp['tm_year'] + 1900);
+		$end = mktime(23, 59, 59, $tmp['tm_mon'] + 1, $tmp['tm_mday'], $tmp['tm_year'] + 1900);
 		$rendered_end = $received_end;
 	}
 }
@@ -96,7 +97,7 @@ $ids = array();
 $texts = array();
 
 try {
-	$results = $plugin->getData($begin,$end,$show,$ids,$texts);
+	$results = $plugin->getData($begin, $end, $show, $ids, $texts);
 } catch (Exception $e) {
 	exit_error($e->getMessage(), 'home');
 }
@@ -138,8 +139,6 @@ if (count($ids) < 1) {
 	if (count($results) < 1) {
 		echo $HTML->information(_('No Activity Found'));
 	} else {
-
-
 		$displayTableTop = 0;
 		$last_day = 0;
 		foreach ($results as $arr) {
