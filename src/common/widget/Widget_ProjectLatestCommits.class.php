@@ -68,7 +68,7 @@ class Widget_ProjectLatestCommits extends Widget {
 					$revisionDescription .= ' [...]';
 				}
 				$divattr = array('class' => '', 'style' => 'border-bottom:1px solid #ddd');
-				if (($key + 1) % 2) == 1) {
+				if ((($key + 1) % 2) == 1) {
 					$divattr['class'] = 'bgcolor-white';
 				} else {
 					$divattr['class'] = 'bgcolor-grey';
