@@ -33,6 +33,8 @@
 require_once '../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 
+global $HTML;
+
 $otherfreeknowledge = getIntFromRequest('otherfreeknowledge') ;
 $gwords = getStringFromRequest('gwords');
 $order = getStringFromRequest('order', 'rank');
@@ -163,7 +165,7 @@ if (!$result || $rows < 1) {
         $title_arr[] = util_make_link('/plugins/'.$gsplugin->name.'/?gwords='.urlencode($gwords).'&order=title&gexact='.$gexact,
 				       _('Forge')) ;
 
-        echo $GLOBALS['HTML']->listTableTop($title_arr);
+        echo $HTML->listTableTop($title_arr);
 
         for ( $i = 0; $i < $rows; $i++ ) {
                 print        "<tr><td><a href=\""
@@ -175,7 +177,7 @@ if (!$result || $rows < 1) {
                         . db_result($result,$i,'title')."</a></center></td></tr>\n";
         }
 
-        echo $GLOBALS['HTML']->listTableBottom();
+        echo $HTML->listTableBottom();
 
 }
 
@@ -198,7 +200,7 @@ if ( !$no_rows && ( ($rows_returned > $rows) || ($offset != 0) ) ) {
 	if ( $rows_returned > $rows) {
 		echo "<span style=\"font-family:arial, helvetica;text-decoration: none\">";
 		echo util_make_link('/plugins/'.$gsplugin->name.'/?gwords='.urlencode($gwords).'&order='.urlencode($order).'&gexact='.$gexact.'&offset='.($offset+25),
-			'<strong>'._('Next Results').html_image('t.png', 15, 15, array("align"=>"middle")).'</strong>').'</span>';
+			'<strong>'._('Next Results').$HTML->getNextPic('', '', array("align"=>"middle")).'</strong>').'</span>';
 	} else {
 		echo "&nbsp;";
 	}

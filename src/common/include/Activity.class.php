@@ -84,7 +84,7 @@ class Activity extends FFError {
 		$docmanerror = 0;
 		switch (@$arr['section']) {
 			case 'scm': {
-				$icon = html_image('ic/cvs16b.png','','',array('alt'=>_('Source Code')));
+				$icon = $HTML->getScmPic(_('Source Code'), 'sourcecode');
 				$url = util_make_link('/scm/'.$arr['ref_id'].$arr['subref_id'],_('scm commit')._(': ').$arr['description']);
 				break;
 			}
@@ -99,33 +99,33 @@ class Activity extends FFError {
 				break;
 			}
 			case 'frsrelease': {
-				$icon = html_image('ic/cvs16b.png','','',array('alt'=>_('Files')));
+				$icon = $HTML->getPackagePic(_('Files'), 'files');
 				$url = util_make_link('/frs/?release_id='.$arr['subref_id'].'&group_id='.$arr['group_id'],_('FRS Release').' '.$arr['description']);
 				break;
 			}
 			case 'forumpost': {
-				$icon = html_image('ic/forum20g.png','','',array('alt'=>_('Forum')));
+				$icon = $HTML->getForumPic(_('Forum'), 'forum');
 				$url = util_make_link('/forum/message.php?msg_id='.$arr['subref_id'].'&group_id='.$arr['group_id'],_('Forum Post').' '.$arr['description']);
 				break;
 			}
 			case 'news': {
-				$icon = html_image('ic/write16w.png','','',array('alt'=>_('News')));
+				$icon = $HTML->getNewsPic(_('News'), 'news');
 				$url = util_make_link('/forum/forum.php?forum_id='.$arr['subref_id'],_('News').' '.$arr['description']);
 				break;
 			}
 			case 'taskopen': {
-				$icon = html_image('ic/taskman20w.png','','',array('alt'=>_('Tasks')));
+				$icon = $HTML->getPmPic(_('Open Task'), 'opentask');
 				$url = util_make_link('/pm/t_follow.php/'.$arr['subref_id'],_('Tasks').' '.$arr['description']);
 				break;
 			}
 			case 'taskclose': {
-				$icon = html_image('ic/taskman20w.png','','',array('alt'=>_('Tasks')));
+				$icon = $HTML->getPmPic(_('Closed Task'), 'closedtask');
 				$url = util_make_link('/pm/t_follow.php/'.$arr['subref_id'],_('Tasks').' '.$arr['description']);
 				break;
 			}
 
 			case 'taskdelete': {
-				$icon = html_image('ic/taskman20w.png','','',array('alt'=>_('Tasks')));
+				$icon = $HTML->getPmPic(_('Deleted Task', 'deletedtask'));
 				$url = util_make_link('/pm/t_follow.php/'.$arr['subref_id'],_('Tasks').' '.$arr['description']);
 				break;
 			}
@@ -152,7 +152,7 @@ class Activity extends FFError {
 					$docmanerror = 1;
 					break;
 				}
-				$icon = $HTML->getFolderPic('', _('Directory'));
+				$icon = $HTML->getFolderPic(_('Directory'), 'directory');
 				if ($dg->getState() == 2) {
 					$view = 'listtrashfile';
 				} else {

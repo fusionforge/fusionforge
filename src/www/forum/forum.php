@@ -348,7 +348,7 @@ if ($forum_id) {
 				*/
 				$ret_val .= '<tr><td>'
 					.util_make_link('/forum/forum.php?thread_id='.$row['thread_id'].'&forum_id='.$forum_id.'&group_id='.$group_id,
-							html_image('ic/cfolder15.png').' '. $subject).'</td>'
+							$HTML->getFolderPic().' '. $subject).'</td>'
 					.'<td>'.util_display_user($row['user_name'], $row['user_id'], $row['realname']).'</td>'.
 					'<td>'. $row['followups'] .'</td>'.
 					'<td>'. relative_date($row['recent']).'</td></tr>';
@@ -369,7 +369,7 @@ if ($forum_id) {
 		if ($offset != 0) {
 			$ret_val .= '<span class="prev">
 			<a href="javascript:history.back()"><strong>' .
-				html_image('t2.png', 15, 15) ._('Newer Messages').'</strong></a></span>';
+				$HTML->getPrevPic() ._('Newer Messages').'</strong></a></span>';
 		} else {
 			$ret_val .= ' ';
 		}
@@ -379,7 +379,7 @@ if ($forum_id) {
 		if ($avail_rows > $max_rows) {
 			$ret_val .= '<span class="next">'.
 				util_make_link('/forum/forum.php?max_rows='.$max_rows.'&style='.$style.'&offset='.($offset+$i).'&forum_id='.$forum_id.'&group_id='.$group_id,
-						html_e('strong', array(), _('Older Messages').html_image('t.png', 15, 15))).'</span>';
+						html_e('strong', array(), _('Older Messages').$HTML->getNextPic())).'</span>';
 		} else {
 			$ret_val .= ' ';
 		}

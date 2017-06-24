@@ -211,7 +211,7 @@ if (count($ids) < 1) {
 					break;
 				}
 				case 'docgroupnew': {
-					$icon = html_image('ic/cfolder15.png', '', '', array("alt"=>_('Directory')));
+					$icon = $HTML->getFolderPic(_('Directory'), 'directory');
 					$url = util_make_link('docman/?group_id='.$arr['group_id'].'&view=listfile&dirid='.$arr['subref_id'],_('Directory').' '.$arr['description']);
 					break;
 				}

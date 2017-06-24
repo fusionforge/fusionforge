@@ -35,15 +35,7 @@ class HtmlSearchRenderer extends SearchRenderer {
 	 */
 	var $tableHeaders = array();
 
-	/**
-	 * @param string  $typeOfSearch type of the search (Software, Forum, People and so on)
-	 * @param string  $words        words we are searching for
-	 * @param bool    $isExact      if we want to search for all the words or if only one matching the query is sufficient
-	 * @param object  $searchQuery  SearchQuery instance
-	 */
-	function __construct($typeOfSearch, $words, $isExact, $searchQuery) {
-		parent::__construct($typeOfSearch, $words, $isExact, $searchQuery);
-	}
+	// No __construct. Inherited from parent.
 
 	/**
 	 * flush - flush the html output
@@ -128,6 +120,7 @@ class HtmlSearchRenderer extends SearchRenderer {
 	 * @return string html output
 	 */
 	function getNavigationPanel() {
+		global $HTML;
 		$searchQuery =& $this->searchQuery;
 
 		$html = '<br />';
@@ -135,14 +128,14 @@ class HtmlSearchRenderer extends SearchRenderer {
 		$html .= '<tr>';
 		$html .= '<td>';
 		if ($searchQuery->getOffset() != 0) {
-			$html .= util_make_link($this->getPreviousResultsUrl(), html_image('t2.png', 15, 15).' '._('Previous Results'), array('class' => 'prev'));
+			$html .= util_make_link($this->getPreviousResultsUrl(), $HTML->getPrevPic().' '._('Previous Results'), array('class' => 'prev'));
 		} else {
 			$html .= '&nbsp;';
 		}
 		$html .= '</td><td class="align-right">';
 		$result = $this->searchQuery->getData($this->searchQuery->getRowsPerPage(),$this->searchQuery->getOffset());
 		if ($searchQuery->getRowsTotalCount() > $this->searchQuery->getRowsPerPage()+$this->searchQuery->getOffset()) {
-			$html .= util_make_link($this->getNextResultsUrl(), _('Next Results').' '.html_image('t.png', 15, 15), array('class' => 'next'));
+			$html .= util_make_link($this->getNextResultsUrl(), _('Next Results').' '.$HTML->getNextPic(), array('class' => 'next'));
 		} else {
 			$html .= '&nbsp;';
 		}

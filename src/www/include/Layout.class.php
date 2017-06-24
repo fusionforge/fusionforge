@@ -929,64 +929,76 @@ abstract class Layout extends FFError {
 		return $return;
 	}
 
-	function getMonitorPic($title = '', $alt = '') {
-		return $this->getPicto('ic/mail16w.png', $title, $alt);
+	function getNextPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/t.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
-	function getStartMonitoringPic($title = '', $alt = '') {
-		return $this->getPicto('ic/startmonitor.png', $title, $alt);
+	function getPrevPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/t2.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
-	function getStopMonitoringPic($title = '', $alt = '') {
-		return $this->getPicto('ic/stopmonitor.png', $title, $alt);
+	function getMonitorPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/mail16w.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
-	function getReleaseNotesPic($title = '', $alt = '') {
-		return $this->getPicto('ic/manual16c.png', $title, $alt);
+	function getStartMonitoringPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/startmonitor.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
-	function getDownloadPic($title = '', $alt = '') {
-		return $this->getPicto('ic/download.png', $title, $alt);
+	function getStopMonitoringPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/stopmonitor.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
-	function getHomePic($title = '', $alt = '') {
-		return $this->getPicto('ic/home16b.png', $title, $alt);
+	function getReleaseNotesPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/manual16c.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
-	function getFollowPic($title = '', $alt = '') {
-		return $this->getPicto('ic/tracker20g.png', $title, $alt);
+	function getDownloadPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/download.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
-	function getForumPic($title = '', $alt = '') {
-		return $this->getPicto('ic/forum20g.png', $title, $alt);
+	function getHomePic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/home16b.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
-	function getDocmanPic($title = '', $alt = '') {
-		return $this->getPicto('ic/docman16b.png', $title, $alt);
+	function getFollowPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/tracker20g.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
-	function getMailPic($title = '', $alt = '') {
-		return $this->getPicto('ic/mail16b.png', $title, $alt);
+	function getForumPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/forum20g.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
-	function getMailNotifyPic($title = '', $alt = '') {
-		return $this->getPicto('ic/mail-send.png', $title, $alt);
+	function getDocmanPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/docman16b.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
-	function getPmPic($title = '', $alt = '') {
-		return $this->getPicto('ic/taskman20g.png', $title, $alt);
+	function getMailPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/mail16b.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
-	function getSurveyPic($title = '', $alt = '') {
-		return $this->getPicto('ic/survey16b.png', $title, $alt);
+	function getMailNotifyPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/mail-send.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
-	function getScmPic($title = '', $alt = '') {
-		return $this->getPicto('ic/cvs16b.png', $title, $alt);
+	function getPmPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/taskman20g.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
-	function getFtpPic($title = '', $alt = '') {
-		return $this->getPicto('ic/ftp16b.png', $title, $alt);
+	function getSurveyPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/survey16b.png', $title, $alt, 20, 20, $otherAttr);
+	}
+
+	function getScmPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/cvs16b.png', $title, $alt, 20, 20, $otherAttr);
+	}
+
+	function getFtpPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/ftp16b.png', $title, $alt, 20, 20, $otherAttr);
+	}
+
+	function getPackagePic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/package.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
 	function getDeletePic($title = '', $alt = '', $otherAttr = array()) {
@@ -1031,6 +1043,10 @@ abstract class Layout extends FFError {
 
 	function getFolderPic($title = '', $alt = '', $otherAttr = array()) {
 		return $this->getPicto('ic/folder.png', $title, $alt, 20, 20, $otherAttr);
+	}
+
+	function getOpenFolderPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/ofolder.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
 	function getOpenTicketPic($title = '', $alt = '', $otherAttr = array()) {

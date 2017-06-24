@@ -42,9 +42,7 @@ if (!$categoryId) {
 }
 
 $category = new TroveCategory($categoryId);
-
-	$HTML->header(array('title'=>_('Trove Map')));
-
+$HTML->header(array('title'=>_('Trove Map')));
 echo '<hr />';
 
 // We check current filtering directives and display them
@@ -92,7 +90,7 @@ if($filter) {
 		<?php
 			// here we print list of root level categories, and use open folder for current
 			$rootCategories = TroveCategoryFactory::getRootCategories();
-			echo _('Browse By').':';
+			echo _('Browse By')._(':');
 			for($i = 0, $count = sizeof($rootCategories); $i < $count; $i++) {
 				$rootCategory =& $rootCategories[$i];
 
@@ -103,11 +101,11 @@ if($filter) {
 				if (($rootCategory->getID() == $category->getRootParentId())
 					|| ($rootCategory->getID() == $category->getID())) {
 
-					echo html_image('ic/ofolder15.png', 15, 13);
+					echo $HTML->getOpenFolderPic();
 					echo '&nbsp; <strong>'.$rootCategory->getLocalizedLabel().'</strong>';
 				} else {
 					echo '<a href="?form_cat='.$rootCategory->getID().@$discrim_url.'">';
-					echo html_image('ic/cfolder15.png', 15, 13);
+					echo $HTML->getFolderPic();
 					echo '&nbsp; '.$rootCategory->getLocalizedLabel();
 					echo '</a>';
 				}
@@ -121,7 +119,7 @@ if($filter) {
 			for ($i=0, $count = sizeof($parentCategories); $i < $count; $i++) {
 				echo str_repeat(' &nbsp; ', $i * 2);
 
-				echo html_image('ic/ofolder15.png', 15, 13);
+				echo $HTML->getOpenFolderPic();
 				echo '&nbsp; ';
 				if($parentCategories[$i]['id'] != $category->getID()) {
 					echo '<a href="?form_cat='.$parentCategories[$i]['id'].$discrim_url.'">';
@@ -146,7 +144,7 @@ if($filter) {
 
 				echo $currentIndent;
 				echo '<a href="?form_cat='.$childCategory->getID().@$discrim_url.'">';
-				echo html_image('ic/cfolder15.png', 15, 13);
+				echo $HTML->getFolderPic();
 				echo '&nbsp; '.$childCategory->getLocalizedLabel().'</a>';
 				echo ' <em>('
 					.sprintf(_('%s projects'), $childCategory->getSubProjectsCount())
