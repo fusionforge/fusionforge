@@ -89,7 +89,7 @@ class Widget_ProjectLatestFileReleases extends Widget {
 				$tmp_alt = $package_name . " - " . _('Release Notes');
 				$link = '/frs/?group_id=' . $group_id . '&view=shownotes&release_id='.$frsrnr->getID();
 				$link_content = $HTML->getReleaseNotesPic($tmp_alt, $tmp_alt);
-				$cells[] = array(util_make_link($link, $link_content), 'class' => 'align-center');
+				$cells[][] = util_make_link($link, $link_content);
 				// -> monitor
 				if (session_loggedin()) {
 					$url = '/frs/?group_id='.$group_id.'&package_id='.$frsrnr->FRSPackage->getID().'&action=monitor';
@@ -109,7 +109,7 @@ class Widget_ProjectLatestFileReleases extends Widget {
 				$link_content = $HTML->getDownloadPic($tmp_alt, $tmp_alt);
 				$t_link_anchor = $HTML->toSlug($package_name)."-".$HTML->toSlug($package_release)."-title-content";
 				$link = '/frs/?group_id=' . $group_id . '&amp;release_id='.$frsrnr->getID()."#".$t_link_anchor;
-				$cells[] = array(util_make_link ($link, $link_content), 'class' => 'align-center');
+				$cells[][] = util_make_link($link, $link_content);
 				$result .= $HTML->multiTableRow(array(), $cells);
 			}
 			$result .= $HTML->listTableBottom();
