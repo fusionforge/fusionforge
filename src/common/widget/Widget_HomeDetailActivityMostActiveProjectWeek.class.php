@@ -18,6 +18,7 @@
  */
 
 require_once 'Widget.class.php';
+require_once $gfcommon.'include/Activity.class.php';
 
 class Widget_HomeDetailActivityMostActiveProjectWeek extends Widget {
 
@@ -44,17 +45,11 @@ class Widget_HomeDetailActivityMostActiveProjectWeek extends Widget {
 				$count++;
 			}
 		}
-		$activities = array();
-		$begin = (time()-(7*86400));
+		$begin = (time() - (7 * 86400));
 		$end = time();
-		$res = db_query_params('SELECT * FROM activity_vw WHERE activity_date BETWEEN $1 AND $2
-					AND group_id = ANY ($3) ORDER BY activity_date DESC',
-				array($begin, $end, db_int_array_to_any_clause($selected_groups)));
-		if ($res && db_numrows($res) > 0) {
-			while ($arr = db_fetch_array($res)) {
-				$activities[] = $arr;
-			}
-		}
+		$ffactivity = new Activity();
+		$activities = $ffactivity->getActivitiesForProjects($selected_groups, $begin, $end);
+
 		foreach ($selected_groups as $group_id) {
 			// If plugins wants to add activities.
 			$hookParams['group'] = $group_id;
@@ -66,12 +61,12 @@ class Widget_HomeDetailActivityMostActiveProjectWeek extends Widget {
 		if (count($activities) > 0) {
 			$date_format = _('%Y-%m-%d');
 			$date_format_js = _('yy-mm-dd');
-			usort($activities, 'Widget_HomeDetailActivityMostActiveProjectWeek::date_compare');
+			usort($activities, 'Activity::date_compare');
 			$displayTableTop = 0;
 			$last_day = 0;
 			foreach ($activities as $activity) {
 				$docmanerror = 0;
-				if (!$this->check_perm_for_activity($activity)) {
+				if (!$ffactivity->check_perm_for_activity($activity, $this->cached_perms)) {
 					continue;
 				}
 				if (!$displayTableTop) {
@@ -84,74 +79,8 @@ class Widget_HomeDetailActivityMostActiveProjectWeek extends Widget {
 					echo $HTML->listTableTop($theader);
 					$displayTableTop = 1;
 				}
-				switch (@$activity['section']) {
-					case 'scm': {
-						$icon = html_image('ic/cvs16b.png','','',array('alt'=>_('Source Code')));
-						$url = util_make_link('/scm/'.$activity['ref_id'].$activity['subref_id'],_('scm commit')._(': ').$activity['description']);
-						break;
-					}
-					case 'trackeropen': {
-						$icon = $HTML->getOpenTicketPic(_('Tracker Open'), 'trackeropen');
-						$url = util_make_link('/tracker/a_follow.php/'.$activity['subref_id'],_('Tracker Item').' [#'.$activity['subref_id'].'] '.$activity['description'].' '._('Open'));
-						break;
-					}
-					case 'trackerclose': {
-						$icon = $HTML->getClosedTicketPic(_('Tracker Closed'), 'trackerclose');
-						$url = util_make_link('/tracker/a_follow.php/'.$activity['subref_id'],_('Tracker Item').' [#'.$activity['subref_id'].'] '.$activity['description'].' '._('Closed'));
-						break;
-					}
-					case 'frsrelease': {
-						$icon = html_image('ic/cvs16b.png','','',array('alt'=>_('Files')));
-						$url = util_make_link('/frs/?release_id='.$activity['subref_id'].'&group_id='.$activity['group_id'],_('FRS Release').' '.$activity['description']);
-						break;
-					}
-					case 'forumpost': {
-						$icon = html_image('ic/forum20g.png','','',array('alt'=>_('Forum')));
-						$url = util_make_link('/forum/message.php?msg_id='.$activity['subref_id'].'&group_id='.$activity['group_id'],_('Forum Post').' '.$activity['description']);
-						break;
-					}
-					case 'news': {
-						$icon = html_image('ic/write16w.png','','',array('alt'=>_('News')));
-						$url = util_make_link('/forum/forum.php?forum_id='.$activity['subref_id'],_('News').' '.$activity['description']);
-						break;
-					}
-					case 'taskopen':
-					case 'taskclose':
-					case 'taskdelete': {
-						$icon = html_image('ic/taskman20w.png','','',array('alt'=>_('Tasks')));
-						$url = util_make_link('/pm/t_follow.php/'.$activity['subref_id'],_('Tasks').' '.$activity['description']);
-						break;
-					}
-					case 'docmannew':
-					case 'docmanupdate': {
-						$document = document_get_object($activity['subref_id'], $activity['group_id']);
-						$stateid = $document->getStateID();
-						if ($stateid != 1 && !forge_check_perm('docman', $activity['group_id'], 'approve')) {
-							$docmanerror = 1;
-						}
-						$dg = documentgroup_get_object($activity['ref_id'], $activity['group_id']);
-						if (!$dg || $dg->isError() || !$dg->getPath(true, false)) {
-							$docmanerror = 1;
-						}
-						$icon = html_image('ic/docman16b.png', '', '', array('alt'=>_('Documents')));
-						$url = util_make_link($document->getPermalink(),_('Document').' '.$activity['description']);
-						break;
-					}
-					case 'docgroupnew': {
-						$dg = documentgroup_get_object($activity['subref_id'], $activity['group_id']);
-						if (!$dg || $dg->isError() || !$dg->getPath(true, false)) {
-							$docmanerror = 1;
-						}
-						$icon = html_image('ic/cfolder15.png', '', '', array("alt"=>_('Directory')));
-						$url = util_make_link('docman/?group_id='.$activity['group_id'].'&view=listfile&dirid='.$activity['subref_id'],_('Directory').' '.$activity['description']);
-						break;
-					}
-					default: {
-						$icon = isset($activity['icon']) ? $activity['icon'] : '';
-						$url = '<a href="'.$activity['link'].'">'.$activity['title'].'</a>';
-					}
-				}
-				if ($docmanerror) {
+				$displayinfo = $ffactivity->getDisplayInfo($arr);
+				if (!$displayinfo) {
 					continue;
 				}
 				if ($last_day != strftime($date_format, $activity['activity_date'])) {
@@ -161,11 +90,11 @@ class Widget_HomeDetailActivityMostActiveProjectWeek extends Widget {
 					$last_day=strftime($date_format, $activity['activity_date']);
 				}
 				$cells = array();
-				$cells[][] = date('H:i:s',$activity['activity_date']);
+				$cells[][] = date('H:i:s', $activity['activity_date']);
 				$group_object = group_get_object($activity['group_id']);
 
 				$cells[][] = util_make_link_g($group_object->getUnixName(), $activity['group_id'], $group_object->getPublicName());
-				$cells[][] = $icon .' '.$url;
+				$cells[][] = $displayinfo;
 				if (isset($activity['user_name']) && $activity['user_name']) {
 					$cells[][] = util_display_user($activity['user_name'], $activity['user_id'],$activity['realname']);
 				} else {
@@ -188,58 +117,5 @@ class Widget_HomeDetailActivityMostActiveProjectWeek extends Widget {
 
 	function isAvailable() {
 		return isset($this->content['title']);
-	}
-
-	function date_compare($a, $b) {
-		if ($a['activity_date'] == $b['activity_date']) {
-			return 0;
-		}
-		return ($a['activity_date'] > $b['activity_date']) ? -1 : 1;
-	}
-
-	function check_perm_for_activity($arr) {
-		$s = $arr['section'];
-		$ref = $arr['ref_id'];
-		$group_id = $arr['group_id'];
-
-		if (!isset($this->cached_perms[$s][$ref])) {
-			switch ($s) {
-				case 'scm': {
-					$this->cached_perms[$s][$ref] = forge_check_perm('scm', $group_id, 'read');
-					break;
-				}
-				case 'trackeropen':
-				case 'trackerclose': {
-					$this->cached_perms[$s][$ref] = forge_check_perm('tracker', $ref, 'read');
-					break;
-				}
-				case 'frsrelease': {
-					$this->cached_perms[$s][$ref] = forge_check_perm('frs', $ref, 'read');
-					break;
-				}
-				case 'forumpost':
-				case 'news': {
-					$this->cached_perms[$s][$ref] = forge_check_perm('forum', $ref, 'read');
-					break;
-				}
-				case 'taskopen':
-				case 'taskclose':
-				case 'taskdelete': {
-					$this->cached_perms[$s][$ref] = forge_check_perm('pm', $ref, 'read');
-					break;
-				}
-				case 'docmannew':
-				case 'docmanupdate':
-				case 'docgroupnew': {
-					$this->cached_perms[$s][$ref] = forge_check_perm('docman', $group_id, 'read');
-					break;
-				}
-				default: {
-					// Must be a bug somewhere, we're supposed to handle all types
-					$this->cached_perms[$s][$ref] = false;
-				}
-			}
-		}
-		return $this->cached_perms[$s][$ref];
 	}
 }
