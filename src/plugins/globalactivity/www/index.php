@@ -29,6 +29,7 @@
 
 require_once '../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
+require_once $gfcommon.'include/Activity.class.php';
 
 global $HTML;
 
@@ -44,8 +45,7 @@ $show = getArrayFromRequest('show', array('forumpost',
 					  'frsrelease',
 					  'docmannew',
 					  'docmanupdate',
-					  'docgroupnew',
-					  'mediawiki'
+					  'docgroupnew'
 ));
 
 $date_format = _('%Y-%m-%d');
@@ -141,7 +141,14 @@ if (count($ids) < 1) {
 	} else {
 		$displayTableTop = 0;
 		$last_day = 0;
+		$ffactivity = new Activity();
 		foreach ($results as $arr) {
+
+			$displayinfo = $ffactivity->getDisplayInfo($arr);
+			if (!$displayinfo) {
+				continue;
+			}
+
 			$group_id = $arr['group_id'];
 			if (!$displayTableTop) {
 				$theader = array();
@@ -157,73 +164,11 @@ if (count($ids) < 1) {
 				echo '<tr class="tableheading"><td colspan="4">'.strftime($date_format, $arr['activity_date']).'</td></tr>';
 				$last_day=strftime($date_format, $arr['activity_date']);
 			}
-			switch (@$arr['section']) {
-				case 'scm': {
-					$icon = html_image('ic/cvs16b.png','','',array('alt'=>_('Source Code')));
-					$url = util_make_link('/scm/'.$arr['ref_id'].$arr['subref_id'],_('scm commit')._(': ').$arr['description']);
-					break;
-				}
-				case 'trackeropen': {
-					$icon = html_image('ic/tracker20g.png','','',array('alt'=>_('Trackers')));
-					$url = util_make_link('/tracker/?func=detail&atid='.$arr['ref_id'].'&aid='.$arr['subref_id'].'&group_id='.$arr['group_id'],_('Tracker Item').' [#'.$arr['subref_id'].'] '.$arr['description'].' '._('Opened'));
-					break;
-				}
-				case 'trackerclose': {
-					$icon = html_image('ic/tracker20g.png','','',array('alt'=>_('Trackers')));
-					$url = util_make_link('/tracker/?func=detail&atid='.$arr['ref_id'].'&aid='.$arr['subref_id'].'&group_id='.$arr['group_id'],_('Tracker Item').' [#'.$arr['subref_id'].'] '.$arr['description'].' '._('Closed'));
-					break;
-				}
-				case 'frsrelease': {
-					$icon = html_image('ic/cvs16b.png','','',array('alt'=>_('Files')));
-					$url = util_make_link('/frs/?release_id='.$arr['subref_id'].'&group_id='.$arr['group_id'],_('FRS Release').' '.$arr['description']);
-					break;
-				}
-				case 'forumpost': {
-					$icon = html_image('ic/forum20g.png','','',array('alt'=>_('Forum')));
-					$url = util_make_link('/forum/message.php?msg_id='.$arr['subref_id'].'&group_id='.$arr['group_id'],_('Forum Post').' '.$arr['description']);
-					break;
-				}
-				case 'news': {
-					$icon = html_image('ic/write16w.png','','',array('alt'=>_('News')));
-					$url = util_make_link('/forum/forum.php?forum_id='.$arr['subref_id'],_('News').' '.$arr['description']);
-					break;
-				}
-				case 'taskopen': {
-					$icon = html_image('ic/taskman20w.png','','',array('alt'=>_('Tasks')));
-					$url = util_make_link('/pm/task.php?func=detailtask&project_task_id='.$arr['subref_id'].'&group_id='.$arr['group_id'].'&group_project_id='.$arr['ref_id'],_('Tasks').' '.$arr['description']);
-					break;
-				}
-				case 'taskclose': {
-					$icon = html_image('ic/taskman20w.png','','',array('alt'=>_('Tasks')));
-					$url = util_make_link('/pm/task.php?func=detailtask&project_task_id='.$arr['subref_id'].'&group_id='.$arr['group_id'].'&group_project_id='.$arr['ref_id'],_('Tasks').' '.$arr['description']);
-					break;
-				}
 
-				case 'taskdelete': {
-					$icon = html_image('ic/taskman20w.png','','',array('alt'=>_('Tasks')));
-					$url = util_make_link('/pm/task.php?func=detailtask&project_task_id='.$arr['subref_id'].'&group_id='.$arr['group_id'].'&group_project_id='.$arr['ref_id'],_('Tasks').' '.$arr['description']);
-					break;
-				}
-				case 'docmannew':
-				case 'docmanupdate': {
-					$icon = html_image('ic/docman16b.png', '', '', array('alt'=>_('Documents')));
-					$url = util_make_link('docman/?group_id='.$arr['group_id'].'&view=listfile&dirid='.$arr['ref_id'],_('Document').' '.$arr['description']);
-					break;
-				}
-				case 'docgroupnew': {
-					$icon = $HTML->getFolderPic(_('Directory'), 'directory');
-					$url = util_make_link('docman/?group_id='.$arr['group_id'].'&view=listfile&dirid='.$arr['subref_id'],_('Directory').' '.$arr['description']);
-					break;
-				}
-				default: {
-					$icon = isset($arr['icon']) ? $arr['icon'] : '';
-					$url = '<a href="'.$arr['link'].'">'.$arr['title'].'</a>';
-				}
-			}
 			$cells = array();
 			$cells[][] = util_make_link_g(group_get_object($group_id)->getUnixName(),$group_id,group_get_object($group_id)->getPublicName());
 			$cells[][] = date('H:i:s',$arr['activity_date']);
-			$cells[][] = $icon .' '.$url;
+			$cells[][] = $displayinfo;
 			if (isset($arr['user_name']) && $arr['user_name']) {
 				$cells[][] = util_display_user($arr['user_name'], $arr['user_id'],$arr['realname']);
 			} else {
