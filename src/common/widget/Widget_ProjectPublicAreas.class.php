@@ -129,7 +129,7 @@ class Widget_ProjectPublicAreas extends Widget {
 
 		if ($project->usesFRS()) {
 			$result .= '<div class="public-area-box">';
-			$link_content = $HTML->getDownloadPic('') . ' ' . _('Files');
+			$link_content = $HTML->getPackagePic('') . ' ' . _('Files');
 			//	<a rel="sioc:container_of" xmlns:sioc="http://rdfs.org/sioc/ns#" href="'.util_make_url ('/frs/?group_id='.$group_id).'">';
 			$result .= util_make_link('/frs/?group_id='.$group_id, $link_content);
 			$result .= '</div>';
