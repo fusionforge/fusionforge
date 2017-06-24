@@ -81,6 +81,7 @@ class Activity extends FFError {
 	}
 
 	function getDisplayInfo($arr) {
+		global $HTML;
 		$docmanerror = 0;
 		switch (@$arr['section']) {
 			case 'scm': {
