@@ -227,10 +227,15 @@ echo $HTML->closeForm();
 		$j = 0;
 		$last_day = 0;
 		foreach ($results as $arr) {
-			$docmanerror = 0;
 			if (!$ffactivity->check_perm_for_activity($arr, $cached_perms)) {
 				continue;
 			}
+
+			$displayinfo = $ffactivity->getDisplayInfo($arr);
+			if (!$displayinfo) {
+				continue;
+			}
+
 			if (!$displayTableTop) {
 				$theader = array();
 				$theader[] = _('Time');
@@ -239,11 +244,6 @@ echo $HTML->closeForm();
 
 				echo $HTML->listTableTop($theader);
 				$displayTableTop = 1;
-			}
-
-			$displayinfo = $ffactivity->getDisplayInfo($arr);
-			if (!$displayinfo) {
-				continue;
 			}
 
 			if ($last_day != strftime($date_format, $arr['activity_date'])) {
