@@ -134,11 +134,7 @@ function html_blankimage($height, $width) {
  * @return	string
  */
 function html_abs_image($url, $width, $height, $args) {
-	global $use_tooltips;
 	$args['src'] = $url;
-	if (!$use_tooltips && isset($args['title'])) {
-		$args['title'] = '';
-	}
 	if (!isset($args['alt'])) {
 		$args['alt'] = '';
 	}
