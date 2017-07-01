@@ -64,7 +64,7 @@ if ($mode == 'date_range') {
 	if (!ctype_digit($end_time))
 		die('Invalid end time');
 	$options = "--since=@$start_time --until=@$end_time";
-} else if ($mode == 'latest' or $mode == 'latest_user') {
+} elseif ($mode == 'latest' or $mode == 'latest_user') {
 	$limit = $_GET['limit'];
 	if (!ctype_digit($limit))
 		die('Invalid limit');

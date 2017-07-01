@@ -67,7 +67,7 @@ if ($mode == 'date_range') {
 	$d1 = date('Y-m-d', $start_time - 80000);
 	$d2 = date('Y-m-d', $end_time + 80000);
 	$options = "-r '{".$d2."}:{".$d1."}'";
-} else if ($mode == 'latest' or $mode == 'latest_user') {
+} elseif ($mode == 'latest' or $mode == 'latest_user') {
 	$limit = $_GET['limit'];
 	if (!ctype_digit($limit))
 		die('Invalid limit');

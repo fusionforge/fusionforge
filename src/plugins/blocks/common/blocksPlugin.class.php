@@ -168,7 +168,7 @@ control over it to the project's administrator.");
 			require_once 'common/widget/WidgetLayoutManager.class.php';
 			$params['fusionforge_widgets'][] = 'plugin_blocks_project_summary';
 			return true;
-		} else if ($params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_HOME) {
+		} elseif ($params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_HOME) {
 			$params['fusionforge_widgets'][] = 'plugin_blocks_home_summary';
 			return true;
 		}

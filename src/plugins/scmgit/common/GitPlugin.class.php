@@ -300,7 +300,7 @@ control over it to the project's administrator.");
 			if ($params['user_id']) {
 				$repo_user = user_get_object($params['user_id']);
 				$repo = $project->getUnixName().'/users/'.$repo_user->getUnixName().'.git';
-			} else if ($params['extra']) {
+			} elseif ($params['extra']) {
 				$repo = $project->getUnixName().'/'.$params['extra'].'.git';
 			} else {
 				$repo = $project->getUnixName().'/'.$project->getUnixName().'.git';

@@ -410,9 +410,9 @@ _('This plugin allows each project to embed Mediawiki under a tab.');
                                                 $title = 'Mediawiki ';
                                                 if ($recentchanges['type'] == 'new') {
                                                         $title .= _('new element created')._(': ');
-                                                } else if ($recentchanges['type'] == 'edit') {
+                                                } elseif ($recentchanges['type'] == 'edit') {
                                                         $title .= _('modified element')._(': ');
-                                                } else if ($recentchanges['type'] == 'log') {
+                                                } elseif ($recentchanges['type'] == 'log') {
                                                         $title .= _('stored element')._(': ');
                                                 }
                                                 $title .= $recentchanges['title'];

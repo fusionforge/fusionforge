@@ -131,7 +131,7 @@ projects on /projects URLs with content-negotiation
 			$params['return'][] = '<link rel="alternate" type="application/rdf+xml" title="ADMS.SW RDF Data" href="'. util_make_url ("/projects") .'"/>';
 			$params['return'][] = '<link rel="alternate" type="text/turtle" title="ADMS.SW RDF Data" href="'. util_make_url ("/projects") .'"/>';
 		}
-		else if($script_name == '/projects') {
+		elseif($script_name == '/projects') {
 			$params['return'][] = '<link rel="alternate" type="application/rdf+xml" title="ADMS.SW RDF Data" href="'. util_make_url ($php_self) .'"/>';
 			$params['return'][] = '<link rel="alternate" type="text/turtle" title="ADMS.SW RDF Data" href="'. util_make_url ($php_self) .'"/>';
 		}
