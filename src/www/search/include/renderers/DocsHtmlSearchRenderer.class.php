@@ -96,7 +96,6 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			<?php
 			echo html_ac(html_ap() - 1);
 		}
-		$i = 0;
 		foreach ($result as $row) {
 			$document = document_get_object($row['docid'], $row['group_id']);
 			$currentDocGroup = documentgroup_get_object($document->getDocGroupID(), $document->Group->getID());
@@ -108,10 +107,9 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 					$content = _('Project')._(': ').util_make_link('/docman/?group_id='.$currentDocGroup->Group->getID(),$currentDocGroup->Group->getPublicName()).' ';
 				}
 				$cells = array();
-				$cells[] = array($content.html_image('ic/folder.png', 22, 22, array('border' => '0')).$currentDocGroup->getPath(true), 'colspan' => 4);
+				$cells[] = array($content.$HTML->getFolderPic().$currentDocGroup->getPath(true), 'colspan' => 7);
 				$lastDocGroupID = $currentDocGroup->getID();
 				$return .= $HTML->multiTableRow(array(), $cells);
-				$rowColor = 0;
 			}
 			$cells = array();
 			if (!$document->getLocked() && !$document->getReserved()) {
@@ -143,14 +141,13 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 				$cells[][] = '&nbsp;';
 			}
 			$return .= $HTML->multiTableRow(array(), $cells);
-			$rowColor++;
 		}
 		$content = html_ao('span', array('id' => 'massactionactive', 'class' => 'hide'));
 		$content .=  html_e('span', array('id' => 'docman-massactionmessage', 'title' => _('Actions availables for selected documents, you need to check at least one document to get actions')), _('Mass actions for selected documents')._(':'), false);
 		$content .= util_make_link('#', html_image('docman/download-directory-zip.png', 22, 22, array('alt' => _('Download as a ZIP'))) , array('onclick' => 'window.location.href=\''.util_make_uri('/docman/view.php/'.$this->groupId.'/zip/selected/files/\'+controllerListFile.buildUrlByCheckbox("active")'), 'title' => _('Download as a ZIP')), true);
 		$content .= html_ac(html_ap() - 1);
 		$cells = array();
-		$cells[] = array($content, 'colspan' => 4);
+		$cells[] = array($content, 'colspan' => 7);
 		$return .= $HTML->multiTableRow(array(), $cells);
 		return $return;
 	}
