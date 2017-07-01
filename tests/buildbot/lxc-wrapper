@@ -15,7 +15,7 @@ esac
 
 host=$2
 case "$host" in
-    centos5|centos6|centos7|debian7|debian8)
+    centos7|debian8|debian9)
 	echo "Handling host $host"
 	;;
     *)
@@ -36,7 +36,7 @@ sed -i -e 's/^ *chroot $rootfs_path passwd -e root/# DISABLED # &/' /usr/share/l
 
 # Get variables
 case $host in
-    centos*)
+    centos7)
 	template=centos
 	release=${host#centos}
 	cachedir=/var/cache/lxc/centos/x86_64/$release/rootfs
@@ -44,11 +44,11 @@ case $host in
     debian*)
 	template=debian
 	case $host in
-	    debian7)
-		release=wheezy
-		;;
 	    debian8)
 		release=jessie
+		;;
+	    debian9)
+		release=stretch
 		;;
 	esac
 	cachedir=/var/cache/lxc/debian/rootfs-$release-amd64
@@ -76,12 +76,6 @@ case $cmd in
 		    rm -rf $cachedir/var/run/
 		    ln -s ../run $cachedir/var/
 		    ;;
-		centos6)
-		    chroot $cachedir yum install -y avahi-autoipd avahi
-		    ;;
-		centos5)
-		    chroot $cachedir yum install -y avahi
-		    ;;
 		debian*)
 		    chroot $cachedir apt-get install --yes \
 			   avahi-autoipd avahi-daemon unattended-upgrades bash-completion
@@ -108,7 +102,7 @@ case $cmd in
 		LANG=C chroot $cachedir sh -c "unattended-upgrades -d"
 		chroot $cachedir sh -c "apt-get clean"
 		umount $cachedir/proc
-		
+
 		find $cachedir/var/log/unattended-upgrades -type f -mtime +30 | xargs -r rm
 		;;
 	esac
