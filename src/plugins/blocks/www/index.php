@@ -309,9 +309,15 @@ if ($type == 'admin') {
 	print "</div>";
 
 	print "<fieldset><legend>".
-			_("Tips").
-			"</legend>" .
-			"<p>" .
+		_("Tips").
+		"</legend>";
+	$parsertype = forge_get_config('parser_type', 'blocks');
+	switch ($parsertype) {
+		case 'markdown':
+			echo html_e('p', array(), _('You can use markdown format.'));
+			break;
+		default:
+			echo "<p>" .
 			_("You can create boxes like the ones on the right site of summary page, by inserting the following sentences in the content:").
 			"</p><ul><li>".
 			"{boxTop Hello}".
@@ -329,8 +335,9 @@ if ($type == 'admin') {
 			_(": will create a footer after a text.").
 			"</li></ul><p>".
 			_("You can create as many boxes as you want, but a boxTop has to be closed by a boxBottom and a boxHeader has to be closed by a boxFooter.").
-			"</p>".
-			"</fieldset>";
+			"</p>";
+	}
+	echo '</fieldset>';
 } elseif ($type == 'configure_post') {
 	$res = db_query_params('SELECT id FROM plugin_blocks WHERE group_id=$1 AND name=$2',
 			array($id, htmlspecialchars($name)));
