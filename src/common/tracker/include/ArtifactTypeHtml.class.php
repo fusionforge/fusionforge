@@ -114,9 +114,9 @@ class ArtifactTypeHtml extends ArtifactType {
 		$params['submenu'] = $HTML->subMenu($labels, $links, $attr);
 		site_project_header($params);
 
-		if ($this)
-			plugin_hook("blocks", "tracker_".$this->getName());
-
+		if ($this) {
+			plugin_hook('blocks', 'tracker_'.$this->getName());
+		}
 	}
 
 	function footer($params = array()) {
