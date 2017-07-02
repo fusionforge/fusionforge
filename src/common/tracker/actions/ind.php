@@ -67,7 +67,7 @@ if ($group->usesPlugin('projects-hierarchy')) {
 if (count($at_arr) < 1) {
 	echo $localInformation;
 } else {
-	plugin_hook ("blocks", "tracker index");
+	plugin_hook('blocks', 'tracker index');
 	echo html_e('p', array(), _('Choose a tracker and you can browse/edit/add items to it.'));
 	/*
 		Put the result set (list of trackers for this group) into a column with folders
