@@ -70,7 +70,7 @@ class blocks_Widget_ProjectSummary extends Widget {
 	}
 
 	function getPreferences() {
-		return $this->getPartialPreferencesForm($this->getTitle(), $this->getContent());
+		return $this->getPartialPreferencesForm($this->getTitle(), $this->content);
 	}
 
 	function getInstallPreferences() {
