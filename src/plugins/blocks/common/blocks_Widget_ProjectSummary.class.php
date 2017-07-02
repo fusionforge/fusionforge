@@ -50,6 +50,7 @@ class blocks_Widget_ProjectSummary extends Widget {
 	function hasPreferences() {
 		return true;
 	}
+
 	private function getPartialPreferencesForm($title, $content) {
 		$prefs  = '<table>';
 		$prefs .= '<tr><td>'._('Title')._(':').'</td>';
@@ -67,12 +68,15 @@ class blocks_Widget_ProjectSummary extends Widget {
 		$prefs .= '</table>';
 		return $prefs;
 	}
+
 	function getPreferences() {
 		return $this->getPartialPreferencesForm($this->getTitle(), $this->getContent());
 	}
+
 	function getInstallPreferences() {
 		return $this->getPartialPreferencesForm(_("Enter title of block"), '');
 	}
+
 	function updatePreferences(&$request) {
 		$done = false;
 		$vContentId = new Valid_UInt('content_id');
@@ -106,6 +110,7 @@ class blocks_Widget_ProjectSummary extends Widget {
 		}
 		return $done;
 	}
+
 	function loadContent($id) {
 		$group = group_get_object($this->group_id);
 		if ( $group && $group->usesPlugin ('blocks') ) {
@@ -114,6 +119,7 @@ class blocks_Widget_ProjectSummary extends Widget {
 			$this->content_id = $id;
 		}
 	}
+
 	function create(&$request) {
 		$title = getStringFromRequest('title');
 		$content = getStringFromRequest('body');
@@ -125,13 +131,16 @@ class blocks_Widget_ProjectSummary extends Widget {
 			array('summary_block'.$content_id, $content_id));
 		return $content_id;
 	}
+
 	function getContent() {
-		return $this->content;
+		return plugin_get_object('blocks')->parseContent($this->content);
 	}
+
 	function destroy($id) {
 		$sql = 'DELETE FROM plugin_blocks WHERE id = $1 AND group_id = $2';
 		db_query_params($sql,array($id,$this->group_id));
 	}
+
 	function isUnique() {
 		return false;
 	}

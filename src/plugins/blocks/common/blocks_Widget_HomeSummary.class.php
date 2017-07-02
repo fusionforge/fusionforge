@@ -41,7 +41,7 @@ class blocks_Widget_HomeSummary extends Widget {
 	}
 
 	function getDescription() {
-		return _("Add a free block on the forge homepage to allow giving information.");
+		return _('Add a free block on the forge homepage to allow giving information.');
 	}
 
 	function isUnique() {
@@ -73,7 +73,7 @@ class blocks_Widget_HomeSummary extends Widget {
 	}
 
 	function getInstallPreferences() {
-		return $this->getPartialPreferencesForm(_("Enter title of block"), '');
+		return $this->getPartialPreferencesForm(_('Enter title of block'), '');
 	}
 	function updatePreferences(&$request) {
 		$done = false;
@@ -128,7 +128,7 @@ class blocks_Widget_HomeSummary extends Widget {
 	}
 
 	function getContent() {
-		return $this->content;
+		return plugin_get_object('blocks')->parseContent($this->content);
 	}
 
 	function destroy($id) {

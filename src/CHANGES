@@ -19,6 +19,7 @@ FusionForge 6.X:
 * Layout: new dynamic quickNav menu: based on user activity to select 5 more visited projects (TrivialDev)
 * Plugin AuthBuiltin: add captcha after 3 attempts with the same login [#795] (TrivialDev)
 * Plugin AuthLDAP: support X_FORWARD_USER to delegate authentication and then retrieve user from LDAP (TrivialDev)
+* Plugin Blocks: support Markdown syntax. (TrivialDev)
 * Plugin GlobalActivity: forge-wide aggregation for project activities (Roland Mas)
 * Plugin Mediawiki: support activity for public project (TrivialDev)
 * Projects Page: add paging system in full_list and tag_cloud subpages (TrivialDev)

@@ -172,14 +172,14 @@ $group = group_get_object($id);
 if ( !$group) {
 	exit_no_group();
 }
-if ( ! ($group->usesPlugin ( $pluginname )) ) {//check if the group has the blocks plugin active
-	exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'),$pluginname),'home');
+if (!$group->usesPlugin($pluginname)) {//check if the group has the blocks plugin active
+	exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'), $pluginname), 'home');
 }
 
 session_require_perm ('project_admin', $id) ;
 
 if ($type == 'admin') {
-	blocks_Project_Header(array('title' => _('Blocks Administration'), 'pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));
+	blocks_Project_Header(array('title' => _('Blocks Administration'), 'pagename' => $pluginname, 'sectionvals' => array(group_getname($id))));
 
 	$res = db_query_params('SELECT name, status FROM plugin_blocks WHERE group_id=$1',
 			array($id));
@@ -189,9 +189,9 @@ if ($type == 'admin') {
 
 	print _("Blocks are customizable HTML boxes in the left or right side of the pages the web site. They are created manually.");
 	echo $HTML->openForm(array('action' => '/plugins/blocks/', 'method' => 'post'));
-	print "<input type=\"hidden\" name=\"id\" value=\"$id\" />\n";
-	print "<input type=\"hidden\" name=\"pluginname\" value=\"$pluginname\" />\n";
-	print "<input type=\"hidden\" name=\"type\" value=\"admin_post\" />\n";
+	echo html_e('input', array('type' => 'hidden', 'name' => 'id', 'value' => $id));
+	echo html_e('input', array('type' => 'hidden', 'name' => 'pluginname', 'value' => $pluginname));
+	echo html_e('input', array('type' => 'hidden', 'name' => 'type', 'value' => 'admin_post'));
 
 	$thArray = array(_('Name'), _('Active'), _('Description'), _('Operation'));
 	echo $HTML->listTableTop($thArray, array(), 'centered listing');
@@ -259,7 +259,7 @@ if ($type == 'admin') {
 	$feedback = _('Block Saved');
 	session_redirect('/plugins/blocks/?id='.$id.'&type=admin&pluginname=blocks');
 } elseif ($type == 'configure') {
-	blocks_Project_Header(array('title'=>_('Edit Block'), 'pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));
+	blocks_Project_Header(array('title'=>_('Edit Block'), 'pagename' => $pluginname, 'sectionvals' => array(group_getname($id))));
 	// DO THE STUFF FOR THE PROJECT ADMINISTRATION PART HERE
 
 	$blocks = getAvailableBlocks($group);
