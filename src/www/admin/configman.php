@@ -68,57 +68,57 @@ class configCheck {
 
 site_admin_header(array('title'=>_('Configuration Manager')));
 
-echo "<h2>".sprintf (_('Configuration from the config API (*.ini files)'))."</h2>" ;
+echo "<h2>".sprintf(_('Configuration from the config API (*.ini files)'))."</h2>";
 
 $title_arr = array(_('Variable'),_('Configured value'),_('Result (possibly after interpolation)'));
 echo $HTML->listTableTop($title_arr);
 
-$c = FusionForgeConfig::get_instance () ;
-$counter = 0 ;
-$sections = $c->get_sections () ;
-natsort($sections) ;
-array_unshift ($sections, 'core') ;
-$seen_core = false ;
+$c = FusionForgeConfig::get_instance();
+$counter = 0;
+$sections = $c->get_sections();
+natsort($sections);
+array_unshift($sections, 'core');
+$seen_core = false;
 foreach ($sections as $section) {
 	if ($section == 'core') {
 		if ($seen_core) {
-			continue ;
+			continue;
 		}
-		$seen_core = true ;
+		$seen_core = true;
 	}
-	echo '<tr><th colspan="3"><strong>'.sprintf (_('Section %s'), $section)."</strong></th></tr>\n" ;
+	echo '<tr><th colspan="3"><strong>'.sprintf(_('Section %s'), $section)."</strong></th></tr>\n";
 
-	$variables = $c->get_variables ($section) ;
-	natsort($variables) ;
+	$variables = $c->get_variables($section);
+	natsort($variables);
 	foreach ($variables as $var) {
 		if (isset($config_depends_on[$var]) &&
 			(!$c->get_value($section, $config_depends_on[$var]))) {
 			continue;
 		}
-		$v = $c->get_value ($section, $var) ;
+		$v = $c->get_value($section, $var);
 
 		if (method_exists('configCheck', $var)) {
 			$class = configCheck::$var($v)? 'class="good_value"': 'class="wrong_value"';
 		} else {
 			$class = '';
 		}
-		echo '<tr><td>'.$var ;
-		if ($c->is_bool ($section, $var)) {
-			print " (boolean)" ;
+		echo '<tr><td>'.$var;
+		if ($c->is_bool($section, $var)) {
+			print " (boolean)";
 		}
-		print "</td><td>" ;
-		print htmlspecialchars($c->get_raw_value ($section, $var)) ;
-		print "</td><td $class>" ;
-		if ($c->is_bool ($section, $var)) {
+		print "</td><td>";
+		print htmlspecialchars($c->get_raw_value($section, $var));
+		print "</td><td $class>";
+		if ($c->is_bool($section, $var)) {
 			if ($v) {
-				print "true" ;
+				print "true";
 			} else {
-				print "false" ;
+				print "false";
 			}
 		} else {
 			print htmlspecialchars($v);
 		}
-		print "</td></tr>\n" ;
+		print "</td></tr>\n";
 	}
 }
 
