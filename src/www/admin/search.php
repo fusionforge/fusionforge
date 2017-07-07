@@ -79,7 +79,6 @@ if ($usersearch) {
 		$title[]=_('Status');
 
 		echo $HTML->listTableTop($title);
-		$i = 0 ;
 		while ($row = db_fetch_array($result)) {
 			print '
 				<tr>
@@ -154,7 +153,6 @@ if (getStringFromRequest('groupsearch')) {
 
 		echo $HTML->listTableTop($title);
 
-		$i = 0;
 		foreach ($rows as $row) {
 			$extra_status = "";
 			if (!$ra->hasPermission('project_read', $row['group_id'])) {
@@ -172,7 +170,6 @@ if (getStringFromRequest('groupsearch')) {
 			';
 
 		}
-
 		echo $HTML->listTableBottom();
 	} else {
 		echo $HTML->information(_('No project found.'));
