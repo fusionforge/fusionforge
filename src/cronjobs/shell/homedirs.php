@@ -91,7 +91,7 @@ if (!is_dir($hpfx)) {
 	@mkdir($hpfx, 0755, true);
 }
 
-if (forge_get_config('use_ftp_uploads')) {
+if (forge_get_config('use_ftp')) {
 	if (!($ftp_pfx = forge_get_config('ftp_upload_dir'))) {
 		// this should be set in the configuration
 		exit();
@@ -131,7 +131,7 @@ foreach(util_result_column_to_array($res,0) as $uname) {
 
 /* create project/group homes */
 $res = db_query_params('SELECT unix_group_name, group_name FROM groups WHERE status=$1', array('A'));
-while ($row = pg_fetch_array($res)) {
+while ($row = db_fetch_array($res)) {
 	$groupname = $row['unix_group_name'] ;
 
 	if ($ftp_pfx && !is_dir($ftp_pfx . '/' . $groupname)) {
