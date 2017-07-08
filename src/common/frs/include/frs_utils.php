@@ -134,6 +134,7 @@ function frs_add_file_from_form($release, $type_id, $processor_id, $release_date
 
 	$group_unix_name = $release->getFRSPackage()->getGroup()->getUnixName();
 	$incoming = forge_get_config('groupdir_prefix').'/'.$group_unix_name.'/incoming';
+	$upload_dir = forge_get_config('ftp_upload_dir').'/'.$group_unix_name;
 
 	$filechecks = false;
 
@@ -157,7 +158,7 @@ function frs_add_file_from_form($release, $type_id, $processor_id, $release_date
 				return _('Unknown file upload error.').' => ';
 			break;
 		}
-	} elseif (forge_get_config('use_ftp_uploads') && $ftp_filename && util_is_valid_filename($ftp_filename) && is_file($upload_dir.'/'.$ftp_filename)) {
+	} elseif ($release->getFRSPackage()->getGroup()->usesFTP() && $ftp_filename && util_is_valid_filename($ftp_filename) && is_file($upload_dir.'/'.$ftp_filename)) {
 		$infile = $upload_dir.'/'.$ftp_filename;
 		$fname = $ftp_filename;
 		$move = false;
