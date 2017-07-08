@@ -35,7 +35,8 @@ if [ -e /etc/debian_version ]; then
 	apache2 postgresql postgresql-contrib libnss-pgsql2 unscd \
 	cvs subversion viewvc python-pycurl git xinetd \
 	python-moinmoin libapache2-mod-wsgi python-psycopg2 \
-	unoconv poppler-utils dpkg-dev
+	unoconv poppler-utils dpkg-dev \
+	vsftpd
     if ! dpkg-vendor --is Ubuntu; then
 	apt-get install locales-all  # https://bugs.launchpad.net/ubuntu/+source/glibc/+bug/1394929
     fi
@@ -52,7 +53,8 @@ elif [ -e /etc/SuSE-release ]; then
 		subversion-server  \
 		git git-web \
 		python-psycopg2 \
-		mediawiki moinmoin-wiki
+		mediawiki moinmoin-wiki \
+		vsftpd
 else
     yum install -y make tar
     backports_rpm
@@ -62,7 +64,8 @@ else
 	cvs subversion viewvc python-pycurl git gitweb xinetd \
 	moin mod_wsgi python-psycopg2 \
 	unoconv poppler-utils libreoffice-headless \
-        mediawiki php-markdown
+        mediawiki php-markdown \
+	vsftpd
 fi
 
 (
