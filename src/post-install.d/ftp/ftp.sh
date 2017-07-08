@@ -24,13 +24,15 @@ set -e
 . $(forge_get_config source_path)/post-install.d/common/service.inc
 
 configure_ftpd() {
-    sed -i -e 's/^anonymous_enable=YES.*$/anonymous_enable=NO/' /etc/vsftpd/vsftpd.conf
+    sed -i -e 's/^anonymous_enable=.*$/anonymous_enable=NO/' /etc/vsftpd/vsftpd.conf
     sed -i -e 's/^#ftpd_banner=.*$/ftpd_banner=Welcome to FusionForge FTP server/' /etc/vsftpd/vsftpd.conf
+    sed -i -e 's/^chroot_local_user=.*$/chroot_local_user=YES/' /etc/vsftpd/vsftpd.conf
 }
 
 remove_ftpd() {
     sed -i -e 's/^anonymous_enable=NO.*$/anonymous_enable=YES/' /etc/vsftpd/vsftpd.conf
     sed -i -e 's/^ftpd_banner=Welcome.*$/#ftpd_banner=Welcome to blah FTP service./' /etc/vsftpd/vsftpd.conf
+    sed -i -e 's/^chroot_local_user=YES.*$/chroot_local_user=NO/' /etc/vsftpd/vsftpd.conf
 }
 
 restart_ftp_service()
