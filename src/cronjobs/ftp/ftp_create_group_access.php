@@ -24,12 +24,10 @@
 require_once $gfcommon.'include/pre.php';
 require $gfcommon.'include/cron_utils.php';
 
-
 $users = array();
 
-$chroot_dir = forge_get_config('chroot');
-$ftp_dir = forge_get_config('ftp_upload_dir')."/pub/";
-$home_dir = $chroot_dir.forge_get_config('homedir_prefix')."/";
+$ftp_dir = forge_get_config('ftp_upload_dir');
+$home_dir = forge_get_config('homedir_prefix');
 
 $res_db = db_query_params ('SELECT user_id FROM users WHERE unix_status=$1',
 			   array ('A'));
@@ -40,26 +38,26 @@ if ($res_db) {
 }
 
 foreach ($users as $u) {
-        $dir = "$home_dir".$u->getUnixName()."/pub";
+        $dir = $home_dir.'/'.$u->getUnixName().'/pub';
         if (is_dir("$home_dir".$u->getUnixName())) {
                 foreach ($u->getGroups() as $project) {
-			$g = $project->getUnixName() ;
-                        if (is_dir("$ftp_dir"."$g")) {
-                                if (is_dir("$dir/$g")) {
-                                        $cmd = "/bin/umount $dir/$g";
+			$g = $project->getUnixName();
+                        if (is_dir($ftp_dir.'/'.$g)) {
+                                if (is_dir($dir.'/'.$g)) {
+                                        $cmd = '/bin/umount '.$dir.'/'.$g;
                                         $res = execute($cmd);
-                                        $cmd = "/bin/rmdir $dir/$g";
+                                        $cmd = '/bin/rmdir '.$dir.'/'.$g;
                                         $res = execute($cmd);
                                 }
                                 if (!is_dir($dir)) {
-                                        $cmd = "/bin/mkdir $dir";
+                                        $cmd = '/bin/mkdir '.$dir;
                                         $res = execute($cmd);
                                 }
-                                $cmd = "/bin/mkdir $dir/$g";
+                                $cmd = '/bin/mkdir '.$dir.'/'.$g;
                                 $res = execute($cmd);
-                                $cmd = "/bin/mount --bind $ftp_dir"."$g $dir/$g";
+                                $cmd = '/bin/mount --bind '.$ftp_dir.'/'.$g $dir.'/'.$g;
                                 $res = execute($cmd);
-                                echo "allow ".$u->getUnixName()." to access at $dir/$g\n";
+                                echo 'allow '.$u->getUnixName().' to access at '.$dir.'/'.$g."\n";
                         }
                 }
         }
