@@ -54,7 +54,7 @@ foreach ($users as $u) {
 				}
 				$cmd = '/bin/mkdir '.$dir.'/'.$g;
 				$res = execute($cmd);
-				$cmd = '/bin/mount --bind '.$ftp_dir.'/'.$g $dir.'/'.$g;
+				$cmd = '/bin/mount --bind '.$ftp_dir.'/'.$g.' '.$dir.'/'.$g;
 				$res = execute($cmd);
 				echo 'allow '.$u->getUnixName().' to access at '.$dir.'/'.$g."\n";
 			}
