@@ -143,6 +143,8 @@ install-lists: install-base-dirs
 	$(CP_R) cronjobs/lists $(DESTDIR)$(pkgdatadir)/cronjobs/
 	$(CP_R) post-install.d/lists $(DESTDIR)$(pkgdatadir)/post-install.d/
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(pkgdatadir)/lists/
+install-ftp: install-base-dirs
+	$(CP_R) post-install.d/ftp $(DESTDIR)$(pkgdatadir)/post-install.d/
 
 install-base: install-base-dirs install-common install-web install-db install-scm
 
@@ -204,6 +206,8 @@ post-install-mta-exim4:
 	$(post_source_path)/post-install.d/mta-exim4/mta-exim4.sh configure
 post-install-lists:
 	$(post_source_path)/post-install.d/lists/lists.sh configure
+post-install-ftp:
+	$(post_source_path)/post-install.d/ftp/ftp.sh configure
 
 PLUGINS_INSTALLED:=$(shell [ -d "$(post_plugins_path)" ] && cd $(post_plugins_path) && find * -maxdepth 0 -type d)
 PLUGINS_POST_INSTALL_TARGETS=$(addprefix post-install-plugin-,$(PLUGINS_INSTALLED))
