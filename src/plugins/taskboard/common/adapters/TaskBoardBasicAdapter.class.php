@@ -84,7 +84,7 @@ class TaskBoardBasicAdapter extends FFError {
 	/**
 	 * Get list of instances of user stories artifacts
 	 *
-	 * @return	array
+	 * @return	array|bool
 	 */
 	function getUserStories($release_value = NULL) {
 		$at = $this->getUserStoriesTracker();
@@ -197,7 +197,7 @@ class TaskBoardBasicAdapter extends FFError {
 	 * @param	integer	optional identifier of assigned person
 	 * @param	string	optional value (name) of sprint/release
 	 *
-	 * @return	array
+	 * @return	array|bool
 	 */
 	function getTasks($tracker_id, $assigned_to = NULL, $release_value = NULL, $user_story_value = NULL) {
 		$tasks = array();
@@ -398,7 +398,7 @@ class TaskBoardBasicAdapter extends FFError {
 	/**
 	 * Returns true if current user can manage trackers
 	 *
-	 * @return	boolean
+	 * @return	bool
 	 */
 	function isManager() {
 		$ret = true;
@@ -414,7 +414,7 @@ class TaskBoardBasicAdapter extends FFError {
 	/**
 	 * Returns true if current user can modify artifacts
 	 *
-	 * @return	boolean
+	 * @return	bool
 	 */
 	function isTechnician() {
 		$ret = true;
