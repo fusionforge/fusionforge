@@ -2797,41 +2797,37 @@ class Group extends FFError {
 		foreach ($admins as $admin) {
 			setup_gettext_for_user ($admin);
 
-			$message = sprintf(_('Your project registration for %4$s has been approved.
+			$message = sprintf(_('Your project registration for %s has been approved.'), forge_get_config ('forge_name')) . "\n\n"
 
-Project Full Name:  %1$s
-Project Unix Name:  %2$s
+					. _('Project Full Name')._(': '). htmlspecialchars_decode($this->getPublicName()) . "\n"
+					. _('Project Unix Name')._(': '). $this->getUnixName() . "\n\n"
 
-Your DNS will take up to a day to become active on our site.
-Your web site is accessible through your shell account. Please read
-site documentation (see link below) about intended usage, available
-services, and directory layout of the account.
+					. _('Your DNS will take up to a day to become active on our site. '
+						.'Your web site is accessible through your shell account. Please read '
+						.'site documentation (see link below) about intended usage, available '
+						.'services, and directory layout of the account.') . "\n\n"
 
-If you visit your
-own project page in %4$s while logged in, you will find
-additional menu functions to your left labeled \'Project Admin\'.
+					. sprintf(_('If you visit your own project page in %s while logged in, '
+								. 'you will find additional menu functions to your left labeled “Project Admin”.'),
+							  forge_get_config ('forge_name')) . "\n\n"
 
-We highly suggest that you now visit %4$s and create a public
-description for your project. This can be done by visiting your project
-page while logged in, and selecting \'Project Admin\' from the menus
-on the left (or by visiting %3$s
-after login).
+					. sprintf(_('We highly suggest that you now visit %1$s and create a public '
+								. 'description for your project. This can be done by visiting your project '
+								. 'page while logged in, and selecting “Project Admin” from the menus '
+								. 'on the left (or by visiting %2$s after login).'),
+							  forge_get_config ('forge_name'), util_make_url('/project/admin/?group_id='.$this->getID())) . "\n\n"
 
-Your project will also not appear in the Trove Software Map (primary
-list of projects hosted on %4$s which offers great flexibility in
-browsing and search) until you categorize it in the project administration
-screens. So that people can find your project, you should do this now.
-Visit your project while logged in, and select \'Project Admin\' from the
-menus on the left.
+					. sprintf(_('Your project will also not appear in the Trove Software Map (primary '
+								. 'list of projects hosted on %s which offers great flexibility in '
+								. 'browsing and search) until you categorize it in the project administration '
+								. 'screens. So that people can find your project, you should do this now. '
+								. 'Visit your project while logged in, and select “Project Admin” from the '
+								. 'menus on the left.'), forge_get_config ('forge_name')) . "\n\n"
 
-Enjoy the system, and please tell others about %4$s. Let us know
-if there is anything we can do to help you.
+					. sprintf(_('Enjoy the system, and please tell others about %s. Let us know '
+								. 'if there is anything we can do to help you.'), forge_get_config ('forge_name')) . "\n\n"
 
--- the %4$s crew'),
-							htmlspecialchars_decode($this->getPublicName()),
-							$this->getUnixName(),
-							util_make_url ('/project/admin/?group_id='.$this->getID()),
-							forge_get_config ('forge_name'));
+					. sprintf(_('-- the %s staff'), forge_get_config ('forge_name')) . "\n";
 
 			util_send_message($admin->getEmail(), sprintf(_('%s Project Approved'), forge_get_config ('forge_name')), $message);
 
