@@ -446,11 +446,11 @@ switch (getStringFromRequest('func')) {
 			} elseif ($ah->isError()) {
 				exit_error($ah->getErrorMessage(),'tracker');
 			} else {
-				if ($start && $ah->isMonitoring())
+				if ($start && $ah->isMonitoring()) {
 					$feedback = _('Monitoring Started');
-				elseif ($stop && !$ah->isMonitoring())
+				} elseif ($stop && !$ah->isMonitoring()) {
 					$feedback = _('Monitoring Stopped');
-				else {
+				} else {
 					$ah->setMonitor();
 				}
 				include $gfcommon.'tracker/actions/browse.php';
@@ -462,11 +462,11 @@ switch (getStringFromRequest('func')) {
 			} elseif ($at->isError()) {
 				exit_error($at->getErrorMessage(),'tracker');
 			} else {
-				if ($start && $at->isMonitoring())
+				if ($start && $at->isMonitoring()) {
 					$feedback = _('Monitoring Started');
-				elseif ($stop && !$at->isMonitoring())
+				} elseif ($stop && !$at->isMonitoring()) {
 					$feedback = _('Monitoring Deactivated');
-				else {
+				} else {
 					$at->setMonitor();
 					$at->clearError();
 				}

@@ -46,8 +46,7 @@ if (isset($_GET['group_id'])&&!empty($_GET['group_id'])&&is_numeric($_GET['group
 	} elseif ($group->isError()) {
 	        beginFeed();
 		endOnError($group->getErrorMessage());
-	}
-    elseif (!$group->isPublic()){
+	} elseif (!$group->isPublic()){
 		beginFeed();
 		endOnError('No RSS feed available as group status is set to private.');
 	}

@@ -284,8 +284,7 @@ switch (getStringFromRequest('func')) {
 		}
 		if ($count == 0) {
 			$warning_msg = _('No task selected');
-		}
-		elseif (isset($was_error) && !$was_error) {
+		} elseif (isset($was_error) && !$was_error) {
 			$feedback = _('Task Updated Successfully');
 		}
 		include $gfwww.'pm/browse_task.php';

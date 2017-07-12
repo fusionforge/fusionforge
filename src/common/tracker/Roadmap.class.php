@@ -382,8 +382,7 @@ class Roadmap extends FFError {
 				}
 			}
 			$this->data_array = $this->getList();
-		}
-		elseif (isset($this->roadmap_id) && $this->roadmap_id) {
+		} elseif (isset($this->roadmap_id) && $this->roadmap_id) {
 			$result = db_query_params ('SELECT * FROM roadmap WHERE roadmap_id=$1',
 						array ($this->roadmap_id));
 			if (! $result) {
@@ -467,14 +466,11 @@ class Roadmap extends FFError {
 	private function _setList($artifact_type_id, $field_id) {
 		if (! $field_id) {
 			$result = $this->_deleteList($artifact_type_id);
-		}
-		elseif (array_key_exists($artifact_type_id, $this->data_array)) {
+		} elseif (array_key_exists($artifact_type_id, $this->data_array)) {
 			$result = $this->_updateList($artifact_type_id, $field_id);
-		}
-		else {
+		} else {
 			$result = $this->_insertList($artifact_type_id, $field_id);
 		}
-
 		return $result;
 	}
 
