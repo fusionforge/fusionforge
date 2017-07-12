@@ -18,7 +18,6 @@
 # with FusionForge; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-set -x
 set -e
 
 . $(forge_get_config source_path)/post-install.d/common/service.inc
@@ -37,7 +36,11 @@ remove_ftpd() {
 
 restart_ftp_service()
 {
-    service vsftpd restart
+    if [[ $is_docker ]]; then
+        killall vsftpd >/dev/null 2>&1
+    else
+        service vsftpd restart
+    fi
 }
 
 # Main
