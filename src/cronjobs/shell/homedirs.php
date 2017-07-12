@@ -136,7 +136,8 @@ while ($row = db_fetch_array($res)) {
 
 	if ($ftp_pfx && !is_dir($ftp_pfx . '/' . $groupname)) {
 		@mkdir($ftp_pfx . '/' . $groupname);
-		//XXX chown/chgrp/chmod?
+		system("chown -R root:$groupname $ftp_pfx/$groupname");
+		system("chmod -R 0770 $ftp_pfx/$groupname");
 	}
 
 	$ghome = $gpfx . '/' . $groupname;
