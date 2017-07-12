@@ -144,7 +144,7 @@ install-lists: install-base-dirs
 	$(CP_R) post-install.d/lists $(DESTDIR)$(pkgdatadir)/post-install.d/
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(pkgdatadir)/lists/
 install-ftp: install-base-dirs
-    $(CP_R) cronjobs/ftp $(DESTDIR)$(pkgdatadir)/cronjobs/
+	$(CP_R) cronjobs/ftp $(DESTDIR)$(pkgdatadir)/cronjobs/
 	$(CP_R) post-install.d/ftp $(DESTDIR)$(pkgdatadir)/post-install.d/
 
 install-base: install-base-dirs install-common install-web install-db install-scm
