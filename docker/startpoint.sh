@@ -24,6 +24,7 @@ __postinstall() {
 /usr/local/share/fusionforge/post-install.d/common/common.sh configure
 /usr/local/share/fusionforge/post-install.d/web/web.sh rawconfigure
 /usr/local/share/fusionforge/post-install.d/shell/shell.sh rawconfigure
+/usr/local/share/fusionforge/post-install.d/ftp/ftp.sh configure
 }
 
 __zzzzlocalini() {

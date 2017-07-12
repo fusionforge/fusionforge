@@ -82,6 +82,6 @@ COPY ./postinstall.sh /postinstall.sh
 RUN chmod +x /startpoint.sh
 RUN chmod +x /postinstall.sh
 
-EXPOSE 22 80 443
+EXPOSE 21 22 80 443
 ENTRYPOINT ["/startpoint.sh"]
 CMD []
