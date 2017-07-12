@@ -41,13 +41,15 @@ RUN source ./autoinstall/common-backports && \
                    poppler-utils \
                    libreoffice-headless \
                    cronie \
-                   mediawiki && \
+                   mediawiki \
+                   vsftpd && \
     yum -y clean all && \
     cd src/ && \
     make && \
     make install-base \
          install-shell \
          install-scm \
+         install-ftp \
          install-plugin-scmcvs \
          install-plugin-scmsvn \
          install-plugin-scmgit \
