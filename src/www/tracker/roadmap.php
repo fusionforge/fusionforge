@@ -126,8 +126,7 @@ function nrange($col1, $col2, $nb) {
 function color_gradient($colors, $nb_colors) {
 	if (! is_array($colors)) {
 		return array();
-	}
-	elseif (count($colors) < 2 || $nb_colors <= 2) {
+	} elseif (count($colors) < 2 || $nb_colors <= 2) {
 		return $colors;
 	}
 
@@ -368,8 +367,7 @@ if (!$at_arr || count($at_arr) < 1) {
 					// Icon
 					if ($artifact->getStatusID() == 1) {
 						$icon = html_image('ic/ticket-open.png','','',array('alt' => $custom_status_name, 'title' => $custom_status_name));
-					}
-					else {
+					} else {
 						$icon = html_image('ic/ticket-closed.png','','',array('alt' => $custom_status_name, 'title' => $custom_status_name));
 					}
 					$rmap[$release_value_id][$artifact_type_name] .= sprintf($templates[$template]['ticket_icon'], $icon);
@@ -475,7 +473,7 @@ if (!$at_arr || count($at_arr) < 1) {
 				$roadmap_name._(': '),
 				util_make_uri('/tracker/roadmap.php?group_id='.$group_id.'&amp;roadmap_id='.$roadmap_id.'&amp;release='.urlencode($release_value)),
 				$release_value,
-				' '.html_image("ic/file-txt.png",'','',array("title"=>_('Display as text'), "onclick"=>"getReleaseTxt('".addslashes($release_value)."')")));
+				' '.html_image("ic/file-txt.png",'','',array("alt"=>_('Display as text'), "title"=>_('Display as text'), "onclick"=>"getReleaseTxt('".addslashes($release_value)."')")));
 
 		// Graph
 		if ($display_graph && $templates[$template]['display_graph']) {
