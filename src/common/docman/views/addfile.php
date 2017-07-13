@@ -41,7 +41,7 @@ global $stateidArr;
 $actionurl = '/docman/?group_id='.$group_id.'&action=addfile&dirid='.$dirid;
 $redirecturl = '/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid;
 // plugin projects-hierarchy support
-if ($childgroup_id) {
+if (isset($childgroup_id) && $childgroup_id) {
 	$g = group_get_object($childgroup_id);
 	$actionurl .= '&childgroup_id='.$childgroup_id;
 	$redirecturl .= '&childgroup_id='.$childgroup_id;
