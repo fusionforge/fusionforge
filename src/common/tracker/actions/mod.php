@@ -44,7 +44,7 @@ function gettipspan($idpart, $content) {
 html_use_jqueryui();
 html_use_coolfieldset();
 html_use_jquerydatetimepicker();
-$ath->header(array ('title'=> $ah->getStringID().' '. $ah->getSummary(), 'atid'=>$ath->getID()));
+$ath->header(array('title'=> $ah->getStringID().' '. $ah->getSummary(), 'atid'=>$ath->getID()));
 
 echo notepad_func();
 echo init_datetimepicker();
@@ -113,7 +113,7 @@ echo $HTML->listTableTop();
 				$submittedUnixName = $ah->getSubmittedUnixName();
 				$submittedBy = $ah->getSubmittedBy();
 				?>
-				(<samp><?php echo util_make_link_u ($submittedUnixName,$submittedBy,$submittedUnixName); ?></samp>)
+				(<samp><?php echo util_make_link_u($submittedUnixName,$submittedBy,$submittedUnixName); ?></samp>)
 			<?php } ?>
 		</td>
 		<td><strong><?php echo _('Date Submitted')._(':'); ?></strong><br />
@@ -133,20 +133,20 @@ echo $HTML->listTableTop();
 		<td><strong><?php echo _('Data Type'). _(': ') ?></strong><br />
 <?php
 
-$atf = new ArtifactTypeFactory ($group);
-$tids = array () ;
+$atf = new ArtifactTypeFactory($group);
+$tids = array();
 foreach ($atf->getArtifactTypes() as $at) {
-	if (forge_check_perm ('tracker', $at->getID(), 'manager')) {
-		$tids[] = $at->getID() ;
+	if (forge_check_perm('tracker', $at->getID(), 'manager')) {
+		$tids[] = $at->getID();
 	}
 }
 
 $res = db_query_params('SELECT group_artifact_id, name
 			FROM artifact_group_list
 			WHERE group_artifact_id = ANY ($1)',
-			array (db_int_array_to_any_clause ($tids))) ;
+			array(db_int_array_to_any_clause($tids)));
 
-echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
+echo html_build_select_box($res,'new_artifact_type_id',$ath->getID(),false);
 
 ?>
 		</td>
@@ -360,7 +360,7 @@ if (forge_get_config('use_artefacts_dependencies')) { ?>
 }
 if (forge_get_config('use_object_associations')) { ?>
 	<div id="tabber-object-associations" class="tabbertab">
-	<?php if (forge_check_perm ('tracker',$ath->getID(),'submit')) {
+	<?php if (forge_check_perm('tracker',$ath->getID(),'submit')) {
 			echo $ah->showAssociations('/tracker/?func=removeassoc&aid='.$ah->getID().'&group_id='.$ath->Group->getID().'&atid='.$ath->getID());
 			echo $ah->showAddAssociations();
 		} else {
