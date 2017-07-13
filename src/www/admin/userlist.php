@@ -261,8 +261,7 @@ if ($usingplugin) {
 		$filter = '&group_id='.$group_id;
 		$max = ($totalUsers > ($start + $paging)) ? ($start + $paging) : $totalUsers;
 		show_users_list($users_id, $filter, $sort_order, $start, $max, $paging, $totalUsers);
-	}
-	else {
+	} else {
 		echo $HTML->information(_('No user in this project'));
 	}
 }
