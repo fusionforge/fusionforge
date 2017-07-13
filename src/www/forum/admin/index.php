@@ -108,12 +108,12 @@ if (getStringFromRequest('add_forum')) {
 			<input type="hidden" name="add_forum" value="y" />
 			<input type="hidden" name="group_id" value="'.$group_id.'" />
 			<input type="hidden" name="form_key" value="' . form_generate_key() . '" />
-			<strong>'._('Forum Name').utils_requiredField()._(':').'</strong><br />
-			<input type="text" name="forum_name" required="required" value="" size="20" maxlength="30" pattern=".{3,}" />
+			<label for="forum_name"><strong>'._('Forum Name').utils_requiredField()._(':').'</strong></label>
+			<input id="forum_name" type="text" name="forum_name" required="required" value="" size="20" maxlength="30" pattern=".{3,}" />
 			</p>
 			<p>
-			<strong>'._('Description').utils_requiredField()._(':').'</strong><br />
-			<input type="text" name="description" required="required" value="" size="40" maxlength="80" pattern=".{10,}" />
+			<label for="description"><strong>'._('Description').utils_requiredField()._(':').'</strong></label>
+			<input id="description" type="text" name="description" required="required" value="" size="40" maxlength="80" pattern=".{10,}" />
 			</p>
 			<p>
 			<strong>'._('Email All Posts To:').'</strong><br />
@@ -169,16 +169,14 @@ if (getStringFromRequest('add_forum')) {
 	$f = new Forum ($g,$group_forum_id);
 
 	forum_header(array('title'=>_('Permanently Delete Forum'), 'modal' => 1));
-	echo '<p>
-			<strong>'._('You are about to permanently and irretrievably delete this entire forum and all its contents!').'</strong><br />
-			</p>';
+	echo '<p><strong>'._('You are about to permanently and irretrievably delete this entire forum and all its contents!').'</strong></p>';
 	echo $HTML->openForm(array('method' => 'post', 'action' => getStringFromServer('PHP_SELF')));
 	echo '		<input type="hidden" name="post_changes" value="y" />
 			<input type="hidden" name="deleteforum" value="y" />
 			<input type="hidden" name="group_id" value="'.$group_id.'" />
 			<input type="hidden" name="group_forum_id" value="'.$group_forum_id.'" />
-			<input type="checkbox" name="sure" value="1" />'._('I am Sure').'<br />
-			<input type="checkbox" name="really_sure" value="1" />'._('I am Really Sure').'<br />
+			<input id="sure" type="checkbox" name="sure" value="1" /><label for="sure">'._('I am Sure').'</label><br />
+			<input id="really_sure" type="checkbox" name="really_sure" value="1" /><label for="really_sure">'._('I am Really Sure').'</label><br />
 			<input type="submit" name="submit" value="'._('Delete').'" />';
 	echo $HTML->closeForm();
 	forum_footer();
