@@ -108,21 +108,21 @@ class pgsql extends System {
 		if (!$user) {
 			return false;
 		} else {
-			$res = db_query_params ('UPDATE users SET
-			unix_uid=user_id+$1,
-			unix_status=$2
-			WHERE user_id=$3',
-						array ($this->UID_ADD,
-							   'A',
-							   $user_id)) ;
-					if (!$res) {
-							$this->setError('Error: Cannot Update User UID/GID: '.db_error());
-							return false;
+			$res = db_query_params('UPDATE users SET
+						unix_uid = user_id+$1,
+						unix_status = $2
+						WHERE user_id = $3',
+						array($this->UID_ADD,
+							'A',
+							$user_id));
+			if (!$res) {
+				$this->setError(_('Error')._(': ')._('Cannot Update User UID/GID')._(': ').db_error());
+				return false;
 			}
-			$res1 = db_query_params ('DELETE FROM nss_usergroups WHERE user_id=$1',
-						 array ($user_id)) ;
+			$res1 = db_query_params('DELETE FROM nss_usergroups WHERE user_id = $1',
+						 array($user_id));
 			if (!$res1) {
-				$this->setError('Error: Cannot Delete Group Member(s): '.db_error());
+				$this->setError(_('Error')._(': ')._('Cannot Delete Group Member(s)')._(': ').db_error());
 				return false;
 			}
 
@@ -132,13 +132,13 @@ class pgsql extends System {
 			}
 			foreach ($user->getRoles() as $r) {
 				foreach ($r->getLinkedProjects() as $p) {
-					if (forge_check_perm_for_user ($user, 'scm', $p->getID(), 'write')) {
-						$pids[] = $p->getID() ;
+					if (forge_check_perm_for_user($user, 'scm', $p->getID(), 'write')) {
+						$pids[] = $p->getID();
 					}
 				}
 			}
 			foreach (array_unique($pids) as $pid) {
-				$this->sysGroupAddUser($pid, $user_id) ;
+				$this->sysGroupAddUser($pid, $user_id);
 			}
 		}
 		return parent::sysCreateUser($user_id);

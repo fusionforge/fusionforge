@@ -197,7 +197,7 @@ abstract class BaseRole extends FFError {
 		return group_get_objects(array_unique($ids));
 	}
 
-	function linkProject ($project) { // From the PFO spec
+	function linkProject($project) { // From the PFO spec
 		global $SYS;
 		$hp = $this->getHomeProject();
 		if ($hp != NULL && $hp->getID() == $project->getID()) {
