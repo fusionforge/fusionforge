@@ -153,22 +153,22 @@ abstract class BaseRole extends FFError {
 	}
 
 	public function getUsers() {
-		return array () ;
+		return array();
 	}
 	public function hasUser($user) {
-		throw new Exception ("Not implemented") ;
+		throw new Exception ("Not implemented");
 	}
 	function hasGlobalPermission($section, $action = NULL) {
-		return $this->hasPermission ($section, -1, $action) ;
+		return $this->hasPermission ($section, -1, $action);
 	}
 	public function getSettings() {
-		throw new Exception ("Not implemented") ;
+		throw new Exception ("Not implemented");
 	}
 	public function setSettings($data) {
-		throw new Exception ("Not implemented") ;
+		throw new Exception ("Not implemented");
 	}
-	public function delete () {
-		throw new Exception ("Not implemented") ;
+	public function delete() {
+		throw new Exception ("Not implemented");
 	}
 
 	/**
@@ -210,7 +210,7 @@ abstract class BaseRole extends FFError {
 					     $project->getID()));
 
 		if (db_numrows($res)) {
-			return true ;
+			return true;
 		}
 		$res = db_query_params('INSERT INTO role_project_refs (role_id, group_id) VALUES ($1, $2)',
 				       array($this->getID(),
@@ -229,7 +229,7 @@ abstract class BaseRole extends FFError {
 			}
 		}
 
-		return true ;
+		return true;
 	}
 
 	function unlinkProject($project) { // From the PFO spec
@@ -248,7 +248,7 @@ abstract class BaseRole extends FFError {
 			return false;
 		}
 
-		$this->removeObsoleteSettings ();
+		$this->removeObsoleteSettings();
 
 		foreach ($this->getUsers() as $u) {
 			if (!$SYS->sysCheckCreateUser($u->getID())) {
@@ -270,7 +270,7 @@ abstract class BaseRole extends FFError {
 				$systasksq->add(SYSTASK_CORE, 'SCM_REPO', $project->getID());
 		}
 
-		return true ;
+		return true;
 	}
 
 	/**
@@ -287,7 +287,7 @@ abstract class BaseRole extends FFError {
 		unset($this->perms_array);
 
 		$res = db_query_params('SELECT * FROM pfo_role WHERE role_id=$1',
-				       array ($role_id)) ;
+				       array ($role_id));
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError('BaseRole::fetchData()::'.db_error());
 			return false;
@@ -319,18 +319,18 @@ abstract class BaseRole extends FFError {
 			return;
 		}
 
-		$role_id = $this->getID () ;
+		$role_id = $this->getID();
 
 		db_query_params ('DELETE FROM pfo_role_setting WHERE role_id=$1 AND section_name=$2 AND ref_id=$3',
 					array ($role_id,
 					       $section,
-					       $reference)) ;
+					       $reference));
 
 		db_query_params ('INSERT INTO pfo_role_setting (role_id, section_name, ref_id, perm_val) VALUES ($1, $2, $3, $4)',
 						array ($role_id,
 						       $section,
 						       $reference,
-						       $value)) ;
+						       $value));
 		$this->perms_array[$section][$reference] = $value;
 
 		# Change repo permissions when we change anonymous access
@@ -345,17 +345,17 @@ abstract class BaseRole extends FFError {
 		$result = array();
 		$group_id = $project->getID();
 
-		$sections = array ('project_read', 'project_admin', 'scm', 'docman', 'tracker_admin', 'new_tracker') ;
+		$sections = array ('project_read', 'project_admin', 'scm', 'docman', 'tracker_admin', 'new_tracker');
 		foreach ($sections as $section) {
-			$result[$section][$group_id] = $this->getVal ($section, $group_id) ;
+			$result[$section][$group_id] = $this->getVal ($section, $group_id);
 		}
 
 		if ($project->usesTracker()) {
-			$atf = new ArtifactTypeFactory ($project) ;
+			$atf = new ArtifactTypeFactory ($project);
 			if (!$atf->isError()) {
-				$tids = $atf->getAllArtifactTypeIds () ;
+				$tids = $atf->getAllArtifactTypeIds();
 				foreach ($tids as $tid) {
-					$result['tracker'][$tid] = $this->getVal ('tracker', $tid) ;
+					$result['tracker'][$tid] = $this->getVal ('tracker', $tid);
 				}
 			}
 			array_push ($sections,'tracker');
@@ -381,16 +381,16 @@ abstract class BaseRole extends FFError {
 		/*XXX merge from Branch_5_1: maybe this also only if usesForum? */
 		$sections_forum = array('forum_admin', 'new_forum');
 		foreach ($sections_forum as $section_forum) {
-			$result[$section_forum][$group_id] = $this->getVal ($section_forum, $group_id) ;
+			$result[$section_forum][$group_id] = $this->getVal ($section_forum, $group_id);
 		}
 		$sections = array_merge($sections, $sections_forum);
 
 		if ($project->usesForum()) {
-			$ff = new ForumFactory ($project) ;
+			$ff = new ForumFactory ($project);
 			if (!$ff->isError()) {
-				$fids = $ff->getAllForumIdsWithNews () ;
+				$fids = $ff->getAllForumIdsWithNews();
 				foreach ($fids as $fid) {
-					$result['forum'][$fid] = $this->getVal ('forum', $fid) ;
+					$result['forum'][$fid] = $this->getVal ('forum', $fid);
 				}
 			}
 			array_push ($sections,'forum');
@@ -399,19 +399,19 @@ abstract class BaseRole extends FFError {
 		/*XXX see above, maybe only if usesPM? */
 		$sections_pm = array('pm_admin', 'new_pm');
 		foreach ($sections_pm as $section_pm) {
-			$result[$section_pm][$group_id] = $this->getVal ($section_pm, $group_id) ;
+			$result[$section_pm][$group_id] = $this->getVal ($section_pm, $group_id);
 		}
 		$sections = array_merge($sections, $sections_pm);
 
 		if ($project->usesPM()) {
-			$pgf = new ProjectGroupFactory ($project) ;
+			$pgf = new ProjectGroupFactory ($project);
 			if (!$pgf->isError()) {
-				$pgids = $pgf->getAllProjectGroupIds () ;
+				$pgids = $pgf->getAllProjectGroupIds();
 				foreach ($pgids as $pgid) {
-					$result['pm'][$pgid] = $this->getVal ('pm', $pgid) ;
+					$result['pm'][$pgid] = $this->getVal ('pm', $pgid);
 				}
 			}
-			array_push ($sections,'pm') ;
+			array_push ($sections,'pm');
 		}
 
 		// Add settings not yet listed so far (probably plugins)
@@ -424,12 +424,12 @@ abstract class BaseRole extends FFError {
 		foreach (array_keys ($this->perms_array) as $section) {
 			if (!in_array ($section, $sections)) {
 				if (!in_array ($section, $this->global_settings)) {
-					$result[$section][$group_id] = $this->getVal ($section, $group_id) ;
+					$result[$section][$group_id] = $this->getVal ($section, $group_id);
 				}
 			}
 		}
 
-		return $result ;
+		return $result;
 	}
 
 	/**
@@ -439,23 +439,23 @@ abstract class BaseRole extends FFError {
 	 *
 	 * @return	array	array of permission for global settings
 	 */
-	function getGlobalSettings () {
+	function getGlobalSettings() {
 		$result = array();
 
-		$sections = array ('forge_admin', 'forge_stats', 'approve_projects', 'approve_news') ;
+		$sections = array ('forge_admin', 'forge_stats', 'approve_projects', 'approve_news');
 		foreach ($sections as $section) {
-			$result[$section][-1] = $this->getVal($section, -1) ;
+			$result[$section][-1] = $this->getVal($section, -1);
 		}
 		// Add settings not yet listed so far (probably plugins)
 		foreach (array_keys ($this->perms_array) as $section) {
 			if (!in_array ($section, $sections)) {
 				if (in_array ($section, $this->global_settings)) {
-					$result[$section][-1] = $this->getVal ($section, -1) ;
+					$result[$section][-1] = $this->getVal ($section, -1);
 				}
 			}
 		}
 
-		return $result ;
+		return $result;
 	}
 
 	/**
@@ -471,30 +471,30 @@ abstract class BaseRole extends FFError {
 			$value = 0;
 		}
 
-		$min = PHP_INT_MAX ;
-		$mask = 0 ;
+		$min = PHP_INT_MAX;
+		$mask = 0;
 
 		switch ($section) {
 		case 'forge_admin':
-			return $value ;
-			break ;
+			return $value;
+			break;
 
 		case 'forge_read':
 		case 'approve_projects':
 		case 'approve_news':
 		case 'project_admin':
 			if ($this->hasGlobalPermission('forge_admin')) {
-				return 1 ;
+				return 1;
 			}
-			return $value ;
-			break ;
+			return $value;
+			break;
 
 		case 'forge_stats':
 			if ($this->hasGlobalPermission('forge_admin')) {
-				return 2 ;
+				return 2;
 			}
-			return $value ;
-			break ;
+			return $value;
+			break;
 
 		case 'project_read':
 			if ($this->hasPermission('project_admin', $reference)) {
@@ -510,26 +510,26 @@ abstract class BaseRole extends FFError {
 			} elseif (!$this->hasPermission('project_read', $reference)) {
 				return 0;
 			}
-			return $value ;
-			break ;
+			return $value;
+			break;
 		case 'frs_admin':
 		case 'scm':
 			if ($this->hasPermission('project_admin', $reference)) {
-				return 2 ;
+				return 2;
 			} elseif (!$this->hasPermission('project_read', $reference)) {
 				return 0;
 			}
-			return $value ;
-			break ;
+			return $value;
+			break;
 
 		case 'docman':
 			if ($this->hasPermission('project_admin', $reference)) {
-				return 4 ;
+				return 4;
 			} elseif (!$this->hasPermission('project_read', $reference)) {
 				return 0;
 			}
-			return $value ;
-			break ;
+			return $value;
+			break;
 
 		case 'frs':
 			if ($this->hasPermission('frs_admin', frspackage_get_groupid($reference), 'admin')) {
@@ -537,82 +537,83 @@ abstract class BaseRole extends FFError {
 			} elseif (!$this->hasPermission('project_read', frspackage_get_groupid($reference))) {
 				return 0;
 			}
-			return $value ;
-			break ;
+			return $value;
+			break;
 		case 'new_frs':
 			if ($this->hasPermission('frs_admin', $reference, 'admin')) {
 				return 4;
 			} elseif (!$this->hasPermission('project_read', $reference)) {
 				return 0;
 			}
-			return $value ;
-			break ;
+			return $value;
+			break;
+
 		case 'forum':
 			if ($this->hasPermission('forum_admin', forum_get_groupid($reference))) {
-				return 4 ;
+				return 4;
 			} elseif (!$this->hasPermission('project_read', forum_get_groupid($reference))) {
 				return 0;
 			}
-			return $value ;
-			break ;
+			return $value;
+			break;
 		case 'new_forum':
 			if ($this->hasPermission('forum_admin', $reference)) {
-				return 4 ;
+				return 4;
 			} elseif (!$this->hasPermission('project_read', $reference)) {
 				return 0;
 			}
-			return $value ;
-			break ;
+			return $value;
+			break;
 
 		case 'tracker':
 			if ($this->hasPermission('tracker_admin', artifacttype_get_groupid($reference))) {
-				return 29 | $value ;
+				return 29 | $value;
 			} elseif (!$this->hasPermission('project_read', artifacttype_get_groupid($reference))) {
 				return 0;
 			}
-			return $value ;
-			break ;
+			return $value;
+			break;
 		case 'new_tracker':
 			if ($this->hasPermission('tracker_admin', $reference)) {
-				return 29 | $value ;
+				return 29 | $value;
 			} elseif (!$this->hasPermission('project_read', $reference)) {
 				return 0;
 			}
-			return $value ;
-			break ;
+			return $value;
+			break;
 
 		case 'pm':
 			if ($this->hasPermission('pm_admin', projectgroup_get_groupid($reference))) {
-				return 5 | $value ;
+				return 5 | $value;
 			} elseif (!$this->hasPermission('project_read', projectgroup_get_groupid($reference))) {
 				return 0;
 			}
-			return $value ;
-			break ;
+			return $value;
+			break;
 		case 'new_pm':
 			if ($this->hasPermission('pm_admin', $reference)) {
-				return 5 | $value ;
+				return 5 | $value;
 			} elseif (!$this->hasPermission('project_read', $reference)) {
 				return 0;
 			}
-			return $value ;
-			break ;
+			return $value;
+			break;
 		default:
-			$hook_params = array ();
-			$hook_params['role'] = $this ;
-			$hook_params['section'] = $section ;
-			$hook_params['reference'] = $reference ;
-			$hook_params['value'] = $value ;
-			$hook_params['result'] = NULL ;
+			$hook_params = array();
+			$hook_params['role'] = $this;
+			$hook_params['section'] = $section;
+			$hook_params['reference'] = $reference;
+			$hook_params['value'] = $value;
+			$hook_params['result'] = NULL;
 			plugin_hook_by_reference ("role_get_setting", $hook_params);
-			return $hook_params['result'] ;
-			break ;
+			return $hook_params['result'];
+			break;
 		}
 	}
 
 	function getSettingRaw($section, $reference) {
 		if (isset ($this->perms_array[$section][$reference])) {
-			return $this->perms_array[$section][$reference] ;
+			return $this->perms_array[$section][$reference];
 		}
 	}
 
@@ -627,7 +628,7 @@ abstract class BaseRole extends FFError {
 		if (!$ref_id) {
 			$ref_id=0;
 		}
-		return $this->getSetting($section, $ref_id) ;
+		return $this->getSetting($section, $ref_id);
 	}
 
 	/**
@@ -658,10 +659,10 @@ abstract class BaseRole extends FFError {
 	}
 
 	function hasPermission($section, $reference, $action = NULL) {
-		$result = false ;
-		$value = $this->getSetting ($section, $reference) ;
-		$min = PHP_INT_MAX ;
-		$mask = 0 ;
+		$result = false;
+		$value = $this->getSetting ($section, $reference);
+		$min = PHP_INT_MAX;
+		$mask = 0;
 
 		switch ($section) {
 		case 'forge_admin':
@@ -673,48 +674,48 @@ abstract class BaseRole extends FFError {
 		case 'tracker_admin':
 		case 'pm_admin':
 		case 'forum_admin':
-			return ($value >= 1) ;
-			break ;
+			return ($value >= 1);
+			break;
 
 		case 'forge_stats':
 		case 'frs_admin':
 			switch ($action) {
 			case 'read':
-				return ($value >= 1) ;
-				break ;
+				return ($value >= 1);
+				break;
 			case 'admin':
-				return ($value >= 2) ;
-				break ;
+				return ($value >= 2);
+				break;
 			}
-			break ;
+			break;
 
 		case 'scm':
 			switch ($action) {
 			case 'read':
-				return ($value >= 1) ;
-				break ;
+				return ($value >= 1);
+				break;
 			case 'write':
-				return ($value >= 2) ;
-				break ;
+				return ($value >= 2);
+				break;
 			}
-			break ;
+			break;
 
 		case 'docman':
 			switch ($action) {
 			case 'read':
-				return ($value >= 1) ;
-				break ;
+				return ($value >= 1);
+				break;
 			case 'submit':
-				return ($value >= 2) ;
-				break ;
+				return ($value >= 2);
+				break;
 			case 'approve':
-				return ($value >= 3) ;
-				break ;
+				return ($value >= 3);
+				break;
 			case 'admin':
-				return ($value >= 4) ;
-				break ;
+				return ($value >= 4);
+				break;
 			}
-			break ;
+			break;
 
 		case 'frs':
 		case 'new_frs':
@@ -738,66 +739,66 @@ abstract class BaseRole extends FFError {
 		case 'new_forum':
 			switch ($action) {
 			case 'read':
-				return ($value >= 1) ;
-				break ;
+				return ($value >= 1);
+				break;
 			case 'post':
-				return ($value >= 2) ;
-				break ;
+				return ($value >= 2);
+				break;
 			case 'unmoderated_post':
-				return ($value >= 3) ;
-				break ;
+				return ($value >= 3);
+				break;
 			case 'moderate':
-				return ($value >= 4) ;
-				break ;
+				return ($value >= 4);
+				break;
 			}
-			break ;
+			break;
 
 		case 'tracker':
 		case 'new_tracker':
 			switch ($action) {
 			case 'read':
-				return (($value & 1) != 0) ;
-				break ;
+				return (($value & 1) != 0);
+				break;
 			case 'tech':
-				return (($value & 2) != 0) ;
-				break ;
+				return (($value & 2) != 0);
+				break;
 			case 'manager':
-				return (($value & 4) != 0) ;
-				break ;
+				return (($value & 4) != 0);
+				break;
 			case 'submit':
-				return (($value & 8) != 0) ;
-				break ;
+				return (($value & 8) != 0);
+				break;
 			case 'vote':
 				return (($value & 16) != 0);
 				break;
 			}
-			break ;
+			break;
 
 		case 'pm':
 		case 'new_pm':
 			switch ($action) {
 			case 'read':
-				return (($value & 1) != 0) ;
-				break ;
+				return (($value & 1) != 0);
+				break;
 			case 'tech':
-				return (($value & 2) != 0) ;
-				break ;
+				return (($value & 2) != 0);
+				break;
 			case 'manager':
-				return (($value & 4) != 0) ;
-				break ;
+				return (($value & 4) != 0);
+				break;
 			}
-			break ;
+			break;
 
 		default:
-			$hook_params = array ();
-			$hook_params['section'] = $section ;
-			$hook_params['reference'] = $reference ;
-			$hook_params['action'] = $action ;
-			$hook_params['value'] = $value ;
-			$hook_params['result'] = false ;
+			$hook_params = array();
+			$hook_params['section'] = $section;
+			$hook_params['reference'] = $reference;
+			$hook_params['action'] = $action;
+			$hook_params['value'] = $value;
+			$hook_params['result'] = false;
 			plugin_hook_by_reference ("role_has_permission", $hook_params);
-			return $hook_params['result'] ;
-			break ;
+			return $hook_params['result'];
+			break;
 		}
 	}
 
@@ -826,10 +827,10 @@ abstract class BaseRole extends FFError {
 
 		db_begin();
 
-		$role_id = $this->getID () ;
+		$role_id = $this->getID();
 
 		if ($role_name != $this->getName()) {
-			$this->setName($role_name) ;
+			$this->setName($role_name);
 		}
 
 		db_prepare ('INSERT INTO pfo_role_setting (role_id, section_name, ref_id, perm_val) VALUES ($1, $2, $3, $4)',
@@ -871,7 +872,7 @@ abstract class BaseRole extends FFError {
 		db_unprepare ('delete_from_pfo_role_setting');
 		db_unprepare ('update_pfo_role_setting');
 
-		$hook_params = array ();
+		$hook_params = array();
 		$hook_params['role'] =& $this;
 		$hook_params['role_id'] = $this->getID();
 		$hook_params['data'] = $data;
@@ -895,71 +896,71 @@ abstract class BaseRole extends FFError {
 	function getDisplayableName($group = NULL) {
 		if ($this->getHomeProject() == NULL) {
 			return sprintf (_('%s (global role)'),
-					$this->getName ()) ;
+					$this->getName());
 		} elseif ($group == NULL
 			  || $this->getHomeProject()->getID() != $group->getID()) {
 			return sprintf (_('%s (in project %s)'),
-					$this->getName (),
-					$this->getHomeProject()->getPublicName()) ;
+					$this->getName(),
+					$this->getHomeProject()->getPublicName());
 		} else {
-			return $this->getName () ;
+			return $this->getName();
 		}
 	}
 
-	function removeObsoleteSettings () {
-		db_begin () ;
+	function removeObsoleteSettings() {
+		db_begin();
 
 		// Remove obsolete project-wide settings
 		$sections = array ('project_read', 'project_admin', 'frs_admin', 'new_frs', 'scm', 'docman', 'tracker_admin', 'new_tracker', 'forum_admin', 'new_forum', 'pm_admin', 'new_pm');
 		db_query_params ('DELETE FROM pfo_role_setting where role_id=$1 AND section_name=ANY($2) and ref_id NOT IN (SELECT home_group_id FROM pfo_role WHERE role_id=$1 AND home_group_id IS NOT NULL UNION SELECT group_id from role_project_refs WHERE role_id=$1)',
 				 array ($this->getID(),
-					db_string_array_to_any_clause($sections))) ;
+					db_string_array_to_any_clause($sections)));
 
 		// Remove obsolete settings for multiple-instance tools
 		db_query_params ('DELETE FROM pfo_role_setting where role_id=$1 AND section_name=$2 and ref_id NOT IN (SELECT group_artifact_id FROM artifact_group_list WHERE group_id IN (SELECT home_group_id FROM pfo_role WHERE role_id=$1 AND home_group_id IS NOT NULL UNION SELECT group_id from role_project_refs WHERE role_id=$1))',
 				 array ($this->getID(),
-					'tracker')) ;
+					'tracker'));
 		db_query_params ('DELETE FROM pfo_role_setting where role_id=$1 AND section_name=$2 and ref_id NOT IN (SELECT group_project_id FROM project_group_list WHERE group_id IN (SELECT home_group_id FROM pfo_role WHERE role_id=$1 AND home_group_id IS NOT NULL UNION SELECT group_id from role_project_refs WHERE role_id=$1))',
 				 array ($this->getID(),
-					'pm')) ;
+					'pm'));
 		db_query_params ('DELETE FROM pfo_role_setting where role_id=$1 AND section_name=$2 and ref_id NOT IN (SELECT group_forum_id FROM forum_group_list WHERE group_id IN (SELECT home_group_id FROM pfo_role WHERE role_id=$1 AND home_group_id IS NOT NULL UNION SELECT group_id from role_project_refs WHERE role_id=$1))',
 				 array ($this->getID(),
-					'forum')) ;
+					'forum'));
 		db_query_params ('DELETE FROM pfo_role_setting where role_id=$1 AND section_name=$2 and ref_id NOT IN (SELECT package_id FROM frs_package WHERE group_id IN (SELECT home_group_id FROM pfo_role WHERE role_id=$1 AND home_group_id IS NOT NULL UNION SELECT group_id from role_project_refs WHERE role_id=$1))',
-				 array ($this->getID(),	'frs')) ;
+				 array ($this->getID(),	'frs'));
 
-		db_commit () ;
+		db_commit();
 		$this->fetchData($this->getID());
-		return true ;
+		return true;
 	}
 
 	function normalizePermsForSection (&$new_pa, $section, $refid) {
 		if (array_key_exists ($section, $this->perms_array)
 		    && array_key_exists ($refid, $this->perms_array[$section])) {
-			$new_pa[$section][$refid] = $this->perms_array[$section][$refid] ;
+			$new_pa[$section][$refid] = $this->perms_array[$section][$refid];
 		} elseif (array_key_exists ($this->data_array['role_name'], $this->defaults)
 			  && array_key_exists ($section, $this->defaults[$this->data_array['role_name']])) {
-			$new_pa[$section][$refid] = $this->defaults[$this->data_array['role_name']][$section] ;
+			$new_pa[$section][$refid] = $this->defaults[$this->data_array['role_name']][$section];
 		} else {
-			$new_pa[$section][$refid] = 0 ;
+			$new_pa[$section][$refid] = 0;
 		}
-		return $new_pa ;
+		return $new_pa;
 	}
 
-	function normalizeData () { // From the PFO spec
-		$this->removeObsoleteSettings () ;
+	function normalizeData() { // From the PFO spec
+		$this->removeObsoleteSettings();
 
-		$this->fetchData ($this->getID()) ;
+		$this->fetchData ($this->getID());
 
-		$projects = $this->getLinkedProjects() ;
-		$new_pa = array () ;
+		$projects = $this->getLinkedProjects();
+		$new_pa = array();
 
 		// Add missing settings
 		// ...project-wide settings
-		$arr = array ('project_read', 'project_admin', 'scm', 'docman', 'frs_admin', 'new_frs', 'tracker_admin', 'new_tracker', 'forum_admin', 'new_forum', 'pm_admin', 'new_pm') ;
+		$arr = array ('project_read', 'project_admin', 'scm', 'docman', 'frs_admin', 'new_frs', 'tracker_admin', 'new_tracker', 'forum_admin', 'new_forum', 'pm_admin', 'new_pm');
 		foreach ($projects as $p) {
 			foreach ($arr as $section) {
-				$this->normalizePermsForSection ($new_pa, $section, $p->getID()) ;
+				$this->normalizePermsForSection ($new_pa, $section, $p->getID());
 			}
 		}
 		$this->normalizePermsForSection($new_pa, 'forge_admin', -1);
@@ -967,9 +968,9 @@ abstract class BaseRole extends FFError {
 		$this->normalizePermsForSection($new_pa, 'approve_news', -1);
 		$this->normalizePermsForSection($new_pa, 'forge_stats', -1);
 
-		$hook_params = array ();
+		$hook_params = array();
 		$hook_params['role'] =& $this;
-		$hook_params['new_pa'] =& $new_pa ;
+		$hook_params['new_pa'] =& $new_pa;
 		plugin_hook ("role_normalize", $hook_params);
 
 		// ...tracker-related settings
@@ -985,50 +986,50 @@ abstract class BaseRole extends FFError {
 			$tid = $row['group_artifact_id'];
 			if (array_key_exists ('tracker', $this->perms_array)
 			    && array_key_exists ($tid, $this->perms_array['tracker']) ) {
-				$new_pa['tracker'][$tid] = $this->perms_array['tracker'][$tid] ;
+				$new_pa['tracker'][$tid] = $this->perms_array['tracker'][$tid];
 			} elseif (array_key_exists ('new_tracker', $this->perms_array)
 				  && array_key_exists ($p->getID(), $this->perms_array['new_tracker']) ) {
-				$new_pa['tracker'][$tid] = $new_pa['new_tracker'][$p->getID()] ;
+				$new_pa['tracker'][$tid] = $new_pa['new_tracker'][$p->getID()];
 			}
 		}
 
 		// ...forum-related settings
-		$new_pa['forum'] = array () ;
+		$new_pa['forum'] = array();
 		foreach ($projects as $p) {
 			if (!$p->usesForum()) {
 				continue;
 			}
-			$ff = new ForumFactory ($p) ;
+			$ff = new ForumFactory ($p);
 			if (!$ff->isError()) {
-				$fids = $ff->getAllForumIdsWithNews () ;
+				$fids = $ff->getAllForumIdsWithNews();
 				foreach ($fids as $fid) {
 					if (array_key_exists ('forum', $this->perms_array)
 					&& array_key_exists ($fid, $this->perms_array['forum']) ) {
-						$new_pa['forum'][$fid] = $this->perms_array['forum'][$fid] ;
+						$new_pa['forum'][$fid] = $this->perms_array['forum'][$fid];
 					} elseif (array_key_exists ('new_forum', $this->perms_array)
 						&& array_key_exists ($p->getID(), $this->perms_array['new_forum']) ) {
-						$new_pa['forum'][$fid] = $new_pa['new_forum'][$p->getID()] ;
+						$new_pa['forum'][$fid] = $new_pa['new_forum'][$p->getID()];
 					}
 				}
 			}
 		}
 
 		// ...pm-related settings
-		$new_pa['pm'] = array () ;
+		$new_pa['pm'] = array();
 		foreach ($projects as $p) {
 			if (!$p->usesPM()) {
 				continue;
 			}
-			$pgf = new ProjectGroupFactory ($p) ;
+			$pgf = new ProjectGroupFactory ($p);
 			if (!$pgf->isError()) {
-				$pgids = $pgf->getAllProjectGroupIds () ;
+				$pgids = $pgf->getAllProjectGroupIds();
 				foreach ($pgids as $gid) {
 					if (array_key_exists ('pm', $this->perms_array)
 					&& array_key_exists ($gid, $this->perms_array['pm']) ) {
-						$new_pa['pm'][$gid] = $this->perms_array['pm'][$gid] ;
+						$new_pa['pm'][$gid] = $this->perms_array['pm'][$gid];
 					} elseif (array_key_exists ('new_pm', $this->perms_array)
 						&& array_key_exists ($p->getID(), $this->perms_array['new_pm']) ) {
-						$new_pa['pm'][$gid] = $new_pa['new_pm'][$p->getID()] ;
+						$new_pa['pm'][$gid] = $new_pa['new_pm'][$p->getID()];
 					}
 				}
 			}
@@ -1045,9 +1046,9 @@ abstract class BaseRole extends FFError {
 				$frspids = $frspf->getAllPackagesIds();
 				foreach ($frspids as $frspid) {
 					if (array_key_exists('frs', $this->perms_array) && array_key_exists($frspid, $this->perms_array['frs'])) {
-						$new_pa['frs'][$frspid] = $this->perms_array['frs'][$frspid] ;
+						$new_pa['frs'][$frspid] = $this->perms_array['frs'][$frspid];
 					} elseif (array_key_exists('new_frs', $this->perms_array) && array_key_exists($p->getID(), $this->perms_array['new_frs']) ) {
-						$new_pa['frs'][$frspid] = $new_pa['new_frs'][$p->getID()] ;
+						$new_pa['frs'][$frspid] = $new_pa['new_frs'][$p->getID()];
 					}
 				}
 			}
@@ -1178,8 +1179,8 @@ abstract class RoleExplicit extends BaseRole implements PFO_RoleExplicit {
 
 class RoleAnonymous extends BaseRole implements PFO_RoleAnonymous {
 	// This role is implemented as a singleton
-	private static $_instance ;
-	private $_role_id ;
+	private static $_instance;
+	private $_role_id;
 	public static function getInstance() {
 		if (isset(self::$_instance)) {
 			return self::$_instance;
@@ -1202,13 +1203,13 @@ class RoleAnonymous extends BaseRole implements PFO_RoleAnonymous {
 		}
 
 		$res = db_query_params('SELECT r.role_id FROM pfo_role r, pfo_role_class c WHERE r.role_class = c.class_id AND c.class_name = $1',
-					array('PFO_RoleAnonymous')) ;
+					array('PFO_RoleAnonymous'));
 		if (!$res || !db_numrows($res)) {
 			throw new Exception(_('No PFO_RoleAnonymous role in the database'));
 		}
-		self::$_instance->_role_id = db_result ($res, 0, 'role_id') ;
+		self::$_instance->_role_id = db_result ($res, 0, 'role_id');
 
-		$hook_params = array ();
+		$hook_params = array();
 		$hook_params['role'] =& self::$_instance;
 		plugin_hook ('role_get', $hook_params);
 
@@ -1221,13 +1222,13 @@ class RoleAnonymous extends BaseRole implements PFO_RoleAnonymous {
 		return $this->_role_id;
 	}
 	public function isPublic() {
-		return true ;
+		return true;
 	}
 	public function setPublic($flag) {
 		throw new Exception(_('Cannot setPublic() on RoleAnonymous'));
 	}
 	public function getHomeProject() {
-		return NULL ;
+		return NULL;
 	}
 	public function getName() {
 		return _('Anonymous/not logged in');
@@ -1239,8 +1240,8 @@ class RoleAnonymous extends BaseRole implements PFO_RoleAnonymous {
 
 class RoleLoggedIn extends BaseRole implements PFO_RoleLoggedin {
 	// This role is implemented as a singleton
-	private static $_instance ;
-	private $_role_id ;
+	private static $_instance;
+	private $_role_id;
 	public static function getInstance() {
 		if (isset(self::$_instance)) {
 			return self::$_instance;
@@ -1256,7 +1257,7 @@ class RoleLoggedIn extends BaseRole implements PFO_RoleLoggedin {
 		}
 		self::$_instance->_role_id = db_result ($res, 0, 'role_id');
 
-		$hook_params = array ();
+		$hook_params = array();
 		$hook_params['role'] =& self::$_instance;
 		plugin_hook ('role_get', $hook_params);
 
@@ -1306,7 +1307,7 @@ class RoleComparator {
 		switch ($this->criterion) {
 		case 'name':
 			return strcoll ($a->getName(), $b->getName());
-			break ;
+			break;
 		case 'id':
 			$aid = $a->getID();
 			$bid = $b->getID();
@@ -1342,33 +1343,33 @@ class RoleComparator {
 	 * @return	number
 	 */
 	function CompareNoRef ($a, $b) {
-		$ap = $a->getHomeProject() ;
-		$bp = $b->getHomeProject() ;
+		$ap = $a->getHomeProject();
+		$bp = $b->getHomeProject();
 		if ($ap == NULL && $bp != NULL) {
-			return -1 ;
+			return -1;
 		} elseif ($ap != NULL && $bp == NULL) {
-			return 1 ;
+			return 1;
 		} elseif ($ap == NULL && $bp == NULL) {
-			$tmp = strcoll ($a->getName(), $b->getName()) ;
-			return $tmp ;
+			$tmp = strcoll ($a->getName(), $b->getName());
+			return $tmp;
 		} else {
-			$projcmp = new ProjectComparator () ;
-			$projcmp->criterion = 'name' ;
-			$tmp = $projcmp->Compare ($ap, $bp) ;
+			$projcmp = new ProjectComparator();
+			$projcmp->criterion = 'name';
+			$tmp = $projcmp->Compare ($ap, $bp);
 			if ($tmp) { /* Different projects, sort accordingly */
-				return $tmp ;
+				return $tmp;
 			}
-			return strcoll ($a->getName(), $b->getName()) ;
+			return strcoll ($a->getName(), $b->getName());
 		}
 	}
 }
 
 function sortRoleList (&$list, $relative_to = NULL, $criterion='composite') {
-	$cmp = new RoleComparator () ;
-	$cmp->criterion = $criterion ;
-	$cmp->reference_project = $relative_to ;
+	$cmp = new RoleComparator();
+	$cmp->criterion = $criterion;
+	$cmp->reference_project = $relative_to;
 
-	return usort ($list, array ($cmp, 'Compare')) ;
+	return usort ($list, array ($cmp, 'Compare'));
 }
 
 // Local Variables:
