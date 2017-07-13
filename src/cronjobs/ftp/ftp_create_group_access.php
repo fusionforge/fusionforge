@@ -25,6 +25,7 @@ require_once $gfcommon.'include/pre.php';
 require $gfcommon.'include/cron_utils.php';
 
 $users = array();
+$err = '';
 
 $ftp_dir = forge_get_config('ftp_upload_dir');
 $home_dir = forge_get_config('homedir_prefix');
@@ -72,3 +73,6 @@ function execute($cmd) {
 	// print_debug ("res= ".$res);
 	return $res;
 }
+
+cron_entry(31, $err);
+
