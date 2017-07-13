@@ -71,118 +71,118 @@ class Rest {
 		echo json_encode($data);
 	}
 
-	static function error($message, $code=500) {
+	static function error($message, $code = 500) {
 		header("X-Status-Reason: $message", true, $code);
 	}
 
 	static function renderUser($user) {
 		return array(
-		'user_id' => $user->getID(),
-		'user_name' => $user->getUnixName(),
-		'title' => $user->getTitle(),
-		'firstname' => $user->getFirstName(),
-		'lastname' => $user->getLastName(),
-		'status' => $user->getStatus(),
-		'email' => $user->getEmail(),
-		'language' => lang_id_to_language_name($user->getLanguage()),
-		'country_code' => $user->getCountryCode(),
-		'add_date' => date('c', $user->getAddDate()),
-		//'last_login_time' => date('c', $user->getLastLoginTime())
+			'user_id' => $user->getID(),
+			'user_name' => $user->getUnixName(),
+			'title' => $user->getTitle(),
+			'firstname' => $user->getFirstName(),
+			'lastname' => $user->getLastName(),
+			'status' => $user->getStatus(),
+			'email' => $user->getEmail(),
+			'language' => lang_id_to_language_name($user->getLanguage()),
+			'country_code' => $user->getCountryCode(),
+			'add_date' => date('c', $user->getAddDate()),
+			//'last_login_time' => date('c', $user->getLastLoginTime())
 		);
 	}
 
 	static function renderProject($project) {
 		return array(
-		'group_id' => $project->getID(),
-		'group_name' => $project->getPublicName(),
-		'homepage' => $project->getHomePage(),
-		'is_public' => $project->isPublic(),
-		'status' => $project->getStatus(),
-		'unix_group_name' => $project->getUnixName(),
-		'short_description' => $project->getDescription(),
-		'register_purpose' => $project->getRegisterPurpose(),
-		'unix_box' => $project->getUnixBox(),
-		'scm_box' => $project->getSCMBox(),
-		'register_time' => date('c', $project->getStartDate()),
-		//'built_from_template' => $project->getTemplateProject(),
-		'use_mail' => $project->usesMail(),
-		'use_survey' => $project->usesSurvey(),
-		'use_forum' => $project->usesForum(),
-		'use_pm' => $project->usesPM(),
-		//'use_pm_depend_box' => $grps[$i]->data_array['use_pm_depend_box'],
-		'use_scm' => $project->usesSCM(),
-		'use_news' => $project->usesNews(),
-		'use_docman' => $project->usesDocman(),
-		'new_doc_address' => $project->getDocEmailAddress(),
-		'send_all_docs' => $project->docEmailAll(),
-		'use_ftp' => $project->usesFTP(),
-		'use_tracker' => $project->usesTracker(),
-		'use_frs' => $project->usesFRS(),
-		'use_stats' => $project->usesStats(),
-		'use_activity' => $project->usesActivity(),
-		'tags'=>$project->getTags(),
-		'admins'=> array_map('rest::renderUser', $project->getAdmins()),
-		//'last_update_time' => date('c', $project->getLastUpdateTime())
+			'group_id' => $project->getID(),
+			'group_name' => $project->getPublicName(),
+			'homepage' => $project->getHomePage(),
+			'is_public' => $project->isPublic(),
+			'status' => $project->getStatus(),
+			'unix_group_name' => $project->getUnixName(),
+			'short_description' => $project->getDescription(),
+			'register_purpose' => $project->getRegisterPurpose(),
+			'unix_box' => $project->getUnixBox(),
+			'scm_box' => $project->getSCMBox(),
+			'register_time' => date('c', $project->getStartDate()),
+			//'built_from_template' => $project->getTemplateProject(),
+			'use_mail' => $project->usesMail(),
+			'use_survey' => $project->usesSurvey(),
+			'use_forum' => $project->usesForum(),
+			'use_pm' => $project->usesPM(),
+			//'use_pm_depend_box' => $grps[$i]->data_array['use_pm_depend_box'],
+			'use_scm' => $project->usesSCM(),
+			'use_news' => $project->usesNews(),
+			'use_docman' => $project->usesDocman(),
+			'new_doc_address' => $project->getDocEmailAddress(),
+			'send_all_docs' => $project->docEmailAll(),
+			'use_ftp' => $project->usesFTP(),
+			'use_tracker' => $project->usesTracker(),
+			'use_frs' => $project->usesFRS(),
+			'use_stats' => $project->usesStats(),
+			'use_activity' => $project->usesActivity(),
+			'tags' => $project->getTags(),
+			'admins' => array_map('rest::renderUser', $project->getAdmins()),
+			//'last_update_time' => date('c', $project->getLastUpdateTime())
 		);
 	}
 
 	static function renderArtifactType($artifact) {
 		return array(
-		'artifact_id' => $artifact->getID(),
-		'name' => $artifact->getName(),
-		'description' => $artifact->getDescription(),
-		'unix_name' => $artifact->getUnixName(),
-		'is_public' => $artifact->isPublic(),
-		'allow_anon' => $artifact->allowsAnon(),
-		'email_all' => $artifact->emailAll(),
-		'email_address' => $artifact->getEmailAddress(),
-		'due_period' => $artifact->getDuePeriod() / (60*60*24),
-		'use_resolution' => false,
-		'datatype' => $artifact->getDataType(),
-		'submit_instructions' => $artifact->getSubmitInstructions(),
-		'browse_instructions' => $artifact->getBrowseInstructions()
+			'artifact_id' => $artifact->getID(),
+			'name' => $artifact->getName(),
+			'description' => $artifact->getDescription(),
+			'unix_name' => $artifact->getUnixName(),
+			'is_public' => $artifact->isPublic(),
+			'allow_anon' => $artifact->allowsAnon(),
+			'email_all' => $artifact->emailAll(),
+			'email_address' => $artifact->getEmailAddress(),
+			'due_period' => $artifact->getDuePeriod() / (60 * 60 * 24),
+			'use_resolution' => false,
+			'datatype' => $artifact->getDataType(),
+			'submit_instructions' => $artifact->getSubmitInstructions(),
+			'browse_instructions' => $artifact->getBrowseInstructions()
 		);
 	}
 
 	static function renderArtifact($artifact) {
 		return array(
-		'artifact_id' => $artifact->getID(),
-		'summary' => $artifact->getSummary(),
-		'details' => $artifact->getDetails(),
-		'status_name' => $artifact->getStatusName(),
-		'submitted_by' => $artifact->getSubmittedUnixName(),
-		'open_date' => date('c', $artifact->getOpenDate()),
-		'close_date' => date('c', $artifact->getCloseDate()),
-		'last_modified_date' => date('c', $artifact->getLastModifiedDate()),
-		'comments' => array_map('rest::renderArtifactComment', $artifact->getMessageObjects())
+			'artifact_id' => $artifact->getID(),
+			'summary' => $artifact->getSummary(),
+			'details' => $artifact->getDetails(),
+			'status_name' => $artifact->getStatusName(),
+			'submitted_by' => $artifact->getSubmittedUnixName(),
+			'open_date' => date('c', $artifact->getOpenDate()),
+			'close_date' => date('c', $artifact->getCloseDate()),
+			'last_modified_date' => date('c', $artifact->getLastModifiedDate()),
+			'comments' => array_map('rest::renderArtifactComment', $artifact->getMessageObjects())
 		);
 	}
 
 	static function renderArtifactComment($message) {
 		return array(
-		'message' => util_unconvert_htmlspecialchars($message->getBody()),
-		'user_id' => $message->getUserID(),
-		'add_date' => date('c', $message->getAddDate())
+			'message' => util_unconvert_htmlspecialchars($message->getBody()),
+			'user_id' => $message->getUserID(),
+			'add_date' => date('c', $message->getAddDate())
 		);
 	}
 
 	static function renderForumType($forum) {
 		return array(
-		'forum_id' => $forum->getID(),
-		'name' => $forum->getName(),
-		'description' => $forum->getDescription(),
-		'send_all_posts_to' => $forum->getSendAllPostsTo(),
-		'is_public' => $forum->isPublic(),
-		'moderation_level' => $forum->getModerationLevel()
+			'forum_id' => $forum->getID(),
+			'name' => $forum->getName(),
+			'description' => $forum->getDescription(),
+			'send_all_posts_to' => $forum->getSendAllPostsTo(),
+			'is_public' => $forum->isPublic(),
+			'moderation_level' => $forum->getModerationLevel()
 		);
 	}
 
 	static function renderForum($message) {
 		return array(
-		'id' => $message->getID(),
-		'body' => $message->getBody(),
-		'user_id' => $message->getUserID(),
-		'add_date' => date('c', $message->getAddDate())
+			'id' => $message->getID(),
+			'body' => $message->getBody(),
+			'user_id' => $message->getUserID(),
+			'add_date' => date('c', $message->getAddDate())
 		);
 	}
 
@@ -375,7 +375,7 @@ $router->map('POST', '/v1/trackers/[i:group_id]', function ($group_id) {
 		return Rest::error($atf->getErrorMessage());
 	}
 
-	return(Rest::json(Rest::renderArtifactType($atf)));
+	return (Rest::json(Rest::renderArtifactType($atf)));
 });
 
 
@@ -387,7 +387,7 @@ $router->map('GET', '/v1/trackers/[i:group_id]/[i:group_artifact_id]', function 
 		return Rest::error($grp->getErrorMessage());
 	}
 
-	$at = new ArtifactType($grp,$group_artifact_id);
+	$at = new ArtifactType($grp, $group_artifact_id);
 	if (!$at || !is_object($at)) {
 		return Rest::error('Could Not Get ArtifactType');
 	} elseif ($at->isError()) {
@@ -401,7 +401,7 @@ $router->map('GET', '/v1/trackers/[i:group_id]/[i:group_artifact_id]', function 
 		return Rest::error($af->getErrorMessage());
 	}
 
-	$af->setup(0,'','',0,false, '', '');
+	$af->setup(0, '', '', 0, false, '', '');
 	$artifacts = $af->getArtifacts();
 	if ($artifacts === false) {
 		return Rest::error($af->getErrorMessage());
@@ -450,16 +450,16 @@ $router->map('POST', '/v1/tracker', function () {
 	}
 
 	if ($input->comments) {
-		foreach($input->comments as $comment) {
-		$res = $a->addMessage($comment->message);
-		if (!$res) {
-			return Rest::error('Could Not Create Artifact Comment: '.$a->getErrorMessage());
-		}
+		foreach ($input->comments as $comment) {
+			$res = $a->addMessage($comment->message);
+			if (!$res) {
+				return Rest::error('Could Not Create Artifact Comment: '.$a->getErrorMessage());
+			}
 
-		$msg_id = db_insertid($res, 'artifact_message', 'id');
-		$add_date = strtotime($comment->add_date);
-		db_query_params('UPDATE artifact_message SET submitted_by=$1, adddate=$2 WHERE id=$3',
-			array ($comment->user_id, $add_date, $msg_id));
+			$msg_id = db_insertid($res, 'artifact_message', 'id');
+			$add_date = strtotime($comment->add_date);
+			db_query_params('UPDATE artifact_message SET submitted_by=$1, adddate=$2 WHERE id=$3',
+				array($comment->user_id, $add_date, $msg_id));
 		}
 	}
 
@@ -510,8 +510,8 @@ if (isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW'])) {
 }
 
 // call closure or throw 404 status
-if( $match && is_callable( $match['target'] ) ) {
-	call_user_func_array( $match['target'], $match['params'] );
+if ($match && is_callable($match['target'])) {
+	call_user_func_array($match['target'], $match['params']);
 } else {
 	// no route was matched
 	header($_SERVER["SERVER_PROTOCOL"] . ' 404 Not Found');

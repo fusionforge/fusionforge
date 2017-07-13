@@ -51,37 +51,37 @@ if (!session_loggedin()) {
 	if (count ($projects) < 1) {
 		echo $HTML->information(_("You're not a member of any active projects"));
 	} else {
-		$display_col=array('summary'=>1,
-				'changed'=>1,
-				'status'=>0,
-				'priority'=>1,
-				'assigned_to'=>1,
-				'submitted_by'=>1,
-				'related_tasks'=>1);
+		$display_col = array('summary' => 1,
+				'changed' => 1,
+				'status' => 0,
+				'priority' => 1,
+				'assigned_to' => 1,
+				'submitted_by' => 1,
+				'related_tasks' => 1);
 
-		$title_arr=array();
+		$title_arr = array();
 
-		$title_arr[]=_('Id');
+		$title_arr[] = _('Id');
 		if ($display_col['summary']) {
-			$title_arr[]=_('Summary');
+			$title_arr[] = _('Summary');
 		}
 		if ($display_col['changed']) {
-			$title_arr[]=_('Changed');
+			$title_arr[] = _('Changed');
 		}
 		if ($display_col['status']) {
-			$title_arr[]=_('Status');
+			$title_arr[] = _('Status');
 		}
 		if ($display_col['priority']) {
-			$title_arr[]=_('Priority');
+			$title_arr[] = _('Priority');
 		}
 		if ($display_col['assigned_to']) {
-			$title_arr[]=_('Assigned to');
+			$title_arr[] = _('Assigned to');
 		}
 		if ($display_col['submitted_by']) {
-			$title_arr[]=_('Submitted by');
+			$title_arr[] = _('Submitted by');
 		}
 		if ($display_col['related_tasks']) {
-			$title_arr[]=_('Tasks');
+			$title_arr[] = _('Tasks');
 		}
 
 		echo $HTML->listTableTop($title_arr);

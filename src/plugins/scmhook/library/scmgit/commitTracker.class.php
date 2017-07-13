@@ -167,7 +167,7 @@ class GitCommitTracker extends scmhook {
 	* getActualVersionLink - Return a link to the actual version File
 	*
 	* @param	String	$GroupName	is the Name of the project
-	* @param	String	$FileName	is the FileName ( with path )
+	* @param	String	$FileName	is the FileName (with path)
 	* @param	String	$Version	the version to retrieve
 	*
 	* @return	String	$Version	The string containing a link to the actual version File
