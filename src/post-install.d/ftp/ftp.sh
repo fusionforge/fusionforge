@@ -25,23 +25,26 @@ set -e
 configure_ftpd() {
     sed -i -e 's/^anonymous_enable=.*$/anonymous_enable=NO/' /etc/vsftpd/vsftpd.conf
     sed -i -e 's/^#ftpd_banner=.*$/ftpd_banner=Welcome to FusionForge FTP server/' /etc/vsftpd/vsftpd.conf
-    sed -i -e 's/^chroot_local_user=.*$/chroot_local_user=YES/' /etc/vsftpd/vsftpd.conf
+    sed -i -e 's/^#chroot_local_user=.*$/chroot_local_user=YES/' /etc/vsftpd/vsftpd.conf
     if [[ $is_docker ]]; then
-        echo 'background=NO' >> /etc/vsftpd/vsftpd.conf
+        if [[ -z `grep 'background=NO' /etc/vsftpd/vsftpd.conf` ]];then
+            echo 'background=NO' >> /etc/vsftpd/vsftpd.conf
+        fi
     fi
 }
 
 remove_ftpd() {
     sed -i -e 's/^anonymous_enable=NO.*$/anonymous_enable=YES/' /etc/vsftpd/vsftpd.conf
     sed -i -e 's/^ftpd_banner=Welcome.*$/#ftpd_banner=Welcome to blah FTP service./' /etc/vsftpd/vsftpd.conf
-    sed -i -e 's/^chroot_local_user=YES.*$/chroot_local_user=NO/' /etc/vsftpd/vsftpd.conf
+    sed -i -e 's/^chroot_local_user=YES.*$/#chroot_local_user=NO/' /etc/vsftpd/vsftpd.conf
     if [[ $is_docker ]]; then
-        sed -i '$d' /etc/vsftpd/vsftpd.conf
+        if [[ ! -z `grep 'background=NO' /etc/vsftpd/vsftpd.conf` ]];then
+            sed -i '$d' /etc/vsftpd/vsftpd.conf
+        fi
     fi
 }
 
-restart_ftp_service()
-{
+restart_ftp_service() {
     if [[ $is_docker ]]; then
         killall vsftpd >/dev/null 2>&1
     else

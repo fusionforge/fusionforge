@@ -31,10 +31,10 @@ $err = '';
 $ftp_dir = forge_get_config('ftp_upload_dir');
 $home_dir = forge_get_config('homedir_prefix');
 
-$res_db = db_query_params('SELECT user_id FROM users WHERE unix_status=$1', array ('A'));
+$res_db = db_query_params('SELECT user_id FROM users WHERE unix_status = $1', array('A'));
 if ($res_db) {
-	while($e = db_fetch_array($res_db)) {
-		$users[] = user_get_object ($e['user_id']) ;
+	while ($e = db_fetch_array($res_db)) {
+		$users[] = user_get_object($e['user_id']);
 	}
 }
 
@@ -54,11 +54,13 @@ foreach ($users as $u) {
 					$cmd = '/bin/mkdir '.$dir;
 					$res = execute($cmd);
 				}
-				$cmd = '/bin/mkdir '.$dir.'/'.$g;
-				$res = execute($cmd);
-				$cmd = '/bin/mount --bind '.$ftp_dir.'/'.$g.' '.$dir.'/'.$g;
-				$res = execute($cmd);
-				//echo 'allow '.$u->getUnixName().' to access at '.$dir.'/'.$g."\n";
+				if ($project->usesFTP()) {
+					$cmd = '/bin/mkdir '.$dir.'/'.$g;
+					$res = execute($cmd);
+					$cmd = '/bin/mount --bind '.$ftp_dir.'/'.$g.' '.$dir.'/'.$g;
+					$res = execute($cmd);
+					//echo 'allow '.$u->getUnixName().' to access at '.$dir.'/'.$g."\n";
+				}
 			}
 		}
 	}
