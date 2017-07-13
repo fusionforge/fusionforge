@@ -138,7 +138,7 @@ if ($set == 'custom') {
 	}
 }
 
-if (is_array($_extra_fields)) {
+if (isset($_extra_fields) && is_array($_extra_fields)) {
 	$keys=array_keys($_extra_fields);
 	foreach ($keys as $key) {
 		if ($_extra_fields[$key] != 'Array') {
