@@ -369,6 +369,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 	 * called by HTTP_WebDAV_Server
 	 *
 	 * @param	array	$options	options passed by previous functions in HTTP_WebDAV_Server
+	 * @return	string
 	 */
 	function DELETE(&$options) {
 		$arr_path = explode('/', rtrim($options['path'], '/'));
