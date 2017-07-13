@@ -47,6 +47,7 @@ $cron_arr = array(
 	'SCM_REPO' => 'scm/create_scm_repos.php',  # 27
 	28 => 'scm/gather_scm_stats.php',
 	'WEB_VHOSTS' => 'web-vhosts/create_vhosts.php',  # 30
+	'FTP_ACCESS' => 'ftp/ftp_create_group_access.php'  #31
 	);
 
 #	 13 => 'cvs.php',
