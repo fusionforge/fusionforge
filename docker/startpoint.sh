@@ -18,7 +18,6 @@
 # You should have received a copy of the GNU General Public License along
 # with FusionForge; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-set -e
 
 __postinstall() {
 /usr/local/share/fusionforge/post-install.d/common/common.sh configure

@@ -26,12 +26,18 @@ configure_ftpd() {
     sed -i -e 's/^anonymous_enable=.*$/anonymous_enable=NO/' /etc/vsftpd/vsftpd.conf
     sed -i -e 's/^#ftpd_banner=.*$/ftpd_banner=Welcome to FusionForge FTP server/' /etc/vsftpd/vsftpd.conf
     sed -i -e 's/^chroot_local_user=.*$/chroot_local_user=YES/' /etc/vsftpd/vsftpd.conf
+    if [[ $is_docker ]]; then
+        sed -i -e 's/^background=.*$/background=NO/' /etc/vsftpd/vsftpd.conf
+    fi
 }
 
 remove_ftpd() {
     sed -i -e 's/^anonymous_enable=NO.*$/anonymous_enable=YES/' /etc/vsftpd/vsftpd.conf
     sed -i -e 's/^ftpd_banner=Welcome.*$/#ftpd_banner=Welcome to blah FTP service./' /etc/vsftpd/vsftpd.conf
     sed -i -e 's/^chroot_local_user=YES.*$/chroot_local_user=NO/' /etc/vsftpd/vsftpd.conf
+    if [[ $is_docker ]]; then
+        sed -i -e 's/^background=NO.*$/background=YES/' /etc/vsftpd/vsftpd.conf
+    fi
 }
 
 restart_ftp_service()
