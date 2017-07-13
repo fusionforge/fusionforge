@@ -201,7 +201,7 @@ unset($GLOBALS['editor_was_set_up']);
 
 	<tr>
 		<td>
-		<label for="hours"><strong><?php echo _('Estimated Hours') . _(': '); ?></strong></label><br />
+		<label for="hours"><strong><?php echo _('Estimated Hours') . _(': '); ?></strong></label>
 		<input id="hours" type="number" name="hours" size="5" value="<?php echo $pt->getHours(); ?>" />
 		</td>
 
@@ -275,7 +275,7 @@ echo '<tr>
 		<td class="align-center">'. report_day_adjust_box() .'</td>
 		<td class="align-center"><input id="time-tracking-hours" type="text" required="required" name="hours" value="" size="3" maxlength="3" /></td>
 		<td class="align-center">'.report_time_category_box('time_code',false).'</td>
-		<td>&nbsp;</td>
+		<td></td>
 		<td class="align-center"><input type="submit" name="add" value="'._('Add').'" /><input type="submit" name="cancel" value="'._('Cancel').'" /></td>
 	</tr>';
 
