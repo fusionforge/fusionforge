@@ -114,7 +114,7 @@ echo '<tr class="noborder">
 	</td>
 	<td colspan="2">
 	</td>
-      </tr>';
+	</tr>';
 echo $HTML->listTableBottom();
 echo $HTML->closeForm();
 if ($select) { ?>
