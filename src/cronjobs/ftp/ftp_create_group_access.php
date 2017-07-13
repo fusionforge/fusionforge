@@ -78,4 +78,3 @@ function execute($cmd) {
 }
 
 cron_entry(31, $err);
-
