@@ -397,7 +397,7 @@ EOS;
  		$countCol = 1;
 
 		$return = '
-			<table cellspacing="10" cellpadding="1" id="advsearch">
+			<table id="advsearch">
 				<tr class="tablecontent">
 					<td colspan="3" class="align-center">
 						<input type="checkbox" class="checkthemall" />'._('Search All').'
