@@ -21,6 +21,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+require dirname(__FILE__).'/../../common/include/env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require $gfcommon.'include/cron_utils.php';
 
@@ -39,7 +40,7 @@ if ($res_db) {
 
 foreach ($users as $u) {
 	$dir = $home_dir.'/'.$u->getUnixName().'/pub';
-	if (is_dir("$home_dir".$u->getUnixName())) {
+	if (is_dir($home_dir.'/'.$u->getUnixName())) {
 		foreach ($u->getGroups() as $project) {
 			$g = $project->getUnixName();
 			if (is_dir($ftp_dir.'/'.$g)) {
@@ -57,7 +58,7 @@ foreach ($users as $u) {
 				$res = execute($cmd);
 				$cmd = '/bin/mount --bind '.$ftp_dir.'/'.$g.' '.$dir.'/'.$g;
 				$res = execute($cmd);
-				echo 'allow '.$u->getUnixName().' to access at '.$dir.'/'.$g."\n";
+				//echo 'allow '.$u->getUnixName().' to access at '.$dir.'/'.$g."\n";
 			}
 		}
 	}
