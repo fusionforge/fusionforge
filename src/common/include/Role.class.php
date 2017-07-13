@@ -40,12 +40,12 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	 * @param	object		$group		The Group object.
 	 * @param	int|bool	$role_id	The role_id.
 	 */
-	function __construct($Group, $role_id = false) {
+	function __construct($group, $role_id = false) {
 		parent::__construct();
-		if (!$Group || !is_object($Group) || $Group->isError()) {
-			$Group = NULL;
+		if (!$group || !is_object($group) || $group->isError()) {
+			$group = NULL;
 		}
-		$this->Group =& $Group;
+		$this->Group =& $group;
 
 		$hook_params = array();
 		$hook_params['role'] =& $this;
@@ -237,7 +237,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 		if (array_key_exists ($name, $this->defaults)) {
 			$arr =& $this->defaults[$name];
 		} else {
-			$arr = array () ;
+			$arr = array();
 		}
 
 		$data = array();
