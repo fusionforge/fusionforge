@@ -75,9 +75,7 @@ class ForumSearchQuery extends SearchQuery {
 	}
 
 	function isRowVisible($row) {
-		return forge_check_perm('forum',
-								$row['group_forum_id'],
-								'read');
+		return forge_check_perm('forum', $row['group_forum_id'], 'read');
 	}
 }
 

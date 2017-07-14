@@ -49,7 +49,7 @@ class TasksSearchQuery extends SearchQuery {
 	 * @param	string 	$sections	sections to search in
 	 * @param	bool	$showNonPublic	flag if private sections are searched too
 	 */
-	function __construct($words, $offset, $isExact, $groupId, $sections=SEARCH__ALL_SECTIONS, $showNonPublic=false) {
+	function __construct($words, $offset, $isExact, $groupId, $sections = SEARCH__ALL_SECTIONS, $showNonPublic = false) {
 		$this->groupId = $groupId;
 		$this->showNonPublic = $showNonPublic;
 
@@ -118,9 +118,7 @@ class TasksSearchQuery extends SearchQuery {
 	}
 
 	function isRowVisible($row) {
-		return forge_check_perm('pm',
-								$row['group_project_id'],
-								'read');
+		return forge_check_perm('pm', $row['group_project_id'], 'read');
 	}
 }
 

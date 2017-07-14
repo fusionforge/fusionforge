@@ -90,9 +90,7 @@ class NewsSearchQuery extends SearchQuery {
 	}
 
 	function isRowVisible($row) {
-		return forge_check_perm('forum',
-								$row['forum_id'],
-								'read');
+		return forge_check_perm('forum', $row['forum_id'], 'read');
 	}
 }
 

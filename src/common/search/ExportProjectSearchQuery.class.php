@@ -62,7 +62,7 @@ class ExportProjectSearchQuery extends SearchQuery {
 	}
 
 	function isRowVisible($row) {
-		return forge_check_perm ('project_read', $row['group_id']);
+		return forge_check_perm('project_read', $row['group_id']);
 	}
 }
 

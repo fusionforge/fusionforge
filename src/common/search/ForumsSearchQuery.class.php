@@ -50,7 +50,7 @@ class ForumsSearchQuery extends SearchQuery {
 	 * @param	string	$sections	sections to search in
 	 * @param	bool	$showNonPublic	flag if private sections are searched too
 	 */
-	function __construct($words, $offset, $isExact, $groupId, $sections=SEARCH__ALL_SECTIONS, $showNonPublic=false) {
+	function __construct($words, $offset, $isExact, $groupId, $sections = SEARCH__ALL_SECTIONS, $showNonPublic = false) {
 		$this->groupId = $groupId;
 		$this->showNonPublic = $showNonPublic;
 
@@ -101,7 +101,7 @@ class ForumsSearchQuery extends SearchQuery {
 	 * @param	boolean	$showNonPublic	if we should consider non public sections
 	 * @return	array
 	 */
-	static function getSections($groupId, $showNonPublic=false) {
+	static function getSections($groupId, $showNonPublic = false) {
 		$sql = 'SELECT group_forum_id, forum_name FROM forum_group_list WHERE group_id = $1 AND ';
 		$sql .= 'group_forum_id NOT IN (SELECT forum_id FROM news_bytes)  ORDER BY forum_name';
 
@@ -117,9 +117,7 @@ class ForumsSearchQuery extends SearchQuery {
 	}
 
 	function isRowVisible($row) {
-		return forge_check_perm('forum',
-								$row['group_forum_id'],
-								'read');
+		return forge_check_perm('forum', $row['group_forum_id'], 'read');
 	}
 }
 
