@@ -148,7 +148,7 @@ class DocsSearchQuery extends SearchQuery {
 	}
 
 	function isRowVisible($row) {
-		return forge_check_perm ('docman', $row['group_id'], 'read');
+		return forge_check_perm('docman', $row['group_id'], 'read');
 	}
 }
 
