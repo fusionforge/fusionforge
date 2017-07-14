@@ -86,7 +86,7 @@ function news_footer($params = array()) {
  * @param bool $show_forum
  * @return string
  */
-function news_show_latest($group_id=0,$limit=10,$show_summaries=true,$allow_submit=true,$flat=false,$tail_headlines=0,$show_forum=true) {
+function news_show_latest($group_id = 0, $limit = 10, $show_summaries = true, $allow_submit = true, $flat = false, $tail_headlines = 0, $show_forum = true) {
 
 	if (!$group_id) {
 		$group_id=forge_get_config('news_group');
