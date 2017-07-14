@@ -72,7 +72,7 @@ if (!$res_new || db_numrows($res_new) < 1) {
 
 	$i = 0;
 	while (($i < 20) && ($row_new = db_fetch_array($res_new))) {
-		if (forge_check_perm('frs', $row_new['group_id'], 'read_public')) {
+		if (forge_check_perm('frs', $row_new['package_id'], 'read')) {
 			$i++;
 			$rows[] = $row_new;
 		}
