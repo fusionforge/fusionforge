@@ -39,4 +39,8 @@ class Widget_HomeTagCloud extends Widget {
 	function isAvailable() {
 		return isset($this->content['title']);
 	}
+
+	function getDescription() {
+		return _('Display tags used by projects to define themself. Tags are classified by frequency of usage.');
+	}
 }

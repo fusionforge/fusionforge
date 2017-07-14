@@ -32,4 +32,8 @@ class Widget_HomeVersion extends Widget {
 		$ff = FusionForge::getInstance();
 		return sprintf(_('%s is running %s version %s'), forge_get_config('forge_name'), $ff->software_name, $ff->software_version);
 	}
+
+	function getDescription() {
+		return _('Display version of Fusionforge used.');
+	}
 }
