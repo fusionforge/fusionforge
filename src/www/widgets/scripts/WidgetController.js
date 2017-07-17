@@ -43,7 +43,7 @@ WidgetBuilderController.prototype =
 						divef.appendTo(jQuery('#td'+divef.attr('id')));
 						divef.draggable({
 							cursor: "move",
-							helper: "clone",
+							helper: "clone"
 						});
 					}
 					tr.parents('table').first().next().remove();
@@ -55,7 +55,7 @@ WidgetBuilderController.prototype =
 						divef.appendTo(jQuery('#td'+divef.attr('id')));
 						divef.draggable({
 							cursor: "move",
-							helper: "clone",
+							helper: "clone"
 						});
 					}
 					jQuery(e).parent().next().remove();
@@ -85,7 +85,7 @@ WidgetBuilderController.prototype =
 						},
 						over: function(event, ui) {
 							ui.helper.css('z-index', 1);
-						},
+						}
 					});
 				newCol.children('div').addClass('layout-manager-column-remove');
 				WidgetBuilderController.prototype.loadRemoveColumn(0, newCol.children('div'));
@@ -114,7 +114,7 @@ WidgetBuilderController.prototype =
 								ui.draggable.find('#x'+ui.draggable.attr('id')).show()},
 							over: function(event, ui) {
 								ui.helper.css('z-index', 1);
-							},
+							}
 						});
 				jQuery(this).parent().parent().append('<div id="fake" class="wb_extrafield" />');
 			}
@@ -122,7 +122,7 @@ WidgetBuilderController.prototype =
 			jQuery(this).parent().appendTo(jQuery('#td'+jQuery(this).parent().attr('id')));
 			jQuery(this).parent().draggable({
 							cursor: "move",
-							helper: "clone",
+							helper: "clone"
 						});
 		});
 	},
