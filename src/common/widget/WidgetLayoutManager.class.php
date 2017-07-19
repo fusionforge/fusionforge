@@ -339,6 +339,7 @@ class WidgetLayoutManager {
 	 *
 	 * @param	int	$owner_id	the id of the newly created tracker
 	 * @param	array	$layoutDescArr  the descriptive array.
+	 * @return	bool	success
 	 */
 	function createLayoutForTrackerFromArray($owner_id, $layoutDescArr) {
 		if (isset($layoutDescArr['rows']) && is_array($layoutDescArr['rows'])) {
@@ -456,6 +457,7 @@ class WidgetLayoutManager {
 	 *
 	 * @param	int	$group_id	the id of the newly created project
 	 * @param	array	$layoutDescArr  the descriptive array.
+	 * @return	bool	success
 	 */
 	function createLayoutForProjectFromArray($group_id, $layoutDescArr) {
 		if (isset($layoutDescArr['rows']) && is_array($layoutDescArr['rows'])) {
@@ -762,9 +764,9 @@ class WidgetLayoutManager {
 	/**
 	 * _displayWidgetsSelectionForm - displays a widget selection form
 	 *
-	 * @param	title		$title
-	 * @param	widgets		$widgets
-	 * @param	used_widgets	$used_widgets
+	 * @param	string	$title			title
+	 * @param	array	$widgets		widgets
+	 * @param	array	$used_widgets	used widgets
 	 * @return	string
 	 */
 	function _displayWidgetsSelectionForm($title, $widgets, $used_widgets) {

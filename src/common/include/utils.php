@@ -379,7 +379,7 @@ function util_result_columns_to_assoc($result, $col_key = 0, $col_val = 1) {
 /**
  * util_result_column_to_array - Takes a result set and turns the optional column into an array
  *
- * @param	int	$result	The result set ID
+ * @param	resource	$result	The result set
  * @param	int	$col	The column
  * @return	array
  *
