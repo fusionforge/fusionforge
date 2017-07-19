@@ -69,7 +69,7 @@ class WidgetLayout {
 									urlparams += '&'+value+'[]='+jQuery(this).attr('id').replace('widget_','');
 									});
 								jQuery.post(urlparams);
-								},
+								}
 							});
 						});
 				/* ]]> */</script>
