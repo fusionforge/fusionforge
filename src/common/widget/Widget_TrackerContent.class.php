@@ -131,7 +131,7 @@ class Widget_TrackerContent extends Widget {
 							<div class="layout-manager-column-remove">x</div>
 							<div class="layout-manager-column-width">
 							'._('Section Title')._(':').'<br  />
-							<input type="text" value="'.htmlspecialchars($extrafieldID[$keys[0]][1]).'" size="20" maxsize="20" /><br />
+							<input type="text" value="'.htmlspecialchars($extrafieldID[$keys[0]][1]).'" size="20" maxlength="20" /><br />
 							<input type="number" value="'.$extrafieldID[$keys[0]][0].'" autocomplete="off" size="1" maxlength="3" />%
 							</div>';
 					$content .= $divEF;
@@ -148,7 +148,7 @@ class Widget_TrackerContent extends Widget {
 				<div class="layout-manager-column-remove">x</div>
 				<div class="layout-manager-column-width">
 				'._('Section Title')._(':').'<br  />
-				<input type="text" value="" size="20" maxsize="20" /><br />
+				<input type="text" value="" size="20" maxlength="20" /><br />
 				<input type="number" value="50" autocomplete="off" size="1" maxlength="3" />%
 				</div>
 				<div id="fake" class="wb_extrafield" style="display: none"></div>
@@ -158,7 +158,7 @@ class Widget_TrackerContent extends Widget {
 				<div class="layout-manager-column-remove">x</div>
 				<div class="layout-manager-column-width">
 				'._('Section Title')._(':').'<br  />
-				<input type="text" value="" size="20" maxsize="20" /><br />
+				<input type="text" value="" size="20" maxlength="20" /><br />
 				<input type="number" value="50" autocomplete="off" size="1" maxlength="3" />%
 				</div>
 				<div id="fake" class="wb_extrafield" style="display: none"></div>
