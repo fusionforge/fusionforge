@@ -48,6 +48,7 @@ require_once $gfcommon.'widget/Widget_ProjectLatestArtifacts.class.php';
 require_once $gfcommon.'widget/Widget_ProjectScmStats.class.php';
 require_once $gfcommon.'widget/Widget_HomeDetailActivityMostActiveProjectWeek.class.php';
 require_once $gfcommon.'widget/Widget_HomeLatestNews.class.php';
+require_once $gfcommon.'widget/Widget_HomeLatestFileReleases.class.php';
 require_once $gfcommon.'widget/Widget_HomeStats.class.php';
 require_once $gfcommon.'widget/Widget_HomeTagCloud.class.php';
 require_once $gfcommon.'widget/Widget_HomeVersion.class.php';
@@ -188,6 +189,9 @@ require_once $gfcommon.'widget/Widget_TrackerSummary.class.php';
 			case 'homedetailactivitymostactiveprojectweek';
 				$o = new Widget_HomeDetailActivityMostActiveProjectWeek();
 				break;
+			case 'homelatestfilereleases':
+				$o = new Widget_HomeLatestFileReleases();
+				break;
 			case 'homerss';
 				$o = new Widget_HomeRss();
 				break;
@@ -321,7 +325,8 @@ require_once $gfcommon.'widget/Widget_TrackerSummary.class.php';
 						);
 				break;
 			case WidgetLayoutManager::OWNER_TYPE_HOME:
-				$widgets = array('hometagcloud', 'homeversion', 'homelatestnews', 'homestats', 'homedetailactivitymostactiveprojectweek', 'homerss');
+				$widgets = array('hometagcloud', 'homeversion', 'homelatestnews', 'homestats', 'homedetailactivitymostactiveprojectweek',
+						'homelatestfilereleases', 'homerss');
 				break;
 			case WidgetLayoutManager::OWNER_TYPE_TRACKER:
 				$widgets = array('trackercontent', 'trackercomment', 'trackerdefaultactions', 'trackergeneral', 'trackermain', 'trackersummary');

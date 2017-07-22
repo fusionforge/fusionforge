@@ -56,6 +56,7 @@ FusionForge 6.X:
 * Widget ProjectlatestArtifact: new widget for project to display the 5 more recent artifacts (TrivialDev)
 * Widget ProjectScmStats: new widget for project to display SCM stats (TrivialDev)
 * Widget HomeRss: new widget for Forge home page to display RSS flow (TrivialDev)
+* Widget HomeLatestFlieReleases: new widget for Forge home page to display 5 latest File releases across the forge (TrivialDev)
 
 FusionForge 6.0.5:
 * Docman: fix XSS attack (Roland Mas)
