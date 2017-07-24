@@ -79,6 +79,7 @@ class Widget_HomeLatestFileReleases extends Widget {
 		} else {
 			$content .= $HTML->information(_('No file releases found'));
 		}
+		$content .= util_make_link('/new/', _('Browse all file releases'));
 		return $content;
 	}
 
