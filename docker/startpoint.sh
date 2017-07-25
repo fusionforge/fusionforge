@@ -19,6 +19,41 @@
 # with FusionForge; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
+__initdb() {
+if [[ ! -d /var/lib/pgsql/backups ]]; then
+    mkdir -p /var/lib/pgsql/backups
+    chown postgres:postgres /var/lib/pgsql/backups
+fi
+if [[ ! -d /var/lib/pgsql/data ]]; then
+    mkdir -p /var/lib/pgsql/data
+    chown postgres:postgres /var/lib/pgsql/data
+    su postgres -c "/usr/bin/initdb -D /var/lib/pgsql/data"
+fi
+su postgres -c "/usr/bin/postgres -D /var/lib/pgsql/data -p 5432 &"
+}
+
+__install() {
+cd /opt/sources/fusionforge/src/ && \
+make && \
+make install-base \
+     install-shell \
+     install-scm \
+     install-ftp \
+     install-plugin-scmcvs \
+     install-plugin-scmsvn \
+     install-plugin-scmgit \
+     install-plugin-blocks \
+     install-plugin-moinmoin \
+     install-plugin-taskboard \
+     install-plugin-message \
+     install-plugin-repositoryapi \
+     install-plugin-mediawiki \
+     install-plugin-compactpreview \
+     install-plugin-headermenu \
+     install-plugin-gravatar \
+     install-plugin-scmhook \
+     install-plugin-webanalytics
+}
 __postinstall() {
 /usr/local/share/fusionforge/post-install.d/common/common.sh configure
 /usr/local/share/fusionforge/post-install.d/web/web.sh rawconfigure
@@ -49,6 +84,8 @@ supervisord -n
 }
 
 # Call all functions
+__initdb
+__install
 __postinstall
 __zzzzlocalini
 __etchost
