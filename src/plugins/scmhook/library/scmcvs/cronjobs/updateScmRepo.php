@@ -86,7 +86,7 @@ class ScmCvsUpdateScmRepo {
 				}
 			}
 
-			$loginfo = "$cvsdir_root/CVSROOT/loginfo";
+			$loginfo = $cvsdir_root.'/CVSROOT/loginfo';
 			if (count($newHooksPostCommit)) {
 				// Befehl in /CVSROOT/loginfo eintragen
 				$content = file_get_contents($loginfo);
@@ -101,10 +101,10 @@ class ScmCvsUpdateScmRepo {
 			} else 	{
 				// Befehl aus /CVSROOT/loginfo entfernen
 				$content = file_get_contents($loginfo);
-				file_put_contents($loginfo, "");
+				file_put_contents($loginfo, '');
 				$oldLines = explode("\n", $content);
 				foreach($oldLines as $line) {
-					if(substr($line, 0, 1) == "#" || strpos($line, "cvs_wrapper.php") === false) {
+					if(substr($line, 0, 1) == '#' || strpos($line, 'cvs_wrapper.php') === false) {
 						file_put_contents($loginfo, "$line\n", FILE_APPEND);
 					}
 				}

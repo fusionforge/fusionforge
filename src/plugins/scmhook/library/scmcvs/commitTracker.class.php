@@ -1,6 +1,6 @@
 <?php
 /**
- * scmhook commitTracker Plugin Class
+ * scmhook CVSCommitTracker Plugin Class
  * Copyright 2014, Philipp Keidel - EDAG Engineering AG
  * Copyright 2017, Franck Villaume - TrivialDev
  *
@@ -38,7 +38,7 @@ class CVSCommitTracker extends scmhook {
 		$this->needcopy = 0;
 		// $filepath = forge_get_config('plugins_path') . '/scmhook/library/' . $this->label . '/hooks/' . $this->unixname . '/post.php';
 		// $this->command = '/usr/bin/php ' . $filepath . ' "$1" "$2"';
-		$filepath = forge_get_config('plugins_path') . '/scmhook/library/' . $this->label . '/hooks/cvs_wrapper.php';
+		$filepath = forge_get_config('plugins_path').'/scmhook/library/'.$this->label.'/hooks/cvs_wrapper.php';
 		$this->command = 'ALL /usr/bin/php '.$filepath.' '.$this->hooktype.' progress %{sVv} $USER';
 	}
 
@@ -46,8 +46,8 @@ class CVSCommitTracker extends scmhook {
 		if ($this->group->usesTracker()) {
 			return true;
 		}
-		$this->disabledMessage = _('Hook not available due to missing dependency: Project not using tracker.');
-		$this->description = "[".$this->disabledMessage."] ".$this->description;
+		$this->disabledMessage = _('Hook not available due to missing dependency')._(': ')._('Project not using tracker.');
+		$this->description = '['.$this->disabledMessage.'] '.$this->description;
 		return false;
 	}
 
@@ -56,20 +56,22 @@ class CVSCommitTracker extends scmhook {
 	}
 
 	function artifact_extra_detail($params) {
+		global $HTML;
 		$DBResult = db_query_params('SELECT * FROM plugin_scmhook_scmcvs_committracker_data_master dm, plugin_scmhook_scmcvs_committracker_data_artifact da
 					WHERE da.group_artifact_id = $1 AND dm.holder_id = da.id ORDER BY cvs_date desc', array($params['artifact_id']));
 		if (!$DBResult) {
-			echo '<p class="error_msg">'._('Unable to retrieve data').'</p>';
+			echo $HTML->error_msg(_('Unable to retrieve data'));
 		} else {
 			$this->getCommitEntries($DBResult, $params['group_id']);
 		}
 	}
 
 	function task_extra_detail($params) {
+		global $HTML;
 		$DBResult = db_query_params ('SELECT * FROM plugin_scmhook_scmcvs_committracker_data_master dm, plugin_scmhook_scmcvs_committracker_data_artifact da
 					WHERE da.project_task_id = $1 AND dm.holder_id = da.id ORDER BY cvs_date desc', array($params['task_id']));
 		if (!$DBResult) {
-			echo '<p class="error_msg">'._('Unable to retrieve data').'</p>';
+			echo $HTML->error_msg(_('Unable to retrieve data'));
 		} else {
 			$this->getCommitEntries($DBResult, $params['group_id']);
 		}
@@ -86,28 +88,30 @@ class CVSCommitTracker extends scmhook {
 		global $HTML;
 		$group = group_get_object($group_id);
 		$Rows= db_numrows($DBResult);
+		$return = '';
 
 		if ($Rows > 0) {
-			echo '<tr><td>';
-			echo '<h2>'._('Related CVS commits').'</h2>';
+			$return .= '<tr><td>';
+			$return .= html_e('h2', array(), _('Related CVS commits'), false);
 
 			$title_arr = $this->getTitleArr();
 			echo $HTML->listTableTop($title_arr);
 
-			for ($i=0; $i<$Rows; $i++) {
-				$Row = db_fetch_array($DBResult);
-				echo '<tr ' . $HTML->boxGetAltRowStyle($i) .'>'.
-					'<td>' . $this->getFileLink($group->getUnixName(), $Row['file'],$Row['actual_version']) . '</td>'.
-					'<td>' . date(_('Y-m-d'), $Row['cvs_date']).'</td>'.
-					'<td>' . $this->getDiffLink($group->getUnixName(), $Row['file'], $Row['prev_version'], $Row['actual_version']) . '</td>'.
-					'<td>' . $this->getActualVersionLink($group->getUnixName(), $Row['file'], $Row['actual_version']) . '</td>
-						<td>' . htmlspecialchars($Row['log_text']).'</td>
-						<td>' . util_make_link_u($Row['author'], user_get_object_by_name($Row['author'])->getId(), $Row['author']) . '</td>
-					</tr>';
+			while ($Row = db_fetch_array($DBResult)) {
+				$cells = array();
+				$cells[][] = $this->getFileLink($group->getUnixName(), $Row['file'],$Row['actual_version']);
+				$cells[][] = date(_('Y-m-d'), $Row['cvs_date']);
+				$cells[][] = $this->getDiffLink($group->getUnixName(), $Row['file'], $Row['prev_version'], $Row['actual_version']);
+				$cells[][] = $this->getActualVersionLink($group->getUnixName(), $Row['file'], $Row['actual_version']);
+				$cells[][] = htmlspecialchars($Row['log_text']);
+				$commituser = user_get_object_by_name($Row['author']);
+				$cells[][] = util_display_user($commituser->getUnixName(), $commituser->getId(), $commituser->getRealname());
+				$return .= $HTML->multiTableRow(array(), $cells);
 			}
-			echo $HTML->listTableBottom();
-			echo '</td></tr>';
+			$return .= $HTML->listTableBottom();
+			$return .= '</td></tr>';
 		}
+		return $return;
 	}
 
 	/**
@@ -138,7 +142,7 @@ class CVSCommitTracker extends scmhook {
 	 *
 	 */
 	function getFileLink($GroupName, $FileName, $LatestRevision) {
-		return util_make_link ('/scm/viewvc.php/'.$FileName . '?root='.$GroupName.'&view=log&rev=' . $LatestRevision, $FileName) ;
+		return util_make_link('/scm/viewvc.php/'.$FileName . '?root='.$GroupName.'&view=log&rev=' . $LatestRevision, $FileName) ;
 	}
 
 	/**
@@ -152,7 +156,7 @@ class CVSCommitTracker extends scmhook {
 	 *
 	 */
 	 function getActualVersionLink($GroupName, $FileName, $Version) {
-		return util_make_link ('/scm/viewvc.php/'.$FileName . '?root='.$GroupName.'&rev='.$Version, $Version);
+		return util_make_link('/scm/viewvc.php/'.$FileName . '?root='.$GroupName.'&rev='.$Version, $Version);
 	}
 
 	/**
@@ -167,8 +171,9 @@ class CVSCommitTracker extends scmhook {
 	 *
 	 */
 	function getDiffLink($GroupName, $FileName, $PrevVersion, $ActualVersion) {
-		if($PrevVersion != 'NONE' && $ActualVersion != 'NONE')
-			return util_make_link ('/scm/viewvc.php/'.$FileName . '?root='.$GroupName.'&r1='.$PrevVersion . '&r2='.$ActualVersion, _('Diff To').' '.$PrevVersion);
+		if($PrevVersion != 'NONE' && $ActualVersion != 'NONE') {
+			return util_make_link('/scm/viewvc.php/'.$FileName . '?root='.$GroupName.'&r1='.$PrevVersion . '&r2='.$ActualVersion, _('Diff To').' '.$PrevVersion);
+		}
 		return _('Wrong situation');
 	}
 }

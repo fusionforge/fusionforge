@@ -1,7 +1,10 @@
 #! /usr/bin/php
 <?php
 /**
- * Copyright (C) 2014 Philipp Keidel - EDAG Engineering AG
+ * Fusionforge Plugin Scmhook scmcvs committracker HTTPPoster
+ *
+ * Copyright 2014, Philipp Keidel - EDAG Engineering AG
+ * Copyrigth 2017, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -35,9 +38,9 @@ require_once $gfcommon.'include/pre.php';
  * @return	string	$Result	Returns artifact.
  */
 function getInvolvedArtifacts($Log) {
-	preg_match_all('/[\[]#[\d]+[\]]/', $Log,  $Matches );
+	preg_match_all('/[\[]#[\d]+[\]]/', $Log,  $Matches);
 	foreach($Matches as $Match) {
-		$Result = preg_replace ('/[[]#([\d]+)[]]/', '\1', $Match);
+		$Result = preg_replace('/[[]#([\d]+)[]]/', '\1', $Match);
 	}
 	return $Result;
 }
@@ -51,9 +54,9 @@ function getInvolvedArtifacts($Log) {
  * @return	string	$Result	Returns artifact.
  */
 function getInvolvedTasks($Log) {
-	preg_match_all('/[\[]T[\d]+[\]]/', $Log,  $Matches );
+	preg_match_all('/[\[]T[\d]+[\]]/', $Log,  $Matches);
 	foreach($Matches as $Match) {
-		$Result = preg_replace ('/[[]T([\d]+)[]]/', '\1', $Match);
+		$Result = preg_replace('/[[]T([\d]+)[]]/', '\1', $Match);
 	}
 	return $Result;
 }
@@ -90,18 +93,16 @@ $tmpname     = $argv[1];
 $stdin       = file_get_contents($tmpname);
 $projectname = $argv[2];
 $username    = $argv[4];
-$misc        = explode(" ", $argv[3], 2); // db\/usersess\/appserver admin_env,1.58,1.59 codecheck,1.16,1.17
+$misc        = explode(' ', $argv[3], 2); // db\/usersess\/appserver admin_env,1.58,1.59 codecheck,1.16,1.17
 $dirpath     = $misc[0];
 
-$files       = explode(" ", $misc[1]);
+$files       = explode(' ', $misc[1]);
 $allfiles    = array();
 
 unlink($tmpname);
 
-echo "dirpath: $dirpath\n";
-
 foreach($files as $file) {
-	$i = explode(",", $file);
+	$i = explode(',', $file);
 	$allfiles[] = array(
 			'filename' => $i[0],
 			'oldrev'   => $i[1],
@@ -125,16 +126,16 @@ $SubmitUrl = util_make_url('/plugins/scmhook/committracker/newcommitcvs.php');
 $SubmitVars = array();
 $i = 0;
 foreach ( $allfiles as $onefile ) {
-	$SubmitVars[$i]["UserName"]        = $username;
-	$SubmitVars[$i]["Repository"]      = $projectname;
-	$SubmitVars[$i]["Directory"]       = $dirpath;
-	$SubmitVars[$i]["FileName"]        = $onefile['filename'];
-	$SubmitVars[$i]["PrevVersion"]     = $onefile['oldrev'];
-	$SubmitVars[$i]["ActualVersion"]   = $onefile['newrev'];
-	$SubmitVars[$i]["Log"]             = $logmessage;
-	$SubmitVars[$i]["TaskNumbers"]     = $tasks_involved;
-	$SubmitVars[$i]["ArtifactNumbers"] = $artifacts_involved;
-	$SubmitVars[$i]["CVSDate"]         = time();
+	$SubmitVars[$i]['UserName']        = $username;
+	$SubmitVars[$i]['Repository']      = $projectname;
+	$SubmitVars[$i]['Directory']       = $dirpath;
+	$SubmitVars[$i]['FileName']        = $onefile['filename'];
+	$SubmitVars[$i]['PrevVersion']     = $onefile['oldrev'];
+	$SubmitVars[$i]['ActualVersion']   = $onefile['newrev'];
+	$SubmitVars[$i]['Log']             = $logmessage;
+	$SubmitVars[$i]['TaskNumbers']     = $tasks_involved;
+	$SubmitVars[$i]['ArtifactNumbers'] = $artifacts_involved;
+	$SubmitVars[$i]['CVSDate']         = time();
 	$i++;
 }
 

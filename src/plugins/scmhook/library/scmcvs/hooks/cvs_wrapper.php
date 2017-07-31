@@ -1,6 +1,8 @@
 #!/usr/bin/php
+<?php
 /**
- * Copyright (C) 2014 Philipp Keidel - EDAG Engineering AG
+ * Copyright 2014, Philipp Keidel - EDAG Engineering AG
+ * Copyright 2017, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -18,26 +20,27 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-<?php
+require_once dirname(__FILE__).'/../../../../../common/include/env.inc.php';
+require_once $gfcommon.'include/pre.php';
 
-$script_name=$argv[1];
+$script_name = $argv[1];
 
-if ( $script_name == "post-commit" ) {
-	$script_path="/usr/share/gforge/plugins/scmhook/library/scmcvs/hooks/committracker/post.php";
+if ($script_name == 'post-commit') {
+	$script_path = forge_get_config('plugins_path').'/scmhook/library/scmcvs/hooks/committracker/post.php';
 } else {
-	echo "Invalid script specified: $script_name";
+	echo _('Invalid script specified')._(': ').$script_name;
 	exit(1);
 }
 
 $args = '';
-for ($i=2; $i<count($argv); $i++) {
+for ($i = 2; $i < count($argv); $i++) {
 	$args .= escapeshellarg($argv[$i]).' ';
 }
 
 $filepath = tempnam("/tmp", "cvswrapper_");
 file_put_contents($filepath, file_get_contents("php://stdin"));
 
-$command = "cd /usr/share/gforge/plugins/ && php $script_path \"$filepath\" $args";
+$command = 'cd '.forge_get_config('plugins_path').' && php '.$script_path.' "'.$filepath.'" '.$args;
 $ouptut = array();
 
 $retval = execute($command, $output);
