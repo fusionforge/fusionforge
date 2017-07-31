@@ -121,7 +121,8 @@ class GitCommitTracker extends scmhook {
 				$cells[][] = $this->getDiffLink($group->getUnixName(), $Row['file'], $Row['prev_version'], $Row['actual_version']);
 				$cells[][] = $this->getActualVersionLink($group->getUnixName(), $Row['file'], $Row['actual_version']);
 				$cells[][] = htmlspecialchars($Row['log_text']);
-				$cells[][] = util_make_link_u($Row['author'], user_get_object_by_name($Row['author'])->getId(), $Row['author']);
+				$commituser = user_get_object_by_name($Row['author']);
+				$cells[][] = util_display_user($commituser->getUnixName(), $commituser->getId(), $commituser->getRealname());
 				$return .= $HTML->multiTableRow(array(), $cells);
 			}
 			$return .= $HTML->listTableBottom();
