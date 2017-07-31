@@ -479,7 +479,7 @@ project independently.");
 		}
 	}
 
-	function displayScmCVSHook($hooksAvailable, $statusDeploy, $hooksEnabled) {
+	function displayScmCVSHook($hooksAvailable, $hooksEnabled) {
 		global $HTML;
 		$hooksPostCommit = array();
 		foreach ($hooksAvailable as $hook) {
@@ -500,7 +500,6 @@ project independently.");
 			$classth = array('unsortable', '', '');
 			echo $HTML->listTableTop($tabletop, false, 'sortable_scmhook_postcommit', 'sortable', $classth);
 			foreach ($hooksPostCommit as $hookPostCommit) {
-				$isdisabled = 0;
 				if (! empty($hookPostCommit->onlyGlobalAdmin) && ! Permission::isGlobalAdmin()) {
 					echo '<tr style="display: none;" ><td>';
 				} else {
@@ -511,12 +510,7 @@ project independently.");
 				if (in_array($hookPostCommit->getClassname(), $hooksEnabled))
 					echo ' checked="checked"';
 
-				if ($statusDeploy) {
-					$isdisabled = 1;
-					echo ' disabled="disabled"';
-				}
-
-				if (!$isdisabled && !$hookPostCommit->isAvailable())
+				if (!$hookPostCommit->isAvailable())
 					echo ' disabled="disabled"';
 
 				echo ' />';
