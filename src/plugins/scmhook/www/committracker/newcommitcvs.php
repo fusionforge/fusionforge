@@ -1,6 +1,6 @@
 <?php
 /**
- * scmhook plugin: CVS commitemail hook
+ * scmhook plugin: CVS committracker hook
  *
  * Copyright 2014, Philipp Keidel - EDAG Engineering AG
  *
@@ -92,8 +92,8 @@ function parseConfig(&$Config) {
 
 	// $repo_root = $repos_path.$GroupName;
 
-	$Result['group']    = group_get_object_by_name($Repository);
-	$Result['user']     = user_get_object_by_name($UserName);
+	$Result['group'] = group_get_object_by_name($Repository);
+	$Result['user']  = user_get_object_by_name($UserName);
 
 	if (!$Result['group'] || !is_object($Result['group']) ||
 		$Result['group']->isError() || !$Result['group']->isActive()) {
@@ -153,11 +153,10 @@ function addArtifactLog($Config, $GroupId, $Num) {
 							$Config['ActualVersion'],
 							$Config['UserName'])) ;
 			if(!$DBRes) {
-				$return['Error']="Problems with Artifact $Num: ".db_error()."\n";
+				$return['Error'] = "Problems with Artifact $Num: ".db_error()."\n";
 				db_rollback();
 			} else {
 				db_commit();
-				$lastID= db_insertid($DBRes,'plugin_scmhook_scmcvs_committracker_data_master','id');
 			}
 		}
 	}
@@ -184,7 +183,7 @@ function addTaskLog($Config, $GroupId, $Num) {
 					AND project_group_list.group_id=$2', array ($Num, $GroupId));
 	$Rows = db_numrows($Result);
 	if ($Rows == 0) {
-		$return['Error'] .= "Task:$Num Not Found.";
+		$return['Error'] .= "Task: $Num Not Found.";
 	}
 	if ($Rows == 1) {
 		db_begin();
@@ -242,4 +241,3 @@ if (isset($Configs) && is_array($Configs)) {
 		}
 	}
 }
-

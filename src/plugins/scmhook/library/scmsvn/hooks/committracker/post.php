@@ -6,7 +6,7 @@
  * Portions Copyright 2004 (c) Roland Mas <99.roland.mas @nospam@ aist.enst.fr>
  * The rest Copyright 2004 (c) Francisco Gimeno <kikov @nospam@ kikov.org>
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2013,2015-2016 Franck Villaume - TrivialDev
+ * Copyright 2013,2015-2017, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -32,17 +32,6 @@
 
 require_once dirname(__FILE__).'/../../../../../../common/include/env.inc.php';
 require_once $gfcommon.'include/pre.php';
-
-/**
- * It returns the usage and exit program
- *
- * @param   string   $argv
- *
- */
-function usage( $argv ) {
-	echo "Usage: $argv[0] <Repository> <Revision> \n";
-	exit(0);
-}
 
 /**
  * It returns a list of involved artifacts.
@@ -81,12 +70,9 @@ function getInvolvedTasks($Log)
 $files = array();
 
 if (count($argv) != 3) {
-    echo <<<USAGE
-Usage: $0 <repository> <revision>
-       This program should be automatically called by SVN
-USAGE;
-
-    exit;
+	echo "Usage: $argv[0] <Repository> <Revision> \n";
+	echo 'This program should be automatically called by SVN';
+	exit(0);
 }
 
 $repository = $argv[1];

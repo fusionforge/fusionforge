@@ -140,13 +140,13 @@ class GitCommitTracker extends scmhook {
 	*
 	*/
 	function getTitleArr($group_id) {
-		$title_arr=array();
-		$title_arr[]=_('File Name').' ('.util_make_link('/scm/browser.php?group_id='.$group_id, _('Browse')).')';
-		$title_arr[]=_('Date');
-		$title_arr[]=_('Previous Version');
-		$title_arr[]=_('Current Version');
-		$title_arr[]=_('Log Message');
-		$title_arr[]=_('Author');
+		$title_arr   = array();
+		$title_arr[] = _('File Name').' ('.util_make_link('/scm/browser.php?group_id='.$group_id, _('Browse')).')';
+		$title_arr[] = _('Date');
+		$title_arr[] = _('Previous Version');
+		$title_arr[] = _('Current Version');
+		$title_arr[] = _('Log Message');
+		$title_arr[] = _('Author');
 		return $title_arr;
 	}
 
