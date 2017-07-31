@@ -2,8 +2,9 @@
 <?php
 /**
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2012-2013, Franck Villaume - TrivialDev
+ * Copyright 2012-2013,2017, Franck Villaume - TrivialDev
  * Copyright 2013, Benoit Debaenst - TrivialDev
+ * Copyright 2014, Philipp Keidel - EDAG Engineering AG
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -132,6 +133,23 @@ function install_hooks($params) {
 				}
 			}
 			break;
+
+		case 'scmcvs': {
+			cron_debug("INFO start updating hooks for project ".$group->getUnixName());
+			require_once $gfplugins.'scmhook/library/'.$scmtype.'/cronjobs/updateScmRepo.php';
+			$scmcvscronjob = new ScmCvsUpdateScmRepo();
+			$params = array();
+			$params['group_id'] = $group_id;
+			$params['hooksString'] = $row['hooks'];
+			$params['scm_root'] = forge_get_config('repos_path', 'scmcvs') . '/' . $group->getUnixName();
+			if ($scmcvscronjob->updateScmRepo($params)) {
+				$res = db_query_params('UPDATE plugin_scmhook set need_update = $1 where id_group = $2', array(0, $group_id));
+				if (!$res) {
+					$returnvalue = false;
+				}
+			}
+			break;
+		}
 
 		default:
 			cron_debug("WARNING No scm plugin found for this project ".$group->getUnixName()." or no cronjobs for this type");

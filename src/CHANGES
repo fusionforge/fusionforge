@@ -22,6 +22,7 @@ FusionForge 6.X:
 * Plugin Blocks: support Markdown syntax. (TrivialDev)
 * Plugin GlobalActivity: forge-wide aggregation for project activities (Roland Mas)
 * Plugin Mediawiki: support activity for public project (TrivialDev)
+* Plugin Scmhook: add CVS commitTracker hook [#700] (Philipp Keidel & TrivialDev)
 * Projects Page: add paging system in full_list and tag_cloud subpages (TrivialDev)
 * SearchEngine: support only FTI queries (TrivialDev)
 * Search: index project tags and use them for search (Roland Mas)

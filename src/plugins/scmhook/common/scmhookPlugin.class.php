@@ -6,6 +6,7 @@
  * Copyright 2012, Benoit Debaenst - TrivialDev
  * Copyright 2012-2014,2017, Franck Villaume - TrivialDev
  * Copyright 2014, Sylvain Beucler - Inria
+ * Copyright 2014, Philipp Keidel - EDAG Engineering AG 
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -211,6 +212,10 @@ project independently.");
 				}
 				case "scmgit": {
 					$this->displayScmGitHook($hooksAvailable, $hooksEnabled);
+					break;
+				}
+				case "scmcvs": {
+					$this->displayScmCVSHook($hooksAvailable, $hooksEnabled);
 					break;
 				}
 				default: {
@@ -423,6 +428,7 @@ project independently.");
 			echo $HTML->listTableBottom();
 		}
 	}
+
 	function displayScmGitHook($hooksAvailable, $hooksEnabled) {
 		global $HTML;
 		$hooksPostReceive = array();
@@ -467,6 +473,66 @@ project independently.");
 				echo $hookPostReceive->getName();
 				echo '</td><td>';
 				echo $hookPostReceive->getDescription();
+				echo '</td></tr>';
+			}
+			echo $HTML->listTableBottom();
+		}
+	}
+
+	function displayScmCVSHook($hooksAvailable, $statusDeploy, $hooksEnabled) {
+		global $HTML;
+		$hooksPostCommit = array();
+		foreach ($hooksAvailable as $hook) {
+			switch ($hook->getHookType()) {
+				case "post-commit": {
+					$hooksPostCommit[] = $hook;
+					break;
+				}
+				default: {
+					//byebye hook.... we do not know you...
+					break;
+				}
+			}
+		}
+		if (count($hooksPostCommit)) {
+			echo html_e('h3', array(), _('post-commit Hooks'));
+			$tabletop = array('', _('Hook Name'), _('Description'));
+			$classth = array('unsortable', '', '');
+			echo $HTML->listTableTop($tabletop, false, 'sortable_scmhook_postcommit', 'sortable', $classth);
+			foreach ($hooksPostCommit as $hookPostCommit) {
+				$isdisabled = 0;
+				if (! empty($hookPostCommit->onlyGlobalAdmin) && ! Permission::isGlobalAdmin()) {
+					echo '<tr style="display: none;" ><td>';
+				} else {
+					echo '<tr><td>';
+				}
+				echo '<input type="checkbox" ';
+				echo 'name="'.$hookPostCommit->getLabel().'_'.$hookPostCommit->getClassname().'" ';
+				if (in_array($hookPostCommit->getClassname(), $hooksEnabled))
+					echo ' checked="checked"';
+
+				if ($statusDeploy) {
+					$isdisabled = 1;
+					echo ' disabled="disabled"';
+				}
+
+				if (!$isdisabled && !$hookPostCommit->isAvailable())
+					echo ' disabled="disabled"';
+
+				echo ' />';
+				if (in_array($hookPostCommit->getClassname(), $hooksEnabled) && $statusDeploy) {
+					echo '<input type="hidden" ';
+					echo 'name="'.$hookPostCommit->getLabel().'_'.$hookPostCommit->getClassname().'" ';
+					echo 'value="on" />';
+				}
+				echo '</td><td';
+				if (!$hookPostCommit->isAvailable())
+					echo ' class="tabtitle-w" title="'.$hookPostCommit->getDisabledMessage().'"';
+
+				echo ' >';
+				echo $hookPostCommit->getName();
+				echo '</td><td>';
+				echo $hookPostCommit->getDescription();
 				echo '</td></tr>';
 			}
 			echo $HTML->listTableBottom();
