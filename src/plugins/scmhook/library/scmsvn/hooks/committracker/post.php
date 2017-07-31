@@ -151,7 +151,7 @@ foreach ($changed as $onefile) {
 $SubmitUrl = util_make_url('/plugins/scmhook/committracker/newcommit.php');
 
 $i = 0;
-foreach ( $files as $onefile ) {
+foreach ($files as $onefile) {
 	$SubmitVars[$i]['UserName']        = $UserName;
 	$SubmitVars[$i]['Repository']      = $repository;
 	$SubmitVars[$i]['FileName']        = $onefile['name'];
@@ -169,8 +169,6 @@ $vars['data'] = urlencode(serialize($SubmitVars));
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $SubmitUrl);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_POSTFIELDS, $vars);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
