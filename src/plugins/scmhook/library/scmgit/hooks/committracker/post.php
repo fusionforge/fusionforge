@@ -182,8 +182,7 @@ if ((!is_array($tasks_involved) || count($tasks_involved) < 1) &&
 }
 
 $i = 0;
-foreach ( $files as $onefile )
-{
+foreach ($files as $onefile) {
 	$SubmitVars[$i]["UserName"]        = $UserName;
 	$SubmitVars[$i]["Email"]           = $email;
 	$SubmitVars[$i]["Repository"]      = $repo_path;
