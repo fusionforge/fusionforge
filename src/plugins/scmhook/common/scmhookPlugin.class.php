@@ -514,7 +514,7 @@ project independently.");
 					echo ' disabled="disabled"';
 
 				echo ' />';
-				if (in_array($hookPostCommit->getClassname(), $hooksEnabled) && $statusDeploy) {
+				if (in_array($hookPostCommit->getClassname(), $hooksEnabled)) {
 					echo '<input type="hidden" ';
 					echo 'name="'.$hookPostCommit->getLabel().'_'.$hookPostCommit->getClassname().'" ';
 					echo 'value="on" />';
