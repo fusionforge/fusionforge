@@ -80,8 +80,8 @@ class CVSCommitTracker extends scmhook {
 	/**
 	 * It display a table with commit related to this tracker or task_extra_detail
 	 *
-	 * @param   string   $Query Query to be executed to get the commit entries.
-	 * @param   integer  $group_id Group_id of the actual Group_id
+	 * @param	string	$Query Query to be executed to get the commit entries.
+	 * @param	int		$group_id Group_id of the actual Group_id
 	 *
 	 */
 	function getCommitEntries($DBResult, $group_id) {
@@ -117,7 +117,7 @@ class CVSCommitTracker extends scmhook {
 	/**
 	 * Return an array with titles of Box to display the entries
 	 *
-	 * @return   Array  The array containing the titles
+	 * @return	array  The array containing the titles
 	 *
 	 */
 	function getTitleArr() {
@@ -134,11 +134,11 @@ class CVSCommitTracker extends scmhook {
 	/**
 	 * Return a link to the File in cvsweb
 	 *
-	 * @param    String  $GroupName is the Name of the project
-	 * @param    String  $FileName  is the FileName ( with path )
-	 * @param 	Int		$LatestRevision	is the last revision for the file
+	 * @param	string  $GroupName is the Name of the project
+	 * @param	string  $FileName  is the FileName ( with path )
+	 * @param	int		$LatestRevision	is the last revision for the file
 	 *
-	 * @return   String  The string containing a link to the File in the cvsweb
+	 * @return	string  The string containing a link to the File in the cvsweb
 	 *
 	 */
 	function getFileLink($GroupName, $FileName, $LatestRevision) {
@@ -146,13 +146,13 @@ class CVSCommitTracker extends scmhook {
 	}
 
 	/**
- 	 * Return a link to the File in viewcvs in the specified Version
+	 * Return a link to the File in viewcvs in the specified Version
 	 *
-	 * @param    String  $GroupName is the Name of the project
-	 * @param    String  $FileName  is the FileName ( with path )
-	 * @param    String  $Version   the version to retrieve
+	 * @param	string  $GroupName is the Name of the project
+	 * @param	string  $FileName  is the FileName ( with path )
+	 * @param	string  $Version   the version to retrieve
 	 *
-	 * @return   String  The string containing a link to the File in the viewcvs
+	 * @return	string  The string containing a link to the File in the viewcvs
 	 *
 	 */
 	 function getActualVersionLink($GroupName, $FileName, $Version) {
@@ -162,12 +162,12 @@ class CVSCommitTracker extends scmhook {
 	/**
 	 * Return a link to the diff between two versions of a File in viewcvs
 	 *
-	 * @param    String  $GroupName is the Name of the project
-	 * @param    String  $FileName  is the FileName ( with path )
-	 * @param    String  $PrevVersion   First version to retrieve
-	 * @param    String  $ActualVersion Second version to retrieve
+	 * @param	string  $GroupName is the Name of the project
+	 * @param	string  $FileName  is the FileName ( with path )
+	 * @param	string  $PrevVersion   First version to retrieve
+	 * @param	string  $ActualVersion Second version to retrieve
 	 *
-	 * @return   String  The string containing a link to the File in the cvsweb
+	 * @return	string  The string containing a link to the File in the cvsweb
 	 *
 	 */
 	function getDiffLink($GroupName, $FileName, $PrevVersion, $ActualVersion) {

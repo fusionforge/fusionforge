@@ -6,7 +6,7 @@
  * Copyright 2012, Benoit Debaenst - TrivialDev
  * Copyright 2012-2014,2017, Franck Villaume - TrivialDev
  * Copyright 2014, Sylvain Beucler - Inria
- * Copyright 2014, Philipp Keidel - EDAG Engineering AG 
+ * Copyright 2014, Philipp Keidel - EDAG Engineering AG
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
