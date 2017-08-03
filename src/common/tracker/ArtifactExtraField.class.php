@@ -52,19 +52,19 @@ define('ARTIFACT_EXTRAFIELDTYPE_EFFORT',21);
 define('ARTIFACT_EXTRAFIELDTYPE_EFFORTRANGE',22);
 define('ARTIFACT_EXTRAFIELDTYPE_PARENT',23);
 
-define ('ARTIFACT_EXTRAFIELDTYPEGROUP_SINGLECHOICE', serialize (array (ARTIFACT_EXTRAFIELDTYPE_SELECT, ARTIFACT_EXTRAFIELDTYPE_RADIO, ARTIFACT_EXTRAFIELDTYPE_STATUS)));
-define ('ARTIFACT_EXTRAFIELDTYPEGROUP_MULTICHOICE', serialize (array (ARTIFACT_EXTRAFIELDTYPE_CHECKBOX, ARTIFACT_EXTRAFIELDTYPE_MULTISELECT)));
-define ('ARTIFACT_EXTRAFIELDTYPEGROUP_CHOICE', serialize (array_merge(unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_SINGLECHOICE), unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_MULTICHOICE))));
-define ('ARTIFACT_EXTRAFIELDTYPEGROUP_SPECALCHOICE', serialize(array(ARTIFACT_EXTRAFIELDTYPE_USER, ARTIFACT_EXTRAFIELDTYPE_RELEASE)));
-define ('ARTIFACT_EXTRAFIELDTYPEGROUP_VALUE', serialize (array (ARTIFACT_EXTRAFIELDTYPE_TEXT,ARTIFACT_EXTRAFIELDTYPE_TEXTAREA,ARTIFACT_EXTRAFIELDTYPE_RELATION,ARTIFACT_EXTRAFIELDTYPE_INTEGER,ARTIFACT_EXTRAFIELDTYPE_FORMULA,ARTIFACT_EXTRAFIELDTYPE_DATETIME, ARTIFACT_EXTRAFIELDTYPE_EFFORT)));
+define('ARTIFACT_EXTRAFIELDTYPEGROUP_SINGLECHOICE', serialize(array(ARTIFACT_EXTRAFIELDTYPE_SELECT, ARTIFACT_EXTRAFIELDTYPE_RADIO, ARTIFACT_EXTRAFIELDTYPE_STATUS)));
+define('ARTIFACT_EXTRAFIELDTYPEGROUP_MULTICHOICE', serialize(array(ARTIFACT_EXTRAFIELDTYPE_CHECKBOX, ARTIFACT_EXTRAFIELDTYPE_MULTISELECT)));
+define('ARTIFACT_EXTRAFIELDTYPEGROUP_CHOICE', serialize(array_merge(unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_SINGLECHOICE), unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_MULTICHOICE))));
+define('ARTIFACT_EXTRAFIELDTYPEGROUP_SPECALCHOICE', serialize(array(ARTIFACT_EXTRAFIELDTYPE_USER, ARTIFACT_EXTRAFIELDTYPE_RELEASE)));
+define('ARTIFACT_EXTRAFIELDTYPEGROUP_VALUE', serialize(array(ARTIFACT_EXTRAFIELDTYPE_TEXT,ARTIFACT_EXTRAFIELDTYPE_TEXTAREA,ARTIFACT_EXTRAFIELDTYPE_RELATION,ARTIFACT_EXTRAFIELDTYPE_INTEGER,ARTIFACT_EXTRAFIELDTYPE_FORMULA,ARTIFACT_EXTRAFIELDTYPE_DATETIME, ARTIFACT_EXTRAFIELDTYPE_EFFORT)));
 
-define ('ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_NO_AGGREGATION', 0);
-define ('ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_SUM', 1);
-define ('ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_STATUS_CLOSE_RESTRICTED', 2);
-define ('ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_STATUS_CLOSE_UPWARDS', 3);
+define('ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_NO_AGGREGATION', 0);
+define('ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_SUM', 1);
+define('ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_STATUS_CLOSE_RESTRICTED', 2);
+define('ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_STATUS_CLOSE_UPWARDS', 3);
 
-define ('ARTIFACT_EXTRAFIELD_DISTRIBUTION_RULE_NO_DISTRIBUTION', 0);
-define ('ARTIFACT_EXTRAFIELD_DISTRIBUTION_RULE_STATUS_CLOSE_RECURSIVELY', 1);
+define('ARTIFACT_EXTRAFIELD_DISTRIBUTION_RULE_NO_DISTRIBUTION', 0);
+define('ARTIFACT_EXTRAFIELD_DISTRIBUTION_RULE_STATUS_CLOSE_RECURSIVELY', 1);
 
 class ArtifactExtraField extends FFError {
 
@@ -145,12 +145,12 @@ class ArtifactExtraField extends FFError {
 			$this->setError(_('Type of custom field not selected'));
 			return false;
 		}
-		if (!forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID())) {
+		if (!forge_check_perm('tracker_admin', $this->ArtifactType->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
 
-		$res = db_query_params ('SELECT field_name FROM artifact_extra_field_list WHERE field_name=$1 AND group_artifact_id=$2',
+		$res = db_query_params('SELECT field_name FROM artifact_extra_field_list WHERE field_name=$1 AND group_artifact_id=$2',
 					array($name,
 					      $this->ArtifactType->getID()));
 		if (db_numrows($res) > 0) {
@@ -173,7 +173,7 @@ class ArtifactExtraField extends FFError {
 				$this->setError(_('This Tracker already uses custom statuses'));
 				return false;
 			}
-		}  elseif ($field_type == ARTIFACT_EXTRAFIELDTYPE_USER) {
+		} elseif ($field_type == ARTIFACT_EXTRAFIELDTYPE_USER) {
 			$show100label='nobody';
 		}
 		$is_required = ($is_required ? 1 : 0);
@@ -187,9 +187,9 @@ class ArtifactExtraField extends FFError {
 		}
 
 		db_begin();
-		$result = db_query_params ('INSERT INTO artifact_extra_field_list (group_artifact_id, field_name, field_type, attribute1, attribute2, is_required, alias, show100, show100label, description, pattern, parent, is_hidden_on_submit, is_disabled, aggregation_rule, distribution_rule)
+		$result = db_query_params('INSERT INTO artifact_extra_field_list (group_artifact_id, field_name, field_type, attribute1, attribute2, is_required, alias, show100, show100label, description, pattern, parent, is_hidden_on_submit, is_disabled, aggregation_rule, distribution_rule)
 			VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16)',
-					   array ($this->ArtifactType->getID(),
+					   array($this->ArtifactType->getID(),
 							  htmlspecialchars($name),
 							  $field_type,
 							  $attribute1,
@@ -254,10 +254,10 @@ class ArtifactExtraField extends FFError {
 //
 //	Must insert some default 100 rows for the data table so None queries will work right
 //
-				$resdefault = db_query_params ('INSERT INTO artifact_extra_field_data(artifact_id,field_data,extra_field_id)
+				$resdefault = db_query_params('INSERT INTO artifact_extra_field_data(artifact_id,field_data,extra_field_id)
 					SELECT artifact_id,100,$1 FROM artifact WHERE group_artifact_id=$2',
-							       array ($id,
-								      $this->ArtifactType->getID())) ;
+							       array($id,
+								      $this->ArtifactType->getID()));
 				if (!$resdefault) {
 					echo db_error();
 				}
@@ -279,8 +279,8 @@ class ArtifactExtraField extends FFError {
 	 */
 	function fetchData($id) {
 		$this->id=$id;
-		$res = db_query_params ('SELECT * FROM artifact_extra_field_list WHERE extra_field_id=$1',
-					array ($id)) ;
+		$res = db_query_params('SELECT * FROM artifact_extra_field_list WHERE extra_field_id=$1',
+					array($id));
 
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError(_('Invalid ArtifactExtraField ID'));
@@ -372,8 +372,8 @@ class ArtifactExtraField extends FFError {
 
 		$id = $this->getID();
 		$return = array();
-		$res = db_query_params ('SELECT extra_field_id FROM artifact_extra_field_list WHERE parent=$1',
-				array ($id)) ;
+		$res = db_query_params('SELECT extra_field_id FROM artifact_extra_field_list WHERE parent=$1',
+				array($id));
 		if (!$res) {
 			$this->setError(_('Invalid ArtifactExtraField ID'));
 			return $return;
@@ -529,15 +529,15 @@ class ArtifactExtraField extends FFError {
 				foreach ($efValues as $efValue) {
 					$value = $efValue['element_id'];
 					if (in_array($value, $default) && !in_array($value, $oldDefault)) {
-						$res = db_query_params ('INSERT INTO artifact_extra_field_default (extra_field_id, default_value) VALUES ($1,$2)',
-								array ($efID, $value)) ;
+						$res = db_query_params('INSERT INTO artifact_extra_field_default (extra_field_id, default_value) VALUES ($1,$2)',
+								array($efID, $value));
 						if (!$res) {
 							$this->setError(_('Unable to set default values')._(':').' '.db_error());
 							$return = false;
 						}
 					} elseif (!in_array($value, $default) && in_array($value, $oldDefault)) {
-						$res = db_query_params ('DELETE FROM artifact_extra_field_default WHERE extra_field_id=$1 AND default_value=$2',
-								array ($efID, $value)) ;
+						$res = db_query_params('DELETE FROM artifact_extra_field_default WHERE extra_field_id=$1 AND default_value=$2',
+								array($efID, $value));
 						if (!$res) {
 							$this->setError(_('Unable to set default values')._(':').' '.db_error());
 							$return = false;
@@ -592,14 +592,14 @@ class ArtifactExtraField extends FFError {
 				$return = $this->resetDefaultValues();
 			} else {
 				$efID = $this->getID();
-				$res = db_query_params ('SELECT default_value FROM artifact_extra_field_default WHERE extra_field_id=$1',
-						array ($efID)) ;
+				$res = db_query_params('SELECT default_value FROM artifact_extra_field_default WHERE extra_field_id=$1',
+						array($efID));
 				if (db_numrows($res) > 0) {
-					$res = db_query_params ('UPDATE artifact_extra_field_default SET default_value = $1 WHERE extra_field_id=$2',
-							array ($default, $efID));
+					$res = db_query_params('UPDATE artifact_extra_field_default SET default_value = $1 WHERE extra_field_id=$2',
+							array($default, $efID));
 				} else {
-					$res = db_query_params ('INSERT INTO artifact_extra_field_default (extra_field_id, default_value) VALUES ($1,$2)',
-							array ($efID, $default)) ;
+					$res = db_query_params('INSERT INTO artifact_extra_field_default (extra_field_id, default_value) VALUES ($1,$2)',
+							array($efID, $default));
 				}
 				if (!$res) {
 					$this->setError(db_error());
@@ -616,8 +616,8 @@ class ArtifactExtraField extends FFError {
 	 * @return	bool
 	 */
 	function resetDefaultValues() {
-		$result = db_query_params ('DELETE FROM artifact_extra_field_default WHERE extra_field_id = $1',
-				array ($this->getID()));
+		$result = db_query_params('DELETE FROM artifact_extra_field_default WHERE extra_field_id = $1',
+				array($this->getID()));
 		if (!$result) {
 			$this->setError(db_error());
 			$return = false;
@@ -634,8 +634,8 @@ class ArtifactExtraField extends FFError {
 	 */
 	function getDefaultValues() {
 		$return = false;
-		$res = db_query_params ('SELECT default_value FROM artifact_extra_field_default WHERE extra_field_id=$1',
-				array ($this->getID()));
+		$res = db_query_params('SELECT default_value FROM artifact_extra_field_default WHERE extra_field_id=$1',
+				array($this->getID()));
 		$type = $this->getType();
 		if (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_VALUE))) {
 			$row = db_fetch_array($res);
@@ -684,8 +684,8 @@ class ArtifactExtraField extends FFError {
 	 */
 	function getFormula() {
 		$return = false;
-		$res = db_query_params ('SELECT id, formula FROM artifact_extra_field_formula WHERE extra_field_id=$1',
-				array ($this->getID()));
+		$res = db_query_params('SELECT id, formula FROM artifact_extra_field_formula WHERE extra_field_id=$1',
+				array($this->getID()));
 		$type = $this->getType();
 		if (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_VALUE))) {
 			if (db_numrows($res) > 0) {
@@ -717,14 +717,14 @@ class ArtifactExtraField extends FFError {
 		} else {
 			$type = $this->getType();
 			$efID = $this->getID();
-			$res = db_query_params ('SELECT id, formula FROM artifact_extra_field_formula WHERE extra_field_id=$1',
-					array ($efID)) ;
+			$res = db_query_params('SELECT id, formula FROM artifact_extra_field_formula WHERE extra_field_id=$1',
+					array($efID));
 			if (db_numrows($res) > 0) {
-				$res = db_query_params ('UPDATE artifact_extra_field_formula SET formula = $1 WHERE extra_field_id=$2',
-						array ($formula, $efID));
+				$res = db_query_params('UPDATE artifact_extra_field_formula SET formula = $1 WHERE extra_field_id=$2',
+						array($formula, $efID));
 			} else {
-				$res = db_query_params ('INSERT INTO artifact_extra_field_formula (extra_field_id, formula) VALUES ($1,$2)',
-						array ($efID, $formula)) ;
+				$res = db_query_params('INSERT INTO artifact_extra_field_formula (extra_field_id, formula) VALUES ($1,$2)',
+						array($efID, $formula));
 			}
 			if (!$res) {
 				$this->setError(db_error());
@@ -740,8 +740,8 @@ class ArtifactExtraField extends FFError {
 	 * @return	bool
 	 */
 	function resetFormula() {
-		$result = db_query_params ('DELETE FROM artifact_extra_field_formula WHERE extra_field_id = $1',
-				array ($this->getID()));
+		$result = db_query_params('DELETE FROM artifact_extra_field_formula WHERE extra_field_id = $1',
+				array($this->getID()));
 		if (!$result) {
 			$this->setError(db_error());
 			$return = false;
@@ -800,7 +800,7 @@ class ArtifactExtraField extends FFError {
 						FROM artifact_extra_field_elements
 						WHERE extra_field_id=$1
 						ORDER BY element_pos ASC, element_id ASC',
-						array ($this->getID()));
+						array($this->getID()));
 			$default = $this->getDefaultValues();
 
 			$return = array();
@@ -864,15 +864,15 @@ class ArtifactExtraField extends FFError {
 			if (count($parentValues)==1 && implode('',$parentValues)=='100' ) {
 				return false;
 			}
-			$res = db_query_params ('SELECT child_element_id FROM artifact_extra_field_elements
+			$res = db_query_params('SELECT child_element_id FROM artifact_extra_field_elements
 										INNER JOIN artifact_extra_field_elements_dependencies ON child_element_id = element_id
 										WHERE extra_field_id=$1 AND parent_element_id IN ($2)',
-					array ($this->getID(), implode(', ', $parentValues)));
+					array($this->getID(), implode(', ', $parentValues)));
 		} else {
-			$res = db_query_params ('SELECT child_element_id FROM artifact_extra_field_elements
+			$res = db_query_params('SELECT child_element_id FROM artifact_extra_field_elements
 										INNER JOIN artifact_extra_field_elements_dependencies ON child_element_id = element_id
 										WHERE extra_field_id=$1 AND parent_element_id=$2',
-					array ($this->getID(), $parentValues));
+					array($this->getID(), $parentValues));
 		}
 		$return = array();
 		while ($row = db_fetch_array($res)) {
@@ -889,8 +889,8 @@ class ArtifactExtraField extends FFError {
 	 * @param	int	$id				id of the field.
 	 */
 	function setRequired($required, $id) {
-		$res = db_query_params ('UPDATE artifact_extra_field_list SET is_required = $1 WHERE extra_field_id = $2',
-				array ($required, $id));
+		$res = db_query_params('UPDATE artifact_extra_field_list SET is_required = $1 WHERE extra_field_id = $2',
+				array($required, $id));
 	}
 
 	/**
@@ -928,7 +928,7 @@ class ArtifactExtraField extends FFError {
 			return false;
 		}
 
-		$res = db_query_params ('SELECT field_name FROM artifact_extra_field_list
+		$res = db_query_params('SELECT field_name FROM artifact_extra_field_list
 				WHERE field_name=$1 AND group_artifact_id=$2 AND extra_field_id !=$3',
 			array($name,
 				$this->ArtifactType->getID(),
@@ -947,7 +947,7 @@ class ArtifactExtraField extends FFError {
 		if (!($alias = $this->generateAlias($alias,$name))) {
 			return false;
 		}
-		$result = db_query_params ('UPDATE artifact_extra_field_list
+		$result = db_query_params('UPDATE artifact_extra_field_list
 			SET field_name = $1,
 			description = $2,
 			attribute1 = $3,
@@ -964,7 +964,7 @@ class ArtifactExtraField extends FFError {
 			distribution_rule = $14
 			WHERE extra_field_id = $15
 			AND group_artifact_id = $16',
-					   array (htmlspecialchars($name),
+					   array(htmlspecialchars($name),
 							  $description,
 							  $attribute1,
 							  $attribute2,
@@ -979,7 +979,7 @@ class ArtifactExtraField extends FFError {
 							  $aggregation_rule,
 							  $distribution_rule,
 							  $this->getID(),
-							  $this->ArtifactType->getID())) ;
+							  $this->ArtifactType->getID()));
 		if ($result && db_affected_rows($result) > 0) {
 			if ($autoassign && !$this->isAutoAssign()) {
 				if (!$this->setAutoAssign()) {
@@ -1020,11 +1020,11 @@ class ArtifactExtraField extends FFError {
 		$result = db_query_params('DELETE FROM artifact_extra_field_data WHERE extra_field_id=$1',
 					   array($this->getID()));
 		if ($result) {
-			$result = db_query_params ('DELETE FROM artifact_extra_field_elements WHERE extra_field_id=$1',
-						   array($this->getID())) ;
+			$result = db_query_params('DELETE FROM artifact_extra_field_elements WHERE extra_field_id=$1',
+						   array($this->getID()));
 			if ($result) {
-				$result = db_query_params ('DELETE FROM artifact_extra_field_list WHERE extra_field_id=$1',
-							   array($this->getID())) ;
+				$result = db_query_params('DELETE FROM artifact_extra_field_list WHERE extra_field_id=$1',
+							   array($this->getID()));
 				if ($result) {
 					if ($this->getType() == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 						if (!$this->ArtifactType->setCustomStatusField(0)) {
@@ -1128,16 +1128,16 @@ class ArtifactExtraField extends FFError {
 		$conflict = false;
 		do {
 			if ($this->data_array['extra_field_id']) {
-				$res = db_query_params ('SELECT * FROM artifact_extra_field_list
+				$res = db_query_params('SELECT * FROM artifact_extra_field_list
                                                          WHERE LOWER (alias)=$1
                                                          AND group_artifact_id=$2
                                                          AND extra_field_id <> $3',
-							array ($alias,
+							array($alias,
 							       $this->ArtifactType->getID(),
-							       $this->data_array['extra_field_id'])) ;
+							       $this->data_array['extra_field_id']));
 			} else {
-				$res = db_query_params ('SELECT * FROM artifact_extra_field_list WHERE LOWER (alias)=$1 AND group_artifact_id=$2',
-							array ($alias,
+				$res = db_query_params('SELECT * FROM artifact_extra_field_list WHERE LOWER (alias)=$1 AND group_artifact_id=$2',
+							array($alias,
 							       $this->ArtifactType->getID()));
 			}
 			if (!$res) {
@@ -1158,7 +1158,7 @@ class ArtifactExtraField extends FFError {
 
 	function updateOrder($element_id, $order) {
 
-		$result=db_query_params ('UPDATE artifact_extra_field_elements
+		$result=db_query_params('UPDATE artifact_extra_field_elements
 				SET element_pos= $1
 				WHERE element_id=$2',
 			array($order,
@@ -1174,7 +1174,7 @@ class ArtifactExtraField extends FFError {
 
 	function reorderValues($element_id, $new_pos) {
 
-		$res = db_query_params ('SELECT element_id FROM artifact_extra_field_elements WHERE extra_field_id=$1 ORDER BY element_pos ASC, element_id ASC',
+		$res = db_query_params('SELECT element_id FROM artifact_extra_field_elements WHERE extra_field_id=$1 ORDER BY element_pos ASC, element_id ASC',
 			array($this->getID()));
 		$max = db_numrows($res);
 		if ($new_pos < 1 || $new_pos > $max) {
@@ -1202,7 +1202,7 @@ class ArtifactExtraField extends FFError {
 	}
 
 	function alphaorderValues() {
-		$res = db_query_params ('SELECT element_id FROM artifact_extra_field_elements WHERE extra_field_id=$1 ORDER BY element_name ASC',
+		$res = db_query_params('SELECT element_id FROM artifact_extra_field_elements WHERE extra_field_id=$1 ORDER BY element_name ASC',
 			array($this->getID()));
 		$i = 1;
 		while ($row = db_fetch_array($res)) {
