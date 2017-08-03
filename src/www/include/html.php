@@ -1442,7 +1442,7 @@ $html_autoclose_pos = 0;
 /**
  * html_ap() - Return XHTML element autoclose stack position
  *
- * @return	integer
+ * @return	int
  */
 function html_ap() {
 	global $html_autoclose_pos;
@@ -1498,8 +1498,7 @@ function html_aonce(&$sptr, $name, $attrs = array()) {
 /**
  * html_ac() - Return proper element XHTML end tags, autoclosing
  *
- * @param	$spos	integer
- *			stack position to return to (nothing is done if === false)
+ * @param	int	$spos	stack position to return to (nothing is done if === false)
  * @throws	Exception
  * @return	string	XHTML string suitable for echo'ing
  */

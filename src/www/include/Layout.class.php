@@ -1303,10 +1303,10 @@ abstract class Layout extends FFError {
 	/**
 	 * paging_top - Display Introduction to paging & form to set the paging preference
 	 *
-	 * @param	integer	$start		start of the list
-	 * @param	integer	$paging		number of element per page
-	 * @param	integer	$totalElements	total number of this type of Elements in the forge
-	 * @param	integer	$maxElements	max number of Elements to display
+	 * @param	int	$start		start of the list
+	 * @param	int	$paging		number of element per page
+	 * @param	int	$totalElements	total number of this type of Elements in the forge
+	 * @param	int	$maxElements	max number of Elements to display
 	 * @param	string	$actionUrl	next / prev Url to click
 	 * @param	array	$htmlAttr	html attributes to set.
 	 * @return	string
@@ -1334,9 +1334,9 @@ abstract class Layout extends FFError {
 	/**
 	 * paging_bottom - Show extra rows for <-- Prev / Next --> at the bottom of the element list
 	 *
-	 * @param	integer	$start		start of the list
-	 * @param	integer	$paging		number of element per page
-	 * @param	integer	$totalElements	total number of Elements to display
+	 * @param	int	$start		start of the list
+	 * @param	int	$paging		number of element per page
+	 * @param	int	$totalElements	total number of Elements to display
 	 * @param	string	$actionUrl	next / prev Url to click
 	 * @return	string
 	 */
