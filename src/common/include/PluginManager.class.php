@@ -225,7 +225,7 @@ class PluginManager extends FFError {
 	 * @param	string	$hookname - name of the hook
 	 * @param	array	$params - array of extra parameters
 	 *
-	 * @return	boolean, true if all returned true.
+	 * @return	bool, true if all returned true.
 	 */
 	function RunHooks($hookname, & $params) {
 		$result = true;

@@ -73,7 +73,7 @@ function frs_show_processor_popup($name = 'processor_id', $checked_val = 'xzxz')
 /**
  * frs_show_release_popup - pop-up select box of packages:releases for this group
  *
- * @param	integer	$group_id	the project id
+ * @param	int	$group_id	the project id
  * @param	string	$name		default value 'processor_id'
  * @param	string	$checked_val	default value 'xzxz'
  * @return	string	html code
@@ -97,7 +97,7 @@ function frs_show_release_popup($group_id, $name = 'release_id', $checked_val = 
 /**
  * frs_show_package_popup - pop-up select box of packages for this group
  *
- * @param	integer	$group_id	the project id
+ * @param	int	$group_id	the project id
  * @param	string	$name		default value 'processor_id'
  * @param	string	$checked_val	default value 'xzxz'
  * @return	string	html code
@@ -120,13 +120,13 @@ function frs_show_package_popup($group_id, $name = 'package_id', $checked_val = 
  * frs_add_file_from_form - helper to add a file from the qrs form which allows multiple possibilities to add a file.
  *
  * @param	object		$release		the release object to which the file belongs
- * @param	integer		$type_id		the file type
- * @param	integer		$processor_id		the processor type
+ * @param	int		$type_id		the file type
+ * @param	int		$processor_id		the processor type
  * @param	string		$release_date		the release date
  * @param	array		$userfile		a new uploaded file
  * @param	string		$ftp_filename		a already uploaded file using ftp
  * @param	string		$manual_filename	a already uploaded file using manual upload
- * @param	integer		$docman_fileid		a doc_id of a already uploaded file using docman
+ * @param	int		$docman_fileid		a doc_id of a already uploaded file using docman
  * @return	bool|string	true on success or string message on error
  */
 function frs_add_file_from_form($release, $type_id, $processor_id, $release_date,

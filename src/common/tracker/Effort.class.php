@@ -26,7 +26,7 @@ require_once $gfcommon.'tracker/EffortUnitFactory.class.php';
 class Effort extends FFError {
 
 	/**
-	 * @var	 integer	value
+	 * @var	 int	value
 	 */
 	private $value;
 
@@ -38,7 +38,7 @@ class Effort extends FFError {
 	/**
 	 * Effort - Effort object constructor
 	 *
-	 * @param	integer
+	 * @param	int
 	 * @param	EffortUnit
 	 */
 	function __construct($value,$effortUnit) {

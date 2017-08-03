@@ -187,7 +187,7 @@ class ArtifactExtraFieldElement extends FFError {
 	 * fetchData - re-fetch the data for this ArtifactExtraFieldElement from the database.
 	 *
 	 * @param	int	$id	ID of the Box.
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function fetchData($id) {
 		$res = db_query_params ('SELECT *, 0 AS is_default FROM artifact_extra_field_elements WHERE element_id=$1',
@@ -271,7 +271,7 @@ class ArtifactExtraFieldElement extends FFError {
 	/**
 	 * getAutoAssignedUser - return id of the user witch issue is auto assign to.
 	 *
-	 * @return	integer user id.
+	 * @return	int user id.
 	 */
 	function getAutoAssignto() {
 		return $this->data_array['auto_assign_to'];
@@ -297,7 +297,7 @@ class ArtifactExtraFieldElement extends FFError {
 	/**
 	 * isDefault - whether this field element is default value or not.
 	 *
-	 * @return	boolean
+	 * @return	bool
 	 */
 	function isDefault() {
 		return $this->data_array['is_default'];
@@ -553,7 +553,7 @@ class ArtifactExtraFieldElement extends FFError {
 	/**
 	 * delete - delete the current value.
 	 *
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function delete() {
 		if (!forge_check_perm ('tracker_admin', $this->ArtifactExtraField->ArtifactType->Group->getID())) {

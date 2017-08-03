@@ -56,7 +56,7 @@ function doc_get_state_box($checkedval = 'xzxz', $removedval = array()) {
  * @param	object	$document_factory
  * @param	int	$docgroup id : default value = 0
  * @param	string	$parent_docname parent name : default value = empty
- * @return	boolean	success or not
+ * @return	bool	success or not
  * @access	public
  */
 function docman_fill_zip($zip, $nested_groups, $document_factory, $docgroup = 0, $parent_docname = '') {

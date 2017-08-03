@@ -28,17 +28,17 @@ require_once $gfcommon.'search/SearchQuery.class.php';
 class TasksSearchQuery extends SearchQuery {
 
 	/**
-	* group id
-	*
-	* @var int $groupId
-	*/
+	 * group id
+	 *
+	 * @var int $groupId
+	 */
 	var $groupId;
 
 	/**
-	* flag if non public items are returned
-	*
-	* @var boolean $showNonPublic
-	*/
+	 * flag if non public items are returned
+	 *
+	 * @var bool $showNonPublic
+	 */
 	var $showNonPublic;
 
 	/**
@@ -100,7 +100,7 @@ class TasksSearchQuery extends SearchQuery {
 	 * getSections - returns the list of available subprojects
 	 *
 	 * @param	int	$groupId	group id
-	 * @param	boolean	$showNonPublic	if we should consider non public sections
+	 * @param	bool	$showNonPublic	if we should consider non public sections
 	 * @return	array
 	 */
 	static function getSections($groupId, $showNonPublic = false) {

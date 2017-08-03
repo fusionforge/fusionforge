@@ -1634,7 +1634,7 @@ function util_save_messages() {
  * @param	string	$path		Path of the file to be created
  * @param	string	$contents	Contents of the file
  *
- * @return	boolean	FALSE on error
+ * @return	bool	false on error
  */
 function util_create_file_with_contents($path, $contents) {
 	if (file_exists($path) && !unlink($path)) {
@@ -1680,7 +1680,7 @@ function util_mkdtemp($suffix = '', $prefix = 'tmp') {
  * @param	string		$username	Unix user name
  * @param	function	$function	function to run (possibly anonymous)
  * @param	array		$params		parameters
- * @return	boolean	true on success, false on error
+ * @return	bool	true on success, false on error
  */
 function util_sudo_effective_user($username, $function, $params=array()) {
 	$userinfo = posix_getpwnam($username);

@@ -45,7 +45,7 @@ class HTTPRequest extends Codendi_Request {
      *
      * This method is useful to test if the current request comes from a form.
      *
-     * @return boolean
+     * @return bool
      */
     function isPost() {
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -58,7 +58,7 @@ class HTTPRequest extends Codendi_Request {
     /**
      * Return true if browser used to submit the request is netscape 4.
      *
-     * @return boolean
+     * @return bool
      */
     function browserIsNetscape4() {
         return browser_is_netscape4();
@@ -81,7 +81,7 @@ class HTTPRequest extends Codendi_Request {
      * Validate file upload.
      *
      * @param  Valid_File Validator for files.
-     * @return Boolean
+     * @return bool
      */
     function validFile(&$validator) {
         if(is_a($validator, 'Valid_File')) {

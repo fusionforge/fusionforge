@@ -248,7 +248,7 @@ class Survey extends FFError {
 	 * delete - use this function to delete this survey
 	 * (We don't support delete yet)
 	 *
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function delete() {
 		$group_id = $this->Group->GetID();
@@ -271,7 +271,7 @@ class Survey extends FFError {
 	 * fetchData - re-fetch the data for this survey from the database.
 	 *
 	 * @param	int	$survey_id The survey_id.
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function fetchData($survey_id) {
 		$group_id = $this->Group->GetID();
@@ -468,7 +468,7 @@ class Survey extends FFError {
 	/**
 	 * _fillSurveyQuestions - Get all Survey Questions using SurveyQuestionFactory
 	 *
-	 * @return	boolean	success
+	 * @return	bool	success
 	 */
 	function _fillSurveyQuestions() {
 		$sqf = new SurveyQuestionFactory($this->getGroup());
@@ -479,7 +479,7 @@ class Survey extends FFError {
 	 * _isValidQuestionID - Check it is correct question id
 	 *
 	 * @param	int	$question_id question id
-	 * @return	boolean	true if it is valid question id
+	 * @return	bool	true if it is valid question id
 	 */
 	function _isValidQuestionID($question_id) {
 		if (!$this->all_question_array || !is_array($this->all_question_array)) {

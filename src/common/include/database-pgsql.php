@@ -556,7 +556,7 @@ function db_result($qhandle, $row, $field) {
  *
  * @param	resource $qhandle	Query result set handle.
  * @param	int	$row		Row number.
- * @return	boolean	True on success
+ * @return	bool	True on success
  */
 function db_result_seek($qhandle, $row) {
 	return @pg_result_seek($qhandle, $row);
@@ -567,7 +567,7 @@ function db_result_seek($qhandle, $row) {
  *
  * @param	resource	$qhandle	Query result set handle.
  * @param	int		$row
- * @return	boolean	True on success
+ * @return	bool	True on success
  */
  //TODO : remove the second param if no one uses it.
 function db_result_reset($qhandle, $row = 0) {

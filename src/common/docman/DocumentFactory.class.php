@@ -54,7 +54,7 @@ class DocumentFactory extends FFError {
 
 	/**
 	 * The doc_group_id limit
-	 * @var	integer	Contains the doc_group id to limit return documents in getDocuments.
+	 * @var	int	Contains the doc_group id to limit return documents in getDocuments.
 	 */
 	var $docgroupid;
 
@@ -74,7 +74,7 @@ class DocumentFactory extends FFError {
 
 	/**
 	 * The limit
-	 * @var	integer	Contains the limit of documents retrieve by getDocuments.
+	 * @var	int	Contains the limit of documents retrieve by getDocuments.
 	 *		Default value is 0 which means NO LIMIT
 	 */
 	var $limit = 0;
@@ -88,7 +88,7 @@ class DocumentFactory extends FFError {
 
 	/**
 	 * The offset
-	 * @var	integer	Contains the offset of the query used to retrive documents using getDocuments.
+	 * @var	int	Contains the offset of the query used to retrive documents using getDocuments.
 	 *		Default value is 0 which means NO OFFSET
 	 */
 	var $offset = 0;
@@ -382,8 +382,7 @@ class DocumentFactory extends FFError {
 	 * getFromStorage - Retrieve documents from storage (database for all informations).
 	 * you can limit query to speed up: warning, once $this->documents is retrieve, it's cached.
 	 *
-	 * @return	boolean	success or not
-	 * @access	private
+	 * @return	bool	success or not
 	 */
 	private function getFromStorage() {
 		$this->Documents = array();

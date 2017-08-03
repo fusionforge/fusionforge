@@ -64,7 +64,7 @@ class pgsql extends System {
 	 * sysUseUnixName() - Check if user/group used the unix_name
 	 *
 	 * @param	string	$unix_name	The unix_name to check
-	 * @return	boolean	true if used/false is free
+	 * @return	bool	true if used/false is free
 	 */
 	function sysUseUnixName($unix_name) {
 		$res1 = db_query_params('SELECT user_id FROM users

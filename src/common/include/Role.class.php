@@ -73,7 +73,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	 * setName - set the name of this role.
 	 *
 	 * @param	string	$role_name	The new name of this role.
-	 * @return	boolean	True if updated OK
+	 * @return	bool	True if updated OK
 	 */
 	function setName($role_name) { // From the PFO spec
 		if ($role_name == '') {
@@ -115,7 +115,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	 * isPublic - is this role public (accessible from projects
 	 * other than its home project)?
 	 *
-	 * @return	boolean	True if public
+	 * @return	bool	True if public
 	 */
 	function isPublic() {	// From the PFO spec
 		return $this->data_array['is_public'];
@@ -124,8 +124,8 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	/**
 	 * setPublic - set the public flag for this role.
 	 *
-	 * @param	boolean	$flag	The new value of the flag.
-	 * @return	boolean	True if updated OK
+	 * @param	bool	$flag	The new value of the flag.
+	 * @return	bool	True if updated OK
 	 */
 	function setPublic($flag) { // From the PFO spec
 		$res = db_query_params('UPDATE pfo_role SET is_public=$1 WHERE role_id=$2',
@@ -227,7 +227,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	/**
 	 * TODO: Enter description here ...
 	 * @param string $name
-	 * @return Ambiguous <number, boolean, contents>|boolean
+	 * @return Ambiguous <number, bool, contents>|bool
 	 */
 	function createDefault($name) {
 		if ($this->Group == NULL) {
@@ -293,7 +293,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	/**
 	 * delete - delete a role in the database.
 	 *
-	 * @return	boolean	True on success or false on failure.
+	 * @return	bool	True on success or false on failure.
 	 */
 	function delete() {
 		if ($this->Group == NULL) {
@@ -355,7 +355,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	 * setUser -
 	 *
 	 * @param	int	User ID
-	 * @return	boolean	True on success or false on failure.
+	 * @return	bool	True on success or false on failure.
 	 */
 	function setUser($user_id) {
 		if ($this->Group == NULL) {

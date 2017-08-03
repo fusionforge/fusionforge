@@ -72,7 +72,7 @@ class DocumentManager extends FFError {
 	/**
 	 * getTrashID - the trash doc_group id for this DocumentManager.
 	 *
-	 * @return	integer	The trash doc_group id.
+	 * @return	int	The trash doc_group id.
 	 */
 	function getTrashID() {
 		if (isset($this->data_array['trashid']))
@@ -98,7 +98,7 @@ class DocumentManager extends FFError {
 	/**
 	 * cleanTrash - delete all items in trash for this DocumentManager
 	 *
-	 * @return	boolean	true on success
+	 * @return	bool	true on success
 	 */
 	function cleanTrash() {
 		$trashId = $this->getTrashID();
@@ -126,7 +126,7 @@ class DocumentManager extends FFError {
 
 	/**
 	 * isTrashEmpty - check if the trash is empty
-	 * @return	boolean	success or not
+	 * @return	bool	success or not
 	 */
 	function isTrashEmpty() {
 		if ($this->Group->usesPlugin('projects-hierarchy')) {

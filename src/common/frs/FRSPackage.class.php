@@ -77,8 +77,8 @@ function frspackage_get_object($package_id, $data = false) {
 /**
  * frspackage_get_groupid - get the project id from a package id
  *
- * @param	integer	$package_id	the package id
- * @return	integer the project id
+ * @param	int	$package_id	the package id
+ * @return	int the project id
  */
 function frspackage_get_groupid($package_id) {
 	$res = db_query_params('SELECT group_id FROM frs_package WHERE package_id=$1',
@@ -148,7 +148,7 @@ class FRSPackage extends FFError {
 	 *
 	 * @param	string 	$name	Name of the package
 	 * @param	int	$status Status ID. Default is 1 => Active
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function create($name, $status = 1) {
 		if (strlen($name) < 3) {
@@ -214,7 +214,7 @@ class FRSPackage extends FFError {
 	 * fetchData - re-fetch the data for this Package from the database.
 	 *
 	 * @param	int	$package_id	The package_id.
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function fetchData($package_id) {
 		$res = db_query_params('SELECT * FROM frs_package WHERE package_id = $1 AND group_id = $2',
@@ -291,7 +291,7 @@ class FRSPackage extends FFError {
 	/**
 	 * isPublic - whether non-group-members can view.
 	 *
-	 * @return	boolean	is_public.
+	 * @return	bool	is_public.
 	 */
 	function isPublic() {
 		$ra = RoleAnonymous::getInstance();
@@ -308,7 +308,7 @@ class FRSPackage extends FFError {
 	/**
 	 * setMonitor - Add the current user to the list of people monitoring this package.
 	 *
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function setMonitor() {
 		if (!session_loggedin()) {
@@ -326,7 +326,7 @@ class FRSPackage extends FFError {
 	/**
 	 * stopMonitor - Remove the current user from the list of people monitoring this package.
 	 *
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function stopMonitor() {
 		if (!session_loggedin()) {
@@ -368,7 +368,7 @@ class FRSPackage extends FFError {
 	/**
 	 * isMonitoring - Is the current user in the list of people monitoring this package.
 	 *
-	 * @return	boolean	is_monitoring.
+	 * @return	bool	is_monitoring.
 	 */
 	function isMonitoring() {
 		if (!session_loggedin()) {
@@ -401,7 +401,7 @@ class FRSPackage extends FFError {
 	 *
 	 * @param	string	$name		The name of this package.
 	 * @param	int	$status		The status_id of this package from frs_status table.
-	 * @return	boolean success.
+	 * @return	bool success.
 	 */
 	function update($name, $status) {
 		if (strlen($name) < 3) {
@@ -545,7 +545,7 @@ class FRSPackage extends FFError {
 	 * getNewestReleaseID - return the newest release_id of a package
 	 * The newest release is the release with the highest ID
 	 *
-	 * @return	integer	release id
+	 * @return	int	release id
 	 */
 	public function getNewestReleaseID() {
 		$result = db_query_params('SELECT MAX(release_id) AS release_id FROM frs_release WHERE package_id = $1',
@@ -576,7 +576,7 @@ class FRSPackage extends FFError {
 	/**
 	 * createReleaseFilesAsZip - create the Zip Archive of the release
 	 *
-	 * @param	integer	release id.
+	 * @param	int	release id.
 	 * @return	bool	true on success even if the php ZipArchive does not exist
 	 */
 	public function createReleaseFilesAsZip($release_id) {
@@ -614,7 +614,7 @@ class FRSPackage extends FFError {
 	/**
 	 * sendNotice - Notifies of package actions
 	 *
-	 * @param	boolean	true = new package (default value)
+	 * @param	bool	true = new package (default value)
 	 * @return	bool
 	 */
 	function sendNotice($new = true) {

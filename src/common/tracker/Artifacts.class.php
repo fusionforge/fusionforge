@@ -75,7 +75,7 @@ class Artifacts extends FFError {
 	 *
 	 * Retrieves an array of artifact objects.
 	 *
-	 * @param	boolean		$offset	Database query offset.
+	 * @param	bool		$offset	Database query offset.
 	 * @return	array|bool	An array of artifact objects on success / false on failure.
 	 */
 	function getArtifacts($offset=false) {

@@ -1026,7 +1026,7 @@ class Group extends FFError {
 	/**
 	 * enableAnonSCM - whether or not this group has opted to enable Anonymous SCM.
 	 *
-	 * @return	boolean	enable_scm.
+	 * @return	bool	enable_scm.
 	 */
 	function enableAnonSCM() {
 		$r = RoleAnonymous::getInstance();
@@ -2475,7 +2475,7 @@ class Group extends FFError {
 	/**
 	 * getMembers - returns array of User objects for this project
 	 *
-	 * @param	boolean	$onlyactive	Only users with state active, or all users of group
+	 * @param	bool	$onlyactive	Only users with state active, or all users of group
 	 * @return array of User objects for this group.
 	 */
 	function getMembers($onlyactive = true) {
@@ -3076,7 +3076,7 @@ class Group extends FFError {
 	 * getUsers - Get the users of a group
 	 *
 	 * @param	bool	$onlylocal
-	 * @param	boolean	$onlyactive	Only users with state active, or all users of group
+	 * @param	bool	$onlyactive	Only users with state active, or all users of group
 	 * @return	array	user's objects.
 	 */
 	function getUsers($onlylocal = true, $onlyactive = true) {
@@ -3172,7 +3172,7 @@ class Group extends FFError {
 
 	/**
 	 *
-	 * @param	integer	$unit_set_id	the effort unit set id
+	 * @param	int	$unit_set_id	the effort unit set id
 	 * @return	bool
 	 */
 	function setEffortUnitSet($unit_set_id) {
@@ -3192,7 +3192,7 @@ class Group extends FFError {
 	/**
 	 * getEffortUnitSet - Get the effort unit set id.
 	 *
-	 * @return	integer	The id of the effort unit set.
+	 * @return	int	The id of the effort unit set.
 	 */
 	function getEffortUnitSet() {
 		return $this->data_array['unit_set_id'];

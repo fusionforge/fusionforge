@@ -47,7 +47,7 @@ class DataAccessObject {
 	 * For INSERT, UPDATE and DELETE queries
 	 * @param string $sql the query string
 	 * @param array  $params The arguments
-	 * @return boolean true if success
+	 * @return bool true if success
 	 */
 	function update($sql,$params) {
 		$result = db_query_params($sql,$params);

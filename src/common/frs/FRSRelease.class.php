@@ -291,7 +291,7 @@ class FRSRelease extends FFObject {
 	/**
 	 * getPreformatted - get the preformatted option of this release.
 	 *
-	 * @return	boolean	preserve_formatting.
+	 * @return	bool	preserve_formatting.
 	 */
 	function getPreformatted() {
 		return $this->data_array['preformatted'];
@@ -309,7 +309,7 @@ class FRSRelease extends FFObject {
 	/**
 	 * sendNotice - the logic to send an email notice for a release.
 	 *
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function sendNotice() {
 		$arr =& $this->FRSPackage->getMonitorIDs();
@@ -438,7 +438,7 @@ class FRSRelease extends FFObject {
 	 * @param	string	The change log for the release.
 	 * @param	int	Whether the notes/log are preformatted with \n chars (1) true (0) false.
 	 * @param	int	The unix date of the release.
-	 * @return	boolean success.
+	 * @return	bool success.
 	 */
 	function update($status, $name, $notes, $changes, $preformatted, $release_date) {
 		if (strlen($name) < 3) {

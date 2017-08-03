@@ -62,7 +62,7 @@ class ArtifactTypes extends FFError {
 	/**
 	 * createTrackers - creates all the standard trackers for a given Group.
 	 *
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function createTrackers() {
 

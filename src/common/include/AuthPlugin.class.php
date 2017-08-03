@@ -208,7 +208,7 @@ abstract class ForgeAuthPlugin extends Plugin {
 	 * startSession - Start a new session for a user
 	 *
 	 * @param	string	$username
-	 * @return	boolean
+	 * @return	bool
 	 */
 	function startSession($username) {
 		if ($this->isSufficient() || $this->isRequired()) {
@@ -235,7 +235,7 @@ abstract class ForgeAuthPlugin extends Plugin {
 
 	/**
 	 * TODO: Enter description here ...
-	 * @return	Ambigous	<Ambigous, NULL, boolean>
+	 * @return	Ambigous	<Ambigous, NULL, bool>
 	 */
 	public function isRequired() {
 		return forge_get_config('required', $this->name);
@@ -243,7 +243,7 @@ abstract class ForgeAuthPlugin extends Plugin {
 
 	/**
 	 * TODO: Enter description here ...
-	 * @return	Ambigous	<Ambigous, NULL, boolean>
+	 * @return	Ambigous	<Ambigous, NULL, bool>
 	 */
 	public function isSufficient() {
 		return forge_get_config('sufficient', $this->name);
@@ -252,7 +252,7 @@ abstract class ForgeAuthPlugin extends Plugin {
 	/**
 	 * TODO: Enter description here ...
 	 * @param	unknown_type	$event
-	 * @return	boolean
+	 * @return	bool
 	 */
 	public function syncDataOn($event) {
 		$configval = forge_get_config('sync_data_on', $this->name);

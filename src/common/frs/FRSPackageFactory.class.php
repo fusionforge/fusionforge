@@ -118,7 +118,7 @@ class FRSPackageFactory extends FFError {
 	/**
 	 * getPermissionOfASpecificUser - get the max level of permission of the current user
 	 *
-	 * @return	integer	the value of permission
+	 * @return	int	the value of permission
 	 *			0 = none
 	 *			1 = read
 	 *			2 = file

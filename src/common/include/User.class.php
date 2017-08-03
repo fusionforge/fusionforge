@@ -515,8 +515,8 @@ class FFUser extends FFError {
 	 *
 	 * Remove the User from all his groups and set his status to D.
 	 *
-	 * @param    boolean    $sure Confirmation of deletion.
-	 * @return    boolean    success or not
+	 * @param	bool    $sure Confirmation of deletion.
+	 * @return	bool    success or not
 	 */
 	function delete($sure) {
 		if (!$sure) {
@@ -664,7 +664,7 @@ class FFUser extends FFError {
 	 * If an update occurred and you need to access the updated info.
 	 *
 	 * @param	int	$user_id	the User ID data to be fetched
-	 * @return	boolean	success;
+	 * @return	bool	success
 	 */
 	function fetchData($user_id) {
 		$res = db_query_params('SELECT * FROM users WHERE user_id=$1',
@@ -713,7 +713,7 @@ class FFUser extends FFError {
 	 * setStatus - set this user's status.
 	 *
 	 * @param	string	$status	Status - P, A, S, or D.
-	 * @return	boolean	success.
+	 * @return	bool	success
 	 */
 	function setStatus($status) {
 
@@ -761,7 +761,7 @@ class FFUser extends FFError {
 	 *
 	 * Database field status of 'A' returns true.
 	 *
-	 * @return	boolean	is_active.
+	 * @return	bool	is_active.
 	 */
 	function isActive() {
 		if ($this->getStatus() == 'A') {
@@ -789,7 +789,7 @@ class FFUser extends FFError {
 	 *                             S    suspended
 	 *                             D    deleted
 	 *
-	 * @return	boolean success.
+	 * @return	bool success
 	 */
 	function setUnixStatus($status) {
 		global $SYS;
@@ -908,7 +908,7 @@ class FFUser extends FFError {
 	 * setEmail - set a new email address, which must be confirmed.
 	 *
 	 * @param	string	$email	The email address.
-	 * @return	boolean	success.
+	 * @return	bool	success
 	 */
 	function setEmail($email) {
 
@@ -960,7 +960,7 @@ class FFUser extends FFError {
 	 *
 	 * @param	string	$email	The email address.
 	 * @param	string	$hash	The email hash.
-	 * @return	boolean	success.
+	 * @return	bool	success
 	 */
 	function setNewEmailAndHash($email, $hash = '') {
 
@@ -1005,8 +1005,8 @@ class FFUser extends FFError {
 	/**
 	 *    setRealName - set the user's real name.
 	 *
-	 * @param string $realname
-	 * @return    string    boolean.
+	 * @param	string $realname
+	 * @return	bool
 	 */
 	function setRealName($realname) {
 		$res = db_query_params('UPDATE users SET realname=$1 WHERE user_id=$2',
@@ -1077,7 +1077,7 @@ class FFUser extends FFError {
 	 * setShell - sets user's preferred shell.
 	 *
 	 * @param	string	$shell	The users preferred shell.
-	 * @return	boolean	success.
+	 * @return	bool	success
 	 */
 	function setShell($shell) {
 		global $SYS;
@@ -1230,7 +1230,7 @@ class FFUser extends FFError {
 	 * addAuthorizedKey - add the SSH authorized key for the user.
 	 *
 	 * @param	string	$key
-	 * @return	boolean	success.
+	 * @return	bool	success
 	 */
 	function addAuthorizedKey($key) {
 		$key = trim($key);
@@ -1285,7 +1285,7 @@ class FFUser extends FFError {
 	/**
 	 * setLoggedIn($val) - Really only used by session code.
 	 *
-	 * @param	boolean	$val	The session value.
+	 * @param	bool	$val	The session value.
 	 */
 	function setLoggedIn($val = true) {
 		$this->is_logged_in = $val;
@@ -1298,7 +1298,7 @@ class FFUser extends FFError {
 	/**
 	 * isLoggedIn - only used by session code.
 	 *
-	 * @return	boolean	is_logged_in.
+	 * @return	bool	is_logged_in.
 	 */
 	function isLoggedIn() {
 		return $this->is_logged_in;
@@ -1308,7 +1308,7 @@ class FFUser extends FFError {
 	 * deletePreference - delete a preference for this user.
 	 *
 	 * @param	string	$preference_name	The unique field name for this preference.
-	 * @return	boolean	success.
+	 * @return	bool	success
 	 */
 	function deletePreference($preference_name) {
 		$preference_name = strtolower(trim($preference_name));
@@ -1323,7 +1323,7 @@ class FFUser extends FFError {
 	 *
 	 * @param	string	$preference_name	The unique field name for this preference.
 	 * @param	string	$value			The value you are setting this preference to.
-	 * @return	boolean	success.
+	 * @return	bool	success
 	 */
 	function setPreference($preference_name, $value) {
 		$preference_name = strtolower(trim($preference_name));
@@ -1401,7 +1401,7 @@ class FFUser extends FFError {
 	 * setPasswd - Changes user's password.
 	 *
 	 * @param	string	$passwd	The plaintext password.
-	 * @return	boolean	success.
+	 * @return	bool	success
 	 */
 	function setPasswd($passwd) {
 		global $SYS;
@@ -1454,7 +1454,7 @@ class FFUser extends FFError {
 	 * setUnixPasswd - Changes user's Unix-hashed password.
 	 *
 	 * @param	string	$unix	The Unix-hashed password.
-	 * @return	boolean	success.
+	 * @return	bool	success
 	 */
 	function setUnixPasswd($unix) {
 		global $SYS;
@@ -1487,7 +1487,7 @@ class FFUser extends FFError {
 	/**
 	 * usesRatings - whether user participates in rating system.
 	 *
-	 * @return	boolean	success.
+	 * @return	bool	success
 	 */
 	function usesRatings() {
 		return !$this->data_array['block_ratings'];
@@ -1496,7 +1496,7 @@ class FFUser extends FFError {
 	/**
 	 * usesTooltips - whether user enables or not tooltips.
 	 *
-	 * @return	boolean	success.
+	 * @return	bool	success
 	 */
 	function usesTooltips() {
 		return $this->data_array['tooltips'];
@@ -1529,7 +1529,7 @@ class FFUser extends FFError {
 	 * usesPlugin - returns true if the user uses a particular plugin
 	 *
 	 * @param	string	$pluginname	name of the plugin
-	 * @return	boolean	whether plugin is being used or not
+	 * @return	bool	whether plugin is being used or not
 	 */
 	function usesPlugin($pluginname) {
 		$plugins_data = $this->getPlugins();
@@ -1545,7 +1545,7 @@ class FFUser extends FFError {
 	 * setPluginUse - enables/disables plugins for the user
 	 *
 	 * @param	string	$pluginname	name of the plugin
-	 * @param	boolean	$val		the new state
+	 * @param	bool	$val		the new state
 	 * @return	string	database result
 	 */
 	function setPluginUse($pluginname, $val = true) {
@@ -1578,7 +1578,7 @@ class FFUser extends FFError {
 	 * getMailingsPrefs - Get activity status for one of the site mailings.
 	 *
 	 * @param	string	$mailing_id	The id of mailing ('mail_va' for community mailings, 'mail_siteupdates' for site mailings)
-	 * @return	boolean	success.
+	 * @return	bool	success
 	 */
 	function getMailingsPrefs($mailing_id) {
 		if ($mailing_id == 'va') {
@@ -1593,8 +1593,8 @@ class FFUser extends FFError {
 	/**
 	 * unsubscribeFromMailings - Disable email notifications for user.
 	 *
-	 * @param	boolean	$all	If false, disable general site mailings, else - all.
-	 * @return	boolean	success.
+	 * @param	bool	$all	If false, disable general site mailings, else - all.
+	 * @return	bool	success
 	 */
 	function unsubscribeFromMailings($all = false) {
 		$res2 = $res3 = true;
@@ -1714,7 +1714,7 @@ class FFUser extends FFError {
 	/**
 	 * setAdminNotification - send an email to all admins (used in verify.php)
 	 *
-	 * @return	boolean	True
+	 * @return	bool	True
 	 */
 	function setAdminNotification() {
 		$admins = RBACEngine::getInstance()->getUsersByAllowedAction('forge_admin', -1);
@@ -1736,7 +1736,7 @@ Email: %3$s
 	 *    isEditable - verify if field name is editable
 	 *
 	 * @param string $fieldName Field name
-	 * @return    boolean
+	 * @return    bool
 	 */
 	function isEditable($fieldName) {
 		if (!isset($this->data_array['uneditable'])) {
@@ -1761,7 +1761,7 @@ Email: %3$s
 	 * isHidden - verify if field name is hidden
 	 *
 	 * @param string $fieldName Field name
-	 * @return    boolean
+	 * @return    bool
 	 */
 	function isHidden($fieldName) {
 		if (!isset($this->data_array['hidden']))
@@ -1778,8 +1778,8 @@ Email: %3$s
 	/**
 	 * setUneditable - set the list of uneditable fields of this user.
 	 *
-	 * @param    array $data	array of uneditable field names
-	 * @return    boolean.
+	 * @param	array $data	array of uneditable field names
+	 * @return	bool
 	 */
 	function setUneditable($data) {
 		if (!is_array($data)) {
@@ -1802,7 +1802,7 @@ Email: %3$s
 	 * setHidden - set the list of hidden fields of this user.
 	 *
 	 * @param array $data Array of hidden field names
-	 * @return    boolean.
+	 * @return    bool
 	 */
 	function setHidden($data) {
 		if (!is_array($data)) {

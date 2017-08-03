@@ -51,7 +51,7 @@ class Validator {
 	/**
 	* Returns true if no null fields have been checked so far
 	*
-	* @return boolean - True if there are no null fields so far
+	* @return bool - True if there are no null fields so far
 	*/
 	function isClean() {
 		return count($this->badfields) == 0;

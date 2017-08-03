@@ -188,7 +188,7 @@ class ArtifactFile extends FFError {
 	/**
 	 * delete - delete this artifact file from the db.
 	 *
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function delete() {
 		if (!forge_check_perm('tracker', $this->Artifact->ArtifactType->getID(), 'tech')) {
@@ -211,7 +211,7 @@ class ArtifactFile extends FFError {
 	 * fetchData - re-fetch the data for this ArtifactFile from the database.
 	 *
 	 * @param	int	$id	The file_id.
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function fetchData($id) {
 		$res = db_query_params ('SELECT * FROM artifact_file_user_vw WHERE id=$1',

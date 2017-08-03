@@ -219,7 +219,7 @@ class FRSFile extends FFError {
 	 * fetchData - re-fetch the data for this FRSFile from the database.
 	 *
 	 * @param	int	$file_id	The file_id.
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function fetchData($file_id) {
 		$res = db_query_params ('SELECT * FROM frs_file_vw WHERE file_id=$1 AND release_id=$2',
@@ -337,7 +337,7 @@ class FRSFile extends FFError {
 	/**
 	 * delete - Delete this file from the database and file system.
 	 *
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function delete() {
 		if (!forge_check_perm('frs', $this->FRSRelease->FRSPackage->getID(), 'file')) {
@@ -380,7 +380,7 @@ class FRSFile extends FFError {
 	 * @param	int		$processor_id	The processor_id of this file from the frs-processor-types table.
 	 * @param	int		$release_time	The release_date of this file in unix time (seconds).
 	 * @param	int|bool	$release_id	The release_id of the release this file belongs to (if not set, defaults to the release id of this file).
-	 * @return	boolean		success.
+	 * @return	bool		success.
 	 */
 	function update($type_id, $processor_id, $release_time, $release_id = false) {
 		if (!forge_check_perm('frs', $this->FRSRelease->FRSPackage->getID(), 'file')) {

@@ -161,7 +161,7 @@ class EffortUnitFactory extends FFError {
 	 * encodedToValue - return the value of an effort expressed in encoded unit.
 	 *
 	 * @param	string	$encoded	encoded effort
-	 * @return	integer	the value of an effort expressed in encoded unit.
+	 * @return	int	the value of an effort expressed in encoded unit.
 	 */
 	function encodedToValue($encoded){
 		$value = 0;
@@ -176,7 +176,7 @@ class EffortUnitFactory extends FFError {
 	 * encodedToValueInBaseUnit - return the value of an effort expressed in base unit.
 	 *
 	 * @param	string	$encoded	encoded effort
-	 * @return	integer	the value of an effort expressed in base unit.
+	 * @return	int	the value of an effort expressed in base unit.
 	 */
 	function encodedToValueInBaseUnit($encoded){
 		$value = 0;
@@ -190,7 +190,7 @@ class EffortUnitFactory extends FFError {
 	 * encodedToUnitId - return the unit id of an encoded effort.
 	 *
 	 * @param	string	$encoded	encoded effort
-	 * @return	integer	the unit id of an encoded effort.
+	 * @return	int	the unit id of an encoded effort.
 	 */
 	function encodedToUnitId($encoded) {
 		if (preg_match('/^(\d+)U(\d+)$/',$encoded,$matches)) {

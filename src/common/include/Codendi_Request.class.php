@@ -97,7 +97,7 @@
 	 * Check if $variable exists in user submitted parameters.
 	 *
 	 * @param string $variable Name of the parameter.
-	 * @return boolean
+	 * @return bool
 	 */
 	function exist($variable) {
 		return $this->_exist($variable, $this->params);
@@ -109,7 +109,7 @@
 	 * @access private
 	 * @param string $variable Name of the parameter.
 	 * @param array	$array
-	 * @return boolean
+	 * @return bool
 	 */
 	function _exist($variable, $array) {
 		return isset($array[$variable]);
@@ -118,7 +118,7 @@
 	 * Apply validator on submitted user value.
 	 *
 	 * @param Valid  Validator to apply
-	 * @return boolean
+	 * @return bool
 	 */
 	function valid(&$validator) {
 		$this->_validated_input[$validator->getKey()] = true;
@@ -129,7 +129,7 @@
 	 * Apply validator on all values of a submitted user array.
 	 *
 	 * @param Valid  Validator to apply
-	 * @return boolean
+	 * @return bool
 	 */
 	function validArray(&$validator) {
 		$this->_validated_input[$validator->getKey()] = true;
@@ -173,7 +173,7 @@
 	 *
 	 * @param string $index Index in the user submitted values where the array stands.
 	 * @param string $validator  Validator to apply
-	 * @return boolean
+	 * @return bool
 	 */
 	function validInArray($index, &$validator) {
 		$this->_validated_input[$index][$validator->getKey()] = true;

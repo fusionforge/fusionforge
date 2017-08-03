@@ -294,7 +294,7 @@ class MailingList extends FFError {
 	/**
 	 * isPublic - Is this mailing list open to the general public.
 	 *
-	 * @return	boolean	is_public.
+	 * @return	bool	is_public.
 	 */
 	function isPublic() {
 		return $this->dataArray['is_public'];
@@ -392,9 +392,9 @@ class MailingList extends FFError {
 	/**
 	 * delete - permanently delete this mailing list
 	 *
-	 * @param	boolean	$sure I'm Sure.
-	 * @param	boolean	$really_sure I'm Really Sure.
-	 * @return	boolean	success;
+	 * @param	bool	$sure I'm Sure.
+	 * @param	bool	$really_sure I'm Really Sure.
+	 * @return	bool	success;
 	 */
 	function delete($sure,$really_sure) {
 

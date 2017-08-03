@@ -141,7 +141,7 @@ class ArtifactMessage extends FFError {
 	 * fetchData - re-fetch the data for this ArtifactMessage from the database.
 	 *
 	 * @param	int	$id	ID of the category.
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function fetchData($id) {
 		$res = db_query_params ('SELECT * FROM artifact_message_user_vw WHERE id=$1',

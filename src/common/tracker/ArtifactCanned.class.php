@@ -114,7 +114,7 @@ class ArtifactCanned extends FFError {
 	 * fetchData - re-fetch the data for this ArtifactCanned from the database.
 	 *
 	 * @param	int	$id The ID number.
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function fetchData($id) {
 		$res = db_query_params ('SELECT * FROM artifact_canned_responses WHERE id=$1',
@@ -169,7 +169,7 @@ class ArtifactCanned extends FFError {
 	 *
 	 * @param	string	$title	Title of the message.
 	 * @param	string	$body	Body of the message.
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function update($title,$body) {
 		if (!forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID())) {
@@ -200,7 +200,7 @@ class ArtifactCanned extends FFError {
 	/**
 	 * delete - delete an ArtifactCanned message.
 	 *
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function delete() {
 		if (!forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID())) {

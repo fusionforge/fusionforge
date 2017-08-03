@@ -210,7 +210,7 @@ class ArtifactQuery extends FFError {
 	 * fetchData - re-fetch the data for this ArtifactQuery from the database.
 	 *
 	 * @param	int	$id	ID of saved query.
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function fetchData($id) {
 			$res = db_query_params ('SELECT * FROM artifact_query WHERE artifact_query_id=$1',
@@ -263,7 +263,7 @@ class ArtifactQuery extends FFError {
 	 * @param	string		$description
 	 * @param	$last_modifier
 	 * @param	$followups
-	 * @return	boolean		True/false on success or not.
+	 * @return	bool		True/false on success or not.
 	 */
 	function insertElements($id,$status,$submitter,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange,$closedaterange,$summary,$description,$followups,$last_modifier) {
 		$res = db_query_params ('DELETE FROM artifact_query_fields WHERE artifact_query_id=$1',
@@ -822,7 +822,7 @@ class ArtifactQuery extends FFError {
 	/**
 	 * makeDefault - set this as the default query
 	 *
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function makeDefault() {
 		if (!session_loggedin()) {
@@ -836,7 +836,7 @@ class ArtifactQuery extends FFError {
 	/**
 	 * delete - delete query
 	 *
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function delete() {
 		if (forge_check_perm ('tracker', $this->ArtifactType->getID(), 'manager')) {

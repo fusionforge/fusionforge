@@ -110,7 +110,7 @@ class WidgetLayoutManager {
 	 *
 	 * @param	int	$owner_id
 	 * @param	string	$owner_type
-	 * @return	boolean	true if the user can update the layout (add/remove widget, collapse, set preferences, ...)
+	 * @return	bool	true if the user can update the layout (add/remove widget, collapse, set preferences, ...)
 	 */
 	function _currentUserCanUpdateLayout($owner_id, $owner_type) {
 		$modify = false;

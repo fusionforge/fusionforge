@@ -463,7 +463,7 @@ abstract class BaseRole extends FFError {
 	 *
 	 * @param	string	$section
 	 * @param	unknown_type	$reference
-	 * @return number|boolean
+	 * @return number|bool
 	 */
 	function getSetting($section, $reference) {
 		$value = $this->getSettingRaw($section, $reference);
@@ -621,8 +621,8 @@ abstract class BaseRole extends FFError {
 	 * getVal - get a value out of the array of settings for this role.
 	 *
 	 * @param	string	$section	The name of the role.
-	 * @param	integer	$ref_id		The ref_id (ex: group_artifact_id, group_forum_id) for this item.
-	 * @return integer	The value of this item.
+	 * @param	int	$ref_id		The ref_id (ex: group_artifact_id, group_forum_id) for this item.
+	 * @return	int	The value of this item.
 	 */
 	function getVal($section, $ref_id) {
 		if (!$ref_id) {
@@ -807,9 +807,9 @@ abstract class BaseRole extends FFError {
 	 *
 	 * @param	string	$role_name	The name of the role.
 	 * @param	array	$data		A multi-dimensional array of data in this format: $data['section_name']['ref_id']=$val
-	 * @param	boolean	$check_perms	Perform permission checking
-	 * @param	boolean	$update_sys	Update system users & groups membership
-	 * @return	boolean	True on success or false on failure.
+	 * @param	bool	$check_perms	Perform permission checking
+	 * @param	bool	$update_sys	Update system users & groups membership
+	 * @return	bool	True on success or false on failure.
 	 */
 	function update($role_name,$data,$check_perms=true,$update_sys=true) {
 		global $SYS;

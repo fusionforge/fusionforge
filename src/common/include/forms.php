@@ -52,7 +52,7 @@ function form_generate_key() {
  * 	it updates the db.
  *
  *	@param	int	$key The key.
- *  @return	boolean	True if the given key is already used. False if not.
+ *  @return	bool	True if the given key is already used. False if not.
  *
  */
 function form_key_is_valid($key) {
@@ -81,7 +81,7 @@ function form_key_is_valid($key) {
  *  form_release_key() - Releases the given key if it is already used. If the given key it's not in the db, it returns false.
  *
  *	@param	int	$key The key.
- *  @return	boolean	True if the given key is successfully released. False if not.
+ *  @return	bool	True if the given key is successfully released. False if not.
  *
  */
 function form_release_key($key) {

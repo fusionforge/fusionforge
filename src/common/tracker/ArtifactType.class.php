@@ -289,7 +289,7 @@ class ArtifactType extends FFError {
 	 * fetchData - re-fetch the data for this ArtifactType from the database.
 	 *
 	 * @param	int	$artifact_type_id	The artifact type ID.
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function fetchData($artifact_type_id) {
 		$this->voters = false;
@@ -366,7 +366,7 @@ class ArtifactType extends FFError {
 	/**
 	 * emailAll - determine if we're supposed to email on every event.
 	 *
-	 * @return	boolean	email_all.
+	 * @return	bool	email_all.
 	 */
 	function emailAll() {
 		return $this->data_array['email_all_updates'];
@@ -467,7 +467,7 @@ class ArtifactType extends FFError {
 	 * setCustomStatusField - set the extra_field_id of the field containing the custom status.
 	 *
 	 * @param	int	$extra_field_id	The extra field id.
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function setCustomStatusField($extra_field_id) {
 		$res = db_query_params('UPDATE artifact_group_list SET custom_status_field=$1
@@ -491,7 +491,7 @@ class ArtifactType extends FFError {
 	 * setAutoAssignField - set the extra_field_id of the field that triggers auto-assignment rules.
 	 *
 	 * @param	int	$extra_field_id	The extra field id.
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function setAutoAssignField($extra_field_id) {
 		$res = db_query_params('UPDATE artifact_group_list SET auto_assign_field=$1
@@ -505,7 +505,7 @@ class ArtifactType extends FFError {
 	/**
 	 * usesCustomStatuses - boolean
 	 *
-	 * @return	boolean	use_custom_statues.
+	 * @return	bool	use_custom_statues.
 	 */
 	function usesCustomStatuses() {
 		return $this->getCustomStatusField();
@@ -773,7 +773,7 @@ class ArtifactType extends FFError {
 	 *
 	 * @param	int	$clone_tracker_id	id of the cloned tracker
 	 * @param	array	$id_mappings		array mapping between template objects and new project objects
-	 * @return	boolean	true/false on success
+	 * @return	bool	true/false on success
 	 */
 	function cloneFieldsFrom($clone_tracker_id, $id_mappings = array()) {
 		$at = artifactType_get_object($clone_tracker_id);
@@ -1438,7 +1438,7 @@ class ArtifactType extends FFError {
 	 * setBrowseList - set the list of columns in browse page.
 	 *
 	 * @param	string	$list	string comma separated of ids of custom field and names of internal fields.
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function setBrowseList($list) {
 		$res = db_query_params('UPDATE artifact_group_list
@@ -1486,7 +1486,7 @@ class ArtifactType extends FFError {
 
 	/**
 	 *
-	 * @param	integer	$unit_set_id	the effort unit set id
+	 * @param	int	$unit_set_id	the effort unit set id
 	 * @return	bool
 	 */
 	function setEffortUnitSet($unit_set_id) {
@@ -1506,7 +1506,7 @@ class ArtifactType extends FFError {
 	/**
 	 * getEffortUnitSet - Get the effort unit set id.
 	 *
-	 * @return	integer	The id of the effort unit set.
+	 * @return	int	The id of the effort unit set.
 	 */
 	function getEffortUnitSet() {
 		return $this->data_array['unit_set_id'];

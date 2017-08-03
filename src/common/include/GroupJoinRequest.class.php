@@ -91,7 +91,7 @@ class GroupJoinRequest extends FFError {
 	 * @param	int	$user_id	user_id.
 	 * @param	string	$comments	comments.
 	 * @param	bool	$send_email	whether to send an email to the admin(s)
-	 * @return	boolean	Success.
+	 * @return	bool	Success.
 	 */
 	function create($user_id, $comments, $send_email = true) {
 		$v = new Validator();
@@ -150,7 +150,7 @@ class GroupJoinRequest extends FFError {
 	 *
 	 * @param	int	$group_id	The group_id.
 	 * @param	int	$user_id	The user_id.
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function fetchData($group_id, $user_id) {
 		$res = db_query_params('SELECT * FROM group_join_request WHERE user_id=$1 AND group_id=$2',
@@ -213,7 +213,7 @@ class GroupJoinRequest extends FFError {
 	/**
 	 * sendJoinNotice() - send mail notification to project admin when user requests to join the project
 	 *
-	 * @return	boolean	true/false.
+	 * @return	bool	true/false.
 	 */
 	function sendJoinNotice() {
 		$user =& session_get_user();
@@ -248,7 +248,7 @@ class GroupJoinRequest extends FFError {
 	/**
 	 * reject() - reject the join and send a notification to the user
 	 *
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function reject() {
 		$user = user_get_object($this->getUserId());
@@ -276,8 +276,8 @@ class GroupJoinRequest extends FFError {
 	/**
 	 * delete() - delete this row from the database.
 	 *
-	 * @param	boolean	$sure	I'm Sure.
-	 * @return	boolean	true/false.
+	 * @param	bool	$sure	I'm Sure.
+	 * @return	bool	true/false.
 	 */
 	function delete($sure) {
 		if (!$sure) {

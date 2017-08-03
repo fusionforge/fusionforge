@@ -275,7 +275,7 @@ class ArtifactExtraField extends FFError {
 	 * fetchData - re-fetch the data for this ArtifactExtraField from the database.
 	 *
 	 * @param	int	$id ID of the Box.
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function fetchData($id) {
 		$this->id=$id;
@@ -446,7 +446,7 @@ class ArtifactExtraField extends FFError {
 	/**
 	 * isRequired - whether this field is required or not.
 	 *
-	 * @return	boolean	required.
+	 * @return	bool	required.
 	 */
 	function isRequired() {
 		return $this->data_array['is_required'];
@@ -455,7 +455,7 @@ class ArtifactExtraField extends FFError {
 	/**
 	 * isHiddenOnSubmit - whether this field is hidden on a new submission or not.
 	 *
-	 * @return	boolean	required.
+	 * @return	bool	required.
 	 */
 	function isHiddenOnSubmit() {
 		return $this->data_array['is_hidden_on_submit'];
@@ -464,7 +464,7 @@ class ArtifactExtraField extends FFError {
 	/**
 	 * isDisabled - whether this field is disabled or not.
 	 *
-	 * @return	boolean	required.
+	 * @return	bool	required.
 	 */
 	function isDisabled() {
 		return $this->data_array['is_disabled'];
@@ -473,7 +473,7 @@ class ArtifactExtraField extends FFError {
 	/**
 	 * isAutoAssign
 	 *
-	 * @return	boolean	assign.
+	 * @return	bool	assign.
 	 */
 	function isAutoAssign() {
 		if ($this->getArtifactType()->getAutoAssignField() == $this->getID()) {
@@ -487,7 +487,7 @@ class ArtifactExtraField extends FFError {
 	/**
 	 * setAutoAssign - set this field that triggers auto-assignment rules.
 	 *
-	 * @return	boolean
+	 * @return	bool
 	 */
 	function setAutoAssign() {
 		return $this->getArtifactType()->setAutoAssignField($this->getID());
@@ -496,7 +496,7 @@ class ArtifactExtraField extends FFError {
 	/**
 	 * unsetAutoAssign - unset this field that triggers auto-assignment rules.
 	 *
-	 * @return	boolean
+	 * @return	bool
 	 */
 	function unsetAutoAssign() {
 		return $this->getArtifactType()->setAutoAssignField(100);
@@ -505,8 +505,8 @@ class ArtifactExtraField extends FFError {
 	/**
 	 * setDefaultValues - set default value(s) for this field.
 	 *
-	 * @param	string|integer|array	$default	default value, default id value, or array of default values.
-	 * @return	boolean
+	 * @param	string|int|array	$default	default value, default id value, or array of default values.
+	 * @return	bool
 	 */
 	function setDefaultValues($default) {
 		$type = $this->getType();
@@ -613,7 +613,7 @@ class ArtifactExtraField extends FFError {
 	/**
 	 * resetDefaultValues - reset default value(s) for this field.
 	 *
-	 * @return	boolean
+	 * @return	bool
 	 */
 	function resetDefaultValues() {
 		$result = db_query_params ('DELETE FROM artifact_extra_field_default WHERE extra_field_id = $1',
@@ -630,7 +630,7 @@ class ArtifactExtraField extends FFError {
 	/**
 	 * getDefaultValues - Get default value, id of default value or list of id of default values for this extra field
 	 *
-	 * @return	string|integer|array
+	 * @return	string|int|array
 	 */
 	function getDefaultValues() {
 		$return = false;
@@ -737,7 +737,7 @@ class ArtifactExtraField extends FFError {
 	/**
 	 * resetFormula - reset formula
 	 *
-	 * @return	boolean
+	 * @return	bool
 	 */
 	function resetFormula() {
 		$result = db_query_params ('DELETE FROM artifact_extra_field_formula WHERE extra_field_id = $1',

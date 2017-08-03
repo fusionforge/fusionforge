@@ -289,7 +289,7 @@ class Document extends FFObject {
 	 * fetchData() - re-fetch the data for this document from the database.
 	 *
 	 * @param	int	$docid	The document id.
-	 * @return	boolean	success
+	 * @return	bool	success
 	 */
 	function fetchData($docid) {
 		$res = db_query_params('SELECT * FROM docdata_vw WHERE docid=$1 AND group_id=$2',
@@ -344,7 +344,7 @@ class Document extends FFObject {
 	/**
 	 * isURL - whether this document is a URL and not a local file.
 	 *
-	 * @return	boolean	is_url.
+	 * @return	bool	is_url.
 	 */
 	function isURL() {
 		return ($this->data_array['filetype'] == 'URL');
@@ -353,7 +353,7 @@ class Document extends FFObject {
 	/**
 	 * isText - whether this document is a text document and not a binary one.
 	 *
-	 * @return	boolean	is_text.
+	 * @return	bool	is_text.
 	 */
 	function isText() {
 		$doctype = $this->data_array['filetype'];
@@ -366,7 +366,7 @@ class Document extends FFObject {
 	/**
 	 * isHtml - whether this document is a html document.
 	 *
-	 * @return	boolean	is_html.
+	 * @return	bool	is_html.
 	 */
 	function isHtml() {
 		$doctype = $this->data_array['filetype'];
@@ -379,7 +379,7 @@ class Document extends FFObject {
 	/**
 	 * isPublic - whether this document is available to the general public.
 	 *
-	 * @return	boolean	is_public.
+	 * @return	bool	is_public.
 	 */
 	function isPublic() {
 		return (($this->data_array['stateid'] == 1) ? true : false);
@@ -486,7 +486,7 @@ class Document extends FFObject {
 	/**
 	 * getFileData - the filedata of this document.
 	 *
-	 * @param	boolean	$download	update the download flag or not. default is true
+	 * @param	bool	$download	update the download flag or not. default is true
 	 * @return	string	The filedata.
 	 */
 	function getFileData($download = true) {
@@ -633,7 +633,7 @@ class Document extends FFObject {
 	 * removeMonitoredBy - remove this document for a specific user id for monitoring.
 	 *
 	 * @param	int	$userid	User ID
-	 * @return	boolean	true if success
+	 * @return	bool	true if success
 	 */
 	function removeMonitoredBy($userid) {
 		$MonitorElementObject = new MonitorElement('docdata');
@@ -648,7 +648,7 @@ class Document extends FFObject {
 	 * addMonitoredBy - add this document for a specific user id for monitoring.
 	 *
 	 * @param	int	$userid	User ID
-	 * @return	boolean	true if success
+	 * @return	bool	true if success
 	 */
 	function addMonitoredBy($userid) {
 		$MonitorElementObject = new MonitorElement('docdata');
@@ -662,7 +662,7 @@ class Document extends FFObject {
 	/**
 	 * clearMonitor - remove all entries of monitoring for this document.
 	 *
-	 * @return	boolean	true if success.
+	 * @return	bool	true if success.
 	 */
 	function clearMonitor() {
 		$MonitorElementObject = new MonitorElement('docdata');
@@ -677,7 +677,7 @@ class Document extends FFObject {
 	 * setState - set the stateid of the document.
 	 *
 	 * @param	int	$stateid	The state id of the doc_states table.
-	 * @return	boolean	success or not.
+	 * @return	bool	success or not.
 	 */
 	function setState($stateid) {
 		return $this->setValueinDB(array('stateid'), array($stateid));
@@ -688,7 +688,7 @@ class Document extends FFObject {
 	 * setDocGroupID - set the doc_group of the document.
 	 *
 	 * @param	int	$newdocgroupid	The group_id of this document.
-	 * @return	boolean	success or not.
+	 * @return	bool	success or not.
 	 */
 	function setDocGroupID($newdocgroupid) {
 		return $this->setValueinDB(array('doc_group'), array($newdocgroupid));
@@ -720,7 +720,7 @@ class Document extends FFObject {
 	 *
 	 * @param	int	$statusReserved	The status of the reserved
 	 * @param	int	$idReserver	The ID of the owner : by default : noone
-	 * @return	boolean	success
+	 * @return	bool	success
 	 */
 	function setReservedBy($statusReserved, $idReserver = NULL) {
 		$colArr = array('reserved', 'reserved_by');
@@ -846,7 +846,7 @@ class Document extends FFObject {
 	 * @param	array	$importData		Array of data to change creator, time of creation, bypass permission check and do not send notification like:
 	 *						array('user' => 127, 'time' => 1234556789, 'nopermcheck' => 1, 'nonotice' => 1)
 	 * @param	string	$vcomment		The comment of this version
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function update($filename, $filetype, $data, $doc_group, $title, $description, $stateid, $version = 1, $current_version = 1, $new_version = 0, $importData = array(), $vcomment = '') {
 
@@ -993,7 +993,7 @@ class Document extends FFObject {
 	/**
 	 * sendNotice - Notifies of document submissions
 	 *
-	 * @param	boolean	true = new document (default value)
+	 * @param	bool	true = new document (default value)
 	 * @return	bool
 	 */
 	function sendNotice($new = true) {
@@ -1033,7 +1033,7 @@ class Document extends FFObject {
 	/**
 	 * sendApprovalNotice - send email to project admin for pending documents.
 	 *
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function sendApprovalNotice() {
 		if ($this->getStateID() != 3)
@@ -1081,7 +1081,7 @@ class Document extends FFObject {
 	/**
 	 * delete - Delete this file
 	 *
-	 * @return	boolean	success
+	 * @return	bool	success
 	 */
 	function delete() {
 		$perm =& $this->Group->getPermission();
@@ -1121,7 +1121,7 @@ class Document extends FFObject {
 	/**
 	 * trash - move this file to trash
 	 *
-	 * @return	boolean	success or not.
+	 * @return	bool	success or not.
 	 */
 	function trash() {
 		if (!$this->getLocked() || ((time() - $this->getLockdate()) > 600)) {
@@ -1159,8 +1159,7 @@ class Document extends FFObject {
 	 *
 	 * @param	array	$colArr	the columns to update in array form array('col1', col2')
 	 * @param	array	$valArr	the values to store in array form array('val1', 'val2')
-	 * @return	boolean	success or not
-	 * @access	private
+	 * @return	bool	success or not
 	 */
 	private function setValueinDB($colArr, $valArr) {
 		if ((count($colArr) != count($valArr)) || !count($colArr) || !count($valArr)) {

@@ -173,7 +173,7 @@ class ForumFactory extends FFError {
 	 *
 	 * Note: old forum ID is useless if forum_agg_msg_count table is no longer used
 	 *
-	 * @return boolean success.
+	 * @return bool success.
 	 */
 	function moveThread($group_forum_id,$thread_id,$old_forum_id = false) {
 		$res = db_query_params('UPDATE forum SET group_forum_id=$1 WHERE thread_id=$2',

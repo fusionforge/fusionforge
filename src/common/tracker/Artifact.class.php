@@ -142,7 +142,7 @@ class Artifact extends FFObject {
 	/**
 	 * Database result set of parent
 	 *
-	 * @var	integer|boolean	$parent
+	 * @var	int|bool	$parent
 	 */
 	var $parent;
 

@@ -331,7 +331,7 @@ class Rule_File extends Rule {
 	 * Check file upload validity
 	 *
 	 * @param string $file
-	 * @return boolean Is file upload valid or not.
+	 * @return bool Is file upload valid or not.
 	 */
 	function isValid($file) {
 		$ok = false;

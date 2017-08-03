@@ -39,7 +39,7 @@ class DocsSearchQuery extends SearchQuery {
 	/**
 	* flag if non public items are returned
 	*
-	* @var boolean $showNonPublic
+	* @var bool $showNonPublic
 	*/
 	var $showNonPublic;
 
@@ -123,7 +123,7 @@ class DocsSearchQuery extends SearchQuery {
 	 * getSections - returns the list of available doc groups
 	 *
 	 * @param	$groupId	int group id
-	 * @param	$showNonPublic	boolean if we should consider non public sections
+	 * @param	$showNonPublic	bool if we should consider non public sections
 	 * @return	array
 	 */
 	static function getSections($groupId, $showNonPublic = false) {

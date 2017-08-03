@@ -122,7 +122,7 @@ class SurveyQuestion extends FFError {
 	 *					4: Comment Only
 	 *					5: Text Field
 	 *					6: None
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function update($question, $question_type = 1) {
 		if (strlen($question) < 3) {
@@ -151,7 +151,7 @@ class SurveyQuestion extends FFError {
 	/**
 	 * delete - use this function to delete a survey question
 	 *
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function delete() {
 		$group_id = $this->Group->GetID();

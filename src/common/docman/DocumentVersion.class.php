@@ -275,7 +275,7 @@ class DocumentVersion extends FFError {
 	/**
 	 * isURL - whether this document is a URL and not a local file.
 	 *
-	 * @return	boolean	is_url.
+	 * @return	bool	is_url.
 	 */
 	function isURL() {
 		return ($this->data_array['filetype'] == 'URL');
@@ -345,8 +345,7 @@ class DocumentVersion extends FFError {
 	 * @param	int	$version	the version id to update
 	 * @param	array	$colArr		the columns to update in array form array('col1', col2')
 	 * @param	array	$valArr		the values to store in array form array('val1', 'val2')
-	 * @return	boolean	success or not
-	 * @access	private
+	 * @return	bool	success or not
 	 */
 	private function setValueinDB($version, $colArr, $valArr) {
 		if ((count($colArr) != count($valArr)) || !count($colArr) || !count($valArr)) {

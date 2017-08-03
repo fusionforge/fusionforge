@@ -111,7 +111,7 @@ class Permission extends FFError {
 	/**
 	 *  isSuperUser - whether the current user has site admin privilege.
 	 *
-	 *  @return	boolean	is_super_user.
+	 *  @return	bool	is_super_user.
 	 */
 	function isSuperUser() {
 		return forge_check_global_perm ('forge_admin');
@@ -120,7 +120,7 @@ class Permission extends FFError {
 	/**
 	 *  isForumAdmin - whether the current user has form admin perms.
 	 *
-	 *  @return	boolean	is_forum_admin.
+	 *  @return	bool	is_forum_admin.
 	 */
 	function isForumAdmin() {
 		return forge_check_perm ('forum_admin', $this->group_id);
@@ -129,7 +129,7 @@ class Permission extends FFError {
 	/**
 	 *  isDocEditor - whether the current user has form doc editor perms.
 	 *
-	 *  @return	boolean	is_doc_editor.
+	 *  @return	bool	is_doc_editor.
 	 */
 	function isDocEditor() {
 		return forge_check_perm('docman', $this->group_id, 'approve');
@@ -138,7 +138,7 @@ class Permission extends FFError {
 	/**
 	 *  isDocAdmin - whether the current user has form doc admin perms.
 	 *
-	 *  @return	boolean	is_doc_admin.
+	 *  @return	bool	is_doc_admin.
 	 */
 	function isDocAdmin() {
 		return forge_check_perm('docman', $this->group_id, 'admin');
@@ -147,7 +147,7 @@ class Permission extends FFError {
 	/**
 	 *  isReleaseTechnician - whether the current user has FRS admin perms.
 	 *
-	 *  @return	boolean	is_release_technician.
+	 *  @return	bool	is_release_technician.
 	 */
 	function isReleaseTechnician() {
 		return forge_check_perm('frs', $this->group_id, 'admin');
@@ -156,7 +156,7 @@ class Permission extends FFError {
 	/**
 	 *  isFRSAdmin - whether the current user has FRS admin perms.
 	 *
-	 *  @return	boolean	is_frs_admin.
+	 *  @return	bool	is_frs_admin.
 	 */
 	function isFRSAdmin() {
 		return forge_check_perm('frs_admin', $this->group_id, 'admin');
@@ -165,7 +165,7 @@ class Permission extends FFError {
 	/**
 	 *  isArtifactAdmin - whether the current user has artifact admin perms.
 	 *
-	 *  @return	boolean	is_artifact_admin.
+	 *  @return	bool	is_artifact_admin.
 	 */
 	function isArtifactAdmin() {
 		return forge_check_perm ('tracker_admin', $this->group_id);
@@ -174,7 +174,7 @@ class Permission extends FFError {
 	/**
 	 *  isPMAdmin - whether the current user has Tasks admin perms.
 	 *
-	 *  @return	boolean	is_projman_admin.
+	 *  @return	bool	is_projman_admin.
 	 */
 	function isPMAdmin() {
 		return forge_check_perm ('pm_admin', $this->group_id);
@@ -183,7 +183,7 @@ class Permission extends FFError {
 	/**
 	 *  isAdmin - User is an admin of the project or admin of the entire site.
 	 *
-	 *  @return	boolean	is_admin.
+	 *  @return	bool	is_admin.
 	 */
 	function isAdmin() {
 		return forge_check_perm ('project_admin', $this->group_id);
@@ -192,7 +192,7 @@ class Permission extends FFError {
 	/**
 	 *	isCVSReader - checks the cvs_flags field in user_group table.
 	 *
-	 *	@return	boolean	cvs_flags
+	 *	@return	bool	cvs_flags
 	 */
 	function isCVSReader() {
 		return forge_check_perm ('scm', $this->group_id, 'read');
@@ -201,7 +201,7 @@ class Permission extends FFError {
 	/**
 	 *      isCVSWriter - checks if the user has CVS write access.
 	 *
-	 *      @return boolean cvs_flags
+	 *      @return bool cvs_flags
 	 */
 	function isCVSWriter() {
 		return forge_check_perm ('scm', $this->group_id, 'write');

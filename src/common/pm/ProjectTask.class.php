@@ -131,7 +131,7 @@ class ProjectTask extends FFError {
 	 * @param	int	$duration		The duration of the task in days.
 	 * @param	int	$parent_id		The id of the parent task, if any.
 	 * @param	array	$importData		An array ('user' => user_id)
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function create($summary,$details,$priority,$hours,$start_date,$end_date,
 			$category_id,$percent_complete,&$assigned_arr,&$depend_arr,$duration=0,$parent_id=0, $importData = array()) {
@@ -218,7 +218,7 @@ class ProjectTask extends FFError {
 	 * fetchData - re-fetch the data for this ProjectTask from the database.
 	 *
 	 * @param	int	$project_task_id	The project_task_id.
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function fetchData($project_task_id) {
 		$res = db_query_params ('SELECT * FROM project_task_vw
@@ -448,7 +448,7 @@ class ProjectTask extends FFError {
 	 * addRelatedArtifacts - take an array of artifact_id's and build relationships.
 	 *
 	 * @param	array	$art_array	An array of artifact_id's to be attached to this task.
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function addRelatedArtifacts($art_array) {
 		if (!forge_check_perm ('pm', $this->ProjectGroup->getID(), 'manager')) {
@@ -479,7 +479,7 @@ class ProjectTask extends FFError {
 	 * removeRelatedArtifacts - take an array of artifact_id's and delete relationships.
 	 *
 	 * @param	array	$art_array	An array of artifact_id's to be removed from this task.
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function removeRelatedArtifacts($art_array) {
 		if (!forge_check_perm ('pm', $this->ProjectGroup->getID(), 'manager')) {
@@ -631,7 +631,7 @@ class ProjectTask extends FFError {
 	 *
 	 * @param	string	$message	The message.
 	 * @param	array	$importData	Specific data for import (user id and time)
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function addMessage($message, $importData = array()) {
 		//prevent posting the same message
@@ -710,7 +710,7 @@ class ProjectTask extends FFError {
 	 *
 	 * @param	int	$depend_on_id	The project_task_id you are dependent on.
 	 * @param	int	$original_id	The project_task_id you are checking circular dependencies for.
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function checkCircular($depend_on_id, $original_id) {
 		//for msproject users - ms project has more complex logic than gforge
@@ -741,7 +741,7 @@ class ProjectTask extends FFError {
 	 * setDependentOn - takes an array of project_task_id's and builds dependencies.
 	 *
 	 * @param	array	$arr_	The array of project_task_id's.
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function setDependentOn(&$arr_) {
 //
@@ -847,7 +847,7 @@ class ProjectTask extends FFError {
 	 * setAssignedTo - takes an array of user_id's and builds assignments.
 	 *
 	 * @param	array	$arr	The array of user_id's.
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function setAssignedTo(&$arr) {
 		$arr2 = $this->getAssignedTo();
