@@ -132,10 +132,11 @@ class FRSRelease extends FFObject {
 	 * @param	string	$notes		The release notes for the release.
 	 * @param	string	$changes	The change log for the release.
 	 * @param	int	$preformatted	Whether the notes/log are preformatted with \n chars (1) true (0) false.
-	 * @param	int	$release_date	The unix date of the release.
+	 * @param	int|bool	$release_date	The unix date of the release.
+	 * @param       int $status_id
 	 * @param	array	$importData	Array of data to change creator, time of creation, bypass permission check and do not send notification like:
 	 *					array('user' => 127, 'time' => 1234556789, 'nopermcheck' => 1, 'nonotice' => 1)
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function create($name, $notes, $changes, $preformatted, $release_date = false, $status_id = 1, $importData = array()) {
 		if (strlen($name) < 3) {

@@ -60,6 +60,7 @@ class FusionForge extends FFError {
 	 *
 	 * @param	array	$params		array of columns and values to filter query: $params['status'] = 'A' ...
 	 * @param	string	$extended_qpa	string of SQL to be part of the QPA query
+	 * @return	bool|int
 	 */
 	function getNumberOfProjects($params = array(), $extended_qpa = null) {
 		$qpa = db_construct_qpa(false, 'SELECT count(*) AS count FROM groups');

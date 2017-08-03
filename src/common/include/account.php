@@ -76,6 +76,7 @@ function account_pwvalid($pw) {
  *
  * @param	string	$name	The username string
  * @param	bool	$unix	Check for an unix username
+ * @param	bool	$check_exists
  * @return	bool	true on success/false on failure
  *
  */

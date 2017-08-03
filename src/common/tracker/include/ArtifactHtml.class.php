@@ -34,6 +34,8 @@ class ArtifactHtml extends Artifact {
 	 * showDetails - show details preformatted (like followups)
 	 *
 	 * @param	bool	$editable	is the detail editable or not? default is false.
+	 * @param	array	$editattrs
+	 * @return	string
 	 */
 	function showDetails($editable = false, $editattrs = array()) {
 		global $HTML;

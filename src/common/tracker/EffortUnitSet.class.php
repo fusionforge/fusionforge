@@ -49,7 +49,7 @@ class EffortUnitSet extends FFError {
 	private $data_array;
 
 	/**
-	 * @var	integer	$objectLevel	The level (forge/projet/tracker) of the object $Object.
+	 * @var	int		$objectLevel	The level (forge/projet/tracker) of the object $Object.
 	 */
 	private $objectLevel;
 
@@ -57,6 +57,8 @@ class EffortUnitSet extends FFError {
 	 * EffortUnitSet - EffortUnitSet object constructor
 	 *
 	 * @param	Object	$Object Null, group, tracker object to which this EffortUnitSet is associated
+	 * @param	bool	$unit_set_id
+	 * @param	bool	$arr
 	 */
 	function __construct(&$Object = null, $unit_set_id = false, $arr = false) {
 		parent::__construct();
@@ -115,11 +117,11 @@ class EffortUnitSet extends FFError {
 	/**
 	 * create - Create new Effort Unit Set in the database.
 	 *
-	 * @param	boolean	$is_autoconvert		set if unit is auto convert
+	 * @param	bool	$is_autoconvert		set if unit is auto convert
 	 * @param	array	$importData			For import
 	 * @return	bool	success or not
 	 */
-	function create($is_autoconvert = 0, $importData = array()) {
+	function create($is_autoconvert = false, $importData = array()) {
 		if(array_key_exists('user', $importData)){
 			$user = $importData['user'];
 		} else {
@@ -284,7 +286,7 @@ class EffortUnitSet extends FFError {
 	/**
 	 * fetchData - May need to refresh database fields if an update occurred.
 	 *
-	 * @param	integer	$group_id The group_id.
+	 * @param	int		$unit_set_id	The unit set id.
 	 * @return	bool	success or not
 	 */
 	function fetchData($unit_set_id) {
@@ -301,7 +303,7 @@ class EffortUnitSet extends FFError {
 	/**
 	 * getID - Simply return the unit_set_id for this object.
 	 *
-	 * @return integer unit_set_id.
+	 * @return int	 unit_set_id.
 	 */
 	function getID() {
 		return $this->data_array['unit_set_id'];
@@ -310,7 +312,7 @@ class EffortUnitSet extends FFError {
 	/**
 	 * getLevel - return the level (forge/projet/tracker) at which the set is defined.
 	 *
-	 * @return integer level.
+	 * @return int	 level.
 	 */
 	function getLevel() {
 		return $this->data_array['level'];
@@ -319,7 +321,7 @@ class EffortUnitSet extends FFError {
 	/**
 	 * getObjectLevel - return the level of the object used.
 	 *
-	 * @return integer objectLevel.
+	 * @return int	 objectLevel.
 	 */
 	function getObjectLevel() {
 		return $this->objectLevel;
@@ -356,7 +358,7 @@ class EffortUnitSet extends FFError {
 	 * isEquivalentTo - test if this unit set is equivalent to the other.
 	 * @param	EffortUnitSet $effortUnitSet	Unit set to test
 	 *
-	 * @return	boolean	true/false.
+	 * @return	bool	true/false.
 	 */
 	function isEquivalentTo($effortUnitSet) {
 		if ($this->getID() == $effortUnitSet->getID()) {
@@ -388,7 +390,7 @@ class EffortUnitSet extends FFError {
 	/**
 	 * isAutoconvert - test if for this unit set, value will be convert on an unit change.
 	 *
-	 * @return	boolean	true/false.
+	 * @return	bool	true/false.
 	 */
 	function isAutoconvert() {
 		return ($this->data_array['is_autoconvert']? true : false);
@@ -397,8 +399,8 @@ class EffortUnitSet extends FFError {
 	/**
 	 * update - update Effort Unit Set in the database.
 	 *
-	 * @param	boolean	$is_autoconvert		set if unit is auto convert
-	 * @return	boolean	true/false.
+	 * @param	bool	$is_autoconvert		set if unit is auto convert
+	 * @return	bool	true/false.
 	 */
 	function update($is_autoconvert) {
 		$res = db_query_params ('UPDATE effort_unit_set SET is_autoconvert=$1 WHERE unit_set_id=$2',
@@ -481,9 +483,9 @@ function getAvailableEffortUnitSets(&$Object = null) {
 /**
  * getAvailableEffortUnitSets - Get EffortUnitSet ID available for the object at this level.
  * @param	null|Group|ArtifactType $Object	Object
- * @param	integer $level	level
+ * @param	int	 $level	level
  *
- * @return	integer	EffortUnitSet ID.
+ * @return	int		EffortUnitSet ID.
  */
 function getEffortUnitSetForLevel(&$Object, $level) {
 	if (!$Object) {

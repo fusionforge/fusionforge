@@ -565,6 +565,7 @@ class ArtifactType extends FFError {
 	/**
 	 * setMonitor - user can monitor this artifact.
 	 *
+	 * @param	int		$user_id
 	 * @return	bool	false - always false - always use the getErrorMessage() for feedback
 	 */
 	function setMonitor($user_id = -1) {

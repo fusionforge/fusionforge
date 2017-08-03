@@ -926,6 +926,7 @@ class ArtifactTypeHtml extends ArtifactType {
 	 * @param	string	$text_100	What $string to call the '100 row'
 	 * @param	bool	$show_any
 	 * @param	string	$text_any
+	 * @param	bool	$allowed
 	 * @param	array	$attrs		Array of other attributes
 	 * @return	string	HTML code using radio buttons
 	 */
@@ -978,6 +979,7 @@ class ArtifactTypeHtml extends ArtifactType {
 	 * @param	array		$checked	The items that should be checked
 	 * @param	bool|string	$show_100	Whether to show the '100 row'
 	 * @param	string		$text_100	What to call the '100 row'
+	 * @param	bool		$allowed
 	 * @param	array		$attrs		Array of other attributes
 	 * @return	string		radio buttons
 	 */
@@ -1037,6 +1039,7 @@ class ArtifactTypeHtml extends ArtifactType {
 	 * @param	array		$checked	The items that should be checked
 	 * @param	bool|string	$show_100	Whether to show the '100 row'
 	 * @param	string		$text_100	What to call the '100 row'
+	 * @param	bool		$allowed
 	 * @param	array		$attrs		Array of other attributes
 	 * @return	string		radio multiselectbox
 	 */
@@ -1318,6 +1321,7 @@ class ArtifactTypeHtml extends ArtifactType {
 	 *
 	 *  @param	    int	    $extra_field_id	The ID of this field.
 	 *	@param 		string	$contents The data for this field.
+	 *	@param		$ef
 	 *	@return		string
 	 */
 	function renderSLAField($extra_field_id, $contents, $ef) {
@@ -1514,7 +1518,12 @@ class ArtifactTypeHtml extends ArtifactType {
 	/**
 	 * statusBox - show the statuses - automatically shows the "custom statuses" if they exist
 	 *
-	 * @return string	HTML code
+	 * @param	string	$name
+	 * @param	string	$checked
+	 * @param	bool	$show_100
+	 * @param	string	$text_100
+	 * @param	array	$attrs
+	 * @return	string	HTML code
 	 */
 	function statusBox($name = 'status_id', $checked = 'xzxz', $show_100 = false, $text_100 = 'none', $attrs = array()) {
 		if ($text_100=='none'){
@@ -1526,7 +1535,12 @@ class ArtifactTypeHtml extends ArtifactType {
 	/**
 	 * priorityBox - show the priorities
 	 *
-	 * @return string	HTML code
+	 * @param	string	$name
+	 * @param	string	$checked_val
+	 * @param	bool	$nochange
+	 * @param	array	$attrs
+	 * @param	bool	$show_any
+	 * @return	string	HTML code
 	 */
 	function priorityBox($name = 'priority', $checked_val = '3', $nochange = false, $attrs = array(), $show_any = false){
 		return html_build_priority_select_box($name, $checked_val, $nochange, $attrs, $show_any);

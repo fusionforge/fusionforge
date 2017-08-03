@@ -72,6 +72,7 @@ class ArtifactMessage extends FFError {
 	 *
 	 * @param	string		$body	Body.
 	 * @param	string|bool	$by	Email of submitter (obsolete?).
+	 * @param	array	$importData
 	 * @return	int|bool	id on success / false on failure.
 	 */
 	function create($body, $by = false, $importData = array()) {

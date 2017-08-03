@@ -129,7 +129,6 @@ class DocumentVersion extends FFError {
 	/**
 	 * getFileData - the filedata of this document.
 	 *
-	 * @param	boolean	$download	update the download flag or not. default is true
 	 * @return	string	The filedata.
 	 */
 	function getFileData() {
@@ -172,7 +171,8 @@ class DocumentVersion extends FFError {
 	 * @param	int	$createtimetamp		timestamp of creation of this version
 	 * @param	int	$version		The version id to create. Default is 1 (the first version)
 	 * @param	int	$current_version	Is it the current version? Defaut is 1 (yes)
-	 * return	bool	true on success
+	 * @param	string $vcomment
+	 * @return	bool	true on success
 	 */
 	function create($docid, $title, $description, $created_by, $filetype, $filename, $filesize, $kwords, $createtimetamp, $version = 1, $current_version = 1, $vcomment = '') {
 		db_begin();
@@ -296,6 +296,7 @@ class DocumentVersion extends FFError {
 	 * @param	int	$filesize		The new filesize
 	 * @param	int	$updatetimestamp	timestamp of this update
 	 * @param	int	$current_version	Is the current version to set? Default is yes.
+	 * @param	string $vcomment
 	 * @return	bool	true on success
 	 */
 	function update($version, $title, $description, $filetype, $filename, $filesize, $updatetimestamp, $current_version = 1, $vcomment = '') {

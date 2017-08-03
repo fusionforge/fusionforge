@@ -306,8 +306,8 @@ class ArtifactExtraFieldElement extends FFError {
 	/**
 	 * setAsDefault - set this field element as default value or not.
 	 *
-	 * @param	is_default	boolean true-> set as default, false->unset as default
-	 * @return	boolean
+	 * @param	bool	$is_default	true-> set as default, false->unset as default
+	 * @return	bool
 	 */
 	function setAsDefault($is_default) {
 		if ($is_default) {
@@ -407,6 +407,7 @@ class ArtifactExtraFieldElement extends FFError {
 	/**
 	 * getChildrenElements - return the array of the elements of children fields who depend on current element
 	 *
+	 * @param	int	$childExtraFieldId
 	 * @return	array of parent elements
 	 */
 	function getChildrenElements($childExtraFieldId = null) {
@@ -444,7 +445,7 @@ class ArtifactExtraFieldElement extends FFError {
 	/**
 	 * saveParentElements - save the list of the elements of the parent field on which depends the current element
 	 *
-	 * @param	elements	array of new parent elements
+	 * @param	array	$elements	array of new parent elements
 	 * @return	bool	always true
 	 */
 	function saveParentElements($elements) {
@@ -501,8 +502,9 @@ class ArtifactExtraFieldElement extends FFError {
 	 * boxes and fields configured by the admin
 	 *
 	 * @param	string	$name		Name of the choice in a box.
-	 * @param	int	$status_id	Optional for status box - maps to either open/closed.
-	 * @param	boolean	$is_default	Set this element as default value
+	 * @param	int		$status_id	Optional for status box - maps to either open/closed.
+	 * @param	int		$auto_assign_to
+	 * @param	bool	$is_default	Set this element as default value
 	 * @return	bool	success.
 	 */
 	function update($name, $status_id=0, $auto_assign_to=100, $is_default=false) {

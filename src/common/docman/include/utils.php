@@ -35,6 +35,7 @@
  *
  * @param string $checkedval
  * @param array $removedval
+ * @return string
  */
 
 function doc_get_state_box($checkedval = 'xzxz', $removedval = array()) {

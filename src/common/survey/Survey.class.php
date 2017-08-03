@@ -125,8 +125,9 @@ class Survey extends FFError {
 	 * @param	string		$survey_title The survey title
 	 * @param	array		$add_questions The question numbers to be added
 	 * @param	int		$is_active 1: Active, 0: Inactive
+	 * @param	int		$is_public
 	 * @param	int		$is_result_public
-	 * @param	Allow|int	$double_vote
+	 * @param	int		$double_vote
 	 * @return	bool	success.
 	 */
 	function create($survey_title, $add_questions, $is_active = 0, $is_public = 1, $is_result_public = 0, $double_vote = 0) {
@@ -167,8 +168,9 @@ class Survey extends FFError {
 	 * @param	array		$add_questions The question numbers to be added
 	 * @param	array		$del_questions The question numbers to be deleted
 	 * @param	int		$is_active 1: Active, 0: Inactive
+	 * @param	int		$is_public
 	 * @param	int		$is_result_public
-	 * @param	Allow|int	$double_vote
+	 * @param	int		$double_vote
 	 * @return	bool		success.
 	 */
 	function update($survey_title, &$add_questions, &$del_questions, $is_active = 0, $is_public = 1, $is_result_public = 0, $double_vote = 0) {

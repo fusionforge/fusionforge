@@ -251,6 +251,7 @@ class DocumentManager extends FFError {
 	 * getTree - retrieve the tree structure into an organized array
 	 *
 	 * @param	int	$docGroupId	the doc_group to start: default 0
+	 * @return	array
 	 */
 	function getTree($docGroupId = 0) {
 		$dg = new DocumentGroup($this->Group);
@@ -274,6 +275,7 @@ class DocumentManager extends FFError {
 	/**
 	 * getSettings - return the configuration flags of the docman
 	 *
+	 * @return	array
 	 */
 	function getSettings() {
 		$settingsArr = array();

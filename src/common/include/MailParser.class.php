@@ -192,6 +192,8 @@ class MailParser extends FFError {
 
 	/**
 	 * one word decode implementation of RFC 2047
+	 * @param	string	$string
+	 * @return	array
 	 */
 	function mime_header_one_word_decode($string) {
 		/* Default charset */

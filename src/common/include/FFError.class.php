@@ -126,7 +126,7 @@ class FFError {
 	/**
 	 * isPermissionDeniedError() - Determines if it is a permission denied error
 	 *
-	 * @return	boolean
+	 * @return	bool
 	 */
 	function isPermissionDeniedError(){
 		return ($this->error_code == ERROR__PERMISSION_DENIED_ERROR);
@@ -134,7 +134,8 @@ class FFError {
 
 	/**
 	 * setInvalidEmailError() - sets a Invalid Email error
-	 *  retrieves the localized error string for Invalid Email and calls exit_error()
+	 * retrieves the localized error string for Invalid Email and calls exit_error()
+	 * @param	bool	$adr
 	 */
 	function setInvalidEmailError($adr=false){
 		$e = _('Invalid Email Address');
@@ -149,7 +150,7 @@ class FFError {
 	/**
 	 * isInvalidEmailError() - Determines if it is an invalid email error
 	 *
-	 * @return	boolean
+	 * @return	bool
 	 */
 	function isInvalidEmailError(){
 		return ($this->error_code == ERROR__INVALID_EMAIL_ERROR);
@@ -169,7 +170,7 @@ class FFError {
 	/**
 	 * isOnUpdateError() - Determines if it is an on update error
 	 *
-	 * @return	boolean
+	 * @return	bool
 	 */
 	function isOnUpdateError(){
 		return ($this->error_code == ERROR__ON_UPDATE_ERROR);
@@ -187,7 +188,7 @@ class FFError {
 	/**
 	 * isGroupIdError() - Determines if it is a group ID error
 	 *
-	 * @return	boolean
+	 * @return	bool
 	 */
 	function isGroupIdError(){
 		return ($this->error_code == ERROR__GROUPID_ERROR);
@@ -210,7 +211,7 @@ class FFError {
 	/**
 	 * isMissingParamsError() - Determines if it is a missing params error
 	 *
-	 * @return	boolean
+	 * @return	bool
 	 */
 	function isMissingParamsError(){
 		return ($this->error_code == ERROR__MISSING_PARAMS_ERROR);

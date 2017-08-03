@@ -21,6 +21,12 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+/**
+ * license_getname - get the license name
+ * @param	int	$id
+ * @return	string
+ */
+
 function license_getname($id) {
 	global $license_arr;
 	if (!isset($license_arr[$id])) {
@@ -31,10 +37,16 @@ function license_getname($id) {
 	return $license_arr[$id];
 }
 
+/**
+ * license_add - get the license name
+ * @param	string	$name
+ * @return	bool
+ */
+
 function license_add($name) {
 	global $feedback;
-	$res = db_query_params ('INSERT INTO licenses (license_name) VALUES ($1)',
-				array (htmlspecialchars ($name))) ;
+	$res = db_query_params('INSERT INTO licenses (license_name) VALUES ($1)',
+				array (htmlspecialchars ($name)));
 	if (!$res) {
 		$feedback .= ' Error adding License: '.db_error();
 		return false;
@@ -43,11 +55,18 @@ function license_add($name) {
 	}
 }
 
-function license_update($id,$name) {
+/**
+ * license_update - update license
+ * @param	int		$id
+ * @param	string	$name
+ * @return	bool
+ */
+
+function license_update($id, $name) {
 	global $feedback;
-	$res = db_query_params ('UPDATE licenses SET license_name=$1 WHERE license_id=$2',
+	$res = db_query_params('UPDATE licenses SET license_name=$1 WHERE license_id=$2',
 				array (htmlspecialchars($name),
-				       $id)) ;
+				       $id));
 	if (!$res) {
 		$feedback .= ' Error updating License: '.db_error();
 		return false;
@@ -56,16 +75,22 @@ function license_update($id,$name) {
 	}
 }
 
+/**
+ * license_delete - delete license
+ * @param	int	$id
+ * @return	bool
+ */
+
 function license_delete($id) {
 	global $feedback;
-	$res = db_query_params ('UPDATE groups SET license_id=100 WHERE license_id=$1',
-				array ($id)) ;
+	$res = db_query_params('UPDATE groups SET license_id=100 WHERE license_id=$1',
+				array ($id));
 	if (!$res) {
 		$feedback .= ' Error deleting License: '.db_error();
 		return false;
 	} else {
 		$res = db_query_params ('DELETE FROM licenses WHERE license_id=$1',
-					array ($id)) ;
+					array ($id));
 		if (!$res) {
 			$feedback .= ' Error deleting License: '.db_error();
 			return false;
@@ -75,9 +100,16 @@ function license_delete($id) {
 	}
 }
 
-function license_selectbox($title='license_id',$selected='xzxz') {
-	$res = db_query_params ('SELECT license_id, license_name FROM licenses ORDER BY license_name',
-				array()) ;
+/**
+ * license_selectbox - build license select box
+ * @param	string	$title
+ * @param	string	$selected
+ * @return	string
+ */
+
+function license_selectbox($title='license_id', $selected='xzxz') {
+	$res = db_query_params('SELECT license_id, license_name FROM licenses ORDER BY license_name',
+				array());
     return html_build_select_box($res,$title,$selected,false);
 }
 

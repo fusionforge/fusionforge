@@ -108,8 +108,6 @@ class FRSFile extends FFError {
 	 * @param	int		$type_id	The type_id of this file from the frs-file-types table.
 	 * @param	int		$processor_id	The processor_id of this file from the frs-processor-types table.
 	 * @param	int|bool	$release_time	The release_date of this file in unix time (seconds).
-	 * @param	string		$mime_type	The mime type of the file (default: application/octet-stream)
-	 * @param	bool		$is_remote	True if file is an URL and not an uploaded file (default: false)
 	 * @return	bool		success.
 	 */
 	function create($name,$file_location,$type_id,$processor_id,$release_time=false) {

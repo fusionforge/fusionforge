@@ -301,9 +301,10 @@ function db_query_params($qstring, $params = array(), $limit = -1, $offset = 0, 
 /**
  * db_prepare - Prepare an SQL query
  *
- * @param	string	$qstring	SQL statement.
- * @param	string	$qname		name of the prepared query
- * @return	int	$dbserver	result set handle.
+ * @param	string		$qstring	SQL statement.
+ * @param	string		$qname		name of the prepared query
+ * @param 	resource	$dbserver
+ * @return	int			result set handle.
  */
 function db_prepare($qstring, $qname, $dbserver = NULL) {
 	global $sysdebug_dbquery, $sysdebug_dberrors;
@@ -335,7 +336,7 @@ function db_prepare($qstring, $qname, $dbserver = NULL) {
 /**
  * db_execute - Execute a prepared statement, with parameters
  *
- * @param	string	$name		the prepared query
+ * @param	string	$qname		the prepared query
  * @param	array	$params		the parameters
  * @param	int	$dbserver	ability to spread load to multiple db servers.
  * @return	int	result set handle.
@@ -609,7 +610,7 @@ function db_affected_rows($qhandle) {
  * the current row of this database result
  *
  * @param	resource	$qhandle	Query result set handle.
- * @param	const		$result_type	Result type PGSQL_ASSOC, PGSQL_NUM et PGSQL_BOTH
+ * @param	int			$result_type	Result type: PGSQL_ASSOC, PGSQL_NUM or PGSQL_BOTH
  * @return array array of fieldname/value key pairs.
  */
 function db_fetch_array($qhandle, $result_type = PGSQL_BOTH) {

@@ -481,8 +481,9 @@ class DocumentReview extends FFError {
 	/**
 	 * sendNotice - Notifies users of review.
 	 *
-	 * @param	array	array of users where IDs to be notify is arr[1].
-	 * @param	boolean	true = new review, false = reminder
+	 * @param	array	$users array of users where IDs to be notify is arr[1].
+	 * @param	bool	$new true = new review, false = reminder
+	 * @param	bool	$reviewnotificationcomment
 	 * @return	bool
 	 */
 	function sendNotice($users, $new = false, $reviewnotificationcomment = false) {

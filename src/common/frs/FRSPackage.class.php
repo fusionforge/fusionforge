@@ -466,6 +466,7 @@ class FRSPackage extends FFError {
 	/**
 	 * getReleases - gets Release objects for all the releases in this package.
 	 *
+	 * @param	bool	$include_hidden
 	 * @return	array	Array of FRSRelease Objects.
 	 */
 	function &getReleases($include_hidden = true) {

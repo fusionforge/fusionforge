@@ -150,6 +150,8 @@ class PluginManager extends FFError {
 	/**
 	 * LoadPlugin() - load a specific plugin
 	 *
+	 * @param	string	$p_name	plugin name
+	 * @return	bool
 	 */
 	function LoadPlugin($p_name) {
 		global $gfplugins, $gfcommon, $gfwww;

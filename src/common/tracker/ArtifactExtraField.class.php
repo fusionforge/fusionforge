@@ -121,14 +121,16 @@ class ArtifactExtraField extends FFError {
 	 * @param	int	$attribute2		For text (maxlength) and textarea (cols)
 	 * @param	int	$is_required		True or false whether this is a required field or not.
 	 * @param	string	$alias			Alias for this extra field (optional)
-	 * @param	int	$show100		True or false whether the 100 value is displayed or not
+	 * @param	int|bool	$show100		True or false whether the 100 value is displayed or not
 	 * @param	string	$show100label		The label used for the 100 value if displayed
 	 * @param	string	$description		Description used for help text.
 	 * @param	string	$pattern		A regular expression to check the field.
 	 * @param	int	$parent			Parent extra field id.
 	 * @param	int	$autoassign		True or false whether it triggers auto-assignment rules
 	 * @param	int	$is_hidden_on_submit	True or false to display the extrafield in the new artifact submit page
-	 * @param	int	$disabled		True or false to enable/disable the extrafield
+	 * @param	int	$is_disabled		True or false to enable/disable the extrafield
+	 * @param	int		$aggregation_rule
+	 * @param	int		$distribution_rule
 	 * @return	bool	true on success / false on failure.
 	 */
 	function create($name, $field_type, $attribute1, $attribute2, $is_required = 0, $alias = '', $show100 = true, $show100label = 'none', $description = '', $pattern = '', $parent = 100, $autoassign = 0, $is_hidden_on_submit = 0, $is_disabled = 0, $aggregation_rule = 0, $distribution_rule = 0) {
@@ -901,11 +903,16 @@ class ArtifactExtraField extends FFError {
 	 * @param	int	$attribute2	For text (maxlength) and textarea (cols)
 	 * @param	int	$is_required	True or false whether this is a required field or not.
 	 * @param	string	$alias		Alias for this field
-	 * @param	int	$show100	True or false whether the 100 value is displayed or not
+	 * @param	int|bool	$show100	True or false whether the 100 value is displayed or not
 	 * @param	string	$show100label	The label used for the 100 value if displayed
 	 * @param	string	$description	Description used for help text.
 	 * @param	string	$pattern	A regular expression to check the field.
 	 * @param	int	$parent		Parent extra field id.
+	 * @param	int	$autoassign
+	 * @param	int	$is_hidden_on_submit
+	 * @param	int	$is_disabled
+	 * @param	int	$aggregation_rule
+	 * @param	int	$distribution_rule
 	 * @return	bool	success.
 	 */
 	function update($name, $attribute1, $attribute2, $is_required = 0, $alias = "", $show100 = true, $show100label = 'none', $description = '', $pattern = '', $parent = 100, $autoassign = 0, $is_hidden_on_submit = 0, $is_disabled = 0, $aggregation_rule = 0, $distribution_rule = 0) {
@@ -994,27 +1001,30 @@ class ArtifactExtraField extends FFError {
 	}
 
 	/**
+	 * delete - delete extra field
 	 *
-	 *
+	 * @param	$sure
+	 * @param	$really_sure
+	 * @return	bool
 	 */
 	function delete($sure, $really_sure) {
 		if (!$sure || !$really_sure) {
 			$this->setMissingParamsError(_('Please tick all checkboxes.'));
 			return false;
 		}
-		if (!forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID())) {
+		if (!forge_check_perm('tracker_admin', $this->ArtifactType->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
 		db_begin();
-		$result = db_query_params ('DELETE FROM artifact_extra_field_data WHERE extra_field_id=$1',
-					   array ($this->getID())) ;
+		$result = db_query_params('DELETE FROM artifact_extra_field_data WHERE extra_field_id=$1',
+					   array($this->getID()));
 		if ($result) {
 			$result = db_query_params ('DELETE FROM artifact_extra_field_elements WHERE extra_field_id=$1',
-						   array ($this->getID())) ;
+						   array($this->getID())) ;
 			if ($result) {
 				$result = db_query_params ('DELETE FROM artifact_extra_field_list WHERE extra_field_id=$1',
-							   array ($this->getID())) ;
+							   array($this->getID())) ;
 				if ($result) {
 					if ($this->getType() == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 						if (!$this->ArtifactType->setCustomStatusField(0)) {
@@ -1207,7 +1217,8 @@ class ArtifactExtraField extends FFError {
 	 *    getMandatoryExtraFields - List of possible user built extra fields
 	 *    set up for this artifact type.
 	 *
-	 * @return array arrays of data;
+	 * @param	int		$atid
+	 * @return	array arrays of data
 	 */
 	static function getMandatoryExtraFields($atid) {
 		$return = array();
@@ -1230,7 +1241,8 @@ class ArtifactExtraField extends FFError {
 	 *    getAllExtraFields - List of possible user built extra fields
 	 *    set up for this artifact type.
 	 *
-	 * @return array arrays of data;
+	 * @param	int	$atid
+	 * @return	array arrays of data
 	 */
 	static function getAllExtraFields($atid) {
 		$return = array();
@@ -1252,7 +1264,9 @@ class ArtifactExtraField extends FFError {
 	 *    checkExtraFieldElements - Check the elements for extra fields
 	 *    set up for this artifact type.
 	 *
-	 * @return boolean;
+	 * @param	int		$field_id
+	 * @param	string 	$element_name
+	 * @return	bool
 	 */
 	static function checkExtraFieldElements($field_id, $element_name) {
 		$return = false;

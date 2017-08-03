@@ -129,10 +129,11 @@ class ArtifactQuery extends FFError {
 	 * @param	int		$closedaterange
 	 * @param	string		$summary
 	 * @param	string		$description
-	 * @param	$followups
+	 * @param	string		$followups
 	 * @param	int		$query_type
 	 * @param	array		$query_options
 	 * @param	string		$submitter	Name of the saved query.
+	 * @param	string		$last_modifier
 	 * @return	bool		true on success / false on failure.
 	 */
 	function create($name,$status,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange=0,$closedaterange=0,
@@ -260,6 +261,7 @@ class ArtifactQuery extends FFError {
 	 * @param	$closedaterange
 	 * @param	string		$summary
 	 * @param	string		$description
+	 * @param	$last_modifier
 	 * @param	$followups
 	 * @return	boolean		True/false on success or not.
 	 */
@@ -764,6 +766,7 @@ class ArtifactQuery extends FFError {
 	 * @param	int		$query_type	Id of the saved query
 	 * @param	array		$query_options
 	 * @param	string		$submitter
+	 * @param	string		$last_modifier
 	 * @return	bool		success.
 	 */
 	function update($name,$status,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange='',$closedaterange='',

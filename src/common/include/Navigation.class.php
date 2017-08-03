@@ -75,6 +75,9 @@ class Navigation extends FFError {
 	 * the URL of the favicon.
 	 *
 	 * @todo: Make favicon configurable
+	 *
+	 * @param	bool	$asHTML
+	 * @return	string
 	 */
 	function getFavIcon($asHTML = true) {
 		if (!$asHTML) {
@@ -91,6 +94,8 @@ class Navigation extends FFError {
 	 * array with the following structure: $result['titles']:
 	 * list of titles of the feeds; $result['urls'] list of urls
 	 * of the feeds.
+	 * @param bool $asHTML
+	 * @return array
 	 */
 	function getRSS($asHTML = true) {
 		if (!$asHTML) {
@@ -345,14 +350,17 @@ class Navigation extends FFError {
 
 	/**
 	 * Get a reference to an array of the projects menu for the project with the id $group_id with the following structure:
-	 *	$result['starturl']: URL of the projects starting page;
-	 *	$result['name']: public name of the project;
-	 *	$result['titles']: list of titles of the menu entries;
-	 *	$result['tooltips']: list of tooltips (html title) of the menu entries;
-	 *	$result['urls']: list of urls of the menu entries;
-	 *	$result['adminurls']: list of urls to the admin pages of the menu entries.
-	 *	If the user has no admin permissions, the corresponding adminurl is false.
-	 *	$result['selected']: number of the menu entry that is currently selected.
+	 *    $result['starturl']: URL of the projects starting page;
+	 *    $result['name']: public name of the project;
+	 *    $result['titles']: list of titles of the menu entries;
+	 *    $result['tooltips']: list of tooltips (html title) of the menu entries;
+	 *    $result['urls']: list of urls of the menu entries;
+	 *    $result['adminurls']: list of urls to the admin pages of the menu entries.
+	 *    If the user has no admin permissions, the corresponding adminurl is false.
+	 *    $result['selected']: number of the menu entry that is currently selected.
+	 * @param $group_id
+	 * @param string $toptab
+	 * @return mixed
 	 */
 	function getProjectMenu($group_id, $toptab = "") {
 		// rebuild menu if it has never been built before, or
@@ -608,6 +616,8 @@ class Navigation extends FFError {
 	 * the link on the banner; $result['image']: URL of the banner
 	 * image; $result['title']: HTML code that outputs the banner;
 	 * $result['html']: HTML code that creates the banner and the link.
+	 * @param bool $asHTML
+	 * @return string
 	 */
 	function getPoweredBy($asHTML=true) {
 		$res['url'] = 'http://fusionforge.org/';
@@ -627,6 +637,8 @@ class Navigation extends FFError {
 	 *  set, otherwise an array with the following structure:
 	 *  $result['url']: URL of the link to the source code viewer;
 	 *  $result['title']: Title of the link.
+	 * @param bool $asHTML
+	 * @return null|string
 	 */
 	function getShowSource($asHTML=true) {
 		if (forge_get_config('show_source')) {

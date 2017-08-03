@@ -143,6 +143,7 @@ class DocumentGroup extends FFError {
 	 *							2 = deleted
 	 *							5 = private
 	 * @param	int	$createtimestamp	Timestamp of the directory creation
+	 * @param	bool $forcecreate
 	 * @return	bool	true on success / false on failure.
 	 * @access	public
 	 */
