@@ -159,12 +159,12 @@ class Theme_Funky extends Layout {
 		}
 	}
 
-	function bodyFooter($params) {
+	function bodyFooter() {
 		echo html_ac(html_ap() -1).'<!-- id="maindiv" -->' . "\n";
 	}
 
-	function footer($params = array()) {
-		$this->bodyFooter($params);
+	function footer() {
+		$this->bodyFooter();
 		echo html_ao('footer', array('role' => 'contentinfo'));
 		echo $this->navigation->getPoweredBy();
 		echo $this->navigation->getShowSource();

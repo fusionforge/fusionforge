@@ -407,7 +407,7 @@ abstract class Layout extends FFError {
 
 	abstract function bodyHeader($params);
 
-	abstract function footer($params = array());
+	abstract function footer();
 
 	function footerEnd() { ?>
 
