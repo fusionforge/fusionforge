@@ -145,7 +145,7 @@ function group_add_history ($field_name,$old_value,$group_id) {
 /**
  * show_grouphistory - show the group_history rows that are relevant to this group_id
  *
- * @param	integer	$group_id	the group id
+ * @param	int	$group_id	the group id
  */
 function show_grouphistory($group_id) {
 	global $HTML;
