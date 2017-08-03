@@ -31,7 +31,7 @@ class FrsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 * @param int $offset offset
 	 * @param bool $isExact if we want to search for all the words or if only one matching the query is sufficient
 	 * @param int $groupId group id
-	 * @param array|string $sections array of all sections to search in (array of strings)
+	 * @param array|string|int $sections array of all sections to search in (array of strings)
 	 */
 	function __construct($words, $offset, $isExact, $groupId, $sections=SEARCH__ALL_SECTIONS) {
 		$userIsGroupMember = $this->isGroupMember($groupId);

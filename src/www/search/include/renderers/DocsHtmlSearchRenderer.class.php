@@ -35,7 +35,7 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 * @param int $offset offset
 	 * @param bool $isExact if we want to search for all the words or if only one matching the query is sufficient
 	 * @param int $groupId group id
-	 * @param array|string $sections array of all sections to search in (array of strings)
+	 * @param array|string|int $sections array of all sections to search in (array of strings)
 	 * @param int|string $rowsPerPage
 	 * @param array $options
 	 */
