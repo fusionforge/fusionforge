@@ -92,9 +92,9 @@ class FRSRelease extends FFObject {
 	/**
 	 * @param	object  	$FRSPackage	The FRSPackage object to which this release is associated.
 	 * @param	int|bool	$release_id	The release_id.
-	 * @param	array|bool	$arr		The associative array of data.
+	 * @param	array		$arr		The associative array of data.
 	 */
-	function __construct(&$FRSPackage, $release_id = false, $arr = false) {
+	function __construct(&$FRSPackage, $release_id = false, $arr = array()) {
 		if (!$FRSPackage || !is_object($FRSPackage)) {
 			$this->setError(_('Invalid FRS Package Object'));
 			return;
