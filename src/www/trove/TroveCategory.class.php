@@ -50,9 +50,9 @@ class TroveCategory extends FFError {
 
 	/**
 	 * @param	bool|int			$categoryId		The trove_cat_id.
-	 * @param	bool|array	$dataArray		The associative array of data.
+	 * @param	array	$dataArray		The associative array of data.
 	 */
-	function __construct($categoryId = false, $dataArray = false) {
+	function __construct($categoryId = false, $dataArray = array()) {
 		if ($categoryId) {
 			$this->categoryId = $categoryId;
 			if (!$dataArray || !is_array($dataArray)) {
