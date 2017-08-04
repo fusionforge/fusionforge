@@ -29,10 +29,10 @@ require_once $gfcommon.'include/FFError.class.php';
  * Factory method which creates a FRSFile from an file id
  *
  * @param	int		$file_id	The file id
- * @param	array|bool	$data		The result array, if it's passed in
- * @return	object		FRSFile object
+ * @param	array	$data		The result array, if it's passed in
+ * @return	object|bool		FRSFile object, false in case of error
  */
-function &frsfile_get_object($file_id, $data=false) {
+function &frsfile_get_object($file_id, $data = array()) {
 	global $FRSFILE_OBJ;
 	if (!isset($FRSFILE_OBJ['_'.$file_id.'_'])) {
 		if ($data) {
@@ -70,9 +70,9 @@ class FRSFile extends FFError {
 	/**
 	 * @param	object		$FRSRelease	The FRSRelease object to which this file is associated.
 	 * @param	int|bool	$file_id	The file_id.
-	 * @param	array|bool	$arr		The associative array of data.
+	 * @param	array		$arr		The associative array of data.
 	 */
-	function __construct(&$FRSRelease, $file_id=false, $arr=false) {
+	function __construct(&$FRSRelease, $file_id=false, $arr=array()) {
 		parent::__construct();
 		if (!$FRSRelease || !is_object($FRSRelease)) {
 			$this->setError(_('Invalid FRS Release Object'));
