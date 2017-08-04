@@ -163,9 +163,9 @@ class ArtifactType extends FFError {
 	/**
 	 * @param	Group		$Group			The Group object.
 	 * @param	int|bool	$artifact_type_id	The id # assigned to this artifact type in the db.
-	 * @param	array|bool	$arr			The associative array of data.
+	 * @param	array		$arr			The associative array of data.
 	 */
-	function __construct($Group, $artifact_type_id = false, $arr = false) {
+	function __construct($Group, $artifact_type_id = false, $arr = array()) {
 		parent::__construct();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(_('Invalid Project'));
