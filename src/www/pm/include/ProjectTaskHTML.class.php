@@ -29,7 +29,7 @@ require_once $gfcommon.'pm/ProjectTask.class.php';
 
 class ProjectTaskHTML extends ProjectTask {
 
-	function __construct(&$ProjectGroup, $project_task_id=false, $arr=false) {
+	function __construct(&$ProjectGroup, $project_task_id=false, $arr=array()) {
 		parent::__construct($ProjectGroup, $project_task_id, $arr);
 	}
 

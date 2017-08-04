@@ -83,9 +83,9 @@ class ProjectTask extends FFError {
 	/**
 	 * @param	object	   	$ProjectGroup		The ProjectGroup object to which this ProjectTask is associated.
 	 * @param	int|bool	$project_task_id	The project_task_id.
-	 * @param	array|bool	$arr			The associative array of data.
+	 * @param	array		$arr			The associative array of data.
 	 */
-	function __construct(&$ProjectGroup, $project_task_id=false, $arr=false) {
+	function __construct(&$ProjectGroup, $project_task_id=false, $arr=array()) {
 		parent::__construct();
 		if (!$ProjectGroup || !is_object($ProjectGroup)) {
 			$this->setError('No Valid ProjectGroup Object');
