@@ -119,21 +119,21 @@ class ArtifactExtraField extends FFError {
 	 * @param	int	$field_type		The type of field - radio, select, text, textarea
 	 * @param	int	$attribute1		For text (size) and textarea (rows)
 	 * @param	int	$attribute2		For text (maxlength) and textarea (cols)
-	 * @param	int	$is_required		True or false whether this is a required field or not.
+	 * @param	bool	$is_required		True or false whether this is a required field or not.
 	 * @param	string	$alias			Alias for this extra field (optional)
-	 * @param	int|bool	$show100		True or false whether the 100 value is displayed or not
+	 * @param	bool	$show100		True or false whether the 100 value is displayed or not
 	 * @param	string	$show100label		The label used for the 100 value if displayed
 	 * @param	string	$description		Description used for help text.
 	 * @param	string	$pattern		A regular expression to check the field.
 	 * @param	int	$parent			Parent extra field id.
-	 * @param	int	$autoassign		True or false whether it triggers auto-assignment rules
-	 * @param	int	$is_hidden_on_submit	True or false to display the extrafield in the new artifact submit page
-	 * @param	int	$is_disabled		True or false to enable/disable the extrafield
+	 * @param	bool	$autoassign		True or false whether it triggers auto-assignment rules
+	 * @param	bool	$is_hidden_on_submit	True or false to display the extrafield in the new artifact submit page
+	 * @param	bool	$is_disabled		True or false to enable/disable the extrafield
 	 * @param	int		$aggregation_rule
 	 * @param	int		$distribution_rule
 	 * @return	bool	true on success / false on failure.
 	 */
-	function create($name, $field_type, $attribute1, $attribute2, $is_required = 0, $alias = '', $show100 = true, $show100label = 'none', $description = '', $pattern = '', $parent = 100, $autoassign = 0, $is_hidden_on_submit = 0, $is_disabled = 0, $aggregation_rule = 0, $distribution_rule = 0) {
+	function create($name, $field_type, $attribute1, $attribute2, $is_required = false, $alias = '', $show100 = true, $show100label = 'none', $description = '', $pattern = '', $parent = 100, $autoassign = false, $is_hidden_on_submit = false, $is_disabled = false, $aggregation_rule = 0, $distribution_rule = 0) {
 		//
 		//	data validation
 		//
@@ -478,8 +478,7 @@ class ArtifactExtraField extends FFError {
 	function isAutoAssign() {
 		if ($this->getArtifactType()->getAutoAssignField() == $this->getID()) {
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
@@ -889,7 +888,7 @@ class ArtifactExtraField extends FFError {
 	 * @param	int	$id				id of the field.
 	 */
 	function setRequired($required, $id) {
-		$res = db_query_params('UPDATE artifact_extra_field_list SET is_required = $1 WHERE extra_field_id = $2',
+		db_query_params('UPDATE artifact_extra_field_list SET is_required = $1 WHERE extra_field_id = $2',
 				array($required, $id));
 	}
 
@@ -901,21 +900,21 @@ class ArtifactExtraField extends FFError {
 	 * @param	string	$name		Name of the field.
 	 * @param	int	$attribute1	For text (size) and textarea (rows)
 	 * @param	int	$attribute2	For text (maxlength) and textarea (cols)
-	 * @param	int	$is_required	True or false whether this is a required field or not.
+	 * @param	bool	$is_required	True or false whether this is a required field or not.
 	 * @param	string	$alias		Alias for this field
-	 * @param	int|bool	$show100	True or false whether the 100 value is displayed or not
+	 * @param	bool	$show100	True or false whether the 100 value is displayed or not
 	 * @param	string	$show100label	The label used for the 100 value if displayed
 	 * @param	string	$description	Description used for help text.
 	 * @param	string	$pattern	A regular expression to check the field.
 	 * @param	int	$parent		Parent extra field id.
-	 * @param	int	$autoassign
-	 * @param	int	$is_hidden_on_submit
-	 * @param	int	$is_disabled
+	 * @param	bool	$autoassign
+	 * @param	bool	$is_hidden_on_submit
+	 * @param	bool	$is_disabled
 	 * @param	int	$aggregation_rule
 	 * @param	int	$distribution_rule
-	 * @return	bool	success.
+	 * @return	bool	success
 	 */
-	function update($name, $attribute1, $attribute2, $is_required = 0, $alias = "", $show100 = true, $show100label = 'none', $description = '', $pattern = '', $parent = 100, $autoassign = 0, $is_hidden_on_submit = 0, $is_disabled = 0, $aggregation_rule = 0, $distribution_rule = 0) {
+	function update($name, $attribute1, $attribute2, $is_required = false, $alias = "", $show100 = true, $show100label = 'none', $description = '', $pattern = '', $parent = 100, $autoassign = false, $is_hidden_on_submit = false, $is_disabled = false, $aggregation_rule = 0, $distribution_rule = 0) {
 		if (!forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
@@ -1062,7 +1061,7 @@ class ArtifactExtraField extends FFError {
 	 * Validate an alias.
 	 * Note that this function does not check for conflicts.
 	 *
-	 * @param	string	alias - alias to validate
+	 * @param	string	$alias - alias to validate
 	 * @return	bool	true if alias is valid, false otherwise and it sets the corresponding error
 	 */
 	function validateAlias($alias) {
