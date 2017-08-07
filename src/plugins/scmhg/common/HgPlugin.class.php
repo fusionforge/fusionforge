@@ -259,7 +259,7 @@ Offer DAV or SSH access.");
 		}
 		if ($project->usesPlugin($this->name)) {
 			if ($this->browserDisplayable($project)) {
-				$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
+				$protocol = forge_get_config('use_ssl', 'scmhg')? 'https' : 'http';
 				$box = forge_get_config('scm_host');
 				$iframesrc = $protocol.'://'.$box.'/plugins/scmhg/cgi-bin/'.$project->getUnixName().'.cgi';
 				if ($params['commit']) {
