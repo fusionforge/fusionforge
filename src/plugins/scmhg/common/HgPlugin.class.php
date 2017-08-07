@@ -314,7 +314,7 @@ Offer DAV or SSH access.");
 			fclose($f);
 			$apache_user = forge_get_config('apache_user');
 			$apache_group = forge_get_config('apache_group');
-			system("chgrp $apache_user:$apache_group $project_hgweb");
+			system("chown $apache_user:$apache_group $project_hgweb");
 			system("chmod u+x $project_hgweb");
 		}
 		if (!is_dir("$root/.hg")) {
