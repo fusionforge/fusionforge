@@ -33,7 +33,7 @@ if [ -e /etc/debian_version ]; then
 	libapache2-mpm-itk libapache2-mod-svn \
 	libapache2-mod-php5 \
 	apache2 postgresql postgresql-contrib libnss-pgsql2 unscd \
-	cvs subversion viewvc python-pycurl git xinetd \
+	cvs subversion viewvc python-pycurl git mercurial xinetd \
 	python-moinmoin libapache2-mod-wsgi python-psycopg2 \
 	unoconv poppler-utils dpkg-dev \
 	vsftpd
@@ -52,6 +52,7 @@ elif [ -e /etc/SuSE-release ]; then
 		cvs rcs perl-IPC-Run perl-URI \
 		subversion-server  \
 		git git-web \
+		mercurial \
 		python-psycopg2 \
 		mediawiki moinmoin-wiki \
 		vsftpd
@@ -61,7 +62,7 @@ else
     yum --enablerepo=epel install -y httpd-itk
     yum install -y gettext php-cli php-pgsql php-process php-mbstring php-pear-HTTP \
 	httpd mod_dav_svn mod_ssl postgresql-server postgresql-contrib nscd \
-	cvs subversion viewvc python-pycurl git gitweb xinetd \
+	cvs subversion viewvc python-pycurl git gitweb mercurial xinetd \
 	moin mod_wsgi python-psycopg2 \
 	unoconv poppler-utils libreoffice-headless \
         mediawiki php-markdown \
@@ -72,7 +73,7 @@ fi
     cd $(dirname $0)/../src/
     make
     make install-base install-shell install-scm \
-        install-plugin-scmcvs install-plugin-scmsvn install-plugin-scmgit \
+        install-plugin-scmcvs install-plugin-scmsvn install-plugin-scmgit install-plugin-scmhg \
         install-plugin-blocks install-plugin-moinmoin \
         install-plugin-taskboard install-plugin-message \
 	install-plugin-repositoryapi
