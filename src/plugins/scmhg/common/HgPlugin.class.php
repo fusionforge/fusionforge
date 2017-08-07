@@ -264,10 +264,8 @@ Offer DAV or SSH access.");
 				$iframesrc = $protocol.'://'.$box.'/plugins/scmhg/cgi-bin/'.$project->getUnixName().'.cgi';
 				if ($params['commit']) {
 					$iframesrc .= '/rev/'.$params['commit'];
-				} else {
-					$iframesrc .=  '?p='.$project->getUnixName();
 				}
-				htmlIframe($iframesrc,array('id'=>'scmhg_iframe', 'absolute'=>true));
+				htmlIframe($iframesrc, array('id' => 'scmhg_iframe', 'absolute' => true));
 			}
 		}
 	}
