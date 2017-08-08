@@ -42,6 +42,7 @@ make install-base \
      install-plugin-scmcvs \
      install-plugin-scmsvn \
      install-plugin-scmgit \
+     install-plugin-scmhg \
      install-plugin-blocks \
      install-plugin-moinmoin \
      install-plugin-taskboard \

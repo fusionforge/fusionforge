@@ -42,7 +42,8 @@ RUN source ./autoinstall/common-backports && \
                    libreoffice-headless \
                    cronie \
                    mediawiki \
-                   vsftpd && \
+                   vsftpd \
+                   mercurial && \
     yum -y clean all
 
 RUN yum --enablerepo=epel install -y supervisor \
