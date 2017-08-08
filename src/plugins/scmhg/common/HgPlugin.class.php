@@ -266,13 +266,13 @@ Offer DAV or SSH access.");
 					$iframesrc = $protocol.'://'.$box.'/anonscm/scmhg/cgi-bin/'.$project->getUnixName();
 				} elseif (session_loggedin()) {
 					$logged_user = user_get_object(user_getid())->getUnixName();
-					$iframesrc = $protocol.'://'.$box.'/authscm/'.$logged_user.'/scmhg/cgi-bin/'.$project->getUnixName();
+					$iframesrc = $protocol.'://'.$box.'/authscm/'.$logged_user.'/scmhg/cgi-bin/'.$project->getUnixName().'/';
 				}
 
 				if ($params['commit']) {
 					$iframesrc .= '/rev/'.$params['commit'];
 				}
-				htmlIframe($iframesrc, array('id' => 'scmhg_iframe', 'absolute' => true));
+				echo '<iframe src="'.$iframesrc.'" id="scmhg_iframe" style="width:100%; height:400px;" frameborder="0" ></iframe>';
 			}
 		}
 	}
