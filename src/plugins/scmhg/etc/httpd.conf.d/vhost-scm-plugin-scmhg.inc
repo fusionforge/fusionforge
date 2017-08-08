@@ -6,7 +6,7 @@ AliasMatch ^/authscm/[^/]+/hg/(.*)  ${FF__core__plugins_path}/scmhg/www/cgi-bin/
 AliasMatch ^/anonscm/hg/(.*) ${FF__core__plugins_path}/scmhg/www/cgi-bin/$1
 
 ScriptAlias /anonscm/scmhg/cgi-bin/ ${FF__core__plugins_path}/scmhg/www/cgi-bin/
-ScriptAliasMatch ^/authscm/[^/]+/scmhg/cgi-bin/$ ${FF__core__plugins_path}/scmhg/www/cgi-bin/
+ScriptAliasMatch ^/authscm/[^/]+/scmhg/cgi-bin/(.*) ${FF__core__plugins_path}/scmhg/www/cgi-bin/$1
 
 <Directory ${FF__core__plugins_path}/scmhg/www/cgi-bin >
 	Options +ExecCGI +FollowSymLinks +Multiviews
