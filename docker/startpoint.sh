@@ -27,8 +27,11 @@ fi
 if [[ ! -d /var/lib/pgsql/data ]]; then
     mkdir -p /var/lib/pgsql/data
     chown postgres:postgres /var/lib/pgsql/data
+fi
+if [[ ! -f /var/lib/pgsql/data/postgresql.conf ]]; then
     su postgres -c "/usr/bin/initdb -D /var/lib/pgsql/data"
 fi
+
 su postgres -c "/usr/bin/postgres -D /var/lib/pgsql/data -p 5432 &"
 }
 
