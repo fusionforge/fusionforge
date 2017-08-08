@@ -153,7 +153,7 @@ Offer DAV or SSH access.");
 				foreach ($repo_list as $repo_name) {
 					// Warning : the ssh uri MUST be this form : ssh://username@scmbox//path/reponame
 					//           HAVE YOU SEEN THE // starting the path ? Keep in mind the double /
-					$htmlRepo .= html_e('tt', array(), 'hg clone ssh://'.$d.'@'.forge_get_config('scm_host').'/'.forge_get_config('repos_path', 'scmhg').'/'.$project->getUnixName()).html_e('br');
+					$htmlRepo .= html_e('tt', array(), 'hg clone ssh://'.html_e('i', array(), _('developername')).'@'.forge_get_config('scm_host').'/'.forge_get_config('repos_path', 'scmhg').'/'.$project->getUnixName()).html_e('br');
 				}
 				$b .= html_e('p', array(), $htmlRepo);
 				$b .= '</div>';
