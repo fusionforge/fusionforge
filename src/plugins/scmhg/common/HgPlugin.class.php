@@ -261,7 +261,14 @@ Offer DAV or SSH access.");
 			if ($this->browserDisplayable($project)) {
 				$protocol = forge_get_config('use_ssl', 'scmhg')? 'https' : 'http';
 				$box = forge_get_config('scm_host');
-				$iframesrc = $protocol.'://'.$box.'/plugins/scmhg/cgi-bin/'.$project->getUnixName().'.cgi';
+
+	                        if ($project->enableAnonSCM()) {
+					$iframesrc = $protocol.'://'.$box.'/anonscm/scmhg/cgi-bin/'.$project->getUnixName();
+				} elseif (session_loggedin()) {
+					$logged_user = user_get_object(user_getid())->getUnixName();
+					$iframesrc = $protocol.'://'.$box.'/authscm/'.$logged_user.'/scmhg/cgi-bin/'.$project->getUnixName();
+				}
+
 				if ($params['commit']) {
 					$iframesrc .= '/rev/'.$params['commit'];
 				}
@@ -295,7 +302,7 @@ Offer DAV or SSH access.");
 		/** per project configuration for http **/
 		//get template hgweb.cgi
 		$hgweb = forge_get_config('source_path').'/plugins/scmhg/cgi-bin/hgweb.cgi';
-		$project_hgweb = forge_get_config('source_path').'/www/plugins/scmhg/cgi-bin/'.$project_name.'.cgi';
+		$project_hgweb = forge_get_config('source_path').'/www/plugins/scmhg/cgi-bin/'.$project_name;
 		if (!is_file($project_hgweb)) {
 			$lines = file($hgweb);
 			$repo_config = "";
