@@ -306,14 +306,12 @@ control over it to the project's administrator.");
 				$repo = $project->getUnixName().'/'.$project->getUnixName().'.git';
 			}
 
+			$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
+			$box = forge_get_config('scm_host');
 			if ($project->enableAnonSCM()) {
-				$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
-				$box = forge_get_config('scm_host');
 				$iframesrc = "$protocol://$box/anonscm/gitweb/?p=$repo";
 			} elseif (session_loggedin()) {
 				$logged_user = user_get_object(user_getid())->getUnixName();
-				$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
-				$box = forge_get_config('scm_host');
 				$iframesrc = "$protocol://$box/authscm/$logged_user/gitweb/?p=$repo";
 			}
 			if ($params['commit']) {
