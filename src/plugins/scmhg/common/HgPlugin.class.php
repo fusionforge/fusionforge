@@ -76,7 +76,7 @@ Offer DAV or SSH access.");
 		if (forge_get_config('use_dav', 'scmhg')) {
 			$protocol = forge_get_config('use_ssl', 'scmhg')? 'https' : 'http';
 			$b .= html_e('p', array(), _("This project's Mercurial repository can be checked out through anonymous access with the following command")._(':'));
-			$b .= html_e('p', array(), html_e('tt', array(), 'hg clone '.$protocol.'://'.forge_get_config('scm_host').'/anonscm/'.'hg'.'/'.$project->getUnixName()));
+			$b .= html_e('p', array(), html_e('kbd', array(), 'hg clone '.$protocol.'://'.forge_get_config('scm_host').'/anonscm/'.'hg'.'/'.$project->getUnixName()));
 		} else {
 			$b .= $HTML->warning_msg(_('Please contact forge administrator, scmhg plugin is not correctly configured'));
 		}
@@ -124,7 +124,7 @@ Offer DAV or SSH access.");
 				foreach ($repo_list as $repo_name) {
 					// Warning : the ssh uri MUST be this form : ssh://username@scmbox//path/reponame
 					//           HAVE YOU SEEN THE // starting the path ? Keep in mind the double /
-					$htmlRepo .= html_e('tt', array(), 'hg clone ssh://'.$d.'@'.forge_get_config('scm_host').'/'.forge_get_config('repos_path', 'scmhg').'/'.$project->getUnixName()).html_e('br');
+					$htmlRepo .= html_e('kbd', array(), 'hg clone ssh://'.$d.'@'.forge_get_config('scm_host').'/'.forge_get_config('repos_path', 'scmhg').'/'.$project->getUnixName()).html_e('br');
 				}
 				$b .= html_e('p', array(), $htmlRepo);
 				$b .= '</div>';
@@ -135,7 +135,7 @@ Offer DAV or SSH access.");
 				$htmlRepo = '';
 				$protocol = forge_get_config('use_ssl', 'scmhg') ? 'https' : 'http';
 				foreach ($repo_list as $repo_name) {
-					$htmlRepo .= html_e('tt', array(), 'hg clone '.$protocol.'://<i>'.$d.'</i>@'.forge_get_config('scm_host').'/authscm/'.$d.'/hg/'. $project->getUnixName()).html_e('br');
+					$htmlRepo .= html_e('kbd', array(), 'hg clone '.$protocol.'://<i>'.$d.'</i>@'.forge_get_config('scm_host').'/authscm/'.$d.'/hg/'. $project->getUnixName()).html_e('br');
 				}
 				$b .= html_e('p', array(), $htmlRepo);
 				$b .= '</div>';
@@ -153,7 +153,7 @@ Offer DAV or SSH access.");
 				foreach ($repo_list as $repo_name) {
 					// Warning : the ssh uri MUST be this form : ssh://username@scmbox//path/reponame
 					//           HAVE YOU SEEN THE // starting the path ? Keep in mind the double /
-					$htmlRepo .= html_e('tt', array(), 'hg clone ssh://'.html_e('i', array(), _('developername')).'@'.forge_get_config('scm_host').'/'.forge_get_config('repos_path', 'scmhg').'/'.$project->getUnixName()).html_e('br');
+					$htmlRepo .= html_e('kbd', array(), 'hg clone ssh://'.html_e('i', array(), _('developername'), true, false).'@'.forge_get_config('scm_host').'/'.forge_get_config('repos_path', 'scmhg').'/'.$project->getUnixName()).html_e('br');
 				}
 				$b .= html_e('p', array(), $htmlRepo);
 				$b .= '</div>';
@@ -168,7 +168,7 @@ Offer DAV or SSH access.");
 					' '. _('Enter your site password when prompted.'));
 				$htmlRepo = '';
 				foreach ($repo_list as $repo_name) {
-					$htmlRepo .= html_e('tt', array(), 'hg clone '.$protocol.'://'.html_e('i', array(), _('developername')).'@'.forge_get_config('scm_host').'/authscm/'.html_e('i', array(), _('developername')).'/hg/'.$project->getUnixName()).html_e('br');
+					$htmlRepo .= html_e('kbd', array(), 'hg clone '.$protocol.'://'.html_e('i', array(), _('developername'), true, false).'@'.forge_get_config('scm_host').'/authscm/'.html_e('i', array(), _('developername'), true, false).'/hg/'.$project->getUnixName()).html_e('br');
 				}
 				$b .= html_e('p', array(), $htmlRepo);
 				$b .= '</div>';
@@ -812,7 +812,7 @@ Offer DAV or SSH access.");
 // 			echo $HTML->listTableTop($titleArr);
 // 			foreach ($existing_repos as $key => $repo) {
 // 				$cells = array();
-// 				$cells[][] = html_e('tt', array(), $repo['repo_name']);
+// 				$cells[][] = html_e('kbd', array(), $repo['repo_name']);
 // 				$cells[][] = $repo['description'];
 // 				$cells[][] = $repo['clone_url'];
 // 				$deleteForm = $HTML->openForm(array('name' => 'form_delete_repo_'.$repo['repo_name'], 'action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
