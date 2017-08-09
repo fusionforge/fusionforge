@@ -271,6 +271,7 @@ $userProjectsIdArray = array();
 foreach ($projects as $p) {
 	if ($i == 0) {
 		echo $HTML->listTableTop($title);
+		$i = 1;
 	}
 	$cells = array();
 	$cells[][] = util_unconvert_htmlspecialchars(htmlspecialchars($p->getPublicName()));
