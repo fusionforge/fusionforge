@@ -36,10 +36,8 @@ class CVSCommitTracker extends scmhook {
 		$this->label = "scmcvs";
 		$this->unixname = "committracker";
 		$this->needcopy = 0;
-		// $filepath = forge_get_config('plugins_path') . '/scmhook/library/' . $this->label . '/hooks/' . $this->unixname . '/post.php';
-		// $this->command = '/usr/bin/php ' . $filepath . ' "$1" "$2"';
 		$filepath = forge_get_config('plugins_path').'/scmhook/library/'.$this->label.'/hooks/cvs_wrapper.php';
-		$this->command = 'ALL /usr/bin/php '.$filepath.' '.$this->hooktype.' progress %{sVv} $USER';
+		$this->command = 'ALL /usr/bin/php '.$filepath.' '.$this->hooktype.' '.$this->group->getUnixName().' %{sVv} $USER';
 	}
 
 	function isAvailable() {

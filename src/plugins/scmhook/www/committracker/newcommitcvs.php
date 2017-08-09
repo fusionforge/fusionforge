@@ -26,8 +26,6 @@
  *
  */
 
-$SubmittedVars = unserialize(urldecode($_POST['data']));
-
 require_once dirname(__FILE__)."/../../../env.inc.php";
 require_once $gfcommon.'include/pre.php';
 
@@ -41,25 +39,6 @@ $Config = array();
 $Configs = array();
 $Configs = unserialize(urldecode($_POST['data']));
 
-/*
-$data = urldecode($_POST['data']);
-$i = 0;
-if(is_array($SubmittedVars)) {
-	foreach ($SubmittedVars as $SubmittedVar) {
-		$Configs[$i] = array();
-		$Configs[$i]['UserName']        = $SubmittedVar['UserName'];
-		$Configs[$i]['Repository']      = $SubmittedVar['Repository'];
-		$Configs[$i]['FileName']        = $SubmittedVar['FileName'];
-		$Configs[$i]['PrevVersion']     = $SubmittedVar['PrevVersion'];
-		$Configs[$i]['ActualVersion']   = $SubmittedVar['ActualVersion'];
-		$Configs[$i]['Log']             = $SubmittedVar['Log'];
-		$Configs[$i]['ArtifactNumbers'] = $SubmittedVar['ArtifactNumbers'];
-		$Configs[$i]['CVSDate']         = $SubmittedVar['SvnDate'];
-		//$Configs[$i]['TaskNumbers']     = $SubmittedVar['TaskNumbers'];
-		$i++;
-	}
-}
-*/
 
 /**
  * Checks if the commit it's possible and parse arguments
@@ -78,19 +57,6 @@ function parseConfig(&$Config) {
 	$Result['check'] = true;
 	$Repository = $Config['Repository'];
 	$UserName = $Config['UserName'];
-	$dirpath  = $Config['Directory'];
-
-	// if($repos_path[strlen($repos_path)-1]!='/') {
-	// 	$repos_path.='/';
-	// }
-
-
-	// if(fileinode($repos_path) == fileinode($repo_root)) {
-		// $GroupName = $Repository; // substr($Repository, 0, strpos($Repository, '/'));
-		// $Config['FileName'] = $Config['FileName'];
-	// }
-
-	// $repo_root = $repos_path.$GroupName;
 
 	$Result['group'] = group_get_object_by_name($Repository);
 	$Result['user']  = user_get_object_by_name($UserName);
