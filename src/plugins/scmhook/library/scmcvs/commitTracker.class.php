@@ -29,7 +29,7 @@ class CVSCommitTracker extends scmhook {
 
 	function __construct() {
 		$this->group = $GLOBALS['group'];
-		$this->name = "Post Commit";
+		$this->name = "Commit Tracker";
 		$this->description = _('Every commit is pushed into related tracker or task.');
 		$this->classname = "commitTracker";
 		$this->hooktype = "post-commit";
