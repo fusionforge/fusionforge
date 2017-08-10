@@ -42,8 +42,15 @@ class ArtifactHtml extends Artifact {
 		$return = '';
 		$result = $this->getDetails();
 		$result_html = util_gen_cross_ref($result, $this->ArtifactType->Group->getID());
-		//$result = util_line_wrap( $result, 120,"\n");
-		$result_html = nl2br($result_html);
+		$parsertype = forge_get_config('tracker_parser_type');
+		switch ($parsertype) {
+			case 'markdown':
+				require_once 'Michelf/Markdown.inc.php';
+				$result_html = \Michelf\Markdown::defaultTransform($result_html);
+				break;
+			default:
+				$result_html = nl2br($result_html);
+		}
 
 		$title_arr = array();
 		if ($editable === true) {
@@ -108,20 +115,27 @@ function hide_edit_button(id) {
 
 				$return .= '<span style="float:left">';
 				$return .= _('Date')._(': ').
-					date(_('Y-m-d H:i'),db_result($result, $i, 'adddate')) .'<br />'.
+					date(_('Y-m-d H:i'), db_result($result, $i, 'adddate')) .'<br />'.
 					_('Sender')._(': ');
-				if(db_result($result,$i,'user_id') == 100) {
-					$return .= db_result($result,$i,'realname');
+				if(db_result($result, $i, 'user_id') == 100) {
+					$return .= db_result($result, $i, 'realname');
 				} else {
-					$return .= util_make_link_u (db_result($result,$i,'user_name'),db_result($result,$i,'user_id'),db_result($result,$i,'realname'));
+					$return .= util_make_link_u(db_result($result, $i, 'user_name'), db_result($result, $i, 'user_id'), db_result($result, $i, 'realname'));
 				}
 				$return .= '</span>';
 
 				$return .= '<p style="clear: both;padding-top: 1em;">';
 				$text = db_result($result, $i, 'body');
 				$text = util_gen_cross_ref($text, $this->ArtifactType->Group->getID());
-				//$text = util_line_wrap( $text, 120,"\n");
-				$text = nl2br($text);
+				$parsertype = forge_get_config('tracker_parser_type');
+ 				switch ($parsertype) {
+					case 'markdown':
+						require_once 'Michelf/Markdown.inc.php';
+						$text = \Michelf\Markdown::defaultTransform($text);
+						break;
+					default:
+						$text = nl2br($text);
+				}
 				$return .= $text;
 				$return .= '</p>';
 				$return .= '</td></tr>';
