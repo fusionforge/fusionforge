@@ -60,14 +60,14 @@ class Widget_TrackerComment extends Widget {
 			$count = $ah->hasMessages();
 			$nb = $count? ' ('.$count.')' : '';
 			$file_list = $ah->getFiles();
-			$count=count($file_list);
+			$count = count($file_list);
 		}
 		$nbf = (isset($count) && $count)? ' ('.$count.')' : '';
 		$elementsLi = array();
 		if ($func == 'detail') {
 			$elementsLi[] = array('content' => util_make_link('#tabber-comments', _('Comments').$nb, false, true));
 			if ($group->usesPM()) {
-				$count= db_numrows($ah->getRelatedTasks());
+				$count = db_numrows($ah->getRelatedTasks());
 				$nbrt = $count? ' ('.$count.')' : '';
 				$elementsLi[] = array('content' => util_make_link('#tabber-tasks', _('Related Tasks').$nbrt, false, true));
 			}
@@ -87,11 +87,11 @@ class Widget_TrackerComment extends Widget {
 			if ($pluginfound) {
 				$elementsLi[] = array('content' => util_make_link('#tabber-commits', _('Commits'), false, true));
 			}
-			$count=db_numrows($ah->getHistory());
+			$count = db_numrows($ah->getHistory());
 			$nbh = $count? ' ('.$count.')' : '';
 			$elementsLi[] = array('content' => util_make_link('#tabber-changes', _('Changes').$nbh, false, true));
 			if ($ah->hasRelations()) {
-				$count=db_numrows($ah->getRelations());
+				$count = db_numrows($ah->getRelations());
 				$nbr = $count? ' ('.$count.')' : '';
 				$elementsLi[] = array('content' => util_make_link('#tabber-relations', _('Relations').$nbr, false, true));
 			}
