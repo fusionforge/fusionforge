@@ -90,7 +90,7 @@ class phptextcaptchaPlugin extends Plugin {
 		$pngfile = sha1(session_id()).'.png';
 		if (is_file($this->pngdir.'/'.$pngfile)) {
 			unlink($this->pngdir.'/'.$pngfile);
-		}	
+		}
 		file_put_contents($this->pngdir.'/'.$pngfile, $png);
 		$html = '<p>';
 		$html .= '<img src="/plugins/'.$this->name.'/'.$pngfile.'?'.time().'" />';

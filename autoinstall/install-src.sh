@@ -37,7 +37,7 @@ if [ -e /etc/debian_version ]; then
 	python-moinmoin libapache2-mod-wsgi python-psycopg2 \
 	unoconv poppler-utils dpkg-dev \
 	vsftpd \
-        fonts-dejavu-core 
+        fonts-dejavu-core
     if ! dpkg-vendor --is Ubuntu; then
 	apt-get install locales-all  # https://bugs.launchpad.net/ubuntu/+source/glibc/+bug/1394929
     fi
@@ -78,7 +78,7 @@ fi
         install-plugin-scmcvs install-plugin-scmsvn install-plugin-scmgit install-plugin-scmhg \
         install-plugin-blocks install-plugin-moinmoin \
         install-plugin-taskboard install-plugin-message \
-	install-plugin-repositoryapi 
+	install-plugin-repositoryapi
     if [ -e /etc/centos-release ]; then
         make install-plugin-mediawiki
     fi

@@ -128,7 +128,7 @@ function hide_edit_button(id) {
 				$text = db_result($result, $i, 'body');
 				$text = util_gen_cross_ref($text, $this->ArtifactType->Group->getID());
 				$parsertype = forge_get_config('tracker_parser_type');
- 				switch ($parsertype) {
+				switch ($parsertype) {
 					case 'markdown':
 						require_once 'Michelf/Markdown.inc.php';
 						$text = \Michelf\Markdown::defaultTransform($text);
