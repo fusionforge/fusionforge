@@ -94,6 +94,7 @@ class phptextcaptchaPlugin extends Plugin {
 		file_put_contents($this->pngdir.'/'.$pngfile, $png);
 		$html = '<p>';
 		$html .= '<img src="/plugins/'.$this->name.'/'.$pngfile.'?'.time().'" />';
+		$html .= '</p><p>';
 		$html .= _('Write captcha here')._(': ').'<br />';
 		$html .= '<input type="text" name="captcha_code" size="10" maxlength="8" required="required" />';
 		$html .= '</p>';
