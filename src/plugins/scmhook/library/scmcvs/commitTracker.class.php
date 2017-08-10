@@ -53,14 +53,19 @@ class CVSCommitTracker extends scmhook {
 		return $this->disabledMessage;
 	}
 
-	function artifact_extra_detail($params) {
+	function artifact_extra_detail(&$params) {
 		global $HTML;
 		$DBResult = db_query_params('SELECT * FROM plugin_scmhook_scmcvs_committracker_data_master dm, plugin_scmhook_scmcvs_committracker_data_artifact da
 					WHERE da.group_artifact_id = $1 AND dm.holder_id = da.id ORDER BY cvs_date desc', array($params['artifact_id']));
 		if (!$DBResult) {
-			echo $HTML->error_msg(_('Unable to retrieve data'));
+			$return = $HTML->error_msg(_('Unable to retrieve data'));
 		} else {
-			$this->getCommitEntries($DBResult, $params['group_id']);
+			$return = $this->getCommitEntries($DBResult, $params['group_id']);
+		}
+		if (isset($params['content'])) {
+			$params['content'] .= $return;
+		} else {
+			echo $return;
 		}
 	}
 
@@ -93,7 +98,7 @@ class CVSCommitTracker extends scmhook {
 			$return .= html_e('h2', array(), _('Related CVS commits'), false);
 
 			$title_arr = $this->getTitleArr();
-			echo $HTML->listTableTop($title_arr);
+			$return .= $HTML->listTableTop($title_arr);
 
 			while ($Row = db_fetch_array($DBResult)) {
 				$cells = array();
