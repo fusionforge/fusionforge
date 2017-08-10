@@ -186,10 +186,10 @@ over it to the project's administrator.");
 				$cells = array();
 				$cells[] = array(util_display_user($data['user_name'], $data['user_id'], $data['realname']), 'class' => 'halfwidth');
 				$cells[] = array($data['adds'], 'class' => 'onequarterwidth align-right');
-				$cells[] = array($data['updates'], 'class' => 'onequarterwidth align-right');
+				$cells[] = array($data['commits'], 'class' => 'onequarterwidth align-right');
 				$b .= $HTML->multiTableRow(array(), $cells);
 				$total['adds'] += $data['adds'];
-				$total['updates'] += $data['commits'];
+				$total['commits'] += $data['commits'];
 				$i++;
 			}
 			$cells = array();
