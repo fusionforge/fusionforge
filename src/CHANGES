@@ -48,7 +48,7 @@ FusionForge 6.X:
 * Tracker: CSV export, add comments [#853] (Dassault Aviation)
 * Tracker: add new customfield: Effort (TrivialDev)
 * Tracker: new widget oriented display to replace the old "2 columns" view. (TrivialDev)
-* Tracker: support markdown syntax in artifact summary and comments (TrivialDev)
+* Tracker: support Markdown syntax in artifact detailled description and comments (TrivialDev)
 * Utils: cross ref document/release. Use [DNNN]/[RNNN] where NNN is the ID of the document/frs release. (TrivialDev)
 * Web UI: upgrade splitter jquery plugin to 0.20.0 (TrivialDev)
 * Web UI: upgrade jquery ui to 1.12.1 (TrivialDev)
