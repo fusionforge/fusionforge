@@ -11,8 +11,6 @@ case "$1" in
     configure)
 	# hgweb
 	if [ -z "$hgwebcgi" -o -z "$hgtemplatesdir" ]; then echo "Cannot find required directories"; exit 1; fi
-	mkdir -p -m 755 $plugindir/cgi-bin/
-	mkdir -p -m 755 $plugindir/www/cgi-bin/
 	ln -nfs $hgwebcgi                 $plugindir/cgi-bin/
 	ln -nfs $plugindir/etc/fflog.tmpl $hgtemplatesdir
 	;;
