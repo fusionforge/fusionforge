@@ -88,7 +88,7 @@ if (count($pg_arr) < 1 || $pg_arr == false) {
 			echo $pg_arr[$j]->getErrorMessage();
 		} else {
 			$cells = array();
-			$cells[][] = util_make_link('/pm/task.php?group_project_id='.$pg_arr[$j]->getID().'&group_id='.$group_id.'&func=browse', html_image("ic/taskman20w.png", 20, 20). ' '.$pg_arr[$j]->getName());
+			$cells[][] = util_make_link('/pm/task.php?group_project_id='.$pg_arr[$j]->getID().'&group_id='.$group_id.'&func=browse', $HTML->getPmPic(). ' '.$pg_arr[$j]->getName());
 			$cells[][] = $pg_arr[$j]->getDescription(); 
 			$cells[] = array((int) $pg_arr[$j]->getOpenCount(), 'class' => 'align-center');
 			$cells[] = array((int) $pg_arr[$j]->getTotalCount(), 'class' => 'align-center');
