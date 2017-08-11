@@ -27,20 +27,20 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/cron_utils.php';
 
 // Plugins subsystem
-require_once $gfcommon.'include/Plugin.class.php' ;
-require_once $gfcommon.'include/PluginManager.class.php' ;
+require_once $gfcommon.'include/Plugin.class.php';
+require_once $gfcommon.'include/PluginManager.class.php';
 
 // SCM-specific plugins subsystem
-require_once $gfcommon.'include/SCMPlugin.class.php' ;
+require_once $gfcommon.'include/SCMPlugin.class.php';
 
-session_set_admin () ;
+session_set_admin();
 
-setup_plugin_manager () ;
+setup_plugin_manager();
 
 
 date_default_timezone_set(@date_default_timezone_get());
 $endtime   = time();
-$starttime = $endtime - 86400 ;
+$starttime = $endtime - 86400;
 
 $shortopts = "v";       // enable verbose mode
 $longopts = array(
@@ -59,29 +59,29 @@ if ($options === false) {  // doesn't work, PHP returns ambiguous array() on err
 }
 
 
-$EXTRA_WHERE = "";
+$EXTRA_WHERE = '';
 $verbose = false;
 
-$qpa = db_construct_qpa(false, 'SELECT group_id, group_name, register_time FROM groups WHERE status=$1 AND use_scm=$2', array ('A', 1));
+$qpa = db_construct_qpa(false, 'SELECT group_id, group_name, register_time FROM groups WHERE status = $1 AND use_scm = $2', array ('A', 1));
 
 if ( isset($options['v']) ) {
 	$verbose = true;
 }
 if ( isset($options['startdate']) ) {
 	$starttime = strtotime($options['startdate']) ;
-	($verbose) && print "Startdate: ".date("Y-m-d", $starttime)."\n";
+	($verbose) && print 'Startdate:       '.date('Y-m-d', $starttime)."\n";
 }
 if ( isset($options['enddate']) ) {
 	$endtime = strtotime($options['enddate']) ;
-	($verbose) && print "Enddate:   ".date("Y-m-d", $endtime)."\n";
+	($verbose) && print 'Enddate:         '.date('Y-m-d', $endtime)."\n";
 }
 if ( isset($options['group_id']) ) {
-	($verbose) && print "group_id:      ".$options['group_id']."\n";
-	$qpa = db_construct_qpa($qpa, ' AND group_id=$1', array($options['group_id']));
+	($verbose) && print 'group_id:        '.$options['group_id']."\n";
+	$qpa = db_construct_qpa($qpa, ' AND group_id = $1', array($options['group_id']));
 }
 if ( isset($options['unix_group_name']) ) {
-	($verbose) && print "unix_group_name: ".$options['unix_group_name']."\n";
-	$qpa = db_construct_qpa($qpa, ' AND unix_group_name=$1', array($options['unix_group_name']));
+	($verbose) && print 'unix_group_name: '.$options['unix_group_name']."\n";
+	$qpa = db_construct_qpa($qpa, ' AND unix_group_name = $1', array($options['unix_group_name']));
 }
 
 $qpa = db_construct_qpa($qpa, ' ORDER BY group_id DESC');
@@ -96,31 +96,31 @@ if (!$res) {
 
 $output = '';
 while ($data = db_fetch_array ($res)) {
-	($verbose) && print "Processing GroupId ".$data['group_id']." (".$data['group_name'].")\n";
+	($verbose) && print 'Processing GroupId '.$data['group_id'].' ('.$data['group_name'].")\n";
 	$time = $starttime;
 	$etime = $endtime;
-	if ( isset($options['all']) ) {
+	if (isset($options['all'])) {
 		$time = date($data['register_time']);
 		$etime = time();
 	}
-	if ( isset($options['allepoch']) ) {
+	if (isset($options['allepoch'])) {
 		$time = 0;
 		$etime = time();
 	}
 	$last_seen_day = '' ;
 	while ($time < $etime) {
-		$day = date ('Y-m-d', $time) ;
+		$day = date('Y-m-d', $time);
 		if ($day != $last_seen_day) {
 			$last_seen_day = $day ;
 			($verbose) && print "processing $day\n" ;
-			$hook_params = array ('group_id' => $data['group_id'],
-						  'mode' => 'day',
-						  'year' => date ('Y', $time),
-						  'month' => date ('n', $time),
-						  'day' => date ('j', $time)) ;
-			plugin_hook ('scm_gather_stats', $hook_params) ;
+			$hook_params = array('group_id' => $data['group_id'],
+						 'mode' => 'day',
+						 'year' => date('Y', $time),
+						 'month' => date('n', $time),
+						 'day' => date('j', $time));
+			plugin_hook('scm_gather_stats', $hook_params);
 		}
-		$time = $time + 86400 ;
+		$time = $time + 86400;
 	}
 }
 
