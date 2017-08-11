@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2012,2014,2016, Franck Villaume - TrivialDev
+ * Copyright 2012,2014,2016-2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is a part of Fusionforge.
@@ -163,7 +163,7 @@ class Widget_ProjectPublicAreas extends Widget {
 				$result .= "\n".'<ul class="task-manager">';
 				foreach ($pgs as $pg) {
 					$result .= "\n\t<li>";
-					$result .= util_make_link('/pm/task.php?group_project_id='.$pg->getID().'&group_id='.$group_id.'&func=browse',$pg->getName());
+					$result .= util_make_link('/pm/task.php?group_project_id='.$pg->getID().'&group_id='.$group_id.'&func=browse',$pg->getName()).' ('.html_e('strong', array(), $pg->getOpenCount(), true, false).' '._('open').' / '.html_e('strong', array(), $pg->getTotalCount()).' '._('total').')';
 					$result .= '</li>' ;
 				}
 				$result .= "\n</ul>";
