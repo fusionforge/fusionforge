@@ -73,7 +73,7 @@ if (count($at_arr) < 1) {
 		Put the result set (list of trackers for this group) into a column with folders
 	*/
 	$tablearr = array(_('Tracker'),_('Description'),_('Open'),_('Total'));
-	$thclass = array(array(), array(), array(), array('class' => 'align-center'), array('class' => 'align-center'));
+	$thclass = array(array(), array(), array('class' => 'align-center'), array('class' => 'align-center'));
 	if ($child_has_at) {
 		$tablearr = array(_('Project'), _('Tracker'),_('Description'),_('Open'),_('Total'));
 		$thclass = array(array(), array(), array(), array('class' => 'align-center'), array('class' => 'align-center'));
