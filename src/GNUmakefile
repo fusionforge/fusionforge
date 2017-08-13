@@ -1,6 +1,7 @@
 # FusionForge build system
 #
 # Copyright (C) 2014, 2015  Inria (Sylvain Beucler)
+# Copyright 2017, Franck Villaume - TrivialDev
 #
 # This file is part of FusionForge. FusionForge is free software;
 # you can redistribute it and/or modify it under the terms of the
@@ -24,8 +25,6 @@ VERSION:=$(shell cat VERSION)
 ## Step 1: build files
 all:
 	$(MAKE) -C locale/
-
-
 
 ## Step 2: install files
 install: all install-base install-plugins
@@ -143,6 +142,7 @@ install-lists: install-base-dirs
 	$(CP_R) cronjobs/lists $(DESTDIR)$(pkgdatadir)/cronjobs/
 	$(CP_R) post-install.d/lists $(DESTDIR)$(pkgdatadir)/post-install.d/
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(pkgdatadir)/lists/
+
 install-ftp: install-base-dirs
 	$(CP_R) cronjobs/ftp $(DESTDIR)$(pkgdatadir)/cronjobs/
 	$(CP_R) post-install.d/ftp $(DESTDIR)$(pkgdatadir)/post-install.d/
@@ -189,24 +189,33 @@ post_source_path:=$(shell forge_get_config source_path 2>/dev/null)
 post_plugins_path:=$(shell forge_get_config plugins_path 2>/dev/null)
 post-install:
 	$(post_source_path)/bin/post-install.sh
-post-install-base: post-install-common post-install-db post-install-web post-install-scm
+
+post-install-base: post-install-common post-install-db post-install-web post-install-scm post-install-ftp
+
 post-install-common:
 	$(post_source_path)/post-install.d/common/common.sh configure
+
 post-install-db:
 	$(post_source_path)/post-install.d/db/db.sh configure
+
 post-install-web:
 	$(post_source_path)/post-install.d/web/web.sh configure
+
 post-install-scm:
 #	nothing yet
 
 post-install-shell:
 	$(post_source_path)/post-install.d/shell/shell.sh configure
+
 post-install-mta-postfix:
 	$(post_source_path)/post-install.d/mta-postfix/mta-postfix.sh configure
+
 post-install-mta-exim4:
 	$(post_source_path)/post-install.d/mta-exim4/mta-exim4.sh configure
+
 post-install-lists:
 	$(post_source_path)/post-install.d/lists/lists.sh configure
+
 post-install-ftp:
 	$(post_source_path)/post-install.d/ftp/ftp.sh configure
 

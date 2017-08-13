@@ -100,3 +100,6 @@ Depends:
 
 Package: fusionforge-plugin-webanalytics
 Depends:
+
+Package: fusionforge-plugin-phptextcaptcha
+Depends: php-text-captcha
