@@ -1,6 +1,5 @@
 <?php
 /**
- *
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
  * Originally written by Laurent Julliard 2001, 2002, Codendi Team, Xerox
  * http://www.codendi.com
@@ -27,11 +26,11 @@
  * my_hide_url() - Generate hide/show urls to expand/collapse sections of the personal page
  *
  * @param	string	$svc		service name to hide/show (sr, bug, pm...)
- * @param	int		$db_item_id	the item (group, forum, task sub-project,...) from the
- *								database that we are currently processing and about to display
- * @param	int		$item_id	the item_id as given in the URL and on which the show/hide switch
- *								is going to apply
- * @param	int		$count
+ * @param	int	$db_item_id	the item (group, forum, task sub-project,...) from the
+ *					database that we are currently processing and about to display
+ * @param	int	$item_id	the item_id as given in the URL and on which the show/hide switch
+ *					is going to apply
+ * @param	int	$count
  * @param	bool	$hide		hide param as given in the script URL (-1 means no param was given)
  * @return	array
  *  $hide_url: URL to use in the page to switch from hide to show or vice versa
