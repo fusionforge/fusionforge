@@ -72,7 +72,7 @@ class System extends FFError {
 		} else {
 			$systasksq = new SysTasksQ();
 			$systasksq->add(SYSTASK_CORE, 'HOMEDIR', null, $user_id);
-			//$systasksq->add(SYSTASK_CORE, 'FTP_ACCESS', null, $user_id);
+			$systasksq->add(SYSTASK_CORE, 'FTP_ACCESS', null, $user_id);
 			return true;
 		}
 	}

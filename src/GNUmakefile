@@ -147,7 +147,7 @@ install-ftp: install-base-dirs
 	$(CP_R) cronjobs/ftp $(DESTDIR)$(pkgdatadir)/cronjobs/
 	$(CP_R) post-install.d/ftp $(DESTDIR)$(pkgdatadir)/post-install.d/
 
-install-base: install-base-dirs install-common install-web install-db install-scm
+install-base: install-base-dirs install-common install-web install-db install-scm install-ftp
 
 # Select only "valid" plugins for 'make install'
 PLUGINS=$(shell grep -l '^plugin_status\s=\svalid' plugins/*/etc/*.ini | sed 's,plugins/\([^/]*\)/.*,\1,')
