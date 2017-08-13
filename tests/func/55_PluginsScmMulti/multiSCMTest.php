@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Copyright (C) 2012 Roland Mas
  * Copyright (C) 2015  Inria (Sylvain Beucler)
  *
@@ -93,7 +93,7 @@ class multiSCMTest extends FForge_SeleniumTestCase
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
-		$p = $this->getText("//tt[contains(.,'git clone git+ssh')]");
+		$p = $this->getText("//kbd[contains(.,'git clone git+ssh')]");
 		$p = preg_replace(",^git clone ,", "", $p);
 		$t = exec("mktemp -d /tmp/gitTest.XXXXXX");
 		system("cd $t && git clone --quiet $p", $ret);
