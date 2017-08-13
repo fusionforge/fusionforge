@@ -179,6 +179,19 @@ Description: collaborative development tool - mailing-lists (using Mailman)
  This package controls the interaction between FusionForge and Mailman.
 
 
+Package: fusionforge-ftp
+Architecture: all
+Depends: fusionforge-common (=${source:Version}), php-cli | php5-cli, vsftpd, ${misc:Depends}
+Description: collaborative development tool - ftp (using vsftpd)
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This package controls the interaction between FusionForge and vsftpd.
+
+
 ##
 # Transition 5.3->6.0
 ##
