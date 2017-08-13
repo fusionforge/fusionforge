@@ -49,7 +49,7 @@ class ScmGitSSHTest extends FForge_SeleniumTestCase
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
-		$p = $this->getText("//tt[contains(.,'git clone git+ssh')]");
+		$p = $this->getText("//kbd[contains(.,'git clone git+ssh')]");
 		$p = preg_replace(",^git clone ,", "", $p);
 
 		// Create a local clone, add stuff, push it to the repo
