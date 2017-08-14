@@ -21,25 +21,28 @@
 set -e
 
 . $(forge_get_config source_path)/post-install.d/common/service.inc
+vsftpdconffile=$(ls /etc/vsftpd.conf /etc/vsftpd/vsftpd.conf 2>/dev/null | tail -1)
+#Debian: /etc/vsftpd.conf
+#CentOS: /etc/vsftpd/vsftpd.conf
 
 configure_ftpd() {
-    sed -i -e 's/^anonymous_enable=.*$/anonymous_enable=NO/' /etc/vsftpd/vsftpd.conf
-    sed -i -e 's/^#ftpd_banner=.*$/ftpd_banner=Welcome to FusionForge FTP server/' /etc/vsftpd/vsftpd.conf
-    sed -i -e 's/^#chroot_local_user=.*$/chroot_local_user=YES/' /etc/vsftpd/vsftpd.conf
+    sed -i -e 's/^anonymous_enable=.*$/anonymous_enable=NO/' $vsftpdconffile
+    sed -i -e 's/^#ftpd_banner=.*$/ftpd_banner=Welcome to FusionForge FTP server/' $vsftpdconffile
+    sed -i -e 's/^#chroot_local_user=.*$/chroot_local_user=YES/' $vsftpdconffile
     if [[ $is_docker ]]; then
-        if [[ -z `grep 'background=NO' /etc/vsftpd/vsftpd.conf` ]];then
-            echo 'background=NO' >> /etc/vsftpd/vsftpd.conf
+        if [[ -z `grep 'background=NO' $vsftpdconffile` ]];then
+            echo 'background=NO' >> $vsftpdconffile
         fi
     fi
 }
 
 remove_ftpd() {
-    sed -i -e 's/^anonymous_enable=NO.*$/anonymous_enable=YES/' /etc/vsftpd/vsftpd.conf
-    sed -i -e 's/^ftpd_banner=Welcome.*$/#ftpd_banner=Welcome to blah FTP service./' /etc/vsftpd/vsftpd.conf
-    sed -i -e 's/^chroot_local_user=YES.*$/#chroot_local_user=NO/' /etc/vsftpd/vsftpd.conf
+    sed -i -e 's/^anonymous_enable=NO.*$/anonymous_enable=YES/' $vsftpdconffile
+    sed -i -e 's/^ftpd_banner=Welcome.*$/#ftpd_banner=Welcome to blah FTP service./' $vsftpdconffile
+    sed -i -e 's/^chroot_local_user=YES.*$/#chroot_local_user=NO/' $vsftpdconffile
     if [[ $is_docker ]]; then
-        if [[ ! -z `grep 'background=NO' /etc/vsftpd/vsftpd.conf` ]];then
-            sed -i '$d' /etc/vsftpd/vsftpd.conf
+        if [[ ! -z `grep 'background=NO' $vsftpdconffile` ]];then
+            sed -i '$d' $vsftpdconffile
         fi
     fi
 }
