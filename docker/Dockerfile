@@ -21,6 +21,8 @@ RUN source ./autoinstall/common-backports && \
                    php-process \
                    php-mbstring \
                    php-pear-HTTP \
+                   php-pear-Text_CAPTCHA \
+                   php-markdown \
                    httpd \
                    mod_dav_svn \
                    mod_ssl \
@@ -43,7 +45,8 @@ RUN source ./autoinstall/common-backports && \
                    cronie \
                    mediawiki \
                    vsftpd \
-                   mercurial && \
+                   mercurial \
+                   dejavu-fonts-common && \
     yum -y clean all
 
 RUN yum --enablerepo=epel install -y supervisor \

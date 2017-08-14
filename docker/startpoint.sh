@@ -56,7 +56,8 @@ make install-base \
      install-plugin-headermenu \
      install-plugin-gravatar \
      install-plugin-scmhook \
-     install-plugin-webanalytics
+     install-plugin-webanalytics \
+     install-plugin-phptextcaptcha
 }
 __postinstall() {
 /usr/local/share/fusionforge/post-install.d/common/common.sh configure
@@ -68,6 +69,8 @@ __postinstall() {
 __zzzzlocalini() {
 echo '[core]' > /etc/fusionforge/config.ini.d/zzzz-local.ini
 echo 'is_docker = 1' >> /etc/fusionforge/config.ini.d/zzzz-local.ini
+echo "tracker_parser_type = 'markdown'" >> /etc/fusionforge/config.ini.d/zzzz-local.ini
+
 if [[ ! -z ${PORT_HTTP} ]]; then
    echo 'http_port = '${PORT_HTTP} >> /etc/fusionforge/config.ini.d/zzzz-local.ini
 fi
@@ -77,6 +80,10 @@ fi
 if [[ ! -z ${PORT_SSH} ]]; then
    echo 'ssh_port = '${PORT_SSH} >> /etc/fusionforge/config.ini.d/zzzz-local.ini
 fi
+
+echo '[blocks]' >> /etc/fusionforge/config.ini.d/zzzz-local.ini
+echo "parser_type = 'markdown'" >> /etc/fusionforge/config.ini.d/zzzz-local.ini
+echo "default = 'use markdown syntax to format your text'" >> /etc/fusionforge/config.ini.d/zzzz-local.ini
 }
 
 __etchost() {
