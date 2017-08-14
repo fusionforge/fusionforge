@@ -53,6 +53,9 @@ RUN yum --enablerepo=epel install -y supervisor \
                                      net-tools && \
     yum -y clean all
 
+RUN curl https://kojipkgs.fedoraproject.org//packages/httpd-itk/2.4.7.04/1.el7/x86_64/httpd-itk-2.4.7.04-1.el7.x86_64.rpm -o httpd-itk-2.4.7.04-1.el7.x86_64.rpm && \
+    yum downgrade -y httpd-itk-2.4.7.04-1.el7.x86_64.rpm
+
 RUN mkdir /var/run/sshd
 RUN /usr/sbin/sshd-keygen
 
