@@ -4,6 +4,7 @@
 # Copyright (C) 2011  Roland Mas
 # Copyright (C) 2011  Olivier Berger - Institut Telecom
 # Copyright (C) 2014  Inria (Sylvain Beucler)
+# Copyright 2017, Franck Villaume - TrivialDev
 #
 # This file is part of FusionForge. FusionForge is free software;
 # you can redistribute it and/or modify it under the terms of the
@@ -22,28 +23,13 @@
 
 
 function backports_deb {
-    if grep -q ^7 /etc/debian_version; then
-	# Install OpenSSH 6.6 to get AuthorizedKeysCommand support
-	if [ ! -f /etc/apt/sources.list.d/backports.list ]; then
-	    echo 'deb http://http.debian.net/debian wheezy-backports main' \
-		> /etc/apt/sources.list.d/backports.list
-	    apt-get update
+	if grep -q ^8 /etc/debian_version; then
+		# Install Mediawiki from jessie-backport
+		if [ ! -f /etc/apt/sources.list.d/backports.list ]; then
+			echo 'deb http://http.debian.net/debian jessie-backports main' \
+				> /etc/apt/sources.list.d/backports.list
+		fi
 	fi
-	if dpkg-query -s openssh-server | grep -q 'Version: 1:6.0'; then
-	    apt-get -y install openssh-server -t wheezy-backports
-	fi
-
-	# fusionforge-plugin-scmbzr depends on loggerhead (>=
-	# 1.19~bzr477~), but wheezy only has 1.19~bzr461-1, so we need
-	# to manually "Backport" a more recent dependency
-	if ! dpkg-query -s loggerhead >/dev/null 2>&1 ; then
-	    # install loggerhead with its dependencies
-	    # we need gdebi to make sure dependencies are installed too (simple dpkg -i won't)
-	    apt-get -y install gdebi-core wget
-	    wget -c http://snapshot.debian.org/archive/debian/20121107T152130Z/pool/main/l/loggerhead/loggerhead_1.19%7Ebzr477-1_all.deb
-	    gdebi --non-interactive loggerhead_1.19~bzr477-1_all.deb
-	fi
-    fi
 }
 
 function backport_rpm_from_fedora {
@@ -172,48 +158,6 @@ EOF
 
     case $os_version in
 	7)
-	    # viewvc: not available in EPEL7
-	    if yum list viewvc >/dev/null 2>&1; then
-		yum install -y viewvc
-	    else
-		DEPS="python-devel python-pygments"
-		REMOVEDEPS="python-devel"
-		yum install -y $DEPS
-		yumdownloader --enablerepo=fedora-source --enablerepo=fedora-updates-source \
-			      --source viewvc
-		rpm -ivh viewvc-*.src.rpm
-		# remove cvsgraph dependency, not available in EPEL7
-		sed -i -e '/Requires:\s*cvsgraph/d' ~/rpmbuild/SPECS/viewvc.spec
-		rpmbuild -bb ~/rpmbuild/SPECS/viewvc.spec
-		yum install -y ~/rpmbuild/RPMS/*/viewvc-[0-9]*.rpm
-	    fi
-
-	    # mediawiki not available in EPEL
-	    # Note: we don't support mediawiki > 1.19 as of 2015-06
-	    # Note: no stable/backportable mediawiki rpm as of 2015-09 -> manual install + mock rpm?
-	    if false; then
-                if yum list mediawiki >/dev/null 2>&1; then
-                    yum install -y mediawiki
-                else
-                    DEPS="httpd-filesystem"
-                    yum install --enablerepo=fedora -y $DEPS
-                    yumdownloader --enablerepo=fedora-source --enablerepo=fedora-updates-source \
-                                  --source mediawiki
-                    rpm -ivh mediawiki-*.src.rpm
-		    # Work-arounds for mediawiki-1.25.1-3.fc22
-                    # don't backport php-pecl-jsonc which has lots of deps, use built-in php-json
-                    sed -i -e '/Requires/ s/, php-pecl-jsonc//' ~/rpmbuild/SPECS/mediawiki.spec
-                    sed -i -e '/Requires: php-pecl-jsonc/d' ~/rpmbuild/SPECS/mediawiki.spec
-                    # drop new-style php requires
-                    sed -i -e '/Requires: php(/d' ~/rpmbuild/SPECS/mediawiki.spec
-                    # drop test-suite
-                    sed -i -e '/BuildRequires: /d' ~/rpmbuild/SPECS/mediawiki.spec
-                    sed -i -e '/^%check/,/^php phpunit.php/d' ~/rpmbuild/SPECS/mediawiki.spec
-                    rpmbuild -bb ~/rpmbuild/SPECS/mediawiki.spec
-                    yum install -y ~/rpmbuild/RPMS/noarch/mediawiki-[0-9]*.rpm
-                fi
-	    fi
-
 	    yum --enablerepo=epel -y install php-tidy
 	    # php-htmlpurifier-htmlpurifier Requires, available in EPEL6 but not EPEL7
 	    DEPS="php-pear"

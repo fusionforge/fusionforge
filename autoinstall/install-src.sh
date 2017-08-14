@@ -4,6 +4,7 @@
 # Copyright (C) 2011  Roland Mas
 # Copyright (C) 2011  Olivier Berger - Institut Telecom
 # Copyright (C) 2014  Inria (Sylvain Beucler)
+# Copyright 2017, Franck Villaume - TrivialDev
 #
 # This file is part of FusionForge. FusionForge is free software;
 # you can redistribute it and/or modify it under the terms of the
@@ -38,6 +39,7 @@ if [ -e /etc/debian_version ]; then
 		unoconv poppler-utils dpkg-dev \
 		vsftpd \
 		fonts-dejavu-core
+	apt-get -y install mediawiki -t jessie-backports
 	if ! dpkg-vendor --is Ubuntu; then
 		apt-get install locales-all  # https://bugs.launchpad.net/ubuntu/+source/glibc/+bug/1394929
 	fi
