@@ -457,4 +457,14 @@ class DocumentManager extends FFError {
 		}
 		return $results;
 	}
+
+	function getNbDocs() {
+		$res = db_query_params('SELECT count(docid) as docs FROM doc_data WHERE group_id = $1', array($this->Group->getID()));
+		return db_result($res, 0, 0);
+	}
+
+	function getNbFolders() {
+		$res = db_query_params('SELECT count(doc_group) as folders FROM doc_groups WHERE group_id = $1', array($this->Group->getID()));
+		return db_result($res, 0, 0);
+	}
 }

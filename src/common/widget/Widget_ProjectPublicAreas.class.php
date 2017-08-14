@@ -21,6 +21,8 @@
  */
 
 require_once 'Widget.class.php';
+require_once $gfcommon.'frs/FRSManager.class.php';
+require_once $gfcommon.'docman/DocumentManager.class.php';
 
 /**
  * Widget_ProjectPublicAreas
@@ -122,6 +124,8 @@ class Widget_ProjectPublicAreas extends Widget {
 			$link_content = $HTML->getDocmanPic('') . ' ' . _('Document Manager');
 			//	<a rel="sioc:container_of" xmlns:sioc="http://rdfs.org/sioc/ns#" href="'.util_make_url ('/docman/?group_id='.$group_id).'">';
 			$result .= util_make_link('/docman/?group_id='.$group_id, $link_content);
+			$docm = new DocumentManager($project);
+			$result .= ' ('.html_e('strong', array(), $docm->getNbDocs(), true, false).' '._('documents').' '._('in').' '.html_e('strong', array(), $docm->getNbFolders(), true, false).' '._('directories').')';
 			$result .= '</div>';
 		}
 
@@ -132,6 +136,8 @@ class Widget_ProjectPublicAreas extends Widget {
 			$link_content = $HTML->getPackagePic('') . ' ' . _('Files');
 			//	<a rel="sioc:container_of" xmlns:sioc="http://rdfs.org/sioc/ns#" href="'.util_make_url ('/frs/?group_id='.$group_id).'">';
 			$result .= util_make_link('/frs/?group_id='.$group_id, $link_content);
+			$frsm = new FRSManager($project);
+			$result .= ' ('.html_e('strong', array(), $frsm->getNbReleases(), true, false).' '._('releases').' '._('in').' '.html_e('strong', array(), $frsm->getNbPackages(), true, false).' '._('packages').')';
 			$result .= '</div>';
 		}
 

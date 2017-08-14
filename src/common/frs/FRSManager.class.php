@@ -20,6 +20,9 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+require_once $gfcommon.'frs/FRSPackageFactory.class.php';
+require_once $gfcommon.'frs/FRSReleaseFactory.class.php';
+
 class FRSManager extends FFError {
 	/**
 	 * The Group object.
@@ -54,5 +57,15 @@ class FRSManager extends FFError {
 		$settings['new_frs_address'] = $this->Group->getFRSEmailAddress();
 		$settings['group_id']        = $this->Group->getID();
 		return $settings;
+	}
+
+	function getNbReleases() {
+		$frsrf = new FRSReleaseFactory($this->Group);
+		return count($frsrf->getFRSRs());
+	}
+
+	function getNbPackages() {
+		$frspf = new FRSPackageFactory($this->Group);
+		return count($frspf->getAllPackagesIds());
 	}
 }
