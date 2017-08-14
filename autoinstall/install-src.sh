@@ -26,21 +26,21 @@ set -e
 
 # Install FusionForge dependencies
 if [ -e /etc/debian_version ]; then
-    export DEBIAN_FRONTEND=noninteractive
-    backports_deb
-    apt-get update
-    apt-get install -y make gettext php5-cli php5-pgsql php-htmlpurifier php-http php-text-captcha \
-	libapache2-mpm-itk libapache2-mod-svn \
-	libapache2-mod-php5 \
-	apache2 postgresql postgresql-contrib libnss-pgsql2 unscd \
-	cvs subversion viewvc python-pycurl git mercurial xinetd \
-	python-moinmoin libapache2-mod-wsgi python-psycopg2 \
-	unoconv poppler-utils dpkg-dev \
-	vsftpd \
-        fonts-dejavu-core
-    if ! dpkg-vendor --is Ubuntu; then
-	apt-get install locales-all  # https://bugs.launchpad.net/ubuntu/+source/glibc/+bug/1394929
-    fi
+	export DEBIAN_FRONTEND=noninteractive
+	backports_deb
+	apt-get update
+	apt-get install -y make gettext php5-cli php5-pgsql php-htmlpurifier php-http php-text-captcha \
+		libapache2-mpm-itk libapache2-mod-svn \
+		libapache2-mod-php5 \
+		apache2 postgresql postgresql-contrib libnss-pgsql2 unscd \
+		cvs subversion viewvc python-pycurl git mercurial xinetd \
+		python-moinmoin libapache2-mod-wsgi python-psycopg2 \
+		unoconv poppler-utils dpkg-dev \
+		vsftpd \
+		fonts-dejavu-core
+	if ! dpkg-vendor --is Ubuntu; then
+		apt-get install locales-all  # https://bugs.launchpad.net/ubuntu/+source/glibc/+bug/1394929
+	fi
 elif [ -e /etc/SuSE-release ]; then
 	suse_check_release
 	suse_install_repos
@@ -58,32 +58,32 @@ elif [ -e /etc/SuSE-release ]; then
 		mediawiki moinmoin-wiki \
 		vsftpd
 else
-    yum install -y make tar
-    backports_rpm
-    yum --enablerepo=epel install -y httpd-itk
-    yum install -y gettext php-cli php-pgsql php-process php-mbstring php-pear-HTTP php-pear-Text-CAPTCHA \
-	httpd mod_dav_svn mod_ssl postgresql-server postgresql-contrib nscd \
-	cvs subversion viewvc python-pycurl git gitweb mercurial xinetd \
-	moin mod_wsgi python-psycopg2 \
-	unoconv poppler-utils libreoffice-headless \
-        mediawiki php-markdown \
-	vsftpd \
-        dejavu-fonts-common
+	yum install -y make tar
+	backports_rpm
+	yum --enablerepo=epel install -y httpd-itk
+	yum install -y gettext php-cli php-pgsql php-process php-mbstring php-pear-HTTP php-pear-Text-CAPTCHA \
+		httpd mod_dav_svn mod_ssl postgresql-server postgresql-contrib nscd \
+		cvs subversion viewvc python-pycurl git gitweb mercurial xinetd \
+		moin mod_wsgi python-psycopg2 \
+		unoconv poppler-utils libreoffice-headless \
+		mediawiki php-markdown \
+		vsftpd \
+		dejavu-fonts-common
 fi
 
 (
-    cd $(dirname $0)/../src/
-    make
-    make install-base install-shell install-scm \
-        install-plugin-scmcvs install-plugin-scmsvn install-plugin-scmgit install-plugin-scmhg \
-        install-plugin-blocks install-plugin-moinmoin \
-        install-plugin-taskboard install-plugin-message \
-	install-plugin-repositoryapi
-    if [ -e /etc/centos-release ]; then
-        make install-plugin-mediawiki
-    fi
-    if [ -e /etc/centos-release -o -e /etc/debian-release ]; then
-        make install-plugin-phptextcaptcha
-    fi
-    make post-install
+	cd $(dirname $0)/../src/
+	make
+	make install-base install-shell install-scm \
+		install-plugin-scmcvs install-plugin-scmsvn install-plugin-scmgit install-plugin-scmhg \
+		install-plugin-blocks install-plugin-moinmoin \
+		install-plugin-taskboard install-plugin-message \
+		install-plugin-repositoryapi
+	if [ -e /etc/centos-release ]; then
+		make install-plugin-mediawiki
+	fi
+	if [ -e /etc/centos-release -o -e /etc/debian-release ]; then
+		make install-plugin-phptextcaptcha
+	fi
+	make post-install
 )
