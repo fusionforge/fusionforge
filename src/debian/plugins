@@ -45,7 +45,7 @@ Package: fusionforge-plugin-authldap
 Depends: php-ldap | php5-ldap
 
 Package: fusionforge-plugin-blocks
-Depends:
+Depends: libmarkdown-php
 
 Package: fusionforge-plugin-compactpreview
 Depends:

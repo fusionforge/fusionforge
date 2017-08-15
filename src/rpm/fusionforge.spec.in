@@ -184,7 +184,7 @@ It should be installed on only one server in your infrastructure.
 
 %package web
 Summary: Collaborative development tool - web part (using Apache)
-Requires: %{name}-common = %{version}-%{release}, %{name}-db = %{version}-%{release}, httpd, mod_ssl, php, php-pgsql, php-simplepie, php-pear-HTTP, php-nusoap, php-mbstring, httpd-itk, mod_dav_svn, unoconv, poppler-utils, openssl
+Requires: %{name}-common = %{version}-%{release}, %{name}-db = %{version}-%{release}, httpd, mod_ssl, php, php-pgsql, php-simplepie, php-pear-HTTP, php-nusoap, php-mbstring, php-markdown, httpd-itk, mod_dav_svn, unoconv, poppler-utils, openssl
 %description web
 FusionForge provides many tools to aid collaboration in a
 development project, such as bug-tracking, task management,

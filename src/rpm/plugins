@@ -29,7 +29,7 @@ Requires:
 Requires: php-ldap
 
 %package plugin-blocks
-Requires:
+Requires: php-markdown
 
 %package plugin-ckeditor
 Requires: ckeditor
