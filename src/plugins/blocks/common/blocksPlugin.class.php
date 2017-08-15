@@ -130,8 +130,8 @@ control over it to the project's administrator.");
 		$parsertype = forge_get_config('parser_type', 'blocks');
 		switch ($parsertype) {
 			case 'markdown':
-				require_once 'Michelf/Markdown.inc.php';
-				$text = \Michelf\Markdown::defaultTransform($text);
+				require_once 'markdown.php';
+				$text = Markdown($text);
 				break;
 			default:
 				$text = preg_replace_callback('/<p>{boxTop (.*?)}<\/p>/i', function($m) { global $HTML; return $HTML->boxTop($m[1]); }, $text);

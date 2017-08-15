@@ -45,8 +45,8 @@ class ArtifactHtml extends Artifact {
 		$parsertype = forge_get_config('tracker_parser_type');
 		switch ($parsertype) {
 			case 'markdown':
-				require_once 'Michelf/Markdown.inc.php';
-				$result_html = \Michelf\Markdown::defaultTransform($result_html);
+				require_once 'markdown.php';
+				$result_html = Markdown($result_html);
 				break;
 			default:
 				$result_html = nl2br($result_html);

@@ -37,6 +37,7 @@ if [ -e /etc/debian_version ]; then
 		cvs subversion viewvc python-pycurl git mercurial xinetd \
 		python-moinmoin libapache2-mod-wsgi python-psycopg2 \
 		unoconv poppler-utils dpkg-dev \
+		libmarkdown-php \
 		vsftpd \
 		fonts-dejavu-core
 	apt-get -y install mediawiki -t jessie-backports
