@@ -178,15 +178,15 @@ if ($forum_id) {
 	$options_popup=html_build_select_box_from_arrays ($vals,$texts,'style',$style,false);
 
 	//create a pop-up select box showing options for max_row count
-	$vals=array(25,50,75,100);
-	$texts=array(_('Show').' 25',_('Show').' 50',_('Show').' 75',_('Show').' 100');
+	$vals  = array(25, 50, 75, 100);
+	$texts = array(_('Show').' 25',_('Show').' 50',_('Show').' 75',_('Show').' 100');
 
-	$max_row_popup=html_build_select_box_from_arrays ($vals,$texts,'max_rows',$max_rows,false);
+	$max_row_popup = html_build_select_box_from_arrays ($vals,$texts,'max_rows',$max_rows,false);
 
 	//now show the popup boxes in a form
 
-	echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'get'));
-	$ret_val = '
+	$ret_val = $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'get'));
+	$ret_val .= '
 	<table>
 		<tr><td>
 			<input type="hidden" name="set" value="custom" />
@@ -197,7 +197,7 @@ if ($forum_id) {
 			_('Change View').'" />
 		</td></tr>
 	</table>';
-	echo $HTML->closeForm();
+	$ret_val .= $HTML->closeForm();
 
 	$am = new AttachManager();
 	$ret_val .= $am->PrintHelperFunctions();
