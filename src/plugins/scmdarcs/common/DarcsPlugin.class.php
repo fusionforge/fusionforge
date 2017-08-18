@@ -420,7 +420,7 @@ over it to the project's administrator.");
 			$month = $params['month'];
 			$day = $params['day'];
 			foreach ($this->getRepositories($project) as $repo_name) {
-				gatherStatsRepo($project, $repo_name, $year, $month, $day);
+				$this->gatherStatsRepo($project, $repo_name, $year, $month, $day);
 			}
 		}
 	}

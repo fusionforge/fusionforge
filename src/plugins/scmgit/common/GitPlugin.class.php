@@ -698,14 +698,14 @@ control over it to the project's administrator.");
 			$start_time = gmmktime(0, 0, 0, $month, $day, $year);
 			$end_time = $start_time + 86400;
 
-			gatherStatsRepo($project->getUnixName(), $project->getUnixName(), $year, $month, $day);
+			$this->gatherStatsRepo($project, $project->getUnixName(), $year, $month, $day);
 
 			$result = db_query_params('SELECT repo_name FROM scm_secondary_repos WHERE group_id=$1 AND plugin_id=$3 ORDER BY repo_name',
 						   array($project->getID(),
 							  $this->getID()));
 			$rows = db_numrows($result);
 			for ($i=0; $i<$rows; $i++) {
-				gatherStatsRepo($project, db_result($result, $i, 'repo_name'), $year, $month, $day);
+				$this->gatherStatsRepo(&$project, db_result($result, $i, 'repo_name'), $year, $month, $day);
 			}
 		}
 	}
