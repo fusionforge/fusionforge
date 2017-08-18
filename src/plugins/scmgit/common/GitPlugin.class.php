@@ -705,7 +705,7 @@ control over it to the project's administrator.");
 							  $this->getID()));
 			$rows = db_numrows($result);
 			for ($i=0; $i<$rows; $i++) {
-				gatherStatsRepo($project, db_result($result, $i, 'repo_name', $year, $month, $day);
+				gatherStatsRepo($project, db_result($result, $i, 'repo_name'), $year, $month, $day);
 			}
 		}
 	}
