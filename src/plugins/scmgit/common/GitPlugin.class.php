@@ -698,150 +698,173 @@ control over it to the project's administrator.");
 			$start_time = gmmktime(0, 0, 0, $month, $day, $year);
 			$end_time = $start_time + 86400;
 
-			$usr_adds = array();
-			$usr_updates = array();
-			$usr_deletes = array();
-			$usr_commits = array();
+			gatherStatsRepo($project->getUnixName(), $project->getUnixName(), $year, $month, $day);
 
-			$adds = 0;
-			$updates = 0;
-			$deletes = 0;
-			$commits = 0;
-
-			$repo = forge_get_config('repos_path', 'scmgit') . '/' . $project->getUnixName() . '/' . $project->getUnixName() . '.git';
-			if (!is_dir($repo) || !is_dir("$repo/refs")) {
-				// echo "No repository $repo\n";
-				return false;
+			$result = db_query_params('SELECT repo_name FROM scm_secondary_repos WHERE group_id=$1 AND plugin_id=$3 ORDER BY repo_name',
+						   array($project->getID(),
+							  $this->getID()));
+			$rows = db_numrows($result);
+			for ($i=0; $i<$rows; $i++) {
+				gatherStatsRepo($project, db_result($result, $i, 'repo_name', $year, $month, $day);
 			}
+		}
+	}
 
-			# For each commit, get committer full name and e-mail (respecting git .mailmap file),
-			# and a list of files prefixed by their status (A/M/D)
-			$pipe = popen("GIT_DIR=\"$repo\" git log --since=@$start_time --until=@$end_time --all --pretty='format:%n%aN <%aE>' --name-status 2>/dev/null", 'r' );
+	function gatherStatsRepo($group, $project_reponame, $year, $month, $day) {
 
-			db_begin();
+		$month_string = sprintf("%04d%02d", $year, $month);
+		$start_time = gmmktime(0, 0, 0, $month, $day, $year);
+		$end_time = $start_time + 86400;
 
-			// cleaning stats_cvs_* table for the current day
-			$res = db_query_params('DELETE FROM stats_cvs_group WHERE month=$1 AND day=$2 AND group_id=$3',
+		$usr_adds = array();
+		$usr_updates = array();
+		$usr_deletes = array();
+		$usr_commits = array();
+
+		$adds = 0;
+		$updates = 0;
+		$deletes = 0;
+		$commits = 0;
+
+		$repo = forge_get_config('repos_path', 'scmgit') . '/' . $group->getUnixName() . '/' . $project_reponame . '.git';
+		if (!is_dir($repo) || !is_dir("$repo/refs")) {
+			// echo "No repository $repo\n";
+			return false;
+		}
+
+		# For each commit, get committer full name and e-mail (respecting git .mailmap file),
+		# and a list of files prefixed by their status (A/M/D)
+		$pipe = popen("GIT_DIR=\"$repo\" git log --since=@$start_time --until=@$end_time --all --pretty='format:%n%aN <%aE>' --name-status 2>/dev/null", 'r');
+
+		db_begin();
+
+		// cleaning stats_cvs_* table for the current day for the default repository
+		$res = db_query_params('DELETE FROM stats_cvs_group WHERE month = $1 AND day = $2 AND group_id = $3 and reponame = $4',
 						array($month_string,
-						       $day,
-						       $project->getID()));
-			if (!$res) {
-				echo "Error while cleaning stats_cvs_group\n";
+							$day,
+							$group->getID(),
+							$project_reponame));
+		if (!$res) {
+			echo "Error while cleaning stats_cvs_group\n";
+			db_rollback();
+			return false;
+		}
+
+		$res = db_query_params ('DELETE FROM stats_cvs_user WHERE month = $1 AND day = $2 AND group_id = $3 and reponame = $4',
+						array($month_string,
+							$day,
+							$group->getID(),
+							$project_reponame));
+		if(!$res) {
+			echo "Error while cleaning stats_cvs_user\n";
+			db_rollback();
+			return false;
+		}
+
+		$last_user = "";
+		while (!feof($pipe) && $data = fgets($pipe)) {
+			$line = trim($data);
+			// Replace bad UTF-8 with '?' - it's quite hard to make git output non-UTF-8
+			// (e.g. with i18n.commitEncoding = unknown) - but some users do!
+			// and this makes PostgreSQL choke (SQL> ERROR:  invalid byte sequence for encoding "UTF8": 0xf9)
+			$line = mb_convert_encoding($line, 'UTF-8', 'UTF-8');
+			if (strlen($line) > 0) {
+				$result = preg_match("/^(?P<name>.+) <(?P<mail>.+)>/", $line, $matches);
+				if ($result) {
+					// Author line
+					$last_user = $matches['name'];
+					$user2email[$last_user] = $matches['mail'];
+					if (!isset($usr_adds[$last_user])) {
+						$usr_adds[$last_user] = 0;
+						$usr_updates[$last_user] = 0;
+						$usr_deletes[$last_user] = 0;
+						$usr_commits[$last_user] = 0;
+					}
+					$commits++;
+					$usr_commits[$last_user]++;
+				} else {
+					// Short-commit stats line
+					$result = preg_match("/^(?P<mode>[AMD])\s+(?P<file>.+)$/", $line, $matches);
+					if (!$result)
+						continue;
+					if ($last_user == "")
+						continue;
+					if (!isset($usr_adds[$last_user]))
+						$usr_adds[$last_user] = 0;
+					if (!isset($usr_updates[$last_user]))
+						$usr_updates[$last_user] = 0;
+					if (!isset($usr_deletes[$last_user]))
+						$usr_deletes[$last_user] = 0;
+					if ($matches['mode'] == 'A') {
+						$usr_adds[$last_user]++;
+						$adds++;
+					} elseif ($matches['mode'] == 'M') {
+						$usr_updates[$last_user]++;
+						$updates++;
+					} elseif ($matches['mode'] == 'D') {
+						$usr_deletes[$last_user]++;
+						$deletes++;
+					}
+				}
+			}
+		}
+
+		// inserting group results in stats_cvs_groups
+		if ($updates > 0 || $adds > 0 || $deletes > 0 || $commits > 0) {
+			if (!db_query_params('INSERT INTO stats_cvs_group (month, day, group_id, checkouts, commits, adds, updates, deletes, reponame)
+						VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)',
+						array($month_string,
+							$day,
+							$project->getID(),
+							0,
+							$commits,
+							$adds,
+							$updates,
+							$deletes,
+							$project_reponame))) {
+				echo "Error while inserting into stats_cvs_group\n";
 				db_rollback();
 				return false;
 			}
+		}
 
-			$res = db_query_params ('DELETE FROM stats_cvs_user WHERE month=$1 AND day=$2 AND group_id=$3',
-						array ($month_string,
-						       $day,
-						       $project->getID())) ;
-			if(!$res) {
-				echo "Error while cleaning stats_cvs_user\n" ;
-				db_rollback () ;
-				return false ;
-			}
+		// building the user list
+		$user_list = array_unique(array_merge(array_keys($usr_adds), array_keys($usr_updates), array_keys($usr_deletes), array_keys($usr_commits)));
 
-			$last_user = "";
-			while (!feof($pipe) && $data = fgets($pipe)) {
-				$line = trim($data);
-				// Replace bad UTF-8 with '?' - it's quite hard to make git output non-UTF-8
-				// (e.g. with i18n.commitEncoding = unknown) - but some users do!
-				// and this makes PostgreSQL choke (SQL> ERROR:  invalid byte sequence for encoding "UTF8": 0xf9)
-				$line = mb_convert_encoding($line, 'UTF-8', 'UTF-8');
-				if (strlen($line) > 0) {
-					$result = preg_match("/^(?P<name>.+) <(?P<mail>.+)>/", $line, $matches);
-					if ($result) {
-						// Author line
-						$last_user = $matches['name'];
-						$user2email[$last_user] = $matches['mail'];
-						if (!isset($usr_adds[$last_user])) {
-							$usr_adds[$last_user] = 0;
-							$usr_updates[$last_user] = 0;
-							$usr_deletes[$last_user] = 0;
-							$usr_commits[$last_user] = 0;
-						}
-						$commits++;
-						$usr_commits[$last_user]++;
-					} else {
-						// Short-commit stats line
-						$result = preg_match("/^(?P<mode>[AMD])\s+(?P<file>.+)$/", $line, $matches);
-						if (!$result)
-							continue;
-						if ($last_user == "")
-							continue;
-						if (!isset($usr_adds[$last_user]))
-							$usr_adds[$last_user] = 0;
-						if (!isset($usr_updates[$last_user]))
-							$usr_updates[$last_user] = 0;
-						if (!isset($usr_deletes[$last_user]))
-							$usr_deletes[$last_user] = 0;
-						if ($matches['mode'] == 'A') {
-							$usr_adds[$last_user]++;
-							$adds++;
-						} elseif ($matches['mode'] == 'M') {
-							$usr_updates[$last_user]++;
-							$updates++;
-						} elseif ($matches['mode'] == 'D') {
-							$usr_deletes[$last_user]++;
-							$deletes++;
-						}
-					}
+		foreach ($user_list as $user) {
+			// Trying to get user id from user name or email
+			$u = user_get_object_by_name($user);
+			if ($u) {
+				$user_id = $u->getID();
+			} else {
+				$res = db_query_params('SELECT user_id FROM users WHERE lower(realname)=$1 OR lower(email)=$2',
+						array(strtolower($user), strtolower($user2email[$user])));
+				if ($res && db_numrows($res) > 0) {
+					$user_id = db_result($res, 0, 'user_id');
+				} else {
+					continue;
 				}
 			}
 
-			// inserting group results in stats_cvs_groups
-			if ($updates > 0 || $adds > 0 || $deletes > 0 || $commits > 0) {
-				if (!db_query_params('INSERT INTO stats_cvs_group (month,day,group_id,checkouts,commits,adds,updates,deletes) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
-						      array($month_string,
-							     $day,
-							     $project->getID(),
-							     0,
-							     $commits,
-							     $adds,
-							     $updates,
-							     $deletes))) {
-					echo "Error while inserting into stats_cvs_group\n";
+			$uc = isset($usr_commits[$user]) ? $usr_commits[$user] : 0;
+			$uu = isset($usr_updates[$user]) ? $usr_updates[$user] : 0;
+			$ua = isset($usr_adds[$user]) ? $usr_adds[$user] : 0;
+			$ud = isset($usr_deletes[$user]) ? $usr_deletes[$user] : 0;
+			if ($uu > 0 || $ua > 0 || $uc > 0 || $ud > 0) {
+				if (!db_query_params('INSERT INTO stats_cvs_user (month, day, group_id, user_id, commits, adds, updates, deletes, reponame)
+									VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)',
+								array($month_string,
+									$day,
+									$project->getID(),
+									$user_id,
+									$uc,
+									$ua,
+									$uu,
+									$ud,
+									$project_reponame))) {
+					echo "Error while inserting into stats_cvs_user\n";
 					db_rollback();
 					return false;
-				}
-			}
-
-			// building the user list
-			$user_list = array_unique(array_merge(array_keys($usr_adds), array_keys($usr_updates), array_keys($usr_deletes), array_keys($usr_commits)));
-
-			foreach ($user_list as $user) {
-				// Trying to get user id from user name or email
-				$u = user_get_object_by_name($user);
-				if ($u) {
-					$user_id = $u->getID();
-				} else {
-					$res = db_query_params('SELECT user_id FROM users WHERE lower(realname)=$1 OR lower(email)=$2',
-						array(strtolower($user), strtolower($user2email[$user])));
-					if ($res && db_numrows($res) > 0) {
-						$user_id = db_result($res, 0, 'user_id');
-					} else {
-						continue;
-					}
-				}
-
-				$uc = isset($usr_commits[$user]) ? $usr_commits[$user] : 0;
-				$uu = isset($usr_updates[$user]) ? $usr_updates[$user] : 0;
-				$ua = isset($usr_adds[$user]) ? $usr_adds[$user] : 0;
-				$ud = isset($usr_deletes[$user]) ? $usr_deletes[$user] : 0;
-				if ($uu > 0 || $ua > 0 || $uc > 0 || $ud > 0) {
-					if (!db_query_params('INSERT INTO stats_cvs_user (month,day,group_id,user_id,commits,adds,updates,deletes) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
-							      array($month_string,
-								     $day,
-								     $project->getID(),
-								     $user_id,
-								     $uc,
-								     $ua,
-								     $uu,
-								     $ud))) {
-						echo "Error while inserting into stats_cvs_user\n";
-						db_rollback();
-						return false;
-					}
 				}
 			}
 		}

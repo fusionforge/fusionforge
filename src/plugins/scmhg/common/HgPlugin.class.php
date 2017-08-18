@@ -531,20 +531,22 @@ Offer DAV or SSH access.");
 				return false;
 			}
 			// cleaning stats_cvs_* table for the current day
-			$res = db_query_params('DELETE FROM stats_cvs_group WHERE month = $1 AND day = $2 AND group_id = $3',
+			$res = db_query_params('DELETE FROM stats_cvs_group WHERE month = $1 AND day = $2 AND group_id = $3 AND reponame = $4',
 						array($month_string,
 							$day,
-							$project->getID()));
+							$project->getID(),
+							$project->getUnixName()));
 			if(!$res) {
 				echo "Error while cleaning stats_cvs_group\n";
 				db_rollback();
 				return false;
 			}
 
-			$res = db_query_params ('DELETE FROM stats_cvs_user WHERE month=$1 AND day=$2 AND group_id=$3',
-						array ($month_string,
-						       $day,
-						       $project->getID())) ;
+			$res = db_query_params('DELETE FROM stats_cvs_user WHERE month = $1 AND day = $2 AND group_id = $3 AND reponame = $4',
+						array($month_string,
+							$day,
+							$project->getID(),
+							$project->getUnixName()));
 			if(!$res) {
 				echo "Error while cleaning stats_cvs_user\n" ;
 				db_rollback () ;
@@ -596,7 +598,8 @@ Offer DAV or SSH access.");
 
 			// inserting group results in stats_cvs_groups
 			if ($updates > 0 || $adds > 0 || $deletes > 0 || $commits > 0) {
-				if (!db_query_params('INSERT INTO stats_cvs_group (month,day,group_id,checkouts,commits,adds,updates,deletes) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
+				if (!db_query_params('INSERT INTO stats_cvs_group (month, day, group_id, checkouts, commits, adds, updates, deletes, reponame)
+								VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)',
 						      array($month_string,
 							     $day,
 							     $project->getID(),
@@ -604,7 +607,8 @@ Offer DAV or SSH access.");
 							     $commits,
 							     $adds,
 							     $updates,
-							     $deletes))) {
+							     $deletes,
+								$project->getUnixName()))) {
 					echo "Error while inserting into stats_cvs_group\n";
 					db_rollback();
 					return false;
@@ -634,7 +638,8 @@ Offer DAV or SSH access.");
 				$ua = isset($usr_adds[$user]) ? $usr_adds[$user] : 0;
 				$ud = isset($usr_deletes[$user]) ? $usr_deletes[$user] : 0;
 				if ($uu > 0 || $ua > 0 || $uc > 0 || $ud > 0) {
-					if (!db_query_params('INSERT INTO stats_cvs_user (month,day,group_id,user_id,commits,adds,updates,deletes) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
+					if (!db_query_params('INSERT INTO stats_cvs_user (month, day, group_id, user_id, commits, adds, updates, deletes, reponame)
+									VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)',
 							      array($month_string,
 								     $day,
 								     $project->getID(),
@@ -642,7 +647,8 @@ Offer DAV or SSH access.");
 								     $uc,
 								     $ua,
 								     $uu,
-								     $ud))) {
+								     $ud,
+									$project->getUnixName()))) {
 						echo "Error while inserting into stats_cvs_user\n";
 						db_rollback();
 						return false;

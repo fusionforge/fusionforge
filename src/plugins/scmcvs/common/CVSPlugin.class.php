@@ -337,20 +337,22 @@ over it to the project's administrator.");
 			}
 
 			// cleaning stats_cvs_* table for the current day
-			$res = db_query_params ('DELETE FROM stats_cvs_group WHERE month=$1 AND day=$2 AND group_id=$3',
-						array ($month_string,
+			$res = db_query_params('DELETE FROM stats_cvs_group WHERE month = $1 AND day = $2 AND group_id = $3 AND reponame = $4',
+						array($month_string,
 						       $day,
-						       $project->getID())) ;
+						       $project->getID(),
+							$project->getUnixName()));
 			if(!$res) {
 				echo "Error while cleaning stats_cvs_group\n" ;
 				db_rollback () ;
 				return false ;
 			}
 
-			$res = db_query_params ('DELETE FROM stats_cvs_user WHERE month=$1 AND day=$2 AND group_id=$3',
-						array ($month_string,
+			$res = db_query_params('DELETE FROM stats_cvs_user WHERE month = $1 AND day = $2 AND group_id = $3 AND reponame = $4',
+						array($month_string,
 						       $day,
-						       $project->getID())) ;
+						       $project->getID(),
+							$project->getUnixName()));
 			if(!$res) {
 				echo "Error while cleaning stats_cvs_user\n" ;
 				db_rollback () ;
@@ -388,13 +390,15 @@ over it to the project's administrator.");
 			fclose( $hist_file );
 
 			// inserting group results in stats_cvs_groups
-			if (!db_query_params ('INSERT INTO stats_cvs_group (month,day,group_id,checkouts,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
-					      array ($month_string,
+			if (!db_query_params('INSERT INTO stats_cvs_group (month, day, group_id, checkouts, commits, adds, reponame)
+							VALUES ($1, $2, $3, $4, $5, $6, $7)',
+					      array($month_string,
 						     $day,
 						     $project->getID(),
 						     $cvs_co,
 						     $cvs_commit,
-						     $cvs_add))) {
+						     $cvs_add,
+							$project->getUnixName()))) {
 				echo "Error while inserting into stats_cvs_group\n" ;
 				db_rollback () ;
 				return false ;
@@ -412,13 +416,15 @@ over it to the project's administrator.");
 					continue;
 				}
 
-				if (!db_query_params ('INSERT INTO stats_cvs_user (month,day,group_id,user_id,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
-						      array ($month_string,
+				if (!db_query_params('INSERT INTO stats_cvs_user (month, day, group_id, user_id, commits, adds, reponame)
+								VALUES ($1, $2, $3, $4, $5, $6, $7)',
+						      array($month_string,
 							     $day,
 							     $project->getID(),
 							     $user_id,
 							     isset ($usr_commit[$user]) ? $usr_commit[$user] : 0,
-							     isset ($usr_add[$user]) ? $usr_add[$user] : 0))) {
+							     isset ($usr_add[$user]) ? $usr_add[$user] : 0,
+								$project->getUnixName()))) {
 					echo "Error while inserting into stats_cvs_user\n" ;
 					db_rollback () ;
 					return false ;
