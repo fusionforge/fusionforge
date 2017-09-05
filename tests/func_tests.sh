@@ -49,6 +49,18 @@ case $INSTALL_OS in
 	exit 1 ;;
 esac
 
+fix_httpd_itk() {
+    case $INSTALL_OS in
+        centos*)
+            echo 'WARNING: WORKAROUND for docker/lxc. Downgrade httpd-itk.'
+            echo 'TODO: check for newer version. Debian not impacted.'
+            curl https://kojipkgs.fedoraproject.org//packages/httpd-itk/2.4.7.04/1.el7/x86_64/httpd-itk-2.4.7.04-1.el7.x86_64.rpm -o /tmp/httpd-itk-2.4.7.04-1.el7.x86_64.rpm
+            yum downgrade -y /tmp/httpd-itk-2.4.7.04-1.el7.x86_64.rpm
+            rm -f /tmp/httpd-itk-2.4.7.04-1.el7.x86_64.rpm
+            service httpd restart || true
+        ;;
+    esac
+}
 
 install_selenium() {
     # Selenium dependencies and test dependencies
@@ -117,6 +129,8 @@ fixup_nss() {
 }
 
 fixup_nss
+
+fix_httpd_itk
 
 install_selenium
 
