@@ -123,13 +123,11 @@ if (session_loggedin()) {
 	<tr>
 	<td>
 		<?php echo $HTML->html_select($SCRIPT_LANGUAGE, 'language', _('Language').utils_requiredField()._(': ')); ?>
-		<br />
 		<!-- FIXME: Where should this link go to? <?php echo util_make_link ('/support/?func=addsupport&group_id=1',_('Suggest a Language')); ?> -->
 	</td>
 
 	<td>
 		<?php echo $HTML->html_select($SCRIPT_CATEGORY, 'category', _('Category').utils_requiredField()._(': ')); ?>
-		<br />
                 <!-- FIXME: Where should this link go to? <?php echo util_make_link ('/support/?func=addsupport&group_id=1',_('Suggest a Category')); ?> -->
 	</td>
 	</tr>

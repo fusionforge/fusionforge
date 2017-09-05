@@ -781,27 +781,25 @@ abstract class Layout extends FFError {
 		if (!$id) {
 			$id = $name;
 		}
-		$return = '<div class="field-holder">
-			';
+		$return = html_ao('div', array('class' => 'field-holder'));
 		if ($label) {
-			$return .= '<label for="' . $id . '">' . $label . '</label>
-				';
+			$return .= html_e('label', array('for' => $id), $label);
 		}
-		$return .= '<input id="' . $id . '" type="' . $type . '"';
+		$attrs = array('id' => $id, 'type' => $type);
 		//if input is a submit then name is not present
 		if ($name) {
-			$return .= ' name="' . $name . '"';
+			$attrs['name'] = $name;
 		}
 		if ($value) {
-			$return .= ' value="' . $value . '"';
+			$attrs['value'] = $value;
 		}
 		if (is_array($extra_params)) {
 			foreach ($extra_params as $key => $extra_params_value) {
-				$return .= $key . '="' . $extra_params_value . '" ';
+				$attrs[$key] = $extra_params_value;
 			}
 		}
-		$return .= '/>
-			</div>';
+		$return .= html_e('input', $attrs);
+		$return .= html_ac(html_ap() -1);
 		return $return;
 	}
 
@@ -840,8 +838,7 @@ abstract class Layout extends FFError {
 		$return = '<div class="field-holder">
 			';
 		if ($label) {
-			$return .= '<label for="' . $id . '">' . $label . '</label>
-				';
+			$return .= html_e('label', array('for' => $id), $label);
 		}
 		$return .= '<input id="' . $id . '" type="text" name="' . $name . '"';
 		if ($value) {
@@ -871,8 +868,7 @@ abstract class Layout extends FFError {
 		$return = '<div class="field-holder">
 			';
 		if ($label) {
-			$return .= '<label for="' . $id . '">' . $label . '</label>
-				';
+			$return .= html_e('label', array('for' => $id), $label);
 		}
 		$return .= '<select name="' . $name . '" id="' . $id . '" ';
 		if (is_array($extra_params)) {
@@ -908,24 +904,18 @@ abstract class Layout extends FFError {
 		if (!$id) {
 			$id = $name;
 		}
-		$return = '<div class="field-holder">
-			';
+		$return = html_ao('div', array('class' => 'field-holder'));
 		if ($label) {
-			$return .= '<label for="' . $id . '">' . $label . '</label>
-				';
+			$return .= html_e('label', array('for' => $id), $label);
 		}
-		$return .= '<textarea id="' . $id . '" name="' . $name . '" ';
+		$attrs = array('id' => $id, 'name' => $name);
 		if (is_array($extra_params)) {
 			foreach ($extra_params as $key => $extra_params_value) {
-				$return .= $key . '="' . $extra_params_value . '" ';
+				$attrs[$key] = $extra_params_value;
 			}
 		}
-		$return .= '>';
-		if ($value) {
-			$return .= $value;
-		}
-		$return .= '</textarea>
-			</div>';
+		$return .= html_e('textarea', $attrs, $value, false);
+		$return .= html_ac(html_ap() -1);
 		return $return;
 	}
 
