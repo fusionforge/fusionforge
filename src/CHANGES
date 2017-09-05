@@ -29,6 +29,7 @@ FusionForge 6.X:
 * Search: provide language-specific settings for better indexation/search (Roland Mas)
 * Site Admin: add paging system in userlist page [#799] (TrivialDev)
 * Site Admin: support widgets for forge home page (TrivialDev)
+* Snippet: markdown support & fix code syntax highlight [#865] (TrivialDev)
 * Soap: getArtifacts tracker function: support changed_from parameter (TrivialDev)
 * Soap: getFlattedArtifacts function: to return as CSV export. All data in 1 call (TrivialDev)
 * Spellcheck (Anders Jonsson)

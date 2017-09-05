@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems - Tim Perdue
  * Copyright 2012, Jean-Christophe Masson - French National Education Department
- * Copyright 2012-2015, Franck Villaume - TrivialDev
+ * Copyright 2012-2015,2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -133,29 +133,28 @@ function snippet_footer($params = array()) {
 function snippet_show_package_snippets($version) {
 	global $HTML;
 	//show the latest version
-	$result=db_query_params("SELECT users.realname,users.user_id,snippet_package_item.snippet_version_id, snippet_version.version,snippet.name,users.user_name
+	$result = db_query_params('SELECT users.realname,users.user_id,snippet_package_item.snippet_version_id, snippet_version.version,snippet.name,users.user_name
 				FROM snippet,snippet_version,snippet_package_item,users
 				WHERE snippet.snippet_id=snippet_version.snippet_id
 				AND users.user_id=snippet_version.submitted_by
 				AND snippet_version.snippet_version_id=snippet_package_item.snippet_version_id
-				AND snippet_package_item.snippet_package_version_id=$1", array($version));
+				AND snippet_package_item.snippet_package_version_id=$1', array($version));
 
-	$rows=db_numrows($result);
-	echo '<h3>' ._('Snippets In This Package').'</h3>';
-
-	$title_arr=array();
-	$title_arr[]= _('Snippet ID');
-	$title_arr[]= _('Download Version');
-	$title_arr[]= _('Title');
-	$title_arr[]= _('Author');
+	$rows = db_numrows($result);
+	echo html_e('h3', array(), _('Snippets In This Package'));
 
 	if (!$result || $rows < 1) {
 		echo db_error();
 		echo $HTML->warning_msg(_('No Snippets Are In This Package Yet'));
 	} else {
+		$title_arr = array();
+		$title_arr[] = _('Snippet ID');
+		$title_arr[] = _('Download Version');
+		$title_arr[] = _('Title');
+		$title_arr[] = _('Author');
 		echo $HTML->listTableTop($title_arr);
 		//get the newest version, so we can display it's code
-		$newest_version=db_result($result,0,'snippet_version_id');
+		$newest_version = db_result($result, 0, 'snippet_version_id');
 
 		for ($i=0; $i<$rows; $i++) {
 			echo '
@@ -173,10 +172,9 @@ function snippet_show_package_snippets($version) {
 function snippet_show_package_details($id) {
 	global $SCRIPT_CATEGORY,$SCRIPT_LANGUAGE;
 
-	$result=db_query_params("SELECT * FROM snippet_package WHERE snippet_package_id=$1", array($id));
+	$result = db_query_params("SELECT * FROM snippet_package WHERE snippet_package_id=$1", array($id));
 
 	echo '
-	<p>
 	<table class="fullwidth" cellspacing="1" cellpadding="2">
 
 	<tr><td colspan="2">
@@ -193,11 +191,21 @@ function snippet_show_package_details($id) {
 		</td>
 	</tr>
 
-	<tr><td colspan="2"><br /><strong>'._('Description')._(':').'</strong><br />
-	'. util_make_links(nl2br(db_result($result,0,'description'))).'
+	<tr><td colspan="2"><br />
+	<strong>'._('Description')._(':').'</strong><br />';
+	$parsertype = forge_get_config('snippet_parser_type');
+	switch ($parsertype) {
+		case 'markdown':
+			require_once 'markdown.php';
+			$result_html = Markdown(db_result($result, 0, 'description'));
+			break;
+		default:
+			$result_html = util_make_links(nl2br(db_result($result, 0, 'description')));
+	}
+	echo $result_html.'
 	</td></tr>
 
-	</table></p>';
+	</table>';
 
 }
 
@@ -207,7 +215,6 @@ function snippet_show_snippet_details($id) {
 	$result=db_query_params("SELECT * FROM snippet WHERE snippet_id=$1", array($id));
 
 	echo '
-	<p>
 	<table class="fullwidth" cellspacing="1" cellpadding="2">
 
 	<tr><td colspan="2">
@@ -227,11 +234,20 @@ function snippet_show_snippet_details($id) {
 	</td></tr>
 
 	<tr><td colspan="2"><br />
-	<strong>'._('Description')._(':').'</strong><br />
-	'. util_make_links(nl2br(db_result($result,0,'description'))).'
+	<strong>'._('Description')._(':').'</strong><br />';
+	$parsertype = forge_get_config('snippet_parser_type');
+	switch ($parsertype) {
+		case 'markdown':
+			require_once 'markdown.php';
+			$result_html = Markdown(db_result($result,0,'description'));
+			break;
+		default:
+			$result_html = util_make_links(nl2br(db_result($result,0,'description')));
+	}
+	echo $result_html.'
 	</td></tr>
 
-	</table></p>';
+	</table>';
 }
 
 // Local Variables:

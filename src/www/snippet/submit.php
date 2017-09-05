@@ -3,7 +3,7 @@
  * Code Snippets Repository
  *
  * Copyright 1999-2001 (c) VA Linux Systems
- * Copyright 2014,2016, Franck Villaume - TrivialDev
+ * Copyright 2014,2016-2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -97,7 +97,7 @@ if (session_loggedin()) {
 	echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post', 'id' => 'snippet_submit'));
 	echo $HTML->html_input('form_key', '', '', 'hidden', form_generate_key());
 	echo $HTML->html_input('post_changes', '', '', 'hidden', 'y');
-	echo $HTML->html_input('changes', '', '', 'hidden', 'First Posted Version');
+	echo $HTML->html_input('changes', '', '', 'hidden', _('First Posted Version'));
 	?>
 
 	<table>

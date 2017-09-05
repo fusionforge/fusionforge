@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2013, French Ministry of National Education
- * Copyright 2014,2016, Franck Villaume - TrivialDev
+ * Copyright 2014,2016-2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -57,24 +57,22 @@ if ($type=='snippet') {
 
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
-		echo $HTML->error_msg(_('Error: no versions found'));
+		echo $HTML->error_msg(_('Error')._(': ')._('no versions found'));
 	} else {
-		echo '
-		<h3>' ._('Versions Of This Snippet:').'</h3>
-		<p>';
-		$title_arr=array();
-		$title_arr[]= _('Snippet ID');
-		$title_arr[]= _('Download Version');
-		$title_arr[]= _('Date Posted');
-		$title_arr[]= _('Author');
-		$title_arr[]= _('Delete');
+		echo html_e('h3', array(), _('Versions Of This Snippet')._(':'));
+		$title_arr = array();
+		$title_arr[] = _('Snippet ID');
+		$title_arr[] = _('Download Version');
+		$title_arr[] = _('Date Posted');
+		$title_arr[] = _('Author');
+		$title_arr[] = _('Delete');
 
 		echo $HTML->listTableTop($title_arr);
 
 		/*
 			get the newest version of this snippet, so we can display its code
 		*/
-		$newest_version=db_result($result,0,'snippet_version_id');
+		$newest_version = db_result($result,0,'snippet_version_id');
 
 		for ($i=0; $i<$rows; $i++) {
 			echo '
@@ -94,29 +92,24 @@ if ($type=='snippet') {
 
 		echo $HTML->listTableBottom();
 
-		echo '
-		</p><p>'._('Download a raw-text version of this code by clicking on “Download Version”').'
-		</p>';
+		echo html_e('p', array(), _('Download a raw-text version of this code by clicking on “Download Version”'));
 	/*
 		show the latest version of this snippet's code
 	*/
 	$result=db_query_params ('SELECT code,version FROM snippet_version WHERE snippet_version_id=$1',
 			array($newest_version));
 
+	echo html_e('hr').html_e('h2', array(), _('Latest Snippet Version')._(': ').db_result($result,0,'version'));
 	echo '
-		<p>&nbsp;</p>
-		<hr />
-		<h2>'._('Latest Snippet Version: ').db_result($result,0,'version').'</h2>
 		<p>
-		<span class="snippet-detail">'. db_result($result,0,'code') .'
-		</span>
+		<span class="snippet-detail"><pre>'. db_result($result,0,'code') .'
+		</pre></span>
 		</p>';
 	/*
 		Show a link so you can add a new version of this snippet
 	*/
-	echo '
-	<h3>'.util_make_link('/snippet/addversion.php?type=snippet&id='.htmlspecialchars($id), _('Add a new version')).'</h3>
-	<p>' ._('You can submit a new version of this snippet if you have modified it and you feel it is appropriate to share with others.').'.</p>';
+	echo html_e('h3', array(), util_make_link('/snippet/addversion.php?type=snippet&id='.htmlspecialchars($id), _('Add a new version'))).
+		html_e('p', array(), _('You can submit a new version of this snippet if you have modified it and you feel it is appropriate to share with others.'));
 
 	}
 	snippet_footer();
