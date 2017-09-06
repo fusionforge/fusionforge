@@ -39,6 +39,7 @@
 require_once $gfcommon.'include/constants.php';
 require_once $gfcommon.'include/FusionForge.class.php';
 require_once $gfcommon.'include/Navigation.class.php';
+require_once $gfwww.'include/html.php';
 
 abstract class Layout extends FFError {
 
@@ -771,19 +772,17 @@ abstract class Layout extends FFError {
 	}
 
 	function jQueryUIconfirmBox($id = 'dialog-confirm', $title = 'Confirm your action', $message = 'Do you confirm your action?') {
-		$htmlcode = html_ao('div', array('id' => $id, 'title' => $title, 'class' => 'hide'));
-		$htmlcode .= html_e('p', array(), html_e('span', array('class' => 'ui-icon ui-icon-alert', 'style' => 'float:left; margin:0 7px 20px 0;'), '', false).$message);
-		$htmlcode .= html_ac(html_ap() -1);
-		return $htmlcode;
+		return html_e('div', array('id' => $id, 'title' => $title, 'class' => 'hide'), 
+				html_e('p', array(), html_e('span', array('class' => 'ui-icon ui-icon-alert', 'style' => 'float:left; margin:0 7px 20px 0;'), '', false).$message));
 	}
 
 	function html_input($name, $id = '', $label = '', $type = 'text', $value = '', $extra_params = '') {
 		if (!$id) {
 			$id = $name;
 		}
-		$return = html_ao('div', array('class' => 'field-holder'));
+		$htmllabel = '';
 		if ($label) {
-			$return .= html_e('label', array('for' => $id), $label);
+			$htmllabel .= html_e('label', array('for' => $id), $label, true);
 		}
 		$attrs = array('id' => $id, 'type' => $type);
 		//if input is a submit then name is not present
@@ -798,16 +797,13 @@ abstract class Layout extends FFError {
 				$attrs[$key] = $extra_params_value;
 			}
 		}
-		$return .= html_e('input', $attrs);
-		$return .= html_ac(html_ap() -1);
-		return $return;
+		return html_e('div', array('class' => 'field-holder'), $htmllabel.html_e('input', $attrs));
 	}
 
 	function html_checkbox($name, $value, $id = '', $label = '', $checked = '', $extra_params = array()) {
 		if (!$id) {
 			$id = $name;
 		}
-		$return = html_ao('div', array('class' => 'field-holder'));
 		$attrs = array('name' => $name, 'id' => $id, 'type' => 'checkbox', 'value' => $value);
 		if ($checked) {
 			$attrs['checked'] = 'checked';
@@ -817,12 +813,11 @@ abstract class Layout extends FFError {
 				$attrs[$key] = $extra_params_value;
 			}
 		}
-		$return .= html_e('input', $attrs);
+		$htmllabel = '';
 		if ($label) {
-			$return .= html_e('label', array('for' => $id), $label, true);
+			$htmllabel .= html_e('label', array('for' => $id), $label, true);
 		}
-		$return .= html_ac(html_ap() -1);
-		return $return;
+		return html_e('div', array('class' => 'field-holder'), $htmllabel.html_e('input', $attrs));
 	}
 
 	function html_text_input_img_submit($name, $img_src, $id = '', $label = '', $value = '', $img_title = '', $img_alt = '', $extra_params = array(), $img_extra_params = '') {
@@ -865,39 +860,17 @@ abstract class Layout extends FFError {
 		if (!$id) {
 			$id = $name;
 		}
-		$return = '<div class="field-holder">
-			';
+		$htmllabel = '';
 		if ($label) {
-			$return .= html_e('label', array('for' => $id), $label);
+			$htmllabel .= html_e('label', array('for' => $id), $label);
 		}
-		$return .= '<select name="' . $name . '" id="' . $id . '" ';
+		$attrs = array();
 		if (is_array($extra_params)) {
 			foreach ($extra_params as $key => $extra_params_value) {
-				$return .= $key . '="' . $extra_params_value . '" ';
+				$attrs[$key] = $extra_params_value;
 			}
 		}
-		$return .= '>';
-		$rows = count($vals);
-		for ($i = 0; $i < $rows; $i++) {
-			if ( $text_is_value ) {
-				$return .= '
-					<option value="' . $vals[$i] . '"';
-				if ($vals[$i] == $checked_val) {
-					$return .= ' selected="selected"';
-				}
-			} else {
-				$return .= '
-					<option value="' . $i . '"';
-				if ($i == $checked_val) {
-					$return .= ' selected="selected"';
-				}
-			}
-			$return .= '>' . htmlspecialchars($vals[$i]) . '</option>';
-		}
-		$return .= '
-			</select>
-			</div>';
-		return $return;
+		return html_e('div', array('class' => 'field-holder'), $htmllabel.html_build_select_box_from_array($vals, $name, $checked_val, $text_is_value, $attrs)); 
 	}
 
 	function html_textarea($name, $id = '', $label = '', $value = '',  $extra_params = '') {
