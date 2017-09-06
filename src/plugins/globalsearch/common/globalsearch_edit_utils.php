@@ -65,7 +65,7 @@ function globalsearch_admin_table_postadd () {
 				    $new_onlysw,
 				    $new_enabled,
 				    $new_rank))) {
-		echo _('Associated forge successfully added.');
+		echo _('Associated Forge successfully added.');
         } else {
                 echo db_error();
         }
@@ -113,7 +113,7 @@ function globalsearch_admin_table_confirmdelete ($id) {
 function globalsearch_admin_table_delete ($id) {
         if (db_query_params ('DELETE FROM plugin_globalsearch_assoc_site WHERE assoc_site_id=$1',
 			     array($id))) {
-		echo _('Associated forge successfully deleted.');
+		echo _('Associated Forge successfully deleted.');
         } else {
                 echo db_error();
         }
@@ -179,7 +179,7 @@ function globalsearch_admin_table_postedit ($id) {
 				    $new_enabled,
 				    $new_rank,
 				    $id))) {
-		echo _('Associated forge successfully modified.');
+		echo _('Associated Forge successfully modified.');
         } else {
                 echo db_error();
         }
@@ -197,7 +197,7 @@ function globalsearch_admin_table_show () {
 		$rows = db_numrows($result);
 
 		$cell_data=array();
-		$cell_data[]=array(ngettext('Associated forge','Associated forges',$rows).' '.util_make_link(getStringFromServer('PHP_SELF').'?function=add', '['._('add new').']'),
+		$cell_data[]=array(ngettext('Associated Forge','Associated Forges',$rows).' '.util_make_link(getStringFromServer('PHP_SELF').'?function=add', '['._('add new').']'),
 			'colspan' => 8);
 
 		echo '<table border="0" width="100%">';
