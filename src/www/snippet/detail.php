@@ -207,6 +207,6 @@ if ($type=='snippet') {
 
 } else {
 
-	exit_error(_('Error: was the URL mangled?'));
+	exit_error(_('Error: mangled URL?'));
 
 }
