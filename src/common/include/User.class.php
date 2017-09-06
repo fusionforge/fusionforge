@@ -255,7 +255,7 @@ class FFUser extends FFError {
 				$this->data_array =& $res;
 			} elseif (db_numrows($res) < 1) {
 				//function in class we extended
-				$this->setError(_('User Not Found'));
+				$this->setError(_('User not found'));
 				$this->data_array = array();
 				return;
 			} else {
