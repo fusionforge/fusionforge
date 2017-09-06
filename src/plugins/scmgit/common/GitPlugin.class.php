@@ -700,7 +700,7 @@ control over it to the project's administrator.");
 
 			$this->gatherStatsRepo($project, $project->getUnixName(), $year, $month, $day);
 
-			$result = db_query_params('SELECT repo_name FROM scm_secondary_repos WHERE group_id=$1 AND plugin_id=$3 ORDER BY repo_name',
+			$result = db_query_params('SELECT repo_name FROM scm_secondary_repos WHERE group_id = $1 AND plugin_id = $2 ORDER BY repo_name',
 						   array($project->getID(),
 							  $this->getID()));
 			$rows = db_numrows($result);
