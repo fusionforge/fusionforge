@@ -135,7 +135,7 @@ if ($type=='snippet') {
 
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
-		echo $HTML->error_msg(_('Error: no versions found'));
+		echo $HTML->error_msg(_('Error')._(': ')._('no versions found'));
 	} else {
 		echo '
 		<h3>' ._('Versions Of This Package')._(':').'</h3>
