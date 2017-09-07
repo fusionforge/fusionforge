@@ -74,7 +74,7 @@ class Theme_Funky extends Layout {
 				jQuery(":submit").button();
 				jQuery(":reset").button();
 				jQuery(":button").button();
-				jQuery("#tabber").tabs();
+				jQuery("[id^=tabber").tabs();
 			});
 			//]]>'."\n";
 		if ($use_tooltips) {

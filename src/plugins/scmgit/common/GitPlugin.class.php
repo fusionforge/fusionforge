@@ -173,14 +173,14 @@ control over it to the project's administrator.");
 				ngettext('Only project developers can access the Git repository via this method.',
 				'Only project developers can access the Git repositories via this method.',
 				count($repo_list)));
-		$b .= '<div id="tabber">';
+		$b .= '<div id="tabber-git">';
 		$b .= '<ul>';
 		if (forge_get_config('use_ssh', 'scmgit')) {
-			$b .= '<li><a href="#tabber-ssh">'._('via SSH').'</a></li>';
+			$b .= '<li><a href="#tabber-gitssh">'._('via SSH').'</a></li>';
 			$configuration = 1;
 		}
 		if (forge_get_config('use_smarthttp', 'scmgit')) {
-			$b .= '<li><a href="#tabber-smarthttp">'._('via "smart HTTP"').'</a></li>';
+			$b .= '<li><a href="#tabber-gitsmarthttp">'._('via "smart HTTP"').'</a></li>';
 			$configuration = 1;
 		}
 		$b .= '</ul>';
@@ -195,7 +195,7 @@ control over it to the project's administrator.");
 			$u = user_get_object(user_getid());
 			$d = $u->getUnixName();
 			if (forge_get_config('use_ssh', 'scmgit')) {
-				$b .= '<div id="tabber-ssh" class="tabbertab" >';
+				$b .= '<div id="tabber-gitssh" class="tabbertab" >';
 				$b .= html_e('p', array(), _('SSH must be installed on your client machine.'));
 				$htmlRepo = '';
 				foreach ($repo_list as $repo_name) {
@@ -205,7 +205,7 @@ control over it to the project's administrator.");
 				$b .= '</div>';
 			}
 			if (forge_get_config('use_smarthttp', 'scmgit')) {
-				$b .= '<div id="tabber-smarthttp" class="tabbertab" >';
+				$b .= '<div id="tabber-gitsmarthttp" class="tabbertab" >';
 				$b .= html_e('p', array(), _('Enter your site password when prompted.'));
 				$htmlRepo = '';
 				$protocol = forge_get_config('use_ssl', 'scmgit') ? 'https' : 'http';
@@ -217,7 +217,7 @@ control over it to the project's administrator.");
 			}
 		} else {
 			if (forge_get_config('use_ssh', 'scmgit')) {
-				$b .= '<div id="tabber-ssh" class="tabbertab" >';
+				$b .= '<div id="tabber-gitssh" class="tabbertab" >';
 				$b .= html_e('p', array(),
 					ngettext('Only project developers can access the Git repository via this method.',
 						'Only project developers can access the Git repositories via this method.',
@@ -233,7 +233,7 @@ control over it to the project's administrator.");
 			}
 			if (forge_get_config('use_smarthttp', 'scmgit')) {
 				$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
-				$b .= '<div id="tabber-smarthttp" class="tabbertab" >';
+				$b .= '<div id="tabber-gitsmarthttp" class="tabbertab" >';
 				$b .= html_e('p', array(),
 					ngettext('Only project developers can access the Git repository via this method.',
 						'Only project developers can access the Git repositories via this method.',

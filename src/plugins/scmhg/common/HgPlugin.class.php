@@ -100,14 +100,14 @@ Offer DAV or SSH access.");
 				ngettext('Only project developers can access the Hg repository via this method.',
 				'Only project developers can access the Hg repositories via this method.',
 				count($repo_list)));
-		$b .= '<div id="tabber">';
+		$b .= '<div id="tabber-hg">';
 		$b .= '<ul>';
 		if (forge_get_config('use_ssh', 'scmhg')) {
-			$b .= '<li><a href="#tabber-ssh">'._('via SSH').'</a></li>';
+			$b .= '<li><a href="#tabber-hgssh">'._('via SSH').'</a></li>';
 			$configuration = 1;
 		}
 		if (forge_get_config('use_dav', 'scmhg')) {
-			$b .= '<li><a href="#tabber-dav">'._('via "DAV"').'</a></li>';
+			$b .= '<li><a href="#tabber-hgdav">'._('via "DAV"').'</a></li>';
 			$configuration = 1;
 		}
 		$b .= '</ul>';
@@ -118,7 +118,7 @@ Offer DAV or SSH access.");
 			$u = user_get_object(user_getid());
 			$d = $u->getUnixName();
 			if (forge_get_config('use_ssh', 'scmhg')) {
-				$b .= '<div id="tabber-ssh" class="tabbertab" >';
+				$b .= '<div id="tabber-hgssh" class="tabbertab" >';
 				$b .= html_e('p', array(), _('SSH must be installed on your client machine.'));
 				$htmlRepo = '';
 				foreach ($repo_list as $repo_name) {
@@ -130,7 +130,7 @@ Offer DAV or SSH access.");
 				$b .= '</div>';
 			}
 			if (forge_get_config('use_dav', 'scmhg')) {
-				$b .= '<div id="tabber-dav" class="tabbertab" >';
+				$b .= '<div id="tabber-hgdav" class="tabbertab" >';
 				$b .= html_e('p', array(), _('Enter your site password when prompted.'));
 				$htmlRepo = '';
 				$protocol = forge_get_config('use_ssl', 'scmhg') ? 'https' : 'http';
@@ -142,7 +142,7 @@ Offer DAV or SSH access.");
 			}
 		} else {
 			if (forge_get_config('use_ssh', 'scmhg')) {
-				$b .= '<div id="tabber-ssh" class="tabbertab" >';
+				$b .= '<div id="tabber-hgssh" class="tabbertab" >';
 				$b .= html_e('p', array(),
 					ngettext('Only project developers can access the Hg repository via this method.',
 						'Only project developers can access the Hg repositories via this method.',
@@ -160,7 +160,7 @@ Offer DAV or SSH access.");
 			}
 			if (forge_get_config('use_dav', 'scmhg')) {
 				$protocol = forge_get_config('use_ssl', 'scmhg')? 'https' : 'http';
-				$b .= '<div id="tabber-dav" class="tabbertab" >';
+				$b .= '<div id="tabber-hgdav" class="tabbertab" >';
 				$b .= html_e('p', array(),
 					ngettext('Only project developers can access the Hg repository via this method.',
 						'Only project developers can access the Hg repositories via this method.',
