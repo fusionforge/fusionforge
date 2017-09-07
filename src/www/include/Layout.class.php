@@ -105,7 +105,7 @@ abstract class Layout extends FFError {
 		$this->navigation = new Navigation();
 
 		// determine rootindex
-		if ( file_exists(forge_get_config('custom_path') . '/index_std.php') ) {
+		if (file_exists(forge_get_config('custom_path') . '/index_std.php')) {
 			$this->rootindex = forge_get_config('custom_path') . '/index_std.php';
 		} else {
 			$this->rootindex = $GLOBALS['gfwww'].'index_std.php';
@@ -216,7 +216,7 @@ abstract class Layout extends FFError {
 	}
 
 	function addButtons($link, $text, $options = array()) {
-		$this->buttons[] = array_merge( array('link' => $link, 'text' => $text), $options);
+		$this->buttons[] = array_merge(array('link' => $link, 'text' => $text), $options);
 	}
 
 	function getButtons() {
@@ -651,24 +651,24 @@ abstract class Layout extends FFError {
 	 */
 	function multiTableRow($row_attrs, $cell_data, $istitle = false) {
 		$ap = html_ap();
-		if ( $istitle ) {
+		if ($istitle) {
 			(isset($row_attrs['class'])) ? $row_attrs['class'] .= ' align-center multiTableRowTitle' : $row_attrs['class'] = 'align-center multiTableRowTitle';
 			$row_attrs['class'] .= '';
 		}
 		$return = html_ao('tr', $row_attrs);
 		$type = $istitle ? 'th' : 'td';
-		for ( $c = 0; $c < count($cell_data); $c++ ) {
+		for ($c = 0; $c < count($cell_data); $c++) {
 			$locAp = html_ap();
 			$cellAttrs = array();
 			foreach (array_slice($cell_data[$c],1) as $k => $v) {
 				$cellAttrs[$k] = $v;
 			}
 			$return .= html_ao($type, $cellAttrs);
-			if ( $istitle ) {
+			if ($istitle) {
 				$return .= html_ao('span', array('class' => 'multiTableRowTitle'));
 			}
 			$return .= $cell_data[$c][0];
-			if ( $istitle ) {
+			if ($istitle) {
 				$return .= html_ac(html_ap() -1);
 			}
 			$return .= html_ac($locAp);
@@ -772,7 +772,7 @@ abstract class Layout extends FFError {
 	}
 
 	function jQueryUIconfirmBox($id = 'dialog-confirm', $title = 'Confirm your action', $message = 'Do you confirm your action?') {
-		return html_e('div', array('id' => $id, 'title' => $title, 'class' => 'hide'), 
+		return html_e('div', array('id' => $id, 'title' => $title, 'class' => 'hide'),
 				html_e('p', array(), html_e('span', array('class' => 'ui-icon ui-icon-alert', 'style' => 'float:left; margin:0 7px 20px 0;'), '', false).$message));
 	}
 
@@ -870,7 +870,7 @@ abstract class Layout extends FFError {
 				$attrs[$key] = $extra_params_value;
 			}
 		}
-		return html_e('div', array('class' => 'field-holder'), $htmllabel.html_build_select_box_from_array($vals, $name, $checked_val, $text_is_value, $attrs)); 
+		return html_e('div', array('class' => 'field-holder'), $htmllabel.html_build_select_box_from_array($vals, $name, $checked_val, $text_is_value, $attrs));
 	}
 
 	function html_textarea($name, $id = '', $label = '', $value = '',  $extra_params = '') {
@@ -1336,7 +1336,7 @@ abstract class Layout extends FFError {
 				}
 			}
 		}
-		if ( $totalElements > $start + $paging) {
+		if ($totalElements > $start + $paging) {
 			$html_content .= util_make_link($actionUrl.$sep.'start='.($start+$paging),'<strong>'._('next').' &rarr;</strong>');
 		}
 		return $html_content;
