@@ -451,7 +451,7 @@ over it to the project's administrator.");
 		$res = db_query_params('DELETE FROM stats_cvs_group WHERE month = $1 AND day = $2 AND group_id = $3 AND reponame = $4',
 						array($month_string,
 							$day,
-							$project->getID(),
+							$group->getID(),
 							$project_reponame));
 		if(!$res) {
 			echo "Error while cleaning stats_cvs_group\n";
@@ -462,7 +462,7 @@ over it to the project's administrator.");
 		$res = db_query_params('DELETE FROM stats_cvs_user WHERE month = $1 AND day = $2 AND group_id = $3 AND reponame = $4',
 					array($month_string,
 						$day,
-						$project->getID(),
+						$group->getID(),
 						$project_reponame));
 		if(!$res) {
 			echo "Error while cleaning stats_cvs_user\n";
@@ -493,7 +493,7 @@ over it to the project's administrator.");
 						VALUES ($1, $2, $3, $4, $5, $6, $7)',
 					array($month_string,
 						$day,
-						$project->getID(),
+						$group->getID(),
 						0,
 						$updates,
 						$adds,
@@ -549,7 +549,7 @@ over it to the project's administrator.");
 			if (!db_query_params('INSERT INTO stats_cvs_user (month, day, group_id, user_id, commits, adds) VALUES ($1, $2, $3, $4, $5, $6, $7)',
 							array($month_string,
 								$day,
-								$project->getID(),
+								$group->getID(),
 								$user_id,
 								isset($usr_updates[$user]) ? $usr_updates[$user] : 0,
 								isset($usr_adds[$user]) ? $usr_adds[$user] : 0),
@@ -559,7 +559,6 @@ over it to the project's administrator.");
 				return false;
 			}
 		}
-
 		db_commit();
 	}
 
