@@ -94,16 +94,8 @@ control over it to the project's administrator.");
 	}
 
 	function getInstructionsForAnon($project) {
-		$repo_list = array($project->getUnixName());
+		$repo_list = $this->getRepositories($project);
 		$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
-		$result = db_query_params('SELECT repo_name FROM scm_secondary_repos WHERE group_id=$1 AND next_action = $2 AND plugin_id=$3 ORDER BY repo_name',
-					   array($project->getID(),
-						  SCM_EXTRA_REPO_ACTION_UPDATE,
-						  $this->getID()));
-		$rows = db_numrows($result);
-		for ($i=0; $i<$rows; $i++) {
-			$repo_list[] = db_result($result,$i,'repo_name');
-		}
 		$clone_commands = array();
 		foreach ($repo_list as $repo_name) {
 			if (forge_get_config('use_smarthttp', 'scmgit')) {
@@ -156,16 +148,7 @@ control over it to the project's administrator.");
 
 	function getInstructionsForRW($project) {
 		global $HTML;
-		$repo_list = array($project->getUnixName());
-
-		$result = db_query_params('SELECT repo_name FROM scm_secondary_repos WHERE group_id=$1 AND next_action = $2 AND plugin_id=$3 ORDER BY repo_name',
-					   array($project->getID(),
-						  SCM_EXTRA_REPO_ACTION_UPDATE,
-						  $this->getID()));
-		$rows = db_numrows($result);
-		for ($i=0; $i<$rows; $i++) {
-			$repo_list[] = db_result($result, $i, 'repo_name');
-		}
+		$repo_list = $this->getRepositories($project);
 
 		$b = '';
 		$b .= html_e('h2', array(), _('Developer Access'));
@@ -698,14 +681,9 @@ control over it to the project's administrator.");
 			$start_time = gmmktime(0, 0, 0, $month, $day, $year);
 			$end_time = $start_time + 86400;
 
-			$this->gatherStatsRepo($project, $project->getUnixName(), $year, $month, $day);
-
-			$result = db_query_params('SELECT repo_name FROM scm_secondary_repos WHERE group_id = $1 AND plugin_id = $2 ORDER BY repo_name',
-						   array($project->getID(),
-							  $this->getID()));
-			$rows = db_numrows($result);
-			for ($i=0; $i<$rows; $i++) {
-				$this->gatherStatsRepo($project, db_result($result, $i, 'repo_name'), $year, $month, $day);
+			$repolist = $this->getRepositories($project);
+			foreach ($repolist as $repo_name) {
+				$this->gatherStatsRepo($project, $repo_name, $year, $month, $day);
 			}
 		}
 	}
@@ -1516,6 +1494,18 @@ control over it to the project's administrator.");
 											 $t));
 			}
 		}
+	}
+
+	function getRepositories($group) {
+		$repoarr = array($group->getUnixName());
+		$result = db_query_params('SELECT repo_name FROM scm_secondary_repos WHERE group_id = $1 AND next_action = $2 AND plugin_id = $3 ORDER BY repo_name',
+						   array($group->getID(),
+							  SCM_EXTRA_REPO_ACTION_UPDATE,
+							  $this->getID()));
+		while ($arr = db_fetch_array($result)) {
+			$repoarr[] = $arr['repo_name'];
+		}
+		return $repoarr;
 	}
 }
 
