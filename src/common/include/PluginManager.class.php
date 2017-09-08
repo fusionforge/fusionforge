@@ -27,6 +27,7 @@ class PluginManager extends FFError {
 	var $plugins_to_hooks;
 	var $hooks_to_plugins;
 	var $returned_values = array();
+	var $plugins_data = array();
 
 	function __construct() {
 		parent::__construct();
@@ -64,7 +65,7 @@ class PluginManager extends FFError {
 	 * GetPluginObject() - get a particular plugin object
 	 *
 	 * @param	string	$pluginname	name of plugin
-	 * @return	object	plugin object or false if not available
+	 * @return	object|bool	plugin object or false if not available
 	 */
 	function GetPluginObject($pluginname) {
 		if (!isset($this->plugins_objects[$pluginname])) {
@@ -114,7 +115,7 @@ class PluginManager extends FFError {
 		$query_exists = 'SELECT plugin_id, plugin_name FROM plugins WHERE plugin_name=$1';
 		$res = db_query_params($query_exists, array($pluginname));
 		if (db_numrows($res) == 0) {
-			$res = db_query_params('INSERT INTO plugins (plugin_name,plugin_desc) VALUES ($1,$2)',
+			db_query_params('INSERT INTO plugins (plugin_name,plugin_desc) VALUES ($1,$2)',
 				array($pluginname, "This is the $pluginname plugin"));
 		}
 
