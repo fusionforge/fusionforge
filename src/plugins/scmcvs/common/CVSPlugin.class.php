@@ -22,8 +22,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-forge_define_config_item ('default_server', 'scmcvs', forge_get_config ('scm_host')) ;
-forge_define_config_item ('repos_path', 'scmcvs', forge_get_config('chroot').'/scmrepos/cvs') ;
+forge_define_config_item('default_server', 'scmcvs', forge_get_config('scm_host')) ;
+forge_define_config_item('repos_path', 'scmcvs', forge_get_config('chroot').'/scmrepos/cvs') ;
 
 class CVSPlugin extends SCMPlugin {
 	function __construct () {
@@ -38,12 +38,12 @@ _("This plugin contains the CVS subsystem of FusionForge. It allows each
 FusionForge project to have its own CVS repository, and gives some control
 over it to the project's administrator.");
 		$this->hooks[] = 'scm_browser_page';
-		$this->hooks[] = 'scm_generate_snapshots' ;
-		$this->hooks[] = 'scm_gather_stats' ;
+		$this->hooks[] = 'scm_generate_snapshots';
+		$this->hooks[] = 'scm_gather_stats';
 
 		$this->provides['cvs'] = true;
 
-		$this->register () ;
+		$this->register();
 	}
 
 	function getDefaultServer() {
