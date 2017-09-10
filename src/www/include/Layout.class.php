@@ -776,7 +776,7 @@ abstract class Layout extends FFError {
 				html_e('p', array(), html_e('span', array('class' => 'ui-icon ui-icon-alert', 'style' => 'float:left; margin:0 7px 20px 0;'), '', false).$message));
 	}
 
-	function html_input($name, $id = '', $label = '', $type = 'text', $value = '', $extra_params = '') {
+	function html_input($name, $id = '', $label = '', $type = 'text', $value = '', $extra_params_input = '', $extra_params_div = '') {
 		if (!$id) {
 			$id = $name;
 		}
@@ -792,12 +792,14 @@ abstract class Layout extends FFError {
 		if ($value) {
 			$attrs['value'] = $value;
 		}
-		if (is_array($extra_params)) {
-			foreach ($extra_params as $key => $extra_params_value) {
+		if (is_array($extra_params_input)) {
+			foreach ($extra_params_input as $key => $extra_params_value) {
 				$attrs[$key] = $extra_params_value;
 			}
 		}
-		return html_e('div', array('class' => 'field-holder'), $htmllabel.html_e('input', $attrs));
+		$attrs_div = array('class' => 'field-holder');
+		$attrs_div = array_merge($attrs_div, $extra_params_div);
+		return html_e('div', $attrs_div, $htmllabel.html_e('input', $attrs));
 	}
 
 	function html_checkbox($name, $value, $id = '', $label = '', $checked = '', $extra_params = array()) {
