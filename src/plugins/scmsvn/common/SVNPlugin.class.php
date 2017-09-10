@@ -77,7 +77,7 @@ some control over it to the project's administrator.");
 			return;
 		}
 
-		if ($project->usesPlugin($this->name) && forge_check_perm('scm', $project->getID(), 'read')) {
+		if (forge_check_perm('scm', $project->getID(), 'read')) {
 			$result = db_query_params('SELECT sum(updates) AS updates, sum(adds) AS adds FROM stats_cvs_group WHERE group_id=$1',
 						array($project->getID()));
 			$commit_num = db_result($result,0,'updates');
@@ -208,7 +208,7 @@ some control over it to the project's administrator.");
 	}
 
 	function getSnapshotPara($project) {
-		return ;
+		return;
 	}
 
 	function getBrowserLinkBlock($project) {
@@ -275,20 +275,17 @@ some control over it to the project's administrator.");
 			return;
 		}
 
-		if ($project->usesPlugin($this->name)) {
-			$iframe_src = '/scm/viewvc.php?root='.$project->getUnixName();
-			if ($params['commit']) {
-				$iframe_src .= '&view=rev&revision='.$params['commit'];
-			}
-			htmlIframe($iframe_src, array('id'=>'scmsvn_iframe'));
+		$iframe_src = '/scm/viewvc.php?root='.$project->getUnixName();
+		if ($params['commit']) {
+			$iframe_src .= '&view=rev&revision='.$params['commit'];
 		}
+		htmlIframe($iframe_src, array('id'=>'scmsvn_iframe'));
 	}
 
 	function createOrUpdateRepo($params) {
 		$project = $this->checkParams($params);
 		if (!$project) return false;
 		if (!$project->isActive()) return false;
-		if (!$project->usesPlugin($this->name)) return false;
 
 		$repo_prefix = forge_get_config('repos_path', 'scmsvn');
 		if (!is_dir($repo_prefix) && !mkdir($repo_prefix, 0755, true)) {
@@ -361,10 +358,6 @@ some control over it to the project's administrator.");
 
 		$project = $this->checkParams($params);
 		if (!$project) {
-			return false;
-		}
-
-		if (!$project->usesPlugin($this->name)) {
 			return false;
 		}
 
@@ -589,9 +582,8 @@ some control over it to the project's administrator.");
 		$times = array();
 		$revisions = array();
 
-		$group_id = $params['group'];
-		$project = group_get_object($group_id);
-		if (!$project->usesPlugin($this->name)) {
+		$project = $this->checkParams($params);
+		if (!$project) {
 			return false;
 		}
 
@@ -648,8 +640,8 @@ some control over it to the project's administrator.");
 				foreach ($messages as $message) {
 					$result = array();
 					$result['section'] = 'scm';
-					$result['group_id'] = $group_id;
-					$result['ref_id'] = 'browser.php?group_id='.$group_id;
+					$result['group_id'] = $project->getID();
+					$result['ref_id'] = 'browser.php?group_id='.$project->getID();
 					$result['description'] = htmlspecialchars($message).' (r'.$revisions[$i].')';
 					$userObject = user_get_object_by_name($users[$i]);
 					if (is_a($userObject, 'FFUser')) {
