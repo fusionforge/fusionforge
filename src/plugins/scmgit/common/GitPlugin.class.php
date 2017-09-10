@@ -72,7 +72,7 @@ control over it to the project's administrator.");
 			return;
 		}
 
-		if ($project->usesPlugin($this->name) && forge_check_perm('scm', $project->getID(), 'read')) {
+		if (forge_check_perm('scm', $project->getID(), 'read')) {
 			$result = db_query_params('SELECT sum(updates) AS updates, sum(adds) AS adds FROM stats_cvs_group WHERE group_id=$1',
 						array($project->getID()));
 			$commit_num = db_result($result,0,'updates');
@@ -417,7 +417,6 @@ control over it to the project's administrator.");
 		$project = $this->checkParams($params);
 		if (!$project) return false;
 		if (!$project->isActive()) return false;
-		if (!$project->usesPlugin($this->name)) return false;
 
 		$project_name = $project->getUnixName();
 		$unix_group_ro = $project_name . '_scmro';
@@ -660,10 +659,6 @@ control over it to the project's administrator.");
 			return false;
 		}
 
-		if (!$project->usesPlugin($this->name)) {
-			return false;
-		}
-
 		if ($params['mode'] == 'day') {
 			$year = $params['year'];
 			$month = $params['month'];
@@ -680,7 +675,6 @@ control over it to the project's administrator.");
 	}
 
 	function gatherStatsRepo($group, $project_reponame, $year, $month, $day) {
-
 		$month_string = sprintf("%04d%02d", $year, $month);
 		$start_time = gmmktime(0, 0, 0, $month, $day, $year);
 		$end_time = $start_time + 86400;
@@ -973,11 +967,11 @@ control over it to the project's administrator.");
 	}
 
 	function activity($params) {
-		$group_id = $params['group'];
-		$project = group_get_object($group_id);
-		if (!$project->usesPlugin($this->name)) {
+		$project = $this->checkParams($params);
+		if (!$project) {
 			return false;
 		}
+
 		if (in_array('scmgit', $params['show']) || (count($params['show']) < 1)) {
 			if ($project->enableAnonSCM()) {
 				$server_script = '/anonscm/gitlog';
@@ -1021,8 +1015,8 @@ control over it to the project's administrator.");
 				if (sizeof($splitedLine) == 4) {
 					$result = array();
 					$result['section'] = 'scm';
-					$result['group_id'] = $group_id;
-					$result['ref_id'] = 'browser.php?group_id='.$group_id.'&commit='.$splitedLine[3];
+					$result['group_id'] = $project->getID();
+					$result['ref_id'] = 'browser.php?group_id='.$project->getID().'&commit='.$splitedLine[3];
 					$result['description'] = htmlspecialchars($splitedLine[2]).' (commit '.$splitedLine[3].')';
 					$userObject = user_get_object_by_email($splitedLine[1]);
 					if (is_a($userObject, 'FFUser')) {
@@ -1047,9 +1041,6 @@ control over it to the project's administrator.");
 	function scm_add_repo(&$params) {
 		$project = $this->checkParams($params);
 		if (!$project) {
-			return false;
-		}
-		if (!$project->usesPlugin($this->name)) {
 			return false;
 		}
 
@@ -1136,9 +1127,6 @@ control over it to the project's administrator.");
 		global $HTML;
 		$project = $this->checkParams($params);
 		if (!$project) {
-			return false;
-		}
-		if (!$project->usesPlugin($this->name)) {
 			return false;
 		}
 
