@@ -1178,15 +1178,15 @@ control over it to the project's administrator.");
 		echo $HTML->openForm(array('name' => 'form_create_repo', 'action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
 		echo $HTML->html_input('group_id', '', '', 'hidden', $params['group_id']);
 		echo $HTML->html_input('create_repository', '', '', 'hidden', 1);
-		echo html_e('p', array(), html_e('strong', array(), _('Repository name')._(':')).utils_requiredField().html_e('br').
-				$HTML->html_input('repo_name', '', '', 'text', '', array('required' => 'required', 'size' => 20)));
-		echo html_e('p', array(), html_e('strong', array(), _('Description')._(':')).html_e('br').
-				$HTML->html_input('description', '', '', 'text', '', array('size' => 60)));
+		echo $HTML->html_input('repo_name', '', html_e('strong', array(), _('Repository name')._(':')).utils_requiredField(), 'text', '', array('required' => 'required', 'size' => 20));
+		echo html_e('br');
+		echo $HTML->html_input('description', '', html_e('strong', array(), _('Description')._(':')), 'text', '', array('size' => 60));
 		echo html_e('p', array(), html_e('strong', array(), _('Initial clone URL (or name of an existing repository in this project; leave empty to start with an empty repository)')._(':')).html_e('br').
 				$HTML->html_input('clone', '', '', 'text', $project_name, array('size' => 60)));
 		echo $HTML->html_input('scm_enable_anonymous', '', '', 'hidden', ($project->enableAnonSCM()? 1 : 0));
-		echo $HTML->html_input('cancel', '', '', 'submit', _('Cancel'));
-		echo $HTML->html_input('submit', '', '', 'submit', _('Submit'));
+		echo html_e('br');
+		echo $HTML->html_input('cancel', '', '', 'submit', _('Cancel'), array(), array('style' => 'display: inline-block!important'));
+		echo $HTML->html_input('submit', '', '', 'submit', _('Submit'), array(), array('style' => 'display: inline-block!important'));
 		echo $HTML->closeForm();
 	}
 
