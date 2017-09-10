@@ -27,7 +27,7 @@
 
 require_once $gfcommon.'include/plugins_utils.php';
 
-forge_define_config_item('default_server', 'scmsvn', forge_get_config ('scm_host'));
+forge_define_config_item('default_server', 'scmsvn', forge_get_config('scm_host'));
 forge_define_config_item('repos_path', 'scmsvn', forge_get_config('chroot').'/scmrepos/svn');
 forge_define_config_item('serve_path', 'scmsvn', forge_get_config('repos_path'));
 forge_define_config_item('use_ssh', 'scmsvn', false);
@@ -125,10 +125,10 @@ some control over it to the project's administrator.");
 			if (forge_get_config('ssh_port') != 22) {
 				$ssh_port = '--config-option="config:tunnels:ssh=ssh -p '.forge_get_config('ssh_port').'"';
 			}
-			$b .= '<span class="tt">svn '.$ssh_port.' checkout svn://'.forge_get_config('scm_host').$this->svn_root_fs.'/'.$project->getUnixName().$module.'</span><br />';
+			$b .= '<span class="tt">svn '.$ssh_port.' checkout svn://'.$this->getBoxForProject($project).$this->svn_root_fs.'/'.$project->getUnixName().$module.'</span><br />';
 		}
 		if (forge_get_config('use_dav', 'scmsvn')) {
-			$b .= '<p><span class="tt">svn checkout http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. forge_get_config('scm_host'). '/anonscm/svn/'.$project->getUnixName().$module.'</span></p>' ;
+			$b .= '<p><span class="tt">svn checkout http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'.$this->getBoxForProject($project).'/anonscm/svn/'.$project->getUnixName().$module.'</span></p>' ;
 		}
 		$b .= '</p>';
 		return $b;
@@ -165,7 +165,7 @@ some control over it to the project's administrator.");
 				if (forge_get_config('ssh_port') != 22) {
 					$ssh_port = '--config-option="config:tunnels:ssh=ssh -p '.forge_get_config('ssh_port').'" ';
 				}
-				$b .= '<p><span class="tt">svn '.$ssh_port.'checkout svn+ssh://'.$d.'@' . forge_get_config('scm_host') . $this->svn_root_fs .'/'. $project->getUnixName().$module.'</span></p>' ;
+				$b .= '<p><span class="tt">svn '.$ssh_port.'checkout svn+ssh://'.$d.'@'.$this->getBoxForProject($project).$this->svn_root_fs .'/'. $project->getUnixName().$module.'</span></p>' ;
 				$b .= '</div>';
 			}
 			if (forge_get_config('use_dav', 'scmsvn')) {
@@ -173,7 +173,7 @@ some control over it to the project's administrator.");
 				$b .= '<p>';
 				$b .= _('Enter your site password when prompted.');
 				$b .= '</p>';
-				$b .= '<p><span class="tt">svn checkout --username '.$d.' http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. forge_get_config('scm_host'). '/authscm/'.$d.'/svn/'.$project->getUnixName().$module.'</span></p>' ;
+				$b .= '<p><span class="tt">svn checkout --username '.$d.' http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'.$this->getBoxForProject($project).'/authscm/'.$d.'/svn/'.$project->getUnixName().$module.'</span></p>' ;
 				$b .= '</div>';
 			}
 		} else {
@@ -190,7 +190,8 @@ some control over it to the project's administrator.");
 				if (forge_get_config('ssh_port') != 22) {
 					$ssh_port = '--config-option="config:tunnels:ssh=ssh -p '.forge_get_config('ssh_port').'" ';
 				}
-				$b .= '<p><span class="tt">svn '.$ssh_port.'checkout svn+ssh://<i>'._('developername').'</i>@' . forge_get_config('scm_host') . $this->svn_root_fs .'/'. $project->getUnixName().$module.'</span></p>' ; $b .= '</div>';
+				$b .= '<p><span class="tt">svn '.$ssh_port.'checkout svn+ssh://<i>'._('developername').'</i>@'.$this->getBoxForProject($project).$this->svn_root_fs .'/'.$project->getUnixName().$module.'</span></p>';
+				$b .= '</div>';
 			}
 			if (forge_get_config('use_dav', 'scmsvn')) {
 				$b .= '<div id="tabber-svndav" class="tabbertab" >';
@@ -199,7 +200,7 @@ some control over it to the project's administrator.");
 				$b .= ' ';
 				$b .= _('Enter your site password when prompted.');
 				$b .= '</p>';
-				$b .= '<p><span class="tt">svn checkout --username <i>'._('developername').'</i> http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. forge_get_config('scm_host'). '/authscm/<i>'._('developername').'</i>/svn/'.$project->getUnixName().$module.'</span></p>' ;
+				$b .= '<p><span class="tt">svn checkout --username <i>'._('developername').'</i> http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'.$this->getBoxForProject($project).'/authscm/<i>'._('developername').'</i>/svn/'.$project->getUnixName().$module.'</span></p>' ;
 				$b .= '</div>';
 			}
 		}
@@ -607,7 +608,7 @@ some control over it to the project's administrator.");
 					return false;
 				}
 			}
-			$script_url = $protocol . forge_get_config('scm_host')
+			$script_url = $protocol.$this->getBoxForProject($project)
 				. $server_script
 				.'?unix_group_name='.$project->getUnixName()
 				.'&mode=date_range'
@@ -697,7 +698,7 @@ some control over it to the project's administrator.");
 			} else {
 				$params = '&mode=latest';
 			}
-			$script_url = $protocol . forge_get_config('scm_host')
+			$script_url = $protocol.$this->getBoxForProject($project)
 				. $server_script
 				.'?unix_group_name='.$project->getUnixName()
 				. $params
@@ -775,17 +776,17 @@ some control over it to the project's administrator.");
 			}
 			$urls = array();
 			if (forge_get_config('use_dav', 'scmsvn')) {
-				$urls[] = $protocol.'://'.forge_get_config('scm_host').'/anonscm/svn/'.$arr['unix_group_name'];
+				$urls[] = $protocol.'://'.$this->getBoxForProject($project).'/anonscm/svn/'.$arr['unix_group_name'];
 			}
 			if (forge_get_config('use_ssh', 'scmsvn')) {
-				$urls[] = 'svn://'.forge_get_config('scm_host').$this->svn_root_fs.'/'.$arr['unix_group_name'];
+				$urls[] = 'svn://'.$this->getBoxForProject($project).$this->svn_root_fs.'/'.$arr['unix_group_name'];
 			}
 			if (session_loggedin()) {
 				if (forge_get_config('use_dav', 'scmsvn')) {
-					$urls[] = $protocol.'://'.forge_get_config('scm_host').'/authscm/'.$d.'/svn/'.$arr['unix_group_name'];
+					$urls[] = $protocol.'://'.$this->getBoxForProject($project).'/authscm/'.$d.'/svn/'.$arr['unix_group_name'];
 				}
 				if (forge_get_config('use_ssh', 'scmsvn')) {
-					$urls[] = 'svn+ssh://'.$d.'@' . forge_get_config('scm_host') . $this->svn_root_fs .'/'. $arr['unix_group_name'];
+					$urls[] = 'svn+ssh://'.$d.'@'.$this->getBoxForProject($project).$this->svn_root_fs .'/'. $arr['unix_group_name'];
 				}
 			}
 			$results[] = array('group_id' => $arr['group_id'],
