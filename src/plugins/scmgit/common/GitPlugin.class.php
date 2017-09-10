@@ -150,23 +150,22 @@ control over it to the project's administrator.");
 		global $HTML;
 		$repo_list = $this->getRepositories($project);
 
-		$b = '';
-		$b .= html_e('h2', array(), _('Developer Access'));
+		$b = html_e('h2', array(), _('Developer Access'));
 		$b .= html_e('p', array(),
 				ngettext('Only project developers can access the Git repository via this method.',
 				'Only project developers can access the Git repositories via this method.',
 				count($repo_list)));
 		$b .= '<div id="tabber-git">';
-		$b .= '<ul>';
+		$liElements = array();
 		if (forge_get_config('use_ssh', 'scmgit')) {
-			$b .= '<li><a href="#tabber-gitssh">'._('via SSH').'</a></li>';
+			$liElements[]['content'] = '<a href="#tabber-gitssh">'._('via SSH').'</a>';
 			$configuration = 1;
 		}
 		if (forge_get_config('use_smarthttp', 'scmgit')) {
-			$b .= '<li><a href="#tabber-gitsmarthttp">'._('via "smart HTTP"').'</a></li>';
+			$liElements[]['content'] = '<a href="#tabber-gitsmarthttp">'._('via "smart HTTP"').'</a>';
 			$configuration = 1;
 		}
-		$b .= '</ul>';
+		$b .= $HTML->html_list($liElements);
 		if (!isset($configuration)) {
 			return $HTML->error_msg(_('Error')._(': ')._('No access protocol has been allowed for the Git plugin in scmgit.ini: use_ssh and use_smarthttp are disabled'));
 		}
@@ -312,15 +311,7 @@ control over it to the project's administrator.");
 		$b .= html_e('p', array(), '['.util_make_link('/scm/browser.php?group_id='.$project->getID(), _('Browse main git repository')).']');
 
 		# Extra repos
-		$result = db_query_params('SELECT repo_name FROM scm_secondary_repos WHERE group_id=$1 AND next_action = $2 AND plugin_id=$3 ORDER BY repo_name',
-								  array($project->getID(),
-										SCM_EXTRA_REPO_ACTION_UPDATE,
-										$this->getID()));
-		$rows = db_numrows($result);
-		$repo_list = array();
-		for ($i=0; $i<$rows; $i++) {
-			$repo_list[] = db_result($result,$i,'repo_name');
-		}
+		$repo_list = $this->getRepositories($project, false);
 		foreach ($repo_list as $repo_name) {
 			if (forge_get_config('use_smarthttp', 'scmgit')) {
 				$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
@@ -1137,7 +1128,7 @@ control over it to the project's administrator.");
 			return false;
 		}
 
-		plugin_hook ("scm_admin_update", $params);
+		plugin_hook('scm_admin_update', $params);
 		return true;
 	}
 
@@ -1183,11 +1174,11 @@ control over it to the project's administrator.");
 				$cells[][] = $repo['description'];
 				$cells[][] = $repo['clone_url'];
 				$deleteForm = $HTML->openForm(array('name' => 'form_delete_repo_'.$repo['repo_name'], 'action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
-				$deleteForm .= html_e('input', array('type' => 'hidden', 'name' => 'group_id', 'value' => $params['group_id']));
-				$deleteForm .= html_e('input', array('type' => 'hidden', 'name' => 'delete_repository', 'value' => 1));
-				$deleteForm .= html_e('input', array('type' => 'hidden', 'name' => 'repo_name', 'value' => $repo['repo_name']));
-				$deleteForm .= html_e('input', array('type' => 'hidden', 'name' => 'scm_enable_anonymous', 'value' => ($project->enableAnonSCM()? 1 : 0)));
-				$deleteForm .= html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Delete')));
+				$deleteForm .= $HTML->html_input('group_id', '', '', 'hidden', $params['group_id']);
+				$deleteForm .= $HTML->html_input('delete_repository', '', '', 'hidden', 1);
+				$deleteForm .= $HTML->html_input('repo_name', '', '', 'hidden', $repo['repo_name']);
+				$deleteForm .= $HTML->html_input('scm_enable_anonymous', '', '', 'hidden', ($project->enableAnonSCM()? 1 : 0));
+				$deleteForm .= $HTML->html_input('submit', '', '', 'submit', _('Delete'));
 				$deleteForm .= $HTML->closeForm();
 				$cells[][] = $deleteForm;
 				echo $HTML->multiTableRow(array(), $cells);
@@ -1197,17 +1188,17 @@ control over it to the project's administrator.");
 
 		echo html_e('h2', array(), _('Create new Git repository for project').' '.$project_name);
 		echo $HTML->openForm(array('name' => 'form_create_repo', 'action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
-		echo html_e('input', array('type' => 'hidden', 'name' => 'group_id', 'value' => $params['group_id']));
-		echo html_e('input', array('type' => 'hidden', 'name' => 'create_repository', 'value' => 1));
+		echo $HTML->html_input('group_id', '', '', 'hidden', $params['group_id']);
+		echo $HTML->html_input('create_repository', '', '', 'hidden', 1);
 		echo html_e('p', array(), html_e('strong', array(), _('Repository name')._(':')).utils_requiredField().html_e('br').
-				html_e('input', array('type' => 'text', 'required' => 'required', 'size' => 20, 'name' => 'repo_name', 'value' => '')));
+				$HTML->html_input('repo_name', '', '', 'text', '', array('required' => 'required', 'size' => 20));
 		echo html_e('p', array(), html_e('strong', array(), _('Description')._(':')).html_e('br').
-				html_e('input', array('type' => 'text', 'size' => 60, 'name' => 'description', 'value' => '')));
+				$HTML->html_input('description', '', '', 'text', '', array('size' => 60));
 		echo html_e('p', array(), html_e('strong', array(), _('Initial clone URL (or name of an existing repository in this project; leave empty to start with an empty repository)')._(':')).html_e('br').
-				html_e('input', array('type' => 'text', 'size' => 60, 'name' => 'clone', 'value' => $project_name)));
-		echo html_e('input', array('type' => 'hidden', 'name' => 'scm_enable_anonymous', 'value' => ($project->enableAnonSCM()? 1 : 0)));
-		echo html_e('input', array('type' => 'submit', 'name' => 'cancel', 'value' => _('Cancel')));
-		echo html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Submit')));
+				$HTML->html_input('clone', '', '', 'text', $project_name, array('size' => 60));
+		echo $HTML->html_input('scm_enable_anonymous', '', '', 'hidden', ($project->enableAnonSCM()? 1 : 0));
+		echo $HTML->html_input('cancel', '', '', 'submit', _('Cancel'));
+		echo $HTML->html_input('submit', '', '', 'submit', _('Submit'));
 		echo $HTML->closeForm();
 	}
 
@@ -1496,8 +1487,10 @@ control over it to the project's administrator.");
 		}
 	}
 
-	function getRepositories($group) {
-		$repoarr = array($group->getUnixName());
+	function getRepositories($group, $autoinclude = true) {
+		if ($autoinclude) {
+			$repoarr = array($group->getUnixName());
+		}
 		$result = db_query_params('SELECT repo_name FROM scm_secondary_repos WHERE group_id = $1 AND next_action = $2 AND plugin_id = $3 ORDER BY repo_name',
 						   array($group->getID(),
 							  SCM_EXTRA_REPO_ACTION_UPDATE,
