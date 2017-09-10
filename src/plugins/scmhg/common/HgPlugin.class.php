@@ -76,7 +76,7 @@ Offer DAV or SSH access.");
 		if (forge_get_config('use_dav', 'scmhg')) {
 			$protocol = forge_get_config('use_ssl', 'scmhg')? 'https' : 'http';
 			$b .= html_e('p', array(), _("This project's Mercurial repository can be checked out through anonymous access with the following command")._(':'));
-			$b .= html_e('p', array(), html_e('kbd', array(), 'hg clone '.$protocol.'://'.forge_get_config('scm_host').'/anonscm/'.'hg'.'/'.$project->getUnixName()));
+			$b .= html_e('p', array(), html_e('kbd', array(), 'hg clone '.$protocol.'://'.$this->getBoxForProject($project).'/anonscm/'.'hg'.'/'.$project->getUnixName()));
 		} else {
 			$b .= $HTML->warning_msg(_('Please contact forge administrator, scmhg plugin is not correctly configured'));
 		}
@@ -84,16 +84,8 @@ Offer DAV or SSH access.");
 	}
 
 	function getInstructionsForRW($project) {
-		$repo_list = array($project->getUnixName());
+		$repo_list = $this->getRepositories($project);
 
-		$result = db_query_params('SELECT repo_name FROM scm_secondary_repos WHERE group_id=$1 AND next_action = $2 AND plugin_id=$3 ORDER BY repo_name',
-					   array($project->getID(),
-						  SCM_EXTRA_REPO_ACTION_UPDATE,
-						  $this->getID()));
-		$rows = db_numrows($result);
-		for ($i=0; $i<$rows; $i++) {
-			$repo_list[] = db_result($result, $i, 'repo_name');
-		}
 		$b = '';
 		$b .= html_e('h2', array(), _('Developer Access'));
 		$b .= html_e('p', array(),
@@ -101,18 +93,22 @@ Offer DAV or SSH access.");
 				'Only project developers can access the Hg repositories via this method.',
 				count($repo_list)));
 		$b .= '<div id="tabber-hg">';
-		$b .= '<ul>';
+		$liElements = array();
 		if (forge_get_config('use_ssh', 'scmhg')) {
-			$b .= '<li><a href="#tabber-hgssh">'._('via SSH').'</a></li>';
+			$liElements[]['content'] = '<a href="#tabber-hgssh">'._('via SSH').'</a>';
 			$configuration = 1;
 		}
 		if (forge_get_config('use_dav', 'scmhg')) {
-			$b .= '<li><a href="#tabber-hgdav">'._('via "DAV"').'</a></li>';
+			$liElements[]['content'] = '<a href="#tabber-hgdav">'._('via "DAV"').'</a>';
 			$configuration = 1;
 		}
-		$b .= '</ul>';
+		$b .= $HTML->html_list($liElements);
 		if (!isset($configuration)) {
 			return $HTML->error_msg(_('Error')._(': ')._('No access protocol has been allowed for the Hg plugin in scmhg.ini: use_ssh and use_dav are disabled'));
+		}
+		$ssh_port = '';
+		if (forge_get_config('ssh_port') != 22) {
+			$ssh_port = ':'.forge_get_config('ssh_port');
 		}
 		if (session_loggedin()) {
 			$u = user_get_object(user_getid());
@@ -124,7 +120,7 @@ Offer DAV or SSH access.");
 				foreach ($repo_list as $repo_name) {
 					// Warning : the ssh uri MUST be this form : ssh://username@scmbox//path/reponame
 					//           HAVE YOU SEEN THE // starting the path ? Keep in mind the double /
-					$htmlRepo .= html_e('kbd', array(), 'hg clone ssh://'.$d.'@'.forge_get_config('scm_host').'/'.forge_get_config('repos_path', 'scmhg').'/'.$project->getUnixName()).html_e('br');
+					$htmlRepo .= html_e('kbd', array(), 'hg clone ssh://'.$d.'@'.$this->getBoxForProject($project).$ssh_port.'/'.forge_get_config('repos_path', 'scmhg').'/'.$project->getUnixName()).html_e('br');
 				}
 				$b .= html_e('p', array(), $htmlRepo);
 				$b .= '</div>';
@@ -135,7 +131,7 @@ Offer DAV or SSH access.");
 				$htmlRepo = '';
 				$protocol = forge_get_config('use_ssl', 'scmhg') ? 'https' : 'http';
 				foreach ($repo_list as $repo_name) {
-					$htmlRepo .= html_e('kbd', array(), 'hg clone '.$protocol.'://<i>'.$d.'</i>@'.forge_get_config('scm_host').'/authscm/'.$d.'/hg/'. $project->getUnixName()).html_e('br');
+					$htmlRepo .= html_e('kbd', array(), 'hg clone '.$protocol.'://<i>'.$d.'</i>@'.$this->getBoxForProject($project).'/authscm/'.$d.'/hg/'. $project->getUnixName()).html_e('br');
 				}
 				$b .= html_e('p', array(), $htmlRepo);
 				$b .= '</div>';
@@ -153,7 +149,7 @@ Offer DAV or SSH access.");
 				foreach ($repo_list as $repo_name) {
 					// Warning : the ssh uri MUST be this form : ssh://username@scmbox//path/reponame
 					//           HAVE YOU SEEN THE // starting the path ? Keep in mind the double /
-					$htmlRepo .= html_e('kbd', array(), 'hg clone ssh://'.html_e('i', array(), _('developername'), true, false).'@'.forge_get_config('scm_host').'/'.forge_get_config('repos_path', 'scmhg').'/'.$project->getUnixName()).html_e('br');
+					$htmlRepo .= html_e('kbd', array(), 'hg clone ssh://'.html_e('i', array(), _('developername'), true, false).'@'.$this->getBoxForProject($project).$ssh_port.'/'.forge_get_config('repos_path', 'scmhg').'/'.$project->getUnixName()).html_e('br');
 				}
 				$b .= html_e('p', array(), $htmlRepo);
 				$b .= '</div>';
@@ -168,7 +164,7 @@ Offer DAV or SSH access.");
 					' '. _('Enter your site password when prompted.'));
 				$htmlRepo = '';
 				foreach ($repo_list as $repo_name) {
-					$htmlRepo .= html_e('kbd', array(), 'hg clone '.$protocol.'://'.html_e('i', array(), _('developername'), true, false).'@'.forge_get_config('scm_host').'/authscm/'.html_e('i', array(), _('developername'), true, false).'/hg/'.$project->getUnixName()).html_e('br');
+					$htmlRepo .= html_e('kbd', array(), 'hg clone '.$protocol.'://'.html_e('i', array(), _('developername'), true, false).'@'.$this->getBoxForProject($project).'/authscm/'.html_e('i', array(), _('developername'), true, false).'/hg/'.$project->getUnixName()).html_e('br');
 				}
 				$b .= html_e('p', array(), $htmlRepo);
 				$b .= '</div>';
@@ -260,7 +256,7 @@ Offer DAV or SSH access.");
 		if ($project->usesPlugin($this->name)) {
 			if ($this->browserDisplayable($project)) {
 				$protocol = forge_get_config('use_ssl', 'scmhg')? 'https' : 'http';
-				$box = forge_get_config('scm_host');
+				$box = $this->getBoxForProject($project);
 
 	                        if ($project->enableAnonSCM()) {
 					$iframesrc = $protocol.'://'.$box.'/anonscm/scmhg/cgi-bin/'.$project->getUnixName();
@@ -504,164 +500,170 @@ Offer DAV or SSH access.");
 		if (!$project) {
 			return false;
 		}
-		if (!$project->usesPlugin($this->name)) {
-			return false;
+
+		// since cronjobs are running as root, we need to trust apache user
+		if (!is_file('/root/.hgrc')) {
+			echo 'creation fichier'."\n";
+			$trustdata = '[trusted]'.PHP_EOL.'users = '.forge_get_config('apache_user').PHP_EOL;
+			$f = fopen('/root/.hgrc', 'w');
+			fwrite($f, $trustdata);
+			fclose($f);
 		}
 
-                // since cronjobs are running as root, we need to trust apache user
-                if (!is_file('/root/.hgrc')) {
-                        echo 'creation fichier'."\n";
-                        $trustdata = '[trusted]'.PHP_EOL.'users = '.forge_get_config('apache_user').PHP_EOL;
-                        $f = fopen('/root/.hgrc', 'w');
-                        fwrite($f, $trustdata);
-                        fclose($f);
-                }
-
 		if ($params['mode'] == 'day') {
-			db_begin();
 			$year = $params['year'];
 			$month = $params['month'];
 			$day = $params['day'];
 			$month_string = sprintf("%04d%02d", $year, $month);
 			$start_time = gmmktime(0, 0, 0, $month, $day, $year);
 			$end_time = $start_time + 86400;
-			$usr_adds    = array();
-			$usr_updates = array();
-			$usr_deletes = array();
-			$usr_commits = array();
-			$adds    = 0;
-			$updates = 0;
-			$deletes = 0;
-			$commits = 0;
-			$repo = forge_get_config('repos_path', 'scmhg') . '/' . $project->getUnixName();
-			if (!is_dir($repo) || !is_dir("$repo/.hg")) {
-				// echo "No repository\n";
-				db_rollback();
-				return false;
-			}
-			// cleaning stats_cvs_* table for the current day
-			$res = db_query_params('DELETE FROM stats_cvs_group WHERE month = $1 AND day = $2 AND group_id = $3 AND reponame = $4',
-						array($month_string,
-							$day,
-							$project->getID(),
-							$project->getUnixName()));
-			if(!$res) {
-				echo "Error while cleaning stats_cvs_group\n";
-				db_rollback();
-				return false;
-			}
 
-			$res = db_query_params('DELETE FROM stats_cvs_user WHERE month = $1 AND day = $2 AND group_id = $3 AND reponame = $4',
-						array($month_string,
-							$day,
-							$project->getID(),
-							$project->getUnixName()));
-			if(!$res) {
-				echo "Error while cleaning stats_cvs_user\n" ;
-				db_rollback () ;
-				return false ;
+			$repolist = $this->getRepositories($project);
+			foreach ($repolist as $repo_name) {
+				$this->gatherStatsRepo($project, $repo_name, $year, $month, $day);
 			}
+		}
 
-			//switch into scm_repository and take a look at the log informations
-			$cdir = chdir($repo);
-			if ($cdir) {
-				//show customised log informations
-				$pipe = popen("hg log --style fflog.tmpl -d '$start_time 0 to $end_time 0'", 'r');
-				$last_user = "";
-				while (!feof($pipe) && $line = fgets ($pipe)) {
-					//determine between author line and file informations
-					if (preg_match("/(\A[AMD]) .*/", $line, $matches)) {
-						if ($last_user == "") continue;
-						switch ($matches[1]) {
-							case 'A':
-								$usr_adds[$last_user]++;
-								$adds++;
-								break;
-							case 'M':
-								$usr_updates[$last_user]++;
-								$updates++;
-								break;
-							case 'D':
-								$usr_deletes[$last_user]++;
-								break;
+	function gatherStatsRepo($project, $repo_name, $year, $month, $day) {
+		$month_string = sprintf("%04d%02d", $year, $month);
+		$start_time = gmmktime(0, 0, 0, $month, $day, $year);
+		$end_time = $start_time + 86400;
+		$usr_adds    = array();
+		$usr_updates = array();
+		$usr_deletes = array();
+		$usr_commits = array();
+		$adds    = 0;
+		$updates = 0;
+		$deletes = 0;
+		$commits = 0;
+		$repo = forge_get_config('repos_path', 'scmhg') . '/' . $project->getUnixName();
+		if (!is_dir($repo) || !is_dir("$repo/.hg")) {
+			// echo "No repository\n";
+			db_rollback();
+			return false;
+		}
+		// cleaning stats_cvs_* table for the current day
+		$res = db_query_params('DELETE FROM stats_cvs_group WHERE month = $1 AND day = $2 AND group_id = $3 AND reponame = $4',
+					array($month_string,
+						$day,
+						$project->getID(),
+						$repo_name));
+		if(!$res) {
+			echo "Error while cleaning stats_cvs_group\n";
+			db_rollback();
+			return false;
+		}
+
+		$res = db_query_params('DELETE FROM stats_cvs_user WHERE month = $1 AND day = $2 AND group_id = $3 AND reponame = $4',
+					array($month_string,
+						$day,
+						$project->getID(),
+						$repo_name));
+		if(!$res) {
+			echo "Error while cleaning stats_cvs_user\n" ;
+			db_rollback () ;
+			return false ;
+		}
+
+		//switch into scm_repository and take a look at the log informations
+		$cdir = chdir($repo);
+		if ($cdir) {
+			//show customised log informations
+			$pipe = popen("hg log --style fflog.tmpl -d '$start_time 0 to $end_time 0'", 'r');
+			$last_user = "";
+			while (!feof($pipe) && $line = fgets ($pipe)) {
+				//determine between author line and file informations
+				if (preg_match("/(\A[AMD]) .*/", $line, $matches)) {
+					if ($last_user == "") continue;
+					switch ($matches[1]) {
+						case 'A':
+							$usr_adds[$last_user]++;
+							$adds++;
+							break;
+						case 'M':
+							$usr_updates[$last_user]++;
+							$updates++;
+							break;
+						case 'D':
+							$usr_deletes[$last_user]++;
+							break;
+					}
+				} else {
+					$result = preg_match("/^(?P<name>.+) <(?P<mail>.+)>/", $line, $matches);
+					if ($result) {
+						// Author line
+						$last_user = $matches['name'];
+						$user2email[$last_user] = strtolower($matches['mail']);
+						if (!isset($usr_adds[$last_user])) {
+							$usr_adds[$last_user] = 0;
+							$usr_updates[$last_user] = 0;
+							$usr_deletes[$last_user] = 0;
+							$usr_commits[$last_user] = 0;
 						}
-					} else {
-						$result = preg_match("/^(?P<name>.+) <(?P<mail>.+)>/", $line, $matches);
-						if ($result) {
-							// Author line
-							$last_user = $matches['name'];
-							$user2email[$last_user] = strtolower($matches['mail']);
-							if (!isset($usr_adds[$last_user])) {
-								$usr_adds[$last_user] = 0;
-								$usr_updates[$last_user] = 0;
-								$usr_deletes[$last_user] = 0;
-								$usr_commits[$last_user] = 0;
-							}
-							$commits++;
-							$usr_commits[$last_user]++;
-						}
+						$commits++;
+						$usr_commits[$last_user]++;
 					}
 				}
-				pclose($pipe);
+			}
+			pclose($pipe);
+		}
+
+		// inserting group results in stats_cvs_groups
+		if ($updates > 0 || $adds > 0 || $deletes > 0 || $commits > 0) {
+			if (!db_query_params('INSERT INTO stats_cvs_group (month, day, group_id, checkouts, commits, adds, updates, deletes, reponame)
+							VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)',
+						array($month_string,
+							$day,
+							$project->getID(),
+							0,
+							$commits,
+							$adds,
+							$updates,
+							$deletes,
+							$repo_name))) {
+				echo "Error while inserting into stats_cvs_group\n";
+				db_rollback();
+				return false;
+			}
+		}
+
+		// building the user list
+		$user_list = array_unique(array_merge(array_keys($usr_adds), array_keys($usr_updates), array_keys($usr_deletes), array_keys($usr_commits)));
+
+		foreach ($user_list as $user) {
+			// Trying to get user id from user name or email
+			$u = user_get_object_by_name($user);
+			if ($u) {
+				$user_id = $u->getID();
+			} else {
+				$res=db_query_params('SELECT user_id FROM users WHERE lower(realname)=$1 OR email=$2',
+					array(strtolower($user), $user2email[$user]));
+				if ($res && db_numrows($res) > 0) {
+					$user_id = db_result($res,0,'user_id');
+				} else {
+					continue;
+				}
 			}
 
-			// inserting group results in stats_cvs_groups
-			if ($updates > 0 || $adds > 0 || $deletes > 0 || $commits > 0) {
-				if (!db_query_params('INSERT INTO stats_cvs_group (month, day, group_id, checkouts, commits, adds, updates, deletes, reponame)
+			$uc = isset($usr_commits[$user]) ? $usr_commits[$user] : 0;
+			$uu = isset($usr_updates[$user]) ? $usr_updates[$user] : 0;
+			$ua = isset($usr_adds[$user]) ? $usr_adds[$user] : 0;
+			$ud = isset($usr_deletes[$user]) ? $usr_deletes[$user] : 0;
+			if ($uu > 0 || $ua > 0 || $uc > 0 || $ud > 0) {
+				if (!db_query_params('INSERT INTO stats_cvs_user (month, day, group_id, user_id, commits, adds, updates, deletes, reponame)
 								VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)',
-						      array($month_string,
-							     $day,
-							     $project->getID(),
-							     0,
-							     $commits,
-							     $adds,
-							     $updates,
-							     $deletes,
-								$project->getUnixName()))) {
-					echo "Error while inserting into stats_cvs_group\n";
+							array($month_string,
+								$day,
+								$project->getID(),
+								$user_id,
+								$uc,
+								$ua,
+								$uu,
+								$ud,
+								$repo_name))) {
+					echo "Error while inserting into stats_cvs_user\n";
 					db_rollback();
 					return false;
-				}
-			}
-
-			// building the user list
-			$user_list = array_unique(array_merge(array_keys($usr_adds), array_keys($usr_updates), array_keys($usr_deletes), array_keys($usr_commits)));
-
-			foreach ($user_list as $user) {
-				// Trying to get user id from user name or email
-				$u = user_get_object_by_name($user);
-				if ($u) {
-					$user_id = $u->getID();
-				} else {
-					$res=db_query_params('SELECT user_id FROM users WHERE lower(realname)=$1 OR email=$2',
-						array(strtolower($user), $user2email[$user]));
-					if ($res && db_numrows($res) > 0) {
-						$user_id = db_result($res,0,'user_id');
-					} else {
-						continue;
-					}
-				}
-
-				$uc = isset($usr_commits[$user]) ? $usr_commits[$user] : 0;
-				$uu = isset($usr_updates[$user]) ? $usr_updates[$user] : 0;
-				$ua = isset($usr_adds[$user]) ? $usr_adds[$user] : 0;
-				$ud = isset($usr_deletes[$user]) ? $usr_deletes[$user] : 0;
-				if ($uu > 0 || $ua > 0 || $uc > 0 || $ud > 0) {
-					if (!db_query_params('INSERT INTO stats_cvs_user (month, day, group_id, user_id, commits, adds, updates, deletes, reponame)
-									VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)',
-							      array($month_string,
-								     $day,
-								     $project->getID(),
-								     $user_id,
-								     $uc,
-								     $ua,
-								     $uu,
-								     $ud,
-									$project->getUnixName()))) {
-						echo "Error while inserting into stats_cvs_user\n";
-						db_rollback();
-						return false;
-					}
 				}
 			}
 		}
@@ -669,9 +671,8 @@ Offer DAV or SSH access.");
 	}
 
 	function activity($params) {
-		$group_id = $params['group'];
-		$project = group_get_object($group_id);
-		if (!$project->usesPlugin($this->name)) {
+		$project = $this->checkParams($params);
+		if (!$project) {
 			return false;
 		}
 		if (in_array('scmhg', $params['show']) || (count($params['show']) < 1)) {
@@ -686,8 +687,8 @@ Offer DAV or SSH access.");
 					if (sizeof($splitedLine) == 4) {
 						$result = array();
 						$result['section'] = 'scm';
-						$result['group_id'] = $group_id;
-						$result['ref_id'] = 'browser.php?group_id='.$group_id.'&commit='.$splitedLine[3];
+						$result['group_id'] = $project->getID();
+						$result['ref_id'] = 'browser.php?group_id='.$project->getID().'&commit='.$splitedLine[3];
 						$result['description'] = htmlspecialchars($splitedLine[2]).' (changeset '.$splitedLine[3].')';
 						$userObject = user_get_object_by_email($splitedLine[1]);
 						if (is_a($userObject, 'FFUser')) {
@@ -713,9 +714,6 @@ Offer DAV or SSH access.");
 // 	function scm_add_repo(&$params) {
 // 		$project = $this->checkParams($params);
 // 		if (!$project) {
-// 			return false;
-// 		}
-// 		if (!$project->usesPlugin($this->name)) {
 // 			return false;
 // 		}
 //
@@ -803,9 +801,6 @@ Offer DAV or SSH access.");
 // 		if (!$project) {
 // 			return false;
 // 		}
-// 		if (!$project->usesPlugin($this->name)) {
-// 			return false;
-// 		}
 //
 // 		session_require_perm('project_admin', $params['group_id']);
 //
@@ -866,6 +861,19 @@ Offer DAV or SSH access.");
 // 		echo $HTML->closeForm();
 // 	}
 
+	function getRepositories($group, $autoinclude = true) {
+		if ($autoinclude) {
+			$repoarr = array($group->getUnixName());
+		}
+		$result = db_query_params('SELECT repo_name FROM scm_secondary_repos WHERE group_id = $1 AND next_action = $2 AND plugin_id = $3 ORDER BY repo_name',
+						   array($group->getID(),
+							  SCM_EXTRA_REPO_ACTION_UPDATE,
+							  $this->getID()));
+		while ($arr = db_fetch_array($result)) {
+			$repoarr[] = $arr['repo_name'];
+		}
+		return $repoarr;
+	}
 }
 
 // Local Variables:
