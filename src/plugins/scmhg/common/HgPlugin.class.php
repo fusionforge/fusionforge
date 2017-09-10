@@ -523,6 +523,7 @@ Offer DAV or SSH access.");
 				$this->gatherStatsRepo($project, $repo_name, $year, $month, $day);
 			}
 		}
+	}
 
 	function gatherStatsRepo($project, $repo_name, $year, $month, $day) {
 		$month_string = sprintf("%04d%02d", $year, $month);
