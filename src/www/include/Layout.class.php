@@ -735,7 +735,7 @@ abstract class Layout extends FFError {
 		}
 	}
 
-	function confirmBox($msg, $params, $buttons, $image='*none*') {
+	function confirmBox($msg, $params, $buttons, $image = '*none*') {
 		global $HTML;
 		if ($image == '*none*') {
 			$image = html_image('stop.png', 48, 48);
@@ -1287,7 +1287,7 @@ abstract class Layout extends FFError {
 			$html_content .= sprintf(_('Displaying results %1$s out of %2$d total.'), ($start + 1).'-'.$maxElements, $totalElements);
 			if (session_loggedin()) {
 				$html_content .= sprintf(' ' . _('Displaying %s results.'), html_build_select_box_from_array(array('10', '25', '50', '100', '1000'), 'nres', $paging, 1));
-				$html_content .= html_e('input', array('type' => 'submit', 'name' => 'setpaging', 'value' => _('Change')));
+				$html_content .= $this->html_input('setpaging', '', '', 'submit', _('Change'));
 				$html_content .= $this->closeForm();
 			}
 		}
