@@ -73,7 +73,7 @@ over it to the project's administrator.");
 			return;
 		}
 
-		if ($project->usesPlugin($this->name) && forge_check_perm('scm', $project->getID(), 'read')) {
+		if (forge_check_perm('scm', $project->getID(), 'read')) {
 			$result = db_query_params('SELECT sum(commits) AS commits, sum(adds) AS adds FROM stats_cvs_group WHERE group_id=$1',
 						  array($project->getID()));
 			$commit_num = db_result($result, 0, 'commits');
@@ -219,20 +219,14 @@ over it to the project's administrator.");
 			return;
 		}
 
-		if ($project->usesPlugin($this->name)) {
-			if ($this->browserDisplayable($project)) {
-					htmlIframe('/plugins/scmdarcs/cgi-bin/darcsweb.cgi?r='.$project->getUnixName().'/'.$params['repo_name'],array('id'=>'scmdarcs_iframe'));
-			}
+		if ($this->browserDisplayable($project)) {
+			htmlIframe('/plugins/scmdarcs/cgi-bin/darcsweb.cgi?r='.$project->getUnixName().'/'.$params['repo_name'],array('id'=>'scmdarcs_iframe'));
 		}
 	}
 
 	function createOrUpdateRepo($params) {
 		$project = $this->checkParams($params);
 		if (!$project) {
-			return false;
-		}
-
-		if (! $project->usesPlugin($this->name)) {
 			return false;
 		}
 
@@ -359,10 +353,6 @@ over it to the project's administrator.");
 		$snapshot = forge_get_config('scm_snapshots_path').'/'.$group_name.'-scm-latest.tar'.util_get_compressed_file_extension();
 		$tarball = forge_get_config('scm_tarballs_path').'/'.$group_name.'-scmroot.tar'.util_get_compressed_file_extension();
 
-		if (! $project->usesPlugin($this->name)) {
-			return false;
-		}
-
 		if (! $project->enableAnonSCM()) {
 			if (file_exists($tarball)) unlink($tarball);
 			return false;
@@ -408,10 +398,6 @@ over it to the project's administrator.");
 
 		$project = $this->checkParams($params);
 		if (!$project) {
-			return false;
-		}
-
-		if (! $project->usesPlugin($this->name)) {
 			return false;
 		}
 
@@ -570,30 +556,27 @@ over it to the project's administrator.");
 			return false;
 		}
 
-		if ($project->usesPlugin($this->name)) {
-			$result = db_query_params(
-				"SELECT repo_name FROM plugin_scmdarcs_create_repos WHERE group_id=$1",
+		$result = db_query_params('SELECT repo_name FROM plugin_scmdarcs_create_repos WHERE group_id=$1',
 				array($project->getID()));
-			if ($result && db_numrows($result) > 0) {
-				$nm = array();
-				while ($res = db_fetch_array($result)) {
-					array_push($nm, $res['repo_name']);
-				}
-				print '<p><strong>'._('Repository to be created')._(': ').'</strong>'.
-					implode(_(', '), $nm) . '</p>';
+		if ($result && db_numrows($result) > 0) {
+			$nm = array();
+			while ($res = db_fetch_array($result)) {
+				array_push($nm, $res['repo_name']);
 			}
-
-			print '<p><strong>'._('Create new repository')._(': ').'</strong></p>';
-			print '<p>'._('Repository name')._(': ');
-			print '<input type="string" name="scm_create_repo_name" size=16 maxlength=128 /></p>';
-			print '<p>'._('Clone')._(': ').
-				'<select name="scm_clone_repo_name">';
-			print '<option value="">&lt;none&gt;</option>';
-			foreach ($this->getRepositories($project) as $repo_name) {
-				print '<option value="'.$repo_name.'">'.$repo_name.'</option>';
-			}
-			print '</select></p>';
+			print '<p><strong>'._('Repository to be created')._(': ').'</strong>'.
+				implode(_(', '), $nm) . '</p>';
 		}
+
+		print '<p><strong>'._('Create new repository')._(': ').'</strong></p>';
+		print '<p>'._('Repository name')._(': ');
+		print '<input type="string" name="scm_create_repo_name" size=16 maxlength=128 /></p>';
+		print '<p>'._('Clone')._(': ').
+				'<select name="scm_clone_repo_name">';
+		print '<option value="">&lt;none&gt;</option>';
+		foreach ($this->getRepositories($project) as $repo_name) {
+			print '<option value="'.$repo_name.'">'.$repo_name.'</option>';
+		}
+		print '</select></p>';
 	}
 
 	function adminUpdate($params) {
