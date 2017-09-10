@@ -289,7 +289,7 @@ control over it to the project's administrator.");
 			}
 
 			$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
-			$box = forge_get_config('scm_host');
+			$box = $this->getBoxForProject($project);
 			if ($project->enableAnonSCM()) {
 				$iframesrc = "$protocol://$box/anonscm/gitweb/?p=$repo";
 			} elseif (session_loggedin()) {
@@ -983,7 +983,7 @@ control over it to the project's administrator.");
 			}
 			// Grab commit log
 			$protocol = forge_get_config('use_ssl', 'scmgit') ? 'https://' : 'http://';
-			$script_url = $protocol . forge_get_config('scm_host')
+			$script_url = $protocol.$this->getBoxForProject($project)
 				. $server_script
 				.'?unix_group_name='.$project->getUnixName()
 				.'&mode=date_range'
@@ -1211,7 +1211,7 @@ control over it to the project's administrator.");
 			} else {
 				$params = '&mode=latest';
 			}
-			$script_url = $protocol . forge_get_config('scm_host')
+			$script_url = $protocol.$this->getBoxForProject($project)
 				. $server_script
 				.'?unix_group_name='.$project->getUnixName()
 				. $params
@@ -1282,15 +1282,16 @@ control over it to the project's administrator.");
 				continue;
 			}
 			$urls = array();
+			$project = group_get_object($arr['group_id']);
 			if (forge_get_config('use_smarthttp', 'scmgit')) {
-				$urls[] = $protocol.'://'.forge_get_config('scm_host').'/anonscm/git/'.$arr['unix_group_name'].'/'.$arr['unix_group_name'].'.git';
+				$urls[] = $protocol.'://'.$this->getBoxForProject($project).'/anonscm/git/'.$arr['unix_group_name'].'/'.$arr['unix_group_name'].'.git';
 			}
 			if (session_loggedin()) {
 				if (forge_get_config('use_ssh', 'scmgit')) {
-					$urls[] = 'git+ssh://'.$d.'@' . forge_get_config('scm_host') . forge_get_config('repos_path', 'scmgit') .'/'. $arr['unix_group_name'] .'/'. $arr['unix_group_name'] .'.git';
+					$urls[] = 'git+ssh://'.$d.'@'.$this->getBoxForProject($project).forge_get_config('repos_path', 'scmgit') .'/'. $arr['unix_group_name'] .'/'. $arr['unix_group_name'] .'.git';
 				}
 				if (forge_get_config('use_smarthttp', 'scmgit')) {
-					$urls[] = $protocol.'://'.$d.'@'.forge_get_config('scm_host').'/authscm/'.$d.'/git/'.$arr['unix_group_name'].'/'.$arr['unix_group_name'].'.git';
+					$urls[] = $protocol.'://'.$d.'@'.$this->getBoxForProject($project).'/authscm/'.$d.'/git/'.$arr['unix_group_name'].'/'.$arr['unix_group_name'].'.git';
 				}
 			}
 			$results[] = array('group_id' => $arr['group_id'],
@@ -1319,15 +1320,16 @@ control over it to the project's administrator.");
 				continue;
 			}
 			$urls = array();
+			$project = group_get_object($arr['group_id']);
 			if (forge_get_config('use_smarthttp', 'scmgit')) {
-				$urls[] = $protocol.'://'.forge_get_config('scm_host').'/anonscm/git/'.$arr['unix_group_name'].'/'.$arr['repo_name'].'.git';
+				$urls[] = $protocol.'://'.$this->getBoxForProject($project).'/anonscm/git/'.$arr['unix_group_name'].'/'.$arr['repo_name'].'.git';
 			}
 			if (session_loggedin()) {
 				if (forge_get_config('use_ssh', 'scmgit')) {
-					$urls[] = 'git+ssh://'.$d.'@' . forge_get_config('scm_host') . forge_get_config('repos_path', 'scmgit') .'/'. $arr['unix_group_name'] .'/'. $arr['repo_name'] .'.git';
+					$urls[] = 'git+ssh://'.$d.'@'.$this->getBoxForProject($project).forge_get_config('repos_path', 'scmgit') .'/'. $arr['unix_group_name'] .'/'. $arr['repo_name'] .'.git';
 				}
 				if (forge_get_config('use_smarthttp', 'scmgit')) {
-					$urls[] = $protocol.'://'.$d.'@'.forge_get_config('scm_host').'/authscm/'.$d.'/git/'.$arr['unix_group_name'].'/'.$arr['repo_name'].'.git';
+					$urls[] = $protocol.'://'.$d.'@'.$this->getBoxForProject($project).'/authscm/'.$d.'/git/'.$arr['unix_group_name'].'/'.$arr['repo_name'].'.git';
 				}
 			}
 			$results[] = array('group_id' => $arr['group_id'],
@@ -1358,15 +1360,16 @@ control over it to the project's administrator.");
 				continue;
 			}
 			$urls = array();
+			$project = group_get_object($arr['group_id']);
 			if (forge_get_config('use_smarthttp', 'scmgit')) {
-				$urls[] = $protocol.'://'.forge_get_config('scm_host').'/anonscm/git/'.$arr['unix_group_name'].'/users/'.$arr['user_name'].'.git';
+				$urls[] = $protocol.'://'.$this->getBoxForProject($project).'/anonscm/git/'.$arr['unix_group_name'].'/users/'.$arr['user_name'].'.git';
 			}
 			if (session_loggedin()) {
 				if (forge_get_config('use_ssh', 'scmgit')) {
-					$urls[] = 'git+ssh://'.$d.'@' . forge_get_config('scm_host') . forge_get_config('repos_path', 'scmgit') .'/'. $arr['unix_group_name'] .'/users/'. $arr['user_name'] .'.git';
+					$urls[] = 'git+ssh://'.$d.'@'.$this->getBoxForProject($project).forge_get_config('repos_path', 'scmgit') .'/'. $arr['unix_group_name'] .'/users/'. $arr['user_name'] .'.git';
 				}
 				if (forge_get_config('use_smarthttp', 'scmgit')) {
-					$urls[] = $protocol.'://'.$d.'@'.forge_get_config('scm_host').'/authscm/'.$d.'/git/'.$arr['unix_group_name'].'/users/'.$arr['user_name'].'.git';
+					$urls[] = $protocol.'://'.$d.'@'.$this->getBoxForProject($project).'/authscm/'.$d.'/git/'.$arr['unix_group_name'].'/users/'.$arr['user_name'].'.git';
 				}
 			}
 			$results[] = array('group_id' => $arr['group_id'],
