@@ -321,7 +321,7 @@ abstract class SCMPlugin extends Plugin {
 	}
 
 	function checkParams($params) {
-		$group_id = $params['group_id'] ;
+		$group_id = $params['group_id'];
 		$project = group_get_object($group_id);
 		if (!$project || !is_object($project)) {
 			return false;
