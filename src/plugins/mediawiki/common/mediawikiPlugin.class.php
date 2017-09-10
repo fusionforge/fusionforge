@@ -40,7 +40,7 @@ class MediaWikiPlugin extends Plugin {
 		'MEDIAWIKI_CREATE_IMAGEDIR' => 'create-imagedirs.php'
 	);
 
-	function __construct ($id=0) {
+	function __construct($id = 0) {
 		parent::__construct($id) ;
 		$this->name = 'mediawiki' ;
 		$this->text = _('Mediawiki') ; // To show in the tabs, use...
@@ -367,7 +367,7 @@ _('This plugin allows each project to embed Mediawiki under a tab.');
 				exec('/bin/rm -rf '.forge_get_config('projects_path', 'mediawiki').'/'.$projectObject->getUnixName());
 			}
 		} elseif ($hookname == 'activity') {
-			$group_id = $params['group'];
+			$group_id = $params['group_id'];
 			$project = group_get_object($group_id);
 			if (!$project->usesPlugin($this->name)) {
 				return false;

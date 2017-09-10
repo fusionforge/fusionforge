@@ -158,7 +158,7 @@ if ($results === false) {
 	exit_error(_('Unable to get activities')._(':').$ffactivity->getErrorMessage(), 'home');
 }
 // If plugins wants to add activities.
-$hookParams['group'] = $group_id;
+$hookParams['group_id'] = $group_id;
 $hookParams['results'] = &$results;
 $hookParams['show'] = &$show;
 $hookParams['begin'] = $begin;

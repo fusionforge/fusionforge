@@ -141,7 +141,7 @@ page edits displayed on activity tab, and multi-project wiki preferences.");
 				$params['result'] .= '</div>';
 			}
 		} elseif ($hookname == 'activity') {
-			$group = group_get_object($params['group']);
+			$group = group_get_object($params['group_id']);
 			if (!$group || !is_object($group)) {
 				return;
 			}
