@@ -2,7 +2,7 @@
 /**
  * globalactivityPlugin Class
  *
- *
+ * Copyright 2017, Franck Villaume - TrivialDev
  * This file is part of FusionForge.
  *
  * FusionForge is free software; you can redistribute it and/or modify
@@ -236,12 +236,10 @@ class globalactivityPlugin extends Plugin {
 
 		// If plugins wants to add activities.
 		while ($arr = db_fetch_array($res)) {
-			$group_id = $arr['group_id'];
-			if (!forge_check_perm('project_read', $group_id)) {
+			if (!forge_check_perm('project_read', $arr['group_id'])) {
 				continue;
 			}
-			$group_id = $arr['group_id'];
-			$hookParams['group'] = $group_id;
+			$hookParams['group_id'] = $arr['group_id'];
 			$hookParams['results'] = &$results;
 			$hookParams['show'] = &$section;
 			$hookParams['begin'] = $begin;
