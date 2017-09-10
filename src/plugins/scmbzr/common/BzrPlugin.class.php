@@ -3,7 +3,7 @@
  * FusionForge Bazaar plugin
  *
  * Copyright 2009, Roland Mas
- * Copyright 2013-2014,2017 Franck Villaume - TrivialDev
+ * Copyright 2013-2014,2017, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -24,8 +24,8 @@
 
 require_once $gfcommon.'include/plugins_utils.php';
 
-forge_define_config_item ('default_server', 'scmbzr', forge_get_config ('scm_host')) ;
-forge_define_config_item ('repos_path', 'scmbzr', forge_get_config('chroot').'/scmrepos/bzr') ;
+forge_define_config_item('default_server', 'scmbzr', forge_get_config('scm_host'));
+forge_define_config_item('repos_path', 'scmbzr', forge_get_config('chroot').'/scmrepos/bzr');
 
 class BzrPlugin extends SCMPlugin {
 	function __construct() {
@@ -37,32 +37,32 @@ class BzrPlugin extends SCMPlugin {
 _("This plugin contains the Bazaar subsystem of FusionForge. It allows each
 FusionForge project to have its own Bazaar repository, and gives some control
 over it to the project's administrator.");
-		$this->hooks[] = 'scm_generate_snapshots' ;
+		$this->hooks[] = 'scm_generate_snapshots';
 		$this->hooks[] = 'scm_browser_page';
-		$this->hooks[] = 'scm_update_repolist' ;
-		$this->hooks[] = 'scm_gather_stats' ;
+		$this->hooks[] = 'scm_update_repolist';
+		$this->hooks[] = 'scm_gather_stats';
 
-		$this->main_branch_names = array () ;
-		$this->main_branch_names[] = 'trunk' ;
-		$this->main_branch_names[] = 'master' ;
-		$this->main_branch_names[] = 'main' ;
-		$this->main_branch_names[] = 'head' ;
-		$this->main_branch_names[] = 'HEAD' ;
+		$this->main_branch_names = array();
+		$this->main_branch_names[] = 'trunk';
+		$this->main_branch_names[] = 'master';
+		$this->main_branch_names[] = 'main';
+		$this->main_branch_names[] = 'head';
+		$this->main_branch_names[] = 'HEAD';
 
 		$this->register () ;
 	}
 
 	function getDefaultServer() {
-		return forge_get_config('default_server', 'scmbzr') ;
+		return forge_get_config('default_server', 'scmbzr');
 	}
 
-	function printShortStats ($params) {
-		$project = $this->checkParams ($params) ;
+	function printShortStats($params) {
+		$project = $this->checkParams($params);
 		if (!$project) {
 			return;
 		}
 
-		if ($project->usesPlugin($this->name) && forge_check_perm('scm', $project->getID(), 'read')) {
+		if (forge_check_perm('scm', $project->getID(), 'read')) {
 			$result = db_query_params('SELECT sum(updates) AS updates, sum(adds) AS adds FROM stats_cvs_group WHERE group_id=$1',
 						  array ($project->getID())) ;
 			$commit_num = db_result($result,0,'updates');
@@ -77,7 +77,7 @@ over it to the project's administrator.");
 		}
 	}
 
-	function getBlurb () {
+	function getBlurb() {
 		return '<p>'
 				. sprintf(_('Documentation for %1$s is available at <a href="%2$s">%2$s</a>.'),
 							'Bazaar (“bzr”)',
@@ -85,7 +85,7 @@ over it to the project's administrator.");
 				. '</p>';
 	}
 
-	function getInstructionsForAnon ($project) {
+	function getInstructionsForAnon($project) {
 		$b = '<h2>';
 		$b .=  _('Anonymous Bazaar Access');
 		$b = '</h2>';
@@ -98,7 +98,7 @@ over it to the project's administrator.");
 		return $b ;
 	}
 
-	function getInstructionsForRW ($project) {
+	function getInstructionsForRW($project) {
 		$b = '' ;
 		if (session_loggedin()) {
 			$u = user_get_object(user_getid()) ;
@@ -151,21 +151,19 @@ over it to the project's administrator.");
 		return $b ;
 	}
 
-	function getStatsBlock ($project) {
+	function getStatsBlock($project) {
 		return;
 	}
 
-	function printBrowserPage ($params) {
+	function printBrowserPage($params) {
 		global $HTML;
-		$project = $this->checkParams ($params) ;
+		$project = $this->checkParams($params);
 		if (!$project) {
 			return;
 		}
 
-		if ($project->usesPlugin ($this->name)) {
-			if ($this->browserDisplayable ($project)) {
-					htmlIframe('/scm/loggerhead/'.$project->getUnixName(),array('id'=>'scmbzr_iframe'));
-			}
+		if ($this->browserDisplayable ($project)) {
+			htmlIframe('/scm/loggerhead/'.$project->getUnixName(),array('id'=>'scmbzr_iframe'));
 		}
 	}
 
@@ -173,10 +171,6 @@ over it to the project's administrator.");
 		$project = $this->checkParams ($params) ;
 		if (!$project) {
 			return false ;
-		}
-
-		if (! $project->usesPlugin ($this->name)) {
-			return false;
 		}
 
 		$project_name = $project->getUnixName();
@@ -202,27 +196,27 @@ over it to the project's administrator.");
 				return false;
 			}
 
-			system ("bzr init-repo --no-trees $tmp_repo >/dev/null") ;
-			system ("find $tmp_repo/.bzr -type d | xargs chmod g+s") ;
-			system ("chmod -R g+rwX,o+rX-w $tmp_repo/.bzr") ;
-			system ("chgrp -R $unix_group $tmp_repo/.bzr") ;
+			system("bzr init-repo --no-trees $tmp_repo >/dev/null") ;
+			system("find $tmp_repo/.bzr -type d | xargs chmod g+s") ;
+			system("chmod -R g+rwX,o+rX-w $tmp_repo/.bzr") ;
+			system("chgrp -R $unix_group $tmp_repo/.bzr") ;
 
-			system ("mkdir -p $repo") ;
-			system ("chgrp $unix_group $repo") ;
-			system ("chmod g+ws $repo") ;
-			system ("mv $tmp_repo/.bzr $repo/.bzr");
-			rmdir ($tmp_repo);
+			system("mkdir -p $repo") ;
+			system("chgrp $unix_group $repo") ;
+			system("chmod g+ws $repo") ;
+			system("mv $tmp_repo/.bzr $repo/.bzr");
+			rmdir($tmp_repo);
 		}
 
 		if ($project->enableAnonSCM()) {
-			system ("chmod o+rX-w $repo") ;
+			system("chmod o+rX-w $repo") ;
 		} else {
-			system ("chmod o-rwx $repo") ;
+			system("chmod o-rwx $repo") ;
 		}
 	}
 
-	function updateRepositoryList ($params) {
-		$groups = $this->getGroups () ;
+	function updateRepositoryList($params) {
+		$groups = $this->getGroups();
 
 		$dir = forge_get_config('data_path').'/plugins/scmbzr/public-repositories' ;
 
@@ -275,13 +269,9 @@ over it to the project's administrator.");
 	}
 
 	function gatherStats($params) {
-                $project = $this->checkParams ($params) ;
+                $project = $this->checkParams($params);
                 if (!$project) {
                         return false ;
-                }
-
-                if (! $project->usesPlugin ($this->name)) {
-                        return false;
                 }
 
                 if ($params['mode'] == 'day') {
@@ -453,35 +443,35 @@ over it to the project's administrator.");
 						return false ;
 					}
 				}
-                        }
-                }
-                db_commit();
+			}
+		}
+		db_commit();
 	}
 
-	function findMainBranch ($project) {
+	function findMainBranch($project) {
 		$toprepo = forge_get_config('repos_path', 'scmbzr') ;
 		$repo = $toprepo . '/' . $project->getUnixName() ;
 
-		$branch = '' ;
+		$branch = '';
 
 		foreach ($this->main_branch_names as $bname) {
 			system ("bzr ls file://$repo/$bname > /dev/null 2>&1", $code) ;
 			if ($code == 0) {
 				$branch = $bname ;
-				break ;
+				break;
 			}
 		}
 		return $branch;
 	}
 
-	function generateSnapshots ($params) {
+	function generateSnapshots($params) {
 		$us = forge_get_config('use_scm_snapshots') ;
 		$ut = forge_get_config('use_scm_tarballs') ;
 		if (!$us && !$ut) {
-			return false ;
+			return false;
 		}
 
-		$project = $this->checkParams ($params) ;
+		$project = $this->checkParams($params);
 		if (!$project) {
 			return false ;
 		}
@@ -536,7 +526,7 @@ over it to the project's administrator.");
 			system ("rm -rf $tmp") ;
 		}
 	}
-  }
+}
 
 // Local Variables:
 // mode: php
