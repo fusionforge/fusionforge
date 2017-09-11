@@ -166,7 +166,7 @@ class PluginManager extends FFError {
 			if (file_exists($filename)) {
 				require_once($filename);
 				$p_class = $p_name.'Plugin';
-				register_plugin (new $p_class);
+				register_plugin(new $p_class);
 			}
 		}
 		return true;
@@ -210,7 +210,7 @@ class PluginManager extends FFError {
 	 * @param	object	$pluginobject	an object of a subclass of the Plugin class
 	 * @return	bool
 	 */
-	function RegisterPlugin(&$pluginobject) {
+	function RegisterPlugin($pluginobject) {
 		if (!$pluginobject->GetName()) {
 			exit_error(_("Some plugin did not provide a name. I'd gladly tell you which one, but obviously I cannot. Sorry."),'');
 		}
@@ -330,8 +330,8 @@ function &plugin_get_object($pluginname) {
  * @param	pluginobject - an object of a subclass of the Plugin class
  * @return	bool
  */
-function register_plugin(&$pluginobject) {
-	$pm =& plugin_manager_get_object();
+function register_plugin($pluginobject) {
+	$pm =&plugin_manager_get_object();
 	return $pm->RegisterPlugin($pluginobject);
 }
 
