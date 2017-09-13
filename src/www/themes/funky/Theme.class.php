@@ -75,7 +75,7 @@ class Theme_Funky extends Layout {
 				jQuery(":reset").button();
 				jQuery(":button").button();
 				jQuery("[id^=tabber").tabs();
-				jQuery('input').filter('[type="number"]').spinner();
+				jQuery("input").filter(\'[type="number"]\').spinner();
 				jQuery("select").filter(":visible").not(\'[multiple="multiple"]\').selectmenu({change: function( event, ui ) {
 								if (ui.item.element.context.parentNode.id == "quicknav") {
 									location.href = ui.item.value;
