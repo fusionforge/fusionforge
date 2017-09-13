@@ -23,18 +23,19 @@ class ASelect {
 	var $organization;
 	var $attributes=array();
 	var $ticket;
-	function ASelect () {
+
+	function __construct() {
 
 		if(isset($_COOKIE['aselectuid'])){
-		   $this->username = $_COOKIE['aselectuid'];
+			$this->username = $_COOKIE['aselectuid'];
 		} else {
-   		 $this->username = '';
+   			$this->username = '';
 		}
 
 		if(isset($_COOKIE['aselectorganization'])){
 			$this->organization = $_COOKIE['aselectorganization'];
 		} else {
-   		$this->organization = '';
+			$this->organization = '';
 		}
 
 		if(isset($_COOKIE['aselectattributes'])){
