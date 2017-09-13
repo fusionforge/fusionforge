@@ -115,7 +115,6 @@ hr {
 /* =header */
 #header {
 	background: white url("../images/header/header-bg.png");
-	font-size:77%;
 	margin: 0;
 	border-top-left-radius: 6px;
 	border-top-right-radius: 6px;
@@ -180,8 +179,6 @@ hr {
 .quicknews-toggle {
 	display: inline;
 	font-size: 12px;
-/*    text-shadow: 1px 1px gray;*/
-	color: white;
 }
 
 .quicknews .title {
@@ -229,8 +226,7 @@ hr {
 
 
 #searchBox span {
-  display: inline;
-  margin-left: 20px;
+	margin-left: 20px;
 }
 
 #searchBox span input[type=text] {
@@ -250,16 +246,9 @@ hr {
 	display:none;
 }
 
-/* =quicknavform */
-#quicknavform {
+#quicknavdiv {
 	display: inline;
-	color: white;
 	float: left;
-}
-
-#quicknavform span {
-	display: inline;
-	color: white;
 }
 
 #quicknav {

@@ -530,9 +530,8 @@ abstract class Layout extends FFError {
 			if (count($groups) < 1) {
 				return '';
 			} else {
-				$result = $this->openForm(array('id' => 'quicknavform', 'name' => 'quicknavform', 'action' => ''));
-				$result .= html_ao('div');
-				$result .= html_ao('select', array('name' => 'quicknav', 'id' => 'quicknav', 'onchange' => 'location.href=document.quicknavform.quicknav.value'));
+				$result .= html_ao('div', array('id' => 'quicknavdiv'));
+				$result .= html_ao('select', array('name' => 'quicknav', 'id' => 'quicknav', 'onchange' => 'location.href=document.quicknavdiv.quicknav.value'));
 				$result .= html_e('option', array('value' => ''), _('Quick Jump To...'), false);
 				if (!forge_get_config('use_quicknav_default') && session_get_user()->getPreference('quicknav_mode')) {
 					$groups = session_get_user()->getActivityLogGroups();
@@ -550,7 +549,6 @@ abstract class Layout extends FFError {
 					}
 				}
 				$result .= html_ac(html_ap() - 2);
-				$result .= $this->closeForm();
 			}
 			return $result;
 		}
@@ -1289,7 +1287,7 @@ abstract class Layout extends FFError {
 			$html_content .= sprintf(_('Displaying results %1$s out of %2$d total.'), ($start + 1).'-'.$maxElements, $totalElements);
 			if (session_loggedin()) {
 				$html_content .= sprintf(' ' . _('Displaying %s results.'), html_build_select_box_from_array(array('10', '25', '50', '100', '1000'), 'nres', $paging, 1));
-				$html_content .= $this->html_input('setpaging', '', '', 'submit', _('Change'));
+				$html_content .= $this->html_input('setpaging', '', '', 'submit', _('Change'), array(), array('style' => 'display: inline-block'));
 				$html_content .= $this->closeForm();
 			}
 		}
