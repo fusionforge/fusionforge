@@ -134,7 +134,7 @@ echo $HTML->openForm(array('action' => '/tracker/reporting/?group_id='.$group_id
 <?php echo report_months_box($report, 'start', $start); ?></td>
 <td><strong><?php echo _('End Date')._(': '); ?></strong><br />
 <?php echo report_months_box($report, 'end', $end); ?></td>
-<td><input type="submit" name="submit" value="<?php echo _("Refresh") ?>" /></td>
+<td><br /><input type="submit" name="submit" value="<?php echo _("Refresh") ?>" /></td>
 </tr>
 </table>
 <?php
