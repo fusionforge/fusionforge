@@ -57,7 +57,7 @@ class scmgit_Widget_MyRepositories extends Widget {
 			$returnhtml .= $HTML->listTableBottom();
 			return $returnhtml;
 		} else {
-			return $HTML->information(_('No personal git repository'));
+			return $HTML->warning_msg(_('No personal git repository.'));
 		}
 	}
 

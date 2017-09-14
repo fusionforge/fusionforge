@@ -90,7 +90,7 @@ class Widget_ProjectLatestArtifacts extends Widget {
 			}
 			$html .= $HTML->listTableBottom();
 		} else {
-			$html .= $HTML->information(_('No artifact found'));
+			$html .= $HTML->warning_msg(_('No artifact found.'));
 		}
 		$html .= html_e('div', array('class' => 'underline-link'), util_make_link('/tracker/?group_id='.$project->getID(), _('Browse Trackers')));
 		return $html;

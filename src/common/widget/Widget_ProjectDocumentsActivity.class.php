@@ -238,7 +238,7 @@ class Widget_ProjectDocumentsActivity extends Widget {
 			$result .= '//]]></script>';
 			$result .= '<div id="chart1"></div>';
 		} else {
-			$result .= $HTML->information(_('No activity to display'));
+			$result .= $HTML->warning_msg(_('No activity to display.'));
 		}
 		$result .= html_e('div', array('class' => 'underline-link'), util_make_link('/docman/?group_id='.$group_id, _('Browse Documents Manager')));
 

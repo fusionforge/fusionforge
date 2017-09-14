@@ -106,13 +106,13 @@ class Widget_MyLatestCommits extends Widget {
 			}
 		}
 		if (!$global_nb_revisions) {
-			$html .= $HTML->information(_('No commit found'));
+			$html .= $HTML->warning_msg(_('No commit found.'));
 		}
 		return $html;
 	}
 
 	function getPreferences() {
-		$prefs  = _('Maximum number of commits to display per project');
+		$prefs  = _('Maximum number of commits to display per project.');
 		$prefs .= html_e('input', array('name' => 'nb_commits', 'type' => 'number', 'size' => 2, 'maxlenght' => 3, 'value' => UserManager::instance()->getCurrentUser()->getPreference('my_latests_commits_nb_display')));
 		return $prefs;
 	}

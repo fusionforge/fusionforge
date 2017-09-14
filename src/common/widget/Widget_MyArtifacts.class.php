@@ -139,7 +139,7 @@ class Widget_MyArtifacts extends Widget {
 			$html_my_artifacts .= $this->_display_artifacts($my_artifacts, 1);
 			$html_my_artifacts .= $HTML->listTableBottom();
 		} else {
-			$html_my_artifacts = $HTML->information(_('You have no artifacts.'));
+			$html_my_artifacts = $HTML->warning_msg(_('You have no artifacts.'));
 		}
 
 		return $html_my_artifacts;

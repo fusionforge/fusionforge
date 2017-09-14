@@ -104,7 +104,7 @@ class Widget_HomeDetailActivityMostActiveProjectWeek extends Widget {
 				echo $HTML->listTableBottom();
 			}
 		} else {
-			echo $HTML->information(_('No activity during the last week'));
+			echo $HTML->warning_msg(_('No activity during the last week.'));
 		}
 		return $return;
 	}

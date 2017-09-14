@@ -82,7 +82,7 @@ class Widget_ProjectLatestCommits extends Widget {
 							$revisionDescription));
 			}
 		} else {
-			$html .= $HTML->information(_('No commit found'));
+			$html .= $HTML->warning_msg(_('No commit found.'));
 		}
 		$html .= html_e('div', array('class' => 'underline-link'), util_make_link('/scm/?group_id='.$project->getID(), _('Browse Source Content Management')));
 		return $html;

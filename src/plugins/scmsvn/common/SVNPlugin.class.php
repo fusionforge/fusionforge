@@ -262,7 +262,7 @@ some control over it to the project's administrator.");
 			$b .= $HTML->multiTableRow(array(), $cells);
 			$b .= $HTML->listTableBottom();
 		} else {
-			$b .= $HTML->information(_('No history yet'));
+			$b .= $HTML->warning_msg(_('No history yet.'));
 		}
 
 		return $b;

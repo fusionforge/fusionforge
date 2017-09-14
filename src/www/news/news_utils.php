@@ -87,7 +87,7 @@ function news_footer($params = array()) {
  * @return string
  */
 function news_show_latest($group_id = 0, $limit = 10, $show_summaries = true, $allow_submit = true, $flat = false, $tail_headlines = 0, $show_forum = true) {
-
+	global $HTML;
 	if (!$group_id) {
 		$group_id=forge_get_config('news_group');
 	}
@@ -121,7 +121,7 @@ ORDER BY post_date DESC',
 	$return = '';
 
 	if (!$result || $rows < 1) {
-		$return .= _('No News Found');
+		$return .= $HTML->warning_msg(_('No news found.'));
 		$return .= db_error();
 //		$return .= "</div>";
 	} else {

@@ -77,7 +77,7 @@ class Widget_HomeLatestFileReleases extends Widget {
 			}
 			$content .= $HTML->listTableBottom();
 		} else {
-			$content .= $HTML->information(_('No file releases found'));
+			$content .= $HTML->warning_msg(_('No file releases found.'));
 		}
 		$content .= util_make_link('/new/', _('Browse all file releases'));
 		return $content;
