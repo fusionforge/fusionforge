@@ -107,7 +107,7 @@ echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method'
 <td><strong><?php echo _('End Date')._(':'); ?></strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
 <td>
 	<input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
-	<input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" />
+	<br/><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" />
 </td>
 </tr>
 </table>
