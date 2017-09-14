@@ -530,7 +530,7 @@ abstract class Layout extends FFError {
 			if (count($groups) < 1) {
 				return '';
 			} else {
-				$result .= html_ao('div', array('id' => 'quicknavdiv'));
+				$result = html_ao('div', array('id' => 'quicknavdiv'));
 				$result .= html_ao('select', array('name' => 'quicknav', 'id' => 'quicknav', 'onchange' => 'location.href=document.quicknavdiv.quicknav.value'));
 				$result .= html_e('option', array('value' => ''), _('Quick Jump To...'), false);
 				if (!forge_get_config('use_quicknav_default') && session_get_user()->getPreference('quicknav_mode')) {
