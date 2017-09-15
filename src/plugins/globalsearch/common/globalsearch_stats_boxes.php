@@ -70,7 +70,7 @@ function show_top_n_assocsites($num_assocsites) {
 		array('t', $num_assocsites));
 
         if (db_numrows($res_top_n_assoc) == 0) {
-		return _('No stats available')." ".db_error();
+		return _('No stats available.')." ".db_error();
         }
 
 	$return .= "<div align=\"left\"><table>";
@@ -101,7 +101,7 @@ function stats_get_total_projects_assoc_sites() {
 		$row_count = db_fetch_array($res_count);
 		return $row_count['numprojects'];
 	} else {
-		return _('No stats available')." ".db_error();
+		return _('No stats available.')." ".db_error();
 	}
 }
 

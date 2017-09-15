@@ -103,7 +103,7 @@ hosted on these forges from your own.");
 							array('t', $num_assocsites));
 
 		if (db_numrows($res_top_n_assoc) == 0) {
-			return $HTML->information(_('No stats available')." ".db_error());
+			return $HTML->information(_('No stats available.')." ".db_error());
 		}
 
 		$return = '<table class="underline-link">';
@@ -137,7 +137,7 @@ hosted on these forges from your own.");
 			$row_count = db_fetch_array($res_count);
 			return $row_count['numprojects'];
 		} else {
-			return _('No stats available')." ".db_error();
+			return _('No stats available.')." ".db_error();
 		}
 	}
 

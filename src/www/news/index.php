@@ -73,7 +73,7 @@ if ($rows < 1) {
 	if ($group_id) {
 		echo $HTML->information(sprintf(_('No News Found for %s'),group_getname($group_id)));
 	} else {
-		echo $HTML->information(_('No News Found'));
+		echo $HTML->information(_('No news found.'));
 	}
 	echo db_error();
 } else {
