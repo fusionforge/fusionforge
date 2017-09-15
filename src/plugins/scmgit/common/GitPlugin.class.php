@@ -337,7 +337,7 @@ control over it to the project's administrator.");
 		global $HTML;
 		$b = '';
 
-		$result = db_query_params('SELECT u.realname, u.user_name, u.user_id, sum(updates) as updates, sum(adds) as adds, sum(adds+updates) as combined FROM stats_cvs_user s, users u WHERE group_id=$1 AND s.user_id=u.user_id AND (updates>0 OR adds >0) GROUP BY u.user_id, realname, user_name, u.user_id ORDER BY combined DESC, realname',
+		$result = db_query_params('SELECT u.realname, u.user_name, u.user_id, sum(updates) as updates, sum(adds) as adds, sum(adds+updates) as combined, reponame FROM stats_cvs_user s, users u WHERE group_id=$1 AND s.user_id=u.user_id AND (updates>0 OR adds >0) GROUP BY u.user_id, realname, user_name, u.user_id, reponame ORDER BY reponame, combined DESC, realname',
 			array($project->getID()));
 
 		if (db_numrows($result) > 0) {
@@ -351,7 +351,22 @@ control over it to the project's administrator.");
 			$i = 0;
 			$total = array('adds' => 0, 'updates' => 0);
 
+			$prevrepo = '';
 			while ($data = db_fetch_array($result)) {
+				if ($prevrepo != $data['reponame']) {
+					if ($prevrepo != '') {
+						$cells = array();
+						$cells[] = array(html_e('strong', array(), _('Total')._(':')), 'class' => 'halfwidth');
+						$cells[] = array($total['adds'], 'class' => 'onequarterwidth align-right');
+						$cells[] = array($total['updates'], 'class' => 'onequarterwidth align-right');
+						$b .= $HTML->multiTableRow(array(), $cells);
+					}
+					$prevrepo = $data['reponame'];
+					$total = array('adds' => 0, 'updates' => 0);
+					$cells = array();
+					$cells[] = array(html_e('strong', array(), $data['reponame'].' '._('statistics')), 'colspan' => 3);
+					$b .= $HTML->multiTableRow(array(), $cells);
+				}
 				$cells = array();
 				$cells[] = array(util_display_user($data['user_name'], $data['user_id'], $data['realname']), 'class' => 'halfwidth');
 				$cells[] = array($data['adds'], 'class' => 'onequarterwidth align-right');
