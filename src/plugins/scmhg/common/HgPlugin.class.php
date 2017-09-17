@@ -84,6 +84,7 @@ Offer DAV or SSH access.");
 	}
 
 	function getInstructionsForRW($project) {
+		global $HTML;
 		$repo_list = $this->getRepositories($project);
 
 		$b = '';
