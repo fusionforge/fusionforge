@@ -76,8 +76,8 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 		$this->assertTextPresent("Adding file");
 		$this->selectFrame("relative=top");
 
-        // Check gitweb directly
-        $this->openWithOneRetry("https://scm.".HOST.ROOT."/anonscm/gitweb/?p=projecta/projecta.git");
+		// Check gitweb directly
+		$this->openWithOneRetry("https://scm.".HOST.ROOT."/anonscm/gitweb/?p=projecta/projecta.git");
 		$this->assertElementPresent("//.[@class='page_footer']");
 		$this->assertTextPresent("projecta.git");
 		$this->clickAndWait("link=projecta.git");
@@ -100,13 +100,13 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 		// Update repositories
 		$this->waitSystasks();
 
-        // Check that gitweb now fails
-        $this->openWithOneRetry("https://scm.".HOST.ROOT."/anonscm/gitweb/?p=projecta/projecta.git");
+		// Check that gitweb now fails
+		$this->openWithOneRetry("https://scm.".HOST.ROOT."/anonscm/gitweb/?p=projecta/projecta.git");
 		$this->assertElementPresent("//.[@class='page_footer']");
 		$this->assertTextNotPresent("projecta.git");
 
-        // Now try to use the authenticated gitweb
-        $this->openWithOneRetry("https://".FORGE_ADMIN_USERNAME.":".FORGE_ADMIN_PASSWORD."@scm.".HOST.ROOT."/authscm/".FORGE_ADMIN_USERNAME."/gitweb/?p=projecta/projecta.git");
+		// Now try to use the authenticated gitweb
+		$this->openWithOneRetry("https://".FORGE_ADMIN_USERNAME.":".FORGE_ADMIN_PASSWORD."@scm.".HOST.ROOT."/authscm/".FORGE_ADMIN_USERNAME."/gitweb/?p=projecta/projecta.git");
 		$this->assertElementPresent("//.[@class='page_footer']");
 		$this->assertTextPresent("projecta.git");
 
@@ -149,9 +149,9 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 		$this->assertElementPresent("//.[@class='page_footer']");
 		$this->assertTextNotPresent("projecta.git");
 
-        // Test accessing admin's URL with otheruser's credentials (and asserting we get a 401)
-        // …Selenium doesn't allow checking HTTP return codes, so use a file_get_contents() hack
-        // First make sure that the hack works
+		// Test accessing admin's URL with otheruser's credentials (and asserting we get a 401)
+		// …Selenium doesn't allow checking HTTP return codes, so use a file_get_contents() hack
+		// First make sure that the hack works
 		$opts = array(
 			'ssl'=>array(
 				'verify_peer'=>false,
@@ -159,13 +159,12 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 			)
 		);
 		$context = stream_context_create($opts);
-        $f = @file_get_contents("https://otheruser:".FORGE_OTHER_PASSWORD."@scm.".HOST.ROOT."/authscm/otheruser/gitweb/", "r", $context);
-        $this->assertTrue(is_string($f));
-        $this->assertEquals(1, preg_match('/projectb.git/',$f));
-        // Then make sure we detect a failure
-        $f = @file_get_contents("https://otheruser:".FORGE_OTHER_PASSWORD."@scm.".HOST.ROOT."/authscm/".FORGE_ADMIN_USERNAME."/gitweb/projecta/", "r", $context);
-        $this->assertFalse($f);
-
+		$f = @file_get_contents("https://otheruser:".FORGE_OTHER_PASSWORD."@scm.".HOST.ROOT."/authscm/otheruser/gitweb/", "r", $context);
+		$this->assertTrue(is_string($f));
+		$this->assertEquals(1, preg_match('/projectb.git/',$f));
+		// Then make sure we detect a failure
+		$f = @file_get_contents("https://otheruser:".FORGE_OTHER_PASSWORD."@scm.".HOST.ROOT."/authscm/".FORGE_ADMIN_USERNAME."/gitweb/projecta/", "r", $context);
+		$this->assertFalse($f);
 		system("rm -fr $t");
 	}
 }
