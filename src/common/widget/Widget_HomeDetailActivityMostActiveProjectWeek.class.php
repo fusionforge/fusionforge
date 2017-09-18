@@ -77,7 +77,7 @@ class Widget_HomeDetailActivityMostActiveProjectWeek extends Widget {
 					$theader[] = _('Activity');
 					$theader[] = _('By');
 
-					echo $HTML->listTableTop($theader);
+					$return .= $HTML->listTableTop($theader);
 					$displayTableTop = 1;
 				}
 				$displayinfo = $ffactivity->getDisplayInfo($activity);
@@ -87,7 +87,7 @@ class Widget_HomeDetailActivityMostActiveProjectWeek extends Widget {
 				if ($last_day != strftime($date_format, $activity['activity_date'])) {
 					$cells = array();
 					$cells[] = array(strftime($date_format, $activity['activity_date']), 'colspan' => 4);
-					echo $HTML->multiTableRow(array('class' => 'tableheading'), $cells, true);
+					$return .= $HTML->multiTableRow(array('class' => 'tableheading'), $cells, true);
 					$last_day=strftime($date_format, $activity['activity_date']);
 				}
 				$cells = array();
@@ -101,13 +101,17 @@ class Widget_HomeDetailActivityMostActiveProjectWeek extends Widget {
 				} else {
 					$cells[][] = $activity['realname'];
 				}
-				echo $HTML->multiTableRow(array(), $cells);
+				$return .= $HTML->multiTableRow(array(), $cells);
 			}
 			if ($displayTableTop) {
-				echo $HTML->listTableBottom();
+				$return .= $HTML->listTableBottom();
 			}
 		} else {
-			echo $HTML->warning_msg(_('No activity during the last week.'));
+			$return .= $HTML->warning_msg(_('No activity during the last week.'));
+		}
+		$pm = plugin_manager_get_object();
+		if ($pm->PluginIsInstalled('globalactivity')) {
+			$return .= util_make_link('/plugins/globalactivity/', _('Browse all activities.'));
 		}
 		return $return;
 	}
