@@ -40,7 +40,7 @@ if [ -e /etc/debian_version ]; then
 
 		# Additional components for testsuite
 		$APT install fusionforge-shell fusionforge-scm fusionforge-ftp \
-		fusionforge-plugin-scmcvs fusionforge-plugin-scmsvn fusionforge-plugin-scmgit fusionforge-plugin-scmbzr \
+		fusionforge-plugin-scmcvs fusionforge-plugin-scmsvn fusionforge-plugin-scmgit fusionforge-plugin-scmbzr fusionforge-plugin-scmhg \
 		fusionforge-plugin-moinmoin \
 		fusionforge-plugin-blocks fusionforge-plugin-taskboard \
 		fusionforge-plugin-message fusionforge-plugin-repositoryapi
@@ -68,7 +68,7 @@ else
 	else
 		# Initial installation
 		yum --enablerepo=epel install -y fusionforge fusionforge-shell fusionforge-scm fusionforge-ftp \
-		fusionforge-plugin-scmcvs fusionforge-plugin-scmsvn fusionforge-plugin-scmgit \
+		fusionforge-plugin-scmcvs fusionforge-plugin-scmsvn fusionforge-plugin-scmgit fusionforge-plugin-scmhg \
 		fusionforge-plugin-blocks fusionforge-plugin-taskboard \
 		fusionforge-plugin-message fusionforge-plugin-moinmoin \
 		fusionforge-plugin-globalactivity fusionforge-plugin-repositoryapi
