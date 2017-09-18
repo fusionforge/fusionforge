@@ -365,7 +365,7 @@ control over it to the project's administrator.");
 					$total = array('adds' => 0, 'updates' => 0);
 					$cells = array();
 					$cells[] = array(html_e('strong', array(), $data['reponame'].' '._('statistics')), 'colspan' => 3);
-					$b .= $HTML->multiTableRow(array(), $cells);
+					$b .= $HTML->multiTableRow(array('class' => 'tableheading'), $cells);
 				}
 				$cells = array();
 				$cells[] = array(util_display_user($data['user_name'], $data['user_id'], $data['realname']), 'class' => 'halfwidth');
