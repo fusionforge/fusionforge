@@ -55,15 +55,15 @@ class ScmHgHTTPTest extends FForge_SeleniumTestCase
 		// Create a local clone, add stuff, push it to the repo
 // 		$t = exec("mktemp -d /tmp/hgTest.XXXXXX");
 // 		$this->runCommandTimeout($t, "hg clone --quiet $p", "GIT_SSL_NO_VERIFY=true");
-// 
+//
 // 		system("echo 'this is a simple text' > $t/projecta/mytext.txt");
 // 		system("cd $t/projecta && hg add mytext.txt && hg commit --quiet -a -m'Adding file'", $ret);
 // 		system("echo 'another simple text' >> $t/projecta/mytext.txt");
 // 		system("cd $t/projecta && hg commit --quiet -a -m'Modifying file'", $ret);
 // 		$this->assertEquals(0, $ret);
-// 
+//
 // 		$this->runCommandTimeout("$t/projecta", "hg push --quiet --all", "GIT_SSL_NO_VERIFY=true");
-// 
+//
 // 		// Check that the changes appear in gitweb
 // 		$this->open(ROOT);
 // 		$this->clickAndWait("link=ProjectA");
@@ -84,7 +84,7 @@ class ScmHgHTTPTest extends FForge_SeleniumTestCase
 // 		$this->clickAndWait("link=projecta.git");
 // 		$this->assertTextPresent("Modifying file");
 // 		$this->assertTextPresent("Adding file");
-// 
+//
 // 		// Disable anonymous access to gitweb
 // 		$this->openWithOneRetry(ROOT);
 // 		$this->clickAndWait("link=ProjectA");
@@ -97,7 +97,7 @@ class ScmHgHTTPTest extends FForge_SeleniumTestCase
 // 		$this->click("//tr/td/form/div[contains(.,'Anonymous')]/../../../td/form/div/input[contains(@value,'Unlink Role')]");
 // 		$this->waitForPageToLoad("30000");
 // 		$this->assertTrue($this->isTextPresent("Role unlinked successfully"));
-// 
+//
 // 		// Update repositories
 // 		$this->waitSystasks();
 
@@ -105,12 +105,12 @@ class ScmHgHTTPTest extends FForge_SeleniumTestCase
 // 		$this->openWithOneRetry("https://scm.".HOST.ROOT."/anonscm/gitweb/?p=projecta/projecta.git");
 // 		$this->assertElementPresent("//.[@class='page_footer']");
 // 		$this->assertTextNotPresent("projecta.git");
-// 
+//
 // 		// Now try to use the authenticated gitweb
 // 		$this->openWithOneRetry("https://".FORGE_ADMIN_USERNAME.":".FORGE_ADMIN_PASSWORD."@scm.".HOST.ROOT."/authscm/".FORGE_ADMIN_USERNAME."/gitweb/?p=projecta/projecta.git");
 // 		$this->assertElementPresent("//.[@class='page_footer']");
 // 		$this->assertTextPresent("projecta.git");
-// 
+//
 // 		// Also check via the standard page
 // 		$this->openWithOneRetry(ROOT);
 // 		$this->clickAndWait("link=ProjectA");
@@ -123,7 +123,7 @@ class ScmHgHTTPTest extends FForge_SeleniumTestCase
 // 		$this->assertTextPresent("Modifying file");
 // 		$this->assertTextPresent("Adding file");
 // 		$this->selectFrame("relative=top");
-// 
+//
 // 		// Set up a different user
 // 		$this->createUser ('otheruser') ;
 // 		$this->createAndGoto ('projectb');
@@ -136,20 +136,20 @@ class ScmHgHTTPTest extends FForge_SeleniumTestCase
 // 		$this->assertTrue($this->isElementPresent("//tr/td/a[.='otheruser Lastname']/../../td/div[contains(.,'Admin')]")) ;
 // 		$this->clickAndWait("//tr/td/form/div[contains(.,'Anonymous')]/../../../td/form/div/input[contains(@value,'Unlink Role')]");
 // 		$this->assertTrue($this->isTextPresent("Role unlinked successfully"));
-// 
+//
 // 		$this->clickAndWait("link=Tools");
 // 		$this->clickAndWait("link=Source Code Admin");
 // 		$this->click("//input[@name='scmengine[]' and @value='scmgit']");
 // 		$this->clickAndWait("submit");
-// 
+//
 // 		// Create repositories
 // 		$this->waitSystasks();
-// 
+//
 // 		// Try with a different user
 // 		$this->openWithOneRetry("https://otheruser:".FORGE_OTHER_PASSWORD."@scm.".HOST.ROOT."/authscm/otheruser/gitweb/?p=projecta/projecta.git");
 // 		$this->assertElementPresent("//.[@class='page_footer']");
 // 		$this->assertTextNotPresent("projecta.git");
-// 
+//
 // 		// Test accessing admin's URL with otheruser's credentials (and asserting we get a 401)
 // 		// …Selenium doesn't allow checking HTTP return codes, so use a file_get_contents() hack
 // 		// First make sure that the hack works

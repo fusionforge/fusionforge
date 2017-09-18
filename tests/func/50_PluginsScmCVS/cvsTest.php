@@ -25,7 +25,7 @@ require_once dirname(dirname(__FILE__)).'/SeleniumForge.php';
 class ScmCvsSSHTest extends FForge_SeleniumTestCase
 {
 	public $fixture = 'projecta';
-	
+
 	function testScmCvs()
 	{
 		$this->loadAndCacheFixture();

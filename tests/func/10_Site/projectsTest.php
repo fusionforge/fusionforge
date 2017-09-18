@@ -251,7 +251,7 @@ class CreateProject extends FForge_SeleniumTestCase
 		$this->uncheck("//input[@name='use_survey']") ;
 		$this->uncheck("//input[@name='use_mail']") ;
 		$this->clickAndWait("submit");
-		
+
 		$this->clickAndWait("link=Site Admin");
 		$this->clickAndWait("link=Display Full Project List/Edit Projects");
 		$this->clickAndWait("link=ProjectA");
