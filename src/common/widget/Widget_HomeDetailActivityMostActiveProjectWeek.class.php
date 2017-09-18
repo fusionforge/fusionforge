@@ -54,6 +54,9 @@ class Widget_HomeDetailActivityMostActiveProjectWeek extends Widget {
 			$hookParams['results'] = &$activities;
 			$hookParams['begin'] = $begin;
 			$hookParams['end'] = $end;
+			$hookParams['show'] = array();
+			$hookParams['ids'] = array();
+			$hookParams['texts'] = array();
 			plugin_hook('activity', $hookParams);
 		}
 		if (count($activities) > 0) {
