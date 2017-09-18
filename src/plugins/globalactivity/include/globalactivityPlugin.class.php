@@ -81,7 +81,7 @@ class globalactivityPlugin extends Plugin {
 			$uri.'#globalactivity_getActivityForProject','rpc','encoded');
 	}
 
-	public function getData($begin,$end,$show,&$ids,&$texts,$gid = NULL) {
+	public function getData($begin,$end,&$show,&$ids,&$texts,$gid = NULL) {
 		if ($begin > $end) {
 			$tmp = $end;
 			$end = $begin;
@@ -241,7 +241,7 @@ class globalactivityPlugin extends Plugin {
 			}
 			$hookParams['group_id'] = $arr['group_id'];
 			$hookParams['results'] = &$results;
-			$hookParams['show'] = &$section;
+			$hookParams['show'] = &$show;
 			$hookParams['begin'] = $begin;
 			$hookParams['end'] = $end;
 			$hookParams['ids'] = &$ids;
@@ -250,7 +250,7 @@ class globalactivityPlugin extends Plugin {
 		}
 
 		if (count($show) < 1) {
-			$show = $section;
+			$show = $ids;
 		}
 
 		foreach ($show as $showthis) {
