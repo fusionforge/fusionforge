@@ -50,7 +50,7 @@ class Widget_HomeDetailActivityMostActiveProjectWeek extends Widget {
 
 		foreach ($selected_groups as $group_id) {
 			// If plugins wants to add activities.
-			$hookParams['group'] = $group_id;
+			$hookParams['group_id'] = $group_id;
 			$hookParams['results'] = &$activities;
 			$hookParams['begin'] = $begin;
 			$hookParams['end'] = $end;
