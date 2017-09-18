@@ -77,7 +77,7 @@ class Widget_HomeDetailActivityMostActiveProjectWeek extends Widget {
 					echo $HTML->listTableTop($theader);
 					$displayTableTop = 1;
 				}
-				$displayinfo = $ffactivity->getDisplayInfo($arr);
+				$displayinfo = $ffactivity->getDisplayInfo($activity);
 				if (!$displayinfo) {
 					continue;
 				}
