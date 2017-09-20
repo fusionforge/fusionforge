@@ -76,11 +76,6 @@ class Theme_Funky extends Layout {
 				jQuery(":button").button();
 				jQuery("[id^=tabber").tabs();
 				jQuery("input").filter(\'[type="number"]\').spinner();
-				jQuery("select").filter(":visible").not(\'[multiple="multiple"],[form="trackerform"]\').selectmenu({change: function( event, ui ) {
-								if (ui.item.element.context.parentNode.id == "quicknav") {
-									location.href = ui.item.value;
-								}
-							}});
 			});
 			//]]>'."\n";
 		if ($use_tooltips) {
