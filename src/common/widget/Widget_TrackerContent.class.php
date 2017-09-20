@@ -429,7 +429,7 @@ EOS;
 										$parent = $extrafieldObject->getParent();
 										if (!is_null($parent) && !empty($parent) && $parent != '100') {
 											$selectedElmnts = (isset($selected[$parent]) ? $selected[$parent] : '');
-											$allowed = $aef->getAllowedValues($selectedElmnts);
+											$allowed = $extrafieldObject->getAllowedValues($selectedElmnts);
 										}
 										$cellContent .= $ath->renderSelect($keys[0], $value, $extrafieldObject->getShow100(), $extrafieldObject->getShow100label(), false, false, $allowed, $attrs);
 									}
@@ -446,7 +446,7 @@ EOS;
 										$parent = $extrafieldObject->getParent();
 										if (!is_null($parent) && !empty($parent) && $parent != '100') {
 											$selectedElmnts = (isset($selected[$parent]) ? $selected[$parent] : '');
-											$allowed = $aef->getAllowedValues($selectedElmnts);
+											$allowed = $extrafieldObject->getAllowedValues($selectedElmnts);
 										}
 										$cellContent .= $ath->renderCheckbox($keys[0], $value, $extrafieldObject->getShow100(), $extrafieldObject->getShow100label(), $allowed, $attrs);
 									}
@@ -463,7 +463,7 @@ EOS;
 										$parent = $extrafieldObject->getParent();
 										if (!is_null($parent) && !empty($parent) && $parent != '100') {
 											$selectedElmnts = (isset($selected[$parent]) ? $selected[$parent] : '');
-											$allowed = $aef->getAllowedValues($selectedElmnts);
+											$allowed = $extrafieldObject->getAllowedValues($selectedElmnts);
 										}
 										$cellContent .= $ath->renderRadio($keys[0], $value, $extrafieldObject->getShow100(), $extrafieldObject->getShow100label(), false, false, $allowed, $attrs);
 									}
@@ -496,7 +496,7 @@ EOS;
 										$parent = $extrafieldObject->getParent();
 										if (!is_null($parent) && !empty($parent) && $parent != '100') {
 											$selectedElmnts = (isset($selected[$parent]) ? $selected[$parent] : '');
-											$allowed = $aef->getAllowedValues($selectedElmnts);
+											$allowed = $extrafieldObject->getAllowedValues($selectedElmnts);
 										}
 										$cellContent .= $ath->renderMultiSelectBox($keys[0], $value, $extrafieldObject->getShow100(), $extrafieldObject->getShow100label(), $allowed, $attrs);
 									}
@@ -537,7 +537,7 @@ EOS;
 											}
 											if ($childOpen) {
 												$extrafieldObject = new ArtifactExtraField($ath, $keys[0]);
-												//$aef = new ArtifactExtraField($this, $efarr[$i]['extra_field_id']);
+												//$extrafieldObject = new ArtifactExtraField($this, $efarr[$i]['extra_field_id']);
 												$statusArr = $extrafieldObject->getAvailableValues();
 												$openStatus = array();
 												foreach ($statusArr as $status) {
