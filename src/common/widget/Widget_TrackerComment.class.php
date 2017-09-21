@@ -90,11 +90,9 @@ class Widget_TrackerComment extends Widget {
 			$count = db_numrows($ah->getHistory());
 			$nbh = $count? ' ('.$count.')' : '';
 			$elementsLi[] = array('content' => util_make_link('#tabber-changes', _('Changes').$nbh, false, true));
-			if ($ah->hasRelations()) {
-				$count = db_numrows($ah->getRelations());
-				$nbr = $count? ' ('.$count.')' : '';
-				$elementsLi[] = array('content' => util_make_link('#tabber-relations', _('Relations').$nbr, false, true));
-			}
+			$count = db_numrows($ah->getRelations());
+			$nbr = $count? ' ('.$count.')' : '';
+			$elementsLi[] = array('content' => util_make_link('#tabber-relations', _('Relations').$nbr, false, true));
 			if (forge_get_config('use_artefacts_dependencies')) {
 				$tabTitle = _('Dependencies');
 				$nbChildren = $ah->hasChildren() ? $ah->hasChildren() : 0;

@@ -206,6 +206,7 @@ function hide_edit_button(id) {
 	}
 
 	function showRelations() {
+		global $HTML;
 		$result=$this->getRelations();
 		$rows= db_numrows($result);
 		$return = '';
@@ -236,6 +237,8 @@ function hide_edit_button(id) {
 			$return .= '</td>
 				</tr>
 				</table>';
+		} else {
+			$return .= $HTML->information(_('No relations found.'));
 		}
 		return $return;
 	}
