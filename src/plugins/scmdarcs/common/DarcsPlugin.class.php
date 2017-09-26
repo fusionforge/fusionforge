@@ -203,7 +203,7 @@ over it to the project's administrator.");
 					$prevrepo = $data['reponame'];
 					$total = array('adds' => 0, 'updates' => 0);
 					$cells = array();
-					$cells[] = array(html_e('strong', array(), $data['reponame'].' '._('statistics')), 'colspan' => 3);
+					$cells[] = array(html_e('strong', array(), $data['reponame'].' '._('Statistics')), 'colspan' => 3);
 					$b .= $HTML->multiTableRow(array(), $cells);
 				}
 				$cells = array();
