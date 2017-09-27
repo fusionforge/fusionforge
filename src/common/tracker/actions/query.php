@@ -291,13 +291,26 @@ echo '<input type="hidden" name="form_key" value="'.form_generate_key().'" />
 			$checked[1] = ' checked="checked"';
 			$checked[3] = '';
 		}
-		echo '
-		<input type="radio" name="query_action" value="1"'.$checked[1].' />'._('Name and Save Query').'<br />
-		<input type="radio" name="query_action" value="4" />'._('Load Query').'<br />';
+		echo '<input type="radio" id="name-save-query" name="query_action" value="1"'.$checked[1].' />'."\n";
+		echo '<label for="name-save-query">';
+		echo _('Name and Save Query');
+		echo '</label>'."\n";
+		echo '<br />'."\n";
+		echo '<input type="radio" id="load-query" name="query_action" value="4" />'."\n";
+		echo '<label for="load-query">';
+		echo _('Load Query');
+		echo '</label>'."\n";
+		echo '<br />'."\n";
 		if ($allow_update) {
-			echo '
-		<input type="radio" name="query_action" value="3"'.$checked[3].' />'._('Update Query').'<br />
-		<input type="radio" name="query_action" value="5" />'._('Delete Query');
+			echo '<input type="radio" id="update-query" name="query_action" value="3"'.$checked[3].' />'."\n";
+			echo '<label for="update-query">';
+			echo _('Update Query');
+			echo '</label>'."\n";
+			echo '<br />'."\n";
+			echo '<input type="radio" id="delete-query" name="query_action" value="5" />'."\n";
+			echo '<label for="delete-query">';
+			echo _('Delete Query');
+			echo '</label>'."\n";
 		}
 	} else {
 		echo '
@@ -325,20 +338,28 @@ if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
 	} else {
 		$note= '<br/><i>'._('Note: There is no default project query defined.').'</i>';
 	}
-	echo '
-	<tr>
-		<td colspan="2">
-			<strong>'._('Type of query')._(': ').'</strong><br />
-			<input name="query_type" value="0" type="radio"'.(($query_type==0) ? ' checked="checked"' : '' ).' />'.
-			_('Private query').'<br />
-			<input name="query_type" value="1" type="radio"'.(($query_type==1) ? ' checked="checked"' : '' ).' />'.
-			_('Project level query (query is public)').'<br />
-			<input name="query_type" value="2" type="radio"'.(($query_type==2) ? ' checked="checked"' : '' ).' />'.
-			_('Default project query (for project level query only)').'<br />
-			'.$note.'
-			<hr/>
-		</td>
-	</tr>';
+	echo '<tr>'."\n";
+	echo '<td colspan="2">'."\n";
+	echo '<strong>'._('Type of query')._(': ').'</strong><br />'."\n";
+	echo '<input id="private-query" name="query_type" value="0" type="radio"'.(($query_type==0) ? ' checked="checked"' : '' ).' />'."\n";
+	echo '<label for="private-query">';
+	echo _('Private query');
+	echo '</label>';
+	echo '<br />'."\n";
+	echo '<input id="project-level-query" name="query_type" value="1" type="radio"'.(($query_type==1) ? ' checked="checked"' : '' ).' />'."\n";
+	echo '<label for="project-level-query">';
+	echo _('Project level query (query is public)');
+	echo '</label>';
+	echo '<br />'."\n";
+	echo '<input id="default-project-query" name="query_type" value="2" type="radio"'.(($query_type==2) ? ' checked="checked"' : '' ).' />'."\n";
+	echo '<label for="default-project-query">';
+	echo _('Default project query (for project level query only)');
+	echo '</label>';
+	echo '<br />'."\n";
+	echo $note."\n";
+	echo '<hr/>'."\n";
+	echo '</td>'."\n";
+	echo '</tr>'."\n";
 }
 	if (!$ath->usesCustomStatuses()) {
 		echo '<tr>
