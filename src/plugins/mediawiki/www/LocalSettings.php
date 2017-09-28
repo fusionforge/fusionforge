@@ -24,7 +24,7 @@
  * Mediawiki plugin of FusionForge.
  */
 
-/* C style inclusion guard. Yes, I know. Don’t comment on it. */
+/* C style inclusion guard. Yes, I know. Do not comment on it. */
 if (!isset($fusionforge_plugin_mediawiki_LocalSettings_included)) {
 	$fusionforge_plugin_mediawiki_LocalSettings_included = true;
 
@@ -92,7 +92,7 @@ if (!isset($fusionforge_plugin_mediawiki_LocalSettings_included)) {
 		/* disabled project requires Site Admin privs */
 		$exit_errorlevel = 1;
 		session_require_global_perm('forge_admin');
-		/* revert, if we’re still there */
+		/* revert, if we are still there */
 		$exit_errorlevel = 0;
 	}
 	$wgSitename         = $g->getPublicName() . " Wiki";
@@ -137,7 +137,15 @@ if (!isset($fusionforge_plugin_mediawiki_LocalSettings_included)) {
 
 	$wgLanguageCode = strtolower(forge_get_config('default_country_code'));
 
-	$wgDefaultSkin = 'fusionforge';
+	global $wgVersion;
+	$wgVersionArr = explode('.', $wgVersion);
+	if ($wgVersionArr[0] == 1 && $wgVersionArr[1] >= 24) {
+		$wgDefaultSkin = 'monobookfusionforge';
+		wfLoadSkin('MonoBookFusionForge');
+	} else {
+		$wgDefaultSkin = 'fusionforge';
+	}
+
 	$wgHtml5 = false;
 	$wgWellFormedXml = true;
 

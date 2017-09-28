@@ -44,6 +44,7 @@ case "$1" in
 
 		ln -nfs $mediawikidir $data_path/plugins/mediawiki/master
 		ln -nfs $plugindir/mediawiki-skin/FusionForge.php $mediawikidir/skins/
+		ln -nfs $plugindir/MonoBookFusionForge $mediawikidir/skins/
 	;;
     triggered)
 		case $2 in
@@ -55,6 +56,7 @@ case "$1" in
 		rm -f $source_path/www/themes/css/mw-headbg.jpg
 		rm -f $data_path/plugins/mediawiki/master
 		rm -f $mediawikidir/skins/FusionForge.php
+		rm -f $mediawikidir/skins/MonoBookFusionForge
 	;;
     *)
 		echo "Usage: $0 {configure|triggered|remove}"
