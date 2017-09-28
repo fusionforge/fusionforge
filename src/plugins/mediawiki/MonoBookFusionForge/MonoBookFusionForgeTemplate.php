@@ -236,6 +236,28 @@ class MonoBookFusionForgeTemplate extends BaseTemplate {
 			$sidebar['LANGUAGES'] = true;
 		}
 
+		if (session_loggedin()) {
+			$efbox_log_text = _('Log Out');
+			$efbox_log_link = "/account/logout.php?return_to=" . urlencode(getStringFromServer('REQUEST_URI'));
+		} else {
+			$efbox_log_text = _('Log In');
+			$efbox_log_link = "/account/login.php?return_to=" . urlencode(getStringFromServer('REQUEST_URI'));
+		}
+		$efbox_prj_link = "/projects/" . $this->project->getUnixName() . "/";
+
+		$this->customBox("FusionForge", array(
+						"project" => array(
+						"id" => "fusionforge_project",
+						"href" => $efbox_prj_link,
+						"text" => _("Project Summary"),
+						),
+				"loginout" => array(
+						"id" => "fusionforge_loginout",
+						"href" => $efbox_log_link,
+						"text" => $efbox_log_text,
+						),
+				));
+
 		foreach ( $sidebar as $boxName => $content ) {
 			if ( $content === false ) {
 				continue;
