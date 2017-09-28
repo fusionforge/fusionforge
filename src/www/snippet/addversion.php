@@ -36,7 +36,7 @@ if (session_loggedin()) {
 		/*
 			See if the snippet exists first
 		*/
-		$result=db_query_params ('SELECT * FROM snippet WHERE snippet_id=$1',
+		$result=db_query_params ('SELECT * FROM snippet AS s INNER JOIN snippet_version AS sv ON (s.snippet_id = sv.snippet_id) WHERE s.snippet_id=$1 ORDER BY snippet_version_id DESC LIMIT 1',
 			array($id));
 		if (!$result || db_numrows($result) < 1) {
 			exit_error(_('Error: snippet does not exist'));
@@ -75,13 +75,19 @@ if (session_loggedin()) {
 				} else {
 					form_release_key(getStringFromRequest("form_key"));
 					$feedback .= _('Snippet Version Added Successfully.');
+					session_redirect('snippet/detail.php?type=snippet&id='.$id);
 				}
 			} else {
 				exit_error(_('Error')._(': ')._('Go back and fill in all the information'));
 			}
 
 		}
+		html_use_ace();
 		snippet_header(array('title'=>_('New snippet version')));
+
+
+		$last_version=db_result($result,0,'version');
+		$last_code=db_result($result,0,'code');
 
 		?>
 		<p><?php echo _('If you have modified a version of a snippet and you feel it is significant enough to share with others, please do so.'); ?></p>
@@ -93,18 +99,19 @@ if (session_loggedin()) {
 		<input type="hidden" name="id" value="<?php echo $id; ?>" />
 
 		<table>
+		<tr><td colspan="2"><strong><?php echo _('Last version')._(':'); ?></strong><br />
+			<?php echo $last_version ?>
+		</td></tr>
 		<tr><td colspan="2"><label for="version"><strong><?php echo _('Version')._(':'). utils_requiredField(); ?></strong></label><br />
 			<input id="version" type="text" name="version" size="10" maxlength="15" required="required" />
 		</td></tr>
-
 		<tr><td colspan="2"><label for="changes"><strong><?php echo _('Changes')._(':'). utils_requiredField(); ?></strong></label><br />
 			<textarea id="changes" name="changes" rows="5" cols="45" required="required"></textarea>
 		</td></tr>
-
-		<tr><td colspan="2"><label for="code"><strong><?php echo _('Paste the Code Here')._(':'). utils_requiredField(); ?></strong></label><br />
-			<textarea id="code" name="code" rows="30" cols="85" required="required"></textarea>
+		<tr><td colspan="2">
+			<?php echo $HTML->html_input('code', '', _('Paste the Code Here').utils_requiredField()._(': '), 'hidden', array('value'=>$last_code)); ?>
+			<div id='editor'><?php echo $last_code; ?></div>
 		</td></tr>
-
 		<tr><td colspan="2" class="align-center">
 			<strong><?php echo _('Make sure all info is complete and accurate'); ?></strong>
 			<br />
@@ -113,6 +120,26 @@ if (session_loggedin()) {
 		</table>
 		<?php
 		echo $HTML->closeForm();
+
+		$jsvar = "var mode = '".$SCRIPT_LANGUAGE_ACE[db_result($result,0,'language')]."';\n";
+		$javascript = <<<'EOS'
+	var editor = ace.edit("editor");
+	editor.setOptions({
+		minLines: 20,
+		maxLines: 40,
+		mode: "ace/mode/"+mode,
+		autoScrollEditorIntoView: true
+	});
+	editor.session.setMode({
+		path:"ace/mode/"+mode,
+		inline:true
+	});
+	editor.getSession().on('change', function () {
+		$('input#code').val(editor.getSession().getValue());
+	});
+EOS;
+		echo html_e('script', array( 'type'=>'text/javascript'), '//<![CDATA['."\n".'$(function(){'.$jsvar.$javascript.'});'."\n".'//]]>');
+
 		snippet_footer();
 
 	} elseif ($type=='package') {

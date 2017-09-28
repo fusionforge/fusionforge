@@ -84,6 +84,8 @@ if (session_loggedin()) {
 		}
 
 	}
+	html_use_jquery();
+	html_use_ace();
 	snippet_header(array('title'=>_('Snippet submit')));
 
 	?>
@@ -103,7 +105,7 @@ if (session_loggedin()) {
 	<table>
 
 	<tr><td colspan="2">
-	    <?php echo $HTML->html_input('name', '', _('Title').utils_requiredField()._(': '), 'text', '', array('size' => '45', 'maxlength' => '60', 'required' => 'required')); ?>
+	    <?php echo $HTML->html_input('name', '', _('Title').utils_requiredField()._(': '), 'text', '', array('size' => 45, 'maxlength' => 60, 'required' => 'required')); ?>
 	</td></tr>
 
 	<tr><td colspan="2">
@@ -137,7 +139,8 @@ if (session_loggedin()) {
 	</td></tr>
 
 	<tr><td colspan="2">
-	    <?php echo $HTML->html_textarea('code', '', _('Paste the Code Here').utils_requiredField()._(': '), '', array('rows' => '30', 'cols' => '85', 'required' => 'required')); ?>
+	    <?php echo $HTML->html_input('code', '', _('Paste the Code Here').utils_requiredField()._(': '), 'hidden', array()); ?>
+		<div id='editor'></div>
 	</td></tr>
 
 	<tr><td colspan="2" class="align-center">
@@ -146,6 +149,25 @@ if (session_loggedin()) {
 	</table>
 	<?php
 	echo $HTML->closeForm();
+
+	$jsvar = "var languageAce = ['".implode("','", $SCRIPT_LANGUAGE_ACE)."'];\n";
+	$javascript = <<<'EOS'
+	var editor = ace.edit("editor");
+	editor.setOptions({
+		minLines: 20,
+		maxLines: 40,
+		mode: "ace/mode/text",
+		autoScrollEditorIntoView: true
+	});
+	$("select[name='language']").on('change', function () {
+		editor.session.setMode({ path:"ace/mode/"+languageAce[$("select[name='language']").val()], inline:true});
+	});
+	editor.getSession().on('change', function () {
+		$('input#code').val(editor.getSession().getValue());
+	});
+EOS;
+	echo html_e('script', array( 'type'=>'text/javascript'), '//<![CDATA['."\n".'$(function(){'.$jsvar.$javascript.'});'."\n".'//]]>');
+
 	snippet_footer();
 } else {
 	exit_not_logged_in();

@@ -601,6 +601,10 @@ function html_use_jquerygentleselect() {
 	use_stylesheet('/scripts/jquery-gentleSelect/jquery-gentleSelect.css');
 }
 
+function html_use_ace() {
+	use_javascript('/scripts/ace/ace.js');
+}
+
 /**
  * html_build_select_box_from_arrays() - Takes two arrays, with the first array being the "id" or value and the other
  * array being the text you want displayed.

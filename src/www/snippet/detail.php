@@ -42,7 +42,7 @@ if ($type=='snippet') {
 		View a snippet and show its versions
 		Expand and show the code for the latest version
 	*/
-
+	html_use_ace();
 	snippet_header(array('title'=>_('Snippet Library')));
 
 	snippet_show_snippet_details($id);
@@ -96,13 +96,13 @@ if ($type=='snippet') {
 	/*
 		show the latest version of this snippet's code
 	*/
-	$result=db_query_params ('SELECT code,version FROM snippet_version WHERE snippet_version_id=$1',
+	$result=db_query_params ('SELECT code,language,version FROM snippet,snippet_version WHERE snippet.snippet_id = snippet_version.snippet_id AND snippet_version_id=$1',
 			array($newest_version));
 
 	echo html_e('hr').html_e('h2', array(), _('Latest Snippet Version')._(': ').db_result($result,0,'version'));
 	echo '
 		<p>
-		<span class="snippet-detail"><pre>'. db_result($result,0,'code') .'
+		<span class="snippet-detail"><pre id="code">'. db_result($result,0,'code') .'
 		</pre></span>
 		</p>';
 	/*
@@ -112,6 +112,24 @@ if ($type=='snippet') {
 		html_e('p', array(), _('You can submit a new version of this snippet if you have modified it and you feel it is appropriate to share with others.'));
 
 	}
+
+	$jsvar = "var mode = '".$SCRIPT_LANGUAGE_ACE[db_result($result,0,'language')]."';\n";
+	$javascript = <<<'EOS'
+	var editor = ace.edit("code");
+	editor.setOptions({
+		minLines: 20,
+		maxLines: 40,
+		mode: "ace/mode/"+mode,
+		autoScrollEditorIntoView: true
+	});
+	editor.session.setMode({
+		path:"ace/mode/"+mode,
+		inline:true
+	});
+	editor.setReadOnly(true);
+EOS;
+	echo html_e('script', array( 'type'=>'text/javascript'), '//<![CDATA['."\n".'$(function(){'.$jsvar.$javascript.'});'."\n".'//]]>');
+
 	snippet_footer();
 
 } elseif ($type=='package') {
