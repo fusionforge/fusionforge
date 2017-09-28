@@ -103,7 +103,6 @@ pre, .mw-code {
 }
 
 .mw-indicator {
-	display: -moz-inline-block;
 	display: inline-block;
 	zoom: 1;
 	display: inline;
