@@ -31,6 +31,7 @@ class PluginMediawiki extends FForge_SeleniumTestCase
 	{
 		$this->skip_on_deb_installs();
 		$this->skip_on_rpm_installs();
+		$this->skip_on_debian();
 
 		$this->loadAndCacheFixture();
 
