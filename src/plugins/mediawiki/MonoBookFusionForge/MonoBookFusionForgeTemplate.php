@@ -42,6 +42,12 @@ class MonoBookFusionForgeTemplate extends BaseTemplate {
 		wfSuppressWarnings();
 
 		$this->html( 'headelement' );
+
+		echo "\n<!-- FUSIONFORGE BodyHeader BEGIN -->\n";
+		$GLOBALS['HTML']->bodyHeader($this->params);
+		echo "<div id=\"ff-mw-wrapper\"><div style=\"font-size:x-small;\">\n";
+		echo "<!-- FUSIONFORGE BodyHeader END -->\n";
+
 		?><div id="globalWrapper">
 		<div id="column-content">
 			<div id="content" class="mw-body" role="main">
@@ -207,8 +213,9 @@ class MonoBookFusionForgeTemplate extends BaseTemplate {
 		</div>
 		<?php
 		$this->printTrail();
-		echo Html::closeElement( 'body' );
-		echo Html::closeElement( 'html' );
+		echo "</div></div>\n";
+		$GLOBALS['HTML']->footer($this->params);
+
 		echo "\n";
 		wfRestoreWarnings();
 	} // end of execute() method
