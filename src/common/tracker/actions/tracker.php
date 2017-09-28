@@ -651,7 +651,12 @@ switch (getStringFromRequest('func')) {
 		session_redirect('/tracker/?group_id='.$group_id.'&atid='.$atid.'&aid='.$aid, false);
 		break;
 	default : {
-		include $gfcommon.'tracker/actions/browse.php';
+		$aid = getIntFromRequest('aid');
+		if ($aid) {
+			include $gfcommon.'tracker/actions/detail.php';
+		} else {
+			include $gfcommon.'tracker/actions/browse.php';
+		}
 		break;
 	}
 }
