@@ -106,7 +106,7 @@ pre, .mw-code {
 	display: -moz-inline-block;
 	display: inline-block;
 	zoom: 1;
-	*display: inline;
+	display: inline;
 }
 
 /*
