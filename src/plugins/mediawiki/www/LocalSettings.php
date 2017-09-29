@@ -211,9 +211,10 @@ if (!isset($fusionforge_plugin_mediawiki_LocalSettings_included)) {
 	}
 
 	function FusionForgeMWAuth( $user, &$result ) {
-		global $fusionforgeproject, $wgGroupPermissions ;
+		global $fusionforgeproject, $wgGroupPermissions, $wgVersion ;
 
 		session_set();
+		$wgVersionArr = explode('.', $wgVersion);
 
 		if (session_loggedin()) {
 			$u = session_get_user();
@@ -226,7 +227,9 @@ if (!isset($fusionforge_plugin_mediawiki_LocalSettings_included)) {
 				$mwu->setPassword (User::randomPassword());
 				$mwu->setRealName ($u->getRealName ()) ;
 				$mwu->setToken ();
-				$mwu->saveSettings ();
+				if (!$wgVersionArr[0] == 1 && !$wgVersionArr[1] >= 24) {
+					$mwu->saveSettings ();
+				}
 			}
 			$user->mId=$mwu->getID();
 			$user->loadFromId() ;
@@ -270,7 +273,9 @@ if (!isset($fusionforge_plugin_mediawiki_LocalSettings_included)) {
 			}
 
 			$user->setCookies ();
-			$user->saveSettings ();
+			if (!$wgVersionArr[0] == 1 && !$wgVersionArr[1] >= 24) {
+				$user->saveSettings ();
+			}
 			wfSetupSession ();
 		} else {
 			$user->logout ();
