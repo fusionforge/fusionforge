@@ -684,8 +684,8 @@ class Artifact extends FFObject {
 	 * @return	resource result set.
 	 */
 	function getHistory() {
-		return db_query_params ('SELECT * FROM artifact_history_user_vw WHERE artifact_id=$1 ORDER BY entrydate DESC, id ASC',
-					array ($this->getID())) ;
+		return db_query_params('SELECT * FROM artifact_history_user_vw WHERE artifact_id=$1 ORDER BY entrydate DESC, id ASC',
+					array ($this->getID()));
 	}
 
 	function hasMessages() {
@@ -700,7 +700,7 @@ class Artifact extends FFObject {
 	 * @param	string		$ascending
 	 * @return	resource	result set.
 	 */
-	function getMessages($ascending='up') {
+	function getMessages($ascending = 'up') {
 		/*
 		 * This is necessary because someone committed a change
 		 * to this method in FusionForge trunk that accepts 'up'
@@ -758,10 +758,10 @@ class Artifact extends FFObject {
 	 */
 	function &getFiles() {
 		if (!isset($this->files)) {
-			$res = db_query_params ('SELECT id,artifact_id,description,filename,filesize,' .
-					'filetype,adddate,submitted_by,user_name,realname
-					 FROM artifact_file_user_vw WHERE artifact_id=$1',
-						array ($this->getID())) ;
+			$res = db_query_params('SELECT id,artifact_id,description,filename,filesize,
+						filetype,adddate,submitted_by,user_name,realname
+						FROM artifact_file_user_vw WHERE artifact_id=$1',
+						array ($this->getID()));
 			$rows=db_numrows($res);
 			if ($rows > 0) {
 				for ($i=0; $i < $rows; $i++) {
@@ -781,14 +781,14 @@ class Artifact extends FFObject {
 	 */
 	function getRelatedTasks() {
 		if (!$this->related_tasks) {
-			$this->related_tasks = db_query_params ('SELECT pt.group_project_id,pt.project_task_id,pt.summary,pt.start_date,pt.end_date,pgl.group_id,pt.status_id,pt.percent_complete,ps.status_name
-			FROM project_task pt, project_group_list pgl, project_status ps
-			WHERE pt.group_project_id = pgl.group_project_id
-                        AND ps.status_id = pt.status_id
-                        AND EXISTS (SELECT project_task_id FROM project_task_artifact
-				WHERE project_task_id=pt.project_task_id
-				AND artifact_id = $1)',
-							       array ($this->getID())) ;
+			$this->related_tasks = db_query_params('SELECT pt.group_project_id,pt.project_task_id,pt.summary,pt.start_date,pt.end_date,pgl.group_id,pt.status_id,pt.percent_complete,ps.status_name
+								FROM project_task pt, project_group_list pgl, project_status ps
+								WHERE pt.group_project_id = pgl.group_project_id
+								AND ps.status_id = pt.status_id
+								AND EXISTS (SELECT project_task_id FROM project_task_artifact
+										WHERE project_task_id=pt.project_task_id
+										AND artifact_id = $1)',
+							       array ($this->getID()));
 		}
 		return $this->related_tasks;
 	}
@@ -865,12 +865,12 @@ class Artifact extends FFObject {
 	/**
 	 * setStatus - set the status of this artifact.
 	 *
-	 * @param	int	$status_id The artifact status ID.
-	 * @param	int|bool	$closingTime Closing date if status = 1
+	 * @param	int		$status_id	The artifact status ID.
+	 * @param	int|bool	$closingTime	Closing date if status = 1
 	 *
 	 * @return	bool	success.
 	 */
-	function setStatus($status_id, $closingTime=false) {
+	function setStatus($status_id, $closingTime = false) {
 		db_begin();
 		$qpa = db_construct_qpa(array(), 'UPDATE artifact SET status_id=$1', array ($status_id)) ;
 		if ($closingTime && $status_id != 1) {
@@ -910,13 +910,11 @@ class Artifact extends FFObject {
 	 * @param	int	$new_artifact_type_id	Allows you to move an artifact to another type.
 	 * @param	array	$extra_fields		Array of extra fields like: array(15=>'foobar',22=>'1');
 	 * @param	string  $description		The description.
-	 * @param	array	$importData	Array of data to change submitter and time of submit like:
-	 *						array('user' => 127, 'time' => 1234556789, 'nopermcheck' => true, 'nonotice' => true)
+	 * @param	array	$importData		Array of data to change submitter and time of submit like:
+	 *							array('user' => 127, 'time' => 1234556789, 'nopermcheck' => true, 'nonotice' => true)
 	 * @return	bool	success.
 	 */
-	function update($priority,$status_id,
-		$assigned_to,$summary,$canned_response,$details,$new_artifact_type_id,
-		$extra_fields = array(), $description='', $importData = array()) {
+	function update($priority,$status_id, $assigned_to,$summary,$canned_response,$details,$new_artifact_type_id, $extra_fields = array(), $description='', $importData = array()) {
 
 		if (array_key_exists('user', $importData)){
 			$user = $importData['user'];
@@ -1000,7 +998,7 @@ class Artifact extends FFObject {
 
 		// Check that assigned_to is a tech for the tracker
 		if ($assigned_to != 100 && $permCheck) {
-			if (!forge_check_perm_for_user ($assigned_to, 'tracker', $this->ArtifactType->getID(), 'tech')) {
+			if (!forge_check_perm_for_user($assigned_to, 'tracker', $this->ArtifactType->getID(), 'tech')) {
 				$this->setError(_("Invalid assigned person: must be a technician"));
 				return false;
 			}
@@ -1015,7 +1013,7 @@ class Artifact extends FFObject {
 		//
 		//	Get a lock on this row in the database
 		//
-		db_query_params ('SELECT * FROM artifact WHERE artifact_id=$1 FOR UPDATE', array ($this->getID())) ;
+		db_query_params('SELECT * FROM artifact WHERE artifact_id=$1 FOR UPDATE', array ($this->getID()));
 		$artifact_type_id = $this->ArtifactType->getID();
 		//
 		//	Attempt to move this Artifact to a new ArtifactType
@@ -1036,9 +1034,7 @@ class Artifact extends FFObject {
 			}
 
 			// Add a message to explain that the tracker was moved.
-			$message = sprintf(_('Moved from %1$s to %2$s'),
-                               $this->ArtifactType->getName(),
-                               $newArtifactType->getName());
+			$message = sprintf(_('Moved from %1$s to %2$s'), $this->ArtifactType->getName(), $newArtifactType->getName());
 			$this->addHistory('type', $this->ArtifactType->getName(), $importData);
 			$this->addMessage($message,'',0, $importData);
 
@@ -1107,10 +1103,10 @@ class Artifact extends FFObject {
 
 			$extra_fields = $new_extra_fields;
 
-			$res = db_query_params ('DELETE FROM artifact_extra_field_data WHERE artifact_id=$1',
-						array ($this->getID()));
+			$res = db_query_params('DELETE FROM artifact_extra_field_data WHERE artifact_id=$1',
+						array($this->getID()));
 			if (!$res) {
-				$this->setError(_('Removal of old artifact_extra_field_data failed: ').db_error());
+				$this->setError(_('Removal of old artifact_extra_field_data failed')._(': ').db_error());
 				db_rollback();
 				return false;
 			}
@@ -1195,7 +1191,7 @@ class Artifact extends FFObject {
 		  $result = db_query_qpa($qpa);
 
 			if (!$result || db_affected_rows($result) < 1) {
-				$this->setError(_('Update failed').db_error());
+				$this->setError(_('Update failed')._(': ')db_error());
 				db_rollback();
 				return false;
 			} else {
@@ -1297,7 +1293,7 @@ class Artifact extends FFObject {
 		$res = db_query_params ('UPDATE artifact SET assigned_to=$1 WHERE artifact_id=$2',
 								array ($user_id, $this->getID())) ;
 		if (!$res) {
-			$this->setError(_('Error updating assigned_to in artifact: ').db_error());
+			$this->setError(_('Error updating assigned_to in artifact')._(': ').db_error());
 			return false;
 		}
 		$this->fetchData($this->getID());
@@ -1367,7 +1363,7 @@ class Artifact extends FFObject {
 						$status_changed = true;
 						$atw = new ArtifactWorkflow($this->ArtifactType, $efid);
 						if (!$atw->checkEvent($from_status, $to_status)) {
-							$this->setError('Workflow error: You are not authorized to change the Status ('.$from_status.' => '.$to_status.')');
+							$this->setError(_('Workflow error: You are not authorized to change the Status').'('.$from_status.' => '.$to_status.')');
 							return false;
 						}
 					}
@@ -1477,9 +1473,9 @@ class Artifact extends FFObject {
 				} elseif (($type == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT) || ($type == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX)) {
 					$extra_fields[$efid] = array('100');
 				} else {
-					db_query_params ('DELETE FROM artifact_extra_field_data WHERE artifact_id=$1 AND extra_field_id=$2',
+					db_query_params('DELETE FROM artifact_extra_field_data WHERE artifact_id=$1 AND extra_field_id=$2',
 								   array ($this->getID(),
-									  $efid)) ;
+									  $efid));
 					continue;
 				}
 			}
@@ -1487,9 +1483,9 @@ class Artifact extends FFObject {
 			//
 			//	get the old rows of data
 			//
-			$resd = db_query_params ('SELECT * FROM artifact_extra_field_data WHERE artifact_id=$1 AND extra_field_id=$2',
-						 array ($this->getID(),
-							$efid)) ;
+			$resd = db_query_params('SELECT * FROM artifact_extra_field_data WHERE artifact_id=$1 AND extra_field_id=$2',
+						 array($this->getID(),
+							$efid));
 			$rows=db_numrows($resd);
 			if ($resd && $rows) {
 //
@@ -1517,9 +1513,9 @@ class Artifact extends FFObject {
 						$this->addHistory($field_name, $this->ArtifactType->getElementName(array_reverse($old_values)),$importData);
 						$update = true;
 
-						db_query_params ('DELETE FROM artifact_extra_field_data WHERE	artifact_id=$1 AND extra_field_id=$2',
-									   array ($this->getID(),
-										  $efid)) ;
+						db_query_params('DELETE FROM artifact_extra_field_data WHERE	artifact_id=$1 AND extra_field_id=$2',
+									   array($this->getID(),
+										  $efid));
 					} else {
 						continue;
 					}
@@ -1532,9 +1528,9 @@ class Artifact extends FFObject {
 					if (!preg_match('/^@/', $ef[$efid]['alias'])) {
 						$changes["extra_fields"][$efid] = 1;
 					}
-					db_query_params ('DELETE FROM artifact_extra_field_data WHERE	artifact_id=$1 AND extra_field_id=$2',
-								   array ($this->getID(),
-									  $efid)) ;
+					db_query_params('DELETE FROM artifact_extra_field_data WHERE	artifact_id=$1 AND extra_field_id=$2',
+								   array($this->getID(),
+									  $efid));
 
 					// Adding history with previous value.
 					if (($type == ARTIFACT_EXTRAFIELDTYPE_SELECT) || ($type == ARTIFACT_EXTRAFIELDTYPE_RADIO) || ($type == ARTIFACT_EXTRAFIELDTYPE_STATUS)) {
@@ -1565,25 +1561,25 @@ class Artifact extends FFObject {
 				foreach (explode(' ',$value) as $id) {
 					if (preg_match('/^(\d+)$/', $id)) {
 						if ($id == $this->getID()) {
-							$this->setError('Illegal id '.$id.', self reference for field: '.$ef[$efid]['field_name'].'.'); // @todo: lang
+							$this->setError(_('Illegal id').' '.$id._(': ')._('self reference for field')._(': ').$ef[$efid]['field_name']);
 							return false;
 						}
 						// Control that the id is present in the db
-						$res = db_query_params ('SELECT artifact_id FROM artifact WHERE artifact_id=$1',
+						$res = db_query_params('SELECT artifact_id FROM artifact WHERE artifact_id=$1',
 									array($id));
 						if (db_numrows($res) == 1) {
 							$new .= $id.' ';
 						} else {
-							$this->setError('Illegal id '.$id.', it\'s not a valid artifact id for field: '.$ef[$efid]['field_name'].'.'); // @todo: lang
+							$this->setError(_('Illegal id').' '.$id._(': ')._('it is not a valid artifact id for field')._(': ').$ef[$efid]['field_name'].'.');
 							return false;
 						}
 						$progeny = $this->getProgeny();
 						if (in_array($id, $progeny)) {
-							$this->setError('Illegal id '.$id.', circular dependency for field: '.$ef[$efid]['field_name'].'.'); // @todo: lang
+							$this->setError(_('Illegal id').' '.$id._(': ')._('circular dependency for field')._(': ').$ef[$efid]['field_name']);
 							return false;
 						}
 					} else {
-						$this->setError('Illegal value '.$id.', only artifact id are allowed for field: '.$ef[$efid]['field_name'].'.'); // @todo: lang
+						$this->setError(_('Illegal value').' '.$id._(': ')._('only artifact ids are allowed for field')._(': ').$ef[$efid]['field_name']);
 						return false;
 					}
 				}
@@ -1594,11 +1590,11 @@ class Artifact extends FFObject {
 			if ($type == ARTIFACT_EXTRAFIELDTYPE_INTEGER) {
 				$extra_fields[$efid] = trim($extra_fields[$efid]);
 				if (!preg_match('/^[-+]?(\d+)$/', $extra_fields[$efid])) {
-					$this->setError('Illegal value '.$extra_fields[$efid].' for field '.$ef[$efid]['field_name'].': Only integer is allowed.');
+					$this->setError(_('Illegal value').' '.$extra_fields[$efid].' '._('for field ').' '.$ef[$efid]['field_name']._(': ')._('Only integer is allowed.'));
 					return false;
 				}
 				if ($extra_fields[$efid] < -2147483648 || $extra_fields[$efid] > 2147483647) {
-					$this->setError('Illegal value '.$extra_fields[$efid].' for field '.$ef[$efid]['field_name'].': Integer out of range (-2147483648 to +2147483647).');
+					$this->setError(_('Illegal value').' '.$extra_fields[$efid].' '._('for field ').' '.$ef[$efid]['field_name']._(': ')._('Integer out of range (-2147483648 to +2147483647).'));
 					return false;
 				}
 				$extra_fields[$efid] = intval($extra_fields[$efid]);
@@ -1836,8 +1832,8 @@ class Artifact extends FFObject {
 	function &getExtraFieldData() {
 		if (!isset($this->extra_field_data)) {
 			$this->extra_field_data = array();
-			$res = db_query_params ('SELECT * FROM artifact_extra_field_data WHERE artifact_id=$1 ORDER BY extra_field_id',
-						array ($this->getID())) ;
+			$res = db_query_params('SELECT * FROM artifact_extra_field_data WHERE artifact_id=$1 ORDER BY extra_field_id',
+						array($this->getID()));
 			$ef = $this->ArtifactType->getExtraFields();
 			while ($arr = db_fetch_array($res)) {
 				$type=$ef[$arr['extra_field_id']]['field_type'];
@@ -2245,17 +2241,17 @@ class Artifact extends FFObject {
 	function  getChildren() {
 		if (!$this->children) {
 			$res = db_query_params ('SELECT *
-													FROM artifact_extra_field_list, artifact_extra_field_data, artifact_group_list, artifact, groups
-													WHERE field_type = $1
-													AND artifact_extra_field_list.extra_field_id=artifact_extra_field_data.extra_field_id
-													AND artifact_group_list.group_artifact_id = artifact_extra_field_list.group_artifact_id
-													AND artifact.artifact_id = artifact_extra_field_data.artifact_id
-													AND groups.group_id = artifact_group_list.group_id
-													AND field_data = $2
-													AND artifact.is_deleted = 0
-													ORDER BY artifact_group_list.group_id ASC, name ASC, artifact.artifact_id ASC',
-								array(ARTIFACT_EXTRAFIELDTYPE_PARENT,
-										$this->getID()));
+						FROM artifact_extra_field_list, artifact_extra_field_data, artifact_group_list, artifact, groups
+						WHERE field_type = $1
+						AND artifact_extra_field_list.extra_field_id=artifact_extra_field_data.extra_field_id
+						AND artifact_group_list.group_artifact_id = artifact_extra_field_list.group_artifact_id
+						AND artifact.artifact_id = artifact_extra_field_data.artifact_id
+						AND groups.group_id = artifact_group_list.group_id
+						AND field_data = $2
+						AND artifact.is_deleted = 0
+						ORDER BY artifact_group_list.group_id ASC, name ASC, artifact.artifact_id ASC',
+						array(ARTIFACT_EXTRAFIELDTYPE_PARENT,
+								$this->getID()));
 			while ($row = db_fetch_array($res)) {
 				$this->children[] = $row;
 			}
@@ -2270,12 +2266,11 @@ class Artifact extends FFObject {
 
 	function  getParent() {
 		if (!isset($this->parent)) {
-			$res = db_query_params ('SELECT field_data FROM
-										artifact_extra_field_data
-										INNER JOIN artifact_extra_field_list USING (extra_field_id)
-									WHERE
-										field_type = $1
-											AND artifact_id = $2',
+			$res = db_query_params ('SELECT field_data
+						FROM artifact_extra_field_data
+						INNER JOIN artifact_extra_field_list USING (extra_field_id)
+						WHERE field_type = $1
+						AND artifact_id = $2',
 						array(ARTIFACT_EXTRAFIELDTYPE_PARENT,
 								$this->getID()));
 			if (db_numrows($res) == 0) {
