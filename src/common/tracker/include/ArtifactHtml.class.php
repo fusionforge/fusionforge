@@ -196,7 +196,7 @@ function hide_edit_button(id) {
 					'<td>'. date(_('Y-m-d H:i'),db_result($result, $i, 'entrydate')) .'</td>';
 				$user = user_get_object_by_name(db_result($result, $i, 'user_name'));
 				if ($user && is_object($user)) {
-					$return .= '<td>'.util_display_user($user->getUnixName(), $user->getID(), $user->getRealName(), 's').'</td></tr>';
+					$return .= '<td>'.util_display_user($user->getUnixName(), $user->getID(), $user->getRealName()).'</td></tr>';
 				} else {
 					$return .= '<td>'.db_result($result, $i, 'user_name').'</td></tr>';
 				}
