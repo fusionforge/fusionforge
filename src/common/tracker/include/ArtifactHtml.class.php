@@ -151,7 +151,7 @@ function hide_edit_button(id) {
 
 	function showHistory() {
 		global $HTML;
-		$result=$this->getHistory();
+		$result = $this->getHistory();
 		$rows= db_numrows($result);
 		$return = '';
 
@@ -193,8 +193,13 @@ function hide_edit_button(id) {
 
 				}
 				$return .= '</td>'.
-					'<td>'. date(_('Y-m-d H:i'),db_result($result, $i, 'entrydate')) .'</td>'.
-					'<td>'. db_result($result, $i, 'user_name'). '</td></tr>';
+					'<td>'. date(_('Y-m-d H:i'),db_result($result, $i, 'entrydate')) .'</td>';
+				$user = user_get_object_by_name(db_result($result, $i, 'user_name'));
+				if ($user && is_object($user)) {
+					$return .= '<td>'.util_display_user($user->getUnixName(), $user->getID(), $user->getRealName(), 's').'</td></tr>';
+				} else {
+					$return .= '<td>'.db_result($result, $i, 'user_name').'</td></tr>';
+				}
 			}
 
 			$return .= $HTML->listTableBottom();
