@@ -774,7 +774,7 @@ abstract class Layout extends FFError {
 				html_e('p', array(), html_e('span', array('class' => 'ui-icon ui-icon-alert', 'style' => 'float:left; margin:0 7px 20px 0;'), '', false).$message));
 	}
 
-	function html_input($name, $id = '', $label = '', $type = 'text', $value = '', $extra_params_input = '', $extra_params_div = '') {
+	function html_input($name, $id = '', $label = '', $type = 'text', $value = '', $extra_params_input = '', $extra_params_div = array()) {
 		if (!$id) {
 			$id = $name;
 		}
