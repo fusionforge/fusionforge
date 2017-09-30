@@ -136,6 +136,7 @@ $liElements[]['content'] = _('Plugin Blocks: support Markdown syntax. (TrivialDe
 $liElements[]['content'] = _('Plugin GlobalActivity: forge-wide aggregation for project activities (Roland Mas)');
 $liElements[]['content'] = _('Plugin Mediawiki: support activity for public project (TrivialDev)');
 $liElements[]['content'] = _('Plugin Mediawiki: upgrade to MW 1.23 on CentOS, to MW 1.27 on Debian [#746] (TrivialDev)');
+$liElements[]['content'] = _('Plugin phptexcaptcha: new plugin to support standard php captcha library (TrivialDev)');
 $liElements[]['content'] = _('Plugin REST: new REST api (Alain Peyrat & TrivialDev)');
 $liElements[]['content'] = _('Plugin Scmhook: add CVS commitTracker hook [#700] (Philipp Keidel & TrivialDev)');
 $liElements[]['content'] = _('Plugin Taskboard: support multiple taskboards per project [#785] (TrivialDev)');
