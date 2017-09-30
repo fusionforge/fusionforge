@@ -268,10 +268,10 @@ class Artifact extends FFObject {
 		} else {
 			$time = time();
 		}
-		$res = db_query_params ('INSERT INTO artifact
-			(group_artifact_id,status_id,priority,
-			submitted_by,assigned_to,open_date,summary,details)
-			VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
+		$res = db_query_params('INSERT INTO artifact
+					(group_artifact_id,status_id,priority,
+					submitted_by,assigned_to,open_date,summary,details)
+					VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
 					array ($this->ArtifactType->getID(),
 					       $status_id,
 					       $priority,
@@ -279,7 +279,7 @@ class Artifact extends FFObject {
 					       $assigned_to,
 					       $time,
 					       htmlspecialchars($summary),
-					       htmlspecialchars($details))) ;
+					       htmlspecialchars($details)));
 		if (!$res) {
 			$this->setError(db_error());
 			db_rollback();
@@ -323,7 +323,7 @@ class Artifact extends FFObject {
 	/**
 	 * fetchData - re-fetch the data for this Artifact from the database.
 	 *
-	 * @param	int		$artifact_id	The artifact ID.
+	 * @param	int	$artifact_id	The artifact ID.
 	 * @return	bool	success.
 	 */
 	function fetchData($artifact_id) {
@@ -568,7 +568,7 @@ class Artifact extends FFObject {
 	/**
 	 * delete - "delete" this artifact and all its related data, artifact is taged deleted
 	 *
-	 * @param	bool	$sure I'm Sure.
+	 * @param	bool	$sure	I'm Sure.
 	 * @return	bool	true/false;
 	 */
 	function delete($sure) {
@@ -725,7 +725,7 @@ class Artifact extends FFObject {
 	/**
 	 * getMessage - get a message attached to this artifact.
 	 *
-	 * @param	int		$msg_id id of the message.
+	 * @param	int		$msg_id	id of the message.
 	 * @access	public
 	 * @return	resource|bool	database result set.
 	 */
@@ -1185,13 +1185,13 @@ class Artifact extends FFObject {
 		*/
 		if ($update){
 		  $qpa = db_construct_qpa($qpa, ' group_artifact_id=$1
-				                              WHERE artifact_id=$2 AND group_artifact_id=$3',
-                                      array($new_artifact_type_id,
-                                            $this->getID(), $artifact_type_id));
+						WHERE artifact_id=$2 AND group_artifact_id=$3',
+						array($new_artifact_type_id,
+							$this->getID(), $artifact_type_id));
 		  $result = db_query_qpa($qpa);
 
 			if (!$result || db_affected_rows($result) < 1) {
-				$this->setError(_('Update failed')._(': ')db_error());
+				$this->setError(_('Update failed')._(': ').db_error());
 				db_rollback();
 				return false;
 			} else {
@@ -1203,9 +1203,9 @@ class Artifact extends FFObject {
 		}
 
 		//extra field handling
-		$update=true;
+		$update = true;
 		if (!$this->updateExtraFields($extra_fields, $changes, $importData)) {
-//TODO - see if anything actually did change
+			//TODO - see if anything actually did change
 			db_rollback();
 			return false;
 		}
@@ -1217,7 +1217,7 @@ class Artifact extends FFObject {
 		*/
 		if ($canned_response != 100) {
 			//don't care if this response is for this group - could be hacked
-			$acr = new ArtifactCanned($this->ArtifactType,$canned_response);
+			$acr = new ArtifactCanned($this->ArtifactType, $canned_response);
 			if (!$acr || !is_object($acr)) {
 				$this->setError(_('Could Not Create Canned Response Object'));
 			} elseif ($acr->isError()) {
@@ -1225,7 +1225,7 @@ class Artifact extends FFObject {
 			} else {
 				$body = $acr->getBody();
 				if ($body) {
-					if (!$this->addMessage(util_unconvert_htmlspecialchars($body),'',0,$importData)) {
+					if (!$this->addMessage(util_unconvert_htmlspecialchars($body), '', 0, $importData)) {
 						db_rollback();
 						return false;
 					} else {
