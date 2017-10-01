@@ -1087,8 +1087,6 @@ function util_display_user($username, $user_id = 0, $text = '', $size = 'xs') {
 			return '';
 		}
 
-		$u2 = $user->getID();
-
 		$u2gl = $user->getGroupIds();
 		$seen = false;
 		foreach ($u2gl as $u2g) {
