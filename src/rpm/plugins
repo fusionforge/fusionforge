@@ -96,5 +96,8 @@ Requires:
 %package plugin-repositoryapi
 Requires:
 
-%pacakge plugin-phptextcaptcha
+%package plugin-phptextcaptcha
 Requires: php-pear-Text-CAPTCHA
+
+%package plugin-rest
+Requires:
