@@ -1,6 +1,6 @@
 FROM centos:centos7
 LABEL maintainer "franck.villaume@trivialdev.com"
-LABEL version "master"
+LABEL version "branch-6.1"
 LABEL name "FusionForge"
 LABEL vendor "TrivialDev"
 LABEL description "all-in-one"
