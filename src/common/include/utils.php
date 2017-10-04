@@ -1078,6 +1078,28 @@ function util_make_link_u($username, $user_id, $text) {
  * @return	string
  */
 function util_display_user($username, $user_id = 0, $text = '', $size = 'xs') {
+	$user = user_get_object_by_name($username);
+	if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
+		return $text;
+	}
+	if (forge_get_config('restrict_users_visibility')) {
+		if (!session_loggedin()) {
+			return '';
+		}
+
+		$u2gl = $user->getGroupIds();
+		$seen = false;
+		foreach ($u2gl as $u2g) {
+			if (forge_check_perm('project_read', $u2g)) {
+				$seen = true;
+				break;
+			}
+		}
+		if ($seen == false) {
+			return '';
+		}
+	}
+	
 	// Invoke user_link_with_tooltip plugin
 	$hook_params = array('resource_type' => 'user', 'username' => $username, 'user_id' => $user_id, 'size' => $size, 'link_text' => $text, 'user_link' => '');
 	plugin_hook_by_reference('user_link_with_tooltip', $hook_params);

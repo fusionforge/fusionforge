@@ -103,3 +103,6 @@ Depends:
 
 Package: fusionforge-plugin-phptextcaptcha
 Depends: php-text-captcha
+
+Package: fusionforge-plugin-rest
+Depends:

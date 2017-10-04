@@ -11,6 +11,7 @@ RUN yum -y install git openssh-server && \
 WORKDIR /opt/sources
 RUN git clone https://scm.fusionforge.org/anonscm/git/fusionforge/fusionforge.git
 WORKDIR /opt/sources/fusionforge
+RUN git checkout master
 RUN source ./autoinstall/common-backports && \
     yum install -y make tar && \
     backports_rpm && \

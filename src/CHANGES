@@ -1,6 +1,6 @@
-FusionForge 6.2.x:
+FusionForge X.y:
 
-FusionForge 6.1.0:
+FusionForge 6.1:
 * Accounts: minimum password length is now 8 (Sylvain Beucler)
 * Accounts: add minimal constraints to password (upper-case, lower-case, non-alphanumeric check) [#826] (Inria)
 * Core System: support object association n-n, bidirectional (Artifact, Document, FRSRelease) (TrivialDev)
@@ -25,6 +25,8 @@ FusionForge 6.1.0:
 * Plugin GlobalActivity: forge-wide aggregation for project activities (Roland Mas)
 * Plugin Mediawiki: support activity for public project (TrivialDev)
 * Plugin Mediawiki: upgrade to MW 1.23 on CentOS, to MW 1.27 on Debian [#746] (TrivialDev)
+* Plugin phptexcaptcha: new plugin to support standard php captcha library (TrivialDev)
+* Plugin REST: new REST api (Alain Peyrat & TrivialDev)
 * Plugin Scmhook: add CVS commitTracker hook [#700] (Philipp Keidel & TrivialDev)
 * Projects Page: add paging system in full_list and tag_cloud subpages (TrivialDev)
 * SearchEngine: support only FTI queries (TrivialDev)

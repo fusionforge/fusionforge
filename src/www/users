@@ -50,7 +50,6 @@ if (forge_get_config('restrict_users_visibility')) {
 	if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
 		exit_permission_denied();
 	}
-	$u2 = $user->getID();
 
 	$u2gl = $user->getGroupIds();
 	$seen = false;
