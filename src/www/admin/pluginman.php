@@ -199,8 +199,6 @@ if($handle = opendir(forge_get_config('plugins_path'))) {
 }
 sort($filelist);
 
-$j = 0;
-
 foreach ($filelist as $key => $filename) {
 	$pluginObject = $pm->GetPluginObject($filename);
 	if ($pm->PluginIsInstalled($filename)) {
