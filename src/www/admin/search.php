@@ -102,20 +102,20 @@ if (getStringFromRequest('groupsearch')) {
 	$status = getStringFromRequest('status');
 	$is_public = getIntFromRequest('is_public', -1);
 	$crit_desc = '';
-	$qpa = db_construct_qpa() ;
+	$qpa = db_construct_qpa();
 
 	if(is_numeric($search)) {
 		$qpa = db_construct_qpa($qpa, 'SELECT DISTINCT * FROM groups
 						WHERE (group_id=$1 OR lower (unix_group_name) LIKE $2 OR lower (group_name) LIKE $2)',
 					    array ($search,
-						   strtolower ("%$search%"))) ;
+						   strtolower ("%$search%")));
 	} else {
 		$qpa = db_construct_qpa($qpa, 'SELECT DISTINCT * FROM groups WHERE (lower (unix_group_name) LIKE $1 OR lower (group_name) LIKE $1)',
-					    array (strtolower ("%$search%"))) ;
+					    array (strtolower ("%$search%")));
 	}
 
 	if ($status) {
-		$qpa = db_construct_qpa($qpa, ' AND status=$1', array ($status)) ;
+		$qpa = db_construct_qpa($qpa, ' AND status=$1', array ($status));
 		$crit_desc .= " status=$status";
 	}
 
@@ -123,10 +123,10 @@ if (getStringFromRequest('groupsearch')) {
 		$crit_desc = "(".trim($crit_desc).")";
 	}
 
-	$result = db_query_qpa ($qpa) ;
+	$result = db_query_qpa ($qpa);
 	if (db_numrows($result) >= 1) {
 		$rows = array();
-		$ra = RoleAnonymous::getInstance() ;
+		$ra = RoleAnonymous::getInstance();
 		while ($row = db_fetch_array($result)) {
 
 			if ($is_public == 1) {
