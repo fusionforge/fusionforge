@@ -195,7 +195,7 @@ class MailingList extends FFError {
 					. _('List administration can be found at:') . "\n"
 					. $this->getExternalAdminUrl() . "\n\n"
 
-					. _('Your list password is: ') . $listPassword . "\n"
+					. _('Your list password is')._(': ') . $listPassword . "\n"
 					. _('You are encouraged to change this password as soon as possible.') . "\n\n"
 
 					. sprintf(_('Thank you for registering your project with %s.'), forge_get_config ('forge_name'))
