@@ -198,7 +198,7 @@ EOS;
 		echo '
 			<p>&nbsp;</p>
 			<hr />
-			<h2>' ._('Latest Package Version: ').db_result($result,0,'version').'</h2>
+			<h2>' ._('Latest Package Version')._(': ').db_result($result,0,'version').'</h2>
 			<p>&nbsp;</p>
 			<p>&nbsp;</p>';
 		snippet_show_package_snippets($newest_version);

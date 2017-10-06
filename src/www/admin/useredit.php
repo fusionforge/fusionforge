@@ -52,7 +52,7 @@ if (getStringFromRequest('delete_user') != '') {
 	if (getStringFromRequest('confirm_delete') == '1') {
 		// delete user
 		if (!$u->delete(true)) {
-			exit_error( _('Could Not Complete Operation: ').$u->getErrorMessage(),'admin');
+			exit_error( _('Could Not Complete Operation')._(': ').$u->getErrorMessage(),'admin');
 		} else {
 			$feedback = _('Deleted (D)').'<br />';
 		}
@@ -69,7 +69,7 @@ if (getStringFromRequest('delete_user') != '') {
 	if (!$u->setEmail($email)
 		|| (forge_get_config('use_shell') && !$u->setShell($shell))
 		|| !$u->setStatus($status)) {
-		exit_error( _('Could Not Complete Operation: ').$u->getErrorMessage(),'admin');
+		exit_error( _('Could Not Complete Operation')._(': ').$u->getErrorMessage(),'admin');
 	}
 
 	if (is_array($addToProjectArray)) {
