@@ -619,8 +619,11 @@ EOS;
 										$cellContent .= $ath->renderDatetime($keys[0], $value, $attrs);
 									}
 									break;
-								/* 13: reserved SLA */
 								case ARTIFACT_EXTRAFIELDTYPE_SLA:
+									if ($readonly) {
+									} else {
+										$cellContent .= $ath->renderSLAField($keys[0], $value, $attrs);
+									}
 									break;
 								case ARTIFACT_EXTRAFIELDTYPE_USER:
 									if ($readonly) {
