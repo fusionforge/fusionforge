@@ -71,15 +71,18 @@ class Widget_TrackerContent extends Widget {
 	}
 
 	function create(&$request) {
+		$sanitizer = new TextSanitizer();
 		$hp = Codendi_HTMLPurifier::instance();
 		$this->trackercontent_title = $hp->purify($request->get('title'), CODENDI_PURIFIER_CONVERT_HTML);
 		$trackerrows = getArrayFromRequest('trackercontent_layout');
 		$trackerextrafields = getArrayFromRequest('trackercontent_ef');
+		$trackercelltitles = getArrayFromRequest('trackercontent_title');
 		$res = db_query_params('INSERT INTO artifact_display_widget (owner_id, title) VALUES ($1, $2)', array($this->owner_id, $this->trackercontent_title));
 		$content_id = db_insertid($res, 'artifact_display_widget', 'id');
 		foreach ($trackerrows as $rowkey => $trackerrow) {
 			$columns = explode(',', $trackerrow);
 			$extrafields = explode(',', $trackerextrafields[$rowkey]);
+			$celltitle = explode(',', $trackercelltitles[$rowkey]);
 			$rowid = $rowkey;
 			foreach ($columns as $columnkey => $column) {
 				if ($extrafields[$columnkey] == "fake") {
@@ -87,8 +90,9 @@ class Widget_TrackerContent extends Widget {
 				} else {
 					$extrafieldid = substr($extrafields[$columnkey], 2); //remove prefix ef
 				}
-				db_query_params('INSERT INTO artifact_display_widget_field (id, field_id, column_id, row_id, width) VALUES ($1, $2, $3, $4, $5)',
-						array($content_id, $extrafieldid, $columnkey, $rowid, $column));
+				$section = $sanitizer->SanitizeHtml($celltitle[$columnkey]);
+				db_query_params('INSERT INTO artifact_display_widget_field (id, field_id, column_id, row_id, width, section) VALUES ($1, $2, $3, $4, $5, $6)',
+						array($content_id, $extrafieldid, $columnkey, $rowid, $column, $section));
 			}
 		}
 		return $content_id;
