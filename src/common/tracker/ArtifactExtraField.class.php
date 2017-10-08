@@ -36,10 +36,8 @@ define('ARTIFACT_EXTRAFIELDTYPE_STATUS',7);
 //define('ARTIFACT_EXTRAFIELDTYPE_ASSIGNEE',8);
 define('ARTIFACT_EXTRAFIELDTYPE_RELATION',9);
 define('ARTIFACT_EXTRAFIELDTYPE_INTEGER',10);
-/* reserved for aljeux extension, for merge into FusionForge */
 define('ARTIFACT_EXTRAFIELDTYPE_FORMULA',11);
 define('ARTIFACT_EXTRAFIELDTYPE_DATETIME',12);
-/* 13: reserved SLA */
 define('ARTIFACT_EXTRAFIELDTYPE_SLA',13);
 define('ARTIFACT_EXTRAFIELDTYPE_USER',14);
 define('ARTIFACT_EXTRAFIELDTYPE_MULTIUSER',15);
@@ -129,8 +127,8 @@ class ArtifactExtraField extends FFError {
 	 * @param	bool	$autoassign		True or false whether it triggers auto-assignment rules
 	 * @param	bool	$is_hidden_on_submit	True or false to display the extrafield in the new artifact submit page
 	 * @param	bool	$is_disabled		True or false to enable/disable the extrafield
-	 * @param	int		$aggregation_rule
-	 * @param	int		$distribution_rule
+	 * @param	int	$aggregation_rule
+	 * @param	int	$distribution_rule
 	 * @return	bool	true on success / false on failure.
 	 */
 	function create($name, $field_type, $attribute1, $attribute2, $is_required = false, $alias = '', $show100 = true, $show100label = 'none', $description = '', $pattern = '', $parent = 100, $autoassign = false, $is_hidden_on_submit = false, $is_disabled = false, $aggregation_rule = 0, $distribution_rule = 0) {

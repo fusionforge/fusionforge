@@ -156,14 +156,14 @@ class ArtifactTypeHtml extends ArtifactType {
 	/**
 	 * renderExtraFields - ???
 	 *
-	 * @param	array			$selected
-	 * @param	bool			$show_100			Display the specific '100' value. Default is false.
-	 * @param	string			$text_100			Label displayed for the '100' value. Default is 'none'
-	 * @param	bool			$show_any
-	 * @param	string			$text_any
-	 * @param	array			$types
-	 * @param	bool			$status_show_100	Force display of the '100' value if needed. Default is false.
-	 * @param	string			$mode				QUERY, DISPLAY, UPDATE, NEW
+	 * @param	array	$selected
+	 * @param	bool	$show_100		Display the specific '100' value. Default is false.
+	 * @param	string	$text_100		Label displayed for the '100' value. Default is 'none'
+	 * @param	bool	$show_any
+	 * @param	string	$text_any
+	 * @param	array	$types
+	 * @param	bool	$status_show_100	Force display of the '100' value if needed. Default is false.
+	 * @param	string	$mode			QUERY, DISPLAY, UPDATE, NEW
 	 */
 	function renderExtraFields($selected = array(),
                                $show_100 = false, $text_100 = 'none',
@@ -437,6 +437,8 @@ class ArtifactTypeHtml extends ArtifactType {
 				$str = $this->renderEffort($efarr[$i]['extra_field_id'], $selected[$efarr[$i]['extra_field_id']], $efarr[$i]['attribute1'], $efarr[$i]['attribute2'], $attrs);
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_EFFORTRANGE) {
 				$str = $this->renderEffortRange($efarr[$i]['extra_field_id'], $selected[$efarr[$i]['extra_field_id']], $efarr[$i]['attribute1'], $efarr[$i]['attribute2'], $attrs);
+			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_SLA) {
+				$str = $this->renderSLAField($efarr[$i]['extra_field_id'], $selected[$efarr[$i]['extra_field_id']], $attrs);
 			}
 			$template = str_replace('{$PostName:'.$efarr[$i]['field_name'].'}', $post_name, $template);
 			$template = str_replace('{$'.$efarr[$i]['field_name'].'}', $str, $template);
@@ -1307,22 +1309,22 @@ class ArtifactTypeHtml extends ArtifactType {
 	}
 
 	/**
-	 *	renderFormulaField - this function builds a formula field (RO).
+	 * renderFormulaField - this function builds a formula field (RO).
 	 *
-	 *	@param 		string	$contents The data for this field.
-	 *	@return		string
+	 * @param 	string	$contents The data for this field.
+	 * @return	string
 	 */
 	function renderFormulaField($contents) {
 		return $contents;
 	}
 
 	/**
-	 *	renderSLAField - this function builds a formula field (RO).
+	 * renderSLAField - this function builds a formula field (RO).
 	 *
-	 *  @param	    int	    $extra_field_id	The ID of this field.
-	 *	@param 		string	$contents The data for this field.
-	 *	@param		$ef
-	 *	@return		string
+	 * @param	int	$extra_field_id	The ID of this field.
+	 * @param	string	$contents	The data for this field.
+	 * @param	$ef
+	 * @return	string
 	 */
 	function renderSLAField($extra_field_id, $contents, $ef) {
 		global $aid;
