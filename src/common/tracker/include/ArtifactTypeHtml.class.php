@@ -1495,8 +1495,8 @@ class ArtifactTypeHtml extends ArtifactType {
 		$ids =& util_result_column_to_array($result,0);
 		$names =& util_result_column_to_array($result,1);
 		if ($extra_id != '-1') {
-			$ids[]=$extra_id;
-			$names[]=$extra_name;
+			$ids[] = $extra_id;
+			$names[] = $extra_name;
 		}
 
 		if ($multiple) {
