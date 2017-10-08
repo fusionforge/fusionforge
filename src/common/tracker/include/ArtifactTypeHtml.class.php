@@ -156,14 +156,14 @@ class ArtifactTypeHtml extends ArtifactType {
 	/**
 	 * renderExtraFields - ???
 	 *
-	 * @param	array			$selected
-	 * @param	bool			$show_100			Display the specific '100' value. Default is false.
-	 * @param	string			$text_100			Label displayed for the '100' value. Default is 'none'
-	 * @param	bool			$show_any
-	 * @param	string			$text_any
-	 * @param	array			$types
-	 * @param	bool			$status_show_100	Force display of the '100' value if needed. Default is false.
-	 * @param	string			$mode				QUERY, DISPLAY, UPDATE, NEW
+	 * @param	array	$selected
+	 * @param	bool	$show_100		Display the specific '100' value. Default is false.
+	 * @param	string	$text_100		Label displayed for the '100' value. Default is 'none'
+	 * @param	bool	$show_any
+	 * @param	string	$text_any
+	 * @param	array	$types
+	 * @param	bool	$status_show_100	Force display of the '100' value if needed. Default is false.
+	 * @param	string	$mode			QUERY, DISPLAY, UPDATE, NEW
 	 */
 	function renderExtraFields($selected = array(),
                                $show_100 = false, $text_100 = 'none',
