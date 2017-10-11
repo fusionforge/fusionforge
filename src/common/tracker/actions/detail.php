@@ -39,7 +39,7 @@ echo notepad_func();
 
 echo $HTML->openForm(array('id' => 'trackerdetailform', 'action' => '/tracker/?group_id='.$group_id.'&atid='.$ath->getID(), 'method' => 'post', 'enctype' => 'multipart/form-data'));
 if (session_loggedin()) {
-	echo $HTML->listTableTop(); ?>
+	echo $HTML->listTableTop(array(), array(), 'full'); ?>
 		<tr>
 			<td>
 				<?php
@@ -74,7 +74,7 @@ if (session_loggedin()) {
 		</tr>
 <?php echo $HTML->listTableBottom(); ?>
 <?php }
-echo $HTML->listTableTop(); ?>
+echo $HTML->listTableTop(array(), array(), 'full'); ?>
 		<tr>
 			<td>
 				<strong><?php echo _('Date')._(':'); ?></strong><br />

@@ -51,7 +51,7 @@ echo $HTML->openForm(array('id' => 'trackermodlimitedform', 'action' => '/tracke
 
 <?php
 if (session_loggedin()) {
-echo $HTML->listTableTop();
+echo $HTML->listTableTop(array(), array(), 'full');
 ?>
 		<tr>
 			<td><?php
@@ -93,7 +93,7 @@ echo $HTML->listTableTop();
 <?php echo $HTML->listTableBottom(); ?>
 <br />
 <?php }
-echo $HTML->listTableTop(); ?>
+echo $HTML->listTableTop(array(), array(), 'full'); ?>
 	<tr>
 		<td><strong><?php echo _('Submitted by')._(':'); ?></strong><br />
 			<?php
