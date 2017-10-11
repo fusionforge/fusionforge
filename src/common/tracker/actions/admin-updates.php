@@ -706,10 +706,14 @@ if (getStringFromRequest('add_extrafield')) {
 			$is_default =  getArrayFromRequest('is_default');
 			$is_default = array_keys($is_default);
 		}
-		if ($ac->setDefaultValues($is_default)) {
-			$feedback .= _('Default value(s) Updated');
+		if ($is_default) {
+			if ($ac->setDefaultValues($is_default)) {
+				$feedback .= _('Default value(s) Updated');
+			} else {
+				$error_msg .= _('Update default value(s) failed')._(': ').$ac->getErrorMessage();
+			}
 		} else {
-			$error_msg .= _('Update default value(s) failed')._(': ').$ac->getErrorMessage();
+			$warning_msg .= _('No default value to set.');
 		}
 	}
 
