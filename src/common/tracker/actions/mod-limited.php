@@ -272,9 +272,11 @@ echo $ath->renderFiles($group_id, $ah);
 <div id="tabber-changes" class="tabbertab">
 	<?php echo $ah->showHistory(); ?>
 </div>
+<?php if ($ah->hasRelations()) { ?>
 <div id="tabber-relations" class="tabbertab">
 	<?php echo $ah->showRelations(); ?>
 </div><?php
+}
 if (forge_get_config('use_artefacts_dependencies')) { ?>
 	<div id="tabber-dependencies" class="tabbertab">
 		<?php echo $ah->showDependencies();
