@@ -222,7 +222,7 @@ $nbh = $count? ' ('.$count.')' : '';
 	<?php echo $HTML->listTableTop(); ?>
 		<tr><td colspan="2">
 			<br /><strong><?php echo _('Add A Comment') ?>: <?php echo notepad_button('document.forms.trackermodlimitedform.details') ?></strong><br />
-			<textarea id="tracker-comment" name="details" rows="7" style="width: 100%" title="<?php echo util_html_secure(html_get_tooltip_description('comment')) ?>"></textarea>
+			<textarea id="tracker-comment" name="details" rows="7" style="width: 100%; box-sizing: border-box;" title="<?php echo util_html_secure(html_get_tooltip_description('comment')) ?>"></textarea>
 			<p>
 			<?php
 	echo $ah->showMessages();

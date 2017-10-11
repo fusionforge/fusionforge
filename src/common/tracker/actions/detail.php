@@ -190,7 +190,7 @@ $nbh = $count? ' ('.$count.')' : '';
 				<p>
 				<strong><?php echo _('Add A Comment')._(':'); ?></strong>
 				<?php echo notepad_button('document.forms.trackerdetailform.details') ?><br />
-				<textarea name="details" rows="10" style="width: 100%" ></textarea>
+				<textarea name="details" rows="10" style="width: 100%; box-sizing: border-box;" ></textarea>
 				</p>
 			</td></tr>
 			<?php } ?>

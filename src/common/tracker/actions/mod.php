@@ -303,7 +303,7 @@ $nbh = $count? ' ('.$count.')' : '';
 		/* ]]> */</script>
 		<p>
 		<strong><?php echo _('Post Comment')._(': ') ?><?php echo notepad_button('document.forms.trackermodform.details') ?></strong><br />
-		<textarea id="tracker-comment" name="details" rows="7" style="width: 100%" title="<?php echo util_html_secure(html_get_tooltip_description('comment')) ?>"></textarea></p>
+		<textarea id="tracker-comment" name="details" rows="7" style="width: 100%; box-sizing: border-box;" title="<?php echo util_html_secure(html_get_tooltip_description('comment')) ?>"></textarea></p>
 		<?php echo $ah->showMessages(); ?>
 	</td></tr>
 <?php echo $HTML->listTableBottom(); ?>
