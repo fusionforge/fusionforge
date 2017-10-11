@@ -5,6 +5,7 @@
  * Copyright 1999-2000, Tim Perdue/Sourceforge
  * Copyright 2002, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
+ * Copyright 2017, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -150,7 +151,7 @@ class ForumFactory extends FFError {
 			$this->forums = false;
 		}
 
-		if (isset($result))
+		if (isset($result)) {
 			if (!$result) {
 				$this->setError(db_error());
 				$this->forums = false;
