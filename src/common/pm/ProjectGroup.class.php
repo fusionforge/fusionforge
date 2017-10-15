@@ -134,7 +134,7 @@ class ProjectGroup extends FFError {
 	 * @param	string	$send_all_posts_to	The email address to send new notifications to.
 	 * @return	bool	success.
 	 */
-	function create($project_name,$description,$send_all_posts_to='') {
+	function create($project_name, $description, $send_all_posts_to = '') {
 		if (strlen($project_name) < 3) {
 			$this->setError(sprintf(_('Title Must Be At Least %d Characters'), 3));
 			return false;
