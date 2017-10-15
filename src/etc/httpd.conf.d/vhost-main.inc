@@ -58,6 +58,8 @@ SetEnv FF__core__config_path "${FF__core__config_path}"
 
   RequestHeader unset FusionForgeSessionKey
   RequestHeader append FusionForgeSessionKey "${FF__core__session_key}"
+
+  ErrorDocument 404 /404.php
 </Directory>
 
 # Directory options for vendor dir (${FF__core__source_path}/vendor

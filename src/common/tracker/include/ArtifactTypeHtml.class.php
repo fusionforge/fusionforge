@@ -306,7 +306,7 @@ class ArtifactTypeHtml extends ArtifactType {
 				$efarr[$i]['show100'] = $status_show_100;
 			}
 
-			$allowed=false;
+			$allowed = false;
 
 			if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_SELECT ||
 					$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX ||
@@ -1487,13 +1487,13 @@ class ArtifactTypeHtml extends ArtifactType {
 		}
 	}
 
-	function lastModifierBox($name='last_modified_by[]', $checked='xzxz', $show_100=true, $text_100='none', $extra_id='-1', $extra_name='', $multiple=false) {
+	function lastModifierBox($name = 'last_modified_by[]', $checked = 'xzxz', $show_100 = true, $text_100 = 'none', $extra_id = '-1', $extra_name = '', $multiple = false) {
 		if ($text_100=='none'){
 			$text_100=_('Nobody');
 		}
 		$result = $this->getLastModifiers();
-		$ids =& util_result_column_to_array($result,0);
-		$names =& util_result_column_to_array($result,1);
+		$ids =& util_result_column_to_array($result, 0);
+		$names =& util_result_column_to_array($result, 1);
 		if ($extra_id != '-1') {
 			$ids[] = $extra_id;
 			$names[] = $extra_name;

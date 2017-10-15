@@ -39,7 +39,7 @@ echo notepad_func();
 
 echo $HTML->openForm(array('id' => 'trackerdetailform', 'action' => '/tracker/?group_id='.$group_id.'&atid='.$ath->getID(), 'method' => 'post', 'enctype' => 'multipart/form-data'));
 if (session_loggedin()) {
-	echo $HTML->listTableTop(); ?>
+	echo $HTML->listTableTop(array(), array(), 'full'); ?>
 		<tr>
 			<td>
 				<?php
@@ -74,7 +74,7 @@ if (session_loggedin()) {
 		</tr>
 <?php echo $HTML->listTableBottom(); ?>
 <?php }
-echo $HTML->listTableTop(); ?>
+echo $HTML->listTableTop(array(), array(), 'full'); ?>
 		<tr>
 			<td>
 				<strong><?php echo _('Date')._(':'); ?></strong><br />
@@ -190,7 +190,7 @@ $nbh = $count? ' ('.$count.')' : '';
 				<p>
 				<strong><?php echo _('Add A Comment')._(':'); ?></strong>
 				<?php echo notepad_button('document.forms.trackerdetailform.details') ?><br />
-				<textarea name="details" rows="10" style="width: 100%" ></textarea>
+				<textarea name="details" rows="10" style="width: 100%; box-sizing: border-box;" ></textarea>
 				</p>
 			</td></tr>
 			<?php } ?>
@@ -247,9 +247,11 @@ if ($group->usesPM()) {
 	<div id="tabber-changes" class="tabbertab">
 		<?php echo $ah->showHistory(); ?>
 	</div>
+	<?php if ($ah->hasRelations()) { ?>
 	<div id="tabber-relations" class="tabbertab">
 	<?php echo $ah->showRelations(); ?>
 	</div><?php
+	}
 	if (forge_get_config('use_artefacts_dependencies')) { ?>
 		<div id="tabber-dependencies" class="tabbertab">
 			<?php echo $ah->showDependencies()

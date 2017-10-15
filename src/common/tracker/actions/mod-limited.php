@@ -51,7 +51,7 @@ echo $HTML->openForm(array('id' => 'trackermodlimitedform', 'action' => '/tracke
 
 <?php
 if (session_loggedin()) {
-echo $HTML->listTableTop();
+echo $HTML->listTableTop(array(), array(), 'full');
 ?>
 		<tr>
 			<td><?php
@@ -93,7 +93,7 @@ echo $HTML->listTableTop();
 <?php echo $HTML->listTableBottom(); ?>
 <br />
 <?php }
-echo $HTML->listTableTop(); ?>
+echo $HTML->listTableTop(array(), array(), 'full'); ?>
 	<tr>
 		<td><strong><?php echo _('Submitted by')._(':'); ?></strong><br />
 			<?php
@@ -222,7 +222,7 @@ $nbh = $count? ' ('.$count.')' : '';
 	<?php echo $HTML->listTableTop(); ?>
 		<tr><td colspan="2">
 			<br /><strong><?php echo _('Add A Comment') ?>: <?php echo notepad_button('document.forms.trackermodlimitedform.details') ?></strong><br />
-			<textarea id="tracker-comment" name="details" rows="7" style="width: 100%" title="<?php echo util_html_secure(html_get_tooltip_description('comment')) ?>"></textarea>
+			<textarea id="tracker-comment" name="details" rows="7" style="width: 100%; box-sizing: border-box;" title="<?php echo util_html_secure(html_get_tooltip_description('comment')) ?>"></textarea>
 			<p>
 			<?php
 	echo $ah->showMessages();
@@ -272,9 +272,11 @@ echo $ath->renderFiles($group_id, $ah);
 <div id="tabber-changes" class="tabbertab">
 	<?php echo $ah->showHistory(); ?>
 </div>
+<?php if ($ah->hasRelations()) { ?>
 <div id="tabber-relations" class="tabbertab">
 	<?php echo $ah->showRelations(); ?>
 </div><?php
+}
 if (forge_get_config('use_artefacts_dependencies')) { ?>
 	<div id="tabber-dependencies" class="tabbertab">
 		<?php echo $ah->showDependencies();

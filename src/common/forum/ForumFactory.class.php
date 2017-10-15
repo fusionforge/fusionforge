@@ -5,6 +5,7 @@
  * Copyright 1999-2000, Tim Perdue/Sourceforge
  * Copyright 2002, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
+ * Copyright 2017, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -132,15 +133,14 @@ class ForumFactory extends FFError {
 	 * @return	array	The array of Forum objects.
 	 */
 	function &getForumsAdmin() {
-		if ($this->forums) {
-			return $this->forums;
-		}
-
 		if (session_loggedin()) {
 			if (!forge_check_perm ('forum_admin', $this->Group->getID())) {
 				$this->setError(_('You are not allowed to access this page'));
 				$this->forums = false;
 			} else {
+				if ($this->forums) {
+					return $this->forums;
+				}
 				$result = db_query_params('SELECT * FROM forum_group_list_vw
 							WHERE group_id=$1
 							ORDER BY group_forum_id',
@@ -151,14 +151,20 @@ class ForumFactory extends FFError {
 			$this->forums = false;
 		}
 
-		$rows = db_numrows($result);
-
-		if (!$result || ($rows < 1)) {
-			$this->setError(_('Forum not found')._(': ').db_error());
-			$this->forums = false;
-		} else {
-			while ($arr = db_fetch_array($result)) {
-				$this->forums[] = new Forum($this->Group, $arr['group_forum_id'], $arr);
+		if (isset($result)) {
+			if (!$result) {
+				$this->setError(db_error());
+				$this->forums = false;
+			} else {
+				$rows = db_numrows($result);
+				if ($rows <= 0) {
+					$this->setError(_('No forums found.'));	
+					$this->forums = false;
+				} else {
+					while ($arr = db_fetch_array($result)) {
+						$this->forums[] = new Forum($this->Group, $arr['group_forum_id'], $arr);
+					}
+				}
 			}
 		}
 		return $this->forums;

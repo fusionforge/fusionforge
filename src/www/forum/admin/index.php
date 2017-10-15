@@ -365,8 +365,8 @@ if (getStringFromRequest('add_forum')) {
 
 		$farr = $ff->getForums();
 
-		if ($ff->isError()) {
-			echo $HTML->error_msg(sprintf(_('No Forums Found for %s'), $g->getPublicName()).' '.$ff->getErrorMessage());
+		if (is_array($farr) && count($farr) == 0) {
+			echo $HTML->error_msg(_('No forums found.'));
 			forum_footer();
 			exit;
 		}
@@ -439,8 +439,8 @@ if (getStringFromRequest('add_forum')) {
 
 	$farr = $ff->getForumsAdmin();
 
-	if ($ff->isError()) {
-		echo $HTML->error_msg(sprintf(_('No Forums Found for %s'), $g->getPublicName()).' '.$ff->getErrorMessage());
+	if (!$farr) {
+		echo $HTML->error_msg($ff->getErrorMessage());
 		forum_footer();
 		exit;
 	}
