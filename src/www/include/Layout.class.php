@@ -481,7 +481,7 @@ abstract class Layout extends FFError {
 		if (count($titleArray)) {
 			$ap = html_ap();
 			$return .= html_ao('thead');
-			$return .= html_ao('tr');
+			$return .= html_ao('tr', array('class' => 'tableheading'));
 
 			$count = count($titleArray);
 			for ($i = 0; $i < $count; $i++) {

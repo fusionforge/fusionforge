@@ -94,7 +94,13 @@ class Widget_MyLatestCommits extends Widget {
 						if (strlen($revision['description']) > 255) {
 							$revisionDescription .= ' [...]';
 						}
-						$html .= html_e('div', array('style' => 'border-bottom:1px solid #ddd'),
+						$divattr = array('class' => '', 'style' => 'border-bottom:1px solid #ddd');
+						if ((($key + 1) % 2) == 1) {
+							$divattr['class'] = 'bgcolor-white';
+						} else {
+							$divattr['class'] = 'bgcolor-grey';
+						}
+						$html .= html_e('div', $divattr,
 								html_e('div', array('style' => 'font-size:0.98em'),
 									$this->_getLinkToCommit($project, $revision['commit_id'], $revision['pluginName']).
 									' '._('on').' '.

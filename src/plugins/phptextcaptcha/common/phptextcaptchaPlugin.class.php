@@ -56,10 +56,14 @@ class phptextcaptchaPlugin extends Plugin {
 		if (is_file('/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf')) {
 			//Debian-like
 			$font_path = '/usr/share/fonts/truetype/dejavu/';
-		} else {
+		} elseif (is_file('/usr/share/fonts/dejavu/DejaVuSansMono.ttf')) {
 			//CentOS
 			$font_path = '/usr/share/fonts/dejavu/';
+		} elseif (is_file('/usr/share/fonts/TTF/dejavu/DejaVuSansMono.ttf')) {
+			//Mageia
+			$font_path = '/usr/share/fonts/TTF/dejavu/';
 		}
+
 		$imageOptions = array(
 			'font_size' => 24,
 			'font_path' => $font_path,
@@ -92,7 +96,7 @@ class phptextcaptchaPlugin extends Plugin {
 			unlink($this->pngdir.'/'.$pngfile);
 		}
 		file_put_contents($this->pngdir.'/'.$pngfile, $png);
-		$html = '<p>';
+		$html .= '<p>';
 		$html .= '<img src="/plugins/'.$this->name.'/'.$pngfile.'?'.time().'" />';
 		$html .= '</p><p>';
 		$html .= _('Write captcha here')._(': ').'<br />';
