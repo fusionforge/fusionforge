@@ -23,22 +23,18 @@
 
 require (dirname(__FILE__).'/../www/env.inc.php');
 require_once $gfcommon.'include/pre.php';
+require_once $gfcommon.'include/Plugin.class.php';
+require_once $gfcommon.'include/PluginManager.class.php';
 
-$err = '';
-
-// Plugins subsystem
-require_once 'common/include/Plugin.class.php';
-require_once 'common/include/PluginManager.class.php';
-
-setup_plugin_manager ();
-session_set_admin ();
+setup_plugin_manager();
+session_set_admin();
 
 function usage($rc = 1) {
-	echo "Usage:\n";
+	echo _('Usage')._(':')."\n";
 	echo "\t.../populate_template_project.php 5\n";
 	echo "\t.../populate_template_project.php new unixname groupname\n";
-	echo "The first syntax populates an existing group, with its ID given.\n";
-	echo "The second syntax creates a new template group.\n";
+	echo _('The first syntax populates an existing group, with its ID given.')."\n";
+	echo _('The second syntax creates a new template group.')."\n";
 	exit($rc);
 }
 
@@ -100,22 +96,22 @@ function populateProject($project) {
 
 	if (forge_get_config('use_forum')) {
 		$f1 = new Forum($project);
-		if (!$f1->create(_('Open-Discussion'),_('General Discussion'),1,'',1,0)) {
-			$project->setError(sprintf (_('F%d: %s'), 1, $f1->getErrorMessage()));
+		if (!$f1->create(_('Open-Discussion'),_('General Discussion'),'',1)) {
+			$project->setError(sprintf(_('F%d: %s'), 1, $f1->getErrorMessage()));
 			db_rollback();
 			setup_gettext_from_context();
 			return false;
 		}
 		$f2 = new Forum($project);
-		if (!$f2->create(_('Help'),_('Get Public Help'),1,'',1,0)) {
-			$project->setError(sprintf (_('F%d: %s'), 2, $f2->getErrorMessage()));
+		if (!$f2->create(_('Help'),_('Get Public Help'),'',1)) {
+			$project->setError(sprintf(_('F%d: %s'), 2, $f2->getErrorMessage()));
 			db_rollback();
 			setup_gettext_from_context();
 			return false;
 		}
 		$f3 = new Forum($project);
-		if (!$f3->create(_('Developers-Discussion'),_('Project Developer Discussion'),0,'',1,0)) {
-			$project->setError(sprintf (_('F%d: %s'), 3, $f3->getErrorMessage()));
+		if (!$f3->create(_('Developers-Discussion'),_('Project Developer Discussion'),'',1)) {
+			$project->setError(sprintf(_('F%d: %s'), 3, $f3->getErrorMessage()));
 			db_rollback();
 			setup_gettext_from_context();
 			return false;
@@ -144,14 +140,14 @@ function populateProject($project) {
 
 	if (forge_get_config('use_pm')) {
 		$pg = new ProjectGroup($project);
-		if (!$pg->create(_('To Do'),_('Things We Have To Do'),1)) {
+		if (!$pg->create(_('To Do'),_('Things We Have To Do'))) {
 			$project->setError(sprintf(_('PG%d: %s'), 1, $pg->getErrorMessage()));
 			db_rollback();
 			setup_gettext_from_context();
 			return false;
 		}
 		$pg = new ProjectGroup($project);
-		if (!$pg->create(_('Next Release'),_('Items For Our Next Release'),1)) {
+		if (!$pg->create(_('Next Release'),_('Items For Our Next Release'))) {
 			$project->setError(sprintf(_('PG%d: %s'), 2, $pg->getErrorMessage()));
 			db_rollback();
 			setup_gettext_from_context();
@@ -179,22 +175,16 @@ function populateProject($project) {
 	$ra->setSetting('forum', $f2->getID(), 3);
 	$rl->setSetting('forum', $f2->getID(), 3);
 
-	$pgf = new ProjectGroupFactory ($project);
+	$pgf = new ProjectGroupFactory($project);
 	foreach ($pgf->getAllProjectGroupIds() as $pgid) {
-		$pg = projectgroup_get_object($pgid);
-		if ($pg->isPublic()) {
-			$ra->setSetting('pm', $pgid, 1);
-			$rl->setSetting('pm', $pgid, 1);
-		}
+		$ra->setSetting('pm', $pgid, 1);
+		$rl->setSetting('pm', $pgid, 1);
 	}
 
-	$atf = new ArtifactTypeFactory ($project);
+	$atf = new ArtifactTypeFactory($project);
 	foreach ($atf->getAllArtifactTypeIds() as $atid) {
-		$at = artifactType_get_object ($atid);
-		if ($at->isPublic()) {
-			$ra->setSetting('tracker', $atid, 1);
-			$rl->setSetting('tracker', $atid, 1);
-		}
+		$ra->setSetting('tracker', $atid, 1);
+		$rl->setSetting('tracker', $atid, 1);
 	}
 
 	if (forge_get_config('use_mail')) {
@@ -207,10 +197,9 @@ function populateProject($project) {
 			return false;
 		}
 	}
+
 	$project->normalizeAllRoles();
-
 	db_commit();
-
 	return true;
 }
 
