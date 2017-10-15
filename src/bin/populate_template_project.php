@@ -161,8 +161,8 @@ function populateProject($project) {
 
 	$ra = RoleAnonymous::getInstance();
 	$rl = RoleLoggedIn::getInstance();
-	$ra->linkProject ($project);
-	$rl->linkProject ($project);
+	$ra->linkProject($project);
+	$rl->linkProject($project);
 
 	$ra->setSetting('project_read', $project->getID(), 1);
 	$rl->setSetting('project_read', $project->getID(), 1);
@@ -243,6 +243,7 @@ if (isset($argv[1]) && in_array($argv[1], array('-h', '-?', '--help'))) {
 		exit(1);
 	}
 	if (!populateProject($project)) {
+		db_rollback();
 		echo _('Error')._(': ')._('could not populate new group')._(': ').$project->getErrorMessage()."\n";
 		exit(1);
 	}
