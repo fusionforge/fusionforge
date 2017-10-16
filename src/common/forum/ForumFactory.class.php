@@ -58,7 +58,7 @@ class ForumFactory extends FFError {
 		}
 		if (!$skip_check && !$Group->usesForum()) {
 			$this->setError(sprintf(_('%s does not use the Forum tool.'),
-			    $Group->getPublicName()));
+				$Group->getPublicName()));
 			return;
 		}
 		$this->Group =& $Group;
@@ -74,7 +74,7 @@ class ForumFactory extends FFError {
 	}
 
 	function &getAllForumIds() {
-		$result = array () ;
+		$result = array();
 		$res = db_query_params('SELECT group_forum_id FROM forum_group_list
 					WHERE group_forum_id NOT IN (
 						SELECT group_forum_id FROM forum_group_list WHERE group_forum_id IN (
@@ -83,25 +83,25 @@ class ForumFactory extends FFError {
 					ORDER BY group_forum_id',
 					array($this->Group->getID()));
 		if (!$res) {
-			return $result ;
+			return $result;
 		}
 		while ($arr = db_fetch_array($res)) {
-			$result[] = $arr['group_forum_id'] ;
+			$result[] = $arr['group_forum_id'];
 		}
-		return $result ;
+		return $result;
 	}
 
 	function &getAllForumIdsWithNews() {
-		$result = array () ;
+		$result = array();
 		$res = db_query_params('SELECT group_forum_id FROM forum_group_list WHERE group_id=$1 ORDER BY group_forum_id',
 					array($this->Group->getID()));
 		if (!$res) {
-			return $result ;
+			return $result;
 		}
 		while ($arr = db_fetch_array($res)) {
-			$result[] = $arr['group_forum_id'] ;
+			$result[] = $arr['group_forum_id'];
 		}
-		return $result ;
+		return $result;
 	}
 
 	/**
@@ -144,7 +144,7 @@ class ForumFactory extends FFError {
 				$result = db_query_params('SELECT * FROM forum_group_list_vw
 							WHERE group_id=$1
 							ORDER BY group_forum_id',
-							array($this->Group->getID())) ;
+							array($this->Group->getID()));
 			}
 		} else {
 			$this->setError(_('You are not allowed to access this page'));
@@ -158,7 +158,7 @@ class ForumFactory extends FFError {
 			} else {
 				$rows = db_numrows($result);
 				if ($rows <= 0) {
-					$this->setError(_('No forums found.'));	
+					$this->setError(_('No forums found.'));
 					$this->forums = false;
 				} else {
 					while ($arr = db_fetch_array($result)) {
