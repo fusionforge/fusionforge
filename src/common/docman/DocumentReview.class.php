@@ -245,7 +245,7 @@ class DocumentReview extends FFError {
 
 	function showCompleteFormHTML() {
 		global $HTML;
-		$return = $HTML->listTableTop();
+		$return = $HTML->listTableTop(array(), array(), 'full');
 		$cells = array();
 		$cells[] = array(_('Close the review')._(':'), 'style' => 'width: 30%;');
 		$cells[][] = html_e('input', array('type' => 'checkbox', 'name' => 'review-completedchecked', 'value' => 1));
@@ -292,7 +292,7 @@ class DocumentReview extends FFError {
 			}
 			$date_format_js = _('yy-mm-dd');
 			$return = html_ao('div', array('style' => 'display: none;', 'id' => 'editfile-createreview'));
-			$return .= $HTML->listTableTop();
+			$return .= $HTML->listTableTop(array(), array(), 'full');
 			$cells = array();
 			$cells[] = array(_('Title').utils_requiredField()._(':'), 'style' => 'width: 30%;');
 			$cells[][] = html_e('input', array('type' => 'text', 'id' => 'review-title', 'name' => 'review-title', 'style' => 'width: 100%; box-sizing: border-box;', 'required' => 'required', 'pattern' => '.{5,}', 'placeholder' => _('Title').' '.sprintf(_('(at least %s characters)'), DOCMAN__REVIEW_TITLE_MIN_SIZE), 'maxlength' => DOCMAN__REVIEW_TITLE_MAX_SIZE));
