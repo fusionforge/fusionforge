@@ -708,6 +708,7 @@ class DocumentGroup extends FFError {
 				$returnPath .= '/'.$this->getName();
 			}
 		}
+		$returnPath = preg_replace('/\/\//','/', $returnPath);
 		return $returnPath;
 	}
 
