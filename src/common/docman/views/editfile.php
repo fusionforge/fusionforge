@@ -88,7 +88,7 @@ $thClass = array('', '', '', '', '', '', '', '', 'unsortable');
 echo $HTML->listTableTop($thArr, array(), 'sortable full', 'sortable_doc_version_table', $thClass, $thTitle, $thSizeCssArr);
 echo $HTML->listTableBottom();
 echo html_e('button', array('id' => 'doc_version_addbutton', 'type' => 'button', 'onclick' => 'javascript:controllerListFile.toggleAddVersionView()'), _('Add new version'));
-echo $HTML->listTableTop(array(), array(), 'listing full hide', 'doc_version_edit');
+echo $HTML->listTableTop(array(), array(), 'full hide', 'doc_version_edit');
 $cells = array();
 $cells[] = array(_('Document Title').utils_requiredField()._(':'), 'class' => 'docman_editfile_title', 'style' => 'width: 40%');
 $cells[][] = html_e('input', array('pattern' => '.{5,}', 'required' => 'required', 'title' => sprintf(_('(at least %s characters)'), 5), 'id' => 'title', 'type' => 'text', 'name' => 'title', 'maxlength' => '255', 'style' => 'box-sizing: border-box; width: 100%'));
