@@ -7,7 +7,7 @@
  * Copyright (C) 2010 Alcatel-Lucent
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2016, Franck Villaume - TrivialDev
+ * Copyright 2012-2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -184,9 +184,7 @@ if ($DocGroupName) {
 	if ($childgroup_id) {
 		$headerPath .= _('Subproject')._(': ').util_make_link('/docman/?group_id='.$g->getID(), $g->getPublicName()).'::';
 	}
-	$generalpath = $dgpath.'/'.$DocGroupName;
-	$generalpath = preg_replace('/\/\//','/', $generalpath);
-	$headerPath .= html_e('i', array(), $generalpath, false);
+	$headerPath .= html_e('i', array(), preg_replace('/\/\//','/', $dgpath.'/'.$DocGroupName), false);
 	echo html_e('h2', array('class' => 'docman_h2'), $headerPath, false);
 	$max = ($nbDocs > ($start + $paging)) ? ($start + $paging) : $nbDocs;
 	echo $HTML->paging_top($start, $paging, $nbDocs, $max, $redirecturl, array('style' => 'display:inline-block'));

@@ -91,13 +91,11 @@ class Widget_ProjectLatestDocuments extends Widget {
 					$doc =& $df->Documents[$key][$i];
 					$updatedate = $doc->getUpdated();
 					$createdate = $doc->getCreated();
-					$realdate = ($updatedate >= $createdate) ? $updatedate : $createdate;
 					$filename = $doc->getFileName();
 					$filetype = $doc->getFileType();
 					$docid = $doc->getID();
 					$docgroup = $doc->getDocGroupID();
 					$ndg = documentgroup_get_object($docgroup, $group_id);
-					$path = $ndg->getPath(true, true);
 					switch ($filetype) {
 						case "URL": {
 							$docurl = util_make_link($filename, html_image($doc->getFileTypeImage(), 22, 22, array('alt'=>$doc->getFileType())), array(), true);
@@ -108,12 +106,12 @@ class Widget_ProjectLatestDocuments extends Widget {
 						}
 					}
 					$cells = array();
-					$cells[][] = date(_('Y-m-d'), $realdate);
+					$cells[][] = date(_('Y-m-d'), ($updatedate >= $createdate) ? $updatedate : $createdate);
 					$cells[][] = $docurl;
 					$cells[][] = $filename;
 					$cells[] = array($doc->getName(), 'title' => $doc->getDescription());
 					$cells[][] = util_display_user($doc->getCreatorUserName(), $doc->getCreatorID(), $doc->getCreatorRealName());
-					$cells[][] = $path;
+					$cells[][] = $ndg->getPath(true, true);
 					if (session_loggedin()) {
 						$cells[][] = $doc->getStateName();
 						$action = '';
