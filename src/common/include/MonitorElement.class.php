@@ -2,7 +2,7 @@
 /**
  * FusionForge MonitorElement Object
  *
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2017, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -64,7 +64,7 @@ class MonitorElement extends FFError {
 				$this->_getMonitorCounterIntegerQuery = 'select count(docgroup_monitored_docman.user_id) as count from docgroup_monitored_docman, users where users.user_id = docgroup_monitored_docman.user_id and docgroup_id = $1 and users.status = $2';
 				$this->_getMonitorUsersIdsInArrayQuery = 'select docgroup_monitored_docman.user_id from docgroup_monitored_docman, users where users.user_id = docgroup_monitored_docman.user_id and docgroup_id = $1 and users.status = $2';
 				$this->_getMonitoredByUserIdInArrayQuery = 'select docgroup_id from docgroup_monitored_docman where user_id = $1';
-				$this->_getMonitoredDistinctGroupIdsByUserIdInArrayQuery = 'select distinct doc_groups.group_id from groups, doc_groups, docgroup_monitored_docman where docgroup_monitored_docman.docgroup_id = doc_groups.doc_group and groups.group_id = doc_groups.group_id and docgroup_monitored_docman.user_id = $1';
+				$this->_getMonitoredDistinctGroupIdsByUserIdInArrayQuery = 'select distinct doc_groups.group_id from groups, doc_groups, docgroup_monitored_docman where docgroup_monitored_docman.docgroup_id = doc_groups.doc_group and groups.group_id = doc_groups.group_id and docgroup_monitored_docman.user_id = $1 and groups.status = $2';
 				$this->_getMonitoredIdsByGroupIdByUserIdInArrayQuery = 'select doc_groups.doc_group from doc_groups, docgroup_monitored_docman where doc_groups.doc_group = docgroup_monitored_docman.docgroup_id and doc_groups.group_id = $1 and docgroup_monitored_docman.user_id = $2';
 				$this->_isMonitoredByAnyQuery = 'select docgroup_id, docgroup_monitored_docman.user_id from docgroup_monitored_docman, users where users.user_id = docgroup_monitored_docman.user_id and docgroup_id = $1 and users.status = $2';
 				$this->_isMonitoredByUserIdQuery = 'select docgroup_id from docgroup_monitored_docman where docgroup_id = $1 and user_id = $2';
