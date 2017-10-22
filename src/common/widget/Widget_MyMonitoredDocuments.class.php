@@ -128,7 +128,7 @@ class Widget_MyMonitoredDocuments extends Widget {
 	}
 
 	function getDescription() {
-		return _('List documents that you are currently monitoring, by project.')
+		return _('List documents/folders that you are currently monitoring, by project.')
 			.'<br />'
 			._('To cancel any of the monitored items just click on the trash icon next to the item label.');
 	}
