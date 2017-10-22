@@ -472,6 +472,10 @@ p.information {
 	background-image: url('../../images/widget/widget-preview-favorites.png');
 }
 
+.widget-preview-mymonitoreddocuments-en_US {
+	background-image: url('../../images/widget/widget-preview-monitored_documents-en_US.png');
+}
+
 .widget-preview-mymonitoredfp-fr_FR {
 	background-image: url('../../images/widget/widget-preview-monitored_files-fr_FR.png');
 }
