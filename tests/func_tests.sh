@@ -68,7 +68,12 @@ install_selenium() {
 	# rsyslog to get e.g. sshd error log
 	if [ -e /etc/debian_version ]; then
 		apt-get -y install wget default-jre iceweasel
-		apt-get -y install phpunit phpunit-selenium patch psmisc patch rsyslog
+		if grep -q ^8 /etc/debian_version; then
+		    apt-get -y install phpunit phpunit-selenium patch psmisc patch rsyslog
+		else
+		    apt-get -y install php-curl unzip composer patch psmisc patch rsyslog
+		    composer --no-plugins --no-scripts require phpunit/phpunit-selenium
+		fi
 	else
 		yum -y install wget firefox
 		if yum list java-1.7.0-openjdk >/dev/null 2>&1 ; then
