@@ -32,7 +32,7 @@ fi
 # ?
 sed -i -e 's/lxc.cap.drop = mac_admin mac_override.*/lxc.cap.drop = mac_admin mac_override/' /usr/share/lxc/config/centos.common.conf
 # Don't expire root password
-sed -i -e 's/^ *chroot $rootfs_path passwd -e root/# DISABLED # &/' /usr/share/lxc/templates/lxc-centos
+sed -i -e 's/^ *chroot $rootfs_path passwd -e root/echo # DISABLED # &/' /usr/share/lxc/templates/lxc-centos
 
 # Get variables
 case $host in
