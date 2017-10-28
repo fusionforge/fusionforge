@@ -71,7 +71,7 @@ install_selenium() {
 		if grep -q ^8 /etc/debian_version; then
 		    apt-get -y install phpunit phpunit-selenium patch psmisc patch rsyslog
 		else
-		    apt-get -y install php-curl unzip composer patch psmisc patch rsyslog
+		    apt-get -y install phpunit php-curl unzip composer patch psmisc patch rsyslog
 		    composer --no-plugins --no-scripts require phpunit/phpunit-selenium
 		fi
 	else
