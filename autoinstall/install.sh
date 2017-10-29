@@ -41,12 +41,12 @@ if [ -e /etc/debian_version ]; then
 		# Additional components for testsuite
 		$APT install fusionforge-shell fusionforge-scm fusionforge-ftp \
 		fusionforge-plugin-scmcvs fusionforge-plugin-scmsvn fusionforge-plugin-scmgit fusionforge-plugin-scmbzr fusionforge-plugin-scmhg \
-		fusionforge-plugin-moinmoin \
+		fusionforge-plugin-moinmoin fusionforge-plugin-mediawiki \
 		fusionforge-plugin-blocks fusionforge-plugin-taskboard \
 		fusionforge-plugin-message fusionforge-plugin-repositoryapi
 		$APT install dpkg-dev
 		if ! dpkg-vendor --is Ubuntu; then
-		apt-get install locales-all  # https://bugs.launchpad.net/ubuntu/+source/glibc/+bug/1394929
+			apt-get install locales-all  # https://bugs.launchpad.net/ubuntu/+source/glibc/+bug/1394929
 		fi
 	fi
 elif [ -e /etc/SuSE-release ]; then
