@@ -31,28 +31,28 @@ if [ -e /etc/debian_version ]; then
 	backports_deb
 	apt-get update
 	if grep -q ^8 /etc/debian_version; then
-	    apt-get install -y make gettext php5-cli php5-pgsql php-htmlpurifier php-http php-text-captcha \
-		    libapache2-mpm-itk libapache2-mod-svn \
-		    libapache2-mod-php5 \
-		    apache2 postgresql postgresql-contrib libnss-pgsql2 unscd \
-		    cvs subversion viewvc python-pycurl git mercurial xinetd \
-		    python-moinmoin libapache2-mod-wsgi python-psycopg2 \
-		    unoconv poppler-utils dpkg-dev \
-		    libmarkdown-php \
-		    vsftpd \
-		    fonts-dejavu-core
-	    apt-get -y install mediawiki -t jessie-backports
+		apt-get install -y make gettext php5-cli php5-pgsql php-htmlpurifier php-http php-text-captcha \
+			libapache2-mpm-itk libapache2-mod-svn \
+			libapache2-mod-php5 \
+			apache2 postgresql postgresql-contrib libnss-pgsql2 unscd \
+			cvs subversion viewvc python-pycurl git mercurial xinetd \
+			python-moinmoin libapache2-mod-wsgi python-psycopg2 \
+			unoconv poppler-utils dpkg-dev \
+			libmarkdown-php \
+			vsftpd \
+			fonts-dejavu-core
+		apt-get -y install mediawiki -t jessie-backports
 	else
-	    apt-get install -y make gettext php-cli php-pgsql php-htmlpurifier php-http php-text-captcha \
-		    libapache2-mpm-itk libapache2-mod-svn \
-		    libapache2-mod-php \
-		    apache2 postgresql postgresql-contrib libnss-pgsql2 unscd \
-		    cvs subversion viewvc python-pycurl git mercurial xinetd \
-		    python-moinmoin libapache2-mod-wsgi python-psycopg2 \
-		    unoconv poppler-utils dpkg-dev \
-		    libmarkdown-php \
-		    vsftpd \
-		    fonts-dejavu-core mediawiki
+		apt-get install -y make gettext php-cli php-pgsql php-htmlpurifier php-http php-text-captcha \
+			libapache2-mpm-itk libapache2-mod-svn \
+			libapache2-mod-php \
+			apache2 postgresql postgresql-contrib libnss-pgsql2 unscd \
+			cvs subversion viewvc python-pycurl git mercurial xinetd \
+			python-moinmoin libapache2-mod-wsgi python-psycopg2 \
+			unoconv poppler-utils dpkg-dev \
+			libmarkdown-php \
+			vsftpd \
+			fonts-dejavu-core mediawiki
 	fi
 	if ! dpkg-vendor --is Ubuntu; then
 		apt-get install locales-all  # https://bugs.launchpad.net/ubuntu/+source/glibc/+bug/1394929
