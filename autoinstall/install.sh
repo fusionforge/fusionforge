@@ -70,7 +70,7 @@ else
 		yum --enablerepo=epel install -y fusionforge fusionforge-shell fusionforge-scm fusionforge-ftp \
 		fusionforge-plugin-scmcvs fusionforge-plugin-scmsvn fusionforge-plugin-scmgit fusionforge-plugin-scmhg \
 		fusionforge-plugin-blocks fusionforge-plugin-taskboard \
-		fusionforge-plugin-message fusionforge-plugin-moinmoin \
+		fusionforge-plugin-message fusionforge-plugin-moinmoin fusionforge-plugin-mediawiki\
 		fusionforge-plugin-globalactivity fusionforge-plugin-repositoryapi
 	fi
 fi
