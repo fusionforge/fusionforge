@@ -196,7 +196,7 @@ EOF
 echo "Starting Selenium"
 killall -9 java || true
 timeout=60
-PATH=/usr/lib/iceweasel:/usr/lib64/firefox:$PATH LANG=C java -jar /usr/share/selenium/selenium-server.jar -trustAllSSLCertificates -singleWindow &
+PATH=/usr/lib/iceweasel:/usr/lib/firefox-esr:/usr/lib64/firefox:$PATH LANG=C java -jar /usr/share/selenium/selenium-server.jar -trustAllSSLCertificates -singleWindow &
 pid=$!
 i=0
 while [ $i -lt $timeout ] && ! netstat -tnl 2>/dev/null | grep -q :4444 && kill -0 $pid 2>/dev/null; do
