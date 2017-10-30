@@ -3,7 +3,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 	define('PHPUnit_MAIN_METHOD', 'AllTests::main');
 }
 
-if (@include_once '/usr/share/php/vendor/autoload.php') {
+if (@include_once '/usr/local/share/php/vendor/autoload.php') {
 	$phpunitversion = 6;
 	class PHPUnit_Framework_TestSuite extends PHPUnit\Framework\TestSuite {}
 	class PHPUnit_Framework_TestCase extends PHPUnit\Framework\TestCase {}
