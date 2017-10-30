@@ -7,10 +7,12 @@ if (@include_once '/usr/local/share/php/vendor/autoload.php') {
 	$phpunitversion = 6;
 	class PHPUnit_Framework_TestSuite extends PHPUnit\Framework\TestSuite {}
 	class PHPUnit_Framework_TestCase extends PHPUnit\Framework\TestCase {}
-} elseif (!@include_once 'PHPUnit/Autoload.php') {
+} else {
 	$phpunitversion = 4;
-	include_once 'PHPUnit/Framework.php';
-	require_once 'PHPUnit/TextUI/TestRunner.php';
+	if (!@include_once 'PHPUnit/Autoload.php') {
+		include_once 'PHPUnit/Framework.php';
+		require_once 'PHPUnit/TextUI/TestRunner.php';
+	}
 }
 
 class AllTests
