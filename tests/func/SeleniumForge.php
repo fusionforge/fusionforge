@@ -53,6 +53,7 @@ require_once $config;
 
 if ($phpunitversion == 4) {
 	require_once 'PHPUnit/Extensions/SeleniumTestCase.php';
+} else {
 	class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit\Extensions\SeleniumTestCase {}
 }
 
