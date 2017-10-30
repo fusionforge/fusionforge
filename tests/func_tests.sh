@@ -71,15 +71,19 @@ install_selenium() {
 		if grep -q ^8 /etc/debian_version; then
 		    apt-get -y install phpunit phpunit-selenium patch psmisc patch rsyslog
 		else
-		    apt-get -y install phpunit php-curl unzip composer patch psmisc patch rsyslog
+		    apt-get -y install php-curl unzip composer patch psmisc patch rsyslog
+		    mkdir -p /usr/local/share/php
+		    pushd /usr/local/share/php
+		    composer --no-plugins --no-scripts require phpunit/phpunit
 		    composer --no-plugins --no-scripts require phpunit/phpunit-selenium
+		    popd
 		fi
 	else
 		yum -y install wget firefox
 		if yum list java-1.7.0-openjdk >/dev/null 2>&1 ; then
-		yum install -y java-1.7.0-openjdk
+		    yum install -y java-1.7.0-openjdk
 		else
-		yum install -y java-1.6.0
+		    yum install -y java-1.6.0
 		fi
 		yum --enablerepo=epel install -y php-phpunit-PHPUnit php-phpunit-PHPUnit-Selenium psmisc patch net-tools
 	fi
@@ -100,7 +104,8 @@ install_selenium() {
 	grep -q "^$(hostname -i).*$(forge_get_config scm_host)" /etc/hosts || sed -i -e "s/^$(hostname -i).*/& $(forge_get_config scm_host)/" /etc/hosts
 
 	# Fix screenshot default black background (/usr/share/{php,pear}) (fix available upstream)
-	patch -N /usr/share/*/PHPUnit/Extensions/SeleniumTestCase.php <<'EOF' || true
+	if [ -e /usr/share/*/PHPUnit/Extensions/SeleniumTestCase.php ] ; then
+	    patch -N /usr/share/*/PHPUnit/Extensions/SeleniumTestCase.php <<'EOF' || true
 --- /usr/share/php/PHPUnit/Extensions/SeleniumTestCase.php-dist	2014-02-10 19:48:34.000000000 +0000
 +++ /usr/share/php/PHPUnit/Extensions/SeleniumTestCase.php	2014-09-01 10:09:38.823051288 +0000
 @@ -1188,7 +1188,7 @@
@@ -113,6 +118,7 @@ install_selenium() {
              return 'Screenshot: ' . $this->screenshotUrl . '/' .
                     $this->testId . ".png\n";
 EOF
+	fi
 }
 
 # Mitigate testsuite timeouts, cf.
@@ -190,7 +196,7 @@ EOF
 echo "Starting Selenium"
 killall -9 java || true
 timeout=60
-PATH=/usr/lib/iceweasel:/usr/lib64/firefox:$PATH LANG=C java -jar /usr/share/selenium/selenium-server.jar -trustAllSSLCertificates -singleWindow &
+PATH=/usr/lib/iceweasel:/usr/lib/firefox-esr:/usr/lib64/firefox:$PATH LANG=C java -jar /usr/share/selenium/selenium-server.jar -trustAllSSLCertificates -singleWindow &
 pid=$!
 i=0
 while [ $i -lt $timeout ] && ! netstat -tnl 2>/dev/null | grep -q :4444 && kill -0 $pid 2>/dev/null; do
@@ -226,7 +232,13 @@ if [ -n "$1" ] ; then
 	testname="$1"
 fi
 
-timeout 2h phpunit --verbose --debug --stop-on-failure --log-junit $SELENIUM_RC_DIR/phpunit-selenium.xml $testname || retcode=$?
+if [ -x /usr/local/share/php/vendor/bin/phpunit ] ; then
+    phpunit=/usr/local/share/php/vendor/bin/phpunit
+else
+    phpunit=phpunit
+fi
+
+timeout 2h $phpunit --verbose --debug --stop-on-failure --log-junit $SELENIUM_RC_DIR/phpunit-selenium.xml $testname || retcode=$?
 
 set +x
 echo "phpunit returned with code $retcode"

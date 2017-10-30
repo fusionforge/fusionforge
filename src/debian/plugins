@@ -27,7 +27,7 @@ Depends: mercurial
 Recommends: fusionforge-scm
 
 Package: fusionforge-plugin-mediawiki
-Depends: php-cli | php5-cli, mediawiki (>= 1:1.19.1-2~exp2)
+Depends: php-cli | php5-cli, mediawiki
 
 Package: fusionforge-plugin-moinmoin
 Depends: php-cli | php5-cli, python-moinmoin, python-psycopg2, libapache2-mod-wsgi

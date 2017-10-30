@@ -75,6 +75,7 @@ function build_deb {
 	Subkey-Length: 2048
 	Name-Real: FusionForge
 	Expire-Date: 0
+	%no-protection
 	%commit
 	EOF
     fi

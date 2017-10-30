@@ -31,6 +31,7 @@ if [ -e /etc/debian_version ]; then
 	export LANG=C
 	APT="apt-get -y -o Dpkg::Options::=--force-confnew"
 	backports_deb
+	apt-get update
 	if dpkg-query -s fusionforge >/dev/null 2>&1; then
 		# Already installed, upgrading
 		$APT dist-upgrade
@@ -70,7 +71,7 @@ else
 		yum --enablerepo=epel install -y fusionforge fusionforge-shell fusionforge-scm fusionforge-ftp \
 		fusionforge-plugin-scmcvs fusionforge-plugin-scmsvn fusionforge-plugin-scmgit fusionforge-plugin-scmhg \
 		fusionforge-plugin-blocks fusionforge-plugin-taskboard \
-		fusionforge-plugin-message fusionforge-plugin-moinmoin \
+		fusionforge-plugin-message fusionforge-plugin-moinmoin fusionforge-plugin-mediawiki\
 		fusionforge-plugin-globalactivity fusionforge-plugin-repositoryapi
 	fi
 fi

@@ -29,9 +29,6 @@ class PluginMediawiki extends FForge_SeleniumTestCase
 
 	function testMediawiki()
 	{
-		// $this->skip_on_deb_installs();
-		$this->skip_on_rpm_installs();
-
 		$this->loadAndCacheFixture();
 
 		$this->changeConfig(array("mediawiki" => array("unbreak_frames" => "yes")));
