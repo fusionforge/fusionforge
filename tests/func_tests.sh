@@ -81,9 +81,9 @@ install_selenium() {
 	else
 		yum -y install wget firefox
 		if yum list java-1.7.0-openjdk >/dev/null 2>&1 ; then
-		yum install -y java-1.7.0-openjdk
+		    yum install -y java-1.7.0-openjdk
 		else
-		yum install -y java-1.6.0
+		    yum install -y java-1.6.0
 		fi
 		yum --enablerepo=epel install -y php-phpunit-PHPUnit php-phpunit-PHPUnit-Selenium psmisc patch net-tools
 	fi
