@@ -72,8 +72,11 @@ install_selenium() {
 		    apt-get -y install phpunit phpunit-selenium patch psmisc patch rsyslog
 		else
 		    apt-get -y install php-curl unzip composer patch psmisc patch rsyslog
+		    mkdir -p /usr/local/share/php
+		    pushd /usr/local/share/php
 		    composer --no-plugins --no-scripts require phpunit/phpunit
 		    composer --no-plugins --no-scripts require phpunit/phpunit-selenium
+		    popd
 		fi
 	else
 		yum -y install wget firefox
@@ -229,8 +232,8 @@ if [ -n "$1" ] ; then
 	testname="$1"
 fi
 
-if [ -x /usr/share/php/vendor/bin/phpunit ] ; then
-    phpunit=/usr/share/php/vendor/bin/phpunit
+if [ -x /usr/local/share/php/vendor/bin/phpunit ] ; then
+    phpunit=/usr/local/share/php/vendor/bin/phpunit
 else
     phpunit=phpunit
 fi
