@@ -71,7 +71,8 @@ install_selenium() {
 		if grep -q ^8 /etc/debian_version; then
 		    apt-get -y install phpunit phpunit-selenium patch psmisc patch rsyslog
 		else
-		    apt-get -y install phpunit php-curl unzip composer patch psmisc patch rsyslog
+		    apt-get -y install php-curl unzip composer patch psmisc patch rsyslog
+		    composer --no-plugins --no-scripts require phpunit/phpunit
 		    composer --no-plugins --no-scripts require phpunit/phpunit-selenium
 		fi
 	else
@@ -100,7 +101,8 @@ install_selenium() {
 	grep -q "^$(hostname -i).*$(forge_get_config scm_host)" /etc/hosts || sed -i -e "s/^$(hostname -i).*/& $(forge_get_config scm_host)/" /etc/hosts
 
 	# Fix screenshot default black background (/usr/share/{php,pear}) (fix available upstream)
-	patch -N /usr/share/*/PHPUnit/Extensions/SeleniumTestCase.php <<'EOF' || true
+	if [ -e /usr/share/*/PHPUnit/Extensions/SeleniumTestCase.php ] ; then
+	    patch -N /usr/share/*/PHPUnit/Extensions/SeleniumTestCase.php <<'EOF' || true
 --- /usr/share/php/PHPUnit/Extensions/SeleniumTestCase.php-dist	2014-02-10 19:48:34.000000000 +0000
 +++ /usr/share/php/PHPUnit/Extensions/SeleniumTestCase.php	2014-09-01 10:09:38.823051288 +0000
 @@ -1188,7 +1188,7 @@
@@ -113,6 +115,7 @@ install_selenium() {
              return 'Screenshot: ' . $this->screenshotUrl . '/' .
                     $this->testId . ".png\n";
 EOF
+	fi
 }
 
 # Mitigate testsuite timeouts, cf.
@@ -226,7 +229,13 @@ if [ -n "$1" ] ; then
 	testname="$1"
 fi
 
-timeout 2h phpunit --verbose --debug --stop-on-failure --log-junit $SELENIUM_RC_DIR/phpunit-selenium.xml $testname || retcode=$?
+if [ -x /usr/share/php/vendor/bin/phpunit ] ; then
+    phpunit=/usr/share/php/vendor/bin/phpunit
+else
+    phpunit=phpunit
+fi
+
+timeout 2h $phpunit --verbose --debug --stop-on-failure --log-junit $SELENIUM_RC_DIR/phpunit-selenium.xml $testname || retcode=$?
 
 set +x
 echo "phpunit returned with code $retcode"

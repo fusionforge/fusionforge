@@ -51,7 +51,10 @@ define('FORGE_OTHER_PASSWORD', 'toto_Tata8');
 $config = dirname(__FILE__).'/config.php';
 require_once $config;
 
-require_once 'PHPUnit/Extensions/SeleniumTestCase.php';
+if ($phpunitversion == 4) {
+	require_once 'PHPUnit/Extensions/SeleniumTestCase.php';
+	class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit\Extensions\SeleniumTestCase {}
+}
 
 class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 {
