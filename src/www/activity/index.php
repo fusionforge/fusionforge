@@ -254,7 +254,7 @@ echo $HTML->closeForm();
 			$cells[][] = date('H:i:s',$arr['activity_date']);
 			$cells[][] = $displayinfo;
 			if (isset($arr['user_name']) && $arr['user_name']) {
-				$cells[][] = util_display_user($arr['user_name'], $arr['user_id'],$arr['realname']);
+				$cells[][] = util_display_user($arr['user_name'], $arr['user_id'], $arr['realname']);
 			} else {
 				$cells[][] = $arr['realname'];
 			}

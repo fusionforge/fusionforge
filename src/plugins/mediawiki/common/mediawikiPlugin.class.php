@@ -381,7 +381,7 @@ _('This plugin allows each project to embed Mediawiki under a tab.');
                                                         .'&rcstart='.date('Y-m-d\TH:i:s\Z',$params['end'])
                                                         .'&rcend='.date('Y-m-d\TH:i:s\Z',$params['begin'])
 							.'&rclimit=500'
-							.'rcprop=user|type|ns|title|ids|timestamp';
+							.'rcprop=user|title|ids|timestamp';
                                 $filename = tempnam('/tmp', 'mediawikilog');
                                 $f = fopen($filename, 'w');
                                 $ch = curl_init();
@@ -419,7 +419,13 @@ _('This plugin allows each project to embed Mediawiki under a tab.');
                                                 }
                                                 $title .= $recentchanges['title'];
                                                 $result['title'] = $title;
-						$result['icon'] = html_abs_image(util_make_url('/plugins/'.$this->name.'/wiki/'.$project->getUnixName().'/skins/monobook/wiki.png'),'20','20',array('alt'=>'Mediawiki'));
+						$result['icon'] = html_abs_image('/plugins/'.$this->name.'/wiki/'.$project->getUnixName().'/skins/monobook/wiki.png','20','20',array('alt'=>'Mediawiki'));
+						if (isset($recentchanges['user'])) {
+	                                        	$userObject = user_get_object_by_name(strtolower($recentchanges['user']));
+                                        		if (is_a($userObject, 'FFUser')) {
+                                                		$result['realname'] = util_display_user($userObject->getUnixName(), $userObject->getID(), $userObject->getRealName());
+                                        		}
+						}
                                                 $params['results'][] = $result;
                                         }
                                 }
