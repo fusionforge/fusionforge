@@ -3,7 +3,7 @@
  * Change user's email page
  *
  * Copyright 1999-2001 (c) VA Linux Systems
- * Copyright 2010, 2014, Franck Villaume - TrivialDev
+ * Copyright 2010,2014,2017, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -40,7 +40,7 @@ if (getStringFromRequest('submit')) {
 		exit_error(_('Invalid Email Address'),'my');
 	}
 
-	$confirm_hash = substr(md5($GLOBALS['session_ser'] . time()),0,16);
+	$confirm_hash = substr(md5($GLOBALS['session_ser'].time()), 0, 16);
 
 	$u = user_get_object(user_getid());
 	if (!$u || !is_object($u)) {
@@ -58,18 +58,18 @@ if (getStringFromRequest('submit')) {
 
 	$message = sprintf(_('You have requested a change of email address on %s.'), forge_get_config('forge_name'))
 			. "\n\n"
-			. _('Please visit the following URL to complete the email change:')
+			. _('Please visit the following URL to complete the email change')._(':')
 			. "\n\n"
 			.  util_make_url('/account/change_email-complete.php?ch='.$confirm_hash)
 			. "\n\n"
 			. sprintf(_('-- the %s staff'), forge_get_config('forge_name'));
 
-	util_send_message($newemail,sprintf(_('%s Verification'), forge_get_config ('forge_name')),$message);
+	util_send_message($newemail, sprintf(_('%s Verification'), forge_get_config ('forge_name')), $message);
 
-	site_user_header(array('title'=>_('Email Change Confirmation')));
+	site_user_header(array('title' => _('Email Change Confirmation')));
 
 	echo html_e('p', array(), _('An email has been sent to the new address. Follow the instructions in the email to complete the email change.'));
-	echo util_make_link('/', '[ '._('Home').' ]');
+	echo util_make_link('/account/', '[ '._('Home').' ]');
 } else {
 	//show form
 	site_user_header(array('title'=>_('Email change')));
@@ -83,7 +83,7 @@ if (getStringFromRequest('submit')) {
 				html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Send Confirmation to New Address'))));
 	echo $HTML->closeForm();
 	echo $HTML->addRequiredFieldsInfoBox();
-	echo html_e('p', array(), util_make_link('/', _('Return')));
+	echo html_e('p', array(), util_make_link('/account/', _('Return')));
 }
 site_user_footer();
 
