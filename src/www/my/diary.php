@@ -182,7 +182,7 @@ if (!session_loggedin()) {
 	echo html_e('input', array('type' => 'hidden', 'name' => 'form_key', 'value' => form_generate_key()));
 	echo html_e('input', array('type' => 'hidden', 'name' => $proc_str, 'value' => '1'));
 	echo html_e('input', array('type' => 'hidden', 'name' => 'diary_id', 'value' => $_diary_id));
-	echo $HTML->listTableTop();
+	echo $HTML->listTableTop(array(), array(), 'full');
 	echo html_ao('tr').html_ao('td').html_ao('label', array('for' => 'summary'));
 	echo html_e('strong', array(), _('Summary')._(':')).'<br />';
 	echo html_ac(html_ap()-1);
