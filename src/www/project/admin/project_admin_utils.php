@@ -65,9 +65,11 @@ function project_admin_header($params) {
 	$attr_r[] = array('title' => _('Show the significant change of your project.'));
 	$links[] = '/project/admin/history.php?group_id='.$group_id;
 
-	$labels[] = _('Effort Units');
-	$attr_r[] = array('title' => _('Manage Effort Units used in your project.'));
-	$links[] = '/project/admin/effortunits.php?group_id='.$group_id;
+	if(forge_get_config('use_tracker')) {
+		$labels[] = _('Effort Units');
+		$attr_r[] = array('title' => _('Manage Effort Units used in your project.'));
+		$links[] = '/project/admin/effortunits.php?group_id='.$group_id;
+	}
 
 	if(forge_get_config('use_people')) {
 		$labels[] = _('Post Jobs');

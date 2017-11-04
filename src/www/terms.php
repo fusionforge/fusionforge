@@ -36,7 +36,7 @@ $HTML->header(array('title'=> sprintf (_('%s Terms of Use'),
 	if ( file_exists(forge_get_config('custom_path') . '/terms.php') ) {
 		include forge_get_config('custom_path') . '/terms.php';
 	} else {
-		printf (_('These are the terms and conditions under which you are allowed to use the %s service.  They are empty by default, but the administrator(s) of the service can use this page to publish their local requirements if needed.'),
+		printf (_('These are the terms and conditions under which you are allowed to use the %s service. They are empty by default, but the administrator(s) of the service can use this page to publish their local requirements if needed.'),
 			forge_get_config ('forge_name')) ;
 	}
 ?>

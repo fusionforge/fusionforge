@@ -58,7 +58,7 @@ if (getStringFromRequest('submit')) {
 
 	if (!$u->setPasswd($passwd)) {
 		form_release_key(getStringFromRequest('form_key'));
-		exit_error(_('Could not change password: ').$u->getErrorMessage(),'my');
+		exit_error(_('Could not change password')._(': ').$u->getErrorMessage(),'my');
 	}
 
 	site_user_header(array('title'=>_('Successfully Changed Password')));

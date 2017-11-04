@@ -272,7 +272,7 @@ for ($i=0; $i<count($keys); $i++) {
 		$res = db_query_params('SELECT package_id,name FROM frs_package WHERE group_id=$1', array($group_id));
 		for ($q = 0; $q < db_numrows($res); $q++) {
 			$cells = array();
-			$cells[][] = $rbac_edit_section_names[$keys[$i]];
+			$cells[] = array($rbac_edit_section_names[$keys[$i]], 'style' => 'padding-left: 4em;');
 			$cells[][] = db_result($res,$q,'name');
 			$cells[][] = html_build_select_box_from_assoc($role->getRoleVals($keys[$i]),
 									"data[".$keys[$i]."][".db_result($res,$q,'package_id')."]",

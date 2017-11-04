@@ -39,6 +39,9 @@ global $HTML; // Layout object
 if (!session_loggedin()) {
 	exit_not_logged_in();
 } else {
+	if (!forge_get_config('use_tracker')) {
+		exit_disabled('my');
+	}
 	$u = session_get_user();
 	site_user_header(array('title'=>sprintf(_('Personal Page for %s'), $u->getRealName())));
 	echo $HTML->listTableTop();
