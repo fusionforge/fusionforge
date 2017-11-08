@@ -70,7 +70,7 @@ if (getStringFromRequest('submit')) {
 		form_release_key(getStringFromRequest('form_key'));
 		exit_error(
 			_('Error'),
-			_('Could not change password: ').$u->getErrorMessage()
+			_('Could not change password')._(': ').$u->getErrorMessage()
 		);
 	}
 
