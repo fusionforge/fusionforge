@@ -223,7 +223,7 @@ control over it to the project's administrator.");
 					' '. _('Enter your site password when prompted.'));
 				$htmlRepo = '';
 				foreach ($repo_list as $repo_name) {
-					$htmlRepo .= '<tt>git clone '.$protocol.'://<i>'._('developername').'</i>@'.$this->getBoxForProject($project).'/authscm/<i>'._('developername').'</i>/git/'.$project->getUnixName() .'/'. $repo_name .'.git</tt><br />';
+					$htmlRepo .= '<kbd>git clone '.$protocol.'://<i>'._('developername').'</i>@'.$this->getBoxForProject($project).'/authscm/<i>'._('developername').'</i>/git/'.$project->getUnixName() .'/'. $repo_name .'.git</kbd><br />';
 				}
 				$b .= html_e('p', array(), $htmlRepo);
 				$b .= '</div>';

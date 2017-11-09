@@ -653,14 +653,14 @@ projects on /projects URLs with content-negotiation
 
 			$doc .= _('To access this RDF document, you may use, for instance:');
 			$doc .= '<br />';
-			$doc .= '<tt>$ curl -L -H "Accept: text/turtle" '. $documenturi .'</tt><br />';
+			$doc .= '<kbd>$ curl -L -H "Accept: text/turtle" '. $documenturi .'</kbd><br />';
 
 			$doc .= _('This may redirect to several pages documents in case of too big number of results (observing the LDP paging specifications).');
 			$doc .= '<br /><br />';
 
 			$doc .= _('Alternatively, if you are sure you want the full dump in one single document, use:');
 			$doc .= '<br />';
-			$doc .= '<tt>$ curl -H "Accept: text/turtle" "'. $documenturi .'?allatonce"</tt>';
+			$doc .= '<kbd>$ curl -H "Accept: text/turtle" "'. $documenturi .'?allatonce"</kbd>';
 
 		}
 		return $doc;

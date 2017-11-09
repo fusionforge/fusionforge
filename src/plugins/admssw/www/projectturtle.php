@@ -51,7 +51,7 @@ echo $plugin->htmlPreviewProjectAsTurtle($group_id);
 
 echo _('To access this RDF document, you may use, for instance:');
 echo '<br />';
-echo '<tt>$ curl -H "Accept: text/turtle" '. util_make_url_g($projectname, $group_id) .'</tt><br />';
+echo '<kbd>$ curl -H "Accept: text/turtle" '. util_make_url_g($projectname, $group_id) .'</kbd><br />';
 
 $HTML->footer();
 

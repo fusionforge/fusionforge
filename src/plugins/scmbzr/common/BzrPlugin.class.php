@@ -93,7 +93,7 @@ over it to the project's administrator.");
 		$b .= _('This project\'s Bazaar repository can be checked out through anonymous access with the following command.');
 		$b .= '</p>';
 		$b .= '<p>' ;
-		$b .= '<tt>bzr checkout '.util_make_url ('/anonscm/bzr/'.$project->getUnixName().'/').'</tt><br />';
+		$b .= '<kbd>bzr checkout '.util_make_url ('/anonscm/bzr/'.$project->getUnixName().'/').'</kbd><br />';
 		$b .= '</p>';
 		return $b ;
 	}
@@ -113,7 +113,7 @@ over it to the project's administrator.");
 			$b .= ' ';
 			$b .= _('Enter your site password when prompted.');
 			$b .= '</p>';
-			$b .= '<p><tt>bzr checkout bzr+ssh://'.$d.'@' . $this->getBoxForProject($project) . forge_get_config('repos_path', 'scmbzr') .'/'. $project->getUnixName().'/'._('branchname').'</tt></p>' ;
+			$b .= '<p><kbd>bzr checkout bzr+ssh://'.$d.'@' . $this->getBoxForProject($project) . forge_get_config('repos_path', 'scmbzr') .'/'. $project->getUnixName().'/'._('branchname').'</kbd></p>' ;
 		} else {
 			$b .= '<h2>';
 			$b .= sprintf(_('Developer %s Access via SSH'), 'Bazaar');
@@ -127,7 +127,7 @@ over it to the project's administrator.");
 			$b .= ' ';
 			$b .= _('Enter your site password when prompted.');
 			$b .= '</p>';
-			$b .= '<p><tt>bzr checkout bzr+ssh://<i>'._('developername').'</i>@' . $this->getBoxForProject($project) . forge_get_config('repos_path', 'scmbzr') .'/'. $project->getUnixName().'/'._('branchname').'</tt></p>' ;
+			$b .= '<p><kbd>bzr checkout bzr+ssh://<i>'._('developername').'</i>@' . $this->getBoxForProject($project) . forge_get_config('repos_path', 'scmbzr') .'/'. $project->getUnixName().'/'._('branchname').'</kbd></p>' ;
 		}
 		return $b ;
 	}

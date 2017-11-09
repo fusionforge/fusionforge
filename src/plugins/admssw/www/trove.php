@@ -45,7 +45,7 @@ echo $plugin->htmlPreviewTroveCatsAsTurtle();
 
 echo _('To access this RDF document, you may use, for instance:');
 echo '<br />';
-echo '<tt>$ curl -H "Accept: text/turtle" '. util_make_url('/softwaremap/trove_list.php') .'</tt><br />';
+echo '<kbd>$ curl -H "Accept: text/turtle" '. util_make_url('/softwaremap/trove_list.php') .'</kbd><br />';
 
 $HTML->footer();
 
