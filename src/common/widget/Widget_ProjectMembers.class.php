@@ -91,7 +91,7 @@ class Widget_ProjectMembers extends Widget {
 
 		if (count($members) > 0) {
 			$headerresult = true;
-			$resultcomplete = '<span class="completemember" style="display: none">';
+			$resultcomplete = '<div class="completemember" style="display: none">';
 			$resultmore = false;
 			foreach ($members as $key => $u) {
 				if (in_array($u->getID(), $seen)) {
@@ -128,7 +128,7 @@ class Widget_ProjectMembers extends Widget {
 					$resultmore = true;
 				}
 			}
-			$resultcomplete .= '</span>';
+			$resultcomplete .= '</div>';
 			$result .= $resultcomplete;
 			if ($resultmore && !$headerresult) {
 				$result .= '<input type="button" class="seemoremember" value="'._('See more ...').'" />';
