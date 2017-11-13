@@ -86,48 +86,48 @@ class Activity extends FFError {
 		$docmanerror = 0;
 		switch (@$arr['section']) {
 			case 'scm': {
-				$icon = $HTML->getScmPic(_('Source Code'), 'sourcecode');
+				$icon = $HTML->getScmPic(_('Source Code'), _('Source Code'));
 				$url = util_make_link('/scm/'.$arr['ref_id'].$arr['subref_id'],_('scm commit')._(': ').$arr['description']);
 				break;
 			}
 			case 'trackeropen': {
-				$icon = $HTML->getOpenTicketPic(_('Tracker Open'), 'trackeropen');
+				$icon = $HTML->getOpenTicketPic(_('Tracker Open'), _('Tracker Open'));
 				$url = util_make_link('/tracker/a_follow.php/'.$arr['subref_id'],_('Tracker Item').' [#'.$arr['subref_id'].'] '.$arr['description'].' '._('Opened'));
 				break;
 			}
 			case 'trackerclose': {
-				$icon = $HTML->getClosedTicketPic(_('Tracker Closed'), 'trackerclose');
+				$icon = $HTML->getClosedTicketPic(_('Tracker Closed'), _('Tracker Closed'));
 				$url = util_make_link('/tracker/a_follow.php/'.$arr['subref_id'],_('Tracker Item').' [#'.$arr['subref_id'].'] '.$arr['description'].' '._('Closed'));
 				break;
 			}
 			case 'frsrelease': {
-				$icon = $HTML->getPackagePic(_('Files'), 'files');
+				$icon = $HTML->getPackagePic(_('Files'), _('Files'));
 				$url = util_make_link('/frs/?release_id='.$arr['subref_id'].'&group_id='.$arr['group_id'],_('FRS Release').' '.$arr['description']);
 				break;
 			}
 			case 'forumpost': {
-				$icon = $HTML->getForumPic(_('Forum'), 'forum');
+				$icon = $HTML->getForumPic(_('Forum'), _('Forum'));
 				$url = util_make_link('/forum/message.php?msg_id='.$arr['subref_id'].'&group_id='.$arr['group_id'],_('Forum Post').' '.$arr['description']);
 				break;
 			}
 			case 'news': {
-				$icon = $HTML->getNewsPic(_('News'), 'news');
+				$icon = $HTML->getNewsPic(_('News'), _('News'));
 				$url = util_make_link('/forum/forum.php?forum_id='.$arr['subref_id'],_('News').' '.$arr['description']);
 				break;
 			}
 			case 'taskopen': {
-				$icon = $HTML->getPmPic(_('Open Task'), 'opentask');
+				$icon = $HTML->getPmPic(_('Open Task'), _('Open Task'));
 				$url = util_make_link('/pm/t_follow.php/'.$arr['subref_id'],_('Tasks').' '.$arr['description']);
 				break;
 			}
 			case 'taskclose': {
-				$icon = $HTML->getPmPic(_('Closed Task'), 'closedtask');
+				$icon = $HTML->getPmPic(_('Closed Task'), _('Closed Task'));
 				$url = util_make_link('/pm/t_follow.php/'.$arr['subref_id'],_('Tasks').' '.$arr['description']);
 				break;
 			}
 
 			case 'taskdelete': {
-				$icon = $HTML->getPmPic(_('Deleted Task', 'deletedtask'));
+				$icon = $HTML->getPmPic(_('Deleted Task'), _('Deleted Task'));
 				$url = util_make_link('/pm/t_follow.php/'.$arr['subref_id'],_('Tasks').' '.$arr['description']);
 				break;
 			}
