@@ -107,7 +107,7 @@ class Widget_ProjectPublicAreas extends Widget {
 				$messages_count += $f->getMessageCount();
 			}
 
-			$link_content = $HTML->getForumPic('') . ' ' . _('Public Forums');
+			$link_content = $HTML->getForumPic() . ' ' . _('Public Forums');
 			$result .= util_make_link('/forum/?group_id=' . $group_id, $link_content);
 			$result .= ' (';
 			$result .= sprintf(ngettext("<strong>%d</strong> message","<strong>%d</strong> messages",$messages_count),$messages_count);
@@ -121,7 +121,7 @@ class Widget_ProjectPublicAreas extends Widget {
 
 		if ($project->usesDocman()) {
 			$result .= '<div class="public-area-box">';
-			$link_content = $HTML->getDocmanPic('') . ' ' . _('Document Manager');
+			$link_content = $HTML->getDocmanPic() . ' ' . _('Document Manager');
 			//	<a rel="sioc:container_of" xmlns:sioc="http://rdfs.org/sioc/ns#" href="'.util_make_url ('/docman/?group_id='.$group_id).'">';
 			$result .= util_make_link('/docman/?group_id='.$group_id, $link_content);
 			$docm = new DocumentManager($project);
@@ -133,7 +133,7 @@ class Widget_ProjectPublicAreas extends Widget {
 
 		if ($project->usesFRS()) {
 			$result .= '<div class="public-area-box">';
-			$link_content = $HTML->getPackagePic('') . ' ' . _('Files');
+			$link_content = $HTML->getPackagePic() . ' ' . _('Files');
 			//	<a rel="sioc:container_of" xmlns:sioc="http://rdfs.org/sioc/ns#" href="'.util_make_url ('/frs/?group_id='.$group_id).'">';
 			$result .= util_make_link('/frs/?group_id='.$group_id, $link_content);
 			$frsm = new FRSManager($project);
@@ -145,7 +145,7 @@ class Widget_ProjectPublicAreas extends Widget {
 
 		if ($project->usesMail()) {
 			$result .= '<div class="public-area-box">';
-			$link_content = $HTML->getMailPic('') . ' ' . _('Mailing Lists');
+			$link_content = $HTML->getMailPic() . ' ' . _('Mailing Lists');
 			$result .= util_make_link('/mail/?group_id='.$group_id, $link_content);
 			$n = project_get_mail_list_count($group_id);
 			$result .= ' ';
@@ -157,7 +157,7 @@ class Widget_ProjectPublicAreas extends Widget {
 
 		if ($project->usesPM()) {
 			$result .= '<div class="public-area-box">';
-			$link_content = $HTML->getPmPic('') . ' ' . _('Tasks');
+			$link_content = $HTML->getPmPic() . ' ' . _('Tasks');
 			$result .= util_make_link('/pm/?group_id='.$group_id, $link_content);
 
 			$pgf = new ProjectGroupFactory ($project);
@@ -181,7 +181,7 @@ class Widget_ProjectPublicAreas extends Widget {
 
 		if ($project->usesSurvey()) {
 			$result .= '<div class="public-area-box">'."\n";
-			$link_content = $HTML->getSurveyPic('') . ' ' . _('Surveys');
+			$link_content = $HTML->getSurveyPic() . ' ' . _('Surveys');
 			$result .= util_make_link('/survey/?group_id='.$group_id, $link_content);
 			$result .= ' (<strong>'. project_get_survey_count($group_id) .'</strong> ' . _('surveys').')';
 			$result .= "\n</div>\n";
@@ -192,7 +192,7 @@ class Widget_ProjectPublicAreas extends Widget {
 		if ($project->usesSCM()) {
 			$result .= '<div class="public-area-box">'."\n";
 
-			$link_content = $HTML->getScmPic('') . ' ' . _('SCM Repository');
+			$link_content = $HTML->getScmPic() . ' ' . _('SCM Repository');
 			//	$result .= '<hr size="1" /><a rel="doap:repository" href="'.util_make_url ('/scm/?group_id='.$group_id).'">';
 			$result .= util_make_link('/scm/?group_id='.$group_id, $link_content);
 
@@ -217,7 +217,7 @@ class Widget_ProjectPublicAreas extends Widget {
 			if ($project->isActive()) {
 				$result .= '<div class="public-area-box">'."\n";
 
-				$link_content = $HTML->getFtpPic('') . ' ' . _('Anonymous FTP Space');
+				$link_content = $HTML->getFtpPic() . ' ' . _('Anonymous FTP Space');
 				//		$result .= '<a rel="doap:anonymous root" href="ftp://' . $project->getUnixName() . '.' . forge_get_config('web_host') . '/pub/'. $project->getUnixName() .'/">';
 				if (forge_get_config('use_project_vhost')) {
 					$result .= util_make_link('ftp://' . $project->getUnixName() . '.' . forge_get_config('web_host') . '/pub/'. $project->getUnixName(), $link_content, false, true);
