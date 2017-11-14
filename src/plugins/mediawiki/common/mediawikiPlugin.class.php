@@ -381,7 +381,7 @@ _('This plugin allows each project to embed Mediawiki under a tab.');
                                                         .'&rcstart='.date('Y-m-d\TH:i:s\Z',$params['end'])
                                                         .'&rcend='.date('Y-m-d\TH:i:s\Z',$params['begin'])
 							.'&rclimit=500'
-							.'rcprop=user|title|ids|timestamp';
+							.'&rcprop=user|title|ids|timestamp';
                                 $filename = tempnam('/tmp', 'mediawikilog');
                                 $f = fopen($filename, 'w');
                                 $ch = curl_init();
@@ -406,6 +406,7 @@ _('This plugin allows each project to embed Mediawiki under a tab.');
                                                 $result = array();
                                                 $result['section'] = 'mediawiki';
                                                 $result['group_id'] = $group_id;
+                                                $result['ref_id'] = $group_id;
                                                 $result['activity_date'] = strtotime($recentchanges['timestamp']);
                                                 $result['link'] = forge_get_config('url_prefix').'plugins/'.$this->name.'/wiki/'.$project->getUnixName().'/index.php/'.str_replace(' ', '_',
  $recentchanges['title']);
@@ -425,6 +426,8 @@ _('This plugin allows each project to embed Mediawiki under a tab.');
                                         		if (is_a($userObject, 'FFUser')) {
                                                 		$result['realname'] = util_display_user($userObject->getUnixName(), $userObject->getID(), $userObject->getRealName());
                                         		}
+						} else {
+							$result['realname'] = '';
 						}
                                                 $params['results'][] = $result;
                                         }
