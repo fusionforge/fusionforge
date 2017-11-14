@@ -81,7 +81,7 @@ class ScmCvsSSHTest extends FForge_SeleniumTestCase
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectB");
 		$this->clickAndWait("link=SCM");
-		$p = $this->getText("//tt[contains(.,' login')]");
+		$p = $this->getText("//kbd[contains(.,' login')]");
 		$p = preg_replace(",^cvs -d ,", "", $p);
 		$p = preg_replace(", login.*,", "", $p);
 
