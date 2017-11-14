@@ -1508,7 +1508,7 @@ class Group extends FFError {
 			if ($p_name == $feature) {
 				return true;
 			}
-			if ($pm->getPluginByName($p_name)->provide($feature)) {
+			if (is_object($pm->getPluginByName($p_name)) && $pm->getPluginByName($p_name)->provide($feature)) {
 				return true;
 			}
 		}
