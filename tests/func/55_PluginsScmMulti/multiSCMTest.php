@@ -58,7 +58,7 @@ class multiSCMTest extends FForge_SeleniumTestCase
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
-		$p = $this->getText("//tt[contains(.,'bzr checkout bzr+ssh')]");
+		$p = $this->getText("//kbd[contains(.,'bzr checkout bzr+ssh')]");
 		$p = preg_replace(",^bzr checkout ,", "", $p);
 		$p = preg_replace(",/branchname$,", "", $p);
 		$t = exec("mktemp -d /tmp/bzrTest.XXXXXX");
