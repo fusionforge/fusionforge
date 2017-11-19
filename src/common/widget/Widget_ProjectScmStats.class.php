@@ -51,7 +51,7 @@ class Widget_ProjectScmStats extends Widget {
 		$project_plugins = $project->getPlugins();
 		foreach ($project_plugins as $value) {
 			$plugin_object = plugin_get_object($value);
-			if ($plugin_object->provide('scm')) {
+			if (is_object($plugin_object) && $plugin_object->provide('scm')) {
 				$html_projectscmstats .= $plugin_object->getStatsBlock($project);
 			}
 		}
