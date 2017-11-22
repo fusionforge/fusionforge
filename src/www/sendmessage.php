@@ -183,7 +183,9 @@ if (isset($body)) {
 </p>
 <?php
 if (!$is_logged) {
-	plugin_hook('captcha_form');
+	$html = '';
+	plugin_hook_by_reference('captcha_form', $html);
+	echo $html;
 }
 ?>
 <p align="center">
