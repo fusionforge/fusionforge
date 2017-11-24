@@ -557,11 +557,11 @@ class ArtifactQuery extends FFError {
 	 * @return	array	array of all activated options
 	 */
 	function getQueryOptions() {
-        if (isset($this->data_array['query_options'])) {
-		    return explode('|', $this->data_array['query_options']);
-        } else {
-            return array();
-        }
+		if (isset($this->data_array['query_options'])) {
+			return explode('|', $this->data_array['query_options']);
+		} else {
+			return array();
+		}
 	}
 
 	/**
