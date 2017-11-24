@@ -140,11 +140,10 @@ if (forge_get_config('use_manual_uploads')) {
 }
 if ($g->useCreateOnline()) {
 	$cells = array();
-	$cells[] = array(_('Edit the contents to your desire or leave them as they are to remain unmodified.').html_e('br').
-			html_e('textarea', array('id' => 'defaulteditzone', 'name' => 'details', 'rows' => '15', 'cols' => '100'), '', false).
+	$cells[][] = _('Edit the content of your file')._(':');
+	$cells[][] = html_e('textarea', array('id' => 'defaulteditzone', 'name' => 'details', 'rows' => '15', 'cols' => '100'), '', false).
 			html_e('input', array('id' => 'defaulteditfiletype', 'type' => 'hidden', 'name' => 'filetype', 'value' => 'text/plain')).
-			html_e('input', array('id' => 'editor', 'type' => 'hidden', 'name' => 'editor', 'value' => 'online')),
-			'colspan' => 2);
+			html_e('input', array('id' => 'editor', 'type' => 'hidden', 'name' => 'editor', 'value' => 'online'));
 	echo $HTML->multiTableRow(array('id' => 'editonlineroweditfile', 'class' => 'hide'), $cells);
 }
 
