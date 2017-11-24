@@ -148,7 +148,7 @@ if ($dgf->getNested($stateidArr) == NULL) {
 	$cells[][] = html_e('input', array('type' => 'text', 'name' => 'name', 'size' => '30'));
 	echo $HTML->multiTableRow(array('id' => 'editnamerow', 'class' => 'hide'), $cells);
 	echo html_ao('tr', array('id' => 'editrow', 'class' => 'hide'));
-	echo html_ao('td', array('colspan' => '2'));
+	echo html_e('td', array(), _('Set the content to your file')._(':'));
 	$GLOBALS['editor_was_set_up'] = false;
 	$params = array() ;
 	/* name must be details !!! if name = data then nothing is displayed */
@@ -158,10 +158,10 @@ if ($dgf->getNested($stateidArr) == NULL) {
 	$params['group'] = $group_id;
 	plugin_hook("text_editor", $params);
 	if (!$GLOBALS['editor_was_set_up']) {
-		echo html_e('textarea', array('name' => 'details', 'rows' => 5, 'cols' => 80), '', false);
+		echo html_e('td', array(), html_e('textarea', array('name' => 'details', 'rows' => 5, 'cols' => 80), '', false));
 	}
 	unset($GLOBALS['editor_was_set_up']);
-	echo html_ac(html_ap() - 2);
+	echo html_ac(html_ap() - 1);
 	if ($dirid) {
 		echo html_ao('tr');
 		echo html_ao('td', array('colspan' => 2));
