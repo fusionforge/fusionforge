@@ -218,7 +218,7 @@ if ($usingplugin) {
 
 	$qpa = db_construct_qpa(false, 'SELECT user_id FROM users WHERE users.user_id != 100');
 	if ($user_name_search) {
-		$qpa = db_construct_qpa($qpa, ' AND lower(user_name) LIKE $1 OR lower(lastname) LIKE $1', array(strtolower("$user_name_search%")));
+		$qpa = db_construct_qpa($qpa, ' AND (lower(user_name) LIKE $1 OR lower(lastname) LIKE $1)', array(strtolower("$user_name_search%")));
 		$msg = sprintf(_('User list beginning with “%s” for all projects'), $user_name_search);
 		$filter .= '&user_name_search='.$user_name_search;
 	} else {
