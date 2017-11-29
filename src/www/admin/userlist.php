@@ -203,16 +203,17 @@ if ($usingplugin) {
 	show_users_list(util_result_column_to_array($res, 0), '', 'realname', $start, $max, $paging, $totalUsers);
 
 } elseif (!$group_id) {
+	$filter='';
 	$user_name_search = getStringFromRequest('user_name_search');
 	$sort_order = getStringFromRequest('sortorder', 'realname');
-	util_ensure_value_in_set($sort_order,
-				array('realname','user_name','lastname','firstname','user_id','status','add_date'));
+	util_ensure_value_in_set($sort_order, array('realname','user_name','lastname','firstname','user_id','status','add_date'));
 
 	if ($user_name_search) {
 		$res = db_query_params('SELECT user_id FROM users WHERE lower(user_name) LIKE $1 OR lower(lastname) LIKE $1 and users.user_id != 100 ORDER BY '.$sort_order.' LIMIT $2 OFFSET $3',
 					array(strtolower("$user_name_search%"), $paging, $start));
 		$list_id = util_result_column_to_array($res, 0);
 		$msg = sprintf(_('User list beginning with “%s” for all projects'), $user_name_search);
+		$filter .= '&user_name_search='.$user_name_search;
 	} else {
 		$msg = _('User list for all projects');
 	}
@@ -228,14 +229,13 @@ if ($usingplugin) {
 			$list_id = util_result_column_to_array($res, 0);
 		}
 	}
-	if (! isset($list_id)) {
+	if (!isset($list_id)) {
 		$res = db_query_params('SELECT user_id FROM users where users.user_id != 100 ORDER BY '.$sort_order.' LIMIT $1 OFFSET $2',
 				array($paging, $start));
 		$list_id = util_result_column_to_array($res, 0);
 	}
-	$filter='';
-	if (in_array($status,array('D','A','S','P'))) {
-		$filter = '&status='.$status;
+	if (in_array($status, array('D', 'A', 'S', 'P'))) {
+		$filter .= '&status='.$status;
 	}
 	$totalUsers = FusionForge::getInstance()->getNumberOfUsers($status);
 	$max = ($totalUsers > ($start + $paging)) ? ($start + $paging) : $totalUsers;
