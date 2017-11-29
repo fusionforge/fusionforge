@@ -231,7 +231,6 @@ if ($usingplugin) {
 	$qpa = db_construct_qpa($qpa, ' ORDER BY $1', array($sort_order));
 	$res = db_query_qpa($qpa, $paging, $start);
 	$list_id = util_result_column_to_array($res, 0);
-	var_dump($list_id);
 	echo html_e('h2', array(), $msg);
 
 	$params = array('status' => $status, 'user_name_search' => $user_name_search);
