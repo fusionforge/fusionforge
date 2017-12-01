@@ -131,7 +131,7 @@ function hide_edit_button(id) {
 				switch ($parsertype) {
 					case 'markdown':
 						require_once 'markdown.php';
-						$result_html = Markdown($text);
+						$text = Markdown($text);
 						break;
 					default:
 						$text = nl2br($text);
