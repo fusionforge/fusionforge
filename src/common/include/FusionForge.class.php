@@ -201,7 +201,11 @@ class FusionForge extends FFError {
                 	$qpa = db_construct_qpa($qpa, ' AND status = $1', array($params['status']));
         	}
         	$res = db_query_qpa($qpa);
-
+		if (!$res || db_numrows($res) < 1) {
+			$this->setError('Unable to get users count: '.db_error());
+			return false;
+		}
+		return $this->parseCount($res);
 	}
 
 	function parseCount($res) {
