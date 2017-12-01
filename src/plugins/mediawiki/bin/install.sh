@@ -40,6 +40,10 @@ case "$1" in
 		fi
 
 		ln -nfs $mediawikidir/skins $plugindir/www/
+		# specific workaround for debian CamelCase
+		if [ -e $mediawikidir/skins/MonoBook ];then
+			ln -nfs $mediawikidir/skins/MonoBook $mediawikidir/skins/monobook
+		fi
 		ln -nfs $mediawikidir/skins/monobook/headbg.jpg $source_path/www/themes/css/mw-headbg.jpg
 
 		ln -nfs $mediawikidir $data_path/plugins/mediawiki/master
