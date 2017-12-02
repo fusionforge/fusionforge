@@ -110,7 +110,7 @@ function build_deb {
     cd $(dirname $0)/../src/
     cp -a debian/changelog $f
 
-    version=$(dpkg-parsechangelog | sed -n 's/^Version: \([0-9.]\+\(\~\(rc\|beta\|alpha\)[0-9]\)\?\).*/\1/p')+$(date +%Y%m%d%H%M)
+    version=$(dpkg-parsechangelog | sed -n 's/^Version: \([0-9.]\+\(\~\(rc\|beta\|alpha\)[0-9]\)\?\).*/\1/p')+autobuilt$(date +%Y%m%d%H%M)
     make dist VERSION=$version
     mv fusionforge-$version.tar.bz2 ../fusionforge_$version.orig.tar.bz2
     cd ..

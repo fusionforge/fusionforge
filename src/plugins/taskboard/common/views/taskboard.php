@@ -287,7 +287,7 @@ var gMessages = {
 	'completedCost' : "<?php echo _('Completed m/d') ?>",
 	'invalidRegEx' : " <?php echo _('Invalid regular expression') ?>"
 }
-var gThemeRoot = "<?php echo $HTML->imgroot ?>";
+var gThemeRoot = "<?php echo $HTML->imgbaseurl ?>";
 
 <?php
 	$releases = array();

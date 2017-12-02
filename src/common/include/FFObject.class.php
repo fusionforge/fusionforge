@@ -177,7 +177,7 @@ class FFObject extends FFError {
 				if (preg_match('/^[Dd][0-9]+/', $objectRef)) {
 					//Document Ref.
 					$documentId = substr($objectRef, 1);
-					if ($documentId != $this->getID()) {
+					if ('Document'.$documentId != $this->getRealClass($this).$this->getID()) {
 						$documentObject = document_get_object($documentId, $this->getGroupID($this));
 						if (is_object($documentObject)) {
 							$statusArr[] = $this->addAssociationTo($documentObject);
@@ -192,7 +192,7 @@ class FFObject extends FFError {
 				} elseif (preg_match('/^#[0-9]+/', $objectRef)) {
 					//Artifact Ref.
 					$artifactId = substr($objectRef, 1);
-					if ($artifactId != $this->getID()) {
+					if ('Artifact'.$artifactId != $this->getRealClass($this).$this->getID()) {
 						$artifactObject = artifact_get_object($artifactId);
 						if (is_object($artifactObject)) {
 							$statusArr[] = $this->addAssociationTo($artifactObject);
@@ -205,9 +205,9 @@ class FFObject extends FFError {
 						$statusArr[] = false;
 					}
 				} elseif (preg_match('/^[Rr][0-9]+/', $objectRef)) {
-					//Artifact Ref.
+					//File Release Ref.
 					$frsreleaseId = substr($objectRef, 1);
-					if ($frsreleaseId != $this->getID()) {
+					if ('FRSRelease'.$frsreleaseId != $this->getRealClass($this).$this->getID()) {
 						$frsreleaseObject = frsrelease_get_object($frsreleaseId);
 						if (is_object($frsreleaseObject)) {
 							$statusArr[] = $this->addAssociationTo($frsreleaseObject);

@@ -31,7 +31,6 @@ class Theme_Funky extends Layout {
 		parent::__construct();
 		$this->themeurl = util_make_uri('themes/funky/');
 		$this->imgbaseurl = $this->themeurl . 'images/';
-		$this->imgroot = $this->imgbaseurl;
 		$this->addStylesheet('/themes/funky/css/theme.css');
 		$this->addStylesheet('/themes/funky/css/theme-pages.css');
 		$this->addStylesheet('/scripts/jquery-ui/css/overcast/jquery-ui-1.12.1.css');
