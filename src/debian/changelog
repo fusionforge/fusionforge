@@ -1,3 +1,12 @@
+fusionforge (6.0.5-2) unstable; urgency=medium
+
+  * Disable the scmcvs and scmbzr plugins in official Debian packages (not
+    the ones built by fusionforge.org), again.  Mediawiki is still fine.
+  * Adapt installation script to PostgreSQL 10 (which dropped the
+    createlang tool).
+
+ -- Roland Mas <lolando@debian.org>  Sat, 02 Dec 2017 16:52:51 +0100
+
 fusionforge (6.0.5-1) unstable; urgency=medium
 
   * New upstream release.
