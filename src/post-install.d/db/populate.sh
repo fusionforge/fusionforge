@@ -37,9 +37,7 @@ fi
 # Create database
 if ! su - postgres -c 'psql -At -l' | grep "^$database_name|" >/dev/null; then
     su - postgres -c "createdb --template template0 --encoding UNICODE $database_name"
-    if ! su - postgres -c "createlang -l $database_name" | grep -q plpgsql; then
-	su - postgres -c "createlang plpgsql $database_name"
-    fi
+    echo "CREATE EXTENSION IF NOT EXISTS plpgsql" | su - postgres -c "psql $database_name"
 fi
 
 # Create DB user
