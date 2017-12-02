@@ -32,12 +32,6 @@ function isLogged(){
 	return session_loggedin();
 }
 
-
-// DEPRECATED: use session_redirect
-function htmlRedirect($url) {
-	session_redirect($url);
-}
-
 function htmlIframe($url, $poub = array()) {
 	global $HTML, $group_id;
 	$project = group_get_object($group_id);
@@ -116,7 +110,7 @@ function getIcon($url, $w = 16, $h = 16, $args = array()) {
 }
 
 function getImage($img) {
-	echo util_make_url($GLOBALS['HTML']->imgroot.$img);
+	echo util_make_url($GLOBALS['HTML']->imgbaseurl.$img);
 }
 
 function get_server_url() {

@@ -31,7 +31,6 @@ class Theme_Funky_Wow extends Theme_Funky {
 		parent::__construct();
 		$this->themeurl = util_make_uri('themes/funky-wOw/');
 		$this->imgbaseurl = $this->themeurl . 'images/';
-		$this->imgroot = $this->imgbaseurl;
 		$this->addStylesheet('/themes/funky-wOw/css/theme.css');
 		$this->addStylesheet('/scripts/jquery-ui/css/sunny/jquery-ui-1.12.4.css');
 		$this->addStylesheet('/scripts/jquery-ui/css/sunny/jquery-ui.structure-1.12.4.css');
