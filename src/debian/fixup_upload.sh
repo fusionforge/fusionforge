@@ -30,8 +30,17 @@ sed -i -e '/^Package: fusionforge-plugin-scmcvs/,/^$/d' debian/plugins
 # QA Team unresponsive (BTS and private mails)
 # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=789772
 # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=789773
-rm -f debian/*.{preinst,postinst,prerm,postrm}
-mv debian/fusionforge-common.README.Debian-testing debian/fusionforge-common.README.Debian
+disablestring="exit 0 # Disabled in packages uploaded to Debian"
+for i in debian/*.{preinst,postinst,prerm,postrm} ; do
+    if ! [ -e "$i" ] ; then
+	continue
+    fi
+    l=$(sed -n 2p $i)
+    if ! [ "$l" = "$disablestring" ] ; then
+	sed -i "2i$disablestring" $i
+    fi
+done
+cp debian/fusionforge-common.README.Debian-testing debian/fusionforge-common.README.Debian
 
 # Regen debian/control
 debian/rules debian/control
