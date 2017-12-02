@@ -18,10 +18,6 @@
 # with FusionForge; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-# Mediawiki has no maintainer for months
-# https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=783503
-sed -i -e '/^Package: fusionforge-plugin-mediawiki/,/^$/d' debian/plugins
-
 # bzr has FTBFS for months
 # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=794146
 sed -i -e '/^Package: fusionforge-plugin-scmbzr/,/^$/d' debian/plugins
