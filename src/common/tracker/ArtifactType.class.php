@@ -211,7 +211,7 @@ class ArtifactType extends FFError {
 	 * @param	bool	$use_resolution		(1) true (0) false - whether the resolution box should be shown. //TODO: unused parameter. to be drop!
 	 * @param	string	$submit_instructions	Free-form string that project admins can place on the submit page.
 	 * @param	string	$browse_instructions	Free-form string that project admins can place on the browse page.
-	 * @param	int	$datatype		(1) bug tracker, (2) Support Tracker, (3) Patch Tracker, (4) features (0) other.
+	 * @param	int	$datatype		(1) bug tracker, (2) Support Tracker, (3) Patch Tracker, (4) features (0) other. //TODO: unused parameter. to be drop!
 	 * @return	int	id on success, false on failure.
 	 */
 	function create($name, $description, $email_all, $email_address,
