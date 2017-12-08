@@ -42,7 +42,7 @@ class WidgetLayout_Row {
 
 	function display($readonly, $owner_id, $owner_type) {
 		global $HTML;
-		echo $HTML->listTableTop(array(), array(), '', 'mainwidget_table'.$this->id);
+		echo $HTML->listTableTop(array(), array(), 'full', 'mainwidget_table'.$this->id);
 		echo html_ao('tr', array('style' => 'vertical-align:top;'));
 		$last = count($this->columns) - 1;
 		$i = 0;
