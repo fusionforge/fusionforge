@@ -263,30 +263,31 @@ class Artifact extends FFObject {
 		}
 
 		db_begin();
-		if (array_key_exists('time',$importData)){
+		if (array_key_exists('time', $importData)){
 			$time = $importData['time'];
 		} else {
 			$time = time();
 		}
 		$res = db_query_params('INSERT INTO artifact
-					(group_artifact_id,status_id,priority,
-					submitted_by,assigned_to,open_date,summary,details)
-					VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
+					(group_artifact_id, status_id, priority,
+					submitted_by, assigned_to, open_date, last_modified_date, summary,details)
+					VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)',
 					array ($this->ArtifactType->getID(),
-					       $status_id,
-					       $priority,
-					       $user,
-					       $assigned_to,
-					       $time,
-					       htmlspecialchars($summary),
-					       htmlspecialchars($details)));
+						$status_id,
+						$priority,
+						$user,
+						$assigned_to,
+						$time,
+						$time,
+						htmlspecialchars($summary),
+						htmlspecialchars($details)));
 		if (!$res) {
 			$this->setError(db_error());
 			db_rollback();
 			return false;
 		}
 
-		$artifact_id=db_insertid($res,'artifact','artifact_id');
+		$artifact_id = db_insertid($res, 'artifact', 'artifact_id');
 
 		if (!$res || !$artifact_id) {
 			$this->setError(db_error());
