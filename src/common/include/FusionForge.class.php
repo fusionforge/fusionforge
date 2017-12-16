@@ -193,14 +193,14 @@ class FusionForge extends FFError {
 	}
 
 	function getNumberOfUsersByStatusAndName($params = array()) {
-        	$qpa = db_construct_qpa(false, 'SELECT count(user_id) FROM users WHERE users.user_id != 100');
-        	if (isset($params['user_name_search'])) {
-                	$qpa = db_construct_qpa($qpa, ' AND lower(user_name) LIKE $1 OR lower(lastname) LIKE $1', array(strtolower($params['user_name_search'].'%')));
+		$qpa = db_construct_qpa(false, 'SELECT count(user_id) FROM users WHERE users.user_id != 100');
+		if (isset($params['user_name_search'])) {
+			$qpa = db_construct_qpa($qpa, ' AND (lower(user_name) LIKE $1 OR lower(lastname) LIKE $1)', array(strtolower($params['user_name_search'].'%')));
 		}
-        	if (isset($params['status']) && in_array($params['status'], array('D', 'A', 'S', 'P'))) {
-                	$qpa = db_construct_qpa($qpa, ' AND status = $1', array($params['status']));
-        	}
-        	$res = db_query_qpa($qpa);
+		if (isset($params['status']) && in_array($params['status'], array('D', 'A', 'S', 'P'))) {
+			$qpa = db_construct_qpa($qpa, ' AND status = $1', array($params['status']));
+		}
+		$res = db_query_qpa($qpa);
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError('Unable to get users count: '.db_error());
 			return false;
