@@ -4,7 +4,7 @@
  * Fusionforge Cron Job
  *
  * The rest Copyright 2002-2005 (c) GForge Team
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2017, Franck Villaume - TrivialDev
  * Copyright © 2013 Thorsten Glaser, tarent solutions GmbH
  * http://fusionforge.org/
  *
@@ -171,6 +171,10 @@ while ($row = db_fetch_array($res)) {
 
 		system("chown -R root:$groupname $ghome");
 		system("chmod -R g+w $ghome");
+		if (forge_get_config('use_manual_uploads')) {
+		// specific ownership for apache to deal with incoming
+			chown($ghome.'/incoming', forge_get_config('apache_user'));
+		}
 	}
 }
 
