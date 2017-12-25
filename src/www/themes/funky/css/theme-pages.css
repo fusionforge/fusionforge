@@ -3,6 +3,7 @@
  *
  * Copyright 2009 Matthieu FAURE // Open-S: global clean-up
  * Copyright 2010, Antoine Mercadal - Capgemini
+ * Copyright 2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -174,8 +175,45 @@
 }
 
 /*
+ * PAGE: Activity (eg: http://fusionforge/activity/?group_id=<id>)
+ * ========================================================
+ */
+#activity {
+	display: table;
+	width: 100%;
+}
+
+#activity_left {
+	float: left;
+}
+
+#activity_right {
+	overflow : hidden;
+	padding-left: 10px;
+	margin-top:5px;
+}
+
+#activity_select {
+}
+
+#activity_label,
+#activity_label_startdate,
+#activity_label_enddate {
+	font-weight:bold;
+	margin-top:10px;
+}
+
+#activity_startdate,
+#activity_enddate {
+}
+
+#activity_submit {
+	margin-top:10px;
+}
+
+/*
  * PAGE: docman (eg: http://fusionforge/docman/?group_id=<id>)
- *
+ * ========================================================
  */
 .docman_h3 {
 	margin-top: 0;
@@ -232,15 +270,19 @@
 	margin: 2px;
 }
 
+.docman_editfile_title,
+#docman_search_query_label {
+	font-weight:bold;
+}
+
 /*
-	tracker
-*/
-#trackermodform  table
-{
+ * PAGE: tracker (eg: http://fusionforge/tracker/?group_id=<id>)
+ * ========================================================
+ */
+#trackermodform  table {
 	width: 100%;
 }
 
-#trackermodform  input[type=submit]
-{
+#trackermodform  input[type=submit] {
 	float: right;
 }

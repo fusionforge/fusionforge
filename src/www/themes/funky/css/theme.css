@@ -4,7 +4,7 @@
  * Copyright 2010, Antoine Mercadal - Capgemini
  * Copyright 2010, Franck Villaume - Capgemini
  * Copyright 2011, Iñigo Martinez
- * Copyright 2013-2014, Franck Villaume - TrivialDev
+ * Copyright 2013-2014,2017, Franck Villaume - TrivialDev
  * Copyright 2014, Benoit Debaenst - TrivialDev
  * http://fusionforge.org
  *
@@ -125,12 +125,10 @@ hr {
   padding:10px;
 }
 
-#header-col1 img{
-  padding:0;
-  height: 30px;
-/*  height: 50%;
-  width: 50%;
-*/}
+#header-col1 img {
+	padding:0;
+	height: 30px;
+}
 
 #header-col1 h1 {
 	padding: 0;
@@ -145,6 +143,7 @@ hr {
   text-shadow: 1px 1px white;
   font-weight: bold;
 }
+
 #header-col2 a {
   font-size: 10px;
   color: #7D88CC;
@@ -208,7 +207,7 @@ hr {
   display: inline;
 }
 
-#searchBox a{
+#searchBox a {
   font-size: 10px;
   margin-right: 10px;
   text-decoration:none;
@@ -274,8 +273,8 @@ hr {
 }
 
 .tabGenerator .tg-middle {
-  background-color: #41495C;
-  vertical-align: bottom;
+	background-color: #41495C;
+	vertical-align: bottom;
 }
 
 .tabGenerator .tg-middle span {
@@ -342,8 +341,8 @@ hr {
 }
 
 .innertabs .tabGenerator .tg-middle {
-  background-color: #F7F7F7;
-  vertical-align: middle;
+	background-color: #F7F7F7;
+	vertical-align: middle;
 }
 
 .innertabs .tabGenerator .tg-middle span {
@@ -545,7 +544,7 @@ table.listing tbody tr:nth-child(odd),
 	border-collapse: collapse;
 }
 
-.listTable table td{
+.listTable table td {
 	padding: 5px;
 	border: 1px solid gray;
 }
@@ -585,7 +584,7 @@ table.listing tbody tr:nth-child(odd),
 /* =ft (footer)
 ----------------------------------------------- */
 #ft {
-  text-align:center;
+	text-align:center;
 }
 
 /* error_msg, warning_msg or feedback function
@@ -710,45 +709,6 @@ footer img {
 .priority3 { background-color: #fde4aa}
 .priority4 { background-color: #fcd986}
 .priority5 { background-color: #fac955}
-
-/* Activity Page */
-#activity {
-	display: table;
-	width: 100%;
-}
-
-#activity_left {
-	float: left;
-}
-
-#activity_right {
-	overflow : hidden;
-	padding-left: 10px;
-	margin-top:5px;
-}
-
-#activity_select {
-}
-
-#activity_label,
-#activity_label_startdate,
-#activity_label_enddate {
-	font-weight:bold;
-	margin-top:10px;
-}
-
-#activity_startdate,
-#activity_enddate {
-}
-
-#activity_submit {
-	margin-top:10px;
-}
-
-.docman_editfile_title,
-#docman_search_query_label {
-	font-weight:bold;
-}
 
 .table-header-rotated {
 	border-collapse: collapse;
