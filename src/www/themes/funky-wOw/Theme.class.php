@@ -37,9 +37,9 @@ class Theme_Funky_Wow extends Theme_Funky {
 		$this->addStylesheet('/themes/css/fusionforge.css');
 		$this->addStylesheet('/themes/funky-wOw/css/theme.css');
 		$this->addStylesheet('/themes/funky-wOw/css/theme-pages.css');
-		$this->addStylesheet('/scripts/jquery-ui/css/sunny/jquery-ui-1.12.4.css');
-		$this->addStylesheet('/scripts/jquery-ui/css/sunny/jquery-ui.structure-1.12.4.css');
-		$this->addStylesheet('/scripts/jquery-ui/css/sunny/jquery-ui.theme-1.12.4.css');
+		$this->addStylesheet('/scripts/jquery-ui/css/sunny/jquery-ui-1.12.1.css');
+		$this->addStylesheet('/scripts/jquery-ui/css/sunny/jquery-ui.structure-1.12.1.css');
+		$this->addStylesheet('/scripts/jquery-ui/css/sunny/jquery-ui.theme-1.12.1.css');
 	}
 }
 
