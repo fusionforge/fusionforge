@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-10 10:40+0100\n"
+"POT-Creation-Date: 2017-12-25 14:39+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -167,8 +167,8 @@ msgstr ""
 #: common/tracker/EffortUnitSet.class.php:518
 #: common/tracker/include/ArtifactHtml.class.php:58
 #: common/tracker/include/ArtifactTypeHtml.class.php:520
-#: common/tracker/include/ArtifactTypeHtml.class.php:1301
-#: common/tracker/include/ArtifactTypeHtml.class.php:1305
+#: common/tracker/include/ArtifactTypeHtml.class.php:1306
+#: common/tracker/include/ArtifactTypeHtml.class.php:1310
 #: common/tracker/include/build_submission_form.php:43
 #: common/tracker/include/build_submission_form.php:51
 #: common/tracker/include/build_submission_form.php:64
@@ -962,8 +962,8 @@ msgstr ""
 #: common/tracker/views/form-adminroadmap.php:385
 #: common/tracker/views/form-updateextrafieldelement.php:51
 #: common/tracker/views/form-updateextrafield.php:45
-#: common/tracker/views/form-workflow.php:140
-#: common/tracker/views/form-workflow.php:141 common/valid/Valid.class.php:149
+#: common/tracker/views/form-workflow.php:135
+#: common/tracker/views/form-workflow.php:136 common/valid/Valid.class.php:149
 #: common/valid/Valid.class.php:153 common/valid/Valid.class.php:157
 #: common/widget/Widget_HomeLatestFileReleases.class.php:64
 #: common/widget/Widget_HomeLatestFileReleases.class.php:65
@@ -995,7 +995,9 @@ msgstr ""
 #: cronjobs/db/send_pending_items_mail.php:118
 #: cronjobs/db/send_pending_items_mail.php:119
 #: cronjobs/db/send_pending_items_mail.php:120
-#: cronjobs/db/send_pending_items_mail.php:121 db/20141105-frs-ziplatest.php:52
+#: cronjobs/db/send_pending_items_mail.php:121
+#: cronjobs/misc/backup_site.php:120 cronjobs/misc/backup_site.php:148
+#: cronjobs/misc/backup_site.php:191 db/20141105-frs-ziplatest.php:52
 #: db/20141105-frs-ziplatest.php:60 db/20141105-frs-ziplatest.php:64
 #: db/20141105-frs-ziplatest.php:70 db/20141105-frs-ziplatest.php:75
 #: db/20141105-frs-ziplatest.php:83 db/20141106-frs-zip-per-release.php:50
@@ -2092,9 +2094,9 @@ msgstr ""
 #: common/tracker/include/ArtifactHtml.class.php:188
 #: common/tracker/include/ArtifactTypeHtml.class.php:687
 #: common/tracker/include/ArtifactTypeHtml.class.php:840
-#: common/tracker/include/ArtifactTypeHtml.class.php:885
-#: common/tracker/include/ArtifactTypeHtml.class.php:990
-#: common/tracker/include/ArtifactTypeHtml.class.php:1532
+#: common/tracker/include/ArtifactTypeHtml.class.php:890
+#: common/tracker/include/ArtifactTypeHtml.class.php:995
+#: common/tracker/include/ArtifactTypeHtml.class.php:1537
 #: common/tracker/views/form-addextrafieldoption.php:105
 #: common/widget/Widget_TrackerContent.class.php:616
 #: common/widget/Widget_TrackerContent.class.php:631
@@ -2769,7 +2771,7 @@ msgstr ""
 #: common/tracker/include/ArtifactTypeHtml.class.php:488
 #: common/tracker/include/ArtifactTypeHtml.class.php:489
 #: common/tracker/include/ArtifactTypeHtml.class.php:536
-#: common/tracker/include/ArtifactTypeHtml.class.php:1205
+#: common/tracker/include/ArtifactTypeHtml.class.php:1210
 #: common/widget/Widget_HomeLatestFileReleases.class.php:67
 #: common/widget/Widget_MyLatestCommits.class.php:107
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:120
@@ -3656,7 +3658,7 @@ msgstr ""
 #: common/reporting/report_utils.php:1146
 #: common/tracker/actions/downloadcsv.php:39
 #: common/widget/Widget_ProjectLatestDocuments.class.php:109
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:85
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:88
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:79
 #: plugins/scmhook/library/scmcvs/commitTracker.class.php:106
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:120
@@ -3720,13 +3722,13 @@ msgid "Set dates"
 msgstr ""
 
 #: common/docman/views/search.php:142 common/include/FFObject.class.php:353
-#: common/tracker/actions/csv.php:133 common/tracker/views/form-workflow.php:70
+#: common/tracker/actions/csv.php:133 common/tracker/views/form-workflow.php:64
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:46
 msgid "From"
 msgstr ""
 
 #: common/docman/views/search.php:143 common/include/FFObject.class.php:326
-#: common/tracker/views/form-workflow.php:71
+#: common/tracker/views/form-workflow.php:65
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:47
 msgid "To"
 msgstr ""
@@ -4556,7 +4558,7 @@ msgstr ""
 
 #: common/frs/actions/monitor.php:79 common/frs/views/listpackages.php:98
 #: common/widget/Widget_MyMonitoredFp.class.php:100
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:97
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:100
 msgid "Stop monitoring this package"
 msgstr ""
 
@@ -4565,7 +4567,7 @@ msgid "Monitoring stopped successfully"
 msgstr ""
 
 #: common/frs/actions/monitor.php:102 common/frs/views/listpackages.php:102
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:101
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:104
 msgid "Start monitoring this package"
 msgstr ""
 
@@ -4763,7 +4765,7 @@ msgstr ""
 
 #: common/frs/FRSRelease.class.php:325 common/frs/views/qrs.php:83
 #: common/frs/views/shownotes.php:73
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:89
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:92
 msgid "Release Notes"
 msgstr ""
 
@@ -6332,7 +6334,7 @@ msgstr ""
 #: common/include/group_section_texts.php:33
 #: common/widget/Widget_HomeLatestFileReleases.class.php:35
 #: common/widget/Widget_MyMonitoredFp.class.php:123
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:130
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:133
 #: www/export/rss20_activity.php:142 www/index_std.php:83
 msgid "File Release System"
 msgstr ""
@@ -6502,7 +6504,7 @@ msgstr ""
 #: common/tracker/include/build_submission_form.php:70
 #: common/widget/Widget_MyProjects.class.php:77
 #: common/widget/Widget_TrackerComment.class.php:118
-#: plugins/quota_management/www/quota.php:41 www/include/Layout.class.php:547
+#: plugins/quota_management/www/quota.php:41 www/include/Layout.class.php:548
 #: www/pm/add_task.php:52 www/pm/mod_task.php:66
 msgid "Admin"
 msgstr ""
@@ -7983,7 +7985,7 @@ msgstr ""
 #: common/tracker/views/form-updatecanned.php:58
 #: common/tracker/views/form-updateextrafield.php:230
 #: common/tracker/views/form-updatetracker.php:103
-#: common/tracker/views/form-workflow.php:144
+#: common/tracker/views/form-workflow.php:139
 #: common/tracker/views/form-workflow_required_fields.php:93
 #: common/tracker/views/form-workflow_roles.php:82
 #: common/widget/Widget.class.php:101
@@ -8566,9 +8568,9 @@ msgstr ""
 #: common/tracker/actions/browse.php:803
 #: common/tracker/include/ArtifactTypeHtml.class.php:748
 #: common/tracker/include/ArtifactTypeHtml.class.php:789
-#: common/tracker/include/ArtifactTypeHtml.class.php:1436
-#: common/tracker/include/ArtifactTypeHtml.class.php:1469
-#: common/tracker/include/ArtifactTypeHtml.class.php:1492
+#: common/tracker/include/ArtifactTypeHtml.class.php:1441
+#: common/tracker/include/ArtifactTypeHtml.class.php:1474
+#: common/tracker/include/ArtifactTypeHtml.class.php:1497
 #: www/include/html.php:645
 msgid "Nobody"
 msgstr ""
@@ -8675,7 +8677,7 @@ msgstr ""
 #: common/tracker/actions/detail.php:51
 #: common/tracker/actions/mod-limited.php:63 common/tracker/actions/mod.php:69
 #: common/tracker/include/ArtifactTypeHtml.class.php:81
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:72
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:73
 #: common/widget/Widget_TrackerDefaultActions.class.php:72
 msgid "Monitor"
 msgstr ""
@@ -10128,8 +10130,8 @@ msgstr ""
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:526
 #: common/widget/Widget_HomeLatestFileReleases.class.php:73
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:74
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:108
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:76
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:111
 #: plugins/mantisbt/view/viewAttachment.php:52
 #: plugins/mediawiki/www/plugin_admin.php:175 www/new/index.php:119
 msgid "Download"
@@ -10155,47 +10157,51 @@ msgstr ""
 msgid "[DELETED]"
 msgstr ""
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:1144
-#: common/tracker/include/ArtifactTypeHtml.class.php:1177
+#: common/tracker/include/ArtifactTypeHtml.class.php:871
+msgid "Unable to get FRS Package Factory"
+msgstr ""
+
+#: common/tracker/include/ArtifactTypeHtml.class.php:1149
+#: common/tracker/include/ArtifactTypeHtml.class.php:1182
 msgid ""
 "Tip: Enter a space-separated list of artifact ids ([#NNN] also accepted)"
 msgstr ""
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:1301
+#: common/tracker/include/ArtifactTypeHtml.class.php:1306
 msgid "Between"
 msgstr ""
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:1305
+#: common/tracker/include/ArtifactTypeHtml.class.php:1310
 msgid "and"
 msgstr ""
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:1381
-#: common/tracker/include/ArtifactTypeHtml.class.php:1412
+#: common/tracker/include/ArtifactTypeHtml.class.php:1386
+#: common/tracker/include/ArtifactTypeHtml.class.php:1417
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:242
 #: plugins/mantisbt/view/jumpToIssue.php:33
 #: plugins/taskboard/www/admin/ajax.php:55 plugins/taskboard/www/ajax.php:49
 msgid "OK"
 msgstr ""
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:1383
-#: common/tracker/include/ArtifactTypeHtml.class.php:1414
+#: common/tracker/include/ArtifactTypeHtml.class.php:1388
+#: common/tracker/include/ArtifactTypeHtml.class.php:1419
 msgid "Missed"
 msgstr ""
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:1418
+#: common/tracker/include/ArtifactTypeHtml.class.php:1423
 #: www/admin/userlist.php:84
 msgid "Suspended"
 msgstr ""
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:1429
+#: common/tracker/include/ArtifactTypeHtml.class.php:1434
 msgid "Not Available"
 msgstr ""
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:1553
+#: common/tracker/include/ArtifactTypeHtml.class.php:1558
 msgid "One or more of the selected options is not allowed"
 msgstr ""
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:1554
+#: common/tracker/include/ArtifactTypeHtml.class.php:1559
 msgid "This choice is not allowed"
 msgstr ""
 
@@ -10946,44 +10952,44 @@ msgstr ""
 msgid "Configure Workflow"
 msgstr ""
 
-#: common/tracker/views/form-workflow.php:62
+#: common/tracker/views/form-workflow.php:66
+msgid "Initial values"
+msgstr ""
+
+#: common/tracker/views/form-workflow.php:79
 #, php-format
 msgid "Allowed initial values for the %s field"
 msgstr ""
 
-#: common/tracker/views/form-workflow.php:72
-msgid "Initial values"
+#: common/tracker/views/form-workflow.php:102
+msgid "Allowed from value to value switch"
 msgstr ""
 
-#: common/tracker/views/form-workflow.php:77
-msgid "From Value"
-msgstr ""
-
-#: common/tracker/views/form-workflow.php:121
-#: common/tracker/views/form-workflow.php:140 www/project/admin/users.php:298
+#: common/tracker/views/form-workflow.php:116
+#: common/tracker/views/form-workflow.php:135 www/project/admin/users.php:298
 msgid "Edit Roles"
 msgstr ""
 
-#: common/tracker/views/form-workflow.php:123
-#: common/tracker/views/form-workflow.php:141
+#: common/tracker/views/form-workflow.php:118
+#: common/tracker/views/form-workflow.php:136
 msgid "Edit Required Fields"
 msgstr ""
 
-#: common/tracker/views/form-workflow.php:140
+#: common/tracker/views/form-workflow.php:135
 msgid "Tip"
 msgstr ""
 
-#: common/tracker/views/form-workflow.php:140
+#: common/tracker/views/form-workflow.php:135
 #, php-format
 msgid ""
 "Click on %s to configure allowed roles for a transition (all by default)."
 msgstr ""
 
-#: common/tracker/views/form-workflow.php:141
+#: common/tracker/views/form-workflow.php:136
 msgid "Tip2"
 msgstr ""
 
-#: common/tracker/views/form-workflow.php:141
+#: common/tracker/views/form-workflow.php:136
 #, php-format
 msgid ""
 "Click on %s to configure required fields for a transition (none by default)."
@@ -11003,7 +11009,7 @@ msgstr ""
 #: common/widget/Widget_TrackerContent.class.php:721
 #: plugins/mailman/www/mailman_utils.php:71
 #: plugins/mailman/www/mailman_utils.php:141 www/account/index.php:239
-#: www/include/Layout.class.php:1103
+#: www/include/Layout.class.php:1104
 msgid "Preferences"
 msgstr ""
 
@@ -11109,7 +11115,7 @@ msgid "Recently Registered Projects"
 msgstr ""
 
 #: common/widget/Widget_HomeTagCloud.class.php:27
-#: www/include/features_boxes.php:42 www/include/Layout.class.php:1164
+#: www/include/features_boxes.php:42 www/include/Layout.class.php:1165
 #: www/softwaremap/tag_cloud.php:56
 msgid "Tag Cloud"
 msgstr ""
@@ -11831,29 +11837,29 @@ msgstr ""
 msgid "This project has not released any files."
 msgstr ""
 
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:117
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:120
 msgid "View All Project Files"
 msgstr ""
 
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:134
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:137
 msgid ""
 "List the most recent packages available for download along with their "
 "revision."
 msgstr ""
 
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:136
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:139
 msgid ""
 "A Release Notes icon allows you to see the latest changes and developers "
 "comments associated with this revision."
 msgstr ""
 
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:138
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:141
 msgid ""
 "Then comes the monitor icon, selecting this icon will cause this package to "
 "be monitored for you."
 msgstr ""
 
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:140
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:143
 msgid ""
 "Anytime the project development team posts a new release, you will be "
 "automatically notified via e-mail. All monitored File Releases are listed in "
@@ -12258,6 +12264,22 @@ msgstr ""
 #: www/export/rssAboTask.php:144 www/my/diary.php:193
 #: www/news/admin/index.php:145 www/news/submit.php:156
 msgid "Details"
+msgstr ""
+
+#: cronjobs/misc/backup_site.php:120
+msgid "Unable to find upload dir. Configured value is"
+msgstr ""
+
+#: cronjobs/misc/backup_site.php:135
+msgid "Unable to find Mailman data dir. Please edit backup_site.php cronjob"
+msgstr ""
+
+#: cronjobs/misc/backup_site.php:148
+msgid "Unable to find CVSROOT dir. Configured value is"
+msgstr ""
+
+#: cronjobs/misc/backup_site.php:191
+msgid "Unable to find SVNROOT dir. Configured value is"
 msgstr ""
 
 #: cronjobs/misc/tracker_gateway.php:195
@@ -20191,7 +20213,7 @@ msgstr ""
 msgid "Resend New Project Instruction Email"
 msgstr ""
 
-#: www/admin/grouplist.php:31 www/include/Layout.class.php:1176
+#: www/admin/grouplist.php:31 www/include/Layout.class.php:1177
 #: www/softwaremap/full_list.php:85
 msgid "Project List"
 msgstr ""
@@ -21940,70 +21962,70 @@ msgstr ""
 msgid "en"
 msgstr ""
 
-#: www/include/Layout.class.php:535
+#: www/include/Layout.class.php:536
 msgid "Quick Jump To..."
 msgstr ""
 
-#: www/include/Layout.class.php:1084
+#: www/include/Layout.class.php:1085
 msgid "Remove block"
 msgstr ""
 
-#: www/include/Layout.class.php:1084
+#: www/include/Layout.class.php:1085
 msgid "Do you really want to remove this block?"
 msgstr ""
 
-#: www/include/Layout.class.php:1089
+#: www/include/Layout.class.php:1090
 msgid "Maximize"
 msgstr ""
 
-#: www/include/Layout.class.php:1092
+#: www/include/Layout.class.php:1093
 msgid "Minimize"
 msgstr ""
 
-#: www/include/Layout.class.php:1134
+#: www/include/Layout.class.php:1135
 msgid "Spinner"
 msgstr ""
 
-#: www/include/Layout.class.php:1166
+#: www/include/Layout.class.php:1167
 msgid "Browse per tags defined by the projects."
 msgstr ""
 
-#: www/include/Layout.class.php:1170 www/softwaremap/trove_list.php:83
+#: www/include/Layout.class.php:1171 www/softwaremap/trove_list.php:83
 msgid "Project Tree"
 msgstr ""
 
-#: www/include/Layout.class.php:1172 www/snippet/index.php:81
+#: www/include/Layout.class.php:1173 www/snippet/index.php:81
 msgid "Browse by Category"
 msgstr ""
 
-#: www/include/Layout.class.php:1178
+#: www/include/Layout.class.php:1179
 msgid "Complete listing of available projects."
 msgstr ""
 
-#: www/include/Layout.class.php:1219
+#: www/include/Layout.class.php:1220
 #, php-format
 msgid "Fields marked with %s are mandatory."
 msgstr ""
 
-#: www/include/Layout.class.php:1287
+#: www/include/Layout.class.php:1288
 #, php-format
 msgid "Displaying results %1$s out of %2$d total."
 msgstr ""
 
-#: www/include/Layout.class.php:1289
+#: www/include/Layout.class.php:1290
 #, php-format
 msgid "Displaying %s results."
 msgstr ""
 
-#: www/include/Layout.class.php:1290 www/top/topusers.php:67
+#: www/include/Layout.class.php:1291 www/top/topusers.php:67
 msgid "Change"
 msgstr ""
 
-#: www/include/Layout.class.php:1313
+#: www/include/Layout.class.php:1314
 msgid "previous"
 msgstr ""
 
-#: www/include/Layout.class.php:1340
+#: www/include/Layout.class.php:1341
 msgid "next"
 msgstr ""
 
