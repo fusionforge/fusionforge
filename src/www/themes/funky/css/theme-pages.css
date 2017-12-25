@@ -286,3 +286,8 @@
 #trackermodform  input[type=submit] {
 	float: right;
 }
+
+.artifact_closed,
+.artifact_closed:hover {
+	text-decoration:line-through;
+}
