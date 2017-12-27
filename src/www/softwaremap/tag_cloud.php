@@ -110,11 +110,19 @@ if ($selected_tag) {
 		if ($row_grp['short_description']) {
 			$content .= "- " . $row_grp['short_description'];
 		}
-		$cells[] = array($content, 'colspan' => 2);
+		if (forge_get_config('use_trove')) {
+			$cells[] = array($content, 'colspan' => 2);
+		} else {
+			$cells[][] = $content;
+		}
 		echo $HTML->multiTableRow(array('class' => 'top'), $cells);
 		// extra description
 		$cells = array();
-		$cells[] = array(_('Tags') . _(': ') . list_project_tag($row_grp['group_id']), 'colspan' => 2);
+		if (forge_get_config('use_trove')) {
+			$cells[] = array(_('Tags') . _(': ') . list_project_tag($row_grp['group_id']), 'colspan' => 2);
+		} else {
+			$cells[][] = _('Tags') . _(': ') . list_project_tag($row_grp['group_id']);
+		}
 		echo $HTML->multiTableRow(array('class' => 'top'), $cells);
 		$cells = array();
 		if (forge_get_config('use_trove')) {
@@ -133,11 +141,7 @@ if ($selected_tag) {
 		$content .= html_e('br')._('Activity Ranking')._(': ').$ranking;
 		$content .= html_e('br').sprintf(_('Registered') . _(': '));
 		$content .= html_e('strong', array(), date(_('Y-m-d H:i'),$row_grp['register_time']));
-		if (forge_get_config('use_trove')) {
-			$cells[] = array($content, 'class' => 'align-right');
-		} else {
-			$cells[] = array($content, 'class' => 'align-right', 'colspan' => 2);
-		}
+		$cells[] = array($content, 'class' => 'align-right');
 		echo $HTML->multiTableRow(array('class' => 'top'), $cells);
 		if (forge_get_config('use_people') && people_group_has_job($row_grp['group_id'])) {
 				$cells = array();
