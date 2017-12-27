@@ -1494,8 +1494,9 @@ control over it to the project's administrator.");
 	}
 
 	function getRepositories($group, $autoinclude = true) {
+		$repoarr = array();
 		if ($autoinclude) {
-			$repoarr = array($group->getUnixName());
+			$repoarr[] = $group->getUnixName();
 		}
 		$result = db_query_params('SELECT repo_name FROM scm_secondary_repos WHERE group_id = $1 AND next_action = $2 AND plugin_id = $3 ORDER BY repo_name',
 						   array($group->getID(),
