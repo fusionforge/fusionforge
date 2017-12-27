@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (C) 2008-2009 Alcatel-Lucent
- * Copyright 2015, Franck Villaume - TrivialDev
+ * Copyright 2015,2017, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -117,7 +117,9 @@ if ($selected_tag) {
 		$cells[] = array(_('Tags') . _(': ') . list_project_tag($row_grp['group_id']), 'colspan' => 2);
 		echo $HTML->multiTableRow(array('class' => 'top'), $cells);
 		$cells = array();
-		$cells[][] = trove_getcatlisting($row_grp['group_id'],0,1,0);
+		if (forge_get_config('use_trove')) {
+			$cells[][] = trove_getcatlisting($row_grp['group_id'], 0, 1, 0);
+		}
 		$res = db_query_params('SELECT percentile, ranking FROM project_weekly_metric WHERE group_id = $1', array($row_grp['group_id']));
 		$nb_line = db_numrows($res);
 		if ($nb_line) {
@@ -131,7 +133,11 @@ if ($selected_tag) {
 		$content .= html_e('br')._('Activity Ranking')._(': ').$ranking;
 		$content .= html_e('br').sprintf(_('Registered') . _(': '));
 		$content .= html_e('strong', array(), date(_('Y-m-d H:i'),$row_grp['register_time']));
-		$cells[] = array($content, 'class' => 'align-right');
+		if (forge_get_config('use_trove')) {
+			$cells[] = array($content, 'class' => 'align-right');
+		} else {
+			$cells[] = array($content, 'class' => 'align-right', 'colspan' => 2);
+		}
 		echo $HTML->multiTableRow(array('class' => 'top'), $cells);
 		if (forge_get_config('use_people') && people_group_has_job($row_grp['group_id'])) {
 				$cells = array();
