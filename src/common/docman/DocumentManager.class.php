@@ -433,13 +433,14 @@ class DocumentManager extends FFError {
 	 */
 	function getActivity($sections, $begin, $end) {
 		$results = array();
+		$qpa = false;
 		for ($i = 0; $i < count($sections); $i++) {
 			$results[$sections[$i]] = 0;
 			$union = 0;
 			if (count($sections) >= 1 && $i != count($sections) -1) {
 				$union = 1;
 			}
-			$qpa = db_construct_qpa(false, 'SELECT count(*) FROM activity_vw WHERE activity_date BETWEEN $1 AND $2
+			$qpa = db_construct_qpa($qpa, 'SELECT count(*) FROM activity_vw WHERE activity_date BETWEEN $1 AND $2
 							AND group_id = $3 AND section = $4 ',
 							array($begin,
 								$end,
