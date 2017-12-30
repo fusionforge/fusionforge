@@ -53,7 +53,7 @@ Requires:
 Requires:
 
 %package plugin-mediawiki
-Requires: mediawiki
+Requires: mediawiki ImageMagick
 
 %package plugin-message
 Requires:

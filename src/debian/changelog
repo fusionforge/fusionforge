@@ -4,6 +4,12 @@ fusionforge (6.1.50-0) UNRELEASED; urgency=medium
 
  -- Franck Villaume <franck.villaume@trivialdev.com>  Wed, 04 Oct 2017 09:40:00 +0200
 
+fusionforge (6.1~beta1) UNRELEASED; urgency=medium
+
+  * New snapshot from 6.1 stabilization branch
+
+ -- Franck Villaume <franck.villaume@trivialdev.com>  Sun, 10 Dec 2017 08:30:00 +0200
+
 fusionforge (6.1~alpha0) UNRELEASED; urgency=medium
 
   * New snapshot from 6.1 stabilization branch

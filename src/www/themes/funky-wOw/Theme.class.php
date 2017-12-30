@@ -1,11 +1,11 @@
 <?php
 /**
- * FusionForge Funky Theme
+ * FusionForge Funky wOw Theme
  *
  * Copyright 2010, Antoine Mercadal - Capgemini
  * Copyright 2010, Marc-Etienne Vargenau, Alcatel-Lucent
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2011-2016, Franck Villaume - TrivialDev
+ * Copyright 2011-2017, Franck Villaume - TrivialDev
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -31,10 +31,15 @@ class Theme_Funky_Wow extends Theme_Funky {
 		parent::__construct();
 		$this->themeurl = util_make_uri('themes/funky-wOw/');
 		$this->imgbaseurl = $this->themeurl . 'images/';
+		$this->css = array();
+		$this->css_min = array();
+		$this->stylesheets = array();
+		$this->addStylesheet('/themes/css/fusionforge.css');
 		$this->addStylesheet('/themes/funky-wOw/css/theme.css');
-		$this->addStylesheet('/scripts/jquery-ui/css/sunny/jquery-ui-1.12.4.css');
-		$this->addStylesheet('/scripts/jquery-ui/css/sunny/jquery-ui.structure-1.12.4.css');
-		$this->addStylesheet('/scripts/jquery-ui/css/sunny/jquery-ui.theme-1.12.4.css');
+		$this->addStylesheet('/themes/funky-wOw/css/theme-pages.css');
+		$this->addStylesheet('/scripts/jquery-ui/css/sunny/jquery-ui-1.12.1.css');
+		$this->addStylesheet('/scripts/jquery-ui/css/sunny/jquery-ui.structure-1.12.1.css');
+		$this->addStylesheet('/scripts/jquery-ui/css/sunny/jquery-ui.theme-1.12.1.css');
 	}
 }
 

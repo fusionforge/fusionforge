@@ -68,13 +68,16 @@ class Widget_ProjectLatestFileReleases extends Widget {
 			//]]>';
 			$result .= html_ac(html_ap() - 1);
 			$titleArr = array(_('Package'), _('Version'), _('Date'), _('Notes'));
+			$classth = array('', '', '', 'unsortable');
 			if (session_loggedin()) {
 				$titleArr[] = _('Monitor');
+				$classth[] = 'unsortable';
 			}
 			$titleArr[] = _('Download');
+			$classth[] = 'unsortable';
 			html_use_tablesorter();
 			$result .= $HTML->getJavascripts();
-			$result .= $HTML->listTableTop($titleArr, array(), 'sortable_widget_frs_listpackage full', 'sortable_frs');
+			$result .= $HTML->listTableTop($titleArr, array(), 'sortable_widget_frs_listpackage full', 'sortable_frs', $classth);
 			foreach ($frsrnrs as $key => $frsrnr) {
 				$rel_date = $frsrnr->getReleaseDate();
 				$package_name = $frsrnr->FRSPackage->getName();

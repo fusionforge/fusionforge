@@ -82,7 +82,7 @@ else
 		cvs subversion viewvc python-pycurl git gitweb mercurial xinetd \
 		moin mod_wsgi python-psycopg2 \
 		unoconv poppler-utils libreoffice-headless \
-		mediawiki php-markdown \
+		mediawiki ImageMagick php-markdown \
 		vsftpd \
 		dejavu-fonts-common
 fi

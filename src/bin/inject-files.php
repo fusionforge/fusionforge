@@ -2,6 +2,7 @@
 <?php
 /**
  * Copyright 2009, Roland Mas
+ * Copyright 2017, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -18,14 +19,6 @@
  * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
-require (dirname (__FILE__).'/../common/include/env.inc.php');
-require_once $gfcommon.'include/pre.php';
-require_once $gfcommon.'frs/FRSPackage.class.php';
-require_once $gfcommon.'frs/FRSRelease.class.php';
-require_once $gfcommon.'frs/FRSFile.class.php';
-
-db_begin ();
 
 /*
  * Line format:
@@ -49,79 +42,97 @@ db_begin ();
  9999 | Other
 */
 
-$f = fopen ('files.txt', 'r') ;
-while (! feof ($f)) {
-	$l = trim (fgets ($f, 1024)) ;
-	if ($l == "") { continue ; } ;
-	$array = explode (':', $l) ;
-	$projectname = $array[0] ;
-	$packagename = $array[1] ;
-	$releasename = $array[2] ;
-	$filepath = $array[3] ;
-	$notes = $array[4] ;
-	$changes = $array[5] ;
-	$typeid = $array[6] ;
-	$processorid = $array[7] ;
+require (dirname (__FILE__).'/../common/include/env.inc.php');
+require_once $gfcommon.'include/pre.php';
+require_once $gfcommon.'frs/FRSPackage.class.php';
+require_once $gfcommon.'frs/FRSRelease.class.php';
+require_once $gfcommon.'frs/FRSFile.class.php';
 
-	$admin = user_get_object_by_name ('admin') ;
-	session_set_new ($admin->getID ()) ;
+if (count($argv) != 2) {
+	echo "Usage: .../inject-files.php files.txt\n";
+	exit(1);
+}
 
-	$g = group_get_object_by_name ($projectname);
+if (!is_file('files.txt')) {
+	echo "Cannot open files.txt\n";
+	exit(1);
+}
+
+$f = fopen('files.txt', 'r');
+db_begin();
+
+while (!feof($f)) {
+	$l = trim (fgets($f, 1024));
+	if ($l == "") { continue; }
+	$array = explode (':', $l);
+	$projectname = $array[0];
+	$packagename = $array[1];
+	$releasename = $array[2];
+	$filepath = $array[3];
+	$notes = $array[4];
+	$changes = $array[5];
+	$typeid = $array[6];
+	$processorid = $array[7];
+
+	$admin = user_get_object_by_name('admin');
+	session_set_new($admin->getID());
+
+	$g = group_get_object_by_name($projectname);
 	if (! $g) {
-		print "Error: invalid group\n" ;
-		db_rollback () ;
-		exit (1) ;
+		print "Error: invalid group\n";
+		db_rollback();
+		exit(1);
 	}
 
-	$packages = get_frs_packages ($g) ;
+	$packages = get_frs_packages($g);
 	$package = false ;
 	if ($packages) {
 		foreach ($packages as $cur) {
 			if ($cur->getName () == $packagename) {
-				$package = $cur ;
-				break ;
+				$package = $cur;
+				break;
 			}
 		}
 	}
 	if (!$package) {
-		$package = new FRSPackage ($g) ;
-		$r = $package->create ($packagename) ;
+		$package = new FRSPackage($g);
+		$r = $package->create($packagename);
 	}
 	if (!$r || !$package) {
-		print "Error when creating FRS package\n" ;
-		db_rollback () ;
-		exit (1) ;
+		print "Error when creating FRS package\n";
+		db_rollback();
+		exit(1);
 	}
 
-	$releases = $package->getReleases () ;
-	$release = false ;
+	$releases = $package->getReleases();
+	$release = false;
 	if ($releases) {
 		foreach ($releases as $cur) {
 			if ($cur->getName () == $releasename) {
-				$release = $cur ;
+				$release = $cur;
 				break ;
 			}
 		}
 	}
 	if (!$release) {
-		$release = new FRSRelease ($package) ;
-		$r = $release->create ($releasename, $notes, $changes, false) ;
+		$release = new FRSRelease($package);
+		$r = $release->create($releasename, $notes, $changes, false);
 	}
 	if (!$r || !$release) {
 		print "Error when creating FRS release\n" ;
-		db_rollback () ;
-		exit (1) ;
+		db_rollback();
+		exit(1);
 	}
 
-	$file = new FRSFile ($release) ;
-	$pathcomponents = explode ('/', $filepath) ;
-	$filename = $pathcomponents[count($pathcomponents)-1] ;
-	$r = $file->create ($filename, $filepath, $typeid, $processorid) ;
+	$file = new FRSFile($release);
+	$pathcomponents = explode('/', $filepath);
+	$filename = $pathcomponents[count($pathcomponents)-1];
+	$r = $file->create($filename, $filepath, $typeid, $processorid);
 
 	if (!$r) {
-		print "Error when creating FRS file\n" ;
-		db_rollback () ;
-		exit (1) ;
+		print "Error when creating FRS file\n";
+		db_rollback();
+		exit(1);
 	}
 }
 fclose ($f);

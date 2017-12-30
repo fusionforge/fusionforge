@@ -246,7 +246,7 @@ abstract class SCMPlugin extends Plugin {
 
 	function printAdminPage($params) {
 		$group = $this->checkParams($params);
-		if (!$project) {
+		if (!$group) {
 			return;
 		}
 

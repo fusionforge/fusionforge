@@ -243,12 +243,7 @@ class Artifact extends FFObject {
 			$this->setError(_('Message Body Is Required'));
 			return false;
 		}
-		if (!$assigned_to) {
-			$assigned_to=100;
-		}
-		if (!$priority) {
-			$priority=3;
-		}
+
 		$status_id=1;		// on creation, status is set to "open"
 
 		//
@@ -263,30 +258,32 @@ class Artifact extends FFObject {
 		}
 
 		db_begin();
-		if (array_key_exists('time',$importData)){
+		if (array_key_exists('time', $importData)){
 			$time = $importData['time'];
 		} else {
 			$time = time();
 		}
 		$res = db_query_params('INSERT INTO artifact
-					(group_artifact_id,status_id,priority,
-					submitted_by,assigned_to,open_date,summary,details)
-					VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
+					(group_artifact_id, status_id, priority,
+					submitted_by, assigned_to, open_date, last_modified_date, last_modified_by, summary, details)
+					VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)',
 					array ($this->ArtifactType->getID(),
-					       $status_id,
-					       $priority,
-					       $user,
-					       $assigned_to,
-					       $time,
-					       htmlspecialchars($summary),
-					       htmlspecialchars($details)));
+						$status_id,
+						$priority,
+						$user,
+						$assigned_to,
+						$time,
+						$time,
+						$user,
+						htmlspecialchars($summary),
+						htmlspecialchars($details)));
 		if (!$res) {
 			$this->setError(db_error());
 			db_rollback();
 			return false;
 		}
 
-		$artifact_id=db_insertid($res,'artifact','artifact_id');
+		$artifact_id = db_insertid($res, 'artifact', 'artifact_id');
 
 		if (!$res || !$artifact_id) {
 			$this->setError(db_error());
@@ -719,7 +716,7 @@ class Artifact extends FFObject {
 			$order = 'ASC';
 		}
 		return db_query_params('SELECT * FROM artifact_message_user_vw WHERE artifact_id=$1 ORDER BY adddate ' . $order . ', id ASC',
-		    array($this->getID()));
+					array($this->getID()));
 	}
 
 	/**
@@ -733,8 +730,8 @@ class Artifact extends FFObject {
 		if (!$msg_id) {
 			return false;
 		}
-		return db_query_params ('SELECT * FROM artifact_message_user_vw WHERE id=$1',
-			array($msg_id));
+		return db_query_params('SELECT * FROM artifact_message_user_vw WHERE id=$1',
+					array($msg_id));
 	}
 
 	/**

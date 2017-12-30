@@ -178,37 +178,32 @@
  * PAGE: Activity (eg: http://fusionforge/activity/?group_id=<id>)
  * ========================================================
  */
-#activity {
+#activity_left {
 	display: table;
 	width: 100%;
 }
 
-#activity_left {
-	float: left;
-}
-
 #activity_right {
-	overflow : hidden;
-	padding-left: 10px;
 	margin-top:5px;
 }
 
 #activity_select {
-}
-
-#activity_label,
-#activity_label_startdate,
-#activity_label_enddate {
-	font-weight:bold;
-	margin-top:10px;
+	float: left;
 }
 
 #activity_startdate,
 #activity_enddate {
+	float: left;
+	margin-left: 5px;
 }
 
 #activity_submit {
 	margin-top:10px;
+}
+
+#activity_submit input {
+	margin-top: 23px;
+	margin-left: 5px;
 }
 
 /*

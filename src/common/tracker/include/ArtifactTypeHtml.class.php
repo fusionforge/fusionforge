@@ -851,20 +851,25 @@ class ArtifactTypeHtml extends ArtifactType {
 		}
 
 		$fpFactory = new FRSPackageFactory($this->getGroup());
-		$packages = $fpFactory->getFRSs(true);
-		uasort($packages, 'compareObjectName');
-		foreach ($packages as $package) {
-			$releases = $package->getReleases(false);
-			uasort($releases, 'compareObjectName');
-			foreach ($releases as $release) {
-				$optGroup[] = $package->getName();
-				$releasesArray[$release->getID()] = $release->getName();
+		if ($fpFactory && is_object($fpFactory) && !$fpFactory->isError()) {
+			$packages = $fpFactory->getFRSs(true);
+			uasort($packages, 'compareObjectName');
+			foreach ($packages as $package) {
+				$releases = $package->getReleases(false);
+				uasort($releases, 'compareObjectName');
+				foreach ($releases as $release) {
+					$optGroup[] = $package->getName();
+					$releasesArray[$release->getID()] = $release->getName();
+				}
 			}
-		}
 
-		$keys = array_keys($releasesArray);
-		$vals = array_values($releasesArray);
-		return html_build_select_box_from_arrays($keys, $vals, 'extra_fields['.$extra_field_id.']', $checked, $show_100, $text_100, $show_any, $text_any, $allowed, $attrs, $releasesAttrs, array(), $optGroup);
+			$keys = array_keys($releasesArray);
+			$vals = array_values($releasesArray);
+			return html_build_select_box_from_arrays($keys, $vals, 'extra_fields['.$extra_field_id.']', $checked, $show_100, $text_100, $show_any, $text_any, $allowed, $attrs, $releasesAttrs, array(), $optGroup);
+		} else {
+			global $HTML;
+			return $HTML->error_msg(_('Unable to get FRS Package Factory'));
+		}
 	}
 
 	/**

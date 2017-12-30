@@ -57,33 +57,27 @@ if (!$has_error) {
 	$elearray = $ath->getExtraFieldElements($field_id);
 	$states = $elearray;
 
-?>
+	echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&amp;atid='.$ath->getID(), 'method' => 'post'));
+	echo html_e('input', array('type' => 'hidden', 'name' => 'field_id', 'value' => $field_id));
+	echo html_e('input', array('type' => 'hidden', 'name' => 'workflow', 'value' => 1));
 
-	<h2><?php printf(_('Allowed initial values for the %s field'), $field_name) ?></h2>
-<?php
-echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&amp;atid='.$ath->getID(), 'method' => 'post'));
-?>
-	<input type="hidden" name="field_id" value="<?php echo $field_id ?>" />
-	<input type="hidden" name="workflow" value="1" />
-
-<?php
 	$from = _('From').' ';
 	$to = _('To').' ';
 	$init = _('Initial values').' ';
 
-	$title_arr=array();
-	$to_title_arr=array();
-	$class_arr=array();
-	$title_arr[]=_('From Value');
-	$class_arr[]=('');
-	$to_title_arr[]=('');
+	$title_arr = array();
+	$to_title_arr = array();
+	$class_arr = array();
+	$title_arr[] = '';
+	$class_arr[] = '';
+	$to_title_arr[] = '';
 	foreach ($elearray as $status) {
 		$title_arr[]='<div><span>'.$status['element_name'].'</span></div>';
 		$to_title_arr[]='<div><span>'.$to.$status['element_name'].'</span></div>';
 		$class_arr[]='rotate';
 	}
-	echo $HTML->listTableTop($title_arr, array(), 'table-header-rotated', '', $class_arr);
-	echo "\n";
+	echo html_e('h2', array(), sprintf(_('Allowed initial values for the %s field'), $field_name));
+	echo $HTML->listTableTop($title_arr, array(), 'table-header-rotated', '', $class_arr, array(), array(), '');
 
 	// Special treatment for the initial value (in the Submit form).
 	echo '<tr id="initval"><th class="row-header" style="text-align:left">'.$init.'</th>'."\n";
@@ -105,7 +99,8 @@ echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&a
 		$totitle_arr[] = $title_arr[$i]? $to_title_arr[$i] : '';
 		$class_arr[]='rotate';
 	}
-	echo $HTML->listTableTop($totitle_arr, array(), 'table-header-rotated','',$class_arr);
+	echo html_e('h2', array(), _('Allowed from value to value switch'));
+	echo $HTML->listTableTop($totitle_arr, array(), 'table-header-rotated','',$class_arr, array(), array(), '');
 
 	$i=1;
 	foreach ($elearray as $status) {

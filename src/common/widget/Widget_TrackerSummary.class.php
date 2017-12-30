@@ -99,7 +99,7 @@ class Widget_TrackerSummary extends Widget {
 			$return .= $ah->showDetails($editable, array('form' => 'trackerform', 'class'=>$class));
 		} elseif ($func == 'add') {
 			$return .= notepad_func();
-			$return .= $HTML->listTableTop();
+			$return .= $HTML->listTableTop(array(), array(), 'full');
 			$content = html_e('strong', array(), _('Detailed description').$requiredInfo._(':'));
 			$content .= notepad_button('document.forms.trackerform.details');
 			$content .= html_e('textarea', array('form' => 'trackerform', 'id'=>'tracker-description', 'required'=>'required', 'name'=>'details', 'rows'=>'20', 'class'=>$class, 'style'=>'box-sizing: border-box; width: 100%', 'title'=>util_html_secure(html_get_tooltip_description('description'))), $details, false);

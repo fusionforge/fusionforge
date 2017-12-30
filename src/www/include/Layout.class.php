@@ -464,9 +464,10 @@ abstract class Layout extends FFError {
 	 * @param	array	$thClassArray		specific class for th column
 	 * @param	array	$thTitleArray		specific title for th column
 	 * @param	array	$thOtherAttrsArray	optional other html attributes for the th
+	 * @param	string	$theadClass		optional thead tr css class. default is tableheading
 	 * @return	string	the html code
 	 */
-	function listTableTop($titleArray = array(), $linksArray = array(), $class = '', $id = '', $thClassArray = array(), $thTitleArray = array(), $thOtherAttrsArray = array()) {
+	function listTableTop($titleArray = array(), $linksArray = array(), $class = '', $id = '', $thClassArray = array(), $thTitleArray = array(), $thOtherAttrsArray = array(), $theadClass = 'tableheading') {
 		$attrs = array();
 		if ($class) {
 			$attrs['class'] = $class;
@@ -481,7 +482,7 @@ abstract class Layout extends FFError {
 		if (count($titleArray)) {
 			$ap = html_ap();
 			$return .= html_ao('thead');
-			$return .= html_ao('tr', array('class' => 'tableheading'));
+			$return .= html_ao('tr', array('class' => $theadClass));
 
 			$count = count($titleArray);
 			for ($i = 0; $i < $count; $i++) {

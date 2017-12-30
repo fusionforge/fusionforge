@@ -1,3 +1,6 @@
+-- extra_field_id 100 is reserved!
+UPDATE artifact_extra_field_list set extra_field_id = (select max(extra_field_id)+1 from artifact_extra_field_list) where extra_field_id = 100;
+
 INSERT INTO artifact_extra_field_list(extra_field_id, group_artifact_id, field_name, alias, description) VALUES (100, 100, 'Default', 'default', 'Default Data - Dont Edit');
 
 ALTER TABLE artifact_group_list
