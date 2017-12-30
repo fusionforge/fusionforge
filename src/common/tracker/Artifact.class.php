@@ -265,8 +265,8 @@ class Artifact extends FFObject {
 		}
 		$res = db_query_params('INSERT INTO artifact
 					(group_artifact_id, status_id, priority,
-					submitted_by, assigned_to, open_date, last_modified_date, summary,details)
-					VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)',
+					submitted_by, assigned_to, open_date, last_modified_date, last_modified_by, summary, details)
+					VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)',
 					array ($this->ArtifactType->getID(),
 						$status_id,
 						$priority,
@@ -274,6 +274,7 @@ class Artifact extends FFObject {
 						$assigned_to,
 						$time,
 						$time,
+						$user,
 						htmlspecialchars($summary),
 						htmlspecialchars($details)));
 		if (!$res) {
