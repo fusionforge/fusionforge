@@ -243,12 +243,7 @@ class Artifact extends FFObject {
 			$this->setError(_('Message Body Is Required'));
 			return false;
 		}
-		if (!$assigned_to) {
-			$assigned_to=100;
-		}
-		if (!$priority) {
-			$priority=3;
-		}
+
 		$status_id=1;		// on creation, status is set to "open"
 
 		//
@@ -720,7 +715,7 @@ class Artifact extends FFObject {
 			$order = 'ASC';
 		}
 		return db_query_params('SELECT * FROM artifact_message_user_vw WHERE artifact_id=$1 ORDER BY adddate ' . $order . ', id ASC',
-		    array($this->getID()));
+					array($this->getID()));
 	}
 
 	/**
@@ -734,8 +729,8 @@ class Artifact extends FFObject {
 		if (!$msg_id) {
 			return false;
 		}
-		return db_query_params ('SELECT * FROM artifact_message_user_vw WHERE id=$1',
-			array($msg_id));
+		return db_query_params('SELECT * FROM artifact_message_user_vw WHERE id=$1',
+					array($msg_id));
 	}
 
 	/**
