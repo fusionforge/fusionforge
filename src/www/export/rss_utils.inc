@@ -52,14 +52,14 @@ function rss_description ($in) {
 
 // callback is optional function name which should be called for each project
 // row and which result will be appended to description element
-function rss_dump_project_result_set ($res,$title,$desription='',$callback=0) {
-        if (!$desription) $desription=$title;
+function rss_dump_project_result_set($res, $title ,$desription = '', $callback = 0) {
+        if (!$desription) $desription = $title;
 	// one time output
 	print " <channel>\n";
-	print "  <copyright>Copyright ".date("Y")." ".forge_get_config ('forge_name')."</copyright>\n";
+	print "  <copyright>Copyright ".date("Y")." ".forge_get_config('forge_name')."</copyright>\n";
 	print "  <pubDate>".rss_date(time())."</pubDate>\n";
 	print "  <description>$desription</description>\n";
-	print "  <link>http://".forge_get_config ('web_host')."/</link>\n";
+	print "  <link>".util_make_url()."</link>\n";
 	print "  <title>$title</title>\n";
 	print "  <webMaster>".forge_get_config ('admin_email')."</webMaster>\n";
 	print "  <language>en-us</language>\n";
@@ -93,7 +93,7 @@ function rss_dump_project_result_array ($result,$title,$desription='',$callback=
 	print "  <copyright>Copyright ".date("Y")." ".forge_get_config ('forge_name')."</copyright>\n";
 	print "  <pubDate>".rss_date(time())."</pubDate>\n";
 	print "  <description>$desription</description>\n";
-	print "  <link>http://".forge_get_config ('web_host')."/</link>\n";
+	print "  <link>".util_make_url()."</link>\n";
 	print "  <title>$title</title>\n";
 	print "  <webMaster>".forge_get_config ('admin_email')."</webMaster>\n";
 	print "  <language>en-us</language>\n";
