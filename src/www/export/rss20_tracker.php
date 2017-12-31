@@ -1,5 +1,7 @@
 <?php
 /**
+ * Previous Copyright: FusionForge Team
+ * Copyright 2017, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -34,7 +36,7 @@ require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'export/rss_utils.inc';
 
-if (isset($_GET['group_id'])&&!empty($_GET['group_id'])&&is_numeric($_GET['group_id'])) {
+if (isset($_GET['group_id']) && !empty($_GET['group_id']) && is_numeric($_GET['group_id'])) {
 	$group_id = $_GET['group_id'];
 
 	$group = group_get_object($group_id);
@@ -50,10 +52,8 @@ if (isset($_GET['group_id'])&&!empty($_GET['group_id'])&&is_numeric($_GET['group
 		beginFeed();
 		endOnError('No RSS feed available as group status is set to private.');
 	}
-	$groupname = $group->getPublicName();
-	$link = "/tracker/?group_id=$group_id";
 
-        beginFeed($groupname,$link);
+        beginFeed($group->getPublicName(), '/tracker/?group_id='.$group_id);
 
 	//does tracker exist? do we get a factory?
 	$atf = new ArtifactTypeFactory($group);
@@ -69,8 +69,7 @@ if (isset($_GET['group_id'])&&!empty($_GET['group_id'])&&is_numeric($_GET['group
 }//no group_id in GET
 else {
 	beginFeed();
-	displayError('Please supply a Group ID with the request.');
-	endFeed();
+	endOnError('Please supply a Group ID with the request.');
 }
 
 //**************************************************************++
@@ -82,17 +81,17 @@ function beginFeed($groupname = "", $link = "") {
 			';
 	print " <channel>\n";
 	print "  <title>".forge_get_config('forge_name')." Project \"".$groupname."\" Bug Trackers</title>\n";
-	print "  <link>http://".forge_get_config('web_host').$link."</link>\n";
+	print "  <link>".util_make_url($link)."</link>\n";
 	print "  <description>".forge_get_config('forge_name')." Bug Trackers of \"".$groupname."\"</description>\n";
 	print "  <language>en-us</language>\n";
 	print "  <copyright>Copyright 2000-".date("Y")." ".forge_get_config('forge_name')."</copyright>\n";
 	print "  <webMaster>".forge_get_config('admin_email')."</webMaster>\n";
-	print "  <lastBuildDate>".gmdate('D, d M Y G:i:s',time())." GMT</lastBuildDate>\n";
+	print "  <lastBuildDate>".rss_date(time())."</lastBuildDate>\n";
 	print "  <docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
 	print "  <image>\n";
-	print "    <url>http://".forge_get_config('web_host')."/images/bflogo-88.png</url>\n";
-	print "    <title>".forge_get_config('forge_name')." Developer</title>\n";
-	print "    <link>http://".forge_get_config('web_host')."/</link>\n";
+	print "    <url>".util_make_url('/images/icon.png')."</url>\n";
+	print "    <title>".forge_get_config('forge_name')."</title>\n";
+	print "    <link>".util_make_url()."</link>\n";
 	print "    <width>124</width>\n";
 	print "    <heigth>32</heigth>\n";
 	print "  </image>\n";
@@ -118,11 +117,11 @@ function writeFeed($at_arr, $group_id){
 			if (!is_object($at_arr[$j])) {
                         	//just skip it
 			} elseif ($at_arr[$j]->isError()) {
-				print " <title>Error</title>".
+				print " <title>"._('Error')."</title>".
 						"<description>".rss_description($at_arr[$j]->getErrorMessage())."</decription>";
 			} else {
 				print "   <title>".$at_arr[$j]->getName()."</title>\n";
-				print "   <link>http://".forge_get_config('web_host')."/tracker?atid=".$at_arr[$j]->getID()."&amp;group_id=".$group_id."&amp;func=browse</link>\n";
+				print "   <link>".util_make_url("/tracker?atid=".$at_arr[$j]->getID()."&amp;group_id=".$group_id."&amp;func=browse")."</link>\n";
 				print "   <description>".
 						rss_description($at_arr[$j]->getDescription()).
 						" - Open Bugs: ".(int) $at_arr[$j]->getOpenCount() .
