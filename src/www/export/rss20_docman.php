@@ -1,7 +1,7 @@
 <?php
 /**
  * FusionForge Documents RSS Feed
- * Copyright 2012,2015 Franck Villaume - TrivialDev
+ * Copyright 2012,2015,2017, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -59,7 +59,17 @@ if (isset($group_id) && !empty($group_id) && is_numeric($group_id)) {
 		endOnError($df->getErrorMessage());
 	}
 
-	$d_arr =& $df->getDocuments();
+	$stateIdDg = 1;
+	$stateIdDocuments = array(1);
+	if (forge_check_perm('docman', $group_id, 'approve')) {
+		$stateIdDg = 5;
+		$stateIdDocuments = array(1, 2, 3, 4, 5);
+	}
+	$df->setDocGroupState($stateIdDg);
+	$df->setStateID($stateIdDocuments);
+	$df->setOrder(array('updatedate', 'createdate'));
+	$df->setSort('DESC');
+	$d_arr = $df->getDocuments();
 
 	writeFeed($d_arr, $limit);
 	endFeed();
