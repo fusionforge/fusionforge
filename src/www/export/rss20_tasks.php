@@ -191,7 +191,6 @@ function handle_getvar($name) {
 }
 
 function beginTaskFeed($feed_title, $feed_link, $feed_desc) {
-
 	header("Content-Type: text/xml");
 	print "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 	print "<rss version=\"2.0\">\n";
@@ -207,32 +206,15 @@ function beginTaskFeed($feed_title, $feed_link, $feed_desc) {
 }
 
 function writeTaskFeed($msg, $item_cat){
-
-    //------------ build one feed item ------------
-    print "  <item>\n";
-        print "   <title>".$msg['subject']."</title>\n";
-        print "   <link>" . util_make_url("/pm/t_follow.php/" . $msg['project_task_id']) . "</link>\n";
-        print "   <category>".$item_cat."</category>\n";
-        print "   <description>".$msg['details']."</description>\n";
-        print "   <author>".$msg['user_realname']."</author>\n";
-                //print "   <comment></comment>\n";
-        print "   <pubDate>".gmdate('D, d M Y G:i:s',$msg['most_recent_date'])." GMT</pubDate>\n";
+	//------------ build one feed item ------------
+	print "  <item>\n";
+	print "   <title>".$msg['subject']."</title>\n";
+	print "   <link>" . util_make_url("/pm/t_follow.php/" . $msg['project_task_id']) . "</link>\n";
+	print "   <category>".$item_cat."</category>\n";
+	print "   <description>".$msg['details']."</description>\n";
+	print "   <author>".$msg['user_realname']."</author>\n";
+	//print "   <comment></comment>\n";
+	print "   <pubDate>".gmdate('D, d M Y G:i:s',$msg['most_recent_date'])." GMT</pubDate>\n";
 	print "   <guid>" . util_make_url("/pm/t_lookup.php?tid=" . $msg['project_task_id']) . "</guid>\n";
-    print "  </item>\n";
-
-}
-
-function displayError($errorMessage) {
-	print "  <title>Error</title>\n".
-		"  <description>".$errorMessage."</description>";
-}
-
-function endFeed() {
-    print "\n </channel>\n</rss>";
-    exit();
-}
-
-function endOnError($errorMessage) {
-	displayError($errorMessage);
-	endFeed();
+	print "  </item>\n";
 }

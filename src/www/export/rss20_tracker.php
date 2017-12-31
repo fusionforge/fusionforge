@@ -139,19 +139,3 @@ function writeFeed($at_arr, $group_id){
 		}//for loop
 	}//else (there are trackers)
 }
-
-
-function displayError($errorMessage) {
-	print " <title>Error</title>".
-			"<description>".rss_description($errorMessage)."</description>";
-}
-
-function endFeed() {
-			print '</channel></rss>';
-			exit();
-		}
-
-function endOnError($errorMessage) {
-	displayError($errorMessage);
-	endFeed();
-}

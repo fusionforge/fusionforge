@@ -119,3 +119,18 @@ function rss_dump_project_result_array ($result,$title,$desription='',$callback=
 	// end output
 	print " </channel>\n";
 }
+
+function displayError($errorMessage) {
+	print " <title>"._('Error')."</title>".
+		"<description>".rss_description($errorMessage)."</description>";
+}
+
+function endFeed() {
+	print '</channel></rss>';
+	exit();
+}
+
+function endOnError($errorMessage) {
+	displayError($errorMessage);
+	endFeed();
+}

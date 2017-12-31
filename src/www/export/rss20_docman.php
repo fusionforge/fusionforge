@@ -89,8 +89,7 @@ function beginFeed($groupname = "", $link = "") {
 	print "  <generator>".forge_get_config ('forge_name')." RSS generator</generator>\n";
 }
 
-function writeFeed($d_arr, $limit){
-
+function writeFeed($d_arr, $limit) {
 	/*
 	if (!is_array($nested_groups["$parent_group"])) {
 		return;
@@ -131,20 +130,4 @@ function writeFeed($d_arr, $limit){
 			if ($j >= $limit) break;
 		}//for loop
 	}//else (there are documents)
-}
-
-
-function displayError($errorMessage) {
-	print " <title>"._('Error')."</title>".
-		"<description>".rss_description($errorMessage)."</description>";
-}
-
-function endFeed() {
-	print '</channel></rss>';
-	exit();
-}
-
-function endOnError($errorMessage) {
-	displayError($errorMessage);
-	endFeed();
 }
