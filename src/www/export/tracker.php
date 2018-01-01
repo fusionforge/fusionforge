@@ -195,8 +195,7 @@ if ($group_id && $atid) {
 	echo '</tracker>';
 } else {
 	beginDocument();
-	displayError('Project ID or Artifact ID Not Set');
-	endDocument();
+	endOnError('Project ID or Artifact ID Not Set');
 }
 
 // Local Variables:
