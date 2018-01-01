@@ -36,7 +36,7 @@ function rss_date($date) {
 	return gmdate('D, d M Y H:i:s', $date).' GMT';
 }
 
-function rss_description ($in) {
+function rss_description($in) {
 	// if description_maxlen is defined, then truncate appropriately
 	// added for netscape rss schema compat
 	if (isset($GLOBALS['description_maxlen']) && $GLOBALS['description_maxlen'] &&
@@ -65,13 +65,13 @@ function rss_dump_project_result_set($res, $title ,$desription = '', $callback =
 	print "  <language>en-us</language>\n";
 
 	// item outputs
-	$addendum = '' ;
+	$addendum = '';
 	while ($row = db_fetch_array($res)) {
-		if (!forge_check_perm ('project_read', $row['group_id'])) {
-			continue ;
+		if (!forge_check_perm('project_read', $row['group_id'])) {
+			continue;
 		}
 		if ($callback) {
-			$addendum=$callback($row);
+			$addendum = $callback($row);
 		}
 		print "  <item>\n";
 		print "   <title>".htmlspecialchars($row['group_name'])."</title>\n";
@@ -86,8 +86,8 @@ function rss_dump_project_result_set($res, $title ,$desription = '', $callback =
 	print " </channel>\n";
 }
 
-function rss_dump_project_result_array ($result,$title,$desription='',$callback=0) {
-        if (!$desription) $desription=$title;
+function rss_dump_project_result_array($result, $title, $desription = '', $callback = 0) {
+        if (!$desription) $desription = $title;
 	// one time output
 	print " <channel>\n";
 	print "  <copyright>Copyright ".date("Y")." ".forge_get_config ('forge_name')."</copyright>\n";
@@ -99,13 +99,13 @@ function rss_dump_project_result_array ($result,$title,$desription='',$callback=
 	print "  <language>en-us</language>\n";
 
 	// item outputs
-	$addendum = '' ;
+	$addendum = '';
 	foreach ($result as $row) {
-		if (!forge_check_perm ('project_read', $row['group_id'])) {
-			continue ;
+		if (!forge_check_perm('project_read', $row['group_id'])) {
+			continue;
 		}
 		if ($callback) {
-			$addendum=$callback($row);
+			$addendum = $callback($row);
 		}
 		print "  <item>\n";
 		print "   <title>".htmlspecialchars($row['group_name'])."</title>\n";
