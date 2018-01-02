@@ -154,8 +154,8 @@ if ($release_box) {
 				<td colspan="<?php echo $colspan ?>">
 				</td>
 			</tr>
-			<tr>
 		<?php if ($release_box) { ?>
+			<tr>
 				<td>
 					<?php echo _('Release')._(': '); ?>
 				</td>
@@ -177,8 +177,8 @@ if ($release_box) {
 						<button id="taskboard-burndown-btn"><?php echo _('Burndown chart'); ?></button>
 					</div>
 				</td>
-		<?php } ?>
 			</tr>
+		<?php } ?>
 		</table>
 	</form>
 	<table class="full">
@@ -308,7 +308,7 @@ aPhases = []
 
 jQuery( document ).ready(function( $ ) {
 
-	$("<style type='text/css'>.agile-toolbar-minimize, .agile-minimize-column {background-image: url('" + gThemeRoot + "ic/up-down-16.png');} .agile-toolbar-add-task {background-image: url('" + gThemeRoot + "ic/add-16.png');}</style>").appendTo('head');
+	$("<style type='text/css'>.agile-toolbar-minimize, .agile-minimize-column {background-image: url('" + gThemeRoot + "ic/up-down-16.png');} .agile-toolbar-add-task {background-image: url('" + gThemeRoot + "ic/add-16.png');}<\/style>").appendTo('head');
 
 	loadTaskboard( <?php echo $group_id ?> );
 
