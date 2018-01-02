@@ -36,7 +36,7 @@ function rss_date($date) {
 	return gmdate('D, d M Y H:i:s', $date).' GMT';
 }
 
-function rss_description ($in) {
+function rss_description($in) {
 	// if description_maxlen is defined, then truncate appropriately
 	// added for netscape rss schema compat
 	if (isset($GLOBALS['description_maxlen']) && $GLOBALS['description_maxlen'] &&
@@ -52,26 +52,26 @@ function rss_description ($in) {
 
 // callback is optional function name which should be called for each project
 // row and which result will be appended to description element
-function rss_dump_project_result_set ($res,$title,$desription='',$callback=0) {
-        if (!$desription) $desription=$title;
+function rss_dump_project_result_set($res, $title ,$desription = '', $callback = 0) {
+        if (!$desription) $desription = $title;
 	// one time output
 	print " <channel>\n";
-	print "  <copyright>Copyright ".date("Y")." ".forge_get_config ('forge_name')."</copyright>\n";
+	print "  <copyright>Copyright ".date("Y")." ".forge_get_config('forge_name')."</copyright>\n";
 	print "  <pubDate>".rss_date(time())."</pubDate>\n";
 	print "  <description>$desription</description>\n";
-	print "  <link>http://".forge_get_config ('web_host')."/</link>\n";
+	print "  <link>".util_make_url()."</link>\n";
 	print "  <title>$title</title>\n";
 	print "  <webMaster>".forge_get_config ('admin_email')."</webMaster>\n";
 	print "  <language>en-us</language>\n";
 
 	// item outputs
-	$addendum = '' ;
+	$addendum = '';
 	while ($row = db_fetch_array($res)) {
-		if (!forge_check_perm ('project_read', $row['group_id'])) {
-			continue ;
+		if (!forge_check_perm('project_read', $row['group_id'])) {
+			continue;
 		}
 		if ($callback) {
-			$addendum=$callback($row);
+			$addendum = $callback($row);
 		}
 		print "  <item>\n";
 		print "   <title>".htmlspecialchars($row['group_name'])."</title>\n";
@@ -86,26 +86,26 @@ function rss_dump_project_result_set ($res,$title,$desription='',$callback=0) {
 	print " </channel>\n";
 }
 
-function rss_dump_project_result_array ($result,$title,$desription='',$callback=0) {
-        if (!$desription) $desription=$title;
+function rss_dump_project_result_array($result, $title, $desription = '', $callback = 0) {
+        if (!$desription) $desription = $title;
 	// one time output
 	print " <channel>\n";
 	print "  <copyright>Copyright ".date("Y")." ".forge_get_config ('forge_name')."</copyright>\n";
 	print "  <pubDate>".rss_date(time())."</pubDate>\n";
 	print "  <description>$desription</description>\n";
-	print "  <link>http://".forge_get_config ('web_host')."/</link>\n";
+	print "  <link>".util_make_url()."</link>\n";
 	print "  <title>$title</title>\n";
 	print "  <webMaster>".forge_get_config ('admin_email')."</webMaster>\n";
 	print "  <language>en-us</language>\n";
 
 	// item outputs
-	$addendum = '' ;
+	$addendum = '';
 	foreach ($result as $row) {
-		if (!forge_check_perm ('project_read', $row['group_id'])) {
-			continue ;
+		if (!forge_check_perm('project_read', $row['group_id'])) {
+			continue;
 		}
 		if ($callback) {
-			$addendum=$callback($row);
+			$addendum = $callback($row);
 		}
 		print "  <item>\n";
 		print "   <title>".htmlspecialchars($row['group_name'])."</title>\n";
@@ -118,4 +118,19 @@ function rss_dump_project_result_array ($result,$title,$desription='',$callback=
 	}
 	// end output
 	print " </channel>\n";
+}
+
+function displayError($errorMessage) {
+	print " <title>"._('Error')."</title>".
+		"<description>".rss_description($errorMessage)."</description>";
+}
+
+function endFeed() {
+	print '</channel></rss>';
+	exit();
+}
+
+function endOnError($errorMessage) {
+	displayError($errorMessage);
+	endFeed();
 }

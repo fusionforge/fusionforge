@@ -137,10 +137,6 @@ function account_namevalid($name, $unix=false, $check_exists=true) {
 			return false;
 		}
 	}
-	if (preg_match("/^(anoncvs_)/i",$name)) {
-		$GLOBALS['register_error'] = _('Name is reserved for CVS.');
-		return false;
-	}
 
 	return true;
 }

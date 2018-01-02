@@ -278,10 +278,6 @@ class Rule_UserNameFormat extends Rule {
 				.'|(www)|(cvs)|(shell)|(ftp)|(irc)|(debian)|(ns)|(download))$/i', $val);
 	}
 
-	function isCvsAccount($val) {
-		return preg_match('/^anoncvs_/i', $val);
-	}
-
 	function lessThanMin($val) {
 		return (strlen($val) < 3);
 	}
@@ -292,7 +288,6 @@ class Rule_UserNameFormat extends Rule {
 
 	function isValid($val) {
 		return !$this->isNotLegalName($val)
-			&& !$this->isCvsAccount($val)
 			&& !$this->lessThanMin($val)
 			&& !$this->greaterThanMax($val)
 			&& !$this->containsIllegalChars($val);

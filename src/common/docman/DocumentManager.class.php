@@ -460,12 +460,20 @@ class DocumentManager extends FFError {
 	}
 
 	function getNbDocs() {
-		$res = db_query_params('SELECT count(docid) as docs FROM doc_data WHERE group_id = $1', array($this->Group->getID()));
+		$qpa = db_construct_qpa(false, 'SELECT count(docid) as docs FROM doc_data WHERE group_id = $1', array($this->Group->getID()));
+		if (!forge_check_perm('docman', $this->Group->getID(), 'approve')) {
+			$qpa = db_construct_qpa($qpa, ' AND stateid = $1', array(1));
+		}
+		$res = db_query_qpa($qpa);
 		return db_result($res, 0, 0);
 	}
 
 	function getNbFolders() {
-		$res = db_query_params('SELECT count(doc_group) as folders FROM doc_groups WHERE group_id = $1', array($this->Group->getID()));
+		$qpa = db_construct_qpa(false, 'SELECT count(doc_group) as folders FROM doc_groups WHERE group_id = $1', array($this->Group->getID()));
+		if (!forge_check_perm('docman', $this->Group->getID(), 'approve')) {
+			$qpa = db_construct_qpa($qpa, ' AND stateid = $1', array(1));
+		}
+		$res = db_query_qpa($qpa);
 		return db_result($res, 0, 0);
 	}
 }

@@ -84,7 +84,7 @@ if ($group_id) {
 	$texts = array();
 	$show = array();
 
-	$hookParams['group'] = $group_id ;
+	$hookParams['group_id'] = $group_id ;
 	$hookParams['results'] = &$results;
 	$hookParams['show'] = &$show;
 	$hookParams['begin'] = time()-(30*86400);
@@ -104,8 +104,8 @@ if ($group_id) {
 				}
 				print "  <item>\n";
 				print "   <title>".htmlspecialchars('Commit :'.$arr['description'])."</title>\n";
-				print "   <link>".util_make_url('/scm/'.$arr['ref_id'].$arr['subref_id'])."</link>\n";
-				print "   <comments>".util_make_url('/scm/'.$arr['ref_id'].$arr['subref_id'])."</comments>\n";
+				print "   <link>".util_make_url('/scm/'.htmlentities($arr['ref_id'].$arr['subref_id']))."</link>\n";
+				print "   <comments>".util_make_url('/scm/'.htmlentities($arr['ref_id'].$arr['subref_id']))."</comments>\n";
 				$arr['category'] = _('Source Code');
 				break;
 			}
@@ -209,11 +209,12 @@ if ($group_id) {
 		if (isset($arr['category']) && $arr['category']) {
 			print "   <category>".$arr['category']."</category>\n";
 		}
-		if (isset($arr['user_name']) && $arr['user_name']) {
-			print "   <author>".$arr['user_name']."@".forge_get_config('users_host')." (".$arr['realname'].")</author>\n";
-		} else {
-			print "   <author>".$arr['realname']."</author>\n";
-		}
+//TODO: fix the HTML in the arr['realname']. Get a new way to display user info in activity.
+// 		if (isset($arr['user_name']) && $arr['user_name']) {
+// 			print "   <author>".$arr['user_name']."@".forge_get_config('users_host')." (".$arr['realname'].")</author>\n";
+// 		} else {
+// 			print "   <author>".$arr['realname']."</author>\n";
+// 		}
 		print "   <pubDate>".rss_date($arr['activity_date'])."</pubDate>\n";
 		print "  </item>\n";
 	}

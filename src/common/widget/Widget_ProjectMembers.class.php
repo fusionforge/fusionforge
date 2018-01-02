@@ -49,7 +49,7 @@ class Widget_ProjectMembers extends Widget {
 		$iam_member = false;
 		if (count($admins) > 0) {
 			$result .= '<div class="extractadmin"><span class="develtitle">'._('Project Admins').'</span><br />';
-			$resultcomplete = '<span class="completeadmin" style="display:none">';
+			$resultcomplete = '<div class="completeadmin" style="display:none">';
 			$resultmore = false;
 			foreach ($admins as $key => $u) {
 				$resultlocal = '<div rel="doap:maintainer">'."\n";
@@ -77,7 +77,7 @@ class Widget_ProjectMembers extends Widget {
 					$resultmore = true;
 				}
 			}
-			$resultcomplete .= '</span>';
+			$resultcomplete .= '</div>';
 			$result .= $resultcomplete;
 			if ($resultmore) {
 				$result .= '<input type="button" class="seemoreadmin" value="'._('See more ...').'" />';
