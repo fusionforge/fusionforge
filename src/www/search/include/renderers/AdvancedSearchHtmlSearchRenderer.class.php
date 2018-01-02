@@ -340,7 +340,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$res .= $HTML->openForm(array('class' => 'ff', 'name' => 'advancedsearch', 'action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
 		$res .= '<input class="ff" type="hidden" name="search" value="1"/>
 			<input class="ff" type="hidden" name="group_id" value="'.$group_id.'"/>
-			<div align="center"><br />
+			<div align="center">
 			<table id="advsearchinput">
 				<tr class="ff">
 				<td class="ff" colspan ="2">
@@ -405,6 +405,7 @@ EOS;
 				</tr>
 				<tr class="top tablecontent">
 					<td>';
+		$i = 0;
 		foreach($sectionsArray as $key => $section) {
 			$oldcountlines = $countLines;
 			if (is_array($section)) {
@@ -413,7 +414,7 @@ EOS;
 				$countLines += 3;
 			}
 
-			if ($countLines >= $break) {
+			if ($countLines >= $break && $i) {
  				// if we are closer to the limit with this one included, then
  				// it's better to include it.
  				if (($countCol < $maxCol) && ($countLines - $break) >= ($break - $oldcountlines)) {
@@ -454,6 +455,7 @@ EOS;
 					$break += $breakLimit;
 				}
 			}
+			$i++;
 		}
 
 		return $return.'		</td>
