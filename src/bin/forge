@@ -1673,7 +1673,12 @@ class CliActions {
 			$stream = $stream_ori;
 		}
 		unset($stream_ori);
-		return $stream;
+		if ($stream) {
+			return $stream;
+		} else {
+			echo _('Unable to load file')._(': ')._('Check syntax')."\n";
+			die();
+		}
 	}
 
 	private function getMappingId($idtofind, $objecttofind) {
