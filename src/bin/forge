@@ -1319,6 +1319,9 @@ class CliActions {
 				}
 			} else {
 				$parent_doc_group = (int)$this->getMappingId($stream['data_array']['parent_doc_group'], 'doc_group');
+				if (!isset($stream['data_array']['createdate'])) {
+					$stream['data_array']['createdate'] = time();
+				}
 				if (!$dg->create($stream['data_array']['groupname'], $parent_doc_group, $stream['data_array']['stateid'], $stream['data_array']['createdate'])) {
 					echo $dg->getErrorMessage()."\n";
 					db_rollback();
