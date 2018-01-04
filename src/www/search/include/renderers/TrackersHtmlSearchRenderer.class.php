@@ -56,6 +56,7 @@ class TrackersHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 * @return string html output
 	 */
 	function getRows() {
+		global $HTML;
 		$result = $this->searchQuery->getData($this->searchQuery->getRowsPerPage(),$this->searchQuery->getOffset());
 
 		$return = '';
@@ -73,8 +74,7 @@ class TrackersHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			$return .= '<tr>'
 						.'<td style="width: 5%"></td>'
 						.'<td>'.$row['artifact_id'].'</td>'
-						.'<td>'.util_make_link('/tracker/?func=detail&group_id='.$this->groupId.'&aid='.$row['artifact_id'].'&atid='.$row['group_artifact_id'],
-									html_image('ic/tracker20g.png').' '.$row['summary'])
+						.'<td>'.util_make_link('/tracker/a_follow.php/'.$row['artifact_id'], $HTML->getFollowPic().' '.$row['summary'])
 						.'</td>'
 						.'<td style="width: 15%">'.$row['realname'].'</td>'
 						.'<td style="width: 15%">'.relative_date($row['open_date']).'</td></tr>';
