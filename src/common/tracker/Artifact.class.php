@@ -267,7 +267,7 @@ class Artifact extends FFObject {
 					(group_artifact_id, status_id, priority,
 					submitted_by, assigned_to, open_date, last_modified_date, last_modified_by, summary, details)
 					VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)',
-					array ($this->ArtifactType->getID(),
+					array($this->ArtifactType->getID(),
 						$status_id,
 						$priority,
 						$user,
@@ -326,8 +326,8 @@ class Artifact extends FFObject {
 	function fetchData($artifact_id) {
 		$this->votes = false;
 		$res = db_query_params ('SELECT * FROM artifact_vw WHERE artifact_id=$1 AND group_artifact_id=$2',
-					array ($artifact_id,
-					       $this->ArtifactType->getID())) ;
+					array($artifact_id,
+					      $this->ArtifactType->getID()));
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError(_('Invalid Artifact ID'));
 			return false;
@@ -392,7 +392,7 @@ class Artifact extends FFObject {
 		if ($custom_status_id) {
 			$result = db_query_params ('SELECT element_name FROM artifact_extra_field_elements aefe, artifact_extra_field_data aefd
 										WHERE artifact_id=$1 AND aefd.extra_field_id=$2 AND CAST(aefd.field_data AS INTEGER)=aefe.element_id',
-								array ($this->getID(), $custom_status_id)) ;
+								array($this->getID(), $custom_status_id));
 			if ($result) {
 				return db_result($result, 0, 'element_name');
 			}
@@ -573,7 +573,7 @@ class Artifact extends FFObject {
 			$this->setMissingParamsError(_('Please tick all checkboxes.'));
 			return false;
 		}
-		if (!forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID())) {
+		if (!forge_check_perm('tracker_admin', $this->ArtifactType->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -586,8 +586,8 @@ class Artifact extends FFObject {
 			return false;
 		}
 
-		$res = db_query_params ('UPDATE artifact SET is_deleted=1 WHERE artifact_id=$1',
-					array ($this->getID())) ;
+		$res = db_query_params('UPDATE artifact SET is_deleted=1 WHERE artifact_id=$1',
+					array($this->getID()));
 		if (!$res) {
 			$this->setError(_('Error deleting artifact')._(': ').db_error());
 			db_rollback();
@@ -605,7 +605,7 @@ class Artifact extends FFObject {
 		if ($this->getStatusID() == 1) {
 			$res = db_query_params ('UPDATE artifact_counts_agg SET count=count-1,open_count=open_count-1
 				WHERE group_artifact_id=$1',
-						array ($this->getArtifactType()->getID())) ;
+						array($this->getArtifactType()->getID()));
 			if (!$res) {
 				$this->setError(_('Error updating artifact counts')._(': ').db_error());
 				db_rollback();
@@ -614,7 +614,7 @@ class Artifact extends FFObject {
 		} elseif ($this->getStatusID() == 2) {
 			$res = db_query_params ('UPDATE artifact_counts_agg SET count=count-1
 				WHERE group_artifact_id=$1',
-						array ($this->getArtifactType()->getID())) ;
+						array($this->getArtifactType()->getID()));
 			if (!$res) {
 				$this->setError(_('Error updating artifact counts')._(': ').db_error());
 				db_rollback();
@@ -682,7 +682,7 @@ class Artifact extends FFObject {
 	 */
 	function getHistory() {
 		return db_query_params('SELECT * FROM artifact_history_user_vw WHERE artifact_id=$1 ORDER BY entrydate DESC, id ASC',
-					array ($this->getID()));
+					array($this->getID()));
 	}
 
 	function hasMessages() {
@@ -758,7 +758,7 @@ class Artifact extends FFObject {
 			$res = db_query_params('SELECT id,artifact_id,description,filename,filesize,
 						filetype,adddate,submitted_by,user_name,realname
 						FROM artifact_file_user_vw WHERE artifact_id=$1',
-						array ($this->getID()));
+						array($this->getID()));
 			$rows=db_numrows($res);
 			if ($rows > 0) {
 				for ($i=0; $i < $rows; $i++) {
@@ -785,7 +785,7 @@ class Artifact extends FFObject {
 								AND EXISTS (SELECT project_task_id FROM project_task_artifact
 										WHERE project_task_id=pt.project_task_id
 										AND artifact_id = $1)',
-							       array ($this->getID()));
+							       array($this->getID()));
 		}
 		return $this->related_tasks;
 	}
@@ -852,11 +852,11 @@ class Artifact extends FFObject {
 			$time = time();
 		}
 		return db_query_params ('INSERT INTO artifact_history(artifact_id,field_name,old_value,mod_by,entrydate) VALUES ($1,$2,$3,$4,$5)',
-					array ($this->getID(),
-					       $field_name,
-					       $old_value,
-					       $user,
-					       $time));
+					array($this->getID(),
+					      $field_name,
+					      $old_value,
+					      $user,
+					      $time));
 	}
 
 	/**
@@ -869,14 +869,14 @@ class Artifact extends FFObject {
 	 */
 	function setStatus($status_id, $closingTime = false) {
 		db_begin();
-		$qpa = db_construct_qpa(array(), 'UPDATE artifact SET status_id=$1', array ($status_id)) ;
+		$qpa = db_construct_qpa(array(), 'UPDATE artifact SET status_id=$1', array($status_id));
 		if ($closingTime && $status_id != 1) {
 			$time=$closingTime;
-			$qpa = db_construct_qpa($qpa, ', close_date=$1 ', array ($time)) ;
+			$qpa = db_construct_qpa($qpa, ', close_date=$1 ', array($time));
 		}
 		$qpa = db_construct_qpa($qpa,
 					 'WHERE artifact_id=$1 AND group_artifact_id=$2',
-					 array ($this->getID(), $this->ArtifactType->getID())) ;
+					 array($this->getID(), $this->ArtifactType->getID()));
 		$result=db_query_qpa($qpa);
 
 		if (!$result || db_affected_rows($result) < 1) {
@@ -911,7 +911,7 @@ class Artifact extends FFObject {
 	 *							array('user' => 127, 'time' => 1234556789, 'nopermcheck' => true, 'nonotice' => true)
 	 * @return	bool	success.
 	 */
-	function update($priority,$status_id, $assigned_to,$summary,$canned_response,$details,$new_artifact_type_id, $extra_fields = array(), $description='', $importData = array()) {
+	function update($priority,$status_id, $assigned_to, $summary, $canned_response, $details, $new_artifact_type_id, $extra_fields = array(), $description='', $importData = array()) {
 
 		if (array_key_exists('user', $importData)){
 			$user = $importData['user'];
@@ -1010,7 +1010,7 @@ class Artifact extends FFObject {
 		//
 		//	Get a lock on this row in the database
 		//
-		db_query_params('SELECT * FROM artifact WHERE artifact_id=$1 FOR UPDATE', array ($this->getID()));
+		db_query_params('SELECT * FROM artifact WHERE artifact_id=$1 FOR UPDATE', array($this->getID()));
 		$artifact_type_id = $this->ArtifactType->getID();
 		//
 		//	Attempt to move this Artifact to a new ArtifactType
@@ -1271,7 +1271,7 @@ class Artifact extends FFObject {
 		}
 
 		$res = db_query_params ('UPDATE artifact SET last_modified_date=$1, last_modified_by=$2 WHERE artifact_id=$3',
-			array ($time, $user, $this->getID()));
+			array($time, $user, $this->getID()));
 		return (!$res);
 	}
 
@@ -1288,7 +1288,7 @@ class Artifact extends FFObject {
 
 		$user_id = user_getid();
 		$res = db_query_params ('UPDATE artifact SET assigned_to=$1 WHERE artifact_id=$2',
-								array ($user_id, $this->getID())) ;
+								array($user_id, $this->getID()));
 		if (!$res) {
 			$this->setError(_('Error updating assigned_to in artifact')._(': ').db_error());
 			return false;
@@ -1471,7 +1471,7 @@ class Artifact extends FFObject {
 					$extra_fields[$efid] = array('100');
 				} else {
 					db_query_params('DELETE FROM artifact_extra_field_data WHERE artifact_id=$1 AND extra_field_id=$2',
-								   array ($this->getID(),
+								   array($this->getID(),
 									  $efid));
 					continue;
 				}
@@ -1615,9 +1615,9 @@ class Artifact extends FFObject {
 					$count=count($extra_fields[$efid]);
 					for ($fin=0; $fin<$count; $fin++) {
 						$res = db_query_params ('INSERT INTO artifact_extra_field_data (artifact_id,extra_field_id,field_data) VALUES ($1,$2,$3)',
-									array ($this->getID(),
-									       $efid,
-									       $extra_fields[$efid][$fin])) ;
+									array($this->getID(),
+									      $efid,
+									      $extra_fields[$efid][$fin]));
 						if (!$res) {
 							$this->setError(db_error());
 							return false;
@@ -1627,9 +1627,9 @@ class Artifact extends FFObject {
 					$multi_rows=false;
 					$count=1;
 					$res = db_query_params ('INSERT INTO artifact_extra_field_data (artifact_id,extra_field_id,field_data) VALUES ($1,$2,$3)',
-								array ($this->getID(),
-								       $efid,
-								       htmlspecialchars($extra_fields[$efid]))) ;
+								array($this->getID(),
+								      $efid,
+								      htmlspecialchars($extra_fields[$efid])));
 					if (!$res) {
 						$this->setError(db_error());
 						return false;
@@ -2204,7 +2204,7 @@ class Artifact extends FFObject {
 		return false;
 	}
 
-	function  getRelations() {
+	function getRelations() {
 		$aid = $this->getID();
 		$res = db_query_params ('SELECT *
 		FROM artifact_extra_field_list, artifact_extra_field_data, artifact_group_list, artifact, groups
@@ -2235,9 +2235,9 @@ class Artifact extends FFObject {
 		return false;
 	}
 
-	function  getChildren() {
+	function getChildren() {
 		if (!$this->children) {
-			$res = db_query_params ('SELECT *
+			$res = db_query_params('SELECT *
 						FROM artifact_extra_field_list, artifact_extra_field_data, artifact_group_list, artifact, groups
 						WHERE field_type = $1
 						AND artifact_extra_field_list.extra_field_id=artifact_extra_field_data.extra_field_id
@@ -2261,7 +2261,7 @@ class Artifact extends FFObject {
 		return ($this->getParent()?true:false);
 	}
 
-	function  getParent() {
+	function getParent() {
 		if (!isset($this->parent)) {
 			$res = db_query_params ('SELECT field_data
 						FROM artifact_extra_field_data
@@ -2366,57 +2366,57 @@ class Artifact extends FFObject {
 }
 
 class ArtifactComparator {
-	var $criterion = 'artifact_id' ;
-	var $order = 'ASC' ;
+	var $criterion = 'artifact_id';
+	var $order = 'ASC';
 
 	function Compare ($a, $b) {
 		if ($this->order == 'DESC') {
-			$c = $a ; $a = $b ; $b = $c ;
+			$c = $a; $a = $b; $b = $c;
 		}
 		switch ($this->criterion) {
 		case 'summary':
 			$namecmp = strcoll ($a->getSummary(),
-					    $b->getSummary()) ;
+					    $b->getSummary());
 			if ($namecmp != 0) {
-				return $namecmp ;
+				return $namecmp;
 			}
-			break ;
+			break;
 		case 'assigned_to':
 			$namecmp = strcoll($a->getAssignedRealName(),$b->getAssignedRealName());
 			if ($namecmp != 0) {
-				return $namecmp ;
+				return $namecmp;
 			}
-			break ;
+			break;
 		case 'submitted_by':
 			$namecmp = strcoll($a->getSubmittedRealName(),$b->getSubmittedRealName());
 			if ($namecmp != 0) {
-				return $namecmp ;
+				return $namecmp;
 			}
-			break ;
+			break;
 		case 'last_modified_by':
-			$namecmp = strcoll ($a->getLastModifiedRealName(),$b->getLastModifiedRealName()) ;
+			$namecmp = strcoll ($a->getLastModifiedRealName(),$b->getLastModifiedRealName());
 			if ($namecmp != 0) {
-				return $namecmp ;
+				return $namecmp;
 			}
-			break ;
+			break;
 		case 'open_date':
-			$a_date = $a->getOpenDate() ;
-			$b_date = $b->getOpenDate() ;
+			$a_date = $a->getOpenDate();
+			$b_date = $b->getOpenDate();
 			return ($a_date < $b_date) ? -1 : 1;
 			break;
 		case 'close_date':
-			$a_date = $a->getCloseDate() ;
-			$b_date = $b->getCloseDate() ;
+			$a_date = $a->getCloseDate();
+			$b_date = $b->getCloseDate();
 			return ($a_date < $b_date) ? -1 : 1;
 			break;
 		case 'last_modified_date':
-			$a_date = $a->getLastModifiedDate() ;
-			$b_date = $b->getLastModifiedDate() ;
+			$a_date = $a->getLastModifiedDate();
+			$b_date = $b->getLastModifiedDate();
 			return ($a_date < $b_date) ? -1 : 1;
 			break;
 		case 'priority':
-			$a_priority = $a->getPriority() ;
-			$b_priority = $b->getPriority() ;
+			$a_priority = $a->getPriority();
+			$b_priority = $b->getPriority();
 			return ($a_priority < $b_priority) ? -1 : 1;
 			break;
 		case '_votes':
@@ -2463,14 +2463,14 @@ class ArtifactComparator {
 					$namecmp = strcoll ($af,$bf);
 			}
 			if ($namecmp != 0) {
-				return $namecmp ;
+				return $namecmp;
 			}
-			break ;
+			break;
 		}
 
 		// When in doubt, sort on artifact ID
-		$aid = $a->getID() ;
-		$bid = $b->getID() ;
+		$aid = $a->getID();
+		$bid = $b->getID();
 		if ($aid == $bid) {
 			return 0;
 		}
@@ -2479,11 +2479,11 @@ class ArtifactComparator {
 }
 
 function sortArtifactList (&$list, $criterion='name', $order='ASC') {
-	$cmp = new ArtifactComparator () ;
-	$cmp->criterion = $criterion ;
-	$cmp->order = $order ;
+	$cmp = new ArtifactComparator ();
+	$cmp->criterion = $criterion;
+	$cmp->order = $order;
 
-	return usort ($list, array ($cmp, 'Compare')) ;
+	return usort ($list, array($cmp, 'Compare'));
 }
 
 // Local Variables:

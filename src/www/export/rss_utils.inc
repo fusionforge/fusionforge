@@ -52,7 +52,7 @@ function rss_description($in) {
 
 // callback is optional function name which should be called for each project
 // row and which result will be appended to description element
-function rss_dump_project_result_set($res, $title ,$desription = '', $callback = 0) {
+function rss_dump_project_result_set($res, $title, $desription = '', $callback = 0) {
         if (!$desription) $desription = $title;
 	// one time output
 	print " <channel>\n";
