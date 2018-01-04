@@ -469,7 +469,7 @@ function applyTaskFilter() {
 					$(container).addClass('filtred');
 				}
 			} else {
-				$TaskDescription = $(container).find('a.agile-toolbar-get-description').text();
+				$TaskDescription = $(container).find('div.agile-sticker-description').text();
 				if (sTaskName.match(sFilter) || $TaskDescription.match(sFilter)) {
 					$(container).removeClass('filtred');
 				} else {

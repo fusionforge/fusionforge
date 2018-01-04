@@ -98,6 +98,7 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		}
 		foreach ($result as $row) {
 			$document = document_get_object($row['docid'], $row['group_id']);
+			$dv = documentversion_get_object($row['version'], $row['docid'], $row['group_id']);
 			$currentDocGroup = documentgroup_get_object($document->getDocGroupID(), $document->Group->getID());
 			//section changed
 			if ($lastDocGroupID != $currentDocGroup->getID()) {
@@ -121,8 +122,8 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 					$cells[][] = html_e('input', array('type' => 'checkbox', 'value' => $document->Group->getID().'-'.$document->getID(), 'class' => 'checkeddocidactive', 'title' => _('Select / Deselect this document for massaction'), 'onClick' => 'controllerListFile.checkgeneral("active")'));
 				}
 			}
-			if ($document->isURL()) {
-				$cells[][] = util_make_link($document->getFileName(), html_image($document->getFileTypeImage(), 22, 22), array('title' => _('Visit this link')), true);
+			if ($dv->isURL()) {
+				$cells[][] = util_make_link($dv->getFileName(), html_image('docman/file_type_html.png', 22, 22), array('title' => _('Visit this link')), true);
 			} else {
 				$cells[][] = util_make_link('/docman/view.php/'.$document->Group->getID().'/versions/'.$document->getID().'/'.$row['version'], html_image($document->getFileTypeImage(), 22, 22), array('title' => _('View this document')));
 			}
