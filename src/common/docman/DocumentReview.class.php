@@ -558,7 +558,7 @@ class DocumentReview extends FFError {
 				$doneMandatoryUsers[] = $mandatoryUser;
 			}
 		}
-		$percentDoneMandatoryUsers = ((count($doneMandatoryUsers) / count($mandatoryUsers)) * 100).'%';
+		$percentDoneMandatoryUsers = floor((count($doneMandatoryUsers) / count($mandatoryUsers)) * 100).'%';
 		$doneOptionalUsers = array();
 		$optionalUsers = $this->getOptionalUsers();
 		foreach ($optionalUsers as $optionalUser) {
@@ -567,7 +567,7 @@ class DocumentReview extends FFError {
 			}
 		}
 		if (count($optionalUsers) > 0) {
-			$percentDoneOptionalUsers = ((count($doneOptionalUsers) / count($optionalUsers)) * 100).'%';
+			$percentDoneOptionalUsers = floor((count($doneOptionalUsers) / count($optionalUsers)) * 100).'%';
 		} else {
 			$percentDoneOptionalUsers = _('n/a');
 		}
