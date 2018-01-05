@@ -92,7 +92,7 @@ $group = group_get_object($group_id);
 if (!$group || !is_object($group)) {
 	exit_no_group();
 } elseif ($group->isError()) {
-	exit_error($group->getErrorMessage(), 'home');
+	exit_error($group->getErrorMessage(), 'activity');
 } elseif (!forge_get_config('use_activity')) {
 	exit_disabled();
 } elseif (!$group->usesActivity()) {
@@ -100,8 +100,6 @@ if (!$group || !is_object($group)) {
 }
 
 html_use_jqueryui();
-
-site_project_header(array('title'=>_('Activity'), 'group'=>$group_id, 'toptab'=>'activity'));
 
 $ids = array();
 $texts = array();
@@ -155,7 +153,7 @@ if (count($show) < 1) {
 $ffactivity = new Activity();
 $results = $ffactivity->getActivitiesForProject($group_id, $begin, $end, $section);
 if ($results === false) {
-	exit_error(_('Unable to get activities')._(':').$ffactivity->getErrorMessage(), 'home');
+	exit_error(_('Unable to get activities')._(':').$ffactivity->getErrorMessage(), 'activity');
 }
 // If plugins wants to add activities.
 $hookParams['group_id'] = $group_id;
@@ -173,9 +171,11 @@ if (count($show) < 1) {
 
 foreach ($show as $showthis) {
 	if (array_search($showthis, $ids) === false) {
-		exit_error(_('Invalid Data Passed to query'), 'home');
+		exit_error(_('Invalid Data Passed to query'), 'activity');
 	}
 }
+
+site_project_header(array('title'=>_('Activity'), 'group'=>$group_id, 'toptab'=>'activity'));
 
 if (count($ids) < 1) {
 	echo $HTML->information(_('No Activity Found'));
