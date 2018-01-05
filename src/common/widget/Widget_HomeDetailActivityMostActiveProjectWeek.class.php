@@ -65,6 +65,7 @@ class Widget_HomeDetailActivityMostActiveProjectWeek extends Widget {
 			usort($activities, 'Activity::date_compare');
 			$displayTableTop = 0;
 			$last_day = 0;
+			$displayed_activities = false;
 			foreach ($activities as $activity) {
 				$docmanerror = 0;
 				if (!$ffactivity->check_perm_for_activity($activity, $this->cached_perms)) {
@@ -84,6 +85,7 @@ class Widget_HomeDetailActivityMostActiveProjectWeek extends Widget {
 				if (!$displayinfo) {
 					continue;
 				}
+				$displayed_activities = true;
 				if ($last_day != strftime($date_format, $activity['activity_date'])) {
 					$cells = array();
 					$cells[] = array(strftime($date_format, $activity['activity_date']), 'colspan' => 4);
@@ -105,6 +107,9 @@ class Widget_HomeDetailActivityMostActiveProjectWeek extends Widget {
 			}
 			if ($displayTableTop) {
 				$return .= $HTML->listTableBottom();
+			}
+			if (!$displayed_activities) {
+				$return .= $HTML->warning_msg(_('No activity during the last week.'));
 			}
 		} else {
 			$return .= $HTML->warning_msg(_('No activity during the last week.'));
