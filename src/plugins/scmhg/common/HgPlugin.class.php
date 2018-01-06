@@ -678,31 +678,61 @@ Offer DAV or SSH access.");
 			return false;
 		}
 		if (in_array('scmhg', $params['show']) || (count($params['show']) < 1)) {
-			$repo = forge_get_config('repos_path', 'scmhg') . '/' . $project->getUnixName();
-			if (is_dir($repo) && is_dir($repo.'/.hg') && chdir($repo)) {
-				$start_time = $params['begin'];
-				$end_time = $params['end'];
-				$pipe = popen("hg log --template '{date}||{author|email}||{desc}||{node}\n' -d '$start_time 0 to $end_time 0'", 'r');
-				while (!feof($pipe) && $data = fgets($pipe)) {
-					$line = trim($data);
-					$splitedLine = explode('||', $line);
-					if (sizeof($splitedLine) == 4) {
-						$result = array();
-						$result['section'] = 'scm';
-						$result['group_id'] = $project->getID();
-						$result['ref_id'] = 'browser.php?group_id='.$project->getID().'&commit='.$splitedLine[3];
-						$result['description'] = htmlspecialchars($splitedLine[2]).' (changeset '.$splitedLine[3].')';
-						$userObject = user_get_object_by_email($splitedLine[1]);
-						if (is_a($userObject, 'FFUser')) {
-							$result['realname'] = util_display_user($userObject->getUnixName(), $userObject->getID(), $userObject->getRealName());
-						} else {
-							$result['realname'] = '';
-						}
-						$splitedDate = explode('-', $splitedLine[0]);
-						$result['activity_date'] = $splitedDate[0];
-						$result['subref_id'] = '';
-						$params['results'][] = $result;
+			if ($project->enableAnonSCM()) {
+				$server_script = '/anonscm/hglog';
+			} elseif (session_loggedin()) {
+				$u = session_get_user();
+				$server_script = '/authscm/'.$u->getUnixName().'/hglog';
+			} else {
+				return false;
+			}
+			// Grab commit log
+			$protocol = forge_get_config('use_ssl', 'scmhg') ? 'https://' : 'http://';
+			$script_url = $protocol.$this->getBoxForProject($project)
+				. $server_script
+				.'?unix_group_name='.$project->getUnixName()
+				.'&mode=date_range'
+				.'&begin='.$params['begin']
+				.'&end='.$params['end'];
+			$filename = tempnam('/tmp', 'hglog');
+			$f = fopen($filename, 'w');
+			$ch = curl_init();
+			curl_setopt($ch, CURLOPT_URL, $script_url);
+			curl_setopt($ch, CURLOPT_FILE, $f);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+			curl_setopt($ch, CURLOPT_COOKIE, @$_SERVER['HTTP_COOKIE']);  // for session validation
+			curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);  // for session validation
+			curl_setopt($ch, CURLOPT_HTTPHEADER,
+						array('X-Forwarded-For: '.$_SERVER['REMOTE_ADDR']));  // for session validation
+			$body = curl_exec($ch);
+			if ($body === false) {
+				$this->setError(curl_error($ch));
+			}
+			curl_close($ch);
+			fclose($f); // flush buffer
+			$f = fopen($filename, 'r');
+			unlink($filename);
+
+			while (!feof($f) && $data = fgets($f)) {
+			$line = trim($data);
+				$splitedLine = explode('||', $line);
+				if (sizeof($splitedLine) == 4) {
+					$result = array();
+					$result['section'] = 'scm';
+					$result['group_id'] = $project->getID();
+					$result['ref_id'] = 'browser.php?group_id='.$project->getID().'&commit='.$splitedLine[3];
+					$result['description'] = htmlspecialchars($splitedLine[2]).' (changeset '.$splitedLine[3].')';
+					$userObject = user_get_object_by_email($splitedLine[1]);
+					if (is_a($userObject, 'FFUser')) {
+						$result['realname'] = util_display_user($userObject->getUnixName(), $userObject->getID(), $userObject->getRealName());
+					} else {
+						$result['realname'] = '';
 					}
+					$splitedDate = explode('-', $splitedLine[0]);
+					$result['activity_date'] = $splitedDate[0];
+					$result['subref_id'] = '';
+					$params['results'][] = $result;
 				}
 			}
 		}

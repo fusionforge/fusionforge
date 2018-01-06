@@ -21,3 +21,11 @@ ScriptAliasMatch ^/authscm/[^/]+/scmhg/cgi-bin/(.*) ${FF__core__plugins_path}/sc
 	#Header always set Access-Control-Allow-Origin "${FF__core__web_host}"
 	#Header always set Access-Control-Allow-Credentials "true"
 </Directory>
+
+# Activity
+ScriptAliasMatch ^/authscm/[^/]+/hglog(.*) ${FF__core__plugins_path}/scmhg/libexec/hglog.php$1
+# Authentified via cookie in hglog.php:
+<LocationMatch "^/authscm/[^/]+/hglog">
+  Satisfy Any
+</LocationMatch>
+ScriptAlias /anonscm/hglog ${FF__core__plugins_path}/scmhg/libexec/hglog.php
