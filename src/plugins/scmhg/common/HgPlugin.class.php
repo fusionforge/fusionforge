@@ -736,7 +736,7 @@ Offer DAV or SSH access.");
 				}
 			}
 		}
-		if (!in_array($this->name, $params['ids'])) {
+		if (!in_array($this->name, $params['ids']) && ($project->enableAnonSCM() || session_loggedin())) {
 			$params['ids'][] = $this->name;
 			$params['texts'][] = _('Hg Commits');
 		}

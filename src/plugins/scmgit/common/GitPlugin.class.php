@@ -1046,7 +1046,7 @@ control over it to the project's administrator.");
 				}
 			}
 		}
-		if (!in_array($this->name, $params['ids'])) {
+		if (!in_array($this->name, $params['ids']) && ($project->enableAnonSCM() || session_loggedin())) {
 			$params['ids'][] = $this->name;
 			$params['texts'][] = _('Git Commits');
 		}
