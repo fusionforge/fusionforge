@@ -81,8 +81,6 @@ if (!$plugin) {
 	exit_disabled();
 }
 
-site_header(array('title'=>_('Global activity')));
-
 $ids = array();
 $texts = array();
 
@@ -91,6 +89,8 @@ try {
 } catch (Exception $e) {
 	exit_error($e->getMessage(), 'home');
 }
+
+site_header(array('title'=>_('Global activity')));
 
 if (count($ids) < 1) {
 	echo $HTML->information(_('No Activity Found'));
