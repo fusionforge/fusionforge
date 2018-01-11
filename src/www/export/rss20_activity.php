@@ -115,8 +115,8 @@ if ($group_id) {
 				}
 				print "  <item>\n";
 				print "   <title>".htmlspecialchars('Tracker Item [#'.$arr['subref_id'].' '.$arr['description'].'] Opened')."</title>\n";
-				print "   <link>".util_make_url("/tracker/?func=detail&amp;atid=".$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'])."</link>\n";
-				print "   <comments>".util_make_url("/tracker/?func=detail&amp;atid=".$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'])."</comments>\n";
+				print "   <link>".util_make_url("/tracker/a_follow.php/".$arr['subref_id'])."</link>\n";
+				print "   <comments>".util_make_url("/tracker/a_follow.php/".$arr['subref_id'])."</comments>\n";
 				$arr['category'] = _('Trackers');
 				break;
 			}
@@ -126,8 +126,8 @@ if ($group_id) {
 				}
 				print "  <item>\n";
 				print "   <title>".htmlspecialchars('Tracker Item [#'.$arr['subref_id'].' '.$arr['description'].'] Closed')."</title>\n";
-				print "   <link>".util_make_url("/tracker/?func=detail&amp;atid=".$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'])."</link>\n";
-				print "   <comments>".util_make_url("/tracker/?func=detail&amp;atid=".$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'])."</comments>\n";
+				print "   <link>".util_make_url("/tracker/a_follow.php/".$arr['subref_id'])."</link>\n";
+				print "   <comments>".util_make_url("/tracker/a_follow.php/".$arr['subref_id'])."</comments>\n";
 				$arr['category'] = _('Trackers');
 				break;
 			}
@@ -195,6 +195,39 @@ if ($group_id) {
 				print "   <link>".util_make_url("/docman/?group_id=".$arr['group_id']."&amp;view=listfile&amp;dirid=".$arr['subref_id'])."</link>\n";
 				print "   <comment>".util_make_url("/docman/?group_id=".$arr['group_id']."&amp;view=listfile&amp;dirid=".$arr['subref_id'])."</comment>\n";
 				$arr['category'] = _('Documents');
+				break;
+			}
+			case 'taskopen': {
+				if (!forge_check_perm('pm', $arr['ref_id'], 'read')) {
+					continue(2);
+				}
+				print "  <item>\n";
+				print "   <title>".htmlspecialchars('Task Item [#'.$arr['subref_id'].' '.$arr['description'].'] Open')."</title>\n";
+				print "   <link>".util_make_url("/pm/t_follow.php/".$arr['subref_id'])."</link>\n";
+				print "   <comments>".util_make_url("/pm/t_follow.php/".$arr['subref_id'])."</comments>\n";
+				$arr['category'] = _('Tasks');
+				break;
+			}
+			case 'taskclose': {
+				if (!forge_check_perm('pm', $arr['ref_id'], 'read')) {
+					continue(2);
+				}
+				print "  <item>\n";
+				print "   <title>".htmlspecialchars('Task Item [#'.$arr['subref_id'].' '.$arr['description'].'] Closed')."</title>\n";
+				print "   <link>".util_make_url("/pm/t_follow.php/".$arr['subref_id'])."</link>\n";
+				print "   <comments>".util_make_url("/pm/t_follow.php/".$arr['subref_id'])."</comments>\n";
+				$arr['category'] = _('Tasks');
+				break;
+			}
+			case 'taskdelete': {
+				if (!forge_check_perm('pm', $arr['ref_id'], 'read')) {
+					continue(2);
+				}
+				print "  <item>\n";
+				print "   <title>".htmlspecialchars('Task Item [#'.$arr['subref_id'].' '.$arr['description'].'] Deleted')."</title>\n";
+				print "   <link>".util_make_url("/pm/t_follow.php/".$arr['subref_id'])."</link>\n";
+				print "   <comments>".util_make_url("/pm/t_follow.php/".$arr['subref_id'])."</comments>\n";
+				$arr['category'] = _('Tasks');
 				break;
 			}
 			default: {
