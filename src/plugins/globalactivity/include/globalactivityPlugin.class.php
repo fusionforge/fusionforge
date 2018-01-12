@@ -81,7 +81,7 @@ class globalactivityPlugin extends Plugin {
 			$uri.'#globalactivity_getActivityForProject','rpc','encoded');
 	}
 
-	public function getData($begin,$end,&$show,&$ids,&$texts,$gid = NULL) {
+	public function getData($begin, $end, &$show, &$ids, &$texts, $gid = NULL) {
 		if ($begin > $end) {
 			$tmp = $end;
 			$end = $begin;
@@ -137,73 +137,15 @@ class globalactivityPlugin extends Plugin {
 			$section = $show;
 		}
 
-		function activity_date_compare($a, $b) {
-			if ($a['activity_date'] == $b['activity_date']) {
-				return 0;
-			}
-			return ($a['activity_date'] > $b['activity_date']) ? -1 : 1;
-		}
-
-		global $cached_perms;
+		$ffactivity = new Activity();
 		$cached_perms = array();
-		function check_perm_for_activity($arr) {
-			global $cached_perms;
-			$s = $arr['section'];
-			$ref = $arr['ref_id'];
-			$group_id = $arr['group_id'];
-
-			if (!isset($cached_perms[$s][$ref])) {
-				switch ($s) {
-					case 'scm': {
-						$cached_perms[$s][$ref] = forge_check_perm('scm', $group_id, 'read');
-						break;
-					}
-					case 'trackeropen':
-					case 'trackerclose': {
-						$cached_perms[$s][$ref] = forge_check_perm('tracker', $ref, 'read');
-						break;
-					}
-					case 'frsrelease': {
-						$cached_perms[$s][$ref] = forge_check_perm('frs', $ref, 'read');
-						break;
-					}
-					case 'forumpost':
-					case 'news': {
-						$cached_perms[$s][$ref] = forge_check_perm('forum', $ref, 'read');
-						break;
-					}
-					case 'taskopen':
-					case 'taskclose':
-					case 'taskdelete': {
-						$cached_perms[$s][$ref] = forge_check_perm('pm', $ref, 'read');
-						break;
-					}
-					case 'docmannew':
-					case 'docmanupdate':
-					case 'docgroupnew': {
-						$cached_perms[$s][$ref] = forge_check_perm('docman', $group_id, 'read');
-						break;
-					}
-					default: {
-						// Must be a bug somewhere, we're supposed to handle all types
-						$cached_perms[$s][$ref] = false;
-					}
-				}
-			}
-			return $cached_perms[$s][$ref];
-		}
 
 		if ($gid) {
 			$res = db_query_params('SELECT * FROM activity_vw WHERE activity_date BETWEEN $1 AND $2 AND section = ANY ($3) AND group_id = $4 ORDER BY activity_date DESC',
-							   array($begin,
-									 $end,
-									 db_string_array_to_any_clause($section),
-									 $gid));
+							   array($begin, $end, db_string_array_to_any_clause($section), $gid));
 		} else {
 			$res = db_query_params('SELECT * FROM activity_vw WHERE activity_date BETWEEN $1 AND $2 AND section = ANY ($3) ORDER BY activity_date DESC',
-							   array($begin,
-									 $end,
-									 db_string_array_to_any_clause($section)));
+							   array($begin, $end, db_string_array_to_any_clause($section)));
 		}
 
 		if (db_error()) {
@@ -216,7 +158,7 @@ class globalactivityPlugin extends Plugin {
 			if (!forge_check_perm('project_read', $group_id)) {
 				continue;
 			}
-			if (!check_perm_for_activity($arr)) {
+			if (!$ffactivity->check_perm_for_activity($arr, $cached_perms)) {
 				continue;
 			}
 			$results[] = $arr;
@@ -265,13 +207,13 @@ class globalactivityPlugin extends Plugin {
 			if (!forge_check_perm('project_read', $group_id)) {
 				continue;
 			}
-			if (!check_perm_for_activity($arr)) {
+			if (!$ffactivity->check_perm_for_activity($arr, $cached_perms)) {
 				continue;
 			}
 			$res2[] = $arr;
 		}
 
-		usort($res2, 'activity_date_compare');
+		usort($res2, 'Activity::date_compare');
 
 		return $res2;
 	}

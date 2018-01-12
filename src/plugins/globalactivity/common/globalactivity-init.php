@@ -1,8 +1,9 @@
 <?php
-
 /**
  *
  * This file is part of FusionForge.
+ * Copyright 2016, Roland Mas
+ * Copyright 2017, Franck Villaume - TrivialDev
  *
  * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,11 +21,12 @@
  */
 
 global $gfplugins;
-require_once $gfplugins.'globalactivity/include/globalactivityPlugin.class.php' ;
+require_once $gfplugins.'globalactivity/include/globalactivityPlugin.class.php';
+require_once $gfcommon.'include/Activity.class.php';
 
-$globalactivityPluginObject = new globalactivityPlugin ;
+$globalactivityPluginObject = new globalactivityPlugin;
 
-register_plugin ($globalactivityPluginObject) ;
+register_plugin($globalactivityPluginObject);
 
 // Local Variables:
 // mode: php
