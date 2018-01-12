@@ -24,6 +24,7 @@
 
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
+require_once $gfcommon.'include/Activity.class.php';
 require_once $gfwww.'export/rss_utils.inc';
 
 global $HTML;
@@ -93,16 +94,19 @@ if ($group_id) {
 	$hookParams['texts'] = &$texts;
 	plugin_hook ("activity", $hookParams) ;
 
-	usort($results, 'date_compare');
+	$ffactivity = new Activity();
+	usort($results, 'Activity::date_compare');
 
 	// ## item outputs
+	$cached_perms = array();
 	foreach ($results as $arr) {
+		if (!$ffactivity->check_perm_for_activity($arr, $cached_perms)) {
+			continue;
+		}
+
+		print "  <item>\n";
 		switch ($arr['section']) {
 			case 'scm': {
-				if (!forge_check_perm('scm',$arr['group_id'],'read')) {
-					continue (2);
-				}
-				print "  <item>\n";
 				print "   <title>".htmlspecialchars('Commit :'.$arr['description'])."</title>\n";
 				print "   <link>".util_make_url('/scm/'.htmlentities($arr['ref_id'].$arr['subref_id']))."</link>\n";
 				print "   <comments>".util_make_url('/scm/'.htmlentities($arr['ref_id'].$arr['subref_id']))."</comments>\n";
@@ -110,10 +114,6 @@ if ($group_id) {
 				break;
 			}
 			case 'trackeropen': {
-				if (!forge_check_perm('tracker',$arr['ref_id'],'read')) {
-					continue (2);
-				}
-				print "  <item>\n";
 				print "   <title>".htmlspecialchars('Tracker Item [#'.$arr['subref_id'].' '.$arr['description'].'] Opened')."</title>\n";
 				print "   <link>".util_make_url("/tracker/a_follow.php/".$arr['subref_id'])."</link>\n";
 				print "   <comments>".util_make_url("/tracker/a_follow.php/".$arr['subref_id'])."</comments>\n";
@@ -121,10 +121,6 @@ if ($group_id) {
 				break;
 			}
 			case 'trackerclose': {
-				if (!forge_check_perm('tracker',$arr['ref_id'],'read')) {
-					continue (2);
-				}
-				print "  <item>\n";
 				print "   <title>".htmlspecialchars('Tracker Item [#'.$arr['subref_id'].' '.$arr['description'].'] Closed')."</title>\n";
 				print "   <link>".util_make_url("/tracker/a_follow.php/".$arr['subref_id'])."</link>\n";
 				print "   <comments>".util_make_url("/tracker/a_follow.php/".$arr['subref_id'])."</comments>\n";
@@ -132,10 +128,6 @@ if ($group_id) {
 				break;
 			}
 			case 'frsrelease': {
-				if (!forge_check_perm('frs',$arr['ref_id'],'read')) {
-					continue (2);
-				}
-				print "  <item>\n";
 				print "   <title>".htmlspecialchars('FRS Release [#'.$arr['description'].']')."</title>\n";
 				print "   <link>".util_make_url("/frs/?release_id=".$arr['subref_id'].'&amp;group_id='.$arr['group_id'])."</link>\n";
 				print "   <comments>".util_make_url("/frs/?release_id=".$arr['subref_id'].'&amp;group_id='.$arr['group_id'])."</comments>\n";
@@ -143,10 +135,6 @@ if ($group_id) {
 				break;
 			}
 			case 'forumpost': {
-				if (!forge_check_perm('forum',$arr['ref_id'],'read')) {
-					continue (2);
-				}
-				print "  <item>\n";
 				print "   <title>".htmlspecialchars('Forum Post [#'.$arr['subref_id'].'] '.$arr['description'])."</title>\n";
 				print "   <link>".util_make_url("/forum/message.php?forum_id=".$arr['ref_id'].'&amp;msg_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'])."</link>\n";
 				print "   <comments>".util_make_url("/forum/message.php?forum_id=".$arr['ref_id'].'&amp;msg_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'])."</comments>\n";
@@ -154,10 +142,6 @@ if ($group_id) {
 				break;
 			}
 			case 'news': {
-				if (!forge_check_perm('forum',$arr['subref_id'],'read')) {
-					continue (2);
-				}
-				print "  <item>\n";
 				print "   <title>".htmlspecialchars('News Post [#'.$arr['subref_id'].'] '.$arr['description'])."</title>\n";
 				print "   <link>".util_make_url("/forum/forum.php?forum_id=".$arr['subref_id'])."</link>\n";
 				print "   <comments>".util_make_url("/forum/forum.php?forum_id=".$arr['subref_id'])."</comments>\n";
@@ -165,10 +149,6 @@ if ($group_id) {
 				break;
 			}
 			case 'docmannew': {
-				if (!forge_check_perm('docman', $arr['group_id'], 'read')) {
-					continue (2);
-				}
-				print "  <item>\n";
 				print "   <title>".htmlspecialchars('New Document '.$arr['description'])."</title>\n";
 				print "   <link>".util_make_url("/docman/?group_id=".$arr['group_id']."&amp;view=listfile&amp;dirid=".$arr['ref_id'])."</link>\n";
 				print "   <comment>".util_make_url("/docman/?group_id=".$arr['group_id']."&amp;view=listfile&amp;dirid=".$arr['ref_id'])."</comment>\n";
@@ -176,10 +156,6 @@ if ($group_id) {
 				break;
 			}
 			case 'docmanupdate': {
-				if (!forge_check_perm('docman', $arr['group_id'], 'read')) {
-					continue (2);
-				}
-				print "  <item>\n";
 				print "   <title>".htmlspecialchars('Updated Document '.$arr['description'])."</title>\n";
 				print "   <link>".util_make_url("/docman/?group_id=".$arr['group_id']."&amp;view=listfile&amp;dirid=".$arr['ref_id'])."</link>\n";
 				print "   <comment>".util_make_url("/docman/?group_id=".$arr['group_id']."&amp;view=listfile&amp;dirid=".$arr['ref_id'])."</comment>\n";
@@ -187,10 +163,6 @@ if ($group_id) {
 				break;
 			}
 			case 'docgroupnew': {
-				if (!forge_check_perm('docman', $arr['group_id'], 'read')) {
-					continue (2);
-				}
-				print "  <item>\n";
 				print "   <title>".htmlspecialchars('New Document Directory '.$arr['description'])."</title>\n";
 				print "   <link>".util_make_url("/docman/?group_id=".$arr['group_id']."&amp;view=listfile&amp;dirid=".$arr['subref_id'])."</link>\n";
 				print "   <comment>".util_make_url("/docman/?group_id=".$arr['group_id']."&amp;view=listfile&amp;dirid=".$arr['subref_id'])."</comment>\n";
@@ -198,10 +170,6 @@ if ($group_id) {
 				break;
 			}
 			case 'taskopen': {
-				if (!forge_check_perm('pm', $arr['ref_id'], 'read')) {
-					continue(2);
-				}
-				print "  <item>\n";
 				print "   <title>".htmlspecialchars('Task Item [#'.$arr['subref_id'].' '.$arr['description'].'] Open')."</title>\n";
 				print "   <link>".util_make_url("/pm/t_follow.php/".$arr['subref_id'])."</link>\n";
 				print "   <comments>".util_make_url("/pm/t_follow.php/".$arr['subref_id'])."</comments>\n";
@@ -209,10 +177,6 @@ if ($group_id) {
 				break;
 			}
 			case 'taskclose': {
-				if (!forge_check_perm('pm', $arr['ref_id'], 'read')) {
-					continue(2);
-				}
-				print "  <item>\n";
 				print "   <title>".htmlspecialchars('Task Item [#'.$arr['subref_id'].' '.$arr['description'].'] Closed')."</title>\n";
 				print "   <link>".util_make_url("/pm/t_follow.php/".$arr['subref_id'])."</link>\n";
 				print "   <comments>".util_make_url("/pm/t_follow.php/".$arr['subref_id'])."</comments>\n";
@@ -220,10 +184,6 @@ if ($group_id) {
 				break;
 			}
 			case 'taskdelete': {
-				if (!forge_check_perm('pm', $arr['ref_id'], 'read')) {
-					continue(2);
-				}
-				print "  <item>\n";
 				print "   <title>".htmlspecialchars('Task Item [#'.$arr['subref_id'].' '.$arr['description'].'] Deleted')."</title>\n";
 				print "   <link>".util_make_url("/pm/t_follow.php/".$arr['subref_id'])."</link>\n";
 				print "   <comments>".util_make_url("/pm/t_follow.php/".$arr['subref_id'])."</comments>\n";
@@ -231,7 +191,6 @@ if ($group_id) {
 				break;
 			}
 			default: {
-				print "  <item>\n";
 				print "   <title>".htmlspecialchars($arr['title'])."</title>\n";
 				print "   <link>".util_make_url($arr['link'])."</link>\n";
 				print "   <comment>".util_make_url($arr['link'])."</comment>\n";
@@ -258,12 +217,4 @@ if ($group_id) {
 } else {
 	// Print error showing no group was selected
 	echo $HTML->error_msg(_('Error: No group selected'));
-}
-
-function date_compare($a, $b)
-{
-	if ($a['activity_date'] == $b['activity_date']) {
-		return 0;
-	}
-	return ($a['activity_date'] > $b['activity_date']) ? -1 : 1;
 }
