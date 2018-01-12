@@ -6,7 +6,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
- * Copyright 2016, Franck Villaume - TrivialDev
+ * Copyright 2016,2018, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -34,6 +34,10 @@ global $use_tooltips, $HTML;
 
 $group_id = getIntFromRequest('group_id');
 session_require_perm('project_admin', $group_id);
+
+if (!forge_get_config('use_trove')) {
+	exit_disabled('summary');
+}
 
 // Check for submission. If so, make changes and redirect
 
