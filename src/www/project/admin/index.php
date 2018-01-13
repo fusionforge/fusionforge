@@ -121,13 +121,13 @@ project_admin_header(array('title'=>sprintf(_('Project Information for %s'), $gr
 
 if (forge_get_config('use_shell')) {
 ?>
-<p><?php echo _('Group shell (SSH) server:') ?> <strong><?php echo forge_get_config('shell_host'); ?></strong></p>
-<p><?php echo _('Group directory on shell server:') ?><br/><strong><?php echo account_group_homedir($group->getUnixName()); ?></strong></p>
-<p><?php echo _('Project WWW directory on shell server:') ?><br /><strong><?php echo account_group_homedir($group->getUnixName()).'/htdocs'; ?></strong></p>
+<p><?php echo _('Group shell (SSH) server')._(':') ?> <strong><?php echo forge_get_config('shell_host'); ?></strong></p>
+<p><?php echo _('Group directory on shell server')._(':') ?><br/><strong><?php echo account_group_homedir($group->getUnixName()); ?></strong></p>
+<p><?php echo _('Project WWW directory on shell server')._(':') ?><br /><strong><?php echo account_group_homedir($group->getUnixName()).'/htdocs'; ?></strong></p>
 <?php
-	} //end of use_shell condition
+} //end of use_shell condition
 
-	echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
+echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
 ?>
 
 <input type="hidden" name="group_id" value="<?php echo $group->getID(); ?>" />
