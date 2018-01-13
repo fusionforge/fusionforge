@@ -73,7 +73,7 @@ class Theme_Funky extends Layout {
 				jQuery(":submit").button();
 				jQuery(":reset").button();
 				jQuery(":button").button();
-				jQuery("[id^=tabber").tabs();
+				jQuery("#tabber").tabs();
 				jQuery("input").filter(\'[type="number"]\').spinner();
 			});
 			//]]>'."\n";
