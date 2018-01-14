@@ -839,6 +839,9 @@ class Group extends FFError {
 		$res = db_query_params('UPDATE groups SET is_template=$1 WHERE group_id=$2',
 					array($booleanparam, $this->getID()));
 		if ($res) {
+			if ($booleanparam != $this->data_array['is_template']) {
+				$this->addHistory('is_template', $this->data_array['is_template']);
+			}
 			$this->data_array['is_template'] = $booleanparam;
 			db_commit();
 			return true;
