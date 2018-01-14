@@ -1196,11 +1196,16 @@ abstract class Layout extends FFError {
 	 * openForm - create the html code to open a form
 	 *
 	 * @param	array	$args	argument of the form (method, action, ...)
+	 * @param	bool	$proto	force https if needed. Useful in case to force https URL page in http page.
 	 * @return	string	html code
 	 */
-	function openForm($args) {
+	function openForm($args, $proto = false) {
 		if (isset($args['action'])) {
-			$args['action'] = util_make_uri($args['action']);
+			if ($proto && forge_get_config('use_ssl')) {
+				$args['action'] = util_make_url($args['action'], 'https');
+			} else {
+				$args['action'] = util_make_uri($args['action']);
+			}
 		}
 		return html_ao('form', $args);
 	}
