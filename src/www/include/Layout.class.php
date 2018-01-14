@@ -735,7 +735,6 @@ abstract class Layout extends FFError {
 	}
 
 	function confirmBox($msg, $params, $buttons, $image = '*none*') {
-		global $HTML;
 		if ($image == '*none*') {
 			$image = html_image('stop.png', 48, 48);
 		}
@@ -759,10 +758,10 @@ abstract class Layout extends FFError {
 			</tr>
 			<tr>
 			<td colspan="2" align="center">
-			<br />'.$HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'get'))
+			<br />'.$this->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'get'))
 			.$prm.'
 			'.$btn.
-			$HTML->closeForm().'
+			$this->closeForm().'
 			</td>
 			</tr>
 			</table>
