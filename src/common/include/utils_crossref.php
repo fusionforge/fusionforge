@@ -58,9 +58,16 @@ function util_gen_cross_ref($text, $group_id) {
 	return $text;
 }
 
-function _page2url($group_id,$page) {
-	$prj = group_getunixname ($group_id);
-	return util_make_link('/wiki/g/'.$prj.'/'.rawurlencode($page), $page);
+function _page2url($group_id, $page) {
+	$params = array();
+	$params['group_id'] = $group_id;
+	$params['page'] = $page;
+	plugin_hook_by_reference('crossrefurl', $params);
+	if (isset($params['url'])) {
+		return util_make_link($params['url'], '[wiki:'.$page.']');
+	} else {
+		return '[wiki:'.$page.']';
+	}
 }
 
 function _artifactid2url($id, $mode = '') {

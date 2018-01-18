@@ -61,6 +61,7 @@ _('This plugin allows each project to embed Mediawiki under a tab.');
 		$this->_addHook('clone_project_from_template');
 		$this->_addHook('group_delete');
 		$this->_addHook('activity');
+		$this->_addHook('crossrefurl');
 	}
 
 	function process() {
@@ -365,6 +366,18 @@ _('This plugin allows each project to embed Mediawiki under a tab.');
 				$schema = strtr($schema, '-', '_');
 				db_query_params('drop schema $1 cascade', array($schema));
 				exec('/bin/rm -rf '.forge_get_config('projects_path', 'mediawiki').'/'.$projectObject->getUnixName());
+			}
+		} elseif ($hookname == 'crossrefurl') {
+			$group_id = $params['group_id'];
+			$project = group_get_object($group_id);
+			if (!$project->usesPlugin($this->name)) {
+				return false;
+			}
+			if (isset($params['page'])) {
+				$params['url'] = '/plugins/'.$this->name.'/wiki/'.$project->getUnixName().'/index.php/'.$params['page'];
+				return true;
+			} else {
+				return false;
 			}
 		} elseif ($hookname == 'activity') {
 			$group_id = $params['group_id'];
