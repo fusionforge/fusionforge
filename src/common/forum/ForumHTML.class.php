@@ -218,7 +218,7 @@ class ForumHTML extends FFError {
 			</tr>
 			<tr>
 				<td>
-					'.  $msg->getBody() .'
+					'.  util_gen_cross_ref($msg->getBody(), $group_id) .'
 				</td>
 			</tr>
 		</table>';
@@ -275,9 +275,9 @@ class ForumHTML extends FFError {
 				<td colspan="2">
 					';
 					if (strpos($msg->getBody(),'<') === false) {
-						$ret_val .= nl2br($msg->getBody()); //backwards compatibility for non html messages
+						$ret_val .= nl2br(util_gen_cross_ref($msg->getBody())); //backwards compatibility for non html messages
 					} else {
-						$ret_val .= $msg->getBody();
+						$ret_val .= util_gen_cross_ref($msg->getBody());
 					}
 					$ret_val .= '
 				</td>
