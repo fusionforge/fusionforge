@@ -275,9 +275,9 @@ class ForumHTML extends FFError {
 				<td colspan="2">
 					';
 					if (strpos($msg->getBody(),'<') === false) {
-						$ret_val .= nl2br(util_gen_cross_ref($msg->getBody())); //backwards compatibility for non html messages
+						$ret_val .= nl2br(util_gen_cross_ref($msg->getBody(), $group_id)); //backwards compatibility for non html messages
 					} else {
-						$ret_val .= util_gen_cross_ref($msg->getBody());
+						$ret_val .= util_gen_cross_ref($msg->getBody(), $group_id);
 					}
 					$ret_val .= '
 				</td>
