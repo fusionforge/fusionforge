@@ -11,6 +11,7 @@ msgstr ""
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
 "Language: sv\n"
+"X-Bugs: Report translation errors to the Language-Team address.\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -228,7 +229,7 @@ msgstr ""
 #: common/forum/ForumHTML.class.php:587 common/forum/ForumHTML.class.php:590
 #: common/forum/ForumMessage.class.php:666 common/frs/FRSFile.class.php:187
 #: common/frs/FRSFile.class.php:440 common/frs/FRSPackage.class.php:295
-#: common/include/FFError.class.php:206 common/include/exit.php:80
+#: common/include/Error.class.php:206 common/include/exit.php:80
 #: common/include/Group.class.php:2634 common/include/Group.class.php:2635
 #: common/include/Group.class.php:2636 common/include/Group.class.php:2688
 #: common/include/Group.class.php:2689 common/include/Group.class.php:2692
@@ -512,7 +513,7 @@ msgstr "Inga giltiga gruppobject"
 
 #: common/docman/Document.class.php:82
 #: common/docman/DocumentGroup.class.php:76 common/forum/Forum.class.php:139
-#: common/frs/FRSPackage.class.php:120 common/include/FFError.class.php:184
+#: common/frs/FRSPackage.class.php:120 common/include/Error.class.php:184
 #: common/mail/MailingList.class.php:83 common/survey/Survey.class.php:83
 #: common/survey/SurveyQuestion.class.php:74
 #: plugins/mailman/include/MailmanList.class.php:102
@@ -2793,7 +2794,7 @@ msgid "Invalid file_id"
 msgstr "Ogiltigt fullständigt namn"
 
 #: common/frs/FRSFile.class.php:416 common/frs/FRSPackage.class.php:400
-#: common/frs/FRSRelease.class.php:438 common/include/FFError.class.php:167
+#: common/frs/FRSRelease.class.php:438 common/include/Error.class.php:167
 #: common/mail/MailingList.class.php:265 common/pm/ProjectGroup.class.php:369
 #: www/admin/pending-news.php:76 www/admin/pending-news.php:86
 #: www/admin/pending-news.php:106 www/news/admin/index.php:90
@@ -3035,12 +3036,12 @@ msgstr ""
 msgid "Database initialisation error:"
 msgstr "Databasmanipulering"
 
-#: common/include/FFError.class.php:106
+#: common/include/Error.class.php:106
 #, fuzzy
 msgid "No Error"
 msgstr "Fel"
 
-#: common/include/FFError.class.php:125 common/include/Group.class.php:432
+#: common/include/Error.class.php:125 common/include/Group.class.php:432
 #: common/include/Group.class.php:515
 #: plugins/hudson/include/hudson.class.php:65
 #: plugins/hudson/include/hudson.class.php:77
@@ -3054,18 +3055,18 @@ msgstr "Fel"
 msgid "Permission denied."
 msgstr "Åtkomst nekad."
 
-#: common/include/FFError.class.php:142 common/include/User.class.php:350
+#: common/include/Error.class.php:142 common/include/User.class.php:350
 #: common/include/User.class.php:931 common/include/User.class.php:983
 #: common/tracker/actions/tracker.php:86
 #: plugins/forumml/www/forumml_utils.php:679 www/account/change_email.php:38
 msgid "Invalid Email Address"
 msgstr "Ogiltig e-postadress"
 
-#: common/include/FFError.class.php:146
+#: common/include/Error.class.php:146
 msgid "(none given)"
 msgstr ""
 
-#: common/include/FFError.class.php:208 common/include/exit.php:80
+#: common/include/Error.class.php:208 common/include/exit.php:80
 #: common/include/exit.php:85
 #, php-format
 msgid "Missing Required Parameters"
