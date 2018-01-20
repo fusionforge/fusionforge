@@ -67,7 +67,7 @@ if (count ($argv) == 3) {
 } else {
 	echo "Usage: .../forge-get-config <variable> [ <section> ]
 For instance: .../forge-get-config web_host
-              .../forge-get-config repo_prefix scmsvn
+              .../forge-get-config repos_path scmsvn
 
 Or:           .../forge-get-config list-all-variables, for all variables
               .../forge-get-config list-all-variables-values, for all variables and their values
