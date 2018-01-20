@@ -53,4 +53,6 @@ $hook_params = array();
 $hook_params['group_id'] = $group_id;
 plugin_hook("scm_page", $hook_params);
 
+echo html_e('script', array('type'=>'text/javascript'), '//<![CDATA['."\n".'jQuery("[id^=tabber]").tabs();'."\n".'//]]>');
+
 scm_footer();
