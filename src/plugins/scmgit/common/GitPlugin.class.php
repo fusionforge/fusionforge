@@ -181,7 +181,11 @@ control over it to the project's administrator.");
 				$b .= html_e('p', array(), _('SSH must be installed on your client machine.'));
 				$htmlRepo = '';
 				foreach ($repo_list as $repo_name) {
-					$htmlRepo .= html_e('kbd', array(), 'git clone git+ssh://'.$d.'@'.$this->getBoxForProject($project).$ssh_port.forge_get_config('repos_path', 'scmgit').'/'.$project->getUnixName().'/'.$repo_name.'.git').html_e('br');
+					if (forge_get_config('use_shell_limited')) {
+						$htmlRepo .= html_e('kbd', array(), 'git clone '.$d.'@'.$this->getBoxForProject($project).$ssh_port.':'.$project->getUnixName().'/'.$repo_name.'.git').html_e('br');
+					} else {
+						$htmlRepo .= html_e('kbd', array(), 'git clone git+ssh://'.$d.'@'.$this->getBoxForProject($project).$ssh_port.forge_get_config('repos_path', 'scmgit').'/'.$project->getUnixName().'/'.$repo_name.'.git').html_e('br');
+					}
 				}
 				$b .= html_e('p', array(), $htmlRepo);
 				$b .= '</div>';
@@ -208,7 +212,11 @@ control over it to the project's administrator.");
 					' '. _('Substitute <em>developername</em> with the proper value.'));
 				$htmlRepo = '';
 				foreach ($repo_list as $repo_name) {
-					$htmlRepo .= html_e('kbd', array(), 'git clone git+ssh://'.html_e('i', array(), _('developername'), true, false).'@'.$this->getBoxForProject($project).$ssh_port.forge_get_config('repos_path', 'scmgit').'/'.$project->getUnixName().'/'.$repo_name.'.git').html_e('br');
+					if (forge_get_config('use_shell_limited')) {
+						$htmlRepo .= html_e('kbd', array(), 'git clone '.html_e('i', array(), _('developername'), true, false).'@'.$this->getBoxForProject($project).$ssh_port.':'.$project->getUnixName().'/'.$repo_name.'.git').html_e('br');
+					} else {
+						$htmlRepo .= html_e('kbd', array(), 'git clone git+ssh://'.html_e('i', array(), _('developername'), true, false).'@'.$this->getBoxForProject($project).$ssh_port.forge_get_config('repos_path', 'scmgit').'/'.$project->getUnixName().'/'.$repo_name.'.git').html_e('br');
+					}
 				}
 				$b .= html_e('p', array(), $htmlRepo);
 				$b .= '</div>';
