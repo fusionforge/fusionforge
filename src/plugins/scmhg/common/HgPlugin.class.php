@@ -4,7 +4,7 @@
  *
  * Copyright 2009, Roland Mas
  * Copyright 2012, Denise Patzker
- * Copyright 2012-2014,2017, Franck Villaume - TrivialDev
+ * Copyright 2012-2014,2017-2018, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -440,18 +440,6 @@ Offer DAV or SSH access.");
 			system("chown $unix_user:$unix_group $path/hgrc");
 			system("chmod 660 $path/hgrc");
 		}
-
-		foreach ($hgusers as $user_id => $user) {
-			$password_data .= $user->getUnixName().':'.$user->getUnixPasswd()."\n";
-		}
-		$password_data .= forge_get_config('anonhg_login', 'scmhg').":".htpasswd_apr1_md5(forge_get_config('anonhg_password', 'scmhg'))."\n";
-
-		$fname = forge_get_config('data_path').'/hgroot-authfile';
-		$f = fopen($fname.'.new', 'w');
-		fwrite($f, $password_data);
-		fclose($f);
-		chmod($fname.'.new', 0644);
-		rename($fname.'.new', $fname);
 	}
 
 	function generateSnapshots($params) {
