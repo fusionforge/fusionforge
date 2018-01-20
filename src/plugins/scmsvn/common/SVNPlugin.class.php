@@ -37,7 +37,6 @@ forge_set_config_item_bool('use_dav', 'scmsvn');
 forge_define_config_item('use_ssl', 'scmsvn', true);
 forge_set_config_item_bool('use_ssl', 'scmsvn');
 forge_define_config_item('anonsvn_login','scmsvn', 'anonsvn');
-forge_define_config_item('anonsvn_password','scmsvn', 'anonsvn');
 forge_define_config_item('ssh_port', 'core', 22);
 
 class SVNPlugin extends SCMPlugin {
