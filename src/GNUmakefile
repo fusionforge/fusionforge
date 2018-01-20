@@ -1,7 +1,7 @@
 # FusionForge build system
 #
 # Copyright (C) 2014, 2015  Inria (Sylvain Beucler)
-# Copyright 2017, Franck Villaume - TrivialDev
+# Copyright 2017-2018, Franck Villaume - TrivialDev
 #
 # This file is part of FusionForge. FusionForge is free software;
 # you can redistribute it and/or modify it under the terms of the
@@ -130,6 +130,7 @@ install-scm: install-base-dirs
 	fi
 
 install-shell: install-base-dirs
+	ln -nfs $(pkgdatadir)/bin/limited_ssh.sh $(DESTDIR)$(bindir)
 	$(CP_R) cronjobs/shell $(DESTDIR)$(pkgdatadir)/cronjobs/
 	$(CP_R) post-install.d/shell $(DESTDIR)$(pkgdatadir)/post-install.d/
 

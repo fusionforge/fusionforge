@@ -121,7 +121,12 @@ Offer DAV or SSH access.");
 				foreach ($repo_list as $repo_name) {
 					// Warning : the ssh uri MUST be this form : ssh://username@scmbox//path/reponame
 					//           HAVE YOU SEEN THE // starting the path ? Keep in mind the double /
-					$htmlRepo .= html_e('kbd', array(), 'hg clone ssh://'.$d.'@'.$this->getBoxForProject($project).$ssh_port.'/'.forge_get_config('repos_path', 'scmhg').'/'.$project->getUnixName()).html_e('br');
+					if (forge_get_config('use_shell_limited')) {
+						$htmlRepo .= html_e('kbd', array(), 'hg clone ssh://'.$d.'@'.$this->getBoxForProject($project).$ssh_port'/hg/'.$project->getUnixName()).html_e('br');
+
+					} else {
+						$htmlRepo .= html_e('kbd', array(), 'hg clone ssh://'.$d.'@'.$this->getBoxForProject($project).$ssh_port.'/'.forge_get_config('repos_path', 'scmhg').'/'.$project->getUnixName()).html_e('br');
+					}
 				}
 				$b .= html_e('p', array(), $htmlRepo);
 				$b .= '</div>';
@@ -150,7 +155,11 @@ Offer DAV or SSH access.");
 				foreach ($repo_list as $repo_name) {
 					// Warning : the ssh uri MUST be this form : ssh://username@scmbox//path/reponame
 					//           HAVE YOU SEEN THE // starting the path ? Keep in mind the double /
-					$htmlRepo .= html_e('kbd', array(), 'hg clone ssh://'.html_e('i', array(), _('developername'), true, false).'@'.$this->getBoxForProject($project).$ssh_port.'/'.forge_get_config('repos_path', 'scmhg').'/'.$project->getUnixName()).html_e('br');
+					if (forge_get_config('use_shell_limited') {
+						$htmlRepo .= html_e('kbd', array(), 'hg clone ssh://'.html_e('i', array(), _('developername'), true, false).'@'.$this->getBoxForProject($project).$ssh_port.'/hg/'.$project->getUnixName()).html_e('br');
+					} else {
+						$htmlRepo .= html_e('kbd', array(), 'hg clone ssh://'.html_e('i', array(), _('developername'), true, false).'@'.$this->getBoxForProject($project).$ssh_port.'/'.forge_get_config('repos_path', 'scmhg').'/'.$project->getUnixName()).html_e('br');
+					}
 				}
 				$b .= html_e('p', array(), $htmlRepo);
 				$b .= '</div>';
