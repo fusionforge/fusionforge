@@ -56,7 +56,7 @@ $hook_params = array ('output' => '') ;
 plugin_hook_by_reference ('scm_update_repolist', $hook_params) ;
 $output .= $hook_params['output'];
 
-cron_entry(27, $output);
+cron_entry('SCM_REPO', $output);
 
 // Local Variables:
 // mode: php

@@ -169,7 +169,7 @@ m_exit($mess);
 function m_exit($mess = '') {
 	global $err;
 
-	if (!cron_entry(6,$mess.$err)) {
+	if (!cron_entry('MASSMAIL', $mess.$err)) {
 		// rely on crond to report the error
 		echo "cron_entry error: ".db_error()."\n";
 	}
