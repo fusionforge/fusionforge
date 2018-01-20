@@ -165,7 +165,11 @@ some control over it to the project's administrator.");
 				if (forge_get_config('ssh_port') != 22) {
 					$ssh_port = '--config-option="config:tunnels:ssh=ssh -p '.forge_get_config('ssh_port').'" ';
 				}
-				$b .= '<p><span class="tt">svn '.$ssh_port.'checkout svn+ssh://'.$d.'@'.$this->getBoxForProject($project).$this->svn_root_fs .'/'. $project->getUnixName().$module.'</span></p>' ;
+				if (forge_get_config('use_shell_limited')) {
+					$b .= '<p><span class="tt">svn '.$ssh_port.'checkout svn+ssh://'.$d.'@'.$this->getBoxForProject($project).'/'.$project->getUnixName().$module.'</span></p>' ;
+				} else {
+					$b .= '<p><span class="tt">svn '.$ssh_port.'checkout svn+ssh://'.$d.'@'.$this->getBoxForProject($project).$this->svn_root_fs .'/'. $project->getUnixName().$module.'</span></p>' ;
+				}
 				$b .= '</div>';
 			}
 			if (forge_get_config('use_dav', 'scmsvn')) {
@@ -190,7 +194,11 @@ some control over it to the project's administrator.");
 				if (forge_get_config('ssh_port') != 22) {
 					$ssh_port = '--config-option="config:tunnels:ssh=ssh -p '.forge_get_config('ssh_port').'" ';
 				}
-				$b .= '<p><span class="tt">svn '.$ssh_port.'checkout svn+ssh://<i>'._('developername').'</i>@'.$this->getBoxForProject($project).$this->svn_root_fs .'/'.$project->getUnixName().$module.'</span></p>';
+				if (forge_get_config('use_shell_limited')) {
+					$b .= '<p><span class="tt">svn '.$ssh_port.'checkout svn+ssh://<i>'._('developername').'</i>@'.$this->getBoxForProject($project).'/'.$project->getUnixName().$module.'</span></p>';
+				} else {
+					$b .= '<p><span class="tt">svn '.$ssh_port.'checkout svn+ssh://<i>'._('developername').'</i>@'.$this->getBoxForProject($project).$this->svn_root_fs .'/'.$project->getUnixName().$module.'</span></p>';
+				}
 				$b .= '</div>';
 			}
 			if (forge_get_config('use_dav', 'scmsvn')) {
