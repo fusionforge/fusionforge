@@ -96,12 +96,11 @@ case "$COMMAND" in
     fi
     EXEC="$HG -R $HG_BASE_DIR/$hpath serve --stdio"
     ;;
-  git)
+  git-*)
     # do git ssh
     gpath=`echo "$SSH_ORIGINAL_COMMAND"  | cut -d' ' -f2 | sed -e "s/'//g"`
     $LOG "command: $COMMAND"
     EXEC="$COMMAND $GIT_BASE_DIR/$gpath"
-
     ;;
    *)
     fail "operation not permitted"
