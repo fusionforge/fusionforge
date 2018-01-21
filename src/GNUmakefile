@@ -130,6 +130,7 @@ install-scm: install-base-dirs
 	fi
 
 install-shell: install-base-dirs
+	$(INSTALL) -d -m 00755 $(DESTDIR)$(bindir)
 	ln -nfs $(pkgdatadir)/bin/limited_ssh.sh $(DESTDIR)$(bindir)
 	$(CP_R) cronjobs/shell $(DESTDIR)$(pkgdatadir)/cronjobs/
 	$(CP_R) post-install.d/shell $(DESTDIR)$(pkgdatadir)/post-install.d/
