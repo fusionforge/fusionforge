@@ -273,7 +273,7 @@ function hide_edit_button(id) {
 						$end = '<br /><br />';
 					}
 					$text = '[#'.$arr['artifact_id'].']';
-					$url = '/tracker/?func=detail&aid='.$arr['artifact_id'].'&group_id='.$arr['group_id'].'&atid='.$arr['group_artifact_id'];
+					$url = '/tracker/a_follow.php/'.$arr['artifact_id'];
 					$arg['title'] = util_html_secure($arr['summary']);
 					if ($arr['status_id'] == 2) {
 						$arg['class'] = 'artifact_closed';
