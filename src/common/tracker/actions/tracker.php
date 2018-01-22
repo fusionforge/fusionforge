@@ -395,7 +395,7 @@ switch (getStringFromRequest('func')) {
 					//
 					//	Delete list of files from this artifact
 					//
-					$delete_file = getStringFromRequest('delete_file');
+					$delete_file = getArrayFromRequest('delete_file', null);
 					if ($delete_file) {
 						$count=count($delete_file);
 						for ($i=0; $i<$count; $i++) {
