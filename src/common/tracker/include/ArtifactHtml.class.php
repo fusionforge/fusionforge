@@ -314,7 +314,7 @@ function hide_edit_button(id) {
 				$title = $parentG->getPublicName()._(': ').$parentAt->getName();
 				$return .= '<strong>'.$title.'</strong>';
 				$text = '[#'.$parent->getID().']';
-				$url = '/tracker/?func=detail&aid='.$parent->getID().'&group_id='.$parentG->getID().'&atid='.$parentAt->getID();
+				$url = '/tracker/a_follow.php/'.$parent->getID();
 				$arg['title'] = util_html_secure($parent->getSummary());
 				if ($parent->getStatusID() == 2) {
 					$arg['class'] = 'artifact_closed';
