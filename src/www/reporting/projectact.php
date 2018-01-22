@@ -63,7 +63,7 @@ html_use_jqueryjqplotplugindateAxisRenderer();
 html_use_jqueryjqplotpluginBar();
 
 report_header(_('Project Activity'));
-echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'get')); ?>
+echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'get'));
 ?>
 <table><tr>
 <td><strong><?php echo _('Project')._(':'); ?></strong><br /><?php echo report_group_box('g_id',$g_id); ?></td>
