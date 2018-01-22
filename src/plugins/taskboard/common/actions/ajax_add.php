@@ -1,6 +1,7 @@
 <?php
 /**
- * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
+ * Copyright 2013, Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
+ * Copyright 2018, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -29,11 +30,10 @@ $user_story_id = getIntFromRequest('user_story_id', 0);
 $desc = getStringFromRequest('desc', '');
 $title = getStringFromRequest('title', '');
 $release = getStringFromRequest('release', NULL);
-$assigned_to = getStringFromRequest('assigned_to', NULL);
 
 if( $tracker_id && $desc && $title  ) {
 	db_begin();
-	$msg = $taskboard->TrackersAdapter->createTask($tracker_id, $title, $desc, $user_story_id, $release, $assigned_to);
+	$msg = $taskboard->TrackersAdapter->createTask($tracker_id, $title, $desc, $user_story_id, $release);
 	if($msg) {
 		$ret['alert'] = $msg;
 		db_rollback();

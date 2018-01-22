@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
+ * Copyright 2018, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -273,7 +274,7 @@ class TaskBoardBasicAdapter extends FFError {
 	 *
 	 * @return	string	error message in case of fail
 	 */
-	function createTask($tracker_id, $title, $description, $user_story_id = null, $release_value = NULL, $assigned_to = NULL) {
+	function createTask($tracker_id, $title, $description, $user_story_id = null, $release_value = NULL, $assigned_to = 100, $priority = 3) {
 		$tracker = $this->getTasksTracker($tracker_id);
 		if ($tracker) {
 			$artifact = new Artifact($tracker);
@@ -306,7 +307,7 @@ class TaskBoardBasicAdapter extends FFError {
 				}
 			}
 
-			$ret = $artifact->create($title, $description, $assigned_to, null, $extra_fields);
+			$ret = $artifact->create($title, $description, $assigned_to, $priority, $extra_fields);
 
 			if (!$ret) {
 				return $artifact->getErrorMessage();
@@ -435,6 +436,6 @@ class TaskBoardBasicAdapter extends FFError {
 	 * @return	string	html code.
 	 */
 	function getTaskUrl($artifact) {
-		return util_make_url('/tracker/?aid='.$artifact->getID().'&atid='.$artifact->ArtifactType->getID().'&group_id='.$artifact->ArtifactType->Group->getID().'&func=detail');
+		return util_make_url('/tracker/a_follow.php/'.$artifact->getID());
 	}
 }
