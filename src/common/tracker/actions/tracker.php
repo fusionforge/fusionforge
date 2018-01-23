@@ -67,8 +67,8 @@ switch (getStringFromRequest('func')) {
 		$artifact_group_id = getIntFromRequest('artifact_group_id');
 		$summary = getStringFromRequest('summary');
 		$details = getStringFromRequest('details');
-		$assigned_to = getStringFromRequest('assigned_to');
-		$priority = getStringFromRequest('priority');
+		$assigned_to = getIntFromRequest('assigned_to', 100);
+		$priority = getIntFromRequest('priority', 3);
 		$extra_fields = getStringFromRequest('extra_fields');
 
 		/*
