@@ -1248,7 +1248,7 @@ class FFUser extends FFError {
 		$now = time();
 		$explodedKey = explode(' ', $key);
 		if (forge_get_config('use_shell_limited')) {
-			$key = preg_replace("/^.*ssh-/", "command=\"\/usr\/local\/bin\/limited_ssh.sh\" ssh-", $key);
+			$key = preg_replace("/^.*ssh-/", "command=\"".forge_get_config('bin_path')."/limited_ssh.sh\" ssh-", $key);
 		}
 		$existingKeys = $this->getAuthorizedKeys();
 		foreach ($existingKeys as $existingKey) {
