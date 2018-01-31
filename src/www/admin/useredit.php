@@ -61,7 +61,7 @@ if (getStringFromRequest('delete_user') != '') {
 	}
 } elseif (getStringFromRequest('action') == "update_user" && getStringFromRequest('delete_user') == '') {
 	$email = getStringFromRequest('email');
-	$shell = getStringFromRequest('shell');
+	$shell = getStringFromRequest('shell', forge_get_config('user_default_shell'));
 	$status = getStringFromRequest('status');
 	$addToProjectArray =getStringFromRequest('group_id_add_member');
 
@@ -194,7 +194,7 @@ echo html_build_select_box_from_arrays(
 		<?php echo $unix_status2str[$u->getUnixStatus()]; ?>
 	</td>
 </tr>
-
+<?php if (!forge_get_config('use_shell_limited')) { ?>
 <tr>
 	<td>
         <label for="unix-shell"><?php echo _('Unix Shell:'); ?></label>
@@ -206,6 +206,7 @@ echo html_build_select_box_from_arrays(
     </td>
 </tr>
 <?php
+		}
 	}  // end of sys_use_shell conditional
 ?>
 
