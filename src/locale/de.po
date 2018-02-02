@@ -33564,18 +33564,6 @@ msgstr "Kein Benutzername angegeben"
 #~ msgid "Question insert failed"
 #~ msgstr "Einfügen der Frage fehlgeschlagen"
 
-#~ msgid ""
-#~ "List question numbers, in desired order, separated by commas. "
-#~ "<strong>Refer to your list of questions</strong> so you can view the "
-#~ "question id's. Do <strong>not</strong> include spaces or end your list "
-#~ "with a comma. <br />Ex: 1,2,3,4,5,6,7"
-#~ msgstr ""
-#~ "Auflisten der Fragennummern in beliebiger Reihenfolge, von Kommas "
-#~ "getrennt. <strong>Beziehen Sie sich auf die Liste Ihrer Fragen </strong> "
-#~ "nun können sie die Frage IDÅ½s ansehen. Fügen Sie <strong>keine</strong> "
-#~ "Lehrzeichen ein und beenden Sie die Liste nicht mit einem Komma. <br /"
-#~ ">Bsp: 1,2,3,4,5,6,7"
-
 #~ msgid "Show Existing Questions"
 #~ msgstr "Zeige existierende Fragen"
 

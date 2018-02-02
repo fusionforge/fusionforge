@@ -30757,17 +30757,6 @@ msgstr "Nom d'usuari"
 #~ msgid "Question insert failed"
 #~ msgstr "Tipus de pregunta"
 
-#~ msgid ""
-#~ "List question numbers, in desired order, separated by commas. "
-#~ "<strong>Refer to your list of questions</strong> so you can view the "
-#~ "question id's. Do <strong>not</strong> include spaces or end your list "
-#~ "with a comma. <br />Ex: 1,2,3,4,5,6,7"
-#~ msgstr ""
-#~ "Llisteu els números de pregunta en l'ordre desitjat i separats per comes. "
-#~ "<strong>Referiu-vos a la vostra llista de preguntes</strong> així podreu "
-#~ "veure els id's de les preguntes. <strong>No</strong> incloeu espais o "
-#~ "acabeu la vostra llista amb una coma. <br />P.e.: 1,2,3,4,5,6,7"
-
 #~ msgid "Show Existing Questions"
 #~ msgstr "Mostra les preguntes existents"
 

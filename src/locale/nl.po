@@ -30895,17 +30895,6 @@ msgstr "Gebruikersnaam"
 #~ msgid "Question insert failed"
 #~ msgstr "Type vraag"
 
-#~ msgid ""
-#~ "List question numbers, in desired order, separated by commas. "
-#~ "<strong>Refer to your list of questions</strong> so you can view the "
-#~ "question id's. Do <strong>not</strong> include spaces or end your list "
-#~ "with a comma. <br />Ex: 1,2,3,4,5,6,7"
-#~ msgstr ""
-#~ "Geef de vraagnummers, in de gewenste volgorde, gescheiden door komma's. "
-#~ "<strong>Raadpleeg Uw lijst van vragen</strong> zodat U de juiste "
-#~ "vraagnummers kunt zien. Gebruik <strong>geen</strong> spaties, en eindig "
-#~ "<strong>niet</strong> met een komma.<br /> Bijvoorbeeld: 1,2,3,4,5,6,7"
-
 #~ msgid "Show Existing Questions"
 #~ msgstr "Vertoon bestaande vragen"
 

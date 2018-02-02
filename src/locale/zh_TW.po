@@ -30645,16 +30645,6 @@ msgstr "帳號"
 #~ msgid "Question insert failed"
 #~ msgstr "問題類型"
 
-#~ msgid ""
-#~ "List question numbers, in desired order, separated by commas. "
-#~ "<strong>Refer to your list of questions</strong> so you can view the "
-#~ "question id's. Do <strong>not</strong> include spaces or end your list "
-#~ "with a comma. <br />Ex: 1,2,3,4,5,6,7"
-#~ msgstr ""
-#~ "以希望的次序列出問題編號，並以逗號分格。<strong>提及您的問題列表</"
-#~ "strong>，因此您能瀏覽問題的編號。<strong>不要</strong>包括空白字元或以逗號"
-#~ "作為結尾。<br />範例：1,2,3,4,5,6,7"
-
 #~ msgid "Show Existing Questions"
 #~ msgstr "顯示已經存在的問題"
 

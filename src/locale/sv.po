@@ -29785,17 +29785,6 @@ msgstr "Användarenamn"
 #~ msgid "Question insert failed"
 #~ msgstr "Fråga typ"
 
-#~ msgid ""
-#~ "List question numbers, in desired order, separated by commas. "
-#~ "<strong>Refer to your list of questions</strong> so you can view the "
-#~ "question id's. Do <strong>not</strong> include spaces or end your list "
-#~ "with a comma. <br />Ex: 1,2,3,4,5,6,7"
-#~ msgstr ""
-#~ "Lista frågenummer, i önskad ordning, kommaseparerad. <strong>Hänvisa till "
-#~ "din lista med frågor</strong> så att du kan se frågornas ID. Ta "
-#~ "<strong>inte</strong> med mellanslag eller avsluta din lista med ett "
-#~ "komma. <br />Ex: 1,2,3,4,5,6,7"
-
 #~ msgid "Show Existing Questions"
 #~ msgstr "Visa existerande frågor"
 

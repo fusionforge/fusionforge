@@ -30932,17 +30932,6 @@ msgstr "Non è stato inserito alcun file"
 #~ msgid "Question insert failed"
 #~ msgstr "Tipo domanda"
 
-#~ msgid ""
-#~ "List question numbers, in desired order, separated by commas. "
-#~ "<strong>Refer to your list of questions</strong> so you can view the "
-#~ "question id's. Do <strong>not</strong> include spaces or end your list "
-#~ "with a comma. <br />Ex: 1,2,3,4,5,6,7"
-#~ msgstr ""
-#~ "Elenca il numero di domande, nell'ordine desiderato, separato da virgole. "
-#~ "<strong>Fai riferimento alla lista delle domande</strong>in modo che puoi "
-#~ "visualizzare gli ID delle domande. <strong>Non</strong> includere spazi e "
-#~ "non terminare la lista con una virgola. <br />Esempio: 1,2,3,4,5,6,7"
-
 #~ msgid "Show Existing Questions"
 #~ msgstr "Visualizza domande esistenti"
 

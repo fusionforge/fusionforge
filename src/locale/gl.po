@@ -31910,17 +31910,6 @@ msgstr "Non se introduciu un nome de usuario"
 #~ msgid "Question insert failed"
 #~ msgstr "Fallou a inserción da pregunta"
 
-#~ msgid ""
-#~ "List question numbers, in desired order, separated by commas. "
-#~ "<strong>Refer to your list of questions</strong> so you can view the "
-#~ "question id's. Do <strong>not</strong> include spaces or end your list "
-#~ "with a comma. <br />Ex: 1,2,3,4,5,6,7"
-#~ msgstr ""
-#~ "Números das preguntas, na orde que desexar, separadas por comas. "
-#~ "<strong>Consulte a listaxe de preguntas</strong> para ver o número das "
-#~ "preguntas. <strong>Non</strong> inclúa espazos ou remate a súa listaxe "
-#~ "nunha coma.<br /> Ex: 1,2,3,4,5,6,7"
-
 #~ msgid "Show Existing Questions"
 #~ msgstr "Mostrar as preguntas existentes."
 

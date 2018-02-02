@@ -27283,17 +27283,6 @@ msgstr ""
 #~ msgid "Show Existing Questions."
 #~ msgstr "Mostrar Questões Existentes."
 
-#~ msgid ""
-#~ "List question numbers, in desired order, separated by commas. "
-#~ "<strong>Refer to your list of questions</strong> so you can view the "
-#~ "question id's. Do <strong>not</strong> include spaces or end your list "
-#~ "with a comma. <br />Ex: 1,2,3,4,5,6,7"
-#~ msgstr ""
-#~ "Listar números de questões, na ordem de criação, separadas por vírgulas. "
-#~ "<strong>Refere-se a sua lista de questões</strong> para que você possa "
-#~ "ver as id's das questões. <strong>Não</strong> inclua espaços nem termine "
-#~ "a sua lista com vírgula. <br />Ex: 1,2,3,4,5,6,7"
-
 #~ msgid "Show Existing Questions"
 #~ msgstr "Mostrar Questões Existentes"
 

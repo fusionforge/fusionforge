@@ -30499,17 +30499,6 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #~ msgid "Question insert failed"
 #~ msgstr "Galdera mota"
 
-#~ msgid ""
-#~ "List question numbers, in desired order, separated by commas. "
-#~ "<strong>Refer to your list of questions</strong> so you can view the "
-#~ "question id's. Do <strong>not</strong> include spaces or end your list "
-#~ "with a comma. <br />Ex: 1,2,3,4,5,6,7"
-#~ msgstr ""
-#~ "Galderen zenbakiak nahi dituzun ordenan eta komaz bananduak. <strong>Zure "
-#~ "galderen zerrenda kontsulta ezazu</strong> galderen zenbakiak ikusteko. "
-#~ "<strong>Ez</strong> idatzi tarterik edo ez amaitu zerrenda koma batez. "
-#~ "<br />Adibidez: 1,2,3,4,5,6,7"
-
 #~ msgid "Show Existing Questions"
 #~ msgstr "Erakutsi dauden galderak"
 

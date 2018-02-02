@@ -276,11 +276,6 @@ class SurveyHTML extends FFError {
 			$ret.= $HTML->listTableBottom();
 		}
 
-		/* Privous style question input text box. deprecated.
-		$ret.= _('List question numbers, in desired order, separated by commas. <strong>Refer to your list of questions</strong> so you can view the question id\'s. Do <strong>not</strong> include spaces or end your list with a comma. <br />Ex: 1,2,3,4,5,6,7');
-		$ret.='<br /><input type="text" name="survey_questions" value="" length="90" maxlength="1500" /></p>';
-		*/
-
 		$ret.='<p><input type="submit" name="submit" value="'.$survey_button.'" /></p>';
 		$ret.= $HTML->closeForm();
 		return $ret;
