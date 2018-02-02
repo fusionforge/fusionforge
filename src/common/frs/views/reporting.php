@@ -166,8 +166,9 @@ if ($report->isError()) {
 			});'."\n";
 		echo '//]]></script>';
 		echo $HTML->html_chartid('chart1');
-		echo $HTML->listTableTop(array(_('Package'), _('Release'), _('File'), _('User'), _('Date')),
-				false, true, 'Download');
+		$tabletop = array(_('Package'), _('Release'), _('File'), _('User'), _('Date'));
+		$classth = array('', '', '', '', '');
+		echo $HTML->listTableTop($tabletop, array(), 'sortable_frs_reportingtable', 'sortable', $classth);
 		for ($i=0; $i<count($data); $i++) {
 			$date = preg_replace('/^(....)(..)(..)$/', '\1-\2-\3', $data[$i][4]);
 			$cells = array();
