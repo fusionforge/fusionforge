@@ -32,7 +32,7 @@ $localcontent = sprintf(_('Alternatively, you can use a file you already uploade
                        $incoming, 'sftp://'.forge_get_config('web_host').$incoming.'/');
 $localcontent .= ' ' . _('This direct <samp>sftp://</samp> link only works with some browsers, such as Konqueror.') .html_e('br');
 $localcontent .= _('Choose an already uploaded file')._(':');
-$content = html_e('p', array(), $localcontent);
+$content .= html_e('p', array(), $localcontent);
 $manual_files_arr = frs_filterfiles(ls($incoming, true));
 if (count($manual_files_arr)) {
 	$content .= html_build_select_box_from_arrays($manual_files_arr, $manual_files_arr, 'manual_filename', '');
