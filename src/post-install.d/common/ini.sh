@@ -34,7 +34,7 @@ case "$1" in
 	hostname=$(hostname -f || hostname)
 	if [ ! -e $DESTDIR$config_path/config.ini.d/post-install.ini ]; then \
 	    sed $source_path/templates/post-install.ini \
-		-e "s,@web_host@,$hostname," -e "s,@bin_dir@,$bindir," \
+		-e "s,@web_host@,$hostname," -e "s,@bin_dir@,$source_path/bin," \
 		> $DESTDIR$config_path/config.ini.d/post-install.ini; \
 	fi
 
