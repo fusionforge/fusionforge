@@ -90,7 +90,7 @@ echo $HTML->openForm(array('action' => '/account/lostpw.php', 'method' => 'post'
 <?php echo _('Login Name')._(':'); ?>
 <br />
     <label for="loginname">
-        <input id="loginname" type="text" name="loginname" required='required' />
+        <input id="loginname" type="text" name="loginname" required="required" />
     </label>
     <br />
 <input type="submit" name="submit" value="<?php echo _('Send Lost PW Hash'); ?>" />
