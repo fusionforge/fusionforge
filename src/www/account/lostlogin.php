@@ -62,7 +62,7 @@ if (!$u || !is_object($u)) {
 if (getStringFromRequest("submit")) {
 
 	if (strlen($passwd) < 8) {
-		$message = _('You must supply valid password (at least 8 characters).').(forge_get_config('check_password_strength') ? html_e('br')._('Must contain at least one uppercase letter, one lowercase, one digit, one non-alphanumeric character.') : '')
+		$message = _('You must supply valid password (at least 8 characters).').(forge_get_config('check_password_strength') ? html_e('br')._('Must contain at least one uppercase letter, one lowercase, one digit, one non-alphanumeric character.') : '');
 		exit_error($message, 'my');
 	}
 
@@ -75,7 +75,7 @@ if (getStringFromRequest("submit")) {
 		// Invalidate confirm hash
 		$u->setNewEmailAndHash('', 0);
 		$feedback = _('Password changed successfully');
-		$HTML->header(array('title' => _('Lost Account Password'));
+		$HTML->header(array('title' => _('Lost Account Password')));
 		print '<p>';
 		printf (_('Congratulations, you have re-set your account password. You may <a href="%s">login</a> to the site now.'),
 			  util_make_url ("/account/login.php"));
