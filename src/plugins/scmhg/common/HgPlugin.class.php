@@ -44,9 +44,10 @@ Offer DAV or SSH access.");
 		$this->_addHook('scm_generate_snapshots');
 		$this->_addHook('scm_gather_stats');
 		$this->_addHook('activity');
- 		$this->_addHook('scm_admin_form');
- 		$this->_addHook('scm_delete_repo');
- 		$this->_addHook('scm_add_repo');
+		$this->_addHook('scm_admin_form');
+		$this->_addHook('scm_delete_repo');
+		$this->_addHook('scm_add_repo');
+		$this->_addHook('get_scm_repo_list');
 		$this->register();
 	}
 
@@ -75,9 +76,12 @@ Offer DAV or SSH access.");
 		$b = html_e('h2', array(), _('Anonymous Mercurial Access'));
 
 		if (forge_get_config('use_dav', 'scmhg')) {
+			$repo_list = $this->getRepositories($project);
 			$protocol = forge_get_config('use_ssl', 'scmhg')? 'https' : 'http';
 			$b .= html_e('p', array(), _("This project's Mercurial repository can be checked out through anonymous access with the following command")._(':'));
-			$b .= html_e('p', array(), html_e('kbd', array(), 'hg clone '.$protocol.'://'.$this->getBoxForProject($project).'/anonscm/'.'hg'.'/'.$project->getUnixName()));
+			foreach ($repo_list as $repo_name) {
+				$b .= html_e('kbd', array(), 'hg clone '.$protocol.'://'.$this->getBoxForProject($project).'/anonscm/'.'hg'.'/'.$project->getUnixName().'/'.$repo_name).html_e('br');
+			}
 		} else {
 			$b .= $HTML->warning_msg(_('Please contact forge administrator, scmhg plugin is not correctly configured'));
 		}
@@ -123,10 +127,10 @@ Offer DAV or SSH access.");
 					// Warning : the ssh uri MUST be this form : ssh://username@scmbox//path/reponame
 					//           HAVE YOU SEEN THE // starting the path ? Keep in mind the double /
 					if (forge_get_config('use_shell_limited')) {
-						$htmlRepo .= html_e('kbd', array(), 'hg clone ssh://'.$d.'@'.$this->getBoxForProject($project).$ssh_port.'/hg/'.$project->getUnixName()).html_e('br');
+						$htmlRepo .= html_e('kbd', array(), 'hg clone ssh://'.$d.'@'.$this->getBoxForProject($project).$ssh_port.'/hg/'.$project->getUnixName().'/'.$repo_name).html_e('br');
 
 					} else {
-						$htmlRepo .= html_e('kbd', array(), 'hg clone ssh://'.$d.'@'.$this->getBoxForProject($project).$ssh_port.'/'.forge_get_config('repos_path', 'scmhg').'/'.$project->getUnixName()).html_e('br');
+						$htmlRepo .= html_e('kbd', array(), 'hg clone ssh://'.$d.'@'.$this->getBoxForProject($project).$ssh_port.'/'.forge_get_config('repos_path', 'scmhg').'/'.$project->getUnixName().'/'.$repo_name).html_e('br');
 					}
 				}
 				$b .= html_e('p', array(), $htmlRepo);
@@ -138,7 +142,7 @@ Offer DAV or SSH access.");
 				$htmlRepo = '';
 				$protocol = forge_get_config('use_ssl', 'scmhg') ? 'https' : 'http';
 				foreach ($repo_list as $repo_name) {
-					$htmlRepo .= html_e('kbd', array(), 'hg clone '.$protocol.'://<i>'.$d.'</i>@'.$this->getBoxForProject($project).'/authscm/'.$d.'/hg/'. $project->getUnixName()).html_e('br');
+					$htmlRepo .= html_e('kbd', array(), 'hg clone '.$protocol.'://<i>'.$d.'</i>@'.$this->getBoxForProject($project).'/authscm/'.$d.'/hg/'. $project->getUnixName().'/'.$repo_name).html_e('br');
 				}
 				$b .= html_e('p', array(), $htmlRepo);
 				$b .= '</div>';
@@ -157,9 +161,9 @@ Offer DAV or SSH access.");
 					// Warning : the ssh uri MUST be this form : ssh://username@scmbox//path/reponame
 					//           HAVE YOU SEEN THE // starting the path ? Keep in mind the double /
 					if (forge_get_config('use_shell_limited')) {
-						$htmlRepo .= html_e('kbd', array(), 'hg clone ssh://'.html_e('i', array(), _('developername'), true, false).'@'.$this->getBoxForProject($project).$ssh_port.'/hg/'.$project->getUnixName()).html_e('br');
+						$htmlRepo .= html_e('kbd', array(), 'hg clone ssh://'.html_e('i', array(), _('developername'), true, false).'@'.$this->getBoxForProject($project).$ssh_port.'/hg/'.$project->getUnixName().'/'.$repo_name).html_e('br');
 					} else {
-						$htmlRepo .= html_e('kbd', array(), 'hg clone ssh://'.html_e('i', array(), _('developername'), true, false).'@'.$this->getBoxForProject($project).$ssh_port.'/'.forge_get_config('repos_path', 'scmhg').'/'.$project->getUnixName()).html_e('br');
+						$htmlRepo .= html_e('kbd', array(), 'hg clone ssh://'.html_e('i', array(), _('developername'), true, false).'@'.$this->getBoxForProject($project).$ssh_port.'/'.forge_get_config('repos_path', 'scmhg').'/'.$project->getUnixName().'/'.$repo_name).html_e('br');
 					}
 				}
 				$b .= html_e('p', array(), $htmlRepo);
@@ -175,7 +179,7 @@ Offer DAV or SSH access.");
 					' '. _('Enter your site password when prompted.'));
 				$htmlRepo = '';
 				foreach ($repo_list as $repo_name) {
-					$htmlRepo .= html_e('kbd', array(), 'hg clone '.$protocol.'://'.html_e('i', array(), _('developername'), true, false).'@'.$this->getBoxForProject($project).'/authscm/'.html_e('i', array(), _('developername'), true, false).'/hg/'.$project->getUnixName()).html_e('br');
+					$htmlRepo .= html_e('kbd', array(), 'hg clone '.$protocol.'://'.html_e('i', array(), _('developername'), true, false).'@'.$this->getBoxForProject($project).'/authscm/'.html_e('i', array(), _('developername'), true, false).'/hg/'.$project->getUnixName().'/'.$repo_name).html_e('br');
 				}
 				$b .= html_e('p', array(), $htmlRepo);
 				$b .= '</div>';
@@ -194,6 +198,10 @@ Offer DAV or SSH access.");
 		$b = html_e('h2', array(), _('Mercurial Repository Browser'));
 		$b .= html_e('p', array(), _('Browsing the Mercurial tree gives you a view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.'));
 		$b .= html_e('p', array(), '['.util_make_link('/scm/browser.php?group_id='.$project->getID(), _('Browse Hg Repository')).']');
+		$repo_list = $this->getRepositories($project, false);
+		foreach ($repo_list as $repo_name) {
+			$b .= '['.util_make_link('/scm/browser.php?group_id='.$project->getID().'&extra='.$repo_name, _('Browse extra Hg repository')._(': ').$repo_name).']'.html_e('br');
+		}
 		return $b;
 	}
 
@@ -243,7 +251,7 @@ Offer DAV or SSH access.");
 		if (!$project) {
 			return false;
 		}
-		if ($project->usesPlugin($this->name)  && forge_check_perm('scm', $project->getID(), 'read')) {
+		if (forge_check_perm('scm', $project->getID(), 'read')) {
 			$result = db_query_params('SELECT sum(updates) AS updates, sum(adds) AS adds FROM stats_cvs_group WHERE group_id=$1',
 						array ($project->getID())) ;
 			$update_num = db_result($result,0,'updates');
@@ -264,31 +272,27 @@ Offer DAV or SSH access.");
 		if (!$project) {
 			return false;
 		}
-		if ($project->usesPlugin($this->name)) {
-			if ($this->browserDisplayable($project)) {
-				$protocol = forge_get_config('use_ssl', 'scmhg')? 'https' : 'http';
-				$box = $this->getBoxForProject($project);
-
-	                        if ($project->enableAnonSCM()) {
-					$iframesrc = $protocol.'://'.$box.'/anonscm/scmhg/cgi-bin/'.$project->getUnixName();
-				} elseif (session_loggedin()) {
-					$logged_user = user_get_object(user_getid())->getUnixName();
-					$iframesrc = $protocol.'://'.$box.'/authscm/'.$logged_user.'/scmhg/cgi-bin/'.$project->getUnixName().'/';
-				}
-
-				if ($params['commit']) {
-					$iframesrc .= '/rev/'.$params['commit'];
-				}
-				echo '<iframe src="'.$iframesrc.'" id="scmhg_iframe" style="width:100%; height:400px;" frameborder="0" ></iframe>';
+		if ($this->browserDisplayable($project)) {
+			$protocol = forge_get_config('use_ssl', 'scmhg')? 'https' : 'http';
+			$box = $this->getBoxForProject($project);
+                        if ($project->enableAnonSCM()) {
+				$iframesrc = $protocol.'://'.$box.'/anonscm/scmhg/cgi-bin/'.$project->getUnixName();
+			} elseif (session_loggedin()) {
+				$logged_user = user_get_object(user_getid())->getUnixName();
+				$iframesrc = $protocol.'://'.$box.'/authscm/'.$logged_user.'/scmhg/cgi-bin/'.$project->getUnixName().'/';
 			}
+			if ($params['commit']) {
+				$iframesrc .= '/rev/'.$params['commit'];
+			}
+			echo '<iframe src="'.$iframesrc.'" id="scmhg_iframe" style="width:100%; height:400px;" frameborder="0" ></iframe>';
 		}
 	}
 
 	function createOrUpdateRepo($params) {
 		$project = $this->checkParams($params);
-		if (!$project) return false;
-		if (!$project->isActive()) return false;
-		if (!$project->usesPlugin($this->name)) return false;
+		if (!$project) {
+			return false;
+		}
 
 		$project_name = $project->getUnixName();
 		$unix_group_ro = $project_name . '_scmro';
@@ -452,10 +456,6 @@ Offer DAV or SSH access.");
 
 		$project = $this->checkParams($params);
 		if (!$project) {
-			return false;
-		}
-
-		if (! $project->usesPlugin ($this->name)) {
 			return false;
 		}
 
