@@ -871,10 +871,6 @@ control over it to the project's administrator.");
 		$snapshot = forge_get_config('scm_snapshots_path').'/'.$group_name.'-scm-latest.tar'.util_get_compressed_file_extension();
 		$tarball = forge_get_config('scm_tarballs_path').'/'.$group_name.'-scmroot.tar'.util_get_compressed_file_extension();
 
-		if (!$project->usesPlugin($this->name)) {
-			return false;
-		}
-
 		if (!$project->enableAnonSCM()) {
 			if (is_file($snapshot)) {
 				unlink($snapshot);
