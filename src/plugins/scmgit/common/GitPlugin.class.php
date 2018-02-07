@@ -321,10 +321,7 @@ control over it to the project's administrator.");
 		# Extra repos
 		$repo_list = $this->getRepositories($project, false);
 		foreach ($repo_list as $repo_name) {
-			if (forge_get_config('use_smarthttp', 'scmgit')) {
-				$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
-				$b .= '['.util_make_link('/scm/browser.php?group_id='.$project->getID().'&extra='.$repo_name, _('Browse extra git repository')._(': ').$repo_name).']'.html_e('br');
-			}
+			$b .= '['.util_make_link('/scm/browser.php?group_id='.$project->getID().'&extra='.$repo_name, _('Browse extra git repository')._(': ').$repo_name).']'.html_e('br');
 		}
 
 		$result = db_query_params('SELECT u.user_id, u.user_name FROM scm_personal_repos p, users u WHERE p.group_id=$1 AND u.user_id=p.user_id AND u.unix_status=$2 AND plugin_id=$3',
