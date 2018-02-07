@@ -190,7 +190,12 @@ Offer DAV or SSH access.");
 	}
 
 	function getSnapshotPara($project) {
-		return;
+		$b = '';
+		$filename = $project->getUnixName().'-scm-latest.tar'.util_get_compressed_file_extension();
+		if (file_exists(forge_get_config('scm_snapshots_path').'/'.$filename)) {
+			$b .= html_e('p', array(), '['.util_make_link('/snapshots.php?group_id='.$project->getID(), _('Download the nightly snapshot')).']');
+		}
+		return $b;
 	}
 
 	function getBrowserLinkBlock($project) {
@@ -460,19 +465,27 @@ Offer DAV or SSH access.");
 		}
 
 		$group_name = $project->getUnixName();
+		$snapshot = forge_get_config('scm_snapshots_path').'/'.$group_name.'-scm-latest.tar'.util_get_compressed_file_extension();
 		$tarball = forge_get_config('scm_tarballs_path').'/'.$group_name.'-scmroot.tar'.util_get_compressed_file_extension();
 
 		if (!$project->enableAnonSCM()) {
+			if (is_file($snapshot)) {
+				unlink($snapshot);
+			}
 			if (is_file($tarball)) {
 				unlink ($tarball) ;
 			}
 			return false;
 		}
 
+		// TODO: ideally we generate one snapshot per hg repository
 		$toprepo = forge_get_config('repos_path', 'scmhg');
-		$repo = $toprepo . '/' . $project->getUnixName();
+		$repo = $toprepo . '/' . $project->getUnixName().  $project->getUnixName();
 
 		if (!is_dir($repo)) {
+			if (is_file($snapshot)) {
+				unlink($snapshot);
+			}
 			if (is_file($tarball)) {
 				unlink($tarball);
 			}
