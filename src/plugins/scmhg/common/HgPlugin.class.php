@@ -374,17 +374,10 @@ Offer DAV or SSH access.");
 		for ($i = 0; $i < $rows; $i++) {
 			$repo_name = db_result($result, $i, 'repo_name');
 			$description = db_result($result, $i, 'description');
-			$clone_url = db_result($result, $i, 'clone_url');
-			// Clone URLs need to be validated to prevent a potential arbitrary command execution
-			if (!preg_match('|^[-a-zA-Z0-9:./_]+$|', $clone_url)) {
-				$clone_url = '';
-			}
+			//no support for cloning from any URL, working dir...
 			$repodir = $root.'/'.$repo_name;
 			if (!is_dir("$repodir/.hg")) {
-				if ($clone_url != '') {
-				} else {
-					system("hg init $repodir");
-				}
+				system("hg init $repodir");
 				$f = fopen("$repodir/.hg/hgrc", 'w');
 				$conf = "[web]\n";
 				$conf .= "baseurl = /hg/".$project_name."\n";
@@ -400,7 +393,6 @@ Offer DAV or SSH access.");
 				system("chgrp -R $unix_group_rw $repodir");
 				system("chmod -R g=rwX,o=rX $repodir");
 				system("chmod 660 $repodir/.hg/hgrc");
-				}
 			}
 		}
 
