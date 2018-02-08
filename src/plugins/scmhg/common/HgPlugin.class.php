@@ -325,9 +325,8 @@ Offer DAV or SSH access.");
 			$lines = file($hgweb);
 			$repo_config = "";
 			foreach ($lines as $line) {
-				if (preg_match("/\Aapplication = hgweb/",$line)) {
-					//link per project hgweb.cgi to the project repository
-					$repo_config .= "application = hgweb(\"".$root."\",\"".$project_name."\")\n";
+				if (preg_match("/\Aconfig = /",$line)) {
+					$repo_config .= 'config = "'.$root.'/config"'."\n";
 				} else {
 					$repo_config .= $line;
 				}
@@ -340,25 +339,32 @@ Offer DAV or SSH access.");
 			system("chown $apache_user:$apache_group $project_hgweb");
 			system("chmod 755 $project_hgweb");
 		}
-		if (!is_dir("$root/.hg")) {
-			system("hg init $root");
-			$f = fopen("$root/.hg/hgrc",'w');
+		if (!is_file("$root/config")) {
+			$f = fopen("$root/config", 'w');
+			$conf = "[paths]\n";
+			$conf .= "/ = ".$root.'/*'."\n";
+			fwrite($f, $conf);
+			fclose($f);
+		}
+		if (!is_dir("$root/$project_name/.hg")) {
+			system("hg init $root/$project_name");
+			$f = fopen("$root/$project_name/.hg/hgrc",'w');
 			$conf = "[web]\n";
-			$conf .= "baseurl = /hg";
-			$conf .= "\ndescription = ".$project_name;
-			$conf .= "\nstyle = paper";
-			$conf .= "\nallow_push = *"; // every user (see Apache configuration) is allowed to push
-			$conf .= "\nallow_read = *"; // every user is allowed to clone and pull
+			$conf .= "baseurl = /hg/".$project_name."\n";
+			$conf .= "description = ".$project_name."\n";
+			$conf .= "style = paper\n";
+			$conf .= "allow_push = *\n"; // every user (see Apache configuration) is allowed to push
+			$conf .= "allow_read = *\n"; // every user is allowed to clone and pull
 			if (!forge_get_config('use_ssl', 'scmhg')) {
-				$conf .= "\npush_ssl = 0";
+				$conf .= "push_ssl = 0\n";
 			}
 			fwrite($f, $conf);
 			fclose($f);
 			//system("chmod 770 $root");
 			//system("find $root -type d | xargs chmod g+s");
-			system("chgrp -R $unix_group_rw $root");
-			system("chmod -R g=rwX,o=rX $root");
-			system("chmod 660 $root/.hg/hgrc");
+			system("chgrp -R $unix_group_rw $root/$project_name");
+			system("chmod -R g=rwX,o=rX $root/$project_name");
+			system("chmod 660 $root/$project_name/.hg/hgrc");
 		}
 	}
 
@@ -366,7 +372,6 @@ Offer DAV or SSH access.");
 		$groups = $this->getGroups();
 		$unix_group = forge_get_config('apache_group');
 		$unix_user = forge_get_config('apache_user');
-		$password_data = '';
 		$hgusers = array();
 		foreach ($groups as $project) {
 			if (!$project->isActive()) continue;
@@ -375,7 +380,7 @@ Offer DAV or SSH access.");
 
 			$push = "";
 			$read = ""; /*pull,clone*/
-			$path = forge_get_config('repos_path', 'scmhg').'/'.$project->getUnixName().'/.hg';
+			$path = forge_get_config('repos_path', 'scmhg').'/'.$project->getUnixName().'/'.$project->getUnixName.'/.hg';
 			$prevp = false;
 			$prevr = false;
 			$users = $project->getMembers();
@@ -435,7 +440,7 @@ Offer DAV or SSH access.");
 				}
 			} else {
 				$hgrc = "[web]\n";
-				$hgrc .= "baseurl = /hg";
+				$hgrc .= "baseurl = /hg/".$project->getUnixName();
 				$hgrc .= "\ndescription = ".$project->getUnixName();
 				$hgrc .= "\nstyle = paper";
 				$hgrc .= "\nallow_read = ".$read;
