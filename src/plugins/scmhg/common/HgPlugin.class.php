@@ -278,13 +278,15 @@ Offer DAV or SSH access.");
 			return false;
 		}
 		if ($this->browserDisplayable($project)) {
+			(isset($params['extra']) && $params['extra']) ? $extrarepo = $params['extra'] : $extrarepo = $project->getUnixName();
+
 			$protocol = forge_get_config('use_ssl', 'scmhg')? 'https' : 'http';
 			$box = $this->getBoxForProject($project);
                         if ($project->enableAnonSCM()) {
-				$iframesrc = $protocol.'://'.$box.'/anonscm/scmhg/cgi-bin/'.$project->getUnixName();
+				$iframesrc = $protocol.'://'.$box.'/anonscm/scmhg/cgi-bin/'.$project->getUnixName().'/'.$extrarepo;
 			} elseif (session_loggedin()) {
 				$logged_user = user_get_object(user_getid())->getUnixName();
-				$iframesrc = $protocol.'://'.$box.'/authscm/'.$logged_user.'/scmhg/cgi-bin/'.$project->getUnixName().'/';
+				$iframesrc = $protocol.'://'.$box.'/authscm/'.$logged_user.'/scmhg/cgi-bin/'.$project->getUnixName().'/'.$extrarepo.'/';
 			}
 			if ($params['commit']) {
 				$iframesrc .= '/rev/'.$params['commit'];
@@ -905,8 +907,9 @@ Offer DAV or SSH access.");
  	}
 
 	function getRepositories($group, $autoinclude = true) {
+		$repoarr = array();
 		if ($autoinclude) {
-			$repoarr = array($group->getUnixName());
+			$repoarr[] = $group->getUnixName();
 		}
 		$result = db_query_params('SELECT repo_name FROM scm_secondary_repos WHERE group_id = $1 AND next_action = $2 AND plugin_id = $3 ORDER BY repo_name',
 						   array($group->getID(),
