@@ -5,7 +5,7 @@
  * Copyright 2003-2010, Roland Mas, Franck Villaume
  * Copyright 2004, GForge, LLC
  * Copyright 2010, Alain Peyrat <aljeux@free.fr>
- * Copyright 2012-2014,2016-2017, Franck Villaume - TrivialDev
+ * Copyright 2012-2014,2016-2018, Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of National Education
  *
  * This file is part of FusionForge.
@@ -134,10 +134,8 @@ some control over it to the project's administrator.");
 	}
 
 	function getInstructionsForRW($project) {
-		$b = '';
-
 		$module = $this->topModule($project);
-		$b .= html_e('h2', array(), _('Developer Access'));
+		$b = html_e('h2', array(), _('Developer Access'));
 		$b .= sprintf(_('Only project developers can access the %s tree via this method.'), 'Subversion');
 		$b .= '<div id="tabber-svn">';
 		$b .= '<ul>';
@@ -216,7 +214,12 @@ some control over it to the project's administrator.");
 	}
 
 	function getSnapshotPara($project) {
-		return;
+		$b = '';
+		$filename = $project->getUnixName().'-scm-latest.tar'.util_get_compressed_file_extension();
+		if (file_exists(forge_get_config('scm_snapshots_path').'/'.$filename)) {
+			$b .= html_e('p', array(), '['.util_make_link("/snapshots.php?group_id=".$project->getID(), _('Download the nightly snapshot')).']');
+		}
+		return $b;
 	}
 
 	function getBrowserLinkBlock($project) {
@@ -516,10 +519,6 @@ some control over it to the project's administrator.");
 
 		$snapshot = forge_get_config('scm_snapshots_path').'/'.$group_name.'-scm-latest.tar'.util_get_compressed_file_extension();
 		$tarball = forge_get_config('scm_tarballs_path').'/'.$group_name.'-scmroot.tar'.util_get_compressed_file_extension();
-
-		if (!$project->usesPlugin($this->name)) {
-			return false;
-		}
 
 		if (!$project->enableAnonSCM()) {
 			if (is_file($snapshot)) {
