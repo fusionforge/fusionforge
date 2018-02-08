@@ -348,7 +348,7 @@ Offer DAV or SSH access.");
 		}
 		if (!is_dir("$root/$project_name/.hg")) {
 			system("hg init $root/$project_name");
-			$f = fopen("$root/$project_name/.hg/hgrc",'w');
+			$f = fopen("$root/$project_name/.hg/hgrc", 'w');
 			$conf = "[web]\n";
 			$conf .= "baseurl = /hg/".$project_name."\n";
 			$conf .= "description = ".$project_name."\n";
@@ -360,8 +360,6 @@ Offer DAV or SSH access.");
 			}
 			fwrite($f, $conf);
 			fclose($f);
-			//system("chmod 770 $root");
-			//system("find $root -type d | xargs chmod g+s");
 			system("chgrp -R $unix_group_rw $root/$project_name");
 			system("chmod -R g=rwX,o=rX $root/$project_name");
 			system("chmod 660 $root/$project_name/.hg/hgrc");
@@ -373,7 +371,7 @@ Offer DAV or SSH access.");
 						SCM_EXTRA_REPO_ACTION_UPDATE,
 						$this->getID()));
 		$rows = db_numrows($result);
-		for ($i=0; $i<$rows; $i++) {
+		for ($i = 0; $i < $rows; $i++) {
 			$repo_name = db_result($result, $i, 'repo_name');
 			$description = db_result($result, $i, 'description');
 			$clone_url = db_result($result, $i, 'clone_url');
@@ -381,6 +379,48 @@ Offer DAV or SSH access.");
 			if (!preg_match('|^[-a-zA-Z0-9:./_]+$|', $clone_url)) {
 				$clone_url = '';
 			}
+			$repodir = $root.'/'.$repo_name;
+			if (!is_dir("$repodir/.hg")) {
+				if ($clone_url != '') {
+				} else {
+					system("hg init $repodir");
+				}
+				$f = fopen("$repodir/.hg/hgrc", 'w');
+				$conf = "[web]\n";
+				$conf .= "baseurl = /hg/".$project_name."\n";
+				$conf .= "description = ".$description."\n";
+				$conf .= "style = paper\n";
+				$conf .= "allow_push = *\n"; // every user (see Apache configuration) is allowed to push
+				$conf .= "allow_read = *\n"; // every user is allowed to clone and pull
+				if (!forge_get_config('use_ssl', 'scmhg')) {
+					$conf .= "push_ssl = 0\n";
+				}
+				fwrite($f, $conf);
+				fclose($f);
+				system("chgrp -R $unix_group_rw $repodir");
+				system("chmod -R g=rwX,o=rX $repodir");
+				system("chmod 660 $repodir/.hg/hgrc");
+				}
+			}
+		}
+
+		// Delete project-wide secondary repositories
+		$result = db_query_params ('SELECT repo_name FROM scm_secondary_repos WHERE group_id=$1 AND next_action = $2 AND plugin_id=$3',
+					   array($project->getID(),
+						  SCM_EXTRA_REPO_ACTION_DELETE,
+						  $this->getID()));
+		$rows = db_numrows ($result);
+		for ($i = 0; $i < $rows; $i++) {
+			$repo_name = db_result($result, $i, 'repo_name');
+			$repodir = $root.'/'.$repo_name;
+			if (util_is_valid_repository_name($repo_name)) {
+				system("rm -rf $repodir");
+			}
+			db_query_params ('DELETE FROM scm_secondary_repos WHERE group_id=$1 AND repo_name=$2 AND next_action = $3 AND plugin_id=$4',
+					 array($project->getID(),
+						$repo_name,
+						SCM_EXTRA_REPO_ACTION_DELETE,
+						$this->getID()));
 		}
 	}
 
