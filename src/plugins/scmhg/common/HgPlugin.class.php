@@ -366,6 +366,22 @@ Offer DAV or SSH access.");
 			system("chmod -R g=rwX,o=rX $root/$project_name");
 			system("chmod 660 $root/$project_name/.hg/hgrc");
 		}
+
+		// Create project-wide secondary repositories
+		$result = db_query_params('SELECT repo_name, description, clone_url FROM scm_secondary_repos WHERE group_id=$1 AND next_action = $2 AND plugin_id=$3',
+						array($project->getID(),
+						SCM_EXTRA_REPO_ACTION_UPDATE,
+						$this->getID()));
+		$rows = db_numrows($result);
+		for ($i=0; $i<$rows; $i++) {
+			$repo_name = db_result($result, $i, 'repo_name');
+			$description = db_result($result, $i, 'description');
+			$clone_url = db_result($result, $i, 'clone_url');
+			// Clone URLs need to be validated to prevent a potential arbitrary command execution
+			if (!preg_match('|^[-a-zA-Z0-9:./_]+$|', $clone_url)) {
+				$clone_url = '';
+			}
+		}
 	}
 
 	function updateRepositoryList($params) {
