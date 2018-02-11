@@ -196,6 +196,9 @@ abstract class SCMPlugin extends Plugin {
 		}
 
 		session_require_perm('scm', $project->getID(), 'read');
+		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
+			echo html_ao('div', array('id' => 'tabber-'.$this->name, 'class' => 'tabbertab'));
+		}
 		// Table for summary info
 		echo $HTML->listTableTop();
 		$cells = array();
@@ -231,6 +234,9 @@ abstract class SCMPlugin extends Plugin {
 		$cells[] = array($cellContent, 'style' => 'width:35%', 'class' => 'top');
 		echo $HTML->multiTableRow(array('class' => 'top'), $cells);
 		echo $HTML->listTableBottom();
+		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
+			echo html_ac(html_ap() - 1);
+		}
 	}
 
 	function printBrowserPage($params) {
