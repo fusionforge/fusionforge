@@ -165,7 +165,7 @@ $hook_params['group_id'] = $group_id ;
 $SCMFactory = new SCMFactory();
 $scm_plugins = $SCMFactory->getSCMs();
 if (count($scm_plugins) != 0) {
-	echo $HTML->information(_('Note: Changing the repository does not delete the previous repository.  It only affects the information displayed under the SCM tab.'));
+	echo $HTML->information(_('Note: Changing the repository does not delete the previous repository. It only affects the information displayed under the SCM tab.'));
 	if (count($scm_plugins) == 1) {
 		$myPlugin = plugin_get_object($scm_plugins[0]);
 		echo html_e('input', array('type' => 'hidden', 'name' => 'scmengine[]', 'value' => $myPlugin->name));
