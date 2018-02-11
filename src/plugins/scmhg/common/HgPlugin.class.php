@@ -885,9 +885,9 @@ Offer DAV or SSH access.");
 			return false;
 		}
 		$existing_repos = array();
-		while($data = db_fetch_array($result)) {
+		while ($data = db_fetch_array($result)) {
 			$existing_repos[] = array('repo_name' => $data['repo_name'],
-						  'description' => $data['description'],
+						  'description' => $data['description']);
 		}
 		if (count($existing_repos) == 0) {
 			echo $HTML->information(_('No extra Hg repository for project').' '.$project_name);
