@@ -929,6 +929,10 @@ Offer DAV or SSH access.");
 		echo html_e('input', array('type' => 'submit', 'name' => 'cancel', 'value' => _('Cancel')));
 		echo html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Submit')));
 		echo $HTML->closeForm();
+		if ($project->usesPlugin('scmhook')) {
+			$scmhookPlugin = plugin_get_object('scmhook');
+			$scmhookPlugin->displayScmHook($project->getID(), $this->name);
+		}
 		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
 			echo html_ac(html_ap() - 1);
 		}

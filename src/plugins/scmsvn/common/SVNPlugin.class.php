@@ -48,9 +48,9 @@ class SVNPlugin extends SCMPlugin {
 _("This plugin contains the Subversion subsystem of FusionForge. It allows
 each FusionForge project to have its own Subversion repository, and gives
 some control over it to the project's administrator.");
-		$this->svn_root_fs = forge_get_config('repos_path',
-											  $this->name);
+		$this->svn_root_fs = forge_get_config('repos_path', $this->name);
 		$this->svn_root_dav = '/svn';
+		$this->_addHook('scm_admin_form');
 		$this->_addHook('scm_browser_page');
 		$this->_addHook('scm_update_repolist');
 		$this->_addHook('scm_regen_apache_auth');
@@ -883,6 +883,10 @@ some control over it to the project's administrator.");
 
 		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
 			echo html_ao('div', array('id' => 'tabber-'.$this->name, 'class' => 'tabbertab'));
+		}
+		if ($project->usesPlugin('scmhook')) {
+			$scmhookPlugin = plugin_get_object('scmhook');
+			$scmhookPlugin->displayScmHook($project->getID(), $this->name);
 		}
 		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
 			echo html_ac(html_ap() - 1);

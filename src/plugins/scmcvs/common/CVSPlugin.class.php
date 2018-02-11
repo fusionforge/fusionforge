@@ -37,9 +37,10 @@ class CVSPlugin extends SCMPlugin {
 _("This plugin contains the CVS subsystem of FusionForge. It allows each
 FusionForge project to have its own CVS repository, and gives some control
 over it to the project's administrator.");
-		$this->hooks[] = 'scm_browser_page';
-		$this->hooks[] = 'scm_generate_snapshots';
-		$this->hooks[] = 'scm_gather_stats';
+		$this->_addHook('scm_admin_form');
+		$this->_addHook('scm_browser_page');
+		$this->_addHook('scm_generate_snapshots');
+		$this->_addHook('scm_gather_stats');
 
 		$this->provides['cvs'] = true;
 
@@ -509,6 +510,10 @@ over it to the project's administrator.");
 
 		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
 			echo html_ao('div', array('id' => 'tabber-'.$this->name, 'class' => 'tabbertab'));
+		}
+		if ($project->usesPlugin('scmhook')) {
+			$scmhookPlugin = plugin_get_object('scmhook');
+			$scmhookPlugin->displayScmHook($project->getID(), $this->name);
 		}
 		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
 			echo html_ac(html_ap() - 1);

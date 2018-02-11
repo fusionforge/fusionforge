@@ -1208,6 +1208,11 @@ control over it to the project's administrator.");
 		echo $HTML->html_input('cancel', '', '', 'submit', _('Cancel'), array(), array('style' => 'display: inline-block!important'));
 		echo $HTML->html_input('submit', '', '', 'submit', _('Submit'), array(), array('style' => 'display: inline-block!important'));
 		echo $HTML->closeForm();
+
+		if ($project->usesPlugin('scmhook')) {
+			$scmhookPlugin = plugin_get_object('scmhook');
+			$scmhookPlugin->displayScmHook($project->getID(), $this->name);
+		}
 		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
 			echo html_ac(html_ap() - 1);
 		}

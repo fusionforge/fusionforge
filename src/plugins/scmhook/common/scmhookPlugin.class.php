@@ -44,7 +44,6 @@ project independently.");
 			$this->_addHook('groupisactivecheckbox'); // The "use ..." checkbox in editgroupinfo
 		}
 		$this->_addHook('groupisactivecheckboxpost'); //
-		$this->_addHook('scm_admin_page');
 		$this->_addHook('scm_admin_update');
 		$this->_addHook('artifact_extra_detail');
 		$this->_addHook('task_extra_detail');
@@ -52,15 +51,6 @@ project independently.");
 
 	function CallHook($hookname, &$params) {
 		switch ($hookname) {
-			case 'scm_admin_page': {
-				$group_id = $params['group_id'];
-				$scm_plugin = $params['scm_plugin'];
-				$group = group_get_object($group_id);
-				if ($group->usesPlugin($this->name) && $scm_plugin) {
-					$this->displayScmHook($group_id, $scm_plugin);
-				}
-				break;
-			}
 			case 'scm_admin_update': {
 				$this->update($params);
 				break;
@@ -199,8 +189,7 @@ project independently.");
 		$hooksEnabled = $this->getEnabledHooks($group_id);
 		if (count($hooksAvailable)) {
 			echo '<div id="scmhook">';
-
-			echo '<h2>'._('Enable Repository Hooks').'</h2>';
+			echo html_e('h2', array(), _('Enable Repository Hooks'));
 			switch ($scm) {
 				case "scmsvn": {
 					$this->displayScmSvnHook($hooksAvailable, $hooksEnabled, $group_id);
@@ -238,14 +227,15 @@ project independently.");
 	}
 
 	function getAvailableHooks($group_id) {
+		$available_hooks = array();
 		$listScm = $this->getListLibraryScm();
 		$group = group_get_object($group_id);
 		for ($i = 0; $i < count($listScm); $i++) {
 			if ($group->usesPlugin($listScm[$i])) {
-				return $this->getListLibraryHook($listScm[$i]);
+				$available_hooks = array_merge($available_hooks, $this->getListLibraryHook($listScm[$i]));
 			}
 		}
-		return array();
+		return $available_hooks;
 	}
 
 	function getEnabledHooks($group_id) {
@@ -324,13 +314,15 @@ project independently.");
 		// Group available hooks by type
 		$hooks_by_type = array();
 		foreach ($hooksAvailable as $hook)
-			$hooks_by_type[$hook->getHookType()][] = $hook;
+			if ($hook->label == 'scmsvn') {
+				$hooks_by_type[$hook->getHookType()][] = $hook;
+			}
 		// Display available hooks, in specific order
 		foreach (array('pre-commit', 'pre-revprop-change', 'post-commit') as $hooktype) {
 			$hooks = $hooks_by_type[$hooktype];
 			if (count($hooks)) {
 				echo html_e('h3', array(), sprintf(_('%s Hooks'), $hooktype), false);
-				$tabletop = array('', _('Hook'), _('Description'));
+				$tabletop = array('', _('Hook Name'), _('Description'));
 				$classth = array('unsortable', '', '');
 				echo $HTML->listTableTop($tabletop, array(), "sortable_scmhook_$hooktype", 'sortable', $classth);
 				foreach ($hooks as $hook) {
@@ -383,14 +375,16 @@ project independently.");
 		global $HTML;
 		$hooksServePushPullBundle = array();
 		foreach ($hooksAvailable as $hook) {
-			switch ($hook->getHookType()) {
-				case "serve-push-pull-bundle": {
-					$hooksServePushPullBundle[] = $hook;
-					break;
-				}
-				default: {
-					//byebye hook.... we do not know you...
-					break;
+			if ($hook->label == 'scmhg') {
+				switch ($hook->getHookType()) {
+					case "serve-push-pull-bundle": {
+						$hooksServePushPullBundle[] = $hook;
+						break;
+					}
+					default: {
+						//byebye hook.... we do not know you...
+						break;
+					}
 				}
 			}
 		}
@@ -433,14 +427,16 @@ project independently.");
 		global $HTML;
 		$hooksPostReceive = array();
 		foreach ($hooksAvailable as $hook) {
-			switch ($hook->getHookType()) {
-				case "post-receive": {
-					$hooksPostReceive[] = $hook;
-					break;
-				}
-				default: {
-					//byebye hook.... we do not know you...
-					break;
+			if ($hook->label == 'scmgit') {
+				switch ($hook->getHookType()) {
+					case "post-receive": {
+						$hooksPostReceive[] = $hook;
+						break;
+					}
+					default: {
+						//byebye hook.... we do not know you...
+						break;
+					}
 				}
 			}
 		}
@@ -483,14 +479,16 @@ project independently.");
 		global $HTML;
 		$hooksPostCommit = array();
 		foreach ($hooksAvailable as $hook) {
-			switch ($hook->getHookType()) {
-				case "post-commit": {
-					$hooksPostCommit[] = $hook;
-					break;
-				}
-				default: {
-					//byebye hook.... we do not know you...
-					break;
+			if ($hook->label == 'scmcvs') {
+				switch ($hook->getHookType()) {
+					case "post-commit": {
+						$hooksPostCommit[] = $hook;
+						break;
+					}
+					default: {
+						//byebye hook.... we do not know you...
+						break;
+					}
 				}
 			}
 		}
