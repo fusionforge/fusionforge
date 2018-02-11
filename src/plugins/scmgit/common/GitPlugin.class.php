@@ -928,9 +928,6 @@ control over it to the project's administrator.");
 	 */
 	function widgets($params) {
 		require_once 'common/widget/WidgetLayoutManager.class.php';
-		if ($params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_GROUP) {
-			$params['fusionforge_widgets'][] = 'plugin_scmgit_project_latestcommits';
-		}
 		if ($params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_USER) {
 			$params['fusionforge_widgets'][] = 'plugin_scmgit_user_myrepositories';
 		}
