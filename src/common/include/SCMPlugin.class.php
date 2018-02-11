@@ -294,6 +294,9 @@ abstract class SCMPlugin extends Plugin {
 	}
 
 	function scm_delete_repo(&$params) {
+		if ($params['scm_plugin_id'] != $this->getID()) {
+			return;
+		}
 		$project = $this->checkParams($params);
 		if (!$project) {
 			return false;
@@ -326,7 +329,6 @@ abstract class SCMPlugin extends Plugin {
 			return false;
 		}
 
-		plugin_hook("scm_admin_update", $params);
 		return true;
 	}
 

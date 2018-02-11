@@ -1183,6 +1183,7 @@ control over it to the project's administrator.");
 				$deleteForm .= $HTML->html_input('group_id', '', '', 'hidden', $params['group_id']);
 				$deleteForm .= $HTML->html_input('delete_repository', '', '', 'hidden', 1);
 				$deleteForm .= $HTML->html_input('repo_name', '', '', 'hidden', $repo['repo_name']);
+				$deleteForm .= $HTML->html_input('scm_plugin_id', '', '', 'hidden', $this->getID());
 				$deleteForm .= $HTML->html_input('submit', '', '', 'submit', _('Delete'));
 				$deleteForm .= $HTML->closeForm();
 				$cells[][] = $deleteForm;
