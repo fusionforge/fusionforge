@@ -31,10 +31,8 @@ class SCMFactory extends FFError {
 	 * @var  array  scms.
 	 */
 	var $scms;
-	var $fetched_rows;
 
 	function __construct() {
-
 		parent::__construct();
 		if (!forge_get_config('use_scm')) {
 			$this->setError('SCMFactory::sys_use_scm');
