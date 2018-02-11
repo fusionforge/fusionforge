@@ -4,9 +4,8 @@
  *
  * Copyright 2009, Roland Mas
  * Copyright 2009, Mehdi Dogguy <mehdi@debian.org>
- * Copyright 2012-2014,2016-2017, Franck Villaume - TrivialDev
- * Copyright © 2013
- *	Thorsten Glaser <t.glaser@tarent.de>
+ * Copyright 2013, Thorsten Glaser <t.glaser@tarent.de>
+ * Copyright 2012-2014,2016-2018, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -1055,6 +1054,9 @@ control over it to the project's administrator.");
 	}
 
 	function scm_add_repo(&$params) {
+		if ($params['scm_plugin'] != $this->name) {
+			return;
+		}
 		$project = $this->checkParams($params);
 		if (!$project) {
 			return false;
@@ -1135,7 +1137,6 @@ control over it to the project's administrator.");
 			return false;
 		}
 
-		plugin_hook('scm_admin_update', $params);
 		return true;
 	}
 
@@ -1185,7 +1186,6 @@ control over it to the project's administrator.");
 				$deleteForm .= $HTML->html_input('group_id', '', '', 'hidden', $params['group_id']);
 				$deleteForm .= $HTML->html_input('delete_repository', '', '', 'hidden', 1);
 				$deleteForm .= $HTML->html_input('repo_name', '', '', 'hidden', $repo['repo_name']);
-				$deleteForm .= $HTML->html_input('scm_enable_anonymous', '', '', 'hidden', ($project->enableAnonSCM()? 1 : 0));
 				$deleteForm .= $HTML->html_input('submit', '', '', 'submit', _('Delete'));
 				$deleteForm .= $HTML->closeForm();
 				$cells[][] = $deleteForm;
@@ -1195,15 +1195,15 @@ control over it to the project's administrator.");
 		}
 
 		echo html_e('h2', array(), _('Create new Git repository for project').' '.$project_name);
-		echo $HTML->openForm(array('name' => 'form_create_repo', 'action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
+		echo $HTML->openForm(array('name' => 'form_create_repo_scmgit', 'action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
 		echo $HTML->html_input('group_id', '', '', 'hidden', $params['group_id']);
 		echo $HTML->html_input('create_repository', '', '', 'hidden', 1);
+		echo $HTML->html_input('scm_plugin', '', '', 'hidden', $this->name);
 		echo $HTML->html_input('repo_name', '', html_e('strong', array(), _('Repository name')._(':')).utils_requiredField(), 'text', '', array('required' => 'required', 'size' => 20));
 		echo html_e('br');
 		echo $HTML->html_input('description', '', html_e('strong', array(), _('Description')._(':')), 'text', '', array('size' => 60));
 		echo html_e('p', array(), html_e('strong', array(), _('Initial clone URL (or name of an existing repository in this project; leave empty to start with an empty repository)')._(':')).html_e('br').
 				$HTML->html_input('clone', '', '', 'text', $project_name, array('size' => 60)));
-		echo $HTML->html_input('scm_enable_anonymous', '', '', 'hidden', ($project->enableAnonSCM()? 1 : 0));
 		echo html_e('br');
 		echo $HTML->html_input('cancel', '', '', 'submit', _('Cancel'), array(), array('style' => 'display: inline-block!important'));
 		echo $HTML->html_input('submit', '', '', 'submit', _('Submit'), array(), array('style' => 'display: inline-block!important'));

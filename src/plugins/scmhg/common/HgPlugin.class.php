@@ -810,6 +810,9 @@ Offer DAV or SSH access.");
 	}
 
 	function scm_add_repo(&$params) {
+		if ($params['scm_plugin'] != $this->name) {
+			return;
+		}
 		$project = $this->checkParams($params);
 		if (!$project) {
 			return false;
@@ -862,7 +865,6 @@ Offer DAV or SSH access.");
 			return false;
 		}
 
-		plugin_hook('scm_admin_update', $params);
 		return true;
 	}
 
@@ -908,7 +910,6 @@ Offer DAV or SSH access.");
 				$deleteForm .= html_e('input', array('type' => 'hidden', 'name' => 'group_id', 'value' => $params['group_id']));
 				$deleteForm .= html_e('input', array('type' => 'hidden', 'name' => 'delete_repository', 'value' => 1));
 				$deleteForm .= html_e('input', array('type' => 'hidden', 'name' => 'repo_name', 'value' => $repo['repo_name']));
-				$deleteForm .= html_e('input', array('type' => 'hidden', 'name' => 'scm_enable_anonymous', 'value' => ($project->enableAnonSCM()? 1 : 0)));
 				$deleteForm .= html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Delete')));
 				$deleteForm .= $HTML->closeForm();
 				$cells[][] = $deleteForm;
@@ -918,16 +919,16 @@ Offer DAV or SSH access.");
 		}
 
 		echo html_e('h2', array(), sprintf(_('Create new Hg repository for project %s'), $project_name));
-		echo $HTML->openForm(array('name' => 'form_create_repo', 'action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
-		echo html_e('input', array('type' => 'hidden', 'name' => 'group_id', 'value' => $params['group_id']));
-		echo html_e('input', array('type' => 'hidden', 'name' => 'create_repository', 'value' => 1));
-		echo html_e('p', array(), html_e('strong', array(), _('Repository name')._(':')).utils_requiredField().html_e('br').
-				html_e('input', array('type' => 'text', 'required' => 'required', 'size' => 20, 'name' => 'repo_name', 'value' => '')));
-		echo html_e('p', array(), html_e('strong', array(), _('Description')._(':')).html_e('br').
-				html_e('input', array('type' => 'text', 'size' => 60, 'name' => 'description', 'value' => '')));
-		echo html_e('input', array('type' => 'hidden', 'name' => 'scm_enable_anonymous', 'value' => ($project->enableAnonSCM()? 1 : 0)));
-		echo html_e('input', array('type' => 'submit', 'name' => 'cancel', 'value' => _('Cancel')));
-		echo html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Submit')));
+		echo $HTML->openForm(array('name' => 'form_create_repo_scmhg', 'action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
+		echo $HTML->html_input('group_id', '', '', 'hidden', $params['group_id']);
+		echo $HTML->html_input('create_repository', '', '', 'hidden', 1);
+		echo $HTML->html_input('scm_plugin', '', '', 'hidden', $this->name);
+		echo $HTML->html_input('repo_name', '', html_e('strong', array(), _('Repository name')._(':')).utils_requiredField(), 'text', '', array('required' => 'required', 'size' => 20));
+		echo html_e('br');
+		echo $HTML->html_input('description', '', html_e('strong', array(), _('Description')._(':')), 'text', '', array('size' => 60));
+		echo html_e('br');
+		echo $HTML->html_input('cancel', '', '', 'submit', _('Cancel'), array(), array('style' => 'display: inline-block!important'));
+		echo $HTML->html_input('submit', '', '', 'submit', _('Submit'), array(), array('style' => 'display: inline-block!important'));
 		echo $HTML->closeForm();
 		if ($project->usesPlugin('scmhook')) {
 			$scmhookPlugin = plugin_get_object('scmhook');

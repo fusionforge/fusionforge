@@ -64,7 +64,6 @@ if (getStringFromRequest('create_repository') && getStringFromRequest('submit'))
 	$hook_params['description'] = $description;
 	$hook_params['clone'] = $clone;
 	$hook_params['error_msg'] = '';
-	$hook_params['scm_enable_anonymous'] = getIntFromRequest('scm_enable_anonymous');
 	plugin_hook_by_reference('scm_add_repo', $hook_params);
 	if ($hook_params['error_msg']) {
 		$error_msg = $hook_params['error_msg'];
@@ -80,7 +79,6 @@ if (getStringFromRequest('create_repository') && getStringFromRequest('submit'))
 	$hook_params['group_id'] = $group_id;
 	$hook_params['repo_name'] = $repo_name;
 	$hook_params['error_msg'] = '';
-	$hook_params['scm_enable_anonymous'] = getIntFromRequest('scm_enable_anonymous');
 	plugin_hook_by_reference('scm_delete_repo', $hook_params);
 	if ($hook_params['error_msg']) {
 		$error_msg = $hook_params['error_msg'];
