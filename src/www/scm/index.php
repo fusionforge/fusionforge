@@ -23,6 +23,7 @@
 
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
+require_once $gfcommon.'scm/SCMFactory.class.php';
 require_once $gfwww.'scm/include/scm_utils.php';
 
 global $HTML;
@@ -36,11 +37,12 @@ if (!$group || !is_object($group)) {
 session_require_perm('scm', $group_id, 'read');
 
 // Check if there is an associated scm plugin and issue a warning if none.
+$SCMFactory = new SCMFactory();
+$av_scm_plugins = $SCMFactory->getSCMs();
 $scm_plugins = array();
-foreach (PluginManager::instance()->getPlugins() as $p) {
-	$plugin = PluginManager::instance()->GetPluginObject($p);
-	if (isset($plugin->provides['scm']) && $plugin->provides['scm'] && $group->usesPlugin($p)) {
-		$scm_plugins[] = $plugin;
+foreach ($av_scm_plugins as $av_scm_plugin) {
+	if ($group->usesPlugin($av_scm_plugin)) {
+		$scm_plugins[] = plugin_get_object($av_scm_plugin);
 	}
 }
 if (count($scm_plugins) == 0) {
