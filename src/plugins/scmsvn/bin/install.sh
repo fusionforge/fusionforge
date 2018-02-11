@@ -1,7 +1,5 @@
-#!/bin/bash
+#!/bin/bash -e
 # Configure Subversion
-
-set -e
 
 source $(forge_get_config source_path)/post-install.d/common/service.inc
 

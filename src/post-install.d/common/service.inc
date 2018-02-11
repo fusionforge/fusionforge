@@ -20,15 +20,15 @@
 # Debian-specific behavior for Policy Nazis
 # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=789778
 if [ -e /etc/debian_version ]; then
-    service () {
-        invoke-rc.d $@
-        ret=$?
-        if [ $ret -ne 0 ]; then
-            # Work-around invoke-rc.d's silence on error..
-            echo "invoke-rc.d: error $ret running '$@'"
-            return $ret
-        fi
-    }
+	service () {
+		invoke-rc.d $@
+		ret=$?
+		if [ $ret -ne 0 ]; then
+		# Work-around invoke-rc.d's silence on error..
+		echo "invoke-rc.d: error $ret running '$@'"
+		return $ret
+		fi
+	}
 fi
 
 # Tests:
