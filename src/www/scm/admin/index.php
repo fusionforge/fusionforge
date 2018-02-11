@@ -3,6 +3,7 @@
  * SCM Frontend
  *
  * Copyright 2004 (c) Roland Mas, Tim Perdue GForge LLC
+ * Copyright 2018, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -193,7 +194,8 @@ if (count($scm_plugins) != 0) {
 }
 
 (isset($scm)) ? $hook_params['scm_plugin'] = $scm : $hook_params['scm_plugin'] = 0;
-plugin_hook("scm_admin_page", $hook_params);
+$hook_params['allow_multiple_scm'] = forge_get_config('allow_multiple_scm');
+plugin_hook_by_reference("scm_admin_page", $hook_params);
 echo html_e('input', array('type' => 'hidden', 'name' => 'group_id', 'value' => $group_id));
 echo html_e('p', array(), html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Update'))));
 echo $HTML->closeForm();

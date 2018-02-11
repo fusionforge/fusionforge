@@ -4,7 +4,7 @@
  *
  * Copyright 2004-2009, Roland Mas
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012,2014,2017, Franck Villaume - TrivialDev
+ * Copyright 2012,2014,2017-2018, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -250,14 +250,18 @@ abstract class SCMPlugin extends Plugin {
 		}
 	}
 
-	function printAdminPage($params) {
+	function printAdminPage(&$params) {
 		$group = $this->checkParams($params);
 		if (!$group) {
 			return;
 		}
 
 		$ra = RoleAnonymous::getInstance();
-		if ($ra->hasPermission('project_read', $group->getID())) {
+		// $params is passed by reference. This hack limits the display of the anonymous information if project is using multiple scm plugins.
+		if ($ra->hasPermission('project_read', $group->getID()) && !isset($params['anonymous_display'])) {
+			if ($params['allow_multiple_scm']) {
+				$params['anonymous_display'] = true;
+			}
 			$inputAttr = array('type' => 'checkbox', 'name' => 'scm_enable_anonymous', 'value' => 1);
 			if ($group->enableAnonSCM()) {
 				$inputAttr['checked'] = 'checked';
