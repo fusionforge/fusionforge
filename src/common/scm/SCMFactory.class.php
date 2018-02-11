@@ -28,7 +28,7 @@ class SCMFactory extends FFError {
 	/**
 	 * The scms array.
 	 *
-	 * @var  array  scms.
+	 * @var	array	scms.
 	 */
 	var $scms;
 
@@ -40,9 +40,9 @@ class SCMFactory extends FFError {
 	}
 
 	/**
-	 *	getSCMs - get an array of Plugin SCM objects.
+	 *	getSCMs - get an array of Plugin SCM names.
 	 *
-	 *	@return	array	The array of SCM objects.
+	 *	@return	array	The array of plugin SCM names.
 	 */
 	function &getSCMs() {
 		$scm_plugins = array();
