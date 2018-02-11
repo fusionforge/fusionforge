@@ -70,8 +70,7 @@ if(is_array($SubmittedVars)) {
  *
  * @return  array    Returns 'check'=true if check passed, group, group_id
  */
-function parseConfig(&$Config)
-{
+function parseConfig(&$Config) {
 	$repos_path = forge_get_config ('repos_path', 'scmsvn') ;
 
 	$Result = array();
@@ -122,8 +121,7 @@ function parseConfig(&$Config)
  *
  * @return  array    Returns 'check'=true if check passed, group, group_id
  */
-function addArtifactLog($Config, $GroupId, $Num)
-{
+function addArtifactLog($Config, $GroupId, $Num) {
 	$return = array();
 	$Result = db_query_params ('SELECT * FROM artifact,artifact_group_list WHERE
 artifact.group_artifact_id=artifact_group_list.group_artifact_id
@@ -178,8 +176,7 @@ AND artifact_group_list.group_id=$1 AND artifact.artifact_id=$2',
  *
  * @return  array    Returns 'check'=true if check passed, group, group_id
  */
-function addTaskLog($Config, $GroupId, $Num)
-{
+function addTaskLog($Config, $GroupId, $Num) {
 	$return = array();
 	$Result = db_query_params ('SELECT * FROM project_task,project_group_list
 WHERE project_task.group_project_id=project_group_list.group_project_id
