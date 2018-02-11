@@ -1148,6 +1148,10 @@ control over it to the project's administrator.");
 
 		session_require_perm('project_admin', $params['group_id']);
 
+		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
+			echo html_ao('div', array('id' => 'tabber-'.$this->name, 'class' => 'tabbertab'));
+		}
+
 		$project_name = $project->getUnixName();
 
 		$result = db_query_params('SELECT repo_name, description, clone_url FROM scm_secondary_repos WHERE group_id=$1 AND next_action = $2 AND plugin_id=$3 ORDER BY repo_name',
@@ -1204,6 +1208,9 @@ control over it to the project's administrator.");
 		echo $HTML->html_input('cancel', '', '', 'submit', _('Cancel'), array(), array('style' => 'display: inline-block!important'));
 		echo $HTML->html_input('submit', '', '', 'submit', _('Submit'), array(), array('style' => 'display: inline-block!important'));
 		echo $HTML->closeForm();
+		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
+			echo html_ac(html_ap() - 1);
+		}
 	}
 
 	function getCommits($project, $user = null, $nb_commits) {

@@ -874,6 +874,9 @@ Offer DAV or SSH access.");
 		}
 
 		session_require_perm('project_admin', $params['group_id']);
+		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
+			echo html_ao('div', array('id' => 'tabber-'.$this->name, 'class' => 'tabbertab'));
+		}
 
 		$project_name = $project->getUnixName();
 		$result = db_query_params('SELECT repo_name, description FROM scm_secondary_repos WHERE group_id=$1 AND next_action = $2 AND plugin_id=$3 ORDER BY repo_name',
@@ -926,6 +929,9 @@ Offer DAV or SSH access.");
 		echo html_e('input', array('type' => 'submit', 'name' => 'cancel', 'value' => _('Cancel')));
 		echo html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Submit')));
 		echo $HTML->closeForm();
+		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
+			echo html_ac(html_ap() - 1);
+		}
 	}
 
 	function getRepositories($group, $autoinclude = true) {

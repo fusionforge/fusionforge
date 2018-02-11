@@ -135,8 +135,7 @@ over it to the project's administrator.");
 		return $b ;
 	}
 
-	function getSnapshotPara ($project) {
-
+	function getSnapshotPara($project) {
 		$b = "" ;
 		$filename = $project->getUnixName().'-scm-latest.tar'.util_get_compressed_file_extension();
 		if (file_exists(forge_get_config('scm_snapshots_path').'/'.$filename)) {
@@ -499,7 +498,23 @@ over it to the project's administrator.");
 			system ("rm -rf $tmp") ;
 		}
 	}
-  }
+
+	function scm_admin_form(&$params) {
+		global $HTML;
+		$project = $this->checkParams($params);
+		if (!$project) {
+			return false;
+		}
+		session_require_perm('project_admin', $params['group_id']);
+
+		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
+			echo html_ao('div', array('id' => 'tabber-'.$this->name, 'class' => 'tabbertab'));
+		}
+		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
+			echo html_ac(html_ap() - 1);
+		}
+	}
+}
 
 // Local Variables:
 // mode: php

@@ -183,6 +183,7 @@ if (count($scm_plugins) != 0) {
 					$inputAttr['type'] = 'radio';
 			}
 			if ($group->usesPlugin($myPlugin->name)) {
+				$scmPluginObjects[] = $myPlugin;
 				$scm = $myPlugin->name;
 				$inputAttr['checked'] = 'checked';
 			}
@@ -200,7 +201,23 @@ echo html_e('input', array('type' => 'hidden', 'name' => 'group_id', 'value' => 
 echo html_e('p', array(), html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Update'))));
 echo $HTML->closeForm();
 
+if (forge_get_config('allow_multiple_scm') && (count($scmPluginObjects) > 1)) {
+	$elementsLi = array();
+	foreach ($scmPluginObjects as $scmPluginObject) {
+		$elementsLi[] = array('content' => util_make_link('#tabber-'.$scmPluginObject->name, $scmPluginObject->text, false, true));
+	}
+	echo html_ao('div', array('id' => 'tabberid'));
+	echo $HTML->html_list($elementsLi);
+}
+
+$hook_params['allow_multiple_scm'] = count($scmPluginObjects);
 plugin_hook('scm_admin_form', $hook_params);
+
+if (forge_get_config('allow_multiple_scm') && (count($scmPluginObjects) > 1)) {
+	echo html_ac(html_ap() - 1);
+}
+
+echo html_e('script', array('type'=>'text/javascript'), '//<![CDATA['."\n".'jQuery("[id^=tabber]").tabs();'."\n".'//]]>');
 scm_footer();
 
 // Local Variables:
