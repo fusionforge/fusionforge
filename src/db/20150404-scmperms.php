@@ -31,10 +31,10 @@ $verbose = (count($argv) > 1 and $argv[1] == '--verbose');
 // (avoids querying nss for all groups, which sometimes fails due to
 // transient sql/network error or deleted projects)
 $res = db_query_params("SELECT name, group_id, gid, perm_val AS anon FROM nss_groups
-  LEFT JOIN pfo_role_setting ON (nss_groups.group_id = pfo_role_setting.ref_id
-                                 AND pfo_role_setting.role_id=$1 AND pfo_role_setting.section_name=$2)
-  WHERE gid < $3
-  ORDER BY name", array(1, 'scm', 20000));
+			LEFT JOIN pfo_role_setting ON (nss_groups.group_id = pfo_role_setting.ref_id
+							AND pfo_role_setting.role_id=$1 AND pfo_role_setting.section_name=$2)
+			WHERE gid < $3
+			ORDER BY name", array(1, 'scm', 20000));
 
 // Store everything in RAM to avoid a 3h-long SQL connection
 while ($row = db_fetch_array($res))
@@ -43,42 +43,42 @@ while ($row = db_fetch_array($res))
 $svnroot = forge_get_config('repos_path', 'scmsvn');
 $gitroot = forge_get_config('repos_path', 'scmgit');
 foreach ($groups as $group) {
-    $gname = $group['name'];
-    $gid_ro = $group['group_id'] + $SYS->GID_ADD_SCMRO;
-    $gid_rw = $group['group_id'] + $SYS->GID_ADD_SCMRW;
-    if ($verbose) print "$gname\n";
-    
-    $repo = "$svnroot/$gname";
-    if (is_dir($repo)) {
-        chmod($repo, $group['anon'] ? 02755 : 02750);
-        system("chown -Rh root:{$gid_rw} $repo");
-        system("chown  -h root:{$gid_ro} $repo");
-        system("find $repo/* -type d -print0 | xargs -r -0 chmod 2775");
-        system("chmod -R g+rwX,o+rX-w $repo/*");
-    }
-    $repo = '/nonexistent';  // for safety
+	$gname = $group['name'];
+	$gid_ro = $group['group_id'] + $SYS->GID_ADD_SCMRO;
+	$gid_rw = $group['group_id'] + $SYS->GID_ADD_SCMRW;
+	if ($verbose) print "$gname\n";
 
-    $projroot = "$gitroot/$gname";
-    if (is_dir("$projroot")) {
-        chmod($projroot, $group['anon'] ? 02755 : 02750);
+	$repo = "$svnroot/$gname";
+	if (is_dir($repo)) {
+		chmod($repo, $group['anon'] ? 02755 : 02750);
+		system("chown -Rh root:{$gid_rw} $repo");
+		system("chown  -h root:{$gid_ro} $repo");
+		system("find $repo/* -type d -print0 | xargs -r -0 chmod 2775");
+		system("chmod -R g+rwX,o+rX-w $repo/*");
+	}
+	$repo = '/nonexistent';  // for safety
 
-        if (is_dir("$projroot/users")) {
-            chmod("$projroot/users", 00755);
-            foreach (glob("$projroot/users/*") as $userrepo) {
+	$projroot = "$gitroot/$gname";
+	if (is_dir("$projroot")) {
+		chmod($projroot, $group['anon'] ? 02755 : 02750);
+
+		if (is_dir("$projroot/users")) {
+		chmod("$projroot/users", 00755);
+			foreach (glob("$projroot/users/*") as $userrepo) {
 				if (is_dir($userrepo)) {
 					$matches = preg_match(":/users/([^/]+)/:", $userrepo);
 					$user = $matches[1];
 					system("chown -hR $user:root $userrepo");
 					system("chmod -R g+rX-sw,o+rX-w $userrepo");
 				}
-            }
-        }
+			}
+		}
 
-        system("chown  -h root:{$gid_ro} $projroot");
-        system("chown -Rh root:{$gid_rw} $projroot/*.git");
-        system("find $projroot/*.git -type d -print0 | xargs -r -0 chmod 2775");
-        system("chmod -R g+rwX,o+rX-w $projroot/*.git");
-    }
+		system("chown  -h root:{$gid_ro} $projroot");
+		system("chown -Rh root:{$gid_rw} $projroot/*.git");
+		system("find $projroot/*.git -type d -print0 | xargs -r -0 chmod 2775");
+		system("chmod -R g+rwX,o+rX-w $projroot/*.git");
+	}
 }
 
 echo "SUCCESS\n";
