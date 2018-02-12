@@ -202,10 +202,10 @@ Offer DAV or SSH access.");
 		global $HTML;
 		$b = html_e('h2', array(), _('Mercurial Repository Browser'));
 		$b .= html_e('p', array(), _('Browsing the Mercurial tree gives you a view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.'));
-		$b .= html_e('p', array(), '['.util_make_link('/scm/browser.php?group_id='.$project->getID(), _('Browse Hg Repository')).']');
+		$b .= html_e('p', array(), '['.util_make_link('/scm/browser.php?group_id='.$project->getID().'&scm_plugin='.$this->name, _('Browse Hg Repository')).']');
 		$repo_list = $this->getRepositories($project, false);
 		foreach ($repo_list as $repo_name) {
-			$b .= '['.util_make_link('/scm/browser.php?group_id='.$project->getID().'&extra='.$repo_name, _('Browse extra Hg repository')._(': ').$repo_name).']'.html_e('br');
+			$b .= '['.util_make_link('/scm/browser.php?group_id='.$project->getID().'&extra='.$repo_name.'&scm_plugin='.$this->name, _('Browse extra Hg repository')._(': ').$repo_name).']'.html_e('br');
 		}
 		return $b;
 	}
@@ -272,6 +272,9 @@ Offer DAV or SSH access.");
 	}
 
 	function printBrowserPage($params) {
+		if ($params['scm_plugin'] != $this->name) {
+			return;
+		}
 		global $HTML;
 		$project = $this->checkParams($params);
 		if (!$project) {

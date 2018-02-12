@@ -230,7 +230,7 @@ some control over it to the project's administrator.");
 		$b .= _('You may also view the complete histories of any file in the repository.');
 		$b .= '</p>';
 		$b .= '<p>[' ;
-		$b .= util_make_link ("/scm/browser.php?group_id=".$project->getID(),
+		$b .= util_make_link ("/scm/browser.php?group_id=".$project->getID().'&scm_plugin='.$this->name,
 								sprintf(_('Browse %s Repository'), 'Subversion')
 		) ;
 		$b .= ']</p>' ;
@@ -279,6 +279,9 @@ some control over it to the project's administrator.");
 	}
 
 	function printBrowserPage($params) {
+		if ($params['scm_plugin'] != $this->name) {
+			return;
+		}
 		global $HTML;
 		$useautoheight = 0;
 		$project = $this->checkParams($params);

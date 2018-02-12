@@ -278,6 +278,9 @@ control over it to the project's administrator.");
 	}
 
 	function printBrowserPage($params) {
+		if ($params['scm_plugin'] != $this-name) {
+			return;
+		}
 		global $HTML;
 		$useautoheight = 0;
 		$project = $this->checkParams($params);
@@ -315,12 +318,12 @@ control over it to the project's administrator.");
 		$b .= html_e('p', array(), _("Browsing the Git tree gives you a view into the current status"
 						. " of this project's code. You may also view the complete"
 						. " history of any file in the repository."));
-		$b .= html_e('p', array(), '['.util_make_link('/scm/browser.php?group_id='.$project->getID(), _('Browse main git repository')).']');
+		$b .= html_e('p', array(), '['.util_make_link('/scm/browser.php?group_id='.$project->getID().'&scm_plugin='.$this->name, _('Browse main git repository')).']');
 
 		# Extra repos
 		$repo_list = $this->getRepositories($project, false);
 		foreach ($repo_list as $repo_name) {
-			$b .= '['.util_make_link('/scm/browser.php?group_id='.$project->getID().'&extra='.$repo_name, _('Browse extra git repository')._(': ').$repo_name).']'.html_e('br');
+			$b .= '['.util_make_link('/scm/browser.php?group_id='.$project->getID().'&extra='.$repo_name.'&scm_plugin='.$this->name, _('Browse extra git repository')._(': ').$repo_name).']'.html_e('br');
 		}
 
 		$result = db_query_params('SELECT u.user_id, u.user_name FROM scm_personal_repos p, users u WHERE p.group_id=$1 AND u.user_id=p.user_id AND u.unix_status=$2 AND plugin_id=$3',
@@ -331,7 +334,7 @@ control over it to the project's administrator.");
 		for ($i=0; $i<$rows; $i++) {
 			$user_id = db_result($result,$i,'user_id');
 			$user_name = db_result($result,$i,'user_name');
-			$b .= '['.util_make_link('/scm/browser.php?group_id='.$project->getID().'&user_id='.$user_id, _('Browse personal git repository')._(': ').$user_name).']'.html_e('br');
+			$b .= '['.util_make_link('/scm/browser.php?group_id='.$project->getID().'&user_id='.$user_id.'&scm_plugin='.$this->name, _('Browse personal git repository')._(': ').$user_name).']'.html_e('br');
 		}
 
 		return $b;

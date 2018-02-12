@@ -163,7 +163,7 @@ over it to the project's administrator.");
 		$repo_names = $this->getRepositories($project);
 		if (count($repo_names) > 0) {
 			foreach ($repo_names as $repo_name) {
-				$b .= html_e('p', array(), '['.util_make_link('/scm/browser.php?group_id='.$project->getID()."&repo_name=".$repo_name,
+				$b .= html_e('p', array(), '['.util_make_link('/scm/browser.php?group_id='.$project->getID()."&repo_name=".$repo_name.'&scm_plugin='.$this->name,
 									_('Browse Darcs repository').' '.$repo_name).']');
 			}
 		} else {
@@ -229,6 +229,9 @@ over it to the project's administrator.");
 	}
 
 	function printBrowserPage($params) {
+		if ($params['scm_plugin'] != $this->name) {
+			return;
+		}
 		$project = $this->checkParams($params);
 		if (!$project) {
 			return;

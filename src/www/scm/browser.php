@@ -36,6 +36,7 @@ $hook_params['repo_name'] = getStringFromRequest('repo_name', 'none');
 $hook_params['user_id'] = getIntFromRequest('user_id');
 $hook_params['extra'] = getStringFromRequest('extra');
 $hook_params['commit'] = getStringFromRequest('commit');
+$hook_params['scm_plugin'] = getStringFromRequest('scm_plugin');
 plugin_hook ('scm_browser_page', $hook_params);
 
 scm_footer();
