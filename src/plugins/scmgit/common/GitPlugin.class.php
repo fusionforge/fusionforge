@@ -278,7 +278,7 @@ control over it to the project's administrator.");
 	}
 
 	function printBrowserPage($params) {
-		if ($params['scm_plugin'] != $this-name) {
+		if ($params['scm_plugin'] != $this->name) {
 			return;
 		}
 		global $HTML;
