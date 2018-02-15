@@ -124,8 +124,8 @@ function parseConfig(&$Config) {
 function addArtifactLog($Config, $GroupId, $Num) {
 	$return = array();
 	$Result = db_query_params ('SELECT * FROM artifact,artifact_group_list WHERE
-artifact.group_artifact_id=artifact_group_list.group_artifact_id
-AND artifact_group_list.group_id=$1 AND artifact.artifact_id=$2',
+					artifact.group_artifact_id=artifact_group_list.group_artifact_id
+					AND artifact_group_list.group_id=$1 AND artifact.artifact_id=$2',
 				   array ($GroupId,
 					  $Num));
 	$Rows = db_numrows($Result);
@@ -136,8 +136,8 @@ AND artifact_group_list.group_id=$1 AND artifact.artifact_id=$2',
 	if ($Rows == 1) {
 		db_begin();
 		$DBRes = db_query_params ('INSERT INTO plugin_scmhook_scmsvn_committracker_data_artifact
-(kind, group_artifact_id) VALUES
-(0, $1)',
+						(kind, group_artifact_id) VALUES
+						(0, $1)',
 					  array ($Num));
 		$HolderID= db_insertid($DBRes,'plugin_scmhook_scmsvn_committracker_data_artifact','id');
 		if (!$DBRes || !$HolderID) {
