@@ -109,6 +109,7 @@ project independently.");
 
 	function update($params) {
 		$group_id = $params['group_id'];
+		$repository_name = $params['repository_name'];
 
                 $group = group_get_object($group_id);
                 if (!$group->usesPlugin($this->name))
@@ -129,8 +130,8 @@ project independently.");
 				}
 			}
 		}
-		$res = db_query_params('UPDATE plugin_scmhook set hooks = $1, need_update = 1 where id_group = $2',
-				       array(implode('|', $enabled_hooknames), $group_id));
+		$res = db_query_params('UPDATE plugin_scmhook set hooks = $1, need_update = 1 where id_group = $2 and repository_name = $3',
+				       array(implode('|', $enabled_hooknames), $group_id, $repository_name));
 
 		// Save parameters
 		foreach($hooks as $hook) {
@@ -314,6 +315,9 @@ project independently.");
 
 	function displayScmSvnHook($hooksAvailable, $hooksEnabled, $group_id) {
 		global $HTML;
+		$scm_plugin = plugin_get_object('scmsvn');
+		$groupObject = group_get_object($group_id);
+		$repositories = $scm_plugin->getRepositories($groupObject);
 		// Group available hooks by type
 		$hooks_by_type = array();
 		foreach ($hooksAvailable as $hook)
@@ -376,6 +380,9 @@ project independently.");
 
 	function displayScmHgHook($hooksAvailable, $hooksEnabled, $group_id) {
 		global $HTML;
+		$scm_plugin = plugin_get_object('scmhg');
+		$groupObject = group_get_object($group_id);
+		$repositories = $scm_plugin->getRepositories($groupObject);
 		$hooksServePushPullBundle = array();
 		foreach ($hooksAvailable as $hook) {
 			if ($hook->label == 'scmhg') {
@@ -392,35 +399,33 @@ project independently.");
 			}
 		}
 		if (count($hooksServePushPullBundle)) {
-			echo html_e('h3', array(), _('serve-push-pull-bundle Hooks'), false);
-			$tabletop = array('', _('Hook Name'), _('Description'));
-			$classth = array('unsortable', '', '');
-			echo $HTML->listTableTop($tabletop, array(), 'sortable_scmhook_serve-push-pull-bundle', 'sortable', $classth);
+			$tabletop = array(_('Repository'));
+			$classth = array('');
+			$titleArr = array('');
 			foreach ($hooksServePushPullBundle as $hookServePushPullBundle) {
-				if (! empty($hookServePushPullBundle->onlyGlobalAdmin) && ! Permission::isGlobalAdmin()) {
-					echo '<tr class="hide" ><td>';
+				$tabletop[] = $hookServePushPullBundle->getName();
+				$classth[] = 'unsortable';
+				$titleArr[] = $hookServePushPullBundle->getDescription();
+			}
+
+			echo $HTML->listTableTop($tabletop, '', 'sortable_scmhook_scmhg', 'sortable', $classth, $titleArr);
+			foreach($repositories as $repository) {
+				$cells = array();
+				$cells[][] = $repository;
+				foreach ($hooksServePushPullBundle as $hookServePushPullBundle) {
+					$attr = array('type' => 'checkbox');
+					if ((!empty($hookServePushPullBundle->onlyGlobalAdmin) && !Permission::isGlobalAdmin()) || !$hookServePushPullBundle->isAvailable()) {
+						$attr = array_merge($attr, array('disabled' => 'disabled'));
+						if (!$hookServePushPullBundle->isAvailable()) {
+							$attr = array_merge($attr, array('title' => $hookServePushPullBundle->getDisabledMessage()));
+						}
+					}
+					if (in_array($hookServePushPullBundle->getName(), $hooksEnabled[$repository])) {
+						$attr = array_merge($attr, array('checked' => 'checked'));
+					}
+					$cells[][] = html_e('input', array('type' => 'checkbox', 'name' => $hookServePushPullBundle->getLabel().'_'.$hookServePushPullBundle->getClassname(), 'value' => $repository));
 				}
-				else {
-					echo '<tr><td>';
-				}
-				echo '<input type="checkbox" ';
-				echo 'name="'.$hookServePushPullBundle->getLabel().'_'.$hookServePushPullBundle->getClassname().'" ';
-				if (in_array($hookServePushPullBundle->getClassname(), $hooksEnabled))
-					echo ' checked="checked"';
-
-				if (!$hookServePushPullBundle->isAvailable())
-					echo ' disabled="disabled"';
-
-				echo ' />';
-				echo '</td><td';
-				if (!$hookServePushPullBundle->isAvailable())
-					echo ' title="'.$hookServePushPullBundle->getDisabledMessage().'"';
-
-				echo ' >';
-				echo $hookServePushPullBundle->getName();
-				echo '</td><td>';
-				echo $hookServePushPullBundle->getDescription();
-				echo '</td></tr>';
+				echo $HTML->multiTableRow(array(), $cells);
 			}
 			echo $HTML->listTableBottom();
 		}
