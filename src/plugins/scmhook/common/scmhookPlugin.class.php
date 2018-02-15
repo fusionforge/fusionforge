@@ -188,6 +188,7 @@ project independently.");
 		$hooksAvailable = $this->getAvailableHooks($group_id);
 		$hooksEnabled = $this->getEnabledHooks($group_id);
 		if (count($hooksAvailable)) {
+			echo $HTML->openForm(array('id' => 'scmhook_form', 'action' => '/scm/admin/?group_id='.$group_id, 'method' => 'post'));
 			echo '<div id="scmhook">';
 			echo html_e('h2', array(), _('Enable Repository Hooks'));
 			switch ($scm) {
@@ -196,15 +197,15 @@ project independently.");
 					break;
 				}
 				case "scmhg": {
-					$this->displayScmHgHook($hooksAvailable, $hooksEnabled);
+					$this->displayScmHgHook($hooksAvailable, $hooksEnabled, $group_id);
 					break;
 				}
 				case "scmgit": {
-					$this->displayScmGitHook($hooksAvailable, $hooksEnabled);
+					$this->displayScmGitHook($hooksAvailable, $hooksEnabled, $group_id);
 					break;
 				}
 				case "scmcvs": {
-					$this->displayScmCVSHook($hooksAvailable, $hooksEnabled);
+					$this->displayScmCVSHook($hooksAvailable, $hooksEnabled, $group_id);
 					break;
 				}
 				default: {
@@ -213,6 +214,8 @@ project independently.");
 				}
 			}
 			echo '</div>'."\n";
+			echo $HTML->html_input('scmhook_submit', '', '', 'submit', _('Submit'));
+			echo $HTML->closeForm();
 		} else {
 			echo $HTML->information(_('No hooks available'));
 		}
@@ -239,15 +242,15 @@ project independently.");
 	}
 
 	function getEnabledHooks($group_id) {
-		$res = db_query_params('SELECT hooks FROM plugin_scmhook WHERE id_group = $1', array($group_id));
+		$enabledHooks = array();
+		$res = db_query_params('SELECT hooks, repository_name FROM plugin_scmhook WHERE id_group = $1', array($group_id));
 		if (!$res)
-			return false;
+			return $enabledHooks;
 
-		$row = db_fetch_array($res);
-		if (count($row)) {
-			return explode('|', $row['hooks']);
+		while ($arr = db_fetch_array($res)) {
+			$enabledHooks[$row['repository_name']] = explode('|', $row['hooks']);
 		}
-		return array();
+		return $enabledHooks;
 	}
 
 	function getListLibraryScm() {
@@ -371,7 +374,7 @@ project independently.");
 		}
 	}
 
-	function displayScmHgHook($hooksAvailable, $hooksEnabled) {
+	function displayScmHgHook($hooksAvailable, $hooksEnabled, $group_id) {
 		global $HTML;
 		$hooksServePushPullBundle = array();
 		foreach ($hooksAvailable as $hook) {
@@ -423,13 +426,16 @@ project independently.");
 		}
 	}
 
-	function displayScmGitHook($hooksAvailable, $hooksEnabled) {
+	function displayScmGitHook($hooksAvailable, $hooksEnabled, $group_id) {
 		global $HTML;
+		$scm_plugin = plugin_get_object('scmgit');
+		$groupObject = group_get_object($group_id);
+		$repositories = $scm_plugin->getRepositories($groupObject);
 		$hooksPostReceive = array();
 		foreach ($hooksAvailable as $hook) {
 			if ($hook->label == 'scmgit') {
 				switch ($hook->getHookType()) {
-					case "post-receive": {
+					case 'post-receive': {
 						$hooksPostReceive[] = $hook;
 						break;
 					}
@@ -441,41 +447,39 @@ project independently.");
 			}
 		}
 		if (count($hooksPostReceive)) {
-			echo html_e('h3', array(), _('post-receive Hooks'), false);
-			$tabletop = array('', _('Hook Name'), _('Description'));
-			$classth = array('unsortable', '', '');
-			echo $HTML->listTableTop($tabletop, array(), 'sortable_scmhook_post-receive', 'sortable', $classth);
+			$tabletop = array(_('Repository'));
+			$classth = array('');
+			$titleArr = array('');
 			foreach ($hooksPostReceive as $hookPostReceive) {
-				if (! empty($hookPostReceive->onlyGlobalAdmin) && ! Permission::isGlobalAdmin()) {
-					echo '<tr class="hide" ><td>';
+				$tabletop[] = $hookPostReceive->getName();
+				$classth[] = 'unsortable';
+				$titleArr[] = $hookPostReceive->getDescription();
+			}
+			
+			echo $HTML->listTableTop($tabletop, '', 'sortable_scmhook_scmgit', 'sortable', $classth, $titleArr);
+			foreach($repositories as $repository) {
+				$cells = array();
+				$cells[][] = $repository;
+				foreach ($hooksPostReceive as $hookPostReceive) {
+					$attr = array('type' => 'checkbox');
+					if ((!empty($hookPostReceive->onlyGlobalAdmin) && !Permission::isGlobalAdmin()) || !$hookPostReceive->isAvailable()) {
+						$attr = array_merge($attr, array('disabled' => 'disabled'));
+						if (!$hookPostReceive->isAvailable()) {
+							$attr = array_merge($attr, array('title' => $hookPostReceive->getDisabledMessage()));
+						}
+					}
+					if (in_array($hookPostReceive->getName(), $hooksEnabled[$repository])) {
+						$attr = array_merge($attr, array('checked' => 'checked'));
+					}
+					$cells[][] = html_e('input', array('type' => 'checkbox', 'name' => $hookPostReceive->getLabel().'_'.$hookPostReceive->getClassname(), 'value' => $repository));
 				}
-				else {
-					echo '<tr><td>';
-				}
-				echo '<input type="checkbox" ';
-				echo 'name="'.$hookPostReceive->getLabel().'_'.$hookPostReceive->getClassname().'" ';
-				if (in_array($hookPostReceive->getClassname(), $hooksEnabled))
-					echo ' checked="checked"';
-
-				if (!$hookPostReceive->isAvailable())
-					echo ' disabled="disabled"';
-
-				echo ' />';
-				echo '</td><td';
-				if (!$hookPostReceive->isAvailable())
-					echo ' title="'.$hookPostReceive->getDisabledMessage().'"';
-
-				echo ' >';
-				echo $hookPostReceive->getName();
-				echo '</td><td>';
-				echo $hookPostReceive->getDescription();
-				echo '</td></tr>';
+				echo $HTML->multiTableRow(array(), $cells);
 			}
 			echo $HTML->listTableBottom();
 		}
 	}
 
-	function displayScmCVSHook($hooksAvailable, $hooksEnabled) {
+	function displayScmCVSHook($hooksAvailable, $hooksEnabled, $group_id) {
 		global $HTML;
 		$hooksPostCommit = array();
 		foreach ($hooksAvailable as $hook) {
