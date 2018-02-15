@@ -347,6 +347,14 @@ abstract class SCMPlugin extends Plugin {
 
 		return $project;
 	}
+
+	function getRepositories($group, $autoinclude = true) {
+		$repoarr = array();
+		if ($autoinclude) {
+			$repoarr[] = $group->getUnixName();
+		}
+		return $repoarr;
+	}
 }
 
 // Local Variables:
