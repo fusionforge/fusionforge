@@ -249,7 +249,7 @@ project independently.");
 			return $enabledHooks;
 
 		while ($arr = db_fetch_array($res)) {
-			$enabledHooks[$row['repository_name']] = explode('|', $row['hooks']);
+			$enabledHooks[$arr['repository_name']] = explode('|', $arr['hooks']);
 		}
 		return $enabledHooks;
 	}
@@ -420,7 +420,7 @@ project independently.");
 							$attr = array_merge($attr, array('title' => $hookServePushPullBundle->getDisabledMessage()));
 						}
 					}
-					if (in_array($hookServePushPullBundle->getName(), $hooksEnabled[$repository])) {
+					if (isset($hooksEnabled[$repository]) && in_array($hookServePushPullBundle->getName(), $hooksEnabled[$repository])) {
 						$attr = array_merge($attr, array('checked' => 'checked'));
 					}
 					$cells[][] = html_e('input', array('type' => 'checkbox', 'name' => $hookServePushPullBundle->getLabel().'_'.$hookServePushPullBundle->getClassname(), 'value' => $repository));
