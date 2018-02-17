@@ -651,7 +651,7 @@ some control over it to the project's administrator.");
 					$result = array();
 					$result['section'] = 'scm';
 					$result['group_id'] = $project->getID();
-					$result['ref_id'] = 'browser.php?group_id='.$project->getID();
+					$result['ref_id'] = 'browser.php?group_id='.$project->getID().'&scm_plugin='.$this->name;
 					$result['description'] = htmlspecialchars($message).' (r'.$revisions[$i].')';
 					$userObject = user_get_object_by_name($users[$i]);
 					if (is_a($userObject, 'FFUser')) {
