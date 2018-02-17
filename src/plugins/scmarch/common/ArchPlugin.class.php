@@ -1,5 +1,6 @@
 <?php
-/** FusionForge Arch plugin
+/**
+ * FusionForge Arch plugin
  *
  * Copyright 2009, Roland Mas
  *
