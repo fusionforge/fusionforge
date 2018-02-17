@@ -142,6 +142,25 @@ if (getStringFromRequest('create_repository') && getStringFromRequest('submit'))
 		// Don't call scm plugin update if their form wasn't displayed
 		// to avoid processing an apparently empty form and reset configuration
 		plugin_hook("scm_admin_update", $hook_params);
+} elseif (getStringFromRequest('scmhook_submit')) {
+	$hook_params = array();
+	$hook_params['group_id'] = $group_id;
+	$repos = getArrayFromRequest('repository', array());
+	foreach ($repos as $repo => $hook_elements) {
+		$hook_params['repository_name'] = $repo;
+		$hook_params['hooks'] = $hook_elements;
+		$hook_params['scm_plugin'] = getStringFromRequest('scm_plugin');
+		$hook_options = array();
+		foreach ($hook_elements as $hook_element) {
+			$hook_params['hooks']['options'] = array();
+			$options = getArrayFromRequest($hook_element, array());
+			if (isset($options[$repo])) {
+				$hook_params['hooks']['options'] = $options[$repo];
+			}
+		}
+		$scmhookPlugin = plugin_get_object('scmhook');
+		$scmhookPlugin->update($hook_params);
+	}
 }
 
 scm_header(array('title'=>_('SCM Repository'),'group'=>$group_id));
