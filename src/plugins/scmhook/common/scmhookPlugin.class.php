@@ -309,7 +309,6 @@ project independently.");
 		$flag = strtolower('use_'.$this->name);
 		if (getIntFromRequest($flag) == 1) {
 			$group->setPluginUse($this->name);
-			$this->add($group->getID());
 		} else {
 			$group->setPluginUse($this->name, false);
 			$this->remove($group->getID());
