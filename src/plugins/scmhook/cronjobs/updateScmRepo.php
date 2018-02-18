@@ -38,9 +38,9 @@ require_once $gfplugins.'scmhook/common/scmhookPlugin.class.php';
 ###### START
 
 $res = db_query_params('SELECT systask_id, group_id, user_name FROM systasks
-	JOIN users ON (systasks.user_id = users.user_id)
-	WHERE systasks.status=$1 AND systask_type=$2',
-	array('WIP', 'SCMHOOK_UPDATE'));
+			JOIN users ON (systasks.user_id = users.user_id)
+			WHERE systasks.status=$1 AND systask_type=$2',
+			array('WIP', 'SCMHOOK_UPDATE'));
 while ($task = db_fetch_array($res)) {
 	$group_id = $task['group_id'];
 	$user_name = $task['user_name'];
@@ -57,13 +57,13 @@ function install_hooks($params) {
 	$group_id = $params[0];
 	// get the list of project to be updated
 	$res = db_query_params('SELECT groups.group_id, groups.scm_box, plugin_scmhook.hooks
-			FROM groups, plugin_scmhook
-			WHERE groups.status = $1
-			AND plugin_scmhook.id_group = groups.group_id
-			AND plugin_scmhook.need_update = $2
-			AND groups.use_scm = $3
-            AND group_id = $4',
-		array('A', 1, 1, $group_id));
+				FROM groups, plugin_scmhook
+				WHERE groups.status = $1
+				AND plugin_scmhook.id_group = groups.group_id
+				AND plugin_scmhook.need_update = $2
+				AND groups.use_scm = $3
+				AND group_id = $4',
+				array('A', 1, 1, $group_id));
 
 	if (! $res) {
 		cron_debug("FATAL Database Query Failed: " . db_error());
