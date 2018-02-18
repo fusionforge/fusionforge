@@ -417,7 +417,7 @@ project independently.");
 			echo $HTML->listTableTop($tabletop, '', 'sortable_scmhook_scmhg', 'sortable', $classth, $titleArr);
 			foreach($repositories as $repository) {
 				$cells = array();
-				$cells[][] = $repository.html_e('input', array('type' => 'hidden', 'name' => 'repository['.$repository.'][]');
+				$cells[][] = $repository.html_e('input', array('type' => 'hidden', 'name' => 'repository['.$repository.'][]'));
 				foreach ($hooksServePushPullBundle as $hookServePushPullBundle) {
 					$attr = array('type' => 'checkbox', 'name' => 'repository['.$repository.'][]', 'value' => $hookServePushPullBundle->getLabel().'_'.$hookServePushPullBundle->getClassname());
 					if ((!empty($hookServePushPullBundle->onlyGlobalAdmin) && !Permission::isGlobalAdmin()) || !$hookServePushPullBundle->isAvailable()) {
@@ -484,7 +484,7 @@ project independently.");
 			echo $HTML->listTableTop($tabletop, '', 'sortable_scmhook_scmgit', 'sortable', $classth, $titleArr);
 			foreach($repositories as $repository) {
 				$cells = array();
-				$cells[][] = $repository.html_e('input', array('type' => 'hidden', 'name' => 'repository['.$repository.'][]');
+				$cells[][] = $repository.html_e('input', array('type' => 'hidden', 'name' => 'repository['.$repository.'][]'));
 				foreach ($hooksPostReceive as $hookPostReceive) {
 					$attr = array('type' => 'checkbox');
 					if ((!empty($hookPostReceive->onlyGlobalAdmin) && !Permission::isGlobalAdmin()) || !$hookPostReceive->isAvailable()) {
@@ -551,7 +551,7 @@ project independently.");
 			echo $HTML->listTableTop($tabletop, '', 'sortable_scmhook_scmgit', 'sortable', $classth, $titleArr);
 			foreach($repositories as $repository) {
 				$cells = array();
-				$cells[][] = $repository.html_e('input', array('type' => 'hidden', 'name' => 'repository['.$repository.'][]');
+				$cells[][] = $repository.html_e('input', array('type' => 'hidden', 'name' => 'repository['.$repository.'][]'));
 				foreach ($hooksPostCommit as $hookPostCommit) {
 					$attr = array('type' => 'checkbox');
 					if ((!empty($hookPostCommit->onlyGlobalAdmin) && !Permission::isGlobalAdmin()) || !$hookPostCommit->isAvailable()) {
