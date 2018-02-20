@@ -486,7 +486,7 @@ project independently.");
 				$cells = array();
 				$cells[][] = $repository.html_e('input', array('type' => 'hidden', 'name' => 'repository['.$repository.'][]'));
 				foreach ($hooksPostReceive as $hookPostReceive) {
-					$attr = array('type' => 'checkbox');
+					$attr = array('type' => 'checkbox', 'name' => 'repository['.$repository.'][]', 'value' => $hookPostReceive->getLabel().'_'.$hookPostReceive->getClassname());
 					if ((!empty($hookPostReceive->onlyGlobalAdmin) && !Permission::isGlobalAdmin()) || !$hookPostReceive->isAvailable()) {
 						$attr = array_merge($attr, array('disabled' => 'disabled'));
 						if (!$hookPostReceive->isAvailable()) {
@@ -505,12 +505,12 @@ project independently.");
 							$val = ($values[$pname] != null) ? $values[$pname] : $pconf['default'];
 							switch($pconf['type']) {
 							case 'emails':
-								$content = html_e('input', array('type' => 'text','title' => $pconf['description'], 'name' => 'scmgit_{'.$hookPostReceive->getClassname().'}_'.$pname.'[]', 'value' => $val, 'size' => 40));
+								$content = html_e('input', array('type' => 'text','title' => $pconf['description'], 'name' => $hookPostReceive->getLabel().'_'.$hookPostReceive->getClassname().'['.$repository.']['.$pname.']', 'value' => $val, 'size' => 40));
 								break;
 							}
 						}
 					}
-					$cells[][] = html_e('input', array('type' => 'checkbox', 'name' => $hookPostReceive->getLabel().'_'.$hookPostReceive->getClassname().'[]', 'value' => $repository)).$content;
+					$cells[][] = html_e('input', $attr).$content;
 				}
 				echo $HTML->multiTableRow(array(), $cells);
 			}
@@ -553,7 +553,7 @@ project independently.");
 				$cells = array();
 				$cells[][] = $repository.html_e('input', array('type' => 'hidden', 'name' => 'repository['.$repository.'][]'));
 				foreach ($hooksPostCommit as $hookPostCommit) {
-					$attr = array('type' => 'checkbox');
+					$attr = array('type' => 'checkbox', 'name' => 'repository['.$repository.'][]', 'value' => $hookPostCommit->getLabel().'_'.$hookPostCommit->getClassname());
 					if ((!empty($hookPostCommit->onlyGlobalAdmin) && !Permission::isGlobalAdmin()) || !$hookPostCommit->isAvailable()) {
 						$attr = array_merge($attr, array('disabled' => 'disabled'));
 						if (!$hookPostCommit->isAvailable()) {
@@ -563,7 +563,7 @@ project independently.");
 					if (isset($hooksEnabled['scmcvs'][$repository]) && in_array($hookPostCommit->getName(), $hooksEnabled['scmcvs'][$repository])) {
 						$attr = array_merge($attr, array('checked' => 'checked'));
 					}
-					$cells[][] = html_e('input', array('type' => 'checkbox', 'name' => $hookPostCommit->getLabel().'_'.$hookPostCommit->getClassname().'[]', 'value' => $repository));
+					$cells[][] = html_e('input', $attr);
 				}
 				echo $HTML->multiTableRow(array(), $cells);
 			}
