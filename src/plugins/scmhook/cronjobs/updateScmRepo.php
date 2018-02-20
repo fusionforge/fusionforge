@@ -56,7 +56,7 @@ function install_hooks($params) {
 
 	$group_id = $params[0];
 	// get the list of project to be updated
-	$res = db_query_params('SELECT groups.group_id, groups.scm_box, plugin_scmhook.hooks
+	$res = db_query_params('SELECT groups.group_id, groups.scm_box, plugin_scmhook.hooks, plugin_scmhook.scm_plugin
 				FROM groups, plugin_scmhook
 				WHERE groups.status = $1
 				AND plugin_scmhook.id_group = groups.group_id
@@ -72,19 +72,11 @@ function install_hooks($params) {
 	$scmhookPlugin = new scmhookPlugin;
 	while ($row = db_fetch_array($res)) {
 		$group_id = $row['group_id'];
-		$scm_box = $row['scm_box'];
-		$scmtype = '';
-		// find the scm type of the project
-		$listScm = $scmhookPlugin->getListLibraryScm();
 		$group = group_get_object($group_id);
-		for ($i = 0; $i < count($listScm); $i++) {
-			if ($group->usesPlugin($listScm[$i])) {
-				$scmtype = $listScm[$i];
-				continue;
-			}
-		}
+		$scm_box = $row['scm_box'];
 		$returnvalue = true;
 		// call the right cronjob in the library
+		$scmtype = $row['scm_plugin'];
 		switch ($scmtype) {
 		case 'scmsvn':
 			cron_debug("INFO start updating hooks for project ".$group->getUnixName());
