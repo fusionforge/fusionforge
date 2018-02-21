@@ -279,10 +279,14 @@ project independently.");
 	function artifact_extra_detail(&$params) {
 		$hooksAvailable = $this->getAvailableHooks($params['group_id']);
 		$hooksEnabled = $this->getEnabledHooks($params['group_id']);
-		foreach ($hooksAvailable as $hookAvailable) {
-			if (in_array($hookAvailable->getClassname(), $hooksEnabled)) {
-				if (method_exists($hookAvailable,'artifact_extra_detail')) {
-					$hookAvailable->artifact_extra_detail($params);
+		foreach ($hooksEnabled as $key => $repos) {
+			foreach ($repos as $repo) {
+				foreach ($hooksAvailable as $hookAvailable) {
+					if (in_array($hookAvailable->getClassname(), $repo)) {
+						if (method_exists($hookAvailable,'artifact_extra_detail')) {
+							$hookAvailable->artifact_extra_detail($params);
+						}
+					}
 				}
 			}
 		}
