@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-19 13:51+0000\n"
+"POT-Creation-Date: 2018-02-23 12:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -73,7 +73,7 @@ msgstr ""
 #: common/include/FFObject.class.php:374 common/include/user_profile.php:62
 #: common/include/user_profile.php:115 common/include/user_profile.php:122
 #: common/include/user_profile.php:133 common/include/user_profile.php:140
-#: common/include/utils.php:504 common/pm/import_utils.php:76
+#: common/include/utils.php:456 common/pm/import_utils.php:76
 #: common/tracker/Artifact.class.php:2308
 #: common/tracker/ArtifactExtraField.class.php:219
 #: common/tracker/ArtifactExtraField.class.php:224
@@ -325,14 +325,16 @@ msgstr ""
 #: plugins/scmcvs/common/CVSPlugin.class.php:196
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:198
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:219
-#: plugins/scmgit/common/GitPlugin.class.php:359
-#: plugins/scmgit/common/GitPlugin.class.php:380
-#: plugins/scmgit/common/GitPlugin.class.php:1196
-#: plugins/scmgit/common/GitPlugin.class.php:1198
-#: plugins/scmgit/common/GitPlugin.class.php:1199
-#: plugins/scmhg/common/HgPlugin.class.php:78
-#: plugins/scmhg/common/HgPlugin.class.php:219
-#: plugins/scmsvn/common/SVNPlugin.class.php:259
+#: plugins/scmgit/common/GitPlugin.class.php:366
+#: plugins/scmgit/common/GitPlugin.class.php:387
+#: plugins/scmgit/common/GitPlugin.class.php:1203
+#: plugins/scmgit/common/GitPlugin.class.php:1205
+#: plugins/scmgit/common/GitPlugin.class.php:1206
+#: plugins/scmhg/common/HgPlugin.class.php:81
+#: plugins/scmhg/common/HgPlugin.class.php:242
+#: plugins/scmhg/common/HgPlugin.class.php:929
+#: plugins/scmhg/common/HgPlugin.class.php:931
+#: plugins/scmsvn/common/SVNPlugin.class.php:269
 #: plugins/taskboard/common/views/admin/columns.php:73
 #: plugins/taskboard/common/views/admin/columns.php:77
 #: plugins/taskboard/common/views/admin/columns.php:81
@@ -382,8 +384,8 @@ msgstr ""
 #: www/admin/groupedit.php:196 www/admin/groupedit.php:205
 #: www/admin/groupedit.php:215 www/admin/massmail.php:110
 #: www/admin/massmail.php:128 www/admin/massmail.php:154
-#: www/admin/pending-news.php:139 www/admin/pending-news.php:141
-#: www/admin/pending-news.php:147 www/admin/pending-news.php:149
+#: www/admin/pending-news.php:135 www/admin/pending-news.php:137
+#: www/admin/pending-news.php:143 www/admin/pending-news.php:145
 #: www/admin/responses_admin.php:81 www/admin/responses_admin.php:83
 #: www/admin/responses_admin.php:84 www/admin/responses_admin.php:120
 #: www/admin/responses_admin.php:122 www/admin/responses_admin.php:123
@@ -394,7 +396,7 @@ msgstr ""
 #: www/admin/trove/trove_cat_edit.php:144
 #: www/admin/trove/trove_cat_edit.php:147 www/admin/useredit.php:133
 #: www/admin/useredit.php:142 www/admin/useredit.php:151
-#: www/admin/useredit.php:160 www/admin/useredit.php:214
+#: www/admin/useredit.php:160 www/admin/useredit.php:215
 #: www/admin/vhost.php:151 www/admin/vhost.php:176
 #: www/forum/admin/index.php:111 www/forum/admin/index.php:115
 #: www/forum/admin/index.php:148 www/include/user_home.php:96
@@ -596,9 +598,9 @@ msgstr ""
 #: common/include/Group.class.php:2330 common/include/Group.class.php:2405
 #: common/include/Group.class.php:3052 common/include/Group.class.php:3116
 #: common/include/Group.class.php:3133 common/include/Group.class.php:3150
-#: common/include/Group.class.php:3166 common/include/User.class.php:1409
-#: common/include/User.class.php:1786 common/include/User.class.php:1794
-#: common/include/User.class.php:1809 common/include/User.class.php:1817
+#: common/include/Group.class.php:3166 common/include/User.class.php:1412
+#: common/include/User.class.php:1789 common/include/User.class.php:1797
+#: common/include/User.class.php:1812 common/include/User.class.php:1820
 #: common/include/system/pgsql.class.php:119
 #: common/include/system/pgsql.class.php:125
 #: common/search/SearchQuery.class.php:135
@@ -637,8 +639,8 @@ msgstr ""
 #: plugins/mailman/www/admin/index.php:223 plugins/mailman/www/index.php:25
 #: plugins/mailman/www/index.php:32 plugins/mailman/www/index.php:35
 #: plugins/mailman/www/index.php:47 plugins/moinmoin/www/frame.php:41
-#: plugins/scmgit/common/GitPlugin.class.php:170
-#: plugins/scmhg/common/HgPlugin.class.php:108 www/account/lostlogin.php:87
+#: plugins/scmgit/common/GitPlugin.class.php:169
+#: plugins/scmhg/common/HgPlugin.class.php:113 www/account/lostlogin.php:87
 #: www/admin/globalroledelete.php:53 www/admin/globalroledelete.php:59
 #: www/admin/passedit.php:56 www/admin/passedit.php:64
 #: www/admin/passedit.php:72 www/export/rss20_tracker.php:120
@@ -650,7 +652,7 @@ msgstr ""
 #: www/project/admin/editimages.php:136 www/project/admin/editimages.php:161
 #: www/project/admin/roledelete.php:66 www/project/admin/roledelete.php:73
 #: www/project/admin/vhost.php:43 www/project/admin/vhost.php:45
-#: www/scm/admin/index.php:192
+#: www/scm/admin/index.php:213
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:102
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
@@ -761,11 +763,11 @@ msgstr ""
 #: common/forum/AttachManager.class.php:220
 #: common/forum/AttachManager.class.php:324
 #: common/forum/AttachManager.class.php:360
-#: common/forum/AttachManager.class.php:415 common/forum/Forum.class.php:224
-#: common/forum/Forum.class.php:505 common/forum/Forum.class.php:586
-#: common/forum/Forum.class.php:612 common/forum/Forum.class.php:620
-#: common/forum/Forum.class.php:628 common/forum/Forum.class.php:636
-#: common/forum/Forum.class.php:645 common/forum/Forum.class.php:653
+#: common/forum/AttachManager.class.php:415 common/forum/Forum.class.php:223
+#: common/forum/Forum.class.php:504 common/forum/Forum.class.php:585
+#: common/forum/Forum.class.php:611 common/forum/Forum.class.php:619
+#: common/forum/Forum.class.php:627 common/forum/Forum.class.php:635
+#: common/forum/Forum.class.php:644 common/forum/Forum.class.php:652
 #: common/forum/ForumAdmin.class.php:412 common/forum/ForumFactory.class.php:56
 #: common/forum/ForumHTML.class.php:58 common/forum/ForumHTML.class.php:68
 #: common/forum/ForumHTML.class.php:69 common/forum/ForumHTML.class.php:70
@@ -842,9 +844,9 @@ msgstr ""
 #: common/include/Navigation.class.php:64 common/include/SysTasksQ.class.php:50
 #: common/include/SysTasksQ.class.php:66 common/include/User.class.php:362
 #: common/include/User.class.php:448 common/include/User.class.php:455
-#: common/include/User.class.php:1409 common/include/User.class.php:1786
-#: common/include/User.class.php:1794 common/include/User.class.php:1809
-#: common/include/User.class.php:1817 common/include/exit.php:95
+#: common/include/User.class.php:1412 common/include/User.class.php:1789
+#: common/include/User.class.php:1797 common/include/User.class.php:1812
+#: common/include/User.class.php:1820 common/include/exit.php:95
 #: common/include/system/pgsql.class.php:119
 #: common/include/system/pgsql.class.php:125 common/include/user_profile.php:81
 #: common/include/user_profile.php:85 common/include/user_profile.php:101
@@ -987,9 +989,11 @@ msgstr ""
 #: common/widget/Widget_TrackerDefaultActions.class.php:79
 #: common/widget/Widget_TrackerMain.class.php:81
 #: common/widget/Widget_TrackerMain.class.php:84
-#: common/widget/Widget_TrackerMain.class.php:89
-#: common/widget/Widget_TrackerMain.class.php:107
-#: common/widget/Widget_TrackerMain.class.php:125
+#: common/widget/Widget_TrackerMain.class.php:90
+#: common/widget/Widget_TrackerMain.class.php:104
+#: common/widget/Widget_TrackerMain.class.php:110
+#: common/widget/Widget_TrackerMain.class.php:129
+#: common/widget/Widget_TrackerMain.class.php:143
 #: common/widget/Widget_TrackerSummary.class.php:86
 #: cronjobs/db/send_pending_items_mail.php:77
 #: cronjobs/db/send_pending_items_mail.php:78
@@ -1004,10 +1008,11 @@ msgstr ""
 #: cronjobs/db/send_pending_items_mail.php:120
 #: cronjobs/db/send_pending_items_mail.php:121
 #: cronjobs/misc/backup_site.php:120 cronjobs/misc/backup_site.php:148
-#: cronjobs/misc/backup_site.php:191 db/20141105-frs-ziplatest.php:52
-#: db/20141105-frs-ziplatest.php:60 db/20141105-frs-ziplatest.php:64
-#: db/20141105-frs-ziplatest.php:70 db/20141105-frs-ziplatest.php:75
-#: db/20141105-frs-ziplatest.php:83 db/20141106-frs-zip-per-release.php:50
+#: cronjobs/misc/backup_site.php:191 cronjobs/web-vhosts/create_vhosts.php:41
+#: db/20141105-frs-ziplatest.php:52 db/20141105-frs-ziplatest.php:60
+#: db/20141105-frs-ziplatest.php:64 db/20141105-frs-ziplatest.php:70
+#: db/20141105-frs-ziplatest.php:75 db/20141105-frs-ziplatest.php:83
+#: db/20141106-frs-zip-per-release.php:50
 #: db/20141106-frs-zip-per-release.php:57
 #: db/20141106-frs-zip-per-release.php:63
 #: plugins/authopenid/include/AuthOpenIDPlugin.class.php:83
@@ -1109,20 +1114,19 @@ msgstr ""
 #: plugins/projects-hierarchy/www/index.php:37
 #: plugins/projects-hierarchy/www/index.php:44
 #: plugins/projects-hierarchy/www/index.php:90 plugins/scmcvs/www/acl.php:53
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:581
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:585
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:586
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:584
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:588
-#: plugins/scmgit/common/GitPlugin.class.php:170
-#: plugins/scmgit/common/GitPlugin.class.php:318
-#: plugins/scmgit/common/GitPlugin.class.php:330
-#: plugins/scmhg/common/HgPlugin.class.php:108
-#: plugins/scmhook/common/scmhookPlugin.class.php:166
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:589
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:591
+#: plugins/scmgit/common/GitPlugin.class.php:169
+#: plugins/scmgit/common/GitPlugin.class.php:326
+#: plugins/scmgit/common/GitPlugin.class.php:337
+#: plugins/scmhg/common/HgPlugin.class.php:113
+#: plugins/scmhg/common/HgPlugin.class.php:208
+#: plugins/scmhook/common/scmhookPlugin.class.php:155
 #: plugins/scmhook/library/scmcvs/commitTracker.class.php:47
 #: plugins/scmhook/library/scmcvs/hooks/cvs_wrapper.php:31
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:49
-#: plugins/scmhook/library/scmgit/postReceiveEmail.class.php:56
-#: plugins/scmhook/library/scmgit/postReceiveEmail.class.php:58
 #: plugins/taskboard/common/TaskBoard.class.php:113
 #: plugins/taskboard/common/TaskBoard.class.php:314
 #: plugins/taskboard/common/TaskBoard.class.php:348
@@ -1142,7 +1146,7 @@ msgstr ""
 #: plugins/taskboard/common/TaskBoardColumn.class.php:432
 #: plugins/taskboard/common/TaskBoardColumn.class.php:456
 #: plugins/taskboard/common/TaskBoardColumnSource.class.php:267
-#: plugins/taskboard/common/adapters/TaskBoardBasicAdapter.class.php:387
+#: plugins/taskboard/common/adapters/TaskBoardBasicAdapter.class.php:388
 #: plugins/taskboard/common/views/admin/columns.php:28
 #: plugins/taskboard/common/views/admin/delete_column.php:32
 #: plugins/taskboard/common/views/admin/delete_taskboard.php:26
@@ -1183,32 +1187,32 @@ msgstr ""
 #: www/admin/index.php:122 www/admin/index.php:132 www/admin/massmail.php:75
 #: www/admin/massmail.php:93 www/admin/massmail.php:132
 #: www/admin/passedit.php:77 www/admin/passedit.php:84
-#: www/admin/pending-news.php:78 www/admin/pending-news.php:88
-#: www/admin/pending-news.php:108 www/admin/responses_admin.php:34
+#: www/admin/pending-news.php:74 www/admin/pending-news.php:84
+#: www/admin/pending-news.php:104 www/admin/responses_admin.php:34
 #: www/admin/responses_admin.php:43 www/admin/unsubscribe.php:49
 #: www/admin/unsubscribe.php:53 www/admin/unsubscribe.php:77
 #: www/admin/unsubscribe.php:87 www/admin/useredit.php:119
-#: www/admin/userlist.php:72 www/admin/userlist.php:245 www/admin/vhost.php:200
-#: www/docman/d_follow.php:45 www/export/rss20_projects.php:40
-#: www/export/rss20_tasks.php:132 www/export/rssAboTask.php:140
-#: www/export/rssAboTask.php:141 www/export/rssAboTask.php:142
-#: www/export/rssAboTask.php:143 www/export/rssAboTask.php:144
-#: www/export/rssAboTask.php:167 www/export/rssAboTask.php:169
-#: www/export/rssAboTask.php:171 www/export/rss_project.php:86
-#: www/export/rss_project.php:97 www/export/rss_project.php:103
-#: www/export/rss_project.php:109 www/export/rss_project.php:115
-#: www/export/rss_project.php:121 www/forum/admin/index.php:156
-#: www/forum/admin/pendingmsgdetail.php:59 www/forum/forum.php:58
-#: www/forum/forum.php:95 www/forum/forum.php:160 www/forum/message.php:128
-#: www/frs/r_follow.php:45 www/include/features_boxes.php:152
-#: www/include/features_boxes.php:162 www/include/html.php:1168
-#: www/include/html.php:1171 www/include/html.php:1184
-#: www/include/user_home.php:64 www/new/index.php:92 www/new/index.php:97
-#: www/new/index.php:99 www/news/admin/index.php:94
+#: www/admin/userlist.php:72 www/admin/userlist.php:245 www/admin/vhost.php:74
+#: www/admin/vhost.php:105 www/admin/vhost.php:201 www/docman/d_follow.php:45
+#: www/export/rss20_projects.php:40 www/export/rss20_tasks.php:132
+#: www/export/rssAboTask.php:140 www/export/rssAboTask.php:141
+#: www/export/rssAboTask.php:142 www/export/rssAboTask.php:143
+#: www/export/rssAboTask.php:144 www/export/rssAboTask.php:167
+#: www/export/rssAboTask.php:169 www/export/rssAboTask.php:171
+#: www/export/rss_project.php:86 www/export/rss_project.php:97
+#: www/export/rss_project.php:103 www/export/rss_project.php:109
+#: www/export/rss_project.php:115 www/export/rss_project.php:121
+#: www/forum/admin/index.php:156 www/forum/admin/pendingmsgdetail.php:59
+#: www/forum/forum.php:58 www/forum/forum.php:95 www/forum/forum.php:160
+#: www/forum/message.php:128 www/frs/r_follow.php:45
+#: www/include/features_boxes.php:152 www/include/features_boxes.php:162
+#: www/include/html.php:1168 www/include/html.php:1171
+#: www/include/html.php:1184 www/include/user_home.php:64 www/new/index.php:92
+#: www/new/index.php:97 www/new/index.php:99 www/news/admin/index.php:94
 #: www/news/admin/index.php:129 www/news/admin/index.php:135
 #: www/news/admin/index.php:141 www/news/admin/index.php:145
-#: www/news/submit.php:109 www/news/submit.php:117 www/news/submit.php:131
-#: www/news/submit.php:150 www/news/submit.php:152 www/news/submit.php:156
+#: www/news/submit.php:109 www/news/submit.php:117 www/news/submit.php:125
+#: www/news/submit.php:144 www/news/submit.php:146 www/news/submit.php:150
 #: www/people/admin/index.php:54 www/people/admin/index.php:67
 #: www/people/editjob.php:63 www/people/editjob.php:82
 #: www/people/editjob.php:101 www/people/editjob.php:117
@@ -1235,7 +1239,7 @@ msgstr ""
 #: www/project/admin/roledelete.php:66 www/project/admin/roledelete.php:73
 #: www/project/admin/vhost.php:61 www/project/admin/vhost.php:100
 #: www/register/index.php:150 www/register/index.php:191
-#: www/reporting/timeadd.php:73 www/scm/admin/index.php:192
+#: www/reporting/timeadd.php:73 www/scm/admin/index.php:213
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:102
 #: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:108
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
@@ -1891,11 +1895,8 @@ msgstr ""
 #: plugins/oauthprovider/www/consumer.php:109
 #: plugins/oauthprovider/www/consumer_manage.php:63
 #: plugins/oauthprovider/www/consumer_update_page.php:64
-#: plugins/scmgit/common/GitPlugin.class.php:1198
-#: plugins/scmhook/common/scmhookPlugin.class.php:333
-#: plugins/scmhook/common/scmhookPlugin.class.php:399
-#: plugins/scmhook/common/scmhookPlugin.class.php:449
-#: plugins/scmhook/common/scmhookPlugin.class.php:499
+#: plugins/scmgit/common/GitPlugin.class.php:1205
+#: plugins/scmhg/common/HgPlugin.class.php:931
 #: plugins/taskboard/common/views/admin/ind.php:56
 #: plugins/taskboard/common/views/admin/trackers.php:95
 #: plugins/taskboard/common/views/ind.php:48 www/forum/admin/index.php:115
@@ -3087,7 +3088,7 @@ msgstr ""
 #: common/tracker/actions/mod-limited.php:141
 #: common/tracker/actions/mod.php:186 common/tracker/actions/query.php:367
 #: common/tracker/views/form-customizelist.php:45
-#: common/widget/Widget_TrackerMain.class.php:107 www/pm/browse_task.php:358
+#: common/widget/Widget_TrackerMain.class.php:110 www/pm/browse_task.php:358
 msgid "State"
 msgstr ""
 
@@ -3797,14 +3798,16 @@ msgstr ""
 #: plugins/oauthprovider/www/request_tokens.php:100
 #: plugins/oauthprovider/www/request_tokens.php:103
 #: plugins/oauthprovider/www/request_tokens.php:108
-#: plugins/scmgit/common/GitPlugin.class.php:1172
-#: plugins/scmgit/common/GitPlugin.class.php:1184
+#: plugins/scmgit/common/GitPlugin.class.php:1178
+#: plugins/scmgit/common/GitPlugin.class.php:1190
+#: plugins/scmhg/common/HgPlugin.class.php:906
+#: plugins/scmhg/common/HgPlugin.class.php:916
 #: plugins/taskboard/common/views/admin/delete_column.php:50
 #: plugins/taskboard/common/views/admin/delete_taskboard.php:43
 #: plugins/taskboard/common/views/releases/delete_release.php:52
 #: www/admin/admin_table.php:158 www/admin/admin_table.php:313
 #: www/admin/massmail.php:164 www/admin/responses_admin.php:47
-#: www/admin/trove/trove_cat_edit.php:150 www/admin/useredit.php:234
+#: www/admin/trove/trove_cat_edit.php:150 www/admin/useredit.php:235
 #: www/admin/userlist.php:149 www/admin/userlist.php:151
 #: www/forum/admin/index.php:180 www/news/admin/index.php:137
 #: www/people/people_utils.php:187 www/people/people_utils.php:334
@@ -3883,53 +3886,53 @@ msgstr ""
 msgid "File Updated Successfully"
 msgstr ""
 
-#: common/forum/Forum.class.php:166 common/forum/Forum.class.php:533
+#: common/forum/Forum.class.php:166 common/forum/Forum.class.php:532
 msgid "Forum name must be at least 3 characters."
 msgstr ""
 
-#: common/forum/Forum.class.php:170 common/forum/Forum.class.php:537
+#: common/forum/Forum.class.php:170 common/forum/Forum.class.php:536
 msgid "Forum description must be at least 10 characters."
 msgstr ""
 
 #: common/forum/Forum.class.php:175 common/forum/Forum.class.php:177
-#: common/forum/Forum.class.php:542 common/forum/Forum.class.php:544
+#: common/forum/Forum.class.php:541 common/forum/Forum.class.php:543
 msgid "Illegal characters in Forum name."
 msgstr ""
 
-#: common/forum/Forum.class.php:175 common/forum/Forum.class.php:542
+#: common/forum/Forum.class.php:175 common/forum/Forum.class.php:541
 msgid "No space allowed."
 msgstr ""
 
-#: common/forum/Forum.class.php:197 common/forum/Forum.class.php:569
+#: common/forum/Forum.class.php:197 common/forum/Forum.class.php:568
 msgid "Mailing List exists with same name."
 msgstr ""
 
-#: common/forum/Forum.class.php:224
+#: common/forum/Forum.class.php:223
 msgid "Error Adding Forum"
 msgstr ""
 
-#: common/forum/Forum.class.php:235 cronjobs/shell/homedirs.php:159
+#: common/forum/Forum.class.php:234 cronjobs/shell/homedirs.php:159
 #: www/account/first.php:30
 #, php-format
 msgid "Welcome to %s"
 msgstr ""
 
-#: common/forum/Forum.class.php:259
+#: common/forum/Forum.class.php:258
 msgid "Invalid forum group identifier."
 msgstr ""
 
-#: common/forum/Forum.class.php:432 common/forum/Forum.class.php:454
+#: common/forum/Forum.class.php:431 common/forum/Forum.class.php:453
 #: common/frs/FRSPackage.class.php:315 common/frs/FRSPackage.class.php:333
 #: common/tracker/Artifact.class.php:638
 #: common/tracker/ArtifactType.class.php:575
 msgid "You can only monitor if you are logged in."
 msgstr ""
 
-#: common/forum/Forum.class.php:487
+#: common/forum/Forum.class.php:486
 msgid "You can only save your place if you are logged in."
 msgstr ""
 
-#: common/forum/Forum.class.php:586 common/survey/Survey.class.php:201
+#: common/forum/Forum.class.php:585 common/survey/Survey.class.php:201
 #: common/survey/Survey.class.php:239
 #: common/survey/SurveyQuestion.class.php:145
 #: common/tracker/Artifact.class.php:1191
@@ -3950,7 +3953,7 @@ msgstr ""
 msgid "Update failed"
 msgstr ""
 
-#: common/forum/Forum.class.php:601 common/frs/FRSPackage.class.php:510
+#: common/forum/Forum.class.php:600 common/frs/FRSPackage.class.php:510
 #: common/frs/FRSRelease.class.php:397 common/include/Group.class.php:1778
 #: common/mail/MailingList.class.php:402 common/pm/ProjectGroup.class.php:378
 #: common/pm/ProjectTask.class.php:512 common/tracker/Artifact.class.php:573
@@ -3959,9 +3962,9 @@ msgstr ""
 msgid "Please tick all checkboxes."
 msgstr ""
 
-#: common/forum/Forum.class.php:612 common/forum/Forum.class.php:620
-#: common/forum/Forum.class.php:628 common/forum/Forum.class.php:636
-#: common/forum/Forum.class.php:645 common/forum/Forum.class.php:653
+#: common/forum/Forum.class.php:611 common/forum/Forum.class.php:619
+#: common/forum/Forum.class.php:627 common/forum/Forum.class.php:635
+#: common/forum/Forum.class.php:644 common/forum/Forum.class.php:652
 msgid "Error Deleting Forum"
 msgstr ""
 
@@ -4089,16 +4092,16 @@ msgstr ""
 #: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:83
 #: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:89
 #: plugins/webanalytics/view/admin/updateLinkValue.php:45
-#: www/account/index.php:316 www/account/lostlogin.php:107
+#: www/account/index.php:316 www/account/lostlogin.php:106
 #: www/admin/groupedit.php:226 www/admin/trove/trove_cat_edit.php:150
-#: www/admin/useredit.php:239 www/admin/useredit.php:314
+#: www/admin/useredit.php:240 www/admin/useredit.php:315
 #: www/admin/vhost.php:193 www/forum/admin/index.php:160
 #: www/mail/admin/index.php:234 www/mail/admin/index.php:285
 #: www/people/people_utils.php:186 www/people/people_utils.php:333
 #: www/pm/admin/index.php:342 www/pm/calendar.php:289
 #: www/project/admin/index.php:310 www/project/admin/tools.php:331
 #: www/reporting/customstatus.php:105 www/reporting/timecategory.php:100
-#: www/scm/admin/index.php:198
+#: www/scm/admin/index.php:220
 msgid "Update"
 msgstr ""
 
@@ -4285,9 +4288,9 @@ msgstr ""
 
 #: common/forum/ForumHTML.class.php:509 common/forum/ForumHTML.class.php:571
 #: plugins/forumml/www/index.php:110 www/admin/massmail.php:128
-#: www/admin/massmail.php:150 www/admin/pending-news.php:147
+#: www/admin/massmail.php:150 www/admin/pending-news.php:143
 #: www/developer/diary.php:82 www/news/admin/index.php:141
-#: www/news/admin/news_admin_utils.php:64 www/news/submit.php:152
+#: www/news/admin/news_admin_utils.php:64 www/news/submit.php:146
 #: www/sendmessage.php:76 www/sendmessage.php:171
 msgid "Subject"
 msgstr ""
@@ -4312,7 +4315,8 @@ msgstr ""
 #: plugins/headermenu/view/admin/updateLinkValue.php:108
 #: plugins/oauthconsumer/www/provider_edit.php:28
 #: plugins/oauthprovider/www/consumer_update_page.php:50
-#: plugins/scmgit/common/GitPlugin.class.php:1203
+#: plugins/scmgit/common/GitPlugin.class.php:1209
+#: plugins/scmhg/common/HgPlugin.class.php:933
 #: plugins/taskboard/common/views/taskboard.php:397
 #: plugins/webanalytics/view/admin/updateLinkValue.php:46
 #: www/admin/admin_table.php:58 www/admin/admin_table.php:159
@@ -4481,8 +4485,8 @@ msgstr ""
 #: common/frs/FRSFile.class.php:419 common/frs/FRSPackage.class.php:432
 #: common/frs/FRSRelease.class.php:465 common/frs/FRSRelease.class.php:484
 #: common/include/FFError.class.php:167 common/mail/MailingList.class.php:264
-#: common/pm/ProjectGroup.class.php:363 www/admin/pending-news.php:78
-#: www/admin/pending-news.php:88 www/admin/pending-news.php:108
+#: common/pm/ProjectGroup.class.php:363 www/admin/pending-news.php:74
+#: www/admin/pending-news.php:84 www/admin/pending-news.php:104
 #: www/news/admin/index.php:94
 msgid "Error On Update"
 msgstr ""
@@ -5193,12 +5197,12 @@ msgstr ""
 #: plugins/oauthprovider/www/consumer_update_page.php:54
 #: plugins/scmcvs/common/CVSPlugin.class.php:176
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:184
-#: plugins/scmgit/common/GitPlugin.class.php:345
-#: plugins/scmhg/common/HgPlugin.class.php:199
-#: plugins/scmsvn/common/SVNPlugin.class.php:239
+#: plugins/scmgit/common/GitPlugin.class.php:352
+#: plugins/scmhg/common/HgPlugin.class.php:222
+#: plugins/scmsvn/common/SVNPlugin.class.php:249
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:32
 #: www/account/editsshkeys.php:50 www/account/index.php:292
-#: www/admin/useredit.php:265 www/admin/useredit.php:293
+#: www/admin/useredit.php:266 www/admin/useredit.php:294
 #: www/project/admin/editimages.php:268 www/reporting/usersummary.php:103
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:42
 #: www/sendmessage.php:76
@@ -5282,7 +5286,7 @@ msgid "D/L"
 msgstr ""
 
 #: common/frs/views/listpackages.php:188
-#: plugins/scmarch/common/ArchPlugin.class.php:31
+#: plugins/scmarch/common/ArchPlugin.class.php:32
 msgid "Arch"
 msgstr ""
 
@@ -6383,8 +6387,8 @@ msgid "Admin"
 msgstr ""
 
 #: common/include/Navigation.class.php:410 www/admin/approve-pending.php:140
-#: www/admin/groupedit.php:101 www/admin/useredit.php:279
-#: www/admin/useredit.php:307
+#: www/admin/groupedit.php:101 www/admin/useredit.php:280
+#: www/admin/useredit.php:308
 msgid "Project Admin"
 msgstr ""
 
@@ -6630,20 +6634,20 @@ msgstr ""
 msgid "Not implemented for this SCM plugin yet."
 msgstr ""
 
-#: common/include/SCMPlugin.class.php:223
+#: common/include/SCMPlugin.class.php:226
 #: common/widget/Widget_ProjectScmStats.class.php:38
 msgid "Repository History"
 msgstr ""
 
-#: common/include/SCMPlugin.class.php:225
+#: common/include/SCMPlugin.class.php:228
 msgid "Data about current and past states of the repository."
 msgstr ""
 
-#: common/include/SCMPlugin.class.php:259
+#: common/include/SCMPlugin.class.php:269
 msgid "Enable Anonymous Read Access"
 msgstr ""
 
-#: common/include/SCMPlugin.class.php:305
+#: common/include/SCMPlugin.class.php:318
 #, php-format
 msgid "No repository %s exists"
 msgstr ""
@@ -6782,7 +6786,7 @@ msgid "Error: Cannot Update User Status:"
 msgstr ""
 
 #: common/include/User.class.php:860 common/include/User.class.php:865
-#: common/include/User.class.php:1450
+#: common/include/User.class.php:1453
 msgid "MD5 obsoleted"
 msgstr ""
 
@@ -6799,24 +6803,24 @@ msgstr ""
 msgid "Error: Cannot Update User Unix Shell:"
 msgstr ""
 
-#: common/include/User.class.php:1253
+#: common/include/User.class.php:1256
 msgid "SSH Key already in use"
 msgstr ""
 
-#: common/include/User.class.php:1261
+#: common/include/User.class.php:1264
 msgid "Error - Could Not Add User SSH Key:"
 msgstr ""
 
-#: common/include/User.class.php:1277
+#: common/include/User.class.php:1280
 msgid "Error: Cannot delete user SSH key"
 msgstr ""
 
-#: common/include/User.class.php:1421 common/include/User.class.php:1450
-#: common/include/User.class.php:1468
+#: common/include/User.class.php:1424 common/include/User.class.php:1453
+#: common/include/User.class.php:1471
 msgid "Error: Cannot Change User Password:"
 msgstr ""
 
-#: common/include/User.class.php:1724
+#: common/include/User.class.php:1727
 #, php-format
 msgid ""
 "New User %1$s registered and validated\n"
@@ -6824,24 +6828,24 @@ msgid ""
 "Email: %3$s\n"
 msgstr ""
 
-#: common/include/User.class.php:1729
+#: common/include/User.class.php:1732
 #, php-format
 msgid "New %1$s User"
 msgstr ""
 
-#: common/include/User.class.php:1786
+#: common/include/User.class.php:1789
 msgid "Cannot Update list of uneditable fields: not an array"
 msgstr ""
 
-#: common/include/User.class.php:1794
+#: common/include/User.class.php:1797
 msgid "Cannot Update list of uneditable fields"
 msgstr ""
 
-#: common/include/User.class.php:1809
+#: common/include/User.class.php:1812
 msgid "Cannot Update list of hidden fields: not an array"
 msgstr ""
 
-#: common/include/User.class.php:1817
+#: common/include/User.class.php:1820
 msgid "Cannot Update list of hidden fields"
 msgstr ""
 
@@ -6946,7 +6950,7 @@ msgstr ""
 #: common/widget/Widget_TrackerContent.class.php:695
 #: common/widget/Widget_TrackerDefaultActions.class.php:114
 #: common/widget/Widget_TrackerGeneral.class.php:121
-#: common/widget/Widget_TrackerMain.class.php:157
+#: common/widget/Widget_TrackerMain.class.php:163
 #: common/widget/Widget_TrackerSummary.class.php:128
 #: plugins/blocks/www/index.php:154 www/export/rss20_activity.php:120
 #: www/export/rss20_activity.php:127 www/index_std.php:100
@@ -7374,24 +7378,24 @@ msgstr ""
 msgid "URI:"
 msgstr ""
 
-#: common/include/utils.php:213 common/mail/Mail.class.php:38
+#: common/include/utils.php:165 common/mail/Mail.class.php:38
 msgid "UTF-8"
 msgstr ""
 
-#: common/include/utils.php:504
+#: common/include/utils.php:456
 msgid "Priority Colors"
 msgstr ""
 
-#: common/include/utils.php:774 common/include/utils.php:778
-#: common/include/utils.php:789
+#: common/include/utils.php:726 common/include/utils.php:730
+#: common/include/utils.php:741
 msgid "bytes"
 msgstr ""
 
-#: common/include/utils.php:774 common/include/utils.php:789
+#: common/include/utils.php:726 common/include/utils.php:741
 msgid "kB"
 msgstr ""
 
-#: common/include/utils.php:774 plugins/quota_management/www/quota.php:245
+#: common/include/utils.php:726 plugins/quota_management/www/quota.php:245
 #: plugins/quota_management/www/quota.php:249
 #: plugins/quota_management/www/quota.php:253
 #: plugins/quota_management/www/quota.php:257
@@ -7418,35 +7422,35 @@ msgstr ""
 msgid "MB"
 msgstr ""
 
-#: common/include/utils.php:774
+#: common/include/utils.php:726
 msgid "GB"
 msgstr ""
 
-#: common/include/utils.php:774
+#: common/include/utils.php:726
 msgid "TB"
 msgstr ""
 
-#: common/include/utils.php:778 common/include/utils.php:789
+#: common/include/utils.php:730 common/include/utils.php:741
 msgid "KiB"
 msgstr ""
 
-#: common/include/utils.php:778
+#: common/include/utils.php:730
 msgid "MiB"
 msgstr ""
 
-#: common/include/utils.php:778
+#: common/include/utils.php:730
 msgid "GiB"
 msgstr ""
 
-#: common/include/utils.php:778
+#: common/include/utils.php:730
 msgid "TiB"
 msgstr ""
 
-#: common/include/utils.php:1201
+#: common/include/utils.php:1153
 msgid "Error: a mailing list with the same email address already exists."
 msgstr ""
 
-#: common/include/utils.php:1219
+#: common/include/utils.php:1171
 msgid "Error: a forum with the same email address already exists."
 msgstr ""
 
@@ -7979,7 +7983,8 @@ msgstr ""
 #: common/tracker/actions/mod.php:161
 #: common/tracker/include/build_submission_form.php:64
 #: common/tracker/views/form-customizelist.php:47
-#: common/widget/Widget_TrackerMain.class.php:89
+#: common/widget/Widget_TrackerMain.class.php:90
+#: common/widget/Widget_TrackerMain.class.php:104
 #: cronjobs/db/send_pending_items_mail.php:119
 #: plugins/mantisbt/controler/filter.php:139
 #: plugins/mantisbt/view/addIssue.php:61
@@ -8030,7 +8035,7 @@ msgid "Nothing Changed - Update Cancelled"
 msgstr ""
 
 #: common/tracker/Artifact.class.php:1293
-#: plugins/taskboard/common/adapters/TaskBoardBasicAdapter.class.php:387
+#: plugins/taskboard/common/adapters/TaskBoardBasicAdapter.class.php:388
 msgid "Error updating assigned_to in artifact"
 msgstr ""
 
@@ -8737,7 +8742,9 @@ msgstr ""
 #: plugins/forumml/www/forumml_utils.php:596 plugins/forumml/www/index.php:126
 #: plugins/mantisbt/view/addIssue.php:133
 #: plugins/mantisbt/view/addOrEditNote.php:60
-#: plugins/scmgit/common/GitPlugin.class.php:1204
+#: plugins/scmgit/common/GitPlugin.class.php:1210
+#: plugins/scmhg/common/HgPlugin.class.php:934
+#: plugins/scmhook/common/scmhookPlugin.class.php:222
 #: plugins/taskboard/common/views/admin/columns.php:94
 #: plugins/taskboard/common/views/admin/edit_column.php:102
 #: plugins/taskboard/common/views/admin/init.php:72
@@ -8746,11 +8753,11 @@ msgstr ""
 #: plugins/taskboard/common/views/releases/edit_release.php:103
 #: www/account/pending-resend.php:72 www/admin/admin_table.php:215
 #: www/admin/cronman.php:39 www/admin/globalroleedit.php:231
-#: www/admin/index.php:162 www/admin/pending-news.php:162
+#: www/admin/index.php:162 www/admin/pending-news.php:158
 #: www/forum/admin/index.php:407 www/include/vote_function.php:284
 #: www/my/bookmark_add.php:56 www/my/bookmark_edit.php:68 www/my/diary.php:200
 #: www/news/admin/index.php:165 www/news/news_utils.php:49
-#: www/news/submit.php:169 www/people/admin/index.php:113
+#: www/news/submit.php:163 www/people/admin/index.php:113
 #: www/people/admin/index.php:151 www/pm/add_task.php:53
 #: www/pm/add_task.php:106 www/pm/admin/index.php:211
 #: www/pm/admin/index.php:255 www/pm/admin/index.php:284 www/pm/csv.php:91
@@ -9050,7 +9057,8 @@ msgstr ""
 #: common/tracker/include/build_submission_form.php:74
 #: common/tracker/views/form-customizelist.php:46
 #: common/widget/Widget_ProjectLatestArtifacts.class.php:71
-#: common/widget/Widget_TrackerMain.class.php:125
+#: common/widget/Widget_TrackerMain.class.php:129
+#: common/widget/Widget_TrackerMain.class.php:143
 #: plugins/mantisbt/view/addIssue.php:60
 #: plugins/mantisbt/view/editIssue.php:114
 #: plugins/mantisbt/view/viewIssue.php:87
@@ -9206,7 +9214,7 @@ msgstr ""
 #: cronjobs/db/send_pending_items_mail.php:79
 #: cronjobs/db/send_pending_items_mail.php:120
 #: plugins/mantisbt/controler/filter.php:123 www/admin/approve-pending.php:215
-#: www/admin/pending-news.php:141 www/my/dashboard.php:84
+#: www/admin/pending-news.php:137 www/my/dashboard.php:84
 #: www/news/admin/index.php:129 www/pm/detail_task.php:40
 #: www/pm/mod_task.php:55
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:56
@@ -9391,7 +9399,7 @@ msgstr ""
 #: common/tracker/actions/query.php:272
 #: common/widget/Widget_TrackerComment.class.php:195
 #: common/widget/Widget_TrackerContent.class.php:689
-#: common/widget/Widget_TrackerMain.class.php:143
+#: common/widget/Widget_TrackerMain.class.php:149
 #: common/widget/Widget_TrackerSummary.class.php:114
 msgid "Save Changes"
 msgstr ""
@@ -9672,10 +9680,10 @@ msgstr ""
 #: plugins/scmcvs/common/CVSPlugin.class.php:196
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:198
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:219
-#: plugins/scmgit/common/GitPlugin.class.php:359
-#: plugins/scmgit/common/GitPlugin.class.php:380
-#: plugins/scmhg/common/HgPlugin.class.php:219
-#: plugins/scmsvn/common/SVNPlugin.class.php:259 www/pm/index.php:79
+#: plugins/scmgit/common/GitPlugin.class.php:366
+#: plugins/scmgit/common/GitPlugin.class.php:387
+#: plugins/scmhg/common/HgPlugin.class.php:242
+#: plugins/scmsvn/common/SVNPlugin.class.php:269 www/pm/index.php:79
 #: www/pm/mod_task.php:313 www/stats/site_stats_utils.php:270
 msgid "Total"
 msgstr ""
@@ -10245,7 +10253,7 @@ msgid ""
 "If you <strong>cannot</strong> login, then enter your email address here"
 msgstr ""
 
-#: common/tracker/include/build_submission_form.php:51 www/news/submit.php:150
+#: common/tracker/include/build_submission_form.php:51 www/news/submit.php:144
 #: www/people/viewjob.php:79
 msgid "For project"
 msgstr ""
@@ -12022,8 +12030,8 @@ msgstr ""
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:197
 #: plugins/scmgit/www/index.php:61 plugins/scmgit/www/index.php:76
-#: www/register/index.php:257 www/scm/admin/index.php:146
-#: www/scm/admin/index.php:175 www/scm/browser.php:31 www/scm/viewvc.php:189
+#: www/register/index.php:257 www/scm/admin/index.php:166
+#: www/scm/admin/index.php:195 www/scm/browser.php:31 www/scm/viewvc.php:189
 msgid "SCM Repository"
 msgstr ""
 
@@ -12142,7 +12150,7 @@ msgstr ""
 
 #: common/widget/Widget_TrackerComment.class.php:195
 #: common/widget/Widget_TrackerContent.class.php:689
-#: common/widget/Widget_TrackerMain.class.php:143
+#: common/widget/Widget_TrackerMain.class.php:149
 #: common/widget/Widget_TrackerSummary.class.php:114
 msgid "Save is validating the complete form"
 msgstr ""
@@ -12281,9 +12289,9 @@ msgstr ""
 msgid "The item #%s is pending"
 msgstr ""
 
-#: cronjobs/db/send_pending_items_mail.php:121 www/admin/pending-news.php:149
+#: cronjobs/db/send_pending_items_mail.php:121 www/admin/pending-news.php:145
 #: www/export/rssAboTask.php:144 www/my/diary.php:193
-#: www/news/admin/index.php:145 www/news/submit.php:156
+#: www/news/admin/index.php:145 www/news/submit.php:150
 msgid "Details"
 msgstr ""
 
@@ -12338,14 +12346,10 @@ msgid "forge not using vhost"
 msgstr ""
 
 #: cronjobs/web-vhosts/create_vhosts.php:41
-msgid "Unable to get list of projects with vhost: "
+msgid "Unable to get list of projects with vhost"
 msgstr ""
 
-#: cronjobs/web-vhosts/create_vhosts.php:44
-msgid "httpd server not restarted"
-msgstr ""
-
-#: cronjobs/web-vhosts/create_vhosts.php:67
+#: cronjobs/web-vhosts/create_vhosts.php:66
 msgid " vhost created."
 msgstr ""
 
@@ -13329,7 +13333,7 @@ msgstr ""
 #: plugins/oauthprovider/www/consumer_manage.php:68
 #: plugins/oauthprovider/www/consumer_update_page.php:69
 #: www/admin/search.php:77 www/admin/unsubscribe.php:105
-#: www/admin/useredit.php:214 www/forum/admin/monitor.php:66
+#: www/admin/useredit.php:215 www/forum/admin/monitor.php:66
 #: www/sendmessage.php:76
 msgid "Email"
 msgstr ""
@@ -17609,20 +17613,20 @@ msgstr ""
 msgid "This plugin provides a REST API for FusionForge."
 msgstr ""
 
-#: plugins/scmarch/common/ArchPlugin.class.php:33
+#: plugins/scmarch/common/ArchPlugin.class.php:34
 msgid ""
 "This plugin contains the GNU Arch subsystem of FusionForge. It allows\n"
 "each FusionForge project to have its own Arch repository, and gives\n"
 "some control over it to the project's administrator."
 msgstr ""
 
-#: plugins/scmarch/common/ArchPlugin.class.php:47
+#: plugins/scmarch/common/ArchPlugin.class.php:48
 #: plugins/scmbzr/common/BzrPlugin.class.php:82
-#: plugins/scmcvs/common/CVSPlugin.class.php:76
+#: plugins/scmcvs/common/CVSPlugin.class.php:77
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:93
-#: plugins/scmgit/common/GitPlugin.class.php:91
-#: plugins/scmhg/common/HgPlugin.class.php:66
-#: plugins/scmsvn/common/SVNPlugin.class.php:97
+#: plugins/scmgit/common/GitPlugin.class.php:90
+#: plugins/scmhg/common/HgPlugin.class.php:68
+#: plugins/scmsvn/common/SVNPlugin.class.php:96
 #, php-format
 msgid "Documentation for %1$s is available at <a href=\"%2$s\">%2$s</a>."
 msgstr ""
@@ -17641,9 +17645,9 @@ msgstr ""
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:76
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:87
-#: plugins/scmgit/common/GitPlugin.class.php:86
-#: plugins/scmhg/common/HgPlugin.class.php:247
-#: plugins/scmsvn/common/SVNPlugin.class.php:91
+#: plugins/scmgit/common/GitPlugin.class.php:85
+#: plugins/scmhg/common/HgPlugin.class.php:270
+#: plugins/scmsvn/common/SVNPlugin.class.php:90
 #, php-format
 msgid "<strong>%1$s</strong> updates, <strong>%2$s</strong> adds"
 msgstr ""
@@ -17662,8 +17666,8 @@ msgstr ""
 #: plugins/scmbzr/common/BzrPlugin.class.php:119
 #: plugins/scmcpold/common/CpoldPlugin.class.php:75
 #: plugins/scmcpold/common/CpoldPlugin.class.php:87
-#: plugins/scmcvs/common/CVSPlugin.class.php:102
-#: plugins/scmcvs/common/CVSPlugin.class.php:119
+#: plugins/scmcvs/common/CVSPlugin.class.php:103
+#: plugins/scmcvs/common/CVSPlugin.class.php:120
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:133
 #, php-format
 msgid "Developer %s Access via SSH"
@@ -17673,10 +17677,10 @@ msgstr ""
 #: plugins/scmbzr/common/BzrPlugin.class.php:122
 #: plugins/scmcpold/common/CpoldPlugin.class.php:78
 #: plugins/scmcpold/common/CpoldPlugin.class.php:90
-#: plugins/scmcvs/common/CVSPlugin.class.php:105
-#: plugins/scmcvs/common/CVSPlugin.class.php:122
+#: plugins/scmcvs/common/CVSPlugin.class.php:106
+#: plugins/scmcvs/common/CVSPlugin.class.php:123
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:136
-#: plugins/scmsvn/common/SVNPlugin.class.php:142
+#: plugins/scmsvn/common/SVNPlugin.class.php:139
 #, php-format
 msgid "Only project developers can access the %s tree via this method."
 msgstr ""
@@ -17685,15 +17689,15 @@ msgstr ""
 #: plugins/scmbzr/common/BzrPlugin.class.php:124
 #: plugins/scmcpold/common/CpoldPlugin.class.php:80
 #: plugins/scmcpold/common/CpoldPlugin.class.php:92
-#: plugins/scmcvs/common/CVSPlugin.class.php:107
-#: plugins/scmcvs/common/CVSPlugin.class.php:124
+#: plugins/scmcvs/common/CVSPlugin.class.php:108
+#: plugins/scmcvs/common/CVSPlugin.class.php:125
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:138
-#: plugins/scmgit/common/GitPlugin.class.php:181
-#: plugins/scmgit/common/GitPlugin.class.php:207
-#: plugins/scmhg/common/HgPlugin.class.php:119
-#: plugins/scmhg/common/HgPlugin.class.php:147
-#: plugins/scmsvn/common/SVNPlugin.class.php:160
-#: plugins/scmsvn/common/SVNPlugin.class.php:183
+#: plugins/scmgit/common/GitPlugin.class.php:180
+#: plugins/scmgit/common/GitPlugin.class.php:210
+#: plugins/scmhg/common/HgPlugin.class.php:124
+#: plugins/scmhg/common/HgPlugin.class.php:157
+#: plugins/scmsvn/common/SVNPlugin.class.php:157
+#: plugins/scmsvn/common/SVNPlugin.class.php:184
 msgid "SSH must be installed on your client machine."
 msgstr ""
 
@@ -17701,17 +17705,17 @@ msgstr ""
 #: plugins/scmbzr/common/BzrPlugin.class.php:128
 #: plugins/scmcpold/common/CpoldPlugin.class.php:82
 #: plugins/scmcpold/common/CpoldPlugin.class.php:96
-#: plugins/scmcvs/common/CVSPlugin.class.php:111
-#: plugins/scmcvs/common/CVSPlugin.class.php:128
+#: plugins/scmcvs/common/CVSPlugin.class.php:112
+#: plugins/scmcvs/common/CVSPlugin.class.php:129
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:142
-#: plugins/scmgit/common/GitPlugin.class.php:191
-#: plugins/scmgit/common/GitPlugin.class.php:223
-#: plugins/scmhg/common/HgPlugin.class.php:131
-#: plugins/scmhg/common/HgPlugin.class.php:165
-#: plugins/scmsvn/common/SVNPlugin.class.php:162
-#: plugins/scmsvn/common/SVNPlugin.class.php:174
-#: plugins/scmsvn/common/SVNPlugin.class.php:187
-#: plugins/scmsvn/common/SVNPlugin.class.php:201
+#: plugins/scmgit/common/GitPlugin.class.php:194
+#: plugins/scmgit/common/GitPlugin.class.php:230
+#: plugins/scmhg/common/HgPlugin.class.php:141
+#: plugins/scmhg/common/HgPlugin.class.php:179
+#: plugins/scmsvn/common/SVNPlugin.class.php:159
+#: plugins/scmsvn/common/SVNPlugin.class.php:175
+#: plugins/scmsvn/common/SVNPlugin.class.php:188
+#: plugins/scmsvn/common/SVNPlugin.class.php:206
 msgid "Enter your site password when prompted."
 msgstr ""
 
@@ -17722,25 +17726,28 @@ msgstr ""
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:126
 #: plugins/scmcpold/common/CpoldPlugin.class.php:94
-#: plugins/scmcvs/common/CVSPlugin.class.php:109
-#: plugins/scmcvs/common/CVSPlugin.class.php:126
+#: plugins/scmcvs/common/CVSPlugin.class.php:110
+#: plugins/scmcvs/common/CVSPlugin.class.php:127
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:140
-#: plugins/scmgit/common/GitPlugin.class.php:208
-#: plugins/scmhg/common/HgPlugin.class.php:148
-#: plugins/scmsvn/common/SVNPlugin.class.php:185
-#: plugins/scmsvn/common/SVNPlugin.class.php:199
+#: plugins/scmgit/common/GitPlugin.class.php:211
+#: plugins/scmhg/common/HgPlugin.class.php:158
+#: plugins/scmsvn/common/SVNPlugin.class.php:186
+#: plugins/scmsvn/common/SVNPlugin.class.php:204
 msgid "Substitute <em>developername</em> with the proper value."
 msgstr ""
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:130
 #: plugins/scmcpold/common/CpoldPlugin.class.php:98
-#: plugins/scmcvs/common/CVSPlugin.class.php:132
-#: plugins/scmgit/common/GitPlugin.class.php:211
-#: plugins/scmgit/common/GitPlugin.class.php:226
-#: plugins/scmhg/common/HgPlugin.class.php:153
-#: plugins/scmhg/common/HgPlugin.class.php:168
-#: plugins/scmsvn/common/SVNPlugin.class.php:193
-#: plugins/scmsvn/common/SVNPlugin.class.php:203
+#: plugins/scmcvs/common/CVSPlugin.class.php:133
+#: plugins/scmgit/common/GitPlugin.class.php:215
+#: plugins/scmgit/common/GitPlugin.class.php:217
+#: plugins/scmgit/common/GitPlugin.class.php:233
+#: plugins/scmhg/common/HgPlugin.class.php:164
+#: plugins/scmhg/common/HgPlugin.class.php:166
+#: plugins/scmhg/common/HgPlugin.class.php:182
+#: plugins/scmsvn/common/SVNPlugin.class.php:195
+#: plugins/scmsvn/common/SVNPlugin.class.php:197
+#: plugins/scmsvn/common/SVNPlugin.class.php:208
 msgid "developername"
 msgstr ""
 
@@ -17751,7 +17758,7 @@ msgstr ""
 #: plugins/scmbzr/common/BzrPlugin.class.php:142
 #: plugins/scmccase/common/CCasePlugin.class.php:116
 #: plugins/scmcvs/common/CVSPlugin.class.php:155
-#: plugins/scmsvn/common/SVNPlugin.class.php:218
+#: plugins/scmsvn/common/SVNPlugin.class.php:228
 #, php-format
 msgid ""
 "Browsing the %s tree gives you a view into the current status of this "
@@ -17761,13 +17768,13 @@ msgstr ""
 #: plugins/scmbzr/common/BzrPlugin.class.php:144
 #: plugins/scmccase/common/CCasePlugin.class.php:118
 #: plugins/scmcvs/common/CVSPlugin.class.php:157
-#: plugins/scmsvn/common/SVNPlugin.class.php:220
+#: plugins/scmsvn/common/SVNPlugin.class.php:230
 msgid "You may also view the complete histories of any file in the repository."
 msgstr ""
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:148
 #: plugins/scmcvs/common/CVSPlugin.class.php:161
-#: plugins/scmsvn/common/SVNPlugin.class.php:224
+#: plugins/scmsvn/common/SVNPlugin.class.php:234
 #, php-format
 msgid "Browse %s Repository"
 msgstr ""
@@ -17827,16 +17834,16 @@ msgid ""
 "over it to the project's administrator."
 msgstr ""
 
-#: plugins/scmcvs/common/CVSPlugin.class.php:70
+#: plugins/scmcvs/common/CVSPlugin.class.php:71
 #, php-format
 msgid "<strong>%1$s</strong> commits, <strong>%2$s</strong> adds"
 msgstr ""
 
-#: plugins/scmcvs/common/CVSPlugin.class.php:84
+#: plugins/scmcvs/common/CVSPlugin.class.php:85
 msgid "Anonymous CVS Access"
 msgstr ""
 
-#: plugins/scmcvs/common/CVSPlugin.class.php:86
+#: plugins/scmcvs/common/CVSPlugin.class.php:87
 msgid ""
 "This project's CVS repository can be checked out through anonymous (pserver) "
 "CVS with the following instruction set. The module you wish to check out "
@@ -17844,15 +17851,17 @@ msgid ""
 "for <em>anonymous</em>, simply press the Enter key."
 msgstr ""
 
-#: plugins/scmcvs/common/CVSPlugin.class.php:90
-#: plugins/scmcvs/common/CVSPlugin.class.php:115
-#: plugins/scmcvs/common/CVSPlugin.class.php:132
+#: plugins/scmcvs/common/CVSPlugin.class.php:91
+#: plugins/scmcvs/common/CVSPlugin.class.php:116
+#: plugins/scmcvs/common/CVSPlugin.class.php:133
 msgid "modulename"
 msgstr ""
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:145
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:152
-#: plugins/scmgit/common/GitPlugin.class.php:268
+#: plugins/scmgit/common/GitPlugin.class.php:275
+#: plugins/scmhg/common/HgPlugin.class.php:196
+#: plugins/scmsvn/common/SVNPlugin.class.php:220
 msgid "Download the nightly snapshot"
 msgstr ""
 
@@ -17862,18 +17871,18 @@ msgstr ""
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:177
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:185
-#: plugins/scmgit/common/GitPlugin.class.php:346
-#: plugins/scmhg/common/HgPlugin.class.php:200
-#: plugins/scmsvn/common/SVNPlugin.class.php:240
+#: plugins/scmgit/common/GitPlugin.class.php:353
+#: plugins/scmhg/common/HgPlugin.class.php:223
+#: plugins/scmsvn/common/SVNPlugin.class.php:250
 #: www/stats/site_stats_utils.php:289
 msgid "Adds"
 msgstr ""
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:202
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:225
-#: plugins/scmgit/common/GitPlugin.class.php:386
-#: plugins/scmhg/common/HgPlugin.class.php:225
-#: plugins/scmsvn/common/SVNPlugin.class.php:265
+#: plugins/scmgit/common/GitPlugin.class.php:393
+#: plugins/scmhg/common/HgPlugin.class.php:248
+#: plugins/scmsvn/common/SVNPlugin.class.php:275
 msgid "No history yet."
 msgstr ""
 
@@ -17902,7 +17911,7 @@ msgid "where REPO can be: "
 msgstr ""
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:114
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:582
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:585
 msgid ", "
 msgstr ""
 
@@ -17915,7 +17924,7 @@ msgid "Repository not yet created, wait an hour."
 msgstr ""
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:125
-#: plugins/scmgit/common/GitPlugin.class.php:106
+#: plugins/scmgit/common/GitPlugin.class.php:105
 msgid "Anonymous Access"
 msgstr ""
 
@@ -17945,42 +17954,44 @@ msgid "No repositories to browse"
 msgstr ""
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:186
-#: plugins/scmgit/common/GitPlugin.class.php:347
-#: plugins/scmhg/common/HgPlugin.class.php:201
-#: plugins/scmsvn/common/SVNPlugin.class.php:241
+#: plugins/scmgit/common/GitPlugin.class.php:354
+#: plugins/scmhg/common/HgPlugin.class.php:224
+#: plugins/scmsvn/common/SVNPlugin.class.php:251
 msgid "Updates"
 msgstr ""
 
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:581
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:584
 msgid "Repository to be created"
 msgstr ""
 
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:585
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:588
 msgid "Create new repository"
 msgstr ""
 
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:586
-#: plugins/scmgit/common/GitPlugin.class.php:1172
-#: plugins/scmgit/common/GitPlugin.class.php:1196
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:589
+#: plugins/scmgit/common/GitPlugin.class.php:1178
+#: plugins/scmgit/common/GitPlugin.class.php:1203
+#: plugins/scmhg/common/HgPlugin.class.php:906
+#: plugins/scmhg/common/HgPlugin.class.php:929
 msgid "Repository name"
 msgstr ""
 
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:588
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:591
 msgid "Clone"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:43
+#: plugins/scmgit/common/GitPlugin.class.php:42
 msgid "Git"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:45
+#: plugins/scmgit/common/GitPlugin.class.php:44
 msgid ""
 "This plugin contains the Git subsystem of FusionForge. It allows each\n"
 "FusionForge project to have its own Git repository, and gives some\n"
 "control over it to the project's administrator."
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:109
+#: plugins/scmgit/common/GitPlugin.class.php:108
 msgid ""
 "This project's Git repository can be checked out through anonymous access "
 "with the following command."
@@ -17990,13 +18001,13 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:127
+#: plugins/scmgit/common/GitPlugin.class.php:126
 msgid "Member repository"
 msgid_plural "Members repositories"
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:131
+#: plugins/scmgit/common/GitPlugin.class.php:130
 msgid ""
 "One of this project's members also has a personal Git repository that can be "
 "checked out anonymously."
@@ -18006,53 +18017,53 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:153
-#: plugins/scmhg/common/HgPlugin.class.php:91
-#: plugins/scmsvn/common/SVNPlugin.class.php:141
+#: plugins/scmgit/common/GitPlugin.class.php:152
+#: plugins/scmhg/common/HgPlugin.class.php:96
+#: plugins/scmsvn/common/SVNPlugin.class.php:138
 msgid "Developer Access"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:155
-#: plugins/scmgit/common/GitPlugin.class.php:204
-#: plugins/scmgit/common/GitPlugin.class.php:220
+#: plugins/scmgit/common/GitPlugin.class.php:154
+#: plugins/scmgit/common/GitPlugin.class.php:207
+#: plugins/scmgit/common/GitPlugin.class.php:227
 msgid "Only project developers can access the Git repository via this method."
 msgid_plural ""
 "Only project developers can access the Git repositories via this method."
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:161
-#: plugins/scmhg/common/HgPlugin.class.php:99
-#: plugins/scmsvn/common/SVNPlugin.class.php:146
+#: plugins/scmgit/common/GitPlugin.class.php:160
+#: plugins/scmhg/common/HgPlugin.class.php:104
+#: plugins/scmsvn/common/SVNPlugin.class.php:143
 msgid "via SSH"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:165
+#: plugins/scmgit/common/GitPlugin.class.php:164
 msgid "via \"smart HTTP\""
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:170
+#: plugins/scmgit/common/GitPlugin.class.php:169
 msgid ""
 "No access protocol has been allowed for the Git plugin in scmgit.ini: "
 "use_ssh and use_smarthttp are disabled"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:241
+#: plugins/scmgit/common/GitPlugin.class.php:248
 msgid "Access to your personal repository"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:242
+#: plugins/scmgit/common/GitPlugin.class.php:249
 msgid ""
 "You have a personal repository for this project, accessible through the "
 "following methods. Enter your site password when prompted."
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:253
-#: plugins/scmgit/common/GitPlugin.class.php:255
+#: plugins/scmgit/common/GitPlugin.class.php:260
+#: plugins/scmgit/common/GitPlugin.class.php:262
 msgid "Request a personal repository"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:254
+#: plugins/scmgit/common/GitPlugin.class.php:261
 msgid ""
 "You can clone the project repository into a personal one into which you "
 "alone will be able to write.  Other members of the project will only have "
@@ -18061,30 +18072,30 @@ msgid ""
 "time before it is created (less than an hour in most situations)."
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:307
+#: plugins/scmgit/common/GitPlugin.class.php:317
 msgid "Git Repository Browser"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:308
+#: plugins/scmgit/common/GitPlugin.class.php:318
 msgid ""
 "Browsing the Git tree gives you a view into the current status of this "
 "project's code. You may also view the complete history of any file in the "
 "repository."
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:311
+#: plugins/scmgit/common/GitPlugin.class.php:321
 msgid "Browse main git repository"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:318
+#: plugins/scmgit/common/GitPlugin.class.php:326
 msgid "Browse extra git repository"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:330
+#: plugins/scmgit/common/GitPlugin.class.php:337
 msgid "Browse personal git repository"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:367
+#: plugins/scmgit/common/GitPlugin.class.php:374
 msgid "statistics"
 msgstr ""
 
@@ -18092,48 +18103,51 @@ msgstr ""
 msgid "Git Commits"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1067
+#: plugins/scmgit/common/GitPlugin.class.php:1070
+#: plugins/scmhg/common/HgPlugin.class.php:829
 msgid "Cannot create a secondary repository with the same name as the primary"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1072
+#: plugins/scmgit/common/GitPlugin.class.php:1075
+#: plugins/scmhg/common/HgPlugin.class.php:834
 msgid "This repository name is not valid"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1085
+#: plugins/scmgit/common/GitPlugin.class.php:1088
+#: plugins/scmhg/common/HgPlugin.class.php:847
 #, php-format
 msgid "A repository %s already exists"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1111
+#: plugins/scmgit/common/GitPlugin.class.php:1114
 msgid "Invalid URL from which to clone"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1120
+#: plugins/scmgit/common/GitPlugin.class.php:1123
 #, php-format
 msgid "Clone of %s"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1167
+#: plugins/scmgit/common/GitPlugin.class.php:1173
 msgid "No extra Git repository for project"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1169
+#: plugins/scmgit/common/GitPlugin.class.php:1175
 #, php-format
 msgid "Extra Git repository for project %1$s"
 msgid_plural "Extra Git repositories for project %1$s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1172
+#: plugins/scmgit/common/GitPlugin.class.php:1178
 msgid "Initial clone URL (if any)"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1192
+#: plugins/scmgit/common/GitPlugin.class.php:1198
 msgid "Create new Git repository for project"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1199
+#: plugins/scmgit/common/GitPlugin.class.php:1206
 msgid ""
 "Initial clone URL (or name of an existing repository in this project; leave "
 "empty to start with an empty repository)"
@@ -18173,11 +18187,11 @@ msgid ""
 "be created shortly."
 msgstr ""
 
-#: plugins/scmhg/common/HgPlugin.class.php:35
+#: plugins/scmhg/common/HgPlugin.class.php:36
 msgid "Mercurial"
 msgstr ""
 
-#: plugins/scmhg/common/HgPlugin.class.php:37
+#: plugins/scmhg/common/HgPlugin.class.php:38
 msgid ""
 "This plugin contains the Mercurial (Hg) subsystem of FusionForge. It\n"
 "allows each FusionForge project to have its own Mercurial repository,\n"
@@ -18185,67 +18199,87 @@ msgid ""
 "Offer DAV or SSH access."
 msgstr ""
 
-#: plugins/scmhg/common/HgPlugin.class.php:58
+#: plugins/scmhg/common/HgPlugin.class.php:60
 msgid "Use Mercurial as Source Code Management tool. Offer DAV or SSH access."
 msgstr ""
 
-#: plugins/scmhg/common/HgPlugin.class.php:69
+#: plugins/scmhg/common/HgPlugin.class.php:71
 msgid ""
 "Another short Introduction can be found at <a href=\"http://hginit.com/"
 "\">http://hginit.com/</a>"
 msgstr ""
 
-#: plugins/scmhg/common/HgPlugin.class.php:74
+#: plugins/scmhg/common/HgPlugin.class.php:76
 msgid "Anonymous Mercurial Access"
 msgstr ""
 
-#: plugins/scmhg/common/HgPlugin.class.php:78
+#: plugins/scmhg/common/HgPlugin.class.php:81
 msgid ""
 "This project's Mercurial repository can be checked out through anonymous "
 "access with the following command"
 msgstr ""
 
-#: plugins/scmhg/common/HgPlugin.class.php:81
+#: plugins/scmhg/common/HgPlugin.class.php:86
 msgid ""
 "Please contact forge administrator, scmhg plugin is not correctly configured"
 msgstr ""
 
-#: plugins/scmhg/common/HgPlugin.class.php:93
-#: plugins/scmhg/common/HgPlugin.class.php:144
-#: plugins/scmhg/common/HgPlugin.class.php:162
+#: plugins/scmhg/common/HgPlugin.class.php:98
+#: plugins/scmhg/common/HgPlugin.class.php:154
+#: plugins/scmhg/common/HgPlugin.class.php:176
 msgid "Only project developers can access the Hg repository via this method."
 msgid_plural ""
 "Only project developers can access the Hg repositories via this method."
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugins/scmhg/common/HgPlugin.class.php:103
+#: plugins/scmhg/common/HgPlugin.class.php:108
 msgid "via \"DAV\""
 msgstr ""
 
-#: plugins/scmhg/common/HgPlugin.class.php:108
+#: plugins/scmhg/common/HgPlugin.class.php:113
 msgid ""
 "No access protocol has been allowed for the Hg plugin in scmhg.ini: use_ssh "
 "and use_dav are disabled"
 msgstr ""
 
-#: plugins/scmhg/common/HgPlugin.class.php:184
+#: plugins/scmhg/common/HgPlugin.class.php:203
 msgid "Mercurial Repository Browser"
 msgstr ""
 
-#: plugins/scmhg/common/HgPlugin.class.php:185
+#: plugins/scmhg/common/HgPlugin.class.php:204
 msgid ""
 "Browsing the Mercurial tree gives you a view into the current status of this "
 "project's code. You may also view the complete histories of any file in the "
 "repository."
 msgstr ""
 
-#: plugins/scmhg/common/HgPlugin.class.php:186
+#: plugins/scmhg/common/HgPlugin.class.php:205
 msgid "Browse Hg Repository"
 msgstr ""
 
-#: plugins/scmhg/common/HgPlugin.class.php:741
+#: plugins/scmhg/common/HgPlugin.class.php:208
+msgid "Browse extra Hg repository"
+msgstr ""
+
+#: plugins/scmhg/common/HgPlugin.class.php:810
 msgid "Hg Commits"
+msgstr ""
+
+#: plugins/scmhg/common/HgPlugin.class.php:901
+msgid "No extra Hg repository for project"
+msgstr ""
+
+#: plugins/scmhg/common/HgPlugin.class.php:903
+#, php-format
+msgid "Extra Hg repository for project %1$s"
+msgid_plural "Extra Hg repositories for project %1$s"
+msgstr[0] ""
+msgstr[1] ""
+
+#: plugins/scmhg/common/HgPlugin.class.php:924
+#, php-format
+msgid "Create new Hg repository for project %s"
 msgstr ""
 
 #: plugins/scmhook/common/scmhook.class.php:75
@@ -18263,47 +18297,27 @@ msgid ""
 "project independently."
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:166
+#: plugins/scmhook/common/scmhookPlugin.class.php:155
 msgid "invalid e-mails"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:203
+#: plugins/scmhook/common/scmhookPlugin.class.php:198
 msgid "Enable Repository Hooks"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:222
+#: plugins/scmhook/common/scmhookPlugin.class.php:217
 msgid "SCM Type not supported yet by scmhook"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:228
+#: plugins/scmhook/common/scmhookPlugin.class.php:225
 msgid "No hooks available"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:332
-#, php-format
-msgid "%s Hooks"
-msgstr ""
-
-#: plugins/scmhook/common/scmhookPlugin.class.php:333
-msgid "Hook"
-msgstr ""
-
-#: plugins/scmhook/common/scmhookPlugin.class.php:398
-msgid "serve-push-pull-bundle Hooks"
-msgstr ""
-
-#: plugins/scmhook/common/scmhookPlugin.class.php:399
-#: plugins/scmhook/common/scmhookPlugin.class.php:449
-#: plugins/scmhook/common/scmhookPlugin.class.php:499
-msgid "Hook Name"
-msgstr ""
-
-#: plugins/scmhook/common/scmhookPlugin.class.php:448
-msgid "post-receive Hooks"
-msgstr ""
-
-#: plugins/scmhook/common/scmhookPlugin.class.php:498
-msgid "post-commit Hooks"
+#: plugins/scmhook/common/scmhookPlugin.class.php:338
+#: plugins/scmhook/common/scmhookPlugin.class.php:412
+#: plugins/scmhook/common/scmhookPlugin.class.php:479
+#: plugins/scmhook/common/scmhookPlugin.class.php:546
+msgid "Repository"
 msgstr ""
 
 #: plugins/scmhook/library/scmcvs/commitTracker.class.php:33
@@ -18314,8 +18328,6 @@ msgstr ""
 
 #: plugins/scmhook/library/scmcvs/commitTracker.class.php:47
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:49
-#: plugins/scmhook/library/scmgit/postReceiveEmail.class.php:56
-#: plugins/scmhook/library/scmgit/postReceiveEmail.class.php:58
 msgid "Hook not available due to missing dependency"
 msgstr ""
 
@@ -18349,45 +18361,24 @@ msgstr ""
 msgid "Related Git commits"
 msgstr ""
 
-#: plugins/scmhook/library/scmgit/commitTracker.class.php:144
-#: www/pm/browse_task.php:170 www/pm/ganttpage.php:188
-#: www/snippet/snippet_utils.php:135
-msgid "Browse"
-msgstr ""
-
 #: plugins/scmhook/library/scmgit/postReceiveEmail.class.php:33
-msgid "Commit message log is pushed to commit mailing-list of the project"
-msgstr ""
-
-#: plugins/scmhook/library/scmgit/postReceiveEmail.class.php:56
-msgid "Project has no commit mailing-list: "
-msgstr ""
-
-#: plugins/scmhook/library/scmgit/postReceiveEmail.class.php:58
-msgid "Project not using mailing-list."
-msgstr ""
-
 #: plugins/scmhook/library/scmhg/commitEmail.class.php:36
+#: plugins/scmhook/library/scmsvn/commitEmail.class.php:35
 msgid ""
-"Every commit pushed sends a notification e-mail to the users of the commit-"
-"mailinglist."
+"Commit message log is pushed to commit mailing-list of the project (which "
+"you need to create)"
+msgstr ""
+
+#: plugins/scmhook/library/scmgit/postReceiveEmail.class.php:49
+#: plugins/scmhook/library/scmhg/commitEmail.class.php:54
+#: plugins/scmhook/library/scmsvn/commitEmail.class.php:62
+msgid "Send commit e-mail notification to"
 msgstr ""
 
 #: plugins/scmhook/library/scmhg/commitEmail.class.php:38
 msgid ""
-"The hook is triggered after 'serve push pull bundle' on the projects "
+"The hook is triggered after \"serve push pull bundle\" on the projects "
 "repository."
-msgstr ""
-
-#: plugins/scmhook/library/scmhg/commitEmail.class.php:60
-msgid ""
-"Hook not available due to missing dependency: Project has no commit mailing-"
-"list: "
-msgstr ""
-
-#: plugins/scmhook/library/scmhg/commitEmail.class.php:62
-msgid ""
-"Hook not available due to missing dependency: Project not using mailing-list."
 msgstr ""
 
 #: plugins/scmhook/library/scmsvn/allowRevPropChange.class.php:30
@@ -18402,16 +18393,6 @@ msgstr ""
 msgid "Verify if committed files have svn:mimetype set up correctly."
 msgstr ""
 
-#: plugins/scmhook/library/scmsvn/commitEmail.class.php:35
-msgid ""
-"Commit message log is pushed to commit mailing-list of the project (which "
-"you need to create)"
-msgstr ""
-
-#: plugins/scmhook/library/scmsvn/commitEmail.class.php:62
-msgid "Send commit e-mail notification to"
-msgstr ""
-
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:50
 msgid ""
 "Hook not available due to missing dependency: Project not using tracker."
@@ -18421,36 +18402,36 @@ msgstr ""
 msgid "Related SVN commits"
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:47
+#: plugins/scmsvn/common/SVNPlugin.class.php:46
 msgid "Subversion"
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:49
+#: plugins/scmsvn/common/SVNPlugin.class.php:48
 msgid ""
 "This plugin contains the Subversion subsystem of FusionForge. It allows\n"
 "each FusionForge project to have its own Subversion repository, and gives\n"
 "some control over it to the project's administrator."
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:116
+#: plugins/scmsvn/common/SVNPlugin.class.php:115
 msgid "Anonymous Subversion Access"
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:118
+#: plugins/scmsvn/common/SVNPlugin.class.php:117
 msgid ""
 "This project's SVN repository can be checked out through anonymous access "
 "with the following command(s)."
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:150
+#: plugins/scmsvn/common/SVNPlugin.class.php:147
 msgid "via DAV"
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:216
+#: plugins/scmsvn/common/SVNPlugin.class.php:226
 msgid "Subversion Repository Browser"
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:662
+#: plugins/scmsvn/common/SVNPlugin.class.php:671
 msgid "Subversion Commits"
 msgstr ""
 
@@ -19385,7 +19366,7 @@ msgstr ""
 msgid "Old password is incorrect"
 msgstr ""
 
-#: www/account/change_pw.php:56 www/account/lostlogin.php:69
+#: www/account/change_pw.php:56 www/account/lostlogin.php:70
 #: www/admin/passedit.php:65
 msgid "New passwords do not match."
 msgstr ""
@@ -19430,14 +19411,15 @@ msgstr ""
 msgid "Minimum 8 characters."
 msgstr ""
 
-#: www/account/change_pw.php:80 www/account/register.php:163
+#: www/account/change_pw.php:80 www/account/lostlogin.php:65
+#: www/account/lostlogin.php:95 www/account/register.php:163
 #, php-format
 msgid ""
 "Must contain at least one uppercase letter, one lowercase, one digit, one "
 "non-alphanumeric character."
 msgstr ""
 
-#: www/account/change_pw.php:82 www/account/lostlogin.php:101
+#: www/account/change_pw.php:82 www/account/lostlogin.php:100
 #: www/admin/passedit.php:91
 msgid "New Password (repeat)"
 msgstr ""
@@ -19637,8 +19619,12 @@ msgstr ""
 msgid "You must supply valid password (at least 8 characters)."
 msgstr ""
 
-#: www/account/lostlogin.php:78
-msgid "Password changed"
+#: www/account/lostlogin.php:77
+msgid "Password changed successfully"
+msgstr ""
+
+#: www/account/lostlogin.php:78 www/account/lostpw.php:83
+msgid "Lost Account Password"
 msgstr ""
 
 #: www/account/lostlogin.php:80
@@ -19999,7 +19985,7 @@ msgstr ""
 msgid "Add this custom response to canned responses"
 msgstr ""
 
-#: www/admin/approve-pending.php:170 www/admin/pending-news.php:146
+#: www/admin/approve-pending.php:170 www/admin/pending-news.php:142
 #: www/project/admin/users.php:211
 msgid "Reject"
 msgstr ""
@@ -20252,7 +20238,7 @@ msgid "Register Time"
 msgstr ""
 
 #: www/admin/grouplist.php:131 www/admin/search.php:149
-#: www/admin/useredit.php:266 www/admin/useredit.php:294
+#: www/admin/useredit.php:267 www/admin/useredit.php:295
 #: www/project/admin/massadd.php:90 www/project/admin/massfinish.php:75
 #: www/register/index.php:245 www/register/index.php:248
 msgid "Unix Name"
@@ -20586,37 +20572,37 @@ msgstr ""
 msgid "At least 8 characters"
 msgstr ""
 
-#: www/admin/pending-news.php:63 www/admin/pending-news.php:126
+#: www/admin/pending-news.php:59 www/admin/pending-news.php:122
 #: www/news/admin/index.php:67 www/news/admin/index.php:115
 msgid "Newsbyte not found"
 msgstr ""
 
-#: www/admin/pending-news.php:80 www/news/admin/index.php:96
+#: www/admin/pending-news.php:76 www/news/admin/index.php:96
 msgid "Newsbyte Updated."
 msgstr ""
 
-#: www/admin/pending-news.php:90 www/admin/pending-news.php:129
+#: www/admin/pending-news.php:86 www/admin/pending-news.php:125
 msgid "Newsbyte Deleted."
 msgstr ""
 
-#: www/admin/pending-news.php:110
+#: www/admin/pending-news.php:106
 msgid "Newsbytes Rejected."
 msgstr ""
 
-#: www/admin/pending-news.php:115 www/news/admin/index.php:106
+#: www/admin/pending-news.php:111 www/news/admin/index.php:106
 #: www/project/admin/tools.php:362
 msgid "News Admin"
 msgstr ""
 
-#: www/admin/pending-news.php:139
+#: www/admin/pending-news.php:135
 msgid "Submitted for project"
 msgstr ""
 
-#: www/admin/pending-news.php:144
+#: www/admin/pending-news.php:140
 msgid "Approve For Front Page"
 msgstr ""
 
-#: www/admin/pending-news.php:145
+#: www/admin/pending-news.php:141
 msgid "Do Nothing"
 msgstr ""
 
@@ -20951,49 +20937,49 @@ msgstr ""
 msgid "Unix Shell:"
 msgstr ""
 
-#: www/admin/useredit.php:223
+#: www/admin/useredit.php:224
 msgid "Current confirm hash:"
 msgstr ""
 
-#: www/admin/useredit.php:233
+#: www/admin/useredit.php:234
 msgid "I want to delete this user"
 msgstr ""
 
-#: www/admin/useredit.php:241
+#: www/admin/useredit.php:242
 msgid ""
 "This pages allows to change only direct properties of user object. To edit "
 "properties pertinent to user within specific project, visit admin page of "
 "that project (below)."
 msgstr ""
 
-#: www/admin/useredit.php:248
+#: www/admin/useredit.php:249
 msgid ""
 "Unix status updated mirroring web status, unless it has value “No Unix "
 "account (N)”"
 msgstr ""
 
-#: www/admin/useredit.php:256
+#: www/admin/useredit.php:257
 msgid "Projects Membership"
 msgstr ""
 
-#: www/admin/useredit.php:267 www/admin/useredit.php:295
+#: www/admin/useredit.php:268 www/admin/useredit.php:296
 #: www/admin/vhost.php:184 www/project/admin/vhost.php:141
 msgid "Operations"
 msgstr ""
 
-#: www/admin/useredit.php:287 www/include/user_home.php:93
+#: www/admin/useredit.php:288 www/include/user_home.php:93
 msgid "This user is not a member of any project."
 msgstr ""
 
-#: www/admin/useredit.php:290
+#: www/admin/useredit.php:291
 msgid "Add membership to new projects"
 msgstr ""
 
-#: www/admin/useredit.php:290
+#: www/admin/useredit.php:291
 msgid "(100 shown)"
 msgstr ""
 
-#: www/admin/useredit.php:296
+#: www/admin/useredit.php:297
 msgid "Select role"
 msgstr ""
 
@@ -21048,29 +21034,29 @@ msgstr ""
 msgid "No user in this project"
 msgstr ""
 
-#: www/admin/vhost.php:75
-msgid "Error adding VHOST: "
+#: www/admin/vhost.php:74
+msgid "Error adding VHOST"
 msgstr ""
 
-#: www/admin/vhost.php:77 www/admin/vhost.php:151
+#: www/admin/vhost.php:76 www/admin/vhost.php:151
 #: www/project/admin/vhost.php:140
 msgid "Virtual Host"
 msgstr ""
 
-#: www/admin/vhost.php:77
+#: www/admin/vhost.php:76
 msgid " scheduled for creation on group "
 msgstr ""
 
-#: www/admin/vhost.php:82
+#: www/admin/vhost.php:81
 msgid "Vhost not valid"
 msgstr ""
 
-#: www/admin/vhost.php:85
+#: www/admin/vhost.php:84
 msgid "Missing group name"
 msgstr ""
 
 #: www/admin/vhost.php:105
-msgid "Error updating VHOST entry: "
+msgid "Error updating VHOST entry"
 msgstr ""
 
 #: www/admin/vhost.php:107
@@ -21121,7 +21107,7 @@ msgstr ""
 msgid "CGI Dir"
 msgstr ""
 
-#: www/admin/vhost.php:200
+#: www/admin/vhost.php:201
 msgid "No such VHOST"
 msgstr ""
 
@@ -23006,17 +22992,17 @@ msgstr ""
 msgid "both subject and body are required."
 msgstr ""
 
-#: www/news/submit.php:131
+#: www/news/submit.php:125
 msgid "Submit News for Project"
 msgstr ""
 
-#: www/news/submit.php:134
+#: www/news/submit.php:128
 msgid ""
 "You can post news about your project if you are an admin on your project. "
 "You may also post “help wanted” notes if your project needs help."
 msgstr ""
 
-#: www/news/submit.php:137
+#: www/news/submit.php:131
 #, php-format
 msgid ""
 "All posts <strong>for your project</strong> will appear instantly on your "
@@ -23025,11 +23011,11 @@ msgid ""
 "appear on the %1$s home page."
 msgstr ""
 
-#: www/news/submit.php:140
+#: www/news/submit.php:134
 msgid "You may include URLs, but not HTML in your submissions."
 msgstr ""
 
-#: www/news/submit.php:143
+#: www/news/submit.php:137
 msgid "URLs that start with http:// are made clickable."
 msgstr ""
 
@@ -23714,6 +23700,11 @@ msgstr ""
 
 #: www/pm/browse_task.php:169
 msgid "Detail View"
+msgstr ""
+
+#: www/pm/browse_task.php:170 www/pm/ganttpage.php:188
+#: www/snippet/snippet_utils.php:135
+msgid "Browse"
 msgstr ""
 
 #: www/pm/browse_task.php:174
@@ -25403,24 +25394,24 @@ msgstr ""
 msgid "User Time Reporting"
 msgstr ""
 
-#: www/scm/admin/index.php:72
+#: www/scm/admin/index.php:73
 #, php-format
 msgid "New repository %s registered, will be created shortly."
 msgstr ""
 
-#: www/scm/admin/index.php:88
+#: www/scm/admin/index.php:89
 #, php-format
 msgid ""
 "Repository %s is marked for deletion (actual deletion will happen shortly)."
 msgstr ""
 
-#: www/scm/admin/index.php:168
+#: www/scm/admin/index.php:188
 msgid ""
-"Note: Changing the repository does not delete the previous repository.  It "
+"Note: Changing the repository does not delete the previous repository. It "
 "only affects the information displayed under the SCM tab."
 msgstr ""
 
-#: www/scm/admin/index.php:192
+#: www/scm/admin/index.php:213
 msgid "Site has SCM but no plugins registered"
 msgstr ""
 
@@ -25458,13 +25449,13 @@ msgid ""
 "next few minutes."
 msgstr ""
 
-#: www/scm/index.php:45
+#: www/scm/index.php:49
 msgid ""
 "This project has no associated Source Code Management tool defined, please "
 "configure one using the Administration submenu."
 msgstr ""
 
-#: www/scm/index.php:48
+#: www/scm/index.php:52
 #, php-format
 msgid "Source Code Repository for %s"
 msgstr ""
@@ -26221,19 +26212,19 @@ msgstr[1] ""
 msgid "Displaying %1$s per page. Projects sorted by activity ranking."
 msgstr ""
 
-#: www/source.php:36
+#: www/source.php:35
 msgid "A file must be specified for this page."
 msgstr ""
 
-#: www/source.php:40
+#: www/source.php:39
 msgid "The file argument is invalid."
 msgstr ""
 
-#: www/source.php:53
+#: www/source.php:52
 msgid "Cannot find specified file to display."
 msgstr ""
 
-#: www/source.php:56
+#: www/source.php:55
 #, php-format
 msgid "Source of %s"
 msgstr ""
