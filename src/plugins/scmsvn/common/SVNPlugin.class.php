@@ -343,7 +343,7 @@ some control over it to the project's administrator.");
 		if (!$project) return false;
 		if (!$project->isActive()) return false;
 
-		$repo_prefix = forge_get_config('repos_path', 'scmsvn').'/'.$project->getUnixName().'.svn/';
+		$repo_prefix = forge_get_config('repos_path', 'scmsvn').'/'.$project->getUnixName().'/';
 		if (!is_dir($repo_prefix) && !mkdir($repo_prefix, 0755, true)) {
 			return false;
 		}
@@ -1093,7 +1093,7 @@ some control over it to the project's administrator.");
 			echo $HTML->listTableTop($titleArr);
 			foreach ($existing_repos as $key => $repo) {
 				$cells = array();
-				$cells[][] = html_e('tt', array(), $repo['repo_name']);
+				$cells[][] = html_e('kbd', array(), $repo['repo_name']);
 				$cells[][] = $repo['description'];
 				$deleteForm = $HTML->openForm(array('name' => 'form_delete_repo_'.$repo['repo_name'], 'action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
 				$deleteForm .= html_e('input', array('type' => 'hidden', 'name' => 'group_id', 'value' => $params['group_id']));
@@ -1103,7 +1103,7 @@ some control over it to the project's administrator.");
 				$deleteForm .= html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Delete')));
 				$deleteForm .= $HTML->closeForm();
 				$cells[][] = $deleteForm;
-				echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($key, true)), $cells);
+				echo $HTML->multiTableRow(array(), $cells);
 			}
 			echo $HTML->listTableBottom();
 		}

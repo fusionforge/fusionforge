@@ -38,6 +38,8 @@ if (is_dir($svn_root)) {
 				if (mkdir($svn_root.'/'.$svn_repodir.'.svn')) {
 					if (!rename($svn_root.'/'.$svn_repodir, $svn_root.'/'.$svn_repodir.'.svn/'.$svn_repodir)) {
 						echo "UNABLE TO MOVE TO FINAL DESTINATION REPO: ".$svn_repodir."\n";
+					} else {
+						rename($svn_root.'/'.$svn_repodir.'.svn', $svn_root.'/'.$svn_repodir);
 					}
 				} else {
 					echo "UNABLE TO CREATE TARGET DIR FOR REPO: ".$svn_repodir."\n";
