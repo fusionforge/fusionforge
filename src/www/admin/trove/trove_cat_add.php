@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -25,6 +26,8 @@ require_once '../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'include/trove.php';
 require_once $gfwww.'admin/admin_utils.php';
+
+global $HTML, $error_msg;
 
 session_require_global_perm ('forge_admin');
 
@@ -70,15 +73,13 @@ if (getStringFromRequest('submit')) {
 }
 
 site_admin_header(array('title'=>_('Add New Trove Category')));
+echo $HTML->openForm(array('action' => '/admin/trove/trove_cat_add.php', 'method' => 'post'));
 ?>
-
-<form action="<?php echo util_make_uri('/admin/trove/trove_cat_add.php'); ?>" method="post">
 <input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>" />
 <p><?php echo _('Parent Category').utils_requiredField()._(':'); ?>
 <br /><select name="form_parent">
 
 <?php
-
 // generate list of possible parents
 // <paul@zootweb.com> 4/2/2003 - If we were given a parent trove use it
 // in the "Parent Category" box otherwise give them the complete list.
@@ -103,7 +104,6 @@ if ($parent_trove_cat_id != -1) {
 		print ('<option value="'.$row_cat["trove_cat_id"].'">'.$row_cat["fullname"]."</option>");
 	}
 }
-
 ?>
 
 </select></p>
@@ -114,8 +114,6 @@ if ($parent_trove_cat_id != -1) {
 <p><?php echo _('New category description (maximum length is 255 chars)')._(':'); ?>
 <br /><input type="text" size="80" name="form_description" /></p>
 <p><input type="submit" name="submit" value="<?php echo _('Add'); ?>" /></p>
-</form>
-
 <?php
-
+echo $HTML->closeForm();
 site_admin_footer();

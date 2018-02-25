@@ -50,7 +50,10 @@ class ContextualHelp extends FForge_SeleniumTestCase
 
 	function testContextualHelp()
 	{
+		$this->skip_on_src_installs();
 		$this->skip_on_deb_installs();
+		$this->skip_on_rpm_installs();
+		$this->skip_on_centos();
 
 		$this->loadAndCacheFixture();
 

@@ -1,10 +1,9 @@
 <?php
-
 /**
  * Project importing script for site admin
  *
  * Copyright (c) 2011 Olivier Berger & Institut Telecom
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013,2016, Franck Villaume - TrivialDev
  *
  * This program was developped in the frame of the COCLICO project
  * (http://www.coclico-project.org/) with financial support of the Paris
@@ -110,7 +109,7 @@ class ProjectsImportPage extends FileManagerPage {
 		// If invoked initially (not on callback) or if more details needed
 		// display the last part of the form for JSON file upload
 		if (! $this->form_header_already_displayed) {
-			echo '<form enctype="multipart/form-data" action="'.getStringFromServer('PHP_SELF').'" method="post">';
+			echo $HTML->openForm(array('enctype' => 'multipart/form-data', 'action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
 			$this->form_header_already_displayed = True;
 		}
 
@@ -119,8 +118,7 @@ class ProjectsImportPage extends FileManagerPage {
 		if (!$feedback) {
 			if ($this->posted_selecteddumpfile) {
 				$preselected = basename($this->posted_selecteddumpfile);
-			}
-			elseif ($this->posted_uploadedfile) {
+			} elseif ($this->posted_uploadedfile) {
 				$preselected = $this->posted_uploadedfile;
 			}
 		}
@@ -131,15 +129,16 @@ class ProjectsImportPage extends FileManagerPage {
 
 		// finally, display the file upload form
 		echo '<fieldset><legend>Please upload a file :</legend>
-		       <p><center>
-                          <input type="file" id="uploaded_file" name="uploaded_file" tabindex="2" />
-                       </center></p>
-                    </fieldset>
-                    <div style="text-align:center;">
-                      <input type="submit" name="submit" value="Submit" />
-                    </div>
-              </form>';
-
+			<p><center>
+				<input type="file" id="uploaded_file" name="uploaded_file" tabindex="2" />
+			</center></p>
+			</fieldset>
+			<div style="text-align:center;">
+			<input type="submit" name="submit" value="Submit" />
+			</div>';
+		if ($this->form_header_already_displayed) {
+			echo $HTML->closeForm();
+		}
 		site_footer();
 	}
 
@@ -172,8 +171,7 @@ class ProjectsImportPage extends FileManagerPage {
 
 			if(! $json) {
 				$feedback = "Error : missing data";
-			}
-			else {
+			} else {
 
 				//			print_r($imported_file);
 				$this->importer->parse_OSLCCoreRDFJSON($json);
@@ -204,9 +202,9 @@ class ProjectsImportPage extends FileManagerPage {
 	 * @return html string
 	 */
 	function do_work() {
-		global $feedback;
+		global $feedback, $HTML;
 
-		$html = '';
+		$htmlcontent = '';
 
 		// If the posted JSON file indeed contains a project dump, an importer was created,
 		// and if it has data we can work
@@ -219,14 +217,14 @@ class ProjectsImportPage extends FileManagerPage {
 			// start HTML output
 			if (! $this->form_header_already_displayed) {
 				$this->form_header_already_displayed = true;
-				$html .= '<form enctype="multipart/form-data" action="'.getStringFromServer('PHP_SELF').'" method="post">';
+				$htmlcontent .= $HTML->openForm(array('enctype' => 'multipart/form-data', 'action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
 			}
 			// Then handle project(s)
 
 			if(count($projects)) {
 
 				// Display project's general description
-				$html .= '<table id="project-summary-and-devs" class="my-layout-table">';
+				$htmlcontent .= '<table id="project-summary-and-devs" class="my-layout-table">';
 
 				// Display project attributes
 				foreach($projects as $project) {
@@ -236,7 +234,6 @@ class ProjectsImportPage extends FileManagerPage {
 					$description = $project->getDescription();
 					$purpose = 'Imported from JSON file';
 					$scm_host = '';
-					$is_public = $project->getIsPublic();
 					$send_mail = ! forge_get_config ('project_auto_approval') ;
 					$built_from_template = 0 ;
 
@@ -250,7 +247,6 @@ class ProjectsImportPage extends FileManagerPage {
 						$purpose,
 						'shell1',
 						$scm_host,
-						$is_public,
 						$send_mail,
 						$built_from_template);
 
@@ -259,37 +255,32 @@ class ProjectsImportPage extends FileManagerPage {
 						if ($feedback) $feedback .= '<br />';
 						$feedback .= 'Import of "'. $unix_name . '": '. $error_msg;
 
-						$html .= '<tr>
-		                             <td>
-			                            <h2>'._('Failed to create project'). ': <pre>'. $unix_name .'</pre>
-			                            </h2>';
-					}
-					else {
-						$html .= '<tr>
-		                             <td>
-			                            <h2>'._('Created project'). ': <pre>'. $unix_name .'</pre>
-			                            </h2>';
+						$htmlcontent .= '<tr>
+						<td>
+							<h2>'._('Failed to create project'). ': <pre>'. $unix_name .'</pre>
+							</h2>';
+					} else {
+						$htmlcontent .= '<tr>
+						<td>
+							<h2>'._('Created project'). ': <pre>'. $unix_name .'</pre>
+							</h2>';
 
 					}
-					$html .= '<h3>'._('Project Summary').'</h3>';
-					$html .= '<p><pre>'. $description .'</pre></p>';
+					$htmlcontent .= '<h3>'._('Project Summary').'</h3>';
+					$htmlcontent .= '<p><pre>'. $description .'</pre></p>';
 
-					$html .= '<p>full_name : '. $full_name .'</p>';
+					$htmlcontent .= '<p>full_name : '. $full_name .'</p>';
 					//$html .= '<p>purpose : '. $project->getPurpose() .'</p>';
-					$html .= '<p>is_public : '. $is_public .'</p>';
-					$html .= '</td></tr>';
+					$htmlcontent .= '</td></tr>';
 
 				}
-				$html .= '</table>';
-			}
-			else {
+				$htmlcontent .= '</table>';
+			} else {
 				$feedback .= 'Found no projects <br />';
 			}
 		}
-		return $html;
+		return $htmlcontent;
 	}
-
-
 }
 
 global $group_id, $feedback;
@@ -305,8 +296,7 @@ if (getStringFromRequest('submit')) {
 
 	$this_page->initialize_from_submitted_data();
 
-}
-else {
+} else {
 	$message .= "You can import a list of projects from a JSON RDF document compatible with ForgePlucker's dump format.<br />";
 }
 

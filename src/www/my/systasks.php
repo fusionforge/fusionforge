@@ -52,7 +52,7 @@ if (empty($gids))
 $gids = implode(',', $gids);
 
 $title_arr = array(
-	_('Task ID'),
+	_('Task Id'),
 	_('Plugin'),
 	_('SysTask Type'),
 	_('Group ID'),
@@ -81,10 +81,11 @@ for ($i=0; $i<db_numrows($res); $i++) {
 	$cells = array();
 	$cells[][] = db_result($res,$i,'systask_id');
 	$plugin_name = db_result($res,$i,'plugin_name');
-	if ($plugin_name == null)
+	if ($plugin_name == null) {
 		$cells[][] = 'core';
-	else
+	} else {
 		$cells[][] = $plugin_name;
+	}
 	$cells[][] = db_result($res,$i,'systask_type');
 	$cells[][] = db_result($res,$i,'unix_group_name');
 	$cells[][] = db_result($res,$i,'status');
@@ -93,7 +94,7 @@ for ($i=0; $i<db_numrows($res); $i++) {
 		. ' (+' . round(db_result($res, $i,'queued'), 1) . 's)';
 	$cells[][] = date("H:i:s", db_result($res, $i,'stopped'))
 		. ' (+' . round(db_result($res, $i,'run'), 1) . 's)';
-	echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i+1, true)), $cells);
+	echo $HTML->multiTableRow(array(), $cells);
 }
 
 echo $HTML->listTableBottom();

@@ -3,7 +3,8 @@
  * Update Artifact Type Form
  *
  * Copyright 2010, FusionForge Team
- * Copyright 2015, Franck Villaume - TrivialDev
+ * Copyright 2015,2016, Franck Villaume - TrivialDev
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -56,33 +57,27 @@ if (!$has_error) {
 	$elearray = $ath->getExtraFieldElements($field_id);
 	$states = $elearray;
 
-?>
+	echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&amp;atid='.$ath->getID(), 'method' => 'post'));
+	echo html_e('input', array('type' => 'hidden', 'name' => 'field_id', 'value' => $field_id));
+	echo html_e('input', array('type' => 'hidden', 'name' => 'workflow', 'value' => 1));
 
-	<h2><?php printf(_('Allowed initial values for the %s field'), $field_name) ?></h2>
-<?php
-echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&amp;atid='.$ath->getID(), 'method' => 'post'));
-?>
-	<input type="hidden" name="field_id" value="<?php echo $field_id ?>" />
-	<input type="hidden" name="workflow" value="1" />
-
-<?php
 	$from = _('From').' ';
 	$to = _('To').' ';
 	$init = _('Initial values').' ';
 
-	$title_arr=array();
-	$to_title_arr=array();
-	$class_arr=array();
-	$title_arr[]=_('From Value');
-	$class_arr[]=('');
-	$to_title_arr[]=('');
+	$title_arr = array();
+	$to_title_arr = array();
+	$class_arr = array();
+	$title_arr[] = '';
+	$class_arr[] = '';
+	$to_title_arr[] = '';
 	foreach ($elearray as $status) {
 		$title_arr[]='<div><span>'.$status['element_name'].'</span></div>';
 		$to_title_arr[]='<div><span>'.$to.$status['element_name'].'</span></div>';
 		$class_arr[]='rotate';
 	}
-	echo $HTML->listTableTop($title_arr, false, 'table-header-rotated','',$class_arr);
-	echo "\n";
+	echo html_e('h2', array(), sprintf(_('Allowed initial values for the %s field'), $field_name));
+	echo $HTML->listTableTop($title_arr, array(), 'table-header-rotated', '', $class_arr, array(), array(), '');
 
 	// Special treatment for the initial value (in the Submit form).
 	echo '<tr id="initval"><th class="row-header" style="text-align:left">'.$init.'</th>'."\n";
@@ -104,7 +99,8 @@ echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&a
 		$totitle_arr[] = $title_arr[$i]? $to_title_arr[$i] : '';
 		$class_arr[]='rotate';
 	}
-	echo $HTML->listTableTop($totitle_arr, false, 'table-header-rotated','',$class_arr);
+	echo html_e('h2', array(), _('Allowed from value to value switch'));
+	echo $HTML->listTableTop($totitle_arr, array(), 'table-header-rotated','',$class_arr, array(), array(), '');
 
 	$i=1;
 	foreach ($elearray as $status) {
@@ -117,9 +113,9 @@ echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&a
 				$str = '<input type="checkbox" name="'.$name.'"'.$value.' />';
 				if ($value) {
 					$url = '/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&workflow_roles=1&from='.$status['element_id'].'&next='.$s['element_id'];
-					$str .= util_make_link($url, html_image('ic/acl_roles20.png', 20, 20, array('alt'=>_('Edit Roles'))), array('title' => _('Edit roles')));
+					$str .= util_make_link($url, html_image('ic/acl_roles20.png', 20, 20, array('alt'=>_('Edit Roles'))), array('title' => _('Edit Roles')));
 					$url = '/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&workflow_required_fields=1&from='.$status['element_id'].'&next='.$s['element_id'];
-					$str .= util_make_link($url, html_image('ic/required.png', 20, 20, array('alt'=>_('Edit Required Fields'))), array('title' => _('Edit required fields')));
+					$str .= util_make_link($url, html_image('ic/required.png', 20, 20, array('alt'=>_('Edit Required Fields'))), array('title' => _('Edit Required Fields')));
 				} else {
 					$str .= ' '.html_image('spacer.gif', 20, 20);
 					$str .= ' '.html_image('spacer.gif', 20, 20);
@@ -136,8 +132,8 @@ echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&a
 	echo $HTML->listTableBottom();
 
 ?>
-<div class="tips">Tip: Click on <?php echo html_image('ic/acl_roles20.png', 20, 20, array('alt'=> _('Edit Roles'))) ?> to configure allowed roles for a transition (all by default).</div>
-<div class="tips">Tip2: Click on <?php echo html_image('ic/required.png', 20, 20, array('alt'=> _('Edit Required Fields'))) ?> to configure required fields for a transition (none by default).</div>
+<div class="tips"><?php echo _('Tip')._(': ').sprintf(_('Click on %s to configure allowed roles for a transition (all by default).'), html_image('ic/acl_roles20.png', 20, 20, array('alt'=> _('Edit Roles')))) ?></div>
+<div class="tips"><?php echo _('Tip2')._(': ').sprintf(_('Click on %s to configure required fields for a transition (none by default).'), html_image('ic/required.png', 20, 20, array('alt'=> _('Edit Required Fields')))) ?></div>
 
 <p>
 <input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>

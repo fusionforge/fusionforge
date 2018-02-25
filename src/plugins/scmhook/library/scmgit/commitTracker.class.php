@@ -1,12 +1,12 @@
 <?php
 /**
- * scmhook commitTracker Plugin Class
+ * scmhook GitCommitTracker Plugin Class
  * Copyright 2004, Francisco Gimeno <kikov @nospam@ kikov.org>
  * Copyright 2005, Guillaume Smet <guillaume-gforge@smet.org>
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2013-2014, Benoit Debaenst - TrivialDev
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2016-2017, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -46,10 +46,7 @@ class GitCommitTracker extends scmhook {
 
 	function isAvailable() {
 		if (!$this->group->usesTracker()) {
-			$this->disabledMessage = _('Hook not available due to missing dependency: Project not using tracker.');
-			return false;
-		} elseif (!forge_get_config('use_ssh','scmgit')) {
-			$this->disabledMessage = _('Hook not available due to missing dependency: Forge not using SSH for Git.');
+			$this->disabledMessage = _('Hook not available due to missing dependency')._(': ')._('Project not using tracker.');
 			return false;
 		}
 		return true;
@@ -59,7 +56,7 @@ class GitCommitTracker extends scmhook {
 		return $this->disabledMessage;
 	}
 
-	function artifact_extra_detail($params) {
+	function artifact_extra_detail(&$params) {
 		global $HTML;
 		$DBResult = db_query_params('SELECT * FROM plugin_scmhook_scmgit_committracker_data_master, plugin_scmhook_scmgit_committracker_data_artifact
 						WHERE plugin_scmhook_scmgit_committracker_data_artifact.group_artifact_id = $1
@@ -67,22 +64,33 @@ class GitCommitTracker extends scmhook {
 						ORDER BY git_date',
 						array($params['artifact_id']));
 		if (!$DBResult) {
-			echo $HTML->error_msg(_('Unable to retrieve data'));
+			$return = $HTML->error_msg(_('Unable to retrieve data'));
 		} else {
-			$this->getCommitEntries($DBResult, $params['group_id']);
+			$return = $this->getCommitEntries($DBResult, $params['group_id']);
+		}
+		if (isset($params['content'])) {
+			$params['content'] .= $return;
+		} else {
+			echo $return;
 		}
 	}
 
 	function task_extra_detail($params) {
+		$return = '';
 		$DBResult = db_query_params ('SELECT * FROM plugin_scmhook_scmgit_committracker_data_master, plugin_scmhook_scmgit_committracker_data_artifact
-						WHERE plugin_scmhook_scmgit_committracker_data_artifact.project_task_id=$1
-						AND plugin_scmhook_scmgit_committracker_data_master.holder_id=plugin_scmhook_scmgit_committracker_data_artifact.id
+						WHERE plugin_scmhook_scmgit_committracker_data_artifact.project_task_id = $1
+						AND plugin_scmhook_scmgit_committracker_data_master.holder_id = plugin_scmhook_scmgit_committracker_data_artifact.id
 						ORDER BY git_date',
 						array($params['task_id']));
 		if (!$DBResult) {
-			echo $HTML->error_msg(_('Unable to retrieve data'));
+			$return = $HTML->error_msg(_('Unable to retrieve data'));
 		} else {
-			$this->getCommitEntries($DBResult, $params['group_id']);
+			$return = $this->getCommitEntries($DBResult, $params['group_id']);
+		}
+		if (isset($params['content'])) {
+			$params['content'] = $return;
+		} else {
+			echo $return;
 		}
 	}
 
@@ -96,29 +104,31 @@ class GitCommitTracker extends scmhook {
 	function getCommitEntries($DBResult, $group_id) {
 		global $HTML;
 		$group = group_get_object($group_id);
-		$Rows= db_numrows($DBResult);
+		$Rows = db_numrows($DBResult);
+		$return = '';
 
 		if ($Rows > 0) {
-			echo '<tr><td>';
-			echo html_e('h2', array(), _('Related Git commits'), false);
+			$return .= '<tr><td>';
+			$return .= html_e('h2', array(), _('Related Git commits'), false);
 
 			$title_arr = $this->getTitleArr($group_id);
-			echo $HTML->listTableTop($title_arr);
+			$return .= $HTML->listTableTop($title_arr);
 
-			for ($i=0; $i<$Rows; $i++) {
-				$Row = db_fetch_array($DBResult);
+			while ($Row = db_fetch_array($DBResult)) {
 				$cells = array();
 				$cells[][] = $this->getFileLink($group->getUnixName(), $Row['file'], $Row['actual_version']);
 				$cells[][] = date(_('Y-m-d'), $Row['git_date']);
 				$cells[][] = $this->getDiffLink($group->getUnixName(), $Row['file'], $Row['prev_version'], $Row['actual_version']);
 				$cells[][] = $this->getActualVersionLink($group->getUnixName(), $Row['file'], $Row['actual_version']);
 				$cells[][] = htmlspecialchars($Row['log_text']);
-				$cells[][] = util_make_link_u($Row['author'], user_get_object_by_name($Row['author'])->getId(), $Row['author']);
-				echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
+				$commituser = user_get_object_by_name($Row['author']);
+				$cells[][] = util_display_user($commituser->getUnixName(), $commituser->getId(), $commituser->getRealname());
+				$return .= $HTML->multiTableRow(array(), $cells);
 			}
-			echo $HTML->listTableBottom();
-			echo '</td></tr>';
+			$return .= $HTML->listTableBottom();
+			$return .= '</td></tr>';
 		}
+		return $return;
 	}
 
 	/**
@@ -130,13 +140,13 @@ class GitCommitTracker extends scmhook {
 	*
 	*/
 	function getTitleArr($group_id) {
-		$title_arr=array();
-		$title_arr[]=_('File Name').' ('.util_make_link('/scm/browser.php?group_id='.$group_id, _('Browse')).')';
-		$title_arr[]=_('Date');
-		$title_arr[]=_('Previous Version');
-		$title_arr[]=_('Current Version');
-		$title_arr[]=_('Log Message');
-		$title_arr[]=_('Author');
+		$title_arr   = array();
+		$title_arr[] = _('File Name');
+		$title_arr[] = _('Date');
+		$title_arr[] = _('Previous Version');
+		$title_arr[] = _('Current Version');
+		$title_arr[] = _('Log Message');
+		$title_arr[] = _('Author');
 		return $title_arr;
 	}
 
@@ -158,7 +168,7 @@ class GitCommitTracker extends scmhook {
 	* getActualVersionLink - Return a link to the actual version File
 	*
 	* @param	String	$GroupName	is the Name of the project
-	* @param	String	$FileName	is the FileName ( with path )
+	* @param	String	$FileName	is the FileName (with path)
 	* @param	String	$Version	the version to retrieve
 	*
 	* @return	String	$Version	The string containing a link to the actual version File

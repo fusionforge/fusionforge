@@ -29,9 +29,9 @@ class TasksHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	/**
 	 * @param string $words words we are searching for
 	 * @param int $offset offset
-	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
+	 * @param bool $isExact if we want to search for all the words or if only one matching the query is sufficient
 	 * @param int $groupId group id
-	 * @param array|string $sections array of all sections to search in (array of strings)
+	 * @param array|string|int $sections array of all sections to search in (array of strings)
 	 */
 	function __construct($words, $offset, $isExact, $groupId, $sections=SEARCH__ALL_SECTIONS) {
 		$userIsGroupMember = $this->isGroupMember($groupId);
@@ -71,7 +71,7 @@ class TasksHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 				$lastProjectName = $currentProjectName;
 				$rowColor = 0;
 			}
-			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($rowColor) .'>'
+			$return .= '<tr>'
 						. ' <td style="width: 5%">&nbsp;</td>'
 						. ' <td>'.$row['project_task_id'].'</td>'
 						. ' <td>'

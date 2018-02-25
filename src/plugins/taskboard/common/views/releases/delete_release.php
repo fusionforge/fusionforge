@@ -2,6 +2,7 @@
 /**
  * Copyright (C) 2015 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
  * Copyright 2015, Franck Villaume - TrivialDev
+ * Copyright 2016, Stéphane-Eymeric Bredtthauer - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -29,8 +30,8 @@ $release = new TaskBoardRelease( $taskboard, $release_id );
 
 $taskboard->header(
 	array(
-		'title'=>'Taskboard for '.$group->getPublicName().' : '._('Release').' : '._('Delete release') ,
-		'pagename'=>_('Release').' : '._('Delete release'),
+		'title'=> $taskboard->getName()._(': ')._('Release').' : '._('Delete release') ,
+		'pagename'=>_('Release')._(': ')._('Delete release'),
 		'sectionvals'=>array(group_getname($group_id)),
 		'group'=>$group_id
 	)
@@ -41,8 +42,9 @@ if ($taskboard->isError()) {
 } else {
 	echo html_e('div', array('id' => 'messages', 'style' => 'display: none;'), '', false);
 }
+$taskboard_id = $taskboard->getID();
 
-echo $HTML->openForm(array('action' => '/plugins/'.$pluginTaskboard->name.'/releases/?group_id='.$group_id.'&action=delete_release', 'method' => 'post'));
+echo $HTML->openForm(array('action' => '/plugins/'.$pluginTaskboard->name.'/releases/?group_id='.$group_id.'&taskboard_id='.$taskboard_id.'&action=delete_release', 'method' => 'post'));
 echo html_e('input', array('type' => 'hidden', 'name' => 'release_id', 'value' => $release_id));
 echo html_e('h2', array(), _('Release') ." '".$release->getTitle() ."'");
 echo html_e('div', array(), _('You are about to permanently and irretrievably delete this release with all indicators!'));

@@ -9,6 +9,7 @@
  * Copyright 2002-2004 (c) GForge Team
  * Copyright 2010 (c) Franck Villaume
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2016, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -39,7 +40,7 @@ if (getStringFromRequest('submit')) {
 
 	$u = user_get_object_by_name($loginname);
 
-	if (!$u || !is_object($u)){
+	if (!$u || !is_object($u) || ($u->getStatus() == 'S') || ($u->getStatus() == 'D')){
 		form_release_key(getStringFromRequest('form_key'));
 		exit_error(_('That user does not exist.'),'my');
 	}
@@ -79,23 +80,22 @@ if (getStringFromRequest('submit')) {
 	}
 }
 
-$HTML->header(array('title'=>"Lost Account Password"));
+$HTML->header(array('title'=> _('Lost Account Password')));
 
 echo '<p>' . _('Hey... losing your password is serious business. It compromises the security of your account, your projects, and this site.') . '</p>';
 echo '<p>' . _('Clicking “Send Lost PW Hash” below will email a URL to the email address we have on file for you. In this URL is a 128-bit confirmation hash for your account. Visiting the URL will allow you to change your password online and login.') . '</p>';
+echo $HTML->openForm(array('action' => '/account/lostpw.php', 'method' => 'post'));
 ?>
-
-<form action="<?php echo util_make_url('/account/lostpw.php'); ?>" method="post">
 <input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/> <p>
 <?php echo _('Login Name')._(':'); ?>
 <br />
     <label for="loginname">
-        <input id="loginname" type="text" name="loginname"/>
+        <input id="loginname" type="text" name="loginname" required="required" />
     </label>
     <br />
 <input type="submit" name="submit" value="<?php echo _('Send Lost PW Hash'); ?>" />
 </p>
-</form>
+<?php echo $HTML->closeForm(); ?>
 
 	<p><?php echo util_make_link ("/", _('Return')); ?></p>
 

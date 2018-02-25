@@ -27,6 +27,12 @@ class Widget_HomeLatestNews extends Widget {
 		return _('Latest News');
 	}
 	function getContent() {
-		return news_show_latest(forge_get_config('news_group'), 5, true, false, false, 5);
+		$content = news_show_latest(GROUP_IS_NEWS, 5, true, false, false, 5);
+		$content .= util_make_link('/news/', _('Browse all news'));
+		return $content;
+	}
+
+	function getDescription() {
+		return _('Display last 5 validated news for frontpage.');
 	}
 }

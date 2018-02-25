@@ -2,7 +2,7 @@
 /**
  * oauthproviderPlugin Class
  *
- * This file is (c) Copyright 2010, 2011 by Olivier BERGER, Madhumita DHAR, Institut TELECOM
+ * Copyright 2010, 2011 by Olivier BERGER, Madhumita DHAR, Institut TELECOM
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -22,8 +22,6 @@
 
 // will most probably not be set sufficient for the whole forge, but temporarily for one script, which will call
 // session_set_for_authplugin('oauthprovider');
-
-// TODO : fix missing copyright
 
 class oauthproviderPlugin extends ForgeAuthPlugin {
 
@@ -73,87 +71,17 @@ class oauthproviderPlugin extends ForgeAuthPlugin {
 			if ($project->isError()) {
 				return;
 			}
-			if (!$project->isProject()) {
-				return;
-			}
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][]=$this->text;
 				$params['DIRS'][]=util_make_url ('/plugins/oauthprovider/index.php?type=group&id=' . $group_id) ; // we indicate the part we're calling is the project one
+				$params['TOOLTIPS'][] = '';
 			} else {
 				$params['TITLES'][]=$this->text." is [Off]";
 				$params['DIRS'][]='';
+				$params['TOOLTIPS'][] = '';
 			}
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
 	}
-	/*
-	 * works with the function implementations in Plugin.class.php
-	 * re-implementation below is redundant
-	 *
-	 function groupisactivecheckbox($params) {
-		//Check if the group is active
-			// this code creates the checkbox in the project edit public info page to activate/deactivate the plugin
-			$group_id=$params['group'];
-			$group = group_get_object($group_id);
-			echo "<tr>";
-			echo "<td>";
-			echo ' <input type="checkbox" name="use_oauthproviderplugin" value="1" ';
-			// checked or unchecked?
-			if ( $group->usesPlugin ( $this->name ) ) {
-				echo "checked";
-			}
-			echo " /><br/>";
-			echo "</td>";
-			echo "<td>";
-			echo "<strong>Use ".$this->text." Plugin</strong>";
-			echo "</td>";
-			echo "</tr>";
-	}
-	function groupisactivecheckboxpost($params) {
-				global $use_oauthproviderplugin;
-
-	// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
-			$group_id=$params['group'];
-			$group = group_get_object($group_id);
-			$use_oauthproviderplugin = getStringFromRequest('use_oauthproviderplugin');
-			if ( $use_oauthproviderplugin == 1 ) {
-				$group->setPluginUse ( $this->name );
-			} else {
-				$group->setPluginUse ( $this->name, false );
-			}
-	}
-	/*function userisactivecheckbox ($params) {
-		global $G_SESSION;
-		//Check if the group is active
-			// this code creates the checkbox in the project edit public info page to activate/deactivate the plugin
-			$userid = $params['user_id'];
-			$user = user_get_object($userid);
-			echo "<tr>";
-			echo "<td>";
-			echo ' <input type="checkbox" name="use_oauthproviderplugin" value="1" ';
-			// checked or unchecked?
-			if ( $user->usesPlugin ( $this->name ) ) {
-				echo "checked";
-			}
-			echo " /><br/>";
-			echo "</td>";
-			echo "<td>";
-			echo "<strong>Use ".$this->text." Plugin</strong>";
-			echo "</td>";
-			echo "</tr>";
-	}
-	function userisactivecheckboxpost($params) {
-				global $use_oauthproviderplugin;
-
-	// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
-			$userid = $params['user_id'];
-			$user = user_get_object($userid);
-			$use_oauthproviderplugin = getStringFromPost('use_oauthproviderplugin');
-			if ( $use_oauthproviderplugin == 1 ) {
-				$user->setPluginUse ( $this->name );
-			} else {
-				$user->setPluginUse ( $this->name, false );
-			}
-	}*/
 
 	function user_personal_links($params) {
 	// this displays the link in the user's profile page to it's personal oauthprovider (if you want other sto access it, youll have to change the permissions in the index.php
@@ -318,5 +246,4 @@ class oauthproviderPlugin extends ForgeAuthPlugin {
 			}
 		}
 	}
-
 }

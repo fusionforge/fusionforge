@@ -50,32 +50,32 @@ $i=0;
 <td class="right"><?php print util_make_link("/plugins/".$pluginname.'/consumer_manage.php?consumer_id=' . $t_consumer->getId(), _('Cancel') ); ?></td>
 </tr>
 
-<tr <?php echo $HTML->boxGetAltRowStyle($i++) ?>>
+<tr>
 <td class="category"><?php echo _('Name') ?></td>
 <td><input name="consumer_name" maxlength="128" size="40" value="<?php echo ( $t_consumer->getName() ) ?>"/></td>
 </tr>
 
-<tr <?php echo $HTML->boxGetAltRowStyle($i++) ?>>
+<tr>
 <td class="category"><?php echo _('URL') ?></td>
 <td><input name="consumer_url" maxlength="250" size="40" value="<?php echo ( $t_consumer->getUrl() ) ?>"/></td>
 </tr>
 
-<tr <?php echo $HTML->boxGetAltRowStyle($i++) ?>>
+<tr>
 <td class="category"><?php echo _('Description') ?></td>
 <td><input name="consumer_desc" maxlength="250" size="40" value="<?php echo ( $t_consumer->getDesc() ) ?>"/></td>
 </tr>
 
-<tr <?php echo $HTML->boxGetAltRowStyle($i++) ?>>
+<tr>
 <td class="category"><?php echo _('Email') ?></td>
 <td><input name="consumer_email" maxlength="250" size="40" value="<?php echo ( $t_consumer->getEmail() ) ?>"/></td>
 </tr>
 
-<tr <?php echo $HTML->boxGetAltRowStyle($i++) ?>>
+<tr>
 <td class="category"><?php echo _('Key') ?></td>
 <td><input name="consumer_key" readonly="readonly" maxlength="250" size="40" value="<?php echo ( $t_consumer->key ) ?>"/></td>
 </tr>
 
-<tr <?php echo $HTML->boxGetAltRowStyle($i++) ?>>
+<tr>
 <td class="category"><?php echo _('Secret') ?></td>
 <td><input name="consumer_secret" readonly="readonly" maxlength="250" size="40" value="<?php echo ( $t_consumer->secret ) ?>"/></td>
 </tr>

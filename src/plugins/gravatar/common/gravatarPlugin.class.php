@@ -26,7 +26,7 @@ class gravatarPlugin extends Plugin {
 
 	function __construct() {
 		parent::__construct();
-		$this->name = "gravatar";
+		$this->name = 'gravatar';
 		$this->text = _('Gravatar Plugin');
 		$this->pkg_desc =
 _("This plugin contains the gravatar plugin of FusionForge. It allows each
@@ -34,7 +34,7 @@ FusionForge user to have its gravatar icon displayed.");
 		$this->hooks[] = 'user_logo';
 	}
 
-	function user_logo (&$params) {
+	function user_logo(&$params) {
 		$user_id = $params['user_id'];
 		$size = isset($params['size'])? $params['size']: 'm';
 		$code = $this->getHtml($user_id, $size);

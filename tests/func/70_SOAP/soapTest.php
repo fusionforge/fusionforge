@@ -33,8 +33,10 @@ class SoapTest extends FForge_SeleniumTestCase
 		$this->soapclient = NULL;
 
 		$this->soapclient = new SoapClient(WSDL_URL,
-						array('cache_wsdl' => WSDL_CACHE_NONE,
-							'trace' => true));
+					array('cache_wsdl' => WSDL_CACHE_NONE,
+						'stream_context' => stream_context_create(array('ssl' => array('verify_peer' => false,
+														'verify_peer_name' => false,
+														'allow_self_signed' => true)))));
 
 		$this->assertNotNull($this->soapclient);
 	}
@@ -61,7 +63,7 @@ class SoapTest extends FForge_SeleniumTestCase
 			$this->fail('An expected exception has not been raised.');
 		}
 		catch (SoapFault $expected) {
-			$this->assertEquals("Unable to log in with userid of coin", $expected->faultstring);
+			$this->assertEquals("Unable to log in with username of coin", $expected->faultstring);
 		}
 
 		// Check logging in with wrong password
@@ -70,7 +72,7 @@ class SoapTest extends FForge_SeleniumTestCase
 			$this->fail('An expected exception has not been raised.');
 		}
 		catch (SoapFault $expected) {
-			$this->assertEquals("Unable to log in with userid of ".FORGE_ADMIN_USERNAME, $expected->faultstring);
+			$this->assertEquals("Unable to log in with username of ".FORGE_ADMIN_USERNAME, $expected->faultstring);
 		}
 
 		// Get list of groups with empty parameters

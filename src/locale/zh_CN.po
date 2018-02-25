@@ -15,6 +15,7 @@ msgstr ""
 "Last-Translator: Mingye Wang (Arthur2e5) <arthur200126@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
+"X-Bugs: Report translation errors to the Language-Team address.\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -240,7 +241,7 @@ msgstr "使用论坛"
 #: common/frs/FRSReleaseFactory.class.php:64
 #: common/frs/views/editrelease.php:98 common/frs/views/editrelease.php:105
 #: common/frs/views/editrelease.php:132 common/frs/views/qrs.php:62
-#: common/frs/views/shownotes.php:51 common/include/FFError.class.php:206
+#: common/frs/views/shownotes.php:51 common/include/Error.class.php:206
 #: common/include/Group.class.php:2688 common/include/Group.class.php:2689
 #: common/include/Group.class.php:2690 common/include/Group.class.php:2742
 #: common/include/Group.class.php:2743 common/include/Group.class.php:2746
@@ -508,7 +509,7 @@ msgstr ""
 
 #: common/docman/Document.class.php:112
 #: common/docman/DocumentGroup.class.php:106 common/forum/Forum.class.php:138
-#: common/frs/FRSPackage.class.php:141 common/include/FFError.class.php:184
+#: common/frs/FRSPackage.class.php:141 common/include/Error.class.php:184
 #: common/mail/MailingList.class.php:84 common/survey/Survey.class.php:83
 #: common/survey/SurveyQuestion.class.php:74
 #: plugins/mailman/include/MailmanList.class.php:102
@@ -4215,12 +4216,12 @@ msgstr ""
 msgid "Database initialisation error:"
 msgstr "数据库管理"
 
-#: common/include/FFError.class.php:106
+#: common/include/Error.class.php:106
 #, fuzzy
 msgid "No Error"
 msgstr "错误"
 
-#: common/include/FFError.class.php:125 common/include/Group.class.php:434
+#: common/include/Error.class.php:125 common/include/Group.class.php:434
 #: common/include/Group.class.php:517
 #: plugins/hudson/include/hudson.class.php:66
 #: plugins/hudson/include/hudson.class.php:78
@@ -4234,18 +4235,18 @@ msgstr "错误"
 msgid "Permission denied."
 msgstr "权限不足."
 
-#: common/include/FFError.class.php:142 common/include/User.class.php:351
+#: common/include/Error.class.php:142 common/include/User.class.php:351
 #: common/include/User.class.php:913 common/include/User.class.php:965
 #: common/tracker/actions/tracker.php:84
 #: plugins/forumml/www/forumml_utils.php:679 www/account/change_email.php:40
 msgid "Invalid Email Address"
 msgstr "邮箱地址无效。"
 
-#: common/include/FFError.class.php:146
+#: common/include/Error.class.php:146
 msgid "(none given)"
 msgstr ""
 
-#: common/include/FFError.class.php:167 common/mail/MailingList.class.php:273
+#: common/include/Error.class.php:167 common/mail/MailingList.class.php:273
 #: common/pm/ProjectGroup.class.php:369 www/admin/pending-news.php:76
 #: www/admin/pending-news.php:86 www/admin/pending-news.php:106
 #: www/news/admin/index.php:93
@@ -4253,7 +4254,7 @@ msgstr ""
 msgid "Error On Update: %s"
 msgstr "更新时错误："
 
-#: common/include/FFError.class.php:208 common/include/exit.php:91
+#: common/include/Error.class.php:208 common/include/exit.php:91
 #: common/include/exit.php:96
 #, fuzzy, php-format
 msgid "Missing Required Parameters"

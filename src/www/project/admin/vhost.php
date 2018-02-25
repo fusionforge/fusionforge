@@ -4,7 +4,7 @@
  *
  * Portions Copyright 1999-2001 (c) VA Linux Systems
  * The rest Copyright 2002-2004 (c) GForge Team
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -58,7 +58,7 @@ if (getStringFromRequest('createvhost')) {
 			values ($1, $2, $3, $4)', array($vhost_name, $docdir, $cgidir, $group->getID()));
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$error_msg = _('Cannot insert VHOST entry:').db_error();
+			$error_msg = _('Cannot insert VHOST entry')._(': ').db_error();
 		} else {
 			$feedback = _('Virtual Host scheduled for creation.');
 			$group->addHistory('Added vhost '.$vhost_name.' ','');
@@ -97,7 +97,7 @@ if (getStringFromRequest('deletevhost')) {
 				$group_id));
 
 	if (!$res || db_affected_rows($res) < 1) {
-		$error_msg .= _('Could not delete VHOST entry:').db_error();
+		$error_msg .= _('Could not delete VHOST entry')._(': ').db_error();
 	} else {
 		$feedback .= _('VHOST deleted');
 		$group->addHistory('Virtual Host '.$row_vh['vhost_name'].' Removed','');
@@ -109,19 +109,17 @@ if (getStringFromRequest('deletevhost')) {
 
 project_admin_header(array('title'=>_('Virtual Host Management'),'group'=>$group->getID()));
 
-print '<h2>' . _('Add New Virtual Host') . '</h2>';
+echo html_e('h2', array(), _('Add New Virtual Host'));
 
 print '<p>';
-printf(_('To add a new virtual host - simply point a <strong>CNAME</strong> for <em>yourhost.org</em> at <strong>%1$s.%2$s</strong>.  %3$s does not currently host mail (i.e. cannot be an MX) or DNS</strong>.'), $group->getUnixName(), forge_get_config ('web_host'), forge_get_config ('forge_name'));
+printf(_('To add a new virtual host - simply point a <strong>CNAME</strong> for <em>yourhost.org</em> at <strong>%1$s.%2$s</strong>.  %3$s does not currently host mail (i.e. cannot be an MX) or DNS.'), $group->getUnixName(), forge_get_config ('web_host'), forge_get_config ('forge_name'));
 print '</p>';
 
 print '<p>';
 printf(_('Clicking on “Create” will schedule the creation of the Virtual Host.  This will be synced to the project webservers - such that <em>yourhost.org</em> will display the material at <em>%1$s.%2$s</em>.'), $group->getUnixName(), forge_get_config ('web_host'));
 print '</p>';
-
+echo $HTML->openForm(array('name' => 'new_vhost', 'action' => '/project/admin/vhost.php?group_id='.$group->getID().'&createvhost=1', 'method' => 'post'));
 ?>
-
-<form name="new_vhost" action="<?php echo util_make_uri('/project/admin/vhost.php?group_id='.$group->getID().'&createvhost=1'); ?>" method="post">
 <table>
 <tr>
 	<td> <?php echo _('New Virtual Host <em>(e.g. vhost.org)</em>') ?> </td>
@@ -129,10 +127,8 @@ print '</p>';
 	<td> <input type="submit" value="<?php echo _('Create') ?>" /> </td>
 </tr>
 </table>
-</form>
-
 <?php
-
+echo $HTML->closeForm();
 $res_db = db_query_params('
 	SELECT *
 	FROM prweb_vhost
@@ -152,7 +148,7 @@ if (db_numrows($res_db) > 0) {
 	}
 	echo $HTML->listTableBottom();
 } else {
-	echo '<p>'._('No VHOSTs defined').'</p>';
+	echo html_e('p', array(), _('No VHOSTs defined'));
 }
 
 project_admin_footer();

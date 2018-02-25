@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
+ * Copyright 2018, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -25,7 +26,7 @@ require_once $gfcommon.'tracker/ArtifactTypeFactory.class.php';
 require_once $gfcommon.'tracker/ArtifactFactory.class.php';
 require_once $gfcommon.'tracker/ArtifactExtraField.class.php';
 
-class TaskBoardBasicAdapter {
+class TaskBoardBasicAdapter extends FFError {
 	/**
 	 * The TaskBoard object.
 	 *
@@ -84,15 +85,17 @@ class TaskBoardBasicAdapter {
 	/**
 	 * Get list of instances of user stories artifacts
 	 *
-	 * @return	array
+	 * @return	array|bool
 	 */
 	function getUserStories($release_value = NULL) {
 		$at = $this->getUserStoriesTracker();
 		$af = new ArtifactFactory($at);
 		if (!$af || !is_object($af)) {
-			exit_error('Error','Could Not Get Factory');
+			$this->setError('Could Not Get Factory');
+			return false;
 		} elseif ($af->isError()) {
-			exit_error('Error',$af->getErrorMessage());
+			$this->setError($af->getErrorMessage());
+			return false;
 		}
 
 		$_status = 1;
@@ -195,7 +198,7 @@ class TaskBoardBasicAdapter {
 	 * @param	integer	optional identifier of assigned person
 	 * @param	string	optional value (name) of sprint/release
 	 *
-	 * @return	array
+	 * @return	array|bool
 	 */
 	function getTasks($tracker_id, $assigned_to = NULL, $release_value = NULL, $user_story_value = NULL) {
 		$tasks = array();
@@ -204,9 +207,11 @@ class TaskBoardBasicAdapter {
 		if ($at) {
 			$af = new ArtifactFactory($at);
 			if (!$af || !is_object($af)) {
-				exit_error('Error','Could Not Get Factory');
+				$this->setError('Could Not Get Factory');
+				return false;
 			} elseif ($af->isError()) {
-				exit_error('Error',$af->getErrorMessage());
+				$this->setError($af->getErrorMessage());
+				return false;
 			}
 
 			$_status = 1;
@@ -269,7 +274,7 @@ class TaskBoardBasicAdapter {
 	 *
 	 * @return	string	error message in case of fail
 	 */
-	function createTask($tracker_id, $title, $description, $user_story_id = null, $release_value = NULL, $assigned_to = NULL) {
+	function createTask($tracker_id, $title, $description, $user_story_id = null, $release_value = NULL, $assigned_to = 100, $priority = 3) {
 		$tracker = $this->getTasksTracker($tracker_id);
 		if ($tracker) {
 			$artifact = new Artifact($tracker);
@@ -286,9 +291,9 @@ class TaskBoardBasicAdapter {
 			}
 
 			// link create task to user story (if specified)
-			if ($user_story_id && $user_story_alias) {
+			if (!is_null($user_story_id) && $user_story_alias) {
 				if(array_key_exists($user_story_alias, $fields_ids)) {
-					$extra_fields[ $fields_ids[ $user_story_alias ] ] = $user_story_id;
+					$extra_fields[ $fields_ids[ $user_story_alias ] ] = ($user_story_id!=0 ? $user_story_id : '');
 				}
 			}
 
@@ -302,7 +307,7 @@ class TaskBoardBasicAdapter {
 				}
 			}
 
-			$ret = $artifact->create($title, $description, $assigned_to, null, $extra_fields);
+			$ret = $artifact->create($title, $description, $assigned_to, $priority, $extra_fields);
 
 			if (!$ret) {
 				return $artifact->getErrorMessage();
@@ -394,7 +399,7 @@ class TaskBoardBasicAdapter {
 	/**
 	 * Returns true if current user can manage trackers
 	 *
-	 * @return	boolean
+	 * @return	bool
 	 */
 	function isManager() {
 		$ret = true;
@@ -410,7 +415,7 @@ class TaskBoardBasicAdapter {
 	/**
 	 * Returns true if current user can modify artifacts
 	 *
-	 * @return	boolean
+	 * @return	bool
 	 */
 	function isTechnician() {
 		$ret = true;
@@ -431,6 +436,6 @@ class TaskBoardBasicAdapter {
 	 * @return	string	html code.
 	 */
 	function getTaskUrl($artifact) {
-		return util_make_url('/tracker/?aid='.$artifact->getID().'&atid='.$artifact->ArtifactType->getID().'&group_id='.$artifact->ArtifactType->Group->getID().'&func=detail');
+		return util_make_url('/tracker/a_follow.php/'.$artifact->getID());
 	}
 }

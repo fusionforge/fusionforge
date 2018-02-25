@@ -71,42 +71,37 @@ if (getStringFromRequest('set_roadmap')) {
 
 	if (! $roadmap_name) {
 		$error_msg .= _("Cannot create or rename roadmap")._(': ')._('name is empty');
-	}
-	else {
+	} else {
 		$roadmap = new Roadmap($group, $roadmap_id);
 		if (! $roadmap_id) {
 			$result = $roadmap->create($roadmap_name);
 			if ($result) {
 				$feedback .= sprintf(_('Roadmap %s created'), $roadmap_name);
+			} else {
+				$error_msg .= _("Cannot create roadmap")._(': ').$roadmap->getErrorMessage();
 			}
-			else {
-				$error_msg .= _("Cannot create roadmap: ").$roadmap->getErrorMessage();
-			}
-		}
-		else {
+		} else {
 			$old_roadmap_name = $roadmap->getName();
 			if ($roadmap_name != $old_roadmap_name) {
 				$result = $roadmap->rename($roadmap_name);
 				if ($result) {
 					$feedback .= sprintf(_('Roadmap %s renamed to %s'), $old_roadmap_name, $roadmap_name);
-				}
-				else {
-					$error_msg .= _("Cannot rename roadmap: ").$roadmap->getErrorMessage();
+				} else {
+					$error_msg .= _("Cannot rename roadmap")._(': ').$roadmap->getErrorMessage();
 				}
 			}
 		}
 		if (! $error_msg && is_array($roadmap_list) && ! empty($roadmap_list)) {
 			$result = $roadmap->setList($roadmap_list);
 			if (! $result) {
-				$error_msg .= _("Cannot set roadmap: ").$roadmap->getErrorMessage();
+				$error_msg .= _("Cannot set roadmap")._(': ').$roadmap->getErrorMessage();
 			}
 		}
 	}
 	if ($error_msg) {
 		$set_roadmap_failed = true;
 	}
-}
-elseif (getStringFromRequest('set_roadmap_state')) {
+} elseif (getStringFromRequest('set_roadmap_state')) {
 	$roadmap_states = getArrayFromRequest('roadmap_states');
 	$default_roadmap = getIntFromRequest('default_roadmap');
 
@@ -122,11 +117,11 @@ elseif (getStringFromRequest('set_roadmap_state')) {
 		} else {
 			$result = $roadmap->setState((array_key_exists($roadmap->getID(), $roadmap_states) ? 1 : 0));
 			if (! $result) {
-				$error_msg .= _("Cannot set roadmap state: ").$roadmap->getErrorMessage();
+				$error_msg .= _("Cannot set roadmap state")._(': ').$roadmap->getErrorMessage();
 			}
 			$result = $roadmap->isDefault(($default_roadmap == $roadmap->getID() ? 1 : 0));
 			if (! $result) {
-				$error_msg .= _("Cannot set default value: ").$roadmap->getErrorMessage();
+				$error_msg .= _("Cannot set default value")._(': ').$roadmap->getErrorMessage();
 			}
 			if (! $error_msg && $updated === false) {
 				$feedback .= _('Roadmap configuration is updated');
@@ -134,17 +129,15 @@ elseif (getStringFromRequest('set_roadmap_state')) {
 			}
 		}
 	}
-}
-elseif (getStringFromRequest('delete_roadmap_sure')) {
+} elseif (getStringFromRequest('delete_roadmap_sure')) {
 	$roadmap_id = getIntFromRequest('roadmap_id', 0);
 
 	$roadmap = new Roadmap($group, $roadmap_id);
 	$result = $roadmap->delete();
 	if ($result) {
 		$feedback .= sprintf(_('Roadmap %s is deleted'), $roadmap->getName());
-	}
-	else {
-		$error_msg .= _("Cannot delete roadmap: ").$roadmap->getErrorMessage();
+	} else {
+		$error_msg .= _("Cannot delete roadmap")._(': ').$roadmap->getErrorMessage();
 	}
 }
 
@@ -187,8 +180,7 @@ if ($set_roadmap_failed ||
 
 	if (getStringFromRequest('new_roadmap')) {
 		$atfh->header(array('title' => _('Create a new roadmap'), 'modal' => 1));
-	}
-	else {
+	} else {
 		$atfh->header(array('title' => _('Update roadmap'), 'modal' => 1));
 	}
 
@@ -198,11 +190,15 @@ if ($set_roadmap_failed ||
 		echo $HTML->information(_('No trackers have been set up.'));
 	} else {
 		echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&admin_roadmap=1', 'method' => 'post'));
-		echo '<p>'._('Name'). _(': ') . '<input required="required" type="text" name="roadmap_name" value="'.$roadmap->getName().'" size="40" /></p>';
 		if ($roadmap_id) {
 			echo '<input type="hidden" name="roadmap_id" value="'.$roadmap_id.'" />';
 		}
-		echo '<table>'."\n";
+		echo $HTML->listTableTop();
+		$cells = array();
+		$cells[][] = '<label for="roadmap_name">'._('Name')._(':').'</label>';
+		$cells[][] = html_e('input', array('required' => 'required', 'type' => 'text', 'id' => 'roadmap_name', 'name' => 'roadmap_name', 'value' => $roadmap->getName(), 'size' => 40));
+		echo $HTML->multiTableRow(array(), $cells);
+
 		foreach ($at_arr as $artifact_type) {
 			if (!is_object($artifact_type)) {
 				//just skip it
@@ -215,22 +211,22 @@ if ($set_roadmap_failed ||
 				if (array_key_exists($artifact_type->getID(), $roadmap_list)) {
 					$field_id = $roadmap_list[$artifact_type->getID()];
 				}
-
-				echo '<tr>';
-				echo '<td>' . $artifact_type->getName() . '</td>'."\n";
-				echo '<td><select name="roadmap_list['.$artifact_type->getID().']">'."\n";
-				echo '<option value="0"'.(! $field_id ? ' selected="selected"' : '').' >'._('Not used').'</option>'."\n";
-				$extra_fields = $ath->getExtraFields( array(ARTIFACT_EXTRAFIELD_FILTER_INT));
+				$cells = array();
+				$cells[][] = $artifact_type->getName();
+				$content = '<select name="roadmap_list['.$artifact_type->getID().']">'."\n";
+				$content .= '<option value="0"'.(! $field_id ? ' selected="selected"' : '').' >'._('Not used').'</option>'."\n";
+				$extra_fields = $ath->getExtraFields(array(ARTIFACT_EXTRAFIELD_FILTER_INT));
 				foreach ($extra_fields as $extra_field) {
 					if ($extra_field['field_type'] != ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) {
-						echo '<option value="'.$extra_field['extra_field_id'].'"'.($extra_field['extra_field_id'] == $field_id ? ' selected="selected"' : '').' >'.$extra_field['field_name'].'</option>'."\n";
+						$content .= '<option value="'.$extra_field['extra_field_id'].'"'.($extra_field['extra_field_id'] == $field_id ? ' selected="selected"' : '').' >'.$extra_field['field_name'].'</option>'."\n";
 					}
 				}
-				echo '</select></td>'."\n";
-				echo '</tr>'."\n";
+				$content .= '</select>';
+				$cells[][] = $content;
+				echo $HTML->multiTableRow(array(), $cells);
 			}
 		}
-		echo '</table>'."\n";
+		echo $HTML->listTableBottom();
 		echo '<p>
 			<input type="submit" name="set_roadmap" value="'._('Submit').'" />
 			<input type="submit" name="cancel" formnovalidate="formnovalidate" value="'._('Cancel').'" />
@@ -251,8 +247,7 @@ if (getIntFromRequest('manage_release') ||
 	$selected_roadmap = $roadmap_factory->getRoadmapByID($roadmap_id);
 	if (! is_object($selected_roadmap)) {
 		$error_msg .= sprintf(_('roadmap %s is not available'), 'ID='.$roadmap_id);
-	}
-	else {
+	} else {
 		$artifact_type_list = $selected_roadmap->getList();
 
 		$update_order = 0;
@@ -279,15 +274,12 @@ if (getIntFromRequest('manage_release') ||
 				$result = $selected_roadmap->setReleaseOrder($release_order);
 				if ($result) {
 					$feedback .= _('Release(s) order updated');
+				} else {
+					$error_msg .= _("Cannot modify release order")._(': ').$selected_roadmap->getErrorMessage();
 				}
-				else {
-					$error_msg .= _("Cannot modify release order: ").$selected_roadmap->getErrorMessage();
-				}
-			}
-			elseif (getStringFromRequest('release_auto_order')) {
+			} elseif (getStringFromRequest('release_auto_order')) {
 				usort($release_order, 'version_compare');
-			}
-			elseif (getStringFromRequest('release_changes_order')) {
+			} elseif (getStringFromRequest('release_changes_order')) {
 				$order = array_reverse(getArrayFromRequest('order'));
 
 				// Items with not modified positions
@@ -309,13 +301,11 @@ if (getIntFromRequest('manage_release') ||
 						if (!isset($out_before[$new_pos]))
 							$out_before[$new_pos] = array();
 						$out_before[$new_pos][] = $field;
-					}
-					elseif ($new_pos > $list_size) {
+					} elseif ($new_pos > $list_size) {
 						if (!isset($out_after[$new_pos]))
 							$out_after[$new_pos] = array();
 						$out_after[$new_pos][] = $field;
-					}
-					else {
+					} else {
 						if (!isset($changed[$new_pos - 1]))
 							$changed[$new_pos - 1] = array();
 						$changed[$new_pos - 1][] = $field;
@@ -366,15 +356,14 @@ if (getIntFromRequest('manage_release') ||
 			$result = $selected_roadmap->setReleaseOrder($release_order);
 			if ($result) {
 				$feedback .= _('Release(s) order updated');
-			}
-			else {
-				$error_msg .= _("Cannot modify release order: ").$selected_roadmap->getErrorMessage();
+			} else {
+				$error_msg .= _("Cannot modify release order")._(': ').$selected_roadmap->getErrorMessage();
 			}
 		}
 
 		$rows = array();
 		for ($pos = count($release_order) - 1; $pos >= 0; $pos--) {
-			$rows[$pos] = '<tr '. $HTML->boxGetAltRowStyle($pos) .'>'.'<td>'.'&#160;&#160;&#160;'.$release_order[$pos].'</td>'."\n".
+			$rows[$pos] = '<tr>'.'<td>'.'&#160;&#160;&#160;'.$release_order[$pos].'</td>'."\n".
 						'<td class="align-right">'.
 						($pos + 1).'&#160;--&gt;&#160;<input type="text" name="order['.$release_order[$pos].']" value="" size="3" maxlength="3" />'.
 						'</td>'."\n".
@@ -393,19 +382,19 @@ if (getIntFromRequest('manage_release') ||
 		if (! empty($rows)) {
 			?>
 			<p>
-			<strong><?php echo sprintf(_('Set order of releases for %s roadmap:'), $selected_roadmap->getName()) ?></strong>
+			<strong><?php echo sprintf(_('Set order of releases for %s roadmap')._(': '), $selected_roadmap->getName()) ?></strong>
 			</p>
 			<?php
-			echo $HTML->openForm(array('action' => '/tracker/admin?group_id='.$group_id.'&admin_roadmap=1', 'method' => 'post'));
+			echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&admin_roadmap=1', 'method' => 'post'));
 			?>
 			<input type="hidden" name="roadmap_id" value="<?php echo $roadmap_id ?>" />
 			<?php
 			$title_arr = array();
 			$title_arr[] = _('Releases');
-			$title_arr[] = _('Current / New positions');
+			$title_arr[] = _('Current/New positions');
 			$title_arr[] = _('Up/Down positions');
 
-			echo $HTML->listTableTop($title_arr, false, ' ');
+			echo $HTML->listTableTop($title_arr);
 			echo implode('', $rows);
 			echo '<tr class="noborder">
 					<td>
@@ -419,8 +408,7 @@ if (getIntFromRequest('manage_release') ||
 				  </tr>';
 			echo $HTML->listTableBottom();
 			echo $HTML->closeForm();
-		}
-		else {
+		} else {
 			echo '<p>'._('No tracker is selected for this roadmap').'.</p>';
 			echo '<p>'._('You can '). util_make_link('/tracker/admin/?group_id='.$group_id.'&roadmap_id='.$roadmap_id.'&admin_roadmap=1&update_roadmap=1', _('select tracker(s) for this roadmap')).
 				'</p>';
@@ -450,7 +438,7 @@ if (! isset($ihm) || $ihm !== true) {
 		} elseif ($roadmap->isError()) {
 			echo $roadmap->getErrorMessage();
 		} else {
-			$rows[$pos] = '<tr '. $HTML->boxGetAltRowStyle($pos) .'>'.
+			$rows[$pos] = '<tr>'.
 					'<td><input type="checkbox" name="roadmap_states['.$roadmap->getID().']" value="1"'.($roadmap->getState() ? ' checked="checked"' : '').' /></td>'.
 					'<td>'.$roadmap->getName().'</td>'."\n".
 					'<td class="align-center"><input type="radio" name="default_roadmap" value="'.$roadmap->getID().'"'.($roadmap->isDefault() ? ' checked="checked"' : '').' /></td>'.
@@ -470,7 +458,7 @@ if (! isset($ihm) || $ihm !== true) {
 					util_make_link('/tracker/admin/?group_id='.$group_id.'&roadmap_id='.$roadmap->getID().'&admin_roadmap=1&update_roadmap=1',
 							$HTML->getConfigurePic(_('Modify roadmap'), 'modifyroadmap')).
 					util_make_link('/tracker/admin/?group_id='.$group_id.'&roadmap_id='.$roadmap->getID().'&admin_roadmap=1&manage_release=1',
-							html_image('ic/tag.png','','',array('alt' => _('Manage releases'), 'title' => _('Manage releases')))).
+							$HTML->getTagPic(_('Manage releases'), 'managereleases')).
 					util_make_link('/tracker/admin/?group_id='.$group_id.'&roadmap_id='.$roadmap->getID().'&admin_roadmap=1&delete_roadmap=1',
 							$HTML->getDeletePic(_('Delete roadmap'), 'delroadmap')).
 					'</td>'."\n".
@@ -484,11 +472,11 @@ if (! isset($ihm) || $ihm !== true) {
 		$title_arr[] = _('Enable');
 		$title_arr[] = _('Roadmap name');
 		$title_arr[] = _('Default');
-		//$title_arr[] = _('Current / New positions');
+		//$title_arr[] = _('Current/New positions');
 		//$title_arr[] = _('Up/Down positions');
 		$title_arr[] = _('Actions');
 
-		echo $HTML->listTableTop($title_arr, false, ' ');
+		echo $HTML->listTableTop($title_arr);
 		echo implode('', $rows);
 		echo $HTML->listTableBottom();
 	}

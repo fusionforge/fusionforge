@@ -5,6 +5,7 @@
  * Copyright 2003-2004 (c) GForge LLC
  * Copyright 2010 (c) Franck Villaume
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -31,6 +32,8 @@ require_once $gfcommon.'reporting/ReportSetup.class.php';
 
 session_require_global_perm ('forge_stats', 'admin') ;
 
+global $HTML, $feedback, $error_msg;
+
 if (getStringFromRequest('submit') && getStringFromRequest('im_sure')) {
 
 	$r = new ReportSetup();
@@ -55,9 +58,9 @@ echo '</p>';
 echo '<p>';
 echo _('This could take a couple minutes, so DO NOT CLICK MORE THAN ONCE.');
 echo '</p>';
-?>
 
-<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
+echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
+?>
 <p>
 <label for="im_sure">
 <input type="checkbox" id="im_sure" name="im_sure" value="1" /><?php echo _('I am Sure'); ?>
@@ -66,9 +69,8 @@ echo '</p>';
 <p>
 <input type="submit" name="submit" value="<?php echo _('Press ONLY ONCE'); ?>" />
 </p>
-</form>
-
 <?php
+echo $HTML->closeForm();
 
 report_footer();
 

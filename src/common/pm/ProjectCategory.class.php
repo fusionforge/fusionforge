@@ -43,7 +43,6 @@ class ProjectCategory extends FFError {
 	/**
 	 * @param	object	   	$ProjectGroup	ProjectGroup object.
 	 * @param	array|bool	$data		(all fields from project_category) OR category_id from database.
-	 * @return	boolean		success.
 	 */
 	function __construct(&$ProjectGroup, $data=false) {
 		parent::__construct();
@@ -76,7 +75,7 @@ class ProjectCategory extends FFError {
 	 * create - create a new item in the database.
 	 *
 	 * @param	string	$name	Item name.
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function create($name) {
 		//
@@ -118,7 +117,7 @@ class ProjectCategory extends FFError {
 	 * fetchData() - re-fetch the data for this ProjectCategory from the database.
 	 *
 	 * @param	int	$id	ID of the category.
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function fetchData($id) {
 		$res = db_query_params ('SELECT * FROM project_category WHERE category_id=$1',
@@ -163,7 +162,7 @@ class ProjectCategory extends FFError {
 	 * update - update a ProjectCategory.
 	 *
 	 * @param	string	$name	Name of the category.
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function update($name) {
 		if (!forge_check_perm ('pm_admin', $this->ProjectGroup->Group->getID())) {

@@ -49,7 +49,7 @@ abstract class ForgeAuthPlugin extends Plugin {
 	}
 
 	// Hook dispatcher
-	function CallHook ($hookname, &$params) {
+	function CallHook($hookname, &$params) {
 		switch ($hookname) {
 		case 'check_auth_session':
 			$this->checkAuthSession($params);
@@ -61,7 +61,7 @@ abstract class ForgeAuthPlugin extends Plugin {
 			// no default implementation, but see AuthBuiltinPlugin::displayAuthForm()
 			//  $params can be passed with a 'return_to' attribute
 			//  it should return an HTML dialog appened to passed $params['html_snippets']
-            //  it may return a redirection URL appened to  $params['transparent_redirect_urls']
+			//  it may return a redirection URL appened to  $params['transparent_redirect_urls']
 			$this->displayAuthForm($params);
 			break;
 		case 'display_create_user_form':
@@ -81,6 +81,9 @@ abstract class ForgeAuthPlugin extends Plugin {
 		case 'close_auth_session':
 			$this->closeAuthSession($params);
 			break;
+		case 'refresh_auth_session':
+			$this->refreshAuthSession($params);
+			break;
 		default:
 			// Forgot something
 		}
@@ -96,7 +99,7 @@ abstract class ForgeAuthPlugin extends Plugin {
 	protected $saved_user;
 
 	/**
-	 * Is there a valid session?
+	 * checkAuthSession - Is there a valid session?
 	 *
 	 * @param	array	$params
 	 * @return	FORGE_AUTH_AUTHORITATIVE_ACCEPT, FORGE_AUTH_AUTHORITATIVE_REJECT or FORGE_AUTH_NOT_AUTHORITATIVE
@@ -192,7 +195,7 @@ abstract class ForgeAuthPlugin extends Plugin {
 	}
 
 	/**
-	 * Sets the session cookie according to the user in $this->saved_user
+	 * setSessionCookie - Sets the session cookie according to the user in $this->saved_user
 	 */
 	protected function setSessionCookie() {
 		if($this->saved_user) {
@@ -202,10 +205,10 @@ abstract class ForgeAuthPlugin extends Plugin {
 	}
 
 	/**
-	 * Start a new session for a user
+	 * startSession - Start a new session for a user
 	 *
 	 * @param	string	$username
-	 * @return	boolean
+	 * @return	bool
 	 */
 	function startSession($username) {
 		if ($this->isSufficient() || $this->isRequired()) {
@@ -222,13 +225,17 @@ abstract class ForgeAuthPlugin extends Plugin {
 		}
 	}
 
+    function refreshAuthSession() {
+            $this->setSessionCookie();
+    }
+
 	protected function unsetSessionCookie() {
 		session_set_cookie($this->getCookieName(), '');
 	}
 
 	/**
 	 * TODO: Enter description here ...
-	 * @return	Ambigous	<Ambigous, NULL, boolean>
+	 * @return	Ambigous	<Ambigous, NULL, bool>
 	 */
 	public function isRequired() {
 		return forge_get_config('required', $this->name);
@@ -236,7 +243,7 @@ abstract class ForgeAuthPlugin extends Plugin {
 
 	/**
 	 * TODO: Enter description here ...
-	 * @return	Ambigous	<Ambigous, NULL, boolean>
+	 * @return	Ambigous	<Ambigous, NULL, bool>
 	 */
 	public function isSufficient() {
 		return forge_get_config('sufficient', $this->name);
@@ -245,7 +252,7 @@ abstract class ForgeAuthPlugin extends Plugin {
 	/**
 	 * TODO: Enter description here ...
 	 * @param	unknown_type	$event
-	 * @return	boolean
+	 * @return	bool
 	 */
 	public function syncDataOn($event) {
 		$configval = forge_get_config('sync_data_on', $this->name);

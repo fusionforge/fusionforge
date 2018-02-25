@@ -5,6 +5,7 @@
  * Copyright 1999-2001, VA Linux Systems, Inc
  * Copyright 2004, Guillaume Smet/Open Wide
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -43,7 +44,7 @@ class ArtifactSearchQuery extends SearchQuery {
 	/**
 	 * @param	string	$words		words we are searching for
 	 * @param	int	$offset		offset
-	 * @param	boolean	$isExact	if we want to search for all the words or if only one matching the query is sufficient
+	 * @param	bool	$isExact	if we want to search for all the words or if only one matching the query is sufficient
 	 * @param	int	$groupId	group id
 	 * @param	int	$artifactId	artifact id
 	 */
@@ -64,13 +65,13 @@ class ArtifactSearchQuery extends SearchQuery {
 		$words = $this->getFTIwords();
 
 		if (count($this->phrases)) {
-			$qpa = db_construct_qpa(false, 'SELECT x.* FROM (SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact.summary||$1||artifact.details||$1||coalesce(ff_string_agg(artifact_message.body), $1) as full_string_agg, artifact_idx.vectors FROM artifact LEFT OUTER JOIN artifact_message USING (artifact_id), users, artifact_idx WHERE users.user_id = artifact.submitted_by AND artifact.group_artifact_id = $2 AND artifact.artifact_id = artifact_idx.artifact_id AND vectors @@ to_tsquery($3) GROUP BY artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact.details, vectors) AS x WHERE ',
+			$qpa = db_construct_qpa(false, 'SELECT x.* FROM (SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact.summary||$1||artifact.details||$1||coalesce(ff_string_agg(artifact_message.body), $1) as full_string_agg, artifact_idx.vectors FROM artifact LEFT OUTER JOIN artifact_message USING (artifact_id), users, artifact_idx WHERE artifact.is_deleted = 0 AND users.user_id = artifact.submitted_by AND artifact.group_artifact_id = $2 AND artifact.artifact_id = artifact_idx.artifact_id AND vectors @@ to_tsquery($3) GROUP BY artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact.details, vectors) AS x WHERE ',
 							array ($this->field_separator, $this->artifactId, $words));
 			$qpa = $this->addMatchCondition($qpa, 'full_string_agg');
 			$qpa = db_construct_qpa($qpa, ' ORDER BY ts_rank(vectors, to_tsquery($1)) DESC',
 							array($words));
 		} else {
-			$qpa = db_construct_qpa(false, 'SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact_idx.vectors FROM artifact, users, artifact_idx WHERE users.user_id = artifact.submitted_by AND artifact.group_artifact_id = $1 AND artifact.artifact_id = artifact_idx.artifact_id AND vectors @@ to_tsquery($2) ORDER BY ts_rank(vectors, to_tsquery($2)) DESC',
+			$qpa = db_construct_qpa(false, 'SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact_idx.vectors FROM artifact, users, artifact_idx WHERE artifact.is_deleted = 0 AND users.user_id = artifact.submitted_by AND artifact.group_artifact_id = $1 AND artifact.artifact_id = artifact_idx.artifact_id AND vectors @@ to_tsquery($2) ORDER BY ts_rank(vectors, to_tsquery($2)) DESC',
 							array ($this->artifactId, $words));
 		}
 
@@ -78,9 +79,7 @@ class ArtifactSearchQuery extends SearchQuery {
 	}
 
 	function isRowVisible($row) {
-		return forge_check_perm('tracker',
-								$row['group_artifact_id'],
-								'read');
+		return forge_check_perm('tracker', $row['group_artifact_id'], 'read');
 	}
 }
 

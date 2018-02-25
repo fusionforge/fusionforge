@@ -1,15 +1,12 @@
 <?php
-
 /**
  * CompactPreviewPlugin Class
  *
- *
- * This file is part of FusionForge.
- *
- * FusionForge is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
+ * This file is part of FusionForge. FusionForge is free software;
+ * you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the Licence, or (at your option)
+ * any later version.
  *
  * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -17,13 +14,13 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
 class CompactPreviewPlugin extends Plugin {
 
-	function __construct($id=0) {
+	function __construct($id = 0) {
 		parent::__construct($id);
 		$this->name = "compactpreview";
 		$this->text = _("CompactPreview!"); // To show in the tabs, use...
@@ -46,8 +43,7 @@ _("This plugin adds support for user and project compact-preview
 	 * override util_display_user() with modified version to display compact preview popup on user links
 	 * @param array $params hook params (return in $params['user_link'])
 	 */
-	function user_link_with_tooltip (&$params) {
-		//
+	function user_link_with_tooltip(&$params) {
 		require_once dirname( __FILE__ ) . '/CompactResource.class.php';
 		$cR = CompactResource::createCompactResource($params);
 		$params['user_link'] = $cR->getResourceLink();
@@ -57,20 +53,20 @@ _("This plugin adds support for user and project compact-preview
 	 * override util_make_link_g() with modified version to display compact preview popup on project links
 	 * @param array $params hook params (return in $params['user_link'])
 	 */
-	function project_link_with_tooltip (&$params) {
+	function project_link_with_tooltip(&$params) {
 		require_once dirname( __FILE__ ) . '/CompactResource.class.php';
 		$cR = CompactResource::createCompactResource($params);
 		$params['group_link'] = $cR->getResourceLink();
 	}
 
-	function javascript_file (&$params) {
+	function javascript_file(&$params) {
 		// The userTooltip.js script is used by the compact preview feature (see content_negociated_user_home)
 		html_use_jquery();
 		// provides support for the popup for compact preview
 		use_javascript('/plugins/'.$this->name.'/scripts/oslcTooltip.js');
 	}
 
-	function cssfile (&$params) {
+	function cssfile(&$params) {
 		use_stylesheet('/plugins/'.$this->name.'/css/oslcTooltipStyle.css');
 	}
 
@@ -78,7 +74,7 @@ _("This plugin adds support for user and project compact-preview
 	 * Declaration of which content-negociation alternatives are provided by this plugin
 	 * @param unknown_type $params
 	 */
-	function script_accepted_types (&$params) {
+	function script_accepted_types(&$params) {
 		$script = $params['script'];
 		if ($script == 'user_home' || $script == 'project_home') {
 			// we do support content-negociation on /users and /project with the following accept header values

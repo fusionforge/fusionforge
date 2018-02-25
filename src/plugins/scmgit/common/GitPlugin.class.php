@@ -4,9 +4,8 @@
  *
  * Copyright 2009, Roland Mas
  * Copyright 2009, Mehdi Dogguy <mehdi@debian.org>
- * Copyright 2012-2014,2016, Franck Villaume - TrivialDev
- * Copyright © 2013
- *	Thorsten Glaser <t.glaser@tarent.de>
+ * Copyright 2013, Thorsten Glaser <t.glaser@tarent.de>
+ * Copyright 2012-2014,2016-2018, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -32,10 +31,9 @@ forge_define_config_item('default_server', 'scmgit', forge_get_config('scm_host'
 forge_define_config_item('repos_path', 'scmgit', forge_get_config('chroot').'/scmrepos/git');
 forge_define_config_item('use_ssh', 'scmgit', false);
 forge_set_config_item_bool('use_ssh', 'scmgit');
-forge_define_config_item('use_dav', 'scmgit', true);
-forge_set_config_item_bool('use_dav', 'scmgit');
 forge_define_config_item('use_ssl', 'scmgit', true);
 forge_set_config_item_bool('use_ssl', 'scmgit');
+forge_define_config_item('ssh_port', 'core', 22);
 
 class GitPlugin extends SCMPlugin {
 	function __construct() {
@@ -53,6 +51,9 @@ control over it to the project's administrator.");
 		$this->_addHook('scm_admin_form');
 		$this->_addHook('scm_add_repo');
 		$this->_addHook('scm_delete_repo');
+		$this->_addHook('get_scm_repo_list');
+		$this->_addHook('get_scm_repo_info');
+		$this->_addHook('parse_scm_repo_activities');
 		$this->_addHook('widget_instance', 'myPageBox', false);
 		$this->_addHook('widgets', 'widgets', false);
 		$this->_addHook('activity');
@@ -70,7 +71,7 @@ control over it to the project's administrator.");
 			return;
 		}
 
-		if ($project->usesPlugin($this->name) && forge_check_perm('scm', $project->getID(), 'read')) {
+		if (forge_check_perm('scm', $project->getID(), 'read')) {
 			$result = db_query_params('SELECT sum(updates) AS updates, sum(adds) AS adds FROM stats_cvs_group WHERE group_id=$1',
 						array($project->getID()));
 			$commit_num = db_result($result,0,'updates');
@@ -92,20 +93,12 @@ control over it to the project's administrator.");
 	}
 
 	function getInstructionsForAnon($project) {
-		$repo_list = array($project->getUnixName());
+		$repo_list = $this->getRepositories($project);
 		$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
-		$result = db_query_params('SELECT repo_name FROM scm_secondary_repos WHERE group_id=$1 AND next_action = $2 AND plugin_id=$3 ORDER BY repo_name',
-					   array($project->getID(),
-						  SCM_EXTRA_REPO_ACTION_UPDATE,
-						  $this->getID()));
-		$rows = db_numrows($result);
-		for ($i=0; $i<$rows; $i++) {
-			$repo_list[] = db_result($result,$i,'repo_name');
-		}
 		$clone_commands = array();
 		foreach ($repo_list as $repo_name) {
 			if (forge_get_config('use_smarthttp', 'scmgit')) {
-				$clone_commands[] = 'git clone '.$protocol.'://'.forge_get_config('scm_host').'/anonscm/git/'.$project->getUnixName().'/'.$repo_name.'.git';
+				$clone_commands[] = 'git clone '.$protocol.'://'.$this->getBoxForProject($project).'/anonscm/git/'.$project->getUnixName().'/'.$repo_name.'.git';
 			}
 		}
 
@@ -118,7 +111,7 @@ control over it to the project's administrator.");
 
 		$htmlRepo = '';
 		foreach ($clone_commands as $cmd) {
-			$htmlRepo .= html_e('tt', array(), $cmd).html_e('br');;
+			$htmlRepo .= html_e('kbd', array(), $cmd).html_e('br');;
 		}
 		$b .= html_e('p', array(), $htmlRepo);
 
@@ -142,7 +135,7 @@ control over it to the project's administrator.");
 				$user_id = db_result($result, $i, 'user_id');
 				$user_name = db_result($result, $i, 'user_name');
 				$real_name = db_result($result, $i, 'realname');
-				$htmlRepo .= html_e('tt', array(), 'git clone '.$protocol.'://'.forge_get_config('scm_host').'/anonscm/git/'.$project->getUnixName().'/users/'.$user_name.'.git')
+				$htmlRepo .= html_e('kbd', array(), 'git clone '.$protocol.'://'.$this->getBoxForProject($project).'/anonscm/git/'.$project->getUnixName().'/users/'.$user_name.'.git')
 					. ' ('.util_make_link_u($user_name, $user_id, $real_name).')'
 					. html_e('br');
 			}
@@ -154,53 +147,62 @@ control over it to the project's administrator.");
 
 	function getInstructionsForRW($project) {
 		global $HTML;
-		$repo_list = array($project->getUnixName());
+		$repo_list = $this->getRepositories($project);
 
-		$result = db_query_params('SELECT repo_name FROM scm_secondary_repos WHERE group_id=$1 AND next_action = $2 AND plugin_id=$3 ORDER BY repo_name',
-					   array($project->getID(),
-						  SCM_EXTRA_REPO_ACTION_UPDATE,
-						  $this->getID()));
-		$rows = db_numrows($result);
-		for ($i=0; $i<$rows; $i++) {
-			$repo_list[] = db_result($result, $i, 'repo_name');
+		$b = html_e('h2', array(), _('Developer Access'));
+		$b .= html_e('p', array(),
+				ngettext('Only project developers can access the Git repository via this method.',
+				'Only project developers can access the Git repositories via this method.',
+				count($repo_list)));
+		$b .= '<div id="tabber-git">';
+		$liElements = array();
+		if (forge_get_config('use_ssh', 'scmgit')) {
+			$liElements[]['content'] = '<a href="#tabber-gitssh">'._('via SSH').'</a>';
+			$configuration = 1;
 		}
-
-		$b = '';
-		$b .= html_e('h2', array(), _('Developer Access'));
+		if (forge_get_config('use_smarthttp', 'scmgit')) {
+			$liElements[]['content'] = '<a href="#tabber-gitsmarthttp">'._('via "smart HTTP"').'</a>';
+			$configuration = 1;
+		}
+		$b .= $HTML->html_list($liElements);
+		if (!isset($configuration)) {
+			return $HTML->error_msg(_('Error')._(': ')._('No access protocol has been allowed for the Git plugin in scmgit.ini: use_ssh and use_smarthttp are disabled'));
+		}
+		$ssh_port = '';
+		if (forge_get_config('ssh_port') != 22) {
+			$ssh_port = ':'.forge_get_config('ssh_port');
+		}
 		if (session_loggedin()) {
 			$u = user_get_object(user_getid());
 			$d = $u->getUnixName();
 			if (forge_get_config('use_ssh', 'scmgit')) {
-				$b .= html_e('h3', array(), _('via SSH'));
-				$b .= html_e('p', array(),
-					ngettext('Only project developers can access the Git repository via this method.',
-						'Only project developers can access the Git repositories via this method.',
-						count($repo_list)).
-					' '. _('SSH must be installed on your client machine.'));
+				$b .= '<div id="tabber-gitssh" class="tabbertab" >';
+				$b .= html_e('p', array(), _('SSH must be installed on your client machine.'));
 				$htmlRepo = '';
 				foreach ($repo_list as $repo_name) {
-						$htmlRepo .= html_e('tt', array(), 'git clone git+ssh://'.$d.'@' . forge_get_config('scm_host') . forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git').html_e('br');
+					if (forge_get_config('use_shell_limited')) {
+						$htmlRepo .= html_e('kbd', array(), 'git clone '.$d.'@'.$this->getBoxForProject($project).$ssh_port.':'.$project->getUnixName().'/'.$repo_name.'.git').html_e('br');
+					} else {
+						$htmlRepo .= html_e('kbd', array(), 'git clone git+ssh://'.$d.'@'.$this->getBoxForProject($project).$ssh_port.forge_get_config('repos_path', 'scmgit').'/'.$project->getUnixName().'/'.$repo_name.'.git').html_e('br');
+					}
 				}
 				$b .= html_e('p', array(), $htmlRepo);
+				$b .= '</div>';
 			}
 			if (forge_get_config('use_smarthttp', 'scmgit')) {
-				$b .= html_e('h3', array(), _('via "smart HTTP"'));
-				$b .= html_e('p', array(),
-					ngettext('Only project developers can access the Git repository via this method.',
-						'Only project developers can access the Git repositories via this method.',
-						count($repo_list)).
-					' '. _('Enter your site password when prompted.'));
+				$b .= '<div id="tabber-gitsmarthttp" class="tabbertab" >';
+				$b .= html_e('p', array(), _('Enter your site password when prompted.'));
 				$htmlRepo = '';
-
 				$protocol = forge_get_config('use_ssl', 'scmgit') ? 'https' : 'http';
 				foreach ($repo_list as $repo_name) {
-					$htmlRepo .= '<tt>git clone '.$protocol.'://'.$d.'@' . forge_get_config('scm_host').'/authscm/'.$d.'/git/'.$project->getUnixName() .'/'. $repo_name .'.git</tt><br />';
+					$htmlRepo .= html_e('kbd', array(), 'git clone '.$protocol.'://'.$d.'@'.$this->getBoxForProject($project).'/authscm/'.$d.'/git/'.$project->getUnixName() .'/'. $repo_name .'.git').html_e('br');
 				}
 				$b .= html_e('p', array(), $htmlRepo);
+				$b .= '</div>';
 			}
 		} else {
 			if (forge_get_config('use_ssh', 'scmgit')) {
-				$b .= html_e('h3', array(), _('via SSH'));
+				$b .= '<div id="tabber-gitssh" class="tabbertab" >';
 				$b .= html_e('p', array(),
 					ngettext('Only project developers can access the Git repository via this method.',
 						'Only project developers can access the Git repositories via this method.',
@@ -209,13 +211,18 @@ control over it to the project's administrator.");
 					' '. _('Substitute <em>developername</em> with the proper value.'));
 				$htmlRepo = '';
 				foreach ($repo_list as $repo_name) {
-					$htmlRepo .= html_e('tt', array(), 'git clone git+ssh://'.html_e('i', array(), _('developername'), true, false).'@' . forge_get_config('scm_host') . forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git').html_e('br');
+					if (forge_get_config('use_shell_limited')) {
+						$htmlRepo .= html_e('kbd', array(), 'git clone '.html_e('i', array(), _('developername'), true, false).'@'.$this->getBoxForProject($project).$ssh_port.':'.$project->getUnixName().'/'.$repo_name.'.git').html_e('br');
+					} else {
+						$htmlRepo .= html_e('kbd', array(), 'git clone git+ssh://'.html_e('i', array(), _('developername'), true, false).'@'.$this->getBoxForProject($project).$ssh_port.forge_get_config('repos_path', 'scmgit').'/'.$project->getUnixName().'/'.$repo_name.'.git').html_e('br');
+					}
 				}
 				$b .= html_e('p', array(), $htmlRepo);
+				$b .= '</div>';
 			}
 			if (forge_get_config('use_smarthttp', 'scmgit')) {
 				$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
-				$b .= html_e('h3', array(), _('via "smart HTTP"'));
+				$b .= '<div id="tabber-gitsmarthttp" class="tabbertab" >';
 				$b .= html_e('p', array(),
 					ngettext('Only project developers can access the Git repository via this method.',
 						'Only project developers can access the Git repositories via this method.',
@@ -223,15 +230,13 @@ control over it to the project's administrator.");
 					' '. _('Enter your site password when prompted.'));
 				$htmlRepo = '';
 				foreach ($repo_list as $repo_name) {
-					$b .= '<tt>git clone '.$protocol.'://<i>'._('developername').'</i>@' . forge_get_config('scm_host').'/authscm/<i>'._('developername').'</i>/git/'.$project->getUnixName() .'/'. $repo_name .'.git</tt><br />';
+					$htmlRepo .= '<tt>git clone '.$protocol.'://<i>'._('developername').'</i>@'.$this->getBoxForProject($project).'/authscm/<i>'._('developername').'</i>/git/'.$project->getUnixName() .'/'. $repo_name .'.git</tt><br />';
 				}
 				$b .= html_e('p', array(), $htmlRepo);
+				$b .= '</div>';
 			}
 		}
-		if ($b == '') {
-			$b .= $HTML->error_msg(_('Error')._(': ')._('No access protocol has been allowed for the Git plugin in scmgit.ini: use_ssh and use_smarthttp are disabled'));
-		}
-
+		$b .= '</div>';
 		if (session_loggedin()) {
 			$u = user_get_object(user_getid());
 			if ($u->getUnixStatus() == 'A') {
@@ -243,10 +248,10 @@ control over it to the project's administrator.");
 					$b .= html_e('h3', array(), _('Access to your personal repository'));
 					$b .= html_e('p', array(), _('You have a personal repository for this project, accessible through the following methods. Enter your site password when prompted.'));
 					if (forge_get_config('use_ssh', 'scmgit')) {
-						$b .= html_e('tt', array(), 'git clone git+ssh://'.$u->getUnixName().'@' . forge_get_config('scm_host') . forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/users/'. $u->getUnixName() .'.git').html_e('br');
+						$b .= html_e('kbd', array(), 'git clone git+ssh://'.$u->getUnixName().'@'.$this->getBoxForProject($project).$ssh_port.forge_get_config('repos_path', 'scmgit').'/'.$project->getUnixName().'/users/'.$u->getUnixName().'.git').html_e('br');
 					}
 					if (forge_get_config('use_smarthttp', 'scmgit')) {
-						$b .= html_e('tt', array(), 'git clone '.$protocol.'://'.$u->getUnixName().'@' . forge_get_config('scm_host').'/authscm/'.$u->getUnixName().'/git/'.$project->getUnixName() .'/users/'. $u->getUnixName() .'.git').html_e('br');
+						$b .= html_e('kbd', array(), 'git clone '.$protocol.'://'.$u->getUnixName().'@'.$this->getBoxForProject($project).'/authscm/'.$u->getUnixName().'/git/'.$project->getUnixName() .'/users/'. $u->getUnixName() .'.git').html_e('br');
 					}
 				} else {
 					$glist = $u->getGroups();
@@ -273,6 +278,9 @@ control over it to the project's administrator.");
 	}
 
 	function printBrowserPage($params) {
+		if ($params['scm_plugin'] != $this->name) {
+			return;
+		}
 		global $HTML;
 		$useautoheight = 0;
 		$project = $this->checkParams($params);
@@ -284,20 +292,18 @@ control over it to the project's administrator.");
 			if ($params['user_id']) {
 				$repo_user = user_get_object($params['user_id']);
 				$repo = $project->getUnixName().'/users/'.$repo_user->getUnixName().'.git';
-			} else if ($params['extra']) {
+			} elseif ($params['extra']) {
 				$repo = $project->getUnixName().'/'.$params['extra'].'.git';
 			} else {
 				$repo = $project->getUnixName().'/'.$project->getUnixName().'.git';
 			}
 
+			$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
+			$box = $this->getBoxForProject($project);
 			if ($project->enableAnonSCM()) {
-				$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
-				$box = forge_get_config('scm_host');
 				$iframesrc = "$protocol://$box/anonscm/gitweb/?p=$repo";
 			} elseif (session_loggedin()) {
 				$logged_user = user_get_object(user_getid())->getUnixName();
-				$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
-				$box = forge_get_config('scm_host');
 				$iframesrc = "$protocol://$box/authscm/$logged_user/gitweb/?p=$repo";
 			}
 			if ($params['commit']) {
@@ -310,26 +316,14 @@ control over it to the project's administrator.");
 	function getBrowserLinkBlock($project) {
 		$b = html_e('h2', array(), _('Git Repository Browser'));
 		$b .= html_e('p', array(), _("Browsing the Git tree gives you a view into the current status"
-									 . " of this project's code. You may also view the complete"
-									 . " history of any file in the repository."));
-		$b .= html_e('p', array(), '['.util_make_link('/scm/browser.php?group_id='.$project->getID(),
-													  _('Browse main git repository')).']');
+						. " of this project's code. You may also view the complete"
+						. " history of any file in the repository."));
+		$b .= html_e('p', array(), '['.util_make_link('/scm/browser.php?group_id='.$project->getID().'&scm_plugin='.$this->name, _('Browse main git repository')).']');
 
 		# Extra repos
-		$result = db_query_params('SELECT repo_name FROM scm_secondary_repos WHERE group_id=$1 AND next_action = $2 AND plugin_id=$3 ORDER BY repo_name',
-								  array($project->getID(),
-										SCM_EXTRA_REPO_ACTION_UPDATE,
-										$this->getID()));
-		$rows = db_numrows($result);
-		$repo_list = array();
-		for ($i=0; $i<$rows; $i++) {
-			$repo_list[] = db_result($result,$i,'repo_name');
-		}
+		$repo_list = $this->getRepositories($project, false);
 		foreach ($repo_list as $repo_name) {
-			if (forge_get_config('use_smarthttp', 'scmgit')) {
-				$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
-				$b .= '['.util_make_link('/scm/browser.php?group_id='.$project->getID().'&extra='.$repo_name, _('Browse extra git repository')._(': ').$repo_name).']'.html_e('br');
-			}
+			$b .= '['.util_make_link('/scm/browser.php?group_id='.$project->getID().'&extra='.$repo_name.'&scm_plugin='.$this->name, _('Browse extra git repository')._(': ').$repo_name).']'.html_e('br');
 		}
 
 		$result = db_query_params('SELECT u.user_id, u.user_name FROM scm_personal_repos p, users u WHERE p.group_id=$1 AND u.user_id=p.user_id AND u.unix_status=$2 AND plugin_id=$3',
@@ -340,7 +334,7 @@ control over it to the project's administrator.");
 		for ($i=0; $i<$rows; $i++) {
 			$user_id = db_result($result,$i,'user_id');
 			$user_name = db_result($result,$i,'user_name');
-			$b .= '['.util_make_link('/scm/browser.php?group_id='.$project->getID().'&user_id='.$user_id, _('Browse personal git repository')._(': ').$user_name).']'.html_e('br');
+			$b .= '['.util_make_link('/scm/browser.php?group_id='.$project->getID().'&user_id='.$user_id.'&scm_plugin='.$this->name, _('Browse personal git repository')._(': ').$user_name).']'.html_e('br');
 		}
 
 		return $b;
@@ -350,7 +344,7 @@ control over it to the project's administrator.");
 		global $HTML;
 		$b = '';
 
-		$result = db_query_params('SELECT u.realname, u.user_name, u.user_id, sum(updates) as updates, sum(adds) as adds, sum(adds+updates) as combined FROM stats_cvs_user s, users u WHERE group_id=$1 AND s.user_id=u.user_id AND (updates>0 OR adds >0) GROUP BY u.user_id, realname, user_name, u.user_id ORDER BY combined DESC, realname',
+		$result = db_query_params('SELECT u.realname, u.user_name, u.user_id, sum(updates) as updates, sum(adds) as adds, sum(adds+updates) as combined, reponame FROM stats_cvs_user s, users u WHERE group_id=$1 AND s.user_id=u.user_id AND (updates>0 OR adds >0) GROUP BY u.user_id, realname, user_name, u.user_id, reponame ORDER BY reponame, combined DESC, realname',
 			array($project->getID()));
 
 		if (db_numrows($result) > 0) {
@@ -359,17 +353,32 @@ control over it to the project's administrator.");
 					_('Adds'),
 					_('Updates')
 			);
-			$b .= $HTML->listTableTop($tableHeaders, false, '', 'repo-history');
+			$b .= $HTML->listTableTop($tableHeaders, array(), '', 'repo-history');
 
 			$i = 0;
 			$total = array('adds' => 0, 'updates' => 0);
 
+			$prevrepo = '';
 			while ($data = db_fetch_array($result)) {
+				if ($prevrepo != $data['reponame']) {
+					if ($prevrepo != '') {
+						$cells = array();
+						$cells[] = array(html_e('strong', array(), _('Total')._(':')), 'class' => 'halfwidth');
+						$cells[] = array($total['adds'], 'class' => 'onequarterwidth align-right');
+						$cells[] = array($total['updates'], 'class' => 'onequarterwidth align-right');
+						$b .= $HTML->multiTableRow(array(), $cells);
+					}
+					$prevrepo = $data['reponame'];
+					$total = array('adds' => 0, 'updates' => 0);
+					$cells = array();
+					$cells[] = array(html_e('strong', array(), $data['reponame'].' '._('statistics')), 'colspan' => 3);
+					$b .= $HTML->multiTableRow(array('class' => 'tableheading'), $cells);
+				}
 				$cells = array();
-				$cells[] = array(util_make_link_u($data['user_name'], $data['user_id'], $data['realname']), 'class' => 'halfwidth');
+				$cells[] = array(util_display_user($data['user_name'], $data['user_id'], $data['realname']), 'class' => 'halfwidth');
 				$cells[] = array($data['adds'], 'class' => 'onequarterwidth align-right');
 				$cells[] = array($data['updates'], 'class' => 'onequarterwidth align-right');
-				$b .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
+				$b .= $HTML->multiTableRow(array(), $cells);
 				$total['adds'] += $data['adds'];
 				$total['updates'] += $data['updates'];
 				$i++;
@@ -378,10 +387,10 @@ control over it to the project's administrator.");
 			$cells[] = array(html_e('strong', array(), _('Total')._(':')), 'class' => 'halfwidth');
 			$cells[] = array($total['adds'], 'class' => 'onequarterwidth align-right');
 			$cells[] = array($total['updates'], 'class' => 'onequarterwidth align-right');
-			$b .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
+			$b .= $HTML->multiTableRow(array(), $cells);
 			$b .= $HTML->listTableBottom();
 		} else {
-			$b .= $HTML->information(_('No history yet'));
+			$b .= $HTML->warning_msg(_('No history yet.'));
 		}
 
 		return $b;
@@ -405,6 +414,8 @@ control over it to the project's administrator.");
 			system("cd $root; LC_ALL=C git clone --bare --quiet --no-hardlinks $main_repo $repodir 2>&1 >/dev/null | grep -v 'warning: You appear to have cloned an empty repository.' >&2");
 			system("GIT_DIR=\"$repodir\" git update-server-info");
 			system("GIT_DIR=\"$repodir\" git config http.receivepack true");
+			system("GIT_DIR=\"$repodir\" git config core.logAllRefUpdates true");
+
 			if (is_file("$repodir/hooks/post-update.sample")) {
 				rename("$repodir/hooks/post-update.sample",
 					"$repodir/hooks/post-update");
@@ -428,7 +439,6 @@ control over it to the project's administrator.");
 		$project = $this->checkParams($params);
 		if (!$project) return false;
 		if (!$project->isActive()) return false;
-		if (!$project->usesPlugin($this->name)) return false;
 
 		$project_name = $project->getUnixName();
 		$unix_group_ro = $project_name . '_scmro';
@@ -459,6 +469,7 @@ control over it to the project's administrator.");
 			$result = '';
 			exec("GIT_DIR=\"$tmp_repo\" git update-server-info", $result);
 			exec("GIT_DIR=\"$tmp_repo\" git config http.receivepack true", $result);
+			exec("GIT_DIR=\"$tmp_repo\" git config core.logAllRefUpdates true");
 			$output .= join("<br />", $result);
 			if (is_file("$tmp_repo/hooks/post-update.sample")) {
 				rename("$tmp_repo/hooks/post-update.sample",
@@ -515,6 +526,7 @@ control over it to the project's administrator.");
 				}
 				system("GIT_DIR=\"$repodir\" git update-server-info");
 				system("GIT_DIR=\"$repodir\" git config http.receivepack true");
+				system("GIT_DIR=\"$repodir\" git config core.logAllRefUpdates true");
 				if (is_file("$repodir/hooks/post-update.sample")) {
 					rename("$repodir/hooks/post-update.sample",
 						"$repodir/hooks/post-update");
@@ -602,7 +614,7 @@ control over it to the project's administrator.");
 		fwrite($f, "\$favicon = '". util_make_url('/plugins/scmgit/git-favicon.png')."';\n");
 		fwrite($f, "\$stylesheet = '". util_make_url('/plugins/scmgit/gitweb.css')."';\n");
 		fwrite($f, "\$javascript = '". util_make_url('/plugins/scmgit/gitweb.js')."';\n");
-		fwrite($f, "\$site_html_head_string = '<script type=\"text/javascript\" src=\"". util_make_url('/scripts/iframe-resizer/iframeResizer.contentWindow.min.js'). "\" />';\n");
+		fwrite($f, "\$site_html_head_string = '<script type=\"text/javascript\" src=\"". util_make_url('/scripts/iframe-resizer/iframeResizer.contentWindow.js'). "\" />';\n");
 		fwrite($f, "\$prevent_xss = 'true';\n");
 		fwrite($f, "\$site_footer = '".forge_get_config('source_path')."/plugins/scmgit/www/gitweb_footer.html';\n");
 		fwrite($f, "\$feature{'actions'}{'default'} = [('project home', '" .
@@ -669,10 +681,6 @@ control over it to the project's administrator.");
 			return false;
 		}
 
-		if (!$project->usesPlugin($this->name)) {
-			return false;
-		}
-
 		if ($params['mode'] == 'day') {
 			$year = $params['year'];
 			$month = $params['month'];
@@ -681,150 +689,167 @@ control over it to the project's administrator.");
 			$start_time = gmmktime(0, 0, 0, $month, $day, $year);
 			$end_time = $start_time + 86400;
 
-			$usr_adds = array();
-			$usr_updates = array();
-			$usr_deletes = array();
-			$usr_commits = array();
-
-			$adds = 0;
-			$updates = 0;
-			$deletes = 0;
-			$commits = 0;
-
-			$repo = forge_get_config('repos_path', 'scmgit') . '/' . $project->getUnixName() . '/' . $project->getUnixName() . '.git';
-			if (!is_dir($repo) || !is_dir("$repo/refs")) {
-				// echo "No repository $repo\n";
-				return false;
+			$repolist = $this->getRepositories($project);
+			foreach ($repolist as $repo_name) {
+				$this->gatherStatsRepo($project, $repo_name, $year, $month, $day);
 			}
+		}
+	}
 
-			# For each commit, get committer full name and e-mail (respecting git .mailmap file),
-			# and a list of files prefixed by their status (A/M/D)
-			$pipe = popen("GIT_DIR=\"$repo\" git log --since=@$start_time --until=@$end_time --all --pretty='format:%n%aN <%aE>' --name-status 2>/dev/null", 'r' );
+	function gatherStatsRepo($group, $project_reponame, $year, $month, $day) {
+		$month_string = sprintf("%04d%02d", $year, $month);
+		$start_time = gmmktime(0, 0, 0, $month, $day, $year);
+		$end_time = $start_time + 86400;
 
-			db_begin();
+		$usr_adds = array();
+		$usr_updates = array();
+		$usr_deletes = array();
+		$usr_commits = array();
 
-			// cleaning stats_cvs_* table for the current day
-			$res = db_query_params('DELETE FROM stats_cvs_group WHERE month=$1 AND day=$2 AND group_id=$3',
+		$adds = 0;
+		$updates = 0;
+		$deletes = 0;
+		$commits = 0;
+
+		$repo = forge_get_config('repos_path', 'scmgit') . '/' . $group->getUnixName() . '/' . $project_reponame . '.git';
+		if (!is_dir($repo) || !is_dir("$repo/refs")) {
+			// echo "No repository $repo\n";
+			return false;
+		}
+
+		# For each commit, get committer full name and e-mail (respecting git .mailmap file),
+		# and a list of files prefixed by their status (A/M/D)
+		$pipe = popen("GIT_DIR=\"$repo\" git log --since=@$start_time --until=@$end_time --all --pretty='format:%n%aN <%aE>' --name-status 2>/dev/null", 'r');
+
+		db_begin();
+
+		// cleaning stats_cvs_* table for the current day for the default repository
+		$res = db_query_params('DELETE FROM stats_cvs_group WHERE month = $1 AND day = $2 AND group_id = $3 and reponame = $4',
 						array($month_string,
-						       $day,
-						       $project->getID()));
-			if (!$res) {
-				echo "Error while cleaning stats_cvs_group\n";
+							$day,
+							$group->getID(),
+							$project_reponame));
+		if (!$res) {
+			echo "Error while cleaning stats_cvs_group\n";
+			db_rollback();
+			return false;
+		}
+
+		$res = db_query_params ('DELETE FROM stats_cvs_user WHERE month = $1 AND day = $2 AND group_id = $3 and reponame = $4',
+						array($month_string,
+							$day,
+							$group->getID(),
+							$project_reponame));
+		if(!$res) {
+			echo "Error while cleaning stats_cvs_user\n";
+			db_rollback();
+			return false;
+		}
+
+		$last_user = "";
+		while (!feof($pipe) && $data = fgets($pipe)) {
+			$line = trim($data);
+			// Replace bad UTF-8 with '?' - it's quite hard to make git output non-UTF-8
+			// (e.g. with i18n.commitEncoding = unknown) - but some users do!
+			// and this makes PostgreSQL choke (SQL> ERROR:  invalid byte sequence for encoding "UTF8": 0xf9)
+			$line = mb_convert_encoding($line, 'UTF-8', 'UTF-8');
+			if (strlen($line) > 0) {
+				$result = preg_match("/^(?P<name>.+) <(?P<mail>.+)>/", $line, $matches);
+				if ($result) {
+					// Author line
+					$last_user = $matches['name'];
+					$user2email[$last_user] = $matches['mail'];
+					if (!isset($usr_adds[$last_user])) {
+						$usr_adds[$last_user] = 0;
+						$usr_updates[$last_user] = 0;
+						$usr_deletes[$last_user] = 0;
+						$usr_commits[$last_user] = 0;
+					}
+					$commits++;
+					$usr_commits[$last_user]++;
+				} else {
+					// Short-commit stats line
+					$result = preg_match("/^(?P<mode>[AMD])\s+(?P<file>.+)$/", $line, $matches);
+					if (!$result)
+						continue;
+					if ($last_user == "")
+						continue;
+					if (!isset($usr_adds[$last_user]))
+						$usr_adds[$last_user] = 0;
+					if (!isset($usr_updates[$last_user]))
+						$usr_updates[$last_user] = 0;
+					if (!isset($usr_deletes[$last_user]))
+						$usr_deletes[$last_user] = 0;
+					if ($matches['mode'] == 'A') {
+						$usr_adds[$last_user]++;
+						$adds++;
+					} elseif ($matches['mode'] == 'M') {
+						$usr_updates[$last_user]++;
+						$updates++;
+					} elseif ($matches['mode'] == 'D') {
+						$usr_deletes[$last_user]++;
+						$deletes++;
+					}
+				}
+			}
+		}
+
+		// inserting group results in stats_cvs_groups
+		if ($updates > 0 || $adds > 0 || $deletes > 0 || $commits > 0) {
+			if (!db_query_params('INSERT INTO stats_cvs_group (month, day, group_id, checkouts, commits, adds, updates, deletes, reponame)
+						VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)',
+						array($month_string,
+							$day,
+							$group->getID(),
+							0,
+							$commits,
+							$adds,
+							$updates,
+							$deletes,
+							$project_reponame))) {
+				echo "Error while inserting into stats_cvs_group\n";
 				db_rollback();
 				return false;
 			}
+		}
 
-			$res = db_query_params ('DELETE FROM stats_cvs_user WHERE month=$1 AND day=$2 AND group_id=$3',
-						array ($month_string,
-						       $day,
-						       $project->getID())) ;
-			if(!$res) {
-				echo "Error while cleaning stats_cvs_user\n" ;
-				db_rollback () ;
-				return false ;
-			}
+		// building the user list
+		$user_list = array_unique(array_merge(array_keys($usr_adds), array_keys($usr_updates), array_keys($usr_deletes), array_keys($usr_commits)));
 
-			$last_user = "";
-			while (!feof($pipe) && $data = fgets($pipe)) {
-				$line = trim($data);
-				// Replace bad UTF-8 with '?' - it's quite hard to make git output non-UTF-8
-				// (e.g. with i18n.commitEncoding = unknown) - but some users do!
-				// and this makes PostgreSQL choke (SQL> ERROR:  invalid byte sequence for encoding "UTF8": 0xf9)
-				$line = mb_convert_encoding($line, 'UTF-8', 'UTF-8');
-				if (strlen($line) > 0) {
-					$result = preg_match("/^(?P<name>.+) <(?P<mail>.+)>/", $line, $matches);
-					if ($result) {
-						// Author line
-						$last_user = $matches['name'];
-						$user2email[$last_user] = $matches['mail'];
-						if (!isset($usr_adds[$last_user])) {
-							$usr_adds[$last_user] = 0;
-							$usr_updates[$last_user] = 0;
-							$usr_deletes[$last_user] = 0;
-							$usr_commits[$last_user] = 0;
-						}
-						$commits++;
-						$usr_commits[$last_user]++;
-					} else {
-						// Short-commit stats line
-						$result = preg_match("/^(?P<mode>[AMD])\s+(?P<file>.+)$/", $line, $matches);
-						if (!$result)
-							continue;
-						if ($last_user == "")
-							continue;
-						if (!isset($usr_adds[$last_user]))
-							$usr_adds[$last_user] = 0;
-						if (!isset($usr_updates[$last_user]))
-							$usr_updates[$last_user] = 0;
-						if (!isset($usr_deletes[$last_user]))
-							$usr_deletes[$last_user] = 0;
-						if ($matches['mode'] == 'A') {
-							$usr_adds[$last_user]++;
-							$adds++;
-						} elseif ($matches['mode'] == 'M') {
-							$usr_updates[$last_user]++;
-							$updates++;
-						} elseif ($matches['mode'] == 'D') {
-							$usr_deletes[$last_user]++;
-							$deletes++;
-						}
-					}
+		foreach ($user_list as $user) {
+			// Trying to get user id from user name or email
+			$u = user_get_object_by_name($user);
+			if ($u) {
+				$user_id = $u->getID();
+			} else {
+				$res = db_query_params('SELECT user_id FROM users WHERE lower(realname)=$1 OR lower(email)=$2',
+						array(strtolower($user), strtolower($user2email[$user])));
+				if ($res && db_numrows($res) > 0) {
+					$user_id = db_result($res, 0, 'user_id');
+				} else {
+					continue;
 				}
 			}
 
-			// inserting group results in stats_cvs_groups
-			if ($updates > 0 || $adds > 0 || $deletes > 0 || $commits > 0) {
-				if (!db_query_params('INSERT INTO stats_cvs_group (month,day,group_id,checkouts,commits,adds,updates,deletes) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
-						      array($month_string,
-							     $day,
-							     $project->getID(),
-							     0,
-							     $commits,
-							     $adds,
-							     $updates,
-							     $deletes))) {
-					echo "Error while inserting into stats_cvs_group\n";
+			$uc = isset($usr_commits[$user]) ? $usr_commits[$user] : 0;
+			$uu = isset($usr_updates[$user]) ? $usr_updates[$user] : 0;
+			$ua = isset($usr_adds[$user]) ? $usr_adds[$user] : 0;
+			$ud = isset($usr_deletes[$user]) ? $usr_deletes[$user] : 0;
+			if ($uu > 0 || $ua > 0 || $uc > 0 || $ud > 0) {
+				if (!db_query_params('INSERT INTO stats_cvs_user (month, day, group_id, user_id, commits, adds, updates, deletes, reponame)
+									VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)',
+								array($month_string,
+									$day,
+									$group->getID(),
+									$user_id,
+									$uc,
+									$ua,
+									$uu,
+									$ud,
+									$project_reponame))) {
+					echo "Error while inserting into stats_cvs_user\n";
 					db_rollback();
 					return false;
-				}
-			}
-
-			// building the user list
-			$user_list = array_unique(array_merge(array_keys($usr_adds), array_keys($usr_updates), array_keys($usr_deletes), array_keys($usr_commits)));
-
-			foreach ($user_list as $user) {
-				// Trying to get user id from user name or email
-				$u = user_get_object_by_name($user);
-				if ($u) {
-					$user_id = $u->getID();
-				} else {
-					$res = db_query_params('SELECT user_id FROM users WHERE lower(realname)=$1 OR lower(email)=$2',
-						array(strtolower($user), strtolower($user2email[$user])));
-					if ($res && db_numrows($res) > 0) {
-						$user_id = db_result($res, 0, 'user_id');
-					} else {
-						continue;
-					}
-				}
-
-				$uc = isset($usr_commits[$user]) ? $usr_commits[$user] : 0;
-				$uu = isset($usr_updates[$user]) ? $usr_updates[$user] : 0;
-				$ua = isset($usr_adds[$user]) ? $usr_adds[$user] : 0;
-				$ud = isset($usr_deletes[$user]) ? $usr_deletes[$user] : 0;
-				if ($uu > 0 || $ua > 0 || $uc > 0 || $ud > 0) {
-					if (!db_query_params('INSERT INTO stats_cvs_user (month,day,group_id,user_id,commits,adds,updates,deletes) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
-							      array($month_string,
-								     $day,
-								     $project->getID(),
-								     $user_id,
-								     $uc,
-								     $ua,
-								     $uu,
-								     $ud))) {
-						echo "Error while inserting into stats_cvs_user\n";
-						db_rollback();
-						return false;
-					}
 				}
 			}
 		}
@@ -847,10 +872,6 @@ control over it to the project's administrator.");
 
 		$snapshot = forge_get_config('scm_snapshots_path').'/'.$group_name.'-scm-latest.tar'.util_get_compressed_file_extension();
 		$tarball = forge_get_config('scm_tarballs_path').'/'.$group_name.'-scmroot.tar'.util_get_compressed_file_extension();
-
-		if (!$project->usesPlugin($this->name)) {
-			return false;
-		}
 
 		if (!$project->enableAnonSCM()) {
 			if (is_file($snapshot)) {
@@ -910,9 +931,6 @@ control over it to the project's administrator.");
 	 */
 	function widgets($params) {
 		require_once 'common/widget/WidgetLayoutManager.class.php';
-		if ($params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_GROUP) {
-			$params['fusionforge_widgets'][] = 'plugin_scmgit_project_latestcommits';
-		}
 		if ($params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_USER) {
 			$params['fusionforge_widgets'][] = 'plugin_scmgit_user_myrepositories';
 		}
@@ -964,11 +982,11 @@ control over it to the project's administrator.");
 	}
 
 	function activity($params) {
-		$group_id = $params['group'];
-		$project = group_get_object($group_id);
-		if (!$project->usesPlugin($this->name)) {
+		$project = $this->checkParams($params);
+		if (!$project) {
 			return false;
 		}
+
 		if (in_array('scmgit', $params['show']) || (count($params['show']) < 1)) {
 			if ($project->enableAnonSCM()) {
 				$server_script = '/anonscm/gitlog';
@@ -980,7 +998,7 @@ control over it to the project's administrator.");
 			}
 			// Grab commit log
 			$protocol = forge_get_config('use_ssl', 'scmgit') ? 'https://' : 'http://';
-			$script_url = $protocol . forge_get_config('scm_host')
+			$script_url = $protocol.$this->getBoxForProject($project)
 				. $server_script
 				.'?unix_group_name='.$project->getUnixName()
 				.'&mode=date_range'
@@ -1012,8 +1030,8 @@ control over it to the project's administrator.");
 				if (sizeof($splitedLine) == 4) {
 					$result = array();
 					$result['section'] = 'scm';
-					$result['group_id'] = $group_id;
-					$result['ref_id'] = 'browser.php?group_id='.$group_id.'&commit='.$splitedLine[3];
+					$result['group_id'] = $project->getID();
+					$result['ref_id'] = 'browser.php?group_id='.$project->getID().'&scm_plugin='.$this->name.'&commit='.$splitedLine[3];
 					$result['description'] = htmlspecialchars($splitedLine[2]).' (commit '.$splitedLine[3].')';
 					$userObject = user_get_object_by_email($splitedLine[1]);
 					if (is_a($userObject, 'FFUser')) {
@@ -1028,17 +1046,19 @@ control over it to the project's administrator.");
 				}
 			}
 		}
-		$params['ids'][] = $this->name;
-		$params['texts'][] = _('Git Commits');
+		if (!in_array($this->name, $params['ids']) && ($project->enableAnonSCM() || session_loggedin())) {
+			$params['ids'][] = $this->name;
+			$params['texts'][] = _('Git Commits');
+		}
 		return true;
 	}
 
 	function scm_add_repo(&$params) {
+		if ($params['scm_plugin'] != $this->name) {
+			return;
+		}
 		$project = $this->checkParams($params);
 		if (!$project) {
-			return false;
-		}
-		if (!$project->usesPlugin($this->name)) {
 			return false;
 		}
 
@@ -1117,7 +1137,6 @@ control over it to the project's administrator.");
 			return false;
 		}
 
-		plugin_hook ("scm_admin_update", $params);
 		return true;
 	}
 
@@ -1127,11 +1146,12 @@ control over it to the project's administrator.");
 		if (!$project) {
 			return false;
 		}
-		if (!$project->usesPlugin($this->name)) {
-			return false;
-		}
 
 		session_require_perm('project_admin', $params['group_id']);
+
+		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
+			echo html_ao('div', array('id' => 'tabber-'.$this->name, 'class' => 'tabbertab'));
+		}
 
 		$project_name = $project->getUnixName();
 
@@ -1159,36 +1179,44 @@ control over it to the project's administrator.");
 			echo $HTML->listTableTop($titleArr);
 			foreach ($existing_repos as $key => $repo) {
 				$cells = array();
-				$cells[][] = html_e('tt', array(), $repo['repo_name']);
+				$cells[][] = html_e('kbd', array(), $repo['repo_name']);
 				$cells[][] = $repo['description'];
 				$cells[][] = $repo['clone_url'];
 				$deleteForm = $HTML->openForm(array('name' => 'form_delete_repo_'.$repo['repo_name'], 'action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
-				$deleteForm .= html_e('input', array('type' => 'hidden', 'name' => 'group_id', 'value' => $params['group_id']));
-				$deleteForm .= html_e('input', array('type' => 'hidden', 'name' => 'delete_repository', 'value' => 1));
-				$deleteForm .= html_e('input', array('type' => 'hidden', 'name' => 'repo_name', 'value' => $repo['repo_name']));
-				$deleteForm .= html_e('input', array('type' => 'hidden', 'name' => 'scm_enable_anonymous', 'value' => ($project->enableAnonSCM()? 1 : 0)));
-				$deleteForm .= html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Delete')));
+				$deleteForm .= $HTML->html_input('group_id', '', '', 'hidden', $params['group_id']);
+				$deleteForm .= $HTML->html_input('delete_repository', '', '', 'hidden', 1);
+				$deleteForm .= $HTML->html_input('repo_name', '', '', 'hidden', $repo['repo_name']);
+				$deleteForm .= $HTML->html_input('scm_plugin_id', '', '', 'hidden', $this->getID());
+				$deleteForm .= $HTML->html_input('submit', '', '', 'submit', _('Delete'));
 				$deleteForm .= $HTML->closeForm();
 				$cells[][] = $deleteForm;
-				echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($key, true)), $cells);
+				echo $HTML->multiTableRow(array(), $cells);
 			}
 			echo $HTML->listTableBottom();
 		}
 
 		echo html_e('h2', array(), _('Create new Git repository for project').' '.$project_name);
-		echo $HTML->openForm(array('name' => 'form_create_repo', 'action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
-		echo html_e('input', array('type' => 'hidden', 'name' => 'group_id', 'value' => $params['group_id']));
-		echo html_e('input', array('type' => 'hidden', 'name' => 'create_repository', 'value' => 1));
-		echo html_e('p', array(), html_e('strong', array(), _('Repository name')._(':')).utils_requiredField().html_e('br').
-				html_e('input', array('type' => 'text', 'required' => 'required', 'size' => 20, 'name' => 'repo_name', 'value' => '')));
-		echo html_e('p', array(), html_e('strong', array(), _('Description')._(':')).html_e('br').
-				html_e('input', array('type' => 'text', 'size' => 60, 'name' => 'description', 'value' => '')));
+		echo $HTML->openForm(array('name' => 'form_create_repo_scmgit', 'action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
+		echo $HTML->html_input('group_id', '', '', 'hidden', $params['group_id']);
+		echo $HTML->html_input('create_repository', '', '', 'hidden', 1);
+		echo $HTML->html_input('scm_plugin', '', '', 'hidden', $this->name);
+		echo $HTML->html_input('repo_name', '', html_e('strong', array(), _('Repository name')._(':')).utils_requiredField(), 'text', '', array('required' => 'required', 'size' => 20));
+		echo html_e('br');
+		echo $HTML->html_input('description', '', html_e('strong', array(), _('Description')._(':')), 'text', '', array('size' => 60));
 		echo html_e('p', array(), html_e('strong', array(), _('Initial clone URL (or name of an existing repository in this project; leave empty to start with an empty repository)')._(':')).html_e('br').
-				html_e('input', array('type' => 'text', 'size' => 60, 'name' => 'clone', 'value' => $project_name)));
-		echo html_e('input', array('type' => 'hidden', 'name' => 'scm_enable_anonymous', 'value' => ($project->enableAnonSCM()? 1 : 0)));
-		echo html_e('input', array('type' => 'submit', 'name' => 'cancel', 'value' => _('Cancel')));
-		echo html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Submit')));
+				$HTML->html_input('clone', '', '', 'text', $project_name, array('size' => 60)));
+		echo html_e('br');
+		echo $HTML->html_input('cancel', '', '', 'submit', _('Cancel'), array(), array('style' => 'display: inline-block!important'));
+		echo $HTML->html_input('submit', '', '', 'submit', _('Submit'), array(), array('style' => 'display: inline-block!important'));
 		echo $HTML->closeForm();
+
+		if ($project->usesPlugin('scmhook')) {
+			$scmhookPlugin = plugin_get_object('scmhook');
+			$scmhookPlugin->displayScmHook($project->getID(), $this->name);
+		}
+		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
+			echo html_ac(html_ap() - 1);
+		}
 	}
 
 	function getCommits($project, $user = null, $nb_commits) {
@@ -1212,7 +1240,7 @@ control over it to the project's administrator.");
 			} else {
 				$params = '&mode=latest';
 			}
-			$script_url = $protocol . forge_get_config('scm_host')
+			$script_url = $protocol.$this->getBoxForProject($project)
 				. $server_script
 				.'?unix_group_name='.$project->getUnixName()
 				. $params
@@ -1252,6 +1280,246 @@ control over it to the project's administrator.");
 			}
 		}
 		return $commits;
+	}
+
+    function get_scm_repo_list(&$params) {
+		if (array_key_exists('group_name',$params)) {
+			$unix_group_name = $params['group_name'];
+		} else {
+			$unix_group_name = '';
+		}
+		$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
+		if (session_loggedin()) {
+			$u = user_get_object(user_getid());
+			$d = $u->getUnixName();
+		}
+
+		$results = array();
+		if ($unix_group_name) {
+			$res = db_query_params("SELECT unix_group_name, groups.group_id FROM groups
+			JOIN group_plugin ON (groups.group_id=group_plugin.group_id)
+			WHERE groups.status=$1 AND group_plugin.plugin_id=$2 AND groups.unix_group_name=$3
+			ORDER BY unix_group_name", array('A', $this->getID(), $unix_group_name));
+		} else {
+			$res = db_query_params("SELECT unix_group_name, groups.group_id FROM groups
+			JOIN group_plugin ON (groups.group_id=group_plugin.group_id)
+			WHERE groups.status=$1 AND group_plugin.plugin_id=$2
+			ORDER BY unix_group_name", array('A', $this->getID()));
+		}
+		while ($arr = db_fetch_array($res)) {
+			if (!forge_check_perm('scm', $arr['group_id'], 'read')) {
+				continue;
+			}
+			$urls = array();
+			$project = group_get_object($arr['group_id']);
+			if (forge_get_config('use_smarthttp', 'scmgit')) {
+				$urls[] = $protocol.'://'.$this->getBoxForProject($project).'/anonscm/git/'.$arr['unix_group_name'].'/'.$arr['unix_group_name'].'.git';
+			}
+			if (session_loggedin()) {
+				if (forge_get_config('use_ssh', 'scmgit')) {
+					$urls[] = 'git+ssh://'.$d.'@'.$this->getBoxForProject($project).forge_get_config('repos_path', 'scmgit') .'/'. $arr['unix_group_name'] .'/'. $arr['unix_group_name'] .'.git';
+				}
+				if (forge_get_config('use_smarthttp', 'scmgit')) {
+					$urls[] = $protocol.'://'.$d.'@'.$this->getBoxForProject($project).'/authscm/'.$d.'/git/'.$arr['unix_group_name'].'/'.$arr['unix_group_name'].'.git';
+				}
+			}
+			$results[] = array('group_id' => $arr['group_id'],
+							   'repository_type' => 'git',
+							   'repository_id' => $arr['unix_group_name'].'/git/'.$arr['unix_group_name'],
+							   'repository_urls' => $urls,
+				);
+		}
+		if ($unix_group_name) {
+			$res = db_query_params("SELECT unix_group_name, groups.group_id, repo_name
+			FROM groups
+			JOIN group_plugin ON (groups.group_id=group_plugin.group_id)
+			JOIN scm_secondary_repos ON (groups.group_id=scm_secondary_repos.group_id)
+			WHERE groups.status=$1 AND group_plugin.plugin_id=$2 AND groups.unix_group_name=$3
+			ORDER BY unix_group_name, repo_name", array('A', $this->getID(), $unix_group_name));
+		} else {
+			$res = db_query_params("SELECT unix_group_name, groups.group_id, repo_name
+			FROM groups
+			JOIN group_plugin ON (groups.group_id=group_plugin.group_id)
+			JOIN scm_secondary_repos ON (groups.group_id=scm_secondary_repos.group_id)
+			WHERE groups.status=$1 AND group_plugin.plugin_id=$2
+			ORDER BY unix_group_name, repo_name", array('A', $this->getID()));
+		}
+		while ($arr = db_fetch_array($res)) {
+			if (!forge_check_perm('scm', $arr['group_id'], 'read')) {
+				continue;
+			}
+			$urls = array();
+			$project = group_get_object($arr['group_id']);
+			if (forge_get_config('use_smarthttp', 'scmgit')) {
+				$urls[] = $protocol.'://'.$this->getBoxForProject($project).'/anonscm/git/'.$arr['unix_group_name'].'/'.$arr['repo_name'].'.git';
+			}
+			if (session_loggedin()) {
+				if (forge_get_config('use_ssh', 'scmgit')) {
+					$urls[] = 'git+ssh://'.$d.'@'.$this->getBoxForProject($project).forge_get_config('repos_path', 'scmgit') .'/'. $arr['unix_group_name'] .'/'. $arr['repo_name'] .'.git';
+				}
+				if (forge_get_config('use_smarthttp', 'scmgit')) {
+					$urls[] = $protocol.'://'.$d.'@'.$this->getBoxForProject($project).'/authscm/'.$d.'/git/'.$arr['unix_group_name'].'/'.$arr['repo_name'].'.git';
+				}
+			}
+			$results[] = array('group_id' => $arr['group_id'],
+							   'repository_type' => 'git',
+							   'repository_id' => $arr['unix_group_name'].'/git/'.$arr['repo_name'],
+							   'repository_urls' => $urls,
+				);
+		}
+		if ($unix_group_name) {
+			$res = db_query_params("SELECT unix_group_name, groups.group_id, user_name
+			FROM groups
+			JOIN group_plugin ON (groups.group_id=group_plugin.group_id)
+			JOIN scm_personal_repos ON (groups.group_id=scm_personal_repos.group_id)
+			JOIN users ON (scm_personal_repos.user_id=users.user_id)
+			WHERE groups.status=$1 AND group_plugin.plugin_id=$2 AND users.status=$3 AND groups.unix_group_name=$4
+			ORDER BY unix_group_name, user_name", array('A', $this->getID(), 'A', $unix_group_name));
+		} else {
+			$res = db_query_params("SELECT unix_group_name, groups.group_id, user_name
+			FROM groups
+			JOIN group_plugin ON (groups.group_id=group_plugin.group_id)
+			JOIN scm_personal_repos ON (groups.group_id=scm_personal_repos.group_id)
+			JOIN users ON (scm_personal_repos.user_id=users.user_id)
+			WHERE groups.status=$1 AND group_plugin.plugin_id=$2 AND users.status=$3
+			ORDER BY unix_group_name, user_name", array('A', $this->getID(), 'A'));
+		}
+		while ($arr = db_fetch_array($res)) {
+			if (!forge_check_perm('scm', $arr['group_id'], 'read')) {
+				continue;
+			}
+			$urls = array();
+			$project = group_get_object($arr['group_id']);
+			if (forge_get_config('use_smarthttp', 'scmgit')) {
+				$urls[] = $protocol.'://'.$this->getBoxForProject($project).'/anonscm/git/'.$arr['unix_group_name'].'/users/'.$arr['user_name'].'.git';
+			}
+			if (session_loggedin()) {
+				if (forge_get_config('use_ssh', 'scmgit')) {
+					$urls[] = 'git+ssh://'.$d.'@'.$this->getBoxForProject($project).forge_get_config('repos_path', 'scmgit') .'/'. $arr['unix_group_name'] .'/users/'. $arr['user_name'] .'.git';
+				}
+				if (forge_get_config('use_smarthttp', 'scmgit')) {
+					$urls[] = $protocol.'://'.$d.'@'.$this->getBoxForProject($project).'/authscm/'.$d.'/git/'.$arr['unix_group_name'].'/users/'.$arr['user_name'].'.git';
+				}
+			}
+			$results[] = array('group_id' => $arr['group_id'],
+							   'repository_type' => 'git',
+							   'repository_id' => $arr['unix_group_name'].'/git/users/'.$arr['user_name'],
+							   'repository_urls' => $urls,
+				);
+		}
+
+		foreach ($results as $res) {
+			$params['results'][] = $res;
+		}
+	}
+
+    function get_scm_repo_info(&$params) {
+		$rid = $params['repository_id'];
+		$e = explode('/',$rid);
+		if ($e[1] != 'git') {
+			return;
+		}
+		$g = $e[0];
+		$p = array('group_name' => $g);
+		$this->get_scm_repo_list($p);
+		foreach ($p['results'] as $r) {
+			if ($r['repository_id'] == $rid) {
+				$params['results'] = $r;
+				return;
+			}
+		}
+	}
+
+    function parse_scm_repo_activities(&$params) {
+		$repos = array();
+		$res = db_query_params("SELECT unix_group_name, groups.group_id FROM groups
+			JOIN group_plugin ON (groups.group_id=group_plugin.group_id)
+			WHERE groups.status=$1 AND group_plugin.plugin_id=$2
+			ORDER BY unix_group_name", array('A', $this->getID()));
+		while ($arr = db_fetch_array($res)) {
+			$el = array();
+			$el['rpath'] = forge_get_config('repos_path', 'scmgit') .'/'. $arr['unix_group_name'] .'/'. $arr['unix_group_name'] .'.git';
+			$el['rid'] = $arr['unix_group_name'].'/git/'.$arr['unix_group_name'];
+			$el['gid'] = $arr['group_id'];
+			$repos[] = $el;
+		}
+
+		$res = db_query_params("SELECT unix_group_name, groups.group_id, repo_name
+			FROM groups
+			JOIN group_plugin ON (groups.group_id=group_plugin.group_id)
+			JOIN scm_secondary_repos ON (groups.group_id=scm_secondary_repos.group_id)
+			WHERE groups.status=$1 AND group_plugin.plugin_id=$2
+			ORDER BY unix_group_name, repo_name", array('A', $this->getID()));
+		while ($arr = db_fetch_array($res)) {
+			$el = array();
+			$el['rpath'] = forge_get_config('repos_path', 'scmgit') .'/'. $arr['unix_group_name'] .'/'. $arr['repo_name'] .'.git';
+			$el['rid'] = $arr['unix_group_name'].'/git/'.$arr['repo_name'];
+			$el['gid'] = $arr['group_id'];
+			$repos[] = $el;
+		}
+
+		$res = db_query_params("SELECT unix_group_name, groups.group_id, user_name
+			FROM groups
+			JOIN group_plugin ON (groups.group_id=group_plugin.group_id)
+			JOIN scm_personal_repos ON (groups.group_id=scm_personal_repos.group_id)
+			JOIN users ON (scm_personal_repos.user_id=users.user_id)
+			WHERE groups.status=$1 AND group_plugin.plugin_id=$2 AND users.status=$3
+			ORDER BY unix_group_name, user_name", array('A', $this->getID(), 'A'));
+		while ($arr = db_fetch_array($res)) {
+			$el = array();
+			$el['rpath'] = forge_get_config('repos_path', 'scmgit') .'/'. $arr['unix_group_name'] .'/users/'. $arr['user_name'] .'.git';
+			$el['rid'] = $arr['unix_group_name'].'/git/users/'.$arr['user_name'];
+			$el['gid'] = $arr['group_id'];
+			$repos[] = $el;
+		}
+
+		$lastactivities = array();
+		$res = db_query_params("SELECT repository_id, max(tstamp) AS last FROM scm_activities WHERE plugin_id=$1 GROUP BY repository_id",
+							   array($this->getID()));
+		while ($arr = db_fetch_array($res)) {
+			$lastactivities[$arr['repository_id']] = $arr['last'];
+		}
+
+		foreach ($repos as $rdata) {
+			$since = "";
+			if (array_key_exists($rdata['rid'], $lastactivities)) {
+				$since = "--since=@".$lastactivities[$rdata['rid']];
+			}
+			$rpath = $rdata['rpath'];
+			$tstamps = array();
+			$f = popen("GIT_DIR=\"$rpath\" git reflog --date=raw --all $since 2> /dev/null", "r");
+			while (($l = fgets($f, 4096)) !== false) {
+				if (preg_match("/@\{(?P<tstamp>[0-9]+) [-+0-9]+\}: push/", $l, $matches)) {
+					if (array_key_exists($rdata['rid'], $lastactivities)
+						&& $matches['tstamp'] <= $lastactivities[$rdata['rid']]) {
+						continue;
+					}
+					$tstamps[$matches['tstamp']] = 1;
+				}
+			}
+			foreach ($tstamps as $t => $v) {
+				$res = db_query_params("INSERT INTO scm_activities (group_id, plugin_id, repository_id, tstamp) VALUES ($1,$2,$3,$4)",
+									   array($rdata['gid'],
+											 $this->getID(),
+											 $rdata['rid'],
+											 $t));
+			}
+		}
+	}
+
+	function getRepositories($group, $autoinclude = true) {
+		$repoarr = array();
+		if ($autoinclude) {
+			$repoarr[] = $group->getUnixName();
+		}
+		$result = db_query_params('SELECT repo_name FROM scm_secondary_repos WHERE group_id = $1 AND next_action = $2 AND plugin_id = $3 ORDER BY repo_name',
+						   array($group->getID(),
+							  SCM_EXTRA_REPO_ACTION_UPDATE,
+							  $this->getID()));
+		while ($arr = db_fetch_array($result)) {
+			$repoarr[] = $arr['repo_name'];
+		}
+		return $repoarr;
 	}
 }
 

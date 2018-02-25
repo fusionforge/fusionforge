@@ -76,7 +76,7 @@ if (session_loggedin()) {
 		exit_permission_denied(_('You cannot submit news for a project unless you are an admin on that project.'), 'home');
 	}
 
-	if ($group_id == forge_get_config('news_group')) {
+	if ($group_id == GROUP_IS_NEWS) {
 		exit_permission_denied(_('Submitting news from the news group is not allowed.'), 'home');
 	}
 
@@ -118,12 +118,6 @@ if (session_loggedin()) {
 		}
 	}
 
-	//news must now be submitted from a project page -
-
-	if (!$group_id) {
-		exit_no_group();
-	}
-
 	/*
 		Show the submit form
 	*/
@@ -149,10 +143,11 @@ if (session_loggedin()) {
 		<input type="hidden" name="form_key" value="'. form_generate_key() .'" />
 		<p><strong>'._('For project')._(': ').$group->getPublicName().'</strong></p>
 		<p>
-		<strong>'._('Subject').utils_requiredField()._(': ').'</strong><br />
-		<input required="required" type="text" name="summary" value="'.$summary.'" size="80" /></p>
+		<label for="summary"><strong>'._('Subject').utils_requiredField()._(': ').'</strong></label>
+		<input required="required" type="text" id="summary" name="summary" value="'.$summary.'" size="80" />
+		</p>
 		<p>
-		<strong>'._('Details').utils_requiredField()._(': ').'</strong>'.notepad_button('document.forms.newssubmitform.details').'</p>';
+		<label for="details"><strong>'._('Details').utils_requiredField()._(': ').'</strong></label>'.notepad_button('document.forms.newssubmitform.details').'</p>';
 
 	$params = array();
 	$params['name'] = 'details';
@@ -160,12 +155,13 @@ if (session_loggedin()) {
 	$params['height'] = "500";
 	$params['body'] = $details;
 	$params['group'] = $group_id;
-	$params['content'] = '<textarea required="required" name="details" rows="5" cols="50">'.$details.'</textarea>';
+	$params['content'] = '<textarea required="required" id="details" name="details" rows="5" cols="50">'.$details.'</textarea>';
 	plugin_hook_by_reference("text_editor",$params);
 
 	echo $params['content'].'<br />';
-	echo '<div><input type="submit" name="submit" value="'._('Submit').'" />
-		</div>';
+	echo '<p>';
+	echo '<input type="submit" name="submit" value="'._('Submit').'" />';
+	echo '</p>';
 	echo $HTML->closeForm();
 
 	news_footer();

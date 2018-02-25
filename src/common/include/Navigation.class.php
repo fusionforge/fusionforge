@@ -3,7 +3,7 @@
  * FusionForge navigation
  *
  * Copyright 2009 - 2010, Olaf Lenz
- * Copyright 2011-2012, Franck Villaume - TrivialDev
+ * Copyright 2011-2012,2016, Franck Villaume - TrivialDev
  * Copyright 2014, Stéphane-Eymeric Bredthauer
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -75,6 +75,9 @@ class Navigation extends FFError {
 	 * the URL of the favicon.
 	 *
 	 * @todo: Make favicon configurable
+	 *
+	 * @param	bool	$asHTML
+	 * @return	string
 	 */
 	function getFavIcon($asHTML = true) {
 		if (!$asHTML) {
@@ -91,6 +94,8 @@ class Navigation extends FFError {
 	 * array with the following structure: $result['titles']:
 	 * list of titles of the feeds; $result['urls'] list of urls
 	 * of the feeds.
+	 * @param bool $asHTML
+	 * @return array
 	 */
 	function getRSS($asHTML = true) {
 		if (!$asHTML) {
@@ -122,7 +127,7 @@ class Navigation extends FFError {
 	 * Get the searchBox HTML code.
 	 */
 	function getSearchBox() {
-		global $words, $forum_id, $group_id, $group_project_id, $atid, $exact, $type_of_search;
+		global $words, $forum_id, $group_id, $group_project_id, $atid, $exact, $type_of_search, $HTML;
 
 		$res = "";
 		if (get_magic_quotes_gpc()) {
@@ -138,7 +143,8 @@ class Navigation extends FFError {
 			$exact = 1;
 		}
 
-		$res .= html_ao('form', array('id' => 'searchBox', 'action' => util_make_uri('/search/'), 'method' => 'get'));
+		$res .= html_ao('div', array('role' => 'search'));
+		$res .= $HTML->openForm(array('id' => 'searchBox', 'action' => '/search/', 'method' => 'get'));
 		$res .= html_ao('div', array());
 		$parameters = array(
 			SEARCH__PARAMETER_GROUP_ID => $group_id,
@@ -155,8 +161,9 @@ class Navigation extends FFError {
 		for($i = 0, $max = count($searchEngines); $i < $max; $i++) {
 			$searchEngine =& $searchEngines[$i];
 			$attrs = array('value' => $searchEngine->getType());
-			if ( $type_of_search == $searchEngine->getType())
+			if ( $type_of_search == $searchEngine->getType()) {
 				$attrs['selected'] = 'selected';
+			}
 			$res .= html_e('option', $attrs, $searchEngine->getLabel($parameters), false);
 		}
 		$res .= html_ac(html_ap() - 1);
@@ -171,7 +178,9 @@ class Navigation extends FFError {
 		if (isset($group_id) && $group_id) {
 			$res .= util_make_link('/search/advanced_search.php?group_id='.$group_id, _('Advanced search'));
 		}
-		$res .= html_ac(html_ap() - 2);
+		$res .= html_ac(html_ap() - 1);
+		$res .= $HTML->closeForm();
+		$res .= html_ac(html_ap() - 1);
 
 		return $res;
 	}
@@ -214,6 +223,7 @@ class Navigation extends FFError {
 	 *	$result['selected']: number of the selected menu entry.
 	 */
 	function getSiteMenu() {
+		//WARNING: REQUEST_URI does not include prefix. DO NOT use util_make_uri in test to find the selected tab.
 		$request_uri = getStringFromServer('REQUEST_URI');
 
 		$menu = array();
@@ -223,28 +233,33 @@ class Navigation extends FFError {
 		$selected = 0;
 
 		// Home
-		$menu['titles'][] = _('Home');
-		$menu['urls'][] = util_make_uri('/');
-		$menu['tooltips'][] = _('Main Page');
+		if (forge_get_config('use_home')) {
+			$menu['titles'][] = _('Home');
+			$menu['urls'][] = util_make_uri('/');
+			$menu['tooltips'][] = _('Main Page');
+		}
 
 		// My Page
-		$menu['titles'][] = _('My Page');
-		$menu['urls'][] = util_make_uri('/my/');
-		$menu['tooltips'][] = _('Your Page, widgets selected by you to follow your items.');
-		if (strstr($request_uri, util_make_uri('/my/'))
-			|| strstr($request_uri, util_make_uri('/account/'))
-			|| strstr($request_uri, util_make_uri('/register/'))
-			|| strstr($request_uri, util_make_uri('/themes/'))
-			)
-		{
-			$selected = count($menu['urls'])-1;
+		if (forge_get_config('use_my')) {
+			$menu['titles'][] = _('My Page');
+			$menu['urls'][] = util_make_uri('/my/');
+			$menu['tooltips'][] = _('Your Page, widgets selected by you to follow your items.');
+			if (strstr($request_uri, '/my/')
+				|| strstr($request_uri, '/account/')
+				|| strstr($request_uri, '/register/')
+				|| strstr($request_uri, '/themes/')
+				|| strstr($request_uri, '/forum/myforums.php')
+				)
+			{
+				$selected = count($menu['urls'])-1;
+			}
 		}
 
 		if (forge_get_config('use_trove') || forge_get_config('use_project_tags') || forge_get_config('use_project_full_list')) {
 			$menu['titles'][] = _('Projects');
 			$menu['urls'][] = util_make_uri('/softwaremap/');
 			$menu['tooltips'][] = _('Map of projects, by categories or types.');
-			if (strstr($request_uri, util_make_uri('/softwaremap/'))) {
+			if (strstr($request_uri, '/softwaremap/')) {
 				$selected = count($menu['urls'])-1;
 			}
 		}
@@ -253,7 +268,7 @@ class Navigation extends FFError {
 			$menu['titles'][] = _('Code Snippets');
 			$menu['urls'][] = util_make_uri('/snippet/');
 			$menu['tooltips'][] = _('Tooling library. Small coding tips.');
-			if (strstr($request_uri, util_make_uri('/snippet/'))) {
+			if (strstr($request_uri, '/snippet/')) {
 				$selected = count($menu['urls'])-1;
 			}
 		}
@@ -262,7 +277,7 @@ class Navigation extends FFError {
 			$menu['titles'][] = _('Project Openings');
 			$menu['urls'][] = util_make_uri('/people/');
 			$menu['tooltips'][] = _('Hiring Market Place.');
-			if (strstr($request_uri, util_make_uri('/people/'))) {
+			if (strstr($request_uri, '/people/')) {
 				$selected=count($menu['urls'])-1;
 			}
 		}
@@ -288,7 +303,7 @@ class Navigation extends FFError {
 			$menu['titles'][] = _('Site Admin');
 			$menu['urls'][] = util_make_uri('/admin/');
 			$menu['tooltips'][] = _('Administration Submenu to handle global configuration, users & projects.');
-			if (strstr($request_uri, util_make_uri('/admin/')) || strstr($request_uri, 'type=globaladmin')) {
+			if (strstr($request_uri, '/admin/') || strstr($request_uri, 'type=globaladmin')) {
 				$selected = count($menu['urls'])-1;
 			}
 		}
@@ -296,7 +311,7 @@ class Navigation extends FFError {
 			$menu['titles'][] = _('Reporting');
 			$menu['urls'][] = util_make_uri('/reporting/');
 			$menu['tooltips'][] = _('Statistics about visits, users & projects in time frame.');
-			if (strstr($request_uri, util_make_uri('/reporting/'))) {
+			if (strstr($request_uri, '/reporting/')) {
 				$selected = count($menu['urls'])-1;
 			}
 		}
@@ -316,7 +331,7 @@ class Navigation extends FFError {
 				}
 			}
 			if ($project && is_object($project)) {
-				if (!$project->isError() && $project->isProject()) {
+				if (!$project->isError()) {
 					$menu['titles'][] = $project->getPublicName();
 					$menu['tooltips'][] = _('Project home page, widgets selected to follow specific items.');
 					if (isset ($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
@@ -330,20 +345,22 @@ class Navigation extends FFError {
 		}
 
 		$menu['selected'] = $selected;
-
 		return $menu;
 	}
 
 	/**
 	 * Get a reference to an array of the projects menu for the project with the id $group_id with the following structure:
-	 *	$result['starturl']: URL of the projects starting page;
-	 *	$result['name']: public name of the project;
-	 *	$result['titles']: list of titles of the menu entries;
-	 *	$result['tooltips']: list of tooltips (html title) of the menu entries;
-	 *	$result['urls']: list of urls of the menu entries;
-	 *	$result['adminurls']: list of urls to the admin pages of the menu entries.
-	 *	If the user has no admin permissions, the correpsonding adminurl is false.
-	 *	$result['selected']: number of the menu entry that is currently selected.
+	 *    $result['starturl']: URL of the projects starting page;
+	 *    $result['name']: public name of the project;
+	 *    $result['titles']: list of titles of the menu entries;
+	 *    $result['tooltips']: list of tooltips (html title) of the menu entries;
+	 *    $result['urls']: list of urls of the menu entries;
+	 *    $result['adminurls']: list of urls to the admin pages of the menu entries.
+	 *    If the user has no admin permissions, the corresponding adminurl is false.
+	 *    $result['selected']: number of the menu entry that is currently selected.
+	 * @param $group_id
+	 * @param string $toptab
+	 * @return mixed
 	 */
 	function getProjectMenu($group_id, $toptab = "") {
 		// rebuild menu if it has never been built before, or
@@ -358,9 +375,6 @@ class Navigation extends FFError {
 			if ($group->isError()) {
 				//wasn't found or some other problem
 				return null;
-			}
-			if (!$group->isProject()) {
-				return;
 			}
 
 			$selected = 0;
@@ -403,8 +417,8 @@ class Navigation extends FFError {
 
 			/* Homepage
 			// check for use_home_tab?
-			$TABS_DIRS[]='http://'. $this->getHomePage();
-			$TABS_TITLES[]=_('Home Page');
+			$tabs_dirs[]='http://'. $this->getHomePage();
+			$tabs_titles[]=_('Home Page');
 			*/
 
 			// Project Activity
@@ -602,6 +616,8 @@ class Navigation extends FFError {
 	 * the link on the banner; $result['image']: URL of the banner
 	 * image; $result['title']: HTML code that outputs the banner;
 	 * $result['html']: HTML code that creates the banner and the link.
+	 * @param bool $asHTML
+	 * @return string
 	 */
 	function getPoweredBy($asHTML=true) {
 		$res['url'] = 'http://fusionforge.org/';
@@ -621,6 +637,8 @@ class Navigation extends FFError {
 	 *  set, otherwise an array with the following structure:
 	 *  $result['url']: URL of the link to the source code viewer;
 	 *  $result['title']: Title of the link.
+	 * @param bool $asHTML
+	 * @return null|string
 	 */
 	function getShowSource($asHTML=true) {
 		if (forge_get_config('show_source')) {

@@ -1,3 +1,27 @@
+/**
+ * FusionForge Documentation Manager
+ *
+ * Previous Copyright to FusionForge Team
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
+ * Copyright 2016-2017, Franck Villaume - TrivialDev
+ * http://fusionforge.org
+ *
+ * This file is part of FusionForge. FusionForge is free software;
+ * you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the Licence, or (at your option)
+ * any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with FusionForge; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
+
 var aTaskboardUserStories = [];
 
 function cleanMessages() {
@@ -14,6 +38,7 @@ function loadTaskboard( group_id ) {
 	var data = {
 			action   : 'load_taskboard',
 			group_id : group_id,
+			taskboard_id : gTaskboardId,
 			assigned_to : assigned_to,
 			release : release_val
 		};
@@ -83,35 +108,24 @@ function loadTaskboard( group_id ) {
 
 			jQuery( ".agile-minimize-column" ).click( function() {
 				var phase_id = jQuery(this).attr('phase_id');
-				var phase_locator = '.agile-phase-' + phase_id;
-				var locator = phase_locator + ' div.agile-sticker-container';
-
-				if( jQuery(this).is(':checked') ) {
-					// hide column
-					jQuery(phase_locator).each( function(j,p) {
-						jQuery(p).children('div.agile-sticker-container').each( function(i,e) {
-							if( i > 0 ) {
-								jQuery(e).hide();
-								if( i==1 && jQuery(e).parent().children(phase_locator+'-more').length == 0 ) {
-									jQuery(e).parent().append('<div class="agile-phase-' + phase_id + '-more agile-phase-more">...</div>' );
-								}
-							}
-						})
-					});
+				if( $(this).hasClass('minimized') ) {
+					maximizeColumn(phase_id);
 				} else {
-					// unhide column
-					jQuery(locator).each( function(i,e) {
-						jQuery(e).show();
-						if( i==0 && jQuery(e).parent().children(phase_locator+'-more').length > 0 ) {
-							jQuery(phase_locator+'-more').remove();
-						}
-					});
+					minimizeColumn(phase_id);
 				}
+				$(this).toggleClass('minimized');
 			});
 		} else {
 			jQuery( "#agile-board" ).append(
 					'<tr><td colspan="'  + aPhases.length + '" style="text-align: center;">' + gMessages['notasks'] + '</td></tr>'
 				);
+		}
+
+		if ($('#filter-tasks-chk').is(':checked')) {
+			applyTaskFilter();
+		}
+		if ($('#hide-unlinked-task-chk').is(':checked')) {
+			hideUnlinkedTasks();
 		}
 	});
 }
@@ -155,14 +169,14 @@ function drawBoardProgress() {
 	}
 
 	var html = '<table>';
-	html += '<tr><td width="' + parseInt( 100 / aPhases.length )  + '%" style="padding: 0;">' + gMessages.progressByTasks + ':</td><td style="padding: 0;">';
+	html += '<tr><td style="padding: 0; width: '+ parseInt( 100 / aPhases.length ) +'%">' + gMessages.progressByTasks + ':</td><td style="padding: 0;">';
 
 	var buf = 0;
 	for( var j=start; j<aPhases.length; j++) {
 		if( aPhases[j].progressTasks ) {
 			var wt = parseInt(  parseInt( aPhases[j].progressTasks ) / totalTasks * 100 );
 			if( j == lastPhaseWithTasks ) {
-				// to avoid bad presenttaion when sum of rounded percemts less then 100
+				// to avoid bad presentation when sum of rounded percemts less then 100
 				wt = 100 - buf;
 			}
 			buf += wt;
@@ -184,7 +198,7 @@ function drawBoardProgress() {
 		var wt = parseInt( totalCostCompleted/totalCostEstimated * 100);
 		// show progress by cost
 		html += '<table>';
-		html += '<tr><td width="' + parseInt( 100 / aPhases.length )  + '%" style="padding: 0;">' + gMessages.progressByCost + ':</td><td style="padding: 0;">';
+		html += '<tr><td style="padding: 0; width: '+ parseInt( 100 / aPhases.length ) +'">' + gMessages.progressByCost + ':</td><td style="padding: 0;">';
 		html += '<div class="agile-board-progress-bar-done" style="width: ' + wt + '%;" title="' + gMessages['completedCost'] + '">' + totalCostCompleted + '</div>';
 		html += '<div class="agile-board-progress-bar-remains" style="width: ' + ( 100 - wt ) + '%;" title="' + gMessages['remainingCost'] + '">' + totalCostRemaining + '</div>';
 		html += '</td></tr><table>';
@@ -197,16 +211,32 @@ function drawUserStories() {
 	var l_sHtml = '';
 
 	for( var i=0; i<aUserStories.length; i++ ) {
-		l_sHtml += "<tr valign='top'>\n";
 		var start=0;
 		var us=aUserStories[i];
+		evenOdd = 'even';
+		if (i % 2) {
+			evenOdd = 'odd';
+		}
+		l_sHtml += "<tr class='agile-user-story-"+ us.id +" "+evenOdd+"' class='top'>\n";
 		if( bShowUserStories ) {
 			start=1;
-			l_sHtml += '<td class="agile-phase"><div class="agile-sticker-container">';
+			l_sHtml += '<td class="agile-phase agile-user-stories">';
+			l_sHtml += '<div class="agile-sticker-container">';
 			l_sHtml += '<div class="agile-sticker agile-sticker-user-story" id="user-story-' + us.id + '">';
-			l_sHtml += '<div class="agile-sticker-header"><a href="' + us.url + '" target="_blank">[#' + us.id + ']</a>';
-			l_sHtml += '<div style="float: right";>[<a href="" class="agile-toolbar-add-task" user_story_id="' +us.id+ '">+</a>]</div></div>\n';
-			l_sHtml += '<div class="agile-sticker-body">' + us.title + "</div>\n";
+			l_sHtml += '<div class="agile-sticker-header">';
+			if( us.id==0) {
+				l_sHtml += '<a>[#' + us.id + ']</a>';
+			} else {
+				l_sHtml += '<a href="' + us.url + '" target="_blank">[#' + us.id + ']</a>';
+			}
+			l_sHtml += '<div class="agile-toolbar-minimize minimized"></div>\n';
+			l_sHtml += '<div class="agile-toolbar-add-task" user_story_id="' +us.id+ '"></div>\n';
+			l_sHtml += '</div>\n';
+			l_sHtml += '<div class="agile-sticker-body">'
+			l_sHtml += '<div class="agile-sticker-name">' + us.title + "</div>\n";
+			l_sHtml += '<div class="agile-sticker-description">' + us.description + "</div>\n";
+			l_sHtml += "</div>\n"
+			l_sHtml += "</div>\n";
 			l_sHtml += "</div>\n";
 			l_sHtml += "</td>\n";
 		}
@@ -217,7 +247,7 @@ function drawUserStories() {
 			if( ph.background ) {
 				style = ' style="background-color:' + ph.background + ';"';
 			}
-			l_sHtml += '<td id="' + ph.id + '-' + us.id + '" class="agile-phase agile-phase-' + ph.id + '"' + style + '>';
+			l_sHtml += '<td id="' + ph.id + '-' + us.id + '" class="agile-phase agile-tasks agile-phase-' + ph.id + '"' + style + '>';
 			l_sHtml += "</td>\n";
 
 			// initialize progress counters
@@ -277,6 +307,7 @@ function setPhase( nUserStoryId, nTaskId, nTargetPhaseId ) {
 								data : {
 									action   : 'drop_card',
 									group_id : gGroupId,
+									taskboard_id : gTaskboardId,
 									task_id : nTaskId,
 									target_phase_id : nTargetPhaseId
 								},
@@ -322,6 +353,14 @@ function initUserStories() {
 	for( var i=0; i<aUserStories.length; i++ ) {
 		initUserStory( aUserStories[i] );
 	}
+	jQuery( ".agile-toolbar-minimize" ).click( function() {
+		if( $(this).hasClass('minimized') ) {
+			$(this).parent().parent().css('height','auto').find('.agile-sticker-description').show();
+		} else {
+			$(this).parent().parent().css('height','80px').find('.agile-sticker-description').hide();
+		}
+		$(this).toggleClass('minimized');
+	});
 }
 
 function initUserStory( oUserStory ) {
@@ -346,7 +385,7 @@ function initUserStory( oUserStory ) {
 		}
 	}
 
-	jQuery('#user-story-' + oUserStory.id).data('task_id', oUserStory.id);
+	jQuery('#user-story-' + oUserStory.id).data('user_story_id', oUserStory.id);
 }
 
 function drawUserStory( oUserStory ) {
@@ -368,7 +407,7 @@ function drawUserStory( oUserStory ) {
 				.data('user_story_id', oUserStory.id)
 				.draggable( {
 					containment: '#agile-board',
-					//cursor: 'move',
+					cursor: 'move',
 					stack: 'div',
 					revert: true,
 					start: helperTaskStart,
@@ -390,13 +429,20 @@ function drawTasks( oUserStory, sPhaseId ) {
 			l_sHtml += '<div class="agile-sticker agile-sticker-task agile-sticker-task-' + tsk.user_story + '" id="task-' + tsk.id + '" >';
 			l_sHtml += '<div class="agile-sticker-header" style="background-color: ' + tsk.background + ';">';
 			l_sHtml += '<a href="' + tsk.url  +  '" target="_blank">[#' + tsk.id + ']</a>';
+			l_sHtml += '<div class="agile-toolbar-minimize minimized"></div>\n';
 			l_sHtml += "</div>\n";
-			l_sHtml += '<div class="agile-sticker-body">' + tsk.title;
+			l_sHtml += '<div class="agile-sticker-body">';
+			l_sHtml += '<div class="agile-sticker-name">' + tsk.title +'</div>';
+			l_sHtml += '<div class="agile-sticker-description">' + tsk.description +'</div>';
 			if( tsk.assigned_to_face ) {
 				l_sHtml += '<div class="agile-sticker-assignee-face">' + tsk.assigned_to_face + '</div>';
 			}
+			l_sHtml += '</div>';
+			l_sHtml += '<div class="agile-sticker-footer">';
 			if( tsk.assigned_to != "Nobody" ) {
 				l_sHtml += '<div class="agile-sticker-assignee">Assigned: ' + tsk.assigned_to + '</div>';
+			} else {
+				l_sHtml += '<div class="agile-sticker-assignee">Unassigned</div>';
 			}
 			if( tsk.estimated_dev_effort ) {
 				l_sHtml += '<div class="agile-sticker-effort">' + tsk.remaining_dev_effort + '/' + tsk.estimated_dev_effort + '</div>';
@@ -405,8 +451,67 @@ function drawTasks( oUserStory, sPhaseId ) {
 			l_sHtml += "</div></div>\n";
 		}
 	}
-
+	l_sHtml += '<div class="agile-phase-' + sPhaseId + '-more agile-phase-more">...</div>'
 	return l_sHtml;
+}
+
+function applyTaskFilter() {
+	var sFilter = $('#task-filter')[0].value;
+	var bOnlyOnName = $('#filter-only-on-name-chk').is(':checked');
+
+	if ($('#task-filter')[0].checkValidity()) {
+		$('td.agile-tasks div.agile-sticker-container').each( function(nb,container) {
+			sTaskName = $(container).find('div.agile-sticker-name').text();
+			if (bOnlyOnName) {
+				if (sTaskName.match(sFilter)) {
+					$(container).removeClass('filtred');
+				} else {
+					$(container).addClass('filtred');
+				}
+			} else {
+				$TaskDescription = $(container).find('div.agile-sticker-description').text();
+				if (sTaskName.match(sFilter) || $TaskDescription.match(sFilter)) {
+					$(container).removeClass('filtred');
+				} else {
+					$(container).addClass('filtred');
+				}
+			}
+		});
+	}
+}
+
+function removeTaskFilter () {
+	$('td.agile-tasks div.agile-sticker-container').removeClass('filtred');
+}
+
+function checkTaskFilter () {
+	var bReturn = true;
+	try {
+		new RegExp($('#task-filter')[0].value);
+	} catch(e) {
+		$('#task-filter')[0].setCustomValidity(gMessages.invalidRegEx);
+		bReturn = false;
+	}
+	if (bReturn) {
+		$('#task-filter')[0].setCustomValidity("");
+	}
+	return bReturn
+}
+
+function hideUnlinkedTasks() {
+	$('tr.agile-user-story-0').hide();
+}
+
+function showUnlinkedTasks() {
+	$('tr.agile-user-story-0').show();
+}
+
+function minimizeColumn(phase_id) {
+	$('table#agile-board td.agile-phase-'+phase_id).addClass('minimized');
+}
+
+function maximizeColumn(phase_id) {
+	$('table#agile-board td.agile-phase-'+phase_id).removeClass('minimized');
 }
 
 function taskInPhase( tsk, phase ) {
@@ -434,7 +539,7 @@ function initEditable() {
 	}
 
 	// description
-	jQuery("div.agile-sticker-body").dblclick( function () {
+	jQuery("td.agile-tasks div.agile-sticker-name").dblclick( function () {
 		if( jQuery(this).children('textarea').length == 0 ) {
 			// close open textarea
 			jQuery('#text_title').trigger('focusout');
@@ -442,14 +547,12 @@ function initEditable() {
 
 			var l_oTitle = jQuery(this);
 			var l_sTitle = l_oTitle.html();
-			var l_nTaskId = jQuery(this).parent().data('task_id');
+			var l_nTaskId = jQuery(this).parent().parent().data('task_id');
 			jQuery(this).html( '<textarea id="text_title" name="title" rows="11"></textarea>');
 
 
 			jQuery('#text_title')
 				.html( l_sTitle.replace(/<br>/g, "\n") )
-				.css('width', '98%')
-				.css('height', '95%')
 				.focus()
 				.focusout(function() {
 					l_oTitle.html( l_sTitle );
@@ -470,6 +573,7 @@ function initEditable() {
 						data : {
 							action   : 'update',
 							group_id : gGroupId,
+							taskboard_id : gTaskboardId,
 							task_id : l_nTaskId,
 							title : jQuery(this).val()
 						},

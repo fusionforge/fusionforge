@@ -40,6 +40,7 @@ $browse_instructions = getStringFromRequest('browse_instructions', $ath->getBrow
 $ath->adminHeader(array('title'=>sprintf(_('Update settings for %s'),
 	$ath->getName()),
 	'modal'=>1));
+
 echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID(), 'method' => 'post'));
 
 echo html_e('input', array('type'=>'hidden', 'name'=>'update_type', 'value'=>'y'));
@@ -103,7 +104,7 @@ echo html_e('input', array('type'=>'submit', 'name'=>'post_changes', 'value'=>_(
 echo html_ac(html_ap()-1);
 
 echo $HTML->closeForm();
-	$ath->footer();
+$ath->footer();
 
 // Local Variables:
 // mode: php

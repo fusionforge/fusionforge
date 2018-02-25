@@ -1,6 +1,5 @@
 <?php
 /**
- *
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
  * Originally written by Laurent Julliard 2001, 2002, Codendi Team, Xerox
  * http://www.codendi.com
@@ -23,27 +22,24 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-/*
-  Function that generates hide/show urls to expand/collapse
-  sections of the personal page
+/**
+ * my_hide_url() - Generate hide/show urls to expand/collapse sections of the personal page
+ *
+ * @param	string	$svc		service name to hide/show (sr, bug, pm...)
+ * @param	int	$db_item_id	the item (group, forum, task sub-project,...) from the
+ *					database that we are currently processing and about to display
+ * @param	int	$item_id	the item_id as given in the URL and on which the show/hide switch
+ *					is going to apply
+ * @param	int	$count
+ * @param	bool	$hide		hide param as given in the script URL (-1 means no param was given)
+ * @return	array
+ *  $hide_url: URL to use in the page to switch from hide to show or vice versa
+ *  $count_diff: difference between the number of items in the list between now and
+ *     the previous last time the section was open (can be negative if items were removed)
+ *  $hide_flag: true if the section must be hidden, false otherwise
+ */
 
-Input:
-  $svc : service name to hide/show (sr, bug, pm...)
-  $db_item_id : the item (group, forum, task sub-project,...) from the
-     database that we are curently processing and about to display
-  $item_id : the item_id as given in the URL and on which the show/hide switch
-     is going to apply.
-  $hide = hide param as given in the script URL (-1 means no param was given)
-
-Output:
-  $hide_url: URL to use in the page to switch from hide to show or vice versa
-  $count_diff: difference between the number of items in the list between now and
-     the previous last time the section was open (can be negative if items were removed)
-  $hide_flag: true if the section must be hidden, false otherwise
-
-*/
-
-function my_hide_url ($svc, $db_item_id, $item_id, $count, $hide) {
+function my_hide_url($svc, $db_item_id, $item_id, $count, $hide) {
 
 	$pref_name = 'my_hide_'.$svc.$db_item_id;
 	$old_hide = $old_count = $old_pref_value = UserManager::instance()->getCurrentUser()->getPreference($pref_name);
@@ -52,9 +48,12 @@ function my_hide_url ($svc, $db_item_id, $item_id, $count, $hide) {
 	}
 
 	// Make sure they are both 0 if never set before
-	if ($old_count == false) { $old_count = 0; }
-	if ($old_hide == false) { $old_hide = 0; }
-
+	if ($old_count == false) {
+		$old_count = 0;
+	}
+	if ($old_hide == false) {
+		$old_hide = 0;
+	}
 	if ($item_id == $db_item_id) {
 		if (isset($hide)) {
 			$pref_value = "$hide|$count";
@@ -93,15 +92,16 @@ function my_hide_url ($svc, $db_item_id, $item_id, $count, $hide) {
 function my_hide($svc, $db_item_id, $item_id, $hide) {
 	$pref_name = 'my_hide_'.$svc.$db_item_id;
 	$old_pref_value = UserManager::instance()->getCurrentUser()->getPreference($pref_name);
-	if ($old_pref_value)
+	if ($old_pref_value) {
 		list($old_hide, $old_count) = explode('|', $old_pref_value);
-
-	if (!isset($old_hide))
+	}
+	if (!isset($old_hide)) {
 		$old_hide = false;
-
+	}
 	// Make sure they are both 0 if never set before
-	if ($old_hide == false) { $old_hide = 0; }
-
+	if ($old_hide == false) {
+		$old_hide = 0;
+	}
 	if ($item_id == $db_item_id) {
 		if (!isset($hide)) {
 			$hide = $old_hide;
@@ -127,20 +127,24 @@ function my_format_as_flag($assigned_to, $submitted_by, $multi_assigned_to=null)
 	if ($submitted_by == user_getid()) {
 		$AS_flag .= 'S';
 	}
-	if ($AS_flag) { $AS_flag = '[<b>'.$AS_flag.'</b>]'; }
-
+	if ($AS_flag) {
+		$AS_flag = '[<b>'.$AS_flag.'</b>]';
+	}
 	return $AS_flag;
 }
 
 /* second case */
 function my_format_as_flag2($assignee, $submitter) {
 	$AS_flag = '';
-	if ($assignee) $AS_flag = 'A';
-
-	if ($submitter) $AS_flag .= 'S';
-
-	if ($AS_flag != '') $AS_flag = '[<b>'.$AS_flag.'</b>]';
-
+	if ($assignee) {
+		$AS_flag = 'A';
+	}
+	if ($submitter) {
+		$AS_flag .= 'S';
+	}
+	if ($AS_flag != '') {
+		$AS_flag = '[<b>'.$AS_flag.'</b>]';
+	}
 	return $AS_flag;
 }
 

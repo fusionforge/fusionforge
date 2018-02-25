@@ -1,17 +1,33 @@
 <?php
 /**
- * FusionForge nouveau
+ * FusionForge nouveau.
  *
  * Translated from gwicke's previous TAL template version to remove
  * dependency on PHPTAL.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * http://www.gnu.org/copyleft/gpl.html
  *
  * @todo document
  * @file
  * @ingroup Skins
  */
 
-if( !defined( 'MEDIAWIKI' ) )
+if ( !defined( 'MEDIAWIKI' ) ) {
 	die( -1 );
+}
 
 /**
  * Inherit main code from SkinTemplate, set the CSS and template filter.
@@ -28,9 +44,9 @@ class SkinFusionForge extends SkinTemplate {
 
 		$tc->params = array();
 		if (($tc->project = $project =
-		    group_get_object_by_name($GLOBALS['fusionforgeproject']))) {
+			group_get_object_by_name($GLOBALS['fusionforgeproject']))) {
 			$tc->params['group'] = $GLOBALS['group_id'] =
-			    $project->getID();
+			$project->getID();
 			$tc->params['toptab'] = 'mediawiki';
 		}
 
@@ -41,22 +57,14 @@ class SkinFusionForge extends SkinTemplate {
 	 * @param $out OutputPage
 	 */
 	function setupSkinUserCss( OutputPage $out ) {
-		global $wgHandheldStyle;
+		parent::setupSkinUserCss( $out );
 
 		/* add FusionForge styles */
 		foreach ($GLOBALS['HTML']->stylesheets as $sheet) {
 			$out->addStyle($sheet['css'], $sheet['media']);
 		}
 
-		parent::setupSkinUserCss( $out );
-
-		$out->addModuleStyles( 'skins.monobook' );
-
-		// Ugh. Can't do this properly because $wgHandheldStyle may be a URL
-		if( $wgHandheldStyle ) {
-			// Currently in testing... try 'chick/main.css'
-			$out->addStyle( $wgHandheldStyle, 'handheld' );
-		}
+		$out->addModuleStyles( array( 'mediawiki.skinning.interface', 'skins.monobook.styles' ) );
 
 		// TODO: Migrate all of these
 		$out->addStyle( 'monobook/IE60Fixes.css', 'screen', 'IE 6' );
@@ -82,71 +90,63 @@ class FusionForgeTemplate extends BaseTemplate {
 	 * @access private
 	 */
 	function execute() {
-		global $wgHtml5;
-
 		// Suppress warnings to prevent notices about missing indexes in $this->data
 		wfSuppressWarnings();
 
 		$this->html( 'headelement' );
 
 		echo "\n<!-- FUSIONFORGE BodyHeader BEGIN -->\n";
-		html_ao('body'); // don't print, makes "html helpers" stack consistent
 		$GLOBALS['HTML']->bodyHeader($this->params);
 		echo "<div id=\"ff-mw-wrapper\"><div style=\"font-size:x-small;\">\n";
 		echo "<!-- FUSIONFORGE BodyHeader END -->\n";
 
 ?><div id="globalWrapper">
-<div id="column-content"><div id="content">
+<div id="column-content"><div id="content" class="mw-body-primary" role="main">
 	<a id="top"></a>
-	<?php if($this->data['sitenotice']) { ?><div id="siteNotice"><?php $this->html('sitenotice') ?></div><?php } ?>
+	<?php if ( $this->data['sitenotice'] ) { ?><div id="siteNotice"><?php $this->html( 'sitenotice' ) ?></div><?php } ?>
 
-	<h1 id="firstHeading" class="firstHeading"><span<?php if ($wgHtml5) echo ' dir="auto"'; ?>><?php $this->html('title') ?></span></h1>
+	<h1 id="firstHeading" class="firstHeading" lang="<?php
+		$this->data['pageLanguage'] = $this->getSkin()->getTitle()->getPageViewLanguage()->getHtmlCode();
+		$this->text( 'pageLanguage' );
+	?>"><span dir="auto"><?php $this->html( 'title' ) ?></span></h1>
 	<div id="bodyContent" class="mw-body">
-		<div id="siteSub"><?php $this->msg('tagline') ?></div>
-		<div id="contentSub"<?php $this->html('userlangattributes') ?>><?php $this->html('subtitle') ?></div>
-<?php if($this->data['undelete']) { ?>
-		<div id="contentSub2"><?php $this->html('undelete') ?></div>
-<?php } ?><?php if($this->data['newtalk'] ) { ?>
-		<div class="usermessage"><?php $this->html('newtalk')  ?></div>
-<?php } ?><?php if($this->data['showjumplinks']) { ?>
-		<div id="jump-to-nav" class="mw-jump"><?php $this->msg('jumpto') ?> <a href="#column-one"><?php $this->msg('jumptonavigation') ?></a>, <a href="#searchInput"><?php $this->msg('jumptosearch') ?></a></div>
+		<div id="siteSub"><?php $this->msg( 'tagline' ) ?></div>
+		<div id="contentSub"<?php $this->html( 'userlangattributes' ) ?>><?php $this->html( 'subtitle' ) ?></div>
+<?php if ( $this->data['undelete'] ) { ?>
+		<div id="contentSub2"><?php $this->html( 'undelete' ) ?></div>
+<?php } ?><?php if ( $this->data['newtalk'] ) { ?>
+		<div class="usermessage"><?php $this->html( 'newtalk' ) ?></div>
 <?php } ?>
+		<div id="jump-to-nav" class="mw-jump"><?php $this->msg( 'jumpto' ) ?> <a href="#column-one"><?php $this->msg( 'jumptonavigation' ) ?></a><?php $this->msg( 'comma-separator' ) ?><a href="#searchInput"><?php $this->msg( 'jumptosearch' ) ?></a></div>
+
 		<!-- start content -->
-<?php $this->html('bodytext') ?>
-		<?php if($this->data['catlinks']) { $this->html('catlinks'); } ?>
+<?php $this->html( 'bodytext' ) ?>
+		<?php if ( $this->data['catlinks'] ) { $this->html( 'catlinks' ); } ?>
 		<!-- end content -->
-		<?php if($this->data['dataAfterContent']) { $this->html ('dataAfterContent'); } ?>
+		<?php if ( $this->data['dataAfterContent'] ) { $this->html( 'dataAfterContent' ); } ?>
 		<div class="visualClear"></div>
 	</div>
 </div></div>
-<div id="column-one"<?php $this->html('userlangattributes')  ?>>
+<div id="column-one"<?php $this->html( 'userlangattributes' ) ?>>
+	<h2><?php $this->msg( 'navigation-heading' ) ?></h2>
 <?php $this->cactions(); ?>
-	<div class="portlet" id="p-personal">
-		<h5><?php $this->msg('personaltools') ?></h5>
+	<div class="portlet" id="p-personal" role="navigation">
+		<h3><?php $this->msg( 'personaltools' ) ?></h3>
 		<div class="pBody">
-<?php
-	$ul_shown = false;
-	foreach ($this->getPersonalTools() as $key => $item) {
-		if (!$ul_shown) {
-?>
-			<ul<?php $this->html('userlangattributes') ?>>
-<?php
-			$ul_shown = true;
-		}
-		echo "\n" . $this->makeListItem($key, $item);
-	}
-	if ($ul_shown) {
-		echo "\n</ul>\n";
-	}
-?>
+			<ul<?php $this->html( 'userlangattributes' ) ?>>
+<?php		foreach ( $this->getPersonalTools() as $key => $item ) { ?>
+				<?php echo $this->makeListItem( $key, $item ); ?>
+
+<?php		} ?>
+			</ul>
 		</div>
 	</div>
-	<div class="portlet" id="p-logo">
+	<div class="portlet" id="p-logo" role="banner">
 <?php
 			echo Html::element( 'a', array(
 				'href' => $this->data['nav_urls']['mainpage']['href'],
 				'style' => "background-image: url({$this->data['logopath']});" )
-				+ Linker::tooltipAndAccesskeyAttribs('p-logo') ); ?>
+				+ Linker::tooltipAndAccesskeyAttribs( 'p-logo' ) ); ?>
 
 	</div>
 <?php
@@ -159,14 +159,14 @@ class FusionForgeTemplate extends BaseTemplate {
 	$validFooterLinks = $this->getFooterLinks( "flat" ); // Additional footer links
 
 	if ( count( $validFooterIcons ) + count( $validFooterLinks ) > 0 ) { ?>
-<div id="footer"<?php $this->html('userlangattributes') ?>>
+<div id="footer" role="contentinfo"<?php $this->html( 'userlangattributes' ) ?>>
 <?php
 		$footerEnd = '</div>';
 	} else {
 		$footerEnd = '';
 	}
 	foreach ( $validFooterIcons as $blockName => $footerIcons ) { ?>
-	<div id="f-<?php echo htmlspecialchars($blockName); ?>ico">
+	<div id="f-<?php echo htmlspecialchars( $blockName ); ?>ico">
 <?php foreach ( $footerIcons as $icon ) { ?>
 		<?php echo $this->getSkin()->makeFooterIcon( $icon ); ?>
 
@@ -178,8 +178,8 @@ class FusionForgeTemplate extends BaseTemplate {
 		if ( count( $validFooterLinks ) > 0 ) {
 ?>	<ul id="f-list">
 <?php
-			foreach( $validFooterLinks as $aLink ) { ?>
-		<li id="<?php echo $aLink ?>"><?php $this->html($aLink) ?></li>
+			foreach ( $validFooterLinks as $aLink ) { ?>
+		<li id="<?php echo $aLink ?>"><?php $this->html( $aLink ) ?></li>
 <?php
 			}
 ?>
@@ -198,38 +198,46 @@ echo $footerEnd;
 
 	/*************************************************************************************************/
 
+	/**
+	 * @param $sidebar array
+	 */
 	protected function renderPortals( $sidebar ) {
-		if ( !isset( $sidebar['SEARCH'] ) ) $sidebar['SEARCH'] = true;
-		if ( !isset( $sidebar['TOOLBOX'] ) ) $sidebar['TOOLBOX'] = true;
-		if ( !isset( $sidebar['LANGUAGES'] ) ) $sidebar['LANGUAGES'] = true;
+		if ( !isset( $sidebar['SEARCH'] ) ) {
+			$sidebar['SEARCH'] = true;
+		}
+		if ( !isset( $sidebar['TOOLBOX'] ) ) {
+			$sidebar['TOOLBOX'] = true;
+		}
+		if ( !isset( $sidebar['LANGUAGES'] ) ) {
+			$sidebar['LANGUAGES'] = true;
+		}
 
 		if (session_loggedin()) {
 			$efbox_log_text = _('Log Out');
-			$efbox_log_link = "/account/logout.php?return_to=" .
-			    urlencode(getStringFromServer('REQUEST_URI'));
+			$efbox_log_link = "/account/logout.php?return_to=" . urlencode(getStringFromServer('REQUEST_URI'));
 		} else {
 			$efbox_log_text = _('Log In');
-			$efbox_log_link = "/account/login.php?return_to=" .
-			    urlencode(getStringFromServer('REQUEST_URI'));
+			$efbox_log_link = "/account/login.php?return_to=" . urlencode(getStringFromServer('REQUEST_URI'));
 		}
-		$efbox_prj_link = "/projects/" .
-		    $this->project->getUnixName() . "/";
+		$efbox_prj_link = "/projects/" . $this->project->getUnixName() . "/";
+
 		$this->customBox("FusionForge", array(
 			"project" => array(
-				"id" => "fusionforge_project",
-				"href" => $efbox_prj_link,
-				"text" => _("Project Summary"),
-			    ),
+			"id" => "fusionforge_project",
+			"href" => $efbox_prj_link,
+			"text" => _("Project Summary"),
+			),
 			"loginout" => array(
-				"id" => "fusionforge_loginout",
-				"href" => $efbox_log_link,
-				"text" => $efbox_log_text,
-			    ),
-		    ));
+			"id" => "fusionforge_loginout",
+			"href" => $efbox_log_link,
+			"text" => $efbox_log_text,
+			),
+		));
 
-		foreach( $sidebar as $boxName => $content ) {
-			if ( $content === false )
+		foreach ( $sidebar as $boxName => $content ) {
+			if ( $content === false ) {
 				continue;
+			}
 
 			if ( $boxName == 'SEARCH' ) {
 				$this->searchBox();
@@ -246,22 +254,24 @@ echo $footerEnd;
 	function searchBox() {
 		global $wgUseTwoButtonsSearchForm;
 ?>
-	<div id="p-search" class="portlet">
-		<h5><label for="searchInput"><?php $this->msg('search') ?></label></h5>
+	<div id="p-search" class="portlet" role="search">
+		<h3><label for="searchInput"><?php $this->msg( 'search' ) ?></label></h3>
 		<div id="searchBody" class="pBody">
-			<form action="<?php $this->text('wgScript') ?>" id="searchform">
-				<input type='hidden' name="title" value="<?php $this->text('searchtitle') ?>"/>
-				<?php echo $this->makeSearchInput(array( "id" => "searchInput" )); ?>
+			<form action="<?php $this->text( 'wgScript' ) ?>" id="searchform">
+				<input type='hidden' name="title" value="<?php $this->text( 'searchtitle' ) ?>"/>
+				<?php echo $this->makeSearchInput( array( "id" => "searchInput" ) ); ?>
 
-				<?php echo $this->makeSearchButton("go", array( "id" => "searchGoButton", "class" => "searchButton" ));
-				if ($wgUseTwoButtonsSearchForm): ?>&#160;
-				<?php echo $this->makeSearchButton("fulltext", array( "id" => "mw-searchButton", "class" => "searchButton" ));
-				else: ?>
+				<?php echo $this->makeSearchButton( "go", array( "id" => "searchGoButton", "class" => "searchButton" ) );
+				if ( $wgUseTwoButtonsSearchForm ) { ?>&#160;
+				<?php echo $this->makeSearchButton( "fulltext", array( "id" => "mw-searchButton", "class" => "searchButton" ) );
+				} else { ?>
 
-				<div><a href="<?php $this->text('searchaction') ?>" rel="search"><?php $this->msg('powersearch-legend') ?></a></div><?php
-				endif; ?>
+				<div><a href="<?php $this->text( 'searchaction' ) ?>" rel="search"><?php $this->msg( 'powersearch-legend' ) ?></a></div><?php
+				} ?>
 
 			</form>
+
+			<?php $this->renderAfterPortlet( 'search' ); ?>
 		</div>
 	</div>
 <?php
@@ -273,16 +283,17 @@ echo $footerEnd;
 	 */
 	function cactions() {
 ?>
-	<div id="p-cactions" class="portlet">
-		<h5><?php $this->msg('views') ?></h5>
+	<div id="p-cactions" class="portlet" role="navigation">
+		<h3><?php $this->msg( 'views' ) ?></h3>
 		<div class="pBody">
 			<ul><?php
-				foreach($this->data['content_actions'] as $key => $tab) {
+				foreach ( $this->data['content_actions'] as $key => $tab ) {
 					echo '
 				' . $this->makeListItem( $key, $tab );
 				} ?>
 
 			</ul>
+<?php		$this->renderAfterPortlet( 'cactions' ); ?>
 		</div>
 	</div>
 <?php
@@ -290,13 +301,13 @@ echo $footerEnd;
 	/*************************************************************************************************/
 	function toolbox() {
 ?>
-	<div class="portlet" id="p-tb">
-		<h5><?php $this->msg('toolbox') ?></h5>
+	<div class="portlet" id="p-tb" role="navigation">
+		<h3><?php $this->msg( 'toolbox' ) ?></h3>
 		<div class="pBody">
 			<ul>
 <?php
 		foreach ( $this->getToolbox() as $key => $tbitem ) { ?>
-				<?php echo $this->makeListItem($key, $tbitem); ?>
+				<?php echo $this->makeListItem( $key, $tbitem ); ?>
 
 <?php
 		}
@@ -304,6 +315,7 @@ echo $footerEnd;
 		wfRunHooks( 'SkinTemplateToolboxEnd', array( &$this, true ) );
 ?>
 			</ul>
+<?php		$this->renderAfterPortlet( 'tb' ); ?>
 		</div>
 	</div>
 <?php
@@ -311,17 +323,19 @@ echo $footerEnd;
 
 	/*************************************************************************************************/
 	function languageBox() {
-		if( $this->data['language_urls'] ) {
+		if ( $this->data['language_urls'] !== false ) {
 ?>
-	<div id="p-lang" class="portlet">
-		<h5<?php $this->html('userlangattributes') ?>><?php $this->msg('otherlanguages') ?></h5>
+	<div id="p-lang" class="portlet" role="navigation">
+		<h3<?php $this->html( 'userlangattributes' ) ?>><?php $this->msg( 'otherlanguages' ) ?></h3>
 		<div class="pBody">
 			<ul>
-<?php		foreach($this->data['language_urls'] as $key => $langlink) { ?>
-				<?php echo $this->makeListItem($key, $langlink); ?>
+<?php		foreach ( $this->data['language_urls'] as $key => $langlink ) { ?>
+				<?php echo $this->makeListItem( $key, $langlink ); ?>
 
 <?php		} ?>
 			</ul>
+
+<?php		$this->renderAfterPortlet( 'lang' ); ?>
 		</div>
 	</div>
 <?php
@@ -329,21 +343,26 @@ echo $footerEnd;
 	}
 
 	/*************************************************************************************************/
+	/**
+	 * @param $bar string
+	 * @param $cont array|string
+	 */
 	function customBox( $bar, $cont ) {
-		$portletAttribs = array( 'class' => 'generated-sidebar portlet', 'id' => Sanitizer::escapeId( "p-$bar" ) );
+		$portletAttribs = array( 'class' => 'generated-sidebar portlet', 'id' => Sanitizer::escapeId( "p-$bar" ), 'role' => 'navigation' );
 		$tooltip = Linker::titleAttrib( "p-$bar" );
 		if ( $tooltip !== false ) {
 			$portletAttribs['title'] = $tooltip;
 		}
 		echo '	' . Html::openElement( 'div', $portletAttribs );
+		$msgObj = wfMessage( $bar );
 ?>
 
-		<h5><?php $msg = wfMessage( $bar ); echo htmlspecialchars( $msg->exists() ? $msg->text() : $bar ); ?></h5>
+		<h3><?php echo htmlspecialchars( $msgObj->exists() ? $msgObj->text() : $bar ); ?></h3>
 		<div class='pBody'>
 <?php   if ( is_array( $cont ) ) { ?>
 			<ul>
-<?php 			foreach($cont as $key => $val) { ?>
-				<?php echo $this->makeListItem($key, $val); ?>
+<?php 			foreach ( $cont as $key => $val ) { ?>
+				<?php echo $this->makeListItem( $key, $val ); ?>
 
 <?php			} ?>
 			</ul>
@@ -351,9 +370,12 @@ echo $footerEnd;
 			# allow raw HTML block to be defined by extensions
 			print $cont;
 		}
+
+		$this->renderAfterPortlet( $bar );
 ?>
 		</div>
 	</div>
 <?php
 	}
+
 } // end of class

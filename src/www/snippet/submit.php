@@ -3,7 +3,7 @@
  * Code Snippets Repository
  *
  * Copyright 1999-2001 (c) VA Linux Systems
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2016-2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -26,8 +26,9 @@ require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'snippet/snippet_utils.php';
 
-if (session_loggedin()) {
+global $HTML, $feedback, $error_msg;
 
+if (session_loggedin()) {
 	if (getStringFromRequest('post_changes')) {
 		if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 			exit_form_double_submit();
@@ -79,10 +80,12 @@ if (session_loggedin()) {
 			}
 		} else {
 			form_release_key(getStringFromRequest("form_key"));
-			exit_error(_('Error: Go back and fill in all the information'));
+			exit_error(_('Error')._(': ')._('Go back and fill in all the information'));
 		}
 
 	}
+	html_use_jquery();
+	html_use_ace();
 	snippet_header(array('title'=>_('Snippet submit')));
 
 	?>
@@ -92,17 +95,17 @@ if (session_loggedin()) {
 	<p>
 	<?php echo _('<span class="important">Note:</span> You can submit a new version of an existing snippet by browsing the library. You should only use this page if you are submitting an entirely new script or function.'); ?>
 	</p>
-	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post" id="snippet_submit">
 	<?php
+	echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post', 'id' => 'snippet_submit'));
 	echo $HTML->html_input('form_key', '', '', 'hidden', form_generate_key());
 	echo $HTML->html_input('post_changes', '', '', 'hidden', 'y');
-	echo $HTML->html_input('changes', '', '', 'hidden', 'First Posted Version');
+	echo $HTML->html_input('changes', '', '', 'hidden', _('First Posted Version'));
 	?>
 
 	<table>
 
 	<tr><td colspan="2">
-	    <?php echo $HTML->html_input('name', '', _('Title').utils_requiredField()._(': '), 'text', '', array('size' => '45', 'maxlength' => '60', 'required' => 'required')); ?>
+	    <?php echo $HTML->html_input('name', '', _('Title').utils_requiredField()._(': '), 'text', '', array('size' => 45, 'maxlength' => 60, 'required' => 'required')); ?>
 	</td></tr>
 
 	<tr><td colspan="2">
@@ -122,37 +125,52 @@ if (session_loggedin()) {
 	<tr>
 	<td>
 		<?php echo $HTML->html_select($SCRIPT_LANGUAGE, 'language', _('Language').utils_requiredField()._(': ')); ?>
-		<br />
 		<!-- FIXME: Where should this link go to? <?php echo util_make_link ('/support/?func=addsupport&group_id=1',_('Suggest a Language')); ?> -->
 	</td>
 
 	<td>
 		<?php echo $HTML->html_select($SCRIPT_CATEGORY, 'category', _('Category').utils_requiredField()._(': ')); ?>
-                <br />
                 <!-- FIXME: Where should this link go to? <?php echo util_make_link ('/support/?func=addsupport&group_id=1',_('Suggest a Category')); ?> -->
 	</td>
 	</tr>
 
 	<tr><td colspan="2">
-        <?php echo $HTML->html_input('version', '', _('Version').utils_requiredField()._(': '), 'text', '', array('size' => '10', 'maxlength' => '15')); ?>
+        <?php echo $HTML->html_input('version', '', _('Version').utils_requiredField()._(': '), 'text', '', array('size' => '10', 'maxlength' => '15', 'required' => 'required')); ?>
 	</td></tr>
 
 	<tr><td colspan="2">
-	    <?php echo $HTML->html_textarea('code', '', _('Paste the Code Here').utils_requiredField()._(': '), '', array('rows' => '30', 'cols' => '85')); ?>
+	    <?php echo $HTML->html_input('code', '', _('Paste the Code Here').utils_requiredField()._(': '), 'hidden', array()); ?>
+		<div id='editor'></div>
 	</td></tr>
 
 	<tr><td colspan="2" class="align-center">
         <?php echo $HTML->html_input('submit', '', _('Make sure all info is complete and accurate'), 'submit', _('Submit')); ?>
 	</td></tr>
-	</table></form>
-
+	</table>
 	<?php
+	echo $HTML->closeForm();
+
+	$jsvar = "var languageAce = ['".implode("','", $SCRIPT_LANGUAGE_ACE)."'];\n";
+	$javascript = <<<'EOS'
+	var editor = ace.edit("editor");
+	editor.setOptions({
+		minLines: 20,
+		maxLines: 40,
+		mode: "ace/mode/text",
+		autoScrollEditorIntoView: true
+	});
+	$("select[name='language']").on('change', function () {
+		editor.session.setMode({ path:"ace/mode/"+languageAce[$("select[name='language']").val()], inline:true});
+	});
+	editor.getSession().on('change', function () {
+		$('input#code').val(editor.getSession().getValue());
+	});
+EOS;
+	echo html_e('script', array( 'type'=>'text/javascript'), '//<![CDATA['."\n".'$(function(){'.$jsvar.$javascript.'});'."\n".'//]]>');
+
 	snippet_footer();
-
 } else {
-
 	exit_not_logged_in();
-
 }
 
 // Local Variables:

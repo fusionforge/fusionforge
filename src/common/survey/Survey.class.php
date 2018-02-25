@@ -26,6 +26,43 @@
 require_once $gfcommon.'include/FFError.class.php';
 require_once $gfcommon.'survey/SurveyQuestionFactory.class.php';
 
+$SURVEY_OBJ = array();
+
+/**
+ * survey_get_object() - Get the survey object.
+ *
+ * survey_get_object() is useful so you can pool survey objects/save database queries
+ * You should always use this instead of instantiating the object directly.
+ *
+ * You can now optionally pass in a db result handle. If you do, it re-uses that query
+ * to instantiate the objects.
+ *
+ * IMPORTANT! That db result must contain all fields
+ * from surveys table or you will have problems
+ *
+ * @param	int		$survey_id	Required
+ * @param	int|bool	$res		Result set handle ("SELECT * FROM surveys WHERE survey_id = xx")
+ * @return	Survey|bool	A survey object or false on failure
+ */
+function &survey_get_object($survey_id, $res = false) {
+	global $SURVEY_OBJ;
+	if (!isset($SURVEY_OBJ["_".$survey_id."_"])) {
+		if ($res) {
+			//the db result handle was passed in
+		} else {
+			$res = db_query_params('SELECT * FROM surveys WHERE survey_id=$1', array($survey_id));
+		}
+		if (!$res || db_numrows($res) < 1) {
+			$SURVEY_OBJ["_".$survey_id."_"] = false;
+		} else {
+			$arr = db_fetch_array($res);
+			$groupObject = group_get_object($arr['group_id']);
+			$SURVEY_OBJ["_".$survey_id."_"] = new Survey($groupObject, $survey_id, $arr);
+		}
+	}
+	return $SURVEY_OBJ["_".$survey_id."_"];
+}
+
 class Survey extends FFError {
 
 	/**
@@ -53,14 +90,11 @@ class Survey extends FFError {
 	 * @param	$Group
 	 * @param	bool	$survey_id
 	 * @param	bool	$arr
-	 * @internal	param	\The $object Group object to which this survey is associated.
-	 * @internal	param	\The $int survey_id.
-	 * @internal	param	\The $array associative array of data.
 	 */
 	function __construct(&$Group, $survey_id = false, $arr = false) {
 		parent::__construct();
 		if (!$Group || !is_object($Group)) {
-			$this->setError(_('No Valid Group Object'));
+			$this->setError(_('Invalid Project'));
 			return;
 		}
 		if ($Group->isError()) {
@@ -88,18 +122,13 @@ class Survey extends FFError {
 	/**
 	 * create - use this function to create a survey
 	 *
-	 * @param string $survey_title The survey title
-	 * @param array  $add_questions The question numbers to be added
-	 * @param int $is_active 1: Active, 0: Inactive
-	 * @param int $is_result_public
-	 * @param	Allow|int	$double_vote
-	 * @internal	param		\The $string survey title
-	 * @internal	param		array	$int The question numbers to be added
-	 * @internal	param		$is_active 1: Active, 0: Inactive
-	 * For future options
-	 * @internal	param		$is_result_public 0: Admins Only, 1: Group Members, 2: FusionForge user, 3:voted user 4:Every body
-	 * @internal	param		\Allow $double_vote double vote if it is 1
-	 * @return boolean success.
+	 * @param	string		$survey_title The survey title
+	 * @param	array		$add_questions The question numbers to be added
+	 * @param	int		$is_active 1: Active, 0: Inactive
+	 * @param	int		$is_public
+	 * @param	int		$is_result_public
+	 * @param	int		$double_vote
+	 * @return	bool	success.
 	 */
 	function create($survey_title, $add_questions, $is_active = 0, $is_public = 1, $is_result_public = 0, $double_vote = 0) {
 		if (!$survey_title) {
@@ -135,19 +164,14 @@ class Survey extends FFError {
 	/**
 	 * update - use this function to update a survey
 	 *
-	 * @param string $survey_title The survey title
-	 * @param array  $add_questions The question numbers to be added
-	 * @param array  $del_questions The question numbers to be deleted
-	 * @param int $is_active 1: Active, 0: Inactive
+	 * @param	string		$survey_title The survey title
+	 * @param	array		$add_questions The question numbers to be added
+	 * @param	array		$del_questions The question numbers to be deleted
+	 * @param	int		$is_active 1: Active, 0: Inactive
+	 * @param	int		$is_public
 	 * @param	int		$is_result_public
-	 * @param	Allow|int	$double_vote
-	 * @internal	param		\The $string survey title
-	 * @internal	param		array $int The question numbers to be added
-	 * @internal	param		array $int The question numbers to be deleted
-	 * @internal	param		$is_active 1: Active, 0: Inactive
-	 * @internal	param		$is_result_public 0: Admins Only, 1: Group Members, 2: FusionForge user, 3:voted user 4:Every body
-	 * @internal	param		\Allow $double_vote double vote if it is 1
-	 * @return	boolean		success.
+	 * @param	int		$double_vote
+	 * @return	bool		success.
 	 */
 	function update($survey_title, &$add_questions, &$del_questions, $is_active = 0, $is_public = 1, $is_result_public = 0, $double_vote = 0) {
 		if (!$survey_title) {
@@ -224,7 +248,7 @@ class Survey extends FFError {
 	 * delete - use this function to delete this survey
 	 * (We don't support delete yet)
 	 *
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function delete() {
 		$group_id = $this->Group->GetID();
@@ -247,7 +271,7 @@ class Survey extends FFError {
 	 * fetchData - re-fetch the data for this survey from the database.
 	 *
 	 * @param	int	$survey_id The survey_id.
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function fetchData($survey_id) {
 		$group_id = $this->Group->GetID();
@@ -439,12 +463,12 @@ class Survey extends FFError {
 	 * private question string deal methods
 	 * TODO: Add a joint table for surveys and survey_questions.
 	 *       Deal with DBMS not comma separated string
-     ***************************************************************/
+	 ***************************************************************/
 
 	/**
 	 * _fillSurveyQuestions - Get all Survey Questions using SurveyQuestionFactory
 	 *
-	 * @return	boolean	success
+	 * @return	bool	success
 	 */
 	function _fillSurveyQuestions() {
 		$sqf = new SurveyQuestionFactory($this->getGroup());
@@ -455,7 +479,7 @@ class Survey extends FFError {
 	 * _isValidQuestionID - Check it is correct question id
 	 *
 	 * @param	int	$question_id question id
-	 * @return	boolean	true if it is valid question id
+	 * @return	bool	true if it is valid question id
 	 */
 	function _isValidQuestionID($question_id) {
 		if (!$this->all_question_array || !is_array($this->all_question_array)) {

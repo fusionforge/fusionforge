@@ -1,5 +1,4 @@
 <?php
-
 /**
  * FusionForge Monitored Forums Track Page
  *
@@ -8,7 +7,7 @@
  * Copyright 2005 (c) - Daniel Perez
  * Copyright 2010 (c) Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -47,14 +46,17 @@ $group_id = getIntFromRequest("group_id");
 if ($group_id) {
 	forum_header(array('title'=>_('My Monitored Forums')));
 } else {
-	site_header(array('title'=>_('My Monitored Forums'), 'user_id' => $user_id));
+	site_user_header(array('title'=>_('My Monitored Forums')));
 }
 
 //get the user monitored forums
 $MonitorElementObject = new MonitorElement('forum');
-$monitoredForumsIdsArray = $MonitorElementObject->getMonitedByUserIdInArray($user_id);
-
-if (!$monitoredForumsIdsArray) {
+if ($group_id) {
+	$monitoredForumsIdsArray = $MonitorElementObject->getMonitoredIdsByGroupIdByUserIdInArray($group_id, $user_id);
+} else {
+	$monitoredForumsIdsArray = $MonitorElementObject->getMonitedByUserIdInArray($user_id);
+}
+if (!is_array($monitoredForumsIdsArray)) {
 	echo $HTML->error_msg($MonitorElementObject->getErrorMessage());
 	forum_footer();
 	exit;
@@ -66,14 +68,9 @@ if (count($monitoredForumsIdsArray) < 1) {
 	exit;
 }
 
-$tablearr = array(_('Project'),_('Forum'), _('Threads'),
-				_('Posts'), _('Last Post'), _('New Content?'));
-echo $HTML->listTableTop($tablearr);
+echo $HTML->listTableTop(array(_('Project'),_('Forum'), _('Threads'), _('Posts'), _('Last Post'), _('New Content?')), array(), '', '', array(), array(),
+			array(array(), array(), array('class' => 'align-center'),  array('class' => 'align-center'),  array('class' => 'align-center'),  array('class' => 'align-center')));
 
-$i = 0;
-$j = 0;
-
-$f = array();
 //CHECK : if we won't ever be needing to store each forum/fmf, etc for each pass, don't use an array and use the same variable like $fmf instead of $fmf[$i], etc
 for($i = 0; $i < sizeof($monitoredForumsIdsArray); $i++) {
 	if (forge_check_perm('forum', $monitoredForumsIdsArray[$i], 'read')) {
@@ -97,20 +94,8 @@ for($i = 0; $i < sizeof($monitoredForumsIdsArray); $i++) {
 				exit_error($fmf->getErrorMessage(), 'forums');
 			}
 
-			$fmf->setup($offset,$style,$max_rows,$set);
-			$style=$fmf->getStyle();
-			$max_rows=$fmf->max_rows;
-			$offset=$fmf->offset;
+			$fmf->setup();
 			$msg_arr = $fmf->nestArray($fmf->getNested());
-			if ($fmf->isError()) {
-				exit_error($fmf->getErrorMessage(), 'forums');
-			}
-			$rows=count($msg_arr[0]);
-			$avail_rows=$fmf->fetched_rows;
-			if ($rows > $max_rows) {
-				$rows=$max_rows;
-			}
-
 			$new_content = '&nbsp;';
 			//this loops through every message AND followup, in search of new messages.
 			//anything that's new ( new thread or followup) is considered to be a "new thing" and the forum
@@ -120,7 +105,7 @@ for($i = 0; $i < sizeof($monitoredForumsIdsArray); $i++) {
 					foreach ($forum_msg_arr as $forum_msg) {
 						if ($forumObject->getSavedDate() < $forum_msg->getPostDate()) {
 							//we've got ourselves a new message or followup for this forum. note that, exit the search
-							$new_content = html_image('ic/add.png','', '', array('alt' => 'new'));
+							$new_content = $HTML->getNewPic('', 'new');
 							break;
 						}
 					}
@@ -134,7 +119,7 @@ for($i = 0; $i < sizeof($monitoredForumsIdsArray); $i++) {
 			$date = $forumObject->getMostRecentDate()? date(_('Y-m-d H:i'),$forumObject->getMostRecentDate()) : '';
 			$cells = array();
 			$cells[][] = $this_forum_group->getPublicName();
-			$cells[][] = util_make_link('/forum/forum.php?forum_id='.$forumObject->getID().'&group_id='.$this_forum_group->getID(), html_image('ic/forum20w.png').'&nbsp;'.$forumObject->getName());
+			$cells[][] = util_make_link('/forum/forum.php?forum_id='.$forumObject->getID().'&group_id='.$this_forum_group->getID(), $HTML->getForumPic().'&nbsp;'.$forumObject->getName());
 			$cells[] = array($forumObject->getThreadCount(), 'class' => 'align-center');
 			$cells[] = array($forumObject->getMessageCount(), 'class' => 'align-center');
 			$cells[] = array($date, 'class' => 'align-center');

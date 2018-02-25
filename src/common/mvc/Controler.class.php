@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Copyright 2005, STMicroelectronics
  *
  * Originally written by Manuel Vacelet
@@ -31,34 +31,33 @@
  * @license   http://opensource.org/licenses/gpl-license.php GPL
  */
 class Controler {
-  /* protected */ var $gid;
-  /* protected */ var $view;
-  /* protected */ var $action;
-  /* protected */ var $_viewParams   = array();
-  /* protected */ var $_actionParams = array();
+	/* protected */ var $gid;
+	/* protected */ var $view;
+	/* protected */ var $action;
+	/* protected */ var $_viewParams   = array();
+	/* protected */ var $_actionParams = array();
 
-  function request() {
-  }
+	function request() {
+	}
 
-  function viewsManagement() {
-    $className = get_class($this).'Views';
-    $wv = new $className($this, $this->gid, $this->view, $this->_viewParams);
-    return $wv->display($this->view);
-  }
+	function viewsManagement() {
+		$className = get_class($this).'Views';
+		$wv = new $className($this, $this->gid, $this->view, $this->_viewParams);
+		return $wv->display($this->view);
+	}
 
-  function actionsManagement() {
-    $className = get_class($this).'Actions';
-    $wa = new $className($this, $this->gid);
-    $wa->process($this->action, $this->_actionParams);
-  }
+	function actionsManagement() {
+		$className = get_class($this).'Actions';
+		$wa = new $className($this, $this->gid);
+		$wa->process($this->action, $this->_actionParams);
+	}
 
-  function process() {
-    $this->request();
-
-    if($this->action)
-      $this->actionsManagement();
-
-    return $this->viewsManagement();
-  }
+	function process() {
+		$this->request();
+		if($this->action) {
+			$this->actionsManagement();
+		}
+		return $this->viewsManagement();
+	}
 
 }

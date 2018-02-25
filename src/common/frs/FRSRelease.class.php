@@ -23,15 +23,33 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'include/FFError.class.php';
+require_once $gfcommon.'include/FFObject.class.php';
 require_once $gfcommon.'frs/FRSFile.class.php';
+
+/**
+ * get_frs_releases - get all FRS releases for a specific package
+ *
+ * @param	FRSPackage	$package
+ * @return	array
+ */
+function get_frs_releases($package) {
+	$rs = array();
+	$res = db_query_params('SELECT * FROM frs_release WHERE package_id=$1',
+				array($package->getID()));
+	if (db_numrows($res) > 0) {
+		while($arr = db_fetch_array($res)) {
+			$rs[] = new FRSRelease($package, $arr['release_id'], $arr);
+		}
+	}
+	return $rs;
+}
 
 /**
  * Factory method which creates a FRSRelease from an release id
  *
  * @param	int	$release_id	The release id
- * @param	array	$data		The result array, if it's passed in
- * @return	object	FRSRelease object
+ * @param	array	$data	The result array, if it's passed in
+ * @return	object|bool		FRSRelease object
  */
 function frsrelease_get_object($release_id, $data = array()) {
 	global $FRSRELEASE_OBJ;
@@ -53,7 +71,7 @@ function frsrelease_get_object($release_id, $data = array()) {
 	return $FRSRELEASE_OBJ['_'.$release_id.'_'];
 }
 
-class FRSRelease extends FFError {
+class FRSRelease extends FFObject {
 
 	/**
 	 * Associative array of data from db.
@@ -74,10 +92,9 @@ class FRSRelease extends FFError {
 	/**
 	 * @param	object  	$FRSPackage	The FRSPackage object to which this release is associated.
 	 * @param	int|bool	$release_id	The release_id.
-	 * @param	array|bool	$arr		The associative array of data.
+	 * @param	array		$arr		The associative array of data.
 	 */
-	function __construct(&$FRSPackage, $release_id = false, $arr = false) {
-		parent::__construct();
+	function __construct(&$FRSPackage, $release_id = false, $arr = array()) {
 		if (!$FRSPackage || !is_object($FRSPackage)) {
 			$this->setError(_('Invalid FRS Package Object'));
 			return;
@@ -86,9 +103,11 @@ class FRSRelease extends FFError {
 			$this->setError('FRSRelease: '.$FRSPackage->getErrorMessage());
 			return;
 		}
+
 		$this->FRSPackage =& $FRSPackage;
 
 		if ($release_id) {
+			parent::__construct($release_id, 'FRSRelease');
 			if (!$arr || !is_array($arr)) {
 				if (!$this->fetchData($release_id)) {
 					return;
@@ -101,6 +120,8 @@ class FRSRelease extends FFError {
 					return;
 				}
 			}
+		} else {
+			parent::__construct();
 		}
 	}
 
@@ -111,10 +132,13 @@ class FRSRelease extends FFError {
 	 * @param	string	$notes		The release notes for the release.
 	 * @param	string	$changes	The change log for the release.
 	 * @param	int	$preformatted	Whether the notes/log are preformatted with \n chars (1) true (0) false.
-	 * @param	int	$release_date	The unix date of the release.
-	 * @return	boolean	success.
+	 * @param	int|bool	$release_date	The unix date of the release.
+	 * @param       int $status_id
+	 * @param	array	$importData	Array of data to change creator, time of creation, bypass permission check and do not send notification like:
+	 *					array('user' => 127, 'time' => 1234556789, 'nopermcheck' => 1, 'nonotice' => 1)
+	 * @return	bool	success.
 	 */
-	function create($name, $notes, $changes, $preformatted, $release_date = false) {
+	function create($name, $notes, $changes, $preformatted, $release_date = false, $status_id = 1, $importData = array()) {
 		if (strlen($name) < 3) {
 			$this->setError(_('FRSRelease Name Must Be At Least 3 Characters'));
 			return false;
@@ -126,13 +150,25 @@ class FRSRelease extends FFError {
 			$preformatted = 0;
 		}
 
-		if (!forge_check_perm('frs', $this->FRSPackage->getID(), 'release')) {
-			$this->setPermissionDeniedError();
-			return false;
+		if (isset($importData['user'])) {
+			$userid = $importData['user'];
+		} else {
+			$userid = user_getid();
 		}
 
-		if (!$release_date) {
-			$release_date=time();
+		if (!isset($importData['nopermcheck']) || (isset($importData['nopermcheck']) && !$importData['nopermcheck'])) {
+			if (!forge_check_perm_for_user(user_get_object($userid), 'frs', $this->FRSPackage->getID(), 'release')) {
+				$this->setPermissionDeniedError();
+				return false;
+			}
+		}
+
+		if (!$release_date || !isset($importData['time'])) {
+			$release_date = time();
+		} else {
+			if (isset($importData['time'])) {
+				$release_date = $importData['time'];
+			}
 		}
 		$res = db_query_params('SELECT * FROM frs_release WHERE package_id=$1 AND name=$2',
 					array ($this->FRSPackage->getID(),
@@ -150,8 +186,8 @@ class FRSRelease extends FFError {
 						$preformatted,
 						htmlspecialchars($name),
 						$release_date,
-						user_getid(),
-						1));
+						$userid,
+						$status_id));
 		if (!$result) {
 			$this->setError(_('Error Adding Release: ').db_error());
 			db_rollback();
@@ -255,7 +291,7 @@ class FRSRelease extends FFError {
 	/**
 	 * getPreformatted - get the preformatted option of this release.
 	 *
-	 * @return	boolean	preserve_formatting.
+	 * @return	bool	preserve_formatting.
 	 */
 	function getPreformatted() {
 		return $this->data_array['preformatted'];
@@ -273,7 +309,7 @@ class FRSRelease extends FFError {
 	/**
 	 * sendNotice - the logic to send an email notice for a release.
 	 *
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function sendNotice() {
 		$arr =& $this->FRSPackage->getMonitorIDs();
@@ -402,7 +438,7 @@ class FRSRelease extends FFError {
 	 * @param	string	The change log for the release.
 	 * @param	int	Whether the notes/log are preformatted with \n chars (1) true (0) false.
 	 * @param	int	The unix date of the release.
-	 * @return	boolean success.
+	 * @return	bool success.
 	 */
 	function update($status, $name, $notes, $changes, $preformatted, $release_date) {
 		if (strlen($name) < 3) {
@@ -528,6 +564,10 @@ class FRSRelease extends FFError {
 			$roadmaps[$arr[0]][] = $arr[1];
 		}
 		return $roadmaps;
+	}
+
+	function getPermalink() {
+		return '/frs/r_follow.php/'.$this->getID();
 	}
 }
 

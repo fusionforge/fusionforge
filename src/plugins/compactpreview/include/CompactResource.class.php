@@ -1,26 +1,25 @@
 <?php
 /**
- * This file is (c) Copyright 2011 by Sabri LABBENE, Institut TELECOM
+ * CompactPreviewPlugin Classes
  *
- * This file is part of FusionForge.
+ * Copyright 2011, Sabri LABBENE, Institut TELECOM
+ * Copyright 2016, Franck Villaume, TrivialDev
+ * http://fusionforge.org/
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * This file is part of FusionForge. FusionForge is free software;
+ * you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the Licence, or (at your option)
+ * any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
- *
- * This program has been developed in the frame of the COCLICO
- * project with financial support of its funders.
- *
+ * You should have received a copy of the GNU General Public License along
+ * with FusionForge; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
 /**
@@ -61,7 +60,7 @@ class CompactResource {
 				return new CompatResource($params);
 				break;
 			default :
-				return 'Unknown resource type !';
+				return _('Unknown resource type!');
 				break;
 		}
 	}
@@ -81,6 +80,11 @@ class UserCompactResource extends CompactResource {
 	public function getResourceLink() {
 		$username = $this->params['username'];
 		$user_id = $this->params['user_id'];
+		if (isset($this->params['link_text'])) {
+			$link_text = $this->params['link_text'];
+		} else {
+			$link_text = $username;
+		}
 
 		// invoke user_logo hook
 		$logo_params = array('user_id' => $user_id, 'size' => $this->params['size'], 'content' => '');
@@ -96,12 +100,10 @@ class UserCompactResource extends CompactResource {
 		//				'" rel="'. $resource_url .'">'. $username . '</a>';
 		$css_class = $this->getCssClass();
 
-		$url = '<a class="'. $css_class .
-				'" href="'. $resource_url .'">'. $username .'</a>';
+		$url = util_make_link($resource_url, $link_text, array('class' => $css_class), true);
 		if ($logo_params['content']) {
-			$html = $logo_params['content'] . $url .'<div class="new_line"></div>';
-		}
-		else {
+			$html = $logo_params['content'].$url;
+		} else {
 			$html = $url;
 		}
 		return $html;
@@ -144,8 +146,7 @@ class LocalGroupCompactResource extends GroupCompactResource {
 		$link_text = $this->params['link_text'];
 		$resource_url = util_make_url_g ($group_name, $group_id);
 		$css_class = $this->getCssClass();
-		return '<a class="'.$css_class .'" href="'. $resource_url .
-					'">'. $link_text . '</a>';
+		return util_make_link($resource_url, $link_text, array('class' => $css_class), true);
 	}
 }
 
@@ -157,7 +158,6 @@ class OslcGroupCompactResource extends GroupCompactResource {
 		$name = $this->params['name'];
 		$resource_url = $this->params['url'];
 		$css_class = $this->getCssClass();
-		return '<a class="'.$css_class .'" href="'. $resource_url .
-					'">'. $name . '</a>';
+		return util_make_link($resource_url, $name, array('class' => $css_class), true);
 	}
 }

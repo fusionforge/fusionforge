@@ -4,6 +4,7 @@
  *
  * Copyright 2004, GForge, LLC
  * Copyright 2009, Roland Mas
+ * Copyright 2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -71,10 +72,10 @@ class ArtifactHistory extends FFError {
 	 * fetchData - re-fetch the data for this ArtifactHistory from the database.
 	 *
 	 * @param	int	$id ID of the category.
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function fetchData($id) {
-		$res = db_query_params ('SELECT * FROM artifact_category WHERE id=$1',
+		$res = db_query_params ('SELECT * FROM artifact_history_user_vw WHERE id=$1',
 					array ($id)) ;
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError(_('Invalid ArtifactHistory ID'));

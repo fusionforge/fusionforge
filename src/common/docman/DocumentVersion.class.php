@@ -24,9 +24,11 @@
 require_once $gfcommon.'include/FFError.class.php';
 require_once $gfcommon.'docman/DocumentStorage.class.php';
 
+$DOCUMENTVERSION_OBJ = array();
+
 function &documentversion_get_object($ver_id, $docid, $group_id, $res = false) {
 	global $DOCUMENTVERSION_OBJ;
-	if (!isset($DOCUMENTVERSION_OBJ['_'.$ver_id.'_'])) {
+	if (!isset($DOCUMENTVERSION_OBJ['_'.$ver_id.'-'.$docid.'_'])) {
 		if ($res) {
 			//the db result handle was passed in
 		} else {
@@ -35,12 +37,22 @@ function &documentversion_get_object($ver_id, $docid, $group_id, $res = false) {
 						array($ver_id, $docid));
 		}
 		if (!$res || db_numrows($res) < 1) {
-			$DOCUMENTVERSION_OBJ['_'.$ver_id.'_'] = false;
+			$DOCUMENTVERSION_OBJ['_'.$ver_id.'-'.$docid.'_'] = false;
 		} else {
-			$DOCUMENTVERSION_OBJ['_'.$ver_id.'_'] = new DocumentVersion(document_get_object($docid, $group_id), $ver_id, db_fetch_array($res));
+			$DOCUMENTVERSION_OBJ['_'.$ver_id.'-'.$docid.'_'] = new DocumentVersion(document_get_object($docid, $group_id), $ver_id, db_fetch_array($res));
 		}
 	}
-	return $DOCUMENTVERSION_OBJ['_'.$ver_id.'_'];
+	return $DOCUMENTVERSION_OBJ['_'.$ver_id.'-'.$docid.'_'];
+}
+
+function &documentversion_get_object_by_serialid($serial_id, $docid, $group_id, $res = false) {
+	$res = db_query_params('SELECT serial_id, version, docid, current_version, title, updatedate, createdate, created_by, description, filename, filetype, filesize FROM doc_data_version WHERE serial_id = $1 AND docid = $2',
+						array($serial_id, $docid));
+	if ($res && (db_numrows($res) == 1)) {
+		$arr = db_fetch_array($res);
+		return documentversion_get_object($arr['version'], $docid, $group_id, $res);
+	}
+	return false;
 }
 
 class DocumentVersion extends FFError {
@@ -62,19 +74,16 @@ class DocumentVersion extends FFError {
 	 * @param	$Document
 	 * @param	bool			$verid
 	 * @param	bool			$arr
-	 * @internal	param			\The $object Document object to which this version is associated.
-	 * @internal	param			\The $int verid.
-	 * @internal	param			\The $array associative array of data.
 	 */
 	function __construct(&$Document, $verid = false, $arr = false) {
 		parent::__construct();
 		if (!$Document || !is_object($Document)) {
 			$this->setError(_('No Valid Document Object'));
-			return false;
+			return;
 		}
 		if ($Document->isError()) {
 			$this->setError(_('Document Version')._(': ').$Document->getErrorMessage());
-			return false;
+			return;
 		}
 		$this->Document =& $Document;
 		if ($verid) {
@@ -113,10 +122,13 @@ class DocumentVersion extends FFError {
 		return $this->data_array['description'];
 	}
 
+	function getComment() {
+		return $this->data_array['vcomment'];
+	}
+
 	/**
 	 * getFileData - the filedata of this document.
 	 *
-	 * @param	boolean	$download	update the download flag or not. default is true
 	 * @return	string	The filedata.
 	 */
 	function getFileData() {
@@ -134,7 +146,7 @@ class DocumentVersion extends FFError {
 
 	function fetchData($verid) {
 		// everything but data_words. Too much memory consumption.
-		$res = db_query_params('SELECT serial_id, version, docid, current_version, title, updatedate, createdate, created_by, description, filename, filetype, filesize FROM doc_data_version WHERE version = $1 AND docid = $2',
+		$res = db_query_params('SELECT serial_id, version, docid, current_version, title, updatedate, createdate, created_by, description, filename, filetype, filesize, vcomment FROM doc_data_version WHERE version = $1 AND docid = $2',
 					array($verid, $this->Document->getID()));
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError(_('DocumentVersion')._(': ')._('Invalid version id'));
@@ -156,16 +168,17 @@ class DocumentVersion extends FFError {
 	 * @param	string	$filename		The name of the file (content)
 	 * @param	int	$filesize		The size of the file (content)
 	 * @param	string	$kwords			The parsed words of the file (content)
+	 * @param	int	$createtimetamp		timestamp of creation of this version
 	 * @param	int	$version		The version id to create. Default is 1 (the first version)
 	 * @param	int	$current_version	Is it the current version? Defaut is 1 (yes)
-	 * @param	int	$createtimetamp		timestamp of creation of this version
-	 * return	bool	true on success
+	 * @param	string $vcomment
+	 * @return	bool	true on success
 	 */
-	function create($docid, $title, $description, $created_by, $filetype, $filename, $filesize, $kwords, $version = 1, $current_version = 1, $createtimetamp) {
+	function create($docid, $title, $description, $created_by, $filetype, $filename, $filesize, $kwords, $createtimetamp, $version = 1, $current_version = 1, $vcomment = '') {
 		db_begin();
-		$res = db_query_params('INSERT INTO doc_data_version (docid, title, description, created_by, filetype, filename, filesize, data_words, version, current_version, createdate)
-					VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)',
-					array($docid, htmlspecialchars($title), htmlspecialchars($description), $created_by, $filetype, $filename, $filesize, $kwords, $version, $current_version, $createtimetamp));
+		$res = db_query_params('INSERT INTO doc_data_version (docid, title, description, created_by, filetype, filename, filesize, data_words, version, current_version, createdate, vcomment)
+					VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)',
+					array($docid, htmlspecialchars($title), htmlspecialchars($description), $created_by, $filetype, $filename, $filesize, $kwords, $version, $current_version, $createtimetamp, htmlspecialchars($vcomment)));
 		$serial_id = db_insertid($res, 'doc_data_version', 'serial_id');
 		if (!$res || !$serial_id) {
 			$this->setError(_('Document Version')._(': ')._('Cannot create version.').' '.db_error());
@@ -202,7 +215,8 @@ class DocumentVersion extends FFError {
 		}
 		if ($this->getNumberOfVersions() == 1) {
 			$this->getMaxVersionData();
-			$this->update($this->data_array['version'], $this->data_array['title'], $this->data_array['description'], $this->data_array['filetype'], $this->data_array['filename'], $this->data_array['filesize'], 1, $this->data_array['updatedate']);
+			$this->update($this->data_array['version'], $this->data_array['title'], $this->data_array['description'], $this->data_array['filetype'],
+					$this->data_array['filename'], $this->data_array['filesize'], $this->data_array['updatedate'], 1, $this->data_array['vcomment']);
 		}
 		db_commit();
 		db_free_result($res);
@@ -261,7 +275,7 @@ class DocumentVersion extends FFError {
 	/**
 	 * isURL - whether this document is a URL and not a local file.
 	 *
-	 * @return	boolean	is_url.
+	 * @return	bool	is_url.
 	 */
 	function isURL() {
 		return ($this->data_array['filetype'] == 'URL');
@@ -280,14 +294,15 @@ class DocumentVersion extends FFError {
 	 * @param	string	$filetype		The new filetype
 	 * @param	string	$filename		The new filename
 	 * @param	int	$filesize		The new filesize
-	 * @param	int	$current_version	Is the current version to set? Default is yes.
 	 * @param	int	$updatetimestamp	timestamp of this update
+	 * @param	int	$current_version	Is the current version to set? Default is yes.
+	 * @param	string $vcomment
 	 * @return	bool	true on success
 	 */
-	function update($version, $title, $description, $filetype, $filename, $filesize, $current_version = 1, $updatetimestamp) {
+	function update($version, $title, $description, $filetype, $filename, $filesize, $updatetimestamp, $current_version = 1, $vcomment = '') {
 		db_begin();
-		$colArr = array('title', 'description', 'filetype', 'filename', 'filesize', 'current_version', 'updatedate');
-		$valArr = array(htmlspecialchars($title), htmlspecialchars($description), $filetype, $filename, $filesize, $current_version, $updatetimestamp);
+		$colArr = array('title', 'description', 'filetype', 'filename', 'filesize', 'current_version', 'updatedate', 'vcomment');
+		$valArr = array(htmlspecialchars($title), htmlspecialchars($description), $filetype, $filename, $filesize, $current_version, $updatetimestamp, htmlspecialchars($vcomment));
 		if (!$this->setValueinDB($version, $colArr, $valArr)) {
 			db_rollback();
 			return false;
@@ -330,8 +345,7 @@ class DocumentVersion extends FFError {
 	 * @param	int	$version	the version id to update
 	 * @param	array	$colArr		the columns to update in array form array('col1', col2')
 	 * @param	array	$valArr		the values to store in array form array('val1', 'val2')
-	 * @return	boolean	success or not
-	 * @access	private
+	 * @return	bool	success or not
 	 */
 	private function setValueinDB($version, $colArr, $valArr) {
 		if ((count($colArr) != count($valArr)) || !count($colArr) || !count($valArr)) {
@@ -341,6 +355,7 @@ class DocumentVersion extends FFError {
 
 		$qpa = db_construct_qpa(false, 'UPDATE doc_data_version SET ');
 		for ($i = 0; $i < count($colArr); $i++) {
+			$qpa_string = '';
 			switch ($colArr[$i]) {
 				case 'filesize':
 				case 'title':
@@ -349,12 +364,12 @@ class DocumentVersion extends FFError {
 				case 'filename':
 				case 'updatedate':
 				case 'data_words':
-				case 'current_version': {
+				case 'current_version':
+				case 'vcomment': {
 					if ($i) {
-						$qpa = db_construct_qpa($qpa, ',');
+						$qpa_string .= ',';
 					}
-					$qpa = db_construct_qpa($qpa, $colArr[$i]);
-					$qpa = db_construct_qpa($qpa, ' = $1 ', array($valArr[$i]));
+					$qpa = db_construct_qpa($qpa, $qpa_string.$colArr[$i].' = $1 ', array($valArr[$i]));
 					break;
 				}
 				default: {
@@ -372,17 +387,29 @@ class DocumentVersion extends FFError {
 		}
 		for ($i = 0; $i < count($colArr); $i++) {
 			switch ($colArr[$i]) {
+				// we do not store data_words in memory!
 				case 'filesize':
 				case 'title':
 				case 'description':
 				case 'filetype':
 				case 'filename':
 				case 'updatedate':
-				case 'current_version': {
+				case 'current_version':
+				case 'vcomment': {
 					$this->data_array[$colArr[$i]] = $valArr[$i];
 				}
 			}
 		}
 		return true;
+	}
+
+	function hasValidatedReview() {
+		$res = db_query_params('SELECT statusid FROM doc_review, doc_review_version
+					WHERE statusid = $1 AND doc_review.revid = doc_review_version.revid AND doc_review_version.serialid = $2',
+					array(4, $this->getID()));
+		if ($res && (db_numrows($res) > 0)) {
+			return true;
+		}
+		return false;
 	}
 }

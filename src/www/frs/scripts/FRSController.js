@@ -1,7 +1,7 @@
 /**
  * FusionForge FRS
  *
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -41,9 +41,7 @@ FRSController.prototype =
 							jQuery('#maindiv > .warning_msg').remove();
 							if (data.format == 'multi') {
 								var arrayLength = Object.keys(data).length;
-								console.log(arrayLength);
 								for (var i = 0; i < arrayLength; i++) {
-									console.log(data[i]);
 									if (typeof data[i].html != 'undefined') {
 										jQuery('#maindiv').prepend(data[i].html);
 									}
@@ -107,7 +105,8 @@ FRSController.prototype =
 	updatePackage: function(params) {
 		this.params = params;
 		var td = jQuery(this.params.rowid).children();
-		jQuery.getJSON(this.params.action, {package_name: td[2].children.package_name.value, status_id: td[3].children.status_id.value }, function(data){
+		var select = jQuery(td[2].children).children();
+		jQuery.getJSON(this.params.action, {package_name: td[1].children.package_name.value, status_id: select[0].value }, function(data){
 			jQuery('#maindiv > .feedback').remove();
 			jQuery('#maindiv > .error').remove();
 			jQuery('#maindiv > .warning_msg').remove();

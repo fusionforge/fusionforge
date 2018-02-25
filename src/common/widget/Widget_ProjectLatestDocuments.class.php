@@ -70,21 +70,20 @@ class Widget_ProjectLatestDocuments extends Widget {
 		$df->getDocuments();
 
 		$keys = array_keys($df->Documents);
-		$j = 0;
 		if (!count($keys)) {
-			$result .= $HTML->information(_('This project has not published any documents.'));
+			$result .= $HTML->warning_msg(_('This project has not published any documents.'));
 		} else {
 			html_use_tablesorter();
 			$result .= $HTML->getJavascripts();
-			$tabletop = array(_('Date'), _('File Name'), _('Title'), _('Author'), _('Path'));
-			$classth = array('', '', '', '', '');
+			$tabletop = array(_('Date'), _('File Type'), _('File Name'), _('Title'), _('Author'), _('Path'));
+			$classth = array('', '', '', '', '', '');
 			if (session_loggedin()) {
 				$tabletop[] = _('Status');
 				$classth[] = '';
 				$tabletop[] = _('Actions');
 				$classth[] = 'unsortable';
 			}
-			$result .= $HTML->listTableTop($tabletop, false, 'sortable_widget_docman_listfile full', 'sortable', $classth);
+			$result .= $HTML->listTableTop($tabletop, array(), 'sortable_widget_docman_listfile full', 'sortable_docman', $classth);
 
 			foreach ($keys as $key) {
 				$count = count($df->Documents[$key]);
@@ -92,50 +91,48 @@ class Widget_ProjectLatestDocuments extends Widget {
 					$doc =& $df->Documents[$key][$i];
 					$updatedate = $doc->getUpdated();
 					$createdate = $doc->getCreated();
-					$realdate = ($updatedate >= $createdate) ? $updatedate : $createdate;
 					$filename = $doc->getFileName();
-					$title = $doc->getName();
-					$realname = $doc->getCreatorRealName();
-					$user_name = $doc->getCreatorUserName();
-					$statename = $doc->getStateName();
 					$filetype = $doc->getFileType();
 					$docid = $doc->getID();
 					$docgroup = $doc->getDocGroupID();
 					$ndg = documentgroup_get_object($docgroup, $group_id);
-					$path = $ndg->getPath(true, true);
 					switch ($filetype) {
 						case "URL": {
-							$docurl = util_make_link($filename, $filename, array(), true);
+							$docurl = util_make_link($filename, html_image($doc->getFileTypeImage(), 22, 22, array('alt'=>$doc->getFileType())), array(), true);
 							break;
 						}
 						default: {
-							$docurl = util_make_link('/docman/view.php/'.$group_id.'/'.$docid.'/'.urlencode($filename), '<strong>'.$filename.'</strong>');
+							$docurl = util_make_link('/docman/view.php/'.$group_id.'/'.$docid, html_image($doc->getFileTypeImage(), 22, 22, array('alt'=>$doc->getFileType())));
 						}
 					}
 					$cells = array();
-					$cells[][] = date(_('Y-m-d'),$realdate);
+					$cells[][] = date(_('Y-m-d'), ($updatedate >= $createdate) ? $updatedate : $createdate);
 					$cells[][] = $docurl;
-					$cells[][] = $title;
-					$cells[][] = make_user_link($user_name, $realname);
-					$cells[][] = $path;
+					$cells[][] = $filename;
+					$cells[] = array($doc->getName(), 'title' => $doc->getDescription());
+					$cells[][] = util_display_user($doc->getCreatorUserName(), $doc->getCreatorID(), $doc->getCreatorRealName());
+					$cells[][] = $ndg->getPath(true, true);
 					if (session_loggedin()) {
-						$cells[][] = $statename;
-						if ($doc->isMonitoredBy(UserManager::instance()->getCurrentUser()->getID())) {
-							$option = 'stop';
-							$titleMonitor = _('Stop monitoring this document');
-							$image = $HTML->getStopMonitoringPic($titleMonitor, $titleMonitor);
-						} else {
-							$option = 'start';
-							$titleMonitor = _('Start monitoring this document');
-							$image = $HTML->getStartMonitoringPic($titleMonitor, $titleMonitor);
-						}
-						$action = util_make_link('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$docgroup.'&action=monitorfile&option='.$option.'&fileid='.$doc->getID(), $image, array('title' => $titleMonitor));
-						if (forge_check_perm('docman', $group_id, 'approve') && !$doc->getLocked()) {
-							$action .= util_make_link('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$docgroup.'&action=trashfile&fileid='.$doc->getID(), $HTML->getDeletePic('', _('Move this document to trash')), array('title' => _('Move this document to trash')));
+						$cells[][] = $doc->getStateName();
+						$action = '';
+						if ($doc->getStateID() != 2) {
+							if ($doc->isMonitoredBy(UserManager::instance()->getCurrentUser()->getID())) {
+								$option = 'stop';
+								$titleMonitor = _('Stop monitoring this document');
+								$image = $HTML->getStopMonitoringPic($titleMonitor, $titleMonitor);
+							} else {
+								$option = 'start';
+								$titleMonitor = _('Start monitoring this document');
+								$image = $HTML->getStartMonitoringPic($titleMonitor, $titleMonitor);
+							}
+							$action .= util_make_link('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$docgroup.'&action=monitorfile&option='.$option.'&fileid='.$doc->getID(), $image, array('title' => $titleMonitor));
+							if (forge_check_perm('docman', $group_id, 'approve') && !$doc->getLocked()) {
+								$action .= util_make_link('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$docgroup.'&action=trashfile&fileid='.$doc->getID(), $HTML->getDeletePic('', _('Move this document to trash')), array('title' => _('Move this document to trash')));
+								$action .= util_make_link($doc->getPermalink(), $HTML->getEditFilePic(_('Edit this document')), array('title' => _('Edit this document')));
+							}
 						}
 						$cells[][] = $action;
 					}
-
 					$result .= $HTML->multiTableRow(array(), $cells);
 				}
 			}
@@ -161,5 +158,4 @@ class Widget_ProjectLatestDocuments extends Widget {
 	function getDescription() {
 		return _('List the 5 most recent documents published by team project.');
 	}
-
 }

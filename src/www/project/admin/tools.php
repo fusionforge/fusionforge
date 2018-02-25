@@ -5,6 +5,7 @@
  * Portions Copyright 1999-2001 (c) VA Linux Systems
  * The rest Copyright 2002-2004 (c) GForge Team
  * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright 2016, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -26,6 +27,8 @@
 require_once '../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'project/admin/project_admin_utils.php';
+
+global $HTML, $error_msg, $feedback;
 
 $group_id = getIntFromRequest('group_id');
 session_require_perm('project_admin', $group_id);
@@ -113,9 +116,8 @@ echo '<tr class="top">';
 echo '<td class="halfwidth">';
 
 echo $HTML->boxTop(_('Active Tools'));
+echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
 ?>
-
-<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 
 <input type="hidden" name="group_id" value="<?php echo $group->getID(); ?>" />
 <input type="hidden" name="form_group_name" value="<?php echo $group->getPublicName(); ?>" />
@@ -327,7 +329,7 @@ plugin_hook("groupisactivecheckbox",$hookParams);
 <input type="hidden" name="send_all_docs" value="1" <?php echo c($group->docEmailAll()); ?> />
 
 <input type="submit" name="submit" value="<?php echo _('Update') ?>" />
-</form>
+<?php echo $HTML->closeForm(); ?>
 
 <br />
 

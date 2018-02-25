@@ -203,11 +203,9 @@ function _getIntFromArray( $array, $key, $defaultValue = 0) {
 	if(isset($array[$key]) && is_numeric($array[$key]) &&
 		$array[$key] <= 2147483647 && $array[$key] >= -2147483648 ) {
 		return (int) $array[$key];
-	}
-	elseif(is_numeric($defaultValue)) {
+	} elseif(is_numeric($defaultValue)) {
 		return (int) $defaultValue;
-	}
-	else {
+	} else {
 		return 0;
 	}
 }

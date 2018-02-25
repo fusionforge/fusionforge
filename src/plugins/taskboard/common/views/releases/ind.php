@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (C) 2015 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
+ * Copyright 2016, Stéphane-Eymeric Bredtthauer - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -21,44 +22,47 @@
 
 global $taskboard, $group, $group_id, $pluginTaskboard, $HTML;
 
-$taskboard->header(
-	array(
-		'title' => _('Taskboard for ').$group->getPublicName()._(': ')._('Releases'),
-		'pagename' => "Releases",
-		'sectionvals' => array($group->getPublicName()),
-		'group' => $group_id
-	)
-);
-
-?>
-
-<link rel="stylesheet" type="text/css" href="/plugins/taskboard/css/agile-board.css">
-
-<div id="messages" class="warning" style="display: none;"></div>
-<br/>
-<?php
 if (!$taskboard->getReleaseField()) {
 	exit_error(_('Release field is not configured'));
 }
 
+$taskboard_id = $taskboard->getID();
 $taskboardReleases = $taskboard->getReleases();
 
 if ($taskboardReleases === false) {
 	exit_error($taskboard->getErrorMessage());
 }
 
-echo html_e('p', array(), util_make_link('/plugins/'.$pluginTaskboard->name.'/releases/?group_id='.$group_id.'&view=add_release', html_e('strong', array(), _('Add release'))));
+$taskboard->header(
+	array(
+		'title' => $taskboard->getName()._(': ')._('Releases'),
+		'pagename' => "Releases",
+		'sectionvals' => array($group->getPublicName()),
+		'group' => $group_id
+	)
+);
+
+echo html_e('link', array('rel' => 'stylesheet', 'type' => 'text/css', 'href' => util_make_uri('/plugins/'.$pluginTaskboard->name.'/css/agile-board.css')));
+
+?>
+
+<div id="messages" class="warning" style="display: none;"></div>
+<br/>
+<?php
+
+
+echo html_e('p', array(), util_make_link('/plugins/'.$pluginTaskboard->name.'/releases/?group_id='.$group_id.'&taskboard_id='.$taskboard_id.'&view=add_release', html_e('strong', array(), _('Add release'))));
 
 $tablearr = array(_('Title'),_('Start Date'),_('End Date'), _('Goals'), _('Page'), _('Charts'));
 
-echo $HTML->listTableTop($tablearr, false, 'sortable_table_tracker', 'sortable_table_tracker');
+echo $HTML->listTableTop($tablearr, array(), 'sortable_table_tracker', 'sortable_table_tracker');
 
 $today = strtotime(date('Y-m-d'));
 foreach ($taskboardReleases as $release) {
 	$release_title = htmlspecialchars($release->getTitle());
 	if (session_loggedin() && forge_check_perm('tracker_admin', $taskboard->Group->getID())) {
 		$release_title = util_make_link(
-			'/plugins/'.$pluginTaskboard->name.'/releases/?group_id='.$group_id.'&view=edit_release&release_id='.$release->getID(),
+			'/plugins/'.$pluginTaskboard->name.'/releases/?group_id='.$group_id.'&taskboard_id='.$taskboard_id.'&release_id='.$release->getID().'&view=edit_release',
 				$release_title
 		);
 	}
@@ -71,13 +75,13 @@ foreach ($taskboardReleases as $release) {
 	}
 
 	echo '
-	<tr valign="middle"'.$current_release.'>
+	<tr class="middle"'.$current_release.'>
 		<td>'.$release_title.'</td>
 		<td>'.date("Y-m-d", $release->getStartDate()).'</td>
 		<td>'.date("Y-m-d", $release->getEndDate()).'</td>
 		<td>'.htmlspecialchars( $release->getGoals() ).'</td>
 		<td>'. ( $release->getPageUrl() ? '<a href="'.$release->getPageUrl().'" target="_blank">'.htmlspecialchars( $release->getPageUrl() ).'</a>' : '' ).'</td>
-		<td><a href="/plugins/'.$pluginTaskboard->name.'/releases/?group_id='.$group_id.'&view=burndown&release_id='.$release->getID().'">'._('Burndown').'</a>'.'</td>
+		<td>'. util_make_link('/plugins/'.$pluginTaskboard->name.'/releases/?group_id='.$group_id.'&taskboard_id='.$taskboard_id.'&release_id='.$release->getID().'&view=burndown', _('Burndown')).'</td>
 	</tr>
 	';
 }

@@ -7,8 +7,8 @@
  * Copyright 2009, Roland Mas
  * Copyright (C) 2009-2013 Alain Peyrat, Alcatel-Lucent
  * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
- * Copyright 2014-2015, Franck Villaume - TrivialDev
- * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
+ * Copyright 2014-2017, Franck Villaume - TrivialDev
+ * Copyright 2016-2017, Stéphane-Eymeric Bredthauer - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -26,7 +26,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-/*
+/**
  * Standard Alcatel-Lucent disclaimer for contributing to open source
  *
  * "The Artifact ("Contribution") has not been tested and/or
@@ -47,16 +47,20 @@
  * TOGETHER WITH THE SOFTWARE TO WHICH THE CONTRIBUTION RELATES OR ON A STAND
  * ALONE BASIS."
  */
-require_once $gfcommon.'include/FFError.class.php';
+require_once $gfcommon.'include/FFObject.class.php';
+require_once $gfcommon.'tracker/ArtifactFile.class.php';
 require_once $gfcommon.'tracker/ArtifactMessage.class.php';
 require_once $gfcommon.'tracker/ArtifactExtraField.class.php';
 require_once $gfcommon.'tracker/ArtifactWorkflow.class.php';
 require_once $gfcommon.'tracker/ArtifactStorage.class.php';
 require_once $gfcommon.'include/MonitorElement.class.php';
+require_once $gfcommon.'tracker/Effort.class.php';
 
 // This string is used when sending the notification mail for identifying the
 // user response
 define('ARTIFACT_MAIL_MARKER', '#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+');
+
+$ARTIFACT_OBJ = array();
 
 /**
  * Factory method which creates an Artifact from an artifact ID
@@ -65,27 +69,26 @@ define('ARTIFACT_MAIL_MARKER', '#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+');
  * @param	array|bool	$data		The result array, if it's passed in
  * @return	Artifact	Artifact object
  */
-function &artifact_get_object($artifact_id,$data=false) {
+function &artifact_get_object($artifact_id, $data = false) {
 	global $ARTIFACT_OBJ;
 	if (!isset($ARTIFACT_OBJ["_".$artifact_id."_"])) {
 		if ($data) {
 			//the db result handle was passed in
 		} else {
-			$res = db_query_params ('SELECT * FROM artifact_vw WHERE artifact_id=$1',
-						array ($artifact_id)) ;
-			if (db_numrows($res) <1 ) {
-				$ARTIFACT_OBJ["_".$artifact_id."_"]=false;
-				return false;
+			$res = db_query_params('SELECT * FROM artifact_vw WHERE artifact_id=$1', array($artifact_id));
+			if (db_numrows($res) < 1) {
+				$ARTIFACT_OBJ["_".$artifact_id."_"] = false;
+				return $ARTIFACT_OBJ["_".$artifact_id."_"];
 			}
 			$data = db_fetch_array($res);
 		}
 		$ArtifactType =& artifactType_get_object($data["group_artifact_id"]);
-		$ARTIFACT_OBJ["_".$artifact_id."_"]= new Artifact($ArtifactType,$data);
+		$ARTIFACT_OBJ["_".$artifact_id."_"] = new Artifact($ArtifactType, $data);
 	}
 	return $ARTIFACT_OBJ["_".$artifact_id."_"];
 }
 
-class Artifact extends FFError {
+class Artifact extends FFObject {
 
 	/**
 	 * Resource ID.
@@ -125,9 +128,23 @@ class Artifact extends FFError {
 	/**
 	 * Database result set of related tasks
 	 *
-	 * @var	result	$relatedtasks
+	 * @var	result	$related_tasks
 	 */
-	var $relatedtasks;
+	var $related_tasks;
+
+	/**
+	 * Database result set of children
+	 *
+	 * @var	array	$children
+	 */
+	var $children;
+
+	/**
+	 * Database result set of parent
+	 *
+	 * @var	int|bool	$parent
+	 */
+	var $parent;
 
 	/**
 	 * cached return value of getVotes
@@ -140,8 +157,14 @@ class Artifact extends FFError {
 	 * @param	int|bool	$data		(primary key from database OR complete assoc array)
 	 *						ONLY OPTIONAL WHEN YOU PLAN TO IMMEDIATELY CALL ->create()
 	 */
-	function __construct(&$ArtifactType, $data=false) {
-		parent::__construct();
+	function __construct(&$ArtifactType, $data = false) {
+		if (is_array($data)) {
+			parent::__construct($data['artifact_id'], 'Artifact');
+		} elseif (is_int($data)) {
+			parent::__construct($data, 'Artifact');
+		} else {
+			parent::__construct();
+		}
 
 		$this->ArtifactType =& $ArtifactType;
 
@@ -181,13 +204,19 @@ class Artifact extends FFError {
 	 * @param	int	$priority	The artifacts priority.
 	 * @param	array	$extra_fields	Array of extra fields like: array(15=>'foobar',22=>'1');
 	 * @param	array	$importData	Array of data to change submitter and time of submit like:
-	 *						array('user' => 127, 'time' => 1234556789)
+	 *						array('user' => 127, 'time' => 1234556789, 'nopermcheck' => true, 'nonotice' => true)
 	 * @return	bool	id on success / false on failure.
 	 */
-	function create( $summary, $details, $assigned_to=100, $priority=3, $extra_fields=array(), $importData = array()) {
+	function create($summary, $details, $assigned_to = 100, $priority = 3, $extra_fields = array(), $importData = array()) {
 		//
 		//	make sure this person has permission to add artifacts
 		//
+
+		if (isset($importData['nonotice']) && $importData['nonotice']) {
+			$sendNotice = false;
+		} else {
+			$sendNotice = true;
+		}
 
 		//
 		//	get the user_id
@@ -196,15 +225,11 @@ class Artifact extends FFError {
 				$user = $importData['user'];
 		} else {
 			if (!forge_check_perm ('tracker',$this->ArtifactType->getID(),'submit')) {
-					$this->setError(_('You are not currently allowed to submit items to this tracker.'));
-					return false;
+				$this->setError(_('You are not currently allowed to submit items to this tracker.'));
+				return false;
 			}
 
-			if (session_loggedin()) {
-				$user=user_getid();
-			} else {
-				$user=100;
-			}
+			$user = ((session_loggedin()) ? user_getid() : 100);
 		}
 
 		//
@@ -218,12 +243,7 @@ class Artifact extends FFError {
 			$this->setError(_('Message Body Is Required'));
 			return false;
 		}
-		if (!$assigned_to) {
-			$assigned_to=100;
-		}
-		if (!$priority) {
-			$priority=3;
-		}
+
 		$status_id=1;		// on creation, status is set to "open"
 
 		//
@@ -238,30 +258,32 @@ class Artifact extends FFError {
 		}
 
 		db_begin();
-		if (array_key_exists('time',$importData)){
+		if (array_key_exists('time', $importData)){
 			$time = $importData['time'];
 		} else {
 			$time = time();
 		}
-		$res = db_query_params ('INSERT INTO artifact
-			(group_artifact_id,status_id,priority,
-			submitted_by,assigned_to,open_date,summary,details)
-			VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
+		$res = db_query_params('INSERT INTO artifact
+					(group_artifact_id, status_id, priority,
+					submitted_by, assigned_to, open_date, last_modified_date, last_modified_by, summary, details)
+					VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)',
 					array ($this->ArtifactType->getID(),
-					       $status_id,
-					       $priority,
-					       $user,
-					       $assigned_to,
-					       $time,
-					       htmlspecialchars($summary),
-					       htmlspecialchars($details))) ;
+						$status_id,
+						$priority,
+						$user,
+						$assigned_to,
+						$time,
+						$time,
+						$user,
+						htmlspecialchars($summary),
+						htmlspecialchars($details)));
 		if (!$res) {
 			$this->setError(db_error());
 			db_rollback();
 			return false;
 		}
 
-		$artifact_id=db_insertid($res,'artifact','artifact_id');
+		$artifact_id = db_insertid($res, 'artifact', 'artifact_id');
 
 		if (!$res || !$artifact_id) {
 			$this->setError(db_error());
@@ -278,7 +300,7 @@ class Artifact extends FFError {
 				// the changes to the extra fields will be logged in this array.
 				// (we won't use it however)
 				$extra_field_changes = array();
-				if (!$this->updateExtraFields($extra_fields,$extra_field_changes)) {
+				if (!$this->updateExtraFields($extra_fields, $extra_field_changes, $importData)) {
 					db_rollback();
 					return false;
 				}
@@ -286,7 +308,9 @@ class Artifact extends FFError {
 			//
 			//	now send an email if appropriate
 			//
-			$this->mailFollowupEx(0, 1);
+			if ($sendNotice) {
+				$this->mailFollowupEx(0, 1);
+			}
 			db_commit();
 
 			return $artifact_id;
@@ -297,7 +321,7 @@ class Artifact extends FFError {
 	 * fetchData - re-fetch the data for this Artifact from the database.
 	 *
 	 * @param	int	$artifact_id	The artifact ID.
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function fetchData($artifact_id) {
 		$this->votes = false;
@@ -484,6 +508,42 @@ class Artifact extends FFError {
 		return $this->data_array['last_modified_date'];
 	}
 
+		/**
+	 * getLastModifiedBy - get ID of last modifier.
+	 *
+	 * @return	int	user_id of modifier.
+	 */
+	function getLastModifiedBy() {
+		return $this->data_array['last_modified_by'];
+	}
+
+	/**
+	 * getLastModifiedEmail - get email of modifier.
+	 *
+	 * @return	string	The email of modifier.
+	 */
+	function getLastModifiedEmail() {
+		return $this->data_array['last_modified_email'];
+	}
+
+	/**
+	 * getLastModifiedRealName - get real name of modifier.
+	 *
+	 * @return	string	The real name of modifier.
+	 */
+	function getLastModifiedRealName() {
+		return $this->data_array['last_modified_realname'];
+	}
+
+	/**
+	 * getLastModifiedUnixName - get login name of modifier.
+	 *
+	 * @return	string	The unix name of modifier.
+	 */
+	function getLastModifiedUnixName() {
+		return $this->data_array['last_modified_unixname'];
+	}
+
 	/**
 	 * getSummary - get text summary of artifact.
 	 *
@@ -503,9 +563,9 @@ class Artifact extends FFError {
 	}
 
 	/**
-	 * delete - delete this tracker and all its related data.
+	 * delete - "delete" this artifact and all its related data, artifact is taged deleted
 	 *
-	 * @param	bool	$sure I'm Sure.
+	 * @param	bool	$sure	I'm Sure.
 	 * @return	bool	true/false;
 	 */
 	function delete($sure) {
@@ -518,81 +578,50 @@ class Artifact extends FFError {
 			return false;
 		}
 		db_begin();
-		$res = db_query_params ('DELETE FROM artifact_extra_field_data WHERE artifact_id=$1',
-					array ($this->getID())) ;
-		if (!$res) {
-			$this->setError(_('Error deleting extra field data: ').db_error());
-			db_rollback();
-			return false;
-		}
 
-		ArtifactStorage::instance()->deleteFromQuery('SELECT id FROM artifact_file WHERE artifact_id=$1',
-					array ($this->getID())) ;
-
-		$res = db_query_params ('DELETE FROM artifact_file WHERE artifact_id=$1',
-					array ($this->getID())) ;
-		if (!$res) {
-			$this->setError(_('Error deleting file from db: ').db_error());
-			db_rollback();
-			ArtifactStorage::instance()->rollback();
-			return false;
-		}
-		$res = db_query_params ('DELETE FROM artifact_message WHERE artifact_id=$1',
-					array ($this->getID())) ;
-		if (!$res) {
-			$this->setError(_('Error deleting message: ').db_error());
-			db_rollback();
-			ArtifactStorage::instance()->rollback();
-			return false;
-		}
-		$res = db_query_params ('DELETE FROM artifact_history WHERE artifact_id=$1',
-					array ($this->getID())) ;
-		if (!$res) {
-			$this->setError(_('Error deleting history: ').db_error());
-			db_rollback();
-			ArtifactStorage::instance()->rollback();
-			return false;
-		}
 		$MonitorElementObject = new MonitorElement('artifact');
 		if (!$MonitorElementObject->clearMonitor($this->getID())) {
-			$this->setError(_('Error deleting monitor: ').db_error());
+			$this->setError(_('Error deleting monitor')._(': ').db_error());
 			db_rollback();
-			ArtifactStorage::instance()->rollback();
-			return false;
-		}
-		$res = db_query_params ('DELETE FROM artifact WHERE artifact_id=$1',
-					array ($this->getID())) ;
-		if (!$res) {
-			$this->setError(_('Error deleting artifact: ').db_error());
-			db_rollback();
-			ArtifactStorage::instance()->rollback();
 			return false;
 		}
 
+		$res = db_query_params ('UPDATE artifact SET is_deleted=1 WHERE artifact_id=$1',
+					array ($this->getID())) ;
+		if (!$res) {
+			$this->setError(_('Error deleting artifact')._(': ').db_error());
+			db_rollback();
+			return false;
+		}
+
+		if (!$this->removeAllAssociations()) {
+			// error message already set by FFObject class.
+			db_rollback();
+			return false;
+		}
+
+		// update counts: /!\ counts is also update by a trigger artifactgroup_update_trig
+		// and 2 rules artifact_delete_agg (for real delete), artifact_insert_agg
 		if ($this->getStatusID() == 1) {
 			$res = db_query_params ('UPDATE artifact_counts_agg SET count=count-1,open_count=open_count-1
 				WHERE group_artifact_id=$1',
-						array ($this->getID())) ;
+						array ($this->getArtifactType()->getID())) ;
 			if (!$res) {
-				$this->setError(_('Error updating artifact counts: ').db_error());
+				$this->setError(_('Error updating artifact counts')._(': ').db_error());
 				db_rollback();
-				ArtifactStorage::instance()->rollback();
 				return false;
 			}
 		} elseif ($this->getStatusID() == 2) {
 			$res = db_query_params ('UPDATE artifact_counts_agg SET count=count-1
 				WHERE group_artifact_id=$1',
-						array ($this->getID())) ;
+						array ($this->getArtifactType()->getID())) ;
 			if (!$res) {
-				$this->setError(_('Error updating artifact counts: ').db_error());
+				$this->setError(_('Error updating artifact counts')._(': ').db_error());
 				db_rollback();
-				ArtifactStorage::instance()->rollback();
 				return false;
 			}
 		}
-
 		db_commit();
-		ArtifactStorage::instance()->commit();
 		return true;
 	}
 
@@ -626,7 +655,6 @@ class Artifact extends FFError {
 			$feedback = _('Monitoring Stopped');
 			return true;
 		}
-		return false;
 	}
 
 	function isMonitoring() {
@@ -638,9 +666,9 @@ class Artifact extends FFError {
 	}
 
 	/**
-	 * getMonitorIds - array of email addresses monitoring this Artifact.
+	 * getMonitorIds - get user ids monitoring this Artifact.
 	 *
-	 * @return	array of email addresses monitoring this Artifact.
+	 * @return	array of user ids monitoring this Artifact.
 	 */
 	function getMonitorIds() {
 		$MonitorElementObject = new MonitorElement('artifact');
@@ -653,17 +681,23 @@ class Artifact extends FFError {
 	 * @return	resource result set.
 	 */
 	function getHistory() {
-		return db_query_params ('SELECT * FROM artifact_history_user_vw WHERE artifact_id=$1 ORDER BY entrydate DESC, id ASC',
-					array ($this->getID())) ;
+		return db_query_params('SELECT * FROM artifact_history_user_vw WHERE artifact_id=$1 ORDER BY entrydate DESC, id ASC',
+					array ($this->getID()));
+	}
+
+	function hasMessages() {
+		$res = db_query_params('SELECT count(id) FROM artifact_message WHERE artifact_id=$1', array($this->getID()));
+		$row = db_fetch_array($res);
+		return $row[0];
 	}
 
 	/**
 	 * getMessages - get the list of messages attached to this artifact.
 	 *
-	 * @param	string		$order
+	 * @param	string		$ascending
 	 * @return	resource	result set.
 	 */
-	function getMessages($ascending='up') {
+	function getMessages($ascending = 'up') {
 		/*
 		 * This is necessary because someone committed a change
 		 * to this method in FusionForge trunk that accepts 'up'
@@ -682,22 +716,22 @@ class Artifact extends FFError {
 			$order = 'ASC';
 		}
 		return db_query_params('SELECT * FROM artifact_message_user_vw WHERE artifact_id=$1 ORDER BY adddate ' . $order . ', id ASC',
-		    array($this->getID()));
+					array($this->getID()));
 	}
 
 	/**
 	 * getMessage - get a message attached to this artifact.
 	 *
-	 * @param	int		$msg_id id of the message.
+	 * @param	int		$msg_id	id of the message.
 	 * @access	public
-	 * @return	resource	database result set.
+	 * @return	resource|bool	database result set.
 	 */
 	function getMessage($msg_id) {
 		if (!$msg_id) {
 			return false;
 		}
-		return db_query_params ('SELECT * FROM artifact_message_user_vw WHERE id=$1',
-			array($msg_id));
+		return db_query_params('SELECT * FROM artifact_message_user_vw WHERE id=$1',
+					array($msg_id));
 	}
 
 	/**
@@ -721,17 +755,17 @@ class Artifact extends FFError {
 	 */
 	function &getFiles() {
 		if (!isset($this->files)) {
-			$res = db_query_params ('SELECT id,artifact_id,description,filename,filesize,' .
-					'filetype,adddate,submitted_by,user_name,realname
-					 FROM artifact_file_user_vw WHERE artifact_id=$1',
-						array ($this->getID())) ;
+			$res = db_query_params('SELECT id,artifact_id,description,filename,filesize,
+						filetype,adddate,submitted_by,user_name,realname
+						FROM artifact_file_user_vw WHERE artifact_id=$1',
+						array ($this->getID()));
 			$rows=db_numrows($res);
 			if ($rows > 0) {
 				for ($i=0; $i < $rows; $i++) {
-					$this->files[$i]=new ArtifactFile($this,db_fetch_array($res));
+					$this->files[$i] = new ArtifactFile($this, db_fetch_array($res));
 				}
 			} else {
-				$this->files=array();
+				$this->files = array();
 			}
 		}
 		return $this->files;
@@ -743,17 +777,17 @@ class Artifact extends FFError {
 	 * @return	resource	Database result set
 	 */
 	function getRelatedTasks() {
-		if (!$this->relatedtasks) {
-			$this->relatedtasks = db_query_params ('SELECT pt.group_project_id,pt.project_task_id,pt.summary,pt.start_date,pt.end_date,pgl.group_id,pt.status_id,pt.percent_complete,ps.status_name
-			FROM project_task pt, project_group_list pgl, project_status ps
-			WHERE pt.group_project_id = pgl.group_project_id
-                        AND ps.status_id = pt.status_id
-                        AND EXISTS (SELECT project_task_id FROM project_task_artifact
-				WHERE project_task_id=pt.project_task_id
-				AND artifact_id = $1)',
-							       array ($this->getID())) ;
+		if (!$this->related_tasks) {
+			$this->related_tasks = db_query_params('SELECT pt.group_project_id,pt.project_task_id,pt.summary,pt.start_date,pt.end_date,pgl.group_id,pt.status_id,pt.percent_complete,ps.status_name
+								FROM project_task pt, project_group_list pgl, project_status ps
+								WHERE pt.group_project_id = pgl.group_project_id
+								AND ps.status_id = pt.status_id
+								AND EXISTS (SELECT project_task_id FROM project_task_artifact
+										WHERE project_task_id=pt.project_task_id
+										AND artifact_id = $1)',
+							       array ($this->getID()));
 		}
-		return $this->relatedtasks;
+		return $this->related_tasks;
 	}
 
 	/**
@@ -762,49 +796,38 @@ class Artifact extends FFError {
 	 * @param	string	$body		The $string message being attached.
 	 * @param	bool	$by		Email $string address of message creator.
 	 * @param	bool	$send_followup	Whether $bool to email out a followup.
-	 * @return	bool	success.
+	 * @param	array	$importData	Array of data to change submitter and time of submit like:
+	 *						array('user' => 127, 'time' => 1234556789, 'nopermcheck' => true, 'nonotice' => true)
+	 *
+	 * @return	bool|resource
 	 */
-	function addMessage($body,$by=false,$send_followup=false) {
+	function addMessage($body, $by = false, $send_followup = false, $importData = array()) {
 		if (!$body) {
 			$this->setMissingParamsError();
 			return false;
 		}
-		if (!forge_check_perm ('tracker',$this->ArtifactType->getID(),'submit')) {
+		if (!forge_check_perm ('tracker', $this->ArtifactType->getID(), 'submit')) {
 			$this->setError(_('You are not currently allowed to submit items to this tracker.'));
 			return false;
 		}
-		if (session_loggedin()) {
-			$user_id=user_getid();
-			$user = user_get_object($user_id);
-			if (!$user || !is_object($user)) {
-				$this->setError('Error: Logged In User But Could Not Get User Object');
-				return false;
-			}
-			//	we'll store this email even though it will likely never be used -
-			//	since we have their correct user_id, we can join the USERS table to get email
-			$by=$user->getEmail();
+
+		if (isset($importData['nonotice']) && $importData['nonotice']) {
+			$sendNotice = false;
 		} else {
-			$user_id=100;
-			if (!$by || !validate_email($by)) {
-				$this->setMissingParamsError();
-				return false;
+			$sendNotice = true;
+		}
+
+		$artfm = new ArtifactMessage($this);
+		$id = $artfm->create($body, $by, $importData);
+
+		if ($id) {
+			$this->updateLastModified($importData);
+
+			if ($send_followup && $sendNotice) {
+				$this->mailFollowupEx($time, 2, false);
 			}
 		}
-
-		$now = time();
-		$res = db_query_params ('INSERT INTO artifact_message (artifact_id,submitted_by,from_email,adddate,body) VALUES ($1,$2,$3,$4,$5)',
-					array ($this->getID(),
-					       $user_id,
-					       $by,
-					       $now,
-					       htmlspecialchars($body))) ;
-
-		$this->updateLastModifiedDate();
-
-		if ($send_followup) {
-			$this->mailFollowupEx($now, 2, false);
-		}
-		return $res;
+		return $id;
 	}
 
 	/**
@@ -813,19 +836,15 @@ class Artifact extends FFError {
 	 * @param	string	$field_name	The name of the field in the database being modified.
 	 * @param	string	$old_value	The former value of this field.
 	 * @param	array	$importData	Array of data to change submitter and time of submit like:
-	 *						array('user' => 127, 'time' => 1234556789)
+	 *						array('user' => 127, 'time' => 1234556789, 'nopermcheck' => true, 'nonotice' => true)
 	 * @access	private
-	 * @return	boolean	success.
+	 * @return	bool|resource
 	 */
-	function addHistory($field_name,$old_value, $importData = array()) {
+	function addHistory($field_name, $old_value, $importData = array()) {
 		if (array_key_exists('user', $importData)){
 			$user = $importData['user'];
 		} else {
-			if (!session_loggedin()) {
-				$user=100;
-			} else {
-				$user=user_getid();
-			}
+			$user = ((session_loggedin()) ? user_getid() : 100);
 		}
 		if (array_key_exists('time',$importData)){
 			$time = $importData['time'];
@@ -837,18 +856,18 @@ class Artifact extends FFError {
 					       $field_name,
 					       $old_value,
 					       $user,
-					       $time)) ;
+					       $time));
 	}
 
 	/**
 	 * setStatus - set the status of this artifact.
 	 *
-	 * @param	int	$status_id The artifact status ID.
-	 * @param	int|bool	$closingTime Closing date if status = 1
+	 * @param	int		$status_id	The artifact status ID.
+	 * @param	int|bool	$closingTime	Closing date if status = 1
 	 *
 	 * @return	bool	success.
 	 */
-	function setStatus($status_id, $closingTime=false) {
+	function setStatus($status_id, $closingTime = false) {
 		db_begin();
 		$qpa = db_construct_qpa(array(), 'UPDATE artifact SET status_id=$1', array ($status_id)) ;
 		if ($closingTime && $status_id != 1) {
@@ -888,45 +907,61 @@ class Artifact extends FFError {
 	 * @param	int	$new_artifact_type_id	Allows you to move an artifact to another type.
 	 * @param	array	$extra_fields		Array of extra fields like: array(15=>'foobar',22=>'1');
 	 * @param	string  $description		The description.
-	 * @return	boolean	success.
+	 * @param	array	$importData		Array of data to change submitter and time of submit like:
+	 *							array('user' => 127, 'time' => 1234556789, 'nopermcheck' => true, 'nonotice' => true)
+	 * @return	bool	success.
 	 */
-	function update($priority,$status_id,
-		$assigned_to,$summary,$canned_response,$details,$new_artifact_type_id,
-		$extra_fields=array(), $description='') {
+	function update($priority,$status_id, $assigned_to,$summary,$canned_response,$details,$new_artifact_type_id, $extra_fields = array(), $description='', $importData = array()) {
 
+		if (array_key_exists('user', $importData)){
+			$user = $importData['user'];
+		}
+		if (isset($importData['nopermcheck']) && $importData['nopermcheck']) {
+			$permCheck = false;
+		} else {
+			$permCheck = true;
+		}
+
+		if (isset($importData['nonotice']) && $importData['nonotice']) {
+			$sendNotice = false;
+		} else {
+			$sendNotice = true;
+		}
 		/*
 			Field-level permission checking
 		*/
-		if (!forge_check_perm ('tracker', $this->ArtifactType->getID(), 'manager')) {
-			// Non-managers cannot modify these fields
-			$priority=$this->getPriority();
-			$summary=htmlspecialchars_decode($this->getSummary());
-			$description=htmlspecialchars_decode($this->getDetails());
-			$canned_response=100;
-			$new_artifact_type_id=$this->ArtifactType->getID();
-			$autoAssignField = $this->getArtifactType()->getAutoAssignField();
-			if ($autoAssignField!=100) {
-				$ef = new ArtifactExtraField($this->getArtifactType(),$autoAssignField);
-				if (!$ef || !is_object($ef)) {
-					exit_error(_('Unable to create ArtifactExtraField Object'),'tracker');
-				} elseif ($ef->isError()) {
-					exit_error($ef->getErrorMessage(),'tracker');
-				} else {
-					$efe = new ArtifactExtraFieldElement($ef,$extra_fields[$autoAssignField]);
-					if (!$efe || !is_object($efe)) {
-						exit_error(_('Unable to create ArtifactExtraFieldElement Object'),'tracker');
-					} elseif ($efe->isError()) {
-						exit_error($efe->getErrorMessage(),'tracker');
+		if ($permCheck) {
+			if (!forge_check_perm ('tracker', $this->ArtifactType->getID(), 'manager')) {
+				// Non-managers cannot modify these fields
+				$priority=$this->getPriority();
+				$summary=htmlspecialchars_decode($this->getSummary());
+				$description=htmlspecialchars_decode($this->getDetails());
+				$canned_response=100;
+				$new_artifact_type_id=$this->ArtifactType->getID();
+				$autoAssignField = $this->getArtifactType()->getAutoAssignField();
+				if ($autoAssignField!=100) {
+					$ef = new ArtifactExtraField($this->getArtifactType(),$autoAssignField);
+					if (!$ef || !is_object($ef)) {
+						exit_error(_('Unable to create ArtifactExtraField Object'),'tracker');
+					} elseif ($ef->isError()) {
+						exit_error($ef->getErrorMessage(),'tracker');
 					} else {
-						$assigned_to = $efe->getAutoAssignto();
+						$efe = new ArtifactExtraFieldElement($ef,$extra_fields[$autoAssignField]);
+						if (!$efe || !is_object($efe)) {
+							exit_error(_('Unable to create ArtifactExtraFieldElement Object'),'tracker');
+						} elseif ($efe->isError()) {
+							exit_error($efe->getErrorMessage(),'tracker');
+						} else {
+							$assigned_to = $efe->getAutoAssignto();
+						}
 					}
+				} else {
+					$assigned_to = $this->getAssignedTo();
 				}
-			} else {
-				$assigned_to = $this->getAssignedTo();
-			}
-			if (!forge_check_perm ('tracker', $this->ArtifactType->getID(), 'tech')) {
-				$this->setPermissionDeniedError();
-				return false;
+				if (!forge_check_perm ('tracker', $this->ArtifactType->getID(), 'tech')) {
+					$this->setPermissionDeniedError();
+					return false;
+				}
 			}
 		}
 		//
@@ -959,8 +994,8 @@ class Artifact extends FFError {
 		}
 
 		// Check that assigned_to is a tech for the tracker
-		if ($assigned_to != 100) {
-			if (!forge_check_perm_for_user ($assigned_to, 'tracker', $this->ArtifactType->getID(), 'tech')) {
+		if ($assigned_to != 100 && $permCheck) {
+			if (!forge_check_perm_for_user($assigned_to, 'tracker', $this->ArtifactType->getID(), 'tech')) {
 				$this->setError(_("Invalid assigned person: must be a technician"));
 				return false;
 			}
@@ -975,7 +1010,7 @@ class Artifact extends FFError {
 		//
 		//	Get a lock on this row in the database
 		//
-		db_query_params ('SELECT * FROM artifact WHERE artifact_id=$1 FOR UPDATE', array ($this->getID())) ;
+		db_query_params('SELECT * FROM artifact WHERE artifact_id=$1 FOR UPDATE', array ($this->getID()));
 		$artifact_type_id = $this->ArtifactType->getID();
 		//
 		//	Attempt to move this Artifact to a new ArtifactType
@@ -989,18 +1024,16 @@ class Artifact extends FFError {
 				return false;
 			}
 			//	do they have perms for new ArtifactType?
-			if (!forge_check_perm ('tracker', $newArtifactType->getID(), 'manager')) {
+			if (!forge_check_perm ('tracker', $newArtifactType->getID(), 'manager') && $permCheck) {
 				$this->setPermissionDeniedError();
 				db_rollback();
 				return false;
 			}
 
 			// Add a message to explain that the tracker was moved.
-			$message = sprintf(_('Moved from %1$s to %2$s'),
-                               $this->ArtifactType->getName(),
-                               $newArtifactType->getName());
-			$this->addHistory('type', $this->ArtifactType->getName());
-			$this->addMessage($message,'',0);
+			$message = sprintf(_('Moved from %1$s to %2$s'), $this->ArtifactType->getName(), $newArtifactType->getName());
+			$this->addHistory('type', $this->ArtifactType->getName(), $importData);
+			$this->addMessage($message,'',0, $importData);
 
 			// Fake change to send a mail when moved.
 			$changes['Type'] = 1;
@@ -1067,16 +1100,16 @@ class Artifact extends FFError {
 
 			$extra_fields = $new_extra_fields;
 
-			$res = db_query_params ('DELETE FROM artifact_extra_field_data WHERE artifact_id=$1',
-						array ($this->getID()));
+			$res = db_query_params('DELETE FROM artifact_extra_field_data WHERE artifact_id=$1',
+						array($this->getID()));
 			if (!$res) {
-				$this->setError(_('Removal of old artifact_extra_field_data failed: ').db_error());
+				$this->setError(_('Removal of old artifact_extra_field_data failed')._(': ').db_error());
 				db_rollback();
 				return false;
 			}
 
 			// Check that assigned_to is a tech in the new tracker
-			if ($assigned_to != 100) {
+			if ($assigned_to != 100 && $permCheck) {
 				if (!forge_check_perm ('tracker', $newArtifactType->getID(), 'tech')) {
 					$assigned_to = 100;
 				}
@@ -1094,47 +1127,52 @@ class Artifact extends FFError {
 		//
 		//	handle audit trail
 		//
-		$now = time();
+		if (array_key_exists('time',$importData)){
+			$time = $importData['time'];
+		} else {
+			$time = time();
+		}
+
 		if ($this->getStatusID() != $status_id) {
-			$this->addHistory('status_id',$this->getStatusID());
+			$this->addHistory('status_id',$this->getStatusID(), $importData);
 			$qpa = db_construct_qpa($qpa, ' status_id=$1,', array($status_id));
 			$changes['status'] = 1;
 			$update = true;
 
 			if ($status_id != 1) {
-				$qpa = db_construct_qpa($qpa, ' close_date=$1,', array($now));
+				$qpa = db_construct_qpa($qpa, ' close_date=$1,', array($time));
 			} else {
-			  $qpa = db_construct_qpa($qpa, ' close_date=$1,', array(0));
+				$qpa = db_construct_qpa($qpa, ' close_date=$1,', array(0));
 			}
-			$this->addHistory('close_date', $this->getCloseDate());
+			$this->addHistory('close_date', $this->getCloseDate(), $importData);
 		}
 		if ($this->getPriority() != $priority) {
-			$this->addHistory('priority',$this->getPriority());
+			$this->addHistory('priority',$this->getPriority(), $importData);
 			$qpa = db_construct_qpa($qpa, ' priority=$1,', array($priority));
 			$changes['priority'] = 1;
 			$update = true;
 		}
 
 		if ($this->getAssignedTo() != $assigned_to) {
-			$this->addHistory('assigned_to',$this->getAssignedTo());
+			$this->addHistory('assigned_to',$this->getAssignedTo(), $importData);
 			$qpa = db_construct_qpa($qpa, ' assigned_to=$1,', array($assigned_to));
 			$changes['assigned_to'] = 1;
 			$update = true;
 		}
 		if ($summary && ($this->getSummary() != htmlspecialchars($summary))) {
-			$this->addHistory('summary', $this->getSummary());
+			$this->addHistory('summary', $this->getSummary(), $importData);
 			$qpa = db_construct_qpa($qpa, ' summary=$1,', array(htmlspecialchars($summary)));
 			$changes['summary'] = 1;
 			$update = true;
 		}
- 		if ($description && ($this->getDetails() != htmlspecialchars($description))) {
- 			$this->addHistory('details', $this->getDetails());
- 			$qpa = db_construct_qpa($qpa, ' details=$1,', array(htmlspecialchars($description)));
- 			$changes['details'] = 1;
- 			$update = true;
-  		}
+		if ($description && ($this->getDetails() != htmlspecialchars($description))) {
+			$this->addHistory('details', $this->getDetails(), $importData);
+			$qpa = db_construct_qpa($qpa, ' details=$1,', array(htmlspecialchars($description)));
+			$changes['details'] = 1;
+			$update = true;
+		}
 		if ($details) {
-			$this->addMessage($details,'',0);
+			$this->addMessage($details, '' ,0 , $importData);
 			$changes['details'] = 1;
 			$send_message=true;
 		}
@@ -1144,13 +1182,13 @@ class Artifact extends FFError {
 		*/
 		if ($update){
 		  $qpa = db_construct_qpa($qpa, ' group_artifact_id=$1
-				                              WHERE artifact_id=$2 AND group_artifact_id=$3',
-                                      array($new_artifact_type_id,
-                                            $this->getID(), $artifact_type_id));
+						WHERE artifact_id=$2 AND group_artifact_id=$3',
+						array($new_artifact_type_id,
+							$this->getID(), $artifact_type_id));
 		  $result = db_query_qpa($qpa);
 
 			if (!$result || db_affected_rows($result) < 1) {
-				$this->setError(_('Update failed').db_error());
+				$this->setError(_('Update failed')._(': ').db_error());
 				db_rollback();
 				return false;
 			} else {
@@ -1162,9 +1200,9 @@ class Artifact extends FFError {
 		}
 
 		//extra field handling
-		$update=true;
-		if (!$this->updateExtraFields($extra_fields,$changes)) {
-//TODO - see if anything actually did change
+		$update = true;
+		if (!$this->updateExtraFields($extra_fields, $changes, $importData)) {
+			//TODO - see if anything actually did change
 			db_rollback();
 			return false;
 		}
@@ -1176,7 +1214,7 @@ class Artifact extends FFError {
 		*/
 		if ($canned_response != 100) {
 			//don't care if this response is for this group - could be hacked
-			$acr=new ArtifactCanned($this->ArtifactType,$canned_response);
+			$acr = new ArtifactCanned($this->ArtifactType, $canned_response);
 			if (!$acr || !is_object($acr)) {
 				$this->setError(_('Could Not Create Canned Response Object'));
 			} elseif ($acr->isError()) {
@@ -1184,7 +1222,7 @@ class Artifact extends FFError {
 			} else {
 				$body = $acr->getBody();
 				if ($body) {
-					if (!$this->addMessage(util_unconvert_htmlspecialchars($body),'',0)) {
+					if (!$this->addMessage(util_unconvert_htmlspecialchars($body), '', 0, $importData)) {
 						db_rollback();
 						return false;
 					} else {
@@ -1198,9 +1236,9 @@ class Artifact extends FFError {
 		}
 
 		if ($update || $send_message){
-			if (!empty($changes)) {
+			if (!empty($changes) && $sendNotice) {
 				// Send the email with changes
-				$this->mailFollowupEx($now, 2, false, $changes);
+				$this->mailFollowupEx($time, 2, false, $changes);
 			}
 			db_commit();
 			return true;
@@ -1214,13 +1252,26 @@ class Artifact extends FFError {
 	}
 
 	/**
-	 * updateLastModifiedDate - update the last_modified_date attribute of this artifact.
+	 * updateLastModified - update last_modified_date & last_modified_by attribute of this artifact.
+	 * @param	array	$importData	Array of data to change submitter and time of submit like:
+	 *						array('user' => 127, 'time' => 1234556789)
 	 *
 	 * @return	bool	true on success / false on failure
 	 */
-	function updateLastModifiedDate() {
-		$res = db_query_params ('UPDATE artifact SET last_modified_date=EXTRACT(EPOCH FROM now())::integer WHERE artifact_id=$1',
-			array ($this->getID()));
+	function updateLastModified($importData = array()) {
+		if (array_key_exists('time', $importData)){
+			$time = $importData['time'];
+		} else {
+			$time = time();
+		}
+		if (array_key_exists('user',$importData)){
+			$user = $importData['user'];
+		} else {
+			$user = ((session_loggedin()) ? user_getid() : 100);
+		}
+
+		$res = db_query_params ('UPDATE artifact SET last_modified_date=$1, last_modified_by=$2 WHERE artifact_id=$3',
+			array ($time, $user, $this->getID()));
 		return (!$res);
 	}
 
@@ -1239,7 +1290,7 @@ class Artifact extends FFError {
 		$res = db_query_params ('UPDATE artifact SET assigned_to=$1 WHERE artifact_id=$2',
 								array ($user_id, $this->getID())) ;
 		if (!$res) {
-			$this->setError(_('Error updating assigned_to in artifact: ').db_error());
+			$this->setError(_('Error updating assigned_to in artifact')._(': ').db_error());
 			return false;
 		}
 		$this->fetchData($this->getID());
@@ -1251,11 +1302,14 @@ class Artifact extends FFError {
 	 * updateExtraFields - updates the extra data elements for this artifact
 	 * e.g. the extra fields created and defined by the admin.
 	 *
-	 * @param	array	Array of extra fields like: array(15=>'foobar',22=>'1');
-	 * @param	array	Array where changes to the extra fields should be logged
+	 * @param	array	$extra_fields   Array of extra fields like: array(15=>'foobar',22=>'1');
+	 * @param	array	$changes        Array where changes to the extra fields should be logged
+	 * @param	array	$importData     Array of data to change submitter and time of submit like:
+	 *						array('user' => 127, 'time' => 1234556789)
+	 *
 	 * @return	bool	true on success / false on failure
 	 */
-	function updateExtraFields($extra_fields,&$changes){
+	function updateExtraFields($extra_fields, &$changes, $importData = array()){
 /*
 	This is extremely complex code - we have take the passed array
 	and see if we need to insert it into the db, and may have to
@@ -1271,11 +1325,16 @@ class Artifact extends FFError {
 				skip it and continue to next item
 
 */
+		if (isset($importData['nopermcheck']) && $importData['nopermcheck']) {
+			$permCheck = false;
+		} else {
+			$permCheck = true;
+		}
 		$update = false;
 
 		//get a list of extra fields for this artifact_type
 		$ef = $this->ArtifactType->getExtraFields();
-		$efk=array_keys($ef);
+		$efk = array_keys($ef);
 
 		if (empty($extra_fields) && empty($ef)) {
 			return true;
@@ -1285,7 +1344,7 @@ class Artifact extends FFError {
 
 		// If there is a status field, then check against the workflow.
 		// Unless if we change type.
-		if (! isset($changes['Type']) || !$changes['Type']) {
+		if ((!isset($changes['Type']) || !$changes['Type']) && $permCheck) {
 			for ($i=0; $i<count($efk); $i++) {
 				$efid=$efk[$i];
 				$type=$ef[$efid]['field_type'];
@@ -1297,11 +1356,11 @@ class Artifact extends FFError {
 							$efid));
 					$from_status = (db_numrows($res)>0) ? db_result($res,0,'field_data') : 100;
 					$to_status = $extra_fields[$efid];
-						if ($from_status != $to_status) {
+					if ($from_status != $to_status) {
 						$status_changed = true;
 						$atw = new ArtifactWorkflow($this->ArtifactType, $efid);
 						if (!$atw->checkEvent($from_status, $to_status)) {
-							$this->setError('Workflow error: You are not authorized to change the Status ('.$from_status.' => '.$to_status.')');
+							$this->setError(_('Workflow error: You are not authorized to change the Status').'('.$from_status.' => '.$to_status.')');
 							return false;
 						}
 					}
@@ -1323,33 +1382,28 @@ class Artifact extends FFError {
 			$type=$ef[$efid]['field_type'];
 
 			// check required fields
-			if ($ef[$efid]['is_required'] || in_array($efid, $rf)) {
+			if (($ef[$efid]['is_required'] || in_array($efid, $rf)) && $permCheck) {
 				if (!array_key_exists($efid, $extra_fields)) {
 					if ($type == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 						$this->setError(_('Status Custom Field Must Be Set'));
-					}
-					else {
+					} else {
 						$this->setMissingParamsError($ef[$efid]['field_name']);
 					}
 					return false;
-				}
-				else {
+				} else {
 					if ($extra_fields[$efid] === '') {
 						if ($type == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 							$this->setError(_('Status Custom Field Must Be Set'));
-						}
-						else {
+						} else {
 							$this->setMissingParamsError($ef[$efid]['field_name']);
 						}
 						return false;
-					}
-					else {
+					} else {
 						if (($type == ARTIFACT_EXTRAFIELDTYPE_SELECT || $type == ARTIFACT_EXTRAFIELDTYPE_RADIO) &&
 							$extra_fields[$efid] == '100') {
 								$this->setMissingParamsError($ef[$efid]['field_name']);
 								return false;
-						}
-						elseif (($type == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT || $type == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) &&
+						} elseif (($type == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT || $type == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) &&
 								(count($extra_fields[$efid]) == 1 && $extra_fields[$efid][0] == '100')) {
 							$this->setMissingParamsError($ef[$efid]['field_name']);
 							return false;
@@ -1359,10 +1413,11 @@ class Artifact extends FFError {
 			}
 
 			// check parent field
-			if ($type == ARTIFACT_EXTRAFIELDTYPE_SELECT ||
+			if (($type == ARTIFACT_EXTRAFIELDTYPE_SELECT ||
 					$type == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT ||
 					$type == ARTIFACT_EXTRAFIELDTYPE_RADIO ||
-					$type == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) {
+					$type == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX)
+					&& $permCheck) {
 				$allowed = false;
 				if (!is_null($ef[$efid]['parent']) && !empty($ef[$efid]['parent']) && $ef[$efid]['parent']!='100') {
 					$aefParentId = $ef[$efid]['parent'];
@@ -1396,10 +1451,15 @@ class Artifact extends FFError {
 
 
 			// check pattern for text fields
-			if ($type == ARTIFACT_EXTRAFIELDTYPE_TEXT && !empty($ef[$efid]['pattern']) && !empty($extra_fields[$efid]) && !preg_match('/'.$ef[$efid]['pattern'].'/', $extra_fields[$efid])) {
+			if ($type == ARTIFACT_EXTRAFIELDTYPE_TEXT &&
+					!empty($ef[$efid]['pattern']) &&
+					!empty($extra_fields[$efid]) &&
+					!preg_match('/'.$ef[$efid]['pattern'].'/', $extra_fields[$efid]) &&
+					$permCheck) {
 				$this->setError(sprintf(_("Field %s doesn't match the pattern."), $ef[$efid]['field_name']));
 				return false;
 			}
+
 //
 //	Force each field to have some value if it is a numeric field
 //	text fields will just be purged and skipped
@@ -1408,11 +1468,11 @@ class Artifact extends FFError {
 				if (($type == ARTIFACT_EXTRAFIELDTYPE_SELECT) || ($type == ARTIFACT_EXTRAFIELDTYPE_RADIO)) {
 					$extra_fields[$efid]='100';
 				} elseif (($type == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT) || ($type == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX)) {
-					$extra_fields[$efid]=array('100');
+					$extra_fields[$efid] = array('100');
 				} else {
-					db_query_params ('DELETE FROM artifact_extra_field_data WHERE artifact_id=$1 AND extra_field_id=$2',
+					db_query_params('DELETE FROM artifact_extra_field_data WHERE artifact_id=$1 AND extra_field_id=$2',
 								   array ($this->getID(),
-									  $efid)) ;
+									  $efid));
 					continue;
 				}
 			}
@@ -1420,9 +1480,9 @@ class Artifact extends FFError {
 			//
 			//	get the old rows of data
 			//
-			$resd = db_query_params ('SELECT * FROM artifact_extra_field_data WHERE artifact_id=$1 AND extra_field_id=$2',
-						 array ($this->getID(),
-							$efid)) ;
+			$resd = db_query_params('SELECT * FROM artifact_extra_field_data WHERE artifact_id=$1 AND extra_field_id=$2',
+						 array($this->getID(),
+							$efid));
 			$rows=db_numrows($resd);
 			if ($resd && $rows) {
 //
@@ -1447,12 +1507,12 @@ class Artifact extends FFError {
 							$changes["extra_fields"][$efid] = 1;
 						}
 
-						$this->addHistory($field_name, $this->ArtifactType->getElementName(array_reverse($old_values)));
+						$this->addHistory($field_name, $this->ArtifactType->getElementName(array_reverse($old_values)),$importData);
 						$update = true;
 
-						db_query_params ('DELETE FROM artifact_extra_field_data WHERE	artifact_id=$1 AND extra_field_id=$2',
-									   array ($this->getID(),
-										  $efid)) ;
+						db_query_params('DELETE FROM artifact_extra_field_data WHERE	artifact_id=$1 AND extra_field_id=$2',
+									   array($this->getID(),
+										  $efid));
 					} else {
 						continue;
 					}
@@ -1465,15 +1525,15 @@ class Artifact extends FFError {
 					if (!preg_match('/^@/', $ef[$efid]['alias'])) {
 						$changes["extra_fields"][$efid] = 1;
 					}
-					db_query_params ('DELETE FROM artifact_extra_field_data WHERE	artifact_id=$1 AND extra_field_id=$2',
-								   array ($this->getID(),
-									  $efid)) ;
+					db_query_params('DELETE FROM artifact_extra_field_data WHERE	artifact_id=$1 AND extra_field_id=$2',
+								   array($this->getID(),
+									  $efid));
 
 					// Adding history with previous value.
 					if (($type == ARTIFACT_EXTRAFIELDTYPE_SELECT) || ($type == ARTIFACT_EXTRAFIELDTYPE_RADIO) || ($type == ARTIFACT_EXTRAFIELDTYPE_STATUS)) {
-						$this->addHistory($field_name,$this->ArtifactType->getElementName(db_result($resd,0,'field_data')));
+						$this->addHistory($field_name,$this->ArtifactType->getElementName(db_result($resd,0,'field_data')),$importData);
 					} else {
-						$this->addHistory($field_name, db_result($resd,0,'field_data'));
+						$this->addHistory($field_name, db_result($resd,0,'field_data'),$importData);
 					}
 					$update = true;
 				}
@@ -1491,24 +1551,32 @@ class Artifact extends FFError {
 			// 3) Ensure that only integers are given.
 			// 4) Ensure that id corresponds to valid tracker id.
 			//
-			if ($type == ARTIFACT_EXTRAFIELDTYPE_RELATION) {
+			if ($type == ARTIFACT_EXTRAFIELDTYPE_RELATION || $type == ARTIFACT_EXTRAFIELDTYPE_PARENT) {
 				$value = preg_replace('/\[\#(\d+)\]/', "\\1", trim($extra_fields[$efid]));
 				$value = preg_replace('/\\s+/', ' ', $value);
 				$new = '';
 				foreach (explode(' ',$value) as $id) {
 					if (preg_match('/^(\d+)$/', $id)) {
+						if ($id == $this->getID()) {
+							$this->setError(_('Illegal id').' '.$id._(': ')._('self reference for field')._(': ').$ef[$efid]['field_name']);
+							return false;
+						}
 						// Control that the id is present in the db
-
-						$res = db_query_params ('SELECT artifact_id FROM artifact WHERE artifact_id=$1',
-			array($id));
+						$res = db_query_params('SELECT artifact_id FROM artifact WHERE artifact_id=$1',
+									array($id));
 						if (db_numrows($res) == 1) {
 							$new .= $id.' ';
 						} else {
-							$this->setError('Illegal id '.$id.', it\'s not a valid tracker id for field: '.$ef[$efid]['field_name'].'.'); // @todo: lang
+							$this->setError(_('Illegal id').' '.$id._(': ')._('it is not a valid artifact id for field')._(': ').$ef[$efid]['field_name'].'.');
+							return false;
+						}
+						$progeny = $this->getProgeny();
+						if (in_array($id, $progeny)) {
+							$this->setError(_('Illegal id').' '.$id._(': ')._('circular dependency for field')._(': ').$ef[$efid]['field_name']);
 							return false;
 						}
 					} else {
-						$this->setError('Illegal value '.$id.', only trackers id are allowed for field: '.$ef[$efid]['field_name'].'.'); // @todo: lang
+						$this->setError(_('Illegal value').' '.$id._(': ')._('only artifact ids are allowed for field')._(': ').$ef[$efid]['field_name']);
 						return false;
 					}
 				}
@@ -1519,11 +1587,11 @@ class Artifact extends FFError {
 			if ($type == ARTIFACT_EXTRAFIELDTYPE_INTEGER) {
 				$extra_fields[$efid] = trim($extra_fields[$efid]);
 				if (!preg_match('/^[-+]?(\d+)$/', $extra_fields[$efid])) {
-					$this->setError('Illegal value '.$extra_fields[$efid].' for field '.$ef[$efid]['field_name'].': Only integer is allowed.');
+					$this->setError(_('Illegal value').' '.$extra_fields[$efid].' '._('for field ').' '.$ef[$efid]['field_name']._(': ')._('Only integer is allowed.'));
 					return false;
 				}
 				if ($extra_fields[$efid] < -2147483648 || $extra_fields[$efid] > 2147483647) {
-					$this->setError('Illegal value '.$extra_fields[$efid].' for field '.$ef[$efid]['field_name'].': Integer out of range (-2147483648 to +2147483647).');
+					$this->setError(_('Illegal value').' '.$extra_fields[$efid].' '._('for field ').' '.$ef[$efid]['field_name']._(': ')._('Integer out of range (-2147483648 to +2147483647).'));
 					return false;
 				}
 				$extra_fields[$efid] = intval($extra_fields[$efid]);
@@ -1535,8 +1603,13 @@ class Artifact extends FFError {
 			if ($extra_fields[$efid] === '') {
 				//nothing in field to update - text fields may be blank
 			} else {
+				$type = $ef[$efid]['field_type'];
+				//special treatment for DATETIME
+				if ($type == ARTIFACT_EXTRAFIELDTYPE_DATETIME && $extra_fields[$efid] != '' ) {
+					$dateTime = DateTime::createFromFormat(_('Y-m-d H:i'), $extra_fields[$efid]);
+					$extra_fields[$efid] = $dateTime->format('U');
+				}
 				//determine the type of field and whether it should have multiple rows supporting it
-				$type=$ef[$efid]['field_type'];
 				if (($type == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) || ($type==ARTIFACT_EXTRAFIELDTYPE_MULTISELECT)) {
 					$multi_rows=true;
 					$count=count($extra_fields[$efid]);
@@ -1565,12 +1638,187 @@ class Artifact extends FFError {
 				}
 			}
 		}
-		unset($this->extra_field_data);
 
-		if ($update)
-			$this->updateLastModifiedDate();
+		// update parent
+		if ($this->hasParent()) {
+			$parentId = $this->getParent();
+			$parentArtifact = artifact_get_object($parentId);
+			$parentArtifact->updateOnChildChange($changes);
+		}
+
+		// update children
+		if ($this->hasChildren()) {
+			$childrenArray = $this->getChildren();
+
+			foreach ($childrenArray as $childArray) {
+				$childId = $childArray['artifact_id'];
+				$childArtifact = artifact_get_object($childId);
+				$childArtifact->updateOnParentChange($changes);
+			}
+		}
+
+		unset($this->extra_field_data);
+		if ($update) {
+			$this->updateLastModified($importData);
+		}
 
 		return true;
+	}
+
+	function updateOnParentChange($parentChanges) {
+		if ($this->hasParent()) {
+			$return = false;
+			$changes = false;
+
+			$extra_fields = $this->getExtraFieldData();
+			$priority = $this->getPriority();
+			$status_id = $this->getStatusID();
+			$status_id = $this->getArtifactType()->remapStatus($status_id, $extra_fields);
+			$assigned_to = $this->getAssignedTo();
+			$summary = $this->getSummary();
+			$canned_response = 100;
+			$details = "";
+			$artifact_type_id = $this->getArtifactType()->getID();
+			$description = $this->getDetails();
+			$at = $this->getArtifactType();
+			$ef = $at->getExtraFields();
+
+			$parent = $this->getParent();
+			$parentArtifact = artifact_get_object($parent);
+			$parentExtra_fields = $parentArtifact->getExtraFieldData();
+			$parentAt = $parentArtifact->getArtifactType();
+
+			foreach ($extra_fields as $key=>$value) {
+				$distribution_rule = $ef[$key]['distribution_rule'];
+				switch ($distribution_rule) {
+					case ARTIFACT_EXTRAFIELD_DISTRIBUTION_RULE_NO_DISTRIBUTION:
+						break;
+					case ARTIFACT_EXTRAFIELD_DISTRIBUTION_RULE_STATUS_CLOSE_RECURSIVELY:
+						$parentStatusID = $parentArtifact->getStatusID();
+						$parentStatusID = $parentAt->remapStatus($parentStatusID, $parentExtra_fields);
+						if (isset($parentChanges['status']) && $parentStatusID != 1 && $status_id == 1) {
+							$changes = true;
+							if ($parentAt->getID() == $at->getID()) {
+								$status_id = $parentStatusID;
+								if ($at->usesCustomStatuses()) {
+									$extra_fields[$at->getCustomStatusField()] = $parentExtra_fields[$parentAt->getCustomStatusField()];
+									$status_id = $at->remapStatus($status_id, $extra_fields);
+								}
+							} else {
+								if (!$at->usesCustomStatuses()) {
+									$status_id = 2; //closed
+								} else {
+									$parentStatusList = $parentAt->getExtraFieldElements($parentAt->getCustomStatusField());
+									$parentStatusName = $parentStatusList[$parentAt->getCustomStatusField()];
+									$statusList = $at->getExtraFieldElements($at->getCustomStatusField());
+									$found = false;
+									foreach ($statusList as $id->$statusName) {
+										if ($parentStatusName == $statusName) {
+											$found = true;
+											$extra_fields[$at->getCustomStatusField()] = $id;
+											$status_id = 2;
+											break;
+										}
+									}
+									//TODO: status not found
+								}
+							}
+						}
+						break;
+				}
+			}
+			if ($changes) {
+				return $this->update($priority,$status_id,
+						$assigned_to,$summary,$canned_response,$details,$artifact_type_id,
+						$extra_fields, $description);
+			}
+		} else {
+			return true;
+		}
+	}
+
+	function updateOnChildChange($childChanges) {
+		if ($this->hasChildren()) {
+			$return = false;
+			$changes = false;
+
+			$extra_fields = $this->getExtraFieldData();
+			$priority = $this->getPriority();
+			$status_id = $this->getStatusID();
+			$status_id = $this->getArtifactType()->remapStatus($status_id, $extra_fields);
+			$assigned_to = $this->getAssignedTo();
+			$summary = $this->getSummary();
+			$canned_response = 100;
+			$details = "";
+			$artifact_type_id = $this->getArtifactType()->getID();
+			$description = $this->getDetails();
+			$at = $this->getArtifactType();
+			$ef = $at->getExtraFields();
+
+			$children = $this->getChildren();
+
+			foreach ($extra_fields as $key=>$value) {
+				$aggregation_rule = $ef[$key]['aggregation_rule'];
+				$type = $ef[$key]['field_type'];
+				$alias = $ef[$key]['alias'];
+				switch ($aggregation_rule) {
+					case ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_NO_AGGREGATION:
+						break;
+					case ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_SUM:
+						switch ($type) {
+							case ARTIFACT_EXTRAFIELDTYPE_INTEGER:
+								$sum = 0;
+								break;
+							case ARTIFACT_EXTRAFIELDTYPE_EFFORT:
+								$effortUnitSet = new EffortUnitSet($at, $at->getEffortUnitSet());
+								$effortUnitFactory = new EffortUnitFactory($effortUnitSet);
+
+								$baseUnit = $effortUnitFactory->getBaseUnit();
+								$sum = 0;
+								$effortSum= new Effort(0, $baseUnit);
+								break;
+						}
+						foreach ($children as $child) {
+							$childArtifact = artifact_get_object($child['artifact_id']);
+							$childExtra_fields = $childArtifact->getExtraFieldData();
+							if ($at->getID() == $child['group_artifact_id']) {
+								// same tracker
+								$childEf_id= $key;
+							} else {
+								$childAt = $childArtifact->getArtifactType();
+								$childEf= $childAt->getExtraFieldByAlias($alias);
+								if ($childEf) {
+									$childEf_id = $child_ef['extra_field_id'];
+								} else {
+									$childEf_id = false;
+								}
+							}
+							if ($childEf_id) {
+								switch ($type) {
+									case ARTIFACT_EXTRAFIELDTYPE_INTEGER:
+										$sum = $sum+$childExtra_fields[$childEf_id];
+										break;
+									case ARTIFACT_EXTRAFIELDTYPE_EFFORT:
+										$effort = encodedEffortToEffort($childExtra_fields[$childEf_id]);
+										$effortSum= $effortSum->add($effort);
+										$sum = $effortSum->toEncoded();
+								}
+							}
+						}
+						$extra_fields[$key]=$sum;
+						$changes = true;
+						break;
+				}
+			}
+
+			if ($changes) {
+				return $this->update($priority,$status_id,
+						$assigned_to,$summary,$canned_response,$details,$artifact_type_id,
+						$extra_fields, $description);
+			}
+		} else {
+			return true;
+		}
 	}
 
 	/**
@@ -1581,17 +1829,17 @@ class Artifact extends FFError {
 	function &getExtraFieldData() {
 		if (!isset($this->extra_field_data)) {
 			$this->extra_field_data = array();
-			$res = db_query_params ('SELECT * FROM artifact_extra_field_data WHERE artifact_id=$1 ORDER BY extra_field_id',
-						array ($this->getID())) ;
+			$res = db_query_params('SELECT * FROM artifact_extra_field_data WHERE artifact_id=$1 ORDER BY extra_field_id',
+						array($this->getID()));
 			$ef = $this->ArtifactType->getExtraFields();
 			while ($arr = db_fetch_array($res)) {
 				$type=$ef[$arr['extra_field_id']]['field_type'];
-				if (($type == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) || ($type==ARTIFACT_EXTRAFIELDTYPE_MULTISELECT)) {
+				if (($type == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) || ($type == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT)) {
 					//accumulate a sub-array of values in cases where you may have multiple rows
 					if (!array_key_exists($arr['extra_field_id'], $this->extra_field_data) || !is_array($this->extra_field_data[$arr['extra_field_id']])) {
 						$this->extra_field_data[$arr['extra_field_id']] = array();
 					}
-					$this->extra_field_data[$arr['extra_field_id']][]=$arr['field_data'];
+					$this->extra_field_data[$arr['extra_field_id']][] = $arr['field_data'];
 				} else {
 					$this->extra_field_data[$arr['extra_field_id']] = $arr['field_data'];
 				}
@@ -1603,9 +1851,12 @@ class Artifact extends FFError {
 	/**
 	 * marker - adds the > symbol to fields that have been modified for the email message
 	 *
-	 *
+	 * @param	string	$prop_name
+	 * @param	array	$changes
+	 * @param	int		$extra_field_id
+	 * @return	string
 	 */
-	function marker($prop_name,$changes,$extra_field_id=0) {
+	function marker($prop_name, $changes, $extra_field_id=0) {
 		if ($prop_name == 'extra_fields' && isset($changes[$prop_name][$extra_field_id])) {
 			return '>';
 		} elseif ($prop_name != 'extra_fields' && isset($changes[$prop_name])) {
@@ -1623,14 +1874,12 @@ class Artifact extends FFError {
 	 * @param	array	$more_addresses	Array of additional addresses to mail to
 	 * @param	array	$changes	Array of fields changed in this update
 	 * @access	private
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
-	function mailFollowupEx($tm, $type, $more_addresses = false, $changes='') {
-
-		$monitor_ids = array();
+	function mailFollowupEx($tm, $type, $more_addresses = array(), $changes = array()) {
 
 		if (!$changes) {
-			$changes=array();
+			$changes = array();
 		}
 
 		$sess = session_get_user();
@@ -1673,7 +1922,7 @@ class Artifact extends FFError {
 			 "Assigned to: ". $this->getAssignedRealName() .
 			 " (". $this->getAssignedUnixName(). ")"."\n".
 			$this->marker('summary',$changes).
-			 "Summary: ". util_unconvert_htmlspecialchars( $this->getSummary() )." \n";
+			 "Summary: ". util_unconvert_htmlspecialchars($this->getSummary())." \n";
 
 		// Now display the extra fields
 		$efd = $this->getExtraFieldDataText();
@@ -1682,7 +1931,7 @@ class Artifact extends FFError {
 			$body .= $ef["name"].": ".htmlspecialchars_decode($ef["value"])."\n";
 		}
 
-		$subject='['. $this->ArtifactType->Group->getUnixName() . '-' . $name . ']' . $this->getStringID() .' '. util_unconvert_htmlspecialchars( $this->getSummary() );
+		$subject='['. $this->ArtifactType->Group->getUnixName() . '-' . $name . ']' . $this->getStringID() .' '. util_unconvert_htmlspecialchars($this->getSummary());
 
 		if ($type > 1) {
 			// get all the email addresses that are monitoring this request or the ArtifactType
@@ -1718,7 +1967,7 @@ class Artifact extends FFError {
 		}
 
 		$body .= "\n\nInitial Comment:".
-			"\n".util_unconvert_htmlspecialchars( $this->getDetails() ) .
+			"\n".util_unconvert_htmlspecialchars($this->getDetails()) .
 			"\n\n----------------------------------------------------------------------";
 
 		if ($type > 1) {
@@ -1748,9 +1997,9 @@ class Artifact extends FFError {
 						$body .= $this->marker('details',$changes);
 					}
 					$body .= "Comment By: ". db_result($result2,$i,'realname') . " (".db_result($result2,$i,'user_name').")".
-					"\nDate: ". date( _('Y-m-d H:i'),db_result($result2,$i,'adddate') ).
+					"\nDate: ". date(_('Y-m-d H:i'),db_result($result2,$i,'adddate')).
 					"\n\nMessage:".
-					"\n".util_unconvert_htmlspecialchars( db_result($result2,$i,'body') ).
+					"\n".util_unconvert_htmlspecialchars(db_result($result2,$i,'body')).
 					"\n\n----------------------------------------------------------------------";
 				}
 			}
@@ -1758,9 +2007,7 @@ class Artifact extends FFError {
 		}
 
 		$body .= "\n\nYou can respond by visiting: ".
-			"\n".util_make_url ('/tracker/?func=detail&atid='. $this->ArtifactType->getID() .
-					    "&aid=". $this->getID() .
-					    "&group_id=". $this->ArtifactType->Group->getID());
+			"\n".$this->getPermalink();
 
 		//only send if some recipients were found
 		if (count($emails) < 1 && count($monitor_ids) < 1) {
@@ -1768,9 +2015,9 @@ class Artifact extends FFError {
 		}
 
 		if (count($monitor_ids) < 1) {
-			$monitor_ids=array();
+			$monitor_ids = array();
 		} else {
-			$monitor_ids=array_unique($monitor_ids);
+			$monitor_ids = array_unique($monitor_ids);
 		}
 
 		$from = $this->ArtifactType->getReturnEmailAddress();
@@ -1825,7 +2072,11 @@ class Artifact extends FFError {
 				case ARTIFACT_EXTRAFIELDTYPE_TEXT:
 				case ARTIFACT_EXTRAFIELDTYPE_TEXTAREA:
 				case ARTIFACT_EXTRAFIELDTYPE_RELATION:
+				case ARTIFACT_EXTRAFIELDTYPE_PARENT:
 				case ARTIFACT_EXTRAFIELDTYPE_INTEGER:
+				case ARTIFACT_EXTRAFIELDTYPE_DATE:
+				case ARTIFACT_EXTRAFIELDTYPE_DATETIME:
+				case ARTIFACT_EXTRAFIELDTYPE_EFFORT:
 					if (isset($efd[$efid])) {
 						$value = $efd[$efid];
 					} else {
@@ -1884,7 +2135,7 @@ class Artifact extends FFError {
 	/**
 	 * hasVote - Check if a user has voted on this tracker item
 	 *
-	 * @param	int	$uid	user ID (default: current user)
+	 * @param	int|bool	$uid	user ID (default: current user)
 	 * @return	bool	true if a vote exists
 	 */
 	function hasVote($uid=false) {
@@ -1899,11 +2150,11 @@ class Artifact extends FFError {
 		return (db_numrows($res) == 1);
 	}
 
-       /**
-        * getVotes - get number of valid cast and potential votes
-        *
-        * @return	array	(votes, voters, percent)
-        */
+	/**
+	 * getVotes - get number of valid cast and potential votes
+	 *
+	 * @return	array|bool	(votes, voters, percent)
+	 */
 	function getVotes() {
 		if ($this->votes !== false) {
 			return $this->votes;
@@ -1944,13 +2195,173 @@ class Artifact extends FFError {
 					AND (field_data = $1 OR field_data LIKE $2 OR field_data LIKE $3 OR field_data LIKE $4)
 					ORDER BY artifact_group_list.group_id ASC, name ASC, artifact.artifact_id ASC',
 					array($aid,
-					      "$aid %",
-					      "% $aid %",
-					      "% $aid"));
+						"$aid %",
+						"% $aid %",
+						"% $aid"));
 		if (db_numrows($res)>0) {
 			return true;
 		}
 		return false;
+	}
+
+	function  getRelations() {
+		$aid = $this->getID();
+		$res = db_query_params ('SELECT *
+		FROM artifact_extra_field_list, artifact_extra_field_data, artifact_group_list, artifact, groups
+		WHERE field_type = $1
+		AND artifact_extra_field_list.extra_field_id=artifact_extra_field_data.extra_field_id
+		AND artifact_group_list.group_artifact_id = artifact_extra_field_list.group_artifact_id
+		AND artifact.artifact_id = artifact_extra_field_data.artifact_id
+		AND groups.group_id = artifact_group_list.group_id
+		AND (field_data = $2 OR field_data LIKE $3 OR field_data LIKE $4 OR field_data LIKE $5)
+		AND artifact.is_deleted = 0
+		ORDER BY artifact_group_list.group_id ASC, name ASC, artifact.artifact_id ASC',
+				array(ARTIFACT_EXTRAFIELDTYPE_RELATION,
+						$aid,
+						"$aid %",
+						"% $aid %",
+						"% $aid"));
+		return $res;
+	}
+
+	function hasChildren() {
+		if (!$this->children) {
+			$this->children = $this->getChildren();
+		}
+		$nb = count($this->children);
+		if ($nb>0) {
+			return $nb;
+		}
+		return false;
+	}
+
+	function  getChildren() {
+		if (!$this->children) {
+			$res = db_query_params ('SELECT *
+						FROM artifact_extra_field_list, artifact_extra_field_data, artifact_group_list, artifact, groups
+						WHERE field_type = $1
+						AND artifact_extra_field_list.extra_field_id=artifact_extra_field_data.extra_field_id
+						AND artifact_group_list.group_artifact_id = artifact_extra_field_list.group_artifact_id
+						AND artifact.artifact_id = artifact_extra_field_data.artifact_id
+						AND groups.group_id = artifact_group_list.group_id
+						AND field_data = $2
+						AND artifact.is_deleted = 0
+						ORDER BY artifact_group_list.group_id ASC, name ASC, artifact.artifact_id ASC',
+						array(ARTIFACT_EXTRAFIELDTYPE_PARENT,
+								$this->getID()));
+			while ($row = db_fetch_array($res)) {
+				$this->children[] = $row;
+			}
+			db_free_result($res);
+		}
+		return $this->children;
+	}
+
+	function hasParent() {
+		return ($this->getParent()?true:false);
+	}
+
+	function  getParent() {
+		if (!isset($this->parent)) {
+			$res = db_query_params ('SELECT field_data
+						FROM artifact_extra_field_data
+						INNER JOIN artifact_extra_field_list USING (extra_field_id)
+						WHERE field_type = $1
+						AND artifact_id = $2',
+						array(ARTIFACT_EXTRAFIELDTYPE_PARENT,
+								$this->getID()));
+			if (db_numrows($res) == 0) {
+				$this->parent= false;
+			} else {
+				$data = db_fetch_array($res);
+				db_free_result($res);
+				$this->parent= $data['field_data'];
+			}
+		}
+		return $this->parent;
+	}
+
+	function getProgeny() {
+		$return = array();
+		$childrenArr = $this->getChildren();
+		if (is_array($childrenArr)) {
+			$at = $this->ArtifactType;
+			foreach ($childrenArr as $child) {
+				$return[] = $child['artifact_id'];
+				$childObj = new Artifact($at,$child['artifact_id']);
+				$childProgenyArr = $childObj->getProgeny();
+				if (is_array($childProgenyArr)) {
+					$return = array_merge($return, $childProgenyArr);
+				}
+			}
+		}
+		return $return;
+	}
+
+	function setParent($parent_id){
+		$return = false;
+		$update = false;
+		if ($this->getParent()) {
+			if ($this->getParent() == $parent_id) {
+				return true;
+			} else {
+				$this->setError(_('Error')._(':').' '.sprintf(_('Artifact $s has already a parent', $child_id)));
+				return false;
+			}
+		}
+		$extra_fields = $this->getExtraFieldData();
+		$priority = $this->getPriority();
+		$status_id = $this->getStatusID();
+		$status_id = $this->getArtifactType()->remapStatus($status_id, $extra_fields);
+		$assigned_to = $this->getAssignedTo();
+		$summary = $this->getSummary();
+		$canned_response = 100;
+		$details = "";
+		$artifact_type_id = $this->getArtifactType()->getID();
+		$description = $this->getDetails();
+		$ef_parent_arr= $this->getArtifactType()->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_PARENT));
+		$ef_parent = array_shift($ef_parent_arr);
+		$ef_parent_id = $ef_parent['extra_field_id'];
+		$extra_fields[$ef_parent_id] = $parent_id;
+		$ret['ef_parent_id'] = $ef_parent_id;
+		$return = $this->update($priority,$status_id,
+							$assigned_to,$summary,$canned_response,$details,$artifact_type_id,
+							$extra_fields, $description);
+		unset($this->parent);
+		$this->fetchData($this->getID());
+		return $return;
+	}
+
+	function resetParent(){
+		$return = false;
+		$update = false;
+		if (!$this->getParent()) {
+			return true;
+		}
+		$extra_fields = $this->getExtraFieldData();
+		$priority = $this->getPriority();
+		$status_id = $this->getStatusID();
+		$status_id = $this->getArtifactType()->remapStatus($status_id, $extra_fields);
+		$assigned_to = $this->getAssignedTo();
+		$summary = $this->getSummary();
+		$canned_response = 100;
+		$details = "";
+		$artifact_type_id = $this->getArtifactType()->getID();
+		$description = $this->getDetails();
+		$ef_parent_arr= $this->getArtifactType()->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_PARENT));
+		$ef_parent = array_shift($ef_parent_arr);
+		$ef_parent_id = $ef_parent['extra_field_id'];
+		$extra_fields[$ef_parent_id] = '';
+		$return = $this->update($priority,$status_id,
+				$assigned_to,$summary,$canned_response,$details,$artifact_type_id,
+				$extra_fields, $description);
+		unset($this->parent);
+		$this->fetchData($this->getID());
+		return $return;
+	}
+
+	function getPermalink() {
+		return '/tracker/a_follow.php/'.$this->getID();
 	}
 }
 
@@ -1971,15 +2382,19 @@ class ArtifactComparator {
 			}
 			break ;
 		case 'assigned_to':
-			$namecmp = strcoll (user_get_object($a->getAssignedTo())->getRealName(),
-					    user_get_object($b->getAssignedTo())->getRealName()) ;
+			$namecmp = strcoll($a->getAssignedRealName(),$b->getAssignedRealName());
 			if ($namecmp != 0) {
 				return $namecmp ;
 			}
 			break ;
 		case 'submitted_by':
-			$namecmp = strcoll (user_get_object($a->getSubmittedBy())->getRealName(),
-					    user_get_object($b->getSubmittedBy())->getRealName()) ;
+			$namecmp = strcoll($a->getSubmittedRealName(),$b->getSubmittedRealName());
+			if ($namecmp != 0) {
+				return $namecmp ;
+			}
+			break ;
+		case 'last_modified_by':
+			$namecmp = strcoll ($a->getLastModifiedRealName(),$b->getLastModifiedRealName()) ;
 			if ($namecmp != 0) {
 				return $namecmp ;
 			}
@@ -2035,7 +2450,18 @@ class ArtifactComparator {
 			}
 			$af=$aa[$criterion]['value'];
 			$bf=$ba[$criterion]['value'];
-			$namecmp = strcoll ($af,$bf) ;
+			switch ($aa[$criterion]['type']) {
+				case ARTIFACT_EXTRAFIELDTYPE_EFFORT:
+					$namecmp = intval($af)-intval($bf);
+					break;
+				case ARTIFACT_EXTRAFIELDTYPE_INTEGER:
+				case ARTIFACT_EXTRAFIELDTYPE_DATE:
+				case ARTIFACT_EXTRAFIELDTYPE_DATETIME:
+					$namecmp = $af-$bf;
+					break;
+				default:
+					$namecmp = strcoll ($af,$bf);
+			}
 			if ($namecmp != 0) {
 				return $namecmp ;
 			}

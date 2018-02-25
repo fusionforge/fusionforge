@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2010, Franck Villaume - Capgemini
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2016, Franck Villaume - TrivialDev
  * Copyright (C) 2015  Inria (Sylvain Beucler)
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -23,6 +23,33 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+forge_define_config_item('check_password_strength', 'core', 'true');
+forge_set_config_item_bool('check_password_strength', 'core');
+
+/**
+ * pw_weak() - checks if password is weak
+ *
+ * @param	string	$pw	the password
+ * @return	false if password ok, string with description of problem if password ko.
+ *
+ */
+function pw_weak($pw) {
+	// password ok if contains at least 1 uppercase letter, 1 lowercase, 1 digit and 1 non-alphanumeric
+	if (!preg_match('/[[:lower:]]/', $pw)) {
+		return _("Password must contain at least one lowercase letter.");
+	}
+	if (!preg_match('/[[:upper:]]/', $pw)) {
+		return _("Password must contain at least one uppercase letter.");
+	}
+	if (!preg_match('/[[:digit:]]/', $pw)) {
+		return _("Password must contain at least one digit.");
+	}
+	if (!preg_match('/[^[:alnum:]]/', $pw)) {
+		return _("Password must contain at least one non-alphanumeric character.");
+	}
+	return false;
+}
+
 /**
  * account_pwvalid() - Validates a password
  *
@@ -35,6 +62,12 @@ function account_pwvalid($pw) {
 		$GLOBALS['register_error'] = _('Password must be at least 8 characters.');
 		return 0;
 	}
+	if (forge_get_config('check_password_strength')) {
+		if ($msg = pw_weak($pw)) {
+			$GLOBALS['register_error'] = $msg;
+			return 0;
+		}
+	}
 	return 1;
 }
 
@@ -43,6 +76,7 @@ function account_pwvalid($pw) {
  *
  * @param	string	$name	The username string
  * @param	bool	$unix	Check for an unix username
+ * @param	bool	$check_exists
  * @return	bool	true on success/false on failure
  *
  */
@@ -67,8 +101,8 @@ function account_namevalid($name, $unix=false, $check_exists=true) {
 		$GLOBALS['register_error'] = _('Name is too short. It must be at least 3 characters.');
 		return false;
 	}
-	if (strlen($name) > 15) {
-		$GLOBALS['register_error'] = _('Name is too long. It must be less than 15 characters.');
+	if (strlen($name) > 32) {
+		$GLOBALS['register_error'] = _('Name is too long. It must be less than 32 characters.');
 		return false;
 	}
 
@@ -102,10 +136,6 @@ function account_namevalid($name, $unix=false, $check_exists=true) {
 			$GLOBALS['register_error'] = _('That username already exists.');
 			return false;
 		}
-	}
-	if (preg_match("/^(anoncvs_)/i",$name)) {
-		$GLOBALS['register_error'] = _('Name is reserved for CVS.');
-		return false;
 	}
 
 	return true;

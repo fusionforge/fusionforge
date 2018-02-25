@@ -1,7 +1,9 @@
 <?php
-/** External authentication via OpenID for FusionForge
+/**
+ * External authentication via OpenID for FusionForge
  * Copyright 2011, Roland Mas
  * Copyright 2011, Olivier Berger & Institut Telecom
+ * Copyright 2016, Franck Villaume - TrivialDev
  *
  * This program was developped in the frame of the COCLICO project
  * (http://www.coclico-project.org/) with financial support of the Paris
@@ -72,26 +74,23 @@ class AuthOpenIDPlugin extends ForgeAuthPlugin {
 		}
 		$return_to = $params['return_to'];
 
-		$result = '';
 
-		$result .= '<p>';
-		$result .= _('Cookies must be enabled past this point.');
-		$result .= '</p>';
+		$result = html_e('p', array(), _('Cookies must be enabled past this point.'));
 
-		$result .= '<form action="' . util_make_url('/plugins/authopenid/post-login.php') . '" method="post">
-<input type="hidden" name="form_key" value="' . form_generate_key() . '"/>
+		$result .= $HTML->openForm(array('action' => '/plugins/'.$this->name.'/post-login.php', 'method' => 'get'));
+		$result .= '<input type="hidden" name="form_key" value="' . form_generate_key() . '"/>
 <input type="hidden" name="return_to" value="' . htmlspecialchars(stripslashes($return_to)) . '" />
-Your OpenID identifier: <input type="text" name="openid_identifier" />
-<input type="submit" name="login" value="' . _('Login via OpenID') . '" />
-</form>';
+'._('Your OpenID identifier')._(': ').'<input type="text" name="openid_identifier" />
+<input type="submit" name="login" value="' . _('Login via OpenID') . '" />';
+		$result .= $HTML->closeForm();
 
 		$params['html_snippets'][$this->name] = $result;
 
 	}
 
-    /**
+	/**
 	 * Is there a valid session?
-	 * @param unknown_type $params
+	 * @param	array	$params
 	 */
 
 	function checkAuthSession(&$params) {
@@ -118,7 +117,6 @@ Your OpenID identifier: <input type="text" name="openid_identifier" />
 			if ($this->isSufficient()) {
 				$this->saved_user = $user;
 				$params['results'][$this->name] = FORGE_AUTH_AUTHORITATIVE_ACCEPT;
-
 			} else {
 				$params['results'][$this->name] = FORGE_AUTH_NOT_AUTHORITATIVE;
 			}
@@ -175,7 +173,7 @@ Your OpenID identifier: <input type="text" name="openid_identifier" />
 		$text = $this->text; // this is what shows in the tab
 		if ($G_SESSION->usesPlugin($this->name)) {
 			//$param = '?type=user&id=' . $G_SESSION->getId() . "&pluginname=" . $this->name; // we indicate the part we're calling is the user one
-			echo $HTML->PrintSubMenu (array ($text), array ('/plugins/authopenid/index.php'), array(_('coin pan')));
+			echo $HTML->PrintSubMenu (array ($text), array ('/plugins/'.$this->name.'/index.php'), array(_('coin pan')));
 		}
 	}
 }

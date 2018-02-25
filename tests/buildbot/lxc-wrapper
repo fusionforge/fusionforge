@@ -4,24 +4,24 @@ set -e
 
 cmd=$1
 case "$cmd" in
-    start|stop|upgrade|destroy|refresh|prepare|emptycache)
-	echo "Handling command $cmd"
-	;;
-    *)
-	echo "Unknown command"
-	exit 1
-	;;
+	start|stop|upgrade|destroy|refresh|prepare|emptycache)
+		echo "Handling command $cmd"
+		;;
+	*)
+		echo "Unknown command"
+		exit 1
+		;;
 esac
 
 host=$2
 case "$host" in
-    centos5|centos6|centos7|debian7|debian8)
-	echo "Handling host $host"
-	;;
-    *)
-	echo "Unknown host"
-	exit 1
-	;;
+	centos7|debian8|debian9)
+		echo "Handling host $host"
+		;;
+	*)
+		echo "Unknown host"
+		exit 1
+		;;
 esac
 
 # Work-around systemd-journald taking 100% CPU in Centos7
@@ -32,137 +32,131 @@ fi
 # ?
 sed -i -e 's/lxc.cap.drop = mac_admin mac_override.*/lxc.cap.drop = mac_admin mac_override/' /usr/share/lxc/config/centos.common.conf
 # Don't expire root password
-sed -i -e 's/^ *chroot $rootfs_path passwd -e root/# DISABLED # &/' /usr/share/lxc/templates/lxc-centos
+sed -i -e 's/^ *chroot $rootfs_path passwd -e root/echo # DISABLED # &/' /usr/share/lxc/templates/lxc-centos
 
 # Get variables
 case $host in
-    centos*)
-	template=centos
-	release=${host#centos}
-	cachedir=/var/cache/lxc/centos/x86_64/$release/rootfs
-	;;
-    debian*)
-	template=debian
-	case $host in
-	    debian7)
-		release=wheezy
+	centos7)
+		template=centos
+		release=${host#centos}
+		cachedir=/var/cache/lxc/centos/x86_64/$release/rootfs
 		;;
-	    debian8)
-		release=jessie
+	debian*)
+		template=debian
+		case $host in
+		debian8)
+			release=jessie
+			;;
+		debian9)
+			release=stretch
+			;;
+		esac
+		cachedir=/var/cache/lxc/debian/rootfs-$release-amd64
+		export MIRROR=http://ftp.fr.debian.org/debian
 		;;
-	esac
-	cachedir=/var/cache/lxc/debian/rootfs-$release-amd64
-	export MIRROR=http://ftp.fr.debian.org/debian
-	;;
 esac
 rootfs=/var/lib/lxc/$host.local/rootfs
 
 case $cmd in
-    # Prepare customized template
-    # TODO: only apply generic fixes in the site-wide cache (i.e. nothing FF-specific)
-    prepare)
-	if [ ! -e $cachedir ] ; then
-	    # Create and destroy an empty container to create the cache
-	    $0 destroy $host
-	    lxc-create -t $template -f /etc/lxc/default.conf --name $host.local -- --release $release
-	    $0 destroy $host
+	# Prepare customized template
+	# TODO: only apply generic fixes in the site-wide cache (i.e. nothing FF-specific)
+	prepare)
+		if [ ! -e $cachedir ] ; then
+		# Create and destroy an empty container to create the cache
+		$0 destroy $host
+		lxc-create -t $template -f /etc/lxc/default.conf --name $host.local -- --release $release
+		$0 destroy $host
 
-	    # Customize the cache
-	    case $host in
-		centos7)
-		    chroot $cachedir usermod --expiredate $(date +"%Y-%m-%d" -d "1 year") root
-		    chroot $cachedir yum install -y avahi-autoipd avahi nscd
-		    # Fix nscd restart and stalled avahi pid files
-		    rm -rf $cachedir/var/run/
-		    ln -s ../run $cachedir/var/
-		    ;;
-		centos6)
-		    chroot $cachedir yum install -y avahi-autoipd avahi
-		    ;;
-		centos5)
-		    chroot $cachedir yum install -y avahi
-		    ;;
+		# Customize the cache
+		case $host in
+			centos7)
+			chroot $cachedir usermod --expiredate $(date +"%Y-%m-%d" -d "1 year") root
+			chroot $cachedir yum install -y avahi-autoipd avahi nscd
+			# Fix nscd restart and stalled avahi pid files
+			rm -rf $cachedir/var/run/
+			ln -sf ../run $cachedir/var/
+			;;
+			debian*)
+			chroot $cachedir apt-get install --yes \
+				avahi-autoipd avahi-daemon unattended-upgrades bash-completion
+			;;
+		esac
+		# Fix Avahi compatibility with LXC
+		sed -i -e /^rlimit-nproc=/d $cachedir/etc/avahi/avahi-daemon.conf
+		fi
+
+		$0 upgrade $host
+		;;
+
+	# Upgrade template
+	upgrade)
+		case $host in
+		centos*)
+			mount --bind /proc $cachedir/proc
+			chroot $cachedir sh -c "yum update -y"
+			umount $cachedir/proc
+			;;
 		debian*)
-		    chroot $cachedir apt-get install --yes \
-			   avahi-autoipd avahi-daemon unattended-upgrades bash-completion
-		    ;;
-	    esac
-	    # Fix Avahi compatibility with LXC
-	    sed -i -e /^rlimit-nproc=/d $cachedir/etc/avahi/avahi-daemon.conf
-	fi
+			mount --bind /proc $cachedir/proc
+			chroot $cachedir sh -c "apt-get update"
+			LANG=C chroot $cachedir sh -c "unattended-upgrades -d"
+			chroot $cachedir sh -c "apt-get clean"
+			umount $cachedir/proc
 
-	$0 upgrade $host
-	;;
-
-    # Upgrade template
-    upgrade)
-	case $host in
-	    centos*)
-		mount --bind /proc $cachedir/proc
-		chroot $cachedir sh -c "yum update -y"
-		umount $cachedir/proc
+			find $cachedir/var/log/unattended-upgrades -type f -mtime +30 | xargs -r rm
+			;;
+		esac
 		;;
-	    debian*)
-		mount --bind /proc $cachedir/proc
-		chroot $cachedir sh -c "apt-get update"
-		LANG=C chroot $cachedir sh -c "unattended-upgrades -d"
-		chroot $cachedir sh -c "apt-get clean"
-		umount $cachedir/proc
-		
-		find $cachedir/var/log/unattended-upgrades -type f -mtime +30 | xargs -r rm
+
+	# Remove customized template
+	emptycache)
+		rm -rf $cachedir
 		;;
-	esac
-	;;
-
-    # Remove customized template
-    emptycache)
-	rm -rf $cachedir
-	;;
 
 
-    # Recreate VM
-    refresh)
-	$0 prepare $host
-	$0 destroy $host
-	lxc-create -t $template -f /etc/lxc/default.conf --name $host.local -- --release $release
-	case $host in
-	    centos*)
-		echo "$host.local" > $rootfs/etc/hostname
-		# Fix 'hostname -f' == 'localhost'
-		echo "127.0.1.1 $host.local $host" > $rootfs/etc/hosts
+	# Recreate VM
+	refresh)
+		$0 prepare $host
+		$0 destroy $host
+		lxc-create -t $template -f /etc/lxc/default.conf --name $host.local -- --release $release
+		case $host in
+		centos*)
+			echo "$host.local" > $rootfs/etc/hostname
+			# Fix 'hostname -f' == 'localhost'
+			echo "127.0.1.1 $host.local $host" > $rootfs/etc/hosts
+			;;
+		*)
+			# Avoid "Invalid Email Address" during CreateForum::testEmailAddressNotAlreadyUsed
+			echo "127.0.1.1 $host.local $host" >> $rootfs/etc/hosts
+			;;
+		esac
+		# Grant us SSH access - not in prepare to avoid modifying the site-wide cache
+		# TODO: populate ssh cache if it doesn't exist yet
+		cp /var/cache/lxc/ssh/$host.local/* $rootfs/etc/ssh/
+		chmod 600 $rootfs/etc/ssh/*_key
+		mkdir -p $rootfs/root/.ssh/
+		cp /var/lib/jenkins/.ssh/id_rsa.pub $rootfs/root/.ssh/authorized_keys
 		;;
-	    *)
-		# Avoid "Invalid Email Address" during CreateForum::testEmailAddressNotAlreadyUsed
-		echo "127.0.1.1 $host.local $host" >> $rootfs/etc/hosts
+
+	# Start VM
+	start)
+		if [ ! -d $rootfs ] ; then
+		$0 refresh $host
+		fi
+		# TODO: write this in VM config (so it can be started manually)?
+		hwaddr=00:16:3e:$(echo $host | md5sum | cut -c -6 | sed s/../\&:/g | sed s/:$//)
+		lxc-start --name $host.local -s lxc.network.hwaddr=$hwaddr -s lxc.utsname=$host --daemon
 		;;
-	esac
-	# Grant us SSH access - not in prepare to avoid modifying the site-wide cache
-	# TODO: populate ssh cache if it doesn't exist yet
-	cp /var/cache/lxc/ssh/$host.local/* $rootfs/etc/ssh/
-	chmod 600 $rootfs/etc/ssh/*_key
-	mkdir -p $rootfs/root/.ssh/
-	cp /var/lib/jenkins/.ssh/id_rsa.pub $rootfs/root/.ssh/authorized_keys
-	;;
 
-    # Start VM
-    start)
-	if [ ! -d $rootfs ] ; then
-	    $0 refresh $host
-	fi
-	# TODO: write this in VM config (so it can be started manually)?
-	hwaddr=00:16:3e:$(echo $host | md5sum | cut -c -6 | sed s/../\&:/g | sed s/:$//)
-	lxc-start --name $host.local -s lxc.network.hwaddr=$hwaddr -s lxc.utsname=$host --daemon
-	;;
+	# Harshly^WQuickly stop VM
+	stop)
+		if lxc-ls --active | grep -q $host.local ; then
+		lxc-stop --name $host.local --kill
+		fi
+		;;
 
-    # Harshly^WQuickly stop VM
-    stop)
-	if lxc-ls --active | grep -q $host.local ; then
-	    lxc-stop --name $host.local --kill
-	fi
-	;;
-
-    # Harshly^WQuickly destroy VM
-    destroy)
-	lxc-destroy -fn $host.local || true
-	;;
+	# Harshly^WQuickly destroy VM
+	destroy)
+		lxc-destroy -fn $host.local || true
+		;;
 esac

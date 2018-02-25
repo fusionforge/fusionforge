@@ -2,7 +2,7 @@
 /**
  * scmhook commitEmail Plugin Class
  * Copyright 2012, Denise Patzker <denise.patzker@tu-dresden.de>
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2018, Franck Villaume - TrivialDev
  *
  * This class provides hook to activate/deactivate Mercurials e-mail
  * notification per repository.
@@ -33,9 +33,9 @@ class HgCommitEmail extends scmhook {
 	function __construct() {
 		$this->group = $GLOBALS['group'];
 		$this->name = "Commit Email";
-		$this->description = _('Every commit pushed sends a notification e-mail to the users of the commit-mailinglist.')
+		$this->description = _('Commit message log is pushed to commit mailing-list of the project (which you need to create)')
 							. "\n"
-							. _('The hook is triggered after \'serve push pull bundle\' on the projects repository.');
+							. _('The hook is triggered after "serve push pull bundle" on the projects repository.');
 		$this->classname = "commitEmail";
 		$this->label = "scmhg";
 		$this->hooktype = "serve-push-pull-bundle";
@@ -44,28 +44,18 @@ class HgCommitEmail extends scmhook {
 		$this->command = 'exit 0';
 	}
 
-	function isAvailable() {
-		global $gfcommon;
-		require_once $gfcommon.'mail/MailingList.class.php';
-		require_once $gfcommon.'mail/MailingListFactory.class.php';
-		if ($this->group->usesMail()) {
-			$mlFactory = new MailingListFactory($this->group);
-			$mlArray = $mlFactory->getMailingLists();
-			$mlCount = count($mlArray);
-			for ($j = 0; $j < $mlCount; $j++) {
-				$currentList =& $mlArray[$j];
-				if ($currentList->getListEmail() == $this->group->getUnixName().'-commits@'.forge_get_config('lists_host'))
-					return true;
-			}
-			$this->disabledMessage = _('Hook not available due to missing dependency: Project has no commit mailing-list: ').$this->group->getUnixName().'-commits';
-		} else {
-			$this->disabledMessage = _('Hook not available due to missing dependency: Project not using mailing-list.');
-		}
-		return false;
-	}
-
 	function getDisabledMessage() {
 		return $this->disabledMessage;
+	}
+
+	function getParams() {
+		return array(
+			'dest' => array(
+				'description' => _('Send commit e-mail notification to'),
+				'type'        => 'emails',
+				'default'     => $this->group->getUnixName().'-commits@'.forge_get_config('lists_host'),
+			)
+		);
 	}
 
 	/**

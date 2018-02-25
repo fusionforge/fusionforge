@@ -5,7 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 (c) FusionForge Team
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013-2014, Franck Villaume - TrivialDev
+ * Copyright 2013-2014,2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -56,7 +56,7 @@ $accept_conditions = getIntFromRequest ('accept_conditions');
 
 if (forge_get_config('use_ssl') && !session_issecure()) {
 	//force use of SSL for login
-	header('Location: https://'.getStringFromServer('HTTP_HOST').getStringFromServer('REQUEST_URI'));
+	header('Location: https://'.getStringFromServer('HTTP_HOST').forge_get_config('url_prefix').getStringFromServer('REQUEST_URI'));
 }
 
 if (!$theme_id || !is_numeric($theme_id)) {
@@ -140,7 +140,7 @@ if (!isset($ccode) || empty($ccode) || !preg_match('/^[a-zA-Z]{2}$/', $ccode)) {
 }
 
 site_header(array('title'=>_('User Account Registration')));
-echo $HTML->openForm(array('action' => util_make_uri('/account/register.php'), 'method' => 'post'));
+echo $HTML->openForm(array('action' => '/account/register.php', 'method' => 'post'));
 echo html_e('input', array('type' => 'hidden', 'name' => 'form_key', 'value' => form_generate_key()));
 ?>
 <p>
@@ -155,7 +155,15 @@ if (forge_get_config('require_unique_email')) {
     </label>
 </p>
 <p>
-<?php echo _('Password (min. 8 chars)').utils_requiredField()._(':'); ?><br />
+<?php echo _('Password').utils_requiredField()._(':'); ?><br />
+<em>
+<?php printf(_('Minimum 8 characters.')); ?><br/>
+<?php
+if (forge_get_config('check_password_strength')) {
+	printf(_('Must contain at least one uppercase letter, one lowercase, one digit, one non-alphanumeric character.').'<br/>');
+}
+?>
+</em>
     <label for="password1">
         <input id="password1" type="password" required="required" name="password1"/>
     </label>

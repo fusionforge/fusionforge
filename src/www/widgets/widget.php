@@ -55,7 +55,22 @@ if ($request->valid($vOwner)) {
 			}
 			break;
 		case WidgetLayoutManager::OWNER_TYPE_HOME:
-			if (forge_check_global_perm('forge_admin')) {
+			$good = true;
+			break;
+		case WidgetLayoutManager::OWNER_TYPE_TRACKER:
+			if ($at = artifactType_get_object($owner_id)) {
+				$_REQUEST['group_id'] = $_GET['group_id'] = $at->Group->getID();
+				$request->params['group_id'] = $at->Group->getID(); //bad!
+				$redirect = '/tracker/?group_id='.$at->Group->getID().'&atid='.$at->getID();
+				if ((strlen($request->get('func')) > 0)) {
+					$redirect .= '&func='.$request->get('func');
+					if ($request->get('aid')) {
+						$redirect .= '&aid='.$request->get('aid');
+					}
+				}
+				if (!forge_check_global_perm('forge_admin') && !forge_check_perm('tracker_admin', $at->getID())) {
+					$GLOBALS['Response']->redirect($redirect);
+				}
 				$good = true;
 			}
 			break;
@@ -79,7 +94,8 @@ if ($request->valid($vOwner)) {
 							if ($layout_id = (int)$request->get('layout_id')) {
 								if ($owner_type == WidgetLayoutManager::OWNER_TYPE_USER ||
 									forge_check_perm('project_admin', $group_id) ||
-									forge_check_global_perm('forge_admin')) {
+									forge_check_global_perm('forge_admin') ||
+									forge_check_perm('tracker_admin', $owner_id)) {
 									if ($request->get('cancel') || $widget->updatePreferences($request)) {
 										$lm->hideWidgetPreferences($owner_id, $owner_type, $layout_id, $name, $instance_id);
 									}

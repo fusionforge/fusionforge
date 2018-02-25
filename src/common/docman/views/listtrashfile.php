@@ -6,7 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2011-2016, Franck Villaume - TrivialDev
+ * Copyright 2011-2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -97,7 +97,7 @@ if (is_array($d_arr) && count($d_arr) > 0) {
 
 echo html_ao('div', array('id' => 'rightdiv'));
 echo html_ao('div', array('style' => 'padding:5px'));
-echo $HTML->openForm(array('id' => 'emptytrash', 'name' => 'emptytrash', 'method' => 'post', 'action' => util_make_uri('/docman/?group_id='.$group_id.'&action=emptytrash')));
+echo $HTML->openForm(array('id' => 'emptytrash', 'name' => 'emptytrash', 'method' => 'post', 'action' => '/docman/?group_id='.$group_id.'&action=emptytrash'));
 echo html_e('input', array('id' => 'submitemptytrash', 'type' => 'submit', 'value' => _('Delete permanently all documents and folders with deleted status.')));
 echo $HTML->closeForm();
 echo html_ac(html_ap() - 1);
@@ -113,6 +113,7 @@ jQuery(document).ready(function() {
 		buttonEditDirectory:	jQuery('#docman-editdirectory'),
 		docManURL:		'<?php echo util_make_uri('/docman') ?>',
 		lockIntervalDelay:	60000, //in microsecond and if you change this value, please update the check value 600
+		childGroupId:           <?php echo util_ifsetor($childgroup_id, 0) ?>,
 		divLeft:		jQuery('#leftdiv'),
 		divRight:		jQuery('#rightdiv'),
 		divEditFile:		jQuery('#editFile'),
@@ -133,9 +134,7 @@ if ($DocGroupName) {
 	if ($childgroup_id) {
 		$headerPath .= _('Subproject')._(': ').util_make_link('/docman/?group_id='.$g->getID(), $g->getPublicName()).'::';
 	}
-	$generalpath = $dgpath.'/'.$DocGroupName;
-	$generalpath = preg_replace('/\/\//','/', $generalpath);
-	$headerPath .= html_e('i', array(), $generalpath, false).'&nbsp;';
+	$headerPath .= html_e('i', array(), preg_replace('/\/\//','/', $dgpath.'/'.$DocGroupName), false).'&nbsp;';
 	echo html_e('h2', array('class' => 'docman_h2'), $headerPath, false);
 	if ($DocGroupName != '.trash') {
 		echo util_make_link('#', $HTML->getConfigurePic(_('Edit this folder'), 'edit'), array('id' => 'docman-editdirectory', 'onclick' => 'javascript:controllerListFile.toggleEditDirectoryView()'), true);
@@ -149,8 +148,8 @@ if ($DocGroupName) {
 }
 
 if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
-	$tabletop = array(html_e('input', array('id' => 'checkallactive', 'title' => _('Select / Deselect all documents for massaction'), 'type' => 'checkbox', 'onClick' => 'controllerListFile.checkAll("checkeddocidactive", "active")')), '', _('File Name'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'), _('Actions'));
-	$classth = array('unsortable', 'unsortable', '', '', '', '', '', '', '', 'unsortable');
+	$tabletop = array(html_e('input', array('id' => 'checkallactive', 'title' => _('Select / Deselect all documents for massaction'), 'type' => 'checkbox', 'onClick' => 'controllerListFile.checkAll("checkeddocidactive", "active")')), '', 'ID', _('File Name'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'), _('Actions'));
+	$classth = array('unsortable', 'unsortable', '', '', '', '', '', '', '', '', 'unsortable');
 	echo html_ao('div', array('class' => 'docmanDiv'));
 	echo $HTML->listTableTop($tabletop, array(), 'sortable', 'sortable_docman_listfile', $classth);
 	$time_new = 604800;
@@ -166,14 +165,18 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 				$cells[][] = util_make_link('/docman/view.php/'.$group_id.'/'.$d->getID().'/'.urlencode($d->getFileName()), html_image($d->getFileTypeImage(), 20, 20, array('alt' => $d->getFileType())), array('title' => _('View this document')));
 			}
 		}
+		$cells[][] = 'D'.$d->getID();
 		$nextcell ='';
 		if (($d->getUpdated() && $time_new > (time() - $d->getUpdated())) || $time_new > (time() - $d->getCreated())) {
 			$nextcell.= $HTML->getNewPic(_('Created or updated since less than 7 days'), 'new', array('class' => 'docman-newdocument')).'&nbsp;';
 		}
+		if ($d->hasValidatedReview()) {
+			$nextcell .= $HTML->getTagPic(_('Document reviewed and validated'), 'reviewed').'&nbsp;';
+		}
 		$cells[] = array($nextcell.$d->getFileName(), 'style' => 'word-wrap: break-word; max-width: 250px;');
 		$cells[] = array($d->getName(), 'style' => 'word-wrap: break-word; max-width: 250px;');
 		$cells[] = array($d->getDescription(), 'style' => 'word-wrap: break-word; max-width: 250px;');
-		$cells[][] =  make_user_link($d->getCreatorUserName(), $d->getCreatorRealName());
+		$cells[][] =  util_display_user($d->getCreatorUserName(), $d->getCreatorID(), $d->getCreatorRealName());
 		if ($d->getUpdated()) {
 			$cells[] = array(date(_('Y-m-d H:i'), $d->getUpdated()), 'sorttable_customkey' => $d->getUpdated());
 		} else {

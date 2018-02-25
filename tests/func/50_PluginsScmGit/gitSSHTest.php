@@ -49,7 +49,7 @@ class ScmGitSSHTest extends FForge_SeleniumTestCase
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
-		$p = $this->getText("//tt[contains(.,'git clone git+ssh')]");
+		$p = $this->getText("//kbd[contains(.,'git clone git+ssh')]");
 		$p = preg_replace(",^git clone ,", "", $p);
 
 		// Create a local clone, add stuff, push it to the repo
@@ -80,6 +80,16 @@ class ScmGitSSHTest extends FForge_SeleniumTestCase
 		$this->assertTextPresent("Modifying file");
 		$this->assertTextPresent("Adding file");
 		$this->selectFrame("relative=top");
+
+		// Check that the changes appear in the global activity page
+
+		$this->activatePlugin('globalactivity');
+
+		$this->open(ROOT.'/plugins/globalactivity/');
+		$this->select("//select[@name='show[]']","label=Git Commits");
+		$this->clickAndWait("submit");
+		$this->assertTextPresent("scm commit: Modifying file");
+		$this->assertTextPresent("scm commit: Adding file");
 
 		system("rm -fr $t");
 	}

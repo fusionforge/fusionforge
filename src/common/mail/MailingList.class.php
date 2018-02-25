@@ -53,14 +53,11 @@ class MailingList extends FFError {
 	 * @param	$Group
 	 * @param	bool	$groupListId
 	 * @param	bool	$dataArray
-	 * @internal	param	\The $object Group object to which this mailing list is associated.
-	 * @internal	param	\The $int group_list_id.
-	 * @internal	param	\The $array associative array of data.
 	 */
 	function __construct(&$Group, $groupListId = false, $dataArray = false) {
 		parent::__construct();
 		if (!$Group || !is_object($Group)) {
-			$this->setError(_('No Valid Group Object'));
+			$this->setError(_('Invalid Project'));
 			return;
 		}
 		if ($Group->isError()) {
@@ -98,17 +95,14 @@ class MailingList extends FFError {
 	/**
 	 *    create - use this function to create a new entry in the database.
 	 *
-	 * @param	$listName
-	 * @param	$description
-	 * @param	string		$isPublic
-	 * @param	bool		$creator_id
+	 * @param	string	$listName
+	 * @param	string	$description
+	 * @param	string	$isPublic
+	 * @param	bool	$creator_id
 	 * @param	int		$is_external Pass (1) if it should be public (0) for private.
-	 *
-	 * @internal	param		\The $string name of the mailing list
-	 * @internal	param		\The $string description of the mailing list
-	 * @return	boolean		success.
+	 * @return	bool	success.
 	 */
-	function create($listName, $description, $isPublic = MAIL__MAILING_LIST_IS_PUBLIC,$creator_id=false, $is_external=0) {
+	function create($listName, $description, $isPublic = MAIL__MAILING_LIST_IS_PUBLIC, $creator_id = false, $is_external = 0) {
 		//
 		//	During the group creation, the current user_id will not match the admin's id
 		//
@@ -140,7 +134,7 @@ class MailingList extends FFError {
 		}
 
 		$result = db_query_params ('SELECT 1 FROM mail_group_list WHERE lower(list_name)=$1',
-					   array ($realListName)) ;
+					   array ($realListName));
 
 		if (db_numrows($result) > 0) {
 			$this->setError(_('List Already Exists'));
@@ -149,7 +143,7 @@ class MailingList extends FFError {
 
 		$result_forum_samename = db_query_params ('SELECT 1 FROM forum_group_list WHERE forum_name=$1 AND group_id=$2',
 							  array ($listName,
-								 $this->Group->getID())) ;
+								 $this->Group->getID()));
 
 		if (db_numrows($result_forum_samename) > 0){
 			$this->setError(_('Forum exists with the same name'));
@@ -228,7 +222,7 @@ class MailingList extends FFError {
 	function fetchData($groupListId) {
 		$res = db_query_params ('SELECT * FROM mail_group_list WHERE group_list_id=$1 AND group_id=$2',
 					array ($groupListId,
-					       $this->Group->getID())) ;
+					       $this->Group->getID()));
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError(_('Error Getting mailing list'));
 			return false;
@@ -241,11 +235,11 @@ class MailingList extends FFError {
 	/**
 	 * update - use this function to update an entry in the database.
 	 *
-	 * @param	$description
-	 * @param	string		$isPublic
-	 * @param	string		$status The description of the mailing list
-	 * @param	int		$is_external Pass (1) if it should be public (0) for private
-	 * @return	boolean		success.
+	 * @param	string	$description
+	 * @param	string	$isPublic
+	 * @param	string	$status The description of the mailing list
+	 * @param	int	$is_external Pass (1) if it should be public (0) for private
+	 * @return	bool	success.
 	 */
 	function update($description, $isPublic = MAIL__MAILING_LIST_IS_PUBLIC, $status = 'xyzzy', $is_external=0) {
 		if(! forge_check_perm('project_admin', $this->Group->getID())) {
@@ -264,7 +258,7 @@ class MailingList extends FFError {
 					       $description,
 					       $status,
 					       $this->groupMailingListId,
-					       $this->Group->getID())) ;
+					       $this->Group->getID()));
 
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setError(_('Error On Update')._(': ').db_error());
@@ -300,7 +294,7 @@ class MailingList extends FFError {
 	/**
 	 * isPublic - Is this mailing list open to the general public.
 	 *
-	 * @return	boolean	is_public.
+	 * @return	bool	is_public.
 	 */
 	function isPublic() {
 		return $this->dataArray['is_public'];
@@ -337,7 +331,7 @@ class MailingList extends FFError {
 	/**
 	 * getListAdmin - get the user who is the admin of this mailing list
 	 *
-	 * @return	User	The admin user
+	 * @return	FFUser	The admin user
 	 */
 	function getListAdmin() {
 		return user_get_object($this->dataArray['list_admin']);
@@ -398,9 +392,9 @@ class MailingList extends FFError {
 	/**
 	 * delete - permanently delete this mailing list
 	 *
-	 * @param	boolean	$sure I'm Sure.
-	 * @param	boolean	$really_sure I'm Really Sure.
-	 * @return	boolean	success;
+	 * @param	bool	$sure I'm Sure.
+	 * @param	bool	$really_sure I'm Really Sure.
+	 * @return	bool	success;
 	 */
 	function delete($sure,$really_sure) {
 
@@ -419,13 +413,13 @@ class MailingList extends FFError {
 		$res = db_query_params ('INSERT INTO deleted_mailing_lists (mailing_list_name,delete_date,isdeleted) VALUES ($1,$2,$3)',
 					array ($this->getName(),
 					       time(),
-					       0)) ;
+					       0));
 		if (!$res) {
 			$this->setError('Could Not Insert Into Delete Queue: '.db_error());
 			return false;
 		}
 		$res = db_query_params ('DELETE FROM mail_group_list WHERE group_list_id=$1',
-					array ($this->getID())) ;
+					array ($this->getID()));
 		if (!$res) {
 			$this->setError('Could Not Delete List: '.db_error());
 			return false;

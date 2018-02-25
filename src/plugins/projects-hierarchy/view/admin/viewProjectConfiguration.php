@@ -1,9 +1,9 @@
 <?php
 /**
- * Projects Hierarchy plugin
+ * Projects Hierarchy Plugin
  *
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -50,16 +50,32 @@ if (!$projectsHierarchyProjectConf) {
 	$cells[][] = html_e('input', $inputAttrs);
 	echo $HTML->multiTableRow(array(), $cells);
 
-	/* Not Yet Implemented */
-	/*
 	$cells = array();
-	$cells[][] = html_e('label', array('id' => 'projectsHierarchy-delegate', 'title' => _('Enable full rights and configuration delegation to parent.')), _('Enable delegate'));
-	$inputAttrs = array('type' => 'checkbox', 'name' => 'delegate', 'value' => 1);
-	if ($projectsHierarchyProjectConf['delegate'])
+	$cells[][] = html_e('label', array('id' => 'projectsHierarchy-forum', 'title' => _('Enable hierarchical view for browsing in Forum main page.')), _('Enable Forum'));
+	$inputAttrs = array('type' => 'checkbox', 'name' => 'forum', 'value' => 1);
+	if ($projectsHierarchyProjectConf['forum']) {
 		$inputAttrs['checked'] = 'checked';
+	}
 	$cells[][] = html_e('input', $inputAttrs);
 	echo $HTML->multiTableRow(array(), $cells);
-	*/
+
+	$cells = array();
+	$cells[][] = html_e('label', array('id' => 'projectsHierarchy-frs', 'title' => _('Enable hierarchical view for browsing in FRS main page.')), _('Enable FRS'));
+	$inputAttrs = array('type' => 'checkbox', 'name' => 'frs', 'value' => 1);
+	if ($projectsHierarchyProjectConf['frs']) {
+		$inputAttrs['checked'] = 'checked';
+	}
+	$cells[][] = html_e('input', $inputAttrs);
+	echo $HTML->multiTableRow(array(), $cells);
+
+	$cells = array();
+	$cells[][] = html_e('label', array('id' => 'projectsHierarchy-tracker', 'title' => _('Enable hierarchical view for browsing in Tracker main page.')), _('Enable Tracker'));
+	$inputAttrs = array('type' => 'checkbox', 'name' => 'tracker', 'value' => 1);
+	if ($projectsHierarchyProjectConf['tracker']) {
+		$inputAttrs['checked'] = 'checked';
+	}
+	$cells[][] = html_e('input', $inputAttrs);
+	echo $HTML->multiTableRow(array(), $cells);
 
 	$cells = array();
 	$cells[][] = html_e('label', array('id' => 'projectsHierarchy-globalconf', 'title' => _('Use forge global configuration. Superseed any configuration done at project level.')), _('Enable forge global configuration'));

@@ -1,7 +1,25 @@
-/* Support for OSLC compact preview */
+/*
+ * Support for OSLC compact preview
+ *
+ * http://fusionforge.org/
+ *
+ * This file is part of FusionForge. FusionForge is free software;
+ * you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the Licence, or (at your option)
+ * any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with FusionForge; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
 
-#resourcePopupContainer
-{
+#resourcePopupContainer {
 	position:absolute;
 	left:0;
 	top:0;
@@ -10,6 +28,7 @@
 }
 
 .resourcePopupPopup {
+	border-collapse: collapse;
 }
 
 .resourcePopupResult {
@@ -27,40 +46,40 @@
 	margin-right: 15px;
 }
 
-.resourcePopupPopup .corner{
+.resourcePopupPopup .corner {
 	width: 19px;
-	height: 15px;
+	height: 14px;
 }
 
 .resourcePopupPopup .topLeft {
-	background: url(/plugins/compactpreview/images/Tooltip/balloon_topLeft.png) no-repeat right;
+	background: url(../images/Tooltip/balloon_topLeft.png) no-repeat right;
 }
 
 .resourcePopupPopup .bottomLeft {
-	background: url(/plugins/compactpreview/images/Tooltip/balloon_bottomLeft.png) no-repeat right top;
+	background: url(../images/Tooltip/balloon_bottomLeft.png) no-repeat right top;
 }
 
 .resourcePopupPopup .left {
-	background: url(/plugins/compactpreview/images/Tooltip/balloon_left.png) repeat-y right;
+	background: url(../images/Tooltip/balloon_left.png) repeat-y right;
 }
 
 .resourcePopupPopup .right {
-	background: url(/plugins/compactpreview/images/Tooltip/balloon_right.png) repeat-y;
+	background: url(../images/Tooltip/balloon_right.png) repeat-y;
 }
 
 .resourcePopupPopup .topRight {
-	background: url(/plugins/compactpreview/images/Tooltip/balloon_topRight.png) no-repeat left;
+	background: url(../images/Tooltip/balloon_topRight.png) no-repeat left;
 }
 
 .resourcePopupPopup .bottomRight {
-	background: url(/plugins/compactpreview/images/Tooltip/balloon_bottomRight.png) no-repeat;
-}  
+	background: url(../images/Tooltip/balloon_bottomRight.png) no-repeat;
+}
 
 .resourcePopupPopup .top {
-	background: url(/plugins/compactpreview/images/Tooltip/balloon_top.png) repeat-x bottom;
+	background: url(../images/Tooltip/balloon_top.png) repeat-x bottom;
 }
 
 .resourcePopupPopup .bottom {
-	background: url(/plugins/compactpreview/images/Tooltip/balloon_bottom.png) repeat-x;
-	text-align: center;  
+	background: url(../images/Tooltip/balloon_bottom.png) repeat-x;
+	text-align: center;
 }

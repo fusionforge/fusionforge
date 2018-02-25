@@ -59,7 +59,7 @@ class SearchQuery extends FFError {
 	/**
 	 * if we want to search for all the words or if only one is sufficient
 	 *
-	 * @var boolean $isExact
+	 * @var bool $isExact
 	 */
 	 var $isExact = false;
 	/**

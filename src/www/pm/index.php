@@ -55,9 +55,10 @@ if ($pg_arr && $pgf->isError()) {
 	exit_error($pgf->getErrorMessage(),'pm');
 }
 
+html_use_tablesorter();
 pm_header(array('title' => sprintf(_('Subprojects for %s'), $g->getPublicName())));
 
-plugin_hook("blocks", "tasks index");
+plugin_hook('blocks', 'tasks index');
 
 if (count($pg_arr) < 1 || $pg_arr == false) {
 	echo $HTML->information(_('No Subprojects Found'));
@@ -71,94 +72,14 @@ if (count($pg_arr) < 1 || $pg_arr == false) {
 		Put the result set (list of projects for this group) into a column with folders
 	*/
 
-	$sortcol = util_ensure_value_in_set (getStringFromRequest ('sortcol'),
-					     array ('project_id',
-						    'project_description',
-						    'project_name',
-						    'open_count',
-						    'total_count')) ;
-	$sortorder = util_ensure_value_in_set (getStringFromRequest ('sortorder'),
-					       array ('a',
-						      'd')) ;
+	$tablearr = array();
+	$tablearr[] = _('Subproject Name');
+	$tablearr[] = _('Description');
+	$tablearr[] = _('Open');
+	$tablearr[] = _('Total');
+	$thclass = array(array(), array(), array('class' => 'align-center'), array('class' => 'align-center'));
 
-	function build_column_sort_header ($group_id, $title, $val) {
-		global $sortcol, $sortorder;
-
-		if ($sortcol != $val) {
-			return util_make_link('/pm/?group_id='.$group_id.'&sortcol='.$val, $title);
-		} elseif ($sortorder == 'a') {
-			return util_make_link('/pm/?group_id='.$group_id.'&sortcol='.$val.'&sortorder=d', $title.' ▴');
-		} else {
-			return util_make_link('/pm/?group_id='.$group_id.'&sortcol='.$val.'&sortorder=a', $title.' ▾');
-		}
-	}
-
-	$tablearr = array () ;
-	$tablearr[] = build_column_sort_header ($group_id, _('Id'), 'project_id') ;
-	$tablearr[] = build_column_sort_header ($group_id, _('Subproject Name'), 'project_name') ;
-	$tablearr[] = build_column_sort_header ($group_id, _('Description'), 'project_description') ;
-	$tablearr[] = build_column_sort_header ($group_id, _('Open'), 'open_count') ;
-	$tablearr[] = build_column_sort_header ($group_id, _('Total'), 'total_count') ;
-	echo $HTML->listTableTop($tablearr);
-
-	function project_group_comparator ($a, $b) {
-		global $sortcol, $sortorder ;
-
-		switch ($sortcol) {
-		case 'project_name':
-			$sorttype = 'str' ;
-			$va = $a->getName() ;
-			$vb = $b->getName() ;
-			break;
-		case 'project_description':
-			$sorttype = 'str' ;
-			$va = $a->getDescription() ;
-			$vb = $b->getDescription() ;
-			break;
-		case 'project_id':
-			$sorttype = 'int' ;
-			$va = $a->getID();
-			$vb = $b->getID();
-			break;
-		case 'open_count':
-			$sorttype = 'int' ;
-			$va = $a->getOpenCount();
-			$vb = $b->getOpenCount();
-			break;
-		case 'total_count':
-			$sorttype = 'int' ;
-			$va = $a->getTotalCount();
-			$vb = $b->getTotalCount();
-			break;
-		default:
-			return 0;
-		}
-
-		switch ($sorttype) {
-		case 'str':
-			$tmp = strcoll ($va, $vb) ;
-			break ;
-		case 'int':
-			if ($va < $vb) {
-				$tmp = -1 ;
-			} elseif ($va > $vb) {
-				$tmp = 1 ;
-			} else {
-				$tmp = 0 ;
-			}
-			break ;
-		default:
-			return 0;
-		}
-
-		if ($sortorder == 'd') {
-			return -$tmp ;
-		} else {
-			return $tmp ;
-		}
-	}
-
-	usort ($pg_arr, 'project_group_comparator') ;
+	echo $HTML->listTableTop($tablearr, array(), 'full sortable sortable_table_pm', 'sortable_table_pm', array(), array(), $thclass);
 
 	for ($j = 0; $j < count($pg_arr); $j++) {
 		if (!is_object($pg_arr[$j])) {
@@ -166,18 +87,15 @@ if (count($pg_arr) < 1 || $pg_arr == false) {
 		} elseif ($pg_arr[$j]->isError()) {
 			echo $pg_arr[$j]->getErrorMessage();
 		} else {
-		echo '
-		<tr '. $HTML->boxGetAltRowStyle($j) . '>
-			<td>'.util_make_link('/pm/task.php?group_project_id='.$pg_arr[$j]->getID().'&group_id='.$group_id.'&func=browse', html_image("ic/taskman20w.png", 20, 20) . ' &nbsp;'.$pg_arr[$j]->getID()).'</td>
-			<td>'.util_make_link('/pm/task.php?group_project_id='.$pg_arr[$j]->getID().'&group_id='.$group_id.'&func=browse', $pg_arr[$j]->getName()).'</td>
-			<td>'.$pg_arr[$j]->getDescription() .'</td>
-			<td class="align-right">'. (int) $pg_arr[$j]->getOpenCount().'</td>
-			<td class="align-right">'. (int) $pg_arr[$j]->getTotalCount().'</td>
-		</tr>';
+			$cells = array();
+			$cells[][] = util_make_link('/pm/task.php?group_project_id='.$pg_arr[$j]->getID().'&group_id='.$group_id.'&func=browse', $HTML->getPmPic(). ' '.$pg_arr[$j]->getName());
+			$cells[][] = $pg_arr[$j]->getDescription(); 
+			$cells[] = array((int) $pg_arr[$j]->getOpenCount(), 'class' => 'align-center');
+			$cells[] = array((int) $pg_arr[$j]->getTotalCount(), 'class' => 'align-center');
+			echo $HTML->multiTableRow(array(), $cells);
 		}
 	}
 	echo $HTML->listTableBottom();
-
 }
 
 pm_footer();

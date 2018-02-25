@@ -165,7 +165,7 @@ class ProjectTaskFactory extends FFError {
 	/**
 	 * getTasks - get an array of ProjectTask objects.
 	 *
-	 * @return	array	ProjectTask[]	The array of ProjectTask objects.
+	 * @return	array|bool	ProjectTask[]	The array of ProjectTask objects.
 	 */
 	function &getTasks() {
 		if ($this->project_tasks) {

@@ -4,6 +4,7 @@
  *
  * Copyright 2003-2004, GForge, LLC
  * Copyright 2007-2009, Roland Mas
+ * Copyright 2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -31,7 +32,7 @@ include_once(forge_get_config('plugins_path').'/globalsearch/common/globalsearch
 $HTML->header(array('title'=>_('Edit associated forges for global search')));
 
 echo '<h3>'._('Edit associated forges for global search').'</h3>
-<p><a href="/admin/">'._("Site Admin Home").'</a></p>';
+<p>'.util_make_link('/admin/', _('Site Admin Home')).'</p>';
 
 $function = getStringFromRequest ('function');
 $id = getIntFromRequest ('id');

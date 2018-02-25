@@ -8,7 +8,7 @@
  * Copyright 2009-2010, Roland Mas
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * Copyright (C) 2012-2013 Marc-Etienne Vargenau - Alcatel-Lucent
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013,2016-2017, Franck Villaume - TrivialDev
  * Copyright 2014, Stéphane-Eymeric Bredthauer
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -39,9 +39,12 @@ global $HTML; // Layout object
 if (!session_loggedin()) {
 	exit_not_logged_in();
 } else {
+	if (!forge_get_config('use_tracker')) {
+		exit_disabled('my');
+	}
 	$u = session_get_user();
 	site_user_header(array('title'=>sprintf(_('Personal Page for %s'), $u->getRealName())));
-	echo html_ao('table', array('class' => 'fullwidth'));
+	echo $HTML->listTableTop();
 	echo html_ao('tr');
 	echo html_ao('td', array('class' => 'top'));
 	echo $HTML->boxTop(_('All trackers for my projects'), false, false);
@@ -51,37 +54,37 @@ if (!session_loggedin()) {
 	if (count ($projects) < 1) {
 		echo $HTML->information(_("You're not a member of any active projects"));
 	} else {
-		$display_col=array('summary'=>1,
-				'changed'=>1,
-				'status'=>0,
-				'priority'=>1,
-				'assigned_to'=>1,
-				'submitted_by'=>1,
-				'related_tasks'=>1);
+		$display_col = array('summary' => 1,
+				'changed' => 1,
+				'status' => 0,
+				'priority' => 1,
+				'assigned_to' => 1,
+				'submitted_by' => 1,
+				'related_tasks' => 1);
 
-		$title_arr=array();
+		$title_arr = array();
 
-		$title_arr[]=_('Id');
+		$title_arr[] = _('Id');
 		if ($display_col['summary']) {
-			$title_arr[]=_('Summary');
+			$title_arr[] = _('Summary');
 		}
 		if ($display_col['changed']) {
-			$title_arr[]=_('Changed');
+			$title_arr[] = _('Changed');
 		}
 		if ($display_col['status']) {
-			$title_arr[]=_('Status');
+			$title_arr[] = _('Status');
 		}
 		if ($display_col['priority']) {
-			$title_arr[]=_('Priority');
+			$title_arr[] = _('Priority');
 		}
 		if ($display_col['assigned_to']) {
-			$title_arr[]=_('Assigned to');
+			$title_arr[] = _('Assigned to');
 		}
 		if ($display_col['submitted_by']) {
-			$title_arr[]=_('Submitted by');
+			$title_arr[] = _('Submitted by');
 		}
 		if ($display_col['related_tasks']) {
-			$title_arr[]=_('Tasks');
+			$title_arr[] = _('Tasks');
 		}
 
 		echo $HTML->listTableTop($title_arr);
@@ -128,17 +131,16 @@ if (!session_loggedin()) {
 							$cell_attrs = array('colspan' => (array_sum($display_col)+1), 'align' => 'left', 'style' => 'color: darkred; border-bottom: 1px solid #A0A0C0; border-top: 1px dotted #A0A0C0; background-color: #CACADA;');
 							$cell_data = array(array_merge((array)$cell_text, $cell_attrs));
 							echo $HTML->multiTableRow(array(), $cell_data);
-							$toggle=0;
 
 							foreach($art_arr as $art) {
 								$cell_data = array();
-								$row_attrs = array('class' => $HTML->boxGetAltRowStyle($toggle++, true));
+								$row_attrs = array();
 								$cell_attrs = array('class' => 'align-center');
 								$cell_text = $art->getID();
 								$cell_data [] = array_merge((array)$cell_text, $cell_attrs);
 								if ($display_col['summary']) {
 									$cell_attrs = array('class' => 'align-left');
-									$cell_text = util_make_link('/tracker/?func=detail&aid='.$art->getID().'&group_id='.$p->getID().'&atid='.$ath->getID(), $art->getSummary());
+									$cell_text = util_make_link($art->getPermalink(), $art->getSummary());
 									$cell_data [] = array_merge((array)$cell_text, $cell_attrs);
 								}
 								if ($display_col['changed']) {
@@ -170,13 +172,13 @@ if (!session_loggedin()) {
 									$result_tasks = $art->getRelatedTasks();
 									if($result_tasks) {
 										$cell_text ='';
-										$taskcount = db_numrows($art->relatedtasks);
+										$taskcount = db_numrows($art->getRelatedTasks());
 										if ($taskcount > 0) {
 											for ($itask = 0; $itask < $taskcount; $itask++) {
 												if($itask>0)
 													$cell_text .= html_e('br');
 
-												$taskinfo = db_fetch_array($art->relatedtasks, $itask);
+												$taskinfo = db_fetch_array($art->getRelatedTasks(), $itask);
 												$taskid = $taskinfo['project_task_id'];
 												$projectid = $taskinfo['group_project_id'];
 												$groupid   = $taskinfo['group_id'];
@@ -215,6 +217,6 @@ if (!session_loggedin()) {
 	show_priority_colors_key();
 	echo html_ac(html_ap()-2);
 */
-	echo html_ac(html_ap()-1);
+	echo $HTML->listTableBottom();
 	site_user_footer();
 }

@@ -1,9 +1,8 @@
 <?php
-
 /**
  * oslcPlugin Class
  *
- *
+ * Copyright 2016, Franck Villaume - TrivialDev
  * This file is part of FusionForge.
  *
  * FusionForge is free software; you can redistribute it and/or modify
@@ -39,7 +38,7 @@ class oslcPlugin extends Plugin {
 		$this->_addHook("project_rdf_metadata"); // will provide some RDF metadata for the project's DOAP profile to 'doaprdf' plugin
 	}
 
-	function CallHook ($hookname, &$params) {
+	function CallHook($hookname, &$params) {
 		global $use_oslcplugin,$G_SESSION,$HTML;
 		if ($hookname == "usermenu") {
 			$text = $this->text; // this is what shows in the tab
@@ -57,18 +56,25 @@ class oslcPlugin extends Plugin {
 			if ($project->isError()) {
 				return;
 			}
-			if (!$project->isProject()) {
-				return;
-			}
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][]=$this->text;
 				$params['DIRS'][]=util_make_uri('/plugins/oslc/');
-				$params['ADMIN'][]='';
+				if (session_loggedin()) {
+					$userperm = $project->getPermission();
+					if ($userperm->isAdmin()) {
+						$params['ADMIN'][]='';
+					}
+				}
 				$params['TOOLTIPS'][] = NULL;
 			} else {
 				$params['TITLES'][]=$this->text." is [Off]";
 				$params['DIRS'][]='';
-				$params['ADMIN'][]='';
+				if (session_loggedin()) {
+					$userperm = $project->getPermission();
+					if ($userperm->isAdmin()) {
+						$params['ADMIN'][]='';
+					}
+				}
 				$params['TOOLTIPS'][] = NULL;
 			}
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
@@ -141,21 +147,20 @@ class oslcPlugin extends Plugin {
 			//check if the user has the plugin activated
 			if ($user->usesPlugin($this->name)) {
 				echo '	<p>' ;
-				echo util_make_link ("/plugins/oslc/index.php?id=$userid&type=user&pluginname=".$this->name,
+				echo util_make_link("/plugins/oslc/index.php?id=$userid&type=user&pluginname=".$this->name,
 						     _('View Personal oslc')
 					);
 				echo '</p>';
 			}
 		} elseif ($hookname == "project_admin_plugins") {
-			// this displays the link in the project admin options page to it's  oslc administration
+			// this displays the link in the project admin options page to its oslc administration
 			$group_id = $params['group_id'];
 			$group = group_get_object($group_id);
 			if ( $group->usesPlugin ( $this->name ) ) {
 				echo '<p>'.util_make_link ("/plugins/oslc/admin/index.php?id=".$group->getID().'&type=admin&pluginname='.$this->name,
 						     _('oslc Admin')).'</p>' ;
 			}
-		}
-		elseif($hookname == "project_rdf_metadata") {
+		} elseif($hookname == "project_rdf_metadata") {
 
 			# TODO : create another resource
 			$group_id=$params['group'];
@@ -172,9 +177,6 @@ class oslcPlugin extends Plugin {
 
 			$params['out_Resources'][] = $res;
 
-		}
-		elseif ($hookname == "blahblahblah") {
-			// ...
 		}
 	}
 }

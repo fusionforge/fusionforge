@@ -62,12 +62,6 @@ The big work is to make new icons found in www/themes/savannah/images/
 | 		// The background color
 | 		$this->COLOR_BACK= '#FFFFFF';
 | 
-| 		// The primary light background color
-| 		$this->COLOR_LTBACK1= '#FFF4A8';
-| 
-| 		// The secondary light background color
-| 		$this->COLOR_LTBACK2= '#FFF4A8';
-| 
 | 		// The HTML box title color
 | 		$this->COLOR_HTMLBOX_TITLE = '#DAD5D7';
 | 

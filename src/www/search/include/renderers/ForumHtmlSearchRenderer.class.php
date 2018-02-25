@@ -37,7 +37,7 @@ class ForumHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	/**
 	 * @param string $words words we are searching for
 	 * @param int $offset offset
-	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
+	 * @param bool $isExact if we want to search for all the words or if only one matching the query is sufficient
 	 * @param int $groupId group id
 	 * @param int $forumId forum id
 	 */
@@ -68,7 +68,7 @@ class ForumHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$return = '';
 		$i = 0;
 		foreach ($result as $row) {
-			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td class="halfwidth"><a href="'.util_make_url ('/forum/message.php?msg_id=' . $row['msg_id']).'">'
+			$return .= '<tr><td class="halfwidth"><a href="'.util_make_url ('/forum/message.php?msg_id=' . $row['msg_id']).'">'
 				. html_image('ic/msg.png', 10, 12)
 				. ' '.$row['subject'].'</a></td>'
 				. '<td style="width: 30%">'.$row['realname'].'</td>'

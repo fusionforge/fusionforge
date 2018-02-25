@@ -3,7 +3,7 @@
  * MantisBT plugin
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2016 Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -27,9 +27,9 @@ global $mantisbt;
 global $HTML;
 
 echo '<div style="width:98%; text-align:right; padding:5px;" >';
-echo $HTML->openForm(array('name' => 'jump',  'method' => 'post', 'action' => util_make_uri('/plugins/'.$mantisbt->name.'/?type='.$type.'&group_id='.$group_id.'&view=viewIssue')));
+echo $HTML->openForm(array('name' => 'jump',  'method' => 'post', 'action' => '/plugins/'.$mantisbt->name.'/?type='.$type.'&group_id='.$group_id.'&view=viewIssue'));
 echo '<span>'. _('Jump to ticket')._(':'). '</span>';
 echo '<input type="text" name="idBug" />';
-echo '<input type="submit" value="'._('Ok').'" />';
+echo '<input type="submit" value="'._('OK').'" />';
 echo $HTML->closeForm();
 echo '</div>';

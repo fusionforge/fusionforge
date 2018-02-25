@@ -105,7 +105,7 @@ if ($argc == 2) {
         if ($argv[1] == 'all') {
                 // Upgrade activated plugins.
                 $plugins = get_installed_plugins();
-        } else if (in_array($argv[1], $activated_plugins)) {
+        } elseif (in_array($argv[1], $activated_plugins)) {
 		// Upgrade a specific plugin, if activated
                 $plugins[] = $argv[1];
         }

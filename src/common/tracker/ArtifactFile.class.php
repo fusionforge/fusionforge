@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2009, Roland Mas
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -31,7 +32,7 @@ require_once $gfcommon.'include/FFError.class.php';
 * @param	array|bool	$data			The result array, if it's passed in
 * @return	Artifact	object
 */
-function &artifactfile_get_object($artifact_file_id,$data=false) {
+function &artifactfile_get_object($artifact_file_id, $data = false) {
 	global $ARTIFACTFILE_OBJ;
 	if (!isset($ARTIFACTFILE_OBJ["_".$artifact_file_id."_"])) {
 		if ($data) {
@@ -46,7 +47,7 @@ function &artifactfile_get_object($artifact_file_id,$data=false) {
 			$data = db_fetch_array($res);
 		}
 		$Artifact =& artifact_get_object($data["artifact_id"]);
-		$ARTIFACTFILE_OBJ["_".$artifact_file_id."_"]= new ArtifactFile($Artifact,$data);
+		$ARTIFACTFILE_OBJ["_".$artifact_file_id."_"] = new ArtifactFile($Artifact,$data);
 	}
 	return $ARTIFACTFILE_OBJ["_".$artifact_file_id."_"];
 }
@@ -72,17 +73,17 @@ class ArtifactFile extends FFError {
 	 * @param	Artifact	$Artifact	The Artifact object.
 	 * @param	array|bool	$data		(all fields from artifact_file_user_vw) OR id from database.
 	 */
-	function __construct(&$Artifact, $data=false) {
+	function __construct(&$Artifact, $data = false) {
 		parent::__construct();
 
 		// Was Artifact legit?
 		if (!$Artifact || !is_object($Artifact)) {
-			$this->setError('ArtifactFile: No Valid Artifact');
+			$this->setError('ArtifactFile'._(': ')._('No Valid Artifact'));
 			return;
 		}
-		// Did ArtifactType have an error?
+		// Did Artifact have an error?
 		if ($Artifact->isError()) {
-			$this->setError('ArtifactFile: '.$Artifact->getErrorMessage());
+			$this->setError('ArtifactFile'._(': ').$Artifact->getErrorMessage());
 			return;
 		}
 		$this->Artifact =& $Artifact;
@@ -108,7 +109,7 @@ class ArtifactFile extends FFError {
 	 *						array('user' => 127, 'time' => 1234556789)
 	 * @return	int|bool		Identifier on success / false on failure.
 	 */
-	function create($filename, $filetype, $filesize, $file, $description='None', $importData = array()) {
+	function create($filename, $filetype, $filesize, $file, $description = 'None', $importData = array()) {
 		// Some browsers don't supply mime type if they don't know it
 		if (!$filetype) {
 			// Let's be on safe side?
@@ -120,7 +121,7 @@ class ArtifactFile extends FFError {
 		//
 		if (!$filename || !$filetype || !$filesize || !$file) {
 			//echo '<p>|'.$filename.'|'.$filetype.'|'.$filesize.'|'.$file.'|';
-			$this->setError(_('ArtifactFile: File, name, type, size are required'));
+			$this->setError(_('ArtifactFile')._(': ')._('File, name, type, size are required'));
 			return false;
 		}
 
@@ -128,9 +129,9 @@ class ArtifactFile extends FFError {
 			$user_id = $importData['user'];
 		} else {
 			if (session_loggedin()) {
-				$user_id=user_getid();
+				$user_id = user_getid();
 			} else {
-				$user_id=100;
+				$user_id = 100;
 			}
 		}
 
@@ -152,9 +153,9 @@ class ArtifactFile extends FFError {
 					       $filesize,
 					       $filetype,
 					       $time,
-					       $user_id)) ;
+					       $user_id));
 
-		$id=db_insertid($res,'artifact_file','id');
+		$id = db_insertid($res, 'artifact_file', 'id');
 
 		ArtifactStorage::instance()->store($id, $file);
 
@@ -176,9 +177,9 @@ class ArtifactFile extends FFError {
 
 			// If time is set, no need to add to history, will be done in batch
 			if (!array_key_exists('time', $importData)){
-				$this->Artifact->addHistory('File Added',$id.': '.$filename);
+				$this->Artifact->addHistory(_('File Added'),$id._(': ').$filename);
 			}
-			$this->Artifact->updateLastModifiedDate();
+			$this->Artifact->updateLastModified();
 			$this->clearError();
 			return $id;
 		}
@@ -187,22 +188,21 @@ class ArtifactFile extends FFError {
 	/**
 	 * delete - delete this artifact file from the db.
 	 *
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function delete() {
-		if (!forge_check_perm ('tracker', $this->Artifact->ArtifactType->getID(), 'tech')) {
+		if (!forge_check_perm('tracker', $this->Artifact->ArtifactType->getID(), 'tech')) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
 		$res = db_query_params ('DELETE FROM artifact_file WHERE id=$1',
 					array ($this->getID())) ;
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError('ArtifactFile: Unable to Delete');
+			$this->setError('ArtifactFile'._(': ')._('Unable to Delete'));
 			return false;
 		} else {
 			ArtifactStorage::instance()->delete($this->getID())->commit();
-
-			$this->Artifact->addHistory('File Deleted',$this->getID().': '.$this->getName());
+			$this->Artifact->addHistory(_('File Deleted'), $this->getID()._(': ').$this->getName());
 			return true;
 		}
 	}
@@ -211,13 +211,13 @@ class ArtifactFile extends FFError {
 	 * fetchData - re-fetch the data for this ArtifactFile from the database.
 	 *
 	 * @param	int	$id	The file_id.
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function fetchData($id) {
 		$res = db_query_params ('SELECT * FROM artifact_file_user_vw WHERE id=$1',
 					array ($id)) ;
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError('ArtifactFile: Invalid ArtifactFile ID');
+			$this->setError('ArtifactFile'._(': ')._('Invalid ArtifactFile ID'));
 			return false;
 		}
 		$this->data_array = db_fetch_array($res);

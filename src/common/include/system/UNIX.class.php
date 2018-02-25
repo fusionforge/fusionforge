@@ -47,16 +47,16 @@ class UNIX extends System {
 		if (!$user) {
 			return false;
 		} else {
-			$res = db_query_params ('UPDATE users SET
-			unix_uid=user_id+$1,
-			unix_status=$2
-			WHERE user_id=$3',
-						array ($this->UID_ADD,
-							   'A',
-							   $user_id)) ;
-					if (!$res) {
-							$this->setError('Error: Cannot Update User UID/GID: '.db_error());
-							return false;
+			$res = db_query_params('UPDATE users SET
+						unix_uid=user_id+$1,
+						unix_status=$2
+						WHERE user_id=$3',
+						array($this->UID_ADD,
+							'A',
+							$user_id));
+			if (!$res) {
+				$this->setError('Error: Cannot Update User UID/GID: '.db_error());
+				return false;
 			}
 		}
 		return parent::sysCreateUser($user_id);

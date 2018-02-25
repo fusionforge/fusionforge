@@ -33,7 +33,7 @@ header("Cache-Control: must-revalidate");
 
 require_once '../../../www/env.inc.php';
 require_once $gfcommon.'include/pre.php';
-require_once '../../../www/include/login-form.php';
+require_once $gfwww.'include/login-form.php';
 
 /* because session_check_credentials_in_database is setting warning_msg */
 global $warning_msg;
@@ -48,25 +48,8 @@ $triggered = getIntFromRequest('triggered');
 $attempts = getIntFromRequest('attempts');
 $previous_login = getStringFromRequest('previous_login');
 
-if (session_loggedin())
+if (session_loggedin()) {
 	session_redirect('/my');
-
-//
-//	Validate return_to
-//
-if ($return_to) {
-	$tmpreturn = explode('?',$return_to);
-	$rtpath = $tmpreturn[0] ;
-
-	if (@is_file(forge_get_config('url_root').$rtpath)
-	    || @is_dir(forge_get_config('url_root').$rtpath)
-	    || (strpos($rtpath,'/projects') == 0)
-	    || (strpos($rtpath,'/plugins/mediawiki') == 0)) {
-		$newrt = $return_to;
-	} else {
-		$newrt = '/';
-	}
-	$return_to = $newrt;
 }
 
 if (forge_get_config('use_ssl') && !session_issecure()) {
@@ -90,15 +73,16 @@ if ($login) {
 			$plugin->startSession($form_loginname);
 		}
 		if ($return_to) {
+			validate_return_to($return_to);
 			session_redirect($return_to);
 		} else {
 			session_redirect('/my');
 		}
 	} else {
 		if ($form_loginname && $form_pw) {
-			$warning_msg = _('Invalid Password Or User Name');
+			$error_msg = _('Invalid Password Or User Name');
 		} else {
-			$warning_msg = _('Missing Password Or User Name');
+			$error_msg = _('Missing Password Or User Name');
 		}
 	}
 
@@ -114,18 +98,18 @@ if ($login) {
 		}
 	} elseif ($userstatus == "P") {
 		$warning_msg .= '<br />' . _('Your account is currently pending your email confirmation.')
-					  . '<br/>' . _('Visiting the link sent to you in this email will activate your account.')
-                      . '<br/>' . _('If you need this email resent, please click below and a confirmation email will be sent to the email address you provided in registration.')
-                      . '<br/>' . sprintf('<a href="%1$s">%2$s</a>',
-											util_make_url("/account/pending-resend.php?form_user=".htmlspecialchars($form_loginname)),
-                                            _('Resend Confirmation Email'));
+						. '<br/>' . _('Visiting the link sent to you in this email will activate your account.')
+						. '<br/>' . _('If you need this email resent, please click below and a confirmation email will be sent to the email address you provided in registration.')
+						. '<br/>' . sprintf('<a href="%1$s">%2$s</a>',
+								util_make_url("/account/pending-resend.php?form_user=".htmlspecialchars($form_loginname)),
+								_('Resend Confirmation Email'));
 	} elseif ($userstatus == "D") {
-			$error_msg = '<br />' . sprintf(_('Your %1$s account has been removed by %1$s staff.'), forge_get_config('forge_name'))
-                      . '<br/>' . _('This may occur for two reasons, either 1) you requested that your account be removed; or 2) some action has been performed using your account which has been seen as objectionable (i.e. you have breached the terms of service for use of your account) and your account has been revoked for administrative reasons.')
-                      . '<br/>' . sprintf(_('Should you have questions or concerns regarding this matter, please log a <a href="%s">support request</a>.'), util_make_url("/support/?group_id=1"))
-                      . '<br/>' . _('Thank you')
-                      . '<br/>'
-                      . '<br/>' . sprintf(_('-- the %s staff'), forge_get_config('forge_name'));
+		$error_msg = '<br />' . sprintf(_('Your %1$s account has been removed by %1$s staff.'), forge_get_config('forge_name'))
+				. '<br/>' . _('This may occur for two reasons, either 1) you requested that your account be removed; or 2) some action has been performed using your account which has been seen as objectionable (i.e. you have breached the terms of service for use of your account) and your account has been revoked for administrative reasons.')
+				. '<br/>' . sprintf(_('Should you have questions or concerns regarding this matter, please log a <a href="%s">support request</a>.'), util_make_url("/support/?group_id=1"))
+				. '<br/>' . _('Thank you')
+				. '<br/>'
+				. '<br/>' . sprintf(_('-- the %s staff'), forge_get_config('forge_name'));
 	}
 }
 

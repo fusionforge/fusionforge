@@ -21,6 +21,7 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 set -e
+. $(dirname $0)/common-backports
 
 # Debian and Fedora/CentOS/RHEL *package building* are so different
 # that there's nothing to factour out, so they are in separate functions.
@@ -32,8 +33,11 @@ function build_deb {
     apt-get -y install mini-dinstall dput devscripts fakeroot
     apt-get -y install build-essential \
 	$(grep Build-Depends /usr/src/fusionforge/src/debian/control.in | sed -e 's/Build-Depends: //' -e 's/(.*)//')
-    apt-get -y install php5-cli  # debian/gen_control.sh
-
+    if grep -q ^8 /etc/debian_version; then
+	apt-get -y install php5-cli  # debian/gen_control.sh
+    else
+	apt-get -y install php-cli  # debian/gen_control.sh
+    fi
 
     # Populate a local Debian packages repository for APT managed with mini-dinstall
     #rm -rf /usr/src/debian-repository
@@ -71,6 +75,7 @@ function build_deb {
 	Subkey-Length: 2048
 	Name-Real: FusionForge
 	Expire-Date: 0
+	%no-protection
 	%commit
 	EOF
     fi
@@ -105,7 +110,7 @@ function build_deb {
     cd $(dirname $0)/../src/
     cp -a debian/changelog $f
 
-    version=$(dpkg-parsechangelog | sed -n 's/^Version: \([0-9.]\+\(\~rc[0-9]\)\?\).*/\1/p')+$(date +%Y%m%d%H%M)
+    version=$(dpkg-parsechangelog | sed -n 's/^Version: \([0-9.]\+\(\~\(rc\|beta\|alpha\)[0-9]\)\?\).*/\1/p')+autobuilt$(date +%Y%m%d%H%M)
     make dist VERSION=$version
     mv fusionforge-$version.tar.bz2 ../fusionforge_$version.orig.tar.bz2
     cd ..
@@ -161,10 +166,41 @@ function build_rpm {
 	EOF
 }
 
+function build_suse_rpm {
+	suse_check_release
+	suse_install_repos
+	suse_install_rpms make gettext-runtime gettext-tools tar bzip2 rpm-build createrepo php5
+
+	# Build package
+	cd $(dirname $0)/../src/
+	base_version=$(make version)
+	snapshot=$(date +%Y%m%d%H%M)
+	version=$base_version+$snapshot
+	rpm/gen_spec.sh $base_version $snapshot
+	make dist VERSION=$version
+	mkdir -p ../build/SOURCES/ ../build/SPECS/
+	mv fusionforge-$version.tar.bz2 ../build/SOURCES/fusionforge-$version.tar.bz2
+	chown -h root: ../build/SOURCES/fusionforge-$version.tar.bz2
+	cp fusionforge.spec ../build/SPECS/
+	rpmbuild ../build/SPECS/fusionforge.spec --define "_topdir $(pwd)/../build" -ba
+
+	(cd ../build/RPMS/ && createrepo .)
+	repopath=$(readlink  ../build/RPMS/)
+	cat <<-EOF | sed 's,@PATH@,$repopath,g' > /etc/zypp/repos.d/local.repo
+	[local]
+	name=local
+	baseurl=file://@PATH@
+	enabled=1
+	gpgcheck=0
+	EOF
+}
+
 if [ -e /etc/debian_version ]; then
     build_deb
 elif [ -e /etc/redhat-release ]; then
     build_rpm
+elif [ -e /etc/SuSE-release ]; then
+    build_suse_rpm
 else
     echo "Automated package building is not supported for this distribution."
     echo "See https://fusionforge.org/plugins/mediawiki/wiki/fusionforge/index.php/Installing/FromSource"

@@ -5,7 +5,7 @@
  * Copyright 2009, Fabien Dubois - Capgemini
  * Copyright 2009-2011, Franck Villaume - Capgemini
  * Copyright 2010, Antoine Mercadal - Capgemini
- * Copyright 2011,2014 Franck Villaume - TrivialDev
+ * Copyright 2011,2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -195,7 +195,7 @@ if (!isset($clientSOAP) && !isset($errorPage)) {
 	?>
 		<p class="notice_title" onclick='jQuery("#expandable_ticket").slideToggle(300);'><?php echo _('Add a new ticket') ?></p>
 		<div id='expandable_ticket' class="notice_content">
-		<?php include("addIssue.php") ?>
+		<?php include ($gfplugins.$mantisbt->name.'/view/addIssue.php'); ?>
 		</div>
 		<br/>
 	<?php
@@ -209,7 +209,7 @@ if (!isset($clientSOAP) && !isset($errorPage)) {
 		{
 			echo '| <b>'.$i.'</b>';
 		} else {
-			echo $HTML->openForm(array('style' => 'display:inline', 'name' => 'page'.$i, 'method' => 'post',  'action' => util_make_uri('/plugins/'.$mantisbt->name.'/?type='.$type.'&group_id='.$group_id.'&page='.$i)));
+			echo $HTML->openForm(array('style' => 'display:inline', 'name' => 'page'.$i, 'method' => 'post',  'action' => '/plugins/'.$mantisbt->name.'/?type='.$type.'&group_id='.$group_id.'&page='.$i));
 			echo 	'<input type="hidden" name="sort" value="'.$bugfilter['sort'].'" />';
 			echo 	'<input type="hidden" name="dir" value="'.$bugfilter['dir'].'" />';
 			if ( isset($bugfilter['show_status'])) {

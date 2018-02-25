@@ -28,17 +28,17 @@ require_once $gfcommon.'search/SearchQuery.class.php';
 class TasksSearchQuery extends SearchQuery {
 
 	/**
-	* group id
-	*
-	* @var int $groupId
-	*/
+	 * group id
+	 *
+	 * @var int $groupId
+	 */
 	var $groupId;
 
 	/**
-	* flag if non public items are returned
-	*
-	* @var boolean $showNonPublic
-	*/
+	 * flag if non public items are returned
+	 *
+	 * @var bool $showNonPublic
+	 */
 	var $showNonPublic;
 
 	/**
@@ -49,7 +49,7 @@ class TasksSearchQuery extends SearchQuery {
 	 * @param	string 	$sections	sections to search in
 	 * @param	bool	$showNonPublic	flag if private sections are searched too
 	 */
-	function __construct($words, $offset, $isExact, $groupId, $sections=SEARCH__ALL_SECTIONS, $showNonPublic=false) {
+	function __construct($words, $offset, $isExact, $groupId, $sections = SEARCH__ALL_SECTIONS, $showNonPublic = false) {
 		$this->groupId = $groupId;
 		$this->showNonPublic = $showNonPublic;
 
@@ -100,7 +100,7 @@ class TasksSearchQuery extends SearchQuery {
 	 * getSections - returns the list of available subprojects
 	 *
 	 * @param	int	$groupId	group id
-	 * @param	boolean	$showNonPublic	if we should consider non public sections
+	 * @param	bool	$showNonPublic	if we should consider non public sections
 	 * @return	array
 	 */
 	static function getSections($groupId, $showNonPublic = false) {
@@ -118,9 +118,7 @@ class TasksSearchQuery extends SearchQuery {
 	}
 
 	function isRowVisible($row) {
-		return forge_check_perm('pm',
-								$row['group_project_id'],
-								'read');
+		return forge_check_perm('pm', $row['group_project_id'], 'read');
 	}
 }
 

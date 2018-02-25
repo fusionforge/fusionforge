@@ -1,6 +1,8 @@
 <?php
 /**
  * Copyright (C) 2015 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
+ * Copyright 2016, Stéphane-Eymeric Bredtthauer - TrivialDev
+ * Copyright 2017, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -23,7 +25,7 @@ global $group_id, $group, $taskboard;
 
 $release_id = getIntFromRequest('release_id', NULL);
 
-$release = new TaskBoardRelease( $taskboard, $release_id );
+$release = new TaskBoardRelease($taskboard, $release_id);
 
 html_use_jqueryjqplotpluginCanvas();
 html_use_jqueryjqplotplugindateAxisRenderer();
@@ -31,7 +33,7 @@ html_use_jqueryjqplotpluginhighlighter();
 
 $taskboard->header(
 		array(
-			'title' => _('Taskboard for ').$group->getPublicName()._(': '). _('Releases')._(': ')._('Burndown chart')._(': ').$release->getTitle() ,
+			'title' => $taskboard->getName()._(': '). _('Releases')._(': ')._('Burndown chart')._(': ').$release->getTitle() ,
 			'pagename' => _('Releases')._(': ')._('Burndown chart')._(': ').$release->getTitle(),
 			'sectionvals' => array($group->getPublicName()),
 			'group' => $group_id
@@ -44,15 +46,20 @@ if ($taskboard->isError()) {
 	echo html_e('div', array('id' => 'messages', 'style' => 'display: none;'), '', false);
 }
 
+
 // $xaxisData is used to have an every date on the X axis
 $xaxisData = array();
 $chartDate = $release->getStartDate();
-while( $chartDate <= $release->getEndDate() ) {
-	$xaxisData[] = array(  date( 'r', $chartDate) , 0);
+while($chartDate <= $release->getEndDate()) {
+	$xaxisData[] = array(date( 'r', $chartDate) , 0);
 	$chartDate += 86400;
 }
 
 $release_volume = $release->getVolume();
+
+if (!$release_volume) {
+	echo $HTML->error_msg($taskboard->getErrorMessage());
+}
 
 // ideal burndown
 $dataIdeal = array(
@@ -64,41 +71,39 @@ $release_snapshots = $release->getSnapshots();
 $dataRemainingTasks = array();
 $dataRemainingEfforts = array();
 
-foreach( $release_snapshots as $snapshot ) {
-	if( count($dataRemainingTasks) == 0 && $snapshot['snapshot_date'] != $release->getStartDate() ) {
+foreach ($release_snapshots as $snapshot) {
+	if (count($dataRemainingTasks) == 0 && $snapshot['snapshot_date'] != $release->getStartDate()) {
 		// initialize start point if snapshot is missing for the first day
-		$dataRemainingTasks[] = array( $release->getStartDate() * 1000, $release_volume['tasks'] );
-		$dataRemainingEfforts[] = array( $release->getStartDate() * 1000, $release_volume['man_days'] );
+		$dataRemainingTasks[] = array($release->getStartDate() * 1000, $release_volume['tasks']);
+		$dataRemainingEfforts[] = array($release->getStartDate() * 1000, $release_volume['man_days']);
 	}
 
-	$dataRemainingTasks[] = array( $snapshot['snapshot_date'] * 1000, ( $release_volume['tasks'] - $snapshot['completed_tasks'] ) );
-	$dataRemainingEfforts[] = array( $snapshot['snapshot_date'] * 1000, ( $release_volume['man_days'] -  $snapshot['completed_man_days'] ) );
+	$dataRemainingTasks[] = array($snapshot['snapshot_date'] * 1000, ($release_volume['tasks'] - $snapshot['completed_tasks']));
+	$dataRemainingEfforts[] = array($snapshot['snapshot_date'] * 1000, ($release_volume['man_days'] - $snapshot['completed_man_days']));
 }
-
-
 
 ?>
 <div id="taskboard-burndown-chart-nav">
-	<button id="taskboard-view-btn"><?php echo _('Taskboard'); ?></button>
+	<button id="taskboard-view-btn"><?php echo _('Task Board'); ?></button>
 	<br/>
 </div>
 
 <figure>
-	<figcaption><?php echo  _("Burndown chart") . ' : ' . $release->getTitle() ?></figcaption>
+	<figcaption><?php echo  _("Burndown chart")._(': ').$release->getTitle() ?></figcaption>
 	<div id="taskboard-burndown-chart">
 	</div>
 </figure>
 
 <script>
 	var burndownChart;
-	var xaxisData = <?php echo json_encode( $xaxisData ); ?>;
-	var dataRemainingTasks = <?php echo json_encode( $dataRemainingTasks ); ?>;
-	var dataRemainingEfforts = <?php echo json_encode( $dataRemainingEfforts ); ?>;
-	var dataRemainingIdeal = <?php echo json_encode( $dataIdeal ); ?>;
+	var xaxisData = <?php echo json_encode($xaxisData); ?>;
+	var dataRemainingTasks = <?php echo json_encode($dataRemainingTasks); ?>;
+	var dataRemainingEfforts = <?php echo json_encode($dataRemainingEfforts); ?>;
+	var dataRemainingIdeal = <?php echo json_encode($dataIdeal); ?>;
 
 	jQuery( document ).ready(function( $ ) {
 		jQuery('#taskboard-view-btn').click( function ( e ) {
-			window.location = '<?php echo util_make_url ('/plugins/'.$pluginTaskboard->name.'/?group_id='. $group_id . '&_release=' . $release_id ); ?>';
+			window.location = '<?php echo util_make_url('/plugins/'.$pluginTaskboard->name.'/?group_id='.$group_id.'&taskboard_id='.$taskboard->getID().'&_release='.$release_id ); ?>';
 			e.preventDefault();
 		});
 

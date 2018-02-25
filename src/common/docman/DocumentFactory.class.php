@@ -7,7 +7,7 @@
  * Copyright 2009, Roland Mas
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2016, Franck Villaume - TrivialDev
+ * Copyright 2012-2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -28,6 +28,7 @@
 
 require_once $gfcommon.'include/FFError.class.php';
 require_once $gfcommon.'docman/Document.class.php';
+require_once $gfcommon.'docman/DocumentVersionFactory.class.php';
 
 class DocumentFactory extends FFError {
 
@@ -53,7 +54,7 @@ class DocumentFactory extends FFError {
 
 	/**
 	 * The doc_group_id limit
-	 * @var	integer	Contains the doc_group id to limit return documents in getDocuments.
+	 * @var	int	Contains the doc_group id to limit return documents in getDocuments.
 	 */
 	var $docgroupid;
 
@@ -73,7 +74,7 @@ class DocumentFactory extends FFError {
 
 	/**
 	 * The limit
-	 * @var	integer	Contains the limit of documents retrieve by getDocuments.
+	 * @var	int	Contains the limit of documents retrieve by getDocuments.
 	 *		Default value is 0 which means NO LIMIT
 	 */
 	var $limit = 0;
@@ -81,13 +82,13 @@ class DocumentFactory extends FFError {
 	/**
 	 * The docgroupstate
 	 * @var	int	Contains the valid state of documentgroups to retrieve documents using getDocuments.
-	 *		Default value is 1 which means public any
+	 *		Default value is 1 which means public
 	 */
 	var $docgroupstate = 1;
 
 	/**
 	 * The offset
-	 * @var	integer	Contains the offset of the query used to retrive documents using getDocuments.
+	 * @var	int	Contains the offset of the query used to retrive documents using getDocuments.
 	 *		Default value is 0 which means NO OFFSET
 	 */
 	var $offset = 0;
@@ -96,12 +97,11 @@ class DocumentFactory extends FFError {
 
 	/**
 	 * @param	$Group
-	 * @internal	param	\The $object Group object to which this DocumentFactory is associated.
 	 */
 	function __construct(&$Group) {
 		parent::__construct();
 		if (!$Group || !is_object($Group)) {
-			$this->setError(_('No Valid Group Object'));
+			$this->setError(_('Invalid Project'));
 			return;
 		}
 
@@ -273,7 +273,7 @@ class DocumentFactory extends FFError {
 
 	/**
 	 * setDocGroupState - call this before getDocuments() to setup correct permission settings for retrieve authorized documents.
-	 * default value is 1 which means : no limit.
+	 * default value is 1 which means : public.
 	 *
 	 * @param	array	$state	The array of valid state of documentgroups
 	 * @access	public
@@ -297,7 +297,6 @@ class DocumentFactory extends FFError {
 	 * getDocuments - returns an array of Document objects.
 	 *
 	 * @param	int	$nocache	Force to reset the cached data if any available.
-	 * @internal	param	\no $integer cache : force reinit $this->Documents : default: cache is used
 	 * @return	array	Document objects.
 	 * @access	public
 	 */
@@ -335,6 +334,29 @@ class DocumentFactory extends FFError {
 		return $return;
 	}
 
+	function getDocumentsWithVersions() {
+		$return = null;
+		$docs = $this->getDocuments(1);
+		if (is_array($docs)) {
+			foreach ($docs as $doc) {
+				$dvf = new DocumentVersionFactory($doc);
+				$docArr = array();
+				$docArr = (array)$doc;
+				unset($docArr['Group']);
+				$docArr['versions'] = $dvf->getVersions();
+				$docArr['monitor'] = $doc->getMonitorIds();
+				$serialIDs = $dvf->getSerialIDs();
+				if (forge_get_config('use_docman_review')) {
+					$drf = new DocumentReviewFactory($doc);
+					$docArr['reviews'] = $drf->getReviews($serialIDs);
+				}
+				ksort($docArr);
+				$return[] = $docArr;
+			}
+		}
+		return $return;
+	}
+
 	private function ValidDocumentGroups() {
 		$this->validdocumentgroups = array();
 		// recursive query to find if documentgroups are visible thru the tree of documentgroups
@@ -348,7 +370,7 @@ class DocumentFactory extends FFError {
 						array($this->Group->getID(), $this->docgroupstate));
 		$result = db_query_qpa($qpa);
 		if (!$result) {
-			$this->setError('getFromStorage:'.db_error());
+			$this->setError('ValidDocumentGroups:'.db_error());
 			return false;
 		}
 		while ($arr = db_fetch_array($result)) {
@@ -360,8 +382,7 @@ class DocumentFactory extends FFError {
 	 * getFromStorage - Retrieve documents from storage (database for all informations).
 	 * you can limit query to speed up: warning, once $this->documents is retrieve, it's cached.
 	 *
-	 * @return	boolean	success or not
-	 * @access	private
+	 * @return	bool	success or not
 	 */
 	private function getFromStorage() {
 		$this->Documents = array();

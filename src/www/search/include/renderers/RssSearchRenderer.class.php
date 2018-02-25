@@ -36,7 +36,7 @@ class RssSearchRenderer extends SearchRenderer {
 	/**
 	 * @param string $typeOfSearch type of the search (Software, Forum, People and so on)
 	 * @param string $words words we are searching for
-	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
+	 * @param bool $isExact if we want to search for all the words or if only one matching the query is sufficient
 	 * @param object $searchQuery SearchQuery instance
 	 */
 	function __construct($typeOfSearch, $words, $isExact, $searchQuery) {

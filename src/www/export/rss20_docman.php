@@ -1,7 +1,7 @@
 <?php
 /**
  * FusionForge Documents RSS Feed
- * Copyright 2012,2015 Franck Villaume - TrivialDev
+ * Copyright 2012,2015,2017, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -59,7 +59,17 @@ if (isset($group_id) && !empty($group_id) && is_numeric($group_id)) {
 		endOnError($df->getErrorMessage());
 	}
 
-	$d_arr =& $df->getDocuments();
+	$stateIdDg = 1;
+	$stateIdDocuments = array(1);
+	if (forge_check_perm('docman', $group_id, 'approve')) {
+		$stateIdDg = 5;
+		$stateIdDocuments = array(1, 2, 3, 4, 5);
+	}
+	$df->setDocGroupState($stateIdDg);
+	$df->setStateID($stateIdDocuments);
+	$df->setOrder(array('updatedate', 'createdate'));
+	$df->setSort('DESC');
+	$d_arr = $df->getDocuments();
 
 	writeFeed($d_arr, $limit);
 	endFeed();
@@ -89,8 +99,7 @@ function beginFeed($groupname = "", $link = "") {
 	print "  <generator>".forge_get_config ('forge_name')." RSS generator</generator>\n";
 }
 
-function writeFeed($d_arr, $limit){
-
+function writeFeed($d_arr, $limit) {
 	/*
 	if (!is_array($nested_groups["$parent_group"])) {
 		return;
@@ -131,20 +140,4 @@ function writeFeed($d_arr, $limit){
 			if ($j >= $limit) break;
 		}//for loop
 	}//else (there are documents)
-}
-
-
-function displayError($errorMessage) {
-	print " <title>"._('Error')."</title>".
-		"<description>".rss_description($errorMessage)."</description>";
-}
-
-function endFeed() {
-	print '</channel></rss>';
-	exit();
-}
-
-function endOnError($errorMessage) {
-	displayError($errorMessage);
-	endFeed();
 }

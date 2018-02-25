@@ -6,6 +6,7 @@
  * Copyright 2005, GForge, LLC
  * Copyright 2009, Roland Mas
  * Copyright 2009, Alcatel-Lucent
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -23,7 +24,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-/*
+/**
  * Standard Alcatel-Lucent disclaimer for contributing to open source
  *
  * "The Artifact ("Contribution") has not been tested and/or
@@ -59,6 +60,7 @@ define('ARTIFACT_QUERY_SUMMARY',9);
 define('ARTIFACT_QUERY_DESCRIPTION',10);
 define('ARTIFACT_QUERY_FOLLOWUPS',11);
 define('ARTIFACT_QUERY_SUBMITTER',12);
+define('ARTIFACT_QUERY_LAST_MODIFIER',13);
 
 require_once $gfcommon.'tracker/ArtifactType.class.php';
 
@@ -127,14 +129,15 @@ class ArtifactQuery extends FFError {
 	 * @param	int		$closedaterange
 	 * @param	string		$summary
 	 * @param	string		$description
-	 * @param	$followups
+	 * @param	string		$followups
 	 * @param	int		$query_type
 	 * @param	array		$query_options
 	 * @param	string		$submitter	Name of the saved query.
+	 * @param	string		$last_modifier
 	 * @return	bool		true on success / false on failure.
 	 */
 	function create($name,$status,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange=0,$closedaterange=0,
-		$summary='',$description='',$followups='',$query_type=0,$query_options=array(),$submitter='') {
+		$summary='',$description='',$followups='',$query_type=0,$query_options=array(),$submitter='',$last_modifier='') {
 		//
 		//	data validation
 		//
@@ -181,7 +184,7 @@ class ArtifactQuery extends FFError {
 				db_rollback();
 				return false;
 			} else {
-				if (!$this->insertElements($id,$status,$submitter,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange,$closedaterange,$summary,$description,$followups)) {
+				if (!$this->insertElements($id,$status,$submitter,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange,$closedaterange,$summary,$description,$followups,$last_modifier)) {
 					db_rollback();
 					return false;
 				}
@@ -207,7 +210,7 @@ class ArtifactQuery extends FFError {
 	 * fetchData - re-fetch the data for this ArtifactQuery from the database.
 	 *
 	 * @param	int	$id	ID of saved query.
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function fetchData($id) {
 			$res = db_query_params ('SELECT * FROM artifact_query WHERE artifact_query_id=$1',
@@ -258,10 +261,11 @@ class ArtifactQuery extends FFError {
 	 * @param	$closedaterange
 	 * @param	string		$summary
 	 * @param	string		$description
+	 * @param	$last_modifier
 	 * @param	$followups
-	 * @return	boolean		True/false on success or not.
+	 * @return	bool		True/false on success or not.
 	 */
-	function insertElements($id,$status,$submitter,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange,$closedaterange,$summary,$description,$followups) {
+	function insertElements($id,$status,$submitter,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange,$closedaterange,$summary,$description,$followups,$last_modifier) {
 		$res = db_query_params ('DELETE FROM artifact_query_fields WHERE artifact_query_id=$1',
 					array ($id)) ;
 		if (!$res) {
@@ -297,6 +301,15 @@ class ArtifactQuery extends FFError {
 			$assignee = intval($assignee);
 		}
 
+		if (is_array($last_modifier)) {
+			for($e=0; $e<count($last_modifier); $e++) {
+				$last_modifier[$e]=intval($last_modifier[$e]);
+			}
+			$last_modifier=implode(',',$last_modifier);
+		} else {
+			$last_modifier = intval($last_modifier);
+		}
+
 		if (preg_match("/[^[:alnum:]_]/", $sort_col)) {
 			$this->setError('ArtifactQuery: not valid sort_col');
 			return false;
@@ -317,6 +330,20 @@ class ArtifactQuery extends FFError {
 					       $submitter)) ;
 			if (!$res) {
 				$this->setError('Setting Submitter: '.db_error());
+				return false;
+			}
+		}
+
+		//CSV LIST OF SUBMITTERS
+		if ($last_modifier) {
+			$res = db_query_params ('INSERT INTO artifact_query_fields
+									(artifact_query_id,query_field_type,query_field_id,query_field_values)
+									VALUES ($1,$2,0,$3)',
+					array ($id,
+							ARTIFACT_QUERY_LAST_MODIFIER,
+							$last_modifier)) ;
+			if (!$res) {
+				$this->setError('Setting Last Modifier: '.db_error());
 				return false;
 			}
 		}
@@ -530,11 +557,11 @@ class ArtifactQuery extends FFError {
 	 * @return	array	array of all activated options
 	 */
 	function getQueryOptions() {
-        if (isset($this->data_array['query_options'])) {
-		    return explode('|', $this->data_array['query_options']);
-        } else {
-            return array();
-        }
+		if (isset($this->data_array['query_options'])) {
+			return explode('|', $this->data_array['query_options']);
+		} else {
+			return array();
+		}
 	}
 
 	/**
@@ -663,6 +690,17 @@ class ArtifactQuery extends FFError {
 	}
 
 	/**
+	 * getLastModifier
+	 *
+	 * @return	string	Last Modifier ID
+	 */
+	function getLastModifier() {
+		if (!isset($this->element_array[ARTIFACT_QUERY_LAST_MODIFIER]))
+			return false;
+			return $this->element_array[ARTIFACT_QUERY_LAST_MODIFIER][0];
+	}
+
+	/**
 	 * getStatus
 	 *
 	 * @return	string	Status ID
@@ -728,10 +766,11 @@ class ArtifactQuery extends FFError {
 	 * @param	int		$query_type	Id of the saved query
 	 * @param	array		$query_options
 	 * @param	string		$submitter
+	 * @param	string		$last_modifier
 	 * @return	bool		success.
 	 */
 	function update($name,$status,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange='',$closedaterange='',
-		$summary,$description,$followups,$query_type=0,$query_options=array(),$submitter='') {
+		$summary,$description,$followups,$query_type=0,$query_options=array(),$submitter='',$last_modifier='') {
 		if (!$name) {
 			$this->setMissingParamsError();
 			return false;
@@ -765,7 +804,7 @@ class ArtifactQuery extends FFError {
 						  join('|', $query_options),
 						  $this->getID())) ;
 		if ($result && db_affected_rows($result) > 0) {
-			if (!$this->insertElements($this->getID(),$status,$submitter,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange,$closedaterange,$summary,$description,$followups)) {
+			if (!$this->insertElements($this->getID(),$status,$submitter,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange,$closedaterange,$summary,$description,$followups,$last_modifier)) {
 				db_rollback();
 				return false;
 			} else {
@@ -783,7 +822,7 @@ class ArtifactQuery extends FFError {
 	/**
 	 * makeDefault - set this as the default query
 	 *
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function makeDefault() {
 		if (!session_loggedin()) {
@@ -797,7 +836,7 @@ class ArtifactQuery extends FFError {
 	/**
 	 * delete - delete query
 	 *
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function delete() {
 		if (forge_check_perm ('tracker', $this->ArtifactType->getID(), 'manager')) {

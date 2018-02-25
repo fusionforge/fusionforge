@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
- * Copyright 2010-2013, Franck Villaume - TrivialDev
+ * Copyright 2010-2013,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -139,8 +139,7 @@ $HTML->header(array('title' => forge_get_config('forge_name').' '._('Contact')))
 <p class="important">
 <?php echo _('<strong>IF YOU ARE WRITING FOR HELP:</strong> Did you read the site documentation? Did you include your <strong>user_id</strong> and <strong>user_name?</strong> If you are writing about a project, include your <strong>project id</strong> (<strong>group_id</strong>) and <strong>Project Name</strong>.'); ?>
 </p>
-
-<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
+<?php echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post')); ?>
 
 <p>
 <input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>" />
@@ -184,7 +183,9 @@ if (isset($body)) {
 </p>
 <?php
 if (!$is_logged) {
-	plugin_hook('captcha_form');
+	$html = '';
+	plugin_hook_by_reference('captcha_form', $html);
+	echo $html;
 }
 ?>
 <p align="center">

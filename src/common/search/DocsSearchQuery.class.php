@@ -39,7 +39,7 @@ class DocsSearchQuery extends SearchQuery {
 	/**
 	* flag if non public items are returned
 	*
-	* @var boolean $showNonPublic
+	* @var bool $showNonPublic
 	*/
 	var $showNonPublic;
 
@@ -71,23 +71,23 @@ class DocsSearchQuery extends SearchQuery {
 		$params['options'] = $options;
 		plugin_hook_by_reference('docmansearch_has_hierarchy', $params);
 		if (count($params['groupIdArr'])) {
-			$qpa = db_construct_qpa($qpa, ' AND docdata_vw.group_id = ANY ($1) ', array(db_int_array_to_any_clause($params['groupIdArr'])));
+			$qpa = db_construct_qpa($qpa, ' AND doc_data.group_id = ANY ($1) ', array(db_int_array_to_any_clause($params['groupIdArr'])));
 		}
 		if ($sections != SEARCH__ALL_SECTIONS) {
-			$qpa = db_construct_qpa($qpa, ' AND doc_groups.doc_group = ANY ($1)', array(db_int_array_to_any_clause($sections)));
+			$qpa = db_construct_qpa($qpa, ' AND doc_data.doc_group = ANY ($1)', array(db_int_array_to_any_clause($sections)));
 		}
 		if ($this->showNonPublic) {
-			$qpa = db_construct_qpa($qpa, ' AND docdata_vw.stateid IN (1, 3, 4, 5)');
+			$qpa = db_construct_qpa($qpa, ' AND doc_data.stateid IN (1, 3, 4, 5)');
 		} else {
-			$qpa = db_construct_qpa($qpa, ' AND docdata_vw.stateid = 1 AND doc_groups.stateid = 1');
+			$qpa = db_construct_qpa($qpa, ' AND doc_data.stateid = 1 AND doc_groups.stateid = 1');
 		}
 
 		if (isset($options['date_begin']) && !isset($options['date_end'])) {
-			$qpa = db_construct_qpa($qpa, ' AND docdata_vw.createdate >= $1', array($options['date_begin']));
+			$qpa = db_construct_qpa($qpa, ' AND doc_data_version.createdate >= $1', array($options['date_begin']));
 		} elseif (!isset($options['date_begin']) && isset($options['date_end'])) {
-			$qpa = db_construct_qpa($qpa, ' AND docdata_vw.createdate <= $1', array($options['date_end']));
+			$qpa = db_construct_qpa($qpa, ' AND doc_data_version.createdate <= $1', array($options['date_end']));
 		} elseif (isset($options['date_begin']) && isset($options['date_end'])) {
-			$qpa = db_construct_qpa($qpa, ' AND docdata_vw.createdate between $1 and $2', array($options['date_begin'], $options['date_end']));
+			$qpa = db_construct_qpa($qpa, ' AND doc_data_version.createdate between $1 and $2', array($options['date_begin'], $options['date_end']));
 		}
 		return $qpa;
 	}
@@ -101,10 +101,10 @@ class DocsSearchQuery extends SearchQuery {
 		$words = $this->getFTIwords();
 		$options = $this->options;
 		if (!isset($options['insideDocuments']) || !$options['insideDocuments']) {
-			$qpa = db_construct_qpa(false, 'SELECT x.* FROM (SELECT docdata_vw.docid, docdata_vw.group_id AS group_id, docdata_vw.filename, ts_headline(docdata_vw.title, q) AS title, ts_headline(docdata_vw.description, q) AS description, doc_groups.groupname, docdata_vw.title||$1||description AS full_string_agg, doc_data_idx.vectors, groups.group_name as project_name FROM groups, docdata_vw, doc_groups, doc_data_idx, to_tsquery($2) AS q WHERE docdata_vw.doc_group = doc_groups.doc_group AND docdata_vw.group_id = groups.group_id AND docdata_vw.docid = doc_data_idx.docid AND (vectors @@ to_tsquery($2))',
+			$qpa = db_construct_qpa(false, 'SELECT x.* FROM (SELECT doc_data_idx.version, doc_data.docid, doc_data.group_id AS group_id, doc_data_version.filename, ts_headline(doc_data_version.title, q) AS title, ts_headline(doc_data_version.description, q) AS description, doc_groups.groupname, doc_data_version.title||$1||doc_data_version.description AS full_string_agg, doc_data_idx.vectors, doc_data_idx.version, groups.group_name as project_name FROM groups, doc_groups, doc_data_idx, doc_data_version, doc_data, to_tsquery($2) AS q WHERE doc_data.group_id = groups.group_id AND doc_data_version.docid = doc_data_idx.docid AND (vectors @@ to_tsquery($2)) AND doc_data.docid = doc_data_version.docid AND doc_data.doc_group = doc_groups.doc_group AND doc_data_version.version = doc_data_idx.version',
 					array ($this->field_separator, $words));
 		} else {
-			$qpa = db_construct_qpa(false, 'SELECT x.* FROM (SELECT docdata_vw.docid, docdata_vw.group_id AS group_id, ts_headline(docdata_vw.filename, q) AS filename, ts_headline(docdata_vw.title, q) AS title, ts_headline(docdata_vw.description, q) AS description, doc_groups.groupname, docdata_vw.title||$1||description||$1||filename AS full_string_agg, doc_data_words_idx.vectors, groups.group_name as project_name FROM groups, docdata_vw, doc_groups, doc_data_words_idx, to_tsquery($2) AS q WHERE docdata_vw.doc_group = doc_groups.doc_group AND docdata_vw.group_id = groups.group_id AND docdata_vw.docid = doc_data_words_idx.docid AND (vectors @@ to_tsquery($2))',
+			$qpa = db_construct_qpa(false, 'SELECT x.* FROM (SELECT doc_data_words_idx.version, doc_data.docid, doc_data.group_id AS group_id, ts_headline(doc_data_version.filename, q) AS filename, ts_headline(doc_data_version.title, q) AS title, ts_headline(doc_data_version.description, q) AS description, doc_groups.groupname, doc_data_version.title||$1||doc_data_version.description||$1||doc_data_version.filename AS full_string_agg, doc_data_words_idx.vectors, groups.group_name as project_name FROM groups, doc_groups, doc_data_words_idx, doc_data, doc_data_version, to_tsquery($2) AS q WHERE doc_data.group_id = groups.group_id AND doc_data_version.docid = doc_data_words_idx.docid AND (vectors @@ to_tsquery($2)) AND doc_data.docid = doc_data_version.docid AND doc_data_version.version = doc_data_words_idx.version AND doc_data.doc_group = doc_groups.doc_group',
 					array ($this->field_separator, $words));
 		}
 		$qpa = $this->addCommonQPA($qpa);
@@ -123,7 +123,7 @@ class DocsSearchQuery extends SearchQuery {
 	 * getSections - returns the list of available doc groups
 	 *
 	 * @param	$groupId	int group id
-	 * @param	$showNonPublic	boolean if we should consider non public sections
+	 * @param	$showNonPublic	bool if we should consider non public sections
 	 * @return	array
 	 */
 	static function getSections($groupId, $showNonPublic = false) {
@@ -148,7 +148,7 @@ class DocsSearchQuery extends SearchQuery {
 	}
 
 	function isRowVisible($row) {
-		return forge_check_perm ('docman', $row['group_id'], 'read');
+		return forge_check_perm('docman', $row['group_id'], 'read');
 	}
 }
 

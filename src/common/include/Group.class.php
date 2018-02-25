@@ -6,8 +6,9 @@
  * Copyright 2009-2013, Roland Mas
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2010-2012, Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2016, Franck Villaume - TrivialDev
+ * Copyright 2012-2017, Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of National Education
+ * Copyright 2017, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -33,8 +34,8 @@ require_once $gfcommon.'forum/Forum.class.php';
 require_once $gfcommon.'forum/ForumFactory.class.php';
 require_once $gfcommon.'pm/ProjectGroup.class.php';
 require_once $gfcommon.'pm/ProjectGroupFactory.class.php';
-require_once $gfcommon.'include/Role.class.php';
 require_once $gfcommon.'frs/FRSPackage.class.php';
+require_once $gfcommon.'frs/FRSRelease.class.php';
 require_once $gfcommon.'docman/DocumentGroup.class.php';
 require_once $gfcommon.'docman/DocumentGroupFactory.class.php';
 require_once $gfcommon.'mail/MailingList.class.php';
@@ -43,8 +44,10 @@ require_once $gfcommon.'survey/SurveyFactory.class.php';
 require_once $gfcommon.'survey/SurveyQuestionFactory.class.php';
 require_once $gfcommon.'include/gettext.php';
 require_once $gfcommon.'include/GroupJoinRequest.class.php';
+require_once $gfcommon.'include/Role.class.php';
+require_once $gfcommon.'widget/WidgetLayoutManager.class.php';
 
-$GROUP_OBJ=array();
+$GROUP_OBJ = array();
 
 /**
  * group_get_object() - Get the group object.
@@ -80,15 +83,9 @@ function &group_get_object($group_id, $res = false) {
 			$GROUP_OBJ["_".$group_id."_"]=false;
 		} else {
 			/*
-				check group type and set up object
+				set up object
 			*/
-			if (db_result($res,0,'type_id') == 1) {
-				//project
-				$GROUP_OBJ["_".$group_id."_"] = new Group($group_id, $res);
-			} else {
-				//invalid
-				$GROUP_OBJ["_".$group_id."_"] = false;
-			}
+			$GROUP_OBJ["_".$group_id."_"] = new Group($group_id, $res);
 		}
 	}
 	return $GROUP_OBJ["_".$group_id."_"];
@@ -158,6 +155,16 @@ function group_get_object_by_publicname($groupname) {
 	return group_get_object(db_result($res, 0, 'group_id'), $res);
 }
 
+function filter_groups_by_read_access($grps) {
+	$filteredgrps = array();
+	foreach ($grps as $g) {
+		if (forge_check_perm ('project_read', $g->getID())) {
+			$filteredgrps[] = $g;
+		}
+	}
+	return $filteredgrps;
+}
+
 /**
  * get_public_active_projects_asc() - Get a list of rows for public active projects (initially in trove/full_list)
  *
@@ -180,7 +187,7 @@ function group_get_public_active_projects_asc($max_query_limit = -1, $offset = 0
 	$res_grp = db_query_params ('
 			SELECT group_id, group_name, unix_group_name, short_description, register_time
 			FROM groups
-			WHERE status = $1 AND type_id=1 AND is_template=0 AND register_time > 0
+			WHERE status = $1 AND is_template=0 AND register_time > 0
 			AND group_id in (select ref_id FROM pfo_role_setting WHERE section_name = $2 and perm_val = 1 and role_id IN ('.$role_id.'))
 			ORDER BY group_name ASC
 			',
@@ -217,7 +224,7 @@ function group_get_readable_projects_using_tag_asc($selected_tag, $max_query_lim
 		FROM project_tags, groups
 		WHERE LOWER(name) = $1
 		AND project_tags.group_id = groups.group_id
-		AND groups.status = $2 AND groups.type_id=1 AND groups.is_template=0 AND groups.register_time > 0
+		AND groups.status = $2 AND groups.is_template=0 AND groups.register_time > 0
 		AND groups.group_id in (select ref_id FROM pfo_role_setting WHERE section_name = $3 and perm_val = 1 and role_id IN ('.$role_id.'))
 		ORDER BY groups.group_name ASC',
 		array(strtolower($selected_tag), 'A', 'project_read'),
@@ -243,34 +250,6 @@ class Group extends FFError {
 	 * @var	array	$membersArr.
 	 */
 	var $membersArr;
-
-	/**
-	 * Whether the use is an admin/super user of this project.
-	 *
-	 * @var	bool	$is_admin.
-	 */
-	var $is_admin;
-
-	/**
-	 * Artifact types result handle.
-	 *
-	 * @var	int	$types_res.
-	 */
-	var $types_res;
-
-	/**
-	 * Associative array of data for plugins.
-	 *
-	 * @var	array	$plugins_data.
-	 */
-	var $plugins_data;
-
-	/**
-	 * Associative array of data for the group menu.
-	 *
-	 * @var	array	$menu_data.
-	 */
-	var $menu_data;
 
 	/**
 	 * Group - Group object constructor - use group_get_object() to instantiate.
@@ -320,7 +299,7 @@ class Group extends FFError {
 		$res = db_query_params ('SELECT * FROM groups WHERE group_id=$1',
 					array($group_id));
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError(sprintf('fetchData(): %s', db_error()));
+			$this->setError('fetchData()'._(': ').db_error());
 			return false;
 		}
 		$this->data_array = db_fetch_array($res);
@@ -340,14 +319,13 @@ class Group extends FFError {
 	 * @param	string	$purpose		The purpose of the group.
 	 * @param	string	$unix_box
 	 * @param	string	$scm_box
-	 * @param	bool	$is_public
 	 * @param	bool	$send_mail		Whether to send an email or not
 	 * @param	int	$built_from_template	The id of the project this new project is based on
 	 * @param	int	$createtimestamp	The Time Stamp of creation to ease import.
 	 * @return	bool	success or not
 	 */
 	function create(&$user, $group_name, $unix_name, $description, $purpose, $unix_box = 'shell1',
-			$scm_box = 'cvs1', $is_public = true, $send_mail = true, $built_from_template = 0, $createtimestamp = null) {
+			$scm_box = 'cvs1', $send_mail = true, $built_from_template = 0, $createtimestamp = null) {
 		// $user is ignored - anyone can create pending group
 
 		global $SYS;
@@ -363,10 +341,6 @@ class Group extends FFError {
 		} elseif (!$SYS->sysUseUnixName($unix_name)) {
 			$this->setError(_('Unix name already taken.'));
 			return false;
-		} elseif (db_numrows(db_query_params('SELECT group_id FROM groups WHERE unix_group_name=$1',
-							array($unix_name))) > 0) {
-			$this->setError(_('Unix name already taken.'));
-			return false;
 		} elseif (strlen($purpose)<10) {
 			$this->setError(_('Please describe your Registration Project Purpose and Summarization in a more comprehensive manner.'));
 			return false;
@@ -378,9 +352,9 @@ class Group extends FFError {
 			return false;
 		} else {
 
-			// Check if sys_use_project_vhost for homepage
+			// Check if use_project_vhost for homepage
 			if (forge_get_config('use_project_vhost')) {
-				$homepage = $unix_name.".".forge_get_config('web_host');
+				$homepage = $unix_name.'.'.forge_get_config('web_host');
 			} else {
 				$homepage = forge_get_config('web_host')."/www/".$unix_name."/";
 			}
@@ -416,14 +390,14 @@ class Group extends FFError {
 							md5(util_randbytes()),
 							$built_from_template));
 			if (!$res || db_affected_rows($res) < 1) {
-				$this->setError(sprintf(_('Error: Cannot create group: %s'),db_error()));
+				$this->setError(_('Error')._(': ')._('Cannot create group')._(': ').db_error());
 				db_rollback();
 				return false;
 			}
 
 			$id = db_insertid($res, 'groups', 'group_id');
 			if (!$id) {
-				$this->setError(sprintf(_('Error: Cannot get group id: %s'),db_error()));
+				$this->setError(_('Error')._(': ')._('Cannot get group id')._(': ').db_error());
 				db_rollback();
 				return false;
 			}
@@ -434,9 +408,7 @@ class Group extends FFError {
 			}
 
 			$gjr = new GroupJoinRequest($this);
-			$gjr->create($user->getID(),
-					'Fake GroupJoinRequest to store the creator of a project',
-					false);
+			$gjr->create($user->getID(), 'Fake GroupJoinRequest to store the creator of a project', false);
 
 			$hook_params = array();
 			$hook_params['group'] = $this;
@@ -461,13 +433,12 @@ class Group extends FFError {
 	 * This function require site admin privilege.
 	 *
 	 * @param	object	$user		User requesting operation (for access control).
-	 * @param	int	$type_id	Group type (1-project, 2-foundry).
 	 * @param	string	$unix_box	Machine on which group's home directory located.
 	 * @param	string	$http_domain	Domain which serves group's WWW.
 	 * @return	bool	status.
 	 * @access	public
 	 */
-	function updateAdmin(&$user, $type_id, $unix_box, $http_domain) {
+	function updateAdmin(&$user, $unix_box, $http_domain) {
 		$perm =& $this->getPermission();
 
 		if (!$perm || !is_object($perm)) {
@@ -484,23 +455,19 @@ class Group extends FFError {
 
 		$res = db_query_params('
 			UPDATE groups
-			SET type_id=$1, unix_box=$2, http_domain=$3
-			WHERE group_id=$4',
-					array($type_id,
-						$unix_box,
+			SET unix_box=$1, http_domain=$2
+			WHERE group_id=$3',
+					array($unix_box,
 						$http_domain,
 						$this->getID()));
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError(_('Error: Cannot change group properties: %s'),db_error());
+			$this->setError(_('Error')._(': ')._('Cannot change group properties')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
 
 		// Log the audit trail
-		if ($type_id != $this->data_array['type_id']) {
-			$this->addHistory('type_id', $this->data_array['type_id']);
-		}
 		if ($unix_box != $this->data_array['unix_box']) {
 			$this->addHistory('unix_box', $this->data_array['unix_box']);
 		}
@@ -521,29 +488,29 @@ class Group extends FFError {
 	 *
 	 * Unlike updateAdmin(), this function accessible to project admin.
 	 *
-	 * @param object	$user		User requesting operation (for access control).
-	 * @param string	$group_name
-	 * @param string	$homepage
-	 * @param string	$short_description
-	 * @param bool	$use_mail
-	 * @param bool	$use_survey
-	 * @param bool	$use_forum
-	 * @param bool	$use_pm
-	 * @param bool	$use_pm_depend_box
-	 * @param bool	$use_scm
-	 * @param bool	$use_news
-	 * @param bool	$use_docman
-	 * @param string	$new_doc_address
-	 * @param bool	$send_all_docs
-	 * @param int	$logo_image_id XXXX UNUSED XXXX -> see getLogoImageID function
-	 * @param bool	$use_ftp
-	 * @param bool	$use_tracker
-	 * @param bool	$use_frs
-	 * @param bool	$use_stats
-	 * @param string	$tags
-	 * @param bool	$use_activity
-	 * @param bool	$is_public		group is publicly accessible
-	 * @return int    status.
+	 * @param	object	$user		User requesting operation (for access control).
+	 * @param	string	$group_name
+	 * @param	string	$homepage
+	 * @param	string	$short_description
+	 * @param	bool	$use_mail
+	 * @param	bool	$use_survey
+	 * @param	bool	$use_forum
+	 * @param	bool	$use_pm
+	 * @param	bool	$use_pm_depend_box
+	 * @param	bool	$use_scm
+	 * @param	bool	$use_news
+	 * @param	bool	$use_docman
+	 * @param	string	$new_doc_address
+	 * @param	bool	$send_all_docs
+	 * @param	int	$logo_image_id XXXX UNUSED XXXX -> see getLogoImageID function
+	 * @param	bool	$use_ftp
+	 * @param	bool	$use_tracker
+	 * @param	bool	$use_frs
+	 * @param	bool	$use_stats
+	 * @param	string	$tags
+	 * @param	bool	$use_activity
+	 * @param	bool	$is_public		group is publicly accessible
+	 * @return	int	status.
 	 * @access    public
 	 */
 	function update(&$user, $group_name, $homepage, $short_description, $use_mail, $use_survey, $use_forum,
@@ -625,7 +592,7 @@ class Group extends FFError {
 
 		$homepage = ltrim($homepage);
 		if (!$homepage) {
-			$homepage = util_make_url('/projects/' . $this->getUnixName() . '/');
+			$homepage = util_make_url('/projects/'.$this->getUnixName().'/');
 		}
 
 		db_begin();
@@ -669,13 +636,13 @@ class Group extends FFError {
 						$this->getID()));
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError(sprintf(_('Error updating project information: %s'), db_error()));
+			$this->setError(_('Error updating project information')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
 
 		if (!$this->setUseDocman($use_docman)) {
-			$this->setError(sprintf(_('Error updating project information: use_docman %s'), db_error()));
+			$this->setError(_('Error updating project information use_docman')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -720,16 +687,6 @@ class Group extends FFError {
 	function getID() {
 		return $this->data_array['group_id'];
 	}
-
-	/**
-	 * getType() - Foundry, project, etc.
-	 *
-	 * @return	int	The type flag from the database.
-	 */
-	function getType() {
-		return $this->data_array['type_id'];
-	}
-
 
 	/**
 	 * getStatus - the status code.
@@ -781,7 +738,7 @@ class Group extends FFError {
 		// Check that status transition is valid
 		if ($this->getStatus() != $status
 			&& !array_key_exists($this->getStatus(). $status, $allowed_status_changes)) {
-			$this->setError(_('Invalid Status Change From: ').$this->getStatus(). _(' To: '.$status));
+			$this->setError(_('Invalid Status Change From')._(': ').$this->getStatus()._(' To ')._(': ').$status);
 			return false;
 		}
 
@@ -792,7 +749,7 @@ class Group extends FFError {
 			WHERE group_id=$2', array($status, $this->getID()));
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError(sprintf(_('Error: Cannot change group status: %s'),db_error()));
+			$this->setError(_('Error')._(': ')._('Cannot change group status')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -839,19 +796,6 @@ class Group extends FFError {
 	}
 
 	/**
-	 * isProject - Simple boolean test to see if it's a project or not.
-	 *
-	 * @return	bool	is_project.
-	 */
-	function isProject() {
-		if ($this->getType()==1) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	/**
 	 * isPublic - Wrapper around RBAC to check if a project is anonymously readable
 	 *
 	 * @return	boo	is_public.
@@ -867,7 +811,7 @@ class Group extends FFError {
 	 * @return	bool	is_active.
 	 */
 	function isActive() {
-		if ($this->getStatus()=='A') {
+		if ($this->getStatus() == 'A') {
 			return true;
 		} else {
 			return false;
@@ -895,7 +839,10 @@ class Group extends FFError {
 		$res = db_query_params('UPDATE groups SET is_template=$1 WHERE group_id=$2',
 					array($booleanparam, $this->getID()));
 		if ($res) {
-			$this->data_array['is_template']=$booleanparam;
+			if ($booleanparam != $this->data_array['is_template']) {
+				$this->addHistory('is_template', $this->data_array['is_template']);
+			}
+			$this->data_array['is_template'] = $booleanparam;
 			db_commit();
 			return true;
 		} else {
@@ -1082,7 +1029,7 @@ class Group extends FFError {
 	/**
 	 * enableAnonSCM - whether or not this group has opted to enable Anonymous SCM.
 	 *
-	 * @return	boolean	enable_scm.
+	 * @return	bool	enable_scm.
 	 */
 	function enableAnonSCM() {
 		$r = RoleAnonymous::getInstance();
@@ -1150,7 +1097,7 @@ class Group extends FFError {
 		$res = db_query_params('UPDATE groups SET use_scm=$1 WHERE group_id=$2',
 					array($booleanparam, $this->getID()));
 		if ($res) {
-			$this->data_array['use_scm']=$booleanparam;
+			$this->data_array['use_scm'] = $booleanparam;
 			db_commit();
 			return true;
 		} else {
@@ -1192,7 +1139,7 @@ class Group extends FFError {
 		$res = db_query_params('UPDATE groups SET use_mail=$1 WHERE group_id=$2',
 					array($booleanparam, $this->getID()));
 		if ($res) {
-			$this->data_array['use_mail']=$booleanparam;
+			$this->data_array['use_mail'] = $booleanparam;
 			db_commit();
 			return true;
 		} else {
@@ -1220,7 +1167,7 @@ class Group extends FFError {
 		$res = db_query_params('UPDATE groups SET use_news=$1 WHERE group_id=$2',
 					array($booleanparam, $this->getID()));
 		if ($res) {
-			$this->data_array['use_news']=$booleanparam;
+			$this->data_array['use_news'] = $booleanparam;
 			db_commit();
 			return true;
 		} else {
@@ -1248,7 +1195,7 @@ class Group extends FFError {
 		$res = db_query_params('UPDATE groups SET use_activity=$1 WHERE group_id=$2',
 					array($booleanparam, $this->getID()));
 		if ($res) {
-			$this->data_array['use_activity']=$booleanparam;
+			$this->data_array['use_activity'] = $booleanparam;
 			db_commit();
 			return true;
 		} else {
@@ -1282,7 +1229,7 @@ class Group extends FFError {
 		$res = db_query_params('UPDATE groups SET use_forum=$1 WHERE group_id=$2',
 					array($booleanparam, $this->getID()));
 		if ($res) {
-			$this->data_array['use_forum']=$booleanparam;
+			$this->data_array['use_forum'] = $booleanparam;
 			db_commit();
 			return true;
 		} else {
@@ -1564,7 +1511,7 @@ class Group extends FFError {
 			if ($p_name == $feature) {
 				return true;
 			}
-			if ($pm->getPluginByName($p_name)->provide($feature)) {
+			if (is_object($pm->getPluginByName($p_name)) && $pm->getPluginByName($p_name)->provide($feature)) {
 				return true;
 			}
 		}
@@ -1619,6 +1566,27 @@ class Group extends FFError {
 		return $this->data_array['new_doc_address'];
 	}
 
+	function setDocEmailAddress($email) {
+		$invalid_mails = validate_emails($email);
+		if (count($invalid_mails) > 0) {
+			$this->setError(sprintf(ngettext('New Doc Address Appeared Invalid: %s', 'New Doc Addresses Appeared Invalid: %s', count($invalid_mails)),implode(',',$invalid_mails)));
+			return false;
+		}
+		db_begin();
+		$res = db_query_params('UPDATE groups SET new_doc_address = $1 WHERE group_id = $2',
+					array($email, $this->getID()));
+
+		if (!$res) {
+			$this->setError(_('Error')._(': ')._('Cannot Update Group new_doc_address')._(': ').db_error());
+			db_rollback();
+			return false;
+		} else {
+			$this->data_array['new_doc_address'] = $email;
+			db_commit();
+			return true;
+		}
+	}
+
 	/**
 	 * docEmailAll - whether or not this group has opted to use receive notices on all doc updates.
 	 *
@@ -1626,6 +1594,22 @@ class Group extends FFError {
 	 */
 	function docEmailAll() {
 		return $this->data_array['send_all_docs'];
+	}
+
+	function setDocEmailAll($status) {
+		db_begin();
+		$res = db_query_params('UPDATE groups SET send_all_docs = $1 WHERE group_id = $2',
+					array($status, $this->getID()));
+
+		if (!$res) {
+			$this->setError(_('Error')._(': ')._('Cannot Update Group send_all_docs')._(': ').db_error());
+			db_rollback();
+			return false;
+		} else {
+			$this->data_array['send_all_docs'] = $status;
+			db_commit();
+			return true;
+		}
 	}
 
 	/**
@@ -1637,6 +1621,27 @@ class Group extends FFError {
 		return $this->data_array['new_frs_address'];
 	}
 
+	function setFRSEmailAddress($email) {
+		$invalid_mails = validate_emails($email);
+		if (count($invalid_mails) > 0) {
+			$this->setError(sprintf(ngettext('New FRS Address Appeared Invalid: %s', 'New FRS Addresses Appeared Invalid: %s', count($invalid_mails)),implode(',',$invalid_mails)));
+			return false;
+		}
+		db_begin();
+		$res = db_query_params('UPDATE groups SET new_frs_address = $1 WHERE group_id = $2',
+					array($email, $this->getID()));
+
+		if (!$res) {
+			$this->setError(_('Error')._(': ')._('Cannot Update Group new_frs_address')._(': ').db_error());
+			db_rollback();
+			return false;
+		} else {
+			$this->data_array['new_frs_address'] = $email;
+			db_commit();
+			return true;
+		}
+	}
+
 	/**
 	 * frsEmailAll - whether or not this group has opted to use receive notices on all frs updates.
 	 *
@@ -1644,6 +1649,22 @@ class Group extends FFError {
 	 */
 	function frsEmailAll() {
 		return $this->data_array['send_all_frs'];
+	}
+
+	function setFRSEmailAll($status) {
+		db_begin();
+		$res = db_query_params('UPDATE groups SET send_all_frs = $1 WHERE group_id = $2',
+					array($status, $this->getID()));
+
+		if (!$res) {
+			$this->setError(_('Error')._(': ')._('Cannot Update Group send_frs_docs')._(': ').db_error());
+			db_rollback();
+			return false;
+		} else {
+			$this->data_array['send_frs_docs'] = $status;
+			db_commit();
+			return true;
+		}
 	}
 
 	/**
@@ -1681,11 +1702,11 @@ class Group extends FFError {
 				return true;
 			} else {
 				db_rollback();
-				$this->setError(_("Could not insert homepage to database"));
+				$this->setError(_('Could not insert homepage to database'));
 				return false;
 			}
 		} else {
-			$this->setError(_("Homepage cannot be empty"));
+			$this->setError(_('Homepage cannot be empty'));
 			return false;
 		}
 	}
@@ -1712,7 +1733,7 @@ class Group extends FFError {
 		$sql = 'DELETE FROM project_tags WHERE group_id=$1';
 		$res = db_query_params($sql, array($this->getID()));
 		if (!$res) {
-			$this->setError('Deleting old tags: '.db_error());
+			$this->setError(_('Deleting old tags')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -1727,12 +1748,13 @@ class Group extends FFError {
 				return false;
 			}
 			$tag = trim($tag);
-			if ($tag == '' || array_search($tag, $inserted) !== false) continue;
+			if ($tag == '' || array_search($tag, $inserted) !== false) {
+				continue;
+			}
 			$sql = 'INSERT INTO project_tags (group_id,name) VALUES ($1, $2)';
 			$res = db_query_params($sql, array($this->getID(), $tag));
 			if (!$res) {
-				$this->setError(_('Setting tags:') . ' ' .
-					db_error());
+				$this->setError(_('Setting tags')._(': ').db_error());
 				db_rollback();
 				return false;
 			}
@@ -1756,10 +1778,10 @@ class Group extends FFError {
 			$this->setMissingParamsError(_('Please tick all checkboxes.'));
 			return false;
 		}
-		if ($this->getID() == forge_get_config('news_group') ||
-			$this->getID() == 1 ||
-			$this->getID() == forge_get_config('stats_group') ||
-			$this->getID() == forge_get_config('peer_rating_group')) {
+		if ($this->getID() == GROUP_IS_NEWS ||
+			$this->getID() == GROUP_IS_MASTER ||
+			$this->getID() == GROUP_IS_STATS ||
+			$this->getID() == GROUP_IS_PEER_RATINGS) {
 			$this->setError(_('Cannot Delete System Group'));
 			return false;
 		}
@@ -1767,10 +1789,7 @@ class Group extends FFError {
 		if (!$perm || !is_object($perm)) {
 			$this->setPermissionDeniedError();
 			return false;
-		} elseif ($perm->isError()) {
-			$this->setPermissionDeniedError();
-			return false;
-		} elseif (!$perm->isSuperUser()) {
+		} elseif ($perm->isError() || !$perm->isSuperUser()) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -1782,7 +1801,7 @@ class Group extends FFError {
 		$members = $this->getMembers(false);
 		foreach ($members as $i) {
 			if(!$this->removeUser($i->getID())) {
-				$this->setError(_('Could not properly remove member:').' '.$i->getID());
+				$this->setError(_('Could not properly remove member')._(': ').$i->getID());
 				return false;
 			}
 		}
@@ -1805,7 +1824,7 @@ class Group extends FFError {
 				continue;
 			}
 			if (!$i->delete(1,1)) {
-				$this->setError(_('Could not properly delete the tracker:').' '.$i->getErrorMessage());
+				$this->setError(_('Could not properly delete the tracker')._(': ').$i->getErrorMessage());
 				return false;
 			}
 		}
@@ -1819,7 +1838,7 @@ class Group extends FFError {
 				continue;
 			}
 			if (!$i->delete()) {
-				$this->setError(_('Could not properly delete the roadmap:') . ' ' . $i->getErrorMessage());
+				$this->setError(_('Could not properly delete the roadmap')._(': ').$i->getErrorMessage());
 				return false;
 			}
 		}
@@ -1834,7 +1853,7 @@ class Group extends FFError {
 				continue;
 			}
 			if(!$i->delete(1,1)) {
-				$this->setError(_('Could not properly delete the forum:').' '.$i->getErrorMessage());
+				$this->setError(_('Could not properly delete the forum')._(': ').$i->getErrorMessage());
 				return false;
 			}
 		}
@@ -1849,7 +1868,7 @@ class Group extends FFError {
 				continue;
 			}
 			if (!$i->delete(1,1)) {
-				$this->setError(_('Could not properly delete the ProjectGroup:').' '.$i->getErrorMessage());
+				$this->setError(_('Could not properly delete the ProjectGroup')._(': ').$i->getErrorMessage());
 				return false;
 			}
 		}
@@ -1860,7 +1879,7 @@ class Group extends FFError {
 		$res = db_query_params('SELECT * FROM frs_package WHERE group_id=$1',
 					array($this->getID()));
 		if (!$res) {
-			$this->setError(_('Error FRS Packages: ').db_error());
+			$this->setError(_('Error FRS Packages')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -1868,18 +1887,18 @@ class Group extends FFError {
 		while ($arr = db_fetch_array($res)) {
 			$frsp=new FRSPackage($this, $arr['package_id'], $arr);
 			if (!$frsp->delete(1, 1)) {
-				$this->setError(_('Could not properly delete the FRSPackage:').' '.$frsp->getErrorMessage());
+				$this->setError(_('Could not properly delete the FRSPackage')._(': ').$frsp->getErrorMessage());
 				return false;
 			}
 		}
 		//
 		//	Delete news
 		//
-		$news_group=group_get_object(forge_get_config('news_group'));
+		$news_group = group_get_object(GROUP_IS_NEWS);
 		$res = db_query_params('SELECT forum_id FROM news_bytes WHERE group_id=$1',
 					array($this->getID()));
 		if (!$res) {
-			$this->setError(_('Error Deleting News: ').db_error());
+			$this->setError(_('Error Deleting News')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -1887,7 +1906,7 @@ class Group extends FFError {
 		for ($i=0; $i<db_numrows($res); $i++) {
 			$Forum = new Forum($news_group,db_result($res,$i,'forum_id'));
 			if (!$Forum->delete(1,1)) {
-				$this->setError(_("Could Not Delete News Forum: %d"),$Forum->getID());
+				$this->setError(_('Could not delete News Forum')._(': ').$Forum->getID());
 				return false;
 			}
 		}
@@ -1896,7 +1915,7 @@ class Group extends FFError {
 		for ($i = 0; $i < db_numrows($res); $i++) {
 			$Forum = new Forum($this, db_result($res, $i, 'forum_id'));
 			if (!$Forum->delete(1, 1)) {
-				$this->setError(_("Could Not Delete News Forum: %d"), $Forum->getID());
+				$this->setError(_('Could not delete News Forum')._(': ').$Forum->getID());
 				return false;
 			}
 		}
@@ -1904,7 +1923,7 @@ class Group extends FFError {
 		$res = db_query_params('DELETE FROM news_bytes WHERE group_id=$1',
 					array($this->getID()));
 		if (!$res) {
-			$this->setError(_('Error Deleting News: ').db_error());
+			$this->setError(_('Error Deleting News')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -1915,7 +1934,7 @@ class Group extends FFError {
 		$res = db_query_params('DELETE FROM doc_data WHERE group_id=$1',
 					array($this->getID()));
 		if (!$res) {
-			$this->setError(_('Error Deleting Documents: ').db_error());
+			$this->setError(_('Error Deleting Documents')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -1923,7 +1942,7 @@ class Group extends FFError {
 		$res = db_query_params('DELETE FROM doc_groups WHERE group_id=$1',
 					array($this->getID()));
 		if (!$res) {
-			$this->setError(_('Error Deleting Documents: ').db_error());
+			$this->setError(_('Error Deleting Document Groups')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -1933,7 +1952,7 @@ class Group extends FFError {
 		//
 		$res=db_query_params('DELETE FROM project_tags WHERE group_id=$1', array($this->getID()));
 		if (!$res) {
-			$this->setError(_('Error Deleting Tags: ').db_error());
+			$this->setError(_('Error Deleting Tags')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -1944,7 +1963,7 @@ class Group extends FFError {
 		$res = db_query_params('DELETE FROM group_history WHERE group_id=$1',
 					array($this->getID()));
 		if (!$res) {
-			$this->setError(_('Error Deleting Project History: ').db_error());
+			$this->setError(_('Error Deleting Project History')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -1955,7 +1974,7 @@ class Group extends FFError {
 		$res = db_query_params('DELETE FROM group_plugin WHERE group_id=$1',
 					array($this->getID()));
 		if (!$res) {
-			$this->setError(_('Error Deleting Project Plugins: ').db_error());
+			$this->setError(_('Error Deleting Project Plugins')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -1966,7 +1985,7 @@ class Group extends FFError {
 		$res = db_query_params ('DELETE FROM stats_cvs_group WHERE group_id=$1',
 					array($this->getID()));
 		if (!$res) {
-			$this->setError(_('Error Deleting SCM Statistics: ').db_error());
+			$this->setError(_('Error Deleting SCM Statistics')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -2024,7 +2043,7 @@ class Group extends FFError {
 		$res = db_query_params('DELETE FROM trove_group_link WHERE group_id=$1',
 					array($this->getID()));
 		if (!$res) {
-			$this->setError(_('Error Deleting Trove: ').db_error());
+			$this->setError(_('Error Deleting Trove')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -2032,7 +2051,7 @@ class Group extends FFError {
 		$res = db_query_params('DELETE FROM trove_agg WHERE group_id=$1',
 					array($this->getID()));
 		if (!$res) {
-			$this->setError(_('Error Deleting Trove: ').db_error());
+			$this->setError(_('Error Deleting Trove')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -2043,7 +2062,7 @@ class Group extends FFError {
 		$res = db_query_params('DELETE FROM project_sums_agg WHERE group_id=$1',
 					array($this->getID()));
 		if (!$res) {
-			$this->setError(_('Error Deleting Counters: ').db_error());
+			$this->setError(_('Error Deleting Counters')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -2053,7 +2072,7 @@ class Group extends FFError {
 						time(),
 						0));
 		if (!$res) {
-			$this->setError(_('Error Deleting Project:').' '.db_error());
+			$this->setError(_('Error Deleting Project')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -2072,7 +2091,7 @@ class Group extends FFError {
 		$res = db_query_params('DELETE FROM groups WHERE group_id=$1',
 					array($this->getID()));
 		if (!$res) {
-			$this->setError(_('Error Deleting Project:').' '.db_error());
+			$this->setError(_('Error Deleting Project')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -2207,14 +2226,17 @@ class Group extends FFError {
 		//
 		$add_u = user_get_object($user_id);
 		$found = false;
-		foreach ($this->membersArr as $u) {
-			if ($u->getID() == $add_u->getID()) {
-				$found = true;
-				break;
+		if (is_array($this->membersArr)) {
+			foreach ($this->membersArr as $u) {
+				if ($u->getID() == $add_u->getID()) {
+					$found = true;
+					break;
+				}
+			}
+			if (!$found) {
+				$this->membersArr[] = $add_u;
 			}
 		}
-		if (!$found)
-			$this->membersArr[] = $add_u;
 
 		return true;
 	}
@@ -2247,7 +2269,7 @@ class Group extends FFError {
 			}
 		}
 		if (count($found_roles) == 0) {
-			$this->setError(sprintf(_('Error: User not removed: %s')));
+			$this->setError(_('Error')._(': ')._('User not removed')._(': ').$user_id);
 			db_rollback();
 			return false;
 		}
@@ -2271,7 +2293,7 @@ class Group extends FFError {
 						array($this->getID(),
 							$user_id));
 		if (!$res) {
-			$this->setError(_('Error: artifact:').' '.db_error());
+			$this->setError(_('Error')._(': ')._('artifact')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -2292,7 +2314,7 @@ class Group extends FFError {
 						array($this->getID(),
 							$user_id));
 		if (!$res) {
-			$this->setError(sprintf(_('Error: project_assigned_to %d: %s'), 1, db_error()));
+			$this->setError(_('Error')._(': ').sprintf(_('project_assigned_to %d: %s'), 1, db_error()));
 			db_rollback();
 			return false;
 		}
@@ -2305,7 +2327,7 @@ class Group extends FFError {
 						array($this->getID(),
 							$user_id));
 		if (!$res) {
-			$this->setError(sprintf(_('Error: project_assigned_to %d: %s'), 2, db_error()));
+			$this->setError(_('Error')._(': ').sprintf(_('project_assigned_to %d: %s'), 2, db_error()));
 			db_rollback();
 			return false;
 		}
@@ -2323,7 +2345,7 @@ class Group extends FFError {
 		$hook_params['group_id'] = $this->getID();
 		$hook_params['user'] = user_get_object($user_id);
 		$hook_params['user_id'] = $user_id;
-		plugin_hook ("group_removeuser", $hook_params);
+		plugin_hook("group_removeuser", $hook_params);
 
 		//audit trail
 		$this->addHistory(_('Removed User'), $user_id);
@@ -2363,7 +2385,7 @@ class Group extends FFError {
 			$this->setError(_('Could Not Get Role'));
 			return false;
 		} elseif ($newrole->isError()) {
-			$this->setError(sprintf(_('Role: %s'),$role->getErrorMessage()));
+			$this->setError(_('Role')._(': ').$role->getErrorMessage());
 			return false;
 		} elseif ($newrole->getHomeProject() == NULL
 			  || $newrole->getHomeProject()->getID() != $this->getID()) {
@@ -2380,14 +2402,14 @@ class Group extends FFError {
 			}
 		}
 		if ($found_role == NULL) {
-			$this->setError(sprintf(_('Error: User not removed: %s')));
+			$this->setError(_('Error')._(': ')._('User not removed')._(': ').$user_id);
 			db_rollback();
 			return false;
 		}
 		$found_role->removeUser ($user);
 		$newrole->addUser ($user);
 
-		$this->addHistory(_('Updated User'),$user_id);
+		$this->addHistory(_('Updated User'), $user_id);
 		return true;
 	}
 
@@ -2404,8 +2426,8 @@ class Group extends FFError {
                     $old_value = '';
             }
 
-		return db_query_params ('INSERT INTO group_history(group_id,field_name,old_value,mod_by,adddate)
-			VALUES ($1,$2,$3,$4,$5)',
+		return db_query_params('INSERT INTO group_history(group_id,field_name,old_value,mod_by,adddate)
+						VALUES ($1,$2,$3,$4,$5)',
 					array($this->getID(),
 						$field_name,
 						$old_value,
@@ -2428,7 +2450,7 @@ class Group extends FFError {
 
 		global $SYS;
 
-		$members = $this->getUsers (true);
+		$members = $this->getUsers(true);
 
 		foreach ($members as $member) {
 			$user_id = $member->getID();
@@ -2456,11 +2478,11 @@ class Group extends FFError {
 	/**
 	 * getMembers - returns array of User objects for this project
 	 *
-	 * @param	boolean	$onlyactive	Only users with state active, or all users of group
+	 * @param	bool	$onlyactive	Only users with state active, or all users of group
 	 * @return array of User objects for this group.
 	 */
 	function getMembers($onlyactive = true) {
-		return $this->getUsers (true, $onlyactive);
+		return $this->getUsers(true, $onlyactive);
 	}
 
 	/**
@@ -2470,9 +2492,9 @@ class Group extends FFError {
 	 * @return	string	String after replacements
 	 */
 	function replaceTemplateStrings($string) {
-		$string = str_replace ('UNIXNAME', $this->getUnixName(), $string);
-		$string = str_replace ('PUBLICNAME', $this->getPublicName(), $string);
-		$string = str_replace ('DESCRIPTION', $this->getDescription(), $string);
+		$string = str_replace('UNIXNAME', $this->getUnixName(), $string);
+		$string = str_replace('PUBLICNAME', $this->getPublicName(), $string);
+		$string = str_replace('DESCRIPTION', $this->getDescription(), $string);
 		return $string;
 	}
 
@@ -2488,7 +2510,7 @@ class Group extends FFError {
 		require_once $gfcommon.'widget/WidgetLayoutManager.class.php';
 
 		if ($this->getStatus()=='A') {
-			$this->setError(_("Group already active"));
+			$this->setError(_('Group already active'));
 			return false;
 		}
 
@@ -2569,7 +2591,6 @@ class Group extends FFError {
 						$t = new ArtifactType ($this);
 						$t->create ($this->replaceTemplateStrings($o->getName()),$this->replaceTemplateStrings($o->getDescription()),$o->emailAll(),$o->getEmailAddress(),$o->getDuePeriod()/86400,0,$o->getSubmitInstructions(),$o->getBrowseInstructions());
 						$id_mappings['tracker'][$o->getID()] = $t->getID();
-						$t->cloneFieldsFrom ($o->getID());
 					}
 				}
 			}
@@ -2605,19 +2626,19 @@ class Group extends FFError {
 					// First pass: create all docgroups
 					$id_mappings['docman_docgroup'][0] = 0;
 					foreach ($olddgf->getDocumentGroups(array(1, 5)) as $o) {
-						$ndgf = new DocumentGroup($this);
+						$ndg = new DocumentGroup($this);
 						// .trash is a reserved directory
-						if ($o->getName() != '.trash' && $o->getParentID() == 0) {
-							$ndgf->create($this->replaceTemplateStrings($o->getName()));
-							$id_mappings['docman_docgroup'][$o->getID()] = $ndgf->getID();
+						if ($o->getName() != '.trash') {
+							$ndg->create($this->replaceTemplateStrings($o->getName()), 0, 1, null, true);
+							$id_mappings['docman_docgroup'][$o->getID()] = $ndg->getID();
 						}
 					}
 					// Second pass: restore hierarchy links & stateid
 					foreach ($olddgf->getDocumentGroups(array(1, 5)) as $o) {
 						$ndgf = new DocumentGroup($this);
-						if ($o->getName() != '.trash' && $o->getParentID() == 0) {
+						if ($o->getName() != '.trash') {
 							$ndgf->fetchData($id_mappings['docman_docgroup'][$o->getID()]);
-							$ndgf->update($ndgf->getName(), $id_mappings['docman_docgroup'][$o->getParentID()], $id_mappings['docman_docgroup'][$o->getState()]);
+							$ndgf->update($ndgf->getName(), $id_mappings['docman_docgroup'][$o->getParentID()], 0, $o->getState());
 						}
 					}
 				}
@@ -2629,8 +2650,13 @@ class Group extends FFError {
 					foreach (get_frs_packages($template) as $o) {
 						$newp = new FRSPackage($this);
 						$nname = $this->replaceTemplateStrings($o->getName());
-						$newp->create ($nname, $o->isPublic());
+						$newp->create($nname, $o->isPublic());
 						$id_mappings['frs'][$o->getID()] = $newp->getID();
+						foreach(get_frs_releases($o) as $or) {
+							$newr = new FRSRelease($newp);
+							$newr->create($this->replaceTemplateStrings($or->getName()), $this->replaceTemplateStrings($or->getNotes()), $this->replaceTemplateStrings($or->getChanges()), $or->getPreformatted());
+							$id_mappings['frs_release'][$or->getID()] = $newr->getID();
+						}
 					}
 				}
 			}
@@ -2671,7 +2697,7 @@ class Group extends FFError {
 			}
 
 			foreach ($template->getRoles() as $oldrole) {
-				$newrole = RBACEngine::getInstance()->getRoleById ($id_mappings['role'][$oldrole->getID()]);
+				$newrole = RBACEngine::getInstance()->getRoleById($id_mappings['role'][$oldrole->getID()]);
 				if ($oldrole->getHomeProject() != NULL
 					&& $oldrole->getHomeProject()->getID() == $template->getID()) {
 					$newrole->setPublic ($oldrole->isPublic());
@@ -2699,7 +2725,22 @@ class Group extends FFError {
 			}
 
 			$lm = new WidgetLayoutManager();
-			$lm->createDefaultLayoutForProject ($this->getID(), $template->getID());
+			$lm->createDefaultLayoutForProject($this->getID(), $template->getID());
+
+			// second computation to clone fields and workflow
+			if (forge_get_config('use_tracker')) {
+				if ($template->usesTracker()) {
+					$oldatf = new ArtifactTypeFactory($template);
+					foreach ($oldatf->getArtifactTypes() as $o) {
+						$t = artifactType_get_object($id_mappings['tracker'][$o->getID()]);
+						$id_mappings['tracker'][$o->getID()] = $t->getID();
+						$newEFIds = $t->cloneFieldsFrom($o->getID(), $id_mappings);
+						if (forge_get_config('use_tracker_widget_display')) {
+							$lm->createDefaultLayoutForTracker($t->getID(), $o->getID(), $newEFIds);
+						}
+					}
+				}
+			}
 
 			$params = array();
 			$params['template'] = $template;
@@ -2708,7 +2749,8 @@ class Group extends FFError {
 			plugin_hook_by_reference ('clone_project_from_template', $params);
 		} else {
 			// Disable everything - except use_scm (manually set in the registration page)
-			db_query_params ('UPDATE groups SET use_mail=0, use_survey=0, use_forum=0, use_pm=0, use_pm_depend_box=0, use_news=0, use_docman=0, use_ftp=0, use_tracker=0, use_frs=0, use_stats=0 WHERE group_id=$1',
+			db_query_params ('UPDATE groups SET use_mail = 0, use_survey = 0, use_forum = 0, use_pm = 0, use_pm_depend_box = 0, use_news = 0,
+								use_docman = 0, use_ftp = 0, use_tracker = 0, use_frs = 0, use_stats = 0 WHERE group_id = $1',
 				array($this->getID()));
 		}
 
@@ -2750,7 +2792,7 @@ class Group extends FFError {
 		$admins = RBACEngine::getInstance()->getUsersByAllowedAction ('project_admin', $this->getID());
 
 		if (count($admins) < 1) {
-			$this->setError(_("Group does not have any administrators."));
+			$this->setError(_('Group does not have any administrators.'));
 			return false;
 		}
 
@@ -2758,41 +2800,37 @@ class Group extends FFError {
 		foreach ($admins as $admin) {
 			setup_gettext_for_user ($admin);
 
-			$message = sprintf(_('Your project registration for %4$s has been approved.
+			$message = sprintf(_('Your project registration for %s has been approved.'), forge_get_config ('forge_name')) . "\n\n"
 
-Project Full Name:  %1$s
-Project Unix Name:  %2$s
+					. _('Project Full Name')._(': '). htmlspecialchars_decode($this->getPublicName()) . "\n"
+					. _('Project Unix Name')._(': '). $this->getUnixName() . "\n\n"
 
-Your DNS will take up to a day to become active on our site.
-Your web site is accessible through your shell account. Please read
-site documentation (see link below) about intended usage, available
-services, and directory layout of the account.
+					. _('Your DNS will take up to a day to become active on our site. '
+						.'Your web site is accessible through your shell account. Please read '
+						.'site documentation (see link below) about intended usage, available '
+						.'services, and directory layout of the account.') . "\n\n"
 
-If you visit your
-own project page in %4$s while logged in, you will find
-additional menu functions to your left labeled \'Project Admin\'.
+					. sprintf(_('If you visit your own project page in %s while logged in, '
+								. 'you will find additional menu functions to your left labeled “Project Admin”.'),
+							  forge_get_config ('forge_name')) . "\n\n"
 
-We highly suggest that you now visit %4$s and create a public
-description for your project. This can be done by visiting your project
-page while logged in, and selecting \'Project Admin\' from the menus
-on the left (or by visiting %3$s
-after login).
+					. sprintf(_('We highly suggest that you now visit %1$s and create a public '
+								. 'description for your project. This can be done by visiting your project '
+								. 'page while logged in, and selecting “Project Admin” from the menus '
+								. 'on the left (or by visiting %2$s after login).'),
+							  forge_get_config ('forge_name'), util_make_url('/project/admin/?group_id='.$this->getID())) . "\n\n"
 
-Your project will also not appear in the Trove Software Map (primary
-list of projects hosted on %4$s which offers great flexibility in
-browsing and search) until you categorize it in the project administration
-screens. So that people can find your project, you should do this now.
-Visit your project while logged in, and select \'Project Admin\' from the
-menus on the left.
+					. sprintf(_('Your project will also not appear in the Trove Software Map (primary '
+								. 'list of projects hosted on %s which offers great flexibility in '
+								. 'browsing and search) until you categorize it in the project administration '
+								. 'screens. So that people can find your project, you should do this now. '
+								. 'Visit your project while logged in, and select “Project Admin” from the '
+								. 'menus on the left.'), forge_get_config ('forge_name')) . "\n\n"
 
-Enjoy the system, and please tell others about %4$s. Let us know
-if there is anything we can do to help you.
+					. sprintf(_('Enjoy the system, and please tell others about %s. Let us know '
+								. 'if there is anything we can do to help you.'), forge_get_config ('forge_name')) . "\n\n"
 
--- the %4$s crew'),
-							htmlspecialchars_decode($this->getPublicName()),
-							$this->getUnixName(),
-							util_make_url ('/project/admin/?group_id='.$this->getID()),
-							forge_get_config ('forge_name'));
+					. sprintf(_('-- the %s staff'), forge_get_config ('forge_name')) . "\n";
 
 			util_send_message($admin->getEmail(), sprintf(_('%s Project Approved'), forge_get_config ('forge_name')), $message);
 
@@ -2813,14 +2851,14 @@ if there is anything we can do to help you.
 	 * @return	bool	completion status.
 	 * @access	public
 	 */
-	function sendRejectionEmail($response_id, $message="zxcv") {
+	function sendRejectionEmail($response_id, $message = 'zxcv') {
 		$submitters = array();
 		foreach (get_group_join_requests ($this) as $gjr) {
 			$submitters[] = user_get_object($gjr->getUserID());
 		}
 
 		if (count ($submitters) < 1) {
-			$this->setError(_("Group does not have any administrators."));
+			$this->setError(_('Group does not have any administrators.'));
 			return false;
 		}
 
@@ -2842,7 +2880,7 @@ if there is anything we can do to help you.
 					"response_text");
 			}
 
-			util_send_message($admin->getEmail(), sprintf(_('%s Project Denied'), forge_get_config ('forge_name')), $response);
+			util_send_message($admin->getEmail(), sprintf(_('%s Project Denied'), forge_get_config('forge_name')), $response);
 			setup_gettext_from_context();
 		}
 
@@ -2866,14 +2904,14 @@ if there is anything we can do to help you.
 			$submitters[] = user_get_object($gjr->getUserID());
 		}
 		if (count ($submitters) < 1) {
-			$this->setError(_("Could not find user who has submitted the project."));
+			$this->setError(_('Could not find user who has submitted the project.'));
 			return false;
 		}
 
-		$admins = RBACEngine::getInstance()->getUsersByAllowedAction ('approve_projects', -1);
+		$admins = RBACEngine::getInstance()->getUsersByAllowedAction('approve_projects', -1);
 
 		if (count($admins) < 1) {
-			$this->setError(_("There is no administrator to send the mail to."));
+			$this->setError(_('There is no administrator to send the mail to.'));
 			return false;
 		}
 
@@ -2881,7 +2919,7 @@ if there is anything we can do to help you.
 			$admin_email = $admin->getEmail();
 			setup_gettext_for_user ($admin);
 
-			$message = sprintf(_('New %s Project Submitted'), forge_get_config ('forge_name')) . "\n\n"
+			$message = sprintf(_('New %s Project Submitted'), forge_get_config('forge_name')) . "\n\n"
 					. _('Project Full Name')._(': ').htmlspecialchars_decode($this->getPublicName()) . "\n"
 					. _('Submitted Description')._(': ').htmlspecialchars_decode($this->getRegistrationPurpose()) . "\n";
 
@@ -3011,7 +3049,7 @@ if there is anything we can do to help you.
 						$this->getID()));
 
 		if (!$res) {
-			$this->setError(sprintf(_('Error: Cannot Update Group Unix Status: %s'),db_error()));
+			$this->setError(_('Error')._(': ')._('Cannot Update Group Unix Status')._(': ').db_error());
 			db_rollback();
 			return false;
 		} else {
@@ -3031,7 +3069,7 @@ if there is anything we can do to help you.
 				}
 			}
 
-			$this->data_array['unix_status']=$status;
+			$this->data_array['unix_status'] = $status;
 			db_commit();
 			return true;
 		}
@@ -3041,7 +3079,7 @@ if there is anything we can do to help you.
 	 * getUsers - Get the users of a group
 	 *
 	 * @param	bool	$onlylocal
-	 * @param	boolean	$onlyactive	Only users with state active, or all users of group
+	 * @param	bool	$onlyactive	Only users with state active, or all users of group
 	 * @return	array	user's objects.
 	 */
 	function getUsers($onlylocal = true, $onlyactive = true) {
@@ -3071,16 +3109,15 @@ if there is anything we can do to help you.
 
 	function setDocmanCreateOnlineStatus($status) {
 		db_begin();
-		/* if we activate search engine, we probably want to reindex */
-		$res = db_query_params('UPDATE groups SET use_docman_create_online=$1 WHERE group_id=$2',
+		$res = db_query_params('UPDATE groups SET use_docman_create_online = $1 WHERE group_id = $2',
 					array($status, $this->getID()));
 
 		if (!$res) {
-			$this->setError(sprintf(_('Error: Cannot Update Group DocmanCreateOnline Status: %s'),db_error()));
+			$this->setError(_('Error')._(': ')._('Cannot Update Group DocmanCreateOnline Status')._(': ').db_error());
 			db_rollback();
 			return false;
 		} else {
-			$this->data_array['use_docman_create_online']=$status;
+			$this->data_array['use_docman_create_online'] = $status;
 			db_commit();
 			return true;
 		}
@@ -3088,17 +3125,16 @@ if there is anything we can do to help you.
 
 	function setDocmanWebdav($status) {
 		db_begin();
-		/* if we activate search engine, we probably want to reindex */
-		$res = db_query_params('UPDATE groups SET use_webdav=$1 WHERE group_id=$2',
+		$res = db_query_params('UPDATE groups SET use_webdav = $1 WHERE group_id = $2',
 					array($status,
 						   $this->getID()));
 
 		if (!$res) {
-			$this->setError(sprintf(_('Error: Cannot Update Group UseWebdab Status: %s'),db_error()));
+			$this->setError(_('Error')._(': ')._('Cannot Update Group UseWebdav Status')._(': ').db_error());
 			db_rollback();
 			return false;
 		} else {
-			$this->data_array['use_webdav']=$status;
+			$this->data_array['use_webdav'] = $status;
 			db_commit();
 			return true;
 		}
@@ -3107,16 +3143,15 @@ if there is anything we can do to help you.
 	function setDocmanSearchStatus($status) {
 		db_begin();
 		/* if we activate search engine, we probably want to reindex */
-		$res = db_query_params('UPDATE groups SET use_docman_search=$1, force_docman_reindex=$1 WHERE group_id=$2',
-					array($status,
-						$this->getID()));
+		$res = db_query_params('UPDATE groups SET use_docman_search = $1, force_docman_reindex = $1 WHERE group_id = $2',
+					array($status, $this->getID()));
 
 		if (!$res) {
-			$this->setError(sprintf(_('Error: Cannot Update Group UseDocmanSearch Status: %s'),db_error()));
+			$this->setError(_('Error')._(': ')._('Cannot Update Group UseDocmanSearch Status')._(': ').db_error());
 			db_rollback();
 			return false;
 		} else {
-			$this->data_array['use_docman_search']=$status;
+			$this->data_array['use_docman_search'] = $status;
 			db_commit();
 			return true;
 		}
@@ -3124,20 +3159,51 @@ if there is anything we can do to help you.
 
 	function setDocmanForceReindexSearch($status) {
 		db_begin();
-		/* if we activate search engine, we probably want to reindex */
-		$res = db_query_params('UPDATE groups SET force_docman_reindex=$1 WHERE group_id=$2',
-					array($status,
-						$this->getID()));
+		$res = db_query_params('UPDATE groups SET force_docman_reindex = $1 WHERE group_id = $2',
+					array($status, $this->getID()));
 
 		if (!$res) {
-			$this->setError(sprintf(_('Error: Cannot Update Group force_docman_reindex %s'),db_error()));
+			$this->setError(_('Error')._(': ')._('Cannot Update Group force_docman_reindex')._(': ').db_error());
 			db_rollback();
 			return false;
 		} else {
-			$this->data_array['force_docman_reindex']=$status;
+			$this->data_array['force_docman_reindex'] = $status;
 			db_commit();
 			return true;
 		}
+	}
+
+	/**
+	 *
+	 * @param	int	$unit_set_id	the effort unit set id
+	 * @return	bool
+	 */
+	function setEffortUnitSet($unit_set_id) {
+		db_begin();
+		$res = db_query_params ('UPDATE groups SET unit_set_id=$1 WHERE group_id=$2',
+				array($unit_set_id, $this->getID()));
+		if ($res) {
+			$this->data_array['unit_set_id'] = $unit_set_id;
+			db_commit();
+			return true;
+		} else {
+			db_rollback();
+			return false;
+		}
+	}
+
+	/**
+	 * getEffortUnitSet - Get the effort unit set id.
+	 *
+	 * @return	int	The id of the effort unit set.
+	 */
+	function getEffortUnitSet() {
+		return $this->data_array['unit_set_id'];
+	}
+
+	function getWidgetLayoutConfig() {
+		$lm = new WidgetLayoutManager();
+		return $lm->getLayout($this->getID(), WidgetLayoutManager::OWNER_TYPE_GROUP);
 	}
 }
 
@@ -3236,18 +3302,15 @@ class ProjectComparator {
 			}
 			/* If several projects share a same public name */
 			return strcoll ($a->getUnixName(), $b->getUnixName());
-			break;
 		case 'unixname':
 			return strcmp ($a->getUnixName(), $b->getUnixName());
-			break;
 		case 'id':
 			$aid = $a->getID();
 			$bid = $b->getID();
-			if ($a == $b) {
+			if ($aid == $bid) {
 				return 0;
 			}
-			return ($a < $b) ? -1 : 1;
-			break;
+			return ($aid < $bid) ? -1 : 1;
 		}
 	}
 }

@@ -30,16 +30,17 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'pm/ProjectTaskSqlQueries.php';
 
 $tid = getIntFromRequest('tid');
-if (!$tid)
-	$tid = util_path_info_last_numeric_component();
 if (!$tid) {
-    exit_missing_param('',array(_('TID')),'pm');
+	$tid = util_path_info_last_numeric_component();
+}
+if (!$tid) {
+	exit_missing_param('',array(_('TID')),'pm');
 }
 
 $tinfo = getGroupProjectIdGroupId($tid);
 
 if (!$tinfo) {
-    exit_error(_('No Task with ID')._(': ').$tid,'pm');
+	exit_error(_('No Task with ID')._(': ').$tid,'pm');
 }
 
 session_redirect('/pm/task.php?func=detailtask&project_task_id='.$tinfo['project_task_id'].'&group_id='.$tinfo['group_id'].'&group_project_id='.$tinfo['group_project_id']);

@@ -63,9 +63,8 @@ require_once 'Widget.class.php';
 			$items = array_slice($rss->get_items(), 0, $max_items);
 			if (count($items)) {
 				$content .= $HTML->listTableTop();
-				$i = 0;
 				foreach($items as $key => $item){
-					$content .= '<tr '.$HTML->boxGetAltRowStyle($key).'><td width="99%">';
+					$content .= '<tr><td style="width:99%">';
 					if ($image = $item->get_link(0, 'image')) {
 						//hack to display twitter avatar
 						$content .= '<img src="'.  $hp->purify($image, CODENDI_PURIFIER_CONVERT_HTML)  .'" style="float:left; margin-right:1em;" />';

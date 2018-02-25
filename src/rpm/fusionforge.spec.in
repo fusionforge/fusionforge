@@ -74,13 +74,14 @@ install_listfiles scm
 install_listfiles mta-postfix
 install_listfiles mta-exim4
 install_listfiles lists
+install_listfiles ftp
 # Install plugins
 for i in $(sed -n 's/^%package plugin-//p' rpm/plugins); do \
     install_listfiles plugin-$i
 done
-# Manually handling the 3 python glue files for MoinMoin integration
+# Manually handling the python glue files for MoinMoin integration & RepositoryAPI documentation
 echo %{_datadir}/%{name}/plugins/moinmoin/lib/ >> plugin-moinmoin.rpmfiles
-
+echo %{_datadir}/%{name}/plugins/repositoryapi/Documentation/ >> plugin-repositoryapi.rpmfiles
 
 %package common
 Summary: Collaborative development tool - shared files
@@ -183,7 +184,7 @@ It should be installed on only one server in your infrastructure.
 
 %package web
 Summary: Collaborative development tool - web part (using Apache)
-Requires: %{name}-common = %{version}-%{release}, %{name}-db = %{version}-%{release}, httpd, mod_ssl, php, php-pgsql, php-simplepie, php-pear-HTTP, php-nusoap, php-mbstring, httpd-itk, mod_dav_svn, unoconv, poppler-utils, openssl
+Requires: %{name}-common = %{version}-%{release}, %{name}-db = %{version}-%{release}, httpd, mod_ssl, php, php-pgsql, php-simplepie, php-pear-HTTP, php-nusoap, php-mbstring, php-markdown, httpd-itk, mod_dav_svn, unoconv, poppler-utils, openssl
 %description web
 FusionForge provides many tools to aid collaboration in a
 development project, such as bug-tracking, task management,
@@ -272,6 +273,22 @@ This package controls the interaction between FusionForge and Mailman.
 %files lists -f lists.rpmfiles
 %post lists
 %{_datadir}/%{name}/post-install.d/lists/lists.sh configure
+
+
+%package ftp
+Summary: Collaborative development tool - ftp (using vsftpd)
+Requires: %{name}-common = %{version}-%{release}, vsftpd
+%description ftp
+FusionForge provides many tools to aid collaboration in a
+development project, such as bug-tracking, task management,
+mailing-lists, SCM repository, forums, support request helper,
+web/FTP hosting, release management, etc. All these services are
+integrated into one web site and managed through a web interface.
+
+This package controls the interaction between FusionForge and vsftpd.
+%files ftp -f ftp.rpmfiles
+%post ftp
+%{_datadir}/%{name}/post-install.d/ftp/ftp.sh configure
 
 
 @plugins@

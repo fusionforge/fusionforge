@@ -4,7 +4,7 @@
  *
  * Copyright 2003-2004 GForge, LLC
  * Copyright 2007-2009, Roland Mas
- *
+ * Copyright 2016, Franck Villaume - TrivialDev
  * This file is part of FusionForge.
  *
  * FusionForge is free software; you can redistribute it and/or modify
@@ -23,17 +23,17 @@
  */
 
 /**
-  *
-  * Parameters:
-  *   $gwords     = target words to search
-  *   $gexact     = 1 for search ing all words (AND), 0 - for any word (OR)
-  *   $otherfreeknowledge = 1 for search in Free/Libre Knowledge Gforge Initiatives
-  *   $order = "project_title" or "title"    -  criteria for ordering results: if empty or not allowed results are ordered by rank
-  *
-  */
+ * Parameters:
+ *   $gwords     = target words to search
+ *   $gexact     = 1 for search ing all words (AND), 0 - for any word (OR)
+ *   $otherfreeknowledge = 1 for search in Free/Libre Knowledge Gforge Initiatives
+ *   $order = "project_title" or "title"    -  criteria for ordering results: if empty or not allowed results are ordered by rank
+ */
 
 require_once '../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
+
+global $HTML;
 
 $otherfreeknowledge = getIntFromRequest('otherfreeknowledge') ;
 $gwords = getStringFromRequest('gwords');
@@ -72,21 +72,21 @@ $gwords = preg_replace("/\s+/", ' ', $gwords);
 
 // show search box which will return results on
 // this very page (default is to open new window)
-$gsplugin = plugin_get_object ('globalsearch') ;
-echo $gsplugin->search_box ();
+$gsplugin = plugin_get_object('globalsearch');
+echo $gsplugin->search_box();
 
 /*
         Force them to enter at least three characters
 */
 
 if ($gwords && (strlen($gwords) < 3)) {
-        echo "<h2>"._("Search must be at least three characters")."</h2>";
+        echo $HTML->warning(_('Search must be at least three characters'));
         $HTML->footer();
         exit;
 }
 
 if (!$gwords) {
-        echo "<br /><b>"._("Enter Your Search Words Above")."</b></p>";
+        echo $HTML->information(_('Enter Your Search Words Above'));
         $HTML->footer();
         exit;
 }
@@ -122,7 +122,6 @@ foreach ($array as $val) {
 		}
 	}
 	$i++ ;
-
 	$qpa = db_construct_qpa($qpa, 'lower(project_title) LIKE $1', array ("%$val%")) ;
 }
 
@@ -138,47 +137,38 @@ foreach ($array as $val) {
 		}
 	}
 	$i++ ;
-
 	$qpa = db_construct_qpa($qpa, 'lower(project_description) LIKE $1', array ("%$val%")) ;
 }
-$qpa = db_construct_qpa($qpa, ')) ORDER BY '.$order) ;
+$qpa = db_construct_qpa($qpa, ')) ORDER BY '.$order);
 
-$limit=25;
+$limit = 25;
 
 $result = db_query_qpa ($qpa, $limit+1, $offset);
 $rows = $rows_returned = db_numrows($result);
 
 if (!$result || $rows < 1) {
-        $no_rows = 1;
-        echo "<h2>".sprintf (_('No matches found for “%s”'), $gwords)."</h2>";
-        echo db_error();
-
+	$no_rows = 1;
+	echo "<h2>".sprintf (_('No matches found for “%s”'), $gwords)."</h2>";
+	echo db_error();
 } else {
+	if ( $rows_returned > $limit) {
+		$rows = $limit;
+	}
 
-        if ( $rows_returned > $limit) {
-                $rows = $limit;
-        }
+	echo "<h3>".sprintf (_('Search results for “%s”'), $gwords)."</h3><p>\n\n";
 
-        echo "<h3>".sprintf (_('Search results for “%s”'), $gwords)."</h3><p>\n\n";
-
-        $title_arr = array();
-        $title_arr[] = util_make_link ('/plugins/globalsearch/?gwords='.urlencode($gwords).'&order=project_title&gexact='.$gexact,
+	$title_arr = array();
+	$title_arr[] = util_make_link('/plugins/'.$gsplugin->name.'/?gwords='.urlencode($gwords).'&order=project_title&gexact='.$gexact,
 				       _("Project Name")) ;
-        $title_arr[] = util_make_link ('/plugins/globalsearch/?gwords='.urlencode($gwords).'&order=project_description&gexact='.$gexact,
+        $title_arr[] = util_make_link('/plugins/'.$gsplugin->name.'/?gwords='.urlencode($gwords).'&order=project_description&gexact='.$gexact,
 				       _('Description')) ;
-        $title_arr[] = util_make_link ('/plugins/globalsearch/?gwords='.urlencode($gwords).'&order=title&gexact='.$gexact,
+        $title_arr[] = util_make_link('/plugins/'.$gsplugin->name.'/?gwords='.urlencode($gwords).'&order=title&gexact='.$gexact,
 				       _('Forge')) ;
 
-        echo $GLOBALS['HTML']->listTableTop($title_arr);
+        echo $HTML->listTableTop($title_arr);
 
         for ( $i = 0; $i < $rows; $i++ ) {
-                if (db_result($result, $i, 'type') == 2) {
-                        $what = 'foundry';
-                } else {
-                        $what = 'projects';
-                }
-
-                print        "<tr ". $HTML->boxGetAltRowStyle($i)."><td><a href=\""
+                print        "<tr><td><a href=\""
                         . db_result($result, $i, 'project_link')."\" target=\"blank\">"
                         . html_image("ic/msg.png", 10, 12)."&nbsp;"
                         . highlight_target_words($array,db_result($result, $i, 'project_title'))."</a></td>
@@ -187,35 +177,35 @@ if (!$result || $rows < 1) {
                         . db_result($result,$i,'title')."</a></center></td></tr>\n";
         }
 
-        echo $GLOBALS['HTML']->listTableBottom();
+        echo $HTML->listTableBottom();
 
 }
 
    // This code puts the nice next/prev.
 if ( !$no_rows && ( ($rows_returned > $rows) || ($offset != 0) ) ) {
 
-        echo "<br />\n";
+	echo "<br />\n";
 
-        echo "<table style=\"background-color:".$HTML->COLOR_LTBACK1."\" width=\"100%\" cellpadding=\"5\" cellspacing=\"0\">\n";
-        echo "<tr>\n";
-        echo "\t<td align=\"left\">";
-        if ($offset != 0) {
-                echo "<span style=\"font-family:arial, helvetica;text-decoration: none\">";
-                echo "<a href=\"/plugins/globalsearch/?gwords=".urlencode($gwords)."&amp;order=".urlencode($order)."&amp;gexact=$gexact&amp;offset=".($offset-25);
-                echo "\"><strong>"._("Previous Results")."</strong></a></span>";
-        } else {
-                echo "&nbsp;";
-        }
-        echo "</td>\n\t<td align=\"right\">";
-        if ( $rows_returned > $rows) {
-                echo "<span style=\"font-family:arial, helvetica;text-decoration: none\">";
-                echo "<a href=\"/plugins/globalsearch/?gwords=".urlencode($gwords)."&amp;order=".urlencode($order)."&amp;gexact=$gexact&amp;offset=".($offset+25);
-                echo "\"><strong>"._("Next Results") . html_image("t.png", 15, 15, array("align"=>"middle")) . "</strong></a></span>";
-        } else {
-                echo "&nbsp;";
-        }
-        echo "</td>\n</tr>\n";
-        echo "</table>\n";
+	echo "<table width=\"100%\" cellpadding=\"5\" cellspacing=\"0\">\n";
+	echo "<tr>\n";
+	echo "\t<td align=\"left\">";
+	if ($offset != 0) {
+		echo "<span style=\"font-family:arial, helvetica;text-decoration: none\">";
+		echo util_make_link('/plugins/'.$gsplugin->name.'/?gwords='.urlencode($gwords).'&order='.urlencode($order).'&gexact='.$gexact.'&offset='.($offset-25),
+			'<strong>'._('Previous Results').'</strong>').'</span>';
+	} else {
+		echo "&nbsp;";
+	}
+	echo "</td>\n\t<td align=\"right\">";
+	if ( $rows_returned > $rows) {
+		echo "<span style=\"font-family:arial, helvetica;text-decoration: none\">";
+		echo util_make_link('/plugins/'.$gsplugin->name.'/?gwords='.urlencode($gwords).'&order='.urlencode($order).'&gexact='.$gexact.'&offset='.($offset+25),
+			'<strong>'._('Next Results').$HTML->getNextPic('', '', array("align"=>"middle")).'</strong>').'</span>';
+	} else {
+		echo "&nbsp;";
+	}
+	echo "</td>\n</tr>\n";
+	echo "</table>\n";
 }
 
 $HTML->footer();

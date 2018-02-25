@@ -5,6 +5,7 @@
  * Copyright 2003-2004 (c) GForge LLC
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  * Copyright 2015, nitendra tripathi
+ * Copyright 2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -50,7 +51,7 @@ if (getStringFromRequest('submit')) {
 		if (!$r->updateStatusID($status_id,$status_name)) {
 			$error_msg = $r->getErrorMessage();
 		} else {
-			$feedback = _('Update Successful');
+			$feedback = _('Successfully Updated');
 		}
 
 		$status_id=false;
@@ -71,14 +72,14 @@ $arr[]=_('Status Id');
 $arr[]=_('Status Name');
 
 if ($status_id) {
-	echo '[ <a href="customstatus.php">Add</a> ]';
+	echo '[ '.util_make_link('/reporting/customstatus.php', _('Add')). ' ]';
 }
 
 echo $HTML->listTableTop($arr);
 
 for ($i=0; $i<db_numrows($res); $i++) {
-	echo '<tr '.$HTML->boxGetAltRowStyle($i).'><td>'.db_result($res,$i,'status_id').'</td>
-		<td><a href="customstatus.php?status_id='.db_result($res,$i,'status_id').'">'.db_result($res,$i,'status_name').'</a></td></tr>';
+	echo '<tr><td>'.db_result($res,$i,'status_id').'</td>
+		<td>'.util_make_link('/reporting/customstatus.php?status_id='.db_result($res,$i,'status_id'), db_result($res,$i,'status_name')).'</td></tr>';
 }
 
 echo $HTML->listTableBottom();
@@ -87,7 +88,7 @@ echo $HTML->listTableBottom();
 <p>
 <?php echo _('You can create statuses to classify a particular task&apos;s status. Examples of statuses include &quot;Open&quot;, &quot;Close&quot;, &quot;Deleted&quot;.'); ?>
 </p>
-<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
+<?php echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post')); ?>
 <p>
 <input type="hidden" name="submit" value="1" />
 <input type="hidden" name="status_id" value="<?php echo $status_id; ?>" />
@@ -108,10 +109,8 @@ if ($status_id) {
 
 ?>
 </p>
-</form>
-
 <?php
-
+echo $HTML->closeForm();
 report_footer();
 
 // Local Variables:

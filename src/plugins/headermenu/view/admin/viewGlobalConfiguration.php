@@ -2,7 +2,7 @@
 /**
  * headermenu : viewGlobalConfiguration page
  *
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -59,7 +59,7 @@ if (sizeof($linksHeaderMenuArray)) {
 	echo html_e('h2', array(), _('Manage available tabs in headermenu'), false);
 	$tabletop = array(_('Order'), _('Tab Type'), _('Displayed Name'), _('Description'), _('Status'), _('Actions'));
 	$classth = array('', '', '', '', '', 'unsortable');
-	echo $HTML->listTableTop($tabletop, false, 'sortable_headermenu_listlinks', 'sortable', $classth);
+	echo $HTML->listTableTop($tabletop, array(), 'sortable_headermenu_listlinks', 'sortable', $classth);
 	foreach ($linksHeaderMenuArray as $link) {
 		$cells = array();
 		$cells[] = array($link['ordering'], 'class' => 'align-center');
@@ -77,8 +77,8 @@ if (sizeof($linksHeaderMenuArray)) {
 			$cells[][] = $HTML->getRemovePic('', '', array('alt'=>_('link is off'), 'title'=>_('link is off')));
 			$content = util_make_link($actionurl.'&action=updateLinkStatus&linkid='.$link['id_headermenu'].'&linkstatus=1', html_image('docman/reserve-document.png', 22, 22, array('alt' => _('Activate this link'))), array('title' => _('Activate this link')));
 		}
-		$content .= util_make_link($actionurl.'&view=updateLinkValue&linkid='.$link['id_headermenu'], html_image('docman/edit-file.png', 22, 22, array('alt' => _('Edit this link'))), array('title' => _('Edit this link')));
-		$content .= util_make_link($actionurl.'&action=deleteLink&linkid='.$link['id_headermenu'], $HTML->getDeletePic('', '', array('alt' => _('Delete this link'), 'title' => _('Delete this link'))));
+		$content .= util_make_link($actionurl.'&view=updateLinkValue&linkid='.$link['id_headermenu'], $HTML->getEditFilePic(_('Edit this link'), 'editlink'), array('title' => _('Edit this link')));
+		$content .= util_make_link($actionurl.'&action=deleteLink&linkid='.$link['id_headermenu'], $HTML->getDeletePic(_('Delete this link'), 'deletelink'), array('title' => _('Delete this link')));
 		$cells[][] = $content;
 		echo $HTML->multiTableRow(array('id' => $link['id_headermenu']), $cells);
 	}
@@ -93,7 +93,7 @@ if (sizeof($linksOuterMenuArray)) {
 	echo html_e('h2', array(), _('Manage available tabs in outermenu'), false);
 	$tabletop = array(_('Order'), _('Tab Type'), _('Displayed Name'), _('Description'), _('Status'), _('Actions'));
 	$classth = array('', '', '', '', '', 'unsortable');
-	echo $HTML->listTableTop($tabletop, false, 'sortable_outermenu_listlinks', 'sortable', $classth);
+	echo $HTML->listTableTop($tabletop, array(), 'sortable_outermenu_listlinks', 'sortable', $classth);
 	foreach ($linksOuterMenuArray as $link) {
 		$cells = array();
 		$cells[] = array($link['ordering'], 'class' => 'align-center');
@@ -111,8 +111,8 @@ if (sizeof($linksOuterMenuArray)) {
 			$cells[][] = $HTML->getRemovePic('', '', array('alt'=>_('link is off'), 'title'=>_('link is off')));
 			$content = util_make_link($actionurl.'&action=updateLinkStatus&linkid='.$link['id_headermenu'].'&linkstatus=1', html_image('docman/reserve-document.png', 22, 22, array('alt'=>_('Activate this link'))), array('title' => _('Activate this link')));
 		}
-		$content .= util_make_link($actionurl.'&view=updateLinkValue&linkid='.$link['id_headermenu'], html_image('docman/edit-file.png',22,22, array('alt'=>_('Edit this link'))), array('title' => _('Edit this link')));
-		$content .= util_make_link($actionurl.'&action=deleteLink&linkid='.$link['id_headermenu'], $HTML->getDeletePic('', '', array('alt' => _('Delete this link'), 'title' => _('Delete this link'))));
+		$content .= util_make_link($actionurl.'&view=updateLinkValue&linkid='.$link['id_headermenu'], $HTML->getEditFilePic(_('Edit this link'), 'editlink'), array('title' => _('Edit this link')));
+		$content .= util_make_link($actionurl.'&action=deleteLink&linkid='.$link['id_headermenu'], $HTML->getDeletePic(_('Delete this link'), 'deletelink'), array('title' => _('Delete this link')));
 		$cells[][] = $content;
 		echo $HTML->multiTableRow(array('id' => $link['id_headermenu']), $cells);
 	}
@@ -125,7 +125,7 @@ if (sizeof($linksOuterMenuArray)) {
 
 echo html_e('h2', array(), _('Add new tab'), false);
 echo $HTML->information(_('You can add specific tabs in outermenu (main tab) or headermenu (next to the login) with the form below.'));
-echo $HTML->openForm(array('method' => 'POST', 'name' => 'addLink', 'action' => util_make_uri($actionurl.'&action=addLink')));
+echo $HTML->openForm(array('method' => 'POST', 'name' => 'addLink', 'action' => $actionurl.'&action=addLink'));
 echo $HTML->listTableTop();
 $cells = array();
 $cells[] = array(_('Displayed Name').utils_requiredField()._(':'), 'style' => 'text-align:right');

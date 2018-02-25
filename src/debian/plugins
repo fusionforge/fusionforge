@@ -15,7 +15,7 @@ Depends:
 Recommends: fusionforge-scm
 
 Package: fusionforge-plugin-scmcvs
-Depends: php-cli | php5-cli, cvs, viewvc, libphp-snoopy, openbsd-inetd | inet-superserver, update-inetd, libipc-run-perl, liburi-perl, ${perl:Depends}
+Depends: php-cli | php5-cli, cvs, viewvc, libphp-snoopy, xinetd, ${perl:Depends}
 Recommends: fusionforge-scm
 
 Package: fusionforge-plugin-scmdarcs
@@ -27,7 +27,7 @@ Depends: mercurial
 Recommends: fusionforge-scm
 
 Package: fusionforge-plugin-mediawiki
-Depends: php-cli | php5-cli, mediawiki (>= 1:1.19.1-2~exp2)
+Depends: php-cli | php5-cli, mediawiki
 
 Package: fusionforge-plugin-moinmoin
 Depends: php-cli | php5-cli, python-moinmoin, python-psycopg2, libapache2-mod-wsgi
@@ -45,7 +45,7 @@ Package: fusionforge-plugin-authldap
 Depends: php-ldap | php5-ldap
 
 Package: fusionforge-plugin-blocks
-Depends:
+Depends: libmarkdown-php
 
 Package: fusionforge-plugin-compactpreview
 Depends:
@@ -88,6 +88,9 @@ Depends:
 Package: fusionforge-plugin-scmhook
 Depends: php-cli | php5-cli, php-curl | php5-curl, mksh, ${perl:Depends}
 
+Package: fusionforge-plugin-repositoryapi
+Depends:
+
 Package: fusionforge-plugin-sysauthldap
 Depends: php-ldap | php5-ldap
 Recommends: slapd, ldap-utils, ${perl:Depends}
@@ -96,4 +99,10 @@ Package: fusionforge-plugin-taskboard
 Depends:
 
 Package: fusionforge-plugin-webanalytics
+Depends:
+
+Package: fusionforge-plugin-phptextcaptcha
+Depends: php-text-captcha
+
+Package: fusionforge-plugin-rest
 Depends:

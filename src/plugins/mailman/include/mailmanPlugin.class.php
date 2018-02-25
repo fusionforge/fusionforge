@@ -1,8 +1,10 @@
 <?php
-
 /**
  * mailmanPlugin class
  *
+ * Portions Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
+ * Portions Copyright 2010 (c) Mélanie Le Bail
+ * Copyright 2016, Franck Villaume - TrivialDev
  * This file is part of FusionForge.
  *
  * FusionForge is free software; you can redistribute it and/or modify
@@ -19,8 +21,6 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * Portions Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Portions Copyright 2010 (c) Mélanie Le Bail
  */
 
 require_once 'plugins_utils.php';
@@ -69,7 +69,7 @@ class mailmanPlugin extends Plugin {
 		return $this->pluginInfo;
 	}
 
-	function CallHook ($hookname, &$params) {
+	function CallHook($hookname, &$params) {
 		global $use_mailmanplugin,$G_SESSION,$HTML,$gfcommon,$gfwww,$gfplugins;
 		if ($hookname == "usermenu") {
 			$text = $this->text; // this is what shows in the tab
@@ -87,13 +87,16 @@ class mailmanPlugin extends Plugin {
 			if ($project->isError()) {
 				return;
 			}
-			if (!$project->isProject()) {
-				return;
-			}
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][]=$this->text;
-				$params['DIRS'][]='/plugins/mailman/index.php?group_id=' . $group_id . '&pluginname=' . $this->name; // we indicate the part we're calling is the project one
-                $params['ADMIN'][]='';
+				$params['DIRS'][]='/plugins/mailman/?group_id=' . $group_id . '&pluginname=' . $this->name; // we indicate the part we're calling is the project one
+				if (session_loggedin()) {
+					$userperm = $project->getPermission();
+					if ($userperm->isAdmin()) {
+						$params['ADMIN'][]='';
+					}
+				}
+				$params['TOOLTIPS'][] = NULL;
 			}
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
 		} elseif ($hookname == "groupisactivecheckbox") {
@@ -171,11 +174,11 @@ class mailmanPlugin extends Plugin {
 				foreach ($lists as $l) {
 					$group = $l->getGroup();
 					if ($group->getID() != $last_group) {
-						echo ' <tr '. $HTML->boxGetAltRowStyle(1) .'><td colspan="2">'.util_make_link ('/plugins/mailman/index.php?group_id='.$group->getID(),$group->getPublicName()).'</td></tr>';
+						echo ' <tr><td colspan="2">'.util_make_link ('/plugins/mailman/index.php?group_id='.$group->getID(),$group->getPublicName()).'</td></tr>';
 					}
 					echo '
-						<tr '.$HTML->boxGetAltRowStyle(0).'>
-							<td class="align-center">'.util_make_link('/plugins/mailman/index.php?group_id='.$group->getID().'&action=unsubscribe&id='.$l->getID(),'<img src="'.$HTML->imgroot.'/ic/trash.png" height="16" width="16" '.'alt="" />').
+						<tr>
+							<td class="align-center">'.util_make_link('/plugins/mailman/index.php?group_id='.$group->getID().'&action=unsubscribe&id='.$l->getID(), $HTML->getDeletePic(_('Unsubscribe from this mailing-list.'), _('Unsubscribe'))).
 						'</td>
 							<td style="width:99%">'.util_make_link('/plugins/mailman/index.php?group_id='.$group->getID().'&action=options&id='.$l->getID(),$l->getName()).'</td></tr>';
 					$last_group= $group->getID();

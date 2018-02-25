@@ -3,7 +3,7 @@
  * Code Snippets Repository
  *
  * Copyright 1999-2001 (c) VA Linux Systems
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -26,6 +26,8 @@ require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'snippet/snippet_utils.php';
 
+global $HTML;
+
 if (session_loggedin()) {
 	$type = getStringFromRequest('type');
 	$id = getIntFromRequest('id');
@@ -34,7 +36,7 @@ if (session_loggedin()) {
 		/*
 			See if the snippet exists first
 		*/
-		$result=db_query_params ('SELECT * FROM snippet WHERE snippet_id=$1',
+		$result=db_query_params ('SELECT * FROM snippet AS s INNER JOIN snippet_version AS sv ON (s.snippet_id = sv.snippet_id) WHERE s.snippet_id=$1 ORDER BY snippet_version_id DESC LIMIT 1',
 			array($id));
 		if (!$result || db_numrows($result) < 1) {
 			exit_error(_('Error: snippet does not exist'));
@@ -73,17 +75,23 @@ if (session_loggedin()) {
 				} else {
 					form_release_key(getStringFromRequest("form_key"));
 					$feedback .= _('Snippet Version Added Successfully.');
+					session_redirect('snippet/detail.php?type=snippet&id='.$id);
 				}
 			} else {
-				exit_error(_('Error: Go back and fill in all the information'));
+				exit_error(_('Error')._(': ')._('Go back and fill in all the information'));
 			}
 
 		}
+		html_use_ace();
 		snippet_header(array('title'=>_('New snippet version')));
+
+
+		$last_version=db_result($result,0,'version');
+		$last_code=db_result($result,0,'code');
 
 		?>
 		<p><?php echo _('If you have modified a version of a snippet and you feel it is significant enough to share with others, please do so.'); ?></p>
-		<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
+		<?php echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post')); ?>
 		<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>">
 		<input type="hidden" name="post_changes" value="y" />
 		<input type="hidden" name="type" value="snippet" />
@@ -91,25 +99,46 @@ if (session_loggedin()) {
 		<input type="hidden" name="id" value="<?php echo $id; ?>" />
 
 		<table>
-		<tr><td colspan="2"><strong><?php echo _('Version')._(':'). utils_requiredField(); ?></strong><br />
-			<input type="text" name="version" size="10" maxlength="15" required="required" />
+		<tr><td colspan="2"><strong><?php echo _('Last version')._(':'); ?></strong><br />
+			<?php echo $last_version ?>
 		</td></tr>
-
-		<tr><td colspan="2"><strong><?php echo _('Changes')._(':'). utils_requiredField(); ?></strong><br />
-			<textarea name="changes" rows="5" cols="45" required="required"></textarea>
+		<tr><td colspan="2"><label for="version"><strong><?php echo _('Version')._(':'). utils_requiredField(); ?></strong></label><br />
+			<input id="version" type="text" name="version" size="10" maxlength="15" required="required" />
 		</td></tr>
-
-		<tr><td colspan="2"><strong><?php echo _('Paste the Code Here')._(':'). utils_requiredField(); ?></strong><br />
-			<textarea name="code" rows="30" cols="85" required="required"></textarea>
+		<tr><td colspan="2"><label for="changes"><strong><?php echo _('Changes')._(':'). utils_requiredField(); ?></strong></label><br />
+			<textarea id="changes" name="changes" rows="5" cols="45" required="required"></textarea>
 		</td></tr>
-
+		<tr><td colspan="2">
+			<?php echo $HTML->html_input('code', '', _('Paste the Code Here').utils_requiredField()._(': '), 'hidden', array('value'=>$last_code)); ?>
+			<div id='editor'><?php echo $last_code; ?></div>
+		</td></tr>
 		<tr><td colspan="2" class="align-center">
 			<strong><?php echo _('Make sure all info is complete and accurate'); ?></strong>
 			<br />
 			<input type="submit" name="submit" value="<?php echo _('Submit'); ?>" />
 		</td></tr>
-		</table></form>
+		</table>
 		<?php
+		echo $HTML->closeForm();
+
+		$jsvar = "var mode = '".$SCRIPT_LANGUAGE_ACE[db_result($result,0,'language')]."';\n";
+		$javascript = <<<'EOS'
+	var editor = ace.edit("editor");
+	editor.setOptions({
+		minLines: 20,
+		maxLines: 40,
+		mode: "ace/mode/"+mode,
+		autoScrollEditorIntoView: true
+	});
+	editor.session.setMode({
+		path:"ace/mode/"+mode,
+		inline:true
+	});
+	editor.getSession().on('change', function () {
+		$('input#code').val(editor.getSession().getValue());
+	});
+EOS;
+		echo html_e('script', array( 'type'=>'text/javascript'), '//<![CDATA['."\n".'$(function(){'.$jsvar.$javascript.'});'."\n".'//]]>');
 
 		snippet_footer();
 
@@ -195,7 +224,7 @@ function show_add_snippet_box() {
 
 			} else {
 				form_release_key(getStringFromRequest("form_key"));
-				exit_error( _('Error: Go back and fill in all the information'));
+				exit_error(_('Error')._(': ')._('Go back and fill in all the information'));
 			}
 
 		}
@@ -206,7 +235,7 @@ function show_add_snippet_box() {
 		<p>
 		<?php echo _('If you have modified a version of a package and you feel it is significant enough to share with others, please do so.'); ?></p>
 		<p>
-		<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
+		<?php echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post')); ?>
 		<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>">
 		<input type="hidden" name="post_changes" value="y" />
 		<input type="hidden" name="type" value="package" />
@@ -214,12 +243,12 @@ function show_add_snippet_box() {
 		<input type="hidden" name="id" value="<?php echo $id; ?>" />
 
 		<table>
-		<tr><td colspan="2"><strong><?php echo _('Version')._(':'); ?></strong><br />
-			<input type="text" name="version" size="10" maxlength="15" />
+		<tr><td colspan="2"><label for="version"><strong><?php echo _('Version')._(':'); ?></strong></label><br />
+			<input id="version" type="text" name="version" size="10" maxlength="15" />
 		</td></tr>
 
-		<tr><td colspan="2"><strong><?php echo _('Changes')._(':'); ?></strong><br />
-			<textarea name="changes" rows="5" cols="45"></textarea>
+		<tr><td colspan="2"><label for="changes"><strong><?php echo _('Changes')._(':'); ?></strong></label><br />
+			<textarea id="changes" name="changes" rows="5" cols="45"></textarea>
 		</td></tr>
 
 		<tr><td colspan="2" class="align-center">
@@ -227,9 +256,9 @@ function show_add_snippet_box() {
 			<br />
 			<input type="submit" name="submit" value="<?php echo _('Submit'); ?>" />
 		</td></tr>
-		</table></form></p>
+		</table>
 		<?php
-
+		echo $HTML->closeForm();
 		snippet_footer();
 
 	} else {

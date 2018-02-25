@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2012,2014,2016 Franck Villaume - TrivialDev
+ * Copyright 2012,2014,2016-2017, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -30,15 +30,11 @@ require_once $gfcommon.'widget/Widget_MyMonitoredFp.class.php';
 require_once $gfcommon.'widget/Widget_MyLatestCommits.class.php';
 require_once $gfcommon.'widget/Widget_MyProjectsLastDocuments.class.php';
 require_once $gfcommon.'widget/Widget_MyArtifacts.class.php';
-//require_once $gfcommon.'widget/Widget_MySrs.class.php';
 require_once $gfcommon.'widget/Widget_MyTasks.class.php';
 require_once $gfcommon.'widget/Widget_MyRss.class.php';
 require_once $gfcommon.'widget/Widget_MyAdmin.class.php';
 require_once $gfcommon.'widget/Widget_MySystasks.class.php';
-//require_once $gfcommon.'widget/Widget_MyTwitterFollow.class.php';
-//require_once $gfcommon.'widget/Widget_MyWikiPage.class.php';
-
-require_once $gfcommon.'widget/Widget_ProjectDescription.class.php' ;
+require_once $gfcommon.'widget/Widget_ProjectDescription.class.php';
 require_once $gfcommon.'widget/Widget_ProjectMembers.class.php';
 require_once $gfcommon.'widget/Widget_ProjectInfo.class.php';
 require_once $gfcommon.'widget/Widget_ProjectLatestFileReleases.class.php';
@@ -48,15 +44,21 @@ require_once $gfcommon.'widget/Widget_ProjectLatestNews.class.php';
 require_once $gfcommon.'widget/Widget_ProjectPublicAreas.class.php';
 require_once $gfcommon.'widget/Widget_ProjectRss.class.php';
 require_once $gfcommon.'widget/Widget_ProjectLatestCommits.class.php';
-//require_once $gfcommon.'widget/Widget_ProjectTwitterFollow.class.php';
-//require_once $gfcommon.'widget/Widget_ProjectWikiPage.class.php';
+require_once $gfcommon.'widget/Widget_ProjectLatestArtifacts.class.php';
 require_once $gfcommon.'widget/Widget_ProjectScmStats.class.php';
-
 require_once $gfcommon.'widget/Widget_HomeDetailActivityMostActiveProjectWeek.class.php';
 require_once $gfcommon.'widget/Widget_HomeLatestNews.class.php';
+require_once $gfcommon.'widget/Widget_HomeLatestFileReleases.class.php';
 require_once $gfcommon.'widget/Widget_HomeStats.class.php';
 require_once $gfcommon.'widget/Widget_HomeTagCloud.class.php';
 require_once $gfcommon.'widget/Widget_HomeVersion.class.php';
+require_once $gfcommon.'widget/Widget_HomeRss.class.php';
+require_once $gfcommon.'widget/Widget_TrackerComment.class.php';
+require_once $gfcommon.'widget/Widget_TrackerContent.class.php';
+require_once $gfcommon.'widget/Widget_TrackerDefaultActions.class.php';
+require_once $gfcommon.'widget/Widget_TrackerGeneral.class.php';
+require_once $gfcommon.'widget/Widget_TrackerMain.class.php';
+require_once $gfcommon.'widget/Widget_TrackerSummary.class.php';
 
 /**
  * FusionForge Layout Widget
@@ -91,7 +93,7 @@ require_once $gfcommon.'widget/Widget_HomeVersion.class.php';
 	}
 	function getPreferencesForm($layout_id, $owner_id, $owner_type) {
 		global $HTML;
-		$prefs  = $HTML->openForm(array('method' => 'post', 'action' => util_make_uri('/widgets/widget.php?owner='. $owner_type.$owner_id .'&action=update&name['. $this->id .']='. $this->getInstanceId() .'&content_id='. $this->getInstanceId() .'&layout_id='. $layout_id)));
+		$prefs  = $HTML->openForm(array('method' => 'post', 'action' => '/widgets/widget.php?owner='.$owner_type.$owner_id.'&action=update&name%5B'.$this->id.'%5D='.$this->getInstanceId().'&content_id='.$this->getInstanceId().'&layout_id='.$layout_id));
 		$prefs .= html_ao('fieldset').html_e('legend', array(), _('Preferences'));
 		$prefs .= $this->getPreferences();
 		$prefs .= html_e('br');
@@ -169,7 +171,7 @@ require_once $gfcommon.'widget/Widget_HomeVersion.class.php';
 	 * @param string $widget_name
 	 * @return Widget instance
 	 */
-	static  function & getInstance($widget_name) {
+	static function & getInstance($widget_name) {
 		$o = null;
 		switch($widget_name) {
 			case 'homelatestnews':
@@ -186,6 +188,12 @@ require_once $gfcommon.'widget/Widget_HomeVersion.class.php';
 				break;
 			case 'homedetailactivitymostactiveprojectweek';
 				$o = new Widget_HomeDetailActivityMostActiveProjectWeek();
+				break;
+			case 'homelatestfilereleases':
+				$o = new Widget_HomeLatestFileReleases();
+				break;
+			case 'homerss';
+				$o = new Widget_HomeRss();
 				break;
 			case 'mysurveys':
 				$o = new Widget_MySurveys();
@@ -220,10 +228,7 @@ require_once $gfcommon.'widget/Widget_HomeVersion.class.php';
 					|| forge_check_global_perm('approve_news')) {
 					$o = new Widget_MyAdmin();
 				}
-				break;/*
-			case 'mysrs':
-				$o = new Widget_MySrs();
-				break;*/
+				break;
 			case 'mymonitoredfp':
 				$o = new Widget_MyMonitoredFp();
 				break;
@@ -232,13 +237,7 @@ require_once $gfcommon.'widget/Widget_HomeVersion.class.php';
 				break;
 			case 'mysystasks':
 				$o = new Widget_MySystasks();
-				break;/*
-			case 'mytwitterfollow':
-				$o = new Widget_MyTwitterFollow();
 				break;
-			case 'mywikipage':                   //not yet
-				$o = new Widget_MyWikiPage();
-				break;*/
 			case 'projectdescription':
 				$o = new Widget_ProjectDescription();
 				break;
@@ -265,18 +264,33 @@ require_once $gfcommon.'widget/Widget_HomeVersion.class.php';
 				break;
 			case 'projectrss':
 				$o = new Widget_ProjectRss();
-				break;/*
-			case 'projecttwitterfollow':
-				$o = new Widget_ProjectTwitterFollow();
 				break;
-			case 'projectwikipage':                    //not yet
-				$o = new Widget_ProjectWikiPage();
-				break;*/
 			case 'projectscmstats':
 				$o = new Widget_ProjectScmStats();
 				break;
 			case 'projectlatestcommits':
 				$o = new Widget_ProjectLatestCommits();
+				break;
+			case 'projectlatestartifacts':
+				$o = new Widget_ProjectLatestArtifacts();
+				break;
+			case 'trackercontent':
+				$o = new Widget_TrackerContent();
+				break;
+			case 'trackercomment':
+				$o = new Widget_TrackerComment();
+				break;
+			case 'trackerdefaultactions':
+				$o = new Widget_TrackerDefaultActions();
+				break;
+			case 'trackergeneral':
+				$o = new Widget_TrackerGeneral();
+				break;
+			case 'trackermain':
+				$o = new Widget_TrackerMain();
+				break;
+			case 'trackersummary':
+				$o = new Widget_TrackerSummary();
 				break;
 			default:
 				//$em = EventManager::instance();
@@ -293,25 +307,29 @@ require_once $gfcommon.'widget/Widget_HomeVersion.class.php';
 	/**
 	 * getCodendiWidgets - Static
 	 * @param unknown_type $owner_type
-	 * @return multitype:
+	 * @return mixed
 	 */
 	static function getCodendiWidgets($owner_type) {
 		switch ($owner_type) {
 			case WidgetLayoutManager::OWNER_TYPE_USER:
 				$widgets = array('myadmin', 'mysurveys', 'myprojects', 'mybookmarks',
-						'mymonitoredforums', 'mymonitoredfp', 'myartifacts', 'mysystasks', //'mywikipage' //not yet
+						'mymonitoredforums', 'mymonitoredfp', 'myartifacts', 'mysystasks',
 						'mytasks', 'mylatestcommits', 'myrss', 'mymonitoreddocuments', 'myprojectslastdocuments',
 						);
 				break;
 			case WidgetLayoutManager::OWNER_TYPE_GROUP:
 				// project home widgets
 				$widgets = array('projectdescription', 'projectmembers', 'projectinfo', 'projectscmstats',
-						'projectlatestfilereleases', 'projectlatestdocuments', 'projectlatestnews', 'projectpublicareas', //'projectwikipage' //not yet
-						'projectlatestcommits', 'projecttwitterfollow', 'projectrss', 'projectdocumentsactivity',
+						'projectlatestfilereleases', 'projectlatestdocuments', 'projectlatestnews', 'projectpublicareas',
+						'projectlatestcommits', 'projectrss', 'projectdocumentsactivity', 'projectlatestartifacts'
 						);
 				break;
 			case WidgetLayoutManager::OWNER_TYPE_HOME:
-				$widgets = array('hometagcloud', 'homeversion', 'homelatestnews', 'homestats', 'homedetailactivitymostactiveprojectweek');
+				$widgets = array('hometagcloud', 'homeversion', 'homelatestnews', 'homestats', 'homedetailactivitymostactiveprojectweek',
+						'homelatestfilereleases', 'homerss');
+				break;
+			case WidgetLayoutManager::OWNER_TYPE_TRACKER:
+				$widgets = array('trackercontent', 'trackercomment', 'trackerdefaultactions', 'trackergeneral', 'trackermain', 'trackersummary');
 				break;
 			default:
 				$widgets = array();
@@ -331,23 +349,7 @@ require_once $gfcommon.'widget/Widget_HomeVersion.class.php';
 		return $widgets;
 	}
 	/* static */ function getExternalWidgets($owner_type) {
-		switch ($owner_type) {
-			case WidgetLayoutManager::OWNER_TYPE_USER:
-				$widgets = array(
-						);
-				break;
-			case WidgetLayoutManager::OWNER_TYPE_GROUP:
-				$widgets = array(
-						);
-				break;
-			case WidgetLayoutManager::OWNER_TYPE_HOME:
-				$widgets = array();
-				break;
-			default:
-				$widgets = array();
-				break;
-		}
-
+		$widgets = array();
 		$plugins_widgets = array();
 		$em =& EventManager::instance();
 		$em->processEvent('widgets', array('external_widgets' => &$plugins_widgets, 'owner_type' => $owner_type));
@@ -374,5 +376,13 @@ require_once $gfcommon.'widget/Widget_HomeVersion.class.php';
 	}
 	function getIframeUrl($owner_id, $owner_type) {
 		return '/widgets/widget.php?owner='. $owner_type.$owner_id .'&amp;action=iframe&amp;name%5B'. $this->id .'%5D='. $this->getInstanceId();
+	}
+
+	function canBeMinize() {
+		return true;
+	}
+
+	function canBeRemove() {
+		return true;
 	}
 }

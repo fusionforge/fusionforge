@@ -3,8 +3,8 @@
  * Tracker Facility
  *
  * Copyright 2010 (c) FusionForge Team
- * Copyright 2014-2015, Franck Villaume - TrivialDev
- * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
+ * Copyright 2014-2017, Franck Villaume - TrivialDev
+ * Copyright 2016-2017, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -29,6 +29,9 @@ global $HTML;
 //  FORM TO BUILD SELECTION BOXES
 //
 
+
+html_use_tablesorter();
+
 $title = sprintf(_('Manage Custom Fields for %s'), $ath->getName());
 $ath->adminHeader(array('title'=>$title, 'modal'=>1));
 
@@ -41,47 +44,57 @@ $keys=array_keys($efarr);
 $rows=count($keys);
 if ($rows > 0) {
 
-	$title_arr=array();
-	$title_arr[]=_('Custom Fields Defined');
-	$title_arr[]=_('Type');
-	$title_arr[]=_('Enabled');
-	$title_arr[]=_('Required');
-	$title_arr[]=_('Shown on Submit');
-	$title_arr[]=_('Auto Assign');
-	$title_arr[]=_('Depend on');
-	$title_arr[]=_('Elements Defined');
-	$title_arr[]=_('Add Options');
+	$title_arr = array();
+	$classth = array();
+	$title_arr[] = _('Custom Fields Defined');
+	$classth[]   = 'unsortable';
+	$title_arr[] = _('Type');
+	$classth[]   = '';
+	$title_arr[] = _('Enabled');
+	$classth[]   = '';
+	$title_arr[] = _('Required');
+	$classth[]   = '';
+	$title_arr[] = _('Shown on Submit');
+	$classth[]   = '';
+	$title_arr[] = _('Auto Assign');
+	$classth[]   = 'unsortable';
+	$title_arr[] = _('Depend on');
+	$classth[]   = 'unsortable';
+	$title_arr[] = _('Elements Defined');
+	$classth[]   = 'unsortable';
+	$title_arr[] = _('Add Options');
+	$classth[]   = 'unsortable';
 	$autoAssignFieldId = $ath->getAutoAssignField();
-	echo $HTML->listTableTop($title_arr);
+	echo $HTML->listTableTop($title_arr, array(), 'full sortable', 'sortable_extrafields', $classth);
 	$rownb = 0;
 	for ($k=0; $k < $rows; $k++) {
 		$i=$keys[$k];
 		$rownb++;
 		$id=str_replace('@','',$efarr[$i]['alias']);
-		echo '<tr id="field-'.$id.'" '. $HTML->boxGetAltRowStyle($rownb) .">\n".
+		echo '<tr id="field-'.$id.'" >'."\n".
 			'<td>'.$efarr[$i]['field_name'].(($efarr[$i]['is_required']) ? utils_requiredField() : '').
-				util_make_link('/tracker/admin/?update_box=1&id='.$efarr[$i]['extra_field_id'].'&group_id='.$group_id.'&atid='.$ath->getID(), ' ['._('Edit').']').
-				util_make_link('/tracker/admin/?deleteextrafield=1&id='.$efarr[$i]['extra_field_id'].'&group_id='.$group_id.'&atid='. $ath->getID(), ' ['._('Delete').']').
+				util_make_link('/tracker/admin/?update_box=1&id='.$efarr[$i]['extra_field_id'].'&group_id='.$group_id.'&atid='.$ath->getID(), $HTML->getEditFilePic(_('Edit'))).
+				util_make_link('/tracker/admin/?deleteextrafield=1&id='.$efarr[$i]['extra_field_id'].'&group_id='.$group_id.'&atid='. $ath->getID(), $HTML->getDeletePic(_('Delete'))).
 				util_make_link('/tracker/admin/?copy_opt=1&id='.$efarr[$i]['extra_field_id'].'&group_id='.$group_id.'&atid='. $ath->getID(), ' ['._('Copy').']').
 				"</td>\n";
 		echo '<td>'.$eftypes[$efarr[$i]['field_type']]."</td>\n";
 		if ($efarr[$i]['is_disabled'] == 0) {
-			echo '<td class="align-center">'.html_image("ic/check.png",'15','13').'</td>'."\n";
+			echo '<td class="align-center" content="1" >'.html_image("ic/check.png", 15, 13).'</td>'."\n";
 		} else {
-			echo '<td></td>'."\n";
+			echo '<td content="0" ></td>'."\n";
 		}
 		if ($efarr[$i]['is_required'] == 1) {
-			echo '<td class="align-center">'.html_image("ic/check.png",'15','13').'</td>'."\n";
+			echo '<td class="align-center" content="1" >'.html_image("ic/check.png", 15, 13).'</td>'."\n";
 		} else {
-			echo '<td></td>'."\n";
+			echo '<td content="0" ></td>'."\n";
 		}
 		if ($efarr[$i]['is_hidden_on_submit'] == 0) {
-			echo '<td class="align-center">'.html_image("ic/check.png",'15','13').'</td>'."\n";
+			echo '<td class="align-center" content="1" >'.html_image("ic/check.png", 15, 13).'</td>'."\n";
 		} else {
-			echo '<td></td>'."\n";
+			echo '<td content="0" ></td>'."\n";
 		}
 		if ($autoAssignFieldId==$i) {
-			echo '<td class="align-center">'.html_image("ic/check.png",'15','13').'</td>'."\n";
+			echo '<td class="align-center">'.html_image("ic/check.png", 15, 13).'</td>'."\n";
 		} else {
 			echo '<td></td>'."\n";
 		}
@@ -102,38 +115,49 @@ if ($rows > 0) {
 				$rolesarray[$role->getID()]=$role->getName();
 			}
 		}
+		if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RELEASE && !isset($packages)) {
+			$packagesarray = array();
+			$packages = $packages = get_frs_packages($ath->getGroup());
+			foreach ($packages as $package) {
+				$packagesarray[$package->getID()]=$package->getName();
+			}
+		}
 
 		if (!empty($elearray)) {
 			$optrows=count($elearray);
 
 			echo '<td>';
 			for ($j=0; $j <$optrows; $j++) {
-
-				if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_USER) {
-					echo $rolesarray[$elearray[$j]['element_name']];
-				} else {
-					echo $elearray[$j]['element_name'];
-					echo util_make_link('/tracker/admin/?update_opt=1&id='.$elearray[$j]['element_id'].'&group_id='.$group_id.'&atid='.$ath->getID().'&boxid='.$efarr[$i]['extra_field_id'], ' ['._('Edit').']');
+				switch ($efarr[$i]['field_type']) {
+					case ARTIFACT_EXTRAFIELDTYPE_USER:
+						echo $rolesarray[$elearray[$j]['element_name']];
+						break;
+					case ARTIFACT_EXTRAFIELDTYPE_RELEASE:
+						echo $packagesarray[$elearray[$j]['element_name']];
+						break;
+					default:
+						echo $elearray[$j]['element_name'];
+						echo util_make_link('/tracker/admin/?update_opt=1&id='.$elearray[$j]['element_id'].'&group_id='.$group_id.'&atid='.$ath->getID().'&boxid='.$efarr[$i]['extra_field_id'], $HTML->getEditFilePic(_('Edit')));
 				}
-				echo util_make_link('/tracker/admin/?delete_opt=1&id='.$elearray[$j]['element_id'].'&group_id='.$group_id.'&atid='.$ath->getID().'&boxid='.$efarr[$i]['extra_field_id'], ' ['._('Delete').']');
+				echo util_make_link('/tracker/admin/?delete_opt=1&id='.$elearray[$j]['element_id'].'&group_id='.$group_id.'&atid='.$ath->getID().'&boxid='.$efarr[$i]['extra_field_id'], $HTML->getDeletePic(_('Delete')));
 				echo '<br />';
 			}
 		} else {
 			echo '<td>';
 		}
-
 		echo "</td>\n";
 		echo "<td>\n";
-		if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_SELECT
-			|| $efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RADIO
-			|| $efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX
-			|| $efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT
-			|| $efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
+		switch ($efarr[$i]['field_type']) {
+			case ARTIFACT_EXTRAFIELDTYPE_USER:
+				echo util_make_link('/tracker/admin/?add_opt=1&boxid='.$efarr[$i]['extra_field_id'].'&group_id='.$group_id.'&atid='.$ath->getID(), '['._('Add/remove roles for user choices').']');
+				break;
+			case ARTIFACT_EXTRAFIELDTYPE_SELECT:
+			case ARTIFACT_EXTRAFIELDTYPE_RADIO:
+			case ARTIFACT_EXTRAFIELDTYPE_CHECKBOX:
+			case ARTIFACT_EXTRAFIELDTYPE_MULTISELECT:
+			case ARTIFACT_EXTRAFIELDTYPE_STATUS:
 			echo util_make_link('/tracker/admin/?add_opt=1&boxid='.$efarr[$i]['extra_field_id'].'&group_id='.$group_id.'&atid='.$ath->getID(), '['._('Add/Reorder choices').']');
 		}
-		if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_USER) {
-					echo util_make_link('/tracker/admin/?add_opt=1&boxid='.$efarr[$i]['extra_field_id'].'&group_id='.$group_id.'&atid='.$ath->getID(), '['._('Add/remove roles for user choices').']');
-				}
 		echo "</td>\n";
 		echo "</tr>\n";
 	}
@@ -156,7 +180,7 @@ echo html_ac(html_ap() - 1);
 
 echo html_ao('p');
 echo html_e('strong', array(), _('Field alias')._(':')).html_e('br');
-echo html_e('input', array('type'=>'text', 'name'=>'alias', 'value'=>'', 'size'=>'15', 'maxlength'=>'30'));
+echo html_e('input', array('type'=>'text', 'name'=>'alias', 'value'=>'', 'size'=>'15', 'maxlength'=>'30', 'pattern' => '[A-Za-z0-9-_@]+', 'title' => _('Only letters, numbers, hyphens (-), at sign (@) and underscores (_) allowed.')));
 echo html_ac(html_ap() - 1);
 
 echo html_ao('p');
@@ -183,52 +207,99 @@ $jsvariable ="
 	var size = '"._("Size")."';
 	var maxLength = '". _("Maxlength")."';
 	var rows = '"._("Rows")."';
-	var columns = '". _("Columns")."';";
+	var columns = '". _("Columns")."';
+	var typeSelect = ".ARTIFACT_EXTRAFIELDTYPE_SELECT.";
+	var typeCheckBox = ".ARTIFACT_EXTRAFIELDTYPE_CHECKBOX.";
+	var typeRadio = ".ARTIFACT_EXTRAFIELDTYPE_RADIO.";
+	var typeText = ".ARTIFACT_EXTRAFIELDTYPE_TEXT.";
+	var typeMultiSelect = ".ARTIFACT_EXTRAFIELDTYPE_MULTISELECT.";
+	var typeTextArea = ".ARTIFACT_EXTRAFIELDTYPE_TEXTAREA.";
+	var typeStatus = ".ARTIFACT_EXTRAFIELDTYPE_STATUS.";
+	var typeRelation = ".ARTIFACT_EXTRAFIELDTYPE_RELATION.";
+	var typeInteger = ".ARTIFACT_EXTRAFIELDTYPE_INTEGER.";
+	var typeFormula = ".ARTIFACT_EXTRAFIELDTYPE_FORMULA.";
+	var typeDateTime = ".ARTIFACT_EXTRAFIELDTYPE_DATETIME.";
+	var typeUser = ".ARTIFACT_EXTRAFIELDTYPE_USER.";
+	var typeRelease = ".ARTIFACT_EXTRAFIELDTYPE_RELEASE.";
+	var typeEffort = ".ARTIFACT_EXTRAFIELDTYPE_EFFORT.";
+	var typeParent = ".ARTIFACT_EXTRAFIELDTYPE_PARENT.";";
+
 $javascript = <<<'EOS'
-	$("p[class^='for-']").hide()
-	$("input[value=1]").on('change', function(){
+	$("p[class^='for-']").hide();
+	$("[name='parent']").hide();
+	$("input[value="+typeSelect+"]").on('change', function(){
 		$("p.for-select").show();
 		$("p[class^='for-']:not(.for-select)").hide();
+		$("[name='parent']").show();
 	});
-	$("input[value=2]").on('change', function(){
+	$("input[value="+typeCheckBox+"]").on('change', function(){
 		$("p.for-check").show();
 		$("p[class^='for-']:not(.for-check)").hide();
+		$("[name='parent']").show();
 	});
-	$("input[value=3]").on('change', function(){
+	$("input[value="+typeRadio+"]").on('change', function(){
 		$("p.for-radio").show();
 		$("p[class^='for-']:not(.for-radio)").hide();
+		$("[name='parent']").show();
 	});
-	$("input[value=4]").on('change', function(){
+	$("input[value="+typeText+"]").on('change', function(){
 		$("label[for='attribute1']").text(size);
 		$("label[for='attribute2']").text(maxLength);
 		$("p.for-text").show();
 		$("p[class^='for-']:not(.for-text)").hide();
+		$("[name='parent']").hide();
 	});
-	$("input[value=5]").on('change', function(){
+	$("input[value="+typeMultiSelect+"]").on('change', function(){
 		$("p.for-multiselect").show();
 		$("p[class^='for-']:not(.for-multiselect)").hide();
+		$("[name='parent']").show();
 	});
-	$("input[value=6]").on('change', function(){
+	$("input[value="+typeTextArea+"]").on('change', function(){
 		$("label[for='attribute1']").text(rows);
 		$("label[for='attribute2']").text(columns);
 		$("p.for-textarea").show();
 		$("p[class^='for-']:not(.for-textarea)").hide();
+		$("[name='parent']").hide();
 	});
-	$("input[value=9]").on('change', function(){
+	$("input[value="+typeRelation+"]").on('change', function(){
 		$("label[for='attribute1']").text(size);
 		$("label[for='attribute2']").text(maxLength);
 		$("p.for-relation").show();
 		$("p[class^='for-']:not(.for-relation)").hide();
+		$("[name='parent']").hide();
 	});
-	$("input[value=10]").on('change', function(){
+	$("input[value="+typeInteger+"]").on('change', function(){
 		$("label[for='attribute1']").text(size);
 		$("label[for='attribute2']").text(maxLength);
 		$("p.for-integer").show();
 		$("p[class^='for-']:not(.for-integer)").hide();
+		$("[name='parent']").hide();
 	});
-	$("input[value=14]").on('change', function(){
+	$("input[value="+typeDateTime+"]").on('change', function(){
+		$("p.for-release").show();
+		$("p[class^='for-']:not(.for-datetime)").hide();
+		$("[name='parent']").hide();
+	});
+	$("input[value="+typeUser+"]").on('change', function(){
 		$("p.for-user").show();
 		$("p[class^='for-']:not(.for-user)").hide();
+		$("[name='parent']").hide();
+	});
+	$("input[value="+typeRelease+"]").on('change', function(){
+		$("p.for-release").show();
+		$("p[class^='for-']:not(.for-release)").hide();
+	});
+	$("input[value="+typeEffort+"]").on('change', function(){
+		$("label[for='attribute1']").text(size);
+		$("label[for='attribute2']").text(maxLength);
+		$("p.for-effort").show();
+		$("p[class^='for-']:not(.for-effort)").hide();
+	});
+	$("input[value="+typeParent+"]").on('change', function(){
+		$("label[for='attribute1']").text(size);
+		$("label[for='attribute2']").text(maxLength);
+		$("p.for-parent").show();
+		$("p[class^='for-']:not(.for-parent)").hide();
 	});
 
 EOS;
@@ -239,12 +310,17 @@ echo html_e('strong', array(), _('Type of custom field').utils_requiredField()._
 if ($ath->usesCustomStatuses()) {
 	unset($eftypes[ARTIFACT_EXTRAFIELDTYPE_STATUS]);
 }
+
+if (!forge_get_config('use_artefacts_dependencies')) {
+	unset($eftypes[ARTIFACT_EXTRAFIELDTYPE_PARENT]);
+}
+
 $vals = array_keys($eftypes);
 $texts = array_values($eftypes);
 echo html_build_radio_buttons_from_arrays($vals, $texts, 'field_type', '', false, '', false ,'', false, array('required'=>'required') );
 echo html_ac(html_ap() - 1);
 
-echo html_ao('p', array('class'=>'for-text for-textarea for-integer for-relation'));
+echo html_ao('p', array('class'=>'for-text for-textarea for-integer for-relation for-effort for-parent'));
 echo html_e('label', array('for'=>'attribute1'), _('Size')._(':'));
 echo html_e('input', array('type'=>'text', 'name'=>'attribute1', 'value'=>'20', 'size'=>'2', 'maxlength'=>'2')).html_e('br');
 echo html_e('label', array('for'=>'attribute2'), _('Maxlength')._(':'));
@@ -256,7 +332,7 @@ echo _('Pattern');
 echo html_e('input', array('type'=>'text', 'name'=>'pattern', 'value'=>'', 'size'=>'50', 'maxlength'=>'255')).html_e('br');
 echo html_ac(html_ap() - 1);
 
-echo html_ao('p', array('class'=>'for-select for-multiselect for-radio for-check'));
+echo html_ao('p', array('class'=>'for-select for-multiselect for-radio for-check for-release'));
 echo html_build_checkbox('hide100', false, false);
 echo html_e('label', array('for'=>'hide100'), _('Hide the default none value'));
 echo html_e('br');
@@ -264,7 +340,7 @@ echo html_e('label', array('for'=>'show100label'), _('Label for the none value')
 echo html_e('input', array('type'=>'text', 'name'=>'show100label', 'value'=>_('none'), 'size'=>'30')).html_e('br');
 echo html_ac(html_ap() - 1);
 
-echo html_ao('p', array('class'=>'for-select for-multiselect for-radio for-check'));
+echo html_e('p', array('class'=>'for-select for-multiselect for-radio for-check'), html_e('label', array('for'=>'parent'), _('Parent Field')));
 $pfarr = $ath->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_RADIO, ARTIFACT_EXTRAFIELDTYPE_CHECKBOX,ARTIFACT_EXTRAFIELDTYPE_SELECT,ARTIFACT_EXTRAFIELDTYPE_MULTISELECT), false, true);
 $parentField = array();
 if (is_array($pfarr)) {
@@ -273,16 +349,14 @@ if (is_array($pfarr)) {
 	}
 }
 asort($parentField,SORT_FLAG_CASE | SORT_STRING);
-echo html_e('label', array('for'=>'parent'), _('Parent Field'));
 echo html_build_select_box_from_arrays(array_keys($parentField), array_values($parentField), 'parent', null, true, 'none').html_e('br');
-echo html_ac(html_ap() - 1);
 
 echo html_ao('p', array('class'=>'for-select for-multiselect for-radio for-check'));
 echo html_build_checkbox('autoassign', false, false);
 echo html_e('label', array('for'=>'autoassign'), _('Field that triggers auto-assignment rules'));
 echo html_ac(html_ap() - 1);
 
-echo $HTML->warning_msg(_('Warning: this add new custom field'));
+echo $HTML->warning_msg(_('Warning: this adds a new custom field!'));
 
 echo html_ao('p');
 echo html_e('input', array('type'=>'submit', 'name'=>'post_changes', 'value'=>_('Add Custom Field')));
@@ -291,10 +365,12 @@ echo html_ac(html_ap() - 1);
 echo $HTML->closeForm();
 
 echo html_e('h2', array(), _('Custom Field Rendering Template'));
-echo html_ao('p');
-echo util_make_link('/tracker/admin/?edittemplate=1&group_id='.$group_id.'&atid='.$ath->getID(), _('Edit template')).html_e('br');
-echo util_make_link('/tracker/admin/?deletetemplate=1&group_id='.$group_id.'&atid='.$ath->getID(), _('Delete template'));
-echo html_ac(html_ap() - 1);
+if (forge_get_config('use_tracker_widget_display')) {
+	echo $HTML->warning_msg(_('You have to use widgets to render extrafields on submit/update artifact. Click on submit new to get access to layout update.'));
+} else {
+	echo html_e('p', array(), util_make_link('/tracker/admin/?edittemplate=1&group_id='.$group_id.'&atid='.$ath->getID(), _('Edit template')).html_e('br')
+				.util_make_link('/tracker/admin/?deletetemplate=1&group_id='.$group_id.'&atid='.$ath->getID(), _('Delete template')));
+}
 
 $ath->footer();
 

@@ -26,10 +26,6 @@
 
 class Stats extends FFError {
 
-	function __construct() {
-		parent::__construct();
-	}
-
 	/**
 	 * Returns a resultset consisting of the month, day, total_users, pageviews, and sessions
 	 * from the stats_site tables
@@ -56,7 +52,7 @@ class Stats extends FFError {
 	*/
 	function getMostActiveStats($type, $offset) {
 		if ($type == 'week') 	{
-			return db_query_params('SELECT groups.group_name,groups.unix_group_name,groups.group_id,project_weekly_metric.ranking,project_weekly_metric.percentile FROM groups,project_weekly_metric WHERE groups.group_id=project_weekly_metric.group_id AND groups.type_id=1 AND groups.status = $1 AND groups.use_stats=1 ORDER BY ranking ASC',
+			return db_query_params('SELECT groups.group_name,groups.unix_group_name,groups.group_id,project_weekly_metric.ranking,project_weekly_metric.percentile FROM groups,project_weekly_metric WHERE groups.group_id=project_weekly_metric.group_id AND groups.status = $1 AND groups.use_stats=1 ORDER BY ranking ASC',
 				array('A'),
 				0,
 				$offset) ;
@@ -64,7 +60,6 @@ class Stats extends FFError {
 			return db_query_params('SELECT g.group_name,g.unix_group_name,g.group_id,s.group_ranking as ranking,s.group_metric as percentile
 				FROM groups g,stats_project_all_vw s
 				WHERE g.group_id=s.group_id
-					AND g.type_id=1
 					AND g.status = $1
 					AND g.use_stats=1
 					AND s.group_ranking > 0

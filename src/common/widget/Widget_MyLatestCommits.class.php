@@ -33,7 +33,7 @@ class Widget_MyLatestCommits extends Widget {
 	*/
 	private $_nb_commits;
 
-	public function __construct() {
+	function __construct() {
 		parent::__construct('mylatestcommits');
 		$this->_nb_commits = UserManager::instance()->getCurrentUser()->getPreference('my_latests_commits_nb_display');
 		if($this->_nb_commits === false) {
@@ -94,7 +94,13 @@ class Widget_MyLatestCommits extends Widget {
 						if (strlen($revision['description']) > 255) {
 							$revisionDescription .= ' [...]';
 						}
-						$html .= html_e('div', array('class' => $HTML->boxGetAltRowStyle($key, true), 'style' => 'border-bottom:1px solid #ddd'),
+						$divattr = array('class' => '', 'style' => 'border-bottom:1px solid #ddd');
+						if ((($key + 1) % 2) == 1) {
+							$divattr['class'] = 'bgcolor-white';
+						} else {
+							$divattr['class'] = 'bgcolor-grey';
+						}
+						$html .= html_e('div', $divattr,
 								html_e('div', array('style' => 'font-size:0.98em'),
 									$this->_getLinkToCommit($project, $revision['commit_id'], $revision['pluginName']).
 									' '._('on').' '.
@@ -106,13 +112,13 @@ class Widget_MyLatestCommits extends Widget {
 			}
 		}
 		if (!$global_nb_revisions) {
-			$html .= $HTML->information(_('No commit found'));
+			$html .= $HTML->warning_msg(_('No commit found.'));
 		}
 		return $html;
 	}
 
 	function getPreferences() {
-		$prefs  = _('Maximum number of commits to display per project');
+		$prefs  = _('Maximum number of commits to display per project.');
 		$prefs .= html_e('input', array('name' => 'nb_commits', 'type' => 'number', 'size' => 2, 'maxlenght' => 3, 'value' => UserManager::instance()->getCurrentUser()->getPreference('my_latests_commits_nb_display')));
 		return $prefs;
 	}

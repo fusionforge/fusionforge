@@ -99,7 +99,7 @@ class ForumMessage extends FFError {
 	 * @param	int		$thread_id			The thread_id of the message, if known.
 	 * @param	int		$is_followup_to 	The message_id of the parent message, if any.
 	 * @param 	int		$user_id		The id of the user that is posting the message
-	 * @return	boolean success.
+	 * @return	bool success.
 	 */
 	function insertmoderated($subject, $body, $thread_id=0, $is_followup_to=0,$user_id) {
 		if (!$thread_id) {
@@ -244,7 +244,7 @@ class ForumMessage extends FFError {
 	 * @param	int		$user_id			The id of the user that is posting the message
 	 * @param	bool	$has_attach			Whether the message has an attach associated. Defaults to false
 	 * @param	int		$timestamp			The timestamp of the message to insert, defaults to 0.
-	 * @return	boolean success.
+	 * @return	bool success.
 	 */
 	function insertmsg($subject, $body, $thread_id=0, $is_followup_to=0,
 					   $user_id, $has_attach=false, $timestamp=0) {
@@ -345,7 +345,7 @@ class ForumMessage extends FFError {
 	 * @param	int		$is_followup_to	The message_id of the parent message, if any.
 	 * @param	bool	$has_attach		Whether the message has an attach associated. Defaults to false
 	 * @param	int		$timestamp		The timestamp of the message to create. Defaults to 0, meaning the timestamp used for this message will be "time()"
-	 * @return	boolean success.
+	 * @return	bool success.
 	 */
 	function create($subject, $body, $thread_id=0, $is_followup_to=0, $has_attach=false, $timestamp = 0) {
 		if (!strlen(trim($body)) || !strlen(trim($subject))) {
@@ -392,7 +392,7 @@ class ForumMessage extends FFError {
 	 * fetchData - re-fetch the data for this forum_message from the database.
 	 *
 	 * @param	int	 $msg_id	The message ID.
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function fetchData($msg_id) {
 		$res = db_query_params ('SELECT * FROM forum_user_vw WHERE msg_id=$1 AND group_forum_id=$2',
@@ -410,7 +410,7 @@ class ForumMessage extends FFError {
 	 * fetchModeratedData - re-fetch the data for this forum_message from the database, for pending messages
 	 *
 	 * @param	int	 The message ID.
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function fetchModeratedData($msg_id) {
 		$res = db_query_params ('SELECT * FROM forum_pending_user_vw WHERE msg_id=$1 AND group_forum_id=$2',
@@ -535,7 +535,7 @@ class ForumMessage extends FFError {
 	/**
 	 * hasFollowups - whether this message has any followups.
 	 *
-	 * @return boolean has_followups.
+	 * @return bool has_followups.
 	 */
 	function hasFollowups() {
 		return $this->data_array['has_followups'];
@@ -544,7 +544,7 @@ class ForumMessage extends FFError {
 	/**
 	 * hasAttach - whether this message has an attachment.
 	 *
-	 * @return boolean has_attach.
+	 * @return bool has_attach.
 	 */
 	function hasAttach() {
 		if ($this->isPending()) {
@@ -620,8 +620,8 @@ class ForumMessage extends FFError {
 	/**
 	 * sendNotice - contains the logic to send out email followups when a message is posted.
 	 *
-	 * @param	boolean	$has_attach	Whether the message has an attach associated. Defaults to false
-	 * @return	boolean	success.
+	 * @param	bool	$has_attach	Whether the message has an attach associated. Defaults to false
+	 * @return	bool	success.
 	 */
 	function sendNotice($has_attach=false) {
 		$ids = $this->Forum->getMonitoringIDs();
@@ -714,7 +714,7 @@ Or reply to this e-mail entering your response between the following markers:
 	/**
 	 * sendNewModeratedMsgNotice - contains the logic to send out email notifications to the forum admins when a new moderated message is posted
 	 *
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function sendNewModeratedMsgNotice() {
 		$ids = array();
@@ -788,7 +788,7 @@ Or reply to this e-mail entering your response between the following markers:
 	 * @param	int	$thread_id		The thread_id of the message, if known.
 	 * @param	int	$has_followups		has followups?
 	 * @param	string	$most_recent_date	The most recent date.
-	 * @return	boolean success.
+	 * @return	bool success.
 	 */
 	function updatemsg($group_forum_id, $posted_by, $subject, $body,
 					   $post_date, $is_followup_to, $thread_id, $has_followups, $most_recent_date) {
@@ -828,7 +828,7 @@ Or reply to this e-mail entering your response between the following markers:
 	 * sendAttachNotice - contains the logic to send out email attachement followups when a message is posted.
 	 *
 	 * @param	int	$attach_id	- The id of the file that has been attached
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function sendAttachNotice($attach_id) {
 		if ($attach_id) {

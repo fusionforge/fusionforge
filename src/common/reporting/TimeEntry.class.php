@@ -99,7 +99,7 @@ class TimeEntry extends FFError {
      *
      * @author Tony Bibbs <tony@geeklog.net>
      * @access public
-     * @return boolean Always false
+     * @return bool Always false
      *
      */
     function update()
@@ -116,7 +116,7 @@ class TimeEntry extends FFError {
      * @param  int     $projectTaskId ID for the task which the time entry record belongs to.
      * @param  int     $reportDate
      * @param  int     $oldTimeCode   ID of time code that was associated with time entry record.
-     * @return boolean True if delete works, otherwise false)
+     * @return bool True if delete works, otherwise false)
      *
      */
     function delete($projectTaskId, $reportDate, $oldTimeCode)

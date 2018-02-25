@@ -6,6 +6,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
+ * Copyright 2016,2018, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -29,10 +30,14 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'include/trove.php';
 require_once $gfwww.'project/admin/project_admin_utils.php';
 
-global $use_tooltips;
+global $use_tooltips, $HTML;
 
 $group_id = getIntFromRequest('group_id');
 session_require_perm('project_admin', $group_id);
+
+if (!forge_get_config('use_trove')) {
+	exit_disabled('summary');
+}
 
 // Check for submission. If so, make changes and redirect
 
@@ -77,17 +82,17 @@ project_admin_header(array('title'=>_('Edit Trove Categorization'),'group'=>$gro
 <p><?php echo _('Select up to three locations for this project in each of the Trove root categories. If the project does not require any or all of these locations, simply select “None Selected”.') ?></p>
 <p><?php echo _('IMPORTANT: Projects should be categorized in the most specific locations available in the map. Simultaneous categorization in a specific category AND a parent category will result in only the more specific categorization being accepted.') ?></p>
 
-<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
-
 <?php
+echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
 
 $CATROOTS = trove_getallroots();
 while (list($catroot,$fullname) = each($CATROOTS)) {
-	$res_cat = db_query_params ('SELECT * FROM trove_cat WHERE trove_cat_id=$1', array($catroot));
-	if (db_numrows($res_cat)>=1 && $use_tooltips) {
-		$title = db_result($res_cat, 0, 'description');
-	} else {
-		$title = '';
+	$title = '';
+	if ($use_tooltips) {
+		$res_cat = db_query_params ('SELECT * FROM trove_cat WHERE trove_cat_id=$1', array($catroot));
+		if (db_numrows($res_cat)>=1 && $use_tooltips) {
+			$title = db_result($res_cat, 0, 'description');
+		}
 	}
 
 	print "\n<h2>".$fullname."</h2>\n";
@@ -117,9 +122,8 @@ while (list($catroot,$fullname) = each($CATROOTS)) {
 <input type="hidden" name="form_key" value="<?php echo form_generate_key();?>"/>
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
 <p><input type="submit" name="submit" value="<?php echo _('Update All Category Changes') ?>" /></p>
-</form>
-
 <?php
+echo $HTML->closeForm();
 
 project_admin_footer();
 

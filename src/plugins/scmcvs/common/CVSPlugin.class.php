@@ -3,7 +3,7 @@
  * FusionForge CVS plugin
  *
  * Copyright 2004-2009, Roland Mas
- * Copyright 2013,2016, Franck Villaume - TrivialDev
+ * Copyright 2013,2016-2017, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -22,8 +22,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-forge_define_config_item ('default_server', 'scmcvs', forge_get_config ('scm_host')) ;
-forge_define_config_item ('repos_path', 'scmcvs', forge_get_config('chroot').'/scmrepos/cvs') ;
+forge_define_config_item('default_server', 'scmcvs', forge_get_config('scm_host')) ;
+forge_define_config_item('repos_path', 'scmcvs', forge_get_config('chroot').'/scmrepos/cvs') ;
 
 class CVSPlugin extends SCMPlugin {
 	function __construct () {
@@ -37,13 +37,14 @@ class CVSPlugin extends SCMPlugin {
 _("This plugin contains the CVS subsystem of FusionForge. It allows each
 FusionForge project to have its own CVS repository, and gives some control
 over it to the project's administrator.");
-		$this->hooks[] = 'scm_browser_page';
-		$this->hooks[] = 'scm_generate_snapshots' ;
-		$this->hooks[] = 'scm_gather_stats' ;
+		$this->_addHook('scm_admin_form');
+		$this->_addHook('scm_browser_page');
+		$this->_addHook('scm_generate_snapshots');
+		$this->_addHook('scm_gather_stats');
 
 		$this->provides['cvs'] = true;
 
-		$this->register () ;
+		$this->register();
 	}
 
 	function getDefaultServer() {
@@ -135,8 +136,7 @@ over it to the project's administrator.");
 		return $b ;
 	}
 
-	function getSnapshotPara ($project) {
-
+	function getSnapshotPara($project) {
 		$b = "" ;
 		$filename = $project->getUnixName().'-scm-latest.tar'.util_get_compressed_file_extension();
 		if (file_exists(forge_get_config('scm_snapshots_path').'/'.$filename)) {
@@ -157,7 +157,7 @@ over it to the project's administrator.");
 		$b .= _('You may also view the complete histories of any file in the repository.');
 		$b .= '</p>';
 		$b .= '<p>[' ;
-		$b .= util_make_link ("/scm/browser.php?group_id=".$project->getID(),
+		$b .= util_make_link ("/scm/browser.php?group_id=".$project->getID().'&scm_plugin='.$this->name,
 								sprintf(_('Browse %s Repository'), 'CVS')
 			) ;
 		$b .= ']</p>' ;
@@ -183,38 +183,40 @@ over it to the project's administrator.");
 			$total = array('adds' => 0, 'commits' => 0);
 
 			while($data = db_fetch_array($result)) {
-				$b .= '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
-				$b .= '<td class="halfwidth">' ;
-				$b .= util_make_link_u ($data['user_name'], $data['user_id'], $data['realname']) ;
-				$b .= '</td><td class="onequarterwidth align-right">'.$data['adds']. '</td>'.
-					'<td class="onequarterwidth align-right">'.$data['commits'].'</td></tr>';
+				$cells = array();
+				$cells[] = array(util_display_user($data['user_name'], $data['user_id'], $data['realname']), 'class' => 'halfwidth');
+				$cells[] = array($data['adds'], 'class' => 'onequarterwidth align-right');
+				$cells[] = array($data['commits'], 'class' => 'onequarterwidth align-right');
+				$b .= $HTML->multiTableRow(array(), $cells);
 				$total['adds'] += $data['adds'];
 				$total['commits'] += $data['commits'];
 				$i++;
 			}
-			$b .= '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
-			$b .= '<td class="halfwidth"><strong>'._('Total').':</strong></td>'.
-				'<td class="onequarterwidth align-right"><strong>'.$total['adds']. '</strong></td>'.
-				'<td class="onequarterwidth align-right"><strong>'.$total['commits'].'</strong></td>';
-			$b .= '</tr>';
+			$cells = array();
+			$cells[] = array(html_e('strong', array(), _('Total')._(':')), 'class' => 'halfwidth');
+			$cells[] = array($total['adds'], 'class' => 'onequarterwidth align-right');
+			$cells[] = array($total['commits'], 'class' => 'onequarterwidth align-right');
+			$b .= $HTML->multiTableRow(array(), $cells);
 			$b .= $HTML->listTableBottom();
 		} else {
-			$b .= $HTML->information(_('No history yet'));
+			$b .= $HTML->warning_msg(_('No history yet.'));
 		}
 
 		return $b ;
 	}
 
 	function printBrowserPage ($params) {
+		if ($params['scm_plugin'] != $this->name) {
+			return;
+		}
 		$project = $this->checkParams ($params) ;
 		if (!$project) {
 			return;
 		}
 
-		if ($project->usesPlugin ($this->name)) {
-			if ($this->browserDisplayable ($project)) {
-				session_redirect("/scm/viewvc.php/?root=".$project->getUnixName());
-			}
+		if ($project->usesPlugin($this->name)) {
+			$iframe_src = '/scm/viewvc.php?root='.$project->getUnixName();
+			htmlIframe($iframe_src, array('id'=>'scmcvs_iframe'));
 		}
 	}
 
@@ -228,19 +230,22 @@ over it to the project's administrator.");
 			return false;
 		}
 
-		$repo = forge_get_config('repos_path', 'scmcvs') . '/' . $project->getUnixName() ;
-		$locks_dir = forge_get_config('repos_path', 'scmcvs') . '/cvs-locks/' . $project->getUnixName() ;
+		$repo_prefix = forge_get_config('repos_path', 'scmcvs');
+		if (!is_dir($repo_prefix) && !mkdir($repo_prefix, 0755, true)) {
+			return false;
+		}
+
+		$repo = $repo_prefix . '/' . $project->getUnixName() ;
+		$locks_dir = $repo_prefix . '/cvs-locks/' . $project->getUnixName() ;
 
 		$repo_exists = false ;
 		if (is_dir ($repo) && is_dir ("$repo/CVSROOT")) {
 			$repo_exists = true ;
 		}
 
-		if (forge_get_config('use_shell')) {
-			$unix_group = 'scm_' . $project->getUnixName() ;
-		} else {
-			$unix_group = forge_get_config ('apache_user') ;
-		}
+		$rw_unix_group = $project->getUnixName() . '_scmrw';
+		$ro_unix_group = $project->getUnixName() . '_scmro';
+		$apache_user = forge_get_config('apache_user');
 
 		if (!$repo_exists) {
 			if (!@mkdir($repo, 0700)) {
@@ -255,41 +260,33 @@ over it to the project's administrator.");
 			system ("chgrp $unix_group $locks_dir") ;
 			system ("chmod 3777 $locks_dir") ;
 
-			if (forge_get_config('use_shell')) {
-				$cvs_binary_version = get_cvs_binary_version();
-				if ($cvs_binary_version == '1.12') {
-					util_create_file_with_contents("$repo/CVSROOT/config", "SystemAuth=no\nLockDir=$locks_dir\nUseNewInfoFmtStrings=yes\n");
-				}
-				if ($cvs_binary_version == '1.11') {
-					util_create_file_with_contents("$repo/CVSROOT/config", "SystemAuth=no\nLockDir=$locks_dir\n");
-				}
-				if ($project->enableAnonSCM()) {
-					util_create_file_with_contents ("$repo/CVSROOT/readers", "anonymous\n");
-					util_create_file_with_contents ("$repo/CVSROOT/passwd", "anonymous:\n");
-					system ("chmod -R g+rwXs,o+rX-w $repo") ;
-				} else {
-					util_create_file_with_contents ("$repo/CVSROOT/readers", "\n");
-					util_create_file_with_contents ("$repo/CVSROOT/passwd", "\n");
-					system ("chmod -R g+rwXs,o-rwx $repo") ;
-				}
-				system ("chgrp -R $unix_group $repo") ;
-			} else {
-				$unix_user = forge_get_config ('apache_user') ;
-				system ("chmod -R g-rwx,o-rwx $repo") ;
-				system ("chown -R $unix_user:$unix_group $repo") ;
+			$cvs_binary_version = get_cvs_binary_version();
+			if ($cvs_binary_version == '1.12') {
+				util_create_file_with_contents("$repo/CVSROOT/config", "SystemAuth=no\nLockDir=$locks_dir\nUseNewInfoFmtStrings=yes\n");
 			}
-		}
-
-		if (forge_get_config('use_shell')) {
+			if ($cvs_binary_version == '1.11') {
+				util_create_file_with_contents("$repo/CVSROOT/config", "SystemAuth=no\nLockDir=$locks_dir\n");
+			}
+			system ("chmod -R g+rwXs,o+rX-w $repo") ;
 			if ($project->enableAnonSCM()) {
 				util_create_file_with_contents ("$repo/CVSROOT/readers", "anonymous\n");
-				util_create_file_with_contents ("$repo/CVSROOT/passwd", "anonymous:\n");
-				system ("chmod g+rwXs,o+rX-w $repo") ;
+				util_create_file_with_contents ("$repo/CVSROOT/passwd", "anonymous::$apache_user\n");
 			} else {
 				util_create_file_with_contents ("$repo/CVSROOT/readers", "\n");
 				util_create_file_with_contents ("$repo/CVSROOT/passwd", "\n");
-				system ("chmod g+rwXs,o-rwx $repo") ;
 			}
+			system ("chgrp -R $rw_unix_group $repo") ;
+			system ("chgrp $ro_unix_group $repo");
+		}
+
+		if ($project->enableAnonSCM()) {
+			util_create_file_with_contents ("$repo/CVSROOT/readers", "anonymous\n");
+			util_create_file_with_contents ("$repo/CVSROOT/passwd", "anonymous::$apache_user\n");
+			system ("chmod g+rwXs,o+rX-w $repo") ;
+		} else {
+			util_create_file_with_contents ("$repo/CVSROOT/readers", "\n");
+			util_create_file_with_contents ("$repo/CVSROOT/passwd", "\n");
+			system ("chmod g+rwXs,o-rwx $repo") ;
 		}
 	}
 
@@ -343,20 +340,22 @@ over it to the project's administrator.");
 			}
 
 			// cleaning stats_cvs_* table for the current day
-			$res = db_query_params ('DELETE FROM stats_cvs_group WHERE month=$1 AND day=$2 AND group_id=$3',
-						array ($month_string,
+			$res = db_query_params('DELETE FROM stats_cvs_group WHERE month = $1 AND day = $2 AND group_id = $3 AND reponame = $4',
+						array($month_string,
 						       $day,
-						       $project->getID())) ;
+						       $project->getID(),
+							$project->getUnixName()));
 			if(!$res) {
 				echo "Error while cleaning stats_cvs_group\n" ;
 				db_rollback () ;
 				return false ;
 			}
 
-			$res = db_query_params ('DELETE FROM stats_cvs_user WHERE month=$1 AND day=$2 AND group_id=$3',
-						array ($month_string,
+			$res = db_query_params('DELETE FROM stats_cvs_user WHERE month = $1 AND day = $2 AND group_id = $3 AND reponame = $4',
+						array($month_string,
 						       $day,
-						       $project->getID())) ;
+						       $project->getID(),
+							$project->getUnixName()));
 			if(!$res) {
 				echo "Error while cleaning stats_cvs_user\n" ;
 				db_rollback () ;
@@ -394,13 +393,15 @@ over it to the project's administrator.");
 			fclose( $hist_file );
 
 			// inserting group results in stats_cvs_groups
-			if (!db_query_params ('INSERT INTO stats_cvs_group (month,day,group_id,checkouts,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
-					      array ($month_string,
+			if (!db_query_params('INSERT INTO stats_cvs_group (month, day, group_id, checkouts, commits, adds, reponame)
+							VALUES ($1, $2, $3, $4, $5, $6, $7)',
+					      array($month_string,
 						     $day,
 						     $project->getID(),
 						     $cvs_co,
 						     $cvs_commit,
-						     $cvs_add))) {
+						     $cvs_add,
+							$project->getUnixName()))) {
 				echo "Error while inserting into stats_cvs_group\n" ;
 				db_rollback () ;
 				return false ;
@@ -418,13 +419,15 @@ over it to the project's administrator.");
 					continue;
 				}
 
-				if (!db_query_params ('INSERT INTO stats_cvs_user (month,day,group_id,user_id,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
-						      array ($month_string,
+				if (!db_query_params('INSERT INTO stats_cvs_user (month, day, group_id, user_id, commits, adds, reponame)
+								VALUES ($1, $2, $3, $4, $5, $6, $7)',
+						      array($month_string,
 							     $day,
 							     $project->getID(),
 							     $user_id,
 							     isset ($usr_commit[$user]) ? $usr_commit[$user] : 0,
-							     isset ($usr_add[$user]) ? $usr_add[$user] : 0))) {
+							     isset ($usr_add[$user]) ? $usr_add[$user] : 0,
+								$project->getUnixName()))) {
 					echo "Error while inserting into stats_cvs_user\n" ;
 					db_rollback () ;
 					return false ;
@@ -499,7 +502,27 @@ over it to the project's administrator.");
 			system ("rm -rf $tmp") ;
 		}
 	}
-  }
+
+	function scm_admin_form(&$params) {
+		global $HTML;
+		$project = $this->checkParams($params);
+		if (!$project) {
+			return false;
+		}
+		session_require_perm('project_admin', $params['group_id']);
+
+		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
+			echo html_ao('div', array('id' => 'tabber-'.$this->name, 'class' => 'tabbertab'));
+		}
+		if ($project->usesPlugin('scmhook')) {
+			$scmhookPlugin = plugin_get_object('scmhook');
+			$scmhookPlugin->displayScmHook($project->getID(), $this->name);
+		}
+		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
+			echo html_ac(html_ap() - 1);
+		}
+	}
+}
 
 // Local Variables:
 // mode: php

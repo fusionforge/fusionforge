@@ -3,6 +3,7 @@
  * MantisBT plugin
  *
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright 2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -30,7 +31,7 @@ global $userMantisBTConf;
 
 foreach ($userMantisBTConf as $userConf) {
 	echo $HTML->boxTop(_('Manage your account for the URL')._(': ').$userConf['url']);
-	echo $HTML->openForm(array('method' => 'post', 'action' => util_make_uri('/plugins/'.$mantisbt->name.'/?type=user&action=updateuserConf')));
+	echo $HTML->openForm(array('method' => 'post', 'action' => '/plugins/'.$mantisbt->name.'/?type=user&action=updateuserConf'));
 	echo $HTML->listTableTop();
 	$cells = array();
 	$cells[] = array(_('MantisBT User').utils_requiredField()._(':'), 'class' => 'align-right');

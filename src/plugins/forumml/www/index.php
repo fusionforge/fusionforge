@@ -107,19 +107,19 @@ if ($p && $plugin_manager->isPluginAvailable($p) && $p->isAllowed()) {
 	echo "<form name='form' method='post' enctype='multipart/form-data'>
 	<table>
     <tr>
-		<td valign='top' align='left'><b> "._('Subject').":&nbsp;</b></td>
-		<td align='left'><input type=text name='subject' size='80'></td>
+		<td class='top align-left'><b> "._('Subject')._(': ')."</b></td>
+		<td class='align-left'><input type=text name='subject' size='80'></td>
 	</tr></table>";
 	echo '<table>
     <tr>
-		<td align="left">
+		<td class="align-left">
 			<p><a href="javascript:;" onclick="addHeader(\'\',\'\',1);">['.('Add cc').']</a>
 			- <a href="javascript:;" onclick="addHeader(\'\',\'\',2);">['._('Attach:').']</a></p>
 			<input type="hidden" value="0" id="header_val" />
 			<div id="mail_header"></div></td></tr></table>';
 	echo "<table><tr>
-			<td valign='top' align='left'><b>"._('Message')._(': ')."</b></td>
-			<td align='left'><textarea rows='20' cols='100' name='message'></textarea></td>
+			<td class='top align-left'><b>"._('Message')._(': ')."</b></td>
+			<td class='align-left'><textarea rows='20' cols='100' name='message'></textarea></td>
 		</tr>
 		<tr>
 			<td></td>

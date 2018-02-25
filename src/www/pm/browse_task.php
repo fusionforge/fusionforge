@@ -66,8 +66,9 @@ if (session_loggedin()) {
 			$paging = 25;
 		}
 		$LUSER->setPreference('paging', $paging);
-	} else
+	} else {
 		$paging = $LUSER->getPreference('paging');
+	}
 }
 
 if(!isset($paging) || !$paging)
@@ -102,7 +103,7 @@ $techs = $engine->getUsersByAllowedAction('pm', $pg->getID(), 'tech');
 $tech_select_arr = array();
 
 foreach ($techs as $tech) {
-	$tech_select_arr[$tech->getID()] = $tech->getRealName() ;
+	$tech_select_arr[$tech->getID()] = $tech->getRealName();
 }
 $tech_select_arr[0] = _('Any');
 
@@ -183,7 +184,7 @@ if ($rows < 1) {
 	/*
 		Now display the tasks in a table with priority colors
 	*/
-	$IS_ADMIN = forge_check_perm ('pm', $pg->getID(), 'manager') ;
+	$IS_ADMIN = forge_check_perm('pm', $pg->getID(), 'manager');
 
 	if ($IS_ADMIN) {
 		echo $HTML->openForm(array('name' => 'taskList', 'action' => '/pm/task.php?group_id='.$group_id.'&group_project_id='.$pg->getID(), 'method' => 'post'));
@@ -277,7 +278,7 @@ if ($rows < 1) {
 		if ($_view=="detail") {
 			echo '
 			<tr class="priority'.$pt_arr[$i]->getPriority() .'">
-				<td>&nbsp;</td><td colspan="'.(count($title_arr)-1).'">'. nl2br( $pt_arr[$i]->getDetails() ) .'</td>
+				<td>&nbsp;</td><td colspan="'.(count($title_arr)-1).'">'. nl2br($pt_arr[$i]->getDetails()) .'</td>
 			</tr>';
 		}
 	}
@@ -314,20 +315,20 @@ if ($rows < 1) {
 			creating a custom technician box which includes "No Change" and "Nobody"
 		*/
 
-		$engine = RBACEngine::getInstance () ;
-		$techs = $engine->getUsersByAllowedAction ('pm', $pg->getID(), 'tech') ;
+		$engine = RBACEngine::getInstance();
+		$techs = $engine->getUsersByAllowedAction('pm', $pg->getID(), 'tech');
 
-		$tech_id_arr = array () ;
-		$tech_name_arr = array () ;
+		$tech_id_arr = array();
+		$tech_name_arr = array();
 
 		foreach ($techs as $tech) {
-			$tech_id_arr[] = $tech->getID() ;
-			$tech_name_arr[] = $tech->getRealName() ;
+			$tech_id_arr[] = $tech->getID();
+			$tech_name_arr[] = $tech->getRealName();
 		}
 		$tech_id_arr[]='100.1';
 		$tech_name_arr[]=_('Unassigned');
 
-		$tech_box=html_build_select_box_from_arrays ($tech_id_arr,$tech_name_arr,'assigned_to',
+		$tech_box=html_build_select_box_from_arrays($tech_id_arr,$tech_name_arr,'assigned_to',
 		'100',true,_('No Change'));
 
 		echo '<fieldset id="fieldset1_closed" class="coolfieldset">
@@ -338,13 +339,13 @@ if ($rows < 1) {
 
 			<tr>
 			<td>'._('Category')._(':').'</td>
-			<td>'. $pg->categoryBox ('category_id','xzxz',true, _('No Change')) .'</td>
+			<td>'. $pg->categoryBox('category_id','xzxz',true, _('No Change')) .'</td>
 			</tr>
 
 			<tr>
 			<td>'._('Priority')._(':').'</td>
 			<td>';
-			build_priority_select_box ('priority', '100', true);
+			echo build_priority_select_box('priority', '100', true);
 			echo '</td>
 			</tr>
 
@@ -355,7 +356,7 @@ if ($rows < 1) {
 
 			<tr>
 			<td>'._('State')._(':').'</td>
-			<td>'. $pg->statusBox ('status_id','xzxz',true,_('No Change')) .'</td>
+			<td>'. $pg->statusBox('status_id','xzxz',true,_('No Change')) .'</td>
 			</tr>
 
 			<tr>

@@ -90,6 +90,22 @@ if (session_loggedin()) {
 						$GLOBALS['Response']->redirect('/');
 					}
 					break;
+				case WidgetLayoutManager::OWNER_TYPE_TRACKER:
+					if ($at = artifactType_get_object($owner_id)) {
+						use_javascript('/widgets/scripts/WidgetController.js');
+						$_REQUEST['group_id'] = $_GET['group_id'] = $at->Group->getID();
+						$request->params['group_id'] = $at->Group->getID(); //bad!
+						$redirect = '/tracker/?group_id='. $at->Group->getID();
+						if (forge_check_global_perm('forge_admin') || forge_check_perm('tracker_admin', $at->getID())) {
+							$ath = new ArtifactTypeHtml($at->Group, $at->getID());
+							$ath->header(array('atid'=>$ath->getID(), 'title'=>$ath->getName()));
+							$lm->displayAvailableWidgets($owner_id, WidgetLayoutManager::OWNER_TYPE_TRACKER, $layout_id);
+							$ath->footer();
+						} else {
+							$GLOBALS['Response']->redirect($redirect);
+						}
+					}
+					break;
 				default:
 					break;
 			}

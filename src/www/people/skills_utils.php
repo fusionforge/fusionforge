@@ -22,6 +22,13 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+/**
+ * displayUserSkills()
+ *
+ * @param	int		$user_id
+ * @param	bool	$allowEdit
+ */
+
 function displayUserSkills($user_id, $allowEdit) {
 	global $HTML, $feedback;
 	$result=db_query_params("SELECT * FROM skills_data_types ORDER BY type_id ASC", array());
@@ -80,7 +87,7 @@ function displayUserSkills($user_id, $allowEdit) {
 			}
 
 			/* now print out the row, formatted nicely */
-			echo '<tr '. $HTML->boxGetAltRowStyle($i+1) . '>';
+			echo '<tr>';
 			if($allowEdit) {
 				echo '<td><input type="checkbox" name="skill_edit[]" value="'.db_result($result, $i, 'skills_data_id').'" /></td>';
 				echo '<td><input type="checkbox" name="skill_delete[]" value="'.db_result($result, $i, 'skills_data_id').'" /></td>';
@@ -120,7 +127,7 @@ function handle_multi_edit($skill_ids = array()) {
 		$skills=db_query_params("SELECT * FROM skills_data_types WHERE type_id > 0", array());
 		if (!$skills || db_numrows($skills) < 1) {
 			$feedback .= _('No Such User')._(': ').db_error();
-			echo '<h2>'._('No Such User').'<h2>';
+			echo '<h2>'._('No Such User').'</h2>';
 		}
 
 		$yearArray = array();
@@ -146,7 +153,7 @@ function handle_multi_edit($skill_ids = array()) {
 			$finishM = substr($finish, 4, 2);
 
 			echo '<table>'.
-				'<tr '.$HTML->boxGetAltRowStyle($i+1).'>'.
+				'<tr>'.
 				'<td><h3>'.db_result($result, $i,'title').'</h3></td></tr>'.
 				'<tr><td>'.
 				'<table class="fullwidth">'.
@@ -155,7 +162,7 @@ function handle_multi_edit($skill_ids = array()) {
 						'<td >'._('Start Date').'</td>'.
 						'<td >'._('End Date').'</td>'.
 					'</tr>';
-			echo '<tr '.$HTML->boxGetAltRowStyle($i+1).'>'.
+			echo '<tr>'.
 						'<td>'.html_build_select_box($skills, 'type[]',db_result($result, $i,'type') , false, '').'</td>'.
 						'<td>'.html_build_select_box_from_arrays($monthArrayVals,$monthArray, 'startM[]', $startM, false, '').
 							html_build_select_box_from_arrays($yearArray,$yearArray, 'startY[]', $startY, false, '').'</td>'.
@@ -164,7 +171,7 @@ function handle_multi_edit($skill_ids = array()) {
 					'</tr>'.
 				'</table>'.
 				'</td></tr>'.
-				'<tr '.$HTML->boxGetAltRowStyle($i+1).'><td>'.
+				'<tr><td>'.
 				'<table>'.
 					'<tr class="tableheading">'.
 						'<td>'._('Title (max 100 characters)').'</td>'.

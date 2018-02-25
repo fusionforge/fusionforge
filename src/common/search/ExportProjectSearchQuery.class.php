@@ -29,7 +29,7 @@ class ExportProjectSearchQuery extends SearchQuery {
 	/**
 	 * @param	string	$words		words we are searching for
 	 * @param	int	$offset		offset
-	 * @param	boolean	$isExact	if we want to search for all the words or if only one matching the query is sufficient
+	 * @param	bool	$isExact	if we want to search for all the words or if only one matching the query is sufficient
 	 */
 	function __construct($words, $offset, $isExact) {
 		parent::__construct($words, $offset, $isExact, 200);
@@ -62,7 +62,7 @@ class ExportProjectSearchQuery extends SearchQuery {
 	}
 
 	function isRowVisible($row) {
-		return forge_check_perm ('project_read', $row['group_id']);
+		return forge_check_perm('project_read', $row['group_id']);
 	}
 }
 

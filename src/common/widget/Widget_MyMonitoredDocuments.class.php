@@ -2,7 +2,7 @@
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
  * Copyright 2010, Franck Villaume - Capgemini
- * Copyright 2011-2014, Franck Villaume - TrivialDev
+ * Copyright 2011-2014,2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is a part of FusionForge.
@@ -37,24 +37,31 @@ class Widget_MyMonitoredDocuments extends Widget {
 	}
 
 	function getTitle() {
-		return _('Monitored Documents');
+		return _('Monitored Documents/Folders');
 	}
 
 	function getContent() {
 		global $HTML;
 		$html_my_monitored_documents = '';
-		$monitorElementObject = new MonitorElement('docdata');
-		$distinctMonitorGroupIdsArray = $monitorElementObject->getMonitoredDistinctGroupIdsByUserIdInArray(user_getid());
-		if (!$distinctMonitorGroupIdsArray || count($distinctMonitorGroupIdsArray) < 1) {
-			$html_my_monitored_documents .= $HTML->warning_msg(_('You are not monitoring any documents.')).html_e('p', array(), _("If you monitor documents, you will be sent new update in the form of an email.")).html_e('p', array(), _("You can monitor documents by clicking on the appropriate icon action in the directory itself."));
+		$monitorElementObjectDoc = new MonitorElement('docdata');
+		$distinctMonitorGroupIdsArrayDoc = $monitorElementObjectDoc->getMonitoredDistinctGroupIdsByUserIdInArray(user_getid());
+		$monitorElementObjectDocGroup = new MonitorElement('docgroup');
+		$distinctMonitorGroupIdsArrayDocGroup = $monitorElementObjectDocGroup->getMonitoredDistinctGroupIdsByUserIdInArray(user_getid());
+		$distinctMonitorGroupIdsArray = array();
+		if (is_array($distinctMonitorGroupIdsArrayDoc) && is_array($distinctMonitorGroupIdsArrayDocGroup)) {
+			$distinctMonitorGroupIdsArray = array_unique(array_merge($distinctMonitorGroupIdsArrayDoc, $distinctMonitorGroupIdsArrayDocGroup));
+		}
+		if (count($distinctMonitorGroupIdsArray) < 1) {
+			$html_my_monitored_documents .= $HTML->warning_msg(_('You are not monitoring any documents or folders.')).html_e('p', array(), _("If you monitor documents, you will be sent new update in the form of an email.")).html_e('p', array(), _("You can monitor documents by clicking on the appropriate icon action in the directory itself."));
 		} else {
 			$validDistinctMonitorGroupIdsArray = array();
 			foreach ($distinctMonitorGroupIdsArray as $distinctMonitorGroupId) {
 				if (forge_check_perm('docman', $distinctMonitorGroupId, 'read')) {
 					$validDistinctMonitorGroupIdsArray[] = $distinctMonitorGroupId;
 				} else {
-					// Oh ho! we found some monitored documents where user has no read access. Let's clean the situation
-					$monitorElementObject->disableMonitoringForGroupIdByUserId($distinctMonitorGroupId, user_getid());
+					// Oh ho! we found some monitored documents/folders where user has no read access. Let's clean the situation
+					$monitorElementObjectDoc->disableMonitoringForGroupIdByUserId($distinctMonitorGroupId, user_getid());
+					$monitorElementObjectDocGroup->disableMonitoringForGroupIdByUserId($distinctMonitorGroupId, user_getid());
 				}
 			}
 			if (count($validDistinctMonitorGroupIdsArray)) {
@@ -74,36 +81,43 @@ class Widget_MyMonitoredDocuments extends Widget {
 				} else {
 					$hide_document = null;
 				}
-				foreach ($distinctMonitorGroupIdsArray as $distinctMonitorGroupId) {
+				foreach ($validDistinctMonitorGroupIdsArray as $distinctMonitorGroupId) {
 					$groupObject = group_get_object($distinctMonitorGroupId);
-					$monitorElementIds = $monitorElementObject->getMonitoredIdsByGroupIdByUserIdInArray($distinctMonitorGroupId, user_getid());
-
-					list($hide_now, $count_diff, $hide_url) = my_hide_url('document', $distinctMonitorGroupId, $hide_item_id, count($monitorElementIds), $hide_document);
+					$monitorElementDocIds = $monitorElementObjectDoc->getMonitoredIdsByGroupIdByUserIdInArray($distinctMonitorGroupId, user_getid());
+					$monitorElementDocGroupIds = $monitorElementObjectDocGroup->getMonitoredIdsByGroupIdByUserIdInArray($distinctMonitorGroupId, user_getid());
+					$monitorElementIds = count($monitorElementDocIds) + count($monitorElementDocGroupIds);
+					list($hide_now, $count_diff, $hide_url) = my_hide_url('document', $distinctMonitorGroupId, $hide_item_id, $monitorElementIds, $hide_document);
 					$count_new = max(0, $count_diff);
 					$cells = array();
 					$cells[] = array($hide_url.util_make_link('/docman/?group_id='.$distinctMonitorGroupId, $groupObject->getPublicName()).'&nbsp;&nbsp;&nbsp;&nbsp;'.
-							'['.count($monitorElementIds).($count_new ? ', '.html_e('b', array(), sprintf(_('%s new'), $count_new)).']' : ']'), 'colspan' => 2);
+							'['.$monitorElementIds.($count_new ? ', '.html_e('b', array(), sprintf(_('%s new'), $count_new)).']' : ']'), 'colspan' => 2);
 					$html_hdr = $HTML->multiTableRow(array('class' => 'boxitem'), $cells);
 					$html = '';
 					if (!$hide_now) {
-						foreach ($monitorElementIds as $key => $monitorElementId) {
-							$documentObject = document_get_object($monitorElementId, $distinctMonitorGroupId);
+						foreach ($monitorElementDocGroupIds as $key => $monitorElementDocGroupId) {
+							$documentGroupObject = documentgroup_get_object($monitorElementDocGroupId, $distinctMonitorGroupId);
 							$cells = array();
-							$cells[] = array('&nbsp;&nbsp;&nbsp;-&nbsp;'.util_make_link('/docman/?group_id='.$distinctMonitorGroupId.'&view=listfile&dirid='.$documentObject->getDocGroupID(), stripslashes($documentObject->getFileName())), 'style' => 'width:99%');
+							$cells[] = array('&nbsp;&nbsp;&nbsp;-&nbsp;(d)&nbsp;'.util_make_link('/docman/?group_id='.$distinctMonitorGroupId.'&view=listfile&dirid='.$monitorElementDocGroupId, stripslashes($documentGroupObject->getName())), 'style' => 'width:99%');
+							$cells[] = array(util_make_link('/docman/?group_id='.$distinctMonitorGroupId.'&action=monitordirectory&option=stop&view=listfile&dirid='.$monitorElementDocGroupId.'&directoryid='.$monitorElementDocGroupId,
+									$HTML->getDeletePic(_('Stop monitoring'), _('Stop monitoring'), array('onClick' => 'return confirm("'._('Stop monitoring this folder?').'")'))),
+									'class' => 'align-center');
+							$html .= $HTML->multiTableRow(array(), $cells);
+						}
+						foreach ($monitorElementDocIds as $key => $monitorElementDocId) {
+							$documentObject = document_get_object($monitorElementDocId, $distinctMonitorGroupId);
+							$cells = array();
+							$cells[] = array('&nbsp;&nbsp;&nbsp;-&nbsp;(f)&nbsp;'.util_make_link('/docman/?group_id='.$distinctMonitorGroupId.'&view=listfile&dirid='.$documentObject->getDocGroupID(), stripslashes($documentObject->getFileName())), 'style' => 'width:99%');
 							$cells[] = array(util_make_link('/docman/?group_id='.$distinctMonitorGroupId.'&action=monitorfile&option=stop&view=listfile&dirid='.$documentObject->getDocGroupID().'&fileid='.$documentObject->getID(),
 									$HTML->getDeletePic(_('Stop monitoring'), _('Stop monitoring'), array('onClick' => 'return confirm("'._('Stop monitoring this document?').'")'))),
 									'class' => 'align-center');
-							$html .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($key, true)), $cells);
-
+							$html .= $HTML->multiTableRow(array(), $cells);
 						}
 					}
-
-
 					$html_my_monitored_documents .= $html_hdr.$html;
 				}
 				$html_my_monitored_documents .= $HTML->listTableBottom();
 			} else {
-				$html_my_monitored_documents .= $HTML->warning_msg(_('You are not monitoring any documents.')).html_e('p', array(), _("If you monitor documents, you will be sent new update in the form of an email.")).html_e('p', array(), _("You can monitor documents by clicking on the appropriate icon action in the directory itself."));
+				$html_my_monitored_documents .= $HTML->warning_msg(_('You are not monitoring any documents/folders.')).html_e('p', array(), _("If you monitor documents/folders, you will be sent new update in the form of an email.")).html_e('p', array(), _("You can monitor documents by clicking on the appropriate icon action in the directory itself."));
 			}
 		}
 		return $html_my_monitored_documents;
@@ -114,9 +128,9 @@ class Widget_MyMonitoredDocuments extends Widget {
 	}
 
 	function getDescription() {
-		return _("List documents that you are currently monitoring, by project.")
-				. '<br />'
-				. _("To cancel any of the monitored items just click on the trash icon next to the item label.");
+		return _('List documents/folders that you are currently monitoring, by project.')
+			.'<br />'
+			._('To cancel any of the monitored items just click on the trash icon next to the item label.');
 	}
 
 	function isAvailable() {

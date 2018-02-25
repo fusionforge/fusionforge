@@ -4,7 +4,7 @@
  *
  * Copyright 2003-2004 (c) GForge LLC
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -29,6 +29,8 @@ require_once $gfcommon.'reporting/report_utils.php';
 require_once $gfcommon.'reporting/ReportSiteTime.class.php';
 
 session_require_global_perm ('forge_stats', 'read') ;
+
+global $HTML, $error_msg;
 
 $report=new Report();
 if ($report->isError()) {
@@ -71,34 +73,33 @@ $a2[]='category';
 $a2[]='subproject';
 $a2[]='user';
 
+echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'get'));
 ?>
-
-<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 <table><tr>
 <td><strong><?php echo _('Type')._(':'); ?></strong><br /><?php echo html_build_select_box_from_arrays($a2,$a,'type',$type,false); ?></td>
 <td><strong><?php echo _('Start Date')._(':'); ?></strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
 <td><strong><?php echo _('End Date')._(':'); ?></strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
-<td>
+<td><br>
 	<input type="hidden" name="typ" value="<?php echo $typ; ?>" />
 	<input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" />
 </td>
 </tr></table>
-</form>
-
 <?php
+echo $HTML->closeForm();
+
 if ($typ =='r') {
 	$report=new ReportSiteTime($type,$start,$end);
 	$labels = $report->labels;
 	$data = $report->getData();
 
-	echo $HTML->listTableTop (array(_('Type'), _('Time')));
+	echo $HTML->listTableTop(array(_('Type'), _('Time')));
 
 	for ($i=0; $i<count($labels); $i++) {
-		echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>'.
+		echo '<tr>'.
 			 '<td>'. $labels[$i] .'</td><td>'. $data[$i] .'</td></tr>';
 	}
 
-	echo $HTML->listTableBottom ();
+	echo $HTML->listTableBottom();
 } elseif ($start != $end) {
 	report_timegraph('site', $type, $start, $end);
 }

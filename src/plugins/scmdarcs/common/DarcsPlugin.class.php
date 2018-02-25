@@ -3,7 +3,7 @@
  * FusionForge Darcs plugin
  *
  * Copyright 2009, Roland Mas
- * Copyright 2013-2014,2016, Franck Villaume - TrivialDev
+ * Copyright 2013-2014,2016-2017, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -73,7 +73,7 @@ over it to the project's administrator.");
 			return;
 		}
 
-		if ($project->usesPlugin($this->name) && forge_check_perm('scm', $project->getID(), 'read')) {
+		if (forge_check_perm('scm', $project->getID(), 'read')) {
 			$result = db_query_params('SELECT sum(commits) AS commits, sum(adds) AS adds FROM stats_cvs_group WHERE group_id=$1',
 						  array($project->getID()));
 			$commit_num = db_result($result, 0, 'commits');
@@ -96,6 +96,7 @@ over it to the project's administrator.");
 	}
 
 	function getInstructionForDarcs($project, $rw) {
+		global $HTML;
 		$repo_names = $this->getRepositories($project);
 		if (count($repo_names) > 0) {
 			$default_repo = "REPO";
@@ -113,22 +114,17 @@ over it to the project's administrator.");
 				$b .= '<p>'._('where REPO can be: ').implode(_(', '), $repo_names).'</p>';
 			}
 		} else if (is_dir($this->getRootRepositories($project))) {
-			$b = '<p><em>'._('No repositories defined.').'</em></p>';
+			$b = $HTML->information(_('No repositories defined.'));
 		} else {
-			$b = '<p><em>'._('Repository not yet created, wait an hour.').'</em></p>';
+			$b = $HTML->information(_('Repository not yet created, wait an hour.'));
 		}
 		return $b;
 	}
 
 	function getInstructionsForAnon($project) {
-		$b = '<h2>';
-		$b .=  _('Anonymous Darcs Access');
-		$b .= '</h2>';
-		$b .= '<p>';
-		$b .=  _('This project\'s Darcs repository can be checked out through anonymous access with the following command.');
-		$b .= '</p>';
+		$b = html_e('h2', array(), _('Anonymous Access'));
+		$b .= html_e('p', array(), _("This project's Darcs repository can be checked out through anonymous access with the following command."));
 		$b .= $this->getInstructionForDarcs($project, false);
-		$b .= '</p>';
 		return $b;
 	}
 
@@ -153,32 +149,25 @@ over it to the project's administrator.");
 		$b = '';
 		$filename = $project->getUnixName().'-scm-latest.tar'.util_get_compressed_file_extension();
 		if (file_exists(forge_get_config('scm_snapshots_path').'/'.$filename)) {
-			$b .= '<p>[';
-			$b .= util_make_link("/snapshots.php?group_id=".$project->getID(),
-					      _('Download the nightly snapshot')
-				);
-			$b .= ']</p>';
+			$b .= html_e('p', array(), '['.util_make_link("/snapshots.php?group_id=".$project->getID(), _('Download the nightly snapshot')).']');
 		}
 		return $b;
 	}
 
 	function getBrowserLinkBlock($project) {
+		global $HTML;
 		$b = html_e('h2', array(), _('Darcs Repository Browser'));
-		$b .= '<p>';
-		$b .= sprintf(_("Browsing the %s tree gives you a view into the current status of this project's code."), 'Darcs');
-		$b .= ' ';
-		$b .= _('You may also view the complete histories of any file in the repository.');
-		$b .= '</p>';
+		$b .= html_e('p', array(), _("Browsing the Darcs tree gives you a view into the current status"
+						. " of this project's code. You may also view the complete"
+						. " history of any file in the repository."));
 		$repo_names = $this->getRepositories($project);
 		if (count($repo_names) > 0) {
 			foreach ($repo_names as $repo_name) {
-				$b .= '<p>[';
-				$b .= util_make_link("/scm/browser.php?group_id=".$project->getID()."&repo_name=".$repo_name,
-									sprintf(_('Browse %s Repository'), 'Darcs') .' ' . $repo_name);
-				$b .= ']</p>';
+				$b .= html_e('p', array(), '['.util_make_link('/scm/browser.php?group_id='.$project->getID()."&repo_name=".$repo_name.'&scm_plugin='.$this->name,
+									_('Browse Darcs repository').' '.$repo_name).']');
 			}
 		} else {
-			$b .= '<p>'._('No repositories to browse').'</p>';
+			$b .= $HTML->information(_('No repositories to browse'));
 		}
 		return $b;
 	}
@@ -187,63 +176,75 @@ over it to the project's administrator.");
 		global $HTML;
 		$b = '';
 
-		$result = db_query_params('SELECT u.realname, u.user_name, u.user_id, sum(commits) as commits, sum(adds) as adds, sum(adds+commits) as combined FROM stats_cvs_user s, users u WHERE group_id=$1 AND s.user_id=u.user_id AND (commits>0 OR adds >0) GROUP BY u.user_id, realname, user_name, u.user_id ORDER BY combined DESC, realname',
+		$result = db_query_params('SELECT u.realname, u.user_name, u.user_id, sum(commits) as commits, sum(adds) as adds, sum(adds+commits) as combined, reponame FROM stats_cvs_user s, users u WHERE group_id=$1 AND s.user_id=u.user_id AND (commits>0 OR adds >0) GROUP BY u.user_id, realname, user_name, u.user_id, reponame ORDER BY reponame, combined DESC, realname',
 					  array($project->getID()));
 
 		if (db_numrows($result) > 0) {
 			$tableHeaders = array(
-				_('Name'),
-				_('Adds'),
-				_('Updates')
-				);
-			$b .= $HTML->listTableTop($tableHeaders);
+					_('Name'),
+					_('Adds'),
+					_('Updates')
+			);
+			$b .= $HTML->listTableTop($tableHeaders, array(), '', 'repo-history');
 
 			$i = 0;
 			$total = array('adds' => 0, 'commits' => 0);
 
-			while($data = db_fetch_array($result)) {
-				$b .= '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
-				$b .= '<td width="50%">';
-				$b .= util_make_link_u($data['user_name'], $data['user_id'], $data['realname']);
-				$b .= '</td><td width="25%" align="right">'.$data['adds']. '</td>'.
-					'<td width="25%" align="right">'.$data['commits'].'</td></tr>';
+			$prevrepo = '';
+			while ($data = db_fetch_array($result)) {
+				if ($prevrepo != $data['reponame']) {
+					if ($prevrepo != '') {
+						$cells = array();
+						$cells[] = array(html_e('strong', array(), _('Total')._(':')), 'class' => 'halfwidth');
+						$cells[] = array($total['adds'], 'class' => 'onequarterwidth align-right');
+						$cells[] = array($total['updates'], 'class' => 'onequarterwidth align-right');
+						$b .= $HTML->multiTableRow(array(), $cells);
+					}
+					$prevrepo = $data['reponame'];
+					$total = array('adds' => 0, 'updates' => 0);
+					$cells = array();
+					$cells[] = array(html_e('strong', array(), $data['reponame'].' '._('Statistics')), 'colspan' => 3);
+					$b .= $HTML->multiTableRow(array(), $cells);
+				}
+				$cells = array();
+				$cells[] = array(util_display_user($data['user_name'], $data['user_id'], $data['realname']), 'class' => 'halfwidth');
+				$cells[] = array($data['adds'], 'class' => 'onequarterwidth align-right');
+				$cells[] = array($data['commits'], 'class' => 'onequarterwidth align-right');
+				$b .= $HTML->multiTableRow(array(), $cells);
 				$total['adds'] += $data['adds'];
 				$total['commits'] += $data['commits'];
 				$i++;
 			}
-			$b .= '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
-			$b .= '<td width="50%"><strong>'._('Total').':</strong></td>'.
-				'<td width="25%" align="right"><strong>'.$total['adds']. '</strong></td>'.
-				'<td width="25%" align="right"><strong>'.$total['commits'].'</strong></td>';
-			$b .= '</tr>';
+			$cells = array();
+			$cells[] = array(html_e('strong', array(), _('Total')._(':')), 'class' => 'halfwidth');
+			$cells[] = array($total['adds'], 'class' => 'onequarterwidth align-right');
+			$cells[] = array($total['commits'], 'class' => 'onequarterwidth align-right');
+			$b .= $HTML->multiTableRow(array(), $cells);
 			$b .= $HTML->listTableBottom();
 		} else {
-			$b .= $HTML->information(_('No history yet'));
+			$b .= $HTML->warning_msg(_('No history yet.'));
 		}
 
 		return $b;
 	}
 
 	function printBrowserPage($params) {
+		if ($params['scm_plugin'] != $this->name) {
+			return;
+		}
 		$project = $this->checkParams($params);
 		if (!$project) {
 			return;
 		}
 
-		if ($project->usesPlugin($this->name)) {
-			if ($this->browserDisplayable($project)) {
-					htmlIframe('/plugins/scmdarcs/cgi-bin/darcsweb.cgi?r='.$project->getUnixName().'/'.$params['repo_name'],array('id'=>'scmdarcs_iframe'));
-			}
+		if ($this->browserDisplayable($project)) {
+			htmlIframe('/plugins/scmdarcs/cgi-bin/darcsweb.cgi?r='.$project->getUnixName().'/'.$params['repo_name'],array('id'=>'scmdarcs_iframe'));
 		}
 	}
 
 	function createOrUpdateRepo($params) {
 		$project = $this->checkParams($params);
 		if (!$project) {
-			return false;
-		}
-
-		if (! $project->usesPlugin($this->name)) {
 			return false;
 		}
 
@@ -370,10 +371,6 @@ over it to the project's administrator.");
 		$snapshot = forge_get_config('scm_snapshots_path').'/'.$group_name.'-scm-latest.tar'.util_get_compressed_file_extension();
 		$tarball = forge_get_config('scm_tarballs_path').'/'.$group_name.'-scmroot.tar'.util_get_compressed_file_extension();
 
-		if (! $project->usesPlugin($this->name)) {
-			return false;
-		}
-
 		if (! $project->enableAnonSCM()) {
 			if (file_exists($tarball)) unlink($tarball);
 			return false;
@@ -422,157 +419,151 @@ over it to the project's administrator.");
 			return false;
 		}
 
-		if (! $project->usesPlugin($this->name)) {
-			return false;
-		}
-
 		if ($params['mode'] == 'day') {
-			db_begin();
-
 			$year = $params['year'];
 			$month = $params['month'];
 			$day = $params['day'];
-			$month_string = sprintf("%04d%02d", $year, $month);
-			$start_time = gmmktime(0, 0, 0, $month, $day, $year);
-			$end_time = $start_time + 86400;
-
-			$updates = 0;
-			$adds = 0;
-			$deletes = 0;
-			$usr_adds = array();
-			$usr_updates = array();
-			$usr_deletes = array();
-
-			$toprepo = $this->getRootRepositories($project);
-			$from_date = date("c", $start_time);
-			$to_date   = date("c", $end_time);
-
-			// cleaning stats_cvs_* table for the current day
-			$res = db_query_params('DELETE FROM stats_cvs_group WHERE month=$1 AND day=$2 AND group_id=$3',
-						array($month_string,
-						       $day,
-						       $project->getID()));
-			if(!$res) {
-				echo "Error while cleaning stats_cvs_group\n";
-				db_rollback();
-				return false;
-			}
-
-			$res = db_query_params('DELETE FROM stats_cvs_user WHERE month=$1 AND day=$2 AND group_id=$3',
-						array($month_string,
-						       $day,
-						       $project->getID()));
-			if(!$res) {
-				echo "Error while cleaning stats_cvs_user\n";
-				db_rollback();
-				return false;
-			}
-
 			foreach ($this->getRepositories($project) as $repo_name) {
-				$repo = $toprepo . '/' . $repo_name;
-				if (!is_dir($repo) || !is_dir("$repo/_darcs")) {
-					echo "No repository $repo\n";
-					db_rollback();
-					return false;
-				} else {
-					// echo "$repo\n";
-				}
-
-				$pipe = popen("darcs changes --repodir='$repo' "
-								."--match 'date \"between $from_date and $to_date\"' "
-								."--xml -s\n", 'r');
-
-				$xml_parser = xml_parser_create();
-				xml_set_element_handler($xml_parser, "DarcsPluginStartElement", "DarcsPluginEndElement");
-
-				// Analyzing history stream
-				while (!feof($pipe) &&  $data = fgets($pipe, 4096)) {
-					if (!xml_parse($xml_parser, $data, feof($pipe))) {
-						debug("Unable to parse XML with error ".
-									xml_error_string(xml_get_error_code($xml_parser)).
-									" on line ".
-									xml_get_current_line_number($xml_parser));
-						db_rollback();
-						return false;
-						break;
-					}
-				}
-				xml_parser_free($xml_parser);
+				$this->gatherStatsRepo($project, $repo_name, $year, $month, $day);
 			}
+		}
+	}
 
-			// inserting group results in stats_cvs_groups
+	function gatherStatsRepo($group, $project_reponame, $year, $month, $day) {
+		$month_string = sprintf("%04d%02d", $year, $month);
+		$start_time = gmmktime(0, 0, 0, $month, $day, $year);
+		$end_time = $start_time + 86400;
 
-			if (!db_query_params('INSERT INTO stats_cvs_group (month,day,group_id,checkouts,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
-					      array($month_string,
-						     $day,
-						     $project->getID(),
-						     0,
-						     $updates,
-						     $adds))) {
-				echo "Error while inserting into stats_cvs_group\n";
+		$updates = 0;
+		$adds = 0;
+		$deletes = 0;
+		$usr_adds = array();
+		$usr_updates = array();
+		$usr_deletes = array();
+
+		$toprepo = $this->getRootRepositories($group);
+		$repo = $toprepo . '/' . $repo_name;
+		if (!is_dir($repo) || !is_dir("$repo/_darcs")) {
+			echo "No repository $repo\n";
+			return false;
+		}
+		$from_date = date("c", $start_time);
+		$to_date   = date("c", $end_time);
+
+		db_begin();
+		// cleaning stats_cvs_* table for the current day
+		$res = db_query_params('DELETE FROM stats_cvs_group WHERE month = $1 AND day = $2 AND group_id = $3 AND reponame = $4',
+						array($month_string,
+							$day,
+							$group->getID(),
+							$project_reponame));
+		if(!$res) {
+			echo "Error while cleaning stats_cvs_group\n";
+			db_rollback();
+			return false;
+		}
+
+		$res = db_query_params('DELETE FROM stats_cvs_user WHERE month = $1 AND day = $2 AND group_id = $3 AND reponame = $4',
+					array($month_string,
+						$day,
+						$group->getID(),
+						$project_reponame));
+		if(!$res) {
+			echo "Error while cleaning stats_cvs_user\n";
+			db_rollback();
+			return false;
+		}
+
+		$pipe = popen("darcs changes --repodir='$repo' --match 'date \"between $from_date and $to_date\"' --xml -s\n", 'r');
+
+		$xml_parser = xml_parser_create();
+		xml_set_element_handler($xml_parser, "DarcsPluginStartElement", "DarcsPluginEndElement");
+
+		// Analyzing history stream
+		while (!feof($pipe) &&  $data = fgets($pipe, 4096)) {
+			if (!xml_parse($xml_parser, $data, feof($pipe))) {
+				debug("Unable to parse XML with error ".
+					xml_error_string(xml_get_error_code($xml_parser)).
+					" on line ".
+					xml_get_current_line_number($xml_parser));
 				db_rollback();
 				return false;
 			}
-
-			// build map for email -> login
-
-			$email_login = array();
-			$email_login_fn = $repo."/_darcs/email-login.txt";
-			if (!file_exists($email_login_fn)) {
-				$email_login_fn = $repo."/.email-login.txt";
-			}
-			if (!file_exists($email_login_fn)) {
-				unset($email_login_fn);
-			}
-
-			if (isset($email_login_fn)) {
-				$fh = fopen($email_login_fn, 'r');
-				while (!feof($fh)) {
-					$a = explode(" ", fgets($fh));
-					if (isset($a[1])) {
-						$email_login[$a[0]] = rtrim($a[1]);
-					}
-				}
-				fclose($fh);
-			}
-
-			// building the user list
-			$user_list = array_unique(array_merge(array_keys($usr_adds), array_keys($usr_updates)));
-
-			foreach ($user_list as $user) {
-				// trying to get user id from darcs user name
-				$id = $user;
-				$tmp_email = explode("<", $id, 2);
-				if (isset($tmp_email[1])) {
-				  $tmp_email = explode(">", $tmp_email[1]);
-				  $id = $tmp_email[0];
-				}
-				if (isset($email_login[$id])) {
-				  $id = $email_login[$id];
-				}
-
-				$u = user_get_object_by_name($id);
-				if ($u) {
-					$user_id = $u->getID();
-				} else {
-					continue;
-				}
-
-				if (!db_query_params('INSERT INTO stats_cvs_user (month,day,group_id,user_id,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
-						      array($month_string,
-							     $day,
-							     $project->getID(),
-							     $user_id,
-							     isset($usr_updates[$user]) ? $usr_updates[$user] : 0,
-							     isset($usr_adds[$user]) ? $usr_adds[$user] : 0))) {
-					echo "Error while inserting into stats_cvs_user\n";
-					db_rollback();
-					return false;
-				}
-			}
-
-			db_commit();
 		}
+		xml_parser_free($xml_parser);
+
+		// inserting group results in stats_cvs_groups
+		if (!db_query_params('INSERT INTO stats_cvs_group (month, day, group_id, checkouts, commits, adds, reponame)
+						VALUES ($1, $2, $3, $4, $5, $6, $7)',
+					array($month_string,
+						$day,
+						$group->getID(),
+						0,
+						$updates,
+						$adds,
+						$project_reponame))) {
+			echo "Error while inserting into stats_cvs_group\n";
+			db_rollback();
+			return false;
+		}
+
+		// build map for email -> login
+		$email_login = array();
+		$email_login_fn = $repo."/_darcs/email-login.txt";
+		if (!file_exists($email_login_fn)) {
+			$email_login_fn = $repo."/.email-login.txt";
+		}
+		if (!file_exists($email_login_fn)) {
+			unset($email_login_fn);
+		}
+
+		if (isset($email_login_fn)) {
+			$fh = fopen($email_login_fn, 'r');
+			while (!feof($fh)) {
+				$a = explode(" ", fgets($fh));
+				if (isset($a[1])) {
+					$email_login[$a[0]] = rtrim($a[1]);
+				}
+			}
+			fclose($fh);
+		}
+
+		// building the user list
+		$user_list = array_unique(array_merge(array_keys($usr_adds), array_keys($usr_updates)));
+
+		foreach ($user_list as $user) {
+			// trying to get user id from darcs user name
+			$id = $user;
+			$tmp_email = explode("<", $id, 2);
+			if (isset($tmp_email[1])) {
+				$tmp_email = explode(">", $tmp_email[1]);
+				$id = $tmp_email[0];
+			}
+			if (isset($email_login[$id])) {
+				$id = $email_login[$id];
+			}
+
+			$u = user_get_object_by_name($id);
+			if ($u) {
+				$user_id = $u->getID();
+			} else {
+				continue;
+			}
+
+			if (!db_query_params('INSERT INTO stats_cvs_user (month, day, group_id, user_id, commits, adds) VALUES ($1, $2, $3, $4, $5, $6, $7)',
+							array($month_string,
+								$day,
+								$group->getID(),
+								$user_id,
+								isset($usr_updates[$user]) ? $usr_updates[$user] : 0,
+								isset($usr_adds[$user]) ? $usr_adds[$user] : 0),
+								$project_reponame)) {
+				echo "Error while inserting into stats_cvs_user\n";
+				db_rollback();
+				return false;
+			}
+		}
+		db_commit();
 	}
 
 	function printAdminPage($params) {
@@ -583,30 +574,27 @@ over it to the project's administrator.");
 			return false;
 		}
 
-		if ($project->usesPlugin($this->name)) {
-			$result = db_query_params(
-				"SELECT repo_name FROM plugin_scmdarcs_create_repos WHERE group_id=$1",
+		$result = db_query_params('SELECT repo_name FROM plugin_scmdarcs_create_repos WHERE group_id=$1',
 				array($project->getID()));
-			if ($result && db_numrows($result) > 0) {
-				$nm = array();
-				while ($res = db_fetch_array($result)) {
-					array_push($nm, $res['repo_name']);
-				}
-				print '<p><strong>'._('Repository to be created: ').'</strong>'.
-					implode(_(', '), $nm) . '</p>';
+		if ($result && db_numrows($result) > 0) {
+			$nm = array();
+			while ($res = db_fetch_array($result)) {
+				array_push($nm, $res['repo_name']);
 			}
-
-			print '<p><strong>'._('Create new repository:').'</strong></p>';
-			print '<p>'._('Repository name')._(': ');
-			print '<input type="string" name="scm_create_repo_name" size=16 maxlength=128 /></p>';
-			print '<p>'._('Clone')._(': ').
-				'<select name="scm_clone_repo_name">';
-			print '<option value="">&lt;none&gt;</option>';
-			foreach ($this->getRepositories($project) as $repo_name) {
-				print '<option value="'.$repo_name.'">'.$repo_name.'</option>';
-			}
-			print '</select></p>';
+			print '<p><strong>'._('Repository to be created')._(': ').'</strong>'.
+				implode(_(', '), $nm) . '</p>';
 		}
+
+		print '<p><strong>'._('Create new repository')._(': ').'</strong></p>';
+		print '<p>'._('Repository name')._(': ');
+		print '<input type="string" name="scm_create_repo_name" size=16 maxlength=128 /></p>';
+		print '<p>'._('Clone')._(': ').
+				'<select name="scm_clone_repo_name">';
+		print '<option value="">&lt;none&gt;</option>';
+		foreach ($this->getRepositories($project) as $repo_name) {
+			print '<option value="'.$repo_name.'">'.$repo_name.'</option>';
+		}
+		print '</select></p>';
 	}
 
 	function adminUpdate($params) {
@@ -656,6 +644,21 @@ over it to the project's administrator.");
 		}
 	}
 
+	function scm_admin_form(&$params) {
+		global $HTML;
+		$project = $this->checkParams($params);
+		if (!$project) {
+			return false;
+		}
+		session_require_perm('project_admin', $params['group_id']);
+
+		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
+			echo html_ao('div', array('id' => 'tabber-'.$this->name, 'class' => 'tabbertab'));
+		}
+		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
+			echo html_ac(html_ap() - 1);
+		}
+	}
 }
 
 function DarcsPluginStartElement($parser, $name, $attrs) {

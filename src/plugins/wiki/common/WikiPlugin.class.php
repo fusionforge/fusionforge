@@ -46,9 +46,10 @@ page edits displayed on activity tab, and multi-project wiki preferences.");
 		$this->hooks[] = 'project_public_area';
 		$this->hooks[] = 'activity';
 		$this->hooks[] = 'site_admin_option_hook';
+		$this->hooks[] = 'crossrefurl';
 	}
 
-	function CallHook ($hookname, & $params) {
+	function CallHook($hookname, &$params) {
 		if (is_array($params) && isset($params['group']))
 			$group_id=$params['group'];
 		if ($hookname == "groupmenu") {
@@ -57,11 +58,10 @@ page edits displayed on activity tab, and multi-project wiki preferences.");
 				return;
 			if ($project->isError())
 				return;
-			if (!$project->isProject())
-				return;
 			if ($project->usesPlugin($this->name)) {
 				$params['TITLES'][]=$this->text;
 				$params['DIRS'][]='/wiki/g/'.$project->getUnixName().'/HomePage';
+				$params['TOOLTIPS'][] = null;
 			} else {
 				$this->hooks["groupmenu"] = "";
 				//$params['TITLES'][]=$this->text." [Off]";
@@ -141,8 +141,22 @@ page edits displayed on activity tab, and multi-project wiki preferences.");
 									'&nbsp;'.'Wiki');
 				$params['result'] .= '</div>';
 			}
+		} elseif ($hookname == 'crossrefurl') {
+			$project = group_get_object($params['group_id']);
+			if (!$project || !is_object($project)) {
+				return;
+			}
+			if ($project->isError()) {
+				return;
+			}
+			if ($project->usesPlugin($this->name) && isset($params['page'])) {
+				$params['url'] = '/wiki/g/'.$prj.'/'.rawurlencode($params['page']);
+				return true;
+			} else {
+				return;
+			}
 		} elseif ($hookname == 'activity') {
-			$group = group_get_object($params['group']);
+			$group = group_get_object($params['group_id']);
 			if (!$group || !is_object($group)) {
 				return;
 			}

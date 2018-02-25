@@ -33,6 +33,7 @@ class Widget_ProjectInfo extends Widget {
 	}
 
 	public function getContent() {
+		global $HTML;
 		$result = '';
 
 		$request =& HTTPRequest::instance();
@@ -42,7 +43,7 @@ class Widget_ProjectInfo extends Widget {
 		// Tag list
 		if (forge_get_config('use_project_tags')) {
 			$list_tag = list_project_tag($group_id);
-			$result .= html_ao('p').html_image('ic/tag.png'). ' ';
+			$result .= html_ao('p').$HTML->getTagPic().' ';
 			if ($list_tag) {
 				$result .= _('Tags')._(': '). $list_tag;
 			} else {

@@ -97,14 +97,12 @@ class Forum extends FFError {
 	 * @param	$Group
 	 * @param	bool	$group_forum_id
 	 * @param	bool	$arr
-	 * @internal	param	\The $object Group object to which this forum is associated.
-	 * @internal	param	\The $int group_forum_id.
-	 * @internal	param	\The $array associative array of data.
+	 * @param	bool	$is_news
 	 */
 	function __construct(&$Group, $group_forum_id = false, $arr = false, $is_news = false) {
 		parent::__construct();
 		if (!$Group || !is_object($Group)) {
-			$this->setError(_('No Valid Group Object'));
+			$this->setError(_('Invalid Project'));
 			return;
 		}
 		if ($Group->isError()) {
@@ -204,12 +202,11 @@ class Forum extends FFError {
 		// news.  The news/submit.php checks for proper permissions.
 		// This needs to be revisited.
 
-		if ($this->Group->getID() == forge_get_config('news_group')) {
+		if ($this->Group->getID() == GROUP_IS_NEWS) {
 			// Future check will be added.
 
 		} else {
 			// Current permissions check.
-
 			if (!forge_check_perm ('forum_admin', $this->Group->getID())) {
 				$this->setPermissionDeniedError();
 				return false;
@@ -252,7 +249,7 @@ class Forum extends FFError {
 	 * fetchData - re-fetch the data for this forum from the database.
 	 *
 	 * @param	int	$group_forum_id	The forum_id.
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function fetchData($group_forum_id) {
 		$res=db_query_params('SELECT * FROM forum_group_list_vw	WHERE group_forum_id=$1 AND group_id=$2',
@@ -426,7 +423,7 @@ class Forum extends FFError {
 	 * setMonitor - Add the current user to the list of people monitoring the forum.
 	 *
 	 * @param	int	$u user id of the user which will be set to monitor this forum. Defaults to 0, meaning the current logged in user will be used.
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function setMonitor($u = -1) {
 		if ($u == -1) {
@@ -448,7 +445,7 @@ class Forum extends FFError {
 	 * stopMonitor - Remove the current user from the list of people monitoring the forum.
 	 *
 	 * @param	$u
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function stopMonitor($u = -1) {
 		if ($u == -1) {
@@ -469,7 +466,7 @@ class Forum extends FFError {
 	/**
 	 * isMonitoring - See if the current user is in the list of people monitoring the forum.
 	 *
-	 * @return	boolean	is_monitoring.
+	 * @return	bool	is_monitoring.
 	 */
 	function isMonitoring() {
 		if (!session_loggedin()) {
@@ -482,7 +479,7 @@ class Forum extends FFError {
 	/**
 	 * savePlace - set a unix time into the database for this user, so future messages can be highlighted.
 	 *
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function savePlace() {
 		if (!session_loggedin()) {
@@ -528,7 +525,7 @@ class Forum extends FFError {
 	 * @param	string	$forum_name The name of the forum.
 	 * @param	string	$description The description of the forum.
 	 * @param	string	$send_all_posts_to The email address to send all new posts to.
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function update($forum_name, $description, $send_all_posts_to = '') {
 		if (strlen($forum_name) < 3) {

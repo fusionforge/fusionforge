@@ -3,7 +3,7 @@
  * FusionForge Bazaar plugin
  *
  * Copyright 2009, Roland Mas
- * Copyright 2013-2014, Franck Villaume - TrivialDev
+ * Copyright 2013-2014,2017, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -24,8 +24,8 @@
 
 require_once $gfcommon.'include/plugins_utils.php';
 
-forge_define_config_item ('default_server', 'scmbzr', forge_get_config ('scm_host')) ;
-forge_define_config_item ('repos_path', 'scmbzr', forge_get_config('chroot').'/scmrepos/bzr') ;
+forge_define_config_item('default_server', 'scmbzr', forge_get_config('scm_host'));
+forge_define_config_item('repos_path', 'scmbzr', forge_get_config('chroot').'/scmrepos/bzr');
 
 class BzrPlugin extends SCMPlugin {
 	function __construct() {
@@ -37,32 +37,32 @@ class BzrPlugin extends SCMPlugin {
 _("This plugin contains the Bazaar subsystem of FusionForge. It allows each
 FusionForge project to have its own Bazaar repository, and gives some control
 over it to the project's administrator.");
-		$this->hooks[] = 'scm_generate_snapshots' ;
+		$this->hooks[] = 'scm_generate_snapshots';
 		$this->hooks[] = 'scm_browser_page';
-		$this->hooks[] = 'scm_update_repolist' ;
-		$this->hooks[] = 'scm_gather_stats' ;
+		$this->hooks[] = 'scm_update_repolist';
+		$this->hooks[] = 'scm_gather_stats';
 
-		$this->main_branch_names = array () ;
-		$this->main_branch_names[] = 'trunk' ;
-		$this->main_branch_names[] = 'master' ;
-		$this->main_branch_names[] = 'main' ;
-		$this->main_branch_names[] = 'head' ;
-		$this->main_branch_names[] = 'HEAD' ;
+		$this->main_branch_names = array();
+		$this->main_branch_names[] = 'trunk';
+		$this->main_branch_names[] = 'master';
+		$this->main_branch_names[] = 'main';
+		$this->main_branch_names[] = 'head';
+		$this->main_branch_names[] = 'HEAD';
 
 		$this->register () ;
 	}
 
 	function getDefaultServer() {
-		return forge_get_config('default_server', 'scmbzr') ;
+		return forge_get_config('default_server', 'scmbzr');
 	}
 
-	function printShortStats ($params) {
-		$project = $this->checkParams ($params) ;
+	function printShortStats($params) {
+		$project = $this->checkParams($params);
 		if (!$project) {
 			return;
 		}
 
-		if ($project->usesPlugin($this->name) && forge_check_perm('scm', $project->getID(), 'read')) {
+		if (forge_check_perm('scm', $project->getID(), 'read')) {
 			$result = db_query_params('SELECT sum(updates) AS updates, sum(adds) AS adds FROM stats_cvs_group WHERE group_id=$1',
 						  array ($project->getID())) ;
 			$commit_num = db_result($result,0,'updates');
@@ -77,7 +77,7 @@ over it to the project's administrator.");
 		}
 	}
 
-	function getBlurb () {
+	function getBlurb() {
 		return '<p>'
 				. sprintf(_('Documentation for %1$s is available at <a href="%2$s">%2$s</a>.'),
 							'Bazaar (“bzr”)',
@@ -85,7 +85,7 @@ over it to the project's administrator.");
 				. '</p>';
 	}
 
-	function getInstructionsForAnon ($project) {
+	function getInstructionsForAnon($project) {
 		$b = '<h2>';
 		$b .=  _('Anonymous Bazaar Access');
 		$b = '</h2>';
@@ -98,7 +98,7 @@ over it to the project's administrator.");
 		return $b ;
 	}
 
-	function getInstructionsForRW ($project) {
+	function getInstructionsForRW($project) {
 		$b = '' ;
 		if (session_loggedin()) {
 			$u = user_get_object(user_getid()) ;
@@ -144,28 +144,29 @@ over it to the project's administrator.");
 		$b .= _('You may also view the complete histories of any file in the repository.');
 		$b .= '</p>';
 		$b .= '<p>[' ;
-		$b .= util_make_link ("/scm/browser.php?group_id=".$project->getID(),
+		$b .= util_make_link ("/scm/browser.php?group_id=".$project->getID().'&scm_plugin='.$this->name,
 								sprintf(_('Browse %s Repository'), 'Bazaar')
 			) ;
 		$b .= ']</p>' ;
 		return $b ;
 	}
 
-	function getStatsBlock ($project) {
+	function getStatsBlock($project) {
 		return;
 	}
 
-	function printBrowserPage ($params) {
+	function printBrowserPage($params) {
+		if ($params['scm_plugin'] != $this->name) {
+			return;
+		}
 		global $HTML;
-		$project = $this->checkParams ($params) ;
+		$project = $this->checkParams($params);
 		if (!$project) {
 			return;
 		}
 
-		if ($project->usesPlugin ($this->name)) {
-			if ($this->browserDisplayable ($project)) {
-					htmlIframe('/scm/loggerhead/'.$project->getUnixName(),array('id'=>'scmbzr_iframe'));
-			}
+		if ($this->browserDisplayable ($project)) {
+			htmlIframe('/scm/loggerhead/'.$project->getUnixName(),array('id'=>'scmbzr_iframe'));
 		}
 	}
 
@@ -173,10 +174,6 @@ over it to the project's administrator.");
 		$project = $this->checkParams ($params) ;
 		if (!$project) {
 			return false ;
-		}
-
-		if (! $project->usesPlugin ($this->name)) {
-			return false;
 		}
 
 		$project_name = $project->getUnixName();
@@ -202,27 +199,27 @@ over it to the project's administrator.");
 				return false;
 			}
 
-			system ("bzr init-repo --no-trees $tmp_repo >/dev/null") ;
-			system ("find $tmp_repo/.bzr -type d | xargs chmod g+s") ;
-			system ("chmod -R g+rwX,o+rX-w $tmp_repo/.bzr") ;
-			system ("chgrp -R $unix_group $tmp_repo/.bzr") ;
+			system("bzr init-repo --no-trees $tmp_repo >/dev/null") ;
+			system("find $tmp_repo/.bzr -type d | xargs chmod g+s") ;
+			system("chmod -R g+rwX,o+rX-w $tmp_repo/.bzr") ;
+			system("chgrp -R $unix_group $tmp_repo/.bzr") ;
 
-			system ("mkdir -p $repo") ;
-			system ("chgrp $unix_group $repo") ;
-			system ("chmod g+ws $repo") ;
-			system ("mv $tmp_repo/.bzr $repo/.bzr");
-			rmdir ($tmp_repo);
+			system("mkdir -p $repo") ;
+			system("chgrp $unix_group $repo") ;
+			system("chmod g+ws $repo") ;
+			system("mv $tmp_repo/.bzr $repo/.bzr");
+			rmdir($tmp_repo);
 		}
 
 		if ($project->enableAnonSCM()) {
-			system ("chmod o+rX-w $repo") ;
+			system("chmod o+rX-w $repo") ;
 		} else {
-			system ("chmod o-rwx $repo") ;
+			system("chmod o-rwx $repo") ;
 		}
 	}
 
-	function updateRepositoryList ($params) {
-		$groups = $this->getGroups () ;
+	function updateRepositoryList($params) {
+		$groups = $this->getGroups();
 
 		$dir = forge_get_config('data_path').'/plugins/scmbzr/public-repositories' ;
 
@@ -274,14 +271,10 @@ over it to the project's administrator.");
 		}
 	}
 
-	function gatherStats ($params) {
-                $project = $this->checkParams ($params) ;
+	function gatherStats($params) {
+                $project = $this->checkParams($params);
                 if (!$project) {
                         return false ;
-                }
-
-                if (! $project->usesPlugin ($this->name)) {
-                        return false;
                 }
 
                 if ($params['mode'] == 'day') {
@@ -313,23 +306,25 @@ over it to the project's administrator.");
 				return false ;
 			}
 
-                        $pipe = popen ("bzr log file://$repo/$branch --long --verbose 2> /dev/null", 'r' ) ;
+			$pipe = popen("bzr log file://$repo/$branch --long --verbose 2> /dev/null", 'r');
 
-                        // cleaning stats_cvs_* table for the current day
-                        $res = db_query_params ('DELETE FROM stats_cvs_group WHERE month=$1 AND day=$2 AND group_id=$3',
-                                                array ($month_string,
-                                                       $day,
-                                                       $project->getID())) ;
+			// cleaning stats_cvs_* table for the current day
+			$res = db_query_params('DELETE FROM stats_cvs_group WHERE month = $1 AND day = $2 AND group_id = $3 AND reponame = $4',
+						array($month_string,
+							$day,
+							$project->getID()),
+							$project->getUnixName());
                         if(!$res) {
-                                echo "Error while cleaning stats_cvs_group\n" ;
+                                echo "Error while cleaning stats_cvs_group\n";
                                 db_rollback () ;
                                 return false ;
                         }
 
-                        $res = db_query_params ('DELETE FROM stats_cvs_user WHERE month=$1 AND day=$2 AND group_id=$3',
-                                                array ($month_string,
-                                                       $day,
-                                                       $project->getID())) ;
+			$res = db_query_params('DELETE FROM stats_cvs_user WHERE month = $1 AND day = $2 AND group_id = $3 AND reponame = $4',
+						array ($month_string,
+							$day,
+							$project->getID()),
+							$project->getUnixName());
                         if(!$res) {
                                 echo "Error while cleaning stats_cvs_user\n" ;
                                 db_rollback () ;
@@ -401,15 +396,17 @@ over it to the project's administrator.");
 
                         // inserting group results in stats_cvs_groups
 			if ($updates > 0 || $adds > 0 || $deletes > 0 || $commits > 0) {
-				if (!db_query_params ('INSERT INTO stats_cvs_group (month,day,group_id,checkouts,commits,adds,updates,deletes) VALUES ($1,$2,$3,$4,$5,$6)',
-						      array ($month_string,
-							     $day,
-							     $project->getID(),
-							     0,
-							     $commits,
-							     $adds,
-							     $updates,
-							     $deletes))) {
+				if (!db_query_params('INSERT INTO stats_cvs_group (month, day, group_id, checkouts, commits, adds, updates, deletes, reponame)
+								VALUES ($1, $2, $3, $4, $5, $6, $7)',
+								array($month_string,
+									$day,
+									$project->getID(),
+									0,
+									$commits,
+									$adds,
+									$updates,
+									$deletes,
+									$project->getUnixName()))) {
 					echo "Error while inserting into stats_cvs_group\n" ;
 					db_rollback () ;
 					return false ;
@@ -433,49 +430,51 @@ over it to the project's administrator.");
 				$ua = $usr_adds[$user] ? $usr_adds[$user] : 0 ;
 				$ud = $usr_deletes[$user] ? $usr_deletes[$user] : 0 ;
 				if ($uu > 0 || $ua > 0 || $uc > 0 || $ud > 0) {
-					if (!db_query_params ('INSERT INTO stats_cvs_user (month,day,group_id,user_id,commits,adds,updates,deletes) VALUES ($1,$2,$3,$4,$5,$6)',
-							      array ($month_string,
-								     $day,
-								     $project->getID(),
-								     $user_id,
-								     $uc,
-								     $ua,
-								     $uu,
-								     $ud))) {
+					if (!db_query_params('INSERT INTO stats_cvs_user (month, day, group_id, user_id, commits, adds, updates, deletes, reponame)
+									VALUES ($1,$2,$3,$4,$5,$6)',
+									array($month_string,
+										$day,
+										$project->getID(),
+										$user_id,
+										$uc,
+										$ua,
+										$uu,
+										$ud,
+										$project->getUnixName()))) {
 						echo "Error while inserting into stats_cvs_user\n" ;
 						db_rollback () ;
 						return false ;
 					}
 				}
-                        }
-                }
-                db_commit();
+			}
+		}
+		db_commit();
 	}
 
-	function findMainBranch ($project) {
+	function findMainBranch($project) {
 		$toprepo = forge_get_config('repos_path', 'scmbzr') ;
 		$repo = $toprepo . '/' . $project->getUnixName() ;
 
-		$branch = '' ;
+		$branch = '';
 
 		foreach ($this->main_branch_names as $bname) {
 			system ("bzr ls file://$repo/$bname > /dev/null 2>&1", $code) ;
 			if ($code == 0) {
 				$branch = $bname ;
-				break ;
+				break;
 			}
 		}
 		return $branch;
 	}
 
-	function generateSnapshots ($params) {
+	function generateSnapshots($params) {
 		$us = forge_get_config('use_scm_snapshots') ;
 		$ut = forge_get_config('use_scm_tarballs') ;
 		if (!$us && !$ut) {
-			return false ;
+			return false;
 		}
 
-		$project = $this->checkParams ($params) ;
+		$project = $this->checkParams($params);
 		if (!$project) {
 			return false ;
 		}
@@ -484,10 +483,6 @@ over it to the project's administrator.");
 
 		$snapshot = forge_get_config('scm_snapshots_path').'/'.$group_name.'-scm-latest.tar'.util_get_compressed_file_extension();
 		$tarball = forge_get_config('scm_tarballs_path').'/'.$group_name.'-scmroot.tar'.util_get_compressed_file_extension();
-
-		if (! $project->usesPlugin ($this->name)) {
-			return false;
-		}
 
 		if (! $project->enableAnonSCM()) {
 			if (file_exists ($snapshot)) unlink ($snapshot) ;
@@ -530,7 +525,23 @@ over it to the project's administrator.");
 			system ("rm -rf $tmp") ;
 		}
 	}
-  }
+
+	function scm_admin_form(&$params) {
+		global $HTML;
+		$project = $this->checkParams($params);
+		if (!$project) {
+			return false;
+		}
+		session_require_perm('project_admin', $params['group_id']);
+
+		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
+			echo html_ao('div', array('id' => 'tabber-'.$this->name, 'class' => 'tabbertab'));
+		}
+		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
+			echo html_ac(html_ap() - 1);
+		}
+	}
+}
 
 // Local Variables:
 // mode: php

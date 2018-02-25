@@ -8,7 +8,7 @@
  * Copyright 2010-2012, Alain Peyrat - Alcatel-Lucent
  * Copyright © 2011 Thorsten Glaser – tarent GmbH
  * Copyright 2011 - Marc-Etienne Vargenau, Alcatel-Lucent
- * Copyright 2012-2016, Franck Villaume - TrivialDev
+ * Copyright 2012-2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -28,30 +28,20 @@
  */
 
 /**
- *
  * Extends the basic Error class to add HTML functions
  * for displaying all site dependent HTML, while allowing
  * extendibility/overriding by themes via the Theme class.
  *
  * Make sure browser.php is included _before_ you create an instance
  * of this object.
- *
  */
 
 require_once $gfcommon.'include/constants.php';
 require_once $gfcommon.'include/FusionForge.class.php';
 require_once $gfcommon.'include/Navigation.class.php';
+require_once $gfwww.'include/html.php';
 
-class Layout extends FFError {
-
-	/**
-	 * Which doctype to use. Can be configured in the
-	 * constructor. If set to 'strict', headerHTMLDeclaration will
-	 * create a doctype definition that uses the strict doctype,
-	 * otherwise it will use the transitional doctype.
-	 * @var string $doctype
-	 */
-	var $doctype = 'transitional';
+abstract class Layout extends FFError {
 
 	/**
 	 * The default main page content
@@ -101,11 +91,6 @@ class Layout extends FFError {
 	 */
 	var $navigation;
 
-	/**
-	 * The color bars in pm reporting
-	 */
-	var $COLOR_LTBACK1 = '#C0C0C0';
-
 	var $js = array();
 	var $js_min = array();
 	var $javascripts = array();
@@ -120,7 +105,7 @@ class Layout extends FFError {
 		$this->navigation = new Navigation();
 
 		// determine rootindex
-		if ( file_exists(forge_get_config('custom_path') . '/index_std.php') ) {
+		if (file_exists(forge_get_config('custom_path') . '/index_std.php')) {
 			$this->rootindex = forge_get_config('custom_path') . '/index_std.php';
 		} else {
 			$this->rootindex = $GLOBALS['gfwww'].'index_std.php';
@@ -231,15 +216,13 @@ class Layout extends FFError {
 	}
 
 	function addButtons($link, $text, $options = array()) {
-		$this->buttons[] = array_merge( array('link' => $link, 'text' => $text), $options);
+		$this->buttons[] = array_merge(array('link' => $link, 'text' => $text), $options);
 	}
 
 	function getButtons() {
 		$code = '';
 		if ($this->buttons) {
-			$code .= "\n";
-			$code .= '<p class="buttonsbar">';
-			$code .= "\n";
+			$code .= html_ao('p', array('class' => 'buttonsbar'));
 			foreach ($this->buttons as $b) {
 				$text = $b['text'];
 				$link = $b['link'];
@@ -248,9 +231,9 @@ class Layout extends FFError {
 					unset($b['icon']);
 				}
 				unset($b['text'], $b['link'], $b['icon']);
-				$code .= '<span class="buttons">'.util_make_link($link, $text, $b).'</span>'."\n";
+				$code .= html_e('span', array('class' => 'buttons'), util_make_link($link, $text, $b));
 			}
-			$code .= '</p>';
+			$code .= html_ac(html_ap() -1);
 			$this->buttons = array();
 		}
 		return $code;
@@ -259,6 +242,8 @@ class Layout extends FFError {
 	/**
 	 * header() - generates the complete header of page by calling
 	 * headerStart() and bodyHeader().
+	 *
+	 * @param	array	$params		Header parameters array
 	 */
 	function header($params) {
 		$this->headerStart($params);
@@ -279,7 +264,7 @@ class Layout extends FFError {
 		$this->headerHTMLDeclaration();
 		echo html_ao('head');
 		echo html_e('meta', array('http-equiv' => 'Content-Type', 'content' => 'text/html; charset=utf-8'));
-		echo html_e('meta', array('http-equiv' => 'X-UA-Compatible', 'content' => 'IE=9; IE=8; IE=EDGE'));
+		echo html_e('meta', array('http-equiv' => 'X-UA-Compatible', 'content' => 'IE=edge'));
 		if (isset($params['meta-description'])) {
 			echo html_e('meta', array('name' => 'description', 'content' => $params['meta-description']));
 		}
@@ -291,6 +276,9 @@ class Layout extends FFError {
 		$this->headerFavIcon();
 		$this->headerRSS();
 		$this->headerSearch();
+		echo '<script type="text/javascript">//<![CDATA[' .
+		"\n\tvar sys_url_base = " . minijson_encode(util_make_url("/"), false) . ";\n" .
+		"//]]></script>\n";
 		$this->headerJS();
 		$this->headerCSS();
 		$this->headerForgepluckerMeta();
@@ -300,19 +288,12 @@ class Layout extends FFError {
 
 	/**
 	 * headerHTMLDeclaration() - generates the HTML declaration, i.e. the
-	 * XML declaration, the doctype definition, and the opening <html>.
+	 * HTML 5 doctype definition, and the opening <html>.
 	 *
 	 */
 	function headerHTMLDeclaration() {
-		global $sysDTDs, $sysXMLNSs;
-
-		print '<' . '?xml version="1.0" encoding="utf-8"?>'."\n";
-		if (!util_ifsetor($this->doctype) || !util_ifsetor($sysDTDs[$this->doctype])) {
-			$this->doctype = 'transitional';
-		}
-		echo $sysDTDs[$this->doctype]['doctype'] . "\n";
-		echo '<html xml:lang="' . _('en') . '" lang="' . _('en') .
-		    '" ' . $sysXMLNSs . ">\n";
+		print "<!DOCTYPE html>\n";
+		echo '<html xml:lang="' . _('en') . '" lang="' . _('en') .  '" ' . ">\n";
 	}
 
 	/**
@@ -385,9 +366,9 @@ class Layout extends FFError {
 	}
 
 	/**
- 	 * headerLinkedDataAutodiscovery() - creates the link+alternate links to alternate
- 	 * 		representations for Linked Data autodiscovery
- 	 */
+	 * headerLinkedDataAutodiscovery() - creates the link+alternate links to alternate
+	 *		representations for Linked Data autodiscovery
+	 */
 	function headerLinkedDataAutodiscovery() {
 
 		// retrieve the script's prefix
@@ -425,124 +406,9 @@ class Layout extends FFError {
 		echo html_e('meta', array('name' => 'Forge-Identification', 'content' => $ff->software_name.':'.$ff->software_version));
 	}
 
-	function bodyHeader($params){
-		?>
-			<div class="header">
-			<table class="fullwidth" id="headertable">
-			<tr>
-			<td><?php util_make_link('/', html_image('logo.png', 198, 52)); ?></td>
-			<td><?php $this->searchBox(); ?></td>
-			<td align="right"><?php
-			$items = $this->navigation->getUserLinks();
-		for ($j = 0; $j < count($items['titles']); $j++) {
-			echo util_make_link($items['urls'][$j], $items['titles'][$j], array('class'=>'lnkutility'), true);
-		}
+	abstract function bodyHeader($params);
 
-		$params['template'] = ' {menu}';
-		plugin_hook('headermenu', $params);
-
-		$this->quickNav();
-
-		plugin_hook('message', array());
-
-		?></td>
-		<td></td>
-	</tr>
-
-</table>
-
-<table class="fullwidth">
-
-	<tr>
-		<td></td>
-		<td colspan="3">
-
-<?php $this->outerTabs($params); ?>
-
-		</td>
-		<td></td>
-	</tr>
-
-	<tr>
-		<td class="align-left toptab" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/topleft.png" height="9" width="9" alt="" /></td>
-		<td class="toptab" width="30"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="30" height="1" alt="" /></td>
-		<td class="toptab"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="1" height="1" alt="" /></td>
-		<td class="toptab" width="30"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="30" height="1" alt="" /></td>
-		<td class="align-right toptab" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/topright.png" height="9" width="9" alt="" /></td>
-	</tr>
-
-	<tr>
-
-		<!-- Outer body row -->
-
-		<td class="toptab"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="10" height="1" alt="" /></td>
-		<td class="top toptab" width="99%" colspan="3">
-
-			<!-- Inner Tabs / Shell -->
-
-			<table class="fullwidth">
-<?php
-
-
-if (isset($params['group']) && $params['group']) {
-
-			?>
-			<tr>
-				<td></td>
-				<td>
-				<?php $this->projectTabs($params['toptab'],$params['group']); ?>
-				</td>
-				<td></td>
-			</tr>
-			<?php
-
-}
-
-?>
-			<tr>
-				<td class="align-left projecttab" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/topleft-inner.png" height="9" width="9" alt="" /></td>
-				<td class="projecttab" ><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="1" height="1" alt="" /></td>
-				<td class="align-right projecttab"  width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/topright-inner.png" height="9" width="9" alt="" /></td>
-			</tr>
-
-			<tr>
-				<td class="projecttab" ><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="10" height="1" alt="" /></td>
-				<td style="width:99%" class="top projecttab">
-
-	<?php
-
-	}
-
-	function footer($params = array()) {
-
-	?>
-
-			<!-- end main body row -->
-
-				</td>
-				<td width="10" class="footer3" ><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="2" height="1" alt="" /></td>
-			</tr>
-			<tr>
-				<td class="align-left footer1" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/bottomleft-inner.png" height="11" width="11" alt="" /></td>
-				<td class="footer3"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="1" height="1" alt="" /></td>
-				<td class="align-right footer1" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/bottomright-inner.png" height="11" width="11" alt="" /></td>
-			</tr>
-			</table>
-
-		<!-- end inner body row -->
-
-		</td>
-		<td width="10" class="footer2"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="2" height="1" alt="" /></td>
-	</tr>
-	<tr>
-		<td class="align-left footer2" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/bottomleft.png" height="9" width="9" alt="" /></td>
-		<td class="footer2" colspan="3"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="1" height="1" alt="" /></td>
-		<td class="align-right footer2" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/bottomright.png" height="9" width="9" alt="" /></td>
-	</tr>
-</table>
-<?php
-		$this->footerEnd();
-	}
+	abstract function footer();
 
 	function footerEnd() { ?>
 
@@ -570,24 +436,7 @@ if (isset($params['group']) && $params['group']) {
 	 * @param   string  $id
 	 * @return	string	the html code
 	 */
-	function boxTop($title, $id = '') {
-		return '
-			<!-- Box Top Start -->
-
-			<table class="fullwidth" style="background:url('.$this->imgroot.'vert-grad.png)">
-			<tr class="align-center">
-			<td class="top align-right" width="10" style="background:url('.$this->imgbaseurl.'box-topleft.png)"><img src="'.$this->imgbaseurl.'clear.png" width="10" height="20" alt="" /></td>
-			<td class="fullwidth" style="background:url('.$this->imgbaseurl.'box-grad.png)"><span class="titlebar">'.$title.'</span></td>
-			<td class="top" width="10" style="background:url('.$this->imgbaseurl.'box-topright.png)"><img src="'.$this->imgbaseurl.'clear.png" width="10" height="20" alt="" /></td>
-			</tr>
-			<tr>
-			<td colspan="3">
-			<table cellspacing="2" cellpadding="2" class="fullwidth">
-			<tr class="align-left">
-			<td colspan="2">
-
-			<!-- Box Top End -->';
-	}
+	abstract function boxTop($title, $id = '');
 
 	/**
 	 * boxMiddle() - Middle HTML box.
@@ -596,53 +445,14 @@ if (isset($params['group']) && $params['group']) {
 	 * @param   string  $id
 	 * @return	string	The html code
 	 */
-	function boxMiddle($title, $id = '') {
-		return '
-			<!-- Box Middle Start -->
-			</td>
-			</tr>
-			<tr class="align-center">
-			<td colspan="2" style="background:url('.$this->imgbaseurl.'box-grad.png)"><span class="titlebar">'.$title.'</span></td>
-			</tr>
-			<tr class="align-left">
-			<td colspan="2">
-			<!-- Box Middle End -->';
-	}
+	abstract function boxMiddle($title, $id = '');
 
 	/**
 	 * boxBottom() - Bottom HTML box.
 	 *
 	 * @return	string	the html code
 	 */
-	function boxBottom() {
-		return '
-			<!-- Box Bottom Start -->
-			</td>
-			</tr>
-			</table>
-			</td>
-			</tr>
-			</table><br />
-			<!-- Box Bottom End -->';
-	}
-
-	/**
-	 * boxGetAltRowStyle() - Get an alternating row style for tables.
-	 *
-	 * @param	int	$i		Row number
-	 * @param	bool	$classonly	Return class name only
-	 * @return	string	the class code
-	 */
-	function boxGetAltRowStyle($i, $classonly = false) {
-		if ($i % 2 == 0)
-			$ret = 'altRowStyleEven';
-		else
-			$ret = 'altRowStyleOdd';
-		if ($classonly)
-			return $ret;
-		else
-			return 'class="'.$ret.'"';
-	}
+	abstract function boxBottom();
 
 	/**
 	 * listTableTop() - Takes an array of titles and builds the first row of a new table.
@@ -654,15 +464,15 @@ if (isset($params['group']) && $params['group']) {
 	 * @param	array	$thClassArray		specific class for th column
 	 * @param	array	$thTitleArray		specific title for th column
 	 * @param	array	$thOtherAttrsArray	optional other html attributes for the th
+	 * @param	string	$theadClass		optional thead tr css class. default is tableheading
 	 * @return	string	the html code
 	 */
-	function listTableTop($titleArray = array(), $linksArray = array(), $class = '', $id = '', $thClassArray = array(), $thTitleArray = array(), $thOtherAttrsArray = array()) {
-		$attrs = array('class' => 'listing');
-		$args = '';
+	function listTableTop($titleArray = array(), $linksArray = array(), $class = '', $id = '', $thClassArray = array(), $thTitleArray = array(), $thOtherAttrsArray = array(), $theadClass = 'tableheading') {
+		$attrs = array();
 		if ($class) {
-			$attrs['class'] .= ' '.$class;
+			$attrs['class'] = $class;
 		} else {
-			$attrs['class'] .= ' full';
+			$attrs['class'] = 'full listing';
 		}
 		if ($id) {
 			$attrs['id'] = $id;
@@ -672,7 +482,7 @@ if (isset($params['group']) && $params['group']) {
 		if (count($titleArray)) {
 			$ap = html_ap();
 			$return .= html_ao('thead');
-			$return .= html_ao('tr');
+			$return .= html_ao('tr', array('class' => $theadClass));
 
 			$count = count($titleArray);
 			for ($i = 0; $i < $count; $i++) {
@@ -687,7 +497,7 @@ if (isset($params['group']) && $params['group']) {
 					$thAttrs['title'] = $thTitleArray[$i];
 				}
 				$cell = $titleArray[$i];
-				if ($linksArray && isset($linksArray[$i])) {
+				if ($linksArray && !empty($linksArray[$i])) {
 					$cell = util_make_link($linksArray[$i], $titleArray[$i]);
 				}
 				$return .= html_e('th', $thAttrs, $cell, false);
@@ -713,17 +523,16 @@ if (isset($params['group']) && $params['group']) {
 	 */
 	function quickNav() {
 		if (!session_loggedin()) {
-			return;
+			return '';
 		} else {
 			// get all projects that the user belongs to
 			$groups = session_get_user()->getGroups();
 
 			if (count($groups) < 1) {
-				return;
+				return '';
 			} else {
-				$result = $this->openForm(array('id' => 'quicknavform', 'name' => 'quicknavform', 'action' => ''));
-				$result .= html_ao('div');
-				$result .= html_ao('select', array('name' => 'quicknav', 'id' => 'quicknav', 'onchange' => 'location.href=document.quicknavform.quicknav.value'));
+				$result = html_ao('div', array('id' => 'quicknavdiv'));
+				$result .= html_ao('select', array('name' => 'quicknav', 'id' => 'quicknav', 'onchange' => 'if (this.value) window.location.href=this.value'));
 				$result .= html_e('option', array('value' => ''), _('Quick Jump To...'), false);
 				if (!forge_get_config('use_quicknav_default') && session_get_user()->getPreference('quicknav_mode')) {
 					$groups = session_get_user()->getActivityLogGroups();
@@ -741,7 +550,6 @@ if (isset($params['group']) && $params['group']) {
 					}
 				}
 				$result .= html_ac(html_ap() - 2);
-				$result .= $this->closeForm();
 			}
 			return $result;
 		}
@@ -760,112 +568,7 @@ if (isset($params['group']) && $params['group']) {
 		echo $this->tabGenerator($menu['urls'], $menu['titles'], $menu['tooltips'], true, $menu['selected'], 'white');
 	}
 
-	function tabGenerator($TABS_DIRS, $TABS_TITLES, $TABS_TOOLTIPS, $nested=false, $selected=false, $sel_tab_bgcolor='white', $total_width='100%') {
-
-		$count=count($TABS_DIRS);
-		$width=intval((100/$count));
-
-		$return = '';
-		$return .= '
-			<!-- start tabs -->
-			<table class="tabGenerator" ';
-
-		if ($total_width != '100%') {
-			$return .= 'style="width:' . $total_width . ';"';
-		}
-		$return .= ">\n";
-		$return .= '<tr>';
-		if ($nested) {
-			$inner='bottomtab';
-		} else {
-			$inner='toptab';
-		}
-		$rowspan = '';
-		for ($i=0; $i<$count; $i++) {
-			if ($i == 0) {
-				//
-				//	this is the first tab, choose an image with end-name
-				//
-				$wassel=false;
-				$issel=($selected==$i);
-				$bgimg=(($issel)?'theme-'.$inner.'-selected-bg.png':'theme-'.$inner.'-notselected-bg.png');
-				//		$rowspan=(($issel)?'rowspan="2" ' : '');
-
-				$return .= '
-					<td '.$rowspan.'class="top" width="10" style="background:url('.$this->imgbaseurl . 'theme-'.$inner.'-end-'.(($issel) ? '' : 'not').'selected.png)">'.
-					'<img src="'.$this->imgbaseurl . 'clear.png" height="25" width="10" alt="" /></td>'.
-					'<td '.$rowspan.'style="background:url('.$this->imgbaseurl . $bgimg.')" width="'.$width.'%" align="center">'.util_make_link ($TABS_DIRS[$i],$TABS_TITLES[$i],array('class'=>(($issel)?'tabsellink':'tablink')),true).'</td>';
-			} elseif ($i==$count-1) {
-				//
-				//	this is the last tab, choose an image with name-end
-				//
-				$wassel=($selected==$i-1);
-				$issel=($selected==$i);
-				$bgimg=(($issel)?'theme-'.$inner.'-selected-bg.png':'theme-'.$inner.'-notselected-bg.png');
-				//		$rowspan=(($issel)?'rowspan="2" ' : '');
-				//
-				//	Build image between current and prior tab
-				//
-				$return .= '
-					<td '.$rowspan.'colspan="2" class="top" width="20" style="background:url('.$this->imgbaseurl . 'theme-'.$inner.'-'.(($wassel) ? '' : 'not').'selected-'.(($issel) ? '' : 'not').'selected.png)">'.
-					'<img src="'.$this->imgbaseurl . 'clear.png" height="2" width="20" alt="" /></td>'.
-					'<td '.$rowspan.'style="background:url('.$this->imgbaseurl . $bgimg.')" width="'.$width.'%" align="center">'.util_make_link($TABS_DIRS[$i], $TABS_TITLES[$i], array('class'=>(($issel)?'tabsellink':'tablink')), true).'</td>';
-				//
-				//	Last graphic on right-side
-				//
-				$return .= '
-					<td '.$rowspan.'class="top" width="10" style="background:url('.$this->imgbaseurl . 'theme-'.$inner.'-'.(($issel) ? '' : 'not').'selected-end.png)">'.
-					'<img src="'.$this->imgbaseurl . 'clear.png" height="2" width="10" alt="" /></td>';
-
-			} else {
-				//
-				//	middle tabs
-				//
-				$wassel=($selected==$i-1);
-				$issel=($selected==$i);
-				$bgimg=(($issel)?'theme-'.$inner.'-selected-bg.png':'theme-'.$inner.'-notselected-bg.png');
-				//		$rowspan=(($issel)?'rowspan="2" ' : '');
-				//
-				//	Build image between current and prior tab
-				//
-				$return .= '
-					<td '.$rowspan.'colspan="2" class="top" width="20" style="background:url('.$this->imgbaseurl . 'theme-'.$inner.'-'.(($wassel) ? '' : 'not').'selected-'.(($issel) ? '' : 'not').'selected.png)">'.
-					'<img src="'.$this->imgbaseurl . 'clear.png" height="2" width="20" alt="" /></td>'.
-					'<td '.$rowspan.'style="background:url('.$this->imgbaseurl . $bgimg.')" width="'.$width.'%" align="center">'.util_make_link($TABS_DIRS[$i], $TABS_TITLES[$i], array('class'=>(($issel)?'tabsellink':'tablink')), true).'</td>';
-
-			}
-		}
-		$return .= '</tr>';
-
-		//
-		//	Building a bottom row in this table, which will be darker
-		//
-		if ($selected == 0) {
-			$beg_cols=0;
-			$end_cols=((count($TABS_DIRS)*3)-3);
-		} elseif ($selected == (count($TABS_DIRS)-1)) {
-			$beg_cols=((count($TABS_DIRS)*3)-3);
-			$end_cols=0;
-		} else {
-			$beg_cols=($selected*3);
-			$end_cols=(((count($TABS_DIRS)*3)-3)-$beg_cols);
-		}
-		$return .= '<tr>';
-		if ($beg_cols > 0) {
-			$return .= '<td colspan="'.$beg_cols.'" height="1" class="notSelTab"><img src="'.$this->imgbaseurl.'clear.png" height="1" width="10" alt="" /></td>';
-		}
-		$return .= '<td colspan="3" height="1" class="selTab"><img src="'.$this->imgbaseurl.'clear.png" height="1" width="10" alt="" /></td>';
-		if ($end_cols > 0) {
-			$return .= '<td colspan="'.$end_cols.'" height="1" class="notSelTab"><img src="'.$this->imgbaseurl.'clear.png" height="1" width="10" alt="" /></td>';
-		}
-		$return .= '</tr>';
-
-		return $return.'
-			</table>
-
-			<!-- end tabs -->
-			';
-	}
+	abstract function tabGenerator($tabs_dirs, $tabs_titles, $tabs_tooltips, $nested=false, $selected=false, $sel_tab_bgcolor='white', $total_width='100%');
 
 	function searchBox() {
 		return $this->navigation->getSearchBox();
@@ -877,9 +580,7 @@ if (isset($params['group']) && $params['group']) {
 	 * @return	string	Html to start a submenu.
 	 */
 	function beginSubMenu() {
-		$return = '
-			<p><strong>';
-		return $return;
+		return '<p><strong>';
 	}
 
 	/**
@@ -888,8 +589,7 @@ if (isset($params['group']) && $params['group']) {
 	 * @return	string	Html to end a submenu.
 	 */
 	function endSubMenu() {
-		$return = '</strong></p>';
-		return $return;
+		return '</strong></p>';
 	}
 
 	/**
@@ -950,24 +650,24 @@ if (isset($params['group']) && $params['group']) {
 	 */
 	function multiTableRow($row_attrs, $cell_data, $istitle = false) {
 		$ap = html_ap();
-		if ( $istitle ) {
+		if ($istitle) {
 			(isset($row_attrs['class'])) ? $row_attrs['class'] .= ' align-center multiTableRowTitle' : $row_attrs['class'] = 'align-center multiTableRowTitle';
 			$row_attrs['class'] .= '';
 		}
 		$return = html_ao('tr', $row_attrs);
 		$type = $istitle ? 'th' : 'td';
-		for ( $c = 0; $c < count($cell_data); $c++ ) {
+		for ($c = 0; $c < count($cell_data); $c++) {
 			$locAp = html_ap();
 			$cellAttrs = array();
 			foreach (array_slice($cell_data[$c],1) as $k => $v) {
 				$cellAttrs[$k] = $v;
 			}
 			$return .= html_ao($type, $cellAttrs);
-			if ( $istitle ) {
+			if ($istitle) {
 				$return .= html_ao('span', array('class' => 'multiTableRowTitle'));
 			}
 			$return .= $cell_data[$c][0];
-			if ( $istitle ) {
+			if ($istitle) {
 				$return .= html_ac(html_ap() -1);
 			}
 			$return .= html_ac($locAp);
@@ -980,26 +680,28 @@ if (isset($params['group']) && $params['group']) {
 	 * feedback() - returns the htmlized feedback string when an action is performed.
 	 *
 	 * @param	string	$feedback	feedback string
+	 * @param	array	$attr		html attributes
 	 * @return	string	htmlized feedback
 	 */
-	function feedback($feedback) {
+	function feedback($feedback, $attr = array()) {
 		if (!$feedback) {
 			return '';
 		} else {
-			return html_e('p', array('class' => 'feedback'), strip_tags($feedback, '<br>'), true);
+			return html_e('p', array_merge(array('class' => 'feedback'), $attr), strip_tags($feedback, '<br>'), true);
 		}
 	}
 	/**
 	 * warning_msg() - returns the htmlized warning string when an action is performed.
 	 *
 	 * @param	string	$msg	msg string
+	 * @param	array	$attr	html attributes
 	 * @return	string	htmlized warning
 	 */
-	function warning_msg($msg) {
+	function warning_msg($msg, $attr = array()) {
 		if (!$msg) {
 			return '';
 		} else {
-			return html_e('p', array('class' => 'warning_msg'), strip_tags($msg, '<br>'), true);
+			return html_e('p', array_merge(array('class' => 'warning_msg'), $attr), strip_tags($msg, '<br>'), true);
 		}
 	}
 
@@ -1007,13 +709,14 @@ if (isset($params['group']) && $params['group']) {
 	 * error_msg() - returns the htmlized error string when an action is performed.
 	 *
 	 * @param	string	$msg	msg string
+	 * @param	array	$attr	html attributes
 	 * @return	string	htmlized error
 	 */
-	function error_msg($msg) {
+	function error_msg($msg, $attr = array()) {
 		if (!$msg) {
 			return '';
 		} else {
-			return html_e('p', array('class' => 'error'), strip_tags($msg, '<br>'), true);
+			return html_e('p', array_merge(array('class' => 'error'), $attr), strip_tags($msg, '<br>'), true);
 		}
 	}
 
@@ -1031,7 +734,7 @@ if (isset($params['group']) && $params['group']) {
 		}
 	}
 
-	function confirmBox($msg, $params, $buttons, $image='*none*') {
+	function confirmBox($msg, $params, $buttons, $image = '*none*') {
 		if ($image == '*none*') {
 			$image = html_image('stop.png', 48, 48);
 		}
@@ -1055,11 +758,10 @@ if (isset($params['group']) && $params['group']) {
 			</tr>
 			<tr>
 			<td colspan="2" align="center">
-			<br />
-			<form action="' . getStringFromServer('PHP_SELF') . '" method="get" >
-			'.$prm.'
-			'.$btn.'
-			</form>
+			<br />'.$this->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'get'))
+			.$prm.'
+			'.$btn.
+			$this->closeForm().'
 			</td>
 			</tr>
 			</table>
@@ -1068,45 +770,40 @@ if (isset($params['group']) && $params['group']) {
 	}
 
 	function jQueryUIconfirmBox($id = 'dialog-confirm', $title = 'Confirm your action', $message = 'Do you confirm your action?') {
-		$htmlcode = html_ao('div', array('id' => $id, 'title' => $title, 'class' => 'hide'));
-		$htmlcode .= html_e('p', array(), html_e('span', array('class' => 'ui-icon ui-icon-alert', 'style' => 'float:left; margin:0 7px 20px 0;'), '', false).$message);
-		$htmlcode .= html_ac(html_ap() -1);
-		return $htmlcode;
+		return html_e('div', array('id' => $id, 'title' => $title, 'class' => 'hide'),
+				html_e('p', array(), html_e('span', array('class' => 'ui-icon ui-icon-alert', 'style' => 'float:left; margin:0 7px 20px 0;'), '', false).$message));
 	}
 
-	function html_input($name, $id = '', $label = '', $type = 'text', $value = '', $extra_params = '') {
+	function html_input($name, $id = '', $label = '', $type = 'text', $value = '', $extra_params_input = '', $extra_params_div = array()) {
 		if (!$id) {
 			$id = $name;
 		}
-		$return = '<div class="field-holder">
-			';
+		$htmllabel = '';
 		if ($label) {
-			$return .= '<label for="' . $id . '">' . $label . '</label>
-				';
+			$htmllabel .= html_e('label', array('for' => $id), $label, true);
 		}
-		$return .= '<input id="' . $id . '" type="' . $type . '"';
+		$attrs = array('id' => $id, 'type' => $type);
 		//if input is a submit then name is not present
 		if ($name) {
-			$return .= ' name="' . $name . '"';
+			$attrs['name'] = $name;
 		}
 		if ($value) {
-			$return .= ' value="' . $value . '"';
+			$attrs['value'] = $value;
 		}
-		if (is_array($extra_params)) {
-			foreach ($extra_params as $key => $extra_params_value) {
-				$return .= $key . '="' . $extra_params_value . '" ';
+		if (is_array($extra_params_input)) {
+			foreach ($extra_params_input as $key => $extra_params_value) {
+				$attrs[$key] = $extra_params_value;
 			}
 		}
-		$return .= '/>
-			</div>';
-		return $return;
+		$attrs_div = array('class' => 'field-holder');
+		$attrs_div = array_merge($attrs_div, $extra_params_div);
+		return html_e('div', $attrs_div, $htmllabel.html_e('input', $attrs));
 	}
 
 	function html_checkbox($name, $value, $id = '', $label = '', $checked = '', $extra_params = array()) {
 		if (!$id) {
 			$id = $name;
 		}
-		$return = html_ao('div', array('class' => 'field-holder'));
 		$attrs = array('name' => $name, 'id' => $id, 'type' => 'checkbox', 'value' => $value);
 		if ($checked) {
 			$attrs['checked'] = 'checked';
@@ -1116,12 +813,11 @@ if (isset($params['group']) && $params['group']) {
 				$attrs[$key] = $extra_params_value;
 			}
 		}
-		$return .= html_e('input', $attrs);
+		$htmllabel = '';
 		if ($label) {
-			$return .= html_e('label', array('for' => $id), $label, true);
+			$htmllabel .= html_e('label', array('for' => $id), $label, true);
 		}
-		$return .= html_ac(html_ap() -1);
-		return $return;
+		return html_e('div', array('class' => 'field-holder'), $htmllabel.html_e('input', $attrs));
 	}
 
 	function html_text_input_img_submit($name, $img_src, $id = '', $label = '', $value = '', $img_title = '', $img_alt = '', $extra_params = array(), $img_extra_params = '') {
@@ -1137,8 +833,7 @@ if (isset($params['group']) && $params['group']) {
 		$return = '<div class="field-holder">
 			';
 		if ($label) {
-			$return .= '<label for="' . $id . '">' . $label . '</label>
-				';
+			$return .= html_e('label', array('for' => $id), $label);
 		}
 		$return .= '<input id="' . $id . '" type="text" name="' . $name . '"';
 		if ($value) {
@@ -1165,145 +860,108 @@ if (isset($params['group']) && $params['group']) {
 		if (!$id) {
 			$id = $name;
 		}
-		$return = '<div class="field-holder">
-			';
+		$htmllabel = '';
 		if ($label) {
-			$return .= '<label for="' . $id . '">' . $label . '</label>
-				';
+			$htmllabel .= html_e('label', array('for' => $id), $label);
 		}
-		$return .= '<select name="' . $name . '" id="' . $id . '" ';
+		$attrs = array();
 		if (is_array($extra_params)) {
 			foreach ($extra_params as $key => $extra_params_value) {
-				$return .= $key . '="' . $extra_params_value . '" ';
+				$attrs[$key] = $extra_params_value;
 			}
 		}
-		$return .= '>';
-		$rows = count($vals);
-		for ($i = 0; $i < $rows; $i++) {
-			if ( $text_is_value ) {
-				$return .= '
-					<option value="' . $vals[$i] . '"';
-				if ($vals[$i] == $checked_val) {
-					$return .= ' selected="selected"';
-				}
-			} else {
-				$return .= '
-					<option value="' . $i . '"';
-				if ($i == $checked_val) {
-					$return .= ' selected="selected"';
-				}
-			}
-			$return .= '>' . htmlspecialchars($vals[$i]) . '</option>';
-		}
-		$return .= '
-			</select>
-			</div>';
-		return $return;
+		return html_e('div', array('class' => 'field-holder'), $htmllabel.html_build_select_box_from_array($vals, $name, $checked_val, $text_is_value, $attrs));
 	}
 
 	function html_textarea($name, $id = '', $label = '', $value = '',  $extra_params = '') {
 		if (!$id) {
 			$id = $name;
 		}
-		$return = '<div class="field-holder">
-			';
+		$return = html_ao('div', array('class' => 'field-holder'));
 		if ($label) {
-			$return .= '<label for="' . $id . '">' . $label . '</label>
-				';
+			$return .= html_e('label', array('for' => $id), $label);
 		}
-		$return .= '<textarea id="' . $id . '" name="' . $name . '" ';
+		$attrs = array('id' => $id, 'name' => $name);
 		if (is_array($extra_params)) {
 			foreach ($extra_params as $key => $extra_params_value) {
-				$return .= $key . '="' . $extra_params_value . '" ';
+				$attrs[$key] = $extra_params_value;
 			}
 		}
-		$return .= '>';
-		if ($value) {
-			$return .= $value;
-		}
-		$return .= '</textarea>
-			</div>';
+		$return .= html_e('textarea', $attrs, $value, false);
+		$return .= html_ac(html_ap() -1);
 		return $return;
 	}
 
-	/**
-	 * @todo use listTableTop and make this function deprecated ?
-	 */
-	function html_table_top($cols, $summary = '', $class = '', $extra_params = '') {
-		$return = '<table summary="' . $summary . '" ';
-		if ($class) {
-			$return .= 'class="' . $class . '" ';
-		}
-		if (is_array($extra_params)) {
-			foreach ($extra_params as $key => $extra_params_value) {
-				$return .= $key . '="' . $extra_params_value . '" ';
-			}
-		}
-		$return .= '>';
-		$return .= '<thead><tr>';
-		$nbCols = count($cols);
-		for ($i = 0; $i < $nbCols; $i++) {
-			$return .= '<th scope="col">' . $cols[$i] . '</th>';
-		}
-		$return .= '</tr></thead>';
-		return $return;
+	function getNextPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/t.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
-	function getMonitorPic($title = '', $alt = '') {
-		return $this->getPicto('ic/mail16w.png', $title, $alt);
+	function getPrevPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/t2.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
-	function getStartMonitoringPic($title = '', $alt = '') {
-		return $this->getPicto('ic/startmonitor.png', $title, $alt);
+	function getMonitorPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/mail16w.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
-	function getStopMonitoringPic($title = '', $alt = '') {
-		return $this->getPicto('ic/stopmonitor.png', $title, $alt);
+	function getStartMonitoringPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/startmonitor.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
-	function getReleaseNotesPic($title = '', $alt = '') {
-		return $this->getPicto('ic/manual16c.png', $title, $alt);
+	function getStopMonitoringPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/stopmonitor.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
-	/* no picto for download */
-	function getDownloadPic($title = '', $alt = '') {
-		return $this->getPicto('ic/save.png', $title, $alt);
+	function getReleaseNotesPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/manual16c.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
-	function getHomePic($title = '', $alt = '') {
-		return $this->getPicto('ic/home16b.png', $title, $alt);
+	function getDownloadPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/download.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
-	function getFollowPic($title = '', $alt = '') {
-		return $this->getPicto('ic/tracker20g.png', $title, $alt);
+	function getHomePic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/home16b.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
-	function getForumPic($title = '', $alt = '') {
-		return $this->getPicto('ic/forum20g.png', $title, $alt);
+	function getFollowPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/tracker20g.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
-	function getDocmanPic($title = '', $alt = '') {
-		return $this->getPicto('ic/docman16b.png', $title, $alt);
+	function getForumPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/forum20g.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
-	function getMailPic($title = '', $alt = '') {
-		return $this->getPicto('ic/mail16b.png', $title, $alt);
+	function getDocmanPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/docman16b.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
-	function getPmPic($title = '', $alt = '') {
-		return $this->getPicto('ic/taskman20g.png', $title, $alt);
+	function getMailPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/mail16b.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
-	function getSurveyPic($title = '', $alt = '') {
-		return $this->getPicto('ic/survey16b.png', $title, $alt);
+	function getMailNotifyPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/mail-send.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
-	function getScmPic($title = '', $alt = '') {
-		return $this->getPicto('ic/cvs16b.png', $title, $alt);
+	function getPmPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/taskman20g.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
-	function getFtpPic($title = '', $alt = '') {
-		return $this->getPicto('ic/ftp16b.png', $title, $alt);
+	function getSurveyPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/survey16b.png', $title, $alt, 20, 20, $otherAttr);
+	}
+
+	function getScmPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/cvs16b.png', $title, $alt, 20, 20, $otherAttr);
+	}
+
+	function getFtpPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/ftp16b.png', $title, $alt, 20, 20, $otherAttr);
+	}
+
+	function getPackagePic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/package.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
 	function getDeletePic($title = '', $alt = '', $otherAttr = array()) {
@@ -1330,16 +988,62 @@ if (isset($params['group']) && $params['group']) {
 		return $this->getPicto('ic/edit-file.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
+	function getEditFieldPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/forum_edit.png', $title, $alt, 20, 20, $otherAttr);
+	}
+
 	function getNewPic($title = '', $alt = '', $otherAttr = array()) {
 		return $this->getPicto('ic/add.png', $title, $alt, 20, 20, $otherAttr);
+	}
+
+	function getAddPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/add-16.png', $title, $alt, 16, 16, $otherAttr);
+	}
+
+	function getMinusPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/minus-16.png', $title, $alt, 16, 16, $otherAttr);
 	}
 
 	function getFolderPic($title = '', $alt = '', $otherAttr = array()) {
 		return $this->getPicto('ic/folder.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
-	function getPicto($url, $title, $alt, $width = '20', $height = '20', $otherAttr = array()) {
-		$otherAttr['title'] = $title;
+	function getOpenFolderPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/ofolder.png', $title, $alt, 20, 20, $otherAttr);
+	}
+
+	function getOpenTicketPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/ticket-open.png', $title, $alt, 20, 20, $otherAttr);
+	}
+
+	function getClosedTicketPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/ticket-closed.png', $title, $alt, 20, 20, $otherAttr);
+	}
+
+	function getErrorPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/stop.png', $title, $alt, 20, 20, $otherAttr);
+	}
+
+	function getTagPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/tag.png', $title, $alt, 20, 20, $otherAttr);
+	}
+
+	function getNewsPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/write16w.png', $title, $alt, 20, 20, $otherAttr);
+	}
+
+	function getPointerUp($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/pointer_up.png', $title, $alt, 20, 20, $otherAttr);
+	}
+
+	function getPointerDown($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/pointer_down.png', $title, $alt, 20, 20, $otherAttr);
+	}
+
+	function getPicto($url, $title, $alt, $width = 20, $height = 20, $otherAttr = array()) {
+		if ($title != '') {
+			$otherAttr['title'] = $title;
+		}
 		if (!$alt) {
 			$otherAttr['alt'] = $title;
 		} else {
@@ -1375,22 +1079,28 @@ if (isset($params['group']) && $params['group']) {
 		echo html_ao('div', array('class' => 'widget_titlebar '. ($readonly?'':'widget_titlebar_handle')));
 		echo html_e('div', array('class' => 'widget_titlebar_title'), $widget->getTitle(), false);
 		if (!$readonly) {
-			echo html_ao('div', array('class' => 'widget_titlebar_close'));
-			echo util_make_link('/widgets/updatelayout.php?owner='.$owner_type.$owner_id.'&action=widget&name['.$widget->id.'][remove]='.$widget->getInstanceId().'&column_id='.$column_id.'&layout_id='.$layout_id, $this->getPicto('ic/close.png', _('Close'), _('Close')));
-			echo html_ac(html_ap() -1);
-			if ($is_minimized) {
-				echo html_ao('div', array('class' => 'widget_titlebar_maximize'));
-				echo util_make_link('/widgets/updatelayout.php?owner='.$owner_type.$owner_id.'&action=maximize&name['.$widget->id.']='.$widget->getInstanceId().'&column_id='.$column_id.'&layout_id='.$layout_id, $this->getPicto($this->_getTogglePlusForWidgets(), _('Maximize'), _('Maximize')));
-				echo html_ac(html_ap() -1);
-			} else {
-				echo html_ao('div', array('class' => 'widget_titlebar_minimize'));
-				echo util_make_link('/widgets/updatelayout.php?owner='.$owner_type.$owner_id.'&action=minimize&name['.$widget->id.']='.$widget->getInstanceId().'&column_id='.$column_id.'&layout_id='.$layout_id, $this->getPicto($this->_getToggleMinusForWidgets(), _('Minimize'), _('Minimize')));
-				echo html_ac(html_ap() -1);
+			if ($widget->canBeRemove()) {
+				echo html_e('div', array('class' => 'widget_titlebar_close'),
+					util_make_link('/widgets/updatelayout.php?owner='.$owner_type.$owner_id.'&action=widget&name%5B'.$widget->id.'%5D%5Bremove%5D='.$widget->getInstanceId().'&column_id='.$column_id.'&layout_id='.$layout_id, $this->getPicto('ic/close.png', _('Remove block'), _('Remove block')), array('onclick' => 'return confirm('."'"._('Do you really want to remove this block?')."'".');')));
+			}
+			if ($widget->canBeMinize()) {
+				if ($is_minimized) {
+					echo html_e('div', array('class' => 'widget_titlebar_maximize'),
+						util_make_link('/widgets/updatelayout.php?owner='.$owner_type.$owner_id.'&action=maximize&name%5B'.$widget->id.'%5D='.$widget->getInstanceId().'&column_id='.$column_id.'&layout_id='.$layout_id, $this->getPicto($this->_getTogglePlusForWidgets(), _('Maximize'), _('Maximize'))));
+				} else {
+					echo html_e('div', array('class' => 'widget_titlebar_minimize'),
+						util_make_link('/widgets/updatelayout.php?owner='.$owner_type.$owner_id.'&action=minimize&name%5B'.$widget->id.'%5D='.$widget->getInstanceId().'&column_id='.$column_id.'&layout_id='.$layout_id, $this->getPicto($this->_getToggleMinusForWidgets(), _('Minimize'), _('Minimize'))));
+				}
 			}
 			if (strlen($widget->hasPreferences())) {
-				echo html_ao('div', array('class' => 'widget_titlebar_prefs'));
-				echo util_make_link('/widgets/updatelayout.php?owner='.$owner_type.$owner_id.'&action=preferences&name['.$widget->id.']='.$widget->getInstanceId().'&layout_id='.$layout_id, _('Preferences'));
-				echo html_ac(html_ap() -1);
+				$url = '/widgets/updatelayout.php?owner='.$owner_type.$owner_id.'&action=preferences&name%5B'.$widget->id.'%5D='.$widget->getInstanceId().'&layout_id='.$layout_id;
+				if ($owner_type == WidgetLayoutManager::OWNER_TYPE_TRACKER) {
+					$url .= '&func='.getStringFromRequest('func');
+					if (getIntFromRequest('aid')) {
+						$url .= '&aid='.getIntFromRequest('aid');
+					}
+				}
+				echo html_e('div', array('class' => 'widget_titlebar_prefs'), util_make_link($url, _('Preferences')));
 			}
 		}
 		if ($widget->hasRss()) {
@@ -1414,7 +1124,7 @@ if (isset($params['group']) && $params['group']) {
 		}
 		if ($widget->isAjax()) {
 			echo html_ao('div', array('id' => $element_id.'-ajax'));
-			echo '<noscript><iframe width="99%" frameborder="0" src="'. $widget->getIframeUrl($owner_id, $owner_type) .'"></iframe></noscript>';
+			echo '<noscript><iframe style="width:99%; border:none;" src="'. $widget->getIframeUrl($owner_id, $owner_type) .'"></iframe></noscript>';
 			echo html_ac(html_ap() -1);
 		} else {
 			echo $widget->getContent();
@@ -1486,9 +1196,17 @@ if (isset($params['group']) && $params['group']) {
 	 * openForm - create the html code to open a form
 	 *
 	 * @param	array	$args	argument of the form (method, action, ...)
+	 * @param	bool	$proto	force https if needed. Useful in case to force https URL page in http page.
 	 * @return	string	html code
 	 */
-	function openForm($args) {
+	function openForm($args, $proto = false) {
+		if (isset($args['action'])) {
+			if ($proto && forge_get_config('use_ssl')) {
+				$args['action'] = util_make_url($args['action'], 'https');
+			} else {
+				$args['action'] = util_make_uri($args['action']);
+			}
+		}
 		return html_ao('form', $args);
 	}
 
@@ -1553,12 +1271,13 @@ if (isset($params['group']) && $params['group']) {
 	/**
 	 * paging_top - Display Introduction to paging & form to set the paging preference
 	 *
-	 * @param	integer	$start		start of the list
-	 * @param	integer	$paging		number of element per page
-	 * @param	integer	$totalElements	total number of this type of Elements in the forge
-	 * @param	integer	$maxElements	max number of Elements to display
+	 * @param	int	$start		start of the list
+	 * @param	int	$paging		number of element per page
+	 * @param	int	$totalElements	total number of this type of Elements in the forge
+	 * @param	int	$maxElements	max number of Elements to display
 	 * @param	string	$actionUrl	next / prev Url to click
 	 * @param	array	$htmlAttr	html attributes to set.
+	 * @return	string
 	 */
 	function paging_top($start = 0, $paging = 25, $totalElements = 0, $maxElements = 0, $actionUrl = '/', $htmlAttr = array()) {
 		$html_content = '';
@@ -1572,21 +1291,24 @@ if (isset($params['group']) && $params['group']) {
 		if ($totalElements) {
 			$html_content .= sprintf(_('Displaying results %1$s out of %2$d total.'), ($start + 1).'-'.$maxElements, $totalElements);
 			if (session_loggedin()) {
-				$html_content .= sprintf(' ' . _('Displaying %1$s results.'), html_build_select_box_from_array(array('10', '25', '50', '100', '1000'), 'nres', $paging, 1));
-				$html_content .= html_e('input', array('type' => 'submit', 'name' => 'setpaging', 'value' => _('Change')));
+				$html_content .= sprintf(' ' . _('Displaying %s results.'), html_build_select_box_from_array(array('10', '25', '50', '100', '1000'), 'nres', $paging, 1));
+				$html_content .= $this->html_input('setpaging', '', '', 'submit', _('Change'), array(), array('style' => 'display: inline-block'));
 				$html_content .= $this->closeForm();
 			}
 		}
-		return html_e('span', $htmlAttr, $html_content, false);
+		if (strlen($html_content) > 0) {
+			return html_e('div', $htmlAttr, $html_content, false);
+		}
 	}
 
 	/**
 	 * paging_bottom - Show extra rows for <-- Prev / Next --> at the bottom of the element list
 	 *
-	 * @param	integer	$start		start of the list
-	 * @param	integer	$paging		number of element per page
-	 * @param	integer	$totalElements	total number of Elements to display
+	 * @param	int	$start		start of the list
+	 * @param	int	$paging		number of element per page
+	 * @param	int	$totalElements	total number of Elements to display
 	 * @param	string	$actionUrl	next / prev Url to click
+	 * @return	string
 	 */
 	function paging_bottom($start = 0, $paging = 25, $totalElements = 0, $actionUrl = '/') {
 		$html_content = '';
@@ -1621,7 +1343,7 @@ if (isset($params['group']) && $params['group']) {
 				}
 			}
 		}
-		if ( $totalElements > $start + $paging) {
+		if ($totalElements > $start + $paging) {
 			$html_content .= util_make_link($actionUrl.$sep.'start='.($start+$paging),'<strong>'._('next').' &rarr;</strong>');
 		}
 		return $html_content;

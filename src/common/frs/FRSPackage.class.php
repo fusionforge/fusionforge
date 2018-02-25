@@ -77,8 +77,8 @@ function frspackage_get_object($package_id, $data = false) {
 /**
  * frspackage_get_groupid - get the project id from a package id
  *
- * @param	integer	$package_id	the package id
- * @return	integer the project id
+ * @param	int	$package_id	the package id
+ * @return	int the project id
  */
 function frspackage_get_groupid($package_id) {
 	$res = db_query_params('SELECT group_id FROM frs_package WHERE package_id=$1',
@@ -111,14 +111,11 @@ class FRSPackage extends FFError {
 	 * @param	$Group
 	 * @param	bool	$package_id
 	 * @param	bool	$arr
-	 * @internal	param	\The $object Group object to which this FRSPackage is associated.
-	 * @internal	param	\The $int package_id.
-	 * @internal	param	\The $array associative array of data.
 	 */
 	function __construct(&$Group, $package_id = false, $arr = false) {
 		parent::__construct();
 		if (!$Group || !is_object($Group)) {
-			$this->setError(_('No Valid Group Object'));
+			$this->setError(_('Invalid Project'));
 			return;
 		}
 		if ($Group->isError()) {
@@ -149,11 +146,11 @@ class FRSPackage extends FFError {
 	/**
 	 * create - create a new FRSPackage in the database.
 	 *
-	 * @param	$name
-	 * @internal	param	\The $string name of this package.
-	 * @return	boolean	success.
+	 * @param	string 	$name	Name of the package
+	 * @param	int	$status Status ID. Default is 1 => Active
+	 * @return	bool	success.
 	 */
-	function create($name) {
+	function create($name, $status = 1) {
 		if (strlen($name) < 3) {
 			$this->setError(_('FRSPackage Name Must Be At Least 3 Characters'));
 			return false;
@@ -166,7 +163,7 @@ class FRSPackage extends FFError {
 			return false;
 		}
 
-		$res = db_query_params('SELECT * FROM frs_package WHERE group_id=$1 AND name=$2',
+		$res = db_query_params('SELECT * FROM frs_package WHERE group_id = $1 AND name = $2',
 					array($this->Group->getID(),
 						htmlspecialchars($name)));
 		if (db_numrows($res)) {
@@ -178,7 +175,7 @@ class FRSPackage extends FFError {
 		$result = db_query_params('INSERT INTO frs_package(group_id, name, status_id) VALUES ($1, $2, $3)',
 					array($this->Group->getID(),
 						htmlspecialchars($name),
-						1));
+						$status));
 		if (!$result) {
 			$this->setError(_('Error Adding Package')._(': ').db_error());
 			db_rollback();
@@ -217,10 +214,10 @@ class FRSPackage extends FFError {
 	 * fetchData - re-fetch the data for this Package from the database.
 	 *
 	 * @param	int	$package_id	The package_id.
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function fetchData($package_id) {
-		$res = db_query_params('SELECT * FROM frs_package WHERE package_id=$1 AND group_id=$2',
+		$res = db_query_params('SELECT * FROM frs_package WHERE package_id = $1 AND group_id = $2',
 					array($package_id, $this->Group->getID()));
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError(_('Invalid package_id'));
@@ -294,7 +291,7 @@ class FRSPackage extends FFError {
 	/**
 	 * isPublic - whether non-group-members can view.
 	 *
-	 * @return	boolean	is_public.
+	 * @return	bool	is_public.
 	 */
 	function isPublic() {
 		$ra = RoleAnonymous::getInstance();
@@ -311,7 +308,7 @@ class FRSPackage extends FFError {
 	/**
 	 * setMonitor - Add the current user to the list of people monitoring this package.
 	 *
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function setMonitor() {
 		if (!session_loggedin()) {
@@ -329,7 +326,7 @@ class FRSPackage extends FFError {
 	/**
 	 * stopMonitor - Remove the current user from the list of people monitoring this package.
 	 *
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function stopMonitor() {
 		if (!session_loggedin()) {
@@ -371,7 +368,7 @@ class FRSPackage extends FFError {
 	/**
 	 * isMonitoring - Is the current user in the list of people monitoring this package.
 	 *
-	 * @return	boolean	is_monitoring.
+	 * @return	bool	is_monitoring.
 	 */
 	function isMonitoring() {
 		if (!session_loggedin()) {
@@ -394,7 +391,7 @@ class FRSPackage extends FFError {
 	 *
 	 * @return	array	The array of user_id's.
 	 */
-	function &getMonitorIDs() {
+	function getMonitorIDs() {
 		$MonitorElementObject = new MonitorElement('frspackage');
 		return $MonitorElementObject->getMonitorUsersIdsInArray($this->getID());
 	}
@@ -404,7 +401,7 @@ class FRSPackage extends FFError {
 	 *
 	 * @param	string	$name		The name of this package.
 	 * @param	int	$status		The status_id of this package from frs_status table.
-	 * @return	boolean success.
+	 * @return	bool success.
 	 */
 	function update($name, $status) {
 		if (strlen($name) < 3) {
@@ -469,6 +466,7 @@ class FRSPackage extends FFError {
 	/**
 	 * getReleases - gets Release objects for all the releases in this package.
 	 *
+	 * @param	bool	$include_hidden
 	 * @return	array	Array of FRSRelease Objects.
 	 */
 	function &getReleases($include_hidden = true) {
@@ -503,9 +501,9 @@ class FRSPackage extends FFError {
 	/**
 	 * delete - delete this package and all its related data.
 	 *
-	 * @param	bool	I'm Sure.
-	 * @param	bool	I'm REALLY sure.
-	 * @return	bool	true/false;
+	 * @param	bool	$sure		I'm Sure.
+	 * @param	bool	$really_sure	I'm REALLY sure.
+	 * @return	bool
 	 */
 	function delete($sure, $really_sure) {
 		if (!$sure || !$really_sure) {
@@ -547,7 +545,7 @@ class FRSPackage extends FFError {
 	 * getNewestReleaseID - return the newest release_id of a package
 	 * The newest release is the release with the highest ID
 	 *
-	 * @return	integer	release id
+	 * @return	int	release id
 	 */
 	public function getNewestReleaseID() {
 		$result = db_query_params('SELECT MAX(release_id) AS release_id FROM frs_release WHERE package_id = $1',
@@ -578,7 +576,7 @@ class FRSPackage extends FFError {
 	/**
 	 * createReleaseFilesAsZip - create the Zip Archive of the release
 	 *
-	 * @param	integer	release id.
+	 * @param	int	release id.
 	 * @return	bool	true on success even if the php ZipArchive does not exist
 	 */
 	public function createReleaseFilesAsZip($release_id) {
@@ -616,7 +614,7 @@ class FRSPackage extends FFError {
 	/**
 	 * sendNotice - Notifies of package actions
 	 *
-	 * @param	boolean	true = new package (default value)
+	 * @param	bool	true = new package (default value)
 	 * @return	bool
 	 */
 	function sendNotice($new = true) {

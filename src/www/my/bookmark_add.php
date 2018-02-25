@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2014, Stéphane-Eymeric Bredthauer
+ * Copyright 2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -25,6 +26,8 @@ require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'include/bookmarks.php';
 
+global $HTML;
+
 site_user_header(array("title"=>_('Add a new Bookmark')));
 
 $bookmark_url = trim(getStringFromRequest('bookmark_url'));
@@ -40,7 +43,7 @@ if (getStringFromRequest('submit') && $bookmark_url && $bookmark_title) {
 	echo util_make_link('/my/',_('Back to your homepage'));
 	echo html_ac(html_ap()-1);
 } else {
-	echo html_ao('form', array('action' => util_make_uri('/my/bookmark_add.php'), 'method' => 'post'));
+	echo $HTML->openForm(array('action' => '/my/bookmark_add.php', 'method' => 'post'));
 	echo html_ao('p');
 	echo html_e('label', array('for' => 'bookmark_url'), _('Bookmark URL')._(':').html_e('br'));
 	echo html_e('input', array('id' => 'bookmark_url', 'required' => 'required', 'type' => 'url', 'name' => 'bookmark_url', 'value' => 'http://'));
@@ -51,7 +54,8 @@ if (getStringFromRequest('submit') && $bookmark_url && $bookmark_title) {
 	echo html_ac(html_ap()-1);
 	echo html_ao('p');
 	echo html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Submit')));
-	echo html_ac(html_ap()-2);
+	echo html_ac(html_ap()-1);
+	echo $HTML->closeForm();
 }
 
 site_user_footer();

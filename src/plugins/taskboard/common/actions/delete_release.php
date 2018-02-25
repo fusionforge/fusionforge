@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (C) 2015 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
+ * Copyright 2016, Stéphane-Eymeric Bredtthauer - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -37,4 +38,4 @@ if ($confirmed) {
 	}
 }
 
-session_redirect('/plugins/taskboard/releases/?group_id='.$group_id);
+session_redirect('/plugins/taskboard/releases/?group_id='.$group_id.'&taskboard_id='.$taskboard->getID(),false);

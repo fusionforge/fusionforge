@@ -7,7 +7,7 @@
  * Copyright 2009, Roland Mas
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2011-2016, Franck Villaume - TrivialDev
+ * Copyright 2011-2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -26,13 +26,15 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'include/FFError.class.php';
+require_once $gfcommon.'include/FFObject.class.php';
 require_once $gfcommon.'docman/Parsedata.class.php';
 require_once $gfcommon.'docman/DocumentManager.class.php';
 require_once $gfcommon.'docman/DocumentGroup.class.php';
 require_once $gfcommon.'docman/DocumentStorage.class.php';
 require_once $gfcommon.'docman/DocumentVersion.class.php';
 require_once $gfcommon.'include/MonitorElement.class.php';
+require_once $gfcommon.'include/utils_crossref.php';
+require_once $gfcommon.'docman/include/constants.php';
 
 $DOCUMENT_OBJ = array();
 
@@ -42,29 +44,33 @@ $DOCUMENT_OBJ = array();
  * You should always use this instead of instantiating the object directly
  *
  * @param	int		$doc_id		The ID of the document - required
- * @param	int		$group_id	Group ID of the project - required
+ * @param	int|bool	$group_id	Group ID of the project - required
  * @param	int|bool	$res		The result set handle ("SELECT * FROM docdata_vw WHERE docid=$1")
  * @return	Document	a document object or false on failure
  */
-function &document_get_object($doc_id, $group_id, $res = false) {
+function &document_get_object($doc_id, $group_id = false, $res = false) {
 	global $DOCUMENT_OBJ;
 	if (!isset($DOCUMENT_OBJ["_".$doc_id."_"])) {
 		if ($res) {
 			//the db result handle was passed in
-		} else {
+		} elseif ($group_id) {
 			$res = db_query_params('SELECT * FROM docdata_vw WHERE docid = $1 and group_id = $2',
 						array($doc_id, $group_id));
+		} else {
+			$res = db_query_params('SELECT * FROM docdata_vw WHERE docid = $1',
+						array($doc_id));
 		}
 		if (!$res || db_numrows($res) < 1) {
 			$DOCUMENT_OBJ["_".$doc_id."_"] = false;
 		} else {
-			$DOCUMENT_OBJ["_".$doc_id."_"] = new Document(group_get_object($group_id), $doc_id, db_fetch_array($res));
+			$arr = db_fetch_array($res);
+			$DOCUMENT_OBJ["_".$doc_id."_"] = new Document(group_get_object($arr['group_id']), $doc_id, $arr);
 		}
 	}
 	return $DOCUMENT_OBJ["_".$doc_id."_"];
 }
 
-class Document extends FFError {
+class Document extends FFObject {
 
 	/**
 	 * Associative array of data from db.
@@ -84,14 +90,11 @@ class Document extends FFError {
 	 * @param	$Group
 	 * @param	bool	$docid
 	 * @param	bool	$arr
-	 * @internal	param	\The $object Group object to which this document is associated.
-	 * @internal	param	\The $int docid.
-	 * @internal	param	\The $array associative array of data.
 	 */
 	function __construct(&$Group, $docid = false, $arr = false) {
-		parent::__construct();
+		parent::__construct($docid, get_class());
 		if (!$Group || !is_object($Group)) {
-			$this->setError(_('No Valid Group Object'));
+			$this->setError(_('Invalid Project'));
 			return;
 		}
 		if ($Group->isError()) {
@@ -128,35 +131,60 @@ class Document extends FFError {
 	/**
 	 * create - use this function to create a new entry in the database.
 	 *
-	 * @param	string	$filename		The filename of this document. Can be a URL.
-	 * @param	string	$filetype		The filetype of this document. If filename is URL, this should be 'URL';
-	 * @param	string	$data			The absolute path file itself.
-	 * @param	int	$doc_group		The doc_group id of the doc_groups table.
-	 * @param	string	$title			The title of this document.
-	 * @param	string	$description		The description of this document.
-	 * @param	int	$stateid		The state id of the document. At creation, cannot be deleted status.
-	 * @param	int	$createtimestamp	Timestamp of the creation of this document
+	 * @param	string	$filename	The filename of this document. Can be a URL.
+	 * @param	string	$filetype	The filetype of this document. If filename is URL, this should be 'URL';
+	 * @param	string	$data		The absolute path file itself.
+	 * @param	int	$doc_group	The doc_group id of the doc_groups table.
+	 * @param	string	$title		The title of this document.
+	 * @param	string	$description	The description of this document.
+	 * @param	int	$stateid	The state id of the document. At creation, cannot be deleted status.
+	 * @param	string	$vcomment	The comment of the new created version
+	 * @param	array	$importData	Array of data to change creator, time of creation, bypass permission check and do not send notification like:
+	 *					array('user' => 127, 'time' => 1234556789, 'nopermcheck' => 1, 'nonotice' => 1)
 	 * @return	bool	success.
 	 */
-	function create($filename, $filetype, $data, $doc_group, $title, $description, $stateid = 0, $createtimestamp = null) {
-		if (strlen($title) < 5) {
-			$this->setError(_('Title Must Be At Least 5 Characters'));
+	function create($filename, $filetype, $data, $doc_group, $title, $description, $stateid = 0, $vcomment = '', $importData = array()) {
+		if (strlen($title) < DOCMAN__TITLE_MIN_SIZE) {
+			$this->setError(sprintf(_('Title Must Be At Least %d Characters'), DOCMAN__TITLE_MIN_SIZE));
 			return false;
 		}
-		if (strlen($description) < 10) {
-			$this->setError(_('Document Description Must Be At Least 10 Characters'));
+		if (strlen($description) < DOCMAN__DESCRIPTION_MIN_SIZE) {
+			$this->setError(sprintf(_('Document Description Must Be At Least %d Characters'), DOCMAN__DESCRIPTION_MIN_SIZE));
 			return false;
 		}
 
-		$user_id = ((session_loggedin()) ? user_getid() : 100);
+		if (strlen($title) > DOCMAN__TITLE_MAX_SIZE) {
+			$this->setError(sprintf(_('Title Must Be Max %d Characters'), DOCMAN__TITLE_MAX_SIZE));
+			return false;
+		}
 
-		$doc_initstatus = '3';
+		if (strlen($description) > DOCMAN__DESCRIPTION_MAX_SIZE) {
+			$this->setError(sprintf(_('Document Description Must Be Max %d Characters'), DOCMAN__DESCRIPTION_MAX_SIZE));
+			return false;
+		}
+
+		if (strlen($description) > DOCMAN__COMMENT_MAX_SIZE) {
+			$this->setError(sprintf(_('Document Comment Must Be Max %d Characters'), DOCMAN__COMMENT_MAX_SIZE));
+			return false;
+		}
+
+		if (isset($importData['user'])) {
+			$user_id = $importData['user'];
+		} else {
+			$user_id = ((session_loggedin()) ? user_getid() : DOCMAN__INFAMOUS_USER_ID);
+		}
+
 		$perm =& $this->Group->getPermission();
-		if ($perm && is_object($perm) && $perm->isDocEditor()) {
-			if ($stateid && $stateid != 2) {
-				$doc_initstatus = $stateid;
-			} else {
-				$doc_initstatus = '1';
+		if (isset($importData['nopermcheck']) && $importData['nopermcheck']) {
+			$doc_initstatus = $stateid;
+		} else {
+			$doc_initstatus = '3';
+			if ($perm && is_object($perm) && $perm->isDocEditor()) {
+				if ($stateid && $stateid != 2) {
+					$doc_initstatus = $stateid;
+				} else {
+					$doc_initstatus = '1';
+				}
 			}
 		}
 
@@ -192,7 +220,7 @@ class Document extends FFError {
 		}
 
 		db_begin();
-		$createtimestamp = (($createtimestamp) ? $createtimestamp : time());
+		$createtimestamp = (isset($importData['time']))? $importData['time'] : time();
 		$result = db_query_params('INSERT INTO doc_data (group_id, createdate, doc_group, stateid)
 						VALUES ($1, $2, $3, $4)',
 						array($this->Group->getID(), $createtimestamp, $doc_group, $doc_initstatus));
@@ -205,7 +233,7 @@ class Document extends FFError {
 		}
 
 		$dv = new DocumentVersion($this);
-		$idversion = $dv->create($docid, $title, $description, $user_id, $filetype, $filename, $filesize, $kwords, 1, 1, $createtimestamp);
+		$idversion = $dv->create($docid, $title, $description, $user_id, $filetype, $filename, $filesize, $kwords, $createtimestamp, 1, 1, $vcomment);
 		if (!$idversion) {
 			$this->setError($dv->getErrorMessage());
 			db_rollback();
@@ -235,7 +263,7 @@ class Document extends FFError {
 			return false;
 		}
 
-		if ($perm->isDocEditor()) {
+		if ($perm->isDocEditor() || (isset($importData['nopermcheck']) && $importData['nopermcheck'])) {
 			$localDg = documentgroup_get_object($doc_group, $this->Group->getID());
 			if (!$localDg->update($localDg->getName(), $localDg->getParentID(), 1, $localDg->getState(), $createtimestamp)) {
 				$this->setError(_('Error updating document group')._(': ').$localDg->getErrorMessage());
@@ -246,8 +274,10 @@ class Document extends FFError {
 				return false;
 			}
 		}
-		$this->sendNotice(true);
-		$this->sendApprovalNotice();
+		if (!isset($importData['nonotice'])) {
+			$this->sendNotice(true);
+			$this->sendApprovalNotice();
+		}
 		db_commit();
 		if ($filesize) {
 			DocumentStorage::instance()->commit();
@@ -259,7 +289,7 @@ class Document extends FFError {
 	 * fetchData() - re-fetch the data for this document from the database.
 	 *
 	 * @param	int	$docid	The document id.
-	 * @return	boolean	success
+	 * @return	bool	success
 	 */
 	function fetchData($docid) {
 		$res = db_query_params('SELECT * FROM docdata_vw WHERE docid=$1 AND group_id=$2',
@@ -314,7 +344,7 @@ class Document extends FFError {
 	/**
 	 * isURL - whether this document is a URL and not a local file.
 	 *
-	 * @return	boolean	is_url.
+	 * @return	bool	is_url.
 	 */
 	function isURL() {
 		return ($this->data_array['filetype'] == 'URL');
@@ -323,7 +353,7 @@ class Document extends FFError {
 	/**
 	 * isText - whether this document is a text document and not a binary one.
 	 *
-	 * @return	boolean	is_text.
+	 * @return	bool	is_text.
 	 */
 	function isText() {
 		$doctype = $this->data_array['filetype'];
@@ -336,7 +366,7 @@ class Document extends FFError {
 	/**
 	 * isHtml - whether this document is a html document.
 	 *
-	 * @return	boolean	is_html.
+	 * @return	bool	is_html.
 	 */
 	function isHtml() {
 		$doctype = $this->data_array['filetype'];
@@ -349,7 +379,7 @@ class Document extends FFError {
 	/**
 	 * isPublic - whether this document is available to the general public.
 	 *
-	 * @return	boolean	is_public.
+	 * @return	bool	is_public.
 	 */
 	function isPublic() {
 		return (($this->data_array['stateid'] == 1) ? true : false);
@@ -362,6 +392,14 @@ class Document extends FFError {
 	 */
 	function getStateID() {
 		return $this->data_array['stateid'];
+	}
+
+	function getView() {
+		$view = 'listfile';
+		if ($this->getStateID() == 2) {
+			$view = 'listtrashfile';
+		}
+		return $view;
 	}
 
 	/**
@@ -448,7 +486,7 @@ class Document extends FFError {
 	/**
 	 * getFileData - the filedata of this document.
 	 *
-	 * @param	boolean	$download	update the download flag or not. default is true
+	 * @param	bool	$download	update the download flag or not. default is true
 	 * @return	string	The filedata.
 	 */
 	function getFileData($download = true) {
@@ -567,11 +605,20 @@ class Document extends FFError {
 	}
 
 	/**
+	 * getMonitorIds - get user ids monitoring this Document.
+	 *
+	 * @return	array of user ids monitoring this Artifact.
+	 */
+	function getMonitorIds() {
+		$MonitorElementObject = new MonitorElement('docdata');
+		return $MonitorElementObject->getMonitorUsersIdsInArray($this->getID());
+	}
+
+	/**
 	 * isMonitoredBy - get the monitored status of this document for a specific user id.
 	 *
 	 * @param	string	$userid
-	 * @internal	param	\User $int ID
-	 * @return	boolean	true if monitored by this user
+	 * @return	bool	true if monitored by this user
 	 */
 	function isMonitoredBy($userid = 'ALL') {
 		$MonitorElementObject = new MonitorElement('docdata');
@@ -586,7 +633,7 @@ class Document extends FFError {
 	 * removeMonitoredBy - remove this document for a specific user id for monitoring.
 	 *
 	 * @param	int	$userid	User ID
-	 * @return	boolean	true if success
+	 * @return	bool	true if success
 	 */
 	function removeMonitoredBy($userid) {
 		$MonitorElementObject = new MonitorElement('docdata');
@@ -601,7 +648,7 @@ class Document extends FFError {
 	 * addMonitoredBy - add this document for a specific user id for monitoring.
 	 *
 	 * @param	int	$userid	User ID
-	 * @return	boolean	true if success
+	 * @return	bool	true if success
 	 */
 	function addMonitoredBy($userid) {
 		$MonitorElementObject = new MonitorElement('docdata');
@@ -615,7 +662,7 @@ class Document extends FFError {
 	/**
 	 * clearMonitor - remove all entries of monitoring for this document.
 	 *
-	 * @return	boolean	true if success.
+	 * @return	bool	true if success.
 	 */
 	function clearMonitor() {
 		$MonitorElementObject = new MonitorElement('docdata');
@@ -630,7 +677,7 @@ class Document extends FFError {
 	 * setState - set the stateid of the document.
 	 *
 	 * @param	int	$stateid	The state id of the doc_states table.
-	 * @return	boolean	success or not.
+	 * @return	bool	success or not.
 	 */
 	function setState($stateid) {
 		return $this->setValueinDB(array('stateid'), array($stateid));
@@ -641,7 +688,7 @@ class Document extends FFError {
 	 * setDocGroupID - set the doc_group of the document.
 	 *
 	 * @param	int	$newdocgroupid	The group_id of this document.
-	 * @return	boolean	success or not.
+	 * @return	bool	success or not.
 	 */
 	function setDocGroupID($newdocgroupid) {
 		return $this->setValueinDB(array('doc_group'), array($newdocgroupid));
@@ -653,9 +700,7 @@ class Document extends FFError {
 	 * @param	int	$stateLock	the status to be set
 	 * @param	string	$userid		the lock owner
 	 * @param	int	$thistime	the epoch time
-	 * @internal	param	\The $int status of the lock.
-	 * @internal	param	\The $int userid who set the lock.
-	 * @return	boolean	success or not.
+	 * @return	bool	success or not.
 	 */
 	function setLock($stateLock, $userid = NULL, $thistime = 0) {
 		$colArr = array('locked', 'locked_by', 'lockdate');
@@ -675,7 +720,7 @@ class Document extends FFError {
 	 *
 	 * @param	int	$statusReserved	The status of the reserved
 	 * @param	int	$idReserver	The ID of the owner : by default : noone
-	 * @return	boolean	success
+	 * @return	bool	success
 	 */
 	function setReservedBy($statusReserved, $idReserver = NULL) {
 		$colArr = array('reserved', 'reserved_by');
@@ -798,35 +843,60 @@ class Document extends FFError {
 	 * @param	int	$version		The version to update. Default is 1.
 	 * @param	int	$current_version	Is the current version? default is 1.
 	 * @param	int	$new_version		To create a new version? default is 0. == No.
-	 * @param	int	$updatetimestamp	Timestamp of this update.
-	 * @return	boolean	success.
+	 * @param	array	$importData		Array of data to change creator, time of creation, bypass permission check and do not send notification like:
+	 *						array('user' => 127, 'time' => 1234556789, 'nopermcheck' => 1, 'nonotice' => 1)
+	 * @param	string	$vcomment		The comment of this version
+	 * @return	bool	success.
 	 */
-	function update($filename, $filetype, $data, $doc_group, $title, $description, $stateid, $version = 1, $current_version = 1, $new_version = 0, $updatetimestamp = null) {
+	function update($filename, $filetype, $data, $doc_group, $title, $description, $stateid, $version = 1, $current_version = 1, $new_version = 0, $importData = array(), $vcomment = '') {
 
 		$perm =& $this->Group->getPermission();
-		if (!$perm || !is_object($perm) || !$perm->isDocEditor()) {
-			$this->setPermissionDeniedError();
+		if (!isset($importData['nopermcheck'])) {
+			if (!$perm || !is_object($perm) || !$perm->isDocEditor()) {
+				$this->setPermissionDeniedError();
+				return false;
+			}
+		}
+
+		if (isset($importData['user'])) {
+			$user = user_get_object($importData['user']);
+		} else {
+			$user = session_get_user();
+		}
+		if (!isset($importData['nopermcheck'])) {
+			if ($this->getLocked() && ($this->getLockedBy() != $user->getID())) {
+				$this->setPermissionDeniedError();
+				return false;
+			}
+		}
+
+		if (strlen($title) < DOCMAN__TITLE_MIN_SIZE) {
+			$this->setError(sprintf(_('Title Must Be At Least %d Characters'), DOCMAN__TITLE_MIN_SIZE));
 			return false;
 		}
 
-		$user = session_get_user();
-		if ($this->getLocked() && ($this->getLockedBy() != $user->getID())) {
-			$this->setPermissionDeniedError();
+		if (strlen($description) < DOCMAN__DESCRIPTION_MIN_SIZE) {
+			$this->setError(sprintf(_('Document Description Must Be At Least %d Characters'), DOCMAN__DESCRIPTION_MIN_SIZE));
 			return false;
 		}
 
-		if (strlen($title) < 5) {
-			$this->setError(_('Title Must Be At Least 5 Characters'));
+		if (strlen($title) > DOCMAN__TITLE_MAX_SIZE) {
+			$this->setError(sprintf(_('Title Must Be Max %d Characters'), DOCMAN__TITLE_MAX_SIZE));
 			return false;
 		}
 
-		if (strlen($description) < 10) {
-			$this->setError(_('Document Description Must Be At Least 10 Characters'));
+		if (strlen($description) > DOCMAN__DESCRIPTION_MAX_SIZE) {
+			$this->setError(sprintf(_('Document Description Must Be Max %d Characters'), DOCMAN__DESCRIPTION_MAX_SIZE));
+			return false;
+		}
+
+		if (strlen($description) > DOCMAN__COMMENT_MAX_SIZE) {
+			$this->setError(sprintf(_('Document Comment Must Be Max %d Characters'), DOCMAN__COMMENT_MAX_SIZE));
 			return false;
 		}
 
 		db_begin();
-		$updatetimestamp = (($updatetimestamp) ? $updatetimestamp : time());
+		$updatetimestamp = ((isset($importData['time'])) ? $importData['time'] : time());
 		$colArr = array('stateid', 'doc_group', 'updatedate', 'locked', 'locked_by');
 		$valArr = array($stateid, $doc_group, $updatetimestamp, 0, NULL);
 		if (!$this->setValueinDB($colArr, $valArr)) {
@@ -878,14 +948,14 @@ class Document extends FFError {
 			if (isset($kwords)) {
 				$version_kwords = $kwords;
 			}
-			$serial_id = $dv->create($this->getID(), $title, $description, user_getid(), $filetype, $filename, $filesize, $version_kwords, $version, $current_version, $updatetimestamp);
+			$serial_id = $dv->create($this->getID(), $title, $description, $user->getID(), $filetype, $filename, $filesize, $version_kwords, $updatetimestamp, $version, $current_version, $vcomment);
 			if (!$serial_id) {
 				$this->setOnUpdateError(_('Error updating document version')._(': ').$dv->getErrorMessage());
 				db_rollback();
 				return false;
 			}
 		} else {
-			if ($dv->isError() || !$dv->update($version, $title, $description, $filetype, $filename, $filesize, $current_version, $updatetimestamp)) {
+			if ($dv->isError() || !$dv->update($version, $title, $description, $filetype, $filename, $filesize, $updatetimestamp, $current_version, $vcomment)) {
 				$this->setOnUpdateError(_('Error updating document version')._(': ').$dv->getErrorMessage());
 				db_rollback();
 				return false;
@@ -923,7 +993,7 @@ class Document extends FFError {
 	/**
 	 * sendNotice - Notifies of document submissions
 	 *
-	 * @param	boolean	true = new document (default value)
+	 * @param	bool	true = new document (default value)
 	 * @return	bool
 	 */
 	function sendNotice($new = true) {
@@ -950,7 +1020,7 @@ class Document extends FFError {
 			$body .= _('Submitter')._(': ').$this->getCreatorRealName()." (".$this->getCreatorUserName().") \n";
 			$body .= "\n\n-------------------------------------------------------\n".
 				_('For more info, visit:').
-				"\n\n" . util_make_url('/docman/?group_id='.$this->Group->getID().'&view=listfile&dirid='.$this->getDocGroupID());
+				"\n\n" . util_make_url($this->getPermalink());
 
 			$BCCarray = explode(',',$BCC);
 			foreach ($BCCarray as $dest_email) {
@@ -963,7 +1033,7 @@ class Document extends FFError {
 	/**
 	 * sendApprovalNotice - send email to project admin for pending documents.
 	 *
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function sendApprovalNotice() {
 		if ($this->getStateID() != 3)
@@ -977,7 +1047,7 @@ class Document extends FFError {
 
 		$subject="[" . forge_get_config('forge_name') ."] ".util_unconvert_htmlspecialchars($doc_name);
 		$body = "\n"._('A new document has been uploaded and waiting to be approved by you')._(': ').
-		"\n".util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$this->getDocGroupID().'&filedetailid='.$this->getID()).
+		"\n".util_make_url($this->getPermalink()).
 		"\n"._('by').(': ').$name."\n";
 
 		$sanitizer = new TextSanitizer();
@@ -1011,7 +1081,7 @@ class Document extends FFError {
 	/**
 	 * delete - Delete this file
 	 *
-	 * @return	boolean	success
+	 * @return	bool	success
 	 */
 	function delete() {
 		$perm =& $this->Group->getPermission();
@@ -1030,6 +1100,12 @@ class Document extends FFError {
 			db_rollback();
 			return false;
 		}
+
+		if (!$this->removeAllAssociations()) {
+			// error message already set by FFObject class.
+			db_rollback();
+			return false;
+		}
 		db_commit();
 
 		foreach ($serialids as $serialid) {
@@ -1045,7 +1121,7 @@ class Document extends FFError {
 	/**
 	 * trash - move this file to trash
 	 *
-	 * @return	boolean	success or not.
+	 * @return	bool	success or not.
 	 */
 	function trash() {
 		if (!$this->getLocked() || ((time() - $this->getLockdate()) > 600)) {
@@ -1083,8 +1159,7 @@ class Document extends FFError {
 	 *
 	 * @param	array	$colArr	the columns to update in array form array('col1', col2')
 	 * @param	array	$valArr	the values to store in array form array('val1', 'val2')
-	 * @return	boolean	success or not
-	 * @access	private
+	 * @return	bool	success or not
 	 */
 	private function setValueinDB($colArr, $valArr) {
 		if ((count($colArr) != count($valArr)) || !count($colArr) || !count($valArr)) {
@@ -1146,6 +1221,15 @@ class Document extends FFError {
 		}
 		$this->sendNotice(false);
 		return true;
+	}
+
+	function getPermalink() {
+		return '/docman/d_follow.php/'.$this->getID();
+	}
+
+	function hasValidatedReview() {
+		$dv = documentversion_get_object($this->getVersion(), $this->getID(), $this->Group->getID());
+		return $dv->hasValidatedReview();
 	}
 }
 

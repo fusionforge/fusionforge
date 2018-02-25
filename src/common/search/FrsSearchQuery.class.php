@@ -28,17 +28,17 @@ require_once $gfcommon.'search/SearchQuery.class.php';
 class FrsSearchQuery extends SearchQuery {
 
 	/**
-	* group id
-	*
-	* @var int $groupId
-	*/
+	 * group id
+	 *
+	 * @var int $groupId
+	 */
 	var $groupId;
 
 	/**
-	* flag if non public items are returned
-	*
-	* @var boolean $showNonPublic
-	*/
+	 * flag if non public items are returned
+	 *
+	 * @var bool $showNonPublic
+	 */
 	var $showNonPublic;
 
 	/**
@@ -49,7 +49,7 @@ class FrsSearchQuery extends SearchQuery {
 	 * @param	string	$sections	sections to search in
 	 * @param	bool	$showNonPublic
 	 */
-	function __construct($words, $offset, $isExact, $groupId, $sections=SEARCH__ALL_SECTIONS, $showNonPublic=false) {
+	function __construct($words, $offset, $isExact, $groupId, $sections = SEARCH__ALL_SECTIONS, $showNonPublic = false) {
 		$this->groupId = $groupId;
 		$this->showNonPublic = $showNonPublic;
 
@@ -64,7 +64,7 @@ class FrsSearchQuery extends SearchQuery {
 	 * @return	array	query+params array
 	 */
 	function getQuery() {
-		$qpa = db_construct_qpa(false, 'SELECT ts_headline(frs_package.name, q) AS package_name, ts_headline(frs_release.name, q) as release_name, frs_release.release_date, frs_release.release_id, users.realname FROM frs_file, frs_release, users, frs_package, to_tsquery($1) AS q, frs_release_idx r, frs_file_idx f WHERE frs_release.released_by = users.user_id AND r.release_id = frs_release.release_id AND f.file_id = frs_file.file_id AND frs_package.package_id = frs_release.package_id AND frs_file.release_id=frs_release.release_id AND frs_package.group_id=$2 ',
+		$qpa = db_construct_qpa(false, 'SELECT ts_headline(frs_package.name, q) AS package_name, ts_headline(frs_release.name, q) as release_name, frs_release.release_date, frs_release.release_id, users.realname, frs_release.package_id FROM frs_file, frs_release, users, frs_package, to_tsquery($1) AS q, frs_release_idx r, frs_file_idx f WHERE frs_release.released_by = users.user_id AND r.release_id = frs_release.release_id AND f.file_id = frs_file.file_id AND frs_package.package_id = frs_release.package_id AND frs_file.release_id=frs_release.release_id AND frs_package.group_id=$2 ',
 						 array($this->getFTIwords(), $this->groupId));
 		if ($this->sections != SEARCH__ALL_SECTIONS) {
 			$qpa = db_construct_qpa($qpa, 'AND frs_package.package_id = ANY ($1) ',
@@ -95,7 +95,7 @@ class FrsSearchQuery extends SearchQuery {
 	 * getSections - returns the list of available forums
 	 *
 	 * @param	int	$groupId	group id
-	 * @param	boolean	$showNonPublic	if we should consider non public sections
+	 * @param	bool	$showNonPublic	if we should consider non public sections
 	 * @return	array
 	 */
 	static function getSections($groupId, $showNonPublic) {
@@ -115,7 +115,7 @@ class FrsSearchQuery extends SearchQuery {
 	}
 
 	function isRowVisible($row) {
-		return forge_check_perm ('project_read', $row['group_id']);
+		return forge_check_perm('frs', $row['package_id'], 'read');
 	}
 }
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright, 2014, Franck Villaume - TrivialDev
+ * Copyright, 2014,2016, Franck Villaume - TrivialDev
  * Copyright (C) 2015  Inria (Sylvain Beucler)
  *
  * This file is part of FusionForge.
@@ -26,8 +26,7 @@ class CreateFRS extends FForge_SeleniumTestCase
 {
 	public $fixture = 'projecta';
 
-	function testCreateFRSPackage()
-	{
+	function testCreateFRSPackage() {
 		$this->loadAndCacheFixture();
 		$this->switchUser(FORGE_ADMIN_USERNAME);
 		$this->gotoProject('ProjectA');
@@ -38,5 +37,23 @@ class CreateFRS extends FForge_SeleniumTestCase
 		$this->type("//input[@name='package_name']", "My Package Name");
 		$this->clickAndWait("//input[@name='submit' and @value='Create']");
 		$this->assertTextPresent("Added Package");
+	}
+
+	function testRenameFRSPackage() {
+		$this->loadAndCacheFixture();
+		$this->switchUser(FORGE_ADMIN_USERNAME);
+		$this->gotoProject('ProjectA');
+		$this->clickAndWait("link=Files");
+		$this->assertFalse($this->isTextPresent("Permission denied."));
+		$this->assertTrue($this->isTextPresent("Administration"));
+		$this->clickAndWait("link=Administration");
+		$this->type("//input[@name='package_name']", "My Package Name");
+		$this->clickAndWait("//input[@name='submit' and @value='Create']");
+		$this->assertTextPresent("Added Package");
+		$this->clickAndWait("link=Administration");
+		$this->type('//td[2]/input', 'My Named Packaged');
+		$this->click('//td[5]/input');
+		$this->clickAndWait("link=View File Releases");
+		$this->assertTextPresent('My Named Package');
 	}
 }

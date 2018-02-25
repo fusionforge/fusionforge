@@ -52,18 +52,18 @@ function form_generate_key() {
  * 	it updates the db.
  *
  *	@param	int	$key The key.
- *  @return	boolean	True if the given key is already used. False if not.
+ *  @return	bool	True if the given key is already used. False if not.
  *
  */
 function form_key_is_valid($key) {
-	// Fail back mode if key is empty. This can happen when there is
-	// a problem with the generation. In this case, it may be better
-	// to disable this check instead of blocking all the application.
+	// Fail if key is empty
 	if (empty($key))
-		return true;
+		return false;
 
 	db_begin();
-	$res = db_query_params ('SELECT * FROM form_keys WHERE key=$1 and is_used=0 FOR UPDATE', array ($key));
+	$res = db_query_params ('SELECT * FROM form_keys WHERE key=$1 and is_used=0 AND creation_date > $2 FOR UPDATE',
+                            array ($key,
+                                   time()-600));
 	if (!$res || !db_numrows($res)) {
 		db_rollback();
 		return false;
@@ -81,7 +81,7 @@ function form_key_is_valid($key) {
  *  form_release_key() - Releases the given key if it is already used. If the given key it's not in the db, it returns false.
  *
  *	@param	int	$key The key.
- *  @return	boolean	True if the given key is successfully released. False if not.
+ *  @return	bool	True if the given key is successfully released. False if not.
  *
  */
 function form_release_key($key) {

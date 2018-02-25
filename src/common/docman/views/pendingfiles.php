@@ -53,7 +53,10 @@ jQuery(document).ready(function() {
 		docManURL:		'<?php echo util_make_uri('/docman') ?>',
 		lockIntervalDelay:	60000, //in microsecond and if you change this value, please update the check value 600
 		divEditFile:		jQuery('#editFile'),
-		divEditTitle:		'<?php echo _("Edit document dialog box") ?>'
+		divEditTitle:		'<?php echo _("Edit document dialog box") ?>',
+		childGroupId:		<?php echo util_ifsetor($childgroup_id, 0) ?>,
+		tableAddVersion:	jQuery('#doc_version_edit'),
+		useCreateOnline:	<?php echo $g->useCreateOnline() ?>
 	});
 });
 //]]>
@@ -62,8 +65,8 @@ jQuery(document).ready(function() {
 	if (isset($nested_pending_docs[$dirid]) && is_array($nested_pending_docs[$dirid])) {
 		echo html_ao('div', array('class' => 'docmanDiv'));
 		echo html_e('h4', array('class' => 'docman_h4'), _('Pending files'), false);
-		$tabletop = array(html_e('input', array('id' => 'checkallpending', 'type' => 'checkbox', 'onClick' => 'controllerListPending.checkAll("checkeddocidpending", "pending")')), '', _('File Name'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'), _('Actions'));
-		$classth = array('unsortable', 'unsortable', '', '', '', '', '', '', '', 'unsortable');
+		$tabletop = array(html_e('input', array('id' => 'checkallpending', 'type' => 'checkbox', 'onClick' => 'controllerListPending.checkAll("checkeddocidpending", "pending")')), '', 'ID', _('File Name'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'), _('View'), _('Actions'));
+		$classth = array('unsortable', 'unsortable', '', '', '', '', '', '', '', '', '', 'unsortable');
 		echo $HTML->listTableTop($tabletop, array(), 'sortable_docman_listfile', 'sortable', $classth);
 		$time_new = 604800;
 		foreach ($nested_pending_docs[$dirid] as $d) {
@@ -78,18 +81,22 @@ jQuery(document).ready(function() {
 					$cells[][] = util_make_link('/docman/view.php/'.$g->getID().'/'.$d->getID().'/'.urlencode($d->getFileName()), html_image($d->getFileTypeImage(), 20, 20, array('alt'=>$d->getFileType())), array('title' => _('View this document')));
 				}
 			}
+			$cells[][] = 'D'.$d->getID();
 			$nextcell = '';
 			if (($d->getUpdated() && $time_new > (time() - $d->getUpdated())) || $time_new > (time() - $d->getCreated())) {
-				$nextcell.= $HTML->getNewPic(_('Created or updated since less than 7 days'), 'new', array('class' => 'docman-newdocument')).'&nbsp;';
+				$nextcell .= $HTML->getNewPic(_('Created or updated since less than 7 days'), 'new', array('class' => 'docman-newdocument')).'&nbsp;';
+			}
+			if ($d->hasValidatedReview()) {
+				$nextcell .= $HTML->getTagPic(_('Document reviewed and validated'), 'reviewed').'&nbsp;';
 			}
 			$cells[] = array($nextcell.$d->getFileName(), 'style' => 'word-wrap: break-word; max-width: 250px;');
 			$cells[] = array($d->getName(), 'style' => 'word-wrap: break-word; max-width: 250px;');
 			$cells[] = array($d->getDescription(), 'style' => 'word-wrap: break-word; max-width: 250px;');
-			$cells[][] = make_user_link($d->getCreatorUserName(), $d->getCreatorRealName());
+			$cells[][] = util_display_user($d->getCreatorUserName(), $d->getCreatorID(), $d->getCreatorRealName());
 			if ( $d->getUpdated() ) {
-				$cells[] = array(date(_('Y-m-d H:i'), $d->getUpdated()), 'sorttable_customkey' => $d->getUpdated());
+				$cells[] = array(date(_('Y-m-d H:i'), $d->getUpdated()), 'content' => $d->getUpdated());
 			} else {
-				$cells[] = array(date(_('Y-m-d H:i'), $d->getCreated()), 'sorttable_customkey' => $d->getCreated());
+				$cells[] = array(date(_('Y-m-d H:i'), $d->getCreated()), 'content' => $d->getCreated());
 			}
 			$cells[][] =$d->getStateName();
 			switch ($d->getFileType()) {
@@ -102,12 +109,13 @@ jQuery(document).ready(function() {
 					break;
 				}
 			}
+			$cells[][] = $d->getDownload();
 			$editfileaction = '/docman/?action=editfile&fromview=listfile&dirid='.$d->getDocGroupID();
 			if ($childgroup_id) {
 				$editfileaction .= '&childgroup_id='.$childgroup_id;
 			}
 			$editfileaction .= '&group_id='.$group_id;
-			$cells[][] = util_make_link('#', html_image('docman/edit-file.png', 22, 22, array('alt' => _('Edit this document'))), array('onclick' => 'javascript:controllerListPending.toggleEditFileView({action:\''.util_make_uri($editfileaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json').', docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').', title:\''.addslashes($d->getName()).'\', filename:\''.addslashes($d->getFileName()).'\', description:\''.addslashes($d->getDescription()).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri("docman").'\'})', 'title' => _('Edit this document')), true).
+			$cells[][] = util_make_link('#', $HTML->getEditFilePic($edittitle, 'editdocument'), array('onclick' => 'javascript:controllerListPending.toggleEditFileView({action:\''.util_make_uri($editfileaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json').', docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').', title:\''.addslashes($d->getName()).'\', filename:\''.addslashes($d->getFileName()).'\', description:\''.addslashes($d->getDescription()).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri("docman").'\'})', 'title' => _('Edit this document')), true).
 					util_make_link('#', html_image('docman/validate.png', 22, 22, array('alt' => _('Activate in this folder'))), array('onclick' => 'window.location.href=\''.util_make_uri($redirecturl.'&action=validatefile&fileid='.$d->getID()).'\'', 'title' => _('Activate in this folder')), true);
 			echo $HTML->multiTableRow(array(), $cells);
 		}

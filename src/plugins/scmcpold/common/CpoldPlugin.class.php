@@ -35,7 +35,7 @@ class CpoldPlugin extends SCMPlugin {
 		$this->register();
 	}
 
-	function CallHook ($hookname, &$params) {
+	function CallHook($hookname, &$params) {
 		global $HTML;
 
 		switch ($hookname) {
@@ -173,6 +173,22 @@ class CpoldPlugin extends SCMPlugin {
 		copy ("$tmp/tarball.tar.gz", $tarball) ;
 		unlink ("$tmp/tarball.tar.gz") ;
 		system ("rm -rf $tmp") ;
+	}
+
+	function scm_admin_form(&$params) {
+		global $HTML;
+		$project = $this->checkParams($params);
+		if (!$project) {
+			return false;
+		}
+		session_require_perm('project_admin', $params['group_id']);
+
+		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
+			echo html_ao('div', array('id' => 'tabber-'.$this->name, 'class' => 'tabbertab'));
+		}
+		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
+			echo html_ac(html_ap() - 1);
+		}
 	}
 }
 

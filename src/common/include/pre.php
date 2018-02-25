@@ -22,6 +22,7 @@
  * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
+
 require_once $gfcommon.'include/escapingUtils.php';
 require_once $gfcommon.'include/utils.php';
 
@@ -29,14 +30,6 @@ require_once $gfcommon.'include/utils.php';
 util_init_messages();
 
 require_once $gfcommon.'include/config.php';
-
-if (isset($_SERVER) && array_key_exists('PHP_SELF', $_SERVER) && $_SERVER['PHP_SELF']) {
-	$_SERVER['PHP_SELF'] = htmlspecialchars($_SERVER['PHP_SELF']);
-}
-
-if (isset($GLOBALS) && array_key_exists('PHP_SELF', $GLOBALS) && $GLOBALS['PHP_SELF']) {
-	$GLOBALS['PHP_SELF'] = htmlspecialchars($GLOBALS['PHP_SELF']);
-}
 
 // Block link prefetching (Moz prefetching, Google Web Accelerator, others)
 // http://www.google.com/webmasters/faq.html#prefetchblock
@@ -94,16 +87,46 @@ if (($ecd = forge_get_config ('extra_config_dirs')) != NULL) {
 	}
 }
 
+$url_prefix = forge_get_config('url_prefix');
+if (isset($_SERVER) && array_key_exists('PHP_SELF', $_SERVER) && $_SERVER['PHP_SELF']) {
+	$_SERVER['PHP_SELF'] = htmlspecialchars($_SERVER['PHP_SELF']);
+	if (substr($_SERVER['PHP_SELF'], 0, strlen($url_prefix)) == $url_prefix) {
+		$_SERVER['PHP_SELF'] = '/'.substr($_SERVER['PHP_SELF'], strlen($url_prefix));
+	}
+}
+
+if (isset($GLOBALS) && array_key_exists('PHP_SELF', $GLOBALS) && $GLOBALS['PHP_SELF']) {
+	$GLOBALS['PHP_SELF'] = htmlspecialchars($GLOBALS['PHP_SELF']);
+	if (substr($GLOBALS['PHP_SELF'], 0, strlen($url_prefix)) == $url_prefix) {
+		$GLOBALS['PHP_SELF'] = '/'.substr($GLOBALS['PHP_SELF'], strlen($url_prefix));
+	}
+}
+
+if (isset($_SERVER) && array_key_exists('REQUEST_URI', $_SERVER) && $_SERVER['REQUEST_URI']) {
+	$_SERVER['REQUEST_URI'] = htmlspecialchars($_SERVER['REQUEST_URI']);
+	if (substr($_SERVER['REQUEST_URI'], 0, strlen($url_prefix)) == $url_prefix) {
+		$_SERVER['REQUEST_URI'] = '/'.substr($_SERVER['REQUEST_URI'], strlen($url_prefix));
+	}
+}
+
+if (isset($GLOBALS) && array_key_exists('REQUEST_URI', $GLOBALS) && $GLOBALS['REQUEST_URI']) {
+	$GLOBALS['REQUEST_URI'] = htmlspecialchars($GLOBALS['REQUEST_URI']);
+	if (substr($GLOBALS['REQUEST_URI'], 0, strlen($url_prefix)) == $url_prefix) {
+		$GLOBALS['REQUEST_URI'] = '/'.substr($GLOBALS['REQUEST_URI'], strlen($url_prefix));
+	}
+}
+
 if (forge_get_config('use_ssl')) {
 	header('Access-Control-Allow-Origin: http://'.forge_get_config('web_host'));
 }
 
 forge_define_config_item ('installation_environment', 'core', 'production') ;
 $installation_environment = forge_get_config ('installation_environment') ;
-if ($installation_environment == 'development' || $installation_environment == 'integration')
+if ($installation_environment == 'development' || $installation_environment == 'integration') {
 	$default_sysdebug_enable = 'true';
-else
+} else {
 	$default_sysdebug_enable = 'false';
+}
 forge_define_config_item ('sysdebug_enable', 'core', $default_sysdebug_enable) ;
 forge_set_config_item_bool ('sysdebug_enable', 'core') ;
 forge_define_config_item ('sysdebug_phphandler', 'core', 'true') ;
@@ -191,6 +214,7 @@ require $gfcommon.'include/constants.php';
 
 // Base error library for new objects
 require_once $gfcommon.'include/FFError.class.php';
+require_once $gfcommon.'include/ForgeLog.class.php';
 
 // Database abstraction
 // From here database is required
@@ -267,7 +291,7 @@ if (getenv('FUSIONFORGE_NO_DB') != 'true' and forge_get_config('database_name') 
 
 		// Mandatory login
 		if (!session_loggedin() && forge_get_config ('force_login') == 1 ) {
-			$expl_pathinfo = explode('/',getStringFromServer('REQUEST_URI'));
+			$expl_pathinfo = explode('/', getStringFromServer('REQUEST_URI'));
 			if (getStringFromServer('REQUEST_URI')!='/' && $expl_pathinfo[1]!='account' && $expl_pathinfo[1]!='export' && $expl_pathinfo[1]!='plugins') exit_not_logged_in();
 			// Show proj* export even if not logged in when force login
 			// If not default web project page would be broken
@@ -282,11 +306,13 @@ if (getenv('FUSIONFORGE_NO_DB') != 'true' and forge_get_config('database_name') 
 		// If logged in, set up a $LUSER var referencing
 		// the logged in user's object
 		// and setup theme
+		// and refresh session cookies
 		if (session_loggedin()) {
 			$LUSER =& session_get_user();
 			$use_tooltips = $LUSER->usesTooltips();
 			header('Cache-Control: private');
 			$x_theme = $LUSER->setUpTheme();
+			session_refresh();
 		} else {
 			$use_tooltips = 1;
 			$x_theme = forge_get_config('default_theme');

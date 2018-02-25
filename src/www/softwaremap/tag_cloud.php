@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (C) 2008-2009 Alcatel-Lucent
- * Copyright 2015, Franck Villaume - TrivialDev
+ * Copyright 2015,2017, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -90,7 +90,7 @@ if ($selected_tag) {
 	if ($start < 0) {
 		$start = 0;
 	}
-	$nbProjects = FusionForge::getInstance()->getNumberOfProjectsUsingTags(array('groups.status' => 'A', 'groups.type_id' => 1, 'groups.is_template' => 0, 'LOWER(name)' => strtolower($selected_tag)), 'register_time > 0 AND groups.group_id in (select ref_id FROM pfo_role_setting WHERE section_name = \'project_read\' and perm_val = 1 and role_id IN ('.$role_id.'))');
+	$nbProjects = FusionForge::getInstance()->getNumberOfProjectsUsingTags(array('groups.status' => 'A', 'groups.is_template' => 0, 'LOWER(name)' => strtolower($selected_tag)), 'register_time > 0 AND groups.group_id in (select ref_id FROM pfo_role_setting WHERE section_name = \'project_read\' and perm_val = 1 and role_id IN ('.$role_id.'))');
 	$projects = group_get_readable_projects_using_tag_asc($selected_tag, $paging, $start);
 
 	$max = ($nbProjects > ($start + $paging)) ? ($start + $paging) : $nbProjects;
@@ -103,21 +103,31 @@ if ($selected_tag) {
 	for ($i_proj = 0; $i_proj < count($projects); $i_proj++) {
 		$row_grp = $projects[$i_proj];
 
-		echo $HTML->listTableTop();
+		echo $HTML->listTableTop(array(), array(), 'full');
 		$cells = array();
 		$content = util_make_link ('/projects/'. strtolower($row_grp['unix_group_name']).'/',
 				      '<strong>'.$row_grp['group_name'].'</strong> ');
 		if ($row_grp['short_description']) {
 			$content .= "- " . $row_grp['short_description'];
 		}
-		$cells[] = array($content, 'colspan' => 2);
+		if (forge_get_config('use_trove')) {
+			$cells[] = array($content, 'colspan' => 2);
+		} else {
+			$cells[][] = $content;
+		}
 		echo $HTML->multiTableRow(array('class' => 'top'), $cells);
 		// extra description
 		$cells = array();
-		$cells[] = array(_('Tags') . _(': ') . list_project_tag($row_grp['group_id']), 'colspan' => 2);
+		if (forge_get_config('use_trove')) {
+			$cells[] = array(_('Tags') . _(': ') . list_project_tag($row_grp['group_id']), 'colspan' => 2);
+		} else {
+			$cells[][] = _('Tags') . _(': ') . list_project_tag($row_grp['group_id']);
+		}
 		echo $HTML->multiTableRow(array('class' => 'top'), $cells);
 		$cells = array();
-		$cells[][] = trove_getcatlisting($row_grp['group_id'],0,1,0);
+		if (forge_get_config('use_trove')) {
+			$cells[][] = trove_getcatlisting($row_grp['group_id'], 0, 1, 0);
+		}
 		$res = db_query_params('SELECT percentile, ranking FROM project_weekly_metric WHERE group_id = $1', array($row_grp['group_id']));
 		$nb_line = db_numrows($res);
 		if ($nb_line) {

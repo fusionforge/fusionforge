@@ -35,15 +35,7 @@ class HtmlSearchRenderer extends SearchRenderer {
 	 */
 	var $tableHeaders = array();
 
-	/**
-	 * @param string  $typeOfSearch type of the search (Software, Forum, People and so on)
-	 * @param string  $words        words we are searching for
-	 * @param boolean $isExact      if we want to search for all the words or if only one matching the query is sufficient
-	 * @param object  $searchQuery  SearchQuery instance
-	 */
-	function __construct($typeOfSearch, $words, $isExact, $searchQuery) {
-		parent::__construct($typeOfSearch, $words, $isExact, $searchQuery);
-	}
+	// No __construct. Inherited from parent.
 
 	/**
 	 * flush - flush the html output
@@ -74,9 +66,11 @@ class HtmlSearchRenderer extends SearchRenderer {
 
 	/**
 	 * writeBody - write the body
+	 *
+	 * @param bool $withpanel
 	 */
-	function writeBody() {
-		echo $this->writeResults();
+	function writeBody($withpanel = true) {
+		echo $this->writeResults($withpanel);
 	}
 
 	/**
@@ -90,9 +84,11 @@ class HtmlSearchRenderer extends SearchRenderer {
 	/**
 	 * getResults - get the html output which will display the search results
 	 *
+	 * @param bool $withpanel
+	 *
 	 * @return string html output
 	 */
-	function writeResults() {
+	function writeResults($withpanel = true) {
 		global $HTML;
 		$searchQuery =& $this->searchQuery;
 		$query =& $this->query;
@@ -109,8 +105,10 @@ class HtmlSearchRenderer extends SearchRenderer {
 		}
 
 		$result = $this->searchQuery->getData($this->searchQuery->getRowsPerPage(),$this->searchQuery->getOffset());
-		if(count($result) > 0 && ($searchQuery->getRowsTotalCount() > count($result) || $searchQuery->getOffset() != 0 )) {
-			$html .= $this->getNavigationPanel();
+		if ($withpanel) {
+			if (count($result) > 0 && ($searchQuery->getRowsTotalCount() > count($result) || $searchQuery->getOffset() != 0 )) {
+				$html .= $this->getNavigationPanel();
+			}
 		}
 
 		return $html;
@@ -122,6 +120,7 @@ class HtmlSearchRenderer extends SearchRenderer {
 	 * @return string html output
 	 */
 	function getNavigationPanel() {
+		global $HTML;
 		$searchQuery =& $this->searchQuery;
 
 		$html = '<br />';
@@ -129,15 +128,14 @@ class HtmlSearchRenderer extends SearchRenderer {
 		$html .= '<tr>';
 		$html .= '<td>';
 		if ($searchQuery->getOffset() != 0) {
-			$html .= util_make_link($this->getPreviousResultsUrl(), html_image('t2.png', 15, 15).' '._('Previous Results'), array('class' => 'prev'));
+			$html .= util_make_link($this->getPreviousResultsUrl(), $HTML->getPrevPic().' '._('Previous Results'), array('class' => 'prev'));
 		} else {
 			$html .= '&nbsp;';
 		}
 		$html .= '</td><td class="align-right">';
 		$result = $this->searchQuery->getData($this->searchQuery->getRowsPerPage(),$this->searchQuery->getOffset());
-		error_log(count($result));
 		if ($searchQuery->getRowsTotalCount() > $this->searchQuery->getRowsPerPage()+$this->searchQuery->getOffset()) {
-			$html .= util_make_link($this->getNextResultsUrl(), _('Next Results').' '.html_image('t.png', 15, 15), array('class' => 'next'));
+			$html .= util_make_link($this->getNextResultsUrl(), _('Next Results').' '.$HTML->getNextPic(), array('class' => 'next'));
 		} else {
 			$html .= '&nbsp;';
 		}
@@ -155,9 +153,9 @@ class HtmlSearchRenderer extends SearchRenderer {
 		$offset = $this->searchQuery->getOffset() - $this->searchQuery->getRowsPerPage();
 		$query =& $this->query;
 
-		$url = '/search/?type='.$query['typeOfSearch'].'&exact='.$query['isExact'].'&q='.urlencode($query['words']);
+		$url = '/search/?type='.$query['typeOfSearch'].'&amp;exact='.$query['isExact'].'&amp;q='.urlencode($query['words']);
 		if($offset > 0) {
-			$url .= '&offset='.$offset;
+			$url .= '&amp;offset='.$offset;
 		}
 		return $url;
 	}
@@ -169,7 +167,7 @@ class HtmlSearchRenderer extends SearchRenderer {
 	 */
 	function getNextResultsUrl() {
 		$query =& $this->query;
-		return '/search/?type='.$query['typeOfSearch'].'&exact='.$query['isExact'].'&q='.urlencode($query['words']).'&offset='.($this->searchQuery->getOffset() + $this->searchQuery->getRowsPerPage());
+		return '/search/?type='.$query['typeOfSearch'].'&amp;exact='.$query['isExact'].'&amp;q='.urlencode($query['words']).'&amp;offset='.($this->searchQuery->getOffset() + $this->searchQuery->getRowsPerPage());
 	}
 
 	/**
@@ -185,7 +183,7 @@ class HtmlSearchRenderer extends SearchRenderer {
 	/**
 	 * implementsRedirectToResult - check if the current object implements the redirect to result feature by having a redirectToResult method
 	 *
-	 * @return boolean true if our object implements search by id, false otherwise.
+	 * @return bool true if our object implements search by id, false otherwise.
 	 */
 	function implementsRedirectToResult() {
 		return method_exists($this, 'redirectToResult');

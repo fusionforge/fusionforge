@@ -308,13 +308,6 @@ class Theme extends Layout {
 		// The background color
 		\$this->COLOR_BACK= '#FFFFFF';
 
-		// The primary light background color
-		// Alternate list
-		\$this->COLOR_LTBACK1= '#C79FA9';
-
-		// The secondary light background color
-		\$this->COLOR_LTBACK2= '#E0E0E0';
-
 		// The HTML box title color
 		\$this->COLOR_HTMLBOX_TITLE = '#C70036';
 
@@ -458,19 +451,19 @@ class Theme extends Layout {
 	</tr>
 
 	<tr>
-		<td align=LEFT bgcolor="<?php echo \$this->COLOR_LTBACK2; ?>" width=10><img src="<?php echo \$this->imgroot; ?>tabs/topleft.png" height=9 width=9></td>
-		<td bgcolor="<?php echo \$this->COLOR_LTBACK2; ?>" width=30><img src="<?php echo \$this->imgroot; ?>clear.png" width=30 height=1></td>
-		<td bgcolor="<?php echo \$this->COLOR_LTBACK2; ?>"><img src="<?php echo \$this->imgroot; ?>clear.png" width=1 height=1></td>
-		<td bgcolor="<?php echo \$this->COLOR_LTBACK2; ?>" width=30><img src="<?php echo \$this->imgroot; ?>clear.png" width=30 height=1></td>
-		<td align=RIGHT bgcolor="<?php echo \$this->COLOR_LTBACK2; ?>" width=10><img src="<?php echo \$this->imgroot; ?>tabs/topright.png" height=9 width=9></td>
+		<td align=LEFT width=10><img src="<?php echo \$this->imgroot; ?>tabs/topleft.png" height=9 width=9></td>
+		<td width=30><img src="<?php echo \$this->imgroot; ?>clear.png" width=30 height=1></td>
+		<td><img src="<?php echo \$this->imgroot; ?>clear.png" width=1 height=1></td>
+		<td width=30><img src="<?php echo \$this->imgroot; ?>clear.png" width=30 height=1></td>
+		<td align=RIGHT width=10><img src="<?php echo \$this->imgroot; ?>tabs/topright.png" height=9 width=9></td>
 	</tr>
 
 	<tr>
 
 		<!-- Outer body row -->
 
-		<td bgcolor="<?php echo \$this->COLOR_LTBACK2; ?>"><img src="<?php echo \$this->imgroot; ?>clear.png" width=10 height=1></td>
-		<td valign=TOP width="99%" bgcolor="<?php echo \$this->COLOR_LTBACK2; ?>" colspan=3>
+		<td><img src="<?php echo \$this->imgroot; ?>clear.png" width=10 height=1></td>
+		<td valign=TOP width="99%" colspan=3>
 
 			<!-- Inner Tabs / Shell -->
 
@@ -505,7 +498,7 @@ if (\$params['group']) {
 
 			<tr>
 				<td bgcolor="<?php echo \$this->COLOR_BACK; ?>"><img src="<?php echo \$this->imgroot; ?>clear.png" width=10 height=1></td>
-				<td valign=TOP width="99%" bgcolor="<?php echo \$this->COLOR_LTBACK2; ?>">
+				<td valign=TOP width="99%">
 
 	<?php
 
@@ -522,21 +515,21 @@ if (\$params['group']) {
 				<td width=10 bgcolor="<?php echo \$this->COLOR_BACK; ?>"><img src="<?php echo \$this->imgroot; ?>clear.png" width=2 height=1></td>
 			</tr>
 			<tr>
-				<td align=LEFT bgcolor="<?php echo \$this->COLOR_LTBACK2; ?>" width=10"><img src="<?php echo \$this->imgroot; ?>tabs/bottomleft-inner.png" height=11 width=11></td>
+				<td align=LEFT width=10"><img src="<?php echo \$this->imgroot; ?>tabs/bottomleft-inner.png" height=11 width=11></td>
 				<td bgcolor="<?php echo \$this->COLOR_BACK; ?>"><img src="<?php echo \$this->imgroot; ?>clear.png" width="1" height=1></td>
-				<td align=RIGHT bgcolor="<?php echo \$this->COLOR_LTBACK2; ?>" width=10><img src="<?php echo \$this->imgroot; ?>tabs/bottomright-inner.png" height=11 width=11></td>
+				<td align=RIGHT width=10><img src="<?php echo \$this->imgroot; ?>tabs/bottomright-inner.png" height=11 width=11></td>
 			</tr>
 			</TABLE>
 
 		<!-- end inner body row -->
 
 		</td>
-		<td width=10 bgcolor="<?php echo \$this->COLOR_LTBACK2; ?>"><img src="<?php echo \$this->imgroot; ?>clear.png" width=2 height=1></td>
+		<td width=10><img src="<?php echo \$this->imgroot; ?>clear.png" width=2 height=1></td>
 	</tr>
 	<tr>
-		<td align=LEFT bgcolor="<?php echo \$this->COLOR_LTBACK2; ?>" width=10><img src="<?php echo \$this->imgroot; ?>tabs/bottomleft.png" height=9 width=9></td>
-		<td bgcolor="<?php echo \$this->COLOR_LTBACK2; ?>" colspan=3><img src="<?php echo \$this->imgroot; ?>clear.png" width="1" height=1></td>
-		<td align=RIGHT bgcolor="<?php echo \$this->COLOR_LTBACK2; ?>" width=10><img src="<?php echo \$this->imgroot; ?>tabs/bottomright.png" height=9 width=9></td>
+		<td align=LEFT width=10><img src="<?php echo \$this->imgroot; ?>tabs/bottomleft.png" height=9 width=9></td>
+		<td colspan=3><img src="<?php echo \$this->imgroot; ?>clear.png" width="1" height=1></td>
+		<td align=RIGHT width=10><img src="<?php echo \$this->imgroot; ?>tabs/bottomright.png" height=9 width=9></td>
 	</tr>
 </TABLE>
 </body>
@@ -580,19 +573,6 @@ if (\$params['group']) {
 				</tr>
 				<tr align=left bgcolor="'. \$this->COLOR_HTMLBOX_BACK .'">
 					<td colspan=2>';
-	}
-
-	/**
-	 * boxGetAltRowStyle() - Get an alternating row style for tables
-	 *
-	 * @param			   int			 Row number
-	 */
-	function boxGetAltRowStyle(\$i) {
-		if (\$i % 2 == 0) {
-			return 'BGCOLOR="#FFFFFF"';
-		} else {
-			return 'BGCOLOR="' . \$this->COLOR_LTBACK1 . '"';
-		}
 	}
 
 	/**

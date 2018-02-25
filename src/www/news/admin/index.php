@@ -44,7 +44,7 @@ $details = getHtmlTextFromRequest('details');
 $id = getIntFromRequest('id');
 $for_group = getIntFromRequest('for_group');
 
-if ($group_id && $group_id != forge_get_config('news_group')) {
+if ($group_id && $group_id != GROUP_IS_NEWS) {
 	session_require_perm ('project_admin', $group_id) ;
 
 	$status = getIntFromRequest('status');
@@ -125,31 +125,45 @@ if ($group_id && $group_id != forge_get_config('news_group')) {
 		$user = user_get_object(db_result($result,0,'submitted_by'));
 
 		echo '
-		<strong>'._('Submitted by')._(': ').'</strong> '.$user->getRealName().'<br />
+		<p>
+		<strong>'._('Submitted by')._(': ').'</strong> '.$user->getRealName().'
 		<input type="hidden" name="approve" value="y" />
 		<input type="hidden" name="post_changes" value="y" />
+		</p>
 
-		<strong>'._('Status').'</strong><br />
-		<input type="radio" name="status" value="0" checked="checked" /> '._('Displayed').'<br />
-		<input type="radio" name="status" value="4" /> '._('Delete').'<br />
+		<p>
+		<strong>'._('Status')._(': ').'</strong><br />
+		<input type="radio" id="status_displayed" name="status" value="0" checked="checked" /> <label for="status_displayed">'._('Displayed').'</label><br />
+		<input type="radio" id="status_delete" name="status" value="4" /> <label for="status_delete">'._('Delete').'</label>
+		</p>
 
-		<strong>'._('Subject').'</strong><br />
-		<input type="text" name="summary" value="'.db_result($result,0,'summary').'" size="80" /><br />
-		<strong>'._('Details').'</strong>'.notepad_button('document.forms.newsadminform.details').'<br />';
+		<p>
+		<label for="summary"><strong>'._('Subject')._(': ').'</strong></label>
+		<input type="text" id="summary" name="summary" value="'.db_result($result,0,'summary').'" size="80" />
+		</p>
+		<p>
+		<label for="details"><strong>'._('Details')._(': ').'</strong></label>'.notepad_button('document.forms.newsadminform.details');
 
-		$params = array () ;
+		$params = array();
 		$params['name'] = 'details';
 		$params['width'] = "600";
 		$params['height'] = "300";
 		$params['group'] = $group_id;
 		$params['body'] = db_result($result,0,'details');
-		$params['content'] = '<textarea name="details" rows="5" cols="50">'.$params['body'].'</textarea>';
+		$params['content'] = '<textarea id="details" name="details" rows="5" cols="50">'.$params['body'].'</textarea>';
 		plugin_hook_by_reference("text_editor",$params);
 
-		echo $params['content'].'<br/>';
+		echo $params['content'];
+		echo '</p>
+		<p>
+		<strong>'.sprintf(_('If this item is on the %s home page and you edit it, it will be removed from the home page.'), forge_get_config('forge_name')).'</strong></p>';
+		echo '<p>';
+		echo '<label for="ask_frontpage">'._('Check this box if you request frontpage publication:').'</label>';
+		echo '<input type="checkbox" id="ask_frontpage" name="ask_frontpage" value="1" checked="checked" />';
+		echo '</p>';
 		echo '<p>
-		<strong>'.sprintf(_('If this item is on the %s home page and you edit it, it will be removed from the home page.'), forge_get_config('forge_name')).'</strong></p>
-		<input type="submit" name="submit" value="'._('Submit').'" />';
+		<input type="submit" name="submit" value="'._('Submit').'" />
+		</p>';
 		echo $HTML->closeForm();
 
 	} else {

@@ -5,10 +5,10 @@
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2009-2011, Roland Mas
  * Copyright 2009-2011, Franck Villaume - Capgemini
- * Copyright (c) 2010, 2011, 2012
- *	Thorsten Glaser <t.glaser@tarent.de>
+ * Copyright 2010-2012, Thorsten Glaser - Tarent
  * Copyright 2010-2012, Alain Peyrat - Alcatel-Lucent
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013,2016-2018, Franck Villaume - TrivialDev
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivalDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -25,47 +25,6 @@
  * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
-/**
- * htpasswd_apr1_md5 - generate htpasswd md5 format password
- *
- * @param	string	$plainpasswd the plain string password
- * @return	string	the apr1 string passwords
- *
- * From http://www.php.net/manual/en/function.crypt.php#73619
- */
-function htpasswd_apr1_md5($plainpasswd) {
-	$salt = substr(str_shuffle("abcdefghijklmnopqrstuvwxyz0123456789"), 0, 8);
-	$len = strlen($plainpasswd);
-	$text = $plainpasswd.'$apr1$'.$salt;
-	$bin = pack("H32", md5($plainpasswd.$salt.$plainpasswd));
-	$tmp = '';
-	for ($i = $len; $i > 0; $i -= 16) {
-		$text .= substr($bin, 0, min(16, $i));
-	}
-	for ($i = $len; $i > 0; $i >>= 1) {
-		$text .= ($i & 1)? chr(0) : $plainpasswd{0};
-	}
-	$bin = pack("H32", md5($text));
-	for ($i = 0; $i < 1000; $i++) {
-		$new = ($i & 1)? $plainpasswd : $bin;
-		if ($i % 3) $new .= $salt;
-		if ($i % 7) $new .= $plainpasswd;
-		$new .= ($i & 1)? $bin : $plainpasswd;
-		$bin = pack("H32", md5($new));
-	}
-	for ($i = 0; $i < 5; $i++) {
-		$k = $i + 6;
-		$j = $i + 12;
-		if ($j == 16) $j = 5;
-		$tmp = $bin[$i].$bin[$k].$bin[$j].$tmp;
-	}
-	$tmp = chr(0).chr(0).$bin[11].$tmp;
-	$tmp = strtr(strrev(substr(base64_encode($tmp), 2)),
-		"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",
-		"./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
-	return "$"."apr1"."$".$salt."$".$tmp;
-}
 
 /**
  * is_utf8 - utf-8 detection
@@ -372,7 +331,7 @@ function util_result_columns_to_assoc($result, $col_key = 0, $col_val = 1) {
 /**
  * util_result_column_to_array - Takes a result set and turns the optional column into an array
  *
- * @param	int	$result	The result set ID
+ * @param	resource	$result	The result set
  * @param	int	$col	The column
  * @return	array
  *
@@ -439,8 +398,8 @@ function util_make_links($data = '') {
 		}
 		$data = str_replace('&gt;', "\1", $data);
 		$data = preg_replace("#([ \t]|^)www\.#i", " http://www.", $data);
-		$data = preg_replace("#([[:alnum:]]+)://([^[:space:]<\1]*)([[:alnum:]\#?/&=])#i", "<a href=\"\\1://\\2\\3\" target=\"_new\">\\1://\\2\\3</a>", $data);
-		$data = preg_replace("#([[:space:]]|^)(([a-z0-9_]|\\-|\\.)+@([^[:space:]<\1]*)([[:alnum:]-]))#i", "\\1<a href=\"mailto:\\2\" target=\"_new\">\\2</a>", $data);
+		$data = preg_replace("#([[:alnum:]]+)://([^[:space:]<\1]*)([[:alnum:]\#?/&=])#i", "<a href=\"\\1://\\2\\3\" target=\"_blank\">\\1://\\2\\3</a>", $data);
+		$data = preg_replace("#([[:space:]]|^)(([a-z0-9_]|\\-|\\.)+@([^[:space:]<\1]*)([[:alnum:]-]))#i", "\\1<a href=\"mailto:\\2\" target=\"_blank\">\\2</a>", $data);
 		$data = str_replace("\1", '&gt;', $data);
 		for ($i = 0; $i < count($mem); $i++) {
 			$data = preg_replace("/$randPattern/", $mem[$i], $data, 1);
@@ -475,10 +434,10 @@ function util_make_links($data = '') {
 		$line = str_replace('&gt;', "\1", $line);
 		$line = preg_replace("/([ \t]|^)www\./i", " http://www.", $line);
 		$line = preg_replace("/([[:alnum:]]+):\/\/([^[:space:]<\1]*)([[:alnum:]#?\/&=])/i",
-			"<a href=\"\\1://\\2\\3\" target=\"_new\">\\1://\\2\\3</a>", $line);
+			"<a href=\"\\1://\\2\\3\" target=\"_blank\">\\1://\\2\\3</a>", $line);
 		$line = preg_replace(
 			"/([[:space:]]|^)(([a-z0-9_]|\\-|\\.)+@([^[:space:]]*)([[:alnum:]-]))/i",
-			"\\1<a href=\"mailto:\\2\" target=\"_new\">\\2</a>",
+			"\\1<a href=\"mailto:\\2\" target=\"_blank\">\\2</a>",
 			$line
 		);
 		$line = str_replace("\1", '&gt;', $line);
@@ -552,7 +511,7 @@ function ShowResultSet($result, $title = '', $linkify = false, $displayHeaders =
 		$rows = db_numrows($result);
 		$cols = db_numfields($result);
 
-		echo '<table class="fullwidth">'."\n";
+		echo $HTML->listTableTop();
 
 		/*  Create  the  headers  */
 		$headersCellData = array();
@@ -588,34 +547,32 @@ function ShowResultSet($result, $title = '', $linkify = false, $displayHeaders =
 
 		/*  Create the rows  */
 		for ($j = 0; $j < $rows; $j++) {
-			echo '<tr '.$HTML->boxGetAltRowStyle($j).'>';
+			echo '<tr>';
 			for ($i = 0; $i < $cols; $i++) {
 				if (in_array($i, $colsToKeep)) {
 					if ($linkify && $i == 0) {
-						$link = '<a href="'.getStringFromServer('PHP_SELF').'?';
-						$linkend = '</a>';
 						if ($linkify == "bug_cat") {
-							$link .= 'group_id='.$group_id.'&amp;bug_cat_mod=y&amp;bug_cat_id='.db_result($result, $j, 'bug_category_id').'">';
+							$linkUrl = util_make_link(getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;bug_cat_mod=y&amp;bug_cat_id='.db_result($result, $j, 'bug_category_id'), db_result($result, $j, $i));
 						} elseif ($linkify == "bug_group") {
-							$link .= 'group_id='.$group_id.'&amp;bug_group_mod=y&amp;bug_group_id='.db_result($result, $j, 'bug_group_id').'">';
+							$linkUrl = util_make_link(getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;bug_group_mod=y&amp;bug_group_id='.db_result($result, $j, 'bug_group_id'), db_result($result, $j, $i));
 						} elseif ($linkify == "patch_cat") {
-							$link .= 'group_id='.$group_id.'&amp;patch_cat_mod=y&amp;patch_cat_id='.db_result($result, $j, 'patch_category_id').'">';
+							$linkUrl = util_make_link(getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;patch_cat_mod=y&amp;patch_cat_id='.db_result($result, $j, 'patch_category_id'), db_result($result, $j, $i));
 						} elseif ($linkify == "support_cat") {
-							$link .= 'group_id='.$group_id.'&amp;support_cat_mod=y&amp;support_cat_id='.db_result($result, $j, 'support_category_id').'">';
+							$linkUrl = util_make_link(getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;support_cat_mod=y&amp;support_cat_id='.db_result($result, $j, 'support_category_id'), db_result($result, $j, $i));
 						} elseif ($linkify == "pm_project") {
-							$link .= 'group_id='.$group_id.'&amp;project_cat_mod=y&amp;project_cat_id='.db_result($result, $j, 'group_project_id').'">';
+							$linkUrl = util_make_link(getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;project_cat_mod=y&amp;project_cat_id='.db_result($result, $j, 'group_project_id'), db_result($result, $j, $i));
 						} else {
-							$link = $linkend = '';
+							$linkUrl = db_result($result, $j, $i);
 						}
 					} else {
-						$link = $linkend = '';
+						$linkUrl = db_result($result, $j, $i);
 					}
-					echo '<td>'.$link.db_result($result, $j, $i).$linkend.'</td>';
+					echo '<td>'.$linkUrl.'</td>';
 				}
 			}
 			echo '</tr>';
 		}
-		echo '</table>';
+		echo $HTML->listTableBottom();
 	} else {
 		echo db_error();
 	}
@@ -652,15 +609,18 @@ function validate_email($address) {
  * @return	array	Array of invalid e-mail addresses (if empty, all addresses are OK)
  */
 function validate_emails($addresses, $separator = ',') {
-	if (strlen($addresses) == 0) return array();
-
+	if (strlen($addresses) == 0) {
+		return array();
+	}
 	$emails = explode($separator, $addresses);
 	$ret = array();
 
 	if (is_array($emails)) {
 		foreach ($emails as $email) {
 			$email = trim($email); // This is done so we can validate lists like "a@b.com, c@d.com"
-			if (!validate_email($email)) $ret[] = $email;
+			if (!validate_email($email)) {
+				$ret[] = $email;
+			}
 		}
 	}
 	return $ret;
@@ -789,11 +749,12 @@ function human_readable_bytes($bytes, $base10 = false, $round = 0, $labels = arr
 
 /**
  * ls - lists a specified directory and returns an array of files
- * @param	string	$dir	the path of the directory to list
- * @param	bool	$filter	whether to filter out directories and illegal filenames
- * @return	array	array of file names.
+ * @param	string		$dir	the path of the directory to list
+ * @param	bool		$filter	whether to filter out directories and illegal filenames
+ * @param	string|bool	$regex	filter filename based on this regex
+ * @return	array		array of file names.
  */
-function &ls($dir, $filter = false) {
+function &ls($dir, $filter = false, $regex = false) {
 	$out = array();
 
 	if (is_dir($dir) && ($h = opendir($dir))) {
@@ -805,6 +766,11 @@ function &ls($dir, $filter = false) {
 					!is_file($dir."/".$f)
 				)
 					continue;
+			}
+			if ($regex !== false) {
+				if (!preg_match($regex, $f)) {
+					continue;
+				}
 			}
 			$out[] = $f;
 		}
@@ -876,10 +842,10 @@ function util_is_dot_or_dotdot($dir) {
  */
 function util_containts_dot_or_dotdot($dir) {
 	foreach (explode('/', $dir) as $sub_dir) {
-		if (util_is_dot_or_dotdot($sub_dir))
+		if (util_is_dot_or_dotdot($sub_dir)) {
 			return true;
+		}
 	}
-
 	return false;
 }
 
@@ -891,10 +857,12 @@ function util_containts_dot_or_dotdot($dir) {
  */
 function util_secure_filename($file) {
 	$f = preg_replace("/[^-A-Z0-9_\.]/i", '', $file);
-	if (util_containts_dot_or_dotdot($f))
+	if (util_containts_dot_or_dotdot($f)) {
 		$f = preg_replace("/\./", '_', $f);
-	if (!$f)
+	}
+	if (!$f) {
 		$f = md5($file);
+	}
 	return $f;
 }
 
@@ -922,8 +890,9 @@ function normalized_urlprefix() {
 	$prefix = preg_replace("/^\//", "", $prefix);
 	$prefix = preg_replace("/\/$/", "", $prefix);
 	$prefix = "/$prefix/";
-	if ($prefix == '//')
+	if ($prefix == '//') {
 		$prefix = '/';
+	}
 	return $prefix;
 }
 
@@ -954,8 +923,14 @@ function util_url_prefix($prefix = '') {
 function util_make_base_url($prefix = '') {
 	$url = util_url_prefix($prefix);
 	$url .= forge_get_config('web_host');
-	if (forge_get_config('https_port') && (forge_get_config('https_port') != 443)) {
-		$url .= ":".forge_get_config('https_port');
+	if (forge_get_config('use_ssl')) {
+		if (forge_get_config('https_port') && (forge_get_config('https_port') != 443)) {
+			$url .= ":".forge_get_config('https_port');
+		}
+	} else {
+		if (forge_get_config('http_port') && (forge_get_config('http_port') != 80)) {
+			$url .= ":".forge_get_config('http_port');
+		}
 	}
 	return $url;
 }
@@ -968,8 +943,7 @@ function util_make_base_url($prefix = '') {
  * @return	string	URL
  */
 function util_make_url($path = '', $prefix = '') {
-	$url = util_make_base_url($prefix).util_make_uri($path);
-	return $url;
+	return util_make_base_url($prefix).util_make_uri($path);
 }
 
 /**
@@ -979,14 +953,7 @@ function util_make_url($path = '', $prefix = '') {
  * @return	string
  */
 function util_find_relative_referer($url) {
-	$relative_url = str_replace(util_make_base_url(), '', $url);
-	//now remove previous feedback, error_msg or warning_msg
-	$relative_url = preg_replace('/&error_msg=.*&/', '&', $relative_url);
-	$relative_url = preg_replace('/&warning_msg=.*&/', '&', $relative_url);
-	$relative_url = preg_replace('/&feedback=.*&/', '&', $relative_url);
-	$relative_url = preg_replace('/&error_msg=.*/', '', $relative_url);
-	$relative_url = preg_replace('/&warning_msg=.*/', '', $relative_url);
-	$relative_url = preg_replace('/&feedback=.*/', '', $relative_url);
+	$relative_url = str_replace(util_make_base_url().normalized_urlprefix(), '', $url);
 	return $relative_url;
 }
 
@@ -1056,8 +1023,30 @@ function util_make_link_u($username, $user_id, $text) {
  * @return	string
  */
 function util_display_user($username, $user_id = 0, $text = '', $size = 'xs') {
+	$user = user_get_object_by_name($username);
+	if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
+		return $text;
+	}
+	if (forge_get_config('restrict_users_visibility')) {
+		if (!session_loggedin()) {
+			return '';
+		}
+
+		$u2gl = $user->getGroupIds();
+		$seen = false;
+		foreach ($u2gl as $u2g) {
+			if (forge_check_perm('project_read', $u2g)) {
+				$seen = true;
+				break;
+			}
+		}
+		if ($seen == false) {
+			return '';
+		}
+	}
+	
 	// Invoke user_link_with_tooltip plugin
-	$hook_params = array('resource_type' => 'user', 'username' => $username, 'user_id' => $user_id, 'size' => $size, 'user_link' => '');
+	$hook_params = array('resource_type' => 'user', 'username' => $username, 'user_id' => $user_id, 'size' => $size, 'link_text' => $text, 'user_link' => '');
 	plugin_hook_by_reference('user_link_with_tooltip', $hook_params);
 	if ($hook_params['user_link'] != '') {
 		return $hook_params['user_link'];
@@ -1071,7 +1060,7 @@ function util_display_user($username, $user_id = 0, $text = '', $size = 'xs') {
 
 	$url = util_make_link_u($username, $user_id, $text);
 	if ($params['content']) {
-		return $params['content'].$url.'<div class="new_line"></div>';
+		return $params['content'].$url;
 	}
 	return $url;
 }
@@ -1240,9 +1229,9 @@ if (!function_exists('json_encode')) {
 
 /* returns an integer from http://forge/foo/bar.php/123 or false */
 function util_path_info_last_numeric_component() {
-	if (!isset($_SERVER['PATH_INFO']))
+	if (!isset($_SERVER['PATH_INFO'])) {
 		return false;
-
+	}
 	$ok = false;
 	foreach (str_split($_SERVER['PATH_INFO']) as $x) {
 		if ($x == '/') {
@@ -1256,8 +1245,9 @@ function util_path_info_last_numeric_component() {
 			$ok = false;
 		}
 	}
-	if ($ok)
+	if ($ok) {
 		return $rv;
+	}
 	return false;
 }
 
@@ -1281,11 +1271,10 @@ function debug_string_backtrace() {
 
 	// Remove first item from backtrace as it's this function
 	// which is redundant.
-	$trace = preg_replace('/^#0\s+'.__FUNCTION__."[^\n]*\n/", '',
-		$trace, 1);
+	$trace = preg_replace('/^#0\s+'.__FUNCTION__."[^\n]*\n/", '', $trace, 1);
 
 	// Renumber backtrace items.
-	$trace = preg_replace('/^#(\d+)/me', '\'#\' . ($1 - 1)', $trace);
+	$trace = preg_replace_callback('/^#(\d+)/m', function($m) { return '#' . (ltrim($m[0], '#') - 1); }, $trace);
 
 	return $trace;
 }
@@ -1339,6 +1328,10 @@ function util_get_compressed_file_extension() {
  *
  * Do not use this function if $val is “magic”,
  * for example, an overloaded \ArrayAccess.
+ *
+ * @param	$val
+ * @param	bool	$default
+ * @return	bool
  */
 function util_ifsetor(&$val, $default = false) {
 	return (isset($val) ? $val : $default);
@@ -1383,9 +1376,15 @@ function util_randnum($min = 0, $max = 32767) {
 // sys_get_temp_dir() is only available for PHP >= 5.2.1
 if (!function_exists('sys_get_temp_dir')) {
 	function sys_get_temp_dir() {
-		if ($temp = getenv('TMP')) return $temp;
-		if ($temp = getenv('TEMP')) return $temp;
-		if ($temp = getenv('TMPDIR')) return $temp;
+		if ($temp = getenv('TMP')) {
+			return $temp;
+		}
+		if ($temp = getenv('TEMP')) {
+			return $temp;
+		}
+		if ($temp = getenv('TMPDIR')) {
+			return $temp;
+		}
 		return '/tmp';
 	}
 }
@@ -1409,15 +1408,17 @@ function util_uri_grabber($unencoded_string, $tryaidtid = false) {
 	$s = preg_replace(
 		'|([a-zA-Z][a-zA-Z0-9+.-]*:[#0-9a-zA-Z;/?:@&=+$,_.!~*\'()%-]+)|',
 		"\x01\$1\x01", $s);
-	if (!$s)
+	if (!$s) {
 		return htmlentities($unencoded_string, ENT_QUOTES, "UTF-8");
+	}
 	/* encode the string */
 	$s = htmlentities($s, ENT_QUOTES, "UTF-8");
 	/* convert 「^Afoo^A」 to 「<a href="foo">foo</a>」 */
 	$s = preg_replace('|\x01([^\x01]+)\x01|',
 		'<a href="$1">$1</a>', $s);
-	if (!$s)
+	if (!$s) {
 		return htmlentities($unencoded_string, ENT_QUOTES, "UTF-8");
+	}
 //	/* convert [#123] to links if found */
 //	if ($tryaidtid)
 //		$s = util_tasktracker_links($s);
@@ -1570,13 +1571,19 @@ function util_init_messages() {
 		$feedback = $warning_msg = $error_msg = '';
 	} else {
 		$feedback = getStringFromCookie('feedback', '');
-		if ($feedback) setcookie('feedback', '', time()-3600, '/');
+		if ($feedback) {
+			setcookie('feedback', '', time()-3600, '/');
+		}
 
 		$warning_msg = getStringFromCookie('warning_msg', '');
-		if ($warning_msg) setcookie('warning_msg', '', time()-3600, '/');
+		if ($warning_msg) {
+			setcookie('warning_msg', '', time()-3600, '/');
+		}
 
 		$error_msg = getStringFromCookie('error_msg', '');
-		if ($error_msg) setcookie('error_msg', '', time()-3600, '/');
+		if ($error_msg) {
+			setcookie('error_msg', '', time()-3600, '/');
+		}
 	}
 }
 
@@ -1594,7 +1601,7 @@ function util_save_messages() {
  * @param	string	$path		Path of the file to be created
  * @param	string	$contents	Contents of the file
  *
- * @return	boolean	FALSE on error
+ * @return	bool	false on error
  */
 function util_create_file_with_contents($path, $contents) {
 	if (file_exists($path) && !unlink($path)) {
@@ -1640,7 +1647,7 @@ function util_mkdtemp($suffix = '', $prefix = 'tmp') {
  * @param	string		$username	Unix user name
  * @param	function	$function	function to run (possibly anonymous)
  * @param	array		$params		parameters
- * @return	boolean	true on success, false on error
+ * @return	bool	true on success, false on error
  */
 function util_sudo_effective_user($username, $function, $params=array()) {
 	$userinfo = posix_getpwnam($username);
@@ -1692,7 +1699,11 @@ function getThemeIdFromName($dirname) {
 }
 
 /**
- * Generate attachment download headers, with security checks around the MIME type
+ * utils_headers_download() - Generate attachment download headers, with security checks around the MIME type
+ *
+ * @param	string	$filename
+ * @param	string	$mimetype
+ * @param	int		$size
  */
 function utils_headers_download($filename, $mimetype, $size) {
 	/* SECURITY: do not serve content with JavaScript execution (and e.g. cookie theft) */
@@ -1706,9 +1717,9 @@ function utils_headers_download($filename, $mimetype, $size) {
 	/* Disarm XSS-able text/html, and inline common text files (*.c, *.pl...) */
 	$force_text_plain  = ',^(text/html|text/.*|application/x-perl|application/x-ruby)$,';
 
-	if (preg_match($force_text_plain, $mimetype))
+	if (preg_match($force_text_plain, $mimetype)) {
 		$mimetype = 'text/plain';
-
+	}
 	if (preg_match($authorized_inline, $mimetype)) {
 		header('Content-Disposition: inline; filename="' . str_replace('"', '', $filename) . '"');
 		header('Content-Type: '. $mimetype);
@@ -1722,6 +1733,31 @@ function utils_headers_download($filename, $mimetype, $size) {
 	/* https://blogs.msdn.com/b/ie/archive/2008/09/02/ie8-security-part-vi-beta-2-update.aspx?Redirected=true */
 	/* IE6 ignores this, but IE6 users have higher security concerns than this.. */
 	header('X-Content-Type-Options: nosniff');
+}
+
+function compareObjectName ($a, $b) {
+	return strcoll($a->getName(),$b->getName()) ;
+}
+
+/**
+ * compute the differences between two arrays //TODO: looks like array_udiff
+ * @param array $tab1
+ * @param array $tab2
+ * @return array
+ */
+function utils_array_diff_names($tab1, $tab2) {
+	$diff = array();
+	foreach($tab1 as $e1) {
+		$found = false;
+		reset($tab2);
+		while(!$found && list(,$e2) = each($tab2)) {
+			$found = !count(array_diff($e1, $e2));
+		}
+		if (!$found) {
+			$diff[] = $e1;
+		}
+	}
+	return $diff;
 }
 
 // Local Variables:

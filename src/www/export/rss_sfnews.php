@@ -1,12 +1,23 @@
 <?php
 /**
- *
- * SourceForge Exports: Export front page news in RSS
- *
- *
- * SourceForge: Breaking Down the Barriers to Open Source Development
+ * FusionForge Exports: Export front page news in RSS
  * Copyright 1999-2001 (c) VA Linux Systems
- * http://sourceforge.net
+ * http://fusionforge.org
+ *
+ * This file is part of FusionForge. FusionForge is free software;
+ * you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the Licence, or (at your option)
+ * any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with FusionForge; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
  */
 
@@ -86,7 +97,7 @@ while ($row = db_fetch_array($res)) {
 	print "\n <item rdf:about=\"".util_make_url ('/forum/forum.php?forum_id='.$row['forum_id'])."\">\n";
 	print "   <title>".htmlspecialchars($row['summary'])."</title>\n";
 	// if news group, link is main page
-	if ($row['group_id'] != forge_get_config('news_group')) {
+	if ($row['group_id'] != GROUP_IS_NEWS) {
 		print "   <link>".util_make_url ('/forum/forum.php?forum_id='.$row['forum_id'])."</link>\n";
 	} else {
 		print "   <link>".util_make_url ('/')."</link>\n";

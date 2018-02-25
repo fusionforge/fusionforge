@@ -53,7 +53,7 @@ function &user_get_object_by_name($user_name, $res = false) {
  *
  * @param string    $email The unix username - required
  * @param bool|int  $res   The result set handle ("SELECT * FROM USERS WHERE user_id=xx")
- * @return FFUser User object or false on failure
+ * @return FFUser|bool User object or false on failure
  */
 function user_get_object_by_email($email, $res = false) {
 	if (!validate_email($email)
@@ -192,6 +192,16 @@ function &user_get_all_users() {
 	return user_get_objects (util_result_column_to_array($res,0)) ;
 }
 
+function filter_users_by_read_access($users) {
+	$filteredusers = array();
+	foreach ($users as $u) {
+		if ($u->getID() == user_getid() || forge_check_global_perm('forge_admin')) {
+			$filteredusers[] = $u;
+		}
+	}
+	return $filteredusers;
+}
+
 class FFUser extends FFError {
 	/**
 	 * Associative array of data from db.
@@ -245,7 +255,7 @@ class FFUser extends FFError {
 				$this->data_array =& $res;
 			} elseif (db_numrows($res) < 1) {
 				//function in class we extended
-				$this->setError(_('User Not Found'));
+				$this->setError(_('User not found'));
 				$this->data_array = array();
 				return;
 			} else {
@@ -294,6 +304,7 @@ class FFUser extends FFError {
 	 * @param	string		$ccode		The users ISO country_code.
 	 * @param	bool		$send_mail	Whether to send an email or not
 	 * @param	bool|int	$tooltips	The users preference for tooltips
+	 * @param	int		$createtime	The epoch creation time. Useful for migration
 	 * @return	bool|int	The newly created user ID
 	 *
 	 */
@@ -301,7 +312,7 @@ class FFUser extends FFError {
 					$mail_site, $mail_va, $language_id, $timezone,
 					$dummy1, $dummy2, $theme_id, $unix_box = 'shell',
 					$address = '', $address2 = '', $phone = '', $fax = '', $title = '',
-					$ccode = 'US', $send_mail = true, $tooltips = true, $createtimestamp = null) {
+					$ccode = 'US', $send_mail = true, $tooltips = true, $createtime = 0) {
 		global $SYS;
 		if (!$theme_id) {
 			$this->setError(_('You must supply a theme'));
@@ -407,7 +418,7 @@ class FFUser extends FFError {
 		// if we got this far, it must be good
 		$confirm_hash = substr(md5($password1.util_randbytes().microtime()), 0, 16);
 		db_begin();
-		$createtimestamp = (($createtimestamp) ? $createtimestamp : time());
+		$createtime = (($createtime) ? $createtime : time());
 		$result = db_query_params('INSERT INTO users (user_name,unix_pw,realname,firstname,lastname,email,add_date,status,confirm_hash,mail_siteupdates,mail_va,language,timezone,unix_box,address,address2,phone,fax,title,ccode,theme_id,tooltips,shell)
 							VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23)',
 			array($unix_name,
@@ -416,7 +427,7 @@ class FFUser extends FFError {
 				htmlspecialchars($firstname),
 				htmlspecialchars($lastname),
 				$email,
-				$createtimestamp,
+				$createtime,
 				'P',
 				$confirm_hash,
 				(($mail_site)? "1" : "0"),
@@ -441,7 +452,7 @@ class FFUser extends FFError {
 
 			$id = db_insertid($result, 'users', 'user_id');
 			if (!$id) {
-				$this->setError(_('Could Not Get User Id: ') .db_error());
+				$this->setError(_('Could Not Get User Id')._(': ').db_error());
 				db_rollback();
 				return false;
 			}
@@ -456,7 +467,7 @@ class FFUser extends FFError {
 			$hook_params['user_id'] = $this->getID();
 			$hook_params['user_name'] = $unix_name;
 			$hook_params['user_password'] = $password1;
-			$hook_params['user_timecreate'] = $createtimestamp;
+			$hook_params['user_timecreate'] = $createtime;
 			plugin_hook("user_create", $hook_params);
 
 			if ($send_mail) {
@@ -472,25 +483,21 @@ class FFUser extends FFError {
 
 	/**
 	 * sendRegistrationEmail() - Send email for registration verification
-	 *
-	 * @return bool    success or not
 	 */
 	function sendRegistrationEmail() {
-		$message = stripcslashes(sprintf(_('Thank you for registering on the %3$s web site. You have
-account with username %1$s created for you. In order
-to complete your registration, visit the following url:
-
-<%2$s>
-
-You have 1 week to confirm your account. After this time, your account will be deleted.
-
-(If you don\'t see any URL above, it is likely due to a bug in your mail client.
-Use one below, but make sure it is entered as the single line.)
-
-%2$s'),
-			$this->getUnixName(),
-			util_make_url('/account/verify.php?confirm_hash=_'.$this->getConfirmHash()),
-			forge_get_config('forge_name')));
+		$message = sprintf(_('Thank you for registering on the %s web site.'), forge_get_config('forge_name'));
+		$message .= "\n";
+		$message .= sprintf(_('You have account with username %s created for you.'), $this->getUnixName());
+		$message .= "\n";
+		$message .= _('In order to complete your registration, visit the following url:');
+		$message .= "\n\n";
+		$message .= '<'.util_make_url('/account/verify.php?confirm_hash=_'.$this->getConfirmHash()).'>';
+		$message .= "\n\n";
+		$message .= _('You have 1 week to confirm your account. After this time, your account will be deleted.');
+		$message .= "\n\n";
+		$message .= _("(If you don't see any URL above, it is likely due to a bug in your mail client. Use one below, but make sure it is entered as the single line.)");
+		$message .= "\n\n";
+		$message .= util_make_url('/account/verify.php?confirm_hash=_'.$this->getConfirmHash());
 		$message .= "\n\n";
 		$message .= _('Enjoy the site.');
 		$message .= "\n\n";
@@ -508,8 +515,8 @@ Use one below, but make sure it is entered as the single line.)
 	 *
 	 * Remove the User from all his groups and set his status to D.
 	 *
-	 * @param    boolean    $sure Confirmation of deletion.
-	 * @return    boolean    success or not
+	 * @param	bool    $sure Confirmation of deletion.
+	 * @return	bool    success or not
 	 */
 	function delete($sure) {
 		if (!$sure) {
@@ -657,7 +664,7 @@ Use one below, but make sure it is entered as the single line.)
 	 * If an update occurred and you need to access the updated info.
 	 *
 	 * @param	int	$user_id	the User ID data to be fetched
-	 * @return	boolean	success;
+	 * @return	bool	success
 	 */
 	function fetchData($user_id) {
 		$res = db_query_params('SELECT * FROM users WHERE user_id=$1',
@@ -706,7 +713,7 @@ Use one below, but make sure it is entered as the single line.)
 	 * setStatus - set this user's status.
 	 *
 	 * @param	string	$status	Status - P, A, S, or D.
-	 * @return	boolean	success.
+	 * @return	bool	success
 	 */
 	function setStatus($status) {
 
@@ -754,7 +761,7 @@ Use one below, but make sure it is entered as the single line.)
 	 *
 	 * Database field status of 'A' returns true.
 	 *
-	 * @return	boolean	is_active.
+	 * @return	bool	is_active.
 	 */
 	function isActive() {
 		if ($this->getStatus() == 'A') {
@@ -782,7 +789,7 @@ Use one below, but make sure it is entered as the single line.)
 	 *                             S    suspended
 	 *                             D    deleted
 	 *
-	 * @return	boolean success.
+	 * @return	bool success
 	 */
 	function setUnixStatus($status) {
 		global $SYS;
@@ -901,7 +908,7 @@ Use one below, but make sure it is entered as the single line.)
 	 * setEmail - set a new email address, which must be confirmed.
 	 *
 	 * @param	string	$email	The email address.
-	 * @return	boolean	success.
+	 * @return	bool	success
 	 */
 	function setEmail($email) {
 
@@ -953,7 +960,7 @@ Use one below, but make sure it is entered as the single line.)
 	 *
 	 * @param	string	$email	The email address.
 	 * @param	string	$hash	The email hash.
-	 * @return	boolean	success.
+	 * @return	bool	success
 	 */
 	function setNewEmailAndHash($email, $hash = '') {
 
@@ -998,8 +1005,8 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 *    setRealName - set the user's real name.
 	 *
-	 * @param string $realname
-	 * @return    string    boolean.
+	 * @param	string $realname
+	 * @return	bool
 	 */
 	function setRealName($realname) {
 		$res = db_query_params('UPDATE users SET realname=$1 WHERE user_id=$2',
@@ -1070,7 +1077,7 @@ Use one below, but make sure it is entered as the single line.)
 	 * setShell - sets user's preferred shell.
 	 *
 	 * @param	string	$shell	The users preferred shell.
-	 * @return	boolean	success.
+	 * @return	bool	success
 	 */
 	function setShell($shell) {
 		global $SYS;
@@ -1177,13 +1184,14 @@ Use one below, but make sure it is entered as the single line.)
 		return $this->data_array['title'];
 	}
 
+
 	/**
-	 * getGroups - get an array of groups this user is a member of.
+	 * getGroupIds  - get an array of group ids this user is a member of.
 	 *
 	 * @param	bool	$onlylocal
 	 * @return	array	Array of groups.
 	 */
-	function &getGroups($onlylocal = true) {
+	function getGroupIds($onlylocal = true) {
 		$ids = array();
 		foreach ($this->getRoles() as $r) {
 			if ($onlylocal) {
@@ -1197,7 +1205,16 @@ Use one below, but make sure it is entered as the single line.)
 				}
 			}
 		}
-		return group_get_objects(array_values(array_unique($ids))) ;
+		return array_values(array_unique($ids));
+	}
+	/**
+	 * getGroups - get an array of groups this user is a member of.
+	 *
+	 * @param	bool	$onlylocal
+	 * @return	array	Array of groups.
+	 */
+	function &getGroups($onlylocal = true) {
+		return group_get_objects($this->getGroupIds($onlylocal));
 	}
 
 	/**
@@ -1213,7 +1230,7 @@ Use one below, but make sure it is entered as the single line.)
 	 * addAuthorizedKey - add the SSH authorized key for the user.
 	 *
 	 * @param	string	$key
-	 * @return	boolean	success.
+	 * @return	bool	success
 	 */
 	function addAuthorizedKey($key) {
 		$key = trim($key);
@@ -1230,6 +1247,9 @@ Use one below, but make sure it is entered as the single line.)
 		$fingerprint = $returnExecExploded[1];
 		$now = time();
 		$explodedKey = explode(' ', $key);
+		if (forge_get_config('use_shell_limited')) {
+			$key = preg_replace("/^.*ssh-/", "command=\"".forge_get_config('bin_dir')."/limited_ssh.sh\" ssh-", $key);
+		}
 		$existingKeys = $this->getAuthorizedKeys();
 		foreach ($existingKeys as $existingKey) {
 			if ($existingKey['fingerprint'] == $fingerprint) {
@@ -1268,7 +1288,7 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * setLoggedIn($val) - Really only used by session code.
 	 *
-	 * @param	boolean	$val	The session value.
+	 * @param	bool	$val	The session value.
 	 */
 	function setLoggedIn($val = true) {
 		$this->is_logged_in = $val;
@@ -1281,7 +1301,7 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * isLoggedIn - only used by session code.
 	 *
-	 * @return	boolean	is_logged_in.
+	 * @return	bool	is_logged_in.
 	 */
 	function isLoggedIn() {
 		return $this->is_logged_in;
@@ -1291,7 +1311,7 @@ Use one below, but make sure it is entered as the single line.)
 	 * deletePreference - delete a preference for this user.
 	 *
 	 * @param	string	$preference_name	The unique field name for this preference.
-	 * @return	boolean	success.
+	 * @return	bool	success
 	 */
 	function deletePreference($preference_name) {
 		$preference_name = strtolower(trim($preference_name));
@@ -1306,7 +1326,7 @@ Use one below, but make sure it is entered as the single line.)
 	 *
 	 * @param	string	$preference_name	The unique field name for this preference.
 	 * @param	string	$value			The value you are setting this preference to.
-	 * @return	boolean	success.
+	 * @return	bool	success
 	 */
 	function setPreference($preference_name, $value) {
 		$preference_name = strtolower(trim($preference_name));
@@ -1384,7 +1404,7 @@ Use one below, but make sure it is entered as the single line.)
 	 * setPasswd - Changes user's password.
 	 *
 	 * @param	string	$passwd	The plaintext password.
-	 * @return	boolean	success.
+	 * @return	bool	success
 	 */
 	function setPasswd($passwd) {
 		global $SYS;
@@ -1428,18 +1448,16 @@ Use one below, but make sure it is entered as the single line.)
 	 * setMD5Passwd - Changes user's MD5 password.
 	 *
 	 * @param	string	$md5	The MD5-hashed password.
-	 * @return	boolean	success.
 	 */
 	function setMD5Passwd($md5) {
 		exit(_('Error: Cannot Change User Password:').' '._('MD5 obsoleted'));
-		return false;
 	}
 
 	/**
 	 * setUnixPasswd - Changes user's Unix-hashed password.
 	 *
 	 * @param	string	$unix	The Unix-hashed password.
-	 * @return	boolean	success.
+	 * @return	bool	success
 	 */
 	function setUnixPasswd($unix) {
 		global $SYS;
@@ -1472,7 +1490,7 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * usesRatings - whether user participates in rating system.
 	 *
-	 * @return	boolean	success.
+	 * @return	bool	success
 	 */
 	function usesRatings() {
 		return !$this->data_array['block_ratings'];
@@ -1481,7 +1499,7 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * usesTooltips - whether user enables or not tooltips.
 	 *
-	 * @return	boolean	success.
+	 * @return	bool	success
 	 */
 	function usesTooltips() {
 		return $this->data_array['tooltips'];
@@ -1514,7 +1532,7 @@ Use one below, but make sure it is entered as the single line.)
 	 * usesPlugin - returns true if the user uses a particular plugin
 	 *
 	 * @param	string	$pluginname	name of the plugin
-	 * @return	boolean	whether plugin is being used or not
+	 * @return	bool	whether plugin is being used or not
 	 */
 	function usesPlugin($pluginname) {
 		$plugins_data = $this->getPlugins();
@@ -1530,7 +1548,7 @@ Use one below, but make sure it is entered as the single line.)
 	 * setPluginUse - enables/disables plugins for the user
 	 *
 	 * @param	string	$pluginname	name of the plugin
-	 * @param	boolean	$val		the new state
+	 * @param	bool	$val		the new state
 	 * @return	string	database result
 	 */
 	function setPluginUse($pluginname, $val = true) {
@@ -1563,7 +1581,7 @@ Use one below, but make sure it is entered as the single line.)
 	 * getMailingsPrefs - Get activity status for one of the site mailings.
 	 *
 	 * @param	string	$mailing_id	The id of mailing ('mail_va' for community mailings, 'mail_siteupdates' for site mailings)
-	 * @return	boolean	success.
+	 * @return	bool	success
 	 */
 	function getMailingsPrefs($mailing_id) {
 		if ($mailing_id == 'va') {
@@ -1578,8 +1596,8 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * unsubscribeFromMailings - Disable email notifications for user.
 	 *
-	 * @param	boolean	$all	If false, disable general site mailings, else - all.
-	 * @return	boolean	success.
+	 * @param	bool	$all	If false, disable general site mailings, else - all.
+	 * @return	bool	success
 	 */
 	function unsubscribeFromMailings($all = false) {
 		$res2 = $res3 = true;
@@ -1699,7 +1717,7 @@ Use one below, but make sure it is entered as the single line.)
 	/**
 	 * setAdminNotification - send an email to all admins (used in verify.php)
 	 *
-	 * @return	boolean	True
+	 * @return	bool	True
 	 */
 	function setAdminNotification() {
 		$admins = RBACEngine::getInstance()->getUsersByAllowedAction('forge_admin', -1);
@@ -1721,7 +1739,7 @@ Email: %3$s
 	 *    isEditable - verify if field name is editable
 	 *
 	 * @param string $fieldName Field name
-	 * @return    boolean
+	 * @return    bool
 	 */
 	function isEditable($fieldName) {
 		if (!isset($this->data_array['uneditable'])) {
@@ -1746,7 +1764,7 @@ Email: %3$s
 	 * isHidden - verify if field name is hidden
 	 *
 	 * @param string $fieldName Field name
-	 * @return    boolean
+	 * @return    bool
 	 */
 	function isHidden($fieldName) {
 		if (!isset($this->data_array['hidden']))
@@ -1763,12 +1781,12 @@ Email: %3$s
 	/**
 	 * setUneditable - set the list of uneditable fields of this user.
 	 *
-	 * @param    array $data	array of uneditable field names
-	 * @return    boolean.
+	 * @param	array $data	array of uneditable field names
+	 * @return	bool
 	 */
 	function setUneditable($data) {
 		if (!is_array($data)) {
-			$this->setError('Error: Cannot Update list of uneditable fields: not an array');
+			$this->setError(_('Error')._(': ')._('Cannot Update list of uneditable fields: not an array'));
 			return false;
 		}
 
@@ -1776,7 +1794,7 @@ Email: %3$s
 		$sql = 'UPDATE users SET uneditable = $1 WHERE user_id = $2';
 		$res = db_query_params($sql, array($serializedData, $this->getID()));
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError('Error: Cannot Update list of uneditable fields: '.db_error());
+			$this->setError(_('Error')._(': ')._('Cannot Update list of uneditable fields')._(': ').db_error());
 			return false;
 		}
 		$this->data_array['uneditable'] = $serializedData;
@@ -1787,11 +1805,11 @@ Email: %3$s
 	 * setHidden - set the list of hidden fields of this user.
 	 *
 	 * @param array $data Array of hidden field names
-	 * @return    boolean.
+	 * @return    bool
 	 */
 	function setHidden($data) {
 		if (!is_array($data)) {
-			$this->setError('Error: Cannot Update list of hidden fields: not an array');
+			$this->setError(_('Error')._(': ')._('Cannot Update list of hidden fields: not an array'));
 			return false;
 		}
 
@@ -1799,7 +1817,7 @@ Email: %3$s
 		$sql = 'UPDATE users SET hidden = $1 WHERE user_id = $2';
 		$res = db_query_params($sql, array($serializedData, $this->getID()));
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError('Error: Cannot Update list of hidden fields: '.db_error());
+			$this->setError(_('Error')._(': ')._('Cannot Update list of hidden fields')._(': ').db_error());
 			return false;
 		}
 		$this->data_array['hidden'] = $serializedData;
@@ -1807,8 +1825,9 @@ Email: %3$s
 	}
 
 	function getActivityLogGroups() {
-		$res = db_query_params('select group_id from activity_log where group_id != 0 and user_id = $1 group by group_id order by count(group_id) desc',
-					array($this->getID()), 5);
+		$res = db_query_params('select group_id from activity_log where user_id = $1 and group_id = ANY ($2) group by group_id order by count(group_id) desc',
+					array($this->getID(), db_int_array_to_any_clause($this->getGroupIds())), 5);
+
 		if (!$res) {
 			return array();
 		} else {

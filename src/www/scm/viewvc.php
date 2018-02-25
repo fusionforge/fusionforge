@@ -84,7 +84,7 @@ if (!forge_check_perm('scm', $Group->getID(), 'read')) {
 
 $unix_name = $Group->getUnixName();
 $u = session_get_user();
-if ($external_scm) {
+if ($external_scm && !$Group->usesPlugin('scmcvs')) {
 	if ($Group->enableAnonSCM())
 		$server_script = '/anonscm/viewvc';
 	else
@@ -93,7 +93,7 @@ if ($external_scm) {
 	$protocol = forge_get_config('use_ssl', 'scmsvn')? 'https://' : 'http://';
 	$pathinfo = (isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : '/');
 	$pathinfo = preg_replace('/ /', '%20', $pathinfo);
-	$script_url = $protocol . forge_get_config('scm_host') . $server_script
+	$script_url = $protocol . $Group->getSCMBox(). $server_script
 		. $pathinfo . '?' . $_SERVER["QUERY_STRING"];
 	if ($redirect) {
 		header("Location: $script_url");

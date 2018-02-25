@@ -1,6 +1,8 @@
 <?php
 /**
  * Copyright 2005 (c) GForge Group, LLC
+ * Copyright 2016-2017, Franck Villaume - TrivialDev
+ * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -22,16 +24,7 @@ require_once $gfcommon.'tracker/ArtifactFactory.class.php';
 
 global $ath;
 
-$headers = getIntFromRequest('headers');
-$sep = getFilteredStringFromRequest('sep', '/^[,;]$/', ',');
-
-$date = date('Y-m-d');
-
-sysdebug_off();
-header('Content-type: text/csv');
-header('Content-disposition: filename="trackers-'.$date.'.csv"');
-
-session_require_perm ('tracker', $ath->getID(), 'read') ;
+session_require_perm('tracker', $ath->getID(), 'read');
 
 $af = new ArtifactFactory($ath);
 if (!$af || !is_object($af)) {
@@ -40,16 +33,35 @@ if (!$af || !is_object($af)) {
 	exit_error($af->getErrorMessage(),'tracker');
 }
 
+
+$headers = getIntFromRequest('headers');
+$sep = getFilteredStringFromRequest('sep', '/^[,;]$/', ',');
+$date_format = _('Y-m-d');
+
+sysdebug_off();
+header('Content-type: text/csv');
+header('Content-disposition: filename="trackers-'.date('Y-m-d-His').'.csv"');
+
 $offset = getStringFromRequest('offset');
 $_sort_col = getStringFromRequest('_sort_col');
 $_sort_ord = getStringFromRequest('_sort_ord');
 $max_rows = getIntFromRequest('max_rows');
 $set = getStringFromRequest('set');
-$_assigned_to = getStringFromRequest('_assigned_to');
-$_status = getStringFromRequest('_status');
-$_changed_from = getStringFromRequest('_changed_from');
+$_assigned_to = getIntFromRequest('_assigned_to');
+$_status = getIntFromRequest('_status');
+$received_changed_from = getStringFromRequest('_changed_from', 0);
+$overwrite_filter = getStringFromRequest('overwrite_filter', false);
+if ($overwrite_filter) {
+	$set = $overwrite_filter;
+}
+if ($received_changed_from) {
+	$arrDateBegin = DateTime::createFromFormat($date_format, $received_changed_from);
+	$_changed_from = $arrDateBegin->getTimestamp();
+} else {
+	$_changed_from = 0;
+}
 
-$af->setup($offset,$_sort_col,$_sort_ord,$max_rows,$set,$_assigned_to,$_status,$_changed_from);
+$af->setup($offset, $_sort_col, $_sort_ord, $max_rows, $set, $_assigned_to, $_status, array(), $_changed_from);
 
 $at_arr = $af->getArtifacts();
 
@@ -65,6 +77,7 @@ if ($headers) {
 		'open_date'.$sep.
 		'close_date'.$sep.
 		'last_modified_date'.$sep.
+		'last_modified_by'.$sep.
 		'summary'.$sep.
 		'details'.$sep.
 		'_votes'.$sep.
@@ -75,20 +88,24 @@ if ($headers) {
 	//	Show the extra fields
 	//
 	$ef = $ath->getExtraFields();
-	$keys=array_keys($ef);
-	for ($i=0; $i<count($keys); $i++) {
+	$keys = array_keys($ef);
+	for ($i = 0; $i < count($keys); $i++) {
+		if ($ef[$keys[$i]]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_EFFORT) {
+			echo $sep.'"'.'effort_unit for '.$ef[$keys[$i]]['field_name'].'"';
+		}
 		echo $sep.'"'.$ef[$keys[$i]]['field_name'].'"';
 	}
+	echo $sep.'comments';
 	echo "\n";
 }
 
-for ($i=0; $i<count($at_arr); $i++) {
+for ($i = 0; $i < count($at_arr); $i++) {
 
 	$open_date   = $at_arr[$i]->getOpenDate() ? date(_('Y-m-d H:i'),$at_arr[$i]->getOpenDate()) : '';
 	$update_date = $at_arr[$i]->getLastModifiedDate() ? date(_('Y-m-d H:i'),$at_arr[$i]->getLastModifiedDate()) : '';
 	$close_date  = $at_arr[$i]->getCloseDate()? date(_('Y-m-d H:i'),$at_arr[$i]->getCloseDate()): '';
 
-	$at_arr[$i]->getVotes();
+	$votes = $at_arr[$i]->getVotes();
 	echo $at_arr[$i]->getID().$sep.
 		$at_arr[$i]->getStatusID().$sep.
 		'"'.$at_arr[$i]->getStatusName().'"'.$sep.
@@ -100,25 +117,54 @@ for ($i=0; $i<count($at_arr); $i++) {
 		'"'.$open_date.'"'.$sep.
 		'"'.$close_date.'"'.$sep.
 		'"'.$update_date.'"'.$sep.
+		'"'.$at_arr[$i]->getLastModifiedRealName().'"'.$sep.
 		'"'.fix4csv($at_arr[$i]->getSummary()).'"'.$sep.
 		'"'.fix4csv($at_arr[$i]->getDetails()).'"'.$sep.
 		$votes[0].$sep.
 		$votes[1].$sep.
 		$votes[2];
 
-	//
-	//	Show the extra fields
-	//
- 	$efd = $at_arr[$i]->getExtraFieldDataText();
- 	foreach ( $efd as $efd_pair ) {
- 		$value = $efd_pair["value"];
- 		echo $sep.'"'. fix4csv($value) .'"';
- 	}
- 	echo "\n";
+	// Show the extra fields
+	$efd = $at_arr[$i]->getExtraFieldDataText();
+	foreach ( $efd as $key => $efd_pair ) {
+		if ($efd_pair['type'] == ARTIFACT_EXTRAFIELDTYPE_EFFORT) {
+			if (!isset($effortUnitSet)) {
+				$effortUnitSet = new EffortUnitSet($ath, $ath->getEffortUnitSet());
+				$effortUnitFactory = new EffortUnitFactory($effortUnitSet);
+			}
+			$units = $effortUnitFactory->getUnits();
+			$unitId = $effortUnitFactory->encodedToUnitId($efd_pair['value']);
+			$unittexts = _('Unknown');
+			foreach ($units as $unit) {
+				if ($unit->getID() == $unitId) {
+					$unittexts = $unit->getName();
+				}
+			}
+			echo $sep.'"'.fix4csv($unittexts).'"';
+			$value = $effortUnitFactory->encodedToValue($efd_pair['value']);
+		} else {
+			$value = $efd_pair["value"];
+		}
+		echo $sep.'"'.fix4csv($value).'"';
+	}
+
+	// Include comments
+	$result = $at_arr[$i]->getMessages();
+	$comments = '';
+	while ($arr = db_fetch_array($result)) {
+		$date = date(_('Y-m-d H:i'), $arr['adddate']);
+		$realname = $arr['realname'];
+		$body = $arr['body'];
+		// replace all newline by ' ~ '
+		$body = str_replace(array("\r\n", "\r", "\n", PHP_EOL, chr(10), chr(13), chr(10).chr(13)), " ~ ", $body);
+		$comments .= ' *** '.$date.' --- '.$realname.' --- '.$body;
+	}
+	echo $sep.'"'.fix4csv($comments).'"';
+	echo "\n";
 }
 
-function fix4csv ($value) {
-	$value = util_unconvert_htmlspecialchars( $value );
+function fix4csv($value) {
+	$value = util_unconvert_htmlspecialchars($value);
 	$value = str_replace("\r\n", "\n", $value);
 	$value = str_replace('"', '""', $value);
 	return $value;

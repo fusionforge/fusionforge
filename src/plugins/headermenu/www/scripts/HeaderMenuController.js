@@ -1,7 +1,7 @@
 /**
  * headerMenu Plugin Js Controller
  *
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -54,7 +54,7 @@ HeaderMenuController.prototype =
 		this.params.trHtmlCode.hide();
 		this.params.trUrlCode.show();
 		this.params.inputURL.attr('checked', 'checked');
-		if (typeof(this.params.tableOutTbLink) != 'undefined') {
+		if (typeof(this.params.tableOutTbLink) !== 'undefined') {
 			this.params.tableOutTbLink.sortable({
 				update: function(event, ui) {
 					jQuery(".sortable_outermenu_listlinks tbody").children().each(function() {
@@ -69,7 +69,7 @@ HeaderMenuController.prototype =
 				}
 			});
 		}
-		if (typeof(this.params.tableHeaTbLink) != 'undefined') {
+		if (typeof(this.params.tableHeaTbLink) !== 'undefined') {
 			this.params.tableHeaTbLink.sortable({
 				update: function(event, ui) {
 					jQuery(".sortable_headermenu_listlinks tbody").children().each(function() {
@@ -112,7 +112,7 @@ HeaderMenuController.prototype =
 						jQuery('#maindiv > .feedback').remove();
 						jQuery('#maindiv > .error').remove();
 						jQuery('#maindiv > .warning_msg').remove();
-						if (typeof data.html != 'undefined') {
+						if (typeof data.html !== 'undefined') {
 							jQuery('#maindiv').prepend(data.html);
 						}
 						this.params.validOutButton.hide();
@@ -132,7 +132,7 @@ HeaderMenuController.prototype =
 						jQuery('#maindiv > .feedback').remove();
 						jQuery('#maindiv > .error').remove();
 						jQuery('#maindiv > .warning_msg').remove();
-						if (typeof data.html != 'undefined') {
+						if (typeof data.html !== 'undefined') {
 							jQuery('#maindiv').prepend(data.html);
 						}
 						this.params.validHeaButton.hide();
@@ -153,7 +153,7 @@ GroupMenuController.prototype =
 		this.params.trHtmlCode.hide();
 		this.params.trUrlCode.show();
 		this.params.inputURL.attr('checked', 'checked');
-		if (typeof(this.params.tableTbodyLink) != 'undefined') {
+		if (typeof(this.params.tableTbodyLink) !== 'undefined') {
 			this.params.tableTbodyLink.sortable({
 				update: function(event, ui) {
 					jQuery("#sortable").find("tbody").children().each(function() {
@@ -199,7 +199,7 @@ GroupMenuController.prototype =
 						jQuery('#maindiv > .feedback').remove();
 						jQuery('#maindiv > .error').remove();
 						jQuery('#maindiv > .warning_msg').remove();
-						if (typeof data.html != 'undefined') {
+						if (typeof data.html !== 'undefined') {
 							jQuery('#maindiv').prepend(data.html);
 						}
 						this.params.validateButton.hide();
@@ -213,13 +213,13 @@ EditHeaderMenuController.prototype =
 	bindControls: function() {
 		this.params.inputHtmlCode.click(jQuery.proxy(this, "htmlCodeView"));
 		this.params.inputURL.click(jQuery.proxy(this, "htmlUrlView"));
-		if (typeof(this.params.inputOuter) != 'undefined') {
+		if (typeof(this.params.inputOuter) !== 'undefined') {
 			this.params.inputOuter.click(jQuery.proxy(this, "inputHtmlCodeView"));
 		}
-		if (typeof(this.params.inputHeader) != 'undefined') {
+		if (typeof(this.params.inputHeader) !== 'undefined') {
 			this.params.inputHeader.click(jQuery.proxy(this, "headerView"));
 		}
-		if (typeof(this.params.inputURLIframe) != 'undefined') {
+		if (typeof(this.params.inputURLIframe) !== 'undefined') {
 			this.params.inputURLIframe.click(jQuery.proxy(this, "htmlUrlView"));
 		}
 	},
@@ -236,7 +236,7 @@ EditHeaderMenuController.prototype =
 			this.params.trHtmlCode.hide();
 			this.params.trUrlCode.show();
 		}
-		if (typeof(this.params.inputURLIframe) != 'undefined') {
+		if (typeof(this.params.inputURLIframe) !== 'undefined') {
 			if (this.params.inputURLIframe.attr("checked")) {
 				this.params.trHtmlCode.hide();
 				this.params.trUrlCode.show();

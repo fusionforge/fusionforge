@@ -29,6 +29,7 @@ require_once $gfwww.'admin/admin_utils.php';
 
 // print current node, then all subnodes
 function printnode ($nodeid,$text) {
+	global $HTML;
 	print ('<br />');
 
 	if (!isset($GLOBALS['depth']))
@@ -45,7 +46,7 @@ function printnode ($nodeid,$text) {
 		$title = '';
 	}
 
-	print html_image('ic/cfolder15.png');
+	print $HTML->getFolderPic();
 	print ('&nbsp; <span class="trove-nodes" title="'.util_html_secure($title).'">'.$text.'</span> ');
 	if ($nodeid == 0) {
 		echo util_make_link('/admin/trove/trove_cat_add.php?parent_trove_cat_id='.$nodeid, '['._('Add').']');

@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010, FusionForge Team
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -96,6 +96,7 @@ function vote_get_rating ($id, $flag) {
  * @param		string	$flag		The rating type
  */
 function vote_show_release_radios ($vote_on_id, $flag) {
+	global $HTML;
 	/*
 		$flag
 		project - 1
@@ -111,9 +112,8 @@ function vote_show_release_radios ($vote_on_id, $flag) {
 	}
 	$rating=((16*vote_get_rating ($vote_on_id,$flag))-15);
 
+	echo $HTML->openForm(array('action' => '/survey/rating_resp.php', 'method' => 'post'));
 	?>
-
-	<form action="/survey/rating_resp.php" method="post">
 	<input type="radio" name="vote_on_id" value="<?php echo $vote_on_id; ?>" />
 	<input type="radio" name="redirect_to" value="<?php echo urlencode(getStringFromServer('REQUEST_URI')); ?>" />
 	<input type="radio" name="flag" value="<?php echo $flag; ?>" />
@@ -133,10 +133,8 @@ function vote_show_release_radios ($vote_on_id, $flag) {
 	<br />
 	<input type="submit" name="submit" value="Rate" />
 	</div>
-	</form>
-
 	<?php
-
+	echo $HTML->closeForm();
 }
 
 /**
@@ -146,6 +144,7 @@ function vote_show_release_radios ($vote_on_id, $flag) {
  * @param		int		$survey_id	The survey ID
  */
 function show_survey ($group_id, $survey_id) {
+	global $HTML;
 /*
 	Select this survey from the database
 */
@@ -155,10 +154,9 @@ function show_survey ($group_id, $survey_id) {
 					  $group_id));
 
 if (db_numrows($result) > 0) {
-	echo '
-		<h3>'.db_result($result, 0, 'survey_title').'</h3>
-		<form action="'.util_make_uri('/survey/survey_resp.php').'" method="post">
-		<input type="hidden" name="group_id" value="'.$group_id.'" />
+	echo '<h3>'.db_result($result, 0, 'survey_title').'</h3>';
+	echo $HTML->openForm(array('action' => '/survey/survey_resp.php', 'method' => 'post'));
+	echo ' <input type="hidden" name="group_id" value="'.$group_id.'" />
 		<input type="hidden" name="survey_id" value="'.$survey_id.'" />';
 
 	/*
@@ -288,8 +286,8 @@ if (db_numrows($result) > 0) {
 	<?php echo util_make_link('/survey/privacy.php?group_id='.$group_id,_('Survey Privacy')) ?>
 	<?php
 	echo "</td></tr>\n";
-	echo "</form>\n";
 	echo "</table>\n";
+	echo $HTML->closeForm();
 
 } else {
 	echo "<strong>"._('Survey not found.')."</strong>";
@@ -407,10 +405,9 @@ function vote_show_user_rate_box ($user_id, $by_id=0) {
 		}
 	}
 
-	global $USER_RATING_VALUES,$USER_RATING_QUESTIONS;
-	echo '
-	<form action="/developer/rate.php" method="post">
-	<input type="hidden" name="rated_user" value="'.$user_id.'" />
+	global $USER_RATING_VALUES,$USER_RATING_QUESTIONS, $HTML;
+	echo $HTML->openForm(array('action' => '/developer/rate.php', 'method' => 'post'));
+	echo '<input type="hidden" name="rated_user" value="'.$user_id.'" />
 	<table>';
 	for ($i=1; $i<=count($USER_RATING_QUESTIONS); $i++) {
 		$popup="USER_RATING_POPUP$i";
@@ -429,8 +426,8 @@ function vote_show_user_rate_box ($user_id, $by_id=0) {
 		<tr><td colspan="2">
 			<input type="submit" name="submit" value="Rate User" />
 		</td></tr>
-		</table>
-	</form>';
+		</table>';
+	echo $HTML->closeForm();
 }
 
 /**

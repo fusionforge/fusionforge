@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -25,6 +26,7 @@
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'include/note.php';
+require_once $gfwww.'include/jquery_plugins.php';
 require_once $gfcommon.'tracker/Artifact.class.php';
 require_once $gfcommon.'tracker/ArtifactFile.class.php';
 require_once $gfcommon.'tracker/include/ArtifactFileHtml.class.php';
@@ -80,10 +82,8 @@ if (getStringFromRequest('rtype') == 'ajax') {
 
 if ($group_id && $atid) {
 	include $gfcommon.'tracker/actions/tracker.php';
-
 } elseif ($group_id) {
 	include $gfcommon.'tracker/actions/ind.php';
-
 }
 
 // Local Variables:

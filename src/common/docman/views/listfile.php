@@ -7,7 +7,7 @@
  * Copyright (C) 2010 Alcatel-Lucent
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2016, Franck Villaume - TrivialDev
+ * Copyright 2012-2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -36,6 +36,7 @@ global $g; // the Group object
 global $dm; // the docman manager
 global $warning_msg;
 global $start; // use to set the offset
+global $childgroup_id;
 
 $linkmenu = 'listfile';
 $baseredirecturl = '/docman/?group_id='.$group_id;
@@ -46,7 +47,6 @@ include ($gfcommon.'docman/views/tree.php');
 echo html_ac(html_ap() - 1);
 
 // plugin projects-hierarchy support
-$childgroup_id = getIntFromRequest('childgroup_id');
 if ($childgroup_id) {
 	$redirecturl .= '&childgroup_id='.$childgroup_id;
 	$g = group_get_object($childgroup_id);
@@ -104,17 +104,17 @@ if ($dirid) {
 	$ndg = documentgroup_get_object($dirid, $g->getID());
 	if ($ndg->isError()) {
 		$error_msg = $ndg->getErrorMessage();
-		session_redirect($baseredirecturl);
+		session_redirect($baseredirecturl, false);
 	}
 	$DocGroupName = $ndg->getName();
 	$dgpath = $ndg->getPath(true, false);
 	if (!$DocGroupName) {
 		$error_msg = $g->getErrorMessage();
-		session_redirect($baseredirecturl);
+		session_redirect($baseredirecturl, false);
 	}
 	if (($ndg->getState() != 1 && $ndg->getState() != 5) || !$dgpath) {
 		$error_msg = _('Invalid folder');
-		session_redirect($baseredirecturl.'&view=listfile');
+		session_redirect($baseredirecturl.'&view=listfile', false);
 	}
 	$nbDocs = $ndg->getNumberOfDocuments(1);
 	if (forge_check_perm('docman', $g->getID(), 'approve')) {
@@ -133,7 +133,7 @@ if (is_array($d_arr) && count($d_arr) > 0) {
 }
 
 $df->setStateID(array(3));
-$d_pending_arr = $df->getDocuments();
+$d_pending_arr = $df->getDocuments(1);
 
 if (is_array($d_pending_arr) && count($d_pending_arr) > 0) {
 	// Get the document groups info
@@ -171,7 +171,8 @@ jQuery(document).ready(function() {
 		page:			'listfile',
 		docgroupId:		<?php echo $dirid ?>,
 		lockIntervalDelay:	60000,
-		tableAddVersion:	jQuery('#doc_version_edit')
+		tableAddVersion:	jQuery('#doc_version_edit'),
+		useCreateOnline:	<?php echo $g->useCreateOnline() ?>
 	});
 });
 
@@ -183,9 +184,7 @@ if ($DocGroupName) {
 	if ($childgroup_id) {
 		$headerPath .= _('Subproject')._(': ').util_make_link('/docman/?group_id='.$g->getID(), $g->getPublicName()).'::';
 	}
-	$generalpath = $dgpath.'/'.$DocGroupName;
-	$generalpath = preg_replace('/\/\//','/', $generalpath);
-	$headerPath .= html_e('i', array(), $generalpath, false);
+	$headerPath .= html_e('i', array(), preg_replace('/\/\//','/', $dgpath.'/'.$DocGroupName), false);
 	echo html_e('h2', array('class' => 'docman_h2'), $headerPath, false);
 	$max = ($nbDocs > ($start + $paging)) ? ($start + $paging) : $nbDocs;
 	echo $HTML->paging_top($start, $paging, $nbDocs, $max, $redirecturl, array('style' => 'display:inline-block'));
@@ -238,9 +237,18 @@ if ($DocGroupName) {
 	}
 }
 
+// to be used by pendingfiles.php
+$edittitle = _('Edit this document, add version');
+if (forge_get_config('use_object_associations')) {
+	$edittitle .= ', '._('associate to other objects');
+}
+if (forge_get_config('use_docman_review')) {
+	$edittitle .= ', '._('create or comment a review');
+}
+
 if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
-	$tabletop = array(html_e('input', array('id' => 'checkallactive', 'type' => 'checkbox', 'title' => _('Select / Deselect all documents for massaction'), 'onClick' => 'controllerListFile.checkAll("checkeddocidactive", "active")')), '', _('File Name'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'), _('View'));
-	$classth = array('unsortable', 'unsortable', '', '', '', '', '', '', '', '');
+	$tabletop = array(html_e('input', array('id' => 'checkallactive', 'type' => 'checkbox', 'title' => _('Select / Deselect all documents for massaction'), 'onClick' => 'controllerListFile.checkAll("checkeddocidactive", "active")')), '', 'ID', _('File Name'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'), _('View'));
+	$classth = array('unsortable', 'unsortable', '', '', '', '', '', '', '', '', '');
 	if (forge_check_perm('docman', $ndg->Group->getID(), 'approve')) {
 		$tabletop[] = _('Actions');
 		$classth[] = 'unsortable';
@@ -273,14 +281,18 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 				$cells[][] =  util_make_link('/docman/view.php/'.$d->Group->getID().'/'.$d->getID(), html_image($d->getFileTypeImage(), 22, 22, array('alt' => $d->getFileType())), array('title' => _('View this document')));
 			}
 		}
+		$cells[][] = 'D'.$d->getID();
 		$nextcell = '';
 		if (($d->getUpdated() && $time_new > (time() - $d->getUpdated())) || $time_new > (time() - $d->getCreated())) {
-			$nextcell = $HTML->getNewPic(_('Created or updated since less than 7 days'), 'new').'&nbsp;';
+			$nextcell .= $HTML->getNewPic(_('Created or updated since less than 7 days'), 'new').'&nbsp;';
+		}
+		if ($d->hasValidatedReview()) {
+			$nextcell .= $HTML->getTagPic(_('Document reviewed and validated'), 'reviewed').'&nbsp;';
 		}
 		$cells[] = array($nextcell.$d->getFileName(), 'style' => 'word-wrap: break-word; max-width: 250px;');
 		$cells[] = array($d->getName(), 'style' => 'word-wrap: break-word; max-width: 250px;');
 		$cells[] = array($d->getDescription(), 'style' => 'word-wrap: break-word; max-width: 250px;');
-		$cells[][] =  make_user_link($d->getCreatorUserName(), $d->getCreatorRealName());
+		$cells[][] =  util_display_user($d->getCreatorUserName(), $d->getCreatorID(), $d->getCreatorRealName());
 		if ($d->getUpdated()) {
 			$cells[] = array(date(_('Y-m-d H:i'), $d->getUpdated()), 'content' => $d->getUpdated());
 		} else {
@@ -293,7 +305,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 			if ($reserved_by) {
 				$user = user_get_object($reserved_by);
 				if (is_object($user)) {
-					$cells[][] = $nextcell.' '._('by').' '.util_make_link_u($user->getUnixName(), $user->getID(), $user->getRealName());
+					$cells[][] = $nextcell.' '._('by').' '.util_display_user($user->getUnixName(), $user->getID(), $user->getRealName());
 				}
 			}
 		} else {
@@ -315,15 +327,16 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 			$nextcell = '';
 			$editfileaction = '/docman/?action=editfile&fromview=listfile&dirid='.$d->getDocGroupID();
 			$notifyaction = '/docman/?action=notifyusers&fromview=listfile&dirid='.$d->getDocGroupID();
-			if (isset($GLOBALS['childgroup_id']) && $GLOBALS['childgroup_id']) {
-				$editfileaction .= '&childgroup_id='.$GLOBALS['childgroup_id'];
-				$notifyaction .= '&childgroup_id='.$GLOBALS['childgroup_id'];
+			if ($childgroup_id) {
+				$editfileaction .= '&childgroup_id='.$childgroup_id;
+				$notifyaction .= '&childgroup_id='.$childgroup_id;
 			}
-			$editfileaction .= '&group_id='.$GLOBALS['group_id'];
-			$notifyaction .= '&group_id='.$GLOBALS['group_id'];
+			$editfileaction .= '&group_id='.$group_id;
+			$notifyaction .= '&group_id='.$group_id;
 			if (!$d->getLocked() && !$d->getReserved()) {
 				$nextcell .= util_make_link($redirecturl.'&action=trashfile&fileid='.$d->getID(), $HTML->getDeletePic(_('Move this document to trash'), 'delfile'));
-				$nextcell .= util_make_link('#', $HTML->getEditFilePic(_('Edit this document'), 'editdocument'), array('onclick' => 'javascript:controllerListFile.toggleEditFileView({action:\''.util_make_uri($editfileaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' , id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json').', docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').', isText:\''.$d->isText().'\', isHtml:\''.$d->isHtml().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri('/docman').'\'})', 'title' => _('Edit this document')), true);
+
+				$nextcell .= util_make_link('#', $HTML->getEditFilePic($edittitle, 'editdocument'), array('onclick' => 'javascript:controllerListFile.toggleEditFileView({action:\''.util_make_uri($editfileaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' , id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json').', docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').', isText:\''.$d->isText().'\', isHtml:\''.$d->isHtml().'\', docManURL:\''.util_make_uri('/docman').'\'})'), true);
 				if (session_loggedin()) {
 					$nextcell .= util_make_link($redirecturl.'&action=reservefile&fileid='.$d->getID(), html_image('docman/reserve-document.png', 22, 22, array('alt' => _('Reserve this document'))), array('title' => _('Reserve this document for later edition')));
 				}
@@ -334,7 +347,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 					}
 				} else {
 					$nextcell .= util_make_link($redirecturl.'&action=trashfile&fileid='.$d->getID(), $HTML->getDeletePic(_('Move this document to trash'), 'delfile'));
-					$nextcell .= util_make_link('#', $HTML->getEditFilePic(_('Edit this document'), 'editdocument'), array('onclick' => 'javascript:controllerListFile.toggleEditFileView({action:\''.util_make_uri($editfileaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' , id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json').', docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').', isText:\''.$d->isText().'\', isHtml:\''.$d->isHtml().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri('/docman').'\'})', 'title' => _('Edit this document')), true);
+					$nextcell .= util_make_link('#', $HTML->getEditFilePic($edittitle, 'editdocument'), array('onclick' => 'javascript:controllerListFile.toggleEditFileView({action:\''.util_make_uri($editfileaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' , id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json').', docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').', isText:\''.$d->isText().'\', isHtml:\''.$d->isHtml().'\', docManURL:\''.util_make_uri('/docman').'\'})'), true);
 					$nextcell .= util_make_link($redirecturl.'&action=releasefile&fileid='.$d->getID(), html_image('docman/release-document.png', 22, 22, array('alt' => _('Release reservation'))), array('title' => _('Release reservation')));
 				}
 			}
@@ -350,13 +363,12 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 				}
 				$nextcell .= util_make_link($redirecturl.'&action=monitorfile&option='.$option.'&fileid='.$d->getID(), $image, array('title' => $titleMonitor));
 			}
-			$nextcell .= util_make_link('#', html_image('ic/mail-send.png', 22, 22, array('alt' => _('Notify'))), array('onclick' => 'javascript:controllerListFile.toggleNotifyUserView({action:\''.util_make_uri($notifyaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' , id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', title:\''.addslashes($d->getName()).'\', filename:\''.addslashes($d->getFileName()).'\', description:\''.addslashes($d->getDescription()).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', isHtml:\''.$d->isHtml().'\', docManURL:\''.util_make_uri('/docman').'\'})', 'title' => _('Notify users')), true);
+			$nextcell .= util_make_link('#', $HTML->getMailNotifyPic(_('Notify users'), 'notifyusers'), array('onclick' => 'javascript:controllerListFile.toggleNotifyUserView({action:\''.util_make_uri($notifyaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' , id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', title:\''.json_encode($d->getName(), JSON_HEX_APOS).'\', filename:\''.addslashes($d->getFileName()).'\', description:\''.json_encode($d->getDescription(), JSON_HEX_APOS).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', isHtml:\''.$d->isHtml().'\', docManURL:\''.util_make_uri('/docman').'\'})', 'title' => _('Notify users')), true);
 			$cells[][] = $nextcell;
 		}
 		echo $HTML->multiTableRow(array(), $cells);
 	}
 	echo $HTML->listTableBottom();
-	echo html_ao('p');
 	echo html_ao('span', array('id' => 'massactionactive', 'class' => 'hide'));
 	echo html_e('span', array('id' => 'docman-massactionmessage', 'title' => _('Actions availables for selected documents, you need to check at least one document to get actions')), _('Mass actions for selected documents')._(':'), false);
 	if (forge_check_perm('docman', $ndg->Group->getID(), 'approve')) {
@@ -370,7 +382,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		}
 	}
 	echo util_make_link('#', html_image('docman/download-directory-zip.png', 22, 22, array('alt' => _('Download as a ZIP'))) , array('onclick' => 'window.location.href=\''.util_make_uri('/docman/view.php/'.$g->getID().'/zip/selected/'.$dirid.'/\'+controllerListFile.buildUrlByCheckbox("active")'), 'title' => _('Download as a ZIP')), true);
-	echo html_ac(html_ap() - 3);
+	echo html_ac(html_ap() - 2);
 	if (forge_check_perm('docman', $ndg->Group->getID(), 'approve') && session_loggedin()) {
 		echo html_ao('div', array('class' => 'docman_div_include hide', 'id' => 'movefile'));
 		include ($gfcommon.'docman/views/movefile.php');
@@ -411,7 +423,7 @@ if ($DocGroupName) {
 														docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').',
 														title:\''.addslashes($localDocumentObject->getName()).'\',
 														filename:\''.addslashes($localDocumentObject->getFileName()).'\',
-														description:\''.addslashes($localDocumentObject->getDescription()).'\',
+														description:'.json_encode($localDocumentObject->getDescription()).',
 														isURL:\''.$localDocumentObject->isURL().'\',
 														isText:\''.$localDocumentObject->isText().'\',
 														isHtml:\''.$d->isHtml().'\',

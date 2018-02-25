@@ -30,8 +30,6 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 	{
 		$this->loadAndCacheFixture();
 
-		$this->changeConfig(array("core" => array("use_ssl" => "no")));
-
 		$this->activatePlugin('scmgit');
 
 		$this->open(ROOT);
@@ -41,7 +39,7 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=Source Code Admin");
 		$this->click("//input[@name='scmengine[]' and @value='scmgit']");
 		$this->clickAndWait("submit");
-	    
+
 		// Create repositories
 		$this->waitSystasks();
 
@@ -49,7 +47,7 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
-		$p = $this->getText("//tt[contains(.,'git clone http') and contains(.,'".FORGE_ADMIN_USERNAME."@')]");
+		$p = $this->getText("//kbd[contains(.,'git clone http') and contains(.,'".FORGE_ADMIN_USERNAME."@')]");
 		$p = preg_replace(",^git clone ,", "", $p);
 		$p = preg_replace(",@,", ":".FORGE_ADMIN_PASSWORD."@", $p);
 
@@ -78,15 +76,15 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 		$this->assertTextPresent("Adding file");
 		$this->selectFrame("relative=top");
 
-        // Check gitweb directly
-        $this->openWithOneRetry("http://scm.".HOST.ROOT."/anonscm/gitweb/?p=projecta/projecta.git");
+		// Check gitweb directly
+		$this->openWithOneRetry("https://scm.".HOST.ROOT."/anonscm/gitweb/?p=projecta/projecta.git");
 		$this->assertElementPresent("//.[@class='page_footer']");
 		$this->assertTextPresent("projecta.git");
 		$this->clickAndWait("link=projecta.git");
 		$this->assertTextPresent("Modifying file");
 		$this->assertTextPresent("Adding file");
 
-        // Disable anonymous access to gitweb
+		// Disable anonymous access to gitweb
 		$this->openWithOneRetry(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->click("link=Admin");
@@ -102,13 +100,13 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 		// Update repositories
 		$this->waitSystasks();
 
-        // Check that gitweb now fails
-        $this->openWithOneRetry("http://scm.".HOST.ROOT."/anonscm/gitweb/?p=projecta/projecta.git");
+		// Check that gitweb now fails
+		$this->openWithOneRetry("https://scm.".HOST.ROOT."/anonscm/gitweb/?p=projecta/projecta.git");
 		$this->assertElementPresent("//.[@class='page_footer']");
 		$this->assertTextNotPresent("projecta.git");
 
-        // Now try to use the authenticated gitweb
-        $this->openWithOneRetry("http://".FORGE_ADMIN_USERNAME.":".FORGE_ADMIN_PASSWORD."@scm.".HOST.ROOT."/authscm/".FORGE_ADMIN_USERNAME."/gitweb/?p=projecta/projecta.git");
+		// Now try to use the authenticated gitweb
+		$this->openWithOneRetry("https://".FORGE_ADMIN_USERNAME.":".FORGE_ADMIN_PASSWORD."@scm.".HOST.ROOT."/authscm/".FORGE_ADMIN_USERNAME."/gitweb/?p=projecta/projecta.git");
 		$this->assertElementPresent("//.[@class='page_footer']");
 		$this->assertTextPresent("projecta.git");
 
@@ -125,13 +123,13 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 		$this->assertTextPresent("Adding file");
 		$this->selectFrame("relative=top");
 
-        // Set up a different user
-        $this->createUser ('otheruser') ;
-        $this->createAndGoto ('projectb');
+		// Set up a different user
+		$this->createUser ('otheruser') ;
+		$this->createAndGoto ('projectb');
 		$this->clickAndWait("link=Admin");
 		$this->clickAndWait("link=Users and permissions");
 		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "otheruser") ;
-		$this->select("//input[@value='Add Member']/../select[@name='role_id']", "label=Admin");
+		$this->select("//input[@value='Add Member']/../fieldset/select[@name='role_id']", "label=Admin");
 		$this->clickAndWait ("//input[@value='Add Member']") ;
 		$this->assertTrue($this->isTextPresent("otheruser Lastname"));
 		$this->assertTrue($this->isElementPresent("//tr/td/a[.='otheruser Lastname']/../../td/div[contains(.,'Admin')]")) ;
@@ -147,20 +145,26 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 		$this->waitSystasks();
 
 		// Try with a different user
-		$this->openWithOneRetry("http://otheruser:".FORGE_OTHER_PASSWORD."@scm.".HOST.ROOT."/authscm/otheruser/gitweb/?p=projecta/projecta.git");
+		$this->openWithOneRetry("https://otheruser:".FORGE_OTHER_PASSWORD."@scm.".HOST.ROOT."/authscm/otheruser/gitweb/?p=projecta/projecta.git");
 		$this->assertElementPresent("//.[@class='page_footer']");
 		$this->assertTextNotPresent("projecta.git");
 
-        // Test accessing admin's URL with otheruser's credentials (and asserting we get a 401)
-        // …Selenium doesn't allow checking HTTP return codes, so use a file_get_contents() hack
-        // First make sure that the hack works
-        $f = @file_get_contents("http://otheruser:".FORGE_OTHER_PASSWORD."@scm.".HOST.ROOT."/authscm/otheruser/gitweb/", "r");
-        $this->assertTrue(is_string($f));
-        $this->assertEquals(1, preg_match('/projectb.git/',$f));
-        // Then make sure we detect a failure
-        $f = @file_get_contents("http://otheruser:".FORGE_OTHER_PASSWORD."@scm.".HOST.ROOT."/authscm/".FORGE_ADMIN_USERNAME."/gitweb/projecta/", "r");
-        $this->assertFalse($f);
-
+		// Test accessing admin's URL with otheruser's credentials (and asserting we get a 401)
+		// …Selenium doesn't allow checking HTTP return codes, so use a file_get_contents() hack
+		// First make sure that the hack works
+		$opts = array(
+			'ssl'=>array(
+				'verify_peer'=>false,
+				'verify_peer_name'=>false,
+			)
+		);
+		$context = stream_context_create($opts);
+		$f = @file_get_contents("https://otheruser:".FORGE_OTHER_PASSWORD."@scm.".HOST.ROOT."/authscm/otheruser/gitweb/", "r", $context);
+		$this->assertTrue(is_string($f));
+		$this->assertEquals(1, preg_match('/projectb.git/',$f));
+		// Then make sure we detect a failure
+		$f = @file_get_contents("https://otheruser:".FORGE_OTHER_PASSWORD."@scm.".HOST.ROOT."/authscm/".FORGE_ADMIN_USERNAME."/gitweb/projecta/", "r", $context);
+		$this->assertFalse($f);
 		system("rm -fr $t");
 	}
 }

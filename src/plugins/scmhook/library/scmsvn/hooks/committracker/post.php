@@ -6,7 +6,7 @@
  * Portions Copyright 2004 (c) Roland Mas <99.roland.mas @nospam@ aist.enst.fr>
  * The rest Copyright 2004 (c) Francisco Gimeno <kikov @nospam@ kikov.org>
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2013,2015-2016 Franck Villaume - TrivialDev
+ * Copyright 2013,2015-2017, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -32,17 +32,6 @@
 
 require_once dirname(__FILE__).'/../../../../../../common/include/env.inc.php';
 require_once $gfcommon.'include/pre.php';
-
-/**
- * It returns the usage and exit program
- *
- * @param   string   $argv
- *
- */
-function usage( $argv ) {
-	echo "Usage: $argv[0] <Repository> <Revision> \n";
-	exit(0);
-}
 
 /**
  * It returns a list of involved artifacts.
@@ -81,18 +70,14 @@ function getInvolvedTasks($Log)
 $files = array();
 
 if (count($argv) != 3) {
-    echo <<<USAGE
-Usage: $0 <repository> <revision>
-       This program should be automatically called by SVN
-USAGE;
-
-    exit;
+	echo "Usage: $argv[0] <Repository> <Revision> \n";
+	echo 'This program should be automatically called by SVN';
+	exit(0);
 }
 
 $repository = $argv[1];
 $revision   = $argv[2];
 $svn_tracker_debug = 0;
-$svn_tracker_debug_file = sys_get_temp_dir().'scmhook_svn_committracker.debug';
 
 $UserName = trim(`svnlook author -r $revision $repository`); //username of author
 $date    = trim(`svnlook date -r $revision $repository`); //date
@@ -100,6 +85,7 @@ $log     = trim(`svnlook log -r $revision $repository`); // the log
 $changed = trim(`svnlook changed -r $revision $repository | sed 's/[A-Z]*   //'`); // the filenames
 
 if (isset($svn_tracker_debug) && $svn_tracker_debug == 1) {
+	$svn_tracker_debug_file = sys_get_temp_dir().'/scmhook_svn_committracker.debug';
 	$file = fopen($svn_tracker_debug_file, 'a+');
 	fwrite($file,"Vars filled:\n");
 	fwrite($file,"username: " . $UserName . "\n");
@@ -151,7 +137,7 @@ foreach ($changed as $onefile) {
 $SubmitUrl = util_make_url('/plugins/scmhook/committracker/newcommit.php');
 
 $i = 0;
-foreach ( $files as $onefile ) {
+foreach ($files as $onefile) {
 	$SubmitVars[$i]['UserName']        = $UserName;
 	$SubmitVars[$i]['Repository']      = $repository;
 	$SubmitVars[$i]['FileName']        = $onefile['name'];
@@ -169,10 +155,10 @@ $vars['data'] = urlencode(serialize($SubmitVars));
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $SubmitUrl);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_POSTFIELDS, $vars);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 $result = curl_exec($ch);
 //$info = curl_getinfo($ch);
 curl_close($ch);

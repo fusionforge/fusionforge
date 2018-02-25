@@ -40,31 +40,19 @@ if (isset($group_id) && is_numeric($group_id) && $group_id) {
 	}
 } else {
 	//
+	//	This is a hack to allow the logger to have a group_id present for project summary pages
 	//
-	//	This is a hack to allow the logger to have a group_id present
-	//	for foundry and project summary pages
-	//
-	//
-	$pos = strpos (getStringFromServer('REQUEST_URI'),
-		       normalized_urlprefix ());
-	if (($pos !== false) && ($pos == 0)) {
-		$pathwithoutprefix = substr (getStringFromServer('REQUEST_URI'),
-					     strlen (normalized_urlprefix ()) - 1);
-	}
-	$pathwithoutprefix_exploded = explode('?', $pathwithoutprefix);
-	$pathwithoutprefix = $pathwithoutprefix_exploded[0];
-	$expl_pathinfo = explode('/',$pathwithoutprefix);
-	if (($expl_pathinfo[1]=='foundry') || ($expl_pathinfo[1]=='projects')) {
+	$expl_pathinfo = explode('/', getStringFromServer('REQUEST_URI'));
+	if ($expl_pathinfo[1] == 'projects') {
 		$group_name = $expl_pathinfo[2];
 		if ($group_name) {
 			$res_grp = db_query_params ('
 				SELECT *
 				FROM groups
 				WHERE unix_group_name=$1
-				AND status IN ($2,$3)',
+				AND status IN ($2, $3, $4)',
 						    array ($group_name,
-							   'A',
-							   'H'));
+							   'A', 'H', 'P'));
 
 			// store subpage id for analyzing later
 			// This will later be used in the www/projects for instance
@@ -77,7 +65,6 @@ if (isset($group_id) && is_numeric($group_id) && $group_id) {
 			//set up the group_id
 		   	$group_id=db_result($res_grp,0,'group_id');
 
-			//set up a foundry object for reference all over the place
 			if ($group_id) {
 				$grp = group_get_object($group_id,$res_grp);
 				if ($grp) {
@@ -96,8 +83,7 @@ if (isset($group_id) && is_numeric($group_id) && $group_id) {
 
 				global $RESTPATH_PROJECTS_SUBPAGE2;
 				$RESTPATH_PROJECTS_SUBPAGE2 = $subpage2;
-			}
-			else {
+			} else {
 				$RESTPATH_PROJECTS_GROUP_ID = -1;
 			}
 		}
@@ -117,7 +103,6 @@ if (isset($group_id) && is_numeric($group_id) && $group_id) {
 
 		//set up the group_id
 		$group_id=db_result($res_grp,0,'group_id');
-		//set up a foundry object for reference all over the place
 		if ($group_id) {
 			$grp = group_get_object($group_id,$res_grp);
 			if ($grp) {

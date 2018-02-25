@@ -134,11 +134,7 @@ function html_blankimage($height, $width) {
  * @return	string
  */
 function html_abs_image($url, $width, $height, $args) {
-	global $use_tooltips;
 	$args['src'] = $url;
-	if (!$use_tooltips && isset($args['title'])) {
-		$args['title'] = '';
-	}
 	if (!isset($args['alt'])) {
 		$args['alt'] = '';
 	}
@@ -162,12 +158,8 @@ function html_abs_image($url, $width, $height, $args) {
  */
 function html_image($src, $width = 0, $height = 0, $args = array(), $display = true) {
 	global $HTML;
-
-	if (method_exists($HTML, 'html_image')) {
-		$HTML->html_image($src, $width, $height, $args);
-	}
-	$s = ((session_issecure()) ? forge_get_config('images_secure_url') : forge_get_config('images_url') );
-	return html_abs_image($s.$HTML->imgroot.$src, $width, $height, $args);
+	$s = ((session_issecure()) ? forge_get_config('images_secure_url') : forge_get_config('images_url'));
+	return html_abs_image($s.$HTML->imgbaseurl.$src, $width, $height, $args);
 }
 
 /**
@@ -289,6 +281,27 @@ function html_build_select_box_from_array($vals, $select_name, $checked_val = 'x
 }
 
 /**
+ * html_build_radio_button() - Render radio button control
+ *
+ * @param	string		$name		name of control
+ * @param	bool|string	$value		value of control (if false then no attribute value)
+ * @param	bool		$checked	true if control should be selected
+ * @param	array		$attrs		Array of other attributes for this element
+ * @return	html code for radio button control
+ */
+function html_build_radio_button($name, $value, $checked, $attrs=array()) {
+	if ($value === false) {
+		$attrs = array_merge(array('id' => $name, 'name' => $name, 'type' => 'radio'), $attrs);
+	} else {
+		$attrs = array_merge(array('id' => $name, 'name' => $name, 'value' => $value, 'type' => 'radio'), $attrs);
+	}
+	if ($checked) {
+		$attrs['checked'] = 'checked';
+	}
+	return html_e('input', $attrs);
+}
+
+/**
  * html_build_radio_buttons_from_arrays() - Takes two arrays, with the first array being the "id" or value and the other
  * array being the text you want displayed.
  *
@@ -368,7 +381,9 @@ function html_build_radio_buttons_from_arrays(
 				$radio_attrs ['checked'] = 'checked';
 			}
 			if (is_array($allowed) && !in_array($vals[$i], $allowed)) {
-				$radio_attrs['disabled'] = 'disabled';
+				if ((string)$vals[$i] != (string)$checked_val) {
+					$radio_attrs['disabled'] = 'disabled';
+				}
 				$radio_attrs['class'] = (isset($radio_attrs['class']) ? $radio_attrs['class'].' ':'').'radio_disabled';
 			}
 			if (isset($radios_attrs[$i]) && is_array($radios_attrs[$i])) {
@@ -450,7 +465,7 @@ function html_get_tooltip_description($element_name) {
 }
 
 function html_use_jquery() {
-	use_javascript('/scripts/jquery/jquery-1.10.2.js');
+	use_javascript('/scripts/jquery/jquery-1.12.4.js');
 }
 
 function html_use_tablesorter() {
@@ -480,7 +495,7 @@ function html_use_coolfieldset() {
 
 function html_use_jqueryui() {
 	html_use_jquery();
-	use_javascript('/scripts/jquery-ui/js/jquery-ui-1.11.4.js');
+	use_javascript('/scripts/jquery-ui/js/jquery-ui-1.12.1.js');
 }
 
 function html_use_jqueryjqplot() {
@@ -551,12 +566,39 @@ function html_use_jqueryautoheight() {
 }
 
 function html_use_iframeresizer() {
-	use_javascript('/scripts/iframe-resizer/iframeResizer.min.js');
+	use_javascript('/scripts/iframe-resizer/iframeResizer.js');
 }
 
 function html_use_jquerybrowser() {
 	html_use_jquery();
 	use_javascript('/scripts/jquery-auto-height/jquery.browser.js');
+}
+
+function html_use_jquerymousewheel() {
+	html_use_jquery();
+	use_javascript('/scripts/jquery-mousewheel/jquery.mousewheel.js');
+}
+
+function html_use_phpdateformatter() {
+	use_javascript('/scripts/php-date-formatter/js/php-date-formatter.js');
+}
+
+function html_use_jquerydatetimepicker() {
+	html_use_jquery();
+	html_use_phpdateformatter();
+	html_use_jquerymousewheel();
+	use_javascript('/scripts/jquery-datetimepicker/jquery.datetimepicker.js');
+	use_stylesheet('/scripts/jquery-datetimepicker/jquery.datetimepicker.css');
+}
+
+function html_use_jquerygentleselect() {
+	html_use_jquery();
+	use_javascript('/scripts/jquery-gentleSelect/jquery-gentleSelect.js');
+	use_stylesheet('/scripts/jquery-gentleSelect/jquery-gentleSelect.css');
+}
+
+function html_use_ace() {
+	use_javascript('/scripts/ace/ace.js');
 }
 
 /**
@@ -580,6 +622,7 @@ function html_use_jquerybrowser() {
  * @param	array		$attrs		Array of other attributes for this select element
  * @param	array		$opts_attrs
  * @param	array		$attrs_100
+ * @param	array		$optgroup
  * @return	string
  * @throws Exception
  */
@@ -589,7 +632,8 @@ function html_build_select_box_from_arrays($vals, $texts, $select_name,
 					   $show_any = false, $text_any = 'any',
 					   $allowed = false, $attrs = array(),
 					   $opts_attrs = array(),
-					   $attrs_100 = array()) {
+					   $attrs_100 = array(),
+					   $optgroup = array()) {
 	if ($text_100 == 'none') {
 		$text_100 = _('None');
 	}
@@ -597,6 +641,7 @@ function html_build_select_box_from_arrays($vals, $texts, $select_name,
 		$text_100 = _('Nobody');
 	}
 	$have_a_subelement = false;
+	$attrsFieldset = array('style' => 'padding: 0 !important; border: 0 !important; display: inline;');
 	$return = '';
 
 	$rows = count($vals);
@@ -610,9 +655,10 @@ function html_build_select_box_from_arrays($vals, $texts, $select_name,
 
 	if (empty($attrs['title'])) {
 		//TODO: remove this ugly ack to get something more generic...
-		$attrs['title'] = util_html_secure(html_get_tooltip_description($select_name));
+		$attrsFieldset['title'] = util_html_secure(html_get_tooltip_description($select_name));
 	} else {
-		$attrs['title'] = util_html_secure($attrs['title']);
+		$attrsFieldset['title'] = util_html_secure($attrs['title']);
+		unset($attrs['title']);
 	}
 
 	if (!empty($attrs['title'])) {
@@ -622,12 +668,13 @@ function html_build_select_box_from_arrays($vals, $texts, $select_name,
 		}
 	}
 	$attrs['name'] = $select_name;
+	$return .= html_ao('fieldset', $attrsFieldset);
 	$return .= html_ao('select', $attrs);
 
 	//we don't always want the default Any row shown
 	if ($show_any) {
 		$opt_attrs = array('value' => '');
-		if ($checked_val)
+		if ($checked_val == '')
 			$opt_attrs['selected'] = 'selected';
 		$return .= html_e('option', $opt_attrs, util_html_secure($text_any), false);
 		$have_a_subelement = true;
@@ -641,14 +688,17 @@ function html_build_select_box_from_arrays($vals, $texts, $select_name,
 		if (!empty($attrs_100)) {
 			$opt_attrs = array_merge($opt_attrs, $attrs_100);
 		}
-		if ($checked_val)
+		if ($checked_val == '100') {
 			$opt_attrs['selected'] = 'selected';
+		}
 		$return .= html_e('option', $opt_attrs, util_html_secure($text_100), false);
 		$have_a_subelement = true;
 	}
 
 	$checked_found = false;
-
+	$withGroup = !empty($optgroup);
+	$currentGroup = '';
+	$groupOpen = false;
 	for ($i = 0; $i < $rows; $i++) {
 		//  uggh - sorry - don't show the 100 row
 		//  if it was shown above, otherwise do show it
@@ -660,15 +710,29 @@ function html_build_select_box_from_arrays($vals, $texts, $select_name,
 				$opt_attrs['selected'] = 'selected';
 			}
 			if (is_array($allowed) && !in_array($vals[$i], $allowed)) {
-				$opt_attrs['disabled'] = 'disabled';
+				if ((string)$vals[$i] != (string)$checked_val) {
+					$opt_attrs['disabled'] = 'disabled';
+				}
 				$opt_attrs['class'] = (isset($opt_attrs['class']) ? $opt_attrs['class'].' ':'').'option_disabled';
 			}
 			if (isset($opts_attrs[$i]) && is_array($opts_attrs[$i])) {
 				$opt_attrs = array_merge($opt_attrs, $opts_attrs[$i]);
 			}
+			if ($withGroup && $vals[$i] != '100' && $optgroup[$i]!=$currentGroup) {
+				if ($currentGroup!='' && $groupOpen) {
+					$return .= html_ac(html_ap() - 1);
+					$groupOpen = false;
+				}
+				$return .= html_ao('optgroup',array('label'=>$optgroup[$i]));
+				$groupOpen = true;
+				$currentGroup = $optgroup[$i];
+			}
 			$return .= html_e('option', $opt_attrs, util_html_secure($texts[$i]));
 			$have_a_subelement = true;
 		}
+	}
+	if ($withGroup && $groupOpen) {
+		$return .= html_ac(html_ap() - 1);
 	}
 	//
 	//	If the passed in "checked value" was never "SELECTED"
@@ -689,7 +753,7 @@ function html_build_select_box_from_arrays($vals, $texts, $select_name,
 		$return .= html_e('option', array(), '', false);
 	}
 
-	$return .= html_ac(html_ap() -1);
+	$return .= html_ac(html_ap() -2);
 	return $return;
 }
 
@@ -704,8 +768,8 @@ function html_build_select_box_from_arrays($vals, $texts, $select_name,
  * @param	string		$text_100	What to call the '100 row'.  Defaults to none.
  * @param	bool		$show_any	Whether or not to show the 'Any row'
  * @param	string		$text_any	What to call the 'Any row' defaults to any
- * @param	bool		$allowed	Unused
- * @param	array	$attrs
+ * @param	bool		$allowed
+ * @param	array		$attrs
  * @return	string
  */
 function html_build_select_box($result, $name, $checked_val = "xzxz",
@@ -782,10 +846,10 @@ function html_build_multiple_select_box($result, $name, $checked_array, $size = 
 	$texts = array();
 	$rows = db_numrows($result);
 	for ($i = 0; $i < $rows; $i++) {
-		$vals = db_result($result, $i, 0);
-		$texts = substr(db_result($result, $i, 1), 0, 35);
+		$vals[] = db_result($result, $i, 0);
+		$texts[] = substr(db_result($result, $i, 1), 0, 35);
 	}
-	return html_build_multiple_select_box_from_arrays($vals, $texts, $name, $checked_array, $size, $show_100, $text_100, $attrs);
+	return html_build_multiple_select_box_from_arrays($vals, $texts, $name, $checked_array, $size, $show_100, $text_100, false, $attrs);
 }
 
 /**
@@ -794,23 +858,24 @@ function html_build_multiple_select_box($result, $name, $checked_array, $size = 
  * @param	array	$vals
  * @param	array	$texts		Text to be displayed
  * @param	string	$name		id of the items selected
- * @param	string	$checked_array	The item that should be checked
+ * @param	array	$checked_array	The item that should be checked
  * @param	int	$size		The size of this box
  * @param	bool	$show_100	Whether or not to show the '100 row'
  * @param	string	$text_100	What to call the '100 row' defaults to none.
  * @param	bool	$allowed
- * @param	array	$attrs Array of other attributes for this select element
+ * @param	array	$attrs		Array of other attributes for this select element
  * @param	array	$opts_attrs
  * @param	array	$attrs_100
+ * @param	array	$optgroup
  * @return	string
  * @throws	Exception
  */
-function html_build_multiple_select_box_from_arrays(
-		$vals, $texts, $name, $checked_array, $size = 8,
-		$show_100 = true, $text_100 = 'none',
-		$allowed = false, $attrs = array(),
-		$opts_attrs = array(), $attrs_100 = array()) {
-	$return = html_ao('select', array_merge(array('name' => $name, 'multiple' => 'multiple', 'size' => $size), $attrs));
+function html_build_multiple_select_box_from_arrays($vals, $texts, $name, $checked_array = array(), $size = 8,
+						$show_100 = true, $text_100 = 'none',
+						$allowed = false, $attrs = array(),
+						$opts_attrs = array(), $attrs_100 = array(),
+						$optgroup = array()) {
+	$return = html_ao('select', array_merge($attrs, array('name' => $name, 'multiple' => 'multiple', 'size' => $size)));
 	if ($show_100) {
 		if ($text_100 == 'none') {
 			$text_100 = _('None');
@@ -828,6 +893,10 @@ function html_build_multiple_select_box_from_arrays(
 		$return .= html_e('option', $opt_attrs, $text_100, false);
 	}
 
+	$withGroup = !empty($optgroup);
+	$currentGroup = '';
+	$groupOpen = false;
+
 	$rows = count($vals);
 	for ($i = 0; $i < $rows; $i++) {
 		if (($vals[$i] != '100') || ($vals[$i] == '100' && !$show_100)) {
@@ -843,11 +912,25 @@ function html_build_multiple_select_box_from_arrays(
 				$opt_attrs = array_merge($opt_attrs, $opts_attrs[$i]);
 			}
 			if (is_array($allowed) && !in_array($vals[$i], $allowed)) {
-				$opt_attrs['disabled'] = 'disabled';
+				if (!in_array('100', $checked_array)) {
+					$opt_attrs['disabled'] = 'disabled';
+				}
 				$opt_attrs['class'] = (isset($opt_attrs['class']) ? $opt_attrs['class'].' ':'').'option_disabled';
+			}
+			if ($withGroup && $vals[$i]!='100' && $optgroup[$i]!=$currentGroup) {
+				if ($currentGroup!='' && $groupOpen) {
+					$return .= html_ac(html_ap() - 1);
+					$groupOpen = false; // @fixme see $groupOpen below
+				}
+				$return .= html_ao('optgroup', array('label'=>$optgroup[$i]));
+				$groupOpen = true;
+				$currentGroup = $optgroup[$i];
 			}
 			$return .= html_e('option', $opt_attrs, $texts[$i], false);
 		}
+	}
+	if ($groupOpen) {
+		$return .= html_ac(html_ap() -1);
 	}
 	$return .= html_ac(html_ap() -1);
 	return $return;
@@ -862,7 +945,7 @@ function html_build_multiple_select_box_from_arrays(
  * @param	array		$attrs		Array of other attributes for this element
  * @return	html code for checkbox control
  */
-function html_build_checkbox($name, $value, $checked, $attrs=array()) {
+function html_build_checkbox($name, $value, $checked, $attrs = array()) {
 	if ($value === false) {
 		$attrs = array_merge(array('id' => $name, 'name' => $name, 'type' => 'checkbox'), $attrs);
 	} else {
@@ -882,15 +965,20 @@ function html_build_checkbox($name, $value, $checked, $attrs=array()) {
  * @param	array	$checked
  * @param	bool	$checkall
  * @param	bool	$show_100
+ * @param	string	$text_100
+ * @param	bool	$allowed
+ * @param	array	$attrs
+ * @param	array	$checkbox_attrs
+ * @param	array	$attrs_100
  * @return	string	html code for checkbox control
  */
-function html_build_checkboxes_from_array($vals, $check_name, $checked=array(), $checkall=false, $show_100) {
+function html_build_checkboxes_from_array($vals, $check_name, $checked=array(), $checkall=false, $show_100=true, $text_100='none', $allowed=false, $attrs=array(), $checkbox_attrs=array(), $attrs_100=array()) {
 	$values = array_keys($vals);
 	$texts =  array_values($vals);
-	return html_build_checkboxes_from_arrays($values, $texts, $check_name, $checked, $checkall, false);
+	return html_build_checkboxes_from_arrays($values, $texts, $check_name, $checked, $checkall, $show_100, $text_100, $allowed, $attrs, $checkbox_attrs, $attrs_100);
 }
 
-function html_build_checkboxes_from_arrays($vals, $texts, $check_name, $checked=array(), $checkall=false, $show_100=true, $text_100='none', $allowed=false, $attrs=array(),$checkbox_attrs=array(),$attrs_100=array()) {
+function html_build_checkboxes_from_arrays($vals, $texts, $check_name, $checked=array(), $checkall=false, $show_100=true, $text_100='none', $allowed=false, $attrs=array(), $checkbox_attrs=array(), $attrs_100=array()) {
 	if ($text_100 == 'none') {
 		$text_100 = _('None');
 	}
@@ -902,6 +990,8 @@ function html_build_checkboxes_from_arrays($vals, $texts, $check_name, $checked=
 
 	$title = (empty($attrs['title']) ? array() : array('title' => $attrs['title']));
 	if ($checkall) {
+		$attrs_checkall = $attrs;
+		unset($attrs_checkall['required']);
 		$javascript = '//<![CDATA[
 							$(window).load(function(){
 								$("#checkall_'.$check_name.'").change(function () {
@@ -910,13 +1000,41 @@ function html_build_checkboxes_from_arrays($vals, $texts, $check_name, $checked=
 							});
 						//]]';
 		$return .= html_e('script', array( 'type'=>'text/javascript'), $javascript);
-		$return .= html_ao('p');
-		$return .= html_e('input', array_merge( array( 'type' => 'checkbox', 'name' => 'checkall_'.$check_name, 'id' => 'checkall_'.$check_name ), $attrs));
-		$return .= html_e('label', array_merge( array( 'for' => 'checkall_'.$check_name), $title), _('Check all'), false);
-		$return .= html_ac(html_ap() - 1);
+		$return .= html_e('p', array(), html_e('input', array_merge( array( 'type' => 'checkbox', 'name' => 'checkall_'.$check_name, 'id' => 'checkall_'.$check_name ), $attrs_checkall)).
+						html_e('label', array_merge( array( 'for' => 'checkall_'.$check_name), $title), _('Check all'), false));
+	}
+
+	if (isset($attrs['required']) && $attrs['required']=='required') {
+		$attrs['class'] = (isset($attrs['class']) ? $attrs['class'].' ' : '').'checkbox_required';
+		$javascript = '//<![CDATA[
+							$(function() {
+								$("input.checkbox_required[name=\''.$check_name.'[]\']:checkbox").on("change", function() {
+									var requiredCheckboxes = $(this).parent().children(":checkbox");
+									requiredCheckboxes.each(function() {
+										this.setCustomValidity("");
+									});
+									if (requiredCheckboxes.is(":checked")) {
+										requiredCheckboxes.prop("required", false);
+									} else {
+										requiredCheckboxes.prop("required", true)
+									}
+								});
+								$("input.checkbox_required[name=\''.$check_name.'[]\']:checkbox").each(function() {
+									$(this).on("invalid", function() {
+										this.setCustomValidity("");
+										if (!this.validity.valid) {
+											this.setCustomValidity("'._("Please, select at least one of these options").'");
+										}
+									})
+								});
+							});
+						//]]';
+		$return .= html_e('script', array( 'type'=>'text/javascript'), $javascript);
+		if (!empty($checked)) {
+			unset($attrs['required']);
+		}
 	}
 	$return .= html_ao('p');
-
 	if ($show_100) {
 		if (in_array('100', $checked)) {
 			$attrs_100['checked']='checked';
@@ -931,7 +1049,9 @@ function html_build_checkboxes_from_arrays($vals, $texts, $check_name, $checked=
 			$checkbox_attrs[$i]['checked']='checked';
 		}
 		if ($allowed && !in_array($vals[$i], $allowed)) {
-			$checkbox_attrs[$i]['disabled'] = 'disabled';
+			if (!in_array($vals[$i], $checked)) {
+				$checkbox_attrs[$i]['disabled'] = 'disabled';
+			}
 			$checkbox_attrs[$i]['class'] = (isset($checkbox_attrs[$i]['class']) ? $checkbox_attrs[$i]['class'].' ' : '').'checkbox_disabled';
 		}
 		$return .= html_e('input', array_merge( array( 'type' => 'checkbox', 'name' => $check_name.'[]', 'id' => $check_name.'_'.$vals[$i], 'value' => $vals[$i]), $attrs, (isset($checkbox_attrs[$i]) ? $checkbox_attrs[$i] : array())));
@@ -965,9 +1085,10 @@ function build_priority_select_box($name = 'priority', $checked_val = '3', $noch
  * @param	string		$checked_val	The value to be checked
  * @param	bool		$nochange	Whether to make 'No Change' selected.
  * @param	bool|array	$attrs		Array of other attributes for this select element
+ * @param	bool		$show_any	Display the 'Any' value
  * @return string
  */
-function html_build_priority_select_box($name = 'priority', $checked_val = '3', $nochange = false, $attrs = array()) {
+function html_build_priority_select_box($name = 'priority', $checked_val = '3', $nochange = false, $attrs = array(), $show_any = false) {
 	if (empty($attrs['title'])) {
 		$attrs['title'] = util_html_secure(html_get_tooltip_description($name));
 	} else {
@@ -983,30 +1104,12 @@ function html_build_priority_select_box($name = 'priority', $checked_val = '3', 
 		$show_100 = false;
 		$text_100 = '';
 	}
-	return html_build_select_box_from_arrays($vals, $texts, $name, $checked_val, $show_100, $text_100, false, '', false, $attrs);
-}
-
-/**
- * html_buildcheckboxarray() - Build an HTML checkbox array.
- *
- * @param	array	$options	Options array
- * @param	string	$name		Checkbox name
- * @param	array	$checked_array	Array of boxes to be pre-checked
- */
-function html_buildcheckboxarray($options, $name, $checked_array) {
-	$option_count = count($options);
-	$checked_count = count($checked_array);
-
-	for ($i = 1; $i <= $option_count; $i++) {
-		$checked = 0;
-
-		for ($j = 0; $j < $checked_count; $j++) {
-			if ($i == $checked_array[$j]) {
-				$checked = 1;
-			}
-		}
-		echo html_e('br').html_build_checkbox($name, $value, $checked).$options[$i];
+	if ($show_any) {
+		$any_text = _('Any');
+	} else {
+		$any_text = '';
 	}
+	return html_build_select_box_from_arrays($vals, $texts, $name, $checked_val, $show_100, $text_100, $show_any, $any_text, false, $attrs);
 }
 
 /**
@@ -1041,13 +1144,10 @@ function site_footer($params = array()) {
  * @param	params	array() must contain $toptab and $group
  */
 function site_project_header($params) {
-
 	/*
 		Check to see if active
-		Check to see if project rather than foundry
 		Check to see if private (if private check if user_ismember)
 	*/
-
 	$group_id = $params['group'];
 
 	//get the project object
@@ -1058,15 +1158,17 @@ function site_project_header($params) {
 	} elseif ($project->isError()) {
 		if ($project->isPermissionDeniedError()) {
 			if (!session_get_user()) {
-				$next = '/account/login.php?error_msg='.urlencode($project->getErrorMessage());
+				$error_msg = $project->getErrorMessage();
+				$next = '/account/login.php';
 				if (getStringFromServer('REQUEST_METHOD') != 'POST') {
 					$next .= '&return_to='.urlencode(getStringFromServer('REQUEST_URI'));
 				}
 				session_redirect($next);
-			} else
-				exit_error(sprintf(_('Project access problem: %s'), $project->getErrorMessage()), 'home');
+			} else {
+				exit_error(_('Project access problem')._(': ').$project->getErrorMessage(), 'home');
+			}
 		}
-		exit_error(sprintf(_('Project Problem: %s'), $project->getErrorMessage()), 'home');
+		exit_error(_('Project Problem')._(': ').$project->getErrorMessage(), 'home');
 	}
 
 	// Check permissions in case of restricted access
@@ -1332,13 +1434,15 @@ function html_e($name, $attrs = array(), $content = "", $shortform = true, $inde
 	return $rv;
 }
 
+global $html_autoclose_stack, $html_autoclose_pos;
+
 $html_autoclose_stack = array();
 $html_autoclose_pos = 0;
 
 /**
  * html_ap() - Return XHTML element autoclose stack position
  *
- * @return	integer
+ * @return	int
  */
 function html_ap() {
 	global $html_autoclose_pos;
@@ -1394,8 +1498,7 @@ function html_aonce(&$sptr, $name, $attrs = array()) {
 /**
  * html_ac() - Return proper element XHTML end tags, autoclosing
  *
- * @param	$spos	integer
- *			stack position to return to (nothing is done if === false)
+ * @param	int	$spos	stack position to return to (nothing is done if === false)
  * @throws	Exception
  * @return	string	XHTML string suitable for echo'ing
  */
@@ -1485,7 +1588,7 @@ function html_a_apply($scopy) {
  */
 function html_trove_limit_navigation_box($php_self, $querytotalcount, $trove_browselimit, $page, $textintro = '') {
 	if ($textintro != '') {
-		$html_limit = sprintf(_(' Displaying %1$s per page. Projects sorted by alphabetical order.'), $trove_browselimit);
+		$html_limit = sprintf(_('Displaying %d per page. Projects sorted by alphabetical order.'), $trove_browselimit);
 	} else {
 		$html_limit = $textintro;
 	}

@@ -3,7 +3,7 @@
  * FusionForge trackers
  *
  * Copyright 2011, Alcatel-Lucent
- * Copyright 2012,2015, Franck Villaume - TrivialDev
+ * Copyright 2012,2015-2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -126,8 +126,7 @@ function nrange($col1, $col2, $nb) {
 function color_gradient($colors, $nb_colors) {
 	if (! is_array($colors)) {
 		return array();
-	}
-	elseif (count($colors) < 2 || $nb_colors <= 2) {
+	} elseif (count($colors) < 2 || $nb_colors <= 2) {
 		return $colors;
 	}
 
@@ -368,8 +367,7 @@ if (!$at_arr || count($at_arr) < 1) {
 					// Icon
 					if ($artifact->getStatusID() == 1) {
 						$icon = html_image('ic/ticket-open.png','','',array('alt' => $custom_status_name, 'title' => $custom_status_name));
-					}
-					else {
+					} else {
 						$icon = html_image('ic/ticket-closed.png','','',array('alt' => $custom_status_name, 'title' => $custom_status_name));
 					}
 					$rmap[$release_value_id][$artifact_type_name] .= sprintf($templates[$template]['ticket_icon'], $icon);
@@ -475,7 +473,7 @@ if (!$at_arr || count($at_arr) < 1) {
 				$roadmap_name._(': '),
 				util_make_uri('/tracker/roadmap.php?group_id='.$group_id.'&amp;roadmap_id='.$roadmap_id.'&amp;release='.urlencode($release_value)),
 				$release_value,
-				' '.html_image("ic/file-txt.png",'','',array("title"=>_('Display as text'), "onclick"=>"getReleaseTxt('".addslashes($release_value)."')")));
+				' '.html_image("ic/file-txt.png",'','',array("alt"=>_('Display as text'), "title"=>_('Display as text'), "onclick"=>"getReleaseTxt('".addslashes($release_value)."')")));
 
 		// Graph
 		if ($display_graph && $templates[$template]['display_graph']) {
@@ -646,7 +644,7 @@ if (!$at_arr || count($at_arr) < 1) {
 					url: 'roadmap.php',
 					data: '<?php echo 'group_id='.$group_id.'&roadmap_id='.$roadmap_id ?>&ajax=1&template=1&release='+release,
 					success: function(rep) {
-						jQuery('#div_options').empty().append('<a href="<?php echo '/tracker/roadmap.php?group_id='.$group_id ?>&roadmap_id='+selected_roadmap+'&nb_release='+selected_nb_release+'&display_graph='+selected_display_graph+'" ><?php echo _('Return to last release(s)') ?></a>');
+						jQuery('#div_options').empty().append('<a href="<?php echo util_make_uri('/tracker/roadmap.php?group_id='.$group_id) ?>&roadmap_id='+selected_roadmap+'&nb_release='+selected_nb_release+'&display_graph='+selected_display_graph+'" ><?php echo _('Return to last release(s)') ?></a>');
 						jQuery('#div_roadmap').empty().append(rep);
 					}
 				});

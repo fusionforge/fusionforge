@@ -23,6 +23,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+/**
+ * mail_header() - Display header for mailing lists pages
+ *
+ * @param	array	$params
+ */
 function mail_header($params) {
 	global $HTML, $group_id;
 

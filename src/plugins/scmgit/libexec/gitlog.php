@@ -31,9 +31,8 @@ header('Content-type: text/plain');
 
 # Authentify request
 if (!preg_match(',^/anonscm/,', $_SERVER['REQUEST_URI'])) {
-	$web_host = forge_get_config('web_host');
 	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_URL, 'https://' . $web_host . '/account/check_forwarded_session.php');
+	curl_setopt($ch, CURLOPT_URL, util_make_url().'/account/check_forwarded_session.php');
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
@@ -64,12 +63,12 @@ if ($mode == 'date_range') {
 	if (!ctype_digit($end_time))
 		die('Invalid end time');
 	$options = "--since=@$start_time --until=@$end_time";
-} else if ($mode == 'latest' or $mode == 'latest_user') {
+} elseif ($mode == 'latest' or $mode == 'latest_user') {
 	$limit = $_GET['limit'];
 	if (!ctype_digit($limit))
 		die('Invalid limit');
 	$options = "--max-count=$limit";
-	
+
 	if ($mode == 'latest_user') {
 		$email = $_GET['email'];
 		$realname = $_GET['realname'];

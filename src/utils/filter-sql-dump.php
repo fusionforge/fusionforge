@@ -34,7 +34,7 @@ foreach (parse_sql_file($file) as $q) {
 	if (preg_match('/^SET/', $q)) continue;
 	if (preg_match('/^\\\connect/', $q)) continue;
 	if (preg_match('/^SELECT pg_catalog.setval/', $q)) continue;
-	
+
 	$ignored_insert_tables = array('artifact_extra_field_elements',
 				       'artifact_extra_field_list',
 				       'database_changes',

@@ -3,7 +3,7 @@
  * List of all groups in the system.
  *
  * Copyright 1999-2000 (c) The SourceForge Crew
- * Copyright 2013,2015 Franck Villaume - TrivialDev
+ * Copyright 2013,2015-2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -81,11 +81,13 @@ if ($usingplugin) {
 				array(strtolower($usingplugin)));
 	$qpa = db_construct_qpa($qpa, ' ORDER BY '.$sqlsortorder);
 	$res = db_query_qpa($qpa);
+	$totalProjects = db_numrows($res);
 } elseif ($group_name_search != '') {
 	$filter='&group_name_search='.$group_name_search;
 	echo html_e('p', array(), _('Projects that begin with').' '.html_e('strong', array(), $group_name_search));
 	$res = db_query_params('SELECT group_name,register_time,unix_group_name,groups.group_id,groups.is_template,status,license_name,COUNT(DISTINCT(pfo_user_role.user_id)) AS members FROM groups LEFT OUTER JOIN pfo_role ON pfo_role.home_group_id=groups.group_id LEFT OUTER JOIN pfo_user_role ON pfo_user_role.role_id=pfo_role.role_id, licenses WHERE license_id=license AND lower(group_name) LIKE $1 GROUP BY group_name,register_time,unix_group_name,groups.group_id,groups.is_template,status,license_name ORDER BY '.$sqlsortorder,
 				array(strtolower ("$group_name_search%")));
+	$totalProjects = db_numrows($res);
 } else {
 	$qpa = db_construct_qpa(false, 'SELECT group_name,register_time,unix_group_name,groups.group_id,groups.is_template,status,license_name,COUNT(DISTINCT(pfo_user_role.user_id)) AS members FROM groups LEFT OUTER JOIN pfo_role ON pfo_role.home_group_id=groups.group_id LEFT OUTER JOIN pfo_user_role ON pfo_user_role.role_id=pfo_role.role_id, licenses WHERE license_id=license') ;
 	if ($status) {
@@ -193,7 +195,7 @@ if (count($rows)) {
 		$cells[][] = $grp['license_name'];
 		$cells[][] = $grp['members'];
 		$cells[][] = $grp['is_template'];
-		echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($key, true)), $cells);
+		echo $HTML->multiTableRow(array(), $cells);
 	}
 	echo $HTML->listTableBottom();
 	echo $HTML->paging_bottom($start, $paging, $totalProjects, '/admin/grouplist.php?sortorder='.$sortorder.$filter);

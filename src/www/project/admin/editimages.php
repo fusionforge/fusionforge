@@ -115,7 +115,7 @@ if (getStringFromRequest('submit')) {
 
 	if (getStringFromRequest('add')) {
 		if (!util_check_fileupload($input_file['tmp_name'])) {
-			exit_error(_('Invalid filename'));
+			exit_error(_('Invalid file name.'));
 		}
 		if (!$input_file['tmp_name'] || $description == "") {
 			$error_msg .= _('Both file name and description are required');
@@ -165,7 +165,7 @@ if (getStringFromRequest('submit')) {
 
 			} else {
 				if (!util_check_fileupload($input_file['tmp_name'])) {
-					exit_error(_('Invalid filename'));
+					exit_error(_('Invalid file name.'));
 				}
 
 				// new version of the file is uploaded
@@ -287,7 +287,7 @@ for ($i=0; $i<$rows; $i++) {
 	}
 
 	echo '
-	<tr '. $HTML->boxGetAltRowStyle($i) .'>'
+	<tr>'
 	.'<td class="align-center">'
 	 .util_make_link(getStringFromServer('PHP_SELF').'?submit=1&group_id='.$group_id.'&remove=1&id='.db_result($result,$i,'id'), '['._('Del').']')
 	 .util_make_link(getStringFromServer('PHP_SELF').'?&group_id='.$group_id.'&mode=edit&id='.db_result($result,$i,'id'), '['._('Edit').']')

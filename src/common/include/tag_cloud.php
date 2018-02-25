@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (C) 2008-2009 Alcatel-Lucent
+ * Copyright 2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -43,7 +44,7 @@
 $NB_MAX = 20;
 $NB_SIZE = 5;
 $CLASS_PREFIX = 'tag';
-$SELECTED_STYLE = 'style="text-decoration:overline underline;"';
+$SELECTED_STYLE = 'text-decoration:overline underline';
 
 /**
  * tag_cloud() - This function displays a tag cloug with the tags defined by projects.
@@ -77,32 +78,33 @@ function tag_cloud($params = array()) {
 	global $NB_MAX;
 	global $CLASS_PREFIX;
 	global $SELECTED_STYLE;
+	global $HTML;
 
-	if (! is_array($params)) $params = array();
-	if (! isset($params['selected'])) {
+	if (!is_array($params)) $params = array();
+	if (!isset($params['selected'])) {
 		$params['selected'] = '';
 	}
-	if (! isset($params['nb_max'])) {
+	if (!isset($params['nb_max'])) {
 		$params['nb_max'] = $NB_MAX;
 	}
-	if (! isset($params['nb_size'])) {
+	if (!isset($params['nb_size'])) {
 		$params['nb_size'] = $NB_SIZE;
 	}
-	if (! isset($params['class_prefix'])) {
+	if (!isset($params['class_prefix'])) {
 		$params['class_prefix'] = $CLASS_PREFIX;
 	}
-	if (! isset($params['selected_style'])) {
+	if (!isset($params['selected_style'])) {
 		$params['selected_style'] = $SELECTED_STYLE;
 	}
 
 	$return = '';
 
 	// count tag occurrence
-	$res = db_query_params ('SELECT project_tags.name,project_tags.group_id
+	$res = db_query_params('SELECT project_tags.name,project_tags.group_id
 					 FROM project_tags, groups
 					 WHERE project_tags.group_id = groups.group_id
-					 AND groups.status = $1 AND groups.type_id=1 AND groups.register_time > 0',
-				array ('A')) ;
+					 AND groups.status = $1 AND groups.register_time > 0',
+				array('A'));
 	$tag_count = array();
 	while ($row = db_fetch_array($res)) {
 		if (forge_check_perm ('project_read', $row['group_id'])) {
@@ -124,7 +126,7 @@ function tag_cloud($params = array()) {
 	}
 
 	$available_counts = array_keys($count_to_tags);
-	rsort ($available_counts, SORT_NUMERIC);
+	rsort($available_counts, SORT_NUMERIC);
 
 	if (count($tag_count) > 0) {
 		$count_min = 0;
@@ -153,12 +155,17 @@ function tag_cloud($params = array()) {
 		foreach ($tag_count as $name => $count) {
 			if ($count < $count_min) continue;
 			$size = intval(1 + ($count - $count_min) * $a);
-			$return .= '<a href="/softwaremap/tag_cloud.php?tag='
-			. urlencode($name)
-			. '" class="' . $params['class_prefix'] . $size . '" '
-			. (($name == $params['selected']) ? $params['selected_style'] : '' )
-			. '>' . htmlspecialchars($name) . '</a> ';
+			$linkAttr = array();
+			$linkAttr['class'] = $params['class_prefix'] . $size;
+			if ($name == $params['selected']) {
+				$linkAttr['style'] = $params['selected_style'];
+			}
+			$return .= util_make_link('/softwaremap/tag_cloud.php?tag='.urlencode($name), htmlspecialchars($name), $linkAttr);
 		}
+	}
+
+	if (!strlen($return)) {
+		$return .= $HTML->warning_msg(_('No used tags.'));
 	}
 
 	return $return;

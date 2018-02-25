@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
- * Copyright 2011, Franck Villaume - TrivialDev
+ * Copyright 2011,2016, Franck Villaume - TrivialDev
  * Copyright 2014, Stéphane-Eymeric Bredthauer
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -167,6 +167,7 @@ if (!session_loggedin()) {
 
 	site_user_header(array('title' => _('My Diary and Notes')));
 
+	$params['id'] = 'details';
 	$params['name'] = 'details';
 	$params['body'] = $_details;
 	$params['height'] = '350';
@@ -177,18 +178,20 @@ if (!session_loggedin()) {
 
 	echo html_e('h2', array(), $info_str);
 
-	echo html_ao('form', array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
+	echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
 	echo html_e('input', array('type' => 'hidden', 'name' => 'form_key', 'value' => form_generate_key()));
 	echo html_e('input', array('type' => 'hidden', 'name' => $proc_str, 'value' => '1'));
 	echo html_e('input', array('type' => 'hidden', 'name' => 'diary_id', 'value' => $_diary_id));
-	echo html_ao('table', array('class' => 'fullwidth'));
-	echo html_ao('tr').html_ao('td');
-	echo html_e('strong', array(),_('Summary')._(':')).'<br />';
-	echo html_e('input', array( 'required' => 'required', 'type' => 'text', 'name' => 'summary', 'size' => '60', 'maxlength' => '60', 'value' => $_summary));
+	echo $HTML->listTableTop(array(), array(), 'full');
+	echo html_ao('tr').html_ao('td').html_ao('label', array('for' => 'summary'));
+	echo html_e('strong', array(), _('Summary')._(':')).'<br />';
+	echo html_ac(html_ap()-1);
+	echo html_e('input', array('id' => 'summary', 'required' => 'required', 'type' => 'text', 'name' => 'summary', 'size' => '60', 'maxlength' => '60', 'value' => $_summary));
 	echo html_ac(html_ap()-2);
 
-	echo html_ao('tr').html_ao('td');
+	echo html_ao('tr').html_ao('td').html_ao('label', array('for' => 'details'));
 	echo html_e('strong', array(),_('Details')._(':')).'<br />';
+	echo html_ac(html_ap()-1);
 	echo $params['content'];
 	echo html_ac(html_ap()-2);
 
@@ -196,14 +199,16 @@ if (!session_loggedin()) {
 	echo html_ao('p');
 	echo html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Submit'))).'&nbsp;';
 	if ($_is_public) {
-		echo html_e('input', array('type' => 'checkbox', 'name' => 'is_public', 'value' => '1', 'checked' => 'checked'))._('Is Public');
+		echo html_e('input', array('id' => 'is_public', 'type' => 'checkbox', 'name' => 'is_public', 'value' => '1', 'checked' => 'checked')).'<label for="is_public">'._('Is Public').'</label>';
 	} else {
-		echo html_e('input', array('type' => 'checkbox', 'name' => 'is_public', 'value' => '1'))._('Is Public');
+		echo html_e('input', array('id' => 'is_public', 'type' => 'checkbox', 'name' => 'is_public', 'value' => '1')).'<label for="is_public">'._('Is Public').'</label>';
 	}
 	echo html_ac(html_ap()-1);
 
 	echo html_e('p', array(), _('If marked as public, your entry will be mailed to any monitoring users when it is first submitted.'));
-	echo html_ac(html_ap()-4);
+	echo html_ac(html_ap()-2);
+	echo $HTML->listTableBottom();
+	echo $HTML->closeForm();
 
 	echo html_e('h2', array(), _('Existing Diary and Notes Entries'));
 	$result=db_query_params('SELECT * FROM user_diary WHERE user_id=$1 ORDER BY id DESC',
@@ -216,7 +221,7 @@ if (!session_loggedin()) {
 		for ($i=0; $i<$rows; $i++) {
 			$date   = relative_date(db_result($result,$i,'date_posted'));
 			$public = db_result($result,$i,'is_public') ? _('Public') : _('Private');
-			$row_attrs = array('class' => $HTML->boxGetAltRowStyle($i,true));
+			$row_attrs = array();
 			$cell_data = array();
 			$cell_data [] = array(util_make_link('/my/diary.php?diary_id='.db_result($result,$i,'id'), db_result($result,$i,'summary')));
 			$cell_data [] = array($date);

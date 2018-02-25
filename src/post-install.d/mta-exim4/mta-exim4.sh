@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash -e
 # Configure Exim4 for FusionForge+Mailman
 #
 # Christian Bayle, Roland Mas, debian-sf
@@ -20,8 +20,6 @@
 # with FusionForge; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-set -e
-
 . $(forge_get_config source_path)/post-install.d/common/service.inc
 
 ####
@@ -30,56 +28,56 @@ set -e
 cfgs_exim4_main=''
 cfgs_exim4_router=''
 if [ -e /etc/exim4/exim4.conf.template ]; then
-    cfgs_exim4_main="$cfgs_exim4_main /etc/exim4/exim4.conf.template"
-    cfgs_exim4_router="$cfgs_exim4_router /etc/exim4/exim4.conf.template"
+	cfgs_exim4_main="$cfgs_exim4_main /etc/exim4/exim4.conf.template"
+	cfgs_exim4_router="$cfgs_exim4_router /etc/exim4/exim4.conf.template"
 fi
 if [ -e /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs ]; then
-    cfgs_exim4_main="$cfgs_exim4_main /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs"
-    # + /etc/exim4/conf.d/router/01_fusionforge_forwards entirely generated
+	cfgs_exim4_main="$cfgs_exim4_main /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs"
+	# + /etc/exim4/conf.d/router/01_fusionforge_forwards entirely generated
 fi
 if [ -e /etc/exim4/exim4.conf ]; then
-    cfgs_exim4_main="$cfgs_exim4_main /etc/exim4/exim4.conf"
-    cfgs_exim4_router="$cfgs_exim4_router /etc/exim4/exim4.conf"
+	cfgs_exim4_main="$cfgs_exim4_main /etc/exim4/exim4.conf"
+	cfgs_exim4_router="$cfgs_exim4_router /etc/exim4/exim4.conf"
 fi
 if [ -e /etc/exim/exim.conf ]; then
-    cfgs_exim4_main="$cfgs_exim4_main /etc/exim/exim.conf"
-    cfgs_exim4_router="$cfgs_exim4_router /etc/exim/exim.conf"
+	cfgs_exim4_main="$cfgs_exim4_main /etc/exim/exim.conf"
+	cfgs_exim4_router="$cfgs_exim4_router /etc/exim/exim.conf"
 fi
 
 case "$1" in
-    configure)
-	$(dirname $0)/upgrade-conf.sh $2
+	configure)
+		$(dirname $0)/upgrade-conf.sh $2
 
-	users_host=$(forge_get_config users_host)
-	lists_host=$(forge_get_config lists_host)
-	pgsock='/var/run/postgresql/.s.PGSQL.5432'
-	if [ -e '/etc/redhat-release' ]; then pgsock='/tmp/.s.PGSQL.5432'; fi
-	database_name=$(forge_get_config database_name)
-	database_user=$(forge_get_config database_user)
-	database_password_mta=$(forge_get_config database_password_mta)
+		users_host=$(forge_get_config users_host)
+		lists_host=$(forge_get_config lists_host)
+		pgsock='/var/run/postgresql/.s.PGSQL.5432'
+		if [ -e '/etc/redhat-release' ]; then pgsock='/tmp/.s.PGSQL.5432'; fi
+		database_name=$(forge_get_config database_name)
+		database_user=$(forge_get_config database_user)
+		database_password_mta=$(forge_get_config database_password_mta)
 
-	# Redirect "noreply" mail to the bit bucket (if need be)
-	if [ "$(forge_get_config noreply_to_bitbucket)" != 'no' ] ; then
-	    if ! grep -q '^noreply:' /etc/aliases ; then
-		echo 'noreply: :blackhole:' >> /etc/aliases
-	    fi
-	fi
+		# Redirect "noreply" mail to the bit bucket (if need be)
+		if [ "$(forge_get_config noreply_to_bitbucket)" != 'no' ] ; then
+			if ! grep -q '^noreply:' /etc/aliases ; then
+				echo 'noreply: :blackhole:' >> /etc/aliases
+			fi
+		fi
 
-	# Main configuration: list of local domains
-	for i in $cfgs_exim4_main; do
-	    sed -i '/:FUSIONFORGE_DOMAINS/! s/^domainlist local_domains.*/&:FUSIONFORGE_DOMAINS/' $i
-	    if ! grep -q '^FUSIONFORGE_DOMAINS=' $i; then
-		chmod 600 $i
-		sed -i '/^domainlist local_domains/ecat' $i <<EOF
+		# Main configuration: list of local domains
+		for i in $cfgs_exim4_main; do
+			sed -i '/:FUSIONFORGE_DOMAINS/! s/^domainlist local_domains.*/&:FUSIONFORGE_DOMAINS/' $i
+			if ! grep -q '^FUSIONFORGE_DOMAINS=' $i; then
+				chmod 600 $i
+				sed -i '/^domainlist local_domains/ecat' $i <<EOF
 hide pgsql_servers = ($pgsock)/mail/Debian-exim/bogus:($pgsock)/$database_name/${database_user}_mta/${database_password_mta}
 FUSIONFORGE_DOMAINS=$users_host:$lists_host
 EOF
-	    fi
-	done
+			fi
+		done
 
-	# Router configuration
-	block=$(mktemp)
-	cat <<EOF > $block
+		# Router configuration
+		block=$(mktemp)
+		cat <<EOF > $block
 ### BEGIN FUSIONFORGE BLOCK -- DO NOT EDIT ###
 # You may move this block around to accomodate your local needs as long as you
 # keep it in the Directors Configuration section (between the second and the
@@ -183,51 +181,51 @@ forward_for_fusionforge_lists_unsubscribe:
   group = nogroup
 ### END FUSIONFORGE BLOCK -- DO NOT EDIT
 EOF
-	# Stand-alone file:
-	if [ -d /etc/exim4/conf.d/router/ ]; then
-	    cp $block /etc/exim4/conf.d/router/01_fusionforge_forwards
-	fi
-	# Add the same in the unsplit big file(s)
-	for i in $cfgs_exim4_router; do
-	    if ! grep -q '^### BEGIN FUSIONFORGE BLOCK' $i; then
-		sed -i -e '/^begin routers$/ {' -e 'ecat' -e 'd }' $i <<-EOF
-		begin routers
-		### BEGIN FUSIONFORGE BLOCK -- DO NOT EDIT ###
-		### END FUSIONFORGE BLOCK ###
-		EOF
-	    fi
-	    sed -i -e '/^### BEGIN FUSIONFORGE BLOCK/,/^### END FUSIONFORGE BLOCK/ { ' \
-		-e 'ecat' -e 'd }' $i < $block
-	done
-	rm -f $block
+		# Stand-alone file:
+		if [ -d /etc/exim4/conf.d/router/ ]; then
+			cp $block /etc/exim4/conf.d/router/01_fusionforge_forwards
+		fi
+		# Add the same in the unsplit big file(s)
+		for i in $cfgs_exim4_router; do
+			if ! grep -q '^### BEGIN FUSIONFORGE BLOCK' $i; then
+				sed -i -e '/^begin routers$/ {' -e 'ecat' -e 'd }' $i <<-EOF
+					begin routers
+					### BEGIN FUSIONFORGE BLOCK -- DO NOT EDIT ###
+					### END FUSIONFORGE BLOCK ###
+					EOF
+			fi
+			sed -i -e '/^### BEGIN FUSIONFORGE BLOCK/,/^### END FUSIONFORGE BLOCK/ { ' \
+				-e 'ecat' -e 'd }' $i < $block
+		done
+		rm -f $block
 
-	service exim4 restart
-	;;
-    
-    remove)
-	if [ "$(forge_get_config noreply_to_bitbucket)" != 'no' ] ; then
-	    sed -i -e '/^noreply:/d' /etc/aliases
-	fi
+		service exim4 restart
+		;;
 
-	# main conf
-	database_name=$(forge_get_config database_name)
-	for i in $cfgs_exim4_main; do
-	    sed -i -e '/^FUSIONFORGE_DOMAINS=/d' \
-		-e "/^hide pgsql_servers = .*$database_name.*/d" \
-		-e '/domainlist local_domains.*/ s/:FUSIONFORGE_DOMAINS//' $i
-	done
+	remove)
+		if [ "$(forge_get_config noreply_to_bitbucket)" != 'no' ] ; then
+			sed -i -e '/^noreply:/d' /etc/aliases
+		fi
 
-	# routers
-	for i in $cfgs_exim4_router; do
-	    sed -i -e '/^### BEGIN FUSIONFORGE BLOCK/,/^### END FUSIONFORGE BLOCK/d' $i
-	done
-	rm -f /etc/exim4/conf.d/router/01_fusionforge_forwards
+		# main conf
+		database_name=$(forge_get_config database_name)
+		for i in $cfgs_exim4_main; do
+			sed -i -e '/^FUSIONFORGE_DOMAINS=/d' \
+				-e "/^hide pgsql_servers = .*$database_name.*/d" \
+				-e '/domainlist local_domains.*/ s/:FUSIONFORGE_DOMAINS//' $i
+		done
 
-	service exim4 restart
-	;;
-    
-    *)
-	echo "Usage: $0 {configure|remove}"
-	exit 1
-	;;
+		# routers
+		for i in $cfgs_exim4_router; do
+			sed -i -e '/^### BEGIN FUSIONFORGE BLOCK/,/^### END FUSIONFORGE BLOCK/d' $i
+		done
+		rm -f /etc/exim4/conf.d/router/01_fusionforge_forwards
+
+		service exim4 restart
+		;;
+
+	*)
+		echo "Usage: $0 {configure|remove}"
+		exit 1
+		;;
 esac

@@ -42,14 +42,11 @@ class SurveyResponse extends FFError {
 	/**
 	 * @param	$Group
 	 * @param	bool	$arr
-	 * @internal	param	\The $object Group object to which this Survey Response is associated.
-	 * @internal	param	\The $int question_id.
-	 * @internal	param	\The $array associative array of data.
 	 */
 	function __construct(&$Group, $arr=false) {
 		parent::__construct();
 		if (!$Group || !is_object($Group)) {
-			$this->setError(_('No Valid Group Object'));
+			$this->setError(_('Invalid Project'));
 			return;
 		}
 		if ($Group->isError()) {
@@ -70,15 +67,7 @@ class SurveyResponse extends FFError {
 	 * @param	$survey_id
 	 * @param	$question_id
 	 * @param	$response
-	 * @internal	param		\The $string question
-	 * @internal	param		\The $int question type
-	 *				1: Radio Buttons 1-5
-	 *				2: Text Area
-	 *				3: Radio Buttons Yes/No
-	 *				4: Comment Only
-	 *				5: Text Field
-	 *				6: None
-	 * @return	boolean		success.
+	 * @return	bool		success.
 	 */
 	function create($user_id, $survey_id, $question_id, $response) {
 		$res = db_query_params ('INSERT INTO survey_responses (user_id,group_id,survey_id,question_id,response,post_date) VALUES ($1,$2,$3,$4,$5,$6)',

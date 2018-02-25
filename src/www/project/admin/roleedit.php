@@ -8,7 +8,7 @@
  * Copyright © 2011
  *	Thorsten Glaser <t.glaser@tarent.de>
  * Copyright 2014, Stéphane-Eymeric Bredthauer
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -79,10 +79,10 @@ if (getStringFromRequest('submit')) {
 	if (($role->getHomeProject() != NULL)
 		&& ($role->getHomeProject()->getID() == $group_id)) {
 		$role_name = trim(getStringFromRequest('role_name'));
-		$public = getIntFromRequest('public') ? true : false ;
+		$public = getIntFromRequest('public') ? true : false;
 	} else {
-		$role_name = $role->getName() ;
-		$public = $role->isPublic() ;
+		$role_name = $role->getName();
+		$public = $role->isPublic();
 	}
 	if (!$role_name) {
 		$error_msg .= _('Missing Role Name');
@@ -119,8 +119,7 @@ $msg = _('Use this page to edit the permissions attached to each role.  Note tha
 project_admin_header(array('title'=> $title, 'group'=>$group_id));
 
 echo '<p>'.$msg.'</p>';
-echo '
-<form action="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;role_id='. $role_id .'" method="post">';
+echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&role_id='.$role_id, 'method' => 'post'));
 
 if ($role->getHomeProject() == NULL
     || $role->getHomeProject()->getID() != $group_id) {
@@ -201,7 +200,7 @@ for ($i=0; $i<count($keys); $i++) {
 				} else {
 					$txt='';
 				}
-				echo '<tr '. $HTML->boxGetAltRowStyle($j++) . '>
+				echo '<tr>
 				<td style="padding-left: 4em;">'.$rbac_edit_section_names[$keys[$i]].'</td>
 				<td>'.db_result($res,$q,'forum_name').'</td>
 				<td>'.html_build_select_box_from_assoc(
@@ -220,7 +219,7 @@ for ($i=0; $i<count($keys); $i++) {
 			FROM project_group_list WHERE group_id=$1',
 			array($group_id));
 		for ($q=0; $q<db_numrows($res); $q++) {
-			echo '<tr '. $HTML->boxGetAltRowStyle($j++) . '>
+			echo '<tr>
 			<td style="padding-left: 4em;">'.$rbac_edit_section_names[$keys[$i]].'</td>
 			<td>'.db_result($res,$q,'project_name').'</td>
 			<td>'.html_build_select_box_from_assoc(
@@ -255,7 +254,7 @@ for ($i=0; $i<count($keys); $i++) {
 				} else {
 					$txt='';
 				}
-				echo '<tr '. $HTML->boxGetAltRowStyle($j++) . '>
+				echo '<tr>
 				<td style="padding-left: 4em;">'.$rbac_edit_section_names[$keys[$i]].'</td>
 				<td>'.db_result($res,$q,'name').'</td>
 				<td>'.html_build_select_box_from_assoc(
@@ -273,36 +272,32 @@ for ($i=0; $i<count($keys); $i++) {
 		$res = db_query_params('SELECT package_id,name FROM frs_package WHERE group_id=$1', array($group_id));
 		for ($q = 0; $q < db_numrows($res); $q++) {
 			$cells = array();
-			$cells[][] = $rbac_edit_section_names[$keys[$i]];
+			$cells[] = array($rbac_edit_section_names[$keys[$i]], 'style' => 'padding-left: 4em;');
 			$cells[][] = db_result($res,$q,'name');
 			$cells[][] = html_build_select_box_from_assoc($role->getRoleVals($keys[$i]),
 									"data[".$keys[$i]."][".db_result($res,$q,'package_id')."]",
 									$role->getVal($keys[$i],db_result($res,$q,'package_id')),
 									false,
 									false);
-			echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($j++, true)), $cells);
+			echo $HTML->multiTableRow(array(), $cells);
 		}
-
 //
 //	Handle all other settings for all roles
 //
 	} else {
-
-		echo '<tr '. $HTML->boxGetAltRowStyle($j++) . '>
+		echo '<tr>
 		<td colspan="2"><strong>'.$rbac_edit_section_names[$keys[$i]].'</strong></td>
 		<td>';
 		echo html_build_select_box_from_assoc($role->getRoleVals($keys[$i]), "data[".$keys[$i]."][$group_id]", $role->getVal($keys[$i],$group_id), false, false ) ;
 		echo '</td>
 		</tr>';
-
 	}
-
 }
 
 echo $HTML->listTableBottom();
 
-echo '<p><input type="submit" name="submit" value="'._('Submit').'" /></p>
-</form>';
+echo '<p><input type="submit" name="submit" value="'._('Submit').'" /></p>';
+echo $HTML->closeForm();
 
 project_admin_footer();
 

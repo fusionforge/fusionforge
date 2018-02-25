@@ -4,7 +4,7 @@
  *
  * Copyright 2010 (c) FusionForge Team
  * Copyright 2010 (c) Franck Villaume - Capgemini
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2014,2016, Franck Villaume - TrivialDev
  * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
@@ -23,6 +23,8 @@
  * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
+
+require_once $gfcommon.'widget/WidgetLayoutManager.class.php';
 
 global $ath;
 global $error_msg;
@@ -245,6 +247,16 @@ if (getStringFromRequest('add_extrafield')) {
 	$autoassign = getStringFromRequest('autoassign');
 	$is_hidden_on_submit = getStringFromRequest('is_hidden_on_submit');
 	$is_disabled = getStringFromRequest('is_disabled');
+	$defaultArr = getArrayFromRequest('extra_fields', false);
+	$formula = getStringFromRequest('formula');
+	$aggregation_rule = getIntFromRequest('aggregation_rule',0);
+	$distribution_rule = getIntFromRequest('distribution_rule',0);
+	if (isset($defaultArr[$id])) {
+		$default = $defaultArr[$id];
+	} else {
+		$default = false;
+	}
+
 	$ac = new ArtifactExtraField($ath, $id);
 	if (!$ac || !is_object($ac)) {
 		$error_msg .= _('Unable to create ArtifactExtraField Object');
@@ -256,12 +268,75 @@ if (getStringFromRequest('add_extrafield')) {
 		} else {
 			$show100 = 1;
 		}
-		if (!$ac->update($name, $attribute1, $attribute2, $is_required, $alias, $show100, $show100label, $description, $pattern, $parent, $autoassign, $is_hidden_on_submit, $is_disabled)) {
+		if (!$ac->update($name, $attribute1, $attribute2, $is_required, $alias, $show100, $show100label, $description, $pattern, $parent, $autoassign, $is_hidden_on_submit, $is_disabled, $aggregation_rule, $distribution_rule)) {
 			$error_msg .= _('Update failed')._(': ').$ac->getErrorMessage();
 			$ac->clearError();
+		} elseif (!$ac->setFormula($formula)){
+				$error_msg .= _('Update field formula failed')._(': ').$ac->getErrorMessage();
+				$ac->clearError();
+		} elseif ($default!==false) {
+				if (!$ac->setDefaultValues($default)){
+					$error_msg .= _('Update field default value failed')._(': ').$ac->getErrorMessage();
+					$ac->clearError();
+				} else {
+					$feedback .= _('Custom Field updated');
+					$next = 'add_extrafield';
+				}
 		} else {
 			$feedback .= _('Custom Field updated');
 			$next = 'add_extrafield';
+		}
+	}
+
+//
+//	Update formula for an extra field
+//
+} elseif (getStringFromRequest('update_box_formula')) {
+	$id = getStringFromRequest('id');
+	$formula = getStringFromRequest('formula');
+
+	$ac = new ArtifactExtraField($ath, $id);
+	if (!$ac || !is_object($ac)) {
+		$error_msg .= _('Unable to create ArtifactExtraField Object');
+	} elseif ($ac->isError()) {
+		$error_msg .= $ac->getErrorMessage();
+	} else {
+		if (!$ac->setFormula($formula)){
+			$error_msg .= _('Update field formula failed')._(': ').$ac->getErrorMessage();
+			$ac->clearError();
+		} else {
+			$feedback .= _('Field formula updated');
+			$next = 'update_box';
+		}
+	}
+
+//
+//	Update formula for an extra field element
+//
+} elseif (getStringFromRequest('update_opt_formula')) {
+	$boxid = getStringFromRequest('boxid');
+	$is_default = getStringFromRequest('is_default', false);
+	$formula = getStringFromRequest('formula', '');
+	$ac = new ArtifactExtraField($ath,$boxid);
+	if (!$ac || !is_object($ac)) {
+		$error_msg .= _('Unable to create ArtifactExtraField Object');
+	} elseif ($ac->isError()) {
+		$error_msg .= $ac->getErrorMessage();
+	} else {
+		$id = getStringFromRequest('id');
+		$ao = new ArtifactExtraFieldElement($ac,$id);
+		if (!$ao || !is_object($ao)) {
+			$error_msg .= _('Unable to create ArtifactExtraFieldElement Object');
+		} elseif ($ao->isError()) {
+			$error_msg .= $ao->getErrorMessage();
+		} else {
+			if (!$ao->setFormula($formula)){
+				$error_msg .= _('Update field formula failed')._(': ').$ao->getErrorMessage();
+				$ao->clearError();
+			} else {
+				$feedback .= _('Field element formula updated');
+				$next = 'update_opt';
+			}
 		}
 	}
 
@@ -270,6 +345,8 @@ if (getStringFromRequest('add_extrafield')) {
 //
 } elseif (getStringFromRequest('update_opt')) {
 	$boxid = getStringFromRequest('boxid');
+	$is_default = getStringFromRequest('is_default', false);
+	$formula = getStringFromRequest('formula', '');
 	$ac = new ArtifactExtraField($ath,$boxid);
 	if (!$ac || !is_object($ac)) {
 		$error_msg .= _('Unable to create ArtifactExtraField Object');
@@ -286,18 +363,24 @@ if (getStringFromRequest('add_extrafield')) {
 			$name = getStringFromRequest('name');
 			$status_id = getIntFromRequest('status_id');
 			$autoAssignTo = getStringFromRequest('auto_assign_to');
-			if (!$ao->update($name,$status_id,$autoAssignTo)) {
+			if (!$ao->update($name, $status_id, $autoAssignTo, $is_default)) {
 				$error_msg .= _('Update failed')._(': ').$ao->getErrorMessage();
 				$ao->clearError();
 			} else {
 				$feedback .= _('Element updated');
-				$parentElements = getStringFromRequest('parent_elements');
+				$parentElements = getArrayFromRequest('parent_elements', array());
 				if (!$ao->saveParentElements($parentElements)) {
 					$error_msg .= _('Update failed')._(': ').$ao->getErrorMessage();
 					$ao->clearError();
 				} else {
-				$feedback .= html_e('br')._('Parent Elements updated');
-				$next = 'add_extrafield';
+					$feedback .= html_e('br')._('Parent Elements updated');
+					if (!$ao->setFormula($formula)) {
+						$error_msg .= _('Update failed')._(': ').$ao->getErrorMessage();
+						$ao->clearError();
+					} else {
+						$feedback .= html_e('br')._('Formula updated');
+						$next = 'add_extrafield';
+					}
 				}
 			}
 		}
@@ -368,11 +451,16 @@ if (getStringFromRequest('add_extrafield')) {
 	if (!$clone_id) {
 		exit_missing_param('',array(_('Clone ID')),'tracker');
 	}
-	if (!$ath->cloneFieldsFrom($clone_id)) {
-		exit_error(_('Error cloning fields: ').$ath->getErrorMessage(),'tracker');
-	} else {
+	$newEFIds = $ath->cloneFieldsFrom($clone_id);
+	if (is_array($newEFIds)) {
+		if (forge_get_config('use_tracker_widget_display')) {
+			$lm = new WidgetLayoutManager();
+			$lm->createDefaultLayoutForTracker($ath->getID(), $clone_id, $newEFIds);
+		}
 		$feedback .= _('Successfully Cloned Tracker Fields ');
 		$next = '*main*';
+	} else {
+		exit_error(_('Error cloning fields')._(': ').$ath->getErrorMessage(), 'tracker');
 	}
 
 //
@@ -406,12 +494,10 @@ if (getStringFromRequest('add_extrafield')) {
 		if ($field_to_add) {
 			$browse_fields = $ath->getBrowseList();
 			$result = $ath->setBrowseList(($browse_fields ? $browse_fields.',' : '').$field_to_add);
-		}
-		else {
+		} else {
 			$result = false;
 		}
-	}
-	elseif (getStringFromRequest('updownorder_field')) {
+	} elseif (getStringFromRequest('updownorder_field')) {
 		$id = getStringFromRequest('id');
 		$new_pos = getIntFromRequest('new_pos');
 		if ($new_pos) {
@@ -421,12 +507,10 @@ if (getStringFromRequest('add_extrafield')) {
 			$browse_fields[$new_pos - 1] = $id;
 			$browse_fields[$pos_of_id] = $val_at_new_pos;
 			$result = $ath->setBrowseList(implode(',', $browse_fields));
-		}
-		else {
+		} else {
 			$result = false;
 		}
-	}
-	elseif (getStringFromRequest('field_changes_order')) {
+	} elseif (getStringFromRequest('field_changes_order')) {
 		$order = getArrayFromRequest('order');
 
 		// Fields with not modified positions
@@ -448,13 +532,11 @@ if (getStringFromRequest('add_extrafield')) {
 				if (! isset($out_before[$new_pos]))
 					$out_before[$new_pos] = array();
 				$out_before[$new_pos][] = $field;
-			}
-			elseif ($new_pos > $list_size) {
+			} elseif ($new_pos > $list_size) {
 				if (! isset($out_after[$new_pos]))
 					$out_after[$new_pos] = array();
 				$out_after[$new_pos][] = $field;
-			}
-			else {
+			} else {
 				if (! isset($changed[$new_pos - 1]))
 					$changed[$new_pos - 1] = array();
 				$changed[$new_pos - 1][] = $field;
@@ -502,23 +584,20 @@ if (getStringFromRequest('add_extrafield')) {
 		$new_browse_fields = array_merge($start_browse_fields, $not_changed, $end_browse_fields);
 
 		$result = $ath->setBrowseList(implode(',', $new_browse_fields));
-	}
-	elseif (getStringFromRequest('delete_field')) {
+	} elseif (getStringFromRequest('delete_field')) {
 		$id = getStringFromRequest('id');
 		$browse_fields = explode(',',$ath->getBrowseList());
 		$pos = array_search($id, $browse_fields);
 		if ($pos !== false) {
 			array_splice($browse_fields, $pos, 1);
 			$result = $ath->setBrowseList(implode(',', $browse_fields));
-		}
-		else {
+		} else {
 			$result = false;
 		}
 	}
 	if ($result !== false) {
 		$feedback .= _('Tracker Updated');
-	}
-	else {
+	} else {
 		$error_msg .= _('Update failed')._(': ').$ath->getErrorMessage();
 		$ath->clearError();
 	}
@@ -610,6 +689,31 @@ if (getStringFromRequest('add_extrafield')) {
 			$ac->clearError();
 		} else {
 			$feedback .= _('Tracker Updated');
+		}
+	}
+
+} elseif (getStringFromRequest('post_changes_default')) {
+	$boxid = getStringFromRequest('boxid');
+	$ac = new ArtifactExtraField($ath,$boxid);
+	if (!$ac || !is_object($ac)) {
+		$error_msg .= _('Unable to create ArtifactExtraField Object');
+	} elseif ($ac->isError()) {
+		$error_msg .= $ac->getErrorMessage();
+	} else {
+		if (in_array($ac->getType(), unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_SINGLECHOICE))) {
+			$is_default = getIntFromRequest('is_default');
+		} else {
+			$is_default =  getArrayFromRequest('is_default');
+			$is_default = array_keys($is_default);
+		}
+		if ($is_default) {
+			if ($ac->setDefaultValues($is_default)) {
+				$feedback .= _('Default value(s) Updated');
+			} else {
+				$error_msg .= _('Update default value(s) failed')._(': ').$ac->getErrorMessage();
+			}
+		} else {
+			$warning_msg .= _('No default value to set.');
 		}
 	}
 

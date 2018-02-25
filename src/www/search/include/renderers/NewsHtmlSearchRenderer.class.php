@@ -30,7 +30,7 @@ class NewsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	/**
 	 * @param string $words words we are searching for
 	 * @param int $offset offset
-	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
+	 * @param bool $isExact if we want to search for all the words or if only one matching the query is sufficient
 	 * @param int $groupId group id
 	 */
 	function __construct($words, $offset, $isExact, $groupId) {
@@ -58,9 +58,8 @@ class NewsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$rowsCount = count($result);
 
 		$return = '';
-		$i = 0;
 		foreach ($result as $row) {
-			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'
+			$return .= '<tr>'
 				. '<td><a href="'.util_make_url ('/forum/forum.php?forum_id='. $row['forum_id']).'">'
 				. html_image('ic/msg.png', 10, 12)
 				. ' '.$row['summary'].'</a></td>

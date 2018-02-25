@@ -2,7 +2,7 @@
 /**
  * FusionForge plugin system
  *
- * Copyright 2002, 2009, Roland Mas
+ * Copyright 2002-2017, Roland Mas
  * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
@@ -27,6 +27,7 @@ class PluginManager extends FFError {
 	var $plugins_to_hooks;
 	var $hooks_to_plugins;
 	var $returned_values = array();
+	var $plugins_data = array();
 
 	function __construct() {
 		parent::__construct();
@@ -50,7 +51,7 @@ class PluginManager extends FFError {
 	 */
 	function getPlugins() {
 		$this->plugins_data = array();
-		$res = db_query_params('SELECT plugin_id, plugin_name FROM plugins',
+		$res = db_query_params('SELECT plugin_id, plugin_name FROM plugins ORDER BY plugin_name',
 				array());
 		$rows = db_numrows($res);
 		for ($i=0; $i<$rows; $i++) {
@@ -64,7 +65,7 @@ class PluginManager extends FFError {
 	 * GetPluginObject() - get a particular plugin object
 	 *
 	 * @param	string	$pluginname	name of plugin
-	 * @return	object	plugin object or false if not available
+	 * @return	object|bool	plugin object or false if not available
 	 */
 	function GetPluginObject($pluginname) {
 		if (!isset($this->plugins_objects[$pluginname])) {
@@ -114,7 +115,7 @@ class PluginManager extends FFError {
 		$query_exists = 'SELECT plugin_id, plugin_name FROM plugins WHERE plugin_name=$1';
 		$res = db_query_params($query_exists, array($pluginname));
 		if (db_numrows($res) == 0) {
-			$res = db_query_params('INSERT INTO plugins (plugin_name,plugin_desc) VALUES ($1,$2)',
+			db_query_params('INSERT INTO plugins (plugin_name,plugin_desc) VALUES ($1,$2)',
 				array($pluginname, "This is the $pluginname plugin"));
 		}
 
@@ -150,6 +151,8 @@ class PluginManager extends FFError {
 	/**
 	 * LoadPlugin() - load a specific plugin
 	 *
+	 * @param	string	$p_name	plugin name
+	 * @return	bool
 	 */
 	function LoadPlugin($p_name) {
 		global $gfplugins, $gfcommon, $gfwww;
@@ -163,7 +166,7 @@ class PluginManager extends FFError {
 			if (file_exists($filename)) {
 				require_once($filename);
 				$p_class = $p_name.'Plugin';
-				register_plugin (new $p_class);
+				register_plugin(new $p_class);
 			}
 		}
 		return true;
@@ -207,7 +210,7 @@ class PluginManager extends FFError {
 	 * @param	object	$pluginobject	an object of a subclass of the Plugin class
 	 * @return	bool
 	 */
-	function RegisterPlugin(&$pluginobject) {
+	function RegisterPlugin($pluginobject) {
 		if (!$pluginobject->GetName()) {
 			exit_error(_("Some plugin did not provide a name. I'd gladly tell you which one, but obviously I cannot. Sorry."),'');
 		}
@@ -223,7 +226,7 @@ class PluginManager extends FFError {
 	 * @param	string	$hookname - name of the hook
 	 * @param	array	$params - array of extra parameters
 	 *
-	 * @return	boolean, true if all returned true.
+	 * @return	bool, true if all returned true.
 	 */
 	function RunHooks($hookname, & $params) {
 		$result = true;
@@ -327,8 +330,8 @@ function &plugin_get_object($pluginname) {
  * @param	pluginobject - an object of a subclass of the Plugin class
  * @return	bool
  */
-function register_plugin(&$pluginobject) {
-	$pm =& plugin_manager_get_object();
+function register_plugin($pluginobject) {
+	$pm =&plugin_manager_get_object();
 	return $pm->RegisterPlugin($pluginobject);
 }
 

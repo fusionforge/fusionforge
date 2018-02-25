@@ -45,10 +45,9 @@ if (!forge_check_perm('docman', $g->getID(), 'approve')) {
 }
 
 echo html_ao('div', array('class' => 'docmanDivIncluded'));
-echo $HTML->openForm(array('name' => 'movefile', 'action' => util_make_uri($actionurl), 'method' => 'post'));
+echo $HTML->openForm(array('name' => 'movefile', 'action' => $actionurl, 'method' => 'post'));
 echo html_e('input', array('type' => 'hidden', 'name' => 'fileid', 'id' => 'movefileinput'));
-echo html_e('p', array(), _('Move files to').
-			$dm->showSelectNestedGroups($dgf->getNested(array(1, 5)), 'moveto_dirid', false).
-			html_e('input', array('type' => 'submit', 'value' => _('Go'),  'name' => 'submit')));
+echo html_e('span', array(), _('Move selected files to')).$dm->showSelectNestedGroups($dgf->getNested(array(1, 5)), 'moveto_dirid', false).
+			html_e('input', array('type' => 'submit', 'value' => _('Go'),  'name' => 'submit'));
 echo $HTML->closeForm();
 echo html_ac(html_ap() - 1);

@@ -46,7 +46,7 @@ class FRSPackageFactory extends FFError {
 		parent::__construct();
 
 		if (!$Group || !is_object($Group)) {
-			$this->setError(_('No Valid Group Object'));
+			$this->setError(_('Invalid Project'));
 			return;
 		}
 		if ($Group->isError()) {
@@ -118,7 +118,7 @@ class FRSPackageFactory extends FFError {
 	/**
 	 * getPermissionOfASpecificUser - get the max level of permission of the current user
 	 *
-	 * @return	integer	the value of permission
+	 * @return	int	the value of permission
 	 *			0 = none
 	 *			1 = read
 	 *			2 = file

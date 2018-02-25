@@ -394,7 +394,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->clickAndWait("addItemDocmanMenu");
 		$this->click("id=tab-new-document");
 		$this->type("title", "Doc1 Vladimir");
-		$this->type("//input[@name='description']", "Jenkins buildbot - also, ZONGO");
+		$this->type("//textarea[@name='description']", "Jenkins buildbot - also, ZONGO");
 		$this->click("//input[@name='type' and @value='pasteurl']");
 		$this->type("file_url", "http://buildbot.fusionforge.org/");
 		$this->clickAndWait("submit");
@@ -402,7 +402,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->clickAndWait("addItemDocmanMenu");
 		$this->click("id=tab-new-document");
 		$this->type("title", "Doc2 Astromir");
-		$this->type("//input[@name='description']", "Main website (the needle) - also, ZONGO");
+		$this->type("//textarea[@name='description']", "Main website (the needle) - also, ZONGO");
 		$this->click("//input[@name='type' and @value='pasteurl']");
 		$this->type("file_url", "http://fusionforge.org/");
 		$this->clickAndWait("submit");
@@ -492,7 +492,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->gotoProject('ProjectA');
 		$this->clickAndWait('Link=Advanced search');
 		$this->click("//input[@class='checkthemall']");
-		$this->type("//div[@id='maindiv']//input[@name='words']", "needle");
+		$this->type("//main[@id='maindiv']//input[@name='words']", "needle");
 		$this->clickAndWait("//input[@name='submitbutton']");
 		$this->assertTrue($this->isTextPresent("Bug1"));
 		$this->assertFalse($this->isTextPresent("Bug2"));
@@ -510,7 +510,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->gotoProject('ProjectA');
 		$this->clickAndWait('Link=Advanced search');
 		$this->click("//input[@class='checkthemall']");
-		$this->type("//div[@id='maindiv']//input[@name='words']", "zongo");
+		$this->type("//main[@id='maindiv']//input[@name='words']", "zongo");
 		$this->clickAndWait("//input[@name='submitbutton']");
 		$this->assertTrue($this->isTextPresent("Bug1"));
 		$this->assertTrue($this->isTextPresent("Bug2"));
@@ -541,7 +541,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->click("link=Users and permissions");
 		$this->waitForPageToLoad("30000");
 		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "ratatouille") ;
-		$this->select("//input[@value='Add Member']/../select[@name='role_id']", "label=Trainee");
+		$this->select("//input[@value='Add Member']/../fieldset/select[@name='role_id']", "label=Trainee");
 		$this->click ("//input[@value='Add Member']") ;
 		$this->waitForPageToLoad("30000");
 
@@ -550,12 +550,12 @@ class Search extends FForge_SeleniumTestCase
 		$this->click ("//td/form/div[contains(.,'Trainee')]/../div/input[@value='Edit Permissions']") ;
 		$this->waitForPageToLoad("30000");
 		$this->select("//select[contains(@name,'data[project_read]')]", "label=Visible");
-		$this->select("//tr/td[.='Bugs']/../td/select[contains(@name,'data[tracker]')]", "label=Read only");
-		$this->select("//tr/td[.='Patches']/../td/select[contains(@name,'data[tracker]')]", "label=No Access");
-		$this->select("//tr/td[.='To Do']/../td/select[contains(@name,'data[pm]')]", "label=Read only");
-		$this->select("//tr/td[.='Next Release']/../td/select[contains(@name,'data[pm]')]", "label=No Access");
-		$this->select("//tr/td[.='open-discussion']/../td/select[contains(@name,'data[forum]')]", "label=Read only");
-		$this->select("//tr/td[.='developers-discussion']/../td/select[contains(@name,'data[forum]')]", "label=No Access");
+		$this->select("//tr/td[.='Bugs']/../td/fieldset/select[contains(@name,'data[tracker]')]", "label=Read only");
+		$this->select("//tr/td[.='Patches']/../td/fieldset/select[contains(@name,'data[tracker]')]", "label=No Access");
+		$this->select("//tr/td[.='To Do']/../td/fieldset/select[contains(@name,'data[pm]')]", "label=Read only");
+		$this->select("//tr/td[.='Next Release']/../td/fieldset/select[contains(@name,'data[pm]')]", "label=No Access");
+		$this->select("//tr/td[.='open-discussion']/../td/fieldset/select[contains(@name,'data[forum]')]", "label=Read only");
+		$this->select("//tr/td[.='developers-discussion']/../td/fieldset/select[contains(@name,'data[forum]')]", "label=No Access");
 		$this->select("//select[contains(@name,'data[docman]')]", "label=Read only");
 		$this->click ("//input[@value='Submit']") ;
 		$this->waitForPageToLoad("30000");
@@ -565,12 +565,12 @@ class Search extends FForge_SeleniumTestCase
 		$this->click ("//td/form/div[contains(.,'Anonymous')]/../div/input[@value='Edit Permissions']") ;
 		$this->waitForPageToLoad("30000");
 		$this->select("//select[contains(@name,'data[project_read]')]", "label=Visible");
-		$this->select("//tr/td[.='Bugs']/../td/select[contains(@name,'data[tracker]')]", "label=No Access");
-		$this->select("//tr/td[.='Patches']/../td/select[contains(@name,'data[tracker]')]", "label=No Access");
-		$this->select("//tr/td[.='To Do']/../td/select[contains(@name,'data[pm]')]", "label=No Access");
-		$this->select("//tr/td[.='Next Release']/../td/select[contains(@name,'data[pm]')]", "label=No Access");
-		$this->select("//tr/td[.='open-discussion']/../td/select[contains(@name,'data[forum]')]", "label=No Access");
-		$this->select("//tr/td[.='developers-discussion']/../td/select[contains(@name,'data[forum]')]", "label=No Access");
+		$this->select("//tr/td[.='Bugs']/../td/fieldset/select[contains(@name,'data[tracker]')]", "label=No Access");
+		$this->select("//tr/td[.='Patches']/../td/fieldset/select[contains(@name,'data[tracker]')]", "label=No Access");
+		$this->select("//tr/td[.='To Do']/../td/fieldset/select[contains(@name,'data[pm]')]", "label=No Access");
+		$this->select("//tr/td[.='Next Release']/../td/fieldset/select[contains(@name,'data[pm]')]", "label=No Access");
+		$this->select("//tr/td[.='open-discussion']/../td/fieldset/select[contains(@name,'data[forum]')]", "label=No Access");
+		$this->select("//tr/td[.='developers-discussion']/../td/fieldset/select[contains(@name,'data[forum]')]", "label=No Access");
 		$this->select("//select[contains(@name,'data[docman]')]", "label=No Access");
 		$this->click ("//input[@value='Submit']") ;
 		$this->waitForPageToLoad("30000");
@@ -596,7 +596,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->gotoProject('ProjectA');
 		$this->clickAndWait('Link=Advanced search');
 		$this->click("//input[@class='checkthemall']");
-		$this->type("//div[@id='maindiv']//input[@name='words']", "zongo");
+		$this->type("//main[@id='maindiv']//input[@name='words']", "zongo");
 		$this->clickAndWait("//input[@name='submitbutton']");
 		$this->assertTrue($this->isTextPresent("Bug1"));
 		$this->assertFalse($this->isTextPresent("Bug2"));
@@ -634,7 +634,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->click("//input[@class='checkthemall']");
 		$this->assertFalse($this->isElementPresent("//input[@name='short_pm_checkall']"));
 		$this->assertFalse($this->isElementPresent("//input[@name='short_docman_checkall']"));
-		$this->type("//div[@id='maindiv']//input[@name='words']", "zongo");
+		$this->type("//main[@id='maindiv']//input[@name='words']", "zongo");
 		$this->clickAndWait("//input[@name='submitbutton']");
 		$this->assertFalse($this->isTextPresent("Bug1"));
 		$this->assertFalse($this->isTextPresent("Bug2"));
@@ -663,49 +663,49 @@ class Search extends FForge_SeleniumTestCase
 		$this->type("//input[@name='words']", "coded");
 		$this->clickAndWait("//input[@name='Search']");
 		$this->assertFalse($this->isTextPresent("public description for projectc"));
-		
+
 		$this->open(ROOT) ;
 		$this->type("//input[@name='words']", "goldorak");
 		$this->clickAndWait("//input[@name='Search']");
 		$this->assertTrue($this->isTextPresent("public description for projectc"));
-		
+
 		$this->open(ROOT) ;
 		$this->type("//input[@name='words']", "hotel");
 		$this->clickAndWait("//input[@name='Search']");
 		$this->assertFalse($this->isTextPresent("public description for projectc"));
-		
+
 		// In English, accents are removed and coding==coded
 		$this->runCommand(dirname(__FILE__).'/../../../src/bin/configure-fti-search.php english');
 		$this->open(ROOT) ;
 		$this->type("//input[@name='words']", "coded");
 		$this->clickAndWait("//input[@name='Search']");
 		$this->assertTrue($this->isTextPresent("public description for projectc"));
-		
+
 		$this->open(ROOT) ;
 		$this->type("//input[@name='words']", "goldorak");
 		$this->clickAndWait("//input[@name='Search']");
 		$this->assertTrue($this->isTextPresent("public description for projectc"));
-		
+
 		$this->open(ROOT) ;
 		$this->type("//input[@name='words']", "hotel");
 		$this->clickAndWait("//input[@name='Search']");
 		$this->assertTrue($this->isTextPresent("public description for projectc"));
-		
+
 		// In French, accents are removed but coding==coded
 		$this->runCommand(dirname(__FILE__).'/../../../src/bin/configure-fti-search.php french');
 		$this->open(ROOT) ;
 		$this->type("//input[@name='words']", "coded");
 		$this->clickAndWait("//input[@name='Search']");
 		$this->assertFalse($this->isTextPresent("public description for projectc"));
-		
+
 		$this->open(ROOT) ;
 		$this->type("//input[@name='words']", "goldorak");
 		$this->clickAndWait("//input[@name='Search']");
 		$this->assertTrue($this->isTextPresent("public description for projectc"));
-		
+
 		$this->open(ROOT) ;
 		$this->type("//input[@name='words']", "hotel");
 		$this->clickAndWait("//input[@name='Search']");
 		$this->assertTrue($this->isTextPresent("public description for projectc"));
-}
+	}
 }

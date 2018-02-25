@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (C) 2009 Alain Peyrat, Alcatel-Lucent
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2014,2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -41,13 +41,9 @@
  * ALONE BASIS."
  */
 
-//
-//	This page contains a form with a file-upload button
-//	so a user can choose a file to upload a .csv file and store it in task mgr
-//
-
 global $ath;
 global $group_id;
+global $HTML;
 
 $ath->header(array('atid'=>$ath->getID(), 'title'=>$ath->getName()));
 
@@ -71,19 +67,72 @@ if (session_loggedin()) {
 	}
 }
 
-$url_set_format = '/tracker/?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;func=format_csv&amp;sep='.urlencode($sep).'&amp;headers='.$headers;
+echo html_ao('script', array('type' => 'text/javascript'));
+?>
+//<![CDATA[
 
-$url_export = '/tracker/?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;func=downloadcsv&amp;sep='.urlencode($sep).'&amp;headers='.$headers;
+TrackerCSVController = function(params)
+{
+	this.csvparams	= params;
+	this.bindControls();
+};
 
-$format = $headers ? ' with headers' : ' without headers';
-$format .= " using '".htmlentities($sep)."' as separator.";
+TrackerCSVController.prototype =
+{
+	/*! Binds the controls to the actions
+	 */
+	bindControls: function() {
+		this.csvparams.buttonStartDate.click(jQuery.proxy(this, 'setStartDate'));
+	},
+
+	setStartDate: function() {
+		if (this.csvparams.buttonStartDate.is(':checked')) {
+			this.csvparams.datePickerStartDate.removeAttr('disabled');
+			this.csvparams.datePickerStartDate.attr('required', 'required');
+		} else {
+			this.csvparams.datePickerStartDate.attr('disabled', 'disabled');
+			this.csvparams.datePickerStartDate.removeAttr('required');
+		}
+	},
+};
+
+var controllerCSV;
+
+jQuery(document).ready(function() {
+	controllerCSV = new TrackerCSVController({
+		buttonStartDate:	jQuery('#limitByLastModifiedDate'),
+		datePickerStartDate:	jQuery('#datepicker_start'),
+	});
+
+	jQuery('#datepicker_start').datepicker({
+		dateFormat: "<?php echo _('yy-mm-dd'); ?>"
+	});
+});
+
+//]]>
+<?php
+echo html_ac(html_ap() - 1);
+
+$url = '/tracker/?group_id='.$group_id.'&atid='.$ath->getID().'&sep='.urlencode($sep).'&headers='.$headers;
+$format = $headers ? _(' with headers') : _(' without headers');
+$format .= _(' using ')."'".htmlentities($sep)."'"._(' as separator.');
 ?>
 <p><?php echo _('This page allows you to export the items using a CSV (<a href="http://en.wikipedia.org/wiki/Comma-separated_values">Comma Separated Values</a>) File. This format can be used to view your entries using your favorite spreadsheet software.'); ?></p>
-<h2><?php echo _('Export as a CSV file'); ?></h2>
-
-<strong><?php echo _('Selected CSV Format')._(': '); ?></strong>CSV<?php echo $format ?> <a href="<?php echo $url_set_format ?>"><?php echo _('(Change)'); ?></a>
-
-<p><a href="<?php echo $url_export ?>"><?php echo _('Download CSV file'); ?></a></p>
-
 <?php
+echo $HTML->information(_('By default, export uses filter as setup in the browse page. To overwrite, please use Advanced Options'));
+echo html_e('h2', array(), _('Export as a CSV file'));
+echo html_e('strong', array(), _('Selected CSV Format')._(': ')).'CSV'.$format.' '.util_make_link($url.'&func=format_csv', $HTML->getConfigurePic(_('Modify this CSV format.')));
+echo $HTML->openForm(array('action' => $url.'&func=downloadcsv', 'method' => 'post'));
+echo html_ao('fieldset', array('id' => 'fieldset1_closed', 'class' => 'coolfieldset'));
+echo html_e('legend', array(), _('Advanced Options'));
+echo html_ao('div');
+echo html_e('p', array(), _('Overwrite default filter. (No filtering)')._(': ').html_e('input', array('type' => 'checkbox', 'name' => 'overwrite_filter', 'value' => 'overwrite')));
+$attrsInputLimitByStartDate = array('type' => 'checkbox', 'id' => 'limitByLastModifiedDate', 'name' => 'limitByLastModifiedDate', 'value' => 1, 'title' => _('Set last modified date limitation for this export. If not enable, not limitation.'));
+$attrsDatePickerLimitByStartDate = array('id' => 'datepicker_start', 'name' => '_changed_from', 'size' => 10, 'maxlength' => 10, 'disabled' => 'disabled');
+echo html_e('p', array(), _('Set dates')._(': ').html_e('br').
+			_('From')._(': ').html_e('input', $attrsInputLimitByStartDate).html_e('input', $attrsDatePickerLimitByStartDate));
+echo html_ac(html_ap() - 2);
+echo html_e('p', array(), html_e('input', array('type' => 'submit', 'value' => _('Download CSV file'))));
+echo $HTML->closeForm();
+
 $ath->footer();

@@ -307,8 +307,7 @@ function admin_table_show($table, $unit, $primary_key) {
 		echo '</tr>';
 
 		for ($j = 0; $j < $rows; $j++) {
-			echo '<tr '. $HTML->boxGetAltRowStyle($j) . '>';
-
+			echo '<tr>';
 			$id = db_result($result,$j,0);
 			echo '<td>'.util_make_link(getStringFromServer('PHP_SELF').'?function=edit&id='.$id, '['._('Edit').']');
 			echo util_make_link(getStringFromServer('PHP_SELF').'?function=confirmdelete&id='.$id, '['._('Delete').']').'</td>';

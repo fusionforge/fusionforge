@@ -70,7 +70,6 @@ if (!forge_get_config('forge_homepage_widget')) {
 	site_header(array('title'=> _('Welcome'), 'h1' => '', 'toptab' => 'home',
 		'submenu' => $params['submenu']));
 
-	plugin_hook('message');
 	$lm = new WidgetLayoutManager();
 	$lm->displayLayout(0, WidgetLayoutManager::OWNER_TYPE_HOME);
 }

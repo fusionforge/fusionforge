@@ -4,6 +4,7 @@
  * Copyright 2010 (c) Fusionforge Team
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * Copyright 2012-2015, Franck Villaume - TrivialDev
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -56,6 +57,7 @@ if (getStringFromRequest('submit')) {
 		$_status = getStringFromRequest('_status');
 		$_submitted_by = getStringFromRequest('_submitted_by');
 		$_assigned_to = getStringFromRequest('_assigned_to');
+		$_last_modified_by = getStringFromRequest('_last_modified_by');
 		$_sort_col = getStringFromRequest('_sort_col');
 		$_sort_ord = getStringFromRequest('_sort_ord');
 		$extra_fields = getStringFromRequest('extra_fields');
@@ -67,7 +69,7 @@ if (getStringFromRequest('submit')) {
 		$_followups = getStringFromRequest('_followups');
 		$query_options = array_keys(getArrayFromRequest('query_options'));
 		if (!$aq->create($query_name,$_status,$_assigned_to,$_moddaterange,$_sort_col,$_sort_ord,$extra_fields,$_opendaterange,$_closedaterange,
-			$_summary,$_description,$_followups,$query_type, $query_options, $_submitted_by)) {
+			$_summary,$_description,$_followups,$query_type, $query_options, $_submitted_by, $_last_modified_by)) {
 			form_release_key(getStringFromRequest('form_key'));
 			exit_error($aq->getErrorMessage(),'tracker');
 		} else {
@@ -106,6 +108,7 @@ if (getStringFromRequest('submit')) {
 		$_status = getStringFromRequest('_status');
 		$_submitted_by = getStringFromRequest('_submitted_by');
 		$_assigned_to = getStringFromRequest('_assigned_to');
+		$_last_modified_by = getStringFromRequest('_last_modified_by');
 		$_sort_col = getStringFromRequest('_sort_col');
 		$_sort_ord = getStringFromRequest('_sort_ord');
 		$_moddaterange = getStringFromRequest('_moddaterange');
@@ -117,7 +120,7 @@ if (getStringFromRequest('submit')) {
 		$extra_fields = getStringFromRequest('extra_fields');
 		$query_options = array_keys(getArrayFromRequest('query_options'));
 		if (!$aq->update($query_name,$_status,$_assigned_to,$_moddaterange,$_sort_col,$_sort_ord,$extra_fields,$_opendaterange,$_closedaterange,
-			$_summary,$_description,$_followups,$query_type, $query_options, $_submitted_by)) {
+			$_summary,$_description,$_followups,$query_type, $query_options, $_submitted_by,$_last_modified_by)) {
 			exit_error($aq->getErrorMessage(),'tracker');
 		} else {
 			$feedback .= _('Query Updated');
@@ -150,7 +153,6 @@ if (getStringFromRequest('submit')) {
 		} else {
 			$feedback .= _('Query Deleted');;
 		}
-		$query_id=0;
 		session_redirect('/tracker/?atid='.$atid.'&group_id='.$group_id.'&func=browse');
 	} else {
 		exit_error(_('Missing Build Query Action'),'tracker');
@@ -170,6 +172,7 @@ if (getStringFromRequest('submit')) {
 //
 $_submitted_by=$aq->getSubmitter();
 $_assigned_to=$aq->getAssignee();
+$_last_modified_by=$aq->getLastModifier();
 $_status=$aq->getStatus();
 $extra_fields=$aq->getExtraFields();
 $_sort_col=$aq->getSortCol();
@@ -185,7 +188,10 @@ $query_type=$aq->getQueryType();
 //	creating a submitter box
 $submitter_box = $ath->submitterBox('_submitted_by[]',$_submitted_by,true,'none','-1',false,true);
 //	creating a custom technician box which includes "any" and "unassigned"
-$tech_box=$ath->technicianBox('_assigned_to[]',$_assigned_to,true,'none','-1',false,true);
+$tech_box = $ath->technicianBox('_assigned_to[]',$_assigned_to,true,'none','-1',false,true);
+//	creating a last modifier box
+$last_modifier_box = $ath->lastModifierBox('_last_modified_by[]',$_last_modified_by,true,'none','-1',false,true);
+
 
 //
 //	custom order by arrays to build a pop-up box
@@ -199,6 +205,7 @@ $order_name_arr[]=_('Last Modified Date');
 $order_name_arr[]=_('Close Date');
 $order_name_arr[]=_('Submitter');
 $order_name_arr[]=_('Assignee');
+$order_name_arr[]=_('Last Modifier');
 
 $order_arr=array();
 $order_arr[]='artifact_id';
@@ -209,6 +216,7 @@ $order_arr[]='last_modified_date';
 $order_arr[]='close_date';
 $order_arr[]='submitted_by';
 $order_arr[]='assigned_to';
+$order_arr[]='last_modified_by';
 
 //
 //	custom sort arrays to build pop-up box
@@ -258,7 +266,7 @@ echo '<table style="margin-left:auto;margin-right:auto"><tr><td>' .
 
 echo $HTML->openForm(array('action' => '/tracker/?func=query&group_id='.$group_id.'&atid='.$ath->getID(), 'method' => 'post'));
 echo '<input type="hidden" name="form_key" value="'.form_generate_key().'" />
-<table align="center" border="3" cellpadding="4" rules="groups" frame="box" width="100%" class="tablecontent">
+<table class="tablecontent fullwidth">
 	<tr>
 		<td>
 			<input type="submit" name="submit" value="'._('Save Changes').'" />
@@ -283,13 +291,26 @@ echo '<input type="hidden" name="form_key" value="'.form_generate_key().'" />
 			$checked[1] = ' checked="checked"';
 			$checked[3] = '';
 		}
-		echo '
-		<input type="radio" name="query_action" value="1"'.$checked[1].' />'._('Name and Save Query').'<br />
-		<input type="radio" name="query_action" value="4" />'._('Load Query').'<br />';
+		echo '<input type="radio" id="name-save-query" name="query_action" value="1"'.$checked[1].' />'."\n";
+		echo '<label for="name-save-query">';
+		echo _('Name and Save Query');
+		echo '</label>'."\n";
+		echo '<br />'."\n";
+		echo '<input type="radio" id="load-query" name="query_action" value="4" />'."\n";
+		echo '<label for="load-query">';
+		echo _('Load Query');
+		echo '</label>'."\n";
+		echo '<br />'."\n";
 		if ($allow_update) {
-			echo '
-		<input type="radio" name="query_action" value="3"'.$checked[3].' />'._('Update Query').'<br />
-		<input type="radio" name="query_action" value="5" />'._('Delete Query');
+			echo '<input type="radio" id="update-query" name="query_action" value="3"'.$checked[3].' />'."\n";
+			echo '<label for="update-query">';
+			echo _('Update Query');
+			echo '</label>'."\n";
+			echo '<br />'."\n";
+			echo '<input type="radio" id="delete-query" name="query_action" value="5" />'."\n";
+			echo '<label for="delete-query">';
+			echo _('Delete Query');
+			echo '</label>'."\n";
 		}
 	} else {
 		echo '
@@ -298,7 +319,7 @@ echo '<input type="hidden" name="form_key" value="'.form_generate_key().'" />
 	echo '
 		</td>
 		<td class="top">
-		<input type="text" name="query_name" value="'.$aq->getName().'" size="20" maxlength="30"  required="required" /></td>
+		<input required="required" type="text" name="query_name" value="'.$aq->getName().'" size="20" maxlength="30" /></td>
 	</tr>
 </table>';
 
@@ -317,20 +338,28 @@ if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
 	} else {
 		$note= '<br/><i>'._('Note: There is no default project query defined.').'</i>';
 	}
-	echo '
-	<tr>
-		<td colspan="2">
-			<strong>'._('Type of query')._(': ').'</strong><br />
-			<input name="query_type" value="0" type="radio"'.(($query_type==0) ? ' checked="checked"' : '' ).' />'.
-			_('Private query').'<br />
-			<input name="query_type" value="1" type="radio"'.(($query_type==1) ? ' checked="checked"' : '' ).' />'.
-			_('Project level query (query is public)').'<br />
-			<input name="query_type" value="2" type="radio"'.(($query_type==2) ? ' checked="checked"' : '' ).' />'.
-			_('Default project query (for project level query only)').'<br />
-			'.$note.'
-			<hr/>
-		</td>
-	</tr>';
+	echo '<tr>'."\n";
+	echo '<td colspan="2">'."\n";
+	echo '<strong>'._('Type of query')._(': ').'</strong><br />'."\n";
+	echo '<input id="private-query" name="query_type" value="0" type="radio"'.(($query_type==0) ? ' checked="checked"' : '' ).' />'."\n";
+	echo '<label for="private-query">';
+	echo _('Private query');
+	echo '</label>';
+	echo '<br />'."\n";
+	echo '<input id="project-level-query" name="query_type" value="1" type="radio"'.(($query_type==1) ? ' checked="checked"' : '' ).' />'."\n";
+	echo '<label for="project-level-query">';
+	echo _('Project level query (query is public)');
+	echo '</label>';
+	echo '<br />'."\n";
+	echo '<input id="default-project-query" name="query_type" value="2" type="radio"'.(($query_type==2) ? ' checked="checked"' : '' ).' />'."\n";
+	echo '<label for="default-project-query">';
+	echo _('Default project query (for project level query only)');
+	echo '</label>';
+	echo '<br />'."\n";
+	echo $note."\n";
+	echo '<hr/>'."\n";
+	echo '</td>'."\n";
+	echo '</tr>'."\n";
 }
 	if (!$ath->usesCustomStatuses()) {
 		echo '<tr>
@@ -343,6 +372,9 @@ if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
 	echo '<tr>
 		<td class="top"><strong>'._('Submitter')._(': ').'</strong><br />'. $submitter_box .'</td>
 		<td class="top"><strong>'._('Assignee')._(': ').'</strong><br />'. $tech_box .'</td>
+	</tr>
+	<tr>
+		<td class="top"><strong>'._('Last Modifier')._(': ').'</strong><br />'. $last_modifier_box .'</td>
 	</tr>';
 	$ath->renderExtraFields($extra_fields,true,'none',true,'Any',array(),false,'QUERY');
 
@@ -353,7 +385,10 @@ if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
 					    ARTIFACT_EXTRAFIELDTYPE_INTEGER,
 					    ARTIFACT_EXTRAFIELDTYPE_SELECT,
 					    ARTIFACT_EXTRAFIELDTYPE_RADIO,
-					    ARTIFACT_EXTRAFIELDTYPE_STATUS));
+					    ARTIFACT_EXTRAFIELDTYPE_STATUS,
+					    ARTIFACT_EXTRAFIELDTYPE_DATE,
+					    ARTIFACT_EXTRAFIELDTYPE_DATETIME,
+					    ARTIFACT_EXTRAFIELDTYPE_EFFORT));
 	$keys=array_keys($efarr);
 	for ($k=0; $k<count($keys); $k++) {
 		$i=$keys[$k];
@@ -367,22 +402,22 @@ if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
 echo '
 	<tr>
 		<td colspan="2" style="white-space: nowrap;">'.
-		'<strong>'._('Last Modified Date range')._(':').'</strong> <i>(YYYY-MM-DD YYYY-MM-DD Format)</i><br />
-		<input type="text" name="_moddaterange" size="21" maxlength="21" value="'. htmlspecialchars($_moddaterange) .'" /><p/>
-		<strong>'._('Open Date range')._(':').'</strong> <i>(YYYY-MM-DD YYYY-MM-DD Format)</i><br />
-		<input type="text" name="_opendaterange" size="21" maxlength="21" value="'. htmlspecialchars($_opendaterange) .'" /><p/>
-		<strong>'._('Close Date range')._(':').'</strong> <i>(YYYY-MM-DD YYYY-MM-DD Format)</i><br />
-		<input type="text" name="_closedaterange" size="21" maxlength="21" value="'. htmlspecialchars($_closedaterange) .'" />
+		'<p><strong>'._('Last Modified Date range')._(':').'</strong> <i>(YYYY-MM-DD YYYY-MM-DD Format)</i><br />
+		<input type="text" name="_moddaterange" size="21" maxlength="21" value="'. htmlspecialchars($_moddaterange) .'" /></p>
+		<p><strong>'._('Open Date range')._(':').'</strong> <i>(YYYY-MM-DD YYYY-MM-DD Format)</i><br />
+		<input type="text" name="_opendaterange" size="21" maxlength="21" value="'. htmlspecialchars($_opendaterange) .'" /></p>
+		<p><strong>'._('Close Date range')._(':').'</strong> <i>(YYYY-MM-DD YYYY-MM-DD Format)</i><br />
+		<input type="text" name="_closedaterange" size="21" maxlength="21" value="'. htmlspecialchars($_closedaterange) .'" /></p>
 		</td>
 	</tr>
 	<tr>
 		<td colspan="2">'.
-		'<strong>'._('Summary')._(': ').'</strong> '.$tips.'<br />
-		<input type="text" name="_summary" size="40" value="'. htmlspecialchars($_summary) .'" /><p/>
-		<strong>'._('Detailed description')._(': ').'</strong> '.$tips.'<br />
-		<input type="text" name="_description" size="40" value="'. htmlspecialchars($_description) .'" /><p/>
-		<strong>'._('Comments')._(': ').'</strong> '.$tips.'<br />
-		<input type="text" name="_followups" size="40" value="'. htmlspecialchars($_followups) .'" />
+		'<p><strong>'._('Summary')._(': ').'</strong> '.$tips.'<br />
+		<input type="text" name="_summary" size="40" value="'. htmlspecialchars($_summary) .'" /></p>
+		<p><strong>'._('Detailed description')._(': ').'</strong> '.$tips.'<br />
+		<input type="text" name="_description" size="40" value="'. htmlspecialchars($_description) .'" /></p>
+		<p><strong>'._('Comments')._(': ').'</strong> '.$tips.'<br />
+		<input type="text" name="_followups" size="40" value="'. htmlspecialchars($_followups) .'" /></p>
 		</td>
 	</tr>
 	<tr>
@@ -395,9 +430,9 @@ echo '
 echo '<tr>
 		<td colspan="2">'.
 		'<p><strong>'._('Options')._(':').'</strong><br />
-		<input type="checkbox" name="query_options[bargraph]" '.
+		<input id="bargraph" type="checkbox" name="query_options[bargraph]" '.
 	((in_array('bargraph', $aq->getQueryOptions())) ? 'checked="checked"' : '')
-.'/>'._('Display a short summary box on top of the list (roadmap status).').'</p>
+.'/><label for="bargraph">'._('Display a short summary box on top of the list (roadmap status).').'</label></p>
 		</td>
 	</tr>';
 echo $HTML->listTableBottom();

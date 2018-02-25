@@ -45,7 +45,7 @@ class SearchManager {
 	var $parameters = array();
 	var $parametersValues = array();
 
-	function SearchManager() {
+	function __construct() {
 		$this->loadSearchEngines();
 		$this->loadParameters();
 	}

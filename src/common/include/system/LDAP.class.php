@@ -497,42 +497,6 @@ class LDAP extends UNIX {
 			$ret_val=false;
 		}
 
-		//
-		//	Now create CVS group
-		//
-
-		// Add virtual anoncvs user to CVS group
-		$cvs_member_list[$i_cvs++] = 'anoncvs_'.$group->getUnixName();
-
-		$dn = 'cn='.$group->getUnixName().',ou=cvsGroup,'.forge_get_config('ldap_base_dn');
-
-		if ($cvs_member_list) {
-			$entry['memberUid']=$cvs_member_list;
-		} else {
-			unset($entry['memberUid']);
-		}
-
-		if (!$this->gfLdapAdd($dn,$entry)) {
-			$this->setError("Error: cannot add LDAP CVS group entry '"
-				 .$group->getUnixName()."': ".$this->gfLdapError()."<br />");
-			$ret_val=false;
-		}
-
-		//
-		// Finally, setup AnonCVS virtual user
-		//
-
-			if (!$this->gfLdapcheck_user_by_name('anoncvs_'.$group->getUnixName())
-			&& !$this->gfLdapCreateUserFromProps('scm_'.$group->getUnixName(),
-							'anoncvs', 'x',
-							'/bin/false', '/bin/false',
-							$this->getSCMGID(),
-							$this->getUnixGID(), "/dev/null")) {
-			$this->setError("Error: cannot add LDAP AnonCVS user entry '"
-				 .$group->getUnixName()."': ".$this->gfLdapError()."<br />");
-			$ret_val=false;
-		}
-
 		return $ret_val;
 	}
 
@@ -571,17 +535,6 @@ class LDAP extends UNIX {
 
 		if (!$this->gfLdapDelete($dn)) {
 			$this->setError("Error: cannot delete LDAP CVS group entry '".
-				 $group->getUnixName()."': ".$this->gfLdapError()."<br />");
-			$ret_val = false;
-		}
-
-		//
-		//	Remove AnonCVS virtual user
-		//
-
-		$dn = 'uid=anoncvs_'.$group->getUnixName().',ou=People,'.forge_get_config('ldap_base_dn');
-		if (!$this->gfLdapDelete($dn)) {
-			$this->setError("Error: cannot delete LDAP AnonCVS user entry '".
 				 $group->getUnixName()."': ".$this->gfLdapError()."<br />");
 			$ret_val = false;
 		}

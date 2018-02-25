@@ -1,12 +1,11 @@
 <?php
-
 /**
  * Fusionforge Mailing Lists Facility
  *
  * Portions Copyright 1999-2001 (c) VA Linux Systems
  * The rest Copyright 2003-2004 (c) Guillaume Smet - Open Wide
- *
  * Portions Copyright 2010 (c) Mélanie Le Bail
+ * Copyright 2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -31,6 +30,8 @@ require_once 'preplugins.php';
 require_once 'plugins_utils.php';
 require_once '../mailman_utils.php';
 
+global $HTML, $feedback;
+
 $request =& HTTPRequest::instance();
 $group_id=$request->get('group_id');
 $group_list_id=$request->get('group_list_id');
@@ -43,12 +44,9 @@ $change_status=$request->get('change_status');
 $list_name=$request->get('list_name');
 $is_public=$request->get('is_public');
 $description=$request->get('description');
-$PHP_SELF = $request->get('PHP_SELF');
-$feedback = '';
 
 if ($group_id) {
 	if (!$Group || !is_object($Group) || $Group->isError()) {
-
 		exit_no_group();
 	}
 
@@ -155,8 +153,8 @@ if ($group_id) {
 		//
 		//	Form to add list
 		//
+		echo $HTML->openForm(array('method' => 'post', 'action' => getStringFromServer('PHP_SELF').'?group_id='.$group_id));
 		?>
-			<form method="post" action="<?php echo $PHP_SELF; ?>?group_id=<?php echo $group_id ?>">
 			<input type="hidden" name="post_changes" value="y" />
 			<input type="hidden" name="add_list" value="y" />
 			<p><strong><?php echo _('Mailing List Name')._(':'); ?></strong><br />
@@ -169,9 +167,9 @@ if ($group_id) {
 			<input type="text" name="description" value="" size="40" maxlength="80" /><br /></p>
 			<p>
 			<input type="submit" name="submit" value="<?php echo _('Add This List'); ?>" /></p>
-			</form>
-			<?php
-			mail_footer();
+		<?php
+		echo $HTML->closeForm();
+		mail_footer();
 
 		//
 		//	Form to modify list
@@ -188,9 +186,8 @@ if ($group_id) {
 					'help'=>'CommunicationServices.html#MailingLists',
 					'admin' => 1));
 		?>
-
 			<h3><?php echo $mailingList->getName(); ?></h3>
-			<form method="post" action="<?php echo $PHP_SELF; ?>?group_id=<?php echo $group_id; ?>&amp;group_list_id=<?php echo $mailingList->getID(); ?>">
+		<?php echo $HTML->openForm(array('method' => 'post', 'action' => getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&group_list_id='.$mailingList->getID())); ?>
 			<input type="hidden" name="post_changes" value="y" />
 			<input type="hidden" name="change_status" value="y" />
 			<p>
@@ -202,9 +199,9 @@ if ($group_id) {
 			<input type="text" name="description" value="<?php echo $mailingList->getDescription(); ?>" size="40" maxlength="80" /><br /></p>
 			<p>
 			<input type="submit" name="submit" value="<?php echo _('Update'); ?>" /></p>
-			</form>
 			<?php
-			mail_footer();
+		echo $HTML->closeForm();
+		mail_footer();
 	} else {
 		//
 		//	Show lists
@@ -230,9 +227,9 @@ if ($group_id) {
 		}
 		echo '<p>'.sprintf(_('You can administrate lists from here. Please note that private lists can still be viewed by members of your project, but are not listed on %s.'), forge_get_config ('forge_name')).'</p>';
 		echo '<ul>
-			<li>
-			<a href="'.$PHP_SELF.'?group_id='.$group_id.'&amp;add_list=1">'._('Add Mailing List').'</a>
-			</li>
+			<li>';
+		echo util_make_link(getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;add_list=1', _('Add Mailing List'));
+		echo '	</li>
 			</ul>';
 		$mlCount = count($mlArray);
 

@@ -85,21 +85,21 @@ if ($group_id) {
 	for ($j = 0; $j < $mlCount; $j++) {
 		$currentList =& $mlArray[$j];
 		if (!$currentList->isPermissionDeniedError()) {
-			echo '<tr '. $HTML->boxGetAltRowStyle($j) .'>';
+			echo "<tr>\n";
 			if ($currentList->isError()) {
 				echo '<td colspan="4">'.$currentList->getErrorMessage().'</td>';
 			} elseif ($currentList->getStatus() == MAIL__MAILING_LIST_IS_REQUESTED) {
 				echo '<td class="halfwidth" colspan="2"><strong>'.$currentList->getName().'</strong></td>'.
-					'<td width="25%">'.htmlspecialchars($currentList->getDescription()). '</td>'.
-					'<td width="25%" class="align-center">'._('Not activated yet').'</td>';
+					'<td class="onequarterwidth">'.htmlspecialchars($currentList->getDescription()). '</td>'.
+					'<td class="onequarterwidth align-center">'._('Not activated yet').'</td>';
 			} else {
-				echo '<td width="25%">'.
+				echo '<td class="onequarterwidth">'.
 					'<strong><a href="'.$currentList->getArchivesUrl().'">' .
 					sprintf(_('%s Archives'), $currentList->getName()).'</a></strong></td>'.
-					'<td width="25%" align="center"><a href="&#109;&#097;&#105;&#108;&#116;&#111;:'.$currentList->getListEmail().'">'.$currentList->getListEmail(). '</a></td>'.
-					'<td width="25%">'.htmlspecialchars($currentList->getDescription()). '</td>'.
-					'<td width="25%" class="align-center"><a href="'.$currentList->getExternalInfoUrl().'">'._('Subscribe/Unsubscribe/Preferences').'</a>'.
-					'</td>';
+					'<td class="onequarterwidth align-center"><a href="&#109;&#097;&#105;&#108;&#116;&#111;:'.$currentList->getListEmail().'">'.$currentList->getListEmail(). '</a></td>'.
+					'<td class="onequarterwidth">'.htmlspecialchars($currentList->getDescription()). '</td>'.
+					'<td class="onequarterwidth align-center"><a href="'.$currentList->getExternalInfoUrl().'">'._('Subscribe/Unsubscribe/Preferences').'</a>'.
+					"</td>\n";
 			}
 			echo '</tr>';
 		}

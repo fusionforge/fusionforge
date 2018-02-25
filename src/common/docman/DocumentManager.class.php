@@ -2,7 +2,7 @@
 /**
  * FusionForge Documentation Manager
  *
- * Copyright 2011-2014,2016, Franck Villaume - TrivialDev
+ * Copyright 2011-2014,2016-2017, Franck Villaume - TrivialDev
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2013, French Ministry of National Education
  * http://fusionforge.org
@@ -46,12 +46,11 @@ class DocumentManager extends FFError {
 
 	/**
 	 * @param	$Group
-	 * @internal	param	\The $object Group object to which this document is associated.
 	 */
 	function __construct(&$Group) {
 		parent::__construct();
 		if (!$Group || !is_object($Group)) {
-			$this->setError(_('No Valid Group Object'));
+			$this->setError(_('Invalid Project'));
 			return;
 		}
 		if ($Group->isError()) {
@@ -73,7 +72,7 @@ class DocumentManager extends FFError {
 	/**
 	 * getTrashID - the trash doc_group id for this DocumentManager.
 	 *
-	 * @return	integer	The trash doc_group id.
+	 * @return	int	The trash doc_group id.
 	 */
 	function getTrashID() {
 		if (isset($this->data_array['trashid']))
@@ -99,7 +98,7 @@ class DocumentManager extends FFError {
 	/**
 	 * cleanTrash - delete all items in trash for this DocumentManager
 	 *
-	 * @return	boolean	true on success
+	 * @return	bool	true on success
 	 */
 	function cleanTrash() {
 		$trashId = $this->getTrashID();
@@ -127,7 +126,7 @@ class DocumentManager extends FFError {
 
 	/**
 	 * isTrashEmpty - check if the trash is empty
-	 * @return	boolean	success or not
+	 * @return	bool	success or not
 	 */
 	function isTrashEmpty() {
 		if ($this->Group->usesPlugin('projects-hierarchy')) {
@@ -158,13 +157,13 @@ class DocumentManager extends FFError {
 	}
 
 	/**
-	 *  getTree - display recursively the content of the doc_group. Only doc_groups within doc_groups.
+	 *  getHTMLTree - display recursively the content of the doc_group. Only doc_groups within doc_groups.
 	 *
 	 * @param	int	$selecteddir	the selected directory
 	 * @param	string	$linkmenu	the type of link in the menu
 	 * @param	int	$docGroupId	the doc_group to start: default 0
 	 */
-	function getTree($selecteddir, $linkmenu, $docGroupId = 0) {
+	function getHTMLTree($selecteddir, $linkmenu, $docGroupId = 0) {
 		global $g; // the master group of all the groups .... anyway. Needed to support projects-hierarchy plugin
 		$dg = new DocumentGroup($this->Group);
 		switch ($linkmenu) {
@@ -240,12 +239,55 @@ class DocumentManager extends FFError {
 				}
 				if ($dg->getSubgroup($subGroupIdValue, $doc_group_stateid)) {
 					echo html_ao('ul', array('class' => 'simpleTreeMenu'));
-					$this->getTree($selecteddir, $linkmenu, $subGroupIdValue);
+					$this->getHTMLTree($selecteddir, $linkmenu, $subGroupIdValue);
 					echo html_ac(html_ap() - 1);
 				}
 				echo html_ac(html_ap() -1);
 			}
 		}
+	}
+
+	/**
+	 * getTree - retrieve the tree structure into an organized array
+	 *
+	 * @param	int	$docGroupId	the doc_group to start: default 0
+	 * @return	array
+	 */
+	function getTree($docGroupId = 0) {
+		$dg = new DocumentGroup($this->Group);
+		$stateid = array(1, 2, 3, 4, 5);
+		$tree = $dg->getSubgroup($docGroupId, $stateid);
+		if (sizeof($tree)) {
+			foreach ($tree as $key => $value) {
+				$tree[$key] = (array)documentgroup_get_object($value, $this->Group->getID());
+				unset($tree[$key]['Group']);
+				$tree[$key]['subdocgroups'] = $this->getTree($value);
+				$df = new DocumentFactory($this->Group);
+				$df->setDocGroupID($value);
+				$df->setStateID($stateid);
+				$df->setOrder(array('docid'));
+				$tree[$key]['files'] = (array)$df->getDocumentsWithVersions();
+			}
+		}
+		return $tree;
+	}
+
+	/**
+	 * getSettings - return the configuration flags of the docman
+	 *
+	 * @return	array
+	 */
+	function getSettings() {
+		$settingsArr = array();
+		$settingsArr['new_doc_address']          = $this->Group->data_array['new_doc_address'];
+		$settingsArr['send_all_docs']            = $this->Group->data_array['send_all_docs'];
+		$settingsArr['use_docman_search']        = $this->Group->data_array['use_docman_search'];
+		$settingsArr['force_docman_reindex']     = $this->Group->data_array['force_docman_reindex'];
+		$settingsArr['use_webdav']               = $this->Group->data_array['use_webdav'];
+		$settingsArr['use_docman_create_online'] = $this->Group->data_array['use_docman_create_online'];
+		$settingsArr['use_docman_review']        = forge_get_config('use_docman_review');
+		$settingsArr['group_id']                 = $this->Group->getID();
+		return $settingsArr;
 	}
 
 	/**
@@ -391,13 +433,14 @@ class DocumentManager extends FFError {
 	 */
 	function getActivity($sections, $begin, $end) {
 		$results = array();
+		$qpa = false;
 		for ($i = 0; $i < count($sections); $i++) {
 			$results[$sections[$i]] = 0;
 			$union = 0;
 			if (count($sections) >= 1 && $i != count($sections) -1) {
 				$union = 1;
 			}
-			$qpa = db_construct_qpa(false, 'SELECT count(*) FROM activity_vw WHERE activity_date BETWEEN $1 AND $2
+			$qpa = db_construct_qpa($qpa, 'SELECT count(*) FROM activity_vw WHERE activity_date BETWEEN $1 AND $2
 							AND group_id = $3 AND section = $4 ',
 							array($begin,
 								$end,
@@ -414,5 +457,23 @@ class DocumentManager extends FFError {
 			$j++;
 		}
 		return $results;
+	}
+
+	function getNbDocs() {
+		$qpa = db_construct_qpa(false, 'SELECT count(docid) as docs FROM doc_data WHERE group_id = $1', array($this->Group->getID()));
+		if (!forge_check_perm('docman', $this->Group->getID(), 'approve')) {
+			$qpa = db_construct_qpa($qpa, ' AND stateid = $1', array(1));
+		}
+		$res = db_query_qpa($qpa);
+		return db_result($res, 0, 0);
+	}
+
+	function getNbFolders() {
+		$qpa = db_construct_qpa(false, 'SELECT count(doc_group) as folders FROM doc_groups WHERE group_id = $1', array($this->Group->getID()));
+		if (!forge_check_perm('docman', $this->Group->getID(), 'approve')) {
+			$qpa = db_construct_qpa($qpa, ' AND stateid = $1', array(1));
+		}
+		$res = db_query_qpa($qpa);
+		return db_result($res, 0, 0);
 	}
 }

@@ -90,10 +90,7 @@ function send_file($filename, $filepath, $file_id = NULL, $mode = NULL) {
 	}
 }
 
-$normalized_urlprefix = normalized_urlprefix();
-$pathinfo = substr_replace(getStringFromServer('REQUEST_URI'), '', 0, strlen($normalized_urlprefix)-1);
-$expl_pathinfo = explode('/', $pathinfo);
-
+$expl_pathinfo = explode('/', getStringFromServer('REQUEST_URI'));
 $mode = $expl_pathinfo[3];
 
 // .../download.php/123/foo.tar.gz (5.1 backward compatibility)

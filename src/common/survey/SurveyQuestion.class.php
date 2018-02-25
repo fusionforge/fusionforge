@@ -44,14 +44,11 @@ class SurveyQuestion extends FFError {
 	 * @param	$Group
 	 * @param	bool	$question_id
 	 * @param	bool	$arr
-	 * @internal	param	\The $object Group object to which this Survey Question is associated.
-	 * @internal	param	\The $int question_id.
-	 * @internal	param	\The $array associative array of data.
 	 */
 	function __construct(&$Group, $question_id = false, $arr = false) {
 		parent::__construct();
 		if (!$Group || !is_object($Group)) {
-			$this->setError(_('No Valid Group Object'));
+			$this->setError(_('Invalid Project'));
 			return;
 		}
 		if ($Group->isError()) {
@@ -125,7 +122,7 @@ class SurveyQuestion extends FFError {
 	 *					4: Comment Only
 	 *					5: Text Field
 	 *					6: None
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function update($question, $question_type = 1) {
 		if (strlen($question) < 3) {
@@ -154,7 +151,7 @@ class SurveyQuestion extends FFError {
 	/**
 	 * delete - use this function to delete a survey question
 	 *
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function delete() {
 		$group_id = $this->Group->GetID();

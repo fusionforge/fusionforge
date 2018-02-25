@@ -3,7 +3,7 @@
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
  * Copyright 2010, Franck Villaume - Capgemini
  * Copyright 2013, French Ministry of National Education
- * Copyright 2013-2014, Franck Villaume - TrivialDev
+ * Copyright 2013-2014,2016, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -58,7 +58,7 @@ class Widget_MyProjects extends Widget {
 				if ($g->getStatus() != 'A') continue;
 				$i++;
 				$html_my_projects .= '
-				<tr '. $HTML->boxGetAltRowStyle($i) .'><td style="width:99%">'.
+				<tr><td style="width:99%">'.
 					util_make_link('/projects/'.$g->getUnixName(), $g->getPublicName());
 
 				$isadmin = false;
@@ -83,12 +83,11 @@ class Widget_MyProjects extends Widget {
 				}
 				if (!$isadmin) {
 					$html_my_projects .= '</td>'.
-						'<td>'.util_make_link('/my/rmproject.php?group_id='.$g->getID(),
-									'<img src="'.$HTML->imgroot.'ic/trash.png" alt="'._('Leave project').'" height="16" width="16" />',
+						'<td>'.util_make_link('/my/rmproject.php?group_id='.$g->getID(), $HTML->getDeletePic(_('Leave project'), _('Leave project')),
 									array('onClick' => 'return confirm("'._("Quit this project?").'")')).
 						'</td></tr>';
 				} else {
-					$html_my_projects .= '</td><td>&nbsp;</td></tr>';
+					$html_my_projects .= '</td><td></td></tr>';
 				}
 			}
 			$html_my_projects .= $HTML->listTableBottom();

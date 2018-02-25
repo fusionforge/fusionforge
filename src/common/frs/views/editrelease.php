@@ -75,7 +75,7 @@ echo html_e('h2', array(), _('Edit Release for the package').' '.$frsp->getName(
  * Show the forms for each part
  */
 if (forge_check_perm('frs', $package_id, 'admin')) {
-	echo $HTML->openForm(array('enctype' => 'multipart/form-data', 'method' => 'post', 'action' => util_make_uri('/frs/?group_id='.$group_id.'&release_id='.$release_id.'&package_id='.$package_id.'&action=editrelease')));
+	echo $HTML->openForm(array('enctype' => 'multipart/form-data', 'method' => 'post', 'action' => '/frs/?group_id='.$group_id.'&release_id='.$release_id.'&package_id='.$package_id.'&action=editrelease'));
 	echo $HTML->listTableTop();
 	$cells = array();
 	$cells[][] = '<strong>'._('Release Date')._(':').'</strong>';
@@ -126,7 +126,7 @@ echo html_e('hr');
 echo html_e('h2', array(), _('Add Files To This Release'));
 echo html_e('p', array(), _('Now, choose a file to upload into the system.'));
 
-echo $HTML->openForm(array('enctype' => 'multipart/form-data', 'method' => 'post', 'action' => util_make_uri('/frs/?group_id='.$group_id.'&release_id='.$release_id.'&package_id='.$package_id.'&action=addfile')));
+echo $HTML->openForm(array('enctype' => 'multipart/form-data', 'method' => 'post', 'action' => '/frs/?group_id='.$group_id.'&release_id='.$release_id.'&package_id='.$package_id.'&action=addfile'));
 echo html_ao('fieldset');
 echo html_e('legend', array(), '<strong>'._('File Name').'</strong>');
 echo _('Upload a new file')._(': ').'<input type="file" name="userfile" />'.'('._('max upload size')._(': ').human_readable_bytes(util_get_maxuploadfilesize()).')';
@@ -173,7 +173,7 @@ if(count($files)) {
 	echo $HTML->listTableTop($title_arr, array(), '', '', array(), array(), array(array('style' => 'width: 2%'), array('style' => 'width: 30%')));
 	echo '<tr><td colspan="7" style="padding:0;">';
 	foreach ($files as $key => $file) {
-		echo $HTML->openForm(array('action' => util_make_uri('/frs/?group_id='.$group_id.'&release_id='.$release_id.'&package_id='.$package_id.'&file_id='.$file->getID().'&action=editfile'), 'method' => 'post', 'id' => 'fileid'.$file->getID()));
+		echo $HTML->openForm(array('action' => '/frs/?group_id='.$group_id.'&release_id='.$release_id.'&package_id='.$package_id.'&file_id='.$file->getID().'&action=editfile', 'method' => 'post', 'id' => 'fileid'.$file->getID()));
 		echo $HTML->listTableTop();
 		$cells = array();
 		$cells[] = array(html_e('input', array('type' => 'checkbox', 'value' => $file->getID(), 'class' => 'checkedrelidactive', 'title' => _('Select / Deselect this file for massaction'), 'onClick' => 'controllerFRS.checkgeneral("active")')), 'style' => 'width: 2%; padding: 0px;');
@@ -184,7 +184,7 @@ if(count($files)) {
 		$cells[][] = '<input type="text" name="release_time" value="'.date('Y-m-d', $file->getReleaseTime()).'" size="10" maxlength="10" />';
 		$deleteUrlAction = util_make_uri('/frs/?action=deletefile&package_id='.$package_id.'&group_id='.$group_id.'&file_id='.$file->getID());
 		$cells[][] = '<input type="submit" name="submit" value="'._('Update/Refresh').'" />'.util_make_link('#', $HTML->getDeletePic(_('Delete this file'), _('Delete file')), array('onclick' => 'javascript:controllerFRS.toggleConfirmBox({idconfirmbox: \'confirmbox1\', do: \''._('Delete the file').' '.$file->getName().'\', cancel: \''._('Cancel').'\', height: 150, width: 400, action: \''.$deleteUrlAction.'\'})' ), true);
-		echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($key, true)), $cells);
+		echo $HTML->multiTableRow(array(), $cells);
 		echo $HTML->listTableBottom();
 		echo $HTML->closeForm();
 	}
@@ -202,6 +202,16 @@ echo $HTML->jQueryUIconfirmBox('confirmbox1', _('Delete file'), _('You are about
 
 if ($g->usesTracker()) {
 	include $gfcommon.'frs/views/linktrackerroadmap.php';
+}
+
+if (forge_get_config('use_object_associations')) {
+	echo html_e('hr');
+	echo html_e('h2', array(), _('Associate Objects To/From This Release'));
+	echo $frsr->showAssociations('/frs/?action=deleteassociation&group_id='.$group_id.'&package_id='.$package_id.'&release_id='.$release_id);
+	echo $HTML->openForm(array('action' => '/frs/?action=addassociation&group_id='.$group_id.'&package_id='.$package_id.'&release_id='.$release_id, 'method' => 'post'));
+	echo $frsr->showAddAssociations();
+	echo html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Associate Objects')));
+	echo $HTML->closeForm();
 }
 
 echo html_e('hr');

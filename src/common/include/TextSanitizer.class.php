@@ -43,8 +43,6 @@
  * ALONE BASIS."
  */
 
-require_once 'HTMLPurifier.auto.php';
-
 class TextSanitizer extends FFError {
 
 	/**
@@ -220,6 +218,8 @@ class TextSanitizer extends FFError {
 	}
 
 	function stripTags($text, $allowed = 'br,p,li,ul') {
+		require_once 'HTMLPurifier.auto.php';
+
 		// Try apc caching first (if possible).
 		if (function_exists('apc_fetch')) {
 			$key = 'stripTags.'.md5($text);
@@ -242,6 +242,8 @@ class TextSanitizer extends FFError {
 	}
 
 	static function purify($text) {
+		require_once 'HTMLPurifier.auto.php';
+
 		// Remove string like "<![if !supportLists]>" or "<![endif]>"
 		$text = preg_replace('/<!\[.+?\]>/', '', $text);
 		// Remove non opened tags at the beginning

@@ -32,7 +32,14 @@ require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'include/login-form.php';
 
+
+// remove the url_prefix
+$url_prefix = forge_get_config('url_prefix');
 $return_to = getStringFromRequest('return_to');
+if (substr($return_to, 0, strlen($url_prefix)) == $url_prefix) {
+	$return_to = '/'.substr($return_to, strlen($url_prefix));
+}
+
 $triggered = getIntFromRequest('triggered');
 
 if (isset($session_hash)) {

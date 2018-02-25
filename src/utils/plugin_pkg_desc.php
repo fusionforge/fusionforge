@@ -67,7 +67,7 @@ if ($method == 'deb') {
   echo " .\n";
   echo " $desc\n";
 
-} else if ($method == 'rpm') {
+} elseif ($method == 'rpm') {
 
   $shortdesc_prefix = ucfirst($shortdesc_prefix);  // rpmlint summary-not-capitalized
   echo "Summary: {$shortdesc_prefix} - {$plugin->text}\n";

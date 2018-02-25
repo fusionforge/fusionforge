@@ -41,8 +41,8 @@ if (!$group || !is_object($group)) {
 	exit_error($group->getErrorMessage(),'admin');
 }
 
-// This function performs very update
-function do_update(&$group, $is_template, $status, $group_type, $unix_box, $http_domain, $scm_box='') {
+// This function performs every update
+function do_update(&$group, $is_template, $status, $unix_box, $http_domain, $scm_box='') {
 	global $feedback;
 	global $error_msg;
 
@@ -54,7 +54,7 @@ function do_update(&$group, $is_template, $status, $group_type, $unix_box, $http
 		return false;
 	}
 
-	if (!$group->updateAdmin(session_get_user(), $group_type, $unix_box, $http_domain)) {
+	if (!$group->updateAdmin(session_get_user(), $unix_box, $http_domain)) {
 		$error_msg .= $group->getErrorMessage();
 		db_rollback();
 		return false;
@@ -85,7 +85,7 @@ if (getStringFromRequest('submit')) {
 	$form_domain = getStringFromRequest('form_domain');
 	$form_scm_box = getStringFromRequest('form_scm_box');
 
-	do_update($group, $form_template, $form_status, 1, $form_box, $form_domain, $form_scm_box);
+	do_update($group, $form_template, $form_status, $form_box, $form_domain, $form_scm_box);
 
 } elseif (getStringFromRequest('resend')) {
 
@@ -183,7 +183,7 @@ printf(_('With PFO-RBAC, the “is_public” property is gone. Instead, to make 
 ?>
 <tr>
 <td>
-<?php echo _('Home Box:'); ?>
+<?php echo _('Home Box')._(':'); ?>
 </td>
 <td>
 <input type="text" name="form_box" value="<?php echo $group->getUnixBox(); ?>" />
@@ -193,16 +193,16 @@ printf(_('With PFO-RBAC, the “is_public” property is gone. Instead, to make 
 
 <tr>
 <td>
-<?php echo _('HTTP Domain:') ?>
+<label for="form_domain"><?php echo _('HTTP Domain')._(':') ?></label>
 </td>
 <td>
-<input size="40" type="text" name="form_domain" value="<?php echo $group->getDomain(); ?>" />
+<input size="40" id="form_domain" type="text" name="form_domain" value="<?php echo $group->getDomain(); ?>" />
 </td>
 </tr>
 
 <tr>
 <td>
-<?php echo _('Registration Application:'); ?>
+<?php echo _('Registration Application')._(':'); ?>
 </td>
 <td>
 <?php echo $group->getRegistrationPurpose(); ?>
@@ -212,7 +212,7 @@ printf(_('With PFO-RBAC, the “is_public” property is gone. Instead, to make 
 if ($group->usesSCM()) {
 ?>
 <tr>
-	<td><?php echo _('SCM Box:'); ?></td>
+	<td><?php echo _('SCM Box')._(':'); ?></td>
 	<td><input size="40" type="text" name="form_scm_box" value="<?php echo $group->getSCMBox(); ?>"/></td>
 </tr>
 <?php

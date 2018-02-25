@@ -48,7 +48,7 @@ class SurveyQuestionFactory extends FFError {
 	function __construct(&$Group) {
 		parent::__construct();
 		if (!$Group || !is_object($Group)) {
-			$this->setError(_('No Valid Group Object'));
+			$this->setError(_('Invalid Project'));
 			return;
 		}
 		if ($Group->isError()) {
@@ -73,7 +73,7 @@ class SurveyQuestionFactory extends FFError {
 	}
 
 	/**
-	 * getSurveyQuestion - get an array of Survey Question objects
+	 * getSurveyQuestions - get an array of Survey Question objects
 	 *                     for this Group and Survey id if survey_id is given.
 	 *
  	 * @return	array	The array of Survey Question objects.

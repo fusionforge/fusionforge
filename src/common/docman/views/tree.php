@@ -6,7 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013-2015, Franck Villaume - TrivialDev
+ * Copyright 2013-2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -42,7 +42,7 @@ if (!forge_check_perm('docman', $group_id, 'read')) {
 
 echo html_ao('div', array('id' => 'documenttree'));
 echo html_ao('ul', array('id' => $g->getUnixName().'-tree'));
-$dm->getTree($dirid, $linkmenu);
+$dm->getHTMLTree($dirid, $linkmenu);
 echo html_ac(html_ap() - 1);
 echo html_ao('script', array('type' => 'text/javascript'));
 echo '//<![CDATA[
@@ -66,7 +66,7 @@ if (isset($projectIDsArray) && is_array($projectIDsArray)) {
 			echo html_e('h5', array(), _('Child project')._(': ').util_make_link('/docman/?group_id='.$groupObject->getID(),$groupObject->getPublicName(), array('title'=>_('Browse document manager for this project.'))), false);
 			$dmc = new DocumentManager($groupObject);
 			echo html_ao('ul', array('id' => $groupObject->getUnixName().'-tree'));
-			$dmc->getTree($dirid, $linkmenu);
+			$dmc->getHTMLTree($dirid, $linkmenu);
 			echo html_ac(html_ap() - 1);
 			echo html_ao('script', array('type' => 'text/javascript'));
 			echo '//<![CDATA[
@@ -78,6 +78,7 @@ if (isset($projectIDsArray) && is_array($projectIDsArray)) {
 			//]]>'."\n";
 			echo html_ac(html_ap() - 1);
 		}
+		unset($groupObject);
 	}
 }
 if ($childgroup_id) {

@@ -7,7 +7,7 @@
  * Copyright 2010, FusionForge Team
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright 2012-2016, Franck Villaume - TrivialDev
- * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
+ * Copyright 2016-2017, Stéphane-Eymeric Bredthauer - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -102,10 +102,9 @@ if (!isset($at_arr) || !$at_arr || count($at_arr) < 1) {
 
 	for ($j = 0; $j < count($at_arr); $j++) {
 		$cells = array();
-		$cells[][] = util_make_link('/tracker/admin/?atid='.$at_arr[$j]->getID().'&group_id='.$group_id, html_image('ic/tracker20w.png', 20, 20).'&nbsp;'.
-						$at_arr[$j]->getName());
+		$cells[][] = util_make_link('/tracker/admin/?atid='.$at_arr[$j]->getID().'&group_id='.$group_id, $HTML->getFollowPic().'&nbsp;'.$at_arr[$j]->getName());
 		$cells[][] = $at_arr[$j]->getDescription();
-		echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($j, true)), $cells);
+		echo $HTML->multiTableRow(array(), $cells);
 	}
 	echo $HTML->listTableBottom();
 

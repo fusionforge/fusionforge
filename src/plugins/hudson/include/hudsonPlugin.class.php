@@ -59,7 +59,7 @@ control over it to the project administrator.");
 		$this->_addHook('list_roles_by_permission');
 	}
 
-	function CallHook ($hookname, &$params) {
+	function CallHook($hookname, &$params) {
 		global $G_SESSION,$HTML;
 // 		if ($hookname == "usermenu") {
 // 			$text = $this->text; // this is what shows in the tab
@@ -75,9 +75,6 @@ control over it to the project administrator.");
 				return;
 			}
 			if ($project->isError()) {
-				return;
-			}
-			if (!$project->isProject()) {
 				return;
 			}
 			if ( $project->usesPlugin( $this->name )) {

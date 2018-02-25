@@ -55,7 +55,7 @@ echo $HTML->openForm(array('action' => '/pm/task.php?group_id='.$group_id.'&grou
 		<td><strong><?php echo _('Submitted by') . _(': '); ?></strong><br />
 			<?php echo $pt->getSubmittedRealName(); ?> (<?php echo $pt->getSubmittedUnixName(); ?>)</td>
 		<td><input type="submit" value="<?php echo _('Submit') ?>" name="submit" /></td>
-		<td><strong>Task ID:</strong> <?php echo $project_task_id; ?> @ <?php
+		<td><strong><?php echo _('Task Id') . _(': '); ?></strong> <?php echo $project_task_id; ?> @ <?php
 		echo forge_get_config ('web_host') ; ?></td>
 	</tr>
 
@@ -79,12 +79,12 @@ echo $HTML->openForm(array('action' => '/pm/task.php?group_id='.$group_id.'&grou
 
 	<tr>
 		<td>
-		<strong><?php echo _('Percent Complete') . _(': '); ?></strong><br />
+		<strong><?php echo _('Percent Complete')._(': '); ?></strong><br />
 		<?php $pg->percentCompleteBox('percent_complete',$pt->getPercentComplete()); ?>
 		</td>
 
 		<td>
-		<strong><?php echo _('Priority') . _(': '); ?></strong><br />
+		<strong><?php echo _('Priority')._(': '); ?></strong><br />
 		<?php echo build_priority_select_box('priority',$pt->getPriority()); ?>
 		</td>
 
@@ -98,8 +98,8 @@ echo $HTML->openForm(array('action' => '/pm/task.php?group_id='.$group_id.'&grou
 
 	<tr>
 		<td>
-		<strong><?php echo _('Task Summary') . _(': '); ?></strong><br />
-		<input type="text" name="summary" size="65" maxlength="65" value="<?php echo $pt->getSummary(); ?>" />
+		<label for="summary"><strong><?php echo _('Task Summary')._(': '); ?></strong></label><br />
+		<input id="summary" type="text" name="summary" size="65" maxlength="65" value="<?php echo $pt->getSummary(); ?>" />
 		</td>
 		<td colspan="2">
 		<?php echo util_make_link('/pm/task.php?func=deletetask&project_task_id='.$project_task_id.'&group_id='.$group_id.'&group_project_id='.$group_project_id, $HTML->getDeletePic(_('Delete this task'), _('Delete this task')).' '._('Delete this task')); ?>
@@ -113,6 +113,7 @@ echo $HTML->openForm(array('action' => '/pm/task.php?group_id='.$group_id.'&grou
 
 	<tr>
 		<td colspan="3">
+		<p>
 		<strong><?php echo _('Original Comment') . _(': '); ?></strong><br />
 		<?php
 			$sanitizer = new TextSanitizer();
@@ -124,11 +125,15 @@ echo $HTML->openForm(array('action' => '/pm/task.php?group_id='.$group_id.'&grou
 				echo $body;
 			}
 		?>
-		<p />
-		<strong><?php echo _('Add A Comment') . _(': '); ?></strong><?php echo notepad_button('document.forms.modtaskform.details') ?><br />
+		</p>
+		<p>
+		<label for="details"><strong><?php echo _('Add A Comment') . _(': '); ?></strong></label>
+		<?php echo notepad_button('document.forms.modtaskform.details') ?>
+		</p>
 <?php
 $GLOBALS['editor_was_set_up']=false;
 $params = array() ;
+$params['id'] = 'details';
 $params['name'] = 'details';
 $params['width'] = "800";
 $params['height'] = "300";
@@ -196,14 +201,14 @@ unset($GLOBALS['editor_was_set_up']);
 
 	<tr>
 		<td>
-		<strong><?php echo _('Estimated Hours') . _(': '); ?></strong><br />
-		<input type="number" name="hours" size="5" value="<?php echo $pt->getHours(); ?>" />
+		<label for="hours"><strong><?php echo _('Estimated Hours') . _(': '); ?></strong></label>
+		<input id="hours" type="number" name="hours" size="5" value="<?php echo $pt->getHours(); ?>" />
 		</td>
 
 		<td colspan="2">
 		<strong><?php echo _('Status') . _(': '); ?></strong><br />
 		<?php
-		echo $pg->statusBox('status_id', $pt->getStatusID(), false );
+		echo $pg->statusBox('status_id', $pt->getStatusID(), false);
 		?>
 		</td>
 	</tr>
@@ -255,24 +260,22 @@ $title_arr[]=_('Category');
 $title_arr[]=_('User');
 $title_arr[]=' ';
 
-$xi = 0;
-
 $report=new Report();
 if ($report->isError()) {
 	exit_error($report->getErrorMessage(), 'pm');
 }
 $report->setStartDate($pt->ProjectGroup->Group->getStartDate());
 
-echo $HTML->openForm(array('array' => '/reporting/timeadd.php', 'id' => 'time-tracking', 'method' => 'post'));
+echo $HTML->openForm(array('action' => '/reporting/timeadd.php', 'id' => 'time-tracking', 'method' => 'post'));
 echo '<input type="hidden" name="project_task_id" value="'.$project_task_id.'" />
 	<input type="hidden" name="submit" value="1" />';
-echo $HTML->listTableTop ($title_arr);
-echo '<tr '.$HTML->boxGetAltRowStyle($xi++).'>
+echo $HTML->listTableTop($title_arr);
+echo '<tr>
 		<td class="align-center">'. report_weeks_box($report, 'week') .'</td>
 		<td class="align-center">'. report_day_adjust_box() .'</td>
 		<td class="align-center"><input id="time-tracking-hours" type="text" required="required" name="hours" value="" size="3" maxlength="3" /></td>
 		<td class="align-center">'.report_time_category_box('time_code',false).'</td>
-		<td>&nbsp;</td>
+		<td></td>
 		<td class="align-center"><input type="submit" name="add" value="'._('Add').'" /><input type="submit" name="cancel" value="'._('Cancel').'" /></td>
 	</tr>';
 
@@ -283,18 +286,18 @@ echo '<tr '.$HTML->boxGetAltRowStyle($xi++).'>
 //
 
 
-$res=db_query_params ('SELECT users.realname, rep_time_tracking.report_date, rep_time_tracking.hours, rep_time_category.category_name
+$res=db_query_params('SELECT users.realname, rep_time_tracking.report_date, rep_time_tracking.hours, rep_time_category.category_name
 	FROM users,rep_time_tracking,rep_time_category
 	WHERE
 	users.user_id=rep_time_tracking.user_id
 	AND rep_time_tracking.time_code=rep_time_category.time_code
 	AND rep_time_tracking.project_task_id=$1',
 			array($project_task_id));
-$total_hours =0;
+$total_hours = 0;
 for ($i=0; $i<db_numrows($res); $i++) {
 
 	echo '
-	<tr '.$HTML->boxGetAltRowStyle($xi++).'>
+	<tr>
 	<td></td>
 	<td>'.date(_('Y-m-d H:i'),db_result($res,$i,'report_date')).'</td>
 	<td>'.db_result($res,$i,'hours').'</td>
@@ -306,7 +309,7 @@ for ($i=0; $i<db_numrows($res); $i++) {
 }
 
 echo '
-<tr '.$HTML->boxGetAltRowStyle($xi++).'>
+<tr>
 <td><strong>'._('Total')._(': ').'</strong></td>
 <td></td>
 <td>'.$total_hours.'</td>

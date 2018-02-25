@@ -7,7 +7,7 @@
  * Copyright 2009, Roland Mas
  * Copyright 2010, Franck Villaume - Capgemini
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2016, Franck Villaume - TrivialDev
+ * Copyright 2012-2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -59,6 +59,25 @@ function &documentgroup_get_object($docgroup_id, $group_id, $res = false) {
 	return $DOCUMENTGROUP_OBJ["_".$docgroup_id."_"];
 }
 
+function &documentgroup_get_object_byid($docgroup_id, $res = false) {
+	global $DOCUMENTGROUP_OBJ;
+	if (!isset($DOCUMENTGROUP_OBJ["_".$docgroup_id."_"])) {
+		if ($res) {
+			//the db result handle was passed in
+		} else {
+			$res = db_query_params('SELECT * FROM doc_groups WHERE doc_group = $1',
+						array($docgroup_id));
+		}
+		if (!$res || db_numrows($res) < 1) {
+			$DOCUMENTGROUP_OBJ["_".$docgroup_id."_"] = false;
+		} else {
+			$arr = db_fetch_array($res);
+			$DOCUMENTGROUP_OBJ["_".$docgroup_id."_"] = new DocumentGroup(group_get_object($arr['group_id']), $arr);
+		}
+	}
+	return $DOCUMENTGROUP_OBJ["_".$docgroup_id."_"];
+}
+
 class DocumentGroup extends FFError {
 
 	/**
@@ -80,14 +99,12 @@ class DocumentGroup extends FFError {
 	 *
 	 * @param	$Group
 	 * @param	bool	$data
-	 * @internal	param	\Group $object object.
-	 * @internal	param	array $OR doc_group id from database.
 	 */
 	function __construct(&$Group, $data = false) {
 		parent::__construct();
 
 		if (!$Group || !is_object($Group)) {
-			$this->setError(_('No Valid Group Object'));
+			$this->setError(_('Invalid Project'));
 			return;
 		}
 		if ($Group->isError()) {
@@ -126,11 +143,11 @@ class DocumentGroup extends FFError {
 	 *							2 = deleted
 	 *							5 = private
 	 * @param	int	$createtimestamp	Timestamp of the directory creation
-	 * @internal	param	\Item $string name.
-	 * @return	boolean	true on success / false on failure.
+	 * @param	bool	$forcecreate
+	 * @return	bool	true on success / false on failure.
 	 * @access	public
 	 */
-	function create($name, $parent_doc_group = 0, $state = 1, $createtimestamp = null) {
+	function create($name, $parent_doc_group = 0, $state = 1, $createtimestamp = null, $forcecreate = false) {
 		//
 		//	data validation
 		//
@@ -159,14 +176,16 @@ class DocumentGroup extends FFError {
 			}
 		}
 
-		$res = db_query_params('SELECT * FROM doc_groups WHERE groupname=$1 AND parent_doc_group=$2 AND group_id=$3',
-					array($name,
-						$parent_doc_group,
-						$this->Group->getID())
-					);
-		if ($res && db_numrows($res) > 0) {
-			$this->setError(_('Folder name already exists'));
-			return false;
+		if (!$forcecreate) {
+			$res = db_query_params('SELECT * FROM doc_groups WHERE groupname=$1 AND parent_doc_group=$2 AND group_id=$3',
+						array($name,
+							$parent_doc_group,
+							$this->Group->getID())
+						);
+			if ($res && db_numrows($res) > 0) {
+				$this->setError(_('Folder name already exists'));
+				return false;
+			}
 		}
 
 		$createtimestamp = (($createtimestamp) ? $createtimestamp : time());
@@ -208,8 +227,7 @@ class DocumentGroup extends FFError {
 	 *
 	 * @param	int	$doc_groupid
 	 * @param	int	$project_group_id
-	 * @internal	param	\Document $integer Group Id, integer Project Group Id
-	 * @return	boolean	success
+	 * @return	bool	success
 	 * @access	public
 	 */
 	function delete($doc_groupid, $project_group_id) {
@@ -257,10 +275,6 @@ class DocumentGroup extends FFError {
 	 * @access	public
 	 */
 	function injectArchive($uploaded_data) {
-		if (!is_uploaded_file($uploaded_data['tmp_name'])) {
-			$this->setError(_('Invalid file name.'));
-			return false;
-		}
 		if (function_exists('finfo_open')) {
 			$finfo = finfo_open(FILEINFO_MIME_TYPE);
 			$uploaded_data_type = finfo_file($finfo, $uploaded_data['tmp_name']);
@@ -318,7 +332,7 @@ class DocumentGroup extends FFError {
 	/**
 	 * getID - get this DocumentGroup's ID.
 	 *
-	 * @return	integer	The id #.
+	 * @return	int	The id #.
 	 * @access	public
 	 */
 	function getID() {
@@ -328,7 +342,7 @@ class DocumentGroup extends FFError {
 	/**
 	 * getID - get parent DocumentGroup's id.
 	 *
-	 * @return	integer	The id #.
+	 * @return	int	The id #.
 	 * @access	public
 	 */
 	function getParentID() {
@@ -348,7 +362,7 @@ class DocumentGroup extends FFError {
 	/**
 	 * getState - get the state id.
 	 *
-	 * @return	integer	The state id.
+	 * @return	int	The state id.
 	 * @access	public
 	 */
 	function getState() {
@@ -358,7 +372,7 @@ class DocumentGroup extends FFError {
 	/**
 	 * getCreatedate - get the creation date.
 	 *
-	 * @return	integer	The creation date.
+	 * @return	int	The creation date.
 	 * @access	public
 	 */
 	function getCreatedate() {
@@ -368,7 +382,7 @@ class DocumentGroup extends FFError {
 	/**
 	 * getUpdatedate - get the update date.
 	 *
-	 * @return	integer	The update date.
+	 * @return	int	The update date.
 	 * @access	public
 	 */
 	function getUpdatedate() {
@@ -378,7 +392,7 @@ class DocumentGroup extends FFError {
 	/**
 	 * getLastModifyDate - get the bigger value between update date and creation date.
 	 *
-	 * @return	integer	The last modified date.
+	 * @return	int	The last modified date.
 	 * @access	public
 	 */
 	function getLastModifyDate() {
@@ -404,8 +418,7 @@ class DocumentGroup extends FFError {
 	 * isMonitoredBy - get the monitored status of this document directory for a specific user id.
 	 *
 	 * @param	string	$userid
-	 * @internal	param	\User $int ID
-	 * @return	boolean	true if monitored by this user
+	 * @return	bool	true if monitored by this user
 	 */
 	function isMonitoredBy($userid = 'ALL') {
 		$MonitorElementObject = new MonitorElement('docgroup');
@@ -420,7 +433,7 @@ class DocumentGroup extends FFError {
 	 * removeMonitoredBy - remove this document directory for a specific user id for monitoring.
 	 *
 	 * @param	int	$userid	User ID
-	 * @return	boolean	true if success
+	 * @return	bool	true if success
 	 */
 	function removeMonitoredBy($userid) {
 		$MonitorElementObject = new MonitorElement('docgroup');
@@ -435,7 +448,7 @@ class DocumentGroup extends FFError {
 	 * addMonitoredBy - add this document for a specific user id for monitoring.
 	 *
 	 * @param	int	$userid	User ID
-	 * @return	boolean	true if success
+	 * @return	bool	true if success
 	 */
 	function addMonitoredBy($userid) {
 		$MonitorElementObject = new MonitorElement('docgroup');
@@ -449,7 +462,7 @@ class DocumentGroup extends FFError {
 	/**
 	 * clearMonitor - remove all entries of monitoring for this document.
 	 *
-	 * @return	boolean	true if success.
+	 * @return	bool	true if success.
 	 */
 	function clearMonitor() {
 		$MonitorElementObject = new MonitorElement('docgroup');
@@ -463,7 +476,7 @@ class DocumentGroup extends FFError {
 	/**
 	 * getCreated_by - get the creator (user) id.
 	 *
-	 * @return	integer	The User id.
+	 * @return	int	The User id.
 	 * @access	public
 	 */
 	function getCreated_by() {
@@ -478,7 +491,7 @@ class DocumentGroup extends FFError {
 	 * @param	int	$metadata		update only the metadata : created_by, updatedate
 	 * @param	int	$state			state of the directory. Default is 1 = public. See create function for valid values
 	 * @param	int	$updatetimestamp	Timestamp of the update
-	 * @return	boolean	success or not
+	 * @return	bool	success or not
 	 * @access	public
 	 */
 	function update($name, $parent_doc_group = 0, $metadata = 0, $state = 1, $updatetimestamp = null) {
@@ -543,10 +556,7 @@ class DocumentGroup extends FFError {
 	 * @param	array	$nested_groups
 	 * @param	object	$document_factory
 	 * @param	int	$stateid
-	 * @internal	param	Array $array of nested groups information, fetched from DocumentGroupFactory class
-	 * @internal	param	\The $object DocumentFactory object
-	 * @internal	param	int $State of the documents
-	 * @return	boolean	success
+	 * @return	bool	success
 	 * @access	public
 	 */
 	function hasDocuments(&$nested_groups, &$document_factory, $stateid = 0) {
@@ -654,9 +664,9 @@ class DocumentGroup extends FFError {
 	/**
 	 * getPath - return the complete_path
 	 *
-	 * @param	boolean	$url		does path is url clickable (default is false)
-	 * @param	boolean	$includename	does path include this document group name ? (default is true)
-	 * @return	string|boolean		the complete_path or false if user has not proper access to this path.
+	 * @param	bool	$url		does path is url clickable (default is false)
+	 * @param	bool	$includename	does path include this document group name ? (default is true)
+	 * @return	string|bool		the complete_path or false if user has not proper access to this path.
 	 * @access	public
 	 */
 	function getPath($url = false, $includename = true) {
@@ -683,7 +693,12 @@ class DocumentGroup extends FFError {
 		}
 		if ($includename) {
 			if ($url) {
-				$browselink = '/docman/?view=listfile&dirid='.$this->getID();
+				if ($this->getState() == 2) {
+					$view = 'listtrashfile';
+				} else {
+					$view = 'listfile';
+				}
+				$browselink = '/docman/?view='.$view.'&dirid='.$this->getID();
 				if (isset($GLOBALS['childgroup_id']) && $GLOBALS['childgroup_id']) {
 					$browselink .= '&childgroup_id='.$GLOBALS['childgroup_id'];
 				}
@@ -693,6 +708,7 @@ class DocumentGroup extends FFError {
 				$returnPath .= '/'.$this->getName();
 			}
 		}
+		$returnPath = preg_replace('/\/\//','/', $returnPath);
 		return $returnPath;
 	}
 
@@ -701,7 +717,7 @@ class DocumentGroup extends FFError {
 	 *
 	 * @param	int	$stateid	State ID.
 	 * @param	bool	$recursive	set the state id recursively. (i.e. move the directory and his content to trash)
-	 * @return	boolean	success or not.
+	 * @return	bool	success or not.
 	 * @access	public
 	 */
 	function setStateID($stateid, $recursive = false) {
@@ -764,7 +780,7 @@ class DocumentGroup extends FFError {
 	 * setParentDocGroupId - set the parent doc_group id of this document group.
 	 *
 	 * @param	int	$parentDocGroupId	Parent Doc_group Id.
-	 * @return	boolean	success or not.
+	 * @return	bool	success or not.
 	 * @access	public
 	 */
 	function setParentDocGroupId($parentDocGroupId) {
@@ -774,7 +790,7 @@ class DocumentGroup extends FFError {
 	/**
 	 * sendNotice - Notifies of directory submissions
 	 *
-	 * @param	boolean	$new	true = new directory (default value)
+	 * @param	bool	$new	true = new directory (default value)
 	 * @return	bool
 	 */
 	function sendNotice($new = true) {
@@ -835,8 +851,7 @@ class DocumentGroup extends FFError {
 	 * injectZip - private method to inject a zip archive tree and files
 	 *
 	 * @param	array	$uploadedZip	uploaded zip
-	 * @return	boolean	success or not
-	 * @access	private
+	 * @return	bool	success or not
 	 */
 	private function injectZip($uploadedZip) {
 		$zip = new ZipArchive();
@@ -865,8 +880,7 @@ class DocumentGroup extends FFError {
 	 * injectRar - private method to inject a rar archive tree and files
 	 *
 	 * @param	array	$uploadedRar	uploaded rar
-	 * @return	boolean	success or not
-	 * @access	private
+	 * @return	bool	success or not
 	 */
 	private function injectRar($uploadedRar) {
 		return true;
@@ -876,8 +890,7 @@ class DocumentGroup extends FFError {
 	 * injectContent - private method to inject a directory tree and files
 	 *
 	 * @param	string	$directory	the directory to inject
-	 * @return	boolean	success or not
-	 * @access	private
+	 * @return	bool	success or not
 	 */
 	private function injectContent($directory) {
 		if (is_dir($directory)) {
@@ -968,9 +981,7 @@ class DocumentGroup extends FFError {
 	 * @param	int	$stateLock	the status to be set
 	 * @param	string	$userid		the lock owner
 	 * @param	int	$thistime	the epoch time
-	 * @internal	param	\The $int status of the lock.
-	 * @internal	param	\The $int userid who set the lock.
-	 * @return	boolean	success or not.
+	 * @return	bool	success or not.
 	 */
 	function setLock($stateLock, $userid = NULL, $thistime = 0) {
 		$colArr = array('locked', 'locked_by', 'lockdate');
@@ -994,8 +1005,7 @@ class DocumentGroup extends FFError {
 	 *
 	 * @param	array	$colArr	the columns to update in array form array('col1', col2')
 	 * @param	int	$valArr	the values to store in array form array('val1', 'val2')
-	 * @return	boolean	success or not
-	 * @access	private
+	 * @return	bool	success or not
 	 */
 	private function setValueinDB($colArr, $valArr) {
 		if ((count($colArr) != count($valArr)) || !count($colArr) || !count($valArr)) {

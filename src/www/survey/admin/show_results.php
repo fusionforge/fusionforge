@@ -132,15 +132,18 @@ $sh->footer();
  * showResult - Get Result from Survey and Question. Pass the result to Show Result HTML class
  *
  *  @param object $SurveyHTML	a survey object
- *  @param object $Question	a question object
- *  @param int    whether print out export(csv) format
+ *  @param object $Survey
+ *  @param object $Question		a question object
+ *  @param int    $show_comment	whether print out export(csv) format
+ *  @param string $q_num
+ *  @param int    $graph
  */
 function showResult(&$SurveyHTML, &$Survey, &$Question, $show_comment=0, $q_num="", $graph=0) {
 	/* Get results */
 	$srf = new SurveyResponseFactory($Survey, $Question);
 	if (!$srf || !is_object($srf)) {
 		echo $HTML->error_msg(_('Error'). ' ' . _('Cannot get Survey Response Factory'));
-	} elseif ( $srf->isError()) {
+	} elseif ($srf->isError()) {
 		echo $HTML->error_msg(_('Error'). $srf->getErrorMessage());
 	} else {
 		/* Show result in HTML*/

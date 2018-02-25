@@ -120,7 +120,7 @@ class Widget_MyTasks extends Widget {
 			}
 			$this->content .= $HTML->listTableBottom();
 		} else {
-			$this->content .= $HTML->warning_msg(_('No task yet'));
+			$this->content .= $HTML->warning_msg(_('No task yet.'));
 		}
 	}
 

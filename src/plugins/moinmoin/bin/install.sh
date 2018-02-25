@@ -13,6 +13,9 @@ case "$1" in
 		chown -R $wsgi_user: $wikidataprefix/$i
 	    fi
 	done
+	if [ -e /etc/centos-release ] ; then
+	    ln -sf /usr/lib/python2.7/site-packages/MoinMoin/web/static/htdocs /usr/share/moin/
+	fi
 	chown $wsgi_user $config_path/config.ini.d/post-install-secrets.ini  # Ewww...
 	if ! [ -e $wikidataprefix/moinmoin.log ] ; then
 	    touch $wikidataprefix/moinmoin.log

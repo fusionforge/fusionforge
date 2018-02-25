@@ -69,12 +69,20 @@ function performAction($newStatus, $statusString, $user_id) {
 
 function show_users_list($users, $filter = '', $sortorder = 'realname', $start, $rows, $paging, $totalUsers) {
 	global $HTML;
-	echo '<p>' ._('Status')._(': ').
-		util_make_link('/admin/userlist.php', _('All')). '
-		<span class="active">'.util_make_link('/admin/userlist.php?status=A&sortorder='.$sortorder,_('Active')). '</span>
-		<span class="deleted">'.util_make_link('/admin/userlist.php?status=D&sortorder='.$sortorder,_('Deleted')).'</span>
-		<span class="suspended">'.util_make_link('/admin/userlist.php?status=S&sortorder='.$sortorder,_('Suspended')).'</span>
-		<span class="pending">'.util_make_link('/admin/userlist.php?status=P&sortorder='.$sortorder,_('(*)Pending')).'</span>'.'</p>';
+	echo '<p>' ._('Status')._(': ');
+	if (!$filter) {
+		echo util_make_link('/admin/userlist.php?sortorder='.$sortorder, _('All'));
+	} else {
+		if (preg_match('/status=/', $filter)) {
+			$filter = preg_replace('/status=.*/','', $filter);
+		}
+		$filter = rtrim($filter, '&');
+		echo util_make_link('/admin/userlist.php?sortorder='.$sortorder.$filter, _('All'));
+	}
+	echo '	<span class="active">'.util_make_link('/admin/userlist.php?status=A&sortorder='.$sortorder.$filter,_('Active')). '</span>
+		<span class="deleted">'.util_make_link('/admin/userlist.php?status=D&sortorder='.$sortorder.$filter,_('Deleted')).'</span>
+		<span class="suspended">'.util_make_link('/admin/userlist.php?status=S&sortorder='.$sortorder.$filter,_('Suspended')).'</span>
+		<span class="pending">'.util_make_link('/admin/userlist.php?status=P&sortorder='.$sortorder.$filter,_('(*)Pending')).'</span>'.'</p>';
 
 	if (!count($users)) {
 		echo $HTML->warning_msg(_('No user found matching selected criteria.'));
@@ -124,33 +132,33 @@ function show_users_list($users, $filter = '', $sortorder = 'realname', $start, 
 		if ($u->getStatus() == 'P') {
 			$cells[] = array($nextcell, 'class' => 'pending');
 		}
-		$cells[] = array(($u->getAddDate() ? date(_('Y-m-d H:i'), $u->getAddDate()) : '-'), 'width' => '15%', 'class' => 'align-center');
+		$cells[] = array(($u->getAddDate() ? date(_('Y-m-d H:i'), $u->getAddDate()) : '-'), 'style' => 'width:15%', 'class' => 'align-center');
 		if ($u->getStatus() != 'D') {
 			$nextcell = util_make_link('/developer/?form_dev='.$u->getID(),_('User Profile'));
 		} else {
-			$nextcell = '<s>'._('User Profile').'</s>';
+			$nextcell = '<span class="strike">'._('User Profile').'</span>';
 		}
-		$cells[] = array($nextcell, 'width' => '15%', 'class' => 'align-center');
+		$cells[] = array($nextcell, 'style' => 'width:15%', 'class' => 'align-center');
 		if ($u->getStatus() != 'A') {
 			$nextcell = util_make_link('/admin/userlist.php?action=activate&user_id='.$u->getID().$filter,_('Activate'));
 		} else {
-			$nextcell = '<s>'._('Activate').'</s>';
+			$nextcell = '<span class="strike">'._('Activate').'</span>';
 		}
-		$cells[] = array($nextcell, 'width' => '15%', 'class' => 'align-center');
+		$cells[] = array($nextcell, 'style' => 'width:15%', 'class' => 'align-center');
 		if ($u->getStatus() != 'D') {
 			$nextcell = util_make_link('/admin/userlist.php?action=delete&user_id='.$u->getID().$filter,_('Delete'));
 		} else {
-			$nextcell = '<s>'._('Delete').'</s>';
+			$nextcell = '<span class="strike">'._('Delete').'</span>';
 		}
-		$cells[] = array($nextcell, 'width' => '15%', 'class' => 'align-center');
+		$cells[] = array($nextcell, 'style' => 'width:15%', 'class' => 'align-center');
 		if ($u->getStatus() != 'S') {
 			$nextcell = util_make_link('/admin/userlist.php?action=suspend&user_id='.$u->getID().$filter,_('Suspend'));
 		} else {
-			$nextcell = '<s>'._('Suspend').'</s>';
+			$nextcell = '<span class="strike">'._('Suspend').'</span>';
 		}
-		$cells[] = array($nextcell, 'width' => '15%', 'class' => 'align-center');
-		$cells[] = array(util_make_link('/admin/passedit.php?user_id='.$u->getID().$filter,_('Change Password')), 'width' => '12%', 'class' => 'align-center');
-		echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($key, true)), $cells);
+		$cells[] = array($nextcell, 'style' => 'width:15%', 'class' => 'align-center');
+		$cells[] = array(util_make_link('/admin/passedit.php?user_id='.$u->getID().$filter,_('Change Password')), 'style' => 'width:12%', 'class' => 'align-center');
+		echo $HTML->multiTableRow(array(), $cells);
 	}
 	echo $HTML->listTableBottom();
 	echo $HTML->paging_bottom($start, $paging, $totalUsers, '/admin/userlist.php?sortorder='.$sortorder.$filter);
@@ -203,41 +211,30 @@ if ($usingplugin) {
 	show_users_list(util_result_column_to_array($res, 0), '', 'realname', $start, $max, $paging, $totalUsers);
 
 } elseif (!$group_id) {
+	$filter = '';
 	$user_name_search = getStringFromRequest('user_name_search');
 	$sort_order = getStringFromRequest('sortorder', 'realname');
-	util_ensure_value_in_set($sort_order,
-				array('realname','user_name','lastname','firstname','user_id','status','add_date'));
+	util_ensure_value_in_set($sort_order, array('realname','user_name','lastname','firstname','user_id','status','add_date'));
 
+	$qpa = db_construct_qpa(false, 'SELECT user_id FROM users WHERE users.user_id != 100');
 	if ($user_name_search) {
-		$res = db_query_params('SELECT user_id FROM users WHERE lower(user_name) LIKE $1 OR lower(lastname) LIKE $1 and users.user_id != 100 ORDER BY '.$sort_order.' LIMIT $2 OFFSET $3',
-					array(strtolower("$user_name_search%"), $paging, $start));
-		$list_id = util_result_column_to_array($res, 0);
+		$qpa = db_construct_qpa($qpa, ' AND (lower(user_name) LIKE $1 OR lower(lastname) LIKE $1)', array(strtolower("$user_name_search%")));
 		$msg = sprintf(_('User list beginning with “%s” for all projects'), $user_name_search);
+		$filter .= '&user_name_search='.$user_name_search;
 	} else {
 		$msg = _('User list for all projects');
 	}
+	if ($status && in_array($status, array('D', 'A', 'S', 'P'))) {
+		$qpa = db_construct_qpa($qpa, ' AND status = $1', array($status));
+		$filter .= '&status='.$status;
+	}
+	$qpa = db_construct_qpa($qpa, ' ORDER BY $1', array($sort_order));
+	$res = db_query_qpa($qpa, $paging, $start);
+	$list_id = util_result_column_to_array($res, 0);
 	echo html_e('h2', array(), $msg);
 
-	if ($status) {
-		$res = db_query_params('SELECT user_id FROM users WHERE status = $1 and users.user_id != 100 ORDER BY '.$sort_order.' LIMIT $2 OFFSET $3',
-					   array($status, $paging, $start));
-		if (isset($list_id)) {
-			$list_id = array_merge($list_id, util_result_column_to_array($res, 0));
-		}
-		else {
-			$list_id = util_result_column_to_array($res, 0);
-		}
-	}
-	if (! isset($list_id)) {
-		$res = db_query_params('SELECT user_id FROM users where users.user_id != 100 ORDER BY '.$sort_order.' LIMIT $1 OFFSET $2',
-				array($paging, $start));
-		$list_id = util_result_column_to_array($res, 0);
-	}
-	$filter='';
-	if (in_array($status,array('D','A','S','P'))) {
-		$filter = '&status='.$status;
-	}
-	$totalUsers = FusionForge::getInstance()->getNumberOfUsers($status);
+	$params = array('status' => $status, 'user_name_search' => $user_name_search);
+	$totalUsers = FusionForge::getInstance()->getNumberOfUsersByStatusAndName($params);
 	$max = ($totalUsers > ($start + $paging)) ? ($start + $paging) : $totalUsers;
 	show_users_list($list_id, $filter, $sort_order, $start, $max, $paging, $totalUsers);
 } else {
@@ -261,8 +258,7 @@ if ($usingplugin) {
 		$filter = '&group_id='.$group_id;
 		$max = ($totalUsers > ($start + $paging)) ? ($start + $paging) : $totalUsers;
 		show_users_list($users_id, $filter, $sort_order, $start, $max, $paging, $totalUsers);
-	}
-	else {
+	} else {
 		echo $HTML->information(_('No user in this project'));
 	}
 }

@@ -46,7 +46,7 @@ class scmgit_Widget_MyRepositories extends Widget {
 		$scmgitplugin = plugin_get_object('scmgit');
 		$GitRepositories = $this->getMyRepositoriesList($scmgitplugin);
 		if (count($GitRepositories)) {
-			$returnhtml = $HTML->listTableTop(array());
+			$returnhtml = $HTML->listTableTop();
 			foreach ($GitRepositories as $GitRepository) {
 				$project = group_get_object($GitRepository);
 				$cells = array();
@@ -57,7 +57,7 @@ class scmgit_Widget_MyRepositories extends Widget {
 			$returnhtml .= $HTML->listTableBottom();
 			return $returnhtml;
 		} else {
-			return $HTML->information(_('No personal git repository'));
+			return $HTML->warning_msg(_('No personal git repository.'));
 		}
 	}
 

@@ -2,7 +2,7 @@
 /**
  * webanalyticsPlugin Global Configuration View
  *
- * Copyright 2012, 2014, Franck Villaume - TrivialDev
+ * Copyright 2012,2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -31,7 +31,7 @@ if (sizeof($linksArray)) {
 	echo $HTML->boxTop(_('Manage available links'));
 	$tabletop = array(_('Name'), _('Standard JavaScript Tracking code'), _('Is Active'), _('Actions'));
 	$classth = array('','','','unsortable');
-	echo $HTML->listTableTop($tabletop, false, 'sortable_webanalytics_listlinks', 'sortable', $classth);
+	echo $HTML->listTableTop($tabletop, array(), 'sortable_webanalytics_listlinks', 'sortable', $classth);
 	foreach ($linksArray as $link) {
 		$cells = array();
 		$cells[][] = htmlentities($link['name']);
@@ -43,8 +43,8 @@ if (sizeof($linksArray)) {
 			$cells[][] = html_image('docman/delete-directory.png', 22, 22, array('alt'=>_('link is off'), 'title'=>_('link is off')));
 			$nextcell = util_make_link('/plugins/'.$webanalytics->name.'/?type=globaladmin&action=updateLinkStatus&linkid='.$link['id_webanalytics'].'&linkstatus=1', html_image('docman/reserve-document.png', 22, 22, array('alt'=>_('Activate this link'))), array('title' => _('Activate this link')));
 		}
-		$nextcell .= util_make_link('/plugins/'.$webanalytics->name.'/?type=globaladmin&view=updateLinkValue&linkid='.$link['id_webanalytics'], html_image('docman/edit-file.png',22,22, array('alt'=>_('Edit this link'))), array('title' => _('Edit this link')));
-		$nextcell .= util_make_link('/plugins/'.$webanalytics->name.'/?type=globaladmin&action=deleteLink&linkid='.$link['id_webanalytics'], $HTML->getDeletePic('', '', array('alt' => _('Delete this link'), 'title' => _('Delete this link'))));
+		$nextcell .= util_make_link('/plugins/'.$webanalytics->name.'/?type=globaladmin&view=updateLinkValue&linkid='.$link['id_webanalytics'], $HTML->getEditFilePic(_('Edit this link'), _('Edit this link')));
+		$nextcell .= util_make_link('/plugins/'.$webanalytics->name.'/?type=globaladmin&action=deleteLink&linkid='.$link['id_webanalytics'], $HTML->getDeletePic(_('Delete this link'), _('Delete this link')));
 		$cells[][] = $nextcell;
 		echo $HTML->multiTableRow(array(), $cells);
 	}
@@ -53,7 +53,7 @@ if (sizeof($linksArray)) {
 	echo html_e('br');
 }
 
-echo $HTML->openForm(array('method' => 'POST', 'name' => 'addLink', 'action' => util_make_uri('/plugins/'.$webanalytics->name.'/?type=globaladmin&action=addLink')));
+echo $HTML->openForm(array('method' => 'post', 'name' => 'addLink', 'action' => '/plugins/'.$webanalytics->name.'/?type=globaladmin&action=addLink'));
 echo $HTML->boxTop(_('Add a new webanalytics reference'));
 echo $HTML->listTableTop();
 $cells = array();
@@ -62,7 +62,7 @@ $cells[][] = html_e('input', array('name' => 'name', 'type' => 'text', 'maxsize'
 echo $HTML->multiTableRow(array(), $cells);
 $cells = array();
 $cells[] = array(_('Standard JavaScript Tracking code').utils_requiredField()._(':'), 'style' => 'text-align:right');
-$cells[][] = html_e('textarea', array('name' => 'link', 'rows' => 15, 'cols' => 70, 'required' => 'required', 'placeholder' => _('Just paste your code here...')), '', false);
+$cells[][] = html_e('textarea', array('name' => 'link', 'rows' => 15, 'cols' => 70, 'style' => 'width: 100%; box-sizing: border-box;', 'required' => 'required', 'placeholder' => _('Just paste your code here...')), '', false);
 echo $HTML->multiTableRow(array(), $cells);
 $cells = array();
 $cells[] = array(html_e('input', array('type' => 'submit', 'value' => _('Add'))), 'colspan' => 2);

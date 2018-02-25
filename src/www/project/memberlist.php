@@ -75,7 +75,7 @@ foreach ($members as $user) {
 		$content .= $user->getRealName();
 	}
 	$cells[][] = html_e('div', array('about' => $member_uri, 'typeof' => 'sioc:UserAccount'), $content);
-	$cells[][] = util_display_user($user->getUnixName(),$user->getID(),$user->getUnixName(), 's');
+	$cells[][] = util_display_user($user->getUnixName(), $user->getID(), $user->getRealName(), 's');
 
 	$roles = RBACEngine::getInstance()->getAvailableRolesForUser ($user) ;
 	sortRoleList ($roles) ;
@@ -90,7 +90,7 @@ foreach ($members as $user) {
 	if (forge_get_config('use_people')) {
 		$cells[] = array(util_make_link('/people/viewprofile.php?user_id='.$user->getID(), _('View')), 'class' => 'align-center');
 	}
-	echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i++, true)), $cells);
+	echo $HTML->multiTableRow(array(), $cells);
 }
 // end of community member description block
 echo $HTML->listTableBottom();

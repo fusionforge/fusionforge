@@ -21,17 +21,17 @@
 source_path=$(forge_get_config source_path)
 
 case "$1" in
-    configure)
-	$(dirname $0)/upgrade-conf.sh $2
-	$source_path/post-install.d/db/server.sh configure
-	$source_path/post-install.d/db/populate.sh
-	;;
-    remove)
-	$source_path/post-install.d/db/server.sh remove
-	;;
-    # no purge) because we don't want to remove *data* (not conf) automatically
-    *)
-	echo "Usage: $0 {configure|remove}"
-	exit 1
-	;;
+	configure)
+		$(dirname $0)/upgrade-conf.sh $2
+		$source_path/post-install.d/db/server.sh configure
+		$source_path/post-install.d/db/populate.sh
+		;;
+	remove)
+		$source_path/post-install.d/db/server.sh remove
+		;;
+	# no purge) because we don't want to remove *data* (not conf) automatically
+	*)
+		echo "Usage: $0 {configure|remove}"
+		exit 1
+		;;
 esac

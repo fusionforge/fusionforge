@@ -30,6 +30,14 @@
  * tooling library
  */
 
+/**
+ * doc_get_state_box
+ *
+ * @param string $checkedval
+ * @param array $removedval
+ * @return string
+ */
+
 function doc_get_state_box($checkedval = 'xzxz', $removedval = array()) {
 	if (count($removedval)) {
 		//TODO: find an easier way to get != ANY($1)
@@ -48,7 +56,7 @@ function doc_get_state_box($checkedval = 'xzxz', $removedval = array()) {
  * @param	object	$document_factory
  * @param	int	$docgroup id : default value = 0
  * @param	string	$parent_docname parent name : default value = empty
- * @return	boolean	success or not
+ * @return	bool	success or not
  * @access	public
  */
 function docman_fill_zip($zip, $nested_groups, $document_factory, $docgroup = 0, $parent_docname = '') {

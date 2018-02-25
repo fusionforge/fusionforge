@@ -1,5 +1,6 @@
 <?php
 /**
+ * Projects Hierarchy Plugin
  *
  * Copyright 2006 (c) Fabien Regnier - Sogeti
  * http://fusionforge.org
@@ -27,8 +28,3 @@ require_once $gfplugins.'projects-hierarchy/common/projects-hierarchyPlugin.clas
 $projects_hierarchyPluginObject = new projects_hierarchyPlugin;
 
 register_plugin($projects_hierarchyPluginObject);
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:

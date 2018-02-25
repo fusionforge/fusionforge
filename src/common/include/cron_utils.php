@@ -47,6 +47,7 @@ $cron_arr = array(
 	'SCM_REPO' => 'scm/create_scm_repos.php',  # 27
 	28 => 'scm/gather_scm_stats.php',
 	'WEB_VHOSTS' => 'web-vhosts/create_vhosts.php',  # 30
+	'FTP_ACCESS' => 'ftp/ftp_create_group_access.php'  #31
 	);
 
 #	 13 => 'cvs.php',
@@ -117,7 +118,11 @@ function cron_reload_nscd() {
 }
 
 function cron_reload_apache() {
-        system("service apache2 reload || service httpd reload >/dev/null 2>&1");
+	if (forge_get_config('is_docker')) {
+		system('killall httpd >/dev/null 2>&1');
+	} else {
+		system("service apache2 reload || service httpd reload >/dev/null 2>&1");
+	}
 }
 
 function cron_regen_apache_auth() {

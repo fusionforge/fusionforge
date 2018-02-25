@@ -2,7 +2,7 @@
 /**
  * Copyright (C) 2008-2009 Alcatel-Lucent
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012,2014,2015, Franck Villaume - TrivialDev
+ * Copyright 2012,2014-2015,2017, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -45,6 +45,7 @@
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'include/trove.php';
+require_once $gfwww.'people/people_utils.php';
 
 if (!forge_get_config('use_project_full_list')) {
 	exit_disabled();
@@ -84,7 +85,7 @@ if ($start < 0) {
 $HTML->header(array('title'=>_('Project List'),'pagename'=>'softwaremap'));
 $HTML->printSoftwareMapLinks();
 
-$nbProjects = FusionForge::getInstance()->getNumberOfProjects(array('status' => 'A', 'type_id' => 1, 'is_template' => 0), 'register_time > 0 AND group_id in (select ref_id FROM pfo_role_setting WHERE section_name = \'project_read\' and perm_val = 1 and role_id IN ('.$role_id.'))');
+$nbProjects = FusionForge::getInstance()->getNumberOfProjects(array('status' => 'A', 'is_template' => 0), 'register_time > 0 AND group_id in (select ref_id FROM pfo_role_setting WHERE section_name = \'project_read\' and perm_val = 1 and role_id IN ('.$role_id.'))');
 
 $projects = group_get_public_active_projects_asc($paging, $start);
 
@@ -103,32 +104,55 @@ for ($i_proj = 0; $i_proj < count($projects); $i_proj++) {
 	echo html_ao('div', array('typeof' => 'doap:Project sioc:Space', 'about' => $proj_uri));
 	echo html_e('span', array('rel' => 'planetforge:hosted_by', 'resource' => util_make_url('/')), '', false);
 
-	echo $HTML->listTableTop();
+	echo $HTML->listTableTop(array(), array(), 'full');
 	$cells = array();
-	$content = util_make_link_g(strtolower($row_grp['unix_group_name']),$row_grp['group_id'],'<strong>'
-		.'<span property="doap:name">'
-		.$row_grp['group_name']
-		.'</span>'
-		.'</strong>').' ';
+	$content = util_make_link ('/projects/'. strtolower($row_grp['unix_group_name']).'/',
+				'<strong>'.html_e('span', array('property' => 'doap:name'), $row_grp['group_name']).'</strong> ');
 	if ($row_grp['short_description']) {
-		$content .= '- '
-		. '<span property="doap:short_desc">'
-		. $row_grp['short_description']
-		. '</span>';
+		$content .= "- " . html_e('span', array('property' => 'doap:short_desc'), $row_grp['short_description']);
 	}
-	$cells[] = array($content, 'colspan' => 2);
-	echo $HTML->multiTableRow(array('class' => 'top'), $cells);
-	$cells = array();
-	$content = '';
-	// list all trove categories
 	if (forge_get_config('use_trove')) {
-		$content .= trove_getcatlisting($row_grp['group_id'], 0, 1, 1);
+		$cells[] = array($content, 'colspan' => 2);
+	} else {
+		$cells[][] = $content;
 	}
-	$cells[] = array($content, 'class' => 'top');
-	$cells[] = array(html_e('br')._('Register Date')._(': ').html_e('strong', array(), date(_('Y-m-d H:i'),$row_grp['register_time'])),
-			'class' => 'bottom align-right');
 	echo $HTML->multiTableRow(array('class' => 'top'), $cells);
+	// extra description
+	if (forge_get_config('use_project_tags')) {
+		$cells = array();
+		if (forge_get_config('use_trove')) {
+			$cells[] = array(_('Tags') . _(': ') . list_project_tag($row_grp['group_id']), 'colspan' => 2);
+		} else {
+			$cells[][] = _('Tags') . _(': ') . list_project_tag($row_grp['group_id']);
+		}
+		echo $HTML->multiTableRow(array('class' => 'top'), $cells);
+	}
+	$cells = array();
+	if (forge_get_config('use_trove')) {
+		$cells[][] = trove_getcatlisting($row_grp['group_id'], 0, 1, 1);
+	}
+	$res = db_query_params('SELECT percentile, ranking FROM project_weekly_metric WHERE group_id = $1', array($row_grp['group_id']));
+	$nb_line = db_numrows($res);
+	if ($nb_line) {
+		$percentile = html_e('strong', array(), sprintf('%3.0f', number_format(db_result($res, 0, 'percentile'))));
+		$ranking = html_e('strong', array(), sprintf('%d', number_format(db_result($res, 0, 'ranking'))));
+	} else {
+		$percentile = _('N/A');
+		$ranking = _('N/A');
+	}
+	$content = html_e('br')._('Activity Percentile')._(': ').$percentile;
+	$content .= html_e('br')._('Activity Ranking')._(': ').$ranking;
+	$content .= html_e('br').sprintf(_('Registered') . _(': '));
+	$content .= html_e('strong', array(), date(_('Y-m-d H:i'),$row_grp['register_time']));
+	$cells[] = array($content, 'class' => 'align-right');
+	echo $HTML->multiTableRow(array('class' => 'top'), $cells);
+	if (forge_get_config('use_people') && people_group_has_job($row_grp['group_id'])) {
+		$cells = array();
+		$cells[] = array(util_make_link('/people/?group_id='.$row_grp['group_id'],_('[This project needs help]')), 'colspan' => 2, 'class' => 'align-center');
+		echo $HTML->multiTableRow(array('class' => 'top'), $cells);
+	}
 	echo $HTML->listTableBottom();
+
 	echo html_ac(html_ap() -1);
 	echo html_e('hr');
 }

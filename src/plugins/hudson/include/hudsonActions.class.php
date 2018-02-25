@@ -28,8 +28,8 @@ require_once 'PluginHudsonJobDao.class.php';
  */
 class hudsonActions extends Actions {
 
-	function hudsonActions(&$controler, $view=null) {
-		$this->Actions($controler);
+	function __construct(&$controler, $view=null) {
+		parent::__construct($controler);
 	}
 
 	function addJob() {

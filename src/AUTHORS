@@ -2,7 +2,6 @@
 # FusionForge
 # http://fusionforge.org
 #
-#
 
 The FusionForge codebase was developed for many years in the frame of
 the GForge project (until 2009), then in the FusionForge project since
@@ -15,32 +14,67 @@ of each files.
 The new FusionForge Team
 ----------------------------------------------------------------------------
 
-TODO: name all contributors to FusionForge. The list below was
-mostly extracted from the SVN stats.
+The almost complete list of contributors. If your name is missing, please contact us.
+List generated from the Git repositories
 
-Patrick Apel
+Alain Peyrat
+Alan Raison
+Alexandre Neymann
+Andy Parkins
+Antoine Mercadal
+Benoit Debaenst
+Chris Hiestand
 Christian Bayle
-Mélanie Le Bail
-Olivier Berger
+Dan McGee
+Denis Cheng
+Felipe Contreras
+Francisco Gimeno
+Franck Villaume
+Gerrit Pape
 Gonéri Le Bouder
 Grégory Cuellar
-Francisco Gimeno
-Thorsten Glaser
-Julien Heyman
-Ognyan Kulev
-Pierre Lacoste
-Olaf Lenz
-Roland Mas
-Olivier Meunier
-Alexandre Neymann
-Mathieu Peltier
-Alain Peyrat
-Philip Schwartz
 Guillaume Smet
+Jeff Muizelaar
+Jim Meyering
+Jonathan Nieder
+Jon Jensen
+Jose Angel Diaz Diaz
+Julien Heyman
+Junio C Hamano
+Kevin P. Fleming
+Laurent Huet
+Madhumita Dhar
+Marc-Etienne Vargenau
+Matthieu Faure
+Matthieu Imbert
+Matthieu Moy
+Mathieu Peltier
+Mélanie Le Bail
+Michael Haggerty
+Ognyan Kulev
+Olaf Lenz
+Olivier Berger
+Olivier Meunier
+Patrick Apel
+Pat Notz
+Pete Harlan
+Philip Schwartz
+Pierre Lacoste
+P. Keidel
+Ralf Habacker
 Reinhard Spisser
-Franck Villaume
+Richard Fearn
+Robert Schiele
+Roland Mas
+Sabri Labbene
+Shawn O. Pearce
+Sitaram Chamarty
+Stéphane-Eymeric Bredthauer
 Sylvain Beucler
-
+Thorsten Glaser
+Tim Perdue
+Vincent Dravert
+Vitaliy Pylypiv
 
 See also AUTHORS.gforge and AUTHORS.sourceforge for prior contributors.
 

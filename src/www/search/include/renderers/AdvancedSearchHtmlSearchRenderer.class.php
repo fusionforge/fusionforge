@@ -45,7 +45,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	/**
 	 * flag to define whether the result must contain all words or only one of them
 	 *
-	 * @var boolean $isExact
+	 * @var bool $isExact
 	 */
 	var $isExact;
 
@@ -59,7 +59,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	/**
 	 * @param string $words words we are searching for
 	 * @param int $offset offset
-	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
+	 * @param bool $isExact if we want to search for all the words or if only one matching the query is sufficient
 	 * @param int $groupId group id
 	 */
 	function __construct($words, $offset, $isExact, $groupId) {
@@ -93,8 +93,10 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 
 	/**
 	 * writeBody - write the Body of the output
+	 *
+	 * @param bool $withpanel
 	 */
-	function writeBody() {
+	function writeBody($withpanel = true) {
 		global $HTML;
 		if (strlen($this->words) < 3) {
 			echo $HTML->error_msg(_('Error') . _(': ') . _('Search must be at least three characters'));
@@ -190,20 +192,20 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 
 		$result .= '<h2><a name="'.$section.'"></a>'.$title.'</h2>';
 
-		$result = $renderer->searchQuery->getData($renderer->searchQuery->getRowsPerPage(),$renderer->searchQuery->getOffset());
+		$res = $renderer->searchQuery->getData($renderer->searchQuery->getRowsPerPage(),$renderer->searchQuery->getOffset());
 
-		if (count($result) > 0) {
+		if (count($res) > 0) {
 			if ($renderer->searchQuery->getRowsTotalCount() >= $renderer->searchQuery->getRowsPerPage())
 				$result .= '<i>' . sprintf(_('Note: only the first %d results for this category are displayed.'), $renderer->searchQuery->getRowsPerPage()) . '</i>';
 			$result .= $HTML->listTabletop($renderer->tableHeaders);
 			$result .= $renderer->getRows();
 			$result .= $HTML->listTableBottom();
 		} elseif(method_exists($renderer, 'getSections') && (count($renderer->getSections($this->groupId)) == 0)) {
-			$result .= '<p>'.sprintf(_('No matches found for “%s”'), $this->words);
+			$result .= '<p>'.sprintf(_('No matches found for “%s”'), stripslashes(htmlspecialchars($this->words)));
 			$result .= _(' - ');
 			$result .= _('No sections available (check your permissions)').'</p>';
 		} else {
-			$result .= '<p>'.sprintf(_('No matches found for “%s”'), $this->words).'</p>';
+			$result .= '<p>'.sprintf(_('No matches found for “%s”'), stripslashes(htmlspecialchars($this->words))).'</p>';
 		}
 		return $result;
 	}
@@ -285,9 +287,10 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	}
 
 	/**
-	* handleTransferInformation - marks parentsections if child is marked and processes cookie information
-	*
-	*/
+	 * handleTransferInformation - marks parentsections if child is marked and processes cookie information
+	 *
+	 * @param array $sectionarray
+	 */
 	function handleTransferInformation(&$sectionarray) {
 		//get through all sections
 		//if a childsection is marked to search in, mark the parent too
@@ -331,13 +334,13 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	}
 
 	function getAdvancedSearchBox($sectionsArray, $group_id, $words, $isExact) {
+		global $HTML;
 		$res = '';
 		// display the searchmask
-		$res .= '
-			<form class="ff" name="advancedsearch" action="'.getStringFromServer('PHP_SELF').'" method="post">
-			<input class="ff" type="hidden" name="search" value="1"/>
+		$res .= $HTML->openForm(array('class' => 'ff', 'name' => 'advancedsearch', 'action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
+		$res .= '<input class="ff" type="hidden" name="search" value="1"/>
 			<input class="ff" type="hidden" name="group_id" value="'.$group_id.'"/>
-			<div align="center"><br />
+			<div align="center">
 			<table id="advsearchinput">
 				<tr class="ff">
 				<td class="ff" colspan ="2">
@@ -355,9 +358,8 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 				</tr>
 			</table><br />'
 			. $this->createSubSections($sectionsArray) .'
-			</div>
-		</form>
-		';
+			</div>';
+		$res .= $HTML->closeForm();
 
 		// Add jquery javascript method for select none/all
 		$res .= <<< EOS
@@ -395,7 +397,7 @@ EOS;
  		$countCol = 1;
 
 		$return = '
-			<table cellspacing="10" cellpadding="1" id="advsearch">
+			<table id="advsearch">
 				<tr class="tablecontent">
 					<td colspan="3" class="align-center">
 						<input type="checkbox" class="checkthemall" />'._('Search All').'
@@ -403,6 +405,7 @@ EOS;
 				</tr>
 				<tr class="top tablecontent">
 					<td>';
+		$i = 0;
 		foreach($sectionsArray as $key => $section) {
 			$oldcountlines = $countLines;
 			if (is_array($section)) {
@@ -411,7 +414,7 @@ EOS;
 				$countLines += 3;
 			}
 
-			if ($countLines >= $break) {
+			if ($countLines >= $break && $i) {
  				// if we are closer to the limit with this one included, then
  				// it's better to include it.
  				if (($countCol < $maxCol) && ($countLines - $break) >= ($break - $oldcountlines)) {
@@ -448,10 +451,11 @@ EOS;
 
 			if ($countLines >= $break) {
 				if (($countLines - $break) < ($break - $countLines)) {
-					$return .= '</td><td width="33%">';
+					$return .= '</td><td style="width: 33%">';
 					$break += $breakLimit;
 				}
 			}
+			$i++;
 		}
 
 		return $return.'		</td>

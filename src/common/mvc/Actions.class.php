@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Copyright 2005, STMicroelectronics
  *
  * Originally written by Manuel Vacelet
@@ -32,22 +32,23 @@
  */
 class Actions {
 
-    var $_controler;
-    function Actions(&$controler) {
-        $this->_controler =& $controler;
-    }
+	var $_controler;
 
-    function getControler() {
-        return $this->_controler;
-    }
+	function __construct(&$controler) {
+		$this->_controler =& $controler;
+	}
 
-  function check() {
-    return true;
-  }
+	function getControler() {
+		return $this->_controler;
+	}
 
-  function process($action, $params = array()) {
-    if($this->check()) {
-      $this->$action($params);
-    }
-  }
+	function check() {
+		return true;
+	}
+
+	function process($action, $params = array()) {
+		if($this->check()) {
+			$this->$action($params);
+		}
+	}
 }

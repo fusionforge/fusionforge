@@ -5,6 +5,7 @@
  * Copyright 1999-2000, Tim Perdue/Sourceforge
  * Copyright 2002, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
+ * Copyright 2017, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -42,12 +43,13 @@ class ForumFactory extends FFError {
 	var $forums;
 
 	/**
-	 * @param	object	$Group	The Group object to which this forum is associated.
+	 * @param	object $Group The Group object to which this forum is associated.
+	 * @param	bool $skip_check
 	 */
 	function __construct(&$Group, $skip_check=false) {
 		parent::__construct();
 		if (!$Group || !is_object($Group)) {
-			$this->setError(_('No Valid Group Object'));
+			$this->setError(_('Invalid Project'));
 			return;
 		}
 		if ($Group->isError()) {
@@ -131,33 +133,38 @@ class ForumFactory extends FFError {
 	 * @return	array	The array of Forum objects.
 	 */
 	function &getForumsAdmin() {
-		if ($this->forums) {
-			return $this->forums;
-		}
-
 		if (session_loggedin()) {
 			if (!forge_check_perm ('forum_admin', $this->Group->getID())) {
-				$this->setError(_("You don't have a permission to access this page"));
+				$this->setError(_('You are not allowed to access this page'));
 				$this->forums = false;
 			} else {
+				if ($this->forums) {
+					return $this->forums;
+				}
 				$result = db_query_params('SELECT * FROM forum_group_list_vw
 							WHERE group_id=$1
 							ORDER BY group_forum_id',
 							array($this->Group->getID())) ;
 			}
 		} else {
-			$this->setError(_("You don't have a permission to access this page"));
+			$this->setError(_('You are not allowed to access this page'));
 			$this->forums = false;
 		}
 
-		$rows = db_numrows($result);
-
-		if (!$result || ($rows < 1)) {
-			$this->setError(_('Forum not found')._(': ').db_error());
-			$this->forums = false;
-		} else {
-			while ($arr = db_fetch_array($result)) {
-				$this->forums[] = new Forum($this->Group, $arr['group_forum_id'], $arr);
+		if (isset($result)) {
+			if (!$result) {
+				$this->setError(db_error());
+				$this->forums = false;
+			} else {
+				$rows = db_numrows($result);
+				if ($rows <= 0) {
+					$this->setError(_('No forums found.'));	
+					$this->forums = false;
+				} else {
+					while ($arr = db_fetch_array($result)) {
+						$this->forums[] = new Forum($this->Group, $arr['group_forum_id'], $arr);
+					}
+				}
 			}
 		}
 		return $this->forums;
@@ -169,13 +176,10 @@ class ForumFactory extends FFError {
 	 * @param	$group_forum_id
 	 * @param	$thread_id
 	 * @param	bool $old_forum_id
-	 * @internal	param \The $string forum ID
-	 * @internal	param \The $int thread_id of the tread to change.
-	 * @internal	param \The $string old forum ID
 	 *
 	 * Note: old forum ID is useless if forum_agg_msg_count table is no longer used
 	 *
-	 * @return boolean success.
+	 * @return bool success.
 	 */
 	function moveThread($group_forum_id,$thread_id,$old_forum_id = false) {
 		$res = db_query_params('UPDATE forum SET group_forum_id=$1 WHERE thread_id=$2',

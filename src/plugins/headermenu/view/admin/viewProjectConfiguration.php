@@ -2,7 +2,7 @@
 /**
  * headermenu : viewProjectConfiguration page
  *
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -53,7 +53,7 @@ if (sizeof($linksArray)) {
 	echo $HTML->information(_('You can reorder tabs, just drag & drop rows in the table below and save order. Please note that those extra tabs can only appear after the standard tabs. And you can only move them inside the set of extra tabs.'));
 	$tabletop = array(_('Order'), _('Tab Type'), _('Displayed Name'), _('Description'), _('Status'), _('Actions'));
 	$classth = array('', '', '', '', '', 'unsortable');
-	echo $HTML->listTableTop($tabletop, false, 'sortable_headermenu_listlinks', 'sortable', $classth);
+	echo $HTML->listTableTop($tabletop, array(), 'sortable_headermenu_listlinks', 'sortable', $classth);
 	foreach ($linksArray as $link) {
 		$cells = array();
 		$cells[] = array($link['ordering'], 'class' => 'align-center');
@@ -76,8 +76,8 @@ if (sizeof($linksArray)) {
 			$cells[][] = $HTML->getRemovePic('', '', array('alt'=>_('link is off'), 'title'=>_('link is off')));
 			$actionsLinks = util_make_link('/plugins/'.$headermenu->name.'?type=projectadmin&group_id='.$group_id.'&action=updateLinkStatus&linkid='.$link['id_headermenu'].'&linkstatus=1', html_image('docman/reserve-document.png', 22, 22, array('alt'=>_('Activate this link'))), array('title' => _('Activate this link')));
 		}
-		$actionsLinks .= util_make_link('/plugins/'.$headermenu->name.'?type=projectadmin&group_id='.$group_id.'&view=updateLinkValue&linkid='.$link['id_headermenu'], html_image('docman/edit-file.png',22,22, array('alt'=>_('Edit this link'))), array('title' => _('Edit this link')));
-		$actionsLinks .= util_make_link('/plugins/'.$headermenu->name.'?type=projectadmin&group_id='.$group_id.'&action=deleteLink&linkid='.$link['id_headermenu'], html_image('docman/trash-empty.png',22,22, array('alt'=>_('Delete this link'))), array('title' => _('Delete this link')));
+		$actionsLinks .= util_make_link('/plugins/'.$headermenu->name.'?type=projectadmin&group_id='.$group_id.'&view=updateLinkValue&linkid='.$link['id_headermenu'], $HTML->getEditFilePic(_('Edit this link'), 'editdocument'), array('title' => _('Edit this link')));
+		$actionsLinks .= util_make_link('/plugins/'.$headermenu->name.'?type=projectadmin&group_id='.$group_id.'&action=deleteLink&linkid='.$link['id_headermenu'], $HTML->getDeletePic(_('Delete this link'), 'trashdir'), array('title' => _('Delete this link')));
 		$cells[][] = $actionsLinks;
 		echo $HTML->multiTableRow(array('id' => $link['id_headermenu']), $cells);
 	}
@@ -88,7 +88,7 @@ if (sizeof($linksArray)) {
 
 echo html_e('h2', array(), _('Add new tab'));
 echo $HTML->information(_('You can add your own tabs in the menu bar with the form below.'));
-echo $HTML->openForm(array('method' => 'POST', 'name' => 'addLink', 'action' => util_make_uri('/plugins/'.$headermenu->name.'/?type=projectadmin&group_id='.$group_id.'&action=addLink')));
+echo $HTML->openForm(array('method' => 'POST', 'name' => 'addLink', 'action' => '/plugins/'.$headermenu->name.'/?type=projectadmin&group_id='.$group_id.'&action=addLink'));
 echo $HTML->listTableTop();
 $cells = array();
 $cells[] = array(_('Displayed Name').utils_requiredField()._(':'), 'style' => 'text-align:right');

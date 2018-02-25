@@ -72,7 +72,7 @@ if (!$res_new || db_numrows($res_new) < 1) {
 
 	$i = 0;
 	while (($i < 20) && ($row_new = db_fetch_array($res_new))) {
-		if (forge_check_perm('frs', $row_new['group_id'], 'read_public')) {
+		if (forge_check_perm('frs', $row_new['package_id'], 'read')) {
 			$i++;
 			$rows[] = $row_new;
 		}
@@ -81,50 +81,49 @@ if (!$res_new || db_numrows($res_new) < 1) {
 	print '
 		<table class="fullwidth">';
 	$seen = array();
-	$i = 0;
 	foreach ($rows as $row_new) {
 		// avoid duplicates of different file types
 		if (!isset($seen[$row_new['group_id']])) {
 			print '
-			<tr valign="top">
-				<td colspan="2">'.
-				util_make_link_g ($row_new['unix_group_name'],$row_new['group_id'],'<strong>'.$row_new['group_name'].'</strong>').'
-				</td>
-				<td nowrap="nowrap"><em>'._('Released by:').
-				util_make_link_u ($row_new['user_name'],$row_new['user_id'],$row_new['user_name']).'</em>
-				</td>
-			</tr>
-			<tr>
-				<td>'._('Module:').' '.$row_new['module_name'].'
-				</td>
-				<td>'._('Version')._(': ').$row_new['release_version'].'
-				</td>
-				<td>'.date("M d, h:iA",$row_new['release_date']).'
-				</td>
-			</tr>
-			<tr valign="top">
-				<td colspan="2">&nbsp;<br />';
-		if ($row_new['short_description']) {
-			print '<em>'.$row_new['short_description'].'</em>';
-		} else {
-			print '<em>'._('This project has not submitted a description').'</em>';
-		}
-		print '
-				</td>
-				<td></td>
-			</tr>
-			<tr>
-				<td colspan="3">';
-				// link to whole file list for downloads
-				print '&nbsp;<br />'.
-				util_make_link ('/frs/?group_id='.$row_new['group_id'].'&release_id='.$row_new['release_id'],_('Download')).
-				' ('._('Project Total:') .$row_new['downloads'].') | ';
-				// notes for this release
-				print util_make_link ('/frs/?view=shownotes&group_id='.$row_new['group_id'].'&release_id='.$row_new['release_id'],_('Notes and Changes')).'
-				<hr />
-				</td>
-			</tr>';
-		$seen[$row_new['group_id']] = 1;
+				<tr class="top">
+					<td colspan="2">'.
+					util_make_link_g ($row_new['unix_group_name'],$row_new['group_id'],'<strong>'.$row_new['group_name'].'</strong>').'
+					</td>
+					<td nowrap="nowrap"><em>'._('Released by')._(': ').
+					util_make_link_u ($row_new['user_name'],$row_new['user_id'],$row_new['user_name']).'</em>
+					</td>
+				</tr>
+				<tr>
+					<td>'._('Module')._(': ').$row_new['module_name'].'
+					</td>
+					<td>'._('Version')._(': ').$row_new['release_version'].'
+					</td>
+					<td>'.date("M d, h:iA",$row_new['release_date']).'
+					</td>
+				</tr>
+				<tr class="top">
+					<td colspan="2">&nbsp;<br />';
+			if ($row_new['short_description']) {
+				print '<em>'.$row_new['short_description'].'</em>';
+			} else {
+				print '<em>'._('This project has not submitted a description').'</em>';
+			}
+			print '
+					</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td colspan="3">';
+					// link to whole file list for downloads
+					print '&nbsp;<br />'.
+					util_make_link ('/frs/?group_id='.$row_new['group_id'].'&release_id='.$row_new['release_id'],_('Download')).
+					' ('._('Project Total:') .$row_new['downloads'].') | ';
+					// notes for this release
+					print util_make_link ('/frs/?view=shownotes&group_id='.$row_new['group_id'].'&release_id='.$row_new['release_id'],_('Notes and Changes')).'
+					<hr />
+					</td>
+				</tr>';
+			$seen[$row_new['group_id']] = 1;
 		}
 	}
 

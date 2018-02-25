@@ -107,7 +107,7 @@ function show_top_downloads() {
 		}
 	}
 	if ( $return == "" ) {
-		return $HTML->information(_('No stats available'));
+		return $HTML->warning_msg(_('No stats available.'));
 	} else {
 		$return = $HTML->listTableTop(). $return . $HTML->listTableBottom();
 	}
@@ -167,7 +167,7 @@ function show_sitestats() {
 
 function show_newest_projects() {
 	global $HTML;
-	$res_newproj = db_query_params ('SELECT group_id,unix_group_name,group_name,register_time FROM groups WHERE status=$1 AND type_id=1 AND register_time > 0 ORDER BY register_time DESC', array ('A'));
+	$res_newproj = db_query_params ('SELECT group_id,unix_group_name,group_name,register_time FROM groups WHERE status=$1 AND register_time > 0 ORDER BY register_time DESC', array ('A'));
 
 	$return = '';
 
@@ -188,7 +188,7 @@ function show_newest_projects() {
 	}
 
 	if ( $return == "" ) {
-		return $HTML->information(_('No stats available'));
+		return $HTML->warning_msg(_('No stats available.'));
 	} else {
 		$return = $HTML->listTableTop().$return.$HTML->listTableBottom();
 	}
@@ -209,7 +209,7 @@ function show_highest_ranked_users() {
 	} else {
 		$rows = db_numrows($res);
 		if ($rows < 1) {
-			return  $HTML->information(_('No stats available'));
+			return  $HTML->warning_msg(_('No stats available.'));
 		} else {
 			$return = '';
 			for ($i=0; $i < $rows; $i++) {
@@ -245,7 +245,7 @@ function show_highest_ranked_projects() {
 		$count++ ;
 	}
 	if ( $return == "" ) {
-		return $HTML->information(_('No stats available'));
+		return $HTML->warning_msg(_('No stats available.'));
 	} else {
 		$return = $HTML->listTableTop().$return.$HTML->listTableBottom();
 	}

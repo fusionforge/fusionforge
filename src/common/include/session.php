@@ -5,9 +5,9 @@
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2001-2002, 2009, Roland Mas
  * Copyright 2004-2005, GForge, LLC
- * Copyright 2013, Franck Villaume - TrivialDev
  * Copyright © 2013
  *	Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
+ * Copyright 2013,2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -44,7 +44,7 @@ $session_ser = '';
 /**
  *	session_build_session_token() - Construct session token for the user
  *
- *	@param		int		$user_id	User_id of the logged in user
+ *	@param	int	$user_id	User_id of the logged in user
  *	@return string token value
  */
 function session_build_session_token($user_id) {
@@ -146,7 +146,7 @@ function session_check_session_cookie($session_cookie) {
 		return false;
 	}
 	if ((forge_get_config('session_expire') > 0) &&
-	    ($time - time() >= forge_get_config('session_expire'))) {
+	    (time() - $time >= forge_get_config('session_expire'))) {
 		error_log("session_check_session_cookie failed: expired !");
 		return false;
 	}
@@ -188,7 +188,7 @@ function session_logout() {
  *
  */
 function session_login_valid($loginname, $passwd, $allowpending = 0) {
-	global $feedback, $error_msg, $warning_msg;
+	global $feedback, $warning_msg;
 
 	if (!$loginname || !$passwd) {
 		$warning_msg = _('Missing Password Or User Name');
@@ -198,16 +198,28 @@ function session_login_valid($loginname, $passwd, $allowpending = 0) {
 	$hook_params = array();
 	$hook_params['loginname'] = $loginname;
 	$hook_params['passwd'] = $passwd;
-	$result = plugin_hook("session_before_login", $hook_params);
+	$hook_params['results'] = array();
+	plugin_hook_by_reference("session_login_valid", $hook_params);
+	$plugin_session_login_valid = false;
 
 	// Refuse login if not all the plugins are ok.
-	if (!$result) {
-		if (!util_ifsetor($feedback)) {
-			$warning_msg = _('Invalid Password Or User Name');
+	foreach ($params['results'] as $p => $r) {
+		$plugin_session_login_valid = true;
+		if ($r == FORGE_AUTH_AUTHORITATIVE_ACCEPT) {
+			$seen_yes = true;
+		} elseif ($r == FORGE_AUTH_AUTHORITATIVE_REJECT) {
+			$seen_no = true;
 		}
+	}
+	if ($plugin_session_login_valid) {
+		if ($seen_yes && !$seen_no) {
+			return true;
+		}
+		$warning_msg = _('Invalid Password Or User Name');
 		return false;
 	}
 
+	//fallback => rely on database.
 	return session_login_valid_dbonly($loginname, $passwd, $allowpending);
 }
 
@@ -215,7 +227,7 @@ function session_check_credentials_in_database($loginname, $passwd, $allowpendin
 	return session_login_valid_dbonly($loginname, $passwd, $allowpending);
 }
 function session_login_valid_dbonly($loginname, $passwd, $allowpending) {
-	global $feedback, $userstatus;
+	global $feedback, $error_msg, $userstatus;
 
 	// Selecting by user_name/email only
 	if (forge_get_config('require_unique_email')) {
@@ -236,7 +248,7 @@ function session_login_valid_dbonly($loginname, $passwd, $allowpending) {
 		$userstatus = $usr['status'] ;
 
 		if ($usr['unix_pw'] !== crypt($passwd, $usr['unix_pw'])) {
-			// (crypt) unix_pw does not patch
+			// (crypt) unix_pw does not match
 			$error_msg = _('Invalid Password Or User Name');
 			return false;
 		}
@@ -322,7 +334,10 @@ function session_check_ip($oldip, $newip) {
  *	@return bool
  */
 function session_issecure() {
-	return (strtoupper(getStringFromServer('HTTPS')) == "ON");
+	if ((strtoupper(getStringFromServer('HTTPS')) == 'ON') || (strtoupper(getStringFromServer('HTTP_X_FORWARDED_PROTO')) == 'HTTPS')) {
+		return true;
+	}
+	return false;
 }
 
 /**
@@ -334,7 +349,7 @@ function session_issecure() {
  *	@param	string	$name		Name of cookie
  *	@param	string	$value		Value of cookie
  *	@param	string	$domain		Domain scope (default '')
- *	@param	int		$expiration	Expiration time in UNIX seconds (default 0)
+ *	@param	int	$expiration	Expiration time in UNIX seconds (default 0)
  */
 function session_set_cookie($name, $value, $domain='', $expiration=0) {
 	session_cookie($name, $value, $domain, $expiration);
@@ -346,10 +361,8 @@ function session_cookie($name, $value, $domain='', $expiration=0) {
 	if ($expiration) {
 		$expiration = time() + $expiration;
 	}
-	/* evolvis: force secure (SSL-only) session cookies */
-	//$force_secure = true;
-	/* not (yet?) in FusionForge */
-	$force_secure = false;
+	/* force secure (SSL-only) session cookies if relevant */
+	$force_secure = forge_get_config('use_ssl');
 	if ($force_secure && !session_issecure()) {
 		return;
 	}
@@ -364,10 +377,11 @@ function session_cookie($name, $value, $domain='', $expiration=0) {
 /**
  *	session_redirect_uri() - Redirect browser
  *
- *	@param		string	Absolute URI
+ *	@param	string	$loc	Absolute URI
+ *	@param	bool	$permanent
  *	@return never returns
  */
-function session_redirect_uri($loc, $permanent=true) {
+function session_redirect_uri($loc, $permanent = true) {
 	util_save_messages();
 	if ($permanent)
 		sysdebug_off("Status: 301 Moved Permanently", true, 301);
@@ -389,11 +403,10 @@ function session_redirect_uri($loc, $permanent=true) {
  * session_redirect() - Redirect browser within the site and exit.
  *
  * @param  string $loc    Absolute path within the site
+ * @param  bool   $permanent
  */
-function session_redirect($loc, $permanent=true) {
-	util_save_messages();
+function session_redirect($loc, $permanent = false) {
 	session_redirect_uri(util_make_url($loc), $permanent);
-	exit;
 }
 
 /**
@@ -403,12 +416,11 @@ function session_redirect($loc, $permanent=true) {
  *	@return never returns
  */
 function session_redirect_external($url) {
-	util_save_messages();
 	session_redirect_uri($url, false);
 }
 
 /**
- *	session_redirect404() - Redirect browser to 404 error page
+ *	session_redirect404() - Redirect browser to 404 error page and exit.
  *
  *	@return never returns
  */
@@ -757,6 +769,11 @@ function session_continue($sessionKey) {
 	return true;
 }
 
+function session_refresh() {
+	$params = array();
+	plugin_hook('refresh_auth_session', $params);
+}
+
 function setup_tz_from_context() {
 	$user = session_get_user();
 	if (!is_object($user) || $user->isError()) {
@@ -771,8 +788,7 @@ function setup_tz_from_context() {
 /**
  *	session_get_user() - Wrapper function to return the User object for the logged in user.
  *
- *	@return User
- *	@access public
+ *	@return FFUser
  */
 function &session_get_user() {
 	global $G_SESSION;

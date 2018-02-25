@@ -5,8 +5,8 @@
  * Copyright 1999-2000 (c) The SourceForge Crew
  * Copyright 2010, FusionForge Team
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013-2014, Franck Villaume - TrivialDev
- * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
+ * Copyright 2013-2014,2016, Franck Villaume - TrivialDev
+ * Copyright 2016-2017, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -40,6 +40,8 @@ require_once $gfcommon.'tracker/ArtifactExtraField.class.php';
 require_once $gfcommon.'tracker/ArtifactExtraFieldElement.class.php';
 require_once $gfcommon.'tracker/Roadmap.class.php';
 require_once $gfcommon.'tracker/RoadmapFactory.class.php';
+require_once $gfcommon.'tracker/EffortUnit.class.php';
+require_once $gfcommon.'tracker/EffortUnitFactory.class.php';
 
 $group_id = getIntFromRequest('group_id');
 $atid = getIntFromRequest('atid');
@@ -80,12 +82,9 @@ if ($group_id && $atid) {
 	if (getStringFromRequest('post_changes') ||
 		getStringFromRequest('updownorder_opt') ||
 		getStringFromRequest('post_changes_order') ||
+		getStringFromRequest('post_changes_default') ||
 		getStringFromRequest('post_changes_alphaorder')) {
 		include $gfcommon.'tracker/actions/admin-updates.php';
-
-	} elseif (getStringFromRequest('edittemplate')) {
-
-		include $gfcommon.'tracker/views/form-edittemplate.php';
 
 	} elseif (getStringFromRequest('deletetemplate')) {
 
@@ -120,9 +119,11 @@ if ($group_id && $atid) {
 		$action = $next;
 	} else {
 		$actions = array('add_extrafield', 'customize_list', 'workflow', 'workflow_roles', 'workflow_required_fields', 'add_opt',
-			'updownorder_opt', 'post_changes_order', 'post_changes_alphaorder', 'copy_opt', 'add_canned',
+			'updownorder_opt', 'post_changes_order', 'post_changes_alphaorder', 'post_changes_default', 'copy_opt', 'add_canned',
 			'clone_tracker', 'edittemplate',
-			'update_canned', 'delete_canned', 'update_box', 'update_opt', 'delete', 'delete_opt', 'deleteextrafield','update_type');
+			'update_canned', 'delete_canned', 'update_box', 'update_opt', 'delete', 'delete_opt', 'deleteextrafield','update_type',
+			'effort_units', 'edit_formula'
+		);
 		$action = '';
 		foreach ($actions as $a) {
 			if (getStringFromRequest($a)) {
@@ -140,6 +141,10 @@ if ($group_id && $atid) {
 
 		include $gfcommon.'tracker/views/form-customizelist.php';
 
+	}  elseif (getStringFromRequest('edittemplate')) {
+
+		include $gfcommon.'tracker/views/form-edittemplate.php';
+
 	} elseif ($action == 'workflow') {
 
 		include $gfcommon.'tracker/views/form-workflow.php';
@@ -155,6 +160,7 @@ if ($group_id && $atid) {
 	} elseif ($action == 'add_opt' ||
 			  $action == 'updownorder_opt' ||
 			  $action == 'post_changes_order' ||
+			  $action == 'post_changes_default' ||
 			  $action == 'post_changes_alphaorder') {
 
 		include $gfcommon.'tracker/views/form-addextrafieldoption.php';
@@ -232,6 +238,14 @@ if ($group_id && $atid) {
 
 		include $gfcommon.'tracker/views/form-updatetracker.php';
 
+	} elseif ($action == 'effort_units') {
+
+		include $gfcommon.'tracker/actions/effort_units.php';
+
+	} elseif ($action == 'edit_formula') {
+
+			include $gfcommon.'tracker/views/form-editformula.php';
+
 	} else {
 
 		include $gfcommon.'tracker/actions/admin-tracker.php';
@@ -249,6 +263,9 @@ if ($group_id && $atid) {
 
 	} elseif (getStringFromRequest('admin_roadmap')) {
 		include $gfcommon.'tracker/views/form-adminroadmap.php';
+
+	} elseif (getStringFromRequest('effort_units')) {
+		include $gfcommon.'tracker/actions/effort_units.php';
 
 	} else {
 		include $gfcommon.'tracker/actions/admin-ind.php';

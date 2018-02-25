@@ -1,7 +1,7 @@
 #! /usr/bin/php
 <?php
 /**
- * Fusionforge Plugin SVNTracker HTTPPoster
+ * Fusionforge Plugin Git Tracker HTTPPoster
  *
  * Portions Copyright 2004 (c) Roland Mas <99.roland.mas @nospam@ aist.enst.fr>
  * The rest Copyright 2004 (c) Francisco Gimeno <kikov @nospam@ kikov.org>
@@ -126,8 +126,8 @@ $log      = trim(`git log -n 1 --format=%s $newrev`);
 $changed  = trim(`git log -n 1 --format=%b --name-only -p $newrev`);
 
 if (isset($git_tracker_debug) && $git_tracker_debug == 1) {
-	$tempfile = tempnam('/tmp', 'debug.post');
-	$file=fopen($tempfile, 'a+');
+	$git_tracker_debug_file = sys_get_temp_dir().'/scmhook_git_committracker.debug';
+	$file=fopen($git_tracker_debug_file, 'a+');
 	fwrite($file,"Vars filled:\n");
 	fwrite($file,"arg :  " . print_r($argv,true) . " \n");
 	fwrite($file,"rev :  " . $newrev . " \n");
@@ -182,8 +182,7 @@ if ((!is_array($tasks_involved) || count($tasks_involved) < 1) &&
 }
 
 $i = 0;
-foreach ( $files as $onefile )
-{
+foreach ($files as $onefile) {
 	$SubmitVars[$i]["UserName"]        = $UserName;
 	$SubmitVars[$i]["Email"]           = $email;
 	$SubmitVars[$i]["Repository"]      = $repo_path;

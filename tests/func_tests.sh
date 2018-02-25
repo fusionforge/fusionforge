@@ -24,13 +24,13 @@ set -ex
 export DEBIAN_FRONTEND=noninteractive
 
 if [ -z "$1" ]; then
-    set +x
-    echo "Usage:"
-    echo "  $0 src/debian"
-    echo "  $0 deb/debian"
-    echo "  $0 src/centos"
-    echo "  $0 rpm/centos"
-    exit 1
+	set +x
+	echo "Usage:"
+	echo "  $0 src/debian"
+	echo "  $0 deb/debian"
+	echo "  $0 src/centos"
+	echo "  $0 rpm/centos"
+	exit 1
 fi
 
 export INSTALL_METHOD=${1%/*}
@@ -38,85 +38,110 @@ export INSTALL_OS=${1#*/}
 shift
 
 case $INSTALL_METHOD in
-    rpm|src|deb) ;;
-    *)	echo "Unknown install method"
-	exit 1 ;;
+	rpm|src|deb) ;;
+	*)	echo "Unknown install method"
+		exit 1 ;;
 esac
 
 case $INSTALL_OS in
-    debian*|centos*) ;;
-    *)	echo "Unknown install OS"
-	exit 1 ;;
+	debian*|centos*) ;;
+	*)	echo "Unknown install OS"
+		exit 1 ;;
 esac
 
+fix_httpd_itk() {
+	case $INSTALL_OS in
+		centos*)
+			echo 'WARNING: WORKAROUND for docker/lxc. Downgrade httpd-itk.'
+			echo 'TODO: check for newer version. Debian not impacted.'
+			curl https://kojipkgs.fedoraproject.org//packages/httpd-itk/2.4.7.04/1.el7/x86_64/httpd-itk-2.4.7.04-1.el7.x86_64.rpm -o /tmp/httpd-itk-2.4.7.04-1.el7.x86_64.rpm
+			yum downgrade -y /tmp/httpd-itk-2.4.7.04-1.el7.x86_64.rpm
+			rm -f /tmp/httpd-itk-2.4.7.04-1.el7.x86_64.rpm
+			service httpd restart || true
+		;;
+	esac
+}
 
 install_selenium() {
-    # Selenium dependencies and test dependencies
-    # psmisc for db_reload.sh:killall
-    # rsyslog to get e.g. sshd error log
-    if [ -e /etc/debian_version ]; then
-	apt-get -y install wget default-jre iceweasel
-	apt-get -y install phpunit phpunit-selenium patch psmisc patch rsyslog
-    else
-	yum -y install wget firefox
-	if yum list java-1.7.0-openjdk >/dev/null 2>&1 ; then
-	    yum install -y java-1.7.0-openjdk
+	# Selenium dependencies and test dependencies
+	# psmisc for db_reload.sh:killall
+	# rsyslog to get e.g. sshd error log
+	if [ -e /etc/debian_version ]; then
+		apt-get -y install wget default-jre iceweasel
+		if grep -q ^8 /etc/debian_version; then
+		    apt-get -y install phpunit phpunit-selenium patch psmisc patch rsyslog
+		else
+		    apt-get -y install php-curl unzip composer patch psmisc patch rsyslog
+		    mkdir -p /usr/local/share/php
+		    pushd /usr/local/share/php
+		    composer --no-plugins --no-scripts require phpunit/phpunit
+		    composer --no-plugins --no-scripts require phpunit/phpunit-selenium
+		    popd
+		fi
 	else
-	    yum install -y java-1.6.0
+		yum -y install wget firefox
+		if yum list java-1.7.0-openjdk >/dev/null 2>&1 ; then
+		    yum install -y java-1.7.0-openjdk
+		else
+		    yum install -y java-1.6.0
+		fi
+		yum --enablerepo=epel install -y php-phpunit-PHPUnit php-phpunit-PHPUnit-Selenium psmisc patch net-tools
 	fi
-	yum --enablerepo=epel install -y php-phpunit-PHPUnit php-phpunit-PHPUnit-Selenium psmisc patch net-tools
-    fi
-    
-    # Install selenium (no packaged version available)
-    SELENIUMMAJOR=2
-    SELENIUMMINOR=53
-    SELENIUMMICRO=0
-    SELENIUMURL=http://selenium-release.storage.googleapis.com/$SELENIUMMAJOR.$SELENIUMMINOR/selenium-server-standalone-$SELENIUMMAJOR.$SELENIUMMINOR.$SELENIUMMICRO.jar
-    mkdir -p /usr/share/selenium/
-    http_proxy=$PROXY wget -c $SELENIUMURL \
-	      -O /usr/share/selenium/selenium-server.jar
-    
-    # Add alias to /etc/hosts
-    if ! grep -q ^$(hostname -i) /etc/hosts ; then
-	echo $(hostname -i) $(hostname -f) $(hostname)>> /etc/hosts
-    fi
-    grep -q "^$(hostname -i).*$(forge_get_config scm_host)" /etc/hosts || sed -i -e "s/^$(hostname -i).*/& $(forge_get_config scm_host)/" /etc/hosts
-    
-    # Fix screenshot default black background (/usr/share/{php,pear}) (fix available upstream)
-    patch -N /usr/share/*/PHPUnit/Extensions/SeleniumTestCase.php <<'EOF' || true
+
+	# Install selenium (no packaged version available)
+	SELENIUMMAJOR=2
+	SELENIUMMINOR=53
+	SELENIUMMICRO=0
+	SELENIUMURL=http://selenium-release.storage.googleapis.com/$SELENIUMMAJOR.$SELENIUMMINOR/selenium-server-standalone-$SELENIUMMAJOR.$SELENIUMMINOR.$SELENIUMMICRO.jar
+	mkdir -p /usr/share/selenium/
+	http_proxy=$PROXY wget -c $SELENIUMURL \
+		-O /usr/share/selenium/selenium-server.jar
+
+	# Add alias to /etc/hosts
+	if ! grep -q ^$(hostname -i) /etc/hosts ; then
+		echo $(hostname -i) $(hostname -f) $(hostname)>> /etc/hosts
+	fi
+	grep -q "^$(hostname -i).*$(forge_get_config scm_host)" /etc/hosts || sed -i -e "s/^$(hostname -i).*/& $(forge_get_config scm_host)/" /etc/hosts
+
+	# Fix screenshot default black background (/usr/share/{php,pear}) (fix available upstream)
+	if [ -e /usr/share/*/PHPUnit/Extensions/SeleniumTestCase.php ] ; then
+	    patch -N /usr/share/*/PHPUnit/Extensions/SeleniumTestCase.php <<'EOF' || true
 --- /usr/share/php/PHPUnit/Extensions/SeleniumTestCase.php-dist	2014-02-10 19:48:34.000000000 +0000
 +++ /usr/share/php/PHPUnit/Extensions/SeleniumTestCase.php	2014-09-01 10:09:38.823051288 +0000
 @@ -1188,7 +1188,7 @@
              !empty($this->screenshotUrl)) {
              $filename = $this->getScreenshotPath() . $this->testId . '.png';
- 
+
 -            $this->drivers[0]->captureEntirePageScreenshot($filename);
 +            $this->drivers[0]->captureEntirePageScreenshot($filename, 'background=#CCFFDD');
- 
+
              return 'Screenshot: ' . $this->screenshotUrl . '/' .
                     $this->testId . ".png\n";
 EOF
+	fi
 }
 
 # Mitigate testsuite timeouts, cf.
 # http://lists.fusionforge.org/pipermail/fusionforge-general/2015-November/002955.html
 fixup_nss() {
-    conf=''
-    case $INSTALL_OS in
-        debian*)
-            if ! grep -q '^export PGPASSFILE' /etc/apache2/envvars; then
-                echo 'export PGPASSFILE=' >> /etc/apache2/envvars
-            fi
-            ;;
-        centos*)
-            if ! grep -q '^PGPASSFILE' /etc/sysconfig/httpd; then
-                echo 'PGPASSFILE=' >> /etc/sysconfig/httpd
-            fi
-            ;;
-    esac
+	conf=''
+	case $INSTALL_OS in
+		debian*)
+		if ! grep -q '^export PGPASSFILE' /etc/apache2/envvars; then
+			echo 'export PGPASSFILE=' >> /etc/apache2/envvars
+		fi
+		;;
+		centos*)
+		if ! grep -q '^PGPASSFILE' /etc/sysconfig/httpd; then
+			echo 'PGPASSFILE=' >> /etc/sysconfig/httpd
+		fi
+		;;
+	esac
 }
 
 fixup_nss
+
+fix_httpd_itk
 
 install_selenium
 
@@ -161,38 +186,39 @@ define('INSTALL_OS', getenv('INSTALL_OS'));
 // These are deduced from the previous definitions.
 
 // URL to access the application
-define ('URL', 'http://'.HOST.'/');
+define ('URL', 'https://'.HOST.'/');
 
 // WSDL of the forges SOAP API
-define ('WSDL_URL', URL.'soap/index.php?wsdl');
+// define ('WSDL_URL', URL.'soap/index.php?wsdl');
+define ('WSDL_URL', 'http://'.HOST.'/soap/index.php?wsdl');
 EOF
 
 echo "Starting Selenium"
 killall -9 java || true
 timeout=60
-PATH=/usr/lib/iceweasel:/usr/lib64/firefox:$PATH LANG=C java -jar /usr/share/selenium/selenium-server.jar -trustAllSSLCertificates -singleWindow &
+PATH=/usr/lib/iceweasel:/usr/lib/firefox-esr:/usr/lib64/firefox:$PATH LANG=C java -jar /usr/share/selenium/selenium-server.jar -trustAllSSLCertificates -singleWindow &
 pid=$!
 i=0
 while [ $i -lt $timeout ] && ! netstat -tnl 2>/dev/null | grep -q :4444 && kill -0 $pid 2>/dev/null; do
-    echo "Waiting for Selenium..."
-    sleep 1
-    i=$(($i+1))
-done
-if [ $i = $timeout ]; then
-    echo "Selenium failed to start listener… lacking entropy? Trying again."
-    find / > /dev/null 2> /dev/null &
-    i=0
-    while [ $i -lt $timeout ] && ! netstat -tnl 2>/dev/null | grep -q :4444 && kill -0 $pid 2>/dev/null; do
 	echo "Waiting for Selenium..."
 	sleep 1
 	i=$(($i+1))
-    done
+done
+if [ $i = $timeout ]; then
+	echo "Selenium failed to start listener… lacking entropy? Trying again."
+	find / > /dev/null 2> /dev/null &
+	i=0
+	while [ $i -lt $timeout ] && ! netstat -tnl 2>/dev/null | grep -q :4444 && kill -0 $pid 2>/dev/null; do
+		echo "Waiting for Selenium..."
+		sleep 1
+		i=$(($i+1))
+	done
 fi
 if [ $i = $timeout ] || ! kill -0 $pid 2>/dev/null; then
-    echo "Selenium failed to start!"
-    netstat -tnl
-    kill -9 $pid
-    exit 1
+	echo "Selenium failed to start!"
+	netstat -tnl
+	kill -9 $pid
+	exit 1
 fi
 
 echo "Running PHPunit tests"
@@ -203,10 +229,16 @@ cd $(dirname $0)/
 # Use the TESTGLOB environment variable otherwise
 testname="func_tests.php"
 if [ -n "$1" ] ; then
-    testname="$1"
+	testname="$1"
 fi
 
-timeout 2h phpunit --verbose --debug --stop-on-failure --log-junit $SELENIUM_RC_DIR/phpunit-selenium.xml $testname || retcode=$?
+if [ -x /usr/local/share/php/vendor/bin/phpunit ] ; then
+    phpunit=/usr/local/share/php/vendor/bin/phpunit
+else
+    phpunit=phpunit
+fi
+
+timeout 2h $phpunit --verbose --debug --stop-on-failure --log-junit $SELENIUM_RC_DIR/phpunit-selenium.xml $testname || retcode=$?
 
 set +x
 echo "phpunit returned with code $retcode"

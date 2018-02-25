@@ -45,13 +45,9 @@ $id = getIntFromRequest('id');
 $for_group = getIntFromRequest('for_group');
 
 /*
-
   News uber-user admin pages
-
   Show all waiting news items except those already rejected.
-
-  Admin members of forge_get_config('news_group') (news project) can edit/change/approve news items
-
+  Admin members of GROUP_IS_NEWS (news project) can edit/change/approve news items
 */
 session_require_global_perm ('approve_news') ;
 
@@ -102,8 +98,8 @@ if ($post_changes) {
 		*/
 		$news_id = getArrayFromRequest('news_id');
 		$result = db_query_params("UPDATE news_bytes
-SET is_approved='2'
-WHERE id = ANY($1)",array(db_int_array_to_any_clause($news_id)));
+					SET is_approved='2'
+					WHERE id = ANY($1)",array(db_int_array_to_any_clause($news_id)));
 		if (!$result || db_affected_rows($result) < 1) {
 			$error_msg .= _('Error On Update')._(': ').db_error();
 		} else {
@@ -120,8 +116,8 @@ if ($approve) {
 	*/
 
 	$result=db_query_params("SELECT groups.unix_group_name,groups.group_id,news_bytes.*
-FROM news_bytes,groups WHERE id=$1
-AND news_bytes.group_id=groups.group_id ", array($id));
+				FROM news_bytes,groups WHERE id=$1
+				AND news_bytes.group_id=groups.group_id ", array($id));
 	if (db_numrows($result) < 1) {
 		exit_error(_('Newsbyte not found'), 'news');
 	}

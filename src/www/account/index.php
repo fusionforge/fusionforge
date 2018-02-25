@@ -104,7 +104,7 @@ html_use_tablesorter();
 $title = _('My Account');
 site_user_header(array('title'=>$title));
 
-echo $HTML->openForm(array('action' => util_make_uri('/account/'), 'method' => 'post'));
+echo $HTML->openForm(array('action' => '/account/', 'method' => 'post'));
 echo html_e('input', array('type' => 'hidden', 'name' => 'form_key', 'value' => form_generate_key()));
 echo $HTML->boxTop(_('Account options'));
 echo html_e('p', array(), _('Welcome').html_e('strong', array(), $u->getRealName()));
@@ -291,7 +291,7 @@ if (forge_get_config('use_shell')) {
 		if (is_array($sshKeysArray) && count($sshKeysArray)) {
 			$tabletop = array(_('Name'), _('Algorithm'), _('Fingerprint'), _('Uploaded'));
 			$classth = array('', '', '', '');
-			echo $HTML->listTableTop($tabletop, false, 'sortable_sshkeys_listlinks', 'sortable', $classth);
+			echo $HTML->listTableTop($tabletop, array(), 'sortable_sshkeys_listlinks', 'sortable', $classth);
 			foreach($sshKeysArray as $sshKey) {
 				$cells = array();
 				$cells[][] = $sshKey['name'];

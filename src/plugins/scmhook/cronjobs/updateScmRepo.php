@@ -2,8 +2,9 @@
 <?php
 /**
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2012-2013, Franck Villaume - TrivialDev
+ * Copyright 2012-2013,2017, Franck Villaume - TrivialDev
  * Copyright 2013, Benoit Debaenst - TrivialDev
+ * Copyright 2014, Philipp Keidel - EDAG Engineering AG
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -28,18 +29,17 @@
 require dirname(__FILE__).'/../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/cron_utils.php';
-require_once $gfplugins.'scmhook/common/scmhookPlugin.class.php';
 
 // if you want debug output, uncomment the verbose variable.
-//$verbose = true;
+$verbose = true;
 
 ############
 ###### START
 
 $res = db_query_params('SELECT systask_id, group_id, user_name FROM systasks
-	JOIN users ON (systasks.user_id = users.user_id)
-	WHERE systasks.status=$1 AND systask_type=$2',
-	array('WIP', 'SCMHOOK_UPDATE'));
+			JOIN users ON (systasks.user_id = users.user_id)
+			WHERE systasks.status=$1 AND systask_type=$2',
+			array('WIP', 'SCMHOOK_UPDATE'));
 while ($task = db_fetch_array($res)) {
 	$group_id = $task['group_id'];
 	$user_name = $task['user_name'];
@@ -55,38 +55,29 @@ function install_hooks($params) {
 
 	$group_id = $params[0];
 	// get the list of project to be updated
-	$res = db_query_params('SELECT groups.group_id, groups.scm_box, plugin_scmhook.hooks
-			FROM groups, plugin_scmhook
-			WHERE groups.status = $1
-			AND plugin_scmhook.id_group = groups.group_id
-			AND plugin_scmhook.need_update = $2
-			AND groups.use_scm = $3
-            AND group_id = $4',
-		array('A', 1, 1, $group_id));
+	$res = db_query_params('SELECT groups.group_id, groups.scm_box, plugin_scmhook.hooks, plugin_scmhook.scm_plugin, plugin_scmhook.repository_name
+				FROM groups, plugin_scmhook
+				WHERE groups.status = $1
+				AND plugin_scmhook.id_group = groups.group_id
+				AND plugin_scmhook.need_update = $2
+				AND groups.use_scm = $3
+				AND group_id = $4',
+				array('A', 1, 1, $group_id));
 
 	if (! $res) {
 		cron_debug("FATAL Database Query Failed: " . db_error());
 	}
 
-	$scmhookPlugin = new scmhookPlugin;
 	while ($row = db_fetch_array($res)) {
 		$group_id = $row['group_id'];
-		$scm_box = $row['scm_box'];
-		$scmtype = '';
-		// find the scm type of the project
-		$listScm = $scmhookPlugin->getListLibraryScm();
 		$group = group_get_object($group_id);
-		for ($i = 0; $i < count($listScm); $i++) {
-			if ($group->usesPlugin($listScm[$i])) {
-				$scmtype = $listScm[$i];
-				continue;
-			}
-		}
+		$scm_box = $row['scm_box'];
 		$returnvalue = true;
 		// call the right cronjob in the library
+		$scmtype = $row['scm_plugin'];
 		switch ($scmtype) {
 		case 'scmsvn':
-			cron_debug("INFO start updating hooks for project ".$group->getUnixName());
+			cron_debug("INFO start updating hooks for project ".$group->getUnixName().", repository name: ".$row['repository_name']);
 			require_once $gfplugins.'scmhook/library/'.$scmtype.'/cronjobs/updateScmRepo.php';
 			$scmsvncronjob = new ScmSvnUpdateScmRepo();
 			$params = array();
@@ -102,13 +93,13 @@ function install_hooks($params) {
 			break;
 
 		case 'scmhg':
-			cron_debug("INFO start updating hooks for project ".$group->getUnixName());
+			cron_debug("INFO start updating hooks for project ".$group->getUnixName().", repository name: ".$row['repository_name']);
 			require_once $gfplugins.'scmhook/library/'.$scmtype.'/cronjobs/updateScmRepo.php';
 			$scmhgcronjob = new ScmHgUpdateScmRepo();
 			$params = array();
 			$params['group_id'] = $group_id;
 			$params['hooksString'] = $row['hooks'];
-			$params['scm_root'] = forge_get_config('repos_path', 'scmhg') . '/' . $group->getUnixName();
+			$params['scm_root'] = forge_get_config('repos_path', 'scmhg').'/'.$group->getUnixName().'/'.$row['repository_name'];
 			if ($scmhgcronjob->updateScmRepo($params)) {
 				$res_update = db_query_params('UPDATE plugin_scmhook set need_update = $1 where id_group = $2', array(0, $group_id));
 				if (!$res_update) {
@@ -118,13 +109,13 @@ function install_hooks($params) {
 			break;
 
 		case 'scmgit':
-			cron_debug("INFO start updating hooks for project ".$group->getUnixName());
+			cron_debug("INFO start updating hooks for project ".$group->getUnixName().", repository name: ".$row['repository_name']);
 			require_once $gfplugins.'scmhook/library/'.$scmtype.'/cronjobs/updateScmRepo.php';
 			$scmgitcronjob = new ScmGitUpdateScmRepo();
 			$params = array();
 			$params['group_id'] = $group_id;
 			$params['hooksString'] = $row['hooks'];
-			$params['scm_root'] = forge_get_config('repos_path', 'scmgit') . '/' . $group->getUnixName() . '/' . $group->getUnixName() . '.git' ;
+			$params['scm_root'] = forge_get_config('repos_path', 'scmgit').'/'.$group->getUnixName().'/'.$row['repository_name'].'.git' ;
 			if ($scmgitcronjob->updateScmRepo($params)) {
 				$res_update = db_query_params('UPDATE plugin_scmhook set need_update = $1 where id_group = $2', array(0, $group_id));
 				if (!$res_update) {
@@ -133,12 +124,29 @@ function install_hooks($params) {
 			}
 			break;
 
+		case 'scmcvs': {
+			cron_debug("INFO start updating hooks for project ".$group->getUnixName().", repository name: ".$row['repository_name']);
+			require_once $gfplugins.'scmhook/library/'.$scmtype.'/cronjobs/updateScmRepo.php';
+			$scmcvscronjob = new ScmCvsUpdateScmRepo();
+			$params = array();
+			$params['group_id'] = $group_id;
+			$params['hooksString'] = $row['hooks'];
+			$params['scm_root'] = forge_get_config('repos_path', 'scmcvs') . '/' . $group->getUnixName();
+			if ($scmcvscronjob->updateScmRepo($params)) {
+				$res = db_query_params('UPDATE plugin_scmhook set need_update = $1 where id_group = $2', array(0, $group_id));
+				if (!$res) {
+					$returnvalue = false;
+				}
+			}
+			break;
+		}
+
 		default:
 			cron_debug("WARNING No scm plugin found for this project ".$group->getUnixName()." or no cronjobs for this type");
 			$returnvalue = false;
 			break;
 		}
-		
+
 		if ($returnvalue) {
 			cron_debug("INFO hooks updated for project ".$group->getUnixName());
 		} else {

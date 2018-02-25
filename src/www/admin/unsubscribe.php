@@ -112,12 +112,12 @@ if ($pattern) {
 			$cells = array();
 			$cells[][] = '&nbsp;';
 			$cells[][] = $row['user_id'];
-			$cells[][] = util_make_link('/admin/unsubscribe.php?submit=1&user_name='.$row['user_name'], $row['user_name']);
+			$cells[][] = util_make_link('/admin/unsubscribe.php?submit=1&amp;user_name='.$row['user_name'], $row['user_name']);
 			$cells[][] = $row['realname'];
 			$cells[][] = $row['email'];
 			$cells[][] = $row['mail_siteupdates'];
 			$cells[][] = $row['mail_va'];
-			echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i++, true)), $cells);
+			echo $HTML->multiTableRow(array(), $cells);
 		}
 		echo $HTML->listTableBottom();
 	} else {

@@ -30,7 +30,7 @@ require_once $gfcommon.'include/FFError.class.php';
  *
  * @param	array   $group_project_id	whether or not the db result handle is passed in
  * @param	bool	$data
- * @return	ProjectGroup	the ProjectGroup object
+ * @return	ProjectGroup|bool	the ProjectGroup object
  */
 function &projectgroup_get_object($group_project_id, $data = false) {
 	global $PROJECTGROUP_OBJ;
@@ -90,14 +90,11 @@ class ProjectGroup extends FFError {
 	 * @param	$Group
 	 * @param	bool	$group_project_id
 	 * @param	bool	$arr
-	 * @internal	param	\The $object Group object to which this forum is associated.
-	 * @internal	param	\The $int group_project_id.
-	 * @internal	param	\The $array associative array of data.
 	 */
 	function __construct(&$Group, $group_project_id = false, $arr = false) {
 		parent::__construct();
 		if (!$Group || !is_object($Group)) {
-			$this->setError(_('No Valid Group Object'));
+			$this->setError(_('Invalid Project'));
 			return;
 		}
 		if ($Group->isError()) {
@@ -137,9 +134,9 @@ class ProjectGroup extends FFError {
 	 * @param	string	$send_all_posts_to	The email address to send new notifications to.
 	 * @return	bool	success.
 	 */
-	function create($project_name,$description,$send_all_posts_to='') {
+	function create($project_name, $description, $send_all_posts_to = '') {
 		if (strlen($project_name) < 3) {
-			$this->setError(_('Title Must Be At Least 5 Characters'));
+			$this->setError(sprintf(_('Title Must Be At Least %d Characters'), 3));
 			return false;
 		}
 		if (strlen($description) < 10) {
@@ -328,11 +325,11 @@ class ProjectGroup extends FFError {
 	 * @param	string	$project_name	The project name.
 	 * @param	string	$description	The project description.
 	 * @param	string	$send_all_posts_to	The email address to send new notifications to.
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function update($project_name, $description, $send_all_posts_to = '') {
 		if (strlen($project_name) < 3) {
-			$this->setError(_('Title Must Be At Least 5 Characters'));
+			$this->setError(sprintf(_('Title Must Be At Least %d Characters'), 3));
 			return false;
 		}
 		if (strlen($description) < 10) {

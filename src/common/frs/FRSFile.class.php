@@ -29,10 +29,10 @@ require_once $gfcommon.'include/FFError.class.php';
  * Factory method which creates a FRSFile from an file id
  *
  * @param	int		$file_id	The file id
- * @param	array|bool	$data		The result array, if it's passed in
- * @return	object		FRSFile object
+ * @param	array	$data		The result array, if it's passed in
+ * @return	object|bool		FRSFile object, false in case of error
  */
-function &frsfile_get_object($file_id, $data=false) {
+function &frsfile_get_object($file_id, $data = array()) {
 	global $FRSFILE_OBJ;
 	if (!isset($FRSFILE_OBJ['_'.$file_id.'_'])) {
 		if ($data) {
@@ -70,9 +70,9 @@ class FRSFile extends FFError {
 	/**
 	 * @param	object		$FRSRelease	The FRSRelease object to which this file is associated.
 	 * @param	int|bool	$file_id	The file_id.
-	 * @param	array|bool	$arr		The associative array of data.
+	 * @param	array		$arr		The associative array of data.
 	 */
-	function __construct(&$FRSRelease, $file_id=false, $arr=false) {
+	function __construct(&$FRSRelease, $file_id=false, $arr=array()) {
 		parent::__construct();
 		if (!$FRSRelease || !is_object($FRSRelease)) {
 			$this->setError(_('Invalid FRS Release Object'));
@@ -108,8 +108,6 @@ class FRSFile extends FFError {
 	 * @param	int		$type_id	The type_id of this file from the frs-file-types table.
 	 * @param	int		$processor_id	The processor_id of this file from the frs-processor-types table.
 	 * @param	int|bool	$release_time	The release_date of this file in unix time (seconds).
-	 * @param	string		$mime_type	The mime type of the file (default: application/octet-stream)
-	 * @param	bool		$is_remote	True if file is an URL and not an uploaded file (default: false)
 	 * @return	bool		success.
 	 */
 	function create($name,$file_location,$type_id,$processor_id,$release_time=false) {
@@ -221,7 +219,7 @@ class FRSFile extends FFError {
 	 * fetchData - re-fetch the data for this FRSFile from the database.
 	 *
 	 * @param	int	$file_id	The file_id.
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function fetchData($file_id) {
 		$res = db_query_params ('SELECT * FROM frs_file_vw WHERE file_id=$1 AND release_id=$2',
@@ -339,7 +337,7 @@ class FRSFile extends FFError {
 	/**
 	 * delete - Delete this file from the database and file system.
 	 *
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function delete() {
 		if (!forge_check_perm('frs', $this->FRSRelease->FRSPackage->getID(), 'file')) {
@@ -382,7 +380,7 @@ class FRSFile extends FFError {
 	 * @param	int		$processor_id	The processor_id of this file from the frs-processor-types table.
 	 * @param	int		$release_time	The release_date of this file in unix time (seconds).
 	 * @param	int|bool	$release_id	The release_id of the release this file belongs to (if not set, defaults to the release id of this file).
-	 * @return	boolean		success.
+	 * @return	bool		success.
 	 */
 	function update($type_id, $processor_id, $release_time, $release_id = false) {
 		if (!forge_check_perm('frs', $this->FRSRelease->FRSPackage->getID(), 'file')) {
@@ -396,7 +394,7 @@ class FRSFile extends FFError {
 			if ($FRSRelease = frsrelease_get_object($release_id)) {
 				// Check that the new FRSRelease id belongs to the group of this FRSFile
 				if ($FRSRelease->FRSPackage->Group->getID() != $this->FRSRelease->FRSPackage->Group->getID()) {
-					$this->setError(_('No Valid Group Object'));
+					$this->setError(_('Invalid Project'));
 					return false;
 				}
 			} else {

@@ -6,8 +6,8 @@
  * Copyright 2002, Tim Perdue - GForge, LLC
  * Copyright 2010 (c) Franck Villaume - Capgemini
  * Copyright (C) 2010-2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013-2015, Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of National Education
+ * Copyright 2013-2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -76,7 +76,7 @@ function forum_header($params = array()) {
 				';
 
 			// display classification
-			if ($params['group'] == forge_get_config('news_group')) {
+			if ($params['group'] == GROUP_IS_NEWS) {
 				print stripslashes(trove_getcatlisting(db_result($result,0,'forum_id'),0,1));
 			} elseif (forge_get_config('use_trove')) {
 				print stripslashes(trove_getcatlisting($params['group'],0,1));
@@ -218,7 +218,7 @@ class ForumHTML extends FFError {
 			</tr>
 			<tr>
 				<td>
-					'.  $msg->getBody() .'
+					'.  util_gen_cross_ref($msg->getBody(), $group_id) .'
 				</td>
 			</tr>
 		</table>';
@@ -275,9 +275,9 @@ class ForumHTML extends FFError {
 				<td colspan="2">
 					';
 					if (strpos($msg->getBody(),'<') === false) {
-						$ret_val .= nl2br($msg->getBody()); //backwards compatibility for non html messages
+						$ret_val .= nl2br(util_gen_cross_ref($msg->getBody(), $group_id)); //backwards compatibility for non html messages
 					} else {
-						$ret_val .= $msg->getBody();
+						$ret_val .= util_gen_cross_ref($msg->getBody(), $group_id);
 					}
 					$ret_val .= '
 				</td>
@@ -373,7 +373,7 @@ class ForumHTML extends FFError {
 				$total_rows++;
 
 				//	  show the actual nested message
-				$ret_val .= $this->showNestedMessage ($msg_arr["$msg_id"][$i]).'<p />';
+				$ret_val .= $this->showNestedMessage ($msg_arr["$msg_id"][$i]).'<br />';
 
 				if ($msg_arr["$msg_id"][$i]->hasFollowups()) {
 					//	  Call yourself if there are followups
@@ -418,7 +418,7 @@ class ForumHTML extends FFError {
 				$total_rows++;
 
 				$ret_val .= '
-					<tr '. $HTML->boxGetAltRowStyle($total_rows) .'><td style="white-space: nowrap;">';
+					<tr><td style="white-space: nowrap;">';
 				/*
 					How far should it indent?
 				*/
@@ -472,6 +472,7 @@ class ForumHTML extends FFError {
 	 * @return	The HTML output echoed
 	 */
 	function showEditForm(&$msg) {
+		global $HTML;
 		$thread_id = $msg->getThreadID();
 		$msg_id = $msg->getID();
 		$posted_by = $msg->getPosterID();
@@ -488,28 +489,28 @@ class ForumHTML extends FFError {
 			echo notepad_func();
 			?>
 			<div style="margin-left: auto; margin-right: auto;">
-			<form id="ForumEditForm" enctype="multipart/form-data" action="<?php echo util_make_url ('/forum/admin/index.php') ?>" method="post">
-			<?php $objid = $this->Forum->getID();?>
+			<?php echo $HTML->openForm(array('id' => 'ForumEditForm', 'enctype' => 'multipart/form-data', 'action' => '/forum/admin/index.php', 'method' => 'post'));
+			$objid = $this->Forum->getID(); ?>
 			<input type="hidden" name="thread_id" value="<?php echo $thread_id; ?>" />
 			<input type="hidden" name="forum_id" value="<?php echo $objid; ?>" />
 			<input type="hidden" name="editmsg" value="<?php echo $msg_id; ?>" />
 			<input type="hidden" name="is_followup_to" value="<?php echo $is_followup_to; ?>" />
-			<input type="hidden" name="form_key" value="<?php echo form_generate_key();?>">
-			<input type="hidden" name="posted_by" value="<?php echo $posted_by;?>">
-			<input type="hidden" name="post_date" value="<?php echo $post_date;?>">
-			<input type="hidden" name="has_followups" value="<?php echo $has_followups;?>">
-			<input type="hidden" name="most_recent_date" value="<?php echo $most_recent_date;?>">
-			<input type="hidden" name="group_id" value="<?php echo $group_id;?>">
+			<input type="hidden" name="form_key" value="<?php echo form_generate_key();?>" />
+			<input type="hidden" name="posted_by" value="<?php echo $posted_by;?>" />
+			<input type="hidden" name="post_date" value="<?php echo $post_date;?>" />
+			<input type="hidden" name="has_followups" value="<?php echo $has_followups;?>" />
+			<input type="hidden" name="most_recent_date" value="<?php echo $most_recent_date;?>" />
+			<input type="hidden" name="group_id" value="<?php echo $group_id;?>" />
 			<fieldset class="fieldset">
 			<legend><?php echo _('Edit Message'); ?></legend>
 			<table><tr><td class="top">
 			</td><td class="top">
 			<p>
-			<strong><?php echo _('Subject').utils_requiredField()._(':'); ?></strong><br />
-				<input type="text" autofocus="autofocus" required="required" name="subject" value="<?php echo $subject; ?>" size="80" maxlength="80" />
+			<label for="subject"><strong><?php echo _('Subject').utils_requiredField()._(':'); ?></strong></label><br />
+				<input id="subject" type="text" autofocus="autofocus" required="required" name="subject" value="<?php echo $subject; ?>" size="80" maxlength="80" />
 			</p>
 			<p>
-			<strong><?php echo _('Message').utils_requiredField()._(': '); ?></strong>
+			<label for="body"><strong><?php echo _('Message').utils_requiredField()._(': '); ?></strong></label>
 			<?php echo notepad_button('document.forms.ForumEditForm.body'); ?>
 			</p>
 			<?php
@@ -522,7 +523,7 @@ class ForumHTML extends FFError {
 			plugin_hook("text_editor",$params);
 			if (!$GLOBALS['editor_was_set_up']) {
 				//if we don't have any plugin for text editor, display a simple textarea edit box
-				echo '<textarea required="required" name="body" rows="10" cols="70">' . $body . '</textarea>';
+				echo '<textarea id="body" required="required" name="body" rows="10" cols="70">' . $body . '</textarea>';
 			}
 			unset($GLOBALS['editor_was_set_up']);
 				?>
@@ -532,7 +533,7 @@ class ForumHTML extends FFError {
 				<input type="submit" name="cancel" formnovalidate="formnovalidate" value="<?php echo _('Cancel'); ?>" />
 				</p>
 			</td></tr></table></fieldset>
-			</form>
+			<?php echo $HTML->closeForm(); ?>
 			</div>
 			<?php
 		}
@@ -544,7 +545,7 @@ class ForumHTML extends FFError {
 	 * @param string $subject
 	 */
 	function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
-		global $group_id;
+		global $group_id, $HTML;
 
 		$body = '';
 
@@ -557,7 +558,7 @@ class ForumHTML extends FFError {
 			echo notepad_func();
 			?>
 			<div class="align-center">
-			<form id="ForumPostForm" enctype="multipart/form-data" action="<?php echo util_make_url ('/forum/forum.php?forum_id='.$this->Forum->getID().'&amp;group_id='.$group_id); ?>" method="post">
+			<?php echo $HTML->openForm(array('id' => 'ForumPostForm', 'enctype' => 'multipart/form-data', 'action' => '/forum/forum.php?forum_id='.$this->Forum->getID().'&group_id='.$group_id, 'method' => 'post')); ?>
 			<input type="hidden" name="post_message" value="y" />
 			<input type="hidden" name="thread_id" value="<?php echo $thread_id; ?>" />
 			<input type="hidden" name="msg_id" value="<?php echo $is_followup_to; ?>" />
@@ -567,8 +568,8 @@ class ForumHTML extends FFError {
 			<td class="top">
 			</td>
 			<td class="top">
-			<strong><?php echo _('Subject').utils_requiredField()._(': '); ?></strong><br />
-				<input type="text" autofocus="autofocus" required="required" name="subject" value="<?php echo $subject; ?>" size="80" maxlength="80" />
+			<label for="subject"><strong><?php echo _('Subject').utils_requiredField()._(': '); ?></strong></label><br />
+				<input id="subject" type="text" autofocus="autofocus" required="required" name="subject" value="<?php echo $subject; ?>" size="80" maxlength="80" />
 			<br />
 		<strong><?php echo _('Message').utils_requiredField()._(': '); ?></strong>
 		<?php echo notepad_button('document.forms.ForumPostForm.body') ?><br />
@@ -607,7 +608,7 @@ class ForumHTML extends FFError {
 	</tr>
 </table>
 </fieldset>
-</form>
+<?php echo $HTML->closeForm(); ?>
 </div>
 			<?php
 

@@ -78,7 +78,7 @@ class UserBlocks extends FForge_SeleniumTestCase
 		$this->type("body", "This is my nice block.");
 		$this->click("//input[@value='Save']");
 		$this->waitForPageToLoad("30000");
-	//    $this->click("//div[@id='maindiv']/form/table/tbody/tr[2]/td[4]/a");
+	//    $this->click("//main[@id='maindiv']/form/table/tbody/tr[2]/td[4]/a");
 	//    $this->waitForPageToLoad("30000");
 	//    $this->type("body", "{boxTop Project}\nThis is the summary block.\n{boxBottom}");
 	//    $this->click("//input[@value='Save']");

@@ -27,11 +27,8 @@
  */
 
 class AuthBuiltinPlugin extends ForgeAuthPlugin {
-	/**
-	 * AuthBuiltinPlugin() - constructor
-	 *
-	 */
-	function AuthBuiltinPlugin() {
+
+	function __construct() {
 		parent::__construct();
 
 		$this->name = 'authbuiltin';
@@ -45,6 +42,7 @@ class AuthBuiltinPlugin extends ForgeAuthPlugin {
 		// get_extra_roles - add new roles not necessarily stored in the database
 		// restrict_roles - filter out unwanted roles
 		$this->_addHook('close_auth_session');
+		$this->_addHook("refresh_auth_session");
 
 		$this->declareConfigVars();
 	}
@@ -68,9 +66,9 @@ class AuthBuiltinPlugin extends ForgeAuthPlugin {
 		$result = '';
 
 		$result .= html_e('p', array(), _('Cookies must be enabled past this point.'), false);
-		$result .= $HTML->openForm(array('action' => util_make_uri('/plugins/'.$this->name.'/post-login.php'), 'method' => 'post'));
+		$result .= $HTML->openForm(array('action' => '/plugins/'.$this->name.'/post-login.php', 'method' => 'post'), true);
 		$result .= html_e('input', array('type' => 'hidden', 'name' => 'form_key', 'value' => form_generate_key()));
-		$result .= html_e('input', array('type' => 'hidden', 'name' => 'return_to', 'value' => htmlspecialchars(stripslashes($return_to))));
+		$result .= html_e('input', array('type' => 'hidden', 'name' => 'return_to', 'value' => $return_to));
 		$result .= html_ao('p');
 		if (forge_get_config('require_unique_email')) {
 			$result .= _('Login name or email address')._(':');

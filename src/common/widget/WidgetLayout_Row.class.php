@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2013-2014, Franck Villaume - TrivialDev
+ * Copyright 2013-2014,2016, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -25,7 +25,7 @@ class WidgetLayout_Row {
 	var $columns;
 	var $layout;
 
-	function WidgetLayout_Row($id, $rank) {
+	function __construct($id, $rank) {
 		$this->id      = $id;
 		$this->rank    = $rank;
 		$this->columns = array();
@@ -41,15 +41,16 @@ class WidgetLayout_Row {
 	}
 
 	function display($readonly, $owner_id, $owner_type) {
-		echo html_ao('table', array('id' => 'mainwidget_table'.$this->id, 'class' => 'fullwidth'));
-		echo html_ao('tbody');
+		global $HTML;
+		echo $HTML->listTableTop(array(), array(), 'full', 'mainwidget_table'.$this->id);
 		echo html_ao('tr', array('style' => 'vertical-align:top;'));
 		$last = count($this->columns) - 1;
 		$i = 0;
 		foreach($this->columns as $key => $nop) {
 			$this->columns[$key]->display($readonly, $owner_id, $owner_type, $is_last = ($i++ == $last));
 		}
-		echo html_ac(html_ap() -3);
+		echo html_ac(html_ap() -1);
+		echo $HTML->listTableBottom();
 	}
 
 	function getColumnIds() {

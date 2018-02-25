@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (C) 2015 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
+ * Copyright 2016, Stéphane-Eymeric Bredtthauer - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -21,11 +22,10 @@
 
 require_once '../../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
-
-global $gfplugins;
 require_once $gfplugins.'taskboard/common/include/TaskBoardHtml.class.php';
 
 $group_id = getIntFromRequest('group_id');
+$taskboard_id = getIntFromRequest('taskboard_id');
 $pluginTaskboard = plugin_get_object('taskboard');
 
 if (!$group_id) {
@@ -44,7 +44,7 @@ if (!$group_id) {
 
 		$allowedActions = array('add_release', 'delete_release', 'edit_release');
 		$action = getStringFromRequest('action');
-		$taskboard = new TaskBoardHtml($group);
+		$taskboard = new TaskBoardHtml($group, $taskboard_id);
 
 		if (in_array($action, $allowedActions)) {
 			include($gfplugins.$pluginTaskboard->name.'/common/actions/'.$action.'.php');
@@ -53,7 +53,7 @@ if (!$group_id) {
 		$allowedViews = array('add_release', 'delete_release', 'edit_release', 'burndown');
 		$view = getStringFromRequest('view');
 
-		if( in_array($view, $allowedViews) ) {
+		if (in_array($view, $allowedViews)) {
 			include($gfplugins.$pluginTaskboard->name.'/common/views/releases/'.$view.'.php' );
 		} else {
 			include($gfplugins.$pluginTaskboard->name.'/common/views/releases/ind.php' );
@@ -61,7 +61,7 @@ if (!$group_id) {
 	} else {
 		$taskboard->header(
 			array(
-				'title' => _('Taskboard for ').$group->getPublicName()._(': ')._('Administration'),
+				'title' => $taskboard->getName()._(': ')._('Administration'),
 				'pagename' => _('Administration'),
 				'sectionvals' => array(group_getname($group_id)),
 				'group' => $group_id

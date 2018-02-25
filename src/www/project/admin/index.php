@@ -9,6 +9,7 @@
  * Copyright 2004 GForge, LLC - Tim Perdue
  * Copyright 2010, Franck Villaume - Capgemini
  * Copyright 2010-2011, Alain Peyrat - Alcatel-Lucent
+ * Copyright 2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -120,14 +121,14 @@ project_admin_header(array('title'=>sprintf(_('Project Information for %s'), $gr
 
 if (forge_get_config('use_shell')) {
 ?>
-<p><?php echo _('Group shell (SSH) server:') ?> <strong><?php echo forge_get_config('shell_host'); ?></strong></p>
-<p><?php echo _('Group directory on shell server:') ?><br/><strong><?php echo account_group_homedir($group->getUnixName()); ?></strong></p>
-<p><?php echo _('Project WWW directory on shell server:') ?><br /><strong><?php echo account_group_homedir($group->getUnixName()).'/htdocs'; ?></strong></p>
+<p><?php echo _('Group shell (SSH) server')._(':') ?> <strong><?php echo forge_get_config('shell_host'); ?></strong></p>
+<p><?php echo _('Group directory on shell server')._(':') ?><br/><strong><?php echo account_group_homedir($group->getUnixName()); ?></strong></p>
+<p><?php echo _('Project WWW directory on shell server')._(':') ?><br /><strong><?php echo account_group_homedir($group->getUnixName()).'/htdocs'; ?></strong></p>
 <?php
-	} //end of use_shell condition
-?>
+} //end of use_shell condition
 
-<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
+echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
+?>
 
 <input type="hidden" name="group_id" value="<?php echo $group->getID(); ?>" />
 
@@ -149,14 +150,14 @@ if (forge_get_config('use_shell')) {
 <?php if (forge_get_config('use_project_tags')) { ?>
 <h2><?php echo _('Project tags'); ?></h2>
 <p>
-<?php echo _('Add tags (use comma as separator): ') ?><br />
+<?php echo _('Add tags (use comma as separator)')._(':') ?><br />
 <input type="text" name="form_tags" size="100" value="<?php echo $group->getTags(); ?>" />
 </p>
 <?php
 	$infos = getAllProjectTags();
 	if ($infos) {
 		echo '<br />';
-		echo _('Or pick a tag from those used by other projects: ');
+		echo _('Or pick a tag from those used by other projects')._(':');
 		echo '<br />';
 		$titleArr = array(_('Tags'), _('Projects'));
 		echo $HTML->listTableTop($titleArr);
@@ -185,14 +186,13 @@ if (forge_get_config('use_shell')) {
 		}
 		echo $HTML->listTableBottom();
 	}
-} ?>
+}
 
-<h2><?php echo _('Trove Categorization'); ?></h2>
-<p>
-<?php
-echo util_make_link('/project/admin/group_trove.php?group_id='.$group->getID(), '['._('Edit Trove').']');
+if (forge_get_config('use_trove')) {
+	echo html_e('h2', array(), _('Trove Categorization'));
+	echo html_e('p', array(), util_make_link('/project/admin/group_trove.php?group_id='.$group->getID(), '['._('Edit Trove').']'));
+}
 ?>
-</p>
 
 <h2><?php echo _('Homepage Link') ?></h2>
 <p>
@@ -310,9 +310,8 @@ if(forge_get_config('use_tracker')) {
 <input type="submit" name="submit" value="<?php echo _('Update') ?>" />
 </p>
 
-</form>
-
 <?php
+echo $HTML->closeForm();
 plugin_hook('hierarchy_views', array($group_id, 'admin'));
 
 echo $HTML->boxBottom();

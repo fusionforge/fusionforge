@@ -6,7 +6,7 @@
  * Copyright 2002 GForge, LLC, Tim Perdue
  * Copyright 2010, FusionForge Team
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013-2014, Franck Villaume - TrivialDev
+ * Copyright 2013-2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -66,13 +66,10 @@ if (getStringFromRequest('post_changes')) {
 	}
 
 	if (getStringFromRequest('addproject')) {
+		/* Add new subproject */
 		$project_name = getStringFromRequest('project_name');
 		$description = getStringFromRequest('description');
 		$send_all_posts_to = getStringFromRequest('send_all_posts_to');
-
-		/*
-			Add new subproject
-		*/
 		session_require_perm ('pm_admin', $group_id) ;
 		if (!$pg->create($project_name,$description,$send_all_posts_to)) {
 			exit_error($pg->getErrorMessage(),'pm');
@@ -83,56 +80,56 @@ if (getStringFromRequest('post_changes')) {
 		}
 
 	} elseif ($add_cat) {
+		/* Add a project_category */
 		$name = getStringFromRequest('name');
-
-		/*
-			Add a project_category
-		*/
 		session_require_perm ('pm', $pg->getID(), 'manager') ;
 
-		$pc = new ProjectCategory($pg);
-		if (!$pc || !is_object($pc)) {
-			exit_error(_('Unable to create ProjectCategory Object'),'pm');
+		if (trim($name) == '') {
+			$error_msg .= _('Name is required');
 		} else {
-			if (!$pc->create($name)) {
-				$error_msg .= _('Insert Error')._(': ').$pc->getErrorMessage();
+			$pc = new ProjectCategory($pg);
+			if (!$pc || !is_object($pc)) {
+				exit_error(_('Unable to create ProjectCategory Object'),'pm');
 			} else {
-				$feedback .= _('Category Inserted');
+				if (!$pc->create($name)) {
+					$error_msg .= _('Insert Error')._(': ').$pc->getErrorMessage();
+				} else {
+					$feedback .= _('Category Inserted');
+				}
 			}
 		}
 
 	} elseif ($update_cat) {
-		$id = getIntFromRequest('id');
+		/* Update a project_category */
 		$name = getStringFromRequest('name');
-
-		/*
-			Update a project_category
-		*/
-		session_require_perm ('pm', $pg->getID(), 'manager') ;
-
-		$pc = new ProjectCategory($pg,$id);
-		if (!$pc || !is_object($pc)) {
-			exit_error(_('Unable to create ProjectCategory Object'),'pm');
-		} elseif ($pc->isError()) {
-			exit_error($pc->getErrorMessage(),'pm');
+		if (trim($name) == '') {
+			$error_msg .= _('Name is required');
 		} else {
-			if (!$pc->update($name)) {
-				exit_error(_('Update failed')._(': ').$pc->getErrorMessage(),'pm');
+			$id = getIntFromRequest('id');
+			session_require_perm ('pm', $pg->getID(), 'manager') ;
+
+			$pc = new ProjectCategory($pg,$id);
+			if (!$pc || !is_object($pc)) {
+				exit_error(_('Unable to create ProjectCategory Object'),'pm');
+			} elseif ($pc->isError()) {
+				exit_error($pc->getErrorMessage(),'pm');
 			} else {
-				$feedback .= _('Category Updated');
-				$update_cat=false;
-				$add_cat=true;
+				if (!$pc->update($name)) {
+					exit_error(_('Update failed')._(': ').$pc->getErrorMessage(),'pm');
+				} else {
+					$feedback .= _('Category Updated');
+					$update_cat=false;
+					$add_cat=true;
+				}
 			}
 		}
 
 	} elseif (getStringFromRequest('update_pg')) {
+		/* Update a subproject */
 		$project_name = getStringFromRequest('project_name');
 		$description = getStringFromRequest('description');
 		$send_all_posts_to = getStringFromRequest('send_all_posts_to');
 
-		/*
-			Update a subproject
-		*/
 		session_require_perm ('pm', $pg->getID(), 'manager') ;
 
 		if (!$pg->update($project_name,$description,$send_all_posts_to)) {
@@ -142,12 +139,10 @@ if (getStringFromRequest('post_changes')) {
 		}
 
 	} elseif ($delete) {
+		/* Delete a subproject */
 		$sure = getStringFromRequest('sure');
 		$really_sure = getStringFromRequest('really_sure');
 
-		/*
-			Delete a subproject
-		*/
 		session_require_perm ('pm', $pg->getID(), 'manager') ;
 
 		if (!$pg->delete(getStringFromRequest('sure'),getStringFromRequest('really_sure'))) {
@@ -188,21 +183,23 @@ if ($add_cat && $group_project_id) {
 		$title_arr=array();
 		$title_arr[]=_('Id');
 		$title_arr[]=_('Title');
-		echo $HTML->listTableTop ($title_arr);
+		echo $HTML->listTableTop($title_arr);
 		for ($i=0; $i < $rows; $i++) {
 			$cells = array();
 			$cells[][] = db_result($result, $i, 'category_id');
-			$cells[][] = util_make_link('/pm/admin/?update_cat=1&id='.db_result($result, $i, 'category_id').'&group_id='.$group_id.'&group_project_id='. $pg->getID(),
+			$cells[][] = util_make_link('/pm/admin/?update_cat=1&amp;id='.db_result($result, $i, 'category_id').'&amp;group_id='.$group_id.'&amp;group_project_id='. $pg->getID(),
 							db_result($result, $i, 'category_name'));
-			echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
+			echo $HTML->multiTableRow(array(), $cells);
 		}
 		echo $HTML->listTableBottom();
 	} else {
 		echo $HTML->information(_('No categories defined'));
 	}
-
 	?>
-	<form action="<?php echo util_make_uri('/pm/admin/?group_id='.$group_id); ?>" method="post">
+	<p class="important"><?php echo _('Once you add a category, it cannot be deleted') ?></p>
+	<?php
+	echo $HTML->openForm(array('action' => '/pm/admin/?group_id='.$group_id, 'method' => 'post'));
+	?>
 	<p>
 	<input type="hidden" name="add_cat" value="y" />
 	<input type="hidden" name="group_project_id" value="<?php echo $pg->getID(); ?>" />
@@ -211,11 +208,9 @@ if ($add_cat && $group_project_id) {
 	</label>
 	<input id="name" required="required" type="text" name="name" value="" />
 	</p>
-	<p class="important"><?php echo _('Once you add a category, it cannot be deleted') ?></p>
 	<p><input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
-	</form>
 	<?php
-
+	echo $HTML->closeForm();
 	pm_footer();
 
 } elseif ($update_cat && $group_project_id && $id) {
@@ -246,8 +241,8 @@ if ($add_cat && $group_project_id) {
 		exit_error($ac->getErrorMessage(),'pm');
 	} else {
 		echo $HTML->information(_('It is not recommended that you change the category name because other things are dependent upon it. When you change the category name, all related items will be changed to the new name.'));
+		echo $HTML->openForm(array('action' => '/pm/admin/?group_id='.$group_id, 'method' => 'post'));
 		?>
-		<form action="<?php echo util_make_uri('/pm/admin/?group_id='.$group_id); ?>" method="post">
 		<p>
 		<input type="hidden" name="update_cat" value="y" />
 		<input type="hidden" name="id" value="<?php echo $ac->getID(); ?>" />
@@ -258,8 +253,8 @@ if ($add_cat && $group_project_id) {
 		<input id="name" required="required" type="text" name="name" value="<?php echo $ac->getName(); ?>" />
 		</p>
 		<p><input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
-		</form>
 		<?php
+		echo $HTML->closeForm();
 	}
 
 	pm_footer();
@@ -274,23 +269,21 @@ if ($add_cat && $group_project_id) {
 
 	?>
 	<p><?php echo _('Add a new subproject to the Tasks. <strong>This is different than adding a task to a subproject.</strong>') ?></p>
-
-	<form action="<?php echo util_make_uri('/pm/admin/?group_id='.$group_id); ?>" method="post">
+	<?php
+	echo $HTML->openForm(array('action' => '/pm/admin/?group_id='.$group_id, 'method' => 'post'));
+	?>
 	<p>
 	<input type="hidden" name="addproject" value="y" />
 	<input type="hidden" name="post_changes" value="y" />
-	<strong><?php echo _('New Subproject Name').utils_requiredField()?></strong>
-	<br />
-	<input type="text" name="project_name" value="" size="15" maxlength="30" required="required" pattern=".{5,}" title="<?php echo _('At least 5 characters') ?>" />
-	<p />
+	<strong><?php echo _('New Subproject Name').utils_requiredField()?></strong><br />
+	<input type="text" name="project_name" value="" size="15" maxlength="30" required="required" pattern=".{5,}" title="<?php echo _('At least 5 characters') ?>" /><br />
 	<strong><?php echo _('Description').utils_requiredField() ?></strong><br />
-	<input type="text" name="description" value="" size="40" maxlength="80" required="required" pattern=".{10,}" title="<?php echo _('At least 10 characters') ?>" />
-	<p />
-	<strong><?php echo _('Send All Updates To')._(':'); ?></strong><br />
-	<input type="email" name="send_all_posts_to" value="" size="40" maxlength="80" /><p />
+	<input type="text" name="description" value="" size="40" maxlength="80" required="required" pattern=".{10,}" title="<?php echo _('At least 10 characters') ?>" /><br />
+	<label for="send_all_posts_to" ><strong><?php echo _('Send All Updates To')._(':'); ?></strong></label><br />
+	<input id="send_all_posts_to" type="email" name="send_all_posts_to" value="" size="40" maxlength="80" /><br />
 	<input type="submit" name="submit" value="<?php echo _('Submit') ?>" />
-	</form>
 	<?php
+	echo $HTML->closeForm();
 	pm_footer();
 
 } elseif (getStringFromRequest('update_pg') && $group_project_id) {
@@ -307,8 +300,9 @@ if ($add_cat && $group_project_id) {
 
 	?>
 	<p><?php echo _('You can modify an existing subproject using this form. Please note that private subprojects can still be viewed by members of your project, but not the general public.') ?></p>
-
-	<form action="<?php echo util_make_uri('/pm/admin/?group_id='.$group_id);; ?>" method="post">
+	<?php
+	echo $HTML->openForm(array('action' => '/pm/admin/?group_id='.$group_id, 'method' => 'post'));
+	?>
 	<input type="hidden" name="post_changes" value="y" />
 	<input type="hidden" name="update_pg" value="y" />
 	<input type="hidden" name="group_project_id" value="<?php echo $pg->getID(); ?>" />
@@ -349,8 +343,8 @@ if ($add_cat && $group_project_id) {
 		</td>
 	</tr>
 	</table>
-	</form>
 	<?php
+	echo $HTML->closeForm();
 	echo '<p>'.util_make_link('/pm/admin/?group_id='.$group_id.'&add_cat=1&group_project_id='.$group_project_id,_('Category Administration')).'</p>';
 	pm_footer();
 
@@ -367,9 +361,8 @@ if ($add_cat && $group_project_id) {
 
 	pm_header(array('title'=>_('Permanently delete this subproject and all its data'),
 					'modal'=>1));
-
+	echo $HTML->openForm(array('action' => '/pm/admin/?group_id='.$group_id.'&group_project_id='.$group_project_id, 'method' => 'post'));
 	?>
-	<form action="<?php echo util_make_uri('/pm/admin/?group_id='.$group_id.'&group_project_id='.$group_project_id); ?>" method="post">
 	<p>
 	<input type="hidden" name="post_changes" value="y" />
 	<input type="hidden" name="delete" value="y" />
@@ -390,9 +383,8 @@ if ($add_cat && $group_project_id) {
 	<p>
 		<input type="submit" name="post_changes" value="<?php echo _('Permanently delete this subproject and all its data') ?>" />
 	</p>
-	</form>
 	<?php
-
+	echo $HTML->closeForm();
 	pm_footer();
 
 } else {

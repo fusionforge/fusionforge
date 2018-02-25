@@ -30,11 +30,16 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'docman/DocumentManager.class.php';
 require_once $gfcommon.'docman/Document.class.php';
 require_once $gfcommon.'docman/DocumentFactory.class.php';
-require_once $gfcommon.'docman/DocumentVersion.class.php';
-require_once $gfcommon.'docman/DocumentVersionFactory.class.php';
 require_once $gfcommon.'docman/DocumentGroup.class.php';
 require_once $gfcommon.'docman/DocumentGroupFactory.class.php';
+require_once $gfcommon.'docman/DocumentReview.class.php';
+require_once $gfcommon.'docman/DocumentReviewFactory.class.php';
+require_once $gfcommon.'docman/DocumentReviewComment.class.php';
+require_once $gfcommon.'docman/DocumentReviewCommentFactory.class.php';
+require_once $gfcommon.'docman/DocumentVersion.class.php';
+require_once $gfcommon.'docman/DocumentVersionFactory.class.php';
 require_once $gfcommon.'docman/include/utils.php';
+require_once $gfcommon.'docman/include/constants.php';
 require_once $gfcommon.'include/TextSanitizer.class.php'; // to make the HTML input by the user safe to store
 require_once $gfcommon.'reporting/report_utils.php';
 require_once $gfcommon.'reporting/ReportPerGroupDocmanDownloads.class.php';
@@ -65,9 +70,18 @@ if (!$g->usesDocman())
 if ($g->isError())
 	exit_error($g->getErrorMessage(), 'docman');
 
+$childgroup_id = getIntFromRequest('childgroup_id', 0);
 $dirid = getIntFromRequest('dirid', 0);
-
-$childgroup_id = getIntFromRequest('childgroup_id');
+if ($dirid) {
+	if ($childgroup_id) {
+		$chkdg = documentgroup_get_object($dirid, group_get_object($childgroup_id)->getID());
+	} else {
+		$chkdg = documentgroup_get_object($dirid, $g->getID());
+	}
+	if (!is_object($chkdg)) {
+		session_redirect('/docman/?group_id='.$group_id);
+	}
+}
 
 /* everything sounds ok, now let's do the job */
 $action = getStringFromRequest('action');
@@ -83,6 +97,7 @@ html_use_storage();
 html_use_simplemenu();
 html_use_jqueryui();
 html_use_jquerysplitter();
+html_use_jquerygentleselect();
 use_javascript('/docman/scripts/DocManController.js');
 html_use_tablesorter();
 

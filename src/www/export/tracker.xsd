@@ -162,19 +162,6 @@
 			</xsd:simpleContent>
 		</xsd:complexType>
 	</xsd:element>
-	<xsd:element name="resolution">
-		<xsd:complexType>
-			<xsd:simpleContent>
-				<xsd:extension base="xsd:string">
-					<xsd:attribute name="id">
-						<xsd:simpleType>
-							<xsd:restriction base="xsd:int"/>
-						</xsd:simpleType>
-					</xsd:attribute>
-				</xsd:extension>
-			</xsd:simpleContent>
-		</xsd:complexType>
-	</xsd:element>
 	<xsd:element name="sender" type="xsd:string"/>
 	<xsd:element name="status">
 		<xsd:complexType>

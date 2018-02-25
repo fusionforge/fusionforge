@@ -33,6 +33,7 @@ global $HTML;
 */
 $boxid = getIntFromRequest('boxid');
 $ac = new ArtifactExtraField($ath,$boxid);
+$ef_type = $ac->getType();
 if (!$ac || !is_object($ac)) {
 	exit_error(_('Unable to create ArtifactExtraField Object'),'tracker');
 } elseif ($ac->isError()) {
@@ -55,6 +56,10 @@ if (!$ac || !is_object($ac)) {
 		echo html_ao('p');
 		echo html_e('label', array('for'=>'name'), html_e('strong', array(), _('Element')._(':')).html_e('br'));
 		echo html_e('input', array('type'=>'text', 'id'=>'name', 'name'=>'name', 'value'=>$ao->getName()));
+		if (in_array($ef_type, unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_CHOICE))) {
+			echo html_build_checkbox('is_default', false, $ao->isDefault());
+			echo html_e('label', array('for'=>'is_default'), _('Default value'));
+		}
 		echo html_ac(html_ap()-1);
 		// Show a pop-up box to choose the possible statuses that this element will map to
 		if ($ac->getType() == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
@@ -69,7 +74,7 @@ if (!$ac || !is_object($ac)) {
 				$parentFieldElmntVals[$parentFieldElmnt['element_id']] = $parentFieldElmnt['element_name'];
 			}
 			$checkedElmntsArr = $ao->getParentElements();
-			echo html_build_checkboxes_from_array($parentFieldElmntVals, 'parent_elements', $checkedElmntsArr, true);
+			echo html_build_checkboxes_from_array($parentFieldElmntVals, 'parent_elements', $checkedElmntsArr, true, false);
 		}
 		if ($ac->isAutoAssign()) {
 			echo html_e('strong',array(),_('Auto assign to')._(':')).html_e('br');
@@ -85,6 +90,13 @@ if (!$ac || !is_object($ac)) {
 		} else {
 			echo html_e('input', array('type'=>'hidden', 'name'=>'auto_assign_to', 'value'=>100));
 		}
+
+		echo html_ao('p');
+		echo html_e('label', array('for'=>'formula'), html_e('strong', array(), _('Formula')._(':')).html_e('br'));
+		echo html_e('textarea', array('type'=>'text', 'id'=>'formula', 'name'=>'formula', 'rows'=>4, 'cols'=>50), $ao->getFormula(), false).html_e('br');;
+		echo html_e('button', array('onclick'=>'location.href="/tracker/admin/?edit_formula=1&group_id='.$group_id.'&id='.$id.'&atid='.$ath->getID().'&boxid='.$boxid.'"; return false;'),_('Edit formula'));
+		echo html_ac(html_ap()-1);
+
 		echo $HTML->warning_msg(_('It is not recommended that you change the custom field name because other things are dependent upon it. When you change the custom field name, all related items will be changed to the new name.'));
 		echo html_ao('p');
 		echo html_e('input', array('type'=>'submit', 'name'=>'post_changes', 'value'=> _('Update')));

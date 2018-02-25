@@ -36,9 +36,11 @@ $ath->adminHeader(array ('title'=>sprintf(_('Permanently Delete Tracker %s'),
 <?php
 echo $HTML->openForm(array('action' => '/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID(), 'method' => 'post'));
 ?>
-<input type="hidden" name="delete" value="y" /><br />
-<?php echo _('You are about to permanently and irretrievably delete this tracker and all its contents!'); ?>
 <p>
+<?php echo _('You are about to permanently and irretrievably delete this tracker and all its contents!'); ?>
+</p>
+<p>
+<input type="hidden" name="delete" value="y" />
 <input id="sure" type="checkbox" name="sure" value="1" />
 <label for="sure">
 <?php echo _("I am Sure") ?><br />

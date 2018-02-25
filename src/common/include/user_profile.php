@@ -43,21 +43,17 @@ function user_personal_information($user, $compact = false, $title = false) {
 	if ($params['content']) {
 		$user_logo = $params['content'];
 	}
-	$html = $HTML->listTableTop();
-	if($compact) {
-
-		if($title) {
-			$html .= '<tr>
-						<td colspan="2">'. $title . '</td>
-					  </tr>';
-		}
+	$html = $HTML->listTableTop(array(), array(), 'full');
+	if ($compact && $title) {
+		$html .= '<tr>
+			<td colspan="2">'. $title . '</td>
+			  </tr>';
 	}
 
 	$html .= '<tr>';
 	if($user_logo) {
-		$html .= '<td width="150">'. $user_logo .'</td>';
-	}
-	else {
+		$html .= '<td style="width: 150px;">'. $user_logo .'</td>';
+	} else {
 		$html .= '<td></td>';
 	}
 	$html .='<td>
@@ -83,8 +79,7 @@ function user_personal_information($user, $compact = false, $title = false) {
 			</tr>
 			<tr>
 				<td>'. _('Login Name') . _(': ') .'</td>
-				<td><strong><span property="sioc:name">' .
-	$user->getUnixName() . '</span></strong></td>
+				<td><strong><span property="sioc:name">' . $user->getUnixName() . '</span></strong></td>
 			</tr>
 			<tr>
 				<td>'. _('Real Name') . _(': ')  .'</td>';
@@ -93,8 +88,7 @@ function user_personal_information($user, $compact = false, $title = false) {
 	$html .= '<td>
 				<div rev="foaf:account">
 					<div about="#me" typeof="foaf:Person">
-						<strong><span property="foaf:name">'.
-	$user_title_name .'</span></strong>
+						<strong><span property="foaf:name">'. $user_title_name .'</span></strong>
 					</div>
 				</div>
 				</td>
@@ -110,7 +104,7 @@ function user_personal_information($user, $compact = false, $title = false) {
 		// Removed for privacy reasons
 		//print '<span property="sioc:email" content="'. $user_mail .'">';
 				'<span property="sioc:email_sha1" content="'. $user_mailsha1 .'">' .
-		util_make_link ('/sendmessage.php?touser='.$user_id, str_replace('@',' @nospam@ ',$user_mail)) .
+		util_make_link('/sendmessage.php?touser='.$user_id, str_replace('@',' @nospam@ ',$user_mail)) .
 				'</span>
 				</strong>
 			</td>
@@ -147,7 +141,7 @@ function user_personal_information($user, $compact = false, $title = false) {
 				<td><strong>'. relative_date($user->getAddDate()). '</strong>
 				</td>
 			</tr>';
-	if($compact) {
+	if ($compact) {
 		$user_uri = util_make_url('/users/'. $user->getUnixName() . '/');
 		$html .= '<tr>
 					<td><small>'. _('URI:') .'</small></td>

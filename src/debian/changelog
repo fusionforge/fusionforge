@@ -1,11 +1,39 @@
+fusionforge (6.1~beta2) UNRELEASED; urgency=medium
+
+  * New snapshot from 6.1 stabilization branch
+
+ -- Franck Villaume <franck.villaume@trivialdev.com>  Fri, 23 Feb 2018 13:43:00 +0200
+
+fusionforge (6.1~beta1) UNRELEASED; urgency=medium
+
+  * New snapshot from 6.1 stabilization branch
+
+ -- Franck Villaume <franck.villaume@trivialdev.com>  Sun, 10 Dec 2017 08:30:00 +0200
+
+fusionforge (6.1~alpha0) UNRELEASED; urgency=medium
+
+  * New snapshot from 6.1 stabilization branch
+
+ -- Franck Villaume <franck.villaume@trivialdev.com>  Sun, 01 Oct 2017 15:00:00 +0200
+
 fusionforge (6.0.50-0) UNRELEASED; urgency=medium
 
   * New snapshot from master branch.
 
  -- Roland Mas <lolando@debian.org>  Wed, 24 Jun 2015 11:32:26 +0200
 
-fusionforge (6.0.4-1+) UNRELEASED; urgency=medium
+fusionforge (6.0.5-2) unstable; urgency=medium
 
+  * Disable the scmcvs and scmbzr plugins in official Debian packages (not
+    the ones built by fusionforge.org), again.  Mediawiki is still fine.
+  * Adapt installation script to PostgreSQL 10 (which dropped the
+    createlang tool).
+
+ -- Roland Mas <lolando@debian.org>  Sat, 02 Dec 2017 16:52:51 +0100
+
+fusionforge (6.0.5-1) unstable; urgency=medium
+
+  * New upstream release.
   * More packaging fixes for php7.0:
   * Bug fix: "PHP 7.0 Transition", thanks to Ondřej Surý (Closes:
     #821486).
@@ -33,8 +61,9 @@ fusionforge (6.0.4-1+) UNRELEASED; urgency=medium
     #821497).
   * Fixed Lintian warning (fusionforge-web dependency on virtual package
     only).
+  * Removed Olivier Berger from uploaders.  Thanks, Olivier!
 
- -- Roland Mas <lolando@debian.org>  Mon, 02 May 2016 10:57:13 +0200
+ -- Roland Mas <lolando@debian.org>  Fri, 17 Nov 2017 16:19:24 +0100
 
 fusionforge (6.0.4-1) unstable; urgency=medium
 

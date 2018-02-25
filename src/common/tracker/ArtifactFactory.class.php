@@ -4,7 +4,8 @@
  *
  * Copyright 2002, GForge, LLC
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2016, Franck Villaume - TrivialDev
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -49,6 +50,7 @@ class ArtifactFactory extends FFError {
 	var $last_changed;
 	var $submitted_by;
 	var $assigned_to;
+	var $last_modified_by;
 	var $offset;
 	var $max_rows;
 	var $fetched_rows;
@@ -78,27 +80,29 @@ class ArtifactFactory extends FFError {
 			return;
 		}
 		$this->ArtifactType =& $ArtifactType;
-		$this->changed_from = 0x7ffffff; // Any
+		$this->changed_from = 0; // Any
 	}
 
 	/**
 	 * setup - sets up limits and sorts before you call getArtifacts().
 	 *
-	 * @param	int	$offset		The offset - number of rows to skip.
-	 * @param	string	$order_col	The column to sort on.
-	 * @param	string	$sort		The way to order - ASC or DESC.
-	 * @param	int	$max_rows	The max number of rows to return.
-	 * @param	string	$set		Whether to set these prefs into the user_prefs table - use "custom".
-	 * @param	int	$_assigned_to	Include this param if you want to limit to a certain assignee.
-	 * @param	int	$_status	Include this param if you want to limit to a particular status.
-	 * @param	array	$_extra_fields	Array of extra fields & elements to limit the query to.
+	 * @param	int	$offset			The offset - number of rows to skip.
+	 * @param	string	$order_col		The column to sort on.
+	 * @param	string	$sort			The way to order - ASC or DESC.
+	 * @param	int	$max_rows		The max number of rows to return.
+	 * @param	string	$set			Whether to set these prefs into the user_prefs table - use "custom".
+	 * @param	int	$_assigned_to		Include this param if you want to limit to a certain assignee.
+	 * @param	int	$_status		Include this param if you want to limit to a particular status.
+	 * @param	array	$_extra_fields		Array of extra fields & elements to limit the query to.
+	 * @param	int	$_changed_from		Set this param if you want to limit from an UNIX epoch time. Default = 0, no limit in time.
+	 * @param	int	$_last_modified_by	Include this param if you want to limit to a certain last modifier
+	 * @param	int	$_priority		Set this param if you want to limit to a certain priority
 	 */
-	function setup($offset,$order_col,$sort,$max_rows,$set,$_assigned_to,$_status,$_extra_fields=array()) {
-
+	function setup($offset, $order_col, $sort, $max_rows, $set, $_assigned_to, $_status, $_extra_fields = array(), $_changed_from = 0, $_last_modified_by = 0, $_priority = 0) {
 		if ((!$offset) || ($offset < 0)) {
-			$this->offset=0;
+			$this->offset = 0;
 		} else {
-			$this->offset=$offset;
+			$this->offset = $offset;
 		}
 
 		// $max_rows == 0 means we want all the rows
@@ -112,10 +116,10 @@ class ArtifactFactory extends FFError {
 			$u =& session_get_user();
 		}
 		if (!is_array($_extra_fields)) {
-			$_extra_fields=array();
+			$_extra_fields = array();
 		}
 
-		$_changed=0;
+		$_changed = 0;
 		if (!$set) {
 			/*
 				if no set is passed in, see if a preference was set
@@ -123,44 +127,46 @@ class ArtifactFactory extends FFError {
 			*/
 			$this->query_type = '';
 			if (session_loggedin()) {
-				$query_id=$u->getPreference('art_query'.$this->ArtifactType->getID());
+				$query_id = $u->getPreference('art_query'.$this->ArtifactType->getID());
 				if ($query_id) {
 					$this->query_type = 'query';
 					$this->query_id = $query_id;
 				} else {
-					$custom_pref=$u->getPreference('art_cust'.$this->ArtifactType->getID());
+					$custom_pref = $u->getPreference('art_cust'.$this->ArtifactType->getID());
 					if ($custom_pref) {
 //$_assigned_to.'|'.$_status.'|'.$_order_col.'|'.$_sort_ord.'|'.$_changed.'|'.serialize($_extra_fields);
 						$this->query_type = 'custom';
-						$pref_arr=explode('|',$custom_pref);
-						$_assigned_to=$pref_arr[0];
-						$_status=$pref_arr[1];
-						$order_col=$pref_arr[2];
-						$sort=$pref_arr[3];
-						$_changed=$pref_arr[4];
-						if ($this->ArtifactType->usesCustomStatuses()) {
-							$_extra_fields=unserialize($pref_arr[5]);
+						$pref_arr     = explode('|',$custom_pref);
+						$_assigned_to = $pref_arr[0];
+						$_status      = $pref_arr[1];
+						$order_col    = $pref_arr[2];
+						$sort         = $pref_arr[3];
+						$_changed     = $pref_arr[4];
+						if ($this->ArtifactType->usesCustomStatuses() && isset($pref_arr[5])) {
+							$_extra_fields = unserialize($pref_arr[5]);
 						} else {
-							$_status=$pref_arr[1];
+							$_status = $pref_arr[1];
 						}
-						$set='custom';
+						$set = 'custom';
 					}
 				}
-			} elseif (isset($_COOKIE["GFTrackerQuery"])) {
-				$gf_tracker = unserialize($_COOKIE["GFTrackerQuery"]);
-				$query_id = (int)$gf_tracker[$this->ArtifactType->getID()];
-				if ($query_id) {
-					$this->query_type = 'query';
-					$this->query_id = $query_id;
+			} elseif (isset($_COOKIE['GFTrackerQuery'])) {
+				$gf_tracker = unserialize($_COOKIE['GFTrackerQuery']);
+				if (isset($gf_tracker[$this->ArtifactType->getID()])) {
+					$query_id = (int)$gf_tracker[$this->ArtifactType->getID()];
+					if ($query_id) {
+						$this->query_type = 'query';
+						$this->query_id = $query_id;
+					}
 				}
 			}
 
 			if (!$this->query_type) {
-				$res = db_query_params ('SELECT artifact_query_id FROM artifact_query
-					WHERE group_artifact_id=$1
-					AND query_type=2',
+				$res = db_query_params('SELECT artifact_query_id FROM artifact_query
+							WHERE group_artifact_id=$1
+							AND query_type=2',
 							array($this->ArtifactType->getID()));
-				if (db_numrows($res)>0) {
+				if (db_numrows($res) > 0) {
 					$this->query_type = 'query';
 					$this->query_id = db_result($res, 0, 'artifact_query_id');
 				}
@@ -169,25 +175,26 @@ class ArtifactFactory extends FFError {
 			if (!$this->query_type) {
 				//default to all opened
 				$this->query_type = 'default';
-				$_assigned_to=0;
-				$_status=1;
-				$_changed=0;
+				$_assigned_to = 0;
+				$_status = 1;
+				$_changed = 0;
 			}
 
 			if ($this->query_type == 'query') {
 				$aq = new ArtifactQuery($this->ArtifactType, $this->query_id);
-				$this->submitted_by=$aq->getSubmitter();
-				$_assigned_to=$aq->getAssignee();
-				$_status=$aq->getStatus();
-				$_extra_fields=$aq->getExtraFields();
-				$this->moddaterange = $aq->getModDateRange();
-				$this->opendaterange = $aq->getOpenDateRange();
-				$this->closedaterange = $aq->getCloseDateRange();
-				$this->summary = $aq->getSummary();
-				$this->description = $aq->getDescription();
-				$this->followups = $aq->getFollowups();
-				$order_col=$aq->getSortCol();
-				$sort=$aq->getSortOrd();
+				$this->submitted_by     = $aq->getSubmitter();
+				$_assigned_to           = $aq->getAssignee();
+				$this->last_modified_by = $aq->getLastModifier();
+				$_status                = $aq->getStatus();
+				$_extra_fields          = $aq->getExtraFields();
+				$this->moddaterange     = $aq->getModDateRange();
+				$this->opendaterange    = $aq->getOpenDateRange();
+				$this->closedaterange   = $aq->getCloseDateRange();
+				$this->summary          = $aq->getSummary();
+				$this->description      = $aq->getDescription();
+				$this->followups        = $aq->getFollowups();
+				$order_col              = $aq->getSortCol();
+				$sort                   = $aq->getSortOrd();
 			}
 		}
 
@@ -195,7 +202,7 @@ class ArtifactFactory extends FFError {
 		//  validate the column names and sort order passed in from user
 		//  before saving it to prefs
 		//
-		$allowed_order_col = array ('artifact_id',
+		$allowed_order_col = array('artifact_id',
 					   'summary',
 					   'open_date',
 					   'close_date',
@@ -203,21 +210,20 @@ class ArtifactFactory extends FFError {
 					   'submitted_by',
 					   'priority',
 					   'last_modified_date',
+					   'last_modified_by',
 					   '_votes',
 					   '_voters',
-					   '_votage') ;
+					   '_votage');
 		$efarr = $this->ArtifactType->getExtraFields();
-		$keys=array_keys($efarr);
-		for ($k=0; $k<count($keys); $k++) {
-			$i=$keys[$k];
+		$keys = array_keys($efarr);
+		for ($k = 0; $k < count($keys); $k++) {
+			$i = $keys[$k];
 			$allowed_order_col[] = $efarr[$i]['extra_field_id'];
 		}
 
-		$_order_col = util_ensure_value_in_set ($order_col,
-							$allowed_order_col);
-		$_sort_ord = util_ensure_value_in_set ($sort,
-						       array ('ASC', 'DESC')) ;
-		if ($set=='custom') {
+		$_order_col = util_ensure_value_in_set($order_col, $allowed_order_col);
+		$_sort_ord = util_ensure_value_in_set($sort, array('ASC', 'DESC')) ;
+		if ($set == 'custom') {
 			$this->query_type = 'custom';
 			if (session_loggedin()) {
 				/*
@@ -252,25 +258,21 @@ class ArtifactFactory extends FFError {
 					$u->deletePreference('art_query'.$this->ArtifactType->getID());
 				}
 			}
-			$_changed=0;
+			$_changed = 0;
+		}
+		//ugly hack to force _changed value to parameter
+		if ($_changed_from) {
+			$_changed = $_changed_from;
 		}
 
-		$this->sort=$_sort_ord;
-		$this->order_col=$_order_col;
-		$this->status=$_status;
-		$this->assigned_to=$_assigned_to;
-		$this->extra_fields=$_extra_fields;
-		$this->setChangedFrom($_changed);
-	}
-
-	/**
-	 * setChangedFrom - sets up changed-from and last-changed before you call getArtifacts().
-	 *
-	 * @param	int	$changed_from	The changed_from - offset time(sec) from now
-	 */
-	function setChangedFrom($changed_from) {
-		$this->changed_from = ($changed_from <= 0) ? 0x7fffffff : $changed_from;
-		$this->last_changed = time() - $this->changed_from;
+		$this->sort             = $_sort_ord;
+		$this->order_col        = $_order_col;
+		$this->status           = $_status;
+		$this->assigned_to      = $_assigned_to;
+		$this->extra_fields     = $_extra_fields;
+		$this->last_changed     = $_changed;
+		$this->last_modified_by = $_last_modified_by;
+		$this->priority         = $_priority;
 	}
 
 	/**
@@ -279,10 +281,11 @@ class ArtifactFactory extends FFError {
 	 * @return	int
 	 */
 	function getDefaultQuery() {
-		if ($this->query_type == 'query')
+		if ($this->query_type == 'query') {
 			return $this->query_id;
-		else
+		} else {
 			return '';
+		}
 	}
 
 	/**
@@ -318,9 +321,32 @@ class ArtifactFactory extends FFError {
 				$res = db_query_params ('SELECT field_type FROM artifact_extra_field_list WHERE extra_field_id=$1',
 							array($keys[$i])) ;
 				$type = db_result($res,0,'field_type');
-				if ($type == 4 or $type == 6) {
+				if ($type == ARTIFACT_EXTRAFIELDTYPE_TEXT or $type == ARTIFACT_EXTRAFIELDTYPE_TEXTAREA) {
 					$wheresql .= ' AND aefd'.$i.'.field_data LIKE $'.$paramcount++ ;
 					$params[] = $vals[$i];
+				} elseif ($type == ARTIFACT_EXTRAFIELDTYPE_DATE || $type == ARTIFACT_EXTRAFIELDTYPE_DATETIME) {
+					preg_match('/([0-9]{4}-[0-9]{2}-[0-9]{2}) ([0-9]{4}-[0-9]{2}-[0-9]{2})/', $vals[$i], $matches);
+					$strartDate = DateTime::createFromFormat('!Y-m-d', $matches[1]);
+					$endDate = DateTime::createFromFormat('!Y-m-d', $matches[2]);
+					$wheresql .= ' AND cast(aefd'.$i.'.field_data AS BIGINT) BETWEEN $'.$paramcount++;
+					$params[] = $strartDate->format('U');
+					$wheresql .= ' AND $'.$paramcount++;
+					$params[] = $endDate->format('U');
+				} elseif ($type == ARTIFACT_EXTRAFIELDTYPE_EFFORT) {
+					if (preg_match('/^(\d+U\d+) ?(\d+U\d+)?$/',$vals[$i],$matches)) {
+						$startEffort = intval($matches[1]);
+						$endEffort = intval($matches[2]);
+						if ($startEffort>$endEffort) {
+							$startEffort=$endEffort;
+							$endEffort=intval($matches[1]);
+						}
+						if ($endEffort) {
+							$wheresql .= ' AND cast(substring(aefd'.$i.'.field_data from \'^[0-9]+\') AS BIGINT) BETWEEN $'.$paramcount++;
+							$params[] = $startEffort;
+							$wheresql .= ' AND $'.$paramcount++;
+							$params[] = $endEffort;
+						}
+					}
 				} else {
 					if (is_array($vals[$i])) {
 						$wheresql .= ' AND aefd'.$i.'.field_data = ANY ($'.$paramcount++ .')' ;
@@ -333,7 +359,6 @@ class ArtifactFactory extends FFError {
 				$wheresql .= ' AND aefd'.$i.'.artifact_id=artifact_vw.artifact_id' ;
 			}
 		}
-
 		//if status selected, and more to where clause
 		if ($this->status && ($this->status != 100)) {
 			//for open tasks, add status=100 to make sure we show all
@@ -365,9 +390,26 @@ class ArtifactFactory extends FFError {
 			}
 		}
 
+		//if assigned to selected, and more to where clause
+		if ($this->last_modified_by) {
+			if (is_array($this->last_modified_by)) {
+				$wheresql .= ' AND last_modified_by = ANY ($'.$paramcount++ ;
+				$params[] = db_int_array_to_any_clause ($this->last_modified_by) ;
+				$wheresql .= ')' ;
+			} else {
+				$wheresql .= ' AND last_modified_by = $'.$paramcount++ ;
+				$params[] = $this->last_modified_by ;
+			}
+		}
+
 		if ($this->last_changed > 0) {
 			$wheresql .= ' AND last_modified_date > $'.$paramcount++ ;
 			$params[] = $this->last_changed ;
+		}
+
+		if ($this->priority > 0) {
+			$wheresql .= ' AND priority = $'.$paramcount++ ;
+			$params[] = $this->priority ;
 		}
 
 		//add constraint of range of modified dates
@@ -423,7 +465,6 @@ class ArtifactFactory extends FFError {
 
 		$sortorder = util_ensure_value_in_set ($this->sort,
 						       array ('ASC', 'DESC')) ;
-
 		$sortcol = util_ensure_value_in_set ($this->order_col,
 						     array ('extra',
 							    'artifact_id',
@@ -432,17 +473,28 @@ class ArtifactFactory extends FFError {
 							    'close_date',
 							    'assigned_to',
 							    'submitted_by',
+							    'last_modified_by',
 							    'priority',
 							    '_votage',
 							    '_voters',
 							    '_votes'));
 
 		if ($sortcol != 'extra' && $sortcol != '_votes' && $sortcol != '_voters' && $sortcol != '_votage' ) {
+			switch ($sortcol) {
+				case 'assigned_to':
+					$sortcol = 'assigned_realname';
+					break;
+				case 'submitted_by':
+					$sortcol = 'submitted_realname';
+					break;
+				case 'last_modified_by':
+					$sortcol = 'last_modified_realname';
+					break;
+			}
 			$ordersql = " ORDER BY Artifacts.group_artifact_id $sortorder, Artifacts.$sortcol $sortorder" ;
 		} else {
 			$ordersql = ''  ;
 		}
-
 		$result = db_query_params ('SELECT * FROM (' . $selectsql . $wheresql . ') AS Artifacts' . $ordersql,
 					   $params) ;
 		$rows = db_numrows($result);

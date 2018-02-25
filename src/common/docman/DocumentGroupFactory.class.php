@@ -55,7 +55,7 @@ class DocumentGroupFactory extends FFError {
 		parent::__construct();
 
 		if (!$Group || !is_object($Group)) {
-			$this->setError(_('No Valid Group Object'));
+			$this->setError(_('Invalid Project'));
 			return;
 		}
 		if ($Group->isError()) {
@@ -99,7 +99,7 @@ class DocumentGroupFactory extends FFError {
 	/**
 	 * getDocumentGroups - Return an array of DocumentGroup objects.
 	 *
-	 * @param	int	$stateid	The array of stateid of DocumentGroups : default is public (1).
+	 * @param	array	$stateid	The array of stateid of DocumentGroups : default is public (1).
 	 * @return	array	The array of DocumentGroup.
 	 */
 	function &getDocumentGroups($stateid = array(1)) {

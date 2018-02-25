@@ -88,7 +88,7 @@ if (count($rs) < 1) {
 			$content .= util_make_link('#', $HTML->getDeletePic(_('Delete this release'), _('Delete release')), array('onclick' => 'javascript:controllerFRS.toggleConfirmBox({idconfirmbox: \'confirmbox1\', do: \''._('Delete the release').' '.$rs[$i]->getName().'\', cancel: \''._('Cancel').'\', height: 150, width: 300, action: \''.$deleteUrlAction.'\'})' ), true);
 		}
 		$cells[][] = $content;
-		echo $HTML->multiTableRow(array('id' => 'releaseid'.$rs[$i]->getID(), 'class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
+		echo $HTML->multiTableRow(array('id' => 'releaseid'.$rs[$i]->getID()), $cells);
 	}
 	echo $HTML->listTableBottom();
 	if ($permissionlevel >= 3) {

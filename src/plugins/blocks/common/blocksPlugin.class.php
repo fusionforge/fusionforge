@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright (C) 2006 Alain Peyrat, Alcatel-Lucent
  * Copyright (C) 2010 Alain Peyrat <aljeux@free.fr>
@@ -49,16 +48,16 @@ class blocksPlugin extends Plugin {
 
 	function __construct() {
 		parent::__construct();
-		$this->name = "blocks";
-		$this->text = _("Blocks"); // To show in the tabs, use...
+		$this->name = 'blocks';
+		$this->text = _('Blocks'); // To show in the tabs, use...
 		$this->pkg_desc =
 _("This plugin contains the Blocks subsystem of FusionForge. It allows each
 FusionForge project to have its own Blocks, and gives some
 control over it to the project's administrator.");
-		$this->hooks[] = "groupisactivecheckbox"; // The "use ..." checkbox in editgroupinfo
-		$this->hooks[] = "groupisactivecheckboxpost"; //
-		$this->hooks[] = "project_admin_plugins"; // to show up in the admin page fro group
-		$this->hooks[] = "blocks"; // to show up in the admin page fro group
+		$this->hooks[] = 'groupisactivecheckbox'; // The "use ..." checkbox in editgroupinfo
+		$this->hooks[] = 'groupisactivecheckboxpost'; //
+		$this->hooks[] = 'project_admin_plugins'; // to show up in the admin page fro group
+		$this->hooks[] = 'blocks'; // to show up in the admin page fro group
 		$this->hooks[] = 'widget_instance';
 		$this->hooks[] = 'widgets';
 	}
@@ -75,7 +74,7 @@ control over it to the project's administrator.");
 		// Check if block is active and if yes, display the block.
 		// Return true if plugin is active, false otherwise.
 		$group = group_get_object($GLOBALS['group_id']);
-		if ($group && $group->usesPlugin ( $this->name )) {
+		if ($group && $group->usesPlugin($this->name)) {
 			$content = $this->renderBlock($params);
 			if ($content !== false) {
 				echo $content;
@@ -89,14 +88,14 @@ control over it to the project's administrator.");
 		$group_id = $GLOBALS['group_id'];
 		$res = db_query_params('SELECT title
 				FROM plugin_blocks
-				WHERE group_id=$1
-				AND name=$2
-				AND status=1',
+				WHERE group_id = $1
+				AND name = $2
+				AND status = 1',
 				array($group_id, $name)); // 1 is for active
-		if (db_numrows($res)== 0) {
+		if (db_numrows($res) == 0) {
 			return false;
 		} else {
-			return db_result($res,0,"title");
+			return db_result($res, 0, 'title');
 		}
 	}
 
@@ -104,14 +103,14 @@ control over it to the project's administrator.");
 		$group_id = $GLOBALS['group_id'];
 		$res = db_query_params('SELECT content
 				FROM plugin_blocks
-				WHERE group_id=$1
-				AND name=$2
-				AND status=1',
+				WHERE group_id = $1
+				AND name = $2
+				AND status = 1',
 				array($group_id, $name)); // 1 is for active
-		if (db_numrows($res)== 0) {
+		if (db_numrows($res) == 0) {
 			return false;
 		} else {
-			return db_result($res,0,"content");
+			return db_result($res, 0, 'content');
 		}
 	}
 	function renderBlock($name) {
@@ -119,27 +118,34 @@ control over it to the project's administrator.");
 		if ($content === false) {
 			return false;
 		} elseif ($content) {
-			return $this->parseContent($content).'<br />';
+			return $this->parseContent($content);
 		} else {
-			return '<table width="100%" border="1" cellpadding="0" cellspacing="0">'.
-					'<tr><td align="center">block: '.$name.'</td></tr></table><br />';
+			return '<table class="fullwidth boxed">'.
+					'<tr><td class="align-center">block: '.$name.'</td></tr></table><br />';
 		}
 	}
 
 	function parseContent($text) {
 		global $HTML;
+		$parsertype = forge_get_config('parser_type', 'blocks');
+		switch ($parsertype) {
+			case 'markdown':
+				require_once 'markdown.php';
+				$text = Markdown($text);
+				break;
+			default:
+				$text = preg_replace_callback('/<p>{boxTop (.*?)}<\/p>/i', function($m) { global $HTML; return $HTML->boxTop($m[1]); }, $text);
+				$text = preg_replace_callback('/{boxTop (.*?)}/i', function($m) { global $HTML; return $HTML->boxTop($m[1]); }, $text);
+				$text = preg_replace_callback('/<p>{boxMiddle (.*?)}<\/p>/i', function($m) { global $HTML; return $HTML->boxMiddle($m[1]); }, $text);
+				$text = preg_replace_callback('/{boxMiddle (.*?)}/i', function($m) { global $HTML; return $HTML->boxMiddle($m[1]); }, $text);
+				$text = preg_replace_callback('/<p>{boxBottom}<\/p>/i', function($m) { global $HTML; return $HTML->boxBottom($m[1]); }, $text);
+				$text = preg_replace_callback('/{boxBottom}/i', function($m) { global $HTML; return $HTML->boxBottom($m[1]); }, $text);
 
-		$text = preg_replace('/<p>{boxTop (.*?)}<\/p>/ie', '$HTML->boxTop(\'$1\')', $text);
-		$text = preg_replace('/{boxTop (.*?)}/ie', '$HTML->boxTop(\'$1\')', $text);
-		$text = preg_replace('/<p>{boxMiddle (.*?)}<\/p>/ie', '$HTML->boxMiddle(\'$1\')', $text);
-		$text = preg_replace('/{boxMiddle (.*?)}/ie', '$HTML->boxMiddle(\'$1\')', $text);
-		$text = preg_replace('/<p>{boxBottom}<\/p>/i', $HTML->boxBottom(), $text);
-		$text = preg_replace('/{boxBottom}/i', $HTML->boxBottom(), $text);
-
-		$text = preg_replace('/<p>{boxHeader}/i', '<hr />', $text);
-		$text = preg_replace('/{boxHeader}/i', '<hr />', $text);
-		$text = preg_replace('/{boxFooter}<\/p>/i', '<hr />', $text);
-		$text = preg_replace('/{boxFooter}/i', '<hr />', $text);
+				$text = preg_replace('/<p>{boxHeader}/i', '<hr />', $text);
+				$text = preg_replace('/{boxHeader}/i', '<hr />', $text);
+				$text = preg_replace('/{boxFooter}<\/p>/i', '<hr />', $text);
+				$text = preg_replace('/{boxFooter}/i', '<hr />', $text);
+		}
 
 		return $text;
 	}
@@ -169,7 +175,7 @@ control over it to the project's administrator.");
 			require_once 'common/widget/WidgetLayoutManager.class.php';
 			$params['fusionforge_widgets'][] = 'plugin_blocks_project_summary';
 			return true;
-		} else if ($params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_HOME) {
+		} elseif ($params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_HOME) {
 			$params['fusionforge_widgets'][] = 'plugin_blocks_home_summary';
 			return true;
 		}

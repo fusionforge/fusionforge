@@ -77,7 +77,7 @@ class ScmGitWUITest extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=Admin");
 		$this->clickAndWait("link=Tools");
 		$this->clickAndWait("link=Source Code Admin");
-		$this->clickAndWait("//form[@name='form_delete_repo_other-repo']/input[@value='Delete']");
+		$this->clickAndWait("//form[@name='form_delete_repo_other-repo']/div/input[@value='Delete']");
 		$this->assertTextPresent("Repository other-repo is marked for deletion");
 
 		// Run the cronjob to create repositories

@@ -149,7 +149,7 @@ if ( $cat === 'c' ) {
 
 	// ######## two column table for key on right
 	// first print all parent cats and current cat (breadcrumb)
-	echo $HTML->listTableTop();
+	echo $HTML->listTableTop(array(), array(), 'full');
 	print '<tr class="top">' . "\n";
 	print '<td id="project-tree-col1">' . "\n";
 

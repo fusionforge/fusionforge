@@ -73,7 +73,7 @@ function frs_show_processor_popup($name = 'processor_id', $checked_val = 'xzxz')
 /**
  * frs_show_release_popup - pop-up select box of packages:releases for this group
  *
- * @param	integer	$group_id	the project id
+ * @param	int	$group_id	the project id
  * @param	string	$name		default value 'processor_id'
  * @param	string	$checked_val	default value 'xzxz'
  * @return	string	html code
@@ -97,7 +97,7 @@ function frs_show_release_popup($group_id, $name = 'release_id', $checked_val = 
 /**
  * frs_show_package_popup - pop-up select box of packages for this group
  *
- * @param	integer	$group_id	the project id
+ * @param	int	$group_id	the project id
  * @param	string	$name		default value 'processor_id'
  * @param	string	$checked_val	default value 'xzxz'
  * @return	string	html code
@@ -120,13 +120,13 @@ function frs_show_package_popup($group_id, $name = 'package_id', $checked_val = 
  * frs_add_file_from_form - helper to add a file from the qrs form which allows multiple possibilities to add a file.
  *
  * @param	object		$release		the release object to which the file belongs
- * @param	integer		$type_id		the file type
- * @param	integer		$processor_id		the processor type
+ * @param	int		$type_id		the file type
+ * @param	int		$processor_id		the processor type
  * @param	string		$release_date		the release date
  * @param	array		$userfile		a new uploaded file
  * @param	string		$ftp_filename		a already uploaded file using ftp
  * @param	string		$manual_filename	a already uploaded file using manual upload
- * @param	integer		$docman_fileid		a doc_id of a already uploaded file using docman
+ * @param	int		$docman_fileid		a doc_id of a already uploaded file using docman
  * @return	bool|string	true on success or string message on error
  */
 function frs_add_file_from_form($release, $type_id, $processor_id, $release_date,
@@ -134,10 +134,13 @@ function frs_add_file_from_form($release, $type_id, $processor_id, $release_date
 
 	$group_unix_name = $release->getFRSPackage()->getGroup()->getUnixName();
 	$incoming = forge_get_config('groupdir_prefix').'/'.$group_unix_name.'/incoming';
+	$upload_dir = forge_get_config('ftp_upload_dir').'/'.$group_unix_name;
 
 	$filechecks = false;
 
-	if ($userfile && is_uploaded_file($userfile['tmp_name']) && util_is_valid_filename($userfile['name'])) {
+	$filenamecheck  = util_is_valid_filename($userfile['name']);
+
+	if ($userfile && is_uploaded_file($userfile['tmp_name']) && $filenamecheck) {
 		$infile = $userfile['tmp_name'];
 		$fname = $userfile['name'];
 		$move = true;
@@ -152,10 +155,10 @@ function frs_add_file_from_form($release, $type_id, $processor_id, $release_date
 				return _('The uploaded file was only partially uploaded.');
 			break;
 			default:
-				return _('Unknown file upload error.');
+				return _('Unknown file upload error.').' => ';
 			break;
 		}
-	} elseif (forge_get_config('use_ftp_uploads') && $ftp_filename && util_is_valid_filename($ftp_filename) && is_file($upload_dir.'/'.$ftp_filename)) {
+	} elseif ($release->getFRSPackage()->getGroup()->usesFTP() && $ftp_filename && util_is_valid_filename($ftp_filename) && is_file($upload_dir.'/'.$ftp_filename)) {
 		$infile = $upload_dir.'/'.$ftp_filename;
 		$fname = $ftp_filename;
 		$move = false;
@@ -173,6 +176,8 @@ function frs_add_file_from_form($release, $type_id, $processor_id, $release_date
 		$filechecks = true;
 	} elseif ($userfile && $userfile['error'] == UPLOAD_ERR_NO_FILE) {
 		return _('Must select a file.');
+	} elseif ($userfile && $filenamecheck) {
+		return _('Invalid characters in file name.');
 	}
 
 	if ($filechecks) {

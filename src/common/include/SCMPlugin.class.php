@@ -4,7 +4,7 @@
  *
  * Copyright 2004-2009, Roland Mas
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012,2014 Franck Villaume - TrivialDev
+ * Copyright 2012,2014,2017-2018, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -146,47 +146,45 @@ abstract class SCMPlugin extends Plugin {
 			return;
 		}
 
-		if ($project->usesPlugin($this->name)) {
-			echo ' ('.$this->text.')' ;
-		}
+		echo ' ('.$this->text.')';
 	}
 
-	function getBlurb () {
+	function getBlurb() {
 		return html_e('p', array(), _('Unimplemented SCM plugin.'));
 	}
 
-	function getInstructionsForAnon ($project) {
+	function getInstructionsForAnon($project) {
 		return html_e('p', array(), _('Instructions for anonymous access for unimplemented SCM plugin.'));
 	}
 
-	function getInstructionsForRW ($project) {
+	function getInstructionsForRW($project) {
 		return html_e('p', array(), _('Instructions for read-write access for unimplemented SCM plugin.'));
 	}
 
-	function getSnapshotPara ($project) {
+	function getSnapshotPara($project) {
 		return html_e('p', array(), _('Instructions for snapshot access for unimplemented SCM plugin.'));
 	}
 
 	function getBrowserLinkBlock($project) {
-		global $HTML ;
+		global $HTML;
 		$b = $HTML->boxMiddle(_('Repository Browser'));
 		$b .= html_e('p', array(), _('Browsing the SCM tree is not yet implemented for this SCM plugin.'));
 		$b .= html_e('p', array(), '['.util_make_link('/scm/?group_id='.$project->getID(), _('Not implemented yet')).']');
-		return $b ;
+		return $b;
 	}
 
 	function getBrowserBlock($project) {
-		global $HTML ;
+		global $HTML;
 		$b = $HTML->boxMiddle(_('Repository Browser'));
 		$b .= html_e('p', array(), _('Browsing the SCM tree is not yet implemented for this SCM plugin.'));
-		return $b ;
+		return $b;
 	}
 
 	function getStatsBlock($project) {
-		global $HTML ;
+		global $HTML;
 		$b = $HTML->boxMiddle(_('Repository Statistics'));
 		$b .= html_e('p', array(), _('Not implemented for this SCM plugin yet.'));
-		return $b ;
+		return $b;
 	}
 
 	function printPage($params) {
@@ -197,44 +195,47 @@ abstract class SCMPlugin extends Plugin {
 			return;
 		}
 
-		if ($project->usesPlugin($this->name)) {
+		session_require_perm('scm', $project->getID(), 'read');
+		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
+			echo html_ao('div', array('id' => 'tabber-'.$this->name, 'class' => 'tabbertab'));
+		}
+		// Table for summary info
+		echo $HTML->listTableTop();
+		$cells = array();
+		$cellContent = $this->getBlurb();
 
-			session_require_perm('scm', $project->getID(), 'read');
-			// Table for summary info
-			echo $HTML->listTableTop();
-			$cells = array();
-			$cellContent = $this->getBlurb();
+		// Instructions for anonymous access
+		if ($project->enableAnonSCM()) {
+			$cellContent .= $this->getInstructionsForAnon($project);
+		}
 
-			// Instructions for anonymous access
-			if ($project->enableAnonSCM()) {
-				$cellContent .= $this->getInstructionsForAnon($project);
-			}
+		// Instructions for developer access
+		$cellContent .= $this->getInstructionsForRW($project);
 
-			// Instructions for developer access
-			$cellContent .= $this->getInstructionsForRW($project);
+		// Browsing
+		if ($this->browserDisplayable($project)) {
+			$cellContent .= $this->getBrowserLinkBlock($project);
+		}
 
-			// Browsing
-			if ($this->browserDisplayable($project)) {
-				$cellContent .= $this->getBrowserLinkBlock($project);
-			}
+		// Snapshot
+		if ($this->browserDisplayable($project)) {
+			$cellContent .= $this->getSnapshotPara($project);
+		}
+		$cells[] = array($cellContent, 'style' => 'width:65%');
 
-			// Snapshot
-			if ($this->browserDisplayable($project)) {
-				$cellContent .= $this->getSnapshotPara($project);
-			}
-			$cells[] = array($cellContent, 'style' => 'width:65%');
+		$cellContent =  $HTML->boxTop(_('Repository History'));
+		// Stats
+		$cellContent .=  _('Data about current and past states of the repository.');
+		if ($this->browserDisplayable($project)) {
+			$cellContent .= $this->getStatsBlock($project);
+		}
 
-			$cellContent =  $HTML->boxTop(_('Repository History'));
-			// Stats
-			$cellContent .=  _('Data about current and past states of the repository.');
-			if ($this->browserDisplayable($project)) {
-				$cellContent .= $this->getStatsBlock($project);
-			}
-
-			$cellContent .= $HTML->boxBottom();
-			$cells[] = array($cellContent, 'style' => 'width:35%', 'class' => 'top');
-			echo $HTML->multiTableRow(array('class' => 'top'), $cells);
-			echo $HTML->listTableBottom();
+		$cellContent .= $HTML->boxBottom();
+		$cells[] = array($cellContent, 'style' => 'width:35%', 'class' => 'top');
+		echo $HTML->multiTableRow(array('class' => 'top'), $cells);
+		echo $HTML->listTableBottom();
+		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
+			echo html_ac(html_ap() - 1);
 		}
 	}
 
@@ -244,18 +245,23 @@ abstract class SCMPlugin extends Plugin {
 			return;
 		}
 
-		if ($project->usesPlugin ($this->name)) {
-			if ($this->browserDisplayable ($project)) {
-				// print '<iframe src="'.util_make_url('/scm/browser.php?title='.$group->getUnixName()).'" frameborder="0" width=100% height=700></iframe>' ;
-			}
+		if ($this->browserDisplayable($project)) {
+			// print '<iframe src="'.util_make_url('/scm/browser.php?title='.$group->getUnixName()).'" frameborder="0" width=100% height=700></iframe>' ;
 		}
 	}
 
-	function printAdminPage($params) {
-		$group = group_get_object($params['group_id']);
-		$ra = RoleAnonymous::getInstance() ;
+	function printAdminPage(&$params) {
+		$group = $this->checkParams($params);
+		if (!$group) {
+			return;
+		}
 
-		if ( $group->usesPlugin ( $this->name ) && $ra->hasPermission('project_read', $group->getID())) {
+		$ra = RoleAnonymous::getInstance();
+		// $params is passed by reference. This hack limits the display of the anonymous information if project is using multiple scm plugins.
+		if ($ra->hasPermission('project_read', $group->getID()) && !isset($params['anonymous_display'])) {
+			if ($params['allow_multiple_scm']) {
+				$params['anonymous_display'] = true;
+			}
 			$inputAttr = array('type' => 'checkbox', 'name' => 'scm_enable_anonymous', 'value' => 1);
 			if ($group->enableAnonSCM()) {
 				$inputAttr['checked'] = 'checked';
@@ -269,13 +275,10 @@ abstract class SCMPlugin extends Plugin {
 		if (!$project) {
 			return;
 		}
-
-		if ($project->usesPlugin($this->name) ) {
-			if (isset($params['scm_enable_anonymous']) && $params['scm_enable_anonymous']) {
-				$project->SetUsesAnonSCM(true);
-			} else {
-				$project->SetUsesAnonSCM(false);
-			}
+		if (isset($params['scm_enable_anonymous']) && $params['scm_enable_anonymous']) {
+			$project->SetUsesAnonSCM(true);
+		} else {
+			$project->SetUsesAnonSCM(false);
 		}
 	}
 
@@ -291,11 +294,11 @@ abstract class SCMPlugin extends Plugin {
 	}
 
 	function scm_delete_repo(&$params) {
+		if ($params['scm_plugin_id'] != $this->getID()) {
+			return;
+		}
 		$project = $this->checkParams($params);
 		if (!$project) {
-			return false ;
-		}
-		if (! $project->usesPlugin ($this->name)) {
 			return false;
 		}
 
@@ -307,7 +310,7 @@ abstract class SCMPlugin extends Plugin {
 					  array ($params['group_id'],
 						 $params['repo_name'],
 						 $this->getID()));
-		if (! $result) {
+		if (!$result) {
 			$params['error_msg'] = db_error();
 			return false;
 		}
@@ -321,25 +324,36 @@ abstract class SCMPlugin extends Plugin {
 						  $params['group_id'],
 						  $params['repo_name'],
 						  $this->getID()));
-		if (! $result) {
+		if (!$result) {
 			$params['error_msg'] = db_error();
 			return false;
 		}
 
-		plugin_hook ("scm_admin_update", $params);
 		return true;
 	}
 
-	function checkParams ($params) {
-		$group_id = $params['group_id'] ;
+	function checkParams($params) {
+		$group_id = $params['group_id'];
 		$project = group_get_object($group_id);
 		if (!$project || !is_object($project)) {
 			return false;
 		} elseif ($project->isError()) {
 			return false;
+		} elseif (!$project->usesSCM()) {
+			return false;
+		} elseif (!$project->usesPlugin($this->name)) {
+			return false;
 		}
 
-		return $project ;
+		return $project;
+	}
+
+	function getRepositories($group, $autoinclude = true) {
+		$repoarr = array();
+		if ($autoinclude) {
+			$repoarr[] = $group->getUnixName();
+		}
+		return $repoarr;
 	}
 }
 

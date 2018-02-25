@@ -4,7 +4,7 @@
  *
  * Previous Copyright FusionForge Team
  * Copyright 2016, Franck Villaume - TrivialDev
- * http://gforge.org
+ * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -30,22 +30,21 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/gettext.php';
 require_once $gfcommon.'include/FusionForge.class.php';
 
-ini_set('memory_limit','32M');
 sysdebug_off();
 
 // Disable error_reporting as it breaks XML generated output.
 error_reporting(0);
 
-$uri = util_make_base_url();
+$uri = util_make_url();
 // 1. include client and server
 require_once 'nusoap/nusoap.php';
 //$debug = true;
 // 2. instantiate server object
 $server = new soap_server();
 $server->setDebugLevel(0);
-//configureWSDL($serviceName,$namespace = false,$endpoint = false,$style='rpc', $transport = 'http://schemas.xmlsoap.org/soap/http');
-//$server->configureWSDL('GForgeAPI',$uri);
-$server->configureWSDL('FusionForgeAPI',$uri,false,'rpc','http://schemas.xmlsoap.org/soap/http',$uri);
+$server->soap_defencoding = 'UTF-8';
+$server->encode_utf8 = true;
+$server->configureWSDL('FusionForgeAPI',$uri,$uri.'/soap/index.php','rpc','http://schemas.xmlsoap.org/soap/http',$uri);
 
 // add types
 $server->wsdl->addComplexType(
@@ -95,7 +94,7 @@ $server->wsdl->addComplexType(
 // session/authentication
 $server->register(
 	'login',
-	array('userid'=>'xsd:string','passwd'=>'xsd:string'),
+	array('username'=>'xsd:string','passwd'=>'xsd:string'),
 	array('loginResponse'=>'xsd:string'),
 	$uri,
 	$uri.'#login');
@@ -150,6 +149,11 @@ require_once $gfwww.'soap/frs/frs.php';
 //
 require_once $gfwww.'soap/scm/scm.php';
 
+// Include methods defined by plugins
+$params = array();
+$params['server'] = &$server;
+plugin_hook('register_soap',$params);
+
 $wsdl_data = $server->wsdl->serialize();
 
 if (isset($wsdl)) {
@@ -170,20 +174,20 @@ function continue_session($sessionKey) {
 /**
  * login - Logs in a SOAP client
  *
- * @param	string	$userid	userid	The user's unix id
- * @param	string	$passwd	passwd	The user's passwd in clear text
+ * @param	string	$username	username	The user's unix id
+ * @param	string	$passwd		passwd		The user's passwd in clear text
  *
  * @return	string	the session key
  */
-function login($userid, $passwd) {
+function login($username, $passwd) {
 	global $feedback, $session_ser;
 
 	setlocale (LC_TIME, _('en_US'));
 
-	$res = session_check_credentials_in_database($userid, $passwd);
+	$res = session_login_valid($username, $passwd);
 
 	if (!$res) {
-		return new soap_fault('1001', 'user', "Unable to log in with userid of ".$userid, $feedback);
+		return new soap_fault('1001', 'user', 'Unable to log in with username of '.$username, $feedback);
  	}
 
 	return session_build_session_token(user_getid());

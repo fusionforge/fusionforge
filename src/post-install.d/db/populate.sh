@@ -30,30 +30,28 @@ database_password_ssh_akc=$(forge_get_config database_password_ssh_akc)
 source_path=$(forge_get_config source_path)
 
 if [ -z "$database_name" ]; then
-    echo "Cannot get database_name"
-    exit 1
+	echo "Cannot get database_name"
+	exit 1
 fi
 
 # Create database
 if ! su - postgres -c 'psql -At -l' | grep "^$database_name|" >/dev/null; then
-    su - postgres -c "createdb --template template0 --encoding UNICODE $database_name"
-    if ! su - postgres -c "createlang -l $database_name" | grep -q plpgsql; then
-	su - postgres -c "createlang plpgsql $database_name"
-    fi
+	su - postgres -c "createdb --template template0 --encoding UNICODE $database_name"
+	echo "CREATE EXTENSION IF NOT EXISTS plpgsql" | su - postgres -c "psql $database_name"
 fi
 
 # Create DB user
 if ! su - postgres -c 'psql -At -c \\du' | grep "^$database_user|" >/dev/null; then
-    su - postgres -c "createuser -SDR $database_user"
+	su - postgres -c "createuser -SDR $database_user"
 fi
 if ! su - postgres -c 'psql -At -c \\du' | grep "^${database_user}_nss|" >/dev/null; then
-    su - postgres -c "createuser -SDR ${database_user}_nss"
+	su - postgres -c "createuser -SDR ${database_user}_nss"
 fi
 if ! su - postgres -c 'psql -At -c \\du' | grep "^${database_user}_mta|" >/dev/null; then
-    su - postgres -c "createuser -SDR ${database_user}_mta"
+	su - postgres -c "createuser -SDR ${database_user}_mta"
 fi
 if ! su - postgres -c 'psql -At -c \\du' | grep "^${database_user}_ssh_akc|" >/dev/null; then
-    su - postgres -c "createuser -SDR ${database_user}_ssh_akc"
+	su - postgres -c "createuser -SDR ${database_user}_ssh_akc"
 fi
 database_password_quoted=$(echo $database_password | sed -e "s/'/''/")
 database_password_mta_quoted=$(echo $database_password_mta | sed -e "s/'/''/")
@@ -76,8 +74,8 @@ EOF
 
 # Database init
 if ! su - postgres -c "psql $database_name -c 'SELECT COUNT(*) FROM users;'" >/dev/null 2>&1;  then
-    echo "Importing initial database..."
-    psql -h $database_host -p $database_port -U $database_user $database_name < $source_path/db/1-fusionforge-init.sql >/dev/null
+	echo "Importing initial database..."
+	psql -h $database_host -p $database_port -U $database_user $database_name < $source_path/db/1-fusionforge-init.sql >/dev/null
 fi
 
 # Database upgrade
@@ -96,14 +94,14 @@ EOF
 # Admin user
 req="SELECT COUNT(*) FROM users WHERE user_name='admin'"
 if [ "$(echo $req | su - postgres -c "psql -At $database_name")" != "1" ]; then
-    psql -h $database_host -p $database_port -U $database_user $database_name <<EOF >/dev/null
+	psql -h $database_host -p $database_port -U $database_user $database_name <<EOF >/dev/null
 INSERT INTO users (user_name, realname, firstname, lastname, email,
     unix_pw, status, theme_id)
   VALUES ('admin', 'Forge Admin', 'Forge', 'Admin', 'root@localhost.localdomain',
     'INVALID', 'A', (SELECT theme_id FROM themes WHERE dirname='funky'));
 EOF
-    forge_make_admin admin  # set permissions
-    # Note: no password defined yet
+	forge_make_admin admin  # set permissions
+	# Note: no password defined yet
 fi
 
 rm -f $PGPASSFILE

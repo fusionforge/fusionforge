@@ -24,10 +24,15 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+/**
+ * show_news_approve_form() - Show list of waiting news items
+ *
+ * @param $qpa_pending
+ * @param $qpa_rejected
+ * @param $qpa_approved
+ * @param $form_url
+ */
 function show_news_approve_form($qpa_pending, $qpa_rejected, $qpa_approved, $form_url) {
-	/*
-		Show list of waiting news items
-	*/
 
 	global $HTML;
 
@@ -36,7 +41,7 @@ function show_news_approve_form($qpa_pending, $qpa_rejected, $qpa_approved, $for
 	function show_news_item($row, $i, $approved, $selectable, $form_url) {
 		global $HTML;
 
-		echo '<tr '. $HTML->boxGetAltRowStyle($i) . '><td>';
+		echo '<tr><td>';
 		if ($selectable) {
 			echo '<input type="checkbox" '
 			.'name="news_id[]" value="'
@@ -106,7 +111,7 @@ function show_news_approve_form($qpa_pending, $qpa_rejected, $qpa_approved, $for
 		echo '<h2>'.sprintf(_('These items were rejected this past week or were not intended for front page (total: %d).'), $rows).'</h2>';
 		echo $HTML->listTableTop($title_arr);
 		for ($i=0; $i<$rows; $i++) {
-			show_news_item($items[$i], $i, false, false);
+			show_news_item($items[$i], $i, false, false, $form_url);
 		}
 		echo $HTML->listTableBottom();
 	}
@@ -129,7 +134,7 @@ function show_news_approve_form($qpa_pending, $qpa_rejected, $qpa_approved, $for
 		echo '<h2>'.sprintf(_('These items were approved this past week (total: %d).'), $rows).'</h2>';
 		echo $HTML->listTableTop($title_arr);
 		for ($i=0; $i < $rows; $i++) {
-			show_news_item($items[$i], $i, false, false);
+			show_news_item($items[$i], $i, false, false, $form_url);
 		}
 		echo $HTML->listTableBottom();
 	}

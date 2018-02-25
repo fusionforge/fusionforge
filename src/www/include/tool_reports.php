@@ -4,7 +4,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010, FusionForge Team
  * Copyright (C) 2010-2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -31,6 +31,7 @@
  * @param	array	$qpa2		Second query resource ID
  */
 function reports_quick_graph($title, $qpa1, $qpa2) {
+	global $HTML;
 	$result1 = db_query_qpa($qpa1);
 	$result2 = db_query_qpa($qpa2);
 	if ($result1 && $result2 && db_numrows($result2) > 0) {
@@ -71,8 +72,9 @@ function reports_header($group_id, $vals, $titles, $html='') {
 	global $what;
 	global $period;
 	global $span;
+	global $HTML;
 
-	print '<form method="get" action="'.getStringFromServer('PHP_SELF').'">';
+	echo $HTML->openForm(array('method' => 'get', 'action' => getStringFromServer('PHP_SELF')));
 
 	print $html;
 
@@ -98,7 +100,7 @@ function reports_header($group_id, $vals, $titles, $html='') {
 
 	print "<input type=\"hidden\" name=\"group_id\" value=\"$group_id\" />";
 	print ' <input type="submit" value="'._('Show').'" />';
-	print "</form>\n";
+	echo $HTML->closeForm();
 }
 
 // Local Variables:

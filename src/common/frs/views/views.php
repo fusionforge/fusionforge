@@ -26,16 +26,6 @@
 global $gfcommon;
 
 $view = getStringFromRequest('view', 'listpackages');
-switch ($view) {
-	case 'admin':
-	case 'deleterelease':
-	case 'editrelease':
-	case 'listpackages':
-	case 'qrs':
-	case 'reporting':
-	case 'shownotes':
-	case 'showreleases': {
-		include ($gfcommon.'frs/views/'.$view.'.php');
-		break;
-	}
+if (file_exists(forge_get_config('source_path').'/common/frs/views/'.$view.'.php')) {
+	include(forge_get_config('source_path').'/common/frs/views/'.$view.'.php');
 }

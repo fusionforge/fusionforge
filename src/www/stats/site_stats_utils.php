@@ -39,11 +39,11 @@ $allowed_orderby_vals = array('downloads',
 			      'cvs_commits',
 			      'cvs_adds');
 
-function stats_util_sum_array( $sum, $add ) {
+function stats_util_sum_array($sum, $add) {
 	if (!is_array($sum)) {
 		$sum = array();
 	}
-	while( list( $key, $val ) = each( $add ) ) {
+	while(list($key, $val) = each($add)) {
 		if (!isset($sum[$key])) {
 			$sum[$key] = 0;
 		}
@@ -53,11 +53,13 @@ function stats_util_sum_array( $sum, $add ) {
 }
 
 /**
- *	generates the trove list in a select box format.
- *	contains the odd choices of "-2" and "-1" which mean "All projects
- *	and "special project list" respectively
+ * stats_generate_trove_pulldown() - Generate the trove list in a select box format.
+ *    contains the odd choices of "-2" and "-1" which mean "All projects
+ *    and "special project list" respectively
+ *
+ * @param	int	$selected_id
  */
-function stats_generate_trove_pulldown( $selected_id = 0 ) {
+function stats_generate_trove_pulldown($selected_id = 0) {
 	$res = db_query_params ('
 		SELECT trove_cat_id,fullpath
 		FROM trove_cat
@@ -71,10 +73,10 @@ function stats_generate_trove_pulldown( $selected_id = 0 ) {
 			<option value="-2">'._('All Projects').'</option>
 			<option value="-1">'._('Special Projects').'</option>';
 
-	while ( $row = db_fetch_array($res) ) {
+	while ($row = db_fetch_array($res)) {
 		print	'
 			<option value="' . $row['trove_cat_id'] . '"'
-			. ( $selected_id == $row["trove_cat_id"] ? " selected=\"selected\"" : "" )
+			. ($selected_id == $row["trove_cat_id"] ? " selected=\"selected\"" : "")
 			. ">" . $row["fullpath"] . '</option>';
 	}
 
@@ -82,7 +84,7 @@ function stats_generate_trove_pulldown( $selected_id = 0 ) {
 		</select>';
 }
 
-function stats_trove_cat_to_name( $trovecatid ) {
+function stats_trove_cat_to_name($trovecatid) {
 
 	$res = db_query_params ('
 		SELECT fullpath
@@ -90,14 +92,14 @@ function stats_trove_cat_to_name( $trovecatid ) {
 		WHERE trove_cat_id = $1',
 			array($trovecatid));
 
-	if ( $row = db_fetch_array($res) ) {
+	if ($row = db_fetch_array($res)) {
 		return $row["fullpath"];
 	} else {
 		return sprintf(_(" (no category found with ID %d)"), $trovecatid) ;
 	}
 }
 
-function stats_generate_trove_grouplist( $trovecatid ) {
+function stats_generate_trove_grouplist($trovecatid) {
 
 	$results = array();
 
@@ -107,24 +109,24 @@ function stats_generate_trove_grouplist( $trovecatid ) {
 		WHERE trove_cat_id=$1',
 			array($trovecatid));
 
-	print db_error( $res );
+	print db_error($res);
 
 	$i = 0;
-	while ( $row = db_fetch_array($res) ) {
+	while ($row = db_fetch_array($res)) {
 		$results[$i++] = $row["group_id"];
 	}
 
 	return $results;
 }
 
-function stats_site_projects_form( $report='last_30', $orderby = 'downloads', $projects = 0, $trovecat = 0 ) {
+function stats_site_projects_form($report='last_30', $orderby = 'downloads', $projects = 0, $trovecat = 0) {
 	global $allowed_orderby_vals ;
 
 	print '<form action="projects.php" method="get">' . "\n";
 	print '<table class="tableheading fullwidth">' . "\n";
 
 	print '<tr><td><strong>'._('Projects in trove category:').'</strong></td><td>';
-	stats_generate_trove_pulldown( $trovecat );
+	stats_generate_trove_pulldown($trovecat);
 	print '</td></tr>';
 
 	print '<tr><td><strong>'._('OR enter Special Project List:').'</strong></td>';
@@ -147,7 +149,7 @@ function stats_site_projects_form( $report='last_30', $orderby = 'downloads', $p
 
 	print '<tr><td><strong>'._('View by:').'</strong></td><td>';
 
-	print html_build_select_box_from_arrays ( $allowed_orderby_vals, $allowed_orderby_vals, "orderby", $orderby, false );
+	print html_build_select_box_from_arrays ($allowed_orderby_vals, $allowed_orderby_vals, "orderby", $orderby, false);
 	print '</td></tr>';
 
 	print '<tr><td colspan="2" class="align-center"> <input type="submit" value="'._('Generate Report').'" /> </td></tr>';
@@ -158,11 +160,14 @@ function stats_site_projects_form( $report='last_30', $orderby = 'downloads', $p
 }
 
 /**
- *	New function to separate out the SQL so it may be reused in other
- *	potential reports.
- *
+ * stats_site_project_result() - separate out the SQL so it may be reused in other potential reports.
+ * @param $report
+ * @param $orderby
+ * @param $projects
+ * @param $trove
+ * @return resource
  */
-function stats_site_project_result( $report, $orderby, $projects, $trove ) {
+function stats_site_project_result($report, $orderby, $projects, $trove) {
 	global $allowed_orderby_vals ;
 
 	if (!$orderby) {
@@ -212,13 +217,13 @@ ORDER BY ' . $order_clause,
 	}
 }
 
-function stats_site_projects( $report, $orderby, $projects, $trove ) {
+function stats_site_projects($report, $orderby, $projects, $trove) {
 
 	$offset=0;
 	$trove_cat=0;
-	$res=stats_site_project_result( $report, $orderby, $projects, $trove );
+	$res=stats_site_project_result($report, $orderby, $projects, $trove);
 	// if there are any rows, we have valid data (or close enough).
-	if ( db_numrows( $res ) > 1 ) {
+	if (db_numrows($res) > 1) {
 
 		?>
 		<table class="fullwidth">
@@ -248,11 +253,11 @@ function stats_site_projects( $report, $orderby, $projects, $trove ) {
 
 		// Build the query string to resort results.
 		$uri_string = "projects.php?report=" . $report;
-		if ( $trove_cat > 0 ) {
+		if ($trove_cat > 0) {
 			$uri_string .= "&amp;trovecatid=" . $trove_cat;
 		}
-		if ( $trove_cat == -1 ) {
-			$uri_string .= "&amp;projects=" . urlencode( implode( " ", $projects) );
+		if ($trove_cat == -1) {
+			$uri_string .= "&amp;projects=" . urlencode(implode(" ", $projects));
 		}
 		$uri_string .= "&amp;orderby=";
 
@@ -288,32 +293,32 @@ function stats_site_projects( $report, $orderby, $projects, $trove ) {
 		<?php
 
 		$i = $offset;
-		while ( $row = db_fetch_array($res) ) {
-			print	'<tr ' . $GLOBALS['HTML']->boxGetAltRowStyle($i) . ' style="text-align:right">'
+		while ($row = db_fetch_array($res)) {
+			print	'<tr style="text-align:right">'
 				. '<td>' . ($i + 1)." " . util_make_link ('/project/stats/?group_id='.$row["group_id"], $row["group_name"]) . '</td>'
-				. '<td>&nbsp;&nbsp;' . number_format( $row["site_views"],0 ) . '</td>'
-				. '<td>&nbsp;&nbsp;' . number_format( $row["subdomain_views"],0 ) . '</td>';
+				. '<td>&nbsp;&nbsp;' . number_format($row["site_views"],0) . '</td>'
+				. '<td>&nbsp;&nbsp;' . number_format($row["subdomain_views"],0) . '</td>';
 			if (forge_get_config('use_frs')) {
-				print '<td>&nbsp;&nbsp;' . number_format( $row["downloads"],0 ) . '</td>';
+				print '<td>&nbsp;&nbsp;' . number_format($row["downloads"],0) . '</td>';
 			}
 			if (forge_get_config('use_tracker')) {
-				print '<td>&nbsp;&nbsp;' . number_format( $row["bugs_opened"],0 ) . '</td>'
-				. '<td>&nbsp;&nbsp;' . number_format( $row["bugs_closed"],0 ) . '</td>'
-				. '<td>&nbsp;&nbsp;' . number_format( $row["support_opened"],0 ) . '</td>'
-				. '<td>&nbsp;&nbsp;' . number_format( $row["support_closed"],0 ) . '</td>'
-				. '<td>&nbsp;&nbsp;' . number_format( $row["patches_opened"],0 ) . '</td>'
-				. '<td>&nbsp;&nbsp;' . number_format( $row["patches_closed"],0 ) . '</td>'
-				. '<td>&nbsp;&nbsp;' . number_format( $row["artifacts_opened"],0 ) . '</td>'
-				. '<td>&nbsp;&nbsp;' . number_format( $row["artifacts_closed"],0 ) . '</td>';
+				print '<td>&nbsp;&nbsp;' . number_format($row["bugs_opened"],0) . '</td>'
+				. '<td>&nbsp;&nbsp;' . number_format($row["bugs_closed"],0) . '</td>'
+				. '<td>&nbsp;&nbsp;' . number_format($row["support_opened"],0) . '</td>'
+				. '<td>&nbsp;&nbsp;' . number_format($row["support_closed"],0) . '</td>'
+				. '<td>&nbsp;&nbsp;' . number_format($row["patches_opened"],0) . '</td>'
+				. '<td>&nbsp;&nbsp;' . number_format($row["patches_closed"],0) . '</td>'
+				. '<td>&nbsp;&nbsp;' . number_format($row["artifacts_opened"],0) . '</td>'
+				. '<td>&nbsp;&nbsp;' . number_format($row["artifacts_closed"],0) . '</td>';
 			}
 			if (forge_get_config('use_pm')) {
-				print '<td>&nbsp;&nbsp;' . number_format( $row["tasks_opened"],0 ) . '</td>'
-				. '<td>&nbsp;&nbsp;' . number_format( $row["tasks_opened"],0 ) . '</td>';
+				print '<td>&nbsp;&nbsp;' . number_format($row["tasks_opened"],0) . '</td>'
+				. '<td>&nbsp;&nbsp;' . number_format($row["tasks_opened"],0) . '</td>';
 			}
 			if (forge_get_config('use_scm')) {
-				print '<td>&nbsp;&nbsp;' . number_format( $row["cvs_checkouts"],0 ) . '</td>'
-				. '<td>&nbsp;&nbsp;' . number_format( $row["cvs_commits"],0 ) . '</td>'
-				. '<td>&nbsp;&nbsp;' . number_format( $row["cvs_adds"],0 ) . '</td>';
+				print '<td>&nbsp;&nbsp;' . number_format($row["cvs_checkouts"],0) . '</td>'
+				. '<td>&nbsp;&nbsp;' . number_format($row["cvs_commits"],0) . '</td>'
+				. '<td>&nbsp;&nbsp;' . number_format($row["cvs_adds"],0) . '</td>';
 			}
 			$hook_params = array();
 			$hook_params['group_id'] = $row["group_id"];
@@ -335,7 +340,7 @@ function stats_site_projects( $report, $orderby, $projects, $trove ) {
 
 ?><?php
 
-function stats_site_projects_daily( $span ) {
+function stats_site_projects_daily($span) {
 	$i=0;
 	//
 	//  We now only have 30 & 7-day views
@@ -348,7 +353,7 @@ function stats_site_projects_daily( $span ) {
 	echo db_error();
 
 	// if there are any weeks, we have valid data.
-	if ( ($valid_days = db_numrows( $res )) >= 1 ) {
+	if (($valid_days = db_numrows($res)) >= 1) {
 
 		?>
 		<h2><?php printf(_('Statistics for the past %d days'), $valid_days); ?></h2>
@@ -366,14 +371,14 @@ function stats_site_projects_daily( $span ) {
 			</tr>
 		<?php
 
-		while ( $row = db_fetch_array($res) ) {
+		while ($row = db_fetch_array($res)) {
 			 $i++;
 
-			print	'<tr ' . $GLOBALS['HTML']->boxGetAltRowStyle($i) . ' style="text-align:right">'
-				. '<td>' . gmstrftime("%d %b %Y", mktime(0,0,1,substr($row["month"],4,2),$row["day"],substr($row["month"],0,4)) ) . '</td>'
-				. '<td>' . number_format( $row["site_page_views"],0 ) . '</td>'
-				. '<td>' . number_format( $row["subdomain_views"],0 ) . '</td>'
-				. '<td>' . number_format( $row["downloads"],0 ) . '</td>'
+			print	'<tr style="text-align:right">'
+				. '<td>' . gmstrftime("%d %b %Y", mktime(0,0,1,substr($row["month"],4,2),$row["day"],substr($row["month"],0,4))) . '</td>'
+				. '<td>' . number_format($row["site_page_views"],0) . '</td>'
+				. '<td>' . number_format($row["subdomain_views"],0) . '</td>'
+				. '<td>' . number_format($row["downloads"],0) . '</td>'
 				. '<td>&nbsp;&nbsp;' . number_format($row["bugs_opened"],0) . " (" . number_format($row["bugs_closed"],0) . ')</td>'
 				. '<td>&nbsp;&nbsp;' . number_format($row["support_opened"],0) . " (" . number_format($row["support_closed"],0) . ')</td>'
 				. '<td>&nbsp;&nbsp;' . number_format($row["patches_opened"],0) . " (" . number_format($row["patches_closed"],0) . ')</td>'
@@ -401,7 +406,7 @@ function stats_site_projects_monthly() {
 	echo db_error();
 
 	// if there are any weeks, we have valid data.
-	if (($valid_months = db_numrows($res)) >= 1 ) {
+	if (($valid_months = db_numrows($res)) >= 1) {
 
 		?>
 
@@ -421,14 +426,14 @@ function stats_site_projects_monthly() {
 			</tr>
 		<?php
 
-		while ( $row = db_fetch_array($res) ) {
+		while ($row = db_fetch_array($res)) {
 			$i++;
 
-			print	'<tr ' . $GLOBALS['HTML']->boxGetAltRowStyle($i) . 'style="text-align:right">'
+			print	'<tr style="text-align:right">'
 				. '<td>' . $row['month'] . '</td>'
-				. '<td>' . number_format( $row["site_page_views"],0 ) . '</td>'
-				. '<td>' . number_format( $row["subdomain_views"],0 ) . '</td>'
-				. '<td>' . number_format( $row["downloads"],0 ) . '</td>'
+				. '<td>' . number_format($row["site_page_views"],0) . '</td>'
+				. '<td>' . number_format($row["subdomain_views"],0) . '</td>'
+				. '<td>' . number_format($row["downloads"],0) . '</td>'
 				. '<td>&nbsp;&nbsp;' . number_format($row["bugs_opened"],0) . " (" . number_format($row["bugs_closed"],0) . ')</td>'
 				. '<td>&nbsp;&nbsp;' . number_format($row["support_opened"],0) . " (" . number_format($row["support_closed"],0) . ')</td>'
 				. '<td>&nbsp;&nbsp;' . number_format($row["patches_opened"],0) . " (" . number_format($row["patches_closed"],0) . ')</td>'
@@ -447,7 +452,7 @@ function stats_site_projects_monthly() {
 	}
 }
 
-function stats_site_aggregate( ) {
+function stats_site_aggregate() {
 	$res = db_query_params ('SELECT * FROM stats_site_all_vw',
 			array ());
 	$site_totals = db_fetch_array($res);
@@ -473,11 +478,11 @@ function stats_site_aggregate( ) {
 	</tr>
 
 	<tr>
-		<td><?php echo number_format( $site_totals["site_page_views"],0 ); ?></td>
-		<td><?php echo number_format( $site_totals["subdomain_views"],0 ); ?></td>
-		<td><?php echo number_format( $site_totals["downloads"],0 ); ?></td>
-		<td><?php echo number_format( $users["count"],0 ); ?></td>
-		<td><?php echo number_format( $groups["count"],0 ); ?></td>
+		<td><?php echo number_format($site_totals["site_page_views"],0); ?></td>
+		<td><?php echo number_format($site_totals["subdomain_views"],0); ?></td>
+		<td><?php echo number_format($site_totals["downloads"],0); ?></td>
+		<td><?php echo number_format($users["count"],0); ?></td>
+		<td><?php echo number_format($groups["count"],0); ?></td>
 		</tr>
 
 	</table>
@@ -499,7 +504,7 @@ function views_graph($monthly = 0) {
 		$beg_day = date('d',mktime(0,0,0,(date('m')-1),date('d'),date('Y')));
 		$res = db_query_params ('SELECT month,day,site_page_views AS site_views,subdomain_views
 			FROM stats_site_vw
-			( month = $1 AND day >= $2 ) OR ( month > $3 )
+			(month = $1 AND day >= $2) OR (month > $3)
 			ORDER BY month ASC, day ASC',
 			array ("$beg_year$beg_month",
 				$beg_day,
@@ -509,7 +514,7 @@ function views_graph($monthly = 0) {
 	$i = 0;
 	$xlabel = array();
 	$ydata = array();
-	while ( $row = db_fetch_array($res) ) {
+	while ($row = db_fetch_array($res)) {
 		$xlabel[$i] = $row['month'] . ((isset($row['day'])) ? "/" . $row['day'] : '');
 		$ydata[$i] = $row['site_views'] + $row['subdomain_views'];
 		++$i;
@@ -590,7 +595,7 @@ function users_graph() {
 	$label[1] = _('New projects');
 	$monthStartArr = $report->getMonthStartArr();
 	$monthStartArrFormat = $report->getMonthStartArrFormat();
-	while ( $row = db_fetch_array($res) ) {
+	while ($row = db_fetch_array($res)) {
 		$xlabel[$i] = $row['month'];
 		$ydata[0][$i] = $row['new_users'];
 		$ydata[1][$i] = $row['new_projects'];

@@ -60,12 +60,12 @@ if (forge_get_config('require_unique_email')) {
 	echo _('Fill in a user name and click “Submit” to resend the confirmation email.');
 }
 
-echo $HTML->openForm(array('action' => util_make_uri('/account/pending-resend.php'), 'method' => 'post'));
+echo $HTML->openForm(array('action' => '/account/pending-resend.php', 'method' => 'post'));
 
 if (forge_get_config('require_unique_email')) {
 	$content = _('Login name or email address')._(':');
 } else {
-	$content = _('Login name')._(':');
+	$content = _('Login Name')._(':');
 }
 echo html_e('p', array(), $content.html_e('br').html_e('label', array('for' => 'loginname'),
 							html_e('input', array('id' => 'loginname', 'required' => 'required', 'type' => 'text', 'name' => 'loginname'))));

@@ -30,9 +30,21 @@
 
 
 .agile-phase {
-    border: none;
-    padding: 0;
-    margin: 0;
+	border: none;
+	padding: 0;
+	margin: 0;
+}
+
+.agile-phase.minimized .agile-sticker-container.not(.filtred) {
+	display: display;
+}
+
+.agile-phase.minimized .agile-sticker-container:not(.filtred) ~ .agile-sticker-container:not(.filtred) {
+	display: none;
+}
+
+.agile-phase.minimized .agile-sticker-container:not(.filtred) ~ .agile-sticker-container:not(.filtred) ~ .agile-phase-more{
+	display: block;
 }
 
 .agile-phase-title {
@@ -48,6 +60,7 @@
 }
 
 .agile-phase-more {
+	display: none;
 	font-weight: bold;
 	float: right;
 	padding: 0 3%;
@@ -61,22 +74,30 @@
 	width: 92%;
 }
 
+.agile-sticker-container.filtred {
+	display: none;
+}
+
 .agile-sticker {
 	font-size: 10px;
 	width: 100%;
 	/* border: solid #CCCCCC 1px; */
 	height: 80px;
-	-moz-box-shadow: 0 4px 8px rgba(0,0,0,0.5);
-	-webkit-box-shadow: 0 4px 8px rgba(0,0,0,0.5);
 	box-shadow: 0 4px 8px rgba(0,0,0,0.5);
 }
 
 .agile-sticker textarea{
 	font-size: 10px;
+	width: 98%;
+	height: 35px;
 }
 
-.agile-sticker-header, .agile-sticker-footer {
+.agile-sticker-header {
 	background-color: #AAAAAA;
+	padding: 2px;
+}
+
+.agile-sticker-footer {
 	padding: 2px;
 }
 
@@ -84,32 +105,55 @@
 	font-weight: bold;
 }
 
+.agile-toolbar-minimize, .agile-minimize-column {
+	float: right;
+	height: 16px;
+	width: 16px;
+	background-position-y: center;
+	background-position-x: 100%;
+}
+
+.agile-toolbar-minimize.minimized, .agile-minimize-column.minimized{
+	background-position-x: 0;
+}
+
+.agile-toolbar-add-task {
+	float: right;
+	height: 16px;
+	width: 16px;
+	background-position: center;
+}
+
 .agile-sticker-body {
 	position: relative;
 	padding: 2px;
-	height: 58px;
+	min-height: 41px;
 	width: 98%;
 	overflow: hidden;
 }
+.agile-sticker-user-story .agile-sticker-body {
+	min-height: 58px;
+}
+
+.agile-sticker-name {
+	height: auto;
+	overflow: hidden;
+}
+
+.agile-sticker-description {
+	padding-top: 4px;
+	display:none;
+}
 
 .agile-sticker-assignee-face {
+	float: right;
 	position: absolute;
 	top: 0;
 	right: 0;
 }
 
-.agile-sticker-assignee {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	text-align: left;
-}
-
 .agile-sticker-effort {
-	position: absolute;
-	bottom: 0;
-	right: 0;
-	text-align: right;
+	float: right;
 }
 
 .agile-sticker-user-story {
@@ -245,8 +289,8 @@
 }
 
 .ui-datepicker table {
-    border-collapse: collapse;
-    font-size: 0.9em;
+	border-collapse: collapse;
+	font-size: 0.9em;
 }
 
 .ui-datepicker th,  .ui-datepicker td{
@@ -254,10 +298,10 @@
 }
 
 .ui-datepicker {
-    padding: 0.2em 0.2em 0;
-    border: 1px solid #dddddd;
+	padding: 0.2em 0.2em 0;
+	border: 1px solid #dddddd;
 }
 
 .ui-button {
-    margin: 2px 4px;
+	margin: 2px 4px;
 }

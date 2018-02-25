@@ -72,14 +72,15 @@ function trove_genfullpaths($mynode, $myfullpath, $myfullpathids) {
  */
 function trove_updaterootparent($mynode, $rootnode) {
 	// first generate own path
-	if($mynode!=$rootnode) db_query_params('UPDATE trove_cat SET root_parent=$1 WHERE trove_cat_id=$2',
-								array ($rootnode,
-										$mynode));
-	else db_query_params('UPDATE trove_cat SET root_parent=0 WHERE trove_cat_id=$1',
+	if($mynode!=$rootnode) {
+		db_query_params('UPDATE trove_cat SET root_parent=$1 WHERE trove_cat_id=$2',
+						array ($rootnode, $mynode));
+	} else {
+		db_query_params('UPDATE trove_cat SET root_parent=0 WHERE trove_cat_id=$1',
 						array ($mynode));
+	}
 	// now generate paths for all children by recursive call
-	if($mynode!=0)
-	{
+	if($mynode!=0) {
 		$res_child = db_query_params('
 			SELECT trove_cat_id
 			FROM trove_cat

@@ -301,9 +301,10 @@ function db_query_params($qstring, $params = array(), $limit = -1, $offset = 0, 
 /**
  * db_prepare - Prepare an SQL query
  *
- * @param	string	$qstring	SQL statement.
- * @param	string	$qname		name of the prepared query
- * @return	int	$dbserver	result set handle.
+ * @param	string		$qstring	SQL statement.
+ * @param	string		$qname		name of the prepared query
+ * @param 	resource	$dbserver
+ * @return	int			result set handle.
  */
 function db_prepare($qstring, $qname, $dbserver = NULL) {
 	global $sysdebug_dbquery, $sysdebug_dberrors;
@@ -335,7 +336,7 @@ function db_prepare($qstring, $qname, $dbserver = NULL) {
 /**
  * db_execute - Execute a prepared statement, with parameters
  *
- * @param	string	$name		the prepared query
+ * @param	string	$qname		the prepared query
  * @param	array	$params		the parameters
  * @param	int	$dbserver	ability to spread load to multiple db servers.
  * @return	int	result set handle.
@@ -457,7 +458,7 @@ function db_begin($dbserver = NULL) {
 	// programmatical transaction
 	$_sys_db_transaction_level++;
 	if ($_sys_db_transaction_level == 1) {
-		return db_query_params("BEGIN WORK", array(), -1, 0, $dbserver);
+		return db_query_params('BEGIN WORK', array(), -1, 0, $dbserver);
 	}
 
 	return true;
@@ -484,7 +485,7 @@ function db_commit($dbserver = NULL) {
 	// programmatical transaction ends
 	$_sys_db_transaction_level--;
 	if ($_sys_db_transaction_level == 0) {
-		return db_query_params("COMMIT", array(), -1, 0, $dbserver);
+		return db_query_params('COMMIT', array(), -1, 0, $dbserver);
 	}
 
 	return true;
@@ -511,7 +512,7 @@ function db_rollback($dbserver = NULL) {
 	// programmatical transaction ends
 	$_sys_db_transaction_level--;
 	if ($_sys_db_transaction_level == 0) {
-		return db_query_params("ROLLBACK", array(), -1, 0, $dbserver);
+		return db_query_params('ROLLBACK', array(), -1, 0, $dbserver);
 	}
 
 	return true;
@@ -542,8 +543,8 @@ function db_free_result($qhandle) {
  * db_result - Returns a field from a result set.
  *
  * @param	resource	$qhandle	Query result set handle.
- * @param	int		$row	Row number.
- * @param	string		$field	Field name.
+ * @param	int		$row		Row number.
+ * @param	string		$field		Field name.
  * @return	mixed		contents of field from database.
  */
 function db_result($qhandle, $row, $field) {
@@ -553,20 +554,20 @@ function db_result($qhandle, $row, $field) {
 /**
  * db_result_seek - Sets cursor location in a result set.
  *
- * @param	resource $qhandle Query result set handle.
- * @param	int	$row Row number.
- * @return	boolean	True on success
+ * @param	resource $qhandle	Query result set handle.
+ * @param	int	$row		Row number.
+ * @return	bool	True on success
  */
-function db_result_seek($qhandle,$row) {
-	return @pg_result_seek($qhandle,$row);
+function db_result_seek($qhandle, $row) {
+	return @pg_result_seek($qhandle, $row);
 }
 
 /**
  * db_result_reset - Resets cursor location in a result set.
  *
  * @param	resource	$qhandle	Query result set handle.
- * @param	int	$row
- * @return	boolean	True on success
+ * @param	int		$row
+ * @return	bool	True on success
  */
  //TODO : remove the second param if no one uses it.
 function db_result_reset($qhandle, $row = 0) {
@@ -609,11 +610,11 @@ function db_affected_rows($qhandle) {
  * the current row of this database result
  *
  * @param	resource	$qhandle	Query result set handle.
- * @param	bool		$row
+ * @param	int			$result_type	Result type: PGSQL_ASSOC, PGSQL_NUM or PGSQL_BOTH
  * @return array array of fieldname/value key pairs.
  */
-function db_fetch_array($qhandle, $row = false) {
-	return @pg_fetch_array($qhandle);
+function db_fetch_array($qhandle, $result_type = PGSQL_BOTH) {
+	return @pg_fetch_array($qhandle, null, $result_type);
 }
 
 /**
@@ -634,7 +635,7 @@ function db_fetch_array_by_row($qhandle, $row) {
  * @param	resource	$qhandle		Query result set handle.
  * @param	string		$table_name		Name of the table you inserted into.
  * @param	string		$pkey_field_name	Field name of the primary key.
- * @param	resource		$dbserver		Server to which original query was made
+ * @param	resource	$dbserver		Server to which original query was made
  * @return	int		id of the primary key or 0 on failure.
  */
 function db_insertid($qhandle, $table_name, $pkey_field_name, $dbserver = NULL) {

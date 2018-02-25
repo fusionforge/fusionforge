@@ -41,7 +41,7 @@ global $stateidArr;
 $actionurl = '/docman/?group_id='.$group_id.'&action=addfile&dirid='.$dirid;
 $redirecturl = '/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid;
 // plugin projects-hierarchy support
-if ($childgroup_id) {
+if (isset($childgroup_id) && $childgroup_id) {
 	$g = group_get_object($childgroup_id);
 	$actionurl .= '&childgroup_id='.$childgroup_id;
 	$redirecturl .= '&childgroup_id='.$childgroup_id;
@@ -93,26 +93,19 @@ if ($dgf->getNested($stateidArr) == NULL) {
 	echo $HTML->warning_msg(_('You MUST first create at least one folder to store your document.'));
 } else {
 	/* display the add new documentation form */
-	echo html_ao('p');
-	echo html_e('strong', array(), _('Document Title')._(': ')._('Refers to the relatively brief title of the document (e.g. How to use the download server).'), false);
-	echo html_ac(html_ap() - 1);
-	echo html_ao('p');
-	echo html_e('strong', array(), _('Description')._(': ')._('A brief description to be placed just under the title.'), false);
-	echo html_ac(html_ap() - 1);
-	if ($g->useDocmanSearch())
-		echo html_e('p', array(), _('Both fields are used by the document search engine.'), false);
-
-	echo $HTML->openForm(array('name' => 'adddata', 'action' => util_make_uri($actionurl), 'method' => 'post', 'enctype' => 'multipart/form-data'));
+	echo $HTML->openForm(array('name' => 'adddata', 'action' => $actionurl, 'method' => 'post', 'enctype' => 'multipart/form-data'));
 	echo $HTML->listTableTop(array(), array(), 'infotable');
 	$cells = array();
 	$cells[][] = _('Document Title').utils_requiredField();
-	$cells[][] = html_e('input', array('pattern' => '.{5,}', 'placeholder' => _('Document Title'), 'title' => sprintf(_('(at least %s characters)'), 5), 'type' => 'text', 'name' => 'title', 'size' => '40', 'maxlength' => '255', 'required' => 'required')).
-			html_e('span', array(), sprintf(_('(at least %s characters)'), 5), false);
+	$cells[][] = html_e('input', array('pattern' => '.{5,}', 'placeholder' => _('Document Title').' '.sprintf(_('(at least %s characters)'), DOCMAN__TITLE_MIN_SIZE), 'title' => _('Document Title')._(': ')._('Refers to the relatively brief title of the document (e.g. How to use the download server).'), 'type' => 'text', 'name' => 'title', 'size' => 40, 'maxlength' => DOCMAN__TITLE_MAX_SIZE, 'required' => 'required'));
 	echo $HTML->multiTableRow(array(), $cells);
 	$cells = array();
 	$cells[][] = _('Description') .utils_requiredField();
-	$cells[][] = html_e('input', array('pattern' => '.{10,}', 'placeholder' => _('Description'), 'title' => sprintf(_('(at least %s characters)'), 10), 'type' => 'text', 'name' => 'description', 'size' => '50', 'maxlength' => '255', 'required' => 'required')).
-			html_e('span', array(), sprintf(_('(at least %s characters)'), 10), false);
+	$cells[][] = html_e('textarea', array('pattern' => '.{10,}', 'placeholder' => _('Description').' '.sprintf(_('(at least %s characters)'), DOCMAN__DESCRIPTION_MIN_SIZE), 'title' => _('Editing tips:http,https or ftp: Hyperlinks. [#NNN]: Tracker id NNN. [TNNN]: Task id NNN. [wiki:&lt;pagename&gt;]: Wiki page. [forum:&lt;msg_id&gt;]: Forum post. [DNNN]: Document id NNN.'), 'name' => 'description', 'rows' => 5, 'cols' => 50, 'maxlength' => DOCMAN__DESCRIPTION_MAX_SIZE, 'required' => 'required'), '', false);
+	echo $HTML->multiTableRow(array(), $cells);
+	$cells = array();
+	$cells[][] = _('Comment');
+	$cells[][] = html_e('textarea', array('placeholder' => _('Add free comment'), 'name' => 'vcomment', 'rows' => 5, 'cols' => 50, 'maxlength' => DOCMAN__COMMENT_MAX_SIZE), '', false);
 	echo $HTML->multiTableRow(array(), $cells);
 	$cells = array();
 	$cells[][] = _('Type of Document') .utils_requiredField();
@@ -155,7 +148,7 @@ if ($dgf->getNested($stateidArr) == NULL) {
 	$cells[][] = html_e('input', array('type' => 'text', 'name' => 'name', 'size' => '30'));
 	echo $HTML->multiTableRow(array('id' => 'editnamerow', 'class' => 'hide'), $cells);
 	echo html_ao('tr', array('id' => 'editrow', 'class' => 'hide'));
-	echo html_ao('td', array('colspan' => '2'));
+	echo html_e('td', array(), _('Set the content to your file')._(':'));
 	$GLOBALS['editor_was_set_up'] = false;
 	$params = array() ;
 	/* name must be details !!! if name = data then nothing is displayed */
@@ -165,10 +158,10 @@ if ($dgf->getNested($stateidArr) == NULL) {
 	$params['group'] = $group_id;
 	plugin_hook("text_editor", $params);
 	if (!$GLOBALS['editor_was_set_up']) {
-		echo html_e('textarea', array('name' => 'details', 'rows' => 5, 'cols' => 80), '', false);
+		echo html_e('td', array(), html_e('textarea', array('name' => 'details', 'rows' => 5, 'cols' => 80), '', false));
 	}
 	unset($GLOBALS['editor_was_set_up']);
-	echo html_ac(html_ap() - 2);
+	echo html_ac(html_ap() - 1);
 	if ($dirid) {
 		echo html_ao('tr');
 		echo html_ao('td', array('colspan' => 2));
@@ -176,7 +169,7 @@ if ($dgf->getNested($stateidArr) == NULL) {
 		echo html_ac(html_ap() - 2);
 	} else {
 		$cells = array();
-		$cells[][] = _('Documents folder that document belongs in');
+		$cells[][] = _('Folder that document belongs to');
 		$cells[][] = $dm->showSelectNestedGroups($dgf->getNested($stateidArr), 'doc_group', false, $dirid);
 		echo $HTML->multiTableRow(array(), $cells);
 	}
@@ -188,6 +181,9 @@ if ($dgf->getNested($stateidArr) == NULL) {
 	}
 	echo $HTML->listTableBottom();
 	echo $HTML->addRequiredFieldsInfoBox();
+	if ($g->useDocmanSearch()) {
+		echo html_e('p', array(), _('Both fields Title & Description are used by the document search engine.'), false);
+	}
 	echo html_e('div', array('class' => 'docmanSubmitDiv'), html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Submit Information'))));
 	echo $HTML->closeForm();
 }

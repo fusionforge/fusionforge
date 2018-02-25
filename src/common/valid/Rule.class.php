@@ -32,8 +32,8 @@ class Rule {
 	/**
 	 * Check if $val is a valid not.
 	 *
-	 * @param  String  $val Value to check.
-	 * @return Boolean
+	 * @param  string  $val Value to check.
+	 * @return bool
 	 */
 	function isValid($val) {
 		trigger_error(get_class($this).'::isValid() => Not yet implemented', E_USER_ERROR);
@@ -43,7 +43,7 @@ class Rule {
 	 * Default error message if rule is not apply on value.
 	 *
 	 * @param  string  $key Value to check.
-	 * @return boolean
+	 * @return bool
 	 */
 	function getErrorMessage($key) {
 		return $this->error;
@@ -74,6 +74,7 @@ class Rule_Comparator extends Rule {
 	 * @access private
 	 */
 	var $ref;
+
 	function __construct($ref) {
 		$this->ref = $ref;
 	}
@@ -152,8 +153,11 @@ class Rule_WhiteList extends Rule_Comparator {
 class Rule_Int extends Rule {
 	/**
 	 * Check the format according to PHP definition of a decimal integer.
+	 *
 	 * @see http://php.net/int
 	 * @access private
+	 * @param string $val
+	 * @return bool
 	 */
 	function checkFormat($val) {
 		if(preg_match('/^([+-]?[1-9][0-9]*|[+-]?0)$/', $val)) {
@@ -213,7 +217,7 @@ class Rule_NoCr extends Rule {
 class Rule_Email extends Rule {
 	var $separator;
 
-	function Rule_Email($separator = null) {
+	function __construct($separator = null) {
 		$this->separator = $separator;
 	}
 
@@ -240,6 +244,9 @@ class Rule_Email extends Rule {
 	 * email address.
 	 *
 	 * Spaces are allowed at the beginning and the end of the address.
+	 *
+	 * @param string $email
+	 * @return int
 	 */
 	function validEmail($email) {
 		$valid_chars='-!#$%&\'*+0-9=?A-Z^_`a-z{|}~\.';
@@ -271,10 +278,6 @@ class Rule_UserNameFormat extends Rule {
 				.'|(www)|(cvs)|(shell)|(ftp)|(irc)|(debian)|(ns)|(download))$/i', $val);
 	}
 
-	function isCvsAccount($val) {
-		return preg_match('/^anoncvs_/i', $val);
-	}
-
 	function lessThanMin($val) {
 		return (strlen($val) < 3);
 	}
@@ -285,7 +288,6 @@ class Rule_UserNameFormat extends Rule {
 
 	function isValid($val) {
 		return !$this->isNotLegalName($val)
-			&& !$this->isCvsAccount($val)
 			&& !$this->lessThanMin($val)
 			&& !$this->greaterThanMax($val)
 			&& !$this->containsIllegalChars($val);
@@ -307,7 +309,7 @@ class Rule_File extends Rule {
 	var $maxSize;
 	var $i18nPageName;
 
-	function Rule_File() {
+	function __construct() {
 		$this->maxSize = $GLOBALS['sys_max_size_upload'];
 		$this->i18nPageName = 'rule_valid';
 	}
@@ -324,7 +326,7 @@ class Rule_File extends Rule {
 	 * Check file upload validity
 	 *
 	 * @param string $file
-	 * @return boolean Is file upload valid or not.
+	 * @return bool Is file upload valid or not.
 	 */
 	function isValid($file) {
 		$ok = false;

@@ -278,7 +278,7 @@ foreach ($filelist as $key => $filename) {
 	$cells[] = array($users, 'class' => 'align-left');
 	$cells[] = array($groups, 'class' => 'align-left');
 	$cells[] = array($adminlink, 'class' => 'align-left');
-	echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($key, true)), $cells);
+	echo $HTML->multiTableRow(array(), $cells);
 }
 
 echo $HTML->listTableBottom();

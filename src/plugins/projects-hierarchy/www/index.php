@@ -1,5 +1,7 @@
 <?php
 /**
+ * Projects Hierarchy Plugin
+ *
  * Copyright 2004 (c) GForge LLC
  * Copyright 2006 (c) Fabien Regnier - Sogeti
  * Copyright 2010-2011, Franck Villaume - Capgemini
@@ -24,10 +26,8 @@
 require_once '../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 
-$user = session_get_user(); // get the session user
-
-if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
-	exit_error("Invalid User", "Cannot Process your request for this user.");
+if (!session_loggedin()) {
+	exit_not_logged_in();
 }
 
 $type = getStringFromRequest('type');
@@ -38,31 +38,27 @@ if (!$type) {
 }
 
 switch ($type) {
-	case "group": {
-		if (!session_loggedin()) {
-			exit_not_logged_in();
-		}
+	case 'group': {
 		$id = getStringFromRequest('id');
 		if (!$id) {
 			exit_error(_('Cannot Process your request')._(': ')._('No ID specified'), 'home');
 		}
 		$group = group_get_object($id);
 		if ( !$group) {
-			exit_error("Invalid Project", 'home');
+			exit_error(_('Invalid Project'), 'home');
 		}
+		session_require_perm('project_admin', $id);
 		if (!$group->usesPlugin($projectsHierarchy->name)) {//check if the group has the projects-hierarchy plugin active
 			exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'), $projectsHierarchy->name), 'home');
 		}
-		session_require_perm('project_admin', $id);
-
 		$action = getStringFromRequest('action');
 		global $gfplugins;
 		switch ($action) {
-			case "addChild":
-			case "projectsHierarchyDocman":
-			case "removeChild":
-			case "removeParent":
-			case "validateRelationship": {
+			case 'addChild':
+			case 'projectsHierarchyDocman':
+			case 'removeChild':
+			case 'removeParent':
+			case 'validateRelationship': {
 				include($gfplugins.$projectsHierarchy->name.'/actions/'.$action.'.php');
 				break;
 			}
@@ -73,10 +69,7 @@ switch ($type) {
 		}
 		break;
 	}
-	case "globaladmin": {
-		if (!session_loggedin()) {
-			exit_not_logged_in();
-		}
+	case 'globaladmin': {
 		session_require_global_perm('forge_admin');
 		$action = getStringFromRequest('action');
 		switch ($action) {
@@ -91,19 +84,16 @@ switch ($type) {
 		$projectsHierarchy->getFooter('globaladmin');
 		break;
 	}
-	case "admin": {
-		if (!session_loggedin()) {
-			exit_not_logged_in();
-		}
+	case 'admin': {
 		$id = getStringFromRequest('group_id');
-		session_require_perm('project_admin', $id);
 		if (!$id) {
 			exit_error(_('Cannot Process your request')._(': ')._('No ID specified'), 'home');
 		}
 		$group = group_get_object($id);
 		if ( !$group) {
-			exit_error("Invalid Project", 'home');
+			exit_error(_('Invalid Project'), 'home');
 		}
+		session_require_perm('project_admin', $id);
 		if (!$group->usesPlugin($projectsHierarchy->name)) {//check if the group has the projects-hierarchy plugin active
 			exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'), $projectsHierarchy->name), 'home');
 		}
@@ -125,12 +115,7 @@ switch ($type) {
 		break;
 	}
 	default: {
-		exit_error("No TYPE specified", 'home');
+		exit_error(_('No TYPE specified'), 'home');
 		break;
 	}
 }
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:

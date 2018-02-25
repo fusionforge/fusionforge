@@ -338,28 +338,28 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->click("link=Users and permissions");
 		$this->waitForPageToLoad("30000");
 		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "guru") ;
-		$this->select("//input[@value='Add Member']/../select[@name='role_id']", "label=Senior Developer");
+		$this->select("//input[@value='Add Member']/../fieldset/select[@name='role_id']", "label=Senior Developer");
 		$this->click ("//input[@value='Add Member']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("guru Lastname"));
 		$this->assertTrue($this->isElementPresent("//tr/td/a[.='guru Lastname']/../../td/div[contains(.,'Senior Developer')]")) ;
 
 		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "trainee") ;
-		$this->select("//input[@value='Add Member']/../select[@name='role_id']", "label=Junior Developer");
+		$this->select("//input[@value='Add Member']/../fieldset/select[@name='role_id']", "label=Junior Developer");
 		$this->click ("//input[@value='Add Member']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("trainee Lastname"));
 		$this->assertTrue($this->isElementPresent("//tr/td/a[.='trainee Lastname']/../../td/div[contains(.,'Junior Developer')]")) ;
 
 		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "docmaster") ;
-		$this->select("//input[@value='Add Member']/../select[@name='role_id']", "label=Doc Writer");
+		$this->select("//input[@value='Add Member']/../fieldset/select[@name='role_id']", "label=Doc Writer");
 		$this->click ("//input[@value='Add Member']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("docmaster Lastname"));
 		$this->assertTrue($this->isElementPresent("//tr/td/a[.='docmaster Lastname']/../../td/div[contains(.,'Doc Writer')]")) ;
 
 		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "bigboss") ;
-		$this->select("//input[@value='Add Member']/../select[@name='role_id']", "label=Senior Developer");
+		$this->select("//input[@value='Add Member']/../fieldset/select[@name='role_id']", "label=Senior Developer");
 		$this->click ("//input[@value='Add Member']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("bigboss Lastname"));
@@ -376,7 +376,7 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->assertFalse($this->isTextPresent("trainee Lastname"));
 
 		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "trainee") ;
-		$this->select("//input[@value='Add Member']/../select[@name='role_id']", "label=Junior Developer");
+		$this->select("//input[@value='Add Member']/../fieldset/select[@name='role_id']", "label=Junior Developer");
 		$this->click ("//input[@value='Add Member']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("trainee Lastname"));
@@ -466,8 +466,8 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->click("link=Users and permissions");
 		$this->waitForPageToLoad("30000");
 
-		$this->assertTrue($this->isElementPresent("//input[@value='Link external role']/../../div/select/option[.='Senior Developer (in project MetaProject)']")) ;
-		$this->select("//input[@value='Link external role']/../../div/select", "label=Senior Developer (in project MetaProject)") ;
+		$this->assertTrue($this->isElementPresent("//input[@value='Link external role']/../../div/fieldset/select/option[.='Senior Developer (in project MetaProject)']")) ;
+		$this->select("//input[@value='Link external role']/../../div/fieldset/select", "label=Senior Developer (in project MetaProject)") ;
 		$this->click("//input[@value='Link external role']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isElementPresent("//td/form/div[contains(.,'Senior Developer (in project MetaProject)')]/../div/input[contains(@value,'Unlink Role')]"));
@@ -498,9 +498,9 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->click("link=Users and permissions");
 		$this->waitForPageToLoad("30000");
 
-		$this->assertTrue($this->isElementPresent("//input[@value='Link external role']/../../div/select/option[.='Documentation masters (global role)']")) ;
-		$this->assertFalse($this->isElementPresent("//input[@value='Link external role']/../../div/select/option[.='Project moderators (global role)']")) ;
-		$this->select("//input[@value='Link external role']/../../div/select", "label=Documentation masters (global role)") ;
+		$this->assertTrue($this->isElementPresent("//input[@value='Link external role']/../../div/fieldset/select/option[.='Documentation masters (global role)']")) ;
+		$this->assertFalse($this->isElementPresent("//input[@value='Link external role']/../../div/fieldset/select/option[.='Project moderators (global role)']")) ;
+		$this->select("//input[@value='Link external role']/../../div/fieldset/select", "label=Documentation masters (global role)") ;
 		$this->click("//input[@value='Link external role']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isElementPresent("//td/form/div[contains(.,'Documentation masters (global role)')]/../div/input[contains(@value,'Unlink Role')]"));
@@ -512,7 +512,7 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->click("link=Users and permissions");
 		$this->waitForPageToLoad("30000");
 		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "guru") ;
-		$this->select("//input[@value='Add Member']/../select[@name='role_id']", "label=Admin");
+		$this->select("//input[@value='Add Member']/../fieldset/select[@name='role_id']", "label=Admin");
 		$this->click ("//input[@value='Add Member']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("guru Lastname"));
@@ -547,7 +547,7 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Temporary role"));
 		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "trainee") ;
-		$this->select("//input[@value='Add Member']/../select[@name='role_id']", "label=Temporary role");
+		$this->select("//input[@value='Add Member']/../fieldset/select[@name='role_id']", "label=Temporary role");
 		$this->click ("//input[@value='Add Member']") ;
 		$this->waitForPageToLoad("30000");
 		$this->click ("//td/form/div[contains(.,'Temporary role')]/../../form/div/input[@value='Delete role']") ;
@@ -610,19 +610,19 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->click ("//td/form/div[contains(.,'Anonymous')]/../div/input[@value='Edit Permissions']") ;
 		$this->waitForPageToLoad("30000");
 
-		$this->select("//tr/td[contains(.,'first-news')]/../td/select", "label=Read only");
+		$this->select("//tr/td[contains(.,'first-news')]/../td/fieldset/select", "label=Read only");
 		$this->click ("//input[@value='Submit']") ;
 		$this->waitForPageToLoad("30000");
-		$this->assertSelected("//tr/td[contains(.,'first-news')]/../td/select", "Read only");
+		$this->assertSelected("//tr/td[contains(.,'first-news')]/../td/fieldset/select", "Read only");
 
-		$this->select("//tr/td[contains(.,'first-news')]/../td/select", "label=Moderated post");
+		$this->select("//tr/td[contains(.,'first-news')]/../td/fieldset/select", "label=Moderated post");
 		$this->click ("//input[@value='Submit']") ;
 		$this->waitForPageToLoad("30000");
-		$this->assertSelected("//tr/td[contains(.,'first-news')]/../td/select", "Moderated post");
+		$this->assertSelected("//tr/td[contains(.,'first-news')]/../td/fieldset/select", "Moderated post");
 
-		$this->select("//tr/td[contains(.,'first-news')]/../td/select", "label=Unmoderated post");
+		$this->select("//tr/td[contains(.,'first-news')]/../td/fieldset/select", "label=Unmoderated post");
 		$this->click ("//input[@value='Submit']") ;
 		$this->waitForPageToLoad("30000");
-		$this->assertSelected("//tr/td[contains(.,'first-news')]/../td/select", "Unmoderated post");
+		$this->assertSelected("//tr/td[contains(.,'first-news')]/../td/fieldset/select", "Unmoderated post");
 	}
 }

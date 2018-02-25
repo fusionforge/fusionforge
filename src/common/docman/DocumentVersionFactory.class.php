@@ -2,7 +2,7 @@
 /**
  * FusionForge Documentation Manager
  *
- * Copyright 2016, Franck Villaume - TrivialDev
+ * Copyright 2016-2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -34,7 +34,6 @@ class DocumentVersionFactory extends FFError {
 
 	/**
 	 * @param	$Document
-	 * @internal	param			\The $object Document object to which this version factory is associated.
 	 */
 	function __construct(&$Document) {
 		parent::__construct();
@@ -51,22 +50,23 @@ class DocumentVersionFactory extends FFError {
 	}
 
 	/**
-	 * getVersions - retrieve a limited number of version of a document
+	 * getHTMLVersions - retrieve a limited number of version of a document
 	 *
 	 * @param	int	$limit	the number of versions to retrieve. Default is 0 = No limit
 	 * @param	int	$start	Paging the retrieve. Start point. Default is 0.
 	 * @return	array	Array of enriched version datas from database.
 	 */
-	function getVersions($limit = 0, $start = 0) {
+	function getHTMLVersions($limit = 0, $start = 0) {
 		global $HTML;
 		$versions = array();
-		$res = db_query_params('SELECT serial_id, version, docid, current_version, title, updatedate, createdate, created_by, description, filename, filetype, filesize FROM doc_data_version WHERE docid = $1 ORDER by version ASC',
+		// everything but data_words! Too much memory consumption.
+		$res = db_query_params('SELECT serial_id, \'_\'||version as version, docid, current_version, title, updatedate, createdate, created_by, description, filename, filetype, filesize, vcomment FROM doc_data_version WHERE docid = $1 ORDER by version DESC',
 					array($this->Document->getID()), $limit, $start);
 		if ($res) {
 			$numrows = db_numrows($res);
 			while ($arr = db_fetch_array($res)) {
 				$user = user_get_object($arr['created_by']);
-				$arr['created_by_username'] = $user->getRealName();
+				$arr['created_by_username'] = util_display_user($user->getUnixName(), $user->getID(), $user->getRealName());
 				$arr['filesize_readable'] = human_readable_bytes($arr['filesize']);
 				if ($arr['updatedate']) {
 					$arr['lastdate'] = date(_('Y-m-d H:i'), $arr['updatedate']);
@@ -85,11 +85,37 @@ class DocumentVersionFactory extends FFError {
 				if (preg_match('/html/i', $arr['filetype'])) { // text plain, text html, text x-patch, etc
 					$isHtml = 1;
 				}
-				$arr['versionactions'][] = util_make_link('#', $HTML->getEditFilePic(_('Edit this version'), 'editversion'), array('id' => 'version_action_edit', 'onclick' => 'javascript:controllerListFile.toggleEditVersionView({title: \''.addslashes($arr['title']).'\', description: \''.addslashes($arr['description']).'\', version: '.$arr['version'].', current_version: '.$arr['current_version'].', isURL: '.$isURL.', isText: '.$isText.', isHtml: '.$isHtml.', filename: \''.addslashes($arr['filename']).'\'})'), true);
+				$new_description = util_gen_cross_ref($arr['description'], $this->Document->Group->getID());
+				$arr['new_description'] = str_replace(array("\r\n", "\r", "\n"), "\\n", $new_description);
+				$arr['description'] = str_replace(array("\r\n", "\r", "\n"), "\\n", $arr['description']);
+				$arr['vcomment'] = str_replace(array("\r\n", "\r", "\n"), "\\n", $arr['vcomment']);
+				$arr['versionactions'][] = util_make_link('#', $HTML->getEditFilePic(_('Edit this version'), 'editversion'), array('id' => 'version_action_edit', 'onclick' => 'javascript:controllerListFile.toggleEditVersionView({title: \''.addslashes($arr['title']).'\', description: \''.addslashes($arr['description']).'\', new_description: \''.addslashes($arr['new_description']).'\', version: '.ltrim($arr['version'], '_').', current_version: '.$arr['current_version'].', isURL: '.$isURL.', isText: '.$isText.', isHtml: '.$isHtml.', filename: \''.addslashes($arr['filename']).'\', vcomment: \''.addslashes($arr['vcomment']).'\', docid: '.$arr['docid'].', groupId: '.$this->Document->Group->getID().'})'), true);
 				if ($numrows > 1) {
-					$arr['versionactions'][] = util_make_link('#', $HTML->getRemovePic(_('Permanently delete this version'), 'delversion'), array('id' => 'version_action_delete', 'onclick' => 'javascript:controllerListFile.deleteVersion({version: '.$arr['version'].'})'), true);
+					$arr['versionactions'][] = util_make_link('#', $HTML->getRemovePic(_('Permanently delete this version'), 'delversion'), array('id' => 'version_action_delete', 'onclick' => 'javascript:controllerListFile.deleteVersion({version: '.ltrim($arr['version'], '_').', docid: '.$arr['docid'].', groupId: '.$this->Document->Group->getID().'})'), true);
 				}
 				$versions[$arr['version']] = $arr;
+			}
+		}
+		db_free_result($res);
+		return $versions;
+	}
+
+	function getVersions() {
+		$versions = array();
+		// everything but data_words! Too much memory consumption.
+		$res = db_query_params('SELECT serial_id, version as version, docid, current_version, title, updatedate, createdate, created_by, description, filename, filetype, filesize, vcomment FROM doc_data_version WHERE docid = $1 ORDER by version DESC',
+					array($this->Document->getID()));
+		if ($res) {
+			$numrows = db_numrows($res);
+			$i = 0;
+			while ($arr = db_fetch_array($res)) {
+				$versions[$i] = $arr;
+				if ($arr['filetype'] != 'URL') {
+					$versions[$i]['storageref'] = DocumentStorage::instance()->get($arr['serial_id']);
+				} else {
+					$versions[$i]['storageref'] = null;
+				}
+				$i++;
 			}
 		}
 		db_free_result($res);
@@ -103,7 +129,12 @@ class DocumentVersionFactory extends FFError {
 			while ($arr = db_fetch_array($res)) {
 				$serialids[] = $arr[0];
 			}
+			$this->serialids = $serialids;
 		}
 		return $serialids;
+	}
+
+	function getDBResVersionSerialIDs() {
+		return db_query_params('SELECT serial_id, version FROM doc_data_version WHERE docid = $1 ORDER BY version DESC', array($this->Document->getID()));
 	}
 }

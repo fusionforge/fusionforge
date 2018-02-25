@@ -4,7 +4,7 @@
  *
  * Copyright 2003-2004 (c) GForge LLC, Tim Perdue
  * Copyright 2010 (c), FusionForge Team
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -67,19 +67,18 @@ report_header(_('User Summary Report'));
 	<p>
 	<?php echo _('Choose the range from the pop-up boxes below. The report will list all tasks with an open date in that range.'); ?>
 	</p>
-	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
+<?php echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'get')); ?>
 	<table>
 		<tr>
 			<td><strong><?php echo _('Start Date')._(':'); ?></strong><br /><?php echo report_weeks_box($report, 'start', $start); ?></td>
 			<td><strong><?php echo _('End Date')._(':'); ?></strong><br /><?php echo report_weeks_box($report, 'end', $end); ?></td>
 			<td><strong><?php echo _('Task Status')._(':'); ?></strong><br /><?php echo html_build_select_box_from_arrays($l,$n,'tstat',$tstat,false); ?></td>
-			<td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" /></td>
+			<td><br><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" /></td>
 		</tr>
 	</table>
-	</form>
-
 	<?php
-	$res = db_query_params ('SELECT users.realname,users.user_id,users.user_name, ps.status_name, pgl.group_id, pt.group_project_id, pt.summary, pt.hours, pt.end_date, pt.project_task_id, pt.hours, sum(rtt.hours) AS remaining_hrs,
+echo $HTML->closeForm();
+$res = db_query_params ('SELECT users.realname,users.user_id,users.user_name, ps.status_name, pgl.group_id, pt.group_project_id, pt.summary, pt.hours, pt.end_date, pt.project_task_id, pt.hours, sum(rtt.hours) AS remaining_hrs,
 				(select sum(hours) from rep_time_tracking
 					WHERE user_id=users.user_id
 					AND project_task_id=pt.project_task_id
@@ -114,14 +113,14 @@ if (!$res || db_numrows($res) < 1) {
 		$name=db_result($res,$i,'realname');
 		if ($last_name != $name) {
 			echo '
-		<tr '.$HTML->boxGetAltRowStyle(0).'>
+		<tr>
 			<td colspan="6"><strong>'.$name.'</strong></td>
 		</tr>';
 			$last_name = $name;
 		}
 		echo '
-		<tr '.$HTML->boxGetAltRowStyle(1).'>
-			<td>&nbsp;</td>
+		<tr>
+			<td></td>
 			<td>'.util_make_link('/pm/task.php?func=detailtask&group_id='.db_result($res,$i,'group_id').'&project_task_id='.db_result($res,$i,'project_task_id') .'&group_project_id='.db_result($res,$i,'group_project_id'),db_result($res,$i,'summary')) .'
 			</td>
 			<td>'.db_result($res,$i,'status_name').'</td>
@@ -146,7 +145,7 @@ if (!$res || db_numrows($res) < 1) {
 			for ($j=0; $j<db_numrows($res2); $j++) {
 				$tracker=db_result($res2,$j,'group_name'). '*' .db_result($res2,$j,'name');
 				echo '
-		<tr '.$HTML->boxGetAltRowStyle(1).'>
+		<tr>
 			<td colspan="3">&nbsp;</td>
 			<td>';
 				if ($last_tracker != $tracker) {

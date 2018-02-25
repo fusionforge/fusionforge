@@ -50,11 +50,12 @@ class ArtifactTypeFactory extends FFError {
 
 	/**
 	 * @param	Group	$Group The Group object to which this ArtifactTypeFactory is associated
+	 * @param	bool	$skip_check
 	 */
 	function __construct(&$Group, $skip_check=false) {
 		parent::__construct();
 		if (!$Group || !is_object($Group)) {
-			$this->setError(_('No Valid Group Object'));
+			$this->setError(_('Invalid Project'));
 			return;
 		}
 		if ($Group->isError()) {
@@ -84,18 +85,18 @@ class ArtifactTypeFactory extends FFError {
 	 * @return	array	The array of ArtifactType object ids.
 	 */
 	function &getAllArtifactTypeIds() {
-		$result = array () ;
+		$result = array();
 		$res = db_query_params ('SELECT group_artifact_id FROM artifact_group_list_vw
 			WHERE group_id=$1
 			ORDER BY group_artifact_id ASC',
-					array ($this->Group->getID())) ;
+					array ($this->Group->getID()));
 		if (!$res) {
-			return $result ;
+			return $result;
 		}
 		while ($arr = db_fetch_array($res)) {
-			$result[] = $arr['group_artifact_id'] ;
+			$result[] = $arr['group_artifact_id'];
 		}
-		return $result ;
+		return $result;
 	}
 
 	/**
@@ -108,8 +109,8 @@ class ArtifactTypeFactory extends FFError {
 			return $this->ArtifactTypes;
 		}
 
-		$this->ArtifactTypes = array () ;
-		$ids = $this->getAllArtifactTypeIds() ;
+		$this->ArtifactTypes = array();
+		$ids = $this->getAllArtifactTypeIds();
 
 		foreach ($ids as $id) {
 			if (forge_check_perm ('tracker', $id, 'read')) {

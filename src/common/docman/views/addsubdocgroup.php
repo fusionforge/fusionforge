@@ -59,7 +59,7 @@ function doItAddSubGroup() {
 <?php
 echo html_ac(html_ap() - 1);
 echo html_ao('div', array('class' => 'docmanDivIncluded'));
-echo $HTML->openForm(array('id' => 'addsubgroup', 'name' => 'addsubgroup', 'method' => 'post', 'action' => util_make_uri($actionurl)));
+echo $HTML->openForm(array('id' => 'addsubgroup', 'name' => 'addsubgroup', 'method' => 'post', 'action' => $actionurl));
 if ($dirid) {
 	$folderMessage = _('Name of the document subfolder to create');
 } else {

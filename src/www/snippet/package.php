@@ -3,6 +3,7 @@
  * Code Snippets Repository
  *
  * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2016-2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -25,8 +26,9 @@ require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'snippet/snippet_utils.php';
 
-if (session_loggedin()) {
+global $HTML, $feedback, $error_msg;
 
+if (session_loggedin()) {
 	if (getStringFromRequest('post_changes')) {
 		if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 			exit_form_double_submit();
@@ -45,8 +47,8 @@ if (session_loggedin()) {
 			/*
 				Create the new package
 			*/
-			$result = db_query_params ('INSERT INTO snippet_package (category,created_by,name,description,language) VALUES ($1,$2,$3,$4,$5)',
-						   array ($category,
+			$result = db_query_params('INSERT INTO snippet_package (category,created_by,name,description,language) VALUES ($1,$2,$3,$4,$5)',
+						   array($category,
 							  user_getid(),
 							  htmlspecialchars($name),
 							  htmlspecialchars($description),
@@ -64,8 +66,8 @@ if (session_loggedin()) {
 				/*
 					create the snippet package version
 				*/
-				$result = db_query_params ('INSERT INTO snippet_package_version (snippet_package_id,changes,version,submitted_by,post_date) VALUES ($1,$2,$3,$4,$5)',
-							   array ($snippet_package_id,
+				$result = db_query_params('INSERT INTO snippet_package_version (snippet_package_id,changes,version,submitted_by,post_date) VALUES ($1,$2,$3,$4,$5)',
+							   array($snippet_package_id,
 								  htmlspecialchars($changes),
 								  htmlspecialchars($version),
 								  user_getid(),
@@ -82,8 +84,7 @@ if (session_loggedin()) {
 					$feedback .= _('Snippet Package Version Added Successfully.');
 
 					//id for this snippet_package_version
-					$snippet_package_version_id=
-						db_insertid($result,'snippet_package_version','snippet_package_version_id');
+					$snippet_package_version_id = db_insertid($result,'snippet_package_version','snippet_package_version_id');
 					snippet_header(array('title'=>_('Add snippets to package')));
 
 /*
@@ -120,55 +121,60 @@ function show_add_snippet_box() {
 			}
 		} else {
 			form_release_key(getStringFromRequest("form_key"));
-			exit_error(_('Error: Go back and fill in all the information'));
+			exit_error(_('Error')._(': ')._('Go back and fill in all the information'));
 		}
 
 	}
 	snippet_header(array('title'=>_('Submit A New Snippet Package')));
 
 	?>
+	<p>
+	<?php echo _('You can group together existing snippets into a package using this interface. Before creating your package, make sure all your snippets are in place and you have made a note of the snippet ID\'s.'); ?>
 	</p>
-    <p>
-    <?php echo _('You can group together existing snippets into a package using this interface. Before creating your package, make sure all your snippets are in place and you have made a note of the snippet ID\'s.'); ?>
-    </p>
 	<ol>
-      <li><?php echo _('Create the package using this form.'); ?></li>
-	  <li><?php echo _('<strong>Then</strong> use the “Add Snippets to Package” link to add files to your package.'); ?></li>
+		<li><?php echo _('Create the package using this form.'); ?></li>
+		<li><?php echo _('<strong>Then</strong> use the “Add Snippets to Package” link to add files to your package.'); ?></li>
 	</ol>
 	<p><?php echo _('<span class="important">Note:</span> You can submit a new version of an existing package by browsing the library and using the link on the existing package. You should only use this page if you are submitting an entirely new package.'); ?>
-    </p>
-	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
-	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
-	<input type="hidden" name="post_changes" value="y" />
-	<input type="hidden" name="changes" value="<?php echo _('First Posted Version') ?>" />
+	</p>
+	<?php
+	echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
+	echo $HTML->html_input('form_key', '', '', 'hidden', form_generate_key());
+        echo $HTML->html_input('post_changes', '', '', 'hidden', 'y');
+        echo $HTML->html_input('changes', '', '', 'hidden', _('First Posted Version'));
+	?>
 
 	<table>
 
-	<tr><td colspan="2"><strong><?php echo _('Title').utils_requiredField()._(':'); ?></strong><br />
-		<input type="text" required="required" name="name" size="45" maxlength="60" />
-	</td></tr>
-
-	<tr><td colspan="2"><strong><?php echo _('Description').utils_requiredField()._(':'); ?></strong><br />
-		<textarea name="description" required="required" rows="5" cols="45"></textarea>
-	</td></tr>
+	<tr>
+	<td colspan="2">
+		<?php echo $HTML->html_input('name', '', _('Title').utils_requiredField()._(': '), 'text', '', array('size' => '45', 'maxlength' => '60', 'required' => 'required')); ?>
+	</td>
+	</tr>
 
 	<tr>
-	<td><strong><?php echo _('Language').utils_requiredField()._(':'); ?></strong><br />
-		<?php echo html_build_select_box_from_array ($SCRIPT_LANGUAGE,'language'); ?>
-		<br />
+	<td colspan="2">
+		<?php echo $HTML->html_textarea('description', '', _('Description').utils_requiredField()._(': '), '', array('rows' => '5', 'cols' => '45', 'required' => 'required')); ?>
+	</td>
+	</tr>
+
+	<tr>
+	<td>
+		<?php echo $HTML->html_select($SCRIPT_LANGUAGE, 'language', _('Language').utils_requiredField()._(': ')); ?>
 		<!--<?php echo util_make_link ('/support/?func=addsupport&group_id=1',_('Suggest a Language')); ?>-->
 	</td>
 
-	<td><strong><?php echo _('Category') ?></strong><?php echo utils_requiredField(); ?><br />
-		<?php echo html_build_select_box_from_array ($SCRIPT_CATEGORY,'category'); ?>
-		<br />
+	<td>
+		<?php echo $HTML->html_select($SCRIPT_CATEGORY, 'category', _('Category').utils_requiredField()._(': ')); ?>
 		<!--<?php echo util_make_link ('/support/?func=addsupport&group_id=1',_('Suggest a Category')); ?>-->
 	</td>
 	</tr>
 
-	<tr><td colspan="2"><strong><?php echo _('Version').utils_requiredField()._(':'); ?></strong><br />
-		<input type="text" required="required" name="version" size="10" maxlength="15" />
-	</td></tr>
+	<tr>
+	<td colspan="2">
+		<?php echo $HTML->html_input('version', '', _('Version').utils_requiredField()._(': '), 'text', '', array('size' => '10', 'maxlength' => '15', 'required' => 'required')); ?>
+	</td>
+	</tr>
 
 	<tr><td colspan="2" class="align-center">
 		<strong><?php echo _('Make sure all info is complete and accurate'); ?></strong>
@@ -176,14 +182,12 @@ function show_add_snippet_box() {
 		<input type="submit" name="submit" value="<?php echo _('Submit'); ?>" />
 	</td></tr>
 
-	</table></form>
+	</table>
 	<?php
+	echo $HTML->closeForm();
 	snippet_footer();
-
 } else {
-
 	exit_not_logged_in();
-
 }
 
 // Local Variables:

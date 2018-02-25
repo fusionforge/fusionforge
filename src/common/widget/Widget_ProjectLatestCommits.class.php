@@ -2,7 +2,7 @@
 /**
  * Widget_ProjectLatestCommits
  *
- * Copyright 2014 Franck Villaume - TrivialDev
+ * Copyright 2014,2017, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -41,7 +41,7 @@ class Widget_ProjectLatestCommits extends Widget {
 		return _('5 Latest Commits');
 	}
 
-	public function _getLinkToCommit($project, $commit_id, $pluginName) {
+	public function _getLinkToCommit($project, $commit_id) {
 		return util_make_link('/scm/browser.php?group_id='.$project->getID().'&commit='.$commit_id, _('commit')._(': ').$commit_id);
 	}
 
@@ -67,16 +67,22 @@ class Widget_ProjectLatestCommits extends Widget {
 				if (strlen($revision['description']) > 255) {
 					$revisionDescription .= ' [...]';
 				}
-				$html .= html_e('div', array('class' => $HTML->boxGetAltRowStyle($key, true), 'style' => 'border-bottom:1px solid #ddd'),
+				$divattr = array('class' => '', 'style' => 'border-bottom:1px solid #ddd');
+				if ((($key + 1) % 2) == 1) {
+					$divattr['class'] = 'bgcolor-white';
+				} else {
+					$divattr['class'] = 'bgcolor-grey';
+				}
+				$html .= html_e('div', $divattr,
 						html_e('div', array('style' => 'font-size:0.98em'),
-							$this->_getLinkToCommit($project, $revision['commit_id'], $revision['pluginName']).
+							$this->_getLinkToCommit($project, $revision['commit_id']).
 							' '._('on').' '.
 							date(_("Y-m-d H:i"), $revision['date'])).
 						html_e('div', array('style' => 'padding-left:20px; padding-bottom:4px; color:#555'),
 							$revisionDescription));
 			}
 		} else {
-			$html .= $HTML->information(_('No commit found'));
+			$html .= $HTML->warning_msg(_('No commit found.'));
 		}
 		$html .= html_e('div', array('class' => 'underline-link'), util_make_link('/scm/?group_id='.$project->getID(), _('Browse Source Content Management')));
 		return $html;

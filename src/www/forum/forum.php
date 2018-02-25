@@ -113,7 +113,7 @@ if ($forum_id) {
 			$error_msg = $fm->getErrorMessage();
 			session_redirect('/forum/new.php?forum_id='.$forum_id.'&group_id='.$group_id);
 		} else {
-			if ($fm->isPending() ) {
+			if ($fm->isPending()) {
 				$feedback = _('Message Queued for moderation -> Please wait until the admin approves/rejects it');
 			} else {
 				$feedback = _('Message Posted Successfully');
@@ -178,15 +178,15 @@ if ($forum_id) {
 	$options_popup=html_build_select_box_from_arrays ($vals,$texts,'style',$style,false);
 
 	//create a pop-up select box showing options for max_row count
-	$vals=array(25,50,75,100);
-	$texts=array(_('Show').' 25',_('Show').' 50',_('Show').' 75',_('Show').' 100');
+	$vals  = array(25, 50, 75, 100);
+	$texts = array(_('Show').' 25',_('Show').' 50',_('Show').' 75',_('Show').' 100');
 
-	$max_row_popup=html_build_select_box_from_arrays ($vals,$texts,'max_rows',$max_rows,false);
+	$max_row_popup = html_build_select_box_from_arrays ($vals,$texts,'max_rows',$max_rows,false);
 
 	//now show the popup boxes in a form
 
-	echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'get'));
-	$ret_val = '
+	$ret_val = $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'get'));
+	$ret_val .= '
 	<table>
 		<tr><td>
 			<input type="hidden" name="set" value="custom" />
@@ -197,7 +197,7 @@ if ($forum_id) {
 			_('Change View').'" />
 		</td></tr>
 	</table>';
-	echo $HTML->closeForm();
+	$ret_val .= $HTML->closeForm();
 
 	$am = new AttachManager();
 	$ret_val .= $am->PrintHelperFunctions();
@@ -226,13 +226,13 @@ if ($forum_id) {
 				New slashdot-inspired nested threads,
 				showing all submessages and bodies
 			*/
-			$ret_val .= $fh->showNestedMessage ( $msg_arr["0"][$i] ).'<br />';
+			$ret_val .= $fh->showNestedMessage($msg_arr["0"][$i]).'<br />';
 
-			if ( $msg_arr["0"][$i]->hasFollowups() ) {
+			if ($msg_arr["0"][$i]->hasFollowups()) {
 				//show submessages for this message
 				$tempid=$msg_arr["0"][$i]->getID();
 //				echo "<p>before showNestedMessages() $tempid | ". count( $msg_arr["$tempid"] );
-				$ret_val .= $fh->showNestedMessages ( $msg_arr, $tempid );
+				$ret_val .= $fh->showNestedMessages($msg_arr, $tempid);
 			}
 			$i++;
 		}
@@ -251,7 +251,7 @@ if ($forum_id) {
 		$title_arr[]=_('Author');
 		$title_arr[]=_('Date');
 
-		$ret_val .= $HTML->listTableTop ($title_arr);
+		$ret_val .= $HTML->listTableTop($title_arr);
 
 		$rows=count($msg_arr[0]);
 		$avail_rows=$fmf->fetched_rows;
@@ -279,7 +279,7 @@ if ($forum_id) {
 			$cells[][] = util_make_link('/forum/message.php?msg_id='.$msg->getID().'&group_id='.$group_id.'&reply=0', html_image('ic/msg.png').' '.$msgSubject);
 			$cells[][] = util_display_user($msg->getPosterName(), $msg->getPosterID(), $msg->getPosterRealName());
 			$cells[][] = relative_date($msg->getPostDate());
-			$ret_val .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($total_rows, true)), $cells);
+			$ret_val .= $HTML->multiTableRow(array(), $cells);
 			if ($msg->hasFollowups()) {
 				$ret_val .= $fh->showSubmessages($msg_arr,$msg->getID(),1);
 			}
@@ -299,7 +299,7 @@ if ($forum_id) {
 		$avail_rows=$fmf->fetched_rows;
 
 		for ($i=0; ($i<count($msg_arr) && ($i < $max_rows)); $i++) {
-			$ret_val .= $fh->showNestedMessage ( $msg_arr[$i] ).'<br />';
+			$ret_val .= $fh->showNestedMessage($msg_arr[$i]).'<br />';
 		}
 
 	} else {
@@ -331,7 +331,7 @@ if ($forum_id) {
 			$title_arr[]=_('Replies');
 			$title_arr[]=_('Last Post');
 
-			$ret_val .= $HTML->listTableTop ($title_arr);
+			$ret_val .= $HTML->listTableTop($title_arr);
 			$i=0;
 			while (($row=db_fetch_array($result)) && ($i < $max_rows)) {
 				/*
@@ -346,9 +346,9 @@ if ($forum_id) {
 				/*
 						show the subject and poster
 				*/
-				$ret_val .= '<tr '. $HTML->boxGetAltRowStyle($i) .'><td>'
+				$ret_val .= '<tr><td>'
 					.util_make_link('/forum/forum.php?thread_id='.$row['thread_id'].'&forum_id='.$forum_id.'&group_id='.$group_id,
-							html_image('ic/cfolder15.png').' '. $subject).'</td>'
+							$HTML->getFolderPic().' '. $subject).'</td>'
 					.'<td>'.util_display_user($row['user_name'], $row['user_id'], $row['realname']).'</td>'.
 					'<td>'. $row['followups'] .'</td>'.
 					'<td>'. relative_date($row['recent']).'</td></tr>';
@@ -369,7 +369,7 @@ if ($forum_id) {
 		if ($offset != 0) {
 			$ret_val .= '<span class="prev">
 			<a href="javascript:history.back()"><strong>' .
-				html_image('t2.png', 15, 15) ._('Newer Messages').'</strong></a></span>';
+				$HTML->getPrevPic() ._('Newer Messages').'</strong></a></span>';
 		} else {
 			$ret_val .= ' ';
 		}
@@ -379,7 +379,7 @@ if ($forum_id) {
 		if ($avail_rows > $max_rows) {
 			$ret_val .= '<span class="next">'.
 				util_make_link('/forum/forum.php?max_rows='.$max_rows.'&style='.$style.'&offset='.($offset+$i).'&forum_id='.$forum_id.'&group_id='.$group_id,
-						html_e('strong', array(), _('Older Messages').html_image('t.png', 15, 15))).'</span>';
+						html_e('strong', array(), _('Older Messages').$HTML->getNextPic())).'</span>';
 		} else {
 			$ret_val .= ' ';
 		}

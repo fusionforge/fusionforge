@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2012,2014,2016, Franck Villaume - TrivialDev
+ * Copyright 2012,2014,2016-2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is a part of Fusionforge.
@@ -21,6 +21,8 @@
  */
 
 require_once 'Widget.class.php';
+require_once $gfcommon.'frs/FRSManager.class.php';
+require_once $gfcommon.'docman/DocumentManager.class.php';
 
 /**
  * Widget_ProjectPublicAreas
@@ -42,7 +44,7 @@ class Widget_ProjectPublicAreas extends Widget {
 		$group_id = $request->get('group_id');
 		$pm = ProjectManager::instance();
 		$project = $pm->getProject($group_id);
-		$HTML = $GLOBALS['HTML'];
+		global $HTML;
 		// ################# Homepage Link
 
 		$result .= html_e('div', array('class' => 'public-area-box', 'rel' => 'doap:homepage'),
@@ -64,10 +66,9 @@ class Widget_ProjectPublicAreas extends Widget {
 
 			$rows = array();
 			while ($row = db_fetch_array($res)) {
-				if (!forge_check_perm('tracker',$row['group_artifact_id'],'read')) {
-					continue;
+				if (forge_check_perm('tracker', $row['group_artifact_id'], 'read')) {
+					$rows[] = $row;
 				}
-				$rows[] = $row;
 			}
 
 			if (count($rows) < 1) {
@@ -85,7 +86,7 @@ class Widget_ProjectPublicAreas extends Widget {
 					$contentLi .= sprintf(ngettext('(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', '(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', $row['open_count']), $row['open_count'], $row['count']);
 					$contentLi .= '<br />';
 					$contentLi .= '<span rel="sioc:has_space" resource="" ></span>'."\n";
-					$elementLi[] = array('content' => $contentLi, 'attrs' => array('about' => $tracker_stdzd_uri, 'typeof' => 'sioc:Container'));
+					$elementsLi[] = array('content' => $contentLi, 'attrs' => array('about' => $tracker_stdzd_uri, 'typeof' => 'sioc:Container'));
 				}
 				$result .= $HTML->html_list($elementsLi, array('class' => 'tracker', 'rel' => 'doap:bug-database'));
 			}
@@ -120,9 +121,13 @@ class Widget_ProjectPublicAreas extends Widget {
 
 		if ($project->usesDocman()) {
 			$result .= '<div class="public-area-box">';
-			$link_content = $HTML->getDocmanPic('') . ' ' . _('DocManager: Project Documentation');
+			$link_content = $HTML->getDocmanPic('') . ' ' . _('Document Manager');
 			//	<a rel="sioc:container_of" xmlns:sioc="http://rdfs.org/sioc/ns#" href="'.util_make_url ('/docman/?group_id='.$group_id).'">';
 			$result .= util_make_link('/docman/?group_id='.$group_id, $link_content);
+			if (forge_check_perm('docman', $group_id, 'read')) {
+				$docm = new DocumentManager($project);
+				$result .= ' ('.html_e('strong', array(), $docm->getNbDocs(), true, false).' '._('documents').' '._('in').' '.html_e('strong', array(), $docm->getNbFolders(), true, false).' '._('directories').')';
+			}
 			$result .= '</div>';
 		}
 
@@ -130,9 +135,11 @@ class Widget_ProjectPublicAreas extends Widget {
 
 		if ($project->usesFRS()) {
 			$result .= '<div class="public-area-box">';
-			$link_content = $HTML->getDownloadPic('') . ' ' . _('Files');
+			$link_content = $HTML->getPackagePic('') . ' ' . _('Files');
 			//	<a rel="sioc:container_of" xmlns:sioc="http://rdfs.org/sioc/ns#" href="'.util_make_url ('/frs/?group_id='.$group_id).'">';
 			$result .= util_make_link('/frs/?group_id='.$group_id, $link_content);
+			$frsm = new FRSManager($project);
+			$result .= ' ('.html_e('strong', array(), $frsm->getNbReleases(), true, false).' '._('releases').' '._('in').' '.html_e('strong', array(), $frsm->getNbPackages(), true, false).' '._('packages').')';
 			$result .= '</div>';
 		}
 
@@ -164,7 +171,7 @@ class Widget_ProjectPublicAreas extends Widget {
 				$result .= "\n".'<ul class="task-manager">';
 				foreach ($pgs as $pg) {
 					$result .= "\n\t<li>";
-					$result .= util_make_link('/pm/task.php?group_project_id='.$pg->getID().'&group_id='.$group_id.'&func=browse',$pg->getName());
+					$result .= util_make_link('/pm/task.php?group_project_id='.$pg->getID().'&group_id='.$group_id.'&func=browse',$pg->getName()).' ('.html_e('strong', array(), $pg->getOpenCount(), true, false).' '._('open').' / '.html_e('strong', array(), $pg->getTotalCount()).' '._('total').')';
 					$result .= '</li>' ;
 				}
 				$result .= "\n</ul>";

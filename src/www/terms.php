@@ -28,29 +28,19 @@ require_once $gfwww.'news/news_utils.php';
 require_once $gfcommon.'forum/Forum.class.php';
 require_once $gfwww.'include/features_boxes.php';
 
-$HTML->header(array('title'=> _('Terms of use')));
+$HTML->header(array('title'=> sprintf (_('%s Terms of Use'),
+					forge_get_config ('forge_name'))));
 ?>
-
-<table class="fullwidth" cellpadding="5">
-<tr><td class="twothirdswidth top">
-	<h3><?php printf (_('%s Terms of Use'), forge_get_config ('forge_name')); ?></h3>
 <p>
-
 <?php
 	if ( file_exists(forge_get_config('custom_path') . '/terms.php') ) {
 		include forge_get_config('custom_path') . '/terms.php';
 	} else {
-		printf (_('These are the terms and conditions under which you are allowed to use the %s service.  They are empty by default, but the administrator(s) of the service can use this page to publish their local requirements if needed.'),
+		printf (_('These are the terms and conditions under which you are allowed to use the %s service. They are empty by default, but the administrator(s) of the service can use this page to publish their local requirements if needed.'),
 			forge_get_config ('forge_name')) ;
 	}
 ?>
-
 </p>
-
-</td>
-
-<td class="onethirdwidth top">
-</td></tr></table>
 
 <?php
 

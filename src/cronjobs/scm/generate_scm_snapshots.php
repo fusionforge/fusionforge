@@ -47,6 +47,10 @@ if (!is_dir(forge_get_config('scm_tarballs_path'))) {
 	mkdir(forge_get_config('scm_tarballs_path'), 0700, true);
 }
 
+if (!is_dir(forge_get_config('scm_snapshots_path'))) {
+	mkdir(forge_get_config('scm_snapshots_path'), 0700, true);
+}
+
 while ($data = db_fetch_array ($res)) {
 	$hook_params = array ('group_id' => $data['group_id']) ;
 	plugin_hook ('scm_generate_snapshots', $hook_params) ;

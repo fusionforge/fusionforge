@@ -1,5 +1,7 @@
 <?php
-/*
+/**
+ * Projects Hierarchy Plugin
+ *
  * Copyright 2004 (c) GForge LLC
  * Copyright 2006 (c) Fabien Regnier - Sogeti
  * Copyright 2011, Franck Villaume - Capgemini
@@ -25,7 +27,6 @@ function link_box($group_id, $name, $selected = 'xzxzxz') {
 	if (!$link) {
 		$link = db_query_params('SELECT group_id,group_name,register_time FROM groups
 					WHERE status=$1
-					AND type_id=1
 					AND group_id != $2
 					AND group_id NOT IN (SELECT sub_project_id FROM plugin_projects_hierarchy WHERE project_id = $2 )
 					AND group_id NOT IN (SELECT project_id FROM plugin_projects_hierarchy WHERE sub_project_id = $2 )
@@ -33,20 +34,6 @@ function link_box($group_id, $name, $selected = 'xzxzxz') {
 					array('A', $group_id, 'projects-hierarchy'));
 	}
 	return html_build_select_box($link, $name, $selected, false);
-}
-
-function type_son_box() {
-	return "<select name='link_type' onchange=\"javascript:
-if(this.value!= 0){
-document.formson.son.disabled=false
-}
-else {
-document.formson.son.disabled=true
-}\">
-\n<option value='0' selected=\"selected\" >"._('Link Type')."</option>\n
-<option value='shar'>"._('Share')."</option>\n
-<option value='navi' >"._('Navigation')."</option>\n
-</select>";
 }
 
 //search all the family,all ancestor
@@ -64,7 +51,3 @@ function get_family($group_id, $family = '', $cpt = 0){
 	}
 	return $family;
 }
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:

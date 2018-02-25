@@ -1,6 +1,8 @@
 <?php
-/** External authentication via HTTPD for FusionForge
+/**
+ * External authentication via HTTPD for FusionForge
  * Copyright 2011, Roland Mas
+ * Copyright 2016, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -27,7 +29,6 @@ require_once $gfcommon.'include/AuthPlugin.class.php';
  */
 class AuthHTTPDPlugin extends ForgeAuthPlugin {
 	function __construct() {
-		global $gfconfig;
 		parent::__construct();
 		$this->name = "authhttpd";
 		$this->text = _("HTTPD authentication");
@@ -39,6 +40,7 @@ FusionForge, for instance where Kerberos is used.");
 		$this->_addHook("check_auth_session");
 		$this->_addHook("fetch_authenticated_user");
 		$this->_addHook("close_auth_session");
+		$this->_addHook('session_valid_login');
 
 		$this->saved_login = '';
 		$this->saved_user = NULL;
@@ -50,36 +52,51 @@ FusionForge, for instance where Kerberos is used.");
 
 	/**
 	 * Display a form to input credentials
-	 * @param unknown_type $params
-	 * @return boolean
+	 * @param	array	$params
+	 * @return	boolean
 	 */
 	function displayAuthForm(&$params) {
+		global $HTML;
 		if (!$this->isRequired() && !$this->isSufficient()) {
 			return true;
 		}
 		$return_to = $params['return_to'];
 
-		$result = '';
+		$result = html_e('p', array(), _('Cookies must be enabled past this point.'));
 
-		$result .= '<p>';
-		$result .= _('Cookies must be enabled past this point.');
-		$result .= '</p>';
-
-		$result .= '<form action="' . util_make_url('/plugins/authhttpd/post-login.php') . '" method="get">
-<input type="hidden" name="form_key" value="' . form_generate_key() . '"/>
+		$result .= $HTML->openForm(array('action' => '/plugins/'.$this->name.'/post-login.php', 'method' => 'get'));
+		$result .= '<input type="hidden" name="form_key" value="' . form_generate_key() . '"/>
 <input type="hidden" name="return_to" value="' . htmlspecialchars(stripslashes($return_to)) . '" />
 <p><input type="submit" name="login" value="' . _('Login via HTTP authentication') . '" />
-</p>
-</form>';
-
+</p>';
+		$result .= $HTML->closeForm();
 		$params['html_snippets'][$this->name] = $result;
 
-		$params['transparent_redirect_urls'][$this->name] = util_make_url('/plugins/authhttpd/post-login.php?return_to='.htmlspecialchars(stripslashes($return_to)));
+		$params['transparent_redirect_urls'][$this->name] = util_make_url('/plugins/'.$this->name.'/post-login.php?return_to='.htmlspecialchars(stripslashes($return_to)));
+	}
+
+
+	function session_login_valid($params) {
+		$user = user_get_object_by_name($params['loginname']);
+		if ($user) {
+			if ($this->isSufficient()) {
+				$params['results'][$this->name] = FORGE_AUTH_AUTHORITATIVE_ACCEPT;
+			} else {
+				$params['results'][$this->name] = FORGE_AUTH_NOT_AUTHORITATIVE;
+			}
+		} else {
+			if ($this->isRequired()) {
+				$params['results'][$this->name] = FORGE_AUTH_AUTHORITATIVE_REJECT;
+			} else {
+				$params['results'][$this->name] = FORGE_AUTH_NOT_AUTHORITATIVE;
+			}
+		}
+		return true;
 	}
 
 	/**
-	 * Is there a valid session?
-	 * @param unknown_type $params
+	 * checkAuthSession - Is there a valid session?
+	 * @param	array	$params
 	 */
 	function checkAuthSession(&$params) {
 		$this->saved_user = NULL;
@@ -100,7 +117,6 @@ FusionForge, for instance where Kerberos is used.");
 			if ($this->isSufficient()) {
 				$this->saved_user = $user;
 				$params['results'][$this->name] = FORGE_AUTH_AUTHORITATIVE_ACCEPT;
-
 			} else {
 				$params['results'][$this->name] = FORGE_AUTH_NOT_AUTHORITATIVE;
 			}
@@ -114,8 +130,8 @@ FusionForge, for instance where Kerberos is used.");
 	}
 
 	/**
-	 * What FFUser is logged in?
-	 * @param unknown_type $params
+	 * fetchAuthUser - What FFUser is logged in?
+	 * @param	array	$params
 	 */
 	function fetchAuthUser(&$params) {
 		if ($this->saved_user && $this->isSufficient()) {

@@ -20,32 +20,32 @@
 
 source_path=$(forge_get_config source_path)
 case "$1" in
-    configure)
-	# Managed by mailman, but referencing it to document where it is:
-	# echo "Use 'mmsitepass' to set the Mailman master password"
-	# echo "Cf. /var/lib/mailman/data/adm.pw"
+	configure)
+		# Managed by mailman, but referencing it to document where it is:
+		# echo "Use 'mmsitepass' to set the Mailman master password"
+		# echo "Cf. /var/lib/mailman/data/adm.pw"
 
-	# Normally defined in per-list config, but needed e.g. in default empty archives page
-	lists_host=$(forge_get_config lists_host)
-	sed -i -e "s/^DEFAULT_EMAIL_HOST.*/DEFAULT_EMAIL_HOST = '$lists_host'/" \
-	       -e "s/^DEFAULT_URL_HOST.*/DEFAULT_URL_HOST = '$lists_host'/" \
-	       -e "s|^DEFAULT_URL_PATTERN.*|DEFAULT_URL_PATTERN = 'http://%s/mailman/'|" \
-	    /etc/mailman/mm_cfg.py
+		# Normally defined in per-list config, but needed e.g. in default empty archives page
+		lists_host=$(forge_get_config lists_host)
+		sed -i -e "s/^DEFAULT_EMAIL_HOST.*/DEFAULT_EMAIL_HOST = '$lists_host'/" \
+			-e "s/^DEFAULT_URL_HOST.*/DEFAULT_URL_HOST = '$lists_host'/" \
+			-e "s|^DEFAULT_URL_PATTERN.*|DEFAULT_URL_PATTERN = 'http://%s/mailman/'|" \
+			/etc/mailman/mm_cfg.py
 
-	# Detect mailman cgi-bin installation
-	mailman_cgi_dir=$( \
-	    (echo '/autodetection_failed';
-             ls -d /usr/lib/mailman/cgi-bin /usr/lib/cgi-bin/mailman 2>/dev/null) \
-            | tail -1)
-	ln -nfs $mailman_cgi_dir $source_path/lists/cgi-bin
-	;;
+		# Detect mailman cgi-bin installation
+		mailman_cgi_dir=$( \
+			(echo '/autodetection_failed';
+			ls -d /usr/lib/mailman/cgi-bin /usr/lib/cgi-bin/mailman 2>/dev/null) \
+			| tail -1)
+		ln -nfs $mailman_cgi_dir $source_path/lists/cgi-bin
+		;;
 
-    remove)
-	rm -f $source_path/lists/cgi-bin
-	;;
+	remove)
+		rm -f $source_path/lists/cgi-bin
+		;;
 
-    *)
-	echo "Usage: $0 {configure|remove}"
-	exit 1
-	;;
+	*)
+		echo "Usage: $0 {configure|remove}"
+		exit 1
+		;;
 esac

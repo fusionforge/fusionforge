@@ -6,7 +6,8 @@
  * Copyright 2002-2004 (c) GForge Team
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Coyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2017, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -25,9 +26,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-/*
-	Standard header to be used on all /project/admin/* pages
-*/
+/**
+ * project_admin_header() - Standard header to be used on all /project/admin/* pages
+ *
+ * @param	array	$params
+ */
 
 function project_admin_header($params) {
 	global $group_id, $HTML;
@@ -61,6 +64,12 @@ function project_admin_header($params) {
 	$labels[] = _('Project History');
 	$attr_r[] = array('title' => _('Show the significant change of your project.'));
 	$links[] = '/project/admin/history.php?group_id='.$group_id;
+
+	if(forge_get_config('use_tracker')) {
+		$labels[] = _('Effort Units');
+		$attr_r[] = array('title' => _('Manage Effort Units used in your project.'));
+		$links[] = '/project/admin/effortunits.php?group_id='.$group_id;
+	}
 
 	if(forge_get_config('use_people')) {
 		$labels[] = _('Post Jobs');
@@ -138,7 +147,7 @@ function group_add_history ($field_name,$old_value,$group_id) {
 /**
  * show_grouphistory - show the group_history rows that are relevant to this group_id
  *
- * @param	integer	$group_id	the group id
+ * @param	int	$group_id	the group id
  */
 function show_grouphistory($group_id) {
 	global $HTML;
@@ -156,7 +165,7 @@ function show_grouphistory($group_id) {
 		$title_arr[]=_('Date');
 		$title_arr[]=_('By');
 
-		echo $HTML->listTableTop ($title_arr);
+		echo $HTML->listTableTop($title_arr);
 		for ($i=0; $i < $rows; $i++) {
 			$field = db_result($result, $i, 'field_name');
 			$cells = array();
@@ -173,7 +182,7 @@ function show_grouphistory($group_id) {
 			}
 			$cells[][] = date(_('Y-m-d H:i'),db_result($result, $i, 'adddate'));
 			$cells[][] = db_result($result, $i, 'user_name');
-			echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i, true)), $cells);
+			echo $HTML->multiTableRow(array(), $cells);
 		}
 		echo $HTML->listTableBottom();
 

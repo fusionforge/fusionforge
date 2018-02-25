@@ -23,11 +23,17 @@
  */
 
 require_once $gfcommon.'docman/Document.class.php';
+require_once $gfcommon.'tracker/Artifact.class.php';
+require_once $gfcommon.'frs/FRSRelease.class.php';
 
-function util_gen_cross_ref ($text, $group_id) {
-
-	// Some important information.
-	$prj = group_getunixname ($group_id);
+/**
+ * util_gen_cross_ref()
+ *
+ * @param	string	$text
+ * @param	int		$group_id
+ * @return	mixed|string
+ */
+function util_gen_cross_ref($text, $group_id) {
 
 	// Handle URL in links, replace them with hyperlinks.
 	$text = util_make_links($text);
@@ -39,36 +45,42 @@ function util_gen_cross_ref ($text, $group_id) {
 	$text = preg_replace_callback('/\[\T(\d+)\]/', create_function('$matches', 'return _taskid2url($matches[1],'.$group_id.');'), $text);
 
 	// Handle [wiki:<pagename>] syntax
-	$text = preg_replace_callback('/\[wiki:(.*?)\]/', create_function('$matches', 'return _page2url('.$prj.',$matches[1]);'), $text);
+	$text = preg_replace_callback('/\[wiki:(.*?)\]/', create_function('$matches', 'return _page2url('.$group_id.',$matches[1]);'), $text);
 
 	// Handle FusionForge [forum:<thread_id>] Syntax => links to forum.
 	$text = preg_replace_callback('/\[forum:(\d+)\]/', create_function('$matches', 'return _forumid2url($matches[1]);'), $text);
 
 	// Handle FusionForge [Dnnn] Syntax => links to document.
 	$text = preg_replace_callback('/\[D(\d+)\]/', create_function('$matches', 'return _documentid2url($matches[1],'.$group_id.');'), $text);
+
+	// Handle FusionForge [Rnnn] Syntax => links to frs release.
+	$text = preg_replace_callback('/\[R(\d+)\]/', create_function('$matches', 'return _frsreleaseid2url($matches[1]);'), $text);
 	return $text;
 }
 
-function _page2url($prj,$page) {
-	return util_make_link('/wiki/g/'.$prj.'/'.rawurlencode($page), $page);
+function _page2url($group_id, $page) {
+	$params = array();
+	$params['group_id'] = $group_id;
+	$params['page'] = $page;
+	plugin_hook_by_reference('crossrefurl', $params);
+	if (isset($params['url'])) {
+		return util_make_link($params['url'], '[wiki:'.$page.']');
+	} else {
+		return '[wiki:'.$page.']';
+	}
 }
 
-function _artifactid2url ($id, $mode='') {
+function _artifactid2url($id, $mode = '') {
 	$text = '[#'.$id.']';
-	$res = db_query_params ('SELECT group_id, artifact.group_artifact_id, summary, status_id
-			FROM artifact, artifact_group_list
-			WHERE artifact_id=$1
-			AND artifact.group_artifact_id=artifact_group_list.group_artifact_id',
-				array ($id)) ;
-	if (db_numrows($res) == 1) {
-		$row = db_fetch_array($res);
-		$url = '/tracker/?func=detail&aid='.$id.'&group_id='.$row['group_id'].'&atid='.$row['group_artifact_id'];
-		$arg['title'] = util_html_secure($row['summary']);
-		if ($row['status_id'] == 2) {
+	$artifactObject = artifact_get_object($id);
+	if ($artifactObject && is_object($artifactObject) && !$artifactObject->isError()) {
+		$arg['title'] = util_html_secure($artifactObject->getSummary());
+		$url = $artifactObject->getPermalink();
+		if ($artifactObject->getStatusID() == 2) {
 			$arg['class'] = 'artifact_closed';
 		}
 		if ($mode == 'title') {
-			return util_make_link($url, $text, $arg).util_make_link($url, $row['summary']).'<br />';
+			return util_make_link($url, $text, $arg).' '.util_make_link($url, $artifactObject->getSummary()).'<br />';
 		} else {
 			return util_make_link($url, $text, $arg);
 		}
@@ -123,9 +135,20 @@ function _documentid2url($id, $group_id) {
 	$text = '[D'.$id.']';
 	$d = document_get_object($id, $group_id);
 	if ($d && is_object($d) && !$d->isError()) {
-		$view = (($d->getStateID() != 2) ? 'listfile' : 'listtrashfile');
-		$url = '/docman/?group_id='.$group_id.'&view='.$view.'&dirid='.$d->getDocGroupID().'&filedetailid='.$d->getID();
+		$url = $d->getPermalink();
 		$arg['title'] = $d->getName().' ['.$d->getFileName().']';
+		return util_make_link($url, $text, $arg);
+	}
+	return $text;
+}
+
+
+function _frsreleaseid2url($id) {
+	$text = '[R'.$id.']';
+	$frsr = frsrelease_get_object($id);
+	if ($frsr && is_object($frsr) && !$frsr->isError()) {
+		$url = $frsr->getPermalink();
+		$arg['title'] = $frsr->getName();
 		return util_make_link($url, $text, $arg);
 	}
 	return $text;

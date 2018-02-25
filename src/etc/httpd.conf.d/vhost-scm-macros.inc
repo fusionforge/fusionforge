@@ -9,7 +9,7 @@
   # Note: when setting ITKUID, the user's groups (project memberships) are added
   # Note: it's important to set ITKGID, otherwise privilege separation breaks as gid stays 'www-data'
 
-  <Location /authscm/$user/>
+  <Location ${FF__core__url_prefix}authscm/$user/>
     Require user $user
   </Location>
 </Macro>

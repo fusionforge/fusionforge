@@ -22,8 +22,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'include/rbac_texts.php' ;
-require_once $gfcommon.'include/RBAC.php' ;
+require_once $gfcommon.'include/rbac_texts.php';
+require_once $gfcommon.'include/RBAC.php';
 
 /**
  * TODO: FusionForge roles - Enter description here ...
@@ -40,12 +40,12 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	 * @param	object		$group		The Group object.
 	 * @param	int|bool	$role_id	The role_id.
 	 */
-	function __construct($Group, $role_id = false) {
+	function __construct($group, $role_id = false) {
 		parent::__construct();
-		if (!$Group || !is_object($Group) || $Group->isError()) {
-			$Group = NULL;
+		if (!$group || !is_object($group) || $group->isError()) {
+			$group = NULL;
 		}
-		$this->Group =& $Group;
+		$this->Group =& $group;
 
 		$hook_params = array();
 		$hook_params['role'] =& $this;
@@ -73,7 +73,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	 * setName - set the name of this role.
 	 *
 	 * @param	string	$role_name	The new name of this role.
-	 * @return	boolean	True if updated OK
+	 * @return	bool	True if updated OK
 	 */
 	function setName($role_name) { // From the PFO spec
 		if ($role_name == '') {
@@ -115,7 +115,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	 * isPublic - is this role public (accessible from projects
 	 * other than its home project)?
 	 *
-	 * @return	boolean	True if public
+	 * @return	bool	True if public
 	 */
 	function isPublic() {	// From the PFO spec
 		return $this->data_array['is_public'];
@@ -124,8 +124,8 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	/**
 	 * setPublic - set the public flag for this role.
 	 *
-	 * @param	boolean	$flag	The new value of the flag.
-	 * @return	boolean	True if updated OK
+	 * @param	bool	$flag	The new value of the flag.
+	 * @return	bool	True if updated OK
 	 */
 	function setPublic($flag) { // From the PFO spec
 		$res = db_query_params('UPDATE pfo_role SET is_public=$1 WHERE role_id=$2',
@@ -150,7 +150,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	 *	@param	bool	$new_project
 	 *	@return bool|int		The id on success or false on failure.
 	 */
-	function create($role_name, $data, $new_project=false) {
+	function create($role_name, $data, $new_project = false) {
 		if ($this->Group == NULL) {
 			if (!forge_check_global_perm('forge_admin')) {
 				$this->setPermissionDeniedError();
@@ -177,7 +177,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 					       array (htmlspecialchars($role_name)));
 			if (db_numrows($res)) {
 				$this->setError(_('Cannot create a role with this name (already used)'));
-				db_rollback () ;
+				db_rollback();
 				return false;
 			}
 		} else {
@@ -185,36 +185,36 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 					       array ($this->Group->getID(), htmlspecialchars($role_name)));
 			if (db_numrows($res)) {
 				$this->setError(_('Cannot create a role with this name (already used)'));
-				db_rollback () ;
+				db_rollback();
 				return false;
 			}
 		}
 
 		if ($this->Group == NULL) {
 			$res = db_query_params ('INSERT INTO pfo_role (role_name) VALUES ($1)',
-						array (htmlspecialchars($role_name))) ;
+						array (htmlspecialchars($role_name)));
 		} else {
 			$res = db_query_params ('INSERT INTO pfo_role (home_group_id, role_name) VALUES ($1, $2)',
 						array ($this->Group->getID(),
-						       htmlspecialchars($role_name))) ;
+						       htmlspecialchars($role_name)));
 		}
 		if (!$res) {
 			$this->setError('create::'.db_error());
 			db_rollback();
 			return false;
 		}
-		$role_id=db_insertid($res,'pfo_role','role_id');
+		$role_id = db_insertid($res,'pfo_role','role_id');
 		if (!$role_id) {
 			$this->setError('create::db_insertid::'.db_error());
 			db_rollback();
 			return false;
 		}
-		$this->data_array['role_id'] = $role_id ;
-		$this->data_array['role_name'] = $role_name ;
+		$this->data_array['role_id'] = $role_id;
+		$this->data_array['role_name'] = $role_name;
 
-		$this->update ($role_name, $data) ;
+		$this->update($role_name, $data);
 
-		$this->normalizeData () ;
+		$this->normalizeData();
 
 		if (!$this->fetchData($role_id)) {
 			db_rollback();
@@ -227,7 +227,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	/**
 	 * TODO: Enter description here ...
 	 * @param string $name
-	 * @return Ambiguous <number, boolean, contents>|boolean
+	 * @return Ambiguous <number, bool, contents>|bool
 	 */
 	function createDefault($name) {
 		if ($this->Group == NULL) {
@@ -237,7 +237,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 		if (array_key_exists ($name, $this->defaults)) {
 			$arr =& $this->defaults[$name];
 		} else {
-			$arr = array () ;
+			$arr = array();
 		}
 
 		$data = array();
@@ -281,19 +281,19 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 					$this->setError('Error: FRS'.db_error());
 					return false;
 				}
-				for ($j=0; $j<db_numrows($res); $j++) {
-					$data['frs'][db_result($res, $j, 'package_id')]= $v;
+				for ($j = 0; $j < db_numrows($res); $j++) {
+					$data['frs'][db_result($res, $j, 'package_id')] = $v;
 				}
 			}
 		}
 
-		return $this->create($name,$data,false);
+		return $this->create($name, $data, false);
 	}
 
 	/**
 	 * delete - delete a role in the database.
 	 *
-	 * @return	boolean	True on success or false on failure.
+	 * @return	bool	True on success or false on failure.
 	 */
 	function delete() {
 		if ($this->Group == NULL) {
@@ -355,7 +355,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	 * setUser -
 	 *
 	 * @param	int	User ID
-	 * @return	boolean	True on success or false on failure.
+	 * @return	bool	True on success or false on failure.
 	 */
 	function setUser($user_id) {
 		if ($this->Group == NULL) {

@@ -29,11 +29,6 @@ class PluginMediawiki extends FForge_SeleniumTestCase
 
 	function testMediawiki()
 	{
-		$this->skip_on_src_installs();
-		$this->skip_on_deb_installs();
-		$this->skip_on_rpm_installs();
-		$this->skip_on_centos();
-
 		$this->loadAndCacheFixture();
 
 		$this->changeConfig(array("mediawiki" => array("unbreak_frames" => "yes")));
@@ -53,7 +48,7 @@ class PluginMediawiki extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=Mediawiki");
 		$this->assertFalse($this->isTextPresent("not created yet"));
 
-		$this->clickAndWait("link=edit this page");
+		$this->clickAndWait("link=regex:(create|edit) this page");
 		$this->assertTrue($this->isTextPresent("You have followed a link to a page that does not exist yet."));
 		$this->type("//textarea[@id='wpTextbox1']", "= Bleh =
 == Blahblah ==

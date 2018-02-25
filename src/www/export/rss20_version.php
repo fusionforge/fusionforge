@@ -26,12 +26,12 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'export/rss_utils.inc';
 require_once $gfcommon.'include/FusionForge.class.php';
 
-$forge=new FusionForge();
-$vers=$forge->software_version;
-$name=$forge->software_name;
-$date=rss_date(time());
-$link="http://".forge_get_config('web_host').'/';
-$title=forge_get_config ('forge_name').' - Software version';
+$forge = new FusionForge();
+$vers = $forge->software_version;
+$name = $forge->software_name;
+$date = rss_date(time());
+$link = util_make_url();
+$title = forge_get_config ('forge_name').' - Software version';
 
 header("Content-Type: text/xml; charset=utf-8");
 print '<?xml version="1.0" encoding="UTF-8"?>';
@@ -54,5 +54,5 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
               	<link><?php echo $link; ?></link>
               	<description><?php echo $vers; ?></description>
 	</item>
-</channel>
-</rss>
+<?
+endFeed();

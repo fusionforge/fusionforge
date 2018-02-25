@@ -2,7 +2,7 @@
 /**
  * headermenu plugin : updateLinkValue view
  *
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -56,7 +56,7 @@ echo html_ac(html_ap() - 1);
 $linkValues = $headermenu->getLink($linkId);
 if (is_array($linkValues)) {
 	echo html_e('h2', array(), _('Update this link'));
-	echo $HTML->openForm(array('method' => 'POST', 'name' => 'updateLink', 'action' => util_make_uri($action_url)));
+	echo $HTML->openForm(array('method' => 'POST', 'name' => 'updateLink', 'action' => $action_url));
 	echo $HTML->listTableTop();
 	$cells = array();
 	$cells[] = array(_('Displayed Name').utils_requiredField()._(':'), 'style' => 'text-align:right');

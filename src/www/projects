@@ -106,8 +106,8 @@ if (!isset($group_id) && !isset($project)) {
 		display_content_negociated_hook('content_negociated_projects_list', $hook_params, $accepted_type, $forced_content_type);
 
 	} else {
-	  // '/projects' in HTML redirects to the softwaremap
-	  session_redirect(util_make_uri('/softwaremap/'));
+		// '/projects' in HTML redirects to the softwaremap
+		session_redirect('/softwaremap/');
 	}
 
 } else {

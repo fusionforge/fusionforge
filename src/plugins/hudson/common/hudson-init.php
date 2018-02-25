@@ -1,5 +1,4 @@
 <?php
-
 /**
  *
  * This file is part of FusionForge.
@@ -24,9 +23,9 @@
 global $gfplugins;
 require_once $gfplugins.'hudson/include/hudsonPlugin.class.php' ;
 //define('SEARCH__TYPE_IS_LIST', 'hudson');
-$hudsonPluginObject = new hudsonPlugin() ;
+$hudsonPluginObject = new hudsonPlugin();
 
-register_plugin ($hudsonPluginObject) ;
+register_plugin($hudsonPluginObject);
 
 // Local Variables:
 // mode: php

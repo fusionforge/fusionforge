@@ -4,7 +4,7 @@
  * Fusionforge Cron Job
  *
  * The rest Copyright 2002-2005 (c) GForge Team
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2017, Franck Villaume - TrivialDev
  * Copyright © 2013 Thorsten Glaser, tarent solutions GmbH
  * http://fusionforge.org/
  *
@@ -91,7 +91,7 @@ if (!is_dir($hpfx)) {
 	@mkdir($hpfx, 0755, true);
 }
 
-if (forge_get_config('use_ftp_uploads')) {
+if (forge_get_config('use_ftp')) {
 	if (!($ftp_pfx = forge_get_config('ftp_upload_dir'))) {
 		// this should be set in the configuration
 		exit();
@@ -131,12 +131,13 @@ foreach(util_result_column_to_array($res,0) as $uname) {
 
 /* create project/group homes */
 $res = db_query_params('SELECT unix_group_name, group_name FROM groups WHERE status=$1', array('A'));
-while ($row = pg_fetch_array($res)) {
+while ($row = db_fetch_array($res)) {
 	$groupname = $row['unix_group_name'] ;
 
 	if ($ftp_pfx && !is_dir($ftp_pfx . '/' . $groupname)) {
 		@mkdir($ftp_pfx . '/' . $groupname);
-		//XXX chown/chgrp/chmod?
+		system("chown -R root:$groupname $ftp_pfx/$groupname");
+		system("chmod -R 0770 $ftp_pfx/$groupname");
 	}
 
 	$ghome = $gpfx . '/' . $groupname;
@@ -170,7 +171,11 @@ while ($row = pg_fetch_array($res)) {
 
 		system("chown -R root:$groupname $ghome");
 		system("chmod -R g+w $ghome");
+		if (forge_get_config('use_manual_uploads')) {
+		// specific ownership for apache to deal with incoming
+			chown($ghome.'/incoming', forge_get_config('apache_user'));
+		}
 	}
 }
 
-cron_entry(25,$err);
+cron_entry('HOMEDIR', $err);

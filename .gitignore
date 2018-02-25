@@ -17,6 +17,7 @@ src/www/scm/viewvc/viewvc.org/*.zip
 /*.diff.gz
 /*.debian.tar.xz
 /*.build
+/*.buildinfo
 /*.changes
 /*.deb
 /*.upload
@@ -24,9 +25,11 @@ src/www/scm/viewvc/viewvc.org/*.zip
 src/.pc
 fusionforge*.orig.tar.bz2
 fusionforge-*.tar.bz2
+fusionforge_*.tar.xz
 src/fusionforge-*.tar.bz2
 # Debian packaging
 src/debian/control
+src/debian/files
 # RPM packaging:
 build/
 src/fusionforge.spec
@@ -36,3 +39,5 @@ src/fusionforge.spec
 .buildpath
 .project
 .settings/
+# PhpStorm
+.idea/

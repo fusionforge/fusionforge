@@ -4,8 +4,8 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
- * Copyright 2012-2014, Franck Villaume - TrivialDev
  * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
+ * Copyright 2012-2014,2016 Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -26,6 +26,8 @@
 
 global $group;
 global $atid;
+global $feedback;
+global $error_msg;
 
 //
 //	Create the ArtifactType object
@@ -42,14 +44,18 @@ if ($ath->isError()) {
 		exit_error($ath->getErrorMessage(),'tracker');
 	}
 }
-$error_msg = '';
+
 switch (getStringFromRequest('func')) {
 
 	case 'add' : {
 		if (!forge_check_perm ('tracker', $ath->getID(), 'submit')) {
 			exit_permission_denied('tracker');
 		}
-		include $gfcommon.'tracker/actions/add.php';
+		if (forge_get_config('use_tracker_widget_display')) {
+			include $gfcommon.'tracker/actions/widget_artifact_display.php';
+		} else {
+			include $gfcommon.'tracker/actions/add.php';
+		}
 		break;
 	}
 	case 'postadd' : {
@@ -61,8 +67,8 @@ switch (getStringFromRequest('func')) {
 		$artifact_group_id = getIntFromRequest('artifact_group_id');
 		$summary = getStringFromRequest('summary');
 		$details = getStringFromRequest('details');
-		$assigned_to = getStringFromRequest('assigned_to');
-		$priority = getStringFromRequest('priority');
+		$assigned_to = getIntFromRequest('assigned_to', 100);
+		$priority = getIntFromRequest('priority', 3);
 		$extra_fields = getStringFromRequest('extra_fields');
 
 		/*
@@ -91,7 +97,12 @@ switch (getStringFromRequest('func')) {
 		if (!$ah->create($summary,$details,$assigned_to,$priority,$extra_fields)) {
 			$error_msg = $ah->getErrorMessage();
 			form_release_key(getStringFromRequest('form_key'));
-			include $gfcommon.'tracker/actions/add.php';
+			if (forge_get_config('use_tracker_widget_display')) {
+				$func = 'add';
+				include $gfcommon.'tracker/actions/widget_artifact_display.php';
+			} else {
+				include $gfcommon.'tracker/actions/add.php';
+			}
 		} else {
 			$feedback .= sprintf(_('Item %s successfully created'),'[#'.$ah->getID().']');
 			$aid = $ah->getID();
@@ -230,13 +241,14 @@ switch (getStringFromRequest('func')) {
 		$resolution_id = getIntFromRequest('resolution_id');
 		$assigned_to = getStringFromRequest('assigned_to');
 		$summary = getStringFromRequest('summary');
-		$canned_response = getStringFromRequest('canned_response');
+		$canned_response = getStringFromRequest('tracker-canned_response');
 		$details = getStringFromRequest('details');
 		$description = getStringFromRequest('description');
 		$new_artifact_type_id = getIntFromRequest('new_artifact_type_id');
 		$extra_fields = getStringFromRequest('extra_fields');
 		$user_email = getStringFromRequest('user_email', false);
 		$was_error = false;
+		$newobjectsassociation = getStringFromRequest('newobjectsassociation', false);
 
 		/*
 			Technicians can modify limited fields - to be certain
@@ -367,13 +379,23 @@ switch (getStringFromRequest('func')) {
 					}
 				}
 
+				// Admin, Techs and Submitter can associate object
+				if ($newobjectsassociation) {
+					if (!$ah->addAssociations($newobjectsassociation)) {
+						$error_msg .= '<br />'._('Associate Object: Error')._(': ').$ah->getErrorMessage();
+						$was_error = true;
+					} else {
+						$feedback .= '<br />'._('Associate Object: Successful');
+					}
+				}
+
 				// Admin and Techs can delete files.
 				if (forge_check_perm ('tracker', $ath->getID(), 'tech')
 						|| forge_check_perm ('tracker', $ath->getID(), 'manager')) {
 					//
 					//	Delete list of files from this artifact
 					//
-					$delete_file = getStringFromRequest('delete_file');
+					$delete_file = getArrayFromRequest('delete_file', null);
 					if ($delete_file) {
 						$count=count($delete_file);
 						for ($i=0; $i<$count; $i++) {
@@ -424,11 +446,11 @@ switch (getStringFromRequest('func')) {
 			} elseif ($ah->isError()) {
 				exit_error($ah->getErrorMessage(),'tracker');
 			} else {
-				if ($start && $ah->isMonitoring())
+				if ($start && $ah->isMonitoring()) {
 					$feedback = _('Monitoring Started');
-				elseif ($stop && !$ah->isMonitoring())
+				} elseif ($stop && !$ah->isMonitoring()) {
 					$feedback = _('Monitoring Stopped');
-				else {
+				} else {
 					$ah->setMonitor();
 				}
 				include $gfcommon.'tracker/actions/browse.php';
@@ -440,11 +462,11 @@ switch (getStringFromRequest('func')) {
 			} elseif ($at->isError()) {
 				exit_error($at->getErrorMessage(),'tracker');
 			} else {
-				if ($start && $at->isMonitoring())
+				if ($start && $at->isMonitoring()) {
 					$feedback = _('Monitoring Started');
-				elseif ($stop && !$at->isMonitoring())
+				} elseif ($stop && !$at->isMonitoring()) {
 					$feedback = _('Monitoring Deactivated');
-				else {
+				} else {
 					$at->setMonitor();
 					$at->clearError();
 				}
@@ -546,12 +568,16 @@ switch (getStringFromRequest('func')) {
 			exit_error($ah->getErrorMessage(),'tracker');
 		} else {
 			html_use_tablesorter();
-			if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
-				include $gfcommon.'tracker/actions/mod.php';
-			} elseif (forge_check_perm ('tracker', $ath->getID(), 'tech')) {
-				include $gfcommon.'tracker/actions/mod-limited.php';
+			if (forge_get_config('use_tracker_widget_display')) {
+				include $gfcommon.'tracker/actions/widget_artifact_display.php';
 			} else {
-				include $gfcommon.'tracker/actions/detail.php';
+				if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
+					include $gfcommon.'tracker/actions/mod.php';
+				} elseif (forge_check_perm ('tracker', $ath->getID(), 'tech')) {
+					include $gfcommon.'tracker/actions/mod-limited.php';
+				} else {
+					include $gfcommon.'tracker/actions/detail.php';
+				}
 			}
 		}
 		break;
@@ -595,6 +621,35 @@ switch (getStringFromRequest('func')) {
 		include $gfcommon.'tracker/actions/browse.php';
 		break;
 	}
+	case 'removeassoc':
+		$aid = getIntFromRequest('aid');
+		$artifact = artifact_get_object($aid);
+		$objectRefId = getStringFromRequest('objectrefid');
+		$objectId = getStringFromRequest('objectid');
+		$objectType = getStringFromRequest('objecttype');
+		$link = getStringFromRequest('link');
+		$was_error = false;
+		if ($link == 'to') {
+			if (!$artifact->removeAssociationTo($objectId, $objectRefId, $objectType)) {
+				$error_msg = $artifact->getErrorMessage();
+				$was_error = true;
+			}
+		} elseif ($link == 'from') {
+			if (!$artifact->removeAssociationFrom($objectId, $objectRefId, $objectType)) {
+				$error_msg = $artifact->getErrorMessage();
+				$was_error = true;
+			}
+		} elseif ($link == 'any') {
+			if (!$artifact->removeAllAssociations()) {
+				$error_msg = $artifact->getErrorMessage();
+				$was_error = true;
+			}
+		}
+		if (!$was_error) {
+			$feedback = _('Associations removed successfully');
+		}
+		session_redirect('/tracker/?group_id='.$group_id.'&atid='.$atid.'&aid='.$aid, false);
+		break;
 	default : {
 		include $gfcommon.'tracker/actions/browse.php';
 		break;

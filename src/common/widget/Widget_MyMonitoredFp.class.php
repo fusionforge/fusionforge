@@ -101,7 +101,7 @@ class Widget_MyMonitoredFp extends Widget {
 								$package_monitor = util_make_link($url, $HTML->getDeletePic($title, $title, array('onClick' => 'return confirm("'._('Stop monitoring this package?').'")')));
 								$cells[] = array('    - '.util_make_link('/frs/?group_id='.$validDistinctMonitorGroupId, $frsPackageObject->getName()), 'width' => '99%');
 								$cells[][] = $package_monitor;
-								$html .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($key, true)), $cells);
+								$html .= $HTML->multiTableRow(array(), $cells);
 							}
 						}
 						$html_my_monitored_fp .= $html_hdr .$html;

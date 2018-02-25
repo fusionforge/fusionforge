@@ -22,25 +22,25 @@ system_user=$(forge_get_config system_user)
 data_path=$(forge_get_config data_path)
 
 case "$1" in
-    configure)
-	# TODO: specify the role of this user and its permissions
-	# Currently used in: plugin-scmbzr, plugin-moinmoin, ???
-	if ! getent passwd $system_user >/dev/null; then
-	    useradd $system_user -s /bin/false -M -d $data_path
-	fi
-	;;
+	configure)
+		# TODO: specify the role of this user and its permissions
+		# Currently used in: plugin-scmbzr, plugin-moinmoin, ???
+		if ! getent passwd $system_user >/dev/null; then
+			useradd $system_user -s /bin/false -M -d $data_path
+		fi
+		;;
 
-    remove)
-	;;
+	remove)
+		;;
 
-    purge)
-	# note: can't be called from Debian's postrm - reproduced there
-	userdel $system_user
-	# *not* removing $data_path automatically, let's play safe
-	;;
+	purge)
+		# note: can't be called from Debian's postrm - reproduced there
+		userdel $system_user
+		# *not* removing $data_path automatically, let's play safe
+		;;
 
-    *)
-	echo "Usage: $0 {configure|purge}"
-	exit 1
-	;;
+	*)
+		echo "Usage: $0 {configure|purge}"
+		exit 1
+		;;
 esac

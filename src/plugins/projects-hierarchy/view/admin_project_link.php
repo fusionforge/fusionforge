@@ -1,5 +1,6 @@
 <?php
 /**
+ * Projects Hierarchy Plugin
  * admin hierarchy view
  *
  * Copyright 2006 (c) Fabien Regnier - Sogeti
@@ -78,5 +79,6 @@ if (sizeof($pendingParent)) {
 	echo $HTML->closeForm();
 }
 
-if (!sizeof($pendingParent))
+if (!sizeof($pendingParent)) {
 	echo $HTML->information(_('No pending requests'));
+}

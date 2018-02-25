@@ -49,7 +49,7 @@ class ArtifactTypes extends FFError {
 	function __construct(&$Group) {
 		parent::__construct();
 		if (!$Group || !is_object($Group)) {
-			$this->setError(_('No Valid Group Object'));
+			$this->setError(_('Invalid Project'));
 			return;
 		}
 		if ($Group->isError()) {
@@ -62,7 +62,7 @@ class ArtifactTypes extends FFError {
 	/**
 	 * createTrackers - creates all the standard trackers for a given Group.
 	 *
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function createTrackers() {
 

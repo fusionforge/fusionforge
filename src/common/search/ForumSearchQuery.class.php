@@ -43,7 +43,7 @@ class ForumSearchQuery extends SearchQuery {
 	/**
 	 * @param	string	$words		words we are searching for
 	 * @param	int	$offset		offset
-	 * @param	boolean	$isExact	if we want to search for all the words or if only one matching the query is sufficient
+	 * @param	bool	$isExact	if we want to search for all the words or if only one matching the query is sufficient
 	 * @param	int	$groupId	group id
 	 * @param	int	$forumId	forum id
 	 */
@@ -75,9 +75,7 @@ class ForumSearchQuery extends SearchQuery {
 	}
 
 	function isRowVisible($row) {
-		return forge_check_perm('forum',
-								$row['group_forum_id'],
-								'read');
+		return forge_check_perm('forum', $row['group_forum_id'], 'read');
 	}
 }
 

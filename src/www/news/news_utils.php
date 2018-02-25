@@ -5,6 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2017, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -23,6 +24,12 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+/**
+ * news_header() - Display header for news pages
+ *
+ * @param array $params
+ */
+
 function news_header($params) {
 	global $HTML, $group_id;
 
@@ -33,7 +40,7 @@ function news_header($params) {
 	$params['toptab'] = 'news';
 	$params['group'] = $group_id;
 
-	if ($group_id && ($group_id != forge_get_config('news_group'))) {
+	if ($group_id && ($group_id != GROUP_IS_NEWS)) {
 		$menu_texts=array();
 		$menu_links=array();
 
@@ -55,7 +62,7 @@ function news_header($params) {
 	/*
 		Show horizontal links
 	*/
-	if ($group_id && ($group_id != forge_get_config('news_group'))) {
+	if ($group_id && ($group_id != GROUP_IS_NEWS)) {
 		site_project_header($params);
 	} else {
 		site_header($params);
@@ -70,7 +77,7 @@ function news_footer($params = array()) {
 /**
  * Display latest news for frontpage or news page.
  *
- * @param int  $group_id group_id of the news (forge_get_config('news_group') used if none given)
+ * @param int  $group_id group_id of the news (GROUP_IS_NEWS used if none given)
  * @param int  $limit number of news to display (default: 10)
  * @param bool $show_summaries (default: true)
  * @param bool $allow_submit (default: true)
@@ -79,10 +86,10 @@ function news_footer($params = array()) {
  * @param bool $show_forum
  * @return string
  */
-function news_show_latest($group_id=0,$limit=10,$show_summaries=true,$allow_submit=true,$flat=false,$tail_headlines=0,$show_forum=true) {
-
+function news_show_latest($group_id = 0, $limit = 10, $show_summaries = true, $allow_submit = true, $flat = false, $tail_headlines = 0, $show_forum = true) {
+	global $HTML;
 	if (!$group_id) {
-		$group_id=forge_get_config('news_group');
+		$group_id = GROUP_IS_NEWS;
 	}
 	/*
 		Show a simple list of the latest news items with a link to the forum
@@ -93,35 +100,35 @@ function news_show_latest($group_id=0,$limit=10,$show_summaries=true,$allow_subm
 		$l = $limit + $tail_headlines;
 	}
 	$result = db_query_params ('
-SELECT groups.group_name, groups.unix_group_name, groups.group_id,
-       groups.type_id, users.user_name, users.realname,
-       news_bytes.forum_id, news_bytes.summary, news_bytes.post_date,
-       news_bytes.details
-FROM users,news_bytes,groups
-WHERE (news_bytes.group_id=$1 AND news_bytes.is_approved <> 4 OR 1!=$2)
-  AND (news_bytes.is_approved=1 OR 1 != $3)
-  AND users.user_id=news_bytes.submitted_by
-  AND news_bytes.group_id=groups.group_id
-  AND groups.status=$4
-ORDER BY post_date DESC',
-				   array ($group_id,
-					  $group_id != forge_get_config('news_group') ? 1 : 0,
-					  $group_id != forge_get_config('news_group') ? 0 : 1,
-					  'A'),
-				   $l);
+				SELECT groups.group_name, groups.unix_group_name, groups.group_id,
+				users.user_name, users.realname, users.user_id,
+				news_bytes.forum_id, news_bytes.summary, news_bytes.post_date,
+				news_bytes.details
+				FROM users,news_bytes,groups
+				WHERE (news_bytes.group_id=$1 AND news_bytes.is_approved <> 4 OR 1!=$2)
+				AND (news_bytes.is_approved=1 OR 1 != $3)
+				AND users.user_id=news_bytes.submitted_by
+				AND news_bytes.group_id=groups.group_id
+				AND groups.status=$4
+				ORDER BY post_date DESC',
+				array ($group_id,
+					$group_id != GROUP_IS_NEWS ? 1 : 0,
+					$group_id != GROUP_IS_NEWS ? 0 : 1,
+					'A'),
+					$l);
 	$rows=db_numrows($result);
 
 	$return = '';
 
 	if (!$result || $rows < 1) {
-		$return .= _('No News Found');
+		$return .= $HTML->warning_msg(_('No news found.'));
 		$return .= db_error();
 //		$return .= "</div>";
 	} else {
 		for ($i=0; $i<$rows; $i++) {
 			$t_thread_title = db_result($result,$i,'summary');
 			$t_thread_url = "/forum/forum.php?forum_id=" . db_result($result,$i,'forum_id');
-			$t_thread_author = db_result($result,$i,'realname');
+			$t_thread_author = util_display_user(db_result($result,$i,'user_name'), db_result($result,$i,'user_id'), db_result($result,$i,'realname'));
 
 			$return .= '<div class="one-news bordure-dessous">';
 			$return .= "\n";
@@ -154,9 +161,7 @@ ORDER BY post_date DESC',
 					$return .= '<h3>'. $t_thread_title . '</h3>';
 				}
 				$return .= "<div>";
-				$return .= '<em>';
 				$return .= $t_thread_author;
-				$return .= '</em>';
 				$return .= ' - ';
 				$return .= relative_date(db_result($result,$i,'post_date'));
 				$return .= ' - ';
@@ -202,7 +207,7 @@ ORDER BY post_date DESC',
 			$return .= "\n\n";
 		}
 
-		if ($group_id != forge_get_config('news_group')) {
+		if ($group_id != GROUP_IS_NEWS) {
 			$archive_url = '/news/?group_id='.$group_id;
 		} else {
 			$archive_url = '/news/';
@@ -215,60 +220,13 @@ ORDER BY post_date DESC',
 			}
 		}
 	}
-	if ($allow_submit && $group_id != forge_get_config('news_group')) {
+	if ($allow_submit && $group_id != GROUP_IS_NEWS) {
 		if(!$result || $rows < 1) {
 			$return .= '';
 		}
 		//you can only submit news from a project now
 		//you used to be able to submit general news
 		$return .= '<div>' . util_make_link ('/news/submit.php?group_id='.$group_id, _('Submit News')).'</div>';
-	}
-	return $return;
-}
-
-function news_foundry_latest($group_id=0,$limit=5,$show_summaries=true) {
-	/*
-		Show a the latest news for a portal
-	*/
-
-	$result=db_query_params("SELECT groups.group_name,groups.unix_group_name,groups.group_id,
-		users.user_name,users.realname,news_bytes.forum_id,
-		news_bytes.summary,news_bytes.post_date,news_bytes.details
-		FROM users,news_bytes,groups,foundry_news
-		WHERE foundry_news.foundry_id=$1
-		AND users.user_id=news_bytes.submitted_by
-		AND foundry_news.news_id=news_bytes.id
-		AND news_bytes.group_id=groups.group_id
-		AND foundry_news.is_approved=1
-		ORDER BY news_bytes.post_date DESC", array($group_id),$limit);
-
-	$rows=db_numrows($result);
-
-	if (!$result || $rows < 1) {
-		$return .= '<h3>' . _('No News Found') . '</h3>';
-		$return .= db_error();
-	} else {
-		for ($i=0; $i<$rows; $i++) {
-			if ($show_summaries) {
-				//get the first paragraph of the story
-				$arr=explode("\n",db_result($result,$i,'details'));
-				if ((isset($arr[1]))&&(isset($arr[2]))&&(strlen($arr[0]) < 200) && (strlen($arr[1].$arr[2]) < 300) && (strlen($arr[2]) > 5)) {
-					$summ_txt=util_make_links( $arr[0].'<br />'.$arr[1].'<br />'.$arr[2] );
-				} else {
-					$summ_txt=util_make_links( $arr[0] );
-				}
-
-				//show the project name
-				$proj_name=' &nbsp; - &nbsp; '.util_make_link_g (strtolower(db_result($result,$i,'unix_group_name')),db_result($result,$i,'group_id'),db_result($result,$i,'group_name'));
-			} else {
-				$proj_name='';
-				$summ_txt='';
-			}
-			$return .= util_make_link ('/forum/forum.php?forum_id='. db_result($result,$i,'forum_id'),'<strong>'. db_result($result,$i,'summary') . '</strong>')
-				.'<br /><em>'. db_result($result,$i,'realname') .' - '.
-					date(_('Y-m-d H:i'),db_result($result,$i,'post_date')) . $proj_name . '</em>
-				'. $summ_txt .'';
-		}
 	}
 	return $return;
 }

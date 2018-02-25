@@ -1,9 +1,9 @@
 <?php
-
 /**
  * SOAP Tracker Include - this file contains wrapper functions for the SOAP interface
  *
  * Copyright 2005 Tony Bibbs <tony@geeklog.net>
+ * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -26,17 +26,17 @@ require_once $gfcommon.'reporting/TimeEntry.class.php';
 
 //addTimeEntry
 $server->register(
-        'addTimeEntry',
-        array(
-                'session_ser'=>'xsd:string',
-                'projectTaskId'=>'xsd:int',
-                'week'=>'xsd:int',
-                'daysAdjust'=>'xsd:int',
-                'timeCode'=>'xsd:int',
-                'hours'=>'xsd:float'
-        ),
-        array('addTimeEntryResponse'=>'xsd:int'),
-        $uri,$uri.'#addTimeEntry','rpc','encoded'
+	'addTimeEntry',
+	array(
+		'session_ser' => 'xsd:string',
+		'projectTaskId' => 'xsd:int',
+		'week' => 'xsd:int',
+		'daysAdjust' => 'xsd:int',
+		'timeCode' => 'xsd:int',
+		'hours' => 'xsd:float'
+	),
+	array('addTimeEntryResponse' => 'xsd:int'),
+	$uri, $uri.'#addTimeEntry', 'rpc', 'encoded'
 );
 
 //
@@ -45,9 +45,9 @@ $server->register(
 
 function addTimeEntry($session_ser, $projectTaskId, $week, $daysAdjust, $timeCode, $hours)
 {
-        continue_session($session_ser);
+	continue_session($session_ser);
 
-        $teObj = new TimeEntry();
+	$teObj = new TimeEntry();
 	error_log("addTimeEntry ($projectTaskId, $week, $daysAdjust, $timeCode, $hours)");
-        return $teObj->create($projectTaskId, $week, $daysAdjust, $timeCode, $hours);
+	return $teObj->create($projectTaskId, $week, $daysAdjust, $timeCode, $hours);
 }

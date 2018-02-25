@@ -250,8 +250,7 @@ class TaskBoardRelease extends FFError {
 	 */
 	function getVolume() {
 		$user_stories = $this->Taskboard->getUserStories($this->getTitle());
-		$columns = $this->Taskboard->getColumns($this->getTitle());
-
+		$columns = $this->Taskboard->getColumns();
 		$_columns_num = count($columns);
 		$ret = array(
 			'user_stories' => 0,
@@ -263,6 +262,11 @@ class TaskBoardRelease extends FFError {
 			'man_days'=> 0,
 			'completed_man_days'=> 0,
 		);
+
+		if (!$user_stories) {
+			$this->setError($this->Taskboard->getErrorMessage());
+			return false;
+		}
 
 		foreach( $user_stories as $us ) {
 			$completed_us = true;

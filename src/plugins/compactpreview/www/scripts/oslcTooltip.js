@@ -1,26 +1,23 @@
 /**
- * This file is (c) Copyright 2011 by Sabri LABBENE, Institut TELECOM
+ * Copyright 2011, Sabri LABBENE, Institut TELECOM
  * Copyright 2014, Franck Villaume - TrivialDev
  *
- * This file is part of FusionForge.
+ * http://fusionforge.org/
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * This file is part of FusionForge. FusionForge is free software;
+ * you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the Licence, or (at your option)
+ * any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
- *
- * This program has been developed in the frame of the COCLICO
- * project with financial support of its funders.
- *
+ * You should have received a copy of the GNU General Public License along
+ * with FusionForge; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
 // This is heavily inspired by code presented in http://rndnext.blogspot.com/2009/02/jquery-ajax-tooltip.html from Caleb Tucker
@@ -33,7 +30,7 @@ jQuery(function(){
 
 	// One instance that's reused to show info for the current resource
 	var container = jQuery('<div id="resourcePopupContainer">'
-			+ '<table width="" border="0" cellspacing="0" cellpadding="0" class="resourcePopupPopup">'
+			+ '<table class="resourcePopupPopup">'
 			+ '<tr>'
 			+ '   <td class="corner topLeft"></td>'
 			+ '   <td class="top"></td>'
@@ -62,7 +59,6 @@ jQuery(function(){
 			clearTimeout(hideTimer);
 		}
 		var pos = jQuery(this).offset();
-		var width = jQuery(this).width();
 		container.css({
 			left: (pos.left) + 'px',
 			top: pos.top + 10 + 'px'

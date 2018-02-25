@@ -26,6 +26,9 @@ Version 1.5.7 + FusionForge
 
 /* You can change these values */
 var image_path = "/images/";
+if (typeof(sys_url_base) !== 'undefined') {
+	var image_path = sys_url_base+"/images/";
+}
 var image_up = "sort_up.gif";
 var image_down = "sort_down.gif";
 var image_none = "sort_none.gif";

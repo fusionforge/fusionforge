@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (C) 2015 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
+ * Copyright 2016, Stéphane-Eymeric Bredtthauer - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -64,4 +65,4 @@ if ($element_id && $start_date_unixtime && $end_date_unixtime) {
 		$error_msg = $release->getErrorMessage();
 	}
 }
-session_redirect('/plugins/taskboard/releases/?group_id='.$group_id );
+session_redirect('/plugins/taskboard/releases/?group_id='.$group_id.'&taskboard_id='.$taskboard->getID(), false);

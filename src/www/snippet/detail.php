@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2013, French Ministry of National Education
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2016-2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -42,7 +42,7 @@ if ($type=='snippet') {
 		View a snippet and show its versions
 		Expand and show the code for the latest version
 	*/
-
+	html_use_ace();
 	snippet_header(array('title'=>_('Snippet Library')));
 
 	snippet_show_snippet_details($id);
@@ -57,33 +57,31 @@ if ($type=='snippet') {
 
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
-		echo $HTML->error_msg(_('Error: no versions found'));
+		echo $HTML->error_msg(_('Error')._(': ')._('no versions found'));
 	} else {
-		echo '
-		<h3>' ._('Versions Of This Snippet:').'</h3>
-		<p>';
-		$title_arr=array();
-		$title_arr[]= _('Snippet ID');
-		$title_arr[]= _('Download Version');
-		$title_arr[]= _('Date Posted');
-		$title_arr[]= _('Author');
-		$title_arr[]= _('Delete');
+		echo html_e('h3', array(), _('Versions Of This Snippet')._(':'));
+		$title_arr = array();
+		$title_arr[] = _('Snippet ID');
+		$title_arr[] = _('Download Version');
+		$title_arr[] = _('Date Posted');
+		$title_arr[] = _('Author');
+		$title_arr[] = _('Delete');
 
-		echo $HTML->listTableTop ($title_arr);
+		echo $HTML->listTableTop($title_arr);
 
 		/*
 			get the newest version of this snippet, so we can display its code
 		*/
-		$newest_version=db_result($result,0,'snippet_version_id');
+		$newest_version = db_result($result,0,'snippet_version_id');
 
 		for ($i=0; $i<$rows; $i++) {
 			echo '
-				<tr '. $HTML->boxGetAltRowStyle($i) .'><td>'.db_result($result,$i,'snippet_version_id').
+				<tr><td>'.db_result($result,$i,'snippet_version_id').
 				'</td><td>'.
 				util_make_link('/snippet/download.php?type=snippet&id='.db_result($result,$i,'snippet_version_id'), '<strong>'. db_result($result,$i,'version').'</strong>').'</td><td>'.
 				date(_('Y-m-d H:i'),db_result($result,$i,'post_date')).'</td><td>'.
 				util_make_link_u(db_result($result, $i, 'user_name'), db_result($result, $i, 'user_id'), db_result($result, $i, 'realname')).'</td>'.
-				'<td class="align-center">'.util_make_link('/snippet/delete.php?type=snippet&snippet_version_id='.db_result($result,$i,'snippet_version_id'), html_image("ic/trash.png", 16, 16)).'</td></tr>';
+				'<td class="align-center">'.util_make_link('/snippet/delete.php?type=snippet&snippet_version_id='.db_result($result,$i,'snippet_version_id'), $HTML->getDeletePic(_('Delete this version'), _('Delete'))).'</td></tr>';
 
 				if ($i != ($rows - 1)) {
 					echo '
@@ -94,31 +92,44 @@ if ($type=='snippet') {
 
 		echo $HTML->listTableBottom();
 
-		echo '
-		</p><p>'._('Download a raw-text version of this code by clicking on “Download Version”').'
-		</p>';
+		echo html_e('p', array(), _('Download a raw-text version of this code by clicking on “Download Version”'));
 	/*
 		show the latest version of this snippet's code
 	*/
-	$result=db_query_params ('SELECT code,version FROM snippet_version WHERE snippet_version_id=$1',
+	$result=db_query_params ('SELECT code,language,version FROM snippet,snippet_version WHERE snippet.snippet_id = snippet_version.snippet_id AND snippet_version_id=$1',
 			array($newest_version));
 
+	echo html_e('hr').html_e('h2', array(), _('Latest Snippet Version')._(': ').db_result($result,0,'version'));
 	echo '
-		<p>&nbsp;</p>
-		<hr />
-		<h2>'._('Latest Snippet Version: ').db_result($result,0,'version').'</h2>
 		<p>
-		<span class="snippet-detail">'. db_result($result,0,'code') .'
-		</span>
+		<span class="snippet-detail"><pre id="code">'. db_result($result,0,'code') .'
+		</pre></span>
 		</p>';
 	/*
 		Show a link so you can add a new version of this snippet
 	*/
-	echo '
-	<h3>'.util_make_link('/snippet/addversion.php?type=snippet&id='.htmlspecialchars($id), _('Submit a new version')).'</h3>
-	<p>' ._('You can submit a new version of this snippet if you have modified it and you feel it is appropriate to share with others.').'.</p>';
+	echo html_e('h3', array(), util_make_link('/snippet/addversion.php?type=snippet&id='.htmlspecialchars($id), _('Add a new version'))).
+		html_e('p', array(), _('You can submit a new version of this snippet if you have modified it and you feel it is appropriate to share with others.'));
 
 	}
+
+	$jsvar = "var mode = '".$SCRIPT_LANGUAGE_ACE[db_result($result,0,'language')]."';\n";
+	$javascript = <<<'EOS'
+	var editor = ace.edit("code");
+	editor.setOptions({
+		minLines: 20,
+		maxLines: 40,
+		mode: "ace/mode/"+mode,
+		autoScrollEditorIntoView: true
+	});
+	editor.session.setMode({
+		path:"ace/mode/"+mode,
+		inline:true
+	});
+	editor.setReadOnly(true);
+EOS;
+	echo html_e('script', array( 'type'=>'text/javascript'), '//<![CDATA['."\n".'$(function(){'.$jsvar.$javascript.'});'."\n".'//]]>');
+
 	snippet_footer();
 
 } elseif ($type=='package') {
@@ -142,18 +153,18 @@ if ($type=='snippet') {
 
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
-		echo $HTML->error_msg(_('Error: no versions found'));
+		echo $HTML->error_msg(_('Error')._(': ')._('no versions found'));
 	} else {
 		echo '
-		<h3>' ._('Versions Of This Package:').'</h3>
+		<h3>' ._('Versions Of This Package')._(':').'</h3>
 		<p>';
 		$title_arr=array();
 		$title_arr[]= _('Package Version');
 		$title_arr[]= _('Date Posted');
 		$title_arr[]= _('Author');
-		$title_arr[]= _('Edit/Del');
+		$title_arr[]= _('Actions');
 
-		echo $HTML->listTableTop ($title_arr);
+		echo $HTML->listTableTop($title_arr);
 
 		/*
 			determine the newest version of this package,
@@ -163,14 +174,14 @@ if ($type=='snippet') {
 
 		for ($i=0; $i<$rows; $i++) {
 			echo '
-			<tr '. $HTML->boxGetAltRowStyle($i) .'><td>'.
+			<tr><td>'.
 			util_make_link('/snippet/detail.php?type=packagever&id='.db_result($result,$i,'snippet_package_version_id'), '<strong>'.db_result($result,$i,'version').'</strong>').'</td><td>'.
 				date(_('Y-m-d H:i'),db_result($result,$i,'post_date')).'</td><td>'.
 				util_make_link_u (db_result($result, $i, 'user_name'), db_result($result, $i, 'user_id'),db_result($result, $i, 'realname')).'</td>'.
 				'<td class="align-center">'.
 				util_make_link('/snippet/add_snippet_to_package.php?snippet_package_version_id='.db_result($result,$i,'snippet_package_version_id'), html_image("ic/pencil.png", 20, 25)).
 				'&nbsp; &nbsp; &nbsp; '.
-				util_make_link('/snippet/delete.php?type=package&snippet_package_version_id='.db_result($result,$i,'snippet_package_version_id'), html_image("ic/trash.png", 16, 16)).'</td></tr>';
+				util_make_link('/snippet/delete.php?type=package&snippet_package_version_id='.db_result($result,$i,'snippet_package_version_id'), $HTML->getDeletePic(_('Delete this snippet'), _('Delete'))).'</td></tr>';
 		}
 
 		echo $HTML->listTableBottom();
@@ -196,7 +207,7 @@ if ($type=='snippet') {
 			Show a form so you can add a new version of this package
 		*/
 		echo '
-		<h3>'.util_make_link('/snippet/addversion.php?type=package&id='.$id, _('Submit a new version')).'</h3>
+		<h3>'.util_make_link('/snippet/addversion.php?type=package&id='.$id, _('Add a new version')).'</h3>
 		<p>' ._('You can submit a new version of this package if you have modified it and you feel it is appropriate to share with others.').'.</p>';
 
 	}
@@ -214,6 +225,6 @@ if ($type=='snippet') {
 
 } else {
 
-	exit_error(_('Error: was the URL mangled?'));
+	exit_error(_('Error: mangled URL?'));
 
 }

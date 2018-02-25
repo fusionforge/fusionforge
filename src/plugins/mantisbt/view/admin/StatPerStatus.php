@@ -51,13 +51,12 @@ if (!isset($errorPage)){
 	echo		'<th>'._('Closed').'</th>';
 	echo		'<th>'._('Total').'</th>';
 	echo	'</tr>';
-	$nbligne = 1;
 	foreach ($stats as $stat) {
 		$indentation = "";
 		for($i = 1; $i < $stat->project_level; $i++){
 			$indentation = $indentation .'&nbsp;&nbsp;';
 		}
-		echo '<tr '.$HTML->boxGetAltRowStyle($nbligne).'">';
+		echo '<tr>';
 
 		if ($stat->project_level > 1){
 			echo sprintf('<td>%s >> <a class="DataLink" href="?type=group&group_id=%s&pluginname=%s">%s</a></td>',$indentation,group_get_objectid_by_publicname($stat->project_name), $mantisbt->name, $stat->project_name);
@@ -75,7 +74,6 @@ if (!isset($errorPage)){
 		$total['resolved'] += $stat->resolved;
 		$total['closed'] += $stat->closed;
 		$total['total'] += $stat->total;
-		$nbligne++;
 	}
 	echo	'<tr>';
 	echo		'<td></td>';

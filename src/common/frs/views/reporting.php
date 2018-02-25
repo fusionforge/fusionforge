@@ -82,7 +82,7 @@ if ($report->isError()) {
 	echo $HTML->error_msg($report->getErrorMessage());
 } else {
 
-	echo $HTML->openForm(array('action' => util_make_url('/frs/?view=reporting&group_id='.$group_id), 'method' => 'post', 'class' => 'align-center'));
+	echo $HTML->openForm(array('action' => '/frs/?view=reporting&group_id='.$group_id, 'method' => 'post', 'class' => 'align-center'));
 	echo html_e('strong', array(), _('Package')._(':')).report_package_box($group_id,'package_id',$package_id);
 	echo html_e('strong', array(), _('Start Date')._(':')).report_months_box($report, 'start', $start);
 	echo html_e('strong', array(), _('End Date')._(':')).report_months_box($report, 'end', $end);
@@ -166,8 +166,9 @@ if ($report->isError()) {
 			});'."\n";
 		echo '//]]></script>';
 		echo $HTML->html_chartid('chart1');
-		echo $HTML->listTableTop(array(_('Package'), _('Release'), _('File'), _('User'), _('Date')),
-				false, true, 'Download');
+		$tabletop = array(_('Package'), _('Release'), _('File'), _('User'), _('Date'));
+		$classth = array('', '', '', '', '');
+		echo $HTML->listTableTop($tabletop, array(), 'sortable_frs_reportingtable', 'sortable', $classth);
 		for ($i=0; $i<count($data); $i++) {
 			$date = preg_replace('/^(....)(..)(..)$/', '\1-\2-\3', $data[$i][4]);
 			$cells = array();

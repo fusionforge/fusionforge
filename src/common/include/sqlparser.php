@@ -21,6 +21,12 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+/**
+ * get_next_line()
+ *
+ * @param	$f
+ * @return	bool|string
+ */
 function get_next_line($f) {
 	$l = fgets($f);
 	if ($l === false) {
@@ -34,6 +40,12 @@ define ('GREEN', "\033[01;32m" );
 define ('NORMAL', "\033[00m" );
 define ('RED', "\033[01;31m" );
 
+/**
+ * parse_sql_file()
+ *
+ * @param	string	$filename
+ * @return	bool|array
+ */
 function parse_sql_file($filename) {
 	$f = fopen($filename, 'r');
 	if (!$f) {
@@ -114,16 +126,7 @@ function parse_sql_file($filename) {
 
 		case $states['IN_COMMENT']:
 			// error_log('IN_COMMENT');
-			if (($l == '') || preg_match('/^\s*$/', $l)) {
-				$l = get_next_line($f);
-				if ($l === false) {
-					error_log("End of file reached during a comment");
-					$state = $states['ERROR'];
-					continue;
-				}
-				$state = $states['IN_COMMENT'];
-				continue;
-			} elseif (preg_match(',\*/,', $l) || preg_match(',/\*,', $l)) {
+			if (preg_match(',\*/,', $l) || preg_match(',/\*,', $l)) {
 				$l = preg_replace(',.*?((/\*)|(\*/)),', '$1', $l, 1);
 				$chunk = substr($l,0,2);
 				$rest = substr($l,2);
@@ -153,16 +156,7 @@ function parse_sql_file($filename) {
 
 		case $states['IN_SQL_COMMENT']:
 			// error_log('IN_SQL_COMMENT');
-			if (($rest == '') || preg_match('/^\s*$/')) {
-				$rest = get_next_line($f);
-				if ($rest === false) {
-					error_log("End of file reached during a comment");
-					$state = $states['ERROR'];
-					continue;
-				}
-				$state = $states['IN_SQL_COMMENT'];
-				continue;
-			} elseif (preg_match(',\*/,', $rest) || preg_match(',/\*,', $rest)) {
+			if (preg_match(',\*/,', $rest) || preg_match(',/\*,', $rest)) {
 				$rest = preg_replace(',.*?((/\*)|(\*/)),', '$1', $l, 1);
 				$chunk = substr($rest,0,2);
 				$rest = substr($rest,2);

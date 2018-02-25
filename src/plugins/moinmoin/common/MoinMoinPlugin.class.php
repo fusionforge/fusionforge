@@ -1,5 +1,4 @@
 <?php
-
 /**
  * MoinMoinPlugin Class
  *
@@ -27,8 +26,12 @@ forge_define_config_item('use_frame', 'moinmoin', false);
 forge_set_config_item_bool('use_frame', 'moinmoin');
 
 class MoinMoinPlugin extends Plugin {
-	function __construct() {
-		parent::__construct();
+	public $systask_types = array(
+		'MOINMOIN_CREATE_WIKI' => 'create-wikis.php',
+	);
+
+	function __construct($id = 0) {
+		parent::__construct($id);
 		$this->name = "moinmoin";
 		$this->text = _("MoinMoinWiki") ; // To show in the tabs, use...
 		$this->pkg_desc =
@@ -42,11 +45,11 @@ _("This plugin allows each project to embed MoinMoinWiki under a tab.");
 		$this->hooks[] = "role_unlink_project";
 		$this->hooks[] = "role_translate_strings";
 		$this->hooks[] = "role_get_setting";
-		$this->hooks[] = "project_admin_plugins"; // to show up in the admin page for group
 		$this->hooks[] = "clone_project_from_template" ;
+		$this->hooks[] = 'crossrefurl';
 	}
 
-	function getWikiUrl ($project) {
+	function getWikiUrl($project) {
 		if (forge_get_config('use_frame', 'moinmoin')){
 			return util_make_uri('/plugins/moinmoin/frame.php?group_id=' . $project->getID());
 		} else {
@@ -54,7 +57,7 @@ _("This plugin allows each project to embed MoinMoinWiki under a tab.");
 		}
 	}
 
-	function CallHook ($hookname, &$params) {
+	function CallHook($hookname, &$params) {
 		if (isset($params['group_id'])) {
 			$group_id=$params['group_id'];
 		} elseif (isset($params['group'])) {
@@ -68,9 +71,6 @@ _("This plugin allows each project to embed MoinMoinWiki under a tab.");
 				return;
 			}
 			if ($project->isError()) {
-				return;
-			}
-			if (!$project->isProject()) {
 				return;
 			}
 			if ($project->usesPlugin($this->name)) {
@@ -87,41 +87,12 @@ _("This plugin allows each project to embed MoinMoinWiki under a tab.");
 					$params['selected'] = array_search($this->text, $params['TITLES']);
 				}
 			}
-		} elseif ($hookname == "groupisactivecheckbox") {
-			//Check if the group is active
-			// this code creates the checkbox in the project edit public info page to activate/deactivate the plugin
-			$group = group_get_object($group_id);
-			echo "<tr>";
-			echo "<td>";
-			echo ' <input type="checkbox" name="use_moinmoinplugin" value="1" ';
-			// checked or unchecked?
-			if ( $group->usesPlugin ( $this->name ) ) {
-				echo "checked";
-			}
-			echo " /><br/>";
-			echo "</td>";
-			echo "<td>";
-			echo "<strong>Use ".$this->text." Plugin</strong>";
-			echo "</td>";
-			echo "</tr>";
-		} elseif ($hookname == "groupisactivecheckboxpost") {
-			// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
-			$group = group_get_object($group_id);
-			$use_moinmoinplugin = getStringFromRequest('use_moinmoinplugin');
-			if ( $use_moinmoinplugin == 1 ) {
-				$group->setPluginUse ( $this->name );
-			} else {
-				$group->setPluginUse ( $this->name, false );
-			}
 		} elseif ($hookname == "project_public_area") {
 			$project = group_get_object($group_id);
 			if (!$project || !is_object($project)) {
 				return;
 			}
 			if ($project->isError()) {
-				return;
-			}
-			if (!$project->isProject()) {
 				return;
 			}
 			if ( $project->usesPlugin ( $this->name ) ) {
@@ -167,8 +138,8 @@ _("This plugin allows each project to embed MoinMoinWiki under a tab.");
 						      $project->getID()));
 			}
 		} elseif ($hookname == "role_translate_strings") {
-			$right = new PluginSpecificRoleSetting ($role,
-							       'plugin_moinmoin_access') ;
+			$role =& $params['role'];
+			$right = new PluginSpecificRoleSetting ($role, 'plugin_moinmoin_access') ;
 			$right->setDescription (_('MoinMoin Wiki access')) ;
 			$right->setValueDescriptions (array ('0' => _('No Access'),
 							     '1' => _('Read access'),
@@ -189,9 +160,35 @@ _("This plugin allows each project to embed MoinMoinWiki under a tab.");
 				}
 				break ;
 			}
+		} elseif ($hookname == 'clone_project_from_template') {
+			$systasksq = new SystasksQ();
+			$systasksq->add($this->getID(), 'MOINMOIN_CREATE_WIKI', $group_id);
+		} elseif ($hookname == 'crossrefurl') {
+			$project = group_get_object($group_id);
+			if (!$project || !is_object($project)) {
+				return;
+			}
+			if ($project->isError()) {
+				return;
+			}
+			if ($project->usesPlugin($this->name) && isset($params['page'])) {
+				$params['url'] = '/plugins/moinmoin/'.$project->getUnixName().'/'.$params['page'];
+			}
+			return;
 		}
 	}
-  }
+
+	function groupisactivecheckboxpost(&$params) {
+			if (!parent::groupisactivecheckboxpost($params))
+					return false;
+			if (getIntFromRequest('use_moinmoin') == 1) {
+				$systasksq = new SystasksQ();
+				$group_id = $params['group'];
+				$systasksq->add($this->getID(), 'MOINMOIN_CREATE_WIKI', $group_id);
+			}
+			return true;
+	}
+}
 
 // Local Variables:
 // mode: php

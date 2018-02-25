@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2000, Tim Perdue/Sourceforge
  * Copyright 2002, Tim Perdue/GForge, LLC
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2016, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -40,14 +40,13 @@ $params['width'] = "100%";
 $params['content'] = '<textarea required="required" name="details" rows="5" cols="80"></textarea>';
 plugin_hook_by_reference("text_editor", $params);
 
+echo $HTML->openForm(array('id' => 'addtaskform', 'action' => '/pm/task.php?group_id='.$group_id.'&group_project_id='.$group_project_id, 'method' => 'post'));
 ?>
-
-<form id="addtaskform" action="<?php echo util_make_uri('/pm/task.php?group_id='.$group_id.'&group_project_id='.$group_project_id) ?>" method="post">
 <input type="hidden" name="func" value="postaddtask" />
 <input type="hidden" name="add_artifact_id[]" value="<?php echo $related_artifact_id; ?>" />
 
 <?php
-echo $HTML->listTableTop();
+echo $HTML->listTableTop(array(), array(), 'full');
 $cells = array();
 $cells[][] = '<strong>'._('Category')._(':').'</strong><br />'.
 		$pg->categoryBox('category_id').util_make_link('/pm/admin/?group_id='.$group_id.'&add_cat=1&group_project_id='.$group_project_id,'('._('Admin').')');
@@ -110,10 +109,7 @@ $cells[] = array('<input type="submit" value="'._('Submit').'" name="submit" />'
 		'colspan' => 2);
 echo $HTML->multiTableRow(array(), $cells);
 echo $HTML->listTableBottom();
-?>
-</form>
-<?php
-
+echo $HTML->closeForm();
 pm_footer();
 
 // Local Variables:

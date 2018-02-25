@@ -105,7 +105,7 @@ class Widget_MyMonitoredForums extends Widget {
 								$cells[] = array(util_make_link('/forum/monitor.php?forum_id='.$validMonitoredForumId.'&group_id='.$groupObject->getID().'&stop=1',
 										$HTML->getDeletePic(_('Stop monitoring'), _('Stop monitoring'), array('onClick' => 'return confirm("'._('Stop monitoring this forum?').'")'))),
 										'class' => 'align-center');
-								$html .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($key, true)), $cells);
+								$html .= $HTML->multiTableRow(array(), $cells);
 							}
 						}
 						$html_my_monitored_forums .= $html_hdr.$html;
@@ -114,6 +114,7 @@ class Widget_MyMonitoredForums extends Widget {
 					}
 					if (!$setListTableTop) {
 						$html_my_monitored_forums .= $HTML->listTableBottom();
+						$html_my_monitored_forums .= html_e('p', array(), _('Detailed page about monitored forums')._(': ').util_make_link('/forum/myforums.php', _('Here')));
 					}
 				}
 			} else {

@@ -1,11 +1,11 @@
 <?php
 /**
- *
- * SourceForge Generic Tracker facility
+ * FusionForge Generic Tracker facility
  *
  * SourceForge: Breaking Down the Barriers to Open Source Development
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright 2017, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -30,7 +30,7 @@ class ArtifactFileHtml extends ArtifactFile {
 
 	function upload($input_file,$input_file_name,$input_file_type,$description) {
 		if (!util_check_fileupload($input_file)) {
-			$this->setError('ArtifactFile: Invalid filename');
+			$this->setError(_('ArtifactFile')._(': ')._('Invalid file name.'));
 			return false;
 		}
 		$size = @filesize($input_file);

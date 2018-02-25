@@ -67,7 +67,7 @@ class Widget_MySystasks extends Widget {
 		}
 
 		$title_arr = array(
-			_('Task ID'),
+			_('Task Id'),
 			_('Plugin'),
 			_('SysTask Type'),
 			_('Project Name'),
@@ -82,10 +82,11 @@ class Widget_MySystasks extends Widget {
 			$cells = array();
 			$cells[][] = db_result($res,$i,'systask_id');
 			$plugin_name = db_result($res,$i,'plugin_name');
-			if ($plugin_name == null)
+			if ($plugin_name == null) {
 				$cells[][] = 'core';
-			else
+			} else {
 				$cells[][] = $plugin_name;
+			}
 			$cells[][] = db_result($res,$i,'systask_type');
 			$cells[][] = db_result($res,$i,'unix_group_name');
 			$cells[][] = db_result($res,$i,'status');
@@ -94,7 +95,7 @@ class Widget_MySystasks extends Widget {
 				. ' (+' . round(db_result($res, $i,'queued'), 1) . 's)';
 			$cells[][] = date("H:i:s", db_result($res, $i,'stopped'))
 				. ' (+' . round(db_result($res, $i,'run'), 1) . 's)';
-			$html_my_systasks .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i+1, true)), $cells);
+			$html_my_systasks .= $HTML->multiTableRow(array(), $cells);
 		}
 
 		$html_my_systasks .= $HTML->listTableBottom();

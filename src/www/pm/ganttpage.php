@@ -37,7 +37,7 @@ echo $HTML->getJavascripts();
 echo $HTML->getStylesheets();
 echo '</head>';
 echo html_ao('body');
-echo html_ao('div', array('id' => 'maindiv'));
+echo html_ao('main', array('id' => 'maindiv'));
 
 /* define global vars */
 global $pg;
@@ -321,7 +321,7 @@ echo '<div id="workSpace" style="padding:0; overflow-y:auto; overflow-x:hidden; 
           </tr>
         </table>
       </td>
-      <td valign="top">
+      <td class="top">
         <table cellpadding="5">
           <tr>
           <td colspan="2"><label for="status">status</label><br><div id="status" class="taskStatus" status=""></div></td>

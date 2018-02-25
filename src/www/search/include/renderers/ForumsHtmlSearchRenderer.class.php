@@ -29,9 +29,9 @@ class ForumsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	/**
 	 * @param string       $words    words we are searching for
 	 * @param int          $offset   offset
-	 * @param boolean      $isExact  if we want to search for all the words or if only one matching the query is sufficient
+	 * @param bool         $isExact  if we want to search for all the words or if only one matching the query is sufficient
 	 * @param int          $groupId  group id
-	 * @param array|string $sections array of all sections to search in (array of strings)
+	 * @param array|string|int $sections array of all sections to search in (array of strings)
 	 */
 	function __construct($words, $offset, $isExact, $groupId, $sections=SEARCH__ALL_SECTIONS) {
 		$userIsGroupMember = $this->isGroupMember($groupId);
@@ -68,8 +68,8 @@ class ForumsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 				$lastForumName = $currentForumName;
 				$rowColor = 0;
 			}
-			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($rowColor) .'>'
-						. '<td width="5%"></td>'
+			$return .= '<tr>'
+						. '<td style="width: 5%"></td>'
 						. '<td><a href="'.util_make_url ('/forum/message.php?msg_id='. $row['msg_id']).'">'
 							. html_image('ic/msg.png').' '.$row['subject']
 							.'</a></td>'

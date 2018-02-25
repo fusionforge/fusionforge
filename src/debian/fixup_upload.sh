@@ -18,10 +18,6 @@
 # with FusionForge; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-# Mediawiki has no maintainer for months
-# https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=783503
-sed -i -e '/^Package: fusionforge-plugin-mediawiki/,/^$/d' debian/plugins
-
 # bzr has FTBFS for months
 # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=794146
 sed -i -e '/^Package: fusionforge-plugin-scmbzr/,/^$/d' debian/plugins
@@ -34,8 +30,17 @@ sed -i -e '/^Package: fusionforge-plugin-scmcvs/,/^$/d' debian/plugins
 # QA Team unresponsive (BTS and private mails)
 # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=789772
 # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=789773
-rm -f debian/*.{preinst,postinst,prerm,postrm}
-mv debian/fusionforge-common.README.Debian-testing debian/fusionforge-common.README.Debian
+disablestring="exit 0 # Disabled in packages uploaded to Debian"
+for i in debian/*.{preinst,postinst,prerm,postrm} ; do
+    if ! [ -e "$i" ] ; then
+	continue
+    fi
+    l=$(sed -n 2p $i)
+    if ! [ "$l" = "$disablestring" ] ; then
+	sed -i "2i$disablestring" $i
+    fi
+done
+cp debian/fusionforge-common.README.Debian-testing debian/fusionforge-common.README.Debian
 
 # Regen debian/control
 debian/rules debian/control

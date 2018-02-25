@@ -35,7 +35,7 @@ class ProjectSearchQuery extends SearchQuery {
 	 */
 	function getQuery() {
 		$words = $this->getFTIwords();
-		$qpa = db_construct_qpa(false, 'SELECT DISTINCT ON (ts_rank(vectors, q), group_name) type_id, g.group_id, ts_headline(group_name, q) as group_name, unix_group_name, ts_headline(short_description, q) as short_description FROM groups AS g, to_tsquery($1) AS q, groups_idx as i WHERE g.status in ($2, $3) ',
+		$qpa = db_construct_qpa(false, 'SELECT DISTINCT ON (ts_rank(vectors, q), group_name) g.group_id, ts_headline(group_name, q) as group_name, unix_group_name, ts_headline(short_description, q) as short_description FROM groups AS g, to_tsquery($1) AS q, groups_idx as i WHERE g.status in ($2, $3) ',
 						array ($words, 'A', 'H'));
 		$qpa = db_construct_qpa($qpa, 'AND vectors @@ q ');
 		if (count($this->phrases)) {

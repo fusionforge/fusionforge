@@ -30,6 +30,7 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'docman/Document.class.php';
 require_once $gfcommon.'docman/DocumentFactory.class.php';
 require_once $gfcommon.'docman/DocumentGroupFactory.class.php';
+require_once $gfcommon.'docman/DocumentReviewCommentAttachment.class.php';
 require_once $gfcommon.'docman/include/utils.php';
 
 global $warning_msg;
@@ -120,7 +121,20 @@ if (is_numeric($docid)) {
 	ob_end_clean();
 	$file_path = $dv->getFilePath();
 	$length = filesize($file_path);
+	$d->downloadUp();
 	utils_headers_download($dv->getFileName(), $dv->getFileType(), $length);
+	readfile_chunked($file_path);
+
+} elseif ($docid === 'review') {
+	session_require_perm('docman', $group_id, 'approve');
+	// let get the specific ids
+	$attachid = (int)$arr[5];
+
+	$drca = new DocumentReviewCommentAttachment($attachid);
+	ob_end_clean();
+	$file_path = $drca->getFilePath();
+	$length = filesize($file_path);
+	utils_headers_download($drca->getFileName(), $drca->getFileType(), $length);
 	readfile_chunked($file_path);
 
 } elseif ($docid === 'backup') {
@@ -294,6 +308,11 @@ if (is_numeric($docid)) {
 			}
 			foreach ($arr_fileid as $docid) {
 				if (!empty($docid)) {
+					if (strpos($docid, '-') !== false) {
+						$docArr = explode('-', $docid);
+						$g = group_get_object($docArr[0]);
+						$docid =  $docArr[1];
+					}
 					$d = new Document($g, $docid);
 					if (!$d || !is_object($d)) {
 						@unlink($file);

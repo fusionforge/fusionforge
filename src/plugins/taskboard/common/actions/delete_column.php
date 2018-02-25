@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
+ * Copyright 2016, Stéphane-Eymeric Bredtthauer - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -25,7 +26,9 @@ session_require_perm('tracker_admin', $group_id);
 
 $confirmed = getStringFromRequest('confirmed', '');
 $column_id = getStringFromRequest('column_id', '');
+$taskboard_id = getStringFromRequest('taskboard_id', '');
 $column = &taskboard_column_get_object($column_id);
+
 
 if($confirmed) {
 	db_begin();
@@ -35,5 +38,5 @@ if($confirmed) {
 	} else {
 		db_rollback();
 	}
-	session_redirect('/plugins/'.$pluginTaskboard->name.'/admin/?view=columns&group_id='.$group_id);
+	session_redirect('/plugins/'.$pluginTaskboard->name.'/admin/?group_id='.$group_id.'&taskboard_id='.taskboard_id.'&view=columns', false);
 }

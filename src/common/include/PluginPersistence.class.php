@@ -33,7 +33,7 @@ class PluginPersistentStore extends FFError {
 	const persistence_table = 'plugins_persistence';
 
 	/**
-	 * @param integer $plugin_id
+	 * @param int $plugin_id
 	 */
 	function __construct($plugin_id) {
 		$this->plugin_id = $plugin_id;

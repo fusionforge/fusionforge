@@ -78,10 +78,11 @@ class Plugin extends FFError {
 	 * @return	string	the directory where the plugin should be linked.
 	 */
 	function getInstallDir() {
-		if (isset($this->installdir) && $this->installdir)
+		if (isset($this->installdir) && $this->installdir) {
 			return $this->installdir;
-		else
+		} else {
 			return 'plugins/'.$this->name;
+		}
 	}
 
 	/**
@@ -101,10 +102,11 @@ class Plugin extends FFError {
 	 * @return	string	the directory where the plugin should be linked.
 	 */
 	function getPluginPath() {
-		if (isset($this->installdir) && $this->installdir)
+		if (isset($this->installdir) && $this->installdir) {
 			return $this->installdir;
-		else
+		} else {
 			return 'plugins/'.$this->name;
+		}
 	}
 
 	/**
@@ -200,7 +202,7 @@ class Plugin extends FFError {
 				$code = symlink($path . '/etc/plugins/' . $name, forge_get_config('config_path'). '/plugins/'.$name);
 				if (!$code) {
 					$this->setError('['.forge_get_config('config_path'). '/plugins/'.$name.'->'.$path . '/etc/plugins/' . $name . ']'.'<br />'.
-					_('Config file could not be linked to %s. Check the write permissions for apache in /etc/fusionforge/plugins or create the link manually.'), forge_get_config('config_path').'/plugins/'.$name);
+					sprintf(_('Config file could not be linked to %s. Check the write permissions for apache in /etc/fusionforge/plugins or create the link manually.'), forge_get_config('config_path').'/plugins/'.$name));
 				}
 			}
 		}
@@ -217,7 +219,7 @@ class Plugin extends FFError {
 				$code = symlink($path . '/etc/plugins/' . $name, forge_get_config('config_path'). '/plugins/'.$name);
 				if (!$code) {
 					$this->setError('['.forge_get_config('config_path'). '/plugins/'.$name.'->'.$path . '/etc/plugins/' . $name . ']'.'<br />'.
-					_('Config file could not be linked to %s. Check the write permissions for apache in /etc/fusionforge/plugins or create the link manually.'), forge_get_config('config_path').'/plugins/'.$name);
+					sprintf(_('Config file could not be linked to %s. Check the write permissions for apache in /etc/fusionforge/plugins or create the link manually.'), forge_get_config('config_path').'/plugins/'.$name));
 				}
 			}
 		}
@@ -269,7 +271,7 @@ class Plugin extends FFError {
 			if ($group->usesPlugin($this->name)) {
 				echo 'checked="checked"';
 			}
-			echo ' /><br/>';
+			echo ' />';
 			echo "</td>\n";
 			echo '<td title="'.$this->pkg_desc.'">';
 			echo "<strong>";
@@ -353,7 +355,7 @@ class PluginSpecificRoleSetting {
 	var $default_values = array();
 	var $global = false;
 
-	function PluginSpecificRoleSetting(&$role, $name, $global = false) {
+	function __construct(&$role, $name, $global = false) {
 		$this->global = $global;
 		$this->role =& $role;
 		$this->name = $name;

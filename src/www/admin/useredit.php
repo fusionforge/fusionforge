@@ -61,7 +61,7 @@ if (getStringFromRequest('delete_user') != '') {
 	}
 } elseif (getStringFromRequest('action') == "update_user" && getStringFromRequest('delete_user') == '') {
 	$email = getStringFromRequest('email');
-	$shell = getStringFromRequest('shell');
+	$shell = getStringFromRequest('shell', forge_get_config('user_default_shell'));
 	$status = getStringFromRequest('status');
 	$addToProjectArray =getStringFromRequest('group_id_add_member');
 
@@ -116,7 +116,7 @@ if (getStringFromRequest('delete_user') != '') {
 
 }
 
-$title = _('Site Admin: User Info');
+$title = _('Site Admin')._(': ')._('User Info');
 site_admin_header(array('title'=>$title));
 
 ?>
@@ -194,7 +194,7 @@ echo html_build_select_box_from_arrays(
 		<?php echo $unix_status2str[$u->getUnixStatus()]; ?>
 	</td>
 </tr>
-
+<?php if (!forge_get_config('use_shell_limited')) { ?>
 <tr>
 	<td>
         <label for="unix-shell"><?php echo _('Unix Shell:'); ?></label>
@@ -206,6 +206,7 @@ echo html_build_select_box_from_arrays(
     </td>
 </tr>
 <?php
+		}
 	}  // end of sys_use_shell conditional
 ?>
 
@@ -271,12 +272,13 @@ $userProjectsIdArray = array();
 foreach ($projects as $p) {
 	if ($i == 0) {
 		echo $HTML->listTableTop($title);
+		$i = 1;
 	}
 	$cells = array();
 	$cells[][] = util_unconvert_htmlspecialchars(htmlspecialchars($p->getPublicName()));
 	$cells[][] = $p->getUnixName();
 	$cells[] = array(util_make_link('/project/admin/?group_id='.$p->getID(),'['._('Project Admin').']'), 'width' => '40%');
-	echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i++, true)), $cells);
+	echo $HTML->multiTableRow(array(), $cells);
 	$userProjectsIdArray[] = $p->getID();
 }
 
@@ -305,7 +307,7 @@ if ($fullListProjectsQueryResult) {
 			$cells[][] = $projectObject->getUnixName();
 			$cells[][] = util_make_link('/project/admin/?group_id='.$projectObject->getID(),'['._('Project Admin').']');
 			$cells[][] = role_box($projectObject->getID(),'role_id-'.$projectObject->getID());
-			echo $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($i++, true)), $cells);
+			echo $HTML->multiTableRow(array(), $cells);
 		}
 	}
 	echo $HTML->listTableBottom();

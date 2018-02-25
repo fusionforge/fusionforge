@@ -4,7 +4,7 @@
  *
  * Copyright 2004 (c) Dominik Haas, GForge Team
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013,2015 Franck Villaume - TrivialDev
+ * Copyright 2013,2015-2016 Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of National Education
  * http://fusionforge.org
  *
@@ -33,9 +33,11 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	/**
 	 * @param string $words words we are searching for
 	 * @param int $offset offset
-	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
+	 * @param bool $isExact if we want to search for all the words or if only one matching the query is sufficient
 	 * @param int $groupId group id
-	 * @param array|string $sections array of all sections to search in (array of strings)
+	 * @param array|string|int $sections array of all sections to search in (array of strings)
+	 * @param int|string $rowsPerPage
+	 * @param array $options
 	 */
 	function __construct($words, $offset, $isExact, $groupId, $sections = SEARCH__ALL_SECTIONS, $rowsPerPage = SEARCH__DEFAULT_ROWS_PER_PAGE, $options = array()) {
 
@@ -47,7 +49,9 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 
 		$this->tableHeaders = array(
 			_('Directory'),
-			_('&nbsp;'),
+			'&nbsp;',
+			_('Filename'),
+			_('Version'),
 			_('Title'),
 			_('Description'),
 			_('Actions')
@@ -92,9 +96,9 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			<?php
 			echo html_ac(html_ap() - 1);
 		}
-		$i = 0;
 		foreach ($result as $row) {
 			$document = document_get_object($row['docid'], $row['group_id']);
+			$dv = documentversion_get_object($row['version'], $row['docid'], $row['group_id']);
 			$currentDocGroup = documentgroup_get_object($document->getDocGroupID(), $document->Group->getID());
 			//section changed
 			if ($lastDocGroupID != $currentDocGroup->getID()) {
@@ -104,10 +108,9 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 					$content = _('Project')._(': ').util_make_link('/docman/?group_id='.$currentDocGroup->Group->getID(),$currentDocGroup->Group->getPublicName()).' ';
 				}
 				$cells = array();
-				$cells[] = array($content.html_image('ic/folder.png', 22, 22, array('border' => '0')).$currentDocGroup->getPath(true), 'colspan' => 4);
+				$cells[] = array($content.$HTML->getFolderPic().$currentDocGroup->getPath(true), 'colspan' => 7);
 				$lastDocGroupID = $currentDocGroup->getID();
 				$return .= $HTML->multiTableRow(array(), $cells);
-				$rowColor = 0;
 			}
 			$cells = array();
 			if (!$document->getLocked() && !$document->getReserved()) {
@@ -119,31 +122,33 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 					$cells[][] = html_e('input', array('type' => 'checkbox', 'value' => $document->Group->getID().'-'.$document->getID(), 'class' => 'checkeddocidactive', 'title' => _('Select / Deselect this document for massaction'), 'onClick' => 'controllerListFile.checkgeneral("active")'));
 				}
 			}
-			if ($document->isURL()) {
-				$cells[][] = util_make_link($document->getFileName(), html_image($document->getFileTypeImage(), 22, 22), array('title' => _('Visit this link')), true);
+			if ($dv->isURL()) {
+				$cells[][] = util_make_link($dv->getFileName(), html_image('docman/file_type_html.png', 22, 22), array('title' => _('Visit this link')), true);
 			} else {
-				$cells[][] = util_make_link('/docman/view.php/'.$document->Group->getID().'/'.$document->getID().'/'.urlencode($document->getFileName()), html_image($document->getFileTypeImage(), 22, 22), array('title' => _('View this document')));
+				$cells[][] = util_make_link('/docman/view.php/'.$document->Group->getID().'/versions/'.$document->getID().'/'.$row['version'], html_image($document->getFileTypeImage(), 22, 22), array('title' => _('View this document')));
 			}
+			$cells[][] = $row['filename'];
+			$cells[][] = $row['version'];
 			$cells[][] = $row['title'];
-			$cells[][] = $row['description'];
+			// we call util_gen_cross_ref on top of row['description'] to keep the search engine mark
+			$cells[][] = util_gen_cross_ref($row['description'], $document->Group->getID());
 			if (forge_check_perm('docman', $document->Group->getID(), 'approve')) {
 				if (!$document->getLocked() && !$document->getReserved()) {
-					$cells[][] = util_make_link('/docman/?group_id='.$document->Group->getID().'&view=listfile&dirid='.$document->getDocGroupID().'&filedetailid='.$document->getID(), html_image('docman/edit-file.png', 22, 22, array('alt' => _('Edit this document'))), array('title' => _('Edit this document')));
+					$cells[][] = util_make_link('/docman/?group_id='.$document->Group->getID().'&view=listfile&dirid='.$document->getDocGroupID().'&filedetailid='.$document->getID(), $HTML->getEditFilePic(_('Edit this document')), array('title' => _('Edit this document')));
 				} else {
 					$cells[][] = '&nbsp;';
 				}
 			} else {
 				$cells[][] = '&nbsp;';
 			}
-			$return .= $HTML->multiTableRow(array('class' => $HTML->boxGetAltRowStyle($rowColor, true)), $cells);
-			$rowColor++;
+			$return .= $HTML->multiTableRow(array(), $cells);
 		}
 		$content = html_ao('span', array('id' => 'massactionactive', 'class' => 'hide'));
 		$content .=  html_e('span', array('id' => 'docman-massactionmessage', 'title' => _('Actions availables for selected documents, you need to check at least one document to get actions')), _('Mass actions for selected documents')._(':'), false);
 		$content .= util_make_link('#', html_image('docman/download-directory-zip.png', 22, 22, array('alt' => _('Download as a ZIP'))) , array('onclick' => 'window.location.href=\''.util_make_uri('/docman/view.php/'.$this->groupId.'/zip/selected/files/\'+controllerListFile.buildUrlByCheckbox("active")'), 'title' => _('Download as a ZIP')), true);
 		$content .= html_ac(html_ap() - 1);
 		$cells = array();
-		$cells[] = array($content, 'colspan' => 4);
+		$cells[] = array($content, 'colspan' => 7);
 		$return .= $HTML->multiTableRow(array(), $cells);
 		return $return;
 	}

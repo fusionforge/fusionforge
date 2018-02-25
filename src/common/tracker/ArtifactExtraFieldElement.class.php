@@ -6,6 +6,7 @@
  * Copyright 2009, Roland Mas
  * Copyright 2009, Alcatel-Lucent
  * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
+ * Copyright 2017, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -23,7 +24,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-/*
+/**
  * Standard Alcatel-Lucent disclaimer for contributing to open source
  *
  * "The Artifact ("Contribution") has not been tested and/or
@@ -68,7 +69,7 @@ class ArtifactExtraFieldElement extends FFError {
 	 * @param	object		$ArtifactExtraField	ArtifactExtraField object.
 	 * @param	array|bool	$data			(all fields from artifact_file_user_vw) OR id from database.
 	 */
-	function __construct(&$ArtifactExtraField,$data=false) {
+	function __construct(&$ArtifactExtraField, $data = false) {
 		parent::__construct();
 
 		// Was ArtifactExtraField legit?
@@ -99,9 +100,11 @@ class ArtifactExtraFieldElement extends FFError {
 	 *
 	 * @param	string	$name		Name of the choice
 	 * @param	int	$status_id	Id the box that contains the choice (optional).
+	 * @param	int	$auto_assign_to	Id of user for autoassign rule. Default value is 100
+	 * @param	int	$is_default	is this value by default? Default value is 0 => No.
 	 * @return	bool	true on success / false on failure.
 	 */
-	function create($name,$status_id=0,$auto_assign_to=100) {
+	function create($name, $status_id = 0, $auto_assign_to = 100, $is_default = 0) {
 		//
 		//	data validation
 		//
@@ -137,6 +140,26 @@ class ArtifactExtraFieldElement extends FFError {
 		if ($result && db_affected_rows($result) > 0) {
 			$this->clearError();
 			$id=db_insertid($result,'artifact_extra_field_elements','element_id');
+
+			if ($is_default) {
+				$type = $this->ArtifactExtraField->getType();
+				if (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_SINGLECHOICE))) {
+					$result = db_query_params ('DELETE FROM artifact_extra_field_default WHERE extra_field_id = $1',
+							array ($this->ArtifactExtraField->getID()));
+					if (!$result) {
+						$this->setError(db_error());
+						db_rollback();
+						return false;
+					}
+				}
+				$result = db_query_params ('INSERT INTO artifact_extra_field_default (extra_field_id, default_value) VALUES ($1,$2)',
+						array ($this->ArtifactExtraField->getID(),$id));
+				if (!$result) {
+					$this->setError(db_error());
+					db_rollback();
+					return false;
+				}
+			}
 			//
 			//	Now set up our internal data structures
 			//
@@ -164,10 +187,10 @@ class ArtifactExtraFieldElement extends FFError {
 	 * fetchData - re-fetch the data for this ArtifactExtraFieldElement from the database.
 	 *
 	 * @param	int	$id	ID of the Box.
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function fetchData($id) {
-		$res = db_query_params ('SELECT * FROM artifact_extra_field_elements WHERE element_id=$1',
+		$res = db_query_params ('SELECT *, 0 AS is_default FROM artifact_extra_field_elements WHERE element_id=$1',
 					array ($id)) ;
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError('ArtifactExtraField: Invalid ArtifactExtraFieldElement ID');
@@ -175,6 +198,16 @@ class ArtifactExtraFieldElement extends FFError {
 		}
 		$this->data_array = db_fetch_array($res);
 		db_free_result($res);
+		$default = db_query_params ('SELECT 1 FROM artifact_extra_field_default WHERE default_value=$1',
+				array ($id)) ;
+		if (!$default) {
+			$this->setError('ArtifactExtraField: Invalid ArtifactExtraFieldElement ID');
+			return false;
+		}
+		if (db_numrows($default) >= 1) {
+			$this->data_array['is_default'] = true;
+		}
+		db_free_result($default);
 		return true;
 	}
 
@@ -197,7 +230,7 @@ class ArtifactExtraFieldElement extends FFError {
 	}
 
 	/**
-	 * getBoxID - get this  artifact box id.
+	 * getBoxID - get this artifact box id.
 	 *
 	 * @return	int	The id #.
 	 */
@@ -211,7 +244,19 @@ class ArtifactExtraFieldElement extends FFError {
 	 * @return	string	The name.
 	 */
 	function getName() {
-		return $this->data_array['element_name'];
+		switch ($this->ArtifactExtraField->getType()) {
+			case ARTIFACT_EXTRAFIELDTYPE_USER:
+				$role = RBACEngine::getInstance()->getRoleById($this->data_array['element_name']);
+				$name = $role->getName();
+				break;
+			case ARTIFACT_EXTRAFIELDTYPE_RELEASE:
+				$package = frspackage_get_object($this->data_array['element_name']);
+				$name = $package->getName();
+				break;
+			default:
+				$name = $this->data_array['element_name'];
+		}
+		return $name;
 	}
 
 	/**
@@ -226,7 +271,7 @@ class ArtifactExtraFieldElement extends FFError {
 	/**
 	 * getAutoAssignedUser - return id of the user witch issue is auto assign to.
 	 *
-	 * @return	integer user id.
+	 * @return	int user id.
 	 */
 	function getAutoAssignto() {
 		return $this->data_array['auto_assign_to'];
@@ -250,8 +295,119 @@ class ArtifactExtraFieldElement extends FFError {
 	}
 
 	/**
+	 * isDefault - whether this field element is default value or not.
+	 *
+	 * @return	bool
+	 */
+	function isDefault() {
+		return $this->data_array['is_default'];
+	}
+
+	/**
+	 * setAsDefault - set this field element as default value or not.
+	 *
+	 * @param	bool	$is_default	true-> set as default, false->unset as default
+	 * @return	bool
+	 */
+	function setAsDefault($is_default) {
+		if ($is_default) {
+			if ($this->isDefault()) {
+				//nothing to do
+				return true;
+			} else {
+				// inject it!
+				if (in_array($this->ArtifactExtraField->getType(), unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_SINGLECHOICE))) {
+					$result = db_query_params ('DELETE FROM artifact_extra_field_default WHERE extra_field_id = $1',
+								array ($this->ArtifactExtraField->getID()));
+					if (!$result) {
+						$this->setError(db_error());
+						$return = false;
+					}
+				}
+				$result = db_query_params ('INSERT INTO artifact_extra_field_default (extra_field_id, default_value) VALUES ($1,$2)',
+								array ($this->ArtifactExtraField->getID(), $this->getID()));
+				if (!$result) {
+					$this->setError(db_error());
+					return false;
+				}
+				return true;
+			}
+		} else {
+			if ($this->isDefault()) {
+				// remove it!
+				$result = db_query_params ('DELETE FROM artifact_extra_field_default WHERE extra_field_id = $1 AND default_value = $2',
+							array ($this->ArtifactExtraField->getID(), $this->getID()));
+				if (!$result) {
+					$this->setError(db_error());
+					return false;
+				}
+				return true;
+			} else {
+				//nothing to do
+				return true;
+			}
+		}
+	}
+
+	function getFormula() {
+		$return = false;
+		$res = db_query_params ('SELECT formula FROM artifact_extra_field_formula WHERE extra_field_id=$1 AND id=$2',
+				array ($this->ArtifactExtraField->getID(),
+					$this->getID()));
+		if (db_numrows($res) > 0) {
+			$row = db_fetch_array($res);
+			$return = $row['formula'];
+		} else {
+			$return = '';
+		}
+		return $return;
+	}
+
+	function setFormula($formula) {
+		$formula = trim($formula);
+		$return = true;
+		if ($formula=='') {
+			$this->resetFormula();
+		} else {
+			$res = db_query_params ('SELECT id, formula FROM artifact_extra_field_formula WHERE extra_field_id=$1 and id=$2',
+				array ($this->ArtifactExtraField->getID(),
+					$this->getID()));
+			if (db_numrows($res) > 0) {
+				$res = db_query_params ('UPDATE artifact_extra_field_formula SET formula = $1 WHERE extra_field_id=$2 and id=$3',
+					array ($formula,
+						$this->ArtifactExtraField->getID(),
+						$this->getID()));
+			} else {
+				$res = db_query_params ('INSERT INTO artifact_extra_field_formula (extra_field_id, id, formula) VALUES ($1,$2,$3)',
+					array ($this->ArtifactExtraField->getID(),
+						$this->getID(),
+						$formula));
+			}
+			if (!$res) {
+				$this->setError(db_error());
+				$return = false;
+			}
+		}
+		return $return;
+	}
+
+	function resetFormula() {
+		$result = db_query_params ('DELETE FROM artifact_extra_field_formula WHERE extra_field_id=$1 and id=$2',
+				array ($this->ArtifactExtraField->getID(),
+					$this->getID()));
+		if (!$result) {
+			$this->setError(db_error());
+			$return = false;
+		} else {
+			$return = true;
+		}
+		return $return;
+	}
+
+	/**
 	 * getChildrenElements - return the array of the elements of children fields who depend on current element
 	 *
+	 * @param	int	$childExtraFieldId
 	 * @return	array of parent elements
 	 */
 	function getChildrenElements($childExtraFieldId = null) {
@@ -289,7 +445,7 @@ class ArtifactExtraFieldElement extends FFError {
 	/**
 	 * saveParentElements - save the list of the elements of the parent field on which depends the current element
 	 *
-	 * @param	elements	array of new parent elements
+	 * @param	array	$elements	array of new parent elements
 	 * @return	bool	always true
 	 */
 	function saveParentElements($elements) {
@@ -346,10 +502,12 @@ class ArtifactExtraFieldElement extends FFError {
 	 * boxes and fields configured by the admin
 	 *
 	 * @param	string	$name		Name of the choice in a box.
-	 * @param	int	$status_id	Optional for status box - maps to either open/closed.
+	 * @param	int		$status_id	Optional for status box - maps to either open/closed.
+	 * @param	int		$auto_assign_to
+	 * @param	bool	$is_default	Set this element as default value
 	 * @return	bool	success.
 	 */
-	function update($name, $status_id=0, $auto_assign_to=100) {
+	function update($name, $status_id=0, $auto_assign_to=100, $is_default=false) {
 		if (!forge_check_perm ('tracker_admin', $this->ArtifactExtraField->ArtifactType->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
@@ -381,18 +539,21 @@ class ArtifactExtraFieldElement extends FFError {
 						  $status_id,
 						  $auto_assign_to,
 						  $this->getID())) ;
-		if ($result && db_affected_rows($result) > 0) {
-			return true;
-		} else {
+		if (!$result || db_affected_rows($result) == 0) {
 			$this->setError(db_error());
 			return false;
 		}
+
+		if (!$this->setAsDefault($is_default)) {
+			return false;
+		}
+		return true;
 	}
 
 	/**
 	 * delete - delete the current value.
 	 *
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function delete() {
 		if (!forge_check_perm ('tracker_admin', $this->ArtifactExtraField->ArtifactType->Group->getID())) {
