@@ -267,16 +267,15 @@ some control over it to the project's administrator.");
 
 	function getBrowserLinkBlock($project) {
 		$b = html_e('h2', array(), _('Subversion Repository Browser'));
-		$b .= '<p>';
-		$b .= sprintf(_("Browsing the %s tree gives you a view into the current status of this project's code."), 'Subversion');
-		$b .= ' ';
-		$b .= _('You may also view the complete histories of any file in the repository.');
-		$b .= '</p>';
-		$b .= '<p>[' ;
-		$b .= util_make_link ("/scm/browser.php?group_id=".$project->getID().'&scm_plugin='.$this->name,
-								sprintf(_('Browse %s Repository'), 'Subversion')
-		) ;
-		$b .= ']</p>' ;
+		$b .= html_e('p', array(),_("Browsing the Subversion tree gives you a view into the current status of this project's code.")
+						.' '
+						._('You may also view the complete histories of any file in the repository.'));
+		$b .= html_e('p', array(), '['.util_make_link ("/scm/browser.php?group_id=".$project->getID().'&scm_plugin='.$this->name, sprintf(_('Browse %s Repository'), 'Subversion')).']');
+		# Extra repos
+		$repo_list = $this->getRepositories($project, false);
+		foreach ($repo_list as $repo_name) {
+			$b .= '['.util_make_link('/scm/browser.php?group_id='.$project->getID().'&extra='.$repo_name.'&scm_plugin='.$this->name, _('Browse extra SVN repository')._(': ').$repo_name).']'.html_e('br');
+		}
 		return $b ;
 	}
 
@@ -1128,6 +1127,21 @@ some control over it to the project's administrator.");
 		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
 			echo html_ac(html_ap() - 1);
 		}
+	}
+
+	function getRepositories($group, $autoinclude = true) {
+		$repoarr = array();
+		if ($autoinclude) {
+			$repoarr[] = $group->getUnixName();
+		}
+		$result = db_query_params('SELECT repo_name FROM scm_secondary_repos WHERE group_id = $1 AND next_action = $2 AND plugin_id = $3 ORDER BY repo_name',
+						   array($group->getID(),
+							  SCM_EXTRA_REPO_ACTION_UPDATE,
+							  $this->getID()));
+		while ($arr = db_fetch_array($result)) {
+			$repoarr[] = $arr['repo_name'];
+		}
+		return $repoarr;
 	}
 }
 
