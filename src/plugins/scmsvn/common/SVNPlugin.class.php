@@ -1064,6 +1064,9 @@ some control over it to the project's administrator.");
 		}
 
 		session_require_perm('project_admin', $params['group_id']);
+		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
+			echo html_ao('div', array('id' => 'tabber-'.$this->name, 'class' => 'tabbertab'));
+		}
 
 		$project_name = $project->getUnixName();
 
@@ -1118,9 +1121,6 @@ some control over it to the project's administrator.");
 		echo html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Submit')));
 		echo $HTML->closeForm();
 
-		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
-			echo html_ao('div', array('id' => 'tabber-'.$this->name, 'class' => 'tabbertab'));
-		}
 		if ($project->usesPlugin('scmhook')) {
 			$scmhookPlugin = plugin_get_object('scmhook');
 			$scmhookPlugin->displayScmHook($project->getID(), $this->name);
