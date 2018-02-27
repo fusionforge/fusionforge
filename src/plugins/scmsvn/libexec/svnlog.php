@@ -80,7 +80,7 @@ if ($mode == 'date_range') {
 	}
 }
 
-$repo = forge_get_config('repos_path', 'scmsvn').'/'.$unix_group_name.'.svn/'.$unix_group_name;
+$repo = forge_get_config('repos_path', 'scmsvn').'/'.$unix_group_name;
 if (is_dir($repo)) {
 	passthru("svn log file://$repo --xml -v $options 2> /dev/null");
 }
