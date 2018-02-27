@@ -1078,8 +1078,8 @@ some control over it to the project's administrator.");
 				$deleteForm = $HTML->openForm(array('name' => 'form_delete_repo_'.$repo['repo_name'], 'action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
 				$deleteForm .= html_e('input', array('type' => 'hidden', 'name' => 'group_id', 'value' => $params['group_id']));
 				$deleteForm .= html_e('input', array('type' => 'hidden', 'name' => 'delete_repository', 'value' => 1));
+				$deleteForm .= $HTML->html_input('scm_plugin_id', '', '', 'hidden', $this->getID());
 				$deleteForm .= html_e('input', array('type' => 'hidden', 'name' => 'repo_name', 'value' => $repo['repo_name']));
-				$deleteForm .= html_e('input', array('type' => 'hidden', 'name' => 'scm_enable_anonymous', 'value' => ($project->enableAnonSCM()? 1 : 0)));
 				$deleteForm .= html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Delete')));
 				$deleteForm .= $HTML->closeForm();
 				$cells[][] = $deleteForm;
@@ -1096,7 +1096,6 @@ some control over it to the project's administrator.");
 				html_e('input', array('type' => 'text', 'required' => 'required', 'size' => 20, 'name' => 'repo_name', 'value' => '')));
 		echo html_e('p', array(), html_e('strong', array(), _('Description')._(':')).html_e('br').
 				html_e('input', array('type' => 'text', 'size' => 60, 'name' => 'description', 'value' => '')));
-		echo html_e('input', array('type' => 'hidden', 'name' => 'scm_enable_anonymous', 'value' => ($project->enableAnonSCM()? 1 : 0)));
 		echo html_e('input', array('type' => 'submit', 'name' => 'cancel', 'value' => _('Cancel')));
 		echo html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Submit')));
 		echo $HTML->closeForm();
