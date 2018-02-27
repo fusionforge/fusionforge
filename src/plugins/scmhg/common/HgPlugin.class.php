@@ -431,7 +431,7 @@ Offer DAV or SSH access.");
 
 			$push = "";
 			$read = ""; /*pull,clone*/
-			$path = forge_get_config('repos_path', 'scmhg').'/'.$project->getUnixName().'/'.$project->getUnixName.'/.hg';
+			$path = forge_get_config('repos_path', 'scmhg').'/'.$project->getUnixName().'/'.$project->getUnixName().'/.hg';
 			$prevp = false;
 			$prevr = false;
 			$users = $project->getMembers();
@@ -913,6 +913,7 @@ Offer DAV or SSH access.");
 				$deleteForm .= html_e('input', array('type' => 'hidden', 'name' => 'group_id', 'value' => $params['group_id']));
 				$deleteForm .= html_e('input', array('type' => 'hidden', 'name' => 'delete_repository', 'value' => 1));
 				$deleteForm .= html_e('input', array('type' => 'hidden', 'name' => 'repo_name', 'value' => $repo['repo_name']));
+				$deleteForm .= $HTML->html_input('scm_plugin_id', '', '', 'hidden', $this->getID());
 				$deleteForm .= html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Delete')));
 				$deleteForm .= $HTML->closeForm();
 				$cells[][] = $deleteForm;
