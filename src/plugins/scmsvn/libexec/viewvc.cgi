@@ -53,13 +53,11 @@ for pat in CONF_GLOBS:
 #print os.environ
 #sys.exit(0)
 
-
 import sapi
 import viewvc
 
 server = sapi.CgiServer()
 cfg = viewvc.load_config(CONF_PATHNAME, server)
-
 
 import subprocess
 
@@ -68,18 +66,7 @@ import subprocess
 encoding = os.environ.get('HTTP_ACCEPT_ENCODING', None)
 if 'HTTP_ACCEPT_ENCODING' in os.environ: del os.environ['HTTP_ACCEPT_ENCODING']
 repos_path = subprocess.check_output(['forge_get_config', 'repos_path', 'scmsvn']).rstrip()
-uri = os.environ['REQUEST_URI']
-if uri.find('root=') != -1:
-  # uri is: /some/thing/?root=svnrepo&something&else
-  subrepos_path1 = re.sub('^.*?root=', '', uri)
-  subrepos_path = re.sub('&.*$', '', subrepos_path1)
-else:
-  # uri is: /some/thing/svnrepo/?
-  #  or is: /some/thing/svnrepo?
-  subrepos_path1 = uri.split('/')[3]
-  subrepos_path = re.sub('\?.*$', '', subrepos_path1)
-
-cfg.general.root_parents = [repos_path+'/'+subrepos_path+'.svn: svn']
+cfg.general.root_parents = [repos_path+': svn']
 
 # Authentify request
 try:

@@ -104,7 +104,7 @@ some control over it to the project's administrator.");
 
 	function topModule($project, $repo_name) {
 		// Check toplevel module presence
-		$repo = 'file://' . forge_get_config('repos_path', $this->name).'/'.$project->getUnixName().'.svn/'.$repo_name.'/';
+		$repo = 'file://' . forge_get_config('repos_path', $this->name).'/'.$repo_name.'/';
 		$res = array ();
 		$module = 'trunk';
 		if (!is_file($repo.'/format')) {
@@ -142,7 +142,7 @@ some control over it to the project's administrator.");
 			$b .= html_e('h3', array(), _('via SVN'));
 			foreach ($repo_list as $repo_name) {
 				$module = $this->topModule($project, $repo_name);
-				$b .= html_e('tt', array(), 'svn '.$ssh_port.' checkout svn://'.$this->getBoxForProject($project).$this->svn_root_fs.'/'.$project->getUnixName().'/'.$repo_name.$module).html_e('br');
+				$b .= html_e('tt', array(), 'svn '.$ssh_port.' checkout svn://'.$this->getBoxForProject($project).$this->svn_root_fs.'/'.$repo_name.$module).html_e('br');
 			}
 		}
 
@@ -150,7 +150,7 @@ some control over it to the project's administrator.");
 			$b .= html_e('h3', array(), _('via DAV'));
 			foreach ($repo_list as $repo_name) {
 				$module = $this->topModule($project, $repo_name);
-				$b .= html_e('tt', array(), 'svn checkout http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. $this->getBoxForProject($project). '/anonscm/svn/'.$project->getUnixName().'/'.$repo_name.$module).html_e('br');
+				$b .= html_e('tt', array(), 'svn checkout http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. $this->getBoxForProject($project). '/anonscm/svn/'.$repo_name.$module).html_e('br');
 			}
 		}
 		return $b;
@@ -196,9 +196,9 @@ some control over it to the project's administrator.");
 				foreach ($repo_list as $repo_name) {
 					$module = $this->topModule($project, $repo_name);
 					if (forge_get_config('use_shell_limited')) {
-						$b .= html_e('tt', array(), 'svn '.$ssh_port.'checkout svn+ssh://'.$d.'@'.$this->getBoxForProject($project).'/'.$project->getUnixName().'/'.$repo_name.$module).html_e('br');
+						$b .= html_e('tt', array(), 'svn '.$ssh_port.'checkout svn+ssh://'.$d.'@'.$this->getBoxForProject($project).'/'.$repo_name.$module).html_e('br');
 					} else {
-						$b .= html_e('tt', array(), 'svn '.$ssh_port.'checkout svn+ssh://'.$d.'@'.$this->getBoxForProject($project).$this->svn_root_fs .'/'. $project->getUnixName().'/'.$repo_name.$module).html_e('br');
+						$b .= html_e('tt', array(), 'svn '.$ssh_port.'checkout svn+ssh://'.$d.'@'.$this->getBoxForProject($project).$this->svn_root_fs.'/'.$repo_name.$module).html_e('br');
 					}
 				}
 				$b .= '</div>';
@@ -210,7 +210,7 @@ some control over it to the project's administrator.");
 				$b .= '</p>';
 				foreach ($repo_list as $repo_name) {
 					$module = $this->topModule($project, $repo_name);
-					$b .= html_e('tt', array(), 'svn checkout --username '.$d.' http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'.$this->getBoxForProject($project).'/authscm/'.$d.'/svn/'.$project->getUnixName().'/'.$repo_name.$module).html_e('br');
+					$b .= html_e('tt', array(), 'svn checkout --username '.$d.' http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'.$this->getBoxForProject($project).'/authscm/'.$d.'/svn/'.$repo_name.$module).html_e('br');
 				}
 				$b .= '</div>';
 			}
@@ -231,9 +231,9 @@ some control over it to the project's administrator.");
 				foreach ($repo_list as $repo_name) {
 					$module = $this->topModule($project, $repo_name);
 					if (forge_get_config('use_shell_limited')) {
-						$b .= html_e('tt', array(), 'svn '.$ssh_port.'checkout svn+ssh://<i>'._('developername').'</i>@'.$this->getBoxForProject($project).'/'.$project->getUnixName().'/'.$repo_name.$module).html_e('br');
+						$b .= html_e('tt', array(), 'svn '.$ssh_port.'checkout svn+ssh://<i>'._('developername').'</i>@'.$this->getBoxForProject($project).'/'.$repo_name.$module).html_e('br');
 					} else {
-						$b .= html_e('tt', array(), 'svn '.$ssh_port.'checkout svn+ssh://<i>'._('developername').'</i>@'.$this->getBoxForProject($project).$this->svn_root_fs .'/'.$project->getUnixName().'/'.$repo_name.$module).html_e('br');
+						$b .= html_e('tt', array(), 'svn '.$ssh_port.'checkout svn+ssh://<i>'._('developername').'</i>@'.$this->getBoxForProject($project).$this->svn_root_fs .'/'.$repo_name.$module).html_e('br');
 					}
 				}
 				$b .= '</div>';
@@ -247,7 +247,7 @@ some control over it to the project's administrator.");
 				$b .= '</p>';
 				foreach ($repo_list as $repo_name) {
 					$module = $this->topModule($project, $repo_name);
-					$b .= html_e('tt', array(), 'svn checkout --username <i>'._('developername').'</i> http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'.$this->getBoxForProject($project).'/authscm/<i>'._('developername').'</i>/svn/'.$project->getUnixName().'/'.$repo_name.$module).html_e('br');
+					$b .= html_e('tt', array(), 'svn checkout --username <i>'._('developername').'</i> http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'.$this->getBoxForProject($project).'/authscm/<i>'._('developername').'</i>/svn/'.$repo_name.$module).html_e('br');
 				}
 				$b .= '</div>';
 			}
@@ -330,7 +330,11 @@ some control over it to the project's administrator.");
 		if (!$project) {
 			return;
 		}
-		$iframe_src = '/scm/viewvc.php?root='.$project->getUnixName();
+		if (isset($params['extra']) && !empty($params['extra']) && $params['extra'] != 'none') {
+			$iframe_src = '/scm/viewvc.php?root='.$params['extra'];
+		} else {
+			$iframe_src = '/scm/viewvc.php?root='.$project->getUnixName();
+		}
 		if ($params['commit']) {
 			$iframe_src .= '&view=rev&revision='.$params['commit'];
 		}
@@ -342,7 +346,7 @@ some control over it to the project's administrator.");
 		if (!$project) return false;
 		if (!$project->isActive()) return false;
 
-		$repo_prefix = forge_get_config('repos_path', 'scmsvn').'/'.$project->getUnixName().'/';
+		$repo_prefix = forge_get_config('repos_path', 'scmsvn');
 		if (!is_dir($repo_prefix) && !mkdir($repo_prefix, 0755, true)) {
 			return false;
 		}
@@ -899,10 +903,8 @@ some control over it to the project's administrator.");
 			return false;
 		}
 
-		$result = db_query_params('SELECT count(*) AS count FROM scm_secondary_repos WHERE group_id=$1 AND repo_name = $2 AND plugin_id=$3',
-					  array($params['group_id'],
-						 $params['repo_name'],
-						 $this->getID()));
+		$result = db_query_params('SELECT count(*) AS count FROM scm_secondary_repos WHERE repo_name = $1 AND plugin_id=$2',
+					  array($params['repo_name'], $this->getID()));
 		if (!$result) {
 			$params['error_msg'] = db_error();
 			return false;
@@ -1142,6 +1144,12 @@ some control over it to the project's administrator.");
 			$repoarr[] = $arr['repo_name'];
 		}
 		return $repoarr;
+	}
+
+	function getGroupIdFromSecondReponame($repo_name) {
+		$result = db_query_params('SELECT scm_secondary_repos.group_id FROM scm_secondary_repos, groups WHERE scm_secondary_repos.group_id = groups.group_id AND repo_name = $1 AND plugin_id = $2 AND next_action = $3', array($repo_name, $this->getID(), SCM_EXTRA_REPO_ACTION_UPDATE));
+		$arr = db_fetch_array($result);
+		return $arr['group_id'];
 	}
 }
 
