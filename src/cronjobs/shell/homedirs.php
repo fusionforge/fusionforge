@@ -178,4 +178,4 @@ while ($row = db_fetch_array($res)) {
 	}
 }
 
-cron_entry(25,$err);
+cron_entry('HOMEDIR', $err);

@@ -3,7 +3,7 @@
  * SCM Frontend
  *
  * Copyright 2004 (c) Roland Mas, Tim Perdue -GForge LLC
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013,2018, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -23,7 +23,10 @@
 
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
+require_once $gfcommon.'scm/SCMFactory.class.php';
 require_once $gfwww.'scm/include/scm_utils.php';
+
+global $HTML;
 
 $group_id = getIntFromRequest("group_id");
 $group = group_get_object($group_id);
@@ -34,23 +37,40 @@ if (!$group || !is_object($group)) {
 session_require_perm('scm', $group_id, 'read');
 
 // Check if there is an associated scm plugin and issue a warning if none.
-$scm_plugin = '';
-foreach (PluginManager::instance()->getPlugins() as $p) {
-	$plugin = PluginManager::instance()->GetPluginObject($p);
-	if (isset($plugin->provides['scm']) && $plugin->provides['scm'] && $group->usesPlugin($p)) {
-		$scm_plugin = $p;
+$SCMFactory = new SCMFactory();
+$av_scm_plugins = $SCMFactory->getSCMs();
+$scm_plugins = array();
+foreach ($av_scm_plugins as $av_scm_plugin) {
+	if ($group->usesPlugin($av_scm_plugin)) {
+		$scm_plugins[] = plugin_get_object($av_scm_plugin);
 	}
 }
-if (!$scm_plugin) {
+if (count($scm_plugins) == 0) {
 	$warning_msg = _("This project has no associated Source Code Management tool defined, please configure one using the Administration submenu.");
 }
 
-scm_header(array('title'=> sprintf(_('Source Code Repository for %s'), $group->getPublicName()),'group'=>$group_id,'inframe'=>0));
+scm_header(array('title'=> sprintf(_('Source Code Repository for %s'), $group->getPublicName()), 'group' => $group_id, 'inframe' => 0));
 
 plugin_hook("blocks", "scm index");
 
+if (forge_get_config('allow_multiple_scm') && (count($scm_plugins) > 1)) {
+	$elementsLi = array();
+	foreach ($scm_plugins as $scm_plugin) {
+		$elementsLi[] = array('content' => util_make_link('#tabber-'.$scm_plugin->name, $scm_plugin->text, false, true));
+	}
+	echo html_ao('div', array('id' => 'tabberid'));
+	echo $HTML->html_list($elementsLi);
+}
+
 $hook_params = array();
 $hook_params['group_id'] = $group_id;
+$hook_params['allow_multiple_scm'] = count($scm_plugins);
 plugin_hook("scm_page", $hook_params);
+
+if (forge_get_config('allow_multiple_scm') && (count($scm_plugins) > 1)) {
+	echo html_ac(html_ap() - 1);
+}
+
+echo html_e('script', array('type'=>'text/javascript'), '//<![CDATA['."\n".'jQuery("[id^=tabber]").tabs();'."\n".'//]]>');
 
 scm_footer();

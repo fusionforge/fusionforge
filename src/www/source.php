@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Show source code of a given file.
  *

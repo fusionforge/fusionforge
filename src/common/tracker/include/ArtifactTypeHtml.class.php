@@ -510,7 +510,7 @@ class ArtifactTypeHtml extends ArtifactType {
 		return $return;
 	}
 
-	function renderFiles($group_id, $ah) {
+	function renderFiles($group_id, $ah, $formid = null) {
 		global $HTML;
 		$file_list =& $ah->getFiles();
 		$count=count($file_list);
@@ -537,7 +537,7 @@ class ArtifactTypeHtml extends ArtifactType {
 				$return .= '<td>'.util_display_user($file->getSubmittedUnixName(), $file->getSubmittedBy(), $file->getSubmittedRealName()).'</td>';
 				$return .= '<td>'.util_make_link('/tracker/download.php/'.$group_id.'/'. $this->getID().'/'. $ah->getID() .'/'.$file->getID().'/'.$file->getName(), htmlspecialchars($file->getName())).'</td>';
 				if (forge_check_perm('tracker', $this->getID(), 'tech')) {
-					$return .= '<td><input type="checkbox" name="delete_file[]" value="'. $file->getID() .'">'._('Delete').'</td>';
+					$return .= '<td><input type="checkbox" name="delete_file[]" '.(($formid) ? 'form="'.$formid.'"' : '').' value="'. $file->getID() .'">'._('Delete').'</td>';
 				}
 				$return .= '</tr>';
 			}

@@ -227,7 +227,7 @@ function session_check_credentials_in_database($loginname, $passwd, $allowpendin
 	return session_login_valid_dbonly($loginname, $passwd, $allowpending);
 }
 function session_login_valid_dbonly($loginname, $passwd, $allowpending) {
-	global $feedback, $userstatus;
+	global $feedback, $error_msg, $userstatus;
 
 	// Selecting by user_name/email only
 	if (forge_get_config('require_unique_email')) {

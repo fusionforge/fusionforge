@@ -153,7 +153,7 @@ class Widget_TrackerComment extends Widget {
 			}
 		}
 		if ($func == 'detail') {
-			$attachmentContent .= $ath->renderFiles($group_id, $ah);
+			$attachmentContent .= $ath->renderFiles($group_id, $ah, 'trackerform');
 		}
 
 		$tabberContent .= html_e('div', array('id' => 'tabber-attachments', 'class' => 'tabbertab'),

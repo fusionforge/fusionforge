@@ -76,7 +76,7 @@ function forum_header($params = array()) {
 				';
 
 			// display classification
-			if ($params['group'] == forge_get_config('news_group')) {
+			if ($params['group'] == GROUP_IS_NEWS) {
 				print stripslashes(trove_getcatlisting(db_result($result,0,'forum_id'),0,1));
 			} elseif (forge_get_config('use_trove')) {
 				print stripslashes(trove_getcatlisting($params['group'],0,1));
@@ -218,7 +218,7 @@ class ForumHTML extends FFError {
 			</tr>
 			<tr>
 				<td>
-					'.  $msg->getBody() .'
+					'.  util_gen_cross_ref($msg->getBody(), $group_id) .'
 				</td>
 			</tr>
 		</table>';
@@ -275,9 +275,9 @@ class ForumHTML extends FFError {
 				<td colspan="2">
 					';
 					if (strpos($msg->getBody(),'<') === false) {
-						$ret_val .= nl2br($msg->getBody()); //backwards compatibility for non html messages
+						$ret_val .= nl2br(util_gen_cross_ref($msg->getBody(), $group_id)); //backwards compatibility for non html messages
 					} else {
-						$ret_val .= $msg->getBody();
+						$ret_val .= util_gen_cross_ref($msg->getBody(), $group_id);
 					}
 					$ret_val .= '
 				</td>

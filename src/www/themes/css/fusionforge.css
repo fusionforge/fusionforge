@@ -529,6 +529,10 @@ p.information {
 	background-image: url('../../images/widget/widget-preview-my_admin-en_US.png');
 }
 
+.widget-preview-mytasks-en_US {
+	background-image: url('../../images/widget/widget-preview-my_tasks-en_US.png');
+}
+
 .widget-preview-mylatestcommits-en_US {
 	background-image: url('../../images/widget/widget-preview-mylatestcommits-en_US.png');
 }

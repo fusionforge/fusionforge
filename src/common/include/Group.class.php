@@ -839,6 +839,9 @@ class Group extends FFError {
 		$res = db_query_params('UPDATE groups SET is_template=$1 WHERE group_id=$2',
 					array($booleanparam, $this->getID()));
 		if ($res) {
+			if ($booleanparam != $this->data_array['is_template']) {
+				$this->addHistory('is_template', $this->data_array['is_template']);
+			}
 			$this->data_array['is_template'] = $booleanparam;
 			db_commit();
 			return true;
@@ -1775,10 +1778,10 @@ class Group extends FFError {
 			$this->setMissingParamsError(_('Please tick all checkboxes.'));
 			return false;
 		}
-		if ($this->getID() == forge_get_config('news_group') ||
-			$this->getID() == 1 ||
-			$this->getID() == forge_get_config('stats_group') ||
-			$this->getID() == forge_get_config('peer_rating_group')) {
+		if ($this->getID() == GROUP_IS_NEWS ||
+			$this->getID() == GROUP_IS_MASTER ||
+			$this->getID() == GROUP_IS_STATS ||
+			$this->getID() == GROUP_IS_PEER_RATINGS) {
 			$this->setError(_('Cannot Delete System Group'));
 			return false;
 		}
@@ -1891,7 +1894,7 @@ class Group extends FFError {
 		//
 		//	Delete news
 		//
-		$news_group=group_get_object(forge_get_config('news_group'));
+		$news_group = group_get_object(GROUP_IS_NEWS);
 		$res = db_query_params('SELECT forum_id FROM news_bytes WHERE group_id=$1',
 					array($this->getID()));
 		if (!$res) {

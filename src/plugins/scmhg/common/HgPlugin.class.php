@@ -4,7 +4,7 @@
  *
  * Copyright 2009, Roland Mas
  * Copyright 2012, Denise Patzker
- * Copyright 2012-2014,2017, Franck Villaume - TrivialDev
+ * Copyright 2012-2014,2017-2018, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -27,6 +27,7 @@ require_once $gfcommon.'include/plugins_utils.php';
 
 forge_define_config_item('default_server', 'scmhg', forge_get_config('scm_host'));
 forge_define_config_item('repos_path', 'scmhg', forge_get_config('chroot').'/scmrepos/hg');
+forge_define_config_item('ssh_port', 'core', 22);
 
 class HgPlugin extends SCMPlugin {
 	function __construct() {
@@ -43,9 +44,10 @@ Offer DAV or SSH access.");
 		$this->_addHook('scm_generate_snapshots');
 		$this->_addHook('scm_gather_stats');
 		$this->_addHook('activity');
-// 		$this->_addHook('scm_admin_form');
-// 		$this->_addHook('scm_delete_repo');
-// 		$this->_addHook('scm_add_repo');
+		$this->_addHook('scm_admin_form');
+		$this->_addHook('scm_delete_repo');
+		$this->_addHook('scm_add_repo');
+		$this->_addHook('get_scm_repo_list');
 		$this->register();
 	}
 
@@ -74,9 +76,12 @@ Offer DAV or SSH access.");
 		$b = html_e('h2', array(), _('Anonymous Mercurial Access'));
 
 		if (forge_get_config('use_dav', 'scmhg')) {
+			$repo_list = $this->getRepositories($project);
 			$protocol = forge_get_config('use_ssl', 'scmhg')? 'https' : 'http';
 			$b .= html_e('p', array(), _("This project's Mercurial repository can be checked out through anonymous access with the following command")._(':'));
-			$b .= html_e('p', array(), html_e('kbd', array(), 'hg clone '.$protocol.'://'.$this->getBoxForProject($project).'/anonscm/'.'hg'.'/'.$project->getUnixName()));
+			foreach ($repo_list as $repo_name) {
+				$b .= html_e('kbd', array(), 'hg clone '.$protocol.'://'.$this->getBoxForProject($project).'/anonscm/'.'hg'.'/'.$project->getUnixName().'/'.$repo_name).html_e('br');
+			}
 		} else {
 			$b .= $HTML->warning_msg(_('Please contact forge administrator, scmhg plugin is not correctly configured'));
 		}
@@ -121,7 +126,12 @@ Offer DAV or SSH access.");
 				foreach ($repo_list as $repo_name) {
 					// Warning : the ssh uri MUST be this form : ssh://username@scmbox//path/reponame
 					//           HAVE YOU SEEN THE // starting the path ? Keep in mind the double /
-					$htmlRepo .= html_e('kbd', array(), 'hg clone ssh://'.$d.'@'.$this->getBoxForProject($project).$ssh_port.'/'.forge_get_config('repos_path', 'scmhg').'/'.$project->getUnixName()).html_e('br');
+					if (forge_get_config('use_shell_limited')) {
+						$htmlRepo .= html_e('kbd', array(), 'hg clone ssh://'.$d.'@'.$this->getBoxForProject($project).$ssh_port.'/hg/'.$project->getUnixName().'/'.$repo_name).html_e('br');
+
+					} else {
+						$htmlRepo .= html_e('kbd', array(), 'hg clone ssh://'.$d.'@'.$this->getBoxForProject($project).$ssh_port.'/'.forge_get_config('repos_path', 'scmhg').'/'.$project->getUnixName().'/'.$repo_name).html_e('br');
+					}
 				}
 				$b .= html_e('p', array(), $htmlRepo);
 				$b .= '</div>';
@@ -132,7 +142,7 @@ Offer DAV or SSH access.");
 				$htmlRepo = '';
 				$protocol = forge_get_config('use_ssl', 'scmhg') ? 'https' : 'http';
 				foreach ($repo_list as $repo_name) {
-					$htmlRepo .= html_e('kbd', array(), 'hg clone '.$protocol.'://<i>'.$d.'</i>@'.$this->getBoxForProject($project).'/authscm/'.$d.'/hg/'. $project->getUnixName()).html_e('br');
+					$htmlRepo .= html_e('kbd', array(), 'hg clone '.$protocol.'://<i>'.$d.'</i>@'.$this->getBoxForProject($project).'/authscm/'.$d.'/hg/'. $project->getUnixName().'/'.$repo_name).html_e('br');
 				}
 				$b .= html_e('p', array(), $htmlRepo);
 				$b .= '</div>';
@@ -150,7 +160,11 @@ Offer DAV or SSH access.");
 				foreach ($repo_list as $repo_name) {
 					// Warning : the ssh uri MUST be this form : ssh://username@scmbox//path/reponame
 					//           HAVE YOU SEEN THE // starting the path ? Keep in mind the double /
-					$htmlRepo .= html_e('kbd', array(), 'hg clone ssh://'.html_e('i', array(), _('developername'), true, false).'@'.$this->getBoxForProject($project).$ssh_port.'/'.forge_get_config('repos_path', 'scmhg').'/'.$project->getUnixName()).html_e('br');
+					if (forge_get_config('use_shell_limited')) {
+						$htmlRepo .= html_e('kbd', array(), 'hg clone ssh://'.html_e('i', array(), _('developername'), true, false).'@'.$this->getBoxForProject($project).$ssh_port.'/hg/'.$project->getUnixName().'/'.$repo_name).html_e('br');
+					} else {
+						$htmlRepo .= html_e('kbd', array(), 'hg clone ssh://'.html_e('i', array(), _('developername'), true, false).'@'.$this->getBoxForProject($project).$ssh_port.'/'.forge_get_config('repos_path', 'scmhg').'/'.$project->getUnixName().'/'.$repo_name).html_e('br');
+					}
 				}
 				$b .= html_e('p', array(), $htmlRepo);
 				$b .= '</div>';
@@ -165,7 +179,7 @@ Offer DAV or SSH access.");
 					' '. _('Enter your site password when prompted.'));
 				$htmlRepo = '';
 				foreach ($repo_list as $repo_name) {
-					$htmlRepo .= html_e('kbd', array(), 'hg clone '.$protocol.'://'.html_e('i', array(), _('developername'), true, false).'@'.$this->getBoxForProject($project).'/authscm/'.html_e('i', array(), _('developername'), true, false).'/hg/'.$project->getUnixName()).html_e('br');
+					$htmlRepo .= html_e('kbd', array(), 'hg clone '.$protocol.'://'.html_e('i', array(), _('developername'), true, false).'@'.$this->getBoxForProject($project).'/authscm/'.html_e('i', array(), _('developername'), true, false).'/hg/'.$project->getUnixName().'/'.$repo_name).html_e('br');
 				}
 				$b .= html_e('p', array(), $htmlRepo);
 				$b .= '</div>';
@@ -176,14 +190,23 @@ Offer DAV or SSH access.");
 	}
 
 	function getSnapshotPara($project) {
-		return;
+		$b = '';
+		$filename = $project->getUnixName().'-scm-latest.tar'.util_get_compressed_file_extension();
+		if (file_exists(forge_get_config('scm_snapshots_path').'/'.$filename)) {
+			$b .= html_e('p', array(), '['.util_make_link('/snapshots.php?group_id='.$project->getID(), _('Download the nightly snapshot')).']');
+		}
+		return $b;
 	}
 
 	function getBrowserLinkBlock($project) {
 		global $HTML;
 		$b = html_e('h2', array(), _('Mercurial Repository Browser'));
 		$b .= html_e('p', array(), _('Browsing the Mercurial tree gives you a view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.'));
-		$b .= html_e('p', array(), '['.util_make_link('/scm/browser.php?group_id='.$project->getID(), _('Browse Hg Repository')).']');
+		$b .= html_e('p', array(), '['.util_make_link('/scm/browser.php?group_id='.$project->getID().'&scm_plugin='.$this->name, _('Browse Hg Repository')).']');
+		$repo_list = $this->getRepositories($project, false);
+		foreach ($repo_list as $repo_name) {
+			$b .= '['.util_make_link('/scm/browser.php?group_id='.$project->getID().'&extra='.$repo_name.'&scm_plugin='.$this->name, _('Browse extra Hg repository')._(': ').$repo_name).']'.html_e('br');
+		}
 		return $b;
 	}
 
@@ -233,7 +256,7 @@ Offer DAV or SSH access.");
 		if (!$project) {
 			return false;
 		}
-		if ($project->usesPlugin($this->name)  && forge_check_perm('scm', $project->getID(), 'read')) {
+		if (forge_check_perm('scm', $project->getID(), 'read')) {
 			$result = db_query_params('SELECT sum(updates) AS updates, sum(adds) AS adds FROM stats_cvs_group WHERE group_id=$1',
 						array ($project->getID())) ;
 			$update_num = db_result($result,0,'updates');
@@ -249,36 +272,37 @@ Offer DAV or SSH access.");
 	}
 
 	function printBrowserPage($params) {
+		if ($params['scm_plugin'] != $this->name) {
+			return;
+		}
 		global $HTML;
 		$project = $this->checkParams($params);
 		if (!$project) {
 			return false;
 		}
-		if ($project->usesPlugin($this->name)) {
-			if ($this->browserDisplayable($project)) {
-				$protocol = forge_get_config('use_ssl', 'scmhg')? 'https' : 'http';
-				$box = $this->getBoxForProject($project);
+		if ($this->browserDisplayable($project)) {
+			(isset($params['extra']) && $params['extra']) ? $extrarepo = $params['extra'] : $extrarepo = $project->getUnixName();
 
-	                        if ($project->enableAnonSCM()) {
-					$iframesrc = $protocol.'://'.$box.'/anonscm/scmhg/cgi-bin/'.$project->getUnixName();
-				} elseif (session_loggedin()) {
-					$logged_user = user_get_object(user_getid())->getUnixName();
-					$iframesrc = $protocol.'://'.$box.'/authscm/'.$logged_user.'/scmhg/cgi-bin/'.$project->getUnixName().'/';
-				}
-
-				if ($params['commit']) {
-					$iframesrc .= '/rev/'.$params['commit'];
-				}
-				echo '<iframe src="'.$iframesrc.'" id="scmhg_iframe" style="width:100%; height:400px;" frameborder="0" ></iframe>';
+			$protocol = forge_get_config('use_ssl', 'scmhg')? 'https' : 'http';
+			$box = $this->getBoxForProject($project);
+                        if ($project->enableAnonSCM()) {
+				$iframesrc = $protocol.'://'.$box.'/anonscm/scmhg/cgi-bin/'.$project->getUnixName().'/'.$extrarepo;
+			} elseif (session_loggedin()) {
+				$logged_user = user_get_object(user_getid())->getUnixName();
+				$iframesrc = $protocol.'://'.$box.'/authscm/'.$logged_user.'/scmhg/cgi-bin/'.$project->getUnixName().'/'.$extrarepo.'/';
 			}
+			if ($params['commit']) {
+				$iframesrc .= '/rev/'.$params['commit'];
+			}
+			echo '<iframe src="'.$iframesrc.'" id="scmhg_iframe" style="width:100%; height:400px;" frameborder="0" ></iframe>';
 		}
 	}
 
 	function createOrUpdateRepo($params) {
 		$project = $this->checkParams($params);
-		if (!$project) return false;
-		if (!$project->isActive()) return false;
-		if (!$project->usesPlugin($this->name)) return false;
+		if (!$project) {
+			return false;
+		}
 
 		$project_name = $project->getUnixName();
 		$unix_group_ro = $project_name . '_scmro';
@@ -304,9 +328,8 @@ Offer DAV or SSH access.");
 			$lines = file($hgweb);
 			$repo_config = "";
 			foreach ($lines as $line) {
-				if (preg_match("/\Aapplication = hgweb/",$line)) {
-					//link per project hgweb.cgi to the project repository
-					$repo_config .= "application = hgweb(\"".$root."\",\"".$project_name."\")\n";
+				if (preg_match("/\Aconfig = /",$line)) {
+					$repo_config .= 'config = "'.$root.'/config"'."\n";
 				} else {
 					$repo_config .= $line;
 				}
@@ -319,25 +342,80 @@ Offer DAV or SSH access.");
 			system("chown $apache_user:$apache_group $project_hgweb");
 			system("chmod 755 $project_hgweb");
 		}
-		if (!is_dir("$root/.hg")) {
-			system("hg init $root");
-			$f = fopen("$root/.hg/hgrc",'w');
+		if (!is_file("$root/config")) {
+			$f = fopen("$root/config", 'w');
+			$conf = "[paths]\n";
+			$conf .= "/ = ".$root.'/*'."\n";
+			fwrite($f, $conf);
+			fclose($f);
+		}
+		if (!is_dir("$root/$project_name/.hg")) {
+			system("hg init $root/$project_name");
+			$f = fopen("$root/$project_name/.hg/hgrc", 'w');
 			$conf = "[web]\n";
-			$conf .= "baseurl = /hg";
-			$conf .= "\ndescription = ".$project_name;
-			$conf .= "\nstyle = paper";
-			$conf .= "\nallow_push = *"; // every user (see Apache configuration) is allowed to push
-			$conf .= "\nallow_read = *"; // every user is allowed to clone and pull
+			$conf .= "baseurl = /hg/".$project_name."\n";
+			$conf .= "description = ".$project_name."\n";
+			$conf .= "style = paper\n";
+			$conf .= "allow_push = *\n"; // every user (see Apache configuration) is allowed to push
+			$conf .= "allow_read = *\n"; // every user is allowed to clone and pull
 			if (!forge_get_config('use_ssl', 'scmhg')) {
-				$conf .= "\npush_ssl = 0";
+				$conf .= "push_ssl = 0\n";
 			}
 			fwrite($f, $conf);
 			fclose($f);
-			//system("chmod 770 $root");
-			//system("find $root -type d | xargs chmod g+s");
-			system("chgrp -R $unix_group_rw $root");
-			system("chmod -R g=rwX,o=rX $root");
-			system("chmod 660 $root/.hg/hgrc");
+			system("chgrp -R $unix_group_rw $root/$project_name");
+			system("chmod -R g=rwX,o=rX $root/$project_name");
+			system("chmod 660 $root/$project_name/.hg/hgrc");
+		}
+
+		// Create project-wide secondary repositories
+		$result = db_query_params('SELECT repo_name, description, clone_url FROM scm_secondary_repos WHERE group_id=$1 AND next_action = $2 AND plugin_id=$3',
+						array($project->getID(),
+						SCM_EXTRA_REPO_ACTION_UPDATE,
+						$this->getID()));
+		$rows = db_numrows($result);
+		for ($i = 0; $i < $rows; $i++) {
+			$repo_name = db_result($result, $i, 'repo_name');
+			$description = db_result($result, $i, 'description');
+			//no support for cloning from any URL, working dir...
+			$repodir = $root.'/'.$repo_name;
+			if (!is_dir("$repodir/.hg")) {
+				system("hg init $repodir");
+				$f = fopen("$repodir/.hg/hgrc", 'w');
+				$conf = "[web]\n";
+				$conf .= "baseurl = /hg/".$project_name."\n";
+				$conf .= "description = ".$description."\n";
+				$conf .= "style = paper\n";
+				$conf .= "allow_push = *\n"; // every user (see Apache configuration) is allowed to push
+				$conf .= "allow_read = *\n"; // every user is allowed to clone and pull
+				if (!forge_get_config('use_ssl', 'scmhg')) {
+					$conf .= "push_ssl = 0\n";
+				}
+				fwrite($f, $conf);
+				fclose($f);
+				system("chgrp -R $unix_group_rw $repodir");
+				system("chmod -R g=rwX,o=rX $repodir");
+				system("chmod 660 $repodir/.hg/hgrc");
+			}
+		}
+
+		// Delete project-wide secondary repositories
+		$result = db_query_params ('SELECT repo_name FROM scm_secondary_repos WHERE group_id=$1 AND next_action = $2 AND plugin_id=$3',
+					   array($project->getID(),
+						  SCM_EXTRA_REPO_ACTION_DELETE,
+						  $this->getID()));
+		$rows = db_numrows ($result);
+		for ($i = 0; $i < $rows; $i++) {
+			$repo_name = db_result($result, $i, 'repo_name');
+			$repodir = $root.'/'.$repo_name;
+			if (util_is_valid_repository_name($repo_name)) {
+				system("rm -rf $repodir");
+			}
+			db_query_params ('DELETE FROM scm_secondary_repos WHERE group_id=$1 AND repo_name=$2 AND next_action = $3 AND plugin_id=$4',
+					 array($project->getID(),
+						$repo_name,
+						SCM_EXTRA_REPO_ACTION_DELETE,
+						$this->getID()));
 		}
 	}
 
@@ -345,7 +423,6 @@ Offer DAV or SSH access.");
 		$groups = $this->getGroups();
 		$unix_group = forge_get_config('apache_group');
 		$unix_user = forge_get_config('apache_user');
-		$password_data = '';
 		$hgusers = array();
 		foreach ($groups as $project) {
 			if (!$project->isActive()) continue;
@@ -354,7 +431,7 @@ Offer DAV or SSH access.");
 
 			$push = "";
 			$read = ""; /*pull,clone*/
-			$path = forge_get_config('repos_path', 'scmhg').'/'.$project->getUnixName().'/.hg';
+			$path = forge_get_config('repos_path', 'scmhg').'/'.$project->getUnixName().'/'.$project->getUnixName().'/.hg';
 			$prevp = false;
 			$prevr = false;
 			$users = $project->getMembers();
@@ -414,7 +491,7 @@ Offer DAV or SSH access.");
 				}
 			} else {
 				$hgrc = "[web]\n";
-				$hgrc .= "baseurl = /hg";
+				$hgrc .= "baseurl = /hg/".$project->getUnixName();
 				$hgrc .= "\ndescription = ".$project->getUnixName();
 				$hgrc .= "\nstyle = paper";
 				$hgrc .= "\nallow_read = ".$read;
@@ -431,18 +508,6 @@ Offer DAV or SSH access.");
 			system("chown $unix_user:$unix_group $path/hgrc");
 			system("chmod 660 $path/hgrc");
 		}
-
-		foreach ($hgusers as $user_id => $user) {
-			$password_data .= $user->getUnixName().':'.$user->getUnixPasswd()."\n";
-		}
-		$password_data .= forge_get_config('anonhg_login', 'scmhg').":".htpasswd_apr1_md5(forge_get_config('anonhg_password', 'scmhg'))."\n";
-
-		$fname = forge_get_config('data_path').'/hgroot-authfile';
-		$f = fopen($fname.'.new', 'w');
-		fwrite($f, $password_data);
-		fclose($f);
-		chmod($fname.'.new', 0644);
-		rename($fname.'.new', $fname);
 	}
 
 	function generateSnapshots($params) {
@@ -457,24 +522,28 @@ Offer DAV or SSH access.");
 			return false;
 		}
 
-		if (! $project->usesPlugin ($this->name)) {
-			return false;
-		}
-
 		$group_name = $project->getUnixName();
+		$snapshot = forge_get_config('scm_snapshots_path').'/'.$group_name.'-scm-latest.tar'.util_get_compressed_file_extension();
 		$tarball = forge_get_config('scm_tarballs_path').'/'.$group_name.'-scmroot.tar'.util_get_compressed_file_extension();
 
 		if (!$project->enableAnonSCM()) {
+			if (is_file($snapshot)) {
+				unlink($snapshot);
+			}
 			if (is_file($tarball)) {
 				unlink ($tarball) ;
 			}
 			return false;
 		}
 
+		// TODO: ideally we generate one snapshot per hg repository
 		$toprepo = forge_get_config('repos_path', 'scmhg');
-		$repo = $toprepo . '/' . $project->getUnixName();
+		$repo = $toprepo . '/' . $project->getUnixName().  $project->getUnixName();
 
 		if (!is_dir($repo)) {
+			if (is_file($snapshot)) {
+				unlink($snapshot);
+			}
 			if (is_file($tarball)) {
 				unlink($tarball);
 			}
@@ -721,7 +790,7 @@ Offer DAV or SSH access.");
 					$result = array();
 					$result['section'] = 'scm';
 					$result['group_id'] = $project->getID();
-					$result['ref_id'] = 'browser.php?group_id='.$project->getID().'&commit='.$splitedLine[3];
+					$result['ref_id'] = 'browser.php?group_id='.$project->getID().'&scm_plugin='.$this->name.'&commit='.$splitedLine[3];
 					$result['description'] = htmlspecialchars($splitedLine[2]).' (changeset '.$splitedLine[3].')';
 					$userObject = user_get_object_by_email($splitedLine[1]);
 					if (is_a($userObject, 'FFUser')) {
@@ -736,166 +805,148 @@ Offer DAV or SSH access.");
 				}
 			}
 		}
-		if (!in_array($this->name, $params['ids'])) {
+		if (!in_array($this->name, $params['ids']) && ($project->enableAnonSCM() || session_loggedin())) {
 			$params['ids'][] = $this->name;
 			$params['texts'][] = _('Hg Commits');
 		}
 		return true;
 	}
 
-// 	function scm_add_repo(&$params) {
-// 		$project = $this->checkParams($params);
-// 		if (!$project) {
-// 			return false;
-// 		}
-//
-// 		if (!isset($params['repo_name'])) {
-// 			return false;
-// 		}
-//
-// 		if ($params['repo_name'] == $project->getUnixName()) {
-// 			$params['error_msg'] = sprintf(_('A repository %s already exists'), $params['repo_name']);
-// 			return false;
-// 		}
-//
-// 		if (! util_is_valid_repository_name($params['repo_name'])) {
-// 			$params['error_msg'] = _('This repository name is not valid');
-// 			return false;
-// 		}
-//
-// 		$result = db_query_params('SELECT count(*) AS count FROM scm_secondary_repos WHERE group_id=$1 AND repo_name = $2 AND plugin_id=$3',
-// 					  array($params['group_id'],
-// 						 $params['repo_name'],
-// 						 $this->getID()));
-// 		if (!$result) {
-// 			$params['error_msg'] = db_error();
-// 			return false;
-// 		}
-// 		if (db_result($result, 0, 'count')) {
-// 			$params['error_msg'] = sprintf(_('A repository %s already exists'), $params['repo_name']);
-// 			return false;
-// 		}
-//
-// 		$description = '';
-// 		$clone = '';
-// 		if (isset($params['clone'])) {
-// 			$url = $params['clone'];
-// 			if ($url == '') {
-// 				// Start from empty
-// 				$clone = $url;
-// 			} elseif (preg_match('|^https?://|', $url)) {
-// 				// External URLs: OK
-// 				$clone = $url;
-// 			} elseif ($url == $project->getUnixName()) {
-// 				$clone = $url;
-// 			} elseif (($result = db_query_params('SELECT count(*) AS count FROM scm_secondary_repos WHERE group_id=$1 AND repo_name = $2 AND plugin_id=$3',
-// 							     array($project->getID(),
-// 								    $url,
-// 								    $this->getID())))
-// 				  && db_result($result, 0, 'count')) {
-// 				// Local repo: try to clone from an existing repo in same project
-// 				// Repository found
-// 				$clone = $url;
-// 			} else {
-// 				$params['error_msg'] = _('Invalid URL from which to clone');
-// 				$clone = '';
-// 				return false;
-// 			}
-// 		}
-// 		if (isset($params['description'])) {
-// 			$description = $params['description'];
-// 		}
-// 		if ($clone && !$description) {
-// 			$description = sprintf(_('Clone of %s'), $params['clone']);
-// 		}
-// 		if (!$description) {
-// 			$description = "Hg repository $params[repo_name] for project ".$project->getUnixName();
-// 		}
-//
-// 		$result = db_query_params('INSERT INTO scm_secondary_repos (group_id, repo_name, description, clone_url, plugin_id) VALUES ($1, $2, $3, $4, $5)',
-// 					   array($params['group_id'],
-// 						  $params['repo_name'],
-// 						  $description,
-// 						  $clone,
-// 						  $this->getID()));
-// 		if (! $result) {
-// 			$params['error_msg'] = db_error();
-// 			return false;
-// 		}
-//
-// 		plugin_hook('scm_admin_update', $params);
-// 		return true;
-// 	}
+	function scm_add_repo(&$params) {
+		if ($params['scm_plugin'] != $this->name) {
+			return;
+		}
+		$project = $this->checkParams($params);
+		if (!$project) {
+			return false;
+		}
 
-// 	function scm_admin_form(&$params) {
-// 		global $HTML;
-// 		$project = $this->checkParams($params);
-// 		if (!$project) {
-// 			return false;
-// 		}
-//
-// 		session_require_perm('project_admin', $params['group_id']);
-//
-// 		$project_name = $project->getUnixName();
-// 		$result = db_query_params('SELECT repo_name, description, clone_url FROM scm_secondary_repos WHERE group_id=$1 AND next_action = $2 AND plugin_id=$3 ORDER BY repo_name',
-// 					  array($params['group_id'],
-// 						 SCM_EXTRA_REPO_ACTION_UPDATE,
-// 						 $this->getID()));
-// 		if (!$result) {
-// 			$params['error_msg'] = db_error();
-// 			return false;
-// 		}
-// 		$existing_repos = array();
-// 		while($data = db_fetch_array($result)) {
-// 			$existing_repos[] = array('repo_name' => $data['repo_name'],
-// 						  'description' => $data['description'],
-// 						  'clone_url' => $data['clone_url']);
-// 		}
-// 		if (count($existing_repos) == 0) {
-// 			echo $HTML->information(_('No extra Hg repository for project').' '.$project_name);
-// 		} else {
-// 			echo html_e('h2', array(), sprintf(ngettext('Extra Hg repository for project %1$s',
-// 									'Extra Hg repositories for project %1$s',
-// 									count($existing_repos)), $project_name));
-// 			$titleArr = array(_('Repository name'), ('Initial repository description'), _('Initial clone URL (if any)'), _('Delete'));
-// 			echo $HTML->listTableTop($titleArr);
-// 			foreach ($existing_repos as $key => $repo) {
-// 				$cells = array();
-// 				$cells[][] = html_e('kbd', array(), $repo['repo_name']);
-// 				$cells[][] = $repo['description'];
-// 				$cells[][] = $repo['clone_url'];
-// 				$deleteForm = $HTML->openForm(array('name' => 'form_delete_repo_'.$repo['repo_name'], 'action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
-// 				$deleteForm .= html_e('input', array('type' => 'hidden', 'name' => 'group_id', 'value' => $params['group_id']));
-// 				$deleteForm .= html_e('input', array('type' => 'hidden', 'name' => 'delete_repository', 'value' => 1));
-// 				$deleteForm .= html_e('input', array('type' => 'hidden', 'name' => 'repo_name', 'value' => $repo['repo_name']));
-// 				$deleteForm .= html_e('input', array('type' => 'hidden', 'name' => 'scm_enable_anonymous', 'value' => ($project->enableAnonSCM()? 1 : 0)));
-// 				$deleteForm .= html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Delete')));
-// 				$deleteForm .= $HTML->closeForm();
-// 				$cells[][] = $deleteForm;
-// 				echo $HTML->multiTableRow(array(), $cells);
-// 			}
-// 			echo $HTML->listTableBottom();
-// 		}
+		if (!isset($params['repo_name'])) {
+			return false;
+		}
 
-// 		echo html_e('h2', array(), sprintf(_('Create new Hg repository for project %s'), $project_name));
-// 		echo $HTML->openForm(array('name' => 'form_create_repo', 'action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
-// 		echo html_e('input', array('type' => 'hidden', 'name' => 'group_id', 'value' => $params['group_id']));
-// 		echo html_e('input', array('type' => 'hidden', 'name' => 'create_repository', 'value' => 1));
-// 		echo html_e('p', array(), html_e('strong', array(), _('Repository name')._(':')).utils_requiredField().html_e('br').
-// 				html_e('input', array('type' => 'text', 'required' => 'required', 'size' => 20, 'name' => 'repo_name', 'value' => '')));
-// 		echo html_e('p', array(), html_e('strong', array(), _('Description')._(':')).html_e('br').
-// 				html_e('input', array('type' => 'text', 'size' => 60, 'name' => 'description', 'value' => '')));
-// 		echo html_e('p', array(), html_e('strong', array(), _('Initial clone URL (or name of an existing repository in this project; leave empty to start with an empty repository)')._(':')).html_e('br').
-// 				html_e('input', array('type' => 'text', 'size' => 60, 'name' => 'clone', 'value' => $project_name)));
-// 		echo html_e('input', array('type' => 'hidden', 'name' => 'scm_enable_anonymous', 'value' => ($project->enableAnonSCM()? 1 : 0)));
-// 		echo html_e('input', array('type' => 'submit', 'name' => 'cancel', 'value' => _('Cancel')));
-// 		echo html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Submit')));
-// 		echo $HTML->closeForm();
-// 	}
+		if ($params['repo_name'] == $project->getUnixName()) {
+			$params['error_msg'] = _('Cannot create a secondary repository with the same name as the primary');
+			return false;
+		}
+
+		if (! util_is_valid_repository_name($params['repo_name'])) {
+			$params['error_msg'] = _('This repository name is not valid');
+			return false;
+		}
+
+		$result = db_query_params('SELECT count(*) AS count FROM scm_secondary_repos WHERE group_id=$1 AND repo_name = $2 AND plugin_id=$3',
+					  array($params['group_id'],
+						 $params['repo_name'],
+						 $this->getID()));
+		if (!$result) {
+			$params['error_msg'] = db_error();
+			return false;
+		}
+		if (db_result($result, 0, 'count')) {
+			$params['error_msg'] = sprintf(_('A repository %s already exists'), $params['repo_name']);
+			return false;
+		}
+
+		$description = '';
+		$clone = '';
+		if (isset($params['description'])) {
+			$description = $params['description'];
+		}
+		if (!$description) {
+			$description = "Hg repository $params[repo_name] for project ".$project->getUnixName();
+		}
+
+		$result = db_query_params('INSERT INTO scm_secondary_repos (group_id, repo_name, description, clone_url, plugin_id) VALUES ($1, $2, $3, $4, $5)',
+					   array($params['group_id'],
+						  $params['repo_name'],
+						  $description,
+						  $clone,
+						  $this->getID()));
+		if (! $result) {
+			$params['error_msg'] = db_error();
+			return false;
+		}
+
+		return true;
+	}
+
+	function scm_admin_form(&$params) {
+		global $HTML;
+		$project = $this->checkParams($params);
+		if (!$project) {
+			return false;
+		}
+
+		session_require_perm('project_admin', $params['group_id']);
+		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
+			echo html_ao('div', array('id' => 'tabber-'.$this->name, 'class' => 'tabbertab'));
+		}
+
+		$project_name = $project->getUnixName();
+		$result = db_query_params('SELECT repo_name, description FROM scm_secondary_repos WHERE group_id=$1 AND next_action = $2 AND plugin_id=$3 ORDER BY repo_name',
+					  array($params['group_id'],
+						 SCM_EXTRA_REPO_ACTION_UPDATE,
+						 $this->getID()));
+		if (!$result) {
+			$params['error_msg'] = db_error();
+			return false;
+		}
+		$existing_repos = array();
+		while ($data = db_fetch_array($result)) {
+			$existing_repos[] = array('repo_name' => $data['repo_name'],
+						  'description' => $data['description']);
+		}
+		if (count($existing_repos) == 0) {
+			echo $HTML->information(_('No extra Hg repository for project').' '.$project_name);
+		} else {
+			echo html_e('h2', array(), sprintf(ngettext('Extra Hg repository for project %1$s',
+									'Extra Hg repositories for project %1$s',
+									count($existing_repos)), $project_name));
+			$titleArr = array(_('Repository name'), ('Initial repository description'), _('Delete'));
+			echo $HTML->listTableTop($titleArr);
+			foreach ($existing_repos as $key => $repo) {
+				$cells = array();
+				$cells[][] = html_e('kbd', array(), $repo['repo_name']);
+				$cells[][] = $repo['description'];
+				$deleteForm = $HTML->openForm(array('name' => 'form_delete_repo_'.$repo['repo_name'], 'action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
+				$deleteForm .= html_e('input', array('type' => 'hidden', 'name' => 'group_id', 'value' => $params['group_id']));
+				$deleteForm .= html_e('input', array('type' => 'hidden', 'name' => 'delete_repository', 'value' => 1));
+				$deleteForm .= html_e('input', array('type' => 'hidden', 'name' => 'repo_name', 'value' => $repo['repo_name']));
+				$deleteForm .= $HTML->html_input('scm_plugin_id', '', '', 'hidden', $this->getID());
+				$deleteForm .= html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Delete')));
+				$deleteForm .= $HTML->closeForm();
+				$cells[][] = $deleteForm;
+				echo $HTML->multiTableRow(array(), $cells);
+			}
+			echo $HTML->listTableBottom();
+		}
+
+		echo html_e('h2', array(), sprintf(_('Create new Hg repository for project %s'), $project_name));
+		echo $HTML->openForm(array('name' => 'form_create_repo_scmhg', 'action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
+		echo $HTML->html_input('group_id', '', '', 'hidden', $params['group_id']);
+		echo $HTML->html_input('create_repository', '', '', 'hidden', 1);
+		echo $HTML->html_input('scm_plugin', '', '', 'hidden', $this->name);
+		echo $HTML->html_input('repo_name', '', html_e('strong', array(), _('Repository name')._(':')).utils_requiredField(), 'text', '', array('required' => 'required', 'size' => 20));
+		echo html_e('br');
+		echo $HTML->html_input('description', '', html_e('strong', array(), _('Description')._(':')), 'text', '', array('size' => 60));
+		echo html_e('br');
+		echo $HTML->html_input('cancel', '', '', 'submit', _('Cancel'), array(), array('style' => 'display: inline-block!important'));
+		echo $HTML->html_input('submit', '', '', 'submit', _('Submit'), array(), array('style' => 'display: inline-block!important'));
+		echo $HTML->closeForm();
+		if ($project->usesPlugin('scmhook')) {
+			$scmhookPlugin = plugin_get_object('scmhook');
+			$scmhookPlugin->displayScmHook($project->getID(), $this->name);
+		}
+		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
+			echo html_ac(html_ap() - 1);
+		}
+	}
 
 	function getRepositories($group, $autoinclude = true) {
+		$repoarr = array();
 		if ($autoinclude) {
-			$repoarr = array($group->getUnixName());
+			$repoarr[] = $group->getUnixName();
 		}
 		$result = db_query_params('SELECT repo_name FROM scm_secondary_repos WHERE group_id = $1 AND next_action = $2 AND plugin_id = $3 ORDER BY repo_name',
 						   array($group->getID(),

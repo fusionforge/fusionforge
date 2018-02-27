@@ -46,6 +46,7 @@ _("This plugin allows each project to embed MoinMoinWiki under a tab.");
 		$this->hooks[] = "role_translate_strings";
 		$this->hooks[] = "role_get_setting";
 		$this->hooks[] = "clone_project_from_template" ;
+		$this->hooks[] = 'crossrefurl';
 	}
 
 	function getWikiUrl($project) {
@@ -162,6 +163,18 @@ _("This plugin allows each project to embed MoinMoinWiki under a tab.");
 		} elseif ($hookname == 'clone_project_from_template') {
 			$systasksq = new SystasksQ();
 			$systasksq->add($this->getID(), 'MOINMOIN_CREATE_WIKI', $group_id);
+		} elseif ($hookname == 'crossrefurl') {
+			$project = group_get_object($group_id);
+			if (!$project || !is_object($project)) {
+				return;
+			}
+			if ($project->isError()) {
+				return;
+			}
+			if ($project->usesPlugin($this->name) && isset($params['page'])) {
+				$params['url'] = '/plugins/moinmoin/'.$project->getUnixName().'/'.$params['page'];
+			}
+			return;
 		}
 	}
 

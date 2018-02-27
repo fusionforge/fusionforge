@@ -4,9 +4,8 @@
  *
  * Copyright 2009, Roland Mas
  * Copyright 2009, Mehdi Dogguy <mehdi@debian.org>
- * Copyright 2012-2014,2016-2017, Franck Villaume - TrivialDev
- * Copyright © 2013
- *	Thorsten Glaser <t.glaser@tarent.de>
+ * Copyright 2013, Thorsten Glaser <t.glaser@tarent.de>
+ * Copyright 2012-2014,2016-2018, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -181,7 +180,11 @@ control over it to the project's administrator.");
 				$b .= html_e('p', array(), _('SSH must be installed on your client machine.'));
 				$htmlRepo = '';
 				foreach ($repo_list as $repo_name) {
-					$htmlRepo .= html_e('kbd', array(), 'git clone git+ssh://'.$d.'@'.$this->getBoxForProject($project).$ssh_port.forge_get_config('repos_path', 'scmgit').'/'.$project->getUnixName().'/'.$repo_name.'.git').html_e('br');
+					if (forge_get_config('use_shell_limited')) {
+						$htmlRepo .= html_e('kbd', array(), 'git clone '.$d.'@'.$this->getBoxForProject($project).$ssh_port.':'.$project->getUnixName().'/'.$repo_name.'.git').html_e('br');
+					} else {
+						$htmlRepo .= html_e('kbd', array(), 'git clone git+ssh://'.$d.'@'.$this->getBoxForProject($project).$ssh_port.forge_get_config('repos_path', 'scmgit').'/'.$project->getUnixName().'/'.$repo_name.'.git').html_e('br');
+					}
 				}
 				$b .= html_e('p', array(), $htmlRepo);
 				$b .= '</div>';
@@ -208,7 +211,11 @@ control over it to the project's administrator.");
 					' '. _('Substitute <em>developername</em> with the proper value.'));
 				$htmlRepo = '';
 				foreach ($repo_list as $repo_name) {
-					$htmlRepo .= html_e('kbd', array(), 'git clone git+ssh://'.html_e('i', array(), _('developername'), true, false).'@'.$this->getBoxForProject($project).$ssh_port.forge_get_config('repos_path', 'scmgit').'/'.$project->getUnixName().'/'.$repo_name.'.git').html_e('br');
+					if (forge_get_config('use_shell_limited')) {
+						$htmlRepo .= html_e('kbd', array(), 'git clone '.html_e('i', array(), _('developername'), true, false).'@'.$this->getBoxForProject($project).$ssh_port.':'.$project->getUnixName().'/'.$repo_name.'.git').html_e('br');
+					} else {
+						$htmlRepo .= html_e('kbd', array(), 'git clone git+ssh://'.html_e('i', array(), _('developername'), true, false).'@'.$this->getBoxForProject($project).$ssh_port.forge_get_config('repos_path', 'scmgit').'/'.$project->getUnixName().'/'.$repo_name.'.git').html_e('br');
+					}
 				}
 				$b .= html_e('p', array(), $htmlRepo);
 				$b .= '</div>';
@@ -271,6 +278,9 @@ control over it to the project's administrator.");
 	}
 
 	function printBrowserPage($params) {
+		if ($params['scm_plugin'] != $this->name) {
+			return;
+		}
 		global $HTML;
 		$useautoheight = 0;
 		$project = $this->checkParams($params);
@@ -308,15 +318,12 @@ control over it to the project's administrator.");
 		$b .= html_e('p', array(), _("Browsing the Git tree gives you a view into the current status"
 						. " of this project's code. You may also view the complete"
 						. " history of any file in the repository."));
-		$b .= html_e('p', array(), '['.util_make_link('/scm/browser.php?group_id='.$project->getID(), _('Browse main git repository')).']');
+		$b .= html_e('p', array(), '['.util_make_link('/scm/browser.php?group_id='.$project->getID().'&scm_plugin='.$this->name, _('Browse main git repository')).']');
 
 		# Extra repos
 		$repo_list = $this->getRepositories($project, false);
 		foreach ($repo_list as $repo_name) {
-			if (forge_get_config('use_smarthttp', 'scmgit')) {
-				$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
-				$b .= '['.util_make_link('/scm/browser.php?group_id='.$project->getID().'&extra='.$repo_name, _('Browse extra git repository')._(': ').$repo_name).']'.html_e('br');
-			}
+			$b .= '['.util_make_link('/scm/browser.php?group_id='.$project->getID().'&extra='.$repo_name.'&scm_plugin='.$this->name, _('Browse extra git repository')._(': ').$repo_name).']'.html_e('br');
 		}
 
 		$result = db_query_params('SELECT u.user_id, u.user_name FROM scm_personal_repos p, users u WHERE p.group_id=$1 AND u.user_id=p.user_id AND u.unix_status=$2 AND plugin_id=$3',
@@ -327,7 +334,7 @@ control over it to the project's administrator.");
 		for ($i=0; $i<$rows; $i++) {
 			$user_id = db_result($result,$i,'user_id');
 			$user_name = db_result($result,$i,'user_name');
-			$b .= '['.util_make_link('/scm/browser.php?group_id='.$project->getID().'&user_id='.$user_id, _('Browse personal git repository')._(': ').$user_name).']'.html_e('br');
+			$b .= '['.util_make_link('/scm/browser.php?group_id='.$project->getID().'&user_id='.$user_id.'&scm_plugin='.$this->name, _('Browse personal git repository')._(': ').$user_name).']'.html_e('br');
 		}
 
 		return $b;
@@ -866,10 +873,6 @@ control over it to the project's administrator.");
 		$snapshot = forge_get_config('scm_snapshots_path').'/'.$group_name.'-scm-latest.tar'.util_get_compressed_file_extension();
 		$tarball = forge_get_config('scm_tarballs_path').'/'.$group_name.'-scmroot.tar'.util_get_compressed_file_extension();
 
-		if (!$project->usesPlugin($this->name)) {
-			return false;
-		}
-
 		if (!$project->enableAnonSCM()) {
 			if (is_file($snapshot)) {
 				unlink($snapshot);
@@ -928,9 +931,6 @@ control over it to the project's administrator.");
 	 */
 	function widgets($params) {
 		require_once 'common/widget/WidgetLayoutManager.class.php';
-		if ($params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_GROUP) {
-			$params['fusionforge_widgets'][] = 'plugin_scmgit_project_latestcommits';
-		}
 		if ($params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_USER) {
 			$params['fusionforge_widgets'][] = 'plugin_scmgit_user_myrepositories';
 		}
@@ -1031,7 +1031,7 @@ control over it to the project's administrator.");
 					$result = array();
 					$result['section'] = 'scm';
 					$result['group_id'] = $project->getID();
-					$result['ref_id'] = 'browser.php?group_id='.$project->getID().'&commit='.$splitedLine[3];
+					$result['ref_id'] = 'browser.php?group_id='.$project->getID().'&scm_plugin='.$this->name.'&commit='.$splitedLine[3];
 					$result['description'] = htmlspecialchars($splitedLine[2]).' (commit '.$splitedLine[3].')';
 					$userObject = user_get_object_by_email($splitedLine[1]);
 					if (is_a($userObject, 'FFUser')) {
@@ -1046,7 +1046,7 @@ control over it to the project's administrator.");
 				}
 			}
 		}
-		if (!in_array($this->name, $params['ids'])) {
+		if (!in_array($this->name, $params['ids']) && ($project->enableAnonSCM() || session_loggedin())) {
 			$params['ids'][] = $this->name;
 			$params['texts'][] = _('Git Commits');
 		}
@@ -1054,6 +1054,9 @@ control over it to the project's administrator.");
 	}
 
 	function scm_add_repo(&$params) {
+		if ($params['scm_plugin'] != $this->name) {
+			return;
+		}
 		$project = $this->checkParams($params);
 		if (!$project) {
 			return false;
@@ -1134,7 +1137,6 @@ control over it to the project's administrator.");
 			return false;
 		}
 
-		plugin_hook('scm_admin_update', $params);
 		return true;
 	}
 
@@ -1146,6 +1148,10 @@ control over it to the project's administrator.");
 		}
 
 		session_require_perm('project_admin', $params['group_id']);
+
+		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
+			echo html_ao('div', array('id' => 'tabber-'.$this->name, 'class' => 'tabbertab'));
+		}
 
 		$project_name = $project->getUnixName();
 
@@ -1180,7 +1186,7 @@ control over it to the project's administrator.");
 				$deleteForm .= $HTML->html_input('group_id', '', '', 'hidden', $params['group_id']);
 				$deleteForm .= $HTML->html_input('delete_repository', '', '', 'hidden', 1);
 				$deleteForm .= $HTML->html_input('repo_name', '', '', 'hidden', $repo['repo_name']);
-				$deleteForm .= $HTML->html_input('scm_enable_anonymous', '', '', 'hidden', ($project->enableAnonSCM()? 1 : 0));
+				$deleteForm .= $HTML->html_input('scm_plugin_id', '', '', 'hidden', $this->getID());
 				$deleteForm .= $HTML->html_input('submit', '', '', 'submit', _('Delete'));
 				$deleteForm .= $HTML->closeForm();
 				$cells[][] = $deleteForm;
@@ -1190,19 +1196,27 @@ control over it to the project's administrator.");
 		}
 
 		echo html_e('h2', array(), _('Create new Git repository for project').' '.$project_name);
-		echo $HTML->openForm(array('name' => 'form_create_repo', 'action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
+		echo $HTML->openForm(array('name' => 'form_create_repo_scmgit', 'action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
 		echo $HTML->html_input('group_id', '', '', 'hidden', $params['group_id']);
 		echo $HTML->html_input('create_repository', '', '', 'hidden', 1);
+		echo $HTML->html_input('scm_plugin', '', '', 'hidden', $this->name);
 		echo $HTML->html_input('repo_name', '', html_e('strong', array(), _('Repository name')._(':')).utils_requiredField(), 'text', '', array('required' => 'required', 'size' => 20));
 		echo html_e('br');
 		echo $HTML->html_input('description', '', html_e('strong', array(), _('Description')._(':')), 'text', '', array('size' => 60));
 		echo html_e('p', array(), html_e('strong', array(), _('Initial clone URL (or name of an existing repository in this project; leave empty to start with an empty repository)')._(':')).html_e('br').
 				$HTML->html_input('clone', '', '', 'text', $project_name, array('size' => 60)));
-		echo $HTML->html_input('scm_enable_anonymous', '', '', 'hidden', ($project->enableAnonSCM()? 1 : 0));
 		echo html_e('br');
 		echo $HTML->html_input('cancel', '', '', 'submit', _('Cancel'), array(), array('style' => 'display: inline-block!important'));
 		echo $HTML->html_input('submit', '', '', 'submit', _('Submit'), array(), array('style' => 'display: inline-block!important'));
 		echo $HTML->closeForm();
+
+		if ($project->usesPlugin('scmhook')) {
+			$scmhookPlugin = plugin_get_object('scmhook');
+			$scmhookPlugin->displayScmHook($project->getID(), $this->name);
+		}
+		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
+			echo html_ac(html_ap() - 1);
+		}
 	}
 
 	function getCommits($project, $user = null, $nb_commits) {

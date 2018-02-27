@@ -144,7 +144,7 @@ over it to the project's administrator.");
 		$b .= _('You may also view the complete histories of any file in the repository.');
 		$b .= '</p>';
 		$b .= '<p>[' ;
-		$b .= util_make_link ("/scm/browser.php?group_id=".$project->getID(),
+		$b .= util_make_link ("/scm/browser.php?group_id=".$project->getID().'&scm_plugin='.$this->name,
 								sprintf(_('Browse %s Repository'), 'Bazaar')
 			) ;
 		$b .= ']</p>' ;
@@ -156,6 +156,9 @@ over it to the project's administrator.");
 	}
 
 	function printBrowserPage($params) {
+		if ($params['scm_plugin'] != $this->name) {
+			return;
+		}
 		global $HTML;
 		$project = $this->checkParams($params);
 		if (!$project) {
@@ -481,10 +484,6 @@ over it to the project's administrator.");
 		$snapshot = forge_get_config('scm_snapshots_path').'/'.$group_name.'-scm-latest.tar'.util_get_compressed_file_extension();
 		$tarball = forge_get_config('scm_tarballs_path').'/'.$group_name.'-scmroot.tar'.util_get_compressed_file_extension();
 
-		if (! $project->usesPlugin ($this->name)) {
-			return false;
-		}
-
 		if (! $project->enableAnonSCM()) {
 			if (file_exists ($snapshot)) unlink ($snapshot) ;
 			if (file_exists ($tarball)) unlink ($tarball) ;
@@ -524,6 +523,22 @@ over it to the project's administrator.");
 			copy ("$tmp/tarball", $tarball) ;
 			unlink ("$tmp/tarball") ;
 			system ("rm -rf $tmp") ;
+		}
+	}
+
+	function scm_admin_form(&$params) {
+		global $HTML;
+		$project = $this->checkParams($params);
+		if (!$project) {
+			return false;
+		}
+		session_require_perm('project_admin', $params['group_id']);
+
+		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
+			echo html_ao('div', array('id' => 'tabber-'.$this->name, 'class' => 'tabbertab'));
+		}
+		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
+			echo html_ac(html_ap() - 1);
 		}
 	}
 }

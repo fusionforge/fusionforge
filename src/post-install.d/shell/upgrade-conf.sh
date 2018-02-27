@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 # Upgrade NSS+PostgreSQL configuration
 #
 # Copyright (C) 2014  Inria (Sylvain Beucler)
@@ -18,11 +18,9 @@
 # with FusionForge; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-set -e
-
 PREVVER=${1:-0.0}
 
 # 5.3 -> 6.0
 if [ $(php -r "print version_compare('$PREVVER', '5.3.50');") -eq -1 ]; then
-    sed -i -e 's/\(#.*\)GForge/\1FusionForge/' /etc/nsswitch.conf
+	sed -i -e 's/\(#.*\)GForge/\1FusionForge/' /etc/nsswitch.conf
 fi

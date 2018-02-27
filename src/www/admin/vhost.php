@@ -43,7 +43,6 @@ session_require_global_perm ('forge_admin');
 if (getStringFromRequest('add')) {
 	$groupname = getStringFromRequest('groupname');
 	$vhost_name = getStringFromRequest('vhost_name');
-	//$group_id = getIntFromRequest('group_id');
 
 	if ($groupname) {
 
@@ -72,7 +71,7 @@ if (getStringFromRequest('add')) {
 			$group_id)) ;
 
 			if (!$res || db_affected_rows($res) < 1) {
-				$error_msg .= _('Error adding VHOST: ') .db_error();
+				$error_msg .= _('Error adding VHOST')._(': ').db_error();
 			} else {
 				$feedback .= _('Virtual Host').' '.$vhost_name._(' scheduled for creation on group ').$group->getUnixName();
 				$systasksq = new SysTasksQ();
@@ -90,6 +89,7 @@ if (getStringFromRequest('tweakcommit')) {
 	$vhostid = getIntFromRequest('vhostid');
 	$docdir = getStringFromRequest('docdir');
 	$cgidir = getStringFromRequest('cgidir');
+	$group_id = getIntFromRequest('group_id');
 
 	$res = db_query_params ('
 		UPDATE prweb_vhost
@@ -102,7 +102,7 @@ if (getStringFromRequest('tweakcommit')) {
 			$vhostid)) ;
 
 	if (!$res || db_affected_rows($res) < 1) {
-		$error_msg .= _('Error updating VHOST entry: ') .db_error();
+		$error_msg .= _('Error updating VHOST entry')._(': ').db_error();
 	} else {
 		$feedback .= _('Virtual Host entry updated.');
 		$systasksq = new SysTasksQ();
@@ -194,7 +194,8 @@ if (getStringFromRequest('tweak')) {
 			'.$HTML->listTableBottom().'
 
 			<input type="hidden" name="tweakcommit" value="1" />
-			<input type="hidden" name="vhostid" value="'.$row_vh['vhostid'].'" />';
+			<input type="hidden" name="vhostid" value="'.$row_vh['vhostid'].'" />
+			<input type="hidden" name="group_id" value="'.$row_vh['group_id'].'" />';
 		echo $HTML->closeForm();
 	} else {
 		echo $HTML->warning_msg(_('No such VHOST')._(': ').$vhost_name);

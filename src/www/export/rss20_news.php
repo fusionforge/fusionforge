@@ -95,7 +95,7 @@ ORDER BY post_date DESC',
 // ## item outputs
 while ($row = db_fetch_array($res)) {
 	// if news group, link is main page
-	if ($row['group_id'] != forge_get_config('news_group')) {
+	if ($row['group_id'] != GROUP_IS_NEWS) {
 		$link = util_make_url("/forum/forum.php?forum_id=".$row['forum_id']);
 	} else {
 		$link = util_make_url('/');

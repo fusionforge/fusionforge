@@ -3,6 +3,7 @@
  * SCM Frontend
  *
  * Copyright 2004 (c) Roland Mas, Tim Perdue GForge LLC
+ * Copyright 2018, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -63,7 +64,7 @@ if (getStringFromRequest('create_repository') && getStringFromRequest('submit'))
 	$hook_params['description'] = $description;
 	$hook_params['clone'] = $clone;
 	$hook_params['error_msg'] = '';
-	$hook_params['scm_enable_anonymous'] = getIntFromRequest('scm_enable_anonymous');
+	$hook_params['scm_plugin'] = getStringFromRequest('scm_plugin');
 	plugin_hook_by_reference('scm_add_repo', $hook_params);
 	if ($hook_params['error_msg']) {
 		$error_msg = $hook_params['error_msg'];
@@ -79,7 +80,7 @@ if (getStringFromRequest('create_repository') && getStringFromRequest('submit'))
 	$hook_params['group_id'] = $group_id;
 	$hook_params['repo_name'] = $repo_name;
 	$hook_params['error_msg'] = '';
-	$hook_params['scm_enable_anonymous'] = getIntFromRequest('scm_enable_anonymous');
+	$hook_params['scm_plugin_id'] = getIntFromRequest('scm_plugin_id');
 	plugin_hook_by_reference('scm_delete_repo', $hook_params);
 	if ($hook_params['error_msg']) {
 		$error_msg = $hook_params['error_msg'];
@@ -141,6 +142,25 @@ if (getStringFromRequest('create_repository') && getStringFromRequest('submit'))
 		// Don't call scm plugin update if their form wasn't displayed
 		// to avoid processing an apparently empty form and reset configuration
 		plugin_hook("scm_admin_update", $hook_params);
+} elseif (getStringFromRequest('scmhook_submit')) {
+	$hook_params = array();
+	$hook_params['group_id'] = $group_id;
+	$repos = getArrayFromRequest('repository', array());
+	foreach ($repos as $repo => $hook_elements) {
+		$hook_params['repository_name'] = $repo;
+		$hook_params['hooks'] = $hook_elements;
+		$hook_params['scm_plugin'] = getStringFromRequest('scm_plugin');
+		$hook_options = array();
+		foreach ($hook_elements as $hook_element) {
+			$hook_params['hooks']['options'] = array();
+			$options = getArrayFromRequest($hook_element, array());
+			if (isset($options[$repo])) {
+				$hook_params['hooks']['options'] = $options[$repo];
+			}
+		}
+		$scmhookPlugin = plugin_get_object('scmhook');
+		$scmhookPlugin->update($hook_params);
+	}
 }
 
 scm_header(array('title'=>_('SCM Repository'),'group'=>$group_id));
@@ -165,7 +185,7 @@ $hook_params['group_id'] = $group_id ;
 $SCMFactory = new SCMFactory();
 $scm_plugins = $SCMFactory->getSCMs();
 if (count($scm_plugins) != 0) {
-	echo $HTML->information(_('Note: Changing the repository does not delete the previous repository.  It only affects the information displayed under the SCM tab.'));
+	echo $HTML->information(_('Note: Changing the repository does not delete the previous repository. It only affects the information displayed under the SCM tab.'));
 	if (count($scm_plugins) == 1) {
 		$myPlugin = plugin_get_object($scm_plugins[0]);
 		echo html_e('input', array('type' => 'hidden', 'name' => 'scmengine[]', 'value' => $myPlugin->name));
@@ -182,6 +202,7 @@ if (count($scm_plugins) != 0) {
 					$inputAttr['type'] = 'radio';
 			}
 			if ($group->usesPlugin($myPlugin->name)) {
+				$scmPluginObjects[] = $myPlugin;
 				$scm = $myPlugin->name;
 				$inputAttr['checked'] = 'checked';
 			}
@@ -193,12 +214,29 @@ if (count($scm_plugins) != 0) {
 }
 
 (isset($scm)) ? $hook_params['scm_plugin'] = $scm : $hook_params['scm_plugin'] = 0;
-plugin_hook("scm_admin_page", $hook_params);
+$hook_params['allow_multiple_scm'] = forge_get_config('allow_multiple_scm');
+plugin_hook_by_reference("scm_admin_page", $hook_params);
 echo html_e('input', array('type' => 'hidden', 'name' => 'group_id', 'value' => $group_id));
 echo html_e('p', array(), html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Update'))));
 echo $HTML->closeForm();
 
+if (forge_get_config('allow_multiple_scm') && (count($scmPluginObjects) > 1)) {
+	$elementsLi = array();
+	foreach ($scmPluginObjects as $scmPluginObject) {
+		$elementsLi[] = array('content' => util_make_link('#tabber-'.$scmPluginObject->name, $scmPluginObject->text, false, true));
+	}
+	echo html_ao('div', array('id' => 'tabberid'));
+	echo $HTML->html_list($elementsLi);
+}
+
+$hook_params['allow_multiple_scm'] = count($scmPluginObjects);
 plugin_hook('scm_admin_form', $hook_params);
+
+if (forge_get_config('allow_multiple_scm') && (count($scmPluginObjects) > 1)) {
+	echo html_ac(html_ap() - 1);
+}
+
+echo html_e('script', array('type'=>'text/javascript'), '//<![CDATA['."\n".'jQuery("[id^=tabber]").tabs();'."\n".'//]]>');
 scm_footer();
 
 // Local Variables:

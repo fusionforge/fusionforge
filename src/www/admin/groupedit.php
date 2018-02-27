@@ -41,7 +41,7 @@ if (!$group || !is_object($group)) {
 	exit_error($group->getErrorMessage(),'admin');
 }
 
-// This function performs very update
+// This function performs every update
 function do_update(&$group, $is_template, $status, $unix_box, $http_domain, $scm_box='') {
 	global $feedback;
 	global $error_msg;

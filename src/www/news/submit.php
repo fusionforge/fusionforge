@@ -76,7 +76,7 @@ if (session_loggedin()) {
 		exit_permission_denied(_('You cannot submit news for a project unless you are an admin on that project.'), 'home');
 	}
 
-	if ($group_id == forge_get_config('news_group')) {
+	if ($group_id == GROUP_IS_NEWS) {
 		exit_permission_denied(_('Submitting news from the news group is not allowed.'), 'home');
 	}
 
@@ -116,12 +116,6 @@ if (session_loggedin()) {
 			form_release_key(getStringFromRequest('form_key'));
 			$error_msg = _('Error')._(': ')._('both subject and body are required.');
 		}
-	}
-
-	//news must now be submitted from a project page -
-
-	if (!$group_id) {
-		exit_no_group();
 	}
 
 	/*

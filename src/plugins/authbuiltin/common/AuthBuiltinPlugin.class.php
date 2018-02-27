@@ -66,7 +66,7 @@ class AuthBuiltinPlugin extends ForgeAuthPlugin {
 		$result = '';
 
 		$result .= html_e('p', array(), _('Cookies must be enabled past this point.'), false);
-		$result .= $HTML->openForm(array('action' => '/plugins/'.$this->name.'/post-login.php', 'method' => 'post'));
+		$result .= $HTML->openForm(array('action' => '/plugins/'.$this->name.'/post-login.php', 'method' => 'post'), true);
 		$result .= html_e('input', array('type' => 'hidden', 'name' => 'form_key', 'value' => form_generate_key()));
 		$result .= html_e('input', array('type' => 'hidden', 'name' => 'return_to', 'value' => $return_to));
 		$result .= html_ao('p');

@@ -46,6 +46,7 @@ page edits displayed on activity tab, and multi-project wiki preferences.");
 		$this->hooks[] = 'project_public_area';
 		$this->hooks[] = 'activity';
 		$this->hooks[] = 'site_admin_option_hook';
+		$this->hooks[] = 'crossrefurl';
 	}
 
 	function CallHook($hookname, &$params) {
@@ -139,6 +140,20 @@ page edits displayed on activity tab, and multi-project wiki preferences.");
 									html_image('ic/wiki20g.png', 20, 20, array('alt' => 'Wiki')).
 									'&nbsp;'.'Wiki');
 				$params['result'] .= '</div>';
+			}
+		} elseif ($hookname == 'crossrefurl') {
+			$project = group_get_object($params['group_id']);
+			if (!$project || !is_object($project)) {
+				return;
+			}
+			if ($project->isError()) {
+				return;
+			}
+			if ($project->usesPlugin($this->name) && isset($params['page'])) {
+				$params['url'] = '/wiki/g/'.$prj.'/'.rawurlencode($params['page']);
+				return true;
+			} else {
+				return;
 			}
 		} elseif ($hookname == 'activity') {
 			$group = group_get_object($params['group_id']);

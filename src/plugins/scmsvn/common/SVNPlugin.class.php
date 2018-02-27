@@ -5,7 +5,7 @@
  * Copyright 2003-2010, Roland Mas, Franck Villaume
  * Copyright 2004, GForge, LLC
  * Copyright 2010, Alain Peyrat <aljeux@free.fr>
- * Copyright 2012-2014,2016-2017, Franck Villaume - TrivialDev
+ * Copyright 2012-2014,2016-2018, Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of National Education
  *
  * This file is part of FusionForge.
@@ -37,7 +37,6 @@ forge_set_config_item_bool('use_dav', 'scmsvn');
 forge_define_config_item('use_ssl', 'scmsvn', true);
 forge_set_config_item_bool('use_ssl', 'scmsvn');
 forge_define_config_item('anonsvn_login','scmsvn', 'anonsvn');
-forge_define_config_item('anonsvn_password','scmsvn', 'anonsvn');
 forge_define_config_item('ssh_port', 'core', 22);
 
 class SVNPlugin extends SCMPlugin {
@@ -49,9 +48,9 @@ class SVNPlugin extends SCMPlugin {
 _("This plugin contains the Subversion subsystem of FusionForge. It allows
 each FusionForge project to have its own Subversion repository, and gives
 some control over it to the project's administrator.");
-		$this->svn_root_fs = forge_get_config('repos_path',
-											  $this->name);
+		$this->svn_root_fs = forge_get_config('repos_path', $this->name);
 		$this->svn_root_dav = '/svn';
+		$this->_addHook('scm_admin_form');
 		$this->_addHook('scm_browser_page');
 		$this->_addHook('scm_update_repolist');
 		$this->_addHook('scm_regen_apache_auth');
@@ -135,10 +134,8 @@ some control over it to the project's administrator.");
 	}
 
 	function getInstructionsForRW($project) {
-		$b = '';
-
 		$module = $this->topModule($project);
-		$b .= html_e('h2', array(), _('Developer Access'));
+		$b = html_e('h2', array(), _('Developer Access'));
 		$b .= sprintf(_('Only project developers can access the %s tree via this method.'), 'Subversion');
 		$b .= '<div id="tabber-svn">';
 		$b .= '<ul>';
@@ -165,7 +162,11 @@ some control over it to the project's administrator.");
 				if (forge_get_config('ssh_port') != 22) {
 					$ssh_port = '--config-option="config:tunnels:ssh=ssh -p '.forge_get_config('ssh_port').'" ';
 				}
-				$b .= '<p><span class="tt">svn '.$ssh_port.'checkout svn+ssh://'.$d.'@'.$this->getBoxForProject($project).$this->svn_root_fs .'/'. $project->getUnixName().$module.'</span></p>' ;
+				if (forge_get_config('use_shell_limited')) {
+					$b .= '<p><span class="tt">svn '.$ssh_port.'checkout svn+ssh://'.$d.'@'.$this->getBoxForProject($project).'/'.$project->getUnixName().$module.'</span></p>' ;
+				} else {
+					$b .= '<p><span class="tt">svn '.$ssh_port.'checkout svn+ssh://'.$d.'@'.$this->getBoxForProject($project).$this->svn_root_fs .'/'. $project->getUnixName().$module.'</span></p>' ;
+				}
 				$b .= '</div>';
 			}
 			if (forge_get_config('use_dav', 'scmsvn')) {
@@ -190,7 +191,11 @@ some control over it to the project's administrator.");
 				if (forge_get_config('ssh_port') != 22) {
 					$ssh_port = '--config-option="config:tunnels:ssh=ssh -p '.forge_get_config('ssh_port').'" ';
 				}
-				$b .= '<p><span class="tt">svn '.$ssh_port.'checkout svn+ssh://<i>'._('developername').'</i>@'.$this->getBoxForProject($project).$this->svn_root_fs .'/'.$project->getUnixName().$module.'</span></p>';
+				if (forge_get_config('use_shell_limited')) {
+					$b .= '<p><span class="tt">svn '.$ssh_port.'checkout svn+ssh://<i>'._('developername').'</i>@'.$this->getBoxForProject($project).'/'.$project->getUnixName().$module.'</span></p>';
+				} else {
+					$b .= '<p><span class="tt">svn '.$ssh_port.'checkout svn+ssh://<i>'._('developername').'</i>@'.$this->getBoxForProject($project).$this->svn_root_fs .'/'.$project->getUnixName().$module.'</span></p>';
+				}
 				$b .= '</div>';
 			}
 			if (forge_get_config('use_dav', 'scmsvn')) {
@@ -209,7 +214,12 @@ some control over it to the project's administrator.");
 	}
 
 	function getSnapshotPara($project) {
-		return;
+		$b = '';
+		$filename = $project->getUnixName().'-scm-latest.tar'.util_get_compressed_file_extension();
+		if (file_exists(forge_get_config('scm_snapshots_path').'/'.$filename)) {
+			$b .= html_e('p', array(), '['.util_make_link("/snapshots.php?group_id=".$project->getID(), _('Download the nightly snapshot')).']');
+		}
+		return $b;
 	}
 
 	function getBrowserLinkBlock($project) {
@@ -220,7 +230,7 @@ some control over it to the project's administrator.");
 		$b .= _('You may also view the complete histories of any file in the repository.');
 		$b .= '</p>';
 		$b .= '<p>[' ;
-		$b .= util_make_link ("/scm/browser.php?group_id=".$project->getID(),
+		$b .= util_make_link ("/scm/browser.php?group_id=".$project->getID().'&scm_plugin='.$this->name,
 								sprintf(_('Browse %s Repository'), 'Subversion')
 		) ;
 		$b .= ']</p>' ;
@@ -269,6 +279,9 @@ some control over it to the project's administrator.");
 	}
 
 	function printBrowserPage($params) {
+		if ($params['scm_plugin'] != $this->name) {
+			return;
+		}
 		global $HTML;
 		$useautoheight = 0;
 		$project = $this->checkParams($params);
@@ -510,10 +523,6 @@ some control over it to the project's administrator.");
 		$snapshot = forge_get_config('scm_snapshots_path').'/'.$group_name.'-scm-latest.tar'.util_get_compressed_file_extension();
 		$tarball = forge_get_config('scm_tarballs_path').'/'.$group_name.'-scmroot.tar'.util_get_compressed_file_extension();
 
-		if (!$project->usesPlugin($this->name)) {
-			return false;
-		}
-
 		if (!$project->enableAnonSCM()) {
 			if (is_file($snapshot)) {
 				unlink($snapshot);
@@ -642,7 +651,7 @@ some control over it to the project's administrator.");
 					$result = array();
 					$result['section'] = 'scm';
 					$result['group_id'] = $project->getID();
-					$result['ref_id'] = 'browser.php?group_id='.$project->getID();
+					$result['ref_id'] = 'browser.php?group_id='.$project->getID().'&scm_plugin='.$this->name;
 					$result['description'] = htmlspecialchars($message).' (r'.$revisions[$i].')';
 					$userObject = user_get_object_by_name($users[$i]);
 					if (is_a($userObject, 'FFUser')) {
@@ -657,7 +666,7 @@ some control over it to the project's administrator.");
 				}
 			}
 		}
-		if (!in_array($this->name, $params['ids'])) {
+		if (!in_array($this->name, $params['ids']) && ($project->enableAnonSCM() || session_loggedin())) {
 			$params['ids'][] = $this->name;
 			$params['texts'][] = _('Subversion Commits');
 		}
@@ -864,6 +873,26 @@ some control over it to the project's administrator.");
 											 $rdata['rid'],
 											 $t));
 			}
+		}
+	}
+
+	function scm_admin_form(&$params) {
+		global $HTML;
+		$project = $this->checkParams($params);
+		if (!$project) {
+			return false;
+		}
+		session_require_perm('project_admin', $params['group_id']);
+
+		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
+			echo html_ao('div', array('id' => 'tabber-'.$this->name, 'class' => 'tabbertab'));
+		}
+		if ($project->usesPlugin('scmhook')) {
+			$scmhookPlugin = plugin_get_object('scmhook');
+			$scmhookPlugin->displayScmHook($project->getID(), $this->name);
+		}
+		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
+			echo html_ac(html_ap() - 1);
 		}
 	}
 }

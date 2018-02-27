@@ -4,7 +4,7 @@
  *
  * Copyright 2004-2009, Roland Mas
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012,2014,2017, Franck Villaume - TrivialDev
+ * Copyright 2012,2014,2017-2018, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -196,6 +196,9 @@ abstract class SCMPlugin extends Plugin {
 		}
 
 		session_require_perm('scm', $project->getID(), 'read');
+		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
+			echo html_ao('div', array('id' => 'tabber-'.$this->name, 'class' => 'tabbertab'));
+		}
 		// Table for summary info
 		echo $HTML->listTableTop();
 		$cells = array();
@@ -231,6 +234,9 @@ abstract class SCMPlugin extends Plugin {
 		$cells[] = array($cellContent, 'style' => 'width:35%', 'class' => 'top');
 		echo $HTML->multiTableRow(array('class' => 'top'), $cells);
 		echo $HTML->listTableBottom();
+		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
+			echo html_ac(html_ap() - 1);
+		}
 	}
 
 	function printBrowserPage($params) {
@@ -244,14 +250,18 @@ abstract class SCMPlugin extends Plugin {
 		}
 	}
 
-	function printAdminPage($params) {
+	function printAdminPage(&$params) {
 		$group = $this->checkParams($params);
 		if (!$group) {
 			return;
 		}
 
 		$ra = RoleAnonymous::getInstance();
-		if ($ra->hasPermission('project_read', $group->getID())) {
+		// $params is passed by reference. This hack limits the display of the anonymous information if project is using multiple scm plugins.
+		if ($ra->hasPermission('project_read', $group->getID()) && !isset($params['anonymous_display'])) {
+			if ($params['allow_multiple_scm']) {
+				$params['anonymous_display'] = true;
+			}
 			$inputAttr = array('type' => 'checkbox', 'name' => 'scm_enable_anonymous', 'value' => 1);
 			if ($group->enableAnonSCM()) {
 				$inputAttr['checked'] = 'checked';
@@ -284,6 +294,9 @@ abstract class SCMPlugin extends Plugin {
 	}
 
 	function scm_delete_repo(&$params) {
+		if ($params['scm_plugin_id'] != $this->getID()) {
+			return;
+		}
 		$project = $this->checkParams($params);
 		if (!$project) {
 			return false;
@@ -316,7 +329,6 @@ abstract class SCMPlugin extends Plugin {
 			return false;
 		}
 
-		plugin_hook("scm_admin_update", $params);
 		return true;
 	}
 
@@ -334,6 +346,14 @@ abstract class SCMPlugin extends Plugin {
 		}
 
 		return $project;
+	}
+
+	function getRepositories($group, $autoinclude = true) {
+		$repoarr = array();
+		if ($autoinclude) {
+			$repoarr[] = $group->getUnixName();
+		}
+		return $repoarr;
 	}
 }
 

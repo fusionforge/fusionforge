@@ -77,4 +77,4 @@ function execute($cmd) {
 	return $res;
 }
 
-cron_entry(31, $err);
+cron_entry('FTP_ACCESS', $err);

@@ -145,6 +145,8 @@ if (!isset($fusionforge_plugin_mediawiki_LocalSettings_included)) {
 	} else {
 		$wgDefaultSkin = 'fusionforge';
 	}
+	// disable other skins. It breaks FusionForge displays.
+	$wgSkipSkins = array( "cologneblue", "monobook", "modern", "vector" );
 
 	$wgHtml5 = false;
 	$wgWellFormedXml = true;
@@ -315,6 +317,9 @@ if (!isset($fusionforge_plugin_mediawiki_LocalSettings_included)) {
 
 			// Read access
 			$wgGroupPermissions[$gr]['read'] = $r->hasPermission ('plugin_mediawiki_read', $g->getID()) ;
+
+			// Force user edit Preferences.
+			$wgGroupPermissions['user']['editmyoptions'] = true;
 
 			// Day-to-day edit privileges
 			$wgGroupPermissions[$gr]['edit']               = $r->hasPermission ('plugin_mediawiki_edit', $g->getID(), 'editexisting') ;

@@ -44,7 +44,7 @@ $details = getHtmlTextFromRequest('details');
 $id = getIntFromRequest('id');
 $for_group = getIntFromRequest('for_group');
 
-if ($group_id && $group_id != forge_get_config('news_group')) {
+if ($group_id && $group_id != GROUP_IS_NEWS) {
 	session_require_perm ('project_admin', $group_id) ;
 
 	$status = getIntFromRequest('status');

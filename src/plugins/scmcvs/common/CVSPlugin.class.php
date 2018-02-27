@@ -37,9 +37,10 @@ class CVSPlugin extends SCMPlugin {
 _("This plugin contains the CVS subsystem of FusionForge. It allows each
 FusionForge project to have its own CVS repository, and gives some control
 over it to the project's administrator.");
-		$this->hooks[] = 'scm_browser_page';
-		$this->hooks[] = 'scm_generate_snapshots';
-		$this->hooks[] = 'scm_gather_stats';
+		$this->_addHook('scm_admin_form');
+		$this->_addHook('scm_browser_page');
+		$this->_addHook('scm_generate_snapshots');
+		$this->_addHook('scm_gather_stats');
 
 		$this->provides['cvs'] = true;
 
@@ -135,8 +136,7 @@ over it to the project's administrator.");
 		return $b ;
 	}
 
-	function getSnapshotPara ($project) {
-
+	function getSnapshotPara($project) {
 		$b = "" ;
 		$filename = $project->getUnixName().'-scm-latest.tar'.util_get_compressed_file_extension();
 		if (file_exists(forge_get_config('scm_snapshots_path').'/'.$filename)) {
@@ -157,7 +157,7 @@ over it to the project's administrator.");
 		$b .= _('You may also view the complete histories of any file in the repository.');
 		$b .= '</p>';
 		$b .= '<p>[' ;
-		$b .= util_make_link ("/scm/browser.php?group_id=".$project->getID(),
+		$b .= util_make_link ("/scm/browser.php?group_id=".$project->getID().'&scm_plugin='.$this->name,
 								sprintf(_('Browse %s Repository'), 'CVS')
 			) ;
 		$b .= ']</p>' ;
@@ -206,6 +206,9 @@ over it to the project's administrator.");
 	}
 
 	function printBrowserPage ($params) {
+		if ($params['scm_plugin'] != $this->name) {
+			return;
+		}
 		$project = $this->checkParams ($params) ;
 		if (!$project) {
 			return;
@@ -499,7 +502,27 @@ over it to the project's administrator.");
 			system ("rm -rf $tmp") ;
 		}
 	}
-  }
+
+	function scm_admin_form(&$params) {
+		global $HTML;
+		$project = $this->checkParams($params);
+		if (!$project) {
+			return false;
+		}
+		session_require_perm('project_admin', $params['group_id']);
+
+		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
+			echo html_ao('div', array('id' => 'tabber-'.$this->name, 'class' => 'tabbertab'));
+		}
+		if ($project->usesPlugin('scmhook')) {
+			$scmhookPlugin = plugin_get_object('scmhook');
+			$scmhookPlugin->displayScmHook($project->getID(), $this->name);
+		}
+		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
+			echo html_ac(html_ap() - 1);
+		}
+	}
+}
 
 // Local Variables:
 // mode: php

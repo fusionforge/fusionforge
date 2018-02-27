@@ -1,7 +1,7 @@
 # FusionForge build system
 #
 # Copyright (C) 2014, 2015  Inria (Sylvain Beucler)
-# Copyright 2017, Franck Villaume - TrivialDev
+# Copyright 2017-2018, Franck Villaume - TrivialDev
 #
 # This file is part of FusionForge. FusionForge is free software;
 # you can redistribute it and/or modify it under the terms of the
@@ -130,6 +130,8 @@ install-scm: install-base-dirs
 	fi
 
 install-shell: install-base-dirs
+	$(INSTALL) -d -m 00755 $(DESTDIR)$(bindir)
+	ln -nfs $(pkgdatadir)/bin/limited_ssh.sh $(DESTDIR)$(bindir)
 	$(CP_R) cronjobs/shell $(DESTDIR)$(pkgdatadir)/cronjobs/
 	$(CP_R) post-install.d/shell $(DESTDIR)$(pkgdatadir)/post-install.d/
 
@@ -259,5 +261,17 @@ dist: all
 	tar cjf $(TAR_PREFIX).tar.bz2 $(TAR_PREFIX)/
 	rm -rf $(TAR_PREFIX)/
 
+dist-src-release:
+	rm -rf $(TAR_PREFIX)/
+	mkdir -p $(TAR_PREFIX)/{src,autoinstall}
+	$(CP_R) $$(ls -A | grep -v '^\.git' | grep -v $(TAR_PREFIX)) $(TAR_PREFIX)/src/
+	$(CP_R) ../autoinstall/* $(TAR_PREFIX)/autoinstall/
+	find $(TAR_PREFIX)/ -name '*~' -print0 | xargs -r0 rm
+	find $(TAR_PREFIX)/ -type d -print0 | xargs -r0 chmod g-s  # rpmlint non-standard-dir-perm
+	rm -f $(TAR_PREFIX)/src/debian/control $(TAR_PREFIX)/src/fusionforge.spec
+	echo $(VERSION) > $(TAR_PREFIX)/src/VERSION  # if using e.g. make dist VERSION=5.3.50+20141027
+	tar cjf $(TAR_PREFIX).tar.bz2 $(TAR_PREFIX)/
+	rm -rf $(TAR_PREFIX)/
+	
 version:
 	@echo $(VERSION)

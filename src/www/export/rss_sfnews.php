@@ -97,7 +97,7 @@ while ($row = db_fetch_array($res)) {
 	print "\n <item rdf:about=\"".util_make_url ('/forum/forum.php?forum_id='.$row['forum_id'])."\">\n";
 	print "   <title>".htmlspecialchars($row['summary'])."</title>\n";
 	// if news group, link is main page
-	if ($row['group_id'] != forge_get_config('news_group')) {
+	if ($row['group_id'] != GROUP_IS_NEWS) {
 		print "   <link>".util_make_url ('/forum/forum.php?forum_id='.$row['forum_id'])."</link>\n";
 	} else {
 		print "   <link>".util_make_url ('/')."</link>\n";

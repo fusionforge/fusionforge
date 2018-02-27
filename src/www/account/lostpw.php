@@ -80,7 +80,7 @@ if (getStringFromRequest('submit')) {
 	}
 }
 
-$HTML->header(array('title'=>"Lost Account Password"));
+$HTML->header(array('title'=> _('Lost Account Password')));
 
 echo '<p>' . _('Hey... losing your password is serious business. It compromises the security of your account, your projects, and this site.') . '</p>';
 echo '<p>' . _('Clicking “Send Lost PW Hash” below will email a URL to the email address we have on file for you. In this URL is a 128-bit confirmation hash for your account. Visiting the URL will allow you to change your password online and login.') . '</p>';
@@ -90,7 +90,7 @@ echo $HTML->openForm(array('action' => '/account/lostpw.php', 'method' => 'post'
 <?php echo _('Login Name')._(':'); ?>
 <br />
     <label for="loginname">
-        <input id="loginname" type="text" name="loginname"/>
+        <input id="loginname" type="text" name="loginname" required="required" />
     </label>
     <br />
 <input type="submit" name="submit" value="<?php echo _('Send Lost PW Hash'); ?>" />

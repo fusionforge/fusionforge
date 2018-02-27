@@ -163,7 +163,7 @@ over it to the project's administrator.");
 		$repo_names = $this->getRepositories($project);
 		if (count($repo_names) > 0) {
 			foreach ($repo_names as $repo_name) {
-				$b .= html_e('p', array(), '['.util_make_link('/scm/browser.php?group_id='.$project->getID()."&repo_name=".$repo_name,
+				$b .= html_e('p', array(), '['.util_make_link('/scm/browser.php?group_id='.$project->getID()."&repo_name=".$repo_name.'&scm_plugin='.$this->name,
 									_('Browse Darcs repository').' '.$repo_name).']');
 			}
 		} else {
@@ -229,6 +229,9 @@ over it to the project's administrator.");
 	}
 
 	function printBrowserPage($params) {
+		if ($params['scm_plugin'] != $this->name) {
+			return;
+		}
 		$project = $this->checkParams($params);
 		if (!$project) {
 			return;
@@ -641,6 +644,21 @@ over it to the project's administrator.");
 		}
 	}
 
+	function scm_admin_form(&$params) {
+		global $HTML;
+		$project = $this->checkParams($params);
+		if (!$project) {
+			return false;
+		}
+		session_require_perm('project_admin', $params['group_id']);
+
+		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
+			echo html_ao('div', array('id' => 'tabber-'.$this->name, 'class' => 'tabbertab'));
+		}
+		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
+			echo html_ac(html_ap() - 1);
+		}
+	}
 }
 
 function DarcsPluginStartElement($parser, $name, $attrs) {

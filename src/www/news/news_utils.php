@@ -40,7 +40,7 @@ function news_header($params) {
 	$params['toptab'] = 'news';
 	$params['group'] = $group_id;
 
-	if ($group_id && ($group_id != forge_get_config('news_group'))) {
+	if ($group_id && ($group_id != GROUP_IS_NEWS)) {
 		$menu_texts=array();
 		$menu_links=array();
 
@@ -62,7 +62,7 @@ function news_header($params) {
 	/*
 		Show horizontal links
 	*/
-	if ($group_id && ($group_id != forge_get_config('news_group'))) {
+	if ($group_id && ($group_id != GROUP_IS_NEWS)) {
 		site_project_header($params);
 	} else {
 		site_header($params);
@@ -77,7 +77,7 @@ function news_footer($params = array()) {
 /**
  * Display latest news for frontpage or news page.
  *
- * @param int  $group_id group_id of the news (forge_get_config('news_group') used if none given)
+ * @param int  $group_id group_id of the news (GROUP_IS_NEWS used if none given)
  * @param int  $limit number of news to display (default: 10)
  * @param bool $show_summaries (default: true)
  * @param bool $allow_submit (default: true)
@@ -89,7 +89,7 @@ function news_footer($params = array()) {
 function news_show_latest($group_id = 0, $limit = 10, $show_summaries = true, $allow_submit = true, $flat = false, $tail_headlines = 0, $show_forum = true) {
 	global $HTML;
 	if (!$group_id) {
-		$group_id=forge_get_config('news_group');
+		$group_id = GROUP_IS_NEWS;
 	}
 	/*
 		Show a simple list of the latest news items with a link to the forum
@@ -100,22 +100,22 @@ function news_show_latest($group_id = 0, $limit = 10, $show_summaries = true, $a
 		$l = $limit + $tail_headlines;
 	}
 	$result = db_query_params ('
-SELECT groups.group_name, groups.unix_group_name, groups.group_id,
-       users.user_name, users.realname, users.user_id,
-       news_bytes.forum_id, news_bytes.summary, news_bytes.post_date,
-       news_bytes.details
-FROM users,news_bytes,groups
-WHERE (news_bytes.group_id=$1 AND news_bytes.is_approved <> 4 OR 1!=$2)
-  AND (news_bytes.is_approved=1 OR 1 != $3)
-  AND users.user_id=news_bytes.submitted_by
-  AND news_bytes.group_id=groups.group_id
-  AND groups.status=$4
-ORDER BY post_date DESC',
-				   array ($group_id,
-					  $group_id != forge_get_config('news_group') ? 1 : 0,
-					  $group_id != forge_get_config('news_group') ? 0 : 1,
-					  'A'),
-				   $l);
+				SELECT groups.group_name, groups.unix_group_name, groups.group_id,
+				users.user_name, users.realname, users.user_id,
+				news_bytes.forum_id, news_bytes.summary, news_bytes.post_date,
+				news_bytes.details
+				FROM users,news_bytes,groups
+				WHERE (news_bytes.group_id=$1 AND news_bytes.is_approved <> 4 OR 1!=$2)
+				AND (news_bytes.is_approved=1 OR 1 != $3)
+				AND users.user_id=news_bytes.submitted_by
+				AND news_bytes.group_id=groups.group_id
+				AND groups.status=$4
+				ORDER BY post_date DESC',
+				array ($group_id,
+					$group_id != GROUP_IS_NEWS ? 1 : 0,
+					$group_id != GROUP_IS_NEWS ? 0 : 1,
+					'A'),
+					$l);
 	$rows=db_numrows($result);
 
 	$return = '';
@@ -207,7 +207,7 @@ ORDER BY post_date DESC',
 			$return .= "\n\n";
 		}
 
-		if ($group_id != forge_get_config('news_group')) {
+		if ($group_id != GROUP_IS_NEWS) {
 			$archive_url = '/news/?group_id='.$group_id;
 		} else {
 			$archive_url = '/news/';
@@ -220,7 +220,7 @@ ORDER BY post_date DESC',
 			}
 		}
 	}
-	if ($allow_submit && $group_id != forge_get_config('news_group')) {
+	if ($allow_submit && $group_id != GROUP_IS_NEWS) {
 		if(!$result || $rows < 1) {
 			$return .= '';
 		}

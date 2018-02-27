@@ -1247,6 +1247,9 @@ class FFUser extends FFError {
 		$fingerprint = $returnExecExploded[1];
 		$now = time();
 		$explodedKey = explode(' ', $key);
+		if (forge_get_config('use_shell_limited')) {
+			$key = preg_replace("/^.*ssh-/", "command=\"".forge_get_config('bin_dir')."/limited_ssh.sh\" ssh-", $key);
+		}
 		$existingKeys = $this->getAuthorizedKeys();
 		foreach ($existingKeys as $existingKey) {
 			if ($existingKey['fingerprint'] == $fingerprint) {
@@ -1783,7 +1786,7 @@ Email: %3$s
 	 */
 	function setUneditable($data) {
 		if (!is_array($data)) {
-			$this->setError('Error: Cannot Update list of uneditable fields: not an array');
+			$this->setError(_('Error')._(': ')._('Cannot Update list of uneditable fields: not an array'));
 			return false;
 		}
 
@@ -1791,7 +1794,7 @@ Email: %3$s
 		$sql = 'UPDATE users SET uneditable = $1 WHERE user_id = $2';
 		$res = db_query_params($sql, array($serializedData, $this->getID()));
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError('Error: Cannot Update list of uneditable fields: '.db_error());
+			$this->setError(_('Error')._(': ')._('Cannot Update list of uneditable fields')._(': ').db_error());
 			return false;
 		}
 		$this->data_array['uneditable'] = $serializedData;
@@ -1806,7 +1809,7 @@ Email: %3$s
 	 */
 	function setHidden($data) {
 		if (!is_array($data)) {
-			$this->setError('Error: Cannot Update list of hidden fields: not an array');
+			$this->setError(_('Error')._(': ')._('Cannot Update list of hidden fields: not an array'));
 			return false;
 		}
 
@@ -1814,7 +1817,7 @@ Email: %3$s
 		$sql = 'UPDATE users SET hidden = $1 WHERE user_id = $2';
 		$res = db_query_params($sql, array($serializedData, $this->getID()));
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError('Error: Cannot Update list of hidden fields: '.db_error());
+			$this->setError(_('Error')._(': ')._('Cannot Update list of hidden fields')._(': ').db_error());
 			return false;
 		}
 		$this->data_array['hidden'] = $serializedData;

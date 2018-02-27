@@ -61,8 +61,9 @@ if (!$u || !is_object($u)) {
 
 if (getStringFromRequest("submit")) {
 
-	if (strlen($passwd)<8) {
-		exit_error(_('You must supply valid password (at least 8 characters).'),'my');
+	if (strlen($passwd) < 8) {
+		$message = _('You must supply valid password (at least 8 characters).').(forge_get_config('check_password_strength') ? html_e('br')._('Must contain at least one uppercase letter, one lowercase, one digit, one non-alphanumeric character.') : '');
+		exit_error($message, 'my');
 	}
 
 	if ($passwd != $passwd2) {
@@ -73,9 +74,8 @@ if (getStringFromRequest("submit")) {
 
 		// Invalidate confirm hash
 		$u->setNewEmailAndHash('', 0);
-
-		$HTML->header(array('title'=>"Password changed"));
-		print '<h2>' . _('Password changed') . '</h2>';
+		$feedback = _('Password changed successfully');
+		$HTML->header(array('title' => _('Lost Account Password')));
 		print '<p>';
 		printf (_('Congratulations, you have re-set your account password. You may <a href="%s">login</a> to the site now.'),
 			  util_make_url ("/account/login.php"));
@@ -92,8 +92,7 @@ $HTML->header(array('title'=>$title));
 echo html_e('p', array(), sprintf(_('Welcome, %s. You may now change your password.'),$u->getUnixName()));
 echo $HTML->openForm(array('action' => '/account/lostlogin.php', 'method' => 'post'));
 ?>
-<p><?php echo _('New Password (at least 8 characters)')._(':'); ?>
-<br />
+<p><?php echo _('New Password (at least 8 characters)')._(':').html_e('br').(forge_get_config('check_password_strength') ? _('Must contain at least one uppercase letter, one lowercase, one digit, one non-alphanumeric character.').html_e('br') : ''); ?>
 <label for="passwd">
 	<input id="passwd" type="password" name="passwd"/>
 </label>

@@ -202,12 +202,11 @@ class Forum extends FFError {
 		// news.  The news/submit.php checks for proper permissions.
 		// This needs to be revisited.
 
-		if ($this->Group->getID() == forge_get_config('news_group')) {
+		if ($this->Group->getID() == GROUP_IS_NEWS) {
 			// Future check will be added.
 
 		} else {
 			// Current permissions check.
-
 			if (!forge_check_perm ('forum_admin', $this->Group->getID())) {
 				$this->setPermissionDeniedError();
 				return false;

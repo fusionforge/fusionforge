@@ -28,13 +28,11 @@ class SCMFactory extends FFError {
 	/**
 	 * The scms array.
 	 *
-	 * @var  array  scms.
+	 * @var	array	scms.
 	 */
 	var $scms;
-	var $fetched_rows;
 
 	function __construct() {
-
 		parent::__construct();
 		if (!forge_get_config('use_scm')) {
 			$this->setError('SCMFactory::sys_use_scm');
@@ -42,9 +40,9 @@ class SCMFactory extends FFError {
 	}
 
 	/**
-	 *	getSCMs - get an array of Plugin SCM objects.
+	 *	getSCMs - get an array of Plugin SCM names.
 	 *
-	 *	@return	array	The array of SCM objects.
+	 *	@return	array	The array of plugin SCM names.
 	 */
 	function &getSCMs() {
 		$scm_plugins = array();
