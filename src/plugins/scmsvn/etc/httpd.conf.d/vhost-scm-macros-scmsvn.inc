@@ -1,7 +1,7 @@
-<Macro ScmsvnUser $user_auth $project_auth $repo_auth>
-<Location /authscm/$user_auth/svn/$project_auth/$repo_auth>
+<Macro ScmsvnUser $user>
+<Location /authscm/$user/svn>
   DAV svn
-  SVNPath ${FF__scmsvn__repos_path}/$project_auth.svn/$repo_auth
+  SVNParentPath ${FF__scmsvn__repos_path}
   # Note: ^ this need to be in the macro, doesn't work in a LocationMatch
   # This is pretty annoying, because this requires a plugin-specific macro :/
   # <LocationMatch /authscm/[^/]+/svn>

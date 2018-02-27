@@ -36,7 +36,6 @@ forge_define_config_item('use_dav', 'scmsvn', true);
 forge_set_config_item_bool('use_dav', 'scmsvn');
 forge_define_config_item('use_ssl', 'scmsvn', true);
 forge_set_config_item_bool('use_ssl', 'scmsvn');
-forge_define_config_item('anonsvn_login','scmsvn', 'anonsvn');
 forge_define_config_item('ssh_port', 'core', 22);
 
 class SVNPlugin extends SCMPlugin {
@@ -457,37 +456,17 @@ some control over it to the project's administrator.");
 
 	function regenApacheAuth(&$params) {
 		# Enable /authscm/$user/svn URLs
-		$config_fname_auth = forge_get_config('data_path').'/scmsvn-auth.inc';
-		$config_f_auth = fopen($config_fname_auth.'.new', 'w');
+		$config_fname = forge_get_config('data_path').'/scmsvn-auth.inc';
+		$config_f = fopen($config_fname.'.new', 'w');
 
-		$res = db_query_params('SELECT unix_group_name, group_id FROM groups WHERE status = $1 and type_id = $2 and is_template =$3 and register_time > 0',
-					array('A', 1, 0));
-
+		$res = db_query_params("SELECT login FROM nss_passwd WHERE status=$1", array('A'));
 		while ($arr = db_fetch_array($res)) {
-			$groupObject = group_get_object($arr['group_id']);
-			if ($groupObject->usesPlugin($this->name)) {
-				$users = $groupObject->getUsers();
-				$repo_list = array();
-				$repo_list[] = $arr['unix_group_name'];
-				$result = db_query_params('SELECT repo_name FROM scm_secondary_repos WHERE group_id=$1 AND next_action = $2 AND plugin_id=$3 ORDER BY repo_name',
-					array($arr['group_id'], SCM_EXTRA_REPO_ACTION_UPDATE, $this->getID()));
-				$rows = db_numrows($result);
-				for ($i = 0; $i < $rows; $i++) {
-					$repo_list[] = db_result($result, $i, 'repo_name');
-				}
-				foreach ($repo_list as $repo_name) {
-					foreach ($users as $user) {
-						if (forge_check_perm_for_user($user, 'scm', $arr['group_id'], 'write')) {
-							fwrite($config_f_auth, 'Use ScmsvnUser '.$user->getUnixName().' '.$arr['unix_group_name'].' '.$repo_name."\n");
-						}
-					}
-				}
-			}
+			fwrite($config_f, 'Use ScmsvnUser '.$arr['login']."\n");
 		}
 
-		fclose($config_f_auth);
-		chmod($config_fname_auth.'.new', 0644);
-		rename($config_fname_auth.'.new', $config_fname_auth);
+		fclose($config_f);
+		chmod($config_fname.'.new', 0644);
+		rename($config_fname.'.new', $config_fname);
 	}
 
 	function gatherStats($params) {
