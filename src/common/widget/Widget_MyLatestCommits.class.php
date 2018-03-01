@@ -3,7 +3,7 @@
  * Widget_MyLatestCommits
  *
  * Copyright (c) Xerox Corporation, Codendi 2001-2009 - marc.nazarian@xrce.xerox.com
- * Copyright 2014 Franck Villaume - TrivialDev
+ * Copyright 2014, 2018, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -47,7 +47,7 @@ class Widget_MyLatestCommits extends Widget {
 	}
 
 	public function _getLinkToCommit($project, $commit_id, $pluginName) {
-		return util_make_link('/scm/browser.php?group_id='.$project->getID().'&commit='.$commit_id, _('commit')._(': ').$commit_id);
+		return util_make_link('/scm/browser.php?group_id='.$project->getID().'&scm_plugin='.$pluginName.'&commit='.$commit_id, _('commit')._(': ').$commit_id);
 	}
 
 	public function getContent() {
