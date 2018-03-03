@@ -1,7 +1,7 @@
 <?php
 /**
- * Move SVN repos to the new structure to support multi SVN repositories
- * Copyright, 2016, Franck Villaume - TrivialDev
+ * Move Hg repos to the new structure to support multi Hg repositories
+ * Copyright, 2018, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
