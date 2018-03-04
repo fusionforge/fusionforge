@@ -25,6 +25,7 @@ require_once dirname(__FILE__).'/../common/include/env.inc.php';
 require_once $gfcommon.'include/pre.php';
 
 $hg_root = forge_get_config('repos_path', 'scmhg');
+$hgweb = forge_get_config('source_path').'/plugins/scmhg/cgi-bin/hgweb.cgi';
 if (is_dir($hg_root) && ($hg_opendir = opendir($hg_root))) {
 	while (($hg_repodir = readdir($hg_opendir)) !== false) {
 		$keep = true;
@@ -36,18 +37,35 @@ if (is_dir($hg_root) && ($hg_opendir = opendir($hg_root))) {
 		if ($keep && is_dir($hg_root.'/'.$hg_repodir.'/.hg')) {
 			if (mkdir($hg_root.'/'.$hg_repodir.'/'.$hg_repodir)) {
 				if (!rename($hg_root.'/'.$hg_repodir.'/.hg', $hg_root.'/'.$hg_repodir.'/'.$hg_repodir.'/.hg')) {
-					echo "UNABLE TO MOVE TO FINAL DESTINATION REPO: ".$hg_repodir."\n";
+					echo 'UNABLE TO MOVE TO FINAL DESTINATION REPO: '.$hg_repodir."\n";
 				}
 			} else {
-				echo "UNABLE TO CREATE TARGET DIR FOR REPO: ".$hg_repodir."\n";
+				echo 'UNABLE TO CREATE TARGET DIR FOR REPO: '.$hg_repodir."\n";
 			}
-			if (!is_file("$hg_root/$hg_repodir/config")) {
-				$f = fopen("$hg_root/$hg_repodirconfig", 'w');
-				$conf = "[paths]\n";
+			if (!is_file($hg_root.'/'.$hg_repodir.'/config')) {
+				$f = fopen($hg_root.'/'.$hg_repodir.'/config', 'w');
+				$conf = '[paths]'."\n";
 				$conf .= '/ = '.$hg_root.'/'.$hg_repodir.'/*'."\n";
 				fwrite($f, $conf);
 				fclose($f);
 			}
+			$project_hgweb = forge_get_config('source_path').'/www/plugins/scmhg/cgi-bin/'.$hg_repodir;
+			$lines = file($hgweb);
+			$repo_config = "";
+			foreach ($lines as $line) {
+				if (preg_match("/\Aconfig = /",$line)) {
+					$repo_config .= 'config = "'.$hg_root.'/'.$hg_repodir.'/config"'."\n";
+				} else {
+					$repo_config .= $line;
+				}
+			}
+			$f = fopen($project_hgweb, 'w');
+			fwrite($f, $repo_config);
+			fclose($f);
+			$apache_user = forge_get_config('apache_user');
+			$apache_group = forge_get_config('apache_group');
+			system("chown $apache_user:$apache_group $project_hgweb");
+			system("chmod 755 $project_hgweb");
 		}
 	}
 }
