@@ -631,7 +631,7 @@ class TaskBoard extends FFError {
 				$efd = $story ->getExtraFieldData();
 				$stories[$story->getID()]['order'] = $efd[$user_stories_sort_extra_field_id];
 			} else {
-				//sort by GF priority if another field for sorting is not defined
+				//sort by FF priority if another field for sorting is not defined
 				$stories[$story->getID()]['order'] = $stories[$story->getID()]['priority'];
 			}
 
@@ -761,7 +761,7 @@ class TaskBoard extends FFError {
 		$ret['id'] = $task->getID();
 		$ret['title'] = $task->getSummary();
 		$ret['description'] = str_replace("\n", '<br>', util_gen_cross_ref($task->getDetails(),$this->Group->getID()) );
-		$ret['assigned_to'] = $task->getAssignedRealName();
+		$ret['assigned_to'] = util_display_user($task->getAssignedUnixName(), $task->getAssignedTo(), $task->getAssignedRealName());
 		$ret['priority'] = $task->getPriority();
 		foreach( $ef_mapping as $k => $f){
 			$ret[$k] = '';
@@ -778,14 +778,6 @@ class TaskBoard extends FFError {
 		}
 
 		$ret['url'] = $this->TrackersAdapter->getTaskUrl($task);
-
-		$params = array('user_id' => $task->getAssignedTo(), 'size' => 's', 'content' => '');
-		plugin_hook_by_reference("user_logo", $params);
-		if ($params['content']) {
-			$ret['assigned_to_face'] = $params['content'];
-		} else {
-			$ret['assigned_to_face'] = '';
-		}
 
 		return $ret;
 	}

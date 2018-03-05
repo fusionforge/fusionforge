@@ -31,7 +31,7 @@
 
 .agile-phase {
 	border: none;
-	padding: 0;
+	padding: 5px;
 	margin: 0;
 }
 
@@ -67,11 +67,10 @@
 }
 
 .agile-sticker-container {
-	padding: 4%;
+	padding-top: 4%;
 	float: left;
 	margin-left: auto;
 	margin-right: auto;
-	width: 92%;
 }
 
 .agile-sticker-container.filtred {
@@ -81,8 +80,6 @@
 .agile-sticker {
 	font-size: 10px;
 	width: 100%;
-	/* border: solid #CCCCCC 1px; */
-	height: 80px;
 	box-shadow: 0 4px 8px rgba(0,0,0,0.5);
 }
 
@@ -94,11 +91,11 @@
 
 .agile-sticker-header {
 	background-color: #AAAAAA;
-	padding: 2px;
+	padding: 1px;
 }
 
 .agile-sticker-footer {
-	padding: 2px;
+	padding: 1px;
 }
 
 .agile-sticker-header a {
@@ -127,7 +124,6 @@
 .agile-sticker-body {
 	position: relative;
 	padding: 2px;
-	min-height: 41px;
 	width: 98%;
 	overflow: hidden;
 }
