@@ -138,6 +138,7 @@
 .agile-sticker-name {
 	height: auto;
 	overflow: hidden;
+	flont-weight: bold;
 }
 
 .agile-sticker-description {
