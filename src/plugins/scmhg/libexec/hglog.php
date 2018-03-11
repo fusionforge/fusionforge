@@ -80,7 +80,7 @@ if ($mode == 'date_range') {
 // 	}
 }
 
-$repo = forge_get_config('repos_path', 'scmhg') . '/' . $unix_group_name;
+$repo = forge_get_config('repos_path', 'scmhg').'/'.$unix_group_name.'/'.$unix_group_name;
 if (chdir($repo.'/.hg/')) {
 	passthru("hg log --template '{date}||{author|email}||{desc}||{node}\n' ".$options);
 }
