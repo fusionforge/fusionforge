@@ -53,7 +53,7 @@ over it to the project's administrator.");
 		return (forge_get_config('repos_path', 'scmdarcs').'/'.$project->getUnixName());
 	}
 
-	function getRepositories($project) {
+	function getRepositories($project, $autoinclude = true) {
 		$res = array();
 		$toprepo = $this->getRootRepositories($project);
 		if (is_dir($toprepo)) {
@@ -566,7 +566,7 @@ over it to the project's administrator.");
 		db_commit();
 	}
 
-	function printAdminPage($params) {
+	function printAdminPage(&$params) {
 		parent::printAdminPage($params);
 
 		$project = $this->checkParams($params);

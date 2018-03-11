@@ -45,7 +45,11 @@ $mail_va = getIntFromRequest('mail_va');
 
 $language_id = getIntFromRequest('language_id');
 $timezone = getStringFromRequest('timezone');
-$theme_id = getIntFromRequest('theme_id');
+if (forge_get_config('use_user_theme')) {
+	$theme_id = getIntFromRequest('theme_id');
+} else {
+	$theme_id = getThemeIdFromName(forge_get_config('default_theme'));
+}
 $address = getStringFromRequest('address');
 $address2 = getStringFromRequest('address2');
 $phone = getStringFromRequest('phone');
@@ -203,6 +207,7 @@ if (forge_get_config('check_password_strength')) {
 <?php echo html_get_timezone_popup('timezone', $timezone); ?>
 </p>
 <?php
+if (forge_get_config('use_user_theme')) {
 $toDisplay = html_get_theme_popup('theme_id', $theme_id);
 if($toDisplay != "") {
 ?>
@@ -210,7 +215,8 @@ if($toDisplay != "") {
 <?php echo _('Theme')._(':'); ?><br />
 <?php echo $toDisplay; ?>
 </p>
-<?php } ?>
+<?php }
+}?>
 <p>
 <?php echo _('Country:'); ?><br />
 <?php echo html_get_ccode_popup('ccode', $ccode); ?>

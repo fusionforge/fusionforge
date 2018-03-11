@@ -57,7 +57,11 @@ if (getStringFromRequest('submit')) {
 	$lastname = getStringFromRequest('lastname');
 	$language = getIntFromRequest('language');
 	$timezone = getStringFromRequest('timezone');
-	$theme_id = getIntFromRequest('theme_id');
+	if (forge_get_config('use_user_theme')) {
+		$theme_id = getIntFromRequest('theme_id');
+	} else {
+		$theme_id = getThemeIdFromName(forge_get_config('default_theme'));
+	}
 	$ccode = getStringFromRequest('ccode');
 	$address = getStringFromRequest('address');
 	$address2 = getStringFromRequest('address2');
@@ -164,10 +168,12 @@ if ($u->isEditable('timezone')) {
 }
 echo $HTML->multiTableRow(array('class' => 'top'), $cells);
 
-$cells = array();
-$cells[][] = _('Theme')._(':');
-$cells[][] = html_get_theme_popup('theme_id', $u->getThemeID());
-echo $HTML->multiTableRow(array('class' => 'top'), $cells);
+if (forge_get_config('use_user_theme')) {
+	$cells = array();
+	$cells[][] = _('Theme')._(':');
+	$cells[][] = html_get_theme_popup('theme_id', $u->getThemeID());
+	echo $HTML->multiTableRow(array('class' => 'top'), $cells);
+}
 
 $cells = array();
 $cells[][] = _('Country')._(':');
