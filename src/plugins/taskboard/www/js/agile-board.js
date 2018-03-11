@@ -243,9 +243,9 @@ function drawUserStories() {
 
 		for( var j=start; j<aPhases.length; j++) {
 			var ph=aPhases[j];
-			var style = '';
+			var style = 'style="vertical-align: top;"';
 			if( ph.background ) {
-				style = ' style="background-color:' + ph.background + ';"';
+				style = ' style="background-color:' + ph.background + '; vertical-align: top;"';
 			}
 			l_sHtml += '<td id="' + ph.id + '-' + us.id + '" class="agile-phase agile-tasks agile-phase-' + ph.id + '"' + style + '>';
 			l_sHtml += "</td>\n";
@@ -434,9 +434,6 @@ function drawTasks( oUserStory, sPhaseId ) {
 			l_sHtml += '<div class="agile-sticker-body">';
 			l_sHtml += '<div class="agile-sticker-name">' + tsk.title +'</div>';
 			l_sHtml += '<div class="agile-sticker-description">' + tsk.description +'</div>';
-			if( tsk.assigned_to_face ) {
-				l_sHtml += '<div class="agile-sticker-assignee-face">' + tsk.assigned_to_face + '</div>';
-			}
 			l_sHtml += '</div>';
 			l_sHtml += '<div class="agile-sticker-footer">';
 			if( tsk.assigned_to != "Nobody" ) {

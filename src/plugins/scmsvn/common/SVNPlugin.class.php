@@ -102,19 +102,26 @@ some control over it to the project's administrator.");
 	}
 
 	function topModule($project, $repo_name) {
-		// Check toplevel module presence
-		$repo = 'file://' . forge_get_config('repos_path', $this->name).'/'.$repo_name.'/';
-		$res = array ();
-		$module = 'trunk';
-		if (!is_file($repo.'/format')) {
-			$module = '';
-		} else {
-			exec("svn ls '$repo'", $res);
-			if (!in_array($module.'/', $res)) {
-				$module = '';
+		$scm_paths = array();
+		$scm_paths_file = forge_get_config('groupdir_prefix').'/'.$project->getUnixName().'/'.$repo_name.'_scmsvn_paths.txt';
+		if (file_exists($scm_paths_file)) {
+			$scm_paths = array_map("htmlentities", file($scm_paths_file));
+		}
+		// Check scm_path module presence in repository
+		$modules = array();
+		foreach ($scm_paths as $scm_path) {
+			if (strpos($scm_path, "!") === false) {
+				$repo = 'file://' . forge_get_config('repos_path', $this->name).'/'.$repo_name;
+				$res = array();
+				if (!(exec("svn ls '$repo'", $res) && in_array($scm_path.'/', $res))) {
+					$modules[] = '/'.$scm_path;
+				}
 			}
 		}
-		return '/'.$module;
+		if (count($modules) == 0) {
+			$modules[] = '/';
+		}
+		return $modules;
 	}
 
 	function getInstructionsForAnon($project) {
@@ -140,16 +147,20 @@ some control over it to the project's administrator.");
 			}
 			$b .= html_e('h3', array(), _('via SVN'));
 			foreach ($repo_list as $repo_name) {
-				$module = $this->topModule($project, $repo_name);
-				$b .= html_e('tt', array(), 'svn '.$ssh_port.' checkout svn://'.$this->getBoxForProject($project).$this->svn_root_fs.'/'.$repo_name.$module).html_e('br');
+				$modules = $this->topModule($project, $repo_name);
+				foreach ($modules as $module) {
+					$b .= html_e('tt', array(), 'svn '.$ssh_port.' checkout svn://'.$this->getBoxForProject($project).$this->svn_root_fs.'/'.$repo_name.$module).html_e('br');
+				}
 			}
 		}
 
 		if (forge_get_config('use_dav', 'scmsvn')) {
 			$b .= html_e('h3', array(), _('via DAV'));
 			foreach ($repo_list as $repo_name) {
-				$module = $this->topModule($project, $repo_name);
-				$b .= html_e('tt', array(), 'svn checkout http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. $this->getBoxForProject($project). '/anonscm/svn/'.$repo_name.$module).html_e('br');
+				$modules = $this->topModule($project, $repo_name);
+				foreach ($modules as $module) {
+					$b .= html_e('tt', array(), 'svn checkout http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. $this->getBoxForProject($project). '/anonscm/svn/'.$repo_name.$module).html_e('br');
+				}
 			}
 		}
 		return $b;
@@ -164,8 +175,7 @@ some control over it to the project's administrator.");
 			$repo_list[] = db_result($result, $i, 'repo_name');
 		}
 
-		$b = '';
-		$b .= html_e('h2', array(), _('Developer Access'));
+		$b = html_e('h2', array(), _('Developer Access'));
 		$b .= sprintf(_('Only project developers can access the %s tree via this method.'), 'Subversion');
 		$b .= '<div id="tabber-svn">';
 		$b .= '<ul>';
@@ -187,20 +197,22 @@ some control over it to the project's administrator.");
 				$b .= _('SSH must be installed on your client machine.');
 				$b .= ' ';
 				$b .= _('Enter your site password when prompted.');
-				$b .= '</p>';
+				$b .= '</p><p>';
 				$ssh_port = '';
 				if (forge_get_config('ssh_port') != 22) {
 					$ssh_port = '--config-option="config:tunnels:ssh=ssh -p '.forge_get_config('ssh_port').'" ';
 				}
 				foreach ($repo_list as $repo_name) {
-					$module = $this->topModule($project, $repo_name);
-					if (forge_get_config('use_shell_limited')) {
-						$b .= html_e('tt', array(), 'svn '.$ssh_port.'checkout svn+ssh://'.$d.'@'.$this->getBoxForProject($project).'/'.$repo_name.$module).html_e('br');
-					} else {
-						$b .= html_e('tt', array(), 'svn '.$ssh_port.'checkout svn+ssh://'.$d.'@'.$this->getBoxForProject($project).$this->svn_root_fs.'/'.$repo_name.$module).html_e('br');
+					$modules = $this->topModule($project, $repo_name);
+					foreach ($modules as $module) {
+						if (forge_get_config('use_shell_limited')) {
+							$b .= html_e('tt', array(), 'svn '.$ssh_port.'checkout svn+ssh://'.$d.'@'.$this->getBoxForProject($project).'/'.$repo_name.$module).html_e('br');
+						} else {
+							$b .= html_e('tt', array(), 'svn '.$ssh_port.'checkout svn+ssh://'.$d.'@'.$this->getBoxForProject($project).$this->svn_root_fs.'/'.$repo_name.$module).html_e('br');
+						}
 					}
 				}
-				$b .= '</div>';
+				$b .= '</p></div>';
 			}
 			if (forge_get_config('use_dav', 'scmsvn')) {
 				$b .= '<div id="tabber-svndav" class="tabbertab" >';
@@ -208,8 +220,10 @@ some control over it to the project's administrator.");
 				$b .= _('Enter your site password when prompted.');
 				$b .= '</p>';
 				foreach ($repo_list as $repo_name) {
-					$module = $this->topModule($project, $repo_name);
-					$b .= html_e('tt', array(), 'svn checkout --username '.$d.' http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'.$this->getBoxForProject($project).'/authscm/'.$d.'/svn/'.$repo_name.$module).html_e('br');
+					$modules = $this->topModule($project, $repo_name);
+					foreach ($modules as $module) {
+						$b .= html_e('tt', array(), 'svn checkout --username '.$d.' http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'.$this->getBoxForProject($project).'/authscm/'.$d.'/svn/'.$repo_name.$module).html_e('br');
+					}
 				}
 				$b .= '</div>';
 			}
@@ -222,20 +236,22 @@ some control over it to the project's administrator.");
 				$b .= _('Substitute <em>developername</em> with the proper value.');
 				$b .= ' ';
 				$b .= _('Enter your site password when prompted.');
-				$b .= '</p>';
+				$b .= '</p><p>';
 				$ssh_port = '';
 				if (forge_get_config('ssh_port') != 22) {
 					$ssh_port = '--config-option="config:tunnels:ssh=ssh -p '.forge_get_config('ssh_port').'" ';
 				}
 				foreach ($repo_list as $repo_name) {
-					$module = $this->topModule($project, $repo_name);
-					if (forge_get_config('use_shell_limited')) {
-						$b .= html_e('tt', array(), 'svn '.$ssh_port.'checkout svn+ssh://<i>'._('developername').'</i>@'.$this->getBoxForProject($project).'/'.$repo_name.$module).html_e('br');
-					} else {
-						$b .= html_e('tt', array(), 'svn '.$ssh_port.'checkout svn+ssh://<i>'._('developername').'</i>@'.$this->getBoxForProject($project).$this->svn_root_fs .'/'.$repo_name.$module).html_e('br');
+					$modules = $this->topModule($project, $repo_name);
+					foreach ($modules as $module) {
+						if (forge_get_config('use_shell_limited')) {
+							$b .= html_e('tt', array(), 'svn '.$ssh_port.'checkout svn+ssh://<i>'._('developername').'</i>@'.$this->getBoxForProject($project).'/'.$repo_name.$module).html_e('br');
+						} else {
+							$b .= html_e('tt', array(), 'svn '.$ssh_port.'checkout svn+ssh://<i>'._('developername').'</i>@'.$this->getBoxForProject($project).$this->svn_root_fs .'/'.$repo_name.$module).html_e('br');
+						}
 					}
 				}
-				$b .= '</div>';
+				$b .= '</p></div>';
 			}
 			if (forge_get_config('use_dav', 'scmsvn')) {
 				$b .= '<div id="tabber-svndav" class="tabbertab" >';
@@ -245,8 +261,10 @@ some control over it to the project's administrator.");
 				$b .= _('Enter your site password when prompted.');
 				$b .= '</p>';
 				foreach ($repo_list as $repo_name) {
-					$module = $this->topModule($project, $repo_name);
-					$b .= html_e('tt', array(), 'svn checkout --username <i>'._('developername').'</i> http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'.$this->getBoxForProject($project).'/authscm/<i>'._('developername').'</i>/svn/'.$repo_name.$module).html_e('br');
+					$modules = $this->topModule($project, $repo_name);
+					foreach ($modules as $module) {
+						$b .= html_e('tt', array(), 'svn checkout --username <i>'._('developername').'</i> http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'.$this->getBoxForProject($project).'/authscm/<i>'._('developername').'</i>/svn/'.$repo_name.$module).html_e('br');
+					}
 				}
 				$b .= '</div>';
 			}

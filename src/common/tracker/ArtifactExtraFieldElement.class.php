@@ -502,8 +502,8 @@ class ArtifactExtraFieldElement extends FFError {
 	 * boxes and fields configured by the admin
 	 *
 	 * @param	string	$name		Name of the choice in a box.
-	 * @param	int		$status_id	Optional for status box - maps to either open/closed.
-	 * @param	int		$auto_assign_to
+	 * @param	int	$status_id	Optional for status box - maps to either open/closed.
+	 * @param	int	$auto_assign_to
 	 * @param	bool	$is_default	Set this element as default value
 	 * @return	bool	success.
 	 */
