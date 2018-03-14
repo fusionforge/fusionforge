@@ -50,6 +50,7 @@ if (!preg_match(',^/anonscm/,', $_SERVER['REQUEST_URI'])) {
 
 
 $unix_group_name = $_GET['unix_group_name'];
+$repo_name = $_GET['repo_name'];
 $mode = $_GET['mode'];
 if (!preg_match('/^(date_range|latest|latest_user)$/', $mode))
 	die('Invalid mode');
@@ -80,7 +81,7 @@ if ($mode == 'date_range') {
 // 	}
 }
 
-$repo = forge_get_config('repos_path', 'scmhg').'/'.$unix_group_name.'/'.$unix_group_name;
+$repo = forge_get_config('repos_path', 'scmhg').'/'.$unix_group_name.'/'.$repo_name;
 if (chdir($repo.'/.hg/')) {
 	passthru("hg log --template '{date}||{author|email}||{desc}||{node}\n' ".$options);
 }

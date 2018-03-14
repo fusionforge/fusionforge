@@ -308,7 +308,6 @@ Offer DAV or SSH access.");
 		$unix_group_ro = $project_name . '_scmro';
 		$unix_group_rw = $project_name . '_scmrw';
 
-		$repo = forge_get_config('repos_path', 'scmhg') . '/' . $project_name;
 		$root = forge_get_config('repos_path', 'scmhg') . '/' . $project_name;
 		if (!is_dir($root)) {
 			system("mkdir -p $root");
@@ -383,7 +382,7 @@ Offer DAV or SSH access.");
 				system("hg init $repodir");
 				$f = fopen("$repodir/.hg/hgrc", 'w');
 				$conf = "[web]\n";
-				$conf .= "baseurl = /hg/".$project_name."\n";
+				$conf .= 'baseurl = /hg/'.$project_name.'/'.$repo_name."\n";
 				$conf .= "description = ".$description."\n";
 				$conf .= "style = paper\n";
 				$conf .= "allow_push = *\n"; // every user (see Apache configuration) is allowed to push
@@ -427,35 +426,37 @@ Offer DAV or SSH access.");
 		foreach ($groups as $project) {
 			if (!$project->isActive()) continue;
 			if (!$project->usesSCM()) continue;
-			if (!$project->usesPlugin($this->name)) continue;
 
-			$push = "";
-			$read = ""; /*pull,clone*/
-			$path = forge_get_config('repos_path', 'scmhg').'/'.$project->getUnixName().'/'.$project->getUnixName().'/.hg';
-			$prevp = false;
-			$prevr = false;
-			$users = $project->getMembers();
-			$pname = $project->getUnixName();
-			foreach ($users as $user) {
-				if (forge_check_perm_for_user ($user, 'scm', $project->getID(), 'write')) {
-					if ($prevp){
-						$push .= ", ";
+			$repolist = $this->getRepositories($project);
+			foreach ($repolist as $repo_name) {
+				$push = "";
+				$read = ""; /*pull,clone*/
+				$path = forge_get_config('repos_path', 'scmhg').'/'.$project->getUnixName().'/'.$repo_name.'/.hg';
+				$prevp = false;
+				$prevr = false;
+				$users = $project->getMembers();
+				$pname = $project->getUnixName();
+				foreach ($users as $user) {
+					if (forge_check_perm_for_user ($user, 'scm', $project->getID(), 'write')) {
+						if ($prevp){
+							$push .= ", ";
+						}
+						if ($prevr){
+							$read .= ", ";
+						}
+						$push .= $user->getUnixName();
+						$read .= $user->getUnixName();
+						$prevp = true;
+						$prevr = true;
+						$hgusers[$user->getID()] = $user;
+					} elseif (forge_check_perm_for_user ($user, 'scm', $project->getID(), 'read')) {
+						if ($prevr){
+							$read .= ", ";
+						}
+						$read .= $user->getUnixName();
+						$prevr = true;
+						$hgusers[$user->getID()] = $user;
 					}
-					if ($prevr){
-						$read .= ", ";
-					}
-					$push .= $user->getUnixName();
-					$read .= $user->getUnixName();
-					$prevp = true;
-					$prevr = true;
-					$hgusers[$user->getID()] = $user;
-				} elseif (forge_check_perm_for_user ($user, 'scm', $project->getID(), 'read')) {
-					if ($prevr){
-						$read .= ", ";
-					}
-					$read .= $user->getUnixName();
-					$prevr = true;
-					$hgusers[$user->getID()] = $user;
 				}
 			}
 
@@ -491,8 +492,8 @@ Offer DAV or SSH access.");
 				}
 			} else {
 				$hgrc = "[web]\n";
-				$hgrc .= "baseurl = /hg/".$project->getUnixName();
-				$hgrc .= "\ndescription = ".$project->getUnixName();
+				$hgrc .= "baseurl = /hg/".$project->getUnixName().'/'.$repo_name;
+				$hgrc .= "\ndescription = ".$project->getUnixName().'/'.$repo_name;
 				$hgrc .= "\nstyle = paper";
 				$hgrc .= "\nallow_read = ".$read;
 				$hgrc .= "\nallow_push = ".$push;
@@ -757,51 +758,55 @@ Offer DAV or SSH access.");
 			}
 			// Grab commit log
 			$protocol = forge_get_config('use_ssl', 'scmhg') ? 'https://' : 'http://';
-			$script_url = $protocol.$this->getBoxForProject($project)
-				. $server_script
-				.'?unix_group_name='.$project->getUnixName()
-				.'&mode=date_range'
-				.'&begin='.$params['begin']
-				.'&end='.$params['end'];
-			$filename = tempnam('/tmp', 'hglog');
-			$f = fopen($filename, 'w');
-			$ch = curl_init();
-			curl_setopt($ch, CURLOPT_URL, $script_url);
-			curl_setopt($ch, CURLOPT_FILE, $f);
-			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-			curl_setopt($ch, CURLOPT_COOKIE, @$_SERVER['HTTP_COOKIE']);  // for session validation
-			curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);  // for session validation
-			curl_setopt($ch, CURLOPT_HTTPHEADER,
-						array('X-Forwarded-For: '.$_SERVER['REMOTE_ADDR']));  // for session validation
-			$body = curl_exec($ch);
-			if ($body === false) {
-				$this->setError(curl_error($ch));
-			}
-			curl_close($ch);
-			fclose($f); // flush buffer
-			$f = fopen($filename, 'r');
-			unlink($filename);
+			$repo_list = $this->getRepositories($project);
+			foreach ($repo_list as $repo_name) {
+				$script_url = $protocol.$this->getBoxForProject($project)
+					. $server_script
+					.'?unix_group_name='.$project->getUnixName()
+					.'&repo_name='.$repo_name
+					.'&mode=date_range'
+					.'&begin='.$params['begin']
+					.'&end='.$params['end'];
+				$filename = tempnam('/tmp', 'hglog');
+				$f = fopen($filename, 'w');
+				$ch = curl_init();
+				curl_setopt($ch, CURLOPT_URL, $script_url);
+				curl_setopt($ch, CURLOPT_FILE, $f);
+				curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+				curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+				curl_setopt($ch, CURLOPT_COOKIE, @$_SERVER['HTTP_COOKIE']);  // for session validation
+				curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);  // for session validation
+				curl_setopt($ch, CURLOPT_HTTPHEADER,
+							array('X-Forwarded-For: '.$_SERVER['REMOTE_ADDR']));  // for session validation
+				$body = curl_exec($ch);
+				if ($body === false) {
+					$this->setError(curl_error($ch));
+				}
+				curl_close($ch);
+				fclose($f); // flush buffer
+				$f = fopen($filename, 'r');
+				unlink($filename);
 
-			while (!feof($f) && $data = fgets($f)) {
-			$line = trim($data);
-				$splitedLine = explode('||', $line);
-				if (sizeof($splitedLine) == 4) {
-					$result = array();
-					$result['section'] = 'scm';
-					$result['group_id'] = $project->getID();
-					$result['ref_id'] = 'browser.php?group_id='.$project->getID().'&scm_plugin='.$this->name.'&commit='.$splitedLine[3];
-					$result['description'] = htmlspecialchars($splitedLine[2]).' (changeset '.$splitedLine[3].')';
-					$userObject = user_get_object_by_email($splitedLine[1]);
-					if (is_a($userObject, 'FFUser')) {
-						$result['realname'] = util_display_user($userObject->getUnixName(), $userObject->getID(), $userObject->getRealName());
-					} else {
-						$result['realname'] = '';
+				while (!feof($f) && $data = fgets($f)) {
+				$line = trim($data);
+					$splitedLine = explode('||', $line);
+					if (sizeof($splitedLine) == 4) {
+						$result = array();
+						$result['section'] = 'scm';
+						$result['group_id'] = $project->getID();
+						$result['ref_id'] = 'browser.php?group_id='.$project->getID().'&extra='.$repo_name.'&scm_plugin='.$this->name.'&commit='.$splitedLine[3];
+						$result['description'] = htmlspecialchars($splitedLine[2]).' (repository: '.$repo_name.', changeset: '.$splitedLine[3].')';
+						$userObject = user_get_object_by_email($splitedLine[1]);
+						if (is_a($userObject, 'FFUser')) {
+							$result['realname'] = util_display_user($userObject->getUnixName(), $userObject->getID(), $userObject->getRealName());
+						} else {
+							$result['realname'] = '';
+						}
+						$splitedDate = explode('-', $splitedLine[0]);
+						$result['activity_date'] = $splitedDate[0];
+						$result['subref_id'] = '';
+						$params['results'][] = $result;
 					}
-					$splitedDate = explode('-', $splitedLine[0]);
-					$result['activity_date'] = $splitedDate[0];
-					$result['subref_id'] = '';
-					$params['results'][] = $result;
 				}
 			}
 		}

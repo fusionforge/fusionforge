@@ -49,11 +49,14 @@ if (!preg_match(',^/anonscm/,', $_SERVER['REQUEST_URI'])) {
 
 
 $unix_group_name = $_GET['unix_group_name'];
+$repo_name = $_GET['repo_name'];
 $mode = $_GET['mode'];
 if (!preg_match('/^(date_range|latest|latest_user)$/', $mode))
 	die('Invalid mode');
 if (!preg_match('/^[a-z0-9][-a-z0-9_\.]+\z/', $unix_group_name))
 	die('Invalid group name');
+if (!preg_match('/^[a-z0-9][-a-z0-9_\.]+\z/', $repo_name))
+	die('Invalid repository name');
 
 if ($mode == 'date_range') {
 	$start_time = $_GET['begin'];
@@ -82,7 +85,7 @@ if ($mode == 'date_range') {
 	}
 }
 
-$repo = forge_get_config('repos_path', 'scmgit') . "/$unix_group_name/$unix_group_name.git";
+$repo = forge_get_config('repos_path', 'scmgit') . "/$unix_group_name/$repo_name.git";
 if (is_dir($repo)) {
 	passthru("GIT_DIR=\"$repo\" git log --date=raw --all --pretty='format:%ad||%ae||%s||%h' --name-status $options");
 }
