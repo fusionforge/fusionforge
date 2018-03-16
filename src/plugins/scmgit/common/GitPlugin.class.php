@@ -1244,42 +1244,46 @@ control over it to the project's administrator.");
 			} else {
 				$params = '&mode=latest';
 			}
-			$script_url = $protocol.$this->getBoxForProject($project)
-				. $server_script
-				.'?unix_group_name='.$project->getUnixName()
-				. $params
-				.'&limit='.$nb_commits;
-			$filename = tempnam('/tmp', 'gitlog');
-			$f = fopen($filename, 'w');
-			$ch = curl_init();
-			curl_setopt($ch, CURLOPT_URL, $script_url);
-			curl_setopt($ch, CURLOPT_FILE, $f);
-			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-			curl_setopt($ch, CURLOPT_COOKIE, $_SERVER['HTTP_COOKIE']);  // for session validation
-			curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);  // for session validation
-			curl_setopt($ch, CURLOPT_HTTPHEADER,
-						array('X-Forwarded-For: '.$_SERVER['REMOTE_ADDR']));  // for session validation
-			$body = curl_exec($ch);
-			if ($body === false) {
-				$this->setError(curl_error($ch));
-			}
-			curl_close($ch);
-			fclose($f); // flush buffer
-			$f = fopen($filename, 'r');
-			unlink($filename);
+			$repo_list = $this->getRepositories($project);
+			foreach ($repo_list as $repo_name) {
+				$script_url = $protocol.$this->getBoxForProject($project)
+					. $server_script
+					.'?unix_group_name='.$project->getUnixName()
+					.'&repo_name='.$repo_name
+					. $params
+					.'&limit='.$nb_commits;
+				$filename = tempnam('/tmp', 'gitlog');
+				$f = fopen($filename, 'w');
+				$ch = curl_init();
+				curl_setopt($ch, CURLOPT_URL, $script_url);
+				curl_setopt($ch, CURLOPT_FILE, $f);
+				curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+				curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+				curl_setopt($ch, CURLOPT_COOKIE, $_SERVER['HTTP_COOKIE']);  // for session validation
+				curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);  // for session validation
+				curl_setopt($ch, CURLOPT_HTTPHEADER,
+							array('X-Forwarded-For: '.$_SERVER['REMOTE_ADDR']));  // for session validation
+				$body = curl_exec($ch);
+				if ($body === false) {
+					$this->setError(curl_error($ch));
+				}
+				curl_close($ch);
+				fclose($f); // flush buffer
+				$f = fopen($filename, 'r');
+				unlink($filename);
 
-			$i = 0;
-			while (!feof($f) && $data = fgets($f)) {
-				$line = trim($data);
-				$splitedLine = explode('||', $line);
-				if (sizeof($splitedLine) == 4) {
-					$commits[$i]['pluginName'] = $this->name;
-					$commits[$i]['description'] = htmlspecialchars($splitedLine[2]);
-					$commits[$i]['commit_id'] = $splitedLine[3];
-					$splitedDate = explode(' ', $splitedLine[0]);
-					$commits[$i]['date'] = $splitedDate[0];
-					$i++;
+				$i = 0;
+				while (!feof($f) && $data = fgets($f)) {
+					$line = trim($data);
+					$splitedLine = explode('||', $line);
+					if (sizeof($splitedLine) == 4) {
+						$commits[$i]['pluginName'] = $this->name;
+						$commits[$i]['description'] = htmlspecialchars($splitedLine[2]);
+						$commits[$i]['commit_id'] = $splitedLine[3];
+						$splitedDate = explode(' ', $splitedLine[0]);
+						$commits[$i]['date'] = $splitedDate[0];
+						$i++;
+					}
 				}
 			}
 		}
