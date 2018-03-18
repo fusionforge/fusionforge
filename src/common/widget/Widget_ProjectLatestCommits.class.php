@@ -45,13 +45,12 @@ class Widget_ProjectLatestCommits extends Widget {
 		return util_make_link('/scm/browser.php?group_id='.$project->getID().'&scm_plugin='.$plugin_name.'&commit='.$commit_id.'&extra='.$repo_name, _('commit')._(': ').$commit_id);
 	}
 	
-        static function commit_dateorder($a, $b) {
-                if ($a['date'] == $b['date']) {
-                        return 0;
-                }
-                return ($a['date'] > $b['date']) ? -1 : 1;
-        }
-
+	static function commit_dateorder($a, $b) {
+		if ($a['date'] == $b['date']) {
+			return 0;
+		}
+		return ($a['date'] > $b['date']) ? -1 : 1;
+	}
 
 	public function getContent() {
 		global $HTML;
