@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (C) 2010 Roland Mas, Olaf Lenz
+ * Copyright 2018, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -139,10 +140,11 @@ if (!isset($fusionforge_plugin_mediawiki_LocalSettings_included)) {
 
 	global $wgVersion;
 	$wgVersionArr = explode('.', $wgVersion);
-	if ($wgVersionArr[0] == 1 && $wgVersionArr[1] >= 24) {
+	if ($wgVersionArr[0] == 1 && $wgVersionArr[1] >= 25) {
 		$wgDefaultSkin = 'monobookfusionforge';
 		wfLoadSkin('MonoBookFusionForge');
 	} else {
+		require_once "$IP/skins/MonoBook/MonoBook.php";
 		$wgDefaultSkin = 'fusionforge';
 	}
 	// disable other skins. It breaks FusionForge displays.
