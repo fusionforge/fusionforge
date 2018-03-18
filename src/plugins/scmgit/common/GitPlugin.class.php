@@ -1245,6 +1245,7 @@ control over it to the project's administrator.");
 				$params = '&mode=latest';
 			}
 			$repo_list = $this->getRepositories($project);
+			$i = 0;
 			foreach ($repo_list as $repo_name) {
 				$script_url = $protocol.$this->getBoxForProject($project)
 					. $server_script
@@ -1272,7 +1273,6 @@ control over it to the project's administrator.");
 				$f = fopen($filename, 'r');
 				unlink($filename);
 
-				$i = 0;
 				while (!feof($f) && $data = fgets($f)) {
 					$line = trim($data);
 					$splitedLine = explode('||', $line);
@@ -1280,6 +1280,7 @@ control over it to the project's administrator.");
 						$commits[$i]['pluginName'] = $this->name;
 						$commits[$i]['description'] = htmlspecialchars($splitedLine[2]);
 						$commits[$i]['commit_id'] = $splitedLine[3];
+						$commits[$i]['repo_name'] = $repo_name;
 						$splitedDate = explode(' ', $splitedLine[0]);
 						$commits[$i]['date'] = $splitedDate[0];
 						$i++;

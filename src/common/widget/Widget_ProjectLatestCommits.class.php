@@ -41,9 +41,17 @@ class Widget_ProjectLatestCommits extends Widget {
 		return _('5 Latest Commits');
 	}
 
-	public function _getLinkToCommit($project, $commit_id, $plugin_name) {
-		return util_make_link('/scm/browser.php?group_id='.$project->getID().'&scm_plugin='.$plugin_name.'&commit='.$commit_id, _('commit')._(': ').$commit_id);
+	public function _getLinkToCommit($project, $commit_id, $plugin_name, $repo_name) {
+		return util_make_link('/scm/browser.php?group_id='.$project->getID().'&scm_plugin='.$plugin_name.'&commit='.$commit_id.'&extra='.$repo_name, _('commit')._(': ').$commit_id);
 	}
+	
+        static function commit_dateorder($a, $b) {
+                if ($a['date'] == $b['date']) {
+                        return 0;
+                }
+                return ($a['date'] > $b['date']) ? -1 : 1;
+        }
+
 
 	public function getContent() {
 		global $HTML;
@@ -62,6 +70,8 @@ class Widget_ProjectLatestCommits extends Widget {
 			$revisions = array_merge($revisions, $scmPlugin->getCommits($project, null, self::NB_COMMITS_TO_DISPLAY));
 		}
 		if (count($revisions) > 0) {
+			usort($revisions, array ($this, "commit_dateorder"));
+			$revisions = array_slice($revisions, 0, self::NB_COMMITS_TO_DISPLAY, true);
 			foreach ($revisions as $key => $revision) {
 				$revisionDescription = substr($revision['description'], 0, 255);
 				if (strlen($revision['description']) > 255) {
@@ -75,8 +85,8 @@ class Widget_ProjectLatestCommits extends Widget {
 				}
 				$html .= html_e('div', $divattr,
 						html_e('div', array('style' => 'font-size:0.98em'),
-							$this->_getLinkToCommit($project, $revision['commit_id'], $revision['pluginName']).
-							' '._('on').' '.
+							$this->_getLinkToCommit($project, $revision['commit_id'], $revision['pluginName'], $revision['repo_name']).
+							' '._('on repository').' '.$revision['repo_name'].' '.
 							date(_("Y-m-d H:i"), $revision['date'])).
 						html_e('div', array('style' => 'padding-left:20px; padding-bottom:4px; color:#555'),
 							$revisionDescription));
