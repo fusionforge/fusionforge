@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-23 12:44+0000\n"
+"POT-Creation-Date: 2018-03-14 10:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -327,14 +327,14 @@ msgstr ""
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:219
 #: plugins/scmgit/common/GitPlugin.class.php:366
 #: plugins/scmgit/common/GitPlugin.class.php:387
-#: plugins/scmgit/common/GitPlugin.class.php:1203
-#: plugins/scmgit/common/GitPlugin.class.php:1205
-#: plugins/scmgit/common/GitPlugin.class.php:1206
+#: plugins/scmgit/common/GitPlugin.class.php:1207
+#: plugins/scmgit/common/GitPlugin.class.php:1209
+#: plugins/scmgit/common/GitPlugin.class.php:1210
 #: plugins/scmhg/common/HgPlugin.class.php:81
 #: plugins/scmhg/common/HgPlugin.class.php:242
-#: plugins/scmhg/common/HgPlugin.class.php:929
-#: plugins/scmhg/common/HgPlugin.class.php:931
-#: plugins/scmsvn/common/SVNPlugin.class.php:269
+#: plugins/scmhg/common/HgPlugin.class.php:935
+#: plugins/scmhg/common/HgPlugin.class.php:937
+#: plugins/scmsvn/common/SVNPlugin.class.php:294
 #: plugins/taskboard/common/views/admin/columns.php:73
 #: plugins/taskboard/common/views/admin/columns.php:77
 #: plugins/taskboard/common/views/admin/columns.php:81
@@ -354,23 +354,23 @@ msgstr ""
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:64
 #: www/account/change_email.php:61 www/account/change_email.php:81
 #: www/account/change_pw.php:73 www/account/change_pw.php:76
-#: www/account/change_pw.php:82 www/account/index.php:111
-#: www/account/index.php:120 www/account/index.php:125
-#: www/account/index.php:130 www/account/index.php:135
-#: www/account/index.php:141 www/account/index.php:144
-#: www/account/index.php:150 www/account/index.php:159
-#: www/account/index.php:168 www/account/index.php:173
-#: www/account/index.php:182 www/account/index.php:191
-#: www/account/index.php:200 www/account/index.php:209
-#: www/account/index.php:218 www/account/index.php:227
+#: www/account/change_pw.php:82 www/account/index.php:115
+#: www/account/index.php:124 www/account/index.php:129
+#: www/account/index.php:134 www/account/index.php:139
+#: www/account/index.php:145 www/account/index.php:148
+#: www/account/index.php:154 www/account/index.php:163
+#: www/account/index.php:173 www/account/index.php:179
+#: www/account/index.php:188 www/account/index.php:197
+#: www/account/index.php:206 www/account/index.php:215
+#: www/account/index.php:224 www/account/index.php:233
 #: www/account/lostlogin.php:95 www/account/lostpw.php:90
 #: www/account/pending-resend.php:66 www/account/pending-resend.php:68
-#: www/account/register.php:151 www/account/register.php:158
-#: www/account/register.php:172 www/account/register.php:178
-#: www/account/register.php:184 www/account/register.php:191
-#: www/account/register.php:210 www/account/register.php:219
-#: www/account/register.php:230 www/account/register.php:236
-#: www/account/register.php:242 www/account/register.php:248
+#: www/account/register.php:155 www/account/register.php:162
+#: www/account/register.php:176 www/account/register.php:182
+#: www/account/register.php:188 www/account/register.php:195
+#: www/account/register.php:215 www/account/register.php:225
+#: www/account/register.php:236 www/account/register.php:242
+#: www/account/register.php:248 www/account/register.php:254
 #: www/account/verify.php:76 www/account/verify.php:78
 #: www/account/verify.php:82 www/activity/index.php:156
 #: www/activity/index.php:194 www/activity/index.php:199
@@ -1136,10 +1136,10 @@ msgstr ""
 #: plugins/taskboard/common/TaskBoard.class.php:522
 #: plugins/taskboard/common/TaskBoard.class.php:540
 #: plugins/taskboard/common/TaskBoard.class.php:557
-#: plugins/taskboard/common/TaskBoard.class.php:801
-#: plugins/taskboard/common/TaskBoard.class.php:952
-#: plugins/taskboard/common/TaskBoard.class.php:980
-#: plugins/taskboard/common/TaskBoard.class.php:1033
+#: plugins/taskboard/common/TaskBoard.class.php:793
+#: plugins/taskboard/common/TaskBoard.class.php:944
+#: plugins/taskboard/common/TaskBoard.class.php:972
+#: plugins/taskboard/common/TaskBoard.class.php:1025
 #: plugins/taskboard/common/TaskBoardColumn.class.php:113
 #: plugins/taskboard/common/TaskBoardColumn.class.php:365
 #: plugins/taskboard/common/TaskBoardColumn.class.php:388
@@ -1176,8 +1176,8 @@ msgstr ""
 #: plugins/taskboard/www/releases/index.php:32
 #: plugins/taskboard/www/releases/index.php:64
 #: plugins/webanalytics/view/admin/updateLinkValue.php:53
-#: www/account/change_pw.php:61 www/account/index.php:288
-#: www/account/index.php:289 www/account/lostlogin.php:87
+#: www/account/change_pw.php:61 www/account/index.php:294
+#: www/account/index.php:295 www/account/lostlogin.php:87
 #: www/account/verify.php:62 www/admin/approve-pending.php:57
 #: www/admin/approve-pending.php:59 www/admin/approve-pending.php:90
 #: www/admin/approve-pending.php:134 www/admin/approve-pending.php:183
@@ -1832,8 +1832,8 @@ msgstr ""
 #: plugins/taskboard/common/views/admin/columns.php:46
 #: plugins/taskboard/common/views/admin/columns.php:73
 #: plugins/taskboard/common/views/admin/edit_column.php:55
-#: plugins/taskboard/common/views/releases/ind.php:56 www/account/index.php:227
-#: www/account/register.php:178 www/people/editjob.php:54
+#: plugins/taskboard/common/views/releases/ind.php:56 www/account/index.php:233
+#: www/account/register.php:182 www/people/editjob.php:54
 #: www/people/editjob.php:76 www/people/editprofile.php:109
 #: www/people/people_utils.php:440 www/people/skills_utils.php:57
 #: www/pm/admin/index.php:185
@@ -1895,8 +1895,8 @@ msgstr ""
 #: plugins/oauthprovider/www/consumer.php:109
 #: plugins/oauthprovider/www/consumer_manage.php:63
 #: plugins/oauthprovider/www/consumer_update_page.php:64
-#: plugins/scmgit/common/GitPlugin.class.php:1205
-#: plugins/scmhg/common/HgPlugin.class.php:931
+#: plugins/scmgit/common/GitPlugin.class.php:1209
+#: plugins/scmhg/common/HgPlugin.class.php:937
 #: plugins/taskboard/common/views/admin/ind.php:56
 #: plugins/taskboard/common/views/admin/trackers.php:95
 #: plugins/taskboard/common/views/ind.php:48 www/forum/admin/index.php:115
@@ -2369,8 +2369,8 @@ msgstr ""
 #: plugins/compactpreview/include/CompactPreviewPlugin.class.php:175
 #: plugins/forumml/include/ForumMLHtmlSearchRenderer.class.php:62
 #: plugins/hudson/include/HudsonBuild.class.php:115
-#: www/account/editsshkeys.php:58 www/account/index.php:121
-#: www/account/index.php:300 www/admin/cronman.php:79
+#: www/account/editsshkeys.php:58 www/account/index.php:125
+#: www/account/index.php:306 www/admin/cronman.php:79
 #: www/admin/grouplist.php:187 www/admin/massmail.php:168
 #: www/admin/search.php:89 www/admin/search.php:167 www/admin/userlist.php:135
 #: www/developer/diary.php:58 www/developer/diary.php:88
@@ -3798,10 +3798,10 @@ msgstr ""
 #: plugins/oauthprovider/www/request_tokens.php:100
 #: plugins/oauthprovider/www/request_tokens.php:103
 #: plugins/oauthprovider/www/request_tokens.php:108
-#: plugins/scmgit/common/GitPlugin.class.php:1178
-#: plugins/scmgit/common/GitPlugin.class.php:1190
-#: plugins/scmhg/common/HgPlugin.class.php:906
-#: plugins/scmhg/common/HgPlugin.class.php:916
+#: plugins/scmgit/common/GitPlugin.class.php:1182
+#: plugins/scmgit/common/GitPlugin.class.php:1194
+#: plugins/scmhg/common/HgPlugin.class.php:911
+#: plugins/scmhg/common/HgPlugin.class.php:922
 #: plugins/taskboard/common/views/admin/delete_column.php:50
 #: plugins/taskboard/common/views/admin/delete_taskboard.php:43
 #: plugins/taskboard/common/views/releases/delete_release.php:52
@@ -4092,7 +4092,7 @@ msgstr ""
 #: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:83
 #: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:89
 #: plugins/webanalytics/view/admin/updateLinkValue.php:45
-#: www/account/index.php:316 www/account/lostlogin.php:106
+#: www/account/index.php:322 www/account/lostlogin.php:106
 #: www/admin/groupedit.php:226 www/admin/trove/trove_cat_edit.php:150
 #: www/admin/useredit.php:240 www/admin/useredit.php:315
 #: www/admin/vhost.php:193 www/forum/admin/index.php:160
@@ -4315,8 +4315,8 @@ msgstr ""
 #: plugins/headermenu/view/admin/updateLinkValue.php:108
 #: plugins/oauthconsumer/www/provider_edit.php:28
 #: plugins/oauthprovider/www/consumer_update_page.php:50
-#: plugins/scmgit/common/GitPlugin.class.php:1209
-#: plugins/scmhg/common/HgPlugin.class.php:933
+#: plugins/scmgit/common/GitPlugin.class.php:1213
+#: plugins/scmhg/common/HgPlugin.class.php:939
 #: plugins/taskboard/common/views/taskboard.php:397
 #: plugins/webanalytics/view/admin/updateLinkValue.php:46
 #: www/admin/admin_table.php:58 www/admin/admin_table.php:159
@@ -5199,9 +5199,9 @@ msgstr ""
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:184
 #: plugins/scmgit/common/GitPlugin.class.php:352
 #: plugins/scmhg/common/HgPlugin.class.php:222
-#: plugins/scmsvn/common/SVNPlugin.class.php:249
+#: plugins/scmsvn/common/SVNPlugin.class.php:274
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:32
-#: www/account/editsshkeys.php:50 www/account/index.php:292
+#: www/account/editsshkeys.php:50 www/account/index.php:298
 #: www/admin/useredit.php:266 www/admin/useredit.php:294
 #: www/project/admin/editimages.php:268 www/reporting/usersummary.php:103
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:42
@@ -6284,7 +6284,7 @@ msgstr ""
 msgid "Log Out"
 msgstr ""
 
-#: common/include/Navigation.class.php:199 www/account/index.php:104
+#: common/include/Navigation.class.php:199 www/account/index.php:108
 #: www/include/html.php:1256
 msgid "My Account"
 msgstr ""
@@ -6683,11 +6683,11 @@ msgstr ""
 msgid "You must supply a username"
 msgstr ""
 
-#: common/include/User.class.php:328 www/account/index.php:76
+#: common/include/User.class.php:328 www/account/index.php:80
 msgid "You must supply a first name"
 msgstr ""
 
-#: common/include/User.class.php:332 www/account/index.php:79
+#: common/include/User.class.php:332 www/account/index.php:83
 msgid "You must supply a last name"
 msgstr ""
 
@@ -7324,7 +7324,7 @@ msgstr ""
 msgid "No used tags."
 msgstr ""
 
-#: common/include/user_profile.php:62 www/account/index.php:125
+#: common/include/user_profile.php:62 www/account/index.php:129
 #: www/admin/unsubscribe.php:102 www/admin/useredit.php:133
 msgid "User Id"
 msgstr ""
@@ -7336,7 +7336,7 @@ msgstr ""
 #: common/include/user_profile.php:81
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:76
 #: plugins/authldap/common/AuthLDAPPlugin.class.php:216
-#: www/account/index.php:130 www/account/lostpw.php:90
+#: www/account/index.php:134 www/account/lostpw.php:90
 #: www/account/pending-resend.php:68 www/account/verify.php:78
 msgid "Login Name"
 msgstr ""
@@ -7350,23 +7350,23 @@ msgstr ""
 msgid "Real Name"
 msgstr ""
 
-#: common/include/user_profile.php:101 www/account/index.php:182
-#: www/account/register.php:219
+#: common/include/user_profile.php:101 www/account/index.php:188
+#: www/account/register.php:225
 msgid "Email Address"
 msgstr ""
 
-#: common/include/user_profile.php:115 www/account/index.php:191
-#: www/account/register.php:230 www/mail/index.php:79
+#: common/include/user_profile.php:115 www/account/index.php:197
+#: www/account/register.php:236 www/mail/index.php:79
 msgid "Address"
 msgstr ""
 
-#: common/include/user_profile.php:122 www/account/index.php:209
-#: www/account/register.php:242
+#: common/include/user_profile.php:122 www/account/index.php:215
+#: www/account/register.php:248
 msgid "Phone"
 msgstr ""
 
-#: common/include/user_profile.php:133 www/account/index.php:218
-#: www/account/register.php:248
+#: common/include/user_profile.php:133 www/account/index.php:224
+#: www/account/register.php:254
 msgid "Fax"
 msgstr ""
 
@@ -8638,7 +8638,7 @@ msgid "Please configure also the roles (by default, it's “No Access”)"
 msgstr ""
 
 #: common/tracker/actions/admin-ind.php:64 common/tracker/actions/ind.php:31
-#: plugins/taskboard/common/TaskBoard.class.php:861
+#: plugins/taskboard/common/TaskBoard.class.php:853
 #: plugins/taskboard/common/actions/ajax_get_trackers_data.php:24
 #: plugins/taskboard/common/views/admin/trackers.php:39
 msgid "Could Not Get ArtifactTypeFactory"
@@ -8742,8 +8742,8 @@ msgstr ""
 #: plugins/forumml/www/forumml_utils.php:596 plugins/forumml/www/index.php:126
 #: plugins/mantisbt/view/addIssue.php:133
 #: plugins/mantisbt/view/addOrEditNote.php:60
-#: plugins/scmgit/common/GitPlugin.class.php:1210
-#: plugins/scmhg/common/HgPlugin.class.php:934
+#: plugins/scmgit/common/GitPlugin.class.php:1214
+#: plugins/scmhg/common/HgPlugin.class.php:940
 #: plugins/scmhook/common/scmhookPlugin.class.php:222
 #: plugins/taskboard/common/views/admin/columns.php:94
 #: plugins/taskboard/common/views/admin/edit_column.php:102
@@ -9683,7 +9683,7 @@ msgstr ""
 #: plugins/scmgit/common/GitPlugin.class.php:366
 #: plugins/scmgit/common/GitPlugin.class.php:387
 #: plugins/scmhg/common/HgPlugin.class.php:242
-#: plugins/scmsvn/common/SVNPlugin.class.php:269 www/pm/index.php:79
+#: plugins/scmsvn/common/SVNPlugin.class.php:294 www/pm/index.php:79
 #: www/pm/mod_task.php:313 www/stats/site_stats_utils.php:270
 msgid "Total"
 msgstr ""
@@ -11035,7 +11035,7 @@ msgstr ""
 #: common/widget/Widget.class.php:97
 #: common/widget/Widget_TrackerContent.class.php:721
 #: plugins/mailman/www/mailman_utils.php:71
-#: plugins/mailman/www/mailman_utils.php:141 www/account/index.php:239
+#: plugins/mailman/www/mailman_utils.php:141 www/account/index.php:245
 #: www/include/Layout.class.php:1103
 msgid "Preferences"
 msgstr ""
@@ -12538,7 +12538,7 @@ msgstr ""
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:80
 #: plugins/authldap/common/AuthLDAPPlugin.class.php:218
-#: www/account/register.php:158 www/account/verify.php:82
+#: www/account/register.php:162 www/account/verify.php:82
 msgid "Password"
 msgstr ""
 
@@ -12554,7 +12554,7 @@ msgid "[Lost your password?]"
 msgstr ""
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:99
-#: www/account/pending-resend.php:55 www/account/register.php:288
+#: www/account/pending-resend.php:55 www/account/register.php:294
 msgid "Resend confirmation email to a pending account"
 msgstr ""
 
@@ -17680,7 +17680,7 @@ msgstr ""
 #: plugins/scmcvs/common/CVSPlugin.class.php:106
 #: plugins/scmcvs/common/CVSPlugin.class.php:123
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:136
-#: plugins/scmsvn/common/SVNPlugin.class.php:139
+#: plugins/scmsvn/common/SVNPlugin.class.php:156
 #, php-format
 msgid "Only project developers can access the %s tree via this method."
 msgstr ""
@@ -17696,8 +17696,8 @@ msgstr ""
 #: plugins/scmgit/common/GitPlugin.class.php:210
 #: plugins/scmhg/common/HgPlugin.class.php:124
 #: plugins/scmhg/common/HgPlugin.class.php:157
-#: plugins/scmsvn/common/SVNPlugin.class.php:157
-#: plugins/scmsvn/common/SVNPlugin.class.php:184
+#: plugins/scmsvn/common/SVNPlugin.class.php:174
+#: plugins/scmsvn/common/SVNPlugin.class.php:205
 msgid "SSH must be installed on your client machine."
 msgstr ""
 
@@ -17712,10 +17712,10 @@ msgstr ""
 #: plugins/scmgit/common/GitPlugin.class.php:230
 #: plugins/scmhg/common/HgPlugin.class.php:141
 #: plugins/scmhg/common/HgPlugin.class.php:179
-#: plugins/scmsvn/common/SVNPlugin.class.php:159
-#: plugins/scmsvn/common/SVNPlugin.class.php:175
-#: plugins/scmsvn/common/SVNPlugin.class.php:188
-#: plugins/scmsvn/common/SVNPlugin.class.php:206
+#: plugins/scmsvn/common/SVNPlugin.class.php:176
+#: plugins/scmsvn/common/SVNPlugin.class.php:194
+#: plugins/scmsvn/common/SVNPlugin.class.php:209
+#: plugins/scmsvn/common/SVNPlugin.class.php:229
 msgid "Enter your site password when prompted."
 msgstr ""
 
@@ -17731,8 +17731,8 @@ msgstr ""
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:140
 #: plugins/scmgit/common/GitPlugin.class.php:211
 #: plugins/scmhg/common/HgPlugin.class.php:158
-#: plugins/scmsvn/common/SVNPlugin.class.php:186
-#: plugins/scmsvn/common/SVNPlugin.class.php:204
+#: plugins/scmsvn/common/SVNPlugin.class.php:207
+#: plugins/scmsvn/common/SVNPlugin.class.php:227
 msgid "Substitute <em>developername</em> with the proper value."
 msgstr ""
 
@@ -17745,9 +17745,9 @@ msgstr ""
 #: plugins/scmhg/common/HgPlugin.class.php:164
 #: plugins/scmhg/common/HgPlugin.class.php:166
 #: plugins/scmhg/common/HgPlugin.class.php:182
-#: plugins/scmsvn/common/SVNPlugin.class.php:195
-#: plugins/scmsvn/common/SVNPlugin.class.php:197
-#: plugins/scmsvn/common/SVNPlugin.class.php:208
+#: plugins/scmsvn/common/SVNPlugin.class.php:217
+#: plugins/scmsvn/common/SVNPlugin.class.php:219
+#: plugins/scmsvn/common/SVNPlugin.class.php:232
 msgid "developername"
 msgstr ""
 
@@ -17758,7 +17758,7 @@ msgstr ""
 #: plugins/scmbzr/common/BzrPlugin.class.php:142
 #: plugins/scmccase/common/CCasePlugin.class.php:116
 #: plugins/scmcvs/common/CVSPlugin.class.php:155
-#: plugins/scmsvn/common/SVNPlugin.class.php:228
+#: plugins/scmsvn/common/SVNPlugin.class.php:253
 #, php-format
 msgid ""
 "Browsing the %s tree gives you a view into the current status of this "
@@ -17768,13 +17768,13 @@ msgstr ""
 #: plugins/scmbzr/common/BzrPlugin.class.php:144
 #: plugins/scmccase/common/CCasePlugin.class.php:118
 #: plugins/scmcvs/common/CVSPlugin.class.php:157
-#: plugins/scmsvn/common/SVNPlugin.class.php:230
+#: plugins/scmsvn/common/SVNPlugin.class.php:255
 msgid "You may also view the complete histories of any file in the repository."
 msgstr ""
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:148
 #: plugins/scmcvs/common/CVSPlugin.class.php:161
-#: plugins/scmsvn/common/SVNPlugin.class.php:234
+#: plugins/scmsvn/common/SVNPlugin.class.php:259
 #, php-format
 msgid "Browse %s Repository"
 msgstr ""
@@ -17861,7 +17861,7 @@ msgstr ""
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:152
 #: plugins/scmgit/common/GitPlugin.class.php:275
 #: plugins/scmhg/common/HgPlugin.class.php:196
-#: plugins/scmsvn/common/SVNPlugin.class.php:220
+#: plugins/scmsvn/common/SVNPlugin.class.php:245
 msgid "Download the nightly snapshot"
 msgstr ""
 
@@ -17873,7 +17873,7 @@ msgstr ""
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:185
 #: plugins/scmgit/common/GitPlugin.class.php:353
 #: plugins/scmhg/common/HgPlugin.class.php:223
-#: plugins/scmsvn/common/SVNPlugin.class.php:250
+#: plugins/scmsvn/common/SVNPlugin.class.php:275
 #: www/stats/site_stats_utils.php:289
 msgid "Adds"
 msgstr ""
@@ -17882,7 +17882,7 @@ msgstr ""
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:225
 #: plugins/scmgit/common/GitPlugin.class.php:393
 #: plugins/scmhg/common/HgPlugin.class.php:248
-#: plugins/scmsvn/common/SVNPlugin.class.php:275
+#: plugins/scmsvn/common/SVNPlugin.class.php:300
 msgid "No history yet."
 msgstr ""
 
@@ -17956,7 +17956,7 @@ msgstr ""
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:186
 #: plugins/scmgit/common/GitPlugin.class.php:354
 #: plugins/scmhg/common/HgPlugin.class.php:224
-#: plugins/scmsvn/common/SVNPlugin.class.php:251
+#: plugins/scmsvn/common/SVNPlugin.class.php:276
 msgid "Updates"
 msgstr ""
 
@@ -17969,10 +17969,10 @@ msgid "Create new repository"
 msgstr ""
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:589
-#: plugins/scmgit/common/GitPlugin.class.php:1178
-#: plugins/scmgit/common/GitPlugin.class.php:1203
-#: plugins/scmhg/common/HgPlugin.class.php:906
-#: plugins/scmhg/common/HgPlugin.class.php:929
+#: plugins/scmgit/common/GitPlugin.class.php:1182
+#: plugins/scmgit/common/GitPlugin.class.php:1207
+#: plugins/scmhg/common/HgPlugin.class.php:911
+#: plugins/scmhg/common/HgPlugin.class.php:935
 msgid "Repository name"
 msgstr ""
 
@@ -18019,7 +18019,7 @@ msgstr[1] ""
 
 #: plugins/scmgit/common/GitPlugin.class.php:152
 #: plugins/scmhg/common/HgPlugin.class.php:96
-#: plugins/scmsvn/common/SVNPlugin.class.php:138
+#: plugins/scmsvn/common/SVNPlugin.class.php:155
 msgid "Developer Access"
 msgstr ""
 
@@ -18034,7 +18034,7 @@ msgstr[1] ""
 
 #: plugins/scmgit/common/GitPlugin.class.php:160
 #: plugins/scmhg/common/HgPlugin.class.php:104
-#: plugins/scmsvn/common/SVNPlugin.class.php:143
+#: plugins/scmsvn/common/SVNPlugin.class.php:160
 msgid "via SSH"
 msgstr ""
 
@@ -18099,55 +18099,55 @@ msgstr ""
 msgid "statistics"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1051
+#: plugins/scmgit/common/GitPlugin.class.php:1055
 msgid "Git Commits"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1070
-#: plugins/scmhg/common/HgPlugin.class.php:829
+#: plugins/scmgit/common/GitPlugin.class.php:1074
+#: plugins/scmhg/common/HgPlugin.class.php:834
 msgid "Cannot create a secondary repository with the same name as the primary"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1075
-#: plugins/scmhg/common/HgPlugin.class.php:834
+#: plugins/scmgit/common/GitPlugin.class.php:1079
+#: plugins/scmhg/common/HgPlugin.class.php:839
 msgid "This repository name is not valid"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1088
-#: plugins/scmhg/common/HgPlugin.class.php:847
+#: plugins/scmgit/common/GitPlugin.class.php:1092
+#: plugins/scmhg/common/HgPlugin.class.php:852
 #, php-format
 msgid "A repository %s already exists"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1114
+#: plugins/scmgit/common/GitPlugin.class.php:1118
 msgid "Invalid URL from which to clone"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1123
+#: plugins/scmgit/common/GitPlugin.class.php:1127
 #, php-format
 msgid "Clone of %s"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1173
+#: plugins/scmgit/common/GitPlugin.class.php:1177
 msgid "No extra Git repository for project"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1175
+#: plugins/scmgit/common/GitPlugin.class.php:1179
 #, php-format
 msgid "Extra Git repository for project %1$s"
 msgid_plural "Extra Git repositories for project %1$s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1178
+#: plugins/scmgit/common/GitPlugin.class.php:1182
 msgid "Initial clone URL (if any)"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1198
+#: plugins/scmgit/common/GitPlugin.class.php:1202
 msgid "Create new Git repository for project"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1206
+#: plugins/scmgit/common/GitPlugin.class.php:1210
 msgid ""
 "Initial clone URL (or name of an existing repository in this project; leave "
 "empty to start with an empty repository)"
@@ -18262,22 +18262,22 @@ msgstr ""
 msgid "Browse extra Hg repository"
 msgstr ""
 
-#: plugins/scmhg/common/HgPlugin.class.php:810
+#: plugins/scmhg/common/HgPlugin.class.php:815
 msgid "Hg Commits"
 msgstr ""
 
-#: plugins/scmhg/common/HgPlugin.class.php:901
+#: plugins/scmhg/common/HgPlugin.class.php:906
 msgid "No extra Hg repository for project"
 msgstr ""
 
-#: plugins/scmhg/common/HgPlugin.class.php:903
+#: plugins/scmhg/common/HgPlugin.class.php:908
 #, php-format
 msgid "Extra Hg repository for project %1$s"
 msgid_plural "Extra Hg repositories for project %1$s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugins/scmhg/common/HgPlugin.class.php:924
+#: plugins/scmhg/common/HgPlugin.class.php:930
 #, php-format
 msgid "Create new Hg repository for project %s"
 msgstr ""
@@ -18413,25 +18413,25 @@ msgid ""
 "some control over it to the project's administrator."
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:115
+#: plugins/scmsvn/common/SVNPlugin.class.php:126
 msgid "Anonymous Subversion Access"
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:117
+#: plugins/scmsvn/common/SVNPlugin.class.php:128
 msgid ""
 "This project's SVN repository can be checked out through anonymous access "
 "with the following command(s)."
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:147
+#: plugins/scmsvn/common/SVNPlugin.class.php:164
 msgid "via DAV"
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:226
+#: plugins/scmsvn/common/SVNPlugin.class.php:251
 msgid "Subversion Repository Browser"
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:671
+#: plugins/scmsvn/common/SVNPlugin.class.php:696
 msgid "Subversion Commits"
 msgstr ""
 
@@ -18463,10 +18463,10 @@ msgstr ""
 #: plugins/taskboard/common/TaskBoard.class.php:522
 #: plugins/taskboard/common/TaskBoard.class.php:540
 #: plugins/taskboard/common/TaskBoard.class.php:557
-#: plugins/taskboard/common/TaskBoard.class.php:801
-#: plugins/taskboard/common/TaskBoard.class.php:952
-#: plugins/taskboard/common/TaskBoard.class.php:980
-#: plugins/taskboard/common/TaskBoard.class.php:1033
+#: plugins/taskboard/common/TaskBoard.class.php:793
+#: plugins/taskboard/common/TaskBoard.class.php:944
+#: plugins/taskboard/common/TaskBoard.class.php:972
+#: plugins/taskboard/common/TaskBoard.class.php:1025
 #: plugins/taskboard/common/TaskBoardPlugin.class.php:29
 #: plugins/taskboard/common/views/admin/delete_taskboard.php:40
 #: plugins/taskboard/common/views/admin/ind.php:56
@@ -18528,19 +18528,19 @@ msgstr ""
 msgid "Configured extra field for userstories sorting is not found."
 msgstr ""
 
-#: plugins/taskboard/common/TaskBoard.class.php:801
+#: plugins/taskboard/common/TaskBoard.class.php:793
 msgid "Cannot get list of columns."
 msgstr ""
 
-#: plugins/taskboard/common/TaskBoard.class.php:952
+#: plugins/taskboard/common/TaskBoard.class.php:944
 msgid "Cannot get list of releases."
 msgstr ""
 
-#: plugins/taskboard/common/TaskBoard.class.php:980
+#: plugins/taskboard/common/TaskBoard.class.php:972
 msgid "Cannot get current release."
 msgstr ""
 
-#: plugins/taskboard/common/TaskBoard.class.php:1033
+#: plugins/taskboard/common/TaskBoard.class.php:1025
 msgid "Cannot get used resolutions"
 msgstr ""
 
@@ -19393,7 +19393,7 @@ msgstr ""
 msgid "You should now <a href=\"%s\">Return to User Prefs</a>."
 msgstr ""
 
-#: www/account/change_pw.php:70 www/account/index.php:131
+#: www/account/change_pw.php:70 www/account/index.php:135
 #: www/admin/userlist.php:160
 msgid "Change Password"
 msgstr ""
@@ -19406,13 +19406,13 @@ msgstr ""
 msgid "New Password"
 msgstr ""
 
-#: www/account/change_pw.php:79 www/account/register.php:160
+#: www/account/change_pw.php:79 www/account/register.php:164
 #, php-format
 msgid "Minimum 8 characters."
 msgstr ""
 
 #: www/account/change_pw.php:80 www/account/lostlogin.php:65
-#: www/account/lostlogin.php:95 www/account/register.php:163
+#: www/account/lostlogin.php:95 www/account/register.php:167
 #, php-format
 msgid ""
 "Must contain at least one uppercase letter, one lowercase, one digit, one "
@@ -19436,15 +19436,15 @@ msgstr ""
 msgid "Available keys"
 msgstr ""
 
-#: www/account/editsshkeys.php:50 www/account/index.php:292
+#: www/account/editsshkeys.php:50 www/account/index.php:298
 msgid "Algorithm"
 msgstr ""
 
-#: www/account/editsshkeys.php:50 www/account/index.php:292
+#: www/account/editsshkeys.php:50 www/account/index.php:298
 msgid "Fingerprint"
 msgstr ""
 
-#: www/account/editsshkeys.php:50 www/account/index.php:292
+#: www/account/editsshkeys.php:50 www/account/index.php:298
 #: www/project/admin/editimages.php:267
 msgid "Uploaded"
 msgstr ""
@@ -19501,77 +19501,77 @@ msgid ""
 "project."
 msgstr ""
 
-#: www/account/index.php:94 www/admin/groupedit.php:76
+#: www/account/index.php:98 www/admin/groupedit.php:76
 #: www/admin/useredit.php:112
 msgid "Updated"
 msgstr ""
 
-#: www/account/index.php:109 www/account/index.php:111
+#: www/account/index.php:113 www/account/index.php:115
 msgid "Account options"
 msgstr ""
 
-#: www/account/index.php:110 www/index.php:36 www/index.php:70
+#: www/account/index.php:114 www/index.php:36 www/index.php:70
 msgid "Welcome"
 msgstr ""
 
-#: www/account/index.php:112
+#: www/account/index.php:116
 msgid "View My Profile"
 msgstr ""
 
-#: www/account/index.php:114
+#: www/account/index.php:118
 msgid "Edit My Skills Profile"
 msgstr ""
 
-#: www/account/index.php:120 www/admin/search.php:78
+#: www/account/index.php:124 www/admin/search.php:78
 msgid "Member since"
 msgstr ""
 
-#: www/account/index.php:135 www/account/register.php:184
+#: www/account/index.php:139 www/account/register.php:188
 msgid "First Name"
 msgstr ""
 
-#: www/account/index.php:141 www/account/index.php:144
-#: www/account/register.php:191
+#: www/account/index.php:145 www/account/index.php:148
+#: www/account/register.php:195
 msgid "Last Name"
 msgstr ""
 
-#: www/account/index.php:150 www/snippet/package.php:163
+#: www/account/index.php:154 www/snippet/package.php:163
 #: www/snippet/snippet_utils.php:208 www/snippet/snippet_utils.php:251
 #: www/snippet/submit.php:127 www/stats/i18n.php:34
 msgid "Language"
 msgstr ""
 
-#: www/account/index.php:159
+#: www/account/index.php:163
 msgid "Timezone"
 msgstr ""
 
-#: www/account/index.php:168 www/account/register.php:210
+#: www/account/index.php:173 www/account/register.php:215
 msgid "Theme"
 msgstr ""
 
-#: www/account/index.php:173
+#: www/account/index.php:179
 msgid "Country"
 msgstr ""
 
-#: www/account/index.php:184
+#: www/account/index.php:190
 msgid "Change Email Address"
 msgstr ""
 
-#: www/account/index.php:200 www/account/register.php:236
+#: www/account/index.php:206 www/account/register.php:242
 msgid "Address (continued)"
 msgstr ""
 
-#: www/account/index.php:245 www/account/register.php:257
+#: www/account/index.php:251 www/account/register.php:263
 msgid ""
 "Receive Email about Site Updates <em>(Very low traffic and includes security "
 "notices. Highly Recommended.)</em>"
 msgstr ""
 
-#: www/account/index.php:251 www/account/register.php:263
+#: www/account/index.php:257 www/account/register.php:269
 msgid "Receive additional community mailings. <em>(Low traffic.)</em>"
 msgstr ""
 
-#: www/account/index.php:259
+#: www/account/index.php:265
 #, php-format
 msgid ""
 "Participate in peer ratings. <em>(Allows you to rate other users using "
@@ -19580,38 +19580,38 @@ msgid ""
 "participate in ratings.)</em>"
 msgstr ""
 
-#: www/account/index.php:266
+#: www/account/index.php:272
 msgid ""
 "Enable tooltips. Small help texts displayed on mouse over links, images."
 msgstr ""
 
-#: www/account/index.php:274
+#: www/account/index.php:280
 msgid ""
 "Use advanced quicknav menu based on your navigation history on this site. "
 "Quicknav will use your 5 more visited projects."
 msgstr ""
 
-#: www/account/index.php:286
+#: www/account/index.php:292
 msgid "Shell Account Information"
 msgstr ""
 
-#: www/account/index.php:288
+#: www/account/index.php:294
 msgid "Shell box"
 msgstr ""
 
-#: www/account/index.php:289
+#: www/account/index.php:295
 msgid "SSH Shared Authorized Keys"
 msgstr ""
 
-#: www/account/index.php:308
+#: www/account/index.php:314
 msgid "Edit Keys"
 msgstr ""
 
-#: www/account/index.php:310
+#: www/account/index.php:316
 msgid "Shell Account deactivated"
 msgstr ""
 
-#: www/account/index.php:317
+#: www/account/index.php:323
 msgid "Reset Changes"
 msgstr ""
 
@@ -19721,74 +19721,74 @@ msgid ""
 "Fill in a user name and click “Submit” to resend the confirmation email."
 msgstr ""
 
-#: www/account/register.php:77
+#: www/account/register.php:81
 msgid "You can't register an account unless you accept the terms of use."
 msgstr ""
 
-#: www/account/register.php:102
+#: www/account/register.php:106
 msgid "Register Confirmation"
 msgstr ""
 
-#: www/account/register.php:106
+#: www/account/register.php:110
 msgid ""
 "Error during user activation but after user registration (user is now in "
 "pending state and will not get a notification eMail!)"
 msgstr ""
 
-#: www/account/register.php:107
+#: www/account/register.php:111
 #, php-format
 msgid "Could not activate newly registered user's forge account: %s"
 msgstr ""
 
-#: www/account/register.php:114
+#: www/account/register.php:118
 #, php-format
 msgid "You have registered the %1$s account on %2$s."
 msgstr ""
 
-#: www/account/register.php:118
+#: www/account/register.php:122
 msgid ""
 "A confirmation email is being sent to verify the submitted email address. "
 "Visiting the link sent in this email will activate the account."
 msgstr ""
 
-#: www/account/register.php:121
+#: www/account/register.php:125
 #, php-format
 msgid ""
 "You have registered and activated user %1$s on %2$s. They will not receive "
 "an eMail about this fact."
 msgstr ""
 
-#: www/account/register.php:142
+#: www/account/register.php:146
 msgid "User Account Registration"
 msgstr ""
 
-#: www/account/register.php:149
+#: www/account/register.php:153
 msgid ""
 "Login Name (no uppercase letters; leave empty to have it generated "
 "automatically):"
 msgstr ""
 
-#: www/account/register.php:151
+#: www/account/register.php:155
 msgid "Login Name (do not use uppercase letters)"
 msgstr ""
 
-#: www/account/register.php:172
+#: www/account/register.php:176
 msgid "Password (repeat)"
 msgstr ""
 
-#: www/account/register.php:198
+#: www/account/register.php:202
 msgid "Language Choice:"
 msgstr ""
 
-#: www/account/register.php:202
+#: www/account/register.php:206
 msgid "Timezone:"
 msgstr ""
 
-#: www/account/register.php:215
+#: www/account/register.php:221
 msgid "Country:"
 msgstr ""
 
-#: www/account/register.php:222
+#: www/account/register.php:228
 #, php-format
 msgid ""
 "This email address will be verified before account activation. You will "
@@ -19796,16 +19796,16 @@ msgid ""
 "this address."
 msgstr ""
 
-#: www/account/register.php:269
+#: www/account/register.php:275
 #, php-format
 msgid "Do you accept the <a href=\"%s\">terms of use</a> for this site?"
 msgstr ""
 
-#: www/account/register.php:277
+#: www/account/register.php:283
 msgid "Activate this user immediately"
 msgstr ""
 
-#: www/account/register.php:286
+#: www/account/register.php:292
 msgid "Register"
 msgstr ""
 
