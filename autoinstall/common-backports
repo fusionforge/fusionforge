@@ -4,7 +4,7 @@
 # Copyright (C) 2011  Roland Mas
 # Copyright (C) 2011  Olivier Berger - Institut Telecom
 # Copyright (C) 2014  Inria (Sylvain Beucler)
-# Copyright 2017, Franck Villaume - TrivialDev
+# Copyright 2017-2018, Franck Villaume - TrivialDev
 #
 # This file is part of FusionForge. FusionForge is free software;
 # you can redistribute it and/or modify it under the terms of the
@@ -44,7 +44,11 @@ function rebuild_one_rpm {
     enablefedsrc=
     enablefed=
     if [ "$1" = "--enablefedora" ] ; then
-	enablefedsrc="--enablerepo=fedora-source --enablerepo=fedora-updates-source"
+	if [ "$2" = "mediawiki" ] ; then
+		enablefedsrc="--enablerepo=fedora-source"
+	else
+		enablefedsrc="--enablerepo=fedora-source --enablerepo=fedora-updates-source"
+	fi
     	shift
     fi
 
@@ -88,7 +92,15 @@ function rebuild_one_rpm {
 
 	for i in $src-*.src.rpm ; do
 	    if [ $rebuild = yes ] || [ ! -e "$i.done" ] ; then
-		rpmbuild --rebuild $src-*.src.rpm
+		if [ $src = "mediawiki" ] ; then
+			rpm -i $src-*.src.rpm
+			cd ~/rpmbuild
+			sed -e 's/, php-pecl-jsonc//g' -i SPECS/mediawiki.spec
+			rpmbuild --define='_unpackaged_files_terminate_build 0' -ba SPECS/mediawiki.spec
+			cd -
+		else 
+			rpmbuild --rebuild $src-*.src.rpm
+		fi
 	    fi
 	    mv -f "$i" "$i.done"
 	done
@@ -179,6 +191,10 @@ EOF
     DEPS=""
     REMOVEDEPS=$DEPS
     backport_rpm_from_fedora php-htmlpurifier-htmlpurifier
+
+    DEPS=""
+    REMOVEDEPS=$DEPS
+    backport_rpm_from_fedora mediawiki
 
     mkdir -p /usr/src/fusionforge/build/RPMS/
     cp -r ~/rpmbuild/RPMS/* /usr/src/fusionforge/build/RPMS/
