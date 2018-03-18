@@ -862,17 +862,11 @@ some control over it to the project's administrator.");
 			if ($adds > 0 || $updates > 0 || $commits > 0 || $deletes > 0) {
 				$i = 0;
 				foreach ($messages as $message) {
-					if ($user && ($users[$i] == $userunixname)) {
-						$revisionsArr[$i]['pluginName'] = 'scmsvn';
-						$revisionsArr[$i]['description'] = htmlspecialchars($message);
-						$revisionsArr[$i]['commit_id'] = $revisions[$i];
-						$revisionsArr[$i]['date'] = $times[$i];
-					} else {
-						$revisionsArr[$i]['pluginName'] = 'scmsvn';
-						$revisionsArr[$i]['description'] = htmlspecialchars($message);
-						$revisionsArr[$i]['commit_id'] = $revisions[$i];
-						$revisionsArr[$i]['date'] = $times[$i];
-					}
+					$revisionsArr[$i]['pluginName'] = 'scmsvn';
+					$revisionsArr[$i]['description'] = htmlspecialchars($message);
+					$revisionsArr[$i]['commit_id'] = $revisions[$i];
+					$revisionsArr[$i]['repo_name'] = $project->getUnixName();
+					$revisionsArr[$i]['date'] = $times[$i];
 					$i++;
 				}
 			}

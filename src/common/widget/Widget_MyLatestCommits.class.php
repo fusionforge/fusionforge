@@ -46,8 +46,15 @@ class Widget_MyLatestCommits extends Widget {
 		return _('My Latest Commits');
 	}
 
-	public function _getLinkToCommit($project, $commit_id, $pluginName) {
-		return util_make_link('/scm/browser.php?group_id='.$project->getID().'&scm_plugin='.$pluginName.'&commit='.$commit_id, _('commit')._(': ').$commit_id);
+	public function _getLinkToCommit($project, $commit_id, $pluginName, $repo_name) {
+		return util_make_link('/scm/browser.php?group_id='.$project->getID().'&scm_plugin='.$pluginName.'&commit='.$commit_id.'&extra='.$repo_name, _('commit')._(': ').$commit_id);
+	}
+
+	static function commit_dateorder($a, $b) {
+		if ($a['date'] == $b['date']) {
+			return 0;
+		}
+		return ($a['date'] > $b['date']) ? -1 : 1;
 	}
 
 	public function getContent() {
@@ -84,6 +91,8 @@ class Widget_MyLatestCommits extends Widget {
 				$revisions = array_merge($revisions, $scmPlugin->getCommits($project, $user, $this->_nb_commits));
 			}
 			if (count($revisions) > 0) {
+				usort($revisions, array($this, 'commit_dateorder'));
+				$revisions = array_slice($revisions, 0, $this->_nb_commits, true);
 				$global_nb_revisions += count($revisions);
 				list($hide_now, $count_diff, $hide_url) = my_hide_url('scm', $project->getID(), $hide_item_id, count($projects), $hide_scm);
 				$html .= html_e('div', array(), $hide_url.util_make_link('/scm/?group_id='.$project->getID(), $project->getPublicName()));
@@ -102,8 +111,8 @@ class Widget_MyLatestCommits extends Widget {
 						}
 						$html .= html_e('div', $divattr,
 								html_e('div', array('style' => 'font-size:0.98em'),
-									$this->_getLinkToCommit($project, $revision['commit_id'], $revision['pluginName']).
-									' '._('on').' '.
+									$this->_getLinkToCommit($project, $revision['commit_id'], $revision['pluginName'], $revision['repo_name']).
+									' '._('on repository').' '.$revision['repo_name'].' '.
 									date(_("Y-m-d H:i"), $revision['date'])).
 								html_e('div', array('style' => 'padding-left:20px; padding-bottom:4px; color:#555'),
 									$revisionDescription));
