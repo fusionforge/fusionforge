@@ -52,8 +52,8 @@ connectionstring = user=$db_user_nss dbname=$db_name $hostconf
 
 
 #----------------- NSS queries
-getpwnam        = SELECT login AS username,passwd,gecos,('$homedir_prefix' || login) AS homedir,shell,uid,$gid FROM nss_passwd WHERE login = \$1
-getpwuid        = SELECT login AS username,passwd,gecos,('$homedir_prefix' || login) AS homedir,shell,uid,$gid FROM nss_passwd WHERE uid = \$1
+getpwnam        = SELECT login AS username,'x',gecos,('$homedir_prefix' || login) AS homedir,shell,uid,$gid FROM nss_passwd WHERE login = \$1
+getpwuid        = SELECT login AS username,'x',gecos,('$homedir_prefix' || login) AS homedir,shell,uid,$gid FROM nss_passwd WHERE uid = \$1
 #allusers        = SELECT login AS username,passwd,gecos,('$homedir_prefix' || login) AS homedir,shell,uid,$gid FROM nss_passwd
 getgroupmembersbygid = SELECT login AS username FROM nss_passwd WHERE $gid = \$1
 getgrnam = SELECT name AS groupname,'x',gid,ARRAY(SELECT user_name FROM nss_usergroups WHERE nss_usergroups.gid = nss_groups.gid) AS members FROM nss_groups WHERE name = \$1
