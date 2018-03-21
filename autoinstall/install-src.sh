@@ -35,7 +35,7 @@ if [ -e /etc/debian_version ]; then
 			libapache2-mpm-itk libapache2-mod-svn \
 			libapache2-mod-php5 \
 			apache2 postgresql postgresql-contrib libnss-pgsql2 unscd \
-			cvs subversion viewvc python-pycurl git mercurial xinetd \
+			cvs subversion viewvc python-pycurl git mercurial bzr xinetd \
 			python-moinmoin libapache2-mod-wsgi python-psycopg2 \
 			unoconv poppler-utils dpkg-dev \
 			libmarkdown-php \
@@ -47,7 +47,7 @@ if [ -e /etc/debian_version ]; then
 			libapache2-mpm-itk libapache2-mod-svn \
 			libapache2-mod-php \
 			apache2 postgresql postgresql-contrib libnss-pgsql2 unscd \
-			cvs subversion viewvc python-pycurl git mercurial xinetd \
+			cvs subversion viewvc python-pycurl git mercurial bzr xinetd \
 			python-moinmoin libapache2-mod-wsgi python-psycopg2 \
 			unoconv poppler-utils dpkg-dev \
 			libmarkdown-php \
