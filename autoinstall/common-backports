@@ -196,7 +196,7 @@ EOF
     REMOVEDEPS=$DEPS
     backport_rpm_from_fedora python-simpletal
 
-    DEPS="python2-devel python-paste python-paste-deploy python-simplejson python-testtools"
+    DEPS="python2-devel python-paste python-paste-deploy python-simplejson python-testtools python-pygments"
     REMOVEDEPS=$DEPS
     backport_rpm_from_fedora loggerhead
 
