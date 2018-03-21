@@ -59,7 +59,7 @@ class multiSCMTest extends FForge_SeleniumTestCase
 		$p = preg_replace(",^bzr checkout ,", "", $p);
 		$p = preg_replace(",/branchname$,", "", $p);
 		$t = exec("mktemp -d /tmp/bzrTest.XXXXXX");
-		system("bzr whoami admin <admin@localhost.localdomain>");
+		system("bzr whoami 'admin <admin@localhost.localdomain>'");
 		system("cd $t && bzr init --quiet trunk >/dev/null", $ret);
 		$this->assertEquals(0, $ret);
 		system("echo 'this is a simple text' > $t/trunk/mytext.txt");
