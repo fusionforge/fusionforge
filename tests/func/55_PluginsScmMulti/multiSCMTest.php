@@ -28,9 +28,6 @@ class multiSCMTest extends FForge_SeleniumTestCase
 
 	function testMultiSCM()
 	{
-		$this->skip_on_rpm_installs();
-		$this->skip_on_src_installs();
-
 		$this->loadAndCacheFixture();
 
 		$this->changeConfig(array("core" => array("allow_multiple_scm" => "yes")));
@@ -77,7 +74,7 @@ class multiSCMTest extends FForge_SeleniumTestCase
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
-		$p = $this->getText("//span[contains(.,'svn checkout svn+ssh')]");
+		$p = $this->getText("//kbd[contains(.,'svn checkout svn+ssh')]");
 		$p = preg_replace(",^svn checkout ,", "", $p);
 		$t = exec("mktemp -d /tmp/svnTest.XXXXXX");
 		system("cd $t && svn checkout $p projecta", $ret);
