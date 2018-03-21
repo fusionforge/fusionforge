@@ -194,6 +194,14 @@ EOF
 
     DEPS=""
     REMOVEDEPS=$DEPS
+    backport_rpm_from_fedora python-simpletal
+
+    DEPS="python2-devel python-paste python-paste-deploy python-simplejson python-testtools"
+    REMOVEDEPS=$DEPS
+    backport_rpm_from_fedora loggerhead
+
+    DEPS=""
+    REMOVEDEPS=$DEPS
     backport_rpm_from_fedora mediawiki
 
     mkdir -p /usr/src/fusionforge/build/RPMS/

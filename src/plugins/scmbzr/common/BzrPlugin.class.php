@@ -41,6 +41,7 @@ over it to the project's administrator.");
 		$this->hooks[] = 'scm_browser_page';
 		$this->hooks[] = 'scm_update_repolist';
 		$this->hooks[] = 'scm_gather_stats';
+		$this->hooks[] = 'scm_admin_form';
 
 		$this->main_branch_names = array();
 		$this->main_branch_names[] = 'trunk';
@@ -137,17 +138,22 @@ over it to the project's administrator.");
 	}
 
 	function getBrowserLinkBlock ($project) {
+		global $HTML;
 		$b = html_e('h2', array(), _('Bazaar Repository Browser'));
-		$b .= '<p>';
-		$b .= sprintf(_("Browsing the %s tree gives you a view into the current status of this project's code."), 'Bazaar');
-		$b .= ' ';
-		$b .= _('You may also view the complete histories of any file in the repository.');
-		$b .= '</p>';
-		$b .= '<p>[' ;
-		$b .= util_make_link ("/scm/browser.php?group_id=".$project->getID().'&scm_plugin='.$this->name,
+		if ( $project->enableAnonSCM()) {
+			$b .= '<p>';
+			$b .= sprintf(_("Browsing the %s tree gives you a view into the current status of this project's code."), 'Bazaar');
+			$b .= ' ';
+			$b .= _('You may also view the complete histories of any file in the repository.');
+			$b .= '</p>';
+			$b .= '<p>[' ;
+			$b .= util_make_link ("/scm/browser.php?group_id=".$project->getID().'&scm_plugin='.$this->name,
 								sprintf(_('Browse %s Repository'), 'Bazaar')
-			) ;
-		$b .= ']</p>' ;
+				) ;
+			$b .= ']</p>' ;
+		} else {
+			$b .= $HTML->information(_('Only available if anonymous access is allowed'));
+		}
 		return $b ;
 	}
 
@@ -165,7 +171,7 @@ over it to the project's administrator.");
 			return;
 		}
 
-		if ($this->browserDisplayable ($project)) {
+		if ($this->browserDisplayable($project) && $project->enableAnonSCM()) {
 			htmlIframe('/scm/loggerhead/'.$project->getUnixName(),array('id'=>'scmbzr_iframe'));
 		}
 	}
@@ -535,10 +541,8 @@ over it to the project's administrator.");
 		session_require_perm('project_admin', $params['group_id']);
 
 		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
-			echo html_ao('div', array('id' => 'tabber-'.$this->name, 'class' => 'tabbertab'));
-		}
-		if (forge_get_config('allow_multiple_scm') && ($params['allow_multiple_scm'] > 1)) {
-			echo html_ac(html_ap() - 1);
+			echo html_e('div', array('id' => 'tabber-'.$this->name, 'class' => 'tabbertab'),
+				$HTML->information(_('No specific action available')));
 		}
 	}
 }
