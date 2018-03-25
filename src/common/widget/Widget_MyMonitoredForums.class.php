@@ -21,7 +21,7 @@
  */
 
 require_once 'Widget.class.php';
-require_once $gfwww.'include/my_utils.php';
+require_once $gfcommon.'include/my_utils.php';
 require_once $gfcommon.'include/MonitorElement.class.php';
 
 /**

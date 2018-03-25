@@ -25,7 +25,7 @@
 
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
-require_once $gfwww.'include/my_utils.php';
+require_once $gfcommon.'include/my_utils.php';
 require_once $gfwww.'include/vote_function.php';
 require_once $gfcommon.'widget/WidgetLayoutManager.class.php';
 
