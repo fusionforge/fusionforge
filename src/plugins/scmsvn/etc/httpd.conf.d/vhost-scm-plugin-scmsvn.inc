@@ -14,7 +14,7 @@ ScriptAliasMatch ^/authscm/[^/]+/viewvc(.*) ${FF__core__plugins_path}/scmsvn/lib
   Satisfy Any
 </LocationMatch>
 ScriptAlias /anonscm/viewvc ${FF__core__plugins_path}/scmsvn/libexec/viewvc.cgi
-#Alias /doc/viewvc /usr/share/viewvc/docroot
+Alias /scm/viewvc/docroot /usr/share/viewvc/docroot
 
 # Activity
 ScriptAliasMatch ^/authscm/[^/]+/svnlog(.*) ${FF__core__plugins_path}/scmsvn/libexec/svnlog.php$1
