@@ -28,7 +28,6 @@ class multiSCMTest extends FForge_SeleniumTestCase
 
 	function testMultiSCM()
 	{
-		$this->skip_on_rpm_installs();
 		$this->skip_on_src_installs();
 
 		$this->loadAndCacheFixture();
