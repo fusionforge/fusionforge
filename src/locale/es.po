@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: fusionforge 6.1.0rc1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-25 20:22+0200\n"
-"PO-Revision-Date: 2018-03-27 20:52+0200\n"
+"PO-Revision-Date: 2018-03-29 21:18+0200\n"
 "Last-Translator: Francisco Javier Serrador <fserrador@gmail.com>\n"
 "Language-Team: Spanish <es@tp.org.es>\n"
 "Language: es\n"
@@ -1443,7 +1443,7 @@ msgstr "Revisión borrada correctamente."
 
 #: common/docman/actions/deletereview.php:52
 msgid "Cannot delete review ID"
-msgstr "No puede borrar ID revisión "
+msgstr "No puede borrar ID revisión"
 
 #: common/docman/actions/deletereview.php:55
 #: common/docman/actions/editfile.php:260
@@ -1599,7 +1599,7 @@ msgstr "Ningún ID documental o id revisado. No puede obtener comentarios."
 #: common/docman/actions/getdocreviewcompleteform.php:53
 #: common/docman/actions/getdocreviewuserstatus.php:53
 msgid "No document ID or no review id. Cannot retrieve information."
-msgstr "Ningún ID documental o id revisión. No puede obtener información."
+msgstr "Ningún ID documental o id revisado. No puede obtener información."
 
 #: common/docman/actions/getdocreviews.php:49
 #: common/docman/views/editfile.php:75
@@ -1746,7 +1746,7 @@ msgstr "Proyecto"
 #: common/docman/actions/notifyusers.php:76
 #: common/docman/DocumentGroup.class.php:111
 msgid "Document Folder"
-msgstr "Carpeta del Documento:"
+msgstr "Carpeta del Documento"
 
 #: common/docman/actions/notifyusers.php:77
 #: common/docman/Document.class.php:1018 common/docman/views/addfile.php:99
@@ -2022,7 +2022,7 @@ msgstr "El nombre del directorio ya existe"
 
 #: common/docman/DocumentGroup.class.php:204
 msgid "Error Adding Folder"
-msgstr "Error Creando Carpeta "
+msgstr "Error Creando Carpeta"
 
 #: common/docman/DocumentGroup.class.php:295
 msgid "Unsupported injected file"
@@ -2242,7 +2242,7 @@ msgstr "Comentario final"
 #: common/docman/views/editfile.php:94
 #, php-format
 msgid "(at least %s characters)"
-msgstr "(por lo menos %s carácteres)."
+msgstr "(por lo menos %s caracteres)"
 
 #: common/docman/DocumentReview.class.php:293
 #: common/docman/views/search.php:54 common/tracker/actions/csv.php:108
@@ -2541,7 +2541,7 @@ msgstr "opcional"
 #: common/docman/DocumentReview.class.php:413
 #: common/docman/DocumentReview.class.php:592
 msgid "Missing Version ID to create review"
-msgstr ""
+msgstr "ID de Versión Ausente para cerar revisión"
 
 #: common/docman/DocumentReview.class.php:417
 #: common/docman/DocumentReview.class.php:596
@@ -2568,7 +2568,7 @@ msgstr "Falta revisiones mandatorias"
 #: common/docman/DocumentReview.class.php:433
 #: common/docman/DocumentReview.class.php:612
 msgid "Wrong parameter type for optional reviewers"
-msgstr "Tipo de parámetro equivocado para revisiones opcionales "
+msgstr "Tipo de parámetro equivocado para revisiones opcionales"
 
 #: common/docman/DocumentReview.class.php:477
 msgid "Unable to create review"
@@ -2870,7 +2870,7 @@ msgstr "Referido a la descripcion corta del documento (ej. Como usar el servidor
 #: common/docman/views/addfile.php:104 common/docman/views/editfile.php:98
 #: www/include/html.php:452
 msgid "Editing tips:http,https or ftp: Hyperlinks. [#NNN]: Tracker id NNN. [TNNN]: Task id NNN. [wiki:&lt;pagename&gt;]: Wiki page. [forum:&lt;msg_id&gt;]: Forum post. [DNNN]: Document id NNN."
-msgstr "Editar consejos:http,https o ftp: Hiperenlaces. [#NNN]: Seguimiento id NNN. [TNNN]: Tareas id NNN. [wiki:&lt;pagename&gt;]: Página Wiki. [forum:&lt;msg_id&gt;]: Foro post.b"
+msgstr "Editar consejos:http,https o ftp: Hiperenlaces. [#NNN]: Seguimiento Tracker id NNN. [TNNN]: Tareas id NNN. [wiki:&lt;pagename&gt;]: Página Wiki. [forum:&lt;msg_id&gt;]: Foro post. [DNNN]: Documento id NNN."
 
 #: common/docman/views/addfile.php:108
 msgid "Add free comment"
@@ -2998,7 +2998,7 @@ msgstr "Inyectar Árbol"
 
 #: common/docman/views/additem.php:66
 msgid "Create a full folders tree using an compressed archive. Only ZIP format support."
-msgstr "Crear un árbol de directorios completo usando un archivo comprimido. Solo ficheros ZIP soportados."
+msgstr "Crear un árbol de carpetas completo usando un archivo comprimido. Solo ficheros ZIP compatible."
 
 #: common/docman/views/additem.php:82
 msgid "You MUST first create at least one folder to upload your archive."
@@ -3717,11 +3717,11 @@ msgstr "Incluir proyectos hijos"
 
 #: common/docman/views/search.php:121
 msgid "Set created start date limitation for this search. If not enable, not limitation."
-msgstr ""
+msgstr "Establece límitación de fecha inicial creada para esta búsqueda. Si no activa, ninguna limitación."
 
 #: common/docman/views/search.php:131
 msgid "Set created end date limitation for this search. If not enable, not limitation."
-msgstr ""
+msgstr "Establece limitación final de fecha creada para esta búsqueda. Si no activa, no limita."
 
 #: common/docman/views/search.php:141 common/tracker/actions/csv.php:132
 msgid "Set dates"
@@ -3881,7 +3881,7 @@ msgstr "Extensión Inválida"
 
 #: common/forum/AttachManager.class.php:266
 msgid "Error, problem with the attachment file uploaded into the server"
-msgstr "Error con el fichero subido en el servidor "
+msgstr "Error, problema con la carga de fichero adjuntado al servidor"
 
 #: common/forum/AttachManager.class.php:356
 msgid "File Updated Successfully"
@@ -3916,7 +3916,7 @@ msgstr "Error obteniendo Foro"
 
 #: common/forum/ForumAdmin.class.php:176
 msgid "Forum Info Updated Successfully"
-msgstr "Información del foro actualizado con éxito."
+msgstr "Información del Foro Actualizado Correctamente"
 
 #: common/forum/ForumAdmin.class.php:203
 msgid "Forum added successfully"
@@ -3924,7 +3924,7 @@ msgstr "Foro añadido con éxito"
 
 #: common/forum/ForumAdmin.class.php:221 www/forum/admin/index.php:288
 msgid "Error Getting ForumMessage"
-msgstr "Error obteniendo ForumMessage."
+msgstr "Error Obteniendo ForumMessage"
 
 #: common/forum/ForumAdmin.class.php:229
 #, php-format
@@ -4652,7 +4652,7 @@ msgstr "Ese nombre de fichero ya existe en el espacio de este proyecto"
 #: common/frs/FRSFileProcessorType.class.php:61
 #: common/frs/FRSFileType.class.php:65
 msgid "Invalid type_id"
-msgstr "tipo_id no válido"
+msgstr "Tipo type_id no válido"
 
 #: common/frs/FRSManager.class.php:48
 msgid "This Group does not use FRS"
@@ -4677,7 +4677,7 @@ msgstr "Nombre Ya Existente"
 
 #: common/frs/FRSPackage.class.php:223
 msgid "Invalid package_id"
-msgstr "paquete_id no válido"
+msgstr "Paquete package_id no válido"
 
 #: common/frs/FRSPackage.class.php:303
 msgid "public"
@@ -4812,7 +4812,7 @@ msgstr "Error del Fichero"
 
 #: common/frs/FRSRelease.class.php:420
 msgid "Release delete error"
-msgstr "Error de borrado de publicación "
+msgstr "Error de borrado de publicación"
 
 #: common/frs/FRSRelease.class.php:420
 msgid "trying to delete root dir"
@@ -5759,7 +5759,7 @@ msgstr "Añadir objeto nuevo asociado"
 
 #: common/include/FFObject.class.php:382
 msgid "Use standard reference such #nnn, Dnnn, to add object association. Comma separated"
-msgstr ""
+msgstr "Utiliza referencia común como #nnn, Dnnn, para añadir asociación de objeto. Separado con comas"
 
 #: common/include/forge_events.php:26
 msgid "Jobs"
@@ -5796,11 +5796,11 @@ msgstr "Este nombre Unix está ocupado."
 
 #: common/include/Group.class.php:345
 msgid "Please describe your Registration Project Purpose and Summarization in a more comprehensive manner."
-msgstr "Por favor, describa su propuesta de registro de un modo más comprensible."
+msgstr "Por favor describa su propuesta de registro de un modo más comprensible."
 
 #: common/include/Group.class.php:348
 msgid "The Registration Project Purpose and Summarization text is too long. Please make it smaller than 1500 characters."
-msgstr "El texto de propósito de registración es muy largo. Por favor hágalo mas corto que 1500 bytes."
+msgstr "La Propuesta de Proyecto de Registro de Proyecto es demasiado largo. Por favor hágalo mas corto que 1500 bytes."
 
 #: common/include/Group.class.php:351
 msgid "Describe in a more comprehensive manner your project."
@@ -6356,8 +6356,8 @@ msgstr "Colapsar"
 #, php-format
 msgid "%d new item"
 msgid_plural "%d new items"
-msgstr[0] "%d elemento nuevo"
-msgstr[1] "%d elementos nuevos"
+msgstr[0] "%d ítem nuevo"
+msgstr[1] "%d ítemes nuevos"
 
 #: common/include/Navigation.class.php:179
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:87
@@ -6404,7 +6404,7 @@ msgstr "Mi Página"
 
 #: common/include/Navigation.class.php:246
 msgid "Your Page, widgets selected by you to follow your items."
-msgstr "Tu Pagina, widgets seleccionados para seguir a tus elementos."
+msgstr "Tu Pagina, widgets seleccionados para seguir a tus ítemes."
 
 #: common/include/Navigation.class.php:259 www/project/admin/index.php:162
 #: www/reporting/index.php:46 www/search/include/SearchManager.class.php:144
@@ -6452,7 +6452,7 @@ msgstr "Estadisticas de visitas, usuarios y proyectos en intervalo de tiempo."
 
 #: common/include/Navigation.class.php:336
 msgid "Project home page, widgets selected to follow specific items."
-msgstr "Pagina principal del proyecto, widgets seleccionados para seguir a elementos especificos."
+msgstr "Pagina principal del proyecto, widgets seleccionados para seguir a ítemes especificos."
 
 #: common/include/Navigation.class.php:392
 msgid "Project Homepage. Widgets oriented"
@@ -6985,7 +6985,7 @@ msgstr "Instrucciones para accesos a instantánea para complemento SCM no implem
 #: common/include/SCMPlugin.class.php:170
 #: common/include/SCMPlugin.class.php:178
 msgid "Repository Browser"
-msgstr "Exploredor del repositorio"
+msgstr "Explorador del Repositorio"
 
 #: common/include/SCMPlugin.class.php:171
 #: common/include/SCMPlugin.class.php:179
@@ -7169,7 +7169,7 @@ msgstr "Con el fin de completar su registro, visite la url siguiente:"
 
 #: common/include/User.class.php:496
 msgid "You have 1 week to confirm your account. After this time, your account will be deleted."
-msgstr "Tiene 1 semanada de confirmación de su cuanta. Tras este tiempo, su cuenta será eliminada."
+msgstr "Tiene 1 semana para confirmar su cuanta. Tras este tiempo, su cuenta será borrada."
 
 #: common/include/User.class.php:498
 msgid "(If you don't see any URL above, it is likely due to a bug in your mail client. Use one below, but make sure it is entered as the single line.)"
@@ -7306,7 +7306,7 @@ msgstr "Dirección"
 #: common/include/user_profile.php:122 www/account/index.php:215
 #: www/account/register.php:248
 msgid "Phone"
-msgstr "Teléfono:"
+msgstr "Teléfono"
 
 #: common/include/user_profile.php:133 www/account/index.php:224
 #: www/account/register.php:254
@@ -7765,7 +7765,7 @@ msgstr "Por Usuario"
 
 #: common/reporting/report_utils.php:1069
 msgid "Hours Recorded"
-msgstr " Horas Registradas"
+msgstr "Horas Registradas"
 
 #: common/reporting/report_utils.php:1073
 msgid " Hours"
@@ -7886,7 +7886,7 @@ msgstr "Crea un seguimiento nuevo."
 
 #: common/tracker/actions/admin-ind.php:124
 msgid "You can use this system to track virtually any kind of data, with each tracker having separate user, group, category, and permission lists. You can also easily move items between trackers when needed."
-msgstr "Puede emplear este sistema para seguir virtualmente cualquier familia de datos, con cada seguimientos que tengo separadas listas de usuario, grupo, categoría y permisos. Puede mover fácilmente elementos entre seguimientos cuando se necesiten."
+msgstr "Puede emplear este sistema para seguir virtualmente cualquier familia de datos, con cada seguimientos que tengo separadas listas de usuario, grupo, categoría y permisos. Puede mover fácilmente ítemes entre seguimientos cuando se necesiten."
 
 #: common/tracker/actions/admin-ind.php:125
 msgid "Trackers are referred to as “Artifact Types” and individual pieces of data are “Artifacts”. “Bugs” might be an Artifact Type, whiles a bug report would be an Artifact. You can create as many Artifact Types as you want, but remember you need to set up categories, groups, and permission for each type, which can get time-consuming."
@@ -7916,17 +7916,17 @@ msgstr "Días para considerarlo anticuado"
 #: common/tracker/actions/admin-ind.php:157
 #: common/tracker/views/form-updatetracker.php:88
 msgid "Days till pending tracker items time out"
-msgstr "Días pendientes de elementos seguidos aún agotados"
+msgstr "Días pendientes de ítemes seguidos aún agotados"
 
 #: common/tracker/actions/admin-ind.php:162
 #: common/tracker/views/form-updatetracker.php:93
 msgid "Free form text for the “Submit New” page"
-msgstr "Texto libre para la página \"añade un nuevo elemento\""
+msgstr "Formato textual libre para la página “Enviar Novedad”"
 
 #: common/tracker/actions/admin-ind.php:167
 #: common/tracker/views/form-updatetracker.php:98
 msgid "Free form text for the Browse page"
-msgstr "Texto libre para la página \"navega por los elementos\""
+msgstr "Texto libre de formato para la página Explorar"
 
 #: common/tracker/actions/admin-ind.php:172
 #: common/tracker/include/build_submission_form.php:52
@@ -8052,7 +8052,7 @@ msgstr "Gestionar Respuestas Dirigidas"
 #: common/tracker/actions/admin-tracker.php:74
 #: common/tracker/include/ArtifactTypeHtml.class.php:136
 msgid "Create/change generic response messages for the tracker."
-msgstr "Crear/cambiar mensajes genéricos de respuesta para el seguimiento."
+msgstr "Crear/modifica mensajes genéricos de respuesta para el seguimiento."
 
 #: common/tracker/actions/admin-tracker.php:78
 #: common/tracker/include/ArtifactTypeHtml.class.php:137
@@ -8438,7 +8438,7 @@ msgstr "Ordenado según"
 
 #: common/tracker/actions/browse.php:432
 msgid "Quick Browse"
-msgstr "Explorecion Rápida"
+msgstr "Exploración Rápida"
 
 #: common/tracker/actions/browse.php:442
 #, php-format
@@ -8515,7 +8515,7 @@ msgstr "Actualización Masiva"
 
 #: common/tracker/actions/browse.php:775 www/pm/browse_task.php:337
 msgid "If you wish to apply changes to all items selected above, use these controls to change their properties and click once on “Mass Update”."
-msgstr "Si deseas aplicar cambios a todos los elementos seleccionados, usa estos controles para cambiar sus propiedades y pulsa una vez en “Actualización Masiva”."
+msgstr "Si deseas aplicar cambios a todos los ítemes seleccionados, usa estos controles para cambiar sus propiedades y pulsa una vez en “Actualización Masiva”."
 
 #: common/tracker/actions/browse.php:792 common/tracker/actions/browse.php:803
 #: common/tracker/actions/browse.php:808 www/include/html.php:404
@@ -8553,7 +8553,7 @@ msgstr " sin encabezados"
 
 #: common/tracker/actions/csv.php:118
 msgid " using "
-msgstr " empleando"
+msgstr "  empleando "
 
 #: common/tracker/actions/csv.php:118
 msgid " as separator."
@@ -8561,7 +8561,7 @@ msgstr " como separador."
 
 #: common/tracker/actions/csv.php:120
 msgid "This page allows you to export the items using a CSV (<a href=\"http://en.wikipedia.org/wiki/Comma-separated_values\">Comma Separated Values</a>) File. This format can be used to view your entries using your favorite spreadsheet software."
-msgstr "Esta página permite exportar los elementos usando un Fichero CSV (<a href=\"http://en.wikipedia.org/wiki/Comma-separated_values\">Comma Separated Values</a>). Este formato puede ser usado para ver datos usando Hojas de Calculo."
+msgstr "Esta página permite exportar los ítemes usando un Fichero CSV (<a href=\"http://en.wikipedia.org/wiki/Comma-separated_values\">Comma Separated Values</a>). Este formato puede ser usado para ver datos usando Hojas de Calculo."
 
 #: common/tracker/actions/csv.php:122
 msgid "By default, export uses filter as setup in the browse page. To overwrite, please use Advanced Options"
@@ -8585,7 +8585,7 @@ msgstr "Filtro sobrepasado predeterminado. (Sin filtrado)"
 
 #: common/tracker/actions/csv.php:130
 msgid "Set last modified date limitation for this export. If not enable, not limitation."
-msgstr ""
+msgstr "Establece última limitación de fecha modificada para esta exportación. Si no activa, no limita."
 
 #: common/tracker/actions/csv.php:135
 msgid "Download CSV file"
@@ -8871,7 +8871,7 @@ msgstr "%s eliminado correctamente."
 
 #: common/tracker/actions/effort_units.php:500
 msgid "Effort Unit Set copy confirmation"
-msgstr "Establecer Unidad Esfuerzo copiada confirmación"
+msgstr "Establecer Unidad de Esfuerzo copia confirmación"
 
 #: common/tracker/actions/effort_units.php:506
 msgid "Are you sure you want to copy this Effort Units?"
@@ -8966,7 +8966,7 @@ msgstr "El Administrador del proyecto tendrá que configurar los tipos de datos 
 
 #: common/tracker/actions/ind.php:71
 msgid "Choose a tracker and you can browse/edit/add items to it."
-msgstr "Elija un seguimiento y pueda examinar/editar/añadir elementos en él."
+msgstr "Elija un seguimiento y pueda examinar/editar/añadir ítemes en él."
 
 #: common/tracker/actions/ind.php:75 common/tracker/actions/ind.php:78
 #: plugins/mantisbt/view/admin/StatPerStatus.php:52
@@ -9019,12 +9019,12 @@ msgstr "Tipo Datos"
 #: common/tracker/actions/mod.php:203 common/tracker/actions/mod.php:207
 #: plugins/taskboard/common/views/taskboard.php:266 www/include/html.php:444
 msgid "The summary text-box represents a short tracker item summary. Useful when browsing through several tracker items."
-msgstr "El cuadro resumen describe un resumen breve del registro del seguimiento. Útil cuando se explora por diferentes elementos del seguimiento."
+msgstr "El cuadro resumen describe un resumen breve del registro del seguimiento. Útil cuando se explora por diferentes ítemes del seguimiento."
 
 #: common/tracker/actions/mod.php:281
 #: common/widget/Widget_TrackerComment.class.php:117
 msgid "Use Canned Response"
-msgstr "Usar Respuesta Prefijada"
+msgstr "Emplear Respuesta Prefijada"
 
 #: common/tracker/actions/query.php:76
 msgid "Query Successfully Created"
@@ -9425,7 +9425,7 @@ msgstr "Artefacto $s ya tiene un superior"
 
 #: common/tracker/ArtifactExpression.class.php:63
 msgid "Checks if a value exists in an (json) array"
-msgstr ""
+msgstr "Comrueba si un valor existe dentro de una unimatriz (json)"
 
 #: common/tracker/ArtifactExpression.class.php:64
 msgid "Adds to a date/time a duration (duration in ISO 8601 Format)"
@@ -9502,7 +9502,7 @@ msgstr "ID ArtifactExtraField Inválido"
 #: common/tracker/ArtifactExtraField.class.php:533
 #: common/tracker/ArtifactExtraField.class.php:540
 msgid "Unable to set default values"
-msgstr "No puedo establecer valores por defecto"
+msgstr "Incapaz de establecer valores por defecto"
 
 #: common/tracker/ArtifactExtraField.class.php:549
 #: common/tracker/ArtifactExtraField.class.php:551
@@ -9758,30 +9758,22 @@ msgid "Effort Unit Set already define and not compatible"
 msgstr ""
 
 #: common/tracker/ArtifactType.class.php:903
-#, fuzzy
-#| msgid "Error deleting extra field data: "
 msgid "Error Creating New Extra Field"
-msgstr "Error borrando campos de datos adicionales: "
+msgstr "Error Creando Campo Adicional Nuevo"
 
 #: common/tracker/ArtifactType.class.php:929
 #: common/tracker/ArtifactType.class.php:945
 #: common/tracker/ArtifactType.class.php:957
-#, fuzzy
-#| msgid "Error deleting extra field data: "
 msgid "Error Creating New Extra Field Element"
-msgstr "Error borrando campos de datos adicionales: "
+msgstr "Error Creando Campos Adicional Elemental"
 
 #: common/tracker/ArtifactType.class.php:999
-#, fuzzy
-#| msgid "Error deleting extra field data: "
 msgid "Error Updating New Extra Field Parent"
-msgstr "Error borrando campos de datos adicionales: "
+msgstr "Error Actualizando Nuevo Campo Superior Adicional"
 
 #: common/tracker/ArtifactType.class.php:1023
-#, fuzzy
-#| msgid "Error deleting extra field data: "
 msgid "Error Saving New Extra Field Parent Elements"
-msgstr "Error borrando campos de datos adicionales: "
+msgstr "Error Guardando Elemetnos Superiores de Campo Adicional Nuevo"
 
 #: common/tracker/ArtifactType.class.php:1371
 msgid "Tracker name already used"
@@ -9794,10 +9786,8 @@ msgid "%s does not use the Tracker tool"
 msgstr "%s no emplea la herramienta Seguimiento"
 
 #: common/tracker/EffortUnit.class.php:68
-#, fuzzy
-#| msgid "User Not Found"
 msgid "Effort Unit Not Found"
-msgstr "Usuario No Encontrado"
+msgstr "Unidad de Esfuerzo No Encontrada"
 
 #: common/tracker/EffortUnit.class.php:109
 #: common/tracker/EffortUnit.class.php:339
@@ -9806,24 +9796,19 @@ msgstr ""
 
 #: common/tracker/EffortUnit.class.php:114
 #: common/tracker/EffortUnit.class.php:344
-#, fuzzy
-#| msgid "A field name is required"
 msgid "An Unit name is required"
-msgstr "Un nombre de campo es requerido"
+msgstr "Un nombre Unitario está requerido"
 
 #: common/tracker/EffortUnit.class.php:119
 #: common/tracker/EffortUnit.class.php:349
-#, fuzzy, php-format
-#| msgid "Element name already exists"
+#, php-format
 msgid "Unit name %s already exists"
-msgstr "El nombre de elemento ya existe"
+msgstr "El nombre unitario %s ya existe"
 
 #: common/tracker/EffortUnit.class.php:149
 #: common/tracker/EffortUnit.class.php:167
-#, fuzzy
-#| msgid "Cannot create column"
 msgid "Cannot create Effort Unit"
-msgstr "No puede crear columna"
+msgstr "No puede crear Esfuerzo Unitario"
 
 #: common/tracker/EffortUnit.class.php:155
 msgid "Cannot get Effort Unit id"
@@ -9832,16 +9817,12 @@ msgstr ""
 #: common/tracker/EffortUnit.class.php:282
 #: common/tracker/EffortUnit.class.php:297
 #: common/tracker/EffortUnit.class.php:319
-#, fuzzy
-#| msgid "Error deleting monitor: "
 msgid "Error deleting Effort Unit"
-msgstr "Error borrando monitor: "
+msgstr "Error borrando Unidad Esfuerzo"
 
 #: common/tracker/EffortUnit.class.php:370
-#, fuzzy
-#| msgid "Cannot update"
 msgid "Cannot update Effort Unit"
-msgstr "No puedo actualizar"
+msgstr "No puedo actualizar Unidad Esfuerzo"
 
 #: common/tracker/EffortUnit.class.php:398
 msgid "Cannot update Effort Unit (artifacts data update)"
@@ -9849,18 +9830,14 @@ msgstr ""
 
 #: common/tracker/EffortUnit.class.php:419
 #: common/tracker/EffortUnit.class.php:545
-#, fuzzy
-#| msgid "Cannot set default value: "
 msgid "Cannot update Effort Unit (default value update)"
-msgstr "No puedo poner valor por defecto: "
+msgstr "No puedo actualizar Unidad Esfuerzo (valor actualizado por defecto) "
 
 #: common/tracker/EffortUnit.class.php:524
 #: common/tracker/EffortUnitSet.class.php:261
 #: common/tracker/EffortUnitSet.class.php:267
-#, fuzzy
-#| msgid "Error doing insert"
 msgid "Error coping Effort Unit"
-msgstr "ERROR insertando"
+msgstr "Error copiando Unidad Esfuerzo"
 
 #: common/tracker/EffortUnitSet.class.php:141
 #: common/tracker/EffortUnitSet.class.php:155
@@ -9880,33 +9857,25 @@ msgid "Effort Unit Set already exist for project %s"
 msgstr "Repositorio Git adicional para el proyecto %1$s"
 
 #: common/tracker/EffortUnitSet.class.php:167
-#, fuzzy
-#| msgid "That filename already exists in this release"
 msgid "Effort Unit Set already exist for this forge"
-msgstr "Ese nombre de fichero ya existe en esta publicación"
+msgstr "Conjunto Unitario de Esfuerzo ya existe en estea forja"
 
 #: common/tracker/EffortUnitSet.class.php:211
-#, fuzzy
-#| msgid "Error getting new forum message"
 msgid "Error setting new effort unit set for the group"
-msgstr "Error obteniendo nuevos mensajes del foro"
+msgstr "Error obteniendo nuevos opciones unitarias de esfuerzo para el grupo"
 
 #: common/tracker/EffortUnitSet.class.php:217
 #: common/tracker/EffortUnitSet.class.php:222
-#, fuzzy
-#| msgid "Could Not Get ArtifactTypeFactory"
 msgid "Error on new ArtifactTypeFactory"
-msgstr "No Pudo Obtener ArtifactTypeFactory"
+msgstr "Error en nuevo ArtifactTypeFactory"
 
 #: common/tracker/EffortUnitSet.class.php:231
-#, fuzzy
-#| msgid "Error updating artifact counts: "
 msgid "Error on updating artifact type"
-msgstr "Error actualizando numero de artefactos: "
+msgstr "Error actualizando tipo de artefactos"
 
 #: common/tracker/EffortUnitSet.class.php:241
 msgid "Error setting new effort unit set for the artifact type"
-msgstr ""
+msgstr "Error obteniendo esfuerzo nuevo unitario establecido para el tipo de artefacto"
 
 #: common/tracker/EffortUnitSet.class.php:538
 #, php-format
@@ -9919,10 +9888,8 @@ msgid "Error getting Project “%s” level Effort Unit Set"
 msgstr ""
 
 #: common/tracker/EffortUnitSet.class.php:554
-#, fuzzy
-#| msgid "Error getting the list"
 msgid "Error getting Forge level Effort Unit Set"
-msgstr "Error obteniendo lista"
+msgstr "Error obteniendo nivel Forge Conjunto Unitario de Esfuerzo"
 
 #: common/tracker/include/ArtifactHtml.class.php:59
 msgid "Edit this message"
@@ -9954,28 +9921,20 @@ msgid "No Changes Have Been Made to This Item"
 msgstr "Ninguna Modificación Hecha En Este Elemento"
 
 #: common/tracker/include/ArtifactHtml.class.php:239
-#, fuzzy
-#| msgid "Relations"
 msgid "Relation"
-msgstr "Relaciones"
+msgstr "Relación"
 
 #: common/tracker/include/ArtifactHtml.class.php:246
-#, fuzzy
-#| msgid "No questions found"
 msgid "No relations found."
-msgstr "No se encontraron preguntas"
+msgstr "Ninguna relación encontrada."
 
 #: common/tracker/include/ArtifactHtml.class.php:285
-#, fuzzy
-#| msgid "Failed to remove child"
 msgid "Click to remove child"
-msgstr "Fallo en borrar hijo"
+msgstr "Pulse para quitar hijo"
 
 #: common/tracker/include/ArtifactHtml.class.php:326
-#, fuzzy
-#| msgid "Failed to remove parent"
 msgid "Click to remove parent"
-msgstr "Falló borrado del padre"
+msgstr "Pulse para quitar superior"
 
 #: common/tracker/include/ArtifactHtml.class.php:350
 #: plugins/projects-hierarchy/view/admin_project_link.php:35
@@ -9983,10 +9942,8 @@ msgid "Parent"
 msgstr "Precedente"
 
 #: common/tracker/include/ArtifactHtml.class.php:359
-#, fuzzy
-#| msgid "Click to edit this project."
 msgid "Click to add parent"
-msgstr "Pulse para editar este proyecto."
+msgstr "Pulse para añadir superior"
 
 #: common/tracker/include/ArtifactHtml.class.php:364
 #: plugins/projects-hierarchy/view/admin_project_link.php:45
@@ -9994,10 +9951,8 @@ msgid "Children"
 msgstr "Descendientes"
 
 #: common/tracker/include/ArtifactHtml.class.php:369
-#, fuzzy
-#| msgid "Failed to add child"
 msgid "Click to add child"
-msgstr "Falló la inserción del hijo"
+msgstr "Pulse para añador hijo"
 
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:43
 #, php-format
@@ -10092,10 +10047,8 @@ msgstr ""
 #: common/tracker/include/ArtifactTypeHtml.class.php:419
 #: common/widget/Widget_TrackerContent.class.php:583
 #: common/widget/Widget_TrackerContent.class.php:596
-#, fuzzy
-#| msgid "Click here to "
 msgid "Click to edit"
-msgstr "Pulse aquí para "
+msgstr "Pulse para editar"
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:433
 msgid "(YYYY-MM-DD YYYY-MM-DD Format)"
@@ -10111,16 +10064,12 @@ msgid "Remove Relation"
 msgstr "Quitar Relación"
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:505
-#, fuzzy
-#| msgid "Average completion rate: %d%%"
 msgid "Average completion rate"
-msgstr "Porcentaje medio de completado: %d%%"
+msgstr "Porcentaje medio completado"
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:508
-#, fuzzy
-#| msgid "Related Tasks"
 msgid "No related tasks"
-msgstr "Tareas relacionadas"
+msgstr "Tareas no relacionadas"
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:526
 #: common/widget/Widget_HomeLatestFileReleases.class.php:73
@@ -10132,10 +10081,8 @@ msgid "Download"
 msgstr "Descargar"
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:547
-#, fuzzy
-#| msgid "No documents"
 msgid "No attached documents"
-msgstr "No hay documentos"
+msgstr "Ningún documento adjunto"
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:599
 #, php-format
@@ -10213,7 +10160,7 @@ msgstr "acceso"
 #: common/tracker/include/build_submission_form.php:43
 #: common/tracker/include/build_submission_form.php:109
 msgid "If you <strong>cannot</strong> login, then enter your email address here"
-msgstr "Si usted <strong>no puede</strong> iniciar sesión, introduzca su correo electrónico aquí:"
+msgstr "Si usted <strong>no puede</strong> iniciar sesión, introduzca su correo-e aquí"
 
 #: common/tracker/include/build_submission_form.php:51 www/news/submit.php:144
 #: www/people/viewjob.php:79
@@ -10460,7 +10407,7 @@ msgstr ""
 
 #: common/tracker/views/form-addextrafield.php:359
 msgid "Warning: this adds a new custom field!"
-msgstr "Aviso: esto añade un campo personalizado nuevo"
+msgstr "Aviso: ¡esto añade un campo personalizado nuevo!"
 
 #: common/tracker/views/form-addextrafield.php:362
 msgid "Add Custom Field"
@@ -10500,10 +10447,8 @@ msgid "Roadmap %s created"
 msgstr "Roadmap %s creado"
 
 #: common/tracker/views/form-adminroadmap.php:81
-#, fuzzy
-#| msgid "Cannot create roadmap: "
 msgid "Cannot create roadmap"
-msgstr "No puedo crear camino: "
+msgstr "No puedo crear camino"
 
 #: common/tracker/views/form-adminroadmap.php:88
 #, php-format
@@ -10511,28 +10456,20 @@ msgid "Roadmap %s renamed to %s"
 msgstr "Roadmap %s renombrado a %s"
 
 #: common/tracker/views/form-adminroadmap.php:90
-#, fuzzy
-#| msgid "Cannot rename roadmap: "
 msgid "Cannot rename roadmap"
-msgstr "No puedo renombrar camino: "
+msgstr "No puedo renombrar seguimiento"
 
 #: common/tracker/views/form-adminroadmap.php:97
-#, fuzzy
-#| msgid "Cannot set roadmap: "
 msgid "Cannot set roadmap"
-msgstr "No puedo establecer camino: "
+msgstr "No puedo establecer camino"
 
 #: common/tracker/views/form-adminroadmap.php:120
-#, fuzzy
-#| msgid "Cannot set roadmap state: "
 msgid "Cannot set roadmap state"
-msgstr "No puedo establecer el estado de camino: "
+msgstr "No puedo establecer estado de camino"
 
 #: common/tracker/views/form-adminroadmap.php:124
-#, fuzzy
-#| msgid "Cannot set default value: "
 msgid "Cannot set default value"
-msgstr "No puedo poner valor por defecto: "
+msgstr "No puedo establecer valorpredeterminado"
 
 #: common/tracker/views/form-adminroadmap.php:127
 msgid "Roadmap configuration is updated"
@@ -10544,10 +10481,8 @@ msgid "Roadmap %s is deleted"
 msgstr "Roadmap %s borrado"
 
 #: common/tracker/views/form-adminroadmap.php:140
-#, fuzzy
-#| msgid "Cannot delete roadmap: "
 msgid "Cannot delete roadmap"
-msgstr "No puede borrar camino: "
+msgstr "No puede borrar camino"
 
 #: common/tracker/views/form-adminroadmap.php:152
 #: common/tracker/views/form-adminroadmap.php:463
@@ -10691,10 +10626,8 @@ msgid "Choose the template tracker to clone."
 msgstr "Elija la plantilla del seguimiento a clonar."
 
 #: common/tracker/views/form-clonetracker.php:62
-#, fuzzy
-#| msgid "WARNING!!! Cloning this tracker will duplicate all the fields and all the elements from those fields into this tracker. There is nothing to prevent you from cloning multiple times or making a huge mess. If you have preexisting extrafields with same name, they will be dropped. You have been warned!"
 msgid "WARNING!!! Cloning this tracker will duplicate all the fields and all the elements from those fields into this tracker. There is nothing to prevent you from cloning multiple times or making a huge mess. If you have preexisting custom fields with same name or a preexisting custom status type field, they will be dropped. You have been warned!"
-msgstr "¡ADVERTENCIA! La clonación de este seguimiento duplicará todos los campos y todos los elementos incluídos en este seguimiento. No hay nada para prevenirle desde clonación de múltiples veces o hacer un enorme desorden. Si tiene que preexistir campos adicionales con el mismo nombre, serán abandonados. Ya ha sido advertido."
+msgstr "¡ADVERTENCIA! La clonación de este seguimiento duplicará todos los campos y todos los ítemes incluidos en este seguimiento. No hay nada para prevenirle desde clonación de múltiples veces o hacer un enorme desorden. Si tiene que preexistir campos adicionales con el mismo nombre, serán abandonados. ¡Ya ha sido advertido!"
 
 #: common/tracker/views/form-customizelist.php:29
 msgid "Customize Browse List"
@@ -10702,10 +10635,8 @@ msgstr "Personalize la lista"
 
 #: common/tracker/views/form-customizelist.php:49
 #: common/widget/Widget_TrackerGeneral.class.php:85
-#, fuzzy
-#| msgid "Last Modified"
 msgid "Last Modified by"
-msgstr "Última modificación"
+msgstr "Última Modificada por"
 
 #: common/tracker/views/form-customizelist.php:80
 #: www/survey/include/SurveyHTML.class.php:267
@@ -10719,16 +10650,12 @@ msgid "Down"
 msgstr "Abajo"
 
 #: common/tracker/views/form-customizelist.php:84
-#, fuzzy
-#| msgid "[Remove this label]"
 msgid "Remove this field"
-msgstr "[Quitar esta etiqueta]"
+msgstr "Quitar este campo"
 
 #: common/tracker/views/form-customizelist.php:95
-#, fuzzy
-#| msgid "Set order of the fields that will be displayed on the browse view of your tracker:"
 msgid "Set order of the fields that will be displayed on the browse view of your tracker"
-msgstr "Establezca el orden de los campos que serán enseñados en la vista de exploración de seguimientos:"
+msgstr "Establezca el orden de los campos que serán enseñados en la vista de exploración de su seguimiento"
 
 #: common/tracker/views/form-customizelist.php:104
 #: common/tracker/views/form-editformula.php:86
@@ -10736,10 +10663,8 @@ msgid "Fields"
 msgstr "Campos"
 
 #: common/tracker/views/form-customizelist.php:122
-#, fuzzy
-#| msgid "Select the fields that will be displayed on the browse view of your tracker:"
 msgid "Select the fields that will be displayed on the browse view of your tracker"
-msgstr "Seleccione los campos que serán enseñados en la vista de exploración de su seguimiento:"
+msgstr "Seleccione los campos que serán enseñados sobre la vista de exploración de su seguimiento"
 
 #: common/tracker/views/form-customizelist.php:129
 msgid "Add New Field"
@@ -10778,7 +10703,7 @@ msgstr "Borrar Seguimiento Permanentemente %s"
 
 #: common/tracker/views/form-deletetracker.php:40
 msgid "You are about to permanently and irretrievably delete this tracker and all its contents!"
-msgstr "Está a punto de borrar permanentemente e irrevocablemente este seguimiento y todo su contenido."
+msgstr "¡Está a punto de borrar permanentemente e irrevocablemente este seguimiento y todo su contenido!"
 
 #: common/tracker/views/form-editformula.php:46
 #, php-format
@@ -10804,10 +10729,8 @@ msgid "Operator"
 msgstr "Operador"
 
 #: common/tracker/views/form-editformula.php:211
-#, fuzzy
-#| msgid "Template?"
 msgid "Exemple"
-msgstr "¿Plantilla?"
+msgstr "Ejemplo"
 
 #: common/tracker/views/form-editformula.php:277
 msgid "Use formula do define function, set variable, and calculate the value of the current field"
@@ -10842,10 +10765,8 @@ msgid "Example to define priority value according to impact and severity matrix"
 msgstr ""
 
 #: common/tracker/views/form-editformula.php:295
-#, fuzzy
-#| msgid "roadmap %s is not available"
 msgid "(formula for priority is not yet available)"
-msgstr "camino %s no disponible"
+msgstr "(fórmula para prioridad aún no está disponible)"
 
 #: common/tracker/views/form-editformula.php:296
 msgid "For the element '3' of the priority field"
@@ -10890,10 +10811,8 @@ msgstr "Actualiza un campo personalizado de elemento en %s"
 #: common/tracker/views/form-updateextrafield.php:180
 #: common/tracker/views/form-updateextrafield.php:187
 #: common/tracker/views/form-updateextrafield.php:194
-#, fuzzy
-#| msgid "Default"
 msgid "Default value"
-msgstr "Predeterminado"
+msgstr "Valor predeterminado"
 
 #: common/tracker/views/form-updateextrafieldelement.php:70
 #, fuzzy
@@ -10902,22 +10821,18 @@ msgid "Select Parent Values"
 msgstr "Seleccionar cargo"
 
 #: common/tracker/views/form-updateextrafieldelement.php:80
-#, fuzzy
-#| msgid "Autoassign"
 msgid "Auto assign to"
-msgstr "Autoasignar"
+msgstr "Autoasignar a"
 
 #: common/tracker/views/form-updateextrafieldelement.php:97
 #: common/tracker/views/form-updateextrafield.php:206
-#, fuzzy
-#| msgid "Edit release"
 msgid "Edit formula"
-msgstr "Edite publicación"
+msgstr "Edite fórmula"
 
 #: common/tracker/views/form-updateextrafieldelement.php:100
 #: common/tracker/views/form-updateextrafield.php:227
 msgid "It is not recommended that you change the custom field name because other things are dependent upon it. When you change the custom field name, all related items will be changed to the new name."
-msgstr "No se recomienda que cambie el nombre del campo personalizado porque otras cosas dependen en él. Cuando se cambia el nombre del campo, todos los elementos relacionados con el serán cambiados al nuevo nombre."
+msgstr "No se recomienda que cambie el nombre del campo personalizado porque otras cosas dependen en él. Cuando se cambia el nombre del campo, todos los ítemes relacionados con el serán cambiados al nuevo nombre."
 
 #: common/tracker/views/form-updateextrafield.php:34
 #, php-format
@@ -10969,26 +10884,21 @@ msgstr ""
 #: common/tracker/views/form-workflow.php:116
 #: common/tracker/views/form-workflow.php:135 www/project/admin/users.php:298
 msgid "Edit Roles"
-msgstr "Editar cargos"
+msgstr "Editar Cargos"
 
 #: common/tracker/views/form-workflow.php:118
 #: common/tracker/views/form-workflow.php:136
-#, fuzzy
-#| msgid "Required Skills"
 msgid "Edit Required Fields"
-msgstr "Capacidades Requeridas"
+msgstr "Editar Campos Requeridos"
 
 #: common/tracker/views/form-workflow.php:135
-#, fuzzy
-#| msgid "Tips"
 msgid "Tip"
 msgstr "Consejos"
 
 #: common/tracker/views/form-workflow.php:135
-#, fuzzy, php-format
-#| msgid "Configuring allowed roles for the transitions from %1$s to %2$s"
+#, php-format
 msgid "Click on %s to configure allowed roles for a transition (all by default)."
-msgstr "Configurando cargos permitidos para las transiciones desde %1$s a %2$s"
+msgstr "Pulse sobre %s para configurar cargos permitidos para una transición (todo por defecto)."
 
 #: common/tracker/views/form-workflow.php:136
 msgid "Tip2"
@@ -11036,36 +10946,26 @@ msgstr "Hora"
 
 #: common/widget/Widget_HomeDetailActivityMostActiveProjectWeek.class.php:112
 #: common/widget/Widget_HomeDetailActivityMostActiveProjectWeek.class.php:115
-#, fuzzy
-#| msgid "No commits during this period."
 msgid "No activity during the last week."
-msgstr "Ninguna efectuación durante este periodo."
+msgstr "Ninguna actividad durante la última semana."
 
 #: common/widget/Widget_HomeDetailActivityMostActiveProjectWeek.class.php:119
-#, fuzzy
-#| msgid "Browse Archives"
 msgid "Browse all activities."
-msgstr "Examinar Archivos"
+msgstr "Examinar todas archividades."
 
 #: common/widget/Widget_HomeLatestFileReleases.class.php:26
-#, fuzzy
-#| msgid "Latest File Releases"
 msgid "Latest 5 File Releases"
-msgstr "Últimas Publicaciones de Ficheros"
+msgstr "Últimos 5 Ficheros Publicados"
 
 #: common/widget/Widget_HomeLatestFileReleases.class.php:64
 #: www/new/index.php:97
-#, fuzzy
-#| msgid "Module:"
 msgid "Module"
-msgstr "Módulo:"
+msgstr "Módulo"
 
 #: common/widget/Widget_HomeLatestFileReleases.class.php:66
 #: www/new/index.php:92
-#, fuzzy
-#| msgid "Released by:"
 msgid "Released by"
-msgstr "Publicado por:"
+msgstr "Publicado por"
 
 #: common/widget/Widget_HomeLatestFileReleases.class.php:74
 #: www/new/index.php:120
@@ -11078,38 +10978,28 @@ msgid "Notes and Changes"
 msgstr "Notas y Cambios"
 
 #: common/widget/Widget_HomeLatestFileReleases.class.php:80
-#, fuzzy
-#| msgid "No new releases found"
 msgid "No file releases found."
-msgstr "No encontradas releases"
+msgstr "Ninguna publicación encontrada."
 
 #: common/widget/Widget_HomeLatestFileReleases.class.php:82
-#, fuzzy
-#| msgid "New File Releases"
 msgid "Browse all file releases"
-msgstr "Crear Publicaciones de Fichero"
+msgstr "Examina todas las publicaciones de fichero"
 
 #: common/widget/Widget_HomeLatestFileReleases.class.php:87
 msgid "Display last 5 published file releases. Permission settings apply to filter information."
 msgstr ""
 
 #: common/widget/Widget_HomeLatestNews.class.php:31
-#, fuzzy
-#| msgid "Browse tasks"
 msgid "Browse all news"
-msgstr "Examinar tareas"
+msgstr "Examinar todas novedades"
 
 #: common/widget/Widget_HomeLatestNews.class.php:36
-#, fuzzy
-#| msgid "Display the 5 last issues of your project."
 msgid "Display last 5 validated news for frontpage."
-msgstr "Enseña ñas últimas 5 encuestas de su proyecto."
+msgstr "Enseña últimas 5 noticias validadas para página principal."
 
 #: common/widget/Widget_HomeRss.class.php:38
-#, fuzzy
-#| msgid "Include public rss (or atom) feeds into project homepage."
 msgid "Include public rss (or atom) feeds into forge homepage."
-msgstr "Incluye feeds públicos rss (o atom) en la página principal del proyecto."
+msgstr "Incluye alimentación de rss públicos (o atom) en la página inicial de forja."
 
 #: common/widget/Widget_HomeStats.class.php:28
 #: www/include/features_boxes.php:47
@@ -11166,10 +11056,8 @@ msgstr ""
 #: common/widget/WidgetLayoutManager.class.php:192
 #: common/widget/WidgetLayoutManager.class.php:223
 #: common/widget/WidgetLayoutManager.class.php:329
-#, fuzzy
-#| msgid "DB Error: %s"
 msgid "DB Error"
-msgstr "DB Error: %s"
+msgstr "Error BD"
 
 #: common/widget/WidgetLayoutManager.class.php:277
 msgid "Default ExtraField 2-columns Widget"
@@ -11279,8 +11167,6 @@ msgid "Monitored"
 msgstr "Monitorizado"
 
 #: common/widget/Widget_MyArtifacts.class.php:260
-#, fuzzy
-#| msgid "Browse this artefact"
 msgid "Browse this artifact"
 msgstr "Examinar este artefacto"
 
@@ -11293,10 +11179,8 @@ msgid "My Bookmarks"
 msgstr "Mis marcadores"
 
 #: common/widget/Widget_MyBookmarks.class.php:47
-#, fuzzy
-#| msgid "You currently do not have any bookmarks saved"
 msgid "You currently do not have any bookmarks saved."
-msgstr "Actualmente no tiene marcadores guardados"
+msgstr "Actualmente no tiene ningún marcador guardado."
 
 #: common/widget/Widget_MyBookmarks.class.php:56
 msgid "Delete this bookmark?"
@@ -11314,11 +11198,11 @@ msgstr "Lista tus enlaces favoritos (tus páginas favoritas en %s o externas)."
 #: common/widget/Widget_MyBookmarks.class.php:69
 #, php-format
 msgid "Note that in many cases %s uses URL with enough embedded information to bookmark sophisticated items like Software Map browsing, typical search in your project Bug or Task database, etc."
-msgstr "Indicar que en muchos casos %s usan direcciones con suficiente informacion embebida para enlazar elementos avanzados como Exploredores de Mapas de Software, tipicas busquedas en tus Bugs de proyecto o Tareas de base de datos, etc."
+msgstr "Indicar que en muchos casos %s usan direcciones con suficiente informacion embebida para enlazar ítemes avanzados como Exploredores de Mapas de Software, tipicas busquedas en tus Bugs de proyecto o Tareas de base de datos, etc."
 
 #: common/widget/Widget_MyBookmarks.class.php:71
 msgid "Bookmarked items can be edited which means that both the title of the bookmark and its destination URL can be modified."
-msgstr "Los elementos enlazados pueden ser editados lo que significa que ambos, el titulo y sus direcciones de destino pueden ser modificxados."
+msgstr "Los ítemes enlazados pueden ser editados lo que significa que ambos, el titulo y sus direcciones de destino pueden ser modificxados."
 
 #: common/widget/Widget_MyLatestCommits.class.php:46
 msgid "My Latest Commits"
@@ -11335,38 +11219,29 @@ msgstr[1] "efectuaciones"
 
 #: common/widget/Widget_MyLatestCommits.class.php:115
 #: common/widget/Widget_ProjectLatestCommits.class.php:88
-#, fuzzy
 msgid "on repository"
-msgstr "Repositorio del desarollador"
+msgstr "en repositorio"
 
 #: common/widget/Widget_MyLatestCommits.class.php:124
 #: common/widget/Widget_ProjectLatestCommits.class.php:94
-#, fuzzy
-#| msgid "No commit found"
 msgid "No commit found."
-msgstr "Ningún efectuación encontrada"
+msgstr "Ningún efecto encontrado."
 
 #: common/widget/Widget_MyLatestCommits.class.php:130
-#, fuzzy
-#| msgid "Maximum number of commits to display per project"
 msgid "Maximum number of commits to display per project."
-msgstr "Máximo número de efectuaciones para enseñar por proyecto"
+msgstr "Máximo número de efectuaciones para enseñar por proyecto."
 
 #: common/widget/Widget_MyLatestCommits.class.php:160
 msgid "List Commits you have done, by project."
 msgstr "Listar cambios que has realizado, por proyecto."
 
 #: common/widget/Widget_MyMonitoredDocuments.class.php:40
-#, fuzzy
-#| msgid "Monitored Documents"
 msgid "Monitored Documents/Folders"
-msgstr "Documentos Monitorizados"
+msgstr "Documentos Monitorizados/Carpetas"
 
 #: common/widget/Widget_MyMonitoredDocuments.class.php:55
-#, fuzzy
-#| msgid "You are not monitoring any documents."
 msgid "You are not monitoring any documents or folders."
-msgstr "No está monitorizando ningún documento."
+msgstr "No está monitorizando ningún documento o carpeta."
 
 #: common/widget/Widget_MyMonitoredDocuments.class.php:55
 msgid "If you monitor documents, you will be sent new update in the form of an email."
@@ -11384,26 +11259,20 @@ msgid "%s new"
 msgstr "crear %s"
 
 #: common/widget/Widget_MyMonitoredDocuments.class.php:102
-#, fuzzy
-#| msgid "Stop monitoring this folder"
 msgid "Stop monitoring this folder?"
-msgstr "Detener monitorización de esta carpeta"
+msgstr "¿Detengo monitorización de esta carpeta?"
 
 #: common/widget/Widget_MyMonitoredDocuments.class.php:111
 msgid "Stop monitoring this document?"
 msgstr "¿Detener monitorización de este documento?"
 
 #: common/widget/Widget_MyMonitoredDocuments.class.php:120
-#, fuzzy
-#| msgid "You are not monitoring any documents."
 msgid "You are not monitoring any documents/folders."
-msgstr "No está monitorizando ningún documento."
+msgstr "No está monitorizando ningún documento/carpeta."
 
 #: common/widget/Widget_MyMonitoredDocuments.class.php:120
-#, fuzzy
-#| msgid "If you monitor documents, you will be sent new update in the form of an email."
 msgid "If you monitor documents/folders, you will be sent new update in the form of an email."
-msgstr "Si monitorizas documentos, se le enviaran las actualizaciones por correo-e."
+msgstr "Si monitorizas documentos/carpetas, serán enviadas actualizaciones nuevas en el formulario de un correo-e ."
 
 #: common/widget/Widget_MyMonitoredDocuments.class.php:127
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:144
@@ -11454,7 +11323,7 @@ msgstr "Página detallada acerca de foros monitorizados"
 
 #: common/widget/Widget_MyMonitoredForums.class.php:117
 msgid "Here"
-msgstr ""
+msgstr "Aquí"
 
 #: common/widget/Widget_MyMonitoredForums.class.php:132
 msgid "List forums that you are currently monitoring, by project."
@@ -11546,7 +11415,7 @@ msgstr "Encuesta rápida"
 
 #: common/widget/Widget_MySurveys.class.php:149
 msgid "List the surveys in your projects."
-msgstr "lista las encuestas en sus proyectos."
+msgstr "Lista las encuestas en sus proyectos."
 
 #: common/widget/Widget_MySurveys.class.php:159
 msgid "answered [A]"
@@ -11746,7 +11615,7 @@ msgstr "Registrado"
 
 #: common/widget/Widget_ProjectInfo.class.php:68
 msgid ": "
-msgstr ":"
+msgstr ": "
 
 #: common/widget/Widget_ProjectInfo.class.php:86
 #: www/softwaremap/trove_list.php:296
@@ -11878,7 +11747,7 @@ msgstr "Administradores del proyecto"
 #: common/widget/Widget_ProjectMembers.class.php:83
 #: common/widget/Widget_ProjectMembers.class.php:134
 msgid "See more ..."
-msgstr ""
+msgstr "Vea más ..."
 
 #: common/widget/Widget_ProjectMembers.class.php:104
 #: www/admin/grouplist.php:135
@@ -11921,7 +11790,7 @@ msgstr "No hay sistemas de seguimiento de peticiones disponibles"
 msgid "(<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
 msgid_plural "(<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
 msgstr[0] "(<strong>%1$s</strong> abierto / <strong>%2$s</strong> total)"
-msgstr[1] "%1$s abierto /%2$s total"
+msgstr[1] "(<strong>%1$s</strong> abierto / <strong>%2$s</strong> total)"
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:110
 msgid "Public Forums"
@@ -12016,7 +11885,7 @@ msgstr "La función de esta área es equivalente a el Menú Principal del Proyec
 
 #: common/widget/Widget_ProjectRss.class.php:40
 msgid "Include public rss (or atom) feeds into project homepage."
-msgstr "Incluye feeds públicos rss (o atom) en la página principal del proyecto."
+msgstr "Incluye alimentaciones públicos rss (o atom) dentro de la página principal del proyecto."
 
 #: common/widget/Widget_ProjectScmStats.class.php:62
 msgid "Display Repository Statistics history. Number of adds & updates per user since the init of the repository"
@@ -12169,11 +12038,11 @@ msgstr "Enviar Instrucción"
 
 #: common/widget/Widget_TrackerGeneral.class.php:104 www/pm/mod_task.php:75
 msgid "Permalink"
-msgstr ""
+msgstr "Enlace permanente"
 
 #: common/widget/Widget_TrackerMain.class.php:35
 msgid "Internal Fields"
-msgstr ""
+msgstr "Campos Internos"
 
 #: common/widget/Widget_TrackerMain.class.php:43
 msgid "Default widget where default fields are stored & displayed. Priority, Data Types, ..."
@@ -12272,7 +12141,7 @@ msgstr "Este usuario no está permitido para enviar ítemes a este seguimiento."
 
 #: cronjobs/misc/tracker_gateway.php:199
 msgid "Could not match sender email address to user, and tracker does not allow anonymous posts."
-msgstr "No puedo coincidir dirección de correo saliente al usuario, y seguimiento no permitie publicaciones anónimas."
+msgstr "No pudo coincidir dirección de correo emitida al usuario, y seguimiento no permite publicaciones anónimas."
 
 #: cronjobs/shell/homedirs.php:155
 msgid "Default Web Page for groups that haven't setup their page yet"
@@ -12308,13 +12177,13 @@ msgstr " vhost creado."
 #: db/20130602-svncommitemailToScmHookCommitEmailMigration.php:95
 #: www/admin/pluginman.php:84
 msgid "Soft link wasn't removed in www/plugins folder, please do so manually."
-msgstr "Soft link no fue eliminado en el directorio www/complementos, por favor hágalo manualmente."
+msgstr "Enlace débil no fue quitado de la carpeta www/plugin, por favor hágalo manualmente."
 
 #: db/20130127-extratabToHeadermenuMigration.php:90
 #: db/20130531-svntrackerToScmhookCommitTrackerMigration.php:109
 #: db/20130602-svncommitemailToScmHookCommitEmailMigration.php:104
 msgid "Soft link wasn't removed in config folder, please do so manually."
-msgstr "Soft link no fue eliminado en el directorio config por favor hágalo manualmente."
+msgstr "Enlace débil no fue quitado dentro de la carpeta de configuración, porr favor hágalo manualmente."
 
 #: db/20141105-frs-ziplatest.php:52 db/20141105-frs-ziplatest.php:60
 #: db/20141105-frs-ziplatest.php:70 db/20141105-frs-ziplatest.php:75
@@ -12410,7 +12279,7 @@ msgstr "Proyectos publicados:"
 
 #: plugins/admssw/www/index.php:46
 msgid "short index"
-msgstr "Índice corto"
+msgstr "índice corto"
 
 #: plugins/admssw/www/index.php:47
 msgid "or "
@@ -12773,7 +12642,7 @@ msgstr "Una vez que haya confirmado su binding para su cuenta FusionForge, puede
 
 #: plugins/authwebid/www/index.php:103
 msgid "Already pending WebIDs you could bind to your account"
-msgstr "WebIDs ya pendientes pudo enlacear a su cuenta "
+msgstr "WebIDs ya pendientes podría enlacar a su cuenta"
 
 #: plugins/authwebid/www/index.php:109
 msgid "Confirm binding"
@@ -13008,7 +12877,7 @@ msgstr "Puedes crear tantas cajas como se quiera, but un boxTop tiene que ser ce
 
 #: plugins/blocks/www/index.php:352
 msgid "Block configuration saved"
-msgstr "Configuración de Bloques grabada"
+msgstr "Configuración de Bloques guardada"
 
 #: plugins/ckeditor/common/ckeditorPlugin.class.php:39
 msgid "HTML editor (ckeditor)"
@@ -13353,7 +13222,7 @@ msgstr "Nombre de actor"
 #: plugins/contribtracker/www/global_admin.php:429
 #: plugins/contribtracker/www/global_admin.php:456
 msgid "Actor URL"
-msgstr "URL del actor"
+msgstr "URL actor"
 
 #: plugins/contribtracker/www/global_admin.php:430
 #: plugins/contribtracker/www/global_admin.php:457
@@ -13754,7 +13623,7 @@ msgstr "Puede haber algún retraso antes de poder ver el mensaje en los archivos
 
 #: plugins/forumml/www/index.php:77
 msgid " Redirecting to archive page, please wait ..."
-msgstr "Redirigiendo a la página de archivo, espere por favor ..."
+msgstr " Redirigiendo a la página de archivo, espere por favor ..."
 
 #: plugins/forumml/www/index.php:101 plugins/forumml/www/message.php:148
 #: plugins/mailman/www/mailman_utils.php:66
@@ -13829,7 +13698,7 @@ msgstr "Error: Adjunto no encontrado"
 
 #: plugins/forumml/www/upload.php:85
 msgid "Error: Missing parameter"
-msgstr "Error: faltan parámetros"
+msgstr "Error: parámetros ausente"
 
 #: plugins/globalactivity/include/globalactivityPlugin.class.php:101
 #: www/activity/index.php:114
@@ -13913,7 +13782,7 @@ msgstr "Proyectos en Forjas remotas"
 
 #: plugins/globaldashboard/include/globalDashboard_Widget_MyProjects.php:42
 msgid "Lists user projects hosted on remote forge systems"
-msgstr "Mostrar proyectos de usuarios hospedados en sistemas de forjas remotas"
+msgstr "Listar proyectos de usuarios hospedados en sistemas de forjas remotas"
 
 #: plugins/globaldashboard/include/globalDashboard_Widget_MyProjects.php:52
 msgid "My remote projects"
@@ -13929,7 +13798,7 @@ msgstr "Cuentas Remotas creadas correctamente"
 
 #: plugins/globaldashboard/www/admin/add_account.php:75
 msgid "Remote account created but unable to create remote associated discovery parameters"
-msgstr "Copia remota creada pero incapaz de crear parámetros de descubrimiento asociado remoto "
+msgstr "Cuenta remota creada pero incapaz de crear parámetros de descubrimiento asociado remoto"
 
 #: plugins/globaldashboard/www/admin/add_account.php:79
 msgid "Unable to create remote account"
@@ -14081,7 +13950,7 @@ msgstr "Acceso  Denegado"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:32
 msgid "Create a new associated forge below"
-msgstr "Cree una nueva forja asociada a continuación"
+msgstr "Cree una nueva forja asociada debajo"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:36
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:94
@@ -14463,17 +14332,8 @@ msgid "Site Global Menu Admin"
 msgstr "Menú Administrador Sitio Global"
 
 #: plugins/headermenu/common/headermenuPlugin.class.php:476
-#, fuzzy
-#| msgid ""
-#| "This plugin allows each project to define extra tabs with arbitrary\n"
-#| "titles and links, next to the login menu (headermenu),\n"
-#| "in the main menu (outermenu) or in the project menu (groupmenu)."
 msgid "Get the ability to set new links next to the login menu (headermenu), in the main menu (outermenu) or in the project menu (groupmenu)."
-msgstr ""
-"Este complemento permite cada proyecto definir etiquetas adicionales\n"
-"con títulos arbitrarios y enlaces, siguiente al menú de entrada (menú de\n"
-"cabecera) dentro del menú principal (menú externo) o dentro del menú\n"
-"del proyecto (menú grupo)."
+msgstr "Obtiene la capacidad para establecer nuevos enlaces siguiente al menú de entrada (cabecera de menú), o dentro del menú del proyecto (groupmenu)."
 
 #: plugins/headermenu/view/admin/updateLinkValue.php:58
 #: plugins/webanalytics/view/admin/updateLinkValue.php:33
@@ -14758,7 +14618,7 @@ msgstr "Ejercicio monitorizado:"
 
 #: plugins/hudson/include/HudsonJobWidget.class.php:96
 msgid "Current used"
-msgstr "Usada Actualmente"
+msgstr "Actualmente utilizada"
 
 #: plugins/hudson/include/hudsonPlugin.class.php:33
 #: plugins/hudson/include/hudsonViews.class.php:50
@@ -14822,7 +14682,7 @@ msgstr "Último fallado"
 #: plugins/hudson/include/hudson_Widget_JobLastArtifacts.class.php:106
 #: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:99
 msgid "No build found for this job."
-msgstr "Ninguna compilación encontrada para este ejercicio."
+msgstr "Ninguna compilación encontrada para esta tarea."
 
 #: plugins/hudson/include/hudsonPlugin.class.php:303
 #: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:104
@@ -14858,7 +14718,7 @@ msgstr "Fallido (%s)"
 #: plugins/hudson/include/HudsonTestResult.class.php:121
 #, php-format
 msgid "Skip (%s)"
-msgstr "No ejecutado (%s)"
+msgstr "Omitir (%s)"
 
 #: plugins/hudson/include/hudsonViews.class.php:218
 msgid "Back to jobs list"
@@ -15322,7 +15182,7 @@ msgstr "Subscribir"
 
 #: plugins/mailman/www/mailman_utils.php:184
 msgid "Re-create"
-msgstr "Re-Generar"
+msgstr "Re-crear"
 
 #: plugins/mailman/www/mailman_utils.php:194
 msgid "Administrate from Mailman"
@@ -15706,7 +15566,7 @@ msgstr "Use la configración global definida en el nivel de la forja"
 #: plugins/mantisbt/view/admin/viewConfiguration.php:51
 #: plugins/mantisbt/view/init.php:54
 msgid "Use global configuration"
-msgstr "Usar configuraciones globales"
+msgstr "Emplear configuraciones globales"
 
 #: plugins/mantisbt/view/admin/viewConfiguration.php:56
 #: plugins/mantisbt/view/admin/viewGlobalConfiguration.php:35
@@ -16049,7 +15909,7 @@ msgstr "Mediawiki para el proyecto %s (directorio %s) no creado aún, por favor 
 
 #: plugins/mediawiki/www/LocalSettings.php:82
 msgid "This script must be run from the command line!"
-msgstr "¡Este script debe ser ejecutado desde la línea de órdenes!"
+msgstr "¡Este guión debe ser ejecutado desde la línea de órdenes!"
 
 #: plugins/mediawiki/www/LocalSettings.php:90
 #, php-format
@@ -16238,7 +16098,7 @@ msgstr "Llave de Tiempo"
 
 #: plugins/oauthconsumer/www/access_tokens.php:13
 msgid "Token Secret"
-msgstr "Tiempo Secreto"
+msgstr "Billete Secreto"
 
 #: plugins/oauthconsumer/www/access_tokens.php:29
 msgid "You have no OAuth Access Tokens registered in the database currently"
@@ -16296,7 +16156,7 @@ msgstr "Obtener tokes de Acceso"
 #: plugins/oauthprovider/www/access_tokens.php:64
 #: plugins/oauthprovider/www/index.php:75
 msgid "Access tokens"
-msgstr "Tokenes de acceso"
+msgstr "Billetes de acceso"
 
 #: plugins/oauthconsumer/www/get_access_token.php:23
 #: plugins/oauthconsumer/www/index.php:28
@@ -16594,7 +16454,7 @@ msgstr "Ver Personal OSLC"
 
 #: plugins/oslc/include/oslcPlugin.class.php:161
 msgid "oslc Admin"
-msgstr "Administracion OSLC"
+msgstr "Admin OSLC"
 
 #: plugins/phpcaptcha/common/phpcaptchaPlugin.class.php:32
 msgid "Enable use of phpcaptcha (more information www.phpcaptcha.org)"
@@ -16615,22 +16475,16 @@ msgstr "Recargar imagen."
 
 #: plugins/phpcaptcha/common/phpcaptchaPlugin.class.php:57
 #: plugins/phptextcaptcha/common/phptextcaptchaPlugin.class.php:102
-#, fuzzy
-#| msgid "Write captcha here:"
 msgid "Write captcha here"
-msgstr "Escribe reconicimiento aquí:"
+msgstr "Escribe reconocimiento aquí"
 
 #: plugins/phpcaptcha/common/phpcaptchaPlugin.class.php:61
-#, fuzzy
-#| msgid "phpcaptcha seems not installed. Contact your administrator for more informations."
 msgid "phpcaptcha seems not installed. Contact your administrator for more information."
 msgstr "phpcaptcha parece no estar instalado. Contacte a su administrador para más información."
 
 #: plugins/phptextcaptcha/common/phptextcaptchaPlugin.class.php:31
-#, fuzzy
-#| msgid "Enable use of phpcaptcha (more information www.phpcaptcha.org)"
 msgid "Enable use of php-text-captcha (more information http://pear.php.net/manual/en/package.text.text-captcha.php)"
-msgstr "Activa uso de phpcaptcha (más info en www.phpchaptcha.org)"
+msgstr "Activa uso de php-text-captcha (más info en http://pear.php.net/manual/en/package.text.text-captcha.php)"
 
 #: plugins/projectimport/common/ProjectImporter.class.php:27
 msgid "Missing require to use this plugin. You need ARC2_OSLCCoreRDFJSONParserPlugin.php"
@@ -16651,7 +16505,7 @@ msgstr "Complemento importar proyectos"
 
 #: plugins/projectimport/common/ProjectImportPlugin.class.php:82
 msgid "Import users"
-msgstr "importar usuarios"
+msgstr "Importar usuarios"
 
 #: plugins/projectimport/common/UploadedFiles.class.php:99
 #, php-format
@@ -16834,10 +16688,8 @@ msgid "Failed to find mapped user “%s”"
 msgstr "Fallo en localizar usuario mapeado “%s”"
 
 #: plugins/projectimport/www/index.php:499
-#, fuzzy
-#| msgid "Couldn't rename dir"
 msgid "Couldn't proceed!"
-msgstr "No pudo renombrar dir"
+msgstr "¡No pudo procesar!"
 
 #: plugins/projectimport/www/index.php:501
 msgid "All (mapped) imported users added to the group."
@@ -16869,7 +16721,7 @@ msgstr "Importando"
 
 #: plugins/projectimport/www/index.php:624
 msgid "parsing problem"
-msgstr "Problemas procesado"
+msgstr "interpretando problemas"
 
 #: plugins/projectimport/www/index.php:677
 msgid "Confirm selected file or upload a new one"
@@ -16925,16 +16777,12 @@ msgid "Project labels"
 msgstr "Etiquetas de Proyectos"
 
 #: plugins/projectlabels/common/ProjectLabelsPlugin.class.php:30
-#, fuzzy
-#| msgid ""
-#| "This can be used to highlight some projects on a forge, for instance\n"
-#| "for a \"project of the month\"."
 msgid ""
 "This can be used to highlight some projects on a forge, for instance\n"
 "for a “project of the month”."
 msgstr ""
-"Esto puede utilizarse para resaltar algunos proyectos en una forja, para petición\n"
-"de un «proyecto del mes»."
+"Esto puede utilizarse para resaltar algunos proyectos en una forja,\n"
+"por ejemplo para un «proyecto del mes»."
 
 #: plugins/projectlabels/common/ProjectLabelsPlugin.class.php:38
 msgid "Project labels plugin"
@@ -16992,24 +16840,18 @@ msgstr "La etiqueta ha sido guardada."
 
 #: plugins/projectlabels/www/index.php:139
 #: plugins/projectlabels/www/index.php:213
-#, fuzzy
-#| msgid "Label name:"
 msgid "Label name"
-msgstr "Nombre etiqueta:"
+msgstr "Nombre etiqueta"
 
 #: plugins/projectlabels/www/index.php:141
 #: plugins/projectlabels/www/index.php:215
-#, fuzzy
-#| msgid "Displayed text (or HTML) for the label:"
 msgid "Displayed text (or HTML) for the label"
-msgstr "Texto (o HTML) enseñado para la etiqueta:"
+msgstr "Texto (o HTML) enseñado para la etiqueta"
 
 #: plugins/projectlabels/www/index.php:143
 #: plugins/projectlabels/www/index.php:163
-#, fuzzy
-#| msgid "This label currently looks like this:"
 msgid "This label currently looks like this"
-msgstr "Esta etiqueta actualmente se ve asi:"
+msgstr "Esta etiqueta actualmente parece esto"
 
 #: plugins/projectlabels/www/index.php:144
 msgid "Save this label"
@@ -17134,10 +16976,8 @@ msgid "Project Hierarchy"
 msgstr "Jerarquía de Proyecto"
 
 #: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:33
-#, fuzzy
-#| msgid "Organise projects hierarchicaly, relation type 1-n"
 msgid "Organise projects hierarchically, relation type 1-n."
-msgstr "Organizar proyectos jerárquicos, tipo de relación 1-n"
+msgstr "Organizar proyectos jerárquicos, tipo de relación 1-n."
 
 #: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:93
 msgid "Hierarchy Admin"
@@ -17145,10 +16985,8 @@ msgstr "Administración Jerarquias"
 
 #: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:93
 #: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:709
-#, fuzzy
-#| msgid "Configure the projects-hierarchy plugin (docman, tree, delegate, globalconf features)"
 msgid "Configure the projects-hierarchy plugin (docman, tree, globalconf features)"
-msgstr "Configure el complemento de jerarquías de proyecto (docman, árbol, delegación, caracteristicas de configuración global)"
+msgstr "Configure el complemento de jerarquías de proyecto (docman, árbol, delegación, características globalconf)"
 
 #: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:117
 msgid "Per Category"
@@ -17237,10 +17075,8 @@ msgstr "Gestionar Configuración Global de Forja"
 
 #: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:38
 #: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:38
-#, fuzzy
-#| msgid "Enable visibily in hierarchy tree."
 msgid "Enable visibility in hierarchy tree."
-msgstr "Activar la visibilidad del árbol de jerarquías."
+msgstr "Activar visibilidad en árbol jerárquico."
 
 #: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:38
 #: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:38
@@ -17249,7 +17085,7 @@ msgstr "Activar Árbol"
 
 #: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:47
 msgid "Enable hierarchical view for browsing in document manager."
-msgstr "Activar la visión jerarquica para navegar en el gestor documental."
+msgstr "Activar la visión jerárquica para navegar en el gestor documental."
 
 #: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:47
 #: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:46
@@ -17258,45 +17094,33 @@ msgstr "Activar Docman"
 
 #: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:56
 #: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:54
-#, fuzzy
-#| msgid "Enable hierarchical view for browsing in document manager."
 msgid "Enable hierarchical view for browsing in Forum main page."
-msgstr "Activar la visión jerarquica para navegar en el gestor documental."
+msgstr "Activar la visión jerárquica para explorar en la página principal del Foro."
 
 #: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:56
 #: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:54
-#, fuzzy
-#| msgid "Enable Docman"
 msgid "Enable Forum"
-msgstr "Activar Docman"
+msgstr "Activar Forum"
 
 #: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:65
 #: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:63
-#, fuzzy
-#| msgid "Enable hierarchical view for browsing in document manager."
 msgid "Enable hierarchical view for browsing in FRS main page."
-msgstr "Activar la visión jerarquica para navegar en el gestor documental."
+msgstr "Activar la visión jerárquica para explorar en la página principal de FRS."
 
 #: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:65
 #: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:63
-#, fuzzy
-#| msgid "Enable"
 msgid "Enable FRS"
-msgstr "Activar"
+msgstr "Activar FRS"
 
 #: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:74
 #: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:72
-#, fuzzy
-#| msgid "Enable hierarchical view for browsing in document manager."
 msgid "Enable hierarchical view for browsing in Tracker main page."
-msgstr "Activar la visión jerarquica para navegar en el gestor documental."
+msgstr "Activar la visión jerárquica para explorar en la página principal de Traker."
 
 #: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:74
 #: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:72
-#, fuzzy
-#| msgid "Enable Tree"
 msgid "Enable Tracker"
-msgstr "Activar Árbol"
+msgstr "Activar Tracker"
 
 #: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:34
 msgid "Manage project configuration"
@@ -17316,7 +17140,7 @@ msgstr "Activar configuración global de forja"
 
 #: plugins/projects-hierarchy/view/docman_project_link.php:35
 msgid "Enable hierarchical browsing"
-msgstr "Activar navegacion jerarquica"
+msgstr "Activar exploración jerarquica"
 
 #: plugins/projects-hierarchy/view/docman_project_link.php:38
 msgid "Disable hierarchical browsing"
@@ -17515,26 +17339,20 @@ msgid "Home, Ftp"
 msgstr "Inicio, Ftp"
 
 #: plugins/repositoryapi/include/repositoryapiPlugin.class.php:180
-#, fuzzy
-#| msgid "Error when fetching messages "
 msgid "Error when fetching repository info"
-msgstr "Error cuando obtuvo mensajes "
+msgstr "Error cuando obtuvo info de repositorio"
 
 #: plugins/repositoryapi/include/RepositoryAPIPluginDescriptor.class.php:27
-#, fuzzy
-#| msgid "SCM Repository"
 msgid "RepositoryAPI"
-msgstr "Repositorio SCM"
+msgstr "RepositoryAPI"
 
 #: plugins/repositoryapi/include/RepositoryAPIPluginDescriptor.class.php:27
 msgid "Metadata retrieval API for repositories"
 msgstr ""
 
 #: plugins/rest/common/restPlugin.class.php:27
-#, fuzzy
-#| msgid "Restore"
 msgid "Rest"
-msgstr "Restaurar"
+msgstr "Rest"
 
 #: plugins/rest/common/restPlugin.class.php:29
 msgid "This plugin provides a REST API for FusionForge."
@@ -17590,7 +17408,7 @@ msgstr "Acceso anónimo a Bazzar"
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:94
 msgid "This project's Bazaar repository can be checked out through anonymous access with the following command."
-msgstr "Este repositorio Bazaar del proyecto puede ser descargado através de accesos anonimos con el siguiente comando."
+msgstr "Este repositorio Bazaar de este proyecto puede ser descargado através de accesos anonimos con el siguiente comando."
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:108
 #: plugins/scmbzr/common/BzrPlugin.class.php:120
@@ -17711,9 +17529,8 @@ msgid "Only available if anonymous access is allowed"
 msgstr ""
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:545
-#, fuzzy
 msgid "No specific action available"
-msgstr "Estadísticas no disponibles"
+msgstr "Ninguna operación específica disponible"
 
 #: plugins/scmccase/common/CCasePlugin.class.php:92
 msgid "ClearCase Access"
@@ -17753,10 +17570,9 @@ msgid "Anonymous CPOLD Access"
 msgstr "Acceso Anónimo CPOLD"
 
 #: plugins/scmcpold/common/CpoldPlugin.class.php:63
-#, fuzzy, php-format
-#| msgid "This project's CPOLD repository can be accessep anonymously at %s."
+#, php-format
 msgid "This project's CPOLD repository can be accessed anonymously at %s."
-msgstr "Este repositorio CPOLD del proyecto puede ser accedido anónimamente en %s."
+msgstr "Este repositorio CPOLD de este proyecto puede ser accedido anónimamente en %s."
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:35
 msgid "CVS"
@@ -17817,10 +17633,8 @@ msgstr "Añadidos"
 #: plugins/scmgit/common/GitPlugin.class.php:393
 #: plugins/scmhg/common/HgPlugin.class.php:248
 #: plugins/scmsvn/common/SVNPlugin.class.php:334
-#, fuzzy
-#| msgid "No task yet"
 msgid "No history yet."
-msgstr "Ninguna tarea aún"
+msgstr "Ningún historial aún."
 
 #: plugins/scmcvs/www/acl.php:44
 msgid "Invalid CVS repository: "
@@ -17869,25 +17683,19 @@ msgstr "Acceso Anonimo"
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:126
 msgid "This project's Darcs repository can be checked out through anonymous access with the following command."
-msgstr "Este repositorio Darcs del proyecto puede ser marcado fuera a través de accesos anónimos con la siguiente función."
+msgstr "Este repositorio Darcs de este proyecto puede ser marcado fuera a través de accesos anónimos con la siguiente función."
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:159
-#, fuzzy
-#| msgid "%s Repository Browser"
 msgid "Darcs Repository Browser"
-msgstr "%s navegador del repositorio"
+msgstr "Explorador de Repositorio Darcs"
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:160
-#, fuzzy
-#| msgid "Browsing the Git tree gives you a view into the current status of this project's code. You may also view the complete history of any file in the repository."
 msgid "Browsing the Darcs tree gives you a view into the current status of this project's code. You may also view the complete history of any file in the repository."
-msgstr "Examinar por el árbol Git le da una visión del estado actual del código fuente de este proyecto. Puede además ver el historial completo de cualquier fichero en el repositorio."
+msgstr "Examinar por el árbol Darcs le da una visión del estado actual del código fuente de este proyecto. Puede además ver el historial completo de cualquier fichero dentro del repositorio."
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:167
-#, fuzzy
-#| msgid "Browse Darcs Repository "
 msgid "Browse Darcs repository"
-msgstr "Navegar Repositorio Darcs"
+msgstr "Explorar repositorio Darcs"
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:170
 msgid "No repositories to browse"
@@ -17901,16 +17709,12 @@ msgid "Updates"
 msgstr "Actualizaciones"
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:584
-#, fuzzy
-#| msgid "Repository to be created: "
 msgid "Repository to be created"
-msgstr "Repositorio a crear: "
+msgstr "Repositorio a ser creado"
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:588
-#, fuzzy
-#| msgid "Create new repository:"
 msgid "Create new repository"
-msgstr "Crear repositorio nuevo:"
+msgstr "Crear repositorio nuevo"
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:589
 #: plugins/scmgit/common/GitPlugin.class.php:1182
@@ -17943,7 +17747,7 @@ msgstr ""
 #: plugins/scmgit/common/GitPlugin.class.php:108
 msgid "This project's Git repository can be checked out through anonymous access with the following command."
 msgid_plural "This project's Git repositories can be checked out through anonymous access with the following commands."
-msgstr[0] "Este repositorio Git del proyecto puede ser descargado a través de un acceso anónimo con la siguiente orden."
+msgstr[0] "Este repositorio Git de este proyecto puede ser descargado a través de un acceso anónimo con la siguiente orden."
 msgstr[1] "Este repositorio Git del proyecto puede ser descargado a través de un acceso anónimo con las siguientes órdenes."
 
 #: plugins/scmgit/common/GitPlugin.class.php:126
@@ -17983,10 +17787,8 @@ msgid "via \"smart HTTP\""
 msgstr "por «HTTP inteligente»"
 
 #: plugins/scmgit/common/GitPlugin.class.php:169
-#, fuzzy
-#| msgid "No access protocol has been allowed for the Git plugin in scmgit.ini: use_ssh, use_smarthttp and use_dav are disabled"
 msgid "No access protocol has been allowed for the Git plugin in scmgit.ini: use_ssh and use_smarthttp are disabled"
-msgstr "Ningún protocolo de acceso ha sido permitido para el complemento Git en scmgit.ini: use_ssh, use_smarthttp y use_dav están desactivados."
+msgstr "Ningún protocolo de acceso ha sido permitido para el complemento Git en scmgit.ini: use_ssh, use_smarthttp y use_dav están desactivados"
 
 #: plugins/scmgit/common/GitPlugin.class.php:248
 msgid "Access to your personal repository"
@@ -18007,7 +17809,7 @@ msgstr "Puede clonar el repositorio del proyecto en uno personal en el que solo 
 
 #: plugins/scmgit/common/GitPlugin.class.php:317
 msgid "Git Repository Browser"
-msgstr "Exploredor Repositorio Git"
+msgstr "Explorador Repositorio Git"
 
 #: plugins/scmgit/common/GitPlugin.class.php:318
 msgid "Browsing the Git tree gives you a view into the current status of this project's code. You may also view the complete history of any file in the repository."
@@ -18026,10 +17828,8 @@ msgid "Browse personal git repository"
 msgstr "Examinar repositorio personal git"
 
 #: plugins/scmgit/common/GitPlugin.class.php:374
-#, fuzzy
-#| msgid "Statistics"
 msgid "statistics"
-msgstr "Estadísticas"
+msgstr "estadísticas"
 
 #: plugins/scmgit/common/GitPlugin.class.php:1055
 msgid "Git Commits"
@@ -18099,10 +17899,8 @@ msgid "Browse Git Repository"
 msgstr "Examinar Repositorio Git"
 
 #: plugins/scmgit/common/scmgit_Widget_MyRepositories.class.php:60
-#, fuzzy
-#| msgid "No personal git repository"
 msgid "No personal git repository."
-msgstr "No hay repositorios git personales"
+msgstr "Ningún repositorio git personales."
 
 #: plugins/scmgit/www/index.php:48
 #, php-format
@@ -18147,7 +17945,7 @@ msgstr "Acceso Anónimo Mercurial"
 
 #: plugins/scmhg/common/HgPlugin.class.php:81
 msgid "This project's Mercurial repository can be checked out through anonymous access with the following command"
-msgstr "Este repositorio Mercurial del proyecto puede ser descargado a través de accesos anónimos con la siguiente orden"
+msgstr "Este repositorio Mercurial de este proyecto puede ser descargado a través de accesos anónimos con la siguiente orden"
 
 #: plugins/scmhg/common/HgPlugin.class.php:86
 msgid "Please contact forge administrator, scmhg plugin is not correctly configured"
@@ -18156,29 +17954,22 @@ msgstr "Por favor contacte con el administrador de forja, el complemento scmhg n
 #: plugins/scmhg/common/HgPlugin.class.php:98
 #: plugins/scmhg/common/HgPlugin.class.php:154
 #: plugins/scmhg/common/HgPlugin.class.php:176
-#, fuzzy
-#| msgid "Only project developers can access the Git repository via this method."
-#| msgid_plural "Only project developers can access the Git repositories via this method."
 msgid "Only project developers can access the Hg repository via this method."
 msgid_plural "Only project developers can access the Hg repositories via this method."
-msgstr[0] "Solo los desarrolladores del proyecto puede acceder al Git usando este método."
-msgstr[1] "Solo los desarrolladores del proyecto puede acceder al Git usando este método."
+msgstr[0] "Solo los desarrolladores del proyecto puede acceder al repositorio Hg usando este método."
+msgstr[1] "Solo los desarrolladores del proyecto puede acceder a los repositorios Hg usando este método."
 
 #: plugins/scmhg/common/HgPlugin.class.php:108
 msgid "via \"DAV\""
-msgstr ""
+msgstr "vía «DAV»"
 
 #: plugins/scmhg/common/HgPlugin.class.php:113
-#, fuzzy
-#| msgid "No access protocol has been allowed for the Git plugin in scmgit.ini: use_ssh, use_smarthttp and use_dav are disabled"
 msgid "No access protocol has been allowed for the Hg plugin in scmhg.ini: use_ssh and use_dav are disabled"
-msgstr "Ningún protocolo de acceso ha sido permitido para el complemento Git en scmgit.ini: use_ssh, use_smarthttp y use_dav están desactivados."
+msgstr "Ningún protocolo de acceso ha sido permitido para el complemento Hg en scmhg.ini: use_ssh, y use_dav están desactivados"
 
 #: plugins/scmhg/common/HgPlugin.class.php:203
-#, fuzzy
-#| msgid "Git Repository Browser"
 msgid "Mercurial Repository Browser"
-msgstr "Exploredor Repositorio Git"
+msgstr "Explorador Repositorio Mercurial"
 
 #: plugins/scmhg/common/HgPlugin.class.php:204
 msgid "Browsing the Mercurial tree gives you a view into the current status of this project's code. You may also view the complete histories of any file in the repository."
@@ -18189,10 +17980,8 @@ msgid "Browse Hg Repository"
 msgstr "Examinar repositorio Hg"
 
 #: plugins/scmhg/common/HgPlugin.class.php:208
-#, fuzzy
-#| msgid "Browse extra git repository"
 msgid "Browse extra Hg repository"
-msgstr "Examinar repositorio git adicional"
+msgstr "Examinar repositorio Hg adicional"
 
 #: plugins/scmhg/common/HgPlugin.class.php:815
 msgid "Hg Commits"
@@ -18252,10 +18041,8 @@ msgstr "No hay enganchos disponibles"
 #: plugins/scmhook/common/scmhookPlugin.class.php:412
 #: plugins/scmhook/common/scmhookPlugin.class.php:479
 #: plugins/scmhook/common/scmhookPlugin.class.php:546
-#, fuzzy
-#| msgid "SCM Repository"
 msgid "Repository"
-msgstr "Repositorio SCM"
+msgstr "Repositorio"
 
 #: plugins/scmhook/library/scmcvs/commitTracker.class.php:33
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:37
@@ -18265,17 +18052,13 @@ msgstr "Cada efectuación está empujado al seguimiento o tarea correspondiente.
 
 #: plugins/scmhook/library/scmcvs/commitTracker.class.php:47
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:49
-#, fuzzy
-#| msgid "Hook not available due to missing dependency: Project not using tracker."
 msgid "Hook not available due to missing dependency"
-msgstr "Gancho no disponible debido a dependencia perdida: proyecto no empleando seguimiento."
+msgstr "Gancho no disponible debido a dependencia ausente"
 
 #: plugins/scmhook/library/scmcvs/commitTracker.class.php:47
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:49
-#, fuzzy
-#| msgid "This project is not using the tracker feature."
 msgid "Project not using tracker."
-msgstr "Este proyecto no está usando la característica de seguimiento."
+msgstr "Este proyecto no está usando seguimiento."
 
 #: plugins/scmhook/library/scmcvs/commitTracker.class.php:61
 #: plugins/scmhook/library/scmcvs/commitTracker.class.php:77
@@ -18287,22 +18070,16 @@ msgid "Unable to retrieve data"
 msgstr "Incapaz de obtener datos"
 
 #: plugins/scmhook/library/scmcvs/commitTracker.class.php:98
-#, fuzzy
-#| msgid "Related SVN commits"
 msgid "Related CVS commits"
-msgstr "Efectuaciones SVN relacionadas"
+msgstr "Efectuaciones CVS relacionadas"
 
 #: plugins/scmhook/library/scmcvs/commitTracker.class.php:180
-#, fuzzy
-#| msgid "Wrong destination role"
 msgid "Wrong situation"
-msgstr "Cargo de destino incorrecto"
+msgstr "Situación equivocada"
 
 #: plugins/scmhook/library/scmcvs/hooks/cvs_wrapper.php:31
-#, fuzzy
-#| msgid "No list specified"
 msgid "Invalid script specified"
-msgstr "Lista no especificada"
+msgstr "Guión especificado no válido"
 
 #: plugins/scmhook/library/scmgit/commitTracker.class.php:112
 msgid "Related Git commits"
@@ -18321,10 +18098,8 @@ msgid "Send commit e-mail notification to"
 msgstr "Enviar efectuaciones por notificación de correo-e a"
 
 #: plugins/scmhook/library/scmhg/commitEmail.class.php:38
-#, fuzzy
-#| msgid "The hook is triggered after 'serve push pull bundle' on the projects repository."
 msgid "The hook is triggered after \"serve push pull bundle\" on the projects repository."
-msgstr "El gancho está desencadenado tras 'serve push pull bundle' en el repositorio de proyectos."
+msgstr "El gancho está disparado tras «serve push pull bundle» en el repositorio de proyectos."
 
 #: plugins/scmhook/library/scmsvn/allowRevPropChange.class.php:30
 msgid "Allow SCM committers to change revision properties."
@@ -18335,10 +18110,8 @@ msgid "Commit message must not be empty."
 msgstr "Efectuar mensaje no debe estar vacío."
 
 #: plugins/scmhook/library/scmsvn/checkMimetype.class.php:30
-#, fuzzy
-#| msgid "Verify if commited files have svn:mimetype set up correctly."
 msgid "Verify if committed files have svn:mimetype set up correctly."
-msgstr "Verificar si los ficheros efectuados tienen svn:mimetypes puestos correctamente."
+msgstr "Verificar si los ficheros efectuados tienen svn:mimetypes establecidos correctamente."
 
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:50
 msgid "Hook not available due to missing dependency: Project not using tracker."
@@ -18363,64 +18136,50 @@ msgstr ""
 "sobre él para el administrador del proyecto."
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:139
-#, fuzzy
-#| msgid "This project's SVN repository can be checked out through anonymous access with the following command(s)."
 msgid "This project's SVN repository can be checked out through anonymous access with the following command(s)."
 msgid_plural "This project's SVN repositories can be checked out through anonymous access with the following command(s)."
-msgstr[0] "Este repositorio SVN del proyecto puede ser descargado anonimamente con lossiguientes comandos."
-msgstr[1] "Este repositorio SVN del proyecto puede ser descargado anonimamente con lossiguientes comandos."
+msgstr[0] "Este repositorio SVN de este proyecto puede ser descargado anónimamente con las funciones siguientes."
+msgstr[1] "Este repositorio SVN del proyecto puede ser descargado anónimamente con las funciones siguientes."
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:148
-#, fuzzy
-#| msgid "via SSH"
 msgid "via SVN"
-msgstr "por SSH"
+msgstr "vía SVN"
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:158
 #: plugins/scmsvn/common/SVNPlugin.class.php:187
 msgid "via DAV"
-msgstr ""
+msgstr "vía DAV"
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:286
 msgid "Subversion Repository Browser"
 msgstr "Navegador Repositorio Subversion"
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:287
-#, fuzzy
-#| msgid "Browsing the %s tree gives you a view into the current status of this project's code."
 msgid "Browsing the Subversion tree gives you a view into the current status of this project's code."
-msgstr "Explorando por el árbol %s le da una visión del estado actual y su código del proyecto."
+msgstr "Explorando por el árbol Subversion le da una visión del estado actual y su código del proyecto."
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:294
-#, fuzzy
-#| msgid "Browse extra git repository"
 msgid "Browse extra SVN repository"
-msgstr "Examinar repositorio git adicional"
+msgstr "Examinar repositorio SVN adicional"
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:796
 msgid "Subversion Commits"
 msgstr "Cambios Subversion"
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:1079
-#, fuzzy
-#| msgid "No extra Git repository for project"
 msgid "No extra Subversion repository for project"
-msgstr "Ningún repositorio GIT adicional para proyecto"
+msgstr "Ningún repositorio Subversion adicional para proyecto"
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:1081
-#, fuzzy, php-format
-#| msgid "Extra Git repository for project %1$s"
-#| msgid_plural "Extra Git repositories for project %1$s"
+#, php-format
 msgid "Extra Subversion repository for project %1$s"
 msgid_plural "Extra Subversion repositories for project %1$s"
-msgstr[0] "Repositorio Git adicional para el proyecto %1$s"
-msgstr[1] "Repositorios Git adicionales para el proyecto %1$s"
+msgstr[0] "Repositorio Subversion adicional para el proyecto %1$s"
+msgstr[1] "Repositorios Subversion adicionales para el proyecto %1$s"
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:1103
-#, fuzzy
-#| msgid "Create new Git repository for project"
 msgid "Create new Subversion repository for project"
-msgstr "Crear repositorio Git nuevo para proyecto"
+msgstr "Crear repositorio Subversion para proyecto"
 
 #: plugins/soapadmin/include/soapadminPlugin.class.php:72
 msgid "View Personal SoapAdmin"
@@ -18467,8 +18226,6 @@ msgstr "Soltar regla no está definido para esta columna de destino"
 
 #: plugins/taskboard/common/actions/ajax_drop_card.php:58
 #: plugins/taskboard/common/actions/ajax_update.php:44
-#, fuzzy
-#| msgid "Task is not found. Taskboard will be reloaded."
 msgid "Task is not found. Task Board will be reloaded."
 msgstr "Tarea no encontrada. Pizarra será recargada."
 
@@ -18484,9 +18241,8 @@ msgstr "No puedo publicar instantánea"
 
 #: plugins/taskboard/common/actions/ajax_save_release_snapshot.php:43
 #, fuzzy, php-format
-#| msgid "Mail successfully sent "
 msgid "Snapshot is succesfully saved for %s"
-msgstr "Email enviado correctamente "
+msgstr "Snapshot es guardado correctamente por %s"
 
 #: plugins/taskboard/common/actions/ajax_save_release_snapshot.php:46
 msgid "Snapshot date should be withing release period"
@@ -18520,62 +18276,45 @@ msgid "Please, fill all required fields."
 msgstr "Por favor, rellene todos los campos requeridos."
 
 #: plugins/taskboard/common/actions/init.php:60
-#, fuzzy
-#| msgid "Package successfully updated"
 msgid "Task Board successfully updated"
-msgstr "Paquete actualizado correctamente"
+msgstr "Pizarra actualizado correctamente"
 
 #: plugins/taskboard/common/actions/init.php:62
-#, fuzzy
-#| msgid "Release successfully created"
 msgid "Task Board successfully created"
-msgstr "Publicación creada correctamente"
+msgstr "Pizarra creada correctamente"
 
 #: plugins/taskboard/common/include/TaskBoardFactoryHtml.class.php:36
-#, fuzzy, php-format
-#| msgid "Taskboard for "
+#, php-format
 msgid "Task Boards for %s"
-msgstr "Pizarra para "
+msgstr "Pizarra para %s"
 
 #: plugins/taskboard/common/include/TaskBoardFactoryHtml.class.php:40
 #: plugins/taskboard/common/include/TaskBoardHtml.class.php:42
-#, fuzzy
-#| msgid "View Taskboard"
 msgid "View Task Boards"
 msgstr "Ver Pizarra"
 
 #: plugins/taskboard/common/include/TaskBoardFactoryHtml.class.php:42
 #: plugins/taskboard/common/include/TaskBoardHtml.class.php:44
-#, fuzzy
-#| msgid "Get the list of available trackers"
 msgid "Get the list of available taskboards"
-msgstr "Obtener lista de seguimientos disponibles"
+msgstr "Obtener lista de pizarras disponibles"
 
 #: plugins/taskboard/common/include/TaskBoardFactoryHtml.class.php:45
 #: plugins/taskboard/common/include/TaskBoardHtml.class.php:47
-#, fuzzy
-#| msgid "Tasks Administration"
 msgid "Task Boards Administration"
-msgstr "Administrador Tareas"
+msgstr "Administración de Pizarra"
 
 #: plugins/taskboard/common/include/TaskBoardFactoryHtml.class.php:47
 #: plugins/taskboard/common/include/TaskBoardHtml.class.php:49
-#, fuzzy
-#| msgid "Global Administration View"
 msgid "Global administration for taskboards."
-msgstr "Vista Global de Administración"
+msgstr "Administración global para pizarras."
 
 #: plugins/taskboard/common/include/TaskBoardHtml.class.php:55
-#, fuzzy
-#| msgid "View Taskboard"
 msgid "View this taskboard."
-msgstr "Ver Pizarra"
+msgstr "Ver esta pizarra."
 
 #: plugins/taskboard/common/include/TaskBoardHtml.class.php:60
-#, fuzzy
-#| msgid "Manage releases"
 msgid "Manage releases."
-msgstr "Gestione publicaciones"
+msgstr "Gestione publicaciones."
 
 #: plugins/taskboard/common/include/TaskBoardHtml.class.php:74
 #: plugins/taskboard/common/views/releases/edit_release.php:42
@@ -18585,10 +18324,8 @@ msgid "Edit release"
 msgstr "Edite publicación"
 
 #: plugins/taskboard/common/include/TaskBoardHtml.class.php:83
-#, fuzzy
-#| msgid "Administration of tracker"
 msgid "Administration for this taskboard."
-msgstr "Administración de seguimiento"
+msgstr "Administración para esta pizarra."
 
 #: plugins/taskboard/common/include/TaskBoardHtml.class.php:87
 #: plugins/taskboard/common/views/admin/taskboard.php:52
@@ -18617,34 +18354,24 @@ msgstr "Borrar Columna"
 #: plugins/taskboard/common/views/admin/ind.php:56
 #: plugins/taskboard/common/views/ind.php:48
 #: plugins/taskboard/common/views/releases/burndown.php:87
-#, fuzzy
-#| msgid "TaskBoard"
 msgid "Task Board"
 msgstr "Pizarra"
 
 #: plugins/taskboard/common/TaskBoard.class.php:185
-#, fuzzy
-#| msgid "Cannot create taskboard"
 msgid "Cannot create Task Board"
-msgstr "No puede crear pizarra"
+msgstr "No puede crear Pizarra"
 
 #: plugins/taskboard/common/TaskBoard.class.php:239
-#, fuzzy
-#| msgid "Taskboard must be linked at least to one tracker"
 msgid "Task Board must be linked at least to one tracker"
 msgstr "Pizarra debe ser enlazada al menos a un seguimiento"
 
 #: plugins/taskboard/common/TaskBoard.class.php:263
-#, fuzzy
-#| msgid "Cannot update taskboard"
 msgid "Cannot update Task Board"
-msgstr "No puede actualizar pizarra"
+msgstr "No puede actualizar Pizarra"
 
 #: plugins/taskboard/common/TaskBoard.class.php:314
-#, fuzzy
-#| msgid "Cannot create taskboard"
 msgid "Cannot delete Task Board"
-msgstr "No puede crear pizarra"
+msgstr "No puede borrar Pizarra"
 
 #: plugins/taskboard/common/TaskBoard.class.php:348
 msgid "Invalid TaskBoardID"
@@ -18681,7 +18408,7 @@ msgstr "Tareas, las cuales no están enlazadas a cuaquier estoria del usuario"
 
 #: plugins/taskboard/common/TaskBoard.class.php:604
 msgid "Configured extra field for userstories sorting is not found."
-msgstr "Campos adicionales configurado para históricos ordenado de usuario no encontrado. "
+msgstr "Campos adicionales configurado para históricos ordenado de usuario no encontrado."
 
 #: plugins/taskboard/common/TaskBoard.class.php:793
 msgid "Cannot get list of columns."
@@ -18705,7 +18432,7 @@ msgstr "no puedo obtener soluciones"
 
 #: plugins/taskboard/common/TaskBoardColumn.class.php:388
 msgid "cannot get drop rules"
-msgstr "no puedo establecer regla de arrojo "
+msgstr "no puedo establecer reglas de arrojo"
 
 #: plugins/taskboard/common/TaskBoardColumn.class.php:432
 msgid "cannot get resolution by default"
@@ -18713,25 +18440,21 @@ msgstr "no puede obtener la resolución por defecto"
 
 #: plugins/taskboard/common/TaskBoardColumn.class.php:456
 msgid "cannot set drop rule"
-msgstr "no puedo establecer regla de arrojo "
+msgstr "no puedo establecer regla de arrojo"
 
 #: plugins/taskboard/common/TaskBoardColumnSource.class.php:267
 msgid "Tracker error"
 msgstr "Error de seguimeinto"
 
 #: plugins/taskboard/common/TaskBoardPlugin.class.php:30
-#, fuzzy
-#| msgid "Agile TaskBoard: Supports Scrum and Kanban methodologies."
 msgid "Agile Task Board: Supports Scrum and Kanban methodologies."
 msgstr "Pizarra Agile: Apoyo de metodologías Scrum y Kanban."
 
 #: plugins/taskboard/common/TaskBoardPlugin.class.php:43
 msgid "Task Board Admin"
-msgstr "Admin. Tarea "
+msgstr "Admin Pizarra"
 
 #: plugins/taskboard/common/TaskBoardPlugin.class.php:56
-#, fuzzy
-#| msgid "Agile Scrum and Kanban display of existing artefacts."
 msgid "Agile Scrum and Kanban display of existing artifacts."
 msgstr "Agile Scrum y Kanban enseñan artefactos existentes."
 
@@ -18743,10 +18466,8 @@ msgstr "Configuración de columnas"
 #: plugins/taskboard/common/views/admin/columns.php:36
 #: plugins/taskboard/common/views/admin/trackers.php:82
 #: plugins/taskboard/common/views/admin/trackers.php:298
-#, fuzzy
-#| msgid "Choose at least one tracker for using with taskboard."
 msgid "Choose at least one tracker for using with Task Board."
-msgstr "Elija al menos un seguimiento para emplar con pizarra."
+msgstr "Elija al menos un seguimiento para emplear con Pizarra."
 
 #: plugins/taskboard/common/views/admin/columns.php:46
 msgid "Max number of tasks"
@@ -18766,10 +18487,8 @@ msgstr "Añade columna nueva"
 
 #: plugins/taskboard/common/views/admin/columns.php:77
 #: plugins/taskboard/common/views/admin/edit_column.php:59
-#, fuzzy
-#| msgid "Title backgound color"
 msgid "Title background color"
-msgstr "Color de fondo del ttulo"
+msgstr "Color de fondo del título"
 
 #: plugins/taskboard/common/views/admin/columns.php:81
 #: plugins/taskboard/common/views/admin/edit_column.php:63
@@ -18803,21 +18522,17 @@ msgstr "Columna"
 
 #: plugins/taskboard/common/views/admin/delete_column.php:48
 msgid "You are about to permanently and irretrievably delete this column!"
-msgstr "Está a punto de borrar permanentemente e irrecuperablemente esta columna."
+msgstr "¡Está a punto de borrar permanentemente e irrecuperablemente esta columna!"
 
 #: plugins/taskboard/common/views/admin/delete_taskboard.php:26
 #: plugins/taskboard/common/views/admin/delete_taskboard.php:27
 #: plugins/taskboard/common/views/admin/taskboard.php:56
-#, fuzzy
-#| msgid "Delete Tracker"
 msgid "Delete Task Board"
-msgstr "Borrar Tracker"
+msgstr "Borrar Pizarra"
 
 #: plugins/taskboard/common/views/admin/delete_taskboard.php:41
-#, fuzzy
-#| msgid "You are about to permanently and irretrievably delete this column!"
 msgid "You are about to permanently and irretrievably delete this Task Board!"
-msgstr "Está a punto de borrar permanentemente e irrecuperablemente esta columna."
+msgstr "¡Está a punto de borrar permanentemente e irrecuperadamente esta Pizarra de Tareas!"
 
 #: plugins/taskboard/common/views/admin/edit_column.php:52
 msgid "Edit column"
@@ -18846,22 +18561,16 @@ msgstr "No puede editar columna debido a ID de columna ausente"
 #: plugins/taskboard/common/views/admin/ind.php:37
 #: plugins/taskboard/common/views/admin/init.php:43
 #: plugins/taskboard/common/views/ind.php:32
-#, fuzzy
-#| msgid "Could Not Get Factory"
 msgid "Could Not Get TaskBoardFactory"
-msgstr "No puedo obtener Factory"
+msgstr "No puedo obtener TaskBoardFactory"
 
 #: plugins/taskboard/common/views/admin/ind.php:49
-#, fuzzy
-#| msgid "Initialize taskboard"
 msgid "Initialize a new Task Board"
-msgstr "Inicializar pizarra"
+msgstr "Inicializa una nueva Pizarra"
 
 #: plugins/taskboard/common/views/admin/ind.php:50
-#, fuzzy
-#| msgid "Create initial taskboard configuration"
 msgid "Create initial Task Board configuration"
-msgstr "Crear configuración inicial de pizarra"
+msgstr "Crear configuración inicial de Pizarra"
 
 #: plugins/taskboard/common/views/admin/ind.php:53
 #, fuzzy
@@ -18871,66 +18580,46 @@ msgstr "No hay seguimientos configurados, o no puede verlos."
 
 #: plugins/taskboard/common/views/admin/ind.php:55
 #: plugins/taskboard/common/views/ind.php:47
-#, fuzzy
-#| msgid "TaskBoard"
 msgid "Choose a Task Board."
-msgstr "Pizarra"
+msgstr "Elija una Pizarra"
 
 #: plugins/taskboard/common/views/admin/init.php:32
-#, fuzzy
-#| msgid "Administration - Trackers configuration"
 msgid "Administration - Configure Task Board"
-msgstr "Administración - Configuración de seguimientos"
+msgstr "Administración - Configuración Pizarra"
 
 #: plugins/taskboard/common/views/admin/init.php:48
-#, fuzzy
-#| msgid "Taskboard for "
 msgid "Task Boards for "
 msgstr "Pizarra para "
 
 #: plugins/taskboard/common/views/admin/init.php:48
-#, fuzzy
-#| msgid "Administration of tracker"
 msgid "Administration - Create New Task Board"
-msgstr "Administración de seguimiento"
+msgstr "Administración - Crea Nueva Pizarra"
 
 #: plugins/taskboard/common/views/admin/init.php:63
-#, fuzzy
-#| msgid "Task Board Admin"
 msgid "Task Board Name"
-msgstr "Admin. Tarea "
+msgstr "Nombre Pizarra"
 
 #: plugins/taskboard/common/views/admin/init.php:68
-#, fuzzy
-#| msgid "Short Description"
 msgid "Task Board Description"
-msgstr "Descripción corta"
+msgstr "Descripción Pizarra"
 
 #: plugins/taskboard/common/views/admin/taskboard.php:44
-#, fuzzy
-#| msgid "Configure Trackers"
 msgid "Configure Task Board"
-msgstr "Configurar Seguimientos"
+msgstr "Configurar Pizarra"
 
 #: plugins/taskboard/common/views/admin/taskboard.php:45
 msgid "Change Task Board name and description."
 msgstr ""
 
 #: plugins/taskboard/common/views/admin/taskboard.php:48
-#, fuzzy
-#| msgid "Configure Trackers"
 msgid "Configure Trackers used"
-msgstr "Configurar Seguimientos"
+msgstr "Configurar Seguimientos utilizados"
 
 #: plugins/taskboard/common/views/admin/taskboard.php:49
-#, fuzzy
-#| msgid "Choose and configure trackers, used with taskboard."
 msgid "Choose and configure trackers, used with Task Board."
-msgstr "Elija y configure seguimientos, empleados con pizarra."
+msgstr "Elija y configure seguimientos, empleados con Pizarra."
 
 #: plugins/taskboard/common/views/admin/taskboard.php:53
-#, fuzzy
-#| msgid "Configure taskboard columns."
 msgid "Configure Task Board columns."
 msgstr "Configura columnas de pizarra."
 
@@ -18953,10 +18642,8 @@ msgid "There Are No Trackers Defined For This Project"
 msgstr "No Hay Ningún Seguimiento Definido Para Este Proyecto"
 
 #: plugins/taskboard/common/views/admin/trackers.php:87
-#, fuzzy
-#| msgid "There are no any tracker having \"resolution\" field."
 msgid "There are no any tracker having “resolution” field."
-msgstr "No hay ningún seguimiento teniendo el campo \"resolution\"."
+msgstr "No hay ningún seguimiento teniendo el campo “resolution”."
 
 #: plugins/taskboard/common/views/admin/trackers.php:95
 msgid "Use"
@@ -18994,7 +18681,7 @@ msgstr "No definido"
 
 #: plugins/taskboard/common/views/admin/trackers.php:114
 msgid "Remaining effort field"
-msgstr "Campo de esfuerzo estimado"
+msgstr "Campo de esfuerzo restante"
 
 #: plugins/taskboard/common/views/admin/trackers.php:120
 #: plugins/taskboard/common/views/admin/trackers.php:123
@@ -19065,10 +18752,8 @@ msgid "Burndown chart"
 msgstr ""
 
 #: plugins/taskboard/common/views/releases/burndown.php:140
-#, fuzzy
-#| msgid "Completed"
 msgid "Completed tasks"
-msgstr "Completado"
+msgstr "Tareas completadas"
 
 #: plugins/taskboard/common/views/releases/burndown.php:151
 #: www/include/features_boxes.php:181
@@ -19080,16 +18765,12 @@ msgid "Ideal burndown"
 msgstr ""
 
 #: plugins/taskboard/common/views/releases/burndown.php:158
-#, fuzzy
-#| msgid "Unlinked tasks"
 msgid "Remaining tasks"
-msgstr "Tareas desenlazadas"
+msgstr "Tareas pendientes"
 
 #: plugins/taskboard/common/views/releases/burndown.php:159
-#, fuzzy
-#| msgid "Remaining effort field"
 msgid "Remaining efforts"
-msgstr "Campo de esfuerzo estimado"
+msgstr "Esfuerzo restante"
 
 #: plugins/taskboard/common/views/releases/delete_release.php:50
 msgid "You are about to permanently and irretrievably delete this release with all indicators!"
@@ -19130,31 +18811,24 @@ msgid "Save release snapshot"
 msgstr "Guardar instantánea de publicación"
 
 #: plugins/taskboard/common/views/taskboard.php:189
-#, fuzzy
 msgid "Filter tasks"
-msgstr "Ficheros"
+msgstr "Filtrar tareas"
 
 #: plugins/taskboard/common/views/taskboard.php:194
 msgid "Filter"
 msgstr "Filtro"
 
 #: plugins/taskboard/common/views/taskboard.php:195
-#, fuzzy
-#| msgid "Users and permissions"
 msgid "Use regular expression"
-msgstr "Usuarios y permisos"
+msgstr "Emplear expresión regular"
 
 #: plugins/taskboard/common/views/taskboard.php:197
-#, fuzzy
-#| msgid "Failed to do task."
 msgid "Filter only on task name"
-msgstr "Fallado al realizar tarea."
+msgstr "Filtrar solo en nombre de tareas"
 
 #: plugins/taskboard/common/views/taskboard.php:205
-#, fuzzy
-#| msgid "Unlinked tasks"
 msgid "Hide unlinked tasks"
-msgstr "Tareas desenlazadas"
+msgstr "Tareas desenlazadas ocultas"
 
 #: plugins/taskboard/common/views/taskboard.php:283
 msgid "There are no tasks found."
@@ -19169,16 +18843,12 @@ msgid "Progress by cost"
 msgstr "Progreso por coste"
 
 #: plugins/taskboard/common/views/taskboard.php:286
-#, fuzzy
-#| msgid "Remaining effort field"
 msgid "Remaining m/d"
-msgstr "Campo de esfuerzo estimado"
+msgstr "Restante m/d"
 
 #: plugins/taskboard/common/views/taskboard.php:287
-#, fuzzy
-#| msgid "Completed"
 msgid "Completed m/d"
-msgstr "Completado"
+msgstr "Completado m/d"
 
 #: plugins/taskboard/common/views/taskboard.php:288
 msgid "Invalid regular expression"
@@ -19236,16 +18906,8 @@ msgid "Site Global Webanalytics Admin"
 msgstr "Sitio Global Administrador Webanalytics"
 
 #: plugins/webanalytics/common/webanalyticsPlugin.class.php:191
-#, fuzzy
-#| msgid ""
-#| "webanalytics plugin for FusionForge. Get the ability\n"
-#| "to configure specific URL for web analytics tool\n"
-#| "such as Piwik or Google Analytics."
 msgid "Get the ability to configure specific URL for web analytics tool such as Piwik or Google Analytics."
-msgstr ""
-"complemento de análisis web para FusionForge. Obtiene\n"
-"la capacidad para configurar URL especificada para\n"
-"herramientas de análisis web como Piwik para Google Analytics."
+msgstr "Obtiene la capacidad para configurar URL específica para herramienta analítica de web como Piwik o Google Analytics."
 
 #: plugins/webanalytics/view/admin/updateLinkValue.php:36
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:60
@@ -19271,40 +18933,29 @@ msgid "Add a new webanalytics reference"
 msgstr "Añade una referencia analítica web nueva"
 
 #: plugins/wiki/common/soap.php:260
-#, fuzzy, php-format
-#| msgid "HTTP Request"
+#, php-format
 msgid "SOAP Request by %s"
-msgstr "Petición HTTP"
+msgstr "SOAP solicitado por %s"
 
 #: plugins/wiki/common/soap.php:329
-#, fuzzy
-#| msgid "Page"
 msgid "AllPages"
-msgstr "Página"
+msgstr "AllPages"
 
 #: plugins/wiki/common/soap.php:364
-#, fuzzy
-#| msgid "Search"
 msgid "TitleSearch"
-msgstr "Buscar"
+msgstr "TitleSearch"
 
 #: plugins/wiki/common/soap.php:382
-#, fuzzy
-#| msgid "Search"
 msgid "FullTextSearch"
-msgstr "Buscar"
+msgstr "FullTextSearch"
 
 #: plugins/wiki/common/soap.php:398
-#, fuzzy
-#| msgid "Reset Changes"
 msgid "RecentChanges"
-msgstr "Deshacer Cambios"
+msgstr "CambiosRecientes"
 
 #: plugins/wiki/common/soap.php:431 plugins/wiki/common/soap.php:492
-#, fuzzy
-#| msgid "Home Page"
 msgid "HomePage"
-msgstr "Página principal"
+msgstr "PáginaPrincipal"
 
 #: plugins/wiki/common/wikiconfig.class.php:39
 msgid "Check to disable automatic linking of camelcase words to pages. Internal page links must be forced with [[pagename]] then."
@@ -19409,10 +19060,8 @@ msgid "You have requested a change of email address on %s."
 msgstr "Ha solicitado un cambio de correo en %s."
 
 #: www/account/change_email.php:61
-#, fuzzy
-#| msgid "Please visit the following URL to complete the email change:"
 msgid "Please visit the following URL to complete the email change"
-msgstr "Por favor, visite la siguiente dirección para completar el cambio de correo:"
+msgstr "Por favor visite la siguiente URL para completar la modificación de correo-e"
 
 #: www/account/change_email.php:67 www/account/lostpw.php:71
 #, php-format
@@ -19461,10 +19110,8 @@ msgid "New passwords do not match."
 msgstr "Las nuevas contraseñas no coinciden."
 
 #: www/account/change_pw.php:61
-#, fuzzy
-#| msgid "Could not change password: "
 msgid "Could not change password"
-msgstr "No puedo cambiar la contraseña: "
+msgstr "No pudo modificar contraseña"
 
 #: www/account/change_pw.php:64
 msgid "Successfully Changed Password"
@@ -19539,10 +19186,8 @@ msgid "Uploaded"
 msgstr "Carga"
 
 #: www/account/editsshkeys.php:59
-#, fuzzy
-#| msgid "Delete this ssh key."
 msgid "Delete this ssh key"
-msgstr "Elimina esta clave ssh"
+msgstr "Borra esta clave ssh"
 
 #: www/account/editsshkeys.php:66
 msgid "Add a new ssh key"
@@ -19681,7 +19326,7 @@ msgstr "Cuenta shell desactivada"
 
 #: www/account/index.php:323
 msgid "Reset Changes"
-msgstr "Deshacer Cambios"
+msgstr "Restablecer Modificaciones"
 
 #: www/account/lostlogin.php:65 www/admin/passedit.php:57
 #, fuzzy
@@ -19690,16 +19335,12 @@ msgid "You must supply valid password (at least 8 characters)."
 msgstr "Debe proporcionar una contraseña válida (por lo menos seis carácteres)."
 
 #: www/account/lostlogin.php:77
-#, fuzzy
-#| msgid "User added successfully"
 msgid "Password changed successfully"
-msgstr "Usuario Añadido Correctamente"
+msgstr "Contraseña modificada correctamente"
 
 #: www/account/lostlogin.php:78 www/account/lostpw.php:83
-#, fuzzy
-#| msgid "Account password"
 msgid "Lost Account Password"
-msgstr "Actualizar contraseña"
+msgstr "Contraseña de Cuenta Olvidada"
 
 #: www/account/lostlogin.php:80
 #, php-format
@@ -19716,10 +19357,8 @@ msgid "Welcome, %s. You may now change your password."
 msgstr "Bienvenido/a, %s. Quizá ahora cambia su contraseña."
 
 #: www/account/lostlogin.php:95 www/admin/passedit.php:89
-#, fuzzy
-#| msgid "New Password (at least 6 chars)"
 msgid "New Password (at least 8 characters)"
-msgstr "Nueva contraseña (al menos de 6 caracteres)"
+msgstr "Nueva contraseña (al menos de 8 caracteres)"
 
 #: www/account/lostpw.php:58
 #, php-format
@@ -19894,10 +19533,8 @@ msgid "In order to complete your registration, login now. Your account will then
 msgstr "Para completar su registro, autentíquese ahora. De esta forma su cuenta se activará."
 
 #: www/activity/index.php:156
-#, fuzzy
-#| msgid "Unable to get the lists"
 msgid "Unable to get activities"
-msgstr "Incapaz de obtener las listas"
+msgstr "Incapaz de obtener actividades"
 
 #: www/admin/admin_table.php:41
 #, php-format
@@ -19954,16 +19591,12 @@ msgid "Approving Project"
 msgstr "Aprobando Grupo"
 
 #: www/admin/approve-pending.php:59
-#, fuzzy
-#| msgid "Error when approving Project: %s"
 msgid "Error when approving Project"
-msgstr "Error al aprobar Proyecto: %s"
+msgstr "Error cuando aprueva Proyecto"
 
 #: www/admin/approve-pending.php:90
-#, fuzzy
-#| msgid "Error during group rejection: "
 msgid "Error during group rejection"
-msgstr "Error durante el rechazo del grupo: "
+msgstr "Error durante rechazo del grupo"
 
 #: www/admin/approve-pending.php:111
 msgid "Approving Pending Projects"
@@ -19975,10 +19608,8 @@ msgstr "No hay projectos pendientes de aprobación"
 
 #: www/admin/approve-pending.php:125 www/admin/approve-pending.php:127
 #: www/admin/index.php:132
-#, fuzzy
-#| msgid "Pending projects:"
 msgid "Pending projects"
-msgstr "Proyectos pendientes:"
+msgstr "Proyectos pendientes"
 
 #: www/admin/approve-pending.php:136
 msgid "Pre-approval modifications :"
@@ -19999,10 +19630,8 @@ msgid "View/Edit Project Members"
 msgstr "Ver/Editar Miembros del Proyecto"
 
 #: www/admin/approve-pending.php:144
-#, fuzzy
-#| msgid "Decision :"
 msgid "Decision"
-msgstr "Decisión :"
+msgstr "Decisión"
 
 #: www/admin/approve-pending.php:151
 msgid "Approve"
@@ -20030,40 +19659,28 @@ msgid "Reject"
 msgstr "Rechazar"
 
 #: www/admin/approve-pending.php:175
-#, fuzzy
-#| msgid "Project details :"
 msgid "Project details"
-msgstr "Proyecto detallado :"
+msgstr "Proyecto detallado"
 
 #: www/admin/approve-pending.php:183 www/admin/groupedit.php:186
-#, fuzzy
-#| msgid "Home Box:"
 msgid "Home Box"
-msgstr "Buzón:"
+msgstr "Caja Inicio"
 
 #: www/admin/approve-pending.php:187 www/admin/groupedit.php:196
-#, fuzzy
-#| msgid "HTTP Domain:"
 msgid "HTTP Domain"
-msgstr "Dominio HTTP:"
+msgstr "Dominio HTTP"
 
 #: www/admin/approve-pending.php:200
-#, fuzzy
-#| msgid "Purpose of submission:"
 msgid "Purpose of submission"
-msgstr "Propuesta de envio:"
+msgstr "Propuesta de envío"
 
 #: www/admin/approve-pending.php:203
-#, fuzzy
-#| msgid "License Other:"
 msgid "License Other"
-msgstr "Otra Licencia:"
+msgstr "Otra Licencia"
 
 #: www/admin/approve-pending.php:207
-#, fuzzy
-#| msgid "Pending reason:"
 msgid "Pending reason"
-msgstr "Razón por la que está Pendiente:"
+msgstr "Razón pendiente"
 
 #: www/admin/approve-pending.php:221
 msgid "Based on template project"
@@ -20109,10 +19726,8 @@ msgid "Next"
 msgstr "Siguiente"
 
 #: www/admin/cronman.php:114
-#, fuzzy
-#| msgid "Message not found"
 msgid "No message entries found"
-msgstr "Mensaje no encontrado"
+msgstr "Ningún mensaje de entradas encontrado"
 
 #: www/admin/globalroledelete.php:47
 msgid "You can only delete a global role from here."
@@ -20222,10 +19837,8 @@ msgid "Instruction email sent"
 msgstr "Se ha enviado un correo con Instrucciones"
 
 #: www/admin/groupedit.php:97
-#, fuzzy
-#| msgid "Project Info"
 msgid "Project Info for "
-msgstr "Información del Proyecto"
+msgstr "Información del Proyecto para "
 
 #: www/admin/groupedit.php:102
 msgid "Permanently Delete Project"
@@ -20261,16 +19874,12 @@ msgid "Template?"
 msgstr "¿Plantilla?"
 
 #: www/admin/groupedit.php:205
-#, fuzzy
-#| msgid "Registration Application:"
 msgid "Registration Application"
-msgstr "Registro Aplicación:"
+msgstr "Registro Aplicación"
 
 #: www/admin/groupedit.php:215
-#, fuzzy
-#| msgid "SCM Box:"
 msgid "SCM Box"
-msgstr "Caja SCM:"
+msgstr "Caja SCM"
 
 #: www/admin/groupedit.php:227
 msgid "Resend New Project Instruction Email"
@@ -20302,7 +19911,7 @@ msgstr "Nombre Unix"
 
 #: www/admin/grouplist.php:133
 msgid "Public?"
-msgstr "¿Público?"
+msgstr "¿Publico?"
 
 #: www/admin/grouplist.php:134 www/snippet/snippet_utils.php:249
 #: www/snippet/submit.php:121
@@ -20395,16 +20004,12 @@ msgid "Project Maintenance"
 msgstr "Mantenimiento de Proyecto"
 
 #: www/admin/index.php:112
-#, fuzzy
-#| msgid "Register Project"
 msgid "Registered projects"
-msgstr "Registrar un nuevo proyecto"
+msgstr "Proyecto registrado"
 
 #: www/admin/index.php:122
-#, fuzzy
-#| msgid "Approve projects"
 msgid "Active projects"
-msgstr "Aprobar proyectos"
+msgstr "Activar proyectos"
 
 #: www/admin/index.php:134
 msgid "Display Full Project List/Edit Projects"
@@ -20524,10 +20129,8 @@ msgid "No Subject"
 msgstr "No hay Asunto"
 
 #: www/admin/massmail.php:75
-#, fuzzy
-#| msgid "Scheduling Mailing, Could not schedule mailing, database error: "
 msgid "Scheduling Mailing, Could not schedule mailing, database error"
-msgstr "Programando Envio, No puedo programar envios de correo, error base de datos: "
+msgstr "Programando Envío, No Pudo programar envíos por correo, error de BD"
 
 #: www/admin/massmail.php:79
 msgid "Mailing successfully scheduled for delivery"
@@ -20538,10 +20141,8 @@ msgid "Delivery Id"
 msgstr "ID Entrega"
 
 #: www/admin/massmail.php:93
-#, fuzzy
-#| msgid "Scheduling Mailing, Could not delete mailing, database error: "
 msgid "Scheduling Mailing, Could not delete mailing, database error"
-msgstr "Programando Envío, No Pudo eliminar envios de correo, error base de datos: "
+msgstr "Programando Envío, No Pudo eliminar envíos por correo, error de BD"
 
 #: www/admin/massmail.php:95
 msgid "Mailing successfully deleted"
@@ -20605,13 +20206,11 @@ msgstr "No hay destinatarios activos."
 
 #: www/admin/passedit.php:73
 msgid "Could not change password: "
-msgstr "No puedo cambiar la contraseña: "
+msgstr "No pudo cambiar la contraseña: "
 
 #: www/admin/passedit.php:77 www/admin/passedit.php:84
-#, fuzzy
-#| msgid "Change Password"
 msgid "Change User Password"
-msgstr "Cambiar Palabra Clave"
+msgstr "Modificar Clave de Usuario"
 
 #: www/admin/passedit.php:80
 #, php-format
@@ -20633,10 +20232,8 @@ msgid "Changing password for user #%1$s \"%2$s\" (%3$s)."
 msgstr "Modificando contraseña para el usuario #%1$s \"%2$s\" (%3$s)."
 
 #: www/admin/passedit.php:90 www/admin/passedit.php:92
-#, fuzzy
-#| msgid "At least 3 characters"
 msgid "At least 8 characters"
-msgstr "Al menos 3 carácteres"
+msgstr "Al menos 8 carácteres"
 
 #: www/admin/pending-news.php:59 www/admin/pending-news.php:122
 #: www/news/admin/index.php:67 www/news/admin/index.php:115
@@ -20747,10 +20344,8 @@ msgid "Activate"
 msgstr "Activar"
 
 #: www/admin/responses_admin.php:34
-#, fuzzy
-#| msgid "Site Admin: Edit Rejection Responses"
 msgid "Edit Rejection Responses"
-msgstr "Administración del sitio: Editar respuestas de rechazo"
+msgstr "Edita Respuestas de Rechazo"
 
 #: www/admin/responses_admin.php:38
 #, php-format
@@ -20762,22 +20357,16 @@ msgid "Edited Response"
 msgstr "Respuesta editada"
 
 #: www/admin/responses_admin.php:81
-#, fuzzy
-#| msgid "Edit Response:"
 msgid "Edit Response"
-msgstr "Editar respuesta:"
+msgstr "Editar Respuesta"
 
 #: www/admin/responses_admin.php:83 www/admin/responses_admin.php:122
-#, fuzzy
-#| msgid "Response Title:"
 msgid "Response Title"
-msgstr "Título de la respuesta:"
+msgstr "Título Respuesta"
 
 #: www/admin/responses_admin.php:84 www/admin/responses_admin.php:123
-#, fuzzy
-#| msgid "Response Text:"
 msgid "Response Text"
-msgstr "Texto de la respuesta:"
+msgstr "Texto de Respuesta"
 
 #: www/admin/responses_admin.php:104
 msgid "Deleted Response"
@@ -20796,10 +20385,8 @@ msgid "Added Response"
 msgstr "Respuesta Añadida"
 
 #: www/admin/responses_admin.php:120
-#, fuzzy
-#| msgid "Create New Response:"
 msgid "Create New Response"
-msgstr "Crear una nueva respuesta:"
+msgstr "Crear Respuesta Nueva"
 
 #: www/admin/search.php:41
 msgid "Admin Search Results"
@@ -20896,20 +20483,16 @@ msgid "Site Mailings Subscription Maintenance"
 msgstr "Mantenimiento de la Subscripción a los correos de este Sitio"
 
 #: www/admin/unsubscribe.php:49
-#, fuzzy
-#| msgid "Unsubscribe user:"
 msgid "Unsubscribe user"
-msgstr "Desubscribir Usuario:"
+msgstr "Usuario desuscrito"
 
 #: www/admin/unsubscribe.php:50
 msgid "You can unsubscribe user either from admin-initiated sitewide mailings or from all site mailings (admin-initiated and automated mailings, like forum and file release notifications)."
 msgstr "Puede desubscribir a este usuario de correos escritos por administradores o desde cualquier lista de correo (los correos escritos por administradores y correos automáticos como foros y demás notificaciones)."
 
 #: www/admin/unsubscribe.php:53
-#, fuzzy
-#| msgid "Unsubscription type:"
 msgid "Unsubscription type"
-msgstr "Tipo de desuscripción:"
+msgstr "Tipo de des-suscripción"
 
 #: www/admin/unsubscribe.php:55
 msgid "MAIL"
@@ -20931,10 +20514,8 @@ msgid "All site mailings"
 msgstr "Correos de todo el sitio"
 
 #: www/admin/unsubscribe.php:77
-#, fuzzy
-#| msgid "Could not unsubscribe user: "
 msgid "Could not unsubscribe user"
-msgstr "No puedo desuscribir al usuario: "
+msgstr "No pudo des-suscribir al usuario"
 
 #: www/admin/unsubscribe.php:80
 msgid "User unsubscribed"
@@ -20984,10 +20565,8 @@ msgid "Added Successfully to project "
 msgstr "Agregado Correctamente al proyecto "
 
 #: www/admin/useredit.php:119
-#, fuzzy
-#| msgid "User Id"
 msgid "User Info"
-msgstr "Id Usuario"
+msgstr "Info Usuario"
 
 #: www/admin/useredit.php:123
 msgid "Account Information"
@@ -21090,25 +20669,21 @@ msgid "User list for all projects"
 msgstr "Listado de usuarios para todos los proyectos"
 
 #: www/admin/userlist.php:245
-#, fuzzy
-#| msgid "User list for project: "
 msgid "User list for project"
-msgstr "Listado usuarios para proyecto: "
+msgstr "Listado de usuarios para proyecto"
 
 #: www/admin/userlist.php:262
 msgid "No user in this project"
 msgstr "No emplear en este proyecto"
 
 #: www/admin/vhost.php:74
-#, fuzzy
-#| msgid "Error adding VHOST: "
 msgid "Error adding VHOST"
-msgstr "Error creando VHOST: "
+msgstr "Error añadiendo VHOST"
 
 #: www/admin/vhost.php:76 www/admin/vhost.php:151
 #: www/project/admin/vhost.php:140
 msgid "Virtual Host"
-msgstr "Virtual Host"
+msgstr "Hospedador Virtual"
 
 #: www/admin/vhost.php:76
 msgid " scheduled for creation on group "
@@ -21123,10 +20698,8 @@ msgid "Missing group name"
 msgstr "Nombre de grupo no encontrado"
 
 #: www/admin/vhost.php:105
-#, fuzzy
-#| msgid "Error updating VHOST entry: "
 msgid "Error updating VHOST entry"
-msgstr "Error actualizando entrada VHOST: "
+msgstr "Error actualizando entrada VHOST"
 
 #: www/admin/vhost.php:107
 msgid "Virtual Host entry updated."
@@ -21153,10 +20726,8 @@ msgid "Get Info"
 msgstr "Tomar Información"
 
 #: www/admin/vhost.php:176
-#, fuzzy
-#| msgid "Update Record:"
 msgid "Update Record"
-msgstr "Actualizar Registro:"
+msgstr "Actualizar Registro"
 
 #: www/admin/vhost.php:179
 msgid "VHOST ID"
@@ -21179,16 +20750,12 @@ msgid "CGI Dir"
 msgstr "Directorio de CGI"
 
 #: www/admin/vhost.php:201
-#, fuzzy
-#| msgid "No such VHOST: "
 msgid "No such VHOST"
-msgstr "No hay ese VHOST: "
+msgstr "Sin VHOST"
 
 #: www/dbimage.php:30
-#, fuzzy
-#| msgid "Detailed"
 msgid "failed"
-msgstr "Detallado"
+msgstr "fallado"
 
 #: www/developer/diary.php:46
 msgid "Diary and Notes for"
@@ -21208,7 +20775,7 @@ msgstr "Asientos Actuales Diario y Anotaciones"
 
 #: www/developer/diary.php:77
 msgid "This User Has No Diary Entries"
-msgstr "Este usuario no tiene apuntes."
+msgstr "Este Usuario No Tiene Entradas Diarias"
 
 #: www/developer/diary.php:98
 msgid "No User Selected"
@@ -21244,7 +20811,7 @@ msgstr "Ya no recibirá correos cuando el usuario usa su diario."
 
 #: www/developer/monitor.php:80
 msgid "Error: Choose a User To Monitor First"
-msgstr "Error: no hay usuario seleccionado."
+msgstr "Error: elija un Usuario para Primer Monitor"
 
 #: www/developer/rate.php:34
 msgid "Ratings turned off. You chose not to participate in the peer rating system"
@@ -21275,9 +20842,8 @@ msgid "docid"
 msgstr ""
 
 #: www/docman/d_follow.php:45
-#, fuzzy
 msgid "No Document with ID"
-msgstr "Título del Documento"
+msgstr "Sin Documento con ID"
 
 #: www/docman/index.php:104
 msgid "Documents for "
@@ -21288,10 +20854,8 @@ msgid "Document is not available."
 msgstr "Documento no disponible."
 
 #: www/docman/view.php:112
-#, fuzzy
-#| msgid "Document is not available."
 msgid "Document Version is not available."
-msgstr "Documento no disponible."
+msgstr "Versión Documental no está disponible."
 
 #: www/docman/view.php:161
 msgid "Unable to open ZIP archive for backup"
@@ -21404,11 +20968,11 @@ msgstr "Ninguna tarea de projecto fue encontrada."
 #: www/export/rssAboTask.php:137
 #, php-format
 msgid "Update history of the task with the name %1$s and the ID %2$d."
-msgstr "Actualizar la historia de la tarea con el nombre %1$s y el ID %2$d."
+msgstr "Actualizar historia de la tarea con el nombre %1$s y el ID %2$d."
 
 #: www/export/rssAboTask.php:138
 msgid "Current values of the task’s…"
-msgstr "Actuales valores de la(s) tarea(s)..."
+msgstr "Actuales valores de la(s) tarea(s)…"
 
 #: www/export/rssAboTask.php:142
 msgid "Complete"
@@ -21465,7 +21029,9 @@ msgstr "Buscar dentro del proyecto"
 
 #: www/forum/admin/index.php:119 www/forum/admin/index.php:152
 msgid "Email All Posts To:"
-msgstr "Enviar por correo-e todos los respuestas a:"
+msgstr ""
+"Responder Correo-e\n"
+"a Todos Destinatarios:"
 
 #: www/forum/admin/index.php:123
 msgid "Add This Forum"
@@ -21638,7 +21204,7 @@ msgstr "Cambiar Vista"
 
 #: www/forum/forum.php:329
 msgid "Topic"
-msgstr "Tema"
+msgstr "Tópico"
 
 #: www/forum/forum.php:330
 msgid "Topic Starter"
@@ -22365,10 +21931,8 @@ msgid " aka docman"
 msgstr " o docman"
 
 #: www/index_std.php:82
-#, fuzzy
-#| msgid "Add delete packages, releases or files mass action [#713] (TrivialDev)"
 msgid "link package release to tracker roadmap. (TrivialDev)"
-msgstr "Añade paquetes borrados, publicados o acción masiva de ficheros [#713] (TrivialDev)"
+msgstr "enlaza publicación de paquete para fases de seguimiento. (TrivialDev)"
 
 #: www/index_std.php:83
 msgid " aka FRS"
@@ -22451,16 +22015,12 @@ msgid "add paging system in userlist page [#799] (TrivialDev)"
 msgstr ""
 
 #: www/index_std.php:110
-#, fuzzy
-#| msgid "Add support for project activity tab [#725] (TrivialDev)"
 msgid "markdown support & fix code syntax highlight [#865] (TrivialDev)"
-msgstr "Añade apoyo para lengüeta de actividad de proyecto [#725] (TrivialDev)"
+msgstr "marca apoyo y repara marcas sintácticas de códifo [#865] (TrivialDev)"
 
 #: www/index_std.php:111
-#, fuzzy
-#| msgid "Snippets"
 msgid "Snippet"
-msgstr "Recortes"
+msgstr "Recorte"
 
 #: www/index_std.php:113
 msgid "getArtifacts tracker function: support changed_from parameter (TrivialDev)"
@@ -22471,16 +22031,12 @@ msgid "getFlattedArtifacts function: to return as CSV export. All data in 1 call
 msgstr ""
 
 #: www/index_std.php:115
-#, fuzzy
-#| msgid "SOAP User"
 msgid "SOAP"
-msgstr "Usuario SOAP"
+msgstr "SOAP"
 
 #: www/index_std.php:117
-#, fuzzy
-#| msgid "Update the jQuery Auto-height plugin [#716] (TrivialDev)"
 msgid "upgrade splitter jquery plugin to 0.20.0 (TrivialDev)"
-msgstr "Actualizar el complemento Auto-anchura jQuery [#716] (TrivialDev)"
+msgstr "modernizar complemento jQuery a 0.20.0 (TrivialDev)"
 
 #: www/index_std.php:118
 msgid "upgrade jquery ui to 1.12.1 (TrivialDev)"
@@ -22495,10 +22051,8 @@ msgid "HTML 5 Doctype; use HTML 5 &lt;header&gt;, &lt;main&gt; and &lt;footer&gt
 msgstr ""
 
 #: www/index_std.php:121
-#, fuzzy
-#| msgid "Web UI:"
 msgid "Web UI"
-msgstr "IU web:"
+msgstr "IU web"
 
 #: www/index_std.php:123
 #, fuzzy
@@ -22527,16 +22081,12 @@ msgid "HomeLatestFileReleases: new widget for Forge home page to display 5 lates
 msgstr "Últimas Efectuaciones del Proyecto: widget nuevo para enseñar las últimas 5 efectuaciones en la página del proyecto (TrivialDev)"
 
 #: www/index_std.php:128
-#, fuzzy
-#| msgid "Widgets:"
 msgid "Widgets"
-msgstr "Widgets:"
+msgstr "Widgets"
 
 #: www/index_std.php:131
-#, fuzzy
-#| msgid "Plugins:"
 msgid "Plugins"
-msgstr "Complementos: "
+msgstr "Complementos"
 
 #: www/index_std.php:133
 msgid "Plugin AuthBuiltin: add captcha after 3 attempts with the same login [#795] (TrivialDev)"
@@ -22579,14 +22129,12 @@ msgid "Plugin Taskboard: support multiple taskboards per project [#785] (Trivial
 msgstr ""
 
 #: www/index_std.php:143
-#, fuzzy
-#| msgid "Direct link to file details [#747] (TrivialDev)"
 msgid "Plugin Taskboard: support filtering tasks [#786] (TrivialDev)"
-msgstr "Enlace directo a detalles del fichero [#747] (TrivialDev)"
+msgstr "Complemento Taskboard: admite filtrado de tareas [#786] (TrivialDev)"
 
 #: www/index_std.php:144
 msgid "SCM plugins: support stats per repository (TrivialDev)"
-msgstr ""
+msgstr "Complementos SCM: compatible estadísticas por repositorio (TrivialDev)"
 
 #: www/index_std.php:169
 #, php-format
@@ -22656,7 +22204,7 @@ msgstr "Añade un Marcador nuevo"
 #: www/my/bookmark_add.php:37
 #, php-format
 msgid "Added bookmark for <strong>%1$s</strong> with title <strong>%2$s</strong>"
-msgstr "Marcador creado para <strong>%1$s</strong> con título <strong>%2$s</strong>."
+msgstr "Marcador añadido para <strong>%1$s</strong> con título <strong>%2$s</strong>"
 
 #: www/my/bookmark_add.php:40
 msgid "Visit the bookmarked page"
@@ -22717,7 +22265,7 @@ msgstr "Nada Actualizado"
 
 #: www/my/diary.php:79
 msgid "Item Added"
-msgstr "Elemento creado."
+msgstr "Ítem Añadido"
 
 #: www/my/diary.php:94
 #, php-format
@@ -22827,7 +22375,7 @@ msgstr "Marcar esta caja si solicita publicar página principal:"
 
 #: www/news/admin/index.php:179
 msgid "No Queued Items Found"
-msgstr "No hay elementos encolados para el proyecto"
+msgstr "No hay ítemes encolados para el proyecto"
 
 #: www/news/admin/news_admin_utils.php:80
 msgid "No pending items found."
@@ -22836,7 +22384,7 @@ msgstr "No se encuentran registros."
 #: www/news/admin/news_admin_utils.php:85
 #, php-format
 msgid "These items need to be approved (total: %d)"
-msgstr "Estos elementos necesitan ser aprobados (total: %d)"
+msgstr "Estos ítemes necesitan ser aprobados (total: %d)"
 
 #: www/news/admin/news_admin_utils.php:91
 msgid "Reject Selected"
@@ -22844,12 +22392,12 @@ msgstr "Rechazar Seleccionado"
 
 #: www/news/admin/news_admin_utils.php:109
 msgid "No rejected items found for this week."
-msgstr "No hay elementos rechazados para esta semana."
+msgstr "No hay ítemes rechazados para esta semana."
 
 #: www/news/admin/news_admin_utils.php:111
 #, php-format
 msgid "These items were rejected this past week or were not intended for front page (total: %d)."
-msgstr "Estos elementos fueron rechazados la pasada semana o no fueron creados para la página principal (total:·%d)."
+msgstr "Estos ítemes fueron rechazados la pasada semana o no fueron creados para la página principal (total:·%d)."
 
 #: www/news/admin/news_admin_utils.php:132
 msgid "No approved items found for this week."
@@ -22858,7 +22406,7 @@ msgstr "No hay aprobaciones para esta semana."
 #: www/news/admin/news_admin_utils.php:134
 #, php-format
 msgid "These items were approved this past week (total: %d)."
-msgstr "Estos elementos fueron aprobados la pasada semana (total:·%d)."
+msgstr "Estos ítemes fueron aprobados la pasada semana (total:·%d)."
 
 #: www/news/index.php:40
 msgid "Choose a News item and you can browse, search, and post messages."
@@ -23116,7 +22664,7 @@ msgstr "Fallo la insercion de la habilidad: %s"
 
 #: www/people/editprofile.php:104
 msgid "Skill added successfully"
-msgstr "Cualidad añadida satisfactoriamente"
+msgstr "Cualidad añadida correctamente"
 
 #: www/people/editprofile.php:109
 msgid "Start Month"
@@ -23263,7 +22811,7 @@ msgstr "Añade esta Capacidades"
 
 #: www/people/editprofile.php:315
 msgid "Edit/Delete Your Skills"
-msgstr "Edita/Borra tus Capacidades"
+msgstr "Edita/Borra sus Capacidades"
 
 #: www/people/helpwanted-latest.php:36
 msgid "Help Wanted Latest Posts"
@@ -23422,7 +22970,7 @@ msgstr "Este Usuario tiene un perfil Privado."
 
 #: www/people/viewprofile.php:69
 msgid "Skills profile for"
-msgstr "perfil de Capacidades para"
+msgstr "Perfil de capacidades para"
 
 #: www/people/viewprofile.php:86
 msgid "User_id not found."
@@ -23495,7 +23043,7 @@ msgstr "Modicar una Categoria en: %s"
 
 #: www/pm/admin/index.php:243
 msgid "It is not recommended that you change the category name because other things are dependent upon it. When you change the category name, all related items will be changed to the new name."
-msgstr "No se recomienda que cambie el nombre porque otras cosas dependen en él. Cuando se cambia el nombre de la categoría, todos los elementos relacionados serán modificados al nombre nuevo."
+msgstr "No se recomienda que cambie el nombre porque otras cosas dependen en él. Cuando se cambia el nombre de la categoría, todos los ítemes relacionados serán modificados al nombre nuevo."
 
 #: www/pm/admin/index.php:268
 msgid "Add a new subproject"
@@ -24128,7 +23676,7 @@ msgstr "No puedo obtener una Taréa de Proyecto Vacía"
 
 #: www/pm/task.php:130 www/pm/task.php:178
 msgid "Illegal format for hours: must be an integer or a float number."
-msgstr "Formato ilegal para horas: debe ser un entero o en coma flotante."
+msgstr "Formato ilegal para horas: debe ser un entero o un coma flotante."
 
 #: www/pm/task.php:150
 msgid "Task Created Successfully"
@@ -24430,7 +23978,7 @@ msgstr "Mostrar los cámbios importantes de su proyecto."
 
 #: www/project/admin/project_admin_utils.php:69
 msgid "Effort Units"
-msgstr ""
+msgstr "Unidades de Esfuerzo"
 
 #: www/project/admin/project_admin_utils.php:70
 msgid "Manage Effort Units used in your project."
@@ -24537,7 +24085,7 @@ msgstr "Activar foros"
 
 #: www/project/admin/tools.php:185
 msgid "Use Trackers"
-msgstr "Activar Seguimientos"
+msgstr "Activar Trackers"
 
 #: www/project/admin/tools.php:200
 msgid "Use Mailing Lists"
@@ -24850,7 +24398,7 @@ msgstr "Propósito y resumen del proyecto"
 #: www/register/index.php:202
 #, php-format
 msgid "Please provide detailed, accurate description of your project and what %1$s resources and in which way you plan to use. This description will be the basis for the approval or rejection of your project's hosting on %1$s, and later, to ensure that you are using the services in the intended way. This description will not be used as a public description of your project. It must be written in English. From 10 to 1500 characters."
-msgstr "Por favor, proporcione una descripción detallada y precisa de su proyecto y que recursos de %1$s piensa utilizar. Esta descripción es básica para aprobar o rechazar la aprobación de su proyecto en %1$s,y después, para habilitar el uso de los servicios solicitados. Esta descripción no se utiliza como descripción pública de su proyecto."
+msgstr "Por favor proporcione una descripción detallada y precisa de su proyecto y que recursos de %1$s piensa utilizar. Esta descripción es básica para aprobar o rechazar la aprobación de su proyecto en %1$s,y después, para habilitar el uso de los servicios solicitados. Esta descripción no se utiliza como descripción pública de su proyecto."
 
 #: www/register/index.php:211 www/register/index.php:218
 msgid "Project Public Description"
@@ -24973,7 +24521,7 @@ msgstr "Nombre de Estado"
 
 #: www/reporting/customstatus.php:89
 msgid "You can create statuses to classify a particular task&apos;s status. Examples of statuses include &quot;Open&quot;, &quot;Close&quot;, &quot;Deleted&quot;."
-msgstr ""
+msgstr "Puede crear estadísticas para clasificar un estado de tarea particular. Ejemplos de estados incluye &quot;Abrir&quot;, &quot;Cerrar&quot;, &quot;Borrar&quot;."
 
 #: www/reporting/index.php:37 www/stats/i18n.php:34
 msgid "Users"
@@ -24981,7 +24529,7 @@ msgstr "Usuarios"
 
 #: www/reporting/index.php:41 www/reporting/useract.php:66
 msgid "User Activity"
-msgstr "Actividad de usuario"
+msgstr "Actividad de Usuario"
 
 #: www/reporting/index.php:54
 msgid "Project-specific reports: Tracker, Task Mgr, Forums, Doc Mgr, Downloads"
@@ -24989,7 +24537,7 @@ msgstr "Boletines específicos de Proyecto: Registro, Tareas, Foros, Gestor de d
 
 #: www/reporting/index.php:56 www/reporting/projectact.php:65
 msgid "Project Activity"
-msgstr "Actividad de proyecto"
+msgstr "Actividad de Proyecto"
 
 #: www/reporting/index.php:61
 msgid "Site-wide reports: Tracker, Task Mgr, Forums, Doc Mgr, Downloads"
@@ -25139,11 +24687,11 @@ msgstr "Coincidencias no encontradas"
 
 #: www/reporting/usersummary.php:106
 msgid "Cum. Hrs"
-msgstr "Hrs. Acum."
+msgstr "Hrs. Acum"
 
 #: www/reporting/usersummary.php:107
 msgid "Rem. Hrs"
-msgstr "Hrs. Rstn."
+msgstr "Hrs. Rstn"
 
 #: www/reporting/usertime.php:65
 msgid "User Time Reporting"
@@ -25189,7 +24737,7 @@ msgstr "Otros"
 
 #: www/scm/include/scm_utils.php:246
 msgid "Commits By User"
-msgstr "Efectuaciones por Usuario"
+msgstr "Efectuaciones Por Usuario"
 
 #: www/scm/include/scm_utils.php:268
 msgid "No commits during this period."
@@ -25396,7 +24944,7 @@ msgstr "Rellene adecuada y completamente o el destino no será capaz de responde
 
 #: www/sendmessage.php:140
 msgid "<strong>IF YOU ARE WRITING FOR HELP:</strong> Did you read the site documentation? Did you include your <strong>user_id</strong> and <strong>user_name?</strong> If you are writing about a project, include your <strong>project id</strong> (<strong>group_id</strong>) and <strong>Project Name</strong>."
-msgstr "<strong>SI ESTA BUSCANDO AYUDA:</strong> Has leido la documentación del sitio? Has incluido tu <strong>user_id</strong> y <strong>user_name?</strong> Si estas buscando para un proyecto, incluyalo en su <strong>project id</strong> (<strong>group_id</strong>) y <strong>Nombre Proyecto</strong>."
+msgstr "<strong>SI ESTA BUSCANDO AYUDA:</strong> Has leido la documentación del sitio? Has incluido tu <strong>user_id</strong> y <strong>user_name?</strong> Si estas buscando para un proyecto, inclúyalo en su <strong>project id</strong> (<strong>group_id</strong>) y <strong>Nombre Proyecto</strong>."
 
 #: www/sendmessage.php:149
 msgid "Your Name"
@@ -25439,7 +24987,7 @@ msgstr "Error: Este recorte ya ha sido añadido anteriormente a este paquete."
 #: www/snippet/add_snippet_to_package.php:110 www/snippet/addversion.php:74
 #: www/snippet/submit.php:76
 msgid "Error doing snippet version insert"
-msgstr "¡Error insertando la versión del recorte!"
+msgstr "Error insertando la versión del recorte"
 
 #: www/snippet/add_snippet_to_package.php:112 www/snippet/addversion.php:77
 msgid "Snippet Version Added Successfully."
@@ -25505,7 +25053,7 @@ msgstr "Error: este paquete_recorato no existe"
 
 #: www/snippet/addversion.php:183 www/snippet/package.php:77
 msgid "Error doing snippet package version insert"
-msgstr "¡Error insertando versión de paquete de recortes!"
+msgstr "Error recortando versión de paquete insertado"
 
 #: www/snippet/addversion.php:184
 msgid "New snippet package"
@@ -25645,10 +25193,8 @@ msgid "Date Posted"
 msgstr "Fecha Pospuesta"
 
 #: www/snippet/detail.php:84
-#, fuzzy
-#| msgid "Delete this link"
 msgid "Delete this version"
-msgstr "Borrar este enlace"
+msgstr "Borrar esta versión"
 
 #: www/snippet/detail.php:88
 msgid "Changes since last version:"
@@ -25659,30 +25205,24 @@ msgid "Download a raw-text version of this code by clicking on “Download Versi
 msgstr "Descargar una versión texto de este código pulsando en “Descargar Versión”"
 
 #: www/snippet/detail.php:102
-#, fuzzy
-#| msgid "Latest Snippet Version: "
 msgid "Latest Snippet Version"
-msgstr "Última versión recortada: "
+msgstr "Última Versión Recortada"
 
 #: www/snippet/detail.php:112
 msgid "You can submit a new version of this snippet if you have modified it and you feel it is appropriate to share with others."
 msgstr "Si ha modificado una versión de este recorte sustancialmente y crea que debe compartirlo con otros, por favor, hágalo."
 
 #: www/snippet/detail.php:159
-#, fuzzy
-#| msgid "Versions Of This Package:"
 msgid "Versions Of This Package"
-msgstr "Versiones de este Paquete:"
+msgstr "Versiones De Este Paquete"
 
 #: www/snippet/detail.php:162
 msgid "Package Version"
 msgstr "Versiones del Paquete"
 
 #: www/snippet/detail.php:184
-#, fuzzy
-#| msgid "Delete this file"
 msgid "Delete this snippet"
-msgstr "Elimina este fichero"
+msgstr "Borra este recorte"
 
 #: www/snippet/detail.php:201
 msgid "Latest Package Version: "
@@ -25690,7 +25230,7 @@ msgstr "Última versión del paquete: "
 
 #: www/snippet/detail.php:211
 msgid "You can submit a new version of this package if you have modified it and you feel it is appropriate to share with others."
-msgstr "Puede enviar una nueva versión de este paquete si lo ha modificado y crea que es apropiado compartirlo con otros."
+msgstr "Puede enviar una versión nueva de este paquete si lo ha modificado y crea que es apropiado compartirlo con otros."
 
 #: www/snippet/index.php:50
 msgid "The purpose of this archive is to let you share your code snippets, scripts, and functions with the Open Source Software Community."
@@ -25735,7 +25275,7 @@ msgstr "Puede agruparlos todos los recortes existentes en un paquete usando este
 
 #: www/snippet/package.php:135
 msgid "Create the package using this form."
-msgstr "Crear un paquete usando este formulario."
+msgstr "Crear el paquete usando este formulario."
 
 #: www/snippet/package.php:136
 msgid "<strong>Then</strong> use the “Add Snippets to Package” link to add files to your package."
@@ -25743,7 +25283,7 @@ msgstr "<strong>Luego</strong> use el enlace “Agregar recortes al Paquete” p
 
 #: www/snippet/package.php:138
 msgid "<span class=\"important\">Note:</span> You can submit a new version of an existing package by browsing the library and using the link on the existing package. You should only use this page if you are submitting an entirely new package."
-msgstr "<span class=\"important>Nota:</span> Puede enviar una nueva versión de un paquete existente navegando por la biblioteca y usando el enlace del paquete existiente. Podria usar solo esta página si estas enviando un paquete completamente nuevo."
+msgstr "<span class=\"important>Nota:</span> Puede enviar una nueva versión de un paquete existente explorando por la biblioteca y usando el enlace del paquete existiente. Podria usar solo esta página si estas enviando un paquete completamente nuevo."
 
 #: www/snippet/package.php:144 www/snippet/submit.php:102
 msgid "First Posted Version"
@@ -25812,7 +25352,7 @@ msgstr "Funciones Matemáticas"
 
 #: www/snippet/snippet_utils.php:43
 msgid "Full Script"
-msgstr "Script Completa"
+msgstr "Guión Completo"
 
 #: www/snippet/snippet_utils.php:44
 msgid "Sample Code (HOWTO)"
@@ -25840,7 +25380,7 @@ msgstr "Crear un Paquete"
 
 #: www/snippet/submit.php:61
 msgid "Error doing snippet insert"
-msgstr "¡Error haciendo inserción del recorte!"
+msgstr "Error insertando recorte"
 
 #: www/snippet/submit.php:63 www/snippet/submit.php:78
 msgid "Snippet Added Successfully."
@@ -25852,15 +25392,15 @@ msgstr "Enviar Recortes"
 
 #: www/snippet/submit.php:93
 msgid "You can post a new code snippet and share it with other people around the world. Just fill in this information. <strong>Give a good description</strong> and <strong>comment your code</strong> so others can read and understand it."
-msgstr "Puede enviar un nuevo recorte de código y compartirlo con otros usuarios del mundo. Rellene esta información. <strong>De una buena descripción</sstrong> y <strong>comente su código</strong> para que otros usuarios puedan leerlo y comprenderlo."
+msgstr "Puede enviar un recorte nuevo de código y compartirlo con otros usuarios del mundo. Rellene esta información. <strong>De una buena descripción</sstrong> y <strong>comente su código</strong> para que otros usuarios puedan leerlo y comprenderlo."
 
 #: www/snippet/submit.php:96
 msgid "<span class=\"important\">Note:</span> You can submit a new version of an existing snippet by browsing the library. You should only use this page if you are submitting an entirely new script or function."
-msgstr "<span class=\"important\">Nota:</span> Puede enviar un nueva versión de un recorte existente navegando por la biblioteca. Puede usar esta página si esta enviando un script o función completamente nueva."
+msgstr "<span class=\"important\">Nota:</span> Puede enviar un nueva versión de un recorte existente explorando por la biblioteca. Puede usar esta página si esta enviando un guión o función completamente nueva."
 
 #: www/snippet/submit.php:117
 msgid "Script Type"
-msgstr "Tipo de Script"
+msgstr "Tipo de Guión"
 
 #: www/soap/index.php:185
 msgid "en_US"
@@ -25878,16 +25418,12 @@ msgid "Activity Percentile"
 msgstr "Percentil de Actividad"
 
 #: www/softwaremap/full_list.php:144 www/softwaremap/tag_cloud.php:141
-#, fuzzy
-#| msgid "Activity Ranking: %d"
 msgid "Activity Ranking"
-msgstr "Ranking de actividad: %d"
+msgstr "Ranking de Actividad"
 
 #: www/softwaremap/full_list.php:151 www/softwaremap/tag_cloud.php:148
-#, fuzzy
-#| msgid "This project's news"
 msgid "[This project needs help]"
-msgstr "Estas noticias de este proyecto"
+msgstr "[Este proyecto requiere ayuda]"
 
 #: www/softwaremap/trove_list.php:58
 msgid "Software Map"
@@ -26575,7 +26111,7 @@ msgstr "Número de version(es) a mostrar"
 
 #: www/tracker/roadmap.php:429 www/tracker/roadmap.php:647
 msgid "Return to last release(s)"
-msgstr "Regresar a la ultima release(s)"
+msgstr "Regresar a la última publicación(es)"
 
 #: www/tracker/roadmap.php:432
 msgid "Display graphs"
