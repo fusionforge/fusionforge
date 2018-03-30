@@ -192,6 +192,14 @@ EOF
     REMOVEDEPS=$DEPS
     backport_rpm_from_fedora php-htmlpurifier-htmlpurifier
 
+    DEPS="python-devel python-setuptools"
+    REMOVEDEPS=$DEPS
+    backport_rpm_from_fedora python-simpletal
+
+    DEPS="python2-devel python-paste python-paste-deploy python-simplejson python-testtools python-pygments"
+    REMOVEDEPS=$DEPS
+    backport_rpm_from_fedora loggerhead
+
     DEPS=""
     REMOVEDEPS=$DEPS
     backport_rpm_from_fedora mediawiki

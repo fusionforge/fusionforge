@@ -22,7 +22,9 @@
 
 require_once '../env.inc.php';
 
-$_SERVER['REMOTE_ADDR'] = $_SERVER['HTTP_X_FORWARDED_FOR'];
+if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+	$_SERVER['REMOTE_ADDR'] = $_SERVER['HTTP_X_FORWARDED_FOR'];
+}
 require_once $gfcommon.'include/pre.php';
 
 echo session_loggedin() ? 'OK' : 'KO';

@@ -63,6 +63,12 @@ if (!$projectName) {
 // Check permissions
 $Group = group_get_object_by_name($projectName);
 if (!$Group || !is_object($Group)) {
+	$svnplugin = plugin_get_object('scmsvn');
+	$group_id = $svnplugin->getGroupIdFromSecondReponame($projectName);
+	//this may be a SVN second repo. Let's check for it.
+	$Group = group_get_object($group_id);
+}
+if (!$Group || !is_object($Group)) {
 	exit_no_group();
 } elseif ( $Group->isError()) {
 	exit_error($Group->getErrorMessage(),'summary');

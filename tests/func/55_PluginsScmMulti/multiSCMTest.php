@@ -28,7 +28,6 @@ class multiSCMTest extends FForge_SeleniumTestCase
 
 	function testMultiSCM()
 	{
-		$this->skip_on_rpm_installs();
 		$this->skip_on_src_installs();
 
 		$this->loadAndCacheFixture();
@@ -62,6 +61,7 @@ class multiSCMTest extends FForge_SeleniumTestCase
 		$p = preg_replace(",^bzr checkout ,", "", $p);
 		$p = preg_replace(",/branchname$,", "", $p);
 		$t = exec("mktemp -d /tmp/bzrTest.XXXXXX");
+		system("bzr whoami 'admin <admin@localhost.localdomain>'");
 		system("cd $t && bzr init --quiet trunk >/dev/null", $ret);
 		$this->assertEquals(0, $ret);
 		system("echo 'this is a simple text' > $t/trunk/mytext.txt");
@@ -77,7 +77,7 @@ class multiSCMTest extends FForge_SeleniumTestCase
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
-		$p = $this->getText("//span[contains(.,'svn checkout svn+ssh')]");
+		$p = $this->getText("//kbd[contains(.,'svn checkout svn+ssh')]");
 		$p = preg_replace(",^svn checkout ,", "", $p);
 		$t = exec("mktemp -d /tmp/svnTest.XXXXXX");
 		system("cd $t && svn checkout $p projecta", $ret);

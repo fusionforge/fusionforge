@@ -52,7 +52,7 @@ class ScmSvnSSHTest extends FForge_SeleniumTestCase
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
-		$p = $this->getText("//span[contains(.,'svn checkout svn+ssh')]");
+		$p = $this->getText("//kbd[contains(.,'svn checkout svn+ssh')]");
 		$p = preg_replace(",^svn checkout ,", "", $p);
 
 		// Create a local checkout, commit stuff
