@@ -719,11 +719,11 @@ class FFUser extends FFError {
 
 		if ($status != 'P' && $status != 'A'
 			&& $status != 'S' && $status != 'D') {
-			$this->setError(_('Error: Invalid status value'));
+			$this->setError(_('Error')._(': ')._('Invalid status value'));
 			return false;
 		}
 		if ($this->getStatus() != 'P' && $status == 'P') {
-			$this->setError(_('Error: You cannot set pending status if user is suspend or active'));
+			$this->setError(_('Error')._(': ')._('You cannot set pending status if user is suspend or active'));
 			return false;
 		}
 
@@ -732,7 +732,7 @@ class FFUser extends FFError {
 					array($status, $this->getID()));
 
 		if (!$res) {
-			$this->setError(_('Error: Cannot Update User Status:').' '.db_error());
+			$this->setError(_('Error')._(': ')._('Cannot Update User Unix Status')._(': ').db_error());
 			db_rollback();
 			return false;
 		} else {
@@ -798,7 +798,7 @@ class FFUser extends FFError {
 					array($status, $this->getID()));
 
 		if (!$res) {
-			$this->setError('Error: Cannot Update User Unix Status: '.db_error());
+			$this->setError(_('Error')._(': ')._('Cannot Update User Unix Status')._(': ').db_error());
 			db_rollback();
 			return false;
 		} else {
@@ -849,15 +849,6 @@ class FFUser extends FFError {
 	 */
 	function getUnixBox() {
 		return $this->data_array['unix_box'];
-	}
-
-	/**
-	 * getMD5Passwd - the password.
-	 *
-	 * @return	string	This user's MD5-crypted passwd.
-	 */
-	function getMD5Passwd() {
-		exit(_('MD5 obsoleted'));
 	}
 
 	//Added to be compatible with codendi getUserPw function
