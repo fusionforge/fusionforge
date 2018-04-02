@@ -52,7 +52,6 @@ if (!$g || !is_object($g) || $g->isError()) {
 	exit_no_group();
 }
 
-$is_admin_page='y';
 $sh = new  SurveyHtml();
 
 html_use_jqueryjqplotpluginCanvas();
@@ -75,11 +74,11 @@ if ($survey_id) {
 	$s = new Survey($g, $survey_id);
 
 	if (!$s || !is_object($s)) {
-		echo $HTML->error_msg(_('Error'). ' ' . _('Cannot get Survey'));
+		echo $HTML->error_msg(_('Error')._(': ')._('Cannot get Survey'));
 		$sh->footer();
 		exit;
 	} elseif ( $s->isError()) {
-		echo $HTML->error_msg(_('Error'). $s->getErrorMessage());
+		echo $HTML->error_msg(_('Error')._(': ').$s->getErrorMessage());
 		$sh->footer();
 		exit;
 	}
@@ -90,15 +89,15 @@ if ($survey_id) {
 		/* Create a Survey Question for general purpose */
 		$sq = new SurveyQuestion($g, $question_id);
 		if (!$sq || !is_object($sq)) {
-			echo $HTML->error_msg(_('Error'). ' ' . _('Cannot get Survey Question'));
+			echo $HTML->error_msg(_('Error')._(': ')._('Cannot get Survey Question'));
 		} elseif ($sq->isError()) {
-			echo $HTML->error_msg(_('Error'). $sq->getErrorMessage());
+			echo $HTML->error_msg(_('Error')._(': ').$sq->getErrorMessage());
 		} else {
 			showResult($sh, $s, $sq, 1, 0, $graph);
 		}
 
 	} else {
-		echo '<h2>'.$s->getTitle().' ('. $s->getNumberOfVotes() .' ' . _("Votes") . ')'. '</h2>';
+		echo html_e('h2', array(),$s->getTitle().' ('. $s->getNumberOfVotes() .' ' . _("Votes") . ')');
 
 		/* Get questions of this survey */
 		$questions = $s->getQuestionInstances();
