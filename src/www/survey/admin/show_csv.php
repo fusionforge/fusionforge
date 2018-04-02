@@ -1,6 +1,6 @@
 <?php
 /**
- * GForge Survey Facility
+ * Survey Facility
  *
  * Portions Copyright 1999-2001 (c) VA Linux Systems
  * The rest Copyright 2002-2004 (c) GForge Team
@@ -45,20 +45,17 @@ $html = getStringFromRequest('html');
 
 /* We need a group_id */
 if (!$group_id) {
-    exit_no_group();
+	exit_no_group();
 }
 
 $g = group_get_object($group_id);
 if (!$g || !is_object($g) || $g->isError()) {
-    exit_no_group();
+	exit_no_group();
 }
 
-$is_admin_page='y';
 $sh = new SurveyHtml();
 
-$is_admin_page='y';
-
-if (!session_loggedin() || !user_ismember($group_id,'A')) {
+if (!session_loggedin() || !forge_check_perm('project_admin', $group_id)) {
 	echo $HTML->error_msg(_('Permission denied.'));
 	$sh->footer();
 	exit;

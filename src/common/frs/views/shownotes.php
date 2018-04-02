@@ -41,7 +41,7 @@ if (!$frsr || !is_object($frsr)) {
 //  Members of projects can see all packages
 //  Non-members can only see public packages
 if(!$frsr->getFRSPackage()->isPublic()) {
-	if (!session_loggedin() || (!user_ismember($group_id) &&
+	if (!session_loggedin() || (!session_get_user()->isMember($group_id) &&
 		!forge_check_global_perm('forge_admin'))) {
 		exit_permission_denied();
 	}

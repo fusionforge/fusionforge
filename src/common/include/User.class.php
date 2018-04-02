@@ -926,7 +926,7 @@ class FFUser extends FFError {
 					array($email, $this->getID()));
 
 		if (!$res) {
-			$this->setError('Error: Cannot Update User Email: '.db_error());
+			$this->setError(_('Error')._(': ')._('Cannot Update User Email')._(': ').db_error());
 			db_rollback();
 			return false;
 		} else {
@@ -975,7 +975,7 @@ class FFUser extends FFError {
 		$res = db_query_params('UPDATE users SET confirm_hash=$1, email_new=$2 WHERE user_id=$3',
 					array($hash, $email, $this->getID()));
 		if (!$res) {
-			$this->setError('Error: Cannot Update User Email And Hash: '.db_error());
+			$this->setError(_('Error')._(': ')._('Cannot Update User Email And Hash')._(': ').db_error());
 			return false;
 		} else {
 			$this->data_array['email_new'] = $email;
@@ -1003,7 +1003,7 @@ class FFUser extends FFError {
 		$res = db_query_params('UPDATE users SET realname=$1 WHERE user_id=$2',
 			array($realname, $this->getID()));
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError('Error: Cannot Update real name of user : '.db_error());
+			$this->setError(_('Error')._(': ')._('Cannot Update real name of user')._(': ').db_error());
 			return false;
 		}
 		$this->data_array['realname'] = $realname;
@@ -1084,7 +1084,7 @@ class FFUser extends FFError {
 		$res = db_query_params('UPDATE users SET shell=$1 WHERE user_id=$2',
 					array($shell, $this->getID()));
 		if (!$res) {
-			$this->setError(_('Error: Cannot Update User Unix Shell:').' '.db_error());
+			$this->setError(_('Error')._(': ')._('Cannot Update User Unix Shell')._(': ').db_error());
 			db_rollback();
 			return false;
 		} else {
@@ -1268,7 +1268,7 @@ class FFUser extends FFError {
 		$res = db_query_params('DELETE FROM sshkeys WHERE id_sshkeys = $1 and userid = $2',
 					array($keyid, $this->getID()));
 		if (!$res) {
-			$this->setError(_('Error: Cannot delete user SSH key'));
+			$this->setError(_('Error')._(': ')._('Cannot delete user SSH key'));
 			return false;
 		} else {
 			unset($this->data_array['authorized_keys'][$keyid]);
@@ -1412,7 +1412,7 @@ class FFUser extends FFError {
 					       $this->getID()));
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError(_('Error: Cannot Change User Password:').' '.db_error());
+			$this->setError(_('Error')._(': ')._('Cannot Change User Password').(': ').db_error());
 			db_rollback();
 			return false;
 		} else {
@@ -1436,15 +1436,6 @@ class FFUser extends FFError {
 	}
 
 	/**
-	 * setMD5Passwd - Changes user's MD5 password.
-	 *
-	 * @param	string	$md5	The MD5-hashed password.
-	 */
-	function setMD5Passwd($md5) {
-		exit(_('Error: Cannot Change User Password:').' '._('MD5 obsoleted'));
-	}
-
-	/**
 	 * setUnixPasswd - Changes user's Unix-hashed password.
 	 *
 	 * @param	string	$unix	The Unix-hashed password.
@@ -1459,7 +1450,7 @@ class FFUser extends FFError {
 				array($unix, $this->getID()));
 
 			if (!$res || db_affected_rows($res) < 1) {
-				$this->setError(_('Error: Cannot Change User Password:').' '.db_error());
+				$this->setError(_('Error')._(': ')._('Cannot Change User Password')._(': ').db_error());
 				db_rollback();
 				return false;
 			}
@@ -1777,7 +1768,7 @@ Email: %3$s
 	 */
 	function setUneditable($data) {
 		if (!is_array($data)) {
-			$this->setError(_('Error')._(': ')._('Cannot Update list of uneditable fields: not an array'));
+			$this->setError(_('Error')._(': ')._('Cannot Update list of uneditable fields')._(': ')._('not an array'));
 			return false;
 		}
 
@@ -1800,7 +1791,7 @@ Email: %3$s
 	 */
 	function setHidden($data) {
 		if (!is_array($data)) {
-			$this->setError(_('Error')._(': ')._('Cannot Update list of hidden fields: not an array'));
+			$this->setError(_('Error')._(': ')._('Cannot Update list of hidden fields')._(': ')._('not an array'));
 			return false;
 		}
 
@@ -1892,26 +1883,6 @@ function sortUserList(&$list, $criterion = 'name') {
 		DO NOT USE FOR ANY NEW CODE
 
 */
-
-/**
- * user_ismember() - DEPRECATED; DO NOT USE! (TODO: document what should be used instead)
- *  Replace user_ismember(1[, 'A']) with forge_check_global_perm('forge_admin')
- *  Replace user_ismember($group_id, 'A') with forge_check_perm('project_admin', $group_id)
- *  For now, keep user_ismember($group_id) alone
- *
- * @param        int        $group_id The Group ID
- * @param        int        $type     The Type
- * @return bool
- * @deprecated
- *
- */
-function user_ismember($group_id, $type = 0) {
-	if (!session_loggedin()) {
-		return false;
-	}
-
-	return session_get_user()->isMember($group_id, $type) ;
-}
 
 /**
  * user_getname() - DEPRECATED; DO NOT USE! (TODO: document what should be used instead)
