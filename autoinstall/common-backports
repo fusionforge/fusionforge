@@ -212,7 +212,7 @@ EOF
 }
 
 function suse_check_release {
-	supported=$(. /etc/os-release; echo $VERSION | grep "42\.[12]")
+	supported=$(. /etc/os-release; echo $VERSION | grep "42\.[123]")
 	if test -z "$supported"; then
 		echo "unsupported openSUSE version"
 		exit 1
