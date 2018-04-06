@@ -4,7 +4,7 @@
 source $(forge_get_config source_path)/post-install.d/common/service.inc
 
 plugindir=$(forge_get_config plugins_path)/scmhg
-hgwebcgi=$(ls -1 /usr/share/doc/mercurial-*/hgweb.cgi /usr/share/doc/mercurial/examples/hgweb.cgi 2>/dev/null | tail -1)
+hgwebcgi=$(ls -1 /usr/share/doc/mercurial-*/hgweb.cgi /usr/share/doc/mercurial/examples/hgweb.cgi /usr/share/doc/packages/mercurial/hgweb.cgi 2>/dev/null | tail -1)
 hgtemplatesdir=$(ls -1d /usr/lib*/python*/site-packages/mercurial/templates /usr/share/mercurial/templates 2>/dev/null | tail -1)
 
 case "$1" in
