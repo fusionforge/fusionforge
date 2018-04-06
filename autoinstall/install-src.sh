@@ -62,12 +62,12 @@ elif [ -e /etc/SuSE-release ]; then
 	suse_install_repos
 	suse_install_rpms make gettext-runtime php5 php5-gettext php5-posix php5-pgsql \
 		apache2 apache2-mod_php5 apache2-mod_wsgi apache2-mod_mpm_itk \
-		postgresql-server subversion \
+		postgresql-server postgresql-contrib subversion \
 		php5-pear php5-pear-htmlpurifier \
-		mailman postfix  \
-		openssh  \
+		mailman postfix \
+		openssh \
 		cvs rcs perl-IPC-Run perl-URI \
-		subversion-server  \
+		subversion-server \
 		git git-web \
 		mercurial \
 		python-psycopg2 \
