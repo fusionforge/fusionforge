@@ -574,7 +574,6 @@ Offer DAV or SSH access.");
 
 		// since cronjobs are running as root, we need to trust apache user
 		if (!is_file('/root/.hgrc')) {
-			echo 'creation fichier'."\n";
 			$trustdata = '[trusted]'.PHP_EOL.'users = '.forge_get_config('apache_user').PHP_EOL;
 			$f = fopen('/root/.hgrc', 'w');
 			fwrite($f, $trustdata);
