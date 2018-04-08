@@ -1436,18 +1436,6 @@ class FFUser extends FFError {
 	}
 
 	/**
-<<<<<<< HEAD
-	 * setMD5Passwd - Changes user's MD5 password.
-	 *
-	 * @param	string	$md5	The MD5-hashed password.
-	 */
-	function setMD5Passwd($md5) {
-		exit(_('Error')._(': ')._('Could not change password')._(': ')._('MD5 obsoleted'));
-	}
-
-	/**
-=======
->>>>>>> 6.1
 	 * setUnixPasswd - Changes user's Unix-hashed password.
 	 *
 	 * @param	string	$unix	The Unix-hashed password.
@@ -1462,11 +1450,7 @@ class FFUser extends FFError {
 				array($unix, $this->getID()));
 
 			if (!$res || db_affected_rows($res) < 1) {
-<<<<<<< HEAD
 				$this->setError(_('Error')._(': ')._('Could not change password')._(': ').db_error());
-=======
-				$this->setError(_('Error')._(': ')._('Cannot Change User Password')._(': ').db_error());
->>>>>>> 6.1
 				db_rollback();
 				return false;
 			}
