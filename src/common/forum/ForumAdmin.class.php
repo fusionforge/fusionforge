@@ -461,7 +461,7 @@ class ForumAdmin extends FFError {
 								db_begin();
 								if (!db_query_params ('DELETE FROM forum WHERE msg_id=$1',
 										      array ($fm->getID()))) {
-									$error_msg .= "DB Error ". db_error();
+									$error_msg .= "DB Error: ". db_error();
 									db_rollback();
 									break;
 								}

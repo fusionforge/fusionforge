@@ -263,7 +263,7 @@ class AttachManager extends FFError {
 		}
 
 		if (!is_uploaded_file($attachment) || !($filestuff = @file_get_contents($attachment)) ) {
-			$this->messages[] = _('Error, problem with the attachment file uploaded into the server');
+			$this->messages[] = _('Error')._(': ')._('problem with the attachment file uploaded into the server');
 			return false;
 		}
 

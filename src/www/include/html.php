@@ -1146,7 +1146,7 @@ function site_footer($params = array()) {
 function site_project_header($params) {
 	/*
 		Check to see if active
-		Check to see if private (if private check if user_ismember)
+		Check to see if private (if private check if session_require_perm)
 	*/
 	$group_id = $params['group'];
 

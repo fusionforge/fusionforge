@@ -118,7 +118,7 @@ if ($g->usesPlugin('projects-hierarchy')) {
 		echo html_e('p', array(), html_e('input', $attrsInputIncludeSubprojects)._('Include child projects'));
 	}
 }
-$attrsInputLimitByStartDate = array('type' => 'checkbox', 'id' => 'limitByStartDate', 'name' => 'limitByStartDate', 'value' => 1, 'title' => _('Set created start date limitation for this search. If not enable, not limitation.'));
+$attrsInputLimitByStartDate = array('type' => 'checkbox', 'id' => 'limitByStartDate', 'name' => 'limitByStartDate', 'value' => 1, 'title' => _('Set created start date limitation for this search. If not enable, no limitation.'));
 $attrsDatePickerLimitByStartDate = array('id' => 'datepicker_start', 'name' => 'start_date', 'size' => 10, 'maxlength' => 10, 'disabled' => 'disabled');
 if ($limitByStartDate) {
 	$attrsInputLimitByStartDate['checked'] = 'checked';
@@ -128,7 +128,7 @@ if ($limitByStartDate) {
 		$attrsDatePickerLimitByStartDate['value'] = util_html_encode($received_begin);
 	}
 }
-$attrsInputLimitByEndDate = array('type' => 'checkbox', 'id' => 'limitByEndDate', 'name' => 'limitByEndDate', 'value' => 1, 'title' => _('Set created end date limitation for this search. If not enable, not limitation.'));
+$attrsInputLimitByEndDate = array('type' => 'checkbox', 'id' => 'limitByEndDate', 'name' => 'limitByEndDate', 'value' => 1, 'title' => _('Set created end date limitation for this search. If not enable, no limitation.'));
 $attrsDatePickerLimitByEndDate = array('id' => 'datepicker_end', 'name' => 'end_date', 'size' => 10, 'maxlength' => 10, 'disabled' => 'disabled');
 if ($limitByEndDate) {
 	$attrsInputLimitByEndDate['checked'] = 'checked';

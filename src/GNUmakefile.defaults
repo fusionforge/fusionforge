@@ -46,4 +46,4 @@ CP_R=cp -r --preserve=timestamps
 apache_user=$(shell if [ -e /etc/redhat-release ]; then echo 'apache'; elif [ -e /etc/SuSE-release ]; then echo 'wwwrun'; else echo 'www-data'; fi)
 apache_group=$(shell if [ -e /etc/redhat-release ]; then echo 'apache'; elif [ -e /etc/SuSE-release ]; then echo 'www'; else echo 'www-data'; fi)
 apache_service=$(shell if [ -e /etc/redhat-release ]; then echo 'httpd'; else echo 'apache2'; fi)
-ssh_service=$(shell if [ -e /etc/redhat-release ]; then echo 'sshd'; else echo 'ssh'; fi)
+ssh_service=$(shell if [ -e /etc/redhat-release ]; then echo 'sshd'; elif [ -e /etc/SuSE-release ]; then echo 'sshd'; else echo 'ssh'; fi)

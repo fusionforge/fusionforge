@@ -757,14 +757,14 @@ class SurveyHTML extends FFError {
 				$ret .= 'var plot'.$id.';';
 				$yMax = 0;
 				for ($i = 0; $i < count($values); $i++) {
-					$ret .= 'data'.$id.'.push(['.$values[$i].']);';
+					$ret .= 'data'.$id.'.push('.$values[$i].');';
 					if ($yMax < $values[$i]) {
 						$yMax = $values[$i];
 					}
 					$ret .= 'ticks'.$id.'.push([\''.htmlentities($legend[$i]).'\']);';
 				}
 				$ret .= 'jQuery(document).ready(function(){
-						plot'.$id.' = jQuery.jqplot (\'chart'.$id.'\', data'.$id.',
+						plot'.$id.' = jQuery.jqplot (\'chart'.$id.'\', [data'.$id.'],
 						{
 							axesDefaults: {
 								tickRenderer: jQuery.jqplot.CanvasAxisTickRenderer,

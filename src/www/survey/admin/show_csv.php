@@ -1,6 +1,6 @@
 <?php
 /**
- * GForge Survey Facility
+ * Survey Facility
  *
  * Portions Copyright 1999-2001 (c) VA Linux Systems
  * The rest Copyright 2002-2004 (c) GForge Team
@@ -45,20 +45,17 @@ $html = getStringFromRequest('html');
 
 /* We need a group_id */
 if (!$group_id) {
-    exit_no_group();
+	exit_no_group();
 }
 
 $g = group_get_object($group_id);
 if (!$g || !is_object($g) || $g->isError()) {
-    exit_no_group();
+	exit_no_group();
 }
 
-$is_admin_page='y';
 $sh = new SurveyHtml();
 
-$is_admin_page='y';
-
-if (!session_loggedin() || !user_ismember($group_id,'A')) {
+if (!session_loggedin() || !forge_check_perm('project_admin', $group_id)) {
 	echo $HTML->error_msg(_('Permission denied.'));
 	$sh->footer();
 	exit;
@@ -69,7 +66,7 @@ if ($survey_id) {
 
 	/* Get questions of this survey */
 	$questions = & $s->getQuestionInstances();
-	foreach ($questions as $cur_question){
+	foreach ($questions as $cur_question) {
 		$qid = $cur_question->getID();
 		$lib = $cur_question->getQuestion();
 		$type = $cur_question->getQuestionType();
@@ -90,23 +87,24 @@ if ($survey_id) {
 			print "\n".'<table border="1">'."\n";
 			print "<tr>";
 			//print "<td>User</td>";
-			foreach ($header as $id=>$col){
+			foreach ($header as $id=>$col) {
 				print "<td>$col</td>";
 			}
 			print "</tr>\n";
-			foreach ($s2 as $k=>$val){
+			foreach ($s2 as $k=>$val) {
 				print "<tr>";
 				//print "<td>$k</td>";
 				$val = array_reverse($val);
-				foreach ($val as $k1=>$val1){
+				foreach ($val as $k1=>$val1) {
 			 		$res = format($val1,$types[$k1]);
 					print "<td>$res</td>";
-		        }
+				}
 				print "</tr>\n";
 			}
 			print "</table>";
 			$sh->footer();
 		} else {
+			$sysdebug_enable = false;
 			// CSV mode
 			header('Content-type: text/csv');
 			list($year, $month) = explode('-', date('Y-m'));
@@ -119,8 +117,8 @@ if ($survey_id) {
 			foreach ($s2 as $k=>$val){
 				echo "\n";
 			    	foreach ($header as $id=>$col){
-			    	$res = format($val[$id],$types[$id]);
-			    	echo '"'.$res.'";';
+					$res = format($val[$id],$types[$id]);
+					echo '"'.$res.'";';
 				}
 			}
 		}
