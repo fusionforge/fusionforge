@@ -113,6 +113,7 @@ case "$1" in
 			a2enmod macro
 			if [ -e /etc/SuSE-release ]; then
 				a2enmod php5
+				a2enmod mpm_itk
 			else
 				a2enmod php7.0 || a2enmod php5
 			fi
@@ -132,13 +133,12 @@ case "$1" in
 			if ! [ -e /etc/httpd/conf.modules.d/00-macro.conf ] ; then
 				echo "LoadModule macro_module modules/mod_macro.so" > /etc/httpd/conf.modules.d/00-macro.conf
 			fi
+			# Enable mpm-itk on RH/CentOS
 			if [ -e /etc/httpd/conf.modules.d/00-mpm-itk.conf ] \
 				&& ! grep -q ^LoadModule.mpm_itk_module /etc/httpd/conf.modules.d/00-mpm-itk.conf ; then
 				sed -i -e s/^#LoadModule/LoadModule/ /etc/httpd/conf.modules.d/00-mpm-itk.conf
 			fi
 		fi
-
-		# Enable mpm-itk on RH/CentOS
 
 		if [ -x /usr/sbin/a2dissite ]; then
 			a2dissite 000-default
