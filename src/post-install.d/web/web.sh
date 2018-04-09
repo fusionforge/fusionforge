@@ -65,6 +65,8 @@ case "$1" in
 			a2ensite fusionforge.conf
 		elif [ -e /etc/redhat-release ]; then
 			ln -nfs $config_path/httpd.conf /etc/httpd/conf.d/fusionforge.conf
+		elif [ -e /etc/SuSE-release ]; then
+			ln -nfs $config_path/httpd.conf /etc/apache2/conf.d/fusionforge.conf
 		else
 			echo "*** Note: please install $config_path/httpd.conf in your Apache configuration"
 		fi
