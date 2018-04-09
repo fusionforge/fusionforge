@@ -111,7 +111,11 @@ case "$1" in
 		if [ -x /usr/sbin/a2enmod ]; then
 			a2enmod version 2>/dev/null || true  # opensuse..
 			a2enmod macro
-			a2enmod php7.0 || a2enmod php5
+			if [ -e /etc/SuSE-release ]; then
+				a2enmod php5
+			else
+				a2enmod php7.0 || a2enmod php5
+			fi
 			a2enmod ssl
 			a2enmod env
 			a2enmod headers
