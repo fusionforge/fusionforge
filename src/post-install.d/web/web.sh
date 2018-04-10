@@ -114,6 +114,7 @@ case "$1" in
 			if [ -e /etc/SuSE-release ]; then
 				a2enmod php5
 				a2enmod mpm_itk
+				a2enmod mod_access_compat
 			else
 				a2enmod php7.0 || a2enmod php5
 			fi
