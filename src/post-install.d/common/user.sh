@@ -26,7 +26,7 @@ case "$1" in
 		# TODO: specify the role of this user and its permissions
 		# Currently used in: plugin-scmbzr, plugin-moinmoin, ???
 		if ! getent passwd $system_user >/dev/null; then
-			useradd $system_user -s /bin/false -M -d $data_path
+			useradd $system_user -U -s /bin/false -M -d $data_path
 		fi
 		;;
 
