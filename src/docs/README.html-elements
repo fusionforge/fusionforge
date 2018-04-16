@@ -1,7 +1,7 @@
 Documentation of new HTML element creation functions
 ────────────────────────────────────────────────────
 
-Functions defined in src/www/include/html.php → available: always.
+Functions defined in src/common/include/html.php → available: always.
 
 
 ‣ Element emission functions (do not echo anything)

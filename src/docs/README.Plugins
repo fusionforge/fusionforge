@@ -433,7 +433,7 @@ had been written.
                (or colspan'ed to 2).
 
   Hook Name  : usermenu
-  Locations  : www/include/html.php
+  Locations  : common/include/html.php
   Description: Prints out a tab to show when displaying user pages.
                Unlike the groupmenu hook, this hook should use the PrintSubMenu
                method to display the tab itself.

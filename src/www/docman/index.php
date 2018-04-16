@@ -6,7 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2010-2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2016, Franck Villaume - TrivialDev
+ * Copyright 2012-2016,2018, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -43,8 +43,8 @@ require_once $gfcommon.'docman/include/constants.php';
 require_once $gfcommon.'include/TextSanitizer.class.php'; // to make the HTML input by the user safe to store
 require_once $gfcommon.'reporting/report_utils.php';
 require_once $gfcommon.'reporting/ReportPerGroupDocmanDownloads.class.php';
+require_once $gfcommon.'include/html.php';
 require_once $gfwww.'search/include/renderers/DocsHtmlSearchRenderer.class.php';
-require_once $gfwww.'include/html.php';
 
 /* are we using docman ? */
 if (!forge_get_config('use_docman'))

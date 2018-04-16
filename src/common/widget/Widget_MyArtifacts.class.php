@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2012-2013, Franck Villaume - TrivialDev
+ * Copyright 2012-2013,2018, Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of Education
  * http://fusionforge.org
  *
@@ -23,7 +23,7 @@
 
 require_once 'Widget.class.php';
 require_once $gfcommon.'include/utils.php';
-require_once $gfwww.'include/html.php';
+require_once $gfcommon.'include/html.php';
 require_once $gfcommon.'tracker/ArtifactTypeFactory.class.php';
 require_once $gfcommon.'tracker/ArtifactsForUser.class.php';
 require_once $gfcommon.'tracker/Artifact.class.php';
