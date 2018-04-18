@@ -369,7 +369,8 @@ class FFUser extends FFError {
 		}
 		if (forge_get_config('require_unique_email')) {
 			if (user_get_object_by_email($email)) {
-				$this->setError(_('User with this email already exists - use people search to recover your login.'));
+				$this->setError(_('User with this email already exists.')
+                                .' '._('Use people search to recover your login.'));
 				return false;
 			}
 		}
