@@ -2,7 +2,7 @@
 /**
  * Main Tracker Content Widget Class
  *
- * Copyright 2016, Franck Villaume - TrivialDev
+ * Copyright 2016,2018, Franck Villaume - TrivialDev
  * Copyright 2017, Stephane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
@@ -106,9 +106,9 @@ class Widget_TrackerMain extends Widget {
 			$return .= $HTML->multiTableRow(array(), $cells);
 		}
 		if (!$ath->usesCustomStatuses()) {
-			$cells = array();
-			$cells[][] = html_e('strong', array(), _('State')._(': '));
 			if (forge_check_perm('tracker', $atid, 'tech')) {
+				$cells = array();
+				$cells[][] = html_e('strong', array(), _('State')._(': '));
 				if (in_array('status', $fieldInFormula)) {
 					$class = 'in-formula';
 				} else {
@@ -119,10 +119,13 @@ class Widget_TrackerMain extends Widget {
 				} else {
 					$cells[][] = $ath->statusBox('status_id', 'xzxz', false, '', array('form' => 'trackerform', 'class' => $class));
 				}
-			} else {
+				$return .= $HTML->multiTableRow(array(), $cells);
+			} elseif ($func == 'detail') {
+				$cells = array();
+				$cells[][] = html_e('strong', array(), _('State')._(': '));
 				$cells[][] = $ah->getStatusName();
+				$return .= $HTML->multiTableRow(array(), $cells);
 			}
-			$return .= $HTML->multiTableRow(array(), $cells);
 		}
 		if (forge_check_perm('tracker', $atid, 'manager')) {
 			$cells = array();
