@@ -64,6 +64,12 @@ class Widget_TrackerSummary extends Widget {
 		$fieldInFormula = $ath->getFieldsInFormula();
 
 		$return = '';
+		if (!session_loggedin()) {
+			$content = html_e('p', array('class' => 'warning_msg'), _('Please').' '.util_make_link('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI')), _('login')));
+			$content .= _('If you <strong>cannot</strong> login, then enter your email address here')._(':').utils_requiredField();
+			$content .= html_e('p', array(), html_e('input', array('type' => 'email', 'name' => 'user_email', 'size' => 50, 'maxlength' => 255, 'required' => 'required')));
+			$return .= html_e('div', array('class'=>'login_warning_msg'), $content);
+		}
 		$inputAttrs = array('form' => 'trackerform', 'type' => 'text', 'name' => 'summary', 'style' => 'width:99%', 'value' => $summary);
 		if ($func == 'detail') {
 			$inputAttrs['value'] = $ah->getSummary();
