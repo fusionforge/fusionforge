@@ -1899,9 +1899,7 @@ class Artifact extends FFObject {
 
 		if ($type == 1 || $type == 2) {
 			$body .= "\nYou can respond by visiting: ".
-				"\n".util_make_url ('/tracker/?func=detail&atid='. $this->ArtifactType->getID() .
-					    "&aid=". $this->getID() .
-					    "&group_id=". $this->ArtifactType->Group->getID());
+				"\n".util_make_url($this->getPermalink());
 			if (false) {  // currently not working
 				$body .=
 				"\nOr by replying to this e-mail entering your response between the following markers: ".
