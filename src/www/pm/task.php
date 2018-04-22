@@ -61,17 +61,17 @@ $duration = getStringFromRequest('duration');
 $parent_id = getIntFromRequest('parent_id');
 
 if (!$group_id || !$group_project_id) {
-    $redirect_url = '';
-    if (isset($_SERVER['HTTP_REFERER']))
-        $redirect_url = $_SERVER['HTTP_REFERER'];
+	$redirect_url = '';
+	if (isset($_SERVER['HTTP_REFERER']))
+		$redirect_url = $_SERVER['HTTP_REFERER'];
 
-    if (!$group_id)
-        $missing_params[] = _('Group ID');
+	if (!$group_id)
+		$missing_params[] = _('Group ID');
 
-    if (!$group_project_id)
-        $missing_params[] = _('Group Project ID');
+	if (!$group_project_id)
+		$missing_params[] = _('Group Project ID');
 
-	exit_missing_param($redirect_url,$missing_params,'pm');
+	exit_missing_param($redirect_url, $missing_params, 'pm');
 }
 
 $group = group_get_object($group_id);
