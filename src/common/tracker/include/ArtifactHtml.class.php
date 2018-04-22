@@ -144,7 +144,7 @@ function hide_edit_button(id) {
 			$return .= $HTML->listTableBottom();
 
 		} else {
-			$return .= $HTML->information(_('No Comments Have Been Posted'));
+			$return .= $HTML->information(_('No comments have been posted'));
 		}
 		return $return;
 	}
@@ -205,7 +205,7 @@ function hide_edit_button(id) {
 			$return .= $HTML->listTableBottom();
 
 		} else {
-			$return .= $HTML->information(_('No Changes Have Been Made to This Item'));
+			$return .= $HTML->information(_('No changes have been made to this item'));
 		}
 		return $return;
 	}
@@ -370,6 +370,8 @@ function hide_edit_button(id) {
 				$return .= html_ac(html_ap()-1);
 			}
 			$return .= html_ac(html_ap()-1);
+		} else {
+			$return .= $HTML->information(_('No dependency'));
 		}
 		return $return;
 	}

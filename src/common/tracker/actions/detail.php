@@ -5,7 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
- * Copyright 2012-2016, Franck Villaume - TrivialDev
+ * Copyright 2012-2016,2018, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -33,7 +33,7 @@ global $HTML;
 html_use_jqueryui();
 html_use_coolfieldset();
 
-$ath->header(array ('title'=> $ah->getStringID().' '. $ah->getSummary(), 'atid'=>$ath->getID()));
+$ath->header(array('title'=> $ah->getStringID().' '. $ah->getSummary(), 'atid'=>$ath->getID()));
 
 echo notepad_func();
 
@@ -181,8 +181,8 @@ $nbh = $count? ' ('.$count.')' : '';
 	</ul>
 	<div id="tabber-comments" class="tabbertab">
 		<?php echo $HTML->listTableTop();
-			if (forge_check_perm ('tracker',$ath->getID(),'submit')) { ?>
-			<tr><td colspan="2">
+			if (session_loggedin() && ($ah->getSubmittedBy() == user_getid())) { ?>
+			<tr><td>
 				<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>" />
 				<input type="hidden" name="func" value="postmod" />
 				<input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
@@ -194,7 +194,7 @@ $nbh = $count? ' ('.$count.')' : '';
 				</p>
 			</td></tr>
 			<?php } ?>
-			<tr><td colspan="2">
+			<tr><td>
 			<?php echo $ah->showMessages(); ?>
 			</td></tr>
 	<?php echo $HTML->listTableBottom(); ?>
@@ -210,18 +210,18 @@ if ($group->usesPM()) {
 <?php }
 ?>
 	<div id="tabber-attachments" class="tabbertab">
-	<?php echo $HTML->listTableTop(); ?>
-		<tr><td colspan="2">
-		<?php if (session_loggedin() && ($ah->getSubmittedBy() == user_getid())) { ?>
+	<?php if (session_loggedin() && ($ah->getSubmittedBy() == user_getid())) {
+		echo $HTML->listTableTop(); ?>
+		<tr><td>
 			<strong><?php echo _('Attach Files')._(':'); ?></strong>  <?php echo('('._('max upload size')._(': ').human_readable_bytes(util_get_maxuploadfilesize()).')') ?><br />
 			<input type="file" name="input_file0" /><br />
 			<input type="file" name="input_file1" /><br />
 			<input type="file" name="input_file2" /><br />
 			<input type="file" name="input_file3" /><br />
 			<input type="file" name="input_file4" /><br />
-		<?php } ?>
 		</td></tr>
 	<?php echo $HTML->listTableBottom();
+		}
 	//
 	// print a list of files attached to this Artifact
 	//
@@ -260,16 +260,11 @@ if ($group->usesPM()) {
 	}
 	if (forge_get_config('use_object_associations')) { ?>
 	<div id="tabber-object-associations" class="tabbertab">
-	<?php if (forge_check_perm ('tracker',$ath->getID(),'submit')) {
-			echo $ah->showAssociations('/tracker/?rtype=ajax&aid='.$ah->getID().'&group_id='.$ath->Group->getID().'&atid='.$ath->getID().'&func=removeassoc');
-			echo $ah->showAddAssociations();
-		} else {
-			echo $ah->showAssociations();
-		} ?>
+	<?php echo $ah->showAssociations(); ?>
 	</div>
 	<?php } ?>
 </div>
-<?php if (session_loggedin()) {
+<?php if (session_loggedin() && ($ah->getSubmittedBy() == user_getid())) {
 	echo $HTML->listTableTop(); ?>
 		<tr>
 			<td>

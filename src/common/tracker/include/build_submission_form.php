@@ -39,12 +39,12 @@ function artifact_submission_form($ath, $group, $summary='', $details='', $assig
 	echo $HTML->listTableTop(array(), array(), 'full');
 	if (!session_loggedin()) {
 		$content = html_ao('div', array('class'=>'login_warning_msg'));
-		$content .= $HTML->warning_msg(_('Please').' '.util_make_link('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI')), _('login')));
+		$content .= html_e('p', array('class' => 'warning_msg'), _('Please').' '.util_make_link('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI')), _('login')));
 		$content .= _('If you <strong>cannot</strong> login, then enter your email address here')._(':');
-		$content .= html_e('p',array(), html_e('input', array('type'=>'email', 'name'=>'user_email', 'size'=>'50', 'maxlength'=>'255')));
+		$content .= html_e('p', array(), html_e('input', array('type' => 'email', 'name' => 'user_email', 'size' => 50, 'maxlength' => 255, 'required' => 'required')));
 		$content .= html_ac(html_ap() - 1);
 		$cells = array();
-		$cells[][] = $content;
+		$cells[] = array($content,'colspan'=>'2');
 		echo $HTML->multiTableRow(array(), $cells);
 	}
 	$cells = array();
@@ -103,13 +103,6 @@ function artifact_submission_form($ath, $group, $summary='', $details='', $assig
 	echo $HTML->multiTableRow(array(), $cells);
 
 	$content = '';
-	if (!session_loggedin()) {
-		$content .= html_ao('div', array('class'=>'login_warning_msg'));
-		$content .= $HTML->warning_msg(_('Please').' '.util_make_link('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI')), _('login')));
-		$content .= _('If you <strong>cannot</strong> login, then enter your email address here')._(':');
-		$content .= html_e('p',array(), html_e('input', array('type'=>'text', 'name'=>'user_email', 'size'=>'50', 'maxlength'=>'255')));
-		$content .= html_ac(html_ap() - 1);
-	}
 	$content .= html_e('p', array(), '&nbsp;');
 	$content .= html_e('span', array('class'=>'important'), _('DO NOT enter passwords or confidential information in your message!'));
 	$cells = array();

@@ -28,7 +28,7 @@ case "$1" in
 			update-rc.d fusionforge-systasksd defaults
 		fi
 		# not 'start' as systemd will no-op if systasksd started and exited
-		service fusionforge-systasksd restart
+		service fusionforge-systasksd restart || /etc/init.d/fusionforge-systasksd start
 		;;
 
 	remove)

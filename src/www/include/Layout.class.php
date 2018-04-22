@@ -8,7 +8,7 @@
  * Copyright 2010-2012, Alain Peyrat - Alcatel-Lucent
  * Copyright © 2011 Thorsten Glaser – tarent GmbH
  * Copyright 2011 - Marc-Etienne Vargenau, Alcatel-Lucent
- * Copyright 2012-2017, Franck Villaume - TrivialDev
+ * Copyright 2012-2018, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -39,7 +39,7 @@
 require_once $gfcommon.'include/constants.php';
 require_once $gfcommon.'include/FusionForge.class.php';
 require_once $gfcommon.'include/Navigation.class.php';
-require_once $gfwww.'include/html.php';
+require_once $gfcommon.'include/html.php';
 
 abstract class Layout extends FFError {
 

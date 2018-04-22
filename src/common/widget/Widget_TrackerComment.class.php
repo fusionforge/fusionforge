@@ -74,6 +74,7 @@ class Widget_TrackerComment extends Widget {
 		}
 		$elementsLi[] = array('content' => util_make_link('#tabber-attachments', _('Attachments').$nbf, false, true));
 		$pluginfound = false;
+		$tabberContent = '';
 		if ($func == 'detail') {
 			$pm = plugin_manager_get_object();
 			$pluginsListeners = $pm->GetHookListeners('artifact_extra_detail');
@@ -109,9 +110,6 @@ class Widget_TrackerComment extends Widget {
 				}
 				$elementsLi[] = array('content' => util_make_link('#tabber-associations', $tabTitle, false, true));
 			}
-		}
-		$tabberContent = '';
-		if ($func == 'detail') {
 			$divContent = '';
 			if (forge_check_perm('tracker', $atid, 'tech')) {
 				$divContent .= html_e('strong', array(), _('Use Canned Response')._(':')).html_e('br').

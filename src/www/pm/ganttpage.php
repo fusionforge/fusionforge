@@ -6,7 +6,7 @@
  * Copyright 2002 GForge, LLC, Tim Perdue
  * Copyright 2010, FusionForge Team
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013-2015, Franck Villaume - TrivialDev
+ * Copyright 2013-2015,2018, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -26,8 +26,8 @@
  */
 
 require_once $gfcommon.'pm/ProjectTaskFactory.class.php';
+require_once $gfcommon.'include/html.php';
 require_once $gfwww.'include/unicode.php';
-require_once $gfwww.'include/html.php';
 
 global $HTML;
 

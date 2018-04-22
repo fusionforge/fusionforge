@@ -65,6 +65,8 @@ case "$1" in
 			a2ensite fusionforge.conf
 		elif [ -e /etc/redhat-release ]; then
 			ln -nfs $config_path/httpd.conf /etc/httpd/conf.d/fusionforge.conf
+		elif [ -e /etc/SuSE-release ]; then
+			ln -nfs $config_path/httpd.conf /etc/apache2/conf.d/fusionforge.conf
 		else
 			echo "*** Note: please install $config_path/httpd.conf in your Apache configuration"
 		fi
@@ -109,7 +111,13 @@ case "$1" in
 		if [ -x /usr/sbin/a2enmod ]; then
 			a2enmod version 2>/dev/null || true  # opensuse..
 			a2enmod macro
-			a2enmod php7.0 || a2enmod php5
+			if [ -e /etc/SuSE-release ]; then
+				a2enmod php5
+				a2enmod mpm_itk
+				a2enmod mod_access_compat
+			else
+				a2enmod php7.0 || a2enmod php5
+			fi
 			a2enmod ssl
 			a2enmod env
 			a2enmod headers
@@ -126,13 +134,12 @@ case "$1" in
 			if ! [ -e /etc/httpd/conf.modules.d/00-macro.conf ] ; then
 				echo "LoadModule macro_module modules/mod_macro.so" > /etc/httpd/conf.modules.d/00-macro.conf
 			fi
+			# Enable mpm-itk on RH/CentOS
 			if [ -e /etc/httpd/conf.modules.d/00-mpm-itk.conf ] \
 				&& ! grep -q ^LoadModule.mpm_itk_module /etc/httpd/conf.modules.d/00-mpm-itk.conf ; then
 				sed -i -e s/^#LoadModule/LoadModule/ /etc/httpd/conf.modules.d/00-mpm-itk.conf
 			fi
 		fi
-
-		# Enable mpm-itk on RH/CentOS
 
 		if [ -x /usr/sbin/a2dissite ]; then
 			a2dissite 000-default
