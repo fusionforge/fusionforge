@@ -2007,7 +2007,7 @@ class Artifact extends FFObject {
 		}
 
 		$body .= "\n\nYou can respond by visiting: ".
-			"\n".$this->getPermalink();
+			"\n".util_make_url($this->getPermalink());
 
 		//only send if some recipients were found
 		if (count($emails) < 1 && count($monitor_ids) < 1) {
