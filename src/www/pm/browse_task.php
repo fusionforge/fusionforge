@@ -167,7 +167,7 @@ echo '	<input type="hidden" name="set" value="custom" />
 		<td>'._('Category')._(': ').'<br />'. $cat_box .'</td>
 		<td>'._('Sort On')._(': ').'<br />'. $order_box . $sort_box .'</td>
 		<td>'._('Detail View')._(': ').'<br />'. $view_box .'</td>
-		<td><input type="submit" name="submit" value="'._('Browse').'" /></td>
+		<td style="vertical-align: bottom"><input type="submit" name="submit" value="'._('Browse').'" /></td>
 	</tr></table>';
 echo $HTML->closeForm();
 if ($rows < 1) {
@@ -231,7 +231,7 @@ if ($rows < 1) {
 		$title_arr[]=_('Priority');
 
 
-	echo $HTML->listTableTop($title_arr);
+	echo $HTML->listTableTop($title_arr, array(), 'full');
 
 	$now = time();
 
