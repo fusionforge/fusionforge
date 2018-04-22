@@ -73,7 +73,6 @@ if (getStringFromRequest('createvhost')) {
 	}
 }
 
-
 if (getStringFromRequest('deletevhost')) {
 	$vhostid = getStringFromRequest('vhostid');
 
@@ -104,7 +103,6 @@ if (getStringFromRequest('deletevhost')) {
 		$systasksq = new SysTasksQ();
 		$systasksq->add(SYSTASK_CORE, 'WEB_VHOSTS', $group_id);
 	}
-
 }
 
 project_admin_header(array('title'=>_('Virtual Host Management'),'group'=>$group->getID()));
@@ -143,7 +141,7 @@ if (db_numrows($res_db) > 0) {
 	while ($row_db = db_fetch_array($res_db)) {
 		$cells = array();
 		$cells[][] = $row_db['vhost_name'];
-		$cells[][] = '[ <strong>'.util_make_link('/project/admin/vhost.php?group_id='.$group->getID().'&vhostid='.$row_db['vhostid'].'&deletevhost=1', _('Delete')).'</strong>]';
+		$cells[][] = '[ <strong>'.util_make_link('/project/admin/vhost.php?group_id='.$group->getID().'&vhostid='.$row_db['vhostid'].'&deletevhost=1', _('Delete')).'</strong> ]';
 		echo $HTML->multiTableRow(array(), $cells);
 	}
 	echo $HTML->listTableBottom();
