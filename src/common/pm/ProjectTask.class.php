@@ -1214,7 +1214,7 @@ class ProjectTask extends FFError {
 
 		$body .= "\n\n-------------------------------------------------------".
 			"\nFor more info, visit:".
-			"\n\n".util_make_url('/pm/t_follow.php/'.$this->getID();
+			"\n\n".util_make_url('/pm/t_follow.php/'.$this->getID());
 
 		$subject = sprintf(_('[%1$s - %2$s] [Task #%3$d] '),
 				$this->ProjectGroup->Group->getUnixName(),
