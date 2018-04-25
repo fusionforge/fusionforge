@@ -73,6 +73,7 @@ elif [ -e /etc/SuSE-release ]; then
 		python-psycopg2 \
 		mediawiki moinmoin-wiki \
 		vsftpd
+	suse_backport_from_fedora_rpm
 else
 	yum install -y make tar
 	backports_rpm
