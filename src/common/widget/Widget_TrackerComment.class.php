@@ -111,7 +111,7 @@ class Widget_TrackerComment extends Widget {
 				$elementsLi[] = array('content' => util_make_link('#tabber-associations', $tabTitle, false, true));
 			}
 			$divContent = '';
-			if (forge_check_perm('tracker', $atid, 'tech')) {
+			if (session_loggedin() && forge_check_perm('tracker', $atid, 'tech')) {
 				$divContent .= html_e('strong', array(), _('Use Canned Response')._(':')).html_e('br').
 						$ath->cannedResponseBox('tracker-canned_response', 'xzxz', array('form' => 'trackerform')).' '.util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID().'&add_canned=1', '('._('Admin').')').html_e('br').
 						'<script type="text/javascript">//<![CDATA[
@@ -132,7 +132,7 @@ class Widget_TrackerComment extends Widget {
 							});
 						//]]></script>';
 			}
-			if (forge_check_perm('tracker', $atid, 'submit')) {
+			if (session_loggedin() && forge_check_perm('tracker', $atid, 'submit')) {
 				$divContent .= html_e('strong', array(), _('Post Comment')._(':')).html_e('br').
 						html_e('textarea', array('form' => 'trackerform', 'id' => 'tracker-comment', 'name' => 'details', 'rows' => 7, 'style' => 'width: 100%', 'title' => util_html_secure(html_get_tooltip_description('comment'))), '', false);
 			}
@@ -144,7 +144,7 @@ class Widget_TrackerComment extends Widget {
 			}
 		}
 		$attachmentContent = '';
-		if (forge_check_perm('tracker', $atid, 'submit')) {
+		if (($func == 'add' && forge_check_perm('tracker', $atid, 'submit')) || ($func == 'detail' && session_loggedin() && forge_check_perm('tracker', $atid, 'submit'))) {
 			$attachmentContent .=  html_e('strong', array(), _('Attach Files')._(':')).' ('._('max upload size')._(': ').human_readable_bytes(util_get_maxuploadfilesize()).')'.html_e('br');
 			for ($i = 0; $i < 5; $i++) {
 				$attachmentContent .= html_e('input', array('form' => 'trackerform', 'type' => 'file', 'name' => 'input_file'.$i, 'size' => 30)).html_e('br');
@@ -181,7 +181,7 @@ class Widget_TrackerComment extends Widget {
 			}
 			if (forge_get_config('use_object_associations')) {
 				$associationContent = $ah->showAssociations('/tracker/?func=removeassoc&aid='.$ah->getID().'&group_id='.$group_id.'&atid='.$ath->getID());
-				if (forge_check_perm('tracker', $atid, 'tech')) {
+				if (session_loggedin() && forge_check_perm('tracker', $atid, 'tech')) {
 					$associationContent .= $ah->showAddAssociations(false, 'trackerform');
 				}
 				$tabberContent .= html_e('div', array('id' => 'tabber-associations', 'class' => 'tabbertab'), $associationContent);
@@ -189,7 +189,7 @@ class Widget_TrackerComment extends Widget {
 		}
 		$return .= html_e('div', array('id' => 'tabber'), $HTML->html_list($elementsLi).$tabberContent);
 
-		if (forge_check_perm('tracker', $atid, 'submit')) {
+		if (session_loggedin() && forge_check_perm('tracker', $atid, 'submit')) {
 			$return .= html_e('p', array('class' => 'middleRight'), html_e('input', array('form' => 'trackerform', 'type' => 'submit', 'name' => 'submit', 'value' => _('Save Changes'), 'title' => _('Save is validating the complete form'), 'onClick' => 'iefixform()')));
 		}
 		return $return;
