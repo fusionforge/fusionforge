@@ -153,6 +153,13 @@ class Artifact extends FFObject {
 	var $votes = false;
 
 	/**
+	 * cached result set of related artifacts
+	 *
+	 * @var	array	$artifact_relations
+	 */
+	var $artifact_relations;
+
+	/**
 	 * @param	ArtifactType	$ArtifactType	The ArtifactType object.
 	 * @param	int|bool	$data		(primary key from database OR complete assoc array)
 	 *						ONLY OPTIONAL WHEN YOU PLAN TO IMMEDIATELY CALL ->create()
@@ -2182,44 +2189,34 @@ class Artifact extends FFObject {
 	}
 
 	function hasRelations() {
-		$aid = $this->getID();
-		$res = db_query_params('SELECT *
-					FROM artifact_extra_field_list, artifact_extra_field_data, artifact_group_list, artifact, groups
-					WHERE field_type=9
-					AND artifact_extra_field_list.extra_field_id=artifact_extra_field_data.extra_field_id
-					AND artifact_group_list.group_artifact_id = artifact_extra_field_list.group_artifact_id
-					AND artifact.artifact_id = artifact_extra_field_data.artifact_id
-					AND groups.group_id = artifact_group_list.group_id
-					AND (field_data = $1 OR field_data LIKE $2 OR field_data LIKE $3 OR field_data LIKE $4)
-					ORDER BY artifact_group_list.group_id ASC, name ASC, artifact.artifact_id ASC',
-					array($aid,
-						"$aid %",
-						"% $aid %",
-						"% $aid"));
-		if (db_numrows($res)>0) {
+		if (db_numrows($this->getRelations())>0) {
 			return true;
 		}
 		return false;
 	}
 
 	function  getRelations() {
-		$aid = $this->getID();
-		$res = db_query_params ('SELECT *
-		FROM artifact_extra_field_list, artifact_extra_field_data, artifact_group_list, artifact, groups
-		WHERE field_type = $1
-		AND artifact_extra_field_list.extra_field_id=artifact_extra_field_data.extra_field_id
-		AND artifact_group_list.group_artifact_id = artifact_extra_field_list.group_artifact_id
-		AND artifact.artifact_id = artifact_extra_field_data.artifact_id
-		AND groups.group_id = artifact_group_list.group_id
-		AND (field_data = $2 OR field_data LIKE $3 OR field_data LIKE $4 OR field_data LIKE $5)
-		AND artifact.is_deleted = 0
-		ORDER BY artifact_group_list.group_id ASC, name ASC, artifact.artifact_id ASC',
-				array(ARTIFACT_EXTRAFIELDTYPE_RELATION,
-						$aid,
-						"$aid %",
-						"% $aid %",
-						"% $aid"));
-		return $res;
+		if ($this->artifact_relations) {
+			return $this->artifact_relations;
+		} else {
+			$aid = $this->getID();
+			$this->artifact_relations = db_query_params ('SELECT *
+			FROM artifact_extra_field_list, artifact_extra_field_data, artifact_group_list, artifact, groups
+			WHERE field_type = $1
+			AND artifact_extra_field_list.extra_field_id=artifact_extra_field_data.extra_field_id
+			AND artifact_group_list.group_artifact_id = artifact_extra_field_list.group_artifact_id
+			AND artifact.artifact_id = artifact_extra_field_data.artifact_id
+			AND groups.group_id = artifact_group_list.group_id
+			AND (field_data = $2 OR field_data LIKE $3 OR field_data LIKE $4 OR field_data LIKE $5)
+			AND artifact.is_deleted = 0
+			ORDER BY artifact_group_list.group_id ASC, name ASC, artifact.artifact_id ASC',
+					array(ARTIFACT_EXTRAFIELDTYPE_RELATION,
+							$aid,
+							"$aid %",
+							"% $aid %",
+							"% $aid"));
+			return $this->artifact_relations;
+		}
 	}
 
 	function hasChildren() {
