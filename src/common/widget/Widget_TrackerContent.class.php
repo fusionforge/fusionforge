@@ -370,12 +370,12 @@ EOS;
 				$selected = $ah->getExtraFieldData();
 				$efInFormula = $ath->getExtraFieldsInFormula();
 				$efWithFormula = $ath->getExtraFieldsWithFormula();
-			} elseif ($func = 'add') {
+			} elseif ($func == 'add') {
 				$selected = $ath->getExtraFieldsDefaultValue();
 				$efInFormula = $ath->getExtraFieldsInFormula(array(), false, false);
 				$efWithFormula = $ath->getExtraFieldsWithFormula(array(), false, false);
 			}
-			if (!forge_check_perm('tracker', $atid, 'submit')) {
+			if (!forge_check_perm('tracker', $atid, 'submit') || ($func == 'detail' && !session_loggedin())) {
 				$readonly = true;
 			}
 			foreach ($this->layoutExtraFieldIDs as $row_id => $column_id) {
