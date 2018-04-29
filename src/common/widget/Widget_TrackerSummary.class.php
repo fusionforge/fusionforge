@@ -64,7 +64,7 @@ class Widget_TrackerSummary extends Widget {
 		$fieldInFormula = $ath->getFieldsInFormula();
 
 		$return = '';
-		if (!session_loggedin()) {
+		if ($func == 'add' && !session_loggedin()) {
 			$content = html_e('p', array('class' => 'warning_msg'), _('Please').' '.util_make_link('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI')), _('login')));
 			$content .= _('If you <strong>cannot</strong> login, then enter your email address here')._(':').utils_requiredField();
 			$content .= html_e('p', array(), html_e('input', array('type' => 'email', 'name' => 'user_email', 'size' => 50, 'maxlength' => 255, 'required' => 'required')));
@@ -115,7 +115,7 @@ class Widget_TrackerSummary extends Widget {
 			$return .= $HTML->listTableBottom();
 
 		}
-		if (forge_check_perm('tracker', $atid, 'submit')) {
+		if (($func == 'add' && forge_check_perm('tracker', $atid, 'submit')) || ($func == 'detail' && session_loggedin() && forge_check_perm('tracker', $atid, 'submit'))) {
 			$return .= $HTML->addRequiredFieldsInfoBox();
 			$return .= html_e('p', array('class' => 'middleRight'), html_e('input', array('form' => 'trackerform', 'type' => 'submit', 'name' => 'submit', 'value' => _('Save Changes'), 'title' => _('Save is validating the complete form'), 'onClick' => 'iefixform()')));
 		}
