@@ -2,7 +2,7 @@
 /**
  * Generic Tracker Content Widget Class
  *
- * Copyright 2016,2017, Franck Villaume - TrivialDev
+ * Copyright 2016-2018, Franck Villaume - TrivialDev
  * Copyright 2017, Stephane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
@@ -669,7 +669,20 @@ EOS;
 									break;
 							}
 						} else {
-							$cellContent = '&nbsp';
+							if ($extrafieldObject->isRequired()) {
+								switch ($extrafieldObject->getType()) {
+									case ARTIFACT_EXTRAFIELDTYPE_MULTISELECT:
+										$defaultValues = $extrafieldObject->getDefaultValues();
+										foreach ($defaultValues as $defaultValue) {
+											$cellContent .= html_e('input', array('type' => 'hidden', 'value' => $defaultValue, 'name' => 'extra_fields['.$extrafieldObject->getID().'][]', 'form' => 'trackerform'));
+										}
+										break;
+									default:
+										$cellContent .= html_e('input', array('type' => 'hidden', 'value' => $extrafieldObject->getDefaultValues(), 'name' => 'extra_fields['.$extrafieldObject->getID().']', 'form' => 'trackerform'));
+								}
+							} else {
+								$cellContent .= '&nbsp';
+							}
 						}
 					} else {
 						$cellContent = '&nbsp;';
