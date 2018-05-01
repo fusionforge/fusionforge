@@ -461,30 +461,6 @@ function show_priority_colors_key() {
 }
 
 /**
- * utils_buildcheckboxarray - Build a checkbox array
- *
- * @param	int	$options	Number of options to be in the array
- * @param	string	$name		The name of the checkboxes
- * @param	array	$checked_array	An array of boxes to be pre-checked
- *
- */
-function utils_buildcheckboxarray($options, $name, $checked_array) {
-	$option_count = count($options);
-	$checked_count = count($checked_array);
-
-	for ($i = 1; $i <= $option_count; $i++) {
-		echo '
-			<br /><input type="checkbox" name="'.$name.'" value="'.$i.'"';
-		for ($j = 0; $j < $checked_count; $j++) {
-			if ($i == $checked_array[$j]) {
-				echo ' checked';
-			}
-		}
-		echo ' /> '.$options[$i];
-	}
-}
-
-/**
  * utils_requiredField - Adds the required field marker
  *
  * @return	string	A string holding the HTML to mark a required field
