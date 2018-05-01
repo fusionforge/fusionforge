@@ -548,19 +548,10 @@ function ShowResultSet($result, $title = '', $linkify = false, $displayHeaders =
  *
  */
 function validate_email($address) {
-	if (version_compare(PHP_VERSION, '5.2.0', '>=')) {
-		if (filter_var($address, FILTER_VALIDATE_EMAIL)) {
-			return true;
-		} else {
-			return false;
-		}
-	} else {
-		if (preg_match("/^[-!#$%&\'*+\\.\/0-9=?A-Z^_`a-z{|}~]+@[-!#$%&\'*+\\/0-9=?A-Z^_`a-z{|}~]+\.[-!#$%&\'*+\\.\/0-9=?A-Z^_`a-z{|}~]+$/", $address)) {
-			return true;
-		} else {
-			return false;
-		}
+	if (filter_var($address, FILTER_VALIDATE_EMAIL)) {
+		return true;
 	}
+	return false;
 }
 
 /**
