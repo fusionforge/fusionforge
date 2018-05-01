@@ -94,12 +94,10 @@ class TroveCat extends FFError {
 
 	function getIDsFullPath() {
 		return $this->data_array['fullpath_ids'];
-
 	}
 
 	function getDescription() {
 		return $this->data_array['description'];
-
 	}
 
 	function listSubTree() {
