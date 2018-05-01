@@ -750,7 +750,7 @@ if ($art_arr && $art_cnt > 0) {
 
 	if (in_array('priority', $browse_fields)) {
 		echo '<div style="display:table-cell;text-align:right">';
-		show_priority_colors_key();
+		echo $HTML->show_priority_colors_key();
 		echo '</div>';
 	}
 	echo '</div>';

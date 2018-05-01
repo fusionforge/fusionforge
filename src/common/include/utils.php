@@ -447,20 +447,6 @@ function util_make_links($data = '') {
 }
 
 /**
- * show_priority_colors_key - Show the priority colors legend
- *
- * @return	string	html code
- *
- */
-function show_priority_colors_key() {
-	echo '<p><strong> '._('Priority Colors')._(':').'</strong>';
-	for ($i = 1; $i < 6; $i++) {
-		echo ' <span class="priority'.$i.'">'.$i.'</span>';
-	}
-	echo '</p>';
-}
-
-/**
  * utils_requiredField - Adds the required field marker
  *
  * @return	string	A string holding the HTML to mark a required field
