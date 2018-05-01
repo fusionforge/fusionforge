@@ -26,8 +26,8 @@
 /**
  * vote_number_to_stars() - Turns vote results into *'s
  *
- * @param		int		$raw	Raw value
- * @return string
+ * @param	int	$raw	Raw value
+ * @return	string
  */
 function vote_number_to_stars($raw) {
 	$raw=intval($raw*2);
@@ -51,8 +51,8 @@ function vote_number_to_stars($raw) {
 /**
  * vote_show_thumbs() - Show vote stars
  *
- * @param	int $id The survey ID
- * @param	string $flag The rating type
+ * @param	int	$id	The survey ID
+ * @param	string	$flag	The rating type
  * @return	string
  */
 function vote_show_thumbs($id, $flag) {
@@ -74,8 +74,8 @@ function vote_show_thumbs($id, $flag) {
 /**
  * vote_get_rating() - Get a vote rating
  *
- * @param	int $id The survey ID
- * @param	string $flag The rating type
+ * @param	int	$id	The survey ID
+ * @param	string	$flag	The rating type
  * @return	mixed|string
  */
 function vote_get_rating ($id, $flag) {
@@ -92,8 +92,8 @@ function vote_get_rating ($id, $flag) {
 /**
  * vote_show_release_radios() - Show release radio buttons
  *
- * @param		int		$vote_on_id	The survey ID
- * @param		string	$flag		The rating type
+ * @param	int	$vote_on_id	The survey ID
+ * @param	string	$flag		The rating type
  */
 function vote_show_release_radios ($vote_on_id, $flag) {
 	global $HTML;
@@ -140,8 +140,8 @@ function vote_show_release_radios ($vote_on_id, $flag) {
 /**
  * show_survey() - Select and show a specific survey from the database
  *
- * @param		int		$group_id	The group ID
- * @param		int		$survey_id	The survey ID
+ * @param	int	$group_id	The group ID
+ * @param	int	$survey_id	The survey ID
  */
 function show_survey ($group_id, $survey_id) {
 	global $HTML;
@@ -298,8 +298,8 @@ if (db_numrows($result) > 0) {
 /**
  * Show a single question for the new user rating system
  *
- * @param		string	$question		The question to show
- * @param		string	$element_name	The array element
+ * @param	string	$question	The question to show
+ * @param	string	$element_name	The array element
  */
 function vote_show_a_question ($question, $element_name) {
 	echo '
@@ -385,8 +385,8 @@ $USER_RATING_VALUES[]='3';
 /**
  * vote_show_user_rate_box() - Show user rating box
  *
- * @param		int		$user_id	The user ID
- * @param		int		$by_id		The user ID of the user who is rating $user_id
+ * @param	int	$user_id	The user ID
+ * @param	int	$by_id		The user ID of the user who is rating $user_id
  */
 function vote_show_user_rate_box ($user_id, $by_id=0) {
 	if ($by_id) {
@@ -433,7 +433,7 @@ function vote_show_user_rate_box ($user_id, $by_id=0) {
 /**
  * vote_show_user_rating() - Show a user rating
  *
- * @param		int		$user_id	The user ID
+ * @param	int	$user_id	The user ID
  */
 function vote_show_user_rating($user_id) {
 	global $USER_RATING_QUESTIONS;

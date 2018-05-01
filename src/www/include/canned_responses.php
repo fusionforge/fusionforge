@@ -24,24 +24,22 @@
 /**
  * add_canned_response() - Add a new canned response
  *
- * @param		string	$title	Canned response title
- * @param		string	$text	Canned response text
+ * @param	string	$title	Canned response title
+ * @param	string	$text	Canned response text
  */
-function add_canned_response($title, $text)
-{
-		global $error_msg;
-		if( !db_query_params ('INSERT INTO canned_responses (response_title, response_text) VALUES($1,$2)',
-			array($title,
-				$text)) ) {
-			$error_msg .= db_error();
-		}
+function add_canned_response($title, $text) {
+	global $error_msg;
+	if( !db_query_params ('INSERT INTO canned_responses (response_title, response_text) VALUES($1,$2)',
+		array($title,
+			$text)) ) {
+		$error_msg .= db_error();
+	}
 }
 
 /**
  * get_canned_responses() - Get an HTML select-box of canned responses
  */
-function get_canned_responses()
-{
+function get_canned_responses() {
 	global $canned_response_res;
 	if (!$canned_response_res) {
 		$canned_response_res = db_query_params ('SELECT response_id, response_title FROM canned_responses',

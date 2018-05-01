@@ -179,7 +179,7 @@ function trove_setnode($group_id, $trove_cat_id, $rootnode=0) {
 /**
  * trove_getrootcat() - Get the root categegory
  *
- * @param	int $trove_cat_id Trove category ID
+ * @param	int	$trove_cat_id	Trove category ID
  * @return	int
  */
 function trove_getrootcat($trove_cat_id) {
