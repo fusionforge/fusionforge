@@ -25,107 +25,106 @@ require_once 'common/include/Codendi_Request.class.php';
  */
 class HTTPRequest extends Codendi_Request {
 
-    function __construct() {
-        parent::__construct($_REQUEST);
-    }
+	function __construct() {
+		parent::__construct($_REQUEST);
+	}
 
-    /**
-     * Get the value of $variable in $this->params (server side values).
-     *
-     * @param  string $variable Name of the parameter to get.
-     * @return mixed  If the variable exist, the value is returned (string)
-     * otherwise return false;
-     */
-    function getFromServer($variable) {
-        return $this->_get($variable, $_SERVER);
-    }
+	/**
+	 * Get the value of $variable in $this->params (server side values).
+	 *
+	 * @param  string $variable Name of the parameter to get.
+	 * @return mixed  If the variable exist, the value is returned (string)
+	 * otherwise return false;
+	 */
+	function getFromServer($variable) {
+		return $this->_get($variable, $_SERVER);
+	}
 
-    /**
-     * Check if current request is send via 'post' method.
-     *
-     * This method is useful to test if the current request comes from a form.
-     *
-     * @return bool
-     */
-    function isPost() {
-        if($_SERVER['REQUEST_METHOD'] == 'POST') {
-            return true;
-        } else {
-            return false;
-        }
-    }
+	/**
+	 * Check if current request is send via 'post' method.
+	 *
+	 * This method is useful to test if the current request comes from a form.
+	 *
+	 * @return bool
+	 */
+	function isPost() {
+		if($_SERVER['REQUEST_METHOD'] == 'POST') {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
-    /**
-     * Return true if browser used to submit the request is netscape 4.
-     *
-     * @return bool
-     */
-    function browserIsNetscape4() {
-        return browser_is_netscape4();
-    }
+	/**
+	 * Return true if browser used to submit the request is netscape 4.
+	 *
+	 * @return bool
+	 */
+	function browserIsNetscape4() {
+		return browser_is_netscape4();
+	}
 
-    /**
-     * Singleton method for the class.
-     *
-     * @return mixed HTTPRequest Object.
-     */
-    static function &instance() {
-        static $_httprequest_instance;
-        if (!$_httprequest_instance) {
-            $_httprequest_instance = new HTTPRequest();
-        }
-        return $_httprequest_instance;
-    }
+	/**
+	 * Singleton method for the class.
+	 *
+	 * @return mixed HTTPRequest Object.
+	 */
+	static function &instance() {
+		static $_httprequest_instance;
+		if (!$_httprequest_instance) {
+			$_httprequest_instance = new HTTPRequest();
+		}
+		return $_httprequest_instance;
+	}
 
-    /**
-     * Validate file upload.
-     *
-     * @param  Valid_File Validator for files.
-     * @return bool
-     */
-    function validFile(&$validator) {
-        if(is_a($validator, 'Valid_File')) {
-            $this->_validated_input[$validator->getKey()] = true;
-            return $validator->validate($_FILES, $validator->getKey());
-        } else {
-            return false;
-        }
-    }
+	/**
+	 * Validate file upload.
+	 *
+	 * @param  Valid_File Validator for files.
+	 * @return bool
+	 */
+	function validFile(&$validator) {
+		if(is_a($validator, 'Valid_File')) {
+			$this->_validated_input[$validator->getKey()] = true;
+			return $validator->validate($_FILES, $validator->getKey());
+		} else {
+			return false;
+		}
+	}
 
-    /**
-     * Remove slashes in $value. If $value is an array, remove slashes for each
-     * element.
-     *
-     * @access private
-     * @param  mixed $value
-     * @return mixed
-     */
-    function _stripslashes($value) {
-        if (is_string($value)) {
-            $value = stripslashes($value);
-        } elseif (is_array($value)) {
-            foreach($value as $key => $val) {
-                $value[$key] = $this->_stripslashes($val);
-            }
-        }
-        return $value;
-    }
+	/**
+	 * Remove slashes in $value. If $value is an array, remove slashes for each
+	 * element.
+	 *
+	 * @access private
+	 * @param  mixed $value
+	 * @return mixed
+	 */
+	function _stripslashes($value) {
+		if (is_string($value)) {
+			$value = stripslashes($value);
+		} elseif (is_array($value)) {
+			foreach($value as $key => $val) {
+				$value[$key] = $this->_stripslashes($val);
+			}
+		}
+		return $value;
+	}
 
-    /**
-     * Get the value of $variable in $array. If magic_quotes are enabled, the
-     * value is escaped.
-     *
-     * @access private
-     * @param string $variable Name of the parameter to get.
-     * @param array  $array    Name of the parameter to get.
+	/**
+	 * Get the value of $variable in $array. If magic_quotes are enabled, the
+	 * value is escaped.
+	 *
+	 * @access private
+	 * @param string $variable Name of the parameter to get.
+	 * @param array  $array    Name of the parameter to get.
 	 * @return bool|mixed
 	 */
-    function _get($variable, $array) {
-        if ($this->_exist($variable, $array)) {
-            return (get_magic_quotes_gpc()?$this->_stripslashes($array[$variable]):$array[$variable]);
-        } else {
-            return false;
-        }
-    }
-
+	function _get($variable, $array) {
+		if ($this->_exist($variable, $array)) {
+			return (get_magic_quotes_gpc()?$this->_stripslashes($array[$variable]):$array[$variable]);
+		} else {
+			return false;
+		}
+	}
 }

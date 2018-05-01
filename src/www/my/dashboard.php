@@ -209,14 +209,6 @@ if (!session_loggedin()) {
 	}
 	echo $HTML->boxBottom();
 	echo html_ac(html_ap()-2);
-
-// priority colors
-/*
-	echo html_ao('tr');
-	echo html_ao('td', array('colspan' => '2'));
-	show_priority_colors_key();
-	echo html_ac(html_ap()-2);
-*/
 	echo $HTML->listTableBottom();
 	site_user_footer();
 }

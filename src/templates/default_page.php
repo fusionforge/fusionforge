@@ -14,8 +14,8 @@
 <table width="100%" border=0 cellspacing=0 cellpadding=2>
   <tr>
     <td><span class=maintitlebar>&nbsp;&nbsp;
-      <a class=maintitlebar href="http://fusionforge.fusionforge.org/"><small>FusionForge Project</small></a> |
-      <a class=maintitlebar href="http://fusionforge.org/"><small>FusionForge</small></a>
+      <a class=maintitlebar href="https://fusionforge.org/projects/fusionforge/"><small>FusionForge Project</small></a> |
+      <a class=maintitlebar href="https://fusionforge.org/"><small>FusionForge</small></a>
       </span>
     </td>
   </tr>

@@ -42,15 +42,15 @@ class TroveCat extends FFError {
 		$this->fetchData($cat_id);
 	}
 
-    /**
-     * fetchData - May need to refresh database fields.
-     *
-     * If an update occurred and you need to access the updated info.
-     *
-     * @param int $cat_id
-     * @param bool $res
-     * @return    bool    success;
-     */
+	/**
+	 * fetchData - May need to refresh database fields.
+	 *
+	 * If an update occurred and you need to access the updated info.
+	 *
+	 * @param int $cat_id
+	 * @param bool $res
+	 * @return    bool    success;
+	 */
 	function fetchData($cat_id, &$res = false) {
 
 		unset($this->data_array);
@@ -94,12 +94,10 @@ class TroveCat extends FFError {
 
 	function getIDsFullPath() {
 		return $this->data_array['fullpath_ids'];
-
 	}
 
 	function getDescription() {
 		return $this->data_array['description'];
-
 	}
 
 	function listSubTree() {

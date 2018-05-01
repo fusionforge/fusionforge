@@ -270,7 +270,7 @@ function account_get_user_default_shell() {
  * @return    array    Available shells
  */
 function account_getavailableshells($add_user_default_shell = true) {
-	// we'd better use the shells defined inside the 'chroot' in {core/chroot}/etc/shells it it exists
+	// we'd better use the shells defined inside the 'chroot' in {core/chroot}/etc/shells if it exists
 	$chroot = forge_get_config('chroot');
 	$shells_file = $chroot.'/etc/shells';
 	if(! file_exists($shells_file) ) {
@@ -341,7 +341,7 @@ function account_shellselects($current) {
  * @return	string	home directory path
  */
 function account_user_homedir($user) {
-	//return '/home/users/'.substr($user,0,1).'/'.substr($user,0,2).'/'.$user;
+	//return forge_get_config('homedir_prefix').'/'.substr($user,0,1).'/'.substr($user,0,2).'/'.$user;
 	return forge_get_config('homedir_prefix').'/'.$user;
 }
 
@@ -352,7 +352,7 @@ function account_user_homedir($user) {
  * @return	string	home directory path
  */
 function account_group_homedir($group) {
-	//return '/home/groups/'.substr($group,0,1).'/'.substr($group,0,2).'/'.$group;
+	//return forge_get_config('groupdir_prefix').'/'.substr($group,0,1).'/'.substr($group,0,2).'/'.$group;
 	return forge_get_config('groupdir_prefix').'/'.$group;
 }
 

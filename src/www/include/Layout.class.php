@@ -1348,6 +1348,21 @@ abstract class Layout extends FFError {
 		}
 		return $html_content;
 	}
+
+	/**
+	* show_priority_colors_key - Show the priority colors legend
+	*
+	* @return	string	html code
+	*
+	*/
+	function show_priority_colors_key() {
+		$html = '<p><strong> '._('Priority Colors')._(':').'</strong>';
+		for ($i = 1; $i < 6; $i++) {
+			$html .= ' <span class="priority'.$i.'">'.$i.'</span>';
+		}
+		$html .= '</p>';
+		return $html;
+	}
 }
 
 // Local Variables:

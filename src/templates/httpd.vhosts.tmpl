@@ -11,5 +11,7 @@
 	</Directory>
 	Include ${FF__core__config_path}/httpd.conf.d/block-trace.inc
 	Include ${FF__core__config_path}/httpd.conf.d/log.inc
-	Include ${FF__core__config_path}/httpd.conf.d/ssl-off.inc
+	<IfModule apache_ssl.c>
+		SSLDisable
+	</IfModule>
 </VirtualHost>

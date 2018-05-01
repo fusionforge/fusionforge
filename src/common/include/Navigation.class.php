@@ -40,10 +40,6 @@ class Navigation extends FFError {
 	 */
 	var $project_menu_data;
 
-	function __construct() {
-		parent::__construct();
-	}
-
 	/**
 	 * getTitle - Get the HTML code of the title of the page.
 	 * If the array $params contains a value for the key 'title',

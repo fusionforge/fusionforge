@@ -447,44 +447,6 @@ function util_make_links($data = '') {
 }
 
 /**
- * show_priority_colors_key - Show the priority colors legend
- *
- * @return	string	html code
- *
- */
-function show_priority_colors_key() {
-	echo '<p><strong> '._('Priority Colors')._(':').'</strong>';
-	for ($i = 1; $i < 6; $i++) {
-		echo ' <span class="priority'.$i.'">'.$i.'</span>';
-	}
-	echo '</p>';
-}
-
-/**
- * utils_buildcheckboxarray - Build a checkbox array
- *
- * @param	int	$options	Number of options to be in the array
- * @param	string	$name		The name of the checkboxes
- * @param	array	$checked_array	An array of boxes to be pre-checked
- *
- */
-function utils_buildcheckboxarray($options, $name, $checked_array) {
-	$option_count = count($options);
-	$checked_count = count($checked_array);
-
-	for ($i = 1; $i <= $option_count; $i++) {
-		echo '
-			<br /><input type="checkbox" name="'.$name.'" value="'.$i.'"';
-		for ($j = 0; $j < $checked_count; $j++) {
-			if ($i == $checked_array[$j]) {
-				echo ' checked';
-			}
-		}
-		echo ' /> '.$options[$i];
-	}
-}
-
-/**
  * utils_requiredField - Adds the required field marker
  *
  * @return	string	A string holding the HTML to mark a required field
@@ -586,19 +548,10 @@ function ShowResultSet($result, $title = '', $linkify = false, $displayHeaders =
  *
  */
 function validate_email($address) {
-	if (version_compare(PHP_VERSION, '5.2.0', '>=')) {
-		if (filter_var($address, FILTER_VALIDATE_EMAIL)) {
-			return true;
-		} else {
-			return false;
-		}
-	} else {
-		if (preg_match("/^[-!#$%&\'*+\\.\/0-9=?A-Z^_`a-z{|}~]+@[-!#$%&\'*+\\/0-9=?A-Z^_`a-z{|}~]+\.[-!#$%&\'*+\\.\/0-9=?A-Z^_`a-z{|}~]+$/", $address)) {
-			return true;
-		} else {
-			return false;
-		}
+	if (filter_var($address, FILTER_VALIDATE_EMAIL)) {
+		return true;
 	}
+	return false;
 }
 
 /**
@@ -1191,42 +1144,6 @@ function use_stylesheet($css, $media = '') {
 	return $GLOBALS['HTML']->addStylesheet($css, $media);
 }
 
-// array_replace_recursive only appeared in PHP 5.3.0
-if (!function_exists('array_replace_recursive')) {
-	/**
-	 * Replaces elements from passed arrays into the first array recursively
-	 * @param array $a1 The array in which elements are replaced.
-	 * @param array $a2 The array from which elements will be extracted.
-	 * @return array Returns an array, or NULL if an error occurs.
-	 */
-	function array_replace_recursive($a1, $a2) {
-		$result = $a1;
-
-		if (!is_array($a2)) {
-			return $a2;
-		}
-
-		foreach ($a2 as $k => $v) {
-			if (!is_array($v) ||
-				!isset($result[$k]) || !is_array($result[$k])) {
-				$result[$k] = $v;
-			}
-
-			$result[$k] = array_replace_recursive($result[$k], $v);
-		}
-
-		return $result;
-	}
-}
-
-// json_encode only appeared in PHP 5.2.0
-if (!function_exists('json_encode')) {
-	require_once $gfcommon.'include/minijson.php';
-	function json_encode($a1) {
-		return minijson_encode($a1);
-	}
-}
-
 /* returns an integer from http://forge/foo/bar.php/123 or false */
 function util_path_info_last_numeric_component() {
 	if (!isset($_SERVER['PATH_INFO'])) {
@@ -1371,22 +1288,6 @@ function util_randnum($min = 0, $max = 32767) {
 	$n = $ta[1] & 0x7FFFFFFF;
 	$v = $n % (1 + $max - $min);
 	return ($min + $v);
-}
-
-// sys_get_temp_dir() is only available for PHP >= 5.2.1
-if (!function_exists('sys_get_temp_dir')) {
-	function sys_get_temp_dir() {
-		if ($temp = getenv('TMP')) {
-			return $temp;
-		}
-		if ($temp = getenv('TEMP')) {
-			return $temp;
-		}
-		if ($temp = getenv('TMPDIR')) {
-			return $temp;
-		}
-		return '/tmp';
-	}
 }
 
 /* convert '\n' to <br /> or </p><p> */

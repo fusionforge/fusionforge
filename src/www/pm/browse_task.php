@@ -297,7 +297,7 @@ if ($rows < 1) {
 	echo '</div>';
 
 	echo '<div style="display:table-cell;text-align:right">';
-	show_priority_colors_key();
+	echo $HTML->show_priority_colors_key();
 	echo '</div>';
 
 	echo '</div>';

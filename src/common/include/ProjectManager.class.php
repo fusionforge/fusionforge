@@ -23,37 +23,34 @@
  */
 class ProjectManager {
 
-    /**
-     * Hold an instance of the class
-     */
-    private static $_instance;
+	/**
+	* Hold an instance of the class
+	*/
+	private static $_instance;
 
-    /**
-     * A private constructor; prevents direct creation of object
-     */
-    private function __construct() {
+	/**
+	* A private constructor; prevents direct creation of object
+	*/
+	private function __construct() {
+	}
 
-    }
+	/**
+	* ProjectManager is a singleton
+	* @return ProjectManager
+	*/
+	public static function instance() {
+		if (!isset(self::$_instance)) {
+			$c = __CLASS__;
+			self::$_instance = new $c;
+		}
+		return self::$_instance;
+	}
 
-    /**
-     * ProjectManager is a singleton
-     * @return ProjectManager
-     */
-    public static function instance() {
-        if (!isset(self::$_instance)) {
-            $c = __CLASS__;
-            self::$_instance = new $c;
-        }
-        return self::$_instance;
-    }
-
-    /**
-     * @param $group_id int The id of the project to look for
-     * @return Project
-     */
-    public function & getProject($group_id) {
-
-        return  group_get_object($group_id);
-    }
-
+	/**
+	* @param $group_id int The id of the project to look for
+	* @return Project
+	*/
+	public function & getProject($group_id) {
+		return  group_get_object($group_id);
+	}
 }

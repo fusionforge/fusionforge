@@ -18,7 +18,7 @@
  * along with Fusionforge. If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once 'User.class.php';
+require_once $gfcommon.'include/User.class.php';
 
 class UserManager {
 
