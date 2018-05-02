@@ -19568,7 +19568,7 @@ msgid "User updated successfully"
 msgstr "L'user ha estat actualitzat amb èxit"
 
 #: www/people/editprofile.php:100
-, php-format
+#, php-format
 msgid "Failed to add the skill %s"
 msgstr "No s'ha pogut afegit l'habilitat %s"
 
