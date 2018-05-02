@@ -671,7 +671,7 @@ msgstr "문서 제목"
 
 #: common/docman/DocumentGroup.class.php:101
 msgid "Name is required"
-msgstr ""
+msgstr "이름이 필요합니다"
 
 #: common/docman/DocumentGroup.class.php:110
 #: common/docman/DocumentGroup.class.php:490
@@ -2302,7 +2302,6 @@ msgstr ""
 #: plugins/mantisbt/view/admin/editVersion.php:79
 #: plugins/mantisbt/view/roadmap.php:98 plugins/mantisbt/view/roadmap.php:147
 #: www/frs/admin/editrelease.php:348 www/frs/reporting/downloads.php:197
-#, fuzzy
 msgid "Release"
 msgstr "릴리즈"
 
@@ -2335,7 +2334,7 @@ msgstr "릴리즈"
 #: www/project/admin/tools.php:305 www/reporting/timecategory.php:99
 #: www/scm/admin/index.php:176
 msgid "Update"
-msgstr ""
+msgstr "갱신"
 
 #: common/forum/ForumAdmin.class.php:400
 #, fuzzy
@@ -2403,9 +2402,9 @@ msgstr "게시판을 추가할 때 오류가 발생하였습니다."
 
 #: common/forum/Forum.class.php:241 cronjobs/homedirs.php:156
 #: www/account/first.php:29
-#, fuzzy, php-format
+#, php-format
 msgid "Welcome to %s"
-msgstr "환영합니다: %1$s"
+msgstr "환영합니다: %s"
 
 #: common/forum/Forum.class.php:265
 #, fuzzy
@@ -2563,7 +2562,6 @@ msgstr ""
 
 #: common/forum/ForumHTML.class.php:266
 #: plugins/forumml/www/forumml_utils.php:556 www/forum/message.php:123
-#, fuzzy
 msgid "Reply"
 msgstr "답글"
 
@@ -3144,12 +3142,10 @@ msgstr "잘못된 Unix Name."
 
 #: common/include/Group.class.php:318 common/include/Group.class.php:322
 #: common/include/User.class.php:346
-#, fuzzy
 msgid "Unix name already taken."
 msgstr "이미 존재하는 유닉스 이름입니다."
 
 #: common/include/Group.class.php:325
-#, fuzzy
 msgid ""
 "Please describe your Registration Project Purpose and Summarization in a "
 "more comprehensive manner."
@@ -3479,17 +3475,15 @@ msgstr "귀하가 제출하신 %s 프로젝트가 거부되었습니다."
 #: common/include/Group.class.php:2634 common/include/Group.class.php:2688
 #: common/include/Group.class.php:2706 www/register/index.php:183
 #: www/register/index.php:189
-#, fuzzy
 msgid "Project Full Name"
-msgstr "새 프로젝트 이름"
+msgstr "프로젝트 이름"
 
 #: common/include/Group.class.php:2635 plugins/projectlabels/www/index.php:172
 #: www/admin/approve-pending.php:190 www/admin/database.php:155
 #: www/admin/groupedit.php:170 www/admin/vhost.php:118
 #: www/register/index.php:214
-#, fuzzy
 msgid "Project Unix Name"
-msgstr "새 프로젝트 이름"
+msgstr "프로젝트 Unix Name"
 
 #: common/include/Group.class.php:2636
 msgid "Reasons for negative decision"
@@ -3808,7 +3802,7 @@ msgstr "관리"
 #: www/admin/groupedit.php:99 www/admin/useredit.php:276
 #: www/admin/useredit.php:307
 msgid "Project Admin"
-msgstr ""
+msgstr "프로젝트 관리"
 
 #: common/include/Navigation.class.php:424 www/activity/index.php:95
 #: www/activity/index.php:179 www/activity/index.php:265
@@ -4438,7 +4432,7 @@ msgstr ""
 #: www/people/admin/index.php:53 www/people/admin/index.php:66
 #: www/pm/admin/index.php:98 www/survey/rating_resp.php:56
 msgid "Insert Error"
-msgstr ""
+msgstr "입력 실패"
 
 #: common/include/User.class.php:443
 msgid "Could Not Get User Id: "
@@ -4530,9 +4524,8 @@ msgid "Error: Cannot Update User Status:"
 msgstr ""
 
 #: common/include/User.class.php:939 common/include/User.class.php:991
-#, fuzzy
 msgid "User with this email already exists."
-msgstr "사용자 ID가 이미 존재합니다."
+msgstr "누군가 이 이메일 주소를 이미 사용하고 있습니다."
 
 #: common/include/User.class.php:1099
 #, fuzzy, php-format
@@ -5655,7 +5648,6 @@ msgstr "* 요청 표시 > %s일 지났습니다."
 
 #: common/tracker/actions/browse.php:736 common/tracker/actions/browse.php:780
 #: www/pm/browse_task.php:359 www/pm/browse_task.php:388
-#, fuzzy
 msgid "Mass Update"
 msgstr "대량 갱신"
 
@@ -7966,9 +7958,8 @@ msgid "List the last 10 pieces of news posted by the project members."
 msgstr ""
 
 #: common/widget/Widget_ProjectMembers.class.php:33
-#, fuzzy
 msgid "Project Members"
-msgstr "프로젝트 멤버 목록"
+msgstr "프로젝트 멤버"
 
 #: common/widget/Widget_ProjectMembers.class.php:48
 msgid "Project Admins"
@@ -8394,9 +8385,8 @@ msgstr "사용자 ID:"
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:79
 #: plugins/authldap/include/AuthLDAPPlugin.class.php:209
 #: www/account/verify.php:86
-#, fuzzy
 msgid "Password"
-msgstr "비밀번호:"
+msgstr "비밀번호"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:79
 #: plugins/authldap/include/AuthLDAPPlugin.class.php:209
@@ -14619,7 +14609,7 @@ msgstr "나의 스킬 프로필 편집"
 
 #: www/account/index.php:140 www/admin/search.php:76
 msgid "Member since"
-msgstr ""
+msgstr "가입한 날"
 
 #: www/account/index.php:144 www/admin/useredit.php:130
 #: www/include/user_profile.php:68
@@ -14638,7 +14628,7 @@ msgstr ""
 #: www/snippet/snippet_utils.php:187 www/snippet/snippet_utils.php:221
 #: www/snippet/submit.php:124 www/stats/i18n.php:34
 msgid "Language"
-msgstr ""
+msgstr "언어"
 
 #: www/account/index.php:180 www/account/register.php:195
 msgid "Timezone:"
@@ -15506,7 +15496,6 @@ msgstr ""
 #: www/admin/grouplist.php:69 www/admin/search.php:148
 #: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:75
 #: www/register/index.php:236 www/register/index.php:238
-#, fuzzy
 msgid "Unix Name"
 msgstr "Unix 이름"
 
@@ -15517,7 +15506,7 @@ msgstr ""
 #: www/admin/grouplist.php:72 www/snippet/snippet_utils.php:219
 #: www/snippet/submit.php:118
 msgid "License"
-msgstr ""
+msgstr "저작권"
 
 #: www/admin/grouplist.php:100
 #, fuzzy
@@ -16795,9 +16784,9 @@ msgstr "새글 올리기"
 
 #: www/forum/admin/index.php:374 www/forum/admin/index.php:450
 #: www/forum/index.php:58
-#, fuzzy, php-format
+#, php-format
 msgid "No Forums Found for %s"
-msgstr "%1$s에 대한 게시판이 없습니다."
+msgstr "%s에 대한 게시판이 없습니다"
 
 #: www/forum/admin/index.php:404
 #, php-format
@@ -17089,7 +17078,6 @@ msgstr "릴리즈 편집"
 
 #: www/frs/admin/editrelease.php:226 www/frs/admin/editrelease.php:349
 #: www/frs/admin/qrs.php:183
-#, fuzzy
 msgid "Release Date"
 msgstr "릴리즈 날짜"
 
@@ -17146,13 +17134,12 @@ msgid "Submit/Refresh"
 msgstr "제출/갱신"
 
 #: www/frs/admin/editrelease.php:288
-#, fuzzy
 msgid "Add Files To This Release"
-msgstr "3단계: 이 릴리즈의 파일 편집하기"
+msgstr "이 릴리즈에 파일 추가"
 
 #: www/frs/admin/editrelease.php:289
 msgid "Now, choose a file to upload into the system."
-msgstr ""
+msgstr "이제 업로드할 파일을 선택합니다."
 
 #: www/frs/admin/editrelease.php:298 www/frs/admin/qrs.php:200
 #, php-format
@@ -17188,9 +17175,8 @@ msgstr ""
 "대로 나타나지 않습니다."
 
 #: www/frs/admin/editrelease.php:349
-#, fuzzy
 msgid "Processor"
-msgstr "프로세서 타입"
+msgstr "프로세서"
 
 #: www/frs/admin/editrelease.php:371
 msgid "Update/Refresh"
@@ -17233,38 +17219,36 @@ msgid ""
 "You can use packages to group different file releases together, or use them "
 "however you like."
 msgstr ""
+"서로 다른 파일 릴리즈를 패키지 단위로 처리하시거나 또는 원하시는 대로 설정하"
+"실 수 있습니다."
 
 #: www/frs/admin/index.php:129
 msgid "An example of packages:"
-msgstr ""
+msgstr "패키지 예:"
 
 #: www/frs/admin/index.php:131
-#, fuzzy
 msgid "Your Packages:"
-msgstr "패키지:"
+msgstr "여러분의 패키지:"
 
 #: www/frs/admin/index.php:133
 msgid "Define your packages"
-msgstr ""
+msgstr "패키지를 정의합니다"
 
 #: www/frs/admin/index.php:134
-#, fuzzy
 msgid "Create new releases of packages"
-msgstr "새로운 릴리즈를 생성하시려면 이곳을 클릭하세요."
+msgstr "해당 패키지에 새 릴리즈를 추가합니다"
 
 #: www/frs/admin/index.php:136
-#, fuzzy
 msgid "Releases of Packages"
-msgstr "릴리즈 노트"
+msgstr "패키지에 딸린 릴리즈"
 
 #: www/frs/admin/index.php:137
 msgid "A release of a package can contain multiple files."
-msgstr ""
+msgstr "패키지에 딸린 릴리즈는 여러개의 파일을 포함할 수 있습니다."
 
 #: www/frs/admin/index.php:138
-#, fuzzy
 msgid "Examples of Releases"
-msgstr "최근 파일 릴리즈"
+msgstr "릴리즈 예"
 
 #: www/frs/admin/index.php:140
 msgid ""
@@ -17641,13 +17625,12 @@ msgstr ""
 "리자가 작성한 미리 준비한 의견들의 목록을 표시합니다."
 
 #: www/include/html.php:411
-#, fuzzy
 msgid ""
 "If you are a project admin you can click the “Manage Canned Responses” link "
 "to define your own canned responses"
 msgstr ""
 "프로젝트 관리자는 '(관리)' 링크를 클릭하여 미리 준비한 의견을 작성할 수 있습"
-"니다."
+"니다"
 
 #: www/include/html.php:413
 msgid ""
@@ -19112,9 +19095,9 @@ msgid "User updated successfully"
 msgstr "성공적으로 갱신하였습니다."
 
 #: www/people/editprofile.php:100
-#, fuzzy, php-format
+#, php-format
 msgid "Failed to add the skill %s"
-msgstr "스킬 추가 작업이 실패하였습니다."
+msgstr "스킬 추가 작업이 실패하였습니다 %s"
 
 #: www/people/editprofile.php:102
 msgid "Skill added successfully"
@@ -19182,9 +19165,9 @@ msgid "No skills selected to delete."
 msgstr "삭제할 스킬을 선택하지 않았습니다."
 
 #: www/people/editprofile.php:187
-#, fuzzy, php-format
+#, php-format
 msgid "Failed to delete any skills: %s"
-msgstr "스킬 삭제 작업이 실패하였습니다."
+msgstr "스킬 삭제 작업이 실패하였습니다: %s"
 
 #: www/people/editprofile.php:189
 #, fuzzy
@@ -19345,7 +19328,7 @@ msgstr ""
 
 #: www/people/index.php:95
 msgid "more latest posts"
-msgstr ""
+msgstr "more latest posts"
 
 #: www/people/people_utils.php:95
 msgid "Must select a skill ID"
@@ -20797,9 +20780,8 @@ msgid "Use Tasks"
 msgstr ""
 
 #: www/project/admin/tools.php:217
-#, fuzzy
 msgid "Use Documents"
-msgstr "게시판 사용"
+msgstr "문서 관리자 사용"
 
 #: www/project/admin/tools.php:230
 msgid "Use Surveys"
@@ -20811,7 +20793,7 @@ msgstr "뉴스 기능 사용"
 
 #: www/project/admin/tools.php:256
 msgid "Use Source Code"
-msgstr ""
+msgstr "SCM 사용"
 
 #: www/project/admin/tools.php:269
 msgid "Use File Release System"
@@ -21781,7 +21763,6 @@ msgid "Error: Only the creator of a package version can add snippets to it."
 msgstr "오류 - 패키지 버전을 만든 사람만이 거기에 코드를 추가할 수 있습니다."
 
 #: www/snippet/add_snippet_to_package.php:83 www/snippet/addversion.php:40
-#, fuzzy
 msgid "Error: snippet does not exist"
 msgstr "오류 - 코드가 존재하지 않습니다"
 
@@ -22305,9 +22286,9 @@ msgid_plural ""
 msgstr[0] ""
 
 #: www/softwaremap/tag_cloud.php:162
-#, fuzzy, php-format
+#, php-format
 msgid "Activity Percentile: <strong>%3.0f</strong>"
-msgstr "프로젝트 활동 상황:"
+msgstr "프로젝트 활동 상황: <strong>%3.0f</strong>"
 
 #: www/softwaremap/trove_list.php:56
 msgid "Software Map"
