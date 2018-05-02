@@ -631,7 +631,7 @@ msgstr ""
 
 #: common/docman/DocumentGroup.class.php:101
 msgid "Name is required"
-msgstr ""
+msgstr "Nazwa jest wymagana"
 
 #: common/docman/DocumentGroup.class.php:110
 #: common/docman/DocumentGroup.class.php:490
@@ -1203,7 +1203,7 @@ msgstr ""
 #: www/snippet/browse.php:85 www/snippet/package.php:147
 #: www/snippet/snippet_utils.php:144 www/snippet/submit.php:105
 msgid "Title"
-msgstr ""
+msgstr "Tytuł"
 
 #: common/docman/views/listfile.php:218
 #: common/docman/views/listtrashfile.php:129
@@ -3509,7 +3509,7 @@ msgstr ""
 #: common/include/Navigation.class.php:216
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:86
 msgid "New Account"
-msgstr ""
+msgstr "Utwórz konto"
 
 #: common/include/Navigation.class.php:240
 #: plugins/quota_management/www/quota.php:163 www/account/lostpw.php:74
@@ -4163,7 +4163,7 @@ msgstr "Podane hasła są różne."
 
 #: common/include/User.class.php:332
 msgid "Invalid Password"
-msgstr ""
+msgstr "Niepoprawne hasło"
 
 #: common/include/User.class.php:337
 msgid "Invalid Unix Name (must not contain uppercase characters)"
@@ -5558,7 +5558,7 @@ msgstr ""
 #: plugins/mantisbt/view/viewNote.php:42 www/pm/csv.php:93
 #: www/pm/format_csv.php:86
 msgid "Notes"
-msgstr ""
+msgstr "Uwagi"
 
 #: common/tracker/actions/format_csv.php:88 www/pm/format_csv.php:94
 msgid "Some international versions of Microsoft Excel use “;” instead of “,”."
@@ -12998,9 +12998,9 @@ msgstr "Przeglądaj Repozytorium Git"
 #: plugins/scmgit/common/GitPlugin.class.php:202
 msgid "Developer Access to the Git repository via SSH"
 msgid_plural "Developer Access to the Git repositories via SSH"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Dostęp deweloperów do repozytorium Git poprzez SSH"
+msgstr[1] "Dostęp deweloperów do repozytorium Git poprzez SSH"
+msgstr[2] "Dostęp deweloperów do repozytorium Git poprzez SSH"
 
 #: plugins/scmgit/common/GitPlugin.class.php:170
 #: plugins/scmgit/common/GitPlugin.class.php:189
@@ -13834,13 +13834,12 @@ msgstr ""
 
 #: www/account/index.php:140 www/admin/search.php:76
 msgid "Member since"
-msgstr ""
+msgstr "Użytkownik od"
 
 #: www/account/index.php:144 www/admin/useredit.php:130
 #: www/include/user_profile.php:68
-#, fuzzy
 msgid "User Id"
-msgstr "ID użytkownika:"
+msgstr "ID użytkownika"
 
 #: www/account/index.php:156 www/account/register.php:177
 msgid "First Name:"
@@ -13862,7 +13861,7 @@ msgstr "Strefa czasowa:"
 
 #: www/account/index.php:186 www/account/register.php:203
 msgid "Theme"
-msgstr ""
+msgstr "Motyw"
 
 #: www/account/index.php:192 www/account/register.php:208
 msgid "Country:"
@@ -20529,7 +20528,6 @@ msgid "Search All"
 msgstr ""
 
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:70
-#, fuzzy
 msgid "Search for documents"
 msgstr "Szukaj w dokumentach"
 
