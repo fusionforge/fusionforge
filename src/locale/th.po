@@ -689,9 +689,8 @@ msgid "Unable to open ZIP file."
 msgstr ""
 
 #: common/docman/DocumentGroup.class.php:824
-#, fuzzy
 msgid "(Title must be at least 5 characters.)"
-msgstr "ชื่อจะต้องมีอย่างน้อย 5 ตัวอักษร"
+msgstr "(ชื่อจะต้องมีอย่างน้อย 5 ตัวอักษร)"
 
 #: common/docman/DocumentGroup.class.php:829
 msgid "Injected by ZIP:"
