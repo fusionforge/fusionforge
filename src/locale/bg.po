@@ -82,9 +82,9 @@ msgid "Unknown type submission."
 msgstr ""
 
 #: common/docman/actions/addfile.php:193
-#, fuzzy, php-format
+#, php-format
 msgid "Document %s submitted successfully."
-msgstr "Документът е добавен успешно"
+msgstr "Документът %s е добавен успешно."
 
 #: common/docman/actions/addfile.php:196
 #, fuzzy, php-format
@@ -560,7 +560,6 @@ msgid "Error updating document group:"
 msgstr "Грешка при добавянето на форум"
 
 #: common/docman/Document.class.php:252
-#, fuzzy
 msgid "Document: Invalid docid"
 msgstr "Невалиден идентификатор на документ"
 
@@ -669,7 +668,7 @@ msgstr "Име на документа"
 
 #: common/docman/DocumentGroup.class.php:101
 msgid "Name is required"
-msgstr ""
+msgstr "Името е задължително"
 
 #: common/docman/DocumentGroup.class.php:110
 #: common/docman/DocumentGroup.class.php:490
@@ -1000,7 +999,6 @@ msgid "File Name"
 msgstr ""
 
 #: common/docman/views/addfile.php:193
-#, fuzzy
 msgid "Documents folder that document belongs in"
 msgstr "Папка в която да се постави документа"
 
@@ -1185,9 +1183,8 @@ msgstr ""
 
 #: common/docman/views/listfile.php:112
 #: common/docman/views/listtrashfile.php:73
-#, fuzzy
 msgid "Invalid folder"
-msgstr "Грешна парола"
+msgstr "Невалиден идентификатор на папка"
 
 #: common/docman/views/listfile.php:158
 #: common/docman/views/listtrashfile.php:109
@@ -1208,7 +1205,6 @@ msgstr ""
 #: common/docman/views/listfile.php:175 common/docman/views/listfile.php:206
 #: common/docman/views/listtrashfile.php:118
 #: common/docman/views/listtrashfile.php:123
-#, fuzzy
 msgid "Edit this folder"
 msgstr "Редактиране на папка"
 
@@ -2027,7 +2023,7 @@ msgstr ""
 #: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:51
 #: www/stats/lastlogins.php:50
 msgid "Date"
-msgstr ""
+msgstr "ДАТА"
 
 #: common/docman/views/reporting.php:179
 #, fuzzy
@@ -2288,7 +2284,7 @@ msgstr "Име на форума"
 #: plugins/message/common/messagePlugin.class.php:35 www/admin/cronman.php:44
 #: www/sendmessage.php:176
 msgid "Message"
-msgstr ""
+msgstr "Съобщения"
 
 #: common/forum/ForumAdmin.class.php:333
 #, fuzzy
@@ -2397,7 +2393,6 @@ msgid "Mailing List exists with same name."
 msgstr "Име на списъка:"
 
 #: common/forum/Forum.class.php:230
-#, fuzzy
 msgid "Error Adding Forum"
 msgstr "Грешка при добавянето на форум"
 
@@ -2559,7 +2554,7 @@ msgstr ""
 #: www/pm/include/ProjectTaskHTML.class.php:204
 #: www/project/admin/project_admin_utils.php:162
 msgid "By"
-msgstr ""
+msgstr "От"
 
 #: common/forum/ForumHTML.class.php:266
 #: plugins/forumml/www/forumml_utils.php:556 www/forum/message.php:123
@@ -2798,9 +2793,8 @@ msgstr ""
 
 #: common/frs/FRSPackage.class.php:143 common/frs/FRSPackage.class.php:375
 #: common/frs/FRSRelease.class.php:121 common/frs/FRSRelease.class.php:399
-#, fuzzy
 msgid "FRSPackage Name Must Be At Least 3 Characters"
-msgstr "Името на форума трябва да бъде поне 3 символа"
+msgstr "Името на FRSPackage трябва да бъде поне 3 символа"
 
 #: common/frs/FRSPackage.class.php:147
 msgid "Package Name can only be alphanumeric"
@@ -3048,7 +3042,6 @@ msgstr "Грешка при добавянето на форум"
 #: www/survey/admin/show_questions.php:35
 #: www/survey/admin/show_results_individual.php:35
 #: www/survey/admin/show_results.php:66 www/survey/admin/survey.php:53
-#, fuzzy
 msgid "Permission denied."
 msgstr "Разрешението е отказано."
 
@@ -3174,9 +3167,8 @@ msgid "Error: Cannot get group id: %s"
 msgstr "Грешка при добавянето на форум"
 
 #: common/include/Group.class.php:427 common/include/Group.class.php:510
-#, fuzzy
 msgid "Could not get permission."
-msgstr "Разрешение не беше получено"
+msgstr "Разрешение не беше получено."
 
 #: common/include/Group.class.php:448
 #, fuzzy, php-format
@@ -3618,7 +3610,7 @@ msgstr ""
 #: www/stats/site_stats_utils.php:239 www/stats/site_stats_utils.php:364
 #: www/stats/site_stats_utils.php:419
 msgid "Tasks"
-msgstr ""
+msgstr "Управление на задачи"
 
 #: common/include/group_section_texts.php:32
 #: common/reporting/report_utils.php:666
@@ -4384,9 +4376,8 @@ msgid "Passwords do not match"
 msgstr "Паролата и потвърждението и не съвпадат"
 
 #: common/include/User.class.php:332
-#, fuzzy
 msgid "Invalid Password"
-msgstr "Грешна парола:"
+msgstr "Грешна парола"
 
 #: common/include/User.class.php:337
 msgid "Invalid Unix Name (must not contain uppercase characters)"
@@ -4441,9 +4432,8 @@ msgstr ""
 "-- Екипът на %4$s\n"
 
 #: common/include/User.class.php:493
-#, fuzzy
 msgid "Enjoy the site."
-msgstr "Премахване"
+msgstr "Приятно използване на портала."
 
 #: common/include/User.class.php:495 common/mail/MailingList.class.php:205
 #: plugins/authbuiltin/www/post-login.php:122
@@ -4497,9 +4487,8 @@ msgid "Error: Cannot Update User Status:"
 msgstr "Разрешение не беше получено"
 
 #: common/include/User.class.php:939 common/include/User.class.php:991
-#, fuzzy
 msgid "User with this email already exists."
-msgstr "Това потребителско име вече е заето."
+msgstr "Потребител с такъв електронен адрес вече е регистриран."
 
 #: common/include/User.class.php:1099
 #, php-format
@@ -4734,9 +4723,8 @@ msgstr ""
 
 #: common/pm/ProjectTask.class.php:150 common/pm/ProjectTask.class.php:948
 #: www/pm/ganttpage.php:249
-#, fuzzy
 msgid "category"
-msgstr "Категория"
+msgstr "категория"
 
 #: common/pm/ProjectTask.class.php:235
 #, fuzzy
@@ -5185,7 +5173,7 @@ msgstr ""
 #: www/snippet/package.php:176 www/snippet/submit.php:145
 #: www/survey/include/SurveyHTML.class.php:559 www/tracker/roadmap.php:444
 msgid "Submit"
-msgstr ""
+msgstr "Регистриране"
 
 #: common/tracker/actions/admin-tracker.php:31
 #, fuzzy
@@ -7602,9 +7590,8 @@ msgstr "Моите Проекти"
 #: common/widget/Widget_MyProjects.class.php:52
 #: common/widget/Widget_MyProjects.class.php:122
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:47
-#, fuzzy
 msgid "You're not a member of any project"
-msgstr "Вие не сте член на никой активен проект"
+msgstr "Вие не сте член на никой проект"
 
 #: common/widget/Widget_MyProjects.class.php:87
 msgid "Quit this project?"
@@ -7825,7 +7812,7 @@ msgstr ""
 #: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:324
 #, php-format
 msgid "Registered"
-msgstr ""
+msgstr "Регистриране"
 
 #: common/widget/Widget_ProjectInfo.class.php:65
 msgid ": "
@@ -7933,9 +7920,8 @@ msgid "List the last 10 pieces of news posted by the project members."
 msgstr ""
 
 #: common/widget/Widget_ProjectMembers.class.php:33
-#, fuzzy
 msgid "Project Members"
-msgstr "Общо за целия проект"
+msgstr "Участници в проекта"
 
 #: common/widget/Widget_ProjectMembers.class.php:48
 msgid "Project Admins"
@@ -8384,9 +8370,8 @@ msgstr "[Изгубена парола]"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:88
 #: www/account/pending-resend.php:53 www/account/register.php:281
-#, fuzzy
 msgid "Resend confirmation email to a pending account"
-msgstr "[Повторно изпращане на писмото за активиране на акаунт]"
+msgstr "Повторно изпращане на писмото за активиране на акаунт"
 
 #: plugins/authbuiltin/www/post-login.php:106
 #: plugins/authldap/www/post-login.php:105
@@ -9535,7 +9520,6 @@ msgstr ""
 
 #: plugins/forumml/www/index.php:59 plugins/forumml/www/message.php:95
 #: plugins/forumml/www/upload.php:48
-#, fuzzy
 msgid "You are not allowed to access this page"
 msgstr "Нямате право да достъпвате тази страница"
 
@@ -10038,9 +10022,9 @@ msgstr ""
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:228
 #: www/search/include/renderers/HtmlSearchRenderer.class.php:100
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:112
-#, fuzzy, php-format
+#, php-format
 msgid "No matches found for “%s”"
-msgstr "Няма открити резултати за <em>%s</em>"
+msgstr "Няма открити резултати за “%s”"
 
 #: plugins/globalsearch/www/index.php:162
 #: www/search/include/renderers/HtmlGroupSearchRenderer.class.php:69
@@ -11083,9 +11067,9 @@ msgid "Add Mailing List"
 msgstr ""
 
 #: plugins/mailman/www/index.php:39 www/mail/index.php:53
-#, fuzzy, php-format
+#, php-format
 msgid "Mailing Lists for %s"
-msgstr "Пощенски списъци"
+msgstr "Пощенски списъци за %s"
 
 #: plugins/mailman/www/index.php:55 www/mail/index.php:68
 #, php-format
@@ -11516,7 +11500,6 @@ msgid "Add a new category"
 msgstr "Публикуване на документ"
 
 #: plugins/mantisbt/view/admin/addVersion.php:34
-#, fuzzy
 msgid "Add a new version"
 msgstr "Изпращане на нова версия"
 
@@ -13268,7 +13251,7 @@ msgstr ""
 #: plugins/quota_management/www/quota.php:162
 #: plugins/quota_management/www/quota.php:186
 msgid "project"
-msgstr ""
+msgstr "проект"
 
 #: plugins/quota_management/www/quota.php:168
 #: plugins/quota_management/www/quota.php:192
@@ -13564,7 +13547,7 @@ msgstr ""
 
 #: plugins/scmccase/common/CCasePlugin.class.php:111
 msgid "History"
-msgstr ""
+msgstr "История"
 
 #: plugins/scmccase/common/CCasePlugin.class.php:113
 #: plugins/scmccase/common/CCasePlugin.class.php:122
@@ -14376,9 +14359,8 @@ msgstr ""
 
 #: www/account/change_email-complete.php:48 www/account/lostlogin.php:50
 #: www/account/unsubscribe.php:48
-#, fuzzy
 msgid "Invalid confirmation hash."
-msgstr "Невалиден хеш за потвърждение"
+msgstr "Невалиден хеш за потвърждение."
 
 #: www/account/change_email-complete.php:61
 msgid "Email Change Complete"
@@ -14647,7 +14629,7 @@ msgstr "Редактиране на Вашия профил"
 
 #: www/account/index.php:140 www/admin/search.php:76
 msgid "Member since"
-msgstr ""
+msgstr "Член от"
 
 #: www/account/index.php:144 www/admin/useredit.php:130
 #: www/include/user_profile.php:68
@@ -15136,9 +15118,9 @@ msgid "Modify the %s below:"
 msgstr ""
 
 #: www/admin/admin_table.php:263
-#, fuzzy, php-format
+#, php-format
 msgid "%s successfully modified."
-msgstr "Обновено успешно"
+msgstr "%s Обновено успешно."
 
 #: www/admin/admin_table.php:358
 #, fuzzy, php-format
@@ -16061,9 +16043,8 @@ msgstr[1] ""
 #: www/project/admin/massadd.php:90 www/project/admin/massfinish.php:74
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:45
 #: www/top/topusers.php:64
-#, fuzzy
 msgid "Real Name"
-msgstr "Фамилия:"
+msgstr "Истинско Име"
 
 #: www/admin/search.php:96
 #, fuzzy
@@ -19443,9 +19424,8 @@ msgid "Invalid ID"
 msgstr ""
 
 #: www/people/people_utils.php:393
-#, fuzzy
 msgid "No categories found."
-msgstr "Няма намерени категории"
+msgstr "Няма намерени категории."
 
 #: www/people/people_utils.php:438
 msgid "Date Opened"
@@ -20400,7 +20380,7 @@ msgstr ""
 
 #: www/project/admin/database.php:205
 msgid "New Password"
-msgstr ""
+msgstr "Нова парола"
 
 #: www/project/admin/database.php:206
 msgid "Confirm New"
@@ -20811,9 +20791,8 @@ msgid "Use Mailing Lists"
 msgstr "Модул \"Пощенски списъци\""
 
 #: www/project/admin/tools.php:204
-#, fuzzy
 msgid "Use Tasks"
-msgstr "Модул \"Тракер\""
+msgstr "Модул Управление на задачи"
 
 #: www/project/admin/tools.php:217
 #, fuzzy
@@ -22317,9 +22296,9 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: www/softwaremap/tag_cloud.php:162
-#, fuzzy, php-format
+#, php-format
 msgid "Activity Percentile: <strong>%3.0f</strong>"
-msgstr "Процент на активност:&nbsp;"
+msgstr "Процент на активност: <strong>%3.0f</strong>"
 
 #: www/softwaremap/trove_list.php:56
 msgid "Software Map"
@@ -22649,7 +22628,6 @@ msgid "Survey Added"
 msgstr "Администриране"
 
 #: www/survey/admin/survey.php:91
-#, fuzzy
 msgid "Edit a Survey"
 msgstr "Редактиране на проучване"
 
@@ -22876,7 +22854,6 @@ msgid "Vote for Survey"
 msgstr "Редактиране на проучване"
 
 #: www/survey/survey.php:55 www/survey/survey_resp.php:48
-#, fuzzy
 msgid ""
 "For some reason, the Project ID or Survey ID did not make it to this page"
 msgstr ""
