@@ -30,9 +30,8 @@ msgstr "Tillägg av användare lyckades"
 #: common/docman/DocumentGroup.class.php:834
 #: common/tracker/actions/tracker.php:133
 #: common/tracker/actions/tracker.php:361 www/project/admin/editimages.php:58
-#, fuzzy
 msgid "Invalid file name."
-msgstr "Ogiltigt fullständigt namn"
+msgstr "Ogiltigt filnamn."
 
 #: common/account/actions/deletesshkey.php:30
 msgid "SSH Key deleted successfully."
@@ -665,9 +664,8 @@ msgid "Document Folder"
 msgstr "Dokumentrubrik"
 
 #: common/docman/DocumentGroup.class.php:101
-#, fuzzy
 msgid "Name is required"
-msgstr "Namnet är reserverat för CVS."
+msgstr "Namn är obligatoriskt"
 
 #: common/docman/DocumentGroup.class.php:110
 #: common/docman/DocumentGroup.class.php:490
@@ -2307,9 +2305,8 @@ msgstr "Handling"
 #: plugins/mantisbt/view/admin/editVersion.php:79
 #: plugins/mantisbt/view/roadmap.php:98 plugins/mantisbt/view/roadmap.php:147
 #: www/frs/admin/editrelease.php:348 www/frs/reporting/downloads.php:197
-#, fuzzy
 msgid "Release"
-msgstr "Utgåvor"
+msgstr "Utgåva"
 
 #: common/forum/ForumAdmin.class.php:360 common/forum/ForumHTML.class.php:328
 #: common/forum/ForumHTML.class.php:545
@@ -2340,7 +2337,7 @@ msgstr "Utgåvor"
 #: www/project/admin/tools.php:305 www/reporting/timecategory.php:99
 #: www/scm/admin/index.php:176
 msgid "Update"
-msgstr ""
+msgstr "Uppdaterad"
 
 #: common/forum/ForumAdmin.class.php:400
 #, fuzzy
@@ -2409,7 +2406,7 @@ msgstr "Fel vid tillägg i forum"
 
 #: common/forum/Forum.class.php:241 cronjobs/homedirs.php:156
 #: www/account/first.php:29
-#, fuzzy, php-format
+#, php-format
 msgid "Welcome to %s"
 msgstr "Välkommen till %s"
 
@@ -2789,9 +2786,8 @@ msgid "Error Adding Release: "
 msgstr "Fel vid tillägg av databas"
 
 #: common/frs/FRSFile.class.php:232
-#, fuzzy
 msgid "Invalid file_id"
-msgstr "Ogiltigt fullständigt namn"
+msgstr "Ogiltig file_id"
 
 #: common/frs/FRSFile.class.php:416 common/frs/FRSPackage.class.php:400
 #: common/frs/FRSRelease.class.php:438 common/include/Error.class.php:167
@@ -2827,9 +2823,8 @@ msgid "Error Adding Package: "
 msgstr "Fel vid tillägg av databas"
 
 #: common/frs/FRSPackage.class.php:209
-#, fuzzy
 msgid "Invalid package_id"
-msgstr "Ogiltig parameter"
+msgstr "Ogiltig package_id"
 
 #: common/frs/FRSPackage.class.php:327
 msgid "Error On querying monitor count: "
@@ -3736,7 +3731,6 @@ msgid "Main Page"
 msgstr "Användarbedömningssida"
 
 #: common/include/Navigation.class.php:245
-#, fuzzy
 msgid "My Page"
 msgstr "Min sida"
 
@@ -3777,7 +3771,6 @@ msgstr ""
 #: plugins/quota_management/www/quota_admin.php:38
 #: plugins/quota_management/www/quota.php:36 www/admin/globalroleedit.php:140
 #: www/admin/index.php:39 www/admin/vhost.php:106
-#, fuzzy
 msgid "Site Admin"
 msgstr "Webbplats admin"
 
@@ -4428,9 +4421,8 @@ msgid "Passwords do not match"
 msgstr "Lösenorden stämmer inte"
 
 #: common/include/User.class.php:332
-#, fuzzy
 msgid "Invalid Password"
-msgstr "Ogiltigt lösenord:"
+msgstr "Ogiltigt lösenord"
 
 #: common/include/User.class.php:337
 #, fuzzy
@@ -4454,7 +4446,7 @@ msgstr ""
 #: www/people/admin/index.php:53 www/people/admin/index.php:66
 #: www/pm/admin/index.php:98 www/survey/rating_resp.php:56
 msgid "Insert Error"
-msgstr ""
+msgstr "Infogandet misslyckades"
 
 #: common/include/User.class.php:443
 msgid "Could Not Get User Id: "
@@ -5044,14 +5036,12 @@ msgid "Error: search query too short"
 msgstr ""
 
 #: common/survey/Survey.class.php:109 common/survey/Survey.class.php:157
-#, fuzzy
 msgid "Update Failed: Survey Title Required"
-msgstr "UPPDATERING MISSLYCKADES: Undersökning obligatoriskrubrik"
+msgstr "Uppdatering misslyckades: Undersökning obligatoriskrubrik"
 
 #: common/survey/Survey.class.php:113
-#, fuzzy
 msgid "Update Failed: Survey Questions Required"
-msgstr "UPPDATERING MISSLYCKADES: Undersökning obligatoriskafrågor"
+msgstr "Uppdatering misslyckades: Undersökning obligatoriskafrågor"
 
 #: common/survey/Survey.class.php:167 common/survey/Survey.class.php:200
 msgid "The Survey data is not filled"
@@ -5061,7 +5051,7 @@ msgstr ""
 #: www/survey/admin/survey.php:100 www/survey/include/SurveyHTML.class.php:457
 #: www/survey/index.php:56
 msgid "No Survey is found"
-msgstr ""
+msgstr "Hittade inte undersökning"
 
 #: common/survey/SurveyFactory.class.php:59
 #: common/survey/SurveyQuestionFactory.class.php:57
@@ -5689,7 +5679,6 @@ msgstr "* Avser frågor > %s dagar gamla"
 
 #: common/tracker/actions/browse.php:736 common/tracker/actions/browse.php:780
 #: www/pm/browse_task.php:359 www/pm/browse_task.php:388
-#, fuzzy
 msgid "Mass Update"
 msgstr "Mass uppdatering"
 
@@ -6478,14 +6467,12 @@ msgstr "ArtifaktFil: Filnamn, typ, storlek, och data är obligatorisk"
 
 #: common/tracker/ArtifactHistory.class.php:53
 #: common/tracker/ArtifactMessage.class.php:53
-#, fuzzy
 msgid "Invalid Artifact"
-msgstr "Ogiltigt ID"
+msgstr "Ogiltigt Artifact"
 
 #: common/tracker/ArtifactHistory.class.php:82
-#, fuzzy
 msgid "Invalid ArtifactHistory ID"
-msgstr "Ogiltigt ID"
+msgstr "Ogiltigt ArtifactHistory ID"
 
 #: common/tracker/ArtifactMessage.class.php:89
 msgid "Error: Logged In User Bug Could Not Get User Object"
@@ -7213,9 +7200,8 @@ msgstr ""
 #: common/tracker/views/form-deletetracker.php:42
 #: www/forum/admin/index.php:185 www/frs/admin/deletepackage.php:71
 #: www/frs/admin/deleterelease.php:75 www/pm/admin/index.php:390
-#, fuzzy
 msgid "I am Really Sure"
-msgstr "Jag är säker"
+msgstr "Jag är riktigt säker"
 
 #: common/tracker/views/form-deletetracker.php:24
 #, fuzzy, php-format
@@ -8018,9 +8004,8 @@ msgid "List the last 10 pieces of news posted by the project members."
 msgstr ""
 
 #: common/widget/Widget_ProjectMembers.class.php:33
-#, fuzzy
 msgid "Project Members"
-msgstr "Projektmedlemslista"
+msgstr "Projektmedlemmar"
 
 #: common/widget/Widget_ProjectMembers.class.php:48
 msgid "Project Admins"
@@ -12634,7 +12619,7 @@ msgstr "Inga filtyper tillgängliga"
 #: plugins/quota_management/www/quota.php:179
 #: plugins/quota_management/www/quota.php:338
 msgid "name"
-msgstr ""
+msgstr "namn"
 
 #: plugins/projectimport/common/UploadedFiles.class.php:167
 #: plugins/projectimport/www/index.php:585
@@ -15196,7 +15181,7 @@ msgstr "Forum"
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:60
 #: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:52
 msgid "Directory"
-msgstr ""
+msgstr "Katalog"
 
 #: www/admin/admin_table.php:41
 #, fuzzy, php-format
@@ -15263,9 +15248,8 @@ msgstr "Redigera en grupp"
 
 #: www/admin/approve-pending.php:46 www/project/admin/tools.php:34
 #: www/snapshots.php:39 www/tarballs.php:40
-#, fuzzy
 msgid "Error creating group"
-msgstr "Fel vid skapande av gruppobjekt"
+msgstr "Fel vid skapande av grupp"
 
 #: www/admin/approve-pending.php:54 www/register/index.php:148
 #, php-format
@@ -15649,7 +15633,6 @@ msgstr ""
 #: www/admin/grouplist.php:69 www/admin/search.php:148
 #: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:75
 #: www/register/index.php:236 www/register/index.php:238
-#, fuzzy
 msgid "Unix Name"
 msgstr "Unixnamn"
 
@@ -16184,7 +16167,6 @@ msgstr[1] ""
 #: www/project/admin/massadd.php:90 www/project/admin/massfinish.php:74
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:45
 #: www/top/topusers.php:64
-#, fuzzy
 msgid "Real Name"
 msgstr "Verkligt namn"
 
@@ -16230,14 +16212,12 @@ msgid "New category short name (no spaces, Unix-like)"
 msgstr "Ny kategoriförkortning (inga mellanslag, Unix-liknande)"
 
 #: www/admin/trove/trove_cat_add.php:112
-#, fuzzy
 msgid "New category full name (maximum length is 80 chars)"
-msgstr "Nytt kategorinamn (VARCHAR 80)"
+msgstr "Nytt kategorinamn (max 80 tecken)"
 
 #: www/admin/trove/trove_cat_add.php:114
-#, fuzzy
 msgid "New category description (maximum length is 255 chars)"
-msgstr "Ny kategoribeskrivning (VARCHAR 255)"
+msgstr "Ny kategoribeskrivning (max 255 tecken)"
 
 #: www/admin/trove/trove_cat_edit.php:47
 msgid "Error: a category cannot be the same as its own parent: "
@@ -16439,9 +16419,8 @@ msgid "Operations"
 msgstr "Operationer"
 
 #: www/admin/useredit.php:286 www/include/user_home.php:99
-#, fuzzy
 msgid "This user is not a member of any project."
-msgstr "Denna utvecklare är inte medlem i någon grupp."
+msgstr "Denna användare är inte medlem i någon grupp."
 
 #: www/admin/useredit.php:289
 msgid "Add membership to new projects"
@@ -17270,9 +17249,8 @@ msgstr "Redigera utgåvor"
 
 #: www/frs/admin/editrelease.php:226 www/frs/admin/editrelease.php:349
 #: www/frs/admin/qrs.php:183
-#, fuzzy
 msgid "Release Date"
-msgstr "Utgåvans datum"
+msgstr "Utgåvodatum"
 
 #: www/frs/admin/editrelease.php:230 www/frs/admin/qrs.php:175
 #: www/frs/admin/showreleases.php:100 www/frs/shownotes.php:64
@@ -17328,13 +17306,12 @@ msgid "Submit/Refresh"
 msgstr "Lämna in/Visa om"
 
 #: www/frs/admin/editrelease.php:288
-#, fuzzy
 msgid "Add Files To This Release"
-msgstr "Steg 3: Redigera filer i denna utgåva"
+msgstr "Lägg till filer till denna utgåva"
 
 #: www/frs/admin/editrelease.php:289
 msgid "Now, choose a file to upload into the system."
-msgstr ""
+msgstr "Där efter, välj en fil att överföra in i systemet."
 
 #: www/frs/admin/editrelease.php:298 www/frs/admin/qrs.php:200
 #, php-format
@@ -17370,9 +17347,8 @@ msgstr ""
 "nedladdningarnas sammanfattningssida."
 
 #: www/frs/admin/editrelease.php:349
-#, fuzzy
 msgid "Processor"
-msgstr "Processortyp"
+msgstr "Processor"
 
 #: www/frs/admin/editrelease.php:371
 msgid "Update/Refresh"
@@ -17380,7 +17356,7 @@ msgstr "Uppdatera/Visa om"
 
 #: www/frs/admin/editrelease.php:385
 msgid "Delete File"
-msgstr ""
+msgstr "Ta bort fil"
 
 #: www/frs/admin/editrelease.php:394
 #, php-format
@@ -17407,7 +17383,6 @@ msgid "Click here to %1$s quick-release a file %2$s"
 msgstr "Klicka här för att %1$s snabbsläppa(SUS) en fil %2$s"
 
 #: www/frs/admin/index.php:127
-#, fuzzy
 msgid "Packages"
 msgstr "Paket"
 
@@ -17416,39 +17391,36 @@ msgid ""
 "You can use packages to group different file releases together, or use them "
 "however you like."
 msgstr ""
+"Du kan använda paket för att gruppera olika filutgåvor tillsammans eller "
+"använda dem som du vill."
 
 #: www/frs/admin/index.php:129
-#, fuzzy
 msgid "An example of packages:"
-msgstr "Lägg till kodstycken till paket"
+msgstr "Ett exempel på paket:"
 
 #: www/frs/admin/index.php:131
-#, fuzzy
 msgid "Your Packages:"
-msgstr "Paket:"
+msgstr "Ditt paket:"
 
 #: www/frs/admin/index.php:133
 msgid "Define your packages"
-msgstr ""
+msgstr "Definiera dina paket"
 
 #: www/frs/admin/index.php:134
-#, fuzzy
 msgid "Create new releases of packages"
-msgstr "För att skapa en ny utgåva klicka här."
+msgstr "Skapa ny utgåva av paket"
 
 #: www/frs/admin/index.php:136
-#, fuzzy
 msgid "Releases of Packages"
-msgstr "Utgåvonoteringar"
+msgstr "Utgåvor av paket"
 
 #: www/frs/admin/index.php:137
 msgid "A release of a package can contain multiple files."
-msgstr ""
+msgstr "En utgåva av ett paket kan innehålla flera filer."
 
 #: www/frs/admin/index.php:138
-#, fuzzy
 msgid "Examples of Releases"
-msgstr "Senaste filutgåvorna"
+msgstr "Exempel på utgåvor"
 
 #: www/frs/admin/index.php:140
 msgid ""
@@ -17457,7 +17429,6 @@ msgid ""
 msgstr ""
 
 #: www/frs/admin/index.php:155 www/frs/admin/showreleases.php:99
-#, fuzzy
 msgid "Package name"
 msgstr "Paketnamn"
 
@@ -19114,7 +19085,6 @@ msgid "Missing skill name."
 msgstr "Parameter saknas"
 
 #: www/people/admin/index.php:84
-#, fuzzy
 msgid "Add/Change Categories"
 msgstr "Lägg till/Redigera kategorier"
 
@@ -19277,7 +19247,6 @@ msgid "Posting fetch failed: %s"
 msgstr "inlägg misslyckades"
 
 #: www/people/editjob.php:154
-#, fuzzy
 msgid "No such posting for this project"
 msgstr "Inga sådana poster i detta projekt"
 
@@ -19311,9 +19280,9 @@ msgid "User updated successfully"
 msgstr "Uppdatering av användare lyckades"
 
 #: www/people/editprofile.php:100
-#, fuzzy, php-format
+#, php-format
 msgid "Failed to add the skill %s"
-msgstr "Misslyckdes att lägga till kompetens"
+msgstr "Misslyckdes att lägga till kompetens %s"
 
 #: www/people/editprofile.php:102
 msgid "Skill added successfully"
@@ -19383,9 +19352,9 @@ msgid "No skills selected to delete."
 msgstr "Inga kompetenser valda för radering."
 
 #: www/people/editprofile.php:187
-#, fuzzy, php-format
+#, php-format
 msgid "Failed to delete any skills: %s"
-msgstr "Misslyckdes att ta bort några kompetenser"
+msgstr "Misslyckdes att ta bort några kompetenser: %s"
 
 #: www/people/editprofile.php:189
 #, fuzzy
@@ -19515,6 +19484,8 @@ msgid ""
 "The %s Project Help Wanted board is for non-commercial, project volunteer "
 "openings. Commercial use is prohibited."
 msgstr ""
+"%sanslagstavlan Hjälp Önskas är för icke-kommersiella, öppningar för "
+"frivilliga i projekt. Kommersiellt bruk är förbjudet."
 
 #: www/people/index.php:69
 msgid ""
@@ -19522,22 +19493,29 @@ msgid ""
 "whichever comes first. (Project administrators may always re-post expired "
 "openings.)"
 msgstr ""
+"Projektlistningen blir kvar i två veckor eller tills den stängs av "
+"inlämnaren, bereoende på vad som inträffar först. (Projektadministratören "
+"kan alltid lämna in utgågna öppningar på nytt.)"
 
 #: www/people/index.php:73
 msgid ""
 "Browse through the category menu to find projects looking for your help."
 msgstr ""
+"Bläddra igenom kategorimenyn för att hitta ett projekt som behöver din hjälp."
 
 #: www/people/index.php:77
 msgid ""
 "If you're a project admin, log in and submit help wanted requests through "
 "your project administration page."
 msgstr ""
+"Om du är en projektadministratör, logga in och lämna jobböppningar genom din "
+"administrationssida för projektet."
 
 #: www/people/index.php:81
 msgid ""
 "To suggest new job categories, submit a request via the support manager."
 msgstr ""
+"För att föreslå nya jobbkategorier, lämna ett önskemål via supportansvarig."
 
 #: www/people/index.php:86
 msgid "Last posts"
@@ -19597,7 +19575,6 @@ msgid "Error inserting into job inventory: "
 msgstr "FEL vid infogning i kompetenslistan"
 
 #: www/people/people_utils.php:217
-#, fuzzy
 msgid "Added to job inventory"
 msgstr "Till lagt till kompetenslistan"
 
@@ -19611,9 +19588,8 @@ msgid "Invalid ID"
 msgstr "Ogiltigt ID"
 
 #: www/people/people_utils.php:393
-#, fuzzy
 msgid "No categories found."
-msgstr "Hittade inga kategorier"
+msgstr "Hittade inga kategorier."
 
 #: www/people/people_utils.php:438
 msgid "Date Opened"
@@ -20756,7 +20732,6 @@ msgid "Project WWW directory on shell server:"
 msgstr "Projekt WWW katalog på skalservern:"
 
 #: www/project/admin/index.php:134
-#, fuzzy
 msgid "Descriptive Project Name"
 msgstr "Beskrivande gruppnamn"
 
@@ -21033,14 +21008,12 @@ msgid "Use Mailing Lists"
 msgstr "Använd e-postlistor"
 
 #: www/project/admin/tools.php:204
-#, fuzzy
 msgid "Use Tasks"
-msgstr "Uppgifter"
+msgstr "Använd uppgifter"
 
 #: www/project/admin/tools.php:217
-#, fuzzy
 msgid "Use Documents"
-msgstr "Använd forum"
+msgstr "Använd dokumentation"
 
 #: www/project/admin/tools.php:230
 msgid "Use Surveys"
@@ -21051,9 +21024,8 @@ msgid "Use News"
 msgstr "Använd nyheter"
 
 #: www/project/admin/tools.php:256
-#, fuzzy
 msgid "Use Source Code"
-msgstr "Source IP"
+msgstr "Använd SCM"
 
 #: www/project/admin/tools.php:269
 msgid "Use File Release System"
@@ -22037,7 +22009,6 @@ msgstr ""
 "Fel - Endast skaparen av en paketversion kan lägga till kodstycken till det."
 
 #: www/snippet/add_snippet_to_package.php:83 www/snippet/addversion.php:40
-#, fuzzy
 msgid "Error: snippet does not exist"
 msgstr "Fel - Det kodstycket existerar inte"
 
@@ -22115,7 +22086,6 @@ msgid "Paste the Code Here"
 msgstr "Klistra in koden Här"
 
 #: www/snippet/addversion.php:128
-#, fuzzy
 msgid "Error: snippet_package does not exist"
 msgstr "Fel, kodstyckepaket finns inte"
 
@@ -22124,16 +22094,14 @@ msgid "Error doing snippet package version insert"
 msgstr "FEL VID INFOGNING AV VERSION KODSTYCKESPAKET!"
 
 #: www/snippet/addversion.php:156
-#, fuzzy
 msgid "New snippet package"
-msgstr "Lämna in ett nytt kodstyckespaket"
+msgstr "Nytt kodstyckespaket"
 
 #: www/snippet/addversion.php:161 www/snippet/package.php:82
 msgid "Snippet Package Version Added Successfully."
 msgstr "Tillägg av kodstyckepaketversion lyckades."
 
 #: www/snippet/addversion.php:166
-#, fuzzy
 msgid "Add snippet to package"
 msgstr "Lägg till kodstycken till paket"
 
@@ -22374,9 +22342,8 @@ msgid "Browse by Language"
 msgstr "Bläddra efter språk"
 
 #: www/snippet/package.php:57
-#, fuzzy
 msgid "Error doing snippet package insert"
-msgstr "Fel, kodstyckepaket finns inte"
+msgstr "Fel vid infogning av kodstycke i paket!"
 
 #: www/snippet/package.php:58 www/snippet/package.php:76
 #: www/snippet/package.php:127
@@ -22579,9 +22546,9 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: www/softwaremap/tag_cloud.php:162
-#, fuzzy, php-format
+#, php-format
 msgid "Activity Percentile: <strong>%3.0f</strong>"
-msgstr "Aktivitet i procent:"
+msgstr "Aktivitet i procent: <strong>%3.0f</strong>"
 
 #: www/softwaremap/trove_list.php:56
 msgid "Software Map"
@@ -22819,22 +22786,26 @@ msgstr "Du har inte valt en licens"
 
 #: www/survey/admin/index.php:58
 msgid "It's simple to create a survey."
-msgstr ""
+msgstr "Det är enkelt att skapa en undersökning."
 
 #: www/survey/admin/index.php:62
 msgid "Create questions and comments using the forms above."
-msgstr ""
+msgstr "Skapa frågor och kommentarer med formulären ovan."
 
 #: www/survey/admin/index.php:65
 msgid ""
 "Create a survey, listing the questions in order (choose from <strong>your</"
 "strong> list of questions)."
 msgstr ""
+"Skapa en undersökning, lista frågorna i ordning (välj från <strong>din</"
+"strong> lista med frågor)."
 
 #: www/survey/admin/index.php:68
 #, php-format
 msgid "Link to the survey using this format: %s where XX is the survey number"
 msgstr ""
+"Länka till undersökningen med detta format: %s där XX är undersökningens "
+"number"
 
 #: www/survey/admin/index.php:73
 #, php-format
@@ -22961,7 +22932,6 @@ msgid "Question"
 msgstr "Fråga"
 
 #: www/survey/include/SurveyHTML.class.php:139
-#, fuzzy
 msgid "Question Type"
 msgstr "Fråga typ"
 
@@ -23096,6 +23066,8 @@ msgid ""
 "The information collected in these surveys will never be sold to third "
 "parties or used to solicit you to purchase any goods or services."
 msgstr ""
+"Informationen som insamlas i dessa undersökningar kommer aldrig säljas till "
+"tredje man eller användas för få dig att köpa några varor eller tjänster."
 
 #: www/survey/privacy.php:44
 msgid ""
@@ -23103,24 +23075,34 @@ msgid ""
 "developers being surveyed. That profile will help visitors to the site "
 "understand the quality of a given project."
 msgstr ""
+"Denna information samlas in för att med hjälp av undersökningen bygga en "
+"profil om projektet och utvecklarna. Den profilen kommer att hjälpa "
+"webbsidans besökare förstå kvaliteten på ett projekt."
 
 #: www/survey/privacy.php:47
 msgid ""
 "The ID's of those who answer surveys are suppressed and not viewable by "
 "project administrators or the public or third parties."
 msgstr ""
+"ID på dem som svarar på undersökningar döljs och är inte synliga för "
+"projektadministratörer, allmänheten eller tredje man."
 
 #: www/survey/privacy.php:50
 msgid ""
 "The information gathered is used only in aggregate form, not to single out "
 "specific users or developers."
 msgstr ""
+"Den insamlade information används bara i sammanslagen form, och inte för att "
+"peka ut enskilda användare eller utvecklare."
 
 #: www/survey/privacy.php:53
 msgid ""
 "If any changes are made to this policy, it will affect only future data that "
 "is collected and the user will of course have the ability to 'opt-out'."
 msgstr ""
+"Om några förrändringar görs av denna policy, så kommer det bara att påverka "
+"framtida insamlad data och användaren har naturligtvis möjlighet att välja "
+"att inte vara med."
 
 #: www/survey/rating_resp.php:59
 msgid "Vote registered"
@@ -23148,7 +23130,6 @@ msgid "Vote for Survey"
 msgstr "Namn på undersökning"
 
 #: www/survey/survey.php:55 www/survey/survey_resp.php:48
-#, fuzzy
 msgid ""
 "For some reason, the Project ID or Survey ID did not make it to this page"
 msgstr ""
