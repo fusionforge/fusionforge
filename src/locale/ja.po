@@ -408,7 +408,7 @@ msgstr "プロジェクト管理"
 #: www/tracker/roadmap.php:435 www/tracker/roadmap.php:468
 #, php-format
 msgid ": "
-msgstr ""
+msgstr "："
 
 #: common/docman/actions/monitordirectory.php:54
 #: common/docman/actions/monitorfile.php:56
@@ -850,6 +850,8 @@ msgid ""
 "Refers to the relatively brief title of the document (e.g. How to use the "
 "download server)."
 msgstr ""
+"簡潔なドキュメントタイトルにしてください。(例: ダウンロードサーバーの使い"
+"方。)"
 
 #: common/docman/views/addfile.php:92 common/docman/views/addfile.php:108
 #: common/docman/views/addfile.php:110 common/docman/views/editfile.php:42
@@ -909,11 +911,11 @@ msgstr ""
 #: www/snippet/package.php:151 www/snippet/snippet_utils.php:192
 #: www/snippet/snippet_utils.php:226 www/snippet/submit.php:109
 msgid "Description"
-msgstr ""
+msgstr "記述"
 
 #: common/docman/views/addfile.php:92
 msgid "A brief description to be placed just under the title."
-msgstr ""
+msgstr "簡単な記述はタイトルのすぐ下に置いてください。"
 
 #: common/docman/views/addfile.php:94 common/docman/views/editfile.php:47
 msgid "Both fields are used by the document search engine."
@@ -2293,7 +2295,7 @@ msgstr ""
 #: plugins/message/common/messagePlugin.class.php:35 www/admin/cronman.php:44
 #: www/sendmessage.php:176
 msgid "Message"
-msgstr ""
+msgstr "メッセージ"
 
 #: common/forum/ForumAdmin.class.php:333
 #, fuzzy
@@ -2567,7 +2569,6 @@ msgstr ""
 
 #: common/forum/ForumHTML.class.php:266
 #: plugins/forumml/www/forumml_utils.php:556 www/forum/message.php:123
-#, fuzzy
 msgid "Reply"
 msgstr "返信"
 
@@ -2608,7 +2609,7 @@ msgstr "メッセージ:"
 #: www/news/admin/news_admin_utils.php:58 www/news/submit.php:155
 #: www/sendmessage.php:76 www/sendmessage.php:172
 msgid "Subject"
-msgstr ""
+msgstr "件名"
 
 #: common/forum/ForumHTML.class.php:546
 #: common/tracker/views/form-adminroadmap.php:167
@@ -3057,9 +3058,8 @@ msgstr "アカウントをアクティブにするときにエラーが発生し
 #: www/survey/admin/show_questions.php:35
 #: www/survey/admin/show_results_individual.php:35
 #: www/survey/admin/show_results.php:66 www/survey/admin/survey.php:53
-#, fuzzy
 msgid "Permission denied."
-msgstr "許可がありません"
+msgstr "許可がありません。"
 
 #: common/include/Error.class.php:142 common/include/User.class.php:350
 #: common/include/User.class.php:931 common/include/User.class.php:983
@@ -3629,7 +3629,7 @@ msgstr ""
 #: www/stats/site_stats_utils.php:239 www/stats/site_stats_utils.php:364
 #: www/stats/site_stats_utils.php:419
 msgid "Tasks"
-msgstr ""
+msgstr "タスクマネージャ"
 
 #: common/include/group_section_texts.php:32
 #: common/reporting/report_utils.php:666
@@ -3687,7 +3687,7 @@ msgstr ""
 #: common/include/Navigation.class.php:216
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:86
 msgid "New Account"
-msgstr ""
+msgstr "新規アカウント"
 
 #: common/include/Navigation.class.php:240
 #: plugins/quota_management/www/quota.php:163 www/account/lostpw.php:74
@@ -3854,7 +3854,7 @@ msgstr "トッププロジェクト"
 #: www/stats/site_stats_utils.php:242 www/stats/site_stats_utils.php:365
 #: www/stats/site_stats_utils.php:420
 msgid "SCM"
-msgstr ""
+msgstr "SCM"
 
 #: common/include/Navigation.class.php:544
 msgid "Source Content Management, peer-review and source discovery."
@@ -4389,9 +4389,8 @@ msgid "Passwords do not match"
 msgstr "パスワードが一致しません"
 
 #: common/include/User.class.php:332
-#, fuzzy
 msgid "Invalid Password"
-msgstr "無効なパスワード:"
+msgstr "無効なパスワード"
 
 #: common/include/User.class.php:337
 #, fuzzy
@@ -4415,7 +4414,7 @@ msgstr ""
 #: www/people/admin/index.php:53 www/people/admin/index.php:66
 #: www/pm/admin/index.php:98 www/survey/rating_resp.php:56
 msgid "Insert Error"
-msgstr ""
+msgstr "インサート失敗"
 
 #: common/include/User.class.php:443
 #, fuzzy
@@ -5512,7 +5511,6 @@ msgid "Last 7 days"
 msgstr "1週間"
 
 #: common/tracker/actions/browse.php:239 common/tracker/actions/query.php:233
-#, fuzzy
 msgid "Last 2 weeks"
 msgstr "2週間"
 
@@ -8367,16 +8365,14 @@ msgstr ""
 #: www/account/index.php:149 www/account/lostpw.php:89
 #: www/account/pending-resend.php:67 www/account/verify.php:78
 #: www/include/user_profile.php:87
-#, fuzzy
 msgid "Login Name"
 msgstr "ログイン名"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:79
 #: plugins/authldap/include/AuthLDAPPlugin.class.php:209
 #: www/account/verify.php:86
-#, fuzzy
 msgid "Password"
-msgstr "パスワード:"
+msgstr "パスワード"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:79
 #: plugins/authldap/include/AuthLDAPPlugin.class.php:209
@@ -12084,7 +12080,7 @@ msgstr ""
 #: plugins/oauthconsumer/www/get_access_token.php:163
 #: plugins/oauthconsumer/www/index.php:67 www/admin/responses_admin.php:90
 msgid "Go"
-msgstr ""
+msgstr "Go"
 
 #: plugins/oauthconsumer/www/callback.php:75
 #, fuzzy
@@ -14563,21 +14559,17 @@ msgstr ""
 "の公認ユーザーになりました"
 
 #: www/account/first.php:33
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "As a registered user, you can participate fully in the activities on the "
 "site. You may now post messages to the project message forums, post bugs for "
 "software in %s, sign on as a project developer, or even start your own "
 "project."
 msgstr ""
-"おめでとうございます。あなたはオープンソース開発の為のオンライン開発環境 "
-"%1$s の公認ユーザーになりました。あなたは公認ユーザーとしてサイト上の全ての活"
-"動に参加することができ、プロジェクトメッセージフォーラムにメッセージの記入、"
-"開発者として %1$s にあるソフトに関するバグ情報の提出もすることができます。ま"
-"た、あなた個人のプロジェクトを開始するのも良いでしょう。<p>余裕があればこのサ"
-"イトに載っているドキュメントに目を通すようにしてください。<p>そうすれば、よ"
-"り %1$s を使いこなせるようになるでしょう。<p>そして、より良い %1$s にするため"
-"にフィードバックをいただければ助かると思います。<p>-- %1$s スタッフより。"
+"あなたは公認ユーザーとしてサイト上の全ての活動に参加することができ、プロジェ"
+"クトメッセージフォーラムにメッセージの記入、開発者として %s にあるソフトに関"
+"するバグ情報の提出もすることができます。また、あなた個人のプロジェクトを開始"
+"するのも良いでしょう。"
 
 #: www/account/index.php:101 www/admin/groupedit.php:74
 #: www/admin/useredit.php:110
@@ -14604,7 +14596,7 @@ msgstr "スキルプロフィール編集"
 
 #: www/account/index.php:140 www/admin/search.php:76
 msgid "Member since"
-msgstr ""
+msgstr "メンバー登録日"
 
 #: www/account/index.php:144 www/admin/useredit.php:130
 #: www/include/user_profile.php:68
@@ -19256,6 +19248,8 @@ msgid ""
 "The %s Project Help Wanted board is for non-commercial, project volunteer "
 "openings. Commercial use is prohibited."
 msgstr ""
+"%s プロジェクトの協力者募集掲示板は非広告プロジェクトボランティアを対象に解放"
+"しています。広告ユーザーらの利用は禁止です。"
 
 #: www/people/index.php:69
 msgid ""
@@ -19263,22 +19257,29 @@ msgid ""
 "whichever comes first. (Project administrators may always re-post expired "
 "openings.)"
 msgstr ""
+"プロジェクトリスティングが長くて２週間残ります。あるいは新しい投稿により閉じ"
+"ることもあります。(プロジェクトの管理者は期限切れの募集記事を再投稿することが"
+"できます。)"
 
 #: www/people/index.php:73
 msgid ""
 "Browse through the category menu to find projects looking for your help."
-msgstr ""
+msgstr "カテゴリメニューから、「プロジェクト協力者募集」を探してください。"
 
 #: www/people/index.php:77
 msgid ""
 "If you're a project admin, log in and submit help wanted requests through "
 "your project administration page."
 msgstr ""
+"もし、あなたがプロジェクトの管理者であれば、ログインしてプロジェクト管理ペー"
+"ジから「プロジェクト協力者募集」を申し込んで下さい。"
 
 #: www/people/index.php:81
 msgid ""
 "To suggest new job categories, submit a request via the support manager."
 msgstr ""
+"新規ジョブカテゴリーを提案する場合、サポートマネージャからリクエストを提出し"
+"てください。"
 
 #: www/people/index.php:86
 msgid "Last posts"
@@ -22192,9 +22193,9 @@ msgid_plural ""
 msgstr[0] ""
 
 #: www/softwaremap/tag_cloud.php:162
-#, fuzzy, php-format
+#, php-format
 msgid "Activity Percentile: <strong>%3.0f</strong>"
-msgstr "活動率:"
+msgstr "活動率: <strong>%3.0f</strong>"
 
 #: www/softwaremap/trove_list.php:56
 msgid "Software Map"
