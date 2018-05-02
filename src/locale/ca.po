@@ -658,9 +658,8 @@ msgid "Document Folder"
 msgstr ""
 
 #: common/docman/DocumentGroup.class.php:101
-#, fuzzy
 msgid "Name is required"
-msgstr "El nom està reservat pel CVS."
+msgstr "Es necessita un nom"
 
 #: common/docman/DocumentGroup.class.php:110
 #: common/docman/DocumentGroup.class.php:490
@@ -839,6 +838,8 @@ msgid ""
 "Refers to the relatively brief title of the document (e.g. How to use the "
 "download server)."
 msgstr ""
+"Es refereix al títol relativament breu del document (ex. Com es fa per usar "
+"el servidor de baixades)."
 
 #: common/docman/views/addfile.php:92 common/docman/views/addfile.php:108
 #: common/docman/views/addfile.php:110 common/docman/views/editfile.php:42
@@ -902,7 +903,7 @@ msgstr "Descripció"
 
 #: common/docman/views/addfile.php:92
 msgid "A brief description to be placed just under the title."
-msgstr ""
+msgstr "Una breu descripció situada justament sota el títol."
 
 #: common/docman/views/addfile.php:94 common/docman/views/editfile.php:47
 msgid "Both fields are used by the document search engine."
@@ -911,9 +912,9 @@ msgstr ""
 #: common/docman/views/addfile.php:102 common/docman/views/addfile.php:103
 #: common/docman/views/addfile.php:110 common/docman/views/addfile.php:111
 #: common/docman/views/editfile.php:39 common/docman/views/editfile.php:43
-#, fuzzy, php-format
+#, php-format
 msgid "(at least %s characters)"
-msgstr "La contrasenya ha de tenir com a mínim 6 caràcters."
+msgstr "(a mínim %s caràcters)"
 
 #: common/docman/views/addfile.php:116
 #, fuzzy
@@ -1370,7 +1371,6 @@ msgstr ""
 #: common/docman/views/listfile.php:248
 #: common/docman/views/listtrashfile.php:147
 #: common/docman/views/pendingfiles.php:80
-#, fuzzy
 msgid "View this document"
 msgstr "Visualitza la documentació"
 
@@ -2395,7 +2395,6 @@ msgid "Mailing List exists with same name."
 msgstr "Nom de la llista de correu:"
 
 #: common/forum/Forum.class.php:230
-#, fuzzy
 msgid "Error Adding Forum"
 msgstr "Error afegint un fòrum"
 
@@ -2560,9 +2559,8 @@ msgstr "Per"
 
 #: common/forum/ForumHTML.class.php:266
 #: plugins/forumml/www/forumml_utils.php:556 www/forum/message.php:123
-#, fuzzy
 msgid "Reply"
-msgstr "respon"
+msgstr "Respon"
 
 #: common/forum/ForumHTML.class.php:311
 msgid "Current File"
@@ -2979,7 +2977,6 @@ msgid "Failed to find user %s"
 msgstr "No s'ha pogut afegit l'habilitat"
 
 #: common/import/import_users.php:414 www/admin/globalroleedit.php:103
-#, fuzzy
 msgid "User Added Successfully"
 msgstr "Usuari afegit amb èxit"
 
@@ -3000,9 +2997,8 @@ msgid "Illegal character in name."
 msgstr "Caràcter il·legal al nom."
 
 #: common/include/account.php:84
-#, fuzzy
 msgid "Name is reserved."
-msgstr "El nom està reservat pel CVS."
+msgstr "El nom està reservat."
 
 #: common/include/account.php:89 common/include/account.php:93
 #: common/include/User.class.php:355
@@ -3180,9 +3176,8 @@ msgid "Error: Cannot get group id: %s"
 msgstr "No es pot afegir una entrada de la base de dades"
 
 #: common/include/Group.class.php:427 common/include/Group.class.php:510
-#, fuzzy
 msgid "Could not get permission."
-msgstr "No s'ha pogut obtenir permís"
+msgstr "No s'ha pogut obtenir permís."
 
 #: common/include/Group.class.php:448
 #, fuzzy, php-format
@@ -3538,9 +3533,9 @@ msgid "Submitted Description"
 msgstr "Descripció tramesa"
 
 #: common/include/Group.class.php:2696
-#, fuzzy
 msgid "Please visit the following URL to approve or reject this project"
-msgstr "Si us plau, visiteu la següent URL per a completar el canvi d'adreça:"
+msgstr ""
+"Si us plau visiteu la següent URL per a aprovar o rebutjar aquest projecte"
 
 #: common/include/Group.class.php:2708
 #, php-format
@@ -4415,9 +4410,9 @@ msgid "Cannot create directory:"
 msgstr "El fitxer no es pot moure a l'ubicació permanent"
 
 #: common/include/Storage.class.php:66
-#, fuzzy, php-format
+#, php-format
 msgid "File %1$s cannot be moved to the permanent location: %2$s."
-msgstr "El fitxer no es pot moure a l'ubicació permanent"
+msgstr "El fitxer %1$s no es pot moure a l'ubicació permanent: %2$s."
 
 #: common/include/Storage.class.php:70
 #, fuzzy, php-format
@@ -4455,9 +4450,8 @@ msgid "Passwords do not match"
 msgstr "Les contrasenyes no coincideixen"
 
 #: common/include/User.class.php:332
-#, fuzzy
 msgid "Invalid Password"
-msgstr "Contrasenya no vàlida:"
+msgstr "Contrasenya no vàlida"
 
 #: common/include/User.class.php:337
 #, fuzzy
@@ -4481,7 +4475,7 @@ msgstr ""
 #: www/people/admin/index.php:53 www/people/admin/index.php:66
 #: www/pm/admin/index.php:98 www/survey/rating_resp.php:56
 msgid "Insert Error"
-msgstr ""
+msgstr "Ha fallat la inserció"
 
 #: common/include/User.class.php:443
 #, fuzzy
@@ -5082,9 +5076,8 @@ msgid "Hours Recorded"
 msgstr "Les puntuacions han estat desades"
 
 #: common/reporting/report_utils.php:1069
-#, fuzzy
 msgid " Hours"
-msgstr "Hores"
+msgstr " Hores"
 
 #: common/reporting/TimeEntry.class.php:94 www/reporting/timeadd.php:93
 #: www/reporting/timecategory.php:42
@@ -5102,14 +5095,12 @@ msgid "Error: search query too short"
 msgstr ""
 
 #: common/survey/Survey.class.php:109 common/survey/Survey.class.php:157
-#, fuzzy
 msgid "Update Failed: Survey Title Required"
-msgstr "HA FALLAT L'ACTUALITZACIÓ: Es requereix el títol de l'enquesta"
+msgstr "Ha fallat l'actualització: Es requereix el títol de l'enquesta"
 
 #: common/survey/Survey.class.php:113
-#, fuzzy
 msgid "Update Failed: Survey Questions Required"
-msgstr "HA FALLAT L'ACTUALITZACIÓ: Es requereixen les preguntes de l'enquesta"
+msgstr "Ha fallat l'actualització: Es requereixen les preguntes de l'enquesta"
 
 #: common/survey/Survey.class.php:167 common/survey/Survey.class.php:200
 msgid "The Survey data is not filled"
@@ -5325,9 +5316,8 @@ msgid "Update Settings"
 msgstr ""
 
 #: common/tracker/actions/admin-tracker.php:42
-#, fuzzy
 msgid "Set up preferences like expiration times, email addresses."
-msgstr "Establiu preferències com temps d'expiració,adreces de correu"
+msgstr "Establiu preferències com temps d'expiració, adreces de correu."
 
 #: common/tracker/actions/admin-tracker.php:46
 #: common/tracker/include/ArtifactTypeHtml.class.php:112
@@ -5649,7 +5639,6 @@ msgid "Change"
 msgstr "Canvi"
 
 #: common/tracker/actions/browse.php:335 common/tracker/actions/browse.php:445
-#, fuzzy
 msgid "Advanced queries"
 msgstr "Cerca avançada"
 
@@ -6249,7 +6238,6 @@ msgid "Could Not Attach File to Item: "
 msgstr ""
 
 #: common/tracker/actions/tracker.php:220
-#, fuzzy
 msgid "Updated Successfully"
 msgstr "Actualitzat amb èxit"
 
@@ -6284,7 +6272,6 @@ msgid "File Upload: Successful"
 msgstr "Fitxer pujat: amb èxit"
 
 #: common/tracker/actions/tracker.php:389
-#, fuzzy
 msgid "File Delete"
 msgstr "Suprimeix el fitxer"
 
@@ -6551,14 +6538,12 @@ msgstr ""
 
 #: common/tracker/ArtifactHistory.class.php:53
 #: common/tracker/ArtifactMessage.class.php:53
-#, fuzzy
 msgid "Invalid Artifact"
-msgstr "ID no vàlid"
+msgstr "Artifact no vàlid"
 
 #: common/tracker/ArtifactHistory.class.php:82
-#, fuzzy
 msgid "Invalid ArtifactHistory ID"
-msgstr "ID no vàlid"
+msgstr "ArtifactHistory ID no vàlid"
 
 #: common/tracker/ArtifactMessage.class.php:89
 msgid "Error: Logged In User Bug Could Not Get User Object"
@@ -7304,9 +7289,9 @@ msgid "I am Really Sure"
 msgstr "N'estic ben segur"
 
 #: common/tracker/views/form-deletetracker.php:24
-#, fuzzy, php-format
+#, php-format
 msgid "Permanently Delete Tracker %s"
-msgstr "Suprimeix aquest rastrejador permanentment."
+msgstr "Suprimeix rastrejador %s permanentment"
 
 #: common/tracker/views/form-deletetracker.php:34
 msgid ""
@@ -7797,7 +7782,6 @@ msgid "Leave project"
 msgstr "Grups privats"
 
 #: common/widget/Widget_MyProjects.class.php:96
-#, fuzzy
 msgid "Private project"
 msgstr "Grups privats"
 
@@ -8118,9 +8102,8 @@ msgid "List the last 10 pieces of news posted by the project members."
 msgstr ""
 
 #: common/widget/Widget_ProjectMembers.class.php:33
-#, fuzzy
 msgid "Project Members"
-msgstr "Llista de membres del projecte"
+msgstr "Membres del projecte"
 
 #: common/widget/Widget_ProjectMembers.class.php:48
 msgid "Project Admins"
@@ -8446,9 +8429,9 @@ msgstr ""
 
 #: plugins/admssw/include/admsswPlugin.class.php:634
 #: www/softwaremap/full_list.php:70
-#, fuzzy, php-format
+#, php-format
 msgid "<strong>%d</strong> projects in result set."
-msgstr "<strong>%1$s</strong> projectes al conjunt de resultats."
+msgstr "<strong>%d</strong> projectes al conjunt de resultats."
 
 #: plugins/admssw/include/admsswPlugin.class.php:645
 #: plugins/admssw/www/projectturtle.php:52 plugins/admssw/www/trove.php:46
@@ -8551,7 +8534,6 @@ msgstr "Adreça de correu no vàlida"
 #: www/account/index.php:149 www/account/lostpw.php:89
 #: www/account/pending-resend.php:67 www/account/verify.php:78
 #: www/include/user_profile.php:87
-#, fuzzy
 msgid "Login Name"
 msgstr "Nom d'inici de sessió"
 
@@ -9744,7 +9726,6 @@ msgstr "Paràmetre no vàlid"
 
 #: plugins/forumml/www/index.php:59 plugins/forumml/www/message.php:95
 #: plugins/forumml/www/upload.php:48
-#, fuzzy
 msgid "You are not allowed to access this page"
 msgstr "No teniu permís per accedir a aquesta pàgina"
 
@@ -9931,7 +9912,6 @@ msgstr "Informació del compte"
 #: www/project/memberlist.php:50
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:44
 #: www/stats/lastlogins.php:51 www/top/topusers.php:63
-#, fuzzy
 msgid "User Name"
 msgstr "Nom d'usuari"
 
@@ -10261,9 +10241,9 @@ msgstr "No s'han trobat coincidències per “%s”"
 #: plugins/globalsearch/www/index.php:162
 #: www/search/include/renderers/HtmlGroupSearchRenderer.class.php:69
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:111
-#, fuzzy, php-format
+#, php-format
 msgid "Search results for “%s”"
-msgstr "Resultats de cerca per <em>%s</em>"
+msgstr "Resultats de cerca per “%s”"
 
 #: plugins/globalsearch/www/index.php:166 www/admin/grouplist.php:67
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:45
@@ -11696,9 +11676,8 @@ msgid "Apply filter"
 msgstr ""
 
 #: plugins/mantisbt/controler/filter_roadmap.php:48
-#, fuzzy
 msgid "Versions:"
-msgstr "Versió:"
+msgstr "Versions:"
 
 #: plugins/mantisbt/controler/filter_roadmap.php:62
 #: plugins/mantisbt/controler/filter_roadmap.php:94
@@ -12651,7 +12630,7 @@ msgstr ""
 #: plugins/oauthprovider/www/authorize.php:114
 #: plugins/oauthprovider/www/authorize.php:120
 msgid "Authorize"
-msgstr ""
+msgstr "Autor"
 
 #: plugins/oauthprovider/www/authorize.php:128
 msgid "Deny"
@@ -12825,7 +12804,7 @@ msgstr "No hi ha tipus de fitxers disponibles"
 #: plugins/quota_management/www/quota.php:179
 #: plugins/quota_management/www/quota.php:338
 msgid "name"
-msgstr ""
+msgstr "nom"
 
 #: plugins/projectimport/common/UploadedFiles.class.php:167
 #: plugins/projectimport/www/index.php:585
@@ -13594,7 +13573,7 @@ msgstr ""
 
 #: plugins/quota_management/www/quota.php:183
 msgid "database"
-msgstr ""
+msgstr "base de dades"
 
 #: plugins/quota_management/www/quota.php:195
 #: plugins/quota_management/www/quota.php:301
@@ -13699,7 +13678,7 @@ msgstr ""
 
 #: plugins/quota_management/www/quota_project.php:276
 msgid "Home, Ftp"
-msgstr ""
+msgstr "Pàgina inicial, FTP"
 
 #: plugins/scmarch/common/ArchPlugin.class.php:43
 #: plugins/scmbzr/common/BzrPlugin.class.php:76
@@ -14582,9 +14561,8 @@ msgid "Wiki"
 msgstr ""
 
 #: plugins/wiki/common/WikiHtmlSearchRenderer.class.php:50
-#, fuzzy
 msgid "Page"
-msgstr "Pàgina principal"
+msgstr "Pàgina"
 
 #: plugins/wiki/common/WikiPlugin.class.php:74
 #, fuzzy
@@ -14702,9 +14680,8 @@ msgstr "Aquesta clau hash de confirmació existeix més d'un cop."
 
 #: www/account/change_email-complete.php:48 www/account/lostlogin.php:50
 #: www/account/unsubscribe.php:48
-#, fuzzy
 msgid "Invalid confirmation hash."
-msgstr "clau hash de confirmació no vàlida"
+msgstr "Clau hash de confirmació no vàlida."
 
 #: www/account/change_email-complete.php:61
 msgid "Email Change Complete"
@@ -14820,9 +14797,9 @@ msgid "Congratulations. You have changed your password."
 msgstr ""
 
 #: www/account/change_pw.php:80
-#, fuzzy, php-format
+#, php-format
 msgid "You should now <a href=\"%s\">Return to User Prefs</a>."
-msgstr "Ara haurieu de %1$s tornar a UserPrefs %2$s."
+msgstr "Ara haurieu de <a href=\"%s\">tornar a UserPrefs</a>."
 
 #: www/account/change_pw.php:87 www/account/index.php:151
 #: www/admin/userlist.php:140
@@ -15241,14 +15218,13 @@ msgid "You have registered the %1$s account on %2$s."
 msgstr ""
 
 #: www/account/register.php:118
-#, fuzzy
 msgid ""
 "A confirmation email is being sent to verify the submitted email address. "
 "Visiting the link sent in this email will activate the account."
 msgstr ""
-"<p>Felicitats. Us heu registrat a %1$s.  <p> Ara se us està enviant un "
-"correu de confirmació per a verificar la vostra adreça de correu. Visiteu "
-"l'enllaç enviat en aquest correu i s'activarà el vostre compte."
+"Ara se us està enviant un correu de confirmació per a verificar la vostra "
+"adreça de correu. Visiteu l'enllaç enviat en aquest correu i s'activarà el "
+"vostre compte."
 
 #: www/account/register.php:121
 #, php-format
@@ -15433,9 +15409,8 @@ msgstr "Fòrums"
 #: www/activity/index.php:322
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:60
 #: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:52
-#, fuzzy
 msgid "Directory"
-msgstr "Nom del nou projecte"
+msgstr "Directori"
 
 #: www/admin/admin_table.php:41
 #, php-format
@@ -15443,9 +15418,9 @@ msgid "Create a new %s below:"
 msgstr "Crea un nou %s a sota:"
 
 #: www/admin/admin_table.php:94 www/admin/admin_table.php:286
-#, fuzzy, php-format
+#, php-format
 msgid "%s successfully added."
-msgstr "%1$s afegit(s) amb èxit."
+msgstr "%s afegit(s) amb èxit."
 
 #: www/admin/admin_table.php:118
 #, php-format
@@ -15457,13 +15432,13 @@ msgstr ""
 "una publicació de fitxer."
 
 #: www/admin/admin_table.php:127
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "You can't delete the license %s since it is currently referenced in a "
 "project."
 msgstr ""
-"No podeu suprimir la llicència %1$s ja que actualment està referenciada en "
-"un projecte."
+"No podeu suprimir la llicència %s ja que actualment està referenciada en un "
+"projecte."
 
 #: www/admin/admin_table.php:135
 #, php-format
@@ -15510,9 +15485,8 @@ msgstr "Edita la taula de %1s"
 
 #: www/admin/approve-pending.php:46 www/project/admin/tools.php:34
 #: www/snapshots.php:39 www/tarballs.php:40
-#, fuzzy
 msgid "Error creating group"
-msgstr "Error al crear un objecte de grup"
+msgstr "Error al crear grup"
 
 #: www/admin/approve-pending.php:54 www/register/index.php:148
 #, php-format
@@ -15755,9 +15729,9 @@ msgid "Error: You did not tick the “really remove” box!"
 msgstr ""
 
 #: www/admin/globalroleedit.php:126
-#, fuzzy, php-format
+#, php-format
 msgid "User %s removed successfully"
-msgstr "Usuari suprimit amb èxit"
+msgstr "Usuari %s suprimit amb èxit"
 
 #: www/admin/globalroleedit.php:130
 #, fuzzy, php-format
@@ -15959,9 +15933,9 @@ msgid "User Maintenance"
 msgstr "Manteniment dels usuaris"
 
 #: www/admin/index.php:50
-#, fuzzy, php-format
+#, php-format
 msgid "Active site users: <strong>%d</strong>"
-msgstr "Usuaris actius del lloc: <strong>%1$s</strong>"
+msgstr "Usuaris actius del lloc: <strong>%d</strong>"
 
 #: www/admin/index.php:53
 msgid "Display Full User List/Edit Users"
@@ -16278,7 +16252,6 @@ msgid "Newsbytes Rejected."
 msgstr "NewsBytes rebutjat."
 
 #: www/admin/pending-news.php:113 www/project/admin/tools.php:336
-#, fuzzy
 msgid "News Admin"
 msgstr "Administració de les notícies"
 
@@ -16365,9 +16338,9 @@ msgid "%d users"
 msgstr "Afegeix un usuari"
 
 #: www/admin/pluginman.php:246
-#, fuzzy, php-format
+#, php-format
 msgid "%d projects"
-msgstr "%1$s projectes"
+msgstr "%d projectes"
 
 #: www/admin/pluginman.php:257
 msgid "Inactive"
@@ -16439,7 +16412,6 @@ msgstr[1] "Cerca d'usuari amb criteris"
 #: www/project/admin/massadd.php:90 www/project/admin/massfinish.php:74
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:45
 #: www/top/topusers.php:64
-#, fuzzy
 msgid "Real Name"
 msgstr "Nom real"
 
@@ -16519,14 +16491,12 @@ msgid "Category short name (no spaces, Unix-like)"
 msgstr "Nou nom abreujat de categoria (sense espais, estil Unix)"
 
 #: www/admin/trove/trove_cat_edit.php:144
-#, fuzzy
 msgid "Category full name (maximum length is 80 chars)"
-msgstr "Nou nom complet de categoria (VARCHAR 80)"
+msgstr "Nom complet de categoria (80 caràcters com a màxim)"
 
 #: www/admin/trove/trove_cat_edit.php:147
-#, fuzzy
 msgid "Category description (maximum length is 255 chars)"
-msgstr "Descripció de categoria (VARCHAR 255)"
+msgstr "Descripció de categoria (255 caràcters com a màxim)"
 
 #: www/admin/trove/trove_cat_list.php:74
 msgid "Browse Trove Tree"
@@ -16697,9 +16667,8 @@ msgid "Operations"
 msgstr "Operacions"
 
 #: www/admin/useredit.php:286 www/include/user_home.php:99
-#, fuzzy
 msgid "This user is not a member of any project."
-msgstr "Aquest desenvolupador no és membre de cap projecte."
+msgstr "Aquest usuari no és membre de cap projecte."
 
 #: www/admin/useredit.php:289
 #, fuzzy
@@ -17543,7 +17512,6 @@ msgstr "Edita publicacions"
 
 #: www/frs/admin/editrelease.php:226 www/frs/admin/editrelease.php:349
 #: www/frs/admin/qrs.php:183
-#, fuzzy
 msgid "Release Date"
 msgstr "Data de publicació"
 
@@ -17601,13 +17569,12 @@ msgid "Submit/Refresh"
 msgstr "Tramet/Refresca"
 
 #: www/frs/admin/editrelease.php:288
-#, fuzzy
 msgid "Add Files To This Release"
-msgstr "Pas 3: Edita els fitxers en aquesta publicació"
+msgstr "Afegeix fitxers a aquesta publicació"
 
 #: www/frs/admin/editrelease.php:289
 msgid "Now, choose a file to upload into the system."
-msgstr ""
+msgstr "Ara, escolliu un fitxer per pujar-lo al sistema."
 
 #: www/frs/admin/editrelease.php:298 www/frs/admin/qrs.php:200
 #, php-format
@@ -17643,9 +17610,8 @@ msgstr ""
 "apareixeran a la vostra pàgina de resum de baixades."
 
 #: www/frs/admin/editrelease.php:349
-#, fuzzy
 msgid "Processor"
-msgstr "Tipus de processador"
+msgstr "Processador"
 
 #: www/frs/admin/editrelease.php:371
 msgid "Update/Refresh"
@@ -17680,48 +17646,44 @@ msgid "Click here to %1$s quick-release a file %2$s"
 msgstr "Feu clic aquí a %1$s per la publicació ràpida d'un fitxer %2$s"
 
 #: www/frs/admin/index.php:127
-#, fuzzy
 msgid "Packages"
-msgstr "Paquet"
+msgstr "Paquets"
 
 #: www/frs/admin/index.php:128
 msgid ""
 "You can use packages to group different file releases together, or use them "
 "however you like."
 msgstr ""
+"Podeu usar els paquets per agrupar diferents publicacions de fitxers "
+"conjuntament, o usar-lo com vulgueu."
 
 #: www/frs/admin/index.php:129
-#, fuzzy
 msgid "An example of packages:"
-msgstr "Afegeix fragments al paquet"
+msgstr "Un exemple de paquets:"
 
 #: www/frs/admin/index.php:131
-#, fuzzy
 msgid "Your Packages:"
-msgstr "Paquet:"
+msgstr "Els vostres paquets:"
 
 #: www/frs/admin/index.php:133
 msgid "Define your packages"
-msgstr ""
+msgstr "Definiu els vostres paquets"
 
 #: www/frs/admin/index.php:134
-#, fuzzy
 msgid "Create new releases of packages"
-msgstr "Per a crear una nova publicació, feu clic aquí."
+msgstr "Creeu noves publicacions de paquets"
 
 #: www/frs/admin/index.php:136
-#, fuzzy
 msgid "Releases of Packages"
-msgstr "Notes de publicació"
+msgstr "Publicacions de paquets"
 
 #: www/frs/admin/index.php:137
 msgid "A release of a package can contain multiple files."
-msgstr ""
+msgstr "La publicació d'un paquet pot contenir múltiples fitxers."
 
 #: www/frs/admin/index.php:138
-#, fuzzy
 msgid "Examples of Releases"
-msgstr "Últimes publicacions de fitxers"
+msgstr "Exemples de publicacions"
 
 #: www/frs/admin/index.php:140
 msgid ""
@@ -18086,6 +18048,8 @@ msgid ""
 "This has the added benefit of enabling an admin to turn a support request "
 "into a bug."
 msgstr ""
+"Aquest és l'avantatge afegit de permetre a un administrador convertir una "
+"petició de suport en un error (bug)."
 
 #: www/include/html.php:401
 msgid ""
@@ -19405,7 +19369,6 @@ msgid "Missing skill name."
 msgstr "Paràmetre perdut"
 
 #: www/people/admin/index.php:84
-#, fuzzy
 msgid "Add/Change Categories"
 msgstr "Afegeix/edita categories"
 
@@ -19571,7 +19534,6 @@ msgid "Posting fetch failed: %s"
 msgstr "L'enviament ha fallat"
 
 #: www/people/editjob.php:154
-#, fuzzy
 msgid "No such posting for this project"
 msgstr "No hi ha tal missatge per aquest projecte"
 
@@ -19606,9 +19568,9 @@ msgid "User updated successfully"
 msgstr "L'user ha estat actualitzat amb èxit"
 
 #: www/people/editprofile.php:100
-#, fuzzy, php-format
+, php-format
 msgid "Failed to add the skill %s"
-msgstr "No s'ha pogut afegit l'habilitat"
+msgstr "No s'ha pogut afegit l'habilitat %s"
 
 #: www/people/editprofile.php:102
 msgid "Skill added successfully"
@@ -19679,9 +19641,9 @@ msgid "No skills selected to delete."
 msgstr "No hi ha habilitats seleccionades per suprimir."
 
 #: www/people/editprofile.php:187
-#, fuzzy, php-format
+#, php-format
 msgid "Failed to delete any skills: %s"
-msgstr "No s'ha pogut suprimir cap habilitat"
+msgstr "No s'ha pogut suprimir cap habilitat: %s"
 
 #: www/people/editprofile.php:189
 #, fuzzy
@@ -19813,6 +19775,8 @@ msgid ""
 "The %s Project Help Wanted board is for non-commercial, project volunteer "
 "openings. Commercial use is prohibited."
 msgstr ""
+"El tauler destinat a sol·licituds d'ajuda dels projectes de %s serveix per a "
+"col·laboracions voluntàries no comercials. L'ús comercial està prohibit."
 
 #: www/people/index.php:69
 msgid ""
@@ -19820,22 +19784,31 @@ msgid ""
 "whichever comes first. (Project administrators may always re-post expired "
 "openings.)"
 msgstr ""
+"Els llistats de projecte resten oberts durant dues setmanes, o fins que els "
+"tanqui el remitent, el que passi abans. (Els administradors dels projectes "
+"sempre poden reenviar sol·licituds ja expirades.)"
 
 #: www/people/index.php:73
 msgid ""
 "Browse through the category menu to find projects looking for your help."
 msgstr ""
+"Exploreu a través del menú de categories per a trobar projectes que cerquin "
+"la vostra ajuda."
 
 #: www/people/index.php:77
 msgid ""
 "If you're a project admin, log in and submit help wanted requests through "
 "your project administration page."
 msgstr ""
+"Si sou un administrador de projecte, inicieu una sessió i envieu peticions "
+"d'ajuda a través de la vostra pàgina d'administració de projecte."
 
 #: www/people/index.php:81
 msgid ""
 "To suggest new job categories, submit a request via the support manager."
 msgstr ""
+"Per a suggerir noves categories de feina, envieu una petició a través del "
+"gestor de suport."
 
 #: www/people/index.php:86
 msgid "Last posts"
@@ -19895,7 +19868,6 @@ msgid "Error inserting into job inventory: "
 msgstr "Error a l'inserir a l'inventari d'habilitats"
 
 #: www/people/people_utils.php:217
-#, fuzzy
 msgid "Added to job inventory"
 msgstr "Afegit a l'inventari d'habilitats"
 
@@ -19909,9 +19881,8 @@ msgid "Invalid ID"
 msgstr "ID no vàlid"
 
 #: www/people/people_utils.php:393
-#, fuzzy
 msgid "No categories found."
-msgstr "No s'han trobat categories"
+msgstr "No s'han trobat categories."
 
 #: www/people/people_utils.php:438
 msgid "Date Opened"
@@ -20046,9 +20017,9 @@ msgid "Category Name"
 msgstr "Nom de la categoria"
 
 #: www/pm/admin/index.php:243
-#, fuzzy, php-format
+#, php-format
 msgid "Modify a Category in: %s"
-msgstr "Modifica una categoria a"
+msgstr "Modifica una categoria a: %s"
 
 #: www/pm/admin/index.php:253
 msgid ""
@@ -20591,7 +20562,6 @@ msgid "View Subprojects"
 msgstr "Subprojecte"
 
 #: www/pm/include/ProjectGroupHTML.class.php:71
-#, fuzzy
 msgid "Add Task"
 msgstr "Afegeix tasca"
 
@@ -21066,9 +21036,8 @@ msgid "Project WWW directory on shell server:"
 msgstr "Directori WWW de projecte al servidor de shell:"
 
 #: www/project/admin/index.php:134
-#, fuzzy
 msgid "Descriptive Project Name"
-msgstr "Nom de grup descriptiu"
+msgstr "Nom de projecte descriptiu"
 
 #: www/project/admin/index.php:141
 #, fuzzy
@@ -21332,16 +21301,14 @@ msgid "Active Tools"
 msgstr "Actiu"
 
 #: www/project/admin/tools.php:152
-#, fuzzy
 msgid "Use Project Activity"
-msgstr "Activitat de projecte"
+msgstr "Usa activitat de projecte"
 
 #: www/project/admin/tools.php:165
 msgid "Use Forums"
 msgstr "Usa els fòrums"
 
 #: www/project/admin/tools.php:178
-#, fuzzy
 msgid "Use Trackers"
 msgstr "Usa el rastrejador"
 
@@ -21350,14 +21317,12 @@ msgid "Use Mailing Lists"
 msgstr "Usa les llistes de correu"
 
 #: www/project/admin/tools.php:204
-#, fuzzy
 msgid "Use Tasks"
-msgstr "Tasques"
+msgstr "Usa les tasques"
 
 #: www/project/admin/tools.php:217
-#, fuzzy
 msgid "Use Documents"
-msgstr "Usa els fòrums"
+msgstr "Usa el gestor de documents"
 
 #: www/project/admin/tools.php:230
 msgid "Use Surveys"
@@ -21368,9 +21333,8 @@ msgid "Use News"
 msgstr "Usa les notícies"
 
 #: www/project/admin/tools.php:256
-#, fuzzy
 msgid "Use Source Code"
-msgstr "Font IP"
+msgstr "Usa SCM"
 
 #: www/project/admin/tools.php:269
 msgid "Use File Release System"
@@ -21399,7 +21363,6 @@ msgid "Documents Admin"
 msgstr "Administració del fòrum"
 
 #: www/project/admin/tools.php:333
-#, fuzzy
 msgid "Survey Admin"
 msgstr "Administració de l'enquesta"
 
@@ -21420,7 +21383,6 @@ msgid "Role not selected"
 msgstr "Rebutja els seleccionats"
 
 #: www/project/admin/users.php:109 www/project/admin/users.php:166
-#, fuzzy
 msgid "Member Added Successfully"
 msgstr "Usuari afegit amb èxit"
 
@@ -21982,7 +21944,6 @@ msgid "Add Entry"
 msgstr "Afegeix una entrada"
 
 #: www/reporting/timeadd.php:194
-#, fuzzy
 msgid ""
 "Choose a Project/Subproject in the Tasks. You will then have to choose a "
 "Task and category to record your time in."
@@ -22373,7 +22334,6 @@ msgstr ""
 "codi."
 
 #: www/snippet/add_snippet_to_package.php:83 www/snippet/addversion.php:40
-#, fuzzy
 msgid "Error: snippet does not exist"
 msgstr "Error: Aquest fragment de codi no existeix"
 
@@ -22451,25 +22411,22 @@ msgid "Paste the Code Here"
 msgstr "Enganxeu el codi aquí"
 
 #: www/snippet/addversion.php:128
-#, fuzzy
 msgid "Error: snippet_package does not exist"
-msgstr "Error, Error - paquet_fragment_codi no existeix"
+msgstr "Error: paquet_fragment_codi no existeix"
 
 #: www/snippet/addversion.php:155 www/snippet/package.php:75
 msgid "Error doing snippet package version insert"
 msgstr "Error fent la inserció d'una versió d'un paquet de fragment de codi!"
 
 #: www/snippet/addversion.php:156
-#, fuzzy
 msgid "New snippet package"
-msgstr "Envia un nou paquet de fragments de codi"
+msgstr "Nou paquet de fragments de codi"
 
 #: www/snippet/addversion.php:161 www/snippet/package.php:82
 msgid "Snippet Package Version Added Successfully."
 msgstr "La versió del paquet de fragments de codi s'ha afegit amb èxit."
 
 #: www/snippet/addversion.php:166
-#, fuzzy
 msgid "Add snippet to package"
 msgstr "Afegeix fragments al paquet"
 
@@ -22712,9 +22669,8 @@ msgid "Browse by Language"
 msgstr "Navega per idioma"
 
 #: www/snippet/package.php:57
-#, fuzzy
 msgid "Error doing snippet package insert"
-msgstr "Error, Error - paquet_fragment_codi no existeix"
+msgstr "Error fent la inserció d'un paquet de fragment de codi!"
 
 #: www/snippet/package.php:58 www/snippet/package.php:76
 #: www/snippet/package.php:127
@@ -22902,11 +22858,11 @@ msgstr "<strong>%1$s</strong> oberts /<strong>%2$s</strong> total"
 
 #: www/softwaremap/tag_cloud.php:89 www/softwaremap/trove_list.php:269
 #: www/trove/index.php:171
-#, fuzzy, php-format
+#, php-format
 msgid "<strong>%d</strong> project in result set."
 msgid_plural "<strong>%d</strong> projects in result set."
-msgstr[0] "<strong>%1$s</strong> projectes al conjunt de resultats."
-msgstr[1] "<strong>%1$s</strong> projectes al conjunt de resultats."
+msgstr[0] "<strong>%d</strong> projectes al conjunt de resultats."
+msgstr[1] "<strong>%d</strong> projectes al conjunt de resultats."
 
 #: www/softwaremap/tag_cloud.php:98
 #, php-format
@@ -22917,9 +22873,9 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: www/softwaremap/tag_cloud.php:162
-#, fuzzy, php-format
+#, php-format
 msgid "Activity Percentile: <strong>%3.0f</strong>"
-msgstr "Usuaris actius del lloc: <strong>%1$s</strong>"
+msgstr "Percentil d'activitat: <strong>%3.0f</strong>"
 
 #: www/softwaremap/trove_list.php:56
 msgid "Software Map"
@@ -22931,9 +22887,8 @@ msgid "That Trove category does not exist"
 msgstr "Aquesta categoria no existeix"
 
 #: www/softwaremap/trove_list.php:137
-#, fuzzy
 msgid "Now limiting view to projects in the following categories:"
-msgstr "Ara es limita la vista als projectes en les següents categories"
+msgstr "Ara es limita la vista als projectes en les següents categories:"
 
 #: www/softwaremap/trove_list.php:142
 msgid "Remove This Filter"
@@ -22991,9 +22946,9 @@ msgid "Displayed data: only last 24 months."
 msgstr ""
 
 #: www/stats/i18n.php:32
-#, fuzzy, php-format
+#, php-format
 msgid "%s I18n Statistics: Languages Distributions"
-msgstr "Distribucions d'idiomes"
+msgstr "%s Estadístiques I18n: Distribucions d'idiomes"
 
 #: www/stats/i18n.php:54
 msgid "Total Non-English"
@@ -23157,22 +23112,25 @@ msgstr "No heu escollit cap llicència"
 
 #: www/survey/admin/index.php:58
 msgid "It's simple to create a survey."
-msgstr ""
+msgstr "Crear una enquesta és simple."
 
 #: www/survey/admin/index.php:62
 msgid "Create questions and comments using the forms above."
-msgstr ""
+msgstr "Creeu preguntes i comentaris usant els formularis anteriors."
 
 #: www/survey/admin/index.php:65
 msgid ""
 "Create a survey, listing the questions in order (choose from <strong>your</"
 "strong> list of questions)."
 msgstr ""
+"Creeu una enquesta, llisteu les preguntes en ordre (escolliu-les de la "
+"<strong>vostra</strong> llista de preguntes)."
 
 #: www/survey/admin/index.php:68
 #, php-format
 msgid "Link to the survey using this format: %s where XX is the survey number"
 msgstr ""
+"Enllaceu amb l'enquesta usant aquest format: %s on XX és el nom de l'enquesta"
 
 #: www/survey/admin/index.php:73
 #, php-format
@@ -23182,12 +23140,10 @@ msgid ""
 msgstr ""
 
 #: www/survey/admin/question.php:52
-#, fuzzy
 msgid "Edit a Question"
 msgstr "Edita una pregunta"
 
 #: www/survey/admin/question.php:52
-#, fuzzy
 msgid "Add a Question"
 msgstr "Afegeix una pregunta"
 
@@ -23433,6 +23389,8 @@ msgid ""
 "The information collected in these surveys will never be sold to third "
 "parties or used to solicit you to purchase any goods or services."
 msgstr ""
+"La informació obtinguda en aquestes enquestes no es vendrà mai a terceres "
+"parts ni serà utilitzada per demanar-vos que compreu bens o serveis."
 
 #: www/survey/privacy.php:44
 msgid ""
@@ -23440,24 +23398,33 @@ msgid ""
 "developers being surveyed. That profile will help visitors to the site "
 "understand the quality of a given project."
 msgstr ""
+"Aquesta informació es recull per construir un perfil dels projectes i "
+"desenvolupadors que s'estan desenvolupant. Aquest perfil ajudarà els "
+"visitants del lloc a entendre la qualitat d'un determinat projecte."
 
 #: www/survey/privacy.php:47
 msgid ""
 "The ID's of those who answer surveys are suppressed and not viewable by "
 "project administrators or the public or third parties."
 msgstr ""
+"Els ID's dels que responen les enquestes són eliminats i no són visibles per "
+"administradors de projecte, el públic o terceres parts."
 
 #: www/survey/privacy.php:50
 msgid ""
 "The information gathered is used only in aggregate form, not to single out "
 "specific users or developers."
 msgstr ""
+"La informació recollida només s'utilitza en forma agregada, no per "
+"singularitzar usuaris específics o desenvolupadors."
 
 #: www/survey/privacy.php:53
 msgid ""
 "If any changes are made to this policy, it will affect only future data that "
 "is collected and the user will of course have the ability to 'opt-out'."
 msgstr ""
+"Si hi hagués canvis en aquesta política, afectarien només dades futures "
+"recollides i l'usuari naturalment tindria l'opció de no participar."
 
 #: www/survey/rating_resp.php:59
 msgid "Vote registered"
@@ -23486,11 +23453,11 @@ msgid "Vote for Survey"
 msgstr "Nom de l'enquesta"
 
 #: www/survey/survey.php:55 www/survey/survey_resp.php:48
-#, fuzzy
 msgid ""
 "For some reason, the Project ID or Survey ID did not make it to this page"
 msgstr ""
-"Per alguna raó, l'ID de grup o l'ID d'enquesta no ho han fet a aquesta pàgina"
+"Per alguna motiu, l'ID de grup o l'ID d'enquesta no ho han fet a aquesta "
+"pàgina"
 
 #: www/survey/survey_resp.php:41
 msgid "Survey Complete"
