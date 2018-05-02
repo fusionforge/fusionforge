@@ -122,9 +122,8 @@ msgstr "ML: %s"
 
 #: common/account/actions/addsshkey.php:38
 #: common/account/actions/addsshkey.php:54
-#, fuzzy
 msgid "SSH Key added successfully."
-msgstr "用户添加成功"
+msgstr "SSH Key 添加成功。"
 
 #: common/account/actions/addsshkey.php:43
 #: common/docman/DocumentGroup.class.php:251
@@ -132,14 +131,12 @@ msgstr "用户添加成功"
 #: common/docman/actions/addfile.php:121 common/docman/actions/addfile.php:157
 #: common/tracker/actions/tracker.php:131
 #: common/tracker/actions/tracker.php:359 www/project/admin/editimages.php:58
-#, fuzzy
 msgid "Invalid file name."
-msgstr "全名错误"
+msgstr "无效的文件名。"
 
 #: common/account/actions/deletesshkey.php:31
-#, fuzzy
 msgid "SSH Key deleted successfully."
-msgstr "工作技能删除成功"
+msgstr "SSH Key 删除成功。"
 
 #: common/docman/Document.class.php:95
 #: common/docman/DocumentFactory.class.php:92
@@ -505,7 +502,7 @@ msgstr "使用论坛"
 #: www/tracker/roadmap.php:474
 #, php-format
 msgid ": "
-msgstr ""
+msgstr "："
 
 #: common/docman/Document.class.php:112
 #: common/docman/DocumentGroup.class.php:106 common/forum/Forum.class.php:138
@@ -672,9 +669,8 @@ msgid "Document Folder"
 msgstr "文件标题"
 
 #: common/docman/DocumentGroup.class.php:131
-#, fuzzy
 msgid "Name is required"
-msgstr "名称是保留的。"
+msgstr "请输入名字"
 
 #: common/docman/DocumentGroup.class.php:140
 #: common/docman/DocumentGroup.class.php:490
@@ -884,32 +880,29 @@ msgstr "无"
 #: common/docman/actions/updatewebdavinterface.php:34
 #: common/docman/actions/validatefile.php:40
 #: common/docman/views/addfile.php:51
-#, fuzzy
 msgid "Document Manager Action Denied."
-msgstr "文档管理"
+msgstr "无权限进行文档管理。"
 
 #: common/docman/actions/addfile.php:71
-#, fuzzy
 msgid "No valid folder was selected."
-msgstr "没有定义文件分组"
+msgstr "没有选择有效的文件夹。"
 
 #: common/docman/actions/addfile.php:89 common/docman/actions/addfile.php:103
-#, fuzzy
 msgid "Error getting blank document."
-msgstr "错误插入一个组成元件"
+msgstr "空白文档错误。"
 
 #: common/docman/actions/addfile.php:149
 msgid "Manual uploads disabled."
-msgstr ""
+msgstr "禁止手动上传。"
 
 #: common/docman/actions/addfile.php:173
 msgid "Unknown type submission."
 msgstr ""
 
 #: common/docman/actions/addfile.php:191
-#, fuzzy, php-format
+#, php-format
 msgid "Document %s submitted successfully."
-msgstr "文件已提交成功"
+msgstr "文件 %s 已提交成功。"
 
 #: common/docman/actions/addfile.php:194
 #, fuzzy, php-format
@@ -917,14 +910,12 @@ msgid "Document %s has been successfully uploaded and is waiting to be approved.
 msgstr "文件已提交成功"
 
 #: common/docman/actions/addsubdocgroup.php:62
-#, fuzzy
 msgid "Document subfolder successfully created."
-msgstr "文件已提交成功"
+msgstr "子文件夹创建成功。"
 
 #: common/docman/actions/addsubdocgroup.php:66
-#, fuzzy
 msgid "Document folder successfully created."
-msgstr "文件已提交成功"
+msgstr "文件夹创建成功。"
 
 #: common/docman/actions/deldir.php:63
 #, fuzzy, php-format
@@ -985,9 +976,8 @@ msgstr "更新成功"
 #: common/docman/actions/enforcereserve.php:37
 #: common/docman/actions/releasefile.php:36
 #: common/docman/actions/reservefile.php:39
-#, fuzzy
 msgid "Document(s)"
-msgstr "使用论坛"
+msgstr "文档"
 
 #: common/docman/actions/enforcereserve.php:46
 #, fuzzy
@@ -1141,7 +1131,7 @@ msgstr ""
 
 #: common/docman/views/addfile.php:93
 msgid "Refers to the relatively brief title of the document (e.g. How to use the download server)."
-msgstr ""
+msgstr "引用文件中相关的简单标题（例如：如何使用下载服务器）。"
 
 #: common/docman/views/addfile.php:96 common/docman/views/addfile.php:109
 #: common/docman/views/addfile.php:110 common/docman/views/editfile.php:43
@@ -1205,7 +1195,7 @@ msgstr "说明"
 
 #: common/docman/views/addfile.php:96
 msgid "A brief description to be placed just under the title."
-msgstr ""
+msgstr "放在该标题下的简单说明。"
 
 #: common/docman/views/addfile.php:99 common/docman/views/editfile.php:48
 msgid "Both fields are used by the document search engine."
@@ -1739,7 +1729,7 @@ msgstr "分组名称将被用作标题，所以它应该相应的格式化。"
 #: www/survey/include/SurveyHTML.class.php:197
 #, php-format
 msgid ":"
-msgstr ""
+msgstr "："
 
 #: common/docman/views/editfile.php:57
 msgid "Edit the contents to your desire or leave them as they are to remain unmodified."
@@ -2642,15 +2632,14 @@ msgid "Mailing List exists with same name."
 msgstr "邮件列表名称："
 
 #: common/forum/Forum.class.php:229
-#, fuzzy
 msgid "Error Adding Forum"
-msgstr "添加论坛错误"
+msgstr "添加讨论区错误"
 
 #: common/forum/Forum.class.php:240 cronjobs/shell/homedirs.php:158
 #: www/account/first.php:30
-#, fuzzy, php-format
+#, php-format
 msgid "Welcome to %s"
-msgstr "欢迎来到 %1$s"
+msgstr "欢迎来到 %s"
 
 #: common/forum/Forum.class.php:264
 msgid "Invalid forum group identifier."
@@ -2800,7 +2789,6 @@ msgstr "动作"
 #: plugins/taskboard/common/views/releases/delete_release.php:47
 #: plugins/taskboard/common/views/releases/edit_release.php:80
 #: plugins/taskboard/www/index.php:138
-#, fuzzy
 msgid "Release"
 msgstr "发布"
 
@@ -2991,7 +2979,6 @@ msgstr "由"
 
 #: common/forum/ForumHTML.class.php:264
 #: plugins/forumml/www/forumml_utils.php:556 www/forum/message.php:125
-#, fuzzy
 msgid "Reply"
 msgstr "回覆"
 
@@ -3204,9 +3191,8 @@ msgid "Filename can only be alphanumeric and “-”, “_”, “+”, “.”,
 msgstr "文件名只能是字符和“-”, “_”, “+”, “.”, “~”。"
 
 #: common/frs/FRSFile.class.php:134
-#, fuzzy
 msgid "FRSFile appears to be invalid."
-msgstr "FRSFile 似乎无效"
+msgstr "FRSFile 似乎无效。"
 
 #: common/frs/FRSFile.class.php:150
 #, fuzzy
@@ -3229,9 +3215,8 @@ msgstr "全名错误"
 
 #: common/frs/FRSFile.class.php:424 common/frs/FRSPackage.class.php:438
 #: common/frs/FRSRelease.class.php:435 common/frs/FRSRelease.class.php:454
-#, fuzzy
 msgid "Error On Update"
-msgstr "更新时错误："
+msgstr "更新时错误"
 
 #: common/frs/FRSFile.class.php:442
 msgid "That filename already exists in this project space"
@@ -3367,9 +3352,8 @@ msgid "Invalid FRS Package Object"
 msgstr "不正确用户"
 
 #: common/frs/FRSRelease.class.php:123 common/frs/FRSRelease.class.php:415
-#, fuzzy
 msgid "FRSRelease Name Must Be At Least 3 Characters"
-msgstr "文件发布系统规定文件名称必须至少3个字节"
+msgstr "FRSRelease 名称必须至少3个字节"
 
 #: common/frs/FRSRelease.class.php:145
 #, fuzzy
@@ -3649,13 +3633,13 @@ msgid "Help about Packages and Releases"
 msgstr ""
 
 #: common/frs/views/admin.php:64
-#, fuzzy
 msgid "Packages"
 msgstr "软件包"
 
 #: common/frs/views/admin.php:65
 msgid "You can use packages to group different file releases together, or use them however you like."
 msgstr ""
+"您可以使用软件包来把不同的文件一起成组发布，或者如果您愿意，分开发布也可以。"
 
 #: common/frs/views/admin.php:66
 #, fuzzy
@@ -3669,7 +3653,7 @@ msgstr "软件包："
 
 #: common/frs/views/admin.php:70
 msgid "Define your packages"
-msgstr ""
+msgstr "定义您的软件包"
 
 #: common/frs/views/admin.php:71
 #, fuzzy
@@ -3677,13 +3661,12 @@ msgid "Create new releases of packages."
 msgstr "点击这里创建新的发布"
 
 #: common/frs/views/admin.php:73
-#, fuzzy
 msgid "Releases of Packages"
-msgstr "发布记录"
+msgstr "软件包的发布"
 
 #: common/frs/views/admin.php:74
 msgid "A release of a package can contain multiple files."
-msgstr ""
+msgstr "一个软件包发布可以包含多个文件。"
 
 #: common/frs/views/admin.php:75
 #, fuzzy
@@ -3803,7 +3786,6 @@ msgstr "发布记录"
 
 #: common/frs/views/editrelease.php:81 common/frs/views/editrelease.php:169
 #: common/frs/views/qrs.php:57
-#, fuzzy
 msgid "Release Date"
 msgstr "发布日期"
 
@@ -3852,13 +3834,12 @@ msgid "Submit/Refresh"
 msgstr "提交/重新整理"
 
 #: common/frs/views/editrelease.php:126
-#, fuzzy
 msgid "Add Files To This Release"
-msgstr "第三步：编辑这个发布中的文件"
+msgstr "增加文件到这次发布中"
 
 #: common/frs/views/editrelease.php:127
 msgid "Now, choose a file to upload into the system."
-msgstr ""
+msgstr "现在，选择一个文件并且上传到系统中。"
 
 #: common/frs/views/editrelease.php:132 common/frs/views/qrs.php:62
 #: plugins/mediawiki/www/plugin_admin.php:185
@@ -3892,9 +3873,8 @@ msgid "Select / Deselect all files for massaction"
 msgstr ""
 
 #: common/frs/views/editrelease.php:166
-#, fuzzy
 msgid "Processor"
-msgstr "处理器类型"
+msgstr "处理器"
 
 #: common/frs/views/editrelease.php:178
 msgid "Select / Deselect this file for massaction"
@@ -4280,17 +4260,14 @@ msgstr "无效的帐号"
 
 #: common/include/Group.class.php:320 common/include/Group.class.php:324
 #: common/include/User.class.php:347
-#, fuzzy
 msgid "Unix name already taken."
-msgstr "Unix名称重复"
+msgstr "Unix名称重复。"
 
 #: common/include/Group.class.php:327
-#, fuzzy
 msgid "Please describe your Registration Project Purpose and Summarization in a more comprehensive manner."
-msgstr "请详细说明您为什么要在这里注册"
+msgstr "请详细说明您为什么要在这里注册。"
 
 #: common/include/Group.class.php:330
-#, fuzzy
 msgid "The Registration Project Purpose and Summarization text is too long. Please make it smaller than 1500 characters."
 msgstr "注册说明太长。请简化到不超过1500字节。"
 
@@ -4598,16 +4575,14 @@ msgstr "您在 %s 的项目注册被取消了"
 #: common/include/Group.class.php:2688 common/include/Group.class.php:2742
 #: common/include/Group.class.php:2760 www/register/index.php:186
 #: www/register/index.php:194
-#, fuzzy
 msgid "Project Full Name"
-msgstr "新项目名称"
+msgstr "项目全名"
 
 #: common/include/Group.class.php:2689 plugins/projectlabels/www/index.php:172
 #: www/admin/approve-pending.php:193 www/admin/groupedit.php:170
 #: www/admin/vhost.php:121 www/register/index.php:223
-#, fuzzy
 msgid "Project Unix Name"
-msgstr "新项目名称"
+msgstr "项目Unix名"
 
 #: common/include/Group.class.php:2690
 msgid "Reasons for negative decision"
@@ -4623,9 +4598,8 @@ msgid "Could not find user who has submitted the project."
 msgstr "无法找到提交项目的用户。"
 
 #: common/include/Group.class.php:2733
-#, fuzzy
 msgid "There is no administrator to send the mail to."
-msgstr "没有发送邮件的管理员"
+msgstr "没有发送邮件的管理员。"
 
 #: common/include/Group.class.php:2741 common/include/Group.class.php:2752
 #: common/include/Group.class.php:2759 common/include/Group.class.php:2765
@@ -4747,9 +4721,8 @@ msgid "Delete failed"
 msgstr "删除失败"
 
 #: common/include/MailParser.class.php:35
-#, fuzzy
 msgid "Error: file too large"
-msgstr "错误 - 停用的功能"
+msgstr "错误：文件太大"
 
 #: common/include/MailParser.class.php:84
 msgid "Error - only text/plain supported at this time"
@@ -4850,9 +4823,8 @@ msgid "Main Page"
 msgstr "主要页面"
 
 #: common/include/Navigation.class.php:238
-#, fuzzy
 msgid "My Page"
-msgstr "主要页面"
+msgstr "个人中心"
 
 #: common/include/Navigation.class.php:240
 msgid "Your Page, widgets selected by you to follow your items."
@@ -4892,9 +4864,8 @@ msgstr ""
 #: plugins/quota_management/www/quota_admin.php:38
 #: www/admin/globalroleedit.php:30 www/admin/index.php:39
 #: www/admin/vhost.php:109
-#, fuzzy
 msgid "Site Admin"
-msgstr "网站管理"
+msgstr "站点管理"
 
 #: common/include/Navigation.class.php:297
 msgid "Administration Submenu to handle global configuration, users & projects."
@@ -5054,9 +5025,11 @@ msgid "Soft link to www could not be created. Check the write permissions for ap
 msgstr "<br>无法创建www符号链接。请检查apache在/www/plugins的写权限或手工创建。"
 
 #: common/include/Plugin.class.php:205 common/include/Plugin.class.php:222
-#, fuzzy, php-format
+#, php-format
 msgid "Config file could not be linked to %s. Check the write permissions for apache in /etc/fusionforge/plugins or create the link manually."
-msgstr "配置文件无法链接到/etc/fusionforge/plugins/%s。请检查apache在/etc/fusionforge/plugins 的写权限或手工创建。"
+msgstr ""
+"配置文件无法链接到%s。请检查apache在/etc/fusionforge/plugins 的写权限或手工创"
+"建。"
 
 #: common/include/Plugin.class.php:251 common/include/Plugin.class.php:306
 #: www/admin/pluginman.php:269
@@ -5347,9 +5320,8 @@ msgid "Error: Cannot Update User Status:"
 msgstr "错误 - 不能更新组的Unix状态: %s"
 
 #: common/include/User.class.php:921 common/include/User.class.php:973
-#, fuzzy
 msgid "User with this email already exists."
-msgstr "帐号已存在"
+msgstr "已存在使用该email信箱的用户。"
 
 #: common/include/User.class.php:1081
 #, fuzzy, php-format
@@ -5916,7 +5888,6 @@ msgstr "专长资料"
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:75
 #: plugins/authldap/common/AuthLDAPPlugin.class.php:215
 #: www/account/index.php:146 www/account/lostpw.php:89
-#, fuzzy
 msgid "Login Name"
 msgstr "用户名称"
 
@@ -5926,7 +5897,6 @@ msgstr "用户名称"
 #: www/project/admin/massfinish.php:74
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:45
 #: www/top/topusers.php:64
-#, fuzzy
 msgid "Real Name"
 msgstr "真实姓名"
 
@@ -6637,7 +6607,6 @@ msgstr "定制: 消息主要部份是必须的"
 
 #: common/tracker/ArtifactExtraField.class.php:108
 #: common/tracker/ArtifactExtraField.class.php:405
-#, fuzzy
 msgid "A field name is required"
 msgstr "一个栏位名称是必须的"
 
@@ -6715,9 +6684,9 @@ msgid "The alias contains invalid characters. Only letters, numbers, hypens (-),
 msgstr "别名包含无效字符，只允许字母、数字、连字符(-)和下划线(_)。"
 
 #: common/tracker/ArtifactExtraField.class.php:531
-#, fuzzy, php-format
+#, php-format
 msgid "“%s” is a reserved alias. Please provide another name."
-msgstr "'%1$s' 是保留别名，请选用其他别名"
+msgstr "'%s' 是保留别名，请选用其他别名。"
 
 #: common/tracker/ArtifactExtraField.class.php:616
 msgid "Out of range value"
@@ -7446,9 +7415,8 @@ msgid "Selected CSV Format:"
 msgstr "更新"
 
 #: common/tracker/actions/csv.php:86
-#, fuzzy
 msgid "Download CSV file"
-msgstr "下载作为CSV"
+msgstr "下载CSV文件"
 
 #: common/tracker/actions/deleteartifact.php:32
 #, fuzzy
@@ -7806,9 +7774,8 @@ msgid "Could Not Get ProjectTaskFactory"
 msgstr ""
 
 #: common/tracker/actions/taskmgr.php:81 common/tracker/actions/taskmgr.php:98
-#, fuzzy
 msgid "No Available Tasks Found"
-msgstr "未发现可以存取的跟踪者"
+msgstr "未发现可使用任务"
 
 #: common/tracker/actions/taskmgr.php:103
 #: common/tracker/actions/taskmgr.php:158
@@ -7835,17 +7802,14 @@ msgid "Task"
 msgstr "任务"
 
 #: common/tracker/actions/taskmgr.php:118
-#, fuzzy
 msgid "Add Relationship to Selected Task"
 msgstr "添加选取任务的关系"
 
 #: common/tracker/actions/taskmgr.php:152
-#, fuzzy
 msgid "No Existing Project Groups Found"
 msgstr "没有发现项目组"
 
 #: common/tracker/actions/taskmgr.php:169
-#, fuzzy
 msgid "Add Relation to Existing Task"
 msgstr "添加既有任务的关系"
 
@@ -9397,9 +9361,8 @@ msgid "List the last 10 pieces of news posted by the project members."
 msgstr ""
 
 #: common/widget/Widget_ProjectMembers.class.php:33
-#, fuzzy
 msgid "Project Members"
-msgstr "项目成员列表"
+msgstr "项目成员"
 
 #: common/widget/Widget_ProjectMembers.class.php:48
 msgid "Project Admins"
@@ -9859,9 +9822,8 @@ msgstr "登录名或电子邮件地址"
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:79
 #: plugins/authldap/common/AuthLDAPPlugin.class.php:217
 #: www/account/verify.php:80
-#, fuzzy
 msgid "Password"
-msgstr "密码："
+msgstr "密码"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:82
 #: plugins/authldap/common/AuthLDAPPlugin.class.php:219
@@ -9876,9 +9838,8 @@ msgstr "[忘了密码？]"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:89
 #: www/account/pending-resend.php:55 www/account/register.php:274
-#, fuzzy
 msgid "Resend confirmation email to a pending account"
-msgstr "[重新发送确认邮件给未通过的帐号]"
+msgstr "重新发送确认邮件给未通过的帐号"
 
 #: plugins/authbuiltin/www/post-login.php:104
 #: plugins/authldap/www/post-login.php:103
@@ -11673,7 +11634,7 @@ msgstr ""
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:231
 #: www/search/include/renderers/HtmlSearchRenderer.class.php:104
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:112
-#, fuzzy, php-format
+#, php-format
 msgid "No matches found for “%s”"
 msgstr "找不到关于 “%s” 的资料"
 
@@ -12729,9 +12690,9 @@ msgid "Add Mailing List"
 msgstr "添加邮件列表"
 
 #: plugins/mailman/www/index.php:39 www/mail/index.php:54
-#, fuzzy, php-format
+#, php-format
 msgid "Mailing Lists for %s"
-msgstr "%1$s 的邮件列表"
+msgstr "%s 的邮件列表"
 
 #: plugins/mailman/www/index.php:55 www/mail/index.php:69
 #, php-format
@@ -13043,7 +13004,6 @@ msgid "MantisBT project not found"
 msgstr "错误 - 未发现版本"
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:647
-#, fuzzy
 msgid "Missing parameters"
 msgstr "缺少参数"
 
@@ -13217,7 +13177,6 @@ msgid "Add a new category"
 msgstr "增加新项目"
 
 #: plugins/mantisbt/view/admin/addVersion.php:31
-#, fuzzy
 msgid "Add a new version"
 msgstr "上传新版本"
 
@@ -16923,9 +16882,8 @@ msgid "To generate a public key, run the program 'ssh-keygen' (you can use both 
 msgstr "要产生这个公钥，执行这个程序 'ssh-keygen' (您可以使用protocol 1 或 2 两者其中之一)，这个 public key 将被放置在 '~/.ssh/identity.pub' (protocol 1) 与 '~/.ssh/id_dsa.pub' 或 '~/.ssh/id_rsa.pub' (protocol 2)。关于公钥请阅读SSH说明书来获取更进一步信息。"
 
 #: www/account/editsshkeys.php:69
-#, fuzzy
 msgid "Important: Make sure there are no line breaks. After submitting, verify that the number of keys in your file is what you expected."
-msgstr ">重要：确定除了在密钥之间外没有换行符，在提交之后，检验您文件中密钥的数值是您所期望的。"
+msgstr "重要：确定除了在密钥之间外没有换行符，在提交之后，检验您文件中密钥的数值是您所期望的。"
 
 #: www/account/editsshkeys.php:71
 msgid "Or upload your '~/.ssh/identity.pub' (protocol version 1) or '~/.ssh/id_dsa.pub' or '~/.ssh/id_rsa.pub' (protocol version 2)"
@@ -16969,14 +16927,12 @@ msgid "Member since"
 msgstr "帐号创建日期"
 
 #: www/account/index.php:153 www/account/register.php:176
-#, fuzzy
 msgid "First Name"
-msgstr "名字："
+msgstr "名字"
 
 #: www/account/index.php:162 www/account/register.php:183
-#, fuzzy
 msgid "Last Name"
-msgstr "姓氏："
+msgstr "姓氏"
 
 #: www/account/index.php:171 www/snippet/package.php:156
 #: www/snippet/snippet_utils.php:187 www/snippet/snippet_utils.php:221
@@ -17177,9 +17133,8 @@ msgid "Login Name (no uppercase letters; leave empty to have it generated automa
 msgstr ""
 
 #: www/account/register.php:151
-#, fuzzy
 msgid "Login Name (do not use uppercase letters)"
-msgstr "用户名称（请使用小写英文字母，名称开头不得使用数字）："
+msgstr "用户名称（请使用小写英文字母，名称开头不得使用数字）"
 
 #: www/account/register.php:158
 #, fuzzy
@@ -17187,9 +17142,8 @@ msgid "Password (min. 6 chars)"
 msgstr "密码（至少6个字节）："
 
 #: www/account/register.php:164
-#, fuzzy
 msgid "Password (repeat)"
-msgstr "密码（重复）："
+msgstr "密码（重复）"
 
 #: www/account/register.php:190
 msgid "Language Choice:"
@@ -17241,7 +17195,6 @@ msgid "Credentials you entered do not correspond to valid account."
 msgstr "您的认证输入不符合有效的帐号。"
 
 #: www/account/verify.php:60
-#, fuzzy
 msgid "Error while activating account"
 msgstr "启用帐号过程中错误"
 
@@ -17341,29 +17294,29 @@ msgid "Directory"
 msgstr "新项目名称"
 
 #: www/admin/admin_table.php:40
-#, fuzzy, php-format
+#, php-format
 msgid "Create a new %s below:"
-msgstr "创造一个新的 %1$s 如下："
+msgstr "创造一个新的 %s 如下："
 
 #: www/admin/admin_table.php:93 www/admin/admin_table.php:277
-#, fuzzy, php-format
+#, php-format
 msgid "%s successfully added."
-msgstr "%1$s 添加成功"
+msgstr "%s 添加成功。"
 
 #: www/admin/admin_table.php:114
-#, fuzzy, php-format
+#, php-format
 msgid "You cannot delete the processor %s since it is currently referenced in a file release."
-msgstr "因为它现今在一个文件发布中被列入参考，你不能删除处理器 %1$s。"
+msgstr "因为它现今在一个文件发布中被列入参考，你不能删除处理器 %s。"
 
 #: www/admin/admin_table.php:123
-#, fuzzy, php-format
+#, php-format
 msgid "You can't delete the license %s since it is currently referenced in a project."
-msgstr "因为它现今在一个项目中被列入参考，你不能删除授权方式 %1$s。"
+msgstr "因为它现今在一个项目中被列入参考，你不能删除授权方式 %s。"
 
 #: www/admin/admin_table.php:131
-#, fuzzy, php-format
+#, php-format
 msgid "You cannot delete the language %s since it is currently referenced in a user profile."
-msgstr "因为它现今在一个用户描述中被列入参考，你不能删除程序语言 %1$s。"
+msgstr "因为它现今在一个用户描述中被列入参考，你不能删除程序语言 %s。"
 
 #: www/admin/admin_table.php:140
 #, fuzzy, php-format
@@ -17371,29 +17324,29 @@ msgid "You cannot delete the theme %s since it is currently referenced in a user
 msgstr "因为它现今在一个用户描述中被列入参考，你不能删除程序语言 %1$s。"
 
 #: www/admin/admin_table.php:151
-#, fuzzy, php-format
+#, php-format
 msgid "Are you sure you want to delete this %s?"
-msgstr "您确定要删除这个 %1$s 吗？"
+msgstr "您确定要删除这个 %s 吗？"
 
 #: www/admin/admin_table.php:180
-#, fuzzy, php-format
+#, php-format
 msgid "%s successfully deleted."
-msgstr "%1$s 删除成功"
+msgstr "%s 删除成功。"
 
 #: www/admin/admin_table.php:201
-#, fuzzy, php-format
+#, php-format
 msgid "Modify the %s below:"
-msgstr "修改 %1$s 如下："
+msgstr "修改 %s 如下："
 
 #: www/admin/admin_table.php:256
-#, fuzzy, php-format
+#, php-format
 msgid "%s successfully modified."
-msgstr "%1$s 修改成功"
+msgstr "%s 修改成功。"
 
 #: www/admin/admin_table.php:348
-#, fuzzy, php-format
+#, php-format
 msgid "Edit the %ss Table"
-msgstr "编辑 %1$s 表格"
+msgstr "编辑 %s 表格"
 
 #: www/admin/approve-pending.php:48 www/project/admin/tools.php:34
 #: www/snapshots.php:41 www/tarballs.php:42
@@ -17742,9 +17695,8 @@ msgstr "注册时间"
 #: www/admin/useredit.php:266 www/admin/useredit.php:293
 #: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:75
 #: www/register/index.php:246 www/register/index.php:249
-#, fuzzy
 msgid "Unix Name"
-msgstr "Unix帐号"
+msgstr "Unix名"
 
 #: www/admin/grouplist.php:71
 msgid "Public?"
@@ -17802,9 +17754,9 @@ msgid "User Maintenance"
 msgstr "用户维护"
 
 #: www/admin/index.php:47
-#, fuzzy, php-format
+#, php-format
 msgid "Active site users: <strong>%d</strong>"
-msgstr "已激活的用户：<strong>%1$s</strong>"
+msgstr "已激活的用户：<strong>%d</strong>"
 
 #: www/admin/index.php:48
 msgid "Display Full User List/Edit Users"
@@ -18321,12 +18273,10 @@ msgid "New category short name (no spaces, Unix-like)"
 msgstr "新类别缩写 (没有空白，像是Unix)"
 
 #: www/admin/trove/trove_cat_add.php:112
-#, fuzzy
 msgid "New category full name (maximum length is 80 chars)"
 msgstr "新类别完整名称 (80字节)"
 
 #: www/admin/trove/trove_cat_add.php:114
-#, fuzzy
 msgid "New category description (maximum length is 255 chars)"
 msgstr "新类别说明 (255字节)"
 
@@ -19364,9 +19314,11 @@ msgid "This drop-down box represents the current status of a tracker item."
 msgstr "这下拉式选单代表一个跟踪者项目的现在状态。"
 
 #: www/include/html.php:385
-#, fuzzy
 msgid "You can set the status to “Pending” if you are waiting for a response from the tracker item author.  When the author responds the status is automatically reset to that of “Open”. Otherwise, if the author does not respond with an admin-defined amount of time (default is 14 days) then the item is given a status of “Deleted”."
-msgstr "这下拉式选单代表一个跟踪者项目的现在状态。<br /><br />如果你正在等候来自跟踪者项目作者的一个回应，你能将状态设置为'未决定的'。当作者回应时，这状态将自动重新设置为'Open'。否则，如果作者未在管理员定义的时间点内回应(预设是14天)，然后这个项目将被给予'Deleted'的状态。"
+msgstr ""
+"如果你正在等候来自跟踪者项目作者的一个回应，你能将状态设置为“未决定的”。当作"
+"者回应时，这状态将自动重新设置为“Open”。否则，如果作者未在管理员定义的时间点"
+"内回应(预设是14天)，然后这个项目将被给予“Deleted”的状态。"
 
 #: www/include/html.php:387
 #, fuzzy
@@ -20028,9 +19980,9 @@ msgid "Unable to get the list %s: %s"
 msgstr ""
 
 #: www/mail/index.php:98
-#, fuzzy, php-format
+#, php-format
 msgid "%s Archives"
-msgstr "%1$s 文件"
+msgstr "%s 文件"
 
 #: www/mail/index.php:101
 msgid "Subscribe/Unsubscribe/Preferences"
@@ -20488,9 +20440,8 @@ msgid "Long Description"
 msgstr "详细说明"
 
 #: www/people/createjob.php:53
-#, fuzzy
 msgid "Continue"
-msgstr "继续 >>"
+msgstr "继续"
 
 #: www/people/editjob.php:61
 #, fuzzy, php-format
@@ -20575,9 +20526,8 @@ msgid "No such posting for this project"
 msgstr "该项目没有这样的文章"
 
 #: www/people/editjob.php:158
-#, fuzzy
 msgid "Now you can edit/change the list of skills attached to this posting. Developers will be able to match their skills with your requirements."
-msgstr "<p>现在您可以编辑/改变这个文章的技能列表。开发人员可以根据您的技能要求列表来判断他们是否符合您的要求。 </p><p>您的布告在两星期后自动关闭。</p>"
+msgstr "现在您可以编辑/改变这个文章的技能列表。开发人员可以根据您的技能要求列表来判断他们是否符合您的要求。"
 
 #: www/people/editjob.php:160
 msgid "All postings are automatically closed after two weeks."
@@ -20601,9 +20551,9 @@ msgid "User updated successfully"
 msgstr "用户更新成功"
 
 #: www/people/editprofile.php:100
-#, fuzzy, php-format
+#, php-format
 msgid "Failed to add the skill %s"
-msgstr "增加技能失败"
+msgstr "增加技能失败%s"
 
 #: www/people/editprofile.php:102
 msgid "Skill added successfully"
@@ -20670,9 +20620,9 @@ msgid "No skills selected to delete."
 msgstr "没有选择技能进行删除"
 
 #: www/people/editprofile.php:186
-#, fuzzy, php-format
+#, php-format
 msgid "Failed to delete any skills: %s"
-msgstr "删除技能失败"
+msgstr "删除技能失败: %s"
 
 #: www/people/editprofile.php:188
 #, fuzzy
@@ -20785,22 +20735,25 @@ msgstr "点击工作标题来获得更详细的描述"
 #, php-format
 msgid "The %s Project Help Wanted board is for non-commercial, project volunteer openings. Commercial use is prohibited."
 msgstr ""
+"%s 项目寻求协助讨论版为非商业化的项目自愿者开设的。商业性的使用是禁止的。"
 
 #: www/people/index.php:66
 msgid "Project listings remain live for two weeks, or until closed by the poster, whichever comes first. (Project administrators may always re-post expired openings.)"
 msgstr ""
+"寻求协助的文章将存活两个星期，或者被用户主动关闭。（项目管理员可能总是在过期"
+"前重复张贴"
 
 #: www/people/index.php:70
 msgid "Browse through the category menu to find projects looking for your help."
-msgstr ""
+msgstr "通过分类目录浏览并发现需要您帮助的项目。"
 
 #: www/people/index.php:74
 msgid "If you're a project admin, log in and submit help wanted requests through your project administration page."
-msgstr ""
+msgstr "如果您是项目管理员，请登录并通过您的项目管理页来发布需要帮助的信息。"
 
 #: www/people/index.php:78
 msgid "To suggest new job categories, submit a request via the support manager."
-msgstr ""
+msgstr "如果需要增加一种新的工作分类，请向支持管理员提交一个请求。"
 
 #: www/people/index.php:83
 msgid "Last posts"
@@ -20860,7 +20813,6 @@ msgid "Error inserting into job inventory: "
 msgstr "错误 － 无法添加技能目录"
 
 #: www/people/people_utils.php:220
-#, fuzzy
 msgid "Added to job inventory"
 msgstr "加入到技能目录"
 
@@ -20874,16 +20826,15 @@ msgid "Invalid ID"
 msgstr "无效的编号"
 
 #: www/people/people_utils.php:398
-#, fuzzy
 msgid "No categories found."
-msgstr "没有发现分类"
+msgstr "没有发现分类。"
 
 #: www/people/people_utils.php:444
 msgid "Date Opened"
 msgstr "提交日期"
 
 #: www/people/people_utils.php:445 www/softwaremap/trove_list.php:196
-#, fuzzy, php-format
+#, php-format
 msgid "%s project"
 msgid_plural "%s projects"
 msgstr[0] "%s 项目"
@@ -20936,7 +20887,6 @@ msgid "Skills profile for"
 msgstr "技能能力"
 
 #: www/people/viewprofile.php:73
-#, fuzzy
 msgid "Edit your profile"
 msgstr "编辑您的个人能力"
 
@@ -21890,7 +21840,6 @@ msgid "Project WWW directory on shell server:"
 msgstr "shell服务器上的www目录："
 
 #: www/project/admin/index.php:134
-#, fuzzy
 msgid "Descriptive Project Name"
 msgstr "说明性的项目名称"
 
@@ -22146,9 +22095,8 @@ msgid "Use Tasks"
 msgstr "任务"
 
 #: www/project/admin/tools.php:228
-#, fuzzy
 msgid "Use Documents"
-msgstr "使用论坛"
+msgstr "使用文件产生器"
 
 #: www/project/admin/tools.php:243
 msgid "Use Surveys"
@@ -22159,9 +22107,8 @@ msgid "Use News"
 msgstr "使用新闻"
 
 #: www/project/admin/tools.php:273
-#, fuzzy
 msgid "Use Source Code"
-msgstr "来源 IP"
+msgstr "使用SCM"
 
 #: www/project/admin/tools.php:288
 msgid "Use File Release System"
@@ -22723,7 +22670,6 @@ msgid "Add Entry"
 msgstr "添加项目"
 
 #: www/reporting/timeadd.php:194
-#, fuzzy
 msgid "Choose a Project/Subproject in the Tasks. You will then have to choose a Task and category to record your time in."
 msgstr "在任务管理中选择一个项目/子项目，您然后将必须选择一个任务和种类记录你的时间。"
 
@@ -22993,9 +22939,8 @@ msgid "Post Date"
 msgstr "张贴日期"
 
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:154
-#, fuzzy
 msgid "search query too short"
-msgstr "错误:查询请求太短"
+msgstr "查询请求太短"
 
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:175
 #, fuzzy, php-format
@@ -23085,7 +23030,6 @@ msgid "Error: Only the creator of a package version can add snippets to it."
 msgstr "错误 - 只有软件包版本的创建者可以添加代码到其中"
 
 #: www/snippet/add_snippet_to_package.php:84 www/snippet/addversion.php:40
-#, fuzzy
 msgid "Error: snippet does not exist"
 msgstr "错误 - 代码不存在"
 
@@ -23391,9 +23335,8 @@ msgid "Browse by Language"
 msgstr "依程序语言浏览"
 
 #: www/snippet/package.php:57
-#, fuzzy
 msgid "Error doing snippet package insert"
-msgstr "错误, 错误 - 代码软件包不存在"
+msgstr "插入代码版本时发生错误"
 
 #: www/snippet/package.php:58 www/snippet/package.php:76
 #: www/snippet/package.php:127
@@ -23576,9 +23519,9 @@ msgid_plural "Displaying %d projects per page. Projects sorted by alphabetical o
 msgstr[0] ""
 
 #: www/softwaremap/tag_cloud.php:162
-#, fuzzy, php-format
+#, php-format
 msgid "Activity Percentile: <strong>%3.0f</strong>"
-msgstr "已激活的用户：<strong>%1$s</strong>"
+msgstr "活跃度: <strong>%3.0f</strong>"
 
 #: www/softwaremap/trove_list.php:58
 msgid "Software Map"
@@ -23811,20 +23754,20 @@ msgstr "您尚未选择授权方式"
 
 #: www/survey/admin/index.php:58
 msgid "It's simple to create a survey."
-msgstr ""
+msgstr "创造问卷是轻而易举的。"
 
 #: www/survey/admin/index.php:62
 msgid "Create questions and comments using the forms above."
-msgstr ""
+msgstr "使用上述构成问卷项目创造问题和注释。"
 
 #: www/survey/admin/index.php:65
 msgid "Create a survey, listing the questions in order (choose from <strong>your</strong> list of questions)."
-msgstr ""
+msgstr "创造问卷，有条理的列出题目(从<strong>您的</strong>问题列表选择)。"
 
 #: www/survey/admin/index.php:68
 #, php-format
 msgid "Link to the survey using this format: %s where XX is the survey number"
-msgstr ""
+msgstr "链接问卷时网址使用格式：%s 此处 XX 代表问卷编号。"
 
 #: www/survey/admin/index.php:73
 #, php-format
@@ -24059,22 +24002,28 @@ msgstr "搜索整个的项目"
 #: www/survey/privacy.php:41
 msgid "The information collected in these surveys will never be sold to third parties or used to solicit you to purchase any goods or services."
 msgstr ""
+"在这些调查中被收集的资料将不会被卖给第三者或者用来请求你购买任何的产品或服"
+"务。"
 
 #: www/survey/privacy.php:44
 msgid "This information is being gathered to build a profile of the projects and developers being surveyed. That profile will help visitors to the site understand the quality of a given project."
 msgstr ""
+"这被收集的资料是作为创建被审视的项目与开发人员的概述，这概述将协助访客至本站"
+"了解该项目的品质。"
 
 #: www/survey/privacy.php:47
 msgid "The ID's of those who answer surveys are suppressed and not viewable by project administrators or the public or third parties."
-msgstr ""
+msgstr "回答问卷调查的编号会被隐藏并不会被项目管理员或被公开或被第三者看见。"
 
 #: www/survey/privacy.php:50
 msgid "The information gathered is used only in aggregate form, not to single out specific users or developers."
-msgstr ""
+msgstr "被收集的资料只有以整体的形式被使用，不会再选出特定的用户或开发人员。"
 
 #: www/survey/privacy.php:53
 msgid "If any changes are made to this policy, it will affect only future data that is collected and the user will of course have the ability to 'opt-out'."
 msgstr ""
+"如果任何的改变被打造成一个政策，它将只有影响未来资料的收集，而用户当然有权利"
+"\"选择退出\"。"
 
 #: www/survey/rating_resp.php:59
 msgid "Vote registered"
@@ -24103,7 +24052,6 @@ msgid "Vote for Survey"
 msgstr "问卷名称"
 
 #: www/survey/survey.php:57 www/survey/survey_resp.php:50
-#, fuzzy
 msgid "For some reason, the Project ID or Survey ID did not make it to this page"
 msgstr "基于某些理由，群组编号或问卷编号不能出现在这个页面"
 
@@ -24178,7 +24126,7 @@ msgid "More"
 msgstr "更多"
 
 #: www/top/toplist.php:37
-#, fuzzy, php-format
+#, php-format
 msgid "Top Weekly Project Pageviews at *.%1$s (from impressions of %2$s logo)"
 msgstr "每周项目页面浏览排行榜在 *.%1$s (从 %2$s 标志的印象)"
 
