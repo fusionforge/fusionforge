@@ -64,7 +64,6 @@ msgid "Document Manager Action Denied."
 msgstr "Dokumenten Manager Aktion untersagt."
 
 #: common/docman/actions/addfile.php:75
-#, fuzzy
 msgid "No valid folder was selected."
 msgstr "Keine gültige Dokumenten-Gruppe ausgewählt."
 
@@ -602,9 +601,8 @@ msgid "Document Title"
 msgstr "Dokumenten-Titel"
 
 #: common/docman/Document.class.php:952
-#, fuzzy
 msgid "Document description"
-msgstr "Rollenbeschreibung:"
+msgstr "Dokumentenbeschreibung"
 
 #: common/docman/Document.class.php:953
 #: common/docman/DocumentGroup.class.php:731
@@ -639,9 +637,8 @@ msgstr "Keine Dokumente gefunden"
 #: common/docman/DocumentGroup.class.php:67
 #: common/docman/views/listfile.php:173
 #: common/docman/views/listtrashfile.php:116
-#, fuzzy
 msgid "Document Folder"
-msgstr "Dokumenten-Titel"
+msgstr "Dokumenten-Ordner"
 
 #: common/docman/DocumentGroup.class.php:101
 msgid "Name is required"
@@ -1169,7 +1166,7 @@ msgstr "Unterprojekt"
 
 #: common/docman/views/listfile.php:171 common/docman/views/search.php:151
 msgid "Path"
-msgstr ""
+msgstr "Pfad"
 
 #: common/docman/views/listfile.php:175 common/docman/views/listfile.php:206
 #: common/docman/views/listtrashfile.php:118
@@ -2336,7 +2333,6 @@ msgid "Mailing List exists with same name."
 msgstr "Mailingliste mit gleichem Namen existiert bereits"
 
 #: common/forum/Forum.class.php:230
-#, fuzzy
 msgid "Error Adding Forum"
 msgstr "Fehler beim Anlegen eines Forums"
 
@@ -2412,9 +2408,8 @@ msgid "Forum not found"
 msgstr "Forum nicht gefunden."
 
 #: common/forum/ForumFactory.class.php:192
-#, fuzzy
 msgid "Thread not found"
-msgstr "Thread nicht verschoben"
+msgstr "Thread nicht gefunden"
 
 #: common/forum/ForumHTML.class.php:68 www/export/rssAboTask.php:171
 msgid "Posted by"
@@ -3459,10 +3454,8 @@ msgid "Submitted Description"
 msgstr "Eingegebene Beschreibung"
 
 #: common/include/Group.class.php:2696
-#, fuzzy
 msgid "Please visit the following URL to approve or reject this project"
-msgstr ""
-"Bitte besuchen Sie den folgenden Link, um die Änderung zu vervollständigen"
+msgstr "Bitte besuche folgende URL um das Projekt zuzulassen oder abzulehnen"
 
 #: common/include/Group.class.php:2708
 #, php-format
@@ -3867,7 +3860,7 @@ msgstr ""
 #: common/include/Plugin.class.php:250 common/include/Plugin.class.php:309
 #: www/admin/pluginman.php:279
 msgid "Current plugin status is"
-msgstr ""
+msgstr "Aktueller Plugin Status ist"
 
 #: common/include/Plugin.class.php:281 common/include/Plugin.class.php:330
 #, php-format
@@ -3884,6 +3877,8 @@ msgid ""
 "Some plugin did not provide a name. I'd gladly tell you which one, but "
 "obviously I cannot. Sorry."
 msgstr ""
+"Einige Plugins stellen keinen Namen bereit. Ich würde freudig diesen "
+"benennen kann es aber nicht."
 
 #: common/include/PluginPersistence.class.php:111
 msgid "More than one value for the plugin + key"
@@ -3897,14 +3892,12 @@ msgstr ""
 "%2$s überschritten"
 
 #: common/include/RBAC.php:195
-#, fuzzy
 msgid "Cannot link to home project"
-msgstr "Unixname des Projekts:"
+msgstr "Kann nicht zum Projekt verlinken"
 
 #: common/include/RBAC.php:230
-#, fuzzy
 msgid "Cannot unlink from home project"
-msgstr "Alle Tracker für meine Projekte"
+msgstr "Kann Link zum Projekt nicht auflösen"
 
 #: common/include/RBAC.php:599
 msgid "UNKNOWN (internal error, report bug to FusionForge)"
@@ -4313,9 +4306,9 @@ msgid "Cannot create directory:"
 msgstr ""
 
 #: common/include/Storage.class.php:66
-#, fuzzy, php-format
+#, php-format
 msgid "File %1$s cannot be moved to the permanent location: %2$s."
-msgstr "Datei kann nicht zum aktuellen Ort verschoben werden"
+msgstr "Datei %1$s kann nicht zum aktuellen Ort %2$s verschoben werden."
 
 #: common/include/Storage.class.php:70
 #, php-format
@@ -4351,9 +4344,8 @@ msgid "Passwords do not match"
 msgstr "Die Passwörter sind nicht identisch"
 
 #: common/include/User.class.php:332
-#, fuzzy
 msgid "Invalid Password"
-msgstr "Ungültiges Passwort:"
+msgstr "Ungültiges Passwort"
 
 #: common/include/User.class.php:337
 msgid "Invalid Unix Name (must not contain uppercase characters)"
@@ -4492,9 +4484,8 @@ msgid "Error - Could Not Add User SSH Key:"
 msgstr "Fehler - Konnte den Unix Gruppen Status nicht aktualisieren: %s"
 
 #: common/include/User.class.php:1278
-#, fuzzy
 msgid "Error: Cannot Update User SSH Keys"
-msgstr "Fehler - Konnte den Unix Gruppen Status nicht aktualisieren: %s"
+msgstr "Fehler - Konnte Benutzer SSH Schlüssel nicht aktualisieren"
 
 #: common/include/User.class.php:1424 common/include/User.class.php:1460
 #: common/include/User.class.php:1484
@@ -4614,9 +4605,8 @@ msgstr "Ein Forum mit dem selben Namen existiert bereits"
 
 #: common/mail/MailingList.class.php:174
 #: plugins/mailman/include/MailmanList.class.php:163
-#, fuzzy
 msgid "Error Creating mailing list"
-msgstr "Existierende Mailinglisten"
+msgstr "Fehler beim Erstellen der Mailingliste"
 
 #: common/mail/MailingList.class.php:189
 #, fuzzy, php-format
@@ -5073,6 +5063,10 @@ msgid ""
 "tracker having separate user, group, category, and permission lists. You can "
 "also easily move items between trackers when needed."
 msgstr ""
+"Sie können dieses System nutzen um praktisch alle Arten von Daten zu "
+"verfolgen, wobei jeder Tracker separate Nutzer-, Gruppen-, Kategorie- und "
+"Berechtigungs-Listen haben kann. Sie können, falls nötig, Objekte auch "
+"einfach zwischen Trackern verschieben."
 
 #: common/tracker/actions/admin-ind.php:131
 msgid ""
@@ -6667,9 +6661,9 @@ msgid "Invalid Group"
 msgstr "Ungültiger Projekt"
 
 #: common/tracker/Roadmap.class.php:103
-#, fuzzy, php-format
+#, php-format
 msgid "“%s” roadmap already exists"
-msgstr "Dieser Feldname existiert bereits."
+msgstr "»%s« Fahrplan existiert bereits"
 
 #: common/tracker/views/form-addcanned.php:27
 #, php-format
@@ -7239,9 +7233,9 @@ msgid "Configure Workflow"
 msgstr "Workflow konfigurieren"
 
 #: common/tracker/views/form-workflow.php:57
-#, fuzzy, php-format
+#, php-format
 msgid "Allowed initial values for the %s field"
-msgstr "Erlaubte Ausgangswerte für das %s - Feld"
+msgstr "Erlaubte Ausgangswerte für das %s Feld"
 
 #: common/tracker/views/form-workflow.php:63
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:48
@@ -7444,6 +7438,8 @@ msgstr "Lesezeichen hinzufügen"
 #, php-format
 msgid "List your favorite bookmarks (your favorite pages in %s or external)."
 msgstr ""
+"Aufstellung Deiner beliebtesten Bookmarks (Deine beliebtesten Seiten in %s "
+"oder extern)."
 
 #: common/widget/Widget_MyBookmarks.class.php:66
 #, php-format
@@ -7452,12 +7448,18 @@ msgid ""
 "bookmark sophisticated items like Software Map browsing, typical search in "
 "your project Bug or Task database, etc."
 msgstr ""
+"Beachte, dass in vielen Fällen %s die URL mit den eingebetteten "
+"Informationen benutzt um differenziert an Informationen zu Software Map "
+"Browsing, typischen Suchen in der Fehler- oder Aufgabendatenbank, etc. zu "
+"gelangen."
 
 #: common/widget/Widget_MyBookmarks.class.php:68
 msgid ""
 "Bookmarked items can be edited which means that both the title of the "
 "bookmark and its destination URL can be modified."
 msgstr ""
+"Alle Eigenschaften der Bookmarks können editiert werden, der Titel als auch "
+"die Ziel URL können verändert werden."
 
 #: common/widget/Widget_MyLatestSvnCommits.class.php:31
 msgid "My Latest SVN Commits"
@@ -7515,7 +7517,7 @@ msgstr "Documentation Manager"
 
 #: common/widget/Widget_MyMonitoredDocuments.class.php:107
 msgid "List documents that you are currently monitoring, by project."
-msgstr ""
+msgstr "Aufstellung der Dokumente die Du aktuell beobachtest, nach Projekt."
 
 #: common/widget/Widget_MyMonitoredDocuments.class.php:109
 #: common/widget/Widget_MyMonitoredForums.class.php:144
@@ -7524,6 +7526,8 @@ msgid ""
 "To cancel any of the monitored items just click on the trash icon next to "
 "the item label."
 msgstr ""
+"Um die Beobachtung zu beenden klicke auf das Papierkorb Symbol neben dem "
+"Eintrag."
 
 #: common/widget/Widget_MyMonitoredForums.class.php:37
 msgid "Monitored Forums"
@@ -7555,7 +7559,7 @@ msgstr "Dieses Forum nicht weiter beobachten?"
 
 #: common/widget/Widget_MyMonitoredForums.class.php:142
 msgid "List forums that you are currently monitoring, by project."
-msgstr ""
+msgstr "Auflistung der Foren die Du aktuell beobachtest, nach Projekt."
 
 #: common/widget/Widget_MyMonitoredFp.class.php:33
 msgid "Monitored File Packages"
@@ -7579,6 +7583,8 @@ msgid ""
 "You can monitor files by visiting a project's “Summary Page” and clicking on "
 "the appropriate icon in the files section."
 msgstr ""
+"Du kannst Dateien beobachten in dem Du die Übersichtsseite des Projekts "
+"besuchst und das zugehörige Icon In der Datei Sektion anklickst."
 
 #: common/widget/Widget_MyMonitoredFp.class.php:104
 msgid "Stop Monitoring this Package?"
@@ -7586,7 +7592,7 @@ msgstr "Dieses Paket nicht weiter beobachten?"
 
 #: common/widget/Widget_MyMonitoredFp.class.php:122
 msgid "List packages that you are currently monitoring, by project."
-msgstr ""
+msgstr "Aufstellung der Pakete die Du aktuell beobachtest, nach Projekt."
 
 #: common/widget/Widget_MyProjects.class.php:38
 #: plugins/globaldashboard/include/globalDashboard_Widget_MyArtifacts.php:50
@@ -7904,19 +7910,23 @@ msgstr "Zeige alle Projektdateien"
 msgid ""
 "List the most recent packages available for download along with their "
 "revision."
-msgstr ""
+msgstr "Liste der aktuellsten Pakete mit Versionsangabe zum Download."
 
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:175
 msgid ""
 "A Release Notes icon allows you to see the latest changes and developers "
 "comments associated with this revision."
 msgstr ""
+"Das Veröffentlichungs-Hinweis Symbol lässt Sie die neuesten Änderungen und "
+"Entwickler-Kommentare, die mit dieser Revision verbunden zu sehen."
 
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:177
 msgid ""
 "Then comes the monitor icon, selecting this icon will cause this package to "
 "be monitored for you."
 msgstr ""
+"Danach kommt das Beobachtungs Icon, wenn Sie dieses Icon auswählen dann "
+"beobachten Sie dies Paket."
 
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:179
 msgid ""
@@ -7925,6 +7935,11 @@ msgid ""
 "your Personal Page and can be canceled from this page or from the main page "
 "of the file release system."
 msgstr ""
+"Jeder Zeit wenn das Projekt Development Team eine neue Version "
+"veröffentlicht werden Sie per E-Mail darüber informiert. Alle beobachteten "
+"Dateiveröffentlichungen werden auf Ihrer persönlichen Seite aufgelistet und "
+"können von dort oder der Hauptseite vom Veröffentlichungssystem wieder "
+"entfernt werden."
 
 #: common/widget/Widget_ProjectLatestNews.class.php:80
 msgid "List the last 10 pieces of news posted by the project members."
@@ -8041,6 +8056,9 @@ msgid ""
 "List all available services for this project along with some information "
 "next to it. Click on any of this item to access a service."
 msgstr ""
+"Liste alle verfügbaren Dienste für dieses Projekt zusammen mit einigen "
+"Informationen daneben. Klicke auf einen Eintrag um auf den Dienst zu "
+"gelangen."
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:224
 msgid ""
@@ -8048,6 +8066,9 @@ msgid ""
 "the top of the screen except that it shows additional information about each "
 "of the service (e.g. total number of open bugs, tasks, ...)"
 msgstr ""
+"Die Anzeige ist sehr ähnlich zum Projekt-Hauptmenü am oberen Rand des "
+"Bildschirms, es zeigt ausserdem zusätzliche Informationen zu den einzelnen "
+"Diensten (z.B. Gesamtzahl der offenen Bugs, Aufgaben, ...)"
 
 #: common/widget/Widget_ProjectRss.class.php:40
 msgid "Include public rss (or atom) feeds into project homepage."
@@ -8274,7 +8295,7 @@ msgstr ""
 
 #: plugins/admssw/include/admsswPlugin.class.php:634
 #: www/softwaremap/full_list.php:70
-#, fuzzy, php-format
+#, php-format
 msgid "<strong>%d</strong> projects in result set."
 msgstr "<strong>%d</strong> Projekte in der Ergebnisliste."
 
@@ -8602,9 +8623,9 @@ msgstr "OpenID Plugin ist nicht aktiviert für diesen Benutzer Account"
 
 #: plugins/authopenid/www/post-login.php:105
 #: plugins/authwebid/www/post-login.php:85
-#, fuzzy, php-format
+#, php-format
 msgid "Unknown user with identity “%s”"
-msgstr "Unbekannte Spezialgruppe »%s«"
+msgstr "Unbekannter Benutzer mit der Identität »%s«"
 
 #: plugins/authwebid/include/AuthWebIDPlugin.class.php:82
 #, php-format
@@ -8623,9 +8644,8 @@ msgid "Cannot bind new identity: %s"
 msgstr "Kann neuen Tab-Eintrag nicht einfügen: %s"
 
 #: plugins/authwebid/include/AuthWebIDPlugin.class.php:288
-#, fuzzy
 msgid "WebID already used"
-msgstr "Nutzer hinzufügen"
+msgstr "WebID schon benutzt"
 
 #: plugins/authwebid/include/AuthWebIDPlugin.class.php:295
 msgid "WebID already pending binding"
@@ -8840,32 +8860,36 @@ msgid ""
 "You can create boxes like the ones on the right site of summary page, by "
 "inserting the following sentences in the content:"
 msgstr ""
+"Sie können Boxen wie die auf der rechten Seite der Übersichtsseite "
+"erstellen, indem Sie folgenden Inhalt hinzufügen:"
 
 #: plugins/blocks/www/index.php:328
 msgid ": will create the top part of the box using Hello as title."
-msgstr ""
+msgstr ": erstellt den oberen Teil der Box mit Hallo als Titel."
 
 #: plugins/blocks/www/index.php:331
 msgid ": will create a middle part of a box using Here as title (optional)."
-msgstr ""
+msgstr ": erstellt den mittleren Teil der Box mit dem Titel Hier (optional)."
 
 #: plugins/blocks/www/index.php:334
 msgid ": will create the end part of a box."
-msgstr ""
+msgstr ": erstellt den unteren Teil der Box."
 
 #: plugins/blocks/www/index.php:337
 msgid ": will create a header before a text."
-msgstr ""
+msgstr ": erstellt den Kopfteil über dem Text."
 
 #: plugins/blocks/www/index.php:339
 msgid ": will create a footer after a text."
-msgstr ""
+msgstr ": erstellt den Fußteil nach dem Text."
 
 #: plugins/blocks/www/index.php:341
 msgid ""
 "You can create as many boxes as you want, but a boxTop has to be closed by a "
 "boxBottom and a boxHeader has to be closed by a boxFooter."
 msgstr ""
+"ie können so viele Boxen erstellen wie Sie möchten, jedoch muss ein boxTop "
+"und/oder ein boxHeader immer durch ein boxFooter abgeschlossen werden."
 
 #: plugins/blocks/www/index.php:356
 msgid "Block configuration saved"
@@ -9154,33 +9178,31 @@ msgstr "Einen neuen Teilnehmer registrieren"
 
 #: plugins/contribtracker/www/global_admin.php:435
 #: plugins/contribtracker/www/global_admin.php:465
-#, fuzzy
 msgid "Actor name"
-msgstr "Teilnehmer-Name:"
+msgstr "Teilnehmer Name"
 
 #: plugins/contribtracker/www/global_admin.php:436
 #: plugins/contribtracker/www/global_admin.php:466
-#, fuzzy
+
 msgid "Actor URL"
-msgstr "Teilnehmer URL:"
+msgstr "Teilnehmer URL"
 
 #: plugins/contribtracker/www/global_admin.php:437
 #: plugins/contribtracker/www/global_admin.php:467
-#, fuzzy
 msgid "Actor email"
-msgstr "Teilnehmer E-Mail:"
+msgstr "Teilnehmer E-Mail"
 
 #: plugins/contribtracker/www/global_admin.php:438
 #: plugins/contribtracker/www/global_admin.php:468
-#, fuzzy
+
 msgid "Actor description"
-msgstr "Teilnehmer Beschreibung:"
+msgstr "Teilnehmer Beschreibung"
 
 #: plugins/contribtracker/www/global_admin.php:440
 #: plugins/contribtracker/www/global_admin.php:470
-#, fuzzy, php-format
+#, php-format
 msgid "Actor logo (PNG, %d kB max)"
-msgstr "Teilnehmer Logo (PNG, %d kB max): "
+msgstr "Teilnehmer Logo (PNG, %d kB max)"
 
 #: plugins/contribtracker/www/global_admin.php:458
 msgid "Edit an actor"
@@ -9496,9 +9518,9 @@ msgstr ""
 
 #: plugins/forumml/www/forumml_utils.php:579 plugins/forumml/www/index.php:117
 #: plugins/forumml/www/scripts/cc_attach_js.php:50
-#, fuzzy
+
 msgid "Attach:"
-msgstr "Dateien anhängen"
+msgstr "Anhängen:"
 
 #: plugins/forumml/www/forumml_utils.php:597 plugins/forumml/www/index.php:127
 msgid "Erase"
@@ -9546,9 +9568,8 @@ msgid "Mailing List"
 msgstr "Mailinglisten"
 
 #: plugins/forumml/www/index.php:101
-#, fuzzy
 msgid "New Thread"
-msgstr "Starten Sie eine neue Diskussion"
+msgstr "Neue Diskussion"
 
 #: plugins/forumml/www/index.php:102
 msgid "Browse Archives"
@@ -9612,7 +9633,6 @@ msgid "Error: Attachment not found"
 msgstr "Fehler: kein Anhang gefunden"
 
 #: plugins/forumml/www/upload.php:85
-#, fuzzy
 msgid "Error: Missing parameter"
 msgstr "Fehler - es fehlen Parameter"
 
@@ -9887,9 +9907,8 @@ msgid "Forge ID"
 msgstr "Forge ID"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:226
-#, fuzzy
 msgid "edit"
-msgstr "[Bearbeiten]"
+msgstr "bearbeiten"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:246
 msgid "New"
@@ -10392,6 +10411,8 @@ msgstr "Bitte warten Sie 1 Stunde für die Aktualisierung der Trigger."
 #: plugins/hudson/include/hudsonActions.class.php:70
 msgid "Spaces are not allowed in job name. They were replaced by “_”."
 msgstr ""
+"Leerzeichen sind nicht zulässig im Auftragsnamen. Diese werden ersetzt durch "
+"»_«."
 
 #: plugins/hudson/include/hudsonActions.class.php:81
 msgid "Unable to update Hudson job"
@@ -10781,9 +10802,9 @@ msgid "%1$s Test Results (%2$s / %3$s)"
 msgstr "%1$s Test Ergenisse (%2$s / %3$s)"
 
 #: plugins/hudson/include/hudson_Widget_JobTestResults.class.php:50
-#, fuzzy, php-format
+#, php-format
 msgid "%s Test Results"
-msgstr "Nächste Ergebnisse"
+msgstr "%s Test Ergenisse"
 
 #: plugins/hudson/include/hudson_Widget_JobTestResults.class.php:52
 msgid "Test Results"
@@ -12015,11 +12036,12 @@ msgstr "Hole mehr Zugangs-Token"
 
 #: plugins/oauthconsumer/www/callback.php:20
 msgid "Step 3: "
-msgstr ""
+msgstr "Schritt 3: "
 
 #: plugins/oauthconsumer/www/callback.php:22
 msgid "Exchange the authorized request token for an access token"
 msgstr ""
+"Tausche den autorisierten Anforderungs-Token für einen Zugangs-Token aus"
 
 #: plugins/oauthconsumer/www/callback.php:25
 #: plugins/oauthconsumer/www/get_access_token.php:85
@@ -12029,18 +12051,16 @@ msgid "Go"
 msgstr "Los"
 
 #: plugins/oauthconsumer/www/callback.php:75
-#, fuzzy
 msgid "New access token received and saved!"
-msgstr "Es wurden keine Elemente gefunden"
+msgstr "Neuen Zugangs-Token erhalten und gespeichert!"
 
 #: plugins/oauthconsumer/www/callback.php:76
-#, fuzzy
 msgid "Access Token Key: "
-msgstr "Zugriff verweigert"
+msgstr "Zugriffs-Token Schlüssel: "
 
 #: plugins/oauthconsumer/www/callback.php:77
 msgid "Access Token Secret: "
-msgstr ""
+msgstr "Zugangs-Token Secret: "
 
 #: plugins/oauthconsumer/www/callback.php:83
 #: plugins/oauthconsumer/www/index.php:87
@@ -12101,12 +12121,11 @@ msgstr ""
 
 #: plugins/oauthconsumer/www/get_access_token.php:80
 msgid "Step 1: "
-msgstr ""
+msgstr "Schritt 1: "
 
 #: plugins/oauthconsumer/www/get_access_token.php:82
-#, fuzzy
 msgid "Get Request Token"
-msgstr "Beitrittsgesuch"
+msgstr "Einen Anforderungs-Token einholen"
 
 #: plugins/oauthconsumer/www/get_access_token.php:130
 msgid "Error in curl: "
@@ -12114,25 +12133,23 @@ msgstr ""
 
 #: plugins/oauthconsumer/www/get_access_token.php:137
 msgid "New request token received!"
-msgstr ""
+msgstr "Neuen Anforderungs-Token erhalten!"
 
 #: plugins/oauthconsumer/www/get_access_token.php:138
-#, fuzzy
 msgid "Request Token Key"
-msgstr "Beitrittsgesuch"
+msgstr "Anforderungs-Token Schlüssel"
 
 #: plugins/oauthconsumer/www/get_access_token.php:139
-#, fuzzy
 msgid "Request Token Secret"
-msgstr "Anfrage einem Projekt beizutreten"
+msgstr "Token Secret anfordern"
 
 #: plugins/oauthconsumer/www/get_access_token.php:158
 msgid "Step 2: "
-msgstr ""
+msgstr "Schritt 2: "
 
 #: plugins/oauthconsumer/www/get_access_token.php:160
 msgid "Authorize the Request Token (from "
-msgstr ""
+msgstr "Autorisiere den Anforderungs-Token (von "
 
 #: plugins/oauthconsumer/www/get_access_token.php:168
 #, fuzzy
@@ -12161,9 +12178,8 @@ msgid "Accessing resources with OAuth"
 msgstr "Zugang zu Ressourcen mit OAuth"
 
 #: plugins/oauthconsumer/www/index.php:17
-#, fuzzy
 msgid "Providers"
-msgstr "Genehmigen"
+msgstr "Anbieter"
 
 #: plugins/oauthconsumer/www/index.php:49
 msgid "Resource URL"
@@ -12190,9 +12206,8 @@ msgstr ""
 "den unten stehenden Links."
 
 #: plugins/oauthconsumer/www/provider_edit.php:29
-#, fuzzy
 msgid "Edit OAuth Provider"
-msgstr "Genehmigen"
+msgstr "Editiere OAuth Anbieter"
 
 #: plugins/oauthconsumer/www/provider_edit.php:49
 #: plugins/oauthconsumer/www/providers.php:14
@@ -12209,9 +12224,8 @@ msgid "There are currently no OAuth Providers registered in the database"
 msgstr "Es sind aktuell keine OAuth Anbieter in der Datenbank registriert"
 
 #: plugins/oauthconsumer/www/providers.php:69
-#, fuzzy
 msgid "Add a new OAuth provider"
-msgstr "Neue Qualifikation hinzufügen"
+msgstr "Füge einen neuen OAuth Anbieter hinzu"
 
 #: plugins/oauthconsumer/www/providers.php:108
 msgid "Add provider"
@@ -12273,6 +12287,8 @@ msgid ""
 "Consumer “%s” wants to be authorized to access Fusionforge on your behalf "
 "(asked %s)"
 msgstr ""
+"Benutzer »%s« möchte autorisiert werden um zu FusionForge Zugang zu erhalten "
+"(fragte %s)"
 
 #: plugins/oauthprovider/www/authorize.php:114
 #: plugins/oauthprovider/www/authorize.php:120
@@ -12363,6 +12379,8 @@ msgid ""
 "You have denied Consumer “%s” access to Fusionforge on your behalf. The "
 "pending OAuth token request has been deleted."
 msgstr ""
+"Du hast dem Benutzer »%s« den Zugang zu FusionForge in Deinem Namen "
+"untersagt. Die schwebende OAuth Token Anfrage wurde gelöscht."
 
 #: plugins/online_help/common/online_helpPlugin.class.php:85
 msgid "Get Help"
@@ -12461,7 +12479,7 @@ msgstr "Bitte wählen Sie eine vorhandene Datei oder laden eine neue Datei hoch"
 #: plugins/projectimport/common/UploadedFiles.class.php:388
 #, php-format
 msgid "File “%s” uploaded and pre-selected"
-msgstr ""
+msgstr "Datei »%s« hochgeladen und vorausgewählt"
 
 #: plugins/projectimport/common/UploadedFiles.class.php:397
 msgid "The uploaded file exceeds the upload_max_filesize directive in php.ini"
@@ -12479,12 +12497,11 @@ msgstr ""
 
 #: plugins/projectimport/common/UploadedFiles.class.php:405
 msgid "Missing a temporary folder."
-msgstr ""
+msgstr "Fehlender temporärer Ordner."
 
 #: plugins/projectimport/common/UploadedFiles.class.php:407
-#, fuzzy
 msgid "Failed to write file to disk."
-msgstr "Hinzufügen der Qualifikationen fehlgeschlagen"
+msgstr "Fehler beim Schreiben auf Speichermedium."
 
 #: plugins/projectimport/common/UploadedFiles.class.php:409
 msgid "File upload stopped by extension."
@@ -12516,17 +12533,19 @@ msgstr "Benutzer in importierter Datei gefunden"
 #: plugins/projectimport/www/index.php:282
 #, php-format
 msgid "Found matching existing forge user with same login “%s”"
-msgstr ""
+msgstr "Passenden Forge Benutzer mit demselben Login »%s« gefunden"
 
 #: plugins/projectimport/www/index.php:295
 #, php-format
 msgid "Found matching existing forge user “%s” with same email “%s”"
-msgstr ""
+msgstr "Passenden Forge Benutzer »%s« mit derselben E-Mail »%s« gefunden"
 
 #: plugins/projectimport/www/index.php:301
 #, php-format
 msgid "Failed to find existing user matching imported user “%s”"
 msgstr ""
+"Konnte keinen passenden existierenden Benutzer gefunden der auf den "
+"importierten Forge Benutzer »%s« passt"
 
 #: plugins/projectimport/www/index.php:317
 msgid "Optionally change for another existing user"
@@ -12608,16 +12627,17 @@ msgid ""
 "Imported user “%s” (role “%s”), mapped as “%s” which is not yet in the "
 "project: need to add it as role “%s”."
 msgstr ""
+"Importierter Benutzer »%s« (Rolle »%s«), zugeordnet zu »%s« ist noch nicht "
+"im Projekt: muss als Rolle »%s« hinzufügt werden."
 
 #: plugins/projectimport/www/index.php:483
-#, fuzzy, php-format
+#, php-format
 msgid "Failed to find mapped user “%s”"
-msgstr "Nutzer “%s” finden fehlgeschlagen."
+msgstr "Nutzer »%s« finden fehlgeschlagen"
 
 #: plugins/projectimport/www/index.php:564
-#, fuzzy
 msgid "Details of imported project: "
-msgstr "Benutzerliste für die Gruppe:"
+msgstr "Details des importierten Projektes: "
 
 #: plugins/projectimport/www/index.php:578
 msgid "Project's spaces found"
@@ -13068,9 +13088,8 @@ msgid "Linked projects"
 msgstr "Verlinkte Projekte"
 
 #: plugins/projects-hierarchy/view/home_project_link.php:54
-#, fuzzy
 msgid "Parent Project"
-msgstr "Vorgängerprojekt"
+msgstr "Übergeordnetes Projekt"
 
 #: plugins/projects-hierarchy/view/home_project_link.php:54
 #: plugins/projects-hierarchy/view/home_project_link.php:64
@@ -13554,7 +13573,7 @@ msgstr "Benutzer %s nicht gefunden"
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:116
 msgid "where REPO can be: "
-msgstr ""
+msgstr "wo das Repository sein kann: "
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:116
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:631
@@ -13562,14 +13581,12 @@ msgid ", "
 msgstr ""
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:121
-#, fuzzy
 msgid "No repositories defined."
-msgstr "Keine Kategorien definiert"
+msgstr "Keine Repositories definiert."
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:125
-#, fuzzy
 msgid "Repository not yet created, wait an hour."
-msgstr "Quellcode Ansicht"
+msgstr "Repository noch nicht erstellt, bitte eine Stunde warten."
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:132
 msgid "Anonymous Darcs Access"
@@ -13585,7 +13602,7 @@ msgstr ""
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:194
 msgid "No repositories to browse"
-msgstr ""
+msgstr "Keine Repositorys zum durchsuchen"
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:212
 #: plugins/scmgit/common/GitPlugin.class.php:351
@@ -13606,14 +13623,13 @@ msgstr "Erstelle neue Antworten:"
 #: plugins/scmgit/common/GitPlugin.class.php:1103
 #: plugins/scmgit/common/GitPlugin.class.php:1127
 #: plugins/scmhg/common/HgPlugin.class.php:647
-#, fuzzy
 msgid "Repository name"
-msgstr "Quellcode Ansicht"
+msgstr "Repository Name"
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:637
-#, fuzzy
+
 msgid "Clone"
-msgstr "Forge ID"
+msgstr "Klone"
 
 #: plugins/scmgit/common/GitPlugin.class.php:101
 msgid "Anonymous Access to the Git repository"
@@ -13622,7 +13638,6 @@ msgstr[0] "Anonymer Git Zugang"
 msgstr[1] "Anonymer Git Zugang"
 
 #: plugins/scmgit/common/GitPlugin.class.php:106
-#, fuzzy
 msgid ""
 "This project's Git repository can be checked out through anonymous access "
 "with the following command."
@@ -13776,9 +13791,9 @@ msgid "Invalid URL from which to clone"
 msgstr ""
 
 #: plugins/scmgit/common/GitPlugin.class.php:1047
-#, fuzzy, php-format
+#, php-format
 msgid "Clone of %s"
-msgstr "Entwickler (test)"
+msgstr "Klone von %s"
 
 #: plugins/scmgit/common/GitPlugin.class.php:1097
 #, fuzzy, php-format
@@ -14173,7 +14188,7 @@ msgstr ""
 #: plugins/wiki/common/WikiGroupSearchEngine.class.php:32
 #: plugins/wiki/common/WikiPlugin.class.php:32
 msgid "Wiki"
-msgstr ""
+msgstr "Wiki"
 
 #: plugins/wiki/common/WikiHtmlSearchRenderer.class.php:50
 msgid "Page"
@@ -14534,6 +14549,8 @@ msgid ""
 "You are now a registered user on %s, the online development environment for "
 "Open Source projects."
 msgstr ""
+"Sie sind nun ein registrierter Benutzer auf %s, der Online-"
+"Entwicklungsumgebung für Open Source Projekte."
 
 #: www/account/first.php:33
 #, php-format
@@ -15046,9 +15063,8 @@ msgstr "Foren Eintrag"
 #: www/activity/index.php:322
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:60
 #: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:52
-#, fuzzy
 msgid "Directory"
-msgstr "Projektname"
+msgstr "Verzeichnis"
 
 #: www/admin/admin_table.php:41
 #, php-format
@@ -15070,7 +15086,7 @@ msgstr ""
 "freigegebenen Datei referenziert wird."
 
 #: www/admin/admin_table.php:127
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "You can't delete the license %s since it is currently referenced in a "
 "project."
@@ -15088,13 +15104,13 @@ msgstr ""
 "Benutzerprofil referenziert wird."
 
 #: www/admin/admin_table.php:144
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "You cannot delete the theme %s since it is currently referenced in a user "
 "profile."
 msgstr ""
-"Sie können die Sprache %s nicht löschen, weil sie zur Zeit in einem "
-"Benutzerprofil referenziert wird."
+"Sie können Thema %s nicht löschen, weil sie zur Zeit in einem Benutzerprofil "
+"referenziert wird."
 
 #: www/admin/admin_table.php:155
 #, php-format
@@ -15344,14 +15360,12 @@ msgid "Error while adding user to role"
 msgstr "Fehler während Rollenzuweisung an Benutzer"
 
 #: www/admin/globalroleedit.php:108
-#, fuzzy
 msgid "Wrong user name."
-msgstr "Benutzername"
+msgstr "Falscher Benutzername."
 
 #: www/admin/globalroleedit.php:111
-#, fuzzy
 msgid "Cannot add user to this type of role"
-msgstr "Aktuelle Version"
+msgstr "Kann keine Benutzer zu diese Art von Rolle hinzufügen"
 
 #: www/admin/globalroleedit.php:118
 msgid "Error: You did not tick the “really remove” box!"
@@ -15368,9 +15382,8 @@ msgid "Error while removing user %s from role"
 msgstr "Fehler während der Entfernung von der Rolle vom Benutzer %s"
 
 #: www/admin/globalroleedit.php:136
-#, fuzzy
 msgid "Cannot remove user from this type of role"
-msgstr "Kann das Kennzeichen nicht entfernen: %s"
+msgstr "Kann keine Benutzer von diese Art von Rolle löschen"
 
 #: www/admin/globalroleedit.php:145
 msgid "Current users with this role"
@@ -15886,9 +15899,8 @@ msgid "Plugin %s updated Successfully"
 msgstr "Plugin %s erfolgreich aktualisiert"
 
 #: www/admin/pluginman.php:75 www/admin/pluginman.php:111
-#, fuzzy
 msgid "Could not get plugin object"
-msgstr "Konnte kein Foren-Objekt einholen"
+msgstr "Konnte kein Plugin-Objekt einholen"
 
 #: www/admin/pluginman.php:95
 msgid "Success, config not deleted"
@@ -16013,7 +16025,6 @@ msgstr[1] "Benutzer-Suche mit Merkmalen <em>%1$s</em>: %2$s Übereinstimmungen"
 #: www/project/admin/massadd.php:90 www/project/admin/massfinish.php:74
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:45
 #: www/top/topusers.php:64
-#, fuzzy
 msgid "Real Name"
 msgstr "Richtiger Name"
 
@@ -16328,9 +16339,8 @@ msgid "User list beginning with “%s” for all projects"
 msgstr "Benutzerliste für die Gruppe:"
 
 #: www/admin/userlist.php:182
-#, fuzzy
 msgid "User list for all projects"
-msgstr "Benutzerliste für die Gruppe:"
+msgstr "Benutzerliste für alle Gruppen"
 
 #: www/admin/userlist.php:214
 msgid "User list for project: "
@@ -16635,7 +16645,6 @@ msgid "Current values of the task’s…"
 msgstr "Aktuelles Werte des Tasks …"
 
 #: www/export/rssAboTask.php:144
-#, fuzzy
 msgid "Complete"
 msgstr "Fertig"
 
@@ -16954,7 +16963,7 @@ msgstr "Sie müssen zuerst eine Nachricht auswählen"
 #: www/forum/monitor.php:61
 #, php-format
 msgid "You are about to stop monitoring the %s forum."
-msgstr ""
+msgstr "Sie Sind dabei die Beobachtung für Forum %s zu beenden."
 
 #: www/forum/monitor.php:63
 msgid "Do you really want to unsubscribe ?"
@@ -16995,9 +17004,8 @@ msgid "Could Not Get FRS Package"
 msgstr "Konnte FRS Paket nicht bekommen"
 
 #: www/frs/admin/deletepackage.php:57
-#, fuzzy
 msgid "Delete Package"
-msgstr "Lösche Tracker %s"
+msgstr "Lösche Paket"
 
 #: www/frs/admin/deletepackage.php:65
 msgid ""
@@ -17074,9 +17082,8 @@ msgstr "Verändern der Veröffentlichung"
 
 #: www/frs/admin/editrelease.php:226 www/frs/admin/editrelease.php:349
 #: www/frs/admin/qrs.php:183
-#, fuzzy
 msgid "Release Date"
-msgstr "Erscheinungstermin"
+msgstr "Versionsdatum"
 
 #: www/frs/admin/editrelease.php:230 www/frs/admin/qrs.php:175
 #: www/frs/admin/showreleases.php:100 www/frs/shownotes.php:64
@@ -17172,9 +17179,8 @@ msgstr ""
 "erscheinen."
 
 #: www/frs/admin/editrelease.php:349
-#, fuzzy
 msgid "Processor"
-msgstr "Prozessor Typ"
+msgstr "Prozessor"
 
 #: www/frs/admin/editrelease.php:371
 msgid "Update/Refresh"
@@ -17579,6 +17585,8 @@ msgstr "Tracker Gruppe"
 msgid ""
 "The Sort By option allows you to determine how the browse results are sorted."
 msgstr ""
+"Die Sortieroption erlaubt Ihnen zu bestimmen, wie die Browse-Ergebnisse "
+"sortiert werden."
 
 #: www/include/html.php:395
 msgid ""
@@ -18629,7 +18637,7 @@ msgid "Unable to get the list %s: %s"
 msgstr "Kein Zugriff auf Liste %s möglich."
 
 #: www/mail/index.php:97
-#, fuzzy, php-format
+#, php-format
 msgid "%s Archives"
 msgstr "%s Archive"
 
@@ -19191,9 +19199,9 @@ msgid "Finished"
 msgstr "Fertigstellen"
 
 #: www/people/editprofile.php:54
-#, fuzzy, php-format
+#, php-format
 msgid "User update failed: %s"
-msgstr "Update fehlgeschlagen"
+msgstr "Benutzerupdate fehlgeschlagen: %s"
 
 #: www/people/editprofile.php:56
 msgid "User updated successfully"
@@ -19514,9 +19522,8 @@ msgid "Invalid ID"
 msgstr "Ungültige ID"
 
 #: www/people/people_utils.php:393
-#, fuzzy
 msgid "No categories found."
-msgstr "Keine Kategorien gefunden"
+msgstr "Keine Kategorien gefunden."
 
 #: www/people/people_utils.php:438
 msgid "Date Opened"
@@ -20465,7 +20472,6 @@ msgid "Add New Database"
 msgstr "Eine neue Datenbank hinzufügen"
 
 #: www/project/admin/database.php:162
-#, fuzzy
 msgid ""
 "Clicking on “create” will schedule the creation of the database, and email "
 "the details to the project administrators"
@@ -21106,6 +21112,9 @@ msgid ""
 "will be synced to the project webservers - such that <em>yourhost.org</em> "
 "will display the material at <em>%1$s.%2$s</em>."
 msgstr ""
+"Auf »Erstellen« klicken um die Erstellung eines virtuellen Hosts "
+"auszuführen. Dieser wird mit dem Projekt Webserver synchronisiert so das "
+"<em>yourhost.org</em> das Material unter <em>%1$s.%2$s</em> anzeigen wird."
 
 #: www/project/admin/vhost.php:121
 msgid "New Virtual Host <em>(e.g. vhost.org)</em>"
@@ -21234,14 +21243,12 @@ msgid "Approval Error: %s"
 msgstr "Genehmige Gruppe: %s"
 
 #: www/register/index.php:159
-#, fuzzy
 msgid ""
 "Your project has been automatically approved. You should receive an email "
 "containing further information shortly."
 msgstr ""
-"Ihr Projekt wurde den %1$s Administratoren vorgeschlagen. Innerhalb von 72 "
-"Stunden werden Sie eine Benachrichtigung mit der Entscheidung und weiteren "
-"Instruktionen erhalten."
+"Ihr Projekt wurde automatisch freigegeben. Sie sollten in Kürze eine E-Mail "
+"mit weiterführenden Informationen erhalten."
 
 #: www/register/index.php:178
 msgid ""
@@ -21303,17 +21310,20 @@ msgid ""
 "In addition to full project name, you will need to choose short, “Unix” name "
 "for your project."
 msgstr ""
+"Zusätzlich zum vollständigen Projektnamen, müssen Sie einen kurzen »Unix« "
+"Namen für Ihr Projekt wählen."
 
 #: www/register/index.php:216
 msgid ""
 "The “Unix Name” has several restrictions because it is used in so many "
 "places around the site. They are:"
 msgstr ""
+"Der »Unix Name« hat mehrere Einschränkungen, da er an vielen Stellen auf der "
+"Website benutzt wird. Diese sind:"
 
 #: www/register/index.php:218
-#, fuzzy
 msgid "cannot match the Unix name of any other project;"
-msgstr "Unixname des Projekts:"
+msgstr "er darf keinem anderen Projektnamen gleichen;"
 
 #: www/register/index.php:219
 msgid "must be between 3 and 15 characters in length;"
@@ -21347,6 +21357,8 @@ msgid ""
 "Your Unix name is important, however, because it will be used for many "
 "things, including:"
 msgstr ""
+"Ihr Unix Name ist äußerst wichtig, da er für viele Dinge verwendet wird, "
+"darunter:"
 
 #: www/register/index.php:228
 #, php-format
@@ -21360,7 +21372,7 @@ msgstr "der URL Ihres Sorce Code Repository,"
 #: www/register/index.php:231
 #, php-format
 msgid "shell access to <span class=\"tt\">unixname.%s</span>,"
-msgstr ""
+msgstr "Shell Zugang zu <span class=\"tt\">unixname.%s</span>,"
 
 #: www/register/index.php:233
 msgid "search engines throughout the site."
@@ -21577,7 +21589,6 @@ msgid "Add Entry"
 msgstr "Eintrag hinzufügen"
 
 #: www/reporting/timeadd.php:194
-#, fuzzy
 msgid ""
 "Choose a Project/Subproject in the Tasks. You will then have to choose a "
 "Task and category to record your time in."
@@ -21967,7 +21978,6 @@ msgstr ""
 "hinzufügen."
 
 #: www/snippet/add_snippet_to_package.php:83 www/snippet/addversion.php:40
-#, fuzzy
 msgid "Error: snippet does not exist"
 msgstr "Fehler - Dieses Schnipsel existiert nicht"
 
@@ -22048,7 +22058,6 @@ msgid "Paste the Code Here"
 msgstr "Fügen Sie den Code hier ein"
 
 #: www/snippet/addversion.php:128
-#, fuzzy
 msgid "Error: snippet_package does not exist"
 msgstr "Fehler - Schnipsel Paket existiert nicht"
 
@@ -22172,7 +22181,6 @@ msgid "Item Removed From Package"
 msgstr ""
 
 #: www/snippet/delete.php:81
-#, fuzzy
 msgid "Error: That snippet does not exist."
 msgstr "Fehler - Dieses Schnipsel existiert nicht."
 
@@ -22194,9 +22202,8 @@ msgid "Package Removed"
 msgstr "Paketname"
 
 #: www/snippet/delete.php:149
-#, fuzzy
 msgid "Error: mangled URL?"
-msgstr "Fehler - war die URL und Form falsch?"
+msgstr "Fehler: war die URL falsch?"
 
 #: www/snippet/detail.php:57 www/snippet/detail.php:142
 msgid "Error: no versions found"
@@ -22338,6 +22345,8 @@ msgid ""
 "<strong>Then</strong> use the “Add Snippets to Package” link to add files to "
 "your package."
 msgstr ""
+"<strong>Dann</strong>nutzen Sie den “Schnipsel zum Paket hinzufügen” Link um "
+"Ihrem Paket Dateien hinzuzufügen."
 
 #: www/snippet/package.php:138
 msgid ""
@@ -22581,9 +22590,9 @@ msgid "Source of %s"
 msgstr "Quelle von %s"
 
 #: www/stats/graphs.php:36
-#, fuzzy, php-format
+#, php-format
 msgid "%s Sitewide Statistics Graphs"
-msgstr "Seitenweite Graphenstatistiken"
+msgstr "%s seitenweite Statistikgraphen"
 
 #: www/stats/graphs.php:43 www/stats/index.php:44 www/stats/projects.php:45
 msgid "OVERVIEW STATS"
@@ -22602,9 +22611,9 @@ msgid "Displayed data: only last 24 months."
 msgstr ""
 
 #: www/stats/i18n.php:32
-#, fuzzy, php-format
+#, php-format
 msgid "%s I18n Statistics: Languages Distributions"
-msgstr "Sprachdistributionen"
+msgstr "I18n Statistiken von %s: Sprachdistributionen"
 
 #: www/stats/i18n.php:54
 msgid "Total Non-English"
@@ -22621,9 +22630,9 @@ msgstr ""
 "Cookies oder per Browsereinstellungen ausgewählt wurden"
 
 #: www/stats/index.php:32
-#, fuzzy, php-format
+#, php-format
 msgid "%s Sitewide Aggregate Statistics"
-msgstr "Seitenweite Graphenstatistiken"
+msgstr "%s seitenweite Gesamtstatistiken"
 
 #: www/stats/index.php:60
 msgid "Other statistics"
@@ -22638,9 +22647,9 @@ msgid "Source IP"
 msgstr "Quell-IP"
 
 #: www/stats/projects.php:37
-#, fuzzy, php-format
+#, php-format
 msgid "%s Site Project Statistical Comparisons"
-msgstr "statistische Projektvergleiche"
+msgstr "%s statistische Projektvergleiche"
 
 #: www/stats/site_stats_utils.php:71
 msgid "All Projects"
@@ -23020,7 +23029,7 @@ msgstr[1] "Zeige alle %s Kommentare"
 #: www/survey/index.php:46
 #, php-format
 msgid "Surveys for %s"
-msgstr ""
+msgstr "Umfrage von %s"
 
 #: www/survey/index.php:58
 msgid "Select a survey to vote"
@@ -23136,9 +23145,9 @@ msgstr ""
 "Bedürfnisse zu veröffentlichen."
 
 #: www/top/index.php:29
-#, fuzzy, php-format
+#, php-format
 msgid "Top %s Projects"
-msgstr "Top %s Projekt"
+msgstr "Top %s Projekte"
 
 #: www/top/index.php:32
 #, php-format
@@ -23313,7 +23322,6 @@ msgid "Return to last release(s)"
 msgstr "Rückkehr zu den letzten Veröffentlichung(en)"
 
 #: www/tracker/roadmap.php:435
-#, fuzzy
 msgid "Display graphs"
 msgstr "Zeige generierte Projekt-Karte"
 
@@ -28525,18 +28533,6 @@ msgstr "Kein Benutzername angegeben"
 
 #~ msgid "Question insert failed"
 #~ msgstr "Einfügen der Frage fehlgeschlagen"
-
-#~ msgid ""
-#~ "List question numbers, in desired order, separated by commas. "
-#~ "<strong>Refer to your list of questions</strong> so you can view the "
-#~ "question id's. Do <strong>not</strong> include spaces or end your list "
-#~ "with a comma. <br />Ex: 1,2,3,4,5,6,7"
-#~ msgstr ""
-#~ "Auflisten der Fragennummern in beliebiger Reihenfolge, von Kommas "
-#~ "getrennt. <strong>Beziehen Sie sich auf die Liste Ihrer Fragen </strong> "
-#~ "nun können sie die Frage IDÅ½s ansehen. Fügen Sie <strong>keine</strong> "
-#~ "Lehrzeichen ein und beenden Sie die Liste nicht mit einem Komma. <br /"
-#~ ">Bsp: 1,2,3,4,5,6,7"
 
 #~ msgid "Show Existing Questions"
 #~ msgstr "Zeige existierende Fragen"
