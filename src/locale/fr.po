@@ -7700,10 +7700,8 @@ msgid "Cannot Update list of uneditable fields: not an array"
 msgstr ""
 
 #: common/include/User.class.php:1797
-#, fuzzy
-#| msgid "Error: Cannot update multimedia file"
 msgid "Cannot Update list of uneditable fields"
-msgstr "Erreur : impossible de mettre à jour le fichier multimédia : "
+msgstr "Erreur lors de la mise à jour de la liste des champs non modifiables"
 
 #: common/include/User.class.php:1812
 msgid "Cannot Update list of hidden fields: not an array"
@@ -7711,7 +7709,7 @@ msgstr ""
 
 #: common/include/User.class.php:1820
 msgid "Cannot Update list of hidden fields"
-msgstr ""
+msgstr "Erreur lors de la mise à jour de la liste des champs cachés"
 
 #: common/include/user_profile.php:62 www/account/index.php:129
 #: www/admin/unsubscribe.php:102 www/admin/useredit.php:133
