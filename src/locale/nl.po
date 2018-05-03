@@ -30,9 +30,8 @@ msgstr "Gebruiker toegevoegd"
 #: common/docman/DocumentGroup.class.php:834
 #: common/tracker/actions/tracker.php:133
 #: common/tracker/actions/tracker.php:361 www/project/admin/editimages.php:58
-#, fuzzy
 msgid "Invalid file name."
-msgstr "Ongeldige volledige naam"
+msgstr "Ongeldige bestandsnaam."
 
 #: common/account/actions/deletesshkey.php:30
 #, fuzzy
@@ -663,9 +662,8 @@ msgid "Document Folder"
 msgstr "Documenttitel"
 
 #: common/docman/DocumentGroup.class.php:101
-#, fuzzy
 msgid "Name is required"
-msgstr "Naam is gereserveerd voor CVS."
+msgstr "Naam is verplicht"
 
 #: common/docman/DocumentGroup.class.php:110
 #: common/docman/DocumentGroup.class.php:490
@@ -2313,7 +2311,6 @@ msgstr "Actie"
 #: plugins/mantisbt/view/admin/editVersion.php:79
 #: plugins/mantisbt/view/roadmap.php:98 plugins/mantisbt/view/roadmap.php:147
 #: www/frs/admin/editrelease.php:348 www/frs/reporting/downloads.php:197
-#, fuzzy
 msgid "Release"
 msgstr "Release"
 
@@ -3068,9 +3065,8 @@ msgstr "Fout"
 #: www/survey/admin/show_questions.php:35
 #: www/survey/admin/show_results_individual.php:35
 #: www/survey/admin/show_results.php:66 www/survey/admin/survey.php:53
-#, fuzzy
 msgid "Permission denied."
-msgstr "Toegang geweigerd"
+msgstr "Toegang geweigerd."
 
 #: common/include/Error.class.php:142 common/include/User.class.php:350
 #: common/include/User.class.php:931 common/include/User.class.php:983
@@ -3765,9 +3761,8 @@ msgid "Main Page"
 msgstr "Hoofdpagina"
 
 #: common/include/Navigation.class.php:245
-#, fuzzy
 msgid "My Page"
-msgstr "Hoofdpagina"
+msgstr "Mijn pagina"
 
 #: common/include/Navigation.class.php:247
 msgid "Your Page, widgets selected by you to follow your items."
@@ -3804,7 +3799,6 @@ msgstr ""
 #: plugins/quota_management/www/quota_admin.php:38
 #: plugins/quota_management/www/quota.php:36 www/admin/globalroleedit.php:140
 #: www/admin/index.php:39 www/admin/vhost.php:106
-#, fuzzy
 msgid "Site Admin"
 msgstr "Site beheer"
 
@@ -4470,9 +4464,8 @@ msgid "Passwords do not match"
 msgstr "Wachtwoorden komen niet overeen."
 
 #: common/include/User.class.php:332
-#, fuzzy
 msgid "Invalid Password"
-msgstr "Ongeldig wachtwoord:"
+msgstr "Ongeldig wachtwoord"
 
 #: common/include/User.class.php:337
 #, fuzzy
@@ -4496,7 +4489,7 @@ msgstr ""
 #: www/people/admin/index.php:53 www/people/admin/index.php:66
 #: www/pm/admin/index.php:98 www/survey/rating_resp.php:56
 msgid "Insert Error"
-msgstr ""
+msgstr "Aanmelden mislukt"
 
 #: common/include/User.class.php:443
 #, fuzzy
@@ -4591,9 +4584,8 @@ msgid "Error: Cannot Update User Status:"
 msgstr ""
 
 #: common/include/User.class.php:939 common/include/User.class.php:991
-#, fuzzy
 msgid "User with this email already exists."
-msgstr "De opgegeven gebruikersnaam bestaat al."
+msgstr "Dit e-mail adres is al in gebruik."
 
 #: common/include/User.class.php:1099
 #, fuzzy, php-format
@@ -6556,14 +6548,12 @@ msgstr "Artefactbestand: bestandsnaam, type, grootte, en datum zijn verplicht"
 
 #: common/tracker/ArtifactHistory.class.php:53
 #: common/tracker/ArtifactMessage.class.php:53
-#, fuzzy
 msgid "Invalid Artifact"
-msgstr "Ongeldig ID"
+msgstr "Ongeldig Artifact"
 
 #: common/tracker/ArtifactHistory.class.php:82
-#, fuzzy
 msgid "Invalid ArtifactHistory ID"
-msgstr "Ongeldig ID"
+msgstr "Ongeldig ArtifactHistory ID"
 
 #: common/tracker/ArtifactMessage.class.php:89
 msgid "Error: Logged In User Bug Could Not Get User Object"
@@ -6672,7 +6662,7 @@ msgid "Backward Relations"
 msgstr "Creëer taakrelatie"
 
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:43
-#, fuzzy, php-format
+#, php-format
 msgid "Trackers for %s"
 msgstr "Trackers voor %s"
 
@@ -8131,9 +8121,8 @@ msgid "List the last 10 pieces of news posted by the project members."
 msgstr ""
 
 #: common/widget/Widget_ProjectMembers.class.php:33
-#, fuzzy
 msgid "Project Members"
-msgstr "Projectledenlijst"
+msgstr "Projectleden"
 
 #: common/widget/Widget_ProjectMembers.class.php:48
 msgid "Project Admins"
@@ -8585,9 +8574,8 @@ msgstr "[Wachtwoord kwijt?]"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:88
 #: www/account/pending-resend.php:53 www/account/register.php:281
-#, fuzzy
 msgid "Resend confirmation email to a pending account"
-msgstr "[Bevestigings e-mail opnieuw toesturen]"
+msgstr "Bevestigings e-mail opnieuw toesturen"
 
 #: plugins/authbuiltin/www/post-login.php:106
 #: plugins/authldap/www/post-login.php:105
@@ -9761,7 +9749,6 @@ msgstr "Ongeldige parameter"
 
 #: plugins/forumml/www/index.php:59 plugins/forumml/www/message.php:95
 #: plugins/forumml/www/upload.php:48
-#, fuzzy
 msgid "You are not allowed to access this page"
 msgstr "Je hebt geen toestemming om deze pagina op te vragen"
 
@@ -14594,7 +14581,7 @@ msgstr ""
 #: plugins/wiki/common/WikiGroupSearchEngine.class.php:32
 #: plugins/wiki/common/WikiPlugin.class.php:32
 msgid "Wiki"
-msgstr ""
+msgstr "Wiki"
 
 #: plugins/wiki/common/WikiHtmlSearchRenderer.class.php:50
 msgid "Page"
@@ -15475,7 +15462,7 @@ msgstr ""
 "aanhangt in een bestands release."
 
 #: www/admin/admin_table.php:127
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "You can't delete the license %s since it is currently referenced in a "
 "project."
@@ -15918,9 +15905,8 @@ msgstr "Tijdregistratie"
 #: www/admin/grouplist.php:69 www/admin/search.php:148
 #: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:75
 #: www/register/index.php:236 www/register/index.php:238
-#, fuzzy
 msgid "Unix Name"
-msgstr "Unixnaam"
+msgstr "Unix naam"
 
 #: www/admin/grouplist.php:71
 msgid "Public?"
@@ -15978,9 +15964,9 @@ msgid "User Maintenance"
 msgstr "Onderhouden gebruikers"
 
 #: www/admin/index.php:50
-#, fuzzy, php-format
+#, php-format
 msgid "Active site users: <strong>%d</strong>"
-msgstr "Actieve site deelnemers: <strong>%1$s</strong>"
+msgstr "Actieve site deelnemers: <strong>%d</strong>"
 
 #: www/admin/index.php:53
 msgid "Display Full User List/Edit Users"
@@ -16296,7 +16282,6 @@ msgid "Newsbytes Rejected."
 msgstr "Nieuwsitems afgewezen."
 
 #: www/admin/pending-news.php:113 www/project/admin/tools.php:336
-#, fuzzy
 msgid "News Admin"
 msgstr "Nieuwsbeheer"
 
@@ -16456,7 +16441,6 @@ msgstr[1] "Gebruiker zoeken met criteria"
 #: www/project/admin/massadd.php:90 www/project/admin/massfinish.php:74
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:45
 #: www/top/topusers.php:64
-#, fuzzy
 msgid "Real Name"
 msgstr "Echte naam"
 
@@ -16711,7 +16695,6 @@ msgid "Operations"
 msgstr "Bewerkingen"
 
 #: www/admin/useredit.php:286 www/include/user_home.php:99
-#, fuzzy
 msgid "This user is not a member of any project."
 msgstr "Deze ontwikkelaar is geen lid van enig project."
 
@@ -17562,7 +17545,6 @@ msgstr "Release bewerken"
 
 #: www/frs/admin/editrelease.php:226 www/frs/admin/editrelease.php:349
 #: www/frs/admin/qrs.php:183
-#, fuzzy
 msgid "Release Date"
 msgstr "Release datum"
 
@@ -17663,9 +17645,8 @@ msgstr ""
 "komen ze niet op je download samenvattingspagina."
 
 #: www/frs/admin/editrelease.php:349
-#, fuzzy
 msgid "Processor"
-msgstr "Processortype"
+msgstr "Processor"
 
 #: www/frs/admin/editrelease.php:371
 msgid "Update/Refresh"
@@ -19047,7 +19028,7 @@ msgid "Unable to get the list %s: %s"
 msgstr ""
 
 #: www/mail/index.php:97
-#, fuzzy, php-format
+#, php-format
 msgid "%s Archives"
 msgstr "%s archieven"
 
@@ -19417,7 +19398,6 @@ msgid "Missing skill name."
 msgstr "Ontbrekende parameter"
 
 #: www/people/admin/index.php:84
-#, fuzzy
 msgid "Add/Change Categories"
 msgstr "Categoriën toevoegen/aanpassen"
 
@@ -19580,7 +19560,6 @@ msgid "Posting fetch failed: %s"
 msgstr "Plaatsen van bericht niet gelukt"
 
 #: www/people/editjob.php:154
-#, fuzzy
 msgid "No such posting for this project"
 msgstr "Een dergelijke vacature komt in dit project niet voor"
 
@@ -19914,7 +19893,6 @@ msgid "Error inserting into job inventory: "
 msgstr "Fout bij toevoegen aan vaardigheden overzicht"
 
 #: www/people/people_utils.php:217
-#, fuzzy
 msgid "Added to job inventory"
 msgstr "Toegevoegd aan vaardigheden overzicht"
 
@@ -19928,9 +19906,8 @@ msgid "Invalid ID"
 msgstr "Ongeldig ID"
 
 #: www/people/people_utils.php:393
-#, fuzzy
 msgid "No categories found."
-msgstr "Geen categorieën gevonden"
+msgstr "Geen categorieën gevonden."
 
 #: www/people/people_utils.php:438
 msgid "Date Opened"
@@ -21080,12 +21057,10 @@ msgid "Group directory on shell server:"
 msgstr "Groepsdirectory op shell server:"
 
 #: www/project/admin/index.php:125
-#, fuzzy
 msgid "Project WWW directory on shell server:"
 msgstr "WWW directory van project op shell server:"
 
 #: www/project/admin/index.php:134
-#, fuzzy
 msgid "Descriptive Project Name"
 msgstr "Beschrijvende groepsnaam"
 
@@ -21109,9 +21084,8 @@ msgid "Or pick a tag from those used by other projects: "
 msgstr ""
 
 #: www/project/admin/index.php:192
-#, fuzzy
 msgid "Trove Categorization"
-msgstr "Wijzig Trove categorie"
+msgstr "Trove classificatie"
 
 #: www/project/admin/index.php:194
 #, fuzzy
@@ -21366,14 +21340,12 @@ msgid "Use Mailing Lists"
 msgstr "Gebruik mailinglijsten"
 
 #: www/project/admin/tools.php:204
-#, fuzzy
 msgid "Use Tasks"
-msgstr "Taken"
+msgstr "Gebruik taken"
 
 #: www/project/admin/tools.php:217
-#, fuzzy
 msgid "Use Documents"
-msgstr "Gebruik forums"
+msgstr "Gebruik documentmanager"
 
 #: www/project/admin/tools.php:230
 msgid "Use Surveys"
@@ -21384,9 +21356,8 @@ msgid "Use News"
 msgstr "Gebruik nieuws"
 
 #: www/project/admin/tools.php:256
-#, fuzzy
 msgid "Use Source Code"
-msgstr "Source IP"
+msgstr "Gebruik SCM"
 
 #: www/project/admin/tools.php:269
 msgid "Use File Release System"
@@ -22009,7 +21980,6 @@ msgid "Add Entry"
 msgstr "Item toevoegen"
 
 #: www/reporting/timeadd.php:194
-#, fuzzy
 msgid ""
 "Choose a Project/Subproject in the Tasks. You will then have to choose a "
 "Task and category to record your time in."
@@ -22400,7 +22370,6 @@ msgstr ""
 "toevoegen."
 
 #: www/snippet/add_snippet_to_package.php:83 www/snippet/addversion.php:40
-#, fuzzy
 msgid "Error: snippet does not exist"
 msgstr "Fout - Dat codefragment bestaat niet"
 
@@ -22478,7 +22447,6 @@ msgid "Paste the Code Here"
 msgstr "Plak de code hier"
 
 #: www/snippet/addversion.php:128
-#, fuzzy
 msgid "Error: snippet_package does not exist"
 msgstr "Fout: codefragment bundel bestaat niet"
 
@@ -22487,16 +22455,14 @@ msgid "Error doing snippet package version insert"
 msgstr "Fout bij toevoegen CODEFRAGMENT BUNDEL VERSIE!"
 
 #: www/snippet/addversion.php:156
-#, fuzzy
 msgid "New snippet package"
-msgstr "Toevoegen nieuwe codefragment bundel"
+msgstr "Nieuwe codefragment bundel"
 
 #: www/snippet/addversion.php:161 www/snippet/package.php:82
 msgid "Snippet Package Version Added Successfully."
 msgstr "Codefragment bundel versie toegevoegd."
 
 #: www/snippet/addversion.php:166
-#, fuzzy
 msgid "Add snippet to package"
 msgstr "Voeg codefragmenten aan bundel toe"
 
@@ -22631,9 +22597,8 @@ msgid "Package Removed"
 msgstr "Bundelnaam"
 
 #: www/snippet/delete.php:149
-#, fuzzy
 msgid "Error: mangled URL?"
-msgstr "Fout: was de URL of form ongeldig??"
+msgstr "Fout: was de URL ongeldig?"
 
 #: www/snippet/detail.php:57 www/snippet/detail.php:142
 msgid "Error: no versions found"
@@ -22741,9 +22706,8 @@ msgid "Browse by Language"
 msgstr "Bladeren per taal"
 
 #: www/snippet/package.php:57
-#, fuzzy
 msgid "Error doing snippet package insert"
-msgstr "Fout: codefragment bundel bestaat niet"
+msgstr "Fout bij toevoegen codefragment bundel"
 
 #: www/snippet/package.php:58 www/snippet/package.php:76
 #: www/snippet/package.php:127
@@ -22946,9 +22910,9 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: www/softwaremap/tag_cloud.php:162
-#, fuzzy, php-format
+#, php-format
 msgid "Activity Percentile: <strong>%3.0f</strong>"
-msgstr "Actieve site deelnemers: <strong>%1$s</strong>"
+msgstr "Activiteit percentiel: <strong>%3.0f</strong>"
 
 #: www/softwaremap/trove_list.php:56
 msgid "Software Map"
@@ -23187,11 +23151,11 @@ msgstr "Je hebt geen licentievorm gekozen"
 
 #: www/survey/admin/index.php:58
 msgid "It's simple to create a survey."
-msgstr ""
+msgstr "het is heel gemakkelijk om een enquête aan te maken."
 
 #: www/survey/admin/index.php:62
 msgid "Create questions and comments using the forms above."
-msgstr ""
+msgstr "Creëer vragen en commentaren m.b.v. de formulieren hierboven."
 
 #: www/survey/admin/index.php:65
 msgid ""
@@ -23535,7 +23499,6 @@ msgid "Vote for Survey"
 msgstr "Naam van de enquête"
 
 #: www/survey/survey.php:55 www/survey/survey_resp.php:48
-#, fuzzy
 msgid ""
 "For some reason, the Project ID or Survey ID did not make it to this page"
 msgstr ""
