@@ -32,7 +32,7 @@ global $HTML;
 
 site_admin_header(array('title'=>_('Cron Manager')));
 
-$which = getIntFromRequest('which', 100);
+$which = getStringFromRequest('which', 100);
 
 echo $HTML->openForm(array('action' => '/admin/cronman.php', 'method' => 'get'));
 echo html_build_select_box_from_arrays(array_keys($cron_arr), array_values($cron_arr), 'which', $which, true, _('Any'));

@@ -672,9 +672,8 @@ msgid "Document Folder"
 msgstr "Dokumentuaren izenburua"
 
 #: common/docman/DocumentGroup.class.php:101
-#, fuzzy
 msgid "Name is required"
-msgstr "Izen hau CVS-arentzat gordea izan da."
+msgstr "Izena behar da"
 
 #: common/docman/DocumentGroup.class.php:110
 #: common/docman/DocumentGroup.class.php:490
@@ -853,6 +852,8 @@ msgid ""
 "Refers to the relatively brief title of the document (e.g. How to use the "
 "download server)."
 msgstr ""
+"Dokumentuaren izenburu laburraz ari gatzaizu (Adibidez: nola erabili "
+"downloads zerbitzaria)."
 
 #: common/docman/views/addfile.php:92 common/docman/views/addfile.php:108
 #: common/docman/views/addfile.php:110 common/docman/views/editfile.php:42
@@ -916,7 +917,7 @@ msgstr "Deskribapena"
 
 #: common/docman/views/addfile.php:92
 msgid "A brief description to be placed just under the title."
-msgstr ""
+msgstr "Izenburupean egongo den deskribapena."
 
 #: common/docman/views/addfile.php:94 common/docman/views/editfile.php:47
 msgid "Both fields are used by the document search engine."
@@ -2255,7 +2256,6 @@ msgstr ""
 #: www/forum/admin/index.php:247 www/forum/admin/index.php:286
 #: www/forum/attachment.php:70 www/forum/monitor.php:47 www/forum/new.php:48
 #: www/forum/save.php:47
-#, fuzzy
 msgid "Error getting Forum"
 msgstr "Foroa sortzean gertatutako akatsa"
 
@@ -2319,9 +2319,8 @@ msgstr "Akzioa"
 #: plugins/mantisbt/view/admin/editVersion.php:79
 #: plugins/mantisbt/view/roadmap.php:98 plugins/mantisbt/view/roadmap.php:147
 #: www/frs/admin/editrelease.php:348 www/frs/reporting/downloads.php:197
-#, fuzzy
 msgid "Release"
-msgstr "Bertsioak"
+msgstr "Bertsioa"
 
 #: common/forum/ForumAdmin.class.php:360 common/forum/ForumHTML.class.php:328
 #: common/forum/ForumHTML.class.php:545
@@ -2352,7 +2351,7 @@ msgstr "Bertsioak"
 #: www/project/admin/tools.php:305 www/reporting/timecategory.php:99
 #: www/scm/admin/index.php:176
 msgid "Update"
-msgstr ""
+msgstr "Eguneratu"
 
 #: common/forum/ForumAdmin.class.php:400
 #, fuzzy
@@ -2421,9 +2420,9 @@ msgstr "Foroa sortzean gertatutako akatsa"
 
 #: common/forum/Forum.class.php:241 cronjobs/homedirs.php:156
 #: www/account/first.php:29
-#, fuzzy, php-format
+#, php-format
 msgid "Welcome to %s"
-msgstr "Ongietorri %1$s -era"
+msgstr "Ongietorri %s -era"
 
 #: common/forum/Forum.class.php:265
 msgid "Invalid forum group identifier."
@@ -2578,7 +2577,6 @@ msgstr "Noiztik"
 
 #: common/forum/ForumHTML.class.php:266
 #: plugins/forumml/www/forumml_utils.php:556 www/forum/message.php:123
-#, fuzzy
 msgid "Reply"
 msgstr "Erantzun"
 
@@ -3811,9 +3809,8 @@ msgstr ""
 #: plugins/quota_management/www/quota_admin.php:38
 #: plugins/quota_management/www/quota.php:36 www/admin/globalroleedit.php:140
 #: www/admin/index.php:39 www/admin/vhost.php:106
-#, fuzzy
 msgid "Site Admin"
-msgstr "Administrari gunea"
+msgstr "Administrariaren gunea"
 
 #: common/include/Navigation.class.php:304
 msgid ""
@@ -4498,7 +4495,7 @@ msgstr ""
 #: www/people/admin/index.php:53 www/people/admin/index.php:66
 #: www/pm/admin/index.php:98 www/survey/rating_resp.php:56
 msgid "Insert Error"
-msgstr ""
+msgstr "Akatsa sartzean"
 
 #: common/include/User.class.php:443
 #, fuzzy
@@ -4536,9 +4533,8 @@ msgstr ""
 "http://%2$s/account/verify.php?confirm_hash=_%3$s\n"
 
 #: common/include/User.class.php:493
-#, fuzzy
 msgid "Enjoy the site."
-msgstr "Ezabatu iragazkia"
+msgstr "Webgune honetaz goza ezazu."
 
 #: common/include/User.class.php:495 common/mail/MailingList.class.php:205
 #: plugins/authbuiltin/www/post-login.php:122
@@ -6295,7 +6291,6 @@ msgid "File Upload: Successful"
 msgstr "Fitxategi igoera: Arrakasta"
 
 #: common/tracker/actions/tracker.php:389
-#, fuzzy
 msgid "File Delete"
 msgstr "Fitxategia ezabatu"
 
@@ -8127,9 +8122,8 @@ msgid "List the last 10 pieces of news posted by the project members."
 msgstr ""
 
 #: common/widget/Widget_ProjectMembers.class.php:33
-#, fuzzy
 msgid "Project Members"
-msgstr "Proiektu kideen zerrenda"
+msgstr "Taldekideak"
 
 #: common/widget/Widget_ProjectMembers.class.php:48
 msgid "Project Admins"
@@ -8556,7 +8550,6 @@ msgstr "Posta elektronikoaren helbidea baliogabea da"
 #: www/account/index.php:149 www/account/lostpw.php:89
 #: www/account/pending-resend.php:67 www/account/verify.php:78
 #: www/include/user_profile.php:87
-#, fuzzy
 msgid "Login Name"
 msgstr "Erabiltzailearen izena"
 
@@ -8578,9 +8571,8 @@ msgstr "[Pasahitza ahaztu al zaizu?]"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:88
 #: www/account/pending-resend.php:53 www/account/register.php:281
-#, fuzzy
 msgid "Resend confirmation email to a pending account"
-msgstr "[Aktibazioaren zai dagoen kontuaren onespen mezua berriz bidali]"
+msgstr "Aktibazioaren zai dagoen kontuaren onespen mezua berriz bidali"
 
 #: plugins/authbuiltin/www/post-login.php:106
 #: plugins/authldap/www/post-login.php:105
@@ -9749,7 +9741,6 @@ msgstr "Foro talde identifikatzaile baliogabea"
 
 #: plugins/forumml/www/index.php:59 plugins/forumml/www/message.php:95
 #: plugins/forumml/www/upload.php:48
-#, fuzzy
 msgid "You are not allowed to access this page"
 msgstr "Ez duzu baimenik orri hau erabiltzeko"
 
@@ -10257,7 +10248,7 @@ msgstr ""
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:228
 #: www/search/include/renderers/HtmlSearchRenderer.class.php:100
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:112
-#, fuzzy, php-format
+#, php-format
 msgid "No matches found for “%s”"
 msgstr "Ez da ezer aurkitu “%s” -entzat"
 
@@ -11314,9 +11305,9 @@ msgid "Add Mailing List"
 msgstr "Posta Zerrenda Gehitu"
 
 #: plugins/mailman/www/index.php:39 www/mail/index.php:53
-#, fuzzy, php-format
+#, php-format
 msgid "Mailing Lists for %s"
-msgstr "Posta zerrendak %1$s -entzako"
+msgstr "Posta zerrendak %s -entzako"
 
 #: plugins/mailman/www/index.php:55 www/mail/index.php:68
 #, php-format
@@ -11775,7 +11766,6 @@ msgid "Add a new category"
 msgstr "Azpi proiektu bat gehitu"
 
 #: plugins/mantisbt/view/admin/addVersion.php:34
-#, fuzzy
 msgid "Add a new version"
 msgstr "Bertsio berri bat bidali"
 
@@ -15397,9 +15387,8 @@ msgstr "Foroak"
 #: www/activity/index.php:322
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:60
 #: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:52
-#, fuzzy
 msgid "Directory"
-msgstr "Azpiproiektuaren izen berria"
+msgstr "Direktorioa"
 
 #: www/admin/admin_table.php:41
 #, fuzzy, php-format
@@ -15856,7 +15845,6 @@ msgstr ""
 #: www/admin/grouplist.php:69 www/admin/search.php:148
 #: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:75
 #: www/register/index.php:236 www/register/index.php:238
-#, fuzzy
 msgid "Unix Name"
 msgstr "Unix izena"
 
@@ -15915,9 +15903,9 @@ msgid "User Maintenance"
 msgstr "Erabiltzaileen mantentze lanak"
 
 #: www/admin/index.php:50
-#, fuzzy, php-format
+#, php-format
 msgid "Active site users: <strong>%d</strong>"
-msgstr "Tokiaren erabiltzaile aktiboak: <strong>%1$s</strong>"
+msgstr "Tokiaren erabiltzaile aktiboak: <strong>%d</strong>"
 
 #: www/admin/index.php:53
 msgid "Display Full User List/Edit Users"
@@ -16396,7 +16384,6 @@ msgstr[1] "Erabiltzaileak bilatu hirizpide hauen arabera"
 #: www/project/admin/massadd.php:90 www/project/admin/massfinish.php:74
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:45
 #: www/top/topusers.php:64
-#, fuzzy
 msgid "Real Name"
 msgstr "Benetazko izena"
 
@@ -16446,7 +16433,6 @@ msgid "New category full name (maximum length is 80 chars)"
 msgstr "Kategoria berriaren izen osoa (muga 80 karaktere)"
 
 #: www/admin/trove/trove_cat_add.php:114
-#, fuzzy
 msgid "New category description (maximum length is 255 chars)"
 msgstr "Kategoria berriaren azalpena (muga 255 karaktere)"
 
@@ -17493,9 +17479,8 @@ msgstr "Bertsioa editatu"
 
 #: www/frs/admin/editrelease.php:226 www/frs/admin/editrelease.php:349
 #: www/frs/admin/qrs.php:183
-#, fuzzy
 msgid "Release Date"
-msgstr "Argitalpenaren data"
+msgstr "Bertsioaren data"
 
 #: www/frs/admin/editrelease.php:230 www/frs/admin/qrs.php:175
 #: www/frs/admin/showreleases.php:100 www/frs/shownotes.php:64
@@ -17548,13 +17533,12 @@ msgid "Submit/Refresh"
 msgstr "Bidali/Berritu"
 
 #: www/frs/admin/editrelease.php:288
-#, fuzzy
 msgid "Add Files To This Release"
-msgstr "3º urratsa: Bertsio honetan fitxeroak aldatu"
+msgstr "Bertsio honi fitxeroak gehitu"
 
 #: www/frs/admin/editrelease.php:289
 msgid "Now, choose a file to upload into the system."
-msgstr ""
+msgstr "Sistemara bidaliko den fitxeroa aukeratu."
 
 #: www/frs/admin/editrelease.php:298 www/frs/admin/qrs.php:200
 #, php-format
@@ -17590,9 +17574,8 @@ msgstr ""
 "deskargako laburpen orrian aterako."
 
 #: www/frs/admin/editrelease.php:349
-#, fuzzy
 msgid "Processor"
-msgstr "Prozesadore mota"
+msgstr "Prozesadore"
 
 #: www/frs/admin/editrelease.php:371
 msgid "Update/Refresh"
@@ -17627,48 +17610,44 @@ msgid "Click here to %1$s quick-release a file %2$s"
 msgstr "Hemen sakatu %1$s -en %2$s fitxeroa eguneratzeko"
 
 #: www/frs/admin/index.php:127
-#, fuzzy
 msgid "Packages"
-msgstr "Pakete"
+msgstr "Paketeak"
 
 #: www/frs/admin/index.php:128
 msgid ""
 "You can use packages to group different file releases together, or use them "
 "however you like."
 msgstr ""
+"Paketeak erabili ditzakezu fitxero bertsioa ezberdinak elkartzeko edo "
+"nahiago dituzun bezela erabili."
 
 #: www/frs/admin/index.php:129
-#, fuzzy
 msgid "An example of packages:"
-msgstr "Paketeari adabakiak gehitu"
+msgstr "Paketeen adibide bat:"
 
 #: www/frs/admin/index.php:131
-#, fuzzy
 msgid "Your Packages:"
-msgstr "Pakete:"
+msgstr "Zure paketeak:"
 
 #: www/frs/admin/index.php:133
 msgid "Define your packages"
-msgstr ""
+msgstr "Zure paketeak definitu"
 
 #: www/frs/admin/index.php:134
-#, fuzzy
 msgid "Create new releases of packages"
-msgstr "Bertsio berri bat sortzeko egin klik hemen."
+msgstr "Paketeen bertsio berri bat sortu"
 
 #: www/frs/admin/index.php:136
-#, fuzzy
 msgid "Releases of Packages"
-msgstr "Bertsioaren oharrak"
+msgstr "Paketeen bertsioak"
 
 #: www/frs/admin/index.php:137
 msgid "A release of a package can contain multiple files."
-msgstr ""
+msgstr "Pakete baten barne fitxero ugari egon daitezke."
 
 #: www/frs/admin/index.php:138
-#, fuzzy
 msgid "Examples of Releases"
-msgstr "Fitxeroen azken argitalpenak"
+msgstr "Bertsioen adibideak"
 
 #: www/frs/admin/index.php:140
 msgid ""
@@ -18980,9 +18959,9 @@ msgid "Unable to get the list %s: %s"
 msgstr ""
 
 #: www/mail/index.php:97
-#, fuzzy, php-format
+#, php-format
 msgid "%s Archives"
-msgstr "%1$s Artxiboak"
+msgstr "%s Artxiboak"
 
 #: www/mail/index.php:100
 msgid "Subscribe/Unsubscribe/Preferences"
@@ -19348,7 +19327,6 @@ msgid "Missing skill name."
 msgstr "Parametro bat ahaztu zaizu"
 
 #: www/people/admin/index.php:84
-#, fuzzy
 msgid "Add/Change Categories"
 msgstr "Kategoriak gehitu/argitaratu"
 
@@ -19510,7 +19488,6 @@ msgid "Posting fetch failed: %s"
 msgstr "Akatsa mezuaren argitalpenean"
 
 #: www/people/editjob.php:154
-#, fuzzy
 msgid "No such posting for this project"
 msgstr "Proiektu honetan ez dago horrelako argitalpenik"
 
@@ -19545,9 +19522,9 @@ msgid "User updated successfully"
 msgstr "Erabiltzailea arrakastaz eguneratu da"
 
 #: www/people/editprofile.php:100
-#, fuzzy, php-format
+#, php-format
 msgid "Failed to add the skill %s"
-msgstr "Akatsa trebezia sartzean"
+msgstr "Akatsa trebezia sartzean %s"
 
 #: www/people/editprofile.php:102
 msgid "Skill added successfully"
@@ -19617,9 +19594,9 @@ msgid "No skills selected to delete."
 msgstr "Ez da trebeziarik aukeratu ezabatzeko."
 
 #: www/people/editprofile.php:187
-#, fuzzy, php-format
+#, php-format
 msgid "Failed to delete any skills: %s"
-msgstr "Akatsa trebeziak ezabatzen"
+msgstr "Akatsa trebeziak ezabatzen: %s"
 
 #: www/people/editprofile.php:189
 #, fuzzy
@@ -19749,6 +19726,9 @@ msgid ""
 "The %s Project Help Wanted board is for non-commercial, project volunteer "
 "openings. Commercial use is prohibited."
 msgstr ""
+"%s proiektuan laguntza eskaerak egiteko oharren oholak ez du helburu "
+"komertzialik, baizik bolondresei lankidetzarako aukerak eskeintzen dizkio. "
+"Erabilpen komertziala galerazita dago."
 
 #: www/people/index.php:69
 msgid ""
@@ -19756,22 +19736,31 @@ msgid ""
 "whichever comes first. (Project administrators may always re-post expired "
 "openings.)"
 msgstr ""
+"Proiektuen zerrendak bi astez kaleratzen dira edo eskatzen duenak ezabatu "
+"arte (lehen gertatzen dena). Proiektuen administrariak beti argitaratu "
+"dezakete berriro igarotako edozein eskaera."
 
 #: www/people/index.php:73
 msgid ""
 "Browse through the category menu to find projects looking for your help."
 msgstr ""
+"Kategorien menuetatik nabigatu zure laguntza behar duten proiektuak "
+"aurkitzeko."
 
 #: www/people/index.php:77
 msgid ""
 "If you're a project admin, log in and submit help wanted requests through "
 "your project administration page."
 msgstr ""
+"Proiektu baten administraria bazara, atzitu eta laguntza eskaera bidali zure "
+"proiektuko administrazio orritik."
 
 #: www/people/index.php:81
 msgid ""
 "To suggest new job categories, submit a request via the support manager."
 msgstr ""
+"Lan kategoria berriak proposatzeko, bidali eskaera gune hau sostengatzen "
+"duen arduradunari."
 
 #: www/people/index.php:86
 msgid "Last posts"
@@ -19831,7 +19820,6 @@ msgid "Error inserting into job inventory: "
 msgstr "Akatsa trebezien inbentariora sartzean"
 
 #: www/people/people_utils.php:217
-#, fuzzy
 msgid "Added to job inventory"
 msgstr "Trebezien inbentariora gehitu"
 
@@ -19845,9 +19833,8 @@ msgid "Invalid ID"
 msgstr "ID baliogabea"
 
 #: www/people/people_utils.php:393
-#, fuzzy
 msgid "No categories found."
-msgstr "Ez dira kategoririk aurkitu"
+msgstr "Ez dira kategoririk aurkitu."
 
 #: www/people/people_utils.php:438
 msgid "Date Opened"
@@ -19992,6 +19979,9 @@ msgid ""
 "are dependent upon it. When you change the category name, all related items "
 "will be changed to the new name."
 msgstr ""
+"It is not recommended that you change the artifact category name because "
+"other things are dependent upon it. When you change the category name, all "
+"related items will be changed to the new name."
 
 #: www/pm/admin/index.php:277
 #, fuzzy
@@ -21001,7 +20991,6 @@ msgid "Project WWW directory on shell server:"
 msgstr "Proiektuaren WWW direktorioa Shell zerbitzarian:"
 
 #: www/project/admin/index.php:134
-#, fuzzy
 msgid "Descriptive Project Name"
 msgstr "Taldearen izen esanguratsua"
 
@@ -21276,14 +21265,12 @@ msgid "Use Mailing Lists"
 msgstr "Posta zerrendak erabili"
 
 #: www/project/admin/tools.php:204
-#, fuzzy
 msgid "Use Tasks"
-msgstr "Atazak"
+msgstr "Atazak erabili"
 
 #: www/project/admin/tools.php:217
-#, fuzzy
 msgid "Use Documents"
-msgstr "Foroak erabili"
+msgstr "Dokumentazio kudeatzailea erabili"
 
 #: www/project/admin/tools.php:230
 msgid "Use Surveys"
@@ -21294,9 +21281,8 @@ msgid "Use News"
 msgstr "Albisteak erabili"
 
 #: www/project/admin/tools.php:256
-#, fuzzy
 msgid "Use Source Code"
-msgstr "Jatorrizko IP-a"
+msgstr "SCM-a erabili"
 
 #: www/project/admin/tools.php:269
 msgid "Use File Release System"
@@ -21795,7 +21781,7 @@ msgstr ""
 
 #: www/reporting/index.php:56 www/reporting/projectact.php:63
 msgid "Project Activity"
-msgstr ""
+msgstr "Proiektuaren historia"
 
 #: www/reporting/index.php:61
 msgid "Site-wide reports: Tracker, Task Mgr, Forums, Doc Mgr, Downloads"
@@ -22287,7 +22273,6 @@ msgstr ""
 "Akatsa - Bertsio pakete baten sortzaileak bakarrik gehitu ditzake ebakinak."
 
 #: www/snippet/add_snippet_to_package.php:83 www/snippet/addversion.php:40
-#, fuzzy
 msgid "Error: snippet does not exist"
 msgstr "Akatsa - Ebakin hau ez da existitzen"
 
@@ -22623,9 +22608,8 @@ msgid "Browse by Language"
 msgstr "Hizkuntzaren arabera nabigatu"
 
 #: www/snippet/package.php:57
-#, fuzzy
 msgid "Error doing snippet package insert"
-msgstr "Akatsa - adabakiaren paketea ez da aurkitzen"
+msgstr "Akatsa adabakien paketea gehitzean"
 
 #: www/snippet/package.php:58 www/snippet/package.php:76
 #: www/snippet/package.php:127
@@ -22830,9 +22814,9 @@ msgstr[1] ""
 "Orrialdeko proiektu %d bistaratzen. Proiektuak aktibitate mailaz ordenaturik."
 
 #: www/softwaremap/tag_cloud.php:162
-#, fuzzy, php-format
+#, php-format
 msgid "Activity Percentile: <strong>%3.0f</strong>"
-msgstr "Tokiaren erabiltzaile aktiboak: <strong>%1$s</strong>"
+msgstr "Jarduera portzentajea: <strong>%3.0f</strong>"
 
 #: www/softwaremap/trove_list.php:56
 msgid "Software Map"
@@ -23070,22 +23054,26 @@ msgstr "Ez duzu lizentzia mota aukeratu"
 
 #: www/survey/admin/index.php:58
 msgid "It's simple to create a survey."
-msgstr ""
+msgstr "Inkesta bat sortzea erreza da."
 
 #: www/survey/admin/index.php:62
 msgid "Create questions and comments using the forms above."
-msgstr ""
+msgstr "Galderak eta azalpenak sortu gorako formulario erabiltzen."
 
 #: www/survey/admin/index.php:65
 msgid ""
 "Create a survey, listing the questions in order (choose from <strong>your</"
 "strong> list of questions)."
 msgstr ""
+"Inkesta bat sortu, ordenean galderak zerrendatzen (aukera itzazu "
+"<strong>zure</strong> galdera zerrendatik)."
 
 #: www/survey/admin/index.php:68
 #, php-format
 msgid "Link to the survey using this format: %s where XX is the survey number"
 msgstr ""
+"Inkestarekin bat egin ondorengo formatua erabiliaz: %s non XX inkestaren "
+"zenbakia den"
 
 #: www/survey/admin/index.php:73
 #, php-format
@@ -23348,6 +23336,8 @@ msgid ""
 "The information collected in these surveys will never be sold to third "
 "parties or used to solicit you to purchase any goods or services."
 msgstr ""
+"Inkesta honetan jasotako informazioa ez inoiz da hirugarren bati salduko, "
+"ezta erabiliko ere erosteko eskakizunik egiteko."
 
 #: www/survey/privacy.php:44
 msgid ""
@@ -23355,24 +23345,34 @@ msgid ""
 "developers being surveyed. That profile will help visitors to the site "
 "understand the quality of a given project."
 msgstr ""
+"Informazio hau jasotzearen helburua, inkesta egiten zaien lankideen profila "
+"egituratzea da. Profil honi esker bisitariak gune honetako proiektu baten "
+"kalitatea jakin dezake."
 
 #: www/survey/privacy.php:47
 msgid ""
 "The ID's of those who answer surveys are suppressed and not viewable by "
 "project administrators or the public or third parties."
 msgstr ""
+"Inkestak erantzuten dituzten pertsonen identifikadorea ez du proiektuaren "
+"administrariak, ez jende arruntak ez eta hirugarre batzuk ikusten."
 
 #: www/survey/privacy.php:50
 msgid ""
 "The information gathered is used only in aggregate form, not to single out "
 "specific users or developers."
 msgstr ""
+"Informazio orokorki erabiltzen da, alegia ez da erabiltzaileen edo lankideen "
+"banakako informazioa erakusten."
 
 #: www/survey/privacy.php:53
 msgid ""
 "If any changes are made to this policy, it will affect only future data that "
 "is collected and the user will of course have the ability to 'opt-out'."
 msgstr ""
+"Politika honetan aldaketik badago, etorkizunean jasoko diren datuei bakarrik "
+"eragingo die eta erabiltzaileak informazioa ez emateko eskubide osoa izango "
+"du."
 
 #: www/survey/rating_resp.php:59
 msgid "Vote registered"
@@ -23401,7 +23401,6 @@ msgid "Vote for Survey"
 msgstr "Inkestaren izena"
 
 #: www/survey/survey.php:55 www/survey/survey_resp.php:48
-#, fuzzy
 msgid ""
 "For some reason, the Project ID or Survey ID did not make it to this page"
 msgstr ""

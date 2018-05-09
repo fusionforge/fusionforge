@@ -30,9 +30,8 @@ msgstr "會員新增成功"
 #: common/docman/DocumentGroup.class.php:834
 #: common/tracker/actions/tracker.php:133
 #: common/tracker/actions/tracker.php:361 www/project/admin/editimages.php:58
-#, fuzzy
 msgid "Invalid file name."
-msgstr "全名錯誤"
+msgstr "文件名錯誤。"
 
 #: common/account/actions/deletesshkey.php:30
 #, fuzzy
@@ -408,7 +407,7 @@ msgstr "檔案名"
 #: www/tracker/roadmap.php:435 www/tracker/roadmap.php:468
 #, php-format
 msgid ": "
-msgstr ""
+msgstr "："
 
 #: common/docman/actions/monitordirectory.php:54
 #: common/docman/actions/monitorfile.php:56
@@ -673,9 +672,8 @@ msgid "Document Folder"
 msgstr "文件標題"
 
 #: common/docman/DocumentGroup.class.php:101
-#, fuzzy
 msgid "Name is required"
-msgstr "名稱保留給 CVS 使用"
+msgstr "請輸入名字"
 
 #: common/docman/DocumentGroup.class.php:110
 #: common/docman/DocumentGroup.class.php:490
@@ -853,7 +851,7 @@ msgstr ""
 msgid ""
 "Refers to the relatively brief title of the document (e.g. How to use the "
 "download server)."
-msgstr ""
+msgstr "引用文件中相關的簡單標題（例如：如何使用下載伺服器）。"
 
 #: common/docman/views/addfile.php:92 common/docman/views/addfile.php:108
 #: common/docman/views/addfile.php:110 common/docman/views/editfile.php:42
@@ -917,7 +915,7 @@ msgstr "說明"
 
 #: common/docman/views/addfile.php:92
 msgid "A brief description to be placed just under the title."
-msgstr ""
+msgstr "放在該標題下的簡單說明。"
 
 #: common/docman/views/addfile.php:94 common/docman/views/editfile.php:47
 msgid "Both fields are used by the document search engine."
@@ -1950,7 +1948,7 @@ msgstr "開啟日期"
 #: www/survey/include/SurveyHTML.class.php:198
 #, php-format
 msgid ":"
-msgstr ""
+msgstr "："
 
 #: common/docman/views/reporting.php:94
 #: common/tracker/include/ArtifactTypeHtml.class.php:330
@@ -2325,7 +2323,6 @@ msgstr "動作"
 #: plugins/mantisbt/view/admin/editVersion.php:79
 #: plugins/mantisbt/view/roadmap.php:98 plugins/mantisbt/view/roadmap.php:147
 #: www/frs/admin/editrelease.php:348 www/frs/reporting/downloads.php:197
-#, fuzzy
 msgid "Release"
 msgstr "發佈"
 
@@ -2427,9 +2424,9 @@ msgstr "新增討論區錯誤"
 
 #: common/forum/Forum.class.php:241 cronjobs/homedirs.php:156
 #: www/account/first.php:29
-#, fuzzy, php-format
+#, php-format
 msgid "Welcome to %s"
-msgstr "歡迎來到 %1$s"
+msgstr "歡迎來到 %s"
 
 #: common/forum/Forum.class.php:265
 #, fuzzy
@@ -2587,7 +2584,6 @@ msgstr "由"
 
 #: common/forum/ForumHTML.class.php:266
 #: plugins/forumml/www/forumml_utils.php:556 www/forum/message.php:123
-#, fuzzy
 msgid "Reply"
 msgstr "回覆"
 
@@ -3176,16 +3172,14 @@ msgstr "無效的帳號"
 
 #: common/include/Group.class.php:318 common/include/Group.class.php:322
 #: common/include/User.class.php:346
-#, fuzzy
 msgid "Unix name already taken."
-msgstr "Unix名稱重複"
+msgstr "Unix名稱重複。"
 
 #: common/include/Group.class.php:325
-#, fuzzy
 msgid ""
 "Please describe your Registration Project Purpose and Summarization in a "
 "more comprehensive manner."
-msgstr "請詳細說明您為什麼要在這裡註冊"
+msgstr "請詳細說明您為什麼要在這裡註冊。"
 
 #: common/include/Group.class.php:328
 msgid ""
@@ -3523,7 +3517,7 @@ msgstr "專案 Unix 名稱"
 
 #: common/include/Group.class.php:2636
 msgid "Reasons for negative decision"
-msgstr ""
+msgstr "原因"
 
 #: common/include/Group.class.php:2648
 #, php-format
@@ -3805,7 +3799,6 @@ msgstr ""
 #: plugins/quota_management/www/quota_admin.php:38
 #: plugins/quota_management/www/quota.php:36 www/admin/globalroleedit.php:140
 #: www/admin/index.php:39 www/admin/vhost.php:106
-#, fuzzy
 msgid "Site Admin"
 msgstr "網站管理"
 
@@ -4469,9 +4462,8 @@ msgid "Passwords do not match"
 msgstr "密碼不一致"
 
 #: common/include/User.class.php:332
-#, fuzzy
 msgid "Invalid Password"
-msgstr "無效的密碼："
+msgstr "無效的密碼"
 
 #: common/include/User.class.php:337
 #, fuzzy
@@ -4493,7 +4485,7 @@ msgstr "已存在使用該email信箱的會員 － 使用會員查詢來恢復�
 #: www/people/admin/index.php:53 www/people/admin/index.php:66
 #: www/pm/admin/index.php:98 www/survey/rating_resp.php:56
 msgid "Insert Error"
-msgstr ""
+msgstr "新增失敗"
 
 #: common/include/User.class.php:443
 #, fuzzy
@@ -4591,9 +4583,8 @@ msgid "Error: Cannot Update User Status:"
 msgstr "無法更新上層文章"
 
 #: common/include/User.class.php:939 common/include/User.class.php:991
-#, fuzzy
 msgid "User with this email already exists."
-msgstr "帳號已存在"
+msgstr "已存在使用该email信箱的用户。"
 
 #: common/include/User.class.php:1099
 #, fuzzy, php-format
@@ -8126,9 +8117,8 @@ msgid "List the last 10 pieces of news posted by the project members."
 msgstr ""
 
 #: common/widget/Widget_ProjectMembers.class.php:33
-#, fuzzy
 msgid "Project Members"
-msgstr "專案成員列表"
+msgstr "專案成員"
 
 #: common/widget/Widget_ProjectMembers.class.php:48
 msgid "Project Admins"
@@ -8450,9 +8440,9 @@ msgstr ""
 
 #: plugins/admssw/include/admsswPlugin.class.php:634
 #: www/softwaremap/full_list.php:70
-#, fuzzy, php-format
+#, php-format
 msgid "<strong>%d</strong> projects in result set."
-msgstr "找到 <strong>%d</strong> 個專案"
+msgstr "找到 <strong>%d</strong> 個專案。"
 
 #: plugins/admssw/include/admsswPlugin.class.php:645
 #: plugins/admssw/www/projectturtle.php:52 plugins/admssw/www/trove.php:46
@@ -8555,16 +8545,14 @@ msgstr "無效的Email"
 #: www/account/index.php:149 www/account/lostpw.php:89
 #: www/account/pending-resend.php:67 www/account/verify.php:78
 #: www/include/user_profile.php:87
-#, fuzzy
 msgid "Login Name"
 msgstr "使用者名稱"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:79
 #: plugins/authldap/include/AuthLDAPPlugin.class.php:209
 #: www/account/verify.php:86
-#, fuzzy
 msgid "Password"
-msgstr "密碼："
+msgstr "密碼"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:79
 #: plugins/authldap/include/AuthLDAPPlugin.class.php:209
@@ -8578,9 +8566,8 @@ msgstr "[忘了密碼？]"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:88
 #: www/account/pending-resend.php:53 www/account/register.php:281
-#, fuzzy
 msgid "Resend confirmation email to a pending account"
-msgstr "[重新發送確認信函給未通過的帳號]"
+msgstr "重新發送確認信函給未通過的帳號"
 
 #: plugins/authbuiltin/www/post-login.php:106
 #: plugins/authldap/www/post-login.php:105
@@ -9752,7 +9739,6 @@ msgstr "無效參數"
 
 #: plugins/forumml/www/index.php:59 plugins/forumml/www/message.php:95
 #: plugins/forumml/www/upload.php:48
-#, fuzzy
 msgid "You are not allowed to access this page"
 msgstr "您沒有權限存取這個頁面"
 
@@ -10264,14 +10250,14 @@ msgstr ""
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:228
 #: www/search/include/renderers/HtmlSearchRenderer.class.php:100
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:112
-#, fuzzy, php-format
+#, php-format
 msgid "No matches found for “%s”"
 msgstr "找不到關於 “%s” 的資料"
 
 #: plugins/globalsearch/www/index.php:162
 #: www/search/include/renderers/HtmlGroupSearchRenderer.class.php:69
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:111
-#, fuzzy, php-format
+#, php-format
 msgid "Search results for “%s”"
 msgstr "“%s” 的搜尋結果"
 
@@ -11324,9 +11310,9 @@ msgid "Add Mailing List"
 msgstr "新增通信論壇"
 
 #: plugins/mailman/www/index.php:39 www/mail/index.php:53
-#, fuzzy, php-format
+#, php-format
 msgid "Mailing Lists for %s"
-msgstr "%1$s 的通信論壇"
+msgstr "%s 的通信論壇"
 
 #: plugins/mailman/www/index.php:55 www/mail/index.php:68
 #, php-format
@@ -11784,7 +11770,6 @@ msgid "Add a new category"
 msgstr "增加新專案"
 
 #: plugins/mantisbt/view/admin/addVersion.php:34
-#, fuzzy
 msgid "Add a new version"
 msgstr "上傳新版本"
 
@@ -14929,7 +14914,6 @@ msgstr ""
 "Keys請閱讀SSH說明書來獲取更進一步資訊。"
 
 #: www/account/editsshkeys.php:76
-#, fuzzy
 msgid ""
 "Important: Make sure there are no line breaks. After submitting, verify that "
 "the number of keys in your file is what you expected."
@@ -15339,7 +15323,6 @@ msgid "Credentials you entered do not correspond to valid account."
 msgstr "您的認證輸入不符合有效的帳號。"
 
 #: www/account/verify.php:57
-#, fuzzy
 msgid "Error while activating account"
 msgstr "啟動帳號過程中錯誤"
 
@@ -15429,35 +15412,35 @@ msgid "Directory"
 msgstr "新專案名稱"
 
 #: www/admin/admin_table.php:41
-#, fuzzy, php-format
+#, php-format
 msgid "Create a new %s below:"
-msgstr "創造一個新的 %1$s 如下："
+msgstr "創造一個新的 %s 如下："
 
 #: www/admin/admin_table.php:94 www/admin/admin_table.php:286
-#, fuzzy, php-format
+#, php-format
 msgid "%s successfully added."
-msgstr "%1$s 新增成功"
+msgstr "%s 新增成功。"
 
 #: www/admin/admin_table.php:118
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "You cannot delete the processor %s since it is currently referenced in a "
 "file release."
-msgstr "因為它現今在一個檔案發佈中被列入參考，你不能刪除處理器 %1$s。"
+msgstr "因為它現今在一個檔案發佈中被列入參考，你不能刪除處理器 %s。"
 
 #: www/admin/admin_table.php:127
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "You can't delete the license %s since it is currently referenced in a "
 "project."
-msgstr "因為它現今在一個計畫中被列入參考，你不能刪除授權方式 %1$s。"
+msgstr "因為它現今在一個計畫中被列入參考，你不能刪除授權方式 %s。"
 
 #: www/admin/admin_table.php:135
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "You cannot delete the language %s since it is currently referenced in a user "
 "profile."
-msgstr "因為它現今在一個使用者描繪中被列入參考，你不能刪除程式語言 %1$s。"
+msgstr "因為它現今在一個使用者描繪中被列入參考，你不能刪除程式語言 %s。"
 
 #: www/admin/admin_table.php:144
 #, fuzzy, php-format
@@ -15467,14 +15450,14 @@ msgid ""
 msgstr "因為它現今在一個使用者描繪中被列入參考，你不能刪除程式語言 %1$s。"
 
 #: www/admin/admin_table.php:155
-#, fuzzy, php-format
+#, php-format
 msgid "Are you sure you want to delete this %s?"
-msgstr "您確定要刪除這個 %1$s 嗎？"
+msgstr "您確定要刪除這個 %s 嗎？"
 
 #: www/admin/admin_table.php:185
-#, fuzzy, php-format
+#, php-format
 msgid "%s successfully deleted."
-msgstr "%1$s 刪除成功"
+msgstr "%s 刪除成功。"
 
 #: www/admin/admin_table.php:207
 #, fuzzy, php-format
@@ -15482,14 +15465,14 @@ msgid "Modify the %s below:"
 msgstr "修改 %1$s 如下："
 
 #: www/admin/admin_table.php:263
-#, fuzzy, php-format
+#, php-format
 msgid "%s successfully modified."
-msgstr "%1$s 修改成功"
+msgstr "%s 修改成功。"
 
 #: www/admin/admin_table.php:358
-#, fuzzy, php-format
+#, php-format
 msgid "Edit the %ss Table"
-msgstr "編輯 %1$s 表格"
+msgstr "編輯 %s 表格"
 
 #: www/admin/approve-pending.php:46 www/project/admin/tools.php:34
 #: www/snapshots.php:39 www/tarballs.php:40
@@ -15883,9 +15866,9 @@ msgstr "註冊時間"
 #: www/admin/grouplist.php:69 www/admin/search.php:148
 #: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:75
 #: www/register/index.php:236 www/register/index.php:238
-#, fuzzy
+
 msgid "Unix Name"
-msgstr "Unix帳號"
+msgstr "Unix 名稱"
 
 #: www/admin/grouplist.php:71
 msgid "Public?"
@@ -15943,9 +15926,9 @@ msgid "User Maintenance"
 msgstr "會員維護"
 
 #: www/admin/index.php:50
-#, fuzzy, php-format
+#, php-format
 msgid "Active site users: <strong>%d</strong>"
-msgstr "啟用中的使用者：<strong>%1$s</strong>"
+msgstr "啟用中的使用者：<strong>%d</strong>"
 
 #: www/admin/index.php:53
 msgid "Display Full User List/Edit Users"
@@ -16424,7 +16407,6 @@ msgstr[1] ""
 #: www/project/admin/massadd.php:90 www/project/admin/massfinish.php:74
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:45
 #: www/top/topusers.php:64
-#, fuzzy
 msgid "Real Name"
 msgstr "真實姓名"
 
@@ -17513,7 +17495,6 @@ msgstr "編輯發佈"
 
 #: www/frs/admin/editrelease.php:226 www/frs/admin/editrelease.php:349
 #: www/frs/admin/qrs.php:183
-#, fuzzy
 msgid "Release Date"
 msgstr "發佈日期"
 
@@ -17568,13 +17549,12 @@ msgid "Submit/Refresh"
 msgstr "送出/重新整理"
 
 #: www/frs/admin/editrelease.php:288
-#, fuzzy
 msgid "Add Files To This Release"
-msgstr "第三步：編輯這個發佈中的文件"
+msgstr "增加文件到這次發佈中"
 
 #: www/frs/admin/editrelease.php:289
 msgid "Now, choose a file to upload into the system."
-msgstr ""
+msgstr "現在，選擇一個文件並且上傳到系統中。"
 
 #: www/frs/admin/editrelease.php:298 www/frs/admin/qrs.php:200
 #, fuzzy, php-format
@@ -17609,9 +17589,8 @@ msgstr ""
 "則它們不會正確地顯示在您的下載摘要頁中。"
 
 #: www/frs/admin/editrelease.php:349
-#, fuzzy
 msgid "Processor"
-msgstr "處理器類型"
+msgstr "處理器"
 
 #: www/frs/admin/editrelease.php:371
 msgid "Update/Refresh"
@@ -17645,48 +17624,44 @@ msgid "Click here to %1$s quick-release a file %2$s"
 msgstr "點擊這裏來 %1$s 快速發佈檔案 %2$s"
 
 #: www/frs/admin/index.php:127
-#, fuzzy
 msgid "Packages"
-msgstr "集合"
+msgstr "套裝軟體"
 
 #: www/frs/admin/index.php:128
 msgid ""
 "You can use packages to group different file releases together, or use them "
 "however you like."
 msgstr ""
+"您可以使用套裝軟體來把不同的文件一起成組發佈，或者如果您願意，分開發佈也可"
+"以。"
 
 #: www/frs/admin/index.php:129
-#, fuzzy
 msgid "An example of packages:"
-msgstr "新增程式碼到這個集合"
+msgstr "一個可參考的套裝軟體："
 
 #: www/frs/admin/index.php:131
-#, fuzzy
 msgid "Your Packages:"
-msgstr "軟體包裝："
+msgstr "您的套裝軟體："
 
 #: www/frs/admin/index.php:133
 msgid "Define your packages"
-msgstr ""
+msgstr "定義您的套裝軟體"
 
 #: www/frs/admin/index.php:134
-#, fuzzy
 msgid "Create new releases of packages"
-msgstr "點擊這裡建立新的釋出"
+msgstr "建立套裝軟體的新發佈"
 
 #: www/frs/admin/index.php:136
-#, fuzzy
 msgid "Releases of Packages"
-msgstr "釋出記錄"
+msgstr "套裝軟體的發佈"
 
 #: www/frs/admin/index.php:137
 msgid "A release of a package can contain multiple files."
-msgstr ""
+msgstr "一個套裝軟體發佈可以包含多個文件。"
 
 #: www/frs/admin/index.php:138
-#, fuzzy
 msgid "Examples of Releases"
-msgstr "最新發佈專案"
+msgstr "發佈的例子"
 
 #: www/frs/admin/index.php:140
 msgid ""
@@ -18978,9 +18953,9 @@ msgid "Unable to get the list %s: %s"
 msgstr ""
 
 #: www/mail/index.php:97
-#, fuzzy, php-format
+#, php-format
 msgid "%s Archives"
-msgstr "%1$s 檔案"
+msgstr "%s 檔案"
 
 #: www/mail/index.php:100
 msgid "Subscribe/Unsubscribe/Preferences"
@@ -19505,7 +19480,6 @@ msgid "Posting fetch failed: %s"
 msgstr "張貼失敗"
 
 #: www/people/editjob.php:154
-#, fuzzy
 msgid "No such posting for this project"
 msgstr "該專案沒有這樣的文章"
 
@@ -19539,9 +19513,9 @@ msgid "User updated successfully"
 msgstr "會員更新成功"
 
 #: www/people/editprofile.php:100
-#, fuzzy, php-format
+#, php-format
 msgid "Failed to add the skill %s"
-msgstr "增加技能失敗"
+msgstr "增加技能失敗%s"
 
 #: www/people/editprofile.php:102
 msgid "Skill added successfully"
@@ -19612,9 +19586,9 @@ msgid "No skills selected to delete."
 msgstr "沒有選擇技能進行刪除"
 
 #: www/people/editprofile.php:187
-#, fuzzy, php-format
+#, php-format
 msgid "Failed to delete any skills: %s"
-msgstr "刪除技能失敗"
+msgstr "刪除技能失敗: %s"
 
 #: www/people/editprofile.php:189
 #, fuzzy
@@ -19742,6 +19716,7 @@ msgid ""
 "The %s Project Help Wanted board is for non-commercial, project volunteer "
 "openings. Commercial use is prohibited."
 msgstr ""
+"%s 專案尋求協助討論版為非商業化的專案自願者開設的。商業性的使用是禁止的。"
 
 #: www/people/index.php:69
 msgid ""
@@ -19749,22 +19724,24 @@ msgid ""
 "whichever comes first. (Project administrators may always re-post expired "
 "openings.)"
 msgstr ""
+"尋求協助的文章將存活兩個星期，或者被會員主動關閉。（專案管理員可能總是在過期"
+"前重複張貼）"
 
 #: www/people/index.php:73
 msgid ""
 "Browse through the category menu to find projects looking for your help."
-msgstr ""
+msgstr "透過分類目錄瀏覽並發現需要您幫助的專案。"
 
 #: www/people/index.php:77
 msgid ""
 "If you're a project admin, log in and submit help wanted requests through "
 "your project administration page."
-msgstr ""
+msgstr "如果您是專案管理員，請登入並透過您的專案管理頁來發佈需要幫助的資訊。"
 
 #: www/people/index.php:81
 msgid ""
 "To suggest new job categories, submit a request via the support manager."
-msgstr ""
+msgstr "如果需要增加一種新的工作分類，請向支援管理員送出一個請求。"
 
 #: www/people/index.php:86
 msgid "Last posts"
@@ -19824,7 +19801,6 @@ msgid "Error inserting into job inventory: "
 msgstr "錯誤 － 無法新增技能目錄"
 
 #: www/people/people_utils.php:217
-#, fuzzy
 msgid "Added to job inventory"
 msgstr "加入到技能目錄"
 
@@ -19838,9 +19814,8 @@ msgid "Invalid ID"
 msgstr "無效的編號"
 
 #: www/people/people_utils.php:393
-#, fuzzy
 msgid "No categories found."
-msgstr "沒有發現分類"
+msgstr "沒有發現分類。"
 
 #: www/people/people_utils.php:438
 msgid "Date Opened"
@@ -20985,7 +20960,6 @@ msgid "Project WWW directory on shell server:"
 msgstr "shell伺服器上的www目錄："
 
 #: www/project/admin/index.php:134
-#, fuzzy
 msgid "Descriptive Project Name"
 msgstr "說明性的專案名稱"
 
@@ -21256,9 +21230,8 @@ msgid "Use Tasks"
 msgstr "任務"
 
 #: www/project/admin/tools.php:217
-#, fuzzy
 msgid "Use Documents"
-msgstr "使用討論區"
+msgstr "使用文件產生器"
 
 #: www/project/admin/tools.php:230
 msgid "Use Surveys"
@@ -21269,9 +21242,8 @@ msgid "Use News"
 msgstr "使用新聞"
 
 #: www/project/admin/tools.php:256
-#, fuzzy
 msgid "Use Source Code"
-msgstr "來源 IP"
+msgstr "使用原始碼版本管理系統"
 
 #: www/project/admin/tools.php:269
 msgid "Use File Release System"
@@ -21883,7 +21855,6 @@ msgid "Add Entry"
 msgstr "新增項目"
 
 #: www/reporting/timeadd.php:194
-#, fuzzy
 msgid ""
 "Choose a Project/Subproject in the Tasks. You will then have to choose a "
 "Task and category to record your time in."
@@ -22266,7 +22237,6 @@ msgid "Error: Only the creator of a package version can add snippets to it."
 msgstr "錯誤 - 只有軟體包裝版本的建立者可以新增程式碼到其中"
 
 #: www/snippet/add_snippet_to_package.php:83 www/snippet/addversion.php:40
-#, fuzzy
 msgid "Error: snippet does not exist"
 msgstr "錯誤 - 程式碼不存在"
 
@@ -22598,9 +22568,8 @@ msgid "Browse by Language"
 msgstr "依程式語言瀏覽"
 
 #: www/snippet/package.php:57
-#, fuzzy
 msgid "Error doing snippet package insert"
-msgstr "錯誤, 錯誤 - 程式碼集合不存在"
+msgstr "插入程式碼版本時發生錯誤"
 
 #: www/snippet/package.php:58 www/snippet/package.php:76
 #: www/snippet/package.php:127
@@ -22803,9 +22772,9 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: www/softwaremap/tag_cloud.php:162
-#, fuzzy, php-format
+#, php-format
 msgid "Activity Percentile: <strong>%3.0f</strong>"
-msgstr "啟用中的使用者：<strong>%1$s</strong>"
+msgstr "活躍度: <strong>%3.0f</strong>"
 
 #: www/softwaremap/trove_list.php:56
 msgid "Software Map"
@@ -23043,22 +23012,22 @@ msgstr "您尚未選擇授權方式"
 
 #: www/survey/admin/index.php:58
 msgid "It's simple to create a survey."
-msgstr ""
+msgstr "創造問卷是輕而易舉的。"
 
 #: www/survey/admin/index.php:62
 msgid "Create questions and comments using the forms above."
-msgstr ""
+msgstr "使用上述構成問卷項目創造問題和註釋。"
 
 #: www/survey/admin/index.php:65
 msgid ""
 "Create a survey, listing the questions in order (choose from <strong>your</"
 "strong> list of questions)."
-msgstr ""
+msgstr "創造問卷，有條理的列出題目(從<strong>您的</strong>問題列表選擇)。"
 
 #: www/survey/admin/index.php:68
 #, php-format
 msgid "Link to the survey using this format: %s where XX is the survey number"
-msgstr ""
+msgstr "連結問卷時網址使用格式：%s 此處 XX 代表問卷編號。"
 
 #: www/survey/admin/index.php:73
 #, php-format
@@ -23315,6 +23284,8 @@ msgid ""
 "The information collected in these surveys will never be sold to third "
 "parties or used to solicit you to purchase any goods or services."
 msgstr ""
+"在這些調查中被收集的資料將不會被賣給第三者或者用來請求你購買任何的產品或服"
+"務。"
 
 #: www/survey/privacy.php:44
 msgid ""
@@ -23322,24 +23293,28 @@ msgid ""
 "developers being surveyed. That profile will help visitors to the site "
 "understand the quality of a given project."
 msgstr ""
+"這被收集的資料是作為建立被審視的專案與開發人員的概述，這概述將協助訪客至本站"
+"了解該專案的品質。"
 
 #: www/survey/privacy.php:47
 msgid ""
 "The ID's of those who answer surveys are suppressed and not viewable by "
 "project administrators or the public or third parties."
-msgstr ""
+msgstr "回答問卷調查的編號會被隱藏並不會被專案管理員或被公開或被第三者看見。"
 
 #: www/survey/privacy.php:50
 msgid ""
 "The information gathered is used only in aggregate form, not to single out "
 "specific users or developers."
-msgstr ""
+msgstr "被收集的資料只有以整體的形式被使用，不會再選出特定的使用者或開發人員。"
 
 #: www/survey/privacy.php:53
 msgid ""
 "If any changes are made to this policy, it will affect only future data that "
 "is collected and the user will of course have the ability to 'opt-out'."
 msgstr ""
+"如果任何的改變被打造成一個政策，它將只有影響未來資料的收集，而使用者當然有權"
+"利\"選擇退出\"。"
 
 #: www/survey/rating_resp.php:59
 msgid "Vote registered"
@@ -23368,7 +23343,6 @@ msgid "Vote for Survey"
 msgstr "問卷名稱"
 
 #: www/survey/survey.php:55 www/survey/survey_resp.php:48
-#, fuzzy
 msgid ""
 "For some reason, the Project ID or Survey ID did not make it to this page"
 msgstr "基於某些理由，群組編號或問卷編號不能出現在這個頁面"

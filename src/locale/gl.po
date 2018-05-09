@@ -668,9 +668,8 @@ msgid "Document Folder"
 msgstr "Título do documento"
 
 #: common/docman/DocumentGroup.class.php:101
-#, fuzzy
 msgid "Name is required"
-msgstr "Este nome está reservado."
+msgstr "Requírese un nome"
 
 #: common/docman/DocumentGroup.class.php:110
 #: common/docman/DocumentGroup.class.php:490
@@ -849,6 +848,8 @@ msgid ""
 "Refers to the relatively brief title of the document (e.g. How to use the "
 "download server)."
 msgstr ""
+"Refírese ao título breve do documento (por exemplo, como usar o servidor de "
+"descarga)."
 
 #: common/docman/views/addfile.php:92 common/docman/views/addfile.php:108
 #: common/docman/views/addfile.php:110 common/docman/views/editfile.php:42
@@ -912,7 +913,7 @@ msgstr "Descrición"
 
 #: common/docman/views/addfile.php:92
 msgid "A brief description to be placed just under the title."
-msgstr ""
+msgstr "Unha descrición breve que se colocará debaixo do título."
 
 #: common/docman/views/addfile.php:94 common/docman/views/editfile.php:47
 #, fuzzy
@@ -2323,9 +2324,8 @@ msgstr "Sen moderación "
 #: plugins/mantisbt/view/admin/editVersion.php:79
 #: plugins/mantisbt/view/roadmap.php:98 plugins/mantisbt/view/roadmap.php:147
 #: www/frs/admin/editrelease.php:348 www/frs/reporting/downloads.php:197
-#, fuzzy
 msgid "Release"
-msgstr "Liberacións"
+msgstr "Liberación"
 
 #: common/forum/ForumAdmin.class.php:360 common/forum/ForumHTML.class.php:328
 #: common/forum/ForumHTML.class.php:545
@@ -2561,9 +2561,8 @@ msgid "Start New Thread"
 msgstr "Comezar unha nova conversa"
 
 #: common/forum/ForumHTML.class.php:180 common/forum/ForumMessage.class.php:60
-#, fuzzy
 msgid "Invalid Forum Object"
-msgstr "non é un obxecto válido de foro "
+msgstr "Non é un obxecto válido de foro"
 
 #: common/forum/ForumHTML.class.php:203
 msgid "This is the content of the pending message"
@@ -2582,9 +2581,8 @@ msgstr "Por "
 
 #: common/forum/ForumHTML.class.php:266
 #: plugins/forumml/www/forumml_utils.php:556 www/forum/message.php:123
-#, fuzzy
 msgid "Reply"
-msgstr "Responder "
+msgstr "Responder"
 
 #: common/forum/ForumHTML.class.php:311
 msgid "Current File"
@@ -3554,7 +3552,6 @@ msgid "Could not find user who has submitted the project."
 msgstr "Non foi posíbel atopar o usuario que enviou o proxecto."
 
 #: common/include/Group.class.php:2679
-#, fuzzy
 msgid "There is no administrator to send the mail to."
 msgstr "Non hai ningún administrador a quen enviarlle o correo."
 
@@ -3570,11 +3567,8 @@ msgid "Submitted Description"
 msgstr "Descrición proporcionada"
 
 #: common/include/Group.class.php:2696
-#, fuzzy
 msgid "Please visit the following URL to approve or reject this project"
-msgstr ""
-"Por favor, visite o seguinte URL para completar o cambio de correo "
-"electrónico:"
+msgstr "Visite o seguinte URL para aprobar ou rexeitar este proxecto"
 
 #: common/include/Group.class.php:2708
 #, php-format
@@ -3787,9 +3781,8 @@ msgid "Main Page"
 msgstr "Páxina principal"
 
 #: common/include/Navigation.class.php:245
-#, fuzzy
 msgid "My Page"
-msgstr "Páxina principal"
+msgstr "A miña páxina"
 
 #: common/include/Navigation.class.php:247
 msgid "Your Page, widgets selected by you to follow your items."
@@ -4491,9 +4484,8 @@ msgid "Passwords do not match"
 msgstr "Os contrasinais non coinciden "
 
 #: common/include/User.class.php:332
-#, fuzzy
 msgid "Invalid Password"
-msgstr "O contrasinal non é válido:"
+msgstr "O contrasinal non é válido"
 
 #: common/include/User.class.php:337
 #, fuzzy
@@ -6587,14 +6579,12 @@ msgstr ""
 
 #: common/tracker/ArtifactHistory.class.php:53
 #: common/tracker/ArtifactMessage.class.php:53
-#, fuzzy
 msgid "Invalid Artifact"
-msgstr "ID non válido"
+msgstr "Artifact non válido"
 
 #: common/tracker/ArtifactHistory.class.php:82
-#, fuzzy
 msgid "Invalid ArtifactHistory ID"
-msgstr "ID non válido"
+msgstr "ArtifactHistory ID non válido"
 
 #: common/tracker/ArtifactMessage.class.php:89
 msgid "Error: Logged In User Bug Could Not Get User Object"
@@ -7845,7 +7835,6 @@ msgid "Leave project"
 msgstr ""
 
 #: common/widget/Widget_MyProjects.class.php:96
-#, fuzzy
 msgid "Private project"
 msgstr "Proxectos privados"
 
@@ -8068,7 +8057,7 @@ msgid "Activity Ranking: <strong>%d</strong>"
 msgstr "Clasificación por actividade: <strong>%d</strong>"
 
 #: common/widget/Widget_ProjectInfo.class.php:84
-#, fuzzy, php-format
+#, php-format
 msgid "View project <a href=\"%s\">Statistics</a>"
 msgstr "Ver as <a href=\"%s\">estatísticas</a> do proxecto"
 
@@ -8169,9 +8158,8 @@ msgid "List the last 10 pieces of news posted by the project members."
 msgstr ""
 
 #: common/widget/Widget_ProjectMembers.class.php:33
-#, fuzzy
 msgid "Project Members"
-msgstr "Lista de membros do proxecto"
+msgstr "Membros do proxecto"
 
 #: common/widget/Widget_ProjectMembers.class.php:48
 msgid "Project Admins"
@@ -8633,9 +8621,8 @@ msgstr "[Esqueceu o seu contrasinal?] "
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:88
 #: www/account/pending-resend.php:53 www/account/register.php:281
-#, fuzzy
 msgid "Resend confirmation email to a pending account"
-msgstr "[Reenviar o correo de confirmación a unha conta pendente] "
+msgstr "Reenviar o correo de confirmación a unha conta pendente"
 
 #: plugins/authbuiltin/www/post-login.php:106
 #: plugins/authldap/www/post-login.php:105
@@ -9064,7 +9051,7 @@ msgstr "Gardar "
 
 #: plugins/blocks/www/index.php:322
 msgid "Tips"
-msgstr ""
+msgstr "Consellos"
 
 #: plugins/blocks/www/index.php:325
 msgid ""
@@ -9746,9 +9733,8 @@ msgstr "Engadir esta lista"
 #: plugins/forumml/www/message.php:156
 #: plugins/mailman/www/mailman_utils.php:53
 #: plugins/mailman/www/mailman_utils.php:117
-#, fuzzy
 msgid "Archives"
-msgstr "Arquivos de %1$s"
+msgstr "Arquivos"
 
 #: plugins/forumml/www/forumml_utils.php:143
 #: plugins/forumml/www/forumml_utils.php:147
@@ -9822,9 +9808,8 @@ msgstr "O identificador de foro non é válido"
 
 #: plugins/forumml/www/index.php:59 plugins/forumml/www/message.php:95
 #: plugins/forumml/www/upload.php:48
-#, fuzzy
 msgid "You are not allowed to access this page"
-msgstr "Non lle está permitido ver este calendario."
+msgstr "Non ten permiso para acceder a esta páxina"
 
 #: plugins/forumml/www/index.php:62
 msgid "The mailing  list does not exist or is inactive"
@@ -9914,9 +9899,8 @@ msgid "Empty archives"
 msgstr "Cadeas baleiras"
 
 #: plugins/forumml/www/message.php:209
-#, fuzzy
 msgid "Search result for "
-msgstr "Resultados da busca para %1$s"
+msgstr "Resultados da busca para "
 
 #: plugins/forumml/www/message.php:209
 #, fuzzy
@@ -10219,9 +10203,8 @@ msgid "Forge ID"
 msgstr "ID da forxa"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:226
-#, fuzzy
 msgid "edit"
-msgstr "[editar]"
+msgstr "editar"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:246
 msgid "New"
@@ -10316,7 +10299,7 @@ msgstr "Introduza as palabras da busca arriba"
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:228
 #: www/search/include/renderers/HtmlSearchRenderer.class.php:100
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:112
-#, fuzzy, php-format
+#, php-format
 msgid "No matches found for “%s”"
 msgstr "Non se atoparon coincidencias para “%s”"
 
@@ -11269,7 +11252,7 @@ msgid "My Monitored Lists"
 msgstr "Os meus foros monitorizados"
 
 #: plugins/mailman/include/mailmanPlugin.class.php:195
-#, fuzzy, php-format
+#, php-format
 msgid "Not Object: MailmanList: %d"
 msgstr "Non é un obxecto: Lista de correo: %d"
 
@@ -11849,7 +11832,6 @@ msgid "Add a new category"
 msgstr "Engadir un proxecto novo"
 
 #: plugins/mantisbt/view/admin/addVersion.php:34
-#, fuzzy
 msgid "Add a new version"
 msgstr "Enviar unha nova versión"
 
@@ -14173,11 +14155,10 @@ msgstr "Navegar polo repositorio CVS"
 
 #: plugins/scmgit/common/GitPlugin.class.php:165
 #: plugins/scmgit/common/GitPlugin.class.php:202
-#, fuzzy
 msgid "Developer Access to the Git repository via SSH"
 msgid_plural "Developer Access to the Git repositories via SSH"
-msgstr[0] "Desenvolvedores (en proba) "
-msgstr[1] "Desenvolvedores (en proba) "
+msgstr[0] "Acceso para desenvolvedores ao Git mediante SSH"
+msgstr[1] "Acceso para desenvolvedores ao Git mediante SSH"
 
 #: plugins/scmgit/common/GitPlugin.class.php:170
 #: plugins/scmgit/common/GitPlugin.class.php:189
@@ -15560,9 +15541,8 @@ msgstr "Mensaxe de foro"
 #: www/activity/index.php:322
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:60
 #: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:52
-#, fuzzy
 msgid "Directory"
-msgstr "Nome do proxecto"
+msgstr "Directorio"
 
 #: www/admin/admin_table.php:41
 #, php-format
@@ -15584,13 +15564,13 @@ msgstr ""
 "publicación de ficheiros."
 
 #: www/admin/admin_table.php:127
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "You can't delete the license %s since it is currently referenced in a "
 "project."
 msgstr ""
-"Non pode eliminar a licenza %1$s porque está actualmente en uso nalgún "
-"proxecto. "
+"Non pode eliminar a licenza %s porque está actualmente en uso nalgún "
+"proxecto."
 
 #: www/admin/admin_table.php:135
 #, php-format
@@ -15878,9 +15858,9 @@ msgid "Error: You did not tick the “really remove” box!"
 msgstr ""
 
 #: www/admin/globalroleedit.php:126
-#, fuzzy, php-format
+#, php-format
 msgid "User %s removed successfully"
-msgstr "Eliminouse o usuario correctamente"
+msgstr "Eliminouse o usuario %s correctamente"
 
 #: www/admin/globalroleedit.php:130
 #, fuzzy, php-format
@@ -16079,9 +16059,9 @@ msgid "User Maintenance"
 msgstr "Mantemento dos usuarios"
 
 #: www/admin/index.php:50
-#, fuzzy, php-format
+#, php-format
 msgid "Active site users: <strong>%d</strong>"
-msgstr "Usuarios activos: <strong>%1$s</strong>"
+msgstr "Usuarios activos: <strong>%d</strong>"
 
 #: www/admin/index.php:53
 msgid "Display Full User List/Edit Users"
@@ -16399,7 +16379,6 @@ msgid "Newsbytes Rejected."
 msgstr "Rexeitáronse NewsBytes."
 
 #: www/admin/pending-news.php:113 www/project/admin/tools.php:336
-#, fuzzy
 msgid "News Admin"
 msgstr "Administración de novas"
 
@@ -16450,12 +16429,17 @@ msgid ""
 "plugins/ folder. Then, you should activate them also per project, per user "
 "or whatever the plugin specifically applies to."
 msgstr ""
+"Nesta páxina pode activar ou desactivar os complementos que están no "
+"cartafol de complementos. Despois tamén os poderá activar por proxecto, por "
+"usuario ou o que o complemento aplica."
 
 #: www/admin/pluginman.php:134
 msgid ""
 "Be careful because some projects/users can be using the plugin. Deactivating "
 "it will remove the plugin from all users/projects."
 msgstr ""
+"Teña coidado xa que algúns grupos ou usuarios poden estar a usar un "
+"complemento e ao desactivalo pode eliminalo de todos os grupos ou usuarios."
 
 #: www/admin/pluginman.php:136
 msgid "Plugin Name"
@@ -16559,7 +16543,6 @@ msgstr[1] "Busca do usuario cos criterios <em>%1$s</em>: %2$s coincidencias"
 #: www/project/admin/massadd.php:90 www/project/admin/massfinish.php:74
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:45
 #: www/top/topusers.php:64
-#, fuzzy
 msgid "Real Name"
 msgstr "Nome verdadeiro"
 
@@ -16816,9 +16799,8 @@ msgid "Operations"
 msgstr "Operacións "
 
 #: www/admin/useredit.php:286 www/include/user_home.php:99
-#, fuzzy
 msgid "This user is not a member of any project."
-msgstr "Este desenvolvedor non é membro de ningún proxecto."
+msgstr "Este usuario non é membro de ningún proxecto."
 
 #: www/admin/useredit.php:289
 #, fuzzy
@@ -16918,7 +16900,6 @@ msgid "Missing group name"
 msgstr "Esqueceu un parámetro "
 
 #: www/admin/vhost.php:100
-#, fuzzy
 msgid "Error updating VHOST entry: "
 msgstr "Produciuse un erro ao actualizar a entrada de VHOST: "
 
@@ -17656,9 +17637,8 @@ msgstr "Editar as publicacións "
 
 #: www/frs/admin/editrelease.php:226 www/frs/admin/editrelease.php:349
 #: www/frs/admin/qrs.php:183
-#, fuzzy
 msgid "Release Date"
-msgstr "Data da publicación"
+msgstr "Data de publicación"
 
 #: www/frs/admin/editrelease.php:230 www/frs/admin/qrs.php:175
 #: www/frs/admin/showreleases.php:100 www/frs/shownotes.php:64
@@ -17714,19 +17694,18 @@ msgid "Submit/Refresh"
 msgstr "Enviar/actualizar "
 
 #: www/frs/admin/editrelease.php:288
-#, fuzzy
 msgid "Add Files To This Release"
-msgstr "3.º paso: edite os ficheiros nesta versión"
+msgstr "Engada ficheiros a esta versión"
 
 #: www/frs/admin/editrelease.php:289
 msgid "Now, choose a file to upload into the system."
-msgstr ""
+msgstr "Agora, elixa un ficheiro para enviar ao sistema."
 
 #: www/frs/admin/editrelease.php:298 www/frs/admin/qrs.php:200
-#, fuzzy, php-format
+#, php-format
 msgid "Alternatively, you can use FTP to upload a new file at %s."
 msgstr ""
-"De xeito alternativo, pode empregar o FTP para enviar un ficheiro novo a %1$s"
+"De xeito alternativo, pode empregar o FTP para enviar un ficheiro novo a %s."
 
 #: www/frs/admin/editrelease.php:322 www/frs/admin/editrelease.php:350
 #: www/frs/admin/qrs.php:224
@@ -17757,9 +17736,8 @@ msgstr ""
 "aparecerán na páxina de resumo de descargas."
 
 #: www/frs/admin/editrelease.php:349
-#, fuzzy
 msgid "Processor"
-msgstr "Tipo de procesador "
+msgstr "Procesador"
 
 #: www/frs/admin/editrelease.php:371
 msgid "Update/Refresh"
@@ -17794,48 +17772,44 @@ msgid "Click here to %1$s quick-release a file %2$s"
 msgstr "Prema aquí para %1$s unha rápida liberación do ficheiro %2$s"
 
 #: www/frs/admin/index.php:127
-#, fuzzy
 msgid "Packages"
-msgstr "Paquete "
+msgstr "Paquetes"
 
 #: www/frs/admin/index.php:128
 msgid ""
 "You can use packages to group different file releases together, or use them "
 "however you like."
 msgstr ""
+"Pode usar os paquetes para agrupar diferentes versións de ficheiros ou "
+"usalos como desexar."
 
 #: www/frs/admin/index.php:129
-#, fuzzy
 msgid "An example of packages:"
-msgstr "Engadir un fragmento ao paquete"
+msgstr "Un exemplo de paquetes é o seguinte:"
 
 #: www/frs/admin/index.php:131
-#, fuzzy
 msgid "Your Packages:"
-msgstr "Paquete:"
+msgstr "Os seus paquetes:"
 
 #: www/frs/admin/index.php:133
 msgid "Define your packages"
-msgstr ""
+msgstr "Definir os seus paquetes"
 
 #: www/frs/admin/index.php:134
-#, fuzzy
 msgid "Create new releases of packages"
-msgstr "Para crear unha liberación nova, prema aquí."
+msgstr "Crear versións novas dos paquetes"
 
 #: www/frs/admin/index.php:136
-#, fuzzy
 msgid "Releases of Packages"
-msgstr "Notas da publicación"
+msgstr "Versións dos paquetes"
 
 #: www/frs/admin/index.php:137
 msgid "A release of a package can contain multiple files."
-msgstr ""
+msgstr "Unha versión dun paquete pode conter diferentes ficheiros."
 
 #: www/frs/admin/index.php:138
-#, fuzzy
 msgid "Examples of Releases"
-msgstr "Últimas publicacións de ficheiros"
+msgstr "Algúns exemplos de versións posíbeis son os seguintes"
 
 #: www/frs/admin/index.php:140
 msgid ""
@@ -19560,7 +19534,6 @@ msgid "Missing skill name."
 msgstr "Esqueceu un parámetro"
 
 #: www/people/admin/index.php:84
-#, fuzzy
 msgid "Add/Change Categories"
 msgstr "Engadir/editar categorías"
 
@@ -19729,12 +19702,10 @@ msgid "Posting fetch failed: %s"
 msgstr "errou a publicación do comentario "
 
 #: www/people/editjob.php:154
-#, fuzzy
 msgid "No such posting for this project"
-msgstr "Este proxecto non ten definida ningunha etiqueta"
+msgstr "Non existe tal publicación para este proxecto"
 
 #: www/people/editjob.php:158
-#, fuzzy
 msgid ""
 "Now you can edit/change the list of skills attached to this posting. "
 "Developers will be able to match their skills with your requirements."
@@ -19765,9 +19736,9 @@ msgid "User updated successfully"
 msgstr "O usuario actualizouse correctamente"
 
 #: www/people/editprofile.php:100
-#, fuzzy, php-format
+#, php-format
 msgid "Failed to add the skill %s"
-msgstr "Non foi posíbel engadir a habelencia"
+msgstr "Non foi posíbel engadir a habelencia %s"
 
 #: www/people/editprofile.php:102
 msgid "Skill added successfully"
@@ -19838,9 +19809,9 @@ msgid "No skills selected to delete."
 msgstr "Non se seleccionou ningunha habelencia para eliminar."
 
 #: www/people/editprofile.php:187
-#, fuzzy, php-format
+#, php-format
 msgid "Failed to delete any skills: %s"
-msgstr "Produciuse un erro e non se eliminou ningunha habelencia"
+msgstr "Produciuse un erro e non se eliminou ningunha habelencia: %s"
 
 #: www/people/editprofile.php:189
 #, fuzzy
@@ -19972,6 +19943,8 @@ msgid ""
 "The %s Project Help Wanted board is for non-commercial, project volunteer "
 "openings. Commercial use is prohibited."
 msgstr ""
+"O taboleiro de solicitudes de axuda de %s é para vacantes de traballo "
+"voluntario e non comerciais en proxectos. O uso comercial está prohibido."
 
 #: www/people/index.php:69
 msgid ""
@@ -19979,22 +19952,31 @@ msgid ""
 "whichever comes first. (Project administrators may always re-post expired "
 "openings.)"
 msgstr ""
+"Os listados dos proxectos permanecerán dúas semanas, ou ta que sexan "
+"cerradas por quen as escribiu, o que ocorra antes. (Os administradores de "
+"proxectos sempre poderán volver a publicar vacantes que expiraran.)"
 
 #: www/people/index.php:73
 msgid ""
 "Browse through the category menu to find projects looking for your help."
 msgstr ""
+"Navegue polo menú de categorías para atopar proxectos que estean buscando "
+"axuda."
 
 #: www/people/index.php:77
 msgid ""
 "If you're a project admin, log in and submit help wanted requests through "
 "your project administration page."
 msgstr ""
+"Se é vostede un administrador dun proxecto, inicie sesión e envíe "
+"solicitudes de axuda a través da páxina de administración do proxecto."
 
 #: www/people/index.php:81
 msgid ""
 "To suggest new job categories, submit a request via the support manager."
 msgstr ""
+"Para propoñer novas categorías de traballos, envíe unha solicitude a través "
+"do xestor de asistencia."
 
 #: www/people/index.php:86
 msgid "Last posts"
@@ -20054,7 +20036,6 @@ msgid "Error inserting into job inventory: "
 msgstr "Produciuse un erro ao inserir no inventario de habilidades"
 
 #: www/people/people_utils.php:217
-#, fuzzy
 msgid "Added to job inventory"
 msgstr "Engadido ao inventario de habilidades"
 
@@ -20068,9 +20049,8 @@ msgid "Invalid ID"
 msgstr "ID non válido"
 
 #: www/people/people_utils.php:393
-#, fuzzy
 msgid "No categories found."
-msgstr "Non se atoparon categorías"
+msgstr "Non se atoparon categorías."
 
 #: www/people/people_utils.php:438
 msgid "Date Opened"
@@ -20292,9 +20272,8 @@ msgid "Tasks Administration"
 msgstr "Administración"
 
 #: www/pm/admin/index.php:421
-#, fuzzy
 msgid "Add a Subproject"
-msgstr "Engadir un proxecto novo"
+msgstr "Engadir un proxecto"
 
 #: www/pm/admin/index.php:422
 #, fuzzy
@@ -20806,19 +20785,20 @@ msgid "Subprojects for %s"
 msgstr "Fonte de %1$s"
 
 #: www/pm/index.php:61
-#, fuzzy
 msgid "No Subprojects Found"
-msgstr "Non se achou un grupo de proxecto "
+msgstr "Non se atoparon subproxectos"
 
 #: www/pm/index.php:62
 msgid "No subprojects have been set up, or you cannot view them."
-msgstr ""
+msgstr "Non se configuraron subproxectos, ou non os pode ver."
 
 #: www/pm/index.php:63
 msgid ""
 "The Admin for this project will have to set up subprojects using the admin "
 "page."
 msgstr ""
+"A administración deste proxecto terá que configurar os proxectos usando a "
+"páxina de administración."
 
 #: www/pm/index.php:66
 msgid "Choose a Subproject and you can browse/edit/add tasks to it."
@@ -21046,13 +21026,12 @@ msgid "Add New Database"
 msgstr "Engadir unha base de datos nova"
 
 #: www/project/admin/database.php:162
-#, fuzzy
 msgid ""
 "Clicking on “create” will schedule the creation of the database, and email "
 "the details to the project administrators"
 msgstr ""
-"Ao premer en \"crear\" programarase a creación da base de datos e "
-"enviaráselle por correo electrónico os detalles á administración do proxecto"
+"Ao premer en “crear” programarase a creación da base de datos e enviaráselle "
+"por correo electrónico os detalles á administración do proxecto"
 
 #: www/project/admin/database.php:164
 msgid "Database Type"
@@ -21230,9 +21209,8 @@ msgid "Project WWW directory on shell server:"
 msgstr "Directorio da web do proxecto no servidor de intérprete de ordes:"
 
 #: www/project/admin/index.php:134
-#, fuzzy
 msgid "Descriptive Project Name"
-msgstr "Nome descritivo do grupo"
+msgstr "Nome descritivo do proxecto"
 
 #: www/project/admin/index.php:141
 #, fuzzy
@@ -21509,14 +21487,12 @@ msgid "Use Mailing Lists"
 msgstr "Usar as listas de correo"
 
 #: www/project/admin/tools.php:204
-#, fuzzy
 msgid "Use Tasks"
-msgstr "Tarefas "
+msgstr "Usar as tarefas"
 
 #: www/project/admin/tools.php:217
-#, fuzzy
 msgid "Use Documents"
-msgstr "Documentos"
+msgstr "Usar o xestor de documents"
 
 #: www/project/admin/tools.php:230
 msgid "Use Surveys"
@@ -21527,9 +21503,8 @@ msgid "Use News"
 msgstr "Usar as novas"
 
 #: www/project/admin/tools.php:256
-#, fuzzy
 msgid "Use Source Code"
-msgstr "IP de orixe"
+msgstr "Usar o xestión do código fonte"
 
 #: www/project/admin/tools.php:269
 msgid "Use File Release System"
@@ -21686,9 +21661,8 @@ msgid "Virtual Host Management"
 msgstr "Xestión do servidor virtual "
 
 #: www/project/admin/vhost.php:106
-#, fuzzy
 msgid "Add New Virtual Host"
-msgstr "Engadir un host virtual "
+msgstr "Engadir un novo equipo virtual"
 
 #: www/project/admin/vhost.php:109
 #, php-format
@@ -21705,6 +21679,9 @@ msgid ""
 "will be synced to the project webservers - such that <em>yourhost.org</em> "
 "will display the material at <em>%1$s.%2$s</em>."
 msgstr ""
+"Ao premer en “Crear” programarase a creación do equipo virtual.  Isto "
+"sincronizarase cos servidores web do proxecto - de xeito que "
+"<em>o_seu_equipo.org</em> mostrará o material que hai en <em>%1$s.%2$s</em>."
 
 #: www/project/admin/vhost.php:121
 msgid "New Virtual Host <em>(e.g. vhost.org)</em>"
@@ -22104,25 +22081,28 @@ msgid "Successfully Rebuilt"
 msgstr "Eliminouse correctamente "
 
 #: www/reporting/rebuild.php:47
-#, fuzzy
 msgid "Reporting System Initialization"
-msgstr "Sistema de informe de tarefas"
+msgstr "Inicialización do sistema de informes"
 
 #: www/reporting/rebuild.php:50
 msgid ""
 "Occasionally, if cronjobs failed or the database was damaged, you may have "
 "to rebuild the reporting tables."
 msgstr ""
+"Ás veces, se fallan as tarefas de cron ou se dana a base de datos, pode ter "
+"que reconstruír as táboas de informes."
 
 #: www/reporting/rebuild.php:53
 msgid ""
 "If you are sure you want to rebuild all the reporting tables, check the “I "
 "am Sure” box and click the button below."
 msgstr ""
+"Se está seguro de que quere reconstruír as táboas de informes, marque a "
+"caixa de “Estou Seguro” e prema o botón de embaixo."
 
 #: www/reporting/rebuild.php:56
 msgid "This could take a couple minutes, so DO NOT CLICK MORE THAN ONCE."
-msgstr ""
+msgstr "Isto pode levar un par de minutos, así que NON PREMA MÁIS DUNHA VEZ."
 
 #: www/reporting/rebuild.php:67
 msgid "Press ONLY ONCE"
@@ -22154,7 +22134,6 @@ msgid "Add Entry"
 msgstr "Engadir unha entrada"
 
 #: www/reporting/timeadd.php:194
-#, fuzzy
 msgid ""
 "Choose a Project/Subproject in the Tasks. You will then have to choose a "
 "Task and category to record your time in."
@@ -22550,7 +22529,6 @@ msgstr ""
 "código."
 
 #: www/snippet/add_snippet_to_package.php:83 www/snippet/addversion.php:40
-#, fuzzy
 msgid "Error: snippet does not exist"
 msgstr "Erro – este fragmento de código non existe"
 
@@ -22634,7 +22612,6 @@ msgid "Paste the Code Here"
 msgstr "Pegue o código aquí"
 
 #: www/snippet/addversion.php:128
-#, fuzzy
 msgid "Error: snippet_package does not exist"
 msgstr "Erro – non existe o paquete de fragmento"
 
@@ -22860,36 +22837,41 @@ msgid ""
 "The purpose of this archive is to let you share your code snippets, scripts, "
 "and functions with the Open Source Software Community."
 msgstr ""
+"O propósito deste arquivo é permitirlle compartir fragmentos de código, "
+"scripts, te funcións coa comunidade de código aberto."
 
 #: www/snippet/index.php:52
 msgid ""
 "You can create a “new snippet”, then post additional versions of that "
 "snippet quickly and easily."
 msgstr ""
+"Pode crear un “fragmento novo”, e despois publicar versións adicionais dese "
+"fragmento de xeito rápido e sinxelo."
 
 #: www/snippet/index.php:54
 msgid ""
 "Once you have snippets posted, you can then create a “Package” of snippets. "
 "That package can contain multiple, specific versions of other snippets."
 msgstr ""
+"Unha vez que teña publicados fragmentos, pode crear un “paquete” de "
+"fragmentos. Ese paquete pode conter versións múltiples e específicas de "
+"outros fragmentos."
 
 #: www/snippet/index.php:56
-#, fuzzy
 msgid "Browse Snippets"
-msgstr "Fragmentos"
+msgstr "Navegar polos fragmentos"
 
 #: www/snippet/index.php:58
 msgid "You can browse the snippet library quickly:"
-msgstr ""
+msgstr "Pode navegar pola biblioteca de fragmentos de xeito rápido:"
 
 #: www/snippet/index.php:64
 msgid "Browse by Language"
 msgstr "Navegar segundo a linguaxe"
 
 #: www/snippet/package.php:57
-#, fuzzy
 msgid "Error doing snippet package insert"
-msgstr "Erro – non existe o paquete de fragmento"
+msgstr "Produciuse un erro ao inserir o paquete de fragmento de código"
 
 #: www/snippet/package.php:58 www/snippet/package.php:76
 #: www/snippet/package.php:127
@@ -22906,16 +22888,21 @@ msgid ""
 "interface. Before creating your package, make sure all your snippets are in "
 "place and you have made a note of the snippet ID's."
 msgstr ""
+"Pode agrupar fragmentos existentes nun paquete usando esta interface. Antes "
+"de crear o seu paquete, asegúrese de que todos os fragmentos están no seu "
+"sitio e que anotou os ID dos fragmentos."
 
 #: www/snippet/package.php:135
 msgid "Create the package using this form."
-msgstr ""
+msgstr "Cree o paquete usando este formulario."
 
 #: www/snippet/package.php:136
 msgid ""
 "<strong>Then</strong> use the “Add Snippets to Package” link to add files to "
 "your package."
 msgstr ""
+"<strong>Logo</strong> use a ligazón de “engadir fragmentos ao paquete” para "
+"engadir ficheiros ao paquete."
 
 #: www/snippet/package.php:138
 msgid ""
@@ -22924,6 +22911,10 @@ msgid ""
 "package. You should only use this page if you are submitting an entirely new "
 "package."
 msgstr ""
+"<span class=\"important\">Nota:</span> Pode enviar unha versión nova dun "
+"paquete existente navegando pola biblioteca e usando a ligazón no paquete "
+"existente. Só debe usar esta páxina se está a enviar un paquete enteiramente "
+"novo."
 
 #: www/snippet/package.php:143
 #, fuzzy
@@ -23173,9 +23164,9 @@ msgid "Displayed data: only last 24 months."
 msgstr ""
 
 #: www/stats/i18n.php:32
-#, fuzzy, php-format
+#, php-format
 msgid "%s I18n Statistics: Languages Distributions"
-msgstr "Distribucións de idiomas"
+msgstr "Estatísticas de internacionalización de %s: Distribucións de idiomas"
 
 #: www/stats/i18n.php:54
 msgid "Total Non-English"
@@ -23197,9 +23188,8 @@ msgid "%s Sitewide Aggregate Statistics"
 msgstr "Estatísticas agregadas de todo o sitio"
 
 #: www/stats/index.php:60
-#, fuzzy
 msgid "Other statistics"
-msgstr "Usar as estatísticas"
+msgstr "Outras estatísticas"
 
 #: www/stats/lastlogins.php:41
 msgid "No records found. Database error: "
@@ -23337,22 +23327,26 @@ msgstr "Administración do proxecto "
 
 #: www/survey/admin/index.php:58
 msgid "It's simple to create a survey."
-msgstr ""
+msgstr "Crear unha enquisa é moi simple."
 
 #: www/survey/admin/index.php:62
 msgid "Create questions and comments using the forms above."
-msgstr ""
+msgstr "Cree preguntas e comentarios empregando os formularios de arriba."
 
 #: www/survey/admin/index.php:65
 msgid ""
 "Create a survey, listing the questions in order (choose from <strong>your</"
 "strong> list of questions)."
 msgstr ""
+"Cree unha enquisa ao relacionar as preguntas en orde (elíxaa na <strong>súa</"
+"strong> listaxe de preguntas)."
 
 #: www/survey/admin/index.php:68
 #, php-format
 msgid "Link to the survey using this format: %s where XX is the survey number"
 msgstr ""
+"Faga unha ligazón á enquisa usando este formato: %s onde XX é o número da "
+"enquisa"
 
 #: www/survey/admin/index.php:73
 #, php-format
@@ -23613,6 +23607,9 @@ msgid ""
 "The information collected in these surveys will never be sold to third "
 "parties or used to solicit you to purchase any goods or services."
 msgstr ""
+"A información compilada nestas enquisas non se venderá nunca a terceiras "
+"partes nin tampouco se usará para lle solicitar que compre ningunha cousa ou "
+"servizo."
 
 #: www/survey/privacy.php:44
 msgid ""
@@ -23620,24 +23617,34 @@ msgid ""
 "developers being surveyed. That profile will help visitors to the site "
 "understand the quality of a given project."
 msgstr ""
+"Esta información compílase para crear un perfil dos proxectos e dos "
+"desenvolvedores a que se lle fai a enquisa. Este perfil axudará os "
+"visitantes a coñeceren a calidade dun proxecto."
 
 #: www/survey/privacy.php:47
 msgid ""
 "The ID's of those who answer surveys are suppressed and not viewable by "
 "project administrators or the public or third parties."
 msgstr ""
+"Os ID das persoas que responden as preguntas suprimiranse e os "
+"administradores dos proxectos, o público en xeral e terceiras persoas non os "
+"poderán ver."
 
 #: www/survey/privacy.php:50
 msgid ""
 "The information gathered is used only in aggregate form, not to single out "
 "specific users or developers."
 msgstr ""
+"A información so se emprega como agregada, non como información individual "
+"ou específica de usuarios e desenvolvedores."
 
 #: www/survey/privacy.php:53
 msgid ""
 "If any changes are made to this policy, it will affect only future data that "
 "is collected and the user will of course have the ability to 'opt-out'."
 msgstr ""
+"Se se realizar algún cambio nesta política, só afectará aos datos futuros "
+"que se recompilaren e o usuario poderá, por suposto, negarse ao cubrir'."
 
 #: www/survey/rating_resp.php:59
 msgid "Vote registered"
@@ -23666,7 +23673,6 @@ msgid "Vote for Survey"
 msgstr "Nome da enquisa"
 
 #: www/survey/survey.php:55 www/survey/survey_resp.php:48
-#, fuzzy
 msgid ""
 "For some reason, the Project ID or Survey ID did not make it to this page"
 msgstr ""
