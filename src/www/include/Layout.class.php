@@ -1131,7 +1131,7 @@ abstract class Layout extends FFError {
 		}
 		echo html_ac(html_ap() -1);
 		if ($widget->isAjax()) {
-			$spinner = '<div style="text-align:center">'.trim($this->getPicto('ic/spinner.gif',_('Spinner'), _('Spinner'), 10, 10)).'</div>';
+			$spinner = '<div style="text-align:center">'.trim($this->getPicto('ic/spinner.gif',_('Spinner'), _('Spinner'), 10, 10));
 			echo '<script type="text/javascript">/* <![CDATA[ */'."
 				jQuery(document).ready(function() {
 						jQuery('#$element_id-ajax').html('".$spinner."');
