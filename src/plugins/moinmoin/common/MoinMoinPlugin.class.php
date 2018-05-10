@@ -97,7 +97,7 @@ _("This plugin allows each project to embed MoinMoinWiki under a tab.");
 			}
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['result'] .= '<div class="public-area-box">';
-				$params['result'] .= util_make_link($this->getWikiUrl($project), html_image('ic/wiki20g.png', 20, 20, array('alt' => 'Wiki')).'&nbsp;'.'MoinMoin', array(), true);
+				$params['result'] .= util_make_link($this->getWikiUrl($project), html_image('ic/wiki20g.png', 20, 20, array('alt' => 'Wiki')).' MoinMoin', array(), true);
 				$params['result'] .= '</div>';
 			}
 		} elseif ($hookname == "role_get") {

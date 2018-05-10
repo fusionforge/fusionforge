@@ -118,7 +118,7 @@ _('This plugin allows each project to embed Mediawiki under a tab.');
 				$params['result'] .= '<div class="public-area-box">';
 				$params['result'] .= util_make_link('/plugins/'.$this->name.'/wiki/'.$project->getUnixName().'/index.php',
 							html_abs_image(util_make_url('/plugins/'.$this->name.'/wiki/'.$project->getUnixName().'/skins/monobook/wiki.png'),'20','20',array('alt'=>'Mediawiki')).
-							'&nbsp;'.'Mediawiki');
+							' Mediawiki');
 				$params['result'] .= '</div>';
 			}
 		} elseif ($hookname == 'role_get') {
