@@ -108,7 +108,12 @@ if (session_loggedin()) {
 	</td></tr>
 
 	<tr><td colspan="2">
-        <?php echo $HTML->html_textarea('description', '', _('Description').utils_requiredField()._(': '), '', array('rows' => '5', 'cols' => '45', 'required' => 'required')); ?>
+	<?php
+	$attrs = array();
+	if (forge_get_config('snippet_parser_type') == 'markdown') {
+		$attrs = array('title' => _('Use Markdown Syntax'));
+	}
+        echo $HTML->html_textarea('description', '', _('Description').utils_requiredField()._(': '), '', array_merge(array('rows' => '5', 'cols' => '45', 'required' => 'required'), $attrs)); ?>
 	</td></tr>
 
 	<tr>
