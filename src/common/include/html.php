@@ -446,10 +446,18 @@ function html_get_tooltip_description($element_name) {
 			return _('The canned response drop-down represents a list of project admin-defined canned responses to common support or bug submission.')
 				._('If you are a project admin you can click the “Manage Canned Responses” link to define your own canned responses');
 		case 'comment':
-			return _('Anyone can add here comments to give additional information, answers and solutions. Please, be as precise as possible to avoid misunderstanding. If relevant, screenshots or documents can be added as attached files.');
+			$text = _('Anyone can add here comments to give additional information, answers and solutions. Please, be as precise as possible to avoid misunderstanding. If relevant, screenshots or documents can be added as attached files.');
+			if (forge_get_config('tracker_parser_type') == 'markdown') {
+				$text .= ' '._('Use Markdown Syntax');
+			}
+			return $text;
 		case 'description':
-			return _('Enter the complete description.')
+			$text = _('Enter the complete description.')
 				._("Editing tips:http,https or ftp: Hyperlinks. [#NNN]: Tracker id NNN. [TNNN]: Task id NNN. [wiki:&lt;pagename&gt;]: Wiki page. [forum:&lt;msg_id&gt;]: Forum post. [DNNN]: Document id NNN.");
+			if (forge_get_config('tracker_parser_type') == 'markdown') {
+				$text .= ' '._('Use Markdown Syntax');
+			}
+			return $text;
 		case 'attach_file':
 			return _('When you wish to attach a file to a tracker item you must check this checkbox before submitting changes.');
 		case 'monitor':
