@@ -132,22 +132,21 @@ EOS;
 				$ziplink = '';
 				if (class_exists('ZipArchive')) {
 					if (file_exists($FRSPackage->getReleaseZipPath($package_release_id))) {
-						$ziplink .= util_make_link('/frs/download.php/zip/'.$FRSPackageRelease->getID().'/'.$FRSPackage->getReleaseZipName($FRSPackageRelease->getID()),
-						  $HTML->getZipPic(_('Download this release as ZIP.')
-						    .' '._('This link always points to this release as a ZIP file.')));
+						$ziplink .= html_e('span', array('class' => 'frs-zip-release'), util_make_link('/frs/download.php/zip/'.$FRSPackageRelease->getID().'/'.$FRSPackage->getReleaseZipName($FRSPackageRelease->getID()),
+						  $HTML->getZipPic(_('Download this release as ZIP.').' '._('This link always points to this release as a ZIP file.'))), false);
 					}
 				}
 				// Switch whether release_id exists and/or release_id is current one
 				if ( ! $release_id || $release_id == $package_release_id ) {
 					// no release_id OR release_id is current one
 					$release_title = util_make_link('/frs/?view=shownotes&group_id='.$group_id.'&release_id='.$package_release_id, $package_name.' '.$FRSPackageRelease->getName().' ('.date(_('Y-m-d H:i'), $FRSPackageRelease->getReleaseDate()).')');
-					echo $HTML->boxTop($release_title.html_e('span', array('class' => 'frs-zip-release'), $ziplink, false), $package_name.' '.$FRSPackageRelease->getName());
+					echo $HTML->boxTop($release_title.$ziplink, $package_name.' '.$FRSPackageRelease->getName());
 				} elseif ( $release_id != $package_release_id ) {
 					// release_id but not current one
 					$t_url_anchor = $HTML->toSlug($package_name).'-'.$HTML->toSlug($FRSPackageRelease->getName()).'-title-content';
 					$t_url = '/frs/?group_id='.$group_id.'&release_id='.$package_release_id.'#'.$t_url_anchor;
 					$release_title = util_make_link($t_url, $package_name.' '.$FRSPackageRelease->getName());
-					echo html_e('div', array('class' => 'frs_release_name_version'), $release_title.html_e('span', array('class' => 'frs-zip-release'), $ziplink, false));
+					echo html_e('div', array('class' => 'frs_release_name_version'), $release_title.$ziplink);
 				}
 
 				// display linked roadmaps if any
