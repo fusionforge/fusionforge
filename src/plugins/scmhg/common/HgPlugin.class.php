@@ -223,7 +223,7 @@ Offer DAV or SSH access.");
 			_('Adds'),
 			_('Updates')
 			);
-			$b .= $HTML->listTableTop($tableHeaders, array(), '', 'repo-history');
+			$b .= $HTML->listTableTop($tableHeaders, array(), '', 'repo-history-'.$this->name);
 
 			$i = 0;
 			$total = array('adds' => 0, 'updates' => 0);
