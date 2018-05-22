@@ -50,7 +50,7 @@ class scmgit_Widget_MyRepositories extends Widget {
 			foreach ($GitRepositories as $GitRepository) {
 				$project = group_get_object($GitRepository);
 				$cells = array();
-				$cells[][] = '<tt>git clone git+ssh://'.$user->getUnixName().'@' . forge_get_config('scm_host') .'/'. forge_get_config('scm_root', 'scmgit') .'/'. $project->getUnixName() .'/users/'. $user->getUnixName() .'.git</tt>';
+				$cells[][] = '<kbd>git clone git+ssh://'.$user->getUnixName().'@' . forge_get_config('scm_host') .'/'. forge_get_config('scm_root', 'scmgit') .'/'. $project->getUnixName() .'/users/'. $user->getUnixName() .'.git</kbd>';
 				$cells[][] = util_make_link('/scm/browser.php?group_id='.$project->getID().'&user_id='.$user->getID(), _('Browse Git Repository'));
 				$returnhtml .= $HTML->multiTableRow(array(), $cells);
 			}

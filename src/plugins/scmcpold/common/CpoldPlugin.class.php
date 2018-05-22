@@ -81,7 +81,7 @@ class CpoldPlugin extends SCMPlugin {
 			$b .= ' ';
 			$b .= _('Enter your site password when prompted.');
 			$b .= '</p>';
-			$b .= '<p><tt>scp -r '.$d.'@' . $this->getBoxForProject($project) . ':'. forge_get_config('repos_path', 'scmcpold') .'/'. $project->getUnixName().'/ .</tt></p>' ;
+			$b .= '<p><kbd>scp -r '.$d.'@' . $this->getBoxForProject($project) . ':'. forge_get_config('repos_path', 'scmcpold') .'/'. $project->getUnixName().'/ .</kbd></p>' ;
 		} else {
 			$b .= '<h2>';
 			$b .= sprintf(_('Developer %s Access via SSH'), 'CPOLD');
@@ -95,7 +95,7 @@ class CpoldPlugin extends SCMPlugin {
 			$b .= ' ';
 			$b .= _('Enter your site password when prompted.');
 			$b .= '</p>';
-			$b .= '<p><tt>scp -r <i>'._('developername').'</i>@' . $this->getBoxForProject($project) . ':'. forge_get_config('repos_path', 'scmcpold') .'/'. $project->getUnixName().'/ .</tt></p>' ;
+			$b .= '<p><kbd>scp -r <i>'._('developername').'</i>@' . $this->getBoxForProject($project) . ':'. forge_get_config('repos_path', 'scmcpold') .'/'. $project->getUnixName().'/ .</kbd></p>' ;
 		}
 		return $b ;
 	}

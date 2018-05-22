@@ -92,7 +92,7 @@ class CCasePlugin extends SCMPlugin {
 			echo "<b>"._('ClearCase Access')."</b>" ;
 
 			print "<p>" ;
-			printf (_('Either mount the VOB with <tt>cleartool mount %1$s</tt> or select the <tt>%1$s</tt> VOB in your ClearCase Explorer.'),
+			printf (_('Either mount the VOB with <kbd>cleartool mount %1$s</kbd> or select the <kbd>%1$s</kbd> VOB in your ClearCase Explorer.'),
 				$vob_tag) ;
 			print "</p>" ;
 

@@ -87,8 +87,8 @@ over it to the project's administrator.");
 		$b .= _('This project\'s CVS repository can be checked out through anonymous (pserver) CVS with the following instruction set. The module you wish to check out must be specified as the <em>modulename</em>. When prompted for a password for <em>anonymous</em>, simply press the Enter key.');
 		$b .= '</p>';
 		$b .= '<p>
-			<tt>cvs -d :pserver:anonymous@' . $cvsrootend.' login</tt><br/>
-			<tt>cvs -d :pserver:anonymous@' . $cvsrootend.' checkout <em>'._('modulename').'</em></tt>
+			<kbd>cvs -d :pserver:anonymous@' . $cvsrootend.' login</kbd><br/>
+			<kbd>cvs -d :pserver:anonymous@' . $cvsrootend.' checkout <em>'._('modulename').'</em></kbd>
 			</p>';
 
 		return $b ;
@@ -112,8 +112,8 @@ over it to the project's administrator.");
 			$b .= _('Enter your site password when prompted.');
 			$b .= '</p>';
 			$b .= '<p>
-				<tt>export CVS_RSH=ssh</tt><br/>
-				<tt>cvs -d :ext:'.$d.'@'.$cvsrootend.' checkout <em>'._('modulename').'</em></tt>
+				<kbd>export CVS_RSH=ssh</kbd><br/>
+				<kbd>cvs -d :ext:'.$d.'@'.$cvsrootend.' checkout <em>'._('modulename').'</em></kbd>
 				</p>';
 		} else {
 			$b = '<h2>';
@@ -129,8 +129,8 @@ over it to the project's administrator.");
 			$b .= _('Enter your site password when prompted.');
 			$b .= '</p>';
 			$b .= '<p>
-				<tt>export CVS_RSH=ssh</tt><br/>
-				<tt>cvs -d :ext:<em>'._('developername').'</em>@'.$cvsrootend.' checkout <em>'._('modulename').'</em></tt>
+				<kbd>export CVS_RSH=ssh</kbd><br/>
+				<kbd>cvs -d :ext:<em>'._('developername').'</em>@'.$cvsrootend.' checkout <em>'._('modulename').'</em></kbd>
 				</p>';
 		}
 		return $b ;
