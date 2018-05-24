@@ -132,7 +132,7 @@ EOS;
 				$ziplink = '';
 				if (class_exists('ZipArchive')) {
 					if (file_exists($FRSPackage->getReleaseZipPath($package_release_id))) {
-						$ziplink .= html_e('span', array('class' => 'frs-zip-release'), util_make_link('/frs/download.php/zip/'.$FRSPackageRelease->getID().'/'.$FRSPackage->getReleaseZipName($FRSPackageRelease->getID()),
+						$ziplink .= html_e('span', array('class' => 'frs-zip-release'), util_make_link('/frs/download.php/zip/'.$FRSPackageRelease->getID().'/'.urlencode($FRSPackage->getReleaseZipName($FRSPackageRelease->getID())),
 						  $HTML->getZipPic(_('Download this release as ZIP.').' '._('This link always points to this release as a ZIP file.'))), false);
 					}
 				}

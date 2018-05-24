@@ -204,7 +204,7 @@ case 'zip':
 	// 123 -> release_id
 	// foo.tar.gz -> file name
 	$release_id = $expl_pathinfo[4];
-	$file_name = $expl_pathinfo[5];
+	$file_name = urldecode($expl_pathinfo[5]);
 
 	$frsr = frsrelease_get_object($release_id);
 	$frsp = $frsr->FRSPackage;
