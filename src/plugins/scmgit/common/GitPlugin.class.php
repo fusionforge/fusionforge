@@ -511,6 +511,7 @@ control over it to the project's administrator.");
 			if (!is_file("$repodir/HEAD") && !is_dir("$repodir/objects") && !is_dir("$repodir/refs")) {
 				if ($clone_url != '') {
 					system("cd $root; LC_ALL=C git clone --quiet --bare $clone_url $repodir 2>&1 >/dev/null | grep -v 'warning: You appear to have cloned an empty repository.' >&2");
+					system("cd $repodir; LC_ALL=C git config core.sharedRepository group"); 
 				} else {
 					system("GIT_DIR=\"$repodir\" git init --quiet --bare --shared=group");
 				}
