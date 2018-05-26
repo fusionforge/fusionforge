@@ -6,6 +6,7 @@ LABEL vendor "TrivialDev"
 LABEL description "all-in-one"
 LABEL license "GPLv2"
 
+RUN sed -i '/nodocs/d' /etc/yum.conf
 RUN yum -y install git openssh-server && \
     yum -y clean all;
 WORKDIR /opt/sources
@@ -47,7 +48,8 @@ RUN source ./autoinstall/common-backports && \
                    mediawiki \
                    vsftpd \
                    mercurial \
-                   dejavu-fonts-common && \
+                   dejavu-fonts-common \
+                   psmisc && \
     yum -y clean all
 
 RUN yum --enablerepo=epel install -y supervisor \

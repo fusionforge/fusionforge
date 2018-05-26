@@ -68,7 +68,7 @@ elif [ -e /etc/SuSE-release ]; then
 		openssh \
 		cvs rcs perl-IPC-Run perl-URI \
 		subversion-server \
-		git git-web \
+		git git-web php5-pcntl \
 		mercurial \
 		python-psycopg2 \
 		mediawiki moinmoin-wiki \

@@ -48,13 +48,13 @@ class Widget_ProjectPublicAreas extends Widget {
 		// ################# Homepage Link
 
 		$result .= html_e('div', array('class' => 'public-area-box', 'rel' => 'doap:homepage'),
-				util_make_link($project->getHomePage(), $HTML->getHomePic(_('Home Page')). ' ' ._('Project Home Page'), false, true));
+				util_make_link($project->getHomePage(), $HTML->getHomePic(_('Home Page')). ' ' ._('Project Home Page'), false, true));
 
 		// ################## ArtifactTypes
 
 		if ($project->usesTracker()) {
 			$result .= '<div class="public-area-box">'."\n";
-			$link_content = $HTML->getFollowPic(_('Tracker')) . ' ' . _('Tracker');
+			$link_content = $HTML->getFollowPic(_('Tracker')) . ' ' . _('Tracker');
 			$result .= util_make_link('/tracker/?group_id=' . $group_id, $link_content);
 
 			$res = db_query_params ('SELECT agl.*,aca.count,aca.open_count
@@ -107,7 +107,7 @@ class Widget_ProjectPublicAreas extends Widget {
 				$messages_count += $f->getMessageCount();
 			}
 
-			$link_content = $HTML->getForumPic() . ' ' . _('Public Forums');
+			$link_content = $HTML->getForumPic() . ' ' . _('Public Forums');
 			$result .= util_make_link('/forum/?group_id=' . $group_id, $link_content);
 			$result .= ' (';
 			$result .= sprintf(ngettext("<strong>%d</strong> message","<strong>%d</strong> messages",$messages_count),$messages_count);

@@ -3,7 +3,7 @@
  * Code Snippets Repository
  *
  * Copyright 1999-2001 (c) VA Linux Systems
- * Copyright 2014,2016-2017, Franck Villaume - TrivialDev
+ * Copyright 2014,2016-2018, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -60,7 +60,6 @@ if (session_loggedin()) {
 			if (!$result) {
 				$error_msg = _('Error doing snippet insert').' '.db_error();
 			} else {
-				$feedback = _('Snippet Added Successfully.');
 				$snippet_id=db_insertid($result,'snippet','snippet_id');
 				/*
 					create the snippet version
@@ -73,7 +72,7 @@ if (session_loggedin()) {
 								  time(),
 								  htmlspecialchars($code)));
 				if (!$result) {
-					$feedback = _('Error doing snippet version insert').' '.db_error();
+					$error_msg = _('Error doing snippet version insert').' '.db_error();
 				} else {
 					$feedback = _('Snippet Added Successfully.');
 				}
@@ -109,7 +108,12 @@ if (session_loggedin()) {
 	</td></tr>
 
 	<tr><td colspan="2">
-        <?php echo $HTML->html_textarea('description', '', _('Description').utils_requiredField()._(': '), '', array('rows' => '5', 'cols' => '45', 'required' => 'required')); ?>
+	<?php
+	$attrs = array();
+	if (forge_get_config('snippet_parser_type') == 'markdown') {
+		$attrs = array('title' => _('Use Markdown Syntax'));
+	}
+        echo $HTML->html_textarea('description', '', _('Description').utils_requiredField()._(': '), '', array_merge(array('rows' => '5', 'cols' => '45', 'required' => 'required'), $attrs)); ?>
 	</td></tr>
 
 	<tr>

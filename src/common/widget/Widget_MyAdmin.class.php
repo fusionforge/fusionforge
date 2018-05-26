@@ -43,9 +43,6 @@ class Widget_MyAdmin extends Widget {
 			$res = db_query_params("SELECT count(*) AS count FROM users WHERE status='P' OR status='V' OR status='W'",array());
 			$row = db_fetch_array($res);
 			$pending_users = $row['count'];
-			$res = db_query_params("SELECT count(*) AS count FROM users WHERE status='V' OR status='W'",array());
-			$row = db_fetch_array($res);
-			$validated_users = $row['count'];
 
 			$html_my_admin .= $this->_get_admin_row(
 				$i++,

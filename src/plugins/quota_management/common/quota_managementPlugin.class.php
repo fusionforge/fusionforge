@@ -62,10 +62,13 @@ _("This is a quota_management plugin within FusionForge.");
 				break;
 			}
 			case "groupadminmenu": {
-				$params['labels'][] = _ ('Quota');
 				$group_id = $params['group'];
-				$params['links'][] = '/plugins/quota_management/index.php?id='.$group_id.'&type=admin&pluginname='.$this->name;
-				$params['attr_r'][] = array('title' => _('View the quota_management Administration'));
+				$group = group_get_object($group_id);
+				if ( $group->usesPlugin($this->name)) {
+					$params['labels'][] = _ ('Quota');
+					$params['links'][] = '/plugins/quota_management/index.php?id='.$group_id.'&type=admin&pluginname='.$this->name;
+					$params['attr_r'][] = array('title' => _('View the quota_management Administration'));
+				}
 				$returned = true;
 				break;
 			}

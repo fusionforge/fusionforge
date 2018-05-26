@@ -72,7 +72,7 @@ class RepositoryAPI extends FForge_SeleniumTestCase
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
-		$p = $this->getText("//tt[contains(.,'git clone http') and contains(.,'".FORGE_ADMIN_USERNAME."@') and contains(.,'projecta.git')]");
+		$p = $this->getText("//kbd[contains(.,'git clone http') and contains(.,'".FORGE_ADMIN_USERNAME."@') and contains(.,'projecta.git')]");
 		$p = preg_replace(",^git clone ,", "", $p);
 		$p = preg_replace(",@,", ":".FORGE_ADMIN_PASSWORD."@", $p);
 
@@ -106,7 +106,7 @@ class RepositoryAPI extends FForge_SeleniumTestCase
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
-		$p = $this->getText("//tt[contains(.,'git clone http') and contains(.,'".FORGE_ADMIN_USERNAME."@') and contains(.,'".FORGE_ADMIN_USERNAME.".git')]");
+		$p = $this->getText("//kbd[contains(.,'git clone http') and contains(.,'".FORGE_ADMIN_USERNAME."@') and contains(.,'".FORGE_ADMIN_USERNAME.".git')]");
 		$p = preg_replace(",^git clone ,", "", $p);
 		$p = preg_replace(",@,", ":".FORGE_ADMIN_PASSWORD."@", $p);
 

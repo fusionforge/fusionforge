@@ -1131,7 +1131,7 @@ abstract class Layout extends FFError {
 		}
 		echo html_ac(html_ap() -1);
 		if ($widget->isAjax()) {
-			$spinner = '<div style="text-align:center">'.trim($this->getPicto('ic/spinner.gif',_('Spinner'), _('Spinner'), 10, 10)).'</div>';
+			$spinner = '<div style="text-align:center">'.trim($this->getPicto('ic/spinner.gif',_('Spinner'), _('Spinner'), 10, 10));
 			echo '<script type="text/javascript">/* <![CDATA[ */'."
 				jQuery(document).ready(function() {
 						jQuery('#$element_id-ajax').html('".$spinner."');
@@ -1261,11 +1261,11 @@ abstract class Layout extends FFError {
 	 * @return	string
 	 */
 	function html_chartid($chart_id = 'chart0', $figcaption_title = '') {
-		$htmlcode = html_ao('figure');
-		$htmlcode .= html_e('figcaption', array(), $figcaption_title, false);
-		$htmlcode .= html_ao('div', array('id' => $chart_id));
-		$htmlcode .= html_ac(html_ap() -2);
-		return $htmlcode;
+		$figcaption_htmlcode = '';
+		if ($figcaption_title) {
+			$figcaption_htmlcode = html_e('figcaption', array(), $figcaption_title, false);
+		}
+		return html_e('figure', array(), $figcaption_htmlcode.html_e('div', array('id' => $chart_id)));
 	}
 
 	/**

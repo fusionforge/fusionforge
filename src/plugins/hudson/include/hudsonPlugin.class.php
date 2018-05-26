@@ -264,7 +264,7 @@ control over it to the project administrator.");
 				if ($dar && $dar->valid()) {
 					$row = $dar->current();
 					$build = new HudsonBuild($row['job_url'].'/'.$build_id.'/');
-					echo '<strong>' . _("Build performed on:") . '</strong> ' . $build->getBuildTime() . '<br />';
+					echo '<strong>' . _('Build performed on')._(': ').'</strong> ' . $build->getBuildTime() . '<br />';
 					echo '<strong>' . _("Status") . _(": ") . '</strong> ' . $build->getResult();
 				} else {
 					echo $HTML->error_msg(_('Error: Hudson object not found.'));
@@ -308,7 +308,7 @@ control over it to the project administrator.");
 					} catch (Exception $e) {
 					}
 				} else {
-					echo $HTML->error_msg(_('Error: Hudson object not found.'));
+					echo $HTML->error_msg(_('Error')._(': ')._('Hudson object not found.'));
 				}
 				break;
 		}

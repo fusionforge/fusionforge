@@ -187,7 +187,7 @@ if (forge_get_config('use_manual_uploads')) {
 	echo '<p>';
 	printf(_('Alternatively, you can use a file you already uploaded (by SFTP or SCP) to the <a href="%2$s">project\'s incoming directory</a> (%1$s).'),
 		$incoming, "sftp://" . forge_get_config('shell_host') . $incoming . "/");
-	echo ' ' . _('This direct <tt>sftp://</tt> link only works with some browsers, such as Konqueror.') . '<br />';
+	echo ' ' . _('This direct <kbd>sftp://</kbd> link only works with some browsers, such as Konqueror.') . '<br />';
 	$manual_files_arr=ls($incoming,true);
 	if ( count($manual_files_arr) > 0 ) {
 		echo _('Choose an already uploaded file:').'<br />';
