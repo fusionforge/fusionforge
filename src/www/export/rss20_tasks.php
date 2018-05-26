@@ -203,6 +203,14 @@ function beginTaskFeed($feed_title, $feed_link, $feed_desc) {
 	print "  <webMaster>".forge_get_config('admin_email')."</webMaster>\n";
 	print "  <lastBuildDate>".gmdate('D, d M Y G:i:s',time())." GMT</lastBuildDate>\n";
 	print "  <docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
+	print "  <generator>".forge_get_config ('forge_name')." RSS generator</generator>\n";
+	print "  <image>\n";
+	print "    <url>".util_make_url('/images/icon.png')."</url>\n";
+	print "    <title>".forge_get_config('forge_name')."</title>\n";
+	print "    <link>".util_make_url()."</link>\n";
+	print "    <width>124</width>\n";
+	print "    <heigth>32</heigth>\n";
+	print "  </image>\n";
 }
 
 function writeTaskFeed($msg, $item_cat){

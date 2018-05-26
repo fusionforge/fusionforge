@@ -71,6 +71,14 @@ print "  <copyright>Copyright ".date("Y")." ".forge_get_config ('forge_name')."<
 print "  <webMaster>$webmaster</webMaster>\n";
 print "  <lastBuildDate>".rss_date(time())."</lastBuildDate>\n";
 print "  <docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
+print "  <generator>".forge_get_config ('forge_name')." RSS generator</generator>\n";
+print "  <image>\n";
+print "    <url>".util_make_url('/images/icon.png')."</url>\n";
+print "    <title>".forge_get_config('forge_name')."</title>\n";
+print "    <link>".util_make_url()."</link>\n";
+print "    <width>124</width>\n";
+print "    <heigth>32</heigth>\n";
+print "  </image>\n";
 
 $res = db_query_params ('SELECT groups.group_name AS group_name,
 	frs_package.group_id AS group_id,
