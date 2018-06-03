@@ -63,6 +63,10 @@ $groups = array();
 if ($group_ids) {
 	$groups = explode(',', $group_ids);
 }
+$group_id = getIntFromRequest('group_id');
+if ($group_id) {
+	$groups[] = $group_id;
+}
 foreach($groups AS $group) {
 	$pm = new ProjectGroupFactory(group_get_object($group));
 	$pm_group_list = $pm->getProjectGroups();
@@ -85,7 +89,7 @@ $projects = array_unique(array_merge($projects, $p)); //die projekte der getvars
 $project_sq = '' ;
 if (count($projects) > 0) {
 	foreach ($projects AS $project) {
-		$project_sq .= ' OR (group_project_id = '.$project.')';
+		$project_sq .= ' OR (group_project_id = '.$project->getID().')';
 	}
 	$project_sq = '('.substr($project_sq,4).')';
 }
@@ -132,38 +136,40 @@ $i = 0;
 beginTaskFeed(forge_get_config('forge_name')._(': ')._('Current Tasks'), forge_get_config('web_host'), _('See all the tasks you want to see!'));
 if (0 < db_numrows($res)) {
 	while ($i < db_numrows($res)) {
-		$res1 = db_query_params('SELECT group_id, project_name FROM project_group_list WHERE group_project_id = $1', array(db_result($res, $i, 'group_project_id')));
-		if(db_numrows($res1)==1) {
-			$row1 = db_fetch_array($res1);
-			$project_c[db_result($res,$i,'group_project_id')]['group_id'] = $row1['group_id'];
-			if(isset($row1['project_name'])) {
-				$project_c[db_result($res, $i, 'group_project_id')]['project_name'] = $row1['project_name'];
-			} else {
-				$project_c[db_result($res, $i, 'group_project_id')]['project_name'] = 'Wrong or deleted project';
-			}
+		if (forge_check_perm('pm', db_result($res, $i, 'group_project_id'), 'read')) {
+			$res1 = db_query_params('SELECT group_id, project_name FROM project_group_list WHERE group_project_id = $1', array(db_result($res, $i, 'group_project_id')));
+			if(db_numrows($res1)==1) {
+				$row1 = db_fetch_array($res1);
+				$project_c[db_result($res,$i,'group_project_id')]['group_id'] = $row1['group_id'];
+				if(isset($row1['project_name'])) {
+					$project_c[db_result($res, $i, 'group_project_id')]['project_name'] = $row1['project_name'];
+				} else {
+					$project_c[db_result($res, $i, 'group_project_id')]['project_name'] = 'Wrong or deleted project';
+				}
 
-			$res2 = db_query_params('SELECT group_name FROM groups WHERE group_id = $1', array($row1['group_id']));
-			$row2 = db_fetch_array($res2);
-			if(isset($row2['group_name'])) {
-				$group_c[$row1['group_id']] = $row2['group_name'];
-			} else {
-				$group_c[$row1['group_id']] = 'Wrong or deleted group';
-			}
+				$res2 = db_query_params('SELECT group_name FROM groups WHERE group_id = $1', array($row1['group_id']));
+				$row2 = db_fetch_array($res2);
+				if(isset($row2['group_name'])) {
+					$group_c[$row1['group_id']] = $row2['group_name'];
+				} else {
+					$group_c[$row1['group_id']] = 'Wrong or deleted group';
+				}
 
-			$item_cat = $group_c[$project_c[db_result($res, $i, 'group_project_id')]['group_id']]." - ".$project_c[db_result($res, $i, 'group_project_id')]['project_name']." -- ".db_result($res, $i, 'summary');
-			$ar['project_task_id'] = db_result($res, $i, 'project_task_id');
-			$ar['group_project_id'] = db_result($res, $i, 'group_project_id');
-			$ar['group_id'] = $project_c[db_result($res, $i, 'group_project_id')]['group_id'];
-			$ar['most_recent_date'] = db_result($res, $i, 'last_modified_date');
-			$ar['subject'] = db_result($res, $i, 'summary');
-			$ar['user_realname'] = db_result($res, $i, 'user_realname');
-			$ar['details'] = db_result($res, $i, 'details');
-			writeTaskFeed($ar, $item_cat);
+				$item_cat = $group_c[$project_c[db_result($res, $i, 'group_project_id')]['group_id']]." - ".$project_c[db_result($res, $i, 'group_project_id')]['project_name']." -- ".db_result($res, $i, 'summary');
+				$ar['project_task_id'] = db_result($res, $i, 'project_task_id');
+				$ar['group_project_id'] = db_result($res, $i, 'group_project_id');
+				$ar['group_id'] = $project_c[db_result($res, $i, 'group_project_id')]['group_id'];
+				$ar['most_recent_date'] = db_result($res, $i, 'last_modified_date');
+				$ar['subject'] = db_result($res, $i, 'summary');
+				$ar['user_realname'] = db_result($res, $i, 'user_realname');
+				$ar['details'] = db_result($res, $i, 'details');
+				writeTaskFeed($ar, $item_cat);
+			}
 		}
 		$i++;
 	}
 } else {
-	displayError('No tasks found! Please check for invalid params.');
+	displayError('No tasks found! Please check for invalid params. '.db_error());
 }
 endFeed();
 
