@@ -88,6 +88,7 @@ function beginFeed($groupname = "", $link = "") {
 	print "  <webMaster>".forge_get_config('admin_email')."</webMaster>\n";
 	print "  <lastBuildDate>".rss_date(time())."</lastBuildDate>\n";
 	print "  <docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
+	print "  <generator>".forge_get_config ('forge_name')." RSS generator</generator>\n";
 	print "  <image>\n";
 	print "    <url>".util_make_url('/images/icon.png')."</url>\n";
 	print "    <title>".forge_get_config('forge_name')."</title>\n";

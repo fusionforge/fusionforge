@@ -95,7 +95,10 @@ if (!session_loggedin()) {
 			//  get the Project object
 			//
 			if (!$p->usesTracker()) {
-				$cell_text = html_e('strong', array(), ' • '. util_make_link('/tracker/?group_id='.$p->getID(), $p->getPublicName()));
+				$cell_text = html_e('strong', array(), ' • '. $p->getPublicName());
+				if ($admin_flags) {
+					$cell_text .= '['.util_make_link('/project/admin/tools.php?gropu_id='.$p->getID(), _('Activate tracker')).']';
+				}
 				$cell_attrs = array('colspan' => (array_sum($display_col)+1), 'align' => 'left', 'style' => 'background-color: #CADACA; padding-top: 4px; border-top: 1px dotted darkgreen; border-bottom: 1px solid darkgreen; font-size: larger; color: darkgreen;');
 				$cell_data = array(array_merge((array)$cell_text, $cell_attrs));
 				echo $HTML->multiTableRow(array(), $cell_data);

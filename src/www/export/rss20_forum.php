@@ -303,6 +303,7 @@ function beginForumFeed($feed_title, $feed_link, $feed_desc) {
 	print "  <webMaster>".forge_get_config('admin_email')."</webMaster>\n";
 	print "  <lastBuildDate>".gmdate('D, d M Y G:i:s',time())." GMT</lastBuildDate>\n";
 	print "  <docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
+	print "  <generator>".forge_get_config ('forge_name')." RSS generator</generator>\n";
 	print "  <image>\n";
 	print "    <url>http://".forge_get_config('web_host')."/images/bflogo-88.png</url>\n";
 	print "    <title>".forge_get_config('forge_name')." Developer</title>\n";
