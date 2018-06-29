@@ -137,9 +137,9 @@ if ($msg_id) {
 	echo $am->PrintAttachLink($fm,$group_id,$forum_id) . '</td></tr><tr><td colspan="2"><br/><br />';
 
 	if (strpos($fm->getBody(), '>') === false) {
-		echo util_make_links(nl2br($fm->getBody())); //backwards compatibility for non html messages
+		echo util_gen_cross_ref(nl2br($fm->getBody())); //backwards compatibility for non html messages
 	} else {
-		echo util_make_links($fm->getBody());
+		echo util_gen_cross_ref($fm->getBody());
 	}
 	echo '</td></tr></table>';
 
