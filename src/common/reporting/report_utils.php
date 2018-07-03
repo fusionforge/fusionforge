@@ -153,7 +153,6 @@ function report_area_box($name='area', $selected='1', $Group=false) {
 	}
 
 	if (is_object($Group) && $Group->getID()) {
-		$hookParams['group'] = $Group->getID();
 		$hookParams['group_id'] = $Group->getID();
 		$hookParams['show'] = array('none'); // No display => No compute this time.
 		$hookParams['ids'] = &$arr;
@@ -709,7 +708,7 @@ function report_actgraph($type, $SPAN, $start, $end, $id, $area) {
 			$texts = array();
 			$show[] = $area;
 
-			$hookParams['group'] = $id;
+			$hookParams['group_id'] = $id;
 			$hookParams['results'] = &$results;
 			$hookParams['show'] = &$show;
 			$hookParams['begin'] = $start;
