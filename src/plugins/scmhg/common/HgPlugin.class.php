@@ -607,7 +607,7 @@ Offer DAV or SSH access.");
 		$updates = 0;
 		$deletes = 0;
 		$commits = 0;
-		$repo = forge_get_config('repos_path', 'scmhg') . '/' . $project->getUnixName();
+		$repo = forge_get_config('repos_path', 'scmhg').'/'.$project->getUnixName().'/'.$repo_name;
 		if (!is_dir($repo) || !is_dir("$repo/.hg")) {
 			// echo "No repository\n";
 			db_rollback();
