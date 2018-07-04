@@ -746,6 +746,10 @@ Offer DAV or SSH access.");
 		if (!$project) {
 			return false;
 		}
+		if (isset($params['exclusive_area']) && ($params['exclusive_area'] != $this->name)) {
+			return false;
+		}
+
 		if (in_array('scmhg', $params['show']) || (count($params['show']) < 1)) {
 			if ($project->enableAnonSCM()) {
 				$server_script = '/anonscm/hglog';

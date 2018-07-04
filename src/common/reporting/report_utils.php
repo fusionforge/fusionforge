@@ -715,6 +715,7 @@ function report_actgraph($type, $SPAN, $start, $end, $id, $area) {
 			$hookParams['end'] = $end;
 			$hookParams['ids'] = &$ids;
 			$hookParams['texts'] = &$texts;
+			$hookParams['exclusive_area'] = $area;
 			plugin_hook("activity", $hookParams);
 
 			$areaname = $texts[0];

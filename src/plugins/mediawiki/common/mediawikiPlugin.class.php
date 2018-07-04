@@ -385,6 +385,9 @@ _('This plugin allows each project to embed Mediawiki under a tab.');
 			if (!$project->usesPlugin($this->name)) {
 				return false;
 			}
+			if (isset($params['exclusive_area']) && ($params['exclusive_area'] != $this->name)) {
+				return false;
+			}
 			if (in_array($this->name, $params['show']) || (count($params['show']) < 1)) {
                                 $protocol = forge_get_config('use_ssl') ? 'https://' : 'http://';
                                 $script_url = $protocol.forge_get_config('web_host').forge_get_config('url_prefix').'/plugins/'.$this->name.'/wiki/'.$project->getUnixName().'/api.php'
