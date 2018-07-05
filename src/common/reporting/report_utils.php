@@ -118,7 +118,7 @@ function report_area_box($name='area', $selected='1', $Group=false) {
 		$use_docman = $Group->usesDocman();
 		$use_pm = $Group->usesPM();
 		$use_frs = $Group->usesFRS();
-		$use_pageviews = true;
+		$use_pageviews = false;
 	} else {
 		$use_tracker = forge_get_config('use_tracker');
 		$use_forum = forge_get_config('use_forum');
