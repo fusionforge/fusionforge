@@ -145,6 +145,7 @@ install-lists: install-base-dirs
 	$(CP_R) cronjobs/lists $(DESTDIR)$(pkgdatadir)/cronjobs/
 	$(CP_R) post-install.d/lists $(DESTDIR)$(pkgdatadir)/post-install.d/
 	$(INSTALL) -d -m 00755 $(DESTDIR)$(pkgdatadir)/lists/
+	ln -fs /usr/lib/mailman/cgi-bin $(DESTDIR)$(pkgdatadir)/lists/
 
 install-ftp: install-base-dirs
 	$(CP_R) cronjobs/ftp $(DESTDIR)$(pkgdatadir)/cronjobs/

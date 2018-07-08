@@ -607,7 +607,7 @@ Offer DAV or SSH access.");
 		$updates = 0;
 		$deletes = 0;
 		$commits = 0;
-		$repo = forge_get_config('repos_path', 'scmhg') . '/' . $project->getUnixName();
+		$repo = forge_get_config('repos_path', 'scmhg').'/'.$project->getUnixName().'/'.$repo_name;
 		if (!is_dir($repo) || !is_dir("$repo/.hg")) {
 			// echo "No repository\n";
 			db_rollback();
@@ -746,6 +746,10 @@ Offer DAV or SSH access.");
 		if (!$project) {
 			return false;
 		}
+		if (isset($params['exclusive_area']) && ($params['exclusive_area'] != $this->name)) {
+			return false;
+		}
+
 		if (in_array('scmhg', $params['show']) || (count($params['show']) < 1)) {
 			if ($project->enableAnonSCM()) {
 				$server_script = '/anonscm/hglog';

@@ -987,6 +987,9 @@ control over it to the project's administrator.");
 		if (!$project) {
 			return false;
 		}
+		if (isset($params['exclusive_area']) && ($params['exclusive_area'] != $this->name)) {
+			return false;
+		}
 
 		if (in_array('scmgit', $params['show']) || (count($params['show']) < 1)) {
 			if ($project->enableAnonSCM()) {

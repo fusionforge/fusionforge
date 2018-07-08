@@ -116,9 +116,9 @@ if ($report->isError()) {
 			echo 'ticks.push("'.$key.'");';
 		}
 		for ($i=0; $i < count($data); $i++) {
-			$this_date = date(_('Y-m'), mktime(0, 0, 0, substr($data[$i][2], 4, 2), 0, substr($data[$i][2], 0, 4)));
+			$this_date = substr($data[$i][2], 0, 4).'-'.substr($data[$i][2], 4, 2);
 			$index_key = array_search($this_date, $arr2);
-			$valuesArr[$index_key+1]++;
+			$valuesArr[$index_key]++;
 		}
 		foreach ($valuesArr as $key) {
 			echo 'values.push('.$key.');';

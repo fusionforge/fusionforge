@@ -118,7 +118,7 @@ function report_area_box($name='area', $selected='1', $Group=false) {
 		$use_docman = $Group->usesDocman();
 		$use_pm = $Group->usesPM();
 		$use_frs = $Group->usesFRS();
-		$use_pageviews = true;
+		$use_pageviews = false;
 	} else {
 		$use_tracker = forge_get_config('use_tracker');
 		$use_forum = forge_get_config('use_forum');
@@ -153,7 +153,6 @@ function report_area_box($name='area', $selected='1', $Group=false) {
 	}
 
 	if (is_object($Group) && $Group->getID()) {
-		$hookParams['group'] = $Group->getID();
 		$hookParams['group_id'] = $Group->getID();
 		$hookParams['show'] = array('none'); // No display => No compute this time.
 		$hookParams['ids'] = &$arr;
@@ -709,13 +708,14 @@ function report_actgraph($type, $SPAN, $start, $end, $id, $area) {
 			$texts = array();
 			$show[] = $area;
 
-			$hookParams['group'] = $id;
+			$hookParams['group_id'] = $id;
 			$hookParams['results'] = &$results;
 			$hookParams['show'] = &$show;
 			$hookParams['begin'] = $start;
 			$hookParams['end'] = $end;
 			$hookParams['ids'] = &$ids;
 			$hookParams['texts'] = &$texts;
+			$hookParams['exclusive_area'] = $area;
 			plugin_hook("activity", $hookParams);
 
 			$areaname = $texts[0];

@@ -47,7 +47,7 @@ if (!$group || !is_object($group)) {
 	exit_error($group->getErrorMessage(),'admin');
 }
 
-$report=new Report();
+$report = new Report();
 if ($report->isError()) {
 	exit_error($report->getErrorMessage(),'admin');
 }
@@ -91,8 +91,7 @@ html_use_jqueryjqplotpluginhighlighter();
 html_use_jqueryjqplotplugindateAxisRenderer();
 html_use_jqueryjqplotpluginBar();
 
-project_admin_header(array('title'=>sprintf(_('Project Statistics for %s'), $group->getPublicName()),
-							'group'=>$group_id));
+project_admin_header(array('title'=>sprintf(_('Project Statistics for %s'), $group->getPublicName()), 'group'=>$group_id));
 
 //
 // BEGIN PAGE CONTENT CODE

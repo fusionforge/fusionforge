@@ -43,7 +43,7 @@ foreach ($userObjects as $userObject) {
 
 echo html_ao('div', array('id' => 'notifyUsers'));
 echo $HTML->openForm(array('id' => 'notifyusersdoc', 'name' => 'notifyusersdoc', 'method' => 'post', 'enctype' => 'multipart/form-data'));
-echo $HTML->listTableTop(array());
+echo $HTML->listTableTop(array(), array(), 'full');
 $cells = array();
 $cells[][] = _('Document Title')._(':');
 $cells[][] = html_e('span', array('id' => 'notifytitle', 'type' => 'text', 'name' => 'title'), '', false);
