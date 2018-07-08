@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-03 18:49+0200\n"
+"POT-Creation-Date: 2018-07-08 17:25+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -326,16 +326,16 @@ msgstr ""
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:219
 #: plugins/scmgit/common/GitPlugin.class.php:366
 #: plugins/scmgit/common/GitPlugin.class.php:387
-#: plugins/scmgit/common/GitPlugin.class.php:1208
-#: plugins/scmgit/common/GitPlugin.class.php:1210
 #: plugins/scmgit/common/GitPlugin.class.php:1211
+#: plugins/scmgit/common/GitPlugin.class.php:1213
+#: plugins/scmgit/common/GitPlugin.class.php:1214
 #: plugins/scmhg/common/HgPlugin.class.php:81
 #: plugins/scmhg/common/HgPlugin.class.php:242
-#: plugins/scmhg/common/HgPlugin.class.php:934
-#: plugins/scmhg/common/HgPlugin.class.php:936
+#: plugins/scmhg/common/HgPlugin.class.php:938
+#: plugins/scmhg/common/HgPlugin.class.php:940
 #: plugins/scmsvn/common/SVNPlugin.class.php:328
-#: plugins/scmsvn/common/SVNPlugin.class.php:1107
-#: plugins/scmsvn/common/SVNPlugin.class.php:1109
+#: plugins/scmsvn/common/SVNPlugin.class.php:1110
+#: plugins/scmsvn/common/SVNPlugin.class.php:1112
 #: plugins/taskboard/common/views/admin/columns.php:73
 #: plugins/taskboard/common/views/admin/columns.php:77
 #: plugins/taskboard/common/views/admin/columns.php:81
@@ -431,9 +431,9 @@ msgstr ""
 #: www/project/admin/index.php:126 www/project/admin/index.php:153
 #: www/project/admin/index.php:160 www/project/admin/index.php:268
 #: www/project/admin/index.php:285 www/project/admin/vhost.php:43
-#: www/project/admin/vhost.php:45 www/project/stats/index.php:104
-#: www/project/stats/index.php:105 www/project/stats/index.php:106
-#: www/project/stats/index.php:107 www/register/index.php:245
+#: www/project/admin/vhost.php:45 www/project/stats/index.php:103
+#: www/project/stats/index.php:104 www/project/stats/index.php:105
+#: www/project/stats/index.php:106 www/register/index.php:245
 #: www/register/index.php:257 www/reporting/customstatus.php:96
 #: www/reporting/groupadded.php:66 www/reporting/groupadded.php:67
 #: www/reporting/groupadded.php:68 www/reporting/groupcum.php:66
@@ -1111,9 +1111,9 @@ msgstr ""
 #: plugins/mantisbt/view/viewAttachment.php:39
 #: plugins/mantisbt/view/viewIssue.php:44
 #: plugins/mantisbt/view/viewIssues.php:71
-#: plugins/mediawiki/common/mediawikiPlugin.class.php:428
-#: plugins/mediawiki/common/mediawikiPlugin.class.php:430
-#: plugins/mediawiki/common/mediawikiPlugin.class.php:432
+#: plugins/mediawiki/common/mediawikiPlugin.class.php:431
+#: plugins/mediawiki/common/mediawikiPlugin.class.php:433
+#: plugins/mediawiki/common/mediawikiPlugin.class.php:435
 #: plugins/oauthconsumer/www/get_access_token.php:138
 #: plugins/oauthconsumer/www/get_access_token.php:139
 #: plugins/phpcaptcha/common/phpcaptchaPlugin.class.php:57
@@ -2344,9 +2344,9 @@ msgstr ""
 #: plugins/oauthprovider/www/consumer.php:44
 #: plugins/oauthprovider/www/consumer.php:109
 #: plugins/oauthprovider/www/consumer_update_page.php:64
-#: plugins/scmgit/common/GitPlugin.class.php:1210
-#: plugins/scmhg/common/HgPlugin.class.php:936
-#: plugins/scmsvn/common/SVNPlugin.class.php:1109
+#: plugins/scmgit/common/GitPlugin.class.php:1213
+#: plugins/scmhg/common/HgPlugin.class.php:940
+#: plugins/scmsvn/common/SVNPlugin.class.php:1112
 #: plugins/taskboard/common/views/admin/ind.php:56
 #: plugins/taskboard/common/views/admin/trackers.php:95
 #: plugins/taskboard/common/views/ind.php:48 www/forum/admin/index.php:115
@@ -3590,7 +3590,7 @@ msgstr ""
 #: www/people/skills_utils.php:58 www/people/skills_utils.php:162
 #: www/pm/add_task.php:75 www/pm/browse_task.php:128 www/pm/browse_task.php:221
 #: www/pm/detail_task.php:58 www/pm/ganttpage.php:169 www/pm/mod_task.php:153
-#: www/project/stats/index.php:106 www/reporting/groupadded.php:67
+#: www/project/stats/index.php:105 www/reporting/groupadded.php:67
 #: www/reporting/groupcum.php:67 www/reporting/projectact.php:72
 #: www/reporting/projecttime.php:82 www/reporting/siteact.php:70
 #: www/reporting/sitetimebar.php:68 www/reporting/sitetime.php:80
@@ -3612,7 +3612,7 @@ msgstr ""
 #: www/people/skills_utils.php:59 www/people/skills_utils.php:163
 #: www/pm/add_task.php:86 www/pm/browse_task.php:129 www/pm/browse_task.php:223
 #: www/pm/detail_task.php:59 www/pm/ganttpage.php:170 www/pm/mod_task.php:167
-#: www/project/stats/index.php:107 www/reporting/groupadded.php:68
+#: www/project/stats/index.php:106 www/reporting/groupadded.php:68
 #: www/reporting/groupcum.php:68 www/reporting/projectact.php:73
 #: www/reporting/projecttime.php:83 www/reporting/siteact.php:71
 #: www/reporting/sitetimebar.php:69 www/reporting/sitetime.php:81
@@ -3627,7 +3627,7 @@ msgstr ""
 
 #: common/docman/views/reporting.php:93 common/frs/views/reporting.php:89
 #: plugins/globalactivity/www/index.php:121 www/activity/index.php:209
-#: www/project/stats/index.php:110 www/reporting/groupadded.php:69
+#: www/project/stats/index.php:109 www/reporting/groupadded.php:69
 #: www/reporting/groupcum.php:69 www/reporting/projectact.php:74
 #: www/reporting/projecttime.php:84 www/reporting/siteact.php:72
 #: www/reporting/sitetimebar.php:70 www/reporting/sitetime.php:84
@@ -3642,9 +3642,8 @@ msgstr ""
 msgid "There have been no viewed documents for this project yet."
 msgstr ""
 
-#: common/docman/views/reporting.php:111 common/docman/views/reporting.php:119
-#: common/frs/views/reporting.php:107 common/frs/views/reporting.php:116
-#: common/reporting/report_utils.php:73
+#: common/docman/views/reporting.php:111 common/frs/views/reporting.php:107
+#: common/frs/views/reporting.php:116 common/reporting/report_utils.php:73
 msgid "Y-m"
 msgstr ""
 
@@ -3654,8 +3653,8 @@ msgid "Month"
 msgstr ""
 
 #: common/docman/views/reporting.php:145 common/frs/views/reporting.php:150
-#: common/reporting/report_utils.php:148 common/reporting/report_utils.php:191
-#: common/reporting/report_utils.php:674 common/reporting/report_utils.php:675
+#: common/reporting/report_utils.php:148 common/reporting/report_utils.php:190
+#: common/reporting/report_utils.php:673 common/reporting/report_utils.php:674
 #: common/reporting/report_utils.php:947 www/stats/site_stats_utils.php:235
 #: www/stats/site_stats_utils.php:365 www/stats/site_stats_utils.php:419
 #: www/stats/site_stats_utils.php:475 www/top/toplist.php:47
@@ -3685,8 +3684,8 @@ msgid "At least one word must be found."
 msgstr ""
 
 #: common/docman/views/search.php:55 common/reporting/report_utils.php:55
-#: common/reporting/report_utils.php:359 common/reporting/report_utils.php:415
-#: common/reporting/report_utils.php:588 common/reporting/report_utils.php:877
+#: common/reporting/report_utils.php:358 common/reporting/report_utils.php:414
+#: common/reporting/report_utils.php:587 common/reporting/report_utils.php:877
 #: common/reporting/report_utils.php:979 common/reporting/report_utils.php:1043
 #: common/reporting/report_utils.php:1146
 #: common/tracker/actions/downloadcsv.php:39
@@ -3823,12 +3822,12 @@ msgstr ""
 #: plugins/oauthprovider/www/request_tokens.php:100
 #: plugins/oauthprovider/www/request_tokens.php:103
 #: plugins/oauthprovider/www/request_tokens.php:108
-#: plugins/scmgit/common/GitPlugin.class.php:1183
-#: plugins/scmgit/common/GitPlugin.class.php:1195
-#: plugins/scmhg/common/HgPlugin.class.php:910
-#: plugins/scmhg/common/HgPlugin.class.php:921
-#: plugins/scmsvn/common/SVNPlugin.class.php:1084
-#: plugins/scmsvn/common/SVNPlugin.class.php:1095
+#: plugins/scmgit/common/GitPlugin.class.php:1186
+#: plugins/scmgit/common/GitPlugin.class.php:1198
+#: plugins/scmhg/common/HgPlugin.class.php:914
+#: plugins/scmhg/common/HgPlugin.class.php:925
+#: plugins/scmsvn/common/SVNPlugin.class.php:1087
+#: plugins/scmsvn/common/SVNPlugin.class.php:1098
 #: plugins/taskboard/common/views/admin/delete_column.php:50
 #: plugins/taskboard/common/views/admin/delete_taskboard.php:43
 #: plugins/taskboard/common/views/releases/delete_release.php:52
@@ -4167,8 +4166,8 @@ msgstr ""
 #: common/forum/ForumFactory.class.php:56
 #: common/include/group_section_texts.php:29
 #: common/include/Navigation.class.php:433
-#: common/reporting/report_utils.php:136 common/reporting/report_utils.php:680
-#: common/reporting/report_utils.php:681
+#: common/reporting/report_utils.php:136 common/reporting/report_utils.php:679
+#: common/reporting/report_utils.php:680
 #: common/widget/Widget_MyMonitoredForums.class.php:128
 #: plugins/blocks/www/index.php:153
 #: plugins/quota_management/www/quota_project.php:87
@@ -4342,9 +4341,9 @@ msgstr ""
 #: plugins/headermenu/view/admin/updateLinkValue.php:108
 #: plugins/oauthconsumer/www/provider_edit.php:28
 #: plugins/oauthprovider/www/consumer_update_page.php:50
-#: plugins/scmgit/common/GitPlugin.class.php:1214
-#: plugins/scmhg/common/HgPlugin.class.php:938
-#: plugins/scmsvn/common/SVNPlugin.class.php:1111
+#: plugins/scmgit/common/GitPlugin.class.php:1217
+#: plugins/scmhg/common/HgPlugin.class.php:942
+#: plugins/scmsvn/common/SVNPlugin.class.php:1114
 #: plugins/taskboard/common/views/taskboard.php:397
 #: plugins/webanalytics/view/admin/updateLinkValue.php:46
 #: www/admin/admin_table.php:58 www/admin/admin_table.php:159
@@ -5325,7 +5324,7 @@ msgstr ""
 #: plugins/mantisbt/view/admin/viewVersion.php:48 www/admin/massmail.php:149
 #: www/people/editprofile.php:109 www/people/editprofile.php:278
 #: www/people/skills_utils.php:56 www/people/skills_utils.php:161
-#: www/project/stats/index.php:105 www/reporting/groupadded.php:66
+#: www/project/stats/index.php:104 www/reporting/groupadded.php:66
 #: www/reporting/groupcum.php:66 www/reporting/projectact.php:71
 #: www/reporting/projecttime.php:81 www/reporting/projecttime.php:95
 #: www/reporting/siteact.php:69 www/reporting/sitetime.php:79
@@ -5382,7 +5381,7 @@ msgstr ""
 msgid "Create release"
 msgstr ""
 
-#: common/frs/views/reporting.php:95 www/project/stats/index.php:118
+#: common/frs/views/reporting.php:95 www/project/stats/index.php:117
 #: www/reporting/groupadded.php:55 www/reporting/groupcum.php:55
 #: www/reporting/projectact.php:57 www/reporting/projecttime.php:56
 #: www/reporting/siteact.php:54 www/reporting/sitetimebar.php:54
@@ -5653,8 +5652,8 @@ msgstr ""
 #: common/include/Activity.class.php:131
 #: common/include/group_section_texts.php:31
 #: common/include/Navigation.class.php:481 common/include/rbac_texts.php:202
-#: common/reporting/report_utils.php:144 common/reporting/report_utils.php:187
-#: common/reporting/report_utils.php:693 common/reporting/report_utils.php:946
+#: common/reporting/report_utils.php:144 common/reporting/report_utils.php:186
+#: common/reporting/report_utils.php:692 common/reporting/report_utils.php:946
 #: common/widget/Widget_ProjectPublicAreas.class.php:162
 #: plugins/blocks/www/index.php:156 www/export/rss20_activity.php:183
 #: www/export/rss20_activity.php:190 www/export/rss20_activity.php:197
@@ -6343,7 +6342,7 @@ msgid "Delete failed"
 msgstr ""
 
 #: common/include/group_section_texts.php:30
-#: common/reporting/report_utils.php:701
+#: common/reporting/report_utils.php:700
 #: common/widget/Widget_MyArtifacts.class.php:285
 #: common/widget/Widget_ProjectLatestArtifacts.class.php:100
 #: common/widget/Widget_TrackerComment.class.php:207
@@ -6359,7 +6358,7 @@ msgid "Trackers"
 msgstr ""
 
 #: common/include/group_section_texts.php:32
-#: common/reporting/report_utils.php:669
+#: common/reporting/report_utils.php:668
 #: plugins/quota_management/www/quota_project.php:56
 #: www/export/rss20_activity.php:162 www/export/rss20_activity.php:169
 #: www/export/rss20_activity.php:176
@@ -6902,7 +6901,7 @@ msgid "Project Management"
 msgstr ""
 
 #: common/include/Navigation.class.php:496
-#: common/reporting/report_utils.php:140 common/reporting/report_utils.php:668
+#: common/reporting/report_utils.php:140 common/reporting/report_utils.php:667
 #: plugins/blocks/www/index.php:157
 msgid "Docs"
 msgstr ""
@@ -8005,101 +8004,101 @@ msgstr ""
 msgid "Saturday"
 msgstr ""
 
-#: common/reporting/report_utils.php:152 common/reporting/report_utils.php:686
-#: common/reporting/report_utils.php:687 www/stats/site_stats_utils.php:233
+#: common/reporting/report_utils.php:152 common/reporting/report_utils.php:685
+#: common/reporting/report_utils.php:686 www/stats/site_stats_utils.php:233
 #: www/top/toplist.php:38
 msgid "Page Views"
 msgstr ""
 
-#: common/reporting/report_utils.php:171 common/reporting/report_utils.php:940
+#: common/reporting/report_utils.php:170 common/reporting/report_utils.php:940
 #: www/stats/site_stats_utils.php:238 www/stats/site_stats_utils.php:366
 #: www/stats/site_stats_utils.php:420
 msgid "Bugs"
 msgstr ""
 
-#: common/reporting/report_utils.php:172 www/stats/site_stats_utils.php:239
+#: common/reporting/report_utils.php:171 www/stats/site_stats_utils.php:239
 #: www/stats/site_stats_utils.php:367 www/stats/site_stats_utils.php:421
 msgid "Support"
 msgstr ""
 
-#: common/reporting/report_utils.php:173 common/reporting/report_utils.php:942
+#: common/reporting/report_utils.php:172 common/reporting/report_utils.php:942
 #: www/stats/site_stats_utils.php:240 www/stats/site_stats_utils.php:368
 #: www/stats/site_stats_utils.php:422
 msgid "Patches"
 msgstr ""
 
-#: common/reporting/report_utils.php:174 common/reporting/report_utils.php:943
+#: common/reporting/report_utils.php:173 common/reporting/report_utils.php:943
 msgid "Feature Requests"
 msgstr ""
 
-#: common/reporting/report_utils.php:175 common/reporting/report_utils.php:944
+#: common/reporting/report_utils.php:174 common/reporting/report_utils.php:944
 msgid "Other Trackers"
 msgstr ""
 
-#: common/reporting/report_utils.php:183 common/reporting/report_utils.php:945
+#: common/reporting/report_utils.php:182 common/reporting/report_utils.php:945
 msgid "Forum Messages"
 msgstr ""
 
-#: common/reporting/report_utils.php:228 www/snippet/snippet_utils.php:38
+#: common/reporting/report_utils.php:227 www/snippet/snippet_utils.php:38
 #: www/snippet/snippet_utils.php:64
 msgid "Other"
 msgstr ""
 
-#: common/reporting/report_utils.php:247 common/reporting/report_utils.php:370
+#: common/reporting/report_utils.php:246 common/reporting/report_utils.php:369
 msgid "No selected area."
 msgstr ""
 
-#: common/reporting/report_utils.php:260
+#: common/reporting/report_utils.php:259
 msgid "Avg Time Open (in days)"
 msgstr ""
 
-#: common/reporting/report_utils.php:262
+#: common/reporting/report_utils.php:261
 msgid "Total Opened"
 msgstr ""
 
-#: common/reporting/report_utils.php:264
+#: common/reporting/report_utils.php:263
 msgid "Total Still Open"
 msgstr ""
 
-#: common/reporting/report_utils.php:359
+#: common/reporting/report_utils.php:358
 msgid "Tracker Activity"
 msgstr ""
 
-#: common/reporting/report_utils.php:381
+#: common/reporting/report_utils.php:380
 msgid "Per assignee"
 msgstr ""
 
-#: common/reporting/report_utils.php:417
+#: common/reporting/report_utils.php:416
 msgid "No data to display"
 msgstr ""
 
-#: common/reporting/report_utils.php:431 www/reporting/index.php:40
+#: common/reporting/report_utils.php:430 www/reporting/index.php:40
 #: www/reporting/usercum.php:61
 msgid "Cumulative Users"
 msgstr ""
 
-#: common/reporting/report_utils.php:436 www/reporting/index.php:39
+#: common/reporting/report_utils.php:435 www/reporting/index.php:39
 #: www/reporting/useradded.php:61
 msgid "Users Added"
 msgstr ""
 
-#: common/reporting/report_utils.php:441 www/reporting/groupadded.php:61
+#: common/reporting/report_utils.php:440 www/reporting/groupadded.php:61
 #: www/reporting/index.php:48
 msgid "Projects Added"
 msgstr ""
 
-#: common/reporting/report_utils.php:446 www/reporting/groupcum.php:61
+#: common/reporting/report_utils.php:445 www/reporting/groupcum.php:61
 #: www/reporting/index.php:49
 msgid "Cumulative Projects"
 msgstr ""
 
-#: common/reporting/report_utils.php:457 common/reporting/report_utils.php:629
+#: common/reporting/report_utils.php:456 common/reporting/report_utils.php:628
 #: common/reporting/report_utils.php:981 common/reporting/report_utils.php:1045
 #: common/reporting/report_utils.php:1148
 msgid "No data to display."
 msgstr ""
 
-#: common/reporting/report_utils.php:603 plugins/authopenid/www/index.php:39
+#: common/reporting/report_utils.php:602 plugins/authopenid/www/index.php:39
 #: plugins/authwebid/www/index.php:35 www/account/change_email-complete.php:52
 #: www/account/change_email.php:48 www/account/change_pw.php:35
 #: www/account/editsshkeys.php:39 www/account/index.php:40
@@ -8109,19 +8108,19 @@ msgstr ""
 msgid "Could Not Get User"
 msgstr ""
 
-#: common/reporting/report_utils.php:694
+#: common/reporting/report_utils.php:693
 msgid "Task open"
 msgstr ""
 
-#: common/reporting/report_utils.php:695
+#: common/reporting/report_utils.php:694
 msgid "Task close"
 msgstr ""
 
-#: common/reporting/report_utils.php:702
+#: common/reporting/report_utils.php:701
 msgid "Tracker items opened"
 msgstr ""
 
-#: common/reporting/report_utils.php:703
+#: common/reporting/report_utils.php:702
 msgid "Tracker items closed"
 msgstr ""
 
@@ -8350,10 +8349,10 @@ msgstr ""
 #: plugins/forumml/www/forumml_utils.php:596 plugins/forumml/www/index.php:126
 #: plugins/mantisbt/view/addIssue.php:133
 #: plugins/mantisbt/view/addOrEditNote.php:60
-#: plugins/scmgit/common/GitPlugin.class.php:1215
-#: plugins/scmhg/common/HgPlugin.class.php:939
+#: plugins/scmgit/common/GitPlugin.class.php:1218
+#: plugins/scmhg/common/HgPlugin.class.php:943
 #: plugins/scmhook/common/scmhookPlugin.class.php:222
-#: plugins/scmsvn/common/SVNPlugin.class.php:1112
+#: plugins/scmsvn/common/SVNPlugin.class.php:1115
 #: plugins/taskboard/common/views/admin/columns.php:94
 #: plugins/taskboard/common/views/admin/edit_column.php:102
 #: plugins/taskboard/common/views/admin/init.php:72
@@ -16378,19 +16377,19 @@ msgstr ""
 msgid "MediaWiki Plugin admin"
 msgstr ""
 
-#: plugins/mediawiki/common/mediawikiPlugin.class.php:428
+#: plugins/mediawiki/common/mediawikiPlugin.class.php:431
 msgid "new element created"
 msgstr ""
 
-#: plugins/mediawiki/common/mediawikiPlugin.class.php:430
+#: plugins/mediawiki/common/mediawikiPlugin.class.php:433
 msgid "modified element"
 msgstr ""
 
-#: plugins/mediawiki/common/mediawikiPlugin.class.php:432
+#: plugins/mediawiki/common/mediawikiPlugin.class.php:435
 msgid "stored element"
 msgstr ""
 
-#: plugins/mediawiki/common/mediawikiPlugin.class.php:451
+#: plugins/mediawiki/common/mediawikiPlugin.class.php:454
 msgid "Mediawiki Changes"
 msgstr ""
 
@@ -18262,12 +18261,12 @@ msgid "Create new repository"
 msgstr ""
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:589
-#: plugins/scmgit/common/GitPlugin.class.php:1183
-#: plugins/scmgit/common/GitPlugin.class.php:1208
-#: plugins/scmhg/common/HgPlugin.class.php:910
-#: plugins/scmhg/common/HgPlugin.class.php:934
-#: plugins/scmsvn/common/SVNPlugin.class.php:1084
-#: plugins/scmsvn/common/SVNPlugin.class.php:1107
+#: plugins/scmgit/common/GitPlugin.class.php:1186
+#: plugins/scmgit/common/GitPlugin.class.php:1211
+#: plugins/scmhg/common/HgPlugin.class.php:914
+#: plugins/scmhg/common/HgPlugin.class.php:938
+#: plugins/scmsvn/common/SVNPlugin.class.php:1087
+#: plugins/scmsvn/common/SVNPlugin.class.php:1110
 msgid "Repository name"
 msgstr ""
 
@@ -18394,58 +18393,58 @@ msgstr ""
 msgid "statistics"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1056
+#: plugins/scmgit/common/GitPlugin.class.php:1059
 msgid "Git Commits"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1075
-#: plugins/scmhg/common/HgPlugin.class.php:833
-#: plugins/scmsvn/common/SVNPlugin.class.php:888
+#: plugins/scmgit/common/GitPlugin.class.php:1078
+#: plugins/scmhg/common/HgPlugin.class.php:837
+#: plugins/scmsvn/common/SVNPlugin.class.php:891
 msgid "Cannot create a secondary repository with the same name as the primary"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1080
-#: plugins/scmhg/common/HgPlugin.class.php:838
-#: plugins/scmsvn/common/SVNPlugin.class.php:893
+#: plugins/scmgit/common/GitPlugin.class.php:1083
+#: plugins/scmhg/common/HgPlugin.class.php:842
+#: plugins/scmsvn/common/SVNPlugin.class.php:896
 msgid "This repository name is not valid"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1093
-#: plugins/scmhg/common/HgPlugin.class.php:851
-#: plugins/scmsvn/common/SVNPlugin.class.php:904
+#: plugins/scmgit/common/GitPlugin.class.php:1096
+#: plugins/scmhg/common/HgPlugin.class.php:855
+#: plugins/scmsvn/common/SVNPlugin.class.php:907
 #, php-format
 msgid "A repository %s already exists"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1119
+#: plugins/scmgit/common/GitPlugin.class.php:1122
 msgid "Invalid URL from which to clone"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1128
+#: plugins/scmgit/common/GitPlugin.class.php:1131
 #, php-format
 msgid "Clone of %s"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1178
+#: plugins/scmgit/common/GitPlugin.class.php:1181
 msgid "No extra Git repository for project"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1180
+#: plugins/scmgit/common/GitPlugin.class.php:1183
 #, php-format
 msgid "Extra Git repository for project %1$s"
 msgid_plural "Extra Git repositories for project %1$s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1183
+#: plugins/scmgit/common/GitPlugin.class.php:1186
 msgid "Initial clone URL (if any)"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1203
+#: plugins/scmgit/common/GitPlugin.class.php:1206
 msgid "Create new Git repository for project"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1211
+#: plugins/scmgit/common/GitPlugin.class.php:1214
 msgid ""
 "Initial clone URL (or name of an existing repository in this project; leave "
 "empty to start with an empty repository)"
@@ -18560,22 +18559,22 @@ msgstr ""
 msgid "Browse extra Hg repository"
 msgstr ""
 
-#: plugins/scmhg/common/HgPlugin.class.php:814
+#: plugins/scmhg/common/HgPlugin.class.php:818
 msgid "Hg Commits"
 msgstr ""
 
-#: plugins/scmhg/common/HgPlugin.class.php:905
+#: plugins/scmhg/common/HgPlugin.class.php:909
 msgid "No extra Hg repository for project"
 msgstr ""
 
-#: plugins/scmhg/common/HgPlugin.class.php:907
+#: plugins/scmhg/common/HgPlugin.class.php:911
 #, php-format
 msgid "Extra Hg repository for project %1$s"
 msgid_plural "Extra Hg repositories for project %1$s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugins/scmhg/common/HgPlugin.class.php:929
+#: plugins/scmhg/common/HgPlugin.class.php:933
 #, php-format
 msgid "Create new Hg repository for project %s"
 msgstr ""
@@ -18744,22 +18743,22 @@ msgstr ""
 msgid "Browse extra SVN repository"
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:796
+#: plugins/scmsvn/common/SVNPlugin.class.php:799
 msgid "Subversion Commits"
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:1079
+#: plugins/scmsvn/common/SVNPlugin.class.php:1082
 msgid "No extra Subversion repository for project"
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:1081
+#: plugins/scmsvn/common/SVNPlugin.class.php:1084
 #, php-format
 msgid "Extra Subversion repository for project %1$s"
 msgid_plural "Extra Subversion repositories for project %1$s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:1103
+#: plugins/scmsvn/common/SVNPlugin.class.php:1106
 msgid "Create new Subversion repository for project"
 msgstr ""
 
@@ -21463,7 +21462,7 @@ msgstr ""
 msgid "This User Has No Diary Entries"
 msgstr ""
 
-#: www/developer/diary.php:98
+#: www/developer/diary.php:96
 msgid "No User Selected"
 msgstr ""
 
@@ -25071,13 +25070,13 @@ msgstr[1] ""
 msgid "Project Statistics for %s"
 msgstr ""
 
-#: www/project/stats/index.php:104 www/reporting/projectact.php:70
+#: www/project/stats/index.php:103 www/reporting/projectact.php:70
 #: www/reporting/siteact.php:68 www/reporting/useract.php:85
 #: www/tracker/reporting/index.php:129
 msgid "Area"
 msgstr ""
 
-#: www/project/stats/index.php:120 www/tracker/reporting/index.php:148
+#: www/project/stats/index.php:119 www/tracker/reporting/index.php:148
 #: www/tracker/reporting/index.php:152
 msgid "Error during graphic computation."
 msgstr ""
