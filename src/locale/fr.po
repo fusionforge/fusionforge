@@ -18547,13 +18547,11 @@ msgstr "Parcourir le dépôt %s"
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:155
 msgid "Only available if anonymous access is allowed"
-msgstr ""
+msgstr "Disponible uniquement si l'accès anonyme est autorisé"
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:545
-#, fuzzy
-#| msgid "No stats available"
 msgid "No specific action available"
-msgstr "Pas de statistiques disponibles"
+msgstr "Pas d'action spécifique disponible"
 
 #: plugins/scmccase/common/CCasePlugin.class.php:92
 msgid "ClearCase Access"

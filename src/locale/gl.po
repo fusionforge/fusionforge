@@ -18422,14 +18422,12 @@ msgid ""
 msgstr ""
 
 #: www/include/my_utils.php:84
-#, fuzzy
 msgid "Expand"
-msgstr "expandir todos"
+msgstr "Expandir"
 
 #: www/include/my_utils.php:87
-#, fuzzy
 msgid "Collapse"
-msgstr "contraer todos"
+msgstr "Contraer"
 
 #: www/include/my_utils.php:149
 #, fuzzy, php-format

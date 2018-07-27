@@ -24339,9 +24339,8 @@ msgstr "Användarenamn"
 #~ msgid "Invalid folder."
 #~ msgstr "Ogiltig användare"
 
-#, fuzzy
 #~ msgid "Invalid filename"
-#~ msgstr "Ogiltigt fullständigt namn"
+#~ msgstr "Ogiltigt filnamn"
 
 #, fuzzy
 #~ msgid "Invalid Email Address:"
@@ -24829,12 +24828,9 @@ msgstr "Användarenamn"
 #~ msgid "Documentations"
 #~ msgstr "Visa Dokumentation"
 
-#, fuzzy
 #~ msgid ""
 #~ "This Artifact Type Does Not Allow Anonymous Submissions. Please Login."
-#~ msgstr ""
-#~ "Artifakt: Denna Artifakttyp tillåter inte anonyma inlägg. Var vänlig "
-#~ "logga in"
+#~ msgstr "Denna Artifakttyp tillåter inte anonyma inlägg. Var vänlig logga in"
 
 #~ msgid ""
 #~ "Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please "

@@ -8552,7 +8552,6 @@ msgstr "Ongeldig e-mail adres"
 #: www/account/index.php:149 www/account/lostpw.php:89
 #: www/account/pending-resend.php:67 www/account/verify.php:78
 #: www/include/user_profile.php:87
-#, fuzzy
 msgid "Login Name"
 msgstr "Loginnaam"
 

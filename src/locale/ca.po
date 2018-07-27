@@ -23101,7 +23101,6 @@ msgid "New users, new projects: no graph to display."
 msgstr ""
 
 #: www/survey/admin/index.php:35
-#, fuzzy
 msgid "Surveys Administration"
 msgstr "Administració de l'enquesta"
 
@@ -24779,9 +24778,8 @@ msgstr "Nom d'usuari"
 #~ msgid "Average"
 #~ msgstr "Mitjana"
 
-#, fuzzy
 #~ msgid "View All Comments"
-#~ msgstr "Visualitza tots els comentaris %1$s"
+#~ msgstr "Visualitza tots els comentaris"
 
 #~ msgid "%1$s Account Registration"
 #~ msgstr "Registre del compte %1$s"
@@ -25584,12 +25582,11 @@ msgstr "Nom d'usuari"
 #~ msgid "Documentations"
 #~ msgstr "Visualitza la documentació"
 
-#, fuzzy
 #~ msgid ""
 #~ "This Artifact Type Does Not Allow Anonymous Submissions. Please Login."
 #~ msgstr ""
-#~ "Artefacte: Aquest tipus d'artefacte no permet enviaments anònims. Si us "
-#~ "plau,inicieu una sessió."
+#~ "Aquest tipus d'artefacte no permet enviaments anònims. Si us plau,inicieu "
+#~ "una sessió."
 
 #~ msgid ""
 #~ "Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please "
