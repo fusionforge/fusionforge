@@ -91,7 +91,7 @@ install_selenium() {
 	# Install selenium (no packaged version available)
 	SELENIUMMAJOR=2
 	SELENIUMMINOR=53
-	SELENIUMMICRO=0
+	SELENIUMMICRO=1
 	SELENIUMURL=http://selenium-release.storage.googleapis.com/$SELENIUMMAJOR.$SELENIUMMINOR/selenium-server-standalone-$SELENIUMMAJOR.$SELENIUMMINOR.$SELENIUMMICRO.jar
 	mkdir -p /usr/share/selenium/
 	http_proxy=$PROXY wget -c $SELENIUMURL \
