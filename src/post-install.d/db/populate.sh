@@ -70,7 +70,7 @@ EOF
 
 PSQL_WITH_OPTS="psql -h $database_host -p $database_port -U $database_user $database_name"
 
-$PSQL_WITH_OPTS <<EOF >/dev/null
+su - postgres -c "psql $database_name" <<EOF >/dev/null
 CREATE EXTENSION IF NOT EXISTS unaccent;
 EOF
 
