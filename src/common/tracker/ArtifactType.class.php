@@ -1457,7 +1457,10 @@ class ArtifactType extends FFError {
 	 * @return	bool	true if they can
 	 */
 	function canVote() {
-		return forge_check_perm('tracker', $this->getID(), 'vote');
+		if (in_array(user_getid(), $this->getVoters())) {
+			return true;
+		}
+		return false;
 	}
 
 	/**

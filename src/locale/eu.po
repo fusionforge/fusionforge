@@ -25372,12 +25372,11 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #~ msgid "Documentations"
 #~ msgstr "Dokumentuak irakurri."
 
-#, fuzzy
 #~ msgid ""
 #~ "This Artifact Type Does Not Allow Anonymous Submissions. Please Login."
 #~ msgstr ""
-#~ "Erregistroak: Erregistro honek ez ditu bidalketa anonimoak bidaltzen "
-#~ "uzten. Mesedez, sisteman sar zaitez."
+#~ "Erregistro honek ez ditu bidalketa anonimoak bidaltzen uzten. Mesedez, "
+#~ "sisteman sar zaitez."
 
 #~ msgid ""
 #~ "Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please "

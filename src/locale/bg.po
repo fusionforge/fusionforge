@@ -7794,7 +7794,6 @@ msgstr ""
 
 #: common/widget/Widget_ProjectInfo.class.php:32 www/include/user_home.php:88
 #: www/project/admin/project_admin_utils.php:48
-#, fuzzy
 msgid "Project Information"
 msgstr "Информация за проекта"
 

@@ -68,21 +68,23 @@ cat <<EOF > $PGPASSFILE
 $database_host:$database_port:$database_name:$database_user:$database_password
 EOF
 
-su - postgres -c "psql $database_name" <<EOF >/dev/null
+PSQL_WITH_OPTS="psql -h $database_host -p $database_port -U $database_user $database_name"
+
+$PSQL_WITH_OPTS <<EOF >/dev/null
 CREATE EXTENSION IF NOT EXISTS unaccent;
 EOF
 
 # Database init
-if ! su - postgres -c "psql $database_name -c 'SELECT COUNT(*) FROM users;'" >/dev/null 2>&1;  then
+if !$PSQL_WITH_OPTS -c 'SELECT COUNT(*) FROM users;' >/dev/null 2>&1;  then
 	echo "Importing initial database..."
-	psql -h $database_host -p $database_port -U $database_user $database_name < $source_path/db/1-fusionforge-init.sql >/dev/null
+	$PSQL_WITH_OPTS < $source_path/db/1-fusionforge-init.sql >/dev/null
 fi
 
 # Database upgrade
 $source_path/post-install.d/db/upgrade.php
 
 # Additional grants
-psql -h $database_host -p $database_port -U $database_user $database_name <<EOF >/dev/null
+$PSQL_WITH_OPTS <<EOF >/dev/null
 GRANT SELECT ON nss_passwd TO ${database_user}_nss;
 GRANT SELECT ON nss_groups TO ${database_user}_nss;
 GRANT SELECT ON nss_usergroups TO ${database_user}_nss;
@@ -93,8 +95,8 @@ EOF
 
 # Admin user
 req="SELECT COUNT(*) FROM users WHERE user_name='admin'"
-if [ "$(echo $req | su - postgres -c "psql -At $database_name")" != "1" ]; then
-	psql -h $database_host -p $database_port -U $database_user $database_name <<EOF >/dev/null
+if [ "$(echo $req | $PSQL_WITH_OPTS -At)" != "1" ]; then
+	$PSQL_WITH_OPTS <<EOF >/dev/null
 INSERT INTO users (user_name, realname, firstname, lastname, email,
     unix_pw, status, theme_id)
   VALUES ('admin', 'Forge Admin', 'Forge', 'Admin', 'root@localhost.localdomain',

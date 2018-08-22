@@ -17210,7 +17210,6 @@ msgid "Click here to %1$s quick-release a file %2$s"
 msgstr "%1$s 간단히 파일을 릴리즈 %2$s 하실 수 있습니다."
 
 #: www/frs/admin/index.php:127
-#, fuzzy
 msgid "Packages"
 msgstr "패키지"
 

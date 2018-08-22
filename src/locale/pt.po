@@ -20900,7 +20900,6 @@ msgstr ""
 "ele."
 
 #: www/snippet/add_snippet_to_package.php:83 www/snippet/addversion.php:40
-#, fuzzy
 msgid "Error: snippet does not exist"
 msgstr "Erro - Aquele snippet não existe"
 
