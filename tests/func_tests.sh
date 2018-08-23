@@ -78,6 +78,10 @@ install_selenium() {
 		    composer --no-plugins --no-scripts require phpunit/phpunit-selenium
 		    popd
 		fi
+		# Install selenium (no packaged version available)
+		SELENIUMMAJOR=2
+		SELENIUMMINOR=53
+		SELENIUMMICRO=1
 	else
 		yum -y install wget firefox
 		if yum list java-1.7.0-openjdk >/dev/null 2>&1 ; then
@@ -86,12 +90,12 @@ install_selenium() {
 		    yum install -y java-1.6.0
 		fi
 		yum --enablerepo=epel install -y php-phpunit-PHPUnit php-phpunit-PHPUnit-Selenium psmisc patch net-tools
+		# Install selenium (no packaged version available)
+		SELENIUMMAJOR=3
+		SELENIUMMINOR=14
+		SELENIUMMICRO=0
 	fi
 
-	# Install selenium (no packaged version available)
-	SELENIUMMAJOR=3
-	SELENIUMMINOR=14
-	SELENIUMMICRO=0
 	SELENIUMURL=http://selenium-release.storage.googleapis.com/$SELENIUMMAJOR.$SELENIUMMINOR/selenium-server-standalone-$SELENIUMMAJOR.$SELENIUMMINOR.$SELENIUMMICRO.jar
 	mkdir -p /usr/share/selenium/
 	http_proxy=$PROXY wget -c $SELENIUMURL \
