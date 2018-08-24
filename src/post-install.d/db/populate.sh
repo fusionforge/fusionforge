@@ -1,4 +1,5 @@
 #!/bin/bash -e
+set -x
 # Create user and database, and import initial data
 #
 # Copyright (C) 2014, 2015  Inria (Sylvain Beucler)
@@ -70,12 +71,12 @@ EOF
 
 PSQL_WITH_OPTS="psql -h $database_host -p $database_port -U $database_user $database_name"
 
-$PSQL_WITH_OPTS <<EOF >/dev/null
+su - postgres -c "psql $database_name" <<EOF >/dev/null
 CREATE EXTENSION IF NOT EXISTS unaccent;
 EOF
 
 # Database init
-if !$PSQL_WITH_OPTS -c 'SELECT COUNT(*) FROM users;' >/dev/null 2>&1;  then
+if ! $PSQL_WITH_OPTS -c 'SELECT COUNT(*) FROM users;' >/dev/null 2>&1;  then
 	echo "Importing initial database..."
 	$PSQL_WITH_OPTS < $source_path/db/1-fusionforge-init.sql >/dev/null
 fi

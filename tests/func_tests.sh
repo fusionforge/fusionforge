@@ -78,6 +78,10 @@ install_selenium() {
 		    composer --no-plugins --no-scripts require phpunit/phpunit-selenium
 		    popd
 		fi
+		# Install selenium (no packaged version available)
+		SELENIUMMAJOR=2
+		SELENIUMMINOR=53
+		SELENIUMMICRO=1
 	else
 		yum -y install wget firefox
 		if yum list java-1.7.0-openjdk >/dev/null 2>&1 ; then
@@ -86,6 +90,8 @@ install_selenium() {
 		    yum install -y java-1.6.0
 		fi
 		yum --enablerepo=epel install -y php-phpunit-PHPUnit php-phpunit-PHPUnit-Selenium psmisc patch net-tools
+		# Firefox > 60 does not work with Selenium 2
+		yum downgrade -y firefox
 	fi
 
 	# Install selenium (no packaged version available)
