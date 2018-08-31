@@ -1,5 +1,5 @@
 #!/bin/bash -e
-set -x
+#set -x
 # Create user and database, and import initial data
 #
 # Copyright (C) 2014, 2015  Inria (Sylvain Beucler)
