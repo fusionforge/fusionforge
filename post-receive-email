@@ -750,7 +750,7 @@ show_new_revisions()
 	# (see generate_update_branch_email for the explanation of this
 	# command)
 
-	local revspec other_branches onerev
+	local revspec onerev
 
 	# Revision range passed to rev-list differs for new vs. updated
 	# branches.
@@ -763,9 +763,7 @@ show_new_revisions()
 		revspec=$oldrev..$newrev
 	fi
 
-	other_branches=$(git for-each-ref --format='%(refname)' refs/heads/ |
-	    grep -F -v $refname)
-	git rev-parse --not $other_branches |
+	git rev-parse --not "${other_branches[@]}" |
 	if [ -z "$custom_showrev" ]
 	then
 		git rev-list --pretty --stdin $revspec
@@ -856,15 +854,40 @@ if [ -n "$1" -a -n "$2" -a -n "$3" ]; then
 	# themselves
 	prep_for_email $2 $3 $1 && PAGER= generate_email
 else
-	ilines=
-	while read oldrev newrev refname
-	do
-		ilines="$ilines$oldrev $newrev $refname$nl"
+	# get a list of all branches
+	set -A other_branches -- $(git for-each-ref \
+	    --format='%(refname)' refs/heads/)
+	set -A ilines
+	while IFS= read -r line; do
+		# store for later
+		ilines+=("$line")
+		# check if refname is a branch name
+		refname=${line##* }
+		[[ $refname = refs/heads/* ]] || continue
+		# filter out from other_branches if matching
+		i=-1 j=${#other_branches[@]}
+		while (( ++i < j )); do
+			[[ ${other_branches[i]} = "$refname" ]] || continue
+			unset other_branches[i]
+			break
+		done
+		set -A other_branches -- "${other_branches[@]}"
+	done
+	# process one by one for eMails
+	for line in "${ilines[@]}"; do
+		oldrev=${line%% *}
+		newrev=${line#* }
+		newrev=${newrev%% *}
+		refname=${line##* }
 		prep_for_email $oldrev $newrev $refname || continue
 		generate_email $maxlines | send_mail
+		# append to list of branches for which eMails have been sent
+		[[ $refname = refs/heads/* ]] && other_branches+=("$refname")
 	done
 	if [[ -n $kgbconffile && -s $kgbconffile ]]; then
-		print -nr -- "$ilines" | kgb-client \
+		for line in "${ilines[@]}"; do
+			print -r -- "$line"
+		done | kgb-client \
 		    --conf "$kgbconffile" --repository git --git-reflog -
 	fi
 	set -o noglob
