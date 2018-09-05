@@ -379,8 +379,7 @@ generate_create_branch_email()
 
 	echo "Below, we list all revisions that are new to this repository and"
 	echo "have not appeared on any other notification email. The diff below"
-	echo "represents the summarised changes, except those from an initial"
-	echo "commit (i.e. diffing starts with the first commit’s tree)."
+	echo "represents the summarised changes from the first known parent:"
 
 	echo ""
 	echo $LOGBEGIN
@@ -389,10 +388,12 @@ generate_create_branch_email()
 	# experimental summarised changes diff
 	echo ""
 	echo "Summary of changes:"
-	echo $(git rev-parse --not "${other_branches[@]}" | \
-	    git rev-list --stdin $newrev) | \
-	    git -c core.quotePath=false diff-tree --stdin $diffopts | \
-	    sed 1d
+	git rev-parse --not "${other_branches[@]}" | \
+	    git rev-list --parents --topo-order --reverse --stdin $newrev | \
+	    head -n 1 |&
+	read -p commit parent otherparents
+	git -c core.quotePath=false diff-tree $diffopts \
+	    "${parent:-$(:|git hash-object -t tree --stdin)}" "$newrev"
 }
 
 #
