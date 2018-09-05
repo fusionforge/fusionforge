@@ -15,12 +15,12 @@
 #
 # An example hook script to mail out commit update information.
 #
-# NOTE: This script is no longer under active development.  There
-# is another script, git-multimail, which is more capable and
-# configurable and is largely backwards-compatible with this script;
-# please see "contrib/hooks/multimail/".  For instructions on how to
-# migrate from post-receive-email to git-multimail, please see
-# "README.migrate-from-post-receive-email" in that directory.
+# This script is not under active development by the git team, with
+# git-multimail being suggested as replacement. It has downsides,
+# of course; this script is maintained as a fork, by mirabilos, for
+# 100% compatibility with the old version, plus bugfixes (encoding)
+# and new features (more and better diffs shown; cURL triggers and
+# “KGB” bot support, etc.) and optional FusionForge integration.
 #
 # This hook sends emails listing new revisions to the repository
 # introduced by the change being reported.  The rule is that (for
@@ -43,6 +43,7 @@
 #
 # This hook script needs the “en_US.UTF-8” locale set up on the server.
 # The MirBSD Korn Shell (mksh) must be installed as /bin/mksh and usable.
+# Perl or PHP with the Multibyte extension are required as well.
 #
 # This hook script assumes it is enabled on the central repository of a
 # project, with all users pushing only to it and not between each other.  It
