@@ -370,8 +370,15 @@ generate_create_branch_email()
 	echo "        at  $newrev ($newrev_type)"
 	echo ""
 
+	local newrevs=$(show_new_revisions)
+
+	if [[ -z $newrevs ]]; then
+		echo "No new revisions were added by this update."
+		return 0
+	fi
+
 	echo $LOGBEGIN
-	show_new_revisions
+	print -r -- "$newrevs"
 	echo $LOGEND
 }
 
@@ -523,20 +530,18 @@ generate_update_branch_email()
 		fi
 	fi
 
+	local newrevs=
+	[[ -n $rewind_only ]] || newrevs=$(show_new_revisions)
+
 	echo ""
-	if [ -z "$rewind_only" ]; then
+	if [[ -n $newrevs ]]; then
 		echo "Those revisions listed above that are new to this repository have"
 		echo "not appeared on any other notification email; so we list those"
 		echo "revisions in full, below."
 
 		echo ""
 		echo $LOGBEGIN
-		show_new_revisions
-
-		# XXX: Need a way of detecting whether git rev-list actually
-		# outputted anything, so that we can issue a "no new
-		# revisions added by this update" message
-
+		print -r -- "$newrevs"
 		echo $LOGEND
 	else
 		echo "No new revisions were added by this update."
@@ -744,6 +749,8 @@ show_new_revisions()
 	# ref that were previously not accessible
 	# (see generate_update_branch_email for the explanation of this
 	# command)
+
+	local revspec other_branches onerev
 
 	# Revision range passed to rev-list differs for new vs. updated
 	# branches.
