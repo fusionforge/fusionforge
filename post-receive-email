@@ -2,7 +2,7 @@
 #
 # Copyright © 2013
 #	Thorsten “mirabilos” Glaser <thorsten.glaser@teckids.org>
-# Copyright © 2011, 2012, 2013, 2014, 2015
+# Copyright © 2011, 2012, 2013, 2014, 2015, 2018
 #	Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
 # Copyright © 2016
 #	martin f krafft (madduck), Thorsten Glaser (mirabilos)
@@ -284,7 +284,7 @@ generate_email()
 
 generate_email_header()
 {
-	local routing_headers subj
+	local routing_headers subj senc failc=0
 
 	# --- Email (all stdout will be the email)
 	# Generate header
@@ -295,14 +295,36 @@ generate_email_header()
 
 	subj="Subject: ${emailprefix}$shortdesc $refname_type $short_refname ${change_type}d. $describe"
 
-	# Note: the Perl call is known to occasionally insert extra whitespace
-	# cf. https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=787513
-	subj=$(print -nr -- "$subj" | \
-	    perl -C7 -0777 -Mutf8 -MEncode -e "print encode('MIME-Q', <>);")
+	# Try to encode. Strongly prefer PHP over Perl and Python, sadly;
+	# evidence provided in Debian bugs #787511, #787512, #787513,
+	# #819155, #879204, #879205, #881955, #907891 though.
+	senc=$(print -nr -- "$subj" | php -r '
+		mb_internal_encoding("UTF-8");
+		echo mb_encode_mimeheader(file_get_contents("php://stdin"),
+		    "UTF-8", "Q", "\012");
+	    ' 2>/dev/null) || { (( failc |= 1 )); senc=; }
+	[[ $senc = Subject:?("$nl")' '* ]] || { (( failc |= 2 )); senc=; }
+	[[ -n $senc ]] || senc=$(print -nr -- "$subj" | perl \
+	    -C7 -0777 -Mutf8 -MEncode -e "
+		print encode('MIME-Q', <>);
+	    " 2>/dev/null) || { (( failc |= 4 )); senc=; }
+	[[ $senc = Subject:?("$nl")' '* ]] || { (( failc |= 8 )); senc=; }
 
-	if [[ -z $subj ]]; then
+	if [[ -z $senc ]]; then
 		print -u2 "E: Subject empty, RFC2047 MIME encoding failed"
-		exit 1
+		if ! whence -p php >/dev/null 2>&1; then
+			: show only the Perl-related error messages below
+		elif (( failc & 1 )); then
+			print -u2 "N: PHP encoding failed, perhaps install php-mbstring."
+		elif (( failc & 2 )); then
+			print -u2 "N: PHP encoding produced bad output, WTF‽"
+		fi
+		if (( failc & 4 )); then
+			print -u2 "N: Perl encoding failed, WTF‽ Also, install PHP."
+		elif (( failc & 8 )); then
+			print -u2 "N: Perl encoding produced bad output, install PHP!"
+		fi
+		senc="Subject: post-receive-email: no Subject, RFC2047 MIME encoding failed"
 	fi
 
 	cat <<-EOF
@@ -314,7 +336,7 @@ generate_email_header()
 	X-Git-Reftype: $refname_type
 	X-Git-Oldrev: $oldrev
 	X-Git-Newrev: $newrev
-	$subj
+	$senc
 	Auto-Submitted: auto-generated
 
 	This is an automated email from the git hooks/post-receive script. It was
