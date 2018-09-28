@@ -2,7 +2,13 @@ fusionforge (6.1.50-0) UNRELEASED; urgency=medium
 
   * New snapshot from master branch.
 
- -- Franck Villaume <franck.villaume@trivialdev.com>  Sat, 26 May 2018 10:00:00 +0100
+ -- Franck Villaume <franck.villaume@trivialdev.com>  Fri, 28 Sep 2018 15:27:00 +0100
+
+fusionforge (6.1) UNRELEASED; urgency=medium
+
+  * New upstream release.
+
+ -- Franck Villaume <franck.villaume@trivialdev.com>  Thu, 27 Sep 2018 16:43:00 +0100
 
 fusionforge (6.1~rc3) UNRELEASED; urgency=medium
 

@@ -91,7 +91,7 @@ install_selenium() {
 		fi
 		yum --enablerepo=epel install -y php-phpunit-PHPUnit php-phpunit-PHPUnit-Selenium psmisc patch net-tools
 		# Firefox > 60 does not work with Selenium 2
-		yum downgrade -y firefox
+		yum downgrade -y firefox-52.8.0-1.el7.centos
 	fi
 
 	# Install selenium (no packaged version available)

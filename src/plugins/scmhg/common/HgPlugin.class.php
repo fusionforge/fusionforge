@@ -83,7 +83,7 @@ Offer DAV or SSH access.");
 				$b .= html_e('kbd', array(), 'hg clone '.$protocol.'://'.$this->getBoxForProject($project).'/anonscm/'.'hg'.'/'.$project->getUnixName().'/'.$repo_name).html_e('br');
 			}
 		} else {
-			$b .= $HTML->warning_msg(_('Please contact forge administrator, scmhg plugin is not correctly configured'));
+			$b .= $HTML->warning_msg(_('Anonymous browsing not available using ssh access.'));
 		}
 		return $b;
 	}
