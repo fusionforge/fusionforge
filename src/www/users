@@ -83,10 +83,17 @@ if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
 				exit(0);
 		}
 	} else { // default HTML view
-		$user_id = $user->getID();
-
 		//now show the user page
-		include $gfwww.'include/user_home.php';
+		$title = _('User Profile');
+		$HTML->header(array('title'=>$title));
+
+		if (!forge_get_config('user_home_widget')) {
+			include $gfwww.'include/user_home.php';
+		} else {
+			$lm = new WidgetLayoutManager();
+			$lm->displayLayout($user->getID(), WidgetLayoutManager::OWNER_TYPE_USERHOME);
+		}
+		$HTML->footer();
 	}
 }
 

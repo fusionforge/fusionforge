@@ -21,6 +21,7 @@
 
 require_once $gfcommon.'widget/WidgetLayoutManager.class.php';
 
+// User HomePage Widgets
 require_once $gfcommon.'widget/Widget_MySurveys.class.php';
 require_once $gfcommon.'widget/Widget_MyProjects.class.php';
 require_once $gfcommon.'widget/Widget_MyBookmarks.class.php';
@@ -34,6 +35,8 @@ require_once $gfcommon.'widget/Widget_MyTasks.class.php';
 require_once $gfcommon.'widget/Widget_MyRss.class.php';
 require_once $gfcommon.'widget/Widget_MyAdmin.class.php';
 require_once $gfcommon.'widget/Widget_MySystasks.class.php';
+
+// Project HomePage Widgets
 require_once $gfcommon.'widget/Widget_ProjectDescription.class.php';
 require_once $gfcommon.'widget/Widget_ProjectMembers.class.php';
 require_once $gfcommon.'widget/Widget_ProjectInfo.class.php';
@@ -46,6 +49,8 @@ require_once $gfcommon.'widget/Widget_ProjectRss.class.php';
 require_once $gfcommon.'widget/Widget_ProjectLatestCommits.class.php';
 require_once $gfcommon.'widget/Widget_ProjectLatestArtifacts.class.php';
 require_once $gfcommon.'widget/Widget_ProjectScmStats.class.php';
+
+// Forge HomePage Widgets
 require_once $gfcommon.'widget/Widget_HomeDetailActivityMostActiveProjectWeek.class.php';
 require_once $gfcommon.'widget/Widget_HomeLatestNews.class.php';
 require_once $gfcommon.'widget/Widget_HomeLatestFileReleases.class.php';
@@ -53,12 +58,21 @@ require_once $gfcommon.'widget/Widget_HomeStats.class.php';
 require_once $gfcommon.'widget/Widget_HomeTagCloud.class.php';
 require_once $gfcommon.'widget/Widget_HomeVersion.class.php';
 require_once $gfcommon.'widget/Widget_HomeRss.class.php';
+
+// Tracker Widgets
 require_once $gfcommon.'widget/Widget_TrackerComment.class.php';
 require_once $gfcommon.'widget/Widget_TrackerContent.class.php';
 require_once $gfcommon.'widget/Widget_TrackerDefaultActions.class.php';
 require_once $gfcommon.'widget/Widget_TrackerGeneral.class.php';
 require_once $gfcommon.'widget/Widget_TrackerMain.class.php';
 require_once $gfcommon.'widget/Widget_TrackerSummary.class.php';
+
+// UserHome People Widgets
+require_once $gfcommon.'widget/Widget_UserhomePersonalInformation.class.php';
+require_once $gfcommon.'widget/Widget_UserhomeProjectInformation.class.php';
+require_once $gfcommon.'widget/Widget_UserhomePeerRatings.class.php';
+require_once $gfcommon.'widget/Widget_UserhomeActivity.class.php';
+
 
 /**
  * FusionForge Layout Widget
@@ -171,7 +185,7 @@ require_once $gfcommon.'widget/Widget_TrackerSummary.class.php';
 	 * @param string $widget_name
 	 * @return Widget instance
 	 */
-	static function & getInstance($widget_name) {
+	static function & getInstance($widget_name, $owner_id) {
 		$o = null;
 		switch($widget_name) {
 			case 'homelatestnews':
@@ -292,6 +306,18 @@ require_once $gfcommon.'widget/Widget_TrackerSummary.class.php';
 			case 'trackersummary':
 				$o = new Widget_TrackerSummary();
 				break;
+			case 'uhpersonalinformation':
+				$o = new Widget_UserhomePersonalInformation($owner_id);
+				break;
+			case 'uhprojectinformation':
+				$o = new Widget_UserhomeProjectInformation($owner_id);
+				break;
+			case 'uhpeerratings':
+				$o = new Widget_UserhomePeerRatings($owner_id);
+				break;
+			case 'uhactivity':
+				$o = new Widget_UserhomeActivity($owner_id);
+				break;
 			default:
 				//$em = EventManager::instance();
 				//$em->processEvent('widget_instance', array('widget' => $widget_name, 'instance' => &$o));
@@ -331,6 +357,8 @@ require_once $gfcommon.'widget/Widget_TrackerSummary.class.php';
 			case WidgetLayoutManager::OWNER_TYPE_TRACKER:
 				$widgets = array('trackercontent', 'trackercomment', 'trackerdefaultactions', 'trackergeneral', 'trackermain', 'trackersummary');
 				break;
+			case WidgetLayoutManager::OWNER_TYPE_USERHOME:
+				$widgets = array('uhpersonalinformation', 'uhprojectinformation', 'uhpeerratings', 'uhactivity');
 			default:
 				$widgets = array();
 				break;

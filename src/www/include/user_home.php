@@ -32,9 +32,6 @@
 require_once $gfcommon.'include/user_profile.php';
 require_once $gfwww.'include/vote_function.php';
 
-$title = _('User Profile');
-$HTML->header(array('title'=>$title));
-
 echo $HTML->boxTop(_('Personal Information'), _('Personal Information'));
 echo html_ao('div', array('about' => '', 'typeof' => 'sioc:UserAccount'));
 echo user_personal_information($user);
@@ -43,7 +40,7 @@ if (forge_get_config('use_ratings')) {
 	echo $HTML->boxMiddle(_('Peer Rating'), _('Peer Rating'));
 	echo '<table class="my-layout-table" id="user-profile-rating">';
 	if ($user->usesRatings()) {
-		vote_show_user_rating($user_id);
+		vote_show_user_rating($user->getID());
 	} else {
 		echo '<tr><td colspan="2">';
 		echo _('User chose not to participate in peer rating');
@@ -55,36 +52,32 @@ if (forge_get_config('use_ratings')) {
 if (forge_get_config('use_diary')) {
 	echo $HTML->boxMiddle(_('Diary and Notes'), _('Diary and Notes'));
 
-	/*
-		Get their diary information
-	*/
+	/* Get their diary information */
 
 	$res = db_query_params('SELECT count(*) from user_diary WHERE user_id=$1 AND is_public=1',
-				array($user_id));
+				array($user->getID()));
 	echo _('Diary/Note entries')._(': ').db_result($res, 0, 0).'
 		<p>';
 		//.'<span rel="foaf:weblog">'
-		echo util_make_link('/developer/diary.php?diary_user='.$user_id,htmlentities(_('View Diary and Notes')));
-		//.'</span>'.
-		echo '</p>
-		<p>';
-		echo util_make_link('/developer/monitor.php?diary_user='.$user_id,
-						html_image("ic/check.png", 15, 13) ._('Monitor this Diary')
-			) ;
-		echo '</p>';
-		$hookparams['user_id'] = $user_id;
-		plugin_hook("user_personal_links", $hookparams);
-	}
-	?>
+	echo util_make_link('/developer/diary.php?diary_user='.$user->getID(), htmlentities(_('View Diary and Notes')));
+	//.'</span>'.
+	echo '</p>
+	<p>';
+	echo util_make_link('/developer/monitor.php?diary_user='.$user->getID(),
+					html_image("ic/check.png", 15, 13) ._('Monitor this Diary')
+		) ;
+	echo '</p>';
+	$hookparams['user_id'] = $user->getID();
+	plugin_hook("user_personal_links", $hookparams);
+}
 
-<?php
 
 echo $HTML->boxMiddle(_('Project Information'), _('Project Information'));
 
 $projects = $user->getGroups();
 sortProjectList ($projects) ;
-$roles = RBACEngine::getInstance()->getAvailableRolesForUser ($user) ;
-sortRoleList ($roles) ;
+$roles = RBACEngine::getInstance()->getAvailableRolesForUser($user);
+sortRoleList($roles);
 
 // see if there were any groups
 echo '<div>'."\n";
@@ -153,13 +146,13 @@ if (forge_get_config('use_ratings')) {
 		print "<p>";
 		printf(_('The %s Peer Rating system is based on concepts from <a href="http://www.advogato.com/">Advogato.</a> The system has been re-implemented and expanded in a few ways.'), forge_get_config ('forge_name'));
 		print "</p>";
-?>
+	?>
 
-	<div class="align-center">
-        <?php vote_show_user_rate_box ($user_id, $me?$me->getID():0); ?>
-	</div>
+		<div class="align-center">
+		<?php vote_show_user_rate_box ($user->getID(), $me? $me->getID() : 0); ?>
+		</div>
 
-<?php
+	<?php
 		print "<p>";
 		print _('The Peer rating box shows all rating averages (and response levels) for each individual criteria. Due to the math and processing required to do otherwise, these numbers incorporate responses from both “trusted” and “non-trusted” users.');
 		print "</p>";
@@ -180,22 +173,21 @@ if (forge_get_config('use_ratings')) {
 
 		print "<p>";
 		print "<em>";
-		print _('If you would like to opt-out from peer rating system (this will affect your ability to both rate and be rated), refer to <a href="/account/">your account maintenance page</a>. If you choose not to participate, your ratings of other users will be permanently deleted and the “Peer Rating” box will disappear from your user page.');
+		printf(_('If you would like to opt-out from peer rating system (this will affect your ability to both rate and be rated), refer to <a href="%s">your account maintenance page</a>. If you choose not to participate, your ratings of other users will be permanently deleted and the “Peer Rating” box will disappear from your user page.'),
+				util_make_url("/account"));
 		print "</em>";
 		print "</p>";
 
-} elseif ($me && !$me->usesRatings()) {
+	} elseif ($me && !$me->usesRatings()) {
 		print "<p>";
 		print "<em>";
-		printf (_('You opted-out from peer rating system, otherwise you would have a chance to rate the user. Refer to <a href="%s">your account maintenance page</a> for more information.'),
-				  util_make_url ("/account"));
+		printf(_('You opted-out from peer rating system, otherwise you would have a chance to rate the user. Refer to <a href="%s">your account maintenance page</a> for more information.'),
+				util_make_url("/account"));
 		print "</em>";
 		print "</p>";
 	}
 }
 echo $HTML->boxBottom();
-
-$HTML->footer();
 
 // Local Variables:
 // mode: php

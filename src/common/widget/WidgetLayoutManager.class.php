@@ -35,10 +35,11 @@ class WidgetLayoutManager {
 	/**
 	 * define constants for type of widget page
 	 */
-	const OWNER_TYPE_USER    = 'u';
-	const OWNER_TYPE_GROUP   = 'g';
-	const OWNER_TYPE_HOME    = 'h';
-	const OWNER_TYPE_TRACKER = 't';
+	const OWNER_TYPE_USER     = 'u';
+	const OWNER_TYPE_GROUP    = 'g';
+	const OWNER_TYPE_HOME     = 'h';
+	const OWNER_TYPE_TRACKER  = 't';
+	const OWNER_TYPE_USERHOME = 'p';
 
 	/**
 	 * displayLayout
@@ -64,6 +65,9 @@ class WidgetLayoutManager {
 			} elseif ($owner_type == self::OWNER_TYPE_TRACKER) {
 				$this->createDefaultLayoutForTracker($owner_id);
 				$this->displayLayout($owner_id, $owner_type);
+			} elseif ($owner_type == self::OWNER_TYPE_USERHOME) {
+				$this->createDefaultLayoutForUserHome($owner_id);
+				$this->displayLayout($owner_id, $owner_type);
 			}
 		} else {
 			$sql = "SELECT l.*
@@ -77,17 +81,17 @@ class WidgetLayoutManager {
 				$readonly = !$this->_currentUserCanUpdateLayout($owner_id, $owner_type);
 				$layout = new WidgetLayout($data['id'], $data['name'], $data['description'], $data['scope']);
 				$sql = 'SELECT * FROM layouts_rows WHERE layout_id = $1 ORDER BY rank';
-				$req_rows = db_query_params($sql,array($layout->id));
+				$req_rows = db_query_params($sql, array($layout->id));
 				while ($data = db_fetch_array($req_rows)) {
 					$row = new WidgetLayout_Row($data['id'], $data['rank']);
 					$sql = 'SELECT * FROM layouts_rows_columns WHERE layout_row_id = $1';
-					$req_cols = db_query_params($sql,array($row->id));
+					$req_cols = db_query_params($sql, array($row->id));
 					while ($data = db_fetch_array($req_cols)) {
 						$col = new WidgetLayout_Row_Column($data['id'], $data['width']);
 						$sql = "SELECT * FROM layouts_contents WHERE owner_type = $1  AND owner_id = $2 AND column_id = $3 ORDER BY rank";
-						$req_content = db_query_params($sql,array($owner_type, $owner_id, $col->id));
+						$req_content = db_query_params($sql, array($owner_type, $owner_id, $col->id));
 						while ($data = db_fetch_array($req_content)) {
-							$c = Widget::getInstance($data['name']);
+							$c = Widget::getInstance($data['name'], $owner_id);
 							if ($c && $c->isAvailable()) {
 								$c->loadContent($data['content_id']);
 								$col->add($c, $data['is_minimized'], $data['display_preferences']);
@@ -117,6 +121,7 @@ class WidgetLayoutManager {
 		$request =& HTTPRequest::instance();
 		switch ($owner_type) {
 			case self::OWNER_TYPE_USER:
+			case self::OWNER_TYPE_USERHOME:
 				if (user_getid() == $owner_id) { //Current user can only update its own /my/ page
 					$modify = true;
 				}
@@ -140,6 +145,43 @@ class WidgetLayoutManager {
 				break;
 		}
 		return $modify;
+	}
+
+	function createDefaultLayoutForUserHome($owner_id) {
+		db_begin();
+		$success = true;
+		$sql = "INSERT INTO owner_layouts(layout_id, is_default, owner_id, owner_type) VALUES (1, 1, $1, $2)";
+		if (db_query_params($sql, array($owner_id, self::OWNER_TYPE_USERHOME))) {
+
+			$sql = "INSERT INTO layouts_contents(owner_id, owner_type, layout_id, column_id, name, rank) VALUES ";
+
+			$args[] = "($1, $2, 1, 1, 'uhpersonalinformation', 0)";
+			$args[] = "($1, $2, 1, 1, 'uhprojectinformation', 1)";
+			$args[] = "($1, $2, 1, 1, 'uhpeerratings', 2)";
+			$args[] = "($1, $2, 1, 2, 'uhactivity', 0)";
+
+			foreach($args as $a) {
+				if (!db_query_params($sql.$a, array($owner_id, self::OWNER_TYPE_USERHOME))) {
+					$success = false;
+					break;
+				}
+			}
+
+			/*  $em =& EventManager::instance();
+			    $widgets = array();
+			    $em->processEvent('default_widgets_for_new_owner', array('widgets' => &$widgets, 'owner_type' => self::OWNER_TYPE_USER));
+			    foreach($widgets as $widget) {
+			    $sql .= ",($13, $14, 1, $15, $16, $17)";
+			    }*/
+		} else {
+			$success = false;
+		}
+		if (!$success) {
+			$success = db_error();
+			db_rollback();
+			exit_error(_('DB Error')._(': ').$success, 'widgets');
+		}
+		db_commit();
 	}
 	/**
 	 * createDefaultLayoutForUser
@@ -171,7 +213,7 @@ class WidgetLayoutManager {
 			$args[] = "($1, $2, 1, 2, 'mymonitoredfp', 1)";
 
 			foreach($args as $a) {
-				if (!db_query_params($sql.$a,array($owner_id, self::OWNER_TYPE_USER))) {
+				if (!db_query_params($sql.$a, array($owner_id, self::OWNER_TYPE_USER))) {
 					$success = false;
 					break;
 				}
@@ -209,7 +251,7 @@ class WidgetLayoutManager {
 			$args[] = "($1, $2, 1, 1, 'homelatestnews', 1)";
 
 			foreach($args as $a) {
-				if (!db_query_params($sql.$a,array(0, self::OWNER_TYPE_HOME))) {
+				if (!db_query_params($sql.$a, array(0, self::OWNER_TYPE_HOME))) {
 					$success = false;
 					break;
 				}
@@ -866,7 +908,7 @@ class WidgetLayoutManager {
 			AND u.layout_id = $4
 			AND u.column_id <> 0
 			ORDER BY col.rank, col.id";
-		$res = db_query_params($sql,array($layout_id, $owner_type, $owner_id, $layout_id));
+		$res = db_query_params($sql, array($layout_id, $owner_type, $owner_id, $layout_id));
 		echo db_error();
 		$column_id = db_result($res, 0, 'id');
 		if (!$column_id) {
@@ -894,7 +936,7 @@ class WidgetLayoutManager {
 			AND owner_id = $2
 			AND layout_id = $3
 			AND name = $4";
-		$res = db_query_params($sql,array($owner_type, $owner_id, $layout_id, $name));
+		$res = db_query_params($sql, array($owner_type, $owner_id, $layout_id, $name));
 		echo db_error();
 		if (db_numrows($res) && !$widget->isUnique() && db_result($res, 0, 'column_id') == 0) {
 			//search for rank
