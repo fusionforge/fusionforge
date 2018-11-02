@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2012,2014,2016-2017, Franck Villaume - TrivialDev
+ * Copyright 2012,2014,2016-2018, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -185,7 +185,7 @@ require_once $gfcommon.'widget/Widget_UserhomeActivity.class.php';
 	 * @param string $widget_name
 	 * @return Widget instance
 	 */
-	static function & getInstance($widget_name, $owner_id) {
+	static function & getInstance($widget_name, $owner_id = null) {
 		$o = null;
 		switch($widget_name) {
 			case 'homelatestnews':
