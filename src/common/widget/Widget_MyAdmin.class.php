@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2012, 2014 Franck Villaume - TrivialDev
+ * Copyright 2012,2014, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -31,9 +31,11 @@ class Widget_MyAdmin extends Widget {
 	function __construct() {
 		parent::__construct('myadmin');
 	}
+
 	function getTitle() {
 		return _('Pending administrative tasks');
 	}
+
 	function getContent() {
 		global $HTML;
 		$i = 0;
@@ -94,9 +96,11 @@ class Widget_MyAdmin extends Widget {
 
 		return $html_my_admin;
 	}
+
 	function _get_color($nb) {
 		return $nb == 0 ? 'green' : 'orange';
 	}
+
 	function _get_admin_row($i, $text, $value, $bgcolor, $textcolor = 'white') {
 		global $HTML;
 		$cells = array();
