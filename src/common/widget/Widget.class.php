@@ -35,6 +35,7 @@ require_once $gfcommon.'widget/Widget_MyTasks.class.php';
 require_once $gfcommon.'widget/Widget_MyRss.class.php';
 require_once $gfcommon.'widget/Widget_MyAdmin.class.php';
 require_once $gfcommon.'widget/Widget_MySystasks.class.php';
+require_once $gfcommon.'widget/Widget_MyFollowers.class.php';
 
 // Project HomePage Widgets
 require_once $gfcommon.'widget/Widget_ProjectDescription.class.php';
@@ -252,6 +253,9 @@ require_once $gfcommon.'widget/Widget_UserhomeActivity.class.php';
 			case 'mysystasks':
 				$o = new Widget_MySystasks();
 				break;
+			case 'myfollowers':
+				$o = new Widget_MyFollowers();
+				break;
 			case 'projectdescription':
 				$o = new Widget_ProjectDescription();
 				break;
@@ -339,7 +343,7 @@ require_once $gfcommon.'widget/Widget_UserhomeActivity.class.php';
 		switch ($owner_type) {
 			case WidgetLayoutManager::OWNER_TYPE_USER:
 				$widgets = array('myadmin', 'mysurveys', 'myprojects', 'mybookmarks',
-						'mymonitoredforums', 'mymonitoredfp', 'myartifacts', 'mysystasks',
+						'mymonitoredforums', 'mymonitoredfp', 'myartifacts', 'mysystasks', 'myfollowers',
 						'mytasks', 'mylatestcommits', 'myrss', 'mymonitoreddocuments', 'myprojectslastdocuments',
 						);
 				break;

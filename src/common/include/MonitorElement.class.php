@@ -2,7 +2,7 @@
 /**
  * FusionForge MonitorElement Object
  *
- * Copyright 2014,2017, Franck Villaume - TrivialDev
+ * Copyright 2014,2017-2018, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -121,6 +121,16 @@ class MonitorElement extends FFError {
 				break;
 			}
 			case 'frsrelease': {
+				break;
+			}
+			case 'user': {
+				$this->_clearMonitorQuery = 'delete from user_diary_monitor where monitored_user = $1';
+				$this->_clearMonitorForUserIdQuery = 'delete from user_diary_monitor where user_id = $1';
+				$this->_enableMonitoringByUserIdQuery = 'insert into user_diary_monitor (monitored_user, user_id) values ($1, $2)';
+				$this->_disableMonitoringByUserIdQuery = 'delete from user_diary_monitor where monitored_user = $1 and user_id = $2';
+				$this->_getMonitorUsersIdsInArrayQuery = 'select user_diary_monitor.user_id from user_diary_monitor, users where users.user_id = user_diary_monitor.monitored_user and user_diary_monitor.monitored_user = $1 and users.status = $2';
+				$this->_getMonitoredByUserIdInArrayQuery = 'select monitored_user from user_diary_monitor where user_id = $1';
+				$this->_isMonitoredByUserIdQuery = 'select monitored_user from user_diary_monitor where monitored_user = $1 and user_id = $2';
 				break;
 			}
 			default: {

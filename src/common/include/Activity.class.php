@@ -2,7 +2,7 @@
 /**
  * Activity Class
  *
- * Copyright 2017, Franck Villaume - TrivialDev
+ * Copyright 2017,2018, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -63,6 +63,14 @@ class Activity extends FFError {
 				}
 				case 'mediawiki': {
 					$cached_perms[$s][$ref] = forge_check_perm('plugin_mediawiki_read', $group_id, 'read');
+					break;
+				}
+				case 'diaryentry': {
+					if ($arr['subref_id']) {
+						$cached_perms[$s][$ref] = true;
+					} else {
+						$cached_perms[$s][$ref] = false;
+					}
 					break;
 				}
 				default: {
@@ -163,6 +171,11 @@ class Activity extends FFError {
 				$url = util_make_link('/docman/?group_id='.$arr['group_id'].'&view='.$view.'&dirid='.$arr['subref_id'],_('Directory').' '.$arr['description']);
 				break;
 			}
+			case 'diaryentry': {
+				$icon = '';
+				$url = util_make_link('/developer/diary.php?diary_id='.$arr['ref_id'].'&diary_user='.$arr['user_id'], $arr['description']);
+				break;
+			}
 			default: {
 				$icon = isset($arr['icon']) ? $arr['icon'] : '';
 				$url = '<a href="'.$arr['link'].'">'.$arr['title'].'</a>';
@@ -199,6 +212,35 @@ class Activity extends FFError {
 		$res = db_query_params('SELECT * FROM activity_vw WHERE activity_date BETWEEN $1 AND $2
 					AND group_id = ANY ($3) ORDER BY activity_date DESC',
 				array($begin, $end, db_int_array_to_any_clause($selected_groups)));
+		if ($res && db_numrows($res) > 0) {
+			while ($arr = db_fetch_array($res)) {
+				$activities[] = $arr;
+			}
+		}
+		return $activities;
+	}
+
+	function getActivitiesForUser($user_id, $begin, $end, $section) {
+		$activities = array();
+		$res = db_query_params('SELECT * FROM activity_vw WHERE activity_date BETWEEN $1 AND $2
+				AND user_id = $3 AND section = ANY ($4) ORDER BY activity_date DESC',
+				array($begin,
+					$end,
+					$user_id,
+					db_string_array_to_any_clause($section)));
+		if ($res && db_numrows($res) > 0) {
+			while ($arr = db_fetch_array($res)) {
+				$activities[] = $arr;
+			}
+		}
+		return $activities;
+	}
+
+	function getActivitiesForUsers($selected_users, $begin, $end) {
+		$activities = array();
+		$res = db_query_params('SELECT * FROM activity_vw WHERE activity_date BETWEEN $1 AND $2
+					AND user_id = ANY ($3) ORDER BY activity_date DESC',
+				array($begin, $end, db_int_array_to_any_clause($selected_users)));
 		if ($res && db_numrows($res) > 0) {
 			while ($arr = db_fetch_array($res)) {
 				$activities[] = $arr;
