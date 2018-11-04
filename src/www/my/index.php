@@ -43,7 +43,7 @@ $sql = "SELECT l.*
 		AND o.owner_id = $2
 		AND o.is_default = 1
 		";
-$res = db_query_params($sql,array('u', $user->getID()));
+$res = db_query_params($sql,array(WidgetLayoutManager::OWNER_TYPE_USER, $user->getID()));
 $layout_id = db_result($res, 0 , 'id');
 if (!$layout_id) {
 	$layout_id = 1;
@@ -51,7 +51,7 @@ if (!$layout_id) {
 
 $ap = html_ap();
 echo html_ao('ul', array('class' => 'widget_toolbar'));
-$url = '/widgets/widgets.php?owner=u'.$user->getID().'&layout_id='.$layout_id;
+$url = '/widgets/widgets.php?owner='.WidgetLayoutManager::OWNER_TYPE_USER.$user->getID().'&layout_id='.$layout_id;
 $labels = array(_('Add widgets'), _('Customize Layout'));
 $urls = array($url, $url.'&update=layout');
 for ($i = 0; $i < count($urls); $i++) {
