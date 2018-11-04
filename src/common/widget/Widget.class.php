@@ -363,6 +363,7 @@ require_once $gfcommon.'widget/Widget_UserhomeActivity.class.php';
 				break;
 			case WidgetLayoutManager::OWNER_TYPE_USERHOME:
 				$widgets = array('uhpersonalinformation', 'uhprojectinformation', 'uhpeerratings', 'uhactivity');
+				break;
 			default:
 				$widgets = array();
 				break;
