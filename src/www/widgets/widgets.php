@@ -1,7 +1,7 @@
 <?php
 /**
  *
- * Copyright 2011-2014,2016, Franck Villaume - TrivialDev
+ * Copyright 2011-2014,2016,2018, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -48,12 +48,13 @@ if (session_loggedin()) {
 			$owner_type = substr($owner, 0, 1);
 			switch($owner_type) {
 				case WidgetLayoutManager::OWNER_TYPE_USER:
-					$owner_id = user_getid();
-					$userm = UserManager::instance();
-					$current = $userm->getCurrentUser();
-					site_user_header(array('title'=>sprintf(_('Personal Page for %s'), user_getname())));
-					$lm->displayAvailableWidgets(user_getid(), WidgetLayoutManager::OWNER_TYPE_USER, $layout_id);
-					site_footer();
+					if ($owner_id == user_getid()) {
+						$userm = UserManager::instance();
+						$current = $userm->getCurrentUser();
+						site_user_header(array('title'=>sprintf(_('Personal Page for %s'), user_getname())));
+						$lm->displayAvailableWidgets(user_getid(), WidgetLayoutManager::OWNER_TYPE_USER, $layout_id);
+						site_footer();
+					}
 					break;
 				case WidgetLayoutManager::OWNER_TYPE_GROUP:
 					$pm = ProjectManager::instance();
