@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2016, Franck Villaume - TrivialDev
+ * Copyright 2016,2018, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -39,10 +39,11 @@ if ($owner) {
 	$owner_type = substr($owner, 0, 1);
 	switch($owner_type) {
 		case WidgetLayoutManager::OWNER_TYPE_USER:
-			$owner_id = user_getid();
-			$layout_id =(int)$request->get('layout_id');
-			$redirect = '/my/';
-			$good = true;
+			if ($owner_id ==  user_getid()) {
+				$layout_id =(int)$request->get('layout_id');
+				$redirect = '/my/';
+				$good = true;
+			}
 			break;
 		case WidgetLayoutManager::OWNER_TYPE_GROUP:
 			$pm = ProjectManager::instance();
@@ -79,6 +80,14 @@ if ($owner) {
 				if (!forge_check_global_perm('forge_admin') && !forge_check_perm('tracker_admin', $at->getID())) {
 					$GLOBALS['Response']->redirect($redirect);
 				}
+				$good = true;
+			}
+			break;
+		case WidgetLayoutManager::OWNER_TYPE_USERHOME:
+			if ($owner_id == user_getid()) {
+				$user = user_get_object(user_getid());
+				$layout_id =(int)$request->get('layout_id');
+				$redirect = '/users/'.$user->getUnixName();
 				$good = true;
 			}
 			break;

@@ -107,6 +107,15 @@ if (session_loggedin()) {
 						}
 					}
 					break;
+				case WidgetLayoutManager::OWNER_TYPE_USERHOME:
+					if ($owner_id == user_getid()) {;
+						$userm = UserManager::instance();
+						$current = $userm->getCurrentUser();
+						site_header(array('title'=>sprintf(_('Profile Page for %s'), user_getname())));
+						$lm->displayAvailableWidgets(user_getid(), WidgetLayoutManager::OWNER_TYPE_USERHOME, $layout_id);
+						site_footer();
+					}
+					break;
 				default:
 					break;
 			}

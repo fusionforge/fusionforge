@@ -2,7 +2,7 @@
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013-2017, Franck Villaume - TrivialDev
+ * Copyright 2013-2018, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -560,7 +560,7 @@ class WidgetLayoutManager {
 			AND owner_id = $2
 			AND layout_id = $3
 			AND content_id = 0 AND column_id <> 0";
-		$res = db_query_params($sql,array($owner_type, $owner_id, $layout_id));
+		$res = db_query_params($sql, array($owner_type, $owner_id, $layout_id));
 		while($data = db_fetch_array($res)) {
 			$used_widgets[] = $data['name'];
 		}
@@ -616,7 +616,7 @@ class WidgetLayoutManager {
 			//]]></script>
 			<?php
 			$sql = "SELECT * FROM layouts WHERE scope='S' ORDER BY id ";
-			$req_layouts = db_query_params($sql,array());
+			$req_layouts = db_query_params($sql, array());
 			echo $HTML->listTableTop();
 			$is_custom = true;
 			while ($data = db_fetch_array($req_layouts)) {
@@ -676,7 +676,7 @@ class WidgetLayoutManager {
 				<tbody>
 				<tr class="top">
 				<td>';
-			$after .= $this->_displayWidgetsSelectionForm(sprintf(_("%s Widgets"),  forge_get_config('forge_name')), Widget::getCodendiWidgets($owner_type), $used_widgets);
+			$after .= $this->_displayWidgetsSelectionForm(Widget::getCodendiWidgets($owner_type), $used_widgets, $owner_id);
 			echo '</td>
 				<td id="widget-content-categ">'. $after .'</td>
 				</tr>
@@ -806,16 +806,16 @@ class WidgetLayoutManager {
 	/**
 	 * _displayWidgetsSelectionForm - displays a widget selection form
 	 *
-	 * @param	string	$title			title
-	 * @param	array	$widgets		widgets
+	 * @param	array	$widgets	widgets
 	 * @param	array	$used_widgets	used widgets
+	 * @param	int	$owner_id
 	 * @return	string
 	 */
-	function _displayWidgetsSelectionForm($title, $widgets, $used_widgets) {
+	function _displayWidgetsSelectionForm($widgets, $used_widgets, $owner_id = null) {
 		$hp = Codendi_HTMLPurifier::instance();
 		$additionnal_html = '';
 		if (count($widgets)) {
-			$categs = $this->getCategories($widgets);
+			$categs = $this->getCategories($widgets, $owner_id);
 			$widget_rows = array();
 			if (count($categs)) {
 				// display the categories selector in left panel
@@ -861,12 +861,13 @@ class WidgetLayoutManager {
 	 * getCategories - sort the widgets in their different categories
 	 *
 	 * @param	array	$widgets
+	 * @param	int	$owner_id
 	 * @return	array	(category => widgets)
 	 */
-	function getCategories($widgets) {
+	function getCategories($widgets, $owner_id = null) {
 		$categ = array();
 		foreach($widgets as $widget_name) {
-			if ($widget = Widget::getInstance($widget_name)) {
+			if ($widget = Widget::getInstance($widget_name, $owner_id)) {
 				if ($widget->isAvailable()) {
 					$category = str_replace(' ', '_', $widget->getCategory());
 					$cs = explode(',', $category);

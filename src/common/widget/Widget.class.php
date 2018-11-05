@@ -339,7 +339,7 @@ require_once $gfcommon.'widget/Widget_UserhomeActivity.class.php';
 	 * @param unknown_type $owner_type
 	 * @return mixed
 	 */
-	static function getCodendiWidgets($owner_type) {
+	static function getCodendiWidgets($owner_type, $owner_id = null) {
 		switch ($owner_type) {
 			case WidgetLayoutManager::OWNER_TYPE_USER:
 				$widgets = array('myadmin', 'mysurveys', 'myprojects', 'mybookmarks',
