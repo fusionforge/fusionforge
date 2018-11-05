@@ -89,4 +89,4 @@ class Widget_UserhomePeerRatings extends Widget {
 		print "</em>";
 		print "</p>";
 	}
-} 
+}

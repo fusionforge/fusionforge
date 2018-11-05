@@ -159,4 +159,4 @@ class Widget_UserhomeActivity extends Widget {
 			}
 		}
 	}
-}  
+}

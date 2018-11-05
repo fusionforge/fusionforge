@@ -95,4 +95,4 @@ class Widget_UserhomeProjectInformation extends Widget {
 			}
 		} // end if groups
 	}
-} 
+}
