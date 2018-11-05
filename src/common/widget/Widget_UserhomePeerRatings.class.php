@@ -1,6 +1,6 @@
 <?php
 /**
- * Userhome Peer Ratings Widget Class
+ * Userhome Peer Rating Widget Class
  *
  * Copyright 2018, Franck Villaume - TrivialDev
  * http://fusionforge.org
@@ -34,7 +34,7 @@ class Widget_UserhomePeerRatings extends Widget {
 			if ($user->usesRatings() && (!$me || $me->usesRatings())) {
 				$this->owner_id = $owner_id;
 				parent::__construct('uhpeerratings', $owner_id, WidgetLayoutManager::OWNER_TYPE_USERHOME);
-				$this->title = _('Peer Ratings');
+				$this->title = _('Peer Rating');
 			}
 		}
 	}
