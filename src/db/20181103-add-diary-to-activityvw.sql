@@ -1,6 +1,6 @@
  CREATE OR REPLACE VIEW activity_vw AS
- SELECT agl.group_id,                                                                                                                                                                                                  
-    'trackeropen'::text AS section,                                                                                                                                                                                    
+ SELECT agl.group_id,
+    'trackeropen'::text AS section,
     agl.group_artifact_id AS ref_id,
     a.artifact_id AS subref_id,
     a.summary AS description,
