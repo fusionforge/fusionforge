@@ -149,7 +149,7 @@ if (forge_get_config('use_ratings')) {
 	?>
 
 		<div class="align-center">
-		<?php vote_show_user_rate_box ($user->getID(), $me? $me->getID() : 0); ?>
+			<?php vote_show_user_rate_box($user->getID(), $me ? $me->getID() : 0); ?>
 		</div>
 
 	<?php
