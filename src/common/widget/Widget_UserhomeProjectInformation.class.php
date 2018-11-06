@@ -46,53 +46,55 @@ class Widget_UserhomeProjectInformation extends Widget {
 		sortProjectList ($projects) ;
 		$roles = RBACEngine::getInstance()->getAvailableRolesForUser($user);
 		sortRoleList($roles);
-		if (count ($projects) < 1) {
-			echo $HTML->information(_('This user is not a member of any project.'));
-		} else { // endif no groups
-			echo html_e('p', array(), _('This user is a member of the following projects')._(':'));
-
-			foreach ($projects as $p) {
-				if (!forge_check_perm('project_read', $p->getID())) {
-					continue;
-				}
-
-				$project_link = util_make_link_g ($p->getUnixName(),$p->getID(),$p->getPublicName());
-				$project_uri = util_make_url_g ($p->getUnixName(),$p->getID());
-				// sioc:UserGroups for all members of a project are named after /projects/A_PROJECT/members/
-				$usergroup_uri = $project_uri .'members/';
-
-				print '<div rel="sioc:member_of">'."\n"
-					.'<div about="'. $usergroup_uri .'" typeof="sioc:UserGroup">'."\n"
-					.'<div rel="sioc:usergroup_of">'."\n"
-					.'<div about="'. $project_uri .'" typeof="sioc:Space">';
-				$role_names = array () ;
-				$sioc_has_function_close = "";
-				foreach ($roles as $r) {
-					if ($r instanceof RoleExplicit
-					&& $r->getHomeProject() != NULL
-					&& $r->getHomeProject()->getID() == $p->getID()) {
-						$role_names[] = $r->getName() ;
-						print '<div property="sioc:has_function" content= "'.$r->getName().'">';
-						$sioc_has_function_close .= "</div>";
-					}
-				}
-
-				print ('<br />' . $project_link .' ('.htmlspecialchars (implode (', ', $role_names)).')');
-				print "\n";
-
-				if (forge_check_perm_for_user ($user, 'project_admin', $p->getID())) {
-					print '<span rev="doap:maintainer" resource="#me"></span>';
-				}
-				else {
-					print '<span rev="doap:developer" resource="#me"></span>';
-				}
-
-				echo $sioc_has_function_close."\n";  // sioc:has_function
-				echo "</div>\n";  // sioc:Space .../projects/A_PROJECT/
-				echo "</div>\n"; // sioc:usergroup_of
-				echo "</div>\n";  // sioc:UserGroup .../projects/A_PROJECT/members
-				echo "</div>\n"; // sioc:member_of
+		$start = true;
+		foreach ($projects as $p) {
+			if (!forge_check_perm('project_read', $p->getID())) {
+				continue;
 			}
-		} // end if groups
+			if ($start) {
+				echo html_e('p', array(), _('This user is a member of the following projects')._(':'));
+				$start = false;
+			}
+
+			$project_link = util_make_link_g ($p->getUnixName(),$p->getID(),$p->getPublicName());
+			$project_uri = util_make_url_g ($p->getUnixName(),$p->getID());
+			// sioc:UserGroups for all members of a project are named after /projects/A_PROJECT/members/
+			$usergroup_uri = $project_uri .'members/';
+
+			print '<div rel="sioc:member_of">'."\n"
+				.'<div about="'. $usergroup_uri .'" typeof="sioc:UserGroup">'."\n"
+				.'<div rel="sioc:usergroup_of">'."\n"
+				.'<div about="'. $project_uri .'" typeof="sioc:Space">';
+			$role_names = array () ;
+			$sioc_has_function_close = "";
+			foreach ($roles as $r) {
+				if ($r instanceof RoleExplicit
+				&& $r->getHomeProject() != NULL
+				&& $r->getHomeProject()->getID() == $p->getID()) {
+					$role_names[] = $r->getName() ;
+					print '<div property="sioc:has_function" content= "'.$r->getName().'">';
+					$sioc_has_function_close .= "</div>";
+				}
+			}
+
+			print ('<br />' . $project_link .' ('.htmlspecialchars (implode (', ', $role_names)).')');
+			print "\n";
+
+			if (forge_check_perm_for_user ($user, 'project_admin', $p->getID())) {
+				print '<span rev="doap:maintainer" resource="#me"></span>';
+			}
+			else {
+				print '<span rev="doap:developer" resource="#me"></span>';
+			}
+
+			echo $sioc_has_function_close."\n";  // sioc:has_function
+			echo "</div>\n";  // sioc:Space .../projects/A_PROJECT/
+			echo "</div>\n"; // sioc:usergroup_of
+			echo "</div>\n";  // sioc:UserGroup .../projects/A_PROJECT/members
+			echo "</div>\n"; // sioc:member_of
+		}
+		if ($start) {
+			echo $HTML->information(_('This user is not a member of any project.'));
+		}
 	}
 }
