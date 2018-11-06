@@ -94,7 +94,7 @@ if ($group_id && (forge_check_perm('project_admin', $group_id))) {
 		}
 
 		if (people_verify_job_group($job_id,$group_id)) {
-			if (people_add_to_job_inventory($job_id,$skill_id,$skill_level_id,$skill_year_id)) {;
+			if (people_add_to_job_inventory($job_id,$skill_id,$skill_level_id,$skill_year_id)) {
 				$feedback .= _('Job updated successfully');
 			}
 		} else {
