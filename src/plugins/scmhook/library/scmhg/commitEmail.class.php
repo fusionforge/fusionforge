@@ -62,24 +62,23 @@ class HgCommitEmail extends scmhook {
 	 * This function activates e-mail notification for pushed commits.
 	 * This is done by adding the needed entries to the projects hgrc file.
 	 */
-	function enable($project) {
+	function enable($project, $scmdir_root) {
 		if (!$project) {
 			return false;
 		}
 
 		$project_name = $project->getUnixName();
-		$root = forge_get_config('repos_path', 'scmhg') . '/' . $project_name;
 		$unix_group = forge_get_config('apache_group');
 		$unix_user = forge_get_config('apache_user');
 		$sendmail = forge_get_config('sendmail_path');
-		$main_repo = $root . '/.hg';
+		$main_repo = $scmdir_root . '/.hg';
 		if (is_dir("$main_repo")) {
 			$mail = $project_name.'-commits@'.forge_get_config('web_host');
 			$hgrc = "";
 
 			/*strip of repository path for subject line*/
 			$delim = "/";
-			$strip = count(explode($delim, $root))-1;
+			$strip = count(explode($delim, $scmdir_root))-1;
 
 			if (is_file($main_repo.'/hgrc')) {
 				/*set the needed entries within hgrc*/
@@ -161,8 +160,8 @@ class HgCommitEmail extends scmhook {
 			fwrite($f, $hgrc);
 			fclose($f);
 			rename($main_repo.'/hgrc.new', $main_repo.'/hgrc');
-			system("chown $unix_user:$unix_group $main_repo/hgrc" );
-			system("chmod 660 $main_repo/hgrc" );
+			system("chown $unix_user:$unix_group $main_repo/hgrc");
+			system("chmod 660 $main_repo/hgrc");
 		}
 		return true;
 	}
@@ -174,7 +173,7 @@ class HgCommitEmail extends scmhook {
 	 * @param	$project	object containing project data
 	 * @return bool
 	 */
-	function disable($project) {
+	function disable($project, $scmdir_root) {
 		if (!$project) {
 			return false;
 		}
@@ -183,8 +182,7 @@ class HgCommitEmail extends scmhook {
 		$unix_user = forge_get_config('apache_user');
 
 		$project_name = $project->getUnixName();
-		$root = forge_get_config('repos_path', 'scmhg') . '/' . $project_name;
-		$main_repo = $root . '/.hg';
+		$main_repo = $scmdir_root . '/.hg';
 		if (is_file($main_repo.'/hgrc')) {
 			/*unset extension and hook to unable notification emails*/
 			$hgrc_val = parse_ini_file("$main_repo/hgrc", true);
@@ -217,8 +215,8 @@ class HgCommitEmail extends scmhook {
 			fwrite($f, $hgrc);
 			fclose($f);
 			rename($main_repo.'/hgrc.new', $main_repo.'/hgrc');
-			system("chown $unix_user:$unix_group $main_repo/hgrc" );
-			system("chmod 660 $main_repo/hgrc" );
+			system("chown $unix_user:$unix_group $main_repo/hgrc");
+			system("chmod 660 $main_repo/hgrc");
 		}
 		return true;
 	}
