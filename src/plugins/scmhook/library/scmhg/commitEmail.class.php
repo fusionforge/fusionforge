@@ -71,8 +71,8 @@ class HgCommitEmail extends scmhook {
 		$unix_group = forge_get_config('apache_group');
 		$unix_user = forge_get_config('apache_user');
 		$sendmail = forge_get_config('sendmail_path');
-		$main_repo = $scmdir_root . '/.hg';
-		if (is_dir("$main_repo")) {
+		$main_repo = $scmdir_root.'/.hg';
+		if (is_dir($main_repo)) {
 			$mail = $project_name.'-commits@'.forge_get_config('web_host');
 			$hgrc = "";
 
@@ -80,82 +80,36 @@ class HgCommitEmail extends scmhook {
 			$delim = "/";
 			$strip = count(explode($delim, $scmdir_root))-1;
 
-			if (is_file($main_repo.'/hgrc')) {
-				/*set the needed entries within hgrc*/
-
-				$hgrc_val = parse_ini_file("$main_repo/hgrc", true);
-				if (!isset( $hgrc_val['extensions'])) {
-					/*makes notify extension usable*/
-					$hgrc_val['extensions']['hgext.notify'] = '';
-				}
-				if (!isset( $hgrc_val['hooks'])) {
-					/*activates the notify hook*/
-					$hgrc_val['hooks']['changegroup.notify'] = 'python:hgext.notify.hook';
-				}
-				if (!isset( $hgrc_val['email'])) {
-					/*set email parameter*/
-					$hgrc_val['email']['from'] = $mail;
-					$hgrc_val['email']['method'] = $sendmail;
-				}
-				if (!isset( $hgrc_val['notify'])) {
-					/*define when notify does something*/
-					$hgrc_val['notify']['sources'] = 'serve push pull bundle';
-					/*test = true will not deliver the mail, instead you will get command line output*/
-					$hgrc_val['notify']['test'] = 'false';
-
-					/*configure subscribers*/
-					if (!isset( $hgrc_val['reposubs'])) {
-						$hgrc_val['reposubs']['**'] = $mail;
-					}
-					$hgrc_val['notify']['template'] = '"\ndetails:   {webroot}/rev/{node|short}\nchangeset: {rev}:{node|short}\nuser:      {author}\ndate:
-  {date|date}\ndescription:\n{desc}\n"' ;
-					$hgrc_val['notify']['maxdiff'] = '300';
-					$hgrc_val['notify']['strip'] = $strip;
-				} else {
-					/*parse_ini_file() has problems with boolean and special characters*/
-					$hgrc_val['notify']['test'] = 'false';
-					$hgrc_val['notify']['template'] = '"\ndetails:   {webroot}/rev/{node|short}\nchangeset: {rev}:{node|short}\nuser:      {author}\ndate:
-  {date|date}\ndescription:\n{desc}\n"';
-				}
-				/* write configuration back to file*/
-				foreach ($hgrc_val as $section => $sub) {
-					$hgrc .= '['.$section."]\n";
-					foreach ($sub as $prop => $value) {
-						$hgrc .= "$prop = $value\n";
-						if ($value == end($sub)) {
-							$hgrc .= "\n";
-						}
-					}
-				}
-			} else {
-				/*create new hgrc with default values*/
-				$hgrc .= "[web]\n";
-				$hgrc .= "baseurl = /hg";
-				$hgrc .= "\ndescription = ".$project_name;
-				$hgrc .= "\nstyle = paper";
-				$hgrc .= "\nallow_read = *";
-				$hgrc .= "\nallow_push = *\n\n";
-
-				$hgrc .= "[extensions]\n" ;
-				$hgrc .= "hgext.notify =\n\n";
-
-				$hgrc .= "[hooks]\n" ;
-				$hgrc .= "changegroup.notify = python:hgext.notify.hook\n\n";
-
-				$hgrc .= "[email]\n";
-				$hgrc .= "from = $mail\n";
-				$hgrc .= "method = $sendmail\n\n";
-
-				$hgrc .= "[notify]\n" ;
-				$hgrc .= "sources = serve push pull bundle\n";
-				$hgrc .= "test = false\n";
-				$hgrc .= 'template = "\ndetails:   {webroot}/rev/{node|short}/\nchangeset: {rev}:{node|short}\nuser:      {author}\ndate:
-  {date|date}\ndescription:\n{desc}\n"';
-				$hgrc .= "\nmaxdiff = 300\n";
-				$hgrc .= "strip = $strip\n\n";
-				$hgrc .= "[reposubs]\n";
-				$hgrc .= "** = $mail";
+			/*create new hgrc with default values*/
+			$hgrc .= "[web]\n";
+			$hgrc .= "baseurl = /hg";
+			$hgrc .= "\ndescription = ".$project_name;
+			$hgrc .= "\nstyle = paper";
+			$hgrc .= "\nallow_read = *";
+			$hgrc .= "\nallow_push = *\n\n";
+			if (!forge_get_config('use_ssl', 'scmhg')) {
+				$hgrc .= "push_ssl = 0\n";
 			}
+			$hgrc .= "[extensions]\n" ;
+			$hgrc .= "hgext.notify =\n\n";
+
+			$hgrc .= "[hooks]\n" ;
+			$hgrc .= "changegroup.notify = python:hgext.notify.hook\n\n";
+
+			$hgrc .= "[email]\n";
+			$hgrc .= "from = $mail\n";
+			$hgrc .= "method = $sendmail\n\n";
+
+			$hgrc .= "[notify]\n" ;
+			$hgrc .= "sources = serve push pull bundle\n";
+			$hgrc .= "test = false\n";
+			$hgrc .= 'template = "\ndetails:   {webroot}/rev/{node|short}/\nchangeset: {rev}:{node|short}\nuser:      {author}\ndate:
+  {date|date}\ndescription:\n{desc}\n"';
+			$hgrc .= "\nmaxdiff = 300\n";
+			$hgrc .= "strip = $strip\n\n";
+			$hgrc .= "[reposubs]\n";
+			$hgrc .= "** = $mail";
+
 			$f = fopen ("$main_repo/hgrc.new", 'w');
 			fwrite($f, $hgrc);
 			fclose($f);
@@ -182,33 +136,17 @@ class HgCommitEmail extends scmhook {
 		$unix_user = forge_get_config('apache_user');
 
 		$project_name = $project->getUnixName();
-		$main_repo = $scmdir_root . '/.hg';
-		if (is_file($main_repo.'/hgrc')) {
-			/*unset extension and hook to unable notification emails*/
-			$hgrc_val = parse_ini_file("$main_repo/hgrc", true);
-			if ( isset( $hgrc_val['extensions'] )) {
-				unset($hgrc_val['extensions']);
-			}
-			if ( isset( $hgrc_val['hooks'] )) {
-				unset($hgrc_val['hooks']);
-			}
-			if ( isset( $hgrc_val['notify']['test'] )) {
-				$hgrc_val['notify']['test'] = "false";
-			}
-			if ( isset( $hgrc_val['notify']['template'] )) {
-				$hgrc_val['notify']['template'] = '"\ndetails:   {webroot}/rev/{node|short}\nchangeset: {rev}:{node|short}\nuser:      {author}\ndate:
-  {date|date}\ndescription:\n{desc}\n"' ;
-			}
-
-			$hgrc = "" ;
-			foreach ($hgrc_val as $section => $sub) {
-				$hgrc .= '['.$section."]\n";
-				foreach ($sub as $prop => $value) {
-					$hgrc .= "$prop = $value\n";
-					if ($value == end($sub)) {
-						$hgrc .= "\n";
-					}
-				}
+		$main_repo = $scmdir_root.'/.hg';
+		if (is_dir($main_repo)) {
+			/*create new hgrc with default values*/
+			$hgrc .= "[web]\n";
+			$hgrc .= "baseurl = /hg";
+			$hgrc .= "\ndescription = ".$project_name;
+			$hgrc .= "\nstyle = paper";
+			$hgrc .= "\nallow_read = *";
+			$hgrc .= "\nallow_push = *\n\n";
+			if (!forge_get_config('use_ssl', 'scmhg')) {
+				$hgrc .= "push_ssl = 0\n";
 			}
 
 			$f = fopen ("$main_repo/hgrc.new", 'w');
