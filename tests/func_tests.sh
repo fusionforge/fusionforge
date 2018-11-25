@@ -67,8 +67,8 @@ install_selenium() {
 	# psmisc for db_reload.sh:killall
 	# rsyslog to get e.g. sshd error log
 	if [ -e /etc/debian_version ]; then
-		ICEWEASEL_VERSION=`apt-cache show iceweasel | grep Version | grep '52.9' | cut -f 2 -d' '`
-		apt-get -y install wget default-jre iceweasel=$ICEWEASEL_VERSION
+		ICEWEASEL_VERSION=`apt-cache show firefox-esr | grep Version | grep '52.9' | cut -f 2 -d' '`
+		apt-get -y install wget default-jre firefox-esr=$ICEWEASEL_VERSION
 		if grep -q ^8 /etc/debian_version; then
 		    apt-get -y install phpunit phpunit-selenium patch psmisc patch rsyslog
 		else
