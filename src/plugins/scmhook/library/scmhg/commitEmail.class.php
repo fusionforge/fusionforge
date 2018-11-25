@@ -76,7 +76,7 @@ class HgCommitEmail extends scmhook {
 			$mail = $project_name.'-commits@'.forge_get_config('web_host');
 			$table = 'plugin_scmhook_scmhg_'.strtolower($this->classname);
 			if (db_check_table_exists($table)) {
-				$res = db_query_params('SELECT * FROM '.$table.' WHERE group_id = $1 and repository_name = $2', array($group_id, $repository));
+				$res = db_query_params('SELECT * FROM '.$table.' WHERE group_id = $1 and repository_name = $2', array($project->getID(), basename($scmdir_root)));
 				$values = db_fetch_array($res);
 				foreach ($this->getParams() as $pname => $pconf) {
 					$mail = ($values[$pname] != null) ? $values[$pname] : $pconf['default'];
@@ -148,7 +148,7 @@ class HgCommitEmail extends scmhook {
 		$main_repo = $scmdir_root.'/.hg';
 		if (is_dir($main_repo)) {
 			/*create new hgrc with default values*/
-			$hgrc .= "[web]\n";
+			$hgrc = "[web]\n";
 			$hgrc .= "baseurl = /hg";
 			$hgrc .= "\ndescription = ".$project_name;
 			$hgrc .= "\nstyle = paper";
