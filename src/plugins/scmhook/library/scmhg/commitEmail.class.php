@@ -74,7 +74,7 @@ class HgCommitEmail extends scmhook {
 		$main_repo = $scmdir_root.'/.hg';
 		if (is_dir($main_repo)) {
 			$mail = $project_name.'-commits@'.forge_get_config('web_host');
-			$table = 'plugin_scmhook_scmhg_'.strtolower($hookServePushPullBundle->getClassname());
+			$table = 'plugin_scmhook_scmhg_'.strtolower($this->classname);
 			if (db_check_table_exists($table)) {
 				$res = db_query_params('SELECT * FROM '.$table.' WHERE group_id = $1 and repository_name = $2', array($group_id, $repository));
 				$values = db_fetch_array($res);
