@@ -348,7 +348,7 @@ project independently.");
 				}
 			}
 
-			echo $HTML->listTableTop($tabletop, '', 'sortable_scmhook_scmgit', 'sortable', $classth, $titleArr);
+			echo $HTML->listTableTop($tabletop, '', 'sortable_scmhook_scmsvn', 'sortable', $classth, $titleArr);
 			foreach($repositories as $repository) {
 				$cells = array();
 				$cells[][] = $repository.html_e('input', array('type' => 'hidden', 'name' => 'repository['.$repository.'][]'));
