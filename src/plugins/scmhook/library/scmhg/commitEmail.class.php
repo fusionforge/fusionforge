@@ -74,6 +74,14 @@ class HgCommitEmail extends scmhook {
 		$main_repo = $scmdir_root.'/.hg';
 		if (is_dir($main_repo)) {
 			$mail = $project_name.'-commits@'.forge_get_config('web_host');
+			$table = 'plugin_scmhook_scmhg_'.strtolower($hookServePushPullBundle->getClassname());
+			if (db_check_table_exists($table)) {
+				$res = db_query_params('SELECT * FROM '.$table.' WHERE group_id = $1 and repository_name = $2', array($group_id, $repository));
+				$values = db_fetch_array($res);
+				foreach ($hookServePushPullBundle->getParams() as $pname => $pconf) {
+					$mail = ($values[$pname] != null) ? $values[$pname] : $pconf['default'];
+				}
+			}
 			$hgrc = "";
 
 			/*strip of repository path for subject line*/
@@ -86,10 +94,11 @@ class HgCommitEmail extends scmhook {
 			$hgrc .= "\ndescription = ".$project_name;
 			$hgrc .= "\nstyle = paper";
 			$hgrc .= "\nallow_read = *";
-			$hgrc .= "\nallow_push = *\n\n";
+			$hgrc .= "\nallow_push = *\n";
 			if (!forge_get_config('use_ssl', 'scmhg')) {
 				$hgrc .= "push_ssl = 0\n";
 			}
+			$hgrc .= "\n";
 			$hgrc .= "[extensions]\n" ;
 			$hgrc .= "hgext.notify =\n\n";
 
