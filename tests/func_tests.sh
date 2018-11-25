@@ -67,7 +67,7 @@ install_selenium() {
 	# psmisc for db_reload.sh:killall
 	# rsyslog to get e.g. sshd error log
 	if [ -e /etc/debian_version ]; then
-		apt-get -y install wget default-jre iceweasel
+		apt-get -y install wget default-jre iceweasel=52.9.0esr-1~deb9u1
 		if grep -q ^8 /etc/debian_version; then
 		    apt-get -y install phpunit phpunit-selenium patch psmisc patch rsyslog
 		else
@@ -78,10 +78,6 @@ install_selenium() {
 		    composer --no-plugins --no-scripts require phpunit/phpunit-selenium
 		    popd
 		fi
-		# Install selenium (no packaged version available)
-		SELENIUMMAJOR=2
-		SELENIUMMINOR=53
-		SELENIUMMICRO=1
 	else
 		yum -y install wget firefox
 		if yum list java-1.7.0-openjdk >/dev/null 2>&1 ; then
