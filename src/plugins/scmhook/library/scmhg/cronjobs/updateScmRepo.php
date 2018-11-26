@@ -57,7 +57,7 @@ class ScmHgUpdateScmRepo {
 			}
 			//first we disable all hooks
 			foreach($hooksServePushPullBundle as $hookServePushPullBundle) {
-				$hookServePushPullBundle->disable($group);
+				$hookServePushPullBundle->disable($group, $scmdir_root);
 			}
 			//now we enable new available hooks
 			$newHooks = explode('|', $hooksString);
@@ -73,7 +73,7 @@ class ScmHgUpdateScmRepo {
 			}
 			if (isset($newHooksServePushPullBundle) && count($newHooksServePushPullBundle)) {
 				foreach($newHooksServePushPullBundle as $newHookServePushPullBundle) {
-					$newHookServePushPullBundle->enable($group);
+					$newHookServePushPullBundle->enable($group, $scmdir_root);
 				}
 			}
 			return true;
