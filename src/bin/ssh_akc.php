@@ -51,8 +51,13 @@ $conn = pg_connect("host=$host port=$port dbname=$dbname user=$user password=$pa
 $res = pg_query_params($conn,
 		       'SELECT sshkey FROM ssh_authorized_keys WHERE user_name = $1',
 		       array($argv[1]));
-while ($row = pg_fetch_array($res))
-	print $row['sshkey'] . "\n";
+while ($row = pg_fetch_array($res)) {
+	$prefixcmd='';
+	if (forge_get_config('use_shell_limited')) {
+		$prefixcmd='command="'.forge_get_config('bin_dir').'/limited_ssh.sh" ';
+	}
+	echo $prefixcmd.$row['sshkey']."\n";
+}
 
 
 // Local Variables:
