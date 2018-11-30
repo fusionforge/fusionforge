@@ -1238,9 +1238,6 @@ class FFUser extends FFError {
 		$fingerprint = $returnExecExploded[1];
 		$now = time();
 		$explodedKey = explode(' ', $key);
-		if (forge_get_config('use_shell_limited')) {
-			$key = preg_replace("/^.*ssh-/", "command=\"".forge_get_config('bin_dir')."/limited_ssh.sh\" ssh-", $key);
-		}
 		$existingKeys = $this->getAuthorizedKeys();
 		foreach ($existingKeys as $existingKey) {
 			if ($existingKey['fingerprint'] == $fingerprint) {
