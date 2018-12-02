@@ -22,10 +22,6 @@
 
 function check_system() {
 	$result = array();
-
-	if (version_compare(PHP_VERSION, '5.1.0', '<')) {
-		$result[] = 'WARNING: Your php version must not be lower than 5.1.0, please upgrade';
-	}
 	if (get_magic_quotes_gpc()) {
 		$result[] = 'Error: Your installation is running with PHP magic_quotes_gpc ON, please change to OFF';
 	}
@@ -37,9 +33,6 @@ function check_system() {
 	}
 	if (util_ini_get_bytes('upload_max_filesize') < 8*1024*1024) {
 		$result[] = 'WARNING: PHP value "upload_max_filesize" is low, recommended is at least 8M';
-	}
-	if (!function_exists("pg_pconnect")) {
-		$result[] = 'Error: Missing Postgresql support in PHP, please install/compile php-pg.';
 	}
 	if (forge_get_config('use_shell')) {
 		// verify the compatibility between the user_default_shell ini var and the contents of .../etc/shells
