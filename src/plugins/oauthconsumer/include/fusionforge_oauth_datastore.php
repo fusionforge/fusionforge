@@ -157,11 +157,11 @@ class FFOAuthDataStore extends OAuthDataStore {
 	}
 
 
-  /**
-   * Deletes a provider from the DB
-   *
-   * @param int $provider_id
-   */
+	/**
+	 * Deletes a provider from the DB
+	 *
+	 * @param int $provider_id
+	 */
 	public function delete_provider( $provider_id ) {
 
 		$t_provider_table = "plugin_oauthconsumer_provider";
@@ -179,11 +179,11 @@ class FFOAuthDataStore extends OAuthDataStore {
 	}
 
 	/**
-	* Saves an OAuthAccessToken to the DB
-	*
-	* @param OAuthAccessToken $token
-	* @return int the token ID in the DB
-	*/
+	 * Saves an OAuthAccessToken to the DB
+	 *
+	 * @param OAuthAccessToken $token
+	 * @return int the token ID in the DB
+	 */
 	public function save_access_token($token) {
 
 		$t_token_table = "plugin_oauthconsumer_access_token";
@@ -206,11 +206,11 @@ class FFOAuthDataStore extends OAuthDataStore {
 	}
 
 	/**
-	* Retrieve a table of columns values for all access tokens (of a user)
-	*
-	* @param int $user_id
-	* @return array of arrays of column values
-	*/
+	 * Retrieve a table of columns values for all access tokens (of a user)
+	 *
+	 * @param int $user_id
+	 * @return array of arrays of column values
+	 */
 	public function find_all_access_tokens($user_id) {
 		$t_token_table = "plugin_oauthconsumer_access_token";
 		if(isset($user_id)||($user_id)) {
@@ -228,11 +228,11 @@ class FFOAuthDataStore extends OAuthDataStore {
 	}
 
 	/**
-	* Retrieve values of columns for a token in the DB provided its key
-	*
-	* @param string $token_key
-	* @return array of column values
-	*/
+	 * Retrieve values of columns for a token in the DB provided its key
+	 *
+	 * @param string $token_key
+	 * @return array of column values
+	 */
 	public function find_access_token_from_key($token_key) {
 		$t_token_table = "plugin_oauthconsumer_access_token";
 
@@ -292,11 +292,11 @@ class FFOAuthDataStore extends OAuthDataStore {
 	}
 
 	/**
-	* Deletes an access token from the DB
-	*
-	* @param string $token_type
-	* @param int $token_id
-	*/
+	 * Deletes an access token from the DB
+	 *
+	 * @param string $token_type
+	 * @param int $token_id
+	 */
 	function delete_access_token($token_id) {
 		$t_token_table = "plugin_oauthconsumer_access_token";
 
@@ -313,11 +313,11 @@ class FFOAuthDataStore extends OAuthDataStore {
 	}
 
 	/**
-	* Saves an OAuthResource to the DB
-	*
-	* @param OAuthResource $resource
-	* @return int the resource ID in the DB
-	*/
+	 * Saves an OAuthResource to the DB
+	 *
+	 * @param OAuthResource $resource
+	 * @return int the resource ID in the DB
+	 */
 	public function save_oauth_resource($resource) {
 
 		$t_resource_table = "plugin_oauthconsumer_resource";
@@ -340,7 +340,5 @@ class FFOAuthDataStore extends OAuthDataStore {
 			db_query_params( $t_query, array ($resource->get_url(), $resource->get_provider_id(), $resource->get_http_method(), $resource->get_id()) );
 		}
 		return $provider_id;
-
 	}
-
 }
