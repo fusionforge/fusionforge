@@ -200,7 +200,7 @@ abstract class ForgeAuthPlugin extends Plugin {
 	protected function setSessionCookie() {
 		if($this->saved_user) {
 			$cookie = session_build_session_token($this->saved_user->getID());
-			session_set_cookie($this->getCookieName(), $cookie, "", forge_get_config('session_expire'));
+			session_cookie($this->getCookieName(), $cookie, "", forge_get_config('session_expire'));
 		}
 	}
 
@@ -225,12 +225,12 @@ abstract class ForgeAuthPlugin extends Plugin {
 		}
 	}
 
-    function refreshAuthSession() {
-            $this->setSessionCookie();
-    }
+	function refreshAuthSession() {
+		$this->setSessionCookie();
+	}
 
 	protected function unsetSessionCookie() {
-		session_set_cookie($this->getCookieName(), '');
+		session_cookie($this->getCookieName(), '');
 	}
 
 	/**
