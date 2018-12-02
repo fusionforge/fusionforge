@@ -341,7 +341,7 @@ function session_issecure() {
 }
 
 /**
- *	session_set_cookie() - Set a session cookie
+ *	session_cookie() - Set a session cookie
  *
  *	Set a cookie with default temporal scope of the current browser session
  *	and URL space of the current webserver
@@ -351,9 +351,6 @@ function session_issecure() {
  *	@param	string	$domain		Domain scope (default '')
  *	@param	int	$expiration	Expiration time in UNIX seconds (default 0)
  */
-function session_set_cookie($name, $value, $domain='', $expiration=0) {
-	session_cookie($name, $value, $domain, $expiration);
-}
 function session_cookie($name, $value, $domain='', $expiration=0) {
 	if (php_sapi_name() == 'cli') {
 		return;
