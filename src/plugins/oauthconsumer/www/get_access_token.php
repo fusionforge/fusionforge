@@ -121,7 +121,7 @@ if(count($providers)>0)	{
 		if($f_not_verify_ssl) {
 			curl_setopt ($curl, CURLOPT_SSL_VERIFYHOST, 0);
 			curl_setopt ($curl, CURLOPT_SSL_VERIFYPEER, 0);
-			session_set_cookie('NOT_VERIFY_SSL', 1, 0, '', '', false, true);
+			setcookie('NOT_VERIFY_SSL', 1, 0, '', '', false, true);
 		}
 
 		$request_token_string = curl_exec ($curl);
