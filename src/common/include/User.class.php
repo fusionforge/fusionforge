@@ -5,7 +5,7 @@
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2009-2010, Roland Mas
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2012-2015, Franck Villaume - TrivialDev
+ * Copyright 2012-2015,2018, Franck Villaume - TrivialDev
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
@@ -34,9 +34,9 @@ $USER_OBJ = array();
  * user_get_object is useful so you can pool user objects/save database queries
  * You should always use this instead of instantiating the object directly
  *
- * @param string       $user_name The unix username - required
- * @param bool|int     $res       The result set handle ("SELECT * FROM USERS WHERE user_id=xx")
- * @return FFUser User object or false on failure
+ * @param	string		$user_name	The unix username - required
+ * @param	bool|int	$res		The result set handle ("SELECT * FROM USERS WHERE user_id=xx")
+ * @return	FFUser User object or false on failure
  */
 function &user_get_object_by_name($user_name, $res = false) {
 	$user_name = strtolower($user_name);
@@ -49,11 +49,11 @@ function &user_get_object_by_name($user_name, $res = false) {
 
 /**
  * user_get_object_by_email() - Get User object by email address
- * Only works if sys_require_unique_email is true
+ * Only works if require_unique_email is true
  *
- * @param string    $email The unix username - required
- * @param bool|int  $res   The result set handle ("SELECT * FROM USERS WHERE user_id=xx")
- * @return FFUser|bool User object or false on failure
+ * @param	string		$email	The unix username - required
+ * @param	bool|int	$res	The result set handle ("SELECT * FROM USERS WHERE user_id=xx")
+ * @return	FFUser|bool User object or false on failure
  */
 function user_get_object_by_email($email, $res = false) {
 	if (!validate_email($email)
@@ -72,9 +72,9 @@ function user_get_object_by_email($email, $res = false) {
  * user_get_object is useful so you can pool user objects/save database queries
  * You should always use this instead of instantiating the object directly
  *
- * @param    string $user_name The unix username - required
- * @param bool|int $res The result set handle ("SELECT * FROM USERS WHERE user_id=xx")
- * @return    object a user object or false on failure
+ * @param	string		$user_name	The unix username - required
+ * @param	bool|int	$res		The result set handle ("SELECT * FROM USERS WHERE user_id=xx")
+ * @return	object a user object or false on failure
  */
 function &user_get_object_by_name_or_email($user_name, $res = false) {
 	$user = user_get_object_by_name($user_name, $res);
@@ -95,9 +95,9 @@ function &user_get_object_by_name_or_email($user_name, $res = false) {
  * user_get_object is useful so you can pool user objects/save database queries
  * You should always use this instead of instantiating the object directly
  *
- * @param int      $user_id The ID of the user - required
- * @param int|bool $res     The result set handle ("SELECT * FROM USERS WHERE user_id=xx")
- * @return FFUser a user object or false on failure
+ * @param	int		$user_id	The ID of the user - required
+ * @param	int|bool	$res		The result set handle ("SELECT * FROM USERS WHERE user_id=xx")
+ * @return	FFUser a user object or false on failure
  */
 function &user_get_object($user_id, $res = false) {
 	//create a common set of group objects
@@ -124,8 +124,8 @@ function &user_get_object($user_id, $res = false) {
 }
 
 /**
- * @param $id_arr
- * @return FFUser[]
+ * @param	$id_arr
+ * @return	FFUser[]
  */
 function &user_get_objects($id_arr) {
 	global $USER_OBJ;
@@ -154,8 +154,8 @@ function &user_get_objects($id_arr) {
 }
 
 /**
- * @param string $username_arr
- * @return FFUser[]
+ * @param	string	$username_arr
+ * @return	FFUser[]
  */
 function &user_get_objects_by_name($username_arr) {
 	$res = db_query_params('SELECT user_id FROM users WHERE lower(user_name) = ANY ($1)',
@@ -165,8 +165,8 @@ function &user_get_objects_by_name($username_arr) {
 }
 
 /**
- * @param string $email_arr
- * @return FFUser[]
+ * @param	string	$email_arr
+ * @return	FFUser[]
  */
 function &user_get_objects_by_email($email_arr) {
 	$res = db_query_params('SELECT user_id FROM users WHERE lower(email) = ANY ($1)',
@@ -238,8 +238,8 @@ class FFUser extends FFError {
 	 * CONSTRUCTOR - GENERALLY DON'T USE THIS
 	 * instead use the user_get_object() function call
 	 *
-	 * @param bool|int $id  The user_id
-	 * @param bool|int $res The database result set OR array of data
+	 * @param	bool|int	$id	The user_id
+	 * @param	bool|int	$res	The database result set OR array of data
 	 */
 	function __construct($id = false, $res = false) {
 		parent::__construct();
