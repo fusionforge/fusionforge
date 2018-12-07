@@ -5,6 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010, FusionForge Team
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2018, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -45,22 +46,19 @@ function user_personal_information($user, $compact = false, $title = false) {
 	}
 	$html = $HTML->listTableTop(array(), array(), 'full');
 	if ($compact && $title) {
-		$html .= '<tr>
-			<td colspan="2">'. $title . '</td>
-			  </tr>';
+		$cells[] = array($title, 'colspan' => 2);
+		$html .= $HTML->multiTableRow(array(), $cells);
 	}
 
-	$html .= '<tr>';
-	if($user_logo) {
-		$html .= '<td style="width: 150px;">'. $user_logo .'</td>';
+	$cells = array();
+	if ($user_logo) {
+		$cells[] = array($user_logo, 'style' => 'width: 150px');
 	} else {
-		$html .= '<td></td>';
+		$cells[][] = '';
 	}
-	$html .='<td>
-			<table class="my-layout-table" id="user-profile-personal-info">
-			<tr>
-				<td>'. _('User Id')._(':') . '</td>';
-
+	$subtable = $HTML->listTableTop(array(), array(), 'my-layout-table', 'user-profile-personal-info');
+	$subcells[][] = _('User Id')._(':');
+	
 	//print '<div property ="foaf:member" content="fusionforge:ForgeCommunity">';
 	//echo '</div>';
 	// description as a FusionForge Community member
@@ -71,86 +69,77 @@ function user_personal_information($user, $compact = false, $title = false) {
 		$user_id_html = $user_id;
 		//echo '</div>';
 	}
-	$html .= '<td><strong>'. $user_id_html .'</strong>';
+	$subcellcontent = '<strong>'. $user_id_html .'</strong>';
 	if(!$compact && forge_get_config('use_people')) {
-		$html .= '(' . util_make_link ('/people/viewprofile.php?user_id='.$user_id,'<strong>'._('Skills Profile').'</strong>') . ')';
+		$subcellcontent .= '(' . util_make_link ('/people/viewprofile.php?user_id='.$user_id,'<strong>'._('Skills Profile').'</strong>') . ')';
 	}
-	$html .= '</td>
-			</tr>
-			<tr>
-				<td>'. _('Login Name') . _(': ') .'</td>
-				<td><strong><span property="sioc:name">' . $user->getUnixName() . '</span></strong></td>
-			</tr>
-			<tr>
-				<td>'. _('Real Name') . _(': ')  .'</td>';
+	$subcells[][] = $subcellcontent;
+	$subtable .= $HTML->multiTableRow(array(), $subcells);
+	$subcells = array();
+	$subcells[][] = _('Login Name') . _(': ');
+	$subcells[][] = '<strong><span property="sioc:name">' . $user->getUnixName() . '</span></strong>';
+	$subcells = array();
+	$subcells[][] = _('Real Name') . _(': ');
 	$user_title = $user->getTitle();
 	$user_title_name = ($user_title ? ($user_title . ' ') : '') . $user->getRealName();
-	$html .= '<td>
-				<div rev="foaf:account">
+	$subcells[][] = '<div rev="foaf:account">
 					<div about="#me" typeof="foaf:Person">
 						<strong><span property="foaf:name">'. $user_title_name .'</span></strong>
 					</div>
-				</div>
-				</td>
-			</tr>';
+				</div>';
+	$subtable .= $HTML->multiTableRow(array(), $subcells);
 	if (!$compact && forge_get_config('user_display_contact_info')) {
 		$user_mail=$user->getEmail();
 		$user_mailsha1=$user->getSha1Email();
-
-		$html .= '<tr>
-			<td>'. _('Email Address') . _(': ') .'</td>
-			<td><strong>'.
+		$subcells = array();
+		$subcells[][] = _('Email Address') . _(': ');
+		$subcells[][] = '<strong>'.
 
 		// Removed for privacy reasons
 		//print '<span property="sioc:email" content="'. $user_mail .'">';
 				'<span property="sioc:email_sha1" content="'. $user_mailsha1 .'">' .
 		util_make_link('/sendmessage.php?touser='.$user_id, str_replace('@',' @nospam@ ',$user_mail)) .
 				'</span>
-				</strong>
-			</td>
-		</tr>';
+				</strong>';
+		$subtable .= $HTML->multiTableRow(array(), $subcells);
 
 		if ($user->getAddress() || $user->getAddress2()) {
-			$html .= '<tr>
-			<td><'. _('Address')._(':') .'</td>
-			<td>'. $user->getAddress() .'<br/>'. $user->getAddress2() .'</td>
-		</tr>';
+			$subcells = array();
+			$subcells[][] = _('Address')._(':');
+			$subcells[][] = $user->getAddress() .'<br/>'. $user->getAddress2();
+			$subtable .= $HTML->multiTableRow(array(), $subcells);
 		}
 
 		if ($user->getPhone()) {
-			$html .= '<tr>
-			<td>' . _('Phone')._(':') . '</td>
-			<td>' .
+			$subcells = array();
+			$subcells[][] = _('Phone')._(':');
 			//print '<div property="foaf:phone" content="'.$user->getPhone().'">';
-			$user->getPhone()
+			$subcells[][] = $user->getPhone();
 			//echo '</div>';
-			.'</td>
-		</tr>';
+			$subtable .= $HTML->multiTableRow(array(), $subcells);
 		}
 
 		if ($user->getFax()) {
-			$html .= '<tr>
-			<td>'. _('Fax')._(':') .'</td>
-			<td>'. $user->getFax() .'</td>
-		</tr>';
+			$subcells = array();
+			$subcells[][] = _('Fax')._(':');
+			$subcells[][] = $user->getFax();
+			$subtable .= $HTML->multiTableRow(array(), $subcells);
 		}
 	}
-	$html .= '
-			<tr>
-				<td>'. _('Site Member Since')._(':') .'</td>
-				<td><strong>'. relative_date($user->getAddDate()). '</strong>
-				</td>
-			</tr>';
+	$subcells = array();
+	$subcells[][] = _('Site Member Since')._(':');
+	$subcells[][] = '<strong>'. relative_date($user->getAddDate()). '</strong>';
+	$subtable .= $HTML->multiTableRow(array(), $subcells);
 	if ($compact) {
 		$user_uri = util_make_url('/users/'. $user->getUnixName() . '/');
-		$html .= '<tr>
-					<td><small>'. _('URI:') .'</small></td>
-					<td><small>'.util_make_link_u($user->getUnixName(), $user->getID(), util_make_url_u($user->getUnixName(), $user->getID())).'</small></td>
-				</tr>';
+		$subcells = array();
+		$subcells[][] = '<small>'. _('URI')._(':') .'</small>';
+		$subcells[][] = '<small>'.util_make_link_u($user->getUnixName(), $user->getID(), util_make_url_u($user->getUnixName(), $user->getID())).'</small>';
+		$subtable .= $HTML->multiTableRow(array(), $subcells);
 	}
-	$html .= '</table>
-	</td>
-	</tr>';
+	$subtable .= $HTML->listTableBottom();
+	$cells[][] = $subtable;
+	$html .= $HTML->multiTableRow(array(), $cells);
 	$html .= $HTML->listTableBottom();
 
 	return $html;
