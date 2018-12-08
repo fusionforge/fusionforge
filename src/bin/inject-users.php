@@ -23,7 +23,7 @@
  * Line format:
  * login:email:fname:lname:password
  * password is cleartext
- * login might be optional if sys_require_unique_email is true
+ * login might be optional if require_unique_email is true
 */
 
 
