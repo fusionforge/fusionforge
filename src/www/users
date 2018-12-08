@@ -75,13 +75,12 @@ if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
 		$hook_params['accept'] = $content_type;
 		$hook_params['return'] = '';
 		plugin_hook_by_reference('content_negociated_user_home', $hook_params);
-		if($hook_params['content_type'] != ''){
-				header('Content-type: '. $hook_params['content_type']);
-				echo $hook_params['content'];
-		}
-		else {
-				header('HTTP/1.1 406 Not Acceptable',true,406);
-				exit(0);
+		if ($hook_params['content_type'] != '') {
+			header('Content-type: '. $hook_params['content_type']);
+			echo $hook_params['content'];
+		} else {
+			header('HTTP/1.1 406 Not Acceptable',true,406);
+			exit(0);
 		}
 	} else { // default HTML view
 		//now show the user page
