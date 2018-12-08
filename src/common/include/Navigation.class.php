@@ -330,11 +330,7 @@ class Navigation extends FFError {
 				if (!$project->isError()) {
 					$menu['titles'][] = $project->getPublicName();
 					$menu['tooltips'][] = _('Project home page, widgets selected to follow specific items.');
-					if (isset ($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
-						$menu['urls'][] = util_make_uri('/project/?group_id') .$project->getID();
-					} else {
-						$menu['urls'][] = util_make_uri('/projects/') .$project->getUnixName().'/';
-					}
+					$menu['urls'][] = util_make_uri('/projects/') .$project->getUnixName().'/';
 					$selected = count($menu['urls'])-1;
 				}
 			}
@@ -386,11 +382,7 @@ class Navigation extends FFError {
 			// Summary
 			$menu['titles'][] = _('Summary');
 			$menu['tooltips'][] = _('Project Homepage. Widgets oriented');
-			if (isset($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
-				$url = util_make_uri('/project/?group_id=' . $group_id);
-			} else {
-				$url = util_make_uri('/projects/' . $group->getUnixName() .'/');
-			}
+			$url = util_make_uri('/projects/' . $group->getUnixName() .'/');
 			$menu['urls'][] = $url;
 			$menu['adminurls'][] = false;
 			if ($toptab == "home") {

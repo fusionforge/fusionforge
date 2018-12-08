@@ -1026,11 +1026,7 @@ function util_display_user($username, $user_id = 0, $text = '', $size = 'xs') {
  * @return	string URL
  */
 function util_make_url_u($username, $user_id) {
-	if (isset ($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
-		return util_make_uri('/developer/?user_id='.$user_id);
-	} else {
-		return util_make_uri('/users/'.$username.'/');
-	}
+	return util_make_uri('/users/'.$username.'/');
 }
 
 /**
@@ -1064,11 +1060,7 @@ function util_make_link_g($group_name, $group_id, $text) {
  * @return	string
  */
 function util_make_url_g($group_name, $group_id) {
-	if (isset ($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
-		return util_make_uri('/project/?group_id='.$group_id);
-	} else {
-		return util_make_uri('/projects/'.$group_name.'/');
-	}
+	return util_make_uri('/projects/'.$group_name.'/');
 }
 
 function util_ensure_value_in_set($value, $set) {
