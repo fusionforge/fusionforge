@@ -85,7 +85,7 @@ if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
 	} else { // default HTML view
 		//now show the user page
 		$title = '<i>'.$username.'</i> '._('Profile');
-		if (forge_get_config('use_diary') && session_loggedin()) {
+		if (forge_get_config('use_diary') && session_loggedin() && ($user->getID() != user_getid())) {
 			if ($user->isMonitoredBy(user_getid())) {
 				$option = 'stop';
 				$titleMonitor = _('Stop monitoring this user');
