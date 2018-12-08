@@ -88,9 +88,7 @@ if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
 		$title = _('User Profile');
 		$HTML->header(array('title'=>$title));
 
-		if (!forge_get_config('user_home_widget')) {
-			include $gfwww.'include/user_home.php';
-		} else {
+		if (forge_get_config('user_home_widget')) {
 			if (session_loggedin() && ($user->getID() == user_getid())) {
 				$sql = "SELECT l.*
 						FROM layouts AS l INNER JOIN owner_layouts AS o ON(l.id = o.layout_id)
@@ -115,6 +113,8 @@ if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
 			}
 			$lm = new WidgetLayoutManager();
 			$lm->displayLayout($user->getID(), WidgetLayoutManager::OWNER_TYPE_USERHOME);
+		} else {
+			include $gfwww.'include/user_home.php';
 		}
 		$HTML->footer();
 	}
