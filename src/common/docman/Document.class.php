@@ -607,7 +607,7 @@ class Document extends FFObject {
 	/**
 	 * getMonitorIds - get user ids monitoring this Document.
 	 *
-	 * @return	array of user ids monitoring this Artifact.
+	 * @return	array of user ids monitoring this Document.
 	 */
 	function getMonitorIds() {
 		$MonitorElementObject = new MonitorElement('docdata');
