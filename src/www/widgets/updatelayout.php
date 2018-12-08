@@ -105,7 +105,7 @@ if ($owner) {
 			switch($request->get('action')) {
 				case 'widget':
 					if ($name && $request->exist('layout_id')) {
-						if ($widget = Widget::getInstance($name)) {
+						if ($widget = Widget::getInstance($name, $owner_id)) {
 							if ($widget->isAvailable()) {
 								$action = array_pop(array_keys($param[$name]));
 								switch($action) {

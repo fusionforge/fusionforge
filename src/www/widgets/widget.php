@@ -90,7 +90,7 @@ if ($request->valid($vOwner)) {
 			$v = array_keys($param);
 			$name = array_pop($v);
 			$instance_id = (int)$param[$name];
-			if ($widget =& Widget::getInstance($name)) {
+			if ($widget =& Widget::getInstance($name, $owner_id)) {
 				if ($widget->isAvailable()) {
 					switch ($request->get('action')) {
 						case 'rss':

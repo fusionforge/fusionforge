@@ -73,7 +73,7 @@ require_once $gfcommon.'widget/Widget_UserhomePersonalInformation.class.php';
 require_once $gfcommon.'widget/Widget_UserhomeProjectInformation.class.php';
 require_once $gfcommon.'widget/Widget_UserhomePeerRatings.class.php';
 require_once $gfcommon.'widget/Widget_UserhomeActivity.class.php';
-
+require_once $gfcommon.'widget/Widget_UserhomeRss.class.php';
 
 /**
  * FusionForge Layout Widget
@@ -322,6 +322,8 @@ require_once $gfcommon.'widget/Widget_UserhomeActivity.class.php';
 			case 'uhactivity':
 				$o = new Widget_UserhomeActivity($owner_id);
 				break;
+			case 'uhrss';
+				$o = new Widget_UserhomeRss($owner_id);
 			default:
 				//$em = EventManager::instance();
 				//$em->processEvent('widget_instance', array('widget' => $widget_name, 'instance' => &$o));
@@ -362,7 +364,7 @@ require_once $gfcommon.'widget/Widget_UserhomeActivity.class.php';
 				$widgets = array('trackercontent', 'trackercomment', 'trackerdefaultactions', 'trackergeneral', 'trackermain', 'trackersummary');
 				break;
 			case WidgetLayoutManager::OWNER_TYPE_USERHOME:
-				$widgets = array('uhpersonalinformation', 'uhprojectinformation', 'uhpeerratings', 'uhactivity');
+				$widgets = array('uhpersonalinformation', 'uhprojectinformation', 'uhpeerratings', 'uhactivity', 'uhrss');
 				break;
 			default:
 				$widgets = array();
