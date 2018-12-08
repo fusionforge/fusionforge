@@ -84,8 +84,20 @@ if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
 		}
 	} else { // default HTML view
 		//now show the user page
-		$title = _('User Profile');
-		$HTML->header(array('title'=>$title));
+		$title = '<i>'.$username.'</i> '._('Profile');
+		if (forge_get_config('use_diary') && session_loggedin()) {
+			if ($user->isMonitoredBy(user_getid())) {
+				$option = 'stop';
+				$titleMonitor = _('Stop monitoring this user');
+				$image = $HTML->getStopMonitoringPic($titleMonitor, '');
+			} else {
+				$option = 'start';
+				$titleMonitor = _('Start monitoring this user');
+				$image = $HTML->getStartMonitoringPic($titleMonitor, '');
+			}
+			$title .= util_make_link('/developer/monitor.php?diary_user='.$user->getID(), $image, array('title' => $titleMonitor));
+		}
+		$HTML->header(array('title' => $title));
 
 		if (forge_get_config('user_home_widget')) {
 			if (session_loggedin() && ($user->getID() == user_getid())) {

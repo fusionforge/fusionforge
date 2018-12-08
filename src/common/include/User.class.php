@@ -1814,6 +1814,86 @@ Email: %3$s
 			return group_get_objects(util_result_column_to_array($res,0));
 		}
 	}
+
+	/**
+	 * getMonitoredUserEmailAddress - get the email addresses of users who monitor this user
+	 *
+	 * @return	string	The list of emails comma separated
+	 */
+	function getMonitoredUserEmailAddress() {
+		$MonitorElementObject = new MonitorElement('user');
+		return $MonitorElementObject->getAllEmailsInCommatSeparated($this->getID());
+	}
+
+	/**
+	 * getMonitorIds - get user ids monitoring this user.
+	 *
+	 * @return	array of user ids monitoring this user.
+	 */
+	function getMonitorIds() {
+		$MonitorElementObject = new MonitorElement('user');
+		return $MonitorElementObject->getMonitorUsersIdsInArray($this->getID());
+	}
+
+	/**
+	 * isMonitoredBy - get the monitored status of this user for a specific user id.
+	 *
+	 * @param	string	$userid
+	 * @return	bool	true if monitored by this user
+	 */
+	function isMonitoredBy($userid = 'ALL') {
+		$MonitorElementObject = new MonitorElement('user');
+		if ( $userid == 'ALL' ) {
+			return $MonitorElementObject->isMonitoredByAny($this->getID());
+		} else {
+			return $MonitorElementObject->isMonitoredByUserId($this->getID(), $userid);
+		}
+	}
+
+	/**
+	 * removeMonitoredBy - remove this user for a specific user id for monitoring.
+	 *
+	 * @param	int	$userid	User ID
+	 * @return	bool	true if success
+	 */
+	function removeMonitoredBy($userid) {
+		$MonitorElementObject = new MonitorElement('user');
+		if (!$MonitorElementObject->disableMonitoringByUserId($this->getID(), $userid)) {
+			$this->setError($MonitorElementObject->getErrorMessage());
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * addMonitoredBy - add this user for a specific user id for monitoring.
+	 *
+	 * @param	int	$userid	User ID
+	 * @return	bool	true if success
+	 */
+	function addMonitoredBy($userid) {
+		$MonitorElementObject = new MonitorElement('user');
+		if (!$MonitorElementObject->enableMonitoringByUserId($this->getID(), $userid)) {
+			$this->setError($MonitorElementObject->getErrorMessage());
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * clearMonitor - remove all entries of monitoring for this user.
+	 *
+	 * @return	bool	true if success.
+	 */
+	function clearMonitor() {
+		$MonitorElementObject = new MonitorElement('user');
+		if (!$MonitorElementObject->clearMonitor($this->getID())) {
+			$this->setError($MonitorElementObject->getErrorMessage());
+			return false;
+		}
+		return true;
+	}
+
 }
 
 
