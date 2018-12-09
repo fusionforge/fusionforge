@@ -125,7 +125,6 @@ require_once $gfcommon.'include/MonitorElement.class.php';
 					$j = 0;
 					$last_day = 0;
 					foreach ($results as $arr) {
-						var_dump($arr);
 						if (!$ffactivity->check_perm_for_activity($arr, $cached_perms)) {
 							continue;
 						}
