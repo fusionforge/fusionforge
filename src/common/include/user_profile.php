@@ -137,6 +137,10 @@ function user_personal_information($user, $compact = false, $title = false) {
 		$subcells[][] = '<small>'.util_make_link_u($user->getUnixName(), $user->getID(), util_make_url_u($user->getUnixName(), $user->getID())).'</small>';
 		$subtable .= $HTML->multiTableRow(array(), $subcells);
 	}
+	$subcells = array();
+	$subcells[][] = _('Followers/Following')._(':');
+	$subcells[][] = count($user->getMonitorIds()).'/'.count($user->isMonitoredBy());
+	$subtable .= $HTML->multiTableRow(array(), $subcells);
 	$subtable .= $HTML->listTableBottom();
 	$cells[][] = $subtable;
 	$html .= $HTML->multiTableRow(array(), $cells);
