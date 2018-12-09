@@ -16,7 +16,7 @@ ScriptAliasMatch ^/authscm/[^/]+/scmhg/cgi-bin/(.*) ${FF__core__plugins_path}/sc
 	AllowOverride None
 	Require all granted
 	# Work-around for FF40 https://bugzilla.mozilla.org/show_bug.cgi?id=647010
-	ErrorDocument 401 "Please <a href='' target='_top'>login to gitweb</a> to browse private source code.
+	ErrorDocument 401 "Please <a href='' target='_top'>login to hgweb</a> to browse private source code.
 	# FF40 discards this, hopefully they'll make it work in the near future:
 	#Header always set Access-Control-Allow-Origin "${FF__core__web_host}"
 	#Header always set Access-Control-Allow-Credentials "true"
