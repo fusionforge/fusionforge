@@ -46,10 +46,8 @@ require_once $gfcommon.'include/MonitorElement.class.php';
 		} else {
 			echo $HTML->listTableTop();
 			$cells[][] = _('Following');
-			$cells[][] = _('Followers');
-			echo $HTML->multiTableRow(array(), $cells);
-			$cells = array();
 			$cells[][] = count($followerIds);
+			$cells[][] = _('Followers');
 			$cells[][] = count($monitoredUserIds);
 			echo $HTML->multiTableRow(array(), $cells);
 			echo $HTML->listTableBottom();
