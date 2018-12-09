@@ -53,56 +53,55 @@ require_once $gfcommon.'include/MonitorElement.class.php';
 			$cells[][] = count($monitoredUserIds);
 			echo $HTML->multiTableRow(array(), $cells);
 			echo $HTML->listTableBottom();
-			$groupsArr = array();
-			$date_format = _('%Y-%m-%d');
-			$ids = array();
-			$texts = array();
-
-			if (forge_get_config('use_forum')) {
-				$ids[]		= 'forumpost';
-				$texts[]	= _('Forum Post');
-			}
-
-			if (forge_get_config('use_tracker')) {
-				$ids[]		= 'trackeropen';
-				$texts[]	= _('Tracker Opened');
-				$ids[]		= 'trackerclose';
-				$texts[]	= _('Tracker Closed');
-			}
-
-			if (forge_get_config('use_news')) {
-				$ids[]		= 'news';
-				$texts[]	= _('News');
-			}
-
-			if (forge_get_config('use_pm')) {
-				$ids[]		= 'taskopen';
-				$texts[]	= _('Tasks Opened');
-				$ids[]		= 'taskclose';
-				$texts[]	= _('Tasks Closed');
-				$ids[]		= 'taskdelete';
-				$texts[]	= _('Tasks Deleted');
-			}
-
-			if (forge_get_config('use_frs')) {
-				$ids[]		= 'frsrelease';
-				$texts[]	= _('FRS Release');
-			}
-
-			if (forge_get_config('use_docman')) {
-				$ids[]		= 'docmannew';
-				$texts[]	= _('New Documents');
-				$ids[]		= 'docmanupdate';
-				$texts[]	= _('Updated Documents');
-				$ids[]		= 'docgroupnew';
-				$texts[]	= _('New Directories');
-			}
-
-			if (forge_get_config('use_diary')) {
-				$ids[]		= 'diaryentry';
-				$texts[]	= _('New Diary Entries');
-			}
 			if (count($followerIds) > 0) {
+				$date_format = _('%Y-%m-%d');
+				$ids = array();
+				$texts = array();
+
+				if (forge_get_config('use_forum')) {
+					$ids[]		= 'forumpost';
+					$texts[]	= _('Forum Post');
+				}
+
+				if (forge_get_config('use_tracker')) {
+					$ids[]		= 'trackeropen';
+					$texts[]	= _('Tracker Opened');
+					$ids[]		= 'trackerclose';
+					$texts[]	= _('Tracker Closed');
+				}
+
+				if (forge_get_config('use_news')) {
+					$ids[]		= 'news';
+					$texts[]	= _('News');
+				}
+
+				if (forge_get_config('use_pm')) {
+					$ids[]		= 'taskopen';
+					$texts[]	= _('Tasks Opened');
+					$ids[]		= 'taskclose';
+					$texts[]	= _('Tasks Closed');
+					$ids[]		= 'taskdelete';
+					$texts[]	= _('Tasks Deleted');
+				}
+
+				if (forge_get_config('use_frs')) {
+					$ids[]		= 'frsrelease';
+					$texts[]	= _('FRS Release');
+				}
+
+				if (forge_get_config('use_docman')) {
+					$ids[]		= 'docmannew';
+					$texts[]	= _('New Documents');
+					$ids[]		= 'docmanupdate';
+					$texts[]	= _('Updated Documents');
+					$ids[]		= 'docgroupnew';
+					$texts[]	= _('New Directories');
+				}
+
+				if (forge_get_config('use_diary')) {
+					$ids[]		= 'diaryentry';
+					$texts[]	= _('New Diary Entries');
+				}
 				$section = $ids;
 				$ffactivity = new Activity();
 				if (!isset($begin)) {
@@ -126,6 +125,7 @@ require_once $gfcommon.'include/MonitorElement.class.php';
 					$j = 0;
 					$last_day = 0;
 					foreach ($results as $arr) {
+						var_dump($arr);
 						if (!$ffactivity->check_perm_for_activity($arr, $cached_perms)) {
 							continue;
 						}
@@ -138,7 +138,7 @@ require_once $gfcommon.'include/MonitorElement.class.php';
 						if (!$displayTableTop) {
 							$theader = array();
 							$theader[] = _('Time');
-							$theader[] = _('Project');
+							$theader[] = _('User');
 							$theader[] = _('Activity');
 
 							echo $HTML->listTableTop($theader);
@@ -151,11 +151,8 @@ require_once $gfcommon.'include/MonitorElement.class.php';
 						}
 						$cells = array();
 						$cells[][] = date('H:i:s',$arr['activity_date']);
-						if (isset($arr['group_id']) && $arr['group_id']) {
-							if (!isset($groupsArr[$arr['group_id']])) {
-								$groupsArr[$arr['group_id']] = group_get_object($arr['group_id']);
-							}
-							$cells[][] = util_make_link_g($groupsArr[$arr['group_id']]->getUnixName(), $groupsArr[$arr['group_id']]->getID(), $groupsArr[$arr['group_id']]->getPublicName());
+						if (isset($arr['user_id']) && $arr['user_id']) {
+							$cells[][] = util_make_link_u($arr['user_name'], $arr['user_id'], $arr['realname']);
 						} else {
 							$cells[][] = '--';
 						}
