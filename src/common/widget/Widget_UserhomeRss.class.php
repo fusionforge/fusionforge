@@ -37,4 +37,4 @@ class Widget_UserhomeRss extends Widget_Rss {
 	function getDescription() {
 		return _('Allow you to include public rss (or atom) feeds into your profile.');
 	}
-} 
+}
