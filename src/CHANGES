@@ -2,7 +2,8 @@ FusionForge X.y:
 
 FusionForge 6.1.1:
 * Widget User Page: fix owner test to ensure the user is the owner of the layout.
-* fix [#903]: scmhook commitEmail for scmhg broken
+* Plugin Scmhook: fix scmhook commitEmail for scmhg broken [#903]
+* Plugin Scmsvn: fix <reponame>_scmsvn_paths.txt support [#906]
 
 FusionForge 6.1:
 * Accounts: minimum password length is now 8 (Sylvain Beucler)

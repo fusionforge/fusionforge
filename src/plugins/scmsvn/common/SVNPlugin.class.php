@@ -109,12 +109,18 @@ some control over it to the project's administrator.");
 		}
 		// Check scm_path module presence in repository
 		$modules = array();
+		$repo = 'file://' . forge_get_config('repos_path', $this->name).'/'.$repo_name;
 		foreach ($scm_paths as $scm_path) {
+			$scm_path = trim($scm_path);
 			if (strpos($scm_path, "!") === false) {
-				$repo = 'file://' . forge_get_config('repos_path', $this->name).'/'.$repo_name;
 				$res = array();
-				if (!(exec("svn ls '$repo'", $res) && in_array($scm_path.'/', $res))) {
-					$modules[] = '/'.$scm_path;
+				exec("svn info '$repo'", $res);
+				if (!preg_grep("/svn: warning: W170000: URL/", $res)) {
+					if (substr($scm_path, 0, 1) === '/') {
+						$modules[] = $scm_path;
+					} else {
+						$modules[] = '/'.$scm_path;
+					}
 				}
 			}
 		}
