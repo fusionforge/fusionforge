@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
- * Copyright 2010-2013,2016, Franck Villaume - TrivialDev
+ * Copyright 2010-2013,2016,2018 Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -191,8 +191,8 @@ if (!$is_logged) {
 <p align="center">
 <input type="submit" name="send_mail" value="<?php echo _('Send Message') ?>" />
 </p>
-</form>
 <?php
+echo $HTML->closeForm();
 $HTML->footer();
 
 // Local Variables:
