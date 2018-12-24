@@ -324,6 +324,7 @@ require_once $gfcommon.'widget/Widget_UserhomeRss.class.php';
 				break;
 			case 'uhrss';
 				$o = new Widget_UserhomeRss($owner_id);
+				break;
 			default:
 				//$em = EventManager::instance();
 				//$em->processEvent('widget_instance', array('widget' => $widget_name, 'instance' => &$o));
