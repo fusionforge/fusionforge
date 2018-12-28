@@ -934,6 +934,13 @@ class CliActions {
 			if (isset($stream['data_array']['user_id'])) {
 				$importRefMapping['user'][$stream['data_array']['user_id']] = $ffuser->getID();
 			}
+			if (isset($stream['data_array']['status']) && in_array($stream['data_array']['status'], array('P', 'A', 'S', 'D'))) {
+				if (!$ffuser->setStatus($stream['data_array']['status'])) {
+					echo $ffuser->getErrorMessage()."\n";
+					db_rollback();
+					return false;
+				}
+			}
 			echo _('User injected')."\n";
 			db_commit();
 			return true;
