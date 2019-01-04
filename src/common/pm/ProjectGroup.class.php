@@ -40,14 +40,14 @@ function &projectgroup_get_object($group_project_id, $data = false) {
 		} else {
 			$res = db_query_params('SELECT * FROM project_group_list_vw WHERE group_project_id=$1',
 						array($group_project_id));
-			if (db_numrows($res) <1 ) {
-				$PROJECTGROUP_OBJ["_".$group_project_id."_"]=false;
-				return false;
-			}
-			$data = db_fetch_array($res);
 		}
-		$Group = group_get_object($data["group_id"]);
-		$PROJECTGROUP_OBJ["_".$group_project_id."_"]= new ProjectGroup($Group,$group_project_id,$data);
+		if (!$res || db_numrows($res) <1 ) {
+			$PROJECTGROUP_OBJ["_".$group_project_id."_"] = false;
+		} else {
+			$data = db_fetch_array($res);
+			$Group = group_get_object($data["group_id"]);
+			$PROJECTGROUP_OBJ["_".$group_project_id."_"] = new ProjectGroup($Group,$group_project_id,$data);
+		}
 	}
 	return $PROJECTGROUP_OBJ["_".$group_project_id."_"];
 }
