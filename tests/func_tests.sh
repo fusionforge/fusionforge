@@ -52,12 +52,14 @@ esac
 fix_httpd_itk() {
 	case $INSTALL_OS in
 		centos*)
-			echo 'WARNING: WORKAROUND for docker/lxc. Downgrade httpd-itk.'
-			echo 'TODO: check for newer version. Debian not impacted.'
-			curl https://kojipkgs.fedoraproject.org//packages/httpd-itk/2.4.7.04/1.el7/x86_64/httpd-itk-2.4.7.04-1.el7.x86_64.rpm -o /tmp/httpd-itk-2.4.7.04-1.el7.x86_64.rpm
-			yum downgrade -y /tmp/httpd-itk-2.4.7.04-1.el7.x86_64.rpm
-			rm -f /tmp/httpd-itk-2.4.7.04-1.el7.x86_64.rpm
-			service httpd restart || true
+			if [[ `rpm -qi httpd-itk | grep Release | awk '{print $3}'` != '1.el7' ]]; then
+				echo 'WARNING: WORKAROUND for docker/lxc. Downgrade httpd-itk.'
+				echo 'TODO: check for newer version. Debian not impacted.'
+				curl https://kojipkgs.fedoraproject.org//packages/httpd-itk/2.4.7.04/1.el7/x86_64/httpd-itk-2.4.7.04-1.el7.x86_64.rpm -o /tmp/httpd-itk-2.4.7.04-1.el7.x86_64.rpm
+				yum downgrade -y /tmp/httpd-itk-2.4.7.04-1.el7.x86_64.rpm
+				rm -f /tmp/httpd-itk-2.4.7.04-1.el7.x86_64.rpm
+				service httpd restart || true
+			fi
 		;;
 	esac
 }
@@ -67,12 +69,12 @@ install_selenium() {
 	# psmisc for db_reload.sh:killall
 	# rsyslog to get e.g. sshd error log
 	if [ -e /etc/debian_version ]; then
-		ICEWEASEL_VERSION=`apt-cache show firefox-esr | grep Version | grep -v '60' | cut -f 2 -d' '`
-		apt-get -y install wget default-jre firefox-esr=$ICEWEASEL_VERSION
+		apt-get -y install wget firefox-esr net-tools
 		if grep -q ^8 /etc/debian_version; then
 		    apt-get -y install phpunit phpunit-selenium patch psmisc patch rsyslog
+		    apt-get -y install -t jessie-backports openjdk-8-jdk
 		else
-		    apt-get -y install php-curl unzip composer patch psmisc patch rsyslog
+		    apt-get -y install php-curl unzip composer patch psmisc patch rsyslog default-jre
 		    mkdir -p /usr/local/share/php
 		    pushd /usr/local/share/php
 		    composer --no-plugins --no-scripts require phpunit/phpunit
@@ -81,19 +83,13 @@ install_selenium() {
 		fi
 	else
 		yum -y install wget firefox
-		if yum list java-1.7.0-openjdk >/dev/null 2>&1 ; then
-		    yum install -y java-1.7.0-openjdk
-		else
-		    yum install -y java-1.6.0
-		fi
+		yum install -y java-1.8.0-openjdk
 		yum --enablerepo=epel install -y php-phpunit-PHPUnit php-phpunit-PHPUnit-Selenium psmisc patch net-tools
-		# Firefox > 60 does not work with Selenium 2
-		yum downgrade -y firefox-52.8.0-1.el7.centos
 	fi
 
 	# Install selenium (no packaged version available)
-	SELENIUMMAJOR=2
-	SELENIUMMINOR=53
+	SELENIUMMAJOR=3
+	SELENIUMMINOR=8
 	SELENIUMMICRO=1
 	SELENIUMURL=http://selenium-release.storage.googleapis.com/$SELENIUMMAJOR.$SELENIUMMINOR/selenium-server-standalone-$SELENIUMMAJOR.$SELENIUMMINOR.$SELENIUMMICRO.jar
 	mkdir -p /usr/share/selenium/
@@ -199,7 +195,7 @@ EOF
 echo "Starting Selenium"
 killall -9 java || true
 timeout=60
-PATH=/usr/lib/iceweasel:/usr/lib/firefox-esr:/usr/lib64/firefox:$PATH LANG=C java -jar /usr/share/selenium/selenium-server.jar -trustAllSSLCertificates -singleWindow &
+PATH=/usr/lib/iceweasel:/usr/lib/firefox-esr:/usr/lib64/firefox:$PATH LANG=C java -jar /usr/share/selenium/selenium-server.jar -enablePassThrough false &
 pid=$!
 i=0
 while [ $i -lt $timeout ] && ! netstat -tnl 2>/dev/null | grep -q :4444 && kill -0 $pid 2>/dev/null; do
