@@ -96,6 +96,18 @@ install_selenium() {
 	http_proxy=$PROXY wget -c $SELENIUMURL \
 		-O /usr/share/selenium/selenium-server.jar
 
+	# Install GeckoDriver
+	GECKODRIVERMAJOR=0
+	GECKODRIVERMINOR=19
+	GECKODRIVERMICRO=1
+	GECKORDRIVERURL=https://github.com/mozilla/geckodriver/releases/download/v$GECKODRIVERMAJOR.$GECKODRIVERMINOR.$GECKODRIVERMICRO/geckodriver-v$GECKODRIVERMAJOR.$GECKODRIVERMINOR.$GECKODRIVERMICRO-linux64.tar.gz
+	mkdir -p /usr/share/geckodriver/
+	http_proxy=$PROXY wget -c $GECKODRIVERURL \
+                -O /usr/share/geckodriver/geckodriver.tar.gz
+
+	tar -zxf /usr/share/geckodriver/geckodriver.tar.gz
+	chmod +x /usr/share/geckodriver/geckodriver
+
 	# Add alias to /etc/hosts
 	if ! grep -q ^$(hostname -i) /etc/hosts ; then
 		echo $(hostname -i) $(hostname -f) $(hostname)>> /etc/hosts
@@ -195,7 +207,7 @@ EOF
 echo "Starting Selenium"
 killall -9 java || true
 timeout=60
-PATH=/usr/lib/iceweasel:/usr/lib/firefox-esr:/usr/lib64/firefox:$PATH LANG=C java -jar /usr/share/selenium/selenium-server.jar -enablePassThrough false &
+PATH=/usr/share/geckodriver:/usr/lib/iceweasel:/usr/lib/firefox-esr:/usr/lib64/firefox:$PATH LANG=C java -jar /usr/share/selenium/selenium-server.jar -enablePassThrough false &
 pid=$!
 i=0
 while [ $i -lt $timeout ] && ! netstat -tnl 2>/dev/null | grep -q :4444 && kill -0 $pid 2>/dev/null; do
