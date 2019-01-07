@@ -105,7 +105,7 @@ install_selenium() {
 	http_proxy=$PROXY wget -c $GECKODRIVERURL \
                 -O /usr/share/geckodriver/geckodriver.tar.gz
 
-	tar -zxf /usr/share/geckodriver/geckodriver.tar.gz
+	tar -zxf /usr/share/geckodriver/geckodriver.tar.gz -C /usr/share/geckodriver/
 	chmod +x /usr/share/geckodriver/geckodriver
 
 	# Add alias to /etc/hosts
