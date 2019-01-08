@@ -58,7 +58,7 @@ if (@include_once '/usr/local/share/php/vendor/autoload.php') {
 }
 
 
-class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
+class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 {
 	public $logged_in = false ;
 	public $fixture = 'base';
