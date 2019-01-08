@@ -54,7 +54,7 @@ require_once $config;
 if (@include_once '/usr/local/share/php/vendor/autoload.php') {
         class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase {}
 } else {
-        require_once 'PHPUnit/Extensions/SeleniumTestCase.php';
+        require_once 'PHPUnit/Extensions/Selenium2TestCase.php';
 }
 
 
