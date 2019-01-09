@@ -76,7 +76,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 			$this->screenshotUrl = getenv('SELENIUM_RC_URL');
 		}
 		
-		$this->setBrowser('*firefox');
+		$this->setBrowser('firefox');
 		$this->setBrowserUrl(URL);
 		$this->setHost(SELENIUM_RC_HOST);
 
