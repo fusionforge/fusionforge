@@ -89,8 +89,8 @@ install_selenium() {
 
 	# Install selenium (no packaged version available)
 	SELENIUMMAJOR=3
-	SELENIUMMINOR=8
-	SELENIUMMICRO=1
+	SELENIUMMINOR=141
+	SELENIUMMICRO=59
 	SELENIUMURL=http://selenium-release.storage.googleapis.com/$SELENIUMMAJOR.$SELENIUMMINOR/selenium-server-standalone-$SELENIUMMAJOR.$SELENIUMMINOR.$SELENIUMMICRO.jar
 	mkdir -p /usr/share/selenium/
 	http_proxy=$PROXY wget -c $SELENIUMURL \
@@ -207,7 +207,7 @@ EOF
 echo "Starting Selenium"
 killall -9 java || true
 timeout=60
-PATH=/usr/share/geckodriver:/usr/lib/iceweasel:/usr/lib/firefox-esr:/usr/lib64/firefox:$PATH LANG=C java -jar /usr/share/selenium/selenium-server.jar -enablePassThrough false &
+PATH=/usr/share/geckodriver:/usr/lib/iceweasel:/usr/lib/firefox-esr:/usr/lib64/firefox:$PATH LANG=C java -jar /usr/share/selenium/selenium-server.jar &
 pid=$!
 i=0
 while [ $i -lt $timeout ] && ! netstat -tnl 2>/dev/null | grep -q :4444 && kill -0 $pid 2>/dev/null; do
