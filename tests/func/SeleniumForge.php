@@ -77,6 +77,8 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 		}
 		
 		$this->setBrowser('firefox');
+		$capabilities = array('acceptInsecureCerts' => true);
+		$this->setDesiredCapabilities($capabilities);
 		$this->setBrowserUrl(URL);
 		$this->setHost(SELENIUM_RC_HOST);
 
