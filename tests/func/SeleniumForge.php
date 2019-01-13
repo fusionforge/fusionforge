@@ -191,8 +191,10 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 	}
 
 	public function clickAndWait($link) {
+		// click does not do what we expect! Need to be rewrite...
 		$this->click($link);
-		$this->waitForPageToLoad();
+		// we may need to implement this waitForPageToLoad... let's comment it first.
+		//$this->waitForPageToLoad();
 	}
 
 	public function waitForTextPresent($text) {
@@ -379,7 +381,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 	public function logout() {
 //		$this->click("link=Log Out");
 		$this->open( ROOT ."/account/logout.php" );
-		$this->waitForPageToLoad();
+		//$this->waitForPageToLoad();
 
 		$this->logged_in = false ;
 	}
@@ -569,7 +571,17 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 				'args' => array(),
 			));
 		$element = $this->elementFromResponseValue($elementArray);
-		$this->assertRegExp("/$text/", $element->text());
+		if (strpos($element->text(), $text) === false) {
+			return false;
+		}
+		return true;
+	}
+
+	function getLocation() {
+		return $this->execute(array(
+				'script' => 'return window.location.href;',
+				'args' => array(),
+			));
 	}
 }
 
