@@ -156,14 +156,12 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 		}
 	}
 
-	public function clickAndWait($link)
-	{
+	public function clickAndWait($link) {
 		$this->click($link);
 		$this->waitForPageToLoad();
 	}
 
-	public function waitForTextPresent($text)
-	{
+	public function waitForTextPresent($text) {
 		for ($second = 0; ; $second++) {
 			if ($second >= 30) $this->fail("timeout");
 			try {
@@ -173,8 +171,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 		}
 	}
 
-	public function runCommand($cmd)
-	{
+	public function runCommand($cmd) {
 		system($cmd, $ret);
 		$this->assertEquals(0, $ret);
 		ob_flush();
@@ -195,21 +192,18 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 		ob_flush();
 	}
 
-	public function cron($cmd)
-	{
+	public function cron($cmd) {
 		$this->runCommand("forge_run_job $cmd");
 	}
 
-	public function cron_for_plugin($cmd, $plugin)
-	{
+	public function cron_for_plugin($cmd, $plugin) {
 		$this->runCommand("forge_run_plugin_job $plugin $cmd");
 	}
 
-    /**
-     * Execute pending system tasks
-     */
-	public function waitSystasks()
-	{
+	/**
+	 * Execute pending system tasks
+	 */
+	public function waitSystasks() {
 		$this->runCommand(dirname(__FILE__).'/../../src/bin/systasks_wait_until_empty.php');
 	}
 
@@ -217,8 +211,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 		$this->createAndGoto('ProjectA');
 	}
 
-	public function populateStandardTemplate($what='all')
-	{
+	public function populateStandardTemplate($what='all') {
 		if ($what == 'all') {
 			$what = array('trackers','tasks','forums');
 		} elseif ($what == 'empty') {
@@ -326,8 +319,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 		}
 	}
 
-	public function login($username)
-	{
+	public function login($username) {
 		$this->open( ROOT );
 		if ($this->isTextPresent('Log Out')) {
 			$this->logout();
@@ -336,8 +328,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 		$this->triggeredLogin($username);
 	}
 
-	public function triggeredLogin($username)
-	{
+	public function triggeredLogin($username) {
 		if ($username == FORGE_ADMIN_USERNAME) {
 			$password = FORGE_ADMIN_PASSWORD;
 		} else {
@@ -351,8 +342,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 		$this->logged_in = $username ;
 	}
 
-	public function logout()
-	{
+	public function logout() {
 //		$this->click("link=Log Out");
 		$this->open( ROOT ."/account/logout.php" );
 		$this->waitForPageToLoad();
@@ -360,21 +350,18 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 		$this->logged_in = false ;
 	}
 
-	public function switchUser($username)
-	{
+	public function switchUser($username) {
 		if ($this->logged_in != $username) {
 			$this->logout();
 			$this->login($username);
 		}
 	}
 
-	public function isLoginRequired()
-	{
+	public function isLoginRequired() {
 		return $this->isTextPresent("You've been redirected to this login page") ;
 	}
 
-	public function isPermissionDenied()
-	{
+	public function isPermissionDenied() {
 		return $this->isTextPresent("Permission denied") ;
 	}
 
@@ -431,8 +418,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 		$this->gotoProject($project);
 	}
 
-	public function createUser ($login)
-	{
+	public function createUser ($login) {
 		$this->switchUser(FORGE_ADMIN_USERNAME);
 		$this->open( ROOT );
 		$this->clickAndWait("link=Site Admin");
