@@ -520,6 +520,14 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 			$this->skip_test($msg);
 		}
 	}
+
+	/**
+	 * add PHP wrappers for SeleniumTestCase compatibility
+	 */
+
+	function open($url) {
+		$this->url($url);
+	}
 }
 
 // Local Variables:

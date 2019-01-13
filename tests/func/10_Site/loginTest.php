@@ -49,7 +49,7 @@ class LoginProcess extends FForge_SeleniumTestCase
 	function testLogin()
 	{
 		// Test with a normal login.
-		$this->url( ROOT );
+		$this->open( ROOT );
 		if (!$this->isTextPresent("Log In")) {
 			$this->logout();
 		}
@@ -71,16 +71,16 @@ class LoginProcess extends FForge_SeleniumTestCase
 		$this->clickAndWait("login");
 		$this->assertTrue($this->isTextPresent("Forge Admin"));
 		$this->assertTrue($this->isTextPresent("Log Out"));
-		$this->url( ROOT );
+		$this->open( ROOT );
 		$this->assertTrue($this->isTextPresent("Forge Admin"));
 		$this->assertTrue($this->isTextPresent("Log Out"));
 		$this->logout();
-		$this->url( ROOT );
+		$this->open( ROOT );
 		// Verify that logout is succesful
 		$this->assertTrue($this->isTextPresent("Log In"));
 
 		// Test with an empty password.
-		$this->url( ROOT );
+		$this->open( ROOT );
 		$this->clickAndWait("link=Log In");
 		$this->assertTrue($this->isTextPresent("Log In"));
 		$this->type("form_loginname", FORGE_ADMIN_USERNAME);
@@ -92,7 +92,7 @@ class LoginProcess extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("Log In"));
 
 		// Test with a wrong password.
-		$this->url( ROOT );
+		$this->open( ROOT );
 		$this->clickAndWait("link=Log In");
 		$this->type("form_loginname", FORGE_ADMIN_USERNAME);
 		$this->type("form_pw", "awrongpassword");
@@ -114,7 +114,7 @@ class LoginProcess extends FForge_SeleniumTestCase
 		$this->clickAndWait("submit");
 
 		$this->logout();
-		$this->url( ROOT );
+		$this->open( ROOT );
 		$this->clickAndWait("link=Log In");
 		$this->type("form_loginname", FORGE_ADMIN_USERNAME);
 		$this->type("form_pw", FORGE_OTHER_PASSWORD);
@@ -139,7 +139,7 @@ class LoginProcess extends FForge_SeleniumTestCase
 		$this->clickAndWait("submit");
 
 		$this->logout();
-		$this->url( ROOT );
+		$this->open( ROOT );
 		$this->clickAndWait("link=Log In");
 		$this->type("form_loginname", FORGE_ADMIN_USERNAME);
 		$this->type("form_pw", FORGE_ADMIN_PASSWORD);
@@ -148,7 +148,7 @@ class LoginProcess extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("Log Out"));
 
 		// Test session expiration
-		$this->url( ROOT );
+		$this->open( ROOT );
 		if (!$this->isTextPresent("Log In")) {
 			$this->logout();
 		}
@@ -158,24 +158,24 @@ class LoginProcess extends FForge_SeleniumTestCase
 		$this->clickAndWait("login");
 		$this->assertTrue($this->isTextPresent("Forge Admin"));
 		$this->assertTrue($this->isTextPresent("Log Out"));
-		$this->url( ROOT );
+		$this->open( ROOT );
 		$this->assertTrue($this->isTextPresent("Forge Admin"));
 		$this->assertTrue($this->isTextPresent("Log Out"));
 		// Shorten session validity delay
 		$this->changeConfig(array("core" => array("session_expire" => "10")));
 		// Ensure session cookie is refreshed
 		sleep(5);
-		$this->url( ROOT );
+		$this->open( ROOT );
 		sleep(5);
-		$this->url( ROOT );
+		$this->open( ROOT );
 		sleep(5);
-		$this->url( ROOT );
+		$this->open( ROOT );
 		sleep(5);
 		$this->assertTrue($this->isTextPresent("Forge Admin"));
 		$this->assertTrue($this->isTextPresent("Log Out"));
 		// Now ensure that the session expires
 		sleep(15);
-		$this->url( ROOT );
+		$this->open( ROOT );
 		$this->assertFalse($this->isTextPresent("Forge Admin"));
 		$this->assertFalse($this->isTextPresent("Log Out"));
 	}
