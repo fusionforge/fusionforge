@@ -191,10 +191,10 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 	}
 
 	public function clickAndWait($link) {
-		// click does not do what we expect! Need to be rewrite...
-		$this->click($link);
-		// we may need to implement this waitForPageToLoad... let's comment it first.
-		//$this->waitForPageToLoad();
+		$this->execute(array(
+				'script' => 'document.querySelector(\'a[href*="'.$link.'"]\').click()',
+				'args' => array(),
+		));
 	}
 
 	public function waitForTextPresent($text) {
