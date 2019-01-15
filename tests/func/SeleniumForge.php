@@ -191,10 +191,10 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 	}
 
 	public function clickAndWait($link) {
-		$this->execute(array(
-				'script' => 'document.querySelector(\'a[href*="'.$link.'"]\').click()',
-				'args' => array(),
-		));
+		if (preg_match('/^link=/', $link)) {
+			$text = substr($link, 5);
+			$this->byLinkText($link).click();
+		}
 	}
 
 	public function waitForTextPresent($text) {
