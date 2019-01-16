@@ -71,10 +71,10 @@ install_selenium() {
 	if [ -e /etc/debian_version ]; then
 		apt-get -y install wget firefox-esr net-tools
 		if grep -q ^8 /etc/debian_version; then
-		    apt-get -y install phpunit phpunit-selenium psmisc rsyslog
+		    apt-get -y install phpunit phpunit-selenium psmisc rsyslog patch
 		    apt-get -y install -t jessie-backports openjdk-8-jdk
 		else
-		    apt-get -y install php-curl unzip composer psmisc rsyslog default-jre
+		    apt-get -y install php-curl unzip composer psmisc rsyslog default-jre patch
 		    mkdir -p /usr/local/share/php
 		    pushd /usr/local/share/php
 		    composer --no-plugins --no-scripts require phpunit/phpunit
@@ -82,9 +82,8 @@ install_selenium() {
 		    popd
 		fi
 	else
-		yum -y install wget firefox
-		yum install -y java-1.8.0-openjdk
-		yum --enablerepo=epel install -y php-phpunit-PHPUnit php-phpunit-PHPUnit-Selenium psmisc net-tools
+		yum -y install wget firefox java-1.8.0-openjdk
+		yum --enablerepo=epel install -y php-phpunit-PHPUnit php-phpunit-PHPUnit-Selenium psmisc net-tools patch
 	fi
 
 	# Install selenium (no packaged version available)
@@ -114,6 +113,36 @@ install_selenium() {
 		echo $(hostname -i) $(hostname -f) $(hostname)>> /etc/hosts
 	fi
 	grep -q "^$(hostname -i).*$(forge_get_config scm_host)" /etc/hosts || sed -i -e "s/^$(hostname -i).*/& $(forge_get_config scm_host)/" /etc/hosts
+
+	#fix https://github.com/giorgiosironi/phpunit-selenium/issues/427
+	patch -N /usr/share/*/PHPUnit/Extensions/Selenium2TestCase/Element.php <<'EOF' || true
+--- Element.php.dist 2014-11-02 09:23:27.000000000 +0000
++++ Element.php     2019-01-15 15:00:44.034513685 +0000
+@@ -77,10 +77,21 @@
+             PHPUnit_Extensions_Selenium2TestCase_URL $parentFolder,
+             PHPUnit_Extensions_Selenium2TestCase_Driver $driver)
+     {
++        $key = false;
+         if (!isset($value['ELEMENT'])) {
+-            throw new InvalidArgumentException('Element not found.');
++            foreach ($value as $lKey => $val) {
++                if (substr($lKey,0,7) === "element") {
++                    $key = $lKey;
++                    break;
++                }
++            }
++            if (! $key) {
++                throw new InvalidArgumentException('Element not found.');
++            }
++        } else {
++            $key = "ELEMENT";
+         }
+-        $url = $parentFolder->descend($value['ELEMENT']);
++        $url = $parentFolder->descend($value[$key]);
+         return new self($driver, $url);
+     }
+
+EOF
 }
 
 # Mitigate testsuite timeouts, cf.
