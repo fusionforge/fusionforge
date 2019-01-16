@@ -194,6 +194,9 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 		if (preg_match('/^link=/', $link)) {
 			$text = substr($link, 5);
 			$this->byLinkText($text)->click();
+		} else {
+			//default case
+			$this->byName($link)->click();
 		}
 	}
 
@@ -375,15 +378,13 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 		$this->type("form_pw", $password);
 		$this->clickAndWait("login");
 
-		$this->logged_in = $username ;
+		$this->logged_in = $username;
 	}
 
 	public function logout() {
-//		$this->click("link=Log Out");
 		$this->open( ROOT ."/account/logout.php" );
-		//$this->waitForPageToLoad();
 
-		$this->logged_in = false ;
+		$this->logged_in = false;
 	}
 
 	public function switchUser($username) {
@@ -582,6 +583,10 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 				'script' => 'return window.location.href;',
 				'args' => array(),
 			));
+	}
+
+	function type($name, $value) {
+		$this->byName($name)->value($value);
 	}
 }
 
