@@ -193,7 +193,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 	public function clickAndWait($link) {
 		if (preg_match('/^link=/', $link)) {
 			$text = substr($link, 5);
-			$this->byLinkText($text).click();
+			$this->byLinkText($text)->click();
 		}
 	}
 
