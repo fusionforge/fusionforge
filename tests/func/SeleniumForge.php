@@ -194,6 +194,8 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 		if (preg_match('/^link=/', $link)) {
 			$text = substr($link, 5);
 			$this->byLinkText($text)->click();
+		} else if (preg_match('/^\/\/[a-z]/', $link)) {
+			$this->byXpath($link)->click();
 		} else {
 			//default case
 			$this->byName($link)->click();
