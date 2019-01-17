@@ -106,7 +106,8 @@ class LoginProcess extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("Forge Admin"));
 		$this->assertTrue($this->isTextPresent("Log Out"));
 
-		$this->clickAndWait("link=Site Admin");
+		//$this->clickAndWait("link=Site Admin"); // <- this does not work due to element not visble.
+		$this->open(ROOT."/admin/");
 		$this->clickAndWait("link=Display Full User List/Edit Users");
 		$this->clickAndWait("//table/tbody/tr/td/a[contains(@href,'useredit.php') and contains(.,'(admin)')]/../..//a[contains(@href, 'passedit.php?user_id=')]");
 		$this->type("passwd", FORGE_OTHER_PASSWORD);
