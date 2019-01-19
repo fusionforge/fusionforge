@@ -204,7 +204,11 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 			$myelement = $this->byName($link);
 		}
 		sleep(7); // to handle tooltips
-		$myelement->click();
+		try {
+			$myelement->click();
+		} catch (Exception $e) {
+			$this->url($myelement->attribute('href'));
+		}
 	}
 
 	public function waitForTextPresent($text) {
