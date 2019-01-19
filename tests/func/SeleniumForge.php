@@ -193,13 +193,16 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 	public function clickAndWait($link) {
 		if (preg_match('/^link=/', $link)) {
 			$text = substr($link, 5);
-			$this->byLinkText($text)->click();
+			$myelement = $this->byLinkText($text);
 		} else if (preg_match('/^\/\/[a-z]/', $link)) {
-			$this->byXpath($link)->click();
+			$myelement = $this->byXpath($link);
 		} else {
 			//default case
-			$this->byName($link)->click();
+			$myelement = $this->byName($link);
 		}
+		$this->moveto($myelement);
+		sleep(6);
+		$myelement->click();
 	}
 
 	public function waitForTextPresent($text) {
