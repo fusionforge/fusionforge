@@ -2,7 +2,7 @@
 /**
  * Copyright (C) 2008 Alain Peyrat <aljeux@free.fr>
  * Copyright (C) 2009 Alain Peyrat, Alcatel-Lucent
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013,2019, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
