@@ -582,6 +582,13 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 		return true;
 	}
 
+	function isElementPresent($element) {
+		if ($this->byXpath($element) instanceof PHPUnit_Extensions_Selenium2TestCase_Element) {
+			return true;
+		}
+		return false;
+	}
+
 	function getLocation() {
 		return $this->execute(array(
 				'script' => 'return window.location.href;',
