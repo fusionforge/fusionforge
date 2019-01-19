@@ -200,7 +200,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 			//default case
 			$myelement = $this->byName($link);
 		}
-		sleep(6); // to handle tooltips
+		sleep(7); // to handle tooltips
 		$myelement->click();
 	}
 
@@ -266,7 +266,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 
 		$this->createProject ('Tmpl');
 
-		$this->clickAndWait("link=Site Admin");
+		$this->url(ROOT."/admin/");
 		$this->clickAndWait("link=Display Full Project List/Edit Projects");
 		$this->clickAndWait("link=Tmpl");
 		$this->select ("//select[@name='form_template']", "label=Yes") ;
@@ -296,7 +296,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 			$this->clickAndWait("link=Manage Custom Fields");
 			$this->type("name", "URL");
 			$this->type("alias", "url");
-			$this->click("//input[@name='field_type' and @value=4]");
+			$this->clickAndWait("//input[@name='field_type' and @value=4]");
 			$this->clickAndWait("post_changes");
 
 			$this->clickAndWait("link=Admin");
@@ -387,7 +387,6 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 
 	public function logout() {
 		$this->open( ROOT ."/account/logout.php" );
-
 		$this->logged_in = false;
 	}
 
@@ -412,17 +411,13 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 		$saved_user = $this->logged_in ;
 		$this->switchUser ($user) ;
 
-		$this->clickAndWait("link=My Page");
+		$this->url(ROOT."/my/");
 		$this->clickAndWait("link=Register Project");
 		$this->type("full_name", $name);
 		$this->type("purpose", "This is a simple description for $name");
 		$this->type("//textarea[@name='description']", "This is the public description for $name.");
 		$this->type("unix_name", $unix_name);
-		$this->click("//input[@name='scm' and @value='$scm']");
-
-		if ($this->isElementPresent("//select[@name='built_from_template']/option[.='Tmpl']")) {
-			$this->select("//select[@name='built_from_template']", "label=Tmpl");
-		}
+		$this->clickAndWait("//input[@name='scm' and @value='$scm']");
 
 		$this->clickAndWait("submit");
 		$this->assertTextPresent("Your project has been automatically approved");
@@ -604,9 +599,13 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 		}
 	}
 
-	function waitForPageToLoad($integer) {
+	function waitForPageToLoad($integer = 10000) {
 		//do we need to set something???
 		usleep($integer);
+	}
+
+	function assertTextPresent($string) {
+		return $this->assertTrue($this->isTextPresent($string));
 	}
 }
 
