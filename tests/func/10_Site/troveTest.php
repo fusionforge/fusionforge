@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (C) 2009 Alain Peyrat <aljeux@free.fr>
+ * Copyright 2019, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -27,44 +28,44 @@ class Trove extends FForge_SeleniumTestCase
 	{
 		$this->open( ROOT );
 		$this->login(FORGE_ADMIN_USERNAME);
-		$this->click("link=Site Admin");
+		$this->url(ROOT."/admin/");
 		$this->waitForPageToLoad("30000");
-		$this->click("link=Display Trove Map");
+		$this->clickAndWait("link=Display Trove Map");
 		$this->waitForPageToLoad("30000");
 
 		// Test simple modification of an entry (beta => beta2)
-		$this->click("//a[contains(@href, 'trove_cat_edit.php?trove_cat_id=10')]");
+		$this->clickAndWait("//a[contains(@href, 'trove_cat_edit.php?trove_cat_id=10')]");
 		$this->waitForPageToLoad("30000");
 		$this->type("form_shortname", "beta2");
 		$this->type("form_fullname", "4 - Beta2");
 		$this->type("form_description", "Resource2 is in late phases of development. Deliverables are essentially complete, but may still have significant bugs.");
-		$this->click("submit");
+		$this->clickAndWait("submit");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("4 - Beta2"));
 
 		// Test removal of an entry (beta2) (leaf)
-		$this->click("//a[contains(@href, 'trove_cat_edit.php?trove_cat_id=10')]");
+		$this->clickAndWait("//a[contains(@href, 'trove_cat_edit.php?trove_cat_id=10')]");
 		$this->waitForPageToLoad("30000");
-		$this->click("delete");
+		$this->clickAndWait("delete");
 		$this->waitForPageToLoad("30000");
 		$this->assertFalse($this->isTextPresent("4 - Beta2"));
 
 		// Test creation of a new entry (test)
-		$this->click("link=Site Admin");
+		$this->clickAndWait("link=Site Admin");
 		$this->waitForPageToLoad("30000");
-		$this->click("link=Add to the Trove Map");
+		$this->clickAndWait("link=Add to the Trove Map");
 		$this->waitForPageToLoad("30000");
 		$this->type("form_shortname", "Test");
 		$this->type("form_fullname", "Test");
 		$this->type("form_description", "This is a test");
-		$this->click("submit");
+		$this->clickAndWait("submit");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Test"));
 
 		// Test removal of a non empty entry (Microsoft).
-		$this->click("//a[contains(@href, 'trove_cat_edit.php?trove_cat_id=214')]");
+		$this->clickAndWait("//a[contains(@href, 'trove_cat_edit.php?trove_cat_id=214')]");
 		$this->waitForPageToLoad("30000");
-		$this->click("delete");
+		$this->clickAndWait("delete");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Test"));
 		$this->assertFalse($this->isTextPresent("Microsoft"));

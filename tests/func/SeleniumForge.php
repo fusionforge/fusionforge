@@ -2,7 +2,7 @@
 /**
  * Copyright (C) 2007-2008 Alain Peyrat <aljeux at free dot fr>
  * Copyright (C) 2009 Alain Peyrat, Alcatel-Lucent
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013,2019, Franck Villaume - TrivialDev
  * Copyright (C) 2015  Inria (Sylvain Beucler)
  *
  * This file is part of FusionForge.
@@ -194,6 +194,9 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 		if (preg_match('/^link=/', $link)) {
 			$text = substr($link, 5);
 			$myelement = $this->byLinkText($text);
+		} else if (preg_match('/^id=/', $link)) {
+			$id = substr($link, 3);
+			$myelement = $this->byId($id);
 		} else if (preg_match('/^\/\/[a-z]/', $link)) {
 			$myelement = $this->byXpath($link);
 		} else {
@@ -269,7 +272,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 		$this->url(ROOT."/admin/");
 		$this->clickAndWait("link=Display Full Project List/Edit Projects");
 		$this->clickAndWait("link=Tmpl");
-		$this->select ("//select[@name='form_template']", "label=Yes") ;
+		$this->select($this->byXPath("//select[@name='form_template']"))->selectOptionByLabel("Yes");
 		$this->clickAndWait("submit");
 
 		$this->open( ROOT . '/projects/tmpl') ;
