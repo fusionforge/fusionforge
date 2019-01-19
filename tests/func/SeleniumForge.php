@@ -200,8 +200,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 			//default case
 			$myelement = $this->byName($link);
 		}
-		$this->moveto($myelement);
-		sleep(6);
+		sleep(6); // to handle tooltips
 		$myelement->click();
 	}
 
@@ -591,7 +590,16 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 	}
 
 	function type($name, $value) {
-		$this->byName($name)->value($value);
+		if (preg_match('/^\/\/[a-z]/', $name)) {
+			$myelement = $this->byXpath($name)->value($value);
+		} else {
+			$this->byName($name)->value($value);
+		}
+	}
+
+	function waitForPageToLoad($integer) {
+		//do we need to set something???
+		usleep($integer);
 	}
 }
 
