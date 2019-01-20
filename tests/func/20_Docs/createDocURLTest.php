@@ -55,13 +55,13 @@ class CreateDocURL extends FForge_SeleniumTestCase {
 
 		$this->gotoProject('ProjectA');
 		$this->clickAndWait("link=Docs");
-		$this->clickAndWait("addItemDocmanMenu");
+		$this->clickAndWait("id=addItemDocmanMenu");
 		// ugly hack until we fix behavior in docman when no folders exist. We need to click twice on the link
-		$this->clickAndWait("addItemDocmanMenu");
+		$this->clickAndWait("id=addItemDocmanMenu");
 		$this->clickAndWait("id=tabs-new-folder");
 		$this->type("groupname", "docdirectory");
-		$this->clickAndWait("submitaddsubgroup");
-		$this->clickAndWait("addItemDocmanMenu");
+		$this->clickAndWait("id=submitaddsubgroup");
+		$this->clickAndWait("id=addItemDocmanMenu");
 		$this->clickAndWait("id=tabs-new-document");
 		$this->type("title", "My document");
 		$this->type("//textarea[@name='description']", "L'année dernière à Noël, 3 < 4, 中国 \" <em>, père & fils");
@@ -76,7 +76,7 @@ class CreateDocURL extends FForge_SeleniumTestCase {
 
 		$this->gotoProject('ProjectA');
 		$this->clickAndWait("link=Docs");
-		$this->clickAndWait("listFileDocmanMenu");
+		$this->clickAndWait("id=listFileDocmanMenu");
 		$this->clickAndWait("link=docdirectory");
 		$this->clickAndWait("//img[@alt='trashdir']");
 		$this->assertTextPresent("Documents folder docdirectory moved to trash successfully");
@@ -88,9 +88,9 @@ class CreateDocURL extends FForge_SeleniumTestCase {
 
 		$this->gotoProject('ProjectA');
 		$this->clickAndWait("link=Docs");
-		$this->clickAndWait("addItemDocmanMenu");
+		$this->clickAndWait("id=addItemDocmanMenu");
 		// ugly hack until we fix behavior in docman when no folders exist. We need to click twice on the link
-		$this->clickAndWait("addItemDocmanMenu");
+		$this->clickAndWait("id=addItemDocmanMenu");
 		$this->clickAndWait("id=tab-new-document");
 		$this->type("title", "My document");
 		$this->type("//textarea[@name='description']", "My Description");
@@ -102,7 +102,7 @@ class CreateDocURL extends FForge_SeleniumTestCase {
 
 		$this->gotoProject('ProjectA');
 		$this->clickAndWait("link=Docs");
-		$this->clickAndWait("addItemDocmanMenu");
+		$this->clickAndWait("id=addItemDocmanMenu");
 		$this->type("title", " My document ");
 		$this->type("//textarea[@name='description']", "My Description");
 		$this->clickAndWait("//input[@name='type' and @value='pasteurl']");
@@ -117,9 +117,9 @@ class CreateDocURL extends FForge_SeleniumTestCase {
 
 		$this->gotoProject('ProjectA');
 		$this->clickAndWait("link=Docs");
-		$this->clickAndWait("addItemDocmanMenu");
+		$this->clickAndWait("id=addItemDocmanMenu");
 		// ugly hack until we fix behavior in docman when no folders exist. We need to click twice on the link
-		$this->clickAndWait("addItemDocmanMenu");
+		$this->clickAndWait("id=addItemDocmanMenu");
 		$this->clickAndWait("id=tab-new-document");
 		$this->type("title", "My document");
 		$this->type("//textarea[@name='description']", "My Description");
@@ -127,7 +127,7 @@ class CreateDocURL extends FForge_SeleniumTestCase {
 		$this->type("file_url", URL."/terms.php");
 		$this->clickAndWait("//input[@name='submit' and @value='Submit Information']");
 		$this->assertTextPresent("Document ".URL."/terms.php submitted successfully");
-		$this->clickAndWait("listFileDocmanMenu");
+		$this->clickAndWait("id=listFileDocmanMenu");
 		$this->clickAndWait("link=Uncategorized Submissions");
 		$this->clickAndWait("css=img[alt='editdocument']");
 		$this->pause("10000");
@@ -144,9 +144,9 @@ class CreateDocURL extends FForge_SeleniumTestCase {
 
 		$this->gotoProject('ProjectA');
 		$this->clickAndWait("link=Docs");
-		$this->clickAndWait("addItemDocmanMenu");
+		$this->clickAndWait("id=addItemDocmanMenu");
 		// ugly hack until we fix behavior in docman when no folders exist. We need to click twice on the link
-		$this->clickAndWait("addItemDocmanMenu");
+		$this->clickAndWait("id=addItemDocmanMenu");
 		$this->clickAndWait("id=tab-new-document");
 		$this->type("title", "My document");
 		$this->type("//textarea[@name='description']", "My Description");
