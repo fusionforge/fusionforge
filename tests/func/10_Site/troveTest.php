@@ -29,44 +29,44 @@ class Trove extends FForge_SeleniumTestCase
 		$this->open( ROOT );
 		$this->login(FORGE_ADMIN_USERNAME);
 		$this->url(ROOT."/admin/");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("link=Display Trove Map");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 
 		// Test simple modification of an entry (beta => beta2)
 		$this->clickAndWait("//a[contains(@href, 'trove_cat_edit.php?trove_cat_id=10')]");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->type("form_shortname", "beta2");
 		$this->type("form_fullname", "4 - Beta2");
 		$this->type("form_description", "Resource2 is in late phases of development. Deliverables are essentially complete, but may still have significant bugs.");
 		$this->clickAndWait("submit");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTrue($this->isTextPresent("4 - Beta2"));
 
 		// Test removal of an entry (beta2) (leaf)
 		$this->clickAndWait("//a[contains(@href, 'trove_cat_edit.php?trove_cat_id=10')]");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("delete");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertFalse($this->isTextPresent("4 - Beta2"));
 
 		// Test creation of a new entry (test)
 		$this->clickAndWait("link=Site Admin");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("link=Add to the Trove Map");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->type("form_shortname", "Test");
 		$this->type("form_fullname", "Test");
 		$this->type("form_description", "This is a test");
 		$this->clickAndWait("submit");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTrue($this->isTextPresent("Test"));
 
 		// Test removal of a non empty entry (Microsoft).
 		$this->clickAndWait("//a[contains(@href, 'trove_cat_edit.php?trove_cat_id=214')]");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("delete");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTrue($this->isTextPresent("Test"));
 		$this->assertFalse($this->isTextPresent("Microsoft"));
 	}
