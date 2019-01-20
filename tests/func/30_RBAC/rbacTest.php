@@ -34,13 +34,13 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->switchUser(FORGE_ADMIN_USERNAME);
 		$this->gotoProject('ProjectA');
 
-		$this->click("link=Admin");
+		$this->clickAndWait("link=Admin");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Project Information"));
-		$this->click("link=Users and permissions");
+		$this->clickAndWait("link=Users and permissions");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Current Project Members"));
-		$this->click("//tr/td/form/div[contains(.,'Anonymous')]/../../../td/form/div/input[contains(@value,'Unlink Role')]");
+		$this->clickAndWait("//tr/td/form/div[contains(.,'Anonymous')]/../../../td/form/div/input[contains(@value,'Unlink Role')]");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Role unlinked successfully"));
 
@@ -60,25 +60,25 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->loadAndCacheFixture();
 		$this->switchUser(FORGE_ADMIN_USERNAME);
 
-		$this->click("link=Site Admin");
+		$this->clickAndWait("link=Site Admin");
 		$this->waitForPageToLoad("30000");
 
 		// Create "Project approvers" role
 		$this->type ("//form[contains(@action,'globalroleedit.php')]//input[@name='role_name']", "Project approvers") ;
-		$this->click ("//form[contains(@action,'globalroleedit.php')]//input[@value='Create Role']") ;
+		$this->clickAndWait("//form[contains(@action,'globalroleedit.php')]//input[@value='Create Role']") ;
 		$this->waitForPageToLoad("30000");
 
 		// Grant it permissions
 		$this->select("//select[@name='data[approve_projects][-1]']", "label=Approve projects");
 		$this->select("//select[@name='data[approve_news][-1]']", "label=Approve news");
-		$this->click ("//input[@value='Submit']") ;
+		$this->clickAndWait("//input[@value='Submit']") ;
 		$this->waitForPageToLoad("30000");
 
 		// Check permissions were saved
-		$this->click("link=Site Admin");
+		$this->clickAndWait("link=Site Admin");
 		$this->waitForPageToLoad("30000");
 		$this->select ("//form[contains(@action,'globalroleedit.php')]//select[@name='role_id']", "label=Project approvers") ;
-		$this->click ("//form[contains(@action,'globalroleedit.php')]//input[@value='Edit Role']") ;
+		$this->clickAndWait("//form[contains(@action,'globalroleedit.php')]//input[@value='Edit Role']") ;
 		$this->waitForPageToLoad("30000");
 
 		$this->assertSelected("//select[@name='data[approve_projects][-1]']", "Approve projects");
@@ -87,7 +87,7 @@ class RBAC extends FForge_SeleniumTestCase
 
 		// Whoops, we don't actually want the news moderation bit, unset it
 		$this->select("//select[@name='data[approve_news][-1]']", "label=No Access");
-		$this->click ("//input[@value='Submit']") ;
+		$this->clickAndWait("//input[@value='Submit']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertSelected("//select[@name='data[approve_projects][-1]']", "Approve projects");
 		$this->assertSelected("//select[@name='data[approve_news][-1]']", "No Access");
@@ -97,35 +97,35 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->createUser ("newsmod") ;
 
 		// Add them to their respective roles, check they're here
-		$this->click("link=Site Admin");
+		$this->clickAndWait("link=Site Admin");
 		$this->waitForPageToLoad("30000");
 		$this->select ("//form[contains(@action,'globalroleedit.php')]//select[@name='role_id']", "label=Project approvers") ;
-		$this->click ("//form[contains(@action,'globalroleedit.php')]//input[@value='Edit Role']") ;
+		$this->clickAndWait("//form[contains(@action,'globalroleedit.php')]//input[@value='Edit Role']") ;
 		$this->waitForPageToLoad("30000");
 		$this->type ("//form[contains(@action,'globalroleedit.php')]//input[@name='form_unix_name']", "projapp") ;
-		$this->click ("//input[@value='Add User']") ;
+		$this->clickAndWait("//input[@value='Add User']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("projapp Lastname"));
 
-		$this->click("link=Site Admin");
+		$this->clickAndWait("link=Site Admin");
 		$this->waitForPageToLoad("30000");
 		$this->select ("//form[contains(@action,'globalroleedit.php')]//select[@name='role_id']", "label=News moderators") ;
-		$this->click ("//form[contains(@action,'globalroleedit.php')]//input[@value='Edit Role']") ;
+		$this->clickAndWait("//form[contains(@action,'globalroleedit.php')]//input[@value='Edit Role']") ;
 		$this->waitForPageToLoad("30000");
 		$this->type ("//form[contains(@action,'globalroleedit.php')]//input[@name='form_unix_name']", "newsmod") ;
-		$this->click ("//input[@value='Add User']") ;
+		$this->clickAndWait("//input[@value='Add User']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("newsmod Lastname"));
 
 		// Add a wrong user to the role, then remove it
 		$this->type ("//form[contains(@action,'globalroleedit.php')]//input[@name='form_unix_name']", "projapp") ;
-		$this->click ("//input[@value='Add User']") ;
+		$this->clickAndWait("//input[@value='Add User']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("projapp Lastname"));
 		$this->assertTrue($this->isTextPresent("newsmod Lastname"));
-		$this->click ("//a[contains(@href,'/users/projapp')]/../../td/input[@type='checkbox']") ;
-		$this->click ("//input[@name='reallyremove']") ;
-		$this->click ("//input[@name='dormusers']") ;
+		$this->clickAndWait("//a[contains(@href,'/users/projapp')]/../../td/input[@type='checkbox']") ;
+		$this->clickAndWait("//input[@name='reallyremove']") ;
+		$this->clickAndWait("//input[@name='dormusers']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertFalse($this->isTextPresent("projapp Lastname"));
 		$this->assertTrue($this->isTextPresent("newsmod Lastname"));
@@ -135,13 +135,13 @@ class RBAC extends FForge_SeleniumTestCase
 
 		// Temporarily grant project approval rights to user
 		// (For cases where project_registration_restricted=true)
-		$this->click("link=Site Admin");
+		$this->clickAndWait("link=Site Admin");
 		$this->waitForPageToLoad("30000");
 		$this->select ("//form[contains(@action,'globalroleedit.php')]//select[@name='role_id']", "label=Project approvers") ;
-		$this->click ("//form[contains(@action,'globalroleedit.php')]//input[@value='Edit Role']") ;
+		$this->clickAndWait("//form[contains(@action,'globalroleedit.php')]//input[@value='Edit Role']") ;
 		$this->waitForPageToLoad("30000");
 		$this->type ("//form[contains(@action,'globalroleedit.php')]//input[@name='form_unix_name']", "toto") ;
-		$this->click ("//input[@value='Add User']") ;
+		$this->clickAndWait("//input[@value='Add User']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("toto Lastname"));
 
@@ -149,14 +149,14 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->registerProject ("TotoProject", "toto") ;
 
 		// Revoke project approval rights
-		$this->click("link=Site Admin");
+		$this->clickAndWait("link=Site Admin");
 		$this->waitForPageToLoad("30000");
 		$this->select ("//form[contains(@action,'globalroleedit.php')]//select[@name='role_id']", "label=Project approvers") ;
-		$this->click ("//form[contains(@action,'globalroleedit.php')]//input[@value='Edit Role']") ;
+		$this->clickAndWait("//form[contains(@action,'globalroleedit.php')]//input[@value='Edit Role']") ;
 		$this->waitForPageToLoad("30000");
-		$this->click ("//a[contains(@href,'/users/toto')]/../../td/input[@type='checkbox']") ;
-		$this->click ("//input[@name='reallyremove']") ;
-		$this->click ("//input[@name='dormusers']") ;
+		$this->clickAndWait("//a[contains(@href,'/users/toto')]/../../td/input[@type='checkbox']") ;
+		$this->clickAndWait("//input[@name='reallyremove']") ;
+		$this->clickAndWait("//input[@name='dormusers']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertFalse($this->isTextPresent("toto Lastname"));
 

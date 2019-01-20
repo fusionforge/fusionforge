@@ -150,23 +150,23 @@ class CreateTask extends FForge_SeleniumTestCase
 		$this->clickAndWait("submit");
 
 		// There should not be unassigned tasks
-		$this->select("_assigned_to", "label=Unassigned");
+		$this->select($this->byName("_assigned_to"))->selectOptionByLabel("Unassigned");
 		$this->clickAndWait("submit");
 		$this->assertTextPresent("No Matching Tasks found");
 
 		// Tasks 2 and 3 should be assigned to ucontrib
-		$this->select("_assigned_to", "label=ucontrib Lastname");
+		$this->select($this->byName("_assigned_to"))->selectOptionByLabel("ucontrib Lastname");
 		$this->clickAndWait("submit");
 		$this->assertTextPresent("Task2:");
 		$this->assertTextPresent("Task3:");
 
 		// Task 1 should be assigned to ucoredev
-		$this->select("_assigned_to", "label=ucoredev Lastname");
+		$this->select($this->byName("_assigned_to"))->selectOptionByLabel("ucoredev Lastname");
 		$this->clickAndWait("submit");
 		$this->assertTextPresent("Task1:");
 
 		// "Any" should show the 3 tasks
-		$this->select("_assigned_to", "label=Any");
+		$this->select($this->byName("_assigned_to"))->selectOptionByLabel("Any");
 		$this->clickAndWait("submit");
 		$this->assertTextPresent("Task1:");
 		$this->assertTextPresent("Task2:");
@@ -175,22 +175,22 @@ class CreateTask extends FForge_SeleniumTestCase
 		// Let use close a task to sort by status
 		$this->clickAndWait("link=exact:Task1: Hello Paris");
 		$this->clickAndWait("status_id");
-		$this->select("status_id", "label=Closed");
+		$this->select($this->byName("status_id"))->selectOptionByLabel("Closed");
 		$this->clickAndWait("submit");
 
 		// Select open tasks
-		$this->select("_status", "label=Open");
+		$this->select($this->byName("_status"))->selectOptionByLabel("Open");
 		$this->clickAndWait("submit");
 		$this->assertTextPresent("Task2:");
 		$this->assertTextPresent("Task3:");
 
 		// Select closed tasks
-		$this->select("_status", "label=Closed");
+		$this->select($this->byName("_status"))->selectOptionByLabel("Closed");
 		$this->clickAndWait("submit");
 		$this->assertTextPresent("Task1:");
 
 		// Select "Any" status
-		$this->select("_status", "label=Any");
+		$this->select($this->byName("_status"))->selectOptionByLabel("Any");
 		$this->clickAndWait("submit");
 		$this->assertTextPresent("Task1:");
 		$this->assertTextPresent("Task2:");
@@ -211,33 +211,33 @@ class CreateTask extends FForge_SeleniumTestCase
 		// Set Task1 to mycategory
 		$this->clickAndWait("link=To Do");
 		$this->clickAndWait("link=exact:Task1: Hello Paris");
-		$this->select("category_id", "label=mycategory");
+		$this->select($this->byName("category_id"))->selectOptionByLabel("mycategory");
 		$this->clickAndWait("submit");
 
 		// Set Task2 to yourcategory
 		$this->clickAndWait("link=To Do");
 		$this->clickAndWait("link=exact:Task2: Hello France");
-		$this->select("category_id", "label=yourcategory");
+		$this->select($this->byName("category_id"))->selectOptionByLabel("yourcategory");
 		$this->clickAndWait("submit");
 
 		// Select "Any" category
-		$this->select("_category_id", "label=Any");
+		$this->select($this->byName("_category_id"))->selectOptionByLabel("Any");
 		$this->clickAndWait("submit");
-		$this->select("_order", "label=Task Summary");
+		$this->select($this->byName("_order"))->selectOptionByLabel("Task Summary");
 		$this->clickAndWait("submit");
 		$this->assertTextPresent("Task1:");
 		$this->assertTextPresent("Task2:");
 		$this->assertTextPresent("Task3:");
 
 		// Select "mycategory" category
-		$this->select("_category_id", "label=mycategory");
+		$this->select($this->byName("_category_id"))->selectOptionByLabel("mycategory");
 		$this->clickAndWait("submit");
 		$this->assertTextPresent("Task1:");
 		$this->assertFalse($this->isTextPresent("Task2:"));
 		$this->assertFalse($this->isTextPresent("Task3:"));
 
 		// Select "yourcategory" category
-		$this->select("_category_id", "label=yourcategory");
+		$this->select($this->byName("_category_id"))->selectOptionByLabel("yourcategory");
 		$this->clickAndWait("submit");
 		$this->assertFalse($this->isTextPresent("Task1:"));
 		$this->assertTextPresent("Task2:");
@@ -245,15 +245,15 @@ class CreateTask extends FForge_SeleniumTestCase
 
 		// Set Detail view to Detailed
 		$this->clickAndWait("link=To Do");
-		$this->select("_category_id", "label=Any");
-		$this->select("_view", "label=Detailed");
+		$this->select($this->byName("_category_id"))->selectOptionByLabel("Any");
+		$this->select($this->byName("_view"))->selectOptionByLabel("Detailed");
 		$this->clickAndWait("submit");
 		$this->assertTextPresent("Details: Hello Paris");
 		$this->assertTextPresent("Details: Hello France");
 		$this->assertTextPresent("Details: Hello World");
 
 		// Set Detail view to Summary
-		$this->select("_view", "label=Summary");
+		$this->select($this->byName("_view"))->selectOptionByLabel("Summary");
 		$this->clickAndWait("submit");
 		$this->assertFalse($this->isTextPresent("Details: Hello"));
 	}
@@ -262,7 +262,7 @@ class CreateTask extends FForge_SeleniumTestCase
 	{
 		// Set the priority of a task
 		$this->clickAndWait("link=exact:Task2: Hello France");
-		$this->select("priority", "label=5 - Highest");
+		$this->select($this->byName("priority"))->selectOptionByLabel("5 - Highest");
 		$this->clickAndWait("submit");
 
 		// Check the priority is OK
@@ -273,7 +273,7 @@ class CreateTask extends FForge_SeleniumTestCase
 	function completeTask()
 	{
 		// Set the completing value of a task
-		$this->select("percent_complete", "label=45%");
+		$this->select($this->byName("percent_complete"))->selectOptionByLabel("45%");
 		$this->clickAndWait("//option[@value='45']");
 		$this->clickAndWait("submit");
 		$this->assertTextPresent("Task Updated Successfully");
@@ -365,7 +365,7 @@ class CreateTask extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=Tools");
 		$this->clickAndWait("link=Tasks Administration");
 		$this->clickAndWait("link=Add a Subproject");
-		$this->click("//input[@name='is_public' and @value='0']");
+		$this->clickAndWait("//input[@name='is_public' and @value='0']");
 		$this->type("project_name", "private");
 		$this->type("//input[@name='description']", "This is a private subproject");
 		$this->clickAndWait("submit");
@@ -380,7 +380,7 @@ class CreateTask extends FForge_SeleniumTestCase
 		$this->open("/pm/reporting/index.php?what=tech&span=&period=lifespan&group_id=6#b");
 		$this->clickAndWait("link=Tasks");
 		$this->clickAndWait("link=To Do");
-		$this->click("link=Gantt Chart");
+		$this->clickAndWait("link=Gantt Chart");
 		$this->waitForPopUp("Gantt_Chart", "30000");
 		$this->selectWindow("name=Gantt_Chart");
 		$this->assertTextPresent("Assignee");
