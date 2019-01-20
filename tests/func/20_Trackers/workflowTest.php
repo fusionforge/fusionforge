@@ -3,6 +3,7 @@
  * Copyright (C) 2008 Alain Peyrat <aljeux@free.fr>
  * Copyright (C) 2009 - 2010 Alain Peyrat, Alcatel-Lucent
  * Copyright (C) 2015  Inria (Sylvain Beucler)
+ * Copyright 2019, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -58,39 +59,39 @@ class CreateTrackerWorkflow extends FForge_SeleniumTestCase
 
 		$this->clickAndWait("link=Tracker");
 		$this->clickAndWait("link=Bugs");
-		$this->click("//a[contains(@href, '".ROOT. "/tracker/admin/')]");
+		$this->clickAndWait("//a[contains(@href, '".ROOT. "/tracker/admin/')]");
 		$this->waitForPageToLoad("30000");
 		$this->clickAndWait("link=Manage Custom Fields");
 		$this->type("name", "MyStatus");
 		$this->type("alias", "mystatus");
-		$this->click("//input[@name='field_type' and @value=7]");
-		$this->click("post_changes");
+		$this->clickAndWait("//input[@name='field_type' and @value=7]");
+		$this->clickAndWait("post_changes");
 		$this->waitForPageToLoad("30000");
-		$this->click("//tr[@id='field-mystatus']/td[9]/a[1]");
+		$this->clickAndWait("//tr[@id='field-mystatus']/td[9]/a[1]");
 		$this->waitForPageToLoad("30000");
 		$this->type("name", "New");
-		$this->click("post_changes");
+		$this->clickAndWait("post_changes");
 		$this->waitForPageToLoad("30000");
-		$this->click("link=Manage Custom Fields");
+		$this->clickAndWait("link=Manage Custom Fields");
 		$this->waitForPageToLoad("30000");
-		$this->click("//tr[@id='field-mystatus']/td[9]/a[1]");
+		$this->clickAndWait("//tr[@id='field-mystatus']/td[9]/a[1]");
 		$this->waitForPageToLoad("30000");
 		$this->type("name", "Analyse");
-		$this->select("status_id", "label=Open");
-		$this->click("post_changes");
+		$this->select($this->byName("status_id"))->selectOptionByLabel("Open");
+		$this->clickAndWait("post_changes");
 		$this->waitForPageToLoad("30000");
-		$this->click("link=Manage Workflow");
+		$this->clickAndWait("link=Manage Workflow");
 		$this->waitForPageToLoad("30000");
-		$this->click("link=Manage Custom Fields");
+		$this->clickAndWait("link=Manage Custom Fields");
 		$this->waitForPageToLoad("30000");
-		$this->click("//tr[@id='field-mystatus']/td[9]/a[1]");
+		$this->clickAndWait("//tr[@id='field-mystatus']/td[9]/a[1]");
 		$this->waitForPageToLoad("30000");
 		$this->type("name", "Candidate");
-		$this->click("post_changes");
+		$this->clickAndWait("post_changes");
 		$this->waitForPageToLoad("30000");
-		$this->click("link=Manage Custom Fields");
+		$this->clickAndWait("link=Manage Custom Fields");
 		$this->waitForPageToLoad("30000");
-		$this->click("//tr[@id='field-mystatus']/td[9]/a[1]");
+		$this->clickAndWait("//tr[@id='field-mystatus']/td[9]/a[1]");
 		$this->waitForPageToLoad("30000");
 		$this->type("name", "Open");
 		$this->clickAndWait("post_changes");
@@ -99,127 +100,127 @@ class CreateTrackerWorkflow extends FForge_SeleniumTestCase
 		$this->type("name", "Validated");
 		$this->clickAndWait("post_changes");
 		$this->type("name", "Verified");
-		$this->select("status_id", "label=Closed");
+		$this->select($this->byName("status_id"))->selectOptionByLabel("Closed");
 		$this->clickAndWait("post_changes");
 		$this->type("name", "Duplicated");
 		$this->clickAndWait("post_changes");
 		$this->type("name", "Postponed");
 		$this->clickAndWait("post_changes");
 		$this->type("name", "Closed");
-		$this->select("status_id", "label=Closed");
-		$this->click("post_changes");
+		$this->select($this->byName("status_id"))->selectOptionByLabel("Closed");
+		$this->clickAndWait("post_changes");
 		$this->waitForPageToLoad("30000");
-		$this->click("link=Manage Workflow");
+		$this->clickAndWait("link=Manage Workflow");
 		$this->waitForPageToLoad("30000");
-		//
-		$this->click("//tr[@id='configuring-1']//td[3]/input");
-		$this->click("//tr[@id='configuring-1']//td[4]/input");
-		$this->click("//tr[@id='configuring-1']//td[5]/input");
-		$this->click("//tr[@id='configuring-1']//td[6]/input");
-		$this->click("//tr[@id='configuring-1']//td[7]/input");
-		$this->click("//tr[@id='configuring-1']//td[8]/input");
-		$this->click("//tr[@id='configuring-1']//td[9]/input");
-		$this->click("//tr[@id='configuring-1']//td[10]/input");
-		//
-		$this->click("//tr[@id='configuring-2']//td[1]/input");
-		$this->click("//tr[@id='configuring-2']//td[4]/input");
-		$this->click("//tr[@id='configuring-2']//td[5]/input");
-		$this->click("//tr[@id='configuring-2']//td[6]/input");
-		$this->click("//tr[@id='configuring-2']//td[7]/input");
-		$this->click("//tr[@id='configuring-2']//td[8]/input");
-		//
-		$this->click("//tr[@id='configuring-3']//td[1]/input");
-		$this->click("//tr[@id='configuring-3']//td[2]/input");
-		$this->click("//tr[@id='configuring-3']//td[5]/input");
-		$this->click("//tr[@id='configuring-3']//td[6]/input");
-		$this->click("//tr[@id='configuring-3']//td[7]/input");
-		$this->click("//tr[@id='configuring-3']//td[8]/input");
-		//
-		$this->click("//tr[@id='configuring-4']//td[1]/input");
-		$this->click("//tr[@id='configuring-4']//td[3]/input");
-		$this->click("//tr[@id='configuring-4']//td[6]/input");
-		$this->click("//tr[@id='configuring-4']//td[7]/input");
-		$this->click("//tr[@id='configuring-4']//td[8]/input");
-		$this->click("//tr[@id='configuring-4']//td[9]/input");
-		$this->click("//tr[@id='configuring-4']//td[10]/input");
-		//
-		$this->click("//tr[@id='configuring-5']//td[1]/input");
-		$this->click("//tr[@id='configuring-5']//td[3]/input");
-		$this->click("//tr[@id='configuring-5']//td[4]/input");
-		$this->click("//tr[@id='configuring-5']//td[7]/input");
-		$this->click("//tr[@id='configuring-5']//td[8]/input");
-		$this->click("//tr[@id='configuring-5']//td[9]/input");
-		$this->click("//tr[@id='configuring-5']//td[10]/input");
-		//
-		$this->click("//tr[@id='configuring-6']//td[1]/input");
-		$this->click("//tr[@id='configuring-6']//td[3]/input");
-		$this->click("//tr[@id='configuring-6']//td[4]/input");
-		$this->click("//tr[@id='configuring-6']//td[5]/input");
-		$this->click("//tr[@id='configuring-6']//td[8]/input");
-		$this->click("//tr[@id='configuring-6']//td[9]/input");
-		$this->click("//tr[@id='configuring-6']//td[10]/input");
-		//
-		$this->click("//tr[@id='configuring-7']//td[1]/input");
-		$this->click("//tr[@id='configuring-7']//td[2]/input");
-		$this->click("//tr[@id='configuring-7']//td[3]/input");
-		$this->click("//tr[@id='configuring-7']//td[4]/input");
-		$this->click("//tr[@id='configuring-7']//td[5]/input");
-		$this->click("//tr[@id='configuring-7']//td[6]/input");
-		$this->click("//tr[@id='configuring-7']//td[8]/input");
-		$this->click("//tr[@id='configuring-7']//td[9]/input");
-		$this->click("//tr[@id='configuring-7']//td[10]/input");
-		//
-		$this->click("//tr[@id='configuring-8']//td[1]/input");
-		$this->click("//tr[@id='configuring-8']//td[2]/input");
-		$this->click("//tr[@id='configuring-8']//td[3]/input");
-		$this->click("//tr[@id='configuring-8']//td[4]/input");
-		$this->click("//tr[@id='configuring-8']//td[5]/input");
-		$this->click("//tr[@id='configuring-8']//td[6]/input");
-		$this->click("//tr[@id='configuring-8']//td[7]/input");
-		$this->click("//tr[@id='configuring-8']//td[9]/input");
-		$this->click("//tr[@id='configuring-8']//td[10]/input");
-		//
-		$this->click("//tr[@id='configuring-9']//td[1]/input");
-		$this->click("//tr[@id='configuring-9']//td[3]/input");
-		$this->click("//tr[@id='configuring-9']//td[4]/input");
-		$this->click("//tr[@id='configuring-9']//td[5]/input");
-		$this->click("//tr[@id='configuring-9']//td[6]/input");
-		$this->click("//tr[@id='configuring-9']//td[7]/input");
-		$this->click("//tr[@id='configuring-9']//td[8]/input");
-		$this->click("//tr[@id='configuring-9']//td[10]/input");
-		//
-		$this->click("//tr[@id='configuring-10']//td[1]/input");
-		$this->click("//tr[@id='configuring-10']//td[2]/input");
-		$this->click("//tr[@id='configuring-10']//td[3]/input");
-		$this->click("//tr[@id='configuring-10']//td[4]/input");
-		$this->click("//tr[@id='configuring-10']//td[5]/input");
-		$this->click("//tr[@id='configuring-10']//td[6]/input");
-		$this->click("//tr[@id='configuring-10']//td[7]/input");
-		$this->click("//tr[@id='configuring-10']//td[8]/input");
-		$this->click("//tr[@id='configuring-10']//td[9]/input");
-		//
-		$this->click("post_changes");
+
+		$this->clickAndWait("//tr[@id='configuring-1']//td[3]/input");
+		$this->clickAndWait("//tr[@id='configuring-1']//td[4]/input");
+		$this->clickAndWait("//tr[@id='configuring-1']//td[5]/input");
+		$this->clickAndWait("//tr[@id='configuring-1']//td[6]/input");
+		$this->clickAndWait("//tr[@id='configuring-1']//td[7]/input");
+		$this->clickAndWait("//tr[@id='configuring-1']//td[8]/input");
+		$this->clickAndWait("//tr[@id='configuring-1']//td[9]/input");
+		$this->clickAndWait("//tr[@id='configuring-1']//td[10]/input");
+
+		$this->clickAndWait("//tr[@id='configuring-2']//td[1]/input");
+		$this->clickAndWait("//tr[@id='configuring-2']//td[4]/input");
+		$this->clickAndWait("//tr[@id='configuring-2']//td[5]/input");
+		$this->clickAndWait("//tr[@id='configuring-2']//td[6]/input");
+		$this->clickAndWait("//tr[@id='configuring-2']//td[7]/input");
+		$this->clickAndWait("//tr[@id='configuring-2']//td[8]/input");
+
+		$this->clickAndWait("//tr[@id='configuring-3']//td[1]/input");
+		$this->clickAndWait("//tr[@id='configuring-3']//td[2]/input");
+		$this->clickAndWait("//tr[@id='configuring-3']//td[5]/input");
+		$this->clickAndWait("//tr[@id='configuring-3']//td[6]/input");
+		$this->clickAndWait("//tr[@id='configuring-3']//td[7]/input");
+		$this->clickAndWait("//tr[@id='configuring-3']//td[8]/input");
+
+		$this->clickAndWait("//tr[@id='configuring-4']//td[1]/input");
+		$this->clickAndWait("//tr[@id='configuring-4']//td[3]/input");
+		$this->clickAndWait("//tr[@id='configuring-4']//td[6]/input");
+		$this->clickAndWait("//tr[@id='configuring-4']//td[7]/input");
+		$this->clickAndWait("//tr[@id='configuring-4']//td[8]/input");
+		$this->clickAndWait("//tr[@id='configuring-4']//td[9]/input");
+		$this->clickAndWait("//tr[@id='configuring-4']//td[10]/input");
+
+		$this->clickAndWait("//tr[@id='configuring-5']//td[1]/input");
+		$this->clickAndWait("//tr[@id='configuring-5']//td[3]/input");
+		$this->clickAndWait("//tr[@id='configuring-5']//td[4]/input");
+		$this->clickAndWait("//tr[@id='configuring-5']//td[7]/input");
+		$this->clickAndWait("//tr[@id='configuring-5']//td[8]/input");
+		$this->clickAndWait("//tr[@id='configuring-5']//td[9]/input");
+		$this->clickAndWait("//tr[@id='configuring-5']//td[10]/input");
+
+		$this->clickAndWait("//tr[@id='configuring-6']//td[1]/input");
+		$this->clickAndWait("//tr[@id='configuring-6']//td[3]/input");
+		$this->clickAndWait("//tr[@id='configuring-6']//td[4]/input");
+		$this->clickAndWait("//tr[@id='configuring-6']//td[5]/input");
+		$this->clickAndWait("//tr[@id='configuring-6']//td[8]/input");
+		$this->clickAndWait("//tr[@id='configuring-6']//td[9]/input");
+		$this->clickAndWait("//tr[@id='configuring-6']//td[10]/input");
+
+		$this->clickAndWait("//tr[@id='configuring-7']//td[1]/input");
+		$this->clickAndWait("//tr[@id='configuring-7']//td[2]/input");
+		$this->clickAndWait("//tr[@id='configuring-7']//td[3]/input");
+		$this->clickAndWait("//tr[@id='configuring-7']//td[4]/input");
+		$this->clickAndWait("//tr[@id='configuring-7']//td[5]/input");
+		$this->clickAndWait("//tr[@id='configuring-7']//td[6]/input");
+		$this->clickAndWait("//tr[@id='configuring-7']//td[8]/input");
+		$this->clickAndWait("//tr[@id='configuring-7']//td[9]/input");
+		$this->clickAndWait("//tr[@id='configuring-7']//td[10]/input");
+
+		$this->clickAndWait("//tr[@id='configuring-8']//td[1]/input");
+		$this->clickAndWait("//tr[@id='configuring-8']//td[2]/input");
+		$this->clickAndWait("//tr[@id='configuring-8']//td[3]/input");
+		$this->clickAndWait("//tr[@id='configuring-8']//td[4]/input");
+		$this->clickAndWait("//tr[@id='configuring-8']//td[5]/input");
+		$this->clickAndWait("//tr[@id='configuring-8']//td[6]/input");
+		$this->clickAndWait("//tr[@id='configuring-8']//td[7]/input");
+		$this->clickAndWait("//tr[@id='configuring-8']//td[9]/input");
+		$this->clickAndWait("//tr[@id='configuring-8']//td[10]/input");
+
+		$this->clickAndWait("//tr[@id='configuring-9']//td[1]/input");
+		$this->clickAndWait("//tr[@id='configuring-9']//td[3]/input");
+		$this->clickAndWait("//tr[@id='configuring-9']//td[4]/input");
+		$this->clickAndWait("//tr[@id='configuring-9']//td[5]/input");
+		$this->clickAndWait("//tr[@id='configuring-9']//td[6]/input");
+		$this->clickAndWait("//tr[@id='configuring-9']//td[7]/input");
+		$this->clickAndWait("//tr[@id='configuring-9']//td[8]/input");
+		$this->clickAndWait("//tr[@id='configuring-9']//td[10]/input");
+
+		$this->clickAndWait("//tr[@id='configuring-10']//td[1]/input");
+		$this->clickAndWait("//tr[@id='configuring-10']//td[2]/input");
+		$this->clickAndWait("//tr[@id='configuring-10']//td[3]/input");
+		$this->clickAndWait("//tr[@id='configuring-10']//td[4]/input");
+		$this->clickAndWait("//tr[@id='configuring-10']//td[5]/input");
+		$this->clickAndWait("//tr[@id='configuring-10']//td[6]/input");
+		$this->clickAndWait("//tr[@id='configuring-10']//td[7]/input");
+		$this->clickAndWait("//tr[@id='configuring-10']//td[8]/input");
+		$this->clickAndWait("//tr[@id='configuring-10']//td[9]/input");
+
+		$this->clickAndWait("post_changes");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Workflow saved"));
 
 		// Ensure that it is not possible to configure the workflow without initial state.
-		$this->click("//tr[@id='initval']//td[1]/input");
-		$this->click("//tr[@id='initval']//td[2]/input");
-		$this->click("//tr[@id='initval']//td[3]/input");
-		$this->click("//tr[@id='initval']//td[4]/input");
-		$this->click("//tr[@id='initval']//td[5]/input");
-		$this->click("//tr[@id='initval']//td[6]/input");
-		$this->click("//tr[@id='initval']//td[7]/input");
-		$this->click("//tr[@id='initval']//td[8]/input");
-		$this->click("//tr[@id='initval']//td[9]/input");
-		$this->click("//tr[@id='initval']//td[10]/input");
-		$this->click("post_changes");
+		$this->clickAndWait("//tr[@id='initval']//td[1]/input");
+		$this->clickAndWait("//tr[@id='initval']//td[2]/input");
+		$this->clickAndWait("//tr[@id='initval']//td[3]/input");
+		$this->clickAndWait("//tr[@id='initval']//td[4]/input");
+		$this->clickAndWait("//tr[@id='initval']//td[5]/input");
+		$this->clickAndWait("//tr[@id='initval']//td[6]/input");
+		$this->clickAndWait("//tr[@id='initval']//td[7]/input");
+		$this->clickAndWait("//tr[@id='initval']//td[8]/input");
+		$this->clickAndWait("//tr[@id='initval']//td[9]/input");
+		$this->clickAndWait("//tr[@id='initval']//td[10]/input");
+		$this->clickAndWait("post_changes");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Error: Initial values not saved"));
 		$this->assertTrue($this->isTextPresent("Workflow saved"));
 		// unset postponned
-		$this->click("//tr[@id='initval']//td[9]/input");
-		$this->click("post_changes");
+		$this->clickAndWait("//tr[@id='initval']//td[9]/input");
+		$this->clickAndWait("post_changes");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Workflow saved"));
 	}
