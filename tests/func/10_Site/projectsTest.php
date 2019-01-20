@@ -183,7 +183,7 @@ class CreateProject extends FForge_SeleniumTestCase
 		$this->type("purpose", "This is a simple description for ProjectA");
 		$this->type("//textarea[@name='description']", "This is the public description for ProjectA.");
 		$this->type("unix_name", "projecta");
-		$this->select($this->byXpath("//select[@name='built_from_template']"))->selectOptionByLabel("Start from empty project");
+		$this->select($this->byXPath("//select[@name='built_from_template']"))->selectOptionByLabel("Start from empty project");
 		$this->clickAndWait("//input[@name='scm' and @value='scmsvn']");
 		$this->clickAndWait("submit");
 		$this->waitForPageToLoad("30000");
@@ -212,7 +212,7 @@ class CreateProject extends FForge_SeleniumTestCase
 
 		$this->url(ROOT."/admin/");
 		$this->waitForPageToLoad("30000");
-		$this->select($this->byXpath("//form[contains(@action,'globalroleedit.php')]//select[@name='role_id']"))->selectOptionByLabel("Forge administrators") ;
+		$this->select($this->byXPath("//form[contains(@action,'globalroleedit.php')]//select[@name='role_id']"))->selectOptionByLabel("Forge administrators") ;
 		$this->clickAndWait("//form[contains(@action,'globalroleedit.php')]//input[@value='Edit Role']") ;
 		$this->waitForPageToLoad("30000");
 		$this->type ("//form[contains(@action,'globalroleedit.php')]//input[@name='form_unix_name']", "toto") ;

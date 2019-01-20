@@ -2,6 +2,7 @@
 /**
  * Copyright (C) 2012 Roland Mas
  * Copyright (C) 2015  Inria (Sylvain Beucler)
+ * Copyright 2019, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -39,7 +40,7 @@ class ScmSvnWebDAVTest extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=Admin");
 		$this->clickAndWait("link=Tools");
 		$this->clickAndWait("link=Source Code Admin");
-		$this->click("//input[@name='scmengine[]' and @value='scmsvn']");
+		$this->clickAndWait("//input[@name='scmengine[]' and @value='scmsvn']");
 		$this->clickAndWait("submit");
 
 		// Run the cronjob to create repositories

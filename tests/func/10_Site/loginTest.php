@@ -86,7 +86,7 @@ class LoginProcess extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("Log In"));
 		$this->type("form_loginname", FORGE_ADMIN_USERNAME);
 		$this->type("form_pw", "");
-		$this->click("login");
+		$this->clickAndWait("login");
 		sleep(1);
 		$this->assertTrue($this->isTextPresent("Login"));
 		$this->assertFalse($this->isTextPresent("Forge Admin"));

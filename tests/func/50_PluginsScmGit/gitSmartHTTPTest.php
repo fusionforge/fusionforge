@@ -130,7 +130,7 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=Admin");
 		$this->clickAndWait("link=Users and permissions");
 		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "otheruser") ;
-		$this->select($this->byXpath("//input[@value='Add Member']/../fieldset/select[@name='role_id']"))->selectOptionByLabel("Admin");
+		$this->select($this->byXPath("//input[@value='Add Member']/../fieldset/select[@name='role_id']"))->selectOptionByLabel("Admin");
 		$this->clickAndWait ("//input[@value='Add Member']") ;
 		$this->assertTrue($this->isTextPresent("otheruser Lastname"));
 		$this->assertTrue($this->isElementPresent("//tr/td/a[.='otheruser Lastname']/../../td/div[contains(.,'Admin')]")) ;

@@ -198,7 +198,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 			$id = substr($link, 3);
 			$myelement = $this->byId($id);
 		} else if (preg_match('/^\/\/[a-z]/', $link)) {
-			$myelement = $this->byXpath($link);
+			$myelement = $this->byXPath($link);
 		} else {
 			//default case
 			$myelement = $this->byName($link);
@@ -427,7 +427,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 		$this->clickAndWait("//input[@name='scm' and @value='$scm']");
 
 		try {
-			$this->select($this->byXpath("//select[@name='built_from_template']"))->selectOptionByLabel("Tmpl");
+			$this->select($this->byXPath("//select[@name='built_from_template']"))->selectOptionByLabel("Tmpl");
 		} catch (Exception $e) {}
 
 		$this->clickAndWait("submit");
@@ -589,15 +589,17 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 	}
 
 	function isElementPresent($element) {
-		if (preg_match('/^\/\/[a-z]/', $element)) {
-			if ($this->byXpath($element) instanceof PHPUnit_Extensions_Selenium2TestCase_Element) {
-				return true;
+		try {
+			if (preg_match('/^\/\/[a-z]/', $element)) {
+				if ($this->byXPath($element) instanceof PHPUnit_Extensions_Selenium2TestCase_Element) {
+					return true;
+				}
+			} elseif (preg_match('/^link=/', $element)) {
+				if ($this->byLinkText(substr($element, 5)) instanceof PHPUnit_Extensions_Selenium2TestCase_Element) {
+					return true;
+				}
 			}
-		} elseif (preg_match('/^link=/', $element)) {
-			if ($this->byLinkText(substr($element, 5)) instanceof PHPUnit_Extensions_Selenium2TestCase_Element) {
-				return true;
-			}
-		}
+		} catch (Exception $e) {}
 		return false;
 	}
 
@@ -610,7 +612,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 
 	function type($name, $value) {
 		if (preg_match('/^\/\/[a-z]/', $name)) {
-			$myelement = $this->byXpath($name)->value($value);
+			$myelement = $this->byXPath($name)->value($value);
 		} else {
 			$this->byName($name)->value($value);
 		}
@@ -626,14 +628,14 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 	}
 
 	function check($string) {
-		$myelement = $this->byXpath($string);
+		$myelement = $this->byXPath($string);
 		if (!$myelement->attribute('checked')) {
 			$myelement->click();
 		}
 	}
 
 	function uncheck($string) {
-		$myelement = $this->byXpath($string);
+		$myelement = $this->byXPath($string);
 		if ($myelement->attribute('checked')) {
 			$myelement->click();
 		}

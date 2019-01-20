@@ -87,7 +87,7 @@ class ScmGitSSHTest extends FForge_SeleniumTestCase
 		$this->activatePlugin('globalactivity');
 
 		$this->open(ROOT.'/plugins/globalactivity/');
-		$this->select($this->byXpath("//select[@name='show[]']"))->selectOptionByLabel("Git Commits");
+		$this->select($this->byXPath("//select[@name='show[]']"))->selectOptionByLabel("Git Commits");
 		$this->clickAndWait("submit");
 		$this->assertTextPresent("scm commit: Modifying file");
 		$this->assertTextPresent("scm commit: Adding file");

@@ -541,7 +541,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=Users and permissions");
 		$this->waitForPageToLoad("30000");
 		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "ratatouille") ;
-		$this->select($this->byXpath("//input[@value='Add Member']/../fieldset/select[@name='role_id']"))->selectOptionByLabel("Trainee");
+		$this->select($this->byXPath("//input[@value='Add Member']/../fieldset/select[@name='role_id']"))->selectOptionByLabel("Trainee");
 		$this->clickAndWait("//input[@value='Add Member']") ;
 		$this->waitForPageToLoad("30000");
 
@@ -549,14 +549,14 @@ class Search extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->clickAndWait("//td/form/div[contains(.,'Trainee')]/../div/input[@value='Edit Permissions']") ;
 		$this->waitForPageToLoad("30000");
-		$this->select($this->byXpath("//select[contains(@name,'data[project_read]')]"))->selectOptionByLabel("Visible");
-		$this->select($this->byXpath("//tr/td[.='Bugs']/../td/fieldset/select[contains(@name,'data[tracker]')]"))->selectOptionByLabel("Read only");
-		$this->select($this->byXpath("//tr/td[.='Patches']/../td/fieldset/select[contains(@name,'data[tracker]')]"))->selectOptionByLabel("No Access");
-		$this->select($this->byXpath("//tr/td[.='To Do']/../td/fieldset/select[contains(@name,'data[pm]')]"))->selectOptionByLabel("Read only");
-		$this->select($this->byXpath("//tr/td[.='Next Release']/../td/fieldset/select[contains(@name,'data[pm]')]"))->selectOptionByLabel("No Access");
-		$this->select($this->byXpath("//tr/td[.='open-discussion']/../td/fieldset/select[contains(@name,'data[forum]')]"))->selectOptionByLabel("Read only");
-		$this->select($this->byXpath("//tr/td[.='developers-discussion']/../td/fieldset/select[contains(@name,'data[forum]')]"))->selectOptionByLabel("No Access");
-		$this->select($this->byXpath("//select[contains(@name,'data[docman]')]"))->selectOptionByLabel("Read only");
+		$this->select($this->byXPath("//select[contains(@name,'data[project_read]')]"))->selectOptionByLabel("Visible");
+		$this->select($this->byXPath("//tr/td[.='Bugs']/../td/fieldset/select[contains(@name,'data[tracker]')]"))->selectOptionByLabel("Read only");
+		$this->select($this->byXPath("//tr/td[.='Patches']/../td/fieldset/select[contains(@name,'data[tracker]')]"))->selectOptionByLabel("No Access");
+		$this->select($this->byXPath("//tr/td[.='To Do']/../td/fieldset/select[contains(@name,'data[pm]')]"))->selectOptionByLabel("Read only");
+		$this->select($this->byXPath("//tr/td[.='Next Release']/../td/fieldset/select[contains(@name,'data[pm]')]"))->selectOptionByLabel("No Access");
+		$this->select($this->byXPath("//tr/td[.='open-discussion']/../td/fieldset/select[contains(@name,'data[forum]')]"))->selectOptionByLabel("Read only");
+		$this->select($this->byXPath("//tr/td[.='developers-discussion']/../td/fieldset/select[contains(@name,'data[forum]')]"))->selectOptionByLabel("No Access");
+		$this->select($this->byXPath("//select[contains(@name,'data[docman]')]"))->selectOptionByLabel("Read only");
 		$this->clickAndWait("//input[@value='Submit']") ;
 		$this->waitForPageToLoad("30000");
 
@@ -564,14 +564,14 @@ class Search extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->clickAndWait("//td/form/div[contains(.,'Anonymous')]/../div/input[@value='Edit Permissions']") ;
 		$this->waitForPageToLoad("30000");
-		$this->select($this->byXpath("//select[contains(@name,'data[project_read]')]"))->selectOptionByLabel("Visible");
-		$this->select($this->byXpath("//tr/td[.='Bugs']/../td/fieldset/select[contains(@name,'data[tracker]')]"))->selectOptionByLabel("No Access");
-		$this->select($this->byXpath("//tr/td[.='Patches']/../td/fieldset/select[contains(@name,'data[tracker]')]"))->selectOptionByLabel("No Access");
-		$this->select($this->byXpath("//tr/td[.='To Do']/../td/fieldset/select[contains(@name,'data[pm]')]"))->selectOptionByLabel("No Access");
-		$this->select($this->byXpath("//tr/td[.='Next Release']/../td/fieldset/select[contains(@name,'data[pm]')]"))->selectOptionByLabel("No Access");
-		$this->select($this->byXpath("//tr/td[.='open-discussion']/../td/fieldset/select[contains(@name,'data[forum]')]"))->selectOptionByLabel("No Access");
-		$this->select($this->byXpath("//tr/td[.='developers-discussion']/../td/fieldset/select[contains(@name,'data[forum]')]"))->selectOptionByLabel("No Access");
-		$this->select($this->byXpath("//select[contains(@name,'data[docman]')]"))->selectOptionByLabel("No Access");
+		$this->select($this->byXPath("//select[contains(@name,'data[project_read]')]"))->selectOptionByLabel("Visible");
+		$this->select($this->byXPath("//tr/td[.='Bugs']/../td/fieldset/select[contains(@name,'data[tracker]')]"))->selectOptionByLabel("No Access");
+		$this->select($this->byXPath("//tr/td[.='Patches']/../td/fieldset/select[contains(@name,'data[tracker]')]"))->selectOptionByLabel("No Access");
+		$this->select($this->byXPath("//tr/td[.='To Do']/../td/fieldset/select[contains(@name,'data[pm]')]"))->selectOptionByLabel("No Access");
+		$this->select($this->byXPath("//tr/td[.='Next Release']/../td/fieldset/select[contains(@name,'data[pm]')]"))->selectOptionByLabel("No Access");
+		$this->select($this->byXPath("//tr/td[.='open-discussion']/../td/fieldset/select[contains(@name,'data[forum]')]"))->selectOptionByLabel("No Access");
+		$this->select($this->byXPath("//tr/td[.='developers-discussion']/../td/fieldset/select[contains(@name,'data[forum]')]"))->selectOptionByLabel("No Access");
+		$this->select($this->byXPath("//select[contains(@name,'data[docman]')]"))->selectOptionByLabel("No Access");
 		$this->clickAndWait("//input[@value='Submit']") ;
 		$this->waitForPageToLoad("30000");
 

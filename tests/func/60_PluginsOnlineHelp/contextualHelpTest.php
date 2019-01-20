@@ -2,6 +2,7 @@
 /**
  * Copyright (C) 2010 Alcatel-Lucent
  * Copyright (C) 2015  Inria (Sylvain Beucler)
+ * Copyright 2019, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -77,7 +78,7 @@ class ContextualHelp extends FForge_SeleniumTestCase
 	function checkWindow($action, $text)
 	{
 		$this->clickAndWait($action);
-		$this->click("link=Get Help");
+		$this->clickAndWait("link=Get Help");
 		sleep(1);
 		$this->waitForPopUp("HelpWindow", "30000");
 		$this->selectWindow("name=HelpWindow");

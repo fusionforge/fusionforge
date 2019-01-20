@@ -2,6 +2,7 @@
 /**
  * Copyright (C) 2010 Alcatel-Lucent
  * Copyright (C) 2015  Inria (Sylvain Beucler)
+ * Copyright 2019, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -57,33 +58,33 @@ class UserBlocks extends FForge_SeleniumTestCase
 
 		$this->gotoProject('ProjectA');
 
-		$this->click("link=Admin");
+		$this->clickAndWait("link=Admin");
 		$this->waitForPageToLoad("30000");
-		$this->click("link=Tools");
+		$this->clickAndWait("link=Tools");
 		$this->waitForPageToLoad("30000");
-		$this->click("use_blocks");
-		$this->click("submit");
+		$this->clickAndWait("use_blocks");
+		$this->clickAndWait("submit");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Project information updated"));
-		$this->click("link=Blocks Admin");
+		$this->clickAndWait("link=Blocks Admin");
 		$this->waitForPageToLoad("30000");
-		$this->click("activate[summary_description]");
-	//    $this->click("activate[summary_right]");
-		$this->click("//input[@value='Save Blocks']");
+		$this->clickAndWait("activate[summary_description]");
+	//    $this->clickAndWait("activate[summary_right]");
+		$this->clickAndWait("//input[@value='Save Blocks']");
 		$this->waitForPageToLoad("30000");
 
 		$this->open("/plugins/blocks/index.php?id=7&type=admin&pluginname=blocks");
-		$this->click("link=Configure");
+		$this->clickAndWait("link=Configure");
 		$this->waitForPageToLoad("30000");
 		$this->type("body", "This is my nice block.");
-		$this->click("//input[@value='Save']");
+		$this->clickAndWait("//input[@value='Save']");
 		$this->waitForPageToLoad("30000");
-	//    $this->click("//main[@id='maindiv']/form/table/tbody/tr[2]/td[4]/a");
+	//    $this->clickAndWait("//main[@id='maindiv']/form/table/tbody/tr[2]/td[4]/a");
 	//    $this->waitForPageToLoad("30000");
 	//    $this->type("body", "{boxTop Project}\nThis is the summary block.\n{boxBottom}");
-	//    $this->click("//input[@value='Save']");
+	//    $this->clickAndWait("//input[@value='Save']");
 	//    $this->waitForPageToLoad("30000");
-		$this->click("link=Summary");
+		$this->clickAndWait("link=Summary");
 		$this->waitForPageToLoad("30000");
 	//    $this->assertText("//td[@id='main']/table[1]/tbody/tr/td[1]", "This is my nice block.");
 	//    $this->assertEquals("This is the summary block.", $this->getText("//td[@id='main']/table[1]/tbody/tr/td[2]/table[1]/tbody/tr[2]/td"));

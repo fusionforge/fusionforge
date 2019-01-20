@@ -69,15 +69,15 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 
 		// Grant it permissions
-		$this->select($this->byXpath("//select[@name='data[approve_projects][-1]']"))->selectOptionByLabel("Approve projects");
-		$this->select($this->byXpath("//select[@name='data[approve_news][-1]']"))->selectOptionByLabel("Approve news");
+		$this->select($this->byXPath("//select[@name='data[approve_projects][-1]']"))->selectOptionByLabel("Approve projects");
+		$this->select($this->byXPath("//select[@name='data[approve_news][-1]']"))->selectOptionByLabel("Approve news");
 		$this->clickAndWait("//input[@value='Submit']") ;
 		$this->waitForPageToLoad("30000");
 
 		// Check permissions were saved
 		$this->clickAndWait("link=Site Admin");
 		$this->waitForPageToLoad("30000");
-		$this->select($this->byXpath("//form[contains(@action,'globalroleedit.php')]//select[@name='role_id']"))->selectOptionByLabel("Project approvers") ;
+		$this->select($this->byXPath("//form[contains(@action,'globalroleedit.php')]//select[@name='role_id']"))->selectOptionByLabel("Project approvers") ;
 		$this->clickAndWait("//form[contains(@action,'globalroleedit.php')]//input[@value='Edit Role']") ;
 		$this->waitForPageToLoad("30000");
 
@@ -86,7 +86,7 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->assertSelected("//select[@name='data[approve_news][-1]']", "Approve news");
 
 		// Whoops, we don't actually want the news moderation bit, unset it
-		$this->select($this->byXpath("//select[@name='data[approve_news][-1]']"))->selectOptionByLabel("No Access");
+		$this->select($this->byXPath("//select[@name='data[approve_news][-1]']"))->selectOptionByLabel("No Access");
 		$this->clickAndWait("//input[@value='Submit']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertSelected("//select[@name='data[approve_projects][-1]']", "Approve projects");
@@ -99,7 +99,7 @@ class RBAC extends FForge_SeleniumTestCase
 		// Add them to their respective roles, check they're here
 		$this->clickAndWait("link=Site Admin");
 		$this->waitForPageToLoad("30000");
-		$this->select($this->byXpath("//form[contains(@action,'globalroleedit.php')]//select[@name='role_id']"))->selectOptionByLabel("Project approvers");
+		$this->select($this->byXPath("//form[contains(@action,'globalroleedit.php')]//select[@name='role_id']"))->selectOptionByLabel("Project approvers");
 		$this->clickAndWait("//form[contains(@action,'globalroleedit.php')]//input[@value='Edit Role']") ;
 		$this->waitForPageToLoad("30000");
 		$this->type ("//form[contains(@action,'globalroleedit.php')]//input[@name='form_unix_name']", "projapp") ;
@@ -109,7 +109,7 @@ class RBAC extends FForge_SeleniumTestCase
 
 		$this->clickAndWait("link=Site Admin");
 		$this->waitForPageToLoad("30000");
-		$this->select($this->byXpath("//form[contains(@action,'globalroleedit.php')]//select[@name='role_id']"))->selectOptionByLabel("News moderators") ;
+		$this->select($this->byXPath("//form[contains(@action,'globalroleedit.php')]//select[@name='role_id']"))->selectOptionByLabel("News moderators") ;
 		$this->clickAndWait("//form[contains(@action,'globalroleedit.php')]//input[@value='Edit Role']") ;
 		$this->waitForPageToLoad("30000");
 		$this->type ("//form[contains(@action,'globalroleedit.php')]//input[@name='form_unix_name']", "newsmod") ;
@@ -137,7 +137,7 @@ class RBAC extends FForge_SeleniumTestCase
 		// (For cases where project_registration_restricted=true)
 		$this->clickAndWait("link=Site Admin");
 		$this->waitForPageToLoad("30000");
-		$this->select($this->byXpath("//form[contains(@action,'globalroleedit.php')]//select[@name='role_id']"))->selectOptionByLabel("Project approvers");
+		$this->select($this->byXPath("//form[contains(@action,'globalroleedit.php')]//select[@name='role_id']"))->selectOptionByLabel("Project approvers");
 		$this->clickAndWait("//form[contains(@action,'globalroleedit.php')]//input[@value='Edit Role']") ;
 		$this->waitForPageToLoad("30000");
 		$this->type ("//form[contains(@action,'globalroleedit.php')]//input[@name='form_unix_name']", "toto") ;
@@ -151,7 +151,7 @@ class RBAC extends FForge_SeleniumTestCase
 		// Revoke project approval rights
 		$this->clickAndWait("link=Site Admin");
 		$this->waitForPageToLoad("30000");
-		$this->select($this->byXpath("//form[contains(@action,'globalroleedit.php')]//select[@name='role_id']"))->selectOptionByLabel("Project approvers");
+		$this->select($this->byXPath("//form[contains(@action,'globalroleedit.php')]//select[@name='role_id']"))->selectOptionByLabel("Project approvers");
 		$this->clickAndWait("//form[contains(@action,'globalroleedit.php')]//input[@value='Edit Role']") ;
 		$this->waitForPageToLoad("30000");
 		$this->clickAndWait("//a[contains(@href,'/users/toto')]/../../td/input[@type='checkbox']") ;
@@ -229,7 +229,7 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=Site Admin");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isElementPresent("//option[.='Temporary role']"));
-		$this->select($this->byXpath("//form[contains(@action,'globalroleedit.php')]//select[@name='role_id']"))->selectOptionByLabel("Temporary role");
+		$this->select($this->byXPath("//form[contains(@action,'globalroleedit.php')]//select[@name='role_id']"))->selectOptionByLabel("Temporary role");
 		$this->clickAndWait("//form[contains(@action,'globalroleedit.php')]//input[@value='Edit Role']") ;
 		$this->waitForPageToLoad("30000");
 		$this->type ("//form[contains(@action,'globalroleedit.php')]//input[@name='form_unix_name']", "toto") ;
@@ -242,7 +242,7 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("Cannot remove a non empty role"));
 		$this->clickAndWait("link=Site Admin");
 		$this->waitForPageToLoad("30000");
-		$this->select($this->byXpath("//form[contains(@action,'globalroleedit.php')]//select[@name='role_id']"))->selectOptionByLabel("Temporary role");
+		$this->select($this->byXPath("//form[contains(@action,'globalroleedit.php')]//select[@name='role_id']"))->selectOptionByLabel("Temporary role");
 		$this->clickAndWait("//form[contains(@action,'globalroleedit.php')]//input[@value='Edit Role']") ;
 		$this->waitForPageToLoad("30000");
 		$this->clickAndWait("//a[contains(@href,'/users/toto')]/../../td/input[@type='checkbox']") ;
@@ -252,7 +252,7 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=Site Admin");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isElementPresent("//option[.='Temporary role']"));
-		$this->select($this->byXpath("//form[contains(@action,'globalroleedit.php')]//select[@name='role_id']"))->selectOptionByLabel("Temporary role");
+		$this->select($this->byXPath("//form[contains(@action,'globalroleedit.php')]//select[@name='role_id']"))->selectOptionByLabel("Temporary role");
 		$this->clickAndWait("//form[contains(@action,'globalroleedit.php')]//input[@value='Edit Role']") ;
 		$this->waitForPageToLoad("30000");
 		$this->clickAndWait("//input[@type='checkbox' and @name='sure']") ;
@@ -278,7 +278,7 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 
 		// Grant it permissions
-		$this->select($this->byXpath("//select[@name='data[approve_projects][-1]']"))->selectOptionByLabel("Approve projects");
+		$this->select($this->byXPath("//select[@name='data[approve_projects][-1]']"))->selectOptionByLabel("Approve projects");
 		$this->clickAndWait("//input[@value='Submit']") ;
 		$this->waitForPageToLoad("30000");
 
@@ -338,28 +338,28 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=Users and permissions");
 		$this->waitForPageToLoad("30000");
 		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "guru") ;
-		$this->select($this->byXpath("//input[@value='Add Member']/../fieldset/select[@name='role_id']"))->selectOptionByLabel("Senior Developer");
+		$this->select($this->byXPath("//input[@value='Add Member']/../fieldset/select[@name='role_id']"))->selectOptionByLabel("Senior Developer");
 		$this->clickAndWait("//input[@value='Add Member']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("guru Lastname"));
 		$this->assertTrue($this->isElementPresent("//tr/td/a[.='guru Lastname']/../../td/div[contains(.,'Senior Developer')]")) ;
 
 		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "trainee") ;
-		$this->select($this->byXpath("//input[@value='Add Member']/../fieldset/select[@name='role_id']"))->selectOptionByLabel("Junior Developer");
+		$this->select($this->byXPath("//input[@value='Add Member']/../fieldset/select[@name='role_id']"))->selectOptionByLabel("Junior Developer");
 		$this->clickAndWait("//input[@value='Add Member']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("trainee Lastname"));
 		$this->assertTrue($this->isElementPresent("//tr/td/a[.='trainee Lastname']/../../td/div[contains(.,'Junior Developer')]")) ;
 
 		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "docmaster") ;
-		$this->select($this->byXpath("//input[@value='Add Member']/../fieldset/select[@name='role_id']"))->selectOptionByLabel("Doc Writer");
+		$this->select($this->byXPath("//input[@value='Add Member']/../fieldset/select[@name='role_id']"))->selectOptionByLabel("Doc Writer");
 		$this->clickAndWait("//input[@value='Add Member']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("docmaster Lastname"));
 		$this->assertTrue($this->isElementPresent("//tr/td/a[.='docmaster Lastname']/../../td/div[contains(.,'Doc Writer')]")) ;
 
 		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "bigboss") ;
-		$this->select($this->byXpath("//input[@value='Add Member']/../fieldset/select[@name='role_id']"))->selectOptionByLabel("Senior Developer");
+		$this->select($this->byXPath("//input[@value='Add Member']/../fieldset/select[@name='role_id']"))->selectOptionByLabel("Senior Developer");
 		$this->clickAndWait("//input[@value='Add Member']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("bigboss Lastname"));
@@ -376,7 +376,7 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->assertFalse($this->isTextPresent("trainee Lastname"));
 
 		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "trainee") ;
-		$this->select($this->byXpath("//input[@value='Add Member']/../fieldset/select[@name='role_id']"))->selectOptionByLabel("Junior Developer");
+		$this->select($this->byXPath("//input[@value='Add Member']/../fieldset/select[@name='role_id']"))->selectOptionByLabel("Junior Developer");
 		$this->clickAndWait("//input[@value='Add Member']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("trainee Lastname"));
@@ -392,13 +392,13 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->clickAndWait("//td/form/div[contains(.,'Junior Developer')]/../div/input[@value='Edit Permissions']") ;
 		$this->waitForPageToLoad("30000");
 
-		$this->select($this->byXpath("//select[contains(@name,'data[frs_admin]')]"))->selectOptionByLabel("FRS access");
-		$this->select($this->byXpath("//select[contains(@name,'data[docman]')]"))->selectOptionByLabel("Read only");
+		$this->select($this->byXPath("//select[contains(@name,'data[frs_admin]')]"))->selectOptionByLabel("FRS access");
+		$this->select($this->byXPath("//select[contains(@name,'data[docman]')]"))->selectOptionByLabel("Read only");
 		$this->clickAndWait("//input[@value='Submit']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertSelected("//select[contains(@name,'data[docman]')]", "Read only");
 		$this->assertSelected("//select[contains(@name,'data[frs_admin]')]", "FRS access");
-		$this->select($this->byXpath("//select[contains(@name,'data[new_frs]')]"))->selectOptionByLabel("Read only");
+		$this->select($this->byXPath("//select[contains(@name,'data[new_frs]')]"))->selectOptionByLabel("Read only");
 		$this->clickAndWait("//input[@value='Submit']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertSelected("//select[contains(@name,'data[new_frs]')]", "Read only");
@@ -467,7 +467,7 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 
 		$this->assertTrue($this->isElementPresent("//input[@value='Link external role']/../../div/fieldset/select/option[.='Senior Developer (in project MetaProject)']")) ;
-		$this->select($this->byXpath("//input[@value='Link external role']/../../div/fieldset/select"))->selectOptionByLabel("Senior Developer (in project MetaProject)") ;
+		$this->select($this->byXPath("//input[@value='Link external role']/../../div/fieldset/select"))->selectOptionByLabel("Senior Developer (in project MetaProject)") ;
 		$this->clickAndWait("//input[@value='Link external role']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isElementPresent("//td/form/div[contains(.,'Senior Developer (in project MetaProject)')]/../div/input[contains(@value,'Unlink Role')]"));
@@ -475,7 +475,7 @@ class RBAC extends FForge_SeleniumTestCase
 		// Grant it tracker manager permissions
 		$this->clickAndWait("//td/form/div[contains(.,'Senior Developer (in project MetaProject)')]/../div/input[@value='Edit Permissions']") ;
 		$this->waitForPageToLoad("30000");
-		$this->select($this->byXpath("//select[contains(@name,'data[tracker]')]"))->selectOptionByLabel("Manager");
+		$this->select($this->byXPath("//select[contains(@name,'data[tracker]')]"))->selectOptionByLabel("Manager");
 		$this->clickAndWait("//input[@value='Submit']") ;
 		$this->waitForPageToLoad("30000");
 
@@ -500,7 +500,7 @@ class RBAC extends FForge_SeleniumTestCase
 
 		$this->assertTrue($this->isElementPresent("//input[@value='Link external role']/../../div/fieldset/select/option[.='Documentation masters (global role)']")) ;
 		$this->assertFalse($this->isElementPresent("//input[@value='Link external role']/../../div/fieldset/select/option[.='Project moderators (global role)']")) ;
-		$this->select($this->byXpath("//input[@value='Link external role']/../../div/fieldset/select"))->selectOptionByLabel("Documentation masters (global role)") ;
+		$this->select($this->byXPath("//input[@value='Link external role']/../../div/fieldset/select"))->selectOptionByLabel("Documentation masters (global role)") ;
 		$this->clickAndWait("//input[@value='Link external role']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isElementPresent("//td/form/div[contains(.,'Documentation masters (global role)')]/../div/input[contains(@value,'Unlink Role')]"));
@@ -512,7 +512,7 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=Users and permissions");
 		$this->waitForPageToLoad("30000");
 		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "guru") ;
-		$this->select($this->byXpath("//input[@value='Add Member']/../fieldset/select[@name='role_id']"))->selectOptionByLabel("Admin");
+		$this->select($this->byXPath("//input[@value='Add Member']/../fieldset/select[@name='role_id']"))->selectOptionByLabel("Admin");
 		$this->clickAndWait("//input[@value='Add Member']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("guru Lastname"));
@@ -547,7 +547,7 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Temporary role"));
 		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "trainee") ;
-		$this->select($this->byXpath("//input[@value='Add Member']/../fieldset/select[@name='role_id']"))->selectOptionByLabel("Temporary role");
+		$this->select($this->byXPath("//input[@value='Add Member']/../fieldset/select[@name='role_id']"))->selectOptionByLabel("Temporary role");
 		$this->clickAndWait("//input[@value='Add Member']") ;
 		$this->waitForPageToLoad("30000");
 		$this->clickAndWait("//td/form/div[contains(.,'Temporary role')]/../../form/div/input[@value='Delete role']") ;
@@ -610,17 +610,17 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->clickAndWait("//td/form/div[contains(.,'Anonymous')]/../div/input[@value='Edit Permissions']") ;
 		$this->waitForPageToLoad("30000");
 
-		$this->select($this->byXpath("//tr/td[contains(.,'first-news')]/../td/fieldset/select"))->selectOptionByLabel("Read only");
+		$this->select($this->byXPath("//tr/td[contains(.,'first-news')]/../td/fieldset/select"))->selectOptionByLabel("Read only");
 		$this->clickAndWait("//input[@value='Submit']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertSelected("//tr/td[contains(.,'first-news')]/../td/fieldset/select", "Read only");
 
-		$this->select($this->byXpath("//tr/td[contains(.,'first-news')]/../td/fieldset/select"))->selectOptionByLabel("Moderated post");
+		$this->select($this->byXPath("//tr/td[contains(.,'first-news')]/../td/fieldset/select"))->selectOptionByLabel("Moderated post");
 		$this->clickAndWait("//input[@value='Submit']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertSelected("//tr/td[contains(.,'first-news')]/../td/fieldset/select", "Moderated post");
 
-		$this->select($this->byXpath("//tr/td[contains(.,'first-news')]/../td/fieldset/select"))->selectOptionByLabel("Unmoderated post");
+		$this->select($this->byXPath("//tr/td[contains(.,'first-news')]/../td/fieldset/select"))->selectOptionByLabel("Unmoderated post");
 		$this->clickAndWait("//input[@value='Submit']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertSelected("//tr/td[contains(.,'first-news')]/../td/fieldset/select", "Unmoderated post");

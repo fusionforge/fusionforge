@@ -66,7 +66,7 @@ class GlobalActivity extends FForge_SeleniumTestCase
 		$this->gotoProject('ProjectA');
 		$this->clickAndWait("link=Forums");
 		$this->clickAndWait("link=open-discussion");
-		$this->click("link=Start New Thread");
+		$this->clickAndWait("link=Start New Thread");
 		$this->waitForPageToLoad("30000");
 		$this->type("subject", "Message1 in a bottle");
 		$this->type("body", "ninetynine of them on Charlie's wall - also, ZONGO");
@@ -75,7 +75,7 @@ class GlobalActivity extends FForge_SeleniumTestCase
 		$this->createAndGoto('ProjectB');
 		$this->clickAndWait("link=Forums");
 		$this->clickAndWait("link=open-discussion");
-		$this->click("link=Start New Thread");
+		$this->clickAndWait("link=Start New Thread");
 		$this->waitForPageToLoad("30000");
 		$this->type("subject", "Message2");
 		$this->type("body", "Forum post in project B");
@@ -88,10 +88,10 @@ class GlobalActivity extends FForge_SeleniumTestCase
 		$this->clickAndWait("addItemDocmanMenu");
 		// ugly hack until we fix behavior in docman when no folders exist. We need to click twice on the link
 		$this->clickAndWait("addItemDocmanMenu");
-		$this->click("id=tab-new-document");
+		$this->clickAndWait("id=tab-new-document");
 		$this->type("title", "Doc1 Vladimir");
 		$this->type("//textarea[@name='description']", "Main website (the needle) - also, ZONGO");
-		$this->click("//input[@name='type' and @value='pasteurl']");
+		$this->clickAndWait("//input[@name='type' and @value='pasteurl']");
 		$this->type("file_url", "http://fusionforge.org/");
 		$this->clickAndWait("submit");
 
@@ -218,14 +218,14 @@ class GlobalActivity extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=Admin");
 		$this->clickAndWait("link=Users and permissions");
 		$this->clickAndWait ("//td/form/div[contains(.,'Anonymous')]/../div/input[@value='Edit Permissions']") ;
-		$this->select("//select[contains(@name,'data[project_read]')]", "label=Visible");
-		$this->select("//tr/td[.='Bugs']/../td/fieldset/select[contains(@name,'data[tracker]')]", "label=No Access");
-		$this->select("//tr/td[.='Patches']/../td/fieldset/select[contains(@name,'data[tracker]')]", "label=No Access");
-		$this->select("//tr/td[.='To Do']/../td/fieldset/select[contains(@name,'data[pm]')]", "label=No Access");
-		$this->select("//tr/td[.='Next Release']/../td/fieldset/select[contains(@name,'data[pm]')]", "label=No Access");
-		$this->select("//tr/td[.='open-discussion']/../td/fieldset/select[contains(@name,'data[forum]')]", "label=No Access");
-		$this->select("//tr/td[.='developers-discussion']/../td/fieldset/select[contains(@name,'data[forum]')]", "label=No Access");
-		$this->select("//select[contains(@name,'data[docman]')]", "label=Read only");
+		$this->select($this->byXPath("//select[contains(@name,'data[project_read]')]"))->selectOptionByLabel("Visible");
+		$this->select($this->byXPath("//tr/td[.='Bugs']/../td/fieldset/select[contains(@name,'data[tracker]')]"))->selectOptionByLabel("No Access");
+		$this->select($this->byXPath("//tr/td[.='Patches']/../td/fieldset/select[contains(@name,'data[tracker]')]"))->selectOptionByLabel("No Access");
+		$this->select($this->byXPath("//tr/td[.='To Do']/../td/fieldset/select[contains(@name,'data[pm]')]"))->selectOptionByLabel("No Access");
+		$this->select($this->byXPath("//tr/td[.='Next Release']/../td/fieldset/select[contains(@name,'data[pm]')]"))->selectOptionByLabel("No Access");
+		$this->select($this->byXPath("//tr/td[.='open-discussion']/../td/fieldset/select[contains(@name,'data[forum]')]"))->selectOptionByLabel("No Access");
+		$this->select($this->byXPath("//tr/td[.='developers-discussion']/../td/fieldset/select[contains(@name,'data[forum]')]"))->selectOptionByLabel("No Access");
+		$this->select($this->byXPath("//select[contains(@name,'data[docman]')]"))->selectOptionByLabel("Read only");
 		$this->clickAndWait ("//input[@value='Submit']") ;
 
 		// Recheck perms on anonymous global activity page
