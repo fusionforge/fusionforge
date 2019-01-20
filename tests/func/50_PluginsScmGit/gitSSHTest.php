@@ -2,6 +2,7 @@
 /*
  * Copyright (C) 2012 Roland Mas
  * Copyright (C) 2015  Inria (Sylvain Beucler)
+ * Copyright 2019, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -86,7 +87,7 @@ class ScmGitSSHTest extends FForge_SeleniumTestCase
 		$this->activatePlugin('globalactivity');
 
 		$this->open(ROOT.'/plugins/globalactivity/');
-		$this->select("//select[@name='show[]']","label=Git Commits");
+		$this->select($this->byXpath("//select[@name='show[]']"))->selectOptionByLabel("Git Commits");
 		$this->clickAndWait("submit");
 		$this->assertTextPresent("scm commit: Modifying file");
 		$this->assertTextPresent("scm commit: Adding file");
