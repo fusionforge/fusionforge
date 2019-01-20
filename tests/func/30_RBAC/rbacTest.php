@@ -173,7 +173,7 @@ class RBAC extends FForge_SeleniumTestCase
 		// Submit a news in the project
 		$this->switchUser ("toto") ;
 		$this->gotoProject ("TotoProject") ;
-		$this->clickAndWait"link=News") ;
+		$this->clickAndWait("link=News");
 		$this->waitForPageToLoad("30000");
 		$this->clickAndWait("link=Submit") ;
 		$this->waitForPageToLoad("30000");
