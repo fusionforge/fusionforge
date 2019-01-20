@@ -3,6 +3,7 @@
  * Copyright (C) 2008 Alain Peyrat <aljeux@free.fr>
  * Copyright (C) 2009 - 2010 Alain Peyrat, Alcatel-Lucent
  * Copyright (C) 2015  Inria (Sylvain Beucler)
+ * Copyright 2019, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -56,31 +57,31 @@ class CreateTracker extends FForge_SeleniumTestCase
 		$this->gotoProject('ProjectA');
 
 		// Test: Create a simple bug report (Message1/Text1).
-		$this->click("link=Tracker");
+		$this->clickAndWait("link=Tracker");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Bugs"));
 		$this->assertTrue($this->isTextPresent("Support"));
 		$this->assertTrue($this->isTextPresent("Patches"));
 		$this->assertTrue($this->isTextPresent("Feature Requests"));
-		$this->click("link=Bugs");
+		$this->clickAndWait("link=Bugs");
 		$this->waitForPageToLoad("30000");
-		$this->click("//a[contains(@href, '".ROOT. "/tracker/admin/')]");
+		$this->clickAndWait("//a[contains(@href, '".ROOT. "/tracker/admin/')]");
 		$this->waitForPageToLoad("30000");
-		$this->click("link=Manage Custom Fields");
+		$this->clickAndWait("link=Manage Custom Fields");
 		$this->waitForPageToLoad("30000");
 		$this->type("name", "URL");
 		$this->type("alias", "url");
-		$this->click("//input[@name='field_type' and @value='4']");
-		$this->click("post_changes");
+		$this->clickAndWait("//input[@name='field_type' and @value='4']");
+		$this->clickAndWait("post_changes");
 		$this->waitForPageToLoad("30000");
-		$this->click("link=Submit New");
+		$this->clickAndWait("link=Submit New");
 		$this->waitForPageToLoad("30000");
 		$this->type("summary", "Summary1");
 		$this->type("details", "Description1");
-		$this->click("//form[@id='trackeraddform']//input[@type='submit']");
+		$this->clickAndWait("//form[@id='trackeraddform']//input[@type='submit']");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Summary1"));
-		$this->click("link=Summary1");
+		$this->clickAndWait("link=Summary1");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent(""));
 		$this->assertTrue($this->isTextPresent("Description1"));
@@ -106,9 +107,9 @@ class CreateTracker extends FForge_SeleniumTestCase
 
 		// Test: Updating the URL extra field and checking that it is recorded.
 		$this->type("//form[@id='trackermodform']//input[@type='text']", "http://google.com/");
-		$this->click("submit");
+		$this->clickAndWait("submit");
 		$this->waitForPageToLoad("30000");
-		$this->click("link=Summary1");
+		$this->clickAndWait("link=Summary1");
 		$this->waitForPageToLoad("30000");
 		try {
 			$this->assertEquals("http://google.com/", $this->getValue("//form[@id='trackermodform']//input[@type='text']"));
@@ -117,11 +118,11 @@ class CreateTracker extends FForge_SeleniumTestCase
 		}
 
 		// Test: Updating the priority and checking that it is recorded.
-		$this->select("priority", "label=5 - Highest");
-		$this->click("submit");
+		$this->select($this->byName("priority"))->selectOptionByLabel("5 - Highest");
+		$this->clickAndWait("submit");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("5"));
-		$this->click("link=Summary1");
+		$this->clickAndWait("link=Summary1");
 		$this->waitForPageToLoad("30000");
 	}
 
@@ -132,20 +133,20 @@ class CreateTracker extends FForge_SeleniumTestCase
 		$this->gotoProject('ProjectA');
 
 		// Testing extra-fields
-		$this->click("link=Tracker");
+		$this->clickAndWait("link=Tracker");
 		$this->waitForPageToLoad("30000");
-		$this->click("link=Bugs");
+		$this->clickAndWait("link=Bugs");
 		$this->waitForPageToLoad("30000");
-		$this->click("//a[contains(@href, '".ROOT. "/tracker/admin/')]");
+		$this->clickAndWait("//a[contains(@href, '".ROOT. "/tracker/admin/')]");
 		$this->waitForPageToLoad("30000");
-		$this->click("link=Manage Custom Fields");
+		$this->clickAndWait("link=Manage Custom Fields");
 		$this->waitForPageToLoad("30000");
 		$this->type("name", "Number");
 		$this->type("alias", "number");
-		$this->click("field_type");
-		$this->click("post_changes");
+		$this->clickAndWait("field_type");
+		$this->clickAndWait("post_changes");
 		$this->waitForPageToLoad("30000");
-		$this->click("//tr[@id='field-number']/td[9]/a[1]");
+		$this->clickAndWait("//tr[@id='field-number']/td[9]/a[1]");
 		$this->waitForPageToLoad("30000");
 		$this->type("name", "1");
 		$this->clickAndWait("post_changes");
@@ -156,22 +157,22 @@ class CreateTracker extends FForge_SeleniumTestCase
 
 		// Testing [#3609]: Select Box does not accept 0 as choice
 		$this->type("name", "0");
-		$this->click("post_changes");
+		$this->clickAndWait("post_changes");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Element inserted"));
 
 		// Testing [#3649]: 0 not accepted when modifying a select list value
-		$this->click("link=Manage Custom Fields");
+		$this->clickAndWait("link=Manage Custom Fields");
 		$this->waitForPageToLoad("30000");
-		$this->click("//tr[@id='field-number']/td[8]/a[5]");
+		$this->clickAndWait("//tr[@id='field-number']/td[8]/a[5]");
 		$this->waitForPageToLoad("30000");
 		$this->type("name", "10");
-		$this->click("post_changes");
+		$this->clickAndWait("post_changes");
 		$this->waitForPageToLoad("30000");
-		$this->click("//tr[@id='field-number']/td[8]/a[5]");
+		$this->clickAndWait("//tr[@id='field-number']/td[8]/a[5]");
 		$this->waitForPageToLoad("30000");
 		$this->type("name", "0");
-		$this->click("post_changes");
+		$this->clickAndWait("post_changes");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Element updated"));
 	}
@@ -183,24 +184,24 @@ class CreateTracker extends FForge_SeleniumTestCase
 		$this->gotoProject('ProjectA');
 
 		// Create a new tracker and delete it after.
-		$this->click("link=Tracker");
+		$this->clickAndWait("link=Tracker");
 		$this->waitForPageToLoad("30000");
-		$this->click("//a[contains(@href,'".ROOT."/tracker/admin/')]");
+		$this->clickAndWait("//a[contains(@href,'".ROOT."/tracker/admin/')]");
 		$this->waitForPageToLoad("30000");
 		$this->type("name", "newTracker");
 		$this->type("//input[@name='description']", "This is a new tracker");
-		$this->click("post_changes");
+		$this->clickAndWait("post_changes");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Tracker created successfully"));
 		$this->assertTrue($this->isTextPresent("newTracker"));
 		$this->assertTrue($this->isTextPresent("This is a new tracker"));
-		$this->click("link=newTracker");
+		$this->clickAndWait("link=newTracker");
 		$this->waitForPageToLoad("30000");
-		$this->click("link=Delete");
+		$this->clickAndWait("link=Delete");
 		$this->waitForPageToLoad("30000");
-		$this->click("sure");
-		$this->click("really_sure");
-		$this->click("post_changes");
+		$this->clickAndWait("sure");
+		$this->clickAndWait("really_sure");
+		$this->clickAndWait("post_changes");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Successfully Deleted."));
 		$this->assertFalse($this->isTextPresent("newTracker"));

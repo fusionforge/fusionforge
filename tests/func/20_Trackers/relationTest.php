@@ -3,6 +3,7 @@
  * Copyright (C) 2008 Alain Peyrat <aljeux@free.fr>
  * Copyright (C) 2009-2010 Alain Peyrat, Alcatel-Lucent
  * Copyright (C) 2015  Inria (Sylvain Beucler)
+ * Copyright 2019, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -56,18 +57,18 @@ class CreateTrackerRelation extends FForge_SeleniumTestCase
 		$this->gotoProject('ProjectA');
 
 		// Testing extra-fields
-		$this->click("link=Tracker");
+		$this->clickAndWait("link=Tracker");
 		$this->waitForPageToLoad("30000");
-		$this->click("link=Bugs");
+		$this->clickAndWait("link=Bugs");
 		$this->waitForPageToLoad("30000");
-		$this->click("//a[contains(@href, '".ROOT. "/tracker/admin/')]");
+		$this->clickAndWait("//a[contains(@href, '".ROOT. "/tracker/admin/')]");
 		$this->waitForPageToLoad("30000");
-		$this->click("link=Manage Custom Fields");
+		$this->clickAndWait("link=Manage Custom Fields");
 		$this->waitForPageToLoad("30000");
 		$this->type("name", "Depends on");
 		$this->type("alias", "depends_on");
-		$this->click("//input[@name='field_type' and @value=9]");
-		$this->click("post_changes");
+		$this->clickAndWait("//input[@name='field_type' and @value=9]");
+		$this->clickAndWait("post_changes");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Depends on"));
 	}
