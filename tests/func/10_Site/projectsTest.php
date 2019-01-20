@@ -55,9 +55,9 @@ class CreateProject extends FForge_SeleniumTestCase
 		// "Manual" procedure
 		$this->login (FORGE_ADMIN_USERNAME);
 		$this->url(ROOT."/my/");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("link=Register Project");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTrue($this->isTextPresent("Project Full Name"));
 		$this->type("full_name", "ProjectA");
 		$this->type("purpose", "This is a simple description for ProjectA");
@@ -66,13 +66,13 @@ class CreateProject extends FForge_SeleniumTestCase
 		$this->clickAndWait("//input[@name='scm' and @value='scmsvn']");
 		$this->assertTrue($this->isElementPresent("//select[@name='built_from_template']"));
 		$this->clickAndWait("submit");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTrue($this->isTextPresent("Your project has been automatically approved"));
 		$this->url(ROOT);
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTrue($this->isTextPresent("ProjectA"));
 		$this->clickAndWait("link=ProjectA");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTrue($this->isTextPresent("This is the public description for ProjectA."));
 		$this->assertTrue($this->isTextPresent("This project has not yet categorized itself"));
 	}
@@ -81,33 +81,33 @@ class CreateProject extends FForge_SeleniumTestCase
 	{
 		$this->login(FORGE_ADMIN_USERNAME);
 		$this->url(ROOT."/my/");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("link=Register Project");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->type("full_name", "Project ' & B");
 		$this->type("purpose", "This is a & été simple description for project B");
 		$this->type("//textarea[@name='description']", "This is & été the public description for project B.");
 		$this->type("unix_name", "projectb");
 		$this->clickAndWait("//input[@name='scm' and @value='scmsvn']");
 		$this->clickAndWait("submit");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTrue($this->isTextPresent("Your project has been automatically approved"));
 		$this->url(ROOT);
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTrue($this->isTextPresent("Project ' & B"));
 		$this->clickAndWait("link=Project ' & B");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTrue($this->isTextPresent("This is & été the public description for project B."));
 
 		$this->url(ROOT."/projects");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("link=Project Tree");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("link=Project List");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTrue($this->isTextPresent("Project ' & B - This is & été the public description for project B."));
 		$this->url(ROOT."/my/");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertFalse($this->isTextPresent("Project ' &amp; B"));
 	}
 
@@ -116,10 +116,10 @@ class CreateProject extends FForge_SeleniumTestCase
 		// Test our high-level functions (testing the test-suite)
 		$this->createProject ('ProjectB');
 		$this->url(ROOT);
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTrue($this->isTextPresent("ProjectB"));
 		$this->clickAndWait("link=ProjectB");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTrue($this->isTextPresent("This is the public description for ProjectB."));
 		$this->assertTrue($this->isTextPresent("This project has not yet categorized itself"));
 		$this->gotoProject ('ProjectB');
@@ -135,36 +135,36 @@ class CreateProject extends FForge_SeleniumTestCase
 		$this->populateStandardTemplate('trackers');
 
 		$this->open( ROOT . '/projects/tmpl') ;
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 
 		$this->clickAndWait("link=Admin");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("link=Tools");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("link=Trackers Administration");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->type("name", "Local tracker for UNIXNAME");
 		$this->type("//input[@name='description']", "Tracker for PUBLICNAME (UNIXNAME)");
 		$this->clickAndWait("post_changes");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTrue($this->isTextPresent("Tracker created successfully"));
 
 		$this->init();
 		$this->clickAndWait("link=Tracker");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTrue($this->isTextPresent("Tracker for ProjectA (projecta)"));
 
 		// Test for fusionforge.org bug #245
 		$this->open( ROOT . '/projects/tmpl') ;
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 
 		$this->clickAndWait("link=Admin");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("link=Tools");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->uncheck("//input[@name='use_tracker']") ;
 		$this->clickAndWait("submit");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 
 		$this->createAndGoto('ProjectB');
 	}
@@ -175,9 +175,9 @@ class CreateProject extends FForge_SeleniumTestCase
 		$this->populateStandardTemplate('all');
 
 		$this->url(ROOT."/my/");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("link=Register Project");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTrue($this->isElementPresent("//select[@name='built_from_template']"));
 		$this->type("full_name", "ProjectA");
 		$this->type("purpose", "This is a simple description for ProjectA");
@@ -186,13 +186,13 @@ class CreateProject extends FForge_SeleniumTestCase
 		$this->select($this->byXPath("//select[@name='built_from_template']"))->selectOptionByLabel("Start from empty project");
 		$this->clickAndWait("//input[@name='scm' and @value='scmsvn']");
 		$this->clickAndWait("submit");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTrue($this->isTextPresent("Your project has been automatically approved"));
 		$this->url(ROOT);
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTrue($this->isTextPresent("ProjectA"));
 		$this->clickAndWait("link=ProjectA");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTrue($this->isTextPresent("This is the public description for ProjectA."));
 		$this->assertTrue($this->isTextPresent("This project has not yet categorized itself"));
 		$this->assertFalse($this->isElementPresent("link=Tracker"));
@@ -211,32 +211,32 @@ class CreateProject extends FForge_SeleniumTestCase
 		$this->createUser('toto');
 
 		$this->url(ROOT."/admin/");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->select($this->byXPath("//form[contains(@action,'globalroleedit.php')]//select[@name='role_id']"))->selectOptionByLabel("Forge administrators") ;
 		$this->clickAndWait("//form[contains(@action,'globalroleedit.php')]//input[@value='Edit Role']") ;
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->type ("//form[contains(@action,'globalroleedit.php')]//input[@name='form_unix_name']", "toto") ;
 		$this->clickAndWait("//input[@value='Add User']") ;
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTrue($this->isTextPresent("toto Lastname"));
 
 		$this->registerProject('testal1','toto');
 
 		$this->url(ROOT."/admin/");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("link=Display Full Project List/Edit Projects");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("link=testal1");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("link=Permanently Delete Project");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("sure");
 		$this->clickAndWait("reallysure");
 		$this->clickAndWait("reallyreallysure");
 		$this->clickAndWait("submit");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->url(ROOT);
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertFalse($this->isTextPresent("testal1"));
 
 		// Non-regression test for bug #681
