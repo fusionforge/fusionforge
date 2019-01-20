@@ -426,6 +426,10 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 		$this->type("unix_name", $unix_name);
 		$this->clickAndWait("//input[@name='scm' and @value='$scm']");
 
+		try {
+			$this->select($this->byXpath("//select[@name='built_from_template']"))->selectOptionByLabel("Tmpl");
+		} catch (Exception $e) {}
+
 		$this->clickAndWait("submit");
 		$this->assertTextPresent("Your project has been automatically approved");
 
@@ -585,8 +589,14 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 	}
 
 	function isElementPresent($element) {
-		if ($this->byXpath($element) instanceof PHPUnit_Extensions_Selenium2TestCase_Element) {
-			return true;
+		if (preg_match('/^\/\/[a-z]/', $element)) {
+			if ($this->byXpath($element) instanceof PHPUnit_Extensions_Selenium2TestCase_Element) {
+				return true;
+			}
+		} elseif (preg_match('/^link=/', $element)) {
+			if ($this->byLinkText(substr($element, 5)) instanceof PHPUnit_Extensions_Selenium2TestCase_Element) {
+				return true;
+			}
 		}
 		return false;
 	}
