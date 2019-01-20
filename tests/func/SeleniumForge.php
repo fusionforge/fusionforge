@@ -199,7 +199,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 			$myelement = $this->byId($id);
 		} else if (preg_match('/^css=/', $link)) {
 			$css = substr($link, 4);
-			$myelement = $this->byCss($css);
+			$myelement = $this->byCssSelector($css);
 		} else if (preg_match('/^\/\/[a-z]/', $link)) {
 			$myelement = $this->byXPath($link);
 		} else {
