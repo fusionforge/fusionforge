@@ -191,26 +191,34 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 	}
 
 	public function clickAndWait($link) {
-		if (preg_match('/^link=/', $link)) {
-			$text = substr($link, 5);
-			$myelement = $this->byLinkText($text);
-		} else if (preg_match('/^id=/', $link)) {
-			$id = substr($link, 3);
-			$myelement = $this->byId($id);
-		} else if (preg_match('/^css=/', $link)) {
-			$css = substr($link, 4);
-			$myelement = $this->byCssSelector($css);
-		} else if (preg_match('/^\/\/[a-z]/', $link)) {
-			$myelement = $this->byXPath($link);
+		if (preg_match('/^jquery#/', $link)) {
+			$elementid = substr();
+			$this->execute(array(
+					'script' => "jQuery('a[href=\"#$elementid\").click()",
+					'args' => array(),
+				));
 		} else {
-			//default case
-			$myelement = $this->byName($link);
-		}
-		sleep(7); // to handle tooltips
-		try {
-			$myelement->click();
-		} catch (Exception $e) {
-			$this->url($myelement->attribute('href'));
+			if (preg_match('/^link=/', $link)) {
+				$text = substr($link, 5);
+				$myelement = $this->byLinkText($text);
+			} else if (preg_match('/^id=/', $link)) {
+				$id = substr($link, 3);
+				$myelement = $this->byId($id);
+			} else if (preg_match('/^css=/', $link)) {
+				$css = substr($link, 4);
+				$myelement = $this->byCssSelector($css);
+			} else if (preg_match('/^\/\/[a-z]/', $link)) {
+				$myelement = $this->byXPath($link);
+			} else {
+				//default case
+				$myelement = $this->byName($link);
+			}
+			sleep(7); // to handle tooltips
+			try {
+				$myelement->click();
+			} catch (Exception $e) {
+				$this->url($myelement->attribute('href'));
+			}
 		}
 	}
 
@@ -623,7 +631,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 		}
 	}
 
-	function waitForPageToLoad($integer = 10000) {
+	function waitForPageToLoad($integer = 15000) {
 		//do we need to set something???
 		usleep($integer);
 	}

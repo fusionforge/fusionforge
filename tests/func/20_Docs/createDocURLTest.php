@@ -58,11 +58,11 @@ class CreateDocURL extends FForge_SeleniumTestCase {
 		$this->clickAndWait("id=addItemDocmanMenu");
 		// ugly hack until we fix behavior in docman when no folders exist. We need to click twice on the link
 		$this->clickAndWait("id=addItemDocmanMenu");
-		$this->clickAndWait("id=tabs-new-folder");
+		$this->clickAndWait("jquery#tabs-new-folder");
 		$this->type("groupname", "docdirectory");
 		$this->clickAndWait("id=submitaddsubgroup");
 		$this->clickAndWait("id=addItemDocmanMenu");
-		$this->clickAndWait("id=tabs-new-document");
+		$this->clickAndWait("jquery#tabs-new-document");
 		$this->type("title", "My document");
 		$this->type("//textarea[@name='description']", "L'année dernière à Noël, 3 < 4, 中国 \" <em>, père & fils");
 		$this->clickAndWait("//input[@name='type' and @value='pasteurl']");
@@ -91,7 +91,7 @@ class CreateDocURL extends FForge_SeleniumTestCase {
 		$this->clickAndWait("id=addItemDocmanMenu");
 		// ugly hack until we fix behavior in docman when no folders exist. We need to click twice on the link
 		$this->clickAndWait("id=addItemDocmanMenu");
-		$this->clickAndWait("id=tab-new-document");
+		$this->clickAndWait("jquery#tabs-new-document");
 		$this->type("title", "My document");
 		$this->type("//textarea[@name='description']", "My Description");
 		$this->type("//textarea[@name='vcomment']", "My Comment");
@@ -120,7 +120,7 @@ class CreateDocURL extends FForge_SeleniumTestCase {
 		$this->clickAndWait("id=addItemDocmanMenu");
 		// ugly hack until we fix behavior in docman when no folders exist. We need to click twice on the link
 		$this->clickAndWait("id=addItemDocmanMenu");
-		$this->clickAndWait("id=tab-new-document");
+		$this->clickAndWait("jquery#tabs-new-document");
 		$this->type("title", "My document");
 		$this->type("//textarea[@name='description']", "My Description");
 		$this->clickAndWait("//input[@name='type' and @value='pasteurl']");
@@ -147,7 +147,7 @@ class CreateDocURL extends FForge_SeleniumTestCase {
 		$this->clickAndWait("id=addItemDocmanMenu");
 		// ugly hack until we fix behavior in docman when no folders exist. We need to click twice on the link
 		$this->clickAndWait("id=addItemDocmanMenu");
-		$this->clickAndWait("id=tab-new-document");
+		$this->clickAndWait("jquery#tabs-new-document");
 		$this->type("title", "My document");
 		$this->type("//textarea[@name='description']", "My Description");
 		$this->clickAndWait("//input[@name='type' and @value='pasteurl']");
