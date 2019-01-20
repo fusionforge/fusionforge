@@ -2,6 +2,7 @@
 /**
  * Copyright 2012, Roland Mas
  * Copyright (C) 2015  Inria (Sylvain Beucler)
+ * Copyright 2019, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -38,7 +39,7 @@ class PluginMoinMoin extends FForge_SeleniumTestCase
 		$this->gotoProject('ProjectA');
 		$this->clickAndWait("link=Admin");
 		$this->clickAndWait("link=Tools");
-		$this->click("use_moinmoin");
+		$this->clickAndWait("use_moinmoin");
 		$this->clickAndWait("submit");
 		$this->assertTrue($this->isTextPresent("Project information updated"));
 

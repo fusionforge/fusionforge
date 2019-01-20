@@ -38,7 +38,7 @@ class PluginMediawiki extends FForge_SeleniumTestCase
 		$this->gotoProject('ProjectA');
 		$this->clickAndWait("link=Admin");
 		$this->clickAndWait("link=Tools");
-		$this->click("use_mediawiki");
+		$this->clickAndWait("use_mediawiki");
 		$this->clickAndWait("submit");
 		$this->assertTrue($this->isTextPresent("Project information updated"));
 

@@ -326,7 +326,7 @@ class CreateTask extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=My Page");
 		// You cannot click on "Assigned Tasks" tabs,
 		// but the text is present in the page anyway.
-		// $this->click("link=Assigned Tasks");
+		// $this->clickAndWait("link=Assigned Tasks");
 		$this->assertTextPresent("Task2: Hello France");
 		$this->switchUser('uadmin');
 		$this->open(ROOT);

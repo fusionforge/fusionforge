@@ -2,7 +2,7 @@
 /**
  * Copyright (C) 2012 Roland Mas
  * Copyright (C) 2015  Inria (Sylvain Beucler)
- * Copyright 2017, Franck Villaume - TrivialDev
+ * Copyright 2017,2019, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -38,7 +38,7 @@ class ScmHgHTTPTest extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=Admin");
 		$this->clickAndWait("link=Tools");
 		$this->clickAndWait("link=Source Code Admin");
-		$this->click("//input[@name='scmengine[]' and @value='scmhg']");
+		$this->clickAndWait("//input[@name='scmengine[]' and @value='scmhg']");
 		$this->clickAndWait("submit");
 
 		// Create repositories
@@ -88,13 +88,13 @@ class ScmHgHTTPTest extends FForge_SeleniumTestCase
 // 		// Disable anonymous access to gitweb
 // 		$this->openWithOneRetry(ROOT);
 // 		$this->clickAndWait("link=ProjectA");
-// 		$this->click("link=Admin");
+// 		$this->clickAndWait("link=Admin");
 // 		$this->waitForPageToLoad("30000");
 // 		$this->assertTrue($this->isTextPresent("Project Information"));
-// 		$this->click("link=Users and permissions");
+// 		$this->clickAndWait("link=Users and permissions");
 // 		$this->waitForPageToLoad("30000");
 // 		$this->assertTrue($this->isTextPresent("Current Project Members"));
-// 		$this->click("//tr/td/form/div[contains(.,'Anonymous')]/../../../td/form/div/input[contains(@value,'Unlink Role')]");
+// 		$this->clickAndWait("//tr/td/form/div[contains(.,'Anonymous')]/../../../td/form/div/input[contains(@value,'Unlink Role')]");
 // 		$this->waitForPageToLoad("30000");
 // 		$this->assertTrue($this->isTextPresent("Role unlinked successfully"));
 //
@@ -130,7 +130,7 @@ class ScmHgHTTPTest extends FForge_SeleniumTestCase
 // 		$this->clickAndWait("link=Admin");
 // 		$this->clickAndWait("link=Users and permissions");
 // 		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "otheruser") ;
-// 		$this->select("//input[@value='Add Member']/../fieldset/select[@name='role_id']", "label=Admin");
+// 		$this->select($this->byXPath("//input[@value='Add Member']/../fieldset/select[@name='role_id']"))->selectOptionByLabel("Admin");
 // 		$this->clickAndWait ("//input[@value='Add Member']") ;
 // 		$this->assertTrue($this->isTextPresent("otheruser Lastname"));
 // 		$this->assertTrue($this->isElementPresent("//tr/td/a[.='otheruser Lastname']/../../td/div[contains(.,'Admin')]")) ;
@@ -139,7 +139,7 @@ class ScmHgHTTPTest extends FForge_SeleniumTestCase
 //
 // 		$this->clickAndWait("link=Tools");
 // 		$this->clickAndWait("link=Source Code Admin");
-// 		$this->click("//input[@name='scmengine[]' and @value='scmgit']");
+// 		$this->clickAndWait("//input[@name='scmengine[]' and @value='scmgit']");
 // 		$this->clickAndWait("submit");
 //
 // 		// Create repositories

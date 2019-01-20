@@ -62,7 +62,7 @@ class CreateDocURL extends FForge_SeleniumTestCase {
 		$this->type("groupname", "docdirectory");
 		$this->clickAndWait("submitaddsubgroup");
 		$this->clickAndWait("addItemDocmanMenu");
-		$this->click("id=tabs-new-document");
+		$this->clickAndWait("id=tabs-new-document");
 		$this->type("title", "My document");
 		$this->type("//textarea[@name='description']", "L'année dernière à Noël, 3 < 4, 中国 \" <em>, père & fils");
 		$this->clickAndWait("//input[@name='type' and @value='pasteurl']");
@@ -129,7 +129,7 @@ class CreateDocURL extends FForge_SeleniumTestCase {
 		$this->assertTextPresent("Document ".URL."/terms.php submitted successfully");
 		$this->clickAndWait("listFileDocmanMenu");
 		$this->clickAndWait("link=Uncategorized Submissions");
-		$this->click("css=img[alt='editdocument']");
+		$this->clickAndWait("css=img[alt='editdocument']");
 		$this->pause("10000");
 		$this->assertTextPresent("1 (x)");
 		$this->select($this->byId('stateid'))->selectOptionByLabel('pending');
@@ -147,23 +147,23 @@ class CreateDocURL extends FForge_SeleniumTestCase {
 		$this->clickAndWait("addItemDocmanMenu");
 		// ugly hack until we fix behavior in docman when no folders exist. We need to click twice on the link
 		$this->clickAndWait("addItemDocmanMenu");
-		$this->click("id=tab-new-document");
+		$this->clickAndWait("id=tab-new-document");
 		$this->type("title", "My document");
 		$this->type("//textarea[@name='description']", "My Description");
-		$this->click("//input[@name='type' and @value='pasteurl']");
+		$this->clickAndWait("//input[@name='type' and @value='pasteurl']");
 		$this->type("file_url", URL."/terms.php");
 		$this->clickAndWait("//input[@name='submit' and @value='Submit Information']");
 		$this->assertTextPresent("Document ".URL."/terms.php submitted successfully");
 		$this->clickAndWait("listFileDocmanMenu");
 		$this->clickAndWait("link=Uncategorized Submissions");
-		$this->click("css=img[alt='editdocument']");
+		$this->clickAndWait("css=img[alt='editdocument']");
 		$this->pause("10000");
 		$this->assertTextPresent("1 (x)");
-		$this->click("id=doc_version_addbutton");
+		$this->clickAndWait("id=doc_version_addbutton");
 		$this->type("id=title", "My new document");
 		$this->type("id=description", "My new description");
-		$this->click("id=current_version");
-		$this->click("id=editButtonUrl");
+		$this->clickAndWait("id=current_version");
+		$this->clickAndWait("id=editButtonUrl");
 		$this->type("id=editFileurl", "http://google.fr");
 		$this->clickAndWait("xpath=(//button[@type='button'])[3]");
 		$this->assertTextPresent("updated successfully");

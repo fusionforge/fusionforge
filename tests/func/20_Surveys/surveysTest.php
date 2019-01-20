@@ -95,7 +95,7 @@ class Surveys extends FForge_SeleniumTestCase
 		$this->assertTextPresent("This is my third question (yes/no) ?");
 		$this->assertTextPresent("This is my second question (text area) ?");
 		$this->clickAndWait("This is my first question (radio) ?");
-		$this->click("//input[@name='_1' and @value='3']");
+		$this->clickAndWait("//input[@name='_1' and @value='3']");
 		$this->type("_2", "hello");
 		$this->clickAndWait("_3");
 		$this->clickAndWait("_5");
@@ -124,7 +124,7 @@ class Surveys extends FForge_SeleniumTestCase
 		$this->clickAndWait("submit");
 		$this->clickAndWait("link=Add Survey");
 		$this->clickAndWait("link=Edit");
-		$this->click("to_add[]");
+		$this->clickAndWait("to_add[]");
 		$this->clickAndWait("submit");
 		$this->clickAndWait("link=Add Survey");
 		$this->type("survey_title", "Q10 ?");
@@ -157,11 +157,11 @@ class Surveys extends FForge_SeleniumTestCase
 //		$this->clickAndWait("link=Administration");
 //		$this->clickAndWait("link=Add Survey");
 //		$this->clickAndWait("link=Edit");
-//		$this->click("//input[@name='is_public' and @value='0']");
+//		$this->clickAndWait("//input[@name='is_public' and @value='0']");
 //		$this->clickAndWait("submit");
 //		// Log out and check no survey is visible
 //		$this->clickAndWait("link=Log Out");
-//		$this->select("none", "label=projecta");
+//		$this->select($this->byName("none"))->selectOptionByLabel("projecta");
 //		$this->waitForPageToLoad("30000");
 //		$this->clickAndWait("link=Surveys");
 //		$this->assertTextPresent("No Survey is found");

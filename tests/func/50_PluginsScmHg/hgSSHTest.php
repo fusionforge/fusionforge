@@ -87,7 +87,7 @@ class ScmHgSSHTest extends FForge_SeleniumTestCase
 // 		$this->activatePlugin('globalactivity');
 // 
 // 		$this->open(ROOT.'/plugins/globalactivity/');
-// 		$this->select("//select[@name='show[]']","label=Git Commits");
+// 		$this->select($this->byXPath("//select[@name='show[]']"))->selectOptionByLabel("Hg Commits");
 // 		$this->clickAndWait("submit");
 // 		$this->assertTextPresent("scm commit: Modifying file");
 // 		$this->assertTextPresent("scm commit: Adding file");
