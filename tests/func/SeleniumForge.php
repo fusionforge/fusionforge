@@ -197,6 +197,9 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 		} else if (preg_match('/^id=/', $link)) {
 			$id = substr($link, 3);
 			$myelement = $this->byId($id);
+		} else if (preg_match('/^css=/', $link)) {
+			$css = substr($link, 4);
+			$myelement = $this->byCss($css);
 		} else if (preg_match('/^\/\/[a-z]/', $link)) {
 			$myelement = $this->byXPath($link);
 		} else {
@@ -612,7 +615,9 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 
 	function type($name, $value) {
 		if (preg_match('/^\/\/[a-z]/', $name)) {
-			$myelement = $this->byXPath($name)->value($value);
+			$this->byXPath($name)->value($value);
+		} else if (preg_match('/^id=/', $name)) {
+			$this->byId(substr($name, 3))->value($value);
 		} else {
 			$this->byName($name)->value($value);
 		}
