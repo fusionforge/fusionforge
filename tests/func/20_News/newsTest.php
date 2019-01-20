@@ -3,6 +3,7 @@
  * Copyright (C) 2008 Alain Peyrat <aljeux@free.fr>
  * Copyright (C) 2009 Alain Peyrat, Alcatel-Lucent
  * Copyright (C) 2015  Inria (Sylvain Beucler)
+ * Copyright 2019, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -56,48 +57,47 @@ class CreateNews extends FForge_SeleniumTestCase
 		$this->gotoProject('ProjectA');
 
 		// Create a simple news.
-		$this->click("link=News");
+		$this->clickAndWait("link=News");
 		$this->waitForPageToLoad("30000");
-		$this->click("link=Submit");
+		$this->clickAndWait("link=Submit");
 		$this->waitForPageToLoad("30000");
 		$this->type("summary", "First news");
 		$this->type("details", "This is a simple news.");
-		$this->click("submit");
+		$this->clickAndWait("submit");
 		$this->waitForPageToLoad("30000");
-		$this->click("link=News");
+		$this->clickAndWait("link=News");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("First news"));
-		$this->click("link=First news");
+		$this->clickAndWait("link=First news");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("First news"));
 		$this->assertTrue($this->isTextPresent("This is a simple news."));
 
 		// Create a second news.
-		$this->click("link=News");
+		$this->clickAndWait("link=News");
 		$this->waitForPageToLoad("30000");
-		$this->click("link=Submit");
+		$this->clickAndWait("link=Submit");
 		$this->waitForPageToLoad("30000");
 		$this->type("summary", "Second news");
 		$this->type("details", "This is another text");
-		$this->click("submit");
+		$this->clickAndWait("submit");
 		$this->waitForPageToLoad("30000");
-		$this->click("link=News");
+		$this->clickAndWait("link=News");
 		$this->waitForPageToLoad("30000");
-		$this->click("link=Second news");
+		$this->clickAndWait("link=Second news");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Second news"));
 		$this->assertTrue($this->isTextPresent("This is another text"));
 
 		// Check that news are visible in the activity
-		// TODO: Not implemented in gforge-4.6
-//		$this->click("link=Activity");
-//		$this->waitForPageToLoad("30000");
-//		$this->assertTextPresent("First news");
-//		$this->assertTextPresent("Second news");
+		$this->clickAndWait("link=Activity");
+		$this->waitForPageToLoad("30000");
+		$this->assertTextPresent("First news");
+		$this->assertTextPresent("Second news");
 
 		// Check modification of a news.
 		$this->clickAndWait("link=News");
-		$this->click("//a[contains(@href, '" . ROOT . "/news/admin/?group_id=7')]");
+		$this->clickAndWait("//a[contains(@href, '" . ROOT . "/news/admin/?group_id=7')]");
 		$this->waitForPageToLoad("30000");
 		$this->clickAndWait("link=Second news");
 		$this->type("details", "This is another text (corrected)");
@@ -120,7 +120,6 @@ class CreateNews extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=Test3");
 		$this->click("//form[@id='newsadminform']//input[@name='status' and @value=4]");
 		$this->clickAndWait("submit");
-
 	}
 
 	/**

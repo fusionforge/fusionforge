@@ -2,6 +2,7 @@
 /**
  * Copyright (C) 2010 Alcatel-Lucent
  * Copyright (C) 2015  Inria (Sylvain Beucler)
+ * Copyright 2019, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -63,46 +64,46 @@ class Surveys extends FForge_SeleniumTestCase
 		$this->type("question", "This is my first question (radio) ?");
 		$this->clickAndWait("submit");
 		$this->type("question", "This is my second question (text area) ?");
-		$this->select("question_type", "label=Text Area");
+		$this->select($this->byName("question_type"))->selectOptionByLabel("Text Area");
 		$this->clickAndWait("submit");
 		$this->type("question", "This is my third question (yes/no) ?");
-		$this->select("question_type", "label=Radio Buttons Yes/No");
+		$this->select($this->byName("question_type"))->selectOptionByLabel("Radio Buttons Yes/No");
 		$this->clickAndWait("submit");
 		$this->type("question", "This is a comment line of text");
-		$this->select("question_type", "label=Comment Only");
+		$this->select($this->byName("question_type"))->selectOptionByLabel("Comment Only");
 		$this->clickAndWait("submit");
 		$this->type("question", "This is a my fifth question (text field) ?");
-		$this->select("question_type", "label=Text Field");
+		$this->select($this->byName("question_type"))->selectOptionByLabel("Text Field");
 		$this->clickAndWait("submit");
 		$this->type("question", "L'année dernière à Noël, 3 < 4, 中国 \" <em>, père & fils");
-		$this->select("question_type", "label=Text Field");
+		$this->select($this->byName("question_type"))->selectOptionByLabel("Text Field");
 		$this->clickAndWait("submit");
 
 		// Create survey
 		$this->clickAndWait("link=Add Survey");
 		$this->type("survey_title", "My first survey: L'année dernière à Noël, 3 < 4, 中国 \" <em>, père & fils");
-		$this->click("to_add[]");
-		$this->click("//input[@name='to_add[]' and @value='4']");
-		$this->click("//input[@name='to_add[]' and @value='2']");
-		$this->click("//input[@name='to_add[]' and @value='5']");
-		$this->click("//input[@name='to_add[]' and @value='3']");
+		$this->clickAndWait("to_add[]");
+		$this->clickAndWait("//input[@name='to_add[]' and @value='4']");
+		$this->clickAndWait("//input[@name='to_add[]' and @value='2']");
+		$this->clickAndWait("//input[@name='to_add[]' and @value='5']");
+		$this->clickAndWait("//input[@name='to_add[]' and @value='3']");
 		$this->clickAndWait("submit");
-		$this->click("link=My first survey: L'année dernière à Noël, 3 < 4, 中国 \" <em>, père & fils");
+		$this->clickAndWait("link=My first survey: L'année dernière à Noël, 3 < 4, 中国 \" <em>, père & fils");
 		$this->waitForPageToLoad("30000");
 		$this->assertTextPresent("This is a my fifth question (text field) ?");
 		$this->assertTextPresent("This is a comment line of text");
 		$this->assertTextPresent("This is my third question (yes/no) ?");
 		$this->assertTextPresent("This is my second question (text area) ?");
-		$this->assertTextPresent("This is my first question (radio) ?");
+		$this->clickAndWait("This is my first question (radio) ?");
 		$this->click("//input[@name='_1' and @value='3']");
 		$this->type("_2", "hello");
-		$this->click("_3");
-		$this->click("_5");
+		$this->clickAndWait("_3");
+		$this->clickAndWait("_5");
 		$this->type("_5", "text");
 		$this->clickAndWait("submit");
 		$this->clickAndWait("link=Administration");
 		$this->clickAndWait("link=Show Results");
-		$this->click("link=My first survey: L'année dernière à Noël, 3 < 4, 中国 \" <em>, père & fils");
+		$this->clickAndWait("link=My first survey: L'année dernière à Noël, 3 < 4, 中国 \" <em>, père & fils");
 		$this->waitForPageToLoad("30000");
 		$this->assertTextPresent("Warning - you are about to vote a second time on this survey.");
 		$this->clickAndWait("link=Administration");
@@ -136,9 +137,9 @@ class Surveys extends FForge_SeleniumTestCase
 		$this->clickAndWait("submit");
 		$this->clickAndWait("link=Add Survey");
 		$this->clickAndWait("link=Edit");
-		$this->click("to_add[]");
-		$this->click("//input[@name='to_add[]' and @value='8']");
-		$this->click("//input[@name='to_add[]' and @value='9']");
+		$this->clickAndWait("to_add[]");
+		$this->clickAndWait("//input[@name='to_add[]' and @value='8']");
+		$this->clickAndWait("//input[@name='to_add[]' and @value='9']");
 		$this->clickAndWait("submit");
 		$this->assertTextPresent("1, 2, 3, 4, 5, 6, 7, 8, 9");
 
