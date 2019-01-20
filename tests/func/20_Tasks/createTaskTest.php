@@ -2,6 +2,7 @@
 /**
  * Copyright (C) 2010-2011 Alain Peyrat - Alcatel-Lucent
  * Copyright (C) 2015  Inria (Sylvain Beucler)
+ * Copyright 2019, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -76,13 +77,13 @@ class CreateTask extends FForge_SeleniumTestCase
 		$this->gotoProject('ProjectA');
 
 		// Initialize "rep_time_tracking" table
-		$this->click("link=Reporting");
+		$this->clickAndWait("link=Reporting");
 		$this->waitForPageToLoad("30000");
 
-		$this->click("link=Initialize / Rebuild Reporting Tables");
+		$this->clickAndWait("link=Initialize / Rebuild Reporting Tables");
 		$this->waitForPageToLoad("30000");
-		$this->click("im_sure");
-		$this->click("submit");
+		$this->clickAndWait("im_sure");
+		$this->clickAndWait("submit");
 		$this->waitForPageToLoad("30000");
 
 	//        $this->switchUser('uadmin');
@@ -102,7 +103,7 @@ class CreateTask extends FForge_SeleniumTestCase
 		$this->type("summary", "Task1: Hello Paris");
 		$this->type("details", "Details: Hello Paris");
 		$this->type("hours", "10");
-		$this->click("//body//main[@id='maindiv']/form/table/tbody/tr[9]/td/input");
+		$this->clickAndWait("//body//main[@id='maindiv']/form/table/tbody/tr[9]/td/input");
 		$this->waitForPageToLoad("30000");
 		$this->assertTextPresent("Task Created Successfully");
 
@@ -111,7 +112,7 @@ class CreateTask extends FForge_SeleniumTestCase
 		$this->type("summary", "Task2: Hello France");
 		$this->type("details", "Details: Hello France");
 		$this->type("hours", "15");
-		$this->click("//body//main[@id='maindiv']/form/table/tbody/tr[9]/td/input");
+		$this->clickAndWait("//body//main[@id='maindiv']/form/table/tbody/tr[9]/td/input");
 		$this->waitForPageToLoad("30000");
 		$this->assertTextPresent("Task Created Successfully");
 
@@ -120,7 +121,7 @@ class CreateTask extends FForge_SeleniumTestCase
 		$this->type("summary", "Task3: Hello World");
 		$this->type("details", "Details: Hello World");
 		$this->type("hours", "20");
-		$this->click("//body//main[@id='maindiv']/form/table/tbody/tr[9]/td/input");
+		$this->clickAndWait("//body//main[@id='maindiv']/form/table/tbody/tr[9]/td/input");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Task Created Successfully"));
 	}
@@ -173,7 +174,7 @@ class CreateTask extends FForge_SeleniumTestCase
 
 		// Let use close a task to sort by status
 		$this->clickAndWait("link=exact:Task1: Hello Paris");
-		$this->click("status_id");
+		$this->clickAndWait("status_id");
 		$this->select("status_id", "label=Closed");
 		$this->clickAndWait("submit");
 
@@ -273,7 +274,7 @@ class CreateTask extends FForge_SeleniumTestCase
 	{
 		// Set the completing value of a task
 		$this->select("percent_complete", "label=45%");
-		$this->click("//option[@value='45']");
+		$this->clickAndWait("//option[@value='45']");
 		$this->clickAndWait("submit");
 		$this->assertTextPresent("Task Updated Successfully");
 
@@ -293,7 +294,7 @@ class CreateTask extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=To Do");
 		$this->clickAndWait("link=exact:Task3: Hello World");
 		$this->clickAndWait("link=Delete this task");
-		$this->click("confirm_delete");
+		$this->clickAndWait("confirm_delete");
 		$this->clickAndWait("submit");
 		$this->assertTextPresent("Task Successfully Deleted");
 
@@ -309,9 +310,9 @@ class CreateTask extends FForge_SeleniumTestCase
 	{
 		$this->gotoProject("ProjectA");
 		$this->waitForPageToLoad("30000");
-		$this->click("link=Tasks");
+		$this->clickAndWait("link=Tasks");
 		$this->waitForPageToLoad("30000");
-		$this->click("link=To Do");
+		$this->clickAndWait("link=To Do");
 		$this->waitForPageToLoad("30000");
 		$this->clickAndWait("link=exact:Task1: Hello Paris");
 		$this->addSelection("assigned_to[]", "label=ucontrib Lastname");
@@ -392,7 +393,7 @@ class CreateTask extends FForge_SeleniumTestCase
 	{
 		// Display activity report by developer
 		$this->clickAndWait("link=Reporting");
-		$this->select("what", "label=Report by Assignee");
+		$this->select($this->byName("what"))->selectOptionByLabel("Report by Assignee");
 		$this->clickAndWait("//input[@value='Show']");
 		$this->assertTextPresent("Tasks By Assignee");
 		$this->assertTextPresent("ucontrib");
@@ -402,7 +403,7 @@ class CreateTask extends FForge_SeleniumTestCase
 	function displayActivityReportBySubproject()
 	{
 		// Display activity report by subproject
-		$this->select("what", "label=Report by Subproject");
+		$this->select($this->byName("what"))->selectOptionByLabel("Report by Subproject");
 		$this->clickAndWait("//input[@value='Show']");
 		$this->assertTextPresent("Tasks By Category");
 		$this->assertTextPresent("To Do");

@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright, 2014,2016, Franck Villaume - TrivialDev
+ * Copyright, 2014,2016,2019, Franck Villaume - TrivialDev
  * Copyright (C) 2015  Inria (Sylvain Beucler)
  *
  * This file is part of FusionForge.
@@ -52,7 +52,7 @@ class CreateFRS extends FForge_SeleniumTestCase
 		$this->assertTextPresent("Added Package");
 		$this->clickAndWait("link=Administration");
 		$this->type('//td[2]/input', 'My Named Packaged');
-		$this->click('//td[5]/input');
+		$this->clickAndWait('//td[5]/input');
 		$this->clickAndWait("link=View File Releases");
 		$this->assertTextPresent('My Named Package');
 	}
