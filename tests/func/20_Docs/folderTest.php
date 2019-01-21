@@ -33,7 +33,7 @@ class folderTest extends FForge_SeleniumTestCase {
 		$this->clickAndWait("addItemDocmanMenu");
 		// ugly hack until we fix behavior in docman when no folders exist. We need to click twice on the link
 		$this->clickAndWait("addItemDocmanMenu");
-		$this->clickAndWait("id=tabs-new-folder");
+		$this->clickAndWait("jquery#tabs-new-folder");
 		$this->type("groupname", "renamedirectory");
 		$this->clickAndWait("submitaddsubgroup");
 		$this->clickAndWait("id=listFileDocmanMenu");
