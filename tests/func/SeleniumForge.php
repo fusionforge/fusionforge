@@ -194,7 +194,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 		if (preg_match('/^jquery#/', $link)) {
 			$elementid = substr($link, 7);
 			$this->execute(array(
-					'script' => "jQuery('a[href=\"#$elementid\").click()",
+					'script' => "jQuery('a[href=\"#$elementid\"').click()",
 					'args' => array(),
 				));
 		} else {
