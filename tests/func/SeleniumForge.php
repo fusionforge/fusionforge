@@ -192,7 +192,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 
 	public function clickAndWait($link) {
 		if (preg_match('/^jquery#/', $link)) {
-			$elementid = substr($link, 6);
+			$elementid = substr($link, 7);
 			$this->execute(array(
 					'script' => "jQuery('a[href=\"#$elementid\").click()",
 					'args' => array(),
