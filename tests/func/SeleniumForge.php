@@ -632,7 +632,11 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 	}
 
 	function waitForPageToLoad($integer = 30000) {
-		//do we need to set something???
+		//do we need to do something???
+		$this->pause($integer);
+	}
+
+	function pause($integer = 10000) {
 		usleep($integer);
 	}
 
