@@ -63,10 +63,11 @@
 # ------
 # hooks.mailinglist
 #   This is the list that all pushes will go to; leave it blank to not send
-#   emails for every ref update.
+#   emails for every ref update. This fills the To header, so use comma for
+#   multiple recipients (but please only use addresses, not full names).
 # hooks.announcelist
-#   This is the list that all pushes of annotated tags will go to.  Leave it
-#   blank to default to the mailinglist field.  The announce emails lists
+#   This is the list(s) that all pushes of annotated tags will go to. Leave
+#   it blank to default to the mailinglist field. The announce emails lists
 #   the short log summary of the changes since the last annotated tag.
 # hooks.replyto
 #   If set, replies are requested to be directed to this eMail address.
