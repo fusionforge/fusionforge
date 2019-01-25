@@ -2,7 +2,7 @@
 #
 # Copyright © 2013
 #	Thorsten “mirabilos” Glaser <thorsten.glaser@teckids.org>
-# Copyright © 2011, 2012, 2013, 2014, 2015, 2018
+# Copyright © 2011, 2012, 2013, 2014, 2015, 2018, 2019
 #	Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
 # Copyright © 2016
 #	martin f krafft (madduck), Thorsten Glaser (mirabilos)
@@ -41,7 +41,7 @@
 #  ln -sf /etc/gforge/plugins/scmgit/post-receive-email.sh hooks/post-receive
 #  # but that can only be used for a Forge-controlled repository
 #
-# This hook script needs the “en_US.UTF-8” locale set up on the server.
+# This hook script needs the “C.UTF-8” locale set up (or change below).
 # The MirBSD Korn Shell (mksh) must be installed as /bin/mksh and usable.
 # Perl or PHP with the Multibyte extension are required as well.
 #
@@ -120,7 +120,7 @@
 nl='
 '
 unset LANGUAGE LC_ALL
-export LANG=C LC_ADDRESS=C LC_COLLATE=C LC_CTYPE=en_US.UTF-8 \
+export LANG=C LC_ADDRESS=C LC_COLLATE=C LC_CTYPE=C.UTF-8 \
     LC_IDENTIFICATION=C LC_MEASUREMENT=C LC_MESSAGES=C \
     LC_MONETARY=C LC_NAME=C LC_NUMERIC=C LC_PAPER=C \
     LC_TELEPHONE=C LC_TIME=C
