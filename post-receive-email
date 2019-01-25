@@ -70,10 +70,10 @@
 #   it blank to default to the mailinglist field. The announce emails list
 #   the short log summary of the changes since the last annotated tag.
 # hooks.replyto
-#   If set, replies are requested to be directed to this eMail address.
+#   If set, replies are requested to be directed to this eMail address(es).
 # hooks.envelopesender
 #   If set then the -f option is passed to sendmail to allow the envelope
-#   sender address to be set. This is also used as From header.
+#   sender to be set (one address only). This is also used as From header.
 # hooks.emailprefix
 #   If set, e.g. to '[SCM] ', all eMails have their subjects prefixed
 #   with this string to aid filtering.
