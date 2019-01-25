@@ -42,8 +42,9 @@
 #  # but that can only be used for a Forge-controlled repository
 #
 # This hook script needs the “C.UTF-8” locale set up (or change below).
-# The MirBSD Korn Shell (mksh) must be installed as /bin/mksh and usable.
-# Perl or PHP with the Multibyte extension are required as well.
+# Other requirementa are: The MirBSD Korn Shell (mksh) as /bin/mksh;
+# PHP with the mbstring extension (preferred) or Perl 5; curl, if you
+# wish to use the curltrigger functionality.
 #
 # This hook script assumes it is enabled on the central repository of a
 # project, with all users pushing only to it and not between each other.  It
