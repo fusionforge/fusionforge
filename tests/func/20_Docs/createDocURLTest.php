@@ -154,7 +154,7 @@ class CreateDocURL extends FForge_SeleniumTestCase {
 		$this->type("file_url", URL."/terms.php");
 		$this->clickAndWait("//input[@name='submit' and @value='Submit Information']");
 		$this->assertTextPresent("Document ".URL."/terms.php submitted successfully");
-		$this->clickAndWait("listFileDocmanMenu");
+		$this->clickAndWait("id=listFileDocmanMenu");
 		$this->clickAndWait("link=Uncategorized Submissions");
 		$this->clickAndWait("css=img[alt='editdocument']");
 		$this->pause("10000");
@@ -165,7 +165,7 @@ class CreateDocURL extends FForge_SeleniumTestCase {
 		$this->clickAndWait("id=current_version");
 		$this->clickAndWait("id=editButtonUrl");
 		$this->type("id=editFileurl", "http://google.fr");
-		$this->clickAndWait("xpath=(//button[@type='button'])[3]");
+		$this->clickAndWait("//div[3]/div/button");
 		$this->assertTextPresent("updated successfully");
 		$this->assertTextPresent("google.fr");
 	}
