@@ -133,7 +133,7 @@ class CreateDocURL extends FForge_SeleniumTestCase {
 		$this->pause("10000");
 		$this->assertTextPresent("1 (x)");
 		$this->select($this->byId('stateid'))->selectOptionByLabel('pending');
-		$this->clickAndWait("xpath=(//button[@type='button'])[3]");
+		$this->clickAndWait("//div[3]/div/button");
 		$this->assertTextPresent("updated successfully");
 		$this->assertTextPresent("Pending files");
 	}
