@@ -230,6 +230,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 			} catch (Exception $e) {}
 			sleep(1);
 		}
+		return true;
 	}
 
 	public function runCommand($cmd) {
@@ -641,7 +642,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 	}
 
 	function assertTextPresent($string) {
-		return $this->assertTrue($this->isTextPresent($string));
+		return $this->assertTrue($this->waitForTextPresent($string));
 	}
 
 	function check($string) {
