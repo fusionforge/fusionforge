@@ -658,6 +658,13 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 			$myelement->click();
 		}
 	}
+
+	function goBack() {
+		$this->execute(array(
+				'script' => 'window.history.back();',
+				'args' => array(),
+			));
+	}
 }
 
 // Local Variables:
