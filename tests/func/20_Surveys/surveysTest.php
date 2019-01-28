@@ -94,7 +94,6 @@ class Surveys extends FForge_SeleniumTestCase
 		$this->assertTextPresent("This is a comment line of text");
 		$this->assertTextPresent("This is my third question (yes/no) ?");
 		$this->assertTextPresent("This is my second question (text area) ?");
-		$this->clickAndWait("This is my first question (radio) ?");
 		$this->clickAndWait("//input[@name='_1' and @value='3']");
 		$this->type("_2", "hello");
 		$this->clickAndWait("_3");
