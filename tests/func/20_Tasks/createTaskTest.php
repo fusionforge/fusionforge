@@ -136,15 +136,15 @@ class CreateTask extends FForge_SeleniumTestCase
 		$this->assertTextPresent("Task3: Hello World");
 
 		// Let us assign tasks to users so that we can filter by assignee
-		$this->clickAndWait("link=exact:Task1: Hello Paris");
+		$this->clickAndWait("link=Task1: Hello Paris");
 		$this->removeSelection("assigned_to[]", "label=None");
 		$this->addSelection("assigned_to[]", "label=ucoredev Lastname");
 		$this->clickAndWait("submit");
-		$this->clickAndWait("link=exact:Task2: Hello France");
+		$this->clickAndWait("link=Task2: Hello France");
 		$this->removeSelection("assigned_to[]", "label=None");
 		$this->addSelection("assigned_to[]", "label=ucontrib Lastname");
 		$this->clickAndWait("submit");
-		$this->clickAndWait("link=exact:Task3: Hello World");
+		$this->clickAndWait("link=Task3: Hello World");
 		$this->removeSelection("assigned_to[]", "label=None");
 		$this->addSelection("assigned_to[]", "label=ucontrib Lastname");
 		$this->clickAndWait("submit");
@@ -173,7 +173,7 @@ class CreateTask extends FForge_SeleniumTestCase
 		$this->assertTextPresent("Task3:");
 
 		// Let use close a task to sort by status
-		$this->clickAndWait("link=exact:Task1: Hello Paris");
+		$this->clickAndWait("link=Task1: Hello Paris");
 		$this->clickAndWait("status_id");
 		$this->select($this->byName("status_id"))->selectOptionByLabel("Closed");
 		$this->clickAndWait("submit");
@@ -210,13 +210,13 @@ class CreateTask extends FForge_SeleniumTestCase
 
 		// Set Task1 to mycategory
 		$this->clickAndWait("link=To Do");
-		$this->clickAndWait("link=exact:Task1: Hello Paris");
+		$this->clickAndWait("link=Task1: Hello Paris");
 		$this->select($this->byName("category_id"))->selectOptionByLabel("mycategory");
 		$this->clickAndWait("submit");
 
 		// Set Task2 to yourcategory
 		$this->clickAndWait("link=To Do");
-		$this->clickAndWait("link=exact:Task2: Hello France");
+		$this->clickAndWait("link=Task2: Hello France");
 		$this->select($this->byName("category_id"))->selectOptionByLabel("yourcategory");
 		$this->clickAndWait("submit");
 
@@ -261,12 +261,12 @@ class CreateTask extends FForge_SeleniumTestCase
 	function setTaskPriority()
 	{
 		// Set the priority of a task
-		$this->clickAndWait("link=exact:Task2: Hello France");
+		$this->clickAndWait("link=Task2: Hello France");
 		$this->select($this->byName("priority"))->selectOptionByLabel("5 - Highest");
 		$this->clickAndWait("submit");
 
 		// Check the priority is OK
-		$this->clickAndWait("link=exact:Task2: Hello France");
+		$this->clickAndWait("link=Task2: Hello France");
 		$this->assertTextPresent("Highest");
 	}
 
@@ -279,7 +279,7 @@ class CreateTask extends FForge_SeleniumTestCase
 		$this->assertTextPresent("Task Updated Successfully");
 
 		// Check the percentage is OK
-		$this->clickAndWait("link=exact:Task2: Hello France");
+		$this->clickAndWait("link=Task2: Hello France");
 		$this->assertTextPresent("45%");
 	}
 
@@ -292,7 +292,7 @@ class CreateTask extends FForge_SeleniumTestCase
 	{
 		// Delete a task
 		$this->clickAndWait("link=To Do");
-		$this->clickAndWait("link=exact:Task3: Hello World");
+		$this->clickAndWait("link=Task3: Hello World");
 		$this->clickAndWait("link=Delete this task");
 		$this->clickAndWait("confirm_delete");
 		$this->clickAndWait("submit");
@@ -314,7 +314,7 @@ class CreateTask extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->clickAndWait("link=To Do");
 		$this->waitForPageToLoad("30000");
-		$this->clickAndWait("link=exact:Task1: Hello Paris");
+		$this->clickAndWait("link=Task1: Hello Paris");
 		$this->addSelection("assigned_to[]", "label=ucontrib Lastname");
 		$this->removeSelection("assigned_to[]", "label=ucoredev Lastname");
 		$this->clickAndWait("submit");
