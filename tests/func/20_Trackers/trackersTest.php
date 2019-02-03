@@ -67,13 +67,6 @@ class CreateTracker extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->clickAndWait("//a[contains(@href, '".ROOT. "/tracker/admin/')]");
 		$this->waitForPageToLoad("30000");
-		$this->clickAndWait("link=Manage Custom Fields");
-		$this->waitForPageToLoad("30000");
-		$this->type("name", "URL");
-		$this->type("alias", "url");
-		$this->clickAndWait("//input[@name='field_type' and @value='4']");
-		$this->clickAndWait("post_changes");
-		$this->waitForPageToLoad("30000");
 		$this->clickAndWait("link=Submit New");
 		$this->waitForPageToLoad("30000");
 		$this->type("summary", "Summary1");
@@ -83,7 +76,6 @@ class CreateTracker extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("Summary1"));
 		$this->clickAndWait("link=Summary1");
 		$this->waitForPageToLoad("30000");
-		$this->assertTrue($this->isTextPresent(""));
 		$this->assertTrue($this->isTextPresent("Description1"));
 
 		// Test: Adding a comment and checking that it is recorded.
