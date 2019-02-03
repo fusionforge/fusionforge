@@ -671,6 +671,12 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 			return $this->byXPath($string)->text();
 		}
 	}
+
+	function getValue($string) {
+		if (preg_match('/^\/\/[a-z]/', $string)) {
+			return $this->byXPath($string)->attribute('value');
+		}
+	}
 }
 
 // Local Variables:
