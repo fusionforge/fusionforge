@@ -668,7 +668,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 
 	function getText($string) {
 		if (preg_match('/^\/\/[a-z]/', $string)) {
-			$this->byXPath($string)->text();
+			return $this->byXPath($string)->text();
 		}
 	}
 }
