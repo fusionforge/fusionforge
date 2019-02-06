@@ -81,7 +81,8 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->clickAndWait("//form[contains(@action,'globalroleedit.php')]//input[@value='Edit Role']") ;
 		$this->waitForPageToLoad("30000");
 
-		$this->assertSelected("//select[@name='data[approve_projects][-1]']", "Approve projects");
+		$selectedOptions = $this->select($this->byXpath(("//select[@name='data[approve_projects][-1]']"))->selectedLabels();
+		$this->assertEquals(array("Approve projects"), $selectedOptions);
 		$this->assertNotSelected("//select[@name='data[approve_projects][-1]']", "No Access");
 		$this->assertSelected("//select[@name='data[approve_news][-1]']", "Approve news");
 
