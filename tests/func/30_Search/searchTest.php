@@ -201,31 +201,31 @@ class Search extends FForge_SeleniumTestCase
 
 		// Search in trackers
 
-		$this->select($this->byName("type_of_search"))->selectOptionByLabel("This project's trackers");
+		$this->select($this->byName("type_of_search"))->selectOptionByValue("trackers");
 		$this->type("//input[@name='words']", "brebis");
 		$this->clickAndWait("//input[@name='Search']");
 		$this->assertFalse($this->isTextPresent("No matches found for"));
 		$this->assertTrue($this->isTextPresent("Bug1"));
 
-		$this->select($this->byName("type_of_search"))->selectOptionByLabel("This project's trackers");
+		$this->select($this->byName("type_of_search"))->selectOptionByValue("trackers");
 		$this->type("//input[@name='words']", "alpages");
 		$this->clickAndWait("//input[@name='Search']");
 		$this->assertFalse($this->isTextPresent("No matches found for"));
 		$this->assertTrue($this->isTextPresent("Bug1"));
 
-		$this->select($this->byName("type_of_search"))->selectOptionByLabel("This project's trackers");
+		$this->select($this->byName("type_of_search"))->selectOptionByValue("trackers");
 		$this->type("//input[@name='words']", "boustrophédon brebis alpages");
 		$this->clickAndWait("//input[@name='Search']");
 		$this->assertFalse($this->isTextPresent("No matches found for"));
 		$this->assertTrue($this->isTextPresent("Bug1"));
 
-		$this->select($this->byName("type_of_search"))->selectOptionByLabel("This project's trackers");
+		$this->select($this->byName("type_of_search"))->selectOptionByValue("trackers");
 		$this->type("//input[@name='words']", "'boustrophédon brebis'");
 		$this->clickAndWait("//input[@name='Search']");
 		$this->assertTrue($this->isTextPresent("No matches found for"));
 		$this->assertFalse($this->isTextPresent("Bug1"));
 
-		$this->select($this->byName("type_of_search"))->selectOptionByLabel("This project's trackers");
+		$this->select($this->byName("type_of_search"))->selectOptionByValue("trackers");
 		$this->type("//input[@name='words']", "boustrophédon cthulhu");
 		$this->clickAndWait("//input[@name='Search']");
 		$this->assertTrue($this->isTextPresent("No matches found for"));
@@ -234,7 +234,7 @@ class Search extends FForge_SeleniumTestCase
 
 		// Search in one particular tracker
 
-		$this->select($this->byName("type_of_search"))->selectOptionByLabel("This project's trackers");
+		$this->select($this->byName("type_of_search"))->selectOptionByValue("trackers");
 		$this->type("//input[@name='words']", "charlie");
 		$this->clickAndWait("//input[@name='Search']");
 		$this->assertFalse($this->isTextPresent("No matches found for"));
@@ -284,19 +284,19 @@ class Search extends FForge_SeleniumTestCase
 
 		// Search in Tasks
 
-		$this->select($this->byName("type_of_search"))->selectOptionByLabel("This project's tasks");
+		$this->select($this->byName("type_of_search"))->selectOptionByValue("tasks");
 		$this->type("//input[@name='words']", "pinky");
 		$this->clickAndWait("//input[@name='Search']");
 		$this->assertFalse($this->isTextPresent("No matches found for"));
 		$this->assertTrue($this->isTextPresent("Task1"));
 
-		$this->select($this->byName("type_of_search"))->selectOptionByLabel("This project's tasks");
+		$this->select($this->byName("type_of_search"))->selectOptionByValue("tasks");
 		$this->type("//input[@name='words']", "cortex");
 		$this->clickAndWait("//input[@name='Search']");
 		$this->assertTrue($this->isTextPresent("No matches found for"));
 		$this->assertFalse($this->isTextPresent("Task1"));
 
-		$this->select($this->byName("type_of_search"))->selectOptionByLabel("This project's tasks");
+		$this->select($this->byName("type_of_search"))->selectOptionByValue("tasks");
 		$this->type("//input[@name='words']", "brain pinky needle");
 		$this->clickAndWait("//input[@name='Search']");
 		$this->assertFalse($this->isTextPresent("No matches found for"));
@@ -333,7 +333,7 @@ class Search extends FForge_SeleniumTestCase
 
 		// Search in Forums
 
-		$this->select($this->byName("type_of_search"))->selectOptionByLabel("This project's forums");
+		$this->select($this->byName("type_of_search"))->selectOptionByValue("forums");
 		$this->type("//input[@name='words']", "bottle");
 		$this->clickAndWait("//input[@name='Search']");
 		$this->assertFalse($this->isTextPresent("No matches found for"));
@@ -342,7 +342,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("Message3"));
 		$this->assertFalse($this->isTextPresent("Message4"));
 
-		$this->select($this->byName("type_of_search"))->selectOptionByLabel("This project's forums");
+		$this->select($this->byName("type_of_search"))->selectOptionByValue("forums");
 		$this->type("//input[@name='words']", "bottle fridge");
 		$this->clickAndWait("//input[@name='Search']");
 		$this->assertFalse($this->isTextPresent("No matches found for"));
@@ -353,7 +353,7 @@ class Search extends FForge_SeleniumTestCase
 
 		// Search in one particular forum
 
-		$this->select($this->byName("type_of_search"))->selectOptionByLabel("This project's forums");
+		$this->select($this->byName("type_of_search"))->selectOptionByValue("forums");
 		$this->type("//input[@name='words']", "charlie");
 		$this->clickAndWait("//input[@name='Search']");
 		$this->assertFalse($this->isTextPresent("No matches found for"));
@@ -409,14 +409,14 @@ class Search extends FForge_SeleniumTestCase
 
 		// Search in Documents
 
-		$this->select($this->byName("type_of_search"))->selectOptionByLabel("This project's documents");
+		$this->select($this->byName("type_of_search"))->selectOptionByValue("documents");
 		$this->type("//input[@name='words']", "jenkins");
 		$this->clickAndWait("//input[@name='Search']");
 		$this->assertFalse($this->isTextPresent("No matches found for"));
 		$this->assertTrue($this->isTextPresent("Doc1"));
 		$this->assertFalse($this->isTextPresent("Doc2"));
 
-		$this->select($this->byName("type_of_search"))->selectOptionByLabel("This project's documents");
+		$this->select($this->byName("type_of_search"))->selectOptionByValue("documents");
 		$this->type("//input[@name='words']", "vladimir jenkins");
 		$this->clickAndWait("//input[@name='Search']");
 		$this->assertFalse($this->isTextPresent("No matches found for"));
@@ -440,13 +440,13 @@ class Search extends FForge_SeleniumTestCase
 
 		// Search in news
 
-		$this->select($this->byName("type_of_search"))->selectOptionByLabel("This project's news");
+		$this->select($this->byName("type_of_search"))->selectOptionByValue("news");
 		$this->type("//input[@name='words']", "sysadmin");
 		$this->clickAndWait("//input[@name='Search']");
 		$this->assertFalse($this->isTextPresent("No matches found for"));
 		$this->assertTrue($this->isTextPresent("News2"));
 
-		$this->select($this->byName("type_of_search"))->selectOptionByLabel("This project's news");
+		$this->select($this->byName("type_of_search"))->selectOptionByValue("news");
 		$this->type("//input[@name='words']", "daily newspaper");
 		$this->clickAndWait("//input[@name='Search']");
 		$this->assertFalse($this->isTextPresent("No matches found for"));
