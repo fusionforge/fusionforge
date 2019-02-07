@@ -81,17 +81,20 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->clickAndWait("//form[contains(@action,'globalroleedit.php')]//input[@value='Edit Role']") ;
 		$this->waitForPageToLoad("30000");
 
-		$selectedOptions = $this->select($this->byXpath("//select[@name='data[approve_projects][-1]']"))->selectedLabels();
+		$selectedOptions = $this->select($this->byXPath("//select[@name='data[approve_projects][-1]']"))->selectedLabels();
 		$this->assertEquals(array("Approve projects"), $selectedOptions);
-		$this->assertNotSelected("//select[@name='data[approve_projects][-1]']", "No Access");
-		$this->assertSelected("//select[@name='data[approve_news][-1]']", "Approve news");
+		$this->assertNotEquals(array("No Access"), $selectedOptions);
+		$selectedOptions = $this->select($this->byXPath("//select[@name='data[approve_news][-1]']"))->selectedLabels();
+		$this->assertEquals(array("Approve news"), $selectedOptions);
 
 		// Whoops, we don't actually want the news moderation bit, unset it
 		$this->select($this->byXPath("//select[@name='data[approve_news][-1]']"))->selectOptionByLabel("No Access");
 		$this->clickAndWait("//input[@value='Submit']") ;
 		$this->waitForPageToLoad("30000");
-		$this->assertSelected("//select[@name='data[approve_projects][-1]']", "Approve projects");
-		$this->assertSelected("//select[@name='data[approve_news][-1]']", "No Access");
+		$selectedOptions = $this->select($this->byXPath("//select[@name='data[approve_projects][-1]']"))->selectedLabels();
+		$this->assertEquals(array("Approve projects"), $selectedOptions);
+		$selectedOptions = $this->select($this->byXPath("//select[@name='data[approve_news][-1]']"))->selectedLabels();
+		$this->assertEquals(array("No Access"), $selectedOptions);
 
 		// Create users for "Project approvers" and "News moderators" roles
 		$this->createUser ("projapp") ;
@@ -397,12 +400,15 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->select($this->byXPath("//select[contains(@name,'data[docman]')]"))->selectOptionByLabel("Read only");
 		$this->clickAndWait("//input[@value='Submit']") ;
 		$this->waitForPageToLoad("30000");
-		$this->assertSelected("//select[contains(@name,'data[docman]')]", "Read only");
-		$this->assertSelected("//select[contains(@name,'data[frs_admin]')]", "FRS access");
+		$selectedOptions = $this->select($this->byXPath("//select[contains(@name,'data[docman]')]"))->selectedLabels();
+		$this->assertEquals(array("Read only"), $selectedOptions);
+		$selectedOptions = $this->select($this->byXPath("//select[contains(@name,'data[frs_admin]')]"))->selectedLabels();
+		$this->assertEquals(array("FRS access"), $selectedOptions);
 		$this->select($this->byXPath("//select[contains(@name,'data[new_frs]')]"))->selectOptionByLabel("Read only");
 		$this->clickAndWait("//input[@value='Submit']") ;
 		$this->waitForPageToLoad("30000");
-		$this->assertSelected("//select[contains(@name,'data[new_frs]')]", "Read only");
+		$selectedOptions = $this->select($this->byXPath("//select[contains(@name,'data[new_frs]')]"))->selectedLabels();
+		$this->assertEquals(array("Read only"), $selectedOptions);
 
 		// Check that SD is technician on trackers but DM isn't
 		$this->clickAndWait("link=Tracker");
@@ -438,7 +444,7 @@ class RBAC extends FForge_SeleniumTestCase
 
 		// Also check that guru isn't a manager on SubProject yet
 		$this->switchUser('guru');
-		$this->gotoProject ("SubProject") ;
+		$this->gotoProject("SubProject");
 		$this->clickAndWait("link=Tracker");
 		$this->waitForPageToLoad("30000");
 		$this->clickAndWait("link=Bugs");
@@ -449,7 +455,7 @@ class RBAC extends FForge_SeleniumTestCase
 
 		// Mark SD role as shared
 		$this->switchUser('bigboss');
-		$this->gotoProject ("MetaProject") ;
+		$this->gotoProject("MetaProject");
 		$this->clickAndWait("link=Admin");
 		$this->waitForPageToLoad("30000");
 		$this->clickAndWait("link=Users and permissions");
@@ -482,7 +488,7 @@ class RBAC extends FForge_SeleniumTestCase
 
 		// Check that guru now has manager permissions on SubProject
 		$this->switchUser('guru');
-		$this->gotoProject ("SubProject") ;
+		$this->gotoProject("SubProject");
 		$this->clickAndWait("link=Tracker");
 		$this->waitForPageToLoad("30000");
 		$this->clickAndWait("link=Bugs");
@@ -492,8 +498,8 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isElementPresent("//select[@name='assigned_to']")) ;
 
 		// Link global "Documentation masters" role into SubProject
-		$this->switchUser ("bigboss") ;
-		$this->gotoProject ("SubProject") ;
+		$this->switchUser("bigboss") ;
+		$this->gotoProject("SubProject");
 		$this->clickAndWait("link=Admin");
 		$this->waitForPageToLoad("30000");
 		$this->clickAndWait("link=Users and permissions");
@@ -614,16 +620,19 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->select($this->byXPath("//tr/td[contains(.,'first-news')]/../td/fieldset/select"))->selectOptionByLabel("Read only");
 		$this->clickAndWait("//input[@value='Submit']") ;
 		$this->waitForPageToLoad("30000");
-		$this->assertSelected("//tr/td[contains(.,'first-news')]/../td/fieldset/select", "Read only");
+		$selectedOptions = $this->select($this->byXPath("//tr/td[contains(.,'first-news')]/../td/fieldset/select"))->selectedLabels();
+		$this->assertEquals(array("Read only"), $selectedOptions);
 
 		$this->select($this->byXPath("//tr/td[contains(.,'first-news')]/../td/fieldset/select"))->selectOptionByLabel("Moderated post");
 		$this->clickAndWait("//input[@value='Submit']") ;
 		$this->waitForPageToLoad("30000");
-		$this->assertSelected("//tr/td[contains(.,'first-news')]/../td/fieldset/select", "Moderated post");
+		$selectedOptions = $this->select($this->byXPath("//tr/td[contains(.,'first-news')]/../td/fieldset/select"))->selectedLabels();
+		$this->assertEquals(array("Moderated post"), $selectedOptions);
 
 		$this->select($this->byXPath("//tr/td[contains(.,'first-news')]/../td/fieldset/select"))->selectOptionByLabel("Unmoderated post");
 		$this->clickAndWait("//input[@value='Submit']") ;
 		$this->waitForPageToLoad("30000");
-		$this->assertSelected("//tr/td[contains(.,'first-news')]/../td/fieldset/select", "Unmoderated post");
+		$selectedOptions = $this->select($this->byXPath("//tr/td[contains(.,'first-news')]/../td/fieldset/select"))->selectedLabels();
+		$this->assertEquals(array("Unmoderated post"), $selectedOptions);
 	}
 }
