@@ -58,7 +58,7 @@ function user_personal_information($user, $compact = false, $title = false) {
 	}
 	$subtable = $HTML->listTableTop(array(), array(), 'my-layout-table', 'user-profile-personal-info');
 	$subcells[][] = _('User Id')._(':');
-	
+
 	//print '<div property ="foaf:member" content="fusionforge:ForgeCommunity">';
 	//echo '</div>';
 	// description as a FusionForge Community member

@@ -89,7 +89,7 @@ if (count($pg_arr) < 1 || $pg_arr == false) {
 		} else {
 			$cells = array();
 			$cells[][] = util_make_link('/pm/task.php?group_project_id='.$pg_arr[$j]->getID().'&group_id='.$group_id.'&func=browse', $HTML->getPmPic(). ' '.$pg_arr[$j]->getName());
-			$cells[][] = $pg_arr[$j]->getDescription(); 
+			$cells[][] = $pg_arr[$j]->getDescription();
 			$cells[] = array((int) $pg_arr[$j]->getOpenCount(), 'class' => 'align-center');
 			$cells[] = array((int) $pg_arr[$j]->getTotalCount(), 'class' => 'align-center');
 			echo $HTML->multiTableRow(array(), $cells);

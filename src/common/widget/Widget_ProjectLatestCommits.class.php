@@ -44,7 +44,7 @@ class Widget_ProjectLatestCommits extends Widget {
 	public function _getLinkToCommit($project, $commit_id, $plugin_name, $repo_name) {
 		return util_make_link('/scm/browser.php?group_id='.$project->getID().'&scm_plugin='.$plugin_name.'&commit='.$commit_id.'&extra='.$repo_name, _('commit')._(': ').$commit_id);
 	}
-	
+
 	static function commit_dateorder($a, $b) {
 		if ($a['date'] == $b['date']) {
 			return 0;
