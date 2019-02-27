@@ -9,7 +9,8 @@ prepare_workspace
 
 # apt-get install pcregrep moreutils xalan
 cd tests/
-phpunit --log-junit $WORKSPACE/reports/phpunit.xml \
+phpunit --configuration buildbot-configuration-phpunit.xml \
+	--log-junit $WORKSPACE/reports/phpunit.xml \
 	--coverage-clover $WORKSPACE/reports/coverage/clover.xml \
 	--coverage-html $WORKSPACE/reports/coverage/ \
 	code_and_unit_tests.php
