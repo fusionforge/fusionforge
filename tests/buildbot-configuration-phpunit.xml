@@ -1,7 +1,10 @@
 <phpunit>
-<filter>
-  <whitelist processUncoveredFilesFromWhitelist="true">
-    <directory suffix=".php">../src</directory>
-  </whitelist>
-</filter>
+  <filter>
+    <whitelist processUncoveredFilesFromWhitelist="true">
+      <directory suffix=".php">../src</directory>
+    </whitelist>
+  </filter>
+  <php>
+    <includePath>../src</includePath>
+  </php>
 </phpunit>
