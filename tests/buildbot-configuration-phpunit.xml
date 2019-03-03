@@ -1,4 +1,6 @@
-<phpunit>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/5.4/phpunit.xsd"
+         verbose="true">
   <filter>
     <whitelist processUncoveredFilesFromWhitelist="true">
       <directory suffix=".php">../src</directory>
@@ -7,12 +9,4 @@
   <php>
     <includePath>../src</includePath>
   </php>
-  <testsuites>
-    <testsuite name="Unit Tests">
-      <directory>../tests/unit</directory>
-    </testsuite>
-    <testsuite name="Code Tests">
-      <directory>../tests/code</directory>
-    </testsuite>
-  </testsuites>
 </phpunit>
