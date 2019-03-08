@@ -117,7 +117,7 @@ class HgCommitEmail extends scmhook {
 			$hgrc .= "\nmaxdiff = 300\n";
 			$hgrc .= "strip = $strip\n\n";
 			$hgrc .= "[reposubs]\n";
-			$hgrc .= "** = $mail";
+			$hgrc .= "** = $mail\n";
 
 			$f = fopen ("$main_repo/hgrc.new", 'w');
 			fwrite($f, $hgrc);
