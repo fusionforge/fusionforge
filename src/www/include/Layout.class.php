@@ -736,7 +736,7 @@ abstract class Layout extends FFError {
 
 	function confirmBox($msg, $params, $buttons, $image = '*none*') {
 		if ($image == '*none*') {
-			$image = html_image('stop.png', 48, 48);
+			$image = html_image('ic/stop.png', 48, 48);
 		}
 
 		foreach ($params as $b => $v) {
