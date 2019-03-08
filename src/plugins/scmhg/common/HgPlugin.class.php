@@ -352,7 +352,7 @@ Offer DAV or SSH access.");
 			system("hg init $root/$project_name");
 			$f = fopen("$root/$project_name/.hg/hgrc", 'w');
 			$conf = "[web]\n";
-			$conf .= "baseurl = /hg/".$project_name."\n";
+			$conf .= "baseurl = /hg/".$project_name."/".$project_name."\n";
 			$conf .= "description = ".$project_name."\n";
 			$conf .= "style = paper\n";
 			$conf .= "allow_push = *\n"; // every user (see Apache configuration) is allowed to push
