@@ -422,7 +422,6 @@ Offer DAV or SSH access.");
 		$groups = $this->getGroups();
 		$unix_group = forge_get_config('apache_group');
 		$unix_user = forge_get_config('apache_user');
-		$hgusers = array();
 		foreach ($groups as $project) {
 			if (!$project->isActive()) continue;
 			if (!$project->usesSCM()) continue;
@@ -437,7 +436,7 @@ Offer DAV or SSH access.");
 				$users = $project->getMembers();
 				$pname = $project->getUnixName();
 				foreach ($users as $user) {
-					if (forge_check_perm_for_user ($user, 'scm', $project->getID(), 'write')) {
+					if (forge_check_perm_for_user($user, 'scm', $project->getID(), 'write')) {
 						if ($prevp){
 							$push .= ", ";
 						}
@@ -448,14 +447,12 @@ Offer DAV or SSH access.");
 						$read .= $user->getUnixName();
 						$prevp = true;
 						$prevr = true;
-						$hgusers[$user->getID()] = $user;
-					} elseif (forge_check_perm_for_user ($user, 'scm', $project->getID(), 'read')) {
+					} elseif (forge_check_perm_for_user($user, 'scm', $project->getID(), 'read')) {
 						if ($prevr){
 							$read .= ", ";
 						}
 						$read .= $user->getUnixName();
 						$prevr = true;
-						$hgusers[$user->getID()] = $user;
 					}
 				}
 			}
@@ -467,16 +464,16 @@ Offer DAV or SSH access.");
 			/*make new hgrc file*/
 			if (is_file($path.'/hgrc')) {
 				$hgrc_val = parse_ini_file($path.'/hgrc', true);
-				if (isset ($hgrc_val['web'])) {
+				if (isset($hgrc_val['web'])) {
 					$hgrc_val['web']['allow_read'] = $read;
 					$hgrc_val['web']['allow_push'] = $push;
 				}
-				if (isset ($hgrc_val['notify']['test'])) {
+				if (isset($hgrc_val['notify']['test'])) {
 					/* Set the value again, because parse_ini_file() converts boolean values to "" or "1" .
 					This would break the hgrc file.*/
 					$hgrc_val['notify']['test'] = 'false';
 				}
-				if (isset ($hgrc_val['notify']['template'])) {
+				if (isset($hgrc_val['notify']['template'])) {
 					/*Set value again, because special character are not escaped*/
 					$hgrc_val['notify']['template'] = '"\ndetails:  {webroot}/rev/{node|short}\nchangeset:  {rev}:{node|short}\nuser:  {author}\ndate:  {date|date}\ndescription:\n{desc}\n"';
 				}
@@ -495,8 +492,8 @@ Offer DAV or SSH access.");
 				$hgrc .= "baseurl = /hg/".$project->getUnixName().'/'.$repo_name;
 				$hgrc .= "\ndescription = ".$project->getUnixName().'/'.$repo_name;
 				$hgrc .= "\nstyle = paper";
-				$hgrc .= "\nallow_read = ".$read;
 				$hgrc .= "\nallow_push = ".$push;
+				$hgrc .= "\nallow_read = ".$read;
 				if (!forge_get_config('use_ssl', 'scmhg')) {
 					$hgrc .= "\n".'push_ssl = 0';
 				}
