@@ -422,7 +422,6 @@ Offer DAV or SSH access.");
 		$groups = $this->getGroups();
 		$unix_group = forge_get_config('apache_group');
 		$unix_user = forge_get_config('apache_user');
-		$hgusers = array();
 		foreach ($groups as $project) {
 			if (!$project->isActive()) continue;
 			if (!$project->usesSCM()) continue;
@@ -448,14 +447,12 @@ Offer DAV or SSH access.");
 						$read .= $user->getUnixName();
 						$prevp = true;
 						$prevr = true;
-						$hgusers[$user->getID()] = $user;
 					} elseif (forge_check_perm_for_user ($user, 'scm', $project->getID(), 'read')) {
 						if ($prevr){
 							$read .= ", ";
 						}
 						$read .= $user->getUnixName();
 						$prevr = true;
-						$hgusers[$user->getID()] = $user;
 					}
 				}
 			}
