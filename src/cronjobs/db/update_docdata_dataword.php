@@ -6,7 +6,7 @@
  * Copyright 2005, Fabio Bertagnin
  * Copyright 2009, Roland Mas
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2012,2015 Franck Villaume - TrivialDev
+ * Copyright 2012,2015,2019, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -64,19 +64,21 @@ foreach ($resarr as $item) {
 	$group = group_get_object($item['group_id']);
 	$d = new Document($group, $item['docid']);
 	$dv = new DocumentVersion($d, $item['version']);
-	$datafile = tempnam(forge_get_config('data_path'), 'tmp');
-	$fh = fopen($datafile, 'w');
-	fwrite($fh, $dv->getFileData(false));
-	fclose($fh);
-	$lenin = $dv->getFileSize();
-	$res = $p->get_parse_data($datafile, $dv->getFileType());
-	$len = strlen($res);
-	if (file_exists($datafile)) {
-		unlink($datafile);
-	}
-	$resUp = $dv->updateDataWords($item['version'], $res);
-	if (!$resUp) {
-		die('unable to update words for docid/version'.$item['docid'].'/'.$item['version']);
+	if ('URL' != $dv->getFileType()) {
+		$datafile = tempnam(forge_get_config('data_path'), 'tmp');
+		$fh = fopen($datafile, 'w');
+		fwrite($fh, $dv->getFileData());
+		fclose($fh);
+		$lenin = $dv->getFileSize();
+		$res = $p->get_parse_data($datafile, $dv->getFileType());
+		$len = strlen($res);
+		if (file_exists($datafile)) {
+			unlink($datafile);
+		}
+		$resUp = $dv->updateDataWords($item['version'], $res);
+		if (!$resUp) {
+			die('unable to update words for docid/version'.$item['docid'].'/'.$item['version']);
+		}
 	}
 	$timeend = microtime_float();
 	$timetrait = $timeend - $timestart;
@@ -85,7 +87,7 @@ foreach ($resarr as $item) {
 $timeendtrait = microtime_float();
 $timetot = $timeendtrait - $timestarttrait;
 db_query_params('UPDATE groups set force_docman_reindex = $1', array('0'));
-//echo "End analyze : $compt files, $timetot secs.";
+echo "End analyze : $compt files, $timetot secs.";
 
 function microtime_float() {
 	list($usec, $sec) = explode(" ", microtime());
