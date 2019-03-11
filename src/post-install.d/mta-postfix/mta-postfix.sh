@@ -4,6 +4,7 @@
 # Christian Bayle, Roland Mas
 # Julien Goodwin
 # Copyright (C) 2014  Inria (Sylvain Beucler)
+# Copyright 2019, Franck Villaume - TrivialDev
 #
 # This file is part of FusionForge. FusionForge is free software;
 # you can redistribute it and/or modify it under the terms of the
@@ -63,6 +64,20 @@ case "$1" in
 		postfix_append_config 'transport_maps' 'hash:/etc/postfix/fusionforge-lists-transport'
 		postconf -e mailman_destination_recipient_limit=1
 
+		# Mailing-lists aliases - database link
+		touch /etc/postfix/fusionforge-lists.cf
+		chown root:postfix /etc/postfix/fusionforge-lists.cf
+		chmod 640 /etc/postfix/fusionforge-lists.cf  # database password
+		cat > /etc/postfix/fusionforge-lists.cf <<-EOF
+			hosts = unix:/var/run/postgresql
+			user = $(forge_get_config database_user)_mta
+			password = $(forge_get_config database_password_mta)
+			dbname = $(forge_get_config database_name)
+			domain = $users_host
+			query = SELECT list_name FROM mta_lists WHERE list_name = '%u'
+			EOF
+		postfix_append_config 'virtual_alias_maps' 'proxy:pgsql:/etc/postfix/fusionforge-lists.cf'
+
 		# Users aliases - database link
 		touch /etc/postfix/fusionforge-users.cf
 		chown root:postfix /etc/postfix/fusionforge-users.cf
@@ -85,8 +100,11 @@ case "$1" in
 			sed -i -e '/^noreply:/d' /etc/aliases
 		fi
 		rm -f /etc/postfix/fusionforge-lists-transport /etc/postfix/fusionforge-lists-transport.db
+		rm -f /etc/postfix/fusionforge-lists.cf /etc/postfix/fusionforge-users.cf
 		postconf -e transport_maps="$(postconf -h transport_maps \
 			| sed "s|\(, *\)\?hash:/etc/postfix/fusionforge-lists-transport||")"
+		postconf -e virtual_alias_maps="$(postconf -h virtual_alias_maps \
+			| sed "s|\(, *\)\?proxy:pgsql:/etc/postfix/fusionforge-lists.cf||")"
 		postconf -e virtual_alias_maps="$(postconf -h virtual_alias_maps \
 			| sed "s|\(, *\)\?proxy:pgsql:/etc/postfix/fusionforge-users.cf||")"
 		postconf -e relay_domains="$(postconf -h relay_domains | sed "s/\(, *\)\?$lists_host//")"
