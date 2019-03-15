@@ -78,6 +78,123 @@ case "$1" in
 			EOF
 		postfix_append_config 'virtual_alias_maps' 'proxy:pgsql:/etc/postfix/fusionforge-lists.cf'
 
+		touch /etc/postfix/fusionforge-lists-owner.cf
+		chown root:postfix /etc/postfix/fusionforge-lists-owner.cf
+		chmod 640 /etc/postfix/fusionforge-lists-owner.cf  # database password
+		cat > /etc/postfix/fusionforge-lists-owner.cf <<-EOF
+			hosts = unix:/var/run/postgresql
+			user = $(forge_get_config database_user)_mta
+			password = $(forge_get_config database_password_mta)
+			dbname = $(forge_get_config database_name)
+			domain = $users_host
+			query = SELECT list_name||'-owner' FROM mta_lists WHERE list_name = '%u'
+			EOF
+		postfix_append_config 'virtual_alias_maps' 'proxy:pgsql:/etc/postfix/fusionforge-lists-owner.cf'
+
+		touch /etc/postfix/fusionforge-lists-request.cf
+		chown root:postfix /etc/postfix/fusionforge-lists-request.cf
+		chmod 640 /etc/postfix/fusionforge-lists-request.cf  # database password
+		cat > /etc/postfix/fusionforge-lists-request.cf <<-EOF
+			hosts = unix:/var/run/postgresql
+			user = $(forge_get_config database_user)_mta
+			password = $(forge_get_config database_password_mta)
+			dbname = $(forge_get_config database_name)
+			domain = $users_host
+			query = SELECT list_name||'-request' FROM mta_lists WHERE list_name = '%u'
+			EOF
+		postfix_append_config 'virtual_alias_maps' 'proxy:pgsql:/etc/postfix/fusionforge-lists-request.cf'
+
+		touch /etc/postfix/fusionforge-lists-admin.cf
+		chown root:postfix /etc/postfix/fusionforge-lists-admin.cf
+		chmod 640 /etc/postfix/fusionforge-lists-admin.cf  # database password
+		cat > /etc/postfix/fusionforge-lists-admin.cf <<-EOF
+			hosts = unix:/var/run/postgresql
+			user = $(forge_get_config database_user)_mta
+			password = $(forge_get_config database_password_mta)
+			dbname = $(forge_get_config database_name)
+			domain = $users_host
+			query = SELECT list_name||'-admin' FROM mta_lists WHERE list_name = '%u'
+			EOF
+		postfix_append_config 'virtual_alias_maps' 'proxy:pgsql:/etc/postfix/fusionforge-lists-admin.cf'
+
+		touch /etc/postfix/fusionforge-lists-bounces.cf
+		chown root:postfix /etc/postfix/fusionforge-lists-bounces.cf
+		chmod 640 /etc/postfix/fusionforge-lists-bounces.cf  # database password
+		cat > /etc/postfix/fusionforge-lists-bounces.cf <<-EOF
+			hosts = unix:/var/run/postgresql
+			user = $(forge_get_config database_user)_mta
+			password = $(forge_get_config database_password_mta)
+			dbname = $(forge_get_config database_name)
+			domain = $users_host
+			query = SELECT list_name||'-bounces' FROM mta_lists WHERE list_name = '%u'
+			EOF
+		postfix_append_config 'virtual_alias_maps' 'proxy:pgsql:/etc/postfix/fusionforge-lists-bounces.cf'
+
+		touch /etc/postfix/fusionforge-lists-confirm.cf
+		chown root:postfix /etc/postfix/fusionforge-lists-confirm.cf
+		chmod 640 /etc/postfix/fusionforge-lists-confirm.cf  # database password
+		cat > /etc/postfix/fusionforge-lists-confirm.cf <<-EOF
+			hosts = unix:/var/run/postgresql
+			user = $(forge_get_config database_user)_mta
+			password = $(forge_get_config database_password_mta)
+			dbname = $(forge_get_config database_name)
+			domain = $users_host
+			query = SELECT list_name||'-confirm' FROM mta_lists WHERE list_name = '%u'
+			EOF
+		postfix_append_config 'virtual_alias_maps' 'proxy:pgsql:/etc/postfix/fusionforge-lists-confirm.cf'
+
+		touch /etc/postfix/fusionforge-lists-join.cf
+		chown root:postfix /etc/postfix/fusionforge-lists-join.cf
+		chmod 640 /etc/postfix/fusionforge-lists-join.cf  # database password
+		cat > /etc/postfix/fusionforge-lists-join.cf <<-EOF
+			hosts = unix:/var/run/postgresql
+			user = $(forge_get_config database_user)_mta
+			password = $(forge_get_config database_password_mta)
+			dbname = $(forge_get_config database_name)
+			domain = $users_host
+			query = SELECT list_name||'-join' FROM mta_lists WHERE list_name = '%u'
+			EOF
+		postfix_append_config 'virtual_alias_maps' 'proxy:pgsql:/etc/postfix/fusionforge-lists-join.cf'
+
+		touch /etc/postfix/fusionforge-lists-leave.cf
+		chown root:postfix /etc/postfix/fusionforge-lists-leave.cf
+		chmod 640 /etc/postfix/fusionforge-lists-leave.cf  # database password
+		cat > /etc/postfix/fusionforge-lists-leave.cf <<-EOF
+			hosts = unix:/var/run/postgresql
+			user = $(forge_get_config database_user)_mta
+			password = $(forge_get_config database_password_mta)
+			dbname = $(forge_get_config database_name)
+			domain = $users_host
+			query = SELECT list_name||'-leave' FROM mta_lists WHERE list_name = '%u'
+			EOF
+		postfix_append_config 'virtual_alias_maps' 'proxy:pgsql:/etc/postfix/fusionforge-lists-leave.cf'
+
+		touch /etc/postfix/fusionforge-lists-subscribe.cf
+		chown root:postfix /etc/postfix/fusionforge-lists-subscribe.cf
+		chmod 640 /etc/postfix/fusionforge-lists-subscribe.cf  # database password
+		cat > /etc/postfix/fusionforge-lists-subscribe.cf <<-EOF
+			hosts = unix:/var/run/postgresql
+			user = $(forge_get_config database_user)_mta
+			password = $(forge_get_config database_password_mta)
+			dbname = $(forge_get_config database_name)
+			domain = $users_host
+			query = SELECT list_name||'-subscribe' FROM mta_lists WHERE list_name = '%u'
+			EOF
+		postfix_append_config 'virtual_alias_maps' 'proxy:pgsql:/etc/postfix/fusionforge-lists-subscribe.cf'
+
+		touch /etc/postfix/fusionforge-lists-unsubscribe.cf
+		chown root:postfix /etc/postfix/fusionforge-lists-unsubscribe.cf
+		chmod 640 /etc/postfix/fusionforge-lists-unsubscribe.cf  # database password
+		cat > /etc/postfix/fusionforge-lists-unsubscribe.cf <<-EOF
+			hosts = unix:/var/run/postgresql
+			user = $(forge_get_config database_user)_mta
+			password = $(forge_get_config database_password_mta)
+			dbname = $(forge_get_config database_name)
+			domain = $users_host
+			query = SELECT list_name||'-unsubscribe' FROM mta_lists WHERE list_name = '%u'
+			EOF
+		postfix_append_config 'virtual_alias_maps' 'proxy:pgsql:/etc/postfix/fusionforge-lists-unsubscribe.cf'
+
 		# Users aliases - database link
 		touch /etc/postfix/fusionforge-users.cf
 		chown root:postfix /etc/postfix/fusionforge-users.cf
