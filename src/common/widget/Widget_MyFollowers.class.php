@@ -2,7 +2,7 @@
 /**
  * FusionForge Followers (monitored users and vice versa) Widget
  *
- * Copyright 2018, Franck Villaume - TrivialDev
+ * Copyright 2018,2019, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -149,7 +149,7 @@ require_once $gfcommon.'include/MonitorElement.class.php';
 						$cells = array();
 						$cells[][] = date('H:i:s',$arr['activity_date']);
 						if (isset($arr['user_id']) && $arr['user_id']) {
-							$cells[][] = util_make_link_u($arr['user_name'], $arr['user_id'], $arr['realname']);
+							$cells[][] = util_display_user($arr['user_name'], $arr['user_id'], $arr['realname']);
 						} else {
 							$cells[][] = '--';
 						}
