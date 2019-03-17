@@ -25,6 +25,7 @@
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'include/vote_function.php';
+require_once $gfcommon.'diary/DiaryNoteFactory.class.php';
 
 global $HTML;
 
@@ -35,60 +36,48 @@ if (!forge_get_config('use_diary')) {
 $diary_user = getIntFromRequest('diary_user');
 if ($diary_user) {
 	$diary_id = getIntFromRequest('diary_id');
+	$diaryNoteFactoryObject = new diaryNoteFactory(user_get_object($diary_user));
 
-	$user_obj=user_get_object($diary_user);
-	if (!$user_obj or !$user_obj->isActive()) {
-		exit_error(_('User not found'), 'home');
-	} elseif ($user_obj->isError()) {
-		exit_error($user_obj->getErrorMessage(),'home');
+	if (!$diaryNoteFactoryObject) {
+		exit_error( _('Entry Not Found'), 'home');
+	} elseif ($diaryNoteFactoryObject->isError()) {
+		exit_error($diaryNoteFactoryObject->getErrorMessage(),'home');
 	}
 
-	$title = _('Diary and Notes for') . ' ' . $user_obj->getRealName();
-	$HTML->header(array('title'=>$title));
+	$title = _('Diary and Notes for') . ' ' . $diaryNoteFactoryObject->getUser()->getRealName();
+	$HTML->header(array('title' => $title));
 
 	if ($diary_id) {
-		$res = db_query_params ('SELECT * FROM user_diary WHERE user_id=$1 AND id=$2 AND is_public=1',
-					array ($diary_user,
-					       $diary_id));
-
-		if (!$res || db_numrows($res) < 1) {
-			echo '<p>' . _('Entry Not Found For This User') . '</p>';
-		} else {
-			echo $HTML->boxTop(db_result($res,0,'summary'));
-			echo '<p>' . _('Posted on ') . date(_('Y-m-d H:i'), db_result($res,0,'date_posted')).'</p>';
-			echo db_result($res,0,'details');
+		if ($diaryNoteFactoryObject->getDiaryNote($diary_id)->isPublic()) {
+			echo $HTML->boxTop($diaryNoteFactoryObject->getDiaryNote($diary_id)->getSummary());
+			echo '<p>' . _('Posted on ') . $diaryNoteFactoryObject->getDiaryNote($diary_id)->getDatePostedOn().'</p>';
+			echo $diaryNoteFactoryObject->getDiaryNote($diary_id)->getDetails();
 			echo $HTML->boxBottom();
+		} else {
+			echo $HTML->error_msg(_('Entry Not Found For This User'));
 		}
 	}
 
-	echo '<h2>' . _('Existing Diary and Notes Entries') . '</h2>' . "\n";
-	echo '<table class="fullwidth">' . "\n";
+	echo html_e('h2', array(), _('Existing Diary and Notes Entries'));
+	echo $HTML->listTableTop();
 	/*
 		List all diary entries
 	*/
-	$result = db_query_params ('SELECT * FROM user_diary WHERE user_id=$1 AND is_public=1 ORDER BY id DESC',
-				   array ($diary_user));
-	$rows=db_numrows($result);
-	if (!$result || $rows < 1) {
-		if (db_error()) {
-			exit_error(db_error(),'home');
-		} else {
-			echo '
-				<tr><td><strong>'._('This User Has No Diary Entries').'</strong></td></tr>';
+	if ($diaryNoteFactoryObject->hasNotes(1)) {
+		$cells = array();
+		$cells[][] = _('Subject');
+		$cells[][] = _('Date');
+		echo $HTML->multiTableRow(array(), $cells, true);
+		foreach ($diaryNoteFactoryObject->getDiaryNoteIDs(1) as $diarynoteid) {
+			$cells = array();
+			$cells[][] = util_make_link('/developer/diary.php?diary_id='.$diarynoteid.'&diary_user='. $diary_user, $diaryNoteFactoryObject->getDiaryNote($diarynoteid)->getSummary());
+			$cells[][] = $diaryNoteFactoryObject->getDiaryNote($diary_id)->getDatePostedOn();
+			echo $HTML->multiTableRow(array(), $cells);
 		}
 	} else {
-		echo '
-			<tr>
-				<th>'._('Subject').'</th>
-				<th>'._('Date').'</th>
-			</tr>';
-		for ($i=0; $i<$rows; $i++) {
-			echo '
-			<tr><td>'.util_make_link('/developer/diary.php?diary_id='.db_result($result,$i,'id').'&diary_user='. $diary_user, db_result($result,$i,'summary')).'</td>'.
-				'<td>'. date(_('Y-m-d H:i'), db_result($result,$i,'date_posted')).'</td></tr>';
-		}
+		echo '<tr><td><strong>'._('This User Has No Diary Entries').'</strong></td></tr>';
 	}
-	echo "</table>\n";
+	echo $HTML->listTableBottom();
 
 	$HTML->footer();
 
