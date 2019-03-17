@@ -20,34 +20,16 @@
 require_once $gfcommon.'include/FFObject.class.php';
 require_once $gfcommon.'diary/DiaryNote.class.php';
 
-class DiaryNoteFactory extends FFObject {
+class DiaryFactory extends FFObject {
 
 	var $diarynoteids = false;
 
-	/**
-	 * The User object.
-	 *
-	 * @var	object	$User.
-	 */
-	var $User;
-
-	/**
-	 * @param	$User
-	 */
-	function __construct(&$User) {
+	function __construct() {
 		parent::__construct();
 		if (!forge_get_config('use_diary')) {
 			$this->setError(_('Diary feature is off.'));
 			return;
 		}
-		if ($User->isError()) {
-			$this->setError('DiaryNoteFactory: '. $User->getErrorMessage());
-			return;
-		} elseif (!$User->isActive()) {
-			$this->setError(_('User not available'));
-			return;
-		}
-		$this->User =& $User;
 	}
 	
 	function getDiaryNoteIDs($public) {
@@ -55,9 +37,9 @@ class DiaryNoteFactory extends FFObject {
 			return $this->diarynoteids;
 		}
 		$qpa = false;
-		$qpa = db_construct_qpa($qpa, 'SELECT id FROM user_diary WHERE user_id = $1', array($this->User->getID()));
+		$qpa = db_construct_qpa($qpa, 'SELECT id FROM user_diary', array());
 		if ($public) {
-			$qpa = db_construct_qpa($qpa, ' AND is_public = $1', array($public));
+			$qpa = db_construct_qpa($qpa, ' WHERE is_public = $1', array($public));
 		}
 		$qpa = db_construct_qpa($qpa, ' ORDER BY date_posted DESC', array());
 		$res = db_query_qpa($qpa);
@@ -76,8 +58,5 @@ class DiaryNoteFactory extends FFObject {
 	function getDiaryNote($diarynote_id) {
 		return diarynote_get_object($diarynote_id);
 	}
-	
-	function getUser() {
-		return $this->User;
-	}
 }
+ 

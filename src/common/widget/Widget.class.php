@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2012,2014,2016-2018, Franck Villaume - TrivialDev
+ * Copyright 2012,2014,2016-2019, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -74,6 +74,7 @@ require_once $gfcommon.'widget/Widget_UserhomeProjectInformation.class.php';
 require_once $gfcommon.'widget/Widget_UserhomePeerRatings.class.php';
 require_once $gfcommon.'widget/Widget_UserhomeActivity.class.php';
 require_once $gfcommon.'widget/Widget_UserhomeRss.class.php';
+require_once $gfcommon.'widget/Widget_HomeLatestDiaryNotes.class.php';
 
 /**
  * FusionForge Layout Widget
@@ -209,6 +210,9 @@ require_once $gfcommon.'widget/Widget_UserhomeRss.class.php';
 				break;
 			case 'homerss';
 				$o = new Widget_HomeRss();
+				break;
+			case 'homelatestdiarynotes';
+				$o = new Widget_HomeLatestDiaryNotes();
 				break;
 			case 'mysurveys':
 				$o = new Widget_MySurveys();
@@ -359,7 +363,7 @@ require_once $gfcommon.'widget/Widget_UserhomeRss.class.php';
 				break;
 			case WidgetLayoutManager::OWNER_TYPE_HOME:
 				$widgets = array('hometagcloud', 'homeversion', 'homelatestnews', 'homestats', 'homedetailactivitymostactiveprojectweek',
-						'homelatestfilereleases', 'homerss');
+						'homelatestfilereleases', 'homerss', 'homelatestdiarynotes');
 				break;
 			case WidgetLayoutManager::OWNER_TYPE_TRACKER:
 				$widgets = array('trackercontent', 'trackercomment', 'trackerdefaultactions', 'trackergeneral', 'trackermain', 'trackersummary');
