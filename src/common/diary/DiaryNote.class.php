@@ -147,7 +147,17 @@ class DiaryNote extends FFObject {
 	}
 	
 	function getDetails() {
-		return $this->data_array['details'];
+		$result_html = util_gen_cross_ref($this->data_array['details']);
+		$parsertype = forge_get_config('diary_parser_type');
+		switch ($parsertype) {
+			case 'markdown':
+				require_once 'markdown.php';
+				$result_html = Markdown($result_html);
+				break;
+			default:
+				$result_html = nl2br($result_html);
+		}
+		return $result_html;
 	}
 
 	function getID() {

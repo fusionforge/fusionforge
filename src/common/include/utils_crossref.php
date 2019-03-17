@@ -33,7 +33,7 @@ require_once $gfcommon.'frs/FRSRelease.class.php';
  * @param	int		$group_id
  * @return	mixed|string
  */
-function util_gen_cross_ref($text, $group_id) {
+function util_gen_cross_ref($text, $group_id = 0) {
 
 	// Handle URL in links, replace them with hyperlinks.
 	$text = util_make_links($text);
@@ -51,10 +51,14 @@ function util_gen_cross_ref($text, $group_id) {
 	$text = preg_replace_callback('/\[forum:(\d+)\]/', create_function('$matches', 'return _forumid2url($matches[1]);'), $text);
 
 	// Handle FusionForge [Dnnn] Syntax => links to document.
-	$text = preg_replace_callback('/\[D(\d+)\]/', create_function('$matches', 'return _documentid2url($matches[1],'.$group_id.');'), $text);
+	$text = preg_replace_callback('/\[D(\d+)\]/', create_function('$matches', 'return _documentid2url($matches[1]);'), $text);
 
 	// Handle FusionForge [Rnnn] Syntax => links to frs release.
 	$text = preg_replace_callback('/\[R(\d+)\]/', create_function('$matches', 'return _frsreleaseid2url($matches[1]);'), $text);
+	return $text;
+
+	// Handle FusionForge [Nnnn] Syntax => links to diary notes.
+	$text = preg_replace_callback('/\[N(\d+)\]/', create_function('$matches', 'return _diarynotesid2url($matches[1]);'), $text);
 	return $text;
 }
 
@@ -131,9 +135,9 @@ function _forumid2url($id) {
 	return $text;
 }
 
-function _documentid2url($id, $group_id) {
+function _documentid2url($id) {
 	$text = '[D'.$id.']';
-	$d = document_get_object($id, $group_id);
+	$d = document_get_object($id);
 	if ($d && is_object($d) && !$d->isError()) {
 		$url = $d->getPermalink();
 		$arg['title'] = $d->getName().' ['.$d->getFileName().']';
@@ -149,6 +153,17 @@ function _frsreleaseid2url($id) {
 	if ($frsr && is_object($frsr) && !$frsr->isError()) {
 		$url = $frsr->getPermalink();
 		$arg['title'] = $frsr->getName();
+		return util_make_link($url, $text, $arg);
+	}
+	return $text;
+}
+
+function _diarynotesid2url($id) {
+	$text = '[N'.$id.']';
+	$dn = diarynote_get_object($id);
+	if ($dn && is_object($dn) && !$dn->isError() && $dn->isPublic()) {
+		$url = '/developer/diary.php?diary_id='.$id.'&diary_user='.$dn->getUser()->getID();
+		$arg['title'] = $dn->getSummary();
 		return util_make_link($url, $text, $arg);
 	}
 	return $text;
