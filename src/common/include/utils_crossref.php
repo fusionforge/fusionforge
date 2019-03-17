@@ -55,10 +55,12 @@ function util_gen_cross_ref($text, $group_id = 0) {
 
 	// Handle FusionForge [Rnnn] Syntax => links to frs release.
 	$text = preg_replace_callback('/\[R(\d+)\]/', create_function('$matches', 'return _frsreleaseid2url($matches[1]);'), $text);
-	return $text;
 
 	// Handle FusionForge [Nnnn] Syntax => links to diary notes.
 	$text = preg_replace_callback('/\[N(\d+)\]/', create_function('$matches', 'return _diarynotesid2url($matches[1]);'), $text);
+
+	// Handle FusionForge [Pnnn] Syntax => links to project.
+	$text = preg_replace_callback('/\[P(\d+)\]/', create_function('$matches', 'return _projectid2url($matches[1]);'), $text);
 	return $text;
 }
 
@@ -164,6 +166,17 @@ function _diarynotesid2url($id) {
 	if ($dn && is_object($dn) && !$dn->isError() && $dn->isPublic()) {
 		$url = '/developer/diary.php?diary_id='.$id.'&diary_user='.$dn->getUser()->getID();
 		$arg['title'] = $dn->getSummary();
+		return util_make_link($url, $text, $arg);
+	}
+	return $text;
+}
+
+function _projectid2url($id) {
+	$text = '[P'.$id.']';
+	$p = group_get_object($id);
+	if ($p && is_object($p) && !$p->isError()) {
+		$url = $p->getHomePage();
+		$arg['title'] = $p->getPublicName();
 		return util_make_link($url, $text, $arg);
 	}
 	return $text;

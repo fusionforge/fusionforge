@@ -2,6 +2,7 @@ FusionForge X.y:
 * Widget HomeLatestDiaryNotes: new widget for Forge home page to display 5 latest public Diary Notes across the forge (TrivialDev)
 * Diary & Notes: support markdown
 * Diary & Notes: support crossref
+* Utils: crossref, support diary [Nxxx] and Project [Pxxx]
 
 FusionForge 6.1.1:
 * Widget User Page: fix owner test to ensure the user is the owner of the layout.
