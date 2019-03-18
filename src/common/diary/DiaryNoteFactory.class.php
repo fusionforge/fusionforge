@@ -49,7 +49,7 @@ class DiaryNoteFactory extends FFObject {
 		}
 		$this->User =& $User;
 	}
-	
+
 	function getDiaryNoteIDs($public) {
 		if (is_array($this->diarynoteids)) {
 			return $this->diarynoteids;
@@ -64,7 +64,7 @@ class DiaryNoteFactory extends FFObject {
 		$this->diarynoteids = util_result_column_to_array($res);
 		return $this->diarynoteids;
 	}
-	
+
 	function hasNotes($public = 0) {
 		$this->getDiaryNoteIDs($public);
 		if (is_array($this->diarynoteids) && count($this->diarynoteids)) {
@@ -72,11 +72,11 @@ class DiaryNoteFactory extends FFObject {
 		}
 		return false;
 	}
-	
+
 	function getDiaryNote($diarynote_id) {
 		return diarynote_get_object($diarynote_id);
 	}
-	
+
 	function getUser() {
 		return $this->User;
 	}

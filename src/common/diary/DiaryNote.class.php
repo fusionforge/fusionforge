@@ -78,7 +78,7 @@ class DiaryNote extends FFObject {
 			return;
 		}
 		$this->User =& $User;
-		
+
 		if ($noteid) {
 			if (!$arr || !is_array($arr)) {
 				if (!$this->fetchData($noteid)) {
@@ -128,7 +128,7 @@ class DiaryNote extends FFObject {
 		db_free_result($res);
 		return true;
 	}
-	
+
 	/**
 	 * isPublic - whether this diary note is available to the general public.
 	 *
@@ -137,15 +137,15 @@ class DiaryNote extends FFObject {
 	function isPublic() {
 		return (($this->data_array['is_public'] == 1) ? true : false);
 	}
-	
+
 	function getDatePostedOn() {
 		return date(_('Y-m-d H:i'), $this->data_array['date_posted']);
 	}
-	
+
 	function getSummary() {
 		return $this->data_array['summary'];
 	}
-	
+
 	function getDetails() {
 		$result_html = util_gen_cross_ref($this->data_array['details']);
 		$parsertype = forge_get_config('diary_parser_type');

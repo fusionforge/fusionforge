@@ -39,7 +39,7 @@ class Widget_HomeLatestDiaryNotes extends Widget {
 	function isAvailable() {
 		return isset($this->content['title']);
 	}
-	
+
 	function getContent() {
 		$diaryFactory = new DiaryFactory();
 		if ($diaryFactory->hasNotes(1)) {
