@@ -114,7 +114,7 @@ class LoginProcess extends FForge_SeleniumTestCase
 		$this->type("passwd", FORGE_OTHER_PASSWORD);
 		$this->type("passwd2", FORGE_OTHER_PASSWORD);
 		$this->clickAndWait("submit");
-		$this->assertContains('You have changed successfully the password', $this->source());
+		$this->assertTrue($this->isTextPresent("You have changed successfully the password"));
 
 		$this->logout();
 		$this->open( ROOT );
