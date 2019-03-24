@@ -1,14 +1,14 @@
 <?php
 /**
- * ARC2 RDF/JSON Serializer.
+ * ARC2 JSON-LD Serializer.
  *
- * @author Benjamin Nowack <bnowack@semsol.com>
+ * @author John Walker <john.walker@semaku.com>
  * @license W3C Software License and GPL
  * @homepage <https://github.com/semsol/arc2>
  */
 ARC2::inc('RDFSerializer');
 
-class ARC2_RDFJSONSerializer extends ARC2_RDFSerializer
+class ARC2_JSONLDSerializer extends ARC2_RDFSerializer
 {
     public function __construct($a, &$caller)
     {
@@ -18,7 +18,7 @@ class ARC2_RDFJSONSerializer extends ARC2_RDFSerializer
     public function __init()
     {
         parent::__init();
-        $this->content_header = 'application/json';
+        $this->content_header = 'application/ld+json';
     }
 
     public function getTerm($v, $term = 's')
@@ -34,16 +34,13 @@ class ARC2_RDFJSONSerializer extends ARC2_RDFSerializer
             if ('o' != $term) {
                 return $this->getTerm($v['value'], $term);
             }
-            if (preg_match('/^\_\:/', $v['value'])) {
-                return '{ "value" : "'.$this->jsonEscape($v['value']).'", "type" : "bnode" }';
-            }
 
-            return '{ "value" : "'.$this->jsonEscape($v['value']).'", "type" : "uri" }';
+            return '{ "@id" : "'.$this->jsonEscape($v['value']).'" }';
         }
         /* literal */
-        $r = '{ "value" : "'.$this->jsonEscape($v['value']).'", "type" : "literal"';
-        $suffix = isset($v['datatype']) ? ', "datatype" : "'.$v['datatype'].'"' : '';
-        $suffix = isset($v['lang']) ? ', "lang" : "'.$v['lang'].'"' : $suffix;
+        $r = '{ "@value" : "'.$this->jsonEscape($v['value']).'"';
+        $suffix = isset($v['datatype']) ? ', "@type" : "'.$v['datatype'].'"' : '';
+        $suffix = isset($v['lang']) ? ', "@language" : "'.$v['lang'].'"' : $suffix;
         $r .= $suffix.' }';
 
         return $r;
@@ -66,10 +63,10 @@ class ARC2_RDFJSONSerializer extends ARC2_RDFSerializer
         $nl = "\n";
         foreach ($index as $s => $ps) {
             $r .= $r ? ','.$nl.$nl : '';
-            $r .= '  '.$this->getTerm($s).' : {';
-            $first_p = 1;
+            $r .= '  { '.$nl.'    "@id" : '.$this->getTerm($s);
+            //$first_p = 1;
             foreach ($ps as $p => $os) {
-                $r .= $first_p ? $nl : ','.$nl;
+                $r .= ','.$nl;
                 $r .= '    '.$this->getTerm($p).' : [';
                 $first_o = 1;
                 if (!is_array($os)) {/* single literal o */
@@ -80,13 +77,12 @@ class ARC2_RDFJSONSerializer extends ARC2_RDFSerializer
                     $r .= '      '.$this->getTerm($o, 'o');
                     $first_o = 0;
                 }
-                $first_p = 0;
                 $r .= $nl.'    ]';
             }
             $r .= $nl.'  }';
         }
         $r .= $r ? ' ' : '';
 
-        return '{'.$nl.$r.$nl.'}';
+        return '['.$nl.$r.$nl.']';
     }
 }

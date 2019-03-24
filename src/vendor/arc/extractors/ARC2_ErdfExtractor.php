@@ -1,25 +1,21 @@
 <?php
 /*
-homepage: http://arc.semsol.org/
-license:  http://arc.semsol.org/license
+@homepage <https://github.com/semsol/arc2>
+@license W3C Software License and GPL
 
 class:    ARC2 eRDF Extractor (w/o link title generation)
 author:   Benjamin Nowack
-version:  2009-02-09 (Tweak: getRootNode returns 1st node if html tag is not found)
+version:  2010-11-16
 */
 
 ARC2::inc('RDFExtractor');
 
 class ARC2_ErdfExtractor extends ARC2_RDFExtractor {
 
-  function __construct($a = '', &$caller) {
+  function __construct($a, &$caller) {
     parent::__construct($a, $caller);
   }
   
-  function ARC2_ErdfExtractor($a = '', &$caller) {
-    $this->__construct($a, $caller);
-  }
-
   function __init() {
     parent::__init();
   }

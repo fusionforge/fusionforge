@@ -3,66 +3,57 @@
  * ARC2 base class
  *
  * @author Benjamin Nowack
- * @license <http://arc.semsol.org/license>
- * @homepage <http://arc.semsol.org/>
+ * @license W3C Software License and GPL
+ * @homepage <https://github.com/semsol/arc2>
  * @package ARC2
- * @version 2010-06-25
-*/
+ */
 
 class ARC2_Class {
-  
-  /*  */
+    protected $db_object;
 
-  function __construct($a = '', &$caller) {
-    $a = is_array($a) ? $a : array();
-    $this->a = $a;
-    $this->caller = &$caller;
+  function __construct($a, &$caller) {
+    $this->a = is_array($a) ? $a : array();
+    $this->caller = $caller;
     $this->__init();
-  }
-  
-  function ARC2_Class($a = '', &$caller) {
-    $this->__construct($a, $caller);
-  }
-
-  function __destruct() {
-    //echo "\ndestructing " . get_class($this);
   }
 
   function __init() {/* base, time_limit */
     if (!$_POST && isset($GLOBALS['HTTP_RAW_POST_DATA'])) parse_str($GLOBALS['HTTP_RAW_POST_DATA'], $_POST); /* php5 bug */
     $this->inc_path = ARC2::getIncPath();
     $this->ns_count = 0;
-    $this->nsp = array('http://www.w3.org/1999/02/22-rdf-syntax-ns#' => 'rdf');
-    $this->used_ns = array('http://www.w3.org/1999/02/22-rdf-syntax-ns#');
-    $this->ns = $this->v('ns', array(), $this->a);
+    $rdf = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#';
+    $this->nsp = array($rdf => 'rdf');
+    $this->used_ns = array($rdf);
+    $this->ns = array_merge(array('rdf' => $rdf), $this->v('ns', array(), $this->a));
 
     $this->base = $this->v('base', ARC2::getRequestURI(), $this->a);
     $this->errors = array();
     $this->warnings = array();
     $this->adjust_utf8 = $this->v('adjust_utf8', 0, $this->a);
     $this->max_errors = $this->v('max_errors', 25, $this->a);
+    $this->has_pcre_unicode = @preg_match('/\pL/u', 'test');/* \pL = block/point which is a Letter */
   }
 
   /*  */
-  
+
   function v($name, $default = false, $o = false) {/* value if set */
-    if ($o === false) $o =& $this;
+    if ($o === false) $o = $this;
     if (is_array($o)) {
       return isset($o[$name]) ? $o[$name] : $default;
     }
     return isset($o->$name) ? $o->$name : $default;
   }
-  
+
   function v1($name, $default = false, $o = false) {/* value if 1 (= not empty) */
-    if ($o === false) $o =& $this;
+    if ($o === false) $o = $this;
     if (is_array($o)) {
       return (isset($o[$name]) && $o[$name]) ? $o[$name] : $default;
     }
     return (isset($o->$name) && $o->$name) ? $o->$name : $default;
   }
-  
+
   function m($name, $a = false, $default = false, $o = false) {/* call method */
-    if ($o === false) $o =& $this;
+    if ($o === false) $o = $this;
     return method_exists($o, $name) ? $o->$name($a) : $default;
   }
 
@@ -85,24 +76,51 @@ class ARC2_Class {
 
   function deCamelCase($v, $uc_first = 0) {
     $r = str_replace('_', ' ', $v);
-    $r = preg_replace('/([a-z0-9])([A-Z])/e', '"\\1 " . strtolower("\\2")', $r);
+    $r = preg_replace_callback('/([a-z0-9])([A-Z])/', function($matches) {
+      return $matches[1] . ' ' . strtolower($matches[2]);
+    }, $r);
     return $uc_first ? ucfirst($r) : $r;
   }
 
+  /**
+   * Tries to extract a somewhat human-readable label from a URI.
+   */
+
   function extractTermLabel($uri, $loops = 0) {
     list($ns, $r) = $this->splitURI($uri);
+    /* encode apostrophe + s */
+    $r = str_replace('%27s', '_apostrophes_', $r);
+    /* normalize */
     $r = $this->deCamelCase($this->camelCase($r, 1, 1));
-    if (($loops < 1) && preg_match('/^(self|it|this|me)$/i', $r)) {
+    /* decode apostrophe + s */
+    $r = str_replace(' apostrophes ', "'s ", $r);
+    /* typical RDF non-info URI */
+    if (($loops < 1) && preg_match('/^(self|it|this|me|id)$/i', $r)) {
       return $this->extractTermLabel(preg_replace('/\#.+$/', '', $uri), $loops + 1);
     }
+    /* trailing hash or slash */
     if ($uri && !$r && ($loops < 2)) {
       return $this->extractTermLabel(preg_replace('/[\#\/]$/', '', $uri), $loops + 1);
+    }
+    /* a de-camel-cased URL (will look like "www example com") */
+    if (preg_match('/^www (.+ [a-z]{2,4})$/', $r, $m)) {
+      return $this->getPrettyURL($uri);
     }
     return $r;
   }
 
+  /**
+   * Generates a less ugly in-your-face URL.
+   */
+
+  function getPrettyURL($r) {
+    $r = rtrim($r, '/');
+    $r = preg_replace('/^https?\:\/\/(www\.)?/', '', $r);
+    return $r;
+  }
+
   /*  */
-  
+
   function addError($v) {
     if (!in_array($v, $this->errors)) {
       $this->errors[] = $v;
@@ -116,11 +134,11 @@ class ARC2_Class {
     }
     return false;
   }
-  
+
   function getErrors() {
     return $this->errors;
   }
-  
+
   function getWarnings() {
     return $this->warnings;
   }
@@ -131,9 +149,9 @@ class ARC2_Class {
       $this->caller->resetErrors();
     }
   }
-  
+
   /*  */
-  
+
   function splitURI($v) {
     return ARC2::splitURI($v);
   }
@@ -142,12 +160,14 @@ class ARC2_Class {
 
   function getPName($v, $connector = ':') {
     /* is already a pname */
-    if ($ns = $this->getPNameNamespace($v, $connector)) {
+    $ns = $this->getPNameNamespace($v, $connector);
+    if ($ns) {
       if (!in_array($ns, $this->used_ns)) $this->used_ns[] = $ns;
       return $v;
     }
     /* new pname */
-    if ($parts = $this->splitURI($v)) {
+    $parts = $this->splitURI($v);
+    if ($parts) {
       /* known prefix */
       foreach ($this->ns as $prefix => $ns) {
         if ($parts[0] == $ns) {
@@ -172,6 +192,12 @@ class ARC2_Class {
     if (!preg_match($re, $v, $m)) return 0;
     if (!isset($this->ns[$m[1]])) return 0;
     return $this->ns[$m[1]];
+  }
+
+  function setPrefix($prefix, $ns) {
+	 $this->ns[$prefix] = $ns;
+	 $this->nsp[$ns] = $prefix;
+	 return $this;
   }
 
   function getPrefix($ns) {
@@ -220,7 +246,7 @@ class ARC2_Class {
   }
 
   /*  */
-  
+
   function calcURI($path, $base = "") {
     /* quick check */
     if (preg_match("/^[a-z0-9\_]+\:/i", $path)) {/* abs path or bnode */
@@ -265,9 +291,9 @@ class ARC2_Class {
     }
     return $base . $path;
   }
-  
+
   /*  */
-  
+
   function calcBase($path) {
     $r = $path;
     $r = preg_replace('/\#.*$/', '', $r);/* remove hash */
@@ -294,7 +320,7 @@ class ARC2_Class {
     }
     return $res;
   }
-  
+
   function toIndex($v) {
     if (is_array($v)) {
       if (isset($v[0]) && isset($v[0]['s'])) return ARC2::getSimpleIndex($v, 0);
@@ -333,14 +359,14 @@ class ARC2_Class {
     $ser = new ARC2_NTriplesSerializer(array_merge($this->a, array('ns' => $ns)), $this);
     return (isset($v[0]) && isset($v[0]['s'])) ? $ser->getSerializedTriples($v, $raw) : $ser->getSerializedIndex($v, $raw);
   }
-  
+
   function toTurtle($v, $ns = '', $raw = 0) {
     ARC2::inc('TurtleSerializer');
     if (!$ns) $ns = isset($this->a['ns']) ? $this->a['ns'] : array();
     $ser = new ARC2_TurtleSerializer(array_merge($this->a, array('ns' => $ns)), $this);
     return (isset($v[0]) && isset($v[0]['s'])) ? $ser->getSerializedTriples($v, $raw) : $ser->getSerializedIndex($v, $raw);
   }
-  
+
   function toRDFXML($v, $ns = '', $raw = 0) {
     ARC2::inc('RDFXMLSerializer');
     if (!$ns) $ns = isset($this->a['ns']) ? $this->a['ns'] : array();
@@ -399,7 +425,7 @@ class ARC2_Class {
     $parser->parse($g, $this->getTurtleHead() . $t);
     return $parser->getSimpleIndex(0, $vals);
   }
-  
+
   function getTurtleHead() {
     $r = '';
     $ns = $this->v('ns', array(), $this->a);
@@ -408,7 +434,7 @@ class ARC2_Class {
     }
     return $r;
   }
-  
+
   function completeQuery($q, $ns = '') {
     if (!$ns) $ns = isset($this->a['ns']) ? $this->a['ns'] : array();
     $added_prefixes = array();
@@ -443,7 +469,7 @@ class ARC2_Class {
   function checkRegex($str) {
     return addslashes($str); // @@todo extend
   }
-  
+
   /* Microdata methods */
 
   function getMicrodataAttrs($id, $type = '') {
@@ -455,19 +481,97 @@ class ARC2_Class {
     return $this->getMicrodataAttrs($id, $type);
   }
 
-  /* central DB query hook */
+    /* central DB query hook */
 
-  function queryDB($sql, $con, $log_errors = 0) {
-    $t1 = ARC2::mtime();
-    $r = mysql_query($sql, $con);
-    $t2 = ARC2::mtime() - $t1;
-    if ($t2 > 1) {
-      //echo "\n needed " . $t2 . ' secs for ' . $sql;
+    public function getDBObjectFromARC2Class($con = null)
+    {
+        if (null == $this->db_object) {
+            if (false === class_exists('\\ARC2\\Store\\Adapter\\AdapterFactory')) {
+                require __DIR__.'/src/ARC2/Store/Adapter/AdapterFactory.php';
+            }
+            if (false == isset($this->a['db_adapter'])) {
+                $this->a['db_adapter'] = 'mysqli';
+            }
+            $factory = new \ARC2\Store\Adapter\AdapterFactory();
+            $this->db_object = $factory->getInstanceFor($this->a['db_adapter'], $this->a);
+            if ($con) {
+                $this->db_object->connect($con);
+            } else {
+                $this->db_object->connect();
+            }
+        }
+        return $this->db_object;
     }
-    if ($log_errors && ($er = mysql_error($con))) $this->addError($er);
-    return $r;
-  }
 
-  /*  */
+    /**
+     * Dont use this function to directly query the database. It currently works only with mysqli DB adapter.
+     *
+     * @param string $sql SQL query
+     * @param mysqli $con Connection
+     * @param int    $log_errors 1 if you want to log errors. Default is 0
+     *
+     * @return mysqli Result
+     *
+     * @deprecated since 2.4.0
+     */
+    public function queryDB($sql, $con, $log_errors = 0)
+    {
+        $t1 = ARC2::mtime();
+
+        // create connection using an adapter, if not available yet
+        $this->getDBObjectFromARC2Class($con);
+
+        $r = $this->db_object->mysqliQuery($sql);
+
+        // TODO check if this is ever called. it seems not and therefore could be removed.
+        if (0) {
+            $t2 = ARC2::mtime() - $t1;
+            $call_obj = $this;
+            $call_path = '';
+            while ($call_obj) {
+                $call_path = get_class($call_obj) . ' / ' . $call_path;
+                $call_obj = isset($call_obj->caller) ? $call_obj->caller : false;
+            }
+            echo "\n" . $call_path . " needed " . $t2 . ' secs for ' . str_replace("\n" , ' ', $sql);;
+        }
+
+        if ($log_errors && !empty($this->db_object->getErrorMessage())) {
+            $this->addError($this->db_object->getErrorMessage());
+        }
+        return $r;
+    }
+
+  /**
+   * Shortcut method to create an RDF/XML backup dump from an RDF Store object.
+   */
+  function backupStoreData($store, $target_path, $offset = 0) {
+    $limit = 10;
+    $q = '
+      SELECT DISTINCT ?s WHERE {
+        ?s ?p ?o .
+      }
+      ORDER BY ?s
+      LIMIT ' . $limit . '
+      ' . ($offset ? 'OFFSET ' . $offset : '') . '
+    ';
+    $rows = $store->query($q, 'rows');
+    $tc = count($rows);
+    $full_tc = $tc + $offset;
+    $mode = $offset ? 'ab' : 'wb';
+    $fp = fopen($target_path, $mode);
+    foreach ($rows as $row) {
+      $index = $store->query('DESCRIBE <' . $row['s'] . '>', 'raw');
+      if ($index) {
+        $doc = $this->toRDFXML($index);
+        fwrite($fp, $doc . "\n\n");
+      }
+    }
+    fclose($fp);
+    if ($tc == 10) {
+      set_time_limit(300);
+      $this->backupStoreData($store, $target_path, $offset + $limit);
+    }
+    return $full_tc;
+  }
 
 }
