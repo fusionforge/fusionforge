@@ -41,7 +41,7 @@ if [ -e /etc/debian_version ]; then
 			libmarkdown-php \
 			vsftpd \
 			fonts-dejavu-core
-		apt-get -y install mediawiki -t jessie-backports
+# 		apt-get -y install mediawiki -t jessie-backports
 	else
 		apt-get install -y make gettext php-cli php-pgsql php-htmlpurifier php-http php-text-captcha \
 			libapache2-mpm-itk libapache2-mod-svn \
