@@ -95,8 +95,10 @@ fi
 		install-plugin-scmcvs install-plugin-scmsvn install-plugin-scmgit install-plugin-scmbzr install-plugin-scmhg \
 		install-plugin-blocks install-plugin-moinmoin \
 		install-plugin-taskboard install-plugin-message \
-		install-plugin-repositoryapi \
-		install-plugin-mediawiki
+		install-plugin-repositoryapi
+	if [ -e /etc/centos-release -o -e /etc/SuSE-release ]; then
+		make install-plugin-mediawiki
+	fi
 	if [ -e /etc/centos-release -o -e /etc/debian-release ]; then
 		make install-plugin-phptextcaptcha
 	fi
