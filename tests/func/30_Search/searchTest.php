@@ -389,18 +389,18 @@ class Search extends FForge_SeleniumTestCase
 
 		$this->gotoProject('ProjectA');
 		$this->clickAndWait("link=Docs");
-		$this->clickAndWait("addItemDocmanMenu");
+		$this->clickAndWait("id=addItemDocmanMenu");
 		// ugly hack until we fix behavior in docman when no folders exist. We need to click twice on the link
-		$this->clickAndWait("addItemDocmanMenu");
-		$this->clickAndWait("id=tab-new-document");
+		$this->clickAndWait("id=addItemDocmanMenu");
+		$this->clickAndWait("jquery#tab-new-document");
 		$this->type("title", "Doc1 Vladimir");
 		$this->type("//textarea[@name='description']", "Jenkins buildbot - also, ZONGO");
 		$this->clickAndWait("//input[@name='type' and @value='pasteurl']");
 		$this->type("file_url", "http://buildbot.fusionforge.org/");
 		$this->clickAndWait("submit");
 
-		$this->clickAndWait("addItemDocmanMenu");
-		$this->clickAndWait("id=tab-new-document");
+		$this->clickAndWait("id=addItemDocmanMenu");
+		$this->clickAndWait("jquery#tab-new-document");
 		$this->type("title", "Doc2 Astromir");
 		$this->type("//textarea[@name='description']", "Main website (the needle) - also, ZONGO");
 		$this->clickAndWait("//input[@name='type' and @value='pasteurl']");
