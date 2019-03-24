@@ -409,14 +409,14 @@ class Search extends FForge_SeleniumTestCase
 
 		// Search in Documents
 
-		$this->select($this->byName("type_of_search"))->selectOptionByValue("documents");
+		$this->select($this->byName("type_of_search"))->selectOptionByValue("alldocs");
 		$this->type("//input[@name='words']", "jenkins");
 		$this->clickAndWait("//input[@name='Search']");
 		$this->assertFalse($this->isTextPresent("No matches found for"));
 		$this->assertTrue($this->isTextPresent("Doc1"));
 		$this->assertFalse($this->isTextPresent("Doc2"));
 
-		$this->select($this->byName("type_of_search"))->selectOptionByValue("documents");
+		$this->select($this->byName("type_of_search"))->selectOptionByValue("alldocs");
 		$this->type("//input[@name='words']", "vladimir jenkins");
 		$this->clickAndWait("//input[@name='Search']");
 		$this->assertFalse($this->isTextPresent("No matches found for"));
