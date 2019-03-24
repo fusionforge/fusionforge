@@ -632,10 +632,13 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 
 	function type($name, $value) {
 		if (preg_match('/^\/\/[a-z]/', $name)) {
+			$this->byXPath($name)->clear();
 			$this->byXPath($name)->value($value);
 		} else if (preg_match('/^id=/', $name)) {
+			$this->byId(substr($name, 3))->clear();
 			$this->byId(substr($name, 3))->value($value);
 		} else {
+			$this->byName($name)->clear();
 			$this->byName($name)->value($value);
 		}
 	}
