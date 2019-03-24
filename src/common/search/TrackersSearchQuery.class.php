@@ -75,7 +75,7 @@ class TrackersSearchQuery extends SearchQuery {
 								array (db_int_array_to_any_clause ($this->sections)));
 			}
 
-			$qpa = db_construct_qpa($qpa, ' AND artifact.artifact_id = artifact_idx.artifact_id AND vectors @@ to_tsquery($1) GROUP BY artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact.details, vectors) AS x WHERE ',
+			$qpa = db_construct_qpa($qpa, ' AND artifact.artifact_id = artifact_idx.artifact_id AND vectors @@ to_tsquery($1) GROUP BY artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact.details, vectors, artifact_group_list.name) AS x WHERE ',
 							array($words));
 			$qpa = $this->addMatchCondition($qpa, 'full_string_agg');
 			$qpa = db_construct_qpa($qpa, ' ORDER BY ts_rank(vectors, to_tsquery($1)) DESC',
