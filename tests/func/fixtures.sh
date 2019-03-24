@@ -132,6 +132,7 @@ if [ "$reset" = 1 ]; then
     su - postgres -c "dropdb $database" || true
     $(forge_get_config source_path)/post-install.d/db/db.sh configure
     forge_set_password admin 'my_Admin7'
+    su - postgres -c 'psql fusionforge -c "UPDATE users set tooltips = 0;"'
     service fusionforge-systasksd start
     start_apache
     rm -rf $pgdir.backup-*/

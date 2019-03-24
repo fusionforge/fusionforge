@@ -198,27 +198,35 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 					'args' => array(),
 				));
 		} else {
-			if (preg_match('/^link=/', $link)) {
-				$text = substr($link, 5);
-				$myelement = $this->byLinkText($text);
-			} else if (preg_match('/^id=/', $link)) {
-				$id = substr($link, 3);
-				$myelement = $this->byId($id);
-			} else if (preg_match('/^css=/', $link)) {
-				$css = substr($link, 4);
-				$myelement = $this->byCssSelector($css);
-			} else if (preg_match('/^\/\/[a-z]/', $link)) {
-				$myelement = $this->byXPath($link);
-			} else {
-				//default case
-				$myelement = $this->byName($link);
+			for ($second = 0; ; $second++) {
+				if ($second >= 30) $this->fail("timeout");
+				try {
+					if (preg_match('/^link=/', $link)) {
+						$text = substr($link, 5);
+						$myelement = $this->byLinkText($text);
+					} else if (preg_match('/^id=/', $link)) {
+						$id = substr($link, 3);
+						$myelement = $this->byId($id);
+					} else if (preg_match('/^css=/', $link)) {
+						$css = substr($link, 4);
+						$myelement = $this->byCssSelector($css);
+					} else if (preg_match('/^\/\/[a-z]/', $link)) {
+						$myelement = $this->byXPath($link);
+					} else {
+						//default case
+						$myelement = $this->byName($link);
+					}
+					if ($myelement->displayed()) break;
+				} catch (Exception $e) {}
+				sleep(1);
 			}
-			sleep(7); // to handle tooltips
+			sleep(1);
 			try {
 				$myelement->click();
 			} catch (Exception $e) {
 				$this->url($myelement->attribute('href'));
 			}
+			sleep(1);
 		}
 	}
 
