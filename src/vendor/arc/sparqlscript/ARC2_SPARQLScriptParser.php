@@ -1,32 +1,28 @@
 <?php
 /*
-homepage: http://arc.semsol.org/
-license:  http://arc.semsol.org/license
+@homepage <https://github.com/semsol/arc2>
+@license W3C Software License and GPL
 
 class:    ARC2 SPARQLScript Parser (SPARQL+ + functions)
 author:   Benjamin Nowack
-version:  2008-09-22 (Addition: support for FunctionCall) 
+version:  2010-11-16
 */
 
 ARC2::inc('ARC2_SPARQLPlusParser');
 
 class ARC2_SPARQLScriptParser extends ARC2_SPARQLPlusParser {
 
-  function __construct($a = '', &$caller) {
+  function __construct($a, &$caller) {
     parent::__construct($a, $caller);
   }
   
-  function ARC2_SPARQLScriptParser($a = '', &$caller) {
-    $this->__construct($a, $caller);
-  }
-
   function __init() {
     parent::__init();
   }
 
   /*  */
 
-  function parse($v, $src = '') {
+  function parse($v, $src = '', $iso_fallback = 'ignore') {
     $this->setDefaultPrefixes();
     $this->base = $src ? $this->calcBase($src) : ARC2::getScriptURI();
     $this->blocks = array();

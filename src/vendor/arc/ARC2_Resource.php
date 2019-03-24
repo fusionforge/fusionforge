@@ -3,24 +3,20 @@
  * ARC2 Resource object
  *
  * @author Benjamin Nowack <bnowack@semsol.com>
- * @license http://arc.semsol.org/license
- * @homepage <http://arc.semsol.org/>
+ * @license W3C Software License and GPL
+ * @homepage <https://github.com/semsol/arc2>
  * @package ARC2
- * @version 2010-02-23
+ * @version 2011-01-19
 */
 
 ARC2::inc('Class');
 
 class ARC2_Resource extends ARC2_Class {
 
-  function __construct($a = '', &$caller) {
+  function __construct($a, &$caller) {
     parent::__construct($a, $caller);
   }
   
-  function ARC2_Resource($a = '', &$caller) {
-    $this->__construct($a, $caller);
-  }
-
   function __init() {
     parent::__init();
     $this->uri = '';
@@ -37,6 +33,10 @@ class ARC2_Resource extends ARC2_Class {
 
   function setIndex($index) {
     $this->index = $index;
+  }
+
+  function getIndex() {
+    return $this->index;
   }
 
   function setProps($props, $s = '') {
@@ -57,6 +57,35 @@ class ARC2_Resource extends ARC2_Class {
     $this->index[$s][$this->expandPName($p)] = $os;
   }
 
+  /* add a relation to a URI. Allows for instance $res->setRel('rdf:type', 'doap:Project') */
+  function setRel($p, $r, $s = '') {
+    if(!is_array($r)) {
+      $uri = array (
+		    'type' => 'uri',
+		    'value' => $this->expandPName($r));
+      $this->setProp($p, $uri, $s);
+    } else {
+      if (!$s) $s = $this->uri;
+      foreach($r as $i => $x) {
+	if(!is_array($x)) {
+	  $uri = array (
+			'type' => 'uri',
+			'value' => $this->expandPName($x));
+	  $r[$i] = $uri;
+	}
+      }
+      $this->index[$s][$this->expandPName($p)] = $r;
+    }
+  }
+
+  /* Specialize setProp to set an xsd:dateTime typed literal. Example : $res->setPropXSDdateTime('dcterms:created', date('c')) */
+  function setPropXSDdateTime($p, $dt, $s = '') {
+	$datecreated=array('value' => $dt,
+		'type' => 'literal',
+		'datatype' => 'http://www.w3.org/2001/XMLSchema#dateTime');
+	$this->setProp($p, $datecreated, $s);
+  }
+
   function setStore($store) {
     $this->store = $store;
   }
@@ -69,7 +98,7 @@ class ARC2_Resource extends ARC2_Class {
     if (in_array($uri, $this->fetched)) return 0;
     $this->index[$uri] = array();
     if ($this->store) {
-      $index = $this->store->query('DESCRIBE <' . $uri . '>', 'raw');
+      $index = $this->store->query('CONSTRUCT { <' . $uri . '> ?p ?o . } WHERE { <' . $uri . '> ?p ?o . } ', 'raw');
     }
     else {
       $index = $this->toIndex($uri);

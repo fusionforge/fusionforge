@@ -1,6 +1,6 @@
 <?php
 /**
- * ARC2 Remote RDF Store.
+ * ARC2 Memory Store.
  *
  * @author Benjamin Nowack <bnowack@semsol.com>
  * @license W3C Software License and GPL
@@ -9,17 +9,18 @@
  */
 ARC2::inc('Class');
 
-class ARC2_RemoteStore extends ARC2_Class
+class ARC2_MemStore extends ARC2_Class
 {
     public function __construct($a, &$caller)
     {
         parent::__construct($a, $caller);
-        $this->is_remote = 1;
+        $this->is_mem = 1;
     }
 
     public function __init()
     {
         parent::__init();
+        $this->data = [];
     }
 
     public function isSetUp()
@@ -31,30 +32,26 @@ class ARC2_RemoteStore extends ARC2_Class
     {
     }
 
-    public function killDBProcesses()
-    {
-    }
-
     public function reset()
     {
+        $this->data = [];
     }
 
     public function drop()
     {
+        $this->reset();
     }
 
-    public function insert($doc, $g, $keep_bnode_ids = 0)
+    public function insert($doc, $g = 'http://localhost/')
     {
-        return $this->query('INSERT INTO <'.$g.'> { '.$this->toNTriples($doc, '', 1).' }');
+        $index = $this->v($g, [], $this->data);
+        $this->data[$g] = ARC2::getMergedIndex($index, $this->toIndex($doc));
     }
 
-    public function delete($doc, $g)
+    public function delete($doc, $g = 'http://localhost/')
     {
-        if (!$doc) {
-            return $this->query('DELETE FROM <'.$g.'>');
-        } else {
-            return $this->query('DELETE FROM <'.$g.'> { '.$this->toNTriples($doc, '', 1).' }');
-        }
+        $index = $this->v($g, [], $this->data);
+        $this->data[$g] = ARC2::getCleanedIndex($index, $this->toIndex($doc));
     }
 
     public function replace($doc, $g, $doc_2)
@@ -74,7 +71,7 @@ class ARC2_RemoteStore extends ARC2_Class
         $t1 = ARC2::mtime();
         if (!$errs = $p->getErrors()) {
             $qt = $infos['query']['type'];
-            $r = ['query_type' => $qt, 'result' => $this->runQuery($q, $qt, $infos)];
+            $r = ['query_type' => $qt, 'result' => $this->runQuery($q, $qt)];
         } else {
             $r = ['result' => ''];
         }
@@ -88,17 +85,13 @@ class ARC2_RemoteStore extends ARC2_Class
             return $this->v('rows', [], $r['result']);
         }
         if ('row' == $result_format) {
-            if (!isset($r['result']['rows'])) {
-                return [];
-            }
-
             return $r['result']['rows'] ? $r['result']['rows'][0] : [];
         }
 
         return $r;
     }
 
-    public function runQuery($q, $qt = '', $infos = '')
+    public function runQuery($q, $qt = '')
     {
         /* ep */
         $ep = $this->v('remote_store_endpoint', 0, $this->a);
@@ -106,12 +99,20 @@ class ARC2_RemoteStore extends ARC2_Class
             return false;
         }
         /* prefixes */
-        $q = $this->completeQuery($q);
-        /* custom handling */
-        $mthd = 'run'.$this->camelCase($qt).'Query';
-        if (method_exists($this, $mthd)) {
-            return $this->$mthd($q, $infos);
+        $ns = isset($this->a['ns']) ? $this->a['ns'] : [];
+        $added_prefixes = [];
+        $prologue = '';
+        foreach ($ns as $k => $v) {
+            $k = rtrim($k, ':');
+            if (in_array($k, $added_prefixes)) {
+                continue;
+            }
+            if (preg_match('/(^|\s)'.$k.':/s', $q) && !preg_match('/PREFIX\s+'.$k.'\:/is', $q)) {
+                $prologue .= "\n".'PREFIX '.$k.': <'.$v.'>';
+            }
+            $added_prefixes[] = $k;
         }
+        $q = $prologue."\n".$q;
         /* http verb */
         $mthd = in_array($qt, ['load', 'insert', 'delete']) ? 'POST' : 'GET';
         /* reader */
@@ -137,11 +138,10 @@ class ARC2_RemoteStore extends ARC2_Class
         $format = $reader->getFormat();
         $resp = '';
         while ($d = $reader->readStream()) {
-            $resp .= $this->toUTF8($d);
+            $resp .= $d;
         }
         $reader->closeStream();
         $ers = $reader->getErrors();
-        $this->a['reader_auth_infos'] = $reader->getAuthInfos();
         unset($this->reader);
         if ($ers) {
             return ['errors' => $ers];
@@ -160,25 +160,20 @@ class ARC2_RemoteStore extends ARC2_Class
         /* ask|load|insert|delete */
         if (in_array($qt, ['ask', 'load', 'insert', 'delete'])) {
             $bid = $parser->getBooleanInsertedDeleted();
-            if ('ask' == $qt) {
-                $r = $bid['boolean'];
-            } else {
-                $r = $bid;
-            }
+            switch ($qt) {
+        case 'ask': return $bid['boolean'];
+        default: return $bid;
+      }
         }
         /* select */
-        elseif (('select' == $qt) && !method_exists($parser, 'getRows')) {
-            $r = $resp;
-        } elseif ('select' == $qt) {
-            $r = ['rows' => $parser->getRows(), 'variables' => $parser->getVariables()];
+        if (('select' == $qt) && !method_exists($parser, 'getRows')) {
+            return $resp;
+        }
+        if ('select' == $qt) {
+            return ['rows' => $parser->getRows(), 'variables' => $parser->getVariables()];
         }
         /* any other */
-        else {
-            $r = $parser->getSimpleIndex(0);
-        }
-        unset($parser);
-
-        return $r;
+        return $parser->getSimpleIndex(0);
     }
 
     public function optimizeTables()
@@ -211,16 +206,6 @@ class ARC2_RemoteStore extends ARC2_Class
             }, $r);
         }
         $this->resource_labels[$res] = $r;
-
-        return $r;
-    }
-
-    public function getDomains($p)
-    {
-        $r = [];
-        foreach ($this->query('SELECT DISTINCT ?type WHERE {?s <'.$p.'> ?o ; a ?type . }', 'rows') as $row) {
-            $r[] = $row['type'];
-        }
 
         return $r;
     }
