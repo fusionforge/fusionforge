@@ -490,7 +490,7 @@ class Search extends FForge_SeleniumTestCase
 		// Advanced search
 
 		$this->gotoProject('ProjectA');
-		$this->clickAndWait('Link=Advanced search');
+		$this->clickAndWait('link=Advanced search');
 		$this->clickAndWait("//input[@class='checkthemall']");
 		$this->type("//main[@id='maindiv']//input[@name='words']", "needle");
 		$this->clickAndWait("//input[@name='submitbutton']");
@@ -508,7 +508,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("News2"));
 
 		$this->gotoProject('ProjectA');
-		$this->clickAndWait('Link=Advanced search');
+		$this->clickAndWait('link=Advanced search');
 		$this->clickAndWait("//input[@class='checkthemall']");
 		$this->type("//main[@id='maindiv']//input[@name='words']", "zongo");
 		$this->clickAndWait("//input[@name='submitbutton']");
@@ -594,7 +594,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("News2"));
 
 		$this->gotoProject('ProjectA');
-		$this->clickAndWait('Link=Advanced search');
+		$this->clickAndWait('link=Advanced search');
 		$this->clickAndWait("//input[@class='checkthemall']");
 		$this->type("//main[@id='maindiv']//input[@name='words']", "zongo");
 		$this->clickAndWait("//input[@name='submitbutton']");
@@ -630,7 +630,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("News2"));
 
 		$this->gotoProject('ProjectA');
-		$this->clickAndWait('Link=Advanced search');
+		$this->clickAndWait('link=Advanced search');
 		$this->clickAndWait("//input[@class='checkthemall']");
 		$this->assertFalse($this->isElementPresent("//input[@name='short_pm_checkall']"));
 		$this->assertFalse($this->isElementPresent("//input[@name='short_docman_checkall']"));
