@@ -29,6 +29,10 @@ function backports_deb {
 			echo 'deb http://archive.debian.org/debian jessie-backports main' \
 				> /etc/apt/sources.list.d/backports.list
 		fi
+		if [ ! -f /etc/apt/apt.conf.d/10no--check-valid-until ]; then
+			echo 'Acquire::Check-Valid-Until "0";' \
+				> /etc/apt/apt.conf.d/10no--check-valid-until
+		fi
 	fi
 }
 
