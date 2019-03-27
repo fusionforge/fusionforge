@@ -42,7 +42,7 @@ if [ -e /etc/debian_version ]; then
 		# Additional components for testsuite
 		$APT install fusionforge-shell fusionforge-scm fusionforge-ftp \
 		fusionforge-plugin-scmcvs fusionforge-plugin-scmsvn fusionforge-plugin-scmgit fusionforge-plugin-scmbzr fusionforge-plugin-scmhg \
-#		fusionforge-plugin-mediawiki \
+		fusionforge-plugin-mediawiki \
 		fusionforge-plugin-moinmoin \
 		fusionforge-plugin-blocks fusionforge-plugin-taskboard \
 		fusionforge-plugin-message fusionforge-plugin-repositoryapi
