@@ -41,7 +41,7 @@ if [ -e /etc/debian_version ]; then
 			libmarkdown-php \
 			vsftpd \
 			fonts-dejavu-core
-# 		apt-get -y install mediawiki -t jessie-backports
+		apt-get -y install mediawiki -t jessie-backports
 	else
 		apt-get install -y make gettext php-cli php-pgsql php-htmlpurifier php-http php-text-captcha \
 			libapache2-mpm-itk libapache2-mod-svn \
@@ -95,10 +95,9 @@ fi
 		install-plugin-scmcvs install-plugin-scmsvn install-plugin-scmgit install-plugin-scmbzr install-plugin-scmhg \
 		install-plugin-blocks install-plugin-moinmoin \
 		install-plugin-taskboard install-plugin-message \
-		install-plugin-repositoryapi
-	if [ -e /etc/centos-release -o -e /etc/SuSE-release ]; then
-		make install-plugin-mediawiki
-	fi
+		install-plugin-repositoryapi \
+		install-plugin-mediawiki
+
 	if [ -e /etc/centos-release -o -e /etc/debian-release ]; then
 		make install-plugin-phptextcaptcha
 	fi

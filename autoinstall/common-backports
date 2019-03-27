@@ -26,7 +26,7 @@ function backports_deb {
 	if grep -q ^8 /etc/debian_version; then
 		# Install Mediawiki from jessie-backport
 		if [ ! -f /etc/apt/sources.list.d/backports.list ]; then
-			echo 'deb http://http.debian.net/debian jessie-backports main' \
+			echo 'deb http://archive.debian.org/debian jessie-backports main' \
 				> /etc/apt/sources.list.d/backports.list
 		fi
 	fi
