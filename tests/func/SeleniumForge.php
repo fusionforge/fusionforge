@@ -656,6 +656,10 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 		return $this->assertTrue($this->waitForTextPresent($string));
 	}
 
+	function assertTextNotPresent($string) {
+		return $this->assertFalse($this->isTextPresent($string));
+	}
+
 	function check($string) {
 		$myelement = $this->byXPath($string);
 		if (!$myelement->attribute('checked')) {
