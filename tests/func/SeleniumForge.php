@@ -701,6 +701,16 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 		}
 		$this->frame($myelement);
 	}
+
+	function assertElementPresent($string) {
+		try {
+			if (preg_match('/^\/\/[a-z]/', $string)) {
+				$myelement = $this->byXPath($string);
+				return true;
+			}
+		} catch(Exception $e) {}
+		return false;
+	}
 }
 
 // Local Variables:
