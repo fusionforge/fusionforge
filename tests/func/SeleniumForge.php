@@ -688,6 +688,15 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 			return $this->byXPath($string)->attribute('value');
 		}
 	}
+
+	function selectFrame($string) {
+		if (preg_match('/^id=/', $string)) {
+			$myelement = $this->byId(substr($name, 3));
+		} else {
+			$myelement = NULL;
+		}
+		$this->frame($myelement);
+	}
 }
 
 // Local Variables:
