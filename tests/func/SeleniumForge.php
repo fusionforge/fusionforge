@@ -691,7 +691,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 
 	function selectFrame($string) {
 		if (preg_match('/^id=/', $string)) {
-			$myelement = $this->byId(substr($name, 3));
+			$myelement = $this->byId(substr($string, 3));
 		} else {
 			$myelement = NULL;
 		}
