@@ -48,6 +48,7 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
+		$this->clickAndWait("jquery#tabber-gitsmarthttp");
 		$p = $this->getText("//kbd[contains(.,'git clone http') and contains(.,'".FORGE_ADMIN_USERNAME."@')]");
 		$p = preg_replace(",^git clone ,", "", $p);
 		$p = preg_replace(",@,", ":".FORGE_ADMIN_PASSWORD."@", $p);
