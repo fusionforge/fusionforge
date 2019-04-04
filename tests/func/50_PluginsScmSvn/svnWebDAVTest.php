@@ -50,6 +50,7 @@ class ScmSvnWebDAVTest extends FForge_SeleniumTestCase
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
+		$this->clickAndWait("jquery#tabber-svndav");
 		$p = $this->getText("//kbd[contains(.,'svn checkout --username ".FORGE_ADMIN_USERNAME." http')]");
 		$p = preg_replace(",^svn checkout --username ".FORGE_ADMIN_USERNAME." ,", "", $p);
 
