@@ -54,7 +54,7 @@ $MonitorElementObject = new MonitorElement('forum');
 if ($group_id) {
 	$monitoredForumsIdsArray = $MonitorElementObject->getMonitoredIdsByGroupIdByUserIdInArray($group_id, $user_id);
 } else {
-	$monitoredForumsIdsArray = $MonitorElementObject->getMonitedByUserIdInArray($user_id);
+	$monitoredForumsIdsArray = $MonitorElementObject->getMonitoredByUserIdInArray($user_id);
 }
 if (!is_array($monitoredForumsIdsArray)) {
 	echo $HTML->error_msg($MonitorElementObject->getErrorMessage());

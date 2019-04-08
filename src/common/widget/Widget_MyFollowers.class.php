@@ -39,7 +39,7 @@ require_once $gfcommon.'include/MonitorElement.class.php';
 	function getContent() {
 		global $HTML;
 		$monitorUser = new MonitorElement('user');
-		$monitoredUserIds = $monitorUser->getMonitedByUserIdInArray(user_getid());
+		$monitoredUserIds = $monitorUser->getMonitoredByUserIdInArray(user_getid());
 		$followerIds = $monitorUser->getMonitorUsersIdsInArray(user_getid());
 		if (!(is_array($monitoredUserIds) && count($monitoredUserIds) > 0) && !(is_array($followerIds) && count($followerIds) > 0)) {
 			echo $HTML->warning_msg(_('You are not following any user and not followed by any.'));

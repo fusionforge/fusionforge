@@ -270,7 +270,7 @@ class MonitorElement extends FFError {
 		return false;
 	}
 
-	function getMonitedByUserIdInArray($who = 0) {
+	function getMonitoredByUserIdInArray($who = 0) {
 		if ($who && isset($this->_getMonitoredByUserIdInArrayQuery)) {
 			$result = db_query_params($this->_getMonitoredByUserIdInArrayQuery, array($who));
 			if ($result || db_numrows($result) >= 0) {
