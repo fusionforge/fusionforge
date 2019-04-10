@@ -1826,13 +1826,23 @@ Email: %3$s
 	}
 
 	/**
-	 * getMonitorIds - get user ids monitoring this user.
+	 * getMonitorIds - get user ids monitored by this user.
 	 *
-	 * @return	array of user ids monitoring this user.
+	 * @return	array of user ids monitored by this user.
 	 */
 	function getMonitorIds() {
 		$MonitorElementObject = new MonitorElement('user');
 		return $MonitorElementObject->getMonitorUsersIdsInArray($this->getID());
+	}
+
+	/**
+	 * getMonitorByIds - get user ids monitoring this user.
+	 *
+	 * @return	array of user ids monitoring this user.
+	 */
+	function getMonitorByIds() {
+		$MonitorElementObject = new MonitorElement('user');
+		return $MonitorElementObject->getMonitoredByUserIdInArray($this->getID());
 	}
 
 	/**
