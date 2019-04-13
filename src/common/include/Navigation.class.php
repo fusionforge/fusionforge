@@ -245,6 +245,7 @@ class Navigation extends FFError {
 				|| strstr($request_uri, '/register/')
 				|| strstr($request_uri, '/themes/')
 				|| strstr($request_uri, '/forum/myforums.php')
+				|| strstr($request_uri, '/widgets/widgets.php?owner=u')
 				)
 			{
 				$selected = count($menu['urls'])-1;
