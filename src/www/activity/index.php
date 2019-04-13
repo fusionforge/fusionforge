@@ -247,7 +247,9 @@ echo $HTML->closeForm();
 			}
 
 			if ($last_day != strftime($date_format, $arr['activity_date'])) {
-				echo '<tr class="tableheading"><td colspan="3">'.strftime($date_format, $arr['activity_date']).'</td></tr>';
+				$cells = array();
+				$cells[] = array(strftime($date_format, $arr['activity_date']), 'colspan' => 3);
+				echo $HTML->multiTableRow(array('class' => 'tableheading'), $cells);
 				$last_day=strftime($date_format, $arr['activity_date']);
 			}
 			$cells = array();
