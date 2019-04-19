@@ -50,6 +50,7 @@ class ScmGitSSHTest extends FForge_SeleniumTestCase
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
+		$this->clickAndWait("jquery#tabber-gitssh");
 		$p = $this->getText("//kbd[contains(.,'git clone git+ssh')]");
 		$p = preg_replace(",^git clone ,", "", $p);
 
