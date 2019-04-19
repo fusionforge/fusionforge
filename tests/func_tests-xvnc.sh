@@ -18,9 +18,11 @@ then
 	fi
 	if type apt-get >/dev/null 2>&1
 	then
-	    if apt show tigervnc-standalone-server ; then
+	    if apt show tigervnc-standalone-server > /dev/null ; then
+		echo "Installing tigervnc-standalone-server and tigervnc-common"
 		apt-get -y install tigervnc-standalone-server tigervnc-common
 	    else
+		echo "Installing legacy vnc4server"
 		apt-get -y install vnc4server
 	    fi
 	    apt-get -y install xfonts-base
