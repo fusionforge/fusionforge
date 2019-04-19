@@ -115,7 +115,9 @@ install_selenium() {
 	grep -q "^$(hostname -i).*$(forge_get_config scm_host)" /etc/hosts || sed -i -e "s/^$(hostname -i).*/& $(forge_get_config scm_host)/" /etc/hosts
 
 	#fix https://github.com/giorgiosironi/phpunit-selenium/issues/427
-	patch -N /usr/share/*/PHPUnit/Extensions/Selenium2TestCase/Element.php <<'EOF' || true
+	for i in /usr/share/*/PHPUnit/Extensions/Selenium2TestCase/Element.php ./local/share/php/vendor/phpunit/phpunit-selenium/PHPUnit/Extensions/Selenium2TestCase/Element.php ; do
+	    if [ -e "$i" ] ; then
+	patch -N "$i" <<'EOF' || true
 --- Element.php.dist 2014-11-02 09:23:27.000000000 +0000
 +++ Element.php     2019-01-15 15:00:44.034513685 +0000
 @@ -77,10 +77,21 @@
@@ -143,6 +145,8 @@ install_selenium() {
      }
 
 EOF
+	    fi
+	done
 }
 
 # Mitigate testsuite timeouts, cf.
