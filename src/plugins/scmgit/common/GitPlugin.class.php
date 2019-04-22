@@ -610,7 +610,7 @@ control over it to the project's administrator.");
 		$rootdir = forge_get_config('repos_path', 'scmgit');
 		fwrite($f, "\$projectroot = '$rootdir';\n");
 		fwrite($f, "\$projects_list = '$config_dir/gitweb.list';\n");
-		fwrite($f, "\$anon_clone_url = '". util_make_url('/anonscm/git') . "';\n");
+		fwrite($f, "\$anon_clone_url = '".forge_get_config('scm_host').'/anonscm/git'. "';\n");
 		fwrite($f, "\$logo = '". util_make_url('/plugins/scmgit/git-logo.png') . "';\n");
 		fwrite($f, "\$favicon = '". util_make_url('/plugins/scmgit/git-favicon.png')."';\n");
 		fwrite($f, "\$stylesheet = '". util_make_url('/plugins/scmgit/gitweb.css')."';\n");
@@ -624,7 +624,7 @@ control over it to the project's administrator.");
 
 		fwrite($f, "\$per_request_config = sub {\n");
 
-		fwrite($f, "push @git_base_url_list, qq,". util_make_url('/anonscm/git') .",;\n");
+		fwrite($f, "push @git_base_url_list, qq,".forge_get_config('scm_host').'/anonscm/git'.",;\n");
 
 		$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
 		if (forge_get_config('use_smarthttp', 'scmgit')) {
