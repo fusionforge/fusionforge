@@ -610,12 +610,12 @@ control over it to the project's administrator.");
 		$rootdir = forge_get_config('repos_path', 'scmgit');
 		fwrite($f, "\$projectroot = '$rootdir';\n");
 		fwrite($f, "\$projects_list = '$config_dir/gitweb.list';\n");
-		fwrite($f, "\$anon_clone_url = '". util_make_url('/anonscm/git') . "';\n");
-		fwrite($f, "\$logo = '". util_make_url('/plugins/scmgit/git-logo.png') . "';\n");
-		fwrite($f, "\$favicon = '". util_make_url('/plugins/scmgit/git-favicon.png')."';\n");
-		fwrite($f, "\$stylesheet = '". util_make_url('/plugins/scmgit/gitweb.css')."';\n");
-		fwrite($f, "\$javascript = '". util_make_url('/plugins/scmgit/gitweb.js')."';\n");
-		fwrite($f, "\$site_html_head_string = '<script type=\"text/javascript\" src=\"". util_make_url('/scripts/iframe-resizer/iframeResizer.contentWindow.js'). "\" />';\n");
+		fwrite($f, "\$anon_clone_url = '".forge_get_config('scm_host').'/anonscm/git'."';\n");
+		fwrite($f, "\$logo = '".forge_get_config('scm_host').'/plugins/scmgit/git-logo.png'."';\n");
+		fwrite($f, "\$favicon = '".forge_get_config('scm_host').'/plugins/scmgit/git-favicon.png'."';\n");
+		fwrite($f, "\$stylesheet = '".forge_get_config('scm_host').'/plugins/scmgit/gitweb.css'."';\n");
+		fwrite($f, "\$javascript = '".forge_get_config('scm_host').'/plugins/scmgit/gitweb.js'."';\n");
+		fwrite($f, "\$site_html_head_string = '<script type=\"text/javascript\" src=\"".forge_get_config('scm_host').'/scripts/iframe-resizer/iframeResizer.contentWindow.js'. "\" />';\n");
 		fwrite($f, "\$prevent_xss = 'true';\n");
 		fwrite($f, "\$site_footer = '".forge_get_config('source_path')."/plugins/scmgit/www/gitweb_footer.html';\n");
 		fwrite($f, "\$feature{'actions'}{'default'} = [('project home', '" .
@@ -624,7 +624,7 @@ control over it to the project's administrator.");
 
 		fwrite($f, "\$per_request_config = sub {\n");
 
-		fwrite($f, "push @git_base_url_list, qq,". util_make_url('/anonscm/git') .",;\n");
+		fwrite($f, "push @git_base_url_list, qq,". forge_get_config('scm_host').('/anonscm/git') .",;\n");
 
 		$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
 		if (forge_get_config('use_smarthttp', 'scmgit')) {
