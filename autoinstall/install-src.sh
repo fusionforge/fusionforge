@@ -43,7 +43,7 @@ if [ -e /etc/debian_version ]; then
 			fonts-dejavu-core
 		apt-get -y install mediawiki -t jessie-backports
 	else
-		apt-get install -y make gettext php-cli php-pgsql php-htmlpurifier php-http php-text-captcha \
+		apt-get install -y make gettext php-cli php-pgsql php-htmlpurifier php-http php-text-captcha php-soap \
 			libapache2-mpm-itk libapache2-mod-svn \
 			libapache2-mod-php \
 			apache2 postgresql postgresql-contrib libnss-pgsql2 unscd \
