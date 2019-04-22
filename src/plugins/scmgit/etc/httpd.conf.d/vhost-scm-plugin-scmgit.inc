@@ -9,6 +9,12 @@ SetEnv GIT_HTTP_EXPORT_ALL
   Require all granted
 </Directory>
 
+<Directory ${FF__core__source_path}>
+  Require all granted
+</Directory>
+Alias /scripts/iframe-resizer/ ${FF__core__source_path}/vendor/iframe-resizer/
+Alias /plugins/scmgit/ ${FF__core__source_path}/www/plugins/scmgit/
+
 # Pass supported URLs to git-http-backend, leave the rest to Apache
 # Allows efficiency + directory	browsing (debugging) - cf. git-http-backend(1)
 ScriptAliasMatch \
