@@ -47,13 +47,15 @@ the configuration file.");
 		global $gfconfig;
 		switch($hookname) {
 			case 'search_engines':
-				$externalSearchEngines = json_decode (file_get_contents(forge_get_config ('engines', 'externalsearch'))) ;
-				foreach($externalSearchEngines AS $name => $url) {
-					$type = SEARCH__TYPE_IS_EXTERNAL.'_'.$name;
-					$searchManager->addSearchEngine(
-						$type,
-						new ExternalSearchEngine($type, $name, str_replace('%web_host%',forge_get_config('web_host'),$url)
-							));
+				if (is_file(forge_get_config('engines', 'externalsearch'))) {
+					$externalSearchEngines = json_decode (file_get_contents(forge_get_config ('engines', 'externalsearch'))) ;
+					foreach($externalSearchEngines AS $name => $url) {
+						$type = SEARCH__TYPE_IS_EXTERNAL.'_'.$name;
+						$searchManager->addSearchEngine(
+							$type,
+							new ExternalSearchEngine($type, $name, str_replace('%web_host%',forge_get_config('web_host'),$url)
+								));
+					}
 				}
 				break;
 		}
