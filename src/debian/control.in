@@ -79,7 +79,7 @@ Description: collaborative development tool - database (remote)
 
 Package: fusionforge-web
 Architecture: all
-Depends: fusionforge-common (=${source:Version}), fusionforge-db-local | fusionforge-db, libapache2-mpm-itk | apache2-mpm-itk, php-cli | php5-cli, libapache2-mod-php | libapache2-mod-php5, libphp-simplepie, php-http, php-http-webdav-server, libmarkdown-php, libjs-jquery-livequery, python, poppler-utils, openssl, ${misc:Depends}
+Depends: fusionforge-common (=${source:Version}), fusionforge-db-local | fusionforge-db, apache2, libapache2-mpm-itk | apache2-mpm-itk, php-cli | php5-cli, libapache2-mod-php | libapache2-mod-php5, libphp-simplepie, php-http, php-http-webdav-server, libmarkdown-php, libjs-jquery-livequery, python, poppler-utils, openssl, ${misc:Depends}
 Recommends: locales-all, unoconv
 Description: collaborative development tool - web part (using Apache)
  FusionForge provides many tools to aid collaboration in a

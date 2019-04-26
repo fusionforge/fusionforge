@@ -116,6 +116,10 @@ case "$1" in
 				a2enmod mpm_itk
 				a2enmod mod_access_compat
 			else
+				if grep -q ^9 /etc/debian_version; then
+					a2dismod mpm_event
+					a2enmod mpm_itk
+				fi
 				a2enmod php7.0 || a2enmod php5
 			fi
 			a2enmod ssl
