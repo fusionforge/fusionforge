@@ -105,6 +105,11 @@ case $HOST in
 	VM=debian8
 	INSTALL_OS=debian
 	;;
+    debian9.local)
+	export DIST=stretch
+	VM=debian9
+	INSTALL_OS=debian
+	;;
     centos5.local)
 	VM=centos5
 	INSTALL_OS=centos
@@ -118,8 +123,8 @@ case $HOST in
 	INSTALL_OS=centos
 	;;
     *)
-	export DIST=jessie
-	VM=debian8
+	export DIST=stretch
+	VM=debian9
 	INSTALL_OS=debian
 	;;
 esac
