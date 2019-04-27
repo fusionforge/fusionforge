@@ -41,12 +41,15 @@ if [ -e /etc/debian_version ]; then
 
 		# Additional components for testsuite
 		$APT install fusionforge-shell fusionforge-scm fusionforge-ftp \
-		fusionforge-plugin-scmcvs fusionforge-plugin-scmsvn fusionforge-plugin-scmgit fusionforge-plugin-scmbzr fusionforge-plugin-scmhg \
+		fusionforge-plugin-scmcvs fusionforge-plugin-scmsvn fusionforge-plugin-scmgit fusionforge-plugin-scmhg \
 		fusionforge-plugin-mediawiki \
 		fusionforge-plugin-moinmoin \
 		fusionforge-plugin-blocks fusionforge-plugin-taskboard \
 		fusionforge-plugin-message fusionforge-plugin-repositoryapi
 		$APT install dpkg-dev
+		if grep -q ^8 /etc/debian_version; then
+			$APT install fusionforge-plugin-scmbzr
+		fi
 		if ! dpkg-vendor --is Ubuntu; then
 			apt-get install locales-all  # https://bugs.launchpad.net/ubuntu/+source/glibc/+bug/1394929
 		fi
