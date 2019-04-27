@@ -35,6 +35,7 @@ class ScmBzrTest extends FForge_SeleniumTestCase
 	function testScmBzr()
 	{
 		$this->skip_on_src_installs();
+		$this->skip_on_deb_installs();
 
 		$this->loadAndCacheFixture();
 
