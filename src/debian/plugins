@@ -1,5 +1,5 @@
 Package: fusionforge-plugin-scmgit
-Depends: git, xinetd, rsync
+Depends: git, xinetd, rsync, libcgi-pm-perl
 Recommends: fusionforge-scm
 
 Package: fusionforge-plugin-scmsvn
