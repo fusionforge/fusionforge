@@ -1,8 +1,8 @@
 FusionForge X.y:
 * Widget HomeLatestDiaryNotes: new widget for Forge home page to display 5 latest public Diary Notes across the forge (TrivialDev)
-* Diary & Notes: support markdown
-* Diary & Notes: support crossref
-* Utils: crossref, support diary [Nxxx] and Project [Pxxx]
+* Diary & Notes: support markdown (TrivialDev)
+* Diary & Notes: support crossref (TrivialDev)
+* Utils: crossref, support diary [Nxxx] and Project [Pxxx] (TrivialDev)
 
 FusionForge 6.1.1:
 * Search Engine: fix PHP notice in SearchManager.class.php [#908] (TrivialDev)
