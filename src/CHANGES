@@ -1,7 +1,9 @@
 FusionForge 6.1.1:
+* Search Engine: fix PHP notice in SearchManager.class.php [#908] (TrivialDev)
+* Plugin Scmhook: fix scmhook commitEmail for scmhg broken [#903] (TrivialDev)
+* Plugin Scmsvn: fix <reponame>_scmsvn_paths.txt support [#906] (TrivialDev)
+* Plugin Scmgit: fix wrong host for js, css inclusion [#909] (TrivialDev)
 * Widget User Page: fix owner test to ensure the user is the owner of the layout.
-* Plugin Scmhook: fix scmhook commitEmail for scmhg broken [#903]
-* Plugin Scmsvn: fix <reponame>_scmsvn_paths.txt support [#906]
 
 FusionForge 6.1:
 * Accounts: minimum password length is now 8 (Sylvain Beucler)
