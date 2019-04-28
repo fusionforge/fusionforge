@@ -610,12 +610,13 @@ control over it to the project's administrator.");
 		$rootdir = forge_get_config('repos_path', 'scmgit');
 		fwrite($f, "\$projectroot = '$rootdir';\n");
 		fwrite($f, "\$projects_list = '$config_dir/gitweb.list';\n");
-		fwrite($f, "\$anon_clone_url = '".forge_get_config('scm_host').'/anonscm/git'."';\n");
-		fwrite($f, "\$logo = '".forge_get_config('scm_host').'/plugins/scmgit/git-logo.png'."';\n");
-		fwrite($f, "\$favicon = '".forge_get_config('scm_host').'/plugins/scmgit/git-favicon.png'."';\n");
-		fwrite($f, "\$stylesheet = '".forge_get_config('scm_host').'/plugins/scmgit/gitweb.css'."';\n");
-		fwrite($f, "\$javascript = '".forge_get_config('scm_host').'/plugins/scmgit/gitweb.js'."';\n");
-		fwrite($f, "\$site_html_head_string = '<script type=\"text/javascript\" src=\"".forge_get_config('scm_host').'/scripts/iframe-resizer/iframeResizer.contentWindow.js'. "\" />';\n");
+		$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
+		fwrite($f, "\$anon_clone_url = '".$protocol.forge_get_config('scm_host').'/anonscm/git'."';\n");
+		fwrite($f, "\$logo = '".$protocol.forge_get_config('scm_host').'/plugins/scmgit/git-logo.png'."';\n");
+		fwrite($f, "\$favicon = '".$protocol.forge_get_config('scm_host').'/plugins/scmgit/git-favicon.png'."';\n");
+		fwrite($f, "\$stylesheet = '".$protocol.forge_get_config('scm_host').'/plugins/scmgit/gitweb.css'."';\n");
+		fwrite($f, "\$javascript = '".$protocol.forge_get_config('scm_host').'/plugins/scmgit/gitweb.js'."';\n");
+		fwrite($f, "\$site_html_head_string = '<script type=\"text/javascript\" src=\"".$protocol.forge_get_config('scm_host').'/scripts/iframe-resizer/iframeResizer.contentWindow.js'. "\" />';\n");
 		fwrite($f, "\$prevent_xss = 'true';\n");
 		fwrite($f, "\$site_footer = '".forge_get_config('source_path')."/plugins/scmgit/www/gitweb_footer.html';\n");
 		fwrite($f, "\$feature{'actions'}{'default'} = [('project home', '" .
@@ -626,7 +627,6 @@ control over it to the project's administrator.");
 
 		fwrite($f, "push @git_base_url_list, qq,".forge_get_config('scm_host').'/anonscm/git'.",;\n");
 
-		$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
 		if (forge_get_config('use_smarthttp', 'scmgit')) {
 			fwrite($f, "if (defined \$ENV{ITKUID} && \$ENV{ITKUID} ne '".forge_get_config('apache_user')."') { push @git_base_url_list, qq,$protocol://\$ENV{ITKUID}\@".forge_get_config('scm_host')."/authscm/\$ENV{ITKUID}/git,; }\n");
 		}
