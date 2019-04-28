@@ -122,7 +122,7 @@ class SearchManager {
 		$groupForumSE  = new ForumsGroupSearchEngine();
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_FORUMS,
-			$groupForumSE;
+			$groupForumSE
 		);
 		$groupTaskSE = new TasksGroupSearchEngine();
 		$this->addSearchEngine(
