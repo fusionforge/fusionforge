@@ -63,8 +63,8 @@ class SearchManager {
 		return $this->parametersValues;
 	}
 
-	function addSearchEngine($type, &$searchEngine, $format = SEARCH__OUTPUT_HTML) {
-		$this->searchEngines[$format][$type] =& $searchEngine;
+	function addSearchEngine($type, $searchEngine, $format = SEARCH__OUTPUT_HTML) {
+		$this->searchEngines[$format][$type] = $searchEngine;
 	}
 
 	function addParameter($parameterName) {
@@ -152,7 +152,7 @@ class SearchManager {
 		$ffSESoft = new GFSearchEngine(SEARCH__TYPE_IS_SOFTWARE, 'ProjectHtmlSearchRenderer', _('Projects'));
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_SOFTWARE,
-			$gfSESoft
+			$ffSESoft
 		);
 		$ffSEPeople = new GFSearchEngine(SEARCH__TYPE_IS_PEOPLE, 'PeopleHtmlSearchRenderer', _('People'));
 		$this->addSearchEngine(
