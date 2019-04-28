@@ -4,6 +4,7 @@
  *
  * Copyright 2004 (c) Guillaume Smet
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright 2019, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -96,72 +97,87 @@ class SearchManager {
 
 	function loadSearchEngines() {
 		// Specific search engines
+		$artifactSE = new ArtifactSearchEngine();
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_ARTIFACT,
-			new ArtifactSearchEngine()
+			$artifactSE
 		);
+		$forumSE = new ForumSearchEngine();
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_FORUM,
-			new ForumSearchEngine()
+			$forumSE
 		);
 
 		// Project search engines
+		$groupSE = new GroupSearchEngine(SEARCH__TYPE_IS_FULL_PROJECT, 'FullProjectHtmlSearchRenderer', _('Search the entire project'));
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_FULL_PROJECT,
-			new GroupSearchEngine(SEARCH__TYPE_IS_FULL_PROJECT, 'FullProjectHtmlSearchRenderer', _('Search the entire project'))
+			$groupSE
 		);
+		$groupTrackerSE = new TrackersGroupSearchEngine();
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_TRACKERS,
-			new TrackersGroupSearchEngine()
+			$groupTrackerSE
 		);
+		$groupForumSE  = new ForumsGroupSearchEngine();
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_FORUMS,
-			new ForumsGroupSearchEngine()
+			$groupForumSE;
 		);
+		$groupTaskSE = new TasksGroupSearchEngine();
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_TASKS,
-			new TasksGroupSearchEngine()
+			$groupTaskSE
 		);
+		$groupFRSSE = new FrsGroupSearchEngine();
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_FRS,
-			new FrsGroupSearchEngine()
+			$groupFRSSE
 		);
+		$groupDocsSE = new DocsGroupSearchEngine();
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_DOCS,
-			new DocsGroupSearchEngine()
+			$groupDocsSE
 		);
+		$groupNewsSE = new NewsGroupSearchEngine();
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_NEWS,
-			new NewsGroupSearchEngine()
+			$groupNewsSE
 		);
 
 		# Hook to be able to load new search engine
 		plugin_hook_by_reference('group_search_engines', $this);
 
 		// Global search engine
+		$ffSESoft = new GFSearchEngine(SEARCH__TYPE_IS_SOFTWARE, 'ProjectHtmlSearchRenderer', _('Projects'));
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_SOFTWARE,
-			new GFSearchEngine(SEARCH__TYPE_IS_SOFTWARE, 'ProjectHtmlSearchRenderer', _('Projects'))
+			$gfSESoft
 		);
+		$ffSEPeople = new GFSearchEngine(SEARCH__TYPE_IS_PEOPLE, 'PeopleHtmlSearchRenderer', _('People'));
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_PEOPLE,
-			new GFSearchEngine(SEARCH__TYPE_IS_PEOPLE, 'PeopleHtmlSearchRenderer', _('People'))
+			$ffSEPeople
 		);
+		$ffSEAllDocs = new GFSearchEngine(SEARCH__TYPE_IS_ALLDOCS, 'DocsAllHtmlSearchRenderer', _('Documents'));
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_ALLDOCS,
-			new GFSearchEngine(SEARCH__TYPE_IS_ALLDOCS, 'DocsAllHtmlSearchRenderer', _('Documents'))
+			$ffSEAllDocs
 		);
+		
 		if (forge_get_config('use_people')) {
+			$ffSESkills = new GFSearchEngine(SEARCH__TYPE_IS_SKILL, 'SkillHtmlSearchRenderer', _('Skills'));
 			$this->addSearchEngine(
 				SEARCH__TYPE_IS_SKILL,
-				new GFSearchEngine(SEARCH__TYPE_IS_SKILL, 'SkillHtmlSearchRenderer', _('Skills'))
+				$ffSESkills
 			);
 		}
 
 		// Rss search engines
+		$ffSESoftRss = new GFSearchEngine(SEARCH__TYPE_IS_SOFTWARE, 'ProjectRssSearchRenderer', _('Projects'));
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_SOFTWARE,
-			new GFSearchEngine(SEARCH__TYPE_IS_SOFTWARE, 'ProjectRssSearchRenderer', _('Projects')),
+			$ffSESoftRss,
 			SEARCH__OUTPUT_RSS
 		);
 
