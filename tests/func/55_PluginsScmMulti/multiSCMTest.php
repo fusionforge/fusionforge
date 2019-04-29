@@ -45,7 +45,6 @@ class multiSCMTest extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=Source Code Admin");
 		$this->check("//input[@name='scmengine[]' and @value='scmsvn']");
 		$this->check("//input[@name='scmengine[]' and @value='scmgit']");
-		$this->check("//input[@name='scmengine[]' and @value='scmbzr']");
 		$this->clickAndWait("submit");
 
 		$this->uploadSshKey();
@@ -53,27 +52,7 @@ class multiSCMTest extends FForge_SeleniumTestCase
 		// Run the cronjob to create repositories
 		$this->waitSystasks();
 
-        // Check Bazaar commit/push
-		$this->open(ROOT);
-		$this->clickAndWait("link=ProjectA");
-		$this->clickAndWait("link=SCM");
-		$p = $this->getText("//kbd[contains(.,'bzr checkout bzr+ssh')]");
-		$p = preg_replace(",^bzr checkout ,", "", $p);
-		$p = preg_replace(",/branchname$,", "", $p);
-		$t = exec("mktemp -d /tmp/bzrTest.XXXXXX");
-		system("bzr whoami 'admin <admin@localhost.localdomain>'");
-		system("cd $t && bzr init --quiet trunk >/dev/null", $ret);
-		$this->assertEquals(0, $ret);
-		system("echo 'this is a simple text' > $t/trunk/mytext.txt");
-		system("cd $t/trunk && bzr add --quiet && bzr commit -m'Adding file in Bazaar' --quiet", $ret);
-		system("echo 'another simple text' >> $t/trunk/mytext.txt");
-		system("cd $t/trunk && bzr add --quiet && bzr commit -m'Modifying file in Bazaar' --quiet", $ret);
-		$this->assertEquals(0, $ret);
-		system("cd $t/trunk && bzr push --quiet $p/trunk", $ret);
-		$this->assertEquals(0, $ret);
-		system("rm -fr $t");
-
-        // Check Subversion checkout/commit
+		// Check Subversion checkout/commit
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
@@ -89,7 +68,7 @@ class multiSCMTest extends FForge_SeleniumTestCase
 		$this->assertEquals(0, $ret);
 		system("rm -fr $t");
 
-        // Check Git clone/commit/push
+		// Check Git clone/commit/push
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
@@ -107,25 +86,7 @@ class multiSCMTest extends FForge_SeleniumTestCase
 		$this->assertEquals(0, $ret);
 		system("rm -fr $t");
 
-        // Check Bazaar browse
-		$this->open(ROOT);
-		$this->clickAndWait("link=ProjectA");
-		$this->clickAndWait("link=SCM");
-		$this->clickAndWait("link=Browse Bazaar Repository");
-		$this->selectFrame("id=scmbzr_iframe");
-		$this->assertTextPresent("Browsing (root)");
-		$this->clickAndWait("link=projecta");
-		$this->assertTextPresent("Browsing (root)/projecta");
-		$this->assertTextPresent("trunk");
-		$this->clickAndWait("link=trunk");
-		$this->assertTextPresent("Modifying file in Bazaar");
-		$this->assertTextNotPresent("Adding file in Bazaar");
-		$this->clickAndWait("link=Changes");
-		$this->assertTextPresent("Modifying file in Bazaar");
-		$this->assertTextPresent("Adding file in Bazaar");
-		$this->selectFrame("relative=top");
-
-        // Check Subversion browse
+		// Check Subversion browse
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
@@ -136,7 +97,7 @@ class multiSCMTest extends FForge_SeleniumTestCase
 		$this->assertTextPresent("Modifying file in Subversion");
 		$this->selectFrame("relative=top");
 
-        // Check Git browse
+		// Check Git browse
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
