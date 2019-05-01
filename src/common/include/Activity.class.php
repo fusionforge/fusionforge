@@ -184,7 +184,7 @@ class Activity extends FFError {
 		if ($docmanerror) {
 			return false;
 		}
-		return $icon .' '.$url;
+		return html_e('div', array('class' => 'box'), $icon .'&nbsp;'.$url);
 	}
 
 	function getActivitiesForProject($group_id, $begin, $end, $section) {

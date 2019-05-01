@@ -1002,7 +1002,7 @@ function util_display_user($username, $user_id = 0, $text = '', $size = 'xs') {
 	$hook_params = array('resource_type' => 'user', 'username' => $username, 'user_id' => $user_id, 'size' => $size, 'link_text' => $text, 'user_link' => '');
 	plugin_hook_by_reference('user_link_with_tooltip', $hook_params);
 	if ($hook_params['user_link'] != '') {
-		return $hook_params['user_link'];
+		return html_e('div', array('class' => 'box'), $hook_params['user_link']);
 	}
 
 	// If no plugin replaced it, then back to default standard link
@@ -1013,7 +1013,7 @@ function util_display_user($username, $user_id = 0, $text = '', $size = 'xs') {
 
 	$url = util_make_link_u($username, $user_id, $text);
 	if ($params['content']) {
-		return $params['content'].$url;
+		return html_e('div', array('class' => 'box'), $params['content'].'&nbsp;'.$url);
 	}
 	return $url;
 }

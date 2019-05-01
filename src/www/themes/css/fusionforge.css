@@ -137,6 +137,7 @@ table.listing tbody tr:nth-child(odd),
 	font-size: small;
 	font-weight: bold;
 	color: #009900;
+	font-family: arial,helvetica, sans-serif;
 }
 
 .down {
@@ -169,12 +170,6 @@ td.seltab {
 
 td.toptab {
 	background-color: #e0e0e0;
-}
-
-.up {
-	font-family: arial,helvetica, sans-serif;
-	font-size: small;
-	font-weight: bold;
 }
 
 /* generic classes
@@ -1114,4 +1109,9 @@ input[readonly], select[readonly] {
 span.insert {
 	cursor:pointer;
 	color:green;
+}
+
+.box {
+	display: flex;
+	align-items: center;
 }
