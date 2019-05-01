@@ -300,7 +300,7 @@ class Navigation extends FFError {
 			$menu['titles'][] = _('Site Admin');
 			$menu['urls'][] = util_make_uri('/admin/');
 			$menu['tooltips'][] = _('Administration Submenu to handle global configuration, users & projects.');
-			if (strstr($request_uri, '/admin/') || strstr($request_uri, 'type=globaladmin')) {
+			if (strstr($request_uri, forge_get_config('url_prefix').'/admin/') || strstr($request_uri, 'type=globaladmin')) {
 				$selected = count($menu['urls'])-1;
 			}
 		}
