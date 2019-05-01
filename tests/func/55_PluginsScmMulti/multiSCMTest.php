@@ -1,7 +1,8 @@
 <?php
 /**
- * Copyright (C) 2012 Roland Mas
- * Copyright (C) 2015  Inria (Sylvain Beucler)
+ * Copyright (C) 2012, Roland Mas
+ * Copyright (C) 2015, Inria (Sylvain Beucler)
+ * Copyright 2019, Franck Villaume -TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -28,15 +29,12 @@ class multiSCMTest extends FForge_SeleniumTestCase
 
 	function testMultiSCM()
 	{
-		$this->skip_on_src_installs();
-
 		$this->loadAndCacheFixture();
 
 		$this->changeConfig(array("core" => array("allow_multiple_scm" => "yes")));
 
 		$this->activatePlugin('scmsvn');
 		$this->activatePlugin('scmgit');
-		$this->activatePlugin('scmbzr');
 
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
@@ -56,6 +54,7 @@ class multiSCMTest extends FForge_SeleniumTestCase
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
+		$this->clickAndWait("jquery#tabber-scmsvn");
 		$p = $this->getText("//kbd[contains(.,'svn checkout svn+ssh')]");
 		$p = preg_replace(",^svn checkout ,", "", $p);
 		$t = exec("mktemp -d /tmp/svnTest.XXXXXX");
@@ -72,6 +71,7 @@ class multiSCMTest extends FForge_SeleniumTestCase
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
+		$this->clickAndWait("jquery#tabber-scmgit");
 		$p = $this->getText("//kbd[contains(.,'git clone git+ssh')]");
 		$p = preg_replace(",^git clone ,", "", $p);
 		$t = exec("mktemp -d /tmp/gitTest.XXXXXX");
@@ -90,6 +90,7 @@ class multiSCMTest extends FForge_SeleniumTestCase
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
+		$this->clickAndWait("jquery#tabber-scmsvn");
 		$this->clickAndWait("link=Browse Subversion Repository");
 		$this->selectFrame("id=scmsvn_iframe");
 		$this->assertTextPresent("trunk");
@@ -101,6 +102,7 @@ class multiSCMTest extends FForge_SeleniumTestCase
 		$this->open(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=SCM");
+		$this->clickAndWait("jquery#tabber-scmgit");
 		$this->clickAndWait("link=Browse main git repository");
 		$this->selectFrame("id=scmgit_iframe");
 		$this->assertElementPresent("//.[@class='page_footer']");
