@@ -177,8 +177,11 @@ if (!session_loggedin()) {
 	plugin_hook_by_reference("text_editor", $params);
 
 	echo html_e('h2', array(), $info_str);
-
-	echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
+	if (forge_get_config('diary_parser_type') == 'markdown') {
+		echo html_e('p', array(), sprintf(_('You can use markdown syntax in the details of your blog post. Documentation for Markdown syntax is available at <a href="%1$s">%1$s</a>.'),
+							'https://michelf.ca/projets/php-markdown/syntaxe/'));
+	}
+	echo $HTML->openForm(array('action' => '/my/diary.php', 'method' => 'post'));
 	echo html_e('input', array('type' => 'hidden', 'name' => 'form_key', 'value' => form_generate_key()));
 	echo html_e('input', array('type' => 'hidden', 'name' => $proc_str, 'value' => '1'));
 	echo html_e('input', array('type' => 'hidden', 'name' => 'diary_id', 'value' => $_diary_id));
