@@ -934,6 +934,8 @@ control over it to the project's administrator.");
 		require_once 'common/widget/WidgetLayoutManager.class.php';
 		if ($params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_USER) {
 			$params['fusionforge_widgets'][] = 'plugin_scmgit_user_myrepositories';
+		} else if ($params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_USERHOME) {
+			$params['fusionforge_widgets'][] = 'plugin_scmgit_user_userrepositories';
 		}
 		return true;
 	}
@@ -950,6 +952,9 @@ control over it to the project's administrator.");
 		if ($params['widget'] == 'plugin_scmgit_user_myrepositories') {
 			require_once $gfplugins.$this->name.'/common/scmgit_Widget_MyRepositories.class.php';
 			$params['instance'] = new scmgit_Widget_MyRepositories(WidgetLayoutManager::OWNER_TYPE_USER, $user->getId());
+		} elseif ($params['widget'] == 'plugin_scmgit_user_userrepositories') {
+			require_once $gfplugins.$this->name.'/common/scmgit_Widget_UserRepositories.class.php';
+			$params['instance'] = new scmgit_Widget_UserRepositories(WidgetLayoutManager::OWNER_TYPE_USERHOME, $user->getId());
 		}
 	}
 

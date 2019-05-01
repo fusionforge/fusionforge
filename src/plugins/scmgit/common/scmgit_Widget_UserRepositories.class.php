@@ -1,7 +1,6 @@
 <?php
 /**
- * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2019, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -22,9 +21,9 @@
 require_once 'common/widget/Widget.class.php';
 require_once 'common/widget/WidgetLayoutManager.class.php';
 
-class scmgit_Widget_MyRepositories extends Widget {
+class scmgit_Widget_UserRepositories extends Widget {
 	function __construct($owner_type, $owner_id) {
-		parent::__construct('plugin_scmgit_user_myrepositories');
+		parent::__construct('plugin_scmgit_user_userrepositories');
 		$this->setOwner($owner_id, $owner_type);
 	}
 
@@ -37,7 +36,7 @@ class scmgit_Widget_MyRepositories extends Widget {
 	}
 
 	function getDescription() {
-		return _('Get the list of URLS of your personal Git repository cloned from projects.');
+		return _('Get the list of URLS of your personal Git repository cloned from projects, limited to public Git Repositories or shared with visitors.');
 	}
 
 	function getContent() {
@@ -49,19 +48,21 @@ class scmgit_Widget_MyRepositories extends Widget {
 			if (forge_get_config('ssh_port') != 22) {
 				$ssh_port = ':'.forge_get_config('ssh_port');
 			}
-			$returnhtml = $HTML->listTableTop();
+			$returnhtml = null;
 			foreach ($GitRepositories as $GitRepository) {
 				$project = group_get_object($GitRepository);
-				$cells = array();
-				$cells[][] = '<kbd>git clone git+ssh://'.$user->getUnixName().'@'.$this->getBoxForProject($project).$ssh_port.forge_get_config('repos_path', 'scmgit').'/'.$project->getUnixName() .'/users/'. $user->getUnixName() .'.git</kbd>';
-				$cells[][] = util_make_link('/scm/browser.php?group_id='.$project->getID().'&user_id='.$user->getID(), _('Browse Git Repository'));
-				$returnhtml .= $HTML->multiTableRow(array(), $cells);
+				if (forge_check_perm('scm', $project->getID(), 'read')) {
+					$cells = array();
+					$cells[][] = '<kbd>git clone git+ssh://'.$user->getUnixName().'@' . $this->getBoxForProject($project).$ssh_port.forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/users/'. $user->getUnixName() .'.git</kbd>';
+					$cells[][] = util_make_link('/scm/browser.php?group_id='.$project->getID().'&user_id='.$user->getID(), _('Browse Git Repository'));
+					$returnhtml .= $HTML->multiTableRow(array(), $cells);
+				}
 			}
-			$returnhtml .= $HTML->listTableBottom();
-			return $returnhtml;
-		} else {
-			return $HTML->warning_msg(_('No personal git repository.'));
+			if ($returnhtml) {
+				return $HTML->listTableTop().$returnhtml.$HTML->listTableBottom();
+			}
 		}
+		return $HTML->warning_msg(_('No personal git repository.'));
 	}
 
 	function getMyRepositoriesList() {
