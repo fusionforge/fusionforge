@@ -3,6 +3,8 @@ FusionForge X.y:
 * Diary & Notes: support markdown (TrivialDev)
 * Diary & Notes: support crossref (TrivialDev)
 * Utils: crossref, support diary [Nxxx] and Project [Pxxx] (TrivialDev)
+* Developer page: use widget system, including general & scmgit widgets [#899] (TrivialDev)
+* User: followers/following mechanism (TrivialDev)
 
 FusionForge 6.1.1:
 * Search Engine: fix PHP notice in SearchManager.class.php [#908] (TrivialDev)
