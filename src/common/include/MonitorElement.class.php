@@ -128,8 +128,8 @@ class MonitorElement extends FFError {
 				$this->_clearMonitorForUserIdQuery = 'delete from user_diary_monitor where user_id = $1';
 				$this->_enableMonitoringByUserIdQuery = 'insert into user_diary_monitor (monitored_user, user_id) values ($1, $2)';
 				$this->_disableMonitoringByUserIdQuery = 'delete from user_diary_monitor where monitored_user = $1 and user_id = $2';
-				$this->_getMonitorUsersIdsInArrayQuery = 'select user_diary_monitor.user_id from user_diary_monitor, users where users.user_id = user_diary_monitor.monitored_user and user_diary_monitor.monitored_user = $1 and users.status = $2';
-				$this->_getMonitoredByUserIdInArrayQuery = 'select monitored_user from user_diary_monitor where user_id = $1';
+				$this->_getMonitorUsersIdsInArrayQuery = 'select user_diary_monitor.monitored_user from user_diary_monitor, users where users.user_id = user_diary_monitor.monitored_user and user_diary_monitor.user_id = $1 and users.status = $2';
+				$this->_getMonitoredByUserIdInArrayQuery = 'select user_diary_monitor.user_id from user_diary_monitor where user_diary_monitor.monitored_user = $1';
 				$this->_isMonitoredByUserIdQuery = 'select monitored_user from user_diary_monitor where monitored_user = $1 and user_id = $2';
 				break;
 			}
