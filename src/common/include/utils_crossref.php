@@ -177,7 +177,7 @@ function _projectid2url($id) {
 	if ($p && is_object($p) && !$p->isError()) {
 		$url = $p->getHomePage();
 		$arg['title'] = $p->getPublicName();
-		return util_make_link($url, $text, $arg);
+		return util_make_link($url, $text, $arg, true);
 	}
 	return $text;
 }
