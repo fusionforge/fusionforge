@@ -59,6 +59,7 @@ require_once $gfcommon.'widget/Widget_HomeStats.class.php';
 require_once $gfcommon.'widget/Widget_HomeTagCloud.class.php';
 require_once $gfcommon.'widget/Widget_HomeVersion.class.php';
 require_once $gfcommon.'widget/Widget_HomeRss.class.php';
+require_once $gfcommon.'widget/Widget_HomeLatestDiaryNotes.class.php';
 
 // Tracker Widgets
 require_once $gfcommon.'widget/Widget_TrackerComment.class.php';
@@ -74,7 +75,6 @@ require_once $gfcommon.'widget/Widget_UserhomeProjectInformation.class.php';
 require_once $gfcommon.'widget/Widget_UserhomePeerRatings.class.php';
 require_once $gfcommon.'widget/Widget_UserhomeActivity.class.php';
 require_once $gfcommon.'widget/Widget_UserhomeRss.class.php';
-require_once $gfcommon.'widget/Widget_HomeLatestDiaryNotes.class.php';
 
 /**
  * FusionForge Layout Widget
