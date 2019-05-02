@@ -27,6 +27,9 @@ class MessageTest extends FForge_SeleniumTestCase
 
 	function testMessage()
 	{
+		$this->skip_on_src_installs();
+		$this->skip_on_deb_installs();
+		$this->skip_on_rpm_installs();
 		$this->_activateMessagePlugin();
 
 		$this->clickAndWait("link=Site Admin");
