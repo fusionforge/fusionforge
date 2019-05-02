@@ -35,10 +35,10 @@ class MessageTest extends FForge_SeleniumTestCase
 		$this->clickAndWait("//input[@value='Save']");
 
 		$this->open( ROOT );
-		$this->assertTrue($this->isTextPresent("Forge under maintenance"));
+		$this->assertTrue($this->waitForTextPresent("Forge under maintenance"));
 
 		$this->open( ROOT . '/projects/projecta') ;
-		$this->assertTrue($this->isTextPresent("Forge under maintenance"));
+		$this->assertTrue($this->waitForTextPresent("Forge under maintenance"));
 
 		$this->clickAndWait("link=Site Admin");
 		$this->clickAndWait("link=Configure Global Message");
@@ -46,12 +46,12 @@ class MessageTest extends FForge_SeleniumTestCase
 		$this->clickAndWait("//input[@value='Save']");
 
 		$this->open( ROOT );
-		$this->assertFalse($this->isTextPresent("Forge under maintenance"));
-		$this->assertTrue($this->isTextPresent("Forge recently upgraded"));
+		$this->assertFalse($this->waitForTextPresent("Forge under maintenance"));
+		$this->assertTrue($this->waitForTextPresent("Forge recently upgraded"));
 
 		$this->open( ROOT . '/projects/projecta') ;
-		$this->assertFalse($this->isTextPresent("Forge under maintenance"));
-		$this->assertTrue($this->isTextPresent("Forge recently upgraded"));
+		$this->assertFalse($this->waitForTextPresent("Forge under maintenance"));
+		$this->assertTrue($this->waitForTextPresent("Forge recently upgraded"));
 
 		$this->clickAndWait("link=Site Admin");
 		$this->clickAndWait("link=Configure Global Message");
@@ -59,12 +59,12 @@ class MessageTest extends FForge_SeleniumTestCase
 		$this->clickAndWait("//input[@value='Save']");
 
 		$this->open( ROOT );
-		$this->assertFalse($this->isTextPresent("Forge under maintenance"));
-		$this->assertFalse($this->isTextPresent("Forge recently upgraded"));
+		$this->assertFalse($this->waitForTextPresent("Forge under maintenance"));
+		$this->assertFalse($this->waitForTextPresent("Forge recently upgraded"));
 
 		$this->open( ROOT . '/projects/projecta') ;
-		$this->assertFalse($this->isTextPresent("Forge under maintenance"));
-		$this->assertFalse($this->isTextPresent("Forge recently upgraded"));
+		$this->assertFalse($this->waitForTextPresent("Forge under maintenance"));
+		$this->assertFalse($this->waitForTextPresent("Forge recently upgraded"));
 	}
 
 	private function _activateMessagePlugin() {
