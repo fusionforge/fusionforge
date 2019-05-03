@@ -5,7 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2015-2017, Franck Villaume - TrivialDev
+ * Copyright 2015-2017,2019, Franck Villaume - TrivialDev
  * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
@@ -38,15 +38,15 @@ class ArtifactHtml extends Artifact {
 	 * @return	string
 	 */
 	function showDetails($editable = false, $editattrs = array()) {
-		global $HTML;
+		global $HTML, $gfcommon;
 		$return = '';
 		$result = $this->getDetails();
 		$result_html = util_gen_cross_ref($result, $this->ArtifactType->Group->getID());
 		$parsertype = forge_get_config('tracker_parser_type');
 		switch ($parsertype) {
 			case 'markdown':
-				require_once 'markdown.php';
-				$result_html = Markdown($result_html);
+				require_once $gfcommon.'include/Markdown.include.php';
+				$result_html = FF_Markdown($result_html);
 				break;
 			default:
 				$result_html = nl2br($result_html);
@@ -130,8 +130,8 @@ function hide_edit_button(id) {
 				$parsertype = forge_get_config('tracker_parser_type');
 				switch ($parsertype) {
 					case 'markdown':
-						require_once 'markdown.php';
-						$text = Markdown($text);
+						require_once $gfcommon.'include/Markdown.include.php';
+						$text = FF_Markdown($text);
 						break;
 					default:
 						$text = nl2br($text);

@@ -103,8 +103,8 @@ if ((!$result || $rows < 1) && (!$result2 || $rows2 < 1)) {
 			$parsertype = forge_get_config('snippet_parser_type');
 			switch ($parsertype) {
 			case 'markdown':
-				require_once 'markdown.php';
-				$result_html = Markdown(db_result($result2 ,$i ,'description'));
+				require_once $gfcommon.'include/Markdown.include.php';
+				$result_html = FF_Markdown(db_result($result2 ,$i ,'description'));
 				break;
 			default:
 				$result_html = util_make_links(nl2br(db_result($result2, $i ,'description')));
@@ -130,8 +130,8 @@ if ((!$result || $rows < 1) && (!$result2 || $rows2 < 1)) {
 			$parsertype = forge_get_config('snippet_parser_type');
 			switch ($parsertype) {
 			case 'markdown':
-				require_once 'markdown.php';
-				$result_html = Markdown(db_result($result ,$i ,'description'));
+				require_once $gfcommon.'include/Markdown.include.php';
+				$result_html = FF_Markdown(db_result($result ,$i ,'description'));
 				break;
 			default:
 				$result_html = util_make_links(nl2br(db_result($result, $i ,'description')));
