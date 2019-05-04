@@ -212,6 +212,26 @@
 }
 
 /*
+ * PAGE: Diary (eg: http://fusionforge/developer/diary.php?diary_id=<id>&diary_user=<userid>)
+ * ==========================================================================================
+ */
+#diary {
+	display: table;
+	width: 100%;
+}
+
+#diary_left {
+	float: left;
+	width: 75%;
+}
+
+#diary_right {
+	overflow : hidden;
+	padding-left: 10px;
+}
+
+
+/*
  * PAGE: docman (eg: http://fusionforge/docman/?group_id=<id>)
  * ========================================================
  */

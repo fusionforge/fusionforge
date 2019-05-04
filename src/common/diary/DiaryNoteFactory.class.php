@@ -50,9 +50,13 @@ class DiaryNoteFactory extends FFObject {
 		$this->User =& $User;
 	}
 
-	function getDiaryNoteIDs($public) {
+	function getDiaryNoteIDs($public, $limit = 0) {
 		if (is_array($this->diarynoteids)) {
-			return $this->diarynoteids;
+			if ($limit) {
+				return array_slice($this->diarynoteids, 0, $limit);
+			} else {
+				return $this->diarynoteids;
+			}
 		}
 		$qpa = false;
 		$qpa = db_construct_qpa($qpa, 'SELECT id FROM user_diary WHERE user_id = $1', array($this->User->getID()));
@@ -62,7 +66,11 @@ class DiaryNoteFactory extends FFObject {
 		$qpa = db_construct_qpa($qpa, ' ORDER BY date_posted DESC', array());
 		$res = db_query_qpa($qpa);
 		$this->diarynoteids = util_result_column_to_array($res);
-		return $this->diarynoteids;
+		if ($limit) {
+			return array_slice($this->diarynoteids, 0, $limit);
+		} else {
+			return $this->diarynoteids;
+		}
 	}
 
 	function hasNotes($public = 0) {
@@ -79,5 +87,10 @@ class DiaryNoteFactory extends FFObject {
 
 	function getUser() {
 		return $this->User;
+	}
+
+	function getArchivesTree($public) {
+		global $HTML;
+		return $HTML->information(_('No archive available'));
 	}
 }
