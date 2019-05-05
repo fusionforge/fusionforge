@@ -74,7 +74,7 @@ if ($diary_user) {
 		foreach ($diaryNoteFactoryObject->getDiaryNoteIDs(1, 10) as $diarynoteid) {
 			$cells = array();
 			$cells[][] = util_make_link('/developer/diary.php?diary_id='.$diarynoteid.'&diary_user='. $diary_user, $diaryNoteFactoryObject->getDiaryNote($diarynoteid)->getSummary());
-			$cells[][] = $diaryNoteFactoryObject->getDiaryNote($diary_id)->getDatePostedOn();
+			$cells[][] = $diaryNoteFactoryObject->getDiaryNote($diarynoteid)->getDatePostedOn();
 			echo $HTML->multiTableRow(array(), $cells);
 		}
 		echo $HTML->listTableBottom();
