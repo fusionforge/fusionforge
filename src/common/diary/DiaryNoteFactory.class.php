@@ -50,7 +50,7 @@ class DiaryNoteFactory extends FFObject {
 		$this->User =& $User;
 	}
 
-	function getDiaryNoteIDs($public, $limit = 0) {
+	function getDiaryNoteIDs($public = 0, $limit = 0) {
 		if (is_array($this->diarynoteids)) {
 			if ($limit) {
 				return array_slice($this->diarynoteids, 0, $limit);
@@ -89,8 +89,23 @@ class DiaryNoteFactory extends FFObject {
 		return $this->User;
 	}
 
-	function getArchivesTree($public) {
+	function getArchivesTree($public = 0) {
 		global $HTML;
-		return $HTML->information(_('No archive available'));
+		$qpa = false;
+		$qpa = db_construct_qpa($qpa, 'SELECT count(id), year, month FROM user_diary WHERE user_id = $1', array($this->User->getID()));
+		if ($public) {
+			$qpa = db_construct_qpa($qpa, ' AND is_public = $1', array($public));
+		}
+		$qpa = db_construct_qpa($qpa, ' GROUP BY year, month ORDER by year DESC, month DESC');
+		$res = db_query_qpa($qpa);
+		if ($res && db_numrows($res)) {
+			$liElements = array();
+			while ($arr = db_fetch_array($res)) {
+				$liElements[]['content'] = $arr[1].'/'.$arr[2].' ('.$arr[0].')';
+			}
+			return $HTML->html_list($liElements);
+		} else {
+			return $HTML->information(_('No archive available'));
+		}
 	}
 }

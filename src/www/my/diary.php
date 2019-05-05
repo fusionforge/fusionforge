@@ -57,7 +57,7 @@ if (!session_loggedin()) {
 						array($summary,
 							$details,
 							$is_public,
-							user_getid() ,
+							user_getid(),
 							$diary_id));
 			if ($res && db_affected_rows($res) > 0) {
 				$feedback .= _('Diary Updated');
@@ -68,13 +68,16 @@ if (!session_loggedin()) {
 			}
 		} elseif (getStringFromRequest('add')) {
 			//inserting a new diary entry
-			$res = db_query_params ('INSERT INTO user_diary (user_id,date_posted,summary,details,is_public) VALUES
-								($1,$2,$3,$4,$5)',
-								array(user_getid() ,
-									time() ,
+			$currenttime = time();
+			$res = db_query_params('INSERT INTO user_diary (user_id,date_posted,summary,details,is_public, year, month) VALUES
+								($1,$2,$3,$4,$5, $6, $7)',
+								array(user_getid(),
+									$currenttime,
 									$summary,
 									$details,
-									$is_public));
+									$is_public,
+									date('Y', $currenttime),
+									date('m', $currenttime)));
 			if ($res && db_affected_rows($res) > 0) {
 				$feedback .= _('Item Added');
 				if ($is_public) {
@@ -133,7 +136,7 @@ if (!session_loggedin()) {
 				}
 			} else {
 				form_release_key(getStringFromRequest("form_key"));
-				$error_msg .= _('Error Adding Item: '). db_error();
+				$error_msg .= _('Error Adding Item')._(': ').db_error();
 			}
 		}
 
