@@ -143,17 +143,17 @@ function user_personal_information($user, $compact = false, $title = false) {
 	$subtable .= $HTML->multiTableRow(array(), $subcells);
 	if (forge_get_config('use_diary') && session_loggedin() && ($user->getID() != user_getid())) {
 		if ($user->isMonitoredBy(user_getid())) {
-			$option = 'stop';
+			$action = 'deletemonitoring';
 			$titleMonitor = _('Stop monitoring this user');
 			$image = $HTML->getStopMonitoringPic($titleMonitor, '');
 		} else {
-			$option = 'start';
+			$action = 'addmonitoring';
 			$titleMonitor = _('Start monitoring this user');
 			$image = $HTML->getStartMonitoringPic($titleMonitor, '');
 		}
 		$subcells = array();
 		$subcells[][] = $titleMonitor;
-		$subcells[][] = util_make_link('/developer/monitor.php?diary_user='.$user->getID(), $image, array('title' => $titleMonitor));
+		$subcells[][] = util_make_link('/account/?action='.$action.'&diary_user='.$user->getID(), $image, array('title' => $titleMonitor));
 		$subtable .= $HTML->multiTableRow(array(), $subcells);
 	}
 	$subtable .= $HTML->listTableBottom();
