@@ -81,10 +81,10 @@ class Widget_UserhomeProjectInformation extends Widget {
 			print "\n";
 
 			if (forge_check_perm_for_user ($user, 'project_admin', $p->getID())) {
-				print '<span rev="doap:maintainer" resource="#me"></span>';
+				echo html_e('div', array('rev' => 'doap:maintainer', 'resource' => '#me'));
 			}
 			else {
-				print '<span rev="doap:developer" resource="#me"></span>';
+				echo html_e('div', array('rev' => 'doap:developer', 'resource' => '#me'));
 			}
 
 			echo $sioc_has_function_close."\n";  // sioc:has_function
