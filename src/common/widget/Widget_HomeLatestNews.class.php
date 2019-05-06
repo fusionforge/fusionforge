@@ -28,7 +28,6 @@ class Widget_HomeLatestNews extends Widget {
 	}
 	function getContent() {
 		$content = news_show_latest(GROUP_IS_NEWS, 5, true, false, false, 5);
-		$content .= util_make_link('/news/', _('Browse all news'));
 		return $content;
 	}
 
