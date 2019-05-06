@@ -158,7 +158,7 @@ if ($group_id && $group_id != GROUP_IS_NEWS) {
 		<p>
 		<strong>'.sprintf(_('If this item is on the %s home page and you edit it, it will be removed from the home page.'), forge_get_config('forge_name')).'</strong></p>';
 		echo '<p>';
-		echo '<label for="ask_frontpage">'._('Check this box if you request frontpage publication:').'</label>';
+		echo '<label for="ask_frontpage">'._('Check this box if you request frontpage publication. Only public project can be published to frontpage')._(':').'</label>';
 		echo '<input type="checkbox" id="ask_frontpage" name="ask_frontpage" value="1" checked="checked" />';
 		echo '</p>';
 		echo '<p>
