@@ -164,7 +164,7 @@ function _diarynotesid2url($id) {
 	$text = '[N'.$id.']';
 	$dn = diarynote_get_object($id);
 	if ($dn && is_object($dn) && !$dn->isError() && $dn->isPublic()) {
-		$url = '/developer/diary.php?diary_id='.$id.'&diary_user='.$dn->getUser()->getID();
+		$url = '/developer/?view=detail&diary_id='.$id.'&diary_user='.$dn->getUser()->getID();
 		$arg['title'] = $dn->getSummary();
 		return util_make_link($url, $text, $arg);
 	}

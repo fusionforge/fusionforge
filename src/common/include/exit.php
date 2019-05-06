@@ -5,6 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2019, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -80,6 +81,13 @@ function exit_no_group() {
 	exit_error(_('Permission denied.')
 				.' '
 				._('No project was chosen, project does not exist or you cannot access it.'), '');
+}
+
+/**
+ * exit_no_user() - Exit with no user chosen error
+ */
+function exit_no_user() {
+	exit_error(_('No User Selected'), 'home');
 }
 
 /**

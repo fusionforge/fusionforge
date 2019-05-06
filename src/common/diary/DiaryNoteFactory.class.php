@@ -73,6 +73,22 @@ class DiaryNoteFactory extends FFObject {
 		}
 	}
 
+	function getDIaryNoteIDsByYearAndMonth($year, $month, $public = 0, $limit = 0) {
+		$qpa = false;
+		$qpa = db_construct_qpa($qpa, 'SELECT id FROM user_diary WHERE user_id = $1 AND year = $2 AND month = $3', array($this->User->getID(), $year, $month));
+		if ($public) {
+			$qpa = db_construct_qpa($qpa, ' AND is_public = $1', array($public));
+		}
+		$qpa = db_construct_qpa($qpa, ' ORDER BY date_posted DESC', array());
+		$res = db_query_qpa($qpa);
+		$yearmonthdiarynoteids = util_result_column_to_array($res);
+		if ($limit) {
+			return array_slice($yearmonthdiarynoteids, 0, $limit);
+		} else {
+			return $yearmonthdiarynoteids;
+		}
+	}
+
 	function hasNotes($public = 0) {
 		$this->getDiaryNoteIDs($public);
 		if (is_array($this->diarynoteids) && count($this->diarynoteids)) {
@@ -101,11 +117,25 @@ class DiaryNoteFactory extends FFObject {
 		if ($res && db_numrows($res)) {
 			$liElements = array();
 			while ($arr = db_fetch_array($res)) {
-				$liElements[]['content'] = $arr[1].'/'.$arr[2].' ('.$arr[0].')';
+				$liElements[]['content'] = $arr[1].'/'.$arr[2].' '.util_make_link('/developer/?view=archivelist&diary_user='.$this->User->getID().'&year='.$arr[1].'&month='.$arr[2], '('.$arr[0].')');
 			}
 			return $HTML->html_list($liElements);
 		} else {
 			return $HTML->information(_('No archive available'));
 		}
+	}
+
+	function getLastDiaryID($public = 0) {
+		$qpa = false;
+		$qpa = db_construct_qpa($qpa, 'SELECT MAX(id) as lastid FROM user_diary WHERE user_id = $1', array($this->User->getID()));
+		if ($public) {
+			$qpa = db_construct_qpa($qpa, ' AND is_public = $1', array($public));
+		}
+		$res = db_query_qpa($qpa);
+		if ($res && db_numrows($res)) {
+			$arr = db_fetch_array($res);
+			return $arr['lastid'];
+		}
+		return false;
 	}
 }
