@@ -37,4 +37,4 @@ if ($diary_user_object && is_object($diary_user_object)) {
 } else {
 	$error_msg = _('No user to monitor selected.');
 }
-session_redirect('/account/'); 
+session_redirect('/account/');
