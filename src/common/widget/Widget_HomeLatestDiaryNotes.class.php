@@ -53,7 +53,7 @@ class Widget_HomeLatestDiaryNotes extends Widget {
 			foreach ($diaryFactory->getDiaryNoteIDs(1) as $key => $diarynoteid) {
 				if ($key < 5) {
 					$cells = array();
-					$cells[][] = util_make_link('/developer/diary.php?diary_id='.$diarynoteid.'&diary_user='. $diaryFactory->getDiaryNote($diarynoteid)->getUser()->getID(), $diaryFactory->getDiaryNote($diarynoteid)->getSummary());
+					$cells[][] = util_make_link('/developer/?diary_id='.$diarynoteid.'&view=detail&diary_user='. $diaryFactory->getDiaryNote($diarynoteid)->getUser()->getID(), $diaryFactory->getDiaryNote($diarynoteid)->getSummary());
 					$cells[][] = $diaryFactory->getDiaryNote($diarynoteid)->getDatePostedOn();
 					$cells[][] = util_display_user($diaryFactory->getDiaryNote($diarynoteid)->getUser()->getUnixName(), $diaryFactory->getDiaryNote($diarynoteid)->getUser()->getID(), $diaryFactory->getDiaryNote($diarynoteid)->getUser()->getRealName());
 					$content .= $HTML->multiTableRow(array(), $cells);
