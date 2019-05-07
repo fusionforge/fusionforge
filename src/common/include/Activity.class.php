@@ -173,7 +173,7 @@ class Activity extends FFError {
 			}
 			case 'diaryentry': {
 				$icon = '';
-				$url = util_make_link('/developer/diary.php?diary_id='.$arr['ref_id'].'&diary_user='.$arr['user_id'], $arr['description']);
+				$url = util_make_link('/developer/?diary_id='.$arr['ref_id'].'&diary_user='.$arr['user_id'].'&view=detail', $arr['description']);
 				break;
 			}
 			default: {
