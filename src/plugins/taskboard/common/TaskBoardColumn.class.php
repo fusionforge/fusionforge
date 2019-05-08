@@ -103,7 +103,7 @@ class TaskBoardColumn extends FFError {
 
 	var $drop_rules;
 
-	function TaskBoardColumn($Taskboard, $arr = false) {
+	function __construct($Taskboard, $arr = false) {
 		parent::__construct();
 		if (!$Taskboard || !is_object($Taskboard)) {
 			$this->setError('No Valid Taskboard Object');

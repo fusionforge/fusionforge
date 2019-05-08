@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
- * Copyright 2016, Stéphane-Eymeric Bredtthauer - TrivialDev
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -103,7 +103,7 @@ class TaskBoard extends FFError {
 	 */
 	var $data_array;
 
-	function TaskBoard($Group, $data = false) {
+	function __construct($Group, $data = false) {
 		parent::__construct();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(_('Invalid Project'));

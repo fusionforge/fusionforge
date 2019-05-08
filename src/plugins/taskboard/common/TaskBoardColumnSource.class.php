@@ -103,7 +103,8 @@ class TaskBoardColumnSource extends FFError {
 	/**
 	 *
 	 */
-	function TaskBoardColumnSource($arr = false) {
+	function __construct($arr = false) {
+		parent::__construct();
 		if (is_array($arr)) {
 			$this->data_array =& $arr;
 		}

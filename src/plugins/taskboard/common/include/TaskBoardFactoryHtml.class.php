@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2016, Stéphane-Eymeric Bredtthauer - TrivialDev
+ * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  *
  * This file is part of FusionForge.
  *
