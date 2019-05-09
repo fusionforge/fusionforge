@@ -123,7 +123,6 @@ function news_show_latest($group_id = 0, $limit = 10, $show_summaries = true, $a
 	if (!$result || $rows < 1) {
 		$return .= $HTML->warning_msg(_('No news found.'));
 		$return .= db_error();
-//		$return .= "</div>";
 	} else {
 		for ($i=0; $i<$rows; $i++) {
 			$t_thread_title = db_result($result,$i,'summary');
@@ -160,11 +159,11 @@ function news_show_latest($group_id = 0, $limit = 10, $show_summaries = true, $a
 				} else {
 					$return .= '<h3>'. $t_thread_title . '</h3>';
 				}
-				$return .= "<div>";
+				$return .= '<div class="box">';
 				$return .= $t_thread_author;
-				$return .= ' - ';
+				$return .= '&nbsp;-&nbsp;';
 				$return .= relative_date(db_result($result,$i,'post_date'));
-				$return .= ' - ';
+				$return .= '&nbsp;-&nbsp;';
 				$return .= $proj_name ;
 				$return .= "</div>\n";
 
