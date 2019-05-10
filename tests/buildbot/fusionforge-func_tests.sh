@@ -51,7 +51,7 @@ setup_epel_repo() {
     # EPEL REPO
     if [ ! -z "$EPEL_REPO" ] ; then
         echo "Installing specific EPEL REPO $EPEL_REPO"
-	ssh root@$HOST "cat > /etc/yum.repos.d/epel.repo" <<-EOF
+	ssh -o 'StrictHostKeyChecking=no' root@$HOST "cat > /etc/yum.repos.d/epel.repo" <<-EOF
 # Name: EPEL RPM Repository for Red Hat Enterprise \$releasever - epel
 # URL: http://fedoraproject.org/wiki/EPEL
 [epel]
@@ -64,7 +64,7 @@ gpgcheck=0
 EOF
     else
         echo "Installing standard EPEL REPO"
-	ssh root@$HOST yum install -y epel-release
+	ssh -o 'StrictHostKeyChecking=no' root@$HOST yum install -y epel-release
     fi
 }
 
@@ -72,7 +72,7 @@ setup_epel_testing_repo() {
     if [ -z "$HOST" ] ; then  echo "HOST undefined" ;exit 1; fi
     # EPEL Testing REPO
     echo "Installing EPEL Testing REPO"
-    ssh root@$HOST "cat > /etc/yum.repos.d/epel-testing.repo" <<-EOF
+    ssh -o 'StrictHostKeyChecking=no' root@$HOST "cat > /etc/yum.repos.d/epel-testing.repo" <<-EOF
 # Name: EPEL RPM Repository for Red Hat Enterprise Testing \$releasever - epel
 # URL: http://fedoraproject.org/wiki/EPEL
 [epel-testing]
@@ -149,32 +149,32 @@ start_vm $HOST
 
 # LXC post-install...
 if [ $INSTALL_OS == "debian" ]; then
-    ssh root@$HOST "echo \"deb $DEBMIRRORSEC $DIST/updates main\" > /etc/apt/sources.list.d/security.list"
-    ssh root@$HOST "echo 'APT::Install-Recommends \"false\";' > /etc/apt/apt.conf.d/01InstallRecommends"
-    ssh root@$HOST "apt-get update"
+    ssh -o 'StrictHostKeyChecking=no' root@$HOST "echo \"deb $DEBMIRRORSEC $DIST/updates main\" > /etc/apt/sources.list.d/security.list"
+    ssh -o 'StrictHostKeyChecking=no' root@$HOST "echo 'APT::Install-Recommends \"false\";' > /etc/apt/apt.conf.d/01InstallRecommends"
+    ssh -o 'StrictHostKeyChecking=no' root@$HOST "apt-get update"
 fi
 
 if [ $INSTALL_OS == "debian" ]; then
-    ssh root@$HOST "apt-get install -y rsync haveged"
+    ssh -o 'StrictHostKeyChecking=no' root@$HOST "apt-get install -y rsync haveged"
 else
-    ssh root@$HOST "yum install -y rsync"
+    ssh -o 'StrictHostKeyChecking=no' root@$HOST "yum install -y rsync"
     setup_epel_repo
-    ssh root@$HOST "yum --enablerepo=epel install -y haveged"
+    ssh -o 'StrictHostKeyChecking=no' root@$HOST "yum --enablerepo=epel install -y haveged"
 fi
 rsync -av --delete autoinstall src tests root@$HOST:/usr/src/fusionforge/
 if [ $INSTALL_METHOD = "src" ]; then
-    ssh root@$HOST "/usr/src/fusionforge/autoinstall/install-src.sh"
+    ssh -o 'StrictHostKeyChecking=no' root@$HOST "/usr/src/fusionforge/autoinstall/install-src.sh"
 else
-    ssh root@$HOST "/usr/src/fusionforge/autoinstall/build.sh"
-    ssh root@$HOST "/usr/src/fusionforge/autoinstall/install.sh"
+    ssh -o 'StrictHostKeyChecking=no' root@$HOST "/usr/src/fusionforge/autoinstall/build.sh"
+    ssh -o 'StrictHostKeyChecking=no' root@$HOST "/usr/src/fusionforge/autoinstall/install.sh"
 fi
 
 # Run tests
 retcode=0
 echo "Run phpunit test on $HOST"
-echo "export JOB_URL=$JOB_URL" | ssh root@$HOST tee -a .bashrc
-#ssh root@$HOST "TESTGLOB='func/50_PluginsScmBzr/*' /usr/src/fusionforge/tests/func_tests-xvnc.sh $INSTALL_METHOD/$INSTALL_OS" || retcode=$?
-ssh root@$HOST "/usr/src/fusionforge/tests/func_tests-xvnc.sh $INSTALL_METHOD/$INSTALL_OS $*" || retcode=$?
+echo "export JOB_URL=$JOB_URL" | ssh -o 'StrictHostKeyChecking=no' root@$HOST tee -a .bashrc
+#ssh -o 'StrictHostKeyChecking=no' root@$HOST "TESTGLOB='func/50_PluginsScmBzr/*' /usr/src/fusionforge/tests/func_tests-xvnc.sh $INSTALL_METHOD/$INSTALL_OS" || retcode=$?
+ssh -o 'StrictHostKeyChecking=no' root@$HOST "/usr/src/fusionforge/tests/func_tests-xvnc.sh $INSTALL_METHOD/$INSTALL_OS $*" || retcode=$?
 
 copy_logs
 
