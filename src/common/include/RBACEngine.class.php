@@ -4,7 +4,7 @@
  *
  * Copyright 2010, Roland Mas
  * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2019, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -271,6 +271,7 @@ class RBACEngine extends FFError implements PFO_RBACEngine {
 		case 'forge_read':
 		case 'approve_projects':
 		case 'approve_news':
+		case 'approve_diary':
 		case 'project_admin':
 		case 'project_read':
 		case 'tracker_admin':
@@ -427,6 +428,7 @@ class RBACEngine extends FFError implements PFO_RBACEngine {
 		case 'forge_read':
 		case 'approve_projects':
 		case 'approve_news':
+		case 'approve_diary':
 		case 'forge_stats':
 		case 'project_admin':
 			$result = array_merge ($result, $this->_getRolesIdByAllowedAction ('forge_admin', -1));

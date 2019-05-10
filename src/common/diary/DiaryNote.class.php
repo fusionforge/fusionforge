@@ -164,4 +164,32 @@ class DiaryNote extends FFObject {
 	function getID() {
 		return $this->data_array['id'];
 	}
+
+	function getLink() {
+		return '/developer/?view=detail&diary_id='.$this->getID().'&diary_user='.$this->getUser()->getID();
+	}
+
+	function getAbstract() {
+		global $gfcommon;
+		//get the first paragraph of the diary note.
+		if (strstr($this->data_array['details'], '<br/>')) {
+			$arr = explode('<br/>', $this->data_array['details']);
+		} else {
+			$arr = explode("\n", $this->data_array['details']);
+		}
+		$abstract = $arr[0];
+		$parsertype = forge_get_config('diary_parser_type');
+		switch ($parsertype) {
+			case 'markdown':
+				require_once $gfcommon.'include/Markdown.include.php';
+				$abstract = FF_Markdown($abstract);
+				break;
+			default:
+				$abstract = nl2br($abstract);
+		}
+		$content = html_e('div', array('class' => 'widget-sticker-header box'), html_e('div', array(),util_make_link($this->getLink(), $this->getSummary()).'&nbsp;'._('by').'&nbsp;').util_display_user($this->getUser()->getUnixname(), $this->getUser()->getID(), $this->getUser()->GetRealname()));
+		$content .= html_e('div', array('class' => 'widget-sticker-body'), $abstract.html_e('br').util_make_link($this->getLink(),_('... Read more')));
+		$content .= html_e('div', array('class' => 'widget-sticker-footer'), _('Posted')._(': ').$this->getDatePostedOn());
+		return html_e('div', array('class' => 'widget-sticker-container'), $content);
+	}
 }

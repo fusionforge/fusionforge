@@ -181,15 +181,24 @@ echo html_ac(html_ap() - 1);
 
 <?php if(forge_get_config('use_news')) {?>
 <div class="info-box">
-<h2><?php echo _('News'); ?></h2>
+<?php echo html_e('h2', array(), _('News')); ?>
 	<ul>
 		<li><?php echo util_make_link('/admin/pending-news.php', _('Pending news (moderation for front-page)')); ?></li>
+	</ul>
+</div>
+<?php }
+
+if(forge_get_config('use_diary')) {?>
+<div class="info-box">
+<?php echo html_e('h2', array(), _('Diary & Notes')); ?>
+	<ul>
+		<li><?php echo util_make_link('/admin/pending-diary.php', _('Pending diary & notes (moderation for headlines front-page)')); ?></li>
 	</ul>
 </div>
 <?php } ?>
 
 <div class="info-box">
-<h2><?php echo _('Stats'); ?></h2>
+<?php echo html_e('h2', array(), _('Stats')); ?>
 	<ul>
 		<li><?php echo util_make_link('/stats/', _('Site-Wide Stats')); ?></li>
 		<?php plugin_hook('webanalytics_admin', array()); ?>
@@ -197,7 +206,7 @@ echo html_ac(html_ap() - 1);
 </div>
 
 <div class="info-box">
-<h2><?php echo _('Trove Project Tree'); ?></h2>
+<?php echo html_e('h2', array(), _('Trove Project Tree')); ?>
 	<ul>
 		<li><?php echo util_make_link('/admin/trove/trove_cat_list.php', _('Display Trove Map')); ?></li>
 		<li><?php echo util_make_link('/admin/trove/trove_cat_add.php', _('Add to the Trove Map')); ?></li>
@@ -205,7 +214,7 @@ echo html_ac(html_ap() - 1);
 </div>
 
 <div class="info-box">
-<h2><?php echo _('Site Utilities'); ?></h2>
+<?php echo html_e('h2', array(), _('Site Utilities')); ?>
 <ul>
 	<li><?php echo util_make_link('/admin/massmail.php', sprintf(_('Mail Engine for %s Subscribers'), forge_get_config ('forge_name'))); ?></li>
 	<li><?php echo util_make_link('/admin/unsubscribe.php', forge_get_config('forge_name').' '._('Site Mailings Maintenance')); ?></li>

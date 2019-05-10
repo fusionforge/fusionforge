@@ -23,6 +23,7 @@ require_once $gfcommon.'diary/DiaryNote.class.php';
 class DiaryFactory extends FFObject {
 
 	var $diarynoteids = false;
+	var $sponsoreddiarynoteids = false;
 
 	function __construct() {
 		parent::__construct();
@@ -53,6 +54,32 @@ class DiaryFactory extends FFObject {
 			return true;
 		}
 		return false;
+	}
+
+	function hasSponsoredNotes($old_date = 0) {
+		$this->getSponsoredIDS($old_date);
+		if (is_array($this->sponsoreddiarynoteids) && count($this->sponsoreddiarynoteids)) {
+			return true;
+		}
+		return false;
+	}
+
+	function getSponsoredIDS($old_date = 0) {
+		if (is_array($this->sponsoreddiarynoteids)) {
+			return $this->sponsoreddiarynoteids;
+		}
+		if (!$old_date) {
+			$old_date = time()-60*60*24*30;
+		}
+		$res = db_query_params('SELECT user_diary.id FROM user_diary, users
+						WHERE is_public = $1
+						AND is_approved = $2
+						AND user_diary.user_id = users.user_id
+						AND users.status = $3
+						AND date_posted > $4
+						ORDER BY date_posted', array(1, 1, 'A', $old_date));
+		$this->sponsoreddiarynoteids = util_result_column_to_array($res);
+		return $this->sponsoreddiarynoteids;
 	}
 
 	function getDiaryNote($diarynote_id) {

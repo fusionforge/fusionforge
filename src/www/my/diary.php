@@ -69,15 +69,16 @@ if (!session_loggedin()) {
 		} elseif (getStringFromRequest('add')) {
 			//inserting a new diary entry
 			$currenttime = time();
-			$res = db_query_params('INSERT INTO user_diary (user_id,date_posted,summary,details,is_public, year, month) VALUES
-								($1,$2,$3,$4,$5, $6, $7)',
+			$res = db_query_params('INSERT INTO user_diary (user_id,date_posted,summary,details,is_public, year, month, is_approved) VALUES
+								($1,$2,$3,$4,$5, $6, $7, $8)',
 								array(user_getid(),
 									$currenttime,
 									$summary,
 									$details,
 									$is_public,
 									date('Y', $currenttime),
-									date('m', $currenttime)));
+									date('m', $currenttime),
+									0));
 			if ($res && db_affected_rows($res) > 0) {
 				$feedback .= _('Item Added');
 				if ($is_public) {

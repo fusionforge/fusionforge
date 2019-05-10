@@ -63,6 +63,7 @@ abstract class BaseRole extends FFError {
 			'forge_admin' => array(0, 1),
 			'approve_projects' => array(0, 1),
 			'approve_news' => array(0, 1),
+			'approve_diary' => array(0, 1),
 			'forge_stats' => array(0, 1, 2),
 
 			'project_read' => array(0, 1),
@@ -92,6 +93,7 @@ abstract class BaseRole extends FFError {
 			'forge_admin', // “God mode”: all actions allowed
 			'approve_projects', // Ability to approve pending projects
 			'approve_news', // Ability to approve news bits to the forge front page
+			'approve_diary', // Ability to approve diary notes to the forge front page
 			'forge_stats'
 			);
 
@@ -435,14 +437,14 @@ abstract class BaseRole extends FFError {
 	/**
 	 * getGlobalSettings - get the permissions for global settings
 	 *
-	 * The following sections are global : forge_admin, forge_stats, approve_projects, approve_news
+	 * The following sections are global : forge_admin, forge_stats, approve_projects, approve_news, approve_diary
 	 *
 	 * @return	array	array of permission for global settings
 	 */
 	function getGlobalSettings() {
 		$result = array();
 
-		$sections = array ('forge_admin', 'forge_stats', 'approve_projects', 'approve_news');
+		$sections = array ('forge_admin', 'forge_stats', 'approve_projects', 'approve_news', 'approve_diary');
 		foreach ($sections as $section) {
 			$result[$section][-1] = $this->getVal($section, -1);
 		}
@@ -482,6 +484,7 @@ abstract class BaseRole extends FFError {
 		case 'forge_read':
 		case 'approve_projects':
 		case 'approve_news':
+		case 'approve_diary':
 		case 'project_admin':
 			if ($this->hasGlobalPermission('forge_admin')) {
 				return 1;
@@ -669,6 +672,7 @@ abstract class BaseRole extends FFError {
 		case 'forge_read':
 		case 'approve_projects':
 		case 'approve_news':
+		case 'approve_diary':
 		case 'project_admin':
 		case 'project_read':
 		case 'tracker_admin':
@@ -966,6 +970,7 @@ abstract class BaseRole extends FFError {
 		$this->normalizePermsForSection($new_pa, 'forge_admin', -1);
 		$this->normalizePermsForSection($new_pa, 'approve_projects', -1);
 		$this->normalizePermsForSection($new_pa, 'approve_news', -1);
+		$this->normalizePermsForSection($new_pa, 'approve_diary', -1);
 		$this->normalizePermsForSection($new_pa, 'forge_stats', -1);
 
 		$hook_params = array();

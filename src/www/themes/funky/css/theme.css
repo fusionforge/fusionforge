@@ -527,6 +527,33 @@ a.topTabSelected:hover {
 	padding: 4px;
 }
 
+.widget-sticker-container {
+	padding: 4px;
+	float: left;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: white;
+	border: 1px solid #D5D5D5;
+	min-width: 300px;
+	max-width: 500px;
+}
+
+.widget-sticker-header {
+	background-color: #CDDCF3;
+	padding: 1px;
+}
+
+.widget-sticker-body {
+	position: relative;
+	padding: 2px;
+	width: 98%;
+	overflow: hidden;
+}
+
+.widget-sticker-footer {
+	padding: 1px;
+}
+
 table.listing tbody tr:nth-child(even),
 .bgcolor-grey {
 	background-color: #CDDCF3;
