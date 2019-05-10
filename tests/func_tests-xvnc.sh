@@ -21,13 +21,13 @@ then
 	    if apt show tigervnc-standalone-server > /dev/null ; then
 		echo "Installing tigervnc-standalone-server and tigervnc-common"
 		apt-get -y install tigervnc-standalone-server tigervnc-common
-		(echo '$localhost = "no";'
-		 echo '1;') >> /etc/vnc.conf
 	    else
 		echo "Installing legacy vnc4server"
 		apt-get -y install vnc4server
 	    fi
-	    apt-get -y install xfonts-base xterm
+	    (echo '$localhost = "no";'
+	     echo '1;') >> /etc/vnc.conf
+	    apt-get -y install xfonts-base xterm icewm
 	fi
 	if ! type vncserver 2>/dev/null
 	then
