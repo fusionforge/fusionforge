@@ -161,7 +161,7 @@ else
     setup_epel_repo
     ssh -o 'StrictHostKeyChecking=no' root@$HOST "yum --enablerepo=epel install -y haveged"
 fi
-rsync -av --delete autoinstall src tests root@$HOST:/usr/src/fusionforge/
+rsync -e "ssh -o StrictHostKeyChecking=no" -av --delete autoinstall src tests root@$HOST:/usr/src/fusionforge/
 if [ $INSTALL_METHOD = "src" ]; then
     ssh -o 'StrictHostKeyChecking=no' root@$HOST "/usr/src/fusionforge/autoinstall/install-src.sh"
 else
@@ -181,10 +181,10 @@ copy_logs
 if [ $retcode = 0 ] ; then
     case $INSTALL_METHOD in
 	deb)
-	    rsync -av --delete root@$HOST:/usr/src/debian-repository/local/ $WORKSPACE/packages/
+	    rsync -e "ssh -o StrictHostKeyChecking=no" -av --delete root@$HOST:/usr/src/debian-repository/local/ $WORKSPACE/packages/
 	    ;;
 	rpm)
-	    rsync -av --delete root@$HOST:/usr/src/fusionforge/build/RPMS/ $WORKSPACE/packages/
+	    rsync -e "ssh -o StrictHostKeyChecking=no" -av --delete root@$HOST:/usr/src/fusionforge/build/RPMS/ $WORKSPACE/packages/
 	    ;;
     esac
 fi
