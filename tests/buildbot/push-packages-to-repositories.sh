@@ -38,14 +38,14 @@ case $method in
 	sed -i -e "s/^Distribution:.*/Distribution: $dist-$branch/" fusionforge*changes
 	debsign -m"FusionForge buildbot" *changes
 	dput buildbot fusionforge*changes
-	rsync -av --delete-after --exclude=/mini-dinstall --exclude=/*.db --delete-excluded /var/lib/jenkins/deb/ ffbuildbot@fusionforge.org:/home/groups/fusionforge/htdocs/deb/
+	rsync -e "ssh -o StrictHostKeyChecking=no" -av --delete-after --exclude=/mini-dinstall --exclude=/*.db --delete-excluded /var/lib/jenkins/deb/ ffbuildbot@fusionforge.org:/home/groups/fusionforge/htdocs/deb/
 	;;
     rpm)
 	rpmsign --addsign $WORKSPACE/packages/*/*.rpm
 	(cd $WORKSPACE/packages/ && createrepo .)
 	gpg --detach-sign --armor $WORKSPACE/packages/repodata/repomd.xml
-	rsync -av --delete $WORKSPACE/packages/ /var/lib/jenkins/rpm/$dist-$branch/
-	rsync -av --delete-after  /var/lib/jenkins/rpm/ ffbuildbot@fusionforge.org:/home/groups/fusionforge/htdocs/rpm/
+	rsync -e "ssh -o StrictHostKeyChecking=no" -av --delete $WORKSPACE/packages/ /var/lib/jenkins/rpm/$dist-$branch/
+	rsync -e "ssh -o StrictHostKeyChecking=no" -av --delete-after  /var/lib/jenkins/rpm/ ffbuildbot@fusionforge.org:/home/groups/fusionforge/htdocs/rpm/
 	;;
     *)
 	echo "Unknown install method"
