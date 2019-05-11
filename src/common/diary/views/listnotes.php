@@ -41,14 +41,14 @@ if ($diaryNoteFactoryObject->hasNotes(1)) {
 	if ($year && $month) {
 		foreach ($diaryNoteFactoryObject->getDIaryNoteIDsByYearAndMonth($year, $month, 1) as $diarynoteid) {
 			$cells = array();
-			$cells[][] = util_make_link('/developer/?view=detail&diary_id='.$diarynoteid.'&diary_user='. $diary_user, $diaryNoteFactoryObject->getDiaryNote($diarynoteid)->getSummary());
+			$cells[][] = util_make_link($diaryNoteFactoryObject->getDiaryNote($diarynoteid)->getLink(), $diaryNoteFactoryObject->getDiaryNote($diarynoteid)->getSummary());
 			$cells[][] = $diaryNoteFactoryObject->getDiaryNote($diarynoteid)->getDatePostedOn();
 			echo $HTML->multiTableRow(array(), $cells);
 		}
 	} else {
 		foreach ($diaryNoteFactoryObject->getDiaryNoteIDs(1, 10) as $diarynoteid) {
 			$cells = array();
-			$cells[][] = util_make_link('/developer/?view=detail&diary_id='.$diarynoteid.'&diary_user='. $diary_user, $diaryNoteFactoryObject->getDiaryNote($diarynoteid)->getSummary());
+			$cells[][] = util_make_link($diaryNoteFactoryObject->getDiaryNote($diarynoteid)->getLink(), $diaryNoteFactoryObject->getDiaryNote($diarynoteid)->getSummary());
 			$cells[][] = $diaryNoteFactoryObject->getDiaryNote($diarynoteid)->getDatePostedOn();
 			echo $HTML->multiTableRow(array(), $cells);
 		}

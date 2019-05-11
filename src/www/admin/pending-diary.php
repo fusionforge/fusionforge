@@ -64,7 +64,7 @@ if ($res && db_numrows($res)) {
 		$cells = array();
 		$cells[][] = $HTML->html_checkbox('diary_approved_id', $arr['id'], 'diary_approved_id');
 		$cells[][] = $diarynoteObject->getDatePostedOn();
-		$cells[][] = util_make_link('/developer/?view=detail&diary_user='.$diarynoteObject->getUser()->getID().'&diary_id='.$arr['id'],$diarynoteObject->getSummary());
+		$cells[][] = util_make_link($diarynoteObject->getLink(), $diarynoteObject->getSummary());
 		$cells[][] = $diarynoteObject->getUser()->getUnixname();
 		$cells[][] = util_make_link('/admin/pending-diary.php?post_change=add&diary_id='.$arr['id'], $HTML->getAddPic());
 		echo $HTML->multiTableRow(array(), $cells);
@@ -91,7 +91,7 @@ if ($res && db_numrows($res)) {
 		$cells = array();
 		$cells[][] = $HTML->html_checkbox('diary_approved_id', $arr['id'], 'diary_approved_id');
 		$cells[][] = $diarynoteObject->getDatePostedOn();
-		$cells[][] = util_make_link('/developer/?view=detail&diary_user='.$diarynoteObject->getUser()->getID().'&diary_id='.$arr['id'],$diarynoteObject->getSummary());
+		$cells[][] = util_make_link($diarynoteObject->getLink(), $diarynoteObject->getSummary());
 		$cells[][] = $diarynoteObject->getUser()->getUnixname();
 		$cells[][] = util_make_link('/admin/pending-diary.php?post_change=remove&diary_id='.$arr['id'], $HTML->getRemovePic());
 		echo $HTML->multiTableRow(array(), $cells);
@@ -119,7 +119,7 @@ if ($res && db_numrows($res)) {
 		$cells = array();
 		$cells[][] = $HTML->html_checkbox('diary_approved_id', $arr['id'], 'diary_approved_id');
 		$cells[][] = $diarynoteObject->getDatePostedOn();
-		$cells[][] = util_make_link('/developer/?view=detail&diary_user='.$diarynoteObject->getUser()->getID().'&diary_id='.$arr['id'],$diarynoteObject->getSummary());
+		$cells[][] = util_make_link($diarynoteObject->getLink(), $diarynoteObject->getSummary());
 		$cells[][] = $diarynoteObject->getUser()->getUnixname();
 		$cells[][] = util_make_link('/admin/pending-diary.php?post_change=add&diary_id='.$arr['id'], $HTML->getAddPic());
 		echo $HTML->multiTableRow(array(), $cells);
