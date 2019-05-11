@@ -357,11 +357,11 @@ function getGroupsByName($session_ser, $group_names) {
 function getPublicProjectNames($session_ser) {
 	continue_session($session_ser);
 	$forge = new FusionForge();
-	$result = $forge->getPublicProjectNames();
 	if ($forge->isError()) {
 		$errMsg = 'Could Not Get Public Projects Names: '.$forge->getErrorMessage();
 		return new soap_fault('2003', 'group', $errMsg, $errMsg);
 	}
+	$result = $forge->getPublicProjectNames();
 	return $result;
 }
 
