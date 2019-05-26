@@ -67,7 +67,7 @@ class LoginProcess extends FForge_SeleniumTestCase
 		$this->assertRegExp($url_regexp, $location,
 				    "You may need to set 'HOST' setting in test suite's config file to something compatible with 'web_host' defined in ini file");
 
-		$this->byName("form_loginname")->value(FORGE_ADMIN_USERNAME);
+		$this->type("form_loginname", FORGE_ADMIN_USERNAME);
 		$this->type("form_pw", FORGE_ADMIN_PASSWORD);
 		$this->clickAndWait("login");
 		$this->assertTrue($this->isTextPresent("Forge Admin"));
