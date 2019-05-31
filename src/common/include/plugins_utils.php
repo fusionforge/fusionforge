@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright 2010 (c) Mélanie Le Bail
- * Copyright 2014,2015 Franck Villaume - TrivialDev
+ * Copyright 2014,2015, 2019, Franck Villaume - TrivialDev
  * Copyright 2015, Sieu Truc
  * http://fusionforge.org
  *
@@ -63,7 +63,7 @@ function htmlIframe($url, $poub = array()) {
 	}
 }
 
-function htmlIframeResizer($url, $poub = array()) {
+function htmlIframeResizer($url, $poub = array(), $resizeOpt = array()) {
 	global $HTML, $group_id;
 	$project = group_get_object($group_id);
 	if (isset($poub['id'])) {
@@ -83,8 +83,12 @@ function htmlIframeResizer($url, $poub = array()) {
 		echo html_e('iframe', array('src' => $url, 'id' => $id, 'width' => '100%', 'frameborder' =>0), '', false);
 		html_use_iframeresizer();
 		echo $HTML->getJavascripts();
+		$optionString = '';
+		foreach ($resizeOpt as $key => $value) {
+			$optionString .= $key.':'.$value.',';
+		}
 		echo '<script type="text/javascript">//<![CDATA[
-			jQuery(\'#'.$id.'\').iFrameResize();
+			jQuery(\'#'.$id.'\').iFrameResize({'.$optionString.'});
 			function messageHandler (evt) {
 				var matches = jQuery(\'#'.$id.'\')[0].src.match(/^(https?\:\/\/[^\/?#]+)(?:[\/?#]|$)/i);
 				var domain = matches && matches[1];

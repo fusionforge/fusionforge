@@ -4,7 +4,7 @@
  *
  * Copyright 2009, Roland Mas
  * Copyright 2012, Denise Patzker
- * Copyright 2012-2014,2017-2018, Franck Villaume - TrivialDev
+ * Copyright 2012-2014,2017-2019, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -294,7 +294,7 @@ Offer DAV or SSH access.");
 			if ($params['commit']) {
 				$iframesrc .= '/rev/'.$params['commit'];
 			}
-			echo '<iframe src="'.$iframesrc.'" id="scmhg_iframe" style="width:100%; height:400px;" frameborder="0" ></iframe>';
+			htmlIframeResizer($iframesrc, array('id'=>'scmhg', 'absolute'=>true), array('minHeight' => 400));
 		}
 	}
 
