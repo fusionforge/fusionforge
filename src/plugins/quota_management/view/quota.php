@@ -4,6 +4,7 @@
  *
  * Copyright 2005, Fabio Bertagnin
  * Copyright 2011,2016, Franck Villaume - Capgemini
+ * Copyright 2019, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -27,20 +28,26 @@ require_once dirname(__FILE__)."/../../env.inc.php";
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'admin/admin_utils.php';
 
+session_require_global_perm('forge_admin');
+
+global $HTML;
+
 $quota_management = plugin_get_object('quota_management');
 
-$_quota_block_size = 1024;
-$_quota_block_size = trim(shell_exec("echo $BLOCK_SIZE")) + 0;
+$_quota_block_size = trim(shell_exec('echo $BLOCK_SIZE')) + 0;
 if ($_quota_block_size == 0) $_quota_block_size = 1024;
 
-site_admin_header(array('title'=>_('Site Admin')));
-?>
-<h4>
-	<?php echo _('Ressources usage and quota'); ?>
-	&nbsp;&nbsp;&nbsp;&nbsp;
-	<?php echo util_make_link('/plugins/'.$quota_management->name.'/quota_admin.php', _('Admin')) ?>
-</h4>
-<?php
+$subMenuTitle = array();
+$subMenuUrl = array();
+$subMenuAttr = array();
+$subMenuTitle[] = _('Ressources usage and quota');
+$subMenuUrl[] = '/plugins/'.$quota_management->name.'/quota.php';
+$subMenuAttr[] = array('title' => _('View quota and usage per project.'));
+$subMenuTitle[] = _('Admin');
+$subMenuUrl[] = '/plugins/'.$quota_management->name.'/quota_admin.php';
+$subMenuAttr[] = array('title' => _('Administrate quotas per project.'));
+echo $HTML->subMenu($subMenuTitle, $subMenuUrl, $subMenuAttr);
+
 // stock projects infos in array
 $quotas = array();
 
@@ -62,31 +69,36 @@ if (db_numrows($res_db) > 0) {
 }
 
 // documents database size
-$res_db = db_query_params('SELECT group_id, SUM(octet_length(data)) as size, SUM(octet_length(data_words)) as size1 FROM doc_data GROUP BY group_id ',
-			array());
-if (db_numrows($res_db) > 0) {
-	while($e = db_fetch_array($res_db)) {
-		$q = array();
-		$quotas["$e[group_id]"]["database_size"] += $e["size"];
-		$quotas["$e[group_id]"]["database_size"] += $e["size1"];
+if (forge_get_config('use_docman')) {
+	$res_db = $quota_management->getDocumentsSizeQuery();
+	if (db_numrows($res_db) > 0) {
+		while($e = db_fetch_array($res_db)) {
+			$q = array();
+			$quotas["$e[group_id]"]["database_size"] += $e["size"];
+			$quotas["$e[group_id]"]["database_size"] += $e["size1"];
+		}
 	}
 }
 
 // news database size
-$res_db = db_query_params('SELECT group_id, SUM(octet_length(summary) + octet_length(details)) as size FROM news_bytes GROUP BY group_id',
-			array());
-if (db_numrows($res_db) > 0) {
-	while($e = db_fetch_array($res_db)) {
-		$quotas["$e[group_id]"]["database_size"] += $e["size"];
+	if (forge_get_config('use_news')) {
+	$res_db = db_query_params('SELECT group_id, SUM(octet_length(summary) + octet_length(details)) as size FROM news_bytes GROUP BY group_id',
+				array());
+	if (db_numrows($res_db) > 0) {
+		while($e = db_fetch_array($res_db)) {
+			$quotas["$e[group_id]"]["database_size"] += $e["size"];
+		}
 	}
 }
 
 // forums database size
-$res_db = db_query_params('SELECT forum_group_list.group_id as group_id, SUM(octet_length(subject)+octet_length(body)) as size FROM forum INNER JOIN forum_group_list ON forum.group_forum_id = forum_group_list.group_forum_id GROUP BY group_id',
-			array ());
-if (db_numrows($res_db) > 0) {
-	while($e = db_fetch_array($res_db)) {
-		$quotas["$e[group_id]"]["database_size"] += $quota_management->convert_bytes_to_mega($e["size"]);
+if (forge_get_config('use_forums')) {
+	$res_db = db_query_params('SELECT forum_group_list.group_id as group_id, SUM(octet_length(subject)+octet_length(body)) as size FROM forum INNER JOIN forum_group_list ON forum.group_forum_id = forum_group_list.group_forum_id GROUP BY group_id',
+				array ());
+	if (db_numrows($res_db) > 0) {
+		while($e = db_fetch_array($res_db)) {
+			$quotas["$e[group_id]"]["database_size"] += $e["size"];
+		}
 	}
 }
 
@@ -96,7 +108,6 @@ $ftp_dir = forge_get_config('ftp_upload_dir')."/pub/";
 $upload_dir = forge_get_config('upload_dir');
 $group_dir = $chroot_dir.forge_get_config('groupdir_prefix')."/";
 $cvs_dir = $chroot_dir.$cvsdir_prefix."/";
-$svn_dir = $chroot_dir.$svndir_prefix."/";
 
 foreach ($quotas as $p) {
 	$group_id = $p["group_id"];
@@ -117,7 +128,7 @@ foreach ($quotas as $p) {
 	$size = $quota_management->get_dir_size($dir);
 	$quotas["$group_id"]["disk_size_scm"] += $size;
 	// svn dir disk space
-	$dir = $svn_dir.$p["unix_name"];
+	$dir = forge_get_config('repos_path', 'scmsvn').'/'.$p["unix_name"];
 	$size = $quota_management->get_dir_size($dir);
 	$quotas["$group_id"]["disk_size_scm"] += $size;
 }
@@ -146,7 +157,7 @@ foreach ($users as $u)
 	$user_id = $u["user_id"];
 	$dir = $ftp_dir .  $u["user_name"];
 	$size = $quota_management->get_dir_size($dir);
-	$users["$user_id"]["disk_size"] += $quota_management->convert_bytes_to_mega($size);
+	$users["$user_id"]["disk_size"] += human_readable_bytes($size);
 }
 
 ?>
@@ -235,38 +246,31 @@ foreach ($users as $u)
 		<tr>
 			<td style="border-top:thin solid #808080;background:<?php echo $color2; ?>"><?php echo $q["group_id"]; ?></td>
 			<td style="border-top:thin solid #808080;background:<?php echo $color2; ?>">
-				<?php echo util_make_link('/plugins/'.$quota_management->name.'/quota_project.php?group_id='.$q['group_id'], $q['unix_name']); ?>
+				<?php echo util_make_link('/plugins/'.$quota_management->name.'/?type=projectadmin&group_id='.$q['group_id'], $q['unix_name']); ?>
 			</td>
 			<td style="border-top:thin solid #808080;background:<?php echo $color2; ?>">
 				<?php echo $q["name"]; ?>
 			</td>
 			<td style="border-top:thin solid #808080;background:<?php echo $color1; ?>" align="right">
-				<?php echo $quota_management->add_numbers_separator($quota_management->convert_bytes_to_mega($q["database_size"])); ?>
-				<?php echo _('MB'); ?>
+				<?php echo human_readable_bytes($q["database_size"]); ?>
 			</td>
 			<td style="border-top:thin solid #808080;background:<?php echo $color0; ?>" align="right">
-				<?php echo $quota_management->add_numbers_separator($quota_management->convert_bytes_to_mega($q["disk_size_1"])); ?>
-				<?php echo _('MB'); ?>
+				<?php echo human_readable_bytes($q["disk_size_1"]); ?>
 			</td>
 			<td style="border-top:thin solid #808080;background:<?php echo $color0; ?>" align="right">
-				<?php echo $quota_management->add_numbers_separator($quota_management->convert_bytes_to_mega($q["disk_size_scm"])); ?>
-				<?php echo _('MB'); ?>
+				<?php echo human_readable_bytes($q["disk_size_scm"]); ?>
 			</td>
 			<td style="border-top:thin solid #808080;background:<?php echo $color1; ?>" align="right">
-				<?php echo $quota_management->add_numbers_separator($quota_management->convert_bytes_to_mega($q["disk_size_other"])); ?>
-				<?php echo _('MB'); ?>
+				<?php echo human_readable_bytes($q["disk_size_other"]); ?>
 			</td>
 			<td style="border-top:thin solid #808080;background:<?php echo $color1; ?>;font-weight:bold" align="right">
-				<?php echo $quota_management->add_numbers_separator($quota_management->convert_bytes_to_mega($local_disk_size)); ?>
-				<?php echo _('MB'); ?>
+				<?php echo human_readable_bytes($local_disk_size); ?>
 			</td>
 			<td style="border-top:thin solid #808080;background:<?php echo $colorq; ?>" align="right">
 				<?php
 					if ($q["quota_soft"] > 0)
 					{
-						echo $quota_management->add_numbers_separator($quota_management->convert_bytes_to_mega($q["quota_soft"]));
-						echo " ";
-						echo _('MB');
+						echo human_readable_bytes($q["quota_soft"]);
 					}
 					else
 					{
@@ -278,9 +282,7 @@ foreach ($users as $u)
 				<?php
 					if ($q["quota_hard"] > 0)
 					{
-						echo $quota_management->add_numbers_separator($quota_management->convert_bytes_to_mega($q["quota_hard"]));
-						echo " ";
-						echo _('MB');
+						echo human_readable_bytes($q["quota_hard"]);
 					}
 					else
 					{
@@ -299,24 +301,19 @@ foreach ($users as $u)
 		</td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080"><br /></td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080;background:#e0e0e0" align="right">
-			<?php echo $quota_management->add_numbers_separator($quota_management->convert_bytes_to_mega($total_database)); ?>
-			<?php echo _('MB'); ?>
+			<?php echo human_readable_bytes($total_database); ?>
 		</td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080;background:#e0e0e0" align="right">
-			<?php echo $quota_management->add_numbers_separator($quota_management->convert_bytes_to_mega($total_disk_1)); ?>
-			<?php echo _('MB'); ?>
+			<?php echo human_readable_bytes($total_disk_1); ?>
 		</td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080;background:#e0e0e0" align="right">
-			<?php echo $quota_management->add_numbers_separator($quota_management->convert_bytes_to_mega($total_disk_scm)); ?>
-			<?php echo _('MB'); ?>
+			<?php echo human_readable_bytes($total_disk_scm); ?>
 		</td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080;background:#e0e0e0" align="right">
-			<?php echo $quota_management->add_numbers_separator($quota_management->convert_bytes_to_mega($total_disk_other)); ?>
-			<?php echo _('MB'); ?>
+			<?php echo human_readable_bytes($total_disk_other); ?>
 		</td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080;background:#e0e0e0" align="right">
-			<?php echo $quota_management->add_numbers_separator($quota_management->convert_bytes_to_mega($total_database+$total_disk_1+$total_disk_scm+$total_disk_other)); ?>
-			<?php echo _('MB'); ?>
+			<?php echo human_readable_bytes($total_database+$total_disk_1+$total_disk_scm+$total_disk_other); ?>
 		</td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080"><br /></td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080"><br /></td>
@@ -353,8 +350,7 @@ foreach ($users as $u)
 			<td style="border-top:thin solid #808080"><br /></td>
 			<td style="border-top:thin solid #808080"><br /></td>
 			<td style="border-top:thin solid #808080" align="right">
-				<?php echo $quota_management->add_numbers_separator($u["disk_size"]); ?>
-				<?php echo _('MB'); ?>
+				<?php echo $u["disk_size"]; ?>
 			</td>
 		</tr>
 		<?php
@@ -369,8 +365,7 @@ foreach ($users as $u)
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080"><br /></td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080"><br /></td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080" align="right">
-			<?php echo $quota_management->add_numbers_separator($total); ?>
-			<?php echo _('MB'); ?>
+			<?php echo $total; ?>
 		</td>
 	</tr>
 </table>

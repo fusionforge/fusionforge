@@ -29,11 +29,8 @@ class quota_managementPlugin extends Plugin {
 		$this->name = "quota_management";
 		$this->text = _("Quota Management"); // To show in the tabs, use...
 		$this->pkg_desc =
-_("This is a quota_management plugin within FusionForge.");
-		$this->_addHook('groupisactivecheckbox'); // The "use ..." checkbox in editgroupinfo
-		$this->_addHook('groupisactivecheckboxpost'); //
-		$this->_addHook('userisactivecheckbox'); // The "use ..." checkbox in user account
-		$this->_addHook('userisactivecheckboxpost'); //
+_("This is a Quota Management plugin within FusionForge. Provide an easy way
+to monitor disk and database usage per user, project.");
 		$this->_addHook('project_admin_plugins'); // to show up in the admin page fro group
 		$this->_addHook('site_admin_option_hook'); // to show in admin
 		$this->_addHook('groupadminmenu');
@@ -45,14 +42,9 @@ _("This is a quota_management plugin within FusionForge.");
 		switch ($hookname) {
 			case "project_admin_plugins": {
 				// this displays the link in the project admin options page to it's  quota_management administration
-				$group_id = $params['group_id'];
-				$group = group_get_object($group_id);
-				if ( $group->usesPlugin($this->name)) {
-					echo util_make_link('/plugins/quota_management/index.php?id='.$group->getID().'&type=admin&pluginname='.$this->name,
-							_('View the quota_management Administration')
-						) ;
-					echo '<br />';
-				}
+				echo util_make_link('/plugins/quota_management/index.php?group_id='.$params['group_id'].'&type=projectadmin',
+						_('View the Quota Management Administration'));
+				echo '<br />';
 				$returned = true;
 				break;
 			}
@@ -62,13 +54,9 @@ _("This is a quota_management plugin within FusionForge.");
 				break;
 			}
 			case "groupadminmenu": {
-				$group_id = $params['group'];
-				$group = group_get_object($group_id);
-				if ( $group->usesPlugin($this->name)) {
-					$params['labels'][] = _ ('Quota');
-					$params['links'][] = '/plugins/quota_management/index.php?id='.$group_id.'&type=admin&pluginname='.$this->name;
-					$params['attr_r'][] = array('title' => _('View the quota_management Administration'));
-				}
+				$params['labels'][] = _ ('Quota');
+				$params['links'][] = '/plugins/quota_management/index.php?group_id='.$params['group'].'&type=projectadmin';
+				$params['attr_r'][] = array('title' => _('View the Quota Management Administration'));
 				$returned = true;
 				break;
 			}
@@ -77,20 +65,7 @@ _("This is a quota_management plugin within FusionForge.");
 	}
 
 	function getAdminOptionLink() {
-		return util_make_link('/plugins/'.$this->name.'/quota.php', _('Ressources usage and quota'));
-	}
-
-	function convert_bytes_to_mega($mega) {
-		$b = round($mega / (1024*1024), 2);
-		return $b;
-	}
-
-	function add_numbers_separator($val, $sep=' ') {
-		$size = "$val";
-		$size = strrev($size);
-		$size = wordwrap($size, 3, $sep, 1);
-		$size = strrev($size);
-		return $size;
+		return util_make_link('/plugins/'.$this->name.'/index.php?type=globaladmin', _('Ressources usage and quota'));
 	}
 
 	function get_dir_size($dir) {
@@ -102,14 +77,33 @@ _("This is a quota_management plugin within FusionForge.");
 		return "$size";
 	}
 
-	function quota_management_Project_Header($params) {
-		global $id;
-		$params['toptab'] = 'quota_management';
-		$params['group'] = $id;
-		/*
-		Show horizontal links
-		*/
-		site_project_header($params);
+	function getHeader($type, $group_id = 0) {
+		switch ($type) {
+			case 'globaladmin': {
+				global $gfwww;
+				require_once $gfwww.'admin/admin_utils.php';
+				site_admin_header(array('title'=>_('Quota and Usage Admin')));
+				break;
+			}
+			case 'projectadmin': {
+				global $gfwww;
+				require_once $gfwww.'project/admin/project_admin_utils.php';
+				project_admin_header(array('title' => sprintf(_('Quota Management for %s'), group_getname($group_id)), 'group' => $group_id));
+				break;
+			}
+		}
+	}
+
+	function getDocumentsSizeQuery() {
+		return db_query_params('SELECT doc_data.group_id, SUM(doc_data_version.filesize) as size, SUM(octet_length(doc_data_version.data_words)) as size1
+					FROM doc_data, doc_data_version WHERE doc_data.docid = doc_data_version.docid GROUP BY doc_data.group_id',
+			array());
+	}
+
+	function getDocumentsSizeForProject($group_id) {
+		return db_query_params('SELECT doc_data.group_id, SUM(doc_data_version.filesize) as size, SUM(octet_length(doc_data_version.data_words)) as size1, count(doc_data_version.serial_id) as nb
+					FROM doc_data, doc_data_version WHERE doc_data.docid = doc_data_version.docid AND doc_data.group_id = $1 GROUP BY doc_data.group_id',
+			array($group_id));
 	}
 }
 

@@ -3,6 +3,7 @@
  * Copyright 2005, Fabio Bertagnin
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2019, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -38,52 +39,53 @@ if (!$user || !is_object($user)) {
 }
 
 $type = getStringFromRequest('type');
-$id = getStringFromRequest('id');
-$pluginname = getStringFromRequest('pluginname');
-$quota_management = plugin_get_object($pluginname);
 
 if (!$type) {
-	exit_missing_param($_SERVER['HTTP_REFERER'],array(_('No TYPE specified')),'home');
-} elseif (!$id) {
-	exit_missing_param($_SERVER['HTTP_REFERER'],array(_('No ID specified')),'home');
-} else {
-	if ($type == 'group') {
-		$group = group_get_object($id);
-		if ( !$group) {
-			exit_no_group();
+	exit_missing_param($_SERVER['HTTP_REFERER'], array('No TYPE specified'), 'quota_management');
+}
+
+$quota_management = plugin_get_object('quota_management');
+
+switch ($type) {
+	case 'globaladmin': {
+		if (!session_loggedin()) {
+			exit_not_logged_in();
 		}
-		if (!$group->usesPlugin($pluginname)) {//check if the group has the quota_management plugin active
-			exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'),$pluginnname),'home');
+		session_require_global_perm('forge_admin');
+		$action = getStringFromRequest('action');
+		$view = getStringFromRequest('view');
+		switch ($action) {
+			default:
+				break;
 		}
-		$userperm = $group->getPermission();//we'll check if the user belongs to the group (optional)
-		if (!$userperm->IsMember()) {
-			exit_permission_denied(_('You are not a member of this project'),'home');
+		$quota_management->getHeader($type);
+		switch ($view) {
+			default:
+				include $quota_management->name.'/view/quota.php';
+				break;
 		}
-		$quota_management->quota_management_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));
-		include 'quota_management/www/quota_project.php';
-	} elseif ($type == 'admin') {
-		$group = group_get_object($id);
-		if ( !$group) {
-			exit_no_group();
+		break;
+	}
+	case 'projectadmin': {
+		if (!session_loggedin()) {
+			exit_not_logged_in();
 		}
-		if ( ! ($group->usesPlugin ( $pluginname )) ) {//check if the group has the quota_management plugin active
-			exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'),$pluginnname),'home');
+		$group_id = getIntFromRequest('group_id');
+		session_require_perm('project_admin', $group_id);
+		$action = getStringFromRequest('action');
+		$view = getStringFromRequest('view');
+		switch ($action) {
+			default:
+				break;
 		}
-		$userperm = $group->getPermission();//we'll check if the user belongs to the group
-		if ( !$userperm->IsMember()) {
-			exit_permission_denied(_('You are not a member of this project'),'home');
-		}
-		//only project admin can access here
-		if ( $userperm->isAdmin() ) {
-			$quota_management->quota_management_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));
-			include 'quota_management/www/quota_project.php';
-		} else {
-			exit_permission_denied(_('You are not Admin of this project'), 'home');
+		switch ($view) {
+			default:
+				$quota_management->getHeader($type, $group_id);
+				include $quota_management->name.'/view/quota_project.php';
+				break;
 		}
 	}
 }
-
-site_project_footer();
 
 // Local Variables:
 // mode: php

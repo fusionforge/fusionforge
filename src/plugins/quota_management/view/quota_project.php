@@ -7,6 +7,7 @@
  * Copyright 2005, Fabio Bertagnin
  * Copyright 2010 (c) FusionForge Team
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright 2019, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -30,12 +31,12 @@ require_once dirname(__FILE__)."/../../env.inc.php";
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'project/admin/project_admin_utils.php';
 
-$id = getIntFromRequest('group_id');
-$quota_management = plugin_get_object('quota_management');
+global $group_id;
+global $quota_management;
 
-session_require_perm('project_admin', $id);
+session_require_perm('project_admin', $group_id);
 
-$group = group_get_object($id);
+$group = group_get_object($group_id);
 
 if (!$group || !is_object($group)) {
 	exit_no_group();
@@ -43,67 +44,65 @@ if (!$group || !is_object($group)) {
 	exit_error($group->getErrorMessage(), 'home');
 }
 
-project_admin_header(array('title'=>_('Project quota manager'),'group'=>$group->getID(),'pagename'=>'project_admin_quotas','sectionvals'=>array(group_getname($id))));
-?>
-
-<h4><?php echo _('Project quota manager'); ?></h4>
-
-<?php
 $quotas = array();
-$res_db = db_query_params('SELECT SUM(octet_length(data)) as size, SUM(octet_length(data_words)) as size1, count(*) as nb FROM doc_data WHERE group_id = $1 ',
-			array ($id));
-$q = array();
-$q["name"] = _('Documents');
-$q["nb"] = 0; $q["size"] = 0;
-$q1 = array();
-$q1["name"] = _('Documents search engine');
-$q1["size"] = 0;
-if (db_numrows($res_db) > 0) {
-	$e = db_fetch_array($res_db);
-	$q["nb"] = $e["nb"];
-	$q["size"] = $e["size"];
-	// $q1["nb"] = $e["nb"];
-	$q1["size"] = $e["size1"];
+if ($group->usesDocman()) {
+	$res_db = $quota_management->getDocumentsSizeForProject($group_id);
+	$q = array();
+	$q["name"] = _('Documents');
+	$q["nb"] = 0; $q["size"] = 0;
+	$q1 = array();
+	$q1["name"] = _('Documents search engine');
+	$q1["size"] = 0;
+	if (db_numrows($res_db) > 0) {
+		$e = db_fetch_array($res_db);
+		$q["nb"] = $e["nb"];
+		$q["size"] = $e["size"];
+		$q1["nb"] = $e["nb"];
+		$q1["size"] = $e["size1"];
+	}
+	$quotas[0] = $q;
+	$quotas[1] = $q1;
 }
-$quotas[0] = $q;
-$quotas[1] = $q1;
 
-$res_db = db_query_params('SELECT SUM(octet_length(summary) + octet_length(details)) as size, count(*) as nb FROM news_bytes WHERE group_id = $1 ',
-			array ($id));
-$q = array();
-$q["name"] = _('News');
-$q["nb"] = 0; $q["size"] = 0;
-if (db_numrows($res_db) > 0)
-{
-	$e = db_fetch_array($res_db);
-	$q["nb"] = $e["nb"];
-	$q["size"] = $e["size"];
+if ($group->usesNews()) {
+	$res_db = db_query_params('SELECT SUM(octet_length(summary) + octet_length(details)) as size, count(*) as nb FROM news_bytes WHERE group_id = $1 ',
+				array ($group_id));
+	$q = array();
+	$q["name"] = _('News');
+	$q["nb"] = 0; $q["size"] = 0;
+	if (db_numrows($res_db) > 0)
+	{
+		$e = db_fetch_array($res_db);
+		$q["nb"] = $e["nb"];
+		$q["size"] = $e["size"];
+	}
+	$quotas[2] = $q;
 }
-$quotas[2] = $q;
 
-$res_db = db_query_params('SELECT SUM(octet_length(subject)+octet_length(body)) as size, count(*) as nb FROM forum INNER JOIN forum_group_list ON forum.group_forum_id = forum_group_list.group_forum_id WHERE group_id = $1 ',
-			array ($id));
-$q = array();
-$q["name"] = _('Forums');
-$q["nb"] = 0; $q["size"] = 0;
-if (db_numrows($res_db) > 0) {
-	$e = db_fetch_array($res_db);
-	$q["nb"] = $e["nb"];
-	$q["size"] = $e["size"];
+if ($group->usesForum()) {
+	$res_db = db_query_params('SELECT SUM(octet_length(subject)+octet_length(body)) as size, count(*) as nb FROM forum INNER JOIN forum_group_list ON forum.group_forum_id = forum_group_list.group_forum_id WHERE group_id = $1 ',
+				array ($group_id));
+	$q = array();
+	$q["name"] = _('Forums');
+	$q["nb"] = 0; $q["size"] = 0;
+	if (db_numrows($res_db) > 0) {
+		$e = db_fetch_array($res_db);
+		$q["nb"] = $e["nb"];
+		$q["size"] = $e["size"];
+	}
+	$quotas[3] = $q;
 }
-$quotas[3] = $q;
 
 $quotas_disk = array();
 
 // espace disque
 // disk_total_space
-$_quota_block_size = 1024;
-$_quota_block_size = trim(shell_exec("echo $BLOCK_SIZE")) + 0;
+$_quota_block_size = trim(shell_exec('echo $BLOCK_SIZE')) + 0;
 if ($_quota_block_size == 0) $_quota_block_size = 1024;
 $quota_soft = "";
 $quota_hard = "";
 $res_db = db_query_params('SELECT quota_soft, quota_hard FROM groups WHERE group_id = $1',
-			array($id));
+			array($group_id));
 if (db_numrows($res_db) > 0) {
 	$e = db_fetch_array($res_db);
 	$quota_hard = $e["quota_hard"];
@@ -117,11 +116,10 @@ $quota_tot_1 = 0;
 $quota_tot_scm = 0;
 
 $upload_dir = forge_get_config('upload_dir') . $group->getUnixName();
-$chroot_dir = forge_get_config('chroot');
 $ftp_dir = forge_get_config('ftp_upload_dir')."/pub/".$group->getUnixName();
-$group_dir = $chroot_dir.forge_get_config('groupdir_prefix') . "/" . $group->getUnixName();
-$cvs_dir = $chroot_dir.$cvsdir_prefix . "/" . $group->getUnixName();
-$svn_dir = $chroot_dir.$svndir_prefix . "/" . $group->getUnixName();
+$group_dir = forge_get_config('groupdir_prefix') . "/" . $group->getUnixName();
+$cvs_dir = forge_get_config('repos_path', 'scmcvs') . "/" . $group->getUnixName();
+$svn_dir = forge_get_config('repos_path', 'scmsvn') . "/" . $group->getUnixName();
 
 $q["name"] = _('Download project directory');
 $q["path"] = "$upload_dir";
@@ -174,7 +172,7 @@ foreach ($quotas as $q) {
 			<tr>
 				<td style="border-top:thin solid #808080"><?php echo $q["name"]; ?></td>
 				<td style="border-top:thin solid #808080" align="right"><?php echo $q["nb"]; ?></td>
-				<td style="border-top:thin solid #808080" align="right"><?php echo $quota_management->add_numbers_separator($quota_management->convert_bytes_to_mega($q["size"]))." "._('MB'); ?></td>
+				<td style="border-top:thin solid #808080" align="right"><?php echo human_readable_bytes($q["size"]); ?></td>
 			</tr>
 <?php
 	}
@@ -186,7 +184,7 @@ foreach ($quotas as $q) {
 		</td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080">&nbsp;</td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080" align="right">
-			<?php echo $quota_management->add_numbers_separator($quota_management->convert_bytes_to_mega($sizetot))." "._('MB'); ?>
+			<?php echo human_readable_bytes($sizetot); ?>
 		</td>
 	</tr>
 </table>
@@ -219,7 +217,7 @@ foreach ($quotas_disk as $q) {
 			<?php echo $q["quota_label"]; ?>&nbsp;
 		</td>
 		<td style="border-top:thin solid #808080" align="right">
-			<?php echo $quota_management->add_numbers_separator($quota_management->convert_bytes_to_mega($q["size"]))." "._('MB'); ?>
+			<?php echo human_readable_bytes($q["size"]); ?>
 		</td>
 	</tr>
 <?php
@@ -230,7 +228,7 @@ foreach ($quotas_disk as $q) {
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080"><?php echo _('Total'); ?></td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080">&nbsp;</td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080" align="right">
-			<?php echo $quota_management->add_numbers_separator($quota_management->convert_bytes_to_mega($sizetot))." "._('MB'); ?>
+			<?php echo human_readable_bytes($sizetot); ?>
 		</td>
 	</tr>
 </table>
