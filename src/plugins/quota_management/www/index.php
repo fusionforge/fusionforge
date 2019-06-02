@@ -26,7 +26,7 @@
 require_once dirname(__FILE__)."/../../env.inc.php";
 require_once $gfcommon.'include/pre.php';
 
-// the header that displays for the project portion of the plugin
+global $gfplugins;
 
 $user = session_get_user(); // get the session user
 
@@ -55,13 +55,17 @@ switch ($type) {
 		$action = getStringFromRequest('action');
 		$view = getStringFromRequest('view');
 		switch ($action) {
-			default:
+			case 'update':
+				include($gfplugins.$quota_management->name.'/action/'.$action.'.php');
 				break;
 		}
 		$quota_management->getHeader($type);
 		switch ($view) {
+			case 'admin':
+				include $gfplugins.$quota_management->name.'/view/quota_admin.php';
+				break;
 			default:
-				include $quota_management->name.'/view/quota.php';
+				include $gfplugins.$quota_management->name.'/view/quota.php';
 				break;
 		}
 		break;
@@ -81,7 +85,7 @@ switch ($type) {
 		switch ($view) {
 			default:
 				$quota_management->getHeader($type, $group_id);
-				include $quota_management->name.'/view/quota_project.php';
+				include $gfplugins.$quota_management->name.'/view/quota_project.php';
 				break;
 		}
 	}

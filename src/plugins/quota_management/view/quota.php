@@ -41,10 +41,10 @@ $subMenuTitle = array();
 $subMenuUrl = array();
 $subMenuAttr = array();
 $subMenuTitle[] = _('Ressources usage and quota');
-$subMenuUrl[] = '/plugins/'.$quota_management->name.'/quota.php';
-$subMenuAttr[] = array('title' => _('View quota and usage per project.'));
+$subMenuUrl[] = '/plugins/'.$quota_management->name.'/?type=globaladmin';
+$subMenuAttr[] = array('title' => _('View quota and usage per project and user.'));
 $subMenuTitle[] = _('Admin');
-$subMenuUrl[] = '/plugins/'.$quota_management->name.'/quota_admin.php';
+$subMenuUrl[] = '/plugins/'.$quota_management->name.'/?type=globaladmin&view=admin';
 $subMenuAttr[] = array('title' => _('Administrate quotas per project.'));
 echo $HTML->subMenu($subMenuTitle, $subMenuUrl, $subMenuAttr);
 

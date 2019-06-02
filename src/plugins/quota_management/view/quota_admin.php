@@ -4,6 +4,7 @@
  *
  * Copyright 2005, Fabio Bertagnin
  * Copyright 2011,2016, Franck Villaume - Capgemini
+ * Copyright 2019, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -31,37 +32,19 @@ $cmd = getStringFromRequest('cmd');
 
 $quota_management = plugin_get_object('quota_management');
 
-$_quota_block_size = 1024;
-$_quota_block_size = trim(shell_exec("echo $BLOCK_SIZE")) + 0;
+$_quota_block_size = trim(shell_exec('echo $BLOCK_SIZE')) + 0;
 if ($_quota_block_size == 0) $_quota_block_size = 1024;
 
-site_admin_header(array('title'=>_('Site Admin')));
-
-?>
-<h4>
-	<?php echo util_make_link('/plugins/'.$quota_management->name.'/quota.php', _('Ressources usage and quota')); ?>
-	&nbsp;&nbsp;
-	<?php echo _('Quota Manager Admin'); ?>
-</h4>
-<?php
-
-// quota update
-if ($cmd == "maj")
-{
-	$qs = $_POST["qs"] * $_quota_block_size;
-	$qh = $_POST["qh"] * $_quota_block_size;
-	if ($qs > $qh) {
-		$message = utf8_encode(_('Input error: Hard quota must be greater than soft quota'));
-		echo "<h3 style=\"color:red\">$message</h3>";
-	} else {
-		db_query_params('UPDATE groups SET quota_soft = $1, quota_hard = $2 WHERE group_id = $3',
-				array($qs,
-					$qh,
-					getIntFromRequest('group_id')));
-		$message = utf8_encode(_('Successfully updated quota'));
-		echo "<h3 style=\"color:red\">$message</h3>";
-	}
-}
+$subMenuTitle = array();
+$subMenuUrl = array();
+$subMenuAttr = array();
+$subMenuTitle[] = _('Ressources usage and quota');
+$subMenuUrl[] = '/plugins/'.$quota_management->name.'/?type=globaladmin';
+$subMenuAttr[] = array('title' => _('View quota and usage per project and user.'));
+$subMenuTitle[] = _('Admin');
+$subMenuUrl[] = '/plugins/'.$quota_management->name.'/?type=globaladmin&view=admin';
+$subMenuAttr[] = array('title' => _('Administrate quotas per project.'));
+echo $HTML->subMenu($subMenuTitle, $subMenuUrl, $subMenuAttr);
 
 // stock projects infos in array
 $quotas = array();
@@ -102,14 +85,13 @@ if (db_numrows($res_db) > 0) {
 	{
 		$total_database += $q["database_size"];
 		$total_disk += $q["disk_size"];
-		echo $HTML->openForm(array('action' => '/plugins/'.$quota_management->name.'/quota_admin.php', 'method' => 'post'));
+		echo $HTML->openForm(array('action' => '/plugins/'.$quota_management->name.'/?type=globaladmin&action=update', 'method' => 'post'));
 		?>
-		<input type="hidden" name="cmd" value="maj" />
 		<input type="hidden" name="group_id" value="<?php echo $q["group_id"]; ?>" />
 		<tr>
 			<td style="border-top:thin solid #808080"><?php echo $q["group_id"]; ?></td>
 			<td style="border-top:thin solid #808080">
-			<?php echo util_make_link('/plugins/quota_management/index.php?id='.$q['group_id'].'&type=admin&pluginname='.$quota_management->name, $q['unix_name']) ?>
+			<?php echo util_make_link('/plugins/quota_management/?group_id='.$q['group_id'].'&type=projectadmin', $q['unix_name']) ?>
 			</td>
 			<td style="border-top:thin solid #808080"><?php echo $q["name"]; ?></td>
 			<td style="border-top:thin solid #808080" align="right">
