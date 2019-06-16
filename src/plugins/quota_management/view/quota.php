@@ -81,7 +81,7 @@ if (forge_get_config('use_docman')) {
 }
 
 // news database size
-	if (forge_get_config('use_news')) {
+if (forge_get_config('use_news')) {
 	$res_db = db_query_params('SELECT group_id, SUM(octet_length(summary) + octet_length(details)) as size FROM news_bytes GROUP BY group_id',
 				array());
 	if (db_numrows($res_db) > 0) {
