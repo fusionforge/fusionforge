@@ -94,7 +94,7 @@ class Widget_HomeSponsoredHeadLines extends Widget {
 		if (strlen($content)) {
 			return $content.html_e('div', array('style' => 'clear:both'), '&nbsp;');
 		}
-		return $HTML->warning(_('No Sponsored element found'));
+		return $HTML->warning_msg(_('No Sponsored element found'));
 	}
 }
  
