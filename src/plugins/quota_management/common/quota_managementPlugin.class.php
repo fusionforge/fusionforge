@@ -105,6 +105,16 @@ to monitor disk and database usage per user, project.");
 					FROM doc_data, doc_data_version WHERE doc_data.docid = doc_data_version.docid AND doc_data.group_id = $1 GROUP BY doc_data.group_id',
 			array($group_id));
 	}
+
+	function getTrackerSizeForProject($group_id) {
+		return db_query_params('select SUM(octet_length(artifact.summary)+octet_length(artifact.details)+octet_length(artifact_message.body)+artifact_file.filesize) as size, count(artifact_group_list.group_artifact_id) as nb
+					FROM artifact, artifact_group_list, artifact_message, artifact_file
+					WHERE artifact.group_artifact_id = artifact_group_list.group_artifact_id
+					AND artifact.artifact_id = artifact_message.artifact_id
+					AND artifact.artifact_id = artifact_file.artifact_id
+					AND group_id = $1',
+			array($group_id));
+	}
 }
 
 // Local Variables:

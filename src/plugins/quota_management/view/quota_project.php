@@ -60,8 +60,8 @@ if ($group->usesDocman()) {
 		$q1["nb"] = $e["nb"];
 		$q1["size"] = $e["size1"];
 	}
-	$quotas[0] = $q;
-	$quotas[1] = $q1;
+	$quotas[] = $q;
+	$quotas[] = $q1;
 }
 
 if ($group->usesNews()) {
@@ -76,7 +76,7 @@ if ($group->usesNews()) {
 		$q["nb"] = $e["nb"];
 		$q["size"] = $e["size"];
 	}
-	$quotas[2] = $q;
+	$quotas[] = $q;
 }
 
 if ($group->usesForum()) {
@@ -90,7 +90,20 @@ if ($group->usesForum()) {
 		$q["nb"] = $e["nb"];
 		$q["size"] = $e["size"];
 	}
-	$quotas[3] = $q;
+	$quotas[] = $q;
+}
+
+if ($group->usesTracker()) {
+	$res_db = $quota_management->getTrackerSizeForProject($group_id);
+	$q = array();
+	$q["name"] = _('Trackers');
+	$q["nb"] = 0; $q["size"] = 0;
+	if (db_numrows($res_db) > 0) {
+		$e = db_fetch_array($res_db);
+		$q["nb"] = $e["nb"];
+		$q["size"] = $e["size"];
+	}
+	$quotas[] = $q;
 }
 
 $quotas_disk = array();
@@ -118,8 +131,6 @@ $quota_tot_scm = 0;
 $upload_dir = forge_get_config('upload_dir') . $group->getUnixName();
 $ftp_dir = forge_get_config('ftp_upload_dir')."/pub/".$group->getUnixName();
 $group_dir = forge_get_config('groupdir_prefix') . "/" . $group->getUnixName();
-$cvs_dir = forge_get_config('repos_path', 'scmcvs') . "/" . $group->getUnixName();
-$svn_dir = forge_get_config('repos_path', 'scmsvn') . "/" . $group->getUnixName();
 
 $q["name"] = _('Download project directory');
 $q["path"] = "$upload_dir";
@@ -128,29 +139,23 @@ $q["size"] = $quota_management->get_dir_size("$upload_dir");
 $quota_tot_other += $q["size"];
 $quotas_disk[] = $q;
 
-$q["name"] = _('Home project directory');
-$q["path"] = "$group_dir"; $q["size"] = $quota_management->get_dir_size("$group_dir");
-$q["quota_label"] = _('With ftp and home quota control');
-$quota_tot_1 += $q["size"];
-$quotas_disk[] = $q;
+if (forge_get_config('use_shell')) {
+	$q["name"] = _('Home project directory');
+	$q["path"] = "$group_dir"; $q["size"] = $quota_management->get_dir_size("$group_dir");
+	$q["quota_label"] = _('With ftp and home quota control');
+	$quota_tot_1 += $q["size"];
+	$quotas_disk[] = $q;
+}
 
-$q["name"] = _('FTP project directory');
-$q["path"] = "$ftp_dir"; $q["size"] = $quota_management->get_dir_size("$ftp_dir");
-$q["quota_label"] = _('With ftp and home quota control');
-$quota_tot_1 += $q["size"];
-$quotas_disk[] = $q;
+if ($group->usesFTP()) {
+	$q["name"] = _('FTP project directory');
+	$q["path"] = "$ftp_dir"; $q["size"] = $quota_management->get_dir_size("$ftp_dir");
+	$q["quota_label"] = _('With ftp and home quota control');
+	$quota_tot_1 += $q["size"];
+	$quotas_disk[] = $q;
+}
 
-$q["name"] = _('CVS project directory');
-$q["path"] = "$cvs_dir"; $q["size"] = $quota_management->get_dir_size("$cvs_dir");
-$q["quota_label"] = _('With cvs and svn quota control');
-$quota_tot_scm += $q["size"];
-$quotas_disk[] = $q;
-
-$q["name"] = _('Subversion project directory');
-$q["path"] = "$svn_dir"; $q["size"] = $quota_management->get_dir_size("$svn_dir");
-$q["quota_label"] = _('With cvs and svn quota control');
-$quota_tot_scm += $q["size"];
-$quotas_disk[] = $q;
+plugin_hook_by_reference('quota_display', $quotas_disk);
 
 ?>
 
@@ -299,7 +304,7 @@ if (($quota_tot_scm+0) > ($qs+0) && ($qs+0) > 0) {
 	</tr>
 	<tr style="background:<?php echo $color2; ?>">
 		<td style="border-top:thin solid #808080">
-			<?php echo 'CVS, Subversion'; ?>
+			<?php echo _('SCM'); ?>
 		</td>
 		<td style="border-top:thin solid #808080;font-weight:bold;color:red" align="right">
 			<?php echo $msg2; ?>
