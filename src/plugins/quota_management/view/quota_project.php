@@ -114,7 +114,7 @@ $_quota_block_size = trim(shell_exec('echo $BLOCK_SIZE')) + 0;
 if ($_quota_block_size == 0) $_quota_block_size = 1024;
 $quota_soft = "";
 $quota_hard = "";
-$res_db = db_query_params('SELECT quota_soft, quota_hard FROM groups WHERE group_id = $1',
+$res_db = db_query_params('SELECT quota_soft, quota_hard FROM plugin_quota_management WHERE group_id = $1',
 			array($group_id));
 if (db_numrows($res_db) > 0) {
 	$e = db_fetch_array($res_db);
@@ -302,6 +302,7 @@ if (($quota_tot_scm+0) > ($qs+0) && ($qs+0) > 0) {
 			?>
 		</td>
 	</tr>
+<?php if ($group->usesSCM()) { ?>
 	<tr style="background:<?php echo $color2; ?>">
 		<td style="border-top:thin solid #808080">
 			<?php echo _('SCM'); ?>
@@ -330,6 +331,7 @@ if (($quota_tot_scm+0) > ($qs+0) && ($qs+0) > 0) {
 			?>
 		</td>
 	</tr>
+<?php } ?>
 	<tr style="font-weight:bold">
 		<td colspan="4" style="border-top:thick solid #808080" align="center">&nbsp;</td>
 	</tr>

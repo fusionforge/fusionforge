@@ -37,7 +37,7 @@ $qh = $_POST["qh"] * $_quota_block_size;
 if ($qs > $qh) {
 	$error_msg = _('Input error: Hard quota must be greater than soft quota');
 } else {
-	db_query_params('UPDATE groups SET quota_soft = $1, quota_hard = $2 WHERE group_id = $3',
+	db_query_params('UPDATE plugin_quota_management SET quota_soft = $1, quota_hard = $2 WHERE group_id = $3',
 			array($qs,
 				$qh,
 				getIntFromRequest('group_id')));
