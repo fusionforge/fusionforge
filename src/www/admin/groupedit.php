@@ -178,7 +178,6 @@ printf(_('With PFO-RBAC, the “is_public” property is gone. Instead, to make 
 </tr>
 
 <?php
-
 	if (forge_get_config('use_shell')) {
 ?>
 <tr>
@@ -189,7 +188,7 @@ printf(_('With PFO-RBAC, the “is_public” property is gone. Instead, to make 
 <input type="text" name="form_box" value="<?php echo $group->getUnixBox(); ?>" />
 </td>
 </tr>
-<?php	} //end sus_use_shell condition ?>
+<?php	} ?>
 
 <tr>
 <td>
