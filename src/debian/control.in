@@ -28,7 +28,7 @@ Description: collaborative development tool - standard metapackage
 
 Package: fusionforge-common
 Architecture: all
-Depends: php-cli | php5-cli, php-pgsql | php5-pgsql, php-htmlpurifier | php5-htmlpurifier, cron, ucf, ${misc:Depends}
+Depends: php-cli | php5-cli, php-pgsql | php5-pgsql, php-htmlpurifier | php5-htmlpurifier, php-mbstring, cron, ucf, ${misc:Depends}
 # Handle conflicts with files in old packages:
 # gforge-common -> /usr/share/locale/XX/LC_MESSAGES/fusionforge.mo
 # gforge-db-postgresql -> /usr/bin/forge_make_admin & forge_set_password
