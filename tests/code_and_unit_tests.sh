@@ -21,7 +21,7 @@
 set -ex
 
 # Additional dependencies: 'pcregrep' and 'isutf8'
-apt-get -y install pcregrep moreutils
+apt-get -y install pcregrep moreutils php-mbstring
 # TODO: fix htmlpurifier include PATH in CentOS
 
 phpunit code_and_unit_tests.php
