@@ -106,9 +106,20 @@ if ($group->usesTracker()) {
 	$quotas[] = $q;
 }
 
+if ($group->usesFRS()) {
+	$res_db = $quota_management->getFRSSizeForProject($group_id);
+	$q["name"] = _('FRS');
+	$q["nb"] = 0; $q["size"] = 0;
+	if (db_numrows($res_db) > 0) {
+		$e = db_fetch_array($res_db);
+		$q["nb"] = $e["nb"];
+		$q["size"] = $e["size"];
+	}
+	$quotas[] = $q;
+}
+
 $quotas_disk = array();
 
-// espace disque
 // disk_total_space
 $_quota_block_size = trim(shell_exec('echo $BLOCK_SIZE')) + 0;
 if ($_quota_block_size == 0) $_quota_block_size = 1024;
@@ -128,18 +139,8 @@ $quota_tot_other = 0;
 $quota_tot_1 = 0;
 $quota_tot_scm = 0;
 
-$upload_dir = forge_get_config('upload_dir') . $group->getUnixName();
-$ftp_dir = forge_get_config('ftp_upload_dir')."/pub/".$group->getUnixName();
-$group_dir = forge_get_config('groupdir_prefix') . "/" . $group->getUnixName();
-
-$q["name"] = _('Download project directory');
-$q["path"] = "$upload_dir";
-$q["quota_label"] = _('Without quota control');
-$q["size"] = $quota_management->get_dir_size("$upload_dir");
-$quota_tot_other += $q["size"];
-$quotas_disk[] = $q;
-
 if (forge_get_config('use_shell')) {
+	$group_dir = forge_get_config('groupdir_prefix') . "/" . $group->getUnixName();
 	$q["name"] = _('Home project directory');
 	$q["path"] = "$group_dir"; $q["size"] = $quota_management->get_dir_size("$group_dir");
 	$q["quota_label"] = _('With ftp and home quota control');
@@ -148,6 +149,7 @@ if (forge_get_config('use_shell')) {
 }
 
 if ($group->usesFTP()) {
+	$ftp_dir = forge_get_config('ftp_upload_dir')."/pub/".$group->getUnixName();
 	$q["name"] = _('FTP project directory');
 	$q["path"] = "$ftp_dir"; $q["size"] = $quota_management->get_dir_size("$ftp_dir");
 	$q["quota_label"] = _('With ftp and home quota control');
@@ -159,14 +161,14 @@ plugin_hook_by_reference('quota_display', $quotas_disk);
 
 ?>
 
-<table width="500px" cellpadding="2" cellspacing="0" border="0">
+<table width="500" cellpadding="2" cellspacing="0" border="0">
 	<tr style="font-weight:bold">
-		<td colspan="3" style="border-top:thick solid #808080" align="center"><?php echo _('Database'); ?></td>
+		<td colspan="3" style="border-top:thick solid #808080; text-align: center"><?php echo _('Database'); ?></td>
 	</tr>
 	<tr style="font-weight:bold">
 		<td style="border-top:thin solid #808080"><?php echo _('quota type'); ?></td>
-		<td style="border-top:thin solid #808080" align="right"><?php echo _('quantity'); ?></td>
-		<td style="border-top:thin solid #808080" align="right"><?php echo _('size'); ?></td>
+		<td style="border-top:thin solid #808080; text-align: right"><?php echo _('quantity'); ?></td>
+		<td style="border-top:thin solid #808080; text-align: right"><?php echo _('size'); ?></td>
 	</tr>
 <?php
 $sizetot = 0;
@@ -176,8 +178,8 @@ foreach ($quotas as $q) {
 		?>
 			<tr>
 				<td style="border-top:thin solid #808080"><?php echo $q["name"]; ?></td>
-				<td style="border-top:thin solid #808080" align="right"><?php echo $q["nb"]; ?></td>
-				<td style="border-top:thin solid #808080" align="right"><?php echo human_readable_bytes($q["size"]); ?></td>
+				<td style="border-top:thin solid #808080; text-align: right"><?php echo $q["nb"]; ?></td>
+				<td style="border-top:thin solid #808080; text-align: right"><?php echo human_readable_bytes($q["size"]); ?></td>
 			</tr>
 <?php
 	}
@@ -188,16 +190,17 @@ foreach ($quotas as $q) {
 			<?php echo _('Total'); ?>
 		</td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080">&nbsp;</td>
-		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080" align="right">
+		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080; text-align: right">
 			<?php echo human_readable_bytes($sizetot); ?>
 		</td>
 	</tr>
 </table>
 <br />
 <br />
-<table width="500px" cellpadding="2" cellspacing="0" border="0">
+<?php if (count($quotas_disk) > 0) { ?>
+<table width="500" cellpadding="2" cellspacing="0" border="0">
 	<tr style="font-weight:bold">
-		<td colspan="3" style="border-top:thick solid #808080" align="center">
+		<td colspan="3" style="border-top:thick solid #808080; text-align: center">
 			<?php echo _('Disk space'); ?>
 		</td>
 	</tr>
@@ -205,8 +208,8 @@ foreach ($quotas as $q) {
 		<td style="border-top:thin solid #808080">
 			<?php echo _('quota type'); ?>
 		</td>
-		<td style="border-top:thin solid #808080" align="right">&nbsp;</td>
-		<td style="border-top:thin solid #808080" align="right">
+		<td style="border-top:thin solid #808080; text-align: right">&nbsp;</td>
+		<td style="border-top:thin solid #808080; text-align: right">
 			<?php echo _('size'); ?>
 		</td>
 	</tr>
@@ -218,10 +221,10 @@ foreach ($quotas_disk as $q) {
 ?>
 	<tr>
 		<td style="border-top:thin solid #808080"><?php echo $q["name"]; ?></td>
-		<td style="border-top:thin solid #808080" align="right">
+		<td style="border-top:thin solid #808080; text-align: right">
 			<?php echo $q["quota_label"]; ?>&nbsp;
 		</td>
-		<td style="border-top:thin solid #808080" align="right">
+		<td style="border-top:thin solid #808080; text-align: right">
 			<?php echo human_readable_bytes($q["size"]); ?>
 		</td>
 	</tr>
@@ -232,7 +235,7 @@ foreach ($quotas_disk as $q) {
 	<tr style="font-weight:bold">
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080"><?php echo _('Total'); ?></td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080">&nbsp;</td>
-		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080" align="right">
+		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080; text-align: right">
 			<?php echo human_readable_bytes($sizetot); ?>
 		</td>
 	</tr>
@@ -241,6 +244,7 @@ foreach ($quotas_disk as $q) {
 <br />
 
 <?php
+}
 $color1 = "#ffffff";
 $color2 = "#ffffff";
 $msg1 = "&nbsp;";
@@ -256,21 +260,21 @@ if (($quota_tot_scm+0) > ($qs+0) && ($qs+0) > 0) {
 }
 ?>
 
-<table width="500px" cellpadding="2" cellspacing="0" border="0">
+<table width="500" cellpadding="2" cellspacing="0" border="0">
 	<tr style="font-weight:bold">
-		<td colspan="4" style="border-top:thick solid #808080" align="center"><?php echo _('Quota disk management'); ?></td>
+		<td colspan="4" style="border-top:thick solid #808080; text-align: center"><?php echo _('Quota disk management'); ?></td>
 	</tr>
 	<tr style="font-weight:bold">
 		<td style="border-top:thin solid #808080">
 			<?php echo _('Quota settings'); ?>
 		</td>
-		<td style="border-top:thin solid #808080;font-weight:bold" align="right">
+		<td style="border-top:thin solid #808080;font-weight:bold; text-align: right">
 			&nbsp;
 		</td>
-		<td style="border-top:thin solid #808080" align="right">
+		<td style="border-top:thin solid #808080; text-align: right">
 			<?php echo _('Quota soft'); ?>
 		</td>
-		<td style="border-top:thin solid #808080" align="right">
+		<td style="border-top:thin solid #808080; text-align: right">
 			<?php echo _('Quota hard'); ?>
 		</td>
 	</tr>
@@ -278,10 +282,10 @@ if (($quota_tot_scm+0) > ($qs+0) && ($qs+0) > 0) {
 		<td style="border-top:thin solid #808080">
 			<?php echo _('Home, Ftp'); ?>
 		</td>
-		<td style="border-top:thin solid #808080;font-weight:bold;color:red" align="right">
+		<td style="border-top:thin solid #808080;font-weight:bold;color:red; text-align: right">
 			<?php echo $msg1; ?>
 		</td>
-		<td style="border-top:thin solid #808080" align="right">
+		<td style="border-top:thin solid #808080; text-align: right">
 			<?php
 				if ($quota_soft == 0) {
 					echo "---";
@@ -291,7 +295,7 @@ if (($quota_tot_scm+0) > ($qs+0) && ($qs+0) > 0) {
 				}
 			?>
 		</td>
-		<td style="border-top:thin solid #808080" align="right">
+		<td style="border-top:thin solid #808080; text-align: right">
 			<?php
 				if ($quota_hard == 0) {
 					echo "---";
@@ -307,10 +311,10 @@ if (($quota_tot_scm+0) > ($qs+0) && ($qs+0) > 0) {
 		<td style="border-top:thin solid #808080">
 			<?php echo _('SCM'); ?>
 		</td>
-		<td style="border-top:thin solid #808080;font-weight:bold;color:red" align="right">
+		<td style="border-top:thin solid #808080;font-weight:bold;color:red; text-align: right">
 			<?php echo $msg2; ?>
 		</td>
-		<td style="border-top:thin solid #808080" align="right">
+		<td style="border-top:thin solid #808080; text-align: right">
 			<?php
 				if ($quota_soft == 0) {
 					echo "---";
@@ -320,7 +324,7 @@ if (($quota_tot_scm+0) > ($qs+0) && ($qs+0) > 0) {
 				}
 			?>
 			</td>
-		<td style="border-top:thin solid #808080" align="right">
+		<td style="border-top:thin solid #808080; text-align: right">
 			<?php
 				if ($quota_hard == 0) {
 					echo "---";
@@ -333,7 +337,7 @@ if (($quota_tot_scm+0) > ($qs+0) && ($qs+0) > 0) {
 	</tr>
 <?php } ?>
 	<tr style="font-weight:bold">
-		<td colspan="4" style="border-top:thick solid #808080" align="center">&nbsp;</td>
+		<td colspan="4" style="border-top:thick solid #808080">&nbsp;</td>
 	</tr>
 </table>
 <?php project_admin_footer();

@@ -24,6 +24,9 @@
  */
 
 class quota_managementPlugin extends Plugin {
+
+	var $data_array;
+
 	function __construct() {
 		parent::__construct();
 		$this->name = "quota_management";
@@ -37,19 +40,17 @@ to monitor disk and database usage per user, project.");
 	}
 
 	function CallHook($hookname, &$params) {
-		global $use_quota_managementplugin, $G_SESSION, $HTML;
 		$returned = false;
 		switch ($hookname) {
 			case "project_admin_plugins": {
 				// this displays the link in the project admin options page to it's  quota_management administration
-				echo util_make_link('/plugins/quota_management/index.php?group_id='.$params['group_id'].'&type=projectadmin',
-						_('View the Quota Management Administration'));
-				echo '<br />';
+				echo html_e('p', array(), util_make_link('/plugins/'.$this->name.'/?type=projectadmin&group_id='.$params['group_id'],
+						_('Quota Management Administration')));
 				$returned = true;
 				break;
 			}
 			case "site_admin_option_hook": {
-				echo '<li>'.$this->getAdminOptionLink().'</li>';
+				echo html_e('li', array(), $this->getAdminOptionLink());
 				$returned = true;
 				break;
 			}
@@ -77,6 +78,32 @@ to monitor disk and database usage per user, project.");
 		return "$size";
 	}
 
+	function getDataArray($group_id) {
+		$res = db_query_params('select * from plugin_quota_management WHERE group_id = $1', array($group_id));
+		$this->data_array = db_fetch_array($res);
+	}
+
+	function getFTPSize($group_id) {
+		if (!isset($this->data_array['ftp_usage'])) {
+			$this->getDataArray($group_id);
+		}
+		return $this->data_array['ftp_usage'];
+	}
+
+	function getHomeSize($group_id) {
+		if (!isset($this->data_array['home_usage'])) {
+			$this->getDataArray($group_id);
+		}
+		return $this->data_array['home_usage'];
+	}
+
+	function getQuota($group_id, $quota_type) {
+		if (!isset($this->data_array[$quota_type])) {
+			$this->getDataArray($group_id);
+		}
+		return $this->data_array[$quota_type];
+	}
+
 	function getHeader($type, $group_id = 0) {
 		switch ($type) {
 			case 'globaladmin': {
@@ -101,17 +128,26 @@ to monitor disk and database usage per user, project.");
 	}
 
 	function getDocumentsSizeForProject($group_id) {
-		return db_query_params('SELECT doc_data.group_id, SUM(doc_data_version.filesize) as size, SUM(octet_length(doc_data_version.data_words)) as size1, count(doc_data_version.serial_id) as nb
-					FROM doc_data, doc_data_version WHERE doc_data.docid = doc_data_version.docid AND doc_data.group_id = $1 GROUP BY doc_data.group_id',
+		return db_query_params('SELECT SUM(doc_data_version.filesize) as size, SUM(octet_length(doc_data_version.data_words)) as size1, count(doc_data_version.serial_id) as nb
+					FROM doc_data, doc_data_version WHERE doc_data.docid = doc_data_version.docid AND doc_data.group_id = $1',
 			array($group_id));
 	}
 
 	function getTrackerSizeForProject($group_id) {
-		return db_query_params('select SUM(octet_length(artifact.summary)+octet_length(artifact.details)+octet_length(artifact_message.body)+artifact_file.filesize) as size, count(artifact_group_list.group_artifact_id) as nb
+		return db_query_params('SELECT SUM(octet_length(artifact.summary)+octet_length(artifact.details)+octet_length(artifact_message.body)+artifact_file.filesize) as size, count(artifact_group_list.group_artifact_id) as nb
 					FROM artifact, artifact_group_list, artifact_message, artifact_file
 					WHERE artifact.group_artifact_id = artifact_group_list.group_artifact_id
 					AND artifact.artifact_id = artifact_message.artifact_id
 					AND artifact.artifact_id = artifact_file.artifact_id
+					AND group_id = $1',
+			array($group_id));
+	}
+
+	function getFRSSizeForProject($group_id) {
+		return db_query_params('SELECT SUM(octet_length(frs_package.name)+octet_length(frs_release.name)+octet_length(frs_release.notes)+octet_length(frs_release.changes)+frs_file.file_size) as size, count(frs_package.package_id) as nb
+					FROM frs_package, frs_release, frs_file
+					WHERE frs_package.package_id = frs_release.package_id
+					AND frs_release.release_id = frs_file.release_id
 					AND group_id = $1',
 			array($group_id));
 	}
