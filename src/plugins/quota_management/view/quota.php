@@ -52,7 +52,8 @@ echo $HTML->subMenu($subMenuTitle, $subMenuUrl, $subMenuAttr);
 $quotas = array();
 
 // all projects list
-$res_db = db_query_params('SELECT group_id, group_name, unix_group_name, quota_soft, quota_hard FROM groups ORDER BY group_id ',
+$res_db = db_query_params('SELECT plugin_quota_management.*, groups.group_name, groups.unix_group_name FROM plugin_quota_management, groups
+			WHERE plugin_quota_management.group_id = groups.group_id ORDER BY group_id',
 			array());
 if (db_numrows($res_db) > 0) {
 	while($e = db_fetch_array($res_db)) {

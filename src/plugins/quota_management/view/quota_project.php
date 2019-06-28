@@ -154,19 +154,17 @@ $quota_tot_1 = 0;
 $quota_tot_scm = 0;
 
 if (forge_get_config('use_shell')) {
-	$group_dir = forge_get_config('groupdir_prefix') . "/" . $group->getUnixName();
 	$q["name"] = _('Home project directory');
-	$q["path"] = "$group_dir"; $q["size"] = $quota_management->get_dir_size("$group_dir");
-	$q["quota_label"] = _('With ftp and home quota control');
+	$q["size"] = $quota_management->getHomeSize($group_id);
+	$q["quota_label"] = _('With Home quota control');
 	$quota_tot_1 += $q["size"];
 	$quotas_disk[] = $q;
 }
 
 if ($group->usesFTP()) {
-	$ftp_dir = forge_get_config('ftp_upload_dir')."/pub/".$group->getUnixName();
 	$q["name"] = _('FTP project directory');
-	$q["path"] = "$ftp_dir"; $q["size"] = $quota_management->get_dir_size("$ftp_dir");
-	$q["quota_label"] = _('With ftp and home quota control');
+	$q["size"] = $quota_management->getFTPSize($group_id);
+	$q["quota_label"] = _('With FTP quota control');
 	$quota_tot_1 += $q["size"];
 	$quotas_disk[] = $q;
 }
