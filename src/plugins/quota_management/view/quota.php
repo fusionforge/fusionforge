@@ -66,6 +66,8 @@ if (db_numrows($res_db) > 0) {
 		$quotas["$e[group_id]"]["disk_size_scm"] = 0;
 		$quotas["$e[group_id]"]["quota_hard"] = $e["quota_hard"] * $_quota_block_size;
 		$quotas["$e[group_id]"]["quota_soft"] = $e["quota_soft"] * $_quota_block_size;
+		$quotas["$e[group_id]"]["quota_db_hard"] = $e["quota_db_hard"] * $_quota_block_size;
+		$quotas["$e[group_id]"]["quota_db_soft"] = $e["quota_db_soft"] * $_quota_block_size;
 	}
 }
 
@@ -77,6 +79,39 @@ if (forge_get_config('use_docman')) {
 			$q = array();
 			$quotas["$e[group_id]"]["database_size"] += $e["size"];
 			$quotas["$e[group_id]"]["database_size"] += $e["size1"];
+		}
+	}
+}
+
+// trackers database size
+if (forge_get_config('use_tracker')) {
+	$res_db = $quota_management->getTrackersSizeQuery();
+	if (db_numrows($res_db) > 0) {
+		while($e = db_fetch_array($res_db)) {
+			$q = array();
+			$quotas["$e[group_id]"]["database_size"] += $e["size"];
+		}
+	}
+}
+
+// FRS database size
+if (forge_get_config('use_frs')) {
+	$res_db = $quota_management->getFRSSizeQuery();
+	if (db_numrows($res_db) > 0) {
+		while($e = db_fetch_array($res_db)) {
+			$q = array();
+			$quotas["$e[group_id]"]["database_size"] += $e["size"];
+		}
+	}
+}
+
+// PM database size
+if (forge_get_config('use_frs')) {
+	$res_db = $quota_management->getPMSizeQuery();
+	if (db_numrows($res_db) > 0) {
+		while($e = db_fetch_array($res_db)) {
+			$q = array();
+			$quotas["$e[group_id]"]["database_size"] += $e["size"];
 		}
 	}
 }

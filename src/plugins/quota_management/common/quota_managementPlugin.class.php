@@ -123,7 +123,10 @@ to monitor disk and database usage per user, project.");
 
 	function getDocumentsSizeQuery() {
 		return db_query_params('SELECT doc_data.group_id, SUM(doc_data_version.filesize) as size, SUM(octet_length(doc_data_version.data_words)) as size1
-					FROM doc_data, doc_data_version WHERE doc_data.docid = doc_data_version.docid GROUP BY doc_data.group_id',
+					FROM doc_data, doc_data_version
+					WHERE doc_data.docid = doc_data_version.docid
+					GROUP BY doc_data.group_id
+					ORDER BY doc_data.group_id',
 			array());
 	}
 
@@ -131,6 +134,17 @@ to monitor disk and database usage per user, project.");
 		return db_query_params('SELECT SUM(doc_data_version.filesize) as size, SUM(octet_length(doc_data_version.data_words)) as size1, count(doc_data_version.serial_id) as nb
 					FROM doc_data, doc_data_version WHERE doc_data.docid = doc_data_version.docid AND doc_data.group_id = $1',
 			array($group_id));
+	}
+
+	function getTrackersSizeQuery() {
+		return db_query_params('SELECT artifact_group_list.group_id, SUM(octet_length(artifact.summary)+octet_length(artifact.details)+octet_length(artifact_message.body)+artifact_file.filesize) as size
+					FROM artifact, artifact_group_list, artifact_message, artifact_file
+					WHERE artifact.group_artifact_id = artifact_group_list.group_artifact_id
+					AND artifact.artifact_id = artifact_message.artifact_id
+					AND artifact.artifact_id = artifact_file.artifact_id
+					GROUP BY artifact_group_list.group_id
+					ORDER BY artifact_group_list.group_id',
+			array());
 	}
 
 	function getTrackerSizeForProject($group_id) {
@@ -143,6 +157,16 @@ to monitor disk and database usage per user, project.");
 			array($group_id));
 	}
 
+	function getFRSSizeQuery() {
+		return db_query_params('SELECT frs_package.group_id, SUM(octet_length(frs_package.name)+octet_length(frs_release.name)+octet_length(frs_release.notes)+octet_length(frs_release.changes)+frs_file.file_size) as size
+					FROM frs_package, frs_release, frs_file
+					WHERE frs_package.package_id = frs_release.package_id
+					AND frs_release.release_id = frs_file.release_id
+					GROUP BY frs_package.group_id
+					ORDER BY frs_package.group_id',
+			array());
+	}
+
 	function getFRSSizeForProject($group_id) {
 		return db_query_params('SELECT SUM(octet_length(frs_package.name)+octet_length(frs_release.name)+octet_length(frs_release.notes)+octet_length(frs_release.changes)+frs_file.file_size) as size, count(frs_package.package_id) as nb
 					FROM frs_package, frs_release, frs_file
@@ -150,6 +174,16 @@ to monitor disk and database usage per user, project.");
 					AND frs_release.release_id = frs_file.release_id
 					AND group_id = $1',
 			array($group_id));
+	}
+
+	function getPMSizeQuery() {
+		return db_query_params('SELECT project_group_list.group_id, SUM(octet_length(project_group_list.description)+octet_length(project_task.summary)+octet_length(project_task.details)+octet_length(project_messages.body)) as size
+					FROM project_group_list, project_task, project_messages
+					WHERE project_group_list.group_project_id = project_task.group_project_id
+					AND project_task.project_task_id = project_messages.project_task_id
+					GROUP BY project_group_list.group_id
+					ORDER BY project_group_list.group_id',
+			array());
 	}
 
 	function getPMSizeForProject($group_id) {
