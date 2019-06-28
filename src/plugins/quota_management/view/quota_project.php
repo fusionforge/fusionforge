@@ -108,7 +108,21 @@ if ($group->usesTracker()) {
 
 if ($group->usesFRS()) {
 	$res_db = $quota_management->getFRSSizeForProject($group_id);
+	$q = array();
 	$q["name"] = _('FRS');
+	$q["nb"] = 0; $q["size"] = 0;
+	if (db_numrows($res_db) > 0) {
+		$e = db_fetch_array($res_db);
+		$q["nb"] = $e["nb"];
+		$q["size"] = $e["size"];
+	}
+	$quotas[] = $q;
+}
+
+if ($group->usesPM()) {
+	$res_db = $quota_management->getPMSizeForProject($group_id);
+	$q = array();
+	$q["name"] = _('PM');
 	$q["nb"] = 0; $q["size"] = 0;
 	if (db_numrows($res_db) > 0) {
 		$e = db_fetch_array($res_db);

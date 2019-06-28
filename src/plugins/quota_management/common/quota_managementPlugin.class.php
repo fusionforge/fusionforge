@@ -151,6 +151,15 @@ to monitor disk and database usage per user, project.");
 					AND group_id = $1',
 			array($group_id));
 	}
+
+	function getPMSizeForProject($group_id) {
+		return db_query_params('SELECT SUM(octet_length(project_group_list.description)+octet_length(project_task.summary)+octet_length(project_task.details)+octet_length(project_messages.body)) as size, count(project_group_list.group_project_id) as nb
+					FROM project_group_list, project_task, project_messages
+					WHERE project_group_list.group_project_id = project_task.group_project_id
+					AND project_task.project_task_id = project_messages.project_task_id
+					AND group_id = $1',
+			array($group_id));
+	}
 }
 
 // Local Variables:
