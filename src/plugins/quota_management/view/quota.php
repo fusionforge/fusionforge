@@ -61,7 +61,6 @@ if (db_numrows($res_db) > 0) {
 		$quotas["$e[group_id]"]["name"] = $e["group_name"];
 		$quotas["$e[group_id]"]["unix_name"] = $e["unix_group_name"];
 		$quotas["$e[group_id]"]["database_size"] = 0;
-		$quotas["$e[group_id]"]["disk_size_other"] = 0;
 		$quotas["$e[group_id]"]["disk_size_1"] = 0;
 		$quotas["$e[group_id]"]["disk_size_scm"] = 0;
 		$quotas["$e[group_id]"]["quota_hard"] = $e["quota_hard"] * $_quota_block_size;
@@ -137,34 +136,18 @@ if (forge_get_config('use_forums')) {
 }
 
 // disk space size
-$chroot_dir = forge_get_config('chroot');
-$ftp_dir = forge_get_config('ftp_upload_dir')."/pub/";
-$upload_dir = forge_get_config('upload_dir');
-$group_dir = $chroot_dir.forge_get_config('groupdir_prefix')."/";
-$cvs_dir = $chroot_dir.$cvsdir_prefix."/";
-
 foreach ($quotas as $p) {
 	$group_id = $p["group_id"];
-	// upload dir disk space
-	$dir = $upload_dir.$p["unix_name"];
-	$size = $quota_management->get_dir_size($dir);
-	$quotas["$group_id"]["disk_size_other"] += $size;
-	// ftp dir disk space
-	$dir = $ftp_dir.$p["unix_name"];
-	$size = $quota_management->get_dir_size($dir);
-	$quotas["$group_id"]["disk_size_1"] += $size;
-	// home dir disk space
-	$dir = $group_dir.$p["unix_name"];
-	$size = $quota_management->get_dir_size($dir);
-	$quotas["$group_id"]["disk_size_1"] += $size;
-	// cvs dir disk space
-	$dir = $cvs_dir.$p["unix_name"];
-	$size = $quota_management->get_dir_size($dir);
-	$quotas["$group_id"]["disk_size_scm"] += $size;
-	// svn dir disk space
-	$dir = forge_get_config('repos_path', 'scmsvn').'/'.$p["unix_name"];
-	$size = $quota_management->get_dir_size($dir);
-	$quotas["$group_id"]["disk_size_scm"] += $size;
+	if (forge_get_config('use_ftp')) {
+		// ftp dir disk space
+		$size = $quota_management->getFTPSize($group_id);
+		$quotas["$group_id"]["disk_size_1"] += $size;
+	}
+	if (forge_get_config('use_shell')) {
+		// home dir disk space
+		$size = $quota_management->getHomeSize($group_id);
+		$quotas["$group_id"]["disk_size_1"] += $size;
+	}
 }
 
 // users disk space size
@@ -172,12 +155,9 @@ $ftp_dir = forge_get_config('homedir_prefix');
 $users = array();
 $res_db = db_query_params('SELECT user_id, user_name, realname, unix_status FROM users ORDER BY user_id ',
 			array());
-if (db_numrows($res_db) > 0)
-{
-	while($e = db_fetch_array($res_db))
-	{
-		if ($e["unix_status"] != "N")
-		{
+if (db_numrows($res_db) > 0) {
+	while($e = db_fetch_array($res_db)) {
+		if ($e["unix_status"] != "N") {
 			$users["$e[user_id]"]["user_id"] = $e["user_id"];
 			$users["$e[user_id]"]["user_name"] = "$e[user_name]";
 			$users["$e[user_id]"]["realname"] = "$e[realname]";
@@ -186,8 +166,7 @@ if (db_numrows($res_db) > 0)
 		}
 	}
 }
-foreach ($users as $u)
-{
+foreach ($users as $u) {
 	$user_id = $u["user_id"];
 	$dir = $ftp_dir .  $u["user_name"];
 	$size = $quota_management->get_dir_size($dir);
@@ -195,22 +174,16 @@ foreach ($users as $u)
 }
 
 ?>
-<table width="800px" cellpadding="2" cellspacing="0" border="0">
+<table width="800" cellpadding="2" cellspacing="0" border="0">
 	<tr style="">
 		<td style="border-top:thick solid #808080;font-weight:bold" colspan="3">
 			<?php echo _('Projects ressources use'); ?>
 		</td>
-		<td style="border-top:thick solid #808080" colspan="7">
+		<td style="border-top:thick solid #808080" colspan="9">
 			<span style="font-size:10px">
 				(&nbsp;
 				<?php echo _('project'); ?>* :
 				<?php echo 'FTP, ' . _('Home'); ?>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<?php echo _('SCM'); ?>* :
-				<?php echo 'CVS, Subversion'; ?>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<?php echo _('others'); ?>* :
-				<?php echo _('Download - without quota control'); ?>
 				&nbsp;)
 			</span>
 		</td>
@@ -223,25 +196,28 @@ foreach ($users as $u)
 			<?php echo _('name'); ?>
 		</td>
 		<td style="border-top:thin solid #808080"><br /></td>
-		<td style="border-top:thin solid #808080;background:#e0e0e0" align="right">
+		<td style="border-top:thin solid #808080;background:#e0e0e0; text-align: right">
 			<?php echo _('database'); ?>
 		</td>
-		<td style="border-top:thin solid #808080;background:#e0e0e0" align="right">
+		<td style="border-top:thin solid #808080;background:#e0e0e0; text-align: right">
 			<?php echo _('project'); ?>*
 		</td>
-		<td style="border-top:thin solid #808080;background:#e0e0e0" align="right">
-			<?php echo _('SCM'); ?>*
+		<td style="border-top:thin solid #808080;background:#e0e0e0; text-align: right">
+			<?php echo _('SCM'); ?>
 		</td>
-		<td style="border-top:thin solid #808080;background:#e0e0e0" align="right">
-			<?php echo _('others'); ?>*
-		</td>
-		<td style="border-top:thin solid #808080;background:#e0e0e0" align="right">
+		<td style="border-top:thin solid #808080;background:#e0e0e0; text-align: right">
 			<?php echo _('total'); ?>
 		</td>
-		<td style="border-top:thin solid #808080" align="right">
+		<td style="border-top:thin solid #808080; text-align: right">
+			<?php echo _('database quota soft'); ?>
+		</td>
+		<td style="border-top:thin solid #808080; text-align: right">
+			<?php echo _('database quota hard'); ?>
+		</td>
+		<td style="border-top:thin solid #808080; text-align: right">
 			<?php echo _('disk quota soft'); ?>
 		</td>
-		<td style="border-top:thin solid #808080" align="right">
+		<td style="border-top:thin solid #808080; text-align: right">
 			<?php echo _('disk quota hard'); ?>
 		</td>
 	</tr>
@@ -249,28 +225,27 @@ foreach ($users as $u)
 	$total_database = 0;
 	$total_disk = 0;
 	$total_disk_1 = 0;
-	$total_disk_other = 0;
 	$total_disk_scm = 0;
-	foreach ($quotas as $q)
-	{
+	foreach ($quotas as $q) {
 		$total_database += $q["database_size"];
 		$total_disk_1 += $q["disk_size_1"];
-		$total_disk_other += $q["disk_size_other"];
 		$total_disk_scm += $q["disk_size_scm"];
-		$total_disk += $q["disk_size_1"]+$q["disk_size_scm"]+$q["disk_size_other"];
-		$local_disk_size = $q["database_size"]+$q["disk_size_1"]+$q["disk_size_scm"]+$q["disk_size_other"];
+		$total_disk += $q["disk_size_1"]+$q["disk_size_scm"];
+		$local_disk_size = $q["database_size"]+$q["disk_size_1"]+$q["disk_size_scm"];
 		$color1 = "#e0e0e0";
 		$color2 = "#ffffff";
 		$color0 = $color1;
 		$colorq = $color2;
-		if ($q["quota_soft"] > 0)
-		{
+		$colorqb = $color2;
+		if ($q["quota_soft"] > 0) {
 			$color0 = "#E5ECB1";
 			$colorq = $color0;
 		}
-		// echo "size $q[disk_size] quota $q[quota_soft] <br />";
-		if (($q["disk_size_1"] > $q["quota_soft"] || $q["disk_size_scm"] > $q["quota_soft"]) && $q["quota_soft"] > 0)
-		{
+		if ($q["quota_db_soft"] > 0) {
+			$color0 = "#f0f0f0";
+			$colorqb = $color0;
+		}
+		if (($q["disk_size_1"] > $q["quota_soft"] || $q["disk_size_scm"] > $q["quota_soft"]) && $q["quota_soft"] > 0) {
 			$color1 = "#FF9898";
 			$color2 = "#FFDCDC";
 			$color0 = $color1;
@@ -285,41 +260,50 @@ foreach ($users as $u)
 			<td style="border-top:thin solid #808080;background:<?php echo $color2; ?>">
 				<?php echo $q["name"]; ?>
 			</td>
-			<td style="border-top:thin solid #808080;background:<?php echo $color1; ?>" align="right">
+			<td style="border-top:thin solid #808080;background:<?php echo $color1; ?>; text-align: right">
 				<?php echo human_readable_bytes($q["database_size"]); ?>
 			</td>
-			<td style="border-top:thin solid #808080;background:<?php echo $color0; ?>" align="right">
+			<td style="border-top:thin solid #808080;background:<?php echo $color0; ?>; text-align: right">
 				<?php echo human_readable_bytes($q["disk_size_1"]); ?>
 			</td>
-			<td style="border-top:thin solid #808080;background:<?php echo $color0; ?>" align="right">
+			<td style="border-top:thin solid #808080;background:<?php echo $color0; ?>; text-align: right">
 				<?php echo human_readable_bytes($q["disk_size_scm"]); ?>
 			</td>
-			<td style="border-top:thin solid #808080;background:<?php echo $color1; ?>" align="right">
-				<?php echo human_readable_bytes($q["disk_size_other"]); ?>
-			</td>
-			<td style="border-top:thin solid #808080;background:<?php echo $color1; ?>;font-weight:bold" align="right">
+			<td style="border-top:thin solid #808080;background:<?php echo $color1; ?>;font-weight:bold; text-align: right">
 				<?php echo human_readable_bytes($local_disk_size); ?>
 			</td>
-			<td style="border-top:thin solid #808080;background:<?php echo $colorq; ?>" align="right">
+			<td style="border-top:thin solid #808080;background:<?php echo $colorqb; ?>; text-align: right">
 				<?php
-					if ($q["quota_soft"] > 0)
-					{
-						echo human_readable_bytes($q["quota_soft"]);
-					}
-					else
-					{
+					if ($q["quota_db_soft"] > 0) 					{
+						echo human_readable_bytes($q["quota_db_soft"]);
+					} else {
 						echo "---";
 					}
 				?>
 			</td>
-			<td style="border-top:thin solid #808080;background:<?php echo $colorq; ?>" align="right">
+			<td style="border-top:thin solid #808080;background:<?php echo $colorqb; ?>; text-align: right">
 				<?php
-					if ($q["quota_hard"] > 0)
-					{
-						echo human_readable_bytes($q["quota_hard"]);
+					if ($q["quota_db_hard"] > 0) {
+						echo human_readable_bytes($q["quota_db_hard"]);
+					} else {
+						echo "---";
 					}
-					else
-					{
+				?>
+			</td>
+			<td style="border-top:thin solid #808080;background:<?php echo $colorq; ?>; text-align: right">
+				<?php
+					if ($q["quota_soft"] > 0) {
+						echo human_readable_bytes($q["quota_soft"]);
+					} else {
+						echo "---";
+					}
+				?>
+			</td>
+			<td style="border-top:thin solid #808080;background:<?php echo $colorq; ?>; text-align: right">
+				<?php
+					if ($q["quota_hard"] > 0) {
+						echo human_readable_bytes($q["quota_hard"]);
+					} else {
 						echo "---";
 					}
 				?>
@@ -334,28 +318,27 @@ foreach ($users as $u)
 			<?php echo _('total'); ?>
 		</td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080"><br /></td>
-		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080;background:#e0e0e0" align="right">
+		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080;background:#e0e0e0; text-align: right">
 			<?php echo human_readable_bytes($total_database); ?>
 		</td>
-		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080;background:#e0e0e0" align="right">
+		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080;background:#e0e0e0; text-align: right">
 			<?php echo human_readable_bytes($total_disk_1); ?>
 		</td>
-		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080;background:#e0e0e0" align="right">
+		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080;background:#e0e0e0; text-align: right">
 			<?php echo human_readable_bytes($total_disk_scm); ?>
 		</td>
-		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080;background:#e0e0e0" align="right">
-			<?php echo human_readable_bytes($total_disk_other); ?>
+		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080;background:#e0e0e0; text-align: right">
+			<?php echo human_readable_bytes($total_database+$total_disk_1+$total_disk_scm); ?>
 		</td>
-		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080;background:#e0e0e0" align="right">
-			<?php echo human_readable_bytes($total_database+$total_disk_1+$total_disk_scm+$total_disk_other); ?>
-		</td>
+		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080"><br /></td>
+		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080"><br /></td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080"><br /></td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080"><br /></td>
 	</tr>
 </table>
 <br />
 <br />
-<table width="700px" cellpadding="2" cellspacing="0" border="0">
+<table width="700" cellpadding="2" cellspacing="0" border="0">
 	<tr style="font-weight:bold">
 		<td style="border-top:thick solid #808080" colspan="6">
 			<?php echo _('Users disk use'); ?>
@@ -367,14 +350,13 @@ foreach ($users as $u)
 		<td style="border-top:thin solid #808080"><br /></td>
 		<td style="border-top:thin solid #808080"><br /></td>
 		<td style="border-top:thin solid #808080"><br /></td>
-		<td style="border-top:thin solid #808080" align="right">
+		<td style="border-top:thin solid #808080; text-align: right">
 			<?php echo _('disk'); ?>
 		</td>
 	</tr>
 	<?php
 	$total = 0;
-	foreach ($users as $u)
-	{
+	foreach ($users as $u) {
 		$total += $u["disk_size"];
 		?>
 		<tr>
@@ -383,7 +365,7 @@ foreach ($users as $u)
 			<td style="border-top:thin solid #808080"><?php echo $u["realname"]; ?></td>
 			<td style="border-top:thin solid #808080"><br /></td>
 			<td style="border-top:thin solid #808080"><br /></td>
-			<td style="border-top:thin solid #808080" align="right">
+			<td style="border-top:thin solid #808080; text-align: right">
 				<?php echo $u["disk_size"]; ?>
 			</td>
 		</tr>
@@ -398,7 +380,7 @@ foreach ($users as $u)
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080"><br /></td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080"><br /></td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080"><br /></td>
-		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080" align="right">
+		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080; text-align: right">
 			<?php echo $total; ?>
 		</td>
 	</tr>
