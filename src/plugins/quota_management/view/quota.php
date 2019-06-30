@@ -106,7 +106,7 @@ if (forge_get_config('use_frs')) {
 }
 
 // PM database size
-if (forge_get_config('use_frs')) {
+if (forge_get_config('use_pm')) {
 	$res_db = $quota_management->getPMSizeQuery();
 	if (db_numrows($res_db) > 0) {
 		while($e = db_fetch_array($res_db)) {
@@ -118,8 +118,7 @@ if (forge_get_config('use_frs')) {
 
 // news database size
 if (forge_get_config('use_news')) {
-	$res_db = db_query_params('SELECT group_id, SUM(octet_length(summary) + octet_length(details)) as size FROM news_bytes GROUP BY group_id',
-				array());
+	$res_db = $quota_management->getNewsSizeQuery();
 	if (db_numrows($res_db) > 0) {
 		while($e = db_fetch_array($res_db)) {
 			$quotas["$e[group_id]"]["database_size"] += $e["size"];
@@ -129,8 +128,7 @@ if (forge_get_config('use_news')) {
 
 // forums database size
 if (forge_get_config('use_forums')) {
-	$res_db = db_query_params('SELECT forum_group_list.group_id as group_id, SUM(octet_length(subject)+octet_length(body)) as size FROM forum INNER JOIN forum_group_list ON forum.group_forum_id = forum_group_list.group_forum_id GROUP BY group_id',
-				array ());
+	$res_db = $quota_management->getForumSizeQuery();
 	if (db_numrows($res_db) > 0) {
 		while($e = db_fetch_array($res_db)) {
 			$quotas["$e[group_id]"]["database_size"] += $e["size"];

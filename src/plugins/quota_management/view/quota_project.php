@@ -65,8 +65,7 @@ if ($group->usesDocman()) {
 }
 
 if ($group->usesNews()) {
-	$res_db = db_query_params('SELECT SUM(octet_length(summary) + octet_length(details)) as size, count(*) as nb FROM news_bytes WHERE group_id = $1 ',
-				array ($group_id));
+	$res_db = $quota_management->getNewsSizeForProject($group_id);
 	$q = array();
 	$q["name"] = _('News');
 	$q["nb"] = 0; $q["size"] = 0;
@@ -80,8 +79,7 @@ if ($group->usesNews()) {
 }
 
 if ($group->usesForum()) {
-	$res_db = db_query_params('SELECT SUM(octet_length(subject)+octet_length(body)) as size, count(*) as nb FROM forum INNER JOIN forum_group_list ON forum.group_forum_id = forum_group_list.group_forum_id WHERE group_id = $1 ',
-				array ($group_id));
+	$res_db = $quota_management->getForumSizeForProject($group_id);
 	$q = array();
 	$q["name"] = _('Forums');
 	$q["nb"] = 0; $q["size"] = 0;

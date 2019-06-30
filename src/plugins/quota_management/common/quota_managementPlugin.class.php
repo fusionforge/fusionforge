@@ -136,6 +136,36 @@ to monitor disk and database usage per user, project.");
 			array($group_id));
 	}
 
+	function getNewsSizeQuery() {
+		return db_query_params('SELECT group_id, SUM(octet_length(summary) + octet_length(details)) as size
+					FROM news_bytes
+					GROUP BY group_id
+					ORDER BY group_id',
+			array());
+	}
+
+	function getNewsSizeForProject($group_id) {
+		return db_query_params('SELECT SUM(octet_length(summary) + octet_length(details)) as size, count(*) as nb
+					FROM news_bytes
+					WHERE group_id = $1',
+			array($group_id));
+	}
+
+	function getForumSizeQuery() {
+		return db_query_params('SELECT forum_group_list.group_id as group_id, SUM(octet_length(subject)+octet_length(body)) as size
+					FROM forum INNER JOIN forum_group_list ON forum.group_forum_id = forum_group_list.group_forum_id
+					GROUP BY group_id
+					ORDER BY group_id',
+			array());
+	}
+
+	function getForumSizeForProject($group_id) {
+		return db_query_params('SELECT SUM(octet_length(subject)+octet_length(body)) as size, count(*) as nb
+					FROM forum INNER JOIN forum_group_list ON forum.group_forum_id = forum_group_list.group_forum_id
+					WHERE group_id = $1',
+			array($group_id));
+	}
+
 	function getTrackersSizeQuery() {
 		return db_query_params('SELECT artifact_group_list.group_id, SUM(octet_length(artifact.summary)+octet_length(artifact.details)+octet_length(artifact_message.body)+artifact_file.filesize) as size
 					FROM artifact, artifact_group_list, artifact_message, artifact_file
