@@ -70,16 +70,27 @@ to monitor disk and database usage per user, project.");
 	}
 
 	function get_dir_size($dir) {
-		$size = "";
+		$size = 0;
 		$cmd = "/usr/bin/du -bs $dir";
-		$res = shell_exec ($cmd);
+		$res = shell_exec($cmd);
 		$a = explode("\t", $res);
 		if (isset($a[1])) $size = $a[0];
-		return "$size";
+		return int($size);
+	}
+
+	function setDirSize($group_id, $dirtype, $dirsize) {
+		switch ($dirtype) {
+			case 'home':
+				$res = db_query_params('UPDATE plugin_quota_management SET home_usage = $1 WHERE group_id = $2', array($dirsize, $group_id));
+				break;
+			case 'ftp':
+				$res = db_query_params('UPDATE plugin_quota_management SET ftp_usage = $1 WHERE group_id = $2', array($dirsize, $group_id));
+				break;
+		}
 	}
 
 	function getDataArray($group_id) {
-		$res = db_query_params('select * from plugin_quota_management WHERE group_id = $1', array($group_id));
+		$res = db_query_params('SELECT * from plugin_quota_management WHERE group_id = $1', array($group_id));
 		$this->data_array = db_fetch_array($res);
 	}
 

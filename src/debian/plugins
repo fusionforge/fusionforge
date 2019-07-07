@@ -106,3 +106,6 @@ Depends: php-text-captcha
 
 Package: fusionforge-plugin-rest
 Depends:
+
+Package: fusionforge-plugin-quota_management
+Depends: quota

@@ -101,3 +101,6 @@ Requires: php-pear-Text-CAPTCHA
 
 %package plugin-rest
 Requires:
+
+%package quota_management
+Requires: quota
