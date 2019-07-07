@@ -24,6 +24,9 @@
  */
 
 class quota_managementPlugin extends Plugin {
+	public $systask_types = array(
+		'QUOTAMANAGEMENT_SET_QUOTA' => 'quota_management-set_quota.php',
+	);
 
 	var $data_array;
 
