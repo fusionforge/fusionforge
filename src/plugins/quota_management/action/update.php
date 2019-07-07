@@ -27,6 +27,11 @@
 global $quota_management;
 global $group_id;
 
+if ( !forge_check_global_perm('forge_admin')) {
+	$warning_msg = _('Quota Management Action Denied.');
+	redirect_url = '/plugins/'.$quota_management->name.'/?group_id='.$group_id;
+}
+
 require_once $gfcommon.'include/SysTasksQ.class.php';
 
 $_quota_block_size = trim(shell_exec('echo $BLOCK_SIZE')) + 0;
