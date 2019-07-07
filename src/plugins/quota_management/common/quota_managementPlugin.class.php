@@ -75,7 +75,7 @@ to monitor disk and database usage per user, project.");
 		$res = shell_exec($cmd);
 		$a = explode("\t", $res);
 		if (isset($a[1])) $size = $a[0];
-		return int($size);
+		return (int)$size;
 	}
 
 	function setDirSize($group_id, $dirtype, $dirsize) {

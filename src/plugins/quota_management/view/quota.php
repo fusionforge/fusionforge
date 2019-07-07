@@ -168,7 +168,7 @@ if (db_numrows($res_db) > 0) {
 }
 foreach ($users as $u) {
 	$user_id = $u["user_id"];
-	$dir = $ftp_dir .  $u["user_name"];
+	$dir = $ftp_dir.'/'.$u["user_name"];
 	$size = $quota_management->get_dir_size($dir);
 	$users["$user_id"]["disk_size"] += human_readable_bytes($size);
 }
