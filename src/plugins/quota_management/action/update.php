@@ -29,7 +29,7 @@ global $group_id;
 
 if ( !forge_check_global_perm('forge_admin')) {
 	$warning_msg = _('Quota Management Action Denied.');
-	redirect_url = '/plugins/'.$quota_management->name.'/?group_id='.$group_id;
+	session_redirect('/plugins/'.$quota_management->name.'/?group_id='.$group_id, false);
 }
 
 require_once $gfcommon.'include/SysTasksQ.class.php';
@@ -48,7 +48,7 @@ if ($qs > $qh || $qds > $qdh) {
 	$error_msg = _('Input error: Hard quota must be greater than soft quota');
 } else {
 	db_query_params('UPDATE plugin_quota_management SET quota_soft = $1, quota_hard = $2, quota_db_soft = $3, quota_db_hard = $4 WHERE group_id = $5',
-			array($qs, $qh, $qds, $qdh, $group_id);
+			array($qs, $qh, $qds, $qdh, $group_id));
 	$systasksq = new SystasksQ();
 	$systasksq->add($quota_management->getID(), 'QUOTAMANAGEMENT_SET_QUOTA', $group_id);
 	$feedback = _('Quota updated successfully');

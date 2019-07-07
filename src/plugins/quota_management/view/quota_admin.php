@@ -64,19 +64,23 @@ if (db_numrows($res_db) > 0) {
 		$quotas["$e[group_id]"]["disk_size"] = 0;
 		$quotas["$e[group_id]"]["quota_hard"] = $qh;
 		$quotas["$e[group_id]"]["quota_soft"] = $qs;
+		$quotas["$e[group_id]"]["quota_db_hard"] = $e["quota_db_hard"];
+		$quotas["$e[group_id]"]["quota_db_soft"] = $e["quota_db_soft"];
 	}
 }
 ?>
-<table width="700px" cellpadding="2" cellspacing="0" border="0">
+<table width="900" cellpadding="2" cellspacing="0" border="0">
 	<tr style="font-weight:bold">
-		<td style="border-top:thick solid #808080" colspan="6"><?php echo _('Projects disk quota'); ?></td>
+		<td style="border-top:thick solid #808080" colspan="8"><?php echo _('Projects quota'); ?></td>
 	</tr>
 	<tr>
 		<td style="border-top:thin solid #808080"><?php echo _('id'); ?></td>
 		<td style="border-top:thin solid #808080"><?php echo _('name'); ?></td>
 		<td style="border-top:thin solid #808080"><br /></td>
-		<td style="border-top:thin solid #808080" align="right"><?php echo _('disk quota soft'); ?></td>
-		<td style="border-top:thin solid #808080" align="right"><?php echo _('disk quota hard'); ?></td>
+		<td style="border-top:thin solid #808080; text-align:right"><?php echo _('database quota soft'); ?></td>
+		<td style="border-top:thin solid #808080; text-align:right"><?php echo _('database quota hard'); ?></td>
+		<td style="border-top:thin solid #808080; text-align:right"><?php echo _('disk quota soft'); ?></td>
+		<td style="border-top:thin solid #808080; text-align:right"><?php echo _('disk quota hard'); ?></td>
 		<td style="border-top:thin solid #808080"><br /></td>
 	</tr>
 	<?php
@@ -95,21 +99,35 @@ if (db_numrows($res_db) > 0) {
 			<?php echo util_make_link('/plugins/quota_management/?group_id='.$q['group_id'].'&type=projectadmin', $q['unix_name']) ?>
 			</td>
 			<td style="border-top:thin solid #808080"><?php echo $q["name"]; ?></td>
-			<td style="border-top:thin solid #808080" align="right">
+			<td style="border-top:thin solid #808080; text-align:right">
+				<input type="text" name="qds"
+					size="12"
+					value="<?php echo $q["quota_db_soft"]; ?>"
+					style="background:#ffffd0;text-align:right" />
+					<?php echo _('MB'); ?>
+			</td>
+			<td style="border-top:thin solid #808080; text-align:right">
+				<input type="text" name="qdh"
+					size="12"
+					value="<?php echo $q["quota_db_hard"]; ?>"
+					style="background:#ffffd0;text-align:right" />
+				<?php echo _('MB'); ?>
+			</td>
+			<td style="border-top:thin solid #808080; text-align:right">
 				<input type="text" name="qs"
 					size="12"
 					value="<?php echo $q["quota_soft"]; ?>"
 					style="background:#ffffd0;text-align:right" />
 					<?php echo _('MB'); ?>
 			</td>
-			<td style="border-top:thin solid #808080" align="right">
+			<td style="border-top:thin solid #808080; text-align:right">
 				<input type="text" name="qh"
 					size="12"
 					value="<?php echo $q["quota_hard"]; ?>"
 					style="background:#ffffd0;text-align:right" />
 				<?php echo _('MB'); ?>
 			</td>
-			<td style="border-top:thin solid #808080" align="right">
+			<td style="border-top:thin solid #808080; text-align:right">
 				<input type="submit" value="<?php echo _('Modify'); ?>" />
 			</td>
 		</tr>
@@ -118,12 +136,7 @@ if (db_numrows($res_db) > 0) {
 	}
 ?>
 	<tr style="font-weight:bold">
-		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080"><br /></td>
-		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080"><br /></td>
-		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080"><br /></td>
-		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080"><br /></td>
-		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080"><br /></td>
-		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080"><br /></td>
+		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080" colspan="8"><br /></td>
 	</tr>
 </table>
 <?php

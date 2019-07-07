@@ -174,7 +174,7 @@ foreach ($users as $u) {
 }
 
 ?>
-<table width="800" cellpadding="2" cellspacing="0" border="0">
+<table width="900" cellpadding="2" cellspacing="0" border="0">
 	<tr style="">
 		<td style="border-top:thick solid #808080;font-weight:bold" colspan="3">
 			<?php echo _('Projects ressources use'); ?>
