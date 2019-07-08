@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash
 # Quota Management post-install
 
 source $(forge_get_config source_path)/post-install.d/common/service.inc
@@ -20,8 +20,7 @@ case "$1" in
 							echo "uquota & pquota already enabled on $mountpoint"
 						fi
 						;;
-					'ext4')
-					'ext3')
+					'ext4'|'ext3')
 						mountoptions=$(mount | grep "$mountpoint " | grep "usrquota" | grep "grpquota")
 						if [ -z $mountoptions ]; then
 							echo "Enabling usrquota & grpquota on $mountpoint"
