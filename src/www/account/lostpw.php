@@ -87,11 +87,8 @@ echo '<p>' . _('Clicking “Send Lost PW Hash” below will email a URL to the e
 echo $HTML->openForm(array('action' => '/account/lostpw.php', 'method' => 'post'));
 ?>
 <input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/> <p>
-<?php echo _('Login Name')._(':'); ?>
-<br />
-    <label for="loginname">
+<?php echo html_e('label', array('for' => 'loginname'), _('Login Name')._(':')).html_e('br'); ?>
         <input id="loginname" type="text" name="loginname" required="required" />
-    </label>
     <br />
 <input type="submit" name="submit" value="<?php echo _('Send Lost PW Hash'); ?>" />
 </p>
