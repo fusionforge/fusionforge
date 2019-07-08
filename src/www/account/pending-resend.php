@@ -67,8 +67,8 @@ if (forge_get_config('require_unique_email')) {
 } else {
 	$content = _('Login Name')._(':');
 }
-echo html_e('p', array(), $content.html_e('br').html_e('label', array('for' => 'loginname'),
-							html_e('input', array('id' => 'loginname', 'required' => 'required', 'type' => 'text', 'name' => 'loginname'))));
+echo html_e('p', array(), html_e('label', array('for' => 'loginname'), $content).html_e('br').
+							html_e('input', array('id' => 'loginname', 'required' => 'required', 'type' => 'text', 'name' => 'loginname')));
 echo html_e('p', array(), html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Submit'))));
 echo $HTML->closeForm();
 $HTML->footer();
