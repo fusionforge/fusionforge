@@ -3,7 +3,7 @@
  * FusionForge authentication management
  *
  * Copyright 2011, Roland Mas
- * Copyright 2014-2015, Franck Villaume - TrivialDev
+ * Copyright 2014-2015,2019, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -71,14 +71,14 @@ class AuthBuiltinPlugin extends ForgeAuthPlugin {
 		$result .= html_e('input', array('type' => 'hidden', 'name' => 'return_to', 'value' => $return_to));
 		$result .= html_ao('p');
 		if (forge_get_config('require_unique_email')) {
-			$result .= _('Login name or email address')._(':');
+			$result .= html_e('label', array('for' => 'form_loginname'), _('Login name or email address')._(':'));
 		} else {
-			$result .= _('Login Name')._(':');
+			$result .= html_e('label', array('for' => 'form_loginname'), _('Login Name')._(':'));
 		}
-		$result .= html_e('br').html_e('input', array('type' => 'text', 'name' => 'form_loginname', 'value' => htmlspecialchars(stripslashes($loginname)), 'required' => 'required'));
+		$result .= html_e('br').html_e('input', array('type' => 'text', 'id' => 'form_loginname', 'name' => 'form_loginname', 'value' => htmlspecialchars(stripslashes($loginname)), 'required' => 'required'));
 		$result .= html_ac(html_ap() -1);
-		$result .= html_ao('p')._('Password')._(':');
-		$result .= html_e('br').html_e('input', array('type' => 'password', 'name' => 'form_pw', 'required' => 'required'));
+		$result .= html_ao('p').html_e('label', array('for' => 'form_pw'), _('Password')._(':'));
+		$result .= html_e('br').html_e('input', array('type' => 'password', 'id' => 'form_pw', 'name' => 'form_pw', 'required' => 'required'));
 		$result .= html_ac(html_ap() -1);
 		if (isset($params['attempts'])) {
 			$result .= html_e('input', array('type' => 'hidden', 'name' => 'attempts', 'value' => $params['attempts']));
