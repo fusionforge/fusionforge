@@ -33,6 +33,7 @@ require_once $gfwww.'project/admin/project_admin_utils.php';
 
 global $group_id;
 global $quota_management;
+global $HTML;
 
 session_require_perm('project_admin', $group_id);
 
@@ -137,7 +138,7 @@ $_quota_block_size = trim(shell_exec('echo $BLOCK_SIZE')) + 0;
 if ($_quota_block_size == 0) $_quota_block_size = 1024;
 $quota_soft = "";
 $quota_hard = "";
-$res_db = db_query_params('SELECT quota_soft, quota_hard FROM plugin_quota_management WHERE group_id = $1',
+$res_db = db_query_params('SELECT * FROM plugin_quota_management WHERE group_id = $1',
 			array($group_id));
 if (db_numrows($res_db) > 0) {
 	$e = db_fetch_array($res_db);
@@ -145,6 +146,8 @@ if (db_numrows($res_db) > 0) {
 	$quota_soft = $e["quota_soft"];
 	$quota_hard = round(($_quota_block_size * $quota_hard) / (1024*1024), 0);
 	$quota_soft = round(($_quota_block_size * $quota_soft) / (1024*1024), 0);
+	$quota_db_hard = $e["quota_db_hard"];
+	$quota_db_soft = $e["quota_db_soft"];
 }
 
 $quota_tot_other = 0;
@@ -169,27 +172,34 @@ if ($group->usesFTP()) {
 
 plugin_hook_by_reference('quota_display', $quotas_disk);
 
+echo $HTML->listTableTop();
 ?>
 
-<table width="500" cellpadding="2" cellspacing="0" border="0">
 	<tr style="font-weight:bold">
-		<td colspan="3" style="border-top:thick solid #808080; text-align: center"><?php echo _('Database'); ?></td>
+		<td colspan="2" style="border-top:thick solid #808080; text-align: center"><?php echo _('Database'); ?></td>
+		<td colspan="2" style="border-top:thick solid #808080; text-align: center"><?php echo _('DB Quota'); ?></td>
 	</tr>
 	<tr style="font-weight:bold">
-		<td style="border-top:thin solid #808080"><?php echo _('quota type'); ?></td>
-		<td style="border-top:thin solid #808080; text-align: right"><?php echo _('quantity'); ?></td>
-		<td style="border-top:thin solid #808080; text-align: right"><?php echo _('size'); ?></td>
+		<td style="border-top:thin solid #808080"><?php echo _('Category'); ?></td>
+		<td style="border-top:thin solid #808080; text-align: right"><?php echo _('Size'); ?></td>
+		<td>&nbsp;</td><td>&nbsp;</td>
 	</tr>
 <?php
 $sizetot = 0;
-foreach ($quotas as $q) {
+foreach ($quotas as $index => $q) {
 	if ($q["size"] != "") {
 		$sizetot += $q["size"];
 		?>
 			<tr>
 				<td style="border-top:thin solid #808080"><?php echo $q["name"]; ?></td>
-				<td style="border-top:thin solid #808080; text-align: right"><?php echo $q["nb"]; ?></td>
 				<td style="border-top:thin solid #808080; text-align: right"><?php echo human_readable_bytes($q["size"]); ?></td>
+				<?php
+					if ($index == max(array_keys($quotas))) {
+						echo '<td style="border-top:thin solid #808080; text-align: center">'._('Soft').'</td><td style="border-top:thin solid #808080; text-align: center">'.('Hard').'</td>';
+					} else {
+						echo '<td>&nbsp;</td><td>&nbsp;</td>';
+					}
+				?>
 			</tr>
 <?php
 	}
@@ -199,12 +209,24 @@ foreach ($quotas as $q) {
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080">
 			<?php echo _('Total'); ?>
 		</td>
-		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080">&nbsp;</td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080; text-align: right">
 			<?php echo human_readable_bytes($sizetot); ?>
-		</td>
+			<?php
+				if ($quota_db_soft == 0) {
+					echo '<td style="border-top:thin solid #808080; text-align: center">---</td>';
+				} else {
+					echo '<td style="border-top:thin solid #808080; text-align: center">'.$quota_db_soft._('MB').'</td>';
+				}
+				if ($quota_db_hard == 0) {
+					echo '<td style="border-top:thin solid #808080; text-align: center">---</td>';
+				} else {
+					echo '<td style="border-top:thin solid #808080; text-align: center">'.$quota_db_hard._('MB').'</td>';
+				}
+
+			?>
 	</tr>
-</table>
+<?php
+echo $HTML->listTableBottom(); ?>
 <br />
 <br />
 <?php if (count($quotas_disk) > 0) { ?>
@@ -216,7 +238,7 @@ foreach ($quotas as $q) {
 	</tr>
 	<tr style="font-weight:bold">
 		<td style="border-top:thin solid #808080">
-			<?php echo _('quota type'); ?>
+			<?php echo _('Category'); ?>
 		</td>
 		<td style="border-top:thin solid #808080; text-align: right">&nbsp;</td>
 		<td style="border-top:thin solid #808080; text-align: right">
