@@ -131,6 +131,8 @@ if ($group->usesPM()) {
 	$quotas[] = $q;
 }
 
+plugin_hook_by_reference('quota_display_db', $quotas);
+
 $quotas_disk = array();
 
 // disk_total_space
@@ -150,35 +152,23 @@ if (db_numrows($res_db) > 0) {
 	$quota_db_soft = $e["quota_db_soft"];
 }
 
-$quota_tot_other = 0;
-$quota_tot_1 = 0;
-$quota_tot_scm = 0;
-
 if (forge_get_config('use_shell')) {
 	$q["name"] = _('Home project directory');
 	$q["size"] = $quota_management->getHomeSize($group_id);
-	$q["quota_label"] = _('With Home quota control');
-	$quota_tot_1 += $q["size"];
 	$quotas_disk[] = $q;
 }
 
 if ($group->usesFTP()) {
 	$q["name"] = _('FTP project directory');
 	$q["size"] = $quota_management->getFTPSize($group_id);
-	$q["quota_label"] = _('With FTP quota control');
-	$quota_tot_1 += $q["size"];
 	$quotas_disk[] = $q;
 }
 
-plugin_hook_by_reference('quota_display', $quotas_disk);
+plugin_hook_by_reference('quota_display_disks', $quotas_disk);
 
-echo $HTML->listTableTop();
+echo $HTML->listTableTop(array(_('Database'), _('DB Quota')), array(), '', 'quota', array(), array(), array(array('colspan' => 2, 'style' => 'text-align: center'), array('colspan' => 2, 'style' => 'text-align: center')));
+
 ?>
-
-	<tr style="font-weight:bold">
-		<td colspan="2" style="border-top:thick solid #808080; text-align: center"><?php echo _('Database'); ?></td>
-		<td colspan="2" style="border-top:thick solid #808080; text-align: center"><?php echo _('DB Quota'); ?></td>
-	</tr>
 	<tr style="font-weight:bold">
 		<td style="border-top:thin solid #808080"><?php echo _('Category'); ?></td>
 		<td style="border-top:thin solid #808080; text-align: right"><?php echo _('Size'); ?></td>
@@ -229,147 +219,76 @@ foreach ($quotas as $index => $q) {
 echo $HTML->listTableBottom(); ?>
 <br />
 <br />
-<?php if (count($quotas_disk) > 0) { ?>
-<table width="500" cellpadding="2" cellspacing="0" border="0">
-	<tr style="font-weight:bold">
-		<td colspan="3" style="border-top:thick solid #808080; text-align: center">
-			<?php echo _('Disk space'); ?>
-		</td>
-	</tr>
+<?php
+if (count($quotas_disk) > 0) {
+	echo $HTML->listTableTop(array(_('Disk'), _('Quota')), array(), '', 'quota', array(), array(), array(array('colspan' => 2, 'style' => 'text-align: center'), array('colspan' => 2, 'style' => 'text-align: center')));
+?>
 	<tr style="font-weight:bold">
 		<td style="border-top:thin solid #808080">
 			<?php echo _('Category'); ?>
 		</td>
-		<td style="border-top:thin solid #808080; text-align: right">&nbsp;</td>
 		<td style="border-top:thin solid #808080; text-align: right">
 			<?php echo _('size'); ?>
 		</td>
+		<td>&nbsp;</td><td>&nbsp;</td>
 	</tr>
 <?php
 $sizetot = 0;
-foreach ($quotas_disk as $q) {
+foreach ($quotas_disk as $index => $q) {
 	if ($q["size"] != "") {
 		$sizetot += $q["size"];
 ?>
 	<tr>
 		<td style="border-top:thin solid #808080"><?php echo $q["name"]; ?></td>
 		<td style="border-top:thin solid #808080; text-align: right">
-			<?php echo $q["quota_label"]; ?>&nbsp;
-		</td>
-		<td style="border-top:thin solid #808080; text-align: right">
 			<?php echo human_readable_bytes($q["size"]); ?>
 		</td>
+		<?php
+			if ($index == max(array_keys($quotas_disk))) {
+				echo '<td style="border-top:thin solid #808080; text-align: center">'._('Soft').'</td><td style="border-top:thin solid #808080; text-align: center">'.('Hard').'</td>';
+			} else {
+				echo '<td>&nbsp;</td><td>&nbsp;</td>';
+			}
+		?>
 	</tr>
 <?php
 	}
 }
+$bgcolorstyle = '';
+$msg1 = '';
+$qs = $quota_soft * 1024 * 1024;
+if (($sizetot+0) > ($qs+0) && ($qs+0) > 0) {
+	$bgcolorstyle = 'background-color:#FFDCDC; color:white;';
+	$msg1 = _('Quota exceeded');
+}
 ?>
 	<tr style="font-weight:bold">
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080"><?php echo _('Total'); ?></td>
-		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080">&nbsp;</td>
-		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080; text-align: right">
+		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080; text-align: right; <?php echo $bgcolorstyle; ?>">
 			<?php echo human_readable_bytes($sizetot); ?>
 		</td>
+		<td style="border-top:thin solid #808080; text-align: right">
+			<?php
+				if ($quota_soft == 0) {
+					echo "---";
+				} else {
+					echo "$quota_soft";
+					echo _('MB');
+				}
+			?>
+		</td>
+		<td style="border-top:thin solid #808080; text-align: right">
+			<?php
+				if ($quota_hard == 0) {
+					echo "---";
+				} else {
+					echo "$quota_hard";
+					echo _('MB');
+				}
+			?>
+		</td>
 	</tr>
-</table>
-<br />
-<br />
-
 <?php
+	echo $HTML->listTableBottom();
 }
-$color1 = "#ffffff";
-$color2 = "#ffffff";
-$msg1 = "&nbsp;";
-$msg2 = "&nbsp;";
-$qs = $quota_soft * 1024 * 1024;
-if (($quota_tot_1+0) > ($qs+0) && ($qs+0) > 0) {
-	$color1 = "#FFDCDC";
-	$msg1 = _('Quota exceeded');
-}
-if (($quota_tot_scm+0) > ($qs+0) && ($qs+0) > 0) {
-	$color2 = "#FFDCDC";
-	$msg2 = _('Quota exceeded');
-}
-?>
-
-<table width="500" cellpadding="2" cellspacing="0" border="0">
-	<tr style="font-weight:bold">
-		<td colspan="4" style="border-top:thick solid #808080; text-align: center"><?php echo _('Quota disk management'); ?></td>
-	</tr>
-	<tr style="font-weight:bold">
-		<td style="border-top:thin solid #808080">
-			<?php echo _('Quota settings'); ?>
-		</td>
-		<td style="border-top:thin solid #808080;font-weight:bold; text-align: right">
-			&nbsp;
-		</td>
-		<td style="border-top:thin solid #808080; text-align: right">
-			<?php echo _('Quota soft'); ?>
-		</td>
-		<td style="border-top:thin solid #808080; text-align: right">
-			<?php echo _('Quota hard'); ?>
-		</td>
-	</tr>
-	<tr style="background:<?php echo $color1; ?>">
-		<td style="border-top:thin solid #808080">
-			<?php echo _('Home, Ftp'); ?>
-		</td>
-		<td style="border-top:thin solid #808080;font-weight:bold;color:red; text-align: right">
-			<?php echo $msg1; ?>
-		</td>
-		<td style="border-top:thin solid #808080; text-align: right">
-			<?php
-				if ($quota_soft == 0) {
-					echo "---";
-				} else {
-					echo "$quota_soft";
-					echo _('MB');
-				}
-			?>
-		</td>
-		<td style="border-top:thin solid #808080; text-align: right">
-			<?php
-				if ($quota_hard == 0) {
-					echo "---";
-				} else {
-					echo "$quota_hard";
-					echo _('MB');
-				}
-			?>
-		</td>
-	</tr>
-<?php if ($group->usesSCM()) { ?>
-	<tr style="background:<?php echo $color2; ?>">
-		<td style="border-top:thin solid #808080">
-			<?php echo _('SCM'); ?>
-		</td>
-		<td style="border-top:thin solid #808080;font-weight:bold;color:red; text-align: right">
-			<?php echo $msg2; ?>
-		</td>
-		<td style="border-top:thin solid #808080; text-align: right">
-			<?php
-				if ($quota_soft == 0) {
-					echo "---";
-				} else {
-					echo "$quota_soft";
-					echo _('MB');
-				}
-			?>
-			</td>
-		<td style="border-top:thin solid #808080; text-align: right">
-			<?php
-				if ($quota_hard == 0) {
-					echo "---";
-				} else {
-					echo "$quota_hard";
-					echo _('MB');
-				}
-			?>
-		</td>
-	</tr>
-<?php } ?>
-	<tr style="font-weight:bold">
-		<td colspan="4" style="border-top:thick solid #808080">&nbsp;</td>
-	</tr>
-</table>
-<?php project_admin_footer();
+project_admin_footer();
