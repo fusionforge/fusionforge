@@ -156,9 +156,7 @@ class dbObject {
 	/**
 	* Destroys the object
 	*/
-	function destroy() {
-		unset( $this );
-	}
+	function __destroy() {}
 
 	/**
 	* Checks whether the specified RDBMS is supported by the current
@@ -347,7 +345,7 @@ class dbTable extends dbObject {
 			case 'TABLE':
 				$this->parent->addSQL( $this->create( $this->parent ) );
 				xml_set_object( $parser, $this->parent );
-				$this->destroy();
+				$this->__destroy();
 				break;
 			case 'FIELD':
 				unset($this->current_field);
@@ -1064,7 +1062,7 @@ class dbQuerySet extends dbObject {
 			case 'SQL':
 				$this->parent->addSQL( $this->create( $this->parent ) );
 				xml_set_object( $parser, $this->parent );
-				$this->destroy();
+				$this->__destroy();
 				break;
 			default:
 
