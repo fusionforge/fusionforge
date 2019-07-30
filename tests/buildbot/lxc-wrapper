@@ -144,7 +144,7 @@ case $cmd in
 		fi
 		# TODO: write this in VM config (so it can be started manually)?
 		hwaddr=00:16:3e:$(echo $host | md5sum | cut -c -6 | sed s/../\&:/g | sed s/:$//)
-		lxc-start --name $host.local -s lxc.net.hwaddr=$hwaddr -s lxc.uts.name=$host --daemon
+		lxc-start --name $host.local -s lxc.net.0.hwaddr=$hwaddr -s lxc.uts.name=$host --daemon
 		;;
 
 	# Harshly^WQuickly stop VM
