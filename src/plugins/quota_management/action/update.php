@@ -41,8 +41,8 @@ $type = getStringFromRequest('type');
 
 $qs = $_POST["qs"] * $_quota_block_size;
 $qh = $_POST["qh"] * $_quota_block_size;
-$qds = $_POST["qds"];
-$qdh = $_POST["qdh"];
+$qds = $_POST["qds"] * 1024;
+$qdh = $_POST["qdh"] * 1024;
 
 if ($qs > $qh || $qds > $qdh) {
 	$error_msg = _('Input error: Hard quota must be greater than soft quota');
