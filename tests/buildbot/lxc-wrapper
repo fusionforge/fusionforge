@@ -24,10 +24,6 @@ case "$host" in
 		;;
 esac
 
-# Work-around systemd-journald taking 100% CPU in Centos7
-if ! grep -q '^lxc.kmsg = 0' /usr/share/lxc/config/centos.common.conf; then
-    echo 'lxc.kmsg = 0' >> /usr/share/lxc/config/centos.common.conf
-fi
 # TODO: don't modify the side-wide configuration
 # ?
 sed -i -e 's/lxc.cap.drop = mac_admin mac_override.*/lxc.cap.drop = mac_admin mac_override/' /usr/share/lxc/config/centos.common.conf
