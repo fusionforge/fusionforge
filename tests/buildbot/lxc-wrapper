@@ -50,6 +50,9 @@ case $host in
 		debian9)
 			release=stretch
 			;;
+		debian10)
+			release=buster
+			;;
 		esac
 		cachedir=/var/cache/lxc/debian/rootfs-$release-amd64
 		export MIRROR=http://ftp.fr.debian.org/debian
