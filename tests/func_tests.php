@@ -41,7 +41,7 @@ class AllTests {
 	}
 
 	public static function suite() {
-		$suite = new PHPUnit_Framework_TestSuite('PHPUnit');
+		$suite = new PHPUnit\Framework\TestSuite('PHPUnit');
 
 		// Selenium tests
 		if (getenv('TESTGLOB') != FALSE) {
