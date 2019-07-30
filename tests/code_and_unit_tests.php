@@ -18,8 +18,8 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-if (!defined('PHPUnit_MAIN_METHOD')) {
-	define('PHPUnit_MAIN_METHOD', 'AllTests::main');
+if (!defined('PHPUnit\MAIN_METHOD')) {
+	define('PHPUnit\MAIN_METHOD', 'AllTests::main');
 }
 
 if (!@include_once 'PHPUnit/Autoload.php') {
@@ -32,7 +32,7 @@ if (!@include_once 'PHPUnit/Autoload.php') {
 
 class AllTests {
 	public static function main() {
-		PHPUnit_TextUI_TestRunner::run(self::suite());
+		PHPUnit\TextUI\TestRunner::run(self::suite());
 	}
 
 	public static function suite() {
