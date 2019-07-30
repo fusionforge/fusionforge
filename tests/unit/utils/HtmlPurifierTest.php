@@ -29,7 +29,7 @@ require_once 'PHPUnit/Framework/TestCase.php';
  * @copyright 2009 Olivier Berger & Institut TELECOM
  * @license   GPL License
  */
-class HtmlPurifier_Tests extends PHPUnit_Framework_TestCase
+class HtmlPurifier_Tests extends PHPUnit\Framework\TestCase
 {
 	/**
 	 * Test that include of lib doesn't fail, otherwise give some hint on missing package
@@ -43,7 +43,7 @@ class HtmlPurifier_Tests extends PHPUnit_Framework_TestCase
 	    include 'HTMLPurifier.auto.php';
 	  }
 
-	  catch (PHPUnit_Framework_Error $expected) {
+	  catch (PHPUnit\Framework\Error $expected) {
 	    $this->fail('You probably need to install htmlpurifier : '.$expected->getMessage());
             return;
 	  }

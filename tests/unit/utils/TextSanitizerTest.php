@@ -31,7 +31,7 @@ require_once dirname(__FILE__) . '/../../../src/common/include/TextSanitizer.cla
  * @copyright 2009 Alain Peyrat. All rights reserved.
  * @license   GPL License
  */
-class TextSanitizerTests extends PHPUnit_Framework_TestCase
+class TextSanitizerTests extends PHPUnit\Framework\TestCase
 {
 	protected $s;
 
