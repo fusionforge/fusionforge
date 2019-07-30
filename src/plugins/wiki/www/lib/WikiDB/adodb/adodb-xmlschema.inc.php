@@ -2184,18 +2184,6 @@ class adoSchema {
 
 		return $this->sqlArray;
 	}
-
-	/**
-	* Destroys an adoSchema object.
-	*
-	* Call this method to clean up after an adoSchema object that is no longer in use.
-	* @deprecated adoSchema now cleans up automatically.
-	*/
-	function Destroy() {
-		ini_set("magic_quotes_runtime", $this->mgq );
-		#set_magic_quotes_runtime( $this->mgq );
-		unset( $this );
-	}
 }
 
 /**
