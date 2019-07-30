@@ -15,7 +15,7 @@ esac
 
 host=$2
 case "$host" in
-	centos7|debian8|debian9)
+	centos7|debian8|debian9|debian10)
 		echo "Handling host $host"
 		;;
 	*)
