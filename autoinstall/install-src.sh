@@ -67,6 +67,7 @@ if [ -e /etc/debian_version ]; then
 			fonts-dejavu-core mediawiki
 		pushd $(mktemp -d)
 		ptcver=1.0.2-4
+		apt-get install wget
 		wget http://ftp.fr.debian.org/debian/pool/main/p/php-text-captcha/php-text-captcha_${ptcver}_all.deb
 		dpkg -i php-text-captcha_${ptcver}_all.deb
 		rm -f php-text-captcha_${ptcver}_all.deb
