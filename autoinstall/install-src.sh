@@ -66,7 +66,7 @@ if [ -e /etc/debian_version ]; then
 			vsftpd \
 			fonts-dejavu-core mediawiki
 		pushd $(mktemp -d)
-		apt-get install wget php-pear
+		apt-get install -y wget php-pear
 		ptpver=1.2.1-2
 		wget http://ftp.fr.debian.org/debian/pool/main/p/php-text-password/php-text-password_${ptpver}_all.deb
 		dpkg -i php-text-password_${ptpver}_all.deb
