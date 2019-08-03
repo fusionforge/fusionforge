@@ -77,7 +77,7 @@ install_selenium() {
 		    apt-get -y install php-curl unzip composer psmisc rsyslog default-jre patch
 		    mkdir -p /usr/local/share/php
 		    pushd /usr/local/share/php
-		    composer --no-plugins --no-scripts require phpunit/phpunit
+		    composer --no-plugins --no-scripts require phpunit/phpunit:7.5.9
 		    composer --no-plugins --no-scripts require phpunit/phpunit-selenium
 		    popd
 		fi
