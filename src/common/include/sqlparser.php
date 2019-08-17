@@ -4,6 +4,7 @@
  *
  * Copyright 2002-2008, Roland Mas (Perl implementation)
  * Copyright 2011, Roland Mas (PHP rewrite)
+ * Copyright 2019, Franck Villaume - TrvialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -98,7 +99,7 @@ function parse_sql_file($filename) {
 			$l = get_next_line($f);
 			if ($l === false) {
 				$state = $states['DONE'];
-				continue;
+				break;
 			}
 
 			$state = $states['SCAN'];
@@ -110,17 +111,14 @@ function parse_sql_file($filename) {
 				$l = get_next_line($f);
 				if ($l === false) {
 					$state = $states['DONE'];
-					continue;
+					break;
 				}
-				continue;
 			} elseif (preg_match('/\s*copy\s+\"[\w_]+\"\s*(\([\w, "]+\))?\s*from\s+stdin\s*;/i', $l)
 				  || preg_match('/\s*copy\s+[\w_]+\s*(\([\w, "]+\))?\s*from\s+stdin\s*;/i', $l)) {
 				$state = $states['START_COPY'];
-				continue;
 			} else {
 				$sql = '';
 				$state = $states['SQL_SCAN'];
-				continue;
 			}
 			break; // End of SCAN
 
@@ -137,20 +135,19 @@ function parse_sql_file($filename) {
 				}
 				if ($com_level == 0) {
 					$state = $states['SQL_SCAN'];
-					continue;
+					break;
 				} else {
 					$state = $states['IN_COMMENT'];
-					continue;
+					break;
 				}
 			} else {
 				$l = get_next_line($f);
 				if ($l === false) {
 					error_log("End of file reached during a comment");
 					$state = $states['ERROR'];
-					continue;
+					break;
 				}
 				$state = $states['IN_COMMENT'];
-				continue;
 			}
 			break; // End of IN_COMMENT
 
@@ -167,20 +164,19 @@ function parse_sql_file($filename) {
 				}
 				if ($com_level == 0) {
 					$state = $states['IN_SQL'];
-					continue;
+					break;
 				} else {
 					$state = $states['IN_SQL_COMMENT'];
-					continue;
+					break;
 				}
 			} else {
 				$rest = get_next_line($f);
 				if ($rest === false) {
 					error_log("End of file reached during a comment");
 					$state = $states['ERROR'];
-					continue;
+					break;
 				}
 				$state = $states['IN_SQL_COMMENT'];
-				continue;
 			}
 			break; // End of IN_SQL_COMMENT
 
@@ -191,28 +187,24 @@ function parse_sql_file($filename) {
 				if ($l === false) {
 					error_log("End of file reached during an SQL statement");
 					$state = $states['ERROR'];
-					continue;
+					break;
 				}
 				$state = $states['SQL_SCAN'];
-				continue;
 			} elseif (preg_match(',^\s*/\*,', $l)) {
 				$l = preg_replace(',^\s*/\*,','',$l, 1);
 				$com_level = 1;
 				$state = $states['IN_COMMENT'];
-				continue;
 			} elseif (preg_match(',^(.*?)\$([\w]*)\$,', $l, $matches)) {
 				$sql .= $matches[1].'$'.$matches[2].'$';
 				array_push($doldolstack,$matches[2]);
 				$l = preg_replace(',^(.*?)\$[\w]*\$,','',$l, 1);
 				$state = $states['IN_DOLDOL'];
-				continue;
 			} else {
 				preg_match(',^([^()\';-]*)(.*),', $l, $matches);
 				$chunk = $matches[1];
 				$rest = $matches[2];
 				$sql .= $chunk;
 				$state = $states['IN_SQL'];
-				continue;
 			}
 
 			break; // End of SQL_SCAN
@@ -223,61 +215,50 @@ function parse_sql_file($filename) {
 				$rest = preg_replace(',^\s*/\*,','',$rest, 1);
 				$com_level = 1;
 				$state = $states['IN_SQL_COMMENT'];
-				continue;
 			} elseif (preg_match('/^\(/', $rest)) {
 				$par_level += 1;
 				$sql .= '(';
 				$rest = substr($rest, 1);
 				$l = $rest;
 				$state = $states['SQL_SCAN'];
-				continue;
 			} elseif (preg_match('/^\)/', $rest) && $par_level > 0) {
 				$par_level -= 1;
 				$sql .= ')';
 				$rest = substr($rest, 1);
 				$l = $rest;
 				$state = $states['SQL_SCAN'];
-				continue;
 			} elseif (preg_match('/^\)/', $rest)) {
 				error_log("Detected ')' without any matching '('");
 				$state = $states['ERROR'];
-				continue;
 			} elseif (preg_match('/^--/', $rest)) {
 				$rest = '';
 				$l = $rest;
 				$state = $states['SQL_SCAN'];
-				continue;
 			} elseif (preg_match('/^-/', $rest)) {
 				$sql .= '-';
 				$rest = substr($rest, 1);
 				$l = $rest;
 				$state = $states['SQL_SCAN'];
-				continue;
 			} elseif (preg_match('/^;/', $rest) && ($par_level == 0)) {
 				$sql .= ';';
 				$rest = substr($rest, 1);
 				$state = $states['END_SQL'];
-				continue;
 			} elseif (preg_match('/^;/', $rest)) {
 				error_log("Detected ';' within a parenthesis");
 				$state = $states['ERROR'];
-				continue;
 			} elseif ($rest == '') {
 				$l = $rest;
 				$sql .= ' ';
 				$state = $states['SQL_SCAN'];
-				continue;
 			} elseif (preg_match("/^\\'/", $rest)) {
 				$oldrest = $rest;
 				$sql .= "'";
 				$rest = substr($rest, 1);
 				$l = $rest;
 				$state = $states['IN_QUOTE'];
-				continue;
 			} else {
 				error_log("Unknown event in IN_SQL state");
 				$state = $states['ERROR'];
-				continue;
 			}
 			break; // End of IN_SQL
 
@@ -287,14 +268,12 @@ function parse_sql_file($filename) {
 				$sql = '';
 				$l = $rest;
 				$state = $states['SCAN'];
-				continue;
 			} else {
 				array_push($sql_list, $sql);
 				// error_log(RED."---->".$sql.NORMAL);
 				$sql = '';
 				$l = $rest;
 				$state = $states['SCAN'];
-				continue;
 			}
 			break; // End of END_SQL
 
@@ -306,18 +285,16 @@ function parse_sql_file($filename) {
 				if ($l === false) {
 					error_log("End of file reached during a quoted string");
 					$state = $states['ERROR'];
-					continue;
+					break;
 				}
 				$rest = $l;
 				$state = $states['QUOTE_SCAN'];
-				continue;
 			} else {
 				preg_match("/^([^\\\']*)(.*)/", $l, $matches);
 				$chunk = $matches[1];
 				$rest = $matches[2];
 				$sql .= $chunk;
 				$state = $states['IN_QUOTE'];
-				continue;
 			}
 			break; // End of QUOTE_SCAN
 
@@ -328,26 +305,21 @@ function parse_sql_file($filename) {
 				$rest = substr($rest, 1);
 				$l = $rest;
 				$state = $states['SQL_SCAN'];
-				continue;
 			} elseif (preg_match("/^\\\'/", $rest)) {
 				$sql .= "''";
 				$rest = substr($rest, 2);
 				$state = $states['IN_QUOTE'];
-				continue;
 			} elseif (preg_match("/^\\\[^\\\]/", $rest)) {
 				$sql .= '\\';
 				$rest = substr($rest, 1);
 				$state = $states['IN_QUOTE'];
-				continue;
 			} elseif (preg_match('/^\\\$/', $rest)) {
 				$sql .= "\n";
 				$rest = substr($rest, 1);
 				$state = $states['IN_QUOTE'];
-				continue;
 			} else {
 				$l = $rest;
 				$state = $states['QUOTE_SCAN'];
-				continue;
 			}
 			break; // End of IN_QUOTE
 
@@ -361,31 +333,29 @@ function parse_sql_file($filename) {
 					array_pop($doldolstack);
 					if (count($doldolstack) > 0) {
 						$state = $states['IN_DOLDOL'];
-						continue;
+						break;
 					} else {
 						$rest = preg_replace(",^.*?\\$[\w]*\\$,",'',$l, 1);
 						$l = preg_replace(",^.*?\\\$[\w]*\\\$,",'',$l,1);
 						$state = $states['SQL_SCAN'];
-						continue;
+						break;
 					}
 				} else {
 					array_push($doldolstack, $found);
 					$state = $states['IN_DOLDOL'];
-					continue;
+					break;
 				}
 				$l = preg_replace(",^.*?\\\$[\w]*\\\$,",'',$l,1);
 				$state = $states['IN_DOLDOL'];
-				continue;
 			} else {
 				$sql .= $l."\n";
 				$l = get_next_line($f);
 				if ($l === false) {
 					error_log("End of file reached during a dollar-quoted string");
 					$state = $states['ERROR'];
-					continue;
+					break;
 				}
 				$state = $states['IN_DOLDOL'];
-				continue;
 			}
 			break; // End of IN_DOLDOL
 
@@ -402,10 +372,9 @@ function parse_sql_file($filename) {
 				if ($l === false) {
 					error_log("End of file reached during a COPY statement");
 					$state = $states['ERROR'];
-					continue;
+					break;
 				}
 				$state = $states['IN_COPY'];
-				continue;
 			} elseif (preg_match('/\s*copy\s+([\w_]+)\s*(\\([\w, "]+\\))?\s*from\s+stdin\s*;(.*)/i', $l, $matches)) {
 				$copy_table = $matches[1];
 				$copy_field_list = trim($matches[2]);
@@ -417,13 +386,11 @@ function parse_sql_file($filename) {
 				if ($l === false) {
 					error_log("End of file reached during a COPY statement");
 					$state = $states['ERROR'];
-					continue;
+					break;
 				}
 				$state = $states['IN_COPY'];
-				continue;
 			} else {
 				error_log("Unknown event in START_COPY state");
-				continue;
 			}
 			break; // End of START_COPY
 
@@ -432,7 +399,6 @@ function parse_sql_file($filename) {
 			if ($l == '\.') {
 				$l = $copy_rest;
 				$state = $states['SCAN'];
-				continue;
 			} else {
 				$copy_data = array();
 				$copy_data_tmp = explode ("\t", $l);
@@ -454,10 +420,9 @@ function parse_sql_file($filename) {
 				if ($l === false) {
 					error_log("End of file reached during a COPY statement");
 					$state = $states['ERROR'];
-					continue;
+					break;
 				}
 				$state = $states['IN_COPY'];
-				continue;
 			}
 			break; // End of IN_COPY
 
