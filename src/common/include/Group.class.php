@@ -252,6 +252,18 @@ class Group extends FFError {
 	var $membersArr;
 
 	/**
+	 * cached return value of getVotes
+	 * @var	int|bool	$votes
+	 */
+	var $votes = false;
+
+	/**
+	 * cached return value of getVoters
+	 * @var	int|bool	$voters
+	 */
+	var $voters = false;
+
+	/**
 	 * Group - Group object constructor - use group_get_object() to instantiate.
 	 *
 	 * @param	int|bool	$id	Required - Id of the group you want to instantiate.
@@ -3204,6 +3216,126 @@ class Group extends FFError {
 	function getWidgetLayoutConfig() {
 		$lm = new WidgetLayoutManager();
 		return $lm->getLayout($this->getID(), WidgetLayoutManager::OWNER_TYPE_GROUP);
+	}
+
+	/**
+	 * castVote - Vote on this tracker item or retract the vote
+	 * @param	bool	$value	true to cast, false to retract
+	 * @return	bool	success (false sets error message)
+	 */
+	function castVote($value = true) {
+		if (!($uid = user_getid()) || $uid == 100) {
+			$this->setMissingParamsError(_('User ID not passed'));
+			return false;
+		}
+		if (!$this->canVote()) {
+			$this->setPermissionDeniedError();
+			return false;
+		}
+		$has_vote = $this->hasVote($uid);
+		if ($has_vote == $value) {
+			/* nothing changed */
+			return true;
+		}
+		if ($value) {
+			$res = db_query_params('INSERT INTO group_votes (group_id, user_id) VALUES ($1, $2)',
+						array($this->getID(), $uid));
+		} else {
+			$res = db_query_params('DELETE FROM group_votes WHERE group_id = $1 AND user_id = $2',
+						array($this->getID(), $uid));
+		}
+		if (!$res) {
+			$this->setError(db_error());
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * hasVote - Check if a user has voted on this group item
+	 *
+	 * @param	int|bool	$uid	user ID (default: current user)
+	 * @return	bool	true if a vote exists
+	 */
+	function hasVote($uid = false) {
+		if (!$uid) {
+			$uid = user_getid();
+		}
+		if (!$uid || $uid == 100) {
+			return false;
+		}
+		$res = db_query_params('SELECT * FROM group_votes WHERE group_id = $1 AND user_id = $2',
+					array($this->getID(), $uid));
+		return (db_numrows($res) == 1);
+	}
+
+	/**
+	 * getVotes - get number of valid cast and potential votes
+	 *
+	 * @return	array|bool	(votes, voters, percent)
+	 */
+	function getVotes() {
+		if ($this->votes !== false) {
+			return $this->votes;
+		}
+
+		$voters = $this->getVoters();
+		unset($voters[0]);	/* just in case */
+		unset($voters[100]);	/* need users */
+		if (($numvoters = count($voters)) < 1) {
+			$this->votes = array(0, 0, 0);
+			return $this->votes;
+		}
+
+		$res = db_query_params('SELECT COUNT(*) AS count FROM group_votes WHERE group_id = $1 AND user_id = ANY($2)',
+					array($this->getID(), db_int_array_to_any_clause($voters)));
+		$db_count = db_fetch_array($res);
+		$numvotes = $db_count['count'];
+
+		/* check for invalid values */
+		if ($numvotes < 0 || $numvoters < $numvotes) {
+			$this->votes = array(-1, -1, 0);
+		} else {
+			$this->votes = array($numvotes, $numvoters,
+				(int)($numvotes * 100 / $numvoters + 0.5));
+		}
+		return $this->votes;
+	}
+
+	/**
+	 * canVote - check whether the current user can vote on
+	 *		items in this tracker
+	 *
+	 * @return	bool	true if they can
+	 */
+	function canVote() {
+		if (in_array(user_getid(), $this->getVoters())) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * getVoters - get IDs of users that may vote on
+	 *		items in this tracker
+	 *
+	 * @return	array	list of user IDs
+	 */
+	function getVoters() {
+		if ($this->voters !== false) {
+			return $this->voters;
+		}
+
+		$this->voters = array();
+		if (($engine = RBACEngine::getInstance())
+			&& ($voters = $engine->getUsersByAllowedAction('project_read', $this->getID()))
+			&& (count($voters) > 0)) {
+			foreach ($voters as $voter) {
+				$voter_id = $voter->getID();
+				$this->voters[$voter_id] = $voter_id;
+			}
+		}
+		return $this->voters;
 	}
 }
 

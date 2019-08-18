@@ -118,6 +118,23 @@ class Widget_ProjectInfo extends Widget {
 			}
 		}
 
+		$votes = $project->getVotes();
+		if ($votes[1]) {
+			$result .= html_e('br');
+			$content = html_e('span', array('id' => 'group-votes'), html_e('strong', array(), _('Votes') . _(': ')).sprintf('%1$d/%2$d (%3$d%%)', $votes[0], $votes[1], $votes[2]));
+			if ($project->canVote()) {
+				if ($project->hasVote()) {
+					$key = 'pointer_down';
+					$txt = _('Retract Vote');
+				} else {
+					$key = 'pointer_up';
+					$txt = _('Cast Vote');
+				}
+				$content .= util_make_link('/project/?group_id='.$group_id.'&action='.$key, html_image('ic/'.$key.'.png', 16, 16), array('id' => 'group-vote', 'alt' => $txt));
+			}
+			$result .= $content;
+		}
+
 		$hook_params = array();
 		$hook_params['group_id'] = $group_id;
 		plugin_hook("project_after_description",$hook_params);
