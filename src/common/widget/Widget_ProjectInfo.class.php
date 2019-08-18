@@ -65,10 +65,8 @@ class Widget_ProjectInfo extends Widget {
 
 		// registration date
 		$project_start_date = $project->getStartDate();
-		$result .=(_('Registered')._(': ').
-				'<span property="doap:created" content="'.date('Y-m-d', $project_start_date).'">'.
-				date(_('Y-m-d H:i'), $project_start_date).
-				"</span>\n");
+		$result .= html_e('br')._('Registered')._(':').
+				html_e('span', array('property' => 'doap:created', 'content' => date('Y-m-d', $project_start_date)), date(_('Y-m-d H:i'), $project_start_date));
 
 		// Get the activity percentile
 		// CB hide stats if desired
@@ -83,12 +81,12 @@ class Widget_ProjectInfo extends Widget {
 			if (!$actv_res) {
 				$actv_res=0;
 			}
-			$result .= '<br />'.sprintf (_('Activity Ranking: <strong>%d</strong>'), $actv_res)."\n";
-			$result .= '<br />'._('View project').' '.util_make_link('/project/stats/?group_id='.$group_id, _('Statistics'));
+			$result .= html_e('br').sprintf (_('Activity Ranking: <strong>%d</strong>'), $actv_res)."\n";
+			$result .= html_e('br')._('View project').' '.util_make_link('/project/stats/?group_id='.$group_id, _('Statistics'));
 			if ( ($project->usesTracker() && forge_get_config('use_tracker')) || ($project->usesPM() && forge_get_config('use_pm')) ) {
 				$result .= sprintf(_(' or <a href="%s">Activity</a>'),util_make_uri('/project/report/?group_id='.$group_id))."\n";
 			}
-			$result .= '<br />'.sprintf(_('View list of <a href="%s">RSS feeds</a> available for this project.'), util_make_uri('/export/rss_project.php?group_id='.$group_id)). ' ' . html_image('ic/rss.png',16,16,array());
+			$result .= html_e('br').sprintf(_('View list of <a href="%s">RSS feeds</a> available for this project.'), util_make_uri('/export/rss_project.php?group_id='.$group_id)). ' ' . html_image('ic/rss.png',16,16,array());
 		}
 
 		if(forge_get_config('use_people')) {
