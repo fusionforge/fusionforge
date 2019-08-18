@@ -51,9 +51,6 @@ function endOnError($errorMessage) {
 	endDocument();
 }
 
-?>
-<?php
-
 $group_id = getIntFromRequest('group_id');
 $atid = getIntFromRequest('atid');
 $offset = getIntFromRequest('offset');
