@@ -11,6 +11,7 @@ FusionForge 6.1.1:
 * Plugin Scmhook: fix scmhook commitEmail for scmhg broken [#903] (TrivialDev)
 * Plugin Scmsvn: fix <reponame>_scmsvn_paths.txt support [#906] (TrivialDev)
 * Plugin Scmgit: fix wrong host for js, css inclusion [#909] (TrivialDev)
+* Project Admin: fix FRS notification settings [#910] (TrivialDev)
 * Widget User Page: fix owner test to ensure the user is the owner of the layout.
 
 FusionForge 6.1:

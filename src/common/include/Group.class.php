@@ -522,13 +522,15 @@ class Group extends FFError {
 	 * @param	string	$tags
 	 * @param	bool	$use_activity
 	 * @param	bool	$is_public		group is publicly accessible
+	 * @param	string	$new_doc_address
+	 * @param	bool	$send_all_docs
 	 * @return	int	status.
 	 * @access    public
 	 */
 	function update(&$user, $group_name, $homepage, $short_description, $use_mail, $use_survey, $use_forum,
 		$use_pm, $use_pm_depend_box, $use_scm, $use_news, $use_docman,
 		$new_doc_address, $send_all_docs, $logo_image_id,
-		$use_ftp, $use_tracker, $use_frs, $use_stats, $tags, $use_activity, $is_public) {
+		$use_ftp, $use_tracker, $use_frs, $use_stats, $tags, $use_activity, $is_public, $new_frs_address, $send_all_frs) {
 
 		$perm =& $this->getPermission();
 
@@ -553,6 +555,14 @@ class Group extends FFError {
 			$invalid_mails = validate_emails($new_doc_address);
 			if (count($invalid_mails) > 0) {
 				$this->setError(sprintf(ngettext('New Doc Address Appeared Invalid: %s', 'New Doc Addresses Appeared Invalid: %s', count($invalid_mails)),implode(',',$invalid_mails)));
+				return false;
+			}
+		}
+
+		if ($new_frs_address) {
+			$invalid_mails = validate_emails($new_frs_address);
+			if (count($invalid_mails) > 0) {
+				$this->setError(sprintf(ngettext('New FRS Address Appeared Invalid: %s', 'New FRS Addresses Appeared Invalid: %s', count($invalid_mails)),implode(',',$invalid_mails)));
 				return false;
 			}
 		}
@@ -602,6 +612,10 @@ class Group extends FFError {
 			$send_all_docs = 0;
 		}
 
+		if (!$send_all_frs) {
+			$send_all_frs = 0;
+		}
+
 		$homepage = ltrim($homepage);
 		if (!$homepage) {
 			$homepage = util_make_url('/projects/'.$this->getUnixName().'/');
@@ -626,8 +640,10 @@ class Group extends FFError {
 				use_tracker=$14,
 				use_frs=$15,
 				use_stats=$16,
-				use_activity=$17
-			WHERE group_id=$18',
+				use_activity=$17,
+				new_frs_address=$18,
+				send_all_frs=$19
+			WHERE group_id=$20',
 					array(htmlspecialchars($group_name),
 						$homepage,
 						htmlspecialchars($short_description),
@@ -645,6 +661,8 @@ class Group extends FFError {
 						$use_frs,
 						$use_stats,
 						$use_activity,
+						$new_frs_address,
+						$send_all_frs,
 						$this->getID()));
 
 		if (!$res || db_affected_rows($res) < 1) {

@@ -31,7 +31,7 @@ if [ -e /etc/debian_version ]; then
 	backports_deb
 	apt-get update
 	if grep -q ^8 /etc/debian_version; then
-		apt-get install -y make gettext php5-cli php5-pgsql php-htmlpurifier php-http php-text-captcha \
+	    	apt-get install -y make gettext php5-cli php5-pgsql php-htmlpurifier php-http php-text-captcha \
 			libapache2-mpm-itk libapache2-mod-svn \
 			libapache2-mod-php5 \
 			apache2 postgresql postgresql-contrib libnss-pgsql2 unscd \
