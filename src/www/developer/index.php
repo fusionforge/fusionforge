@@ -43,18 +43,18 @@ $user = user_get_object($diary_user);
 if (!$user || !is_object($user) || !$user->isActive())
 	exit_no_user();
 
-/* everything sounds ok, now let's do the job */
-$action = getStringFromRequest('action');
-if (file_exists(forge_get_config('source_path').'/common/diary/actions/'.$action.'.php')) {
-	include(forge_get_config('source_path').'/common/diary/actions/'.$action.'.php');
-}
-
 $diaryNoteFactoryObject = new diaryNoteFactory(user_get_object($diary_user));
 
 if (!$diaryNoteFactoryObject) {
 	exit_error( _('Entry Not Found'), 'home');
 } elseif ($diaryNoteFactoryObject->isError()) {
 	exit_error($diaryNoteFactoryObject->getErrorMessage(),'home');
+}
+
+/* everything sounds ok, now let's do the job */
+$action = getStringFromRequest('action');
+if (file_exists(forge_get_config('source_path').'/common/diary/actions/'.$action.'.php')) {
+	include(forge_get_config('source_path').'/common/diary/actions/'.$action.'.php');
 }
 
 $title = _('Diary and Notes for') . ' ' . $diaryNoteFactoryObject->getUser()->getRealName();
