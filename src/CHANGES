@@ -9,6 +9,7 @@ FusionForge X.y:
 FusionForge 6.1.1:
 * Search Engine: fix PHP notice in SearchManager.class.php [#908] (TrivialDev)
 * Plugin Scmhook: fix scmhook commitEmail for scmhg broken [#903] (TrivialDev)
+* Plugin Scmhook: fix scmhook commitTracker [#911] (Florian Bruneau)
 * Plugin Scmsvn: fix <reponame>_scmsvn_paths.txt support [#906] (TrivialDev)
 * Plugin Scmgit: fix wrong host for js, css inclusion [#909] (TrivialDev)
 * Project Admin: fix FRS notification settings [#910] (TrivialDev)
