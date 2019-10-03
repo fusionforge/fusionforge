@@ -116,7 +116,7 @@ case "$1" in
 				a2enmod mpm_itk
 				a2enmod mod_access_compat
 			else
-				if [ -e /etc/debian_version] && ! grep -q ^8 /etc/debian_version ; then
+				if [ -e /etc/debian_version ] && ! grep -q ^8 /etc/debian_version ; then
 					a2dismod mpm_event
 					a2enmod mpm_itk
 				fi
