@@ -298,7 +298,7 @@ project independently.");
 		foreach ($hooksEnabled as $key => $repos) {
 			foreach ($repos as $repo) {
 				foreach ($hooksAvailable as $hookAvailable) {
-					if (in_array($hookAvailable->getClassname(), $hooksEnabled)) {
+					if (in_array($hookAvailable->getClassname(), $repo)) {
 						if (method_exists($hookAvailable,'task_extra_detail')) {
 							$hookAvailable->task_extra_detail($params);
 						}
