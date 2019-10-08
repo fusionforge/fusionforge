@@ -23,6 +23,10 @@
 database_name=$(forge_get_config database_name)
 database_user=$(forge_get_config database_user)
 
+if [ -d /run/systemd/system ]; then
+   is_systemd=1
+fi
+
 case "$1" in
 	configure)
 		# Create default configuration files if needed
@@ -78,9 +82,14 @@ case "$1" in
 		fi
 
 		if [ $restart = 1 ] || ! service postgresql status >/dev/null; then
-			service postgresql restart
+		    a=restart
 		else
-			service postgresql reload
+		    a=reload
+		fi
+		if [ -n "$is_systemd" ] ; then
+		    systemctl $a postgresql
+		else
+		    service postgresql $a
 		fi
 		;;
 
