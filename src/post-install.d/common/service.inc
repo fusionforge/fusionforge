@@ -19,7 +19,7 @@
 
 # Debian-specific behavior for Policy Nazis
 # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=789778
-if [ -e /etc/debian_version ]; then
+if [ -e /etc/debian_version ] && ! [ "$FF_INSTALL_FORCE_HANDLE_SERVICES" = yes ]; then
 	service () {
 		invoke-rc.d $@
 		ret=$?
