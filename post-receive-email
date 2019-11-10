@@ -551,18 +551,19 @@ generate_update_branch_email()
 	[[ -n $rewind_only ]] || newrevs=$(show_new_revisions)
 
 	echo ""
-	if [[ -n $newrevs ]]; then
-		echo "Those revisions listed above that are new to this repository have"
-		echo "not appeared on any other notification email; so we list those"
-		echo "revisions in full, below."
-
-		echo ""
-		echo $LOGBEGIN
-		print -r -- "$newrevs"
-		echo $LOGEND
-	else
+	if [[ -z $newrevs ]]; then
 		echo "No new revisions were added by this update."
+		return 0
 	fi
+
+	echo "Those revisions listed above that are new to this repository have"
+	echo "not appeared on any other notification email; so we list those"
+	echo "revisions in full, below."
+
+	echo ""
+	echo $LOGBEGIN
+	print -r -- "$newrevs"
+	echo $LOGEND
 
 	# The diffstat is shown from the old revision to the new revision.
 	# This is to show the truth of what happened in this change.
