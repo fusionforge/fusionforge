@@ -13,7 +13,7 @@ case "$1" in
 				case $mountfilesystem in
 					'xfs')
 						mountoptions=$(mount | grep "$mountpoint " | grep "uquota" | grep "gquota")
-						if [ -z $mountoptions ]; then
+						if [ -z "$mountoptions" ]; then
 							echo "Enabling uquota & gquota on $mountpoint"
 							#requires boot changes!!!
 						else
@@ -22,7 +22,7 @@ case "$1" in
 						;;
 					'ext4'|'ext3')
 						mountoptions=$(mount | grep "$mountpoint " | grep "usrquota" | grep "grpquota")
-						if [ -z $mountoptions ]; then
+						if [ -z "$mountoptions" ]; then
 							echo "Enabling usrquota & grpquota on $mountpoint"
 							#add option in fstab
 							mount -o remount,usrquota,grpquota $mountpoint
