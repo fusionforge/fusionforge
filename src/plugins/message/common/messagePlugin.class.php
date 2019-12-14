@@ -50,7 +50,7 @@ on all pages, e.g. for maintenance announcements.");
 	}
 
 	function getAdminOptionLink() {
-		return util_make_link('/plugins/message/index.php', _('Configure Message'));
+		return util_make_link('/plugins/message/index.php', _('Configure Global Message'));
 	}
 
 	function message() {
