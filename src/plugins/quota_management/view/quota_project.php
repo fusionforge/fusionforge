@@ -136,7 +136,7 @@ plugin_hook_by_reference('quota_display_db', $quotas);
 $quotas_disk = array();
 
 // disk_total_space
-$_quota_block_size = trim(shell_exec('echo $BLOCK_SIZE')) + 0;
+$_quota_block_size = intval(trim(shell_exec('echo $BLOCK_SIZE'))) + 0;
 if ($_quota_block_size == 0) $_quota_block_size = 1024;
 $quota_soft = "";
 $quota_hard = "";
