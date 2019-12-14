@@ -1189,7 +1189,7 @@ function debug_string_backtrace() {
 }
 
 function util_ini_get_bytes($id) {
-	$val = trim(ini_get($id));
+	$val = substr(trim(ini_get($id)), 0, -1);
 	$last = strtolower($val[strlen($val)-1]);
 	switch ($last) {
 		case 'g':
