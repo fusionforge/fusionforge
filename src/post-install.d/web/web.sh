@@ -120,7 +120,7 @@ case "$1" in
 					a2dismod mpm_event
 					a2enmod mpm_itk
 				fi
-				a2enmod php || a2enmod php7.2 || a2enmod php7.3 || a2enmod php7.0 || a2enmod php5
+				a2enmod php || a2enmod php7.3 || a2enmod php7.2 || a2enmod php7.0 || a2enmod php5
 			fi
 			a2enmod ssl
 			a2enmod env

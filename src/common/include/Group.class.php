@@ -522,8 +522,8 @@ class Group extends FFError {
 	 * @param	string	$tags
 	 * @param	bool	$use_activity
 	 * @param	bool	$is_public		group is publicly accessible
-	 * @param	string	$new_doc_address
-	 * @param	bool	$send_all_docs
+	 * @param	string	$new_frs_address
+	 * @param	bool	$send_all_frs
 	 * @return	int	status.
 	 * @access    public
 	 */
