@@ -3,6 +3,7 @@
  * Copyright (c) STMicroelectronics, 2007. All Rights Reserved.
  *
  * Originally written by Manuel VACELET, 2007.
+ * Copyright 2019, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -28,8 +29,10 @@ require_once 'common/valid/Valid.class.php';
  */
 class Valid_UInt extends Valid {
 	function validate($value) {
-		$this->addRule(new Rule_Int());
-		$this->addRule(new Rule_GreaterOrEqual(0));
+		$nri = new Rule_Int();
+		$nrgoe = new Rule_GreaterOrEqual(0);
+		$this->addRule($nri);
+		$this->addRule($nrgoe);
 		return parent::validate($value);
 	}
 }
@@ -69,7 +72,8 @@ class Valid_Pv extends Valid {
  */
 class Valid_Text extends Valid {
 	function validate($value) {
-		$this->addRule(new Rule_String());
+		$rs = new Rule_String();
+		$this->addRule($rs);
 		return parent::validate($value);
 	}
 }
@@ -79,7 +83,8 @@ class Valid_Text extends Valid {
  */
 class Valid_String extends Valid_Text {
 	function validate($value) {
-		$this->addRule(new Rule_NoCr());
+		$rnc = new Rule_NoCr();
+		$this->addRule($rnc);
 		return parent::validate($value);
 	}
 }

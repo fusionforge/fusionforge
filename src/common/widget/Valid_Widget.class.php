@@ -3,6 +3,7 @@
  * Copyright (c) STMicroelectronics, 2008. All Rights Reserved.
  *
  * Originally written by Manuel VACELET, 2008.
+ * Copyright 2019, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -28,7 +29,8 @@ require_once 'Rule_Widget.class.php';
  */
 class Valid_Widget_Owner extends Valid_String {
 	function validate($value) {
-		$this->addRule(new Rule_Widget_Owner());
+		$nrwo = new Rule_Widget_Owner();
+		$this->addRule($nrwo);
 		return parent::validate($value);
 	}
 }
