@@ -52,11 +52,6 @@ to monitor disk and database usage per user, project.");
 				$returned = true;
 				break;
 			}
-			case "site_admin_option_hook": {
-				echo html_e('li', array(), $this->getAdminOptionLink());
-				$returned = true;
-				break;
-			}
 			case "groupadminmenu": {
 				$params['labels'][] = _ ('Quota');
 				$params['links'][] = '/plugins/quota_management/index.php?group_id='.$params['group'].'&type=projectadmin';
@@ -66,6 +61,10 @@ to monitor disk and database usage per user, project.");
 			}
 		}
 		return $returned;
+	}
+
+	function site_admin_option_hook() {
+		echo html_e('li', array(), $this->getAdminOptionLink());
 	}
 
 	function getAdminOptionLink() {
