@@ -60,6 +60,8 @@ if (getStringFromRequest('submit')) {
 	$tags = getStringFromRequest('form_tags');
 	$new_doc_address = getStringFromRequest('new_doc_address');
 	$send_all_docs = getStringFromRequest('send_all_docs');
+	$new_frs_address = getStringFromRequest('new_frs_address');
+	$send_all_frs = getStringFromRequest('send_all_frs');
 
 	$res = $group->update(
 		session_get_user(),
@@ -83,7 +85,9 @@ if (getStringFromRequest('submit')) {
 		$use_stats,
 		$tags,
 		$use_activity,
-		$group->isPublic()
+		$group->isPublic(),
+		$new_frs_address,
+		$send_all_frs
 	);
 
 	if (!$res) {
@@ -327,6 +331,8 @@ plugin_hook("groupisactivecheckbox",$hookParams);
 
 <input type="hidden" name="new_doc_address" value="<?php echo $group->getDocEmailAddress(); ?>" />
 <input type="hidden" name="send_all_docs" value="1" <?php echo c($group->docEmailAll()); ?> />
+<input type="hidden" name="new_frs_address" value="<?php echo $group->getFRSEmailAddress(); ?>" />
+<input type="hidden" name="send_all_frs" value="1" <?php echo c($group->frsEmailAll()); ?> />
 
 <input type="submit" name="submit" value="<?php echo _('Update') ?>" />
 <?php echo $HTML->closeForm(); ?>
