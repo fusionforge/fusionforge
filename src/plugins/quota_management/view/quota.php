@@ -34,7 +34,7 @@ global $HTML;
 
 $quota_management = plugin_get_object('quota_management');
 
-$_quota_block_size = trim(shell_exec('echo $BLOCK_SIZE')) + 0;
+$_quota_block_size = intval(trim(shell_exec('echo $BLOCK_SIZE'))) + 0;
 if ($_quota_block_size == 0) $_quota_block_size = 1024;
 
 $subMenuTitle = array();
