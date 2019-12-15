@@ -27,7 +27,7 @@ require_once $gfwww.'include/jquery_plugins.php';
 
 class Widget_TrackerContent extends Widget {
 	var $trackercontent_title;
-	var $layoutExtraFieldIDs;
+	var $layoutExtraFieldIDs = array();
 
 	function __construct() {
 		$request =& HTTPRequest::instance();
