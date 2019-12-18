@@ -54,7 +54,7 @@ $res = db_query_params('SELECT user_diary.id FROM user_diary, users
 						AND date_posted > $4
 						ORDER BY date_posted',
 			array(1, 0, 'A', $old_date));
-			
+
 if ($res && db_numrows($res)) {
 	echo html_e('h2', array(), _('Available diary entries eligible to frontpage'));
 	$title_arr = array('', _('Date'), _('Subject'), _('User'), _('Actions'));
@@ -81,7 +81,7 @@ $res = db_query_params('SELECT user_diary.id FROM user_diary, users
 						AND date_posted > $3
 						ORDER BY date_posted',
 			array(1, 1, $old_date));
-			
+
 if ($res && db_numrows($res)) {
 	echo html_e('h2', array(), _('Published diary entries to frontpage last 30 days.'));
 	$title_arr = array('', _('Date'), _('Subject'), _('User'), _('Actions'));
@@ -109,7 +109,7 @@ $res = db_query_params('SELECT user_diary.id FROM user_diary, users
 						AND date_posted > $3
 						ORDER BY date_posted',
 			array(1, 2, $old_date));
-			
+
 if ($res && db_numrows($res)) {
 	echo html_e('h2', array(), _('Refused diary entries to frontpage last 30 days.'));
 	$title_arr = array('', _('Date'), _('Subject'), _('User'), _('Actions'));

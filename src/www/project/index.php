@@ -38,7 +38,7 @@ session_require_perm('project_read', $group_id);
 
 if ($g->isError())
 	exit_error($g->getErrorMessage(), 'home');
-	
+
 /* everything sounds ok, now let's do the job */
 $action = getStringFromRequest('action');
 if (file_exists(forge_get_config('source_path').'/common/project/actions/'.$action.'.php')) {

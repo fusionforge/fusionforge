@@ -164,7 +164,7 @@ class SearchManager {
 			SEARCH__TYPE_IS_ALLDOCS,
 			$ffSEAllDocs
 		);
-		
+
 		if (forge_get_config('use_people')) {
 			$ffSESkills = new GFSearchEngine(SEARCH__TYPE_IS_SKILL, 'SkillHtmlSearchRenderer', _('Skills'));
 			$this->addSearchEngine(
