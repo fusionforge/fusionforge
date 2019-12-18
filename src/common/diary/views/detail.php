@@ -34,4 +34,4 @@ include ($gfcommon.'diary/views/detailnote.php');
 echo html_ac(html_ap() - 1);
 echo html_ao('div', array('id' => 'diary_right'));
 include ($gfcommon.'diary/views/archive.php');
-echo html_ac(html_ap() - 2); 
+echo html_ac(html_ap() - 2);

@@ -25,7 +25,7 @@ global $group_id;
 global $g;
 
 session_require_perm('project_read', $group_id);
- 
+
 if ($g->castVote(false)) {
 	$feedback = _('Retracted Vote successfully');
 } else {

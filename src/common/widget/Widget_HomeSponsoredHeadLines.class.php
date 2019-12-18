@@ -97,4 +97,3 @@ class Widget_HomeSponsoredHeadLines extends Widget {
 		return $HTML->warning_msg(_('No Sponsored element found'));
 	}
 }
- 

@@ -20,12 +20,12 @@
  * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
- 
+
 global $group_id;
 global $g;
 
 session_require_perm('project_read', $group_id);
- 
+
 if ($g->castVote()) {
 	$feedback = _('Cast Vote successfully');
 } else {
