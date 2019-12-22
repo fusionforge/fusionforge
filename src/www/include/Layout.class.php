@@ -8,7 +8,7 @@
  * Copyright 2010-2012, Alain Peyrat - Alcatel-Lucent
  * Copyright © 2011 Thorsten Glaser – tarent GmbH
  * Copyright 2011 - Marc-Etienne Vargenau, Alcatel-Lucent
- * Copyright 2012-2018, Franck Villaume - TrivialDev
+ * Copyright 2012-2019, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -1038,6 +1038,10 @@ abstract class Layout extends FFError {
 
 	function getPointerDown($title = '', $alt = '', $otherAttr = array()) {
 		return $this->getPicto('ic/pointer_down.png', $title, $alt, 20, 20, $otherAttr);
+	}
+
+	function getFileTxtPic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/file-txt.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
 	function getPicto($url, $title, $alt, $width = 20, $height = 20, $otherAttr = array()) {

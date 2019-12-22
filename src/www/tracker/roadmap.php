@@ -473,7 +473,7 @@ if (!$at_arr || count($at_arr) < 1) {
 				$roadmap_name._(': '),
 				util_make_uri('/tracker/roadmap.php?group_id='.$group_id.'&amp;roadmap_id='.$roadmap_id.'&amp;release='.urlencode($release_value)),
 				$release_value,
-				' '.html_image("ic/file-txt.png",'','',array("alt"=>_('Display as text'), "title"=>_('Display as text'), "onclick"=>"getReleaseTxt('".addslashes($release_value)."')")));
+				' '.$HTML->getFileTxtPic(_('Display as text'), _('Display as text'), array("onclick"=>"getReleaseTxt('".addslashes($release_value)."')")));
 
 		// Graph
 		if ($display_graph && $templates[$template]['display_graph']) {
