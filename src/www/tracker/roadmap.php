@@ -3,7 +3,7 @@
  * FusionForge trackers
  *
  * Copyright 2011, Alcatel-Lucent
- * Copyright 2012,2015-2016, Franck Villaume - TrivialDev
+ * Copyright 2012,2015-2016,2019, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -374,7 +374,7 @@ if (!$at_arr || count($at_arr) < 1) {
 
 					// Artifact id
 					$rmap[$release_value_id][$artifact_type_name] .= sprintf($templates[$template]['ticket_id'],
-							util_make_uri('/tracker/?func=detail&aid='.$artifact_id.'&group_id='.$group_id.'&atid='.$ath->getID()),
+							$artifact->getPermalink(),
 							$artifact_id);
 
 					// Summary
