@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) Alcatel-Lucent
  * Copyright 2009, Roland Mas
- * Copyright 2014-2016, Franck Villaume - TrivialDev
+ * Copyright 2014-2016,2019, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -39,28 +39,28 @@ function util_gen_cross_ref($text, $group_id = 0) {
 	$text = util_make_links($text);
 
 	// Handle FusionForge [#nnn] Syntax => links to tracker.
-	$text = preg_replace_callback('/\[\#(\d+)\]/', create_function('$matches', 'return _artifactid2url($matches[1]);'), $text);
+	$text = preg_replace_callback('/\[\#(\d+)\]/', function($matches) {return _artifactid2url($matches[1]);}, $text);
 
 	// Handle FusionForge [Tnnn] Syntax => links to task.
-	$text = preg_replace_callback('/\[\T(\d+)\]/', create_function('$matches', 'return _taskid2url($matches[1],'.$group_id.');'), $text);
+	$text = preg_replace_callback('/\[\T(\d+)\]/', function($matches) {return _taskid2url($matches[1],'.$group_id.');}, $text);
 
 	// Handle [wiki:<pagename>] syntax
-	$text = preg_replace_callback('/\[wiki:(.*?)\]/', create_function('$matches', 'return _page2url('.$group_id.',$matches[1]);'), $text);
+	$text = preg_replace_callback('/\[wiki:(.*?)\]/', function($matches) {return _page2url('.$group_id.',$matches[1]);}, $text);
 
 	// Handle FusionForge [forum:<thread_id>] Syntax => links to forum.
-	$text = preg_replace_callback('/\[forum:(\d+)\]/', create_function('$matches', 'return _forumid2url($matches[1]);'), $text);
+	$text = preg_replace_callback('/\[forum:(\d+)\]/', function($matches) {return _forumid2url($matches[1]);}, $text);
 
 	// Handle FusionForge [Dnnn] Syntax => links to document.
-	$text = preg_replace_callback('/\[D(\d+)\]/', create_function('$matches', 'return _documentid2url($matches[1]);'), $text);
+	$text = preg_replace_callback('/\[D(\d+)\]/', function($matches) {return _documentid2url($matches[1]);}, $text);
 
 	// Handle FusionForge [Rnnn] Syntax => links to frs release.
-	$text = preg_replace_callback('/\[R(\d+)\]/', create_function('$matches', 'return _frsreleaseid2url($matches[1]);'), $text);
+	$text = preg_replace_callback('/\[R(\d+)\]/', function($matches) {return _frsreleaseid2url($matches[1]);}, $text);
 
 	// Handle FusionForge [Nnnn] Syntax => links to diary notes.
-	$text = preg_replace_callback('/\[N(\d+)\]/', create_function('$matches', 'return _diarynotesid2url($matches[1]);'), $text);
+	$text = preg_replace_callback('/\[N(\d+)\]/', function($matches) {return _diarynotesid2url($matches[1]);}, $text);
 
 	// Handle FusionForge [Pnnn] Syntax => links to project.
-	$text = preg_replace_callback('/\[P(\d+)\]/', create_function('$matches', 'return _projectid2url($matches[1]);'), $text);
+	$text = preg_replace_callback('/\[P(\d+)\]/', function($matches) {return _projectid2url($matches[1]);}, $text);
 	return $text;
 }
 
