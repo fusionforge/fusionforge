@@ -7,7 +7,7 @@
  * Copyright 2009, Roland Mas
  * Copyright (C) 2009-2013 Alain Peyrat, Alcatel-Lucent
  * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
- * Copyright 2014-2017, Franck Villaume - TrivialDev
+ * Copyright 2014-2017,2019, Franck Villaume - TrivialDev
  * Copyright 2016-2017, Stéphane-Eymeric Bredthauer - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -137,7 +137,7 @@ class Artifact extends FFObject {
 	 *
 	 * @var	array	$children
 	 */
-	var $children;
+	var $children = array();
 
 	/**
 	 * Database result set of parent
@@ -2224,7 +2224,7 @@ class Artifact extends FFObject {
 			$this->children = $this->getChildren();
 		}
 		$nb = count($this->children);
-		if ($nb>0) {
+		if ($nb > 0) {
 			return $nb;
 		}
 		return false;
