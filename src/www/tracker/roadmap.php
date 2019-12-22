@@ -366,9 +366,9 @@ if (!$at_arr || count($at_arr) < 1) {
 
 					// Icon
 					if ($artifact->getStatusID() == 1) {
-						$icon = html_image('ic/ticket-open.png','','',array('alt' => $custom_status_name, 'title' => $custom_status_name));
+						$icon = $HTML->getOpenTicketPic($custom_status_name, $custom_status_name);
 					} else {
-						$icon = html_image('ic/ticket-closed.png','','',array('alt' => $custom_status_name, 'title' => $custom_status_name));
+						$icon = $HTML->getClosedTicketPic($custom_status_name, $custom_status_name);
 					}
 					$rmap[$release_value_id][$artifact_type_name] .= sprintf($templates[$template]['ticket_icon'], $icon);
 
