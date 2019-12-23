@@ -3,7 +3,7 @@
  * Generic RSS Widget Class
  *
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2012,2014, Franck Villaume - TrivialDev
+ * Copyright 2012,2014,2019, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is a part of Fusionforge.
@@ -58,7 +58,11 @@ require_once 'Widget.class.php';
 					$content .= $HTML->error_msg(_('Cannot create backend directory. Contact forge administrator.'));
 				}
 			}
-			$rss = new SimplePie($this->rss_url, forge_get_config('data_path') .'/rss', null, forge_get_config('sys_proxy'));
+			$rss = new SimplePie();
+			$rss->set_feed_url($this->rss_url);
+			$rss->set_cache_location(forge_get_config('data_path') .'/rss');
+			$rss->init();
+			$rss->handle_content_type();
 			$max_items = 10;
 			$items = array_slice($rss->get_items(), 0, $max_items);
 			if (count($items)) {
