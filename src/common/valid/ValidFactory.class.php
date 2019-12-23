@@ -95,7 +95,8 @@ class Valid_String extends Valid_Text {
 class Valid_WhiteList extends Valid {
 	function __construct($key, $whitelist) {
 		parent::__construct($key);
-		$this->addRule(new Rule_WhiteList($whitelist));
+		$rwl = new Rule_WhiteList($whitelist);
+		$this->addRule($rwl);
 	}
 }
 

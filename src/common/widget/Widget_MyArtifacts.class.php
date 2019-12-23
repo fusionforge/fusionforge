@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2012-2013,2018, Franck Villaume - TrivialDev
+ * Copyright 2012-2013,2018-2019, Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of Education
  * http://fusionforge.org
  *
@@ -110,7 +110,8 @@ class Widget_MyArtifacts extends Widget {
 
 	function getContent() {
 		global $HTML;
-		$atf = new ArtifactsForUser(@UserManager::instance()->getCurrentUser());
+		$user = @UserManager::instance()->getCurrentUser();
+		$atf = new ArtifactsForUser($user);
 		$my_artifacts = array();
 		if ($this->_artifact_show == 'ASM') {
 			$my_artifacts = $atf->getArtifactsFromSQLwithParams('SELECT * FROM artifact_vw av where (av.submitted_by=$1 OR av.assigned_to=$1 OR av.artifact_id IN (select artifact_monitor.artifact_id FROM artifact_monitor WHERE artifact_monitor.user_id = $1)) AND av.status_id=1 ORDER BY av.group_artifact_id, av.artifact_id DESC',array(UserManager::instance()->getCurrentUser()->getID()));
