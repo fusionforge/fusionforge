@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
+ * Copyright 2019, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -80,7 +81,7 @@ if ($rows < 1) {
 	echo news_show_latest($group_id,10,true,false,false,-1, true);
 }
 
-news_footer();
+$HTML->footer();
 
 // Local Variables:
 // mode: php

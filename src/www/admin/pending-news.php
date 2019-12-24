@@ -7,6 +7,7 @@
  * Copyright 2010, Alain Peyrat - Alcatel-Lucent
  * Copyright 2011, Roland Mas
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
+ * Coprygith 2019, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -198,7 +199,7 @@ if ($approve) {
 		);
 
 }
-news_footer();
+$HTML->footer();
 
 // Local Variables:
 // mode: php

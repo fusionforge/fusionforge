@@ -5,7 +5,7 @@
  * Copyright (C) 1999-2001 VA Linux Systems
  * Copyright (C) 2002-2004 GForge Team
  * Copyright (C) 2008-2010 Alcatel-Lucent
- * Copyright 2013, 2015, Franck Villaume - TrivialDev
+ * Copyright 2013,2015,2019, Franck Villaume - TrivialDev
  *
  * http://fusionforge.org/
  *
@@ -164,7 +164,7 @@ if (session_loggedin()) {
 	echo '</p>';
 	echo $HTML->closeForm();
 
-	news_footer();
+	$HTML->footer();
 
 } else {
 

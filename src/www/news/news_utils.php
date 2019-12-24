@@ -5,7 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2017, Franck Villaume - TrivialDev
+ * Copyright 2017,2019, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -67,11 +67,6 @@ function news_header($params) {
 	} else {
 		site_header($params);
 	}
-}
-
-function news_footer($params = array()) {
-	global $HTML;
-	$HTML->footer($params);
 }
 
 /**

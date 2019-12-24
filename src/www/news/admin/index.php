@@ -5,7 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
- * Copyright 2015, Franck Villaume
+ * Copyright 2015,2019, Franck Villaume
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -188,7 +188,7 @@ if ($group_id && $group_id != GROUP_IS_NEWS) {
 		}
 
 	}
-	news_footer();
+	$HTML->footer();
 
 } else { // No group, or newsadmin group
 	session_redirect('/admin/pending-news.php');
