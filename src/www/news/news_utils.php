@@ -140,6 +140,7 @@ function news_show_latest($group_id = 0, $limit = 10, $show_summaries = true, $a
 					$arr=explode("\n",db_result($result,$i,'details'));
 				}
 				$summ_txt=util_make_links( $arr[0] );
+				$summ_txt = util_gen_cross_ref($summ_txt);
 				$proj_name=util_make_link_g (strtolower(db_result($result,$i,'unix_group_name')),db_result($result,$i,'group_id'),db_result($result,$i,'group_name'));
 			} else {
 				$proj_name='';
