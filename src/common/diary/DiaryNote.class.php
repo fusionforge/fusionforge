@@ -189,7 +189,7 @@ class DiaryNote extends FFObject {
 		} else {
 			$arr = explode("\n", $this->data_array['details']);
 		}
-		$abstract = $arr[0];
+		$abstract = util_gen_cross_ref($arr[0]);
 		$parsertype = forge_get_config('diary_parser_type');
 		switch ($parsertype) {
 			case 'markdown':
