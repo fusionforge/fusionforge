@@ -410,21 +410,6 @@ abstract class Layout extends FFError {
 
 	abstract function footer();
 
-	function footerEnd() { ?>
-
-		<!-- PLEASE LEAVE "Powered By FusionForge" on your site -->
-		<div class="align-right">
-		<?php echo $this->navigation->getPoweredBy(); ?>
-		</div>
-
-		<?php echo $this->navigation->getShowSource();
-
-		plugin_hook('webanalytics_url');
-
-		echo html_ac(html_ap() -1);
-		echo "</html>\n";
-	}
-
 	function getRootIndex() {
 		return $this->rootindex;
 	}
