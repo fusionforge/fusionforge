@@ -1,18 +1,20 @@
 FusionForge X.y:
-* Widget HomeLatestDiaryNotes: new widget for Forge home page to display 5 latest public Diary Notes across the forge (TrivialDev)
+* Developer page: use widget system, including general & scmgit widgets [#899] (TrivialDev)
 * Diary & Notes: support markdown (TrivialDev)
 * Diary & Notes: support crossref (TrivialDev)
-* Utils: crossref, support diary [Nxxx] and Project [Pxxx] (TrivialDev)
-* Developer page: use widget system, including general & scmgit widgets [#899] (TrivialDev)
+* Plugin Hudson/Jenkins: display link in public area widget [#889] (TrivialDev)
 * User: followers/following mechanism (TrivialDev)
+* Utils: crossref, support diary [Nxxx] and Project [Pxxx] (TrivialDev)
+* Widget HomeLatestDiaryNotes: new widget for Forge home page to display 5 latest public Diary Notes across the forge (TrivialDev)
+* Widget_RSS: upgrade SimplePie integration to 1.3.1 version (align source install & debian install) [#913] (TrivialDev)
 
 FusionForge 6.1.1:
-* Search Engine: fix PHP notice in SearchManager.class.php [#908] (TrivialDev)
 * Plugin Scmhook: fix scmhook commitEmail for scmhg broken [#903] (TrivialDev)
 * Plugin Scmhook: fix scmhook commitTracker [#911] (Florian Bruneau)
 * Plugin Scmsvn: fix <reponame>_scmsvn_paths.txt support [#906] (TrivialDev)
 * Plugin Scmgit: fix wrong host for js, css inclusion [#909] (TrivialDev)
 * Project Admin: fix FRS notification settings [#910] (TrivialDev)
+* Search Engine: fix PHP notice in SearchManager.class.php [#908] (TrivialDev)
 * Widget User Page: fix owner test to ensure the user is the owner of the layout.
 
 FusionForge 6.1:

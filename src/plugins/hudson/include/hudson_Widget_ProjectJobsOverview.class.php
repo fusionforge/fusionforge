@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2014,2016, Franck Villaume - TrivialDev
+ * Copyright 2014,2016,2019, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -68,13 +68,13 @@ class hudson_Widget_ProjectJobsOverview extends HudsonOverviewWidget {
 			}
 			if ($this->_all_status['grey'] > 0 || $this->_all_status['red'] > 0) {
 				$this->_global_status = _("One or more failure or pending job");
-				$this->_global_status_icon = '/'.$this->plugin->getThemePath() . "/images/ic/status_red.png";
+				$this->_global_status_icon = '/'.$this->plugin->getIconsPath() . "status_red.png";
 			} elseif ($this->_all_status['yellow'] > 0) {
 				$this->_global_status = _("One or more unstable job");
-				$this->_global_status_icon = '/'.$this->plugin->getThemePath() . "/images/ic/status_yellow.png";
+				$this->_global_status_icon = '/'.$this->plugin->getIconsPath() . "status_yellow.png";
 			} else {
 				$this->_global_status = _("Success");
-				$this->_global_status_icon = '/'.$this->plugin->getThemePath() . "/images/ic/status_blue.png";
+				$this->_global_status_icon = '/'.$this->plugin->getIconsPath() . "status_blue.png";
 			}
 		} else {
 			$this->_use_global_status == false;

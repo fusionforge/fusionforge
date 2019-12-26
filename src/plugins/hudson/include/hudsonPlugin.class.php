@@ -5,7 +5,7 @@
  * Copyright (c) Xerox Corporation, Codendi 2007-2008.
  * @author Marc Nazarian <marc.nazarian@xrce.xerox.com>
  * Copyright (C) 2010-2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013-2014,2016, Franck Villaume - TrivialDev
+ * Copyright 2013-2014,2016,2019, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -57,6 +57,7 @@ control over it to the project administrator.");
 		$this->_addHook('role_has_permission');
 		$this->_addHook('role_get_setting');
 		$this->_addHook('list_roles_by_permission');
+		$this->_addHook('project_public_area');
 	}
 
 	function CallHook($hookname, &$params) {
@@ -110,6 +111,8 @@ control over it to the project administrator.");
 			$this->role_get_setting($params);
 		} elseif ($hookname == 'list_roles_by_permission') {
 			$this->list_roles_by_permission($params);
+		} elseif ($hookname == 'project_public_area') {
+			$this->project_public_area();
 		}
 	}
 
@@ -415,5 +418,30 @@ control over it to the project administrator.");
 				break;
 		}
 		return true;
+	}
+
+	function project_public_area(&$params) {
+		if (isset($params['group_id'])) {
+			$group_id=$params['group_id'];
+		} elseif (isset($params['group'])) {
+			$group_id=$params['group'];
+		} else {
+			$group_id=null;
+		}
+
+		$project = group_get_object($group_id);
+		if (!$project || !is_object($project)) {
+			return;
+		}
+		if ($project->isError()) {
+			return;
+		}
+		if ( $project->usesPlugin($this->name)) {
+			$params['result'] .= '<div class="public-area-box">';
+			$params['result'] .= util_make_link('/plugins/'.$this->name.'/?group_id='.$project->getID(),
+						html_abs_image(util_make_url('/plugins/'.$this->name.'/icon.png'),'20','20',array('alt'=>'Hudson/Jenkins')).
+								' Hudson/Jenkins');
+			$params['result'] .= '</div>';
+		}
 	}
 }
