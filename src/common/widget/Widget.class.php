@@ -61,6 +61,7 @@ require_once $gfcommon.'widget/Widget_HomeVersion.class.php';
 require_once $gfcommon.'widget/Widget_HomeRss.class.php';
 require_once $gfcommon.'widget/Widget_HomeLatestDiaryNotes.class.php';
 require_once $gfcommon.'widget/Widget_HomeSponsoredHeadLines.class.php';
+require_once $gfcommon.'widget/Widget_HomeHallOfFame.class.php';
 
 // Tracker Widgets
 require_once $gfcommon.'widget/Widget_TrackerComment.class.php';
@@ -218,6 +219,9 @@ require_once $gfcommon.'widget/Widget_UserhomeRss.class.php';
 			case 'homesponsoredheadlines';
 				$o = new Widget_HomeSponsoredHeadLines();
 				break;
+			case 'homehalloffame';
+				$o = new Widget_HomeHallOfFame();
+				break;
 			case 'mysurveys':
 				$o = new Widget_MySurveys();
 				break;
@@ -367,7 +371,7 @@ require_once $gfcommon.'widget/Widget_UserhomeRss.class.php';
 				break;
 			case WidgetLayoutManager::OWNER_TYPE_HOME:
 				$widgets = array('hometagcloud', 'homeversion', 'homelatestnews', 'homestats', 'homedetailactivitymostactiveprojectweek',
-						'homelatestfilereleases', 'homerss', 'homelatestdiarynotes', 'homesponsoredheadlines');
+						'homelatestfilereleases', 'homerss', 'homelatestdiarynotes', 'homesponsoredheadlines', 'homehalloffame');
 				break;
 			case WidgetLayoutManager::OWNER_TYPE_TRACKER:
 				$widgets = array('trackercontent', 'trackercomment', 'trackerdefaultactions', 'trackergeneral', 'trackermain', 'trackersummary');

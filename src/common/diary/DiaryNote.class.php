@@ -199,7 +199,8 @@ class DiaryNote extends FFObject {
 			default:
 				$abstract = nl2br($abstract);
 		}
-		$content = html_e('div', array('class' => 'widget-sticker-header box'), html_e('div', array(),util_make_link($this->getLink(), $this->getSummary()).'&nbsp;'._('by').'&nbsp;').util_display_user($this->getUser()->getUnixname(), $this->getUser()->getID(), $this->getUser()->GetRealname()));
+		$arr_v = $this->getVotes();
+		$content = html_e('div', array('class' => 'widget-sticker-header box'), html_e('div', array(), util_make_link($this->getLink(), $this->getSummary()).' - '.$arr_v[0].' '._('Vote(s)').'&nbsp;'._('by').'&nbsp;').util_display_user($this->getUser()->getUnixname(), $this->getUser()->getID(), $this->getUser()->GetRealname()));
 		$content .= html_e('div', array('class' => 'widget-sticker-body'), $abstract.html_e('br').util_make_link($this->getLink(),_('... Read more')));
 		$content .= html_e('div', array('class' => 'widget-sticker-footer'), _('Posted')._(': ').$this->getDatePostedOn());
 		return html_e('div', array('class' => 'widget-sticker-container'), $content);

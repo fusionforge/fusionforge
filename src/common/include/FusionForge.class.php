@@ -4,7 +4,7 @@
  *
  * Copyright 2002, GForge, LLC
  * Copyright 2009-2011, Roland Mas
- * Copyright 2015, Franck Villaume - TrivialDev
+ * Copyright 2015,2020, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -211,6 +211,58 @@ class FusionForge extends FFError {
 	function parseCount($res) {
 		$row_count = db_fetch_array($res);
 		return (int)$row_count['count'];
+	}
+
+	function getHallOfFameObjects($filter, $limit = 10) {
+		$objArr = array();
+		switch($filter) {
+			case 'P':
+				$query = 'select group_id as id, count(group_id) as ref, \'group\' from group_votes group by group_id order by ref desc';
+				break;
+			case 'D':
+				$query = 'select diary_id as id, count(diary_id) as ref, \'diary\' from diary_votes group by diary_id order by ref desc';
+				break;
+			case 'A':
+				$query = 'select artifact_id as id, count(artifact_id) as ref, \'artifact\' from artifact_votes group by artifact_id order by ref desc';
+				break;
+			case 'PA':
+				$query = 'select group_id as id, count(group_id) as ref, \'group\' as object from group_votes group by group_id 
+					union select artifact_id as id, count(artifact_id) as ref, \'artifact\' as object from artifact_votes group by artifact_id
+					order by ref desc';
+				break;
+			case 'PD':
+				$query = 'select group_id as id, count(group_id) as ref, \'group\' as object from group_votes group by group_id 
+					union select diary_id as id, count(diary_id) as ref, \'diary\' as object from diary_votes group by diary_id
+					order by ref desc';
+				break;
+			case 'DA':
+				$query = 'select artifact_id as id, count(artifact_id) as ref, \'artifact\' as object from artifact_votes group by artifact_id
+					union select diary_id as id, count(diary_id) as ref, \'diary\' as object from diary_votes group by diary_id
+					order by ref desc';
+				break;
+			case 'PDA':
+			default:
+				$query = 'select group_id as id, count(group_id) as ref, \'group\' as object from group_votes group by group_id 
+					union select artifact_id as id, count(artifact_id) as ref, \'artifact\' as object from artifact_votes group by artifact_id
+					union select diary_id as id, count(diary_id) as ref, \'diary\' as object from diary_votes group by diary_id
+					order by ref desc';
+				break;
+		}
+		$res = db_query_params($query, array(), $limit);
+		while ($arr = db_fetch_array($res)) {
+			switch($arr[2]) {
+				case 'group':
+					$objArr[] = group_get_object($arr[0]);
+					break;
+				case 'diary':
+					$objArr[] = diarynote_get_object($arr[0]);
+					break;
+				case 'artifact':
+					$objArr[] = artifact_get_object($arr[0]);
+					break;
+			}
+		}
+		return $objArr;
 	}
 }
 
