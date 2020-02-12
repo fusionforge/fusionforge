@@ -57,8 +57,8 @@ function pg_connectstring($dbname, $user, $password = "", $host = "", $port = ""
 	if ($port != "") {
 		$string .= " port=$port";
 	}
-	# using SSL breaks util_sudo_effective_user
-	# ("SSL error: decryption failed or bad record mac" for parent's new queries)
+	// using SSL breaks util_sudo_effective_user
+	// ("SSL error: decryption failed or bad record mac" for parent's new queries)
 	$string .= " sslmode=disable";
 	return $string;
 }
@@ -191,11 +191,11 @@ function db_switcher($dbserver = NULL) {
 /**
  * db_query_from_file - Query the database, from a file.
  *
- * @param	string	$file		File that contains the SQL statements.
- * @param	int	$limit		How many rows do you want returned.
- * @param	int	$offset		Of matching rows, return only rows starting here.
+ * @param	string		$file		File that contains the SQL statements.
+ * @param	int		$limit		How many rows do you want returned.
+ * @param	int		$offset		Of matching rows, return only rows starting here.
  * @param	resource	$dbserver	ability to spread load to multiple db servers.
- * @return	int	result set handle.
+ * @return	int		result set handle.
  */
 function db_query_from_file($file, $limit = -1, $offset = 0, $dbserver = NULL) {
 	global $sysdebug_dbquery, $sysdebug_dberrors;
@@ -304,7 +304,7 @@ function db_query_params($qstring, $params = array(), $limit = -1, $offset = 0, 
  * @param	string		$qstring	SQL statement.
  * @param	string		$qname		name of the prepared query
  * @param 	resource	$dbserver
- * @return	int			result set handle.
+ * @return	int		result set handle.
  */
 function db_prepare($qstring, $qname, $dbserver = NULL) {
 	global $sysdebug_dbquery, $sysdebug_dberrors;
@@ -408,11 +408,11 @@ function db_unprepare($name, $dbserver = NULL) {
 /**
  * db_query_qpa - Query the database, with a query+params array
  *
- * @param	array	$qpa		array(query, array(parameters...))
- * @param	int	$limit		How many rows do you want returned.
- * @param	int	$offset		Of matching rows, return only rows starting here.
+ * @param	array		$qpa		array(query, array(parameters...))
+ * @param	int		$limit		How many rows do you want returned.
+ * @param	int		$offset		Of matching rows, return only rows starting here.
  * @param	resource	$dbserver	Ability to spread load to multiple db servers.
- * @return resource result set handle.
+ * @return	resource	result set handle.
  */
 function db_query_qpa($qpa, $limit = -1, $offset = 0, $dbserver = NULL) {
 	$sql = $qpa[0];
@@ -421,7 +421,7 @@ function db_query_qpa($qpa, $limit = -1, $offset = 0, $dbserver = NULL) {
 }
 
 /**
- *  db_more_results() - Check if there are more unprocessed results.
+ *  db_more_results - Check if there are more unprocessed results.
  *
  * @return bool true if there are more results..
  */
@@ -430,7 +430,7 @@ function db_more_results() {
 }
 
 /**
- * db_next_result() - Get the next result from query with multiple statements.
+ * db_next_result - Get the next result from query with multiple statements.
  *
  * @deprecated
  */
@@ -446,10 +446,10 @@ function db_next_result() {
 $_sys_db_transaction_level = 0;
 
 /**
- * db_begin() - Begin a transaction.
+ * db_begin - Begin a transaction.
  *
  * @param	resource	$dbserver	Database server (SYS_DB_PRIMARY, SYS_DB_STATS, SYS_DB_TROVE, SYS_DB_SEARCH)
- * @return	bool	true.
+ * @return	bool		true.
  */
 function db_begin($dbserver = NULL) {
 	global $_sys_db_transaction_level;
@@ -468,7 +468,7 @@ function db_begin($dbserver = NULL) {
  * db_commit - Commit a transaction.
  *
  * @param	resource	$dbserver	Database server (SYS_DB_PRIMARY, SYS_DB_STATS, SYS_DB_TROVE, SYS_DB_SEARCH)
- * @return	bool	true on success/false on failure.
+ * @return	bool		true on success/false on failure.
  */
 function db_commit($dbserver = NULL) {
 	global $_sys_db_transaction_level, $sysdebug_dberrors;
@@ -495,7 +495,7 @@ function db_commit($dbserver = NULL) {
  * db_rollback - Rollback a transaction.
  *
  * @param	resource	$dbserver	Database server (SYS_DB_PRIMARY, SYS_DB_STATS, SYS_DB_TROVE, SYS_DB_SEARCH)
- * @return	bool	true on success/false on failure.
+ * @return	bool		true on success/false on failure.
  */
 function db_rollback($dbserver = NULL) {
 	global $_sys_db_transaction_level, $sysdebug_dberrors;
@@ -554,9 +554,9 @@ function db_result($qhandle, $row, $field) {
 /**
  * db_result_seek - Sets cursor location in a result set.
  *
- * @param	resource $qhandle	Query result set handle.
- * @param	int	$row		Row number.
- * @return	bool	True on success
+ * @param	resource	$qhandle	Query result set handle.
+ * @param	int		$row		Row number.
+ * @return	bool		True on success
  */
 function db_result_seek($qhandle, $row) {
 	return @pg_result_seek($qhandle, $row);
@@ -610,7 +610,7 @@ function db_affected_rows($qhandle) {
  * the current row of this database result
  *
  * @param	resource	$qhandle	Query result set handle.
- * @param	int			$result_type	Result type: PGSQL_ASSOC, PGSQL_NUM or PGSQL_BOTH
+ * @param	int		$result_type	Result type: PGSQL_ASSOC, PGSQL_NUM or PGSQL_BOTH
  * @return array array of fieldname/value key pairs.
  */
 function db_fetch_array($qhandle, $result_type = PGSQL_BOTH) {
@@ -652,7 +652,7 @@ function db_insertid($qhandle, $table_name, $pkey_field_name, $dbserver = NULL) 
  * db_error - Returns the last error from the database.
  *
  * @param	resource	$dbserver	Database server (SYS_DB_PRIMARY, SYS_DB_STATS, SYS_DB_TROVE, SYS_DB_SEARCH)
- * @return	string	error message.
+ * @return	string		error message.
  */
 function db_error($dbserver = NULL) {
 	$dbconn = db_switcher($dbserver);
