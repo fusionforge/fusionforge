@@ -1,6 +1,6 @@
 #! /usr/bin/php
 <?php
-/*
+/**
  * Copyright 2011, Roland Mas
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -19,7 +19,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-/** This script will automatically dump Mediawiki databases to an XML file.
+/**
+ * This script will automatically dump Mediawiki databases to an XML file.
  *
  * It is intended to be started in a cronjob.
  *
@@ -66,9 +67,8 @@ while ( $row = db_fetch_array($project_res) ) {
 	}
 }
 
-  // Local Variables:
-  // mode: php
-  // c-file-style: "bsd"
-  // End:
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
-?>

@@ -20,11 +20,12 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-  /** This script will automatically create mediawiki instances for
-   projects that do not yet have it.
-
-   It is intended to be started in a cronjob.
-   */
+/**
+ * This script will automatically create mediawiki instances for
+ * projects that do not yet have it.
+ *
+ * It is intended to be started in a cronjob.
+ */
 
 # TODO: How to use cronjob history?
 # Required config variables:
@@ -154,7 +155,7 @@ while ( $row = db_fetch_array($project_res) ) {
 	}
 }
 
-  // Local Variables:
-  // mode: php
-  // c-file-style: "bsd"
-  // End:
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:

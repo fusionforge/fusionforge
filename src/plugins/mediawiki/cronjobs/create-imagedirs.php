@@ -1,6 +1,6 @@
 #! /usr/bin/php
 <?php
-/*
+/**
  * Copyright (C) 2010  Olaf Lenz
  *
  * This file is part of FusionForge.
@@ -20,11 +20,12 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-  /** This script will automatically create the image upload
-   directories for all mediawiki instances.
-
-   It is intended to be started in a cronjob with root permissions.
-   */
+/**
+ * This script will automatically create the image upload
+ * directories for all mediawiki instances.
+ *
+ * It is intended to be started in a cronjob with root permissions.
+ */
 
 require_once dirname(__FILE__) . '/../../../www/env.inc.php';
 require_once $gfcommon.'include/pre.php';
@@ -73,9 +74,7 @@ if (forge_get_config('enable_uploads', 'mediawiki')) {
 } else {
 	cron_debug("Mediawiki uploads not enabled, quitting create-imagedirs.php!");
 }
-  // Local Variables:
-  // mode: php
-  // c-file-style: "bsd"
-  // End:
-
-?>
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
