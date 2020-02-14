@@ -71,4 +71,3 @@ while ( $row = db_fetch_array($project_res) ) {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
