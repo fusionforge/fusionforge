@@ -268,8 +268,6 @@ class DiaryNote extends FFObject {
 		}
 
 		$voters = $this->getVoters();
-		unset($voters[0]);	/* just in case */
-		unset($voters[100]);	/* need users */
 		if (($numvoters = count($voters)) < 1) {
 			$this->votes = array(0, 0, 0);
 			return $this->votes;
