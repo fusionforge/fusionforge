@@ -40,7 +40,7 @@ function admin_table_add($table, $unit, $primary_key) {
 
 		printf(_('Create a new %s below:'), getUnitLabel($unit));
 
-		echo $HTML->openForm(array('name' => 'add', 'action' => getStringFromServer('PHP_SELF').'?function=postad', 'method' => 'post'));
+		echo $HTML->openForm(array('name' => 'add', 'action' => getStringFromServer('PHP_SELF').'?function=postadd', 'method' => 'post'));
 		echo '
 			<input type="hidden" name="form_key" value="'.form_generate_key().'" />
 			<table>';
@@ -91,7 +91,7 @@ function admin_table_postadd($table, $unit) {
 	if (db_query_qpa($qpa)) {
 		echo $HTML->feedback(sprintf(_('%s successfully added.'), ucfirst(getUnitLabel($unit))));
 	} else {
-		echo $HTML->error_msg(db_error());
+		echo $HTML->error_msg(_('Failed.').' '.db_error());
 		form_release_key(getStringFromRequest('form_key'));
 	}
 }
