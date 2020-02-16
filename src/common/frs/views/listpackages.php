@@ -5,7 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
  * Copyright 2010 (c) FusionForge Team
- * Copyright 2013-2014,2016-2017, Franck Villaume - TrivialDev
+ * Copyright 2013-2014,2016-2017,2020, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -171,12 +171,11 @@ EOS;
 
 				// get the files in this release....
 				$res_files = $FRSPackageRelease->getFiles();
-				$num_files = count($FRSPackageRelease);
 
 				// Switch whether release_id exists and/or release_id == package_release['release_id']
 				if (!$release_id || $release_id == $package_release_id) {
 					// no release_id OR no release_id OR release_id is current one
-					if ( !$res_files || $num_files < 1 ) {
+					if ( !$res_files || count($res_files) < 1 ) {
 						echo $HTML->information(_('No files'));
 					} else {
 						$cell_data = array();
