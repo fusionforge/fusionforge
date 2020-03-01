@@ -9,7 +9,7 @@
  * Copyright 2004 GForge, LLC - Tim Perdue
  * Copyright 2010, Franck Villaume - Capgemini
  * Copyright 2010-2011, Alain Peyrat - Alcatel-Lucent
- * Copyright 2016, Franck Villaume - TrivialDev
+ * Copyright 2016,2020, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -192,14 +192,11 @@ if (forge_get_config('use_trove')) {
 	echo html_e('h2', array(), _('Trove Categorization'));
 	echo html_e('p', array(), util_make_link('/project/admin/group_trove.php?group_id='.$group->getID(), '['._('Edit Trove').']'));
 }
-?>
 
-<h2><?php echo _('Homepage Link') ?></h2>
-<p>
-<input type="text" name="form_homepage" size="100" value="<?php echo $group->getHomePage(); ?>" />
-</p>
+echo html_e('h2', array(), _('Homepage Link'));
+echo html_e('p', array(),
+	html_e('input', array('type' => 'url', 'size' => 100, 'name' => 'form_homepage', 'value' => $group->getHomePage(), ' pattern' => "http[s]?://.*")));
 
-<?php
 // This function is used to render checkboxes below
 function c($v) {
 	if ($v) {
