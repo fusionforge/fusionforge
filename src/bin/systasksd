@@ -31,7 +31,7 @@ while (true) {
 		break;
 	} catch (DBException $e) {
 		print "Cannot connect to DB: $e\nWaiting for DB...\n";
-		sleep (5)
+		sleep (5);
 	}
 }
 require_once $gfcommon.'include/cron_utils.php';
