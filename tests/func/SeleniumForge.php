@@ -2,7 +2,7 @@
 /**
  * Copyright (C) 2007-2008 Alain Peyrat <aljeux at free dot fr>
  * Copyright (C) 2009 Alain Peyrat, Alcatel-Lucent
- * Copyright 2013,2019, Franck Villaume - TrivialDev
+ * Copyright 2013,2019-2020, Franck Villaume - TrivialDev
  * Copyright (C) 2015  Inria (Sylvain Beucler)
  *
  * This file is part of FusionForge.
@@ -86,19 +86,17 @@ $config = dirname(__FILE__).'/config.php';
 require_once $config;
 
 if (@include_once '/usr/local/share/php/vendor/autoload.php') {
-        class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase {}
 } else {
         require_once 'PHPUnit/Extensions/Selenium2TestCase.php';
 }
 
-
-class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
+class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestCase
 {
 	public $logged_in = false ;
 	public $fixture = 'base';
 	public $fixture_loaded = false;
 	
-	public function setUp() {
+	public function setUp(): void {
 		$this->configureSelenium();
 		$this->loadCachedFixture();
 	}

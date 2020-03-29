@@ -2,6 +2,7 @@
 /**
  * Copyright (C) 2014 Roland Mas
  * Copyright (C) 2015  Inria (Sylvain Beucler)
+ * Copyright 2020, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -26,7 +27,7 @@ class SoapTest extends FForge_SeleniumTestCase
 {
 	public $fixture = 'projecta';
 
-	function setUp() {
+	function setUp(): void {
 		parent::setUp();
 
 		$this->session = NULL;

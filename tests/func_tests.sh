@@ -4,6 +4,7 @@
 #
 # Copyright (C) 2011  Olivier Berger - Institut Telecom
 # Copyright (C) 2014, 2015  Inria (Sylvain Beucler)
+# Copyright 2020, Franck Villaume - TrivialDev
 #
 # This file is part of FusionForge. FusionForge is free software;
 # you can redistribute it and/or modify it under the terms of the
@@ -77,8 +78,8 @@ install_selenium() {
 		    apt-get -y install php-curl unzip composer psmisc rsyslog default-jre patch
 		    mkdir -p /usr/local/share/php
 		    pushd /usr/local/share/php
-		    composer --no-plugins --no-scripts require phpunit/phpunit:7.5.9
-		    composer --no-plugins --no-scripts require phpunit/phpunit-selenium
+		    composer --no-plugins --no-scripts require phpunit/phpunit:8.5.2
+		    composer --no-plugins --no-scripts require phpunit/phpunit-selenium:8.0.0
 		    popd
 		fi
 	else
