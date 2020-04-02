@@ -36,10 +36,22 @@ while (true) {
 }
 require_once $gfcommon.'include/cron_utils.php';
 
+function reconnect_db_if_needed() {
+	$res = db_query_params("SELECT 1");
+	if (!$res && !db_connection_status()) {
+		db_reconnect();
+		return 0;
+	}
+	return 1;
+}
+
 // Invalidate users/groups cache e.g. when a user is added to a group
 // Special-case in 'publish-subscribe' mode
 function usergroups_sync() {
 	global $usergroups_lastsync;
+	if (reconnect_db_if_needed() == 0) {
+		return;
+	}
 	$res = db_query_params("SELECT MAX(last_modified_date) AS lastmodified FROM nss_usergroups");
 	$row = db_fetch_array($res);
 	if ($row['lastmodified'] >= $usergroups_lastsync) {
@@ -121,11 +133,13 @@ $pm = plugin_manager_get_object();
 
 usergroups_sync();
 while (true) {
+	sleep(1);
+	if (reconnect_db_if_needed() == 0) {
+		continue;
+	}
 	// Deal with pending requests
 	$res = db_query_params("SELECT * FROM systasks WHERE status=$1"
 						   . " ORDER BY systask_id", array('TODO'));
-	if (!$res && !db_connection_status())
-		db_reconnect();
 	while ($arr = db_fetch_array($res)) {
 		$script = systask_get_script($arr['plugin_id'], $arr['systask_type']);
 		if (!file_exists($script))
