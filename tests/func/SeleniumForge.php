@@ -609,11 +609,11 @@ class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestCase
 	function isElementPresent($element) {
 		try {
 			if (preg_match('/^\/\/[a-z]/', $element)) {
-				if ($this->byXPath($element) instanceof PHPUnit_Extensions_Selenium2TestCase_Element) {
+				if ($this->byXPath($element) instanceof PHPUnit\Extensions\Selenium2TestCase\Element) {
 					return true;
 				}
 			} elseif (preg_match('/^link=/', $element)) {
-				if ($this->byLinkText(substr($element, 5)) instanceof PHPUnit_Extensions_Selenium2TestCase_Element) {
+				if ($this->byLinkText(substr($element, 5)) instanceof PHPUnit\Extensions\Selenium2TestCase\Element) {
 					return true;
 				}
 			}
