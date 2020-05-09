@@ -1,11 +1,13 @@
 #!/bin/mksh
 #
+# Copyright © 2016, 2020
+#	mirabilos <m@mirbsd.org>
 # Copyright © 2013
 #	Thorsten “mirabilos” Glaser <thorsten.glaser@teckids.org>
 # Copyright © 2011, 2012, 2013, 2014, 2015, 2018, 2019
 #	Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
 # Copyright © 2016
-#	martin f krafft (madduck), Thorsten Glaser (mirabilos)
+#	martin f krafft (madduck)
 #
 # Copyright (c) 2007 Andy Parkins
 #
@@ -288,6 +290,7 @@ generate_email()
 generate_email_header()
 {
 	local routing_headers subj senc failc=0
+	local repolabel
 
 	# --- Email (all stdout will be the email)
 	# Generate header
@@ -330,6 +333,12 @@ generate_email_header()
 		senc="Subject: post-receive-email: no Subject, RFC2047 MIME encoding failed"
 	fi
 
+	if [[ $shortdesc = "$projectdesc" ]]; then
+		repolabel=$PWD
+	else
+		repolabel=$shortdesc
+	fi
+
 	cat <<-EOF
 	MIME-Version: 1.0
 	Content-Type: text/plain; charset=UTF-8
@@ -342,9 +351,10 @@ generate_email_header()
 	$senc
 	Auto-Submitted: auto-generated
 
-	This is an automated email from the git hooks/post-receive script. It was
-	generated because a ref change was pushed to the repository containing
-	the project "$projectdesc".
+	This is an automated email from the git hooks/post-receive script.
+	It was generated because a ref change was pushed to the repository
+	"$repolabel" containing the project
+	"$projectdesc".
 
 	The $refname_type, $short_refname has been ${change_type}d
 	EOF
