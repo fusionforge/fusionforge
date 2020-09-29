@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 (c) Franck Villaume
+ * Copyright 2020, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -88,7 +89,7 @@ if (!session_loggedin()) {
 
 	echo '
 	<h3>'._('Ratings Recorded').'</h3>
-	<p>'._('You can re-rate this person by simply returning to their ratings page and re-submitting the info.').'.</p>';
+	<p>'._('You can re-rate this person by simply returning to their ratings page and re-submitting the info.').'</p>';
 
 	$HTML->footer();
 }
