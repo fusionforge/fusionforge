@@ -3,7 +3,7 @@
  * FusionForge navigation
  *
  * Copyright 2009 - 2010, Olaf Lenz
- * Copyright 2011-2012,2016, Franck Villaume - TrivialDev
+ * Copyright 2011-2012,2016,2020, Franck Villaume - TrivialDev
  * Copyright 2014, Stéphane-Eymeric Bredthauer
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -57,7 +57,7 @@ class Navigation extends FFError {
 			if (!isset($params['title'])) {
 				return forge_get_config('forge_name');
 			} else {
-				return forge_get_config('forge_name') . _(': ') . $params['title'];
+				return forge_get_config('forge_name') . _(': ') . strip_tags($params['title']);
 			}
 		} else {
 			// return HTML code otherwise
