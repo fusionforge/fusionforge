@@ -78,7 +78,7 @@ install_selenium() {
 		    mkdir -p /usr/local/share/php
 		    pushd /usr/local/share/php
 		    composer --no-plugins --no-scripts require phpunit/phpunit
-		    composer --no-plugins --no-scripts require phpunit/phpunit-selenium
+		    composer --no-plugins --no-scripts require phpunit/phpunit-selenium:dev-master
 		    popd
 		fi
 	else
