@@ -22,7 +22,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 	define('PHPUnit_MAIN_METHOD', 'AllTests::main');
 }
 
-include_once 'PHPUnit/Autoload.php');
+include_once 'PHPUnit/Autoload.php';
 // if (@include_once '/usr/local/share/php/vendor/autoload.php') {
 // 	$phpunitversion = 6;
 // 	class PHPUnit_Framework_TestSuite extends PHPUnit\Framework\TestSuite {}
