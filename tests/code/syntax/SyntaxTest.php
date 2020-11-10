@@ -23,6 +23,7 @@ class Syntax_Tests extends PHPUnit_Framework_TestCase
 			$output = `type pcregrep`;
 			$this->fail('You should probably install "pcregrep" : `type pcregrep` reports "'.$output);
 		}
+		$this->assertEquals(0,$rc);
 	}
 
 	/**

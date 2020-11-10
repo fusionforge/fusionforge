@@ -28,7 +28,7 @@ class HtmlPurifier_Tests extends PHPUnit_Framework_TestCase
 	    $this->fail('You probably need to install htmlpurifier : '.$expected->getMessage());
             return;
 	  }
-
+	  $this->assertEquals(0,0);
 	}
 
 }
