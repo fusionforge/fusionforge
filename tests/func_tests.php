@@ -27,7 +27,7 @@ include_once 'PHPUnit/Autoload.php';
 class PHPUnit_Framework_TestSuite extends PHPUnit\Framework\TestSuite {}
 class PHPUnit_Framework_TestCase extends PHPUnit\Framework\TestCase {}
 
-class AllTests {
+class func_tests {
 	public static function main() {
 		PHPUnit_TextUI_TestRunner::run(self::suite());
 	}
