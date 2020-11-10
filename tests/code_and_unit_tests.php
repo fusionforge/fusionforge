@@ -22,17 +22,18 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 	define('PHPUnit_MAIN_METHOD', 'AllTests::main');
 }
 
-if (@include_once '/usr/local/share/php/vendor/autoload.php') {
-	$phpunitversion = 6;
-	class PHPUnit_Framework_TestSuite extends PHPUnit\Framework\TestSuite {}
-	class PHPUnit_Framework_TestCase extends PHPUnit\Framework\TestCase {}
-} else {
-	$phpunitversion = 4;
-	if (!@include_once 'PHPUnit/Autoload.php') {
-		include_once 'PHPUnit/Framework.php';
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-	}
-}
+include_once 'PHPUnit/Autoload.php');
+// if (@include_once '/usr/local/share/php/vendor/autoload.php') {
+// 	$phpunitversion = 6;
+// 	class PHPUnit_Framework_TestSuite extends PHPUnit\Framework\TestSuite {}
+// 	class PHPUnit_Framework_TestCase extends PHPUnit\Framework\TestCase {}
+// } else {
+// 	$phpunitversion = 4;
+// 	if (!@include_once 'PHPUnit/Autoload.php') {
+// 		include_once 'PHPUnit/Framework.php';
+// 		require_once 'PHPUnit/TextUI/TestRunner.php';
+// 	}
+// }
 
 @include_once 'PHP/Token/Stream/Autoload.php';
 @include_once 'Text/Template/Autoload.php';
