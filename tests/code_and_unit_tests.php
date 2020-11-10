@@ -25,8 +25,8 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 include_once 'PHPUnit/Autoload.php';
 // if (@include_once '/usr/local/share/php/vendor/autoload.php') {
 // 	$phpunitversion = 6;
-// 	class PHPUnit_Framework_TestSuite extends PHPUnit\Framework\TestSuite {}
-// 	class PHPUnit_Framework_TestCase extends PHPUnit\Framework\TestCase {}
+class PHPUnit_Framework_TestSuite extends PHPUnit\Framework\TestSuite {}
+class PHPUnit_Framework_TestCase extends PHPUnit\Framework\TestCase {}
 // } else {
 // 	$phpunitversion = 4;
 // 	if (!@include_once 'PHPUnit/Autoload.php') {
