@@ -31,7 +31,7 @@ class Syntax_Tests extends PHPUnit_Framework_TestCase
 	public function testPhpSyntax()
 	{
 		$root = dirname(dirname(dirname(dirname(__FILE__))));
-		$output = `find $root/src $root/tests -name '*.php' -type f  -exec php -l {} \; | grep -v '^No syntax errors detected'`;
+		$output = `find $root/src $root/tests -path $root/src/plugins/wiki/www/lib -prune -or -name '*.php' -type f  -exec php -l {} \; | grep -v '^No syntax errors detected'`;
 		$this->assertEquals('', $output);
 	}
 
