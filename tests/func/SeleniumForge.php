@@ -87,7 +87,7 @@ require_once $config;
 
 @include_once '/usr/local/share/php/vendor/autoload.php';
 
-class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestCase
+abstract class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestCase
 {
 	public $logged_in = false ;
 	public $fixture = 'base';
@@ -159,7 +159,7 @@ class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestCase
 		}
 	}
 
-	protected function changeConfig($config = array()) {
+	protected function changeConfig($config) {
 		$config_path = rtrim(`forge_get_config config_path`);
 		$classname = get_class($this);
 
