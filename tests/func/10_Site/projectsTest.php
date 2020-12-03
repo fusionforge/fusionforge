@@ -45,7 +45,7 @@
 
 require_once dirname(dirname(__FILE__)).'/SeleniumForge.php';
 
-class CreateProject extends FForge_SeleniumTestCase
+class projectsTest extends FForge_SeleniumTestCase
 {
 	// Simple creation of a project by the admin user.
 	// approval is automatic since project is created bu admin user.
