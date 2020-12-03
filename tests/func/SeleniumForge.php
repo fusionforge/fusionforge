@@ -241,7 +241,7 @@ abstract class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestC
 		ob_flush();
 	}
 
-	function runCommandTimeout($dir, $command, $env='') {
+	protected function runCommandTimeout($dir, $command, $env='') {
 		# Disable timeout so we have a chance to gdb the stalled process:
 		#$cmd = "cd $dir && $env timeout 15s $command";
 		$cmd = "cd $dir && $env $command";

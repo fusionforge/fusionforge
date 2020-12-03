@@ -45,8 +45,11 @@
 
 require_once dirname(dirname(__FILE__)).'/SeleniumForge.php';
 
-class LoginProcess extends FForge_SeleniumTestCase
+class loginTest extends FForge_SeleniumTestCase
 {
+	/**
+	 * @test
+	 */
 	function testLogin()
 	{
 		// Test with a normal login.
