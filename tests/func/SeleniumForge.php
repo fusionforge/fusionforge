@@ -85,20 +85,15 @@ define('FORGE_OTHER_PASSWORD', 'toto_Tata8');
 $config = dirname(__FILE__).'/config.php';
 require_once $config;
 
-if (@include_once '/usr/local/share/php/vendor/autoload.php') {
-        class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase {}
-} else {
-        require_once 'PHPUnit/Extensions/Selenium2TestCase.php';
-}
+@include_once '/usr/local/share/php/vendor/autoload.php'
 
-
-class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
+class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestCase
 {
 	public $logged_in = false ;
 	public $fixture = 'base';
 	public $fixture_loaded = false;
-	
-	public function setUp() {
+
+	protected function setUp():void {
 		$this->configureSelenium();
 		$this->loadCachedFixture();
 	}
@@ -109,7 +104,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestCase
 			$this->screenshotPath = getenv('SELENIUM_RC_DIR');
 			$this->screenshotUrl = getenv('SELENIUM_RC_URL');
 		}
-		
+
 		$this->setBrowser('firefox');
 		$capabilities = array('acceptInsecureCerts' => true);
 		$this->setDesiredCapabilities($capabilities);
