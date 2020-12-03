@@ -159,8 +159,7 @@ class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestCase
 		}
 	}
 
-	
-	public function changeConfig($config) {
+	public function changeConfig($config = array()) {
 		$config_path = rtrim(`forge_get_config config_path`);
 		$classname = get_class($this);
 
@@ -171,7 +170,7 @@ class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestCase
 				$contents .= "$variable = $value\n";
 			}
 		}
-		
+
 		file_put_contents("$config_path/config.ini.d/zzz-buildbot-$classname.ini",
 				$contents);
 	}
