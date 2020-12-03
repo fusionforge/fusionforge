@@ -121,8 +121,8 @@ install_selenium() {
 --- Element.php.dist 2014-11-02 09:23:27.000000000 +0000
 +++ Element.php     2019-01-15 15:00:44.034513685 +0000
 @@ -77,10 +77,21 @@
-             PHPUnit_Extensions_Selenium2TestCase_URL $parentFolder,
-             PHPUnit_Extensions_Selenium2TestCase_Driver $driver)
+             PHPUnit\Extensions\Selenium2TestCase_URL $parentFolder,
+             PHPUnit\Extensions\Selenium2TestCase_Driver $driver)
      {
 +        $key = false;
          if (!isset($value['ELEMENT'])) {

@@ -19,24 +19,18 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-if (!defined('PHPUnit_MAIN_METHOD')) {
-	define('PHPUnit_MAIN_METHOD', 'AllTests::main');
-}
-
-include_once 'PHPUnit/Autoload.php';
-class PHPUnit_Framework_TestSuite extends PHPUnit\Framework\TestSuite {}
-class PHPUnit_Framework_TestCase extends PHPUnit\Framework\TestCase {}
+@include_once '/usr/local/share/php/vendor/autoload.php';
 
 @include_once 'PHP/Token/Stream/Autoload.php';
 @include_once 'Text/Template/Autoload.php';
 
 class AllTests {
 	public static function main() {
-		PHPUnit_TextUI_TestRunner::run(self::suite());
+		PHPUnit\TextUI\TestRunner::run(self::suite());
 	}
 
 	public static function suite() {
-		$suite = new PHPUnit_Framework_TestSuite('PHPUnit');
+		$suite = new PHPUnit\Framework\TestSuite('PHPUnit');
 
 		// Unit tests
 		$suite->addTestFiles(glob("unit/*/*Test.php"));

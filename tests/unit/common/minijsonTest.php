@@ -27,7 +27,7 @@
 require_once('PHPUnit/Framework/TestCase.php');
 require_once(dirname(__FILE__) . '/../../../src/common/include/minijson.php');
 
-class Minijson_Tests extends PHPUnit_Framework_TestCase {
+class Minijson_Tests extends PHPUnit\Framework\TestCase {
 	/****************************************************************/
 	/* $s_orig [parse] print_r->$s_printr [encode] $s_ecompact or $s_epadded */
 	/* $s_e* [decode] print_r ->$s_printrs (due to Object key sorting) */

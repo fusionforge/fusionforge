@@ -11,7 +11,7 @@ require_once dirname(__FILE__) . '/../../../src/common/include/database-pgsql.ph
  * @copyright 2009 Alain Peyrat. All rights reserved.
  * @license   GPL License
  */
-class Database_Utils_Tests extends PHPUnit_Framework_TestCase
+class Database_Utils_Tests extends PHPUnit\Framework\TestCase
 {
 	/**
 	 * test the validate_hostname function.

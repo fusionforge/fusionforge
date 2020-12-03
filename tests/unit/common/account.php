@@ -25,7 +25,7 @@ require_once dirname(__FILE__) . '/../../../src/common/include/account.php';
 require_once dirname(__FILE__) . '/../../../src/common/include/utils.php';
 require_once dirname(__FILE__) . '/../../../src/common/include/config.php';
 
-class Account_Tests extends PHPUnit_Framework_TestCase
+class Account_Tests extends PHPUnit\Framework\TestCase
 {
 	public function test_account_gensalt()
 	{

@@ -10,7 +10,7 @@ require_once 'PHPUnit/Framework/TestCase.php';
  * @copyright 2009 Alain Peyrat. All rights reserved.
  * @license   http://www.opensource.org/licenses/gpl-license.php  GPL License
  */
-class Syntax_Tests extends PHPUnit_Framework_TestCase
+class Syntax_Tests extends PHPUnit\Framework\TestCase
 {
 	/**
 	 * First, make sure pcregrep is installed
