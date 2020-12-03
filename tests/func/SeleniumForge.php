@@ -98,7 +98,7 @@ class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestCase
 		$this->loadCachedFixture();
 	}
 
-	public function configureSelenium() {
+	protected function configureSelenium() {
 		if (getenv('SELENIUM_RC_DIR') && getenv('SELENIUM_RC_URL')) {
 			$this->captureScreenshotOnFailure = true;
 			$this->screenshotPath = getenv('SELENIUM_RC_DIR');
@@ -120,7 +120,7 @@ class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestCase
 	 * Load existing fixture.
 	 * Mainly used to load the 'base' fixture in tests that don't call loadAndCacheFixture() yet
 	 */
-	public function loadCachedFixture() {
+	protected function loadCachedFixture() {
 		$this->fixture_loaded = false;
 		$base_cmd = dirname(__FILE__)."/fixtures.sh";
 		$ret = 0;
@@ -145,7 +145,7 @@ class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestCase
 	 * Alternatively we could use SQL-based fixtures (rather than
 	 * Selenium-based fixtures)
 	 */
-	public function loadAndCacheFixture() {
+	protected function loadAndCacheFixture() {
 		if (!$this->fixture_loaded) {
 			$base_cmd = dirname(__FILE__)."/fixtures.sh";
 			$ret = 0;
@@ -159,7 +159,7 @@ class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestCase
 		}
 	}
 
-	public function changeConfig($config = array()) {
+	protected function changeConfig($config = array()) {
 		$config_path = rtrim(`forge_get_config config_path`);
 		$classname = get_class($this);
 
@@ -175,7 +175,7 @@ class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestCase
 				$contents);
 	}
 
-	public function openWithOneRetry($url) {
+	protected function openWithOneRetry($url) {
 		try {
 			$this->open($url);
 		}
@@ -184,7 +184,7 @@ class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestCase
 		}
 	}
 
-	public function clickAndWait($link) {
+	protected function clickAndWait($link) {
 		if (preg_match('/^jquery#/', $link)) {
 			$elementid = substr($link, 7);
 			$this->execute(array(
@@ -224,7 +224,7 @@ class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestCase
 		}
 	}
 
-	public function waitForTextPresent($text) {
+	protected function waitForTextPresent($text) {
 		for ($second = 0; ; $second++) {
 			if ($second >= 30) $this->fail("timeout");
 			try {
@@ -235,7 +235,7 @@ class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestCase
 		return true;
 	}
 
-	public function runCommand($cmd) {
+	protected function runCommand($cmd) {
 		system($cmd, $ret);
 		$this->assertEquals(0, $ret);
 		ob_flush();
@@ -256,26 +256,26 @@ class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestCase
 		ob_flush();
 	}
 
-	public function cron($cmd) {
+	protected function cron($cmd) {
 		$this->runCommand("forge_run_job $cmd");
 	}
 
-	public function cron_for_plugin($cmd, $plugin) {
+	protected function cron_for_plugin($cmd, $plugin) {
 		$this->runCommand("forge_run_plugin_job $plugin $cmd");
 	}
 
 	/**
 	 * Execute pending system tasks
 	 */
-	public function waitSystasks() {
+	protected function waitSystasks() {
 		$this->runCommand(dirname(__FILE__).'/../../src/bin/systasks_wait_until_empty.php');
 	}
 
-	public function init() {
+	protected function init() {
 		$this->createAndGoto('ProjectA');
 	}
 
-	public function populateStandardTemplate($what='all') {
+	protected function populateStandardTemplate($what='all') {
 		if ($what == 'all') {
 			$what = array('trackers','tasks','forums');
 		} elseif ($what == 'empty') {
@@ -383,7 +383,7 @@ class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestCase
 		}
 	}
 
-	public function login($username) {
+	protected function login($username) {
 		$this->open( ROOT );
 		if ($this->isTextPresent('Log Out')) {
 			$this->logout();
@@ -392,7 +392,7 @@ class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestCase
 		$this->triggeredLogin($username);
 	}
 
-	public function triggeredLogin($username) {
+	protected function triggeredLogin($username) {
 		if ($username == FORGE_ADMIN_USERNAME) {
 			$password = FORGE_ADMIN_PASSWORD;
 		} else {
@@ -406,27 +406,27 @@ class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestCase
 		$this->logged_in = $username;
 	}
 
-	public function logout() {
+	protected function logout() {
 		$this->open( ROOT ."/account/logout.php" );
 		$this->logged_in = false;
 	}
 
-	public function switchUser($username) {
+	protected function switchUser($username) {
 		if ($this->logged_in != $username) {
 			$this->logout();
 			$this->login($username);
 		}
 	}
 
-	public function isLoginRequired() {
+	protected function isLoginRequired() {
 		return $this->isTextPresent("You've been redirected to this login page") ;
 	}
 
-	public function isPermissionDenied() {
+	protected function isPermissionDenied() {
 		return $this->isTextPresent("Permission denied") ;
 	}
 
-	public function registerProject ($name, $user, $scm='scmsvn') {
+	protected function registerProject ($name, $user, $scm='scmsvn') {
 		$unix_name = strtolower($name);
 
 		$saved_user = $this->logged_in ;
@@ -450,7 +450,7 @@ class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestCase
 		$this->switchUser ($saved_user) ;
 	}
 
-	public function approveProject ($name, $user) {
+	protected function approveProject ($name, $user) {
 		$unix_name = strtolower($name);
 
 		$saved_user = $this->logged_in ;
@@ -465,7 +465,7 @@ class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestCase
 		$this->switchUser ($saved_user) ;
 	}
 
-	public function createProject ($name, $scm='scmsvn') {
+	protected function createProject ($name, $scm='scmsvn') {
 		$unix_name = strtolower($name);
 
 		$this->switchUser (FORGE_ADMIN_USERNAME) ;
@@ -474,12 +474,12 @@ class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestCase
 		$this->registerProject($name, FORGE_ADMIN_USERNAME, $scm);
 	}
 
-	public function createAndGoto($project) {
+	protected function createAndGoto($project) {
 		$this->createProject($project);
 		$this->gotoProject($project);
 	}
 
-	public function createUser ($login) {
+	protected function createUser ($login) {
 		$this->switchUser(FORGE_ADMIN_USERNAME);
 		$this->open( ROOT );
 		$this->clickAndWait("link=Site Admin");
@@ -496,7 +496,7 @@ class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestCase
 		$this->clickAndWait("//table/tbody/tr/td/a[contains(@href,'useredit.php') and contains(.,'($login)')]/../..//a[contains(@href, 'userlist.php?action=activate&user_id=')]");
 	}
 
-	public function activatePlugin($pluginName) {
+	protected function activatePlugin($pluginName) {
 		$this->switchUser(FORGE_ADMIN_USERNAME);
 		$this->open( ROOT . '/admin/pluginman.php?update='.$pluginName.'&action=deactivate');
 		$this->waitForPageToLoad();
@@ -505,7 +505,7 @@ class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestCase
 		//$this->logout();
 	}
 
-	public function gotoProject($project) {
+	protected function gotoProject($project) {
 		$unix_name = strtolower($project);
 
 		$this->open( ROOT . '/projects/' . $unix_name) ;
@@ -513,7 +513,7 @@ class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestCase
 		$this->assertTrue($this->isTextPresent("This is the public description for $project."));
 	}
 
-	public function uploadSshKey () {
+	protected function uploadSshKey () {
 		// Prepare client config
 		$sshdir = getenv('HOME') . '/.ssh';
 		if (!file_exists($sshdir)) {
@@ -547,36 +547,36 @@ class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestCase
 		$this->clickAndWait("submit");
 	}
 
-	public function skip_test($msg) {
+	protected function skip_test($msg) {
 		$this->captureScreenshotOnFailure = false;
 		$this->markTestSkipped($msg);
 	}
 
-	public function skip_on_rpm_installs($msg='Skipping on installations from RPM') {
+	protected function skip_on_rpm_installs($msg='Skipping on installations from RPM') {
 		if (INSTALL_METHOD == 'rpm') {
 			$this->skip_test($msg);
 		}
 	}
 
-	public function skip_on_deb_installs($msg='Skipping on installations from *.deb') {
+	protected function skip_on_deb_installs($msg='Skipping on installations from *.deb') {
 		if (INSTALL_METHOD == 'deb') {
 			$this->skip_test($msg);
 		}
 	}
 
-	public function skip_on_src_installs($msg='Skipping on installations from source') {
+	protected function skip_on_src_installs($msg='Skipping on installations from source') {
 		if (INSTALL_METHOD == 'src') {
 			$this->skip_test($msg);
 		}
 	}
 
-	public function skip_on_centos($msg='Skipping on CentOS platforms') {
+	protected function skip_on_centos($msg='Skipping on CentOS platforms') {
 		if (INSTALL_OS == 'centos') {
 			$this->skip_test($msg);
 		}
 	}
 
-	public function skip_on_debian($msg='Skipping on Debian platforms') {
+	protected function skip_on_debian($msg='Skipping on Debian platforms') {
 		if (INSTALL_OS == 'debian') {
 			$this->skip_test($msg);
 		}
@@ -586,11 +586,11 @@ class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestCase
 	 * add PHP wrappers for SeleniumTestCase compatibility
 	 */
 
-	function open($url) {
+	protected function open($url) {
 		$this->url($url);
 	}
 
-	function isTextPresent($text) {
+	protected function isTextPresent($text) {
 		$elementArray = $this->execute(array(
 				'script' => 'return document.body;',
 				'args' => array(),
@@ -602,7 +602,7 @@ class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestCase
 		return true;
 	}
 
-	function isElementPresent($element) {
+	protected function isElementPresent($element) {
 		try {
 			if (preg_match('/^\/\/[a-z]/', $element)) {
 				if ($this->byXPath($element) instanceof PHPUnit_Extensions_Selenium2TestCase_Element) {
@@ -617,14 +617,14 @@ class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestCase
 		return false;
 	}
 
-	function getLocation() {
+	protected function getLocation() {
 		return $this->execute(array(
 				'script' => 'return window.location.href;',
 				'args' => array(),
 			));
 	}
 
-	function type($name, $value) {
+	protected function type($name, $value) {
 		if (preg_match('/^\/\/[a-z]/', $name)) {
 			$this->byXPath($name)->clear();
 			$this->byXPath($name)->value($value);
@@ -637,57 +637,57 @@ class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestCase
 		}
 	}
 
-	function waitForPageToLoad($integer = 30000) {
+	protected function waitForPageToLoad($integer = 30000) {
 		//do we need to do something???
 		$this->pause($integer);
 	}
 
-	function pause($integer = 10000) {
+	protected function pause($integer = 10000) {
 		usleep($integer);
 	}
 
-	function assertTextPresent($string) {
+	protected function assertTextPresent($string) {
 		return $this->assertTrue($this->waitForTextPresent($string));
 	}
 
-	function assertTextNotPresent($string) {
+	protected function assertTextNotPresent($string) {
 		return $this->assertFalse($this->isTextPresent($string));
 	}
 
-	function check($string) {
+	protected function check($string) {
 		$myelement = $this->byXPath($string);
 		if (!$myelement->attribute('checked')) {
 			$myelement->click();
 		}
 	}
 
-	function uncheck($string) {
+	protected function uncheck($string) {
 		$myelement = $this->byXPath($string);
 		if ($myelement->attribute('checked')) {
 			$myelement->click();
 		}
 	}
 
-	function goBack() {
+	protected function goBack() {
 		$this->execute(array(
 				'script' => 'window.history.back();',
 				'args' => array(),
 			));
 	}
 
-	function getText($string) {
+	protected function getText($string) {
 		if (preg_match('/^\/\/[a-z]/', $string)) {
 			return $this->byXPath($string)->text();
 		}
 	}
 
-	function getValue($string) {
+	protected function getValue($string) {
 		if (preg_match('/^\/\/[a-z]/', $string)) {
 			return $this->byXPath($string)->attribute('value');
 		}
 	}
 
-	function selectFrame($string) {
+	protected function selectFrame($string) {
 		if (preg_match('/^id=/', $string)) {
 			$myelement = $this->byId(substr($string, 3));
 		} else {
@@ -696,7 +696,7 @@ class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestCase
 		$this->frame($myelement);
 	}
 
-	function assertElementPresent($string) {
+	protected function assertElementPresent($string) {
 		try {
 			if (preg_match('/^\/\/[a-z]/', $string)) {
 				$myelement = $this->byXPath($string);
