@@ -85,7 +85,7 @@ define('FORGE_OTHER_PASSWORD', 'toto_Tata8');
 $config = dirname(__FILE__).'/config.php';
 require_once $config;
 
-@include_once '/usr/local/share/php/vendor/autoload.php'
+@include_once '/usr/local/share/php/vendor/autoload.php';
 
 class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestCase
 {
