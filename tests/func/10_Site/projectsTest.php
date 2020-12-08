@@ -178,7 +178,7 @@ class projectsTest extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad();
 		$this->clickAndWait("link=Register Project");
 		$this->waitForPageToLoad();
-		$this->assertTrue($this->isElementPresent("//select[@name='built_from_template']"));
+		$this->assertFalse($this->isElementPresent("//select[@name='built_from_template']"));
 		$this->type("full_name", "ProjectA");
 		$this->type("purpose", "This is a simple description for ProjectA");
 		$this->type("//textarea[@name='description']", "This is the public description for ProjectA.");
