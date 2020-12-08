@@ -1,7 +1,7 @@
 # -*- shell-script -*-
 
 # Do we reuse VMs or destroy&recreate them?
-KEEPVM=true
+KEEPVM=false
 
 # LXC post-install
 # Debian security mirror
