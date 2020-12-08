@@ -24,7 +24,7 @@ require_once dirname(dirname(__FILE__)).'/SeleniumForge.php';
 class folderTest extends FForge_SeleniumTestCase {
 	public $fixture = 'projecta';
 
-	function updateFolderName() {
+	function testUpdateFolderName() {
 		$this->loadAndCacheFixture();
 		$this->switchUser(FORGE_ADMIN_USERNAME);
 
