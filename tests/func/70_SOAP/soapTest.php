@@ -50,7 +50,7 @@ class SoapTest extends FForge_SeleniumTestCase
 
 		// Check version number
 		$version = $this->soapclient->version();
-		$this->assertRegexp('/^[-0-9.+a-z~]*$/', $version);
+		$this->assertMatchesRegularExpression('/^[-0-9.+a-z~]*$/', $version);
 
 		// Check login
 		$response = $this->soapclient->login($userid, $passwd);
