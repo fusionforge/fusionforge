@@ -35,7 +35,7 @@ class folderTest extends FForge_SeleniumTestCase {
 		$this->clickAndWait("id=addItemDocmanMenu");
 		$this->clickAndWait("jquery#tabs-new-folder");
 		$this->type("groupname", "renamedirectory");
-		$this->clickAndWait("submitaddsubgroup");
+		$this->clickAndWait("id=submitaddsubgroup");
 		$this->clickAndWait("id=listFileDocmanMenu");
 		$this->clickAndWait("link=renamedirectory");
 		$this->clickAndWait("//a[@id='docman-editdirectory']/img");
