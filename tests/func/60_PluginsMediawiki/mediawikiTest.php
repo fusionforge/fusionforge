@@ -47,6 +47,7 @@ class PluginMediawiki extends FForge_SeleniumTestCase
 		$this->gotoProject('ProjectA');
 		$this->clickAndWait("link=Mediawiki");
 		$this->assertFalse($this->isTextPresent("not created yet"));
+		$this->assertFalse($this->isTextPresent("not found"));
 
 		$this->clickAndWait("//li[@id='ca-edit']/a");
 		$this->assertTrue($this->isTextPresent("You have followed a link to a page that does not exist yet."));

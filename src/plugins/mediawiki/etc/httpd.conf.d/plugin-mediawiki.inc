@@ -22,3 +22,4 @@ AliasMatch ^${FF__core__url_prefix}plugins/mediawiki/dumps/(.*)$ ${FF__core__dat
   Require all granted
 </LocationMatch>
 
+SetEnv MW_INSTALL_PATH ${FF__core__source_path}/www/plugins/mediawiki
