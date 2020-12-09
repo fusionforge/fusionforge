@@ -101,13 +101,8 @@ abstract class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestC
 	}
 
 	protected function configureSelenium() {
-		if (getenv('SELENIUM_RC_DIR') && getenv('SELENIUM_RC_URL')) {
-			$this->captureScreenshotOnFailure = true;
-			$this->screenshotPath = getenv('SELENIUM_RC_DIR');
-			$this->screenshotUrl = getenv('SELENIUM_RC_URL');
-
+		if (getenv('SELENIUM_RC_DIR')) {
 			$this->listener = new ScreenshotListener(getenv('SELENIUM_RC_DIR'));
-
 		}
 
 		$this->setBrowser('firefox');
@@ -115,11 +110,7 @@ abstract class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestC
 		$this->setDesiredCapabilities($capabilities);
 		$this->setBrowserUrl(URL);
 		$this->setHost(SELENIUM_RC_HOST);
-
-		// Use a sensible default background (instead of Selenium's criminal default to black)
-		// (future-proof - https://github.com/giorgiosironi/phpunit-selenium/commit/07e50f74f3782ce8781527653e6c79aeefd94ada)
-		$this->screenshotBgColor = '#CCFFDD';
-			  }
+	}
 
 	public function onNotSuccessfulTest(Throwable $e): void {
         $this->listener->addError($this, $e, microtime(true));
