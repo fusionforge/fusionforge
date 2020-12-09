@@ -121,7 +121,7 @@ abstract class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestC
 		$this->screenshotBgColor = '#CCFFDD';
 			  }
 
-	public function onNotSuccessfulTest($e) {
+	public function onNotSuccessfulTest(Throwable $e): void {
         $this->listener->addError($this, $e, null);
             parent::onNotSuccessfulTest($e);
         }
