@@ -38,30 +38,30 @@ class Account_Tests extends PHPUnit\Framework\TestCase
 		forge_reset_config_item('unix_cipher', 'core', 'DES');
 		$salt = account_gensalt();
 		$this->assertSame(2, strlen($salt));
-		$this->assertRegExp(',[./0-9a-zA-Z]+,', $salt);
+		$this->assertMatchesRegularExpression(',[./0-9a-zA-Z]+,', $salt);
 
 		// $1$abcdefgh
 		forge_reset_config_item('unix_cipher', 'core', 'MD5');
 		$salt = account_gensalt();
 		$this->assertSame('$1$', substr($salt, 0, 3));
 		$this->assertSame(8, strlen(explode('$', $salt)[2]));
-		$this->assertRegExp(',[./0-9a-zA-Z]+,', explode('$', $salt)[2]);
+		$this->assertMatchesRegularExpression(',[./0-9a-zA-Z]+,', explode('$', $salt)[2]);
 
 		// $5$rounds=5000$abcdefghij123456
 		forge_reset_config_item('unix_cipher', 'core', 'SHA256');
 		$salt = account_gensalt();
 		$this->assertSame('$5$', substr($salt, 0, 3));
-		$this->assertRegExp('/rounds=[0-9]+/', explode('$', $salt)[2]);
+		$this->assertMatchesRegularExpression('/rounds=[0-9]+/', explode('$', $salt)[2]);
 		$this->assertSame(16, strlen(explode('$', $salt)[3]));
-		$this->assertRegExp(',[./0-9a-zA-Z]+,', explode('$', $salt)[3]);
+		$this->assertMatchesRegularExpression(',[./0-9a-zA-Z]+,', explode('$', $salt)[3]);
 
 		// $6$rounds=5000$abcdefghij123456
 		forge_reset_config_item('unix_cipher', 'core', 'SHA512');
 		$salt = account_gensalt();
 		$this->assertSame('$6$', substr($salt, 0, 3));
-		$this->assertRegExp('/rounds=[0-9]+/', explode('$', $salt)[2]);
+		$this->assertMatchesRegularExpression('/rounds=[0-9]+/', explode('$', $salt)[2]);
 		$this->assertSame(16, strlen(explode('$', $salt)[3]));
-		$this->assertRegExp(',[./0-9a-zA-Z]+,', explode('$', $salt)[3]);
+		$this->assertMatchesRegularExpression(',[./0-9a-zA-Z]+,', explode('$', $salt)[3]);
 		$this->assertLessThanOrEqual(128, strlen($salt));  // or else update the DB schema
 
 		// $2y$10$abcdefghij123456789012
@@ -75,6 +75,6 @@ class Account_Tests extends PHPUnit\Framework\TestCase
 		$this->assertGreaterThanOrEqual(4, intval($cost));
 		$this->assertLessThanOrEqual(31, intval($cost));
 		$this->assertSame(22, strlen(explode('$', $salt)[3]));
-		$this->assertRegExp(',[./0-9a-zA-Z]+,', explode('$', $salt)[3]);
+		$this->assertMatchesRegularExpression(',[./0-9a-zA-Z]+,', explode('$', $salt)[3]);
 	}
 }

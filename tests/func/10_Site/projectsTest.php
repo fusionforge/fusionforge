@@ -45,7 +45,7 @@
 
 require_once dirname(dirname(__FILE__)).'/SeleniumForge.php';
 
-class CreateProject extends FForge_SeleniumTestCase
+class projectsTest extends FForge_SeleniumTestCase
 {
 	// Simple creation of a project by the admin user.
 	// approval is automatic since project is created bu admin user.
@@ -64,7 +64,7 @@ class CreateProject extends FForge_SeleniumTestCase
 		$this->type("//textarea[@name='description']", "This is the public description for ProjectA.");
 		$this->type("unix_name", "projecta");
 		$this->clickAndWait("//input[@name='scm' and @value='scmsvn']");
-		$this->assertTrue($this->isElementPresent("//select[@name='built_from_template']"));
+		$this->assertFalse($this->isElementPresent("//select[@name='built_from_template']"));
 		$this->clickAndWait("submit");
 		$this->waitForPageToLoad();
 		$this->assertTrue($this->isTextPresent("Your project has been automatically approved"));
@@ -178,7 +178,7 @@ class CreateProject extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad();
 		$this->clickAndWait("link=Register Project");
 		$this->waitForPageToLoad();
-		$this->assertTrue($this->isElementPresent("//select[@name='built_from_template']"));
+		$this->assertFalse($this->isElementPresent("//select[@name='built_from_template']"));
 		$this->type("full_name", "ProjectA");
 		$this->type("purpose", "This is a simple description for ProjectA");
 		$this->type("//textarea[@name='description']", "This is the public description for ProjectA.");

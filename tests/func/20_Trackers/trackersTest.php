@@ -105,7 +105,7 @@ class CreateTracker extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		try {
 			$this->assertEquals("http://google.com/", $this->getValue("//form[@id='trackermodform']//input[@type='text']"));
-		} catch (PHPUnit_Framework_AssertionFailedError $e) {
+		} catch (PHPUnit\Framework\AssertionFailedError $e) {
 			array_push($this->verificationErrors, $e->toString());
 		}
 

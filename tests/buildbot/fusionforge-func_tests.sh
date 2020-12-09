@@ -5,7 +5,7 @@
 set -ex
 
 copy_logs() {
-    rsync -av root@$HOST:/var/log/ $WORKSPACE/reports/
+    rsync -av -e 'ssh -o "StrictHostKeyChecking=no"' root@$HOST:/var/log/ $WORKSPACE/reports/
 }
 trap copy_logs ERR
 

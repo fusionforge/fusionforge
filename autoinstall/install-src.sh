@@ -54,7 +54,7 @@ if [ -e /etc/debian_version ]; then
 			vsftpd \
 			fonts-dejavu-core mediawiki
 	else
-		apt-get install -y make gettext php-cli php-pgsql php-htmlpurifier php-http php-soap \
+		apt-get install -y make gettext php-cli php-pgsql php-htmlpurifier php-http php-soap php-pear ca-certificates \
 			libapache2-mpm-itk libapache2-mod-svn \
 			libapache2-mod-php \
 			apache2 postgresql postgresql-contrib libnss-pgsql2 unscd \
@@ -75,6 +75,9 @@ if [ -e /etc/debian_version ]; then
 		dpkg -i php-text-captcha_${ptcver}_all.deb
 		rm -f php-text-captcha_${ptcver}_all.deb
 		popd
+	fi
+	if ! pear list Text_CAPTCHA ; then
+	    pear install Text_CAPTCHA
 	fi
 	if ! dpkg-vendor --is Ubuntu; then
 		apt-get install locales-all  # https://bugs.launchpad.net/ubuntu/+source/glibc/+bug/1394929

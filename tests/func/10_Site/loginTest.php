@@ -45,8 +45,11 @@
 
 require_once dirname(dirname(__FILE__)).'/SeleniumForge.php';
 
-class LoginProcess extends FForge_SeleniumTestCase
+class loginTest extends FForge_SeleniumTestCase
 {
+	/**
+	 * @test
+	 */
 	function testLogin()
 	{
 		// Test with a normal login.
@@ -64,7 +67,7 @@ class LoginProcess extends FForge_SeleniumTestCase
 		$location=$this->getLocation();
 		$url_regexp = str_replace('.', '\.', HOST);
 		$url_regexp = '/https?:\/\/'. $url_regexp .'\//';
-		$this->assertRegExp($url_regexp, $location,
+		$this->assertMatchesRegularExpression($url_regexp, $location,
 				    "You may need to set 'HOST' setting in test suite's config file to something compatible with 'web_host' defined in ini file");
 
 		$this->type("form_loginname", FORGE_ADMIN_USERNAME);

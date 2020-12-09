@@ -78,8 +78,8 @@ install_selenium() {
 		    apt-get -y install php-curl unzip composer psmisc rsyslog default-jre patch
 		    mkdir -p /usr/local/share/php
 		    pushd /usr/local/share/php
-		    composer --no-plugins --no-scripts require phpunit/phpunit:8.5.2
-		    composer --no-plugins --no-scripts require phpunit/phpunit-selenium:8.0.0
+		    composer --no-plugins --no-scripts require phpunit/phpunit
+		    composer --no-plugins --no-scripts require phpunit/phpunit-selenium:dev-master
 		    popd
 		fi
 	else
@@ -102,7 +102,7 @@ install_selenium() {
 	GECKODRIVERMICRO=0
 	GECKODRIVERURL=https://github.com/mozilla/geckodriver/releases/download/v$GECKODRIVERMAJOR.$GECKODRIVERMINOR.$GECKODRIVERMICRO/geckodriver-v$GECKODRIVERMAJOR.$GECKODRIVERMINOR.$GECKODRIVERMICRO-linux64.tar.gz
 	mkdir -p /usr/share/geckodriver/
-	rm -f /usr/share/geckodriver/geckodriver*
+	rm -f /usr/share/geckodriver/geckodriver
 	http_proxy=$PROXY wget -c $GECKODRIVERURL \
                 -O /usr/share/geckodriver/geckodriver.tar.gz
 
@@ -122,8 +122,8 @@ install_selenium() {
 --- Element.php.dist 2014-11-02 09:23:27.000000000 +0000
 +++ Element.php     2019-01-15 15:00:44.034513685 +0000
 @@ -77,10 +77,21 @@
-             PHPUnit_Extensions_Selenium2TestCase_URL $parentFolder,
-             PHPUnit_Extensions_Selenium2TestCase_Driver $driver)
+             PHPUnit\Extensions\Selenium2TestCase_URL $parentFolder,
+             PHPUnit\Extensions\Selenium2TestCase_Driver $driver)
      {
 +        $key = false;
          if (!isset($value['ELEMENT'])) {
@@ -269,7 +269,10 @@ else
     phpunit=phpunit
 fi
 
-timeout 2h $phpunit --verbose --debug --stop-on-failure --log-junit $SELENIUM_RC_DIR/phpunit-selenium.xml $testname || retcode=$?
+# For some reason PHPunit thinks all methods are tests
+# …hence the --filter ::test to enforce that
+# otherwise shared methods such as login() and logout() are run like tests and fail
+timeout 2h $phpunit --filter ::test --verbose --debug --stop-on-failure --log-junit $SELENIUM_RC_DIR/phpunit-selenium.xml $testname || retcode=$?
 
 set +x
 echo "phpunit returned with code $retcode"
