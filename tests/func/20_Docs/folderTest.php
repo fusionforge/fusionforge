@@ -40,7 +40,7 @@ class folderTest extends FForge_SeleniumTestCase {
 		$this->clickAndWait("link=renamedirectory");
 		$this->clickAndWait("//a[@id='docman-editdirectory']/img");
 		$this->type("groupname", "renamedirectory2");
-		$this->clickAndWait("elements['submit']");
+		$this->clickAndWait("submit");
 		$this->assertTextPresent("Documents folder renamedirectory2 updated successfully");
 	}
 }
