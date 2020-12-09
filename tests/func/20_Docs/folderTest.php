@@ -39,8 +39,8 @@ class folderTest extends FForge_SeleniumTestCase {
 		$this->clickAndWait("id=listFileDocmanMenu");
 		$this->clickAndWait("link=renamedirectory");
 		$this->clickAndWait("//a[@id='docman-editdirectory']/img");
-		$this->type("document.editgroup.groupname", "renamedirectory2");
-		$this->clickAndWait("document.editgroup.elements['submit']");
+		$this->type("groupname", "renamedirectory2");
+		$this->clickAndWait("elements['submit']");
 		$this->assertTextPresent("Documents folder renamedirectory2 updated successfully");
 	}
 }
