@@ -122,7 +122,7 @@ abstract class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestC
 			  }
 
 	public function onNotSuccessfulTest(Throwable $e): void {
-        $this->listener->addError($this, $e, null);
+        $this->listener->addError($this, $e, microtime(true));
             parent::onNotSuccessfulTest($e);
         }
 
