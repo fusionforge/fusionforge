@@ -115,6 +115,11 @@ case $HOST in
 	VM=debian10
 	INSTALL_OS=debian
 	;;
+    debian11.local)
+	export DIST=bullseye
+	VM=debian11
+	INSTALL_OS=debian
+	;;
     centos5.local)
 	VM=centos5
 	INSTALL_OS=centos
