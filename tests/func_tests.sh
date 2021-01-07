@@ -69,7 +69,7 @@ install_selenium() {
 	# psmisc for db_reload.sh:killall
 	# rsyslog to get e.g. sshd error log
 	if [ -e /etc/debian_version ]; then
-		apt-get -y install wget firefox-esr net-tools
+		apt-get -y install wget firefox-esr net-tools chromium chromium-driver
 		if grep -q ^8 /etc/debian_version; then
 		    apt-get -y install phpunit phpunit-selenium psmisc rsyslog patch
 		    apt-get -y install -t jessie-backports openjdk-8-jdk

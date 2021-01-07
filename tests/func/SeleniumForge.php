@@ -105,7 +105,7 @@ abstract class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestC
 			$this->listener = new ScreenshotListener(getenv('SELENIUM_RC_DIR'));
 		}
 
-		$this->setBrowser('firefox');
+		$this->setBrowser('chromium');
 		$capabilities = array('acceptInsecureCerts' => true);
 		$this->setDesiredCapabilities($capabilities);
 		$this->setBrowserUrl(URL);
