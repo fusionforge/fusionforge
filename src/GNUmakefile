@@ -94,7 +94,9 @@ install-db: install-base-dirs
 			> $(DESTDIR)$(sysconfdir)/cron.d/fusionforge-db; \
 	fi
 
-install-web-dirs: install-base-dirs
+install-web: install-base-dirs
+	$(CP_R) vendor www $(DESTDIR)$(pkgdatadir)/
+	$(CP_R) --no-clobber etc/httpd.conf* $(DESTDIR)$(config_path)
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/docman/
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/docman/review/
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/download/
@@ -102,10 +104,6 @@ install-web-dirs: install-base-dirs
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/forum/pending/
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/tracker/
 	$(INSTALL) -d -m 00700 $(DESTDIR)$(data_path)/rss/
-
-install-web: install-web-dirs
-	$(CP_R) vendor www $(DESTDIR)$(pkgdatadir)/
-	$(CP_R) --no-clobber etc/httpd.conf* $(DESTDIR)$(config_path)
 	$(CP_R) post-install.d/web $(DESTDIR)$(pkgdatadir)/post-install.d/
 	if [ ! -e $(DESTDIR)$(sysconfdir)/logrotate.d/fusionforge-web ]; then \
 		sed 's,@log_path@,$(log_path),g' etc/logrotate.d/fusionforge-web \
@@ -193,7 +191,7 @@ uninstall:
 # not relying on 'prefix' for post-install (for no-install/dev setups)
 post_source_path:=$(shell forge_get_config source_path 2>/dev/null)
 post_plugins_path:=$(shell forge_get_config plugins_path 2>/dev/null)
-post-install: install-web-dirs
+post-install:
 	$(post_source_path)/bin/post-install.sh
 
 post-install-base: post-install-common post-install-db post-install-web post-install-scm post-install-ftp
@@ -275,6 +273,6 @@ dist-src-release:
 	echo $(VERSION) > $(TAR_PREFIX)/src/VERSION  # if using e.g. make dist VERSION=5.3.50+20141027
 	tar cjf $(TAR_PREFIX).tar.bz2 $(TAR_PREFIX)/
 	rm -rf $(TAR_PREFIX)/
-
+	
 version:
 	@echo $(VERSION)
