@@ -95,7 +95,7 @@ abstract class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestC
 	public $fixture = 'base';
 	public $fixture_loaded = false;
 
-	protected function setUp():void {
+	protected function setUp() {
 		$this->configureSelenium();
 		$this->loadCachedFixture();
 	}

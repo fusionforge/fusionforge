@@ -26,7 +26,7 @@ class SoapTest extends FForge_SeleniumTestCase
 {
 	public $fixture = 'projecta';
 
-	protected function setUp():void {
+	protected function setUp() {
 		parent::setUp();
 
 		$this->session = NULL;
