@@ -183,8 +183,7 @@ fi
 retcode=0
 echo "Run phpunit test on $HOST"
 echo "export JOB_URL=$JOB_URL" | ssh -o 'StrictHostKeyChecking=no' root@$HOST tee -a .bashrc
-#ssh -o 'StrictHostKeyChecking=no' root@$HOST "TESTGLOB='func/50_PluginsScmBzr/*' /usr/src/fusionforge/tests/func_tests-xvnc.sh $INSTALL_METHOD/$INSTALL_OS" || retcode=$?
-ssh -o 'StrictHostKeyChecking=no' root@$HOST "/usr/src/fusionforge/tests/func_tests-xvnc.sh $INSTALL_METHOD/$INSTALL_OS $*" || retcode=$?
+  ssh -o 'StrictHostKeyChecking=no' root@$HOST "TESTGLOB=$TESTGLOB /usr/src/fusionforge/tests/func_tests-xvnc.sh $INSTALL_METHOD/$INSTALL_OS $*" || retcode=$?
 
 copy_logs
 
