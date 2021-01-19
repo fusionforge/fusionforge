@@ -161,7 +161,7 @@ start_vm $HOST
 if [ $INSTALL_OS == "debian" ]; then
     ssh -o 'StrictHostKeyChecking=no' root@$HOST "echo \"deb $DEBMIRRORSEC $DIST/updates main\" > /etc/apt/sources.list.d/security.list"
     ssh -o 'StrictHostKeyChecking=no' root@$HOST "echo 'APT::Install-Recommends \"false\";' > /etc/apt/apt.conf.d/01InstallRecommends"
-    ssh -o 'StrictHostKeyChecking=no' root@$HOST "apt-get update"
+    ssh -o 'StrictHostKeyChecking=no' root@$HOST "apt-get update" || true
 fi
 
 if [ $INSTALL_OS == "debian" ]; then
