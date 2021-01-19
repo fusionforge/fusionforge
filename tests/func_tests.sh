@@ -76,15 +76,15 @@ install_selenium() {
 		else
 		    apt-get -y install php-curl unzip composer psmisc rsyslog default-jre patch
 		fi
-		mkdir -p /usr/local/share/php
-		pushd /usr/local/share/php
-		composer --no-plugins --no-scripts require phpunit/phpunit
-		composer --no-plugins --no-scripts require phpunit/phpunit-selenium:dev-master
-		popd
 	else
 		yum -y install wget firefox java-1.8.0-openjdk
-		yum --enablerepo=epel install -y php-phpunit-PHPUnit php-phpunit-PHPUnit-Selenium psmisc net-tools patch
+		yum --enablerepo=epel install -y psmisc net-tools patch
 	fi
+	mkdir -p /usr/local/share/php
+	pushd /usr/local/share/php
+	composer --no-plugins --no-scripts require phpunit/phpunit
+	composer --no-plugins --no-scripts require phpunit/phpunit-selenium:dev-master
+	popd
 
 	# Install selenium (no packaged version available)
 	SELENIUMMAJOR=3
