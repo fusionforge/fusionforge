@@ -71,7 +71,7 @@ install_selenium() {
 	if [ -e /etc/debian_version ]; then
 		apt-get -y install wget firefox-esr net-tools
 		if grep -q ^8 /etc/debian_version; then
-		    apt-get -y install rsyslog patch
+		    apt-get -y install rsyslog patch composer
 		    apt-get -y install -t jessie-backports openjdk-8-jdk
 		else
 		    apt-get -y install php-curl unzip composer psmisc rsyslog default-jre patch
