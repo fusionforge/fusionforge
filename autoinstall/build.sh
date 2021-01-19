@@ -47,6 +47,7 @@ function build_deb {
 	[DEFAULT]
 	archivedir = /usr/src/debian-repository
 	archive_style = flat
+	architectures = "all, amd64"
 	
 	verify_sigs = 0
 	
