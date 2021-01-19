@@ -78,7 +78,11 @@ install_selenium() {
 		fi
 	else
 		yum -y install wget firefox java-1.8.0-openjdk
-		yum --enablerepo=epel install -y psmisc net-tools patch
+		yum --enablerepo=epel install -y psmisc net-tools patch php-cli php-zip unzip
+		pushd $(mktemp -d)
+		php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+		php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+		popd
 	fi
 	mkdir -p /usr/local/share/php
 	pushd /usr/local/share/php
