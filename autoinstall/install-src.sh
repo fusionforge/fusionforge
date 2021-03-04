@@ -64,15 +64,15 @@ if [ -e /etc/debian_version ]; then
 elif [ -e /etc/os-release ]; then
 	suse_check_release
 	suse_install_repos
-	suse_install_rpms make gettext-runtime php5 php5-gettext php5-posix php5-pgsql \
-		apache2 apache2-mod_php5 apache2-mod_wsgi apache2-mod_mpm_itk \
+	suse_install_rpms make gettext-runtime php7 php7-gettext php7-posix php7-pgsql \
+		apache2 apache2-mod_php7 apache2-mod_wsgi apache2-mod_mpm_itk \
 		postgresql-server postgresql-contrib subversion \
-		php5-pear php5-pear-htmlpurifier php5-curl \
+		php7-pear php-pear-HTMLPurifier php7-curl \
 		mailman postfix \
 		openssh \
 		cvs rcs perl-IPC-Run perl-URI \
 		subversion-server \
-		git git-web php5-pcntl \
+		git git-web php7-pcntl \
 		mercurial \
 		python-psycopg2 \
 		mediawiki moinmoin-wiki \

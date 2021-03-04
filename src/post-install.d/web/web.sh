@@ -120,7 +120,7 @@ case "$1" in
 			a2enmod version 2>/dev/null || true  # opensuse..
 			a2enmod macro
 			if [ -e /etc/os-release ]; then
-				a2enmod php5
+				a2enmod php7
 				a2enmod mpm_itk
 				a2enmod mod_access_compat
 			else
