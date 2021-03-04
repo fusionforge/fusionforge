@@ -54,7 +54,7 @@ if [ -e /etc/debian_version ]; then
 			apt-get install locales-all  # https://bugs.launchpad.net/ubuntu/+source/glibc/+bug/1394929
 		fi
 	fi
-elif [ -e /etc/SuSE-release ]; then
+elif [ -e /etc/os-release ]; then
 	suse_check_release
 	suse_install_repos
 	if rpm -q fusionforge >/dev/null ; then

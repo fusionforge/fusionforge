@@ -61,7 +61,7 @@ if [ -e /etc/debian_version ]; then
 	if ! dpkg-vendor --is Ubuntu; then
 		apt-get install locales-all  # https://bugs.launchpad.net/ubuntu/+source/glibc/+bug/1394929
 	fi
-elif [ -e /etc/SuSE-release ]; then
+elif [ -e /etc/os-release ]; then
 	suse_check_release
 	suse_install_repos
 	suse_install_rpms make gettext-runtime php5 php5-gettext php5-posix php5-pgsql \
