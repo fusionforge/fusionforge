@@ -70,7 +70,9 @@ class Widget_TrackerGeneral extends Widget {
 			$return = $HTML->listTableTop();
 			$cells = array();
 			$cells[][] = html_e('strong', array(), _('Submitted by')._(':'));
-			if($ah->getSubmittedBy() != 100) {
+			if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
+				$cells[][] = $ath->technicianBox('submitted_by', $ah->getSubmittedBy(), true, _('Nobody'), -1, '', false, array('form' => 'trackerform'));
+			} else if($ah->getSubmittedBy() != 100) {
 				$cells[][] = util_display_user($ah->getSubmittedUnixName(), $ah->getSubmittedBy(), $ah->getSubmittedRealName());
 			} else {
 				$cells[][] = $ah->getSubmittedRealName();
@@ -104,6 +106,9 @@ class Widget_TrackerGeneral extends Widget {
 			$cells[][] = util_make_url($ah->getPermalink());
 			$return .= $HTML->multiTableRow(array(), $cells);
 			$return .= $HTML->listTableBottom();
+			if (session_loggedin() && forge_check_perm('tracker', $atid, 'submit')) {
+				$return .= html_e('p', array('class' => 'middleRight'), html_e('input', array('form' => 'trackerform', 'type' => 'submit', 'name' => 'submit', 'value' => _('Save Changes'), 'title' => _('Save is validating the complete form'), 'onClick' => 'iefixform()')));
+			}
 		}
 		return $return;
 	}

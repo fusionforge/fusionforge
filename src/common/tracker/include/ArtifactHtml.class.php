@@ -178,7 +178,7 @@ function hide_edit_button(id) {
 
 					$return .= $artifactType->getStatusName(db_result($result, $i, 'old_value'));
 
-				} elseif ($field == 'assigned_to') {
+				} elseif ($field == 'assigned_to' || $field == 'submitted_by') {
 
 					$return .= user_getname(db_result($result, $i, 'old_value'));
 

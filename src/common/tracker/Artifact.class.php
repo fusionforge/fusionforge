@@ -229,7 +229,11 @@ class Artifact extends FFObject {
 		//	get the user_id
 		//
 		if(array_key_exists('user', $importData)){
-				$user = $importData['user'];
+			$user = $importData['user'];
+			if (!forge_check_perm_for_user($user, 'tracker', $this->ArtifactType->getID(), 'submit')) {
+				$this->setError(_('The provided user is not currently allowed to submit items to this tracker.'));
+				return false;
+			}
 		} else {
 			if (!forge_check_perm ('tracker',$this->ArtifactType->getID(),'submit')) {
 				$this->setError(_('You are not currently allowed to submit items to this tracker.'));
@@ -281,7 +285,7 @@ class Artifact extends FFObject {
 						$assigned_to,
 						$time,
 						$time,
-						$user,
+						user_getid(),
 						htmlspecialchars($summary),
 						htmlspecialchars($details)));
 		if (!$res) {
@@ -922,6 +926,8 @@ class Artifact extends FFObject {
 
 		if (array_key_exists('user', $importData)){
 			$user = $importData['user'];
+		} else {
+			$user = $this->getSubmittedBy();
 		}
 		if (isset($importData['nopermcheck']) && $importData['nopermcheck']) {
 			$permCheck = false;
@@ -1004,6 +1010,14 @@ class Artifact extends FFObject {
 		if ($assigned_to != 100 && $permCheck) {
 			if (!forge_check_perm_for_user($assigned_to, 'tracker', $this->ArtifactType->getID(), 'tech')) {
 				$this->setError(_("Invalid assigned person: must be a technician"));
+				return false;
+			}
+		}
+
+		// Check that the new submitting user can submit items
+		if ($user != 100 && $permCheck) {
+			if (!forge_check_perm_for_user($user, 'tracker', $this->ArtifactType->getID(), 'submit')) {
+				$this->setError(_('The provided user is not currently allowed to submit items to this tracker.'));
 				return false;
 			}
 		}
@@ -1122,6 +1136,13 @@ class Artifact extends FFObject {
 				}
 			}
 
+			// Check that the new submitting user can submit items
+			if ($user != 100 && $permCheck) {
+				if (!forge_check_perm_for_user($user, 'tracker', $newArtifactType->getID(), 'submit')) {
+					$user = $this->getSubmittedBy();
+				}
+			}
+
 			//can't send a canned response when changing ArtifactType
 			$canned_response=100;
 			$this->ArtifactType =& $newArtifactType;
@@ -1139,6 +1160,9 @@ class Artifact extends FFObject {
 		} else {
 			$time = time();
 		}
+
+		// we want to log the current user, not the changed submitting user
+		unset($importData['user']);
 
 		if ($this->getStatusID() != $status_id) {
 			$this->addHistory('status_id',$this->getStatusID(), $importData);
@@ -1159,7 +1183,12 @@ class Artifact extends FFObject {
 			$changes['priority'] = 1;
 			$update = true;
 		}
-
+		if ($this->getSubmittedBy() != $user) {
+			$this->addHistory('submitted_by', $this->getSubmittedBy(), $importData);
+			$qpa = db_construct_qpa($qpa, ' submitted_by=$1,', array($user));
+			$changes['submitted_by'] = 1;
+			$update = true;
+		}
 		if ($this->getAssignedTo() != $assigned_to) {
 			$this->addHistory('assigned_to',$this->getAssignedTo(), $importData);
 			$qpa = db_construct_qpa($qpa, ' assigned_to=$1,', array($assigned_to));
