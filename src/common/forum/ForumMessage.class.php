@@ -197,7 +197,9 @@ class ForumMessage extends FFError {
 
 
 		db_begin();
-		$result = db_query_params ('INSERT INTO forum (group_forum_id,posted_by,subject,body,post_date,is_followup_to,thread_id,most_recent_date) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
+		$is_pinned = 'f';
+		if (ForumHTML::getIsPinned($thread_id)) $is_pinned = 't';
+		$result = db_query_params ('INSERT INTO forum (group_forum_id,posted_by,subject,body,post_date,is_followup_to,thread_id,most_recent_date,is_pinned) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)',
 					   array ($group_forum_id,
 						  $posted_by,
 						  htmlspecialchars($subject),
@@ -205,7 +207,8 @@ class ForumMessage extends FFError {
 						  $post_date,
 						  $is_followup_to,
 						  $thread_id,
-						  $most_recent_date)) ;
+						  $most_recent_date,
+					      $is_pinned)) ;
 
 		if (!$result || db_affected_rows($result) < 1) {
 			$this->setError(_('Posting Failed').' '.db_error());
@@ -298,7 +301,9 @@ class ForumMessage extends FFError {
 			}
 		}
 
-		$result = db_query_params ('INSERT INTO forum (group_forum_id,posted_by,subject,body,post_date,is_followup_to,thread_id,most_recent_date) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
+        $is_pinned = 'f';
+        if(ForumHTML::getIsPinned($thread_id)) $is_pinned = 't';
+		$result = db_query_params ('INSERT INTO forum (group_forum_id,posted_by,subject,body,post_date,is_followup_to,thread_id,most_recent_date) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)',
 					   array ($this->Forum->getID(),
 						  $user_id,
 						  htmlspecialchars($subject),
@@ -306,7 +311,8 @@ class ForumMessage extends FFError {
 						  $timestamp,
 						  $is_followup_to,
 						  $thread_id,
-						  $timestamp)) ;
+						  $timestamp,
+					      $is_pinned)) ;
 		if (!$result || db_affected_rows($result) < 1) {
 			$this->setError(_('Posting Failed').' '.db_error());
 			db_rollback();

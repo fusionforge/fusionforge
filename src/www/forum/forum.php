@@ -46,6 +46,18 @@ $offset = getIntFromRequest('offset');
 $max_rows = getIntFromRequest('max_rows');
 $set = getStringFromRequest('set');
 
+if (forge_check_perm('forum_admin', $group_id) && ($thread_id)) {
+    $pin = getStringFromRequest('pin');
+    if($pin === 't' || $pin === 'f') {
+        db_query_params('UPDATE forum SET is_pinned=$1 WHERE thread_id=$2', array($pin,$thread_id));
+    }
+    if($pin === 't') {
+        unset($thread_id);
+        $feedback = 'Discussion épinglée';
+    }
+    unset($pin);
+}
+
 if ($forum_id) {
 
 	if (!$group_id) {
@@ -307,15 +319,15 @@ if ($forum_id) {
 			This is the view that is most similar to the "Ultimate BB view"
 		*/
 
-		$result = db_query_params ('SELECT f.most_recent_date,users.user_name,users.realname,users.user_id,f.msg_id,f.subject,f.thread_id,
+		$result = db_query_params ('SELECT f2.is_pinned, f.most_recent_date,users.user_name,users.realname,users.user_id,f.msg_id,f.subject,f.thread_id,
 						(count(f2.thread_id)-1) AS followups,max(f2.post_date) AS recent
 						FROM forum f, forum f2, users
 						WHERE f.group_forum_id=$1
 						AND f.is_followup_to=0
 						AND users.user_id=f.posted_by
 						AND f.thread_id=f2.thread_id
-						GROUP BY f.most_recent_date,users.user_name,users.realname,users.user_id,f.msg_id,f.subject,f.thread_id
-						ORDER BY f.most_recent_date DESC',
+						GROUP BY f2.is_pinned,f.most_recent_date,users.user_name,users.realname,users.user_id,f.msg_id,f.subject,f.thread_id
+						ORDER BY f2.is_pinned DESC,f.most_recent_date DESC',
 						array ($forum_id),
 						$max_rows+1,
 						$offset);
@@ -346,9 +358,13 @@ if ($forum_id) {
 				/*
 						show the subject and poster
 				*/
+				$icon = $HTML->getFolderPic();
+				if($row['is_pinned'] === 't') {
+				    $icon = html_image('ic/forum_pin.png');
+				}
 				$ret_val .= '<tr><td>'
 					.util_make_link('/forum/forum.php?thread_id='.$row['thread_id'].'&forum_id='.$forum_id.'&group_id='.$group_id,
-							$HTML->getFolderPic().' '. $subject).'</td>'
+							$icon.' '. $subject).'</td>'
 					.'<td>'.util_display_user($row['user_name'], $row['user_id'], $row['realname']).'</td>'.
 					'<td>'. $row['followups'] .'</td>'.
 					'<td>'. relative_date($row['recent']).'</td></tr>';

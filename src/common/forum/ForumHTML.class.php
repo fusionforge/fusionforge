@@ -143,6 +143,25 @@ function forum_header($params = array()) {
 			}
 			echo util_make_link('/forum/save.php?forum_id='.$forum_id.'&group_id='.$group_id,
 						 html_image('ic/save.png') .' '._('Save Place')).' | ';
+			// Link to pin or un pin a thread
+			$thread_id = getIntFromRequest("thread_id");
+			if (forge_check_perm('forum_admin', $f->Group->getID()) && ($thread_id)) {
+			    if (getStringFromRequest('pin') !== 't') {
+			        if(ForumHTML::getIsPinned($thread_id)) {
+			            $pin = 'f';
+			            $pin_icon = 'forum_unpin';
+			            $pin_text = _('Unpin this thread');
+			        } else {
+			            $pin = 't';
+			            $pin_icon = 'forum_pin';
+			            $pin_text = _('Pin this thread');
+			        }
+			        echo util_make_link('/forum/forum.php?thread_id='.$thread_id
+			            .'&forum_id='.$forum_id
+			            .'&group_id='.$group_id
+			            .'&pin='.$pin, html_image('ic/'.$pin_icon.'.png').' '.$pin_text).' | ';
+			    }
+			}
 		}
 	} elseif ($f) {
 		echo util_make_link('/forum/monitor.php?forum_id='.$forum_id.'&group_id='.$group_id.'&start=1', html_image('ic/mail16w.png').' '._('Monitor Forum')).' | ';
@@ -539,6 +558,22 @@ class ForumHTML extends FFError {
 		}
 	}
 
+	/**
+	 * getIsPinned - to get is_pinned value from a thread
+	 * 
+	 * @param int $thread_id - thread id
+	 * 
+	 * @return boolean is_pinned - thread is pinned or not
+	 */
+	public static function getIsPinned($thread_id) {
+	    $is_pinned = false;
+	    $result = db_query_params('SELECT is_pinned FROM forum WHERE thread_id=$1 AND is_pinned = \'t\'', array($thread_id));
+	    if(db_numrows($result) > 0) {
+	        $is_pinned = true;
+	    }
+	    return $is_pinned;
+	}
+	
 	/**
 	 * @param int $thread_id
 	 * @param int $is_followup_to
