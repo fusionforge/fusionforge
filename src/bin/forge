@@ -56,6 +56,10 @@ class CliActions {
 				echo "Use: .../forge pluginDeactivate <pluginName>\n";
 				echo "to deactivate the <pluginName> plugin\n";
 				break;
+			case 'pluginList':
+				echo "Use: .../forge pluginList\n";
+				echo "to get a list of all available plugins\n";
+				break;
 			case 'artifactDump':
 				echo "Use: .../forge artifactDump <aid> [json|raw]\n";
 				echo "to dump an artifact from a specific tracker of a project.\n";
@@ -194,6 +198,12 @@ class CliActions {
 	function pluginDeactivate($name) {
 		$pm = plugin_manager_get_object();
 		$pm->deactivate($name);
+	}
+
+    function pluginList() {
+		$pm = plugin_manager_get_object();
+		foreach($pm->getPlugins() as $plugin)
+			echo "$plugin\n";
 	}
 
 	function getZipDump($file, $format = 'json') {
@@ -1725,17 +1735,22 @@ if (count($argv) >= 3) {
 			$j++;
 		}
 	}
+} else if (count($argv) >= 2) {
+	$action = $argv[1];
+	unset($name);
 } else {
 	$action = 'help';
-	$name   = '';
+	unset($name);
 }
 
 $ctl = new CliActions();
 if (method_exists($ctl, $action)) {
 	if (isset($params[0])) {
 		$ctl->$action($name, $params[0]);
-	} else {
+	} else if(isset($name)) {
 		$ctl->$action($name);
+	} else {
+		$ctl->$action();
 	}
 } else {
 	$ctl->help();
