@@ -76,7 +76,7 @@ elif [ -e /etc/os-release ]; then
 		mercurial \
 		python-psycopg2 \
 		mediawiki moinmoin-wiki \
-		vsftpd
+		vsftpd xinetd
 	suse_backport_from_fedora_rpm
 else
 	yum install -y make tar
