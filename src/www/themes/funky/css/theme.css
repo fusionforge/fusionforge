@@ -286,7 +286,6 @@ hr {
 .tabGenerator .tg-middle span span {
 	display: block;
 	text-align:center;
-	vertical-align: middle;
 	height: 20px;
 	border-bottom: 0;
 	border-top-left-radius: 6px;
@@ -298,6 +297,8 @@ hr {
 	margin: 0 2px;
 	transition-property: background-color, color, height, shadow;
 	transition-duration: 0.3s;
+	padding: 0 4px;
+	white-space: nowrap;
 }
 
 .tabGenerator .tg-middle span span:hover {
@@ -319,14 +320,14 @@ hr {
 }
 
 .tabGenerator .tg-right span.selected span {
-	display:none;
+	display: none;
 }
 
 /*
 	innertabs
 */
 .innertabs .tabGenerator {
-	font-weight:bold;
+	font-weight: bold;
 	border-collapse: collapse;
 	height: 20px;
 }
@@ -339,6 +340,7 @@ hr {
 	padding:0;
 	margin: 0;
 	vertical-align: middle;
+ 	border-right: 1px solid white;
 }
 
 .innertabs .tabGenerator .tg-middle {
@@ -347,35 +349,90 @@ hr {
 }
 
 .innertabs .tabGenerator .tg-middle span {
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	display: block;
 	background-color: #F7F7F7;
-	margin-top: 0;
+	color:black;
+	text-shadow: 1px 1px white;
+	line-height: none;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: normal;
+	align-items: center;
+	text-align: center;
+}
+
+.innertabs .tabGenerator .tg-middle span:hover {
+    background-color: white;
+}
+.innertabs .tabGenerator .tg-middle span.selected {
+	background-color: white;
+	text-shadow: 1px 1px white;
 }
 
 .innertabs .tabGenerator .tg-middle span span {
 	display: block;
 	text-align:center;
-	vertical-align: middle;
-	height: 20px;
+	height: auto;
 	margin: 0;
 	border-bottom: 0;
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
-	background-color: #F7F7F7;
-	line-height: 17px;
+	background: none;
 	color: black;
-	text-shadow: 1px 1px white;
-	border-left: 1px solid white;
-	border-right: 1px solid white;
+	border-left: none;
+	border-right: none;
 }
 
+.innertabs .tabGenerator .tg-middle span:hover span,
 .innertabs .tabGenerator .tg-middle span span:hover {
 	display: block;
-	background-color: white;
+	color: black;
+	background: none;
+	text-shadow: none;
+	height: auto;
 }
 
 .innertabs .tabGenerator .tg-middle span span a {
 	display: block;
 	color: black;
+}
+
+.innertabs .tabGenerator{
+    height: 100%;
+}
+.innertabs .tabGenerator tr,
+.innertabs .tabGenerator .tg-middle,
+.innertabs .tabGenerator .tg-middle a,
+.innertabs .tabGenerator .tg-middle span {
+    display:flex;
+    flex-direction:row;
+	width:100%;
+	transition-property: background;
+	transition-duration: 0.3s;
+}
+.innertabs .tabGenerator .tg-middle:first-child a {
+    border-left: 1px solid white;
+}
+.innertabs .tabGenerator td a {
+	width: 100%;
+}
+.innertabs .tabGenerator .tg-middle span span {
+	display: inline;
+	vertical-align: middle;
+}
+.innertabs .tabGenerator td a:hover {
+    background: white;
+    color: black;
+    height: auto;
+}
+.innertabs .tabGenerator .tg-middle span.selected span {
+	background: none;
+	text-shadow: 1px 1px white;
+	color: black;
+	height: auto;
 }
 
 .innertabs .tabGenerator .tg-middle span.selected span {
