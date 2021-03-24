@@ -228,7 +228,7 @@ if ($usingplugin) {
 		$qpa = db_construct_qpa($qpa, ' AND status = $1', array($status));
 		$filter .= '&status='.$status;
 	}
-	$qpa = db_construct_qpa($qpa, ' ORDER BY $1', array($sort_order));
+	$qpa = db_construct_qpa($qpa, ' ORDER BY '.$sort_order);
 	$res = db_query_qpa($qpa, $paging, $start);
 	$list_id = util_result_column_to_array($res, 0);
 	echo html_e('h2', array(), $msg);
