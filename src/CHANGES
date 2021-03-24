@@ -3,6 +3,7 @@ FusionForge X.y:
 * Diary & Notes: support markdown (TrivialDev)
 * Diary & Notes: support crossref (TrivialDev)
 * Forum: pinning support (DGFiP/Guy Morin)
+* Forum: fix behavior [#897] (DGFiP/Guy Morin)
 * Plugin Hudson/Jenkins: display link in public area widget [#889] (TrivialDev)
 * Theme: new funky-guy, support responsive menu (DGFiP/Guy Morin)
 * User: followers/following mechanism (TrivialDev)
