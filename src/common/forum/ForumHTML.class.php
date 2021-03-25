@@ -560,9 +560,9 @@ class ForumHTML extends FFError {
 
 	/**
 	 * getIsPinned - to get is_pinned value from a thread
-	 * 
+	 *
 	 * @param int $thread_id - thread id
-	 * 
+	 *
 	 * @return boolean is_pinned - thread is pinned or not
 	 */
 	public static function getIsPinned($thread_id) {
@@ -573,7 +573,7 @@ class ForumHTML extends FFError {
 	    }
 	    return $is_pinned;
 	}
-	
+
 	/**
 	 * @param int $thread_id
 	 * @param int $is_followup_to
@@ -632,7 +632,7 @@ class ForumHTML extends FFError {
 		if (!session_loggedin()) {
 			echo '<span class="highlight">';
 			printf (_('You are posting anonymously because you are not <a href="%s">logged in</a>'),util_make_url ('/account/login.php?return_to='. urlencode(getStringFromServer('REQUEST_URI'))));
- 			echo '</span>';
+			echo '</span>';
 		}
 		?> <br />
 		<input type="submit" name="submit"

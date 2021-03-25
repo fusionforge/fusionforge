@@ -27,7 +27,7 @@
 require_once $gfwww.'include/Layout.class.php';
 
 class Theme_Funky_Guy extends Layout {
-	
+
 	function __construct() {
 		parent::__construct();
 		$this->themeurl = util_make_uri('themes/funky-guy/');
@@ -100,9 +100,9 @@ class Theme_Funky_Guy extends Layout {
 
 	function hamburgerButton() {
 		$hamburgerIcon = '<svg viewBox="0 0 50 40" width="20" height="20" fill="#eee">
-		  		<rect width="50" height="7"></rect>
-		  		<rect y="15" width="50" height="7"></rect>
-		  		<rect y="30" width="50" height="7"></rect>
+				<rect width="50" height="7"></rect>
+				<rect y="15" width="50" height="7"></rect>
+				<rect y="30" width="50" height="7"></rect>
 			      </svg>';
 		echo html_ao('label', array('for' => 'hamburgerButton'));
 		echo $hamburgerIcon;
@@ -122,7 +122,7 @@ class Theme_Funky_Guy extends Layout {
 
 		echo html_ao('header', array('role' => 'banner'));
 		echo html_ao('nav', array('role' => 'navigation'));
-		echo $this->hamburgerButton();	
+		echo $this->hamburgerButton();
 		echo html_ao('logo');
 		echo util_make_link('/', html_image('header/header-logo.png', null, null, array('alt'=>'FusionForge Home', 'height'=>'40')));
 		echo html_ac(html_ap() -1); // </logo>
@@ -141,7 +141,7 @@ class Theme_Funky_Guy extends Layout {
 		echo implode($template, $links);
 		echo html_ac(html_ap() -1); // </ul>
 		echo html_ac(html_ap() -1); // </div> #userlinkdiv
-		
+
 		echo html_ao('div', array('id' => 'menudiv'));
 		echo html_ao('input', array('id' => 'hamburgerButton', 'type' => 'checkbox'));
 		echo html_ac(html_ap() -1); // </input>
@@ -309,7 +309,7 @@ class Theme_Funky_Guy extends Layout {
 				$attrs['target'] = '_blank';
 			}
 			$return .= html_ao('a', $attrs);
-			
+
 			$attrs = array('title' => $tabs_tooltips[$i]);
 			if ($selected == $i)
 				$attrs['class'] = 'selected';

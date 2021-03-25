@@ -70,21 +70,21 @@ h1, h2, h3,
 }
 
 h1 {
-    	color: #303030;
-    	padding-top: 4px;
-    	font-size: 24px;
-    	letter-spacing: 2px;
+	color: #303030;
+	padding-top: 4px;
+	font-size: 24px;
+	letter-spacing: 2px;
 }
 
 h2 {
 	margin-top: 30px;
-    	font-size: 21px;
+	font-size: 21px;
 	color: #505d77;
 }
 
 h3 {
 	margin-top: 30px;
-    	font-size: 18px;
+	font-size: 18px;
 	color: #505d77;
 }
 
@@ -289,7 +289,7 @@ header nav label,
 	transition-property: background-color, color, height, shadow;
 	transition-duration: 0.3s;
 	font-size:1.15em;
-	
+
 	padding: .6em;
 	white-space: nowrap;
 }
@@ -307,7 +307,7 @@ header nav label,
 	innertabs
 */
 .innertabs {
-    	display: block;
+	display: block;
 	width: 100%;
 }
 
@@ -323,7 +323,7 @@ header nav label,
 	flex: 1;
 	margin: 0;
 	padding: 0;
-}	
+}
 
 .innertabs .tabGenerator a {
 	display: flex;
@@ -363,46 +363,46 @@ header nav label,
 .topTab, a.topTab, a.topTab:visited, a.topTab:hover,
 .topTabSelected, a.topTabSelected, a.topTabSelected:visited,
 a.topTabSelected:hover {
-  	text-decoration: none;
-  	font-weight: bold;
-  	color: rgb(68, 68, 68);
-  	font-family: arial, helvetica, sans-serif;
-  	font-size: 0.9em;
+	text-decoration: none;
+	font-weight: bold;
+	color: rgb(68, 68, 68);
+	font-family: arial, helvetica, sans-serif;
+	font-size: 0.9em;
 }
 
 .bottomTab, a.bottomTab, a.bottomTab:visited, a.bottomTab:hover {
-  	text-decoration: none;
-  	font-weight: bold;
-  	color: white;
-  	font-family: arial, helvetica, sans-serif;
-  	font-size: 0.9em;
+	text-decoration: none;
+	font-weight: bold;
+	color: white;
+	font-family: arial, helvetica, sans-serif;
+	font-size: 0.9em;
 }
 
 .bottomTabSelected, a.bottomTabSelected, a.bottomTabSelected:visited, a.bottomTabSelected:hover {
-  	text-decoration: none;
-  	font-weight: bold;
-  	color: rgb(68, 68, 68);
-  	font-family: arial, helvetica, sans-serif;
-  	font-size: 0.9em;
+	text-decoration: none;
+	font-weight: bold;
+	color: rgb(68, 68, 68);
+	font-family: arial, helvetica, sans-serif;
+	font-size: 0.9em;
 }
 
 .topLeft {
-  	vertical-align: top;
-  	text-align: left;
+	vertical-align: top;
+	text-align: left;
 }
 
 .middleRight {
-  	vertical-align: middle;
- 	text-align: right;
+	vertical-align: middle;
+	text-align: right;
 }
 
 .pane {
-  	color: rgb(112, 112, 112);
-  	background-color: white;
+	color: rgb(112, 112, 112);
+	background-color: white;
 }
 
 .field-holder {
-  	clear: both;
+	clear: both;
 }
 
 /* Boxes (top / middle / bottom)
@@ -498,8 +498,8 @@ a.topTabSelected:hover {
 
 .widget_content {
 	border-bottom: 1px solid #d2d3d4;
-    	border-bottom-left-radius: 3px;
-    	border-bottom-right-radius: 3px;
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
 	margin: 0;
 	padding: .4em;
 }
@@ -623,13 +623,13 @@ table.listing tbody tr:nth-child(odd),
 	padding-left: 0;
 }
 .submenu a {
-    	background: #51596C;
+	background: #51596C;
 	color: #fff;
-    	text-align:center;
+	text-align:center;
 	border-top-left-radius: 6px;
 	border-top-right-radius: 6px;
-    	display: inline-block;
-   	padding: 4px 8px;
+	display: inline-block;
+	padding: 4px 8px;
 }
 .submenu a:hover {
 	color: #ff9;
@@ -652,8 +652,8 @@ table.listing tbody tr:nth-child(odd),
 /* error_msg, warning_msg or feedback function
 ----------------------------------------------- */
 span.active, span.deleted, span.pending, span.suspended {
-    	padding:0 .5em;
-    	border-radius: 3px;
+	padding:0 .5em;
+	border-radius: 3px;
 }
 .active     {background-color: #cfc;}
 .deleted    {background-color: #cff;}
@@ -753,9 +753,9 @@ footer img {
 .info-box {
 	background: #f0f0f0;
 	color: #565c5e;
-    	padding: .2em .4em;
-    	margin-bottom: .4em;
-    	border-radius: 0.7em;    
+	padding: .2em .4em;
+	margin-bottom: .4em;
+	border-radius: 0.7em;
 	border:1px solid #c2c3c4;
 	box-shadow: 1px 1px 4px #c2c3c4;
 }
@@ -805,19 +805,19 @@ table.listing thead tr th {
 
 table.listing thead tr th,
 table.listing tbody tr td {
-    	padding: 4px 8px !important;
+	padding: 4px 8px !important;
 }
 
 table.listing thead tr th a {
-    	color:white;
+	color:white;
 }
 
 table.listing tbody tr:nth-child(2n), .even {
-    	background-color: #e0dfd6 !important;
+	background-color: #e0dfd6 !important;
 }
 
 table.listing tbody tr:nth-child(2n+1), .odd {
-    	background-color: #e6e6e0 !important;
+	background-color: #e6e6e0 !important;
 }
 
 input, select {
@@ -825,29 +825,29 @@ input, select {
 }
 
 .important {
-    	background-color: #e10;
-    	border: none;
-    	color: white;
-    	text-shadow: 0 0 1px #300;;
-    	padding: .2em .4em;
+	background-color: #e10;
+	border: none;
+	color: white;
+	text-shadow: 0 0 1px #300;;
+	padding: .2em .4em;
 }
 
 /* Buttons */
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active {
-    	background:none !important;
-    	background-color: #d7d7d7 !important;
-    	border:1px solid #a7a7a7 !important;
-    	color: #222 !important;
-    	text-shadow:1px 1px #eee;
-    	transition-property: background-color, text-shadow;
+	background:none !important;
+	background-color: #d7d7d7 !important;
+	border:1px solid #a7a7a7 !important;
+	color: #222 !important;
+	text-shadow:1px 1px #eee;
+	transition-property: background-color, text-shadow;
 	transition-duration: 0.3s;
 }
-.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus, .ui-button:hover, .ui-button:focus {    
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus, .ui-button:hover, .ui-button:focus {
 	border: 1px solid #505d77;
-    	background-color: #f7f7f7 !important;
-    	border:1px solid #878787 !important;
-    	color: black !important;
-    	text-shadow:1px 1px #fff;
+	background-color: #f7f7f7 !important;
+	border:1px solid #878787 !important;
+	color: black !important;
+	text-shadow:1px 1px #fff;
 }
 
 /* Hide number input spinners */
@@ -920,7 +920,7 @@ div[role="search"] {
 
 #userlinkshamburgerdiv {
 	margin: 0;
-	width: 100%;	
+	width: 100%;
 }
 
 #userlinkshamburgerdiv ul {
