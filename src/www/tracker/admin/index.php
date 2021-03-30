@@ -124,6 +124,17 @@ if ($group_id && $atid) {
 			'update_canned', 'delete_canned', 'update_box', 'update_opt', 'delete', 'delete_opt', 'deleteextrafield','update_type',
 			'effort_units', 'edit_formula'
 		);
+
+		$hook_params = array('group_id' => $group_id, 'atid' => $atid);
+		plugin_hook_by_reference('admin_tracker_add_actions', $hook_params);
+		if (isset($hook_params['result'])) {
+			foreach($hook_params['result'] as $action => $values) {
+				if (!array_key_exists($action, $actions) && isset($values['page'])) {
+					$actions[] = $action;
+				}
+			}
+		}
+
 		$action = '';
 		foreach ($actions as $a) {
 			if (getStringFromRequest($a)) {
@@ -133,7 +144,11 @@ if ($group_id && $atid) {
 		}
 	}
 
-	if ($action == 'add_extrafield') {
+	if (is_array($hook_params['result'][$action])) {
+
+		include $hook_params['result'][$action]['page'];
+
+	} elseif ($action == 'add_extrafield') {
 
 		include $gfcommon.'tracker/views/form-addextrafield.php';
 

@@ -136,6 +136,13 @@ class ArtifactTypeHtml extends ArtifactType {
 		$elementLi[] = array('content' => util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&add_canned=1', _('Manage Canned Responses'), array('title'=>_('Create/change generic response messages for the tracker.'))));
 		$elementLi[] = array('content' => util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&clone_tracker=1', _('Apply Template Tracker'), array('title'=>_('Duplicate parameters and fields from a template trackers in this one.'))));
 		$elementLi[] = array('content' => util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID().'&delete=1', _('Delete'), array('title'=>_('Permanently delete this tracker.'))));
+		$hook_params = array('group_id' => $group_id, 'atid' => $this->getID());
+		plugin_hook_by_reference("admin_tracker_add_actions", $hook_params);
+		if (isset($hook_params['result'])) {
+			foreach($hook_params['result'] as $action => $values) {
+				$elementLi[] = array('content' => util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID()."&$action=1", $values['text'], array('title'=>$values['description'])));
+			}
+		}
 		echo $HTML->html_list($elementLi);
 	}
 

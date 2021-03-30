@@ -85,4 +85,15 @@ echo '<br />';
 echo _('Permanently delete this tracker.');
 echo '</p>';
 
+$hook_params = array('group_id' => $group_id, 'atid' => $ath->getID());
+plugin_hook_by_reference("admin_tracker_add_actions", $hook_params);
+if (isset($hook_params['result'])) {
+	foreach($hook_params['result'] as $action => $values) {
+		echo '<p>'.util_make_link('/tracker/admin/?group_id='.$group_id.'&atid='.$ath->getID()."&$action=1", '<strong>'.$values['text'].'</strong>');
+		echo '<br />';
+		echo $values['description'];
+		echo '</p>';
+	}
+}
+
 $ath->footer();
