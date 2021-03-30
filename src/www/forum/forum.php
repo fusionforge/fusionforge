@@ -53,7 +53,7 @@ if (forge_check_perm('forum_admin', $group_id) && ($thread_id)) {
     }
     if($pin === 't') {
         unset($thread_id);
-        $feedback = 'Discussion épinglée';
+        $feedback = _('Pinned thread');
     }
     unset($pin);
 }
