@@ -52,6 +52,7 @@ msgstr ""
 #: common/docman/views/notifyusers.php:56
 #: common/docman/views/notifyusers.php:60 common/docman/views/reporting.php:89
 #: common/docman/views/reporting.php:91 common/forum/ForumHTML.class.php:85
+#: common/forum/ForumHTML.class.php:152 common/forum/ForumHTML.class.php:156
 #: common/forum/ForumHTML.class.php:509 common/frs/FRSPackage.class.php:636
 #: common/frs/FRSRelease.class.php:325 common/frs/FRSRelease.class.php:328
 #: common/frs/FRSRelease.class.php:332 common/frs/views/admin.php:66
@@ -1224,7 +1225,8 @@ msgstr ""
 #: www/export/rss_project.php:103 www/export/rss_project.php:109
 #: www/export/rss_project.php:115 www/export/rss_project.php:121
 #: www/forum/admin/index.php:156 www/forum/admin/pendingmsgdetail.php:59
-#: www/forum/forum.php:58 www/forum/forum.php:95 www/forum/forum.php:160
+#: www/forum/forum.php:56 www/forum/forum.php:58
+#: www/forum/forum.php:95 www/forum/forum.php:160
 #: www/forum/message.php:128 www/frs/r_follow.php:45
 #: www/include/features_boxes.php:152 www/include/features_boxes.php:162
 #: www/include/user_home.php:64 www/new/index.php:92 www/new/index.php:97
@@ -4310,6 +4312,14 @@ msgstr ""
 
 #: common/forum/ForumHTML.class.php:505
 msgid "Edit Message"
+msgstr ""
+
+#: common/forum/ForumHTML.class.php:152
+msgid "Unpin this thread"
+msgstr ""
+
+#: common/forum/ForumHTML.class.php:156
+msgid "Pin this thread"
 msgstr ""
 
 #: common/forum/ForumHTML.class.php:509 common/forum/ForumHTML.class.php:571
@@ -21859,6 +21869,10 @@ msgstr ""
 
 #: www/forum/attachment.php:157
 msgid "No attachment found"
+msgstr ""
+
+#: www/forum/forum.php:56
+msgid "Pinned thread"
 msgstr ""
 
 #: www/forum/forum.php:58
