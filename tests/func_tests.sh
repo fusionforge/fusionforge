@@ -72,20 +72,24 @@ install_selenium() {
 	if [ -e /etc/debian_version ]; then
 		apt-get -y install wget firefox-esr net-tools
 		if grep -q ^8 /etc/debian_version; then
-		    apt-get -y install phpunit phpunit-selenium psmisc rsyslog patch
+		    apt-get -y install rsyslog patch composer
 		    apt-get -y install -t jessie-backports openjdk-8-jdk
 		else
 		    apt-get -y install php-curl unzip composer psmisc rsyslog default-jre patch
-		    mkdir -p /usr/local/share/php
-		    pushd /usr/local/share/php
-		    composer --no-plugins --no-scripts require phpunit/phpunit
-		    composer --no-plugins --no-scripts require phpunit/phpunit-selenium:dev-master
-		    popd
 		fi
 	else
 		yum -y install wget firefox java-1.8.0-openjdk
-		yum --enablerepo=epel install -y php-phpunit-PHPUnit php-phpunit-PHPUnit-Selenium psmisc net-tools patch
+		yum --enablerepo=epel install -y psmisc net-tools patch php-cli php-zip unzip
+		pushd $(mktemp -d)
+		php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+		php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+		popd
 	fi
+	mkdir -p /usr/local/share/php
+	pushd /usr/local/share/php
+	composer --no-plugins --no-scripts require phpunit/phpunit
+	composer --no-plugins --no-scripts require phpunit/phpunit-selenium:dev-master
+	popd
 
 	# Install selenium (no packaged version available)
 	SELENIUMMAJOR=3

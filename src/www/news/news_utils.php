@@ -98,12 +98,13 @@ function news_show_latest($group_id = 0, $limit = 10, $show_summaries = true, $a
 				SELECT groups.group_name, groups.unix_group_name, groups.group_id,
 				users.user_name, users.realname, users.user_id,
 				news_bytes.forum_id, news_bytes.summary, news_bytes.post_date,
-				news_bytes.details
-				FROM users,news_bytes,groups
+				news_bytes.details,forum_group_list.forum_name
+                FROM users
+                  JOIN news_bytes ON (users.user_id=news_bytes.submitted_by)
+                  JOIN groups ON (news_bytes.group_id=groups.group_id)
+                  LEFT OUTER JOIN forum_group_list ON news_bytes.forum_id = forum_group_list.group_forum_id
 				WHERE (news_bytes.group_id=$1 AND news_bytes.is_approved <> 4 OR 1!=$2)
 				AND (news_bytes.is_approved=1 OR 1 != $3)
-				AND users.user_id=news_bytes.submitted_by
-				AND news_bytes.group_id=groups.group_id
 				AND groups.status=$4
 				ORDER BY post_date DESC',
 				array ($group_id,
@@ -142,15 +143,20 @@ function news_show_latest($group_id = 0, $limit = 10, $show_summaries = true, $a
 				$summ_txt='';
 			}
 
+            $forum_exists = False;
+            if (db_result($result,$i,'forum_name')) {
+                    $forum_exists = True;
+            }
+
 			if (!$limit) {
-				if ($show_forum) {
+				if ($show_forum && $forum_exists) {
 					$return .= '<h3>'.util_make_link ($t_thread_url, $t_thread_title).'</h3>';
 				} else {
 					$return .= '<h3>'. $t_thread_title . '</h3>';
 				}
 				$return .= ' &nbsp; <em>'. date(_('Y-m-d H:i'),db_result($result,$i,'post_date')).'</em><br />';
 			} else {
-				if ($show_forum) {
+				if ($show_forum && $forum_exists) {
 					$return .= '<h3>'.util_make_link ($t_thread_url, $t_thread_title).'</h3>';
 				} else {
 					$return .= '<h3>'. $t_thread_title . '</h3>';

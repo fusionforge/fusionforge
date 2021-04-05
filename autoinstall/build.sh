@@ -47,6 +47,7 @@ function build_deb {
 	[DEFAULT]
 	archivedir = /usr/src/debian-repository
 	archive_style = flat
+	architectures = "all, amd64"
 	
 	verify_sigs = 0
 	
@@ -82,7 +83,7 @@ function build_deb {
     gpg --export FusionForge -a > /usr/src/debian-repository/key.asc
     apt-key add /usr/src/debian-repository/key.asc
     
-    mini-dinstall -b
+    mini-dinstall -bv
     
     # Configure debian package building tools so as to use the local repo
     if [ ! -f /root/.dput.cf ]; then
@@ -93,7 +94,7 @@ function build_deb {
 	method = local
 	run_dinstall = 0
 	allow_unsigned_uploads = yes
-	post_upload_command = mini-dinstall -b
+	post_upload_command = mini-dinstall -bv
 	allowed_distributions = local
 	EOF
     fi

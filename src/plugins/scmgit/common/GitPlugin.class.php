@@ -178,6 +178,7 @@ control over it to the project's administrator.");
 			if (forge_get_config('use_ssh', 'scmgit')) {
 				$b .= '<div id="tabber-gitssh" class="tabbertab" >';
 				$b .= html_e('p', array(), _('SSH must be installed on your client machine.'));
+				$b .= html_e('p', array(), _('Additionally, a public ssh key must be available in the FusionForge settings of the respective user.'));
 				$htmlRepo = '';
 				foreach ($repo_list as $repo_name) {
 					if (forge_get_config('use_shell_limited')) {

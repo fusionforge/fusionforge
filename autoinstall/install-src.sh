@@ -29,7 +29,7 @@ set -e
 if [ -e /etc/debian_version ]; then
 	export DEBIAN_FRONTEND=noninteractive
 	backports_deb
-	apt-get update
+	apt-get update || true
 	if grep -q ^8 /etc/debian_version; then
 	    	apt-get install -y make gettext php5-cli php5-pgsql php-htmlpurifier php-http php-text-captcha \
 			libapache2-mpm-itk libapache2-mod-svn \

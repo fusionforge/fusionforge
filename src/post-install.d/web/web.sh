@@ -96,15 +96,23 @@ case "$1" in
 
 		# Setup Docman/FRS/Forum/Tracker/RSS attachments
 		# (not done in 'make install' because e.g. dpkg ignores existing dirs, cf. DP10.9[1])
+		mkdir -p $data_path/docman/
 		chown $apache_user: $data_path/docman/
+		mkdir -p $data_path/docman/review/
 		chown $apache_user: $data_path/docman/review/
+		mkdir -p $data_path/download/
 		chown $apache_user: $data_path/download/
+		mkdir -p $data_path/forum/
 		chown $apache_user: $data_path/forum/
+		mkdir -p $data_path/forum/pending/
 		chown $apache_user: $data_path/forum/pending/
+		mkdir -p $data_path/tracker/
 		chown $apache_user: $data_path/tracker/
+		mkdir -p $data_path/rss/
 		chown $apache_user: $data_path/rss/
 
 		# Plugins activation from the web UI
+		mkdir -p $source_path/www/plugins/
 		chown $apache_user: $source_path/www/plugins/
 
 		# Enable required modules

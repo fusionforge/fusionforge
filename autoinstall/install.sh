@@ -31,7 +31,7 @@ if [ -e /etc/debian_version ]; then
 	export LANG=C
 	APT="apt-get -y -o Dpkg::Options::=--force-confnew"
 	backports_deb
-	apt-get update
+	apt-get update || true
 	if dpkg-query -s fusionforge >/dev/null 2>&1; then
 		# Already installed, upgrading
 		$APT dist-upgrade
