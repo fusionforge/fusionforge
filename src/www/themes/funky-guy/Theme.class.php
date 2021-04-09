@@ -96,6 +96,11 @@ class Theme_Funky_Guy extends Layout {
 				);'."\n";
 		}
 		echo html_ac(html_ap() -1);
+		echo html_ao('script', array('type' => 'text/javascript'));
+		echo 'function checkMenu(){
+			document.getElementById("hamburgerButton").checked = true;
+			}';
+		echo html_ac(html_ap() -1);
 	}
 
 	function hamburgerButton() {
@@ -122,13 +127,23 @@ class Theme_Funky_Guy extends Layout {
 
 		echo html_ao('header', array('role' => 'banner'));
 		echo html_ao('nav', array('role' => 'navigation'));
+		
+		$skipToContent = _('Skip to content');
+		$skipToMenu = _('Skip to menu');
+		echo html_ao('a', array('href' => '#content', 'class' => 'skipLink'));
+		echo $skipToContent;
+		echo html_ac(html_ap() -1); // </a>
+		echo html_ao('a', array('href' => '#menu', 'class' => 'skipLink',
+			'onclick' => 'checkMenu()'));
+		echo $skipToMenu;
+		echo html_ac(html_ap() -1); // </a>
+		
 		echo $this->hamburgerButton();
 		echo html_ao('logo');
 		echo util_make_link('/', html_image('header/header-logo.png', null, null, array('alt'=>'FusionForge Home', 'height'=>'40')));
 		echo html_ac(html_ap() -1); // </logo>
 		echo $this->searchBox();
-		echo html_ao('div', array('id' => 'userlinksdiv'));
-		echo html_ao('ul');
+
 		$items = $this->navigation->getUserLinks();
 		for ($j = 0; $j < count($items['titles']); $j++) {
 			$links[] = html_ao('li')
@@ -138,10 +153,14 @@ class Theme_Funky_Guy extends Layout {
 		$params['links'] = &$links;
 		plugin_hook('headermenu', $params);
 		$template = isset($params['template']) ? $params['template'] : null;
+		
+		echo html_ao('div', array('id' => 'userlinksdiv'));
+		echo html_ao('ul');
 		echo implode($template, $links);
 		echo html_ac(html_ap() -1); // </ul>
 		echo html_ac(html_ap() -1); // </div> #userlinkdiv
 
+		echo util_make_link('#', null, array('id' => 'menu', 'name' => 'menu'));
 		echo html_ao('div', array('id' => 'menudiv'));
 		echo html_ao('input', array('id' => 'hamburgerButton', 'type' => 'checkbox'));
 		echo html_ac(html_ap() -1); // </input>
@@ -150,10 +169,11 @@ class Theme_Funky_Guy extends Layout {
 		echo html_ac(html_ap() -1); // </div> #hamburgermenudiv
 		echo html_ao('div', array('id' => 'userlinkshamburgerdiv'));
 		echo html_ao('ul');
-		echo implode($template, $links);
+		echo implode($template, array_reverse($links));
 		echo html_ac(html_ap() -1); // </ul>
 		echo html_ac(html_ap() -1); // </div> #userlinkhamburgerdiv
 		echo html_ac(html_ap() -1); // </div> #menudiv
+		
 		echo $this->quickNav();
 		echo '<!-- inner tabs -->' . "\n";
 		echo html_ao('div', array('class' => 'innertabs'));
@@ -165,6 +185,8 @@ class Theme_Funky_Guy extends Layout {
 		echo html_ac(html_ap() -1); // </nav>
 		echo html_ac(html_ap() -2); // </header>
 
+		echo util_make_link('#', null, array('id' => 'content', 'name' => 'content'));
+		
 		echo html_ao('main', array('id' => 'maindiv', 'role' => 'main'));
 		plugin_hook('message');
 
