@@ -209,6 +209,7 @@ control over it to the project's administrator.");
 						'Only project developers can access the Git repositories via this method.',
 						count($repo_list)).
 					' '. _('SSH must be installed on your client machine.').
+					' '. _('Additionally, a public ssh key must be available in the FusionForge settings of the respective user.').
 					' '. _('Substitute <em>developername</em> with the proper value.'));
 				$htmlRepo = '';
 				foreach ($repo_list as $repo_name) {

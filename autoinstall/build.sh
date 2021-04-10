@@ -170,7 +170,7 @@ function build_rpm {
 function build_suse_rpm {
 	suse_check_release
 	suse_install_repos
-	suse_install_rpms make gettext-runtime gettext-tools tar bzip2 rpm-build createrepo php5
+	suse_install_rpms make gettext-runtime gettext-tools tar bzip2 rpm-build createrepo php7
 
 	# Build package
 	cd $(dirname $0)/../src/
@@ -200,7 +200,7 @@ if [ -e /etc/debian_version ]; then
     build_deb
 elif [ -e /etc/redhat-release ]; then
     build_rpm
-elif [ -e /etc/SuSE-release ]; then
+elif [ -e /etc/os-release ]; then
     build_suse_rpm
 else
     echo "Automated package building is not supported for this distribution."

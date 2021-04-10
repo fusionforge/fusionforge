@@ -220,17 +220,21 @@ function suse_backport_from_fedora_rpm {
 		zypper in xmlto
 		zypper in rpm-build
 		zypper in postgresql-devel
-		wget https://download.fedoraproject.org/pub/fedora/linux/releases/25/Everything/source/tree/Packages/l/libnss-pgsql-1.5.0-0.14.beta.fc24.src.rpm -O libnss-pgsql-1.5.0-0.14.beta.fc24.src.rpm
-		rpm -ivh libnss-pgsql-1.5.0-0.14.beta.fc24.src.rpm
-		sed -i -e 's|<libpq-fe.h|<pgsql/libpq-fe.h|' /usr/src/packages/SOURCES/libnss-pgsql-fix_include.patch
-		rpmbuild -ba /usr/src/packages/SPECS/libnss-pgsql.spec
-		rpm -Uvh /usr/src/packages/RPMS/x86_64/libnss-pgsql-1.5.0-0.14.beta.x86_64.rpm
-		touch libnss-pgsql.done
+		zypper in wget patch
+		pkg=libnss-pgsql-1.5.0-0.24.beta.fc33.src.rpm
+		if ! test -f "$pkg"; then
+			wget https://ftp-stud.hs-esslingen.de/pub/fedora/linux/releases/33/Everything/source/tree/Packages/l/$pkg
+			rpm -ivh $pkg
+			patch -d / -p0 -i $PWD/autoinstall/libnss-pgsql-openSUSE-Leap-15.2.patch
+			rpmbuild -ba /usr/src/packages/SPECS/libnss-pgsql.spec
+			rpm -Uvh /usr/src/packages/RPMS/x86_64/libnss-pgsql-1.5.0-0.24.beta.x86_64.rpm
+			touch libnss-pgsql.done
+		fi
 	fi
 }
 
 function suse_check_release {
-	supported=$(. /etc/os-release; echo $VERSION | grep "42\.[123]")
+	supported=$(. /etc/os-release; echo $VERSION | grep "15\.[0123]")
 	if test -z "$supported"; then
 		echo "unsupported openSUSE version"
 		exit 1
