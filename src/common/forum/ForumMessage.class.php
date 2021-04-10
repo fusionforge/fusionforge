@@ -5,7 +5,7 @@
  * Copyright 1999-2000, Tim Perdue/Sourceforge
  * Copyright 2002, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013,2021, Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of National Education
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -94,14 +94,14 @@ class ForumMessage extends FFError {
 	/**
 	 * insertmoderated - inserts the message into the table for moderation (forum_pending_messages)
 	 *
-	 * @param	string	$subject			The subject of the message.
-	 * @param	string	$body				The body of the message.
-	 * @param	int		$thread_id			The thread_id of the message, if known.
-	 * @param	int		$is_followup_to 	The message_id of the parent message, if any.
-	 * @param 	int		$user_id		The id of the user that is posting the message
+	 * @param	string	$subject		The subject of the message.
+	 * @param	string	$body			The body of the message.
+	 * @param	int	$thread_id		The thread_id of the message, if known.
+	 * @param	int	$is_followup_to 	The message_id of the parent message, if any.
+	 * @param 	int	$user_id		The id of the user that is posting the message
 	 * @return	bool success.
 	 */
-	function insertmoderated($subject, $body, $thread_id=0, $is_followup_to=0,$user_id) {
+	function insertmoderated($subject, $body, $thread_id, $is_followup_to, $user_id) {
 		if (!$thread_id) {
 			$thread_id=$this->Forum->getNextThreadID();
 			$is_followup_to=0;
@@ -151,15 +151,15 @@ class ForumMessage extends FFError {
 	/**
 	 * insertreleasedmsg - inserts the released message into the main table (forum)
 	 *
-	 * @param	string	$group_forum_id	The Forum id
+	 * @param	string	$group_forum_id		The Forum id
 	 * @param	string	$subject		The subject of the message.
 	 * @param	string	$body			The body of the message.
 	 * @param	string	$post_date		The post date
-	 * @param	int		$thread_id		The thread_id of the message
-	 * @param	int		$is_followup_to	The message_id of the parent message, if any.
-	 * @param	int		$posted_by		The id of the user that is posting the message
-	 * @param	int		$has_followups	has followups?
-	 * @param	int		$most_recent_date	most recent date
+	 * @param	int	$thread_id		The thread_id of the message
+	 * @param	int	$is_followup_to		The message_id of the parent message, if any.
+	 * @param	int	$posted_by		The id of the user that is posting the message
+	 * @param	int	$has_followups		has followups?
+	 * @param	int	$most_recent_date	most recent date
 	 * @return	bool	success.
 	 */
 	function insertreleasedmsg($group_forum_id, $subject, $body, $post_date, $thread_id,
@@ -240,17 +240,16 @@ class ForumMessage extends FFError {
 	/**
 	 * insertmsg - inserts the message into the main table (forum)
 	 *
-	 * @param	string	$subject			The subject of the message.
-	 * @param	string	$body				The body of the message.
-	 * @param	int		$thread_id			The thread_id of the message, if known.
-	 * @param	int		$is_followup_to		The message_id of the parent message, if any.
-	 * @param	int		$user_id			The id of the user that is posting the message
-	 * @param	bool	$has_attach			Whether the message has an attach associated. Defaults to false
-	 * @param	int		$timestamp			The timestamp of the message to insert, defaults to 0.
+	 * @param	string	$subject	The subject of the message.
+	 * @param	string	$body		The body of the message.
+	 * @param	int	$thread_id	The thread_id of the message, if known.
+	 * @param	int	$is_followup_to	The message_id of the parent message, if any.
+	 * @param	int	$user_id	The id of the user that is posting the message
+	 * @param	bool	$has_attach	Whether the message has an attach associated. Defaults to false
+	 * @param	int	$timestamp	The timestamp of the message to insert, defaults to 0.
 	 * @return	bool success.
 	 */
-	function insertmsg($subject, $body, $thread_id=0, $is_followup_to=0,
-					   $user_id, $has_attach=false, $timestamp=0) {
+	function insertmsg($subject, $body, $thread_id, $is_followup_to, $user_id, $has_attach = false, $timestamp = 0) {
 		if ($timestamp == 0){
 			$timestamp = time();
 		}
@@ -345,12 +344,12 @@ class ForumMessage extends FFError {
 	/**
 	 * create - use this function to create a new message in the database.
 	 *
-	 * @param	string	$subject		The subject of the message.
-	 * @param	string	$body			The body of the message.
-	 * @param	int		$thread_id		The thread_id of the message, if known.
-	 * @param	int		$is_followup_to	The message_id of the parent message, if any.
-	 * @param	bool	$has_attach		Whether the message has an attach associated. Defaults to false
-	 * @param	int		$timestamp		The timestamp of the message to create. Defaults to 0, meaning the timestamp used for this message will be "time()"
+	 * @param	string	$subject	The subject of the message.
+	 * @param	string	$body		The body of the message.
+	 * @param	int	$thread_id	The thread_id of the message, if known.
+	 * @param	int	$is_followup_to	The message_id of the parent message, if any.
+	 * @param	bool	$has_attach	Whether the message has an attach associated. Defaults to false
+	 * @param	int	$timestamp	The timestamp of the message to create. Defaults to 0, meaning the timestamp used for this message will be "time()"
 	 * @return	bool success.
 	 */
 	function create($subject, $body, $thread_id=0, $is_followup_to=0, $has_attach=false, $timestamp = 0) {
@@ -397,7 +396,7 @@ class ForumMessage extends FFError {
 	/**
 	 * fetchData - re-fetch the data for this forum_message from the database.
 	 *
-	 * @param	int	 $msg_id	The message ID.
+	 * @param	int	$msg_id	The message ID.
 	 * @return	bool	success.
 	 */
 	function fetchData($msg_id) {
@@ -415,7 +414,7 @@ class ForumMessage extends FFError {
 	/**
 	 * fetchModeratedData - re-fetch the data for this forum_message from the database, for pending messages
 	 *
-	 * @param	int	 The message ID.
+	 * @param	int	The message ID.
 	 * @return	bool	success.
 	 */
 	function fetchModeratedData($msg_id) {

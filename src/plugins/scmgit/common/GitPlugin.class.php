@@ -5,7 +5,7 @@
  * Copyright 2009, Roland Mas
  * Copyright 2009, Mehdi Dogguy <mehdi@debian.org>
  * Copyright 2013, Thorsten Glaser <t.glaser@tarent.de>
- * Copyright 2012-2014,2016-2018, Franck Villaume - TrivialDev
+ * Copyright 2012-2014,2016-2018,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -1234,7 +1234,7 @@ control over it to the project's administrator.");
 		}
 	}
 
-	function getCommits($project, $user = null, $nb_commits) {
+	function getCommits($project, $user, $nb_commits) {
 		$commits = array();
 		if ($project->usesPlugin($this->name) && forge_check_perm('scm', $project->getID(), 'read')) {
 			// Grab&parse commit log

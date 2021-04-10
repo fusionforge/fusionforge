@@ -6,7 +6,7 @@
  * Copyright 2010 (c) Fusionforge Team
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2014,2016-2017, Franck Villaume - TrivialDev
+ * Copyright 2014,2016-2017,2021, Franck Villaume - TrivialDev
  * Copyright 2016-2017, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
@@ -573,7 +573,7 @@ class ArtifactTypeHtml extends ArtifactType {
 	 * @param	string	$mode	Display mode (QUERY OR DISPLAY OR NEW)
 	 * @return	string	HTML template.
 	 */
-	function generateRenderHTML($types=array(), $mode) {
+	function generateRenderHTML($types, $mode) {
 		if ($mode == 'NEW') {
 			$efarr = $this->getExtraFields($types, false, false);
 		} else {

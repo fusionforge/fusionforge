@@ -808,7 +808,7 @@ some control over it to the project's administrator.");
 	}
 
 	// Get latest commits for inclusion in a widget
-	function getCommits($project, $user = null, $nbCommits) {
+	function getCommits($project, $user, $nbCommits) {
 		global $commits, $users, $adds, $updates, $messages, $times, $revisions, $deletes, $time_ok, $user_list, $last_message, $notimecheck, $xml_parser;
 		$commits = 0;
 		$users = array();
