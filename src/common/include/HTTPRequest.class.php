@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
+ * Copyright 2021, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -112,8 +113,7 @@ class HTTPRequest extends Codendi_Request {
 	}
 
 	/**
-	 * Get the value of $variable in $array. If magic_quotes are enabled, the
-	 * value is escaped.
+	 * Get the value of $variable in $array.
 	 *
 	 * @access private
 	 * @param string $variable Name of the parameter to get.
@@ -122,7 +122,7 @@ class HTTPRequest extends Codendi_Request {
 	 */
 	function _get($variable, $array) {
 		if ($this->_exist($variable, $array)) {
-			return (get_magic_quotes_gpc()?$this->_stripslashes($array[$variable]):$array[$variable]);
+			return $array[$variable];
 		} else {
 			return false;
 		}

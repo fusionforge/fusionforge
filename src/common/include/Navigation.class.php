@@ -3,7 +3,7 @@
  * FusionForge navigation
  *
  * Copyright 2009 - 2010, Olaf Lenz
- * Copyright 2011-2012,2016,2020, Franck Villaume - TrivialDev
+ * Copyright 2011-2012,2016,2020-2021, Franck Villaume - TrivialDev
  * Copyright 2014, Stéphane-Eymeric Bredthauer
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -126,13 +126,6 @@ class Navigation extends FFError {
 		global $words, $forum_id, $group_id, $group_project_id, $atid, $exact, $type_of_search, $HTML;
 
 		$res = "";
-		if (get_magic_quotes_gpc()) {
-			$defaultWords = stripslashes($words);
-		} else {
-			$defaultWords = $words;
-		}
-
-		$defaultWords = htmlspecialchars($defaultWords);
 
 		// if there is no search currently, set the default
 		if (!isset($type_of_search) ) {
@@ -168,7 +161,7 @@ class Navigation extends FFError {
 		foreach($parameters AS $name => $value) {
 			$res .= html_e('input', array('type' => 'hidden', 'value' => $value, 'name' => $name));
 		}
-		$res .= html_e('input', array('type' => 'text', 'size' => 12, 'id' => 'searchBox-words', 'name' => 'words', 'value' => $defaultWords, 'required' => 'required'));
+		$res .= html_e('input', array('type' => 'text', 'size' => 12, 'id' => 'searchBox-words', 'name' => 'words', 'value' => $words, 'required' => 'required'));
 		$res .= html_e('input', array('type' => 'submit', 'name' => 'Search', 'value' => _('Search')));
 
 		if (isset($group_id) && $group_id) {

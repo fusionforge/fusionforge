@@ -36,9 +36,6 @@
  * @return string  The argument with dangerous shell characters escaped.
  */
 function make_arg_cmd_safe($arg) {
-	if (get_magic_quotes_gpc()) {
-		$arg = stripslashes($arg);
-	}
 	return escapeshellcmd($arg);
 }
 

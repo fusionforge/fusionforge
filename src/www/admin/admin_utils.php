@@ -22,9 +22,6 @@
 
 function check_system() {
 	$result = array();
-	if (get_magic_quotes_gpc()) {
-		$result[] = 'Error: Your installation is running with PHP magic_quotes_gpc ON, please change to OFF';
-	}
 	if (ini_get('register_globals')) {
 		$result[] = 'Error: Your installation is running with PHP register_globals ON, this is very unsecure, please change to OFF';
 	}
