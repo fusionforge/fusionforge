@@ -1,4 +1,5 @@
 FusionForge 6.1.1:
+* Install System: add support for OpenSuSE Leap 15.x [#930] (Ralf Habacker)
 * Search Engine: fix PHP notice in SearchManager.class.php [#908] (TrivialDev)
 * Plugin Scmhook: fix scmhook commitEmail for scmhg broken [#903] (TrivialDev)
 * Plugin Scmhook: fix scmhook commitTracker [#911] (Florian Bruneau)
