@@ -109,7 +109,19 @@ class Theme_Funky extends Layout {
 		}
 
 		echo html_ao('header', array('role' => 'banner'));
+		
+		$skipToContent = _('Skip to content');
+		$skipToMenu = _('Skip to menu');
+		echo html_ao('a', array('href' => '#content', 'class' => 'skipLink'));
+		echo $skipToContent;
+		echo html_ac(html_ap() -1); // </a>
+		echo html_ao('a', array('href' => '#menu', 'class' => 'skipLink',
+		            'onclick' => 'checkMenu()'));
+		echo $skipToMenu;
+		echo html_ac(html_ap() -1); // </a>
+		
 		echo $this->listTableTop(array(), array(), 'fullwidth', 'header');
+		echo util_make_link('#', null, array('id' => 'menu', 'name' => 'menu'));
 		$cells = array();
 		$cells[] = array(util_make_link('/', html_image('/header/top-logo.png', null, null, array('alt'=>'FusionForge Home'))), 'id' => 'header-col1');
 		$items = $this->navigation->getUserLinks();
@@ -136,6 +148,7 @@ class Theme_Funky extends Layout {
 		echo html_ac(html_ap() -1); // </nav>
 		echo html_ac(html_ap() -1); // </header>
 
+		echo util_make_link('#', null, array('id' => 'content', 'name' => 'content'));
 		echo html_ao('main', array('id' => 'maindiv', 'role' => 'main'));
 		plugin_hook('message');
 
