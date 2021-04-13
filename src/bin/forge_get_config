@@ -65,12 +65,12 @@ if (count ($argv) == 3) {
 		echo "$v\n" ;
 	}
 } else {
-	echo "Usage: .../forge-get-config <variable> [ <section> ]
-For instance: .../forge-get-config web_host
-              .../forge-get-config repos_path scmsvn
+	echo "Usage: .../forge_get_config <variable> [ <section> ]
+For instance: .../forge_get_config web_host
+              .../forge_get_config repos_path scmsvn
 
-Or:           .../forge-get-config list-all-variables, for all variables
-              .../forge-get-config list-all-variables-values, for all variables and their values
+Or:           .../forge_get_config list-all-variables, for all variables
+              .../forge_get_config list-all-variables-values, for all variables and their values
 " ;
         exit (1) ;
 }

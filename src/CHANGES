@@ -14,6 +14,9 @@ FusionForge X.y:
 * Widget_HomeHallOfFame: new widget to display to most voted artifact, project, diary across the forge (TrivialDev)
 
 FusionForge 6.1.1:
+* Admin: fix sorting in full user list [#927] (Ralf Habacker)
+* Bin: add pluginList in forge cli [#928] (Ralf Habacker)
+* Bin: fix forge help pages [#929] (Ralf Habacker)
 * Install System: add support for OpenSuSE Leap 15.x [#930] (Ralf Habacker)
 * Search Engine: fix PHP notice in SearchManager.class.php [#908] (TrivialDev)
 * Plugin Scmhook: fix scmhook commitEmail for scmhg broken [#903] (TrivialDev)
