@@ -223,6 +223,26 @@ class Theme_Funky_Guy extends Layout {
 		echo html_ac(html_ap() -1);
 		plugin_hook('webanalytics_url');
 		echo html_ac(html_ap() -1);
+		
+		echo html_ao('div', array('id' => 'loader'));
+        echo html_ao('div');
+		echo html_ac(html_ap() -2); // </div>
+		echo html_ao('script');
+		echo '
+            var loader = document.getElementById("loader");
+            function loadSubmit(event) {
+                loader.style.top = "0";
+                loader.classList.add("loading");
+            }
+            var max = document.getElementsByTagName("FORM").length;
+            if( max > 0 ){
+                for (let i = 0 ; i < max ; i++){
+                    document.forms[i].addEventListener("submit", loadSubmit);
+                }
+            }
+        ';
+        echo html_ac(html_ap() -1);
+		
 		echo '</html>' . "\n";
 	}
 
