@@ -60,6 +60,8 @@ if (session_loggedin()) {
 	}
 }
 
+$bom = getIntFromRequest('bom', 0);
+$encoding = getStringFromRequest('encoding', 'UTF-8');
 $headers = getIntFromRequest('headers', $default['headers']);
 $full = getIntFromRequest('full', $default['full']);
 $sep = getFilteredStringFromRequest('sep', '/^[,;]$/', $default['sep']);
@@ -78,8 +80,8 @@ $format .= " using '".htmlentities($sep)."' as separator.";
 echo html_e('p', array(), _('This page allows you to export or import all the tasks using a CSV (<a href="http://en.wikipedia.org/wiki/Comma-separated_values">Comma Separated Values</a>) File. This format can be used to view tasks using Microsoft Excel.'));
 echo html_e('h2', array(), _('Export tasks as a CSV file'));
 
-echo html_e('strong', array(), _('Selected CSV Format')._(':')).' '.$format.' '.util_make_link('/pm/task.php?group_id='.$group_id.'&group_project_id='.$group_project_id.'&func=format_csv&sep='.$sep.'&full='.$full.'&headers='.$headers, _('(Change)'));
-echo html_e('p', array(), util_make_link('/pm/task.php?group_id='.$group_id.'&group_project_id='.$group_project_id.'&func=downloadcsv&sep='.$sep.'&full='.$full.'&headers='.$headers, _('Export CSV file')));
+echo html_e('strong', array(), _('Selected CSV Format')._(':')).' '.$format.' '.util_make_link('/pm/task.php?group_id='.$group_id.'&group_project_id='.$group_project_id.'&func=format_csv&sep='.$sep.'&full='.$full.'&headers='.$headers.'&bom='.$bom.'&encoding='.$encoding, _('(Change)'));
+echo html_e('p', array(), util_make_link('/pm/task.php?group_id='.$group_id.'&group_project_id='.$group_project_id.'&func=downloadcsv&sep='.$sep.'&full='.$full.'&headers='.$headers.'&bom='.$bom.'&encoding='.$encoding, _('Export CSV file')));
 
 echo html_e('h2', array(), _('Import tasks using a CSV file'));
 echo $HTML->openForm(array('enctype' => 'multipart/form-data', 'method' => 'post', 'action' => '/pm/task.php?group_project_id='.$group_project_id.'&group_id='.$group_id.'&func=postuploadcsv'));

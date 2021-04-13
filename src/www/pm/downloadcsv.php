@@ -82,6 +82,8 @@ dependenton5_linktype
 require_once $gfcommon.'include/User.class.php';
 require_once $gfcommon.'pm/ProjectTaskFactory.class.php';
 
+$bom = getIntFromRequest('bom', 0);
+$encoding = getStringFromRequest('encoding', 'UTF-8');
 $headers = getIntFromRequest('headers');
 $full = getIntFromRequest('full');
 $sep = getFilteredStringFromRequest('sep', '/^[,;]$/', ',');
@@ -181,20 +183,20 @@ $header = array(
 }
 
 if ($headers) {
-	echo join($sep, $header)."\n";
+	$s = join($sep, $header)."\n";
 }
 
 for ($i=0; $i<count($pt_arr); $i++) {
 
-	echo $pt_arr[$i]->getID().$sep.
+	$s .= $pt_arr[$i]->getID().$sep.
 		$pt_arr[$i]->getExternalID().$sep.
 		$pt_arr[$i]->getParentID().$sep.
 		$sep.
 		str_replace($arrRemove, ' ', $pt_arr[$i]->getSummary()).$sep;
 	if ($full) {
-		echo $pt_arr[$i]->getCategoryName().$sep;
+		$s .= $pt_arr[$i]->getCategoryName().$sep;
 	}
-	echo $pt_arr[$i]->getDuration().$sep.
+	$s .= $pt_arr[$i]->getDuration().$sep.
 		$pt_arr[$i]->getHours().$sep.
 		date('Y-m-d H:i:s',$pt_arr[$i]->getStartDate()).$sep.
 		date('Y-m-d H:i:s',$pt_arr[$i]->getEndDate()).$sep.
@@ -206,23 +208,35 @@ for ($i=0; $i<count($pt_arr); $i++) {
 		for ($j=0; $j<5; $j++) {
 			if ($j < count($users)) {
 				if ($users[$j]->getUnixName() != 'none') {
-					echo $users[$j]->getUnixName();
+					$s .= $users[$j]->getUnixName();
 				}
 			}
-			echo $sep;
+			$s .= $sep;
 		}
 
 		$dependentOn = $pt_arr[$i]->getDependentOn();
 		$keys=array_keys($dependentOn);
 		for ($j=0; $j<5; $j++) {
 			if ($j < count($keys)) {
-				echo $keys[$j].$sep.$sep.$dependentOn[$keys[$j]];
+				$s .= $keys[$j].$sep.$sep.$dependentOn[$keys[$j]];
 			} else {
-				echo $sep.$sep;
+				$s .= $sep.$sep;
 			}
 			if ($j<4) {
-				echo $sep;
+				$s .= $sep;
 			}
 		}
-	echo "\n";
+	$s .= "\n";
 }
+
+if ($bom) {
+	if ($encoding == 'UTF-16LE') {
+		echo "\xFF\xFE";
+	} elseif ($encoding == 'UTF-16BE') {
+		echo "\xFE\xFF";
+	} elseif ($encoding == 'UTF-8') {
+		echo "\xEF\xBB\xBF";
+	}
+}
+
+echo mb_convert_encoding($s, $encoding, "UTF-8");

@@ -51,6 +51,8 @@ global $HTML;
 
 pm_header(array('title'=>_('Update CSV Format'), 'modal'=>1, 'group_project_id'=>$group_project_id));
 
+$bom = getIntFromRequest('bom', 0);
+$encoding = getStringFromRequest('encoding', 'UTF-8');
 $headers = getIntFromRequest('headers', 1);
 $full = getIntFromRequest('full', 1);
 $sep = getStringFromRequest('sep', ',');
@@ -107,6 +109,39 @@ $sep = getStringFromRequest('sep', ',');
 					<input type="radio" id="none" name="headers" value="0"<?php if (!$headers) echo ' checked="checked"' ?> />
 					<label for="none">
 						<?php echo _('None'); ?>
+					</label>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<?php echo _('Encoding')._(':'); ?>
+				</td>
+				<td>
+					<input type="radio" id="utf8" name="encoding" value="UTF-8"<?php if ($encoding == 'UTF-8') echo ' checked="checked"' ?> />
+					<label for="utf8">
+						<?php echo _('UTF-8'); ?><br />
+					</label>
+					<input type="radio" id="utf16be" name="encoding" value="UTF-16BE"<?php if ($encoding == 'UTF-16BE') echo ' checked="checked"' ?> />
+					<label for="utf16be">
+						<?php echo _('UTF-16BE'); ?><br />
+					</label>
+					<input type="radio" id="utf16le" name="encoding" value="UTF-16LE"<?php if ($encoding == 'UTF-16LE') echo ' checked="checked"' ?> />
+					<label for="utf16le">
+						<?php echo _('UTF-16LE'); ?><br />
+					</label>
+					<input type="radio" id="1252" name="encoding" value="Windows-1252"<?php if ($encoding == 'Windows-1252') echo ' checked="checked"' ?> />
+					<label for="1252">
+						<?php echo _('Windows-1252'); ?><br />
+					</label>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				</td>
+				<td>
+					<input type="checkbox" id="bom" name="bom" value="1"<?php if ($bom) echo ' checked="checked"' ?> />
+					<label for="bom">
+						<?php echo _('Byte order mark'); ?><br />
 					</label>
 				</td>
 			</tr>
