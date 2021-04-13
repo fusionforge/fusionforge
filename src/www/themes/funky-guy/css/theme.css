@@ -876,8 +876,8 @@ input::-webkit-inner-spin-button { -webkit-appearance: none; }
 
 @media only screen and (max-width:1023px) {
 
-nav {
-	padding: 0 0 .3em 0;
+nav logo {
+	padding-bottom: .3em;
 }
 
 /* =hamburgerMenuOn */
