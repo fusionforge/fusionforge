@@ -113,6 +113,27 @@ hr {
 	height: 1px;
 }
 
+/* =skipLinks */
+header .skipLink {
+       top: -5em;
+       opacity: 0;
+       padding: 1.5em;
+       position: absolute;
+       z-index: 20;  
+       background-color: #F7F7F7;
+       border-left:1px solid #444;
+       border-right:1px solid #444;
+       border-bottom:1px solid #444;
+       border-bottom-left-radius: 6px;
+       border-bottom-right-radius: 6px;
+}
+
+header .skipLink:focus {
+       top: 0;
+       opacity: 1;
+       transition: all ease-out 0.3s;
+}
+
 /* =header */
 #header {
 	background: white url("../images/header/header-bg.png");

@@ -7,7 +7,7 @@
  * Copyright 2013-2014,2017, Franck Villaume - TrivialDev
  * Copyright 2014, Benoit Debaenst - TrivialDev
  * Copyright 2015, Roland Mas
- * Copyright 2021, Guy Morin
+ * Copyright 2021, Guy Morin - DGFiP
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -143,6 +143,21 @@ nav {
 	flex-wrap: wrap;
 	align-items: center;
 	margin: auto;
+}
+
+header .skipLink {
+	top: -5em;
+	opacity: 0;
+	padding: 1.5em;
+	position: absolute;
+	z-index: 20;
+	background-color: #21293C;
+}
+
+header .skipLink:focus {
+ 	top: 0;
+	opacity: 1;
+	transition: all ease-out 0.3s;
 }
 
 header div {
@@ -650,6 +665,57 @@ table.listing tbody tr:nth-child(odd),
 	text-align:center;
 }
 
+footer {
+	padding: 1.5em .5em .5em .5em;
+	background: #efefef;
+	border-top: 1px solid #ccc;
+	margin: 0;
+	text-align: center;
+	color: #dcdcdc;
+}
+
+footer img {
+	float: right;
+}
+
+/* loader */
+#loader {
+	display: flex;
+	background: #0006;
+	position: absolute;
+	top: -100%;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+}
+.loading  {
+	 opacity: 1 !important;
+	ransition: opacity ease-in 1s;
+}
+#loader div {
+	border: 8px solid #fff;
+	border-radius: 50%;
+	border-top: 8px solid #0000;
+	width: 60px;
+	height: 60px;
+	-webkit-animation: spin 2s linear infinite; /* Safari */
+	animation: spin 2s linear infinite;
+	margin: auto;
+	z-index: 20;
+}
+  
+/* Safari */
+@-webkit-keyframes spin {
+	0% { -webkit-transform: rotate(0deg); }
+	100% { -webkit-transform: rotate(360deg); }
+}
+ 
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+} 
+
 /* error_msg, warning_msg or feedback function
 ----------------------------------------------- */
 span.active, span.deleted, span.pending, span.suspended {
@@ -727,19 +793,6 @@ p.information {
 	text-shadow: 1px 1px #ff7c73;
 	color: black;
 	margin: 2px 3px 3px;
-}
-
-footer {
-	padding: 1.5em .5em .5em .5em;
-	background: #efefef;
-	border-top: 1px solid #ccc;
-	margin: 0;
-	text-align: center;
-	color: #dcdcdc;
-}
-
-footer img {
-	float: right;
 }
 
 .info-box h2{
@@ -861,6 +914,10 @@ input::-webkit-inner-spin-button { -webkit-appearance: none; }
 
 @media only screen and (max-width:1023px) {
 
+nav logo {
+	padding-bottom: .3em;
+}
+
 /* =hamburgerMenuOn */
 header nav label {
 	cursor: pointer;
@@ -873,12 +930,9 @@ div[role="search"] {
 }
 
 #userlinksdiv,
-#quicknav {
-	display: none;
-}
-
+#quicknav,
 #quicknavdiv {
-	padding: 0 1em .6em 0;
+	display: none;
 }
 
 #menudiv,
@@ -887,16 +941,21 @@ div[role="search"] {
 	width: 100%;
 }
 
-#menudiv input,
-#menudiv input:not(:checked) ~ #hamburgermenudiv {
-	display: none;
-	height: 0;
-	transition: all ease-in-out .9s;
-}
-
 #menudiv input:checked ~ #hamburgermenudiv {
 	display: block;
-	height: 100%;
+	height: auto;
+	max-height: 100vh;
+	opacity: 1;
+	visibility: visible;
+	transition: all ease-out .4s;
+}
+
+#menudiv input:not(:checked) ~ #hamburgermenudiv {
+	display: block;
+	height: 0;
+	max-height: 0;
+	opacity: 0;
+	visibility: hidden;
 }
 
 #hamburgermenudiv .tabGenerator {
@@ -926,10 +985,6 @@ div[role="search"] {
 #userlinkshamburgerdiv {
 	margin: 0;
 	width: 100%;
-}
-
-#userlinkshamburgerdiv ul {
-	flex-direction: column-reverse;
 }
 
 #userlinkshamburgerdiv li {
