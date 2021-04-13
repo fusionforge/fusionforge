@@ -57,6 +57,8 @@ if (session_loggedin()) {
 	}
 }
 
+$bom = getIntFromRequest('bom', 0);
+$encoding = getStringFromRequest('encoding', 'UTF-8');
 $headers = getIntFromRequest('headers', $default['headers']);
 $sep = getFilteredStringFromRequest('sep', '/^[,;]$/', $default['sep']);
 
@@ -121,8 +123,10 @@ $format .= _(' using ')."'".htmlentities($sep)."'"._(' as separator.');
 <?php
 echo $HTML->information(_('By default, export uses filter as setup in the browse page. To overwrite, please use Advanced Options'));
 echo html_e('h2', array(), _('Export as a CSV file'));
-echo html_e('strong', array(), _('Selected CSV Format')._(': ')).'CSV'.$format.' '.util_make_link($url.'&func=format_csv', $HTML->getConfigurePic(_('Modify this CSV format.')));
+echo html_e('strong', array(), _('Selected CSV Format')._(': ')).'CSV'.$format.' '.util_make_link($url.'&func=format_csv&encoding='.$encoding.'&bom='.$bom, $HTML->getConfigurePic(_('Modify this CSV format.')));
 echo $HTML->openForm(array('action' => $url.'&func=downloadcsv', 'method' => 'post'));
+echo html_e('input', array('type' => 'hidden', 'name' => 'bom', 'value' => $bom));
+echo html_e('input', array('type' => 'hidden', 'name' => 'encoding', 'value' => $encoding));
 echo html_ao('fieldset', array('id' => 'fieldset1_closed', 'class' => 'coolfieldset'));
 echo html_e('legend', array(), _('Advanced Options'));
 echo html_ao('div');

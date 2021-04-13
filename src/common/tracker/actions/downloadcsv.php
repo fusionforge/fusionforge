@@ -42,6 +42,8 @@ sysdebug_off();
 header('Content-type: text/csv');
 header('Content-disposition: filename="trackers-'.date('Y-m-d-His').'.csv"');
 
+$bom = getIntFromRequest('bom', 0);
+$encoding = getStringFromRequest('encoding', 'UTF-8');
 $offset = getStringFromRequest('offset');
 $_sort_col = getStringFromRequest('_sort_col');
 $_sort_ord = getStringFromRequest('_sort_ord');
@@ -66,7 +68,7 @@ $af->setup($offset, $_sort_col, $_sort_ord, $max_rows, $set, $_assigned_to, $_st
 $at_arr = $af->getArtifacts();
 
 if ($headers) {
-	echo 'artifact_id'.$sep.
+	$s = 'artifact_id'.$sep.
 		'status_id'.$sep.
 		'status_name'.$sep.
 		'priority'.$sep.
@@ -91,12 +93,12 @@ if ($headers) {
 	$keys = array_keys($ef);
 	for ($i = 0; $i < count($keys); $i++) {
 		if ($ef[$keys[$i]]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_EFFORT) {
-			echo $sep.'"'.'effort_unit for '.$ef[$keys[$i]]['field_name'].'"';
+			$s .= $sep.'"'.'effort_unit for '.$ef[$keys[$i]]['field_name'].'"';
 		}
-		echo $sep.'"'.$ef[$keys[$i]]['field_name'].'"';
+		$s .= $sep.'"'.$ef[$keys[$i]]['field_name'].'"';
 	}
-	echo $sep.'comments';
-	echo "\n";
+	$s .= $sep.'comments';
+	$s .= "\n";
 }
 
 for ($i = 0; $i < count($at_arr); $i++) {
@@ -106,7 +108,7 @@ for ($i = 0; $i < count($at_arr); $i++) {
 	$close_date  = $at_arr[$i]->getCloseDate()? date(_('Y-m-d H:i'),$at_arr[$i]->getCloseDate()): '';
 
 	$votes = $at_arr[$i]->getVotes();
-	echo $at_arr[$i]->getID().$sep.
+	$s .= $at_arr[$i]->getID().$sep.
 		$at_arr[$i]->getStatusID().$sep.
 		'"'.$at_arr[$i]->getStatusName().'"'.$sep.
 		$at_arr[$i]->getPriority().$sep.
@@ -140,12 +142,12 @@ for ($i = 0; $i < count($at_arr); $i++) {
 					$unittexts = $unit->getName();
 				}
 			}
-			echo $sep.'"'.fix4csv($unittexts).'"';
+			$s .= $sep.'"'.fix4csv($unittexts).'"';
 			$value = $effortUnitFactory->encodedToValue($efd_pair['value']);
 		} else {
 			$value = $efd_pair["value"];
 		}
-		echo $sep.'"'.fix4csv($value).'"';
+		$s .= $sep.'"'.fix4csv($value).'"';
 	}
 
 	// Include comments
@@ -159,9 +161,21 @@ for ($i = 0; $i < count($at_arr); $i++) {
 		$body = str_replace(array("\r\n", "\r", "\n", PHP_EOL, chr(10), chr(13), chr(10).chr(13)), " ~ ", $body);
 		$comments .= ' *** '.$date.' --- '.$realname.' --- '.$body;
 	}
-	echo $sep.'"'.fix4csv($comments).'"';
-	echo "\n";
+	$s .= $sep.'"'.fix4csv($comments).'"';
+	$s .= "\n";
 }
+
+if ($bom) {
+	if ($encoding == 'UTF-16LE') {
+		echo "\xFF\xFE";
+	} elseif ($encoding == 'UTF-16BE') {
+		echo "\xFE\xFF";
+	} elseif ($encoding == 'UTF-8') {
+		echo "\xEF\xBB\xBF";
+	}
+}
+
+echo mb_convert_encoding($s, $encoding, "UTF-8");
 
 function fix4csv($value) {
 	$value = util_unconvert_htmlspecialchars($value);
