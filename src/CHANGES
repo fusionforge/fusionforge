@@ -6,6 +6,7 @@ FusionForge X.y:
 * Forum: fix behavior [#897] (DGFiP/Guy Morin)
 * Plugin Hudson/Jenkins: display link in public area widget [#889] (TrivialDev)
 * Theme: new funky-guy, support responsive menu (DGFiP/Guy Morin)
+* Tracker: Support encoding selection for export [#321] (Ralf Habacker)
 * User: followers/following mechanism (TrivialDev)
 * Utils: crossref, support diary [Nxxx] and Project [Pxxx] (TrivialDev)
 * Widget HomeLatestDiaryNotes: new widget for Forge home page to display 5 latest public Diary Notes across the forge (TrivialDev)
