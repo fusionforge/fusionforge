@@ -1894,40 +1894,40 @@ class Artifact extends FFObject {
 		$body = $this->ArtifactType->Group->getUnixName() . '-' . $name .' '. $this->getStringID();
 
 		if ($type == 1) {
-			$body .= ' was opened at '.date('Y-m-d H:i', $this->getOpenDate());
+			$body .= sprintf(_(" was opened at %s"), date('Y-m-d H:i', $this->getOpenDate()));
 		} elseif ($type == 3) {
-			$body .= ' was deleted at '.date('Y-m-d H:i', time());
+			$body .= sprintf(_(" was deleted at %s"), date('Y-m-d H:i', time()));
 		} else {
-			$body .= ' was changed at '.date('Y-m-d H:i', $tm);
+			$body .= sprintf(_(" was changed at %s"), date('Y-m-d H:i', $tm));
 		}
 		if ($sess) {
-			$body .= ' by ' . $sess->getRealName();
+			$body .= _(' by ') . $sess->getRealName();
 		}
 
 		if ($type == 1 || $type == 2) {
-			$body .= "\nYou can respond by visiting: ".
+			$body .= "\n"._("You can respond by visiting: ").
 				"\n".util_make_url($this->getPermalink());
 			if (false) {  // currently not working
 				$body .=
-				"\nOr by replying to this e-mail entering your response between the following markers: ".
-				"\n".ARTIFACT_MAIL_MARKER.
+				sprintf(_("\nOr by replying to this e-mail entering your response between the following markers: ".
+				"\n%1$s".
 				"\n(enter your response here, only in plain text format)".
-				"\n".ARTIFACT_MAIL_MARKER;
+				"\n%1$s"), ARTIFACT_MAIL_MARKER, ARTIFACT_MAIL_MARKER);
 			}
 			$body .= "\n";
 		}
 
 		$body .= "\n".$this->marker('status',$changes).
-			 "Status: ". $this->getStatusName() ."\n".
+			 _("Status: "). $this->getStatusName() ."\n".
 			$this->marker('priority',$changes).
-			 "Priority: ". $this->getPriority() ."\n".
-			"Submitted By: ". $this->getSubmittedRealName() .
+			_("Priority: "). $this->getPriority() ."\n".
+			_("Submitted By: "). $this->getSubmittedRealName() .
 			" (". $this->getSubmittedUnixName(). ")"."\n".
 			$this->marker('assigned_to',$changes).
-			 "Assigned to: ". $this->getAssignedRealName() .
+			_("Assigned to: "). $this->getAssignedRealName() .
 			 " (". $this->getAssignedUnixName(). ")"."\n".
 			$this->marker('summary',$changes).
-			 "Summary: ". util_unconvert_htmlspecialchars($this->getSummary())." \n";
+			_("Summary: "). util_unconvert_htmlspecialchars($this->getSummary())." \n";
 
 		// Now display the extra fields
 		$efd = $this->getExtraFieldDataText();
@@ -1971,7 +1971,7 @@ class Artifact extends FFObject {
 			}
 		}
 
-		$body .= "\n\nInitial Comment:".
+		$body .= "\n\n"._("Initial Comment:").
 			"\n".util_unconvert_htmlspecialchars($this->getDetails()) .
 			"\n\n----------------------------------------------------------------------";
 
@@ -2001,9 +2001,9 @@ class Artifact extends FFObject {
 					if ($i == 0) {
 						$body .= $this->marker('details',$changes);
 					}
-					$body .= "Comment By: ". db_result($result2,$i,'realname') . " (".db_result($result2,$i,'user_name').")".
-					"\nDate: ". date(_('Y-m-d H:i'),db_result($result2,$i,'adddate')).
-					"\n\nMessage:".
+					$body .= _("Comment By: "). db_result($result2,$i,'realname') . " (".db_result($result2,$i,'user_name').")".
+						"\n"._("Date: "). date(_('Y-m-d H:i'),db_result($result2,$i,'adddate')).
+						"\n\n"._("Message:").
 					"\n".util_unconvert_htmlspecialchars(db_result($result2,$i,'body')).
 					"\n\n----------------------------------------------------------------------";
 				}
@@ -2011,7 +2011,7 @@ class Artifact extends FFObject {
 
 		}
 
-		$body .= "\n\nYou can respond by visiting: ".
+		$body .= "\n\n"._("You can respond by visiting: ").
 			"\n".util_make_url($this->getPermalink());
 
 		//only send if some recipients were found
