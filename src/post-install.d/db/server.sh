@@ -36,7 +36,7 @@ case "$1" in
 		fi
 		if [ -e /etc/os-release ]; then
 			service postgresql start  # creates initial db
-			chkconfig postgresql on
+			systemctl enable postgresql || chkconfig postgresql on
 		fi
 
 		pg_hba=$(ls /etc/postgresql/*/*/pg_hba.conf /var/lib/pgsql/data/pg_hba.conf 2>/dev/null | tail -1)
