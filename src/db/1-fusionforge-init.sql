@@ -7772,7 +7772,7 @@ CREATE TABLE artifact_workflow_event
 	REFERENCES artifact_extra_field_list (group_artifact_id, extra_field_id) MATCH SIMPLE
 	ON UPDATE NO ACTION ON DELETE CASCADE
 )
-WITH OIDS;
+;
 -- ALTER TABLE artifact_workflow_event OWNER TO gforge;
 
 -- Index: artifact_workflow_event_index
@@ -7795,7 +7795,7 @@ CREATE TABLE artifact_workflow_roles
       REFERENCES artifact_workflow_event (event_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE CASCADE
 )
-WITH OIDS;
+;
 -- ALTER TABLE artifact_workflow_roles OWNER TO gforge;
 
 
@@ -7810,7 +7810,7 @@ CREATE TABLE artifact_workflow_notify
       REFERENCES artifact_workflow_event (event_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE CASCADE
 )
-WITH OIDS;
+;
 -- ALTER TABLE artifact_workflow_notify OWNER TO gforge;
 
 

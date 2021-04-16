@@ -16,7 +16,7 @@ CREATE TABLE roadmap
   is_default integer,
   CONSTRAINT roadmap_pkey PRIMARY KEY (roadmap_id)
 )
-WITH OIDS;
+;
 
 CREATE TABLE roadmap_list
 (
@@ -27,6 +27,6 @@ CREATE TABLE roadmap_list
       REFERENCES roadmap (roadmap_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 )
-WITH OIDS;
+;
 
 
