@@ -109,7 +109,7 @@ class Theme_Funky extends Layout {
 		}
 
 		echo html_ao('header', array('role' => 'banner'));
-		
+
 		$skipToContent = _('Skip to content');
 		$skipToMenu = _('Skip to menu');
 		echo html_ao('a', array('href' => '#content', 'class' => 'skipLink'));
@@ -119,7 +119,7 @@ class Theme_Funky extends Layout {
 		            'onclick' => 'checkMenu()'));
 		echo $skipToMenu;
 		echo html_ac(html_ap() -1); // </a>
-		
+
 		echo $this->listTableTop(array(), array(), 'fullwidth', 'header');
 		echo util_make_link('#', null, array('id' => 'menu', 'name' => 'menu'));
 		$cells = array();

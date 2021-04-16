@@ -127,7 +127,7 @@ class Theme_Funky_Guy extends Layout {
 
 		echo html_ao('header', array('role' => 'banner'));
 		echo html_ao('nav', array('role' => 'navigation'));
-		
+
 		$skipToContent = _('Skip to content');
 		$skipToMenu = _('Skip to menu');
 		echo html_ao('a', array('href' => '#content', 'class' => 'skipLink'));
@@ -137,7 +137,7 @@ class Theme_Funky_Guy extends Layout {
 			'onclick' => 'checkMenu()'));
 		echo $skipToMenu;
 		echo html_ac(html_ap() -1); // </a>
-		
+
 		echo $this->hamburgerButton();
 		echo html_ao('logo');
 		echo util_make_link('/', html_image('header/header-logo.png', null, null, array('alt'=>'FusionForge Home', 'height'=>'40')));
@@ -153,7 +153,7 @@ class Theme_Funky_Guy extends Layout {
 		$params['links'] = &$links;
 		plugin_hook('headermenu', $params);
 		$template = isset($params['template']) ? $params['template'] : null;
-		
+
 		echo html_ao('div', array('id' => 'userlinksdiv'));
 		echo html_ao('ul');
 		echo implode($template, $links);
@@ -173,7 +173,7 @@ class Theme_Funky_Guy extends Layout {
 		echo html_ac(html_ap() -1); // </ul>
 		echo html_ac(html_ap() -1); // </div> #userlinkhamburgerdiv
 		echo html_ac(html_ap() -1); // </div> #menudiv
-		
+
 		echo $this->quickNav();
 		echo '<!-- inner tabs -->' . "\n";
 		echo html_ao('div', array('class' => 'innertabs'));
@@ -186,7 +186,7 @@ class Theme_Funky_Guy extends Layout {
 		echo html_ac(html_ap() -2); // </header>
 
 		echo util_make_link('#', null, array('id' => 'content', 'name' => 'content'));
-		
+
 		echo html_ao('main', array('id' => 'maindiv', 'role' => 'main'));
 		plugin_hook('message');
 
@@ -223,7 +223,7 @@ class Theme_Funky_Guy extends Layout {
 		echo html_ac(html_ap() -1);
 		plugin_hook('webanalytics_url');
 		echo html_ac(html_ap() -1);
-		
+
 		echo html_ao('div', array('id' => 'loader'));
         echo html_ao('div');
 		echo html_ac(html_ap() -2); // </div>
@@ -242,7 +242,7 @@ class Theme_Funky_Guy extends Layout {
             }
         ';
         echo html_ac(html_ap() -1);
-		
+
 		echo '</html>' . "\n";
 	}
 
