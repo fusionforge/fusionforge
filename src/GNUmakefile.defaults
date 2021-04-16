@@ -43,7 +43,7 @@ INSTALL=install
 CP_R=cp -r --preserve=timestamps
 
 # Hard-coded detection of distro-specific Apache configuration
-apache_user=$(shell if [ -e /etc/redhat-release ]; then echo 'apache'; elif [ -e /etc/os-release ]; then echo 'wwwrun'; else echo 'www-data'; fi)
-apache_group=$(shell if [ -e /etc/redhat-release ]; then echo 'apache'; elif [ -e /etc/os-release ]; then echo 'www'; else echo 'www-data'; fi)
+apache_user=$(shell if [ -e /etc/redhat-release ]; then echo 'apache'; elif [ -e /etc/debian_version ]; then echo 'www-data'; elif [[ ! -z `cat /etc/os-release | grep "SUSE"` ]]; then echo 'wwwrun'; else echo 'apache'; fi)
+apache_group=$(shell if [ -e /etc/redhat-release ]; then echo 'apache'; elif [ -e /etc/debian_version ]; then echo 'www-data'; elif [[ ! -z `cat /etc/os-release| grep "SUSE"` ]]; then echo 'www'; else echo 'apache'; fi)
 apache_service=$(shell if [ -e /etc/redhat-release ]; then echo 'httpd'; else echo 'apache2'; fi)
-ssh_service=$(shell if [ -e /etc/redhat-release ]; then echo 'sshd'; elif [ -e /etc/os-release ]; then echo 'sshd'; else echo 'ssh'; fi)
+ssh_service=$(shell if [ -e /etc/debian_version ]; then echo 'ssh'; else echo 'sshd'; fi)

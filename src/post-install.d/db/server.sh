@@ -34,7 +34,7 @@ case "$1" in
 			fi
 			chkconfig postgresql on
 		fi
-		if [ -e /etc/os-release ]; then
+		if [[ ! -z `cat /etc/os-release | grep "SUSE"` ]]; then
 			service postgresql start  # creates initial db
 			chkconfig postgresql on
 		fi
