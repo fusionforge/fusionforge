@@ -119,7 +119,7 @@ case "$1" in
 		if [ -x /usr/sbin/a2enmod ]; then
 			a2enmod version 2>/dev/null || true  # opensuse..
 			a2enmod macro
-			if [ -e /etc/os-release ]; then
+			if [[ ! -z `cat /etc/os-release | grep "SUSE"` ]]; then
 				a2enmod php7
 				a2enmod mpm_itk
 				a2enmod mod_access_compat

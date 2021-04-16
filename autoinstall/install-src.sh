@@ -4,7 +4,7 @@
 # Copyright (C) 2011, 2019, Roland Mas
 # Copyright (C) 2011, Olivier Berger - Institut Telecom
 # Copyright (C) 2014, Inria (Sylvain Beucler)
-# Copyright 2017,2019, Franck Villaume - TrivialDev
+# Copyright 2017,2019,2021 Franck Villaume - TrivialDev
 #
 # This file is part of FusionForge. FusionForge is free software;
 # you can redistribute it and/or modify it under the terms of the
@@ -82,7 +82,7 @@ if [ -e /etc/debian_version ]; then
 	if ! dpkg-vendor --is Ubuntu; then
 		apt-get install locales-all  # https://bugs.launchpad.net/ubuntu/+source/glibc/+bug/1394929
 	fi
-elif [ -e /etc/os-release ]; then
+elif [[ ! -z `cat /etc/os-release | grep 'SUSE'` ]]; then
 	suse_check_release
 	suse_install_repos
 	suse_install_rpms make gettext-runtime php7 php7-gettext php7-posix php7-pgsql \

@@ -4,7 +4,7 @@
 if [ -e /etc/debian_version ]; then
     aptitude update
     aptitude -y dist-upgrade
-elif [ -e /etc/os-release ]; then
+elif [[ ! -z `cat /etc/os-release | grep "SUSE"` ]]; then
     zypper update -y
 else
     yum upgrade

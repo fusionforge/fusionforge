@@ -34,9 +34,9 @@ case "$1" in
 			fi
 			chkconfig postgresql on
 		fi
-		if [ -e /etc/os-release ]; then
+		if [[ ! -z `cat /etc/os-release | grep "SUSE"` ]]; then
 			service postgresql start  # creates initial db
-			systemctl enable postgresql || chkconfig postgresql on
+			chkconfig postgresql on
 		fi
 
 		pg_hba=$(ls /etc/postgresql/*/*/pg_hba.conf /var/lib/pgsql/data/pg_hba.conf 2>/dev/null | tail -1)

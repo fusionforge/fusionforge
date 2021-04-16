@@ -200,7 +200,7 @@ if [ -e /etc/debian_version ]; then
     build_deb
 elif [ -e /etc/redhat-release ]; then
     build_rpm
-elif [ -e /etc/os-release ]; then
+elif [[ ! -z `cat /etc/os-release | grep 'SUSE'` ]]; then
     build_suse_rpm
 else
     echo "Automated package building is not supported for this distribution."
