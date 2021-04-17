@@ -42,11 +42,7 @@ function util_gen_cross_ref($text, $group_id = 0) {
 	$text = preg_replace_callback('/\[\#(\d+)\]/', function($matches) {return _artifactid2url($matches[1]);}, $text);
 
 	// Handle FusionForge [Tnnn] Syntax => links to task.
-<<<<<<< HEAD
-	$text = preg_replace_callback('/\[\T(\d+)\]/', function($matches) {return _taskid2url($matches[1],'.$group_id.');}, $text);
-=======
-	$text = preg_replace_callback('/\[T(\d+)\]/', create_function('$matches', 'return _taskid2url($matches[1],'.$group_id.');'), $text);
->>>>>>> 6.1
+	$text = preg_replace_callback('/\[T(\d+)\]/', function($matches) {return _taskid2url($matches[1],'.$group_id.');}, $text);
 
 	// Handle [wiki:<pagename>] syntax
 	$text = preg_replace_callback('/\[wiki:(.*?)\]/', function($matches) {return _page2url('.$group_id.',$matches[1]);}, $text);
