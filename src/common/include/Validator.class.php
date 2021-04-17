@@ -3,6 +3,7 @@
  * FusionForge field validator
  *
  * Copyright 2002, GForge, LLC
+ * Copyright 2021, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -34,7 +35,7 @@
 *
 */
 class Validator {
-	var $badfields;
+	var $badfields = array();
 
 	/**
 	* Checks to see if a field is null; if so, the field name is added to an internal array
