@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) Alcatel-Lucent
  * Copyright 2009, Roland Mas
- * Copyright 2014-2016,2019, Franck Villaume - TrivialDev
+ * Copyright 2014-2016,2019,2021, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -42,7 +42,11 @@ function util_gen_cross_ref($text, $group_id = 0) {
 	$text = preg_replace_callback('/\[\#(\d+)\]/', function($matches) {return _artifactid2url($matches[1]);}, $text);
 
 	// Handle FusionForge [Tnnn] Syntax => links to task.
+<<<<<<< HEAD
 	$text = preg_replace_callback('/\[\T(\d+)\]/', function($matches) {return _taskid2url($matches[1],'.$group_id.');}, $text);
+=======
+	$text = preg_replace_callback('/\[T(\d+)\]/', create_function('$matches', 'return _taskid2url($matches[1],'.$group_id.');'), $text);
+>>>>>>> 6.1
 
 	// Handle [wiki:<pagename>] syntax
 	$text = preg_replace_callback('/\[wiki:(.*?)\]/', function($matches) {return _page2url('.$group_id.',$matches[1]);}, $text);
