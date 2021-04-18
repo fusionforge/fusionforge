@@ -8,6 +8,7 @@
  * Copyright (C) 2010-2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2013, French Ministry of National Education
  * Copyright 2013-2016, Franck Villaume - TrivialDev
+ * Copyright 2021, Guy Morin - French Ministry of Finances, DGFiP
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
