@@ -96,7 +96,7 @@ if ($usingplugin) {
 	$qpa = db_construct_qpa($qpa, ' GROUP BY group_name,register_time,unix_group_name,groups.group_id,groups.is_template,status,license_name ORDER BY '.$sqlsortorder);
 	$qpa = db_construct_qpa($qpa, ' OFFSET $1 LIMIT $2', array($start, $paging));
 	$res = db_query_qpa($qpa);
-	$totalProjects = FusionForge::getInstance()->getNumberOfProjects($status);
+	$totalProjects = FusionForge::getInstance()->getNumberOfProjects(array($status));
 }
 
 $rows = array();
