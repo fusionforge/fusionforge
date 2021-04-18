@@ -155,7 +155,7 @@ if (getStringFromRequest('submit')) {
 			}
 
 			if (!$group->approve($u)) {
-				echo $HTML->error_msg(sprintf(_('Approval Error: %s'), $group->getErrorMessage()));
+				echo $HTML->error_msg(_('Approval Error')._(': '), $group->getErrorMessage());
 			} else {
 				echo '<p>';
 				echo _('Your project has been automatically approved. You should receive an email containing further information shortly.');
