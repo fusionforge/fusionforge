@@ -949,12 +949,13 @@ control over it to the project's administrator.");
 	 */
 	function myPageBox($params) {
 		global $gfplugins;
-		$user = UserManager::instance()->getCurrentUser();
 		require_once 'common/widget/WidgetLayoutManager.class.php';
 		if ($params['widget'] == 'plugin_scmgit_user_myrepositories') {
 			require_once $gfplugins.$this->name.'/common/scmgit_Widget_MyRepositories.class.php';
+			$user = UserManager::instance()->getCurrentUser();
 			$params['instance'] = new scmgit_Widget_MyRepositories(WidgetLayoutManager::OWNER_TYPE_USER, $user->getId());
 		} elseif ($params['widget'] == 'plugin_scmgit_user_userrepositories') {
+			global $user; #TODO: do not rely on global var.
 			require_once $gfplugins.$this->name.'/common/scmgit_Widget_UserRepositories.class.php';
 			$params['instance'] = new scmgit_Widget_UserRepositories(WidgetLayoutManager::OWNER_TYPE_USERHOME, $user->getId());
 		}
