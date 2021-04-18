@@ -28,6 +28,7 @@
 require_once $gfcommon.'include/FFError.class.php';
 include_once $gfcommon.'include/TextSanitizer.class.php'; // for parsing the mail body
 include_once $gfcommon.'include/User.class.php';
+include_once $gfcommon.'forum/ForumHTML.class.php';
 
 class ForumMessage extends FFError {
 
