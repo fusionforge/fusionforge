@@ -5,7 +5,7 @@ source_path=$(forge_get_config source_path)
 data_path=$(forge_get_config data_path)
 plugindir=$(forge_get_config plugins_path)/mediawiki
 
-mediawikidir=$(find /usr/share -type d -name 'mediawiki' | grep -E -v 'doc|extensions|resources')
+mediawikidir=$(find /usr/share -type d -name 'mediawiki' | grep -E -v 'doc|extensions|resources|vendor')
 # Debian: /usr/share/mediawiki/
 # CentOS7: /usr/share/mediawiki123/
 # OpenSUSE Leap 15: /usr/share/php/mediawiki/
