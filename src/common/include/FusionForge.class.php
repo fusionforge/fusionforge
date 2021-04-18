@@ -64,7 +64,7 @@ class FusionForge extends FFError {
 	 */
 	function getNumberOfProjects($params = array(), $extended_qpa = null) {
 		$qpa = db_construct_qpa(false, 'SELECT count(*) AS count FROM groups');
-		if (count($params) > 1) {
+		if (is_array($params) && count($params) > 1) {
 			$qpa = db_construct_qpa($qpa, ' WHERE ');
 			$i = 0;
 			foreach ($params as $key => $value) {
