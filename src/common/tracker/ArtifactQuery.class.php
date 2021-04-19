@@ -7,6 +7,7 @@
  * Copyright 2009, Roland Mas
  * Copyright 2009, Alcatel-Lucent
  * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
+ * Copyright 2021, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -521,7 +522,10 @@ class ArtifactQuery extends FFError {
 	 * @return	int	The id #.
 	 */
 	function getID() {
-		return $this->data_array['artifact_query_id'];
+		if (isset($this->data_array['artifact_query_id'])) {
+			return $this->data_array['artifact_query_id'];
+		}
+		return null;
 	}
 
 	/**
@@ -530,7 +534,10 @@ class ArtifactQuery extends FFError {
 	 * @return	string	The name.
 	 */
 	function getName() {
-		return $this->data_array['query_name'];
+		if (isset($this->data_array['query_name'])) {
+			return $this->data_array['query_name'];
+		}
+		return '';
 	}
 
 	/**
@@ -548,7 +555,10 @@ class ArtifactQuery extends FFError {
 	 * @return	string	type of query (0: private, 1: project, 2: project&default)
 	 */
 	function getQueryType() {
-		return $this->data_array['query_type'];
+		if (isset($this->data_array['query_type'])) {
+			return $this->data_array['query_type'];
+		}
+		return null;
 	}
 
 	/**
@@ -769,8 +779,8 @@ class ArtifactQuery extends FFError {
 	 * @param	string		$last_modifier
 	 * @return	bool		success.
 	 */
-	function update($name,$status,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange='',$closedaterange='',
-		$summary,$description,$followups,$query_type=0,$query_options=array(),$submitter='',$last_modifier='') {
+	function update($name, $status, $assignee, $moddaterange, $sort_col, $sort_ord, $extra_fields, $opendaterange = '', $closedaterange = '',
+		$summary = '', $description = '', $followups = '', $query_type = 0, $query_options = array(), $submitter = '', $last_modifier = '') {
 		if (!$name) {
 			$this->setMissingParamsError();
 			return false;
