@@ -27,8 +27,10 @@ class PluginMediawiki extends FForge_SeleniumTestCase
 	protected $alreadyActive = 0;
 	public $fixture = 'projecta';
 
-	function testMediawiki()
-	{
+	function testMediawiki() {
+		$this->skip_on_src_installs();
+		$this->skip_on_deb_installs();
+
 		$this->loadAndCacheFixture();
 
 		$this->changeConfig(array("mediawiki" => array("unbreak_frames" => "yes")));
