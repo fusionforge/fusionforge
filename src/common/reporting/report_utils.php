@@ -878,7 +878,7 @@ function report_actgraph($type, $SPAN, $start, $end, $id, $area) {
 	return true;
 }
 
-function report_toolspiegraph($datatype = 0, $start, $end) {
+function report_toolspiegraph($datatype, $start, $end) {
 	global $HTML;
 	$now = time() - 60*60*24; // 1 day
 	if ($now < $end) {
@@ -982,7 +982,7 @@ function report_toolspiegraph($datatype = 0, $start, $end) {
 	}
 }
 
-function report_timegraph($type = 'site', $area = 'tasks', $start, $end, $id = 0) {
+function report_timegraph($type, $area, $start, $end, $id = 0) {
 	global $pie_labels, $pie_vals;
 	global $HTML;
 
