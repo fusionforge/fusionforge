@@ -57,15 +57,6 @@ class HTTPRequest extends Codendi_Request {
 	}
 
 	/**
-	 * Return true if browser used to submit the request is netscape 4.
-	 *
-	 * @return bool
-	 */
-	function browserIsNetscape4() {
-		return browser_is_netscape4();
-	}
-
-	/**
 	 * Singleton method for the class.
 	 *
 	 * @return mixed HTTPRequest Object.
