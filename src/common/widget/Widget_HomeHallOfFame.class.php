@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2020, Franck Villaume - TrivialDev
+ * Copyright 2020-2021, Franck Villaume - TrivialDev
  * This file is a part of Fusionforge.
  *
  * Fusionforge is free software; you can redistribute it and/or modify
@@ -82,7 +82,7 @@ class Widget_HomeHallOfFame extends Widget {
 		return false;
 	}
 
-	function updatePreferences(&$request) {
+	function updatePreferences() {
 		$request->valid(new Valid_String('cancel'));
 		$vShow = new Valid_WhiteList('show', array('P', 'D', 'A', 'PA', 'PD', 'DA', 'PDA'));
 		$vShow->required();

@@ -162,7 +162,9 @@ function ffOutputHandler($buffer) {
 	    '<a href="javascript:toggle_ffErrors();">Click to toggle</a>' .
 	    "\n<div id=\"ffErrorsBlock\">";
 
-	if (!($doctype = util_ifsetor($HTML->doctype))) {
+	if (isset($HTML->doctype)) {
+		$doctype = $HTML->doctype;
+	} else {
 		$doctype = 'transitional';
 	}
 

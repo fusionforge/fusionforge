@@ -25,101 +25,87 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/preplugins.php';
 require_once $gfcommon.'include/plugins_utils.php';
 require_once $gfcommon.'widget/WidgetLayoutManager.class.php';
-require_once $gfcommon.'widget/Valid_Widget.class.php';
 
 html_use_jquery();
 use_javascript('/widgets/scripts/LayoutController.js');
 
-$hp = Codendi_HTMLPurifier::instance();
-
 if (session_loggedin()) {
-
-	$request =& HTTPRequest::instance();
 	$lm = new WidgetLayoutManager();
-	$vLayoutId = new Valid_UInt('layout_id');
-	$vLayoutId->required();
-	if ($request->valid($vLayoutId)) {
-		$layout_id = $request->get('layout_id');
-		$vOwner = new Valid_Widget_Owner('owner');
-		$vOwner->required();
-		if ($request->valid($vOwner)) {
-			$owner = $request->get('owner');
-			$owner_id   = (int)substr($owner, 1);
-			$owner_type = substr($owner, 0, 1);
-			switch($owner_type) {
-				case WidgetLayoutManager::OWNER_TYPE_USER:
-					if ($owner_id == user_getid()) {
-						$userm = UserManager::instance();
-						$current = $userm->getCurrentUser();
-						site_user_header(array('title'=>sprintf(_('Personal Page for %s'), user_getname())));
-						$lm->displayAvailableWidgets(user_getid(), WidgetLayoutManager::OWNER_TYPE_USER, $layout_id);
-						site_footer();
-					}
-					break;
-				case WidgetLayoutManager::OWNER_TYPE_GROUP:
-					$pm = ProjectManager::instance();
-					if ($project = $pm->getProject($owner_id)) {
-						$group_id = $owner_id;
-						$_REQUEST['group_id'] = $_GET['group_id'] = $group_id;
-						$request->params['group_id'] = $group_id; //bad!
-						if (forge_check_perm('project_admin', $group_id) ||
-							forge_check_global_perm('forge_admin')) {
-							if (HTTPRequest::instance()->get('update') == 'layout') {
-								$title = _("Customize Layout");
-							} else {
-								$title = _("Add widgets");
-							}
-							site_project_header(array('title'=>$title, 'group'=>$group_id, 'toptab'=>'summary'));
-							$lm->displayAvailableWidgets($group_id, WidgetLayoutManager::OWNER_TYPE_GROUP, $layout_id);
-							site_footer();
-						} else {
-							$GLOBALS['Response']->redirect('/projects/'.$project->getUnixName().'/');
-						}
-					}
-					break;
-				case WidgetLayoutManager::OWNER_TYPE_HOME:
-					if (forge_check_global_perm('forge_admin')) {
-						if (HTTPRequest::instance()->get('update') == 'layout') {
-							$title = _('Customize Layout');
-						} else {
-							$title = _('Add widgets');
-						}
-						site_header(array('title'=>$title, 'toptab'=>'home'));
-						$lm->displayAvailableWidgets(0, WidgetLayoutManager::OWNER_TYPE_HOME, $layout_id);
-						site_footer();
-					} else {
-						$GLOBALS['Response']->redirect('/');
-					}
-					break;
-				case WidgetLayoutManager::OWNER_TYPE_TRACKER:
-					if ($at = artifactType_get_object($owner_id)) {
-						use_javascript('/widgets/scripts/WidgetController.js');
-						$_REQUEST['group_id'] = $_GET['group_id'] = $at->Group->getID();
-						$request->params['group_id'] = $at->Group->getID(); //bad!
-						$redirect = '/tracker/?group_id='. $at->Group->getID();
-						if (forge_check_global_perm('forge_admin') || forge_check_perm('tracker_admin', $at->getID())) {
-							$ath = new ArtifactTypeHtml($at->Group, $at->getID());
-							$ath->header(array('atid'=>$ath->getID(), 'title'=>$ath->getName()));
-							$lm->displayAvailableWidgets($owner_id, WidgetLayoutManager::OWNER_TYPE_TRACKER, $layout_id);
-							$ath->footer();
-						} else {
-							$GLOBALS['Response']->redirect($redirect);
-						}
-					}
-					break;
-				case WidgetLayoutManager::OWNER_TYPE_USERHOME:
-					if ($owner_id == user_getid()) {
-						$userm = UserManager::instance();
-						$current = $userm->getCurrentUser();
-						site_header(array('title'=>sprintf(_('Profile Page for %s'), user_getname())));
-						$lm->displayAvailableWidgets(user_getid(), WidgetLayoutManager::OWNER_TYPE_USERHOME, $layout_id);
-						site_footer();
-					}
-					break;
-				default:
-					break;
+	$layout_id = getIntFromRequest('layout_id');
+	$owner = getStringFromRequest('owner');
+	$owner_id   = (int)substr($owner, 1);
+	$owner_type = substr($owner, 0, 1);
+	switch($owner_type) {
+		case WidgetLayoutManager::OWNER_TYPE_USER:
+			if ($owner_id == user_getid()) {
+				$userm = UserManager::instance();
+				$current = $userm->getCurrentUser();
+				site_user_header(array('title'=>sprintf(_('Personal Page for %s'), user_getname())));
+				$lm->displayAvailableWidgets(user_getid(), WidgetLayoutManager::OWNER_TYPE_USER, $layout_id);
+				site_footer();
 			}
-		}
+			break;
+		case WidgetLayoutManager::OWNER_TYPE_GROUP:
+			$pm = ProjectManager::instance();
+			if ($project = $pm->getProject($owner_id)) {
+				$group_id = $owner_id;
+				$_REQUEST['group_id'] = $_GET['group_id'] = $group_id;
+				if (forge_check_perm('project_admin', $group_id) || forge_check_global_perm('forge_admin')) {
+					$update = getStringFromRequest('update');
+					if ('layout' == $update) {
+						$title = _("Customize Layout");
+					} else {
+						$title = _("Add widgets");
+					}
+					site_project_header(array('title' => $title, 'group' => $group_id, 'toptab' => 'summary'));
+					$lm->displayAvailableWidgets($group_id, WidgetLayoutManager::OWNER_TYPE_GROUP, $layout_id);
+					site_footer();
+				} else {
+					session_redirect('/projects/'.$project->getUnixName().'/');
+				}
+			}
+			break;
+		case WidgetLayoutManager::OWNER_TYPE_HOME:
+			if (forge_check_global_perm('forge_admin')) {
+				$update = getStringFromRequest('update');
+				if ('layout' == $update) {
+					$title = _('Customize Layout');
+				} else {
+					$title = _('Add widgets');
+				}
+				site_header(array('title' => $title, 'toptab' => 'home'));
+				$lm->displayAvailableWidgets(0, WidgetLayoutManager::OWNER_TYPE_HOME, $layout_id);
+				site_footer();
+			} else {
+				session_redirect('/');
+			}
+			break;
+		case WidgetLayoutManager::OWNER_TYPE_TRACKER:
+			if ($at = artifactType_get_object($owner_id)) {
+				use_javascript('/widgets/scripts/WidgetController.js');
+				$_REQUEST['group_id'] = $_GET['group_id'] = $at->Group->getID();
+				$redirect = '/tracker/?group_id='. $at->Group->getID();
+				if (forge_check_global_perm('forge_admin') || forge_check_perm('tracker_admin', $at->getID())) {
+					$ath = new ArtifactTypeHtml($at->Group, $at->getID());
+					$ath->header(array('atid'=>$ath->getID(), 'title'=>$ath->getName()));
+					$lm->displayAvailableWidgets($owner_id, WidgetLayoutManager::OWNER_TYPE_TRACKER, $layout_id);
+					$ath->footer();
+				} else {
+					session_redirect($redirect);
+				}
+			}
+			break;
+		case WidgetLayoutManager::OWNER_TYPE_USERHOME:
+			if ($owner_id == user_getid()) {
+				$userm = UserManager::instance();
+				$current = $userm->getCurrentUser();
+				site_header(array('title'=>sprintf(_('Profile Page for %s'), user_getname())));
+				$lm->displayAvailableWidgets(user_getid(), WidgetLayoutManager::OWNER_TYPE_USERHOME, $layout_id);
+				site_footer();
+			}
+			break;
+		default:
+			break;
 	}
 } else {
 	exit_not_logged_in();

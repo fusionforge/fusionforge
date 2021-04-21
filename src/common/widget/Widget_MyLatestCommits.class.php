@@ -3,7 +3,7 @@
  * Widget_MyLatestCommits
  *
  * Copyright (c) Xerox Corporation, Codendi 2001-2009 - marc.nazarian@xrce.xerox.com
- * Copyright 2014, 2018, Franck Villaume - TrivialDev
+ * Copyright 2014, 2018,2021, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -128,11 +128,11 @@ class Widget_MyLatestCommits extends Widget {
 
 	function getPreferences() {
 		$prefs  = _('Maximum number of commits to display per project.');
-		$prefs .= html_e('input', array('name' => 'nb_commits', 'type' => 'number', 'size' => 2, 'maxlenght' => 3, 'value' => UserManager::instance()->getCurrentUser()->getPreference('my_latests_commits_nb_display')));
+		$prefs .= html_e('input', array('name' => 'nb_commits', 'type' => 'number', 'size' => 2, 'maxlength' => 3, 'value' => UserManager::instance()->getCurrentUser()->getPreference('my_latests_commits_nb_display')));
 		return $prefs;
 	}
 
-	function updatePreferences(&$request) {
+	function updatePreferences() {
 		$request->valid(new Valid_String('cancel'));
 		$nbShow = new Valid_UInt('nb_commits');
 		$nbShow->required();

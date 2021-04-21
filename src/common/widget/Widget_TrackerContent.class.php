@@ -2,7 +2,7 @@
 /**
  * Generic Tracker Content Widget Class
  *
- * Copyright 2016-2018, Franck Villaume - TrivialDev
+ * Copyright 2016-2018,2021 Franck Villaume - TrivialDev
  * Copyright 2017, Stephane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
@@ -30,10 +30,9 @@ class Widget_TrackerContent extends Widget {
 	var $layoutExtraFieldIDs = array();
 
 	function __construct() {
-		$request =& HTTPRequest::instance();
-		$owner_id = (int)substr($request->get('owner'), 1);
+		$owner_id = (int)substr(getStringFromRequest('owner'), 1);
 		if (!$owner_id) {
-			$owner_id = (int)$request->get('atid');
+			$owner_id = getIntFromRequest('atid');
 		}
 		parent::__construct('trackercontent', $owner_id, WidgetLayoutManager::OWNER_TYPE_TRACKER);
 		$this->setOwner($owner_id, WidgetLayoutManager::OWNER_TYPE_TRACKER);
@@ -70,7 +69,7 @@ class Widget_TrackerContent extends Widget {
 		$this->layoutExtraFieldIDs = $this->getLayoutExtraFieldIDs($id);
 	}
 
-	function create(&$request) {
+	function create() {
 		$sanitizer = new TextSanitizer();
 		$hp = Codendi_HTMLPurifier::instance();
 		$this->trackercontent_title = $hp->purify($request->get('title'), CODENDI_PURIFIER_CONVERT_HTML);
@@ -741,45 +740,41 @@ EOS;
 		return $prefs;
 	}
 
-	function updatePreferences(&$request) {
+	function updatePreferences() {
 		$sanitizer = new TextSanitizer();
 		$done = false;
-		$vContentId = new Valid_UInt('content_id');
-		$vContentId->required();
-		if ($request->valid($vContentId)) {
-			$vTitle = new Valid_String('title');
-			if($request->valid($vTitle)) {
-				$title = $sanitizer->SanitizeHtml($request->get('title'));
-			} else {
-				$title = '';
-			}
-			$content_id = (int)$request->get('content_id');
-			if ($title) {
-				$sql = "UPDATE artifact_display_widget SET title = $1 WHERE owner_id =$2 AND id = $3";
-				db_query_params($sql,array($title, $this->owner_id, $content_id));
-				$done = true;
-			}
-			$trackerrows = getArrayFromRequest('trackercontent_layout');
-			$trackerextrafields = getArrayFromRequest('trackercontent_ef');
-			$trackercelltitles = getArrayFromRequest('trackercontent_title');
-			db_query_params('DELETE FROM artifact_display_widget_field WHERE id = $1', array($content_id));
-			foreach ($trackerrows as $rowkey => $trackerrow) {
-				$columns = explode(',', $trackerrow);
-				$extrafields = explode(',', $trackerextrafields[$rowkey]);
-				$celltitle = explode(',', $trackercelltitles[$rowkey]);
-				$rowid = $rowkey;
-				foreach ($columns as $columnkey => $column) {
-					if ($extrafields[$columnkey] == "fake") {
-						$extrafieldid = 0;
-					} else {
-						$extrafieldid = substr($extrafields[$columnkey], 2); //remove prefix ef
-					}
-					$section = $sanitizer->SanitizeHtml($celltitle[$columnkey]);
-					db_query_params('INSERT INTO artifact_display_widget_field (id, field_id, column_id, row_id, width, section) VALUES ($1, $2, $3, $4, $5, $6)',
-							array($content_id, $extrafieldid, $columnkey, $rowid, $column, $section));
+		$title = getStringFromRequest('title');
+		if(strlen($title) > 0) {
+			$title = $sanitizer->SanitizeHtml($title);
+		} else {
+			$title = '';
+		}
+		$content_id = getIntFromRequest('content_id');
+		if ($title) {
+			$sql = "UPDATE artifact_display_widget SET title = $1 WHERE owner_id =$2 AND id = $3";
+			db_query_params($sql,array($title, $this->owner_id, $content_id));
+			$done = true;
+		}
+		$trackerrows = getArrayFromRequest('trackercontent_layout');
+		$trackerextrafields = getArrayFromRequest('trackercontent_ef');
+		$trackercelltitles = getArrayFromRequest('trackercontent_title');
+		db_query_params('DELETE FROM artifact_display_widget_field WHERE id = $1', array($content_id));
+		foreach ($trackerrows as $rowkey => $trackerrow) {
+			$columns = explode(',', $trackerrow);
+			$extrafields = explode(',', $trackerextrafields[$rowkey]);
+			$celltitle = explode(',', $trackercelltitles[$rowkey]);
+			$rowid = $rowkey;
+			foreach ($columns as $columnkey => $column) {
+				if ($extrafields[$columnkey] == "fake") {
+					$extrafieldid = 0;
+				} else {
+					$extrafieldid = substr($extrafields[$columnkey], 2); //remove prefix ef
 				}
-				$done = true;
+				$section = $sanitizer->SanitizeHtml($celltitle[$columnkey]);
+				db_query_params('INSERT INTO artifact_display_widget_field (id, field_id, column_id, row_id, width, section) VALUES ($1, $2, $3, $4, $5, $6)',
+						array($content_id, $extrafieldid, $columnkey, $rowid, $column, $section));
 			}
+			$done = true;
 		}
 		return $done;
 	}

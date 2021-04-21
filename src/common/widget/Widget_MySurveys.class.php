@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2013-2014, Franck Villaume - TrivialDev
+ * Copyright 2013-2014,2021, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -163,7 +163,7 @@ class Widget_MySurveys extends Widget {
 		return $prefs;
 	}
 
-	function updatePreferences(&$request) {
+	function updatePreferences() {
 		$request->valid(new Valid_String('cancel'));
 		$vShow = new Valid_WhiteList('show', array('A', 'N', 'AN'));
 		$vShow->required();

@@ -51,7 +51,7 @@ class Widget_ProjectDocumentsActivity extends Widget {
 		return false;
 	}
 
-	function updatePreferences(&$request) {
+	function updatePreferences() {
 		$request->valid(new Valid_String('cancel'));
 		$vShow = new Valid_WhiteList('show', array('F', 'D', 'U', 'FU', 'FD', 'FUD'));
 		$vShow->required();

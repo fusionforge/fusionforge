@@ -150,7 +150,7 @@ require_once 'Widget.class.php';
 			$this->content_id = $id;
 		}
 	}
-	function create(&$request) {
+	function create() {
 		$content_id = false;
 		$vUrl = new Valid_String('url');
 		$vUrl->setErrorMessage(_("Cannot add empty RSS URL"));
@@ -179,7 +179,7 @@ require_once 'Widget.class.php';
 		}
 		return $content_id;
 	}
-	function updatePreferences(&$request) {
+	function updatePreferences() {
 		$done = false;
 		$vContentId = new Valid_UInt('content_id');
 		$vContentId->required();

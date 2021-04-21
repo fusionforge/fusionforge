@@ -52,41 +52,32 @@ class Widget_MyArtifacts extends Widget {
 		return _('My Artifacts');
 	}
 
-	function updatePreferences(&$request) {
-		$request->valid(new Valid_String('cancel'));
-		$vShow = new Valid_WhiteList('show', array('A', 'S', 'M', 'N', 'AS', 'AM', 'SM', 'ASM'));
-		$vShow->required();
-		if (!$request->exist('cancel')) {
-			if ($request->valid($vShow)) {
-				switch($request->get('show')) {
-					case 'A':
-						$this->_artifact_show = 'A';
-						break;
-					case 'S':
-						$this->_artifact_show = 'S';
-						break;
-					case 'M':
-						$this->_artifact_show = 'M';
-						break;
-					case 'N':
-						$this->_artifact_show = 'N';
-						break;
-					case 'AS':
-						$this->_artifact_show = 'AS';
-						break;
-					case 'AM':
-						$this->_artifact_show = 'AM';
-						break;
-					case 'SM':
-						$this->_artifact_show = 'SM';
-						break;
-					case 'ASM':
-					default:
-						$this->_artifact_show = 'ASM';
-				}
-				UserManager::instance()->getCurrentUser()->setPreference('my_artifacts_show', $this->_artifact_show);
-			}
+	function updatePreferences() {
+		$show = getStringFromRequest('show');
+		switch($show) {
+			case 'A':
+				$this->_artifact_show = 'A';
+				break;
+			case 'S':
+				$this->_artifact_show = 'S';
+				break;
+			case 'M':
+				$this->_artifact_show = 'M';
+				break;
+			case 'AS':
+				$this->_artifact_show = 'AS';
+				break;
+			case 'AM':
+				$this->_artifact_show = 'AM';
+				break;
+			case 'SM':
+				$this->_artifact_show = 'SM';
+				break;
+			case 'ASM':
+			default:
+				$this->_artifact_show = 'ASM';
 		}
+		UserManager::instance()->getCurrentUser()->setPreference('my_artifacts_show', $this->_artifact_show);
 		return true;
 	}
 

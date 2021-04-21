@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2016,2018, Franck Villaume - TrivialDev
+ * Copyright 2016,2018,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -27,12 +27,10 @@ require_once $gfcommon.'include/plugins_utils.php';
 require_once $gfcommon.'widget/WidgetLayoutManager.class.php';
 require_once $gfcommon.'widget/Widget.class.php';
 
-$request =& HTTPRequest::instance();
-
 $lm = new WidgetLayoutManager();
 $good = false;
 $redirect   = '/';
-$owner = $request->get('owner');
+$owner = getStringFromRequest('owner');
 
 if ($owner) {
 	$owner_id   = (int)substr($owner, 1);
@@ -40,7 +38,7 @@ if ($owner) {
 	switch($owner_type) {
 		case WidgetLayoutManager::OWNER_TYPE_USER:
 			if ($owner_id ==  user_getid()) {
-				$layout_id =(int)$request->get('layout_id');
+				$layout_id =getIntFromRequest('layout_id');
 				$redirect = '/my/';
 				$good = true;
 			}
@@ -50,11 +48,10 @@ if ($owner) {
 			if ($project = $pm->getProject($owner_id)) {
 				$group_id = $owner_id;
 				$_REQUEST['group_id'] = $_GET['group_id'] = $group_id;
-				$request->params['group_id'] = $group_id; //bad!
 				$redirect = '/projects/'. $project->getUnixName().'/';
 				if (!forge_check_perm('project_admin', $group_id) &&
 					!forge_check_global_perm('forge_admin')) {
-					$GLOBALS['Response']->redirect($redirect);
+					session_redirect($redirect);
 				}
 				$good = true;
 			}
@@ -62,23 +59,24 @@ if ($owner) {
 		case WidgetLayoutManager::OWNER_TYPE_HOME:
 			$redirect = '/';
 			if (!forge_check_global_perm('forge_admin')) {
-				$GLOBALS['Response']->redirect($redirect);
+				session_redirect($redirect);
 			}
 			$good = true;
 			break;
 		case WidgetLayoutManager::OWNER_TYPE_TRACKER:
 			if ($at = artifactType_get_object($owner_id)) {
 				$_REQUEST['group_id'] = $_GET['group_id'] = $at->Group->getID();
-				$request->params['group_id'] = $at->Group->getID(); //bad!
 				$redirect = '/tracker/?group_id='.$at->Group->getID().'&atid='.$at->getID();
-				if ((strlen($request->get('func')) > 0)) {
-					$redirect .= '&func='.$request->get('func');
-					if ($request->get('aid')) {
-						$redirect .= '&aid='.$request->get('aid');
+				$func = getStringFromRequest('func');
+				if ((strlen($func) > 0)) {
+					$redirect .= '&func='.$func;
+					$aid = getIntFromRequest('aid');
+					if ($aid) {
+						$redirect .= '&aid='.$aid;
 					}
 				}
 				if (!forge_check_global_perm('forge_admin') && !forge_check_perm('tracker_admin', $at->getID())) {
-					$GLOBALS['Response']->redirect($redirect);
+					session_redirect($redirect);
 				}
 				$good = true;
 			}
@@ -86,7 +84,7 @@ if ($owner) {
 		case WidgetLayoutManager::OWNER_TYPE_USERHOME:
 			if ($owner_id == user_getid()) {
 				$user = user_get_object(user_getid());
-				$layout_id =(int)$request->get('layout_id');
+				$layout_id = getIntFromRequest('layout_id');
 				$redirect = '/users/'.$user->getUnixName();
 				$good = true;
 			}
@@ -95,16 +93,17 @@ if ($owner) {
 			break;
 	}
 	if ($good) {
-		if (($layout_id = (int)$request->get('layout_id')) || $request->get('action') == 'preferences') {
+		if (($layout_id = getIntFromRequest('layout_id')) || 'preferences' == getStringFromRequest('action')) {
 			$name = null;
-			if ($request->exist('name')) {
-				$param = $request->get('name');
+			$param = getArrayFromRequest('name');
+			if (count($param)) {
 				$name = array_pop(array_keys($param));
 				$instance_id = (int)$param[$name];
 			}
-			switch($request->get('action')) {
+			$mainaction = getStringFromRequest('action');
+			switch($mainaction) {
 				case 'widget':
-					if ($name && $request->exist('layout_id')) {
+					if ($name) {
 						if ($widget = Widget::getInstance($name, $owner_id)) {
 							if ($widget->isAvailable()) {
 								$action = array_pop(array_keys($param[$name]));
@@ -125,7 +124,7 @@ if ($owner) {
 									default:
 										$category = str_replace(' ', '_', $widget->getCategory());
 										$redirect ='/widgets/widgets.php?owner='. $owner_type.$owner_id.'&layout_id='. $layout_id.'#filter-widget-categ-'.$category;
-										$lm->addWidget($owner_id, $owner_type, $layout_id, $name, $widget, $request);
+										$lm->addWidget($owner_id, $owner_type, $layout_id, $name, $widget);
 										break;
 								}
 							}
@@ -148,15 +147,15 @@ if ($owner) {
 					}
 					break;
 				case 'layout':
-					$lm->updateLayout($owner_id, $owner_type, $request->get('layout_id'), $request->get('new_layout'));
+					$lm->updateLayout($owner_id, $owner_type, $layout_id, getIntFromRequest('new_layout'));
 					break;
 				default:
-					$lm->reorderLayout($owner_id, $owner_type, $layout_id, $request);
+					$lm->reorderLayout($owner_id, $owner_type, $layout_id);
 					break;
 			}
 		}
 	}
 }
-if (!$request->isAjax()) {
+if(!(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtoupper($_SERVER['HTTP_X_REQUESTED_WITH']) == 'XMLHTTPREQUEST')) {
 	session_redirect($redirect, false);
 }

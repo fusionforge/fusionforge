@@ -133,7 +133,7 @@ require_once $gfcommon.'widget/Widget_UserhomeRss.class.php';
 	function hasButtons() {
 		return false;
 	}
-	function updatePreferences(&$request) {
+	function updatePreferences() {
 		return true;
 	}
 	function hasRss() {
@@ -180,7 +180,7 @@ require_once $gfcommon.'widget/Widget_UserhomeRss.class.php';
 	function cloneContent($id, $owner_id, $owner_type) {
 		return $this->getInstanceId();
 	}
-	function create(&$request) {
+	function create() {
 	}
 	function destroy($id) {
 	}

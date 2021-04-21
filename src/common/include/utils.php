@@ -1643,7 +1643,7 @@ function utils_array_diff_names($tab1, $tab2) {
 	foreach($tab1 as $e1) {
 		$found = false;
 		reset($tab2);
-		while(!$found && list(,$e2) = each($tab2)) {
+		foreach($tab2 as $e2) {
 			$found = !count(array_diff($e1, $e2));
 		}
 		if (!$found) {

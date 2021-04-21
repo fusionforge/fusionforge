@@ -2,7 +2,7 @@
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013-2018, Franck Villaume - TrivialDev
+ * Copyright 2013-2018,2021, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -118,7 +118,6 @@ class WidgetLayoutManager {
 	 */
 	function _currentUserCanUpdateLayout($owner_id, $owner_type) {
 		$modify = false;
-		$request =& HTTPRequest::instance();
 		switch ($owner_type) {
 			case self::OWNER_TYPE_USER:
 			case self::OWNER_TYPE_USERHOME:
@@ -565,12 +564,12 @@ class WidgetLayoutManager {
 			$used_widgets[] = $data['name'];
 		}
 		// build & display contextual toolbar
-		$url = '/widgets/widgets.php?owner='.HTTPRequest::instance()->get('owner').
-			'&layout_id='.HTTPRequest::instance()->get('layout_id');
+		$url = '/widgets/widgets.php?owner='.getStringFromRequest('owner').
+			'&layout_id='.getIntFromRequest('layout_id');
 		$elementsLi = array();
 		$elementsLi[0]['content'] = util_make_link($url, _('Add widgets'));
 		$elementsLi[1]['content'] = util_make_link($url.'&update=layout', _('Customize Layout'));
-		$update_layout = (HTTPRequest::instance()->get('update') == 'layout');
+		$update_layout = (getStringFromRequest('update') == 'layout');
 		if ($update_layout) {
 			// customized selected
 			$elementsLi[1]['attrs'] = array('class' => 'current');
@@ -748,25 +747,26 @@ class WidgetLayoutManager {
 
 					// Switch content from old columns to new columns
 					$last_new_col_id = null;
-					reset($new['columns']);
+					reset($new);
 					foreach($old['columns'] as $old_col) {
-						if (list(,$new_col) = each($new['columns'])) {
+						if (key($new)) {
+							$new_col = current($new['columns']);
 							$last_new_col_id = $new_col['id'];
+							next($new);
 						}
 						$sql = "UPDATE layouts_contents
-							SET layout_id  = $1
-							, column_id  =$2
+							SET layout_id  = $1, column_id =$2
 							WHERE owner_type =$3
-							AND owner_id   =$4
-							AND layout_id  =$5
-							AND column_id  =$6;";
-						db_query_params($sql,array($new_layout_id, $last_new_col_id, $owner_type, $owner_id, $old_layout_id, $old_col['id']));
+							AND owner_id  =$4
+							AND layout_id =$5
+							AND column_id =$6;";
+						db_query_params($sql, array($new_layout_id, $last_new_col_id, $owner_type, $owner_id, $old_layout_id, $old_col['id']));
 					}
 					$sql = "UPDATE owner_layouts
 						SET layout_id  = $1
 						WHERE owner_type = $2
-						AND owner_id   = $3
-						AND layout_id  = $4";
+						AND owner_id  = $3
+						AND layout_id = $4";
 					db_query_params($sql, array($new_layout_id, $owner_type, $owner_id, $old_layout_id));
 
 					//If the old layout is custom remove it
@@ -893,9 +893,8 @@ class WidgetLayoutManager {
 	 * @param	int	$layout_id
 	 * @param	string	$name
 	 * @param	object	$widget
-	 * @param	object	$request
 	 */
-	function addWidget($owner_id, $owner_type, $layout_id, $name, &$widget, &$request) {
+	function addWidget($owner_id, $owner_type, $layout_id, $name, &$widget) {
 		//Search for the right column. (The first used)
 		$sql = "SELECT u.column_id AS id
 			FROM layouts_contents AS u
@@ -928,7 +927,7 @@ class WidgetLayoutManager {
 			//unique widgets do not have content_id
 			$content_id = 0;
 		} else {
-			$content_id = $widget->create($request);
+			$content_id = $widget->create();
 		}
 
 		//See if it already exists but not used
@@ -1058,18 +1057,17 @@ class WidgetLayoutManager {
 	 * @param	int	$owner_id
 	 * @param	string	$owner_type
 	 * @param	int	$layout_id
-	 * @param	object	$request
 	 */
-	function reorderLayout($owner_id, $owner_type, $layout_id, &$request) {
+	function reorderLayout($owner_id, $owner_type, $layout_id) {
 		$keys = array_keys($_REQUEST);
 		foreach($keys as $key) {
 			if (preg_match('`widgetlayout_col_\d+`', $key)) {
-
 				$split = explode('_', $key);
 				$column_id = (int)$split[count($split)-1];
 
 				$names = array();
-				foreach($request->get($key) as $name) {
+				$keyArray = getArrayFromRequest($key);
+				foreach($keyArray as $k => $name) {
 					list($name, $id) = explode('-', $name);
 					$names[] = array($id, $name);
 				}
@@ -1078,13 +1076,13 @@ class WidgetLayoutManager {
 				$originals = array();
 				$sql = "SELECT * FROM layouts_contents WHERE owner_type = $1 AND owner_id = $2 AND column_id = $3 ORDER BY rank";
 				$res = db_query_params($sql, array($owner_type, $owner_id, $column_id));
-				echo db_error();
+
 				while($data = db_fetch_array($res)) {
 					$originals[] = array($data['content_id'], $data['name']);
 				}
 
 				//delete removed contents
-				$deleted_names = utils_array_diff_names($originals, $names);
+				$deleted_names = utils_array_diff_names($originals, $names, );
 				if (count($deleted_names)) {
 					$_and = '';
 					foreach($deleted_names as $id => $name) {
@@ -1102,7 +1100,6 @@ class WidgetLayoutManager {
 						AND owner_id = $2
 						AND column_id = $3". $_and;
 					db_query_params($sql, array($owner_type, $owner_id, $column_id));
-					echo db_error();
 				}
 
 				//Insert new contents
@@ -1125,7 +1122,6 @@ class WidgetLayoutManager {
 						AND owner_id = $3' . $_and ."
 						AND layout_id = $4";
 					db_query_params($sql, array($column_id, $owner_type, $owner_id, $layout_id));
-					echo db_error();
 				}
 
 				//Update ranks
@@ -1134,7 +1130,6 @@ class WidgetLayoutManager {
 				foreach($names as $name) {
 					$sql = 'UPDATE layouts_contents SET rank = $1 WHERE owner_type =$2 AND owner_id = $3 AND column_id = $4 AND name = $5 AND content_id = $6';
 					db_query_params($sql, array($rank++, $owner_type, $owner_id, $column_id, $name[1], $name[0]));
-					echo db_error();
 				}
 			}
 		}
