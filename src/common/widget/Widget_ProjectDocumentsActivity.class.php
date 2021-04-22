@@ -26,9 +26,12 @@ require_once 'Widget.class.php';
  */
 
 class Widget_ProjectDocumentsActivity extends Widget {
+
 	var $content;
 	var $_statistic_show = 'FUD';
+
 	function __construct() {
+		global $project;
 		parent::__construct('projectdocumentsactivity');
 		if (session_loggedin()) {
 			$userPrefValue = UserManager::instance()->getCurrentUser()->getPreference('my_docman_project_activitity_show');
@@ -36,8 +39,6 @@ class Widget_ProjectDocumentsActivity extends Widget {
 				$this->_statistic_show = $userPrefValue;
 			}
 		}
-		$pm = ProjectManager::instance();
-		$project = $pm->getProject(getIntFromRequest('group_id'));
 		if ($project && $this->canBeUsedByProject($project) && forge_check_perm('docman', $project->getID(), 'read')) {
 			$this->content['title'] = _('Last 4 weeks Documents Manager Activity');
 		}
@@ -94,14 +95,12 @@ class Widget_ProjectDocumentsActivity extends Widget {
 
 	function getContent() {
 		require_once $GLOBALS['gfcommon'].'docman/DocumentManager.class.php';
-		$result = '';
-		global $HTML;
+		global $HTML, $project;
 		html_use_jqueryjqplotpluginBar();
+		$result = '';
 		$result .= $HTML->getJavascripts();
 		$result .= $HTML->getStylesheets();
-		$group_id = getIntFromRequest('group_id');
-		$group = group_get_object($group_id);
-		$dm = new DocumentManager($group);
+		$dm = new DocumentManager($project);
 		$begin1 = strtotime('monday this week');
 		$end1 = time();
 		$begin2 = strtotime('-1 week', $begin1);
@@ -230,7 +229,7 @@ class Widget_ProjectDocumentsActivity extends Widget {
 		} else {
 			$result .= $HTML->warning_msg(_('No activity to display.'));
 		}
-		$result .= html_e('div', array('class' => 'underline-link'), util_make_link('/docman/?group_id='.$group_id, _('Browse Documents Manager')));
+		$result .= html_e('div', array('class' => 'underline-link'), util_make_link('/docman/?group_id='.$project->getID(), _('Browse Documents Manager')));
 		return $result;
 	}
 

@@ -28,10 +28,8 @@ class Widget_ProjectLatestNews extends Widget {
 	var $content;
 
 	function __construct() {
-		global $gfwww;
+		global $project;
 		parent::__construct('projectlatestnews');
-		$pm = ProjectManager::instance();
-		$project = $pm->getProject(getIntFromRequest('group_id'));
 		if ($project && $this->canBeUsedByProject($project)) {
 			require_once 'www/news/news_utils.php';
 			$this->content = news_show_latest($project->getID(), 10, false);

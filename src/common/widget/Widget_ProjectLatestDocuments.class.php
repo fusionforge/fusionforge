@@ -31,9 +31,8 @@ require_once $gfcommon.'docman/DocumentFactory.class.php';
 class Widget_ProjectLatestDocuments extends Widget {
 	var $content;
 	function __construct() {
+		global $project;
 		parent::__construct('projectlatestdocuments');
-		$pm = ProjectManager::instance();
-		$project = $pm->getProject(getIntFromRequest('group_id'));
 		if ($project && $this->canBeUsedByProject($project) && forge_check_perm('docman', $project->getID(), 'read')) {
 			$this->content['title'] = _('5 Latest Published Documents');
 		}
@@ -44,20 +43,19 @@ class Widget_ProjectLatestDocuments extends Widget {
 	}
 
 	function getContent() {
-		global $HTML;
-		$group_id = getIntFromRequest('group_id');
+		global $HTML, $project;
 		$result = '';
 		$qpa = db_construct_qpa();
 		$qpa = db_construct_qpa($qpa, 'SELECT docid FROM doc_data, doc_groups WHERE doc_data.group_id = $1',
-					array($group_id));
+					array($project->getID()));
 
 		$stateIdDg = 1;
 		$stateIdDocuments = array(1);
-		if (forge_check_perm('docman', $group_id, 'approve')) {
+		if (forge_check_perm('docman', $project->getID(), 'approve')) {
 			$stateIdDg = 5;
 			$stateIdDocuments = array(1, 2, 3, 4, 5);
 		}
-		$df = new DocumentFactory(group_get_object($group_id));
+		$df = new DocumentFactory(group_get_object($project->getID()));
 		$df->setDocGroupState($stateIdDg);
 		$df->setStateID($stateIdDocuments);
 		$df->setLimit(5);
@@ -91,14 +89,14 @@ class Widget_ProjectLatestDocuments extends Widget {
 					$filetype = $doc->getFileType();
 					$docid = $doc->getID();
 					$docgroup = $doc->getDocGroupID();
-					$ndg = documentgroup_get_object($docgroup, $group_id);
+					$ndg = documentgroup_get_object($docgroup, $project->getID());
 					switch ($filetype) {
 						case "URL": {
 							$docurl = util_make_link($filename, html_image($doc->getFileTypeImage(), 22, 22, array('alt'=>$doc->getFileType())), array(), true);
 							break;
 						}
 						default: {
-							$docurl = util_make_link('/docman/view.php/'.$group_id.'/'.$docid, html_image($doc->getFileTypeImage(), 22, 22, array('alt'=>$doc->getFileType())));
+							$docurl = util_make_link('/docman/view.php/'.$project->getID().'/'.$docid, html_image($doc->getFileTypeImage(), 22, 22, array('alt'=>$doc->getFileType())));
 						}
 					}
 					$cells = array();
@@ -121,9 +119,9 @@ class Widget_ProjectLatestDocuments extends Widget {
 								$titleMonitor = _('Start monitoring this document');
 								$image = $HTML->getStartMonitoringPic($titleMonitor, $titleMonitor);
 							}
-							$action .= util_make_link('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$docgroup.'&action=monitorfile&option='.$option.'&fileid='.$doc->getID(), $image, array('title' => $titleMonitor));
-							if (forge_check_perm('docman', $group_id, 'approve') && !$doc->getLocked()) {
-								$action .= util_make_link('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$docgroup.'&action=trashfile&fileid='.$doc->getID(), $HTML->getDeletePic('', _('Move this document to trash')), array('title' => _('Move this document to trash')));
+							$action .= util_make_link('/docman/?group_id='.$project->getID().'&view=listfile&dirid='.$docgroup.'&action=monitorfile&option='.$option.'&fileid='.$doc->getID(), $image, array('title' => $titleMonitor));
+							if (forge_check_perm('docman', $project->getID(), 'approve') && !$doc->getLocked()) {
+								$action .= util_make_link('/docman/?group_id='.$project->getID().'&view=listfile&dirid='.$docgroup.'&action=trashfile&fileid='.$doc->getID(), $HTML->getDeletePic('', _('Move this document to trash')), array('title' => _('Move this document to trash')));
 								$action .= util_make_link($doc->getPermalink(), $HTML->getEditFilePic(_('Edit this document')), array('title' => _('Edit this document')));
 							}
 						}
@@ -134,7 +132,7 @@ class Widget_ProjectLatestDocuments extends Widget {
 			}
 			$result .= $HTML->listTableBottom();
 		}
-		$result .= html_e('div', array('class' => 'underline-link'), util_make_link('/docman/?group_id='.$group_id, _('Browse Documents Manager')));
+		$result .= html_e('div', array('class' => 'underline-link'), util_make_link('/docman/?group_id='.$project->getID(), _('Browse Documents Manager')));
 
 		return $result;
 	}

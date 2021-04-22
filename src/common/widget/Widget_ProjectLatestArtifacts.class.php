@@ -28,9 +28,8 @@ class Widget_ProjectLatestArtifacts extends Widget {
 	const NB_ARTIFACTS_TO_DISPLAY = 5;
 
 	public function __construct() {
+		global $project;
 		parent::__construct('projectlatestartifacts');
-		$pm = ProjectManager::instance();
-		$project = $pm->getProject(getIntFromRequest('group_id'));
 		if ($project && $this->canBeUsedByProject($project)) {
 			$atf = new ArtifactTypeFactory($project);
 			$ats = $atf->getArtifactTypes();
@@ -50,10 +49,8 @@ class Widget_ProjectLatestArtifacts extends Widget {
 	}
 
 	public function getContent() {
-		global $HTML;
+		global $HTML, $project;
 		$html = '';
-		$pm = ProjectManager::instance();
-		$project = $pm->getProject(getIntFromRequest('group_id'));
 		$atf = new ArtifactTypeFactory($project);
 		$artifacts = array();
 		$ats = $atf->getArtifactTypes();

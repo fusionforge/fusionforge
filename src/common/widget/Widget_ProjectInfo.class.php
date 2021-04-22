@@ -33,21 +33,17 @@ class Widget_ProjectInfo extends Widget {
 	}
 
 	public function getContent() {
-		global $HTML;
+		global $HTML, $project;
 		$result = '';
-		$group_id = getIntFromRequest('group_id');
-		$pm = ProjectManager::instance();
-		$project = $pm->getProject($group_id);
 		// Tag list
 		if (forge_get_config('use_project_tags')) {
-			$list_tag = list_project_tag($group_id);
+			$list_tag = list_project_tag($project->getID());
 			$result .= html_ao('p').$HTML->getTagPic().' ';
 			if ($list_tag) {
 				$result .= _('Tags')._(': '). $list_tag;
 			} else {
-				$project = group_get_object($group_id);
 				if (forge_check_perm ('project_admin', $project->getID())) {
-					$result .= util_make_link('/project/admin/?group_id='.$group_id, _('No tag defined for this project'));
+					$result .= util_make_link('/project/admin/?group_id='.$project->getID(), _('No tag defined for this project'));
 				}
 				else {
 					$result .= html_e('span', array(), _('No tag defined for this project'), false);
@@ -58,7 +54,7 @@ class Widget_ProjectInfo extends Widget {
 
 		if(forge_get_config('use_trove')) {
 			$result .= html_e('br');
-			$result .= stripslashes(trove_getcatlisting($group_id,0,1,1))."\n";
+			$result .= stripslashes(trove_getcatlisting($project->getID(),0,1,1))."\n";
 		}
 
 		// registration date
@@ -70,7 +66,7 @@ class Widget_ProjectInfo extends Widget {
 		// CB hide stats if desired
 		if ($project->usesStats()) {
 			$actv = db_query_params ('SELECT ranking FROM project_weekly_metric WHERE group_id=$1',
-					array($group_id));
+					array($project->getID()));
 			if (db_numrows($actv) > 0){
 				$actv_res = db_result($actv,0,"ranking");
 			} else {
@@ -80,11 +76,11 @@ class Widget_ProjectInfo extends Widget {
 				$actv_res=0;
 			}
 			$result .= html_e('br').sprintf (_('Activity Ranking: <strong>%d</strong>'), $actv_res)."\n";
-			$result .= html_e('br')._('View project').' '.util_make_link('/project/stats/?group_id='.$group_id, _('Statistics'));
+			$result .= html_e('br')._('View project').' '.util_make_link('/project/stats/?group_id='.$project->getID(), _('Statistics'));
 			if ( ($project->usesTracker() && forge_get_config('use_tracker')) || ($project->usesPM() && forge_get_config('use_pm')) ) {
-				$result .= sprintf(_(' or <a href="%s">Activity</a>'),util_make_uri('/project/report/?group_id='.$group_id))."\n";
+				$result .= sprintf(_(' or <a href="%s">Activity</a>'),util_make_uri('/project/report/?group_id='.$project->getID()))."\n";
 			}
-			$result .= html_e('br').sprintf(_('View list of <a href="%s">RSS feeds</a> available for this project.'), util_make_uri('/export/rss_project.php?group_id='.$group_id)). ' ' . html_image('ic/rss.png',16,16,array());
+			$result .= html_e('br').sprintf(_('View list of <a href="%s">RSS feeds</a> available for this project.'), util_make_uri('/export/rss_project.php?group_id='.$project->getID())). ' ' . html_image('ic/rss.png',16,16,array());
 		}
 
 		if(forge_get_config('use_people')) {
@@ -94,7 +90,7 @@ class Widget_ProjectInfo extends Widget {
 					AND people_job.status_id=1
 					AND group_id=$1
 					GROUP BY name',
-					array ($group_id),
+					array ($project->getID()),
 					2);
 			if ($jobs_res) {
 				$num=db_numrows($jobs_res);
@@ -104,7 +100,7 @@ class Widget_ProjectInfo extends Widget {
 							ngettext('HELP WANTED: This project is looking for a <a href="%1$s">"%2$s"</a>.',
 								'HELP WANTED: This project is looking for people to fill <a href="%1$s">several different positions</a>.',
 								$num),
-							util_make_uri('/people/?group_id='.$group_id),
+							util_make_uri('/people/?group_id='.$project->getID()),
 							db_result($jobs_res,0,"name"));
 					$result .= "</p>\n";
 					//$result .= '<div rel="fusionforge:has_job" typeof="fusionforge:Job" xmlns:fusionforge="http://fusionforge.org/fusionforge#">';
@@ -128,15 +124,15 @@ class Widget_ProjectInfo extends Widget {
 					$key = 'pointer_up';
 					$txt = _('Cast Vote');
 				}
-				$content .= util_make_link('/project/?group_id='.$group_id.'&action='.$key, html_image('ic/'.$key.'.png', 16, 16), array('id' => 'group-vote', 'alt' => $txt));
+				$content .= util_make_link('/project/?group_id='.$project->getID().'&action='.$key, html_image('ic/'.$key.'.png', 16, 16), array('id' => 'group-vote', 'alt' => $txt));
 			}
 			$result .= $content;
 		}
 
 		$hook_params = array();
-		$hook_params['group_id'] = $group_id;
+		$hook_params['group_id'] = $project->getID();
 		plugin_hook("project_after_description",$hook_params);
-		plugin_hook('hierarchy_views', array($group_id, 'home'));
+		plugin_hook('hierarchy_views', array($project->getID(), 'home'));
 
 		return $result;
 	}

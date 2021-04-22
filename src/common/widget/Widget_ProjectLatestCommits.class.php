@@ -28,9 +28,8 @@ class Widget_ProjectLatestCommits extends Widget {
 	const NB_COMMITS_TO_DISPLAY = 5;
 
 	public function __construct() {
+		global $project;
 		parent::__construct('projectlatestcommits');
-		$pm = ProjectManager::instance();
-		$project = $pm->getProject(getIntFromRequest('group_id'));
 		if ($project && $this->canBeUsedByProject($project) && forge_check_perm('scm', $project->getID(), 'read')) {
 			$this->content['title'] = _('5 Latest Commits');
 		}
@@ -52,10 +51,8 @@ class Widget_ProjectLatestCommits extends Widget {
 	}
 
 	public function getContent() {
-		global $HTML;
+		global $HTML, $project;
 		$html = '';
-		$pm = ProjectManager::instance();
-		$project = $pm->getProject(getIntFromRequest('group_id'));
 		$revisions = array();
 		if ($project->usesPlugin('scmsvn') && forge_check_perm('scm', $project->getID(), 'read')) {
 			$scmPlugin = plugin_get_object('scmsvn');

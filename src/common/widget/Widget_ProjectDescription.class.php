@@ -36,12 +36,8 @@ class Widget_ProjectDescription extends Widget {
 	}
 
 	public function getContent() {
-		global $HTML;
+		global $HTML, $project;
 		$result = '';
-		$group_id = getIntFromRequest('group_id');
-		$pm = ProjectManager::instance();
-		$project = $pm->getProject($group_id);
-
 		$pluginManager = plugin_manager_get_object();
 		if (! $pluginManager->PluginIsInstalled('blocks') || !plugin_hook ("blocks", 'summary_description')) {
 			$project_description = $project->getDescription();

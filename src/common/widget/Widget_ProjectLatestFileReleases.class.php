@@ -29,9 +29,8 @@ require_once $gfcommon.'frs/FRSReleaseFactory.class.php';
 class Widget_ProjectLatestFileReleases extends Widget {
 	var $content;
 	function __construct() {
+		global $project;
 		parent::__construct('projectlatestfilereleases');
-		$pm = ProjectManager::instance();
-		$project = $pm->getProject(getIntFromRequest('group_id'));
 		if ($project && $this->canBeUsedByProject($project) && forge_check_perm('frs_admin', $project->getID(), 'read')) {
 			$this->content['title'] = _('Latest File Releases');
 		}
@@ -42,11 +41,8 @@ class Widget_ProjectLatestFileReleases extends Widget {
 	}
 
 	function getContent() {
-		global $HTML;
+		global $HTML, $project;
 		$result = '';
-		$pm = ProjectManager::instance();
-		$group_id = getIntFromRequest('group_id');
-		$project = $pm->getProject($group_id);
 
 		$frsrf = new FRSReleaseFactory($project);
 		$frsrnrs = $frsrf->getFRSRNewReleases(true);
@@ -87,12 +83,12 @@ class Widget_ProjectLatestFileReleases extends Widget {
 				// -> notes
 				// accessibility: image is a link, so alt must be unique in page => construct a unique alt
 				$tmp_alt = $package_name . " - " . _('Release Notes');
-				$link = '/frs/?group_id=' . $group_id . '&view=shownotes&release_id='.$frsrnr->getID();
+				$link = '/frs/?group_id=' . $project->getID() . '&view=shownotes&release_id='.$frsrnr->getID();
 				$link_content = $HTML->getReleaseNotesPic($tmp_alt, $tmp_alt);
 				$cells[][] = util_make_link($link, $link_content);
 				// -> monitor
 				if (session_loggedin()) {
-					$url = '/frs/?group_id='.$group_id.'&package_id='.$frsrnr->FRSPackage->getID().'&action=monitor';
+					$url = '/frs/?group_id='.$project->getID().'&package_id='.$frsrnr->FRSPackage->getID().'&action=monitor';
 					if($frsrnr->FRSPackage->isMonitoring()) {
 						$title = $package_name . " - " . _('Stop monitoring this package');
 						$url .= '&status=0';
@@ -108,13 +104,13 @@ class Widget_ProjectLatestFileReleases extends Widget {
 				$tmp_alt = $package_name." ".$package_release." - ". _('Download');
 				$link_content = $HTML->getDownloadPic($tmp_alt, $tmp_alt);
 				$t_link_anchor = $HTML->toSlug($package_name)."-".$HTML->toSlug($package_release)."-title-content";
-				$link = '/frs/?group_id=' . $group_id . '&amp;release_id='.$frsrnr->getID()."#".$t_link_anchor;
+				$link = '/frs/?group_id=' . $project->getID() . '&amp;release_id='.$frsrnr->getID()."#".$t_link_anchor;
 				$cells[][] = util_make_link($link, $link_content);
 				$result .= $HTML->multiTableRow(array(), $cells);
 			}
 			$result .= $HTML->listTableBottom();
 		}
-		$result .= html_e('div', array('class' => 'underline-link'), util_make_link('/frs/?group_id='.$group_id, _('View All Project Files')));
+		$result .= html_e('div', array('class' => 'underline-link'), util_make_link('/frs/?group_id='.$project->getID(), _('View All Project Files')));
 
 		return $result;
 	}

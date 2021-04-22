@@ -30,9 +30,8 @@ class Widget_ProjectScmStats extends Widget {
 	var $content = array();
 
 	function __construct() {
+		global $project;
 		parent::__construct('projectscmstats');
-		$pm = ProjectManager::instance();
-		$project = $pm->getProject(getIntFromRequest('group_id'));
 		if ($project && $this->canBeUsedByProject($project) && forge_check_perm('scm', $project->getID(), 'read')) {
 			$this->content['title'] = _('Repository History');
 		}
@@ -43,9 +42,7 @@ class Widget_ProjectScmStats extends Widget {
 	}
 
 	function getContent() {
-		$html_projectscmstats = '';
-		$pm = ProjectManager::instance();
-		$project = $pm->getProject(getIntFromRequest('group_id'));
+		global $project;
 		$project_plugins = $project->getPlugins();
 		foreach ($project_plugins as $value) {
 			$plugin_object = plugin_get_object($value);

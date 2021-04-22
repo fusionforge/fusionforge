@@ -30,7 +30,8 @@ require_once 'Widget.class.php';
 */
 class Widget_ProjectRss extends Widget_Rss {
 	function __construct() {
-		parent::__construct('projectrss', getIntFromRequest('group_id'), WidgetLayoutManager::OWNER_TYPE_GROUP);
+		global $project;
+		parent::__construct('projectrss', $project->getID(), WidgetLayoutManager::OWNER_TYPE_GROUP);
 	}
 	function canBeUsedByProject(&$project) {
 		return true;

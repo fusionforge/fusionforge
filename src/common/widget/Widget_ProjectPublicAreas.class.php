@@ -38,29 +38,25 @@ class Widget_ProjectPublicAreas extends Widget {
 	}
 
 	function getContent() {
-		global $HTML;
+		global $HTML, $project;
 		$result = '';
-		$group_id = getIntFromRequest('group_id');
-		$pm = ProjectManager::instance();
-		$project = $pm->getProject($group_id);
-		// ################# Homepage Link
 
+		// ################# Homepage Link
 		$result .= html_e('div', array('class' => 'public-area-box', 'rel' => 'doap:homepage'),
 				util_make_link($project->getHomePage(), $HTML->getHomePic(_('Home Page')). ' ' ._('Project Home Page'), false, true));
 
 		// ################## ArtifactTypes
-
 		if ($project->usesTracker()) {
 			$result .= '<div class="public-area-box">'."\n";
 			$link_content = $HTML->getFollowPic(_('Tracker')) . ' ' . _('Tracker');
-			$result .= util_make_link('/tracker/?group_id=' . $group_id, $link_content);
+			$result .= util_make_link('/tracker/?group_id='.$project->getID(), $link_content);
 
 			$res = db_query_params ('SELECT agl.*,aca.count,aca.open_count
 					FROM artifact_group_list agl
 					LEFT JOIN artifact_counts_agg aca USING (group_artifact_id)
 					WHERE agl.group_id=$1
 					ORDER BY group_artifact_id ASC',
-					array($group_id));
+					array($project->getID()));
 
 			$rows = array();
 			while ($row = db_fetch_array($res)) {
@@ -79,7 +75,7 @@ class Widget_ProjectPublicAreas extends Widget {
 					$group_artifact_id = $row['group_artifact_id'];
 					$tracker_stdzd_uri = util_make_url('/tracker/cm/project/'. $project->getUnixName() .'/atid/'. $group_artifact_id);
 					$contentLi = '<span rel="http://www.w3.org/2002/07/owl#sameAs">'."\n";
-					$contentLi .= util_make_link('/tracker/?atid='. $group_artifact_id . '&group_id='.$group_id.'&func=browse', $row['name']) . ' ' ;
+					$contentLi .= util_make_link('/tracker/?atid='. $group_artifact_id . '&group_id='.$project->getID().'&func=browse', $row['name']) . ' ' ;
 					$contentLi .= "</span>\n"; // /owl:sameAs
 					$contentLi .= sprintf(ngettext('(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', '(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', $row['open_count']), $row['open_count'], $row['count']);
 					$contentLi .= '<br />';
@@ -96,7 +92,7 @@ class Widget_ProjectPublicAreas extends Widget {
 
 		if ($project->usesForum()) {
 			$result .= '<div class="public-area-box">'."\n";
-			//	$result .= '<hr size="1" /><a rel="sioc:container_of" href="'.util_make_url ('/forum/?group_id='.$group_id).'">';
+			//	$result .= '<hr size="1" /><a rel="sioc:container_of" href="'.util_make_url ('/forum/?group_id='.$project->getID()).'">';
 			$ff = new ForumFactory($project);
 			$f_arr = $ff->getForums();
 			$forums_count = count($f_arr);
@@ -106,7 +102,7 @@ class Widget_ProjectPublicAreas extends Widget {
 			}
 
 			$link_content = $HTML->getForumPic() . ' ' . _('Public Forums');
-			$result .= util_make_link('/forum/?group_id=' . $group_id, $link_content);
+			$result .= util_make_link('/forum/?group_id='.$project->getID(), $link_content);
 			$result .= ' (';
 			$result .= sprintf(ngettext("<strong>%d</strong> message","<strong>%d</strong> messages",$messages_count),$messages_count);
 			$result .= ' ' . _('in') . ' ';
@@ -120,9 +116,9 @@ class Widget_ProjectPublicAreas extends Widget {
 		if ($project->usesDocman()) {
 			$result .= '<div class="public-area-box">';
 			$link_content = $HTML->getDocmanPic() . ' ' . _('Document Manager');
-			//	<a rel="sioc:container_of" xmlns:sioc="http://rdfs.org/sioc/ns#" href="'.util_make_url ('/docman/?group_id='.$group_id).'">';
-			$result .= util_make_link('/docman/?group_id='.$group_id, $link_content);
-			if (forge_check_perm('docman', $group_id, 'read')) {
+			//	<a rel="sioc:container_of" xmlns:sioc="http://rdfs.org/sioc/ns#" href="'.util_make_url ('/docman/?group_id='.$project->getID()).'">';
+			$result .= util_make_link('/docman/?group_id='.$project->getID(), $link_content);
+			if (forge_check_perm('docman', $project->getID(), 'read')) {
 				$docm = new DocumentManager($project);
 				$result .= ' ('.html_e('strong', array(), $docm->getNbDocs(), true, false).' '._('documents').' '._('in').' '.html_e('strong', array(), $docm->getNbFolders(), true, false).' '._('directories').')';
 			}
@@ -134,8 +130,8 @@ class Widget_ProjectPublicAreas extends Widget {
 		if ($project->usesFRS()) {
 			$result .= '<div class="public-area-box">';
 			$link_content = $HTML->getPackagePic() . ' ' . _('Files');
-			//	<a rel="sioc:container_of" xmlns:sioc="http://rdfs.org/sioc/ns#" href="'.util_make_url ('/frs/?group_id='.$group_id).'">';
-			$result .= util_make_link('/frs/?group_id='.$group_id, $link_content);
+			//	<a rel="sioc:container_of" xmlns:sioc="http://rdfs.org/sioc/ns#" href="'.util_make_url ('/frs/?group_id='.$project->getID()).'">';
+			$result .= util_make_link('/frs/?group_id='.$project->getID(), $link_content);
 			$frsm = new FRSManager($project);
 			$result .= ' ('.html_e('strong', array(), $frsm->getNbReleases(), true, false).' '._('releases').' '._('in').' '.html_e('strong', array(), $frsm->getNbPackages(), true, false).' '._('packages').')';
 			$result .= '</div>';
@@ -146,8 +142,8 @@ class Widget_ProjectPublicAreas extends Widget {
 		if ($project->usesMail()) {
 			$result .= '<div class="public-area-box">';
 			$link_content = $HTML->getMailPic() . ' ' . _('Mailing Lists');
-			$result .= util_make_link('/mail/?group_id='.$group_id, $link_content);
-			$n = project_get_mail_list_count($group_id);
+			$result .= util_make_link('/mail/?group_id='.$project->getID(), $link_content);
+			$n = project_get_mail_list_count($project->getID());
 			$result .= ' ';
 			$result .= sprintf(ngettext('(<strong>%s</strong> public mailing list)', '(<strong>%s</strong> public mailing lists)', $n), $n);
 			$result .= "\n</div>\n";
@@ -158,7 +154,7 @@ class Widget_ProjectPublicAreas extends Widget {
 		if ($project->usesPM()) {
 			$result .= '<div class="public-area-box">';
 			$link_content = $HTML->getPmPic() . ' ' . _('Tasks');
-			$result .= util_make_link('/pm/?group_id='.$group_id, $link_content);
+			$result .= util_make_link('/pm/?group_id='.$project->getID(), $link_content);
 
 			$pgf = new ProjectGroupFactory ($project);
 			$pgs = $pgf->getProjectGroups();
@@ -169,7 +165,7 @@ class Widget_ProjectPublicAreas extends Widget {
 				$result .= "\n".'<ul class="task-manager">';
 				foreach ($pgs as $pg) {
 					$result .= "\n\t<li>";
-					$result .= util_make_link('/pm/task.php?group_project_id='.$pg->getID().'&group_id='.$group_id.'&func=browse',$pg->getName()).' ('.html_e('strong', array(), $pg->getOpenCount(), true, false).' '._('open').' / '.html_e('strong', array(), $pg->getTotalCount()).' '._('total').')';
+					$result .= util_make_link('/pm/task.php?group_project_id='.$pg->getID().'&group_id='.$project->getID().'&func=browse',$pg->getName()).' ('.html_e('strong', array(), $pg->getOpenCount(), true, false).' '._('open').' / '.html_e('strong', array(), $pg->getTotalCount()).' '._('total').')';
 					$result .= '</li>' ;
 				}
 				$result .= "\n</ul>";
@@ -182,8 +178,8 @@ class Widget_ProjectPublicAreas extends Widget {
 		if ($project->usesSurvey()) {
 			$result .= '<div class="public-area-box">'."\n";
 			$link_content = $HTML->getSurveyPic() . ' ' . _('Surveys');
-			$result .= util_make_link('/survey/?group_id='.$group_id, $link_content);
-			$result .= ' (<strong>'. project_get_survey_count($group_id) .'</strong> ' . _('surveys').')';
+			$result .= util_make_link('/survey/?group_id='.$project->getID(), $link_content);
+			$result .= ' (<strong>'. project_get_survey_count($project->getID()) .'</strong> ' . _('surveys').')';
 			$result .= "\n</div>\n";
 		}
 
@@ -193,11 +189,11 @@ class Widget_ProjectPublicAreas extends Widget {
 			$result .= '<div class="public-area-box">'."\n";
 
 			$link_content = $HTML->getScmPic() . ' ' . _('SCM Repository');
-			//	$result .= '<hr size="1" /><a rel="doap:repository" href="'.util_make_url ('/scm/?group_id='.$group_id).'">';
-			$result .= util_make_link('/scm/?group_id='.$group_id, $link_content);
+			//	$result .= '<hr size="1" /><a rel="doap:repository" href="'.util_make_url ('/scm/?group_id='.$project->getID()).'">';
+			$result .= util_make_link('/scm/?group_id='.$project->getID(), $link_content);
 
 			$hook_params = array () ;
-			$hook_params['group_id'] = $group_id ;
+			$hook_params['group_id'] = $project->getID() ;
 			$hook_params['result'] = &$result;
 			plugin_hook ("scm_stats", $hook_params) ;
 			$result .= "\n</div>\n";
@@ -206,7 +202,7 @@ class Widget_ProjectPublicAreas extends Widget {
 		// ######################### Plugins
 
 		$hook_params = array ();
-		$hook_params['group_id'] = $group_id;
+		$hook_params['group_id'] = $project->getID();
 		$hook_params['result'] = &$result;
 		plugin_hook ("project_public_area", $hook_params);
 

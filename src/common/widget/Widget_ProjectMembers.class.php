@@ -35,11 +35,8 @@ class Widget_ProjectMembers extends Widget {
 	}
 
 	public function getContent() {
+		global $project;
 		$result = '';
-
-		$group_id = getIntFromRequest('group_id');
-		$pm = ProjectManager::instance();
-		$project = $pm->getProject($group_id);
 
 		$admins = $project->getAdmins();
 		$members = $project->getUsers();
@@ -144,14 +141,14 @@ class Widget_ProjectMembers extends Widget {
 		$result .= '<p><span rel="sioc:has_usergroup">';
 		$result .= '<span about="members/" typeof="sioc:UserGroup">';
 		$result .= '<span rel="http://www.w3.org/2002/07/owl#sameAs">';
-		$result .= util_make_link('/project/memberlist.php?group_id='.$group_id,sprintf(_('View the %d Member(s)'),count($members)));
+		$result .= util_make_link('/project/memberlist.php?group_id='.$project->getID(),sprintf(_('View the %d Member(s)'),count($members)));
 		$result .= '</span>';
 		$result .= '</span>';
 		$result .= '</span></p>';
 		// end of project usergroup description
 
 		if (!$iam_member) {
-			$result .= '<p>'.util_make_link('/project/request.php?group_id='.$group_id,_('Request to join')).'</p>';
+			$result .= '<p>'.util_make_link('/project/request.php?group_id='.$project->getID(),_('Request to join')).'</p>';
 		}
 
 		return $result;
