@@ -2,7 +2,7 @@
 /**
  * General Tracker Content Widget Class
  *
- * Copyright 2016-2017, Franck Villaume - TrivialDev
+ * Copyright 2016-2017,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is a part of Fusionforge.
@@ -28,10 +28,9 @@ class Widget_TrackerGeneral extends Widget {
 	var $title;
 
 	function __construct() {
-		$request =& HTTPRequest::instance();
-		$owner_id = (int)substr($request->get('owner'), 1);
+		$owner_id = (int)substr(getStringFromRequest('owner'), 1);
 		if (!$owner_id) {
-			$owner_id = (int)$request->get('atid');
+			$owner_id = getIntFromRequest('atid');
 		}
 		parent::__construct('trackergeneral', $owner_id, WidgetLayoutManager::OWNER_TYPE_TRACKER);
 		$this->title = _('General Information');

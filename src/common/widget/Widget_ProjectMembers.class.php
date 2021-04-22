@@ -2,7 +2,7 @@
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2016, Franck Villaume - TrivialDev
+ * Copyright 2016,2021, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -37,8 +37,7 @@ class Widget_ProjectMembers extends Widget {
 	public function getContent() {
 		$result = '';
 
-		$request =& HTTPRequest::instance();
-		$group_id = $request->get('group_id');
+		$group_id = getIntFromRequest('group_id');
 		$pm = ProjectManager::instance();
 		$project = $pm->getProject($group_id);
 

@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2021, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -53,21 +53,8 @@ class Widget_MyMonitoredFp extends Widget {
 				}
 			}
 			if (count($validDistinctMonitorGroupIdsArray)) {
-				$request =& HTTPRequest::instance();
-				$vItemId = new Valid_UInt('hide_item_id');
-				$vItemId->required();
-				if ($request->valid($vItemId)) {
-					$hide_item_id = $request->get('hide_item_id');
-				} else {
-					$hide_item_id = null;
-				}
-				$vFrs = new Valid_WhiteList('hide_frs', array(0, 1));
-				$vFrs->required();
-				if ($request->valid($vFrs)) {
-					$hide_frs = $request->get('hide_frs');
-				} else {
-					$hide_frs = null;
-				}
+				$hide_item_id = getIntFromRequest('hide_item_id', 0);
+				$hide_frs = getIntFromRequest('hide_frs', 0);
 				$setListTableTop = true;
 				foreach ($validDistinctMonitorGroupIdsArray as $validDistinctMonitorGroupId) {
 					$groupObject = group_get_object($validDistinctMonitorGroupId);
@@ -134,10 +121,9 @@ class Widget_MyMonitoredFp extends Widget {
 	}
 
 	function getAjaxUrl($owner_id, $owner_type) {
-		$request =& HTTPRequest::instance();
 		$ajax_url = parent::getAjaxUrl($owner_id, $owner_type);
-		if ($request->exist('hide_item_id') || $request->exist('hide_frs')) {
-			$ajax_url .= '&hide_item_id='.$request->get('hide_item_id').'&hide_frs='.$request->get('hide_frs');
+		if (existInRequest('hide_item_id') || existInRequest('hide_frs')) {
+			$ajax_url .= '&hide_item_id='.getIntFromRequest('hide_item_id').'&hide_frs='.getIntFromRequest('hide_frs');
 		}
 		return $ajax_url;
 	}

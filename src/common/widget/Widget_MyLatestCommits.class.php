@@ -3,7 +3,7 @@
  * Widget_MyLatestCommits
  *
  * Copyright (c) Xerox Corporation, Codendi 2001-2009 - marc.nazarian@xrce.xerox.com
- * Copyright 2014, 2018,2021, Franck Villaume - TrivialDev
+ * Copyright 2014,2018,2021, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -60,27 +60,13 @@ class Widget_MyLatestCommits extends Widget {
 	public function getContent() {
 		global $HTML;
 		$html = '';
-		//$uh = new UserHelper();
-		$request = HTTPRequest::instance();
 		$hp = Codendi_HTMLPurifier::instance();
 		$user = UserManager::instance()->getCurrentUser();
 		$projects = $user->getGroups();
 		$global_nb_revisions = 0;
 		foreach ($projects as $project) {
-			$vItemId = new Valid_UInt('hide_item_id');
-			$vItemId->required();
-			if ($request->valid($vItemId)) {
-				$hide_item_id = $request->get('hide_item_id');
-			} else {
-				$hide_item_id = null;
-			}
-			$vProject = new Valid_WhiteList('hide_scm', array(0, 1));
-			$vProject->required();
-			if ($request->valid($vProject)) {
-				$hide_scm = $request->get('hide_scm');
-			} else {
-				$hide_scm = null;
-			}
+			$hide_item_id = getIntFromRequest('hide_item_id', 0);
+			$hide_scm = getIntFromRequest('hide_scm', 0);
 			$revisions = array();
 			if ($project->usesPlugin('scmsvn') && forge_check_perm('scm', $project->getID(), 'read')) {
 				$scmPlugin = plugin_get_object('scmsvn');
@@ -133,20 +119,13 @@ class Widget_MyLatestCommits extends Widget {
 	}
 
 	function updatePreferences() {
-		$request->valid(new Valid_String('cancel'));
-		$nbShow = new Valid_UInt('nb_commits');
-		$nbShow->required();
-		if (!$request->exist('cancel')) {
-			if ($request->valid($nbShow)) {
-				$this->_nb_commits = $request->get('nb_commits');
-			} else {
-				$this->_nb_commits = self::NB_COMMITS_TO_DISPLAY;
-			}
+		$cancel = getStringFromRequest('cancel');
+		if (strlen($cancel) > 0) {
+			$this->_nb_commits = getIntFromRequest('nb_commits', self::NB_COMMITS_TO_DISPLAY);
 			UserManager::instance()->getCurrentUser()->setPreference('my_latests_commits_nb_display', $this->_nb_commits);
 		}
 		return true;
 	}
-
 
 	function hasPreferences() {
 		return true;
@@ -165,10 +144,9 @@ class Widget_MyLatestCommits extends Widget {
 	}
 
 	function getAjaxUrl($owner_id, $owner_type) {
-		$request =& HTTPRequest::instance();
 		$ajax_url = parent::getAjaxUrl($owner_id, $owner_type);
-		if ($request->exist('hide_item_id') || $request->exist('hide_scm')) {
-			$ajax_url .= '&hide_item_id='.$request->get('hide_item_id').'&hide_scm='.$request->get('hide_scm');
+		if (existInRequest('hide_item_id') || existInRequest('hide_scm')) {
+			$ajax_url .= '&hide_item_id='.getIntFromRequest('hide_item_id').'&hide_scm='.getIntFromRequest('hide_scm');
 		}
 		return $ajax_url;
 	}

@@ -29,8 +29,7 @@ class Widget_TrackerMain extends Widget {
 	var $title;
 
 	function __construct() {
-		$request =& HTTPRequest::instance();
-		$owner_id   = (int)substr($request->get('owner'), 1);
+		$owner_id   = (int)substr(getStringFromRequest('owner'), 1);
 		parent::__construct('trackermain', $owner_id, WidgetLayoutManager::OWNER_TYPE_TRACKER);
 		$this->title = _('Internal Fields');
 	}

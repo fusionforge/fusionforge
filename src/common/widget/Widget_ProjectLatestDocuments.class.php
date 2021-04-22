@@ -2,7 +2,7 @@
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
  * Copyright 2010, Franck Villaume - Capgemini
- * Copyright 2012-2013,2016, Franck Villaume - TrivialDev
+ * Copyright 2012-2013,2016,2021, Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of National Education
  *
  * This file is a part of Fusionforge.
@@ -32,9 +32,8 @@ class Widget_ProjectLatestDocuments extends Widget {
 	var $content;
 	function __construct() {
 		parent::__construct('projectlatestdocuments');
-		$request =& HTTPRequest::instance();
 		$pm = ProjectManager::instance();
-		$project = $pm->getProject($request->get('group_id'));
+		$project = $pm->getProject(getIntFromRequest('group_id'));
 		if ($project && $this->canBeUsedByProject($project) && forge_check_perm('docman', $project->getID(), 'read')) {
 			$this->content['title'] = _('5 Latest Published Documents');
 		}
@@ -45,12 +44,9 @@ class Widget_ProjectLatestDocuments extends Widget {
 	}
 
 	function getContent() {
-		$result = '';
-
 		global $HTML;
-		$request =& HTTPRequest::instance();
-		$group_id = $request->get('group_id');
-
+		$group_id = getIntFromRequest('group_id');
+		$result = '';
 		$qpa = db_construct_qpa();
 		$qpa = db_construct_qpa($qpa, 'SELECT docid FROM doc_data, doc_groups WHERE doc_data.group_id = $1',
 					array($group_id));

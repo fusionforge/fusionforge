@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
+ * Copyright 2021, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -29,12 +30,11 @@ class Widget_ProjectLatestNews extends Widget {
 	function __construct() {
 		global $gfwww;
 		parent::__construct('projectlatestnews');
-		$request =& HTTPRequest::instance();
 		$pm = ProjectManager::instance();
-		$project = $pm->getProject($request->get('group_id'));
+		$project = $pm->getProject(getIntFromRequest('group_id'));
 		if ($project && $this->canBeUsedByProject($project)) {
 			require_once 'www/news/news_utils.php';
-			$this->content = news_show_latest($request->get('group_id'), 10, false);
+			$this->content = news_show_latest($project->getID(), 10, false);
 		}
 	}
 
@@ -55,8 +55,7 @@ class Widget_ProjectLatestNews extends Widget {
 	}
 
 	function displayRss() {
-		$request =& HTTPRequest::instance();
-		$owner = $request->get('owner');
+		$owner = getStringFromRequest('owner');
 		$group_id = (int)substr($owner, 1);
 		require_once 'www/export/rss_utils.inc';
 //XXX the following function does not exist

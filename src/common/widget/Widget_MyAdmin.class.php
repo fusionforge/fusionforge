@@ -56,10 +56,10 @@ class Widget_MyAdmin extends Widget {
 
 		if (forge_check_global_perm('approve_projects')) {
 			$res = db_query_params('SELECT count(*) AS count FROM groups
-			WHERE group_id > 4
-			    AND status = $1
-			    AND register_time > 0
-			    AND is_template = 0',
+						WHERE group_id > 4
+						AND status = $1
+						AND register_time > 0
+						AND is_template = 0',
 				array('P'));
 			$row = db_fetch_array($res);
 			$pending_projects = $row['count'];
@@ -75,14 +75,14 @@ class Widget_MyAdmin extends Widget {
 		if (forge_check_global_perm('approve_news')) {
 			$old_date = time()-60*60*24*30;
 			$res = db_query_params('SELECT groups.group_id,id,post_date,summary,
-				group_name,unix_group_name
-			FROM news_bytes,groups
-			WHERE is_approved=0
-			AND news_bytes.group_id=groups.group_id
-			AND post_date > $1
-			AND groups.status=$2
-			ORDER BY post_date',
-				array ($old_date, 'A')) ;
+						group_name,unix_group_name
+						FROM news_bytes,groups
+						WHERE is_approved=0
+						AND news_bytes.group_id=groups.group_id
+						AND post_date > $1
+						AND groups.status=$2
+						ORDER BY post_date',
+						array ($old_date, 'A')) ;
 			$pending_news = db_numrows($res);
 
 			$html_my_admin .= $this->_get_admin_row(

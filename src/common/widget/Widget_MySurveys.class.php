@@ -92,21 +92,8 @@ class Widget_MySurveys extends Widget {
 					}
 				}
 				$surveys = array_values($surveys);
-				$vItemId = new Valid_UInt('hide_item_id');
-				$vItemId->required();
-				if($request->valid($vItemId)) {
-					$hide_item_id = $request->get('hide_item_id');
-				} else {
-					$hide_item_id = null;
-				}
-
-				$vForum = new Valid_WhiteList('hide_survey', array(0, 1));
-				$vForum->required();
-				if($request->valid($vForum)) {
-					$hide_survey = $request->get('hide_survey');
-				} else {
-					$hide_survey = null;
-				}
+				$hide_item_id = getIntFromRequest('hide_item_id', 0);
+				$hide_survey = getIntFromRequest('hide_survey', 0);
 
 				list($hide_now,$count_diff,$hide_url) = my_hide_url('survey',$group_id,$hide_item_id,count($surveys),$hide_survey);
 
@@ -164,25 +151,22 @@ class Widget_MySurveys extends Widget {
 	}
 
 	function updatePreferences() {
-		$request->valid(new Valid_String('cancel'));
-		$vShow = new Valid_WhiteList('show', array('A', 'N', 'AN'));
-		$vShow->required();
-		if (!$request->exist('cancel')) {
-			if ($request->valid($vShow)) {
-				switch($request->get('show')) {
-					case 'A':
-						$this->_survey_show = 'A';
-						break;
-					case 'N':
-						$this->_survey_show = 'N';
-						break;
-					case 'AN':
-					default:
-						$this->_survey_show = 'AN';
-						break;
-				}
-				UserManager::instance()->getCurrentUser()->setPreference('my_surveys_show', $this->_survey_show);
+		$cancel = getStringFromRequest('cancel');
+		if (strlen($cancel) > 0) {
+			$show = getStringFromRequest('show');
+			switch($show) {
+				case 'A':
+					$this->_survey_show = 'A';
+					break;
+				case 'N':
+					$this->_survey_show = 'N';
+				break;
+				case 'AN':
+				default:
+					$this->_survey_show = 'AN';
+					break;
 			}
+			UserManager::instance()->getCurrentUser()->setPreference('my_surveys_show', $this->_survey_show);
 		}
 		return true;
 	}

@@ -2,7 +2,7 @@
 /**
  * Widget_ProjectLatestArtifacts
  *
- * Copyright 2017, Franck Villaume - TrivialDev
+ * Copyright 2017,2021, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -29,9 +29,8 @@ class Widget_ProjectLatestArtifacts extends Widget {
 
 	public function __construct() {
 		parent::__construct('projectlatestartifacts');
-		$request =& HTTPRequest::instance();
 		$pm = ProjectManager::instance();
-		$project = $pm->getProject($request->get('group_id'));
+		$project = $pm->getProject(getIntFromRequest('group_id'));
 		if ($project && $this->canBeUsedByProject($project)) {
 			$atf = new ArtifactTypeFactory($project);
 			$ats = $atf->getArtifactTypes();
@@ -53,10 +52,8 @@ class Widget_ProjectLatestArtifacts extends Widget {
 	public function getContent() {
 		global $HTML;
 		$html = '';
-		//$uh = new UserHelper();
-		$request = HTTPRequest::instance();
 		$pm = ProjectManager::instance();
-		$project = $pm->getProject($request->get('group_id'));
+		$project = $pm->getProject(getIntFromRequest('group_id'));
 		$atf = new ArtifactTypeFactory($project);
 		$artifacts = array();
 		$ats = $atf->getArtifactTypes();

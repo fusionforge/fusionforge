@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2012,2014, Franck Villaume - TrivialDev
+ * Copyright 2012,2014,2021, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -36,9 +36,8 @@ class Widget_ProjectDocumentsActivity extends Widget {
 				$this->_statistic_show = $userPrefValue;
 			}
 		}
-		$request =& HTTPRequest::instance();
 		$pm = ProjectManager::instance();
-		$project = $pm->getProject($request->get('group_id'));
+		$project = $pm->getProject(getIntFromRequest('group_id'));
 		if ($project && $this->canBeUsedByProject($project) && forge_check_perm('docman', $project->getID(), 'read')) {
 			$this->content['title'] = _('Last 4 weeks Documents Manager Activity');
 		}
@@ -52,33 +51,30 @@ class Widget_ProjectDocumentsActivity extends Widget {
 	}
 
 	function updatePreferences() {
-		$request->valid(new Valid_String('cancel'));
-		$vShow = new Valid_WhiteList('show', array('F', 'D', 'U', 'FU', 'FD', 'FUD'));
-		$vShow->required();
-		if (!$request->exist('cancel')) {
-			if ($request->valid($vShow)) {
-				switch($request->get('show')) {
-					case 'F':
-						$this->_statistic_show = 'F';
-						break;
-					case 'D':
-						$this->_statistic_show = 'D';
-						break;
-					case 'U':
-						$this->_statistic_show = 'U';
-						break;
-					case 'FU':
-						$this->_statistic_show = 'FU';
-						break;
-					case 'FD':
-						$this->_statistic_show = 'FD';
-						break;
-					case 'FUD':
-					default:
-						$this->_statistic_show = 'FUD';
-				}
-				UserManager::instance()->getCurrentUser()->setPreference('my_docman_project_activitity_show', $this->_statistic_show);
+		$cancel = getStringFromRequest('cancel');
+		if (strlent($cancel) > 0) {
+			$show = getStringFromRequest('show');
+			switch($request->get('show')) {
+				case 'F':
+					$this->_statistic_show = 'F';
+					break;
+				case 'D':
+					$this->_statistic_show = 'D';
+					break;
+				case 'U':
+					$this->_statistic_show = 'U';
+					break;
+				case 'FU':
+					$this->_statistic_show = 'FU';
+					break;
+				case 'FD':
+					$this->_statistic_show = 'FD';
+					break;
+				case 'FUD':
+				default:
+					$this->_statistic_show = 'FUD';
 			}
+			UserManager::instance()->getCurrentUser()->setPreference('my_docman_project_activitity_show', $this->_statistic_show);
 		}
 		return true;
 	}
@@ -103,8 +99,7 @@ class Widget_ProjectDocumentsActivity extends Widget {
 		html_use_jqueryjqplotpluginBar();
 		$result .= $HTML->getJavascripts();
 		$result .= $HTML->getStylesheets();
-		$request =& HTTPRequest::instance();
-		$group_id = $request->get('group_id');
+		$group_id = getIntFromRequest('group_id');
 		$group = group_get_object($group_id);
 		$dm = new DocumentManager($group);
 		$begin1 = strtotime('monday this week');
@@ -123,29 +118,24 @@ class Widget_ProjectDocumentsActivity extends Widget {
 		switch ($this->_statistic_show) {
 			case 'F': {
 				$visibility = $activitysArray[0]['docmannew'] + $activitysArray[1]['docmannew'] + $activitysArray[2]['docmannew'] + $activitysArray[3]['docmannew'];
-
 				break;
 			}
 			case 'U': {
 				$visibility = $activitysArray[0]['docmanupdate'] + $activitysArray[1]['docmanupdate'] + $activitysArray[2]['docmanupdate'] + $activitysArray[3]['docmanupdate'];
-
 				break;
 			}
 			case 'D': {
 				$visibility = $activitysArray[0]['docgroupnew'] + $activitysArray[1]['docgroupnew'] + $activitysArray[2]['docgroupnew'] + $activitysArray[3]['docgroupnew'];
-
 				break;
 			}
 			case 'FU': {
 				$visibility = $activitysArray[0]['docmannew'] + $activitysArray[1]['docmannew'] + $activitysArray[2]['docmannew'] + $activitysArray[3]['docmannew'] +
 						$activitysArray[0]['docmanupdate'] + $activitysArray[1]['docmanupdate'] + $activitysArray[2]['docmanupdate'] + $activitysArray[3]['docmanupdate'];
-
 				break;
 			}
 			case 'FD': {
 				$visibility = $activitysArray[0]['docmannew'] + $activitysArray[1]['docmannew'] + $activitysArray[2]['docmannew'] + $activitysArray[3]['docmannew'] +
 						$activitysArray[0]['docgroupnew'] + $activitysArray[1]['docgroupnew'] + $activitysArray[2]['docgroupnew'] + $activitysArray[3]['docgroupnew'];
-
 				break;
 			}
 			default: {
@@ -241,7 +231,6 @@ class Widget_ProjectDocumentsActivity extends Widget {
 			$result .= $HTML->warning_msg(_('No activity to display.'));
 		}
 		$result .= html_e('div', array('class' => 'underline-link'), util_make_link('/docman/?group_id='.$group_id, _('Browse Documents Manager')));
-
 		return $result;
 	}
 

@@ -3,7 +3,7 @@
  * Generic RSS Widget Class
  *
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2012,2014,2019, Franck Villaume - TrivialDev
+ * Copyright 2012,2014,2019,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is a part of Fusionforge.
@@ -32,14 +32,17 @@ require_once 'Widget.class.php';
 /* abstract */ class Widget_Rss extends Widget {
 	var $rss_title;
 	var $rss_url;
+	
 	function __construct($id, $owner_id, $owner_type) {
 		parent::__construct($id);
 		$this->setOwner($owner_id, $owner_type);
 	}
+
 	function getTitle() {
 		$hp = Codendi_HTMLPurifier::instance();
 		return $this->rss_title ?  $hp->purify($this->rss_title, CODENDI_PURIFIER_CONVERT_HTML)  : _('RSS Reader');
 	}
+
 	function getContent() {
 		global $HTML;
 		$hp = Codendi_HTMLPurifier::instance();
@@ -89,12 +92,15 @@ require_once 'Widget.class.php';
 		}
 		return $content;
 	}
+
 	function isAjax() {
 		return true;
 	}
+
 	function hasPreferences() {
 		return true;
 	}
+
 	function getPreferences() {
 		$hp = Codendi_HTMLPurifier::instance();
 		$prefs = '<table>';
@@ -113,6 +119,7 @@ require_once 'Widget.class.php';
 		$prefs .= '</table>';
 		return $prefs;
 	}
+
 	function getInstallPreferences() {
 		$prefs = '<table>';
 		$prefs .= '<tr>';
@@ -132,6 +139,7 @@ require_once 'Widget.class.php';
 		$prefs .= '</table>';
 		return $prefs;
 	}
+
 	function cloneContent($id, $owner_id, $owner_type) {
 		$sql = "INSERT INTO widget_rss (owner_id, owner_type, title, url)
 			SELECT $1, $2, title, url
@@ -140,6 +148,7 @@ require_once 'Widget.class.php';
 		$res = db_query_params($sql,array($owner_id,$owner_type,$this->owner_id,$this->owner_type));
 		return db_insertid($res,'widget_rss','id');
 	}
+
 	function loadContent($id) {
 		$sql = "SELECT * FROM widget_rss WHERE owner_id = $1 AND owner_type = $2 AND id = $3";
 		$res = db_query_params($sql,array($this->owner_id,$this->owner_type,$id));
@@ -150,69 +159,51 @@ require_once 'Widget.class.php';
 			$this->content_id = $id;
 		}
 	}
+
 	function create() {
-		$content_id = false;
-		$vUrl = new Valid_String('url');
-		$vUrl->setErrorMessage(_("Cannot add empty RSS URL"));
-		$vUrl->required();
-		if($request->validInArray('rss', $vUrl)) {
-			$rss = $request->get('rss');
-			$vTitle = new Valid_String('title');
-			$vTitle->required();
-			if (!$request->validInArray('rss', $vTitle)) {
-				if (!(include_once 'simplepie/simplepie.inc'))  // vendor, debian
-					if (!(include_once 'php-simplepie/autoloader.php'))  // fedora
-						exit_error(_('Could not load the SimplePie PHP library.'));
-				if (!is_dir(forge_get_config('data_path') .'/rss')) {
-					mkdir(forge_get_config('data_path') .'/rss');
-				}
-				$rss_reader = new SimplePie($rss['url'], forge_get_config('data_path') .'/rss', null, forge_get_config('sys_proxy'));
-				if ($rss_reader) {
-					$rss['title'] = $rss_reader->get_title();
-				} else {
-					return false;
-				}
-			}
-			$sql = 'INSERT INTO widget_rss (owner_id, owner_type, title, url) VALUES ($1,$2,$3,$4)';
-			$res = db_query_params($sql,array($this->owner_id,$this->owner_type,$rss['title'],$rss['url']));
-			$content_id = db_insertid($res, 'widget_rss', 'id');
+		$rss = getArrayFromRequest('rss');
+		if (!(include_once 'simplepie/simplepie.inc'))  // vendor, debian
+			if (!(include_once 'php-simplepie/autoloader.php'))  // fedora
+				exit_error(_('Could not load the SimplePie PHP library.'));
+		if (!is_dir(forge_get_config('data_path') .'/rss')) {
+			mkdir(forge_get_config('data_path') .'/rss');
 		}
+		$rss_reader = new SimplePie($rss['url'], forge_get_config('data_path') .'/rss', null, forge_get_config('sys_proxy'));
+		if ($rss_reader) {
+			//TODO: why ??? We set the title in preference.
+			$rss['title'] = $rss_reader->get_title();
+		} else {
+			return false;
+		}
+		$sql = 'INSERT INTO widget_rss (owner_id, owner_type, title, url) VALUES ($1,$2,$3,$4)';
+		$res = db_query_params($sql,array($this->owner_id,$this->owner_type,$rss['title'],$rss['url']));
+		$content_id = db_insertid($res, 'widget_rss', 'id');
 		return $content_id;
 	}
+
 	function updatePreferences() {
 		$done = false;
-		$vContentId = new Valid_UInt('content_id');
-		$vContentId->required();
-		if (($rss = $request->get('rss')) && $request->valid($vContentId)) {
-			$vUrl = new Valid_String('url');
-			if($request->validInArray('rss', $vUrl)) {
-				$url =  $rss['url'] ;
-			} else {
-				$url = '';
-			}
-
-			$vTitle = new Valid_String('title');
-			if($request->validInArray('rss', $vTitle)) {
-				$title =  $rss['title'] ;
-			} else {
-				$title = '';
-			}
-
+		if ($rss = getArrayFromRequest('rss')) {
+			$url =  $rss['url'] ;
+			$title =  $rss['title'] ;
 			if ($url || $title) {
 				$sql = "UPDATE widget_rss SET title=$1 , url=$2  WHERE owner_id =$3 AND owner_type = $4 AND id = $5";
-				db_query_params($sql,array($title,$url,$this->owner_id,$this->owner_type,(int)$request->get('content_id')));
+				db_query_params($sql, array($title, $url, $this->owner_id, $this->owner_type, (int)$request->get('content_id')));
 				$done = true;
 			}
 		}
 		return $done;
 	}
+
 	function destroy($id) {
 		$sql = 'DELETE FROM widget_rss WHERE id = $1 AND owner_id = $2 AND owner_type = $3';
 		db_query_params($sql,array($id,$this->owner_id,$this->owner_type));
 	}
+
 	function isUnique() {
 		return false;
 	}
+
 	function _date_ago($from_time, $to_time) {
 		$distance_in_minutes = round((abs($to_time - $from_time))/60);
 

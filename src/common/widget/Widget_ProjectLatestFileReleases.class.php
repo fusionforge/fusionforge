@@ -30,9 +30,8 @@ class Widget_ProjectLatestFileReleases extends Widget {
 	var $content;
 	function __construct() {
 		parent::__construct('projectlatestfilereleases');
-		$request =& HTTPRequest::instance();
 		$pm = ProjectManager::instance();
-		$project = $pm->getProject($request->get('group_id'));
+		$project = $pm->getProject(getIntFromRequest('group_id'));
 		if ($project && $this->canBeUsedByProject($project) && forge_check_perm('frs_admin', $project->getID(), 'read')) {
 			$this->content['title'] = _('Latest File Releases');
 		}
@@ -43,13 +42,11 @@ class Widget_ProjectLatestFileReleases extends Widget {
 	}
 
 	function getContent() {
-		$result = '';
-
-		$request =& HTTPRequest::instance();
-		$pm = ProjectManager::instance();
-		$group_id = $request->get('group_id');
-		$project = $pm->getProject($group_id);
 		global $HTML;
+		$result = '';
+		$pm = ProjectManager::instance();
+		$group_id = getIntFromRequest('group_id');
+		$project = $pm->getProject($group_id);
 
 		$frsrf = new FRSReleaseFactory($project);
 		$frsrnrs = $frsrf->getFRSRNewReleases(true);

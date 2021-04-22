@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2012-2013,2018-2019, Franck Villaume - TrivialDev
+ * Copyright 2012-2013,2018-2019,2021,  Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of Education
  * http://fusionforge.org
  *
@@ -128,7 +128,7 @@ class Widget_MyArtifacts extends Widget {
 
 		if (count($my_artifacts) > 0) {
 			$html_my_artifacts = $HTML->listTableTop();
-			$html_my_artifacts .= $this->_display_artifacts($my_artifacts, 1);
+			$html_my_artifacts .= $this->_display_artifacts($my_artifacts);
 			$html_my_artifacts .= $HTML->listTableBottom();
 		} else {
 			$html_my_artifacts = $HTML->warning_msg(_('You have no artifacts.'));
@@ -137,26 +137,11 @@ class Widget_MyArtifacts extends Widget {
 		return $html_my_artifacts;
 	}
 
-	function _display_artifacts($list_trackers, $print_box_begin) {
+	function _display_artifacts($list_trackers) {
 		global $HTML;
-		$request = HTTPRequest::instance();
-		$vItemId = new Valid_UInt('hide_item_id');
-		$vItemId->required();
-		if($request->valid($vItemId)) {
-			$hide_item_id = $request->get('hide_item_id');
-		} else {
-			$hide_item_id = null;
-		}
+		$hide_item_id = getIntFromRequest('hide_item_id', 0);
+		$hide_artifact = getIntFromRequest('hide_artifact', 0);
 
-		$vArtifact = new Valid_WhiteList('hide_artifact', array(0, 1));
-		$vArtifact->required();
-		if($request->valid($vArtifact)) {
-			$hide_artifact = $request->get('hide_artifact');
-		} else {
-			$hide_artifact = null;
-		}
-
-		$j = $print_box_begin;
 		$html_my_artifacts = '';
 		$html = '';
 		$html_hdr = '';
@@ -186,8 +171,7 @@ class Widget_MyArtifacts extends Widget {
 
 				//work on the tracker of the last round if there was one
 				if ($atid != $atid_old && $count_aids != 0) {
-					list($hide_now,$count_diff,$hide_url) =
-						my_hide_url('artifact', $atid_old, $hide_item_id, $count_aids, $hide_artifact);
+					list($hide_now,$count_diff,$hide_url) = my_hide_url('artifact', $atid_old, $hide_item_id, $count_aids, $hide_artifact);
 					$count_new = max(0, $count_diff);
 					$cells = array();
 					$cells[] = array($hide_url.
@@ -199,13 +183,11 @@ class Widget_MyArtifacts extends Widget {
 					$html_my_artifacts .= $HTML->multiTableRow(array('class' => 'boxitem'), $cells).$html;
 					$count_aids = 0;
 					$html = '';
-					$j++;
-
 				}
 
 				if ($count_aids == 0) {
 					//have to call it to get at least the hide_now even if count_aids is false at this point
-					$hide_now = my_hide('artifact',$atid,$hide_item_id,$hide_artifact);
+					$hide_now = my_hide('artifact', $atid, $hide_item_id, $hide_artifact);
 				}
 
 				$group_name   = $trackers_array->ArtifactType->Group->getPublicName();
@@ -226,11 +208,11 @@ class Widget_MyArtifacts extends Widget {
 					// Form the 'Submitted by/Assigned/Monitored_by to flag' for marking
 					$AS_flag = '';
 					$AS_title = '';
-					if($trackers_array->getAssignedTo()== user_getid()) {
+					if($trackers_array->getAssignedTo() == user_getid()) {
 						$AS_flag .= 'A';
 						$AS_title .= _('Assigned');
 					}
-					if ($trackers_array->getSubmittedBy()== user_getid()) {
+					if ($trackers_array->getSubmittedBy() == user_getid()) {
 						$AS_flag .= 'S';
 						if (strlen($AS_title))
 							$AS_title .= ' / ';
@@ -259,7 +241,7 @@ class Widget_MyArtifacts extends Widget {
 		}
 		//work on the tracker of the last round if there was one
 		if ($atid_old != 0 && $count_aids != 0) {
-			list($hide_now,$count_diff,$hide_url) = my_hide_url('artifact',$atid_old,$hide_item_id,$count_aids,$hide_artifact);
+			list($hide_now,$count_diff,$hide_url) = my_hide_url('artifact', $atid_old, $hide_item_id, $count_aids, $hide_artifact);
 			$count_new = max(0, $count_diff);
 			$cells = array();
 			$cells[] = array($hide_url.

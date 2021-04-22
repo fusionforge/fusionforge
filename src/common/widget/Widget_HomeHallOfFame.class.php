@@ -83,36 +83,33 @@ class Widget_HomeHallOfFame extends Widget {
 	}
 
 	function updatePreferences() {
-		$request->valid(new Valid_String('cancel'));
-		$vShow = new Valid_WhiteList('show', array('P', 'D', 'A', 'PA', 'PD', 'DA', 'PDA'));
-		$vShow->required();
-		if (!$request->exist('cancel')) {
-			if ($request->valid($vShow)) {
-				switch($request->get('show')) {
-					case 'P':
-						$this->_hall_show = 'P';
-						break;
-					case 'D':
-						$this->_hall_show = 'D';
-						break;
-					case 'A':
-						$this->_hall_show = 'A';
-						break;
-					case 'PA':
-						$this->_hall_show = 'PA';
-						break;
-					case 'PD':
-						$this->_hall_show = 'PD';
-						break;
-					case 'DA':
-						$this->_hall_show = 'DA';
-						break;
-					case 'PDA':
-					default:
-						$this->_hall_show = 'PDA';
-				}
-				UserManager::instance()->getCurrentUser()->setPreference('my_home_hall_of_fame', $this->_hall_show);
+		$cancel = getStringFromRequest('cancel');
+		if (strlen($cancel) > 0) {
+			$show = getStringFromRequest('show');
+			switch($show) {
+				case 'P':
+					$this->_hall_show = 'P';
+					break;
+				case 'D':
+					$this->_hall_show = 'D';
+					break;
+				case 'A':
+					$this->_hall_show = 'A';
+					break;
+				case 'PA':
+					$this->_hall_show = 'PA';
+					break;
+				case 'PD':
+					$this->_hall_show = 'PD';
+					break;
+				case 'DA':
+					$this->_hall_show = 'DA';
+					break;
+				case 'PDA':
+				default:
+					$this->_hall_show = 'PDA';
 			}
+			UserManager::instance()->getCurrentUser()->setPreference('my_home_hall_of_fame', $this->_hall_show);
 		}
 		return true;
 	}

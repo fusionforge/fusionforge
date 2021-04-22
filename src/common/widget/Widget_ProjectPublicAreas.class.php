@@ -38,13 +38,11 @@ class Widget_ProjectPublicAreas extends Widget {
 	}
 
 	function getContent() {
+		global $HTML;
 		$result = '';
-
-		$request =& HTTPRequest::instance();
-		$group_id = $request->get('group_id');
+		$group_id = getIntFromRequest('group_id');
 		$pm = ProjectManager::instance();
 		$project = $pm->getProject($group_id);
-		global $HTML;
 		// ################# Homepage Link
 
 		$result .= html_e('div', array('class' => 'public-area-box', 'rel' => 'doap:homepage'),

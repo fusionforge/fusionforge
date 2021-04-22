@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2014-2016, Franck Villaume - TrivialDev
+ * Copyright 2014-2016,2021, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -45,7 +45,7 @@ class Widget_MyTasks extends Widget {
 			' AND project_task.status_id=1 AND project_group_list.group_id=groups.group_id '.
 			'AND project_group_list.group_project_id=project_task.group_project_id GROUP BY groups.group_id, groups.group_name, project_group_list.project_name, project_group_list.group_project_id';
 
-		$result=db_query_params($sql,array(user_getid()));
+		$result = db_query_params($sql,array(user_getid()));
 
 		$plist = array();
 		while ($r = db_fetch_array($result)) {
@@ -58,7 +58,6 @@ class Widget_MyTasks extends Widget {
 		$rows = count($plist);
 
 		if ($result && $rows >= 1) {
-			$request =& HTTPRequest::instance();
 			$this->content .= $HTML->listTableTop();
 			for ($j=0; $j<$rows; $j++) {
 
@@ -77,22 +76,8 @@ class Widget_MyTasks extends Widget {
 				$result2 = db_query_params($sql2,array(user_getid(),$group_id,$group_project_id), 100);
 				$rows2 = db_numrows($result2);
 
-				$vItemId = new Valid_UInt('hide_item_id');
-				$vItemId->required();
-				if($request->valid($vItemId)) {
-					$hide_item_id = $request->get('hide_item_id');
-				} else {
-					$hide_item_id = null;
-				}
-
-				$vPm = new Valid_WhiteList('hide_pm', array(0, 1));
-				$vPm->required();
-				if($request->valid($vPm)) {
-					$hide_pm = $request->get('hide_pm');
-				} else {
-					$hide_pm = null;
-				}
-
+				$hide_item_id = getIntFromRequest('hide_item_id', 0);
+				$hide_pm = getIntFromRequest('hide_pm', 0);
 				list($hide_now,$count_diff,$hide_url) = my_hide_url('pm',$group_project_id,$hide_item_id,$rows2,$hide_pm);
 
 				$html_hdr = '<tr class="boxitem"><td colspan="3">'.
@@ -101,9 +86,7 @@ class Widget_MyTasks extends Widget {
 				$html = '';
 				$count_new = max(0, $count_diff);
 				for ($i=0; $i<$rows2; $i++) {
-
 					if (!$hide_now) {
-
 						$html .= '
 							<tr class="priority'.db_result($result2,$i,'priority').
 							'"><td class="small">'.
@@ -111,7 +94,6 @@ class Widget_MyTasks extends Widget {
 									'&group_id='.$group_id.'&group_project_id='.$group_project_id,
 									stripslashes(db_result($result2,$i,'summary'))).'</td>'.
 							'<td class="small">'.(db_result($result2,$i,'percent_complete')).'%</td></tr>';
-
 					}
 				}
 

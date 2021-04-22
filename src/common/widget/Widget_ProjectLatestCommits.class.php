@@ -2,7 +2,7 @@
 /**
  * Widget_ProjectLatestCommits
  *
- * Copyright 2014,2017-2018, Franck Villaume - TrivialDev
+ * Copyright 2014,2017-2018,2021, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -29,9 +29,8 @@ class Widget_ProjectLatestCommits extends Widget {
 
 	public function __construct() {
 		parent::__construct('projectlatestcommits');
-		$request =& HTTPRequest::instance();
 		$pm = ProjectManager::instance();
-		$project = $pm->getProject($request->get('group_id'));
+		$project = $pm->getProject(getIntFromRequest('group_id'));
 		if ($project && $this->canBeUsedByProject($project) && forge_check_perm('scm', $project->getID(), 'read')) {
 			$this->content['title'] = _('5 Latest Commits');
 		}
@@ -55,10 +54,8 @@ class Widget_ProjectLatestCommits extends Widget {
 	public function getContent() {
 		global $HTML;
 		$html = '';
-		//$uh = new UserHelper();
-		$request = HTTPRequest::instance();
 		$pm = ProjectManager::instance();
-		$project = $pm->getProject($request->get('group_id'));
+		$project = $pm->getProject(getIntFromRequest('group_id'));
 		$revisions = array();
 		if ($project->usesPlugin('scmsvn') && forge_check_perm('scm', $project->getID(), 'read')) {
 			$scmPlugin = plugin_get_object('scmsvn');
@@ -110,10 +107,9 @@ class Widget_ProjectLatestCommits extends Widget {
 	}
 
 	function getAjaxUrl($owner_id, $owner_type) {
-		$request =& HTTPRequest::instance();
 		$ajax_url = parent::getAjaxUrl($owner_id, $owner_type);
-		if ($request->exist('hide_item_id') || $request->exist('hide_scm')) {
-			$ajax_url .= '&hide_item_id='.$request->get('hide_item_id').'&hide_scm='.$request->get('hide_scm');
+		if (existInRequest('hide_item_id') || existInRequest('hide_scm')) {
+			$ajax_url .= '&hide_item_id='.getIntFromRequest('hide_item_id').'&hide_scm='.getIntFromRequest('hide_scm');
 		}
 		return $ajax_url;
 	}

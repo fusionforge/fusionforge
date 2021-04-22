@@ -3,6 +3,7 @@
  * FusionForge escaping library
  *
  * Copyright 2003-2004, Guillaume Smet
+ * Copyright 2021, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -357,7 +358,16 @@ function getFilteredStringFromRequest($string, $pattern, $defaultValue = '') {
 	}
 }
 
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:
+/**
+ * existInRequest - check if a var exists in REQUEST
+ *
+ * @param	any	$var	key to check
+ * @return	bool	true if found or false if not found.
+ */
+function existInRequest($var) {
+	$arrR = _getRequestArray();
+	if (isset($arrR[$var])) {
+		return true;
+	}
+	return false;
+}

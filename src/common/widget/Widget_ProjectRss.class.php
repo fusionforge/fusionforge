@@ -2,7 +2,7 @@
 /**
  * Copyright (c) Xerox, 2009. All Rights Reserved.
  * Originally written by Nicolas Terray, 2009. Xerox Codendi Team.
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2021, Franck Villaume - TrivialDev
  * This file is a part of Fusionforge.
  *
  * Fusionforge is free software; you can redistribute it and/or modify
@@ -30,8 +30,7 @@ require_once 'Widget.class.php';
 */
 class Widget_ProjectRss extends Widget_Rss {
 	function __construct() {
-		$request =& HTTPRequest::instance();
-		parent::__construct('projectrss', $request->get('group_id'), WidgetLayoutManager::OWNER_TYPE_GROUP);
+		parent::__construct('projectrss', getIntFromRequest('group_id'), WidgetLayoutManager::OWNER_TYPE_GROUP);
 	}
 	function canBeUsedByProject(&$project) {
 		return true;

@@ -2,7 +2,7 @@
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
  * Copyright 2010, Franck Villaume - Capgemini
- * Copyright 2011-2014,2016, Franck Villaume - TrivialDev
+ * Copyright 2011-2014,2016,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is a part of FusionForge.
@@ -38,8 +38,8 @@ class Widget_MyProjectsLastDocuments extends Widget {
 	}
 
 	function getContent() {
-		$html_my_projects = '';
 		global $HTML;
+		$html_my_projects = '';
 		$user = session_get_user();
 		$groups = $user->getGroups();
 
@@ -47,28 +47,13 @@ class Widget_MyProjectsLastDocuments extends Widget {
 			$html_my_projects .= $HTML->warning_msg(_("You're not a member of any project"));
 		} else {
 			sortProjectList($groups);
-			$request = HTTPRequest::instance();
-			$vItemId = new Valid_UInt('hide_item_id');
-			$vItemId->required();
-			if($request->valid($vItemId)) {
-				$hide_item_id = $request->get('hide_item_id');
-			} else {
-				$hide_item_id = null;
-			}
+			$hide_item_id = getIntFromRequest('hide_item_id', 0);
 			$html_my_projects .= $HTML->listTableTop();
 			$i = 0;
 			foreach ($groups as $g) {
 				if ($g->usesDocman()) {
 					$i++;
-
-					$vWhiteList = new Valid_WhiteList('hide_dmproj', array(0, 1));
-					$vWhiteList->required();
-					if($request->valid($vWhiteList)) {
-						$hide_docmanproject = $request->get('hide_dmproj');
-					} else {
-						$hide_docmanproject = null;
-					}
-
+					$hide_docmanproject = getIntFromRequest('hide_dmproj', 0);
 					$stateIdDg = 1;
 					$stateIdDocuments = array(1);
 					if (forge_check_perm('docman', $g->getID(), 'approve')) {
@@ -127,7 +112,6 @@ class Widget_MyProjectsLastDocuments extends Widget {
 							$j--;
 						}
 					}
-
 					$html_my_projects .= $html_hdr.$html;
 				}
 			}

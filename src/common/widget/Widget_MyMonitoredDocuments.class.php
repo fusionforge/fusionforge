@@ -2,7 +2,7 @@
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
  * Copyright 2010, Franck Villaume - Capgemini
- * Copyright 2011-2014,2017, Franck Villaume - TrivialDev
+ * Copyright 2011-2014,2017,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is a part of FusionForge.
@@ -65,22 +65,9 @@ class Widget_MyMonitoredDocuments extends Widget {
 				}
 			}
 			if (count($validDistinctMonitorGroupIdsArray)) {
-				$request =& HTTPRequest::instance();
 				$html_my_monitored_documents .= $HTML->listTableTop();
-				$vItemId = new Valid_UInt('hide_item_id');
-				$vItemId->required();
-				if($request->valid($vItemId)) {
-					$hide_item_id = $request->get('hide_item_id');
-				} else {
-					$hide_item_id = null;
-				}
-				$vDocument = new Valid_WhiteList('hide_document', array(0, 1));
-				$vDocument->required();
-				if($request->valid($vDocument)) {
-					$hide_document = $request->get('hide_document');
-				} else {
-					$hide_document = null;
-				}
+				$hide_item_id = getIntFromRequest('hide_item_id', 0);
+				$hide_document = getIntFromRequest('hide_document', 0);
 				foreach ($validDistinctMonitorGroupIdsArray as $distinctMonitorGroupId) {
 					$groupObject = group_get_object($distinctMonitorGroupId);
 					$monitorElementDocIds = $monitorElementObjectDoc->getMonitoredIdsByGroupIdByUserIdInArray($distinctMonitorGroupId, user_getid());

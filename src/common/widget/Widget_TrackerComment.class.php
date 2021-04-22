@@ -2,7 +2,7 @@
 /**
  * Comment Tracker Content Widget Class
  *
- * Copyright 2016-2017, Franck Villaume - TrivialDev
+ * Copyright 2016-2017,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is a part of Fusionforge.
@@ -28,8 +28,7 @@ class Widget_TrackerComment extends Widget {
 	var $title;
 
 	function __construct() {
-		$request =& HTTPRequest::instance();
-		$owner_id   = (int)substr($request->get('owner'), 1);
+		$owner_id   = (int)substr(getStringFromRequest('owner'), 1);
 		parent::__construct('trackercomment', $owner_id, WidgetLayoutManager::OWNER_TYPE_TRACKER);
 		$this->title = _('Follow-up tabs');
 	}

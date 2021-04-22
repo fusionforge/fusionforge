@@ -339,8 +339,7 @@ EOS;
 	}
 
 	function getInstallPreferences() {
-		$request =& HTTPRequest::instance();
-		$owner_id = (int)substr($request->get('owner'), 1);
+		$owner_id = (int)substr(getStringFromRequest('owner'), 1);
 		$content = $this->getPartialPreferencesFormTitle(_('Enter title of Tracker Content Box'));
 		$content .= $this->buildRenderWidget();
 		$content .= $this->getAvailableExtraFieldsForm($owner_id);

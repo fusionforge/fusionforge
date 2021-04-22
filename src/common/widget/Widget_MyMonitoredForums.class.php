@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2012-2015, Franck Villaume - TrivialDev
+ * Copyright 2012-2015,2021, Franck Villaume - TrivialDev
  * Copyright (C) 2014 Alain Peyrat - Alcatel-Lucent
  *
  * This file is a part of FusionForge.
@@ -57,21 +57,8 @@ class Widget_MyMonitoredForums extends Widget {
 				}
 			}
 			if (count($validDistinctMonitorGroupIdsArray)) {
-				$request =& HTTPRequest::instance();
-				$vItemId = new Valid_UInt('hide_item_id');
-				$vItemId->required();
-				if ($request->valid($vItemId)) {
-					$hide_item_id = $request->get('hide_item_id');
-				} else {
-					$hide_item_id = null;
-				}
-				$vForum = new Valid_WhiteList('hide_forum', array(0, 1));
-				$vForum->required();
-				if ($request->valid($vForum)) {
-					$hide_forum = $request->get('hide_forum');
-				} else {
-					$hide_forum = null;
-				}
+				$hide_item_id = getIntFromRequest('hide_item_id', 0);
+				$hide_forum = getIntFromRequest('hide_forum', 0);
 				$setListTableTop = true;
 				foreach ($validDistinctMonitorGroupIdsArray as $validDistinctMonitorGroupId) {
 					$groupObject = group_get_object($validDistinctMonitorGroupId);
@@ -139,10 +126,9 @@ class Widget_MyMonitoredForums extends Widget {
 	}
 
 	function getAjaxUrl($owner_id, $owner_type) {
-		$request =& HTTPRequest::instance();
 		$ajax_url = parent::getAjaxUrl($owner_id, $owner_type);
-		if ($request->exist('hide_item_id') || $request->exist('hide_forum')) {
-			$ajax_url .= '&hide_item_id='.$request->get('hide_item_id').'&hide_forum='.$request->get('hide_forum');
+		if (existInRequest('hide_item_id') || existInRequest('hide_forum')) {
+			$ajax_url .= '&hide_item_id='.getIntFromRequest('hide_item_id').'&hide_forum='.getIntFromRequest('hide_forum');
 		}
 		return $ajax_url;
 	}

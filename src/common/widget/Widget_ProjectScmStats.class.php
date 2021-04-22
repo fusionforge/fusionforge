@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2016, Franck Villaume - TrivialDev
+ * Copyright 2016,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is a part of FusionForge.
@@ -31,9 +31,8 @@ class Widget_ProjectScmStats extends Widget {
 
 	function __construct() {
 		parent::__construct('projectscmstats');
-		$request =& HTTPRequest::instance();
 		$pm = ProjectManager::instance();
-		$project = $pm->getProject($request->get('group_id'));
+		$project = $pm->getProject(getIntFromRequest('group_id'));
 		if ($project && $this->canBeUsedByProject($project) && forge_check_perm('scm', $project->getID(), 'read')) {
 			$this->content['title'] = _('Repository History');
 		}
@@ -45,9 +44,8 @@ class Widget_ProjectScmStats extends Widget {
 
 	function getContent() {
 		$html_projectscmstats = '';
-		$request = HTTPRequest::instance();
 		$pm = ProjectManager::instance();
-		$project = $pm->getProject($request->get('group_id'));
+		$project = $pm->getProject(getIntFromRequest('group_id'));
 		$project_plugins = $project->getPlugins();
 		foreach ($project_plugins as $value) {
 			$plugin_object = plugin_get_object($value);
