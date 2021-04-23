@@ -34,13 +34,10 @@ abstract class HudsonJobWidget extends HudsonWidget {
 		return false;
 	}
 
-	function create(&$request) {
+	function create() {
 		$content_id = false;
-		$vId = new Valid_Uint('job_id');
-		$vId->setErrorMessage(_("Cannot add empty job id"));
-		$vId->required();
-		if ($request->valid($vId)) {
-			$job_id = $request->get('job_id');
+		$job_id = getIntFromRequest('job_id');
+		if ($job_id) {
 			$sql = 'INSERT INTO plugin_hudson_widget (widget_name, owner_id, owner_type, job_id) VALUES ($1,$2,$3,$4)';
 			$res = db_query_params($sql,array($this->id,$this->owner_id,$this->owner_type,$job_id));
 			$content_id = db_insertid($res,'plugin_hudson_widget','id');
@@ -100,12 +97,11 @@ abstract class HudsonJobWidget extends HudsonWidget {
 		return $prefs;
 	}
 
-	function updatePreferences(&$request) {
-		$request->valid(new Valid_String('cancel'));
-		if (!$request->exist('cancel')) {
-			$job_id = $request->get($this->id);
+	function updatePreferences() {
+		if (!existInRequest('cancel')) {
+			$job_id = getIntFromRequest($this->id);
 			$sql = "UPDATE plugin_hudson_widget SET job_id=$1 WHERE owner_id = $2 AND owner_type = $3 AND id = $4";
-			$res = db_query_params($sql,array($job_id,$this->owner_id,$this->owner_type,(int)$request->get('content_id')));
+			$res = db_query_params($sql, array($job_id, $this->owner_id, $this->owner_type, getIntFromRequest('content_id')));
 		}
 		return true;
 	}

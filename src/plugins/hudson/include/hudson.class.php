@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2013-2014, Franck Villaume - TrivialDev
+ * Copyright 2013-2014,2021, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -43,19 +43,16 @@ class hudson extends Controler {
 
 	function request() {
 		global $feedback, $error_msg;
-		$request =& HTTPRequest::instance();
-		$vgi = new Valid_GroupId();
-		$vgi->required();
-		if ($request->valid($vgi)) {
-			$group_id = $request->get('group_id');
-			$project = group_get_object($group_id);
-			if ($project->usesService('hudson')) {
-				$user = UserManager::instance()->getCurrentUser();
-				if (forge_check_perm('plugin_hudson_read', $group_id, 'read')) {
-					switch($request->get('action')) {
+		$group_id = getFilteredIntFromRequest('group_id', '\d');
+		$project = group_get_object($group_id);
+		if ($project->usesService('hudson')) {
+			$user = session_get_user();
+			if (forge_check_perm('plugin_hudson_read', $group_id, 'read')) {
+				$action = getStringFromRequest('action');
+				switch($action) {
 						case 'add_job':
 							if ($user->isMember($group_id, 'A')) {
-								if ( $request->exist('hudson_job_url') && trim($request->get('hudson_job_url') != '') ) {
+								if (existInRequest('hudson_job_url') && (getStringFromRequest('hudson_job_url') != '')) {
 									$this->action = 'addJob';
 								} else {
 									$error_msg .= _('Missing Hudson job url (eg: http://myCIserver:8080/hudson/job/MyJob)');
@@ -68,7 +65,7 @@ class hudson extends Controler {
 							break;
 						case 'edit_job':
 							if ($user->isMember($group_id,'A')) {
-								if ($request->exist('job_id')) {
+								if (existInRequest('job_id')) {
 									$this->view = 'editJob';
 								} else {
 									$error_msg .= _('Missing Hudson job ID');
@@ -80,8 +77,8 @@ class hudson extends Controler {
 							break;
 						case 'update_job':
 							if ($user->isMember($group_id, 'A')) {
-								if ($request->exist('job_id')) {
-									if ($request->exist('new_hudson_job_url') && $request->get('new_hudson_job_url') != '') {
+								if (existInRequest('job_id')) {
+									if (existInRequest('new_hudson_job_url') && (getStringFromRequest('new_hudson_job_url') != '')) {
 										$this->action = 'updateJob';
 									} else {
 										$error_msg .= _('Missing Hudson job url (eg: http://myCIserver:8080/hudson/job/MyJob)');
@@ -97,7 +94,7 @@ class hudson extends Controler {
 							break;
 						case 'delete_job':
 							if ($user->isMember($group_id, 'A')) {
-								if ($request->exist('job_id')) {
+								if (existInRequest('job_id')) {
 									$this->action = 'deleteJob';
 								} else {
 									$error_msg .= _('Missing Hudson job ID');

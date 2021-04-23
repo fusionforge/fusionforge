@@ -38,7 +38,7 @@ class hudson_Widget_MyMonitoredJobs extends HudsonOverviewWidget {
 	function __construct($plugin) {
 		parent::__construct('plugin_hudson_my_jobs');
 		$this->plugin = $plugin;
-		$user=UserManager::instance()->getCurrentUser();
+		$user = session_get_user();
 		$this->_not_monitored_jobs = $user->getPreference('plugin_hudson_my_not_monitored_jobs');
 		if ($this->_not_monitored_jobs === false) {
 			$this->_not_monitored_jobs = array();
@@ -105,10 +105,9 @@ class hudson_Widget_MyMonitoredJobs extends HudsonOverviewWidget {
 	}
 
 	function updatePreferences(&$request) {
-		$request->valid(new Valid_String('cancel'));
-		if (!$request->exist('cancel')) {
+		if (existInRequest('cancel')) {
 			$monitored_jobs = $request->get('myhudsonjobs');
-			$user = UserManager::instance()->getCurrentUser();
+			$user = session_get_user();
 			$job_dao = new PluginHudsonJobDao(CodendiDataAccess::instance());
 			$dar = $job_dao->searchByUserID($user->getId());
 			$not_monitored_jobs = array();
@@ -137,7 +136,7 @@ class hudson_Widget_MyMonitoredJobs extends HudsonOverviewWidget {
 		$prefs  = '';
 		// Monitored jobs
 		$prefs .= '<strong>'._("Monitored jobs:").'</strong><br />';
-		$user = UserManager::instance()->getCurrentUser();
+		$user = session_get_user();
 		$job_dao = new PluginHudsonJobDao(CodendiDataAccess::instance());
 		$dar = $job_dao->searchByUserID($user->getId());
 		while ($dar->valid()) {
@@ -201,7 +200,7 @@ class hudson_Widget_MyMonitoredJobs extends HudsonOverviewWidget {
 	}
 
 	function _getMonitoredJobsByUser() {
-		$user = UserManager::instance()->getCurrentUser();
+		$user = session_get_user();
 		$job_dao = new PluginHudsonJobDao(CodendiDataAccess::instance());
 		$dar = $job_dao->searchByUserID($user->getId());
 		$monitored_jobs = array();

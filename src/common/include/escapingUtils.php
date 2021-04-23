@@ -359,6 +359,23 @@ function getFilteredStringFromRequest($string, $pattern, $defaultValue = '') {
 }
 
 /**
+ * getFilteredIntFromRequest - get an int from REQUEST
+ *
+ * @param string   $key of the wanted value
+ * @param string   $pattern Regular expression of allowed values.
+ * @param integer  $defaultValue if we can't find the wanted value, it returns the default value
+ * @return integer the value or false if not valid.
+ */
+function getFilteredIntFromRequest($key, $pattern, $defaultValue = 0) {
+	$value = getIntFromRequest($key, $defaultValue);
+	if (preg_match($pattern, $value)) {
+		return $value;
+	} else {
+		return $defaultValue;
+	}
+}
+
+/**
  * existInRequest - check if a var exists in REQUEST
  *
  * @param	any	$var	key to check

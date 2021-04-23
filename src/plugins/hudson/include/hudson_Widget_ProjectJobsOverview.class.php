@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2014,2016,2019, Franck Villaume - TrivialDev
+ * Copyright 2014,2016,2019,2021, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -39,8 +39,7 @@ class hudson_Widget_ProjectJobsOverview extends HudsonOverviewWidget {
 		parent::__construct('plugin_hudson_project_jobsoverview');
 		$this->plugin = $plugin;
 
-		$request =& HTTPRequest::instance();
-		$this->group_id = $request->get('group_id');
+		$this->group_id = getIntFromRequest('group_id');
 
 		if ($this->_use_global_status === true) {
 			$this->_all_status = array(

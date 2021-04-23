@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2016, Franck Villaume - TrivialDev
+ * Copyright 2016,2021, Franck Villaume - TrivialDev
  *
  * This file is a part of Codendi.
  *
@@ -26,7 +26,6 @@ class blocks_Widget_HomeSummary extends Widget {
 	var $content = '';
 
 	function __construct($owner_type, $owner_id) {
-		$request =& HTTPRequest::instance();
 		if ($owner_type == WidgetLayoutManager::OWNER_TYPE_HOME) {
 			$this->widget_id = 'plugin_blocks_home_summary';
 			$this->group_id = $owner_id;
@@ -75,22 +74,13 @@ class blocks_Widget_HomeSummary extends Widget {
 	function getInstallPreferences() {
 		return $this->getPartialPreferencesForm(_('Enter title of block'), '');
 	}
-	function updatePreferences(&$request) {
+	function updatePreferences() {
 		$done = false;
-		$vContentId = new Valid_UInt('content_id');
-		$vContentId->required();
-		if ($request->valid($vContentId)) {
-			$vTitle = new Valid_String('title');
-			if($request->valid($vTitle)) {
-				$title = htmlspecialchars($request->get('title'));
-			} else {
-				$title = '';
-			}
+		if (existInRequest('content_id')) {
+			$title = htmlspecialchars(getStringFromRequest('title', ''));
 
-			$vContent = new Valid_Text('body');
-			$vContent->required();
-			if($request->valid($vContent)) {
-				$content = $request->get('body');
+			if(existInRequest('body')) {
+				$content = getStringFromRequest('body');
 				if (getStringFromRequest('_body_content_type') == 'html') {
 					$content = TextSanitizer::purify($content);
 				} else {
@@ -102,7 +92,7 @@ class blocks_Widget_HomeSummary extends Widget {
 
 			if ($content) {
 				$sql = "UPDATE plugin_blocks SET title=$1, content=$2 WHERE group_id =$3 AND id = $4";
-				$res = db_query_params($sql,array($title,$content,$this->group_id,(int)$request->get('content_id')));
+				$res = db_query_params($sql, array($title, $content, $this->group_id, getIntFromRequest('content_id')));
 				$done = true;
 			}
 		}
@@ -115,7 +105,7 @@ class blocks_Widget_HomeSummary extends Widget {
 		$this->content_id = $id;
 	}
 
-	function create(&$request) {
+	function create() {
 		$title = getStringFromRequest('title');
 		$content = getStringFromRequest('body');
 		$res = db_query_params('INSERT INTO plugin_blocks (group_id, name, status, title, content)
