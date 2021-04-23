@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
+ * Copyright 2021, Franck Villaume - TrivialDev
  *
  * This file is a part of Codendi.
  *
@@ -18,20 +19,17 @@
  * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once 'common/include/HTTPRequest.class.php';
-
 class blocks_Widget_ProjectSummary extends Widget {
 	var $title = '';
 	var $content = '';
 
 	function __construct($owner_type, $owner_id) {
-		$request =& HTTPRequest::instance();
 		if ($owner_type == WidgetLayoutManager::OWNER_TYPE_USER) {
 			$this->widget_id = 'plugin_blocks_user_summary';
 			$this->group_id = $owner_id;
 		} else {
 			$this->widget_id = 'plugin_blocks_project_summary';
-			$this->group_id = $request->get('group_id');
+			$this->group_id = getIntFromRequest('group_id');
 		}
 		parent::__construct($this->widget_id);
 
