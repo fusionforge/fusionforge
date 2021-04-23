@@ -77,9 +77,6 @@ if (getStringFromRequest('submit')) {
 		$days_adjust = getIntFromRequest('days_adjust');
 
 		if ($project_task_id && $week && $time_code && $hours) { # && $days_adjust has always a valid number. No need to prove.
-
-			//$date_list = split('[- :]',$report_date,5);
-			//$report_date = mktime($date_list[3],$date_list[4],0,$date_list[1],$date_list[2],$date_list[0]);
 			//make it 12 NOON of the report_date
 			$report_date=($week + ($days_adjust*REPORT_DAY_SPAN))+(12*60*60);
 			$res = db_query_params ('INSERT INTO rep_time_tracking (user_id,week,report_date,project_task_id,time_code,hours)

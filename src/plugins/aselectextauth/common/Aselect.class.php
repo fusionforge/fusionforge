@@ -1,9 +1,10 @@
 <?php
-/** A-Select class for Gforge
+/**
+ * A-Select class for FusionForge
  *
- * This file is part of Gforge
+ * This file is part of FusionForge
  *
- * This class, like Gforge, is free software; you can redistribute it
+ * This class, like FusionForge, is free software; you can redistribute it
  * and/or modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2 of
  * the License, or (at your option) any later version.
@@ -42,18 +43,18 @@ class ASelect {
 			$a = explode('&', $_COOKIE['aselectattributes']);
 			$i = 0;
 			while ($i < count($a)) {
-   			$b = split('=', $a[$i]);
-   			$this->$attributes[htmlspecialchars(urldecode($b[0]))] = htmlspecialchars(urldecode($b[1]));
-   			$i++;
+				$b = explode('=', $a[$i]);
+				$this->$attributes[htmlspecialchars(urldecode($b[0]))] = htmlspecialchars(urldecode($b[1]));
+				$i++;
 			}
-			} else {
-   		//nothing to be done here yet.
-			}
+		} else {
+			//nothing to be done here yet.
+		}
 
 		if(isset($_COOKIE['aselectticket'])){
 			$this->ticket = $_COOKIE['aselectticket'];
 		} else {
-   		$this->ticket = '';
+			$this->ticket = '';
 		}
 	}
 

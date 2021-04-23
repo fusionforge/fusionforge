@@ -3,7 +3,7 @@
  * MantisBT plugin
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -36,7 +36,7 @@ $version_data['released'] = getIntFromRequest('version_release');
 $version_data['project_id'] = $mantisbtConf['id_mantisbt'];
 $version_data['name'] = getStringFromRequest('version_name');
 $version_data['description'] = getStringFromRequest('version_description');
-list($day, $month, $year) = split('[/.-]', getStringFromRequest('version_date_order'));
+list($day, $month, $year) = preg_split('[/.-]', getStringFromRequest('version_date_order'));
 $version_data['date_order'] = $month."/".$day."/".$year;
 
 try {

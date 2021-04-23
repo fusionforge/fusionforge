@@ -3,6 +3,7 @@
  * doaprdfPlugin Class
  *
  * Copyright 2011, Olivier Berger & Institut Telecom
+ * Copyright 2021, Franck Villaume - TrivialDev
  *
  * This program was developped in the frame of the COCLICO project
  * (http://www.coclico-project.org/) with financial support of the Paris
@@ -98,7 +99,7 @@ with content-negotiation (application/rdf+xml).");
 		$res->setProp('doap:homepage', $homepages);
 		$tags = array();
 		if($tags_list) {
-			$tags = split(', ',$tags_list);
+			$tags = explode(', ',$tags_list);
 			$res->setProp('dcterms:subject', $tags);
 		}
 

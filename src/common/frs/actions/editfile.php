@@ -50,8 +50,6 @@ if (!$frsf || !is_object($frsf)) {
 } elseif ($frsf->isError()) {
 	exit_error($frsf->getErrorMessage(),'frs');
 } else {
-	//$date_list = split('[- :]',$release_time,5);
-	//$release_time = mktime($date_list[3],$date_list[4],0,$date_list[1],$date_list[2],$date_list[0]);
 	$release_time = strtotime($release_time);
 	if (!$frsf->update($type_id, $processor_id, $release_time, $new_release_id)) {
 		$error_msg = $frsf->getErrorMessage();

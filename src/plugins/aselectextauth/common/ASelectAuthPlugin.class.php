@@ -1,9 +1,10 @@
 <?php
-/** External authentication via A-Select for Gforge
+/**
+ * External authentication via A-Select for FusionForge
  *
- * This file is part of Gforge
+ * This file is part of FusionForge
  *
- * This plugin, like Gforge, is free software; you can redistribute it
+ * This plugin, like FusionForge, is free software; you can redistribute it
  * and/or modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2 of
  * the License, or (at your option) any later version.
@@ -38,7 +39,6 @@ Service Providers.");
 
 		switch ($hookname) {
 		case "session_set_entry":
-
 			$Aselect = new Aselect();
 			$loginname = strtolower($Aselect->getUserName());//Since A-Select UserID is
 																											//not case sensitive we pass it to lower case
@@ -71,8 +71,8 @@ Service Providers.");
 				return false ;
 			}
 		} else {
-					$GLOBALS['aselect_auth_failed']=true;
-					return false;
+			$GLOBALS['aselect_auth_failed']=true;
+			return false;
 		}
 
 	}

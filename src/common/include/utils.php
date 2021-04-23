@@ -7,7 +7,7 @@
  * Copyright 2009-2011, Franck Villaume - Capgemini
  * Copyright 2010-2012, Thorsten Glaser - Tarent
  * Copyright 2010-2012, Alain Peyrat - Alcatel-Lucent
- * Copyright 2013,2016-2018, Franck Villaume - TrivialDev
+ * Copyright 2013,2016-2018,2021, Franck Villaume - TrivialDev
  * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivalDev
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -407,7 +407,7 @@ function util_make_links($data = '') {
 		return ($data);
 	}
 
-	$lines = split("\n", $data);
+	$lines = explode("\n", $data);
 	$newText = "";
 	foreach ($lines as $key => $line) {
 		// Do not scan lines if they already have hyperlinks.
