@@ -3,7 +3,7 @@
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
  * Copyright (c) 2010 Alcatel-Lucent
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013-2014,2016, Franck Villaume - TrivialDev
+ * Copyright 2013-2014,2016,2021, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -24,8 +24,7 @@
 require_once 'common/mvc/Views.class.php';
 /*require_once('common/include/HTTPRequest.class.php');
   require_once 'common/user/UserManager.class.php';
-  require_once 'common/project/ProjectManager.class.php';*/
-//require_once('common/reference/CrossReferenceFactory.class.php');
+  require_once('common/reference/CrossReferenceFactory.class.php');*/
 
 require_once 'HudsonJob.class.php';
 require_once 'common/dao/CodendiDataAccess.class.php';
@@ -41,12 +40,9 @@ class hudsonViews extends Views {
 	function header() {
 
 		parent::header();
-//		echo $this->_getHelp();
-//		echo '<h1>'.$this->_getTitle().'</h1>';
 	}
 
 	function _getTitle() {
-//		return _("Continuous Integration");
 		return _("Hudson/Jenkins");
 	}
 
@@ -207,8 +203,7 @@ class hudsonViews extends Views {
 		$user = UserManager::instance()->getCurrentUser();
 		if ($user->isMember($group_id, 'A')) {
 
-			$project_manager = ProjectManager::instance();
-			$project = $project_manager->getProject($group_id);
+			$project = group_get_objet($group_id);
 
 			$job_dao = new PluginHudsonJobDao(CodendiDataAccess::instance());
 			$dar = $job_dao->searchByJobID($job_id);
@@ -292,8 +287,7 @@ class hudsonViews extends Views {
 
 		if ($dar && $dar->valid()) {
 
-			$project_manager = ProjectManager::instance();
-			$project = $project_manager->getProject($group_id);
+			$project = group_get_objet($group_id);
 
 			echo '<table id="jobs_table">';
 			echo ' <tr class="boxtable">';
@@ -399,8 +393,7 @@ class hudsonViews extends Views {
 
 	function _display_add_job_form($group_id) {
 		global $HTML;
-		$project_manager = ProjectManager::instance();
-		$project = $project_manager->getProject($group_id);
+		$project = group_get_objet($group_id);
 
 		echo '<a href="#" onclick="jQuery(\'#hudson_add_job\').slideToggle(); return false;">' . $HTML->getNewPic() . ' '._("Add job").'</a>';
 		echo ' '.$this->_getHelp('HudsonService', true);

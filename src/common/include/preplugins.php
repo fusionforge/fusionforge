@@ -26,5 +26,4 @@ require_once $gfcommon.'include/Codendi_HTMLPurifier.class.php';
 require_once $gfcommon.'valid/ValidFactory.class.php';
 
 //Manager from Codendi
-require_once $gfcommon.'include/ProjectManager.class.php';
 require_once $gfcommon.'include/UserManager.class.php';

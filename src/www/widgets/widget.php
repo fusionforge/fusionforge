@@ -41,8 +41,7 @@ switch($owner_type) {
 		}
 		break;
 	case WidgetLayoutManager::OWNER_TYPE_GROUP:
-		$pm = ProjectManager::instance();
-		if ($project = $pm->getProject($owner_id)) {
+		if ($project = group_get_object($owner_id)) {
 			$group_id = $owner_id;
 			$_REQUEST['group_id'] = $_GET['group_id'] = $group_id; // why ?
 			$redirect = '/projects/'. $project->getUnixName();

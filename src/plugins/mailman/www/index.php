@@ -16,11 +16,9 @@ require_once 'plugins_utils.php';
 require_once 'mailman_utils.php';
 $request =& HTTPRequest::instance();
 
-$group_id = $request->get('group_id');
-$pm = ProjectManager::instance();
-$Group = $pm->getProject($group_id);
+$group_id = getIntFromRequest('group_id');
 if (isset ($group_id)) {
-
+	$Group = group_get_object($group_id);
 	if (!$Group || !is_object($Group)) {
 		exit_error(_('Error'), 'Could Not Get Group');
 	} elseif ($Group->isError()) {
@@ -104,12 +102,8 @@ if (isset ($group_id)) {
 		if ($request->get('action') == 'update') {
 			$mlFactory->updateInfos();
 		}
-
 	}
 	mail_footer();
-
 } else {
-
 	exit_no_group();
-
 }

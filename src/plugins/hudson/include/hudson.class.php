@@ -48,8 +48,7 @@ class hudson extends Controler {
 		$vgi->required();
 		if ($request->valid($vgi)) {
 			$group_id = $request->get('group_id');
-			$pm = ProjectManager::instance();
-			$project = $pm->getProject($group_id);
+			$project = group_get_object($group_id);
 			if ($project->usesService('hudson')) {
 				$user = UserManager::instance()->getCurrentUser();
 				if (forge_check_perm('plugin_hudson_read', $group_id, 'read')) {

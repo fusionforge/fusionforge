@@ -5,7 +5,7 @@
  * Portions Copyright 1999-2001 (c) VA Linux Systems
  * The rest Copyright 2003-2004 (c) Guillaume Smet - Open Wide
  * Portions Copyright 2010 (c) Mélanie Le Bail
- * Copyright 2016, Franck Villaume - TrivialDev
+ * Copyright 2016,2021, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -30,16 +30,16 @@ require_once 'preplugins.php';
 require_once 'plugins_utils.php';
 require_once '../mailman_utils.php';
 
-$request =& HTTPRequest::instance();
-$group_id = $request->get('group_id');
-
 global $HTML, $feedback;
+
+$request =& HTTPRequest::instance();
+$group_id = getIntFromRequest('group_id');
 
 if (!$group_id) {
 	exit_no_group();
 }
-$pm = ProjectManager::instance();
-$Group = $pm->getProject($group_id);
+
+$Group = group_get_object($group_id);
 if (!$Group || !is_object($Group) || $Group->isError()) {
 	exit_no_group();
 }

@@ -156,13 +156,12 @@ class Widget_MyArtifacts extends Widget {
 		$artifact_types = array();
 		$allIds = array();
 
-		$pm = ProjectManager::instance();
 		foreach ($list_trackers as $trackers_array) {
 			$atid = $trackers_array->getArtifactType()->getID();
 			$group_id = $trackers_array->getArtifactType()->getGroup()->getID();
 
 			//create group
-			$group = $pm->getProject($group_id);
+			$group = group_get_object($group_id);
 			if (!$group || !is_object($group) || $group->isError()) {
 				exit_no_group();
 			}

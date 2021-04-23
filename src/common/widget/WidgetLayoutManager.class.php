@@ -456,8 +456,7 @@ class WidgetLayoutManager {
 	 * @param	int	$template_id  the id of the project template
 	 */
 	function createDefaultLayoutForProject($group_id, $template_id) {
-		$pm = ProjectManager::instance();
-		$project = $pm->getProject($group_id);
+		$project = group_get_object($group_id);
 		$sql = "INSERT INTO owner_layouts(layout_id, is_default, owner_id, owner_type)
 			SELECT layout_id, is_default, $1, owner_type
 			FROM owner_layouts
@@ -502,8 +501,7 @@ class WidgetLayoutManager {
 	 */
 	function createLayoutForProjectFromArray($group_id, $layoutDescArr) {
 		if (isset($layoutDescArr['rows']) && is_array($layoutDescArr['rows'])) {
-			$pm = ProjectManager::instance();
-			$project = $pm->getProject($group_id);
+			$project = group_get_object($group_id);
 			db_query_params('DELETE FROM layouts_contents WHERE owner_id = $1 AND owner_type = $2', array($group_id, self::OWNER_TYPE_GROUP));
 			db_query_params('DELETE FROM owner_layouts WHERE owner_id = $1 AND owner_type = $2', array($group_id, self::OWNER_TYPE_GROUP));
 			$sql = "INSERT INTO layouts(name, description, scope) VALUES ('custom', '', 'P')";

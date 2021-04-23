@@ -27,13 +27,10 @@
  */
 
 /*
-
-   This work is based on Tim Perdue's work on the forum stuff
-
+ * This work is based on Tim Perdue's work on the forum stuff
  */
 
 require_once 'MailmanListDao.class.php';
-require_once 'ProjectManager.class.php';
 require_once 'UserManager.class.php';
 require_once 'common/dao/CodendiDataAccess.class.php';
 require_once 'common/system_event/SystemEventManager.class.php';
@@ -74,8 +71,7 @@ class MailmanList extends FFError {
 	 * @param	array		The associative array of data.
 	 */
 	function __construct($group_id, $groupListId = false, $dataArray = false) {
-		$pm = ProjectManager::instance();
-		$Group = $pm->getProject($group_id);
+		$Group = group_get_object($group_id);
 		$this->_mailingDAO = new MailmanListDao(CodendiDataAccess::instance());
 		parent::__construct();
 		if (!$Group || !is_object($Group)) {

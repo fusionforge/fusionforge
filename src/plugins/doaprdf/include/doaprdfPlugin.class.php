@@ -1,5 +1,4 @@
 <?php
-
 /**
  * doaprdfPlugin Class
  *
@@ -25,7 +24,6 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once 'common/include/ProjectManager.class.php';
 require_once 'common/include/rdfutils.php';
 
 class doaprdfPlugin extends Plugin {
@@ -68,15 +66,13 @@ with content-negotiation (application/rdf+xml).");
 	function getProjectResourceIndex($group_id, &$ns, $detailed = false) {
 
 		// connect to FusionForge internals
-		$pm = ProjectManager::instance();
-		$project = $pm->getProject($group_id);
+		$project = group_get_object($group_id);
 		$projectname = $project->getUnixName();
 		$project_shortdesc = $project->getPublicName();
 		$project_description = $project->getDescription();
 		$tags_list = NULL;
 		if (forge_get_config('use_project_tags')) {
-			$group = group_get_object($group_id);
-			$tags_list = $group->getTags();
+			$tags_list = $project->getTags();
 		}
 
 		$conf = array(

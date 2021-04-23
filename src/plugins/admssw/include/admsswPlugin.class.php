@@ -5,6 +5,7 @@
  *
  * Copyright 2012-2013, Olivier Berger & Institut Mines-Telecom
  * Copyright 2013, Roland Mas
+ * Copyright 2021, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -269,19 +270,14 @@ projects on /projects URLs with content-negotiation
 		$types = array('doap:Project', 'admssw:SoftwareProject');
 		rdfutils_setPropToUri($res, 'rdf:type', $types);
 
-		// Handle project tags
-		$tags_list = NULL;
-		if (forge_get_config('use_project_tags')) {
-			$group = group_get_object($group_id);
-			$tags_list = $group->getTags();
-		}
 		// connect to FusionForge internals
-		$pm = ProjectManager::instance();
-		$project = $pm->getProject($group_id);
-		$tags = array();
-		if($tags_list) {
-			$tags = split(', ',$tags_list);
+		$project = group_get_object($group_id);
 
+		// Handle project tags
+		$tags = array();
+		if (forge_get_config('use_project_tags')) {
+			$tags_list = $project->getTags();
+			$tags = explode(', ',$tags_list);
 			// reuse the same as dcterms:subject until further specialization of adms.sw keywords
 			$res->setProp('rad:keyword', $tags);
 		}
@@ -437,7 +433,7 @@ projects on /projects URLs with content-negotiation
 	 */
 	public function getProjectListSize() {
 		// same as for trove's full list
- 		$projects = group_get_public_active_projects_asc();
+		$projects = group_get_public_active_projects_asc();
 		return count($projects);
 	}
 
@@ -449,9 +445,9 @@ projects on /projects URLs with content-negotiation
 	 * @param $chunk number of the chunk to be returned in case of paging
 	 * @param $chunksize size of chunks in case of paging
 	 */
-    public function getProjectListResourcesGraph($documenturi, $detailed=false, $chunk=null, $chunksize=null) {
+	public function getProjectListResourcesGraph($documenturi, $detailed=false, $chunk=null, $chunksize=null) {
 
-    	// Construct an ARC2_Resource containing the project's RDF (DOAP) description
+		// Construct an ARC2_Resource containing the project's RDF (DOAP) description
 		$ns = $this->admsswNameSpaces();
 
 		$conf = array(

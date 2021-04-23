@@ -21,9 +21,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-/*
+/**
  * ForumML Archives Browsing page
- *
  */
 
 require_once 'env.inc.php';
@@ -38,8 +37,6 @@ require_once(dirname(__FILE__).'/../include/ForumML_HTMLPurifier.class.php');
 require_once(dirname(__FILE__).'/../include/ForumML_MessageManager.class.php');
 global $feedback;
 
-$pm = ProjectManager::instance();
-$Group = $pm->getProject($group_id);
 $plugin_manager =& PluginManager::instance();
 $p =& $plugin_manager->getPluginByName('forumml');
 if ($p && $plugin_manager->isPluginAvailable($p) && $p->isAllowed()) {
@@ -54,6 +51,7 @@ if ($p && $plugin_manager->isPluginAvailable($p) && $p->isAllowed()) {
 	} else {
 		$group_id = "";
 	}
+	$Group = group_get_object($group_id);
 
 	$vTopic = new Valid_UInt('topic');
 	$vTopic->required();
