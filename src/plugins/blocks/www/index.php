@@ -143,7 +143,7 @@ function blocks_Project_Header($params) {
 }
 
 $type = getStringFromRequest('type');
-$id = getStringFromRequest('id');
+$id = getIntFromRequest('id');
 $pluginname = getStringFromRequest('pluginname');
 $name = getStringFromRequest('name');
 $body = getHtmlTextFromRequest('body');
