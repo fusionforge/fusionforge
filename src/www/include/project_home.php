@@ -28,16 +28,11 @@ require_once $gfwww.'news/news_utils.php';
 require_once $gfwww.'include/trove.php';
 require_once $gfwww.'include/project_summary.php';
 require_once $gfcommon.'include/tag_cloud.php';
-require_once $gfcommon.'include/HTTPRequest.class.php';
 require_once $gfcommon.'widget/WidgetLayoutManager.class.php';
 
 session_require_perm ('project_read', $group_id) ;
 
 $title = _('Project Home');
-
-$request =& HTTPRequest::instance();
-$request->set('group_id', $group_id);
-
 $params['submenu'] = '';
 
 if (session_loggedin()) {
@@ -75,8 +70,7 @@ if (session_loggedin()) {
 }
 
 html_use_jqueryui();
-site_project_header(array('title'=>$title, 'h1' => '', 'group'=>$group_id, 'toptab' => 'home',
-	'submenu' => $params['submenu']));
+site_project_header(array('title' => $title, 'h1' => '', 'group' => $group_id, 'toptab' => 'home', 'submenu' => $params['submenu']));
 
 $params = array('group_id' => $group_id);
 plugin_hook('project_before_widgets', $params);

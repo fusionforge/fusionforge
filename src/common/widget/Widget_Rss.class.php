@@ -188,7 +188,7 @@ require_once 'Widget.class.php';
 			$title =  $rss['title'] ;
 			if ($url || $title) {
 				$sql = "UPDATE widget_rss SET title=$1 , url=$2  WHERE owner_id =$3 AND owner_type = $4 AND id = $5";
-				db_query_params($sql, array($title, $url, $this->owner_id, $this->owner_type, (int)$request->get('content_id')));
+				db_query_params($sql, array($title, $url, $this->owner_id, $this->owner_type, getIntFromRequest('content_id')));
 				$done = true;
 			}
 		}

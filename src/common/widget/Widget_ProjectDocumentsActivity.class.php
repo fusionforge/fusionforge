@@ -55,7 +55,7 @@ class Widget_ProjectDocumentsActivity extends Widget {
 		$cancel = getStringFromRequest('cancel');
 		if (strlent($cancel) > 0) {
 			$show = getStringFromRequest('show');
-			switch($request->get('show')) {
+			switch($show) {
 				case 'F':
 					$this->_statistic_show = 'F';
 					break;

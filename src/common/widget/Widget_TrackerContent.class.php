@@ -72,7 +72,7 @@ class Widget_TrackerContent extends Widget {
 	function create() {
 		$sanitizer = new TextSanitizer();
 		$hp = Codendi_HTMLPurifier::instance();
-		$this->trackercontent_title = $hp->purify($request->get('title'), CODENDI_PURIFIER_CONVERT_HTML);
+		$this->trackercontent_title = $hp->purify(getStringFromRequest('title'), CODENDI_PURIFIER_CONVERT_HTML);
 		$trackerrows = getArrayFromRequest('trackercontent_layout');
 		$trackerextrafields = getArrayFromRequest('trackercontent_ef');
 		$trackercelltitles = getArrayFromRequest('trackercontent_title');
