@@ -4,7 +4,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010, FusionForge Team
  * Copyright (C) 2010-2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013,2016, Franck Villaume - TrivialDev
+ * Copyright 2013,2016,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -38,7 +38,7 @@ function reports_quick_graph($title, $qpa1, $qpa2) {
 
 		$assoc_open = util_result_columns_to_assoc($result1);
 		$assoc_all = util_result_columns_to_assoc($result2);
-		while (list($key, $val) = each($assoc_all)) {
+		foreach ($assoc_all as $key => $val) {
 			$titles[] = $key;
 			$all[] = $val;
 			if (isset($assoc_open[$key])) {

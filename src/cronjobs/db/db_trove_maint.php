@@ -138,7 +138,7 @@ db_query_params ('DELETE FROM trove_treesums',
 $err .= db_error();
 
 //$err .= "<table>";
-while (list($k,$v) = each($sum_totals)) {
+foreach ($sum_totals as $k => $v) {
 	$res = db_query_params ('INSERT INTO trove_treesums (trove_cat_id,subprojects)
 		VALUES ($1,$2)',
 				array($k,

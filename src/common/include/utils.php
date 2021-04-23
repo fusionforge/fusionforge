@@ -409,7 +409,7 @@ function util_make_links($data = '') {
 
 	$lines = split("\n", $data);
 	$newText = "";
-	while (list ($key, $line) = each($lines)) {
+	foreach ($lines as $key => $line) {
 		// Do not scan lines if they already have hyperlinks.
 		// Avoid problem with text written with an WYSIWYG HTML editor.
 		if (eregi('<a ([^>]*)>.*</a>', $line, $linePart)) {
