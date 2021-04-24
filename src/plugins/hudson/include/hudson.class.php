@@ -123,15 +123,14 @@ class hudson extends Controler {
 						default:
 							$this->view = 'projectOverview';
 							break;
-					}
-				} else {
-					$error_msg .= _('Permission denied.');
 				}
 			} else {
-				$error_msg .= _('Hudson service is not enabled.');
+				$error_msg .= _('Permission denied.');
 			}
 		} else {
-			$error_msg .= _('Missing group_id parameter.');
+			$error_msg .= _('Hudson service is not enabled.');
 		}
+	} else {
+		$error_msg .= _('Missing group_id parameter.');
 	}
 }
