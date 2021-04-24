@@ -37,6 +37,7 @@ class hudson extends Controler {
 	function getThemePath() {
 		return $this->themePath;
 	}
+
 	function getIconsPath() {
 		return $this->themePath.'/images/ic/';
 	}
@@ -130,7 +131,5 @@ class hudson extends Controler {
 		} else {
 			$error_msg .= _('Hudson service is not enabled.');
 		}
-	} else {
-		$error_msg .= _('Missing group_id parameter.');
 	}
 }
