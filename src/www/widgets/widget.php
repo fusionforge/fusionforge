@@ -93,7 +93,7 @@ if ($good) {
 					break;
 				case 'update':
 					$layout_id = getIntFromRequest('layout_id');
-					if ($layout_id && 
+					if ($layout_id &&
 					    ($owner_type == WidgetLayoutManager::OWNER_TYPE_USER ||
 						forge_check_perm('project_admin', $group_id) ||
 						forge_check_global_perm('forge_admin') ||

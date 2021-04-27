@@ -32,7 +32,7 @@ require_once 'Widget.class.php';
 /* abstract */ class Widget_Rss extends Widget {
 	var $rss_title;
 	var $rss_url;
-	
+
 	function __construct($id, $owner_id, $owner_type) {
 		parent::__construct($id);
 		$this->setOwner($owner_id, $owner_type);
