@@ -58,18 +58,18 @@ class CreateTrackerRelation extends FForge_SeleniumTestCase
 
 		// Testing extra-fields
 		$this->clickAndWait("link=Tracker");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("link=Bugs");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("//a[contains(@href, '".ROOT. "/tracker/admin/')]");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("link=Manage Custom Fields");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->type("name", "Depends on");
 		$this->type("alias", "depends_on");
 		$this->clickAndWait("//input[@name='field_type' and @value=9]");
 		$this->clickAndWait("post_changes");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTrue($this->isTextPresent("Depends on"));
 	}
 }

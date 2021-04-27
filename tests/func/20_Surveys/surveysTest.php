@@ -89,7 +89,7 @@ class Surveys extends FForge_SeleniumTestCase
 		$this->clickAndWait("//input[@name='to_add[]' and @value='3']");
 		$this->clickAndWait("submit");
 		$this->clickAndWait("link=My first survey: L'année dernière à Noël, 3 < 4, 中国 \" <em>, père & fils");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTextPresent("This is a my fifth question (text field) ?");
 		$this->assertTextPresent("This is a comment line of text");
 		$this->assertTextPresent("This is my third question (yes/no) ?");
@@ -103,7 +103,7 @@ class Surveys extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=Administration");
 		$this->clickAndWait("link=Show Results");
 		$this->clickAndWait("link=My first survey: L'année dernière à Noël, 3 < 4, 中国 \" <em>, père & fils");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTextPresent("Warning - you are about to vote a second time on this survey.");
 		$this->clickAndWait("link=Administration");
 		$this->clickAndWait("link=Show Results");
@@ -161,13 +161,13 @@ class Surveys extends FForge_SeleniumTestCase
 //		// Log out and check no survey is visible
 //		$this->clickAndWait("link=Log Out");
 //		$this->select($this->byName("none"))->selectOptionByLabel("projecta");
-//		$this->waitForPageToLoad("30000");
+//		$this->waitForPageToLoad();
 //		$this->clickAndWait("link=Surveys");
 //		$this->assertTextPresent("No Survey is found");
 //
 //		// Check direct access to a survey.
 //		$this->open("/survey/survey.php?group_id=6&survey_id=1");
-//		$this->waitForPageToLoad("30000");
+//		$this->waitForPageToLoad();
 //		$this->assertFalse($this->isTextPresent("My first survey: L'année dernière à Noël, 3 < 4, 中国 \" <em>, père & fils"));
 	}
 }

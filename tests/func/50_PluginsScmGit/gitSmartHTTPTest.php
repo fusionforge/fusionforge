@@ -90,13 +90,13 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 		$this->openWithOneRetry(ROOT);
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=Admin");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTrue($this->isTextPresent("Project Information"));
 		$this->clickAndWait("link=Users and permissions");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTrue($this->isTextPresent("Current Project Members"));
 		$this->clickAndWait("//tr/td/form/div[contains(.,'Anonymous')]/../../../td/form/div/input[contains(@value,'Unlink Role')]");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTrue($this->isTextPresent("Role unlinked successfully"));
 
 		// Update repositories

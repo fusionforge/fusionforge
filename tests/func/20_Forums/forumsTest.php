@@ -60,19 +60,19 @@ class CreateForum extends FForge_SeleniumTestCase
 		$this->assertFalse($this->isTextPresent("Permission denied."));
 		$this->assertTrue($this->isTextPresent("open-discussion"));
 		$this->clickAndWait("link=open-discussion");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("link=Start New Thread");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->type("subject", "Message1");
 		$this->type("body", "Text1");
 		$this->clickAndWait("submit");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTrue($this->isTextPresent("Message Posted Successfully"));
 		$this->clickAndWait("link=Forums");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTrue($this->isTextPresent("open-discussion"));
 		$this->clickAndWait("link=open-discussion");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTrue($this->isTextPresent("Message1"));
 	}
 
@@ -89,12 +89,12 @@ class CreateForum extends FForge_SeleniumTestCase
 		$this->switchUser(FORGE_ADMIN_USERNAME);
 
 		$this->open( ROOT.'/forum/message.php?msg_id=6' );
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTrue($this->isTextPresent("Welcome to developers"));
 
 		$this->logout();
 		$this->open( ROOT.'/forum/message.php?msg_id=6' );
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTrue($this->isLoginRequired());
 		$this->triggeredLogin(FORGE_ADMIN_USERNAME);
 		$this->assertTrue($this->isTextPresent("Welcome to developers"));
@@ -116,14 +116,14 @@ class CreateForum extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=open-discussion");
 		$this->clickAndWait("link=Welcome to open-discussion");
 		$this->clickAndWait("link=[ Reply ]");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTrue($this->isLoginRequired());
 		$this->triggeredLogin(FORGE_ADMIN_USERNAME);
 		$this->type("body", "Here is my 19823 reply");
 		$this->clickAndWait("submit");
 		$this->assertTextPresent("Message Posted Successfully");
 		$this->clickAndWait("link=Welcome to open-discussion");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTextPresent("Here is my 19823 reply");
 
 	}
@@ -137,26 +137,26 @@ class CreateForum extends FForge_SeleniumTestCase
 
 		$this->gotoProject('ProjectA');
 		$this->clickAndWait("link=Mailing Lists");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("//body//main[@id='maindiv']//a[.='Administration']");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("link=Add Mailing List");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->type("list_name", "toto");
 		$this->type("//input[@name='description']", "Toto mailing list");
 		$this->clickAndWait("submit");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTrue($this->isTextPresent("List Added"));
 		$this->clickAndWait("link=Forums");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("//body//main[@id='maindiv']//a[.='Administration']");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("link=Add Forum");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->type("forum_name", "toto");
 		$this->type("//input[@name='description']", "Toto forum");
 		$this->clickAndWait("submit");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTrue($this->isTextPresent("Error: a mailing list with the same email address already exists"));
 	}
 

@@ -37,62 +37,62 @@ class Search extends FForge_SeleniumTestCase
 		$this->createProject('ProjectB');
 
 		$this->open(ROOT) ;
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->type("//input[@name='words']", "XXXXXXXXXXXXXXXXXXXXXXXXXX");
 		$this->clickAndWait("//input[@name='Search']");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTrue($this->isTextPresent("No matches found for"));
 
 		$this->open(ROOT) ;
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->type("//input[@name='words']", "projecta");
 		$this->clickAndWait("//input[@name='Search']");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertFalse($this->isTextPresent("No matches found for"));
 		$this->assertTrue($this->isTextPresent("public description for ProjectA"));
 		$this->assertFalse($this->isTextPresent("public description for ProjectB"));
 
 		$this->open(ROOT) ;
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->type("//input[@name='words']", "description public ProjectA");
 		$this->clickAndWait("//input[@name='Search']");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertFalse($this->isTextPresent("No matches found for"));
 		$this->assertTrue($this->isTextPresent("public description for ProjectA"));
 		$this->assertFalse($this->isTextPresent("public description for ProjectB"));
 
 		$this->open(ROOT) ;
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->type("//input[@name='words']", "description 'public ProjectA'");
 		$this->clickAndWait("//input[@name='Search']");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTrue($this->isTextPresent("No matches found for"));
 		$this->assertFalse($this->isTextPresent("public description for ProjectA"));
 		$this->assertFalse($this->isTextPresent("public description for ProjectB"));
 
 		$this->open(ROOT) ;
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->type("//input[@name='words']", "description public");
 		$this->clickAndWait("//input[@name='Search']");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertFalse($this->isTextPresent("No matches found for"));
 		$this->assertTrue($this->isTextPresent("public description for ProjectA"));
 		$this->assertTrue($this->isTextPresent("public description for ProjectB"));
 
 		$this->open(ROOT) ;
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->type("//input[@name='words']", "'description public'");
 		$this->clickAndWait("//input[@name='Search']");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTrue($this->isTextPresent("No matches found for"));
 		$this->assertFalse($this->isTextPresent("public description for ProjectA"));
 		$this->assertFalse($this->isTextPresent("public description for ProjectB"));
 
 		$this->open(ROOT) ;
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->type("//input[@name='words']", "'public description'");
 		$this->clickAndWait("//input[@name='Search']");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertFalse($this->isTextPresent("No matches found for"));
 		$this->assertTrue($this->isTextPresent("public description for ProjectA"));
 		$this->assertTrue($this->isTextPresent("public description for ProjectB"));
@@ -106,10 +106,10 @@ class Search extends FForge_SeleniumTestCase
 		}
 
 		$this->open(ROOT) ;
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->type("//input[@name='words']", "'public description'");
 		$this->clickAndWait("//input[@name='Search']");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertFalse($this->isTextPresent("No matches found for"));
 		$this->assertTrue($this->isTextPresent("public description for ProjectA"));
 		$this->assertTrue($this->isTextPresent("public description for ProjectB"));
@@ -120,10 +120,10 @@ class Search extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("public description for project-x30"));
 
 		$this->open(ROOT) ;
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->type("//input[@name='words']", "x15");
 		$this->clickAndWait("//input[@name='Search']");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertFalse($this->isTextPresent("No matches found for"));
 		$this->assertTrue($this->isTextPresent("public description for project-x15"));
 		$this->assertFalse($this->isTextPresent("public description for ProjectB"));
@@ -136,41 +136,41 @@ class Search extends FForge_SeleniumTestCase
 		$this->createUser('tartiflette');
 
 		$this->open(ROOT) ;
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->select($this->byName("type_of_search"))->selectOptionByLabel("People");
 		$this->type("//input[@name='words']", "tartempion");
 		$this->clickAndWait("//input[@name='Search']");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTrue($this->isTextPresent("No matches found for"));
 		$this->assertFalse($this->isTextPresent("ratatouille Lastname"));
 		$this->assertFalse($this->isTextPresent("tartiflette Lastname"));
 
 		$this->open(ROOT) ;
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->select($this->byName("type_of_search"))->selectOptionByLabel("People");
 		$this->type("//input[@name='words']", "ratatouille");
 		$this->clickAndWait("//input[@name='Search']");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertFalse($this->isTextPresent("No matches found for"));
 		$this->assertTrue($this->isTextPresent("ratatouille Lastname"));
 		$this->assertFalse($this->isTextPresent("tartiflette Lastname"));
 
 		$this->open(ROOT) ;
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->select($this->byName("type_of_search"))->selectOptionByLabel("People");
 		$this->type("//input[@name='words']", "lastname ratatouille");
 		$this->clickAndWait("//input[@name='Search']");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertFalse($this->isTextPresent("No matches found for"));
 		$this->assertTrue($this->isTextPresent("ratatouille Lastname"));
 		$this->assertFalse($this->isTextPresent("tartiflette Lastname"));
 
 		$this->open(ROOT) ;
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->select($this->byName("type_of_search"))->selectOptionByLabel("People");
 		$this->type("//input[@name='words']", "Lastname");
 		$this->clickAndWait("//input[@name='Search']");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertFalse($this->isTextPresent("No matches found for"));
 		$this->assertTrue($this->isTextPresent("ratatouille Lastname"));
 		$this->assertTrue($this->isTextPresent("tartiflette Lastname"));
@@ -308,7 +308,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=Forums");
 		$this->clickAndWait("link=open-discussion");
 		$this->clickAndWait("link=Start New Thread");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->type("subject", "Message1 in a bottle");
 		$this->type("body", "ninetynine of them on Charlie's wall - also, ZONGO");
 		$this->clickAndWait("submit");
@@ -326,7 +326,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=Forums");
 		$this->clickAndWait("link=developers-discussion");
 		$this->clickAndWait("link=Start New Thread");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->type("subject", "Message4 in an envelope");
 		$this->type("body", "not the same thing as an antilope (and different thread anyway) (but still related to Charlie) - also, ZONGO");
 		$this->clickAndWait("submit");
@@ -529,26 +529,26 @@ class Search extends FForge_SeleniumTestCase
 
 		$this->gotoProject('ProjectA');
 		$this->clickAndWait("link=Admin");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("link=Users and permissions");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("//tr/td/form/div[contains(.,'Any user logged in')]/../../../td/form/div/input[contains(@value,'Unlink Role')]");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->type ("//form[contains(@action,'roleedit.php')]/..//input[@name='role_name']", "Trainee") ;
 		$this->clickAndWait("//input[@value='Create Role']") ;
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 
 		$this->clickAndWait("link=Users and permissions");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "ratatouille") ;
 		$this->select($this->byXPath("//input[@value='Add Member']/../fieldset/select[@name='role_id']"))->selectOptionByLabel("Trainee");
 		$this->clickAndWait("//input[@value='Add Member']") ;
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 
 		$this->clickAndWait("link=Users and permissions");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("//td/form/div[contains(.,'Trainee')]/../div/input[@value='Edit Permissions']") ;
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->select($this->byXPath("//select[contains(@name,'data[project_read]')]"))->selectOptionByLabel("Visible");
 		$this->select($this->byXPath("//tr/td[.='Bugs']/../td/fieldset/select[contains(@name,'data[tracker]')]"))->selectOptionByLabel("Read only");
 		$this->select($this->byXPath("//tr/td[.='Patches']/../td/fieldset/select[contains(@name,'data[tracker]')]"))->selectOptionByLabel("No Access");
@@ -558,12 +558,12 @@ class Search extends FForge_SeleniumTestCase
 		$this->select($this->byXPath("//tr/td[.='developers-discussion']/../td/fieldset/select[contains(@name,'data[forum]')]"))->selectOptionByLabel("No Access");
 		$this->select($this->byXPath("//select[contains(@name,'data[docman]')]"))->selectOptionByLabel("Read only");
 		$this->clickAndWait("//input[@value='Submit']") ;
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 
 		$this->clickAndWait("link=Users and permissions");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("//td/form/div[contains(.,'Anonymous')]/../div/input[@value='Edit Permissions']") ;
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->select($this->byXPath("//select[contains(@name,'data[project_read]')]"))->selectOptionByLabel("Visible");
 		$this->select($this->byXPath("//tr/td[.='Bugs']/../td/fieldset/select[contains(@name,'data[tracker]')]"))->selectOptionByLabel("No Access");
 		$this->select($this->byXPath("//tr/td[.='Patches']/../td/fieldset/select[contains(@name,'data[tracker]')]"))->selectOptionByLabel("No Access");
@@ -573,7 +573,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->select($this->byXPath("//tr/td[.='developers-discussion']/../td/fieldset/select[contains(@name,'data[forum]')]"))->selectOptionByLabel("No Access");
 		$this->select($this->byXPath("//select[contains(@name,'data[docman]')]"))->selectOptionByLabel("No Access");
 		$this->clickAndWait("//input[@value='Submit']") ;
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 
 		$this->switchUser('ratatouille');
 		$this->gotoProject('ProjectA');

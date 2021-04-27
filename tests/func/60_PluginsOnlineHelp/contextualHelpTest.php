@@ -80,7 +80,7 @@ class ContextualHelp extends FForge_SeleniumTestCase
 		$this->clickAndWait($action);
 		$this->clickAndWait("link=Get Help");
 		sleep(1);
-		$this->waitForPopUp("HelpWindow", "30000");
+		$this->waitForPopUp("HelpWindow", );
 		$this->selectWindow("name=HelpWindow");
 		$this->assertTextPresent($text);
 		$this->close();

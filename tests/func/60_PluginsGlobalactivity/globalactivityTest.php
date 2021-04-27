@@ -67,7 +67,7 @@ class GlobalActivity extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=Forums");
 		$this->clickAndWait("link=open-discussion");
 		$this->clickAndWait("link=Start New Thread");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->type("subject", "Message1 in a bottle");
 		$this->type("body", "ninetynine of them on Charlie's wall - also, ZONGO");
 		$this->clickAndWait("submit");
@@ -76,7 +76,7 @@ class GlobalActivity extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=Forums");
 		$this->clickAndWait("link=open-discussion");
 		$this->clickAndWait("link=Start New Thread");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->type("subject", "Message2");
 		$this->type("body", "Forum post in project B");
 		$this->clickAndWait("submit");

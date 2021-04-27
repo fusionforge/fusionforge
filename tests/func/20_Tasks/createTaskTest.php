@@ -78,13 +78,13 @@ class CreateTask extends FForge_SeleniumTestCase
 
 		// Initialize "rep_time_tracking" table
 		$this->clickAndWait("link=Reporting");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 
 		$this->clickAndWait("link=Initialize / Rebuild Reporting Tables");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("im_sure");
 		$this->clickAndWait("submit");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 
 	//        $this->switchUser('uadmin');
 		$this->gotoProject('ProjectA');
@@ -104,7 +104,7 @@ class CreateTask extends FForge_SeleniumTestCase
 		$this->type("details", "Details: Hello Paris");
 		$this->type("hours", "10");
 		$this->clickAndWait("//body//main[@id='maindiv']/form/table/tbody/tr[9]/td/input");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTextPresent("Task Created Successfully");
 
 		// Create a second task
@@ -113,7 +113,7 @@ class CreateTask extends FForge_SeleniumTestCase
 		$this->type("details", "Details: Hello France");
 		$this->type("hours", "15");
 		$this->clickAndWait("//body//main[@id='maindiv']/form/table/tbody/tr[9]/td/input");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTextPresent("Task Created Successfully");
 
 		// Create a third task
@@ -122,7 +122,7 @@ class CreateTask extends FForge_SeleniumTestCase
 		$this->type("details", "Details: Hello World");
 		$this->type("hours", "20");
 		$this->clickAndWait("//body//main[@id='maindiv']/form/table/tbody/tr[9]/td/input");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTrue($this->isTextPresent("Task Created Successfully"));
 	}
 
@@ -309,11 +309,11 @@ class CreateTask extends FForge_SeleniumTestCase
 	function assignTask()
 	{
 		$this->gotoProject("ProjectA");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("link=Tasks");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("link=To Do");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("link=Task1: Hello Paris");
 		$this->addSelection("assigned_to[]", "label=ucontrib Lastname");
 		$this->removeSelection("assigned_to[]", "label=ucoredev Lastname");
@@ -321,7 +321,7 @@ class CreateTask extends FForge_SeleniumTestCase
 
 		$this->switchUser('ucontrib');
 		$this->open(ROOT);
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=My Page");
 		// You cannot click on "Assigned Tasks" tabs,
@@ -330,7 +330,7 @@ class CreateTask extends FForge_SeleniumTestCase
 		$this->assertTextPresent("Task2: Hello France");
 		$this->switchUser('uadmin');
 		$this->open(ROOT);
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 	}
 
 	function orderTask()
@@ -344,7 +344,7 @@ class CreateTask extends FForge_SeleniumTestCase
 	function createSubproject()
 	{
 		$this->gotoProject("ProjectA");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("link=Project Admin");
 		$this->clickAndWait("link=Tools");
 		$this->clickAndWait("link=Tasks Administration");
@@ -360,7 +360,7 @@ class CreateTask extends FForge_SeleniumTestCase
 	function createPrivateSubproject()
 	{
 		$this->gotoProject("ProjectA");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("link=Project Admin");
 		$this->clickAndWait("link=Tools");
 		$this->clickAndWait("link=Tasks Administration");
@@ -381,7 +381,7 @@ class CreateTask extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=Tasks");
 		$this->clickAndWait("link=To Do");
 		$this->clickAndWait("link=Gantt Chart");
-		$this->waitForPopUp("Gantt_Chart", "30000");
+		$this->waitForPopUp("Gantt_Chart", );
 		$this->selectWindow("name=Gantt_Chart");
 		$this->assertTextPresent("Assignee");
 

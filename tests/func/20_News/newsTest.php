@@ -58,47 +58,47 @@ class CreateNews extends FForge_SeleniumTestCase
 
 		// Create a simple news.
 		$this->clickAndWait("link=News");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("link=Submit");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->type("summary", "First news");
 		$this->type("details", "This is a simple news.");
 		$this->clickAndWait("submit");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("link=News");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTrue($this->isTextPresent("First news"));
 		$this->clickAndWait("link=First news");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTrue($this->isTextPresent("First news"));
 		$this->assertTrue($this->isTextPresent("This is a simple news."));
 
 		// Create a second news.
 		$this->clickAndWait("link=News");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("link=Submit");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->type("summary", "Second news");
 		$this->type("details", "This is another text");
 		$this->clickAndWait("submit");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("link=News");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("link=Second news");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTrue($this->isTextPresent("Second news"));
 		$this->assertTrue($this->isTextPresent("This is another text"));
 
 		// Check that news are visible in the activity
 		$this->clickAndWait("link=Activity");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->assertTextPresent("First news");
 		$this->assertTextPresent("Second news");
 
 		// Check modification of a news.
 		$this->clickAndWait("link=News");
 		$this->clickAndWait("//a[contains(@href, '" . ROOT . "/news/admin/?group_id=7')]");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("link=Second news");
 		$this->type("details", "This is another text (corrected)");
 		$this->clickAndWait("submit");
@@ -116,7 +116,7 @@ class CreateNews extends FForge_SeleniumTestCase
 		$this->assertTextPresent("Special ' chars \"");
 		$this->clickAndWait("link=News");
 		$this->clickAndWait("//a[contains(@href, '". ROOT . "/news/admin/?group_id=7')]");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad();
 		$this->clickAndWait("link=Test3");
 		$this->clickAndWait("//form[@id='newsadminform']//input[@name='status' and @value=4]");
 		$this->clickAndWait("submit");
