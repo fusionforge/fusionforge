@@ -638,7 +638,7 @@ abstract class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestC
 		}
 	}
 
-	protected function waitForPageToLoad($integer = 30000) {
+	protected function waitForPageToLoad($integer = 10000) {
 		//do we need to do something???
 		$this->pause($integer);
 	}
