@@ -89,7 +89,11 @@ class DocumentGroupFactory extends FFError {
 		}
 
 		// Build the nested array
-		$count = count($this->flat_groups);
+		if (is_array($this->flat_groups)) {
+			$count = count($this->flat_groups);
+		} else {
+			$count = 0;
+		}
 		for ($i=0; $i < $count; $i++) {
 			$this->nested_groups[$this->flat_groups[$i]->getParentID()][] =& $this->flat_groups[$i];
 		}

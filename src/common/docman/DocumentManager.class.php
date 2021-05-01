@@ -381,7 +381,7 @@ class DocumentManager extends FFError {
 	 * @param	int	$level		The current level
 	 * @param	bool	$display_files	Set filename instead of directory name.
 	 */
-	function buildArrays($group_arr, &$id_array, &$text_array, &$dont_display, $parent = 0, $level = 0, $display_files = false) {
+	function buildArrays($group_arr, &$id_array, &$text_array, $dont_display, $parent = 0, $level = 0, $display_files = false) {
 		if (!is_array($group_arr) || !array_key_exists("$parent", $group_arr)) {
 			return;
 		}
