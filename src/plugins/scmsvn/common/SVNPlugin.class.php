@@ -573,7 +573,6 @@ some control over it to the project's administrator.");
 						xml_get_current_line_number($xml_parser));
 					db_rollback () ;
 					return false ;
-					break;
 				}
 			}
 
