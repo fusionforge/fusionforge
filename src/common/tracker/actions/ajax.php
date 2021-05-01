@@ -91,12 +91,10 @@ function get_formulas_results($group, $atid, $extra_fields=array(), $status='', 
 	if (!$at || !is_object($at)) {
 		$ret['message'] = _('ArtifactType could not be created');
 		return json_encode($ret);
-		exit();
 	}
 	if ($at->isError()) {
 		$ret['message'] = $at->getErrorMessage();
 		return json_encode($ret);
-		exit();
 	}
 
 	$expr = new ArtifactExpression();
@@ -111,32 +109,27 @@ function get_formulas_results($group, $atid, $extra_fields=array(), $status='', 
 		if ($expr->isError()) {
 			$ret['message'] = $expr->getErrorMessage()._(':').' status=\''.$status.'\'';
 			return json_encode($ret);
-			exit();
 		}
 	}
 	$expr->setConstant('assigned_to', $assigned_to);
 	if ($expr->isError()) {
 		$ret['message'] = $expr->getErrorMessage()._(':').' assigned_to=\''.$assigned_to.'\'';
 		return json_encode($ret);
-		exit();
 	}
 	$expr->setConstant('priority', $priority);
 	if ($expr->isError()) {
 		$ret['message'] = $expr->getErrorMessage()._(':').' priority=\''.$priority.'\'';
 		return json_encode($ret);
-		exit();
 	}
 	$expr->setConstant('summary', $summary);
 	if ($expr->isError()) {
 		$ret['message'] = $expr->getErrorMessage()._(':').' summary=\''.$summary.'\'';
 		return json_encode($ret);
-		exit();
 	}
 	$expr->setConstant('description', $description);
 	if ($expr->isError()) {
 		$ret['message'] = $expr->getErrorMessage()._(':').' description=\''.$description.'\'';
 		return json_encode($ret);
-		exit();
 	}
 
 	// Extra Fields
@@ -170,7 +163,6 @@ function get_formulas_results($group, $atid, $extra_fields=array(), $status='', 
 			if ($expr->isError()) {
 				$ret['message'] = $expr->getErrorMessage()._(':').' '.$extraField['alias'].'='.($type==ARTIFACT_EXTRAFIELDTYPE_INTEGER?'':'\'').$value.($type==ARTIFACT_EXTRAFIELDTYPE_INTEGER?'':'\'');
 				return json_encode($ret);
-				exit();
 			}
 		}
 	}
@@ -182,12 +174,10 @@ function get_formulas_results($group, $atid, $extra_fields=array(), $status='', 
 		if (!$ef || !is_object($ef)) {
 			$ret['message'] = _('ArtifactExtraField could not be created');
 			return json_encode($ret);
-			exit();
 		}
 		if ($ef->isError()) {
 			$ret['message'] = $ef->getErrorMessage();
 			return json_encode($ret);
-			exit();
 		}
 		$formula = $ef->getFormula();
 		if ($formula) {
@@ -197,7 +187,6 @@ function get_formulas_results($group, $atid, $extra_fields=array(), $status='', 
 					if ($expr->isError()) {
 						$ret['message'] = $expr->getErrorMessage();
 						return json_encode($ret);
-						exit();
 					}
 					$result [] = array( 'id'=>$extraField['extra_field_id'], 'value'=>$value, 'error'=>($expr->isError()?$expr->getErrorMessage():null));
 				}
@@ -210,7 +199,6 @@ function get_formulas_results($group, $atid, $extra_fields=array(), $status='', 
 						if ($expr->isError()) {
 							$ret['message'] = $expr->getErrorMessage();
 							return json_encode($ret);
-							exit();
 						}
 						if ($value) {
 							$valueArr[]=$key;
@@ -226,7 +214,6 @@ function get_formulas_results($group, $atid, $extra_fields=array(), $status='', 
 	}
 	$ret['fields'] = $result;
 	return json_encode($ret);
-	exit();
 }
 
 function add_parent($child_id, $parent_id) {
@@ -249,7 +236,6 @@ function add_parent($child_id, $parent_id) {
 		$ret['message'] = _('Unable to get artifact');
 	}
 	return json_encode($ret);
-	exit();
 }
 
 function add_child($parent_id, $child_id) {
@@ -270,7 +256,6 @@ function add_child($parent_id, $child_id) {
 		$ret['message'] = _('Unable to get artifact');
 	}
 	return json_encode($ret);
-	exit();
 }
 
 function remove_parent($child_id, $parent_id) {
@@ -282,5 +267,4 @@ function remove_parent($child_id, $parent_id) {
 		$ret['message'] = $child->getErrorMessage();
 	}
 	return json_encode($ret);
-	exit();
 }
