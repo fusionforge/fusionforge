@@ -56,6 +56,7 @@ class SvnCommitTracker extends scmhook {
 	}
 
 	function artifact_extra_detail(&$params) {
+		global $HTML;
 		$DBResult = db_query_params('SELECT * FROM plugin_scmhook_scmsvn_committracker_data_master, plugin_scmhook_scmsvn_committracker_data_artifact
 						WHERE plugin_scmhook_scmsvn_committracker_data_artifact.group_artifact_id = $1
 						AND plugin_scmhook_scmsvn_committracker_data_master.holder_id = plugin_scmhook_scmsvn_committracker_data_artifact.id
