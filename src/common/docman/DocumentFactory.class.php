@@ -420,7 +420,7 @@ class DocumentFactory extends FFError {
 
 		while ($arr = db_fetch_array($result)) {
 			$doc_group_id = $arr['doc_group'];
-			if (!is_array(@$this->Documents[$doc_group_id])) {
+			if (isset($this->Documents[$doc_group_id]) && !is_array($this->Documents[$doc_group_id])) {
 				$this->Documents[$doc_group_id] = array();
 			}
 			$this->Documents[$doc_group_id][] = new Document($this->Group, $arr['docid'], $arr);
