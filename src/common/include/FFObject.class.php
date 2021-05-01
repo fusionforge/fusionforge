@@ -139,10 +139,10 @@ class FFObject extends FFError {
 		}
 	}
 
-	function getLinkObject($objectId, $objectRefId, $objectType) {
+	function getLinkObject($objectId, $objectType) {
 		switch ($objectType) {
 			case 'Document':
-				return _documentid2url($objectId, $objectRefId);
+				return _documentid2url($objectId);
 				break;
 			case 'Artifact':
 				return _artifactid2url($objectId);
@@ -325,7 +325,7 @@ class FFObject extends FFError {
 						$cells = array();
 						$cells[][] = _('To');
 						$cells[][] = $objectType;
-						$cells[][] = $this->getLinkObject($objectId, $objectRefId, $objectType);
+						$cells[][] = $this->getLinkObject($objectId, $objectType);
 						if ($url !== false) {
 							$cells[][] = util_make_link($url.'&link=to&objecttype='.$objectType.'&objectrefid='.$objectRefId.'&objectid='.$objectId, $HTML->getDeletePic(_('Remove this association'), _('Remove this association')));
 						}
@@ -352,7 +352,7 @@ class FFObject extends FFError {
 						$cells = array();
 						$cells[][] = _('From');
 						$cells[][] = $objectType;
-						$cells[][] = $this->getLinkObject($objectId, $objectRefId, $objectType);
+						$cells[][] = $this->getLinkObject($objectId, $objectType);
 						if ($url !== false) {
 							$cells[][] = util_make_link($url.'&link=from&objecttype='.$objectType.'&objectrefid='.$objectRefId.'&objectid='.$objectId, $HTML->getDeletePic(_('Remove this association'), _('Remove this association')));
 						}
