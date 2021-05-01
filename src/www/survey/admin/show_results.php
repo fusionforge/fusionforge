@@ -138,6 +138,7 @@ $sh->footer();
  *  @param int    $graph
  */
 function showResult(&$SurveyHTML, &$Survey, &$Question, $show_comment=0, $q_num="", $graph=0) {
+	global $HTML;
 	/* Get results */
 	$srf = new SurveyResponseFactory($Survey, $Question);
 	if (!$srf || !is_object($srf)) {
