@@ -2300,7 +2300,7 @@ class Artifact extends FFObject {
 			if ($this->getParent() == $parent_id) {
 				return true;
 			} else {
-				$this->setError(_('Error')._(':').' '.sprintf(_('Artifact $s has already a parent', $child_id)));
+				$this->setError(_('Error')._(':').' '.sprintf(_('Artifact $s has already a parent'), $child_id));
 				return false;
 			}
 		}
