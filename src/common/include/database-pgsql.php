@@ -477,7 +477,7 @@ function db_commit($dbserver = NULL) {
 	if ($_sys_db_transaction_level == 0) {
 		echo "COMMIT underflow [$sysdebug_dberrors]<br />";
 		if ($sysdebug_dberrors)
-			ffDebug("database", "db_commit underflow", debug_string_backtrace(), 1);
+			ffDebug("database", "db_commit underflow", debug_string_backtrace());
 		return false;
 	}
 
