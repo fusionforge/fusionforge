@@ -513,11 +513,11 @@ over it to the project's administrator.");
 			$today = date ('Y-m-d') ;
 			$branch = $this->findMainBranch ($project) ;
 			if ($branch != '') {
-				system ("bzr export --root=$group_name-scm-$today --format=tar - $repo/$bname |".forge_get_config('compression_method')."> $tmp/snapshot") ;
+				system ("bzr export --root=$group_name-scm-$today --format=tar - $repo/$branch |".forge_get_config('compression_method')."> $tmp/snapshot") ;
 				chmod ("$tmp/snapshot", 0644) ;
 				copy ("$tmp/snapshot", $snapshot) ;
 				unlink ("$tmp/snapshot") ;
-				system ("rm -rf $tmp/$dir") ;
+				system ("rm -rf $tmp") ;
 			} else {
 				unlink ($snapshot) ;
 			}
