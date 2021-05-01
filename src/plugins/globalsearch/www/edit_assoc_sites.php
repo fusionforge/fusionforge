@@ -64,6 +64,6 @@ switch ($function) {
         }
 }
 
-echo globalsearch_admin_table_show ();
+globalsearch_admin_table_show ();
 
 $HTML->footer();
