@@ -104,10 +104,9 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		}
 
 		$analysed_path = $this->analyse($subpath, $group_id);
-
+		$path = rtrim($options['path'], '/');
 		if ($analysed_path['isdir']) {
 			$i = 0;
-			$path = rtrim($options['path'], '/');
 			$res = db_query_params('select * from doc_groups where group_id = $1 and doc_group = $2 and stateid = ANY ($3)',
 						array($group_id, $analysed_path['doc_group'], db_int_array_to_any_clause(array(1, 5))));
 			if (!$res) {
