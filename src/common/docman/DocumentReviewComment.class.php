@@ -38,7 +38,7 @@ class DocumentReviewComment extends FFError {
 	 */
 	var $data_array = array();
 
-	function __construct(&$DocumentReview, $commentid = false, $arr = false) {
+	function __construct(&$DocumentReview, $commentid = false) {
 		parent::__construct();
 		if (!$DocumentReview || !is_object($DocumentReview)) {
 			$this->setError(_('No Valid DocumentReview Object'));
@@ -88,8 +88,7 @@ class DocumentReviewComment extends FFError {
 
 	function getReviewComment() {
 		$result = util_gen_cross_ref($this->data_array['rcomment'], $this->DocumentReview->Document->Group->getID());
-		$result = nl2br($result);
-		return $result;
+		return nl2br($result);
 	}
 
 	function attachFile($filename, $filetype, $createdate, $data) {

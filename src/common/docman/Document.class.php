@@ -122,7 +122,6 @@ class Document extends FFObject {
 				if (!$perm || !is_object($perm) || !$perm->isDocEditor()) {
 					$this->setPermissionDeniedError();
 					$this->data_array = null;
-					return;
 				}
 			}
 		}
@@ -337,8 +336,7 @@ class Document extends FFObject {
 	 */
 	function getDescription() {
 		$result = util_gen_cross_ref($this->data_array['description'], $this->Group->getID());
-		$result = nl2br($result);
-		return $result;
+		return nl2br($result);;
 	}
 
 	/**
@@ -490,9 +488,9 @@ class Document extends FFObject {
 	 * @return	string	The filedata.
 	 */
 	function getFileData($download = true) {
-		if ($download)
+		if ($download) {
 			$this->downloadUp();
-
+		}
 		return file_get_contents($this->getFilePath());
 	}
 
@@ -1036,9 +1034,9 @@ class Document extends FFObject {
 	 * @return	bool	success.
 	 */
 	function sendApprovalNotice() {
-		if ($this->getStateID() != 3)
+		if ($this->getStateID() != 3) {
 			return true;
-
+		}
 		$doc_name = $this->getName();
 		$desc     = util_unconvert_htmlspecialchars($this->getDescription());
 		$group_id = $this->Group->getID();

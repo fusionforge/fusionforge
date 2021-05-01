@@ -75,9 +75,9 @@ class DocumentManager extends FFError {
 	 * @return	int	The trash doc_group id.
 	 */
 	function getTrashID() {
-		if (isset($this->data_array['trashid']))
+		if (isset($this->data_array['trashid'])) {
 			return $this->data_array['trashid'];
-
+		}
 		$res = db_query_params('SELECT doc_group from doc_groups
 					WHERE groupname = $1
 					AND group_id = $2
@@ -233,7 +233,7 @@ class DocumentManager extends FFError {
 						$linkname .= ' '._('(private)');
 					}
 					//use &nbsp + inline to support Chrome browser correctly
-					echo html_ao('li', array('id' => 'leaf-'.$subGroupIdValue, 'class' => $liclass)).'&nbsp;'.util_make_link($link, $localDg->getName(), array('title'=>$lititle, 'style' => 'display: inline')).$nbDocsLabel;
+					echo html_ao('li', array('id' => 'leaf-'.$subGroupIdValue, 'class' => $liclass)).'&nbsp;'.util_make_link($link, $linkname, array('title'=>$lititle, 'style' => 'display: inline')).$nbDocsLabel;
 				} else {
 					echo html_ao('li', array('id' => 'leaf-'.$subGroupIdValue, 'class' => $liclass)).'&nbsp;'.util_make_link($link, $localDg->getName(), array('style' => 'display: inline')).$nbDocsLabel;
 				}
@@ -309,8 +309,7 @@ class DocumentManager extends FFError {
 				while ($stateArr = db_fetch_array($stateQuery)) {
 					$returnString .= util_html_secure($stateArr['name']).': \''.$stateArr['stateid'].'\',';
 				}
-				$returnString .= '}';
-				return $returnString;
+				return $returnString.'}';
 			}
 			default: {
 				return $stateQuery;
@@ -323,15 +322,12 @@ class DocumentManager extends FFError {
 	 *
 	 * @param	array	$nested_groups
 	 * @param	string	$format		must be json which is wrong, this function does not return any json object
-	 * @param	bool	$allow_none	allow the "None" which is the "/"
-	 * @param	int	$selected_id	the selected folder id
-	 * @param	array	$dont_display	folders id to not display
 	 * @return	string
 	 */
-	function getDocGroupList($nested_groups, $format = '', $allow_none = true, $selected_id = 0, $dont_display = array()) {
+	function getDocGroupList($nested_groups, $format = '') {
 		$id_array = array();
 		$text_array = array();
-		$this->buildArrays($nested_groups, $id_array, $text_array, $dont_display);
+		$this->buildArrays($nested_groups, $id_array, $text_array, array());
 		$rows = count($id_array);
 		switch ($format) {
 			case 'json': {
@@ -386,15 +382,17 @@ class DocumentManager extends FFError {
 	 * @param	bool	$display_files	Set filename instead of directory name.
 	 */
 	function buildArrays($group_arr, &$id_array, &$text_array, &$dont_display, $parent = 0, $level = 0, $display_files = false) {
-		if (!is_array($group_arr) || !array_key_exists("$parent", $group_arr)) return;
-
+		if (!is_array($group_arr) || !array_key_exists("$parent", $group_arr)) {
+			return;
+		}
 		$child_count = count($group_arr["$parent"]);
 		for ($i = 0; $i < $child_count; $i++) {
 			$doc_group =& $group_arr["$parent"][$i];
 
 			// Should we display this element?
-			if (in_array($doc_group->getID(), $dont_display)) continue;
-
+			if (in_array($doc_group->getID(), $dont_display)) {
+				continue;
+			}
 			$margin = str_repeat("--", $level);
 
 			if (!$display_files) {

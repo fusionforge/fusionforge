@@ -48,9 +48,9 @@ if (isset($childgroup_id) && $childgroup_id) {
 }
 
 $dgf = new DocumentGroupFactory($g);
-if ($dgf->isError())
+if ($dgf->isError()) {
 	exit_error($dgf->getErrorMessage(), 'docman');
-
+}
 if (!forge_check_perm('docman', $group_id, 'submit')) {
 	$warning_msg = _('Document Manager Action Denied.');
 	session_redirect($redirecturl);

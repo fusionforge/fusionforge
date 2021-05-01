@@ -69,7 +69,7 @@ if ($dg->getState() == 2 && ($currentParentID == $dm->getTrashID())) {
 }
 
 $feedback = sprintf(_('Documents folder %s updated successfully'), $dg->getName());
-if ($childgroup_id)
+if ($childgroup_id) {
 	$feedback .= ' '.sprintf(_('on project %s'), $g->getPublicName());
-
+}
 session_redirect($urlredirect);

@@ -29,7 +29,6 @@ class DiaryFactory extends FFObject {
 		parent::__construct();
 		if (!forge_get_config('use_diary')) {
 			$this->setError(_('Diary feature is off.'));
-			return;
 		}
 	}
 

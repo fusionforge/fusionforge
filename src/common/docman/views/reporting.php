@@ -64,7 +64,9 @@ if ($report->isError()) {
 	exit_error($report->getErrorMessage(), 'docman');
 }
 
-if (!$start || !$end) $z =& $report->getMonthStartArr();
+if (!$start || !$end) {
+	$z =& $report->getMonthStartArr();
+}
 
 if (!$start) {
 	$start = $z[0];
@@ -73,7 +75,9 @@ if (!$start) {
 if (!$end) {
 	$end = $z[ count($z)-1 ];
 }
-if ($end < $start) list($start, $end) = array($end, $start);
+if ($end < $start) {
+	list($start, $end) = array($end, $start);
+}
 
 html_use_jqueryjqplotpluginCanvas();
 html_use_jqueryjqplotpluginhighlighter();
@@ -96,7 +100,7 @@ if ($report->isError()) {
 
 	$data = $report->getData();
 
-	if (count($data) == 0) {
+	if (empty($data)) {
 		echo $HTML->information(_('There have been no viewed documents for this project yet.'));
 	} else {
 		echo html_ao('script', array('type' => 'text/javascript'));

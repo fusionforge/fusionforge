@@ -97,8 +97,9 @@ echo html_e('input', $attrsInputSearchAll)._('With all the words');
 echo html_e('input', $attrsInputSearchOne)._('With at least one of words');
 if ($g->useDocmanSearch()) {
 	$attrsInputInsideDocs = array('type' => 'checkbox', 'name'  => 'insideDocuments', 'value' => 1, 'title' => _('Filename & contents are used to match searched words.'));
-	if ($insideDocuments)
+	if ($insideDocuments) {
 		$attrsInputInsideDocs['checked'] = 'checked';
+	}
 	echo html_e('input', $attrsInputInsideDocs)._('Inside documents');
 }
 $attrsFieldSet = array('id' => 'fieldset1_closed', 'class' => 'coolfieldset');
@@ -113,8 +114,9 @@ if ($g->usesPlugin('projects-hierarchy')) {
 	$projectIDsArray = $projectsHierarchy->getFamily($group_id, 'child', true, 'validated');
 	if (is_array($projectIDsArray)) {
 		$attrsInputIncludeSubprojects = array('type' => 'checkbox', 'name'  => 'includesubprojects', 'value' => 1, 'title' => _('Search into childs following project hierarchy.'));
-		if ($subprojectsIncluded)
+		if ($subprojectsIncluded) {
 			$attrsInputIncludeSubprojects['checked'] = 'checked';
+		}
 		echo html_e('p', array(), html_e('input', $attrsInputIncludeSubprojects)._('Include child projects'));
 	}
 }
@@ -171,8 +173,9 @@ if (session_loggedin()) {
 	$paging = (int)$LUSER->getPreference('paging');
 }
 
-if(!isset($paging) || !$paging)
+if(!isset($paging) || !$paging) {
 	$paging = 25;
+}
 
 if ($searchString) {
 	$docsHtmlSearchRenderer = new DocsHtmlSearchRenderer($searchString, $start, $isExact, $group_id, SEARCH__ALL_SECTIONS, $paging, $search_options);

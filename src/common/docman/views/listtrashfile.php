@@ -57,13 +57,13 @@ if (!forge_check_perm('docman', $g->getID(), 'approve')) {
 }
 
 $df = new DocumentFactory($g);
-if ($df->isError())
+if ($df->isError()) {
 	exit_error($df->getErrorMessage(), 'docman');
-
+}
 $dgf = new DocumentGroupFactory($g);
-if ($dgf->isError())
+if ($dgf->isError()) {
 	exit_error($dgf->getErrorMessage(), 'docman');
-
+}
 // deleted state id
 $df->setStateID(array(2));
 $df->setDocGroupState(2);

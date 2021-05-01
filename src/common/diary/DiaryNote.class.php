@@ -108,7 +108,6 @@ class DiaryNote extends FFObject {
 				if (!$this->getUser->getID() != user_getid()) {
 					$this->setPermissionDeniedError();
 					$this->data_array = null;
-					return;
 				}
 			}
 		}
@@ -267,14 +266,14 @@ class DiaryNote extends FFObject {
 			return $this->votes;
 		}
 
-		$voters = $this->getVoters();
-		if (($numvoters = count($voters)) < 1) {
+		$lvoters = $this->getVoters();
+		if (($numvoters = count($lvoters)) < 1) {
 			$this->votes = array(0, 0, 0);
 			return $this->votes;
 		}
 
 		$res = db_query_params('SELECT COUNT(*) AS count FROM diary_votes WHERE diary_id = $1 AND user_id = ANY($2)',
-					array($this->getID(), db_int_array_to_any_clause($voters)));
+					array($this->getID(), db_int_array_to_any_clause($lvoters)));
 		$db_count = db_fetch_array($res);
 		$numvotes = $db_count['count'];
 

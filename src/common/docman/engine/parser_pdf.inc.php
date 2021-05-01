@@ -28,12 +28,12 @@ require dirname(__FILE__).'/../../include/env.inc.php';
 require_once $gfcommon.'docman/engine/parser_text.inc.php';
 
 function parser_pdf($fichin) {
-	if (!is_file($fichin))
+	if (!is_file($fichin)) {
 		return '';
-
-	if (filesize($fichin) == 0)
+	}
+	if (filesize($fichin) == 0) {
 		return '';
-
+	}
 	$fichout = tempnam(forge_get_config('data_path'),'tmp');
 	$cmd = '/usr/bin/pdftotext '.$fichin.' '.$fichout;
 	shell_exec($cmd);

@@ -74,12 +74,12 @@ if (!$doc_group) {
 
 if (!$title || !$description || (!$uploaded_data && !$file_url && !$manual_path && (!$editor && !$name))) {
 	$missing_params = array();
-	if (!$title)
+	if (!$title) {
 		$missing_params[] = 'title';
-
-	if (!$description)
+	}
+	if (!$description) {
 		$missing_params[] = 'description';
-
+	}
 	exit_missing_param($_SERVER['HTTP_REFERER'], $missing_params, 'docman');
 }
 

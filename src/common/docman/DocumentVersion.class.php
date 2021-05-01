@@ -79,11 +79,11 @@ class DocumentVersion extends FFError {
 		parent::__construct();
 		if (!$Document || !is_object($Document)) {
 			$this->setError(_('No Valid Document Object'));
-			return;
+			return false;
 		}
 		if ($Document->isError()) {
 			$this->setError(_('Document Version')._(': ').$Document->getErrorMessage());
-			return;
+			return false;
 		}
 		$this->Document =& $Document;
 		if ($verid) {

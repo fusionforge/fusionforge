@@ -106,7 +106,6 @@ class DocumentVersionFactory extends FFError {
 		$res = db_query_params('SELECT serial_id, version as version, docid, current_version, title, updatedate, createdate, created_by, description, filename, filetype, filesize, vcomment FROM doc_data_version WHERE docid = $1 ORDER by version DESC',
 					array($this->Document->getID()));
 		if ($res) {
-			$numrows = db_numrows($res);
 			$i = 0;
 			while ($arr = db_fetch_array($res)) {
 				$versions[$i] = $arr;

@@ -27,12 +27,12 @@
 require_once $gfcommon.'include/config.php';
 
 function parser_text($fichin) {
-	if (!is_file($fichin))
+	if (!is_file($fichin)) {
 		return '';
-
-	if (filesize($fichin) == 0)
+	}
+	if (filesize($fichin) == 0) {
 		return '';
-
+	}
 	$handle = fopen($fichin, 'r');
 	$buff = fread($handle, filesize($fichin));
 
@@ -55,8 +55,7 @@ function parser_text($fichin) {
 	// élimination des doublons
 	$words = array_unique($words);
 	// envoi du résultat sur stdout
-	$rep = print_list($words);
-	return $rep;
+	return print_list($words);
 }
 
 function print_list($list) {
@@ -68,8 +67,7 @@ function print_list($list) {
 }
 
 function delete_specific_chars($text) {
-	$text = strtr($text, "\t\r\n?.*'\":;,#![]()/", "                  ");
-	return $text;
+	return strtr($text, "\t\r\n?.*'\":;,#![]()/", "                  ");
 }
 
 function microtime_float() {

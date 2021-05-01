@@ -34,9 +34,9 @@ if ($argc != 2) {
 }
 
 $fichin = $argv[1];
-if (!is_file($fichin))
+if (!is_file($fichin)) {
 	exit(1);
-
+}
 echo parser_text($fichin);
 
 // Local Variables:

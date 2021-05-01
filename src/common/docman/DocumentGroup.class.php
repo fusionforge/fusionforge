@@ -128,7 +128,6 @@ class DocumentGroup extends FFError {
 		if ($this->getState() == 5 && !forge_check_perm('docman', $this->Group->getID(), 'approve')) {
 			$this->data_array = null;
 			$this->setError(_('Permission refused'));
-			return;
 		}
 	}
 
@@ -240,16 +239,19 @@ class DocumentGroup extends FFError {
 		/* delete documents in directory */
 		$result = db_query_params('DELETE FROM doc_data where doc_group = $1 and group_id = $2',
 					array($doc_groupid, $project_group_id));
-
+		if (!$result) {
+			db_rollback();
+			return false;
+		}
+		
 		/* delete directory */
 		$result = db_query_params('DELETE FROM doc_groups where doc_group = $1 and group_id = $2',
 					array($doc_groupid, $project_group_id));
-
-		db_commit();
-
 		if (!$result) {
+			db_rollback();
 			return false;
 		}
+		db_commit();
 
 		/* update the parent if any */
 		if ($this->getParentID()) {
@@ -535,9 +537,9 @@ class DocumentGroup extends FFError {
 		$valArr = array(htmlspecialchars($name), $parent_doc_group, $updatetimestamp, $user_id, 0, NULL, $state);
 		if ($this->setValueinDB($colArr, $valArr)) {
 			$parentDg = new DocumentGroup($this->Group, $parent_doc_group);
-			if ($parentDg->getParentID())
+			if ($parentDg->getParentID()) {
 				$parentDg->update($parentDg->getName(), $parentDg->getParentID(), 1, $parentDg->getState(), $updatetimestamp);
-
+			}
 			$this->fetchData($this->getID());
 			$this->sendNotice(false);
 			return true;
@@ -562,12 +564,12 @@ class DocumentGroup extends FFError {
 	function hasDocuments(&$nested_groups, &$document_factory, $stateid = 0) {
 		$doc_group_id = $this->getID();
 		static $result = array();	// this function will probably be called several times so we better store results in order to speed things up
-		if (!array_key_exists($stateid, $result) || !is_array($result[$stateid]))
+		if (!array_key_exists($stateid, $result) || !is_array($result[$stateid])) {
 			$result[$stateid] = array();
-
-		if (array_key_exists($doc_group_id, $result[$stateid]))
+		}
+		if (array_key_exists($doc_group_id, $result[$stateid])) {
 			return $result[$stateid][$doc_group_id];
-
+		}
 
 		$stateIdDg = 1;
 		if (forge_check_perm('docman', $document_factory->Group->getID(), 'approve')) {
@@ -626,9 +628,9 @@ class DocumentGroup extends FFError {
 	 * @return	int	the number of found documents
 	 */
 	function getNumberOfDocuments($stateId = 1) {
-		if (isset($this->data_array['numberFiles'][$stateId]))
+		if (isset($this->data_array['numberFiles'][$stateId])) {
 			return $this->data_array['numberFiles'][$stateId];
-
+		}
 		$res = db_query_params('select count(*) from docdata_vw where doc_group = $1 and group_id = $2 and stateid = $3',
 					array($this->getID(), $this->Group->getID(), $stateId));
 		if (!$res) {
@@ -708,8 +710,7 @@ class DocumentGroup extends FFError {
 				$returnPath .= '/'.$this->getName();
 			}
 		}
-		$returnPath = preg_replace('/\/\//','/', $returnPath);
-		return $returnPath;
+		return preg_replace('/\/\//','/', $returnPath);
 	}
 
 	/**
@@ -723,13 +724,13 @@ class DocumentGroup extends FFError {
 	function setStateID($stateid, $recursive = false) {
 		if ($recursive) {
 			$df = new DocumentFactory($this->Group);
-			if ($df->isError())
+			if ($df->isError()) {
 				exit_error($df->getErrorMessage(), 'docman');
-
+			}
 			$dgf = new DocumentGroupFactory($this->Group);
-			if ($dgf->isError())
+			if ($dgf->isError()) {
 				exit_error($dgf->getErrorMessage(), 'docman');
-
+			}
 			$stateidArr = array(1, 3, 4, 5);
 			$nested_groups =& $dgf->getNested($stateidArr);
 
@@ -749,9 +750,9 @@ class DocumentGroup extends FFError {
 			$localdocgroup_arr[] = $this->getID();
 			if (is_array($nested_groups[$this->getID()])) {
 				foreach ($nested_groups[$this->getID()] as $dg) {
-					if (!$dg->setStateID($stateid))
+					if (!$dg->setStateID($stateid)) {
 						return false;
-
+					}
 					$localdocgroup_arr[] = $dg->getID();
 					$localdf = new DocumentFactory($this->Group);
 					$localdf->setDocGroupID($dg->getID());
@@ -767,8 +768,9 @@ class DocumentGroup extends FFError {
 			foreach ($localdocgroup_arr as $docgroup_id) {
 				if (isset($nested_docs[$docgroup_id]) && is_array($nested_docs[$docgroup_id])) {
 					foreach ($nested_docs[$docgroup_id] as $d) {
-						if (!$d->setState($stateid))
+						if (!$d->setState($stateid)) {
 							return false;
+						}
 					}
 				}
 			}
@@ -834,9 +836,9 @@ class DocumentGroup extends FFError {
 		if (!$this->getLocked() || ((time() - $this->getLockdate()) > 600)) {
 			//we need to move recursively all docs and all doc_groups in trash
 			// aka setStateID to 2.
-			if (!$this->setStateID(2, true))
+			if (!$this->setStateID(2, true)) {
 				return false;
-
+			}
 			$dm = new DocumentManager($this->Group);
 			$this->setParentDocGroupId($dm->getTrashID());
 			$this->setLock(0);

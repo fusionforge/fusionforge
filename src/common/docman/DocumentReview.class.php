@@ -43,7 +43,7 @@ class DocumentReview extends FFError {
 	var $version    = null;
 	var $serialid   = null;
 
-	function __construct(&$Document, $revid = false, $arr = false) {
+	function __construct(&$Document, $revid = false) {
 		parent::__construct();
 		if (!$Document || !is_object($Document)) {
 			$this->setError(_('No Valid Document Object'));

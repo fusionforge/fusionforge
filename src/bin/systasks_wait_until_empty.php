@@ -28,9 +28,9 @@ require_once $gfcommon.'include/pre.php';
 
 $first = true;
 do {
-	if (!$first)
+	if (!$first) {
 		sleep(1);
-
+	}
 	$res = db_query_params("SELECT * FROM systasks WHERE status=$1"
 	                       . " ORDER BY systask_id", array('TODO'));
 	$nb = db_numrows($res);

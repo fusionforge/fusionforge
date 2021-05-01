@@ -110,9 +110,9 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 			$path = rtrim($options['path'], '/');
 			$res = db_query_params('select * from doc_groups where group_id = $1 and doc_group = $2 and stateid = ANY ($3)',
 						array($group_id, $analysed_path['doc_group'], db_int_array_to_any_clause(array(1, 5))));
-			if (!$res)
+			if (!$res) {
 				return '404';
-
+			}
 			if (db_numrows($res)) {
 				$arr = db_fetch_array($res);
 			} else {
@@ -140,9 +140,9 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 			$files['files'][$i]['props'][] = $this->mkprop('getcontenttype', 'httpd/unix-directory');
 			$res = db_query_params('select * from doc_groups where group_id = $1 and parent_doc_group = $2 and stateid = ANY ($3)',
 						array($group_id, $analysed_path['doc_group'], db_int_array_to_any_clause(array(1, 5))));
-			if (!$res)
+			if (!$res) {
 				return '404';
-
+			}
 			while ($arr = db_fetch_array($res)) {
 				$i++;
 				if ($arr['updatedate']) {
@@ -163,9 +163,9 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 			}
 			$res = db_query_params('select filename,filetype,filesize,createdate,updatedate from docdata_vw where group_id = $1 and doc_group = $2',
 				array($group_id, $analysed_path['doc_group']));
-			if (!$res)
+			if (!$res) {
 				return '404';
-
+			}
 			while ($arr = db_fetch_array($res)) {
 				$i++;
 				if ($arr['updatedate']) {
@@ -187,9 +187,9 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		} elseif (isset($analysed_path['docid'])) {
 			$res = db_query_params('select filename,filetype,filesize,createdate,updatedate from docdata_vw where group_id = $1 and docid = $2',
 				array($group_id, $analysed_path['docid']));
-			if (!$res)
+			if (!$res) {
 				return '404';
-
+			}
 			$arr = db_fetch_array($res);
 			if ($arr['updatedate']) {
 				$lastmodifieddate = $arr['updatedate'];
@@ -321,9 +321,9 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		/* Open a file for writing */
 		$tmpfile = sys_get_temp_dir().'/'.uniqid();
 		$fp = fopen($tmpfile, "w");
-		while ($data = fread($options['stream'], 1024))
+		while ($data = fread($options['stream'], 1024)) {
 			fwrite($fp, $data);
-
+		}
 		/* Close the streams */
 		fclose($fp);
 		fclose($options['stream']);
@@ -402,16 +402,16 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		if ($analysed_path['isdir']) {
 			/* set this doc_group to trash */
 			$dg = new DocumentGroup($g, $analysed_path['doc_group']);
-			if ($dg->trash())
+			if ($dg->trash()) {
 				return '200';
-
+			}
 			return '423';
 		} else {
 			if ($analysed_path['docid']) {
 				$d = new Document($g, $analysed_path['docid']);
-				if ($d->trash())
+				if ($d->trash()) {
 					return '200';
-
+				}
 				return '423';
 			}
 		}
@@ -436,9 +436,9 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		$dgId = $this->findDgID($arr_path, $group_id);
 		if ($dgId >= 0) {
 			$g = group_get_object($group_id);
-			if (!$g || !is_object($g))
+			if (!$g || !is_object($g)) {
 				exit_no_group();
-
+			}
 			$dg = new DocumentGroup($g);
 			if (!$dg->create($coltocreate, $dgId)) {
 				return '409';
@@ -664,15 +664,12 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 	 */
 	function doWeUseDocman($group_id) {
 		$g = group_get_object($group_id);
-		if (!$g || !is_object($g))
+		if (!$g || !is_object($g)) {
 			exit_no_group();
-
-		if (!$g->usesDocman())
+		}
+		if (!$g->usesDocman() || !$g->useWebdav()) {
 			exit_disabled();
-
-		if (!$g->useWebdav())
-			exit_disabled();
-
+		}
 		if ($g->isError())
 			exit_error($g->getErrorMessage(), 'docman');
 

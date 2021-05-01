@@ -35,9 +35,9 @@ if ($argc != 2) {
 }
 
 $fichin = $argv[1];
-if (!is_file($fichin))
+if (!is_file($fichin)) {
 	exit (1);
-
+}
 $fichout = tempnam(sys_get_temp_dir(), 'docman');
 $cmd = "HOME=/tmp; /usr/bin/unoconv -d document -f text -o $fichout $fichin";
 $res = shell_exec($cmd);

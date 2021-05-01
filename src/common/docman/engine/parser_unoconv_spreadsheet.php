@@ -31,13 +31,13 @@ require_once $gfcommon.'docman/engine/parser_pdf.inc.php';
 
 if ($argc != 2) {
 	echo 'Usage : parser_unoconv_document.php <filename>'."\n";
-	exit (1);
+	exit(1);
 }
 
 $fichin = $argv[1];
-if (!is_file($fichin))
-	exit (1);
-
+if (!is_file($fichin)) {
+	exit(1);
+}
 $fichout = tempnam(sys_get_temp_dir(), 'docman');
 $cmd = "HOME=/tmp; /usr/bin/unoconv -d spreadsheet -f pdf -o $fichout $fichin";
 $res = shell_exec($cmd);

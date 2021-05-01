@@ -24,10 +24,6 @@ require_once 'include/DataAccess.class.php';
 
 class CodendiDataAccess extends DataAccess {
 
-	function __construct() {
-		parent::__construct();
-	}
-
 	protected static $_instance;
 
 	public static function instance() {

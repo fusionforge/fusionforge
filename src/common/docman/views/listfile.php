@@ -70,17 +70,17 @@ if (session_loggedin()) {
 	$paging = $LUSER->getPreference('paging');
 }
 
-if(!isset($paging) || !$paging)
+if(!isset($paging) || !$paging) {
 	$paging = 25;
-
+}
 $df = new DocumentFactory($g);
-if ($df->isError())
+if ($df->isError()) {
 	exit_error($df->getErrorMessage(), 'docman');
-
+}
 $dgf = new DocumentGroupFactory($g);
-if ($dgf->isError())
+if ($dgf->isError()) {
 	exit_error($dgf->getErrorMessage(), 'docman');
-
+}
 $stateidArr = array(1);
 $stateIdDg = 1;
 if (forge_check_perm('docman', $g->getID(), 'approve')) {
@@ -208,9 +208,9 @@ if ($DocGroupName) {
 		}
 	}
 
-	if ($ndg->hasDocuments($nested_groups, $df))
+	if ($ndg->hasDocuments($nested_groups, $df)) {
 		echo util_make_link('/docman/view.php/'.$ndg->Group->getID().'/zip/full/'.$dirid, html_image('docman/download-directory-zip.png', 22, 22, array('alt' => 'downloadaszip')), array('title' => _('Download this folder as a ZIP')));
-
+	}
 	if (session_loggedin()) {
 		if ($ndg->isMonitoredBy($LUSER->getID())) {
 			$option = 'stop';

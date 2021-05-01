@@ -29,16 +29,16 @@ require_once $gfcommon.'docman/engine/parser_text.inc.php';
 
 if ($argc != 2) {
 	echo "Usage : parser_html.php <filename>\n";
-	exit (1);
+	exit(1);
 }
 
 $fichin = $argv[1];
-if (!is_file($fichin))
-	exit (1);
-
-if (filesize($fichin) == 0)
-	exit (1);
-
+if (!is_file($fichin)) {
+	exit(1);
+}
+if (filesize($fichin) == 0) {
+	exit(1);
+}
 $fd = fopen($fichin, "r");
 $contents = fread($fd, filesize($fichin));
 fclose($fd);
@@ -50,7 +50,7 @@ fwrite($fd , $strip_content);
 fclose($fd);
 
 echo parser_text($filename);
-unlink ($filename);
+unlink($filename);
 
 // Local Variables:
 // mode: php
