@@ -81,7 +81,6 @@ function db_connect() {
 		if (!$gfconn) {
 			throw new DBException(forge_get_config('forge_name')
 					." Could Not Connect to Database: ".db_error());
-			exit(1);
 		}
 	} else {
 		print("function pg_pconnect doesn't exist: no postgresql interface");
@@ -324,8 +323,7 @@ function db_prepare($qstring, $qname, $dbserver = NULL) {
 		    db_error($dbserver) . "\n\n" . debug_string_backtrace());
 	} elseif ($sysdebug_dberrors) {
 		ffDebug("database", "db_prepare() failed (" .
-		    db_error($dbserver) . "), SQL: " . $qstring,
-		    print_r(array("params" => $params), 1));
+		    db_error($dbserver) . "), SQL: " . $qstring);
 	} else {
 		error_log('SQL: ' . preg_replace('/\n\t+/', ' ', $qstring));
 		error_log('SQL> ' . db_error($dbserver));
@@ -374,17 +372,17 @@ function db_execute($qname, $params, $dbserver = NULL) {
 /**
  * db_unprepare - Deallocate a prepared SQL query
  *
- * @param	string	$name		the prepared query
+ * @param	string	$qname		the prepared query
  * @param	int	$dbserver	ability to spread load to multiple db servers.
  * @return	int	result set handle.
  */
-function db_unprepare($name, $dbserver = NULL) {
+function db_unprepare($qname, $dbserver = NULL) {
 	global $sysdebug_dbquery, $sysdebug_dberrors;
 
 	db_connect_if_needed();
 	$dbconn = db_switcher($dbserver) ;
 
-	$res = @pg_query($dbconn, "DEALLOCATE $name");
+	$res = @pg_query($dbconn, "DEALLOCATE $qname");
 	if ($res) {
 		if ($sysdebug_dbquery) {
 			ffDebug("trace",
@@ -396,8 +394,7 @@ function db_unprepare($name, $dbserver = NULL) {
 		    db_error($dbserver) . "\n\n" . debug_string_backtrace());
 	} elseif ($sysdebug_dberrors) {
 		ffDebug("database", "db_unprepare() failed (" .
-		    db_error($dbserver) . "), SQL: " . $qname,
-		    print_r(array("params" => $params), 1));
+		    db_error($dbserver) . "), SQL: " . $qname);
 	} else {
 		error_log('SQL: ' . preg_replace('/\n\t+/', ' ', $qname));
 		error_log('SQL> ' . db_error($dbserver));

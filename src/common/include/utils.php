@@ -665,10 +665,9 @@ function valid_hostname($hostname = "xyz") {
  * @param	int	$bytes	is the size
  * @param	bool	$base10	enable base 10 representation, otherwise default base 2  is used
  * @param	int	$round	number of fractional digits
- * @param	array	$labels	strings associated to each 2^10 or 10^3(base10==true) multiple of base units
  * @return	string
  */
-function human_readable_bytes($bytes, $base10 = false, $round = 0, $labels = array()) {
+function human_readable_bytes($bytes, $base10 = false, $round = 0) {
 	if ($bytes == 0) {
 		return "0";
 	}

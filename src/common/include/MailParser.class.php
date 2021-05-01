@@ -24,9 +24,9 @@ require_once $gfcommon.'include/FFError.class.php';
 
 class MailParser extends FFError {
 
-	var $max_file_size=2000000;
+	var $max_file_size = 2000000;
 	var $headers;
-	var $body;
+	var $body = '';
 
 	function __construct($input_file) {
 		parent::__construct();
@@ -43,12 +43,10 @@ class MailParser extends FFError {
 		$linecount=count($lines);
 		unset($input_data);
 
-//system("echo \"mp: headers".implode("***\n",$lines)."\n\" >> /tmp/forum.log");
 		//
 		//	Read the message line-by-line
 		//
 		for ($i=0; $i<($linecount-1); $i++) {
-//system("echo \"mp: line $i of $linecount length: ".strlen($lines[$i])." ".$lines[$i]."\n\" >> /tmp/forum.log");
 			//
 			//	Still reading headers
 			//
