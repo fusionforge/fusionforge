@@ -263,7 +263,6 @@ EOS;
 			}
 			default: {
 				return $localFamily;
-				break;
 			}
 		}
 		if ($res && db_numrows($res) > 0) {
@@ -640,7 +639,6 @@ EOS;
 						}
 						default: {
 							return false;
-							break;
 						}
 					}
 					$res = db_query_qpa($qpa);
@@ -665,7 +663,6 @@ EOS;
 						}
 						default: {
 							return false;
-							break;
 						}
 					}
 					$res = db_query_qpa($qpa);
@@ -828,11 +825,13 @@ EOS;
 			case 'globaladmin': {
 				session_require_global_perm('forge_admin');
 				site_admin_footer();
+				$returned = true;
 				break;
 			}
 			case 'admin':
 			default: {
 				site_project_footer();
+				$returned = true;
 				break;
 			}
 		}
@@ -966,8 +965,7 @@ EOS;
 	function is_child($group_id) {
 		if (count($this->getFamily($group_id, 'parent', true, 'any')) > 0) {
 			return true;
-		} else {
-			return false;
 		}
+		return false;
 	}
 }
