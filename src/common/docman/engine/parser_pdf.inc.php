@@ -39,7 +39,6 @@ function parser_pdf($fichin) {
 	shell_exec($cmd);
 
 	return parser_text($fichout);
-	unlink ($fichout);
 }
 
 // Local Variables:
