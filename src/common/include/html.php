@@ -133,7 +133,7 @@ function html_blankimage($height, $width) {
  * @param	array	$args	Any <img> tag parameters (i.e. 'border', 'alt', etc...)
  * @return	string
  */
-function html_abs_image($url, $width, $height, $args) {
+function html_abs_image($url, $width, $height, $args = array()) {
 	$args['src'] = $url;
 	if (!isset($args['alt'])) {
 		$args['alt'] = '';
