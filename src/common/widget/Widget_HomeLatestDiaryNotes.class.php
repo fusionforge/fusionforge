@@ -41,9 +41,9 @@ class Widget_HomeLatestDiaryNotes extends Widget {
 	}
 
 	function getContent() {
+		global $HTML;
 		$diaryFactory = new DiaryFactory();
 		if ($diaryFactory->hasNotes(1)) {
-			global $HTML;
 			$content = $HTML->listTableTop();
 			$cells = array();
 			$cells[][] = _('Subject');
