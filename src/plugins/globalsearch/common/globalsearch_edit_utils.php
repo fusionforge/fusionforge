@@ -238,11 +238,11 @@ function globalsearch_admin_table_show () {
 
 function globalsearch_status_name ($status_id) {
 	switch ($status_id) {
-	case 1: return _('New'); break;
-	case 2: return _('OK'); break;
-	case 3: return _('Error fetching data'); break;
-	case 4: return _('Error parsing data'); break;
-	default: return _('Unknown status ID');
+		case 1: return _('New'); break;
+		case 2: return _('OK'); break;
+		case 3: return _('Error fetching data'); break;
+		case 4: return _('Error parsing data'); break;
+		default: return _('Unknown status ID');
 	}
 }
 
