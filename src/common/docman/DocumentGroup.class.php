@@ -38,7 +38,7 @@ $DOCUMENTGROUP_OBJ = array();
  *
  * @param	int		$docgroup_id	The ID of the document group - required
  * @param	int		$group_id	Group ID of the project - required
- * @param	int|bool	$res	The result set handle ("SELECT * FROM doc_groups WHERE doc_group = $1")
+ * @param	int|bool	$res		The result set handle ("SELECT * FROM doc_groups WHERE doc_group = $1")
  * @return	DocumentGroup	a document group object or false on failure
  */
 function &documentgroup_get_object($docgroup_id, $group_id, $res = false) {
@@ -368,7 +368,10 @@ class DocumentGroup extends FFError {
 	 * @access	public
 	 */
 	function getState() {
-		return $this->data_array['stateid'];
+		if (isset($this->data_array['stateid'])) {
+			return $this->data_array['stateid'];
+		}
+		return 0;
 	}
 
 	/**
