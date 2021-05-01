@@ -2407,7 +2407,7 @@ class Group extends FFError {
 			$this->setError(_('Could Not Get Role'));
 			return false;
 		} elseif ($newrole->isError()) {
-			$this->setError(_('Role')._(': ').$role->getErrorMessage());
+			$this->setError(_('Role')._(': ').$newrole->getErrorMessage());
 			return false;
 		} elseif ($newrole->getHomeProject() == NULL
 			  || $newrole->getHomeProject()->getID() != $this->getID()) {
