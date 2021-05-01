@@ -28,7 +28,7 @@
 require_once $gfcommon.'include/FFError.class.php';
 require_once $gfcommon.'include/Validator.class.php';
 
-function projecttask_get_object($project_task_id,$data=false) {
+function projecttask_get_object($project_task_id, $data = false) {
 		global $PROJECTTASK_OBJ;
 		if (!isset($PROJECTTASK_OBJ["_".$project_task_id."_"])) {
 			if ($data) {
@@ -250,7 +250,10 @@ class ProjectTask extends FFError {
 	 * @return	int	The project_task_id.
 	 */
 	function getID() {
-		return $this->data_array['project_task_id'];
+		if (isset($this->data_array['project_task_id'])) {
+			return $this->data_array['project_task_id'];
+		}
+		return 0;
 	}
 
 	/**
@@ -583,19 +586,19 @@ class ProjectTask extends FFError {
 		//	May not yet have an ID, if we are creating a NEW task
 		//
 		if ($this->getID()) {
-			return db_query_params ('SELECT project_task_id,summary
-		FROM project_task
-		WHERE group_project_id=$1
-		AND project_task_id <> $2
-				ORDER BY project_task_id DESC',
+			return db_query_params('SELECT project_task_id,summary
+						FROM project_task
+						WHERE group_project_id=$1
+						AND project_task_id <> $2
+						ORDER BY project_task_id DESC',
 						array ($this->ProjectGroup->getID(),
-						       $this->getID())) ;
+						       $this->getID()));
 		} else {
-			return db_query_params ('SELECT project_task_id,summary
-		FROM project_task
-		WHERE group_project_id=$1
-		ORDER BY project_task_id DESC',
-						array ($this->ProjectGroup->getID())) ;
+			return db_query_params('SELECT project_task_id,summary
+						FROM project_task
+						WHERE group_project_id=$1
+						ORDER BY project_task_id DESC',
+						array ($this->ProjectGroup->getID()));
 		}
 	}
 

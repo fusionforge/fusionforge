@@ -33,11 +33,11 @@ class ProjectTaskHTML extends ProjectTask {
 		parent::__construct($ProjectGroup, $project_task_id, $arr);
 	}
 
-	function multipleDependBox ($name='dependent_on[]') {
-		$result=$this->getOtherTasks();
+	function multipleDependBox($name = 'dependent_on[]') {
+		$result = $this->getOtherTasks();
 		//get the data so we can mark items as SELECTED
 		$arr2 = array_keys($this->getDependentOn());
-		return html_build_multiple_select_box ($result,$name,$arr2,8,false);
+		return html_build_multiple_select_box($result, $name, $arr2, 8, false);
 	}
 
 	function multipleAssignedBox ($name='assigned_to[]') {

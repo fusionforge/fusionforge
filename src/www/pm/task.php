@@ -81,7 +81,7 @@ if (!$group || !is_object($group)) {
 	exit_error($group->getErrorMessage(),'pm');
 }
 
-$pg = new ProjectGroupHTML($group,$group_project_id);
+$pg = new ProjectGroupHTML($group, $group_project_id);
 if (!$pg || !is_object($pg)) {
 	exit_error(_('Could Not Get Factory'),'pm');
 } elseif ($pg->isError()) {
@@ -99,7 +99,7 @@ switch (getStringFromRequest('func')) {
 	case 'addtask' : {
 		session_require_perm ('pm', $pg->getID(), 'manager') ;
 
-		$pt=new ProjectTaskHTML($pg);
+		$pt = new ProjectTaskHTML($pg);
 		if (!$pt || !is_object($pt)) {
 			exit_error(_('Could Not Get ProjectTask'),'pm');
 		} elseif ($pt->isError()) {

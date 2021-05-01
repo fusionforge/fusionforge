@@ -25,7 +25,7 @@
 
 require_once $gfwww.'include/note.php';
 
-global $HTML;
+global $HTML, $pg, $pt;
 
 $related_artifact_id = getIntFromRequest('related_artifact_id');
 $related_artifact_summary = getStringFromRequest('related_artifact_summary');
