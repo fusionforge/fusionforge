@@ -88,7 +88,8 @@ if ($group_id && $job_id) {
 		<h2>'._('Required Skills').'</h2>';
 
 		//now show the list of desired skills
-		echo people_show_job_inventory($job_id).'</td></tr></table>';
+		people_show_job_inventory($job_id);
+		echo '</td></tr></table>';
 	}
 
 	people_footer();

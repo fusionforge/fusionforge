@@ -178,7 +178,9 @@ if ($group_id && (forge_check_perm('project_admin', $group_id))) {
 		<input type="submit" name="update_job" value="'._('Update Descriptions').'" /></p>';
 		echo $HTML->closeForm();
 		//now show the list of desired skills
-		echo '<p>'.people_edit_job_inventory($job_id,$group_id).'</p>';
+		echo '<p>';
+		people_edit_job_inventory($job_id,$group_id);
+		echo '</p>';
 		echo $HTML->openForm(array('action' => '/people/', 'method' => 'post'));
 		echo '<input type="submit" name="submit" value="'._('Finished').'" />';
 		echo $HTML->closeForm();
