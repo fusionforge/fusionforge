@@ -76,7 +76,7 @@ class GitCommitTracker extends scmhook {
 	}
 
 	function task_extra_detail($params) {
-		$return = '';
+		global $HTML;
 		$DBResult = db_query_params ('SELECT * FROM plugin_scmhook_scmgit_committracker_data_master, plugin_scmhook_scmgit_committracker_data_artifact
 						WHERE plugin_scmhook_scmgit_committracker_data_artifact.project_task_id = $1
 						AND plugin_scmhook_scmgit_committracker_data_master.holder_id = plugin_scmhook_scmgit_committracker_data_artifact.id
