@@ -72,8 +72,8 @@ class AuthOpenIDPlugin extends ForgeAuthPlugin {
 		if (!$this->isRequired() && !$this->isSufficient()) {
 			return true;
 		}
+		global $HTML;
 		$return_to = $params['return_to'];
-
 
 		$result = html_e('p', array(), _('Cookies must be enabled past this point.'));
 
