@@ -86,7 +86,7 @@ function globalsearch_admin_table_confirmdelete ($id) {
 		$link      =  db_result ($result, 0, 'link');
 		$onlysw    =  db_result ($result, 0, 'onlysw');
 		$enabled   =  db_result ($result, 0, 'enabled');
-		$rank      =  db_result ($result, 0, 'rank', 1);
+		$rank      =  db_result ($result, 0, 'rank');
 
                 echo _('Are you sure you want to delete this associated forge?') ;
 		echo '<table>';
@@ -134,7 +134,7 @@ function globalsearch_admin_table_edit ($id) {
 		$old_link      =  db_result ($result, 0, 'link');
 		$old_onlysw    =  db_result ($result, 0, 'onlysw');
 		$old_enabled   =  db_result ($result, 0, 'enabled');
-		$old_rank      =  db_result ($result, 0, 'rank', 1);
+		$old_rank      =  db_result ($result, 0, 'rank');
 
 		echo _('Modify the associated forge below');
 		echo $HTML->openForm(array('name' => 'edit', 'action' => '/plugins/globalsearch/edit_assoc_sites.php?function=postedit&id='.$id, 'method' => 'post'));
