@@ -203,7 +203,7 @@ function session_login_valid($loginname, $passwd, $allowpending = 0) {
 	$plugin_session_login_valid = false;
 
 	// Refuse login if not all the plugins are ok.
-	foreach ($params['results'] as $p => $r) {
+	foreach ($hook_params['results'] as $p => $r) {
 		$plugin_session_login_valid = true;
 		if ($r == FORGE_AUTH_AUTHORITATIVE_ACCEPT) {
 			$seen_yes = true;
