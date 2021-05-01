@@ -75,7 +75,7 @@ class ForumMessage extends FFError {
 			} else {
 				$this->awaits_moderation = false;
 				if (!$arr || !is_array($arr)) {
-					$this->fetchData($msg_id))
+					$this->fetchData($msg_id);
 				} else {
 					$this->data_array =& $arr;
 					//
