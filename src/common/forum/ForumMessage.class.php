@@ -75,9 +75,7 @@ class ForumMessage extends FFError {
 			} else {
 				$this->awaits_moderation = false;
 				if (!$arr || !is_array($arr)) {
-					if (!$this->fetchData($msg_id)) {
-						return;
-					}
+					$this->fetchData($msg_id))
 				} else {
 					$this->data_array =& $arr;
 					//
@@ -86,7 +84,6 @@ class ForumMessage extends FFError {
 					if ($this->data_array['group_forum_id'] != $this->Forum->getID()) {
 						$this->setError(_('Group_forum_id in db result does not match Forum Object'));
 						$this->data_array=null;
-						return;
 					}
 				}
 			}

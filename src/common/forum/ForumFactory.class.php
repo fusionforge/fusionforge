@@ -43,10 +43,10 @@ class ForumFactory extends FFError {
 	var $forums;
 
 	/**
-	 * @param	object $Group The Group object to which this forum is associated.
-	 * @param	bool $skip_check
+	 * @param	object	$Group		The Group object to which this forum is associated.
+	 * @param	bool	$skip_check
 	 */
-	function __construct(&$Group, $skip_check=false) {
+	function __construct(&$Group, $skip_check = false) {
 		parent::__construct();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(_('Invalid Project'));
@@ -206,8 +206,10 @@ class ForumFactory extends FFError {
 				// Update row
 				$count = db_result($res, 0, 'count');
 				$count -= $msg_count;
-				if ($count < 0) $count = 0;
-				$res = db_query_params('UPDATE forum_agg_msg_count SET count=$1 WHERE group_forum_id=$2',
+				if ($count < 0) {
+					$count = 0;
+				}
+				db_query_params('UPDATE forum_agg_msg_count SET count=$1 WHERE group_forum_id=$2',
 							array($count, $old_forum_id));
 			} else {
 				// Error because row doesn't exist... insert it
@@ -215,7 +217,7 @@ class ForumFactory extends FFError {
 							array($old_forum_id));
 				if ($res && db_numrows($res)) {
 					$count = db_result($res, 0, 'count');
-					$res = db_query_params('INSERT INTO forum_agg_msg_count (group_forum_id, count) VALUES ($1,$2)',
+					db_query_params('INSERT INTO forum_agg_msg_count (group_forum_id, count) VALUES ($1,$2)',
 								array($old_forum_id, $count));
 				}
 			}
@@ -227,11 +229,11 @@ class ForumFactory extends FFError {
 				// Update row
 				$count = db_result($res, 0, 'count');
 				$count += $msg_count;
-				$res = db_query_params('UPDATE forum_agg_msg_count SET count=$1 WHERE group_forum_id=$2',
+				db_query_params('UPDATE forum_agg_msg_count SET count=$1 WHERE group_forum_id=$2',
 							array($count, $group_forum_id));
 			} else {
 				// Insert row
-				$res = db_query_params('INSERT INTO forum_agg_msg_count (group_forum_id, count) VALUES ($1,$2)',
+				db_query_params('INSERT INTO forum_agg_msg_count (group_forum_id, count) VALUES ($1,$2)',
 							array($group_forum_id, $msg_count));
 			}
 		}

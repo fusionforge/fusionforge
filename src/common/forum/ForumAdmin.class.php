@@ -39,7 +39,6 @@ class ForumAdmin extends FFError {
 			$this->p =& $this->g->getPermission();
 			if (!$this->g->usesForum()) {
 				$this->setError(sprintf(_('%s does not use the Forum tool.'), $this->g->getPublicName()));
-				return;
 			}
 		}
 	}
@@ -65,7 +64,6 @@ class ForumAdmin extends FFError {
 
 		$return .= util_make_link('/forum/admin/?editmsg='.$msg_id.'&group_id='.$group_id.'&thread_id='.$thread_id.'&forum_id='.$forum_id, html_image('ic/forum_edit.png', 16, 18, array('alt' => _("Edit"))));
 		$return .= util_make_link('/forum/admin/?deletemsg='.$msg_id.'&group_id='.$group_id.'&thread_id='.$thread_id.'&forum_id='.$forum_id, html_image('ic/forum_delete.png', 16, 18, array('alt'=>_("Delete"))));
-		//		$return .= "<br />";
 		return $return;
 	}
 
@@ -188,7 +186,7 @@ class ForumAdmin extends FFError {
 				form_release_key(getStringFromRequest("form_key"));
 				exit_permission_denied('forums');
 			}
-			$f=new Forum($this->g);
+			$f = new Forum($this->g);
 			if (!$f || !is_object($f)) {
 				form_release_key(getStringFromRequest("form_key"));
 				exit_error(_('Error getting Forum'),'forums');
@@ -207,7 +205,7 @@ class ForumAdmin extends FFError {
 		if ($action == "delete") { //Deleting messages or threads
 			$msg_id = getIntFromRequest('deletemsg');
 			$forum_id = getIntFromRequest('forum_id');
-			$f=new Forum($this->g,$forum_id);
+			$f = new Forum($this->g,$forum_id);
 			if (!$f || !is_object($f)) {
 				exit_error(_('Error getting Forum'),'forums');
 			} elseif ($f->isError()) {
@@ -216,7 +214,7 @@ class ForumAdmin extends FFError {
 
 			session_require_perm ('forum_admin', $f->Group->getID()) ;
 
-			$fm=new ForumMessage($f,$msg_id);
+			$fm = new ForumMessage($f, $msg_id);
 			if (!$fm || !is_object($fm)) {
 				exit_error(_('Error Getting ForumMessage'),'forums');
 			} elseif ($fm->isError()) {
@@ -235,7 +233,7 @@ class ForumAdmin extends FFError {
 				Deleting entire forum
 			*/
 			$group_forum_id = getIntFromRequest('group_forum_id');
-			$f=new Forum($this->g,$group_forum_id);
+			$f = new Forum($this->g, $group_forum_id);
 			if (!$f || !is_object($f)) {
 				exit_error(_('Error getting Forum'),'forums');
 			} elseif ($f->isError()) {
@@ -271,7 +269,7 @@ class ForumAdmin extends FFError {
 				$moderated_forums[$aux[1]] = $aux[0];
 			}
 
-			if (count($moderated_forums)==0) {
+			if (empty($moderated_forums)) {
 				echo $HTML->feedback(_('No forums are moderated for this group'));
 				forum_footer();
 				exit();
@@ -346,17 +344,12 @@ class ForumAdmin extends FFError {
 			echo $HTML->closeForm();
 		}
 		if ($action == "update_pending") {
-			$group_id = getIntFromRequest("group_id");
 			$forum_id = getIntFromRequest("forum_id");
 			$msgids = getStringFromRequest("msgids");//the message ids to update
 			$doaction = getArrayFromRequest("doaction"); //the actions for the messages
 
-			$msgids = explode(",",$msgids);
+			$msgids = explode(",", $msgids);
 			array_pop($msgids);//this last one is empty
-
-			/*if ($this->isGroupAdmin()) {
-				$this->PrintAdminOptions();
-			}*/
 
 			for($i=0;$i<count($msgids);$i++) {
 				switch ($doaction[$i]) {
@@ -423,7 +416,7 @@ class ForumAdmin extends FFError {
 							$feedback .= "($subject) " . _('Pending message released') . "<br />";
 							if (db_numrows($res2)>0) {
 								//if there's an attachment
-								$am = NEW AttachManager();//object that will handle and insert the attachment into the db
+								$am = new AttachManager();//object that will handle and insert the attachment into the db
 								$am->SetForumMsg($fm);
 								$userid = db_result($res2,0,"userid");
 								$dateline = db_result($res2,0,"dateline");
@@ -454,7 +447,7 @@ class ForumAdmin extends FFError {
 
 						if ( isset($am) && (is_object($am)) ) {
 							//if there was an attach, check if it was uploaded ok
-							 if ((!$am->isError())) {
+							 if (!$am->isError()) {
 								$deleteok = true;
 							 } else {
 							 	//undo the changes to the forum table

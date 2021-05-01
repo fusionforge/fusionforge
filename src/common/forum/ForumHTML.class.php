@@ -122,17 +122,15 @@ function forum_header($params = array()) {
 				$menu_links[]='/forum/admin/?group_id='.$group_id;
 			}
 		}
-		if (count($menu_text) > 0) {
-			$params['submenu'] =$HTML->subMenu($menu_text,$menu_links);
-		}
 
+		$params['submenu'] =$HTML->subMenu($menu_text,$menu_links);
 		site_project_header($params);
 	}
 
 	$pluginManager = plugin_manager_get_object();
-	if ($f && $pluginManager->PluginIsInstalled('blocks') && plugin_hook("blocks", "forum_".$f->getName()))
+	if ($f && $pluginManager->PluginIsInstalled('blocks') && plugin_hook("blocks", "forum_".$f->getName())) {
 		echo '<br />';
-
+	}
 	if (session_loggedin()) {
 		if ($f) {
 			if ($f->isMonitoring()) {
@@ -377,8 +375,8 @@ class ForumHTML extends FFError {
 	function showNestedMessages(&$msg_arr, $msg_id) {
 		global $total_rows;
 
-		$rows=count($msg_arr["$msg_id"]);
-		$ret_val='';
+		$rows = count($msg_arr["$msg_id"]);
+		$ret_val = '';
 
 		if ($msg_arr["$msg_id"] && $rows > 0) {
 			$ret_val .= '
@@ -402,10 +400,7 @@ class ForumHTML extends FFError {
 			}
 			$ret_val .= '
 			</li></ul>';
-		} else {
-			//$ret_val .= "<p><strong>no messages actually follow up to $msg_id</strong>";
 		}
-
 		return $ret_val;
 	}
 
@@ -424,12 +419,11 @@ class ForumHTML extends FFError {
 		*/
 		global $total_rows,$current_message,$group_id, $HTML;
 
-		if (!isset($msg_arr["$msg_id"]))
+		if (!isset($msg_arr["$msg_id"])) {
 			return "";
-
+		}
 		$rows=count($msg_arr["$msg_id"]);
 		$ret_val = "";
-		//echo "<p>ShowSubmessages() $msg_id | $rows";
 		if ($rows > 0) {
 			for ($i=($rows-1); $i >= 0; $i--) {
 				/*
@@ -623,7 +617,7 @@ class ForumHTML extends FFError {
 					echo '<textarea required="required" name="body"  rows="10" cols="70">' . $body . '</textarea>';
 				}
 				unset($GLOBALS['editor_was_set_up']);
-				//$text_support->displayTextField('body'); ?>
+			?>
 		<br />
 		<!--		<span class="selected"><?php echo _('HTML tags will display in your post as text'); ?></span> -->
 		<br />
@@ -637,8 +631,10 @@ class ForumHTML extends FFError {
 		}
 		?> <br />
 		<input type="submit" name="submit"
-			value="<?php echo _('Post Comment'); echo ((!session_loggedin())?' '._('Anonymously'):''); ?>" /><?php
-			echo ((session_loggedin()) ? '&nbsp;&nbsp;&nbsp;<input type="checkbox" value="1" name="monitor" />&nbsp;'._('Receive comments via email').'.' : ''); ?>
+			value="<?php echo _('Post Comment'); echo ((!session_loggedin())?' '._('Anonymously'):''); ?>" />
+			<?php if (session_loggedin()) {
+				echo '&nbsp;&nbsp;&nbsp;<input type="checkbox" value="1" name="monitor" />&nbsp;'._('Receive comments via email').'.';
+			} ?>
 		</p>
 		</td>
 	</tr>
