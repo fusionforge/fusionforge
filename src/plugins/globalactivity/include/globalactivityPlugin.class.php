@@ -86,9 +86,6 @@ class globalactivityPlugin extends Plugin {
 			$tmp = $end;
 			$end = $begin;
 			$begin = $tmp;
-			$tmp = $rendered_end;
-			$rendered_end = $rendered_begin;
-			$rendered_begin = $tmp;
 		}
 
 		if (forge_get_config('use_forum')) {
