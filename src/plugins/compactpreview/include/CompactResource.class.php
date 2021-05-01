@@ -74,7 +74,8 @@ class CompactResource {
 class UserCompactResource extends CompactResource {
 
 	protected function getCssClass() {
-		// TBD
+		// TBD, at least return an empty string
+		return '';
 	}
 
 	public function getResourceLink() {
@@ -129,11 +130,10 @@ class OslcUserCompactResource extends UserCompactResource {
  *
  */
 class GroupCompactResource extends CompactResource {
-
 	protected function getCssClass() {
-	// TBD
+		// TBD, at least return an empty string
+		return '';
 	}
-
 }
 
 class LocalGroupCompactResource extends GroupCompactResource {
