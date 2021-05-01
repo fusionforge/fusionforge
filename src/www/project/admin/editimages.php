@@ -181,13 +181,9 @@ if (getStringFromRequest('submit')) {
 
 				$size = $input_file['size'];
 				if (db_result($res,0,'sum')+$size < $QUOTA) {
-
-					store_file($id, $input_file);
-
+					store_file($id, $input_file, $is_logo);
 				} else {
-
 					$feedback .= _('.Sorry - you are over your 1MB quota.');
-
 				}
 			}
 		}
