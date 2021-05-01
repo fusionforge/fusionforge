@@ -442,7 +442,7 @@ over it to the project's administrator.");
 		$usr_deletes = array();
 
 		$toprepo = $this->getRootRepositories($group);
-		$repo = $toprepo . '/' . $repo_name;
+		$repo = $toprepo . '/' . $project_reponame;
 		if (!is_dir($repo) || !is_dir("$repo/_darcs")) {
 			echo "No repository $repo\n";
 			return false;
