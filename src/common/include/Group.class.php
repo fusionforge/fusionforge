@@ -1147,14 +1147,6 @@ class Group extends FFError {
 		} else {
 			return false;
 		}
-
-		$hook_params = array();
-		$hook_params['group'] = $this;
-		$hook_params['group_id'] = $this->getID();
-		$hook_params['group_homepage'] = $this->getHomePage();
-		$hook_params['group_name'] = $this->getPublicName();
-		$hook_params['group_description'] = $this->getDescription();
-		plugin_hook ("group_update", $hook_params);
 	}
 
 	/**
