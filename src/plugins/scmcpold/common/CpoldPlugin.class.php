@@ -58,9 +58,9 @@ class CpoldPlugin extends SCMPlugin {
 	function getInstructionsForAnon ($project) {
 		$b = '<h2>';
 		$b .=  _('Anonymous CPOLD Access');
-		$b = '</h2>';
+		$b .= '</h2>';
 		$b .= '<p>';
-		$b =  sprintf (_('This project\'s CPOLD repository can be accessed anonymously at %s.'),
+		$b .=  sprintf (_('This project\'s CPOLD repository can be accessed anonymously at %s.'),
 			       util_make_link ('/anonscm/cpold/'.$project->getUnixName().'/',
 				   util_make_url ('/anonscm/cpold/'.$project->getUnixName().'/'))) ;
 		$b .= '</p>';
@@ -71,7 +71,7 @@ class CpoldPlugin extends SCMPlugin {
 		if (session_loggedin()) {
 			$u = user_get_object(user_getid()) ;
 			$d = $u->getUnixName() ;
-			$b .= '<h2>';
+			$b = '<h2>';
 			$b .= sprintf(_('Developer %s Access via SSH'), 'CPOLD');
 			$b .= '</h2>';
 			$b .= '<p>';
@@ -83,7 +83,7 @@ class CpoldPlugin extends SCMPlugin {
 			$b .= '</p>';
 			$b .= '<p><kbd>scp -r '.$d.'@' . $this->getBoxForProject($project) . ':'. forge_get_config('repos_path', 'scmcpold') .'/'. $project->getUnixName().'/ .</kbd></p>' ;
 		} else {
-			$b .= '<h2>';
+			$b = '<h2>';
 			$b .= sprintf(_('Developer %s Access via SSH'), 'CPOLD');
 			$b .= '</h2>';
 			$b .= '<p>';
