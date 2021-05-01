@@ -82,6 +82,7 @@ server.");
 		if (!$this->isRequired() && !$this->isSufficient()) {
 			return true;
 		}
+		global $HTML;
 		$return_to = $params['return_to'];
 
 		$this->initCAS();
