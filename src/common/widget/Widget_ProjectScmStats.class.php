@@ -43,6 +43,7 @@ class Widget_ProjectScmStats extends Widget {
 
 	function getContent() {
 		global $project;
+		$html_projectscmstats = '';
 		$project_plugins = $project->getPlugins();
 		foreach ($project_plugins as $value) {
 			$plugin_object = plugin_get_object($value);
