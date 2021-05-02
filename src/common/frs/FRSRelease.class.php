@@ -109,15 +109,12 @@ class FRSRelease extends FFObject {
 		if ($release_id) {
 			parent::__construct($release_id, 'FRSRelease');
 			if (!$arr || !is_array($arr)) {
-				if (!$this->fetchData($release_id)) {
-					return;
-				}
+				$this->fetchData($release_id);
 			} else {
 				$this->data_array =& $arr;
 				if ($this->data_array['package_id'] != $this->FRSPackage->getID()) {
 					$this->setError('FRSPackage_id in db result does not match FRSPackage Object');
 					$this->data_array = null;
-					return;
 				}
 			}
 		} else {
@@ -339,7 +336,6 @@ class FRSRelease extends FFObject {
 										forge_get_config('forge_name'))
 							. "\n\n"
 							. util_make_url('/frs/monitor.php?filemodule_id='.$this->FRSPackage->getID()."&group_id=".$this->FRSPackage->Group->getID()."&stop=1");
-//		$text = util_line_wrap($text);
 		if (count($arr)) {
 			util_handle_message(array_unique($arr), $subject, $text);
 		}
@@ -374,9 +370,9 @@ class FRSRelease extends FFObject {
 	}
 
 	function hasFiles() {
-		if ($this->files_count != null)
+		if ($this->files_count != null) {
 			return $this->files_count;
-
+		}
 		$res = db_query_params('select count(file_id) as files_count from frs_file where release_id = $1', array($this->getID()));
 		if (db_numrows($res) >= 1) {
 			$row = db_fetch_array($res);
@@ -516,15 +512,13 @@ class FRSRelease extends FFObject {
 		return true;
 	}
 
-	function isLinkedRoadmapRelease($roadmap_id, $roadmap_release) {
-		$roadmaps = array();
+	function isLinkedRoadmapRelease($roadmap_release) {
 		$res = db_query_params('SELECT roadmap_id FROM frs_release_tracker_roadmap_link WHERE release_id = $1 and roadmap_release = $2',
 					array($this->getID(), $roadmap_release));
 		if (!$res) {
 			return false;
 		}
-		$roadmaps = util_result_column_to_array($res);
-		return $roadmaps;
+		return util_result_column_to_array($res);
 	}
 
 	function deleteLinkedRoadmap($roadmap_id, $roadmap_release) {

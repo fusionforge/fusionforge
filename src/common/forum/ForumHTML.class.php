@@ -619,7 +619,6 @@ class ForumHTML extends FFError {
 				unset($GLOBALS['editor_was_set_up']);
 			?>
 		<br />
-		<!--		<span class="selected"><?php echo _('HTML tags will display in your post as text'); ?></span> -->
 		<br />
 				<?php $this->LinkAttachForm();?>
 

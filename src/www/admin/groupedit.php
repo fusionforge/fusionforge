@@ -6,7 +6,7 @@
  * Copyright 2010 (c) Franck Villaume - Capgemini
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2013, French Ministry of National Education
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013,2021, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -54,7 +54,7 @@ function do_update(&$group, $is_template, $status, $unix_box, $http_domain, $scm
 		return false;
 	}
 
-	if (!$group->updateAdmin(session_get_user(), $unix_box, $http_domain)) {
+	if (!$group->updateAdmin($unix_box, $http_domain)) {
 		$error_msg .= $group->getErrorMessage();
 		db_rollback();
 		return false;

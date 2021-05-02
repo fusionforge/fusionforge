@@ -3,7 +3,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2012,2014,2016 Franck Villaume - TrivialDev
+ * Copyright 2012,2014,2016,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -669,9 +669,9 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		if (!$g->usesDocman() || !$g->useWebdav()) {
 			exit_disabled();
 		}
-		if ($g->isError())
+		if ($g->isError()) {
 			exit_error($g->getErrorMessage(), 'docman');
-
+		}
 		return true;
 	}
 }

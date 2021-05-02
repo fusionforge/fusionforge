@@ -102,9 +102,9 @@ class FRSPackageFactory extends FFError {
 		$qpa = db_construct_qpa();
 		$qpa = db_construct_qpa($qpa, 'SELECT package_id FROM frs_package WHERE group_id=$1 ',
 					array($this->Group->getID()));
-		if ($status)
+		if ($status) {
 			$qpa = db_construct_qpa($qpa, 'AND status_id=$1', array(1));
-
+		}
 		$qpa = db_construct_qpa($qpa, 'ORDER BY package_id DESC');
 		$res = db_query_qpa($qpa);
 		if ($res) {

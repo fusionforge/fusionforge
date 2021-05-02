@@ -53,7 +53,7 @@ if (!$frsp || !is_object($frsp)) {
 }
 
 $rs = $frsp->getReleases();
-if (count($rs) < 1) {
+if (empty($rs)) {
 	echo $HTML->information_('No releases of this package are available.');
 } else {
 	echo html_ao('script', array('type' => 'text/javascript'));

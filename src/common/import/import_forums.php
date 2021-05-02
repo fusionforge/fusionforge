@@ -62,7 +62,7 @@ class Forums {
 				$attachment = true;
 			}
 			$messageObject->create($message['subject'], $message['content'], $thread_id, $parentMessageId, $attachment, $msg_time);
-			if ($attachment == true){
+			if ($attachment){
 				$am = new AttachManager();
 				$am->SetForumMsg($messageObject);
 				$am->Setmsgid($messageObject->getID());

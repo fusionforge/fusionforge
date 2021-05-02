@@ -5,7 +5,7 @@
  * Copyright 2002, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2014,2021, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -72,7 +72,7 @@ class FRSFile extends FFError {
 	 * @param	int|bool	$file_id	The file_id.
 	 * @param	array		$arr		The associative array of data.
 	 */
-	function __construct(&$FRSRelease, $file_id=false, $arr=array()) {
+	function __construct(&$FRSRelease, $file_id = false, $arr = array()) {
 		parent::__construct();
 		if (!$FRSRelease || !is_object($FRSRelease)) {
 			$this->setError(_('Invalid FRS Release Object'));
@@ -86,15 +86,12 @@ class FRSFile extends FFError {
 
 		if ($file_id) {
 			if (!$arr || !is_array($arr)) {
-				if (!$this->fetchData($file_id)) {
-					return;
-				}
+				$this->fetchData($file_id);
 			} else {
 				$this->data_array =& $arr;
 				if ($this->data_array['release_id'] != $this->FRSRelease->getID()) {
 					$this->setError('FRSRelease_id in db result does not match FRSRelease Object');
-					$this->data_array=null;
-					return;
+					$this->data_array = null;
 				}
 			}
 		}
@@ -351,9 +348,9 @@ class FRSFile extends FFError {
 			$this->FRSRelease->getFileName().'/'.
 			$this->getName();
 
-		if (file_exists($file))
+		if (file_exists($file)) {
 			unlink($file);
-
+		}
 		if (isset($this->FRSRelease->release_files[$this->getID()])) {
 			unset($this->FRSRelease->release_files[$this->getID()]);
 		}

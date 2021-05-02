@@ -5,7 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
  * Copyright 2010 (c) FusionForge Team
- * Copyright 2013-2014,2016-2017,2020, Franck Villaume - TrivialDev
+ * Copyright 2013-2014,2016-2017,2020-2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -130,11 +130,9 @@ EOS;
 			foreach ($FRSPackageReleases as $FRSPackageRelease) {
 				$package_release_id = $FRSPackageRelease->getID();
 				$ziplink = '';
-				if (class_exists('ZipArchive')) {
-					if (file_exists($FRSPackage->getReleaseZipPath($package_release_id))) {
-						$ziplink .= html_e('span', array('class' => 'frs-zip-release'), util_make_link('/frs/download.php/zip/'.$FRSPackageRelease->getID().'/'.urlencode($FRSPackage->getReleaseZipName($FRSPackageRelease->getID())),
+				if (class_exists('ZipArchive') && file_exists($FRSPackage->getReleaseZipPath($package_release_id))) {
+					$ziplink .= html_e('span', array('class' => 'frs-zip-release'), util_make_link('/frs/download.php/zip/'.$FRSPackageRelease->getID().'/'.urlencode($FRSPackage->getReleaseZipName($FRSPackageRelease->getID())),
 						  $HTML->getZipPic(_('Download this release as ZIP.').' '._('This link always points to this release as a ZIP file.'))), false);
-					}
 				}
 				// Switch whether release_id exists and/or release_id is current one
 				if ( ! $release_id || $release_id == $package_release_id ) {

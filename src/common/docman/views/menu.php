@@ -7,7 +7,7 @@
  * Copyright 2002-2004, GForge Team
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2015, Franck Villaume - TrivialDev
+ * Copyright 2015,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -62,12 +62,10 @@ if ($g->useDocmanSearch()) {
 	$menu_attr[] = array('title' => _('Search documents in this project using keywords.'), 'id' => 'searchDocmanMenu');
 }
 
-if (forge_check_perm('docman', $group_id, 'approve')) {
-	if (!$dm->isTrashEmpty()) {
-		$menu_text[] = _('Trash');
-		$menu_links[] = '/docman/?group_id='.$group_id.'&view=listtrashfile';
-		$menu_attr[] = array('title' => _('Recover or delete permanently files with deleted status.'), 'id' => 'trashDocmanMenu');
-	}
+if (forge_check_perm('docman', $group_id, 'approve') && !$dm->isTrashEmpty()) {
+	$menu_text[] = _('Trash');
+	$menu_links[] = '/docman/?group_id='.$group_id.'&view=listtrashfile';
+	$menu_attr[] = array('title' => _('Recover or delete permanently files with deleted status.'), 'id' => 'trashDocmanMenu');
 }
 
 if (forge_check_perm('docman', $group_id, 'admin')) {

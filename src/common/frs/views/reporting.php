@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (C) 2009-2012 Alain Peyrat, Alcatel-Lucent
- * Copyright 2012,2014, Franck Villaume - TrivialDev
+ * Copyright 2012,2014,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -60,7 +60,9 @@ if ($report->isError()) {
 	exit_error($report->getErrorMessage(), 'frs');
 }
 
-if (!$start || !$end) $z =& $report->getMonthStartArr();
+if (!$start || !$end) {
+	$z =& $report->getMonthStartArr();
+}
 
 if (!$start) {
 	$start = $z[0];
@@ -70,7 +72,9 @@ if (!$end) {
 	$end = $z[count($z) - 1];
 }
 
-if ($end < $start) list($start, $end) = array($end, $start);
+if ($end < $start) {
+	list($start, $end) = array($end, $start);
+}
 
 html_use_jqueryjqplotpluginCanvas();
 html_use_jqueryjqplotpluginhighlighter();
@@ -93,7 +97,7 @@ if ($report->isError()) {
 
 	if ($start == $end) {
 		echo $HTML->error_msg(_('Start and end dates must be different'));
-	} elseif (count($data) == 0) {
+	} elseif (empty($data)) {
 		echo $HTML->information(_('There have been no downloads for this package.'));
 	} else {
 		echo '<script type="text/javascript">//<![CDATA['."\n";

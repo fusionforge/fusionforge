@@ -2,7 +2,7 @@
 /**
  * FusionForge FRS: Link Tracker Roadmaps to FRS Release
  *
- * Copyright 2016, Franck Villaume - TrivialDev
+ * Copyright 2016,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -45,7 +45,7 @@ if (count($enabledRoadmaps)) {
 		$releaseRoadmaps = $enabledRoadmap->getReleases();
 		if (count($releaseRoadmaps)) {
 			foreach ($releaseRoadmaps as $releaseRoadmap) {
-				if ($frsr->isLinkedRoadmapRelease($enabledRoadmap->getID(), $releaseRoadmap)) {
+				if ($frsr->isLinkedRoadmapRelease($releaseRoadmap)) {
 					$type = 'del';
 					$labelInput = _('Detach this roadmap from this release');
 				} else {

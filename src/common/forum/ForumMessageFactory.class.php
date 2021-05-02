@@ -71,7 +71,6 @@ class ForumMessageFactory extends FFError {
 	 * @param	string	$set		Whether to set these prefs into the database - use "custom".
 	 */
 	function setup($offset = 0, $style = 'ultimate', $max_rows = 25, $set = 'no') {
-//echo "<br />offset: $offset| style: $style|max_rows: $max_rows|set: $set+";
 		if ((!$offset) || ($offset < 0)) {
 			$this->offset=0;
 		} else {

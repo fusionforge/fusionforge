@@ -5,7 +5,7 @@
  * Copyright 2005, Fabio Bertagnin
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012,2015 Franck Villaume - TrivialDev
+ * Copyright 2012,2015,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -61,7 +61,9 @@ function parser_text($fichin) {
 function print_list($list) {
 	$rep = '';
 	foreach ($list as $el) {
-		if (strlen($el) > 1) $rep .= $el.' ';
+		if (strlen($el) > 1) {
+			$rep .= $el.' ';
+		}
 	}
 	return $rep;
 }

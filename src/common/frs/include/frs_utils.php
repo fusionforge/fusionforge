@@ -181,8 +181,9 @@ function frs_add_file_from_form($release, $type_id, $processor_id, $release_date
 	}
 
 	if ($filechecks) {
-		if (strlen($fname) < 3)
+		if (strlen($fname) < 3) {
 			return _('Name is too short. It must be at least 3 characters.');
+		}
 		if (!$move) {
 			$tmp = tempnam('', '');
 			copy($infile, $tmp);
@@ -213,8 +214,9 @@ function frs_add_file_from_form($release, $type_id, $processor_id, $release_date
 function frs_filterfiles($in) {
 	$out = array();
 	for ($i = 0; $i < count($in); $i++) {
-		if (strlen($in[$i]) < 3)
+		if (strlen($in[$i]) < 3) {
 			continue;
+		}
 		$out[] = $in[$i];
 	}
 	return $out;

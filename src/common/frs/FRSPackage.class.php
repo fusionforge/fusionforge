@@ -126,15 +126,12 @@ class FRSPackage extends FFError {
 
 		if ($package_id) {
 			if (!$arr || !is_array($arr)) {
-				if (!$this->fetchData($package_id)) {
-					return;
-				}
+				$this->fetchData($package_id);
 			} else {
 				$this->data_array =& $arr;
 				if ($this->data_array['group_id'] != $this->Group->getID()) {
 					$this->setError(_('group_id in db result does not match Group Object'));
 					$this->data_array = null;
-					return;
 				}
 //
 //	Add an is_public check here
@@ -444,8 +441,8 @@ class FRSPackage extends FFError {
 		$olddirlocation = forge_get_config('upload_dir').'/'.$this->Group->getUnixName().'/'.$olddirname;
 		$newdirlocation = forge_get_config('upload_dir').'/'.$this->Group->getUnixName().'/'.$newdirname;
 
-		if(($olddirname!=$newdirname)){
-			if(is_dir($newdirlocation)){
+		if($olddirname != $newdirname) {
+			if(is_dir($newdirlocation)) {
 				$this->setError(_('Error Updating Package')._(': ')._('Directory Already Exists'));
 				db_rollback();
 				return false;
@@ -531,9 +528,9 @@ class FRSPackage extends FFError {
 			return false;
 		}
 
-		if (is_dir($dir))
+		if (is_dir($dir)) {
 			rmdir($dir);
-
+		}
 		$this->clearMonitor();
 		db_query_params('DELETE FROM frs_package WHERE package_id=$1 AND group_id=$2',
 				 array ($this->getID(),
@@ -585,7 +582,7 @@ class FRSPackage extends FFError {
 			$zipPath = $this->getReleaseZipPath($release_id);
 			$release = frsrelease_get_object($release_id);
 			$filesPath = forge_get_config('upload_dir').'/'.$this->Group->getUnixName().'/'.$this->getFileName().'/'.$release->getFileName();
-			if ($zip->open($zipPath, ZipArchive::CREATE | ZipArchive::OVERWRITE) != true) {
+			if (!$zip->open($zipPath, ZipArchive::CREATE | ZipArchive::OVERWRITE)) {
 				$this->setError(_('Cannot open the file archive')._(': ').$zipPath.'.');
 				return false;
 			}
@@ -606,8 +603,9 @@ class FRSPackage extends FFError {
 	}
 
 	public function deleteReleaseFilesAsZip($release_id) {
-		if (file_exists($this->getReleaseZipPath($release_id)))
+		if (file_exists($this->getReleaseZipPath($release_id))) {
 			unlink($this->getReleaseZipPath($release_id));
+		}
 		return true;
 	}
 

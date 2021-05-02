@@ -4,9 +4,9 @@
  *
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2009-2013, Roland Mas
- * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright 2010-2011,2021, Franck Villaume - Capgemini
  * Copyright 2010-2012, Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2017, Franck Villaume - TrivialDev
+ * Copyright 2012-2017,2021, Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of National Education
  * Copyright 2017, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
@@ -106,7 +106,7 @@ function &group_get_objects($id_arr) {
 			$fetch[] = $id;
 		}
 	}
-	if (count($fetch) > 0) {
+	if (!empty($fetch)) {
 		$res=db_query_params('SELECT * FROM groups WHERE group_id = ANY ($1)',
 					array(db_int_array_to_any_clause($fetch)));
 		while ($arr = db_fetch_array($res)) {
@@ -277,9 +277,7 @@ class Group extends FFError {
 			return;
 		}
 		if (!$res) {
-			if (!$this->fetchData($id)) {
-				return;
-			}
+			$this->fetchData($id);
 		} else {
 			//
 			//	Assoc array was passed in
@@ -290,8 +288,7 @@ class Group extends FFError {
 				if (db_numrows($res) < 1) {
 					//function in class we extended
 					$this->setError(_('Group Not Found'));
-					$this->data_array=array();
-					return;
+					$this->data_array = array();
 				} else {
 					//set up an associative array for use by other functions
 					$this->data_array = db_fetch_array_by_row($res, 0);
@@ -444,13 +441,12 @@ class Group extends FFError {
 	 *
 	 * This function require site admin privilege.
 	 *
-	 * @param	object	$user		User requesting operation (for access control).
 	 * @param	string	$unix_box	Machine on which group's home directory located.
 	 * @param	string	$http_domain	Domain which serves group's WWW.
 	 * @return	bool	status.
 	 * @access	public
 	 */
-	function updateAdmin(&$user, $unix_box, $http_domain) {
+	function updateAdmin($unix_box, $http_domain) {
 		$perm =& $this->getPermission();
 
 		if (!$perm || !is_object($perm)) {
@@ -545,10 +541,8 @@ class Group extends FFError {
 		}
 
 		// Validate some values
-		if ($this->getPublicName() != htmlspecialchars($group_name)) {
-			if (!$this->validateGroupName($group_name)) {
-				return false;
-			}
+		if ($this->getPublicName() != htmlspecialchars($group_name) && !$this->validateGroupName($group_name)) {
+			return false;
 		}
 
 		if ($new_doc_address) {
@@ -843,9 +837,8 @@ class Group extends FFError {
 	function isActive() {
 		if ($this->getStatus() == 'A') {
 			return true;
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	/**
@@ -1297,10 +1290,9 @@ class Group extends FFError {
 			$this->data_array['use_frs']=$booleanparam;
 			db_commit();
 			return true;
-		} else {
-			db_rollback();
-			return false;
 		}
+		db_rollback();
+		return false;
 	}
 
 	/**
@@ -1311,9 +1303,8 @@ class Group extends FFError {
 	function usesTracker() {
 		if (forge_get_config('use_tracker')) {
 			return $this->data_array['use_tracker'];
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	/**
@@ -1331,10 +1322,9 @@ class Group extends FFError {
 			$this->data_array['use_tracker']=$booleanparam;
 			db_commit();
 			return true;
-		} else {
-			db_rollback();
-			return false;
 		}
+		db_rollback();
+		return false;
 	}
 
 	/**
@@ -1345,9 +1335,8 @@ class Group extends FFError {
 	function useCreateOnline() {
 		if (forge_get_config('use_docman')) {
 			return $this->data_array['use_docman_create_online'];
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	/**
@@ -1358,9 +1347,8 @@ class Group extends FFError {
 	function usesDocman() {
 		if (forge_get_config('use_docman')) {
 			return $this->data_array['use_docman'];
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	/**
@@ -1389,10 +1377,9 @@ class Group extends FFError {
 			$this->data_array['use_docman'] = $booleanparam;
 			db_commit();
 			return true;
-		} else {
-			db_rollback();
-			return false;
 		}
+		db_rollback();
+		return false;
 	}
 
 	/**
@@ -1403,9 +1390,8 @@ class Group extends FFError {
 	function useDocmanSearch() {
 		if (forge_get_config('use_docman')) {
 			return $this->data_array['use_docman_search'];
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	/**
@@ -1416,9 +1402,8 @@ class Group extends FFError {
 	function useWebdav() {
 		if (forge_get_config('use_webdav')) {
 			return $this->data_array['use_webdav'];
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	/**
@@ -1429,9 +1414,8 @@ class Group extends FFError {
 	function usesFTP() {
 		if (forge_get_config('use_ftp')) {
 			return $this->data_array['use_ftp'];
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	/**
@@ -1442,9 +1426,8 @@ class Group extends FFError {
 	function usesSurvey() {
 		if (forge_get_config('use_survey')) {
 			return $this->data_array['use_survey'];
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	/**
@@ -1455,9 +1438,8 @@ class Group extends FFError {
 	function usesPM() {
 		if (forge_get_config('use_pm')) {
 			return $this->data_array['use_pm'];
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	/**
@@ -1475,10 +1457,9 @@ class Group extends FFError {
 			$this->data_array['use_pm']=$booleanparam;
 			db_commit();
 			return true;
-		} else {
-			db_rollback();
-			return false;
 		}
+		db_rollback();
+		return false;
 	}
 
 	/**
@@ -1511,7 +1492,7 @@ class Group extends FFError {
 	 */
 	function usesPlugin($pluginname) {
 		$plugins_data = $this->getPlugins();
-		foreach ($plugins_data as $p_id => $p_name) {
+		foreach ($plugins_data as $p_name) {
 			if ($p_name == $pluginname) {
 				return true;
 			}
@@ -1529,7 +1510,7 @@ class Group extends FFError {
 	function usesService($feature) {
 		$plugins_data = $this->getPlugins();
 		$pm = plugin_manager_get_object();
-		foreach ($plugins_data as $p_id => $p_name) {
+		foreach ($plugins_data as $p_name) {
 			if ($p_name == $feature) {
 				return true;
 			}
@@ -1602,11 +1583,10 @@ class Group extends FFError {
 			$this->setError(_('Error')._(': ')._('Cannot Update Group new_doc_address')._(': ').db_error());
 			db_rollback();
 			return false;
-		} else {
-			$this->data_array['new_doc_address'] = $email;
-			db_commit();
-			return true;
 		}
+		$this->data_array['new_doc_address'] = $email;
+		db_commit();
+		return true;
 	}
 
 	/**
@@ -1627,11 +1607,10 @@ class Group extends FFError {
 			$this->setError(_('Error')._(': ')._('Cannot Update Group send_all_docs')._(': ').db_error());
 			db_rollback();
 			return false;
-		} else {
-			$this->data_array['send_all_docs'] = $status;
-			db_commit();
-			return true;
 		}
+		$this->data_array['send_all_docs'] = $status;
+		db_commit();
+		return true;
 	}
 
 	/**
@@ -1657,11 +1636,10 @@ class Group extends FFError {
 			$this->setError(_('Error')._(': ')._('Cannot Update Group new_frs_address')._(': ').db_error());
 			db_rollback();
 			return false;
-		} else {
-			$this->data_array['new_frs_address'] = $email;
-			db_commit();
-			return true;
 		}
+		$this->data_array['new_frs_address'] = $email;
+		db_commit();
+		return true;
 	}
 
 	/**
@@ -1682,11 +1660,10 @@ class Group extends FFError {
 			$this->setError(_('Error')._(': ')._('Cannot Update Group send_frs_docs')._(': ').db_error());
 			db_rollback();
 			return false;
-		} else {
-			$this->data_array['send_frs_docs'] = $status;
-			db_commit();
-			return true;
 		}
+		$this->data_array['send_frs_docs'] = $status;
+		db_commit();
+		return true;
 	}
 
 	/**
@@ -1695,10 +1672,8 @@ class Group extends FFError {
 	 * @return	string	homepage URL.
 	 */
 	function getHomePage() {
-		if (!preg_match("/^[a-zA-Z][a-zA-Z0-9+.-]*:/",
-			$this->data_array['homepage'])) {
-			$this->data_array['homepage'] = 'http://' .
-				$this->data_array['homepage'];
+		if (!preg_match("/^[a-zA-Z][a-zA-Z0-9+.-]*:/", $this->data_array['homepage'])) {
+			$this->data_array['homepage'] = 'http://'.$this->data_array['homepage'];
 		}
 		return $this->data_array['homepage'];
 	}
@@ -1710,7 +1685,6 @@ class Group extends FFError {
 	 * @return	bool
 	 */
 	function setHomepage($homepage) {
-
 		if ($homepage == $this->data_array['homepage']) {
 			return true;
 		}
@@ -1722,15 +1696,13 @@ class Group extends FFError {
 				$this->data_array['homepage'] = $homepage;
 				db_commit();
 				return true;
-			} else {
-				db_rollback();
-				$this->setError(_('Could not insert homepage to database'));
-				return false;
 			}
-		} else {
-			$this->setError(_('Homepage cannot be empty'));
+			db_rollback();
+			$this->setError(_('Could not insert homepage to database'));
 			return false;
 		}
+		$this->setError(_('Homepage cannot be empty'));
+		return false;
 	}
 
 	/**
@@ -2134,15 +2106,9 @@ class Group extends FFError {
 		//
 		//	Delete reporting
 		//
-		db_query_params('DELETE FROM rep_group_act_monthly WHERE group_id=$1',
-		array($this->getID()));
-		//echo 'rep_group_act_monthly'.db_error();
-		db_query_params('DELETE FROM rep_group_act_weekly WHERE group_id=$1',
-		array($this->getID()));
-		//echo 'rep_group_act_weekly'.db_error();
-		db_query_params('DELETE FROM rep_group_act_daily WHERE group_id=$1',
-		array($this->getID()));
-		//echo 'rep_group_act_daily'.db_error();
+		db_query_params('DELETE FROM rep_group_act_monthly WHERE group_id=$1', array($this->getID()));
+		db_query_params('DELETE FROM rep_group_act_weekly WHERE group_id=$1', array($this->getID()));
+		db_query_params('DELETE FROM rep_group_act_daily WHERE group_id=$1', array($this->getID()));
 		unset($this->data_array);
 		return true;
 	}
@@ -2290,7 +2256,7 @@ class Group extends FFError {
 				$found_roles[] = $role;
 			}
 		}
-		if (count($found_roles) == 0) {
+		if (empty($found_roles)) {
 			$this->setError(_('Error')._(': ')._('User not removed')._(': ').$user_id);
 			db_rollback();
 			return false;
@@ -2701,15 +2667,13 @@ class Group extends FFError {
 				/* use SCM plugin from template group */
 				$this->setUseSCM($template->usesSCM());
 
-				foreach ($template->getPlugins() as
-					$plugin_id => $plugin_name) {
+				foreach ($template->getPlugins() as $plugin_name) {
 					$this->setPluginUse($plugin_name);
 				}
 			} else {
 				/* use SCM choice from registration page */
-				foreach ($template->getPlugins() as $plugin_id => $plugin_name) {
-					if (substr($plugin_name, 3) == 'scm' &&
-						$plugin_name != 'scmhook') {
+				foreach ($template->getPlugins() as $plugin_name) {
+					if (substr($plugin_name, 3) == 'scm' && $plugin_name != 'scmhook') {
 						/* skip copying scm plugins */
 						continue;
 					}
@@ -2813,7 +2777,7 @@ class Group extends FFError {
 	function sendApprovalEmail() {
 		$admins = RBACEngine::getInstance()->getUsersByAllowedAction ('project_admin', $this->getID());
 
-		if (count($admins) < 1) {
+		if (empty($admins)) {
 			$this->setError(_('Group does not have any administrators.'));
 			return false;
 		}
@@ -2925,14 +2889,14 @@ class Group extends FFError {
 		foreach (get_group_join_requests ($this) as $gjr) {
 			$submitters[] = user_get_object($gjr->getUserID());
 		}
-		if (count ($submitters) < 1) {
+		if (empty($submitters)) {
 			$this->setError(_('Could not find user who has submitted the project.'));
 			return false;
 		}
 
 		$admins = RBACEngine::getInstance()->getUsersByAllowedAction('approve_projects', -1);
 
-		if (count($admins) < 1) {
+		if (empty($admins)) {
 			$this->setError(_('There is no administrator to send the mail to.'));
 			return false;
 		}

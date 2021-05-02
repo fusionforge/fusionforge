@@ -197,7 +197,9 @@ class ForumMessage extends FFError {
 
 		db_begin();
 		$is_pinned = 'f';
-		if (ForumHTML::getIsPinned($thread_id)) $is_pinned = 't';
+		if (ForumHTML::getIsPinned($thread_id)) {
+			$is_pinned = 't';
+		}
 		$result = db_query_params('INSERT INTO forum (group_forum_id,posted_by,subject,body,post_date,is_followup_to,thread_id,most_recent_date,is_pinned) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)',
 					array($group_forum_id,
 						$posted_by,
@@ -300,7 +302,9 @@ class ForumMessage extends FFError {
 		}
 
 		$is_pinned = 'f';
-		if(ForumHTML::getIsPinned($thread_id)) $is_pinned = 't';
+		if(ForumHTML::getIsPinned($thread_id)) {
+			$is_pinned = 't';
+		}
 		$result = db_query_params('INSERT INTO forum (group_forum_id,posted_by,subject,body,post_date,is_followup_to,thread_id,most_recent_date, is_pinned) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)',
 				array($this->Forum->getID(),
 					$user_id,
@@ -333,9 +337,7 @@ class ForumMessage extends FFError {
 			db_rollback();
 			return false;
 		}
-//echo "Committing";
 		db_commit();
-//echo "db_error()".db_error();
 		$this->awaits_moderation = false;
 		return true;
 	}
@@ -616,9 +618,7 @@ class ForumMessage extends FFError {
 	 * @return	string	converted text
 	 */
 	function removebbcode($text) {
-		//$replaced =  preg_replace("/\[[_a-zA-Z]:.+\](.+)\[\/[_a-zA-Z]:.*\]/","$1",$text);
-		$replaced =  preg_replace("/\[.+\](.+)\[\/.+\]/","$1",$text);
-		return $replaced;
+		return preg_replace("/\[.+\](.+)\[\/.+\]/","$1",$text);
 	}
 
 	/**
@@ -644,7 +644,7 @@ class ForumMessage extends FFError {
 			}
 		}
 
-		if (count ($recipients) == 0) {
+		if (empty($recipients)) {
 			return true ;
 		}
 
@@ -752,7 +752,6 @@ Or reply to this e-mail entering your response between the following markers:
 		"\n\n______________________________________________________________________".
 		"\nYou are receiving this email because the forum you administrate has a new moderated message awaiting your approval.";
 
-		//$extra_headers = 'Reply-to: '.$this->Forum->getUnixName().'@'.forge_get_config('web_host');
 		$extra_headers = "Return-Path: <noreply@".forge_get_config('web_host').">\n";
 		$extra_headers .= "Errors-To: <noreply@".forge_get_config('web_host').">\n";
 		$extra_headers .= "Sender: <noreply@".forge_get_config('web_host').">\n";
@@ -768,7 +767,7 @@ Or reply to this e-mail entering your response between the following markers:
 		}
 
 		$subject="[" . $this->Forum->getUnixName() ."][".$this->getID()."] ".util_unconvert_htmlspecialchars($this->getSubject());
-		if (count($ids) != 0) {
+		if (!empty($ids)) {
 			$bccres = db_query_params ('SELECT email FROM users WHERE status=$1 AND user_id = ANY ($2)',
 						   array ('A',
 							  db_int_array_to_any_clause ($ids))) ;
@@ -776,7 +775,6 @@ Or reply to this e-mail entering your response between the following markers:
 
 		$BCC = implode(util_result_column_to_array($bccres),',').','.$this->Forum->getSendAllPostsTo();
 		util_send_message('',$subject,$body,"noreply@".forge_get_config('web_host'),$BCC,'Forum',$extra_headers);
-//		util_handle_message(array_unique($ids),$subject,$body,$this->Forum->getSendAllPostsTo(),'','forumgateway@'.forge_get_config('web_host'));
 		return true;
 	}
 

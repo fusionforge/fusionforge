@@ -3,6 +3,7 @@
  * SOAP Group Include - this file contains wrapper functions for the SOAP interface
  *
  * Copyright 2004 (c) GForge, LLC
+ * Copyright 2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -420,7 +421,7 @@ function updateGroup($session_ser, $group_id, $is_public, $is_template, $status,
 		$error_msg .= $group->getErrorMessage();
 	}
 
-	if (!$group->updateAdmin(session_get_user(), $unix_box, $http_domain)) {
+	if (!$group->updateAdmin($unix_box, $http_domain)) {
 		$error_msg .= $group->getErrorMessage();
 	}
 
