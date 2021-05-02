@@ -2,7 +2,7 @@
 /**
  * FusionForge Documentation Manager
  *
- * Copyright 2011-2014,2016-2017, Franck Villaume - TrivialDev
+ * Copyright 2011-2014,2016-2017,2021, Franck Villaume - TrivialDev
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2013, French Ministry of National Education
  * http://fusionforge.org
@@ -435,7 +435,7 @@ class DocumentManager extends FFError {
 		for ($i = 0; $i < count($sections); $i++) {
 			$results[$sections[$i]] = 0;
 			$union = 0;
-			if (count($sections) >= 1 && $i != count($sections) -1) {
+			if (!empty($sections) && $i != count($sections) - 1) {
 				$union = 1;
 			}
 			$qpa = db_construct_qpa($qpa, 'SELECT count(*) FROM activity_vw WHERE activity_date BETWEEN $1 AND $2

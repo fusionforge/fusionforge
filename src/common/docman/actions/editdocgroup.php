@@ -5,7 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2013-2014,2016 Franck Villaume - TrivialDev
+ * Copyright 2013-2014,2016,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -61,11 +61,9 @@ if (!$dg->update($groupname, $parent_dirid, 1, $stateid)) {
 }
 
 $dm = new DocumentManager($g);
-if ($dg->getState() == 2 && ($currentParentID == $dm->getTrashID())) {
-	if (!$dg->setStateID('1', true)) {
-		$error_msg = $dg->getErrorMessage();
-		session_redirect($urlredirect);
-	}
+if (($stateid == 1 || $stateid == 5) && ($currentParentID == $dm->getTrashID()) && !$dg->setStateID($stateid, true)) {
+	$error_msg = $dg->getErrorMessage();
+	session_redirect($urlredirect);
 }
 
 $feedback = sprintf(_('Documents folder %s updated successfully'), $dg->getName());

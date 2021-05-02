@@ -7,7 +7,7 @@
  * Copyright 2009, Roland Mas
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2011-2017, Franck Villaume - TrivialDev
+ * Copyright 2011-2017,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -336,7 +336,7 @@ class Document extends FFObject {
 	 */
 	function getDescription() {
 		$result = util_gen_cross_ref($this->data_array['description'], $this->Group->getID());
-		return nl2br($result);;
+		return nl2br($result);
 	}
 
 	/**
@@ -959,12 +959,10 @@ class Document extends FFObject {
 				return false;
 			}
 		}
-		if (isset($kwords)) {
-			if(!$dv->updateDataWords($version, $kwords)) {
-				$this->setOnUpdateError(_('Error updating document version')._(': ').$dv->getErrorMessage());
-				db_rollback();
-				return false;
-			}
+		if (isset($kwords) && !$dv->updateDataWords($version, $kwords)) {
+			$this->setOnUpdateError(_('Error updating document version')._(': ').$dv->getErrorMessage());
+			db_rollback();
+			return false;
 		}
 
 		if (filesize($data)) {

@@ -7,7 +7,7 @@
  * Copyright 2009, Roland Mas
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2017, Franck Villaume - TrivialDev
+ * Copyright 2012-2017,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -315,8 +315,9 @@ class DocumentFactory extends FFError {
 		}
 
 		foreach ($keys as $key) {
-			if (!array_key_exists($key, $this->Documents))	continue;		// Should not happen
-
+			if (!array_key_exists($key, $this->Documents)) {
+				continue; // Should not happen
+			}
 			$count = count($this->Documents[$key]);
 			for ($i=0; $i < $count; $i++) {
 				$doc =& $this->Documents[$key][$i];

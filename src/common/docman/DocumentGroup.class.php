@@ -7,7 +7,7 @@
  * Copyright 2009, Roland Mas
  * Copyright 2010, Franck Villaume - Capgemini
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2017, Franck Villaume - TrivialDev
+ * Copyright 2012-2017,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -686,10 +686,8 @@ class DocumentGroup extends FFError {
 				return false;
 			}
 			//need to check if user has access to this path. If not, return false.
-			if ($parentDg->getState() != 1) {
-				if (!forge_check_perm('docman', $this->Group->getID(), 'approve')) {
-					return false;
-				}
+			if ($parentDg->getState() != 1 && !forge_check_perm('docman', $this->Group->getID(), 'approve')) {
+				return false;
 			}
 			$returnPath = $parentDg->getPath($url);
 			if (!$returnPath) {
@@ -734,7 +732,7 @@ class DocumentGroup extends FFError {
 			if ($dgf->isError()) {
 				exit_error($dgf->getErrorMessage(), 'docman');
 			}
-			$stateidArr = array(1, 3, 4, 5);
+			$stateidArr = array(1, 2, 3, 4, 5);
 			$nested_groups =& $dgf->getNested($stateidArr);
 
 			$df->setStateID($stateidArr);
@@ -752,13 +750,13 @@ class DocumentGroup extends FFError {
 			$localdocgroup_arr = array();
 			$localdocgroup_arr[] = $this->getID();
 			if (is_array($nested_groups[$this->getID()])) {
-				foreach ($nested_groups[$this->getID()] as $dg) {
-					if (!$dg->setStateID($stateid)) {
+				foreach ($nested_groups[$this->getID()] as $ndg) {
+					if (!$ndg->setStateID($stateid)) {
 						return false;
 					}
-					$localdocgroup_arr[] = $dg->getID();
+					$localdocgroup_arr[] = $ndg->getID();
 					$localdf = new DocumentFactory($this->Group);
-					$localdf->setDocGroupID($dg->getID());
+					$localdf->setDocGroupID($ndg->getID());
 					$d_arr =& $localdf->getDocuments();
 					if (is_array($d_arr)) {
 						foreach ($d_arr as $doc) {
@@ -1068,8 +1066,3 @@ class DocumentGroup extends FFError {
 		return true;
 	}
 }
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:
