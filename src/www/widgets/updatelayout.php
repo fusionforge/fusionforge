@@ -48,8 +48,7 @@ if ($owner) {
 				$group_id = $owner_id;
 				$_REQUEST['group_id'] = $_GET['group_id'] = $group_id;
 				$redirect = '/projects/'. $project->getUnixName().'/';
-				if (!forge_check_perm('project_admin', $group_id) &&
-					!forge_check_global_perm('forge_admin')) {
+				if (!forge_check_perm('project_admin', $group_id) && !forge_check_global_perm('forge_admin')) {
 					session_redirect($redirect);
 				}
 				$good = true;
@@ -92,14 +91,14 @@ if ($owner) {
 			break;
 	}
 	if ($good) {
-		if (($layout_id = getIntFromRequest('layout_id')) || 'preferences' == getStringFromRequest('action')) {
+		$mainaction = getStringFromRequest('action', 'reorder');
+		if (($layout_id = getIntFromRequest('layout_id')) || 'preferences' == $mainaction) {
 			$name = null;
 			$param = getArrayFromRequest('name');
 			if (count($param)) {
 				$name = array_pop(array_keys($param));
 				$instance_id = (int)$param[$name];
 			}
-			$mainaction = getStringFromRequest('action');
 			switch($mainaction) {
 				case 'widget':
 					if ($name) {
@@ -148,6 +147,7 @@ if ($owner) {
 				case 'layout':
 					$lm->updateLayout($owner_id, $owner_type, $layout_id, getIntFromRequest('new_layout'));
 					break;
+				case 'reorder':
 				default:
 					$lm->reorderLayout($owner_id, $owner_type, $layout_id);
 					break;
