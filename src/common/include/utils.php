@@ -1651,6 +1651,7 @@ function compareObjectName ($a, $b) {
  */
 function utils_array_diff_names($tab1, $tab2) {
 	$diff = array();
+	reset($tab1);
 	foreach($tab1 as $e1) {
 		$found = false;
 		reset($tab2);
@@ -1661,6 +1662,8 @@ function utils_array_diff_names($tab1, $tab2) {
 			$diff[] = $e1;
 		}
 	}
+	reset($tab1);
+	reset($tab2);
 	return $diff;
 }
 
