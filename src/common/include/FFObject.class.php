@@ -79,7 +79,6 @@ class FFObject extends FFError {
 				}
 			}
 		}
-		return;
 	}
 
 	function getAssociatedTo() {
