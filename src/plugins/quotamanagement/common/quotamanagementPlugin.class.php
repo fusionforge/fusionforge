@@ -4,6 +4,7 @@
  *
  * Copyright 2005, Fabio Bertagnin
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright 2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -25,7 +26,7 @@
 
 class quotamanagementPlugin extends Plugin {
 	public $systask_types = array(
-		'QUOTAMANAGEMENT_SET_QUOTA' => 'quota_management-set_quota.php',
+		'QUOTAMANAGEMENT_SET_QUOTA' => 'quotamanagement-set_quota.php',
 	);
 
 	var $data_array;
@@ -46,7 +47,7 @@ to monitor disk and database usage per user, project.");
 		$returned = false;
 		switch ($hookname) {
 			case "project_admin_plugins": {
-				// this displays the link in the project admin options page to it's  quota_management administration
+				// this displays the link in the project admin options page to it's quotamanagement administration
 				echo html_e('p', array(), util_make_link('/plugins/'.$this->name.'/?type=projectadmin&group_id='.$params['group_id'],
 						_('Quota Management Administration')));
 				$returned = true;

@@ -1,7 +1,0 @@
-#
-# Regular cron jobs for the plugin-quota_management package
-#
-PATH=@bindir@:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-
-# calculate quota every night
-55 2 * * * root forge_run_plugin_job quota_management quota_management.php 

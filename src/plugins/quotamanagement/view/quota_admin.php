@@ -4,7 +4,7 @@
  *
  * Copyright 2005, Fabio Bertagnin
  * Copyright 2011,2016, Franck Villaume - Capgemini
- * Copyright 2019, Franck Villaume - TrivialDev
+ * Copyright 2019,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -30,7 +30,7 @@ require_once $gfwww.'admin/admin_utils.php';
 
 $cmd = getStringFromRequest('cmd');
 
-$quota_management = plugin_get_object('quota_management');
+$quotamanagement = plugin_get_object('quotamanagement');
 
 $_quota_block_size = intval(trim(shell_exec('echo $BLOCK_SIZE'))) + 0;
 if ($_quota_block_size == 0) $_quota_block_size = 1024;
@@ -39,10 +39,10 @@ $subMenuTitle = array();
 $subMenuUrl = array();
 $subMenuAttr = array();
 $subMenuTitle[] = _('Ressources usage and quota');
-$subMenuUrl[] = '/plugins/'.$quota_management->name.'/?type=globaladmin';
+$subMenuUrl[] = '/plugins/'.$quotamanagement->name.'/?type=globaladmin';
 $subMenuAttr[] = array('title' => _('View quota and usage per project and user.'));
 $subMenuTitle[] = _('Admin');
-$subMenuUrl[] = '/plugins/'.$quota_management->name.'/?type=globaladmin&view=admin';
+$subMenuUrl[] = '/plugins/'.$quotamanagement->name.'/?type=globaladmin&view=admin';
 $subMenuAttr[] = array('title' => _('Administrate quotas per project.'));
 echo $HTML->subMenu($subMenuTitle, $subMenuUrl, $subMenuAttr);
 
@@ -50,8 +50,8 @@ echo $HTML->subMenu($subMenuTitle, $subMenuUrl, $subMenuAttr);
 $quotas = array();
 
 // all projects list
-$res_db = db_query_params('SELECT plugin_quota_management.*, groups.group_name, groups.unix_group_name FROM plugin_quota_management, groups
-			WHERE plugin_quota_management.group_id = groups.group_id ORDER BY group_id',
+$res_db = db_query_params('SELECT plugin_quotamanagement.*, groups.group_name, groups.unix_group_name FROM plugin_quotamanagement, groups
+			WHERE plugin_quotamanagement.group_id = groups.group_id ORDER BY group_id',
 			array());
 if (db_numrows($res_db) > 0) {
 	while($e = db_fetch_array($res_db)) {
@@ -90,13 +90,13 @@ if (db_numrows($res_db) > 0) {
 	{
 		$total_database += $q["database_size"];
 		$total_disk += $q["disk_size"];
-		echo $HTML->openForm(array('action' => '/plugins/'.$quota_management->name.'/?type=globaladmin&action=update', 'method' => 'post'));
+		echo $HTML->openForm(array('action' => '/plugins/'.$quotamanagement->name.'/?type=globaladmin&action=update', 'method' => 'post'));
 		?>
 		<input type="hidden" name="group_id" value="<?php echo $q["group_id"]; ?>" />
 		<tr>
 			<td style="border-top:thin solid #808080"><?php echo $q["group_id"]; ?></td>
 			<td style="border-top:thin solid #808080">
-			<?php echo util_make_link('/plugins/quota_management/?group_id='.$q['group_id'].'&type=projectadmin', $q['unix_name']) ?>
+			<?php echo util_make_link('/plugins/'.$quotamanagement->name.'/?group_id='.$q['group_id'].'&type=projectadmin', $q['unix_name']) ?>
 			</td>
 			<td style="border-top:thin solid #808080"><?php echo $q["name"]; ?></td>
 			<td style="border-top:thin solid #808080; text-align:right">
@@ -142,8 +142,3 @@ if (db_numrows($res_db) > 0) {
 <?php
 
 site_admin_footer();
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:

@@ -41,10 +41,10 @@ if (!$user || !is_object($user)) {
 $type = getStringFromRequest('type');
 
 if (!$type) {
-	exit_missing_param($_SERVER['HTTP_REFERER'], array('No TYPE specified'), 'quota_management');
+	exit_missing_param($_SERVER['HTTP_REFERER'], array('No TYPE specified'), 'quotamanagement');
 }
 
-$quota_management = plugin_get_object('quota_management');
+$quotamanagement = plugin_get_object('quotamanagement');
 
 switch ($type) {
 	case 'globaladmin': {
@@ -56,16 +56,16 @@ switch ($type) {
 		$view = getStringFromRequest('view');
 		switch ($action) {
 			case 'update':
-				include($gfplugins.$quota_management->name.'/action/'.$action.'.php');
+				include($gfplugins.$quotamanagement->name.'/action/'.$action.'.php');
 				break;
 		}
-		$quota_management->getHeader($type);
+		$quotamanagement->getHeader($type);
 		switch ($view) {
 			case 'admin':
-				include $gfplugins.$quota_management->name.'/view/quota_admin.php';
+				include $gfplugins.$quotamanagement->name.'/view/quota_admin.php';
 				break;
 			default:
-				include $gfplugins.$quota_management->name.'/view/quota.php';
+				include $gfplugins.$quotamanagement->name.'/view/quota.php';
 				break;
 		}
 		break;
@@ -84,14 +84,9 @@ switch ($type) {
 		}
 		switch ($view) {
 			default:
-				$quota_management->getHeader($type, $group_id);
-				include $gfplugins.$quota_management->name.'/view/quota_project.php';
+				$quotamanagement->getHeader($type, $group_id);
+				include $gfplugins.$quotamanagement->name.'/view/quota_project.php';
 				break;
 		}
 	}
 }
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:

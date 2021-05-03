@@ -7,7 +7,7 @@
  * Copyright 2005, Fabio Bertagnin
  * Copyright 2010 (c) FusionForge Team
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2019, Franck Villaume - TrivialDev
+ * Copyright 2019,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -32,7 +32,7 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'project/admin/project_admin_utils.php';
 
 global $group_id;
-global $quota_management;
+global $quotamanagement;
 global $HTML;
 
 session_require_perm('project_admin', $group_id);
@@ -47,7 +47,7 @@ if (!$group || !is_object($group)) {
 
 $quotas = array();
 if ($group->usesDocman()) {
-	$res_db = $quota_management->getDocumentsSizeForProject($group_id);
+	$res_db = $quotamanagement->getDocumentsSizeForProject($group_id);
 	$q = array();
 	$q["name"] = _('Documents');
 	$q["nb"] = 0; $q["size"] = 0;
@@ -66,7 +66,7 @@ if ($group->usesDocman()) {
 }
 
 if ($group->usesNews()) {
-	$res_db = $quota_management->getNewsSizeForProject($group_id);
+	$res_db = $quotamanagement->getNewsSizeForProject($group_id);
 	$q = array();
 	$q["name"] = _('News');
 	$q["nb"] = 0; $q["size"] = 0;
@@ -80,7 +80,7 @@ if ($group->usesNews()) {
 }
 
 if ($group->usesForum()) {
-	$res_db = $quota_management->getForumSizeForProject($group_id);
+	$res_db = $quotamanagement->getForumSizeForProject($group_id);
 	$q = array();
 	$q["name"] = _('Forums');
 	$q["nb"] = 0; $q["size"] = 0;
@@ -93,7 +93,7 @@ if ($group->usesForum()) {
 }
 
 if ($group->usesTracker()) {
-	$res_db = $quota_management->getTrackerSizeForProject($group_id);
+	$res_db = $quotamanagement->getTrackerSizeForProject($group_id);
 	$q = array();
 	$q["name"] = _('Trackers');
 	$q["nb"] = 0; $q["size"] = 0;
@@ -106,7 +106,7 @@ if ($group->usesTracker()) {
 }
 
 if ($group->usesFRS()) {
-	$res_db = $quota_management->getFRSSizeForProject($group_id);
+	$res_db = $quotamanagement->getFRSSizeForProject($group_id);
 	$q = array();
 	$q["name"] = _('FRS');
 	$q["nb"] = 0; $q["size"] = 0;
@@ -119,7 +119,7 @@ if ($group->usesFRS()) {
 }
 
 if ($group->usesPM()) {
-	$res_db = $quota_management->getPMSizeForProject($group_id);
+	$res_db = $quotamanagement->getPMSizeForProject($group_id);
 	$q = array();
 	$q["name"] = _('PM');
 	$q["nb"] = 0; $q["size"] = 0;
@@ -140,7 +140,7 @@ $_quota_block_size = intval(trim(shell_exec('echo $BLOCK_SIZE'))) + 0;
 if ($_quota_block_size == 0) $_quota_block_size = 1024;
 $quota_soft = "";
 $quota_hard = "";
-$res_db = db_query_params('SELECT * FROM plugin_quota_management WHERE group_id = $1',
+$res_db = db_query_params('SELECT * FROM plugin_quotamanagement WHERE group_id = $1',
 			array($group_id));
 if (db_numrows($res_db) > 0) {
 	$e = db_fetch_array($res_db);
@@ -154,13 +154,13 @@ if (db_numrows($res_db) > 0) {
 
 if (forge_get_config('use_shell')) {
 	$q["name"] = _('Home project directory');
-	$q["size"] = $quota_management->getHomeSize($group_id);
+	$q["size"] = $quotamanagement->getHomeSize($group_id);
 	$quotas_disk[] = $q;
 }
 
 if ($group->usesFTP()) {
 	$q["name"] = _('FTP project directory');
-	$q["size"] = $quota_management->getFTPSize($group_id);
+	$q["size"] = $quotamanagement->getFTPSize($group_id);
 	$quotas_disk[] = $q;
 }
 
@@ -220,7 +220,7 @@ echo $HTML->listTableBottom(); ?>
 <br />
 <br />
 <?php
-if (count($quotas_disk) > 0) {
+if (!empty($quotas_disk)) {
 	echo $HTML->listTableTop(array(_('Disk'), _('Quota')), array(), '', 'quota', array(), array(), array(array('colspan' => 2, 'style' => 'text-align: center'), array('colspan' => 2, 'style' => 'text-align: center')));
 ?>
 	<tr style="font-weight:bold">

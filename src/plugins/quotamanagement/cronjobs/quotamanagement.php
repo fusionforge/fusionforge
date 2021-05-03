@@ -1,8 +1,8 @@
 <?php
 /**
- * quota_management cronjob
+ * quotamanagement cronjob
  *
- * Copyright 2019, Franck Villaume - Capgemini
+ * Copyright 2019,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -27,7 +27,7 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/cron_utils.php';
 require_once $gfcommon.'include/Group.class.php';
 
-$quota_management = plugin_get_object('quota_management');
+$quotamanagement = plugin_get_object('quotamanagement');
 
 #compute the storage per project and per directory
 $activegroups = group_get_active_projects();
@@ -36,8 +36,8 @@ if (forge_get_config('use_shell')) {
 		$ghome = forge_get_config('groupdir_prefix') . '/' . $activegroup->getUnixName();
 		if (is_dir($ghome)) {
 			#compute Group Home dir
-			$dirsize = $quota_management->get_dir_size($ghome);
-			$quota_management->setDirSize($activegroup->getID(), 'home', $dirsize);
+			$dirsize = $quotamanagement->get_dir_size($ghome);
+			$quotamanagement->setDirSize($activegroup->getID(), 'home', $dirsize);
 		}
 	}
 }
@@ -47,8 +47,8 @@ if (forge_get_config('use_ftp')) {
 		$ftphome = forge_get_config('ftp_upload_dir') . '/' . $activegroup->getUnixName();
 		if ($activegroup->usesFTP() && is_dir($ftphome)) {
 			#compute FTP dir
-			$dirsize = $quota_management->get_dir_size($ftphome);
-			$quota_management->setDirSize($activegroup->getID(), 'ftp', $dirsize);
+			$dirsize = $quotamanagement->get_dir_size($ftphome);
+			$quotamanagement->setDirSize($activegroup->getID(), 'ftp', $dirsize);
 		}
 	}
 }

@@ -1,8 +1,8 @@
 <?php
 /**
- * quota_management set quota
+ * quotamanagement set quota
  *
- * Copyright 2019, Franck Villaume - Capgemini
+ * Copyright 2019, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
