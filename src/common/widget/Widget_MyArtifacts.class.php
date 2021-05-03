@@ -213,14 +213,16 @@ class Widget_MyArtifacts extends Widget {
 					}
 					if ($trackers_array->getSubmittedBy() == user_getid()) {
 						$AS_flag .= 'S';
-						if (strlen($AS_title))
+						if (strlen($AS_title)) {
 							$AS_title .= ' / ';
+						}
 						$AS_title .= _('Submitted');
 					}
 					if ($trackers_array->isMonitoring()) {
 						$AS_flag .= 'M';
-						if (strlen($AS_title))
+						if (strlen($AS_title)) {
 							$AS_title .= ' / ';
+						}
 						$AS_title .= _('Monitored');
 					}
 					if (!strlen($AS_flag)) {

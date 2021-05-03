@@ -217,9 +217,9 @@ class ArtifactTypeHtml extends ArtifactType {
 				$post_name = '';
 				$i=$keys[$k];
 
-				if (!isset($selected[$efarr[$i]['extra_field_id']]))
+				if (!isset($selected[$efarr[$i]['extra_field_id']])) {
 					$selected[$efarr[$i]['extra_field_id']] = '';
-
+				}
 				$value = $selected[$efarr[$i]['extra_field_id']];
 				$type = $efarr[$i]['field_type'];
 
@@ -299,9 +299,9 @@ class ArtifactTypeHtml extends ArtifactType {
 				}
 			}
 
-			if (!isset($selected[$efarr[$i]['extra_field_id']]))
+			if (!isset($selected[$efarr[$i]['extra_field_id']])) {
 				$selected[$efarr[$i]['extra_field_id']] = '';
-
+			}
 			if ($status_show_100) {
 				$efarr[$i]['show100'] = $status_show_100;
 			}
@@ -588,8 +588,9 @@ class ArtifactTypeHtml extends ArtifactType {
 
 		$keys=array_keys($efarr);
 		$count=count($keys);
-		if ($count == 0) return '';
-
+		if ($count == 0) {
+			return '';
+		}
 		for ($k=0; $k<$count; $k++) {
 			$i=$keys[$k];
 

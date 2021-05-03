@@ -123,11 +123,12 @@ class ForumGateway extends FFError {
 
 		$this->FromEmail = $mp->getFromEmail();
 		$subj = $mp->getSubject();
-		if ($mp->isError())
+		if ($mp->isError()) {
 			$this->setError($mp->getErrorMessage());
-		if ($subj === false)
+		}
+		if ($subj === false) {
 			return false;
-
+		}
 		if (preg_match('/(\[)([0-9]*)(\])/',$subj,$arr)) {
 			$this->Parent=$arr[2];
 			$parent_end=(strpos($subj,'['.$arr[2].']')) + strlen('['.$arr[2].']');
@@ -228,7 +229,9 @@ class ForumGateway extends FFError {
 		// Find User id using email
 		$from = strtolower($this->FromEmail);
 		// If no user id, user id is 0;
-		if (! $from) return 0;
+		if (! $from) {
+			return 0;
+		}
 		$res = db_query_params ('SELECT user_id FROM users
 			WHERE lower(email) = $1 AND status = $2',
 					array (strtolower($from),

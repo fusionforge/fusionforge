@@ -75,8 +75,9 @@ class ArtifactHtml extends Artifact {
 			$u = session_get_user();
 			$order = $u->getPreference('tracker_messages_order');
 		}
-		if (!isset($order) || !$order) $order = 'up';
-
+		if (!isset($order) || !$order) {
+			$order = 'up';
+		}
 		$result = $this->getMessages($order);
 		$rows = db_numrows($result);
 

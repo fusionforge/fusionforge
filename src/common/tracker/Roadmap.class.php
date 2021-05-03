@@ -94,8 +94,9 @@ class Roadmap extends FFError {
 	// Public methods
 
 	public function create($name) {
-		if (! $this->_isAdmin()) return false;
-
+		if (! $this->_isAdmin()) {
+			return false;
+		}
 		$result = db_query_params ('SELECT * FROM roadmap WHERE group_id=$1 AND name=$2',
 					array ($this->group_id, $name));
 		if ($result && db_numrows($result)) {
@@ -119,17 +120,18 @@ class Roadmap extends FFError {
 	}
 
 	public function delete() {
-		if (! $this->_isAdmin()) return false;
-
+		if (!$this->_isAdmin()) {
+			return false;
+		}
 		$result = db_query_params('DELETE FROM roadmap_list WHERE roadmap_id=$1',
 					array ($this->roadmap_id));
-		if (! $result) {
+		if (!$result) {
 			$this->setError('in delete, '.db_error());
 			return false;
 		}
 		$result = db_query_params('DELETE FROM roadmap WHERE roadmap_id=$1',
 					array ($this->roadmap_id));
-		if (! $result) {
+		if (!$result) {
 			$this->setError('in delete, '.db_error());
 			return false;
 		}
@@ -147,12 +149,14 @@ class Roadmap extends FFError {
 	}
 
 	public function rename($name) {
-		if (! $this->_isAdmin()) return false;
+		if (!$this->_isAdmin()) {
+			return false;
+		}
 
 		$result = db_query_params('UPDATE roadmap SET name=$1 WHERE roadmap_id=$2',
 					array ($name,
 						$this->roadmap_id));
-		if (! $result) {
+		if (!$result) {
 			$this->setError('in rename, '.db_error());
 			return false;
 		}
@@ -165,20 +169,23 @@ class Roadmap extends FFError {
 	}
 
 	public function enable() {
-		if (! $this->_isAdmin()) return false;
-
+		if (! $this->_isAdmin()) {
+			return false;
+		}
 		return $this->_setState(1);
 	}
 
 	public function disable() {
-		if (! $this->_isAdmin()) return false;
-
+		if (! $this->_isAdmin()) {
+			return false;
+		}
 		return $this->_setState(0);
 	}
 
 	public function setState($state) {
-		if (! $this->_isAdmin()) return false;
-
+		if (! $this->_isAdmin()) {
+			return false;
+		}
 		switch ($state) {
 			case 0:
 			case false:
@@ -207,8 +214,9 @@ class Roadmap extends FFError {
 	}
 
 	public function setReleaseOrder($release_order) {
-		if (! $this->_isAdmin()) return false;
-
+		if (! $this->_isAdmin()) {
+			return false;
+		}
 		$result = db_query_params('UPDATE roadmap SET release_order=$1 WHERE roadmap_id=$2',
 					array (serialize($release_order),
 						$this->roadmap_id));
@@ -225,8 +233,9 @@ class Roadmap extends FFError {
 	}
 
 	public function setDefault($default) {
-		if (! $this->_isAdmin()) return false;
-
+		if (! $this->_isAdmin()) {
+			return false;
+		}
 		$result = db_query_params('UPDATE roadmap SET is_default=$1 WHERE roadmap_id=$2',
 					array ($default,
 						$this->roadmap_id));
@@ -248,8 +257,9 @@ class Roadmap extends FFError {
 	}
 
 	public function setList($arg1, $arg2=false) {
-		if (! $this->_isAdmin()) return false;
-
+		if (! $this->_isAdmin()) {
+			return false;
+		}
 		if (is_array($arg1)) {
 			db_begin();
 			foreach ($arg1 as $artifact_type_id => $field_id) {
@@ -366,8 +376,7 @@ class Roadmap extends FFError {
 					case 'release_order':
 						if ($value) {
 							$this->release_order = unserialize($value);
-						}
-						else {
+						} else {
 							$this->release_order = array();
 						}
 						break;
@@ -393,7 +402,9 @@ class Roadmap extends FFError {
 				$this->name = db_result($result, 0, 'name');
 				$this->enable = db_result($result, 0, 'enable');
 				$tmp = db_result($result, 0, 'release_order');
-				if ($tmp) $this->release_order = unserialize($tmp);
+				if ($tmp) {
+					$this->release_order = unserialize($tmp);
+				}
 				$this->is_default = db_result($result, 0, 'is_default');
 				db_free_result($result);
 			}
@@ -478,8 +489,7 @@ class Roadmap extends FFError {
 		if (isset($this->is_admin)) {
 			if ($this->is_admin) {
 				return true;
-			}
-			else {
+			} else {
 				$this->setPermissionDeniedError();
 				return false;
 			}

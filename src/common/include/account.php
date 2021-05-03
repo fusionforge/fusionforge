@@ -149,8 +149,9 @@ function account_namevalid($name, $unix=false, $check_exists=true) {
  *
  */
 function account_groupnamevalid($name) {
-	if (!account_namevalid($name, 1)) return 0;
-
+	if (!account_namevalid($name, 1)) {
+		return 0;
+	}
 	// illegal names
 	$regExpReservedGroupNames = "^(www[0-9]?|cvs[0-9]?|shell[0-9]?|ftp[0-9]?|"
 		. "irc[0-9]?|news[0-9]?|mail[0-9]?|ns[0-9]?|download[0-9]?|pub|users|"
@@ -223,9 +224,9 @@ function account_gensalt(){
 	}
 
 	$salt = '';
-	for ($i = 0; $i < $salt_size; $i++)
+	for ($i = 0; $i < $salt_size; $i++) {
 		$salt .= genchr();
-
+	}
 	$salt = $salt_prefix.$salt;
 
 	return $salt;

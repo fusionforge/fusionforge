@@ -55,7 +55,9 @@ class Widget_MyProjects extends Widget {
 			$i = 0;
 			$ra = RoleAnonymous::getInstance();
 			foreach ($groups as $g) {
-				if ($g->getStatus() != 'A') continue;
+				if ($g->getStatus() != 'A') {
+					continue;
+				}
 				$i++;
 				$html_my_projects .= '
 				<tr><td style="width:99%">'.

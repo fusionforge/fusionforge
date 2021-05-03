@@ -273,10 +273,12 @@ switch (getStringFromRequest('func')) {
 				require_once $gfcommon.'pm/ProjectTask.class.php';
 				foreach ($remlink as $tid) {
 					$pt = projecttask_get_object($tid);
-					if (!$pt || $pt->isError())
+					if (!$pt || $pt->isError()) {
 						exit_error(_('Error'), sprintf(_('Could not get Project Task for %d'), $tid));
-					if (!$pt->removeRelatedArtifacts(array($artifact_id)))
+					}
+					if (!$pt->removeRelatedArtifacts(array($artifact_id))) {
 						exit_error($tid."->removeRelatedArtifacts(".$artifact_id.")", $pt->getErrorMessage());
+					}
 				}
 			}
 			/*

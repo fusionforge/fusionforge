@@ -529,16 +529,19 @@ if (getStringFromRequest('add_extrafield')) {
 			}
 			$new_pos = intval($new_pos);
 			if ($new_pos < 1 ) {
-				if (! isset($out_before[$new_pos]))
+				if (! isset($out_before[$new_pos])) {
 					$out_before[$new_pos] = array();
+				}
 				$out_before[$new_pos][] = $field;
 			} elseif ($new_pos > $list_size) {
-				if (! isset($out_after[$new_pos]))
+				if (! isset($out_after[$new_pos])) {
 					$out_after[$new_pos] = array();
+				}
 				$out_after[$new_pos][] = $field;
 			} else {
-				if (! isset($changed[$new_pos - 1]))
+				if (! isset($changed[$new_pos - 1])) {
 					$changed[$new_pos - 1] = array();
+				}
 				$changed[$new_pos - 1][] = $field;
 			}
 		}
@@ -662,18 +665,20 @@ if (getStringFromRequest('add_extrafield')) {
 	} else {
 		$updated_flag = 0;
 		foreach ($order as $id => $new_pos) {
-			if ($new_pos == '') continue;
+			if ($new_pos == '') {
+				continue;
+			}
 			if (!$ac->reorderValues($id, $new_pos)) {
 				$error_msg .= _('Update failed')._(': ').$ac->getErrorMessage();
 				$ac->clearError();
 				continue;
-			}
-			else {
+			} else {
 				$updated_flag = 1;
 			}
 		}
-		if ($updated_flag)
+		if ($updated_flag) {
 			$feedback .= _('Tracker Updated');
+		}
 	}
 
 } elseif (getStringFromRequest('post_changes_alphaorder')) {

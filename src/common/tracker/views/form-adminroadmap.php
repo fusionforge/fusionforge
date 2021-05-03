@@ -298,16 +298,19 @@ if (getIntFromRequest('manage_release') ||
 					}
 					$new_pos = intval($new_pos);
 					if ($new_pos < 1) {
-						if (!isset($out_before[$new_pos]))
+						if (!isset($out_before[$new_pos])) {
 							$out_before[$new_pos] = array();
+						}
 						$out_before[$new_pos][] = $field;
 					} elseif ($new_pos > $list_size) {
-						if (!isset($out_after[$new_pos]))
+						if (!isset($out_after[$new_pos])) {
 							$out_after[$new_pos] = array();
+						}
 						$out_after[$new_pos][] = $field;
 					} else {
-						if (!isset($changed[$new_pos - 1]))
+						if (!isset($changed[$new_pos - 1])) {
 							$changed[$new_pos - 1] = array();
+						}
 						$changed[$new_pos - 1][] = $field;
 					}
 				}

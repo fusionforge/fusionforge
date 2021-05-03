@@ -95,9 +95,9 @@ $locks = array();
 function cron_acquire_lock($script) {
 	global $locks;
 	// Script lock: http://perl.plover.com/yak/flock/samples/slide006.html
-	if (!isset($locks[$script]))
+	if (!isset($locks[$script])) {
 		$locks[$script] = fopen($script, 'r') or die("Failed to ask lock.\n");
-
+	}
 	if (!flock($locks[$script], LOCK_EX | LOCK_NB)) {
 		die("There's a lock for '$script', exiting\n");
 	}

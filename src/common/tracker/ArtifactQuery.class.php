@@ -580,8 +580,9 @@ class ArtifactQuery extends FFError {
 	 * @return	string	The column name.
 	 */
 	function getSortCol() {
-		if (!isset($this->element_array))
+		if (!isset($this->element_array)) {
 			return false;
+		}
 		return $this->element_array[ARTIFACT_QUERY_SORTCOL][0];
 	}
 
@@ -591,8 +592,9 @@ class ArtifactQuery extends FFError {
 	 * @return	string	ASC or DESC
 	 */
 	function getSortOrd() {
-		if (!isset($this->element_array))
+		if (!isset($this->element_array)) {
 			return false;
+		}
 		return $this->element_array[ARTIFACT_QUERY_SORTORD][0];
 	}
 
@@ -602,8 +604,9 @@ class ArtifactQuery extends FFError {
 	 * @return	string	mod date range.
 	 */
 	function getModDateRange() {
-		if (!isset($this->element_array))
+		if (!isset($this->element_array)) {
 			return false;
+		}
 		if ($this->element_array[ARTIFACT_QUERY_MODDATE][0]) {
 			return $this->element_array[ARTIFACT_QUERY_MODDATE][0];
 		} else {
@@ -617,8 +620,9 @@ class ArtifactQuery extends FFError {
 	 * @return	string	Open date range.
 	 */
 	function getOpenDateRange() {
-		if (!isset($this->element_array))
+		if (!isset($this->element_array)) {
 			return false;
+		}
 		if (isset($this->element_array[ARTIFACT_QUERY_OPENDATE][0])) {
 			return $this->element_array[ARTIFACT_QUERY_OPENDATE][0];
 		} else {
@@ -632,8 +636,9 @@ class ArtifactQuery extends FFError {
 	 * @return	string	Close date range.
 	 */
 	function getCloseDateRange() {
-		if (!isset($this->element_array))
+		if (!isset($this->element_array)) {
 			return false;
+		}
 		if (isset($this->element_array[ARTIFACT_QUERY_CLOSEDATE][0])) {
 			return $this->element_array[ARTIFACT_QUERY_CLOSEDATE][0];
 		} else {
@@ -683,8 +688,9 @@ class ArtifactQuery extends FFError {
 	 * @return	string	Assignee ID
 	 */
 	function getAssignee() {
-		if (!isset($this->element_array[ARTIFACT_QUERY_ASSIGNEE]))
+		if (!isset($this->element_array[ARTIFACT_QUERY_ASSIGNEE])) {
 			return false;
+		}
 		return $this->element_array[ARTIFACT_QUERY_ASSIGNEE][0];
 	}
 
@@ -694,8 +700,9 @@ class ArtifactQuery extends FFError {
 	 * @return	string	Submitter ID
 	 */
 	function getSubmitter() {
-		if (!isset($this->element_array[ARTIFACT_QUERY_SUBMITTER]))
+		if (!isset($this->element_array[ARTIFACT_QUERY_SUBMITTER])) {
 			return false;
+		}
 		return $this->element_array[ARTIFACT_QUERY_SUBMITTER][0];
 	}
 
@@ -705,9 +712,10 @@ class ArtifactQuery extends FFError {
 	 * @return	string	Last Modifier ID
 	 */
 	function getLastModifier() {
-		if (!isset($this->element_array[ARTIFACT_QUERY_LAST_MODIFIER]))
+		if (!isset($this->element_array[ARTIFACT_QUERY_LAST_MODIFIER])) {
 			return false;
-			return $this->element_array[ARTIFACT_QUERY_LAST_MODIFIER][0];
+		}
+		return $this->element_array[ARTIFACT_QUERY_LAST_MODIFIER][0];
 	}
 
 	/**
@@ -716,8 +724,9 @@ class ArtifactQuery extends FFError {
 	 * @return	string	Status ID
 	 */
 	function getStatus() {
-		if (!isset($this->element_array))
+		if (!isset($this->element_array)) {
 			return false;
+		}
 		return $this->element_array[ARTIFACT_QUERY_STATE][0];
 	}
 
@@ -727,8 +736,9 @@ class ArtifactQuery extends FFError {
 	 * @return	array	Complex Array
 	 */
 	function getExtraFields() {
-		if (!isset($this->element_array))
+		if (!isset($this->element_array)) {
 			return false;
+		}
 		if (! isset ($this->element_array[ARTIFACT_QUERY_EXTRAFIELD])) {
 			$this->element_array[ARTIFACT_QUERY_EXTRAFIELD] = array () ;
 		}
@@ -744,8 +754,7 @@ class ArtifactQuery extends FFError {
 	function validateDateRange(&$daterange) {
 		if(! preg_match('/([0-9]{4})-[0-9]{2}-[0-9]{2} ([0-9]{4})-[0-9]{2}-[0-9]{2}/', $daterange, $matches)) {
 			return false;
-		}
-		else {
+		} else {
 			# Hack to avoid exceeding the maximum value for an integer in the database
 			if ($matches[1] > 2037) {
 				$daterange = preg_replace('/[\d]{4}(-[\d]{2}-[\d]{2} [\d]{4}-[\d]{2}-[\d]{2})/', '2037$1', $daterange);

@@ -375,10 +375,11 @@ function session_cookie($name, $value, $domain='', $expiration=0) {
  */
 function session_redirect_uri($loc, $permanent = true) {
 	util_save_messages();
-	if ($permanent)
+	if ($permanent) {
 		sysdebug_off("Status: 301 Moved Permanently", true, 301);
-	else
+	} else {
 		sysdebug_off("Status: 303 See Other", true, 303);
+	}
 	header("Location: ${loc}", true);
 	header("Content-type: text/html");
 	echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"' .

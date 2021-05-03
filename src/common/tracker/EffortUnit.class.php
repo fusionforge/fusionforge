@@ -477,8 +477,9 @@ class EffortUnit extends FFError {
 		}
 		for ($pos = 1; $pos <= count($data); $pos++) {
 			$unit = new EffortUnit($this->EffortUnitSet,$data[$pos]);
-			if (! $unit->updatePosition($pos))
+			if (! $unit->updatePosition($pos)) {
 				return false;
+			}
 		}
 		return true;
 	}

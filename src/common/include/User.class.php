@@ -1747,9 +1747,9 @@ Email: %3$s
 	 * @return    bool
 	 */
 	function isHidden($fieldName) {
-		if (!isset($this->data_array['hidden']))
+		if (!isset($this->data_array['hidden'])) {
 			return false;
-
+		}
 		$hidden = unserialize($this->data_array['hidden']);
 		if (is_array($hidden) && in_array($fieldName, $hidden)) {
 			return true;

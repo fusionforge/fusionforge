@@ -93,9 +93,9 @@ function html_error_top($msg) {
  * @return	string
  */
 function make_user_link($username, $displayname = '') {
-	if (empty($displayname))
+	if (empty($displayname)) {
 		$displayname = $username;
-
+	}
 	if (!strcasecmp($username, 'Nobody') || !strcasecmp($username, 'None')) {
 		return $username;
 	} else {
@@ -682,8 +682,9 @@ function html_build_select_box_from_arrays($vals, $texts, $select_name,
 	//we don't always want the default Any row shown
 	if ($show_any) {
 		$opt_attrs = array('value' => '');
-		if ($checked_val == '')
+		if ($checked_val == '') {
 			$opt_attrs['selected'] = 'selected';
+		}
 		$return .= html_e('option', $opt_attrs, util_html_secure($text_any), false);
 		$have_a_subelement = true;
 	}
@@ -1321,25 +1322,25 @@ function html_clean_hash_string($hashstr) {
 
 function relative_date($date) {
 	$delta = max(time() - $date, 0);
-	if ($delta < 60)
+	if ($delta < 60) {
 		return sprintf(ngettext('%d second ago', '%d seconds ago', $delta), $delta);
-
+	}
 	$delta = round($delta / 60);
-	if ($delta < 60)
+	if ($delta < 60) {
 		return sprintf(ngettext('%d minute ago', '%d minutes ago', $delta), $delta);
-
+	}
 	$delta = round($delta / 60);
-	if ($delta < 24)
+	if ($delta < 24) {
 		return sprintf(ngettext('%d hour ago', '%d hours ago', $delta), $delta);
-
+	}
 	$delta = round($delta / 24);
-	if ($delta < 7)
+	if ($delta < 7) {
 		return sprintf(ngettext('%d day ago', '%d days ago', $delta), $delta);
-
+	}
 	$delta = round($delta / 7);
-	if ($delta < 4)
+	if ($delta < 4) {
 		return sprintf(ngettext('%d week ago', '%d weeks ago', $delta), $delta);
-
+	}
 	return date(_('Y-m-d H:i'), $date);
 }
 
@@ -1426,7 +1427,9 @@ function html_e($name, $attrs = array(), $content = "", $shortform = true, $inde
 
 	if ($content === "" && $shortform) {
 		$rv .= ' />';
-		if ($indent) $rv .= "\n";
+		if ($indent) {
+			$rv .= "\n";
+		}
 	} else {
 		$rv .= '>';
 		if (preg_match('/([\<])([^\>]{1,})*([\>])/i', $content) && $indent) {
@@ -1437,7 +1440,9 @@ function html_e($name, $attrs = array(), $content = "", $shortform = true, $inde
 			$rv .= $tab;
 		}
 		$rv .= '</'.$name.'>';
-		if ($indent) $rv .= "\n";
+		if ($indent) {
+			$rv .= "\n";
+		}
 	}
 	return $rv;
 }

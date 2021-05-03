@@ -273,7 +273,9 @@ class TextSanitizer extends FFError {
 		$text = trim($text);
 		$arr = explode("\n", $text);
 		$nb_max = count($arr);
-		if ($nb_max > $nb_line) $nb_max = $nb_line;
+		if ($nb_max > $nb_line) {
+			$nb_max = $nb_line;
+		}
 		$summary = '';
 		for ($l = 0; $l < $nb_max; $l++) {
 			$summary .= '<br />';

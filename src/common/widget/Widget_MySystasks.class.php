@@ -40,8 +40,9 @@ class Widget_MySystasks extends Widget {
 		$user = session_get_user();
 		$groups = $user->getGroups();
 		$gids = array();
-		foreach($groups as $g)
+		foreach($groups as $g) {
 			$gids[] = $g->getID();
+		}
 		if (empty($gids)) {
 			return $HTML->information(_('Not member of any project'));
 		}

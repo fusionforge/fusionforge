@@ -67,16 +67,18 @@ for ($i=0; $i < count($aliases_orig); $i++) {
 		} while ($i < count($aliases_orig) && !preg_match("/^[[:blank:]]*#GFORGEEND/", $line));
 
 		// Got to end of file (shouldn't happen, means #GFORGEEND wasn't found on file
-		if ($i >= (count($aliases_orig)-1)) break;
-
+		if ($i >= (count($aliases_orig)-1)) {
+			break;
+		}
 		// read next line
 		$i++;
 		$line = trim($aliases_orig[$i]);
 	}
 
 	// empty line or comment
-	if (empty($line) || preg_match('/^#/', $line)) continue;
-
+	if (empty($line) || preg_match('/^#/', $line)) {
+		continue;
+	}
 	list($alias_name, $alias) = explode(':', $line, 2);
 	$alias_name = trim($alias_name);
 	$alias = trim($alias);
@@ -149,7 +151,9 @@ if (forge_get_config('use_mail') && file_exists(forge_get_config('data_path').'/
 		$mailmanline = explode(":",$mailmanlines[$k], 2);
 
 		$alias = trim($mailmanline[0]);
-		if (empty($alias)) continue;
+		if (empty($alias)) {
+			continue;
+		}
 		$command = trim($mailmanline[1]);
 
 		if (array_key_exists($alias, $aliases)) {

@@ -91,7 +91,9 @@ for ($i=0; $i<$rows; $i++) {
 	$public = db_result($res,$i,'is_public');
 	$status = db_result($res,$i,'status');
 	$description = db_result($res, $i, 'description');
-	if ($coding == 'iso-8859-1') $description = utf8_decode($description);
+	if ($coding == 'iso-8859-1') {
+		$description = utf8_decode($description);
+	}
 	$description = str_replace('"', '\"', $description);
 
 	$listname = trim($listname);
@@ -138,7 +140,9 @@ for ($i=0; $i<$rows; $i++) {
 				$listConfig .= "subscribe_policy = 1\n" ;
 			}
 			fwrite($fh, $listConfig);
-			if (is_readable($custom_file)) fwrite($fh, file_get_contents($custom_file));
+			if (is_readable($custom_file)) {
+				fwrite($fh, file_get_contents($custom_file));
+			}
 			fclose($fh);
 			$config_cmd = escapeshellcmd($path_to_mailman."/bin/config_list -i $tmp $listname");
 			passthru($config_cmd, $failed);
@@ -181,7 +185,9 @@ for ($i=0; $i<$rows; $i++) {
 			$listConfig .= "subscribe_policy = 1\n";
 		}
 		fwrite($fh, $listConfig);
-		if (is_readable($custom_file)) fwrite($fh, file_get_contents($custom_file));
+		if (is_readable($custom_file)) {
+			fwrite($fh, file_get_contents($custom_file));
+		}
 		fclose($fh);
 		$config_cmd = escapeshellcmd($path_to_mailman."/bin/config_list -i $tmp $listname");
 		passthru($config_cmd, $failed);

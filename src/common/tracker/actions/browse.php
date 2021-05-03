@@ -97,9 +97,9 @@ if (session_loggedin()) {
 	}
 }
 
-if(!isset($paging) || !$paging)
+if(!isset($paging) || !$paging) {
 	$paging = 25;
-
+}
 $af = new ArtifactFactory($ath);
 
 if (!$af || !is_object($af)) {
@@ -258,11 +258,12 @@ if ($art_arr && ($art_cnt = count($art_arr)) > 0) {
 
 if ($art_cnt) {
 	if ($focus) {
-		for ($i = 0; $i < $art_cnt; ++$i)
+		for ($i = 0; $i < $art_cnt; ++$i) {
 			if ($art_arr[$i]->getID() == $focus) {
 				$start = $i;
 				break;
 			}
+		}
 	}
 	$max = ($art_cnt > ($start + $paging)) ? ($start + $paging) : $art_cnt;
 } else {

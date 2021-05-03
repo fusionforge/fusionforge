@@ -1175,18 +1175,18 @@ class ProjectTask extends FFError {
 		$body = "Task #". $this->getID() ." has been updated by $user.".
 			"\n\nProject: ". $this->ProjectGroup->Group->getPublicName();
 
-		if (isset($arrChangedAndInNotice['subproject']))
+		if (isset($arrChangedAndInNotice['subproject'])) {
 			$body .= "\n". $arrChangedAndInNotice['subproject']."Subproject: ". $this->ProjectGroup->getName();
-
-		if (isset($arrChangedAndInNotice['summary']))
+		}
+		if (isset($arrChangedAndInNotice['summary'])) {
 			$body .= "\n". $arrChangedAndInNotice['summary']. "Summary: ".util_unconvert_htmlspecialchars( $this->getSummary() );
-
-		if (isset($arrChangedAndInNotice['complete']))
+		}
+		if (isset($arrChangedAndInNotice['complete'])) {
 			$body .= "\n". $arrChangedAndInNotice['complete']. "Complete: ". $this->getPercentComplete() ."%";
-
-		if (isset($arrChangedAndInNotice['status']))
+		}
+		if (isset($arrChangedAndInNotice['status'])) {
 			$body .= "\n". $arrChangedAndInNotice['status']. "Status: ". $this->getStatusName();
-
+		}
 		if (isset($arrChangedAndInNotice['assigned'])) {
 			$assigned = array();
 			foreach ($this->getAssignedTo() as $user_id) {

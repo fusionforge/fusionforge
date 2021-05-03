@@ -183,8 +183,9 @@ class ProjectTaskFactory extends FFError {
 		}
 		if ($this->assigned_to) {
 			$tat = $this->assigned_to ;
-			if (! is_array ($tat))
-				$tat = array ($tat) ;
+			if (! is_array ($tat)) {
+				$tat = array ($tat);
+			}
 			$qpa = db_construct_qpa($qpa, 'SELECT project_task_vw.*, project_task_external_order.external_id
 							FROM project_task_vw natural left join project_task_external_order, project_assigned_to
 							WHERE project_task_vw.project_task_id = project_assigned_to.project_task_id ');

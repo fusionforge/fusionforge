@@ -23,18 +23,19 @@ require dirname(__FILE__).'/../../common/include/env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/cron_utils.php';
 
-$err='';
+$err = '';
 
-$today_formatted=date('Ymd',(time()-(30*60*60*24)));
+$today_formatted = date('Ymd',(time()-(30*60*60*24)));
 
 db_begin();
 
-db_query_params ('DELETE FROM activity_log WHERE day < $1',
-	array ($today_formatted));
+db_query_params('DELETE FROM activity_log WHERE day < $1', array($today_formatted));
 $err .= db_error();
 
 db_commit();
 
-if (!$err) $err = 'Done';
+if (!$err) {
+	$err = 'Done';
+}
 
-cron_entry(10,$err);
+cron_entry(10, $err);

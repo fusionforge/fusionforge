@@ -1,6 +1,7 @@
 <?php
-if (!defined('__main__') && count(get_included_files()) <= 1 && count(debug_backtrace()) < 1)
+if (!defined('__main__') && count(get_included_files()) <= 1 && count(debug_backtrace()) < 1) {
 	define('__main__', __FILE__);
+}
 /**
  * Minimal complete JSON generator and parser for FusionForge/Evolvis
  * and SimKolab, including for debugging output serialisation
@@ -74,9 +75,9 @@ function minijson_encode($x, $ri='', $depth=32, $truncsz=0, $dumprsrc=false) {
  * out:	stdout	encoded
  */
 function minijson_encode_ob_string($x, $truncsz=0, $leader='"') {
-	if (!is_string($x))
+	if (!is_string($x)) {
 		$x = strval($x);
-
+	}
 	$Sx = strlen($x);
 
 	if ($truncsz && ($Sx > $truncsz)) {
@@ -101,39 +102,42 @@ function minijson_encode_ob_string($x, $truncsz=0, $leader='"') {
 
 		if ($c > 0x22 && $c < 0x7F) {
 			/* printable ASCII except space, !, " */
-			if ($c === 0x5C)
+			if ($c === 0x5C) {
 				echo $ch;
+			}
 			echo $ch;
 			continue;
 		}
 
 		if ($c < 0x80) {
 			/* C0 control character, space, !, " or DEL */
-			if (($c & 0x7E) === 0x20)
+			if (($c & 0x7E) === 0x20) {
 				echo $ch;
-			elseif ($c === 0x22)
+			} elseif ($c === 0x22) {
 				echo '\"';
-			elseif ($c === 0x08)
+			} elseif ($c === 0x08) {
 				echo '\b';
-			elseif ($c === 0x09)
+			} elseif ($c === 0x09) {
 				echo '\t';
-			elseif ($c === 0x0A)
+			} elseif ($c === 0x0A) {
 				echo '\n';
-			elseif ($c === 0x0C)
+			} elseif ($c === 0x0C) {
 				echo '\f';
-			elseif ($c === 0x0D)
+			} elseif ($c === 0x0D) {
 				echo '\r';
-			elseif (!$c)
+			} elseif (!$c) {
 				$Sp = $Sx;
-			else
+			} else {
 				printf('\u%04X', $c);
+			}
 			continue;
 		}
 
 		/* UTF-8 lead byte */
 		if ($c < 0xE0) {
-			if ($c < 0xC2)
+			if ($c < 0xC2) {
 				break;
+			}
 			$wc = ($c & 0x1F) << 6;
 			$wmin = 0x80;
 			$Ss = 1;
@@ -150,8 +154,9 @@ function minijson_encode_ob_string($x, $truncsz=0, $leader='"') {
 		}
 		$u = $ch;
 		/* UTF-8 trail bytes */
-		if ($Sp + $Ss > $Sx)
+		if ($Sp + $Ss > $Sx) {
 			break;
+		}
 		while ($Ss--)
 			if (($c = ord(($ch = $x[$Sp++])) ^ 0x80) <= 0x3F) {
 				$wc |= $c << (6 * $Ss);
@@ -159,24 +164,25 @@ function minijson_encode_ob_string($x, $truncsz=0, $leader='"') {
 			} else
 				break 2;
 		/* complete wide character */
-		if ($wc < $wmin)
+		if ($wc < $wmin) {
 			break;
-
+		}
 		if (($wc >= 0x00A0 && $wc < 0x2028) ||
 		    ($wc > 0x2029 && $wc < 0xD800) ||
-		    ($wc > 0xDFFF && $wc <= 0xFFFD))
+		    ($wc > 0xDFFF && $wc <= 0xFFFD)) {
 			echo $u;
-		elseif ($wc > 0xFFFF) {
-			if ($wc > 0x10FFFF)
+		} elseif ($wc > 0xFFFF) {
+			if ($wc > 0x10FFFF) {
 				break;
+			}
 			/* UTF-16 */
 			$wc -= 0x10000;
 			printf('\u%04X\u%04X',
 			    0xD800 | ($wc >> 10),
 			    0xDC00 | ($wc & 0x03FF));
-		} else
+		} else {
 			printf('\u%04X', $wc);
-
+		}
 		/* process next char */
 	}
 
@@ -187,28 +193,29 @@ function minijson_encode_ob_string($x, $truncsz=0, $leader='"') {
 	while ($Sp < $Sx && ($c = ord(($ch = $x[$Sp++])))) {
 		/* similar logic as above, just not as golfed for speed */
 		if ($c >= 0x20 && $c < 0x7F) {
-			if ($c === 0x22 || $c === 0x5C)
+			if ($c === 0x22 || $c === 0x5C) {
 				echo "\\";
+			}
 			echo $ch;
 		} else switch ($c) {
-		case 0x08:
-			echo '\b';
-			break;
-		case 0x09:
-			echo '\t';
-			break;
-		case 0x0A:
-			echo '\n';
-			break;
-		case 0x0C:
-			echo '\f';
-			break;
-		case 0x0D:
-			echo '\r';
-			break;
-		default:
-			printf('\u%04X', $c);
-			break;
+			case 0x08:
+				echo '\b';
+				break;
+			case 0x09:
+				echo '\t';
+				break;
+			case 0x0A:
+				echo '\n';
+				break;
+			case 0x0C:
+				echo '\f';
+				break;
+			case 0x0D:
+				echo '\r';
+				break;
+			default:
+				printf('\u%04X', $c);
+				break;
 		}
 	}
 	echo '"';
@@ -248,7 +255,7 @@ function minijson_encode_ob($x, $ri, $depth, $truncsz, $dumprsrc) {
 				echo $z;
 				return;
 			}
-		} else if (is_nan($x) || is_infinite($x)) {
+		} elseif (is_nan($x) || is_infinite($x)) {
 			echo 'null';
 			return;
 		}
@@ -256,10 +263,12 @@ function minijson_encode_ob($x, $ri, $depth, $truncsz, $dumprsrc) {
 		$v = explode('e', $rs);
 		$rs = rtrim($v[0], '0');
 		echo $rs;
-		if ($rs[strlen($rs) - 1] === '.')
+		if ($rs[strlen($rs) - 1] === '.') {
 			echo '0';
-		if ($v[1] !== '-0' && $v[1] !== '+0')
+		}
+		if ($v[1] !== '-0' && $v[1] !== '+0') {
 			echo 'E' . $v[1];
+		}
 		return;
 	}
 
@@ -339,30 +348,30 @@ function minijson_encode_ob($x, $ri, $depth, $truncsz, $dumprsrc) {
 			'_type' => $rsrctype,
 		);
 		switch ($rsrctype) {
-		case 'stream':
-			$rs['info'] = stream_get_meta_data($x);
-			break;
-		case 'curl':
-			$rs['info'] = curl_getinfo($x);
-			$rs['private'] = curl_getinfo($x, CURLINFO_PRIVATE);
-			break;
-		case 'GMP integer':
-			$rs['value'] = gmp_strval($x);
-			break;
-		case 'OpenSSL key':
-			$rs['info'] = openssl_pkey_get_details($x);
-			break;
-		case 'pgsql link':
-		case 'pgsql link persistent':
-			$rs['err'] = pg_last_error($x); // must be first
-			$rs['db'] = pg_dbname($x);
-			$rs['host'] = pg_host($x);
-			$rs['status'] = pg_connection_status($x);
-			$rs['txn'] = pg_transaction_status($x);
-			break;
-		case 'pgsql result':
-			$rs['status'] = pg_result_status($x, PGSQL_STATUS_STRING);
-			break;
+			case 'stream':
+				$rs['info'] = stream_get_meta_data($x);
+				break;
+			case 'curl':
+				$rs['info'] = curl_getinfo($x);
+				$rs['private'] = curl_getinfo($x, CURLINFO_PRIVATE);
+				break;
+			case 'GMP integer':
+				$rs['value'] = gmp_strval($x);
+				break;
+			case 'OpenSSL key':
+				$rs['info'] = openssl_pkey_get_details($x);
+				break;
+			case 'pgsql link':
+			case 'pgsql link persistent':
+				$rs['err'] = pg_last_error($x); // must be first
+				$rs['db'] = pg_dbname($x);
+				$rs['host'] = pg_host($x);
+				$rs['status'] = pg_connection_status($x);
+				$rs['txn'] = pg_transaction_status($x);
+				break;
+			case 'pgsql result':
+				$rs['status'] = pg_result_status($x, PGSQL_STATUS_STRING);
+				break;
 		}
 		echo '{'/*}*/ . $xi . '"\u0000resource:"' . $Sd;
 		minijson_encode_ob($rs, $si, $depth + 1, $truncsz, $dumprsrc);
@@ -385,11 +394,13 @@ function minijson_encode_ob($x, $ri, $depth, $truncsz, $dumprsrc) {
 	$s = array();
 	foreach (array_keys($x) as $k) {
 		$v = $k;
-		if (!is_string($v))
+		if (!is_string($v)) {
 			$v = strval($v);
+		}
 		/* protected and private members have NULs there */
-		if (strpos($v, "\0") !== false)
+		if (strpos($v, "\0") !== false) {
 			$v = str_replace("\0", "\\", $v);
+		}
 		$s[$k] = $v;
 	}
 	asort($s, SORT_STRING);
@@ -415,28 +426,28 @@ function minijson_encode_ob($x, $ri, $depth, $truncsz, $dumprsrc) {
  * out:	boolean	false if an error occured, true if the output is valid
  */
 function minijson_decode($s, &$ov, $depth=32) {
-	if (!isset($s))
+	if (!isset($s)) {
 		$s = '';
-	elseif (!is_string($s))
+	} elseif (!is_string($s)) {
 		$s = strval($s);
-
+	}
 	$Sp = 0;
 	$Sx = strlen($s);
 	$rv = false;
 
 	/* skip Byte Order Mark if present */
-	if (strncmp($s, "\xEF\xBB\xBF", 3) === 0)
+	if (strncmp($s, "\xEF\xBB\xBF", 3) === 0) {
 		$Sp = 3;
-
+	}
 	/* skip leading whitespace */
 	minijson_skip_wsp($s, $Sp, $Sx);
 
 	/* recursively parse input */
-	if ($Sp < $Sx)
+	if ($Sp < $Sx) {
 		$rv = minijson_decode_value($s, $Sp, $Sx, $ov, $depth);
-	else
+	} else {
 		$ov = 'empty input';
-
+	}
 	/* skip trailing whitespace */
 	if ($rv) {
 		minijson_skip_wsp($s, $Sp, $Sx);
@@ -448,20 +459,23 @@ function minijson_decode($s, &$ov, $depth=32) {
 	}
 
 	/* amend errors by erroring offset */
-	if (!$rv)
+	if (!$rv) {
 		$ov = sprintf('%s at offset 0x%0' . strlen(dechex($Sx)) . 'X',
 		    $ov, $Sp);
+	}
 	return $rv;
 }
 
 /* skip all characters that are JSON whitespace */
 function minijson_skip_wsp($s, &$Sp, $Sx) {
-	while ($Sp < $Sx)
+	while ($Sp < $Sx) {
 		if (($c = ord($s[$Sp])) === 0x20 ||
-		    $c === 0x0A || $c === 0x09 || $c === 0x0D)
+		    $c === 0x0A || $c === 0x09 || $c === 0x0D) {
 			++$Sp;
-		else
+		} else {
 			return $c;
+		}
+	}
 	return -1;
 }
 
@@ -646,43 +660,47 @@ function minijson_decode_string($s, &$Sp, $Sx) {
 		}
 		/* backslash escape? */
 		if ($c === 0x5C) {
-			if ($Sp >= $Sx)
+			if ($Sp >= $Sx) {
 				return 'incomplete escape sequence';
+			}
 			$c = ord(($ch = $s[$Sp++]));
-			if ($c === 0x22 || $c === 0x5C || $c === 0x2F)
+			if ($c === 0x22 || $c === 0x5C || $c === 0x2F) {
 				echo $ch;
-			elseif ($c === 0x74)
+			} elseif ($c === 0x74) {
 				echo "\x09";
-			elseif ($c === 0x6E)
+			} elseif ($c === 0x6E) {
 				echo "\x0A";
-			elseif ($c === 0x75) {
+			} elseif ($c === 0x75) {
 				$c = minijson_decode_uescape($s, $Sp, $Sx, $ch);
-				if ($c >= 0xD800 && $c <= 0xDFFF)
+				if ($c >= 0xD800 && $c <= 0xDFFF) {
 					$c = minijson_decode_surrogate($s, $Sp,
 					    $Sx, $c, $ch);
-				if ($c === 0)
+				}
+				if ($c === 0) {
 					return $ch;
-				if ($c < 0x80)
+				}
+				if ($c < 0x80) {
 					echo chr($c);
-				elseif ($c < 0x0800)
+				} elseif ($c < 0x0800) {
 					echo chr(0xC0 | ($c >> 6)) .
 					    chr(0x80 | ($c & 0x3F));
-				elseif ($c <= 0xFFFF)
+				} elseif ($c <= 0xFFFF) {
 					echo chr(0xE0 | ($c >> 12)) .
 					    chr(0x80 | (($c >> 6) & 0x3F)) .
 					    chr(0x80 | ($c & 0x3F));
-				else
+				} else {
 					echo chr(0xF0 | ($c >> 18)) .
 					    chr(0x80 | (($c >> 12) & 0x3F)) .
 					    chr(0x80 | (($c >> 6) & 0x3F)) .
 					    chr(0x80 | ($c & 0x3F));
-			} elseif ($c === 0x72)
+				}
+			} elseif ($c === 0x72) {
 				echo "\x0D";
-			elseif ($c === 0x62)
+			} elseif ($c === 0x62) {
 				echo "\x08";
-			elseif ($c === 0x66)
+			} elseif ($c === 0x66) {
 				echo "\x0C";
-			else {
+			} else {
 				$Sp -= 2;
 				return "invalid escape sequence “\\{$ch}”";
 			}
@@ -690,8 +708,9 @@ function minijson_decode_string($s, &$Sp, $Sx) {
 		}
 		echo $ch;
 		if ($c < 0x80) {
-			if ($c >= 0x20)
+			if ($c >= 0x20) {
 				continue;
+			}
 			--$Sp;
 			return sprintf('unexpected C0 control 0x%02X', $c);
 		}
@@ -765,26 +784,26 @@ function minijson_decode_uescape($s, &$Sp, $Sx, &$e) {
 	for ($tmp = 1; $tmp <= 4; $tmp++) {
 		$wc <<= 4;
 		switch (ord($s[$Sp++])) {
-		case 0x30:			   break;
-		case 0x31:		$wc +=  1; break;
-		case 0x32:		$wc +=  2; break;
-		case 0x33:		$wc +=  3; break;
-		case 0x34:		$wc +=  4; break;
-		case 0x35:		$wc +=  5; break;
-		case 0x36:		$wc +=  6; break;
-		case 0x37:		$wc +=  7; break;
-		case 0x38:		$wc +=  8; break;
-		case 0x39: 		$wc +=  9; break;
-		case 0x41: case 0x61:	$wc += 10; break;
-		case 0x42: case 0x62:	$wc += 11; break;
-		case 0x43: case 0x63:	$wc += 12; break;
-		case 0x44: case 0x64:	$wc += 13; break;
-		case 0x45: case 0x65:	$wc += 14; break;
-		case 0x46: case 0x66:	$wc += 15; break;
-		default:
-			--$Sp;
-			$e = 'hexadecimal digit expected';
-			return 0;
+			case 0x30:			   break;
+			case 0x31:		$wc +=  1; break;
+			case 0x32:		$wc +=  2; break;
+			case 0x33:		$wc +=  3; break;
+			case 0x34:		$wc +=  4; break;
+			case 0x35:		$wc +=  5; break;
+			case 0x36:		$wc +=  6; break;
+			case 0x37:		$wc +=  7; break;
+			case 0x38:		$wc +=  8; break;
+			case 0x39: 		$wc +=  9; break;
+			case 0x41: case 0x61:	$wc += 10; break;
+			case 0x42: case 0x62:	$wc += 11; break;
+			case 0x43: case 0x63:	$wc += 12; break;
+			case 0x44: case 0x64:	$wc += 13; break;
+			case 0x45: case 0x65:	$wc += 14; break;
+			case 0x46: case 0x66:	$wc += 15; break;
+			default:
+				--$Sp;
+				$e = 'hexadecimal digit expected';
+				return 0;
 		}
 	}
 	if ($wc < 1 || $wc > 0xFFFD) {
@@ -809,8 +828,9 @@ function minijson_decode_surrogate($s, &$Sp, $Sx, $wc, &$e) {
 		return 0;
 	}
 	$Sp += 2;
-	if (($lc = minijson_decode_uescape($s, $Sp, $Sx, $e)) === 0)
+	if (($lc = minijson_decode_uescape($s, $Sp, $Sx, $e)) === 0) {
 		return 0;
+	}
 	if ($lc < 0xDC00 || $lc > 0xDFFF) {
 		$Sp -= 6;
 		$e = sprintf('unexpected \\u%04X, low surrogate expected', $lc);
@@ -834,8 +854,9 @@ function minijson_decode_number($s, &$Sp, $Sx, &$ov) {
 	if (strpos($matches[0], '.') === false) {
 		/* possible integer */
 		$ov = (int)$matches[0];
-		if (strval($ov) === $matches[0])
+		if (strval($ov) === $matches[0]) {
 			return true;
+		}
 	}
 	$ov = (float)$matches[0];
 	return true;
@@ -856,48 +877,57 @@ if (defined('__main__') && constant('__main__') === __FILE__) {
 	while (count($argv)) {
 		$arg = array_shift($argv);
 		/* only options, no arguments (Unix filter) */
-		if ($arg[0] !== '-')
+		if ($arg[0] !== '-') {
 			usage();
-		if ($arg === '--' && count($argv))
+		}
+		if ($arg === '--' && count($argv)) {
 			usage();
-		if ($arg === '-')
+		}
+		if ($arg === '-') {
 			usage();
+		}
 		$arg = str_split($arg);
 		array_shift($arg);	/* initial ‘-’ */
 		/* parse select arguments */
 		while (count($arg)) {
 			switch ($arg[0]) {
-			case 'c':
-				$indent = false;
-				break;
-			case 'd':
-				if (!count($argv))
+				case 'c':
+					$indent = false;
+					break;
+				case 'd':
+					if (!count($argv)) {
+						usage();
+					}
+					$depth = array_shift($argv);
+					if (!preg_match('/^[1-9][0-9]*$/', $depth)) {
+						usage();
+					}
+					if (strval((int)$depth) !== $depth) {
+						usage();
+					}
+					$depth = (int)$depth;
+					break;
+				case 'h':
+				case '?':
+					usage(0);
+				case 'r':
+					$rsrc = true;
+					break;
+				case 't':
+					if (!count($argv)) {
+						usage();
+					}
+					$truncsz = array_shift($argv);
+					if (!preg_match('/^[1-9][0-9]*$/', $truncsz)) {
+						usage();
+					}
+					if (strval((int)$truncsz) !== $truncsz) {
+						usage();
+					}
+					$truncsz = (int)$truncsz;
+					break;
+				default:
 					usage();
-				$depth = array_shift($argv);
-				if (!preg_match('/^[1-9][0-9]*$/', $depth))
-					usage();
-				if (strval((int)$depth) !== $depth)
-					usage();
-				$depth = (int)$depth;
-				break;
-			case 'h':
-			case '?':
-				usage(0);
-			case 'r':
-				$rsrc = true;
-				break;
-			case 't':
-				if (!count($argv))
-					usage();
-				$truncsz = array_shift($argv);
-				if (!preg_match('/^[1-9][0-9]*$/', $truncsz))
-					usage();
-				if (strval((int)$truncsz) !== $truncsz)
-					usage();
-				$truncsz = (int)$truncsz;
-				break;
-			default:
-				usage();
 			}
 			array_shift($arg);
 		}
@@ -913,7 +943,6 @@ if (defined('__main__') && constant('__main__') === __FILE__) {
 		    )) . "\n");
 		exit(1);
 	}
-	fwrite(STDOUT, minijson_encode($odat, $indent, $depth,
-	    $truncsz, $rsrc) . "\n");
+	fwrite(STDOUT, minijson_encode($odat, $indent, $depth, $truncsz, $rsrc) . "\n");
 	exit(0);
 }

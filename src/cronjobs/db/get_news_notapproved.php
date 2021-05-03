@@ -69,8 +69,9 @@ foreach ($results_array as $newsnotapprob) {
 		$emailformatted .= wordwrap($title, 78);
 		$emailformatted .= "----------------------------------------------------------------------\n";
 		$t = explode("\n", wordwrap($details, 70));
-		foreach ($t as $line)
+		foreach ($t as $line) {
 			$emailformatted .= str_repeat(' ', 8) . $line . "\n";
+		}
 		$emailformatted .= "\n\n";
 	}
 }

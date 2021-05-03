@@ -238,9 +238,9 @@ class SurveyResponseFactory extends FFError {
 			if($is_radio) {
 				/* We only counts */
 				// ugly hack to avoid php warning, and count correctly 'no answer' response.
-				if (is_string($response) && !strlen($response))
+				if (is_string($response) && !strlen($response)) {
 					$response = 0;
-
+				}
 				$this->Result[$response]++;
 			} else {
 				/* Save response */

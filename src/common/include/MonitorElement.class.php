@@ -229,9 +229,9 @@ class MonitorElement extends FFError {
 				$getAllEmailsInCommatSeparatedString = '';
 				$comma = '';
 				for ($i = 0; $i < count($getAllEmailsInCommatSeparatedArray); $i++) {
-					if ( $i > 0 )
+					if ( $i > 0 ) {
 						$comma = ',';
-
+					}
 					$getAllEmailsInCommatSeparatedString .= $comma.$getAllEmailsInCommatSeparatedArray[$i];
 				}
 				return $getAllEmailsInCommatSeparatedString;

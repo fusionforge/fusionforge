@@ -47,10 +47,12 @@ function pg_connectstring($dbname, $user, $password = "", $host = "", $port = ""
 	} else {
 		$string = "dbname=gforge";
 	}
-	if ($user != "")
+	if ($user != "") {
 		$string .= " user=$user";
-	if ($password != "")
+	}
+	if ($password != "") {
 		$string .= " password=$password";
+	}
 	if ($host != "") {
 		$string .= " host=$host";
 	}
@@ -146,12 +148,13 @@ function db_reconnect() {
  */
 function db_connection_status() {
 	global $gfconn;
-	if ($gfconn === FALSE)
+	if ($gfconn === FALSE) {
 		return false;
-	if (pg_connection_status($gfconn) == PGSQL_CONNECTION_OK)
+	}
+	if (pg_connection_status($gfconn) == PGSQL_CONNECTION_OK) {
 		return true;
-	else
-		return false;
+	}
+	return false;
 }
 
 function db_switcher($dbserver = NULL) {
@@ -473,8 +476,9 @@ function db_commit($dbserver = NULL) {
 	// check for transaction stack underflow
 	if ($_sys_db_transaction_level == 0) {
 		echo "COMMIT underflow [$sysdebug_dberrors]<br />";
-		if ($sysdebug_dberrors)
+		if ($sysdebug_dberrors) {
 			ffDebug("database", "db_commit underflow", debug_string_backtrace());
+		}
 		return false;
 	}
 
@@ -500,8 +504,9 @@ function db_rollback($dbserver = NULL) {
 	// check for transaction stack underflow
 	if ($_sys_db_transaction_level == 0) {
 		echo "ROLLBACK underflow [$sysdebug_dberrors]<br />";
-		if ($sysdebug_dberrors)
+		if ($sysdebug_dberrors) {
 			ffDebug("database", "db_rollback underflow", debug_string_backtrace());
+		}
 		return false;
 	}
 

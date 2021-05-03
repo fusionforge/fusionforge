@@ -58,9 +58,9 @@ function form_generate_key() {
  */
 function form_key_is_valid($key) {
 	// Fail if key is empty
-	if (empty($key))
+	if (empty($key)) {
 		return false;
-
+	}
 	db_begin();
 	$res = db_query_params ('SELECT * FROM form_keys WHERE key=$1 and is_used=0 AND creation_date > $2 FOR UPDATE',
                             array ($key,

@@ -93,7 +93,6 @@ if (!$res) {
 	return false;
 }
 
-
 $output = '';
 while ($data = db_fetch_array ($res)) {
 	($verbose) && print 'Processing GroupId '.$data['group_id'].' ('.$data['group_name'].")\n";
@@ -124,9 +123,6 @@ while ($data = db_fetch_array ($res)) {
 	}
 }
 
-if ($output) cron_entry(28, $output);
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:
+if ($output) {
+	cron_entry(28, $output);
+}

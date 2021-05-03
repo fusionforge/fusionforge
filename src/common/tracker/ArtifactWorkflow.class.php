@@ -55,9 +55,9 @@ class ArtifactWorkflow extends FFError {
 	// Check if the following event is allowed or not.
 	// return true is allowed, false if not.
 	function checkEvent($from, $to) {
-		if ($from === $to)
+		if ($from === $to) {
 			return true;
-
+		}
 		$res = db_query_params ('SELECT event_id FROM artifact_workflow_event
 				WHERE group_artifact_id=$1
 				AND field_id=$2
@@ -70,9 +70,9 @@ class ArtifactWorkflow extends FFError {
 		$event_id = db_result($res, 0, 'event_id');
 		if ($event_id) {
 			// No role based checks for the initial transition.
-			if ($from == 100)
+			if ($from == 100) {
 				return true;
-
+			}
 			// There is a transition, now check if current role is allowed.
 			$rids = array () ;
 			$available_roles = RBACEngine::getInstance()->getAvailableRoles() ;

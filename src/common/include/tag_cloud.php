@@ -80,7 +80,9 @@ function tag_cloud($params = array()) {
 	global $SELECTED_STYLE;
 	global $HTML;
 
-	if (!is_array($params)) $params = array();
+	if (!is_array($params)) {
+		$params = array();
+	}
 	if (!isset($params['selected'])) {
 		$params['selected'] = '';
 	}
@@ -133,18 +135,22 @@ function tag_cloud($params = array()) {
 		$count_max = 0;
 		$nb = 0;
 		foreach ($available_counts as $count) {
-			if ($count_min == 0 || $count < $count_min) $count_min = $count;
-			if ($count > $count_max) $count_max = $count;
+			if ($count_min == 0 || $count < $count_min) {
+				$count_min = $count;
+			}
+			if ($count > $count_max) {
+				$count_max = $count;
+			}
 			$nb = $nb + count($count_to_tags[$count]);
-			if ($params['nb_max'] && $nb >= $params['nb_max']) break; // no limit if nb_max == 0
+			if ($params['nb_max'] && $nb >= $params['nb_max']) {
+				break; // no limit if nb_max == 0
+			}
 		}
 
 		// Compute 'A' parameter of the function
-		if ($count_max != $count_min) // else we have a division by zero
-		{
+		if ($count_max != $count_min) {// else we have a division by zero
 			$a = ($params['nb_size'] - 1) / ($count_max - $count_min);
-		}
-		else {
+		} else {
 			// Set value 0 for 'A' parameter just for initialised variable
 			// but it's not realy necessary because if $count_max == $count_min
 			// then $count - $count_min = 0 (see below)
@@ -153,7 +159,9 @@ function tag_cloud($params = array()) {
 
 		ksort($tag_count, SORT_STRING);
 		foreach ($tag_count as $name => $count) {
-			if ($count < $count_min) continue;
+			if ($count < $count_min) {
+				continue;
+			}
 			$size = intval(1 + ($count - $count_min) * $a);
 			$linkAttr = array();
 			$linkAttr['class'] = $params['class_prefix'] . $size;

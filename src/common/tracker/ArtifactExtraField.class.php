@@ -1084,7 +1084,9 @@ class ArtifactExtraField extends FFError {
 			'_votage'
 		);
 
-		if (strlen($alias) == 0) return true;	// empty alias
+		if (strlen($alias) == 0) {
+			return true;	// empty alias
+		}
 
 		// invalid chars?
 		if (preg_match("/[^[:alnum:]_@\\-]/", $alias)) {
@@ -1162,8 +1164,7 @@ class ArtifactExtraField extends FFError {
 				$element_id));
 		if ($result && db_affected_rows($result) > 0) {
 			return true;
-		}
-		else {
+		} else {
 			$this->setError(db_error());
 			return false;
 		}
@@ -1190,8 +1191,9 @@ class ArtifactExtraField extends FFError {
 			}
 		}
 		for ($i = 0; $i < count($data); $i++) {
-			if (! $this->updateOrder($data[$i], $i + 1))
+			if (! $this->updateOrder($data[$i], $i + 1)) {
 				return false;
+			}
 		}
 
 		return true;
@@ -1202,8 +1204,9 @@ class ArtifactExtraField extends FFError {
 			array($this->getID()));
 		$i = 1;
 		while ($row = db_fetch_array($res)) {
-			if (! $this->updateOrder($row['element_id'], $i))
+			if (! $this->updateOrder($row['element_id'], $i)) {
 				return false;
+			}
 			$i++;
 		}
 		return true;
@@ -1275,8 +1278,9 @@ class ArtifactExtraField extends FFError {
 
 		if ($result) {
 			while ($row = db_fetch_array($result)) {
-				if ($row['element_id'] > 0)
+				if ($row['element_id'] > 0) {
 					return $row['element_id'];
+				}
 			}
 		}
 

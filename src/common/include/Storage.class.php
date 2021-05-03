@@ -110,7 +110,9 @@ class Storage extends FFError {
 		$key = dechex($key);
 		$pre = substr($key, strlen($key)-2);
 		$last = substr($key, 0, strlen($key)-2);
-		if (!$last) $last = '0';
+		if (!$last) {
+			$last = '0';
+		}
 		return $this->get_storage_path().'/'.$pre.'/'.$last;
 	}
 }

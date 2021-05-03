@@ -169,9 +169,13 @@ if (file_exists($svndir_prefix)) {
 		mkdir($repos_backup_dir);
 		$dh = opendir($svndir_prefix);
 		while ($file = readdir($dh)) {
-			if (preg_match('/^\\./', $file)) continue;		// skip files that start with a dot
+			if (preg_match('/^\\./', $file)) {
+				continue; // skip files that start with a dot
+			}
 			$path = $svndir_prefix.'/'.$file;
-			if (!is_dir($path)) continue;		// not a repository
+			if (!is_dir($path)) {
+				continue; // not a repository
+			}
 			$cmd = 'SVN_PATH="'.$svn_path.'" '.$hot_backup.' '.$path.' '.$repos_backup_dir;
 			@exec($cmd, $output, $retval);
 			if ($retval != 0) {

@@ -133,8 +133,9 @@ if (!$ac || !is_object($ac)) {
 		$progenyField = $ac->getProgeny();
 		if (is_array($pfarr)) {
 			foreach ($pfarr as $pf) {
-				if ($pf['extra_field_id'] != $id && !in_array($pf['extra_field_id'], $progenyField))
-				$parentField[$pf['extra_field_id']] = $pf['field_name'];
+				if ($pf['extra_field_id'] != $id && !in_array($pf['extra_field_id'], $progenyField)) {
+					$parentField[$pf['extra_field_id']] = $pf['field_name'];
+				}
 			}
 		}
 		asort($parentField,SORT_FLAG_CASE | SORT_STRING);
