@@ -1,6 +1,6 @@
 <?php
 /**
- * quota_managementPlugin Class
+ * quotamanagementPlugin Class
  *
  * Copyright 2005, Fabio Bertagnin
  * Copyright 2011, Franck Villaume - Capgemini
@@ -23,7 +23,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-class quota_managementPlugin extends Plugin {
+class quotamanagementPlugin extends Plugin {
 	public $systask_types = array(
 		'QUOTAMANAGEMENT_SET_QUOTA' => 'quota_management-set_quota.php',
 	);
@@ -32,7 +32,7 @@ class quota_managementPlugin extends Plugin {
 
 	function __construct() {
 		parent::__construct();
-		$this->name = "quota_management";
+		$this->name = "quotamanagement";
 		$this->text = _("Quota Management"); // To show in the tabs, use...
 		$this->pkg_desc =
 _("This is a Quota Management plugin within FusionForge. Provide an easy way
@@ -54,7 +54,7 @@ to monitor disk and database usage per user, project.");
 			}
 			case "groupadminmenu": {
 				$params['labels'][] = _ ('Quota');
-				$params['links'][] = '/plugins/quota_management/index.php?group_id='.$params['group'].'&type=projectadmin';
+				$params['links'][] = '/plugins/'.$this->name.'/index.php?group_id='.$params['group'].'&type=projectadmin';
 				$params['attr_r'][] = array('title' => _('View the Quota Management Administration'));
 				$returned = true;
 				break;
@@ -83,16 +83,16 @@ to monitor disk and database usage per user, project.");
 	function setDirSize($group_id, $dirtype, $dirsize) {
 		switch ($dirtype) {
 			case 'home':
-				$res = db_query_params('UPDATE plugin_quota_management SET home_usage = $1 WHERE group_id = $2', array($dirsize, $group_id));
+				$res = db_query_params('UPDATE plugin_quotamanagement SET home_usage = $1 WHERE group_id = $2', array($dirsize, $group_id));
 				break;
 			case 'ftp':
-				$res = db_query_params('UPDATE plugin_quota_management SET ftp_usage = $1 WHERE group_id = $2', array($dirsize, $group_id));
+				$res = db_query_params('UPDATE plugin_quotamanagement SET ftp_usage = $1 WHERE group_id = $2', array($dirsize, $group_id));
 				break;
 		}
 	}
 
 	function getDataArray($group_id) {
-		$res = db_query_params('SELECT * from plugin_quota_management WHERE group_id = $1', array($group_id));
+		$res = db_query_params('SELECT * from plugin_quotamanagement WHERE group_id = $1', array($group_id));
 		$this->data_array = db_fetch_array($res);
 	}
 
