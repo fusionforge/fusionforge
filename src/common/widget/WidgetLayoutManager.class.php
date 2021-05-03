@@ -753,7 +753,7 @@ class WidgetLayoutManager {
 							next($new);
 						}
 						$sql = "UPDATE layouts_contents
-							SET layout_id  = $1, column_id =$2
+							SET layout_id  = $1, column_id = $2
 							WHERE owner_type =$3
 							AND owner_id  =$4
 							AND layout_id =$5
@@ -930,17 +930,15 @@ class WidgetLayoutManager {
 
 		//See if it already exists but not used
 		$sql = "SELECT column_id FROM layouts_contents
-			WHERE owner_type =$1
+			WHERE owner_type = $1
 			AND owner_id = $2
 			AND layout_id = $3
 			AND name = $4";
 		$res = db_query_params($sql, array($owner_type, $owner_id, $layout_id, $name));
-		echo db_error();
 		if (db_numrows($res) && !$widget->isUnique() && db_result($res, 0, 'column_id') == 0) {
 			//search for rank
 			$sql = "SELECT min(rank) - 1 AS rank FROM layouts_contents WHERE owner_type =$1 AND owner_id = $2 AND layout_id = $3 AND column_id = $4 ";
 			$res = db_query_params($sql, array($owner_type, $owner_id, $layout_id, $column_id));
-			echo db_error();
 			$rank = db_result($res, 0, 'rank');
 
 			//Update
@@ -951,7 +949,6 @@ class WidgetLayoutManager {
 				AND name = $5
 				AND layout_id = $6";
 			db_query_params($sql, array($column_id, $rank, $owner_type, $owner_id, $name, $layout_id));
-			echo db_error();
 		} else {
 			//Insert
 			$sql = "INSERT INTO layouts_contents(owner_type, owner_id, layout_id, column_id, name, content_id, rank)
@@ -961,7 +958,6 @@ class WidgetLayoutManager {
 				ORDER BY rank ASC
 				LIMIT 1";
 			db_query_params($sql, array($name, $content_id, $owner_type, $owner_id, $layout_id, $column_id));
-			echo db_error();
 		}
 		$this->feedback();
 	}
@@ -1070,6 +1066,7 @@ class WidgetLayoutManager {
 					$names[] = array($id, $name);
 				}
 
+				db_begin();
 				//Compute differences
 				$originals = array();
 				$sql = "SELECT * FROM layouts_contents WHERE owner_type = $1 AND owner_id = $2 AND column_id = $3 ORDER BY rank";
@@ -1077,27 +1074,6 @@ class WidgetLayoutManager {
 
 				while($data = db_fetch_array($res)) {
 					$originals[] = array($data['content_id'], $data['name']);
-				}
-
-				//delete removed contents
-				$deleted_names = utils_array_diff_names($originals, $names, );
-				if (count($deleted_names)) {
-					$_and = '';
-					foreach($deleted_names as $id => $name) {
-						if ($_and) {
-							$_and .= ' OR ';
-						} else {
-							$_and .= ' AND (';
-						}
-						$_and .= " (name = '".$name[1]."' AND content_id = ". $name[0] .") ";
-					}
-					$_and .= ')';
-					$sql = "UPDATE layouts_contents
-						SET column_id = 0
-						WHERE owner_type = $1
-						AND owner_id = $2
-						AND column_id = $3". $_and;
-					db_query_params($sql, array($owner_type, $owner_id, $column_id));
 				}
 
 				//Insert new contents
@@ -1122,6 +1098,8 @@ class WidgetLayoutManager {
 					db_query_params($sql, array($column_id, $owner_type, $owner_id, $layout_id));
 				}
 
+				// we do not need to delete old contents since another request is sent to add the new content to the other column.
+
 				//Update ranks
 				$rank = 0;
 				$values = array();
@@ -1129,6 +1107,7 @@ class WidgetLayoutManager {
 					$sql = 'UPDATE layouts_contents SET rank = $1 WHERE owner_type =$2 AND owner_id = $3 AND column_id = $4 AND name = $5 AND content_id = $6';
 					db_query_params($sql, array($rank++, $owner_type, $owner_id, $column_id, $name[1], $name[0]));
 				}
+				db_commit();
 			}
 		}
 	}
