@@ -486,8 +486,6 @@ class LDAP extends UNIX {
 		$entry['userPassword']='{crypt}x';
 		$entry['gidNumber']=$this->getUnixGID();
 
-		$i=0; $i_cvs=0;
-
 		$ret_val=true;
 
 		if (!$this->gfLdapAdd($dn,$entry)) {

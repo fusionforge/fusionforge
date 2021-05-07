@@ -5,7 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010, FusionForge Team
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2018, Franck Villaume - TrivialDev
+ * Copyright 2018,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -131,7 +131,6 @@ function user_personal_information($user, $compact = false, $title = false) {
 	$subcells[][] = '<strong>'. relative_date($user->getAddDate()). '</strong>';
 	$subtable .= $HTML->multiTableRow(array(), $subcells);
 	if ($compact) {
-		$user_uri = util_make_url('/users/'. $user->getUnixName() . '/');
 		$subcells = array();
 		$subcells[][] = '<small>'. _('URI')._(':') .'</small>';
 		$subcells[][] = '<small>'.util_make_link_u($user->getUnixName(), $user->getID(), util_make_url_u($user->getUnixName(), $user->getID())).'</small>';

@@ -80,7 +80,7 @@ function is_utf8($str) {
  */
 function util_strip_unprintable(&$data) {
 	if (is_array($data)) {
-		foreach ($data as $key => &$value) {
+		foreach ($data as &$value) {
 			util_strip_unprintable($value);
 		}
 	} else {
@@ -421,7 +421,7 @@ function util_make_links($data = '') {
 
 	$lines = explode("\n", $data);
 	$newText = "";
-	foreach ($lines as $key => $line) {
+	foreach ($lines as $line) {
 		// Do not scan lines if they already have hyperlinks.
 		// Avoid problem with text written with an WYSIWYG HTML editor.
 		if (eregi('<a ([^>]*)>.*</a>', $line, $linePart)) {

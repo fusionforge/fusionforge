@@ -144,7 +144,6 @@ class Widget_MyArtifacts extends Widget {
 
 		$html_my_artifacts = '';
 		$html = '';
-		$html_hdr = '';
 
 		$aid_old  = 0;
 		$atid_old = 0;
@@ -152,9 +151,6 @@ class Widget_MyArtifacts extends Widget {
 		$count_aids = 0;
 		$group_name = '';
 		$tracker_name = '';
-
-		$artifact_types = array();
-		$allIds = array();
 
 		foreach ($list_trackers as $trackers_array) {
 			$atid = $trackers_array->getArtifactType()->getID();

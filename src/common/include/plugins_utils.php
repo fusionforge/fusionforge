@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright 2010 (c) Mélanie Le Bail
- * Copyright 2014,2015, 2019, Franck Villaume - TrivialDev
+ * Copyright 2014,2015,2019,2021, Franck Villaume - TrivialDev
  * Copyright 2015, Sieu Truc
  * http://fusionforge.org
  *
@@ -64,8 +64,7 @@ function htmlIframe($url, $poub = array()) {
 }
 
 function htmlIframeResizer($url, $poub = array(), $resizeOpt = array()) {
-	global $HTML, $group_id;
-	$project = group_get_object($group_id);
+	global $HTML;
 	if (isset($poub['id'])) {
 		$id = $poub['id'];
 	} else {

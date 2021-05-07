@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2019, Franck Villaume - TrivialDev
+ * Copyright 2019,2021, Franck Villaume - TrivialDev
  * This file is a part of Fusionforge.
  *
  * Fusionforge is free software; you can redistribute it and/or modify
@@ -46,7 +46,7 @@ class Widget_HomeSponsoredHeadLines extends Widget {
 		$old_date = time()-60*60*24*30;
 		$diaryFactory = new DiaryFactory();
 		if ($diaryFactory->hasSponsoredNotes($old_date)) {
-			foreach ($diaryFactory->getSponsoredIDS($old_date) as $key => $diarynoteid) {
+			foreach ($diaryFactory->getSponsoredIDS($old_date) as $diarynoteid) {
 				$diaryNoteObject = diarynote_get_object($diarynoteid);
 				$content .= $diaryNoteObject->getAbstract();
 			}

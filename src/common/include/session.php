@@ -7,7 +7,7 @@
  * Copyright 2004-2005, GForge, LLC
  * Copyright © 2013
  *	Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
- * Copyright 2013,2016, Franck Villaume - TrivialDev
+ * Copyright 2013,2016,2021, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -203,7 +203,7 @@ function session_login_valid($loginname, $passwd, $allowpending = 0) {
 	$plugin_session_login_valid = false;
 
 	// Refuse login if not all the plugins are ok.
-	foreach ($hook_params['results'] as $p => $r) {
+	foreach ($hook_params['results'] as $r) {
 		$plugin_session_login_valid = true;
 		if ($r == FORGE_AUTH_AUTHORITATIVE_ACCEPT) {
 			$seen_yes = true;
@@ -642,7 +642,7 @@ function session_set() {
 
 	$seen_yes = false;
 	$seen_no = false;
-	foreach ($params['results'] as $p => $r) {
+	foreach ($params['results'] as $r) {
 		if ($r == FORGE_AUTH_AUTHORITATIVE_ACCEPT) {
 			$seen_yes = true;
 		} elseif ($r == FORGE_AUTH_AUTHORITATIVE_REJECT) {
@@ -702,7 +702,7 @@ function session_set_for_authplugin($authpluginname) {
 	plugin_hook_by_reference('check_auth_session', $params);
 
 	$seen_yes = false;
-	foreach ($params['results'] as $p => $r) {
+	foreach ($params['results'] as $r) {
 		if ($r == FORGE_AUTH_AUTHORITATIVE_ACCEPT) {
 			$seen_yes = true;
 		}

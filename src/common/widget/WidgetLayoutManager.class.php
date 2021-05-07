@@ -501,7 +501,6 @@ class WidgetLayoutManager {
 	 */
 	function createLayoutForProjectFromArray($group_id, $layoutDescArr) {
 		if (isset($layoutDescArr['rows']) && is_array($layoutDescArr['rows'])) {
-			$project = group_get_object($group_id);
 			db_query_params('DELETE FROM layouts_contents WHERE owner_id = $1 AND owner_type = $2', array($group_id, self::OWNER_TYPE_GROUP));
 			db_query_params('DELETE FROM owner_layouts WHERE owner_id = $1 AND owner_type = $2', array($group_id, self::OWNER_TYPE_GROUP));
 			$sql = "INSERT INTO layouts(name, description, scope) VALUES ('custom', '', 'P')";
@@ -1061,7 +1060,7 @@ class WidgetLayoutManager {
 
 				$names = array();
 				$keyArray = getArrayFromRequest($key);
-				foreach($keyArray as $k => $name) {
+				foreach($keyArray as $name) {
 					list($name, $id) = explode('-', $name);
 					$names[] = array($id, $name);
 				}
@@ -1102,7 +1101,6 @@ class WidgetLayoutManager {
 
 				//Update ranks
 				$rank = 0;
-				$values = array();
 				foreach($names as $name) {
 					$sql = 'UPDATE layouts_contents SET rank = $1 WHERE owner_type =$2 AND owner_id = $3 AND column_id = $4 AND name = $5 AND content_id = $6';
 					db_query_params($sql, array($rank++, $owner_type, $owner_id, $column_id, $name[1], $name[0]));
