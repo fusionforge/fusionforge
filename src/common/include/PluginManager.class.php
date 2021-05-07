@@ -3,7 +3,7 @@
  * FusionForge plugin system
  *
  * Copyright 2002-2017, Roland Mas
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -87,7 +87,7 @@ class PluginManager extends FFError {
 	 */
 	function PluginIsInstalled($pluginname) {
 		$plugins_data = $this->getPlugins();
-		foreach ($plugins_data as $p_id => $p_name) {
+		foreach ($plugins_data as $p_name) {
 			if ($p_name == $pluginname) {
 				return true;
 			}
@@ -104,7 +104,7 @@ class PluginManager extends FFError {
 	function isPluginAvailable($plugin) {
 		$pluginname = $plugin->GetName();
 		$plugins_data = $this->getPlugins();
-		foreach ($plugins_data as $p_id => $p_name) {
+		foreach ($plugins_data as $p_name) {
 			if ($p_name == $pluginname) {
 				return true;
 			}
