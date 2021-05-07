@@ -4,7 +4,7 @@
  *
  * Copyright 2004, GForge, LLC
  * Copyright 2009-2010, Roland Mas
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2014,2021, Franck Villaume - TrivialDev
  * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
  * Copyright 2013, French Ministry of National Education
  * Copyright 2014, Inria (Sylvain Beucler)
@@ -473,9 +473,6 @@ abstract class BaseRole extends FFError {
 			$value = 0;
 		}
 
-		$min = PHP_INT_MAX;
-		$mask = 0;
-
 		switch ($section) {
 		case 'forge_admin':
 			return $value;
@@ -662,10 +659,7 @@ abstract class BaseRole extends FFError {
 	}
 
 	function hasPermission($section, $reference, $action = NULL) {
-		$result = false;
 		$value = $this->getSetting ($section, $reference);
-		$min = PHP_INT_MAX;
-		$mask = 0;
 
 		switch ($section) {
 		case 'forge_admin':
@@ -1129,7 +1123,7 @@ abstract class RoleExplicit extends BaseRole implements PFO_RoleExplicit {
 			$ids[] = $user->getID();
 		}
 
-		$res = db_query_params('DELETE FROM pfo_user_role WHERE user_id = ANY($1) AND role_id = $2',
+		db_query_params('DELETE FROM pfo_user_role WHERE user_id = ANY($1) AND role_id = $2',
 					array(db_int_array_to_any_clause($ids), $this->getID()));
 
 		foreach ($this->getLinkedProjects() as $p) {
@@ -1316,10 +1310,10 @@ class RoleComparator {
 		case 'id':
 			$aid = $a->getID();
 			$bid = $b->getID();
-			if ($a == $b) {
+			if ($aid == $bid) {
 				return 0;
 			}
-			return ($a < $b) ? -1 : 1;
+			return ($aid < $bid) ? -1 : 1;
 			break;
 		case 'composite':
 		default:
