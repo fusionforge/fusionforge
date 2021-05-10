@@ -82,16 +82,23 @@ EOS;
 		echo html_e('p', array(), util_make_link('/frs/?view=qrs&group_id='.$group_id, _('To create a new release click here.')));
 	}
 
+	$use_tabs = forge_get_config('frs_with_tabs');
+
 	// Iterate and show the packages
 	$current_groupid = $group_id;
+	$tabmenu = '';
+	$tabs = '';
 	foreach ($FRSPackages as $FRSPackage) {
+		$package_name = $FRSPackage->getName();
+		$package_name_protected = $HTML->toSlug($package_name);
+		$tabmenu .= $use_tabs ? html_e('li', array(), html_e('a', array('href' => '#tabber-'.$package_name_protected), html_entity_decode($package_name))) : '';
+		$content = '';
 
 		if ($FRSPackage->Group->getID() != $current_groupid) {
-			echo html_e('h2', array(), sprintf(_('Child Project %s Packages'), util_make_link('/frs/?group_id='.$FRSPackage->Group->getID(), $FRSPackage->Group->getPublicName())));
+			$content .= html_e('h2', array(), sprintf(_('Child Project %s Packages'), util_make_link('/frs/?group_id='.$FRSPackage->Group->getID(), $FRSPackage->Group->getPublicName())));
 			$current_groupid = $FRSPackage->Group->getID();
 		}
 		$package_id = $FRSPackage->getID();
-		$package_name = $FRSPackage->getName();
 		$url = '/frs/?group_id='.$FRSPackage->Group->getID().'&package_id='.$package_id.'&action=monitor';
 		if (session_loggedin()) {
 			if($FRSPackage->isMonitoring()) {
@@ -113,7 +120,6 @@ EOS;
 		$FRSPackageReleases = $FRSPackage->getReleases(false);
 		$num_releases = count($FRSPackageReleases);
 
-		$package_name_protected = $HTML->toSlug($package_name);
 		$package_ziplink = '';
 		if ($FRSPackageReleases && $num_releases >= 1 && class_exists('ZipArchive') && file_exists($FRSPackage->getReleaseZipPath($FRSPackage->getNewestReleaseID()))) {
 			// display link to latest-release-as-zip
@@ -121,10 +127,10 @@ EOS;
 																$HTML->getZipPic(_('Download the newest release as ZIP.')
 																.' '._('This link always points to the newest release as a ZIP file.'))));
 		}
-		echo html_e('h2', array('id' => 'title_'. $package_name_protected), html_entity_decode($package_name).$package_monitor.$package_ziplink);
+		$content .= html_e('h2', array('id' => 'title_'.$package_name_protected), html_entity_decode($package_name).$package_monitor.$package_ziplink);
 
 		if ( !$FRSPackageReleases || $num_releases < 1 ) {
-			echo $HTML->warning_msg(_('No releases'));
+			$content .= $HTML->warning_msg(_('No releases'));
 		} else {
 			// iterate and show the releases of the package
 			foreach ($FRSPackageReleases as $FRSPackageRelease) {
@@ -138,13 +144,13 @@ EOS;
 				if ( ! $release_id || $release_id == $package_release_id ) {
 					// no release_id OR release_id is current one
 					$release_title = util_make_link('/frs/?view=shownotes&group_id='.$group_id.'&release_id='.$package_release_id, $package_name.' '.$FRSPackageRelease->getName().' ('.date(_('Y-m-d H:i'), $FRSPackageRelease->getReleaseDate()).')');
-					echo $HTML->boxTop($release_title.$ziplink, $package_name.' '.$FRSPackageRelease->getName());
+					$content .= $HTML->boxTop($release_title.$ziplink, $package_name.' '.$FRSPackageRelease->getName());
 				} elseif ( $release_id != $package_release_id ) {
 					// release_id but not current one
 					$t_url_anchor = $HTML->toSlug($package_name).'-'.$HTML->toSlug($FRSPackageRelease->getName()).'-title-content';
 					$t_url = '/frs/?group_id='.$group_id.'&release_id='.$package_release_id.'#'.$t_url_anchor;
 					$release_title = util_make_link($t_url, $package_name.' '.$FRSPackageRelease->getName());
-					echo html_e('div', array('class' => 'frs_release_name_version'), $release_title.$ziplink);
+					$content .= html_e('div', array('class' => 'frs_release_name_version'), $release_title.$ziplink);
 				}
 
 				// display linked roadmaps if any
@@ -163,7 +169,7 @@ EOS;
 								$rnum++;
 							}
 						}
-						echo html_e('span', array(), html_e('b', array(), _('Linked Roadmaps')._(': ')).$urls, false);
+						$content .= html_e('span', array(), html_e('b', array(), _('Linked Roadmaps')._(': ')).$urls, false);
 					}
 				}
 
@@ -174,7 +180,7 @@ EOS;
 				if (!$release_id || $release_id == $package_release_id) {
 					// no release_id OR no release_id OR release_id is current one
 					if ( !$res_files || count($res_files) < 1 ) {
-						echo $HTML->information(_('No files'));
+						$content .= $HTML->information(_('No files'));
 					} else {
 						$cell_data = array();
 						$cell_data[] = _('File Name');
@@ -184,7 +190,7 @@ EOS;
 						$cell_data[] = _('Arch');
 						$cell_data[] = _('Type');
 						$cell_data[] = _('Latest');
-						echo $HTML->listTableTop($cell_data);
+						$content .= $HTML->listTableTop($cell_data);
 						// now iterate and show the files in this release....
 						foreach ($res_files as $res_file) {
 							$cells = array();
@@ -195,14 +201,16 @@ EOS;
 							$cells[][] = $res_file->getProcessor();
 							$cells[][] = $res_file->getFileType();
 							$cells[][] = util_make_link('/frs/download.php/latestfile/'.$FRSPackage->getID().'/'.urlencode($res_file->getName()), _('Latest version'));
-							echo $HTML->multiTableRow(array(), $cells);
+							$content .= $HTML->multiTableRow(array(), $cells);
 						}
-						echo $HTML->listTableBottom();
+						$content .= $HTML->listTableBottom();
 					}
-					echo $HTML->boxBottom();
+					$content .= $HTML->boxBottom();
 				}
 			} //for: release(s)
 		} //if: release(s) available
+		$tabs .= $use_tabs ? html_e('div', array('id' => 'tabber-'.$package_name_protected, 'class' => 'tabbertab'), $content) : $content;
 	}
+	echo $use_tabs ? html_e('div', array('id' => 'tabber'), html_e('ul', array(), $tabmenu).$tabs) : $tabs;
 	echo html_ac(html_ap() -1);
 }
