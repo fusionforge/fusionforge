@@ -37,6 +37,7 @@ if (!forge_check_perm('frs_admin', $group_id, 'admin')) {
 }
 
 $package_name = htmlspecialchars(trim(getStringFromRequest('package_name')));
+$notes = htmlspecialchars(trim(getStringFromRequest('notes')));
 
 if ($package_name) {
 	//create a new package
@@ -46,7 +47,7 @@ if ($package_name) {
 	} elseif ($frsp->isError()) {
 		exit_error($frsp->getErrorMessage(), 'frs');
 	}
-	if (!$frsp->create($package_name)) {
+	if (!$frsp->create($package_name, $notes)) {
 		$error_msg = $frsp->getErrorMessage();
 	} else {
 		$feedback .= _('Added Package');

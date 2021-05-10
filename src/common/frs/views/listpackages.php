@@ -128,6 +128,7 @@ EOS;
 																.' '._('This link always points to the newest release as a ZIP file.'))));
 		}
 		$content .= html_e('h2', array('id' => 'title_'.$package_name_protected), html_entity_decode($package_name).$package_monitor.$package_ziplink);
+		$content .= html_e('p', array(), $FRSPackage->getNotes());
 
 		if ( !$FRSPackageReleases || $num_releases < 1 ) {
 			$content .= $HTML->warning_msg(_('No releases'));

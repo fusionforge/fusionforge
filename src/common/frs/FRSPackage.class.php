@@ -147,7 +147,7 @@ class FRSPackage extends FFError {
 	 * @param	int	$status Status ID. Default is 1 => Active
 	 * @return	bool	success.
 	 */
-	function create($name, $status = 1) {
+	function create($name, $notes = '', $status = 1) {
 		if (strlen($name) < 3) {
 			$this->setError(_('FRSPackage Name Must Be At Least 3 Characters'));
 			return false;
@@ -169,9 +169,10 @@ class FRSPackage extends FFError {
 		}
 
 		db_begin();
-		$result = db_query_params('INSERT INTO frs_package(group_id, name, status_id) VALUES ($1, $2, $3)',
+		$result = db_query_params('INSERT INTO frs_package(group_id, name, notes, status_id) VALUES ($1, $2, $3, $4)',
 					array($this->Group->getID(),
 						htmlspecialchars($name),
+						htmlspecialchars($notes),
 						$status));
 		if (!$result) {
 			$this->setError(_('Error Adding Package')._(': ').db_error());
@@ -250,6 +251,15 @@ class FRSPackage extends FFError {
 	 */
 	function getName() {
 		return $this->data_array['name'];
+	}
+
+	/**
+	 * getNotes - get the notes for this package.
+	 *
+	 * @return	string	The notes for this package.
+	 */
+	function getNotes() {
+		return $this->data_array['notes'];
 	}
 
 	/**
@@ -397,10 +407,11 @@ class FRSPackage extends FFError {
 	 * update - update an FRSPackage in the database.
 	 *
 	 * @param	string	$name		The name of this package.
+	 * @param	string	$notes		The notes for this package.
 	 * @param	int	$status		The status_id of this package from frs_status table.
 	 * @return	bool success.
 	 */
-	function update($name, $status) {
+	function update($name, $notes, $status) {
 		if (strlen($name) < 3) {
 			$this->setError(_('FRSPackage Name Must Be At Least 3 Characters'));
 			return false;
@@ -420,8 +431,9 @@ class FRSPackage extends FFError {
 			}
 		}
 		db_begin();
-		$res = db_query_params('UPDATE frs_package SET name=$1, status_id=$2 WHERE group_id=$3 AND package_id=$4',
+		$res = db_query_params('UPDATE frs_package SET name=$1, notes=$2, status_id=$3 WHERE group_id=$4 AND package_id=$5',
 					array (htmlspecialchars($name),
+					       htmlspecialchars($notes),
 					       $status,
 					       $this->Group->getID(),
 					       $this->getID()));
