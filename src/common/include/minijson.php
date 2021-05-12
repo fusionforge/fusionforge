@@ -157,12 +157,14 @@ function minijson_encode_ob_string($x, $truncsz=0, $leader='"') {
 		if ($Sp + $Ss > $Sx) {
 			break;
 		}
-		while ($Ss--)
+		while ($Ss--) {
 			if (($c = ord(($ch = $x[$Sp++])) ^ 0x80) <= 0x3F) {
 				$wc |= $c << (6 * $Ss);
 				$u .= $ch;
-			} else
+			} else {
 				break 2;
+			}
+		}
 		/* complete wide character */
 		if ($wc < $wmin) {
 			break;
@@ -197,7 +199,8 @@ function minijson_encode_ob_string($x, $truncsz=0, $leader='"') {
 				echo "\\";
 			}
 			echo $ch;
-		} else switch ($c) {
+		} else {
+			switch ($c) {
 			case 0x08:
 				echo '\b';
 				break;
@@ -216,6 +219,7 @@ function minijson_encode_ob_string($x, $truncsz=0, $leader='"') {
 			default:
 				printf('\u%04X', $c);
 				break;
+			}
 		}
 	}
 	echo '"';
@@ -334,12 +338,13 @@ function minijson_encode_ob($x, $ri, $depth, $truncsz, $dumprsrc) {
 			$x = strval($x);
 			$rsrctype = 'resource('/*)*/ . $rs . ($rsrctype ?
 			    (/*(*/')<' . $rsrctype . '>') : /*(*/'?)');
-			if ($x === ('Resource id #' . $rs))
+			if ($x === ('Resource id #' . $rs)) {
 				$x = $rsrctype . ';';
-			elseif (strncmp($x, 'Resource ', 9) === 0)
+			} elseif (strncmp($x, 'Resource ', 9) === 0) {
 				$x = $rsrctype . substr($x, 8);
-			else
+			} else {
 				$x = $rsrctype . '{' . $x . '}';
+			}
 			minijson_encode_ob_string($x, $truncsz, '"\u0000');
 			return;
 		}

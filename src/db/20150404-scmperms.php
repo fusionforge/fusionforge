@@ -37,16 +37,18 @@ $res = db_query_params("SELECT name, group_id, gid, perm_val AS anon FROM nss_gr
 			ORDER BY name", array(1, 'scm', 20000));
 
 // Store everything in RAM to avoid a 3h-long SQL connection
-while ($row = db_fetch_array($res))
+while ($row = db_fetch_array($res)) {
     $groups[] = $row;
-
+}
 $svnroot = forge_get_config('repos_path', 'scmsvn');
 $gitroot = forge_get_config('repos_path', 'scmgit');
 foreach ($groups as $group) {
 	$gname = $group['name'];
 	$gid_ro = $group['group_id'] + $SYS->GID_ADD_SCMRO;
 	$gid_rw = $group['group_id'] + $SYS->GID_ADD_SCMRW;
-	if ($verbose) print "$gname\n";
+	if ($verbose) {
+		print "$gname\n";
+	}
 
 	$repo = "$svnroot/$gname";
 	if (is_dir($repo)) {

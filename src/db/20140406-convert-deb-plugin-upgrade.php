@@ -35,12 +35,15 @@ if (db_check_table_exists('plugin_scmgit_meta_data')) {
 	$res = db_query_params("SELECT value FROM plugin_scmgit_meta_data WHERE key=$1", array('db-version'));
 	$version = db_result($res, 0, 'value');
 	print "  Converting scmgit, db version $version\n";
-	if (is_less_than($version, '0.2'))
+	if (is_less_than($version, '0.2')) {
 		db_query_params("INSERT INTO database_changes VALUES ('scmgit:20121019-multiple-repos.sql')", array());
-	if (is_less_than($version, '0.2.1'))
+	}
+	if (is_less_than($version, '0.2.1')) {
 		db_query_params("INSERT INTO database_changes VALUES ('scmgit:20121123-use-shared-table.sql')", array());
-	if (is_less_than($version, '0.3'))
+	}
+	if (is_less_than($version, '0.3')) {
 		db_query_params("INSERT INTO database_changes VALUES ('scmgit:20121128-drop-old-tables.sql')", array());
+	}
 }
 
 // Convert scmhook
@@ -48,8 +51,9 @@ if (db_check_table_exists('plugin_scmhook_meta_data')) {
 	$res = db_query_params("SELECT value FROM plugin_scmhook_meta_data WHERE key=$1", array('db-version'));
 	$version = db_result($res, 0, 'value');
 	print "  Converting scmhook, db version $version\n";
-	if (is_less_than($version, '0.2'))
+	if (is_less_than($version, '0.2')) {
 		db_query_params("INSERT INTO database_changes VALUES ('scmhook:20130702-create_scmhook_git_committracker.sql')", array());
+	}
 }
 
 // Convert headermenu
@@ -57,8 +61,9 @@ if (db_check_table_exists('plugin_headermenu_meta_data')) {
 	print "  Converting headermenu, db version 0.1\n";
 	foreach(array('headermenu:20120930-addoutermenusupport.sql',
 		 'headermenu:20121231-reorderentry.sql',
-		 'headermenu:20130120-addprojectcolumn.sql') as $filename)
+		 'headermenu:20130120-addprojectcolumn.sql') as $filename) {
 		db_query_params("INSERT INTO database_changes VALUES ($1)", array($filename));
+	}
 }
 
 // Plugins 'block', 'cvstracker' and 'wiki' also have db upgrades, but

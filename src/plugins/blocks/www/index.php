@@ -239,9 +239,9 @@ if ($type == 'admin') {
 
 	foreach ($blocks as $b => $help) {
 
-		if (!$activate[$b])
+		if (!$activate[$b]) {
 			$activate[$b] = 0;
-
+		}
 		if ((!isset($status[$b]) && $activate[$b]) ||
 				(isset($status[$b]) && $activate[$b] !== $status[$b]))
 			// Must be updated.
