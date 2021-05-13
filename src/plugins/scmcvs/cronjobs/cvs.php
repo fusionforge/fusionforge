@@ -1,7 +1,7 @@
 #! /usr/bin/php
 <?php
 /**
- * GForge Cron Job
+ * FusionForge Cron Job
  *
  * The rest Copyright 2002-2005 (c) GForge Team
  * http://fusionforge.org/
@@ -58,17 +58,19 @@ function checkout_cvs_file($repos,$file) {
 	}
 	$actual_dir = getcwd();
 	$tempdirname = tempnam("/tmp","cvstracker");
-	if (!$tempdirname)
+	if (!$tempdirname) {
 		return false;
-	if (!unlink($tempdirname))
+	}
+	if (!unlink($tempdirname)) {
 		return false;
-
+	}
 	// Create the temporary directory and returns its name.
-	if (!mkdir($tempdirname))
+	if (!mkdir($tempdirname)) {
 		return false;
-
-	if (!chdir($tempdirname))
+	}
+	if (!chdir($tempdirname)) {
 		return false;
+	}
 	system("cvs -d ".$repos." co ".$file);
 
 	chdir($actual_dir);
@@ -135,7 +137,7 @@ function cvs_write_file($filePath, $content, $append=1) {
 }
 
 /**
- *add_sync_mail write to /CVSROOT/loginfo unix_name-commits@lists.gforge.company.com
+ *add_sync_mail write to /CVSROOT/loginfo unix_name-commits@lists.fusionforge.company.com
  *
  *@param $unix_group_name Name Group
  *@return void
@@ -173,8 +175,6 @@ function add_sync_mail($unix_group_name) {
 		}
 		commit_cvs_file($cvsdir_prefix."/".$unix_group_name,$loginfo_file);
 		release_cvs_file($loginfo_file);
-	} else {
-//		echo "Syncmail Found!\n";
 	}
 }
 
@@ -214,8 +214,6 @@ function add_cvstracker($unix_group_name) {
 		}
 		commit_cvs_file($cvsdir_prefix."/".$unix_group_name,$loginfo_file);
 		release_cvs_file($loginfo_file);
-	} else {
-//		echo "cvstracker Found!\n";
 	}
 
 	// now make sure that if cvs version is 1.12, "UseNewInfoFmtStrings=yes" line
@@ -271,13 +269,9 @@ function add_acl_check($unix_group_name) {
 				"\n#END adding cvs acl check\n";
 		}
 
-
-
 		cvs_write_file($commitinfofile, $aclcheck, 1);
 		commit_cvs_file($cvsdir_prefix."/".$unix_group_name,$commitinfofile);
 		release_cvs_file($commitinfofile);
-	} else {
-//		echo "cvstracker Found!\n";
 	}
 }
 
@@ -286,38 +280,34 @@ function update_cvs_repositories() {
 	global $err;
 
 	//
-        // Move CVS trees for deleted groups
-        //
-        $res8 = db_query_params ('SELECT unix_group_name FROM deleted_groups WHERE isdeleted = 0;',
+	// Move CVS trees for deleted groups
+	//
+	$res8 = db_query_params ('SELECT unix_group_name FROM deleted_groups WHERE isdeleted = 0;',
 			array());
-        $err .= db_error();
-        $rows    = db_numrows($res8);
-        for($k = 0; $k < $rows; $k++) {
-                $deleted_group_name = db_result($res8,$k,'unix_group_name');
+	$err .= db_error();
+	$rows = db_numrows($res8);
+	for($k = 0; $k < $rows; $k++) {
+		$deleted_group_name = db_result($res8,$k,'unix_group_name');
 
-                if(!is_dir($cvsdir_prefix."/.deleted"))
-                        system("mkdir ".$cvsdir_prefix."/.deleted");
+		if (!is_dir($cvsdir_prefix."/.deleted")) {
+			system("mkdir ".$cvsdir_prefix."/.deleted");
+		}
 
-                system("tar czfC $cvsdir_prefix/.deleted/$deleted_group_name.tar.gz $cvsdir_prefix $deleted_group_name");
-                system("chmod o-rwx $cvsdir_prefix/.deleted/$deleted_group_name.tar.gz");
-                system("rm -rf $cvsdir_prefix/$deleted_group_name");
+		system("tar czfC $cvsdir_prefix/.deleted/$deleted_group_name.tar.gz $cvsdir_prefix $deleted_group_name");
+		system("chmod o-rwx $cvsdir_prefix/.deleted/$deleted_group_name.tar.gz");
+		system("rm -rf $cvsdir_prefix/$deleted_group_name");
 
-                $res9 = db_query_params ('UPDATE deleted_groups set isdeleted = 1 WHERE unix_group_name = $1',
+		db_query_params ('UPDATE deleted_groups set isdeleted = 1 WHERE unix_group_name = $1',
 			array ($deleted_group_name));
-                $err .= db_error();
-        }
-
+		$err .= db_error();
+	}
 }
 
 
 
 /*
-
-
-	Loop through and create/update each repository for every project
-	that uses SCMCVS plugin
-
-
+ Loop through and create/update each repository for every project
+ that uses SCMCVS plugin
 */
 $err = "";
 

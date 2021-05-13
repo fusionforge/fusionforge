@@ -243,12 +243,12 @@ over it to the project's administrator.");
 		closedir($dh) ;
 		sort ($oldlist) ;
 
-                $newlist = array () ;
-                foreach ($groups as $project) {
-                        if ($this->browserDisplayable ($project)) {
-                                $newlist[] = $project->getUnixName() ;
-                        }
-                }
+		$newlist = array () ;
+		foreach ($groups as $project) {
+			if ($this->browserDisplayable ($project)) {
+				$newlist[] = $project->getUnixName() ;
+			}
+		}
 		sort ($newlist) ;
 
 		$dellist = array () ;
@@ -278,20 +278,19 @@ over it to the project's administrator.");
 	}
 
 	function gatherStats($params) {
-                $project = $this->checkParams($params);
-                if (!$project) {
-                        return false ;
-                }
+		$project = $this->checkParams($params);
+		if (!$project) {
+			return false ;
+		}
 
-                if ($params['mode'] == 'day') {
-                        db_begin();
+		if ($params['mode'] == 'day') {
+			db_begin();
 
-                        $year = $params ['year'] ;
-                        $month = $params ['month'] ;
-                        $day = $params ['day'] ;
-                        $month_string = sprintf( "%04d%02d", $year, $month );
-                        $start_time = gmmktime( 0, 0, 0, $month, $day, $year);
-                        $end_time = $start_time + 86400;
+			$year = $params ['year'] ;
+			$month = $params ['month'] ;
+			$day = $params ['day'] ;
+			$month_string = sprintf( "%04d%02d", $year, $month );
+			$start_time = gmmktime( 0, 0, 0, $month, $day, $year);
 
 			$date = sprintf ("%04d-%02d-%02d", $year, $month, $day);
 
@@ -320,27 +319,25 @@ over it to the project's administrator.");
 							$day,
 							$project->getID(),
 							$project->getUnixName()));
-                        if(!$res) {
-                                echo "Error while cleaning stats_cvs_group\n";
-                                db_rollback () ;
-                                return false ;
-                        }
+			if(!$res) {
+				echo "Error while cleaning stats_cvs_group\n";
+				db_rollback () ;
+				return false ;
+			}
 
 			$res = db_query_params('DELETE FROM stats_cvs_user WHERE month = $1 AND day = $2 AND group_id = $3 AND reponame = $4',
 						array ($month_string,
 							$day,
 							$project->getID(),
 							$project->getUnixName()));
-                        if(!$res) {
-                                echo "Error while cleaning stats_cvs_user\n" ;
-                                db_rollback () ;
-                                return false ;
-                        }
+			if(!$res) {
+				echo "Error while cleaning stats_cvs_user\n" ;
+				db_rollback () ;
+				return false ;
+			}
 
                         // Analyzing history stream
 			$sep = '------------------------------------------------------------' ;
-			$currev = '' ;
-			$curuser = '' ;
 			$curdate = '' ;
 			$state = '' ;
 			$curadds = 0 ;
@@ -419,17 +416,17 @@ over it to the project's administrator.");
 				}
 			}
 
-                        // building the user list
-                        $user_list = array_unique( array_merge( array_keys( $usr_adds ), array_keys( $usr_updates ), array_keys( $usr_commits ) ) );
+			// building the user list
+			$user_list = array_unique( array_merge( array_keys( $usr_adds ), array_keys( $usr_updates ), array_keys( $usr_commits ) ) );
 
-                        foreach ( $user_list as $user ) {
-                                // trying to get user id from user name
-                                $u = user_get_object_by_name ($user) ;
-                                if ($u) {
-                                        $user_id = $u->getID();
-                                } else {
-                                        continue;
-                                }
+			foreach ( $user_list as $user ) {
+				// trying to get user id from user name
+				$u = user_get_object_by_name ($user) ;
+				if ($u) {
+					$user_id = $u->getID();
+				} else {
+					continue;
+				}
 
 				$uc = $usr_commits[$user] ? $usr_commits[$user] : 0 ;
 				$uu = $usr_updates[$user] ? $usr_updates[$user] : 0 ;

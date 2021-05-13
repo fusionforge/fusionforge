@@ -71,7 +71,6 @@ function install_hooks($params) {
 	while ($row = db_fetch_array($res)) {
 		$group_id = $row['group_id'];
 		$group = group_get_object($group_id);
-		$scm_box = $row['scm_box'];
 		$returnvalue = true;
 		// call the right cronjob in the library
 		$scmtype = $row['scm_plugin'];
@@ -156,8 +155,3 @@ function install_hooks($params) {
 }
 
 cron_debug("INFO end of updateScmRepo main cronjob");
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:

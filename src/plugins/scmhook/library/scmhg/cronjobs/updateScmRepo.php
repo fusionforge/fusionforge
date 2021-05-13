@@ -40,7 +40,6 @@ class ScmHgUpdateScmRepo {
 		$group = group_get_object($group_id);
 		$scmhookPlugin = new scmhookPlugin;
 		$hooksAvailable = $scmhookPlugin->getAvailableHooks($group_id);
-		$unixname = $group->getUnixName();
 		if (is_dir($scmdir_root)) {
 			$hooksServePushPullBundle = array();
 			foreach ($hooksAvailable as $hook) {

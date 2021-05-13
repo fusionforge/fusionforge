@@ -434,7 +434,6 @@ Offer DAV or SSH access.");
 				$prevp = false;
 				$prevr = false;
 				$users = $project->getMembers();
-				$pname = $project->getUnixName();
 				foreach ($users as $user) {
 					if (forge_check_perm_for_user($user, 'scm', $project->getID(), 'write')) {
 						if ($prevp){
@@ -581,10 +580,7 @@ Offer DAV or SSH access.");
 			$year = $params['year'];
 			$month = $params['month'];
 			$day = $params['day'];
-			$month_string = sprintf("%04d%02d", $year, $month);
 			$start_time = gmmktime(0, 0, 0, $month, $day, $year);
-			$end_time = $start_time + 86400;
-
 			$repolist = $this->getRepositories($project);
 			foreach ($repolist as $repo_name) {
 				$this->gatherStatsRepo($project, $repo_name, $year, $month, $day);
@@ -910,7 +906,7 @@ Offer DAV or SSH access.");
 									count($existing_repos)), $project_name));
 			$titleArr = array(_('Repository name'), ('Initial repository description'), _('Delete'));
 			echo $HTML->listTableTop($titleArr);
-			foreach ($existing_repos as $key => $repo) {
+			foreach ($existing_repos as $repo) {
 				$cells = array();
 				$cells[][] = html_e('kbd', array(), $repo['repo_name']);
 				$cells[][] = $repo['description'];

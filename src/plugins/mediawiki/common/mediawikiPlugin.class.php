@@ -97,7 +97,6 @@ _('This plugin allows each project to embed Mediawiki under a tab.');
 				$params['TITLES'][] = $this->text;
 				$params['DIRS'][] = util_make_uri('/plugins/'.$this->name.'/wiki/'.$project->getUnixName().'/index.php');
 				if (session_loggedin()) {
-					$user = session_get_user();
 					$userperm = $project->getPermission();
 					if ($userperm->isAdmin()) {
 						$params['ADMIN'][] = util_make_uri('/plugins/'.$this->name.'/plugin_admin.php?group_id='.$project->getID());

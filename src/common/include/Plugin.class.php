@@ -167,10 +167,6 @@ class Plugin extends FFError {
 		return 'plugins/'.$this->name.'/themes/default';
 	}
 
-	function registerRoleValues(&$params, $values) {
-		$role =& $params['role'];
-	}
-
 	function install() {
 		$this->installCode();
 		$this->installConfig();

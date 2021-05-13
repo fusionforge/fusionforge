@@ -284,7 +284,6 @@ control over it to the project's administrator.");
 			return;
 		}
 		global $HTML;
-		$useautoheight = 0;
 		$project = $this->checkParams($params);
 		if (!$project) {
 			return;
@@ -688,10 +687,7 @@ control over it to the project's administrator.");
 			$year = $params['year'];
 			$month = $params['month'];
 			$day = $params['day'];
-			$month_string = sprintf("%04d%02d", $year, $month);
 			$start_time = gmmktime(0, 0, 0, $month, $day, $year);
-			$end_time = $start_time + 86400;
-
 			$repolist = $this->getRepositories($project);
 			foreach ($repolist as $repo_name) {
 				$this->gatherStatsRepo($project, $repo_name, $year, $month, $day);
@@ -1193,7 +1189,7 @@ control over it to the project's administrator.");
 									count($existing_repos)), $project_name));
 			$titleArr = array(_('Repository name'), ('Initial repository description'), _('Initial clone URL (if any)'), _('Delete'));
 			echo $HTML->listTableTop($titleArr);
-			foreach ($existing_repos as $key => $repo) {
+			foreach ($existing_repos as $repo) {
 				$cells = array();
 				$cells[][] = html_e('kbd', array(), $repo['repo_name']);
 				$cells[][] = $repo['description'];

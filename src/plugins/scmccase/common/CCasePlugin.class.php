@@ -128,8 +128,6 @@ class CCasePlugin extends SCMPlugin {
 	}
 
 	function scm_admin_update ($params) {
-		$group = group_get_object($params['group_id']);
-
 		if ($params['scmccase_ccase_server'] && $params['scmccase_ccase_server'] != "") {
 			$this->SetGroupServer ($params['group_id'], $params['scmccase_ccase_server']) ;
 		} else {

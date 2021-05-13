@@ -39,19 +39,19 @@ class Widget_MySurveys extends Widget {
 	function __construct() {
 		global $HTML;
 		parent::__construct('mysurveys');
-		$this->_survey_show = UserManager::instance()->getCurrentUser()->getPreference('my_surveys_show');
+		$user = session_get_user();
+		$this->_survey_show = $user->getPreference('my_surveys_show');
 		if($this->_survey_show === false) {
 			$this->_survey_show = 'AN';
-			UserManager::instance()->getCurrentUser()->setPreference('my_surveys_show', $this->_survey_show);
+			$user->setPreference('my_surveys_show', $this->_survey_show);
 		}
-		$user = session_get_user();
 		$projects = $user->getGroups();
 		sortProjectList($projects);
 		$tmp = array();
 		foreach ($projects as $p) {
 			if ($p->usesSurvey()) {
 				$sf = new SurveyFactory($p);
-				if (!empty($sf->getSurveysIds()) {
+				if (!empty($sf->getSurveysIds())) {
 					$tmp[] = $p;
 				}
 			}
@@ -164,7 +164,8 @@ class Widget_MySurveys extends Widget {
 					$this->_survey_show = 'AN';
 					break;
 			}
-			UserManager::instance()->getCurrentUser()->setPreference('my_surveys_show', $this->_survey_show);
+			$user = session_get_user();
+			$user->setPreference('my_surveys_show', $this->_survey_show);
 		}
 		return true;
 	}

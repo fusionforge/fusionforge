@@ -2553,7 +2553,7 @@ class Group extends FFError {
 		if (!$seen_admin_role) {
 			$role = new Role($this);
 			$adminperms = array('project_admin' => array ($this->getID() => 1));
-			$role_id = $role->create ('Admin', $adminperms, true);
+			$role->create ('Admin', $adminperms, true);
 		}
 
 		$roles = $this->getRoles();

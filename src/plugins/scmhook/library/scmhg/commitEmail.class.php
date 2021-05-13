@@ -195,7 +195,6 @@ class HgCommitEmail extends scmhook {
 		$unix_group = forge_get_config('apache_group');
 		$unix_user = forge_get_config('apache_user');
 
-		$project_name = $project->getUnixName();
 		$main_repo = $scmdir_root.'/.hg';
 		if (is_dir($main_repo)) {
 			$push = "";
@@ -203,13 +202,12 @@ class HgCommitEmail extends scmhook {
 			$prevp = false;
 			$prevr = false;
 			$users = $project->getMembers();
-			$pname = $project->getUnixName();
 			foreach ($users as $user) {
 				if (forge_check_perm_for_user($user, 'scm', $project->getID(), 'write')) {
-					if ($prevp){
+					if ($prevp) {
 						$push .= ", ";
 					}
-					if ($prevr){
+					if ($prevr) {
 						$read .= ", ";
 					}
 					$push .= $user->getUnixName();
@@ -217,7 +215,7 @@ class HgCommitEmail extends scmhook {
 					$prevp = true;
 					$prevr = true;
 				} elseif (forge_check_perm_for_user($user, 'scm', $project->getID(), 'read')) {
-					if ($prevr){
+					if ($prevr) {
 						$read .= ", ";
 					}
 					$read .= $user->getUnixName();

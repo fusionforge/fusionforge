@@ -187,26 +187,24 @@ function forge_get_config_array () {
 	return $ret ;
 }
 
-function forge_set_vars_from_config () {
-	$c = FusionForgeConfig::get_instance () ;
-
+function forge_set_vars_from_config() {
 	foreach (func_get_args() as $item) {
-		if (is_array ($item)) {
-			$var = $item[0] ;
-			$x = $var ;
+		if (is_array($item)) {
+			$var = $item[0];
+			$x = $var;
 			if (isset ($item[1])) {
-				$section = $item[1] ;
-				$x = $section.'__'.$var ;
-				$value = forge_get_config ($var, $section) ;
+				$section = $item[1];
+				$x = $section.'__'.$var;
+				$value = forge_get_config($var, $section);
 			}
 		} else {
-			$var = $item ;
-			$x = $item ;
-			$value = forge_get_config ($var) ;
+			$var = $item;
+			$x = $item;
+			$value = forge_get_config($var);
 		}
 
-		global $$x ;
-		$$x = $value ;
+		global $$x;
+		$$x = $value;
 	}
 }
 

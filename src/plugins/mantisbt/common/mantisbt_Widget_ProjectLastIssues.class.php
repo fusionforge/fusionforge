@@ -45,7 +45,6 @@ class mantisBT_Widget_ProjectLastIssues extends Widget {
 		$mantisbtConf = $mantisbt->getMantisBTConf($group_id);
 		$group = group_get_object($group_id);
 		if (session_loggedin()) {
-			$user = session_get_user();
 			$userperm = $group->getPermission();
 			if ($userperm->IsMember()) {
 				$mantisbtUserConf = $mantisbt->getUserConf($mantisbtConf['url']);

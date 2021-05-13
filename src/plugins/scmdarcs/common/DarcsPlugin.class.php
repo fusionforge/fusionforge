@@ -436,10 +436,8 @@ over it to the project's administrator.");
 
 		$updates = 0;
 		$adds = 0;
-		$deletes = 0;
 		$usr_adds = array();
 		$usr_updates = array();
-		$usr_deletes = array();
 
 		$toprepo = $this->getRootRepositories($group);
 		$repo = $toprepo . '/' . $project_reponame;

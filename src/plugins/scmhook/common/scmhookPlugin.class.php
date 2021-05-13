@@ -96,11 +96,11 @@ project independently.");
 		$repository_name = $params['repository_name'];
 		$scm_plugin = $params['scm_plugin'];
 
-                $group = group_get_object($group_id);
-                if (!$group->usesPlugin($this->name))
-                    return;
+		$group = group_get_object($group_id);
+		if (!$group->usesPlugin($this->name)) {
+			return;
+		}
 
-		$hooksString = '';
 		$hooks = $this->getAvailableHooks($group_id);
 		$available_hooknames = array();
 		foreach ($hooks as $hook) {
@@ -141,7 +141,7 @@ project independently.");
 				$sql_cols = array_keys($hook_params);
 				$sql_vals = array();
 				$sql_vars = array();
-				foreach($hook_params as $pname => $pconf) {
+				foreach($hook_params as $pconf) {
 					$vals = $params['hooks']['options'];
 					foreach ($vals as $val) {
 						// Validation
@@ -279,7 +279,7 @@ project independently.");
 	function artifact_extra_detail(&$params) {
 		$hooksAvailable = $this->getAvailableHooks($params['group_id']);
 		$hooksEnabled = $this->getEnabledHooks($params['group_id']);
-		foreach ($hooksEnabled as $key => $repos) {
+		foreach ($hooksEnabled as $repos) {
 			foreach ($repos as $repo) {
 				foreach ($hooksAvailable as $hookAvailable) {
 					if (in_array($hookAvailable->getClassname(), $repo)) {
@@ -295,7 +295,7 @@ project independently.");
 	function task_extra_detail($params) {
 		$hooksAvailable = $this->getAvailableHooks($params['group_id']);
 		$hooksEnabled = $this->getEnabledHooks($params['group_id']);
-		foreach ($hooksEnabled as $key => $repos) {
+		foreach ($hooksEnabled as $repos) {
 			foreach ($repos as $repo) {
 				foreach ($hooksAvailable as $hookAvailable) {
 					if (in_array($hookAvailable->getClassname(), $repo)) {
