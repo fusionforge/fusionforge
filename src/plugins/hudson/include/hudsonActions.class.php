@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
+ * Copyright 2021, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -61,7 +62,6 @@ class hudsonActions extends Actions {
 	function updateJob() {
 		global $feedback, $error_msg;
 		$request =& HTTPRequest::instance();
-		$group_id = $request->get('group_id');
 		$job_id = $request->get('job_id');
 		$new_job_url = $request->get('new_hudson_job_url');
 		$new_job_name = $request->get('new_hudson_job_name');
@@ -87,9 +87,7 @@ class hudsonActions extends Actions {
 
 	function deleteJob() {
 		global $feedback, $error_msg;
-		$request =& HTTPRequest::instance();
-		$group_id = $request->get('group_id');
-		$job_id = $request->get('job_id');
+		$job_id = getIntFromRequest('job_id');
 		$job_dao = new PluginHudsonJobDao(CodendiDataAccess::instance());
 		if ( ! $job_dao->deleteHudsonJob($job_id)) {
 			$error_msg .= _("Unable to delete Hudson job");

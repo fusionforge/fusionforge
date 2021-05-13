@@ -60,7 +60,6 @@ class Widget_MyLatestCommits extends Widget {
 	public function getContent() {
 		global $HTML;
 		$html = '';
-		$hp = Codendi_HTMLPurifier::instance();
 		$user = UserManager::instance()->getCurrentUser();
 		$projects = $user->getGroups();
 		$global_nb_revisions = 0;

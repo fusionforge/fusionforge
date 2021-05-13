@@ -93,7 +93,7 @@ class blocks_Widget_ProjectSummary extends Widget {
 
 			if ($content) {
 				$sql = "UPDATE plugin_blocks SET title=$1, content=$2 WHERE group_id =$3 AND id = $4";
-				$res = db_query_params($sql,array($title,$content,$this->group_id, getIntFromRequest('content_id')));
+				db_query_params($sql,array($title,$content,$this->group_id, getIntFromRequest('content_id')));
 				$done = true;
 			}
 		}
@@ -113,11 +113,11 @@ class blocks_Widget_ProjectSummary extends Widget {
 		$title = getStringFromRequest('title');
 		$content = getStringFromRequest('body');
 		$res = db_query_params('INSERT INTO plugin_blocks (group_id, name, status, title, content)
-			VALUES ($1, $2, 1, $3, $4)',
-			array($this->owner_id, 'summary_block?', $title, $content));
+					VALUES ($1, $2, 1, $3, $4)',
+					array($this->owner_id, 'summary_block?', $title, $content));
 		$content_id = db_insertid($res, 'plugin_blocks', 'id');
-		$res = db_query_params('UPDATE plugin_blocks SET name=$1 WHERE id=$2',
-			array('summary_block'.$content_id, $content_id));
+		db_query_params('UPDATE plugin_blocks SET name=$1 WHERE id=$2',
+				array('summary_block'.$content_id, $content_id));
 		return $content_id;
 	}
 

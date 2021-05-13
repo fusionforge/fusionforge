@@ -41,13 +41,8 @@ class HudsonTestResult {
 		}
 
 		$this->hudson_test_result_url = $hudson_job_url . "/lastBuild/testReport/api/xml/";
-
-		$controler = $this->getHudsonControler();
-
 		$this->_setStreamContext();
-
 		$this->buildJobObject();
-
 	}
 
 	function getHudsonControler() {

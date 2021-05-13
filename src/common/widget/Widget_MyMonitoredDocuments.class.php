@@ -90,7 +90,7 @@ class Widget_MyMonitoredDocuments extends Widget {
 									'class' => 'align-center');
 							$html .= $HTML->multiTableRow(array(), $cells);
 						}
-						foreach ($monitorElementDocIds as $key => $monitorElementDocId) {
+						foreach ($monitorElementDocIds as $monitorElementDocId) {
 							$documentObject = document_get_object($monitorElementDocId, $distinctMonitorGroupId);
 							$cells = array();
 							$cells[] = array('&nbsp;&nbsp;&nbsp;-&nbsp;(f)&nbsp;'.util_make_link('/docman/?group_id='.$distinctMonitorGroupId.'&view=listfile&dirid='.$documentObject->getDocGroupID(), stripslashes($documentObject->getFileName())), 'style' => 'width:99%');

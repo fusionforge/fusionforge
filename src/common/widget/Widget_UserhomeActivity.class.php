@@ -2,7 +2,7 @@
 /**
  * Userhome Activity Widget Class
  *
- * Copyright 2018, Franck Villaume - TrivialDev
+ * Copyright 2018,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is a part of Fusionforge.
@@ -43,7 +43,6 @@ class Widget_UserhomeActivity extends Widget {
 	function getContent() {
 		global $HTML;
 		$groupsArr = array();
-		$date_format = _('%Y-%m-%d');
 		$ids = array();
 		$texts = array();
 
@@ -108,11 +107,10 @@ class Widget_UserhomeActivity extends Widget {
 			echo $HTML->information(_('No Activity Found'));
 		} else {
 			$cached_perms = array();
-
+			$date_format = _('%Y-%m-%d');
 			usort($results, 'Activity::date_compare');
 
 			$displayTableTop = 0;
-			$j = 0;
 			$last_day = 0;
 			foreach ($results as $arr) {
 				if (!$ffactivity->check_perm_for_activity($arr, $cached_perms)) {

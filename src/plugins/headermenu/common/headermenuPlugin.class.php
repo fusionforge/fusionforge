@@ -450,7 +450,6 @@ in the main menu (outermenu) or in the project menu (groupmenu).");
 	 */
 	function getGlobalAdminView() {
 		global $gfplugins;
-		$user = session_get_user();
 		include $gfplugins.$this->name.'/view/admin/viewGlobalConfiguration.php';
 		return true;
 	}
@@ -462,7 +461,6 @@ in the main menu (outermenu) or in the project menu (groupmenu).");
 	 */
 	function getProjectAdminView() {
 		global $gfplugins;
-		$user = session_get_user();
 		include $gfplugins.$this->name.'/view/admin/viewProjectConfiguration.php';
 		return true;
 	}

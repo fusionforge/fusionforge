@@ -38,7 +38,6 @@ class hudsonViews extends Views {
 	}
 
 	function header() {
-
 		parent::header();
 	}
 
@@ -108,9 +107,7 @@ class hudsonViews extends Views {
 
 	function last_build() {
 		global $HTML;
-		$request =& HTTPRequest::instance();
-		$group_id = $request->get('group_id');
-		$job_id = $request->get('job_id');
+		$job_id = getIntFromRequest('job_id');
 
 		$job_dao = new PluginHudsonJobDao(CodendiDataAccess::instance());
 		$dar = $job_dao->searchByJobID($job_id);
@@ -164,11 +161,7 @@ class hudsonViews extends Views {
 
 	function last_test_result() {
 		global $HTML;
-		$request =& HTTPRequest::instance();
-		$group_id = $request->get('group_id');
-		$job_id = $request->get('job_id');
-		$user = UserManager::instance()->getCurrentUser();
-
+		$job_id = getIntFromRequest('job_id');
 		$job_dao = new PluginHudsonJobDao(CodendiDataAccess::instance());
 		$dar = $job_dao->searchByJobID($job_id);
 		if ($dar->valid()) {
@@ -182,10 +175,7 @@ class hudsonViews extends Views {
 	function test_trend() {
 		global $HTML;
 		$request =& HTTPRequest::instance();
-		$group_id = $request->get('group_id');
-		$job_id = $request->get('job_id');
-		$user = UserManager::instance()->getCurrentUser();
-
+		$job_id = getIntFromRequest('job_id');
 		$job_dao = new PluginHudsonJobDao(CodendiDataAccess::instance());
 		$dar = $job_dao->searchByJobID($job_id);
 		if ($dar->valid()) {

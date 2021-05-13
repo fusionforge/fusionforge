@@ -71,7 +71,7 @@ class Widget_ProjectLatestFileReleases extends Widget {
 			html_use_tablesorter();
 			$result .= $HTML->getJavascripts();
 			$result .= $HTML->listTableTop($titleArr, array(), 'sortable_widget_frs_listpackage full', 'sortable_frs', $classth);
-			foreach ($frsrnrs as $key => $frsrnr) {
+			foreach ($frsrnrs as $frsrnr) {
 				$rel_date = $frsrnr->getReleaseDate();
 				$package_name = $frsrnr->FRSPackage->getName();
 				$package_release = $frsrnr->getName();

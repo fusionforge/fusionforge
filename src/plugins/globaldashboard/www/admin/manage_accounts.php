@@ -79,7 +79,6 @@ function listStoredRemoteAccounts($user_id) {
 		$html = '';
 		$tablearr = array(_("User Name"), _("Remote site"), _("User account URL"), _("Actions"));
 		$html .= $HTML->listTableTop($tablearr);
-		$i = 0;
 		foreach ($accounts as $account) {
 			$cells = array();
 			$cells[][] = util_make_link($account['forge_account_uri'], $account['forge_account_login_name'], array(), true);

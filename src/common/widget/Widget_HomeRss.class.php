@@ -30,7 +30,6 @@ require_once 'Widget.class.php';
 */
 class Widget_HomeRss extends Widget_Rss {
 	function __construct() {
-		$request =& HTTPRequest::instance();
 		parent::__construct('homerss', 0, WidgetLayoutManager::OWNER_TYPE_HOME);
 	}
 

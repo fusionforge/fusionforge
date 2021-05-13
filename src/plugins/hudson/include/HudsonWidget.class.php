@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
+ * Copyright 2021, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -31,7 +32,7 @@ abstract class HudsonWidget extends Widget {
 	protected function getAvailableJobs() {
 		$jobs = array();
 		if ($this->owner_type == WidgetLayoutManager::OWNER_TYPE_USER) {
-			$jobs = $this->getJobsByUser($user = UserManager::instance()->getCurrentUser()->getId());
+			$jobs = $this->getJobsByUser(user_getid());
 		} else {
 			$jobs = $this->getJobsByGroup($this->group_id);
 		}

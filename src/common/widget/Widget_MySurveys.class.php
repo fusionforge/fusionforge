@@ -51,9 +51,8 @@ class Widget_MySurveys extends Widget {
 		foreach ($projects as $p) {
 			if ($p->usesSurvey()) {
 				$sf = new SurveyFactory($p);
-				foreach ($sf->getSurveys() as $s) {
+				if (!empty($sf->getSurveysIds()) {
 					$tmp[] = $p;
-					break;
 				}
 			}
 		}
@@ -64,7 +63,6 @@ class Widget_MySurveys extends Widget {
 			$html_my_surveys .= $HTML->warning_msg(_('There are no surveys in your projects.'));
 		} else {
 			global $HTML;
-			$request =& HTTPRequest::instance();
 			$html_my_surveys .= $HTML->listTableTop();
 			foreach ($projects as $project) {
 				$group_id = $project->getID();

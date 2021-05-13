@@ -859,14 +859,14 @@ class ContribTrackerParticipation extends FFError {
 		$contrib_id = $this->getContribution()->getId();
 
 		db_begin();
-		$res = db_query_params ('UPDATE plugin_contribtracker_participation SET index = 0 WHERE participation_id = $1',
-					array ($id));
-		$res = db_query_params ('UPDATE plugin_contribtracker_participation SET index = index+1 WHERE contrib_id = $1 AND index = $2',
-					array ($contrib_id,
-					       $cur-1));
-		$res = db_query_params ('UPDATE plugin_contribtracker_participation SET index = $1 WHERE contrib_id = $2 AND index = 0',
-					array ($cur - 1,
-					       $contrib_id));
+		db_query_params ('UPDATE plugin_contribtracker_participation SET index = 0 WHERE participation_id = $1',
+				array ($id));
+		db_query_params ('UPDATE plugin_contribtracker_participation SET index = index+1 WHERE contrib_id = $1 AND index = $2',
+				array ($contrib_id,
+				       $cur-1));
+		db_query_params ('UPDATE plugin_contribtracker_participation SET index = $1 WHERE contrib_id = $2 AND index = 0',
+				array ($cur - 1,
+				       $contrib_id));
 		db_commit();
 	}
 
@@ -886,14 +886,14 @@ class ContribTrackerParticipation extends FFError {
 		$contrib_id = $this->getContribution()->getId();
 
 		db_begin();
-		$res = db_query_params ('UPDATE plugin_contribtracker_participation SET index = 0 WHERE participation_id = $1',
-					array ($id));
-		$res = db_query_params ('UPDATE plugin_contribtracker_participation SET index = index-1 WHERE contrib_id = $1 AND index = $2',
-					array ($contrib_id,
-					       $cur+1));
-		$res = db_query_params ('UPDATE plugin_contribtracker_participation SET index = $1 WHERE contrib_id = $2 AND index = 0',
-					array ($cur + 1,
-					       $contrib_id));
+		db_query_params ('UPDATE plugin_contribtracker_participation SET index = 0 WHERE participation_id = $1',
+				array ($id));
+		db_query_params ('UPDATE plugin_contribtracker_participation SET index = index-1 WHERE contrib_id = $1 AND index = $2',
+				array ($contrib_id,
+				       $cur+1));
+		db_query_params ('UPDATE plugin_contribtracker_participation SET index = $1 WHERE contrib_id = $2 AND index = 0',
+				array ($cur + 1,
+				       $contrib_id));
 		db_commit();
 	}
 

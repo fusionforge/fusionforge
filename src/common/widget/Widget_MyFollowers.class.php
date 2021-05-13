@@ -120,7 +120,6 @@ require_once $gfcommon.'include/MonitorElement.class.php';
 					usort($results, 'Activity::date_compare');
 
 					$displayTableTop = 0;
-					$j = 0;
 					$last_day = 0;
 					foreach ($results as $arr) {
 						if (!$ffactivity->check_perm_for_activity($arr, $cached_perms)) {

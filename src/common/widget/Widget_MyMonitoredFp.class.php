@@ -80,7 +80,7 @@ class Widget_MyMonitoredFp extends Widget {
 						$html_hdr = $HTML->multiTableRow(array('class' => 'boxitem'), $cells);
 						$html = '';
 						if (!$hide_now) {
-							foreach ($validMonitoredPackageIds as $key => $validMonitoredPackageId) {
+							foreach ($validMonitoredPackageIds as $validMonitoredPackageId) {
 								$frsPackageObject = frspackage_get_object($validMonitoredPackageId);
 								$cells = array();
 								$url = '/frs/?group_id='.$validDistinctMonitorGroupId.'&package_id='.$validMonitoredPackageId.'&action=monitor&status=0&ajax=0';

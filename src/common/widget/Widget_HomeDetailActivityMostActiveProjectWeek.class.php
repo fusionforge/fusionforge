@@ -61,13 +61,11 @@ class Widget_HomeDetailActivityMostActiveProjectWeek extends Widget {
 		}
 		if (count($activities) > 0) {
 			$date_format = _('%Y-%m-%d');
-			$date_format_js = _('yy-mm-dd');
 			usort($activities, 'Activity::date_compare');
 			$displayTableTop = 0;
 			$last_day = 0;
 			$displayed_activities = false;
 			foreach ($activities as $activity) {
-				$docmanerror = 0;
 				if (!$ffactivity->check_perm_for_activity($activity, $this->cached_perms)) {
 					continue;
 				}

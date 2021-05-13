@@ -116,8 +116,7 @@ class Widget_TrackerContent extends Widget {
 				.html_e('div', array('class' => 'layout-manager-row-add'), '+');
 
 		if (count($this->layoutExtraFieldIDs) > 0) {
-			foreach ($this->layoutExtraFieldIDs as $row_id => $column_id) {
-				$cells = array();
+			foreach ($this->layoutExtraFieldIDs as $column_id) {
 				$content .= '<table class="layout-manager-row" id="widget_layout_build">
 							<tr>
 							<td class="layout-manager-column-add">+</td>';
@@ -376,7 +375,7 @@ EOS;
 			if (!forge_check_perm('tracker', $atid, 'submit') || ($func == 'detail' && !session_loggedin())) {
 				$readonly = true;
 			}
-			foreach ($this->layoutExtraFieldIDs as $row_id => $column_id) {
+			foreach ($this->layoutExtraFieldIDs as $column_id) {
 				$return .= $HTML->listTableTop();
 				$cells = array();
 				foreach ($column_id as $extrafieldID) {

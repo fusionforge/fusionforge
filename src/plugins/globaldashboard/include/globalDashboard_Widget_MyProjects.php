@@ -80,7 +80,6 @@ class globalDashboard_Widget_MyProjects extends Widget {
 					$favicon_url = $account['forge_account_domain'] . '/favicon.ico';
 				}
 
-				$i = 0;
 				foreach ($remote_account_projs as $remote_proj) {
 					$project_url = $account['forge_account_domain'] . '/projects/'. $remote_proj['unix_group_name'];
 					$cells = array();

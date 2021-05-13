@@ -101,7 +101,7 @@ abstract class HudsonJobWidget extends HudsonWidget {
 		if (!existInRequest('cancel')) {
 			$job_id = getIntFromRequest($this->id);
 			$sql = "UPDATE plugin_hudson_widget SET job_id=$1 WHERE owner_id = $2 AND owner_type = $3 AND id = $4";
-			$res = db_query_params($sql, array($job_id, $this->owner_id, $this->owner_type, getIntFromRequest('content_id')));
+			db_query_params($sql, array($job_id, $this->owner_id, $this->owner_type, getIntFromRequest('content_id')));
 		}
 		return true;
 	}

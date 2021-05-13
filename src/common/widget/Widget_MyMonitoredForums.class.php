@@ -85,7 +85,7 @@ class Widget_MyMonitoredForums extends Widget {
 						$html_hdr = $HTML->multiTableRow(array('class' => 'boxitem'), $cells);
 						$html = '';
 						if (!$hide_now) {
-							foreach ($validMonitoredForumIds as $key => $validMonitoredForumId) {
+							foreach ($validMonitoredForumIds as $validMonitoredForumId) {
 								$forumObject = forum_get_object($validMonitoredForumId);
 								$cells = array();
 								$cells[] = array('&nbsp;&nbsp;&nbsp;-&nbsp;'.util_make_link('/forum/forum.php?forum_id='.$validMonitoredForumId, $forumObject->getName()), 'style' => 'width:99%');
