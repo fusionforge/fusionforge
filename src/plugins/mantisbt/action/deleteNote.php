@@ -28,9 +28,9 @@ global $password;
 global $group_id;
 
 try {
-	if (!isset($clientSOAP))
+	if (!isset($clientSOAP)) {
 		$clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
-
+	}
 	$clientSOAP->__soapCall('mc_issue_note_delete', array("username" => $username, "password" => $password, "issue_note_id" => $idNote));
 } catch (SoapFault $soapFault) {
 	$error_msg = _('Task failed')._(': ').$soapFault->faultstring;

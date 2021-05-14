@@ -32,9 +32,9 @@ global $HTML;
 
 try {
 	/* do not recreate $clientSOAP object if already created by other pages */
-	if (!isset($clientSOAP))
+	if (!isset($clientSOAP)) {
 		$clientSOAP = new SoapClient($mantisbtConf['url'].'/api/soap/mantisconnect.php?wsdl', array('trace' => true, 'exceptions' => true));
-
+	}
 	$listCategories = $clientSOAP->__soapCall('mc_project_get_categories', array('username' => $username, 'password' => $password, 'project_id' => $mantisbtConf['id_mantisbt']));
 	$listSeverities = $clientSOAP->__soapCall('mc_enum_severities', array('username' => $username, 'password' => $password));
 	$listReproducibilities = $clientSOAP->__soapCall('mc_enum_reproducibilities', array('username' => $username, 'password' => $password));

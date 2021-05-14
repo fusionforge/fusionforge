@@ -137,7 +137,9 @@ $quotas_disk = array();
 
 // disk_total_space
 $_quota_block_size = intval(trim(shell_exec('echo $BLOCK_SIZE'))) + 0;
-if ($_quota_block_size == 0) $_quota_block_size = 1024;
+if ($_quota_block_size == 0) {
+	$_quota_block_size = 1024;
+}
 $quota_soft = "";
 $quota_hard = "";
 $res_db = db_query_params('SELECT * FROM plugin_quotamanagement WHERE group_id = $1',

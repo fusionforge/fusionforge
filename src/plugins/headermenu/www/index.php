@@ -30,7 +30,6 @@ if (!$type) {
 	exit_missing_param($_SERVER['HTTP_REFERER'], array('No TYPE specified'), 'headermenu');
 }
 
-global $use_tooltips;
 $headermenu = plugin_get_object('headermenu');
 
 switch ($type) {

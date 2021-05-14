@@ -38,9 +38,9 @@ if (!empty($version)) {
 	$versionStruct['description'] = getStringFromRequest('description');
 	$versionStruct['date_order'] = '';
 	try {
-		if (!isset($clientSOAP))
+		if (!isset($clientSOAP)) {
 			$clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
-
+		}
 		$clientSOAP->__soapCall('mc_project_version_add', array("username" => $username, "password" => $password, "version" => $versionStruct));
 		// currently transverse is not implemented... need to rely on projects-hierarchy plugin.
 // 		if (isset($_POST['transverse'])) {

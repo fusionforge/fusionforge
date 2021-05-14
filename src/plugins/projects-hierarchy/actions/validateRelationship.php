@@ -29,7 +29,7 @@ $validation_id = getIntFromRequest('validation_id');
 $status = getStringFromRequest('validation_status');
 $relation = getStringFromRequest('relation');
 
-if ($projectsHierarchy->validateRelationship($id, $validation_id, $relation, $status))
+if ($projectsHierarchy->validateRelationship($id, $validation_id, $relation, $status)) {
 	$projectsHierarchy->redirect($_SERVER['HTTP_REFERER'], 'feedback', _('Task done.'));
-
+}
 $projectsHierarchy->redirect($_SERVER['HTTP_REFERER'], 'error_msg', _('Failed to do task.'));

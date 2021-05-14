@@ -275,7 +275,6 @@ Offer DAV or SSH access.");
 		if ($params['scm_plugin'] != $this->name) {
 			return;
 		}
-		global $HTML;
 		$project = $this->checkParams($params);
 		if (!$project) {
 			return false;
@@ -423,9 +422,9 @@ Offer DAV or SSH access.");
 		$unix_group = forge_get_config('apache_group');
 		$unix_user = forge_get_config('apache_user');
 		foreach ($groups as $project) {
-			if (!$project->isActive()) continue;
-			if (!$project->usesSCM()) continue;
-
+			if ($project->isError() || !$project->isActive() || !$project->usesSCM()) {
+				continue;
+			}
 			$repolist = $this->getRepositories($project);
 			foreach ($repolist as $repo_name) {
 				$push = "";
@@ -638,7 +637,9 @@ Offer DAV or SSH access.");
 			while (!feof($pipe) && $line = fgets ($pipe)) {
 				//determine between author line and file informations
 				if (preg_match("/(\A[AMD]) .*/", $line, $matches)) {
-					if ($last_user == "") continue;
+					if ($last_user == "") {
+						continue;
+					}
 					switch ($matches[1]) {
 						case 'A':
 							$usr_adds[$last_user]++;
@@ -959,8 +960,3 @@ Offer DAV or SSH access.");
 		return $repoarr;
 	}
 }
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:

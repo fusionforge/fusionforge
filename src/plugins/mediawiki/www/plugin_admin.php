@@ -34,35 +34,39 @@ global $HTML;
 function logo_create($file_location, $project_mw_images_dir) {
 	$logofile = $project_mw_images_dir . "/.wgLogo.png";
 
-	if (!is_file($file_location) || !file_exists($file_location))
+	if (!is_file($file_location) || !file_exists($file_location)) {
 		return _("Invalid file upload");
-
+	}
 	$img = getimagesize($file_location);
-	if (!$img || ($img[2] != IMAGETYPE_PNG))
+	if (!$img || ($img[2] != IMAGETYPE_PNG)) {
 		return _("Not a valid PNG image");
-	if ($img[0] != 135 || $img[1] != 135)
-		return sprintf(_("Image size is %dx%d pixels, expected %dx%d instead"),
-		    $img[0], $img[1], 135, 135);
+	}
+	if ($img[0] != 135 || $img[1] != 135) {
+		return sprintf(_("Image size is %dx%d pixels, expected %dx%d instead"), $img[0], $img[1], 135, 135);
+	}
 
-	if (!is_writable($project_mw_images_dir))
-	  return sprintf( _("Cannot copy file to target directory %s"), $project_mw_images_dir) ;
+	if (!is_writable($project_mw_images_dir)) {
+		return sprintf( _("Cannot copy file to target directory %s"), $project_mw_images_dir);
+	}
 
-	if (file_exists($logofile) && !is_writable($logofile))
+	if (file_exists($logofile) && !is_writable($logofile)) {
 		return _("Cannot overwrite existing file");
+	}
 
 	$cmd = "/bin/mv " . escapeshellcmd($file_location) .
 	    " " . escapeshellcmd($logofile);
 	exec($cmd,$out);
-	if (!file_exists($logofile))
+	if (!file_exists($logofile)) {
 		return _("Cannot move file to target location");
+	}
 
 	return _("New file installed successfully");
 }
 
 $user = session_get_user();
-if (!$user || !is_object($user) || $user->isError() || !$user->isActive())
+if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
 	exit_error("Invalid User", "Cannot process your request for this user.");
-
+}
 $gid = getIntFromRequest("group_id", -1);
 if ($gid == -1) {
 	$group = false;
@@ -77,17 +81,16 @@ if (!$group->usesPlugin("mediawiki")) {
 }
 
 $userperm = $group->getPermission();
-if (!$userperm->IsMember())
+if (!$userperm->IsMember()) {
 	exit_permission_denied();
-if (!$userperm->IsAdmin())
+} elseif (!$userperm->IsAdmin()) {
 	exit_error("Access Denied", "You are not an admin of this project");
+}
 
 $group_unix_name = $group->getUnixName();
-$wgUploadDirectory = forge_get_config('projects_path', 'mediawiki') . "/" .
-    $group_unix_name . "/images";
+$wgUploadDirectory = forge_get_config('projects_path', 'mediawiki') . "/".$group_unix_name . "/images";
 $group_logo = $wgUploadDirectory . "/.wgLogo.png";
-$group_logo_url = util_make_url("/plugins/mediawiki/wiki/" .
-    $group_unix_name . "/images/.wgLogo.png");
+$group_logo_url = util_make_url("/plugins/mediawiki/wiki/" . $group_unix_name . "/images/.wgLogo.png");
 
 $incoming = False;
 if (forge_get_config('use_manual_uploads')) {

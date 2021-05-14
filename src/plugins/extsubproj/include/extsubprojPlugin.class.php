@@ -166,7 +166,7 @@ control over it to the project's administrator.");
 	* @access	public
 	*/
 	function getGlobalAdminView() {
-		global $gfplugins, $use_tooltips;
+		global $gfplugins;
 		include $gfplugins.$this->name.'/view/admin/viewGlobalConfiguration.php';
 		return true;
 	}
@@ -176,7 +176,7 @@ control over it to the project's administrator.");
 	 * @return boolean
 	 */
 	function getProjectAdminView() {
-		global $gfplugins, $use_tooltips;
+		global $gfplugins;
 		include $gfplugins.$this->name.'/view/admin/viewProjectConfiguration.php';
 		return true;
 	}

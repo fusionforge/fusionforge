@@ -30,9 +30,9 @@ global $group_id;
 global $idBug;
 
 try {
-	if (!isset($clientSOAP))
+	if (!isset($clientSOAP)) {
 		$clientSOAP = new SoapClient($mantisbtConf['url'].'/api/soap/mantisconnect.php?wsdl', array('trace' => true, 'exceptions' => true));
-
+	}
 	$clientSOAP->__soapCall('mc_issue_attachment_add', array('username' => $username, 'password' => $password, 'issue_id' => $idBug, 'name' => $_FILES['attachment']['name'], 'file_type' => $_FILES['attachment']['type'], 'content' => file_get_contents($_FILES['attachment']['tmp_name'])));
 	$feedback = _('Task succeeded.');
 } catch (SoapFault $soapFault) {

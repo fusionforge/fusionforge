@@ -51,36 +51,44 @@ if (!preg_match(',^/anonscm/,', $_SERVER['REQUEST_URI'])) {
 $unix_group_name = $_GET['unix_group_name'];
 $repo_name = $_GET['repo_name'];
 $mode = $_GET['mode'];
-if (!preg_match('/^(date_range|latest|latest_user)$/', $mode))
+if (!preg_match('/^(date_range|latest|latest_user)$/', $mode)) {
 	die('Invalid mode');
-if (!preg_match('/^[a-z0-9][-a-z0-9_\.]+\z/', $unix_group_name))
+}
+if (!preg_match('/^[a-z0-9][-a-z0-9_\.]+\z/', $unix_group_name)) {
 	die('Invalid group name');
-if (!preg_match('/^[a-z0-9][-a-z0-9_\.]+\z/', $repo_name))
+}
+if (!preg_match('/^[a-z0-9][-a-z0-9_\.]+\z/', $repo_name)) {
 	die('Invalid repository name');
+}
 
 if ($mode == 'date_range') {
 	$start_time = $_GET['begin'];
 	$end_time = $_GET['end'];
-	if (!ctype_digit($start_time))
+	if (!ctype_digit($start_time)) {
 		die('Invalid start time');
-	if (!ctype_digit($end_time))
+	}
+	if (!ctype_digit($end_time)) {
 		die('Invalid end time');
+	}
 	$options = "--since=@$start_time --until=@$end_time";
 } elseif ($mode == 'latest' or $mode == 'latest_user') {
 	$limit = $_GET['limit'];
-	if (!ctype_digit($limit))
+	if (!ctype_digit($limit)) {
 		die('Invalid limit');
+	}
 	$options = "--max-count=$limit";
 
 	if ($mode == 'latest_user') {
 		$email = $_GET['email'];
 		$realname = $_GET['realname'];
 		$user_name = $_GET['user_name'];
-		if (!validate_email($email))
+		if (!validate_email($email)) {
 			die('Invalid email');
+		}
 		$realname = escapeshellarg(preg_quote($realname));
-		if (!preg_match('/^[a-z0-9][-a-z0-9_\.]+\z/', $user_name))
+		if (!preg_match('/^[a-z0-9][-a-z0-9_\.]+\z/', $user_name)) {
 			die('Invalid user name');
+		}
 		$options .= " --author='$email' --author=$realname  --author='$user_name'";
 	}
 }

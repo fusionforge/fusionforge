@@ -34,9 +34,9 @@ $deleteVersion = getIntFromRequest('deleteVersion');
 
 if (!empty($deleteVersion)) {
 	try {
-		if(!isset($clientSOAP))
+		if(!isset($clientSOAP)) {
 			$clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
-
+		}
 		$clientSOAP->__soapCall('mc_project_version_delete', array("username" => $username, "password" => $password, "version_id" => $deleteVersion));
 	} catch (SoapFault $soapFault) {
 		$error_msg = _('Task failed')._(': ').$soapFault->faultstring;

@@ -26,7 +26,6 @@ forge_define_config_item ('repos_path', 'scmarch', forge_get_config('chroot').'/
 
 class ArchPlugin extends SCMPlugin {
 	function __construct() {
-		global $gfconfig;
 		parent::__construct();
 		$this->name = 'scmarch';
 		$this->text = _('Arch');
@@ -55,10 +54,6 @@ some control over it to the project's administrator.");
 		$project = $this->checkParams ($params) ;
 		if (!$project) {
 			return false ;
-		}
-
-		if (! $project->usesPlugin ($this->name)) {
-			return false;
 		}
 
 		$repo = forge_get_config('repos_path', 'scmarch') . '/' . $project->getUnixName() ;
@@ -96,8 +91,12 @@ some control over it to the project's administrator.");
 		$tarball = forge_get_config('scm_tarballs_path').'/'.$group_name.'-scmroot.tar'.util_get_compressed_file_extension();
 
 		if (! $project->enableAnonSCM()) {
-			if (file_exists ($snapshot)) unlink ($snapshot) ;
-			if (file_exists ($tarball)) unlink ($tarball) ;
+			if (file_exists ($snapshot)) {
+				unlink ($snapshot) ;
+			}
+			if (file_exists ($tarball)) {
+				unlink ($tarball) ;
+			}
 			return false;
 		}
 
@@ -105,8 +104,12 @@ some control over it to the project's administrator.");
 		$repo = $toprepo . '/' . $project->getUnixName() ;
 
 		if (!is_dir ($repo) || !is_file ("$repo/format")) {
-			if (file_exists ($snapshot)) unlink ($snapshot) ;
-			if (file_exists ($tarball)) unlink ($tarball) ;
+			if (file_exists ($snapshot)) {
+				unlink ($snapshot) ;
+			}
+			if (file_exists ($tarball)) {
+				unlink ($tarball) ;
+			}
 			return false ;
 		}
 
@@ -139,8 +142,3 @@ some control over it to the project's administrator.");
 		}
 	}
 }
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:

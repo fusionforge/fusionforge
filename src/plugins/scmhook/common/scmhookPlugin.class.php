@@ -72,21 +72,21 @@ project independently.");
 
 	function exists($group_id) {
 		$res = db_query_params('SELECT id_group FROM plugin_scmhook WHERE id_group = $1', array($group_id));
-		if (!$res)
+		if (!$res) {
 			return false;
-
-		if (db_numrows($res))
+		}
+		if (db_numrows($res)) {
 			return true;
-
+		}
 		return false;
 	}
 
 	function remove($group_id) {
 		if ($this->exists($group_id)) {
 			$res = db_query_params('DELETE FROM plugin_scmhook where id_group = $1', array($group_id));
-			if (!$res)
+			if (!$res) {
 				return false;
-
+			}
 		}
 		return true;
 	}
@@ -132,10 +132,12 @@ project independently.");
 			$table = 'plugin_scmhook_'.$hook->getLabel().'_'.strtolower($hook->getClassname());
 			if (db_check_table_exists($table)) {
 				$hook_params = $hook->getParams();
-				if (count($hook_params) == 0)
+				if (empty($hook_params)) {
 					continue;
-				if (array_search($hook->getClassname(), $enabled_hooknames) === false)
+				}
+				if (array_search($hook->getClassname(), $enabled_hooknames) === false) {
 					continue;
+				}
 				// Build 3 arrays for inconvenient db_query_params()
 				$i = 1;
 				$sql_cols = array_keys($hook_params);
@@ -151,8 +153,9 @@ project independently.");
 									$emails = array_map('trim', explode(',', $val['dest']));
 									$strict = true;
 									$invalid = array_search(false, array_map('validate_email', $emails), $strict) !== false;
-									if ($invalid)
+									if ($invalid) {
 										exit_error($hook->getName() . _(": ") . _("invalid e-mails"). ' ' . $val['dest']);
+									}
 									$val = implode(',', $emails);
 								}
 						}
@@ -176,9 +179,9 @@ project independently.");
 			}
 		}
 
-		if (!$res)
+		if (!$res) {
 			return false;
-
+		}
 		$systasksq = new SystasksQ();
 		$systasksq->add($this->getID(), 'SCMHOOK_UPDATE', $group_id, user_getid());
 
@@ -228,8 +231,9 @@ project independently.");
 
 	function getStatusDeploy($group_id) {
 		$res = db_query_params('SELECT need_update FROM plugin_scmhook WHERE id_group = $1', array($group_id));
-		if (!$res)
+		if (!$res) {
 			return 1;
+		}
 		$row = db_fetch_array($res);
 		return $row['need_update'];
 	}
@@ -249,9 +253,9 @@ project independently.");
 	function getEnabledHooks($group_id) {
 		$enabledHooks = array();
 		$res = db_query_params('SELECT hooks, repository_name, scm_plugin FROM plugin_scmhook WHERE id_group = $1', array($group_id));
-		if (!$res)
+		if (!$res) {
 			return $enabledHooks;
-
+		}
 		while ($arr = db_fetch_array($res)) {
 			$enabledHooks[$arr['scm_plugin']][$arr['repository_name']] = explode('|', $arr['hooks']);
 		}

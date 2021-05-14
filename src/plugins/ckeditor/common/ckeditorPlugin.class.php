@@ -117,8 +117,12 @@ _("CKEditor is a WYSIWYG text editor that displays within a web browser.");
 			$this->setError(_("Unable to activate ckeditor plugin, package ckeditor not found."));
 			return false;
 		}
-		if (isset($params['width'])) $editor->config['width'] = $params['width'];
-		if (isset($params['height'])) $editor->config['height'] = $params['height'];
+		if (isset($params['width'])) {
+			$editor->config['width'] = $params['width'];
+		}
+		if (isset($params['height'])) {
+			$editor->config['height'] = $params['height'];
+		}
 		if (isset($params['toolbar']) && array_key_exists(strtolower($params['toolbar']), $this->toolBar)) {
 			$editor->config['toolbar'] = $this->toolBar[strtolower($params['toolbar'])];
 		} else {

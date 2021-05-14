@@ -32,9 +32,9 @@ global $password;
 
 try {
 	/* do not recreate $clientSOAP object if already created by other pages */
-	if (!isset($clientSOAP))
+	if (!isset($clientSOAP)) {
 		$clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
-
+	}
 	$stats = $clientSOAP->__soapCall('mc_project_get_statistiques', array("username" => $username, "password" => $password, "project_id" => $mantisbtConf['id_mantisbt'], "level" => 0));
 } catch (SoapFault $soapFault) {
 	echo $HTML->warning_msg(_('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring);

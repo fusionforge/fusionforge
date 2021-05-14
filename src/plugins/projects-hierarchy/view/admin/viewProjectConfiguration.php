@@ -37,16 +37,18 @@ if (!$projectsHierarchyProjectConf) {
 	$cells = array();
 	$cells[][] = html_e('label', array('id' => 'projectsHierarchy-tree', 'title' => _('Enable visibility in hierarchy tree.')), _('Enable Tree'));
 	$inputAttrs = array('type' => 'checkbox', 'name' => 'tree', 'value' => 1);
-	if ($projectsHierarchyProjectConf['tree'])
+	if ($projectsHierarchyProjectConf['tree']) {
 		$inputAttrs['checked'] = 'checked';
+	}
 	$cells[][] = html_e('input', $inputAttrs);
 	echo $HTML->multiTableRow(array(), $cells);
 
 	$cells = array();
 	$cells[][] = html_e('label', array('id' => 'projectsHierarchy-docman', 'title' => _('Enable hierarchy in docman browsing. Direct access to docman features in parent docman tab.')), _('Enable Docman'));
 	$inputAttrs = array('type' => 'checkbox', 'name' => 'docman', 'value' => 1);
-	if ($projectsHierarchyProjectConf['docman'])
+	if ($projectsHierarchyProjectConf['docman']) {
 		$inputAttrs['checked'] = 'checked';
+	}
 	$cells[][] = html_e('input', $inputAttrs);
 	echo $HTML->multiTableRow(array(), $cells);
 
@@ -80,8 +82,9 @@ if (!$projectsHierarchyProjectConf) {
 	$cells = array();
 	$cells[][] = html_e('label', array('id' => 'projectsHierarchy-globalconf', 'title' => _('Use forge global configuration. Superseed any configuration done at project level.')), _('Enable forge global configuration'));
 	$inputAttrs = array('type' => 'checkbox', 'name' => 'globalconf', 'value' => 1);
-	if ($projectsHierarchyProjectConf['globalconf'])
+	if ($projectsHierarchyProjectConf['globalconf']) {
 		$inputAttrs['checked'] = 'checked';
+	}
 	$cells[][] = html_e('input', $inputAttrs);
 	echo $HTML->multiTableRow(array(), $cells);
 

@@ -339,6 +339,8 @@ abstract class SCMPlugin extends Plugin {
 			return false;
 		} elseif ($project->isError()) {
 			return false;
+		} elseif ($project->isActive()) {
+			return false;
 		} elseif (!$project->usesSCM()) {
 			return false;
 		} elseif (!$project->usesPlugin($this->name)) {

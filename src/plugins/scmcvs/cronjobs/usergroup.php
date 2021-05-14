@@ -1,7 +1,7 @@
 #! /usr/bin/php
 <?php
 /**
- * GForge Cron Job
+ * FusionForge Cron Job
  *
  * The rest Copyright 2002-2005 (c) GForge Team
  * http://fusionforge.org/
@@ -31,9 +31,6 @@ require_once dirname(__FILE__).'/../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require $gfcommon.'include/cron_utils.php';
 
-//error variable
-$err = '';
-
 //
 //	Default values for the script
 //
@@ -41,15 +38,15 @@ define('DEFAULT_SHELL','/bin/cvssh.pl'); //use /bin/grap for cvs-only
 define('FILE_EXTENSION',''); // use .new when testing
 
 if (util_is_root_dir(forge_get_config('groupdir_prefix'))) {
-	$err .=  "Error! groupdir_prefix Points To Root Directory!";
+	$err =  "Error! groupdir_prefix Points To Root Directory!";
 	echo $err;
-	cron_entry(16,$err);
+	cron_entry(16, $err);
 	exit;
 }
 
 $res = db_query_params ('SELECT group_id FROM groups WHERE status=$1',
 			array('A')) ;
-$err .= db_error();
+$err = db_error();
 $groups = group_get_objects (util_result_column_to_array($res,'group_id'));
 
 $res = db_query_params ('SELECT user_id FROM users WHERE unix_status=$1',
@@ -57,7 +54,7 @@ $res = db_query_params ('SELECT user_id FROM users WHERE unix_status=$1',
 $err .= db_error();
 $users = user_get_objects (util_result_column_to_array($res,'user_id'));
 
-// Create the entries for the GForge users
+// Create the entries for the FusionForge users
 $gforge_lines_passwd = array();
 $gforge_lines_shadow = array();
 $gforge_lines_groups = array();
@@ -89,8 +86,9 @@ for ($i=0; $i < count($passwd_orig); $i++) {
 
 		// Got to end of file (shouldn't happen, means #GFORGEEND wasn't found on file, but
 		// it's not a fatal error
-		if ($i >= (count($passwd_orig)-1)) break;
-
+		if ($i >= (count($passwd_orig)-1)) {
+			break;
+		}
 		// read next line
 		$i++;
 		$line = trim($passwd_orig[$i]);
@@ -106,7 +104,7 @@ for ($i=0; $i < count($passwd_orig); $i++) {
 	$unmanaged_lines_passwd[] = $line;
 }
 
-// Now, check which of the GForge users were found outside the #GFORGE markers. In that
+// Now, check which of the FusionForge users were found outside the #GFORGE markers. In that
 // case, the user must not be written inside the markers (means the user is managed by
 // the sysadmin)
 foreach ($users as $u) {
@@ -150,8 +148,9 @@ for ($i=0; $i < count($shadow_orig); $i++) {
 
 		// Got to end of file (shouldn't happen, means #GFORGEEND wasn't found on file, but
 		// it's not a fatal error
-		if ($i >= (count($shadow_orig)-1)) break;
-
+		if ($i >= (count($shadow_orig)-1)) {
+			break;
+		}
 		// read next line
 		$i++;
 		$line = trim($shadow_orig[$i]);
@@ -174,9 +173,8 @@ $err .= db_error();
 
 $user_pws = array();
 for($i = 0; $i < db_numrows($userp_res); $i++) {
-        $us_pw = db_result($userp_res,$i,'unix_pw');
-        $user_pws[] = $us_pw;
-
+	$us_pw = db_result($userp_res,$i,'unix_pw');
+	$user_pws[] = $us_pw;
 }
 
 $i=0;
@@ -212,9 +210,9 @@ $err .= db_error();
 
 $gforge_groups = array();
 for($i = 0; $i < db_numrows($group_res); $i++) {
-        $group_name = db_result($group_res,$i,'unix_group_name');
-        $gforge_groups[] = $group_name;
-        $gids[$group_name] = db_result($group_res,$i,'group_id') + 50000;       // 50000: hardcoded value (for now).
+	$group_name = db_result($group_res,$i,'unix_group_name');
+	$gforge_groups[] = $group_name;
+	$gids[$group_name] = db_result($group_res,$i,'group_id') + 50000;       // 50000: hardcoded value (for now).
 }
 
 //	Add the groups from the gforge database
@@ -228,8 +226,9 @@ for ($i=0; $i < count($group_orig); $i++) {
 		} while ($i < count($group_orig) && !preg_match("/^[[:blank:]]*#GFORGEEND/", $line));
 
 		// Got to end of file (shouldn't happen, means #GFORGEEND wasn't found on file
-		if ($i >= (count($group_orig)-1)) break;
-
+		if ($i >= (count($group_orig)-1)) {
+			break;
+		}
 		// read next line
 		$i++;
 		$line = trim($group_orig[$i]);
@@ -314,5 +313,3 @@ if ($group_file) {
 }
 
 cron_entry(16,$err);
-
-?>

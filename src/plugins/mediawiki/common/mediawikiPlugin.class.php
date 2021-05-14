@@ -24,13 +24,13 @@
  */
 
 require_once 'plugins_utils.php';
-if(is_dir("/usr/share/mediawiki")){
-forge_define_config_item('src_path','mediawiki', "/usr/share/mediawiki");
-forge_define_config_item('mwdata_path', 'mediawiki', '$core/data_path/plugins/mediawiki');
-forge_define_config_item('projects_path', 'mediawiki', '$mediawiki/mwdata_path/projects');
-forge_define_config_item('master_path', 'mediawiki', '$mediawiki/mwdata_path/master');
-forge_define_config_item('enable_uploads', 'mediawiki', false);
-forge_set_config_item_bool('enable_uploads', 'mediawiki');
+if (is_dir("/usr/share/mediawiki")) {
+	forge_define_config_item('src_path','mediawiki', "/usr/share/mediawiki");
+	forge_define_config_item('mwdata_path', 'mediawiki', '$core/data_path/plugins/mediawiki');
+	forge_define_config_item('projects_path', 'mediawiki', '$mediawiki/mwdata_path/projects');
+	forge_define_config_item('master_path', 'mediawiki', '$mediawiki/mwdata_path/master');
+	forge_define_config_item('enable_uploads', 'mediawiki', false);
+	forge_set_config_item_bool('enable_uploads', 'mediawiki');
 }
 require_once $gfcommon.'include/SysTasksQ.class.php';
 
@@ -336,8 +336,9 @@ _('This plugin allows each project to embed Mediawiki under a tab.');
 		} elseif ($hookname == 'project_admin_plugins') {
 			$group_id = $params['group_id'];
 			$group = group_get_object($group_id);
-			if ($group->usesPlugin($this->name))
+			if ($group->usesPlugin($this->name)) {
 				echo util_make_link('/plugins/mediawiki/plugin_admin.php?group_id='. $group->getID(), _('MediaWiki Plugin admin')).'<br />';
+			}
 		} elseif ($hookname == 'clone_project_from_template') {
 			$template = $params['template'];
 			$project = $params['project'];
@@ -457,8 +458,9 @@ _('This plugin allows each project to embed Mediawiki under a tab.');
 	}
 
 	function groupisactivecheckboxpost(&$params) {
-			if (!parent::groupisactivecheckboxpost($params))
-					return false;
+			if (!parent::groupisactivecheckboxpost($params)) {
+				return false;
+			}
 			if (getIntFromRequest('use_mediawiki') == 1) {
 				$systasksq = new SystasksQ();
 				$group_id = $params['group'];

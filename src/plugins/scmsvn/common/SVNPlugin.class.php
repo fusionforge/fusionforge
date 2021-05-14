@@ -366,9 +366,9 @@ some control over it to the project's administrator.");
 
 	function createOrUpdateRepo($params) {
 		$project = $this->checkParams($params);
-		if (!$project) return false;
-		if (!$project->isActive()) return false;
-
+		if (!$project) {
+			return false;
+		}
 		$repo_prefix = forge_get_config('repos_path', 'scmsvn');
 		if (!is_dir($repo_prefix) && !mkdir($repo_prefix, 0755, true)) {
 			return false;
@@ -772,10 +772,11 @@ some control over it to the project's administrator.");
 			curl_close($ch);
 
 			// final checks
-			if (!xml_parse($xml_parser, '', true))
+			if (!xml_parse($xml_parser, '', true)) {
 				$this->setError('Unable to parse XML with error '
 						   . xml_error_string(xml_get_error_code($xml_parser))
 						   . ' on line ' . xml_get_current_line_number($xml_parser));
+			}
 			xml_parser_free($xml_parser);
 
 			if ($adds > 0 || $updates > 0 || $commits > 0 || $deletes > 0) {
@@ -830,10 +831,11 @@ some control over it to the project's administrator.");
 			// Grab&parse commit log
 			$protocol = forge_get_config('use_ssl', 'scmsvn') ? 'https://' : 'http://';
 			$u = session_get_user();
-			if ($project->enableAnonSCM())
+			if ($project->enableAnonSCM()) {
 				$server_script = '/anonscm/svnlog';
-			else
+			} else {
 				$server_script = '/authscm/'.$u->getUnixName().'/svnlog';
+			}
 			if ($user) {
 				$userunixname = $user->getUnixName();
 				$params = '&mode=latest_user&user_name='.$userunixname;
@@ -861,10 +863,11 @@ some control over it to the project's administrator.");
 			curl_close($ch);
 
 			// final checks
-			if (!xml_parse($xml_parser, '', true))
+			if (!xml_parse($xml_parser, '', true)) {
 				$this->setError('Unable to parse XML with error '
 						   . xml_error_string(xml_get_error_code($xml_parser))
 						   . ' on line ' . xml_get_current_line_number($xml_parser));
+			}
 			xml_parser_free($xml_parser);
 
 			if ($adds > 0 || $updates > 0 || $commits > 0 || $deletes > 0) {

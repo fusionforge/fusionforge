@@ -32,8 +32,9 @@ $returnValue['html'] = $HTML->error_msg(_('Error in Link Order validation'));
 
 if ($linksOrder && strlen($linksOrder)) {
 	$linksOrderArr = explode(',', $linksOrder);
-	if ($headermenu->setLinksOrder($linksOrderArr))
+	if ($headermenu->setLinksOrder($linksOrderArr)) {
 		$returnValue['html'] = $HTML->feedback(_('Link Order successfully validated'));
+	}
 }
 echo json_encode($returnValue);
 exit;

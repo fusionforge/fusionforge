@@ -31,9 +31,9 @@ global $HTML;
 
 try {
 	/* do not recreate $clientSOAP object if already created by other pages */
-	if (!isset($clientSOAP))
+	if (!isset($clientSOAP)) {
 		$clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
-
+	}
 	$listVersions = $clientSOAP->__soapCall('mc_project_get_versions', array("username" => $username, "password" => $password, "project_id" => $mantisbtConf['id_mantisbt']));
 
 } catch (SoapFault $soapFault) {
@@ -68,8 +68,8 @@ if (!isset($errorPage)) {
 	}
 
 	if ( sizeof($listChild)) {
-	// nous avons deja un bloc
-	$nbblock = 1;
+		// nous avons deja un bloc
+		$nbblock = 1;
 		foreach ($listChild as $key => $child) {
 			$listChildVersions = $clientSOAP->__soapCall('mc_project_get_versions', array("username" => $username, "password" => $password, "project_id" => $child));
 			if (sizeof($listChildVersions)) {

@@ -298,12 +298,12 @@ _('Use Mantis Bugtracker as another ticket management tool.');
 	function isProjectMantisCreated($idProjet){
 		$resIdProjetMantis = db_query_params('SELECT id_mantisbt FROM plugin_mantisbt WHERE id_group = $1',
 					array($idProjet));
-		if (!$resIdProjetMantis)
+		if (!$resIdProjetMantis) {
 			return false;
-
+		}
 		if (db_numrows($resIdProjetMantis) > 0) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
@@ -520,9 +520,9 @@ _('Use Mantis Bugtracker as another ticket management tool.');
 	function updateConf($group_id, $confArr) {
 		$result = db_query_params('update plugin_mantisbt set url = $1 , soap_user = $2, soap_password = $3, use_global = $4 where id_group = $5',
 					array($confArr['url'], $confArr['soap_user'], $confArr['soap_password'], $confArr['global_conf'], $group_id));
-		if (!$result)
+		if (!$result) {
 			return false;
-
+		}
 		return true;
 	}
 
@@ -542,9 +542,9 @@ _('Use Mantis Bugtracker as another ticket management tool.');
 		}
 		$result = db_query_params('update plugin_mantisbt_users set mantisbt_user = $1 , mantisbt_password = $2 where id_user = $3 and mantisbt_url = $4',
 					array($confArr['mantisbt_user'], $confArr['mantisbt_password'], user_getid(), $confArr['mantisbt_url']));
-		if (!$result)
+		if (!$result) {
 			return false;
-
+		}
 		return true;
 	}
 
@@ -557,9 +557,9 @@ _('Use Mantis Bugtracker as another ticket management tool.');
 	function deleteUserConf($url) {
 		$result = db_query_params('delete from plugin_mantisbt_users where id_user = $1 and mantisbt_url = $2',
 					array(user_getid(), $url));
-		if (!$result)
+		if (!$result) {
 			return false;
-
+		}
 		return true;
 	}
 
@@ -655,9 +655,9 @@ _('Use Mantis Bugtracker as another ticket management tool.');
 		}
 
 		try {
-			if (!isset($clientSOAP))
+			if (!isset($clientSOAP)) {
 				$clientSOAP = new SoapClient($confArr['url'].'/api/soap/mantisconnect.php?wsdl', array('trace' => true, 'exceptions' => true));
-
+			}
 			$account = $clientSOAP->__soapCall('mc_login', array('username' => $confArr['soap_user'], 'password' => $confArr['soap_password']));
 		} catch (SoapFault $soapFault) {
 			$this->setError($soapFault->faultstring);

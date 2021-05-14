@@ -238,21 +238,21 @@ if ($type == 'admin') {
 	}
 
 	foreach ($blocks as $b => $help) {
-
 		if (!$activate[$b]) {
 			$activate[$b] = 0;
 		}
 		if ((!isset($status[$b]) && $activate[$b]) ||
-				(isset($status[$b]) && $activate[$b] !== $status[$b]))
+				(isset($status[$b]) && $activate[$b] !== $status[$b])) {
 			// Must be updated.
 			if (!isset($present[$b])) {
-			db_query_params('INSERT INTO plugin_blocks (group_id, name, status)
-					VALUES ($1, $2, $3)',
-					array($id, $b, $activate[$b]));
-		} else {
-			db_query_params('UPDATE plugin_blocks SET status=$1
-					WHERE group_id=$2 AND name=$3',
-					array($activate[$b], $id, $b));
+				db_query_params('INSERT INTO plugin_blocks (group_id, name, status)
+						VALUES ($1, $2, $3)',
+						array($id, $b, $activate[$b]));
+			} else {
+				db_query_params('UPDATE plugin_blocks SET status=$1
+						WHERE group_id=$2 AND name=$3',
+						array($activate[$b], $id, $b));
+			}
 		}
 	}
 	$feedback = _('Block Saved');
@@ -301,9 +301,7 @@ if ($type == 'admin') {
 	plugin_hook_by_reference("text_editor", $params);
 	echo $params['content'];
 
-	print "<br /><input type=\"submit\" value=\"" .
-			_("Save") .
-			"\" />";
+	print '<br /><input type="submit" value="'._("Save").'" />';
 	echo $HTML->closeForm();
 	print "</div>";
 

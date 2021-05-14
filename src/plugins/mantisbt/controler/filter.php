@@ -98,11 +98,13 @@ if (!isset($errorPage)) {
 					foreach ($mantisbtMembersChild as $key => $mantisbtMemberChild) {
 						$found = 0;
 						foreach ($mantisbtMembers as $key => $mantisbtMember) {
-							if ( $mantisbtMemberChild->id == $mantisbtMember->id )
+							if ( $mantisbtMemberChild->id == $mantisbtMember->id ) {
 								$found = 1;
+							}
 						}
-						if (!$found)
+						if (!$found) {
 							$mantisbtMembers[] = $mantisbtMemberChild;
+						}
 					}
 					$resultGroupNameFusionForge = db_query_params('select groups.group_name from groups,plugin_mantisbt where groups.group_id = plugin_mantisbt.id_group and plugin_mantisbt.id_mantisbt = $1',
 											array($child));

@@ -24,8 +24,6 @@
 
 class headermenuPlugin extends Plugin {
 
-	var $pageid;
-
 	function __construct() {
 		parent::__construct();
 		$this->name = 'headermenu';
@@ -206,7 +204,7 @@ in the main menu (outermenu) or in the project menu (groupmenu).");
 	 * getAvailableLinks - get all the links from the db of certain kind
 	 *
 	 * @param	string	$linkmenu	the type of menu links search in db
-	 * @param	int		$project	the group_id. Default is 0 meaning : forge level
+	 * @param	int	$project	the group_id. Default is 0 meaning : forge level
 	 * @return	array	the available links
 	 */
 	function getAvailableLinks($linkmenu, $project = 0) {
@@ -238,8 +236,9 @@ in the main menu (outermenu) or in the project menu (groupmenu).");
 	function setLinksOrder($linksOrder) {
 		for ($i =0; $i < count($linksOrder); $i++) {
 			$res = db_query_params('update plugin_headermenu set ordering = $1 where id_headermenu = $2', array($i, $linksOrder[$i]));
-			if (!$res)
+			if (!$res) {
 				return false;
+			}
 		}
 		return true;
 	}
@@ -281,16 +280,16 @@ in the main menu (outermenu) or in the project menu (groupmenu).");
 						$htmlcode,
 						$ordering
 					));
-		if (!$res)
+		if (!$res) {
 			return false;
-
+		}
 		return true;
 	}
 
 	/**
 	 * deleteLink - delete a link
 	 *
-	 * @param	int		$idLink the link id
+	 * @param	int	$idLink	the link id
 	 * @return	bool	success or not
 	 */
 	function deleteLink($idLink) {
@@ -304,8 +303,8 @@ in the main menu (outermenu) or in the project menu (groupmenu).");
 	/**
 	 * updateLinkStatus - update the link status
 	 *
-	 * @param	int	$idLink the link id
-	 * @param	int	$linkStatus the new status of the link id
+	 * @param	int	$idLink		the link id
+	 * @param	int	$linkStatus	the new status of the link id
 	 * @return	bool	success or not
 	 */
 	function updateLinkStatus($idLink, $linkStatus) {
@@ -319,7 +318,7 @@ in the main menu (outermenu) or in the project menu (groupmenu).");
 	/**
 	 * getLink - get all informations about a link
 	 *
-	 * @param	int	$idLink the link id
+	 * @param	int	$idLink	the link id
 	 * @return	array	the link informations
 	 */
 	function getLink($idLink) {
@@ -333,12 +332,12 @@ in the main menu (outermenu) or in the project menu (groupmenu).");
 	/**
 	 * updateLink - update a valid link
 	 *
-	 * @param	int	$idLink the link id to be updated
-	 * @param	string	$url the url
-	 * @param	string	$name the displayed name
-	 * @param	string	$description a short description (to help administration)
-	 * @param	string	$linkmenu linkmenu entry : headermenu or outermenu
-	 * @param	string	$linktype : url or htmlcode, default is url
+	 * @param	int	$idLink		the link id to be updated
+	 * @param	string	$url		the url
+	 * @param	string	$name		the displayed name
+	 * @param	string	$description	a short description (to help administration)
+	 * @param	string	$linkmenu	linkmenu entry : headermenu or outermenu
+	 * @param	string	$linktype	url or htmlcode, default is url
 	 * @param	string	$htmlcode
 	 * @return	bool	success or not
 	 */
@@ -393,7 +392,7 @@ in the main menu (outermenu) or in the project menu (groupmenu).");
 	/**
 	 * getHeader - initialize header and js
 	 *
-	 * @param	string	$type : user, project, globaladmin (aka group)
+	 * @param	string	$type	user, project, globaladmin (aka group)
 	 * @return	bool	success or not
 	 */
 	function getHeader($type) {

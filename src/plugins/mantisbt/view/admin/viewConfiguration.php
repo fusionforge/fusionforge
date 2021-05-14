@@ -25,7 +25,6 @@
 global $HTML;
 global $mantisbt;
 global $mantisbtConf;
-global $use_tooltips;
 global $group_id;
 
 ?>

@@ -33,7 +33,9 @@ $cmd = getStringFromRequest('cmd');
 $quotamanagement = plugin_get_object('quotamanagement');
 
 $_quota_block_size = intval(trim(shell_exec('echo $BLOCK_SIZE'))) + 0;
-if ($_quota_block_size == 0) $_quota_block_size = 1024;
+if ($_quota_block_size == 0) {
+	$_quota_block_size = 1024;
+}
 
 $subMenuTitle = array();
 $subMenuUrl = array();

@@ -277,8 +277,9 @@ EOS;
 				$nextFamily = $this->getFamily($localFamily[$i], $order, $deep, $status);
 			}
 		}
-		if (isset($nextFamily) && sizeof($nextFamily))
+		if (isset($nextFamily) && !empty($nextFamily)) {
 			$localFamily = array_merge($localFamily, $nextFamily);
+		}
 
 		return $localFamily;
 	}
@@ -741,7 +742,7 @@ EOS;
 	 * @access	public
 	 */
 	function getGlobalAdminView() {
-		global $gfplugins, $use_tooltips;
+		global $gfplugins;
 		include $gfplugins.$this->name.'/view/admin/viewGlobalConfiguration.php';
 		return true;
 	}
@@ -810,7 +811,7 @@ EOS;
 
 
 	function getProjectAdminView() {
-		global $gfplugins, $use_tooltips;
+		global $gfplugins;
 		include $gfplugins.$this->name.'/view/admin/viewProjectConfiguration.php';
 		return true;
 	}

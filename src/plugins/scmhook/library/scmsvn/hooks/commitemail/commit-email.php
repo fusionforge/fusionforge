@@ -37,10 +37,13 @@ putenv("LANG=en_US.UTF-8");
 if(!file_exists($svnlook) || !file_exists($commit_email_pl)) { die("Missing required executables."); }
 
 # Find who made the changes
-if($argc < 4) { die("Invalid arguments."); }
+if($argc < 4) {
+	die("Invalid arguments.");
+}
 
 $users_host = forge_get_config('users_host');
-if (!empty($users_host))
-  $hostname = "-h $users_host";
+if (!empty($users_host)) {
+	$hostname = "-h $users_host";
+}
 passthru("$commit_email_pl \"$argv[1]\" $argv[2] $hostname $argv[3]", $ret);
 exit($ret);  // warn SVN if something went wrong

@@ -30,7 +30,6 @@ if (!$type) {
 	exit_missing_param($_SERVER['HTTP_REFERER'], array('No TYPE specified'), 'webanalytics');
 }
 
-global $use_tooltips;
 $webanalytics = plugin_get_object('webanalytics');
 
 switch ($type) {

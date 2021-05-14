@@ -67,10 +67,7 @@ _("This plugin allows each project to embed MoinMoinWiki under a tab.");
 		}
 		if ($hookname == "groupmenu") {
 			$project = group_get_object($group_id);
-			if (!$project || !is_object($project)) {
-				return;
-			}
-			if ($project->isError()) {
+			if (!$project || !is_object($project) || $project->isError()) {
 				return;
 			}
 			if ($project->usesPlugin($this->name)) {
@@ -89,10 +86,7 @@ _("This plugin allows each project to embed MoinMoinWiki under a tab.");
 			}
 		} elseif ($hookname == "project_public_area") {
 			$project = group_get_object($group_id);
-			if (!$project || !is_object($project)) {
-				return;
-			}
-			if ($project->isError()) {
+			if (!$project || !is_object($project) || $project->isError()) {
 				return;
 			}
 			if ( $project->usesPlugin ( $this->name ) ) {
@@ -165,10 +159,7 @@ _("This plugin allows each project to embed MoinMoinWiki under a tab.");
 			$systasksq->add($this->getID(), 'MOINMOIN_CREATE_WIKI', $group_id);
 		} elseif ($hookname == 'crossrefurl') {
 			$project = group_get_object($group_id);
-			if (!$project || !is_object($project)) {
-				return;
-			}
-			if ($project->isError()) {
+			if (!$project || !is_object($project) || $project->isError()) {
 				return;
 			}
 			if ($project->usesPlugin($this->name) && isset($params['page'])) {
@@ -179,8 +170,9 @@ _("This plugin allows each project to embed MoinMoinWiki under a tab.");
 	}
 
 	function groupisactivecheckboxpost(&$params) {
-			if (!parent::groupisactivecheckboxpost($params))
-					return false;
+			if (!parent::groupisactivecheckboxpost($params)) {
+				return false;
+			}
 			if (getIntFromRequest('use_moinmoin') == 1) {
 				$systasksq = new SystasksQ();
 				$group_id = $params['group'];

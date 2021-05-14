@@ -160,7 +160,9 @@ class CpoldPlugin extends SCMPlugin {
 		$repo = $toprepo . '/' . $project->getUnixName() ;
 
 		if (!is_dir ($repo)) {
-			if (file_exists ($tarball)) unlink ($tarball) ;
+			if (file_exists ($tarball)) {
+				unlink ($tarball) ;
+			}
 			return false ;
 		}
 

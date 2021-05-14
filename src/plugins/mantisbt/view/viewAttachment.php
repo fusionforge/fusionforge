@@ -32,10 +32,10 @@ global $HTML;
 
 if (empty($msg)) {
 	if (!isset($defect)){
-		try{
+		try {
 			$clientSOAP = new SoapClient($mantisbtConf['url'].'/api/soap/mantisconnect.php?wsdl', array('trace' => true, 'exceptions' => true));
 			$defect = $clientSOAP->__soapCall('mc_issue_get', array('username' => $username, 'password' => $password, 'issue_id' => $idBug));
-		}catch (SoapFault $soapFault) {
+		} catch (SoapFault $soapFault) {
 			echo $HTML->warning_msg(_('Technical error occurs during data retrieving')._(': ').$soapFault->faultstring);
 			$errorPage = true;
 		}
@@ -50,9 +50,9 @@ if (empty($msg)) {
 				$cells = array();
 				$cells[][] = $attachement->filename;
 				$contentCell = '<input type=button value="'._('Download').'" onclick="window.location.href=\'/plugins/'.$mantisbt->name.'/getAttachment.php/'.$group_id.'/'.$attachement->id.'/'.$attachement->filename.'\'">';
-				if ($editable)
+				if ($editable) {
 					$contentCell .= '<input type=button value="'._('Delete').'" onclick="window.location.href=\'/plugins/'.$mantisbt->name.'/?type='.$type.'&group_id='.$group_id.'&idBug='.$idBug.'&idAttachment='.$attachement->id.'&action=deleteAttachment&view=viewIssue\'">';
-
+				}
 				$cells[][] = $contentCell;
 				echo $HTML->multiTableRow(array(), $cells);
 			}

@@ -488,8 +488,12 @@ over it to the project's administrator.");
 		$tarball = forge_get_config('scm_tarballs_path').'/'.$group_name.'-scmroot.tar'.util_get_compressed_file_extension();
 
 		if (! $project->enableAnonSCM()) {
-			if (file_exists ($snapshot)) unlink ($snapshot) ;
-			if (file_exists ($tarball)) unlink ($tarball) ;
+			if (file_exists($snapshot)) {
+				unlink ($snapshot) ;
+			}
+			if (file_exists($tarball)) {
+				unlink ($tarball) ;
+			}
 			return false;
 		}
 
@@ -497,8 +501,12 @@ over it to the project's administrator.");
 		$repo = $toprepo . '/' . $project->getUnixName() ;
 
 		if (!is_dir ($repo) || !is_file ("$repo/format")) {
-			if (file_exists ($snapshot)) unlink ($snapshot) ;
-			if (file_exists ($tarball)) unlink ($tarball) ;
+			if (file_exists ($snapshot)) {
+				unlink ($snapshot) ;
+			}
+			if (file_exists ($tarball)) {
+				unlink ($tarball) ;
+			}
 			return false ;
 		}
 

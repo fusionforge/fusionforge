@@ -39,10 +39,9 @@ for a “project of the month”.");
 		} elseif ($hookname == "project_before_widgets") {
 			$group_id=$params['group_id'];
 			$project = group_get_object($group_id);
-			if (!$project || !is_object($project))
+			if (!$project || !is_object($project) || $project->isError()) {
 				return;
-			if ($project->isError())
-				return;
+			}
 			$res_tabs = db_query_params ('SELECT plugin_projectlabels_labels.label_text FROM plugin_projectlabels_labels, plugin_projectlabels_group_labels
 					      WHERE plugin_projectlabels_group_labels.group_id=$1 AND plugin_projectlabels_group_labels.label_id = plugin_projectlabels_labels.label_id',
 						     array ($group_id));

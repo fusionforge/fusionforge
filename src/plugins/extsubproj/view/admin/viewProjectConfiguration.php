@@ -52,8 +52,9 @@ echo '<form method="post" action="'.$pluginExtSubProj->getProjectAdminAddExtSubP
 echo '<table>';
 
 echo '<tr><td><label id="extSubProj-newsubprojecturl" ';
-if ($use_tooltips)
+if ($use_tooltips) {
 	echo 'title="'._('URL of the new subproject.').'"';
+}
 echo ' >'._('URL').'</label></td><td><input type="text" name="newsubprojecturl"';
 echo '/></td></tr>';
 

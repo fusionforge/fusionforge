@@ -28,7 +28,7 @@ global $id;
 
 $child_id = getIntFromRequest('child_id');
 
-if ($child_id && $projectsHierarchy->removeChild($id, $child_id))
+if ($child_id && $projectsHierarchy->removeChild($id, $child_id)) {
 	$projectsHierarchy->redirect($_SERVER['HTTP_REFERER'], 'feedback', _('Successfully removed child'));
-
+}
 $projectsHierarchy->redirect($_SERVER['HTTP_REFERER'], 'error_msg', _('Failed to remove child'));

@@ -77,7 +77,9 @@ to monitor disk and database usage per user, project.");
 		$cmd = "/usr/bin/du -bs $dir";
 		$res = shell_exec($cmd);
 		$a = explode("\t", $res);
-		if (isset($a[1])) $size = $a[0];
+		if (isset($a[1])) {
+			$size = $a[0];
+		}
 		return (int)$size;
 	}
 

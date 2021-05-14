@@ -28,10 +28,10 @@ global $_SERVER;
 global $id;
 
 $sub_project_id = getIntFromRequest('sub_project_id');
-if ($sub_project_id && $projectsHierarchy->is_child($sub_project_id))
+if ($sub_project_id && $projectsHierarchy->is_child($sub_project_id)) {
 	$projectsHierarchy->redirect($_SERVER['HTTP_REFERER'], 'error_msg', _('This project already has a parent'));
-
-if ($sub_project_id && $projectsHierarchy->addChild($id, $sub_project_id))
+}
+if ($sub_project_id && $projectsHierarchy->addChild($id, $sub_project_id)) {
 	$projectsHierarchy->redirect($_SERVER['HTTP_REFERER'], 'feedback', _('Successfully added child'));
-
+}
 $projectsHierarchy->redirect($_SERVER['HTTP_REFERER'], 'error_msg', _('Failed to add child'));

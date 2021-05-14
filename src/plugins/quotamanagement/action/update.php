@@ -35,7 +35,9 @@ if ( !forge_check_global_perm('forge_admin')) {
 require_once $gfcommon.'include/SysTasksQ.class.php';
 
 $_quota_block_size = trim(shell_exec('echo $BLOCK_SIZE')) + 0;
-if ($_quota_block_size == 0) $_quota_block_size = 1024;
+if ($_quota_block_size == 0) {
+	$_quota_block_size = 1024;
+}
 
 $type = getStringFromRequest('type');
 

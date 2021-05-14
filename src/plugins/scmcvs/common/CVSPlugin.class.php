@@ -214,20 +214,14 @@ over it to the project's administrator.");
 			return;
 		}
 
-		if ($project->usesPlugin($this->name)) {
-			$iframe_src = '/scm/viewvc.php?root='.$project->getUnixName();
-			htmlIframe($iframe_src, array('id'=>'scmcvs_iframe'));
-		}
+		$iframe_src = '/scm/viewvc.php?root='.$project->getUnixName();
+		htmlIframe($iframe_src, array('id'=>'scmcvs_iframe'));
 	}
 
 	function createOrUpdateRepo ($params) {
 		$project = $this->checkParams ($params) ;
 		if (!$project) {
 			return false ;
-		}
-
-		if (! $project->usesPlugin ($this->name)) {
-			return false;
 		}
 
 		$repo_prefix = forge_get_config('repos_path', 'scmcvs');
@@ -291,13 +285,9 @@ over it to the project's administrator.");
 	}
 
 	function gatherStats ($params) {
-		$project = $this->checkParams ($params) ;
+		$project = $this->checkParams($params);
 		if (!$project) {
 			return false ;
-		}
-
-		if (! $project->usesPlugin ($this->name)) {
-			return false;
 		}
 
 		if ($params['mode'] == 'day') {
@@ -376,11 +366,15 @@ over it to the project's administrator.");
 				if ( ($time_parsed > $day_begin) && ($time_parsed < $day_end) ) {
 					if ( $type == 'M' ) {
 						$cvs_commit++;
-						if(!isset($usr_commit[$user])) $usr_commit[$user] = 0;
+						if(!isset($usr_commit[$user])) {
+							$usr_commit[$user] = 0;
+						}
 						$usr_commit[$user]++;
 					} elseif ( $type == 'A' ) {
 						$cvs_add++;
-						if(!isset($usr_add[$user])) $usr_add[$user] = 0;
+						if(!isset($usr_add[$user])) {
+							$usr_add[$user] = 0;
+						}
 						$usr_add[$user]++;
 					} elseif ( $type == 'O' || $type == 'E' ) {
 						$cvs_co++;
@@ -454,13 +448,13 @@ over it to the project's administrator.");
 		$snapshot = forge_get_config('scm_snapshots_path').'/'.$group_name.'-scm-latest.tar'.util_get_compressed_file_extension();
 		$tarball = forge_get_config('scm_tarballs_path').'/'.$group_name.'-scmroot.tar'.util_get_compressed_file_extension();
 
-		if (! $project->usesPlugin ($this->name)) {
-			return false;
-		}
-
 		if (! $project->enableAnonSCM()) {
-			if (file_exists($snapshot)) unlink ($snapshot) ;
-			if (file_exists($tarball)) unlink ($tarball) ;
+			if (file_exists($snapshot)) {
+				unlink ($snapshot) ;
+			}
+			if (file_exists($tarball)) {
+				unlink ($tarball) ;
+			}
 			return false;
 		}
 
@@ -473,8 +467,12 @@ over it to the project's administrator.");
 		}
 
 		if (!$repo_exists) {
-			if (file_exists($snapshot)) unlink ($snapshot) ;
-			if (file_exists($tarball)) unlink ($tarball) ;
+			if (file_exists($snapshot)) {
+				unlink ($snapshot) ;
+			}
+			if (file_exists($tarball)) {
+				unlink ($tarball) ;
+			}
 			return false ;
 		}
 

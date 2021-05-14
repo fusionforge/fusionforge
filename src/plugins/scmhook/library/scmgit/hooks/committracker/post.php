@@ -54,11 +54,9 @@ function usage( $prog ) {
  *
  * @return	string	$Result	Returns artifact.
  */
-function getInvolvedArtifacts($Log)
-{
+function getInvolvedArtifacts($Log) {
 	preg_match_all('/[[]#[\d]+[]]/', $Log,  $Matches );
-	foreach($Matches as $Match)
-	{
+	foreach($Matches as $Match) {
 		$Result = preg_replace ('/[[]#([\d]+)[]]/', '\1', $Match);
 	}
 	return $Result;
@@ -72,11 +70,9 @@ function getInvolvedArtifacts($Log)
  *
  * @return	string	$Result	Returns task.
  */
-function getInvolvedTasks($Log)
-{
+function getInvolvedTasks($Log) {
 	preg_match_all ('/[[]T[\d]+[]]/', $Log,  $Matches );
-	foreach($Matches as $Match)
-	{
+	foreach($Matches as $Match) {
 		$Result = preg_replace ('/[[]T([\d]+)[]]/', '\1', $Match);
 	}
 	return $Result;
@@ -89,17 +85,17 @@ function getInvolvedTasks($Log)
  *
  * @return	array	Array of lines of Log Message.
  */
-function getLog($Input)
-{
+function getLog($Input) {
 	$Lines = explode("\n", $Input);
 	$ii = count($Lines);
 	$Logging=false;
-	for ( $i=0; $i < $ii ; $i++ )
-	{
-		if ($Logging==true)
+	for ( $i=0; $i < $ii ; $i++ ) {
+		if ($Logging==true) {
 			$Log.=$Lines[$i]."\n";
-		if ($Lines[$i]=='Log Message:')
+		}
+		if ($Lines[$i]=='Log Message:') {
 			$Logging=true;
+		}
 	}
 	return trim($Log);
 }

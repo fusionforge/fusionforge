@@ -200,16 +200,8 @@ class CCasePlugin extends SCMPlugin {
 	function createOrUpdateRepo ($params) {
 		return true ;   // Disabled for now
 
-		$group_id = $params['group_id'] ;
-
-		$project = group_get_object($group_id);
-		if (!$project || !is_object($project)) {
-			return false;
-		} elseif ($project->isError()) {
-			return false;
-		}
-
-		if (! $project->usesPlugin ($this->name)) {
+		$project = $this->checkParams($params);
+		if (!$project) {
 			return false;
 		}
 

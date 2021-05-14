@@ -55,22 +55,24 @@ FusionForge user to have its gravatar icon displayed.");
 
 	private function getHtml($user_id, $size) {
 		if ($email = $this->getEmail($user_id)) {
-			$hash = md5( strtolower( trim( $email ) ) );
+			$hash = md5(strtolower(trim($email)));
 
 			$url = 'http://www.gravatar.com/avatar/';
-			if (isset($_SERVER['HTTPS']))
+			if (isset($_SERVER['HTTPS'])) {
 				$url = 'https://secure.gravatar.com/avatar/';
+			}
 
-			$image_size = 28;
-
-			if ($size == 'l')
+			if ($size == 'l') {
 				$image_size = 130;
-			if ($size == 'm')
+			} elseif  ($size == 'm') {
 				$image_size = 48;
-			if ($size == 's')
+			} elseif ($size == 's') {
 				$image_size = 28;
-			if ($size == 'xs')
+			} elseif ($size == 'xs') {
 				$image_size = 16;
+			} else {
+				$image_size = 28;
+			}
 
 			$url .= $hash.'?s='. $image_size;
 			$class = 'img-shadow-'.$size;

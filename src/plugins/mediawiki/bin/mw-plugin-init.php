@@ -99,9 +99,9 @@ mysymlink($from, $to);
 
 // create skin subdir
 $todir = "$todir/fusionforge";
-if (!is_dir($todir))
+if (!is_dir($todir)) {
 	mkdir($todir);
-
+}
 // link fusionforge.css files
 $fromdir = "$fromdir/fusionforge";
 $from = "$fromdir/fusionforge.css";
@@ -129,5 +129,3 @@ closedir($dh);
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>
