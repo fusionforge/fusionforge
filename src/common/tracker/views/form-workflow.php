@@ -29,7 +29,7 @@ global $HTML;
 
 $has_error = false;
 $efarr = $ath->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_STATUS));
-if (count($efarr) === 0) {
+if (empty($efarr)) {
 	$has_error = true;
 	$error_msg .= _('To create a workflow, you need first to create a custom field of type “Status”.');
 } elseif (count($efarr) !== 1) {

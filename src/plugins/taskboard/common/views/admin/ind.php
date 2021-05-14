@@ -49,7 +49,7 @@ echo html_e('p', array(), util_make_link('/plugins/'.$pluginTaskboard->name.'/ad
 		html_e('strong', array(), _('Initialize a new Task Board')))
 		.html_e('br'). _('Create initial Task Board configuration'));
 
-if (!$tb_arr || count($tb_arr) < 1) {
+if (!$tb_arr || empty($tb_arr)) {
 	echo $HTML->information(_('No Task Boards have been set up, or you cannot view them.'));
 } else {
 	echo html_e('p', array(), _('Choose a Task Board.'));

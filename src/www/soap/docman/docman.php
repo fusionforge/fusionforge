@@ -523,7 +523,7 @@ function getDocumentGroups($session_ser, $group_id) {
 //
 function documentsGroup_to_soap($dg_arr) {
 	$return = array();
-	if (is_array($dg_arr) && count($dg_arr) > 0) {
+	if (is_array($dg_arr) && !empty($dg_arr)) {
 		for ($i=0; $i<count($dg_arr); $i++) {
 			if ($dg_arr[$i]->isError()) {
 					//skip if error

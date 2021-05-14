@@ -177,7 +177,7 @@ foreach ($show as $showthis) {
 
 site_project_header(array('title'=>_('Activity'), 'group'=>$group_id, 'toptab'=>'activity'));
 
-if (count($ids) < 1) {
+if (empty($ids)) {
 	echo $HTML->information(_('No Activity Found'));
 } else {
 ?>
@@ -216,7 +216,7 @@ echo $HTML->closeForm();
 
 <div id="activity_right">
 <?php
-	if (count($results) < 1) {
+	if (empty($results)) {
 		echo $HTML->information(_('No Activity Found'));
 	} else {
 		$cached_perms = array();

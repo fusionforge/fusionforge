@@ -331,7 +331,7 @@ function parse_sql_file($filename) {
 				$found = $matches[2];
 				if ($found == $cur) {
 					array_pop($doldolstack);
-					if (count($doldolstack) > 0) {
+					if (!empty($doldolstack)) {
 						$state = $states['IN_DOLDOL'];
 						break;
 					} else {

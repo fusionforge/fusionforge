@@ -254,7 +254,7 @@ over it to the project's administrator.");
 		$dellist = array () ;
 		$createlist = array () ;
 
-		while (count ($oldlist) > 0 && count ($newlist) > 0) {
+		while (!empty($oldlist) && !empty($newlist)) {
 			$o = $oldlist[0] ;
 			$n = $newlist[0] ;
 			if ($o > $n) {

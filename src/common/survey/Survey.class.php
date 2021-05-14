@@ -524,7 +524,7 @@ class Survey extends FFError {
 		if (empty($arr)) {
 			$arr = $arr_to_add;
 		} else {
-			if ($arr_to_add && is_array($arr_to_add) && count($arr_to_add)>0) {
+			if ($arr_to_add && is_array($arr_to_add) && !empty($arr_to_add)) {
 				for ($i = 0; $i < count($arr_to_add); $i++) {
 				/* Avoid double question */
 					if ($arr_to_add[$i] && array_search($arr_to_add[$i], $arr) == false && $arr_to_add[$i]!=$arr[0]) {
@@ -535,7 +535,7 @@ class Survey extends FFError {
 		}
 
 		/* questions to delete */
-		if ($arr_to_del && is_array($arr_to_del) && count($arr_to_del)>0) {
+		if ($arr_to_del && is_array($arr_to_del) && !empty($arr_to_del)) {
 			$new_arr = array();
 			for ($i = 0; $i < count($arr); $i++) {
 				/* If the value is no in the delete array, copy it into new array */

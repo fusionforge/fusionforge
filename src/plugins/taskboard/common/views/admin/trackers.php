@@ -77,8 +77,8 @@ if (!$atf || !is_object($atf) || $atf->isError()) {
 			$trackers_bgcolor[ $used_tracker_data['group_artifact_id'] ] = $used_tracker_data['card_background_color'];
 		}
 
-		if (count($trackers) > 0) {
-			if (count($trackers_selected) == 0) {
+		if (!empty($trackers)) {
+			if (empty($trackers_selected)) {
 				echo $HTML->warning_msg(_('Choose at least one tracker for using with Task Board.'));
 			} else {
 				echo html_e('div', array('id' => 'messages', 'class' => 'warning', 'style' => 'display: none;'), '', false);

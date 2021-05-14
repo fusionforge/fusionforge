@@ -365,7 +365,7 @@ if (getStringFromRequest('add_forum')) {
 
 		$farr = $ff->getForums();
 
-		if (is_array($farr) && count($farr) == 0) {
+		if (is_array($farr) && empty($farr)) {
 			echo $HTML->error_msg(_('No forums found.'));
 			forum_footer();
 			exit;

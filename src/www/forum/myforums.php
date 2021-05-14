@@ -62,7 +62,7 @@ if (!is_array($monitoredForumsIdsArray)) {
 	exit;
 }
 
-if (count($monitoredForumsIdsArray) < 1) {
+if (empty($monitoredForumsIdsArray)) {
 	echo $HTML->information(_('You have no monitored forums'));
 	forum_footer();
 	exit;

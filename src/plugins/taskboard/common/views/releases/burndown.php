@@ -72,7 +72,7 @@ $dataRemainingTasks = array();
 $dataRemainingEfforts = array();
 
 foreach ($release_snapshots as $snapshot) {
-	if (count($dataRemainingTasks) == 0 && $snapshot['snapshot_date'] != $release->getStartDate()) {
+	if (empty($dataRemainingTasks) && $snapshot['snapshot_date'] != $release->getStartDate()) {
 		// initialize start point if snapshot is missing for the first day
 		$dataRemainingTasks[] = array($release->getStartDate() * 1000, $release_volume['tasks']);
 		$dataRemainingEfforts[] = array($release->getStartDate() * 1000, $release_volume['man_days']);

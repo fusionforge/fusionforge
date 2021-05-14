@@ -245,7 +245,7 @@ class ArtifactFactory extends FFError {
 				}
 
 				$extra_pref = '';
-				if (count($aux_extra_fields)>0) {
+				if (!empty($aux_extra_fields)) {
 					$extra_pref = '|'.serialize($aux_extra_fields);
 				}
 

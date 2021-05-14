@@ -192,7 +192,7 @@ $cells = array();
 
 // Pending requests
 $reqs =& get_group_join_requests($group);
-if (count($reqs) > 0) {
+if (!empty($reqs)) {
 	$content .=  $HTML->boxTop(_("Pending Membership Requests"));
 	for ($i = 0; $i < count($reqs); $i++) {
 		$user =& user_get_object($reqs[$i]->getUserId());

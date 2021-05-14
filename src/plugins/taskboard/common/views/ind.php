@@ -40,7 +40,7 @@ if ($tb_arr === false) {
 html_use_tablesorter();
 
 $taskboardFactory->header();
-if (!$tb_arr || count($tb_arr) < 1) {
+if (!$tb_arr || empty($tb_arr)) {
 	echo $HTML->information(_('No taskboards have been set up, or you cannot view them.'));
 	echo html_e('p', array(), sprintf(_('The Admin for this project will have to set up data types using the %1$s admin page %2$s'), '<a href="'.util_make_uri('/plugins/'.$pluginTaskboard->name.'/?group_id='.$group_id).'">', '</a>'));
 } else {

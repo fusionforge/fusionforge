@@ -115,7 +115,7 @@ if (!isset($clientSOAP) && !isset($errorPage)) {
 			);
 	}
 
-	if(count($listBugAll) > 0) {
+	if(!empty($listBugAll)) {
 		foreach ($listBugAll as $key => $defect) {
 			if ( ($indexMin <= $key) && ($indexMax >= $key) ){
 				$listBug[] = $defect;
@@ -124,7 +124,7 @@ if (!isset($clientSOAP) && !isset($errorPage)) {
 	}
 
 	// affichage page
-	if (!count($listBug)) {
+	if (empty($listBug)) {
 		echo $HTML->warning_msg(_('No tickets to display.'));
 	} else {
 		html_use_tablesorter();

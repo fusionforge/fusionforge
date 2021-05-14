@@ -142,7 +142,7 @@ switch (getStringFromRequest('func')) {
 		if (!$pt->create($summary,$details,$priority,$hours,$start_date,$end_date,$category_id,$percent_complete,$assigned_to,$pt->convertDependentOn($dependent_on),$duration,$parent_id)) {
 			exit_error($pt->getErrorMessage(),'pm');
 		} else {
-			if (count($add_artifact_id) > 0) {
+			if (!empty($add_artifact_id)) {
 				if (!$pt->addRelatedArtifacts($add_artifact_id)) {
 					exit_error('addRelatedArtifacts: '.$pt->getErrorMessage(),'pm');
 				}

@@ -1362,7 +1362,7 @@ class ArtifactTypeHtml extends ArtifactType {
 			} elseif ($ef['alias'] == 'response_time') {
 				// Implement Response SLA: Time from create to first comment.
 				$messages = $artifact->getMessageObjects();
-				if (count($messages) > 0) {
+				if (!empty($messages)) {
 					$message = $messages[count($messages) - 1];
 					$current_time = $message->getAddDate();
 					$timer_is_running = false;

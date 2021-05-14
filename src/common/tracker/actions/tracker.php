@@ -196,7 +196,7 @@ switch (getStringFromRequest('func')) {
 						// in this case, if $extra_fields is not setted, it
 						// means no option was selected, so we have to delete
 						// the original values
-						if (!is_array($f) || count($f) == 0) {
+						if (!is_array($f) || empty($f)) {
 							$ef[$efid] = array();
 						} elseif (in_array('100', $extra_fields[$efid])) {	// "No change" option selected?
 							// no change

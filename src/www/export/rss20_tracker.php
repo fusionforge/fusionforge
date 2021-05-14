@@ -104,7 +104,7 @@ function writeFeed($at_arr, $group_id){
 	//if (isset($limit) ||empty($limit)) $limit = 10;
 	//if ($limit > 100) $limit = 100;
 
-	if (!$at_arr || count($at_arr) < 1) {
+	if (!$at_arr || empty($at_arr)) {
 		endOnError(_("Tracker RSS: No trackers found"));
 
 	} else {

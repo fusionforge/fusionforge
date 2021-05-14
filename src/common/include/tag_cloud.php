@@ -130,7 +130,7 @@ function tag_cloud($params = array()) {
 	$available_counts = array_keys($count_to_tags);
 	rsort($available_counts, SORT_NUMERIC);
 
-	if (count($tag_count) > 0) {
+	if (!empty($tag_count)) {
 		$count_min = 0;
 		$count_max = 0;
 		$nb = 0;

@@ -1181,7 +1181,7 @@ control over it to the project's administrator.");
 						  'description' => $data['description'],
 						  'clone_url' => $data['clone_url']);
 		}
-		if (count($existing_repos) == 0) {
+		if (empty($existing_repos)) {
 			echo $HTML->information(_('No extra Git repository for project').' '.$project_name);
 		} else {
 			echo html_e('h2', array(), sprintf(ngettext('Extra Git repository for project %1$s',

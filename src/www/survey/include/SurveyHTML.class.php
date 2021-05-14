@@ -206,7 +206,7 @@ class SurveyHTML extends FFError {
 		$arr_to_add = & $s->getAddableQuestionInstances();
 		$arr_to_del = & $s->getQuestionInstances();
 
-		if (count($arr_to_add)>0) {
+		if (!empty($arr_to_add)) {
 			$ret.='<h2>'. _('Addable Questions').'</h2>';
 			$title_arr[] = "&nbsp;";
 			$title_arr[] = _('Questions');
@@ -235,7 +235,7 @@ class SurveyHTML extends FFError {
 			}
 		}
 
-		if (count($arr_to_add)>0) {
+		if (!empty($arr_to_add)) {
 			/* Fill the remain cells */
 			if ($i%3==1) {
 				$ret.='<td>&nbsp;</td><td>&nbsp;</td></tr>';
@@ -247,7 +247,7 @@ class SurveyHTML extends FFError {
 		}
 
 		/* Deletable questions */
-		if (count($arr_to_del) > 0) {
+		if (!empty($arr_to_del)) {
 			$ret.='<h2>'. _('Questions in this Survey').'</h2>';
 			$title_arr = array('', _('Question'), _('Type'), _('Order'), _('Delete from this Survey'));
 			$ret.= $HTML->listTableTop($title_arr);
@@ -272,7 +272,7 @@ class SurveyHTML extends FFError {
 
 		}
 
-		if (count($arr_to_del)) {
+		if (!empty($arr_to_del)) {
 			$ret.= $HTML->listTableBottom();
 		}
 
@@ -298,7 +298,7 @@ class SurveyHTML extends FFError {
 		$title_arr = array(_('Question ID'), _('Question'), _('Type'), _('Edit/Delete'));
 		$ret.= $HTML->listTableTop($title_arr);
 
-		for($i = 0; $i < count($questions); $i++) {
+		for ($i = 0; $i < count($questions); $i++) {
 			if ($questions[$i]->isError()) {
 				echo $questions[$i]->getErrorMessage();
 				continue;
@@ -690,12 +690,10 @@ class SurveyHTML extends FFError {
 					sprintf(ngettext('View All %s Comment', 'View All %s Comments', $totalCount), $totalCount)).
 					'</li></ul>';
 			}
-
 			break;
 		default:
 			break;
 		}
-
 		return $ret;
 	}
 
@@ -819,7 +817,3 @@ class SurveyHTML extends FFError {
 	}
 }
 
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:

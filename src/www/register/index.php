@@ -82,7 +82,7 @@ if (getStringFromRequest('submit')) {
 	} elseif (forge_get_config('allow_project_without_template')) {
 		// Empty projects allowed
 		$built_from_template = 0 ;
-	} elseif (count($template_projects) == 0) {
+	} elseif (empty($template_projects)) {
 		// No empty projects allowed, but no template available
 		$built_from_template = 0 ;
 	} else {

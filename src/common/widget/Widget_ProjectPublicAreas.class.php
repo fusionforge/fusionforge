@@ -65,7 +65,7 @@ class Widget_ProjectPublicAreas extends Widget {
 				}
 			}
 
-			if (count($rows) < 1) {
+			if (empty($rows)) {
 				$result .= "<br />\n<em>"._('There are no trackers available').'</em>';
 			} else {
 				$elementsLi = array();

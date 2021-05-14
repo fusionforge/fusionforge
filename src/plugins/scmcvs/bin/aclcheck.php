@@ -41,7 +41,7 @@ $env_cvsroot = (string) $_ENV['CVSROOT'];
 # 2. Then must contain 3 - 25 alphanumeric chars or -
 preg_match("/^\/\/?(cvs)(root)*\/\/?([[:alnum:]-]{3,25})$/", $env_cvsroot, $matches);
 
-if (count($matches) == 0) {
+if (empty($matches)) {
 	print "Invalid CVS directory\n";
 	exit(1);
 }

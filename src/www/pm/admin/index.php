@@ -412,7 +412,7 @@ if ($add_cat && $group_project_id) {
 
 	$pg_arr = $pgf->getProjectGroups();
 
-	if (count($pg_arr) < 1 || $pg_arr == false) {
+	if ($pg_arr == false || empty($pg_arr)) {
 		echo $HTML->information(_('No Subprojects Found in this Project'));
 		echo '<p>' . _('You may add new Subprojects using the “Add a Subproject” link above.') . '</p>';
 		echo db_error();

@@ -898,7 +898,7 @@ Offer DAV or SSH access.");
 			$existing_repos[] = array('repo_name' => $data['repo_name'],
 						  'description' => $data['description']);
 		}
-		if (count($existing_repos) == 0) {
+		if (empty($existing_repos)) {
 			echo $HTML->information(_('No extra Hg repository for project').' '.$project_name);
 		} else {
 			echo html_e('h2', array(), sprintf(ngettext('Extra Hg repository for project %1$s',

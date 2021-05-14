@@ -29,27 +29,24 @@ require_once $gfcommon.'include/FFError.class.php';
 require_once $gfcommon.'include/Validator.class.php';
 
 function projecttask_get_object($project_task_id, $data = false) {
-		global $PROJECTTASK_OBJ;
-		if (!isset($PROJECTTASK_OBJ["_".$project_task_id."_"])) {
-			if ($data) {
-				//the db result handle was passed in
-			} else {
-				$res = db_query_params ('SELECT * FROM project_task_vw WHERE project_task_id=$1',
-							array ($project_task_id)) ;
+	global $PROJECTTASK_OBJ;
+	if (!isset($PROJECTTASK_OBJ["_".$project_task_id."_"])) {
+		if ($data) {
+			//the db result handle was passed in
+		} else {
+			$res = db_query_params ('SELECT * FROM project_task_vw WHERE project_task_id=$1',
+						array ($project_task_id)) ;
 
-				if (db_numrows($res) <1 ) {
-					$PROJECTTASK_OBJ["_".$project_task_id."_"]=false;
-					return false;
-				}
-				$data = db_fetch_array($res);
-
+			if (db_numrows($res) <1 ) {
+				$PROJECTTASK_OBJ["_".$project_task_id."_"]=false;
+				return false;
 			}
-			$ProjectGroup = projectgroup_get_object($data["group_project_id"]);
-			$PROJECTTASK_OBJ["_".$project_task_id."_"]= new ProjectTask($ProjectGroup,$project_task_id,$data);
-
+			$data = db_fetch_array($res);
 		}
-
-		return $PROJECTTASK_OBJ["_".$project_task_id."_"];
+		$ProjectGroup = projectgroup_get_object($data["group_project_id"]);
+		$PROJECTTASK_OBJ["_".$project_task_id."_"]= new ProjectTask($ProjectGroup,$project_task_id,$data);
+	}
+	return $PROJECTTASK_OBJ["_".$project_task_id."_"];
 }
 
 /*
@@ -857,8 +854,8 @@ class ProjectTask extends FFError {
 		$this->assignedto =& $arr;
 
 		// If no one is assigned, then assign it to "100" - NOBODY
-		if (!$arr || count($arr) < 1 || ((count($arr)==1) && ($arr[0]==''))) {
-			$arr=array('100');
+		if (!$arr || empty($arr) || ((count($arr)==1) && ($arr[0]==''))) {
+			$arr = array('100');
 		}
 		if (count($arr) || count($arr2)) {
 			$add_arr = array_values(array_diff ($arr, $arr2));

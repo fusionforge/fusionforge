@@ -41,7 +41,7 @@ function getFilterUrl($filterArray, $currentId = 0) {
 			unset($filterArray[$currentPosition]);
 		}
 	}
-	if(sizeof($filterArray) > 0) {
+	if(!empty($filterArray)) {
 		$url = '&discrim='.implode(',', $filterArray);
 	}
 	return $url;

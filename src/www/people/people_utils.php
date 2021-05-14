@@ -392,7 +392,7 @@ function people_show_category_table() {
 			$i++;
 		}
 	}
-	if (count($categories) < 1) {
+	if (empty($categories)) {
 		$return = $HTML->warning_msg(_('No categories found.'));
 	} else {
 		$return = $HTML->listTableTop($title_arr);
@@ -449,7 +449,7 @@ function people_show_job_list($result) {
 		}
 	}
 
-	if (count($projects) < 1) {
+	if (empty($projects)) {
 		$return = $HTML->warning_msg(_('None Found'));
 	} else {
 		$return = $HTML->listTableTop($title_arr);

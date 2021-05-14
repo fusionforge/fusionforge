@@ -2843,7 +2843,7 @@ class Group extends FFError {
 			$submitters[] = user_get_object($gjr->getUserID());
 		}
 
-		if (count ($submitters) < 1) {
+		if (empty($submitters)) {
 			$this->setError(_('Group does not have any administrators.'));
 			return false;
 		}

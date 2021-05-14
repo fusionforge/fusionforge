@@ -137,7 +137,7 @@ function queries_to_soap($queries) {
 //	print_r($queries[1]->getExtraFields());
 //	die();
 
-	if (is_array($queries) && count($queries) > 0) {
+	if (is_array($queries) && !empty($queries)) {
 		for ($i=0; $i < count($queries); $i++) {
 			$artifactQuery =& $queries[$i];
 

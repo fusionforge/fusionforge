@@ -976,7 +976,7 @@ class Artifact extends FFObject {
 		//	the status_id based on the extra field - this keeps the counters
 		//	accurate
 		//
-		if (count($extra_fields) > 0) {
+		if (!empty($extra_fields)) {
 			$status_id=$this->ArtifactType->remapStatus($status_id,$extra_fields);
 		}
 		if (!$this->getID()) {
@@ -2015,11 +2015,11 @@ class Artifact extends FFObject {
 			"\n".util_make_url($this->getPermalink());
 
 		//only send if some recipients were found
-		if (count($emails) < 1 && count($monitor_ids) < 1) {
+		if (empty($emails) && empty($monitor_ids)) {
 			return true;
 		}
 
-		if (count($monitor_ids) < 1) {
+		if (empty($monitor_ids)) {
 			$monitor_ids = array();
 		} else {
 			$monitor_ids = array_unique($monitor_ids);
@@ -2039,15 +2039,13 @@ class Artifact extends FFObject {
 		}
 
 		//now remove all duplicates from the email list
-		if (count($emails) > 0) {
+		if (!empty($emails)) {
 			$bcc = implode(',',array_unique($emails));
 			util_send_message('', $subject, $body, $from, $bcc, '', $extra_headers);
 		}
 
 		$this->sendSubjectMsg = $subject;
 		$this->sendBodyMsg = $body;
-
-		//util_handle_message($monitor_ids,$subject,$body,$BCC);
 
 		return true;
 	}

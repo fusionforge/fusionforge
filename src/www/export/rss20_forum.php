@@ -77,34 +77,36 @@ $debug = false;
 
 //--- filter by group_ids - resolve them to forums ---
 if (isset($_GET['group_ids'])&&!empty($_GET['group_ids'])) {
-    //explode: http changes "+" to " "
-    $group_ids = array_unique(array_merge($group_ids, explode(" ",$_GET['group_ids'])));
+	//explode: http changes "+" to " "
+	$group_ids = array_unique(array_merge($group_ids, explode(" ",$_GET['group_ids'])));
 
-    //loop through group_ids
-    for ($i=0; $i<count($group_ids);$i++){
-        if (is_numeric($group_ids[$i])) {
-            $group = group_get_object($group_ids[$i]);
-            //does group exist? do we get an object? is group public? does it use forums?
-            if ($group && is_object($group) && !$group->isError()
-                        && $group->isPublic() && $group->usesForum()){
-                $groups[] = $group;
-                //valid forums from forum_ids param (needed for feed title)
-                $n_group_ids++;
+	//loop through group_ids
+	for ($i=0; $i<count($group_ids);$i++) {
+		if (is_numeric($group_ids[$i])) {
+			$group = group_get_object($group_ids[$i]);
+			//does group exist? do we get an object? is group public? does it use forums?
+			if ($group && is_object($group) && !$group->isError() && $group->isPublic() && $group->usesForum()) {
+				$groups[] = $group;
+				//valid forums from forum_ids param (needed for feed title)
+				$n_group_ids++;
 
-                //this groups' forums in array (code based on forum/index.php)
-                $ff=new ForumFactory($group);
-                if ($ff &&is_object($ff) && !$ff->isError()) {
-                    $farr = array_merge($farr, $ff->getForums());
-                    if (count($farr) < 1) {
-                            error_log(_("Forum RSS: No forums found"),0);
-                    }
-                }
-                else error_log("Forum RSS: ForumFactory error: ".$ff->getErrorMessage()." - No forums for group ".$group->getPublicName(),0);
-            }
-	    else error_log("Forum RSS: group object error",0);
-        }
-	else error_log("Forum RSS: invalid group_ids param: ".$group_ids[$i],0);
-    }
+				//this groups' forums in array (code based on forum/index.php)
+				$ff=new ForumFactory($group);
+				if ($ff &&is_object($ff) && !$ff->isError()) {
+					$farr = array_merge($farr, $ff->getForums());
+					if (empty($farr)) {
+						error_log(_("Forum RSS: No forums found"),0);
+					}
+				} else {
+					error_log("Forum RSS: ForumFactory error: ".$ff->getErrorMessage()." - No forums for group ".$group->getPublicName(),0);
+				}
+			} else {
+				error_log("Forum RSS: group object error",0);
+			}
+		} else { 
+			error_log("Forum RSS: invalid group_ids param: ".$group_ids[$i],0);
+		}
+	}
 }
 
 // ----------- add forums called by forum_ids param, if any ------------

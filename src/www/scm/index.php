@@ -45,7 +45,7 @@ foreach ($av_scm_plugins as $av_scm_plugin) {
 		$scm_plugins[] = plugin_get_object($av_scm_plugin);
 	}
 }
-if (count($scm_plugins) == 0) {
+if (empty($scm_plugins)) {
 	$warning_msg = _("This project has no associated Source Code Management tool defined, please configure one using the Administration submenu.");
 }
 

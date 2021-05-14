@@ -140,7 +140,7 @@ function &user_get_objects($id_arr) {
 			$fetch[] = $id;
 		}
 	}
-	if (count($fetch) > 0) {
+	if (!empty($fetch)) {
 		$res = db_query_params('SELECT * FROM users WHERE user_id = ANY ($1)',
 			array(db_int_array_to_any_clause($fetch)));
 		while ($arr = db_fetch_array($res)) {

@@ -39,7 +39,7 @@ if ($at_arr === false) {
 html_use_tablesorter();
 $atf->header();
 
-if (!$at_arr || count($at_arr) < 1) {
+if (!$at_arr || empty($at_arr)) {
 	$localInformation = $HTML->information(_('No trackers have been set up, or you cannot view them.'));
 	$localInformation .= html_e('p', array(), sprintf(_('The Admin for this project will have to set up data types using the %1$s admin page %2$s'), '<a href="'.util_make_url ('/tracker/admin/?group_id='.$group_id).'">', '</a>'));
 	$at_arr = array();
@@ -64,7 +64,7 @@ if ($group->usesPlugin('projects-hierarchy')) {
 	}
 }
 
-if (count($at_arr) < 1) {
+if (empty($at_arr)) {
 	echo $localInformation;
 } else {
 	plugin_hook('blocks', 'tracker index');

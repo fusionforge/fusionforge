@@ -598,7 +598,7 @@ function getArtifactTypes($session_ser, $group_id) {
 //
 function artifacttype_to_soap($at_arr) {
 	$return = array();
-	if (is_array($at_arr) && count($at_arr) > 0) {
+	if (is_array($at_arr) && !empty($at_arr)) {
 		for ($i=0; $i<count($at_arr); $i++) {
 			if ($at_arr[$i]->isError()) {
 				//skip if error
@@ -615,7 +615,7 @@ function arrangeExtraFields($extra_fields, $extra_field_info) {
 	$efields=array();
 	$fieldsdata=array();
 	if (is_array($extra_fields)) {
-		while(list($eky,)=each($extra_fields)) {
+		foreach ($extra_fields as $eky => $evl) {
 			$efields=$extra_fields[$eky];
 			$efid = $efields['extra_field_id'];
 			$data = $efields['field_data'];
@@ -835,7 +835,7 @@ function getArtifact($session_ser, $group_id, $group_artifact_id, $artifact_id) 
 //
 function artifacts_to_soap($at_arr) {
 	$return = array();
-	if (is_array($at_arr) && count($at_arr) > 0) {
+	if (is_array($at_arr) && !empty($at_arr)) {
 		for ($i=0; $i<count($at_arr); $i++) {
 			if ($at_arr[$i]->isError()) {
 				//skip if error
@@ -845,7 +845,9 @@ function artifacts_to_soap($at_arr) {
 				// Retrieving the artifact details
 				//**checks whether there is any artifact details exists for this object, if not continue with next loop
 
-				if(count($at_arr[$i]) < 1) { continue; }
+				if (empty($at_arr[$i])) {
+					continue;
+				}
 				$flddata=array();
 				$extrafieldsdata=array();
 				$extrafieldsdata=$at_arr[$i]->getExtraFieldData();
@@ -854,10 +856,10 @@ function artifacts_to_soap($at_arr) {
 				//** Retrieving the extra field data and the element data
 				//** checks whether there is any extra fields data available for this artifact
 				//** and checks for the extra element data for the multiselect and checkbox type
-				if(is_array($extrafieldsdata) && count($extrafieldsdata)>0) {
-					while(list($ky, $vl)=each($extrafieldsdata)) {
+				if (is_array($extrafieldsdata) && !empty($extrafieldsdata)) {
+					foreach ($extrafieldsdata as $ky => $vl) {
 						$fldarr=array();
-						if(is_array($extrafieldsdata[$ky])) {
+						if (is_array($extrafieldsdata[$ky])) {
 							//** Retrieving the multiselect and checkbox type data element
 							$fldarr=array('extra_field_id' => $ky, 'field_data'=>implode(",", $extrafieldsdata[$ky]));
 						} else {
@@ -894,7 +896,7 @@ function artifacts_to_soap($at_arr) {
 //
 function flattedartifacts_to_soap($at_arr) {
 	$return = array();
-	if (is_array($at_arr) && count($at_arr) > 0) {
+	if (is_array($at_arr) && !empty($at_arr)) {
 		for ($i=0; $i<count($at_arr); $i++) {
 			if ($at_arr[$i]->isError()) {
 				//skip if error
@@ -904,7 +906,9 @@ function flattedartifacts_to_soap($at_arr) {
 				// Retrieving the artifact details
 				//**checks whether there is any artifact details exists for this object, if not continue with next loop
 
-				if(count($at_arr[$i]) < 1) { continue; }
+				if (count($at_arr[$i]) < 1) {
+					continue;
+				}
 				$flddata=array();
 				$extrafieldsdatatext=array();
 				$extrafieldsdatatext=$at_arr[$i]->getExtraFieldDataText();

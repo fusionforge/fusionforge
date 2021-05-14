@@ -98,7 +98,7 @@ over it to the project's administrator.");
 	function getInstructionForDarcs($project, $rw) {
 		global $HTML;
 		$repo_names = $this->getRepositories($project);
-		if (count($repo_names) > 0) {
+		if (!empty($repo_names)) {
 			$default_repo = "REPO";
 			if (count($repo_names) == 1) {
 				$default_repo = $repo_names[0];

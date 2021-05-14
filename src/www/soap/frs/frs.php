@@ -282,7 +282,7 @@ function getPackages($session_ser, $group_id) {
 function packages_to_soap(&$pkg_arr) {
 	$return = array();
 
-	if (is_array($pkg_arr) && count($pkg_arr) > 0) {
+	if (is_array($pkg_arr) && !empty($pkg_arr)) {
 		for ($i=0; $i<count($pkg_arr); $i++) {
 			if ($pkg_arr[$i]->isError()) {
 				//skip if error
@@ -352,7 +352,7 @@ function getReleases($session_ser, $group_id, $package_id) {
 function releases_to_soap(&$release_arr) {
 	$return = array();
 
-	if (is_array($release_arr) && count($release_arr) > 0) {
+	if (is_array($release_arr) && !empty($release_arr)) {
 		for ($i=0; $i<count($release_arr); $i++) {
 			if ($release_arr[$i]->isError()) {
 				//skip if error
@@ -429,7 +429,7 @@ function getFiles($session_ser, $group_id, $package_id, $release_id) {
 function files_to_soap($files_arr) {
 	$return = array();
 
-	if (is_array($files_arr) && count($files_arr) > 0) {
+	if (is_array($files_arr) && !empty($files_arr)) {
 		for ($i=0; $i<count($files_arr); $i++) {
 			if ($files_arr[$i]->isError()) {
 				//skip if error
@@ -454,7 +454,7 @@ function files_to_soap($files_arr) {
 function filetypes_to_soap($files_arr) {
 	$return = array();
 
-	if (is_array($files_arr) && count($files_arr) > 0) {
+	if (is_array($files_arr) && !empty($files_arr)) {
 		for ($i=0; $i<count($files_arr); $i++) {
 			if ($files_arr[$i]->isError()) {
 				//skip if error
@@ -472,7 +472,7 @@ function filetypes_to_soap($files_arr) {
 function fileprocessortypes_to_soap($files_arr) {
 	$return = array();
 
-	if (is_array($files_arr) && count($files_arr) > 0) {
+	if (is_array($files_arr) && !empty($files_arr)) {
 		for ($i=0; $i<count($files_arr); $i++) {
 			if ($files_arr[$i]->isError()) {
 				//skip if error

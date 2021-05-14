@@ -123,7 +123,7 @@ foreach ($all_users as $user) {
 $err .= "Mailing ".count($filtered_users)." users.\n";
 
 // If no more users left, we've finished with this mailing
-if (count ($filtered_users)==0) {
+if (empty($filtered_users)) {
 	db_query_params ('UPDATE massmail_queue SET failed_date=0,finished_date=$1 WHERE id=$2',
 			 array(time(),
 			       $mail_id));

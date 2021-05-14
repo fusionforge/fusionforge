@@ -124,7 +124,7 @@ some control over it to the project's administrator.");
 				}
 			}
 		}
-		if (count($modules) == 0) {
+		if (empty($modules)) {
 			$modules[] = '/';
 		}
 		return $modules;
@@ -1083,7 +1083,7 @@ some control over it to the project's administrator.");
 			$existing_repos[] = array('repo_name' => $data['repo_name'],
 						  'description' => $data['description']);
 		}
-		if (count($existing_repos) == 0) {
+		if (empty($existing_repos)) {
 			echo $HTML->information(_('No extra Subversion repository for project').' '.$project_name);
 		} else {
 			echo html_e('h2', array(), sprintf(ngettext('Extra Subversion repository for project %1$s',

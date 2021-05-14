@@ -47,7 +47,7 @@ if ($group_id) {
 	}
 
 	$farr = $ff->getForums();
-	if (count($farr) == 0) {
+	if (empty($farr)) {
 		$localInformation = $HTML->information(sprintf(_('No Forums found for %s'), $g->getPublicName()));
 	}
 
@@ -79,7 +79,7 @@ if ($group_id) {
 
 	forum_header(array('title' => sprintf(_('Forums for %s'), $g->getPublicName()) ));
 
-	if ( count($farr) < 1) {
+	if (empty($farr)) {
 		echo $localInformation;
 		forum_footer();
 		exit;
