@@ -33,7 +33,7 @@ class HudsonTestResult {
 	/**
 	 * Construct an Hudson job from a job URL
 	 */
-	function HudsonTestResult($hudson_job_url) {
+	function __construct($hudson_job_url) {
 		$parsed_url = parse_url($hudson_job_url);
 
 		if ( ! $parsed_url || ! array_key_exists('scheme', $parsed_url) ) {

@@ -51,7 +51,7 @@ class ForumGateway extends FFError {
 	var $ForumId=-1;
 	var $Message="";
 
-	function ForumGateway() {
+	function __construct() {
 		parent::__construct();
 
 		/* Copy mail message to tmp file */

@@ -32,13 +32,8 @@ require_once 'PluginHudsonJobDao.class.php';
 
 class hudsonViews extends Views {
 
-	function hudsonViews(&$controler, $view=null) {
-		$request =& HTTPRequest::instance();
-		$this->View($controler, $view, array('title'=>$this->_getTitle(),'group' => $request->get('group_id'), 'toptab' => 'hudson'));
-	}
-
-	function header() {
-		parent::header();
+	function __construct(&$controler, $view=null) {
+		$this->View($controler, $view, array('title'=>$this->_getTitle(),'group' => getIntFromRequest('group_id'), 'toptab' => 'hudson'));
 	}
 
 	function _getTitle() {
@@ -55,10 +50,6 @@ class hudsonViews extends Views {
 			$help_label = _("Help");
 		}
 		return '<b><a href="javascript:help_window(\''.get_server_url().'help/guide/ContinuousIntegrationIntroduction.html'.$section.'\');">'.$help_label.'</a></b>';
-	}
-
-	function footer() {
-		parent::footer();
 	}
 
 	// {{{ Views
@@ -174,7 +165,6 @@ class hudsonViews extends Views {
 
 	function test_trend() {
 		global $HTML;
-		$request =& HTTPRequest::instance();
 		$job_id = getIntFromRequest('job_id');
 		$job_dao = new PluginHudsonJobDao(CodendiDataAccess::instance());
 		$dar = $job_dao->searchByJobID($job_id);

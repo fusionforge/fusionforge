@@ -21,7 +21,7 @@
  */
 
 class globalactivityPlugin extends Plugin {
-	public function __construct($id=0) {
+	public function __construct($id = 0) {
 		parent::__construct($id);
 		$this->name = "globalactivity";
 		$this->text = "Global Activity";

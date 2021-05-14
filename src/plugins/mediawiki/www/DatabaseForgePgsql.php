@@ -22,13 +22,10 @@
 
 require_once("$IP/includes/db/DatabasePostgres.php");
 class DatabaseForge extends DatabasePostgres {
-	function __construct($server=false, $user=false, $password=false,
-	    $dbName=false, $failFunction=false, $flags=0) {
+	function __construct($server=false, $user=false, $password=false, $dbName=false, $failFunction=false, $flags=0) {
 		global $wgDBtype;
-
 		$wgDBtype = "postgres";
-		return parent::__construct($server, $user,
-		    $password, $dbName, $failFunction, $flags);
+		return parent::__construct($server, $user, $password, $dbName, $failFunction, $flags);
 	}
 
 	function fieldInfo($table, $field) {
@@ -93,8 +90,3 @@ class DatabaseForge extends DatabasePostgres {
 		return $v;
 	}
 }
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:

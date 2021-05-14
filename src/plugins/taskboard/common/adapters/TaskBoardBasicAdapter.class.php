@@ -40,7 +40,7 @@ class TaskBoardBasicAdapter extends FFError {
 	var $_fields = array();
 	var $_elements = array(); // hash of extra fields values tracker_id => extra_field_id => element_name => element_id
 
-	function TaskBoardBasicAdapter($TaskBoard) {
+	function __construct($TaskBoard) {
 		$this->TaskBoard = $TaskBoard;
 	}
 

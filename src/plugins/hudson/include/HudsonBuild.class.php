@@ -33,7 +33,7 @@ class HudsonBuild {
 	/**
 	 * Construct an Hudson build from a build URL
 	 */
-	function HudsonBuild($hudson_build_url) {
+	function __construct($hudson_build_url) {
 		$parsed_url = parse_url($hudson_build_url);
 
 		if ( ! $parsed_url || ! array_key_exists('scheme', $parsed_url) ) {

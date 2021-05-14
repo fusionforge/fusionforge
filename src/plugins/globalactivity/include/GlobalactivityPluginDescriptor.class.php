@@ -25,7 +25,7 @@ require_once 'common/plugin/PluginDescriptor.class.php';
 
 class GlobalactivityPluginDescriptor extends PluginDescriptor {
 
-    function GlobalactivityPluginDescriptor() {
+    function __construct() {
         $this->PluginDescriptor(_('Globalactivity'), 'v1.0', _('Global activity in the forge'));
     }
 }

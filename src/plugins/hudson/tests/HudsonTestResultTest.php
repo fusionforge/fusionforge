@@ -36,7 +36,7 @@ class HudsonTestResultTest extends UnitTestCase {
      * Constructor of the test. Can be ommitted.
      * Usefull to set the name of the test
      */
-    function HudsonTestResultTest($name = 'HudsonTestResult test') {
+    function __construct($name = 'HudsonTestResult test') {
         $this->UnitTestCase($name);
     }
 
