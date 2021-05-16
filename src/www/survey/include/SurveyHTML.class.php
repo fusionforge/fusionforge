@@ -816,4 +816,3 @@ class SurveyHTML extends FFError {
 		return $ret;
 	}
 }
-
