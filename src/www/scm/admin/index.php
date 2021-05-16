@@ -184,6 +184,7 @@ $hook_params['group_id'] = $group_id ;
 
 $SCMFactory = new SCMFactory();
 $scm_plugins = $SCMFactory->getSCMs();
+$scmPluginObjects = array();
 if (!empty($scm_plugins)) {
 	echo $HTML->information(_('Note: Changing the repository does not delete the previous repository. It only affects the information displayed under the SCM tab.'));
 	if (count($scm_plugins) == 1) {
