@@ -283,7 +283,6 @@ control over it to the project's administrator.");
 		if ($params['scm_plugin'] != $this->name) {
 			return;
 		}
-		global $HTML;
 		$project = $this->checkParams($params);
 		if (!$project) {
 			return;
@@ -438,9 +437,9 @@ control over it to the project's administrator.");
 		$output = '';
 
 		$project = $this->checkParams($params);
-		if (!$project) return false;
-		if (!$project->isActive()) return false;
-
+		if (!$project) {
+			return false;
+		}
 		$project_name = $project->getUnixName();
 		$unix_group_ro = $project_name . '_scmro';
 		$unix_group_rw = $project_name . '_scmrw';
@@ -769,16 +768,21 @@ control over it to the project's administrator.");
 				} else {
 					// Short-commit stats line
 					$result = preg_match("/^(?P<mode>[AMD])\s+(?P<file>.+)$/", $line, $matches);
-					if (!$result)
+					if (!$result) {
 						continue;
-					if ($last_user == "")
+					}
+					if ($last_user == "") {
 						continue;
-					if (!isset($usr_adds[$last_user]))
+					}
+					if (!isset($usr_adds[$last_user])) {
 						$usr_adds[$last_user] = 0;
-					if (!isset($usr_updates[$last_user]))
+					}
+					if (!isset($usr_updates[$last_user])) {
 						$usr_updates[$last_user] = 0;
-					if (!isset($usr_deletes[$last_user]))
+					}
+					if (!isset($usr_deletes[$last_user])) {
 						$usr_deletes[$last_user] = 0;
+					}
 					if ($matches['mode'] == 'A') {
 						$usr_adds[$last_user]++;
 						$adds++;
@@ -970,7 +974,7 @@ control over it to the project's administrator.");
 			$project = group_get_object($row['group_id']);
 			if (!$project || !is_object($project)) {
 				continue;
-			} elseif ($project->isError()) {
+			} elseif ($project->isError() || !$project->isActive()) {
 				continue;
 			}
 			if (!$project->usesPlugin($this->name)) {
@@ -1237,10 +1241,11 @@ control over it to the project's administrator.");
 			// Grab&parse commit log
 			$protocol = forge_get_config('use_ssl', 'scmgit') ? 'https://' : 'http://';
 			$u = session_get_user();
-			if ($project->enableAnonSCM())
+			if ($project->enableAnonSCM()) {
 				$server_script = '/anonscm/gitlog';
-			else
+			} else {
 				$server_script = '/authscm/'.$u->getUnixName().'/gitlog';
+			}
 			if ($user) {
 				$email = $user->getEmail();
 				$realname = $user->getFirstName().' '.$user->getLastName();
@@ -1539,8 +1544,3 @@ control over it to the project's administrator.");
 		return $repoarr;
 	}
 }
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:
