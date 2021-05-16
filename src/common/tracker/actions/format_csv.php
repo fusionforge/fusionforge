@@ -73,11 +73,11 @@ $sep = getStringFromRequest('sep', ',');
 					<?php echo _('Separator')._(':'); ?>
 				</td>
 				<td>
-					<input type="radio" id="comma" name="sep" value=","<?php if ($sep==',') { echo ' checked="checked"' } ?> />
+					<input type="radio" id="comma" name="sep" value=","<?php if ($sep==',') { echo ' checked="checked"'; } ?> />
 					<label for="comma">
 						<?php echo _('Comma (char: “,”)'); ?><br />
 					</label>
-					<input type="radio" id="semi-colon" name="sep" value=";"<?php if ($sep==';') { echo ' checked="checked"' } ?> />
+					<input type="radio" id="semi-colon" name="sep" value=";"<?php if ($sep==';') { echo ' checked="checked"'; } ?> />
 					<label for="semi-colon">
 						<?php echo _('Semi-colon (char: “;”)'); ?>
 					</label>
@@ -88,11 +88,11 @@ $sep = getStringFromRequest('sep', ',');
 					<?php echo _('Header')._(':'); ?>
 				</td>
 				<td>
-					<input type="radio" id="included" name="headers" value="1"<?php if ($headers) { echo ' checked="checked"' } ?> />
+					<input type="radio" id="included" name="headers" value="1"<?php if ($headers) { echo ' checked="checked"'; } ?> />
 					<label for="included">
 						<?php echo _('Included'); ?><br />
 					</label>
-					<input type="radio" id="none" name="headers" value="0"<?php if (!$headers) echo {' checked="checked"' } ?> />
+					<input type="radio" id="none" name="headers" value="0"<?php if (!$headers) { echo ' checked="checked"'; } ?> />
 					<label for="none">
 						<?php echo _('None'); ?>
 					</label>
