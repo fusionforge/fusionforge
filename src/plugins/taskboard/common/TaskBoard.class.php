@@ -640,7 +640,7 @@ class TaskBoard extends FFError {
 				foreach($tasks_trackers as $tasks_tracker_data) {
 					$tasks = $this->TrackersAdapter->getTasks($tasks_tracker_data['group_artifact_id'], $assigned_to, NULL, $story->getID());
 					foreach($tasks as $task) {
-						$stories[$story->getID()]['tasks'][] = $this->getMappedTask($task);;
+						$stories[$story->getID()]['tasks'][] = $this->getMappedTask($task);
 					}
 				}
 			}

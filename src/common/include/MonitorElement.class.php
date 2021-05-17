@@ -46,7 +46,7 @@ class MonitorElement extends FFError {
 				$this->_enableMonitoringByUserIdQuery = 'insert into docdata_monitored_docman (doc_id, user_id) values ($1, $2)';
 				$this->_getAllEmailsInArrayQuery = 'select users.email from users, docdata_monitored_docman where users.user_id = docdata_monitored_docman.user_id and docdata_monitored_docman.doc_id = $1 and users.status = $2';
 				$this->_getMonitorCounterIntegerQuery = 'select count(docgroup_monitored_docman.user_id) as count from docdata_monitored_docman, users where users.user_id = docdata_monitored_docman.user_id and doc_id = $1 and users.status = $2';
-				$this->_getMonitorUsersIdsInArrayQuery = 'select docdata_monitored_docman.user_id from docdata_monitored_docman, users where users.user_id = docdata_monitored_docman.user_id and doc_id = $1 and users.status = $2';;
+				$this->_getMonitorUsersIdsInArrayQuery = 'select docdata_monitored_docman.user_id from docdata_monitored_docman, users where users.user_id = docdata_monitored_docman.user_id and doc_id = $1 and users.status = $2';
 				$this->_getMonitoredByUserIdInArrayQuery = 'select doc_id from docdata_monitored_docman where user_id = $1';
 				$this->_getMonitoredDistinctGroupIdsByUserIdInArrayQuery = 'select distinct doc_data.group_id from groups, doc_data, docdata_monitored_docman where docdata_monitored_docman.doc_id = doc_data.docid and groups.group_id = doc_data.group_id and docdata_monitored_docman.user_id = $1 and groups.status = $2';
 				$this->_getMonitoredIdsByGroupIdByUserIdInArrayQuery = 'select doc_data.docid from doc_data, docdata_monitored_docman where doc_data.docid = docdata_monitored_docman.doc_id and doc_data.group_id = $1 and docdata_monitored_docman.user_id = $2';

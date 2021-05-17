@@ -99,7 +99,7 @@ $mwscript = $src_path . '/maintenance/'.$mwscript ;
 
 array_unshift($argv, $mwscript, '--conf', $ff_localsettings);
 
-while (@ob_end_flush())
-	/* nothing */;
-
+while (@ob_end_flush()) {
+	/* nothing */
+}
 require_once $mwscript ;

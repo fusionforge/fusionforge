@@ -1158,7 +1158,7 @@ function util_path_info_last_numeric_component() {
 			$rv = 0;
 			$ok = true;
 		} elseif ($ok == false) {
-			; /* need reset using slash */
+			/* need reset using slash */
 		} elseif ((ord($x) >= 48) && (ord($x) <= 57)) {
 			$rv = $rv * 10 + ord($x) - 48;
 		} else {

@@ -179,7 +179,7 @@ foreach ($group->getUsers() as $member) {
 			if (db_numrows($messages)) {
 				$cells[][] = GetTime(time() - db_result($messages, 0, 'adddate'));
 			} else {
-				$cells[][] = GetTime(time() - $artifact->getOpenDate());;
+				$cells[][] = GetTime(time() - $artifact->getOpenDate());
 			}
 			echo $HTML->multiTableRow(array('class' => 'priority'.$artifact->getPriority()), $cells);
 		}

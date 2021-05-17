@@ -96,18 +96,18 @@ $task_count = 0;
 $tasks = false;
 $fdependenton = false;
 
-function startElement($parser, $name, $attrib){
-    global $principal_tag;
-    global $subproject_id;
-    global $tasks;
-    global $fdependenton;
-    global $result;
-    global $tag_aux;
-    global $iddependenton;
-    global $projectiddependenton;
-    global $linktypedependenton;
+function startElement($parser, $name, $attrib) {
+	global $principal_tag;
+	global $subproject_id;
+	global $tasks;
+	global $fdependenton;
+	global $result;
+	global $tag_aux;
+	global $iddependenton;
+	global $projectiddependenton;
+	global $linktypedependenton;
 
-    $tag_aux = $name;
+	$tag_aux = $name;
 	if ($tasks == true){
 		//ID TASK
 		if ($name == "TASK") {
@@ -129,9 +129,9 @@ function startElement($parser, $name, $attrib){
 		return;
 	}
 
-    switch ($name){
-	    case $name=="REQUEST" : {
-		    switch ($attrib["HANDLE"]){
+	switch ($name) {
+		case $name=="REQUEST" : {
+			switch ($attrib["HANDLE"]){
 				case $attrib["HANDLE"] == "GetSubprojects": {
 					$principal_tag = $attrib["HANDLE"];
 					$result[$name] = $principal_tag;
@@ -140,7 +140,7 @@ function startElement($parser, $name, $attrib){
 				case $attrib["HANDLE"] == "upload": {
 					$principal_tag = $attrib["HANDLE"];
 					$result[$name] = $principal_tag;
-					$result["ACTION"] = $attrib["ACTION"];;
+					$result["ACTION"] = $attrib["ACTION"];
 					break;
 				}
 				case $attrib["HANDLE"] == "download": {
@@ -161,16 +161,16 @@ function startElement($parser, $name, $attrib){
 					break;
 				}
 			}
-	    	break;
-    	}
+			break;
+		}
 
 	   	case $name=="SUBPROJECT" : {
 			$subproject_id = $attrib["ID"];
 			break;
 		}
 
-	   	case $name=="TASKS" : {
-		   	$tasks = true;
+		case $name=="TASKS" : {
+			$tasks = true;
 			break;
 		}
 	}

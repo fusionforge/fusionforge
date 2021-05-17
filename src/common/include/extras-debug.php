@@ -324,7 +324,7 @@ function ffExceptionHandler($e) {
 	/* drop output buffers and error handler */
 	$sysdebug__aborted = true;
 	while (ob_get_length() > 0 && ob_end_clean()) {
-		/* loop */ ;
+		/* loop */
 	}
 	restore_error_handler();
 

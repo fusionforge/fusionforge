@@ -129,11 +129,12 @@ function oauthprovider_CheckAdmin() {
 		exit_error("Invalid User, Cannot Process your request for this user.", 'oauthprovider');
 	}
 
-	if($name)	{
+	if ($name) {
 		$group = group_get_object_by_name($name);
 		$id = $group->getID();
+	} else if ($id) {
+		$group = group_get_object($id);
 	}
-	else if($id) $group = group_get_object($id);
 
 	if ( !$group) {
 		exit_error("Invalid Project", $pluginname);
@@ -151,16 +152,14 @@ function oauthprovider_CheckAdmin() {
 	if ($userperm->isAdmin() || forge_check_global_perm ('forge_admin')) {
 		if($userperm->isAdmin()) {
 			oauthprovider_Project_Header(array('group'=>$id, 'title'=>_('OAuth Provider'), 'pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));
-		}else {
+		} else {
 			oauthprovider_Admin_Header();
 		}
 		return 0;
-	}
-	else if(! forge_check_global_perm ('forge_admin')) {
+	} else if (! forge_check_global_perm ('forge_admin')) {
 		//exit_error("Access Denied, You are not a forge Admin", 'oauthprovider');
 		return 1;
-	}
-	else {
+	} else {
 		//exit_error("Access Denied, You are not a project Admin", 'oauthprovider');
 		return 2;
 	}
@@ -170,23 +169,21 @@ function oauthprovider_CheckAdmin() {
  * exits with error if user is ot a forge or project admin
  */
 function oauthprovider_CheckAdminExit() {
-	switch(oauthprovider_CheckAdmin())	{
+	switch(oauthprovider_CheckAdmin()) {
 		case 1: exit_error("Access Denied, You are not a forge Admin", 'oauthprovider');
 			break;
 		case 2: exit_error("Access Denied, You are not a project Admin", 'oauthprovider');
 			break;
-	};
+	}
 }
 
 /*
  * checks whether the user is a forge admin
  */
 function oauthprovider_CheckForgeAdmin() {
-
-	if(! forge_check_global_perm ('forge_admin')) {
+	if (! forge_check_global_perm ('forge_admin')) {
 		return false;
 	}
-
 	oauthprovider_Admin_Header();
 	return true;
 }
@@ -195,11 +192,8 @@ function oauthprovider_CheckForgeAdmin() {
  * checks whether the user is a forge admin and exits
  */
 function oauthprovider_CheckForgeAdminExit() {
-
 	if(! forge_check_global_perm ('forge_admin')) {
 		exit_error("Access Denied, You are not a forge Admin", 'oauthprovider');
 	}
-
 	oauthprovider_Admin_Header();
-
 }

@@ -111,7 +111,7 @@ control over it to the project's administrator.");
 
 		$htmlRepo = '';
 		foreach ($clone_commands as $cmd) {
-			$htmlRepo .= html_e('kbd', array(), $cmd).html_e('br');;
+			$htmlRepo .= html_e('kbd', array(), $cmd).html_e('br');
 		}
 		$b .= html_e('p', array(), $htmlRepo);
 

@@ -85,7 +85,7 @@ for ($i=0; $i<$count; $i++) {
 	/*	Insert each form value into the responses table */
 
 	$val="_" . $quest_array[$i];
-	$response = getStringFromRequest($val);;
+	$response = getStringFromRequest($val);
 
 	$sr->create(user_getid(), $survey_id, $quest_array[$i], $response);
 	if ($sr->isError()) {

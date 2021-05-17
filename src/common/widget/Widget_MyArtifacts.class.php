@@ -123,7 +123,7 @@ class Widget_MyArtifacts extends Widget {
 			$my_artifacts = $atf->getAssignedArtifactsByGroup();
 		}
 		if ($this->_artifact_show== 'M') {
-			$my_artifacts = $atf->getArtifactsFromSQLwithParams('SELECT * FROM artifact_vw av where (av.artifact_id IN (select artifact_monitor.artifact_id FROM artifact_monitor WHERE artifact_monitor.user_id = $1)) AND av.status_id=1 ORDER BY av.group_artifact_id, av.artifact_id DESC',array(UserManager::instance()->getCurrentUser()->getID()));;
+			$my_artifacts = $atf->getArtifactsFromSQLwithParams('SELECT * FROM artifact_vw av where (av.artifact_id IN (select artifact_monitor.artifact_id FROM artifact_monitor WHERE artifact_monitor.user_id = $1)) AND av.status_id=1 ORDER BY av.group_artifact_id, av.artifact_id DESC',array(UserManager::instance()->getCurrentUser()->getID()));
 		}
 
 		if (count($my_artifacts) > 0) {

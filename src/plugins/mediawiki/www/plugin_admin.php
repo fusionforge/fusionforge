@@ -172,7 +172,7 @@ echo html_e('p', array(), sprintf(_('<a href="%s">Download</a> the nightly creat
 				util_make_url("/plugins/mediawiki/dumps/" . $group_unix_name . ".xml")));
 
 echo html_e('h2', array(), _("This project's wiki logo : \$wgLogo"));
-echo html_ao('div', array('style' => 'border:solid 1px black; margin:3px; padding:3px'));;
+echo html_ao('div', array('style' => 'border:solid 1px black; margin:3px; padding:3px'));
 if (file_exists($group_logo)) {
 	echo html_e('p', array(), _("Current logo:") . ' (<a href="' . $group_logo_url .
 				'">' . _("Download") . '</a>)<br /><img alt="wgLogo.png" ' .

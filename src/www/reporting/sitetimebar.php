@@ -40,16 +40,18 @@ $typ = getStringFromRequest('typ');
 $start = getIntFromRequest('start');
 $end = getIntFromRequest('end');
 
-if (!$start || !$end) $z =& $report->getMonthStartArr();
-
+if (!$start || !$end) {
+	$z =& $report->getMonthStartArr();
+}
 if (!$start) {
 	$start = $z[0];
 }
 if (!$end) {
 	$end = $z[count($z)-1];
 }
-if ($end < $start) list($start, $end) = array($end, $start);
-
+if ($end < $start) {
+	list($start, $end) = array($end, $start);
+}
 if ($typ != 'r' && $start == $end) {
 	$error_msg .= _('Start and end dates must be different');
 }
@@ -75,7 +77,7 @@ echo $HTML->closeForm();
 if ($typ=='r') {
 
 	if (!$start) {
-		$start=mktime(0,0,0,date('m'),1,date('Y'));;
+		$start=mktime(0,0,0,date('m'),1,date('Y'));
 	}
 	if (!$end) {
 		$end=time();
@@ -110,8 +112,3 @@ if ($typ=='r') {
 }
 
 report_footer();
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:

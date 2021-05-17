@@ -151,7 +151,7 @@ if (getStringFromRequest('submit')) {
 		if (!$aq->delete()) {
 			$error_msg .= $aq->getErrorMessage();
 		} else {
-			$feedback .= _('Query Deleted');;
+			$feedback .= _('Query Deleted');
 		}
 		session_redirect('/tracker/?atid='.$atid.'&group_id='.$group_id.'&func=browse');
 	} else {

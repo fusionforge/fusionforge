@@ -32,7 +32,7 @@ if ($boxid) {
 	$ef_id = $boxid;
 	$efe_id = getIntFromRequest('id');
 } else {
-	$ef_id = getIntFromRequest('id');;
+	$ef_id = getIntFromRequest('id');
 	$efe_id = 0;
 }
 
