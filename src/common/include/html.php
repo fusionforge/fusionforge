@@ -453,7 +453,7 @@ function html_get_tooltip_description($element_name) {
 			return $text;
 		case 'description':
 			$text = _('Enter the complete description.')
-				._("Editing tips:http,https or ftp: Hyperlinks. [#NNN]: Tracker id NNN. [TNNN]: Task id NNN. [wiki:&lt;pagename&gt;]: Wiki page. [forum:&lt;msg_id&gt;]: Forum post. [DNNN]: Document id NNN.");
+				.util_gen_cross_ref_hints();
 			if (forge_get_config('tracker_parser_type') == 'markdown') {
 				$text .= ' '._('Use Markdown Syntax');
 			}

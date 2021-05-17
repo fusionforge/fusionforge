@@ -64,6 +64,15 @@ function util_gen_cross_ref($text, $group_id = 0) {
 	return $text;
 }
 
+/**
+ * Return string with cross referencing hints
+ *
+ * @return string
+ */
+function util_gen_cross_ref_hints() {
+	return _('Editing tips:http,https or ftp: Hyperlinks. [#NNN]: Tracker id NNN. [TNNN]: Task id NNN. [wiki:&lt;pagename&gt;]: Wiki page. [forum:&lt;msg_id&gt;]: Forum post. [DNNN]: Document id NNN. [RNNN]: File Release id NNN.');
+}
+
 function _page2url($group_id, $page) {
 	$params = array();
 	$params['group_id'] = $group_id;

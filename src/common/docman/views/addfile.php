@@ -101,7 +101,7 @@ if ($dgf->getNested($stateidArr) == NULL) {
 	echo $HTML->multiTableRow(array(), $cells);
 	$cells = array();
 	$cells[][] = _('Description') .utils_requiredField();
-	$cells[][] = html_e('textarea', array('minlength' => 10, 'placeholder' => _('Description').' '.sprintf(_('(at least %s characters)'), DOCMAN__DESCRIPTION_MIN_SIZE), 'title' => _('Editing tips:http,https or ftp: Hyperlinks. [#NNN]: Tracker id NNN. [TNNN]: Task id NNN. [wiki:&lt;pagename&gt;]: Wiki page. [forum:&lt;msg_id&gt;]: Forum post. [DNNN]: Document id NNN.'), 'name' => 'description', 'rows' => 5, 'cols' => 50, 'maxlength' => DOCMAN__DESCRIPTION_MAX_SIZE, 'required' => 'required'), '', false);
+	$cells[][] = html_e('textarea', array('minlength' => 10, 'placeholder' => _('Description').' '.sprintf(_('(at least %s characters)'), DOCMAN__DESCRIPTION_MIN_SIZE), 'title' => util_gen_cross_ref_hints(), 'name' => 'description', 'rows' => 5, 'cols' => 50, 'maxlength' => DOCMAN__DESCRIPTION_MAX_SIZE, 'required' => 'required'), '', false);
 	echo $HTML->multiTableRow(array(), $cells);
 	$cells = array();
 	$cells[][] = _('Comment');
