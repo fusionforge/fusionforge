@@ -87,29 +87,29 @@ class OauthAuthzConsumer extends OAuthConsumer {
   	}
 
   	static function check_consumer_values($p_consumer_name, $p_consumer_url, $p_consumer_desc, $p_consumer_email)	{
-	  	if ((!trim($p_consumer_name))) {
+	  	if (!trim($p_consumer_name)) {
 			//$missing_params[] = _('"Consumer Name"');
-			return "The field 'Consumer Name' is empty! ";
+			return "The field 'Consumer Name' is empty!";
 			//exit_missing_param('', $missing_params,'oauthprovider');
-		} elseif ((!trim($p_consumer_url))) {
-			return "The field 'Consumer URL' is empty! ";
-		} elseif ((!trim($p_consumer_desc))) {
-			return "The field 'Consumer Description' is empty! ";
-		} elseif ((!trim($p_consumer_email))) {
-			return "The field 'Consumer Email' is empty! ";
-		} elseif(strlen($p_consumer_name)<5)	{
+		} elseif (!trim($p_consumer_url)) {
+			return "The field 'Consumer URL' is empty!";
+		} elseif (!trim($p_consumer_desc)) {
+			return "The field 'Consumer Description' is empty!";
+		} elseif (!trim($p_consumer_email)) {
+			return "The field 'Consumer Email' is empty!";
+		} elseif (strlen($p_consumer_name)<5) {
 			return "The Consumer Name cannot be less than 5 characters!";
-		} elseif(strlen($p_consumer_name)>15)	{
+		} elseif (strlen($p_consumer_name)>15) {
 			return "The Consumer Name cannot be more than 15 characters!";
-		} elseif(is_numeric(substr($p_consumer_name, 0, 1)))	{
+		} elseif (is_numeric(substr($p_consumer_name, 0, 1))) {
 			return "The Consumer Name cannot begin with a numeral!";
-		} elseif((substr($p_consumer_name, 0, 1))=="_")	{
+		} elseif ((substr($p_consumer_name, 0, 1)) == "_") {
 			return "The Consumer Name cannot begin with an underscore!";
-		} elseif(preg_match('/^[A-z][A-z_0-9]{4,}/', $p_consumer_name)==0)	{
+		} elseif (preg_match('/^[A-z][A-z_0-9]{4,}/', $p_consumer_name) == 0) {
 			return "The Consumer Name can only contain alphabets (a-z,A-Z), numbers (0-9) and underscores (_). Please choose a Consumer Name accordingly!";
-		} elseif(OauthAuthzConsumer::consumer_exists($p_consumer_name))	{
+		} elseif (OauthAuthzConsumer::consumer_exists($p_consumer_name)) {
 			return "The name '".$p_consumer_name."' has already been taken. Please choose another!";
-		} elseif(!preg_match('|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i', $p_consumer_url))	{
+		} elseif (!preg_match('|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i', $p_consumer_url)) {
 			return "The Consumer URL is not valid.";
 		} else {
 			return null;

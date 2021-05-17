@@ -59,8 +59,7 @@ class SkinMonoBookFusionForge extends SkinTemplate {
 function setupTemplate( $classname, $repository = false, $cache_dir = false ) {
 		$tc = new $classname();
 		$tc->params = array();
-		if (($tc->project = $project =
-			group_get_object_by_name($GLOBALS['fusionforgeproject']))) {
+		if ($tc->project = $project = group_get_object_by_name($GLOBALS['fusionforgeproject'])) {
 			$tc->params['group'] = $GLOBALS['group_id'] =
 			$project->getID();
 			$tc->params['toptab'] = 'mediawiki';

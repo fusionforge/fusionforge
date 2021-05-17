@@ -87,10 +87,10 @@ class OAuthProvider	{
 	}
 
 	static function convert_row_to_object($row)	{
-		if($row!=null)	{
+		if ($row!=null) {
 			$provider = new OAuthProvider($row['name'], $row['description'], $row['consumer_key'], $row['consumer_secret'], $row['request_token_url'], $row['authorize_url'], $row['access_token_url'], $row['id']);
 			return $provider;
-		}else {
+		} else {
 			return null;
 		}
 	}
@@ -109,7 +109,7 @@ class OAuthProvider	{
 		return $provider;
 	}
 
-	static function get_all_oauthproviders()	{
+	static function get_all_oauthproviders() {
 		$conn = FFOAuthDataStore::singleton();
 		$rows = $conn->find_all_providers();
 		$providers = array();
@@ -121,46 +121,33 @@ class OAuthProvider	{
 	}
 
 	static function check_provider_values($new=TRUE, $name, $description, $consumer_key, $consumer_secret, $request_token_url, $authorize_url, $access_token_url)	{
-		if ((!trim($name))) {
+		if (!trim($name)) {
 			return "The field 'Name' is empty! ";
-		}
-		elseif ((!trim($description))) {
+		} elseif (!trim($description)) {
 			return "The field 'Description' is empty! ";
-		}
-		elseif ((!trim($consumer_key))) {
+		} elseif (!trim($consumer_key)) {
 			return "The field 'Consumer Key' is empty! ";
-		}
-		elseif ((!trim($consumer_secret))) {
+		} elseif (!trim($consumer_secret)) {
 			return "The field 'Consumer Secret' is empty! ";
-		}
-		elseif(strlen($name)<5)	{
+		} elseif (strlen($name)<5) {
 			return "The field 'Name' cannot be less than 5 characters!";
-		}
-		elseif(strlen($name)>15)	{
+		} elseif (strlen($name)>15) {
 			return "The field 'Name' cannot be more than 15 characters!";
-		}
-		elseif(is_numeric(substr($name, 0, 1)))	{
+		} elseif (is_numeric(substr($name, 0, 1))) {
 			return "The field 'Name' cannot begin with a numeral!";
-		}
-		elseif((substr($name, 0, 1))=="_")	{
+		}  elseif ((substr($name, 0, 1)) == "_") {
 			return "The field 'Name' cannot begin with an underscore!";
-		}
-		elseif(preg_match('/^[A-z][A-z_0-9]{4,}/', $name)==0)	{
+		} elseif (preg_match('/^[A-z][A-z_0-9]{4,}/', $name) == 0) {
 			return "The field 'Name' can only contain alphabets (a-z,A-Z), numbers (0-9) and underscores (_). Please choose a Name accordingly!";
-		}
-		elseif($new && self::provider_exists($name))	{
+		} elseif ($new && self::provider_exists($name))	{
 			return "The name '".$name."' has already been taken. Please choose another!";
-		}
-		elseif((trim($request_token_url))&&(!preg_match('|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i', $request_token_url)))	{
+		} elseif (trim($request_token_url) && (!preg_match('|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i', $request_token_url))) {
 			return "The Request Token URL is not valid.";
-		}
-		elseif((trim($authorize_url))&&(!preg_match('|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i', $authorize_url)))	{
+		} elseif (trim($authorize_url) && (!preg_match('|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i', $authorize_url))) {
 			return "The Authorization URL is not valid.";
-		}
-		elseif((trim($access_token_url))&&(!preg_match('|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i', $access_token_url)))	{
+		} elseif (trim($access_token_url) && (!preg_match('|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i', $access_token_url))) {
 			return "The Access Token URL is not valid.";
-		}
-		else {
+		} else {
 			return null;
 		}
 	}
@@ -178,7 +165,7 @@ class OAuthProvider	{
 
 	function write_to_db() {
 		if ( strlen(trim( $this->name ))==0 || strlen(trim( $this->description ))==0 || strlen(trim( $this->consumer_key ))==0 || strlen(trim( $this->consumer_secret ))==0 ) {
-			exit_error( "Error trying to add the oauth provider. Please try again.", 'oauthconsumer' );
+			exit_error("Error trying to add the oauth provider. Please try again.", 'oauthconsumer' );
 		}
 		$conn = FFOAuthDataStore::singleton();
 		$id = $conn->save_provider($this);
@@ -192,13 +179,12 @@ class OAuthProvider	{
 	function delete()	{
 		$conn = FFOAuthDataStore::singleton();
 		$id = $this->get_id();
-		if($id!=0)	{
+		if ($id!=0) {
 			if(!($conn->delete_provider($id)))	{
 				exit_error("Error trying to delete provider from DB", 'oauthconsumer');
 			}
-		}else 	{
+		} else  {
 			exit_error("Trying to delete non-existent provider from DB", 'oauthconsumer');
 		}
 	}
-
 }

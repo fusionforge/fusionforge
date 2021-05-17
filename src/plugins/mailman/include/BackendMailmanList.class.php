@@ -99,54 +99,48 @@ class BackendMailmanList {
     }
 
 
-    /**
-     * Create new mailing list with mailman 'newlist' tool
-     * then update the list configuration according to list settings
-     * @return true on success, false otherwise
-     */
-    public function createList($group_list_id) {
+	/**
+	 * Create new mailing list with mailman 'newlist' tool
+	 * then update the list configuration according to list settings
+	 * @return true on success, false otherwise
+	 */
+	public function createList($group_list_id) {
+		$dar = $this->_getMailingListDao()->searchByGroupListId($group_list_id);
+		if ($row = $dar->getRow()) {
+			$list = new MailmanList($row['group_id'],$row['group_list_id']);
+			$user=UserManager::instance()->getUserByID($list->getListAdminId());
+			$list_admin_email= $user->getEmail();
+			$list_dir = $GLOBALS['mailman_lib_dir']."/lists/".$list->getName();
 
-        $dar = $this->_getMailingListDao()->searchByGroupListId($group_list_id);
-
-        if ($row = $dar->getRow()) {
-            $list = new MailmanList($row['group_id'],$row['group_list_id']);
-            $user=UserManager::instance()->getUserByID($list->getListAdminId());
-	    $list_admin_email= $user->getEmail();
-            $list_dir = $GLOBALS['mailman_lib_dir']."/lists/".$list->getName();
-
-	    if($list->isPublic() != 9) {
-		    if ((! is_dir($list_dir))) {
-			    // Create list
-			    system($GLOBALS['mailman_bin_dir']."/newlist -q ".$list->getName()." ".$list_admin_email." ".$list->getPassword()." >/dev/null");
-			    // Then update configuraion
-			    if( is_dir($list_dir) && $this->updateListConfig($list) !=false ) {
-				    $result = $this->_getMailingListDao() -> updateList($list->getID(),$row['group_id'], $list->getDescription(), $list->isPublic(),'3');
-				    if (!$result) {
-					    printf('Unable to update the list status: '.db_error());
-					    return false;
-				    }
-				    else {
-					    return true;
-				    }
-			    }
-			    else {
-				    return false;
-			    }
-		    }
-		    else {
-			    $result = $this->_getMailingListDao() -> updateList($list->getID(),$row['group_id'], $list->getDescription(), $list->isPublic(),'3');
-			    if (!$result) {
-				    printf('Unable to update the list status: '.db_error());
-				    return false;
-			    }
-			    else {
-				    return true;
-			    }
-		    }
-	    }
+			if($list->isPublic() != 9) {
+				if (! is_dir($list_dir)) {
+					// Create list
+					system($GLOBALS['mailman_bin_dir']."/newlist -q ".$list->getName()." ".$list_admin_email." ".$list->getPassword()." >/dev/null");
+					// Then update configuraion
+					if( is_dir($list_dir) && $this->updateListConfig($list) !=false ) {
+						$result = $this->_getMailingListDao() -> updateList($list->getID(),$row['group_id'], $list->getDescription(), $list->isPublic(),'3');
+						if (!$result) {
+							printf('Unable to update the list status: '.db_error());
+							return false;
+						} else {
+							return true;
+						}
+					} else {
+						return false;
+					}
+				} else {
+					$result = $this->_getMailingListDao() -> updateList($list->getID(),$row['group_id'], $list->getDescription(), $list->isPublic(),'3');
+					if (!$result) {
+						printf('Unable to update the list status: '.db_error());
+						return false;
+					} else {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
-	return false;
-    }
 
     /**
      * Delete mailing list

@@ -107,7 +107,7 @@ if (forge_get_config('use_ftp')) {
 
 /* read in the group home template file */
 $contents = '';
-if (($fo = fopen(dirname(__FILE__) . '/../../templates/default_page.php', 'r'))) {
+if ($fo = fopen(dirname(__FILE__) . '/../../templates/default_page.php', 'r')) {
 	while (!feof($fo)) {
 		$contents .= fread($fo, 8192);
 	}
@@ -150,7 +150,7 @@ while ($row = db_fetch_array($res)) {
 		#@mkdir($ghome . '/cgi-bin');
 
 		/* write substituted template to group home */
-		if (($fw = fopen($ghome . '/htdocs/index.html', 'w'))) {
+		if ($fw = fopen($ghome . '/htdocs/index.html', 'w')) {
 			fwrite($fw, str_replace('##comment##',
 			    _('Default Web Page for groups that haven\'t setup their page yet'),
 			    str_replace('##purpose##',

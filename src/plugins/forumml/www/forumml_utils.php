@@ -42,7 +42,6 @@ function getForumMLDao() {
 
 // Get message headers
 function plugin_forumml_get_message_headers($id_message) {
-
 	return getForumMLDao()->getMessageHeaders($id_message)->getRow();
 }
 
@@ -188,7 +187,7 @@ function plugin_forumml_show_all_threads($p,$list_id,$list_name,$offset) {
 
 		$hp =& ForumML_HTMLPurifier::instance();
 		$i = 0;
-		while (($msg = $result->getRow())) {
+		while ($msg = $result->getRow()) {
 			$i++;
 			if ($i % 2 == 0) {
 				$class="boxitemalt bgcolor-white";
@@ -257,7 +256,7 @@ function plugin_forumml_nb_children($parents) {
 		$result = getForumMLDao()->countChildrenFromParents(implode(',',$parents));
 		if ($result && !$result->isError()) {
 			$p = array();
-			while (($row = $result->getRow())) {
+			while ($row = $result->getRow()) {
 				$p[] = $row['id_message'];
 			}
 			$num = $result->rowCount();

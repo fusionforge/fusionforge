@@ -973,7 +973,7 @@ class ArtifactType extends FFError {
 			$type = $oef->getType();
 			if (in_array($type, unserialize(ARTIFACT_EXTRAFIELDTYPEGROUP_VALUE)) || $type == ARTIFACT_EXTRAFIELDTYPE_USER) {
 				$default = $oef->getDefaultValues();
-				if (($type==ARTIFACT_EXTRAFIELDTYPE_INTEGER && $default != 0)) {
+				if ($type==ARTIFACT_EXTRAFIELDTYPE_INTEGER && $default != 0) {
 					$nef->setDefaultValues($default);
 				} elseif ($type==ARTIFACT_EXTRAFIELDTYPE_USER && $default != 100) {
 					$roleEls = $this->getExtraFieldElements($newEFId);
