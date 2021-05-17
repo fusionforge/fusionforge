@@ -71,7 +71,7 @@ if ($frsr->getPreformatted()) {
 
 if (strlen($frsr->getNotes())) {
 	echo $HTML->boxTop(_('Release Notes'));
-	echo html_e($htmltag, array(), $frsr->getNotes());
+	echo html_e($htmltag, array(), util_gen_cross_ref($frsr->getNotes(), $group_id), false, false);
 	echo $HTML->boxBottom();
 } else {
 	echo $HTML->information(_('No release notes'));
@@ -79,7 +79,7 @@ if (strlen($frsr->getNotes())) {
 
 if (strlen($frsr->getChanges())) {
 	echo $HTML->boxTop(_('Change Log'));
-	echo html_e($htmltag, array(), $frsr->getChanges());
+	echo html_e($htmltag, array(), util_gen_cross_ref($frsr->getChanges(), $group_id), false, false);
 	echo $HTML->boxBottom();
 } else {
 	echo $HTML->information(_('No change log'));
