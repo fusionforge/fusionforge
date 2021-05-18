@@ -95,7 +95,7 @@ $cells[][] = html_e('input', array('pattern' => '.{5,}', 'required' => 'required
 echo $HTML->multiTableRow(array(), $cells);
 $cells = array();
 $cells[] = array(_('Description').utils_requiredField()._(':'), 'class' => 'docman_editfile_description');
-$cells[][] = html_e('textarea', array('pattern' => '.{10,}', 'required' => 'required', 'title' => _('Editing tips:http,https or ftp: Hyperlinks. [#NNN]: Tracker id NNN. [TNNN]: Task id NNN. [wiki:&lt;pagename&gt;]: Wiki page. [forum:&lt;msg_id&gt;]: Forum post. [DNNN]: Document id NNN.').
+$cells[][] = html_e('textarea', array('pattern' => '.{10,}', 'required' => 'required', 'title' => util_gen_cross_ref_hints().
 										sprintf(_('at least %s characters)'), 10), 'id' => 'description', 'name' => 'description', 'maxlength' => '255', 'rows' => '5', 'style' => 'box-sizing: border-box; width: 100%'), '', false);
 echo $HTML->multiTableRow(array(), $cells);
 $cells = array();

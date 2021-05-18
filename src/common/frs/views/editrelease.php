@@ -107,13 +107,15 @@ if (forge_check_perm('frs', $package_id, 'admin')) {
 	$cells = array();
 	$cells[] = array('<input type="file" name="uploaded_changes" />', 'colspan' => 2);
 	echo $HTML->multiTableRow(array(), $cells);
+
+	$title = util_gen_cross_ref_hints();
 	$cells = array();
 	$cells[] = array('<strong>'._('Paste The Notes In')._(':').'</strong><br/>'.
-			'<textarea name="release_notes" rows="10" cols="60">'.$frsr->getNotes().'</textarea>', 'colspan' => 2);
+		html_e('textarea', array('name' => 'release_notes', 'rows' => '10', 'cols' => '60', 'title' => $title), $frsr->getNotes()), 'colspan' => 2);
 	echo $HTML->multiTableRow(array(), $cells);
 	$cells = array();
 	$cells[] = array('<strong>'._('Paste The Change Log In')._(':').'</strong><br/>'.
-			'<textarea name="release_changes" rows="10" cols="60">'.$frsr->getChanges().'</textarea>', 'colspan' => 2);
+		html_e('textarea', array('name' => 'release_changes', 'rows' => '10', 'cols' => '60', 'title' => $title), $frsr->getChanges()), 'colspan' => 2);
 	echo $HTML->multiTableRow(array(), $cells);
 	$cells = array();
 	$cells[] = array('<input type="checkbox" name="preformatted" value="1" '.(($frsr->getPreformatted())?'checked="checked"':'').' />'._('Preserve my pre-formatted text').
