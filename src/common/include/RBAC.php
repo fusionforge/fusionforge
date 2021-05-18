@@ -151,6 +151,17 @@ abstract class BaseRole extends FFError {
 						     'pm_admin' => 1,
 						     'new_pm' => 7,
 				),
+			// all other (present) roles
+			'other' => array( 'project_read' => 1,
+						     'frs_admin' => 1,
+						     'new_frs' => 1,
+						     'docman' => 3,
+						     'new_forum' => 3,
+						     'tracker_admin' => 1,
+						     'new_tracker' => 11,
+						     'pm_admin' => 1,
+						     'new_pm' => 7,
+				),
 			);
 	}
 
@@ -470,7 +481,11 @@ abstract class BaseRole extends FFError {
 	function getSetting($section, $reference) {
 		$value = $this->getSettingRaw($section, $reference);
 		if ($value == NULL) {
-			$value = 0;
+			if (isset($this->defaults['other'][$section])) {
+				$value = $this->defaults['other'][$section];
+			} else {
+				$value = 0;
+			}
 		}
 
 		switch ($section) {
@@ -615,6 +630,7 @@ abstract class BaseRole extends FFError {
 		if (isset ($this->perms_array[$section][$reference])) {
 			return $this->perms_array[$section][$reference];
 		}
+		return NULL;
 	}
 
 	/**
