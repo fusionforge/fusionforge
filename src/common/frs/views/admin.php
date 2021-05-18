@@ -89,6 +89,8 @@ if (count($FRSPackages) == 0) {
 	}
 	$title_arr[] = _('Package name');
 	$thTitleArray[] = NULL;
+	$title_arr[] = _('Package notes');
+	$thTitleArray[] = NULL;
 	$title_arr[] = _('Status');
 	$thTitleArray[] = NULL;
 	$title_arr[] = _('Publicly Viewable');
@@ -113,12 +115,14 @@ if (count($FRSPackages) == 0) {
 		}
 		$cells[][] = html_e('input', $package_nameInputAttr);
 		if (forge_check_perm('frs', $FRSPackage->getID(), 'admin')) {
+			$cells[][] = html_e('input', array('type' => 'text', 'name' => 'notes', 'value' => html_entity_decode($FRSPackage->getNotes()), 'size' => 40, 'maxlength' => 60));
 			$cells[][] = frs_show_status_popup('status_id', $FRSPackage->getStatus());
 			$cells[][] = $FRSPackage->getPublicLabel();
 			$deleteUrlAction = util_make_uri('/frs/?action=deletepackage&package_id='.$FRSPackage->getID().'&group_id='.$group_id);
 			$cells[][] = html_e('input', array('type' => 'button', 'name' => 'submit', 'value' => _('Update'), 'onclick' => 'javascript:controllerFRS.updatePackage({rowid: \'#pkgid'.$FRSPackage->getID().'\', action: \''.util_make_uri('/frs/?group_id='.$group_id.'&action=updatepackage&package_id='.$FRSPackage->getID()).'\'})')).
 					util_make_link('#', $HTML->getDeletePic(_('Delete this package'), _('Delete package')), array('onclick' => 'javascript:controllerFRS.toggleConfirmBox({idconfirmbox: \'confirmbox1\', do: \''._('Delete the package').' '.html_entity_decode($FRSPackage->getName()).'\', cancel: \''._('Cancel').'\', height: 150, width: 300, action: \''.$deleteUrlAction.'\'})' ), true);
 		} else {
+			$cells[][] = $FRSPackage->getNotes();
 			$cells[][] = $FRSPackage->getStatusName();
 			$cells[][] = $FRSPackage->getPublicLabel();
 			$cells[][] = '';

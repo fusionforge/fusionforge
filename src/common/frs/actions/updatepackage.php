@@ -42,6 +42,7 @@ if (!forge_check_perm('frs', $package_id, 'admin')) {
 }
 
 $package_name = htmlspecialchars(trim(getStringFromRequest('package_name')));
+$notes = htmlspecialchars(trim(getStringFromRequest('notes')));
 $status_id = getIntFromRequest('status_id');
 
 $result['html'] = $HTML->error_msg(_('Missing package_id or package_name'));
@@ -57,7 +58,7 @@ if ($package_id && $package_name) {
 		echo json_encode($result);
 		exit;
 	}
-	if (!$frsp->update($package_name, $status_id)) {
+	if (!$frsp->update($package_name, $notes, $status_id)) {
 		$result['html'] = $HTML->error_msg($frsp->getErrorMessage());
 		echo json_encode($result);
 		exit;

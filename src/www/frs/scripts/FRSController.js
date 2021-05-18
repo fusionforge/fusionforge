@@ -105,8 +105,8 @@ FRSController.prototype =
 	updatePackage: function(params) {
 		this.params = params;
 		var td = jQuery(this.params.rowid).children();
-		var select = jQuery(td[2].children).children();
-		jQuery.getJSON(this.params.action, {package_name: td[1].children.package_name.value, status_id: select[0].value }, function(data){
+		var select = jQuery(td[3].children).children();
+		jQuery.getJSON(this.params.action, {package_name: td[1].children.package_name.value, notes: td[2].children.notes.value, status_id: select[0].value }, function(data){
 			jQuery('#maindiv > .feedback').remove();
 			jQuery('#maindiv > .error').remove();
 			jQuery('#maindiv > .warning_msg').remove();
