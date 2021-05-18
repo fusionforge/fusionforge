@@ -47,29 +47,29 @@ require_once $gfcommon.'include/html.php';
 require_once $gfwww.'search/include/renderers/DocsHtmlSearchRenderer.class.php';
 
 /* are we using docman ? */
-if (!forge_get_config('use_docman'))
+if (!forge_get_config('use_docman')) {
 	exit_disabled('home');
-
+}
 /* get informations from request or $_POST */
 $group_id = getIntFromRequest('group_id');
 
 /* validate group */
-if (!$group_id)
+if (!$group_id) {
 	exit_no_group();
-
+}
 $g = group_get_object($group_id);
-if (!$g || !is_object($g))
+if (!$g || !is_object($g)) {
 	exit_no_group();
-
+}
 session_require_perm('docman', $group_id, 'read');
 
 /* is this group using docman ? */
-if (!$g->usesDocman())
+if (!$g->usesDocman()) {
 	exit_disabled();
-
-if ($g->isError())
+}
+if ($g->isError()) {
 	exit_error($g->getErrorMessage(), 'docman');
-
+}
 $childgroup_id = getIntFromRequest('childgroup_id', 0);
 $dirid = getIntFromRequest('dirid', 0);
 if ($dirid) {
@@ -90,9 +90,9 @@ if (file_exists(forge_get_config('source_path').'/common/docman/actions/'.$actio
 }
 
 $start = getIntFromRequest('start', 0);
-if ($start < 0)
+if ($start < 0) {
 	$start = 0;
-
+}
 html_use_storage();
 html_use_simplemenu();
 html_use_jqueryui();

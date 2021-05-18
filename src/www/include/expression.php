@@ -8,7 +8,7 @@
  * Copyright 2015 Colin Kiegel <http://colin-kiegel.github.io/>
  * Copyright 2016 Jakub Jankiewicz <http://jcubic.pl/>
  * Copyright 2016 Константин <https://github.com/optimistex>
- * Copyright 2016 Stéphane-Eymeric Breddthauer - TrivaDev
+ * Copyright 2016 Stéphane-Eymeric Bredthauer - TrivaDev
  *
  * NAME
  * Expression - safely evaluate math and boolean expressions
@@ -418,8 +418,9 @@ class Expression {
 						$stack->push ( $op1 * $op2 );
 						break;
 					case '/' :
-						if ($op2 == 0)
+						if ($op2 == 0) {
 							return $this->trigger ( "division by zero" );
+						}
 						$stack->push ( $op1 / $op2 );
 						break;
 					case '%' :
@@ -493,11 +494,13 @@ class Expression {
 			} elseif (preg_match ( "/^([a-z]\w*)\($/", $token, $matches )) { // it's a function!
 				$fnn = $matches [1];
 				if (in_array ( $fnn, $this->fb )) { // built-in function:
-					if (is_null ( $op1 = $stack->pop () ))
+					if (is_null ( $op1 = $stack->pop () )) {
 						return $this->trigger ( "internal error" );
+					}
 					$fnn = preg_replace ( "/^arc/", "a", $fnn ); // for the 'arc' trig synonyms
-					if ($fnn == 'ln')
+					if ($fnn == 'ln') {
 						$fnn = 'log';
+					}
 					$stack->push ( $fnn ( $op1 ) ); // perfectly safe variable function call
 				} elseif (array_key_exists ( $fnn, $this->f )) { // user function
 					// get args
@@ -556,16 +559,18 @@ class Expression {
 			}
 		}
 		// when we're out of tokens, the stack should have a single element, the final result
-		if ($stack->count != 1)
+		if ($stack->count != 1) {
 			return $this->trigger ( "internal error" );
+		}
 		return $stack->pop ();
 	}
 
 	// trigger an error, but nicely, if need be
 	function trigger($msg) {
 		$this->last_error = $msg;
-		if (! $this->suppress_errors)
+		if (! $this->suppress_errors) {
 			trigger_error ( $msg, E_USER_WARNING );
+		}
 		return false;
 	}
 }

@@ -47,8 +47,3 @@ class TrackerMonitorPlugin extends Plugin {
 		}
 	}
 }
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:

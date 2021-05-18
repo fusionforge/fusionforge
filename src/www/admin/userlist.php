@@ -175,9 +175,9 @@ if (getStringFromRequest('setpaging')) {
 	$paging = $LUSER->getPreference('paging');
 }
 
-if (!$paging)
+if (!$paging) {
 	$paging = 25;
-
+}
 // Administrative functions
 
 $group_id = getIntFromRequest('group_id');

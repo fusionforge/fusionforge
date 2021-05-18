@@ -10,14 +10,16 @@ $f_resource_url = getStringFromPost('resource_url');
 $f_http_method = getStringFromPost('http');
 $f_post_data = getStringFromPost('post_data');
 
-if(!$f_post_data)	$f_post_data = NULL;
-
+if (!$f_post_data) {
+	$f_post_data = NULL;
+}
 $access_token = OAuthAccessToken::get_access_token($f_token_id);
 $resource = new OAuthResource($f_resource_url, $access_token->get_provider_id(), $f_http_method);
 $provider = OAuthProvider::get_provider($access_token->get_provider_id());
 
-if(substr($f_resource_url, -5, 5)==".json")	$f_post_data = json_decode($f_post_data, TRUE);
-
+if (substr($f_resource_url, -5, 5)==".json" {
+	$f_post_data = json_decode($f_post_data, TRUE);
+}
 $transaction = new OAuthTransaction($provider, $access_token, $resource, $f_post_data);
 $response = $transaction->send_request();
 
@@ -65,7 +67,7 @@ if(substr($f_resource_url, -5, 5)==".json")	{
 			print_r($response_array);
 		}
 	}
-}else 	{
+} else {
 	var_dump($response);
 }
 

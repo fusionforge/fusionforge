@@ -106,12 +106,14 @@ if (getStringFromRequest('delete_user') != '') {
 
 	if ($u->isError()) {
 		$error_msg = $u->getErrorMessage();
-		if (isset($error_msgMembership) && sizeof($error_msgMembership))
+		if (isset($error_msgMembership) && sizeof($error_msgMembership)) {
 			$error_msg .= '<br/>'.$error_msgMembership;
+		}
 	} else {
 		$feedback = _('Updated');
-		if (isset($feedbackMembership) && sizeof($feedbackMembership))
+		if (isset($feedbackMembership) && sizeof($feedbackMembership)) {
 			$feedback .= '<br/>'.$feedbackMembership;
+		}
 	}
 
 }

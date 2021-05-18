@@ -32,9 +32,9 @@ function printnode ($nodeid,$text) {
 	global $HTML;
 	print ('<br />');
 
-	if (!isset($GLOBALS['depth']))
+	if (!isset($GLOBALS['depth'])) {
 		$GLOBALS['depth'] = 0;
-
+	}
 	for ($i=0;$i<$GLOBALS['depth'];$i++) {
 		print "&nbsp; &nbsp; ";
 	}
@@ -74,8 +74,3 @@ site_admin_header(array('title'=>_('Browse Trove Tree')));
 printnode(0,'root');
 
 site_admin_footer();
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:

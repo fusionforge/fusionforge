@@ -26,7 +26,9 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'export/rss_utils.inc';
 
 $limit = getIntFromRequest('limit', 10);
-if ($limit > 100) $limit = 100;
+if ($limit > 100) {
+	$limit = 100;
+}
 
 header("Content-Type: text/xml; charset=utf-8");
 print '<?xml version="1.0" encoding="UTF-8"?>
@@ -80,7 +82,9 @@ while ($row = db_fetch_array($res)) {
 	}
 	// eliminate dupes, only do $limit of these
 	$seen[$row['group_id']] = 1;
-	if ($outputtotal >= $limit) break;
+	if ($outputtotal >= $limit) {
+		break;
+	}
 }
 // ## end output
 print " </channel>\n";

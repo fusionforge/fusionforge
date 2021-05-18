@@ -347,8 +347,6 @@ some control over it to the project's administrator.");
 		if ($params['scm_plugin'] != $this->name) {
 			return;
 		}
-		global $HTML;
-		$useautoheight = 0;
 		$project = $this->checkParams($params);
 		if (!$project) {
 			return;
@@ -1175,8 +1173,9 @@ function SVNPluginCharData($parser, $chars) {
 			} else {
 				$time_ok = false;
 				if (!isset($notimecheck)) {
-					if ($last_user !== '') // empty in e.g. tags from cvs2svn
+					if ($last_user !== '') { // empty in e.g. tags from cvs2svn
 						$usr_commits[$last_user]--;
+					}
 					$commits--;
 				}
 			}
@@ -1245,11 +1244,12 @@ function SVNPluginEndElement($parser, $name) {
 
 function curl2xml($ch, $data) {
 	global $xml_parser;
-	if (!xml_parse($xml_parser, $data, false))
+	if (!xml_parse($xml_parser, $data, false)) {
 		exit_error('Unable to parse XML with error '
 				   . xml_error_string(xml_get_error_code($xml_parser))
 				   . ' on line ' . xml_get_current_line_number($xml_parser),
 				   'activity');
+	}
 	return strlen($data);
 }
 // Local Variables:

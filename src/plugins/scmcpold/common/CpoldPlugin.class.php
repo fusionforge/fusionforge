@@ -25,7 +25,6 @@ forge_define_config_item ('repos_path', 'scmcpold', forge_get_config('chroot').'
 
 class CpoldPlugin extends SCMPlugin {
 	function __construct() {
-		global $gfconfig;
 		parent::__construct();
 		$this->name = 'scmcpold';
 		$this->text = 'CPOLD';
@@ -118,10 +117,6 @@ class CpoldPlugin extends SCMPlugin {
 			return false ;
 		}
 
-		if (! $project->usesPlugin ($this->name)) {
-			return false;
-		}
-
 		$repo = forge_get_config('repos_path', 'scmcpold') . '/' . $project->getUnixName() ;
 		$unix_group = 'scm_' . $project->getUnixName() ;
 
@@ -147,12 +142,10 @@ class CpoldPlugin extends SCMPlugin {
 
 		$tarball = forge_get_config('scm_tarballs_path').'/'.$group_name.'-scmroot.tar.gz';
 
-		if (! $project->usesPlugin ($this->name)) {
-			return false;
-		}
-
 		if (! $project->enableAnonSCM()) {
-			if (file_exists ($tarball)) unlink ($tarball) ;
+			if (file_exists ($tarball)) {
+				unlink ($tarball) ;
+			}
 			return false;
 		}
 

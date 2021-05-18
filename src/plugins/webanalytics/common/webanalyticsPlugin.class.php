@@ -100,9 +100,9 @@ such as Piwik or Google Analytics.");
 						$url,
 						1,
 					));
-			if (!$res)
+			if (!$res) {
 				return false;
-
+			}
 			return true;
 		}
 		return false;
@@ -154,7 +154,6 @@ such as Piwik or Google Analytics.");
 	 * @return	bool	success or not
 	 */
 	function getHeader($type) {
-		global $gfplugins;
 		$returned = false;
 		switch ($type) {
 			case 'globaladmin': {

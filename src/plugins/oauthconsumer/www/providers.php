@@ -7,9 +7,10 @@ oauthconsumer_CheckUser();
 
 $providers = OAuthProvider::get_all_oauthproviders();
 $admin_access = false;
-if(forge_check_global_perm ('forge_admin')) $admin_access = true;
-
-if(count($providers)>0)	{
+if (forge_check_global_perm ('forge_admin')) {
+	$admin_access = true;
+}
+if (count($providers)>0) {
 	echo $HTML->boxTop(_('OAuth Providers'));
 	echo $HTML->listTableTop(array(_('Name'), _('Description'), _('Consumer Key'), _('Consumer Secret'), _('Request Token URL'), _('Authorization URL'), _('Access Token URL')));
 	$i = 0;
@@ -44,8 +45,7 @@ if(count($providers)>0)	{
 	echo $HTML->listTableBottom();
 	echo $HTML->boxBottom();
 
-}
-else {
+} else {
 	echo '<p>'. _('There are currently no OAuth Providers registered in the database').'</p>';
 }
 

@@ -32,8 +32,9 @@ global $HTML;
 $group_id = getIntFromRequest('group_id');
 $limit = getIntFromRequest('limit', 10);
 
-if ($limit > 100) $limit = 100;
-
+if ($limit > 100) { 
+	$limit = 100;
+}
 if ($group_id) {
 	session_require_perm('project_read', $group_id);
 

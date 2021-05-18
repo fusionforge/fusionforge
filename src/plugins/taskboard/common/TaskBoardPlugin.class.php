@@ -45,10 +45,12 @@ class TaskBoardPlugin extends Plugin {
 		} elseif ($hookname == 'groupmenu') {
 			$group_id = $params['group'];
 			$group = group_get_object($group_id);
-			if (!$group || !is_object($group))
+			if (!$group || !is_object($group)) {
 				return;
-			if ($group->isError())
+			}
+			if ($group->isError()) {
 				return;
+			}
 
 			if($group->usesPlugin($this->name)) {
 				$params['TITLES'][] = $this->text;

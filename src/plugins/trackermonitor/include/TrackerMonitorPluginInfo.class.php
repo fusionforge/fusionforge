@@ -22,10 +22,8 @@ require_once 'common/plugin/PluginInfo.class.php';
 require_once 'TrackerMonitorPluginDescriptor.class.php';
 
 class TrackerMonitorPluginInfo extends PluginInfo {
-
-    function __construct(&$plugin) {
-        parent::__construct($plugin);
-        $this->setPluginDescriptor(new TrackerMonitorPluginDescriptor());
-    }
-
+	function __construct(&$plugin) {
+		parent::__construct($plugin);
+		$this->setPluginDescriptor(new TrackerMonitorPluginDescriptor());
+	}
 }

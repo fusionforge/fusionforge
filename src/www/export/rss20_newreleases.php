@@ -36,7 +36,9 @@ print '<?xml version="1.0" encoding="UTF-8"?>
 $group_id = getIntFromRequest('group_id');
 $limit = getIntFromRequest('limit', 10);
 
-if ($limit > 100) $limit = 100;
+if ($limit > 100) {
+	$limit = 100;
+}
 
 if ($group_id) {
 	session_require_perm('project_read', $group_id);
@@ -48,7 +50,7 @@ if ($group_id) {
 	$link = "/frs/?group_id=$group_id";
 	$description = " of ".$row['group_name'];
 	$admins = RBACEngine::getInstance()->getUsersByAllowedAction ('project_admin', $group_id) ;
-	if (count ($admins)) {
+	if (!empty($admins)) {
 		$webmaster = $admins[0]->getUnixName()."@".forge_get_config('users_host')." (".$admins[0]->getRealName().")";
 	} else {
 		$webmaster = forge_get_config('admin_email');
@@ -127,7 +129,9 @@ while ($row = db_fetch_array($res)) {
 	}
 	// eliminate dupes, only do $limit of these
 	$seen[$row['filerelease_id']] = 1;
-	if ($outputtotal >= $limit) break;
+	if ($outputtotal >= $limit) {
+		break;
+	}
 }
 // ## end output
 print " </channel>\n";

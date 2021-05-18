@@ -19,7 +19,9 @@ if ($showall) {
 	$limit = 0 ;
 } else {
 	$limit = getIntFromRequest('limit', 10);
-	if ($limit > 100) $limit = 100;
+	if ($limit > 100) {
+		$limit = 100;
+	}
 }
 
 header("Content-Type: text/xml; charset=utf-8");

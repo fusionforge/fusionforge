@@ -423,11 +423,7 @@ if (getStringFromRequest('add_forum')) {
 	//	Add new forum
 	//
 	$fa = new ForumAdmin($g->getID());
-
 	$fa->PrintAdminOptions();
-
-	if ($f)
-		plugin_hook ("blocks", "forum index");
 
 	//
 	//	Get existing forums
@@ -463,8 +459,3 @@ if (getStringFromRequest('add_forum')) {
 
 	forum_footer();
 }
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:

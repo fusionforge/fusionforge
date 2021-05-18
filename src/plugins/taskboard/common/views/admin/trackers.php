@@ -46,9 +46,7 @@ if (!$atf || !is_object($atf) || $atf->isError()) {
 		$trackers = array();
 		//select trackers, having resolution field
 		for ($j = 0; $j < count($at_arr); $j++) {
-			if (is_object($at_arr[$j])) {
-				if( $at_arr[$j]->getID() )
-
+			if (is_object($at_arr[$j]) && $at_arr[$j]->getID()) {
 				$fields = $at_arr[$j]->getExtraFields();
 				foreach( $fields as $field) {
 					if( $field['alias'] == 'resolution' ) {

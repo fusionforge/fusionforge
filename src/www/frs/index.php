@@ -38,25 +38,25 @@ require_once $gfcommon.'docman/DocumentManager.class.php';
 
 global $HTML;
 /* are we using frs ? */
-if (!forge_get_config('use_frs'))
+if (!forge_get_config('use_frs')) {
 	exit_disabled('home');
-
+}
 $group_id = getIntFromRequest('group_id');
 /* validate group */
-if (!$group_id)
+if (!$group_id) {
 	exit_no_group();
-
+}
 $g = group_get_object($group_id);
-if (!$g || !is_object($g))
+if (!$g || !is_object($g)) {
 	exit_no_group();
-
+}
 /* is this group using FRS ? */
-if (!$g->usesFRS())
+if (!$g->usesFRS()) {
 	exit_disabled();
-
-if ($g->isError())
+}
+if ($g->isError()) {
 	exit_error($g->getErrorMessage(), 'frs');
-
+}
 session_require_perm('frs_admin', $group_id, 'read');
 
 $release_id = getIntFromRequest('release_id');

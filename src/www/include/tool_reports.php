@@ -89,7 +89,9 @@ function reports_header($group_id, $vals, $titles, $html='') {
 		_('Last year(s)'),
 		_('Project lifespan'));
 
-	if (!$period) $period="lifespan";
+	if (!$period) {
+		$period="lifespan";
+	}
 
 	print _('for');
 	print html_build_select_box_from_arrays (

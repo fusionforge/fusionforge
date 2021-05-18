@@ -51,31 +51,37 @@ if (!preg_match(',^/anonscm/,', $_SERVER['REQUEST_URI'])) {
 
 $unix_group_name = $_GET['unix_group_name'];
 $mode = $_GET['mode'];
-if (!preg_match('/^(date_range|latest|latest_user)$/', $mode))
+if (!preg_match('/^(date_range|latest|latest_user)$/', $mode)) {
 	die('Invalid mode');
-if (!preg_match('/^[a-z0-9][-a-z0-9_\.]+\z/', $unix_group_name))
+}
+if (!preg_match('/^[a-z0-9][-a-z0-9_\.]+\z/', $unix_group_name)) {
 	die('Invalid group name');
+}
 
 if ($mode == 'date_range') {
 	$start_time = $_GET['begin'];
 	$end_time = $_GET['end'];
-	if (!ctype_digit($start_time))
+	if (!ctype_digit($start_time)) {
 		die('Invalid start time');
-	if (!ctype_digit($end_time))
+	}
+	if (!ctype_digit($end_time)) {
 		die('Invalid end time');
+	}
 	$d1 = date('Y-m-d', $start_time - 80000);
 	$d2 = date('Y-m-d', $end_time + 80000);
 	$options = "-r '{".$d2."}:{".$d1."}'";
 } elseif ($mode == 'latest' or $mode == 'latest_user') {
 	$limit = $_GET['limit'];
-	if (!ctype_digit($limit))
+	if (!ctype_digit($limit)) {
 		die('Invalid limit');
+	}
 	$options = "--limit $limit";
 
 	if ($mode == 'latest_user') {
 		$user_name = $_GET['user_name'];
-		if (!preg_match('/^[a-z0-9][-a-z0-9_\.]+\z/', $user_name))
+		if (!preg_match('/^[a-z0-9][-a-z0-9_\.]+\z/', $user_name)) {
 			die('Invalid user name');
+		}
 		$options .= " --search '$user_name'";
 	}
 }

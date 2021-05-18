@@ -33,8 +33,9 @@ $sysdebug_enable = false;
 
 $group_id = getIntFromRequest('group_id');
 $limit = getIntFromRequest('limit', 10);
-if ($limit > 100) $limit = 100;
-
+if ($limit > 100) {
+	$limit = 100;
+}
 if (isset($group_id) && !empty($group_id) && is_numeric($group_id)) {
 	session_require_perm('project_read', $group_id);
 	$group = group_get_object($group_id);
@@ -144,7 +145,9 @@ function writeFeed($d_arr, $limit) {
 			}//else (everything ok)
 			print "  </item>\n";
 
-			if ($j >= $limit) break;
+			if ($j >= $limit) {
+				break;
+			}
 		}//for loop
 	}//else (there are documents)
 }

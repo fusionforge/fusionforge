@@ -142,13 +142,13 @@ if (is_numeric($docid)) {
 		session_require_perm('docman', $group_id, 'admin');
 
 		$df = new DocumentFactory($g);
-		if ($df->isError())
+		if ($df->isError()) {
 			exit_error($df->getErrorMessage(), 'docman');
-
+		}
 		$dgf = new DocumentGroupFactory($g);
-		if ($dgf->isError())
+		if ($dgf->isError()) {
 			exit_error($dgf->getErrorMessage(), 'docman');
-
+		}
 		$nested_groups = $dgf->getNested(array(1, 5));
 
 		if ( $nested_groups != NULL ) {
@@ -219,17 +219,17 @@ if (is_numeric($docid)) {
 			$dirid = $arr[6];
 
 			$dg = new DocumentGroup($g, $dirid);
-			if ($dg->isError())
+			if ($dg->isError()) {
 				exit_error($dg->getErrorMessage(), 'docman');
-
+			}
 			$df = new DocumentFactory($g);
-			if ($df->isError())
+			if ($df->isError()) {
 				exit_error($df->getErrorMessage(), 'docman');
-
+			}
 			$dgf = new DocumentGroupFactory($g);
-			if ($dgf->isError())
+			if ($dgf->isError()) {
 				exit_error($dgf->getErrorMessage(), 'docman');
-
+			}
 			$stateidArr = array(1);
 			if (forge_check_perm('docman', $g->getID(), 'approve')) {
 				$stateidArr = array(1, 4, 5);
@@ -263,8 +263,9 @@ if (is_numeric($docid)) {
 						if ($doc->isURL()) {
 							continue;
 						}
-						if (!$zip->addFromString(iconv("UTF-8", "ASCII//TRANSLIT", $doc->getFileName()), $doc->getFileData()))
+						if (!$zip->addFromString(iconv("UTF-8", "ASCII//TRANSLIT", $doc->getFileName()), $doc->getFileData())) {
 							exit_error(_('Unable to fill ZIP file.'), 'docman');
+						}
 					}
 				}
 				if ( !docman_fill_zip($zip, $nested_groups, $df, $dg->getID())) {

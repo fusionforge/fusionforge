@@ -33,11 +33,10 @@ require_once $gfcommon.'pm/ProjectGroup.class.php';
 require_once $gfcommon.'include/Group.class.php';
 require_once $gfcommon.'pm/ProjectTaskSqlQueries.php';
 
-global $gfwww, $gfcommon;
-
 $tid = getIntFromRequest('tid');
-if (!$tid)
+if (!$tid) {
 	$tid = util_path_info_last_numeric_component();
+}
 if (!$tid) {
 	header("HTTP/1.0 404 Not Found");
 	echo "You forgot to pass the tid.\n";

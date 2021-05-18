@@ -6,13 +6,13 @@ require_once 'checks.php';
 oauthconsumer_CheckUser();
 
 $providers = OAuthProvider::get_all_oauthproviders();
-if(count($providers)>0)	{
+if (count($providers) > 0) {
 ?>
 	<p>To get an access token, there are three steps involved: </p>
-    <ol><li>Get an unauthorized request token
-    <li>Authorize the request token
-    <li>Exchange the authorized request token for an access token </ol>
-    <p>Select a provider from the list below and get started!</p>
+	<ol><li>Get an unauthorized request token
+	<li>Authorize the request token
+	<li>Exchange the authorized request token for an access token </ol>
+	<p>Select a provider from the list below and get started!</p>
 	<form action="get_access_token.php" method="post">
 
 	<select name=providers>
@@ -26,7 +26,7 @@ if(count($providers)>0)	{
 	<?php
 	$f_provider_name = "Provider";
 	$f_provider_id = getStringFromPost('providers');
-	if($f_provider_id)	{
+	if ($f_provider_id) {
 		$f_provider = OAuthProvider::get_provider($f_provider_id);
 		$f_provider_name = $f_provider->get_name();
 		$f_consumer_key = $f_provider->get_consumer_key();
@@ -68,9 +68,9 @@ if(count($providers)>0)	{
 
 	</table><br />
 	<?php
-	if((strcasecmp(substr($f_request_token_url, 0, 5),"https")==0) ||
+	if ((strcasecmp(substr($f_request_token_url, 0, 5),"https")==0) ||
 		(strcasecmp(substr($f_authorization_url, 0, 5),"https")==0) ||
-		(strcasecmp(substr($f_access_token_url, 0, 5),"https")==0))	{ ?>
+		(strcasecmp(substr($f_access_token_url, 0, 5),"https")==0)) { ?>
 		<input type="checkbox" name="not_verify_ssl">
 		<?php echo _('Do not verify SSL Certificate'); ?></input><br /><br />
 	<?php
@@ -118,7 +118,7 @@ if(count($providers)>0)	{
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 
 		//workaround for untrusted security certificates
-		if($f_not_verify_ssl) {
+		if ($f_not_verify_ssl) {
 			curl_setopt ($curl, CURLOPT_SSL_VERIFYHOST, 0);
 			curl_setopt ($curl, CURLOPT_SSL_VERIFYPEER, 0);
 			setcookie('NOT_VERIFY_SSL', 1, 0, '', '', false, true);
@@ -126,14 +126,14 @@ if(count($providers)>0)	{
 
 		$request_token_string = curl_exec ($curl);
 
-		if($request_token_string === false) {
+		if ($request_token_string === false) {
 			trigger_error(_('Error in curl: ').curl_error($curl), E_USER_WARNING);
 		}
 		curl_close ($curl);
 		//print_r($request_token_string);
 		parse_str($request_token_string, $request_token);
 
-		if(array_key_exists('oauth_token', $request_token)&&array_key_exists('oauth_token_secret', $request_token))	{
+		if (array_key_exists('oauth_token', $request_token)&&array_key_exists('oauth_token_secret', $request_token)) {
 			echo _("New request token received!") . "<br />";
 			echo _("Request Token Key") . _(": ") . $request_token['oauth_token'] . "<br />";
 			echo _("Request Token Secret") . _(": ") . $request_token['oauth_token_secret'] . "<br /><br />";
@@ -144,8 +144,9 @@ if(count($providers)>0)	{
 			$oauth_request_token = new OAuthToken($request_token['oauth_token'], $request_token['oauth_token_secret']);
 
 			$separator = "?";
-			if (strpos($f_authorize_url,"?")!=false) $separator = "&";
-
+			if (strpos($f_authorize_url,"?")!=false) {
+				$separator = "&";
+			}
 			$new_user_authorization_url = $f_authorize_url . $separator . "oauth_token=".$request_token['oauth_token']."&oauth_callback=".$callback_url;
 			//print_r($new_user_authorization_url);
 
@@ -174,7 +175,7 @@ if(count($providers)>0)	{
 	if($f_authorization_url)	{
 		header("Location:".$f_authorization_url);
 	}
-}else 	{
+} else  {
 	echo '<p>'. _('There are no OAuth Providers registered in the database currently. Please ask your forge administer to create one.').'</p>';
 }
 

@@ -36,13 +36,13 @@ if (!forge_get_config('use_diary')) {
 $diary_user = getIntFromRequest('diary_user');
 
 /* validate user */
-if (!$diary_user)
+if (!$diary_user) {
 	exit_no_user();
-
+}
 $user = user_get_object($diary_user);
-if (!$user || !is_object($user) || !$user->isActive())
+if (!$user || !is_object($user) || !$user->isActive()) {
 	exit_no_user();
-
+}
 $diaryNoteFactoryObject = new diaryNoteFactory(user_get_object($diary_user));
 
 if (!$diaryNoteFactoryObject) {

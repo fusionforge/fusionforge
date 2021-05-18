@@ -41,18 +41,17 @@ $TROVE_HARDQUERYLIMIT = -1;
 function trove_genfullpaths($mynode, $myfullpath, $myfullpathids) {
 	// first generate own path
 	db_query_params('UPDATE trove_cat SET fullpath=$1,fullpath_ids=$2 WHERE trove_cat_id=$3',
-						array ($myfullpath,
-								$myfullpathids,
-								$mynode));
+			array ($myfullpath,
+				$myfullpathids,
+				$mynode));
 	// now generate paths for all children by recursive call
-	if($mynode!=0)
-	{
+	if ($mynode !=0) {
 		$res_child = db_query_params('
 			SELECT trove_cat_id,fullname
 			FROM trove_cat
 			WHERE parent=$1
 			AND trove_cat_id != 0',
-						  array ($mynode));
+			array ($mynode));
 
 		while ($row_child = db_fetch_array($res_child)) {
 			trove_genfullpaths($row_child['trove_cat_id'],
@@ -74,10 +73,10 @@ function trove_updaterootparent($mynode, $rootnode) {
 	// first generate own path
 	if($mynode!=$rootnode) {
 		db_query_params('UPDATE trove_cat SET root_parent=$1 WHERE trove_cat_id=$2',
-						array ($rootnode, $mynode));
+				array ($rootnode, $mynode));
 	} else {
 		db_query_params('UPDATE trove_cat SET root_parent=0 WHERE trove_cat_id=$1',
-						array ($mynode));
+				array ($mynode));
 	}
 	// now generate paths for all children by recursive call
 	if($mynode!=0) {
@@ -86,7 +85,7 @@ function trove_updaterootparent($mynode, $rootnode) {
 			FROM trove_cat
 			WHERE parent=$1
 			AND trove_cat_id!=0',
-							array($mynode));
+			array($mynode));
 
 		while ($row_child = db_fetch_array($res_child)) {
 			trove_updaterootparent($row_child['trove_cat_id'],$rootnode);
@@ -106,16 +105,18 @@ function trove_updaterootparent($mynode, $rootnode) {
  */
 function trove_setnode($group_id, $trove_cat_id, $rootnode=0) {
 	// verify we were passed information
-	if ((!$group_id) || (!$trove_cat_id)) return 1;
-
+	if ((!$group_id) || (!$trove_cat_id)) {
+		return 1;
+	}
 	// verify trove category exists
-	$res_verifycat = db_query_params('
-		SELECT trove_cat_id,fullpath_ids
-		FROM trove_cat
-		WHERE trove_cat_id=$1',
-					  array ($trove_cat_id));
+	$res_verifycat = db_query_params('SELECT trove_cat_id,fullpath_ids
+					FROM trove_cat
+					WHERE trove_cat_id=$1',
+					array ($trove_cat_id));
 
-	if (db_numrows($res_verifycat) != 1) return 1;
+	if (db_numrows($res_verifycat) != 1) {
+		return 1;
+	}
 	$row_verifycat = db_fetch_array($res_verifycat);
 
 	// if we didnt get a rootnode, find it
@@ -124,13 +125,12 @@ function trove_setnode($group_id, $trove_cat_id, $rootnode=0) {
 	}
 
 	// must first make sure that this is not a subnode of anything current
-	$res_topnodes = db_query_params('
-		SELECT trove_cat.trove_cat_id AS trove_cat_id,
-			trove_cat.fullpath_ids AS fullpath_ids
-		FROM trove_cat,trove_group_link
-		WHERE trove_cat.trove_cat_id=trove_group_link.trove_cat_id
-		AND trove_group_link.group_id=$1
-		AND trove_cat.root_parent=$2',
+	$res_topnodes = db_query_params('SELECT trove_cat.trove_cat_id AS trove_cat_id,
+						trove_cat.fullpath_ids AS fullpath_ids
+					FROM trove_cat,trove_group_link
+					WHERE trove_cat.trove_cat_id=trove_group_link.trove_cat_id
+					AND trove_group_link.group_id=$1
+					AND trove_cat.root_parent=$2',
 					 array ($group_id,
 						$rootnode));
 
@@ -147,11 +147,10 @@ function trove_setnode($group_id, $trove_cat_id, $rootnode=0) {
 	// need to see if this one is more specific than another
 	// if so, delete the other and proceed with this insertion
 	$subnodeids = explode(' :: ',$row_verifycat['fullpath_ids']);
-	$res_checksubs = db_query_params('
-		SELECT trove_cat_id
-		FROM trove_group_link
-		WHERE group_id=$1
-		AND trove_cat_root=$2',
+	$res_checksubs = db_query_params('SELECT trove_cat_id
+					FROM trove_group_link
+					WHERE group_id=$1
+					AND trove_cat_root=$2',
 					  array($group_id,
 						$rootnode));
 
@@ -195,7 +194,9 @@ function trove_getrootcat($trove_cat_id) {
 
 		$row_par = db_fetch_array($res_par);
 		$parent = $row_par["parent"];
-		if ($parent == 0) return $current_cat;
+		if ($parent == 0) {
+			return $current_cat;
+		}
 		$current_cat = $parent;
 	}
 
@@ -240,7 +241,9 @@ function trove_catselectfull($node, $selected, $name, $title='') {
 
 	while ($row_cat = db_fetch_array($res_cat)) {
 		print '  <option value="'.$row_cat['trove_cat_id'].'"';
-		if ($selected == $row_cat['trove_cat_id']) print (' selected="selected"');
+		if ($selected == $row_cat['trove_cat_id']) {
+			print (' selected="selected"');
+		}
 		print '>'.$row_cat['fullpath']."</option>\n";
 	}
 	print "</select>\n";

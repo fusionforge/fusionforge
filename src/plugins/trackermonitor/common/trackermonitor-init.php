@@ -1,5 +1,4 @@
 <?php
-
 /**
  *
  * This file is part of FusionForge.
@@ -25,8 +24,3 @@ require_once $gfplugins.'trackermonitor/include/TrackerMonitorPlugin.class.php' 
 $trackermonitorPluginObject = new TrackerMonitorPlugin ;
 
 register_plugin ($trackermonitorPluginObject) ;
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:

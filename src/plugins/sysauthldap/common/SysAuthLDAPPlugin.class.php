@@ -99,8 +99,12 @@ for other uses).");
 	}
 
 	function user_update($params) {
-		if (!forge_get_config('enabled',$this->name)) return true;
-		if (!$this->_connect()) { exit_error("Error connecting to LDAP"); }
+		if (!forge_get_config('enabled',$this->name)) {
+			return true;
+		}
+		if (!$this->_connect()) {
+			exit_error("Error connecting to LDAP");
+		}
 
 		$user = $params['user'];
 
@@ -149,11 +153,13 @@ for other uses).");
 	}
 
 	function user_delete($params) {
-		if (!forge_get_config('enabled',$this->name)) return true;
-		if (!$this->_connect()) { exit_error("Error connecting to LDAP"); }
-
+		if (!forge_get_config('enabled',$this->name)) {
+			return true;
+		}
+		if (!$this->_connect()) {
+			exit_error("Error connecting to LDAP");
+		}
 		$user = $params['user'];
-
 		return $this->_user_delete($user);
 	}
 

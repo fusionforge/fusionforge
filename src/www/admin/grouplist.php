@@ -41,9 +41,9 @@ if (getStringFromRequest('setpaging')) {
 	$paging = $LUSER->getPreference('paging');
 }
 
-if (!$paging)
+if (!$paging) {
 	$paging = 25;
-
+}
 $start = getIntFromRequest('start');
 if ($start < 0) {
 	$start = 0;
@@ -204,8 +204,3 @@ if (count($rows)) {
 }
 
 site_admin_footer();
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:

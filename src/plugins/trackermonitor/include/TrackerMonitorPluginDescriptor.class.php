@@ -20,8 +20,7 @@
 require_once 'common/plugin/PluginDescriptor.class.php';
 
 class TrackerMonitorPluginDescriptor extends PluginDescriptor {
-
-    function __construct() {
-        parent::__construct(_('TrackerMonitor'), 'v1.0', _("Project administrators can view and edit tracker monitoring status for users"));
-    }
+	function __construct() {
+		parent::__construct(_('TrackerMonitor'), 'v1.0', _("Project administrators can view and edit tracker monitoring status for users"));
+	}
 }

@@ -128,7 +128,9 @@ if ($row_cat["parent"] == 0) {
 print('>root</option>');
 while ($row_parent = db_fetch_array($res_parent)) {
 	print ('<option value="'.$row_parent["trove_cat_id"].'"');
-	if ($row_cat["parent"] == $row_parent["trove_cat_id"]) print ' selected="selected"';
+	if ($row_cat["parent"] == $row_parent["trove_cat_id"]) {
+		print ' selected="selected"';
+	}
 	print ('>'.$row_parent["fullname"]."</option>\n");
 }
 
@@ -151,8 +153,3 @@ while ($row_parent = db_fetch_array($res_parent)) {
 <?php
 echo $HTML->closeForm();
 site_admin_footer();
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:

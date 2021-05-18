@@ -138,8 +138,9 @@ function project_summary($group_id, $mode, $no_table) {
 			} else {
 				for ($j = 0; $j < $rows; $j++) {
 					$artifact_id = db_result($result, $j, 'group_artifact_id');
-					if (!forge_check_perm('tracker', $artifact_id, 'read'))
+					if (!forge_check_perm('tracker', $artifact_id, 'read')) {
 						continue;
+					}
 					$return .= '<p>
 					&nbsp;-&nbsp;'.util_make_link('/tracker/?atid='. $artifact_id . '&group_id='.$group_id.'&func=browse',db_result($result, $j, 'name'));
 					$return .= sprintf(ngettext('(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', '(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', (int) db_result($result, $j, 'open_count')), (int) db_result($result, $j, 'open_count'), (int) db_result($result, $j, 'count')) ;
@@ -221,8 +222,9 @@ function project_summary($group_id, $mode, $no_table) {
 			} else {
 				for ($j = 0; $j < $rows; $j++) {
 					$subproject_id = db_result($result, $j, 'group_project_id');
-					if (!forge_check_perm('pm', $subproject_id, 'read'))
+					if (!forge_check_perm('pm', $subproject_id, 'read')) {
 						continue;
+					}
 					$return .= '<br /> &nbsp; - '.util_make_link('/pm/task.php?group_project_id='.$subproject_id.'&group_id='.$group_id.'&func=browse',db_result($result, $j, 'project_name'));
 				}
 				db_free_result($result);
