@@ -564,6 +564,17 @@ TODO : document Auth plugins :
   Description: returns in $params['content'] an alternate content for /frs/download.php
                in $params['content_type'] the actual content-type to return
 
+  Hook name  : admin_tracker_add_actions
+  Parameters : $params['group_id'] provides the group id for which actions should be added
+               $params['atid'] provides the artifact id for which actions should be added
+  Description: return an array in $params['result'] to add additional actions to the tracker
+               admin menu. The returned array consists of a list of the following structure:
+                'myaction' = array(
+                    'text' => 'text for the displayed link',
+                    'description' => 'description of the action',
+                    'page' => 'path to the php file for displaying the menu page'),
+                ),
+                ...
 
 TODO (nerville) : document display_hierarchy
 TODO (lolando ?) : document role_normalize, role_translate_strings, role_has_permission, role_get_setting, list_roles_by_permission

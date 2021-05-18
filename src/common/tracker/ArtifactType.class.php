@@ -578,7 +578,7 @@ class ArtifactType extends FFError {
 			$user_id = user_getid();
 		}
 		$MonitorElementObject = new MonitorElement('artifact_type');
-		if (!$this->isMonitoring()) {
+		if (!$this->isMonitoring($user_id)) {
 			if (!$MonitorElementObject->enableMonitoringByUserId($this->getID(), $user_id)) {
 				$this->setError($MonitorElementObject->getErrorMessage());
 				return false;
@@ -595,12 +595,15 @@ class ArtifactType extends FFError {
 		}
 	}
 
-	function isMonitoring() {
-		if (!session_loggedin()) {
-			return false;
+	function isMonitoring($user_id = -1) {
+		if ($user_id == -1) {
+			if (!session_loggedin()) {
+				return false;
+			}
+			$user_id = user_getid();
 		}
 		$MonitorElementObject = new MonitorElement('artifact_type');
-		return $MonitorElementObject->isMonitoredByUserId($this->getID(), user_getid());
+		return $MonitorElementObject->isMonitoredByUserId($this->getID(), $user_id);
 	}
 
 	/**
