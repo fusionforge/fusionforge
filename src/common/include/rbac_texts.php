@@ -180,6 +180,9 @@ function setup_rbac_strings () {
 								  'new_frs2' => _('Files management'),
 								  'new_frs3' => _('Files & releases management'),
 								  'new_frs4' => _('Package admin'),
+
+								  'members0' => _('No access'),
+								  'members1' => _('Visible'),
 								  )
 		);
 
@@ -210,6 +213,7 @@ function setup_rbac_strings () {
 
 								    'scm' => _('SCM'),
 								    'docman' => _('Documentation manager'),
+								    'members' => _('Members'),
 								    )
 		) ;
 	plugin_hook ("role_translate_strings") ;

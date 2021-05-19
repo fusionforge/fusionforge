@@ -278,6 +278,7 @@ class RBACEngine extends FFError implements PFO_RBACEngine {
 		case 'tracker_admin':
 		case 'pm_admin':
 		case 'forum_admin':
+		case 'members':
 			$qpa = db_construct_qpa($qpa, 'AND perm_val = 1');
 			break;
 		case 'frs_admin':
