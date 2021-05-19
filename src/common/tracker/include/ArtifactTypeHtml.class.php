@@ -32,7 +32,6 @@ require_once $gfcommon.'tracker/ArtifactExtraFieldElement.class.php';
 require_once $gfcommon.'tracker/ArtifactWorkflow.class.php';
 require_once $gfcommon.'tracker/EffortUnitFactory.class.php';
 require_once $gfcommon.'include/utils_crossref.php';
-require_once $gfcommon.'include/UserManager.class.php';
 require_once $gfcommon.'widget/WidgetLayoutManager.class.php';
 
 class ArtifactTypeHtml extends ArtifactType {
@@ -727,7 +726,7 @@ class ArtifactTypeHtml extends ArtifactType {
 				}
 			}
 			if ($aef->isAutoAssign()) {
-				$autoAssignTo = UserManager::instance()->getUserById($aefe->getAutoAssignto());
+				$autoAssignTo = user_get_object($aefe->getAutoAssignto());
 				$opt_attrs[$i]=array_merge(isset($opt_attrs[$i]) ? $opt_attrs[$i] : array(), array('data-autoassignto'=>'{"id":'.$aefe->getAutoAssignto().', "name":"'.$autoAssignTo->getRealName().' ('.$autoAssignTo->getUnixName().')"}'));
 			}
 		}
@@ -966,8 +965,7 @@ class ArtifactTypeHtml extends ArtifactType {
 			$dependency = '';
 			if (!empty($aefChildren)) {
 				$cElmntArr = $aefe->getChildrenElements();
-				if (!empty($cElmntArr))
-				{
+				if (!empty($cElmntArr)) {
 					foreach ($cElmntArr as $key=>$cElmnt) {
 						$childField = new ArtifactExtraField($this, $key);
 						$dependency .= (empty($dependency) ? '':', ').'{"field":'.$key.', "elmnt": ['.implode(', ', $cElmnt).']}';
@@ -977,7 +975,7 @@ class ArtifactTypeHtml extends ArtifactType {
 				}
 			}
 			if ($aef->isAutoAssign()) {
-				$autoAssignTo = UserManager::instance()->getUserById($aefe->getAutoAssignto());
+				$autoAssignTo = user_get_object($aefe->getAutoAssignto());
 				$radios_attrs[$i]=array_merge(isset($radios_attrs[$i]) ? $radios_attrs[$i] : array(), array('data-autoassignto'=>'{"id":'.$aefe->getAutoAssignto().', "name":"'.$autoAssignTo->getRealName().' ('.$autoAssignTo->getUnixName().')"}'));
 			}
 		}
