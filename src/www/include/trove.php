@@ -258,7 +258,7 @@ function trove_catselectfull($node, $selected, $name, $title='') {
  * @param	int	$a_complete
  * @return	string
  */
-function trove_getcatlisting($group_id, $a_filter, $a_cats, $a_complete=0) {
+function trove_getcatlisting($group_id, $a_filter, $a_cats, $a_complete = 0) {
 	global $discrim_url;
 	global $expl_discrim;
 	global $form_cat;
@@ -304,9 +304,11 @@ function trove_getcatlisting($group_id, $a_filter, $a_cats, $a_complete=0) {
 		// filter links, to add discriminators
 		// first check to see if filter is already applied
 		$filterisalreadyapplied = 0;
-		for ($i=0;$i<sizeof($expl_discrim);$i++) {
-			if ($folders_ids[$folders_len-1] == $expl_discrim[$i]) {
-				$filterisalreadyapplied = 1;
+		if (is_array($expl_discrim)) { // in Widget_ProjectInfo class, $expl_discrim is null.
+			for ($i=0;$i < count($expl_discrim); $i++) {
+				if ($folders_ids[$folders_len-1] == $expl_discrim[$i]) {
+					$filterisalreadyapplied = 1;
+				}
 			}
 		}
 		// then print the stuff
