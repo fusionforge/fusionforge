@@ -27,7 +27,6 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'include/UserManager.class.php';
 require_once $gfcommon.'pm/ProjectTaskFactory.class.php';
 //build page title to make bookmarking easier
 //if a user was selected, add the user_name to the title
@@ -376,8 +375,3 @@ if ($rows < 1) {
 }
 
 pm_footer();
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:
