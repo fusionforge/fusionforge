@@ -279,10 +279,9 @@ function util_convert_body($str, $charset) {
  * @param	string	$subject	subject of the message
  * @param	string	$body		the message body
  * @param	string	$extra_emails	a comma-separated list of email address
- * @param	string	$dummy1		ignored	(no longer used)
  * @param	string	$from		From header
  */
-function util_handle_message($id_arr, $subject, $body, $extra_emails = '', $dummy1 = '', $from = '') {
+function util_handle_message($id_arr, $subject, $body, $extra_emails = '', $from = '') {
 	$address = array();
 
 	if (count($id_arr) < 1) {
