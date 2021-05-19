@@ -283,10 +283,7 @@ function util_convert_body($str, $charset) {
  */
 function util_handle_message($id_arr, $subject, $body, $extra_emails = '', $from = '') {
 	$address = array();
-
-	if (count($id_arr) < 1) {
-
-	} else {
+	if (!empty($id_arr)) {
 		$res = db_query_params('SELECT user_id,email FROM users WHERE user_id = ANY ($1)',
 					array(db_int_array_to_any_clause($id_arr)));
 		$rows = db_numrows($res);
@@ -298,7 +295,7 @@ function util_handle_message($id_arr, $subject, $body, $extra_emails = '', $from
 			}
 			$address['email'][] = db_result($res,$i,'email');
 		}
-		if (isset ($address['email']) && count($address['email']) > 0) {
+		if (isset ($address['email']) && !empty($address['email'])) {
 			$extra_emails = implode($address['email'], ',').','.$extra_emails;
 		}
 	}
