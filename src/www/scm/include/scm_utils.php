@@ -113,7 +113,11 @@ function commitstime_graph($group_id, $chartid) {
 	$start = $g->getStartDate();
 	$monthsArr[] = date('Ym', $start);
 	if ( $firstDateInDB < $monthsArr[0] ) {
-		$monthsArr[0] = $firstDateInDB;
+		if (0 == $firstDateInDB) {
+			$monthsArr[0] = '000000';
+		} else {
+			$monthsArr[0] = $firstDateInDB;
+		}
 		$start = mktime(0, 0, 0, substr($monthsArr[0], 4, 2) , 1, substr($monthsArr[0], 0, 4));
 	}
 	$timeStampArr[] = mktime(0, 0, 0, substr($monthsArr[0], 4, 2) , 1, substr($monthsArr[0], 0, 4));
