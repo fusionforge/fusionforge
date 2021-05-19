@@ -17,7 +17,7 @@ $access_token = OAuthAccessToken::get_access_token($f_token_id);
 $resource = new OAuthResource($f_resource_url, $access_token->get_provider_id(), $f_http_method);
 $provider = OAuthProvider::get_provider($access_token->get_provider_id());
 
-if (substr($f_resource_url, -5, 5)==".json" {
+if (substr($f_resource_url, -5, 5) == ".json") {
 	$f_post_data = json_decode($f_post_data, TRUE);
 }
 $transaction = new OAuthTransaction($provider, $access_token, $resource, $f_post_data);

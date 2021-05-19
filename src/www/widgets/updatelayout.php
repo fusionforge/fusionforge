@@ -66,7 +66,7 @@ if ($owner) {
 				$_REQUEST['group_id'] = $_GET['group_id'] = $at->Group->getID();
 				$redirect = '/tracker/?group_id='.$at->Group->getID().'&atid='.$at->getID();
 				$func = getStringFromRequest('func');
-				if ((strlen($func) > 0)) {
+				if (strlen($func) > 0) {
 					$redirect .= '&func='.$func;
 					$aid = getIntFromRequest('aid');
 					if ($aid) {

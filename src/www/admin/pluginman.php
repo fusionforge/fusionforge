@@ -45,7 +45,7 @@ $pm = plugin_manager_get_object();
 if (getStringFromRequest('update')) {
 	$pluginname = getStringFromRequest('update');
 
-	if ((getStringFromRequest('action') == 'deactivate')) {
+	if (getStringFromRequest('action') == 'deactivate') {
 
 		$res = db_query_params('DELETE FROM user_plugin WHERE plugin_id = (SELECT plugin_id FROM plugins WHERE plugin_name = $1)',
 			array($pluginname));

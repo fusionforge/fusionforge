@@ -80,10 +80,10 @@ if ($delete == "yes") {
 	} else {
 		$res = false;
 	}
-	if ( (!$res) ) {
+	if (!$res) {
 		exit_error("Attachment Download error: ".db_error(),'forums');
 	}
-	if (! ((db_result($res,0,'userid') == user_getid()) || (forge_check_perm('forum_admin', $f->Group->getID()))) ) {
+	if (! ((db_result($res,0,'userid') == user_getid()) || forge_check_perm('forum_admin', $f->Group->getID())) ) {
 		goodbye(_('You cannot delete this attachment'));
 	} else {
 		if (!$pending) {
@@ -114,7 +114,7 @@ if ($edit == "yes") {
 	if ( (!$res) || (!$res2) ) {
 		exit_error("Attachment error:".db_error(), 'forums');
 	}
-	if (! ((db_result($res2, 0, 'posted_by') == user_getid()) || (forge_check_perm('forum_admin', $f->Group->getID())))) {
+	if (! ((db_result($res2, 0, 'posted_by') == user_getid()) || forge_check_perm('forum_admin', $f->Group->getID())) ) {
 		goodbye(_('You cannot edit this attachment'));
 	} else {
 		if ($doedit=="1") {

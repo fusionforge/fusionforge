@@ -56,7 +56,7 @@ switch($owner_type) {
 			$_REQUEST['group_id'] = $_GET['group_id'] = $at->Group->getID(); // why ?
 			$redirect = '/tracker/?group_id='.$at->Group->getID().'&atid='.$at->getID();
 			$func = getStringFromRequest('func');
-			if ((strlen($func) > 0)) {
+			if (strlen($func) > 0) {
 				$redirect .= '&func='.$func;
 				$aid = getStringFromRequest('aid');
 				if (strlen($aid) > 0) {

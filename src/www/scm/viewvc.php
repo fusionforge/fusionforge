@@ -91,10 +91,11 @@ if (!forge_check_perm('scm', $Group->getID(), 'read')) {
 $unix_name = $Group->getUnixName();
 $u = session_get_user();
 if ($external_scm && !$Group->usesPlugin('scmcvs')) {
-	if ($Group->enableAnonSCM())
+	if ($Group->enableAnonSCM()) {
 		$server_script = '/anonscm/viewvc';
-	else
+	} else {
 		$server_script = '/authscm/'.$u->getUnixName().'/viewvc';
+	}
 	// pass the parameters passed to this script to the remote script in the same fashion
 	$protocol = forge_get_config('use_ssl', 'scmsvn')? 'https://' : 'http://';
 	$pathinfo = (isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : '/');
@@ -148,9 +149,10 @@ if (count($exploded_content) > 1) {
 	$headers = explode("\r\n", $headers);
 	$content_type = '';
 	$charset = '';
-	if ($external_scm)
+	if ($external_scm) {
 		// Strip "HTTP/1.1 200 OK" initial status line
 		array_shift($headers);
+	}
 	foreach ($headers as $header) {
 		if (preg_match('/^Content-Type:\s*(([^;]*)(\s*;\s*charset=(.*))?)/i', $header, $matches)) {
 			$content_type = $matches[2];
@@ -178,9 +180,9 @@ switch ($_GET['view']) {
 		$sysdebug_enable = false;
 		// Force content-type for any text/* or */javascript, to avoid XSS
 		if (!empty($content_type)) {
-			if ((preg_match('/text\/.*/', $content_type) ||
-				 preg_match('/.*\/javascript/', $content_type)))
+			if (preg_match('/text\/.*/', $content_type) || preg_match('/.*\/javascript/', $content_type)) {
 					$content_type = 'text/plain';
+			}
 			header("Content-Type: $content_type"
 				   . (!empty($charset) ? ";charset=$charset" : ''));
 		}
@@ -199,8 +201,3 @@ switch ($_GET['view']) {
 		scm_footer(array('inframe'=>1));
 		break;
 }
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:
