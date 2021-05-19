@@ -57,7 +57,6 @@ class Mail {
 		return $this->_headerCharset;
 	}
 
-
 	function setBodyCharset($charset) {
 		$this->_bodyCharset = $charset;
 	}
@@ -138,7 +137,7 @@ class Mail {
 		foreach($recipArray as $email) {
 			$email = trim($email);
 			if(!empty($email)) {
-				$user = UserManager::instance()->getUserByEmail($email);
+				$user = user_get_object_by_email($email);
 				if ($user) {
 					$allowed_status = array('A', 'R', 'P', 'V', 'W');
 					$one_with_status_allowed_found = false;
