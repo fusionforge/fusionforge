@@ -29,23 +29,23 @@ require_once 'checks.php';
 
 $user_id = user_getid();
 
-if(oauthprovider_CheckForgeAdmin()) {
+if (oauthprovider_CheckForgeAdmin()) {
 	$t_tokens = OauthAuthzRequestToken::load_all();
-}elseif($type=='group')	{
-	if(oauthprovider_CheckAdmin()==0)	{
+} elseif ($type=='group')	{
+	if (oauthprovider_CheckAdmin()==0)	{
 		$proj_admin = true;
-	}else {
+	} else {
 		oauthprovider_CheckGroup();
 		$proj_admin = false;
 	}
 	$temp_tokens = OauthAuthzRequestToken::load_all();
-	foreach($temp_tokens as $temp_token) {
+	foreach ($temp_tokens as $temp_token) {
 		$role = RBACEngine::getInstance()->getRoleById($temp_token->getRoleId());
-		if((isset($role))&&($role->getHomeProject()->getID() == $id))	{
+		if ((isset($role))&&($role->getHomeProject()->getID() == $id))	{
 			$t_tokens[] = $temp_token;
 		}
 	}
-}else {
+} else {
 	oauthprovider_CheckUser();
 	$t_tokens = OauthAuthzRequestToken::load_all($user_id);
 }
@@ -61,60 +61,62 @@ $headers = array(
 	'DELETE'
 	);
 
-if(count($t_tokens)>0) {
+if (!empty($t_tokens)) {
 	echo $HTML->boxTop(_('Request Tokens'));
 	echo $HTML->listTableTop($headers);
 
 	$i=0;
-	foreach( $t_tokens as $t_token ) {
+	foreach ( $t_tokens as $t_token ) {
 		$consumer = OauthAuthzConsumer::load($t_token->getConsumerId());
 		echo '<tr>';
-		if(forge_check_global_perm ('forge_admin'))	{
+		if (forge_check_global_perm ('forge_admin')) {
 			echo '<td>'.util_make_link('/plugins/'.$pluginname.'/consumer_manage.php?consumer_id=' . $t_token->getConsumerId(), $consumer->getName()).'</td>';
-		}else {
+		} else {
 			echo '<td>'.$consumer->getName().'</td>';
 		}
 		echo '<td>'.$t_token->key.'</td>';
 		echo '<td>'.$t_token->secret.'</td>';
-		if($t_token->getAuthorized()==1)	$auth = 'Yes';
-		else $auth = 'No';
+		if ($t_token->getAuthorized()==1) {
+			$auth = 'Yes';
+		} else {
+			$auth = 'No';
+		}
 		echo '<td>'.$auth.'</td>';
 		$role_id =$t_token->getRoleId();
-		if($role_id!=0)	{
+		if ($role_id!=0) {
 			//echo 'Roleid: '.$role_id;
 			$role = RBACEngine::getInstance()->getRoleById($role_id);
 			//print_r($role);
 			echo '<td>'.$role->getName().'</td>';
-		}else {
+		} else {
 			echo '<td>'.'---'.'</td>';
 		}
-		if($t_token->getUserId() > 0 ) {
+		if ($t_token->getUserId() > 0 ) {
 			$user_object = user_get_object($t_token->getUserId());
-	          $user = $user_object->getRealName().' ('.$user_object->getUnixName().')';
-		}	else {
-		  $user = "-";
+			$user = $user_object->getRealName().' ('.$user_object->getUnixName().')';
+		} else {
+			$user = "-";
 		}
 		echo '<td>'.$user.'</td>';
 		echo '<td>'.date(DATE_RFC822, $t_token->gettime_stamp()) .'</td>';
-		if(forge_check_global_perm ('forge_admin')) {
+		if (forge_check_global_perm ('forge_admin')) {
 			echo '<td>'.util_make_link('/plugins/'.$pluginname.'/token_delete.php?token_id=' . $t_token->getId() . '&token_type=request' . '&plugin_oauthprovider_token_delete_token='.form_generate_key(), _('Delete')).'</td>';
-		}elseif($type == 'group')	{
-			if(($proj_admin)||($t_token->getUserId() == $user_id)) {
+		} elseif($type == 'group') {
+			if (($proj_admin)||($t_token->getUserId() == $user_id)) {
 				echo '<td>'.util_make_link('/plugins/'.$pluginname.'/token_delete.php?token_id=' . $t_token->getId() . '&token_type=request' . '&plugin_oauthprovider_token_delete_token='.form_generate_key(), _('Delete')).'</td>';
-			}else {
+			} else {
 				echo '<td>'.'</td>';
 			}
-		}else {
+		} else {
 			echo '<td>'.util_make_link('/plugins/'.$pluginname.'/token_delete.php?token_id=' . $t_token->getId() . '&token_type=request' . '&plugin_oauthprovider_token_delete_token='.form_generate_key(), _('Delete')).'</td>';
 		}
 		echo '</tr>';
 		$i++;
-
 	}
 
 	echo $HTML->listTableBottom();
 	echo $HTML->boxBottom();
-}else {
+} else {
 	echo '<p>'. _('No request tokens were found!').'</p>';
 }
 

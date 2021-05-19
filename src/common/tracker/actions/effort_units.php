@@ -239,10 +239,10 @@ function show_units(&$effortUnitSet){
 	$unitFactory = new EffortUnitFactory($effortUnitSet);
 	if (!$unitFactory || !is_object($unitFactory)) {
 		echo $HTML->error_msg(_('Error creating EffortUnitFactory'));
-		return;
+		return false;
 	} elseif ($unitFactory->isError()) {
 		echo $HTML->error_msg($unitFactory->getErrorMessage());
-		return;
+		return false;
 	}
 	$units = $unitFactory->getUnits();
 	if ($unitFactory->isError()) {

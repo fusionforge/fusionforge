@@ -614,7 +614,7 @@ function plugin_forumml_replace_attachment($id_message, $group_id, $list, $id_pa
 			$replace_parts[] = $url;
 		}
 	}
-	if (count($replace_parts) > 0) {
+	if (!empty($replace_parts)) {
 		$body = str_replace($search_parts, $replace_parts, $body);
 	}
 }
@@ -678,7 +678,7 @@ function plugin_forumml_process_mail($plug,$reply=false) {
 			$feedback .=_('Invalid Email Address')._(': ').$err;
 		} else {
 			// add list of cc users to mail mime
-			if (count($cc_array) > 0) {
+			if (!empty($cc_array)) {
 				$cc_list = implode(',',$cc_array);
 				$mail->setCc($cc_list,true);
 			}
