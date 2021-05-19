@@ -664,10 +664,9 @@ function plugin_forumml_process_mail($plug,$reply=false) {
 		}
 		// Checks sanity of CC List
 		$err = '';
-		$valid=true;
-		foreach ($cc_array as $key => $cc) {
-			$umanager = UserManager::instance();
-			$user = $umanager->existEmail($cc);
+		$valid = true;
+		foreach ($cc_array as $cc) {
+			$user = user_get_object_by_email($cc);
 			if (!$user) {
 				$valid = false;
 				$err .= $cc.'<br>';
