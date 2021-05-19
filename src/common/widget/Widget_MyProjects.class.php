@@ -115,10 +115,10 @@ class Widget_MyProjects extends Widget {
 				'copyright'   => 'Copyright Xerox',
 				'pubDate'     => gmdate('D, d M Y G:i:s',time()).' GMT',
 			));
-		$projects = UserManager::instance()->getCurrentUser()->getGroups();
+		$projects = session_get_user()->getGroups();
 		sortProjectList($projects);
 
-		if (!$projects || count($projects) < 1) {
+		if (!$projects || empty($projects)) {
 			$rss->addItem(array(
 					  'title'       => forge_get_config('forge_name'),
 					  'description' => _("You're not a member of any project") . db_error(),
@@ -153,8 +153,3 @@ class Widget_MyProjects extends Widget {
 		return _('List the projects you belong to. Selecting any of these projects brings you to the corresponding Project Summary page.');
 	}
 }
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:

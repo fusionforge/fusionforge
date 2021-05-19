@@ -55,9 +55,7 @@ control over it to the project's administrator.");
 		$group_id = $params['group_id'];
 		$group = group_get_object($group_id);
 		if ($group->usesPlugin($this->name)) {
-			echo '<p>';
-			echo $this->getProjectAdminLink($group_id);
-			echo '</p>';
+			echo '<p>'.$this->getProjectAdminLink($group_id).'</p>';
 		}
 	}
 
@@ -92,7 +90,6 @@ control over it to the project's administrator.");
 	* @return	bool	success or not
 	*/
 	function getHeader($type, $params=NULL) {
-		global $gfplugins;
 		$returned = false;
 		switch ($type) {
 			case 'globaladmin': {
@@ -249,7 +246,6 @@ control over it to the project's administrator.");
 	 */
 	function widget_instance($params) {
 		global $gfplugins, $gfcommon;
-		//$user = UserManager::instance()->getCurrentUser();
 		require_once $gfcommon.'/widget/WidgetLayoutManager.class.php';
 		if ($params['widget'] == 'plugin_extsubproj_project_subprojects') {
 			require_once $gfplugins.$this->name.'/include/extsubproj_Widget_SubProjects.class.php';

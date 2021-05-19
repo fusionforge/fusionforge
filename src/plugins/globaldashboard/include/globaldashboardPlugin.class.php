@@ -37,7 +37,7 @@ class globaldashboardPlugin extends Plugin {
 	}
 
 	function usermenu() {
-		global $G_SESSION,$HTML;
+		global $G_SESSION, $HTML;
 		$text = $this->text; // this is what shows in the tab
 		if ($G_SESSION->usesPlugin("globaldashboard")) {
 			$param = '?type=user&id=' . $G_SESSION->getId() . '&pluginname=' . $this->name; // we indicate the part we're calling is the user one
@@ -61,7 +61,6 @@ class globaldashboardPlugin extends Plugin {
 	 */
 	function widget_instance($params) {
 		global $gfplugins;
-		//$user = UserManager::instance()->getCurrentUser();
 		require_once 'common/widget/WidgetLayoutManager.class.php';
 		if ($params['widget'] == 'plugin_globalDashboard_MyProjects') {
 			require_once $gfplugins.$this->name.'/include/globalDashboard_Widget_MyProjects.php';

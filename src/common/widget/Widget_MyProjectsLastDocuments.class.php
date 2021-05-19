@@ -132,7 +132,7 @@ class Widget_MyProjectsLastDocuments extends Widget {
 		if (!forge_get_config('use_docman')) {
 			return false;
 		}
-		foreach (UserManager::instance()->getCurrentUser()->getGroups(false) as $p) {
+		foreach (session_get_user()->getGroups(false) as $p) {
 			if ($p->usesDocman()) {
 				return true;
 			}

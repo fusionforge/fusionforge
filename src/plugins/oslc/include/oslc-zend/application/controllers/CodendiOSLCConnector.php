@@ -140,7 +140,6 @@ class CodendiOSLCConnector extends OSLCConnector {
 	 * @return boolean true if success, false otherwise.
 	 */
 	public function updateChangeRequest($changerequest_id, $group_id, $tracker_id, $changerequest, $props) {
-		$user = UserManager::instance()->getCurrentUser();
 		$project = group_get_object($group_id);
 		if (! $project || ! is_object($project)) {
 			throw new Exception('Error : Could Not Get Group','updateChangeRequest');

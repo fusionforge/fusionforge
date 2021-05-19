@@ -23,7 +23,6 @@
 
 require_once 'common/mvc/Views.class.php';
 /*require_once('common/include/HTTPRequest.class.php');
-  require_once 'common/user/UserManager.class.php';
   require_once('common/reference/CrossReferenceFactory.class.php');*/
 
 require_once 'HudsonJob.class.php';
@@ -56,7 +55,7 @@ class hudsonViews extends Views {
 	function projectOverview() {
 		$request =& HTTPRequest::instance();
 		$group_id = $request->get('group_id');
-		$user = UserManager::instance()->getCurrentUser();
+		$user = session_get_user();
 
 		$this->_display_jobs_table($group_id);
 		if ($user->isMember($request->get('group_id'), 'A')) {
@@ -180,7 +179,7 @@ class hudsonViews extends Views {
 		$request =& HTTPRequest::instance();
 		$group_id = $request->get('group_id');
 		$job_id = $request->get('job_id');
-		$user = UserManager::instance()->getCurrentUser();
+		$user = session_get_user();
 		if ($user->isMember($group_id, 'A')) {
 
 			$project = group_get_objet($group_id);
@@ -261,7 +260,7 @@ class hudsonViews extends Views {
 		global $HTML;
 		$request =& HTTPRequest::instance();
 		$group_id = $request->get('group_id');
-		$user = UserManager::instance()->getCurrentUser();
+		$user = session_get_user();
 		$job_dao = new PluginHudsonJobDao(CodendiDataAccess::instance());
 		$dar = $job_dao->searchByGroupID($group_id);
 

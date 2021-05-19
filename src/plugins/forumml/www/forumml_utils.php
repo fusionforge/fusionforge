@@ -635,7 +635,7 @@ function plugin_forumml_process_mail($plug,$reply=false) {
 	$to = $list->getName()."@".forge_get_config('lists_host');
 	$mail->setTo($to);
 
-	$mail->setFrom(UserManager::instance()->getCurrentUser()->getEmail());
+	$mail->setFrom(session_get_user()->getEmail());
 
 	$vMsg = new Valid_Text('message');
 	if ($request->valid($vMsg)) {

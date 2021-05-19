@@ -27,8 +27,6 @@ require_once 'mailman/include/MailmanList.class.php';
 require_once 'mailman/include/MailmanListFactory.class.php';
 
 global $HTML;
-global $class;
-$current_user=UserManager::instance()->getCurrentUser();
 
 function sendCreationMail($userEmail,&$list) {
 	$message = sprintf(_('A mailing list will be created on %s in few minutes and you are the list administrator.'), forge_get_config ('forge_name'))
@@ -91,13 +89,11 @@ function table_end()
 	//	echo '</TD></TR></TABLE>';
 	echo '</table>';
 }
-function display_list($currentList)
-{
-global $class;
-$plugin_manager =& PluginManager::instance();
-$p =& $plugin_manager->getPluginByName('mailman');
+function display_list($currentList) {
+	global $class;
+	$plugin_manager =& PluginManager::instance();
+	$p =& $plugin_manager->getPluginByName('mailman');
 	$request =& HTTPRequest::instance();
-	$current_user=UserManager::instance()->getCurrentUser();
 
 	if($currentList->isPublic()!='9'){
 		if ($currentList->isError()) {
@@ -144,7 +140,7 @@ $p =& $plugin_manager->getPluginByName('mailman');
 						;
 						echo  '</a></td> <td></td>';
 					}
-					if ($currentList->getListAdminID() == $current_user->getID()){
+					if ($currentList->getListAdminID() == user_getid()){
 						echo ' <td> <a href="index.php?group_id='. $request->get('group_id').'&amp;action=admin&amp;id='. $currentList->getID() .'">'._('Administrate').'</a> ';
 					}
 					else { echo '<td>';}
@@ -156,11 +152,9 @@ $p =& $plugin_manager->getPluginByName('mailman');
 	}
 }
 
-function display_list_admin($currentList)
-{
+function display_list_admin($currentList) {
 	global $class;
 	$request =& HTTPRequest::instance();
-	$current_user=UserManager::instance()->getCurrentUser();
 	if($currentList->isPublic()!='9'){
 		if ($currentList->isError() ) {
 			echo $currentList->getErrorMessage();
@@ -190,7 +184,7 @@ function display_list_admin($currentList)
 			echo '<td> <a href="index.php?group_id='.$request->get('group_id').'&amp;change_status=1&amp;group_list_id='.$currentList->getID().'">'._('Update').'</a></td>';
 			echo '<td> <a href="deletelist.php?group_id='.$currentList->Group->getID().'&id='.$currentList->getID().'">'. _('Delete').'</td>';
 
-			if ($currentList->getListAdminID() == $current_user->getID()){
+			if ($currentList->getListAdminID() == user_getid()){
 				echo ' <td> <a href="../index.php?group_id='. $request->get('group_id').'&amp;action=admin&amp;id='. $currentList->getID() .'">'._('Administrate from Mailman').'</a></td> ';
 			}
 		}
@@ -201,7 +195,7 @@ function display_list_admin($currentList)
 
 function mailman_header($params) {
 	global $group_id;
-	$current_user=UserManager::instance()->getCurrentUser();
+	$current_user = session_get_user();
 	$request =& HTTPRequest::instance();
 
 	//required for site_project_header
@@ -229,8 +223,3 @@ function mailman_header($params) {
 function mail_footer($params = array()) {
 	site_project_footer($params);
 }
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:

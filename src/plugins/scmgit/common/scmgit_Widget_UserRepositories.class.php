@@ -41,7 +41,7 @@ class scmgit_Widget_UserRepositories extends Widget {
 
 	function getContent() {
 		global $HTML;
-		$user = UserManager::instance()->getCurrentUser();
+		$user = session_get_user();
 		$GitRepositories = $this->getMyRepositoriesList();
 		if (count($GitRepositories)) {
 			$ssh_port = '';

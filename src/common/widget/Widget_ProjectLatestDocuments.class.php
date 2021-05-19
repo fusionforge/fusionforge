@@ -110,7 +110,7 @@ class Widget_ProjectLatestDocuments extends Widget {
 						$cells[][] = $doc->getStateName();
 						$action = '';
 						if ($doc->getStateID() != 2) {
-							if ($doc->isMonitoredBy(UserManager::instance()->getCurrentUser()->getID())) {
+							if ($doc->isMonitoredBy(user_getid())) {
 								$option = 'stop';
 								$titleMonitor = _('Stop monitoring this document');
 								$image = $HTML->getStopMonitoringPic($titleMonitor, $titleMonitor);

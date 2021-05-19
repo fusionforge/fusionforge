@@ -70,11 +70,11 @@ class mailmanPlugin extends Plugin {
 	}
 
 	function CallHook($hookname, &$params) {
-		global $use_mailmanplugin,$G_SESSION,$HTML,$gfcommon,$gfwww,$gfplugins;
+		global $use_mailmanplugin, $HTML, $gfcommon, $gfwww, $gfplugins;
 		if ($hookname == "usermenu") {
 			$text = $this->text; // this is what shows in the tab
-			if ($G_SESSION->usesPlugin("mailman")) {
-				$param = '?type=user&id=' . $G_SESSION->getId() . '&pluginname=' . $this->name; // we indicate the part we're calling is the user one
+			if (session_get_user()->usesPlugin("mailman")) {
+				$param = '?type=user&id=' . user_getid() . '&pluginname=' . $this->name; // we indicate the part we're calling is the user one
 				echo ' | ' . $HTML->PrintSubMenu (array ($text),
 					array ('/plugins/mailman/index.php' . $param ));
 			}
@@ -150,7 +150,7 @@ class mailmanPlugin extends Plugin {
 			}
 		}
 		elseif ($hookname == "monitored_element") {
-			$current_user=UserManager::instance()->getCurrentUser();
+			$current_user = session_get_user();
 			$last_group=0;
 			$order_name_arr=array();
 			$order_name_arr[]=_('Remove');

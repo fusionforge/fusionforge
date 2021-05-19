@@ -41,7 +41,7 @@ $plugin_manager =& PluginManager::instance();
 $p =& $plugin_manager->getPluginByName('forumml');
 if ($p && $plugin_manager->isPluginAvailable($p) && $p->isAllowed()) {
 
-	$current_user=UserManager::instance()->getCurrentUser();
+	$current_user = session_get_user();
 	$request =& HTTPRequest::instance();
 
 	$vGrp = new Valid_UInt('group_id');

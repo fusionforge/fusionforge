@@ -5,8 +5,6 @@
  * Copyright 2003 Guillaume Smet
  * http://fusionforge.org/
  *
- * @version   $Id$
- *
  * This file is part of FusionForge.
  *
  * FusionForge is free software; you can redistribute it and/or modify
@@ -31,7 +29,6 @@
  */
 
 require_once 'MailmanListDao.class.php';
-require_once 'UserManager.class.php';
 require_once 'common/dao/CodendiDataAccess.class.php';
 require_once 'common/system_event/SystemEventManager.class.php';
 require_once 'common/system_event/SystemEvent.class.php';
@@ -117,7 +114,7 @@ class MailmanList extends FFError {
 	 **/
 
 	function create($listName, $description, $isPublic = '1',$creator_id=false) {
-		$current_user=UserManager::instance()->getCurrentUser();
+		$current_user= session_get_user();
 		//
 		//	During the group creation, the current user_id will not match the admin's id
 		//
@@ -161,7 +158,7 @@ class MailmanList extends FFError {
 		$systemevent =	SystemEventManager::instance();
 		$systemevent->createEvent('MAILMAN_LIST_CREATE', $this->groupMailmanListId,SystemEvent::PRIORITY_MEDIUM);
 		$this->fetchData($this->groupMailmanListId);
-		$user=UserManager::instance()->getUserByID($creator_id);
+		$user = user_get_object($creator_id);
 
 		$userEmail = $user->getEmail();
 		if(empty($userEmail) || !validate_email($userEmail)) {
@@ -186,8 +183,7 @@ class MailmanList extends FFError {
 		$result2 = $systemevent->fetchEvents(0,10,false,SystemEvent::STATUS_RUNNING,'MAILMAN_LIST_CREATE',$this->getID());
 		if(count($result1)+count($result2)<1) {
 			return false;
-		}
-		else {
+		} else {
 			return true;
 		}
 	}
@@ -228,7 +224,7 @@ class MailmanList extends FFError {
 	 *	@return	boolean	success.
 	 */
 	function update($description, $isPublic ='1',$status='1') {
-		$current_user=UserManager::instance()->getCurrentUser();
+		$current_user = session_get_user();
 		if(!$current_user->isMember($this->Group->getID(),'A')) {
 			exit_permission_denied();
 			return false;
@@ -341,8 +337,8 @@ class MailmanList extends FFError {
 	 * @return string url of the info page
 	 */
 	function getOptionsUrl() {
-		$current_user=UserManager::instance()->getCurrentUser();
-		$user=$current_user->getEmail();
+		$current_user = session_get_user();
+		$user = $current_user->getEmail();
 		$iframe_url = '/mailman/options/'.$this->getName().'/'.$user;
 		htmlIframe($iframe_url, array('class' => 'iframe_service'));
 	}
@@ -352,9 +348,8 @@ class MailmanList extends FFError {
 	 * @return string url of the info page
 	 */
 	function subscribe() {
-		$current_user=UserManager::instance()->getCurrentUser();
-		if(isLogged() && $current_user->isMember($this->Group->getID()) && !$this->isMonitoring())
-		{
+		$current_user = session_get_user();
+		if(isLogged() && $current_user->isMember($this->Group->getID()) && !$this->isMonitoring()) {
 			$user=$current_user->getEmail();
 			$passwd= $current_user->getUserPw();
 			$name= $current_user->getRealName();
@@ -373,7 +368,7 @@ class MailmanList extends FFError {
 	 * @return string url of the info page
 	 */
 	function unsubscribe() {
-		$current_user=UserManager::instance()->getCurrentUser();
+		$current_user = session_get_user();
 		$user=$current_user->getEmail();
 		$res = $this->_mailingDAO->deleteSubscriber($user,$this->getName());
 		if (!$res) {
@@ -391,7 +386,7 @@ class MailmanList extends FFError {
 		if (!isLogged()) {
 			return false;
 		}
-		$current_user=UserManager::instance()->getCurrentUser();
+		$current_user = session_get_user();
 		$user=$current_user->getEmail();
 		$res = $this->_mailingDAO->userIsMonitoring($user,$this->getName());
 		if (!$res) {
@@ -421,7 +416,7 @@ class MailmanList extends FFError {
 	 *	@return	boolean success;
 	 */
 	function deleteList($sure,$really_sure) {
-		$current_user=UserManager::instance()->getCurrentUser();
+		$current_user = session_get_user();
 		if (!$sure || !$really_sure) {
 			$this->setError(_('Missing parameters'));
 			return false;
@@ -441,12 +436,5 @@ class MailmanList extends FFError {
 		$systemevent->createEvent('MAILMAN_LIST_DELETE',  $this->groupMailmanListId,SystemEvent::PRIORITY_MEDIUM);
 
 		return true;
-
 	}
-
 }
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:

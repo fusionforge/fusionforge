@@ -137,7 +137,7 @@ class Widget_MyMonitoredForums extends Widget {
 		if (!forge_get_config('use_forum')) {
 			return false;
 		}
-		foreach (UserManager::instance()->getCurrentUser()->getGroups(false) as $p) {
+		foreach (session_get_user()->getGroups(false) as $p) {
 			if ($p->usesForum()) {
 				return true;
 			}

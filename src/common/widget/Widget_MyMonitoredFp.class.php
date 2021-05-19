@@ -29,12 +29,15 @@ require_once $gfcommon.'include/MonitorElement.class.php';
 * FRS packages that are actively monitored
 */
 class Widget_MyMonitoredFp extends Widget {
+
 	function __construct() {
 		parent::__construct('mymonitoredfp');
 	}
+
 	function getTitle() {
 		return _('Monitored File Packages');
 	}
+
 	function getContent() {
 		global $HTML;
 		$html_my_monitored_fp = '';
@@ -132,7 +135,7 @@ class Widget_MyMonitoredFp extends Widget {
 		if (!forge_get_config('use_frs')) {
 			return false;
 		}
-		foreach (UserManager::instance()->getCurrentUser()->getGroups(false) as $p) {
+		foreach (session_get_user()->getGroups(false) as $p) {
 			if ($p->usesFRS()) {
 				return true;
 			}

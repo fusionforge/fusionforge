@@ -42,7 +42,7 @@
 function my_hide_url($svc, $db_item_id, $item_id, $count, $hide) {
 
 	$pref_name = 'my_hide_'.$svc.$db_item_id;
-	$old_hide = $old_count = $old_pref_value = UserManager::instance()->getCurrentUser()->getPreference($pref_name);
+	$old_hide = $old_count = $old_pref_value = session_get_user()->getPreference($pref_name);
 	if ($old_pref_value) {
 		list($old_hide,$old_count) = explode('|', $old_pref_value);
 	}
@@ -75,7 +75,7 @@ function my_hide_url($svc, $db_item_id, $item_id, $count, $hide) {
 
 	// Update pref value if needed
 	if ($old_pref_value != $pref_value) {
-		UserManager::instance()->getCurrentUser()->setPreference($pref_name, $pref_value);
+		session_get_user()->setPreference($pref_name, $pref_value);
 	}
 
 	if ($hide) {
@@ -91,7 +91,7 @@ function my_hide_url($svc, $db_item_id, $item_id, $count, $hide) {
 
 function my_hide($svc, $db_item_id, $item_id, $hide) {
 	$pref_name = 'my_hide_'.$svc.$db_item_id;
-	$old_pref_value = UserManager::instance()->getCurrentUser()->getPreference($pref_name);
+	$old_pref_value = session_get_user()->getPreference($pref_name);
 	if ($old_pref_value) {
 		list($old_hide, $old_count) = explode('|', $old_pref_value);
 	}

@@ -34,7 +34,7 @@ class Widget_ProjectDocumentsActivity extends Widget {
 		global $project;
 		parent::__construct('projectdocumentsactivity');
 		if (session_loggedin()) {
-			$userPrefValue = UserManager::instance()->getCurrentUser()->getPreference('my_docman_project_activitity_show');
+			$userPrefValue = session_get_user()->getPreference('my_docman_project_activitity_show');
 			if ($userPrefValue) {
 				$this->_statistic_show = $userPrefValue;
 			}
@@ -75,7 +75,7 @@ class Widget_ProjectDocumentsActivity extends Widget {
 				default:
 					$this->_statistic_show = 'FUD';
 			}
-			UserManager::instance()->getCurrentUser()->setPreference('my_docman_project_activitity_show', $this->_statistic_show);
+			session_get_user()->setPreference('my_docman_project_activitity_show', $this->_statistic_show);
 		}
 		return true;
 	}

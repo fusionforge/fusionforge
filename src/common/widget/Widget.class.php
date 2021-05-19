@@ -415,7 +415,7 @@ require_once $gfcommon.'widget/Widget_UserhomeRss.class.php';
 		return '';
 	}
 	function getPreviewCssClass() {
-		$locale = UserManager::instance()->getCurrentUser()->getLanguage();
+		//TODO: implement locale support using session_get_user()->getLanguage() to get the locale.
 		$locale = "en_US";
 		return 'widget-preview-'.($this->id).'-'.$locale;
 	}

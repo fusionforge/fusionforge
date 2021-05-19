@@ -25,7 +25,7 @@ class Widget_HomeHallOfFame extends Widget {
 	function __construct() {
 		parent::__construct('homehalloffame');
 		if (session_loggedin()) {
-			$userPrefValue = UserManager::instance()->getCurrentUser()->getPreference('my_home_hall_of_fame');
+			$userPrefValue = session_get_user()->getPreference('my_home_hall_of_fame');
 			if ($userPrefValue) {
 				$this->_hall_show = $userPrefValue;
 			}
@@ -109,7 +109,7 @@ class Widget_HomeHallOfFame extends Widget {
 				default:
 					$this->_hall_show = 'PDA';
 			}
-			UserManager::instance()->getCurrentUser()->setPreference('my_home_hall_of_fame', $this->_hall_show);
+			session_get_user()->setPreference('my_home_hall_of_fame', $this->_hall_show);
 		}
 		return true;
 	}
@@ -128,4 +128,3 @@ class Widget_HomeHallOfFame extends Widget {
 		return $prefs;
 	}
 }
- 

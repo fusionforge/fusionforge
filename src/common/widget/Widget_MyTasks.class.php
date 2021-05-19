@@ -119,7 +119,7 @@ class Widget_MyTasks extends Widget {
 			return false ;
 		}
 
-		foreach (UserManager::instance()->getCurrentUser()->getGroups(false) as $p) {
+		foreach (session_get_user()->getGroups(false) as $p) {
 			if ($p->usesPM()) {
 				return true ;
 			}

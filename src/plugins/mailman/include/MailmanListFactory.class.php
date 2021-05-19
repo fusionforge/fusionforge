@@ -91,7 +91,7 @@ class MailmanListFactory extends FFError {
 	 *	@return	array	The array of MailmanList objects.
 	 */
 	function &getMailmanLists() {
-		$current_user=UserManager::instance()->getCurrentUser();
+		$current_user = session_get_user();
 		if (isset($this->mailingLists) && is_array($this->mailingLists)) {
 			return $this->mailingLists;
 		}
@@ -121,9 +121,8 @@ class MailmanListFactory extends FFError {
 	 *
 	 * @return string url of the info page
 	 */
-	function compareInfos()
-	{
-		$current_user=UserManager::instance()->getCurrentUser();
+	function compareInfos() {
+		$current_user = session_get_user();
 		$mail=$current_user->getEmail();
 
 		$passwd= $current_user->getUserPw();
@@ -131,13 +130,9 @@ class MailmanListFactory extends FFError {
 		$result =& $this->_mailingDAO->compareInfos($mail);
 		if (!$result) {
 			return false;
-		}
-		else
-		{
-			while( $arr =& $result->getRow())
-			{
-				if($arr['password']!=$passwd || $arr['name']!=$name)
-				{
+		} else {
+			while( $arr =& $result->getRow()) {
+				if($arr['password']!=$passwd || $arr['name']!=$name) {
 					return true;
 				}
 			}
@@ -150,9 +145,8 @@ class MailmanListFactory extends FFError {
 	 *
 	 * @return string url of the info page
 	 */
-	function updateInfos()
-	{
-		$current_user=UserManager::instance()->getCurrentUser();
+	function updateInfos() {
+		$current_user = session_get_user();
 		$mail=$current_user->getEmail();
 
 		$passwd= $current_user->getUserPw();
@@ -167,8 +161,3 @@ class MailmanListFactory extends FFError {
 	}
 
 }
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:

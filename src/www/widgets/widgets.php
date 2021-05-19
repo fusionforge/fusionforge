@@ -30,16 +30,14 @@ html_use_jquery();
 use_javascript('/widgets/scripts/LayoutController.js');
 
 if (session_loggedin()) {
-	$lm = new WidgetLayoutManager();
-	$layout_id = getIntFromRequest('layout_id');
-	$owner = getStringFromRequest('owner');
+	$lm         = new WidgetLayoutManager();
+	$layout_id  = getIntFromRequest('layout_id');
+	$owner      = getStringFromRequest('owner');
 	$owner_id   = (int)substr($owner, 1);
 	$owner_type = substr($owner, 0, 1);
 	switch($owner_type) {
 		case WidgetLayoutManager::OWNER_TYPE_USER:
 			if ($owner_id == user_getid()) {
-				$userm = UserManager::instance();
-				$current = $userm->getCurrentUser();
 				site_user_header(array('title'=>sprintf(_('Personal Page for %s'), user_getname())));
 				$lm->displayAvailableWidgets(user_getid(), WidgetLayoutManager::OWNER_TYPE_USER, $layout_id);
 				site_footer();
@@ -96,8 +94,6 @@ if (session_loggedin()) {
 			break;
 		case WidgetLayoutManager::OWNER_TYPE_USERHOME:
 			if ($owner_id == user_getid()) {
-				$userm = UserManager::instance();
-				$current = $userm->getCurrentUser();
 				site_header(array('title'=>sprintf(_('Profile Page for %s'), user_getname())));
 				$lm->displayAvailableWidgets(user_getid(), WidgetLayoutManager::OWNER_TYPE_USERHOME, $layout_id);
 				site_footer();

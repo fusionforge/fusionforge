@@ -153,8 +153,6 @@ control over it to the project administrator.");
 	function myPageBox($params) {
 		require_once 'common/widget/WidgetLayoutManager.class.php';
 
-		$user = UserManager::instance()->getCurrentUser();
-
 		// MY
 		if ($params['widget'] == 'plugin_hudson_my_jobs') {
 			require_once 'hudson_Widget_MyMonitoredJobs.class.php';
@@ -162,23 +160,23 @@ control over it to the project administrator.");
 		}
 		if ($params['widget'] == 'plugin_hudson_my_joblastbuilds') {
 			require_once 'hudson_Widget_JobLastBuilds.class.php';
-			$params['instance'] = new hudson_Widget_JobLastBuilds(WidgetLayoutManager::OWNER_TYPE_USER, $user->getId());
+			$params['instance'] = new hudson_Widget_JobLastBuilds(WidgetLayoutManager::OWNER_TYPE_USER, user_getid());
 		}
 		if ($params['widget'] == 'plugin_hudson_my_jobtestresults') {
 			require_once 'hudson_Widget_JobTestResults.class.php';
-			$params['instance'] = new hudson_Widget_JobTestResults(WidgetLayoutManager::OWNER_TYPE_USER, $user->getId());
+			$params['instance'] = new hudson_Widget_JobTestResults(WidgetLayoutManager::OWNER_TYPE_USER, user_getid());
 		}
 		if ($params['widget'] == 'plugin_hudson_my_jobtesttrend') {
 			require_once 'hudson_Widget_JobTestTrend.class.php';
-			$params['instance'] = new hudson_Widget_JobTestTrend(WidgetLayoutManager::OWNER_TYPE_USER, $user->getId());
+			$params['instance'] = new hudson_Widget_JobTestTrend(WidgetLayoutManager::OWNER_TYPE_USER, user_getid());
 		}
 		if ($params['widget'] == 'plugin_hudson_my_jobbuildhistory') {
 			require_once 'hudson_Widget_JobBuildHistory.class.php';
-			$params['instance'] = new hudson_Widget_JobBuildHistory(WidgetLayoutManager::OWNER_TYPE_USER, $user->getId());
+			$params['instance'] = new hudson_Widget_JobBuildHistory(WidgetLayoutManager::OWNER_TYPE_USER, user_getid());
 		}
 		if ($params['widget'] == 'plugin_hudson_my_joblastartifacts') {
 			require_once 'hudson_Widget_JobLastArtifacts.class.php';
-			$params['instance'] = new hudson_Widget_JobLastArtifacts(WidgetLayoutManager::OWNER_TYPE_USER, $user->getId());
+			$params['instance'] = new hudson_Widget_JobLastArtifacts(WidgetLayoutManager::OWNER_TYPE_USER, user_getid());
 		}
 
 		// PROJECT

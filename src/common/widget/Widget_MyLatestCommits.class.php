@@ -35,10 +35,10 @@ class Widget_MyLatestCommits extends Widget {
 
 	function __construct() {
 		parent::__construct('mylatestcommits');
-		$this->_nb_commits = UserManager::instance()->getCurrentUser()->getPreference('my_latests_commits_nb_display');
+		$this->_nb_commits = session_get_user()->getPreference('my_latests_commits_nb_display');
 		if($this->_nb_commits === false) {
 			$this->_nb_commits = self::NB_COMMITS_TO_DISPLAY;
-			UserManager::instance()->getCurrentUser()->setPreference('my_latests_commits_nb_display', $this->_nb_commits);
+			session_get_user()->setPreference('my_latests_commits_nb_display', $this->_nb_commits);
 		}
 	}
 
@@ -60,7 +60,7 @@ class Widget_MyLatestCommits extends Widget {
 	public function getContent() {
 		global $HTML;
 		$html = '';
-		$user = UserManager::instance()->getCurrentUser();
+		$user = session_get_user();
 		$projects = $user->getGroups();
 		$global_nb_revisions = 0;
 		foreach ($projects as $project) {
@@ -75,7 +75,7 @@ class Widget_MyLatestCommits extends Widget {
 				$scmPlugin = plugin_get_object('scmgit');
 				$revisions = array_merge($revisions, $scmPlugin->getCommits($project, $user, $this->_nb_commits));
 			}
-			if (count($revisions) > 0) {
+			if (!empty($revisions)) {
 				usort($revisions, array($this, 'commit_dateorder'));
 				$revisions = array_slice($revisions, 0, $this->_nb_commits, true);
 				$global_nb_revisions += count($revisions);
@@ -113,7 +113,7 @@ class Widget_MyLatestCommits extends Widget {
 
 	function getPreferences() {
 		$prefs  = _('Maximum number of commits to display per project.');
-		$prefs .= html_e('input', array('name' => 'nb_commits', 'type' => 'number', 'size' => 2, 'maxlength' => 3, 'value' => UserManager::instance()->getCurrentUser()->getPreference('my_latests_commits_nb_display')));
+		$prefs .= html_e('input', array('name' => 'nb_commits', 'type' => 'number', 'size' => 2, 'maxlength' => 3, 'value' => session_get_user()->getPreference('my_latests_commits_nb_display')));
 		return $prefs;
 	}
 
@@ -121,7 +121,7 @@ class Widget_MyLatestCommits extends Widget {
 		$cancel = getStringFromRequest('cancel');
 		if (strlen($cancel) > 0) {
 			$this->_nb_commits = getIntFromRequest('nb_commits', self::NB_COMMITS_TO_DISPLAY);
-			UserManager::instance()->getCurrentUser()->setPreference('my_latests_commits_nb_display', $this->_nb_commits);
+			session_get_user()->setPreference('my_latests_commits_nb_display', $this->_nb_commits);
 		}
 		return true;
 	}
@@ -154,7 +154,7 @@ class Widget_MyLatestCommits extends Widget {
 		if (!forge_get_config('use_scm')) {
 			return false;
 		}
-		foreach (UserManager::instance()->getCurrentUser()->getGroups(false) as $p) {
+		foreach (session_get_user()->getGroups(false) as $p) {
 			if ($p->usesPlugin('scmsvn') || $p->usesPlugin('scmgit')) {
 				return true;
 			}
