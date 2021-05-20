@@ -4,7 +4,7 @@
  *
  * Copyright 2004-2009, Roland Mas
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012,2014,2017-2018, Franck Villaume - TrivialDev
+ * Copyright 2012,2014,2017-2018,2021, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -339,7 +339,7 @@ abstract class SCMPlugin extends Plugin {
 			return false;
 		} elseif ($project->isError()) {
 			return false;
-		} elseif ($project->isActive()) {
+		} elseif (!$project->isActive()) {
 			return false;
 		} elseif (!$project->usesSCM()) {
 			return false;
