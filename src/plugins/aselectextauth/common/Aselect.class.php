@@ -22,36 +22,36 @@
 class ASelect {
 	var $username;
 	var $organization;
-	var $attributes=array();
+	var $attributes = array();
 	var $ticket;
 
 	function __construct() {
 
-		if(isset($_COOKIE['aselectuid'])){
+		if (isset($_COOKIE['aselectuid'])) {
 			$this->username = $_COOKIE['aselectuid'];
 		} else {
    			$this->username = '';
 		}
 
-		if(isset($_COOKIE['aselectorganization'])){
+		if (isset($_COOKIE['aselectorganization'])) {
 			$this->organization = $_COOKIE['aselectorganization'];
 		} else {
 			$this->organization = '';
 		}
 
-		if(isset($_COOKIE['aselectattributes'])){
+		if (isset($_COOKIE['aselectattributes'])) {
 			$a = explode('&', $_COOKIE['aselectattributes']);
 			$i = 0;
 			while ($i < count($a)) {
 				$b = explode('=', $a[$i]);
-				$this->$attributes[htmlspecialchars(urldecode($b[0]))] = htmlspecialchars(urldecode($b[1]));
+				$this->attributes[htmlspecialchars(urldecode($b[0]))] = htmlspecialchars(urldecode($b[1]));
 				$i++;
 			}
 		} else {
 			//nothing to be done here yet.
 		}
 
-		if(isset($_COOKIE['aselectticket'])){
+		if (isset($_COOKIE['aselectticket'])) {
 			$this->ticket = $_COOKIE['aselectticket'];
 		} else {
 			$this->ticket = '';

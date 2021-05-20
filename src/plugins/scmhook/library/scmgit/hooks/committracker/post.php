@@ -88,13 +88,14 @@ function getInvolvedTasks($Log) {
 function getLog($Input) {
 	$Lines = explode("\n", $Input);
 	$ii = count($Lines);
-	$Logging=false;
+	$Logging = false;
+	$Log = '';
 	for ( $i=0; $i < $ii ; $i++ ) {
 		if ($Logging==true) {
-			$Log.=$Lines[$i]."\n";
+			$Log .= $Lines[$i]."\n";
 		}
-		if ($Lines[$i]=='Log Message:') {
-			$Logging=true;
+		if ($Lines[$i] == 'Log Message:') {
+			$Logging = true;
 		}
 	}
 	return trim($Log);

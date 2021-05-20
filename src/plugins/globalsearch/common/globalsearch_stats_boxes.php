@@ -43,13 +43,12 @@ function show_globalsearch_stats_boxes() {
 function globalsearch_box() {
 	global $gwords, $gexact, $otherfreeknowledge, $HTML;
 
-	$return = _('Search in other associated forges')._(':').html_e('br').
-	$HTML->openForm(array('method' => 'post', 'action' => '/plugins/globalsearch/')).
-	'<input width="100%" type="text" name="gwords" value="'.$gwords.'"/>
-	<input type="submit" name="Search" value="'._("Search").'" /><br/>
-	<input type="checkbox" name="otherfreeknowledge" value="1"'.( $otherfreeknowledge ? ' checked' : ' unchecked' ).'>'._('Extend search to include non-software projects').'<br/>
-	<input type="checkbox" name="gexact" value="1"'.( $gexact ? ' checked' : ' unchecked' ).'>'._("Require all words").$HTML->closeForm();
-	return $return;
+	return _('Search in other associated forges')._(':').html_e('br').
+		$HTML->openForm(array('method' => 'post', 'action' => '/plugins/globalsearch/')).
+		'<input width="100%" type="text" name="gwords" value="'.$gwords.'"/>
+		<input type="submit" name="Search" value="'._("Search").'" /><br/>
+		<input type="checkbox" name="otherfreeknowledge" value="1"'.( $otherfreeknowledge ? ' checked' : ' unchecked' ).'>'._('Extend search to include non-software projects').'<br/>
+		<input type="checkbox" name="gexact" value="1"'.( $gexact ? ' checked' : ' unchecked' ).'>'._("Require all words").$HTML->closeForm();
 }
 
 /**
@@ -73,12 +72,12 @@ function show_top_n_assocsites($num_assocsites) {
 		return _('No stats available.')." ".db_error();
         }
 
-	$return .= "<div align=\"left\"><table>";
+	$return = '<div align="left"><table>';
 	while ($row_topdown = db_fetch_array($res_top_n_assoc)) {
 		if ($row_topdown['numprojects'] > 0) {
 			$return .= "<tr><td><a href=\"$row_topdown[link]/\">";
 			$return .= $row_topdown[title]."</a></td>";
-			$return .= "<td><div align=\"right\">". number_format($row_topdown[numprojects], 0);
+			$return .= '<td><div align="right">'.number_format($row_topdown[numprojects], 0);
 			$return .= " "._('projects')."</div></td></tr>\n";
 		}
 	}

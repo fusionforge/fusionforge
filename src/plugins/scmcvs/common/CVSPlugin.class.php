@@ -251,7 +251,7 @@ over it to the project's administrator.");
 				return false;
 			}
 			system ("mkdir -p $locks_dir") ;
-			system ("chgrp $unix_group $locks_dir") ;
+			system ("chgrp $rw_unix_group $locks_dir") ;
 			system ("chmod 3777 $locks_dir") ;
 
 			$cvs_binary_version = get_cvs_binary_version();

@@ -11,7 +11,7 @@ require_once $gfwww.'include/pre.php';
 $pluginname = 'oauthconsumer';
 // the header that displays for the user portion of the plugin
 function oauthconsumer_User_Header($params) {
-	global $DOCUMENT_ROOT,$HTML, $user_id, $pluginname;
+	global $HTML, $user_id, $pluginname;
 	$params['toptab']=$pluginname;
 	$params['user']=$user_id;
 	site_user_header($params);
@@ -46,7 +46,7 @@ function oauthconsumer_CheckUser() {
 	}
 
 	//displays the page header
-	oauthconsumer_User_Header(array('title'=>'Personal page for OAuth','pagename'=>"$pluginname",'sectionvals'=>array($realuser->getUnixName())));
+	oauthconsumer_User_Header(array('title' => _('Personal page for OAuth'), 'pagename' => $pluginname, 'sectionvals' => array($realuser->getUnixName())));
 
 }
 
@@ -54,12 +54,12 @@ function oauthconsumer_CheckUser() {
  * checks whether the user is a forge admin
  */
 function oauthconsumer_CheckForgeAdmin() {
-
+	global $pluginname;
 	if(! forge_check_global_perm ('forge_admin')) {
 		return false;
 	}
 
-	oauthconsumer_User_Header(array('title'=>'Admin page for OAuthConsumer','pagename'=>"$pluginname"));
+	oauthconsumer_User_Header(array('title' => _('Admin page for OAuthConsumer'),'pagename' => $pluginname));
 	return true;
 }
 
@@ -67,11 +67,11 @@ function oauthconsumer_CheckForgeAdmin() {
  * checks whether the user is a forge admin and exits
  */
 function oauthconsumer_CheckForgeAdminExit() {
-
+	global $pluginname;
 	if(! forge_check_global_perm ('forge_admin')) {
 		exit_error("Access Denied, You are not a forge Admin", 'oauthconsumer');
 	}
 
-	oauthconsumer_User_Header(array('title'=>'Admin page for OAuthConsumer','pagename'=>"$pluginname"));
+	oauthconsumer_User_Header(array('title' => _('Admin page for OAuthConsumer'),'pagename' => $pluginname));
 
 }
