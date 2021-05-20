@@ -70,10 +70,6 @@ table.listing tbody tr:nth-child(odd),
 	text-decoration: none;
 }
 
-.important {
-	font-weight: bold;
-}
-
 .next {
 	font-family: arial,helvetica, sans-serif;
 	font-size: small;
@@ -334,9 +330,6 @@ p.information {
 	border: 1px solid;
 	margin: 15px 0;
 	padding: 10px 10px 10px 10px;
-}
-
-p.information {
 	border-color: blue;
 	background-color: #bde5f8;
 }
