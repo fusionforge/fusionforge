@@ -1277,7 +1277,7 @@ function site_user_header($params) {
 		$arr_attr[] = array('title' => _('Register a new project in forge, following the workflow.'));
 	}
 
-	echo ($HTML->printSubMenu($arr_t, $arr_l, $arr_attr));
+	echo $HTML->printSubMenu($arr_t, $arr_l, $arr_attr);
 	if (plugin_hook_listeners("usermenu") > 0) {
 		echo $HTML->subMenuSeparator();
 	}

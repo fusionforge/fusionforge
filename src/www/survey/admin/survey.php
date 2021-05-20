@@ -92,7 +92,7 @@ if ($s->isError()) {
 $title = $survey_id ? _('Edit a Survey') : _('Add a Survey');
 $sh->header(array('title'=>$title, 'modal'=>1));
 
-echo ($sh->showAddSurveyForm($s));
+echo $sh->showAddSurveyForm($s);
 
 /* Show list of Survey */
 $sf = new SurveyFactory($g);
@@ -100,7 +100,7 @@ $ss = & $sf->getSurveys();
 if (!$ss) {
 	echo $HTML->information(_('No Survey is found'));
 } else {
-	echo($sh->showSurveys($ss, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1));
+	echo $sh->showSurveys($ss, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1);
 }
 
 $sh->footer();

@@ -58,7 +58,7 @@ if (!$ss) {
 	echo $HTML->information(_('No Survey is found'));
 } else {
 	echo '<p>' . _('Select a survey to vote') . '</p>';
-	echo($sh->showSurveys($ss, 0, 0, 1, 1, 1, 0));
+	echo $sh->showSurveys($ss, 0, 0, 1, 1, 1, 0);
 }
 
 $sh->footer();

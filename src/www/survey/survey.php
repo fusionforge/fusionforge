@@ -57,7 +57,7 @@ if (!$survey_id) {
 	echo $HTML->error_msg(_('For some reason, the Project ID or Survey ID did not make it to this page'));
 } else {
 	plugin_hook("blocks", "survey_".$s->getTitle());
-	echo($sh->showSurveyForm($s));
+	echo $sh->showSurveyForm($s);
 }
 
 $sh->footer();

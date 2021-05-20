@@ -213,7 +213,7 @@ if ($group->usesPM()) {
 	<?php if (session_loggedin() && ($ah->getSubmittedBy() == user_getid())) {
 		echo $HTML->listTableTop(); ?>
 		<tr><td>
-			<strong><?php echo _('Attach Files')._(':'); ?></strong>  <?php echo('('._('max upload size')._(': ').human_readable_bytes(util_get_maxuploadfilesize()).')') ?><br />
+			<strong><?php echo _('Attach Files')._(':'); ?></strong>  <?php echo '('._('max upload size')._(': ').human_readable_bytes(util_get_maxuploadfilesize()).')'; ?><br />
 			<input type="file" name="input_file0" /><br />
 			<input type="file" name="input_file1" /><br />
 			<input type="file" name="input_file2" /><br />

@@ -321,7 +321,7 @@ if ($group->usesPM()) {
 <div id="tabber-attachments" class="tabbertab">
 <?php echo $HTML->listTableTop(); ?>
 	<tr><td colspan="2">
-        <strong><?php echo _('Attach Files')._(':'); ?></strong> <?php echo('('._('max upload size')._(': ').human_readable_bytes(util_get_maxuploadfilesize()).')') ?><br />
+        <strong><?php echo _('Attach Files')._(':'); ?></strong> <?php echo '('._('max upload size')._(': ').human_readable_bytes(util_get_maxuploadfilesize()).')'; ?><br />
         <input type="file" name="input_file0" size="30" /><br />
         <input type="file" name="input_file1" size="30" /><br />
         <input type="file" name="input_file2" size="30" /><br />

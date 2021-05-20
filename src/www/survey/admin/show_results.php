@@ -122,7 +122,7 @@ $ss = & $sf->getSurveys();
 if (!$ss) {
 	echo $HTML->information(_('No Survey Question is found'));
 } else {
-	echo($sh->showSurveys($ss, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1));
+	echo $sh->showSurveys($ss, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1);
 }
 
 $sh->footer();
@@ -147,11 +147,6 @@ function showResult(&$SurveyHTML, &$Survey, &$Question, $show_comment=0, $q_num=
 		echo $HTML->error_msg(_('Error'). $srf->getErrorMessage());
 	} else {
 		/* Show result in HTML*/
-		echo ($SurveyHTML->showResult($srf, $show_comment, $q_num, $graph));
+		echo $SurveyHTML->showResult($srf, $show_comment, $q_num, $graph);
 	}
 }
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:

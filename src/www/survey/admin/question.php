@@ -108,7 +108,7 @@ if (getStringFromRequest('delete')=="Y" && $question_id) {
 /* Show Add/Modify form
  * If $question is null it is add form, otherwise modify
  */
-echo($sh->showAddQuestionForm($sq));
+echo $sh->showAddQuestionForm($sq);
 
 /* Show existing questions (if any)
  */
@@ -117,12 +117,7 @@ $sqs = $sqf->getSurveyQuestions();
 if (!$sqs) {
 	echo $HTML->information(_('No questions found'));
 } else {
-	echo($sh->showQuestions($sqs));
+	echo $sh->showQuestions($sqs);
 }
 
 $sh->footer();
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:

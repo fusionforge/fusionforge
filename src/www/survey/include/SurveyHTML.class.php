@@ -585,7 +585,7 @@ class SurveyHTML extends FFError {
 		$ret.=$Question->getQuestion().'</strong><br />';
 		$results = $sr->getResults();
 		if ($sr->isError()){
-			echo ($sr->getErrorMessage());
+			echo $sr->getErrorMessage();
 		}
 
 		$totalCount = $sr->getNumberOfSurveyResponses();

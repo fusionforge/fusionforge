@@ -16,17 +16,17 @@ if (count($providers)>0) {
 	$i = 0;
 	foreach( $providers as $provider ) { ?>
 		<tr>
-		<td class="center"><?php echo ( $provider->get_name() ) ?></td>
-	    <td class="center"><?php echo ( $provider->get_description() ) ?></td>
-		<td class="center"><?php echo ( $provider->get_consumer_key() ) ?></td>
+		<td class="center"><?php echo $provider->get_name(); ?></td>
+	    <td class="center"><?php echo $provider->get_description(); ?></td>
+		<td class="center"><?php echo $provider->get_consumer_key(); ?></td>
 		<?php if($admin_access)	{ ?>
-			<td class="center"><?php echo ( $provider->get_consumer_secret() ) ?></td>
-		<?php }else 	{ ?>
+			<td class="center"><?php echo $provider->get_consumer_secret(); ?></td>
+		<?php } else { ?>
 			 <td class="center">*****************</td>
 		<?php } ?>
-		<td class="center"><?php echo ( $provider->get_request_token_url() ) ?></td>
-		<td class="center"><?php echo ( $provider->get_authorize_url() ) ?></td>
-		<td class="center"><?php echo ( $provider->get_access_token_url() ) ?></td>
+		<td class="center"><?php echo $provider->get_request_token_url(); ?></td>
+		<td class="center"><?php echo $provider->get_authorize_url(); ?></td>
+		<td class="center"><?php echo $provider->get_access_token_url(); ?></td>
 		<?php
 		if ($admin_access) { ?>
 			<td class="center">

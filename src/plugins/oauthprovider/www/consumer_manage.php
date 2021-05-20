@@ -51,32 +51,32 @@ $t_consumer = OauthAuthzConsumer::load( $f_consumer_id );
 
 <tr>
 <td class="category"><?php echo _('Name') ?></td>
-<td colspan="2"><?php echo ( $t_consumer->getName() ) ?></td>
+<td colspan="2"><?php echo $t_consumer->getName(); ?></td>
 </tr>
 
 <tr>
 <td class="category"><?php echo _('URL') ?></td>
-<td colspan="2"><?php echo ( $t_consumer->getUrl() ) ?></td>
+<td colspan="2"><?php echo $t_consumer->getUrl(); ?></td>
 </tr>
 
 <tr>
 <td class="category"><?php echo _('Description') ?></td>
-<td colspan="2"><?php echo ( $t_consumer->getDesc() ) ?></td>
+<td colspan="2"><?php echo $t_consumer->getDesc(); ?></td>
 </tr>
 
 <tr>
 <td class="category"><?php echo _('Email') ?></td>
-<td colspan="2"><?php echo ( $t_consumer->getEmail() ) ?></td>
+<td colspan="2"><?php echo $t_consumer->getEmail(); ?></td>
 </tr>
 
 <tr>
 <td class="category"><?php echo _('Key') ?></td>
-<td colspan="2"><?php echo ( $t_consumer->key ) ?></td>
+<td colspan="2"><?php echo $t_consumer->key; ?></td>
 </tr>
 
 <tr>
 <td class="category"><?php echo _('Secret') ?></td>
-<td colspan="2"><?php echo ( $t_consumer->secret ) ?></td>
+<td colspan="2"><?php echo $t_consumer->secret; ?></td>
 </tr>
 
 <tr>

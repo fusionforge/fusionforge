@@ -42,7 +42,7 @@ $i=0;
 <br/>
 <form action="consumer_update.php" method="post">
 <?php echo '<input type="hidden" name="plugin_oauthprovider_consumer_update_token" value="'.form_generate_key().'"/>' ?>
-<input type="hidden" name="consumer_id" value="<?php echo $t_consumer->getId() ?>"/>
+<input type="hidden" name="consumer_id" value="<?php echo $t_consumer->getId(); ?>"/>
 <table class="width60" align="center" cellspacing="1">
 
 <tr>
@@ -52,32 +52,32 @@ $i=0;
 
 <tr>
 <td class="category"><?php echo _('Name') ?></td>
-<td><input name="consumer_name" maxlength="128" size="40" value="<?php echo ( $t_consumer->getName() ) ?>"/></td>
+<td><input name="consumer_name" maxlength="128" size="40" value="<?php echo $t_consumer->getName(); ?>"/></td>
 </tr>
 
 <tr>
 <td class="category"><?php echo _('URL') ?></td>
-<td><input name="consumer_url" maxlength="250" size="40" value="<?php echo ( $t_consumer->getUrl() ) ?>"/></td>
+<td><input name="consumer_url" maxlength="250" size="40" value="<?php echo $t_consumer->getUrl(); ?>"/></td>
 </tr>
 
 <tr>
 <td class="category"><?php echo _('Description') ?></td>
-<td><input name="consumer_desc" maxlength="250" size="40" value="<?php echo ( $t_consumer->getDesc() ) ?>"/></td>
+<td><input name="consumer_desc" maxlength="250" size="40" value="<?php echo $t_consumer->getDesc(); ?>"/></td>
 </tr>
 
 <tr>
 <td class="category"><?php echo _('Email') ?></td>
-<td><input name="consumer_email" maxlength="250" size="40" value="<?php echo ( $t_consumer->getEmail() ) ?>"/></td>
+<td><input name="consumer_email" maxlength="250" size="40" value="<?php echo $t_consumer->getEmail(); ?>"/></td>
 </tr>
 
 <tr>
 <td class="category"><?php echo _('Key') ?></td>
-<td><input name="consumer_key" readonly="readonly" maxlength="250" size="40" value="<?php echo ( $t_consumer->key ) ?>"/></td>
+<td><input name="consumer_key" readonly="readonly" maxlength="250" size="40" value="<?php echo $t_consumer->key; ?>"/></td>
 </tr>
 
 <tr>
 <td class="category"><?php echo _('Secret') ?></td>
-<td><input name="consumer_secret" readonly="readonly" maxlength="250" size="40" value="<?php echo ( $t_consumer->secret ) ?>"/></td>
+<td><input name="consumer_secret" readonly="readonly" maxlength="250" size="40" value="<?php echo $t_consumer->secret; ?>"/></td>
 </tr>
 
 <tr>

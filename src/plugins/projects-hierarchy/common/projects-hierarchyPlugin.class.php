@@ -120,7 +120,7 @@ _('Organise projects hierarchically, relation type 1-n.');
 						$hierarMenuAttr[] = array('title' => _('Browse per hierarchy. Projects can share relationship between projects, as father and sons'));
 						$hierarMenuUrl[] = '/softwaremap/trove_list.php?cat=c';
 						$hierarMenuUrl[] = '/softwaremap/trove_list.php?cat=h';
-						echo ($HTML->subMenu($hierarMenuTitle, $hierarMenuUrl, $hierarMenuAttr));
+						echo $HTML->subMenu($hierarMenuTitle, $hierarMenuUrl, $hierarMenuAttr);
 					}
 				}
 				$returned = true;
