@@ -52,7 +52,7 @@ class CreateFRS extends FForge_SeleniumTestCase
 		$this->assertTextPresent("Added Package");
 		$this->clickAndWait("link=Administration");
 		$this->type('//td[2]/input', 'My Named Packaged');
-		$this->clickAndWait('//td[5]/input');
+		$this->clickAndWait('//td[6]/input');
 		$this->clickAndWait("link=View File Releases");
 		$this->assertTextPresent('My Named Package');
 	}
