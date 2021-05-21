@@ -386,12 +386,14 @@ header .skipLink:focus {
 }
 
 .innertabs .tabGenerator .tg-middle span:hover {
-    background-color: white;
+	background-color: white;
 }
+
 .innertabs .tabGenerator .tg-middle span.selected {
 	background-color: white;
 	text-shadow: 1px 1px white;
 }
+
 .innertabs .tabGenerator .tg-middle span span {
 	display: inline;
 	vertical-align: middle;
@@ -431,9 +433,11 @@ header .skipLink:focus {
 	transition-property: background;
 	transition-duration: 0.3s;
 }
+
 .innertabs .tabGenerator .tg-middle:first-child a {
     border-left: 1px solid white;
 }
+
 .innertabs .tabGenerator td a {
 	width: 100%;
 }
@@ -443,13 +447,13 @@ header .skipLink:focus {
 	color: black;
 	height: auto;
 }
+
 .innertabs .tabGenerator .tg-middle span.selected span {
 	background: none;
 	text-shadow: 1px 1px white;
 	color: black;
 	height: auto;
 	background-color: white;
-	text-shadow: 1px 1px white;
 }
 
 .innertabs .tabGenerator .tg-right span.selected span {
