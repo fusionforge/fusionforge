@@ -125,6 +125,7 @@ to monitor disk and database usage per user, project.");
 			case 'globaladmin': {
 				global $gfwww;
 				require_once $gfwww.'admin/admin_utils.php';
+				html_use_tablesorter();
 				site_admin_header(array('title'=>_('Quota and Usage Admin')));
 				break;
 			}

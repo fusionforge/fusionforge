@@ -8,7 +8,7 @@
  * Copyright 2010-2012, Alain Peyrat - Alcatel-Lucent
  * Copyright © 2011 Thorsten Glaser – tarent GmbH
  * Copyright 2011 - Marc-Etienne Vargenau, Alcatel-Lucent
- * Copyright 2012-2019, Franck Villaume - TrivialDev
+ * Copyright 2012-2019,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -446,8 +446,8 @@ abstract class Layout extends FFError {
 	 * @param	array	$linksArray		The array of title links
 	 * @param	string	$class			The css classes to add (optional)
 	 * @param	string	$id			The id of the table (needed by sortable for example)
-	 * @param	array	$thClassArray		specific class for th column
-	 * @param	array	$thTitleArray		specific title for th column
+	 * @param	array	$thClassArray		specific class for th cell
+	 * @param	array	$thTitleArray		specific title for th cell
 	 * @param	array	$thOtherAttrsArray	optional other html attributes for the th
 	 * @param	string	$theadClass		optional thead tr css class. default is tableheading
 	 * @return	string	the html code
@@ -464,13 +464,12 @@ abstract class Layout extends FFError {
 		}
 		$return = html_ao('table', $attrs);
 
-		if (count($titleArray)) {
+		if (!empty($titleArray)) {
 			$ap = html_ap();
 			$return .= html_ao('thead');
 			$return .= html_ao('tr', array('class' => $theadClass));
 
-			$count = count($titleArray);
-			for ($i = 0; $i < $count; $i++) {
+			for ($i = 0; $i < count($titleArray); $i++) {
 				$thAttrs = array();
 				if ($thOtherAttrsArray && isset($thOtherAttrsArray[$i])) {
 					$thAttrs = $thOtherAttrsArray[$i];
@@ -626,10 +625,8 @@ abstract class Layout extends FFError {
 	 *
 	 * @param	array	$row_attrs	the row attributes
 	 * @param	array	$cell_data	the array of cell data, each element is an array,
-	 *					the first item being the text,
-	 *					the subsequent items are attributes (dont include
-	 *					the bgcolor for the title here, that will be
-	 *					handled by $istitle
+	 *					the first item must be the text,
+	 *					the subsequent items are attributes (dont include the bgcolor for the title here, that will be handled by $istitle)
 	 * @param	bool	$istitle	is this row part of the title ?
 	 * @return	string	the html code
 	 */

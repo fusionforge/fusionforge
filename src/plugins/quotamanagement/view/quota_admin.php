@@ -70,77 +70,25 @@ if (db_numrows($res_db) > 0) {
 		$quotas["$e[group_id]"]["quota_db_soft"] = $e["quota_db_soft"];
 	}
 }
-?>
-<table width="900" cellpadding="2" cellspacing="0" border="0">
-	<tr style="font-weight:bold">
-		<td style="border-top:thick solid #808080" colspan="8"><?php echo _('Projects quota'); ?></td>
-	</tr>
-	<tr>
-		<td style="border-top:thin solid #808080"><?php echo _('id'); ?></td>
-		<td style="border-top:thin solid #808080"><?php echo _('name'); ?></td>
-		<td style="border-top:thin solid #808080"><br /></td>
-		<td style="border-top:thin solid #808080; text-align:right"><?php echo _('database quota soft'); ?></td>
-		<td style="border-top:thin solid #808080; text-align:right"><?php echo _('database quota hard'); ?></td>
-		<td style="border-top:thin solid #808080; text-align:right"><?php echo _('disk quota soft'); ?></td>
-		<td style="border-top:thin solid #808080; text-align:right"><?php echo _('disk quota hard'); ?></td>
-		<td style="border-top:thin solid #808080"><br /></td>
-	</tr>
-	<?php
-	$total_database = 0;
-	$total_disk = 0;
-	foreach ($quotas as $q)
-	{
-		$total_database += $q["database_size"];
-		$total_disk += $q["disk_size"];
-		echo $HTML->openForm(array('action' => '/plugins/'.$quotamanagement->name.'/?type=globaladmin&action=update', 'method' => 'post'));
-		?>
-		<input type="hidden" name="group_id" value="<?php echo $q["group_id"]; ?>" />
-		<tr>
-			<td style="border-top:thin solid #808080"><?php echo $q["group_id"]; ?></td>
-			<td style="border-top:thin solid #808080">
-			<?php echo util_make_link('/plugins/'.$quotamanagement->name.'/?group_id='.$q['group_id'].'&type=projectadmin', $q['unix_name']) ?>
-			</td>
-			<td style="border-top:thin solid #808080"><?php echo $q["name"]; ?></td>
-			<td style="border-top:thin solid #808080; text-align:right">
-				<input type="text" name="qds"
-					size="12"
-					value="<?php echo $q["quota_db_soft"]; ?>"
-					style="background:#ffffd0;text-align:right" />
-					<?php echo _('MB'); ?>
-			</td>
-			<td style="border-top:thin solid #808080; text-align:right">
-				<input type="text" name="qdh"
-					size="12"
-					value="<?php echo $q["quota_db_hard"]; ?>"
-					style="background:#ffffd0;text-align:right" />
-				<?php echo _('MB'); ?>
-			</td>
-			<td style="border-top:thin solid #808080; text-align:right">
-				<input type="text" name="qs"
-					size="12"
-					value="<?php echo $q["quota_soft"]; ?>"
-					style="background:#ffffd0;text-align:right" />
-					<?php echo _('MB'); ?>
-			</td>
-			<td style="border-top:thin solid #808080; text-align:right">
-				<input type="text" name="qh"
-					size="12"
-					value="<?php echo $q["quota_hard"]; ?>"
-					style="background:#ffffd0;text-align:right" />
-				<?php echo _('MB'); ?>
-			</td>
-			<td style="border-top:thin solid #808080; text-align:right">
-				<input type="submit" value="<?php echo _('Modify'); ?>" />
-			</td>
-		</tr>
-		<?php
-		echo $HTML->closeForm();
-	}
-?>
-	<tr style="font-weight:bold">
-		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080" colspan="8"><br /></td>
-	</tr>
-</table>
-<?php
 
+echo html_e('h2', array(), _('Projects Quota'));
+$titleArray = array(_('id'), _('unixname'), _('name'), _('database quota soft').' (MB)', _('database quota hard').' (MB)', _('disk quota soft').' (MB)', _('disk quota hard').' (MB)', '');
+$thClassArray = array('', '', '', 'align-right unsortable', 'align-right unsortable', 'align-right unsortable', 'align-right unsortable', 'unsortable');
+echo $HTML->listTableTop($titleArray, array(), 'sortable', 'sortable_quota', $thClassArray);
+foreach ($quotas as $q) {
+	$cells = array();
+	$cells[][] = $q['group_id'];
+	$cells[][] = util_make_link('/plugins/'.$quotamanagement->name.'/?group_id='.$q['group_id'].'&type=projectadmin', $q['unix_name']);
+	$cells[][] = $q['name'];
+	$cells[] = array($HTML->html_input('qds', '', '', 'numeric', $q['quota_db_soft'], array('class' => 'align-right', 'form' => 'q'.$group_id, 'min' => 0)));
+	$cells[] = array($HTML->html_input('qdh', '', '', 'numeric', $q['quota_db_hard'], array('class' => 'align-right', 'form' => 'q'.$group_id, 'min' => 0)));
+	$cells[] = array($HTML->html_input('qs', '', '', 'numeric', $q['quota_soft'], array('class' => 'align-right', 'form' => 'q'.$group_id, 'min' => 0)));
+	$cells[] = array($HTML->html_input('qh', '', '', 'numeric', $q['quota_hard'], array('class' => 'align-right', 'form' => 'q'.$group_id, 'min' => 0)));
+	$cells[] = array($HTML->openForm(array('action' => '/plugins/'.$quotamanagement->name.'/?type=globaladmin&action=update', 'method' => 'post', 'id' => 'q'.$group_id))
+			.$HTML->html_input('submit', '', '', 'submit', _('Modify'), array('form' => 'q'.$group_id))
+			.$HTML->html_input('group_id', '', '', 'hidden', $q['group_id'], array('form' => 'q'.$group_id))
+			.$HTML->closeForm());
+	echo $HTML->multiTableRow(array(), $cells);
+}
+echo $HTML->listTableBottom();
 site_admin_footer();
