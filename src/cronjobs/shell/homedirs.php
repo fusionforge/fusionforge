@@ -85,7 +85,7 @@ if (!($hpfx = forge_get_config('homedir_prefix'))) {
 	// this should be set in configuration
 	exit();
 }
-rtrim($hpfx, '/');
+$hpfx = rtrim($hpfx, '/');
 
 if (!is_dir($hpfx)) {
 	@mkdir($hpfx, 0755, true);
