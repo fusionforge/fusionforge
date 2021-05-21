@@ -192,7 +192,6 @@ for ($i=0; $i<$combolistrows; $i++)
 						$HTML->getDeletePic(_('Remove this snippet version'), _('Delete'))).'</td><td style="width:99%">'.
 				db_result($result,$i,'name').' '.db_result($result,$i,'version')."</td></tr>";
 
-			$last_group=db_result($result,$i,'group_id');
 		}
 		echo $HTML->listTableBottom();
 		echo $HTML->boxBottom();

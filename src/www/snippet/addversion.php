@@ -212,7 +212,7 @@ function show_add_snippet_box() {
 <?php echo _('If a new window opened, use it to add snippets to your package. If a new window did not open, use the following link to add to your package BEFORE you leave this page.'); ?>
 </p>
 <p>
-<?php echo util_make_url ('/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id,_('Add snippets to package'),array('target'=>'_blank')); ?></p>
+<?php echo util_make_link('/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id, _('Add snippets to package') , array('target'=>'_blank')); ?></p>
 <p><?php echo _('<strong>Browse the library</strong> to find the snippets you want to add, then add them using the new window link shown above.'); ?></p>
 <p>
 

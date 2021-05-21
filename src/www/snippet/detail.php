@@ -65,7 +65,7 @@ if ($type=='snippet') {
 		$title_arr[] = _('Download Version');
 		$title_arr[] = _('Date Posted');
 		$title_arr[] = _('Author');
-		$title_arr[] = _('Delete');
+		$title_arr[] = _('Actions');
 
 		echo $HTML->listTableTop($title_arr);
 
@@ -80,7 +80,7 @@ if ($type=='snippet') {
 				'</td><td>'.
 				util_make_link('/snippet/download.php?type=snippet&id='.db_result($result,$i,'snippet_version_id'), '<strong>'. db_result($result,$i,'version').'</strong>').'</td><td>'.
 				date(_('Y-m-d H:i'),db_result($result,$i,'post_date')).'</td><td>'.
-				util_make_link_u(db_result($result, $i, 'user_name'), db_result($result, $i, 'user_id'), db_result($result, $i, 'realname')).'</td>'.
+				util_display_user(db_result($result, $i, 'user_name'), db_result($result, $i, 'user_id'), db_result($result, $i, 'realname')).'</td>'.
 				'<td class="align-center">'.util_make_link('/snippet/delete.php?type=snippet&snippet_version_id='.db_result($result,$i,'snippet_version_id'), $HTML->getDeletePic(_('Delete this version'), _('Delete'))).'</td></tr>';
 
 				if ($i != ($rows - 1)) {
@@ -158,11 +158,11 @@ EOS;
 		echo '
 		<h3>' ._('Versions Of This Package')._(':').'</h3>
 		<p>';
-		$title_arr=array();
-		$title_arr[]= _('Package Version');
-		$title_arr[]= _('Date Posted');
-		$title_arr[]= _('Author');
-		$title_arr[]= _('Actions');
+		$title_arr = array();
+		$title_arr[] = _('Package Version');
+		$title_arr[] = _('Date Posted');
+		$title_arr[] = _('Author');
+		$title_arr[] = _('Actions');
 
 		echo $HTML->listTableTop($title_arr);
 
@@ -177,10 +177,9 @@ EOS;
 			<tr><td>'.
 			util_make_link('/snippet/detail.php?type=packagever&id='.db_result($result,$i,'snippet_package_version_id'), '<strong>'.db_result($result,$i,'version').'</strong>').'</td><td>'.
 				date(_('Y-m-d H:i'),db_result($result,$i,'post_date')).'</td><td>'.
-				util_make_link_u (db_result($result, $i, 'user_name'), db_result($result, $i, 'user_id'),db_result($result, $i, 'realname')).'</td>'.
+				util_display_user(db_result($result, $i, 'user_name'), db_result($result, $i, 'user_id'), db_result($result, $i, 'realname')).'</td>'.
 				'<td class="align-center">'.
-				util_make_link('/snippet/add_snippet_to_package.php?snippet_package_version_id='.db_result($result,$i,'snippet_package_version_id'), html_image("ic/pencil.png", 20, 25)).
-				'&nbsp; &nbsp; &nbsp; '.
+				util_make_link('/snippet/add_snippet_to_package.php?snippet_package_version_id='.db_result($result,$i,'snippet_package_version_id'), $HTML->getEditFilePic(_('Edit this snippet'), _('Edit'))).
 				util_make_link('/snippet/delete.php?type=package&snippet_package_version_id='.db_result($result,$i,'snippet_package_version_id'), $HTML->getDeletePic(_('Delete this snippet'), _('Delete'))).'</td></tr>';
 		}
 
