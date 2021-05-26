@@ -40,7 +40,7 @@ FusionForge, for instance where Kerberos is used.");
 		$this->_addHook("check_auth_session");
 		$this->_addHook("fetch_authenticated_user");
 		$this->_addHook("close_auth_session");
-		$this->_addHook('session_valid_login');
+		$this->_addHook('session_login_valid');
 
 		$this->saved_login = '';
 		$this->saved_user = NULL;
