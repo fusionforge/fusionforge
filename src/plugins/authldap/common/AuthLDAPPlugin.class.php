@@ -391,21 +391,8 @@ into the FusionForge database.");
 		} else {
 			$user_id = $this->checkSessionCookie();
 		}
-		if ($user_id) {
-			$this->saved_user = user_get_object($user_id);
-			if ($this->isSufficient()) {
-				$params['results'][$this->name] = FORGE_AUTH_AUTHORITATIVE_ACCEPT;
-			} else {
-				$params['results'][$this->name] = FORGE_AUTH_NOT_AUTHORITATIVE;
-			}
-		} else {
-			$this->saved_user = NULL;
-			if ($this->isRequired()) {
-				$params['results'][$this->name] = FORGE_AUTH_AUTHORITATIVE_REJECT;
-			} else {
-				$params['results'][$this->name] = FORGE_AUTH_NOT_AUTHORITATIVE;
-			}
-		}
+		$this->saved_user = $user_id ? user_get_object($user_id) : NULL;
+		$this->setAuthStateResult($params, $user_id);
 	}
 }
 

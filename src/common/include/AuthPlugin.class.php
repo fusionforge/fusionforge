@@ -102,7 +102,7 @@ abstract class ForgeAuthPlugin extends Plugin {
 	 * checkAuthSession - Is there a valid session?
 	 *
 	 * @param	array	$params
-	 * @return	FORGE_AUTH_AUTHORITATIVE_ACCEPT, FORGE_AUTH_AUTHORITATIVE_REJECT or FORGE_AUTH_NOT_AUTHORITATIVE
+	 * @return	see setAuthStateResult()
 	 * TODO : document 'auth_token' param
 	 */
 	function checkAuthSession(&$params) {
@@ -112,21 +112,8 @@ abstract class ForgeAuthPlugin extends Plugin {
 		} else {
 			$user_id = $this->checkSessionCookie();
 		}
-		if ($user_id) {
-			$this->saved_user = user_get_object($user_id);
-			if ($this->isSufficient()) {
-				$params['results'][$this->name] = FORGE_AUTH_AUTHORITATIVE_ACCEPT;
-			} else {
-				$params['results'][$this->name] = FORGE_AUTH_NOT_AUTHORITATIVE;
-			}
-		} else {
-			$this->saved_user = NULL;
-			if ($this->isRequired()) {
-				$params['results'][$this->name] = FORGE_AUTH_AUTHORITATIVE_REJECT;
-			} else {
-				$params['results'][$this->name] = FORGE_AUTH_NOT_AUTHORITATIVE;
-			}
-		}
+		$this->saved_user = $user_id ? user_get_object($user_id) : NULL;
+		$this->setAuthStateResult($params, $this->saved_user);
 	}
 
 	/**
@@ -287,6 +274,41 @@ abstract class ForgeAuthPlugin extends Plugin {
 		forge_set_config_item_bool ('sufficient', $this->name) ;
 
 		forge_define_config_item ('sync_data_on', $this->name, 'never');
+	}
+
+	/**
+	 * Set 'results' array in the given array to a value expected by the auth support
+	 *
+	 * Auth support requires as a result of some functions that in the given $params array,
+	 * the ['results'][<plugin_name>] key is set to one of the following values
+	 *
+	 *  - FORGE_AUTH_AUTHORITATIVE_ACCEPT
+	 *  - FORGE_AUTH_AUTHORITATIVE_REJECT
+	 *  - FORGE_AUTH_NOT_AUTHORITATIVE
+	 *
+	 *  depending on the given $state.
+	 *
+	 * @param array $params
+	 * @param bool $state
+	 * @return given state
+	 * @return $param['results'][<plugin_name>] set
+	 */
+	protected function setAuthStateResult(&$params, $state)
+	{
+		if ($state) {
+			if ($this->isSufficient()) {
+				$params['results'][$this->name] = FORGE_AUTH_AUTHORITATIVE_ACCEPT;
+			} else {
+				$params['results'][$this->name] = FORGE_AUTH_NOT_AUTHORITATIVE;
+			}
+		} else {
+			if ($this->isRequired()) {
+				$params['results'][$this->name] = FORGE_AUTH_AUTHORITATIVE_REJECT;
+			} else {
+				$params['results'][$this->name] = FORGE_AUTH_NOT_AUTHORITATIVE;
+			}
+		}
+		return $state;
 	}
 }
 
