@@ -88,7 +88,11 @@ install_selenium() {
 	mkdir -p /usr/local/share/php
 	pushd /usr/local/share/php
 	composer --no-plugins --no-scripts require phpunit/phpunit
-	composer --no-plugins --no-scripts require phpunit/phpunit-selenium:dev-master
+	if grep -q ^9 /etc/debian_version; then
+		composer --no-plugins --no-scripts require phpunit/phpunit-selenium
+	else
+		composer --no-plugins --no-scripts require phpunit/phpunit-selenium:dev-master
+	fi
 	popd
 
 	# Install selenium (no packaged version available)
