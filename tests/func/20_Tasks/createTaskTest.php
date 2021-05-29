@@ -381,7 +381,7 @@ class CreateTask extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=Tasks");
 		$this->clickAndWait("link=To Do");
 		$this->clickAndWait("link=Gantt Chart");
-		$this->waitForPopUp("Gantt_Chart", );
+		$this->waitForPopUp("Gantt_Chart");
 		$this->selectWindow("name=Gantt_Chart");
 		$this->assertTextPresent("Assignee");
 

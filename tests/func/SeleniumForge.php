@@ -89,8 +89,7 @@ require_once $config;
 
 use PHPUnit\Extensions\Selenium2TestCase\ScreenshotListener;
 
-abstract class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestCase
-{
+abstract class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestCase {
 	public $logged_in = false ;
 	public $fixture = 'base';
 	public $fixture_loaded = false;
