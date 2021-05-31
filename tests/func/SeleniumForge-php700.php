@@ -92,7 +92,7 @@ abstract class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestC
 	public $fixture = 'base';
 	public $fixture_loaded = false;
 
-	protected function setUp():void {
+	protected function setUp() {
 		$this->configureSelenium();
 		$this->loadCachedFixture();
 	}
@@ -103,10 +103,6 @@ abstract class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestC
 		$this->setDesiredCapabilities($capabilities);
 		$this->setBrowserUrl(URL);
 		$this->setHost(SELENIUM_RC_HOST);
-	}
-
-	public function onNotSuccessfulTest(Throwable $e): void {
-		parent::onNotSuccessfulTest($e);
 	}
 
 	/**
