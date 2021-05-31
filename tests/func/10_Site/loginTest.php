@@ -64,7 +64,7 @@ class loginTest extends FForge_SeleniumTestCase
 		// If the forge redirects to other URL than the one
 		// used to access it, then logout doesn't work (bug or
 		// feature ?)
-		$location=$this->getLocation();
+		$location = $this->getLocation();
 		$url_regexp = str_replace('.', '\.', HOST);
 		$url_regexp = '/https?:\/\/'. $url_regexp .'\//';
 		$this->assertMatchesRegularExpression($url_regexp, $location,
