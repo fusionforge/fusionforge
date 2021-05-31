@@ -272,9 +272,9 @@ if [ -n "$1" ] ; then
 fi
 
 if [ -x /usr/local/share/php/vendor/bin/phpunit ] ; then
-    phpunit=/usr/local/share/php/vendor/bin/phpunit
+	phpunit=/usr/local/share/php/vendor/bin/phpunit
 else
-    phpunit=phpunit
+	phpunit=phpunit
 fi
 
 # For some reason PHPunit thinks all methods are tests
