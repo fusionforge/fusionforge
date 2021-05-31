@@ -51,7 +51,8 @@ class Widget_MySurveys extends Widget {
 		foreach ($projects as $p) {
 			if ($p->usesSurvey()) {
 				$sf = new SurveyFactory($p);
-				if (!empty($sf->getSurveysIds())) {
+				$sfids = $sf->getSurveysIds();
+				if (!empty($sfids)) {
 					$tmp[] = $p;
 				}
 			}
