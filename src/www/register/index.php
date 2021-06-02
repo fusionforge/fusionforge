@@ -337,7 +337,6 @@ if (count ($template_projects) > 1) {
 <?php
 echo $HTML->closeForm();
 ?>
-<script src="../js/jquery_3-5-1.min.js"></script>
 <script>
 $(document).ready(function(){
     $('#unix_name').keyup(function(){

@@ -294,7 +294,6 @@ echo html_e('p', array(), html_e('input', array('type' => 'submit', 'name' => 's
 echo $HTML->closeForm();
 echo html_e('p', array(), util_make_link('/account/pending-resend.php', _('Resend confirmation email to a pending account')));
 ?>
-<script src="../js/jquery_3-5-1.min.js"></script>
 <script>
 $(document).ready(function(){
 	$('#unix_name').keyup(function(){
