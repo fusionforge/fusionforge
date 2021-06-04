@@ -7,7 +7,7 @@
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright 2011-2017, Franck Villaume - TrivialDev
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2020 Andy Barnes 
+ * Copyright 2020 Andy Barnes
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -370,7 +370,7 @@ class Theme_Glowiron extends Layout {
 	 * headerJS() to adapt your theme.
 	 *
          * This is a copy of the parent class function with the addition
-         * of the meta tags to set the viewport correctly 
+         * of the meta tags to set the viewport correctly
          *
 	 * @param	array	$params		Header parameters array
 	 */

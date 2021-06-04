@@ -1,5 +1,5 @@
 /*
- * Stylesheet for Glowiron Responsive Theme 
+ * Stylesheet for Glowiron Responsive Theme
  * Base on the Funky Theme.
  *
  * Copyright 2010, Antoine Mercadal - Capgemini
@@ -784,7 +784,7 @@ input::-webkit-inner-spin-button { -webkit-appearance: none; }
 
  .widget_toolbar {
    display:none;
- } 
+ }
 
  main h1 {
     display:none;
@@ -801,7 +801,7 @@ input::-webkit-inner-spin-button { -webkit-appearance: none; }
 
   div.widget_content table{
      display:table;
-  } 
+  }
 
   option {
     width:100%;
@@ -833,7 +833,7 @@ input::-webkit-inner-spin-button { -webkit-appearance: none; }
   input[type="text"] {
       width:100%
    }
- 
+
   textarea  {
       width:100%
    }
@@ -841,7 +841,7 @@ input::-webkit-inner-spin-button { -webkit-appearance: none; }
   .important {
       padding:1px;
    }
- 
+
   #1activity {
     display:flex;
     flex-direction:column;
@@ -849,13 +849,11 @@ input::-webkit-inner-spin-button { -webkit-appearance: none; }
 
  #activity_left {
    width:100%;
-    
+
  }
 
  #activity_right {
    width:100%;
  }
 
- 
 }
-
