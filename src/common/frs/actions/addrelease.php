@@ -54,6 +54,7 @@ $userfile = getUploadedFile('userfile');
 $userfile_name = $userfile['name'];
 $type_id = getIntFromRequest('type_id');
 $release_name = getStringFromRequest('release_name');
+$status_id = getIntFromRequest('status_id');
 $uploaded_notes = getUploadedFile('uploaded_notes');
 $uploaded_changes = getUploadedFile('uploaded_changes');
 $release_notes = getStringFromRequest('release_notes');
@@ -103,7 +104,7 @@ if (strlen($release_name) >= 3) {
 
 	if ($exec_changes) {
 		$frsr = new FRSRelease($frsp);
-		if ($frsr->create($release_name, $notes, $changes, $preformatted, $release_date)) {
+		if ($frsr->create($release_name, $notes, $changes, $preformatted, $release_date, $status_id)) {
 			$feedback = _('Release successfully created');
 			if (strlen($userfile_name) || strlen($ftp_filename) || strlen($manual_filename) || $docman_fileid) {
 				$ret = frs_add_file_from_form($frsr, $type_id, $processor_id, $release_date, $userfile, $ftp_filename, $manual_filename, $docman_fileid);

@@ -88,6 +88,7 @@ class FRSRelease extends FFObject {
 	var $FRSPackage;
 	var $release_files;
 	var $files_count = null;
+	var $send_notice = true;
 
 	/**
 	 * @param	object  	$FRSPackage	The FRSPackage object to which this release is associated.
@@ -200,6 +201,9 @@ class FRSRelease extends FFObject {
 				@mkdir($newdirlocation);
 			}
 			db_commit();
+			if ($status_id == 1) {
+				$this->sendNotice();
+			}
 			return true;
 		}
 	}
@@ -302,6 +306,22 @@ class FRSRelease extends FFObject {
 	function getReleaseDate() {
 		return $this->data_array['release_date'];
 	}
+	
+	/**
+	 * setSendNotice - sets if the notice email should be send
+	 * @param $value true/false
+	 */
+	function setSendNotice($value) {
+		$this->send_notice = $value;
+	}
+	
+	/**
+	 * getSendNotice - get if the notice email should be send
+	 * @return true/false
+	 */
+	function getSendNotice() {
+		return $this->send_notice;
+	}
 
 	/**
 	 * sendNotice - the logic to send an email notice for a release.
@@ -310,6 +330,7 @@ class FRSRelease extends FFObject {
 	 */
 	function sendNotice() {
 		$arr =& $this->FRSPackage->getMonitorIDs();
+		$project_adresses = $this->FRSPackage->Group->getFRSEmailAddress();
 
 		$subject = sprintf(_('[%1$s Release] %2$s'),
 					$this->FRSPackage->Group->getUnixName(),
@@ -337,8 +358,8 @@ class FRSRelease extends FFObject {
 										forge_get_config('forge_name'))
 							. "\n\n"
 							. util_make_url('/frs/monitor.php?filemodule_id='.$this->FRSPackage->getID()."&group_id=".$this->FRSPackage->Group->getID()."&stop=1");
-		if (count($arr)) {
-			util_handle_message(array_unique($arr), $subject, $text);
+		if (count($arr) || strlen($project_adresses) > 0) {
+			util_handle_message(array_unique($arr), $subject, $text, $project_adresses);
 		}
 	}
 
@@ -509,6 +530,9 @@ class FRSRelease extends FFObject {
 		db_commit();
 		if ($this->hasFiles()) {
 			$this->FRSPackage->createReleaseFilesAsZip($this->getID());
+		}
+		if ($this->getSendNotice()) {
+			$this->sendNotice();
 		}
 		return true;
 	}

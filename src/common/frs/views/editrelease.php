@@ -87,7 +87,7 @@ if (forge_check_perm('frs', $package_id, 'admin')) {
 	echo $HTML->multiTableRow(array(), $cells);
 	$cells = array();
 	$cells[][] = '<strong>'._('Status')._(':').'</strong>';
-	$cells[][] = frs_show_status_popup('status_id',$frsr->getStatus());
+	$cells[][] = frs_show_status_popup('status_id',$frsr->getStatus()).($frsr->getStatus() == 3?'&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="send_notice" value="1" checked="checked">&nbsp;'. _('Send release notice email if set to active'):'');
 	echo $HTML->multiTableRow(array(), $cells);
 	$cells = array();
 	$cells[] = array(_('Edit the Release Notes or Change Log for this release of this package. These changes will apply to all files attached to this release.').'<br/>'.

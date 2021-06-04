@@ -42,6 +42,7 @@ $release_id = getIntFromRequest('release_id');
 $release_date = getStringFromRequest('release_date');
 $release_name = getStringFromRequest('release_name');
 $status_id = getIntFromRequest('status_id');
+$send_notice = getIntFromRequest('send_notice');
 $uploaded_notes = getUploadedFile('uploaded_notes');
 $uploaded_changes = getUploadedFile('uploaded_changes');
 $release_notes = getStringFromRequest('release_notes');
@@ -103,6 +104,7 @@ if ($uploaded_changes['tmp_name']) {
 
 // If we haven't encountered any problems so far then save the changes
 if ($exec_changes) {
+	$frsr->setSendNotice($send_notice == 1 && $frsr->getStatus() == 3 && $status_id == 1);
 	$release_date = strtotime($release_date);
 	if (!$frsr->update($status_id, $release_name, $notes, $changes, $preformatted, $release_date)) {
 		$error_msg = $frsr->getErrorMessage();
