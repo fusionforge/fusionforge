@@ -1918,16 +1918,16 @@ class Artifact extends FFObject {
 		}
 
 		$body .= "\n".$this->marker('status',$changes).
-			 _("Status: "). $this->getStatusName() ."\n".
+			 _("Status")._(": "). $this->getStatusName() ."\n".
 			$this->marker('priority',$changes).
-			_("Priority: "). $this->getPriority() ."\n".
-			_("Submitted By: "). $this->getSubmittedRealName() .
+			_("Priority")._(": "). $this->getPriority() ."\n".
+			_("Submitted by")._(": "). $this->getSubmittedRealName() .
 			" (". $this->getSubmittedUnixName(). ")"."\n".
 			$this->marker('assigned_to',$changes).
-			_("Assigned to: "). $this->getAssignedRealName() .
+			_("Assigned to")._(": "). $this->getAssignedRealName() .
 			 " (". $this->getAssignedUnixName(). ")"."\n".
 			$this->marker('summary',$changes).
-			_("Summary: "). util_unconvert_htmlspecialchars($this->getSummary())." \n";
+			_("Summary")._(": "). util_unconvert_htmlspecialchars($this->getSummary())." \n";
 
 		// Now display the extra fields
 		$efd = $this->getExtraFieldDataText();
