@@ -88,7 +88,7 @@ install_selenium() {
 	mkdir -p /usr/local/share/php
 	pushd /usr/local/share/php
 	composer --no-plugins --no-scripts require phpunit/phpunit
-	if grep -q ^9 /etc/debian_version; then
+	if grep -q ^9 /etc/debian_version >/dev/null 2>&1 || grep "7\." /etc/centos-release >/dev/null 2>&1; then
 		composer --no-plugins --no-scripts require phpunit/phpunit-selenium
 	else
 		composer --no-plugins --no-scripts require phpunit/phpunit-selenium:dev-master
