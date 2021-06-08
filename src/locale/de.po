@@ -19603,8 +19603,9 @@ msgid ""
 "The system will modify your start/end dates if you attempt to create a start "
 "date earlier than the end date of any tasks you depend on."
 msgstr ""
-"Das System wird Ihre Anfangs- und Enddaten ändern, falls Sie versuchen ein "
-"Startdatum früher als das Enddatum eines Auftrags anzulegen."
+"Das System ändert Ihre Start-/Enddaten, wenn Sie versuchen, ein Startdatum zu"
+" erstellen, das vor dem Enddatum von Aufträgen liegt, von denen Sie abhängig"
+" sind."
 
 #: www/pm/add_task.php:103 www/pm/mod_task.php:154
 msgid "View Calendar"
