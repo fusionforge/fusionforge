@@ -116,34 +116,43 @@ echo $HTML->openForm(array('action' => '/pm/task.php?group_id='.$group_id.'&grou
 	<tr>
 		<td colspan="3">
 		<p>
-		<strong><?php echo _('Original Comment') . _(': '); ?></strong><br />
+		<label for="details"><strong><?php echo _('Original Comment') . _(': '); ?></strong></label>
+		<?php echo notepad_button('document.forms.modtaskform.details'); ?>
+		</p>
 		<?php
 			$sanitizer = new TextSanitizer();
 			$body = $sanitizer->SanitizeHtml($pt->getDetails());
 
-			if (strpos($body,'<') === false) {
-				echo nl2br($pt->getDetails());
-			} else {
-				echo $body;
+			$GLOBALS['editor_was_set_up'] = false;
+			$params = array();
+			$params['id'] = 'details';
+			$params['name'] = 'details';
+			$params['width'] = "800";
+			$params['height'] = "300";
+			$params['body'] = $body;
+			$params['group'] = $group_id;
+			plugin_hook("text_editor", $params);
+			if (!$GLOBALS['editor_was_set_up']) {
+				echo html_e('textarea', array('name' => 'details', 'rows' => '5', 'cols' => '80'), $body, false);
 			}
+			unset($GLOBALS['editor_was_set_up']);
 		?>
-		</p>
 		<p>
-		<label for="details"><strong><?php echo _('Add A Comment') . _(': '); ?></strong></label>
-		<?php echo notepad_button('document.forms.modtaskform.details') ?>
+		<label for="followup"><strong><?php echo _('Add A Comment') . _(': '); ?></strong></label>
+		<?php echo notepad_button('document.forms.modtaskform.followup') ?>
 		</p>
 <?php
 $GLOBALS['editor_was_set_up']=false;
 $params = array() ;
-$params['id'] = 'details';
-$params['name'] = 'details';
+$params['id'] = 'followup';
+$params['name'] = 'followup';
 $params['width'] = "800";
 $params['height'] = "300";
 $params['body'] = "";
 $params['group'] = $group_id;
 plugin_hook("text_editor",$params);
 if (!$GLOBALS['editor_was_set_up']) {
-	echo '<textarea name="details" rows="5" cols="80"></textarea>';
+	echo html_e('textarea', array('name' => 'followup', 'rows' => '5', 'cols' => '80'), '', false);
 }
 unset($GLOBALS['editor_was_set_up']);
 ?>

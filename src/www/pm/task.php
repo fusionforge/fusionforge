@@ -152,6 +152,7 @@ switch (getStringFromRequest('func')) {
 		session_require_perm ('pm', $pg->getID(), 'manager') ;
 
 		$rem_artifact_id = getIntFromRequest('rem_artifact_id');
+		$followup = getStringFromRequest('followup');
 
 		if(!$rem_artifact_id){
 			$rem_artifact_id=array();
@@ -182,6 +183,9 @@ switch (getStringFromRequest('func')) {
 			$status_id,$category_id,$percent_complete,$assigned_to,$pt->convertDependentOn($dependent_on),$new_group_project_id,$duration,$parent_id)) {
 			exit_error('update: '.$pt->getErrorMessage(),'pm');
 		} else {
+			if ($followup && !$pt->addMessage($followup)) {
+				exit_error('update: '.$pt->getErrorMessage(), 'pm');
+			}
 			if (count($rem_artifact_id) > 0) {
 				if (!$pt->removeRelatedArtifacts($rem_artifact_id)) {
 					exit_error('removeRelatedArtifacts: '.$pt->getErrorMessage(),'pm');

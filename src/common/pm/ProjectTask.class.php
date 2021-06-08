@@ -1006,15 +1006,12 @@ class ProjectTask extends FFError {
 			$arrChangedAndInNotice['subproject'] = ">";
 		}
 
-		if ($details) {
+		if ($details != $this->getDetails()) {
+			$this->addHistory ('details',$this->getDetails());
 			$has_changes = true;
-			if($details != "" && $details != null) {$arrChangedAndInNotice['details'] = ">";}
-			//Message vorhanden;
-			if (!$this->addMessage($details)) {
-				db_rollback();
-				return false;
-			}
+			$arrChangedAndInNotice['details'] = ">";
 		}
+
 		if ($this->getStatusID() != $status_id) {
 			$this->addHistory ('status_id',$this->getStatusID());
 			$has_changes = true;
@@ -1104,9 +1101,10 @@ class ProjectTask extends FFError {
 				category_id=$8,
 				group_project_id=$9,
 				duration=$10,
-				parent_id=$11
-				WHERE group_project_id=$12
-				AND project_task_id=$13',
+				parent_id=$11,
+				details=$12
+				WHERE group_project_id=$13
+				AND project_task_id=$14',
 						array (htmlspecialchars($summary),
 						       $priority,
 						       $hours,
@@ -1118,6 +1116,7 @@ class ProjectTask extends FFError {
 						       $new_group_project_id,
 						       $duration,
 						       $parent_id,
+						       htmlspecialchars($details),
 						       $group_project_id,
 						       $this->getID())) ;
 			if (!$res || db_affected_rows($res) < 1) {
