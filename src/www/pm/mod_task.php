@@ -37,9 +37,11 @@ if (getStringFromRequest('commentsort') == 'anti') {
 	$sort_comments_chronologically = true;
 }
 
+html_use_jquerydatetimepicker();
 pm_header(array('title' => _('Modify Task'), 'pagename' => 'pm_modtask', 'group_project_id' => $group_project_id));
 
 echo notepad_func();
+echo init_datetimepicker();
 
 echo $HTML->openForm(array('action' => '/pm/task.php?group_id='.$group_id.'&group_project_id='.$group_project_id, 'id' => 'modtaskform', 'method' => 'post'));
 ?>
@@ -151,26 +153,15 @@ unset($GLOBALS['editor_was_set_up']);
 	<tr>
 		<td colspan="3">
 		<strong><?php echo _('Start Date') . _(': '); ?></strong><br />
-		<?php
-		$pg->showMonthBox ('start_month',date('m', $pt->getStartDate()));
-		$pg->showDayBox ('start_day',date('d', $pt->getStartDate()));
-		$pg->showYearBox ('start_year',date('Y', $pt->getStartDate()));
-		$pg->showHourBox ('start_hour',date('G', $pt->getStartDate()));
-		$pg->showMinuteBox ('start_minute',date('i',$pt->getStartDate()));
-		?><br /><?php echo _('The system will modify your start/end dates if you attempt to create a start date earlier than the end date of any tasks you depend on.') ?>
-		<br /><?php util_make_link('/pm/calendar.php?group_id='.$group_id.'&group_project_id='.$group_project_id, _('View Calendar'), array('target' => '_blank')) ?>
+		<input class="datetimepicker" type="text" name="start_date" value="<?php echo date(_('Y-m-d H:i'), $pt->getStartDate()); ?>">
+		<br /><?php echo _('The system will modify your start/end dates if you attempt to create a start date earlier than the end date of any tasks you depend on.') ?>
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="3">
 		<strong><?php echo _('End Date') . _(': '); ?></strong><br />
-		<?php
-		$pg->showMonthBox ('end_month',date('m', $pt->getEndDate()));
-		$pg->showDayBox ('end_day',date('d', $pt->getEndDate()));
-		$pg->showYearBox ('end_year',date('Y', $pt->getEndDate()));
-		$pg->showHourBox ('end_hour',date('G', $pt->getEndDate()));
-		$pg->showMinuteBox ('end_minute',date('i', $pt->getEndDate()));
+		<input class="datetimepicker" name="end_date" type="text" value="<?php echo date(_('Y-m-d H:i'), $pt->getEndDate()); ?>"
 		?>
 		</td>
 	</tr>
