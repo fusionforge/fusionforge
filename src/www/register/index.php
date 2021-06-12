@@ -247,7 +247,7 @@ if ( !forge_get_config ('project_auto_approval') ) {
 <br />
 <input id="unix_name" required="required" type="text" maxlength="15" size="15" name="unix_name" value="<?php echo htmlspecialchars($unix_name); ?>" placeholder="<?php echo _('Unix Name'); ?>" pattern="[a-z0-9-]{3,15}"/>
 </p>
-
+<div id="uname_response"></div>
 <?php
 $SCMFactory = new SCMFactory();
 $scm_plugins=$SCMFactory->getSCMs();
@@ -336,6 +336,27 @@ if (count ($template_projects) > 1) {
 
 <?php
 echo $HTML->closeForm();
+?>
+<script>
+$(document).ready(function(){
+    $('#unix_name').keyup(function(){
+        var unix_name = $(this).val();
+        if(unix_name != ''){
+            $.ajax({
+                url: '../account/check_unix_name.php',
+                type: 'post',
+                data: {unix_name: unix_name},
+                success: function(response){
+                    $('#uname_response').html(response);
+                }
+            });
+        } else {
+            $('#uname_response').html('');
+        }
+    });
+});
+</script>
+<?php 
 site_footer();
 
 // Local Variables:

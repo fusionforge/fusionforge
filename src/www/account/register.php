@@ -157,6 +157,7 @@ if (forge_get_config('require_unique_email')) {
     <label for="unix_name">
         <input id="unix_name" type="text" required="required" name="unix_name" value="<?php print(htmlspecialchars($unix_name)); ?>"/>
     </label>
+    <div id="uname_response"></div>
 </p>
 <p>
 <?php echo _('Password').utils_requiredField()._(':'); ?><br />
@@ -292,6 +293,27 @@ echo $HTML->addRequiredFieldsInfoBox();
 echo html_e('p', array(), html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Register'))));
 echo $HTML->closeForm();
 echo html_e('p', array(), util_make_link('/account/pending-resend.php', _('Resend confirmation email to a pending account')));
+?>
+<script>
+$(document).ready(function(){
+	$('#unix_name').keyup(function(){
+		var unix_name = $(this).val();
+		if(unix_name != ''){
+			$.ajax({
+				url: 'check_unix_name.php',
+				type: 'post',
+				data: {unix_name: unix_name},
+				success: function(response){
+					$('#uname_response').html(response);
+				}
+			});
+		} else {
+			$('#uname_response').html('');
+		}
+	});
+});	
+</script>
+<?php 
 site_footer();
 
 // Local Variables:
