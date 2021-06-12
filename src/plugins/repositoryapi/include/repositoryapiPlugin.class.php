@@ -61,12 +61,13 @@ class repositoryapiPlugin extends Plugin {
 		$server->register(
 			'repositoryapi_repositoryList',
 			array('session_ser'=>'xsd:string',
-				  'limit'=>'xsd:int',
-				  'offset'=>'xsd:int',
+				'limit'=>'xsd:int',
+				'offset'=>'xsd:int',
 				),
 			array('return'=>'tns:ArrayOfRepositoryAPIRepositoryInfo'),
 			$uri,
-                       $uri.'#repositoryapi_repositoryList','rpc','encoded');
+			$uri.'#repositoryapi_repositoryList','rpc','encoded'
+			);
 
 		$server->register(
 			'repositoryapi_repositoryInfo',
@@ -74,7 +75,8 @@ class repositoryapiPlugin extends Plugin {
 				'repository_id'=>'xsd:string'),
 			array('return'=>'tns:RepositoryAPIRepositoryInfo'),
 			$uri,
-                       $uri.'#repositoryapi_repositoryInfo','rpc','encoded');
+			$uri.'#repositoryapi_repositoryInfo','rpc','encoded'
+			);
 
 		$server->wsdl->addComplexType(
 			'RepositoryAPIActivity',
@@ -98,7 +100,8 @@ class repositoryapiPlugin extends Plugin {
 			'SOAP-ENC:Array',
 			array(),
 			array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:RepositoryAPIActivity[]')),
-			'tns:RepositoryAPIActivity');
+			'tns:RepositoryAPIActivity'
+			);
 
 		$server->wsdl->addComplexType(
 			'RepositoryAPIActivityReturn',
@@ -112,6 +115,7 @@ class repositoryapiPlugin extends Plugin {
 				'activities' => array('name'=>'activities', 'type' => 'tns:ArrayOfRepositoryAPIActivity'),
 				)
 			);
+
 		$server->register(
 			'repositoryapi_repositoryActivity',
 			array('session_ser'=>'xsd:string',
@@ -122,11 +126,9 @@ class repositoryapiPlugin extends Plugin {
 				),
 			array('return'=>'tns:RepositoryAPIActivityReturn'),
 			$uri,
-                       $uri.'#repositoryapi_repositoryActivity','rpc','encoded');
-
+			$uri.'#repositoryapi_repositoryActivity','rpc','encoded'
+			);
 	}
-
-
 }
 
 function &repositoryapi_repositoryList($session_ser, $limit=0, $offset=0) {
