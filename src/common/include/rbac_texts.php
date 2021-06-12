@@ -50,6 +50,8 @@ function setup_rbac_strings () {
 								  'approve_projects1' => _('Approve projects'),
 								  'approve_news0' => _('No Access'),
 								  'approve_news1' => _('Approve news'),
+								  'approve_diary0' => _('No Access'),
+								  'approve_diary1' => _('Approve diaries'),
 								  'forge_stats0' => _('No Access'),
 								  'forge_stats1' => _('Read access'),
 								  'forge_stats2' => _('Admin forge stats'),
@@ -188,6 +190,7 @@ function setup_rbac_strings () {
 								    'forge_admin' => _('Forge administration'),
 								    'approve_projects' => _('Approve projects'),
 								    'approve_news' => _('Approve news'),
+								    'approve_diary' => _('Approve diaries'),
 								    'forge_stats' => _('Forge statistics'),
 
 								    'project_read' => _('Project visibility'),
