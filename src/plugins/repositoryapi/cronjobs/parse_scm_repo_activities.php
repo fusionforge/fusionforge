@@ -32,12 +32,12 @@ require_once $gfcommon.'include/PluginManager.class.php' ;
 // SCM-specific plugins subsystem
 require_once $gfcommon.'include/SCMPlugin.class.php' ;
 
-session_set_admin () ;
+session_set_admin();
 
-setup_plugin_manager () ;
+setup_plugin_manager();
 
 $hook_params = array();
-plugin_hook ('parse_scm_repo_activities', $hook_params) ;
+plugin_hook('parse_scm_repo_activities', $hook_params);
 
 // Local Variables:
 // mode: php

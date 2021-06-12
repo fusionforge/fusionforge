@@ -23,10 +23,8 @@ require_once 'common/plugin/PluginInfo.class.php';
 require_once 'RepositoryAPIPluginDescriptor.class.php';
 
 class RepositoryAPIPluginInfo extends PluginInfo {
-
-    function RepositoryAPIPluginInfo(&$plugin) {
-        $this->PluginInfo($plugin);
-        $this->setPluginDescriptor(new RepositoryAPIPluginDescriptor());
-    }
-
+	function RepositoryAPIPluginInfo(&$plugin) {
+		$this->PluginInfo($plugin);
+		$this->setPluginDescriptor(new RepositoryAPIPluginDescriptor());
+	}
 }

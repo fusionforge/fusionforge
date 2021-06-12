@@ -22,8 +22,7 @@
 require_once 'common/plugin/PluginDescriptor.class.php';
 
 class RepositoryAPIPluginDescriptor extends PluginDescriptor {
-
-    function RepositoryAPIPluginDescriptor() {
-        $this->PluginDescriptor(_('RepositoryAPI'), 'v1.0', _('Metadata retrieval API for repositories'));
-    }
+	function RepositoryAPIPluginDescriptor() {
+		$this->PluginDescriptor(_('RepositoryAPI'), 'v1.0', _('Metadata retrieval API for repositories'));
+	}
 }
