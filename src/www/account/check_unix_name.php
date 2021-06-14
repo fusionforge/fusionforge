@@ -2,7 +2,7 @@
 /**
  * Check if unix name exists
  *
- * Copyright (C) 2015  Inria (Sylvain Beucler)
+ * Copyright 2021, Guy Morin (DGFiP)
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -23,25 +23,16 @@
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 
+$sysdebug_enable = false;
+
 $response = null;
 $unix_name = trim(strtolower(getStringFromRequest('unix_name')));
-$result = db_query_params ('SELECT user_id as id  
-                        FROM users 
-			WHERE user_name LIKE $1
-			UNION 
-			SELECT group_id as id 
-			FROM groups 
-			WHERE unix_group_name LIKE $1',
-            		    array ($unix_name),
-            		    $max_rows+1,
-            		    $offset);
-$avail_rows=db_numrows($result);
-if ($avail_rows > 0) {
+
+if (account_groupnamevalid($unix_name)) {
 	$response = "<span style='color:red'>"
-		._('Invalid Unix Name.')
-		." "
-		._('That username already exists.')
+		._('Unix Name not available.')
 		."</span>";
 }
+
 echo $response;
 die;
