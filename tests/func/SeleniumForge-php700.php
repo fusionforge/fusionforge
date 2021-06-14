@@ -695,7 +695,7 @@ abstract class FForge_SeleniumTestCase extends PHPUnit_Extensions_Selenium2TestC
 		return false;
 	}
 
-	protected function assertMatchesRegularExpression($regexp, $text, $error_msg) {
+	protected function assertMatchesRegularExpression($regexp, $text, $error_msg = 'failed') {
 		if (preg_match($regexp, $text)) {
 			return true;
 		}
