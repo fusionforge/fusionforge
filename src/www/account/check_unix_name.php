@@ -28,8 +28,8 @@ $sysdebug_enable = false;
 $response = null;
 $unix_name = trim(strtolower(getStringFromRequest('unix_name')));
 
-if (account_groupnamevalid($unix_name)) {
-	$response = "<span style='color:red'>"
+if (!account_groupnamevalid($unix_name)) {
+	$response = "<span class='requiredfield'>"
 		._('Unix Name not available.')
 		."</span>";
 }
