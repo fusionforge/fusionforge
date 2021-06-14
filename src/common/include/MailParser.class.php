@@ -39,14 +39,17 @@ class MailParser extends FFError {
 		$input_data = fread($fo, $size);
 		fclose($fo);
 
-		$lines=explode("\n",$input_data);
-		$linecount=count($lines);
+		$lines = explode("\n",$input_data);
+		$linecount = count($lines);
 		unset($input_data);
 
 		//
 		//	Read the message line-by-line
 		//
-		for ($i=0; $i<($linecount-1); $i++) {
+		$lbody = '';
+		$lheader = array();
+		$got_headers = false;
+		for ($i = 0; $i < ($linecount-1); $i++) {
 			//
 			//	Still reading headers
 			//
@@ -55,28 +58,28 @@ class MailParser extends FFError {
 				//	If we hit a blank line, end of headers
 				//
 				if (strlen($lines[$i]) < 2) {
-					$got_headers=true;
+					$got_headers = true;
 				} else {
 					//
 					//	See if line starts with tab, if so ignore it for now
 					//
-					if (!preg_match('/^[A-z]/',$lines[$i])) {
-						$header[$lastheader] = $header[$lastheader]."\n".$lines[$i];
+					if (!preg_match('/^[A-z]/', $lines[$i])) {
+						$lheader[$lastheader] = $lheader[$lastheader]."\n".$lines[$i];
 					} else {
 						$pos = (strpos($lines[$i],':'));
-						$header[substr($lines[$i],0,$pos)] = trim(substr($lines[$i],$pos+2,(strlen($lines[$i])-$pos-2)));
-						$lastheader=substr($lines[$i],0,$pos);
+						$lheader[substr($lines[$i],0,$pos)] = trim(substr($lines[$i], $pos+2, (strlen($lines[$i]) - $pos -2)));
+						$lastheader = substr($lines[$i], 0, $pos);
 					}
 				}
 			} else {
-				$body .= $lines[$i]."\r\n";
+				$lbody .= $lines[$i]."\r\n";
 			}
 		}
-		$this->body =& $body;
-		$this->headers =& $header;
+		$this->body =& $lbody;
+		$this->headers =& $lheader;
 
-		if ($header['Content-Type']) {
-			$hdr = strtolower($header['Content-Type']);
+		if ($lheader['Content-Type']) {
+			$hdr = strtolower($lheader['Content-Type']);
 			if (strpos($hdr,'text/plain') !== false) {
 
 			} else {
@@ -84,11 +87,7 @@ class MailParser extends FFError {
 				return;
 			}
 		}
-//echo "\n\n**".$header['Content-Type']."**\n\n";
-
 		unset ($lines);
-//system("echo \"mp: headers".implode("***\n",$header)."\n\" >> /tmp/forum.log");
-//system("echo \"mp: body".$body."\n\" >> /tmp/forum.log");
 	}
 
 	function &getBody() {
@@ -161,8 +160,9 @@ class MailParser extends FFError {
 		 * encoded-word = "=?" charset "?" encoding "?" encoded-text "?="
 		 * See more detail in RFC 2407
 		 */
-		$count=0;
+		$count = 0;
 		$strlen = strlen($string);
+		$encoded_word_arr = array();
 
 		for ($i=0; $i < $strlen; $i++) {
 			/* Start seperation */

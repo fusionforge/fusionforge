@@ -274,6 +274,7 @@ class Navigation extends FFError {
 
 		// Outermenu hook
 		$before = count($menu['urls']);
+		$hookParams = array();
 		$hookParams['DIRS'] = &$menu['urls'];
 		$hookParams['TITLES'] = &$menu['titles'];
 		$hookParams['TOOLTIPS'] = &$menu['tooltips'];
