@@ -136,8 +136,8 @@ class ForumMessageFactory extends FFError {
 	 * @return	array	The nested multi-dimensional associative array.
 	 */
 	function &nestArray($row) {
-		$cnt=count($row);
-		for ($i=0; $i<$cnt; $i++) {
+		$msg_arr = array();
+		for ($i=0; $i< count($row); $i++) {
 			if ($row[$i]) {
 				$msg_arr["".$row[$i]->getParentID().""][] =& $row[$i];
 			}
