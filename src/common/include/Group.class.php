@@ -2690,7 +2690,7 @@ class Group extends FFError {
 				}
 				$oldsettings = $oldrole->getSettingsForProject ($template);
 
-				$sections = array('project_read', 'project_admin', 'scm', 'docman', 'tracker_admin', 'new_tracker', 'forum_admin', 'new_forum', 'pm_admin', 'new_pm', 'frs_admin', 'new_frs');
+				$sections = array('project_read', 'project_admin', 'scm', 'docman', 'tracker_admin', 'new_tracker', 'forum_admin', 'new_forum', 'pm_admin', 'new_pm', 'frs_admin', 'new_frs', 'members');
 				foreach ($sections as $section) {
 					$newrole->setSetting ($section, $this->getID(), $oldsettings[$section][$template->getID()]);
 				}

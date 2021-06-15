@@ -86,6 +86,7 @@ abstract class BaseRole extends FFError {
 
 			'scm' => array (0, 1, 2),
 			'docman' => array (0, 1, 2, 3, 4),
+			'members' => array (0, 1),
 			);
 
 		// Global permissions
@@ -111,6 +112,7 @@ abstract class BaseRole extends FFError {
 						     'new_tracker' => 15,
 						     'pm_admin' => 1,
 						     'new_pm' => 7,
+						     'members' => 1,
 				),
 			'Senior Developer' => array( 'project_read' => 1,
 						     'frs_admin' => 1,
@@ -123,6 +125,7 @@ abstract class BaseRole extends FFError {
 						     'new_tracker' => 15,
 						     'pm_admin' => 1,
 						     'new_pm' => 7,
+						     'members' => 1,
 				),
 			'Junior Developer' => array( 'project_read' => 1,
 						     'frs_admin' => 1,
@@ -132,6 +135,7 @@ abstract class BaseRole extends FFError {
 						     'new_forum' => 3,
 						     'new_tracker' => 11,
 						     'new_pm' => 3,
+						     'members' => 1,
 				),
 			'Doc Writer' => array(       'project_read' => 1,
 						     'frs_admin' => 1,
@@ -140,6 +144,7 @@ abstract class BaseRole extends FFError {
 						     'new_forum' => 3,
 						     'new_tracker' => 9,
 						     'new_pm' => 1,
+						     'members' => 1,
 				),
 			'Support Tech' => array(     'project_read' => 1,
 						     'frs_admin' => 1,
@@ -150,6 +155,19 @@ abstract class BaseRole extends FFError {
 						     'new_tracker' => 11,
 						     'pm_admin' => 1,
 						     'new_pm' => 7,
+						     'members' => 1,
+				),
+			// all other (present) roles
+			'other' => array( 'project_read' => 1,
+						     'frs_admin' => 1,
+						     'new_frs' => 1,
+						     'docman' => 3,
+						     'new_forum' => 3,
+						     'tracker_admin' => 1,
+						     'new_tracker' => 11,
+						     'pm_admin' => 1,
+						     'new_pm' => 7,
+						     'members' => 1,
 				),
 			);
 	}
@@ -347,7 +365,7 @@ abstract class BaseRole extends FFError {
 		$result = array();
 		$group_id = $project->getID();
 
-		$sections = array ('project_read', 'project_admin', 'scm', 'docman', 'tracker_admin', 'new_tracker');
+		$sections = array ('project_read', 'project_admin', 'scm', 'docman', 'tracker_admin', 'new_tracker', 'members');
 		foreach ($sections as $section) {
 			$result[$section][$group_id] = $this->getVal ($section, $group_id);
 		}
@@ -470,11 +488,16 @@ abstract class BaseRole extends FFError {
 	function getSetting($section, $reference) {
 		$value = $this->getSettingRaw($section, $reference);
 		if ($value == NULL) {
-			$value = 0;
+			if (isset($this->defaults['other'][$section])) {
+				$value = $this->defaults['other'][$section];
+			} else {
+				$value = 0;
+			}
 		}
 
 		switch ($section) {
 		case 'forge_admin':
+		case 'members':
 			return $value;
 			break;
 
@@ -615,6 +638,7 @@ abstract class BaseRole extends FFError {
 		if (isset ($this->perms_array[$section][$reference])) {
 			return $this->perms_array[$section][$reference];
 		}
+		return NULL;
 	}
 
 	/**
@@ -672,6 +696,7 @@ abstract class BaseRole extends FFError {
 		case 'tracker_admin':
 		case 'pm_admin':
 		case 'forum_admin':
+		case 'members':
 			return ($value >= 1);
 			break;
 
@@ -909,7 +934,7 @@ abstract class BaseRole extends FFError {
 		db_begin();
 
 		// Remove obsolete project-wide settings
-		$sections = array ('project_read', 'project_admin', 'frs_admin', 'new_frs', 'scm', 'docman', 'tracker_admin', 'new_tracker', 'forum_admin', 'new_forum', 'pm_admin', 'new_pm');
+		$sections = array ('project_read', 'project_admin', 'frs_admin', 'new_frs', 'scm', 'docman', 'tracker_admin', 'new_tracker', 'forum_admin', 'new_forum', 'pm_admin', 'new_pm', 'members');
 		db_query_params ('DELETE FROM pfo_role_setting where role_id=$1 AND section_name=ANY($2) and ref_id NOT IN (SELECT home_group_id FROM pfo_role WHERE role_id=$1 AND home_group_id IS NOT NULL UNION SELECT group_id from role_project_refs WHERE role_id=$1)',
 				 array ($this->getID(),
 					db_string_array_to_any_clause($sections)));
@@ -955,7 +980,7 @@ abstract class BaseRole extends FFError {
 
 		// Add missing settings
 		// ...project-wide settings
-		$arr = array ('project_read', 'project_admin', 'scm', 'docman', 'frs_admin', 'new_frs', 'tracker_admin', 'new_tracker', 'forum_admin', 'new_forum', 'pm_admin', 'new_pm');
+		$arr = array ('project_read', 'project_admin', 'scm', 'docman', 'frs_admin', 'new_frs', 'tracker_admin', 'new_tracker', 'forum_admin', 'new_forum', 'pm_admin', 'new_pm', 'members');
 		foreach ($projects as $p) {
 			foreach ($arr as $section) {
 				$this->normalizePermsForSection ($new_pa, $section, $p->getID());
