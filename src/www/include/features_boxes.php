@@ -3,7 +3,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012,2016, Franck Villaume - TrivialDev
+ * Copyright 2012,2016,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -255,7 +255,29 @@ function show_highest_ranked_projects() {
 	return $return;
 }
 
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:
+function show_top_voted_project() {
+	global $HTML;
+	$stats = new Stats();
+	$result = $stats->getTopVotedProjects();
+	$return = '' ;
+	$count = 1 ;
+	while(($row = db_fetch_array($result)) && ($count <= 20)) {
+		if (!forge_check_perm('project_read', $row['group_id'])) {
+			continue ;
+		}
+
+		$t_prj_link = util_make_link_g($row['unix_group_name'], $row['group_id'], $row['group_name']);
+
+		$return .= "<tr>";
+		$return .= '<td class="width-stat-col1">'. $row['counter'] . "</td>";
+		$return .= '<td>' . $t_prj_link . '</td>';
+		$return .= "</tr>\n";
+
+		$count++ ;
+	}
+	if ( $return == "" ) {
+		return $HTML->warning_msg(_('No stats available.'));
+	} else {
+		return $HTML->listTableTop().$return.$HTML->listTableBottom();
+	}
+}

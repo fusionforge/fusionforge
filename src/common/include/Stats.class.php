@@ -5,8 +5,8 @@
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2002, GForge, LLC
  * Copyright 2009, Roland Mas
- * Copyright © 2012
- *	Thorsten Glaser <t.glaser@tarent.de>
+ * Copyright 2012, Thorsten Glaser <t.glaser@tarent.de>
+ * Copyright 2021, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -71,8 +71,8 @@ class Stats extends FFError {
 	}
 
 	/**
-	* Returns a resultset containing unix_group_name, group_name, and items - the count of
-	* the messages posted on that group's forums
+	* Returns a _name, group_name, and items - the count of
+	* the messages posted on that group's forumsresultset containing unix_group
 	*
 	* @return resource a resultset of unix_group_name, group_name, items
 	*/
@@ -105,9 +105,10 @@ class Stats extends FFError {
 					array ('A'),
 					100) ;
 	}
-}
 
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:
+	function getTopVotedProjects() {
+		return db_query_params('SELECT g.group_name, g.unix_group_name, gv.group_id, COUNT(*) AS counter FROM group_votes AS gv, groups AS g WHERE gv.group_id = g.group_id AND g.status = $1 GROUP BY gv.group_id, g.group_name, g.unix_group_name ORDER BY counter DESC',
+					array('A'),
+					100);
+	}
+}

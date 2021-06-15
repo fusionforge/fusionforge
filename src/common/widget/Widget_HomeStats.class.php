@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2016, Franck Villaume - TrivialDev
+ * Copyright 2016,2021, Franck Villaume - TrivialDev
  * This file is a part of Fusionforge.
  *
  * Fusionforge is free software; you can redistribute it and/or modify
@@ -41,6 +41,8 @@ class Widget_HomeStats extends Widget {
 		}
 		$return .= $HTML->boxMiddle(_('Most Active This Week'), 'Most_Active_This_Week');
 		$return .= show_highest_ranked_projects();
+		$return .= $HTML->boxMiddle(_('Top Voted Projects'), 'Top_Voted_Projects');
+		$return .= show_top_voted_project();
 		$return .= $HTML->boxMiddle(_('Recently Registered Projects'), 'Recently_Registered_Projects');
 		$return .= show_newest_projects();
 		$params['return'] = &$return;
