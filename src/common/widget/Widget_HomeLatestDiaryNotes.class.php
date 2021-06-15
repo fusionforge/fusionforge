@@ -28,6 +28,10 @@ class Widget_HomeLatestDiaryNotes extends Widget {
 		}
 	}
 
+	function getCategory() {
+		return _('Diary Notes');
+	}
+
 	function getTitle() {
 		return $this->content['title'];
 	}
