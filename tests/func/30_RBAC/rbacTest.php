@@ -52,7 +52,7 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad();
 		$this->assertTrue($this->isLoginRequired());
 		$this->triggeredLogin('staffmember');
-		$this->assertTrue($this->isTextPresent("Project Members"));
+		$this->assertTrue($this->isTextPresent("Project Information"));
 	}
 
 	function testGlobalRolesAndPermissions()
