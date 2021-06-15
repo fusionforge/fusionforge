@@ -35,22 +35,12 @@ require_once $gfcommon.'pm/ProjectGroupFactory.class.php';
 $group_id = getIntFromRequest('group_id');
 $group_project_id = getIntFromRequest('group_project_id');
 $project_task_id = getIntFromRequest('project_task_id');
-$start_hour = getStringFromRequest('start_hour');
-$start_minute = getStringFromRequest('start_minute');
-$start_month = getStringFromRequest('start_month');
-$start_day = getStringFromRequest('start_day');
-$start_year = getStringFromRequest('start_year');
-$end_hour = getStringFromRequest('end_hour');
-$end_minute = getStringFromRequest('end_minute');
-$end_month = getStringFromRequest('end_month');
-$end_day = getStringFromRequest('end_day');
-$end_year = getStringFromRequest('end_year');
 $summary = getStringFromRequest('summary');
 $details = getStringFromRequest('details');
 $priority = getStringFromRequest('priority');
 $hours = getStringFromRequest('hours');
-$start_date = getStringFromRequest('start_date');
-$end_date = getStringFromRequest('end_date');
+$start_date_string = getStringFromRequest('start_date');
+$end_date_string = getStringFromRequest('end_date');
 $status_id = getIntFromRequest('status_id');
 $category_id = getIntFromRequest('category_id');
 $percent_complete = getStringFromRequest('percent_complete');
@@ -133,8 +123,10 @@ switch (getStringFromRequest('func')) {
 		if (!is_array($dependent_on)) {
 			$dependent_on=array();
 		}
-		$start_date=mktime($start_hour,$start_minute,0,$start_month,$start_day,$start_year);
-		$end_date=mktime($end_hour,$end_minute,0,$end_month,$end_day,$end_year);
+		$datetime = DateTime::createFromFormat(_('Y-m-d H:i'), $start_date_string);
+		$start_date = $datetime->getTimestamp();
+		$datetime = DateTime::createFromFormat(_('Y-m-d H:i'), $end_date_string);
+		$end_date = $datetime->getTimestamp();
 
 		$sanitizer = new TextSanitizer();
 		$details = $sanitizer->purify($details);
@@ -181,8 +173,11 @@ switch (getStringFromRequest('func')) {
 		if (!$dependent_on)	{
 			$dependent_on=array();
 		}
-		$start_date=mktime($start_hour,$start_minute,0,$start_month,$start_day,$start_year);
-		$end_date=mktime($end_hour,$end_minute,0,$end_month,$end_day,$end_year);
+		$datetime = DateTime::createFromFormat(_('Y-m-d H:i'), $start_date_string);
+		$start_date = $datetime->getTimestamp();
+		$datetime = DateTime::createFromFormat(_('Y-m-d H:i'), $end_date_string);
+		$end_date = $datetime->getTimestamp();
+
 		if (!$pt->update($summary,$details,$priority,$hours,$start_date,$end_date,
 			$status_id,$category_id,$percent_complete,$assigned_to,$pt->convertDependentOn($dependent_on),$new_group_project_id,$duration,$parent_id)) {
 			exit_error('update: '.$pt->getErrorMessage(),'pm');

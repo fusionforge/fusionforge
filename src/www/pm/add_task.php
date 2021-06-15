@@ -30,8 +30,10 @@ global $HTML, $pg, $pt;
 $related_artifact_id = getIntFromRequest('related_artifact_id');
 $related_artifact_summary = getStringFromRequest('related_artifact_summary');
 
+html_use_jquerydatetimepicker();
 pm_header(array('title'=>_('Add a new Task'),'group_project_id'=>$group_project_id, 'modal' => 1));
 echo notepad_func();
+echo init_datetimepicker();
 
 $params['name'] = 'details';
 $params['body'] = '';
@@ -73,22 +75,13 @@ $cells[] = array('<strong>'._('Estimated Hours').utils_requiredField()._(':').'<
 echo $HTML->multiTableRow(array(), $cells);
 $cells = array();
 $cells[] = array('<strong>'._('Start Date')._(':').'</strong><br />'.
-		$pg->showDayBox('start_day', date('d', time()), false).
-		$pg->showMonthBox ('start_month', date('m', time()), false).
-		$pg->showYearBox ('start_year',date('Y', time()), false).
-		$pg->showHourBox ('start_hour',date('G', time()), false).
-		$pg->showMinuteBox ('start_minute', date('i', 15*(time()%15)), false).
-		'<br />'._('The system will modify your start/end dates if you attempt to create a start date earlier than the end date of any tasks you depend on.').
-		'<br />'.util_make_link('/pm/calendar.php?group_id='.$group_id.'&group_project_id='.$group_project_id, _('View Calendar'), array('target' => '_blank')),
+		'<input class="datetimepicker" type="text" name="start_date" value="'.date(_('Y-m-d H:i'), time()).'">'.
+		'<br />'._('The system will modify your start/end dates if you attempt to create a start date earlier than the end date of any tasks you depend on.'),
 		'colspan' => 2);
 echo $HTML->multiTableRow(array(), $cells);
 $cells = array();
 $cells[] = array('<strong>'._('End Date')._(':').'</strong><br />'.
-		$pg->showDayBox('end_day', date('d', time()+604800), false).
-		$pg->showMonthBox ('end_month', date('m', time()+604800), false).
-		$pg->showYearBox ('end_year',date('Y', time()+604800), false).
-		$pg->showHourBox ('end_hour',date('G', time()+604800), false).
-		$pg->showMinuteBox ('end_minute', date('i', 15*(time()+604800%15)), false),
+		'<input class="datetimepicker" type="text" name="end_date" value="'.date(_('Y-m-d H:i'), time()+604800).'">',
 		'colspan' => 2);
 echo $HTML->multiTableRow(array(), $cells);
 $cells = array();
