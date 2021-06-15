@@ -38,10 +38,6 @@ class Widget_ProjectMembers extends Widget {
 		global $project;
 		$result = '';
 
-		if (!forge_check_perm ('members', $project->getID())) {
-			return _('No access');
-		}
-
 		$admins = $project->getAdmins();
 		$members = $project->getUsers();
 		$seen = array();
@@ -164,6 +160,14 @@ class Widget_ProjectMembers extends Widget {
 
 	function getDescription() {
 		return _('List the project members.');
+	}
+
+	function isAvailable() {
+		global $project;
+		if (!forge_check_perm('members', $project->getID())) {
+			return false;
+		}
+		return true;
 	}
 }
 
