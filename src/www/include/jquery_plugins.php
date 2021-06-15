@@ -33,6 +33,6 @@ function init_datetimepicker() {
 	step: 15
 	';
 
-	$javascript = "$.datetimepicker.setLocale('".$language_code."'); $('.datetimepicker').datetimepicker({".$attributes."});";
-	return html_e('script', array( 'type'=>'text/javascript'), '//<![CDATA['."\n".'$(function(){'.$javascript.'});'."\n".'//]]>');
+	$javascript = "jQuery.datetimepicker.setLocale('".$language_code."'); jQuery('.datetimepicker').datetimepicker({".$attributes."});";
+	return html_e('script', array( 'type'=>'text/javascript'), '//<![CDATA['."\n".'jQuery(function(){'.$javascript.'});'."\n".'//]]>');
 }
