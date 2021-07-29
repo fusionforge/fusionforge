@@ -322,6 +322,7 @@ class FRSRelease extends FFObject {
 							. _('Release Notes')._(':')
 							. "\n\n"
 							. $this->getNotes()
+							. "\n\n"
 							. _('Change Log')._(':')
 							. "\n\n"
 							. $this->getChanges()
