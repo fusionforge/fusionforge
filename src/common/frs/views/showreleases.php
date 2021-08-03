@@ -70,7 +70,7 @@ if (empty($rs)) {
 	// Display a list of releases in this package
 	echo html_e('h2', array(), _('Available Releases for the package').' '.$frsp->getName());
 
-	$title_arr = array(html_e('input', array('id' => 'checkallactive', 'type' => 'checkbox', 'title' => _('Select / Deselect all releases for massaction'), 'onClick' => 'controllerFRS.checkAll("checkedrelidactive", "active")')), _('Release Name'), _('Date'), _('Actions'));
+	$title_arr = array(html_e('input', array('id' => 'checkallactive', 'type' => 'checkbox', 'title' => _('Select / Deselect all releases for massaction'), 'onClick' => 'controllerFRS.checkAll("checkedrelidactive", "active")')), _('Release Name'), _('Date'), _('State'), _('Actions'));
 
 	echo $HTML->listTableTop($title_arr);
 	for ($i = 0; $i < count($rs); $i++) {
@@ -82,6 +82,7 @@ if (empty($rs)) {
 		$cells[][] = html_e('input', $releaseInputAttr);
 		$cells[][] = $rs[$i]->getName();
 		$cells[][] = date('Y-m-d H:i',$rs[$i]->getReleaseDate());
+		$cells[][] = _($rs[$i]->getStatusName());
 		$content = util_make_link('/frs/?view=editrelease&group_id='.$group_id.'&package_id='.$package_id.'&release_id='.$rs[$i]->getID(), $HTML->getConfigurePic(_('Edit'), _('Edit')));
 		if (forge_check_perm('frs', $package_id, 'release')) {
 			$deleteUrlAction = util_make_uri('/frs/?action=deleterelease&package_id='.$package_id.'&group_id='.$group_id.'&release_id='.$rs[$i]->getID());

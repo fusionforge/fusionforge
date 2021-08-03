@@ -268,6 +268,21 @@ class FRSRelease extends FFObject {
 	}
 
 	/**
+	 * getStatusName - get the status name of this release based on his status_id.
+	 *
+	 * @return	string	The status name.
+	 */
+	function getStatusName() {
+		$res = db_query_params('SELECT * FROM frs_status', array());
+		while ($arr = db_fetch_array($res)) {
+			if ($arr['status_id'] == $this->getStatus()) {
+				return $arr['name'];
+			}
+		}
+		return NULL;
+	}
+
+	/**
 	 * getNotes - get the release notes of this release.
 	 *
 	 * @return	string	The release notes.
