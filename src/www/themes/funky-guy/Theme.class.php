@@ -111,9 +111,9 @@ class Theme_Funky_Guy extends Layout {
           // Show button after 200px
           var showAfter = 200;
           if ($(this).scrollTop() > showAfter ) { 
-           $("#backToTop").fadeIn(800);
+            $("#backToTop").fadeIn(800);
           } else { 
-           $("#backToTop").fadeOut(800);
+            $("#backToTop").fadeOut(800);
           }
          });
          
@@ -122,7 +122,7 @@ class Theme_Funky_Guy extends Layout {
           $("html, body").animate({scrollTop : 0},800);
           return false;
          });
-         
+
         });
         ';
 		echo html_ac(html_ap() -1); // </script>
@@ -259,9 +259,11 @@ class Theme_Funky_Guy extends Layout {
 		echo html_ao('script');
 		echo '
         var loader = document.getElementById("loader");
+        var backToTop = document.getElementById("backToTop");
         function loadSubmit(event) {
             $("html, body").animate({ scrollTop: 0 }, 200);
-            $("#backToTop").fadeOut(200);
+            $("#backToTop").hide();
+            $("#backToTop").removeAttr("id");
             loader.style.top = "0";
             loader.classList.add("loading");
         }

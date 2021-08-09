@@ -230,7 +230,7 @@ header option {
 	padding: .5em 0;
 	border-radius: 1em;
 	text-align: center;
-	z-index: 9999;
+	z-index: 19;
 	cursor: pointer;
 	text-decoration: none;
 	transition: background-color 0.8s ease;
