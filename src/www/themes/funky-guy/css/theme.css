@@ -216,17 +216,42 @@ header option {
 	background:#31394c;
 }
 
+/* =backToTop */
+#backToTop {
+  	position: fixed;
+  	background-color:#dfdfdf;
+  	border: 1px solid #abc;
+  	bottom: 4.5em;
+  	color: #505d77;
+	font-size: .8em;
+	font-weight: bold;
+	right: calc(50% - 5em);
+	width: 10em;
+	padding: .5em 0;
+	border-radius: 1em;
+	text-align: center;
+	z-index: 9999;
+	cursor: pointer;
+	text-decoration: none;
+	transition: background-color 0.8s ease;
+	display: none;
+}
+#backToTop:hover,#backToTop:active {
+	background-color: #fff;
+	border-color:#789;
+	cursor: pointer;
+	transition: background-color 0.8s ease;
+}
+
 #searchBox input[type=text] {
-	height: 1.8em;
-	padding: .1em 26px .1em .4em;
-	border-radius: .3em;
-	border: 1px solid #789;
-	display: inline;
-	width: 9em;
-	font-size: inherit;
-	color: #fff;
-	background: #31394c;
-	box-shadow: none;
+    padding: .1em 26px .1em .4em;
+    border-radius: .3em;
+    border: 1px solid #789;
+    display: inline;
+    font-size: inherit;
+    color: #fff;
+    background: #31394c;
+    box-shadow: none;
 }
 
 #searchBox input[type=submit] {
