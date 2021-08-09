@@ -429,7 +429,7 @@ a.topTabSelected:hover {
 	border: 1px solid #c2c3c4;
 	border-radius: 6px;
 	padding:4px 8px 12px 8px;
-	margin-bottom: 0;
+	margin-bottom: 1em;
 	box-shadow: 1px 1px 4px #c2c3c4;
 }
 
@@ -645,7 +645,7 @@ table.listing tbody tr:nth-child(odd),
 	border-top-left-radius: 6px;
 	border-top-right-radius: 6px;
 	display: inline-block;
-	padding: 4px 8px;
+	padding: 6px 8px 1px 8px;
 }
 .submenu a:hover {
 	color: #ff9;
@@ -703,6 +703,9 @@ footer img {
 	animation: spin 2s linear infinite;
 	margin: auto;
 	z-index: 20;
+}
+#backbuttonstate {
+	display: none;
 }
 
 /* Safari */
@@ -882,7 +885,7 @@ input, select {
 	background-color: #e10;
 	border: none;
 	color: white;
-	text-shadow: 0 0 1px #300;
+	text-shadow: 0 0 1px #960;
 	padding: .2em .4em;
 }
 

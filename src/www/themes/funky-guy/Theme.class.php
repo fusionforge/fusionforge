@@ -227,6 +227,7 @@ class Theme_Funky_Guy extends Layout {
 		echo html_ao('div', array('id' => 'loader'));
         echo html_ao('div');
 		echo html_ac(html_ap() -2); // </div>
+		// Loader
 		echo html_ao('script');
 		echo '
             var loader = document.getElementById("loader");
@@ -234,13 +235,18 @@ class Theme_Funky_Guy extends Layout {
                 loader.style.top = "0";
                 loader.classList.add("loading");
             }
+            function unloadSubmit() {
+                loader.style.top = "-100%";
+                loader.classList.remove("loading");
+            }
+            loader.addEventListener("mouseup", unloadSubmit);
             var max = document.getElementsByTagName("FORM").length;
-            if( max > 0 ){
+            if(max > 0){
                 for (let i = 0 ; i < max ; i++){
                     document.forms[i].addEventListener("submit", loadSubmit);
                 }
             }
-        ';
+            ';
         echo html_ac(html_ap() -1);
 
 		echo '</html>' . "\n";
