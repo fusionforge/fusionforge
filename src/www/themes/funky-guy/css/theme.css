@@ -219,10 +219,10 @@ header option {
 /* =backToTop */
 #backToTop {
   	position: fixed;
-  	background-color:#dfdfdf;
+  	background-color:#dfdfdf99;
   	border: 1px solid #abc;
   	bottom: 4.5em;
-  	color: #505d77;
+  	color: #21293C;
 	font-size: .8em;
 	font-weight: bold;
 	right: calc(50% - 5em);
@@ -237,7 +237,7 @@ header option {
 	display: none;
 }
 #backToTop:hover,#backToTop:active {
-	background-color: #fff;
+	background-color: #fff9;
 	border-color:#789;
 	cursor: pointer;
 	transition: background-color 0.8s ease;
