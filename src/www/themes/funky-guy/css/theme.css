@@ -237,7 +237,7 @@ header option {
 	display: none;
 }
 #backToTop:hover,#backToTop:active {
-	background-color: #fff9;
+	background-color: #fff;
 	border-color:#789;
 	cursor: pointer;
 	transition: background-color 0.8s ease;
