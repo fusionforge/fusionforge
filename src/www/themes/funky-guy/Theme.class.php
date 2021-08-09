@@ -261,6 +261,7 @@ class Theme_Funky_Guy extends Layout {
         var loader = document.getElementById("loader");
         function loadSubmit(event) {
             $("html, body").animate({ scrollTop: 0 }, 200);
+            $("#backToTop").fadeOut(200);
             loader.style.top = "0";
             loader.classList.add("loading");
         }
