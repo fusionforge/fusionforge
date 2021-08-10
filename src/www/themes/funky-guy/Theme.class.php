@@ -259,7 +259,6 @@ class Theme_Funky_Guy extends Layout {
 		echo html_ao('script');
 		echo '
         var loader = document.getElementById("loader");
-        var backToTop = document.getElementById("backToTop");
         function loadSubmit(event) {
             loader.style.top = "0";
             loader.classList.add("loading");
